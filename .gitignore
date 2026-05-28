@@ -3,3 +3,4 @@ Thumbs.db
 node_modules/
 dist/
 .npm-cache/
+.git-acl-before.txt
