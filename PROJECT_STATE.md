@@ -10,6 +10,8 @@
 - GitHub push 前の安全確認を行い、`.npm-cache/` を `.gitignore` に追加した。
 - 初回コミット `d537e2f` を作成し、GitHub リポジトリ `https://github.com/shirai-masatomo/whitespace` に push した。
 - 今後 `PROJECT_STATE.md` の更新だけは、確認なしで Codex が行う。
+- 重要コマンドの累積ログとして `docs/COMMAND_LOG.md` を追加した。
+- `PROJECT_STATE.md` 更新タイミングに合わせて、必要に応じて `docs/COMMAND_LOG.md` も更新・コミットする運用にした。
 
 ## 2. 成功したこと
 
@@ -20,6 +22,7 @@
 - npm audit 結果は `found 0 vulnerabilities`。
 - `node_modules/` と `.npm-cache/` は Git 管理対象外にできた。
 - `main` ブランチを GitHub の `origin/main` に push できた。
+- コマンドログの記録方針を決めた。
 
 ## 3. 失敗・エラー
 
@@ -37,12 +40,12 @@
 ## 4. 変更したファイル
 
 - `PROJECT_STATE.md`
+- `docs/COMMAND_LOG.md`
 - `.gitignore`
 - `README.md`
 - `app.js`
 - `index.html`
 - `style.css`
-- `.gitignore`
 - `prototypes/001-nadameyo/package.json`
 - `prototypes/001-nadameyo/package-lock.json`
 - `prototypes/001-nadameyo/index.html`
@@ -61,11 +64,8 @@
 - `prototypes/001-nadameyo` で開発サーバーを起動し、初期 React 画面を確認する。
 - `App.jsx` を少しずつ変更して、会話ゲーム「宥めよ」の最小プロトタイプにする。
 - 既存ルート直下の手作り React ファイルを残すか整理するか決める。
-- Git のユーザー名とメールアドレスを確認し、初回コミットする。
-- 開発サーバーを起動して Vite + React の初期画面を確認する。
-- `PROJECT_STATE.md` の今回更新分を追加コミットして push する。
-- Codex から Git 操作する場合は、通常実行ではなく権限付き実行を使う運用を検討する。
-- `.gitignore` と `PROJECT_STATE.md` の更新分をコミットして push する。
+- `PROJECT_STATE.md` と `docs/COMMAND_LOG.md` の更新分をコミットして push する。
+- 今後の重要作業では、`PROJECT_STATE.md` と `docs/COMMAND_LOG.md` を同じタイミングで更新する。
 
 ## 6. GPTに相談したいこと
 
@@ -75,3 +75,4 @@
 - Codex 内 PATH が Windows PowerShell と違う問題の扱い方。
 - Codex 側で `.git` に書き込めない問題を、権限変更で直すべきかどうか。
 - Codex から安全に `git add` / `git commit` / `git push` できる運用にする方法。
+- コマンドログにどこまで詳細な実行結果を残すべきか。
