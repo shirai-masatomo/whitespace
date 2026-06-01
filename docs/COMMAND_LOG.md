@@ -174,3 +174,30 @@ Get-Content '.vite-dev.stdout.log' -Encoding UTF8 -Tail 30
 - `prototypes/001-nadameyo/APP_STATE.md` を追加した。
 - 「宥めよ」の概要、現行仕様、Reactで管理する状態、状態遷移、単語ルール、画面構成、技術構成、変更履歴を記載した。
 - 今後「宥めよ」を変更する際は、`PROJECT_STATE.md` と `docs/COMMAND_LOG.md` に加えて `APP_STATE.md` も更新する。
+
+## 2026-06-01 11:30:26 +09:00
+
+目的:
+
+- 「宥めよ」の単語判定を、単語ごとの配列から意味カテゴリ辞書方式へリファクタする。
+- 全角半角、空白、句読点の表記揺れをある程度吸収する。
+
+主な実行:
+
+```powershell
+Get-Content 'prototypes\001-nadameyo\src\App.jsx' -Encoding UTF8
+Get-Content 'prototypes\001-nadameyo\APP_STATE.md' -Encoding UTF8
+$env:Path = 'C:\Program Files\nodejs;' + $env:Path
+& 'C:\Program Files\nodejs\npm.cmd' run lint
+& 'C:\Program Files\nodejs\npm.cmd' run build
+Invoke-WebRequest -UseBasicParsing 'http://127.0.0.1:5173'
+```
+
+結果:
+
+- `intentRules` を追加し、`rejection`、`hostile`、`command`、`apology`、`listening`、`reassurance` を定義した。
+- 各 intent は複数の `words`、状態変化量、反応文を持つ。
+- `normalizeInput` を追加し、Unicode NFKC 正規化、小文字化、空白・句読点除去を実装した。
+- `npm.cmd run lint` は成功した。
+- `npm.cmd run build` は成功した。
+- 開発サーバー `http://127.0.0.1:5173/` は HTTP `200` を返した。

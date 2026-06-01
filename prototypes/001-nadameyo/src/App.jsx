@@ -7,43 +7,72 @@ const MAX_TURNS = 5
 
 const openingLine = '……もういい。全部、わかってるんだろ。'
 
-const trustWords = [
-  { word: 'ごめん', reply: '……謝れば済むと思ってるわけじゃ、ないよな。' },
-  { word: '大丈夫', reply: '大丈夫って……どうして、そう言える。' },
-  { word: '聞かせて', reply: '……聞いて、どうするつもりだ。' },
-]
-
-const tensionWords = [
-  { word: '落ち着いて', amount: 1, reply: '落ち着け？　簡単に言うなよ。' },
-  { word: 'お前', amount: 2, reply: '……その呼び方、やめろ。' },
-  { word: '知らない', amount: 2, reply: '知らない？　じゃあ、どうしてここにいる。' },
+const intentRules = [
+  {
+    intent: 'rejection',
+    words: ['知らない', '関係ない', 'どうでもいい'],
+    tensionChange: 2,
+    trustChange: 0,
+    reply: '知らない？　じゃあ、どうしてここにいる。',
+  },
+  {
+    intent: 'hostile',
+    words: ['お前', 'うるさい', '面倒'],
+    tensionChange: 2,
+    trustChange: 0,
+    reply: '……その呼び方、やめろ。',
+  },
+  {
+    intent: 'command',
+    words: ['落ち着いて', '落ち着け', '黙って'],
+    tensionChange: 1,
+    trustChange: 0,
+    reply: '落ち着け？　簡単に言うなよ。',
+  },
+  {
+    intent: 'apology',
+    words: ['ごめん', 'すみません', 'すいません', 'すまん', '申し訳'],
+    tensionChange: 0,
+    trustChange: 1,
+    reply: '……謝れば済むと思ってるわけじゃ、ないよな。',
+  },
+  {
+    intent: 'listening',
+    words: ['聞かせて', '話して', '教えて'],
+    tensionChange: 0,
+    trustChange: 1,
+    reply: '……聞いて、どうするつもりだ。',
+  },
+  {
+    intent: 'reassurance',
+    words: ['大丈夫', 'そばにいる', '急がない'],
+    tensionChange: 0,
+    trustChange: 1,
+    reply: '大丈夫って……どうして、そう言える。',
+  },
 ]
 
 function clamp(value, min, max) {
   return Math.min(Math.max(value, min), max)
 }
 
+function normalizeInput(input) {
+  return input
+    .normalize('NFKC')
+    .toLowerCase()
+    .replace(/[\s、。,.!?！？・「」『』（）()[\]【】]/g, '')
+}
+
 function evaluateLine(line) {
-  const trustMatch = trustWords.find(({ word }) => line.includes(word))
-  const tensionMatch = tensionWords.find(({ word }) => line.includes(word))
+  const normalizedLine = normalizeInput(line)
+  const rule = intentRules.find(({ words }) =>
+    words.some((word) => normalizedLine.includes(normalizeInput(word))),
+  )
 
-  if (tensionMatch) {
-    return {
-      trustChange: 0,
-      tensionChange: tensionMatch.amount,
-      reply: tensionMatch.reply,
-    }
-  }
-
-  if (trustMatch) {
-    return {
-      trustChange: 1,
-      tensionChange: 0,
-      reply: trustMatch.reply,
-    }
-  }
+  if (rule) return rule
 
   return {
+    intent: 'unknown',
     trustChange: 0,
     tensionChange: 1,
     reply: '……それで、何が言いたい。',

@@ -15,6 +15,7 @@
 - `prototypes/001-nadameyo/start-dev.ps1` を追加し、Vite 開発サーバーを起動した。
 - `prototypes/001-nadameyo/src/App.jsx` を会話ゲーム「宥めよ」の最小プロトタイプに変更した。
 - 個別アプリの仕様・状態・状態遷移・変更履歴を記録する `prototypes/001-nadameyo/APP_STATE.md` を追加した。
+- 「宥めよ」の入力判定を、固定単語配列から意味カテゴリ辞書 `intentRules` と `normalizeInput` を使う方式へ変更した。
 
 ## 2. 成功したこと
 
@@ -29,6 +30,7 @@
 - Vite `v8.0.14` の開発サーバーが `http://127.0.0.1:5173/` で起動し、HTTP `200` を確認した。
 - 「宥めよ」で、緊張度・信頼度・残り発言数、入力、単語ルール、相手の反応、成功・失敗、会話履歴、再挑戦を実装した。
 - `npm.cmd run lint` と `npm.cmd run build` が成功した。
+- 意味カテゴリ辞書リファクタ後も `npm.cmd run lint`、`npm.cmd run build`、HTTP `200` 確認が成功した。
 
 ## 3. 失敗・エラー
 
@@ -75,6 +77,7 @@
 
 - ブラウザで `http://127.0.0.1:5173/` を開き、「宥めよ」を実際にプレイして目視確認する。
 - 入力単語と反応文、成功条件、失敗条件のバランスを調整する。
+- ブラウザで表記揺れ入力を試し、`normalizeInput` の吸収範囲を確認する。
 - 既存ルート直下の手作り React ファイルを残すか整理するか決める。
 - `PROJECT_STATE.md` と `docs/COMMAND_LOG.md` の更新分をコミットして push する。
 - 今後の重要作業では、`PROJECT_STATE.md` と `docs/COMMAND_LOG.md` を同じタイミングで更新する。
