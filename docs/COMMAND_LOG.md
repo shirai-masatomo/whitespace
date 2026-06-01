@@ -132,3 +132,33 @@ Invoke-WebRequest -UseBasicParsing 'http://127.0.0.1:5173'
 - 再利用用に `prototypes/001-nadameyo/start-dev.ps1` を追加した。
 - 権限付き `Start-Process` で起動すると、Codex のコマンド終了後もサーバーを維持できた。
 - `.vite-dev.*.log` は一時ログとして `.gitignore` に追加した。
+
+## 2026-06-01 10:39:04 +09:00
+
+目的:
+
+- `prototypes/001-nadameyo` を会話ゲーム「宥めよ」の最小プロトタイプにする。
+- 変更後に構文、ビルド、開発サーバー応答を確認する。
+
+主な実行:
+
+```powershell
+Get-Content 'src\App.jsx' -Encoding UTF8
+Get-Content 'src\App.css' -Encoding UTF8
+Get-Content 'src\index.css' -Encoding UTF8
+$env:Path = 'C:\Program Files\nodejs;' + $env:Path
+& 'C:\Program Files\nodejs\npm.cmd' run lint
+& 'C:\Program Files\nodejs\npm.cmd' run build
+Invoke-WebRequest -UseBasicParsing 'http://127.0.0.1:5173'
+Get-Content '.vite-dev.stdout.log' -Encoding UTF8 -Tail 30
+```
+
+結果:
+
+- `src/App.jsx` を「宥めよ」のゲームロジックに変更した。
+- 緊張度、信頼度、残り発言数、入力、単語ルール、反応、成功・失敗、会話履歴、再挑戦を実装した。
+- `src/App.css` と `src/index.css` をゲーム画面向けに変更した。
+- `npm.cmd run lint` は成功した。
+- `npm.cmd run build` は成功した。
+- 開発サーバー `http://127.0.0.1:5173/` は HTTP `200` を返した。
+- Vite HMR ログに `App.jsx`、`App.css`、`index.css` の更新が出た。

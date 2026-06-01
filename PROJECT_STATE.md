@@ -13,6 +13,7 @@
 - 重要コマンドの累積ログとして `docs/COMMAND_LOG.md` を追加した。
 - `PROJECT_STATE.md` 更新タイミングに合わせて、必要に応じて `docs/COMMAND_LOG.md` も更新・コミットする運用にした。
 - `prototypes/001-nadameyo/start-dev.ps1` を追加し、Vite 開発サーバーを起動した。
+- `prototypes/001-nadameyo/src/App.jsx` を会話ゲーム「宥めよ」の最小プロトタイプに変更した。
 
 ## 2. 成功したこと
 
@@ -25,6 +26,8 @@
 - `main` ブランチを GitHub の `origin/main` に push できた。
 - コマンドログの記録方針を決めた。
 - Vite `v8.0.14` の開発サーバーが `http://127.0.0.1:5173/` で起動し、HTTP `200` を確認した。
+- 「宥めよ」で、緊張度・信頼度・残り発言数、入力、単語ルール、相手の反応、成功・失敗、会話履歴、再挑戦を実装した。
+- `npm.cmd run lint` と `npm.cmd run build` が成功した。
 
 ## 3. 失敗・エラー
 
@@ -45,6 +48,9 @@
 - `PROJECT_STATE.md`
 - `docs/COMMAND_LOG.md`
 - `prototypes/001-nadameyo/start-dev.ps1`
+- `prototypes/001-nadameyo/src/App.jsx`
+- `prototypes/001-nadameyo/src/App.css`
+- `prototypes/001-nadameyo/src/index.css`
 - `.gitignore`
 - `README.md`
 - `app.js`
@@ -65,8 +71,8 @@
 
 ## 5. 次にやるべきこと
 
-- ブラウザで `http://127.0.0.1:5173/` を開き、初期 React 画面を目視確認する。
-- `App.jsx` を少しずつ変更して、会話ゲーム「宥めよ」の最小プロトタイプにする。
+- ブラウザで `http://127.0.0.1:5173/` を開き、「宥めよ」を実際にプレイして目視確認する。
+- 入力単語と反応文、成功条件、失敗条件のバランスを調整する。
 - 既存ルート直下の手作り React ファイルを残すか整理するか決める。
 - `PROJECT_STATE.md` と `docs/COMMAND_LOG.md` の更新分をコミットして push する。
 - 今後の重要作業では、`PROJECT_STATE.md` と `docs/COMMAND_LOG.md` を同じタイミングで更新する。
