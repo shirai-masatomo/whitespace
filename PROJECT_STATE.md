@@ -12,6 +12,7 @@
 - 今後 `PROJECT_STATE.md` の更新だけは、確認なしで Codex が行う。
 - 重要コマンドの累積ログとして `docs/COMMAND_LOG.md` を追加した。
 - `PROJECT_STATE.md` 更新タイミングに合わせて、必要に応じて `docs/COMMAND_LOG.md` も更新・コミットする運用にした。
+- `prototypes/001-nadameyo/start-dev.ps1` を追加し、Vite 開発サーバーを起動した。
 
 ## 2. 成功したこと
 
@@ -23,6 +24,7 @@
 - `node_modules/` と `.npm-cache/` は Git 管理対象外にできた。
 - `main` ブランチを GitHub の `origin/main` に push できた。
 - コマンドログの記録方針を決めた。
+- Vite `v8.0.14` の開発サーバーが `http://127.0.0.1:5173/` で起動し、HTTP `200` を確認した。
 
 ## 3. 失敗・エラー
 
@@ -36,11 +38,13 @@
 - ユーザー希望として、可能なら Codex から GitHub への更新も行いたい。
 - `.git` のACL直接変更は一部失敗したが、権限付き実行の `git add PROJECT_STATE.md` は成功した。
 - ACLバックアップ `.git-acl-before.txt` はローカル用のため `.gitignore` に追加した。
+- Codex の通常サンドボックス内ではバックグラウンドプロセスが残らなかった。権限付き `Start-Process` では開発サーバーを維持できた。
 
 ## 4. 変更したファイル
 
 - `PROJECT_STATE.md`
 - `docs/COMMAND_LOG.md`
+- `prototypes/001-nadameyo/start-dev.ps1`
 - `.gitignore`
 - `README.md`
 - `app.js`
@@ -61,7 +65,7 @@
 
 ## 5. 次にやるべきこと
 
-- `prototypes/001-nadameyo` で開発サーバーを起動し、初期 React 画面を確認する。
+- ブラウザで `http://127.0.0.1:5173/` を開き、初期 React 画面を目視確認する。
 - `App.jsx` を少しずつ変更して、会話ゲーム「宥めよ」の最小プロトタイプにする。
 - 既存ルート直下の手作り React ファイルを残すか整理するか決める。
 - `PROJECT_STATE.md` と `docs/COMMAND_LOG.md` の更新分をコミットして push する。

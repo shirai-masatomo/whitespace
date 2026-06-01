@@ -97,3 +97,38 @@ git push
 補足:
 
 - Git操作はCodex通常実行では `.git/index.lock` の権限問題があるため、権限付き実行を使う。
+
+## 2026-06-01 09:34:24 +09:00
+
+目的:
+
+- `prototypes/001-nadameyo` の Vite + React 初期画面をブラウザで確認できる状態にする。
+
+主な実行:
+
+```powershell
+& 'C:\Program Files\nodejs\npm.cmd' run dev -- --host 127.0.0.1
+Start-Process -FilePath 'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe' `
+  -ArgumentList '-NoProfile','-NonInteractive','-ExecutionPolicy','Bypass','-File',`
+  'C:\Users\masat\Documents\codex_test\prototypes\001-nadameyo\start-dev.ps1' `
+  -WorkingDirectory 'C:\Users\masat\Documents\codex_test\prototypes\001-nadameyo' `
+  -WindowStyle Hidden
+Invoke-WebRequest -UseBasicParsing 'http://127.0.0.1:5173'
+```
+
+結果:
+
+- Vite `v8.0.14` が起動した。
+- 表示URLは `http://127.0.0.1:5173/`。
+- HTTP `200` を確認した。
+
+失敗・エラー:
+
+- 通常の `Start-Process` は Codex 内 PATH に `Path` / `PATH` が重複しており失敗した。
+- サンドボックス内のバックグラウンドジョブと `cmd.exe /c start` では、呼び出し元終了後にサーバーが残らなかった。
+
+補足:
+
+- 再利用用に `prototypes/001-nadameyo/start-dev.ps1` を追加した。
+- 権限付き `Start-Process` で起動すると、Codex のコマンド終了後もサーバーを維持できた。
+- `.vite-dev.*.log` は一時ログとして `.gitignore` に追加した。

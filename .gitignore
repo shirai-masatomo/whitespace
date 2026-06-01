@@ -4,3 +4,4 @@ node_modules/
 dist/
 .npm-cache/
 .git-acl-before.txt
+.vite-dev.*.log
