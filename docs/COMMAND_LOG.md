@@ -162,3 +162,15 @@ Get-Content '.vite-dev.stdout.log' -Encoding UTF8 -Tail 30
 - `npm.cmd run build` は成功した。
 - 開発サーバー `http://127.0.0.1:5173/` は HTTP `200` を返した。
 - Vite HMR ログに `App.jsx`、`App.css`、`index.css` の更新が出た。
+
+## 2026-06-01 10:41:15 +09:00
+
+目的:
+
+- リポジトリ全体の状態と、個別アプリ「宥めよ」の仕様履歴を分離する。
+
+結果:
+
+- `prototypes/001-nadameyo/APP_STATE.md` を追加した。
+- 「宥めよ」の概要、現行仕様、Reactで管理する状態、状態遷移、単語ルール、画面構成、技術構成、変更履歴を記載した。
+- 今後「宥めよ」を変更する際は、`PROJECT_STATE.md` と `docs/COMMAND_LOG.md` に加えて `APP_STATE.md` も更新する。

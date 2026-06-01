@@ -14,6 +14,7 @@
 - `PROJECT_STATE.md` 更新タイミングに合わせて、必要に応じて `docs/COMMAND_LOG.md` も更新・コミットする運用にした。
 - `prototypes/001-nadameyo/start-dev.ps1` を追加し、Vite 開発サーバーを起動した。
 - `prototypes/001-nadameyo/src/App.jsx` を会話ゲーム「宥めよ」の最小プロトタイプに変更した。
+- 個別アプリの仕様・状態・状態遷移・変更履歴を記録する `prototypes/001-nadameyo/APP_STATE.md` を追加した。
 
 ## 2. 成功したこと
 
@@ -51,6 +52,7 @@
 - `prototypes/001-nadameyo/src/App.jsx`
 - `prototypes/001-nadameyo/src/App.css`
 - `prototypes/001-nadameyo/src/index.css`
+- `prototypes/001-nadameyo/APP_STATE.md`
 - `.gitignore`
 - `README.md`
 - `app.js`
@@ -76,6 +78,7 @@
 - 既存ルート直下の手作り React ファイルを残すか整理するか決める。
 - `PROJECT_STATE.md` と `docs/COMMAND_LOG.md` の更新分をコミットして push する。
 - 今後の重要作業では、`PROJECT_STATE.md` と `docs/COMMAND_LOG.md` を同じタイミングで更新する。
+- 「宥めよ」の変更時は、`prototypes/001-nadameyo/APP_STATE.md` も同じタイミングで更新する。
 
 ## 6. GPTに相談したいこと
 
