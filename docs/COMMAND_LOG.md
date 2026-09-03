@@ -245,3 +245,62 @@ Invoke-WebRequest -UseBasicParsing 'http://127.0.0.1:5173'
 - `npm.cmd run lint` は成功した。
 - `npm.cmd run build` は成功した。
 - 開発サーバー `http://127.0.0.1:5173/` は HTTP `200` を返した。
+
+## 2026-09-03 17:42:58 +09:00
+
+目的:
+
+- 「宥めよ」の入力候補を100〜500件のレビュー可能な外部辞書へ発展させる。
+- 新規候補を自動採用せず、既存のゲーム挙動を維持する。
+- 出典と利用条件を確認し、実装・テスト・ブラウザ確認を行う。
+
+主な実行:
+
+```powershell
+Get-Content 'PROJECT_STATE.md' -Encoding UTF8
+Get-Content 'SPEC.md' -Encoding UTF8
+Get-Content 'ACCEPTANCE.md' -Encoding UTF8
+Get-Content 'TODO.md' -Encoding UTF8
+Get-Content 'prototypes\001-nadameyo\APP_STATE.md' -Encoding UTF8
+Get-Content 'prototypes\001-nadameyo\src\App.jsx' -Encoding UTF8
+
+$researchDir = Join-Path $env:TEMP 'whitespace-intent-research'
+Invoke-WebRequest -UseBasicParsing `
+  'https://raw.githubusercontent.com/omwn/omw-data/main/wns/jpn/wn-data-jpn.tab' `
+  -OutFile (Join-Path $researchDir 'wn-data-jpn.tab')
+Invoke-WebRequest -UseBasicParsing `
+  'https://raw.githubusercontent.com/WorksApplications/SudachiDict/develop/src/main/text/synonyms.txt' `
+  -OutFile (Join-Path $researchDir 'sudachi-synonyms.txt')
+rg -n '<relevant Japanese lemmas>' $researchFiles
+
+$env:Path = 'C:\Program Files\nodejs;' + $env:Path
+& 'C:\Program Files\nodejs\npm.cmd' run review:intents
+& 'C:\Program Files\nodejs\npm.cmd' run test
+& 'C:\Program Files\nodejs\npm.cmd' run lint
+& 'C:\Program Files\nodejs\npm.cmd' run build
+```
+
+結果:
+
+- Japanese WordNet、Sudachi同義語辞書、青空文庫の公式な利用条件を確認した。
+- WordNetとSudachiは一時フォルダで調査し、辞書本体をGit管理対象には追加していない。
+- 青空文庫本文は、作品・作者ごとの権利確認を省略しないため今回は採取しなかった。
+- 6 intentそれぞれ24件、合計144件を `src/data/intent-dictionary.json` に整理した。
+- 既存20件だけを `adopted`、新規124件を `review` とした。
+- `docs/INTENT_DICTIONARY_REVIEW.md` をJSONから生成した。
+- 自動テストは6件すべて成功した。
+- `npm.cmd run lint` は成功した。
+- `npm.cmd run build` は成功した。
+
+ブラウザ確認:
+
+- `すみません` で信頼度が `0` から `1` になった。
+- レビュー待ちの `拒否` は `unknown` のままで、緊張度が `2` から `3` になった。
+- `大 丈 夫！？` が正規化され、`reassurance` として判定された。
+- 信頼度 `4` で成功、緊張度 `5` で失敗、残り発言数 `0` で失敗した。
+- `もう一度` で初期状態へ戻せた。
+
+失敗・エラー:
+
+- 通常サンドボックス内の `Invoke-WebRequest` はソケット権限で拒否された。
+- 権限付きで公開辞書を一時フォルダへ取得した後は調査に成功した。

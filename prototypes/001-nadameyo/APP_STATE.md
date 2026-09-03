@@ -12,7 +12,8 @@
 ## 2. 現在の仕様
 
 - プレイヤーは入力欄に一文を入力し、`送る` ボタンで発言する。
-- 入力文を正規化し、意味カテゴリ辞書のルール配列で判定して、相手の反応と状態を更新する。
+- 入力文を正規化し、外部の意味カテゴリ辞書から作ったルール配列で判定して、相手の反応と状態を更新する。
+- 辞書候補は `adopted` と `review` に分け、`adopted` の表現だけをゲーム判定に使う。
 - 緊張度、信頼度、残り発言数を画面に表示する。
 - 会話履歴を画面に表示する。
 - 成功・失敗後は `もう一度` ボタンで初期状態に戻せる。
@@ -36,7 +37,7 @@
 1. 入力文の前後空白を除く。
 2. 入力が空、またはゲーム終了済みなら何もしない。
 3. 入力文を `normalizeInput` で正規化する。
-4. `intentRules` を上から走査し、正規化済み入力に含まれる単語を判定する。
+4. 外部辞書の `adopted` 表現だけで作った `intentRules` を上から走査し、正規化済み入力に含まれる単語を判定する。
 5. 最初に一致した intent の変化量と反応文を使う。
 6. 緊張度または信頼度を更新する。
 7. 残り発言数を `1` 減らす。
@@ -57,10 +58,23 @@
 
 ## 5. 意味カテゴリ辞書
 
+- 辞書本体は `src/data/intent-dictionary.json` に置く。
+- 判定処理は `src/lib/intentMatcher.js` に置く。
+- 候補総数は `144`、現在有効な表現は既存の `20`、レビュー待ちは `124`。
+- 各候補は `text`、`intent`、`subtype`、`confidence`、`sourceType`、`status`、必要に応じて `notes` を持つ。
+- `status: adopted` だけを判定に使い、`status: review` は自動採用しない。
 - 入力は Unicode NFKC 正規化を行う。
 - 全角・半角の差をある程度吸収する。
 - 空白と句読点を除いてから単語を検索する。
 - intent は配列の上から判定し、最初に一致したものを採用する。
+
+### レビュー候補の情報源
+
+- Japanese WordNet: 確認できたsynset見出しだけを `wordnet` とする。
+- Sudachi同義語辞書: 確認できた同義語グループ見出しだけを `sudachi` とする。
+- 一般的な日常表現: `generated` とし、人によるレビューを必須とする。
+- 青空文庫: 著作権切れ作品と利用規準の確認が作品単位で必要なため、今回は本文由来候補を採用していない。
+- 一覧と利用条件は `docs/INTENT_DICTIONARY_REVIEW.md` に記録する。
 
 ### `rejection`
 
@@ -120,6 +134,9 @@
 - 状態管理: React `useState`
 - 入力判定: `normalizeInput` とローカルの意味カテゴリ辞書 `intentRules`
 - LLM連携: なし
+- 辞書データ: `src/data/intent-dictionary.json`
+- 判定モジュール: `src/lib/intentMatcher.js`
+- 自動テスト: Node.js標準テストランナー
 
 ## 8. 変更履歴
 
@@ -133,3 +150,13 @@
 - 入力判定を単語単位の配列から、意味カテゴリ辞書 `intentRules` へ変更する仕様を記録した。
 - `apology`、`listening`、`reassurance`、`command`、`rejection`、`hostile` を定義した。
 - `normalizeInput` で全角半角、空白、句読点をある程度吸収する仕様を追加した。
+
+### 2026-09-03 17:42:58 +09:00
+
+- intent辞書を `App.jsx` から `src/data/intent-dictionary.json` へ切り出した。
+- 6 intentそれぞれ24件、合計144件の候補を整理した。
+- 既存20件だけを `adopted` とし、新規124件は `review` のままゲーム判定から除外した。
+- 曖昧な表現を `medium` / `low` と notes で明示した。
+- `normalizeInput` と判定処理を `src/lib/intentMatcher.js` へ切り出した。
+- 辞書構造、採用状態、正規化、既存挙動を確認する自動テスト6件を追加した。
+- ゲームバランス、状態変化量、返答文、intent優先順位は変更していない。

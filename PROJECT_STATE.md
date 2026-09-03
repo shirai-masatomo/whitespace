@@ -18,6 +18,10 @@
 - 「宥めよ」の入力判定を、固定単語配列から意味カテゴリ辞書 `intentRules` と `normalizeInput` を使う方式へ変更した。
 - 作業開始ルールに必要な `SPEC.md`、`ACCEPTANCE.md`、`TODO.md` を追加した。
 - ドキュメント追加後に `lint`、権限付き `build`、開発サーバー HTTP `200` を確認した。
+- 「宥めよ」のintent辞書を `App.jsx` から `src/data/intent-dictionary.json` へ切り出した。
+- 6 intent、合計144件の候補を整理し、既存20件だけを有効、新規124件をレビュー待ちにした。
+- レビュー一覧 `docs/INTENT_DICTIONARY_REVIEW.md` と、その生成スクリプトを追加した。
+- 入力判定をテスト可能な `src/lib/intentMatcher.js` へ分離し、自動テスト6件を追加した。
 
 ## 2. 成功したこと
 
@@ -35,6 +39,10 @@
 - 意味カテゴリ辞書リファクタ後も `npm.cmd run lint`、`npm.cmd run build`、HTTP `200` 確認が成功した。
 - リポジトリ全体の仕様、受け入れ条件、TODO管理の初期ドキュメントを整備した。
 - `TODO.md` の最初の小タスク「baseline project workflow docs」完了条件を満たした。
+- intent辞書の候補数、必須メタデータ、採用状態の分離を自動テストで確認できた。
+- 既存20表現の状態変化とintent優先順位を変更せず、レビュー待ち候補が自動採用されないことを確認した。
+- `npm.cmd run test`、`npm.cmd run lint`、`npm.cmd run build` が成功した。
+- ブラウザで謝罪判定、レビュー待ち判定、正規化、成功、緊張度失敗、発言数失敗、再挑戦を確認した。
 
 ## 3. 失敗・エラー
 
@@ -51,6 +59,7 @@
 - Codex の通常サンドボックス内ではバックグラウンドプロセスが残らなかった。権限付き `Start-Process` では開発サーバーを維持できた。
 - 読み取り専用サンドボックス内の `npm.cmd run build` は、Viteの一時ファイル作成で `EPERM` になった。権限付き再実行では成功した。
 - 開発サーバー停止中のHTTP確認は接続拒否になった。`start-dev.ps1` で再起動後、HTTP `200` を確認した。
+- サンドボックス内から外部辞書を取得する最初の試行はソケット権限で拒否された。権限付きで一時フォルダへ取得し、調査に成功した。
 
 ## 4. 変更したファイル
 
@@ -60,6 +69,14 @@
 - `prototypes/001-nadameyo/src/App.jsx`
 - `prototypes/001-nadameyo/src/App.css`
 - `prototypes/001-nadameyo/src/index.css`
+- `prototypes/001-nadameyo/src/data/intent-dictionary.json`
+- `prototypes/001-nadameyo/src/lib/intentMatcher.js`
+- `prototypes/001-nadameyo/test/intentMatcher.test.js`
+- `prototypes/001-nadameyo/scripts/generate-intent-review.mjs`
+- `docs/INTENT_DICTIONARY_REVIEW.md`
+- `SPEC.md`
+- `ACCEPTANCE.md`
+- `TODO.md`
 - `prototypes/001-nadameyo/APP_STATE.md`
 - `SPEC.md`
 - `ACCEPTANCE.md`
@@ -84,9 +101,11 @@
 
 ## 5. 次にやるべきこと
 
-- ブラウザで `http://127.0.0.1:5173/` を開き、「宥めよ」を実際にプレイして目視確認する。
-- 入力単語と反応文、成功条件、失敗条件のバランスを調整する。
-- ブラウザで表記揺れ入力を試し、`normalizeInput` の吸収範囲を確認する。
+- `docs/INTENT_DICTIONARY_REVIEW.md` の124件を人がレビューし、採用・保留・除外を決める。
+- 特に `medium` / `low` 候補と、複数intentにまたがる候補を先に確認する。
+- レビュー後、採用候補を小さい単位で `adopted` に変更して再テストする。
+- 部分一致による否定文の誤判定を、辞書採用とは別タスクで検討する。
+- 入力単語と反応文、成功条件、失敗条件のバランス調整は辞書レビュー後に行う。
 - 既存ルート直下の手作り React ファイルを残すか整理するか決める。
 - `PROJECT_STATE.md` と `docs/COMMAND_LOG.md` の更新分をコミットして push する。
 - 今後の重要作業では、`PROJECT_STATE.md` と `docs/COMMAND_LOG.md` を同じタイミングで更新する。
@@ -102,3 +121,6 @@
 - Codex 側で `.git` に書き込めない問題を、権限変更で直すべきかどうか。
 - Codex から安全に `git add` / `git commit` / `git push` できる運用にする方法。
 - コマンドログにどこまで詳細な実行結果を残すべきか。
+- `empathy`、`accountability`、`offering_space` を独立intentにするか。
+- 「大丈夫じゃない」のような否定文を、部分一致より前にどこまで解析するか。
+- 124件のレビュー候補をどの順番でゲームへ採用するか。

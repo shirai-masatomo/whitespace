@@ -2,7 +2,7 @@
 
 This file defines the acceptance criteria for the current milestone.
 
-## Current Milestone: Stabilize `宥めよ` Prototype Workflow
+## Completed Milestone: Stabilize `宥めよ` Prototype Workflow
 
 The milestone is complete when all criteria below are satisfied.
 
@@ -14,6 +14,22 @@ The milestone is complete when all criteria below are satisfied.
 - The local dev server can return HTTP `200`.
 - TODO items are updated only after the related acceptance criteria pass.
 - Each milestone update is committed to Git.
+
+## Current Milestone: Prepare A Reviewable Intent Dictionary
+
+- The intent dictionary is outside `App.jsx` in a structured data file.
+- The dictionary contains between 100 and 500 expression candidates.
+- Every expression has `text`, `intent`, `subtype`, `confidence`, and
+  `sourceType`.
+- Ambiguous expressions are marked `medium` or `low` with explanatory notes.
+- Only explicitly adopted expressions affect gameplay.
+- Existing intent order, replies, and trust/tension changes remain unchanged.
+- A generated review list exists at `docs/INTENT_DICTIONARY_REVIEW.md`.
+- Source and license notes distinguish verified dictionary entries from generated
+  candidates.
+- Automated tests cover dictionary metadata, normalization, active-entry
+  filtering, existing behavior, and review-only behavior.
+- Tests, lint, production build, and browser behavior verification pass.
 
 ## Current App Behavior Acceptance
 
@@ -28,4 +44,3 @@ The milestone is complete when all criteria below are satisfied.
 - Reaching the trust threshold succeeds the run.
 - Running out of utterances fails the run.
 - The player can restart after success or failure.
-

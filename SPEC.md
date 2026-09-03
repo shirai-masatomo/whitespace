@@ -28,7 +28,10 @@ The player can only move the situation by speaking, but every utterance carries 
 
 ## Intent Matching
 
-Input matching uses intent categories instead of one-off word checks.
+Input matching uses intent categories instead of one-off word checks. Gameplay
+definitions and expression metadata live in
+`prototypes/001-nadameyo/src/data/intent-dictionary.json`, while matching logic
+lives in `prototypes/001-nadameyo/src/lib/intentMatcher.js`.
 
 - `rejection`: raises tension strongly.
 - `hostile`: raises tension strongly.
@@ -38,7 +41,14 @@ Input matching uses intent categories instead of one-off word checks.
 - `reassurance`: raises trust.
 - `unknown`: raises tension mildly.
 
-Each intent has multiple words and one response payload. Details live in `prototypes/001-nadameyo/APP_STATE.md`.
+Each expression has `text`, `intent`, `subtype`, `confidence`, `sourceType`, and
+`status`. Only `status: adopted` entries are used by the game. `status: review`
+entries remain review candidates even when their confidence is high.
+
+The review list is generated at `docs/INTENT_DICTIONARY_REVIEW.md`. Candidate
+collection must not change tension, trust, replies, intent priority, or success
+and failure thresholds. Details live in
+`prototypes/001-nadameyo/APP_STATE.md`.
 
 ## Documentation Rules
 
@@ -47,4 +57,3 @@ Each intent has multiple words and one response payload. Details live in `protot
 - `prototypes/001-nadameyo/APP_STATE.md` tracks app-specific state, state transitions, specs, and change history.
 - `TODO.md` tracks small actionable tasks.
 - `ACCEPTANCE.md` tracks completion criteria for the active milestone.
-
