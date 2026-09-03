@@ -16,6 +16,8 @@
 - `prototypes/001-nadameyo/src/App.jsx` を会話ゲーム「宥めよ」の最小プロトタイプに変更した。
 - 個別アプリの仕様・状態・状態遷移・変更履歴を記録する `prototypes/001-nadameyo/APP_STATE.md` を追加した。
 - 「宥めよ」の入力判定を、固定単語配列から意味カテゴリ辞書 `intentRules` と `normalizeInput` を使う方式へ変更した。
+- 作業開始ルールに必要な `SPEC.md`、`ACCEPTANCE.md`、`TODO.md` を追加した。
+- ドキュメント追加後に `lint`、権限付き `build`、開発サーバー HTTP `200` を確認した。
 
 ## 2. 成功したこと
 
@@ -31,6 +33,8 @@
 - 「宥めよ」で、緊張度・信頼度・残り発言数、入力、単語ルール、相手の反応、成功・失敗、会話履歴、再挑戦を実装した。
 - `npm.cmd run lint` と `npm.cmd run build` が成功した。
 - 意味カテゴリ辞書リファクタ後も `npm.cmd run lint`、`npm.cmd run build`、HTTP `200` 確認が成功した。
+- リポジトリ全体の仕様、受け入れ条件、TODO管理の初期ドキュメントを整備した。
+- `TODO.md` の最初の小タスク「baseline project workflow docs」完了条件を満たした。
 
 ## 3. 失敗・エラー
 
@@ -45,6 +49,8 @@
 - `.git` のACL直接変更は一部失敗したが、権限付き実行の `git add PROJECT_STATE.md` は成功した。
 - ACLバックアップ `.git-acl-before.txt` はローカル用のため `.gitignore` に追加した。
 - Codex の通常サンドボックス内ではバックグラウンドプロセスが残らなかった。権限付き `Start-Process` では開発サーバーを維持できた。
+- 読み取り専用サンドボックス内の `npm.cmd run build` は、Viteの一時ファイル作成で `EPERM` になった。権限付き再実行では成功した。
+- 開発サーバー停止中のHTTP確認は接続拒否になった。`start-dev.ps1` で再起動後、HTTP `200` を確認した。
 
 ## 4. 変更したファイル
 
@@ -55,6 +61,9 @@
 - `prototypes/001-nadameyo/src/App.css`
 - `prototypes/001-nadameyo/src/index.css`
 - `prototypes/001-nadameyo/APP_STATE.md`
+- `SPEC.md`
+- `ACCEPTANCE.md`
+- `TODO.md`
 - `.gitignore`
 - `README.md`
 - `app.js`
@@ -82,6 +91,7 @@
 - `PROJECT_STATE.md` と `docs/COMMAND_LOG.md` の更新分をコミットして push する。
 - 今後の重要作業では、`PROJECT_STATE.md` と `docs/COMMAND_LOG.md` を同じタイミングで更新する。
 - 「宥めよ」の変更時は、`prototypes/001-nadameyo/APP_STATE.md` も同じタイミングで更新する。
+- 次の小タスクは `TODO.md` の「Verify current app behavior manually in the browser」。
 
 ## 6. GPTに相談したいこと
 

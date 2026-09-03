@@ -161,6 +161,50 @@ Get-Content '.vite-dev.stdout.log' -Encoding UTF8 -Tail 30
 - `npm.cmd run lint` は成功した。
 - `npm.cmd run build` は成功した。
 - 開発サーバー `http://127.0.0.1:5173/` は HTTP `200` を返した。
+
+## 2026-09-03 12:46:06 +09:00
+
+目的:
+
+- 作業開始時に読む必須ファイルとして `SPEC.md`、`ACCEPTANCE.md`、`TODO.md` を追加する。
+- 今後の実装を小さいTODO単位で進められるようにする。
+
+主な実行:
+
+```powershell
+Get-Content 'PROJECT_STATE.md' -Encoding UTF8
+Get-Content 'SPEC.md' -Encoding UTF8
+Get-Content 'ACCEPTANCE.md' -Encoding UTF8
+Get-Content 'TODO.md' -Encoding UTF8
+rg --files -g '*.md' -g '*TODO*' -g '*SPEC*' -g '*ACCEPTANCE*'
+Get-Content 'prototypes\001-nadameyo\APP_STATE.md' -Encoding UTF8
+Get-Date -Format 'yyyy-MM-dd HH:mm:ss zzz'
+$env:Path = 'C:\Program Files\nodejs;' + $env:Path
+& 'C:\Program Files\nodejs\npm.cmd' run lint
+& 'C:\Program Files\nodejs\npm.cmd' run build
+Start-Process -FilePath 'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe' `
+  -ArgumentList '-NoProfile','-NonInteractive','-ExecutionPolicy','Bypass','-File',`
+  'C:\Users\masat\Documents\codex_test\prototypes\001-nadameyo\start-dev.ps1' `
+  -WorkingDirectory 'C:\Users\masat\Documents\codex_test\prototypes\001-nadameyo' `
+  -WindowStyle Hidden
+Invoke-WebRequest -UseBasicParsing 'http://127.0.0.1:5173'
+```
+
+結果:
+
+- ルート直下に `SPEC.md`、`ACCEPTANCE.md`、`TODO.md` が存在しないことを確認した。
+- 現在の `PROJECT_STATE.md` と `prototypes/001-nadameyo/APP_STATE.md` を元に、3つの必須ドキュメントを追加した。
+- `TODO.md` に次の小タスクを定義した。
+- `npm.cmd run lint` は成功した。
+- 読み取り専用サンドボックス内の `npm.cmd run build` は `node_modules\.vite-temp` への一時ファイル作成で `EPERM` になった。
+- 権限付きで `npm.cmd run build` を再実行し、成功した。
+- 開発サーバー停止中のHTTP確認は接続拒否になった。
+- `start-dev.ps1` で開発サーバーを再起動し、`http://127.0.0.1:5173` の HTTP `200` を確認した。
+
+補足:
+
+- 現在の環境は読み取り専用のため、ファイル作成・Git操作は権限付き実行が必要になる場合がある。
+- `SPEC.md`、`ACCEPTANCE.md`、`TODO.md` 追加タスクは、lint/build/HTTP確認後に完了扱いにした。
 - Vite HMR ログに `App.jsx`、`App.css`、`index.css` の更新が出た。
 
 ## 2026-06-01 10:41:15 +09:00
