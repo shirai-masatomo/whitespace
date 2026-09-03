@@ -1,16 +1,76 @@
-# React + Vite
+# 宥めよ
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+「宥めよ」は、限られた発言回数の中で相手に一文ずつ言葉を送り、信頼を得ることを目指すテキスト会話ゲームです。言葉を選び間違えると緊張度が上がるため、「話さなければ進まないが、発言にはリスクがある」という体験を小さく試作しています。
 
-Currently, two official plugins are available:
+WhiteSpaceプロジェクトの現在のアクティブなプロトタイプです。
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 起動方法
 
-## React Compiler
+事前にNode.jsをインストールしておきます。初回だけ依存パッケージをインストールしてください。
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```powershell
+cd C:\Users\masat\Documents\codex_test\prototypes\001-nadameyo
+npm.cmd install
+```
 
-## Expanding the ESLint configuration
+開発サーバーを起動します。
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```powershell
+npm.cmd run dev -- --host 127.0.0.1
+```
+
+起動後、ブラウザで `http://127.0.0.1:5173/` を開きます。
+
+Codex内でPATHが不安定な場合は、npmをフルパスで指定できます。
+
+```powershell
+& 'C:\Program Files\nodejs\npm.cmd' run dev -- --host 127.0.0.1
+```
+
+## 確認用コマンド
+
+```powershell
+npm.cmd run test
+npm.cmd run lint
+npm.cmd run build
+```
+
+- `test`: intent辞書と入力判定の自動テスト
+- `lint`: JavaScriptとJSXの書き方を検査
+- `build`: 配布可能なproduction buildを作成できるか検査
+
+## 現在のゲーム仕様
+
+- 初期状態は緊張度 `2 / 5`、信頼度 `0 / 4`、残り発言数 `5`。
+- プレイヤーは一度に一文を入力する。
+- 入力は `normalizeInput` で全角・半角、空白、句読点の一部を正規化する。
+- `apology`、`listening`、`reassurance` は信頼度を上げる。
+- `command`、`rejection`、`hostile` は緊張度を上げる。
+- `unknown` は緊張度を少し上げる。
+- 緊張度が `5` になると失敗、信頼度が `4` になると成功する。
+- 発言数を使い切っても成功条件に達しなければ失敗する。
+- 終了後は `もう一度` で再挑戦できる。
+
+## intent辞書の状態
+
+intent辞書には144件の候補があります。既存20件だけが `status: adopted` として有効で、新規124件は `status: review` のままです。レビュー待ち候補は自動的にゲームへ採用されません。
+
+候補一覧は [`../../docs/INTENT_DICTIONARY_REVIEW.md`](../../docs/INTENT_DICTIONARY_REVIEW.md) で確認できます。
+
+## 主なファイル
+
+| ファイル | 役割 |
+| --- | --- |
+| `src/App.jsx` | React画面とゲーム進行を管理する |
+| `src/App.css` | 「宥めよ」画面の見た目を定義する |
+| `src/lib/intentMatcher.js` | 入力の正規化とintent判定を行う |
+| `src/data/intent-dictionary.json` | intent、状態変化、入力候補を保持する |
+| `test/intentMatcher.test.js` | 辞書と判定処理を自動テストする |
+| `scripts/generate-intent-review.mjs` | 辞書からレビュー用Markdownを生成する |
+| `start-dev.ps1` | Codex環境から開発サーバーを起動しやすくする |
+
+## 詳細な状態と変更履歴
+
+ゲーム固有の仕様、管理している状態、状態遷移、intentの効果、変更履歴は [`APP_STATE.md`](APP_STATE.md) に記録しています。
+
+プロジェクト全体の現在地は [`../../PROJECT_STATE.md`](../../PROJECT_STATE.md)、次の作業は [`../../TODO.md`](../../TODO.md) を参照してください。

@@ -1,21 +1,37 @@
-# TODO
+# やること（TODO）
 
-Tasks are intentionally small. Mark an item complete only after implementation, test, correction if needed, and retest are done.
+作業は理解しやすい小さな単位で管理する。実装、確認、必要な修正、再確認が終わった項目だけを `[x]` にする。
 
-## Ready
+## 記号の見方
 
-- [x] Create baseline project workflow docs: `SPEC.md`, `ACCEPTANCE.md`, and `TODO.md`.
-- [x] Verify current app behavior manually in the browser.
-- [x] Add lightweight automated tests for `normalizeInput` and intent matching.
-- [x] Extract intent matching logic from `App.jsx` into a small testable module.
-- [x] Create a 100-500 item review-only intent candidate dictionary.
-- [ ] Review the expanded intent dictionary candidates in `docs/INTENT_DICTIONARY_REVIEW.md`.
-- [ ] Review and tune the first-pass balance of tension, trust, and remaining utterances.
-- [ ] Decide whether to keep or remove the old root-level browser-only React files.
+- `[ ]`: まだ完了していない作業
+- `[x]`: 完了条件を満たした作業
 
-## Backlog
+## 次に行う作業
 
-- [ ] Add more nuanced response variants per intent.
-- [ ] Add a visible debug panel for development only.
-- [ ] Add app-level save/export of play transcripts.
-- [ ] Explore a later LLM-backed response mode without changing the local rule-based mode.
+- [ ] `docs/INTENT_DICTIONARY_REVIEW.md` のレビュー待ち124件を確認する。
+- [ ] `confidence: medium` / `low` と、複数intentにまたがる候補を先に分類する。
+- [ ] レビュー結果に基づき、採用する候補を小さい単位で `status: adopted` に変更する。
+
+## 判断が必要な作業
+
+- [ ] 緊張度、信頼度、残り発言数の初期バランスを調整するか決める。
+- [ ] ルート直下に残っている旧ブラウザ版の `index.html`、`app.js`、`style.css` を残すか整理するか決める。
+- [ ] `empathy`、`accountability`、`offering_space` を独立したintentにするか検討する。
+- [ ] 「大丈夫じゃない」のような否定文を部分一致より先に扱うか検討する。
+
+## 完了した作業
+
+- [x] 基本管理文書 `SPEC.md`、`ACCEPTANCE.md`、`TODO.md` を作成した。
+- [x] 現在のアプリ挙動をブラウザで確認した。
+- [x] `normalizeInput` とintent判定の軽量な自動テストを追加した。
+- [x] intent判定処理を `App.jsx` からテスト可能なモジュールへ分離した。
+- [x] 100〜500件の範囲で、レビュー用のintent候補辞書を作成した。
+- [x] プロジェクト管理文書を日本語化し、READMEと構成案内を現在の状態に合わせる。
+
+## バックログ
+
+- [ ] intentごとに、より細かな返答パターンを追加する。
+- [ ] 開発時だけ表示できるデバッグパネルを追加する。
+- [ ] 会話履歴を保存・書き出しできるようにする。
+- [ ] ローカルのルールベース方式を残したまま、将来のLLM連携モードを検討する。

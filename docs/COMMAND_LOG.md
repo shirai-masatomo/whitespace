@@ -304,3 +304,51 @@ $env:Path = 'C:\Program Files\nodejs;' + $env:Path
 
 - 通常サンドボックス内の `Invoke-WebRequest` はソケット権限で拒否された。
 - 権限付きで公開辞書を一時フォルダへ取得した後は調査に成功した。
+
+## 2026-09-03 21:56:24 +09:00
+
+目的:
+
+- WhiteSpaceの管理文書を日本語で理解しやすい構成へ整理する。
+- ルートREADMEと「宥めよ」のREADMEを現在の実装に合わせる。
+- 初めてリポジトリを開いた人向けの案内図を追加する。
+- コードやゲーム挙動を変更せず、リンクと記述の整合性を確認する。
+
+主な確認:
+
+```powershell
+Get-Content 'PROJECT_STATE.md' -Encoding UTF8
+Get-Content 'SPEC.md' -Encoding UTF8
+Get-Content 'ACCEPTANCE.md' -Encoding UTF8
+Get-Content 'TODO.md' -Encoding UTF8
+Get-Content 'docs\COMMAND_LOG.md' -Encoding UTF8
+Get-Content 'docs\INTENT_DICTIONARY_REVIEW.md' -Encoding UTF8
+Get-Content 'prototypes\001-nadameyo\APP_STATE.md' -Encoding UTF8
+Get-Content 'prototypes\001-nadameyo\README.md' -Encoding UTF8
+rg --files -g '*.md' -g '!**/node_modules/**'
+git status --short
+git diff --check
+```
+
+リンク確認では、各Markdownから相対リンクを抽出し、リンク先のファイルが存在するか `Test-Path` で検査した。
+
+結果:
+
+- `SPEC.md`、`ACCEPTANCE.md`、`TODO.md` の本文を日本語化した。
+- コード上の識別子、パス、コマンド、intent名は維持した。
+- ルート `README.md` をWhiteSpace全体の現在地に合わせた。
+- `prototypes/001-nadameyo/README.md` を「宥めよ」専用の日本語READMEへ変更した。
+- `docs/PROJECT_MAP.md` を追加し、構成、処理の流れ、管理文書の役割を図示した。
+- `PROJECT_STATE.md` を、現在地を先に確認できる構成へ整理した。
+- Markdownのローカルリンクにリンク切れがないことを確認した。
+- 変更対象がMarkdownだけで、ゲームコードと挙動に変更がないことを確認した。
+
+失敗・エラー:
+
+- 最初の編集は、同一パッチ内で同じファイルを削除・再作成する形式が編集ツールに拒否された。
+- ファイルを一つずつ置き換える形式へ変更し、編集に成功した。
+
+補足:
+
+- コードを変更していないため、今回の作業ではlintとbuildを再実行していない。
+- 直近の自動テスト6件、lint、build、ブラウザ確認は前回のintent辞書マイルストーンで成功済み。

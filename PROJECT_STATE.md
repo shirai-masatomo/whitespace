@@ -1,126 +1,84 @@
-# Project State
+# プロジェクト状態（PROJECT STATE）
 
-## 1. 今回やったこと
+最終更新: 2026-09-03
 
-- `codex_test` に Vite + React プロジェクト `prototypes/001-nadameyo` を作成した。
-- Node.js LTS を `winget` でインストールした。
-- PowerShell では `npm` ではなく `npm.cmd` を使う必要があることを確認した。
-- Codex 内では PATH が通常の Windows PowerShell と異なるため、Node.js/npm はフルパス指定で実行している。
-- `prototypes/001-nadameyo` で依存パッケージをインストールした。
-- GitHub push 前の安全確認を行い、`.npm-cache/` を `.gitignore` に追加した。
-- 初回コミット `d537e2f` を作成し、GitHub リポジトリ `https://github.com/shirai-masatomo/whitespace` に push した。
-- 今後 `PROJECT_STATE.md` の更新だけは、確認なしで Codex が行う。
-- 重要コマンドの累積ログとして `docs/COMMAND_LOG.md` を追加した。
-- `PROJECT_STATE.md` 更新タイミングに合わせて、必要に応じて `docs/COMMAND_LOG.md` も更新・コミットする運用にした。
-- `prototypes/001-nadameyo/start-dev.ps1` を追加し、Vite 開発サーバーを起動した。
-- `prototypes/001-nadameyo/src/App.jsx` を会話ゲーム「宥めよ」の最小プロトタイプに変更した。
-- 個別アプリの仕様・状態・状態遷移・変更履歴を記録する `prototypes/001-nadameyo/APP_STATE.md` を追加した。
-- 「宥めよ」の入力判定を、固定単語配列から意味カテゴリ辞書 `intentRules` と `normalizeInput` を使う方式へ変更した。
-- 作業開始ルールに必要な `SPEC.md`、`ACCEPTANCE.md`、`TODO.md` を追加した。
-- ドキュメント追加後に `lint`、権限付き `build`、開発サーバー HTTP `200` を確認した。
-- 「宥めよ」のintent辞書を `App.jsx` から `src/data/intent-dictionary.json` へ切り出した。
-- 6 intent、合計144件の候補を整理し、既存20件だけを有効、新規124件をレビュー待ちにした。
-- レビュー一覧 `docs/INTENT_DICTIONARY_REVIEW.md` と、その生成スクリプトを追加した。
-- 入力判定をテスト可能な `src/lib/intentMatcher.js` へ分離し、自動テスト6件を追加した。
+このファイルは、WhiteSpaceリポジトリ全体の「現在どこまで進んでいるか」を短時間で確認するための記録である。詳しい構成は [`docs/PROJECT_MAP.md`](docs/PROJECT_MAP.md) を参照する。
 
-## 2. 成功したこと
+## 1. 現在地
 
-- Windows PowerShell では `node -v` が `v24.16.0` で動作する。
-- Windows PowerShell では `npm.cmd -v` が `11.13.0` で動作する。
-- `create-vite` 本体を直接 `node` で起動して、Vite + React の雛形作成に成功した。
-- `npm.cmd install` により `node_modules` と `package-lock.json` が作成された。
-- npm audit 結果は `found 0 vulnerabilities`。
-- `node_modules/` と `.npm-cache/` は Git 管理対象外にできた。
-- `main` ブランチを GitHub の `origin/main` に push できた。
-- コマンドログの記録方針を決めた。
-- Vite `v8.0.14` の開発サーバーが `http://127.0.0.1:5173/` で起動し、HTTP `200` を確認した。
-- 「宥めよ」で、緊張度・信頼度・残り発言数、入力、単語ルール、相手の反応、成功・失敗、会話履歴、再挑戦を実装した。
-- `npm.cmd run lint` と `npm.cmd run build` が成功した。
-- 意味カテゴリ辞書リファクタ後も `npm.cmd run lint`、`npm.cmd run build`、HTTP `200` 確認が成功した。
-- リポジトリ全体の仕様、受け入れ条件、TODO管理の初期ドキュメントを整備した。
-- `TODO.md` の最初の小タスク「baseline project workflow docs」完了条件を満たした。
-- intent辞書の候補数、必須メタデータ、採用状態の分離を自動テストで確認できた。
-- 既存20表現の状態変化とintent優先順位を変更せず、レビュー待ち候補が自動採用されないことを確認した。
-- `npm.cmd run test`、`npm.cmd run lint`、`npm.cmd run build` が成功した。
-- ブラウザで謝罪判定、レビュー待ち判定、正規化、成功、緊張度失敗、発言数失敗、再挑戦を確認した。
+- WhiteSpaceは、将来のPC向けゲーム、ARG、実験的・革新的サービスを小さな試作から育てる基盤プロジェクトである。
+- 現在のアクティブなプロトタイプは `prototypes/001-nadameyo` の会話ゲーム「宥めよ」。
+- 「宥めよ」はVite + Reactで動作し、ローカルのルールベースintent判定を使う。
+- intent辞書には144件の候補があり、既存20件が `adopted`、新規124件が `review`。
+- 現在のマイルストーンは、レビュー待ち124件を人が確認し、採用・保留・除外を判断すること。
+- リポジトリはGitHubの `https://github.com/shirai-masatomo/whitespace` と同期している。
 
-## 3. 失敗・エラー
+## 2. 完了していること
 
-- Codex 内で通常の `node` を実行すると、Codex アプリ内部の `node.exe` に当たり `Access is denied` になる。
-- Codex 内で通常の `npm` は見つからない。
-- `npm create vite@latest ...` は `cmd.exe /c create-vite ...` の段階で `Access is denied` になった。
-- Windows PowerShell で `npm -v` を実行すると、`npm.ps1` が Execution Policy により拒否される。`npm.cmd -v` は成功する。
-- push 前確認で `.npm-cache/` が未追跡として見えたため、`.gitignore` に追加して除外した。
-- 初回 push は GitHub 側にリポジトリが未作成だったため `Repository not found` で失敗した。リポジトリ作成後の再 push は成功した。
-- Codex 側では `.git` の所有者と ACL の影響で `git add` が `index.lock: Permission denied` になった。Git 操作は通常 PowerShell から行うのが安全。
-- ユーザー希望として、可能なら Codex から GitHub への更新も行いたい。
-- `.git` のACL直接変更は一部失敗したが、権限付き実行の `git add PROJECT_STATE.md` は成功した。
-- ACLバックアップ `.git-acl-before.txt` はローカル用のため `.gitignore` に追加した。
-- Codex の通常サンドボックス内ではバックグラウンドプロセスが残らなかった。権限付き `Start-Process` では開発サーバーを維持できた。
-- 読み取り専用サンドボックス内の `npm.cmd run build` は、Viteの一時ファイル作成で `EPERM` になった。権限付き再実行では成功した。
-- 開発サーバー停止中のHTTP確認は接続拒否になった。`start-dev.ps1` で再起動後、HTTP `200` を確認した。
-- サンドボックス内から外部辞書を取得する最初の試行はソケット権限で拒否された。権限付きで一時フォルダへ取得し、調査に成功した。
+- Node.js LTSとnpmを導入し、Vite + Reactプロジェクトを作成した。
+- 緊張度、信頼度、残り発言数、会話履歴、成功・失敗、再挑戦を実装した。
+- 入力の正規化と、`apology`、`listening`、`reassurance`、`command`、`rejection`、`hostile`、`unknown` の判定を実装した。
+- intent辞書を `App.jsx` から外部JSONへ切り出した。
+- 辞書候補を自動採用せず、人がレビューできる仕組みにした。
+- Node.js標準テスト、ESLint、Vite production buildを実行できるようにした。
+- ブラウザで成功、緊張度による失敗、発言数による失敗、再挑戦を確認した。
+- プロジェクト管理文書とREADMEを日本語で整理し、`docs/PROJECT_MAP.md` を追加した。
 
-## 4. 変更したファイル
+## 3. 現在の技術構成
 
-- `PROJECT_STATE.md`
-- `docs/COMMAND_LOG.md`
-- `prototypes/001-nadameyo/start-dev.ps1`
-- `prototypes/001-nadameyo/src/App.jsx`
-- `prototypes/001-nadameyo/src/App.css`
-- `prototypes/001-nadameyo/src/index.css`
-- `prototypes/001-nadameyo/src/data/intent-dictionary.json`
-- `prototypes/001-nadameyo/src/lib/intentMatcher.js`
-- `prototypes/001-nadameyo/test/intentMatcher.test.js`
-- `prototypes/001-nadameyo/scripts/generate-intent-review.mjs`
-- `docs/INTENT_DICTIONARY_REVIEW.md`
-- `SPEC.md`
-- `ACCEPTANCE.md`
-- `TODO.md`
-- `prototypes/001-nadameyo/APP_STATE.md`
-- `SPEC.md`
-- `ACCEPTANCE.md`
-- `TODO.md`
-- `.gitignore`
+| 項目 | 現在の状態 |
+| --- | --- |
+| Node.js | `v24.16.0` |
+| npm | `11.13.0`。PowerShellでは `npm.cmd` を使用する |
+| フロントエンド | React `19.2.6` |
+| 開発・build | Vite `8.0.14` |
+| 状態管理 | React `useState` |
+| 入力判定 | `normalizeInput` とローカルintent辞書 |
+| 自動テスト | Node.js標準テストランナー |
+| バージョン管理 | Git / GitHub、`main` ブランチ |
+
+## 4. 直近の確認結果
+
+- `npm.cmd run test`: 自動テスト6件成功。
+- `npm.cmd run lint`: 成功。
+- `npm.cmd run build`: 成功。
+- `http://127.0.0.1:5173/`: ブラウザ上で主要なゲーム遷移を確認済み。
+- Markdownのローカルリンク: リンク切れなし。
+- 今回の文書整理: Markdownのみ変更し、ゲームコードと挙動は未変更。
+
+## 5. 既知の問題と注意点
+
+- Windows PowerShellでは `npm` がExecution Policyで止まる場合があるため、`npm.cmd` を使う。
+- Codex内ではNode.js/npmのPATHが通常のPowerShellと異なる場合があり、必要に応じて `C:\Program Files\nodejs\npm.cmd` を直接指定する。
+- CodexからGitを更新するときは、`.git` の所有権とACLの影響で権限付き実行が必要になる場合がある。
+- 現在のintent判定は部分一致のため、「大丈夫じゃない」が `大丈夫` に一致するなど、否定文を誤判定する可能性がある。
+- 一文に複数intentがある場合は、辞書で先に定義されたintentを採用する。
+- ルートの `index.html`、`app.js`、`style.css` はVite導入前の旧ブラウザ版で、現在は使用していない。削除するかは未決定。
+
+## 6. 次にやること
+
+1. `docs/INTENT_DICTIONARY_REVIEW.md` の `confidence: medium` / `low` 候補を確認する。
+2. 複数intentにまたがる候補を、採用・保留・除外に分類する。
+3. 採用する候補を少数ずつ `status: adopted` に変更する。
+4. 各変更後に自動テスト、lint、build、ブラウザ確認を行う。
+5. 辞書レビュー後に、ゲームバランス調整を別タスクとして検討する。
+
+## 7. 今回整理したファイル
+
 - `README.md`
-- `app.js`
-- `index.html`
-- `style.css`
-- `prototypes/001-nadameyo/package.json`
-- `prototypes/001-nadameyo/package-lock.json`
-- `prototypes/001-nadameyo/index.html`
-- `prototypes/001-nadameyo/vite.config.js`
-- `prototypes/001-nadameyo/eslint.config.js`
+- `SPEC.md`
+- `ACCEPTANCE.md`
+- `TODO.md`
+- `PROJECT_STATE.md`
+- `docs/PROJECT_MAP.md`
+- `docs/COMMAND_LOG.md`
 - `prototypes/001-nadameyo/README.md`
-- `prototypes/001-nadameyo/src/main.jsx`
-- `prototypes/001-nadameyo/src/App.jsx`
-- `prototypes/001-nadameyo/src/App.css`
-- `prototypes/001-nadameyo/src/index.css`
-- `prototypes/001-nadameyo/public/vite.svg`
-- `prototypes/001-nadameyo/src/assets/react.svg`
 
-## 5. 次にやるべきこと
+`prototypes/001-nadameyo/APP_STATE.md` と `docs/INTENT_DICTIONARY_REVIEW.md` は内容を確認したが、今回はアプリ仕様と辞書候補を変更していないため編集していない。
 
-- `docs/INTENT_DICTIONARY_REVIEW.md` の124件を人がレビューし、採用・保留・除外を決める。
-- 特に `medium` / `low` 候補と、複数intentにまたがる候補を先に確認する。
-- レビュー後、採用候補を小さい単位で `adopted` に変更して再テストする。
-- 部分一致による否定文の誤判定を、辞書採用とは別タスクで検討する。
-- 入力単語と反応文、成功条件、失敗条件のバランス調整は辞書レビュー後に行う。
-- 既存ルート直下の手作り React ファイルを残すか整理するか決める。
-- `PROJECT_STATE.md` と `docs/COMMAND_LOG.md` の更新分をコミットして push する。
-- 今後の重要作業では、`PROJECT_STATE.md` と `docs/COMMAND_LOG.md` を同じタイミングで更新する。
-- 「宥めよ」の変更時は、`prototypes/001-nadameyo/APP_STATE.md` も同じタイミングで更新する。
-- 次の小タスクは `TODO.md` の「Verify current app behavior manually in the browser」。
+## 8. GPTに相談したいこと
 
-## 6. GPTに相談したいこと
-
-- 「宥めよ」の最小プロトタイプで、最初に実装すべき状態とルールの設計。
-- `緊張度`、`信頼度`、`残り発言数` のバランス調整。
-- 固定テキスト判定から、将来的に LLM 連携へ拡張する設計。
-- Codex 内 PATH が Windows PowerShell と違う問題の扱い方。
-- Codex 側で `.git` に書き込めない問題を、権限変更で直すべきかどうか。
-- Codex から安全に `git add` / `git commit` / `git push` できる運用にする方法。
-- コマンドログにどこまで詳細な実行結果を残すべきか。
 - `empathy`、`accountability`、`offering_space` を独立intentにするか。
-- 「大丈夫じゃない」のような否定文を、部分一致より前にどこまで解析するか。
-- 124件のレビュー候補をどの順番でゲームへ採用するか。
+- 「大丈夫じゃない」のような否定文をどの段階で解析するか。
+- 124件のレビュー候補を、どの順番と単位でゲームへ採用するか。
+- ルート直下の旧ブラウザ版ファイルを残すか削除するか。

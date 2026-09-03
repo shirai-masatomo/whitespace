@@ -1,46 +1,58 @@
-# ACCEPTANCE
+# 完了条件（ACCEPTANCE）
 
-This file defines the acceptance criteria for the current milestone.
+このファイルは、作業を「完了」と判断するための条件を記録する。TODOは、対応する条件を実装・確認できた場合だけ完了にする。
 
-## Completed Milestone: Stabilize `宥めよ` Prototype Workflow
+## 現在のマイルストーン: intent候補の人手レビュー
 
-The milestone is complete when all criteria below are satisfied.
+- `docs/INTENT_DICTIONARY_REVIEW.md` のレビュー待ち候補を確認する。
+- 特に `confidence: medium` と `low` の候補を優先して確認する。
+- 各候補を採用・保留・除外のいずれかに判断する。
+- 採用する表現だけを、小さい単位で `status: adopted` に変更する。
+- 変更後に自動テスト、lint、production build、ブラウザ確認が成功する。
+- ゲームバランスの変更は、辞書レビューとは別の作業として扱う。
 
-- Required project docs exist: `PROJECT_STATE.md`, `SPEC.md`, `ACCEPTANCE.md`, and `TODO.md`.
-- App-specific history exists at `prototypes/001-nadameyo/APP_STATE.md`.
-- Command history exists at `docs/COMMAND_LOG.md`.
-- `prototypes/001-nadameyo` can pass lint.
-- `prototypes/001-nadameyo` can pass production build.
-- The local dev server can return HTTP `200`.
-- TODO items are updated only after the related acceptance criteria pass.
-- Each milestone update is committed to Git.
+## 完了済みマイルストーン
 
-## Current Milestone: Prepare A Reviewable Intent Dictionary
+### 「宥めよ」開発手順の安定化
 
-- The intent dictionary is outside `App.jsx` in a structured data file.
-- The dictionary contains between 100 and 500 expression candidates.
-- Every expression has `text`, `intent`, `subtype`, `confidence`, and
-  `sourceType`.
-- Ambiguous expressions are marked `medium` or `low` with explanatory notes.
-- Only explicitly adopted expressions affect gameplay.
-- Existing intent order, replies, and trust/tension changes remain unchanged.
-- A generated review list exists at `docs/INTENT_DICTIONARY_REVIEW.md`.
-- Source and license notes distinguish verified dictionary entries from generated
-  candidates.
-- Automated tests cover dictionary metadata, normalization, active-entry
-  filtering, existing behavior, and review-only behavior.
-- Tests, lint, production build, and browser behavior verification pass.
+- `PROJECT_STATE.md`、`SPEC.md`、`ACCEPTANCE.md`、`TODO.md` が存在する。
+- アプリ固有の履歴を `prototypes/001-nadameyo/APP_STATE.md` で管理する。
+- コマンド履歴を `docs/COMMAND_LOG.md` で管理する。
+- `prototypes/001-nadameyo` でlintとproduction buildが成功する。
+- ローカル開発サーバーがHTTP `200`を返す。
+- マイルストーンの更新をGitへコミットする。
 
-## Current App Behavior Acceptance
+### レビュー可能なintent辞書の準備
 
-- The page shows `宥めよ`.
-- The page shows tension, trust, and remaining utterances.
-- The player can enter and submit one sentence.
-- Apology-like input such as `ごめん` and `すみません` raises trust.
-- Listening-like input such as `聞かせて` raises trust.
-- Command or rejection-like input such as `落ち着いて` and `知らない` raises tension.
-- Unknown input raises tension mildly.
-- Reaching maximum tension fails the run.
-- Reaching the trust threshold succeeds the run.
-- Running out of utterances fails the run.
-- The player can restart after success or failure.
+- intent辞書が `App.jsx` の外にある構造化データファイルとして存在する。
+- 辞書に100〜500件の表現候補がある。
+- 各表現が `text`、`intent`、`subtype`、`confidence`、`sourceType` を持つ。
+- 曖昧な表現が `medium` または `low` と説明文で区別されている。
+- 明示的に採用した表現だけがゲームへ影響する。
+- 既存のintent順、返答、信頼度・緊張度の変化量が維持されている。
+- `docs/INTENT_DICTIONARY_REVIEW.md` で候補を一覧できる。
+- 辞書データ、正規化、採用状態、既存挙動を自動テストで確認できる。
+
+### プロジェクト文書の日本語化と整理
+
+- `SPEC.md`、`ACCEPTANCE.md`、`TODO.md` の本文が日本語で書かれている。
+- ルートの `README.md` が現在のWhiteSpaceプロジェクトを説明している。
+- `prototypes/001-nadameyo/README.md` が「宥めよ」の起動方法と構成を説明している。
+- `docs/PROJECT_MAP.md` からプロジェクト構成と各管理文書の役割を理解できる。
+- コード上の識別子、コマンド、intent名が維持されている。
+- Markdownのローカルリンクにリンク切れがない。
+- コードやゲーム挙動に変更がない。
+
+## 現在のアプリ挙動の完了条件
+
+- 画面に `宥めよ` が表示される。
+- 緊張度、信頼度、残り発言数が表示される。
+- プレイヤーが一文を入力して送信できる。
+- `ごめん` や `すみません` などの謝罪表現で信頼度が上がる。
+- `聞かせて` などの傾聴表現で信頼度が上がる。
+- `落ち着いて` や `知らない` などの命令・拒絶表現で緊張度が上がる。
+- `unknown` に分類された入力では緊張度が少し上がる。
+- 緊張度が最大になると失敗する。
+- 信頼度が成功条件に達すると成功する。
+- 発言回数を使い切ると失敗する。
+- 成功・失敗後に再挑戦できる。
