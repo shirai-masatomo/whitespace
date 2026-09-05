@@ -1,42 +1,24 @@
 {
-  "version": 2,
+  "version": 3,
   "reviewPolicy": "Only adopted expressions are active. review is unreviewed; deferred is reviewed but pending design/matching decisions; excluded is unsuitable as a direct utterance trigger and retained as reference. This review was explicitly delegated to the assistant by the user.",
   "intents": [
     {
-      "intent": "rejection",
-      "tensionChange": 2,
-      "trustChange": 0,
-      "reply": "知らない？　じゃあ、どうしてここにいる。"
+      "intent": "rejection"
     },
     {
-      "intent": "hostile",
-      "tensionChange": 2,
-      "trustChange": 0,
-      "reply": "……その呼び方、やめろ。"
+      "intent": "hostile"
     },
     {
-      "intent": "command",
-      "tensionChange": 1,
-      "trustChange": 0,
-      "reply": "落ち着け？　簡単に言うなよ。"
+      "intent": "command"
     },
     {
-      "intent": "apology",
-      "tensionChange": 0,
-      "trustChange": 1,
-      "reply": "……謝れば済むと思ってるわけじゃ、ないよな。"
+      "intent": "apology"
     },
     {
-      "intent": "listening",
-      "tensionChange": 0,
-      "trustChange": 1,
-      "reply": "……聞いて、どうするつもりだ。"
+      "intent": "listening"
     },
     {
-      "intent": "reassurance",
-      "tensionChange": 0,
-      "trustChange": 1,
-      "reply": "大丈夫って……どうして、そう言える。"
+      "intent": "reassurance"
     }
   ],
   "expressions": [

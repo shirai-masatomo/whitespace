@@ -401,3 +401,56 @@ GIT_TERMINAL_PROMPT=0 git push --dry-run origin HEAD:refs/heads/review/intent-di
 
 - ローカル作業ブランチへ変更をコミットし、Git形式のパッチを用意する。GitHubへ反映するには認証済み連携、またはPC側Codexでパッチ適用が必要。
 - マイルストーン全体はブラウザ確認待ち。過去のブラウザ確認結果を今回の変更後の結果として扱わない。
+
+## 2026-09-05 20:41:58 +09:00 — レビュー取込と遊べる改善版
+
+目的: 添付レビューを保持して取り込み、判定・返答・進行・UIを実装し、実操作まで確認する。通常の仕様判断は今回ユーザーから委任された。添付内の旧相談・未確認手順は履歴として扱う。
+
+作業場所: `C:\Users\masat\.codex\worktrees\2f05\codex_test`。以下のnpmコマンドは特記がなければ `prototypes/001-nadameyo` で実行。
+
+実際の主要コマンド:
+
+```powershell
+Get-Location
+git status --short --branch
+git remote -v
+git branch -avv
+git fetch origin
+git log --oneline HEAD..origin/main
+git diff --stat HEAD origin/main
+git switch -c codex/intent-review-playable origin/main
+git apply --stat 'C:\Users\masat\Downloads\whitespace-intent-review.patch'
+git apply --check 'C:\Users\masat\Downloads\whitespace-intent-review.patch'
+git apply 'C:\Users\masat\Downloads\whitespace-intent-review.patch'
+$env:Path = 'C:\Program Files\nodejs;' + $env:Path
+node --version
+npm.cmd --version
+npm.cmd ci --cache .npm-cache --no-audit --no-fund
+npm.cmd run test
+npm.cmd run lint
+npm.cmd run build
+npm.cmd run dev -- --host 127.0.0.1 --port 5174 --strictPort
+git commit -m "Import reviewed intent dictionary and decision records"
+npm.cmd run review:intents
+npm.cmd run test
+npm.cmd run lint
+npm.cmd run build
+npm.cmd run preview -- --host 127.0.0.1 --port 5175 --strictPort
+git diff --check
+```
+
+結果:
+
+- 開始時は未コミット差分なし、d731a53のブランチ未所属。最新origin/mainも同一で後続変更なし。
+- 通常のfetchはFETCH_HEAD書込みの権限拒否。権限付き実行でfetch・作業ブランチ作成に成功。ACLは変更していない。
+- パッチは存在し、checkに成功して一度だけ適用。取込を `c6158cd` へコミット。
+- Node v24.16.0 / npm 11.13.0。最初にリポジトリルートでnpm ciを試してlockfileなしエラーになり、対象アプリへ移動した。通常のnpm取得はEACCESで終了し、権限付きnpm ciで135パッケージを導入。lockfileや依存バージョンは変更していない。
+- 取込後10テスト、改善後20テスト、各lint/build成功。追加テストの呼称の誤判定を修正して再実行。
+- 別環境でできなかったブラウザ操作を、この環境のCodex内ブラウザで実施。成功、2種類の失敗、再挑戦、否定、中立、反復、歩み寄り、狭い画面、判定内訳を確認。
+- 本番previewで実入力と開発パネル非表示を確認し、previewはCtrl+Cで停止。開発サーバー5174と初期画面のタブは遊ぶために残した。
+- Nodeのassert.deepEqualで取込コミットと現在のdictionary.expressionsを比較し、144件の表現・理由・出典が同一と確認（88/43/13/0）。
+- 制作方針をAGENTSへ、現仕様をSPEC/APP_STATE等へ反映。判断理由と実操作結果はPLAYTEST_2026-09-05.mdに記録。
+
+学び: サンドボックスの権限拒否をACL障害と断定しない。作業ディレクトリとnpm.cmdを明示する。辞書レビューの採否と文脈判定は別であり、部分一致だけの断定を減らす境界が必要。実IMEの確認はブラウザの文字列入力だけでは代替できない。
+
+追加確認: `./start-dev.ps1 -Port 5176` を実行し、実際のworktreeからViteが起動することを確認。Ctrl+Cで停止した。Markdown 13ファイルの相対リンクをNodeで検査し、参照先の欠落0件。`git -c core.safecrlf=false diff --check` 成功。

@@ -1,17 +1,15 @@
 :root {
-  --bg: #101316;
-  --surface: #171b1f;
-  --text-strong: #f3f0e9;
-  --muted: #8f989e;
-  --line: #30373c;
-  --meter-empty: #252b30;
-  --accent: #b34e38;
-  --accent-soft: rgba(179, 78, 56, 0.3);
-  --danger: #d6654e;
-  --trust: #76a38b;
+  --bg: #101619;
+  --surface: #171f23;
+  --text-strong: #f2f1eb;
+  --muted: #a5b1b4;
+  --line: #303c41;
+  --meter-empty: #36434a;
+  --accent: #8cbea5;
+  --danger: #e58f78;
+  --trust: #a0d0b8;
   --sans: 'Yu Gothic UI', 'Meiryo', sans-serif;
   --mono: 'Cascadia Mono', 'Yu Gothic UI', monospace;
-
   color: var(--muted);
   background: var(--bg);
   font-family: var(--sans);
@@ -19,17 +17,6 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
 }
-
-* {
-  box-sizing: border-box;
-}
-
-body {
-  min-width: 320px;
-  min-height: 100vh;
-  margin: 0;
-  background:
-    linear-gradient(rgba(255, 255, 255, 0.018) 1px, transparent 1px),
-    var(--bg);
-  background-size: 100% 28px;
-}
+* { box-sizing: border-box; }
+body { min-width: 320px; min-height: 100vh; margin: 0; }
+::selection { color: var(--bg); background: var(--trust); }

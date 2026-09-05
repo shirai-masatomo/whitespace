@@ -50,7 +50,7 @@ const lines = [
   '- `review`: 未レビュー。ゲーム判定では使わない。',
   '- `deferred`: 確認済みだが、仕様または照合条件の検討待ち。ゲーム判定へ追加しない。',
   '- `excluded`: 直接の発話トリガーには不適切。資料として保持し、ゲーム判定へ追加しない。',
-  '- 保留・除外は入力のブロックではない。既存adopted語を含む場合は引き続き一致するため、各行に実際の「現在の判定」を記載する。',
+  '- 保留・未レビュー表現を含む入力は聞き返す。同じ位置を覆う、より長い採用表現がある場合は採用表現を優先。除外候補自体は判定に使わない。各行に実際の「現在の判定」を記載する。',
   '- `medium` / `low`: 文脈依存、短すぎる、複数intentにまたがる等の理由で特に注意して確認する。',
   '',
   '## Source And License Notes',
@@ -119,7 +119,7 @@ for (const intent of dictionary.intents) {
         ? 'high'
         : `${entry.confidence} (レビュー注意)`
     lines.push(
-      `| ${entry.status} | ${escapeCell(entry.text)} | ${escapeCell(entry.subtype)} | ${confidence} | ${entry.sourceType} | ${evaluateLine(entry.text).intent} | ${escapeCell([entry.notes, entry.review && `${entry.review.date}: ${entry.review.reason}`].filter(Boolean).join(' '))} |`,
+      `| ${entry.status} | ${escapeCell(entry.text)} | ${escapeCell(entry.subtype)} | ${confidence} | ${entry.sourceType} | ${evaluateLine({ input: entry.text, history: [], state: {} }).intent} | ${escapeCell([entry.notes, entry.review && `${entry.review.date}: ${entry.review.reason}`].filter(Boolean).join(' '))} |`,
     )
   }
 }
@@ -128,10 +128,10 @@ lines.push(
   '',
   '## Known Matching Limitations',
   '',
-  '- 現在は部分一致なので、保留・除外候補でもadopted語を含む表現は一致する。例: 保留の「面倒くさい」は既存「面倒」に一致する。',
-  '- 否定表現を構文解析していない。例: 「大丈夫じゃない」は現在も「大丈夫」に一致する。',
-  '- 一文に複数intentがある場合、辞書のintent順で最初に一致したものを採用する。',
-  '- 短語による新しい誤検出は今回の保留で避けたが、一般的な否定・引用・主語の解析は未実装。',
+  '- 採用表現は部分一致で照合するが、長い保留表現を短い採用語で加点・減点しない。「面倒くさい」「きっと大丈夫」は判断保留。',
+  '- 「大丈夫じゃない」「ごめんとは思わない」など限定した否定形は判断保留。「一人じゃない」「無理しなくていい」は安心。一般的な構文解析はしない。',
+  '- 一文に複数intentが残る場合は、優先順位で断定せず判断保留にする。',
+  '- 引用の伝聞形、二重否定、面倒を見たい、お前の話は限定的に保留。対応範囲と未対応例は [仕様](../SPEC.md) を参照。',
   '- 再現例、相談事項、次タスクは [今回のレビュー結果](INTENT_REVIEW_OUTCOME.md) と [TODO](../TODO.md) に記載する。',
   '',
 )

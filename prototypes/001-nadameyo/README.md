@@ -1,78 +1,45 @@
 # 宥めよ
 
-「宥めよ」は、限られた発言回数の中で相手に一文ずつ言葉を送り、信頼を得ることを目指すテキスト会話ゲームです。言葉を選び間違えると緊張度が上がるため、「話さなければ進まないが、発言にはリスクがある」という体験を小さく試作しています。
+5回の言葉で、相手が話せるところまで近づく会話ゲーム。WhiteSpaceの自由に変更できる試作です。
 
-WhiteSpaceプロジェクトの現在のアクティブなプロトタイプです。
+## 起動
 
-## 起動方法
-
-事前にNode.jsをインストールしておきます。初回だけ依存パッケージをインストールしてください。
+このREADMEがあるフォルダで実行します。
 
 ```powershell
-cd C:\Users\masat\Documents\codex_test\prototypes\001-nadameyo
-npm.cmd install
+npm.cmd ci
+npm.cmd run dev -- --host 127.0.0.1 --port 5174 --strictPort
 ```
 
-開発サーバーを起動します。
+[アプリを開く](http://127.0.0.1:5174/)。ポートが使用中なら失敗するので別ポートを明示してください。Node.js 24.16.0 / npm 11.13.0で確認。必要時はPATHに `C:\Program Files\nodejs` を追加するかnpm.cmdをフルパスで実行します。
 
-```powershell
-npm.cmd run dev -- --host 127.0.0.1
-```
+PowerShellスクリプトが使える環境では `./start-dev.ps1 -Port 5174` でも起動できます。スクリプト自身のフォルダを使うためworktreeを混同しません。Ctrl+Cで停止します。
 
-起動後、ブラウザで `http://127.0.0.1:5173/` を開きます。
+## 遊び方
 
-Codex内でPATHが不安定な場合は、npmをフルパスで指定できます。
+信頼0・緊張2から開始し、信頼4で成功、緊張5または発言切れで失敗。謝る・聞く・安心を伝える言葉を試し、相手の反応を読んで次を入力します。
 
-```powershell
-& 'C:\Program Files\nodejs\npm.cmd' run dev -- --host 127.0.0.1
-```
+未分類や判断保留は数値を変えず、発言数だけ1消費。同じ文では信頼が増えません。強い言葉の直後に新しい謝罪をすると緊張を1戻せます。終了後に振り返りと再挑戦が表示されます。
 
-## 確認用コマンド
+## 検証・開発
 
 ```powershell
 npm.cmd run test
 npm.cmd run lint
 npm.cmd run build
+npm.cmd run review:intents
 ```
 
-- `test`: intent辞書と入力判定の自動テスト
-- `lint`: JavaScriptとJSXの書き方を検査
-- `build`: 配布可能なproduction buildを作成できるか検査
-
-## 現在のゲーム仕様
-
-- 初期状態は緊張度 `2 / 5`、信頼度 `0 / 4`、残り発言数 `5`。
-- プレイヤーは一度に一文を入力する。
-- 入力は `normalizeInput` で全角・半角、空白、句読点の一部を正規化する。
-- `apology`、`listening`、`reassurance` は信頼度を上げる。
-- `command`、`rejection`、`hostile` は緊張度を上げる。
-- `unknown` は緊張度を少し上げる。
-- 緊張度が `5` になると失敗、信頼度が `4` になると成功する。
-- 発言数を使い切っても成功条件に達しなければ失敗する。
-- 終了後は `もう一度` で再挑戦できる。
-
-## intent辞書の状態
-
-intent辞書には144件の候補があります。ユーザーの委任に基づくレビューで68件を追加採用し、有効88件、確認済み保留43件、除外13件、未レビュー0件になりました。`adopted` だけがルールに追加されます。
-
-保留・除外は入力のブロックではなく、別の採用語を含めば引き続き一致します。採否理由と現在の判定は生成された一覧、検証状況と次タスクは [レビュー結果](../../docs/INTENT_REVIEW_OUTCOME.md) にあります。ブラウザの受け入れ確認はまだ完了していません。
-
-候補一覧は [`../../docs/INTENT_DICTIONARY_REVIEW.md`](../../docs/INTENT_DICTIONARY_REVIEW.md) で確認できます。
-
-## 主なファイル
+テストは言語評価・ゲーム進行・返答の20件。開発画面の「開発用：判定の内訳」で一致語と判断理由を見られます。本番ビルドでは非表示です。
 
 | ファイル | 役割 |
 | --- | --- |
-| `src/App.jsx` | React画面とゲーム進行を管理する |
-| `src/App.css` | 「宥めよ」画面の見た目を定義する |
-| `src/lib/intentMatcher.js` | 入力の正規化とintent判定を行う |
-| `src/data/intent-dictionary.json` | intent、状態変化、入力候補を保持する |
-| `test/intentMatcher.test.js` | 辞書と判定処理を自動テストする |
-| `scripts/generate-intent-review.mjs` | 辞書からレビュー用Markdownを生成する |
-| `start-dev.ps1` | Codex環境から開発サーバーを起動しやすくする |
+| src/App.jsx / App.css / index.css | 入力・画面・見た目 |
+| src/lib/intentMatcher.js | 入力・履歴・状態を受け取る言語評価境界 |
+| src/lib/gameEngine.js | 反復・歩み寄り・数値更新・終了条件 |
+| src/lib/responses.js | 文脈に応じた返答・変化説明・振り返り |
+| src/data/intent-dictionary.json | 88採用・43保留・13除外、全候補の理由と出典 |
+| test/ | 重要な判定と状態遷移のテスト |
+| scripts/generate-intent-review.mjs | 辞書と現行判定からレビュー一覧を生成 |
 
-## 詳細な状態と変更履歴
-
-ゲーム固有の仕様、管理している状態、状態遷移、intentの効果、変更履歴は [`APP_STATE.md`](APP_STATE.md) に記録しています。
-
-プロジェクト全体の現在地は [`../../PROJECT_STATE.md`](../../PROJECT_STATE.md)、次の作業は [`../../TODO.md`](../../TODO.md) を参照してください。
+[アプリの状態](APP_STATE.md) / [詳細仕様](../../SPEC.md) / [画面確認](../../docs/PLAYTEST_2026-09-05.md) / [次の作業](../../TODO.md)

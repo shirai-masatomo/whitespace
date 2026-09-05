@@ -13,7 +13,8 @@ const dictionaryUrl = new URL(
   import.meta.url,
 )
 const dictionary = JSON.parse(await readFile(dictionaryUrl, 'utf8'))
-const evaluateLine = createIntentEvaluator(dictionary)
+const evaluate = createIntentEvaluator(dictionary)
+const evaluateLine = (input) => evaluate({ input, history: [], state: {} })
 
 test('dictionary contains reviewable metadata for 100 to 500 expressions', () => {
   assert.ok(dictionary.expressions.length >= 100)
@@ -57,31 +58,18 @@ test('normalization absorbs width, spaces, and common punctuation', () => {
   assert.equal(normalizeInput('ＳＯＲＲＹ。'), 'sorry')
 })
 
-test('existing positive intent behavior is unchanged', () => {
-  assert.deepEqual(
-    {
-      intent: evaluateLine('すみません').intent,
-      tensionChange: evaluateLine('すみません').tensionChange,
-      trustChange: evaluateLine('すみません').trustChange,
-    },
-    { intent: 'apology', tensionChange: 0, trustChange: 1 },
-  )
+test('positive categories remain available without game rules in evaluation', () => {
+  assert.equal(evaluateLine('すみません').intent, 'apology')
+  assert.equal(evaluateLine('すみません').trustChange, undefined)
   assert.equal(evaluateLine('聞かせて').intent, 'listening')
   assert.equal(evaluateLine('大丈夫').intent, 'reassurance')
 })
 
-test('existing negative intent behavior and priority are unchanged', () => {
-  assert.deepEqual(
-    {
-      intent: evaluateLine('知らない').intent,
-      tensionChange: evaluateLine('知らない').tensionChange,
-      trustChange: evaluateLine('知らない').trustChange,
-    },
-    { intent: 'rejection', tensionChange: 2, trustChange: 0 },
-  )
+test('negative categories work while conflicting categories defer', () => {
+  assert.equal(evaluateLine('知らない').intent, 'rejection')
   assert.equal(evaluateLine('お前').intent, 'hostile')
   assert.equal(evaluateLine('落ち着いて').intent, 'command')
-  assert.equal(evaluateLine('知らないけど、ごめん').intent, 'rejection')
+  assert.equal(evaluateLine('知らないけど、ごめん').disposition, 'uncertain')
 })
 
 test('deferred and excluded expressions without adopted substrings remain unknown', () => {
@@ -132,7 +120,30 @@ test('short deferred words do not introduce false hostile or command matches', (
   }
 })
 
-test('review status is not a blocklist for existing adopted substrings', () => {
-  assert.equal(evaluateLine('面倒くさい').intent, 'hostile')
-  assert.equal(evaluateLine('きっと大丈夫').intent, 'reassurance')
+test('deferred phrases take precedence over shorter adopted substrings', () => {
+  assert.equal(evaluateLine('面倒くさい').disposition, 'uncertain')
+  assert.equal(evaluateLine('きっと大丈夫').disposition, 'uncertain')
+})
+
+test('scoped negation guards do not reject supportive negative wording', () => {
+  for (const input of ['大丈夫じゃない', '大 丈 夫 じゃない！？', '大丈夫ではない', '大丈夫とは思わない',
+    'ごめんとは思わない', 'ごめんと思ってない', '知らないわけじゃない', '面倒を見たい']) {
+    assert.equal(evaluateLine(input).disposition, 'uncertain', input)
+    assert.equal(evaluateLine(input).intent, 'unknown', input)
+  }
+  for (const input of ['一人じゃない', '無理しなくていい', '話さなくてもいい', '責めないよ', '大 丈 夫！？']) {
+    assert.equal(evaluateLine(input).intent, 'reassurance', input)
+  }
+})
+
+test('mixed and reported words defer, and diagnostic evidence is returned', () => {
+  for (const input of ['お前の話を聞きたい', 'ごめん。でも知らない', '「嘘つき」と言われた']) {
+    const result = evaluateLine(input)
+    assert.equal(result.disposition, 'uncertain', input)
+    assert.ok(result.reason)
+    assert.ok(result.matches.length)
+  }
+  assert.equal(evaluateLine('話してください').intent, 'listening')
+  assert.equal(evaluateLine('話してください').matches[0].text, '話してください')
+  assert.equal(evaluateLine('星空がきれい').disposition, 'unknown')
 })

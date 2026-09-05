@@ -1,64 +1,30 @@
 # WhiteSpace
 
-WhiteSpaceは、小さなプロトタイプを作りながら、将来的にPC向けゲーム、ARG、その他の実験的・革新的なサービスへ発展させるための基盤プロジェクトです。
+自由な試作を重ね、PCゲーム、ARG、実験的サービスへ発展させるプロジェクト。スピード・柔軟性・拡張性を重視し、現在の形にも固定しません。
 
-完成を急ぐだけでなく、アイデアを小さく試し、仕組みと制作過程を記録しながら育てることを重視しています。
+現在のアプリは会話ゲーム **宥めよ**。5回の言葉で相手の信頼を得ます。理解できない入力は数値を変えず聞き返し、言葉の反復や歩み寄りに応じて反応します。
 
-## 現在の状態
+## はじめに
 
-現在のアクティブなプロトタイプは、会話ゲーム「宥めよ」です。
+- [現在地](PROJECT_STATE.md) / [構成案内](docs/PROJECT_MAP.md)
+- [制作方針](AGENTS.md) / [仕様](SPEC.md) / [完了条件](ACCEPTANCE.md) / [次の作業](TODO.md)
+- [アプリの起動・構成](prototypes/001-nadameyo/README.md)
+- [改善版の確認結果](docs/PLAYTEST_2026-09-05.md)
 
-- 場所: [`prototypes/001-nadameyo`](prototypes/001-nadameyo/README.md)
-- 技術: Vite + React
-- 内容: プレイヤーが一文ずつ入力し、相手の信頼度と緊張度を変化させるテキスト会話ゲーム
-- 入力判定: ローカルのルールベースintent辞書
-- 辞書候補: 144件のうち88件採用、43件保留、13件除外。未レビュー0件
-- テスト: Node.js標準テスト10件、ESLint、Vite production build成功。今回の変更後のブラウザ確認は未完了
-- レビュー結果・相談事項: [INTENT_REVIEW_OUTCOME.md](docs/INTENT_REVIEW_OUTCOME.md)
+## ローカル起動
 
-## 最初に読むもの
-
-1. [`docs/PROJECT_MAP.md`](docs/PROJECT_MAP.md): プロジェクト全体の案内図
-2. [`PROJECT_STATE.md`](PROJECT_STATE.md): 現在どこまで進んでいるか
-3. [`TODO.md`](TODO.md): 次に何をするか
-4. [`SPEC.md`](SPEC.md): 何を作るか、現在の仕様
-5. [`ACCEPTANCE.md`](ACCEPTANCE.md): 何を満たせば完了か
-
-## プロジェクト構成
-
-```text
-WhiteSpace/
-├── prototypes/
-│   └── 001-nadameyo/        # 現在のアクティブなReactプロトタイプ
-├── docs/
-│   ├── PROJECT_MAP.md        # 全体の案内図
-│   ├── COMMAND_LOG.md        # 重要コマンドの実行履歴
-│   └── INTENT_DICTIONARY_REVIEW.md
-├── PROJECT_STATE.md          # リポジトリ全体の現在地
-├── SPEC.md                   # 仕様
-├── ACCEPTANCE.md             # 完了条件
-└── TODO.md                   # 次の作業
-```
-
-詳しい構造は [`docs/PROJECT_MAP.md`](docs/PROJECT_MAP.md) を参照してください。
-
-## 「宥めよ」の起動
+実際に開いているリポジトリのルートから実行します。元checkoutの絶対パスをコピーせず、このworktreeを使用してください。
 
 ```powershell
-cd C:\Users\masat\Documents\codex_test\prototypes\001-nadameyo
-npm.cmd install
-npm.cmd run dev -- --host 127.0.0.1
+cd prototypes/001-nadameyo
+npm.cmd ci
+npm.cmd run dev -- --host 127.0.0.1 --port 5174 --strictPort
 ```
 
-起動後、表示されたURLをブラウザで開きます。現在の標準URLは `http://127.0.0.1:5173/` です。
+[ローカルの試作を開く](http://127.0.0.1:5174/)。Ctrl+Cでサーバーを停止します。Node.js 24環境で確認済み。PowerShellでnpm.ps1が制限される場合はnpm.cmdを使います。
 
-このPCのPowerShellでは `npm` がExecution Policyで止まる場合があるため、`npm.cmd` を使用します。Codex内でPATHが不安定な場合は `C:\Program Files\nodejs\npm.cmd` を直接指定します。
+## 辞書と旧版
 
-## ルート直下の旧ファイルについて
+144候補のうち88採用・43保留・13除外。全件の判断理由と出典は [辞書レビュー](docs/INTENT_DICTIONARY_REVIEW.md) に保持しています。ルートのindex.html/app.js/style.cssはVite導入前の旧版で、現行アプリでは使いません。
 
-ルートの `index.html`、`app.js`、`style.css` は、Vite導入前に作った初期のブラウザ版です。現在のアクティブなアプリではありません。残すか整理するかは `TODO.md` の判断待ち項目です。
-
-## GitHub
-
-- Repository: https://github.com/shirai-masatomo/whitespace
-- Main branch: `main`
+[GitHubリポジトリ](https://github.com/shirai-masatomo/whitespace)

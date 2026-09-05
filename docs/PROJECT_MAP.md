@@ -1,68 +1,38 @@
 # WhiteSpace プロジェクトマップ
 
-このファイルは、WhiteSpaceを初めて開いたときに「どこに何があるか」を理解するための案内図です。
+## 最初に読む順番
 
-## 全体像
+[PROJECT_STATE](../PROJECT_STATE.md) → [SPEC](../SPEC.md) → [ACCEPTANCE](../ACCEPTANCE.md) → [TODO](../TODO.md)。制作方針と自律的な進め方は [AGENTS](../AGENTS.md)。対象アプリの [APP_STATE](../prototypes/001-nadameyo/APP_STATE.md) と [README](../prototypes/001-nadameyo/README.md) も確認します。
 
-```text
-WhiteSpace
-├── 開発基盤
-│   ├── Git / GitHub          変更履歴と共有
-│   ├── Node.js / npm         開発ツールの実行
-│   └── Vite + React          ブラウザで動く画面の開発
-│
-├── prototypes               小さな実験アプリを置く場所
-│   └── 001-nadameyo         現在のアクティブなプロトタイプ「宥めよ」
-│       ├── React画面         src/App.jsx
-│       ├── intent判定       src/lib/intentMatcher.js
-│       ├── intent辞書       src/data/intent-dictionary.json
-│       ├── テスト           test/intentMatcher.test.js
-│       └── アプリ管理       APP_STATE.md / README.md
-│
-└── 管理ドキュメント
-    ├── PROJECT_STATE.md
-    ├── SPEC.md
-    ├── ACCEPTANCE.md
-    ├── TODO.md
-    └── docs/
-        ├── PROJECT_MAP.md
-        ├── COMMAND_LOG.md
-        └── INTENT_DICTIONARY_REVIEW.md
-```
-
-## 「宥めよ」の処理の流れ
+## 現行アプリの流れ
 
 ```text
-プレイヤーが一文を入力
-        ↓
-React画面（src/App.jsx）
-        ↓
-入力を正規化・intent判定（src/lib/intentMatcher.js）
-        ↓
-採用済み表現を参照（src/data/intent-dictionary.json）
-        ↓
-緊張度・信頼度・残り発言数・相手の返答を更新
-        ↓
-自動テスト（test/intentMatcher.test.js）で既存挙動を確認
+prototypes/001-nadameyo/
+  src/App.jsx                 入力と表示
+      ↓ 送信
+  src/lib/gameEngine.js       入力・直近履歴・状態を評価器へ渡す
+      ↓                      ↑ intent / 判断状態 / 一致語 / 理由
+  src/lib/intentMatcher.js    ローカル辞書による言語評価
+      ↓ 読み取り
+  src/data/intent-dictionary.json
+
+  gameEngine.js              数値・反復・回復・終了を更新
+      ↓ 発言後の状態と履歴
+  src/lib/responses.js        返答・変化説明・振り返り
+      ↓
+  App.jsx                    画面へ表示
+
+  test/intentMatcher.test.js  言語評価の独立テスト
+  test/gameEngine.test.js     ゲーム進行・返答の独立テスト
 ```
 
-## 各管理ドキュメントの役割
+テストは別途コマンドで実行し、ゲーム中には実行しません。モデル導入はまだなく、必要になったら言語評価の境界を拡張します。
 
-| ドキュメント | 役割 |
-| --- | --- |
-| [`PROJECT_STATE.md`](../PROJECT_STATE.md) | リポジトリ全体の現在地、成功したこと、問題、次の作業を記録する。 |
-| [`SPEC.md`](../SPEC.md) | WhiteSpaceと現在のプロトタイプで「何を作るか」を定義する。 |
-| [`ACCEPTANCE.md`](../ACCEPTANCE.md) | 各作業を「完了」と判断するための条件を定義する。 |
-| [`TODO.md`](../TODO.md) | 次に実行する作業、判断待ち、完了済み作業を管理する。 |
-| [`APP_STATE.md`](../prototypes/001-nadameyo/APP_STATE.md) | 「宥めよ」固有の状態、状態遷移、仕様、変更履歴を記録する。 |
-| [`COMMAND_LOG.md`](COMMAND_LOG.md) | 重要なコマンドを、日時・目的・結果と一緒に記録する。 |
-| [`INTENT_DICTIONARY_REVIEW.md`](INTENT_DICTIONARY_REVIEW.md) | intent候補の採用・保留・除外、理由と現在の判定を一覧する。 |
-| [`INTENT_REVIEW_OUTCOME.md`](INTENT_REVIEW_OUTCOME.md) | レビュー結果、残存課題、相談事項、次タスクと未確認のブラウザ手順。 |
+## 記録の役割
 
-## 迷ったときに読む順番
+- [COMMAND_LOG](COMMAND_LOG.md): 日時・コマンド・結果・学びの累積。
+- [INTENT_DICTIONARY_REVIEW](INTENT_DICTIONARY_REVIEW.md): 辞書から生成する採否理由・出典・現在の単独判定。
+- [INTENT_REVIEW_OUTCOME](INTENT_REVIEW_OUTCOME.md): 別環境で行ったレビューの歴史的記録。
+- [PLAYTEST_2026-09-05](PLAYTEST_2026-09-05.md): 今回の実操作・改善理由・確認結果。
 
-1. この `PROJECT_MAP.md` で全体構成を確認する。
-2. `PROJECT_STATE.md` で現在地を確認する。
-3. `TODO.md` で次の小さな作業を確認する。
-4. 実装前に `SPEC.md` と `ACCEPTANCE.md` を確認する。
-5. 「宥めよ」を変更するときは `APP_STATE.md` も確認する。
+ルートの旧index.html/app.js/style.cssは現行アプリから独立しており、今回編集しません。
