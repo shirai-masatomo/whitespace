@@ -352,3 +352,52 @@ git diff --check
 
 - コードを変更していないため、今回の作業ではlintとbuildを再実行していない。
 - 直近の自動テスト6件、lint、build、ブラウザ確認は前回のintent辞書マイルストーンで成功済み。
+
+## 2026-09-05: 委任されたintent辞書レビュー
+
+目的:
+
+- mainの最新版を取得し、124件をレビューして採否を反映する。
+- 要検討の仕様を勝手に変更せず、根拠と次タスクをまとめる。
+
+主な実行（今回の環境はLinux）:
+
+```bash
+git ls-remote https://github.com/shirai-masatomo/whitespace.git HEAD
+git clone https://github.com/shirai-masatomo/whitespace.git whitespace
+git switch -c review/intent-dictionary-20260905
+# prototypes/001-nadameyo内
+npm ci
+npm test
+npm run review:intents
+npm test
+npm run lint
+npm run build
+npm run dev -- --host 127.0.0.1
+# リポジトリ直下
+git diff --check
+GIT_TERMINAL_PROMPT=0 git push --dry-run origin HEAD:refs/heads/review/intent-dictionary-20260905
+```
+
+結果:
+
+- 取得元HEAD: `d731a53232dae287fd07cbc45df1232edbcc64d2`。
+- 変更前テスト6件成功。変更後はテスト10件、lint、production build成功。
+- 68件採用・43件保留・13件除外。既存20件を含め88件有効、未レビュー0件。
+- 新規採用68件中49件が新たに認識され、19件は既存語の部分一致で認識済みだった。
+- 144候補を保持し、重複なし、既存intent定義と20採用語の維持、Markdown相対リンクを確認。
+- 全候補の判断理由、残存課題、相談事項、ブラウザ確認手順、次タスクを記録。
+
+失敗と対応:
+
+- Web経由のGitHub取得は失敗したが、Gitによる取得は成功。
+- 最初のlintはテストのテンプレート文字列中の全角空白で失敗。`\u3000`表記に直して成功。
+- Viteの0.0.0.0起動は環境のネットワークインターフェース取得エラーで失敗。既存の標準127.0.0.1では起動ログを確認。
+- ブラウザはローカルURLに `net::ERR_BLOCKED_BY_CLIENT` を返した。別プロセスからのHTTP確認も接続できなかった。画面操作・HTTP 200は未確認として残す。
+- pushのdry-runはGitHub認証がないため `could not read Username` で失敗。リモートブランチ作成やmain更新は行われていない。
+- 上流ライセンスURLのWeb取得も失敗。今回は条件の再確認済みとせず、出典表示整備をバックログに記載した。
+
+引き継ぎ:
+
+- ローカル作業ブランチへ変更をコミットし、Git形式のパッチを用意する。GitHubへ反映するには認証済み連携、またはPC側Codexでパッチ適用が必要。
+- マイルストーン全体はブラウザ確認待ち。過去のブラウザ確認結果を今回の変更後の結果として扱わない。

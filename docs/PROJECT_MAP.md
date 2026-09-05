@@ -56,7 +56,8 @@ React画面（src/App.jsx）
 | [`TODO.md`](../TODO.md) | 次に実行する作業、判断待ち、完了済み作業を管理する。 |
 | [`APP_STATE.md`](../prototypes/001-nadameyo/APP_STATE.md) | 「宥めよ」固有の状態、状態遷移、仕様、変更履歴を記録する。 |
 | [`COMMAND_LOG.md`](COMMAND_LOG.md) | 重要なコマンドを、日時・目的・結果と一緒に記録する。 |
-| [`INTENT_DICTIONARY_REVIEW.md`](INTENT_DICTIONARY_REVIEW.md) | 収集したintent表現候補を、人が採用・保留・除外するために確認する。 |
+| [`INTENT_DICTIONARY_REVIEW.md`](INTENT_DICTIONARY_REVIEW.md) | intent候補の採用・保留・除外、理由と現在の判定を一覧する。 |
+| [`INTENT_REVIEW_OUTCOME.md`](INTENT_REVIEW_OUTCOME.md) | レビュー結果、残存課題、相談事項、次タスクと未確認のブラウザ手順。 |
 
 ## 迷ったときに読む順番
 

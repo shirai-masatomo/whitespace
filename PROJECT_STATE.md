@@ -1,84 +1,52 @@
 # プロジェクト状態（PROJECT STATE）
 
-最終更新: 2026-09-03
-
-このファイルは、WhiteSpaceリポジトリ全体の「現在どこまで進んでいるか」を短時間で確認するための記録である。詳しい構成は [`docs/PROJECT_MAP.md`](docs/PROJECT_MAP.md) を参照する。
+最終更新: 2026-09-05
 
 ## 1. 現在地
 
-- WhiteSpaceは、将来のPC向けゲーム、ARG、実験的・革新的サービスを小さな試作から育てる基盤プロジェクトである。
-- 現在のアクティブなプロトタイプは `prototypes/001-nadameyo` の会話ゲーム「宥めよ」。
-- 「宥めよ」はVite + Reactで動作し、ローカルのルールベースintent判定を使う。
-- intent辞書には144件の候補があり、既存20件が `adopted`、新規124件が `review`。
-- 現在のマイルストーンは、レビュー待ち124件を人が確認し、採用・保留・除外を判断すること。
-- リポジトリはGitHubの `https://github.com/shirai-masatomo/whitespace` と同期している。
+- WhiteSpaceは、PC向けゲーム、ARG、実験的サービスを小さな試作から育てる基盤プロジェクト。
+- 現在の実装は `prototypes/001-nadameyo` の会話ゲーム「宥めよ」（Vite + React、ローカルのルールベース判定）。
+- 最新取得元は `main` の `d731a53232dae287fd07cbc45df1232edbcc64d2`。
+- 作業ブランチは `review/intent-dictionary-20260905`。この環境にはGitHubへの書き込み認証がなく、今回の変更はまだGitHubへ反映していない。
+- ユーザーの委任に基づき、assistantがレビュー待ち124件を確認。68件採用・43件保留・13件除外。有効な表現は20件から88件になった。
+- 未レビュー0件。全144件に理由を記録した。今回の採用68件中、単独入力で新たに認識できる候補は49件、既存の部分一致で認識できていた候補は19件。
+- **現在のマイルストーンはブラウザ確認待ち**。辞書の採否反映と自動検証は済み、画面の受け入れ確認は未完了。
+- 今後の形態は「宥めよ」に固定しない。辞書・Embedding・LLMの比較実験は次タスクの提案であり、未実装。
 
-## 2. 完了していること
+## 2. 今回の変更
 
-- Node.js LTSとnpmを導入し、Vite + Reactプロジェクトを作成した。
-- 緊張度、信頼度、残り発言数、会話履歴、成功・失敗、再挑戦を実装した。
-- 入力の正規化と、`apology`、`listening`、`reassurance`、`command`、`rejection`、`hostile`、`unknown` の判定を実装した。
-- intent辞書を `App.jsx` から外部JSONへ切り出した。
-- 辞書候補を自動採用せず、人がレビューできる仕組みにした。
-- Node.js標準テスト、ESLint、Vite production buildを実行できるようにした。
-- ブラウザで成功、緊張度による失敗、発言数による失敗、再挑戦を確認した。
-- プロジェクト管理文書とREADMEを日本語で整理し、`docs/PROJECT_MAP.md` を追加した。
+- 辞書に `deferred`（確認済み保留）と `excluded`（発話トリガーから除外）を追加。どちらも自動採用しない。
+- `話してください` の候補分類をcommandからlisteningへ訂正。既存ルールでもlisteningであり、実際の判定は維持。
+- 短語による新規の誤判定を避け、「話せ」「言え」「聞け」「ばか」等を保留。
+- [辞書一覧](docs/INTENT_DICTIONARY_REVIEW.md)に採否理由・実際の判定・出典別件数を表示。
+- [レビュー結果](docs/INTENT_REVIEW_OUTCOME.md)に再現した問題、相談事項、次タスク、未確認のブラウザ手順を記録。
+- 判定器、App.jsx、数値バランス、返答文、intent優先順位は未変更。
 
-## 3. 現在の技術構成
+## 3. 検証状況
 
-| 項目 | 現在の状態 |
+| 項目 | 今回の結果 |
 | --- | --- |
-| Node.js | `v24.16.0` |
-| npm | `11.13.0`。PowerShellでは `npm.cmd` を使用する |
-| フロントエンド | React `19.2.6` |
-| 開発・build | Vite `8.0.14` |
-| 状態管理 | React `useState` |
-| 入力判定 | `normalizeInput` とローカルintent辞書 |
-| 自動テスト | Node.js標準テストランナー |
-| バージョン管理 | Git / GitHub、`main` ブランチ |
+| Node.js標準テスト | 10件成功。採用88表現と代表文、衝突回避を確認 |
+| ESLint | 成功 |
+| Vite production build | 成功（Vite 8.0.14） |
+| ブラウザ確認 | 未完了。ローカルURLをブラウザがERR_BLOCKED_BY_CLIENTで拒否 |
+| HTTP疎通 | 別プロセスから接続できず未確認。起動ログだけで成功扱いにしない |
 
-## 4. 直近の確認結果
+今回の検証環境はLinux、Node.js v24.19.0、npm 11.9.0。ユーザーのWindows環境は変更していない。Windows PowerShellでは引き続き `npm.cmd` を使う。
 
-- `npm.cmd run test`: 自動テスト6件成功。
-- `npm.cmd run lint`: 成功。
-- `npm.cmd run build`: 成功。
-- `http://127.0.0.1:5173/`: ブラウザ上で主要なゲーム遷移を確認済み。
-- Markdownのローカルリンク: リンク切れなし。
-- 今回の文書整理: Markdownのみ変更し、ゲームコードと挙動は未変更。
+## 4. 残存課題と相談事項
 
-## 5. 既知の問題と注意点
+- 否定・引用・複数意図を解析しない。`大丈夫じゃない` がreassurance、`ごめんとは思わない` がapologyになる。
+- `お前の話を聞きたい` や `面倒を見たい` がhostileになる。既存20件にも曖昧な語がある。
+- 保留は入力ブロックではない。`面倒くさい` と `きっと大丈夫` は既存のadopted語に一致する。
+- 未分類入力は緊張+1。判断保留時は状態を変えず聞き返す案をユーザーへ相談する。
+- カテゴリ固定の返答が、入力していない言葉を問い返す場合がある。
+- ルートの旧ブラウザ版の整理、新intent、ゲームバランスは未決定。
 
-- Windows PowerShellでは `npm` がExecution Policyで止まる場合があるため、`npm.cmd` を使う。
-- Codex内ではNode.js/npmのPATHが通常のPowerShellと異なる場合があり、必要に応じて `C:\Program Files\nodejs\npm.cmd` を直接指定する。
-- CodexからGitを更新するときは、`.git` の所有権とACLの影響で権限付き実行が必要になる場合がある。
-- 現在のintent判定は部分一致のため、「大丈夫じゃない」が `大丈夫` に一致するなど、否定文を誤判定する可能性がある。
-- 一文に複数intentがある場合は、辞書で先に定義されたintentを採用する。
-- ルートの `index.html`、`app.js`、`style.css` はVite導入前の旧ブラウザ版で、現在は使用していない。削除するかは未決定。
+## 5. 次にやること
 
-## 6. 次にやること
+1. WS-001: 今回の採用後のゲームをブラウザで確認する。
+2. WS-002: 判断保留の扱いを相談し、否定等の入力例をもとに判定を改善する。
+3. WS-003（提案）: 作品に依存しない言語判定の比較実験を用意する。
 
-1. `docs/INTENT_DICTIONARY_REVIEW.md` の `confidence: medium` / `low` 候補を確認する。
-2. 複数intentにまたがる候補を、採用・保留・除外に分類する。
-3. 採用する候補を少数ずつ `status: adopted` に変更する。
-4. 各変更後に自動テスト、lint、build、ブラウザ確認を行う。
-5. 辞書レビュー後に、ゲームバランス調整を別タスクとして検討する。
-
-## 7. 今回整理したファイル
-
-- `README.md`
-- `SPEC.md`
-- `ACCEPTANCE.md`
-- `TODO.md`
-- `PROJECT_STATE.md`
-- `docs/PROJECT_MAP.md`
-- `docs/COMMAND_LOG.md`
-- `prototypes/001-nadameyo/README.md`
-
-`prototypes/001-nadameyo/APP_STATE.md` と `docs/INTENT_DICTIONARY_REVIEW.md` は内容を確認したが、今回はアプリ仕様と辞書候補を変更していないため編集していない。
-
-## 8. GPTに相談したいこと
-
-- `empathy`、`accountability`、`offering_space` を独立intentにするか。
-- 「大丈夫じゃない」のような否定文をどの段階で解析するか。
-- 124件のレビュー候補を、どの順番と単位でゲームへ採用するか。
-- ルート直下の旧ブラウザ版ファイルを残すか削除するか。
+具体的な手順は [TODO](TODO.md)、仕様は [SPEC](SPEC.md)、完了条件は [ACCEPTANCE](ACCEPTANCE.md) を参照する。

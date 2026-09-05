@@ -50,11 +50,16 @@ WhiteSpaceは、小さな試作を重ねながら、将来的に次のような�
 
 ## intent辞書の運用
 
-各表現は `text`、`intent`、`subtype`、`confidence`、`sourceType`、`status` を持つ。
+各表現は `text`、`intent`、`subtype`、`confidence`、`sourceType`、`status` を持つ。確認済み候補には `review` オブジェクトで確認日・担当・理由を残す。
 
 - `status: adopted`: ゲームの判定に使用する。
-- `status: review`: レビュー候補として保持し、ゲームの判定には自動採用しない。
+- `status: review`: 未レビュー。ゲームの判定には自動採用しない。
+- `status: deferred`: 確認済みだが仕様・照合条件の検討待ち。判定へ追加しない。
+- `status: excluded`: 直接の発話トリガーには不適切。資料として保持し、判定へ追加しない。
+- 保留・除外は入力ブロックではない。別のadopted語への部分一致は起きる。
 - `confidence: medium` または `low`: 文脈によって意味が変わる可能性があるため、特に慎重に確認する。
+
+2026-09-05のユーザー委任レビューにより88件採用、43件保留、13件除外、未レビュー0件。
 
 候補一覧は `docs/INTENT_DICTIONARY_REVIEW.md` に生成する。候補収集だけを理由に、緊張度・信頼度・返答・intentの優先順位・成功条件・失敗条件を変更しない。
 
@@ -68,3 +73,7 @@ WhiteSpaceは、小さな試作を重ねながら、将来的に次のような�
 - `docs/INTENT_DICTIONARY_REVIEW.md`: intent候補の採否をレビューする。
 - `prototypes/001-nadameyo/APP_STATE.md`: 「宥めよ」固有の状態、仕様、変更履歴を記録する。
 - `docs/PROJECT_MAP.md`: プロジェクト構成と各文書の役割を案内する。
+
+## 次の実験の位置づけ
+
+WhiteSpaceの形態は「宥めよ」に固定しない。言語判定の比較画面、Embedding、小型LLMは検討段階であり、現在の実装仕様には含めない。具体的な提案と相談事項は `docs/INTENT_REVIEW_OUTCOME.md` に記録する。

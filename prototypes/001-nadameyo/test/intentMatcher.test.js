@@ -29,7 +29,14 @@ test('dictionary contains reviewable metadata for 100 to 500 expressions', () =>
         expression.sourceType,
       ),
     )
-    assert.ok(['adopted', 'review'].includes(expression.status))
+    assert.ok(['adopted', 'review', 'deferred', 'excluded'].includes(expression.status))
+    assert.ok(dictionary.intents.some(({ intent }) => intent === expression.intent))
+    assert.ok(normalizeInput(expression.text).length > 0)
+    if (expression.status !== 'review') {
+      assert.ok(expression.review?.date)
+      assert.ok(expression.review?.reviewer)
+      assert.ok(expression.review?.reason)
+    }
   }
 })
 
@@ -40,9 +47,9 @@ test('only adopted expressions become active rules', () => {
     .map(({ text }) => text)
 
   assert.deepEqual(activeWords, adoptedWords)
-  assert.equal(activeWords.length, 20)
   assert.ok(!activeWords.includes('悪かった'))
   assert.ok(!activeWords.includes('拒否'))
+  assert.ok(!activeWords.includes('話せ'))
 })
 
 test('normalization absorbs width, spaces, and common punctuation', () => {
@@ -77,8 +84,55 @@ test('existing negative intent behavior and priority are unchanged', () => {
   assert.equal(evaluateLine('知らないけど、ごめん').intent, 'rejection')
 })
 
-test('review-only expressions do not automatically become active', () => {
+test('deferred and excluded expressions without adopted substrings remain unknown', () => {
   assert.equal(evaluateLine('拒否').intent, 'unknown')
   assert.equal(evaluateLine('悪かった').intent, 'unknown')
   assert.equal(evaluateLine('安心して').intent, 'unknown')
+})
+
+test('every adopted phrase reaches its intended category without priority collisions', () => {
+  for (const expression of dictionary.expressions.filter(({ status }) => status === 'adopted')) {
+    assert.equal(evaluateLine(expression.text).intent, expression.intent, expression.text)
+    assert.equal(evaluateLine(`\u3000${expression.text}！？`).intent, expression.intent, expression.text)
+  }
+})
+
+test('newly adopted phrases work in representative utterances', () => {
+  const cases = [
+    ['そんなの知ったこっちゃない', 'rejection'],
+    ['本当に嘘つきだ', 'hostile'],
+    ['ちゃんと説明しろ', 'command'],
+    ['今回は私が悪かった', 'apology'],
+    ['君の話を聞きたい', 'listening'],
+    ['今は無理しなくていい', 'reassurance'],
+    ['一人じゃない', 'reassurance'],
+    ['責めないよ', 'reassurance'],
+    ['話さなくてもいい', 'reassurance'],
+  ]
+  for (const [line, intent] of cases) {
+    assert.equal(evaluateLine(line).intent, intent, line)
+  }
+})
+
+test('short deferred words do not introduce false hostile or command matches', () => {
+  const cases = [
+    ['話せる範囲でいい', 'listening'],
+    ['言える範囲でいい', 'unknown'],
+    ['聞けば分かる', 'unknown'],
+    ['今来たばかり', 'unknown'],
+    ['バカンス', 'unknown'],
+    ['馬鹿正直', 'unknown'],
+    ['どうしたって無理', 'unknown'],
+    ['音楽を聴く', 'unknown'],
+    ['天気が悪かった', 'unknown'],
+    ['最低気温', 'unknown'],
+  ]
+  for (const [line, intent] of cases) {
+    assert.equal(evaluateLine(line).intent, intent, line)
+  }
+})
+
+test('review status is not a blocklist for existing adopted substrings', () => {
+  assert.equal(evaluateLine('面倒くさい').intent, 'hostile')
+  assert.equal(evaluateLine('きっと大丈夫').intent, 'reassurance')
 })

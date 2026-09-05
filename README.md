@@ -12,8 +12,9 @@ WhiteSpaceは、小さなプロトタイプを作りながら、将来的にPC�
 - 技術: Vite + React
 - 内容: プレイヤーが一文ずつ入力し、相手の信頼度と緊張度を変化させるテキスト会話ゲーム
 - 入力判定: ローカルのルールベースintent辞書
-- 辞書候補: 144件のうち既存20件が有効、124件が人によるレビュー待ち
-- テスト: Node.js標準テスト、ESLint、Vite production build
+- 辞書候補: 144件のうち88件採用、43件保留、13件除外。未レビュー0件
+- テスト: Node.js標準テスト10件、ESLint、Vite production build成功。今回の変更後のブラウザ確認は未完了
+- レビュー結果・相談事項: [INTENT_REVIEW_OUTCOME.md](docs/INTENT_REVIEW_OUTCOME.md)
 
 ## 最初に読むもの
 

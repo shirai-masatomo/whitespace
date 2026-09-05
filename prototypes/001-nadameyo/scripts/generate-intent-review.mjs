@@ -1,8 +1,13 @@
 import { mkdir, readFile, writeFile } from 'node:fs/promises'
+import { createIntentEvaluator } from '../src/lib/intentMatcher.js'
 
 const dictionaryUrl = new URL('../src/data/intent-dictionary.json', import.meta.url)
 const outputUrl = new URL('../../../docs/INTENT_DICTIONARY_REVIEW.md', import.meta.url)
 const dictionary = JSON.parse(await readFile(dictionaryUrl, 'utf8'))
+const evaluateLine = createIntentEvaluator(dictionary)
+const statuses = ['adopted', 'review', 'deferred', 'excluded']
+const countStatus = (entries, status) =>
+  entries.filter((entry) => entry.status === status).length
 
 const intentDescriptions = {
   apology: '謝罪、後悔、責任を認める表現',
@@ -31,19 +36,28 @@ function escapeCell(value) {
 const lines = [
   '# Intent Dictionary Review',
   '',
-  'この文書は「宥めよ」の入力候補を人がレビューするための一覧である。候補を大量に収集しても、自動的にはゲーム判定へ採用しない。',
+  'この文書は辞書JSONから生成する採否記録である。2026-09-05、ユーザーからの明示的な委任に基づきassistantが124件をレビューした。候補の収集やconfidenceだけを理由に自動採用しない。',
   '',
   '## Review Status',
   '',
   `- 総候補数: \`${dictionary.expressions.length}\``,
   `- 現在ゲームで有効: \`${adoptedCount}\``,
-  `- レビュー待ち: \`${dictionary.expressions.length - adoptedCount}\``,
+  `- 未レビュー: \`${countStatus(dictionary.expressions, 'review')}\``,
+  `- 確認済み・保留: \`${countStatus(dictionary.expressions, 'deferred')}\``,
+  `- 直接の発話トリガーから除外: \`${countStatus(dictionary.expressions, 'excluded')}\``,
   `- confidence: high \`${confidenceCounts.high}\` / medium \`${confidenceCounts.medium}\` / low \`${confidenceCounts.low}\``,
   '- `adopted`: 現在のゲーム判定で使う。',
-  '- `review`: 候補データとして保持するだけで、ゲーム判定では使わない。',
+  '- `review`: 未レビュー。ゲーム判定では使わない。',
+  '- `deferred`: 確認済みだが、仕様または照合条件の検討待ち。ゲーム判定へ追加しない。',
+  '- `excluded`: 直接の発話トリガーには不適切。資料として保持し、ゲーム判定へ追加しない。',
+  '- 保留・除外は入力のブロックではない。既存adopted語を含む場合は引き続き一致するため、各行に実際の「現在の判定」を記載する。',
   '- `medium` / `low`: 文脈依存、短すぎる、複数intentにまたがる等の理由で特に注意して確認する。',
   '',
   '## Source And License Notes',
+  '',
+  ...['generated', 'wordnet', 'sudachi', 'aozora'].map((sourceType) =>
+    `- 出典内訳 ${sourceType}: ${dictionary.expressions.filter((entry) => entry.sourceType === sourceType).length}件`,
+  ),
   '',
   '- Japanese WordNet: NICTのライセンスに基づく。利用・複製・変更・配布は許可されるが、著作権表示と免責条項を複製物に残す必要がある。今回の `wordnet` 候補は確認したsynsetの見出しだけで、例文は収録していない。',
   '- Japanese WordNet notice: Copyright 2009, 2010 NICT. 詳細な条件と免責事項は下記の公式LICENSEを参照する。',
@@ -61,17 +75,16 @@ const lines = [
   '',
   '## Intent Summary',
   '',
-  '| intent | 役割 | 候補数 | adopted | review |',
-  '| --- | --- | ---: | ---: | ---: |',
+  '| intent | 役割 | 候補数 | adopted | review | deferred | excluded |',
+  '| --- | --- | ---: | ---: | ---: | ---: | ---: |',
 ]
 
 for (const intent of dictionary.intents) {
   const entries = dictionary.expressions.filter(
     (entry) => entry.intent === intent.intent,
   )
-  const intentAdopted = entries.filter(({ status }) => status === 'adopted').length
   lines.push(
-    `| ${intent.intent} | ${intentDescriptions[intent.intent]} | ${entries.length} | ${intentAdopted} | ${entries.length - intentAdopted} |`,
+    `| ${intent.intent} | ${intentDescriptions[intent.intent]} | ${entries.length} | ${statuses.map((status) => countStatus(entries, status)).join(' | ')} |`,
   )
 }
 
@@ -96,8 +109,8 @@ for (const intent of dictionary.intents) {
     '',
     intentDescriptions[intent.intent],
     '',
-    '| status | text | subtype | confidence | sourceType | notes |',
-    '| --- | --- | --- | --- | --- | --- |',
+    '| status | text | subtype | confidence | sourceType | 現在の判定 | notes / 採否理由 |',
+    '| --- | --- | --- | --- | --- | --- | --- |',
   )
 
   for (const entry of entries) {
@@ -106,7 +119,7 @@ for (const intent of dictionary.intents) {
         ? 'high'
         : `${entry.confidence} (レビュー注意)`
     lines.push(
-      `| ${entry.status} | ${escapeCell(entry.text)} | ${escapeCell(entry.subtype)} | ${confidence} | ${entry.sourceType} | ${escapeCell(entry.notes ?? '')} |`,
+      `| ${entry.status} | ${escapeCell(entry.text)} | ${escapeCell(entry.subtype)} | ${confidence} | ${entry.sourceType} | ${evaluateLine(entry.text).intent} | ${escapeCell([entry.notes, entry.review && `${entry.review.date}: ${entry.review.reason}`].filter(Boolean).join(' '))} |`,
     )
   }
 }
@@ -115,10 +128,11 @@ lines.push(
   '',
   '## Known Matching Limitations',
   '',
-  '- 現在は部分一致なので、review候補でもadopted語を含む表現は既存ルールに一致する。例: 「ごめんなさい」は「ごめん」に一致する。',
+  '- 現在は部分一致なので、保留・除外候補でもadopted語を含む表現は一致する。例: 保留の「面倒くさい」は既存「面倒」に一致する。',
   '- 否定表現を構文解析していない。例: 「大丈夫じゃない」は現在も「大丈夫」に一致する。',
   '- 一文に複数intentがある場合、辞書のintent順で最初に一致したものを採用する。',
-  '- これらは辞書候補の人手レビュー後、判定アルゴリズム側の別タスクとして扱う。',
+  '- 短語による新しい誤検出は今回の保留で避けたが、一般的な否定・引用・主語の解析は未実装。',
+  '- 再現例、相談事項、次タスクは [今回のレビュー結果](INTENT_REVIEW_OUTCOME.md) と [TODO](../TODO.md) に記載する。',
   '',
 )
 
