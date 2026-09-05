@@ -454,3 +454,5 @@ git diff --check
 学び: サンドボックスの権限拒否をACL障害と断定しない。作業ディレクトリとnpm.cmdを明示する。辞書レビューの採否と文脈判定は別であり、部分一致だけの断定を減らす境界が必要。実IMEの確認はブラウザの文字列入力だけでは代替できない。
 
 追加確認: `./start-dev.ps1 -Port 5176` を実行し、実際のworktreeからViteが起動することを確認。Ctrl+Cで停止した。Markdown 13ファイルの相対リンクをNodeで検査し、参照先の欠落0件。`git -c core.safecrlf=false diff --check` 成功。
+
+保存結果: `git commit -m "Improve conversation evaluation, reactions and playable feedback"` により `155c07b` を作成。`git push -u origin codex/intent-review-playable` は既存認証で成功し、`c6158cd` と改善コミットをGitHubの作業ブランチへ反映した。mainへはマージしていない。この保存結果をPROJECT_STATEと本ログへ追記し、記録コミットとして保存する。

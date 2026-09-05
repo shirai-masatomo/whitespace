@@ -16,7 +16,7 @@ WhiteSpaceは自由に変更できる試作環境。スピード・柔軟性・�
 - 元checkout: `C:\Users\masat\Documents\codex_test`。今回の編集対象ではない。
 - 開始時: 未コミット差分なし、HEADは `d731a53`（ブランチ未所属）。権限付きfetch後のorigin/mainも同じコミット。
 - 作業ブランチ: `codex/intent-review-playable`。mainへのマージは行わない。
-- レビュー取込コミット: `c6158cd`。後続の改善は別コミット。最新のcommit/push状況はGitとCOMMAND_LOGを参照する。
+- レビュー取込: `c6158cd`。改善実装: `155c07b`。両方をGitHubの同名作業ブランチへpush済み。以降の記録コミットも同ブランチで管理する。
 
 ## 確認結果
 
