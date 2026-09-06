@@ -147,3 +147,22 @@ test('mixed and reported words defer, and diagnostic evidence is returned', () =
   assert.equal(evaluateLine('話してください').matches[0].text, '話してください')
   assert.equal(evaluateLine('星空がきれい').disposition, 'unknown')
 })
+
+test('review regressions: polite negation, positive mixtures and short deferred boundaries', () => {
+  for (const input of ['大丈夫じゃありません', '大丈夫ではありません']) {
+    assert.equal(evaluateLine(input).disposition, 'uncertain')
+  }
+  assert.equal(evaluateLine('一人じゃない').intent, 'reassurance')
+  assert.equal(evaluateLine('無理しなくていい').intent, 'reassurance')
+  assert.equal(evaluateLine('ごめん、話を聞くよ').intent, 'listening')
+  assert.equal(evaluateLine('大丈夫、ごめん').intent, 'apology')
+  assert.equal(evaluateLine('ごめん、嘘つき').disposition, 'uncertain')
+  assert.equal(evaluateLine('ごめん、知らない').disposition, 'uncertain')
+  for (const input of ['ごめん、今来たばかり', 'ごめん、バカンスに来た', 'ごめん、馬鹿正直だった']) {
+    assert.equal(evaluateLine(input).intent, 'apology', input)
+  }
+  for (const input of ['ばか', 'ごめん、ばか', 'ごめん、話せ']) {
+    assert.equal(evaluateLine(input).disposition, 'uncertain', input)
+  }
+  assert.deepEqual(evaluateLine('ごめん、今来たばかり').matches.map(m => m.text), ['ごめん'])
+})

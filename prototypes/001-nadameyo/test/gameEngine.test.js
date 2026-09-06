@@ -101,3 +101,11 @@ test('reflection summarizes actual player behavior and explains uncertain outcom
   assert.match(reflection.advice, /繰り返し/)
   assert.equal(getReflection(play('嘘つき', 'ごめん')).repairs, 1)
 })
+
+test('positive mixtures are a single turn with at most one trust point', () => {
+  const state = play('ごめん、話を聞くよ')
+  assert.equal(state.history[0].evaluation.intent, 'listening')
+  assert.deepEqual([state.trust, state.tension, state.turnsLeft], [1, 2, 4])
+  assert.equal(play('ごめん、今来たばかり').trust, 1)
+  assert.equal(play('大丈夫じゃありません').trust, 0)
+})
