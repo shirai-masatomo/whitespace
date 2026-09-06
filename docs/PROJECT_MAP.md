@@ -26,7 +26,20 @@ prototypes/001-nadameyo/
   test/gameEngine.test.js     ゲーム進行・返答の独立テスト
 ```
 
-テストは別途コマンドで実行し、ゲーム中には実行しません。モデル導入はまだなく、必要になったら言語評価の境界を拡張します。
+テストは別途コマンドで実行し、ゲーム中には実行しません。ゲームは辞書のまま、次の独立比較経路を追加しています。
+
+```text
+src/Workspace.jsx → App.jsx (#game) / Comparison.jsx (#compare)
+Comparison.jsx → lib/comparison.js → 同じ辞書評価器
+                                  → /api/language/evaluate
+server/localModel.js → lib/modelContract.js（固定プロンプト・形式検証）
+                     → このPCのOllama :11435
+src/data/comparisonCases.js        レビュー3例・生成25例
+scripts/compare-language.mjs       同じ実装で初回/ウォーム測定
+test/localModel.test.js            契約・エラー・APIの検証
+```
+
+[LOCAL_MODEL](LOCAL_MODEL.md) は環境・起動・測定条件、[PLAYTEST_2026-09-06](PLAYTEST_2026-09-06.md) は今回の実操作、`experiments/` は実測JSONです。モデルとランタイムはルート `.local-llm/` にあり、Gitには含めません。
 
 ## 記録の役割
 

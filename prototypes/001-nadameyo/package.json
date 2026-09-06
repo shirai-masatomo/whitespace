@@ -9,6 +9,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "review:intents": "node scripts/generate-intent-review.mjs",
+    "compare:language": "node scripts/compare-language.mjs",
     "test": "node --test"
   },
   "dependencies": {

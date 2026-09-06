@@ -456,3 +456,49 @@ git diff --check
 追加確認: `./start-dev.ps1 -Port 5176` を実行し、実際のworktreeからViteが起動することを確認。Ctrl+Cで停止した。Markdown 13ファイルの相対リンクをNodeで検査し、参照先の欠落0件。`git -c core.safecrlf=false diff --check` 成功。
 
 保存結果: `git commit -m "Improve conversation evaluation, reactions and playable feedback"` により `155c07b` を作成。`git push -u origin codex/intent-review-playable` は既存認証で成功し、`c6158cd` と改善コミットをGitHubの作業ブランチへ反映した。mainへはマージしていない。この保存結果をPROJECT_STATEと本ログへ追記し、記録コミットとして保存する。
+
+## 2026-09-06 02時台〜12:33 +09:00 — 辞書修正とローカルLLM比較
+
+目的: 前回の改善版を保持して3指摘を修正し、小型モデルを実PCで動かして辞書と比較できる一版をつくる。途中の上限到達後も未コミット作業を保持して再開した。
+
+作業場所は引き続き `C:\Users\masat\.codex\worktrees\2f05\codex_test`。開始時は未コミット差分なし、`codex/intent-review-playable` のab184da。権限付きfetchで同名リモートもab184da、mainは旧版と確認し、`codex/local-language-comparison` を作成。前回パッチは再適用しない。
+
+実際の主要コマンド（npmと起動スクリプトは対象アプリフォルダ）:
+
+```powershell
+git status --short --branch
+git fetch origin
+git branch -avv
+git switch -c codex/local-language-comparison origin/codex/intent-review-playable
+Get-CimInstance Win32_Processor
+Get-CimInstance Win32_ComputerSystem
+Get-CimInstance Win32_LogicalDisk
+nvidia-smi
+Get-FileHash .local-llm/ollama-windows-amd64.zip -Algorithm SHA256
+./start-local-model.ps1
+./start-local-model.ps1 -Pull
+Invoke-RestMethod http://127.0.0.1:11435/api/tags
+node scripts/compare-language.mjs
+npm.cmd test
+npm.cmd run lint
+npm.cmd run build
+npm.cmd run review:intents
+npm.cmd run preview -- --host 127.0.0.1 --port 5175 --strictPort
+git -c core.safecrlf=false diff --check
+```
+
+結果と修正:
+
+- 通常権限のCIM取得等が拒否されたため、依頼範囲のハードウェア確認・公式ダウンロード・git更新を権限付きで実行。ACL変更は行わない。
+- Ryzen7 5700X / RAM約32GB / RTX4070 SUPER VRAM約12GB、C空き約397.6GB。既存の代表的なモデル環境が見つからず、公式Ollama v0.33.3 standaloneとQwen3.5 Q4_K_Mを導入。モデル1,945,323,638bytes、実行環境ZIP1,469,175,900bytes。公式URL・digest・チェックサムはLOCAL_MODEL.md。
+- ZIPチェックサム照合の初回は公式ファイル名に付いた `./` の扱いで一致行を見つけられなかった。実ハッシュとの一致を確認してから展開・実行した。
+- ランタイム・モデルは `.local-llm/` に限定してGit除外。127.0.0.1:11435、クラウド無効、CUDA推論。常駐サービスや自動起動の登録は行っていない。
+- 既存5174が稼働していたため新起動はポート使用中で失敗。現worktreeのHMRで新画面とAPIへ更新されたことを実ブラウザで確認して既存サーバーを使った。比較CLIを最初にルートから起動した際のパス誤りはアプリフォルダへ移動して修正。
+- 初回のモデル環境初期化で30秒タイムアウト2回。待機上限を120秒にし、初回失敗記録を別JSONへ保持。明示アンロード後の再測定を行い、形式不正応答にも生応答と時間を残すよう修正して最終JSONを作成。未実行結果を代用していない。
+- 最終JSONは28例＋同じ最初の例のウォーム再送1件。最初4,867.4ms（読込3,932.1ms）、読込後28呼出し中央値614.4ms。28例の17件は形式有効、11件不正。有効10件で辞書と判定が異なる。Node再集計で件数と中央値を照合した。
+- 実ブラウザで一括28件・生応答・差分絞り込みを確認。表示を触って結果へのスクロール、正常/エラー別集計、エラーも含む絞り込みへ改善。Ollamaを実停止して接続失敗でも辞書とゲームが使えることを確認。再起動後に中止と再実行を確認。
+- 390px指定で入力と比較結果を確認、実内容幅/scrollWidthとも375px。Enter改行を確認。実IMEは再現できず未確認。ゲームの成功・失敗・再挑戦を確認。詳細はPLAYTEST_2026-09-06.md。
+- 最終テスト28件・lint・build成功（ビルドログのViteは8.0.14）。production preview5175で実モデル入力成功、コンソール警告/エラーなし。previewはCtrl+Cで停止し、開発5174とモデル11435は試せるよう残した。起動状態は記録時点。
+- 辞書JSON全体をNode assert.deepEqualでab184daと比較し完全一致。144候補と全レビュー理由・出典を保持。レビュー一覧を再生成。Markdown15ファイルの相対リンク欠落0件。diff --check成功。
+
+判断: モデルは言い換えを拾う一方、意味の混乱と不正形式があるため、ゲームの標準は辞書のまま。次は同一モデルの出力形式・プロンプトを小さく変え、未使用ケースでも評価する。通常の仕様判断を自律的に進める制作方針を引き続きAGENTSと関連文書へ反映した。
