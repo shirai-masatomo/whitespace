@@ -502,3 +502,5 @@ git -c core.safecrlf=false diff --check
 - 辞書JSON全体をNode assert.deepEqualでab184daと比較し完全一致。144候補と全レビュー理由・出典を保持。レビュー一覧を再生成。Markdown15ファイルの相対リンク欠落0件。diff --check成功。
 
 判断: モデルは言い換えを拾う一方、意味の混乱と不正形式があるため、ゲームの標準は辞書のまま。次は同一モデルの出力形式・プロンプトを小さく変え、未使用ケースでも評価する。通常の仕様判断を自律的に進める制作方針を引き続きAGENTSと関連文書へ反映した。
+
+保存結果（12:35頃）: `git commit -m "Fix polite negation and positive intent composition"` → `f8ca872`、`git commit -m "Add local language comparison lab and measured Qwen experiment"` → `1d78a26`。`git push -u origin codex/local-language-comparison` は既存認証で成功。同名リモートを作成し、追跡設定済み。mainへのマージは行わない。モデル本体・ランタイム・ログが無視対象であることも確認。この保存結果の追記は別の記録コミットにする。
