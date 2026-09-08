@@ -504,3 +504,9 @@ git -c core.safecrlf=false diff --check
 判断: モデルは言い換えを拾う一方、意味の混乱と不正形式があるため、ゲームの標準は辞書のまま。次は同一モデルの出力形式・プロンプトを小さく変え、未使用ケースでも評価する。通常の仕様判断を自律的に進める制作方針を引き続きAGENTSと関連文書へ反映した。
 
 保存結果（12:35頃）: `git commit -m "Fix polite negation and positive intent composition"` → `f8ca872`、`git commit -m "Add local language comparison lab and measured Qwen experiment"` → `1d78a26`。`git push -u origin codex/local-language-comparison` は既存認証で成功。同名リモートを作成し、追跡設定済み。mainへのマージは行わない。モデル本体・ランタイム・ログが無視対象であることも確認。この保存結果の追記は別の記録コミットにする。
+
+## 2026-09-08 16:58 +09:00 — サブエージェントの用途制限
+
+ユーザーの依頼に従い、AGENTS.mdにサブエージェントを敵対的レビューだけに限定するルールを追加。実装・調査・通常レビュー・テスト・文書・設定変更は主エージェントが直接行う。この設定作業でもサブエージェントは使用していない。通常作業を敵対的レビューと呼び替えることも禁止した。
+
+実際の確認: Get-Location、git status --short --branch、git fetch origin、git rev-list --left-right --count HEAD...origin/codex/local-language-comparison。開始時の差分なし、リモートとの差は0/0。文書のみの変更のためアプリのテスト・buildは再実行せず、git diff --checkで確認する。設定の保存範囲はこのworktreeのWhiteSpace。アプリ全体のconfig.tomlは変更していない。現在の会話は明示指示により即時適用。別の既存タスクはファイルの再読込を指示するか、新しい実行で指示を読み込む。参照: https://learn.chatgpt.com/docs/agent-configuration/agents-md
