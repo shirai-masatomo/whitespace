@@ -8,6 +8,8 @@
 
 ## はじめに
 
+中央の低ポリゴン胸像が、信頼・緊張・会話の結果に応じて向きや光を変えます。開発用パネルで表示だけを試せます。[人物表示の確認結果](docs/PLAYTEST_2026-09-08.md)。モデル起動は不要です。
+
 - [現在地](PROJECT_STATE.md) / [構成案内](docs/PROJECT_MAP.md)
 - [制作方針](AGENTS.md) / [仕様](SPEC.md) / [完了条件](ACCEPTANCE.md) / [次の作業](TODO.md)
 - [アプリの起動・構成](prototypes/001-nadameyo/README.md)

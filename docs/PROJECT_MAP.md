@@ -43,6 +43,19 @@ test/localModel.test.js            契約・エラー・APIの検証
 
 ## 記録の役割
 
+人物表示の経路:
+
+```text
+App.jsx（実ゲーム・round・手動動き軽減）
+  → Character.jsx（独立プレビュー・代替SVG・開発パネル）
+  → lib/characterState.js（状態→姿勢、発言イベント、補間）
+  → character/createCharacterRenderer.js（Three.js・ループ・解放）
+      → createBust.js（コード生成の形状・光）
+      → disposeScene.js（共有する資源の解放）
+```
+
+今回の確認・判断・未確認事項は [PLAYTEST_2026-09-08](PLAYTEST_2026-09-08.md)。人物表示はゲームを読み取るだけで、LLMや比較ラボへ依存しません。
+
 - [COMMAND_LOG](COMMAND_LOG.md): 日時・コマンド・結果・学びの累積。
 - [INTENT_DICTIONARY_REVIEW](INTENT_DICTIONARY_REVIEW.md): 辞書から生成する採否理由・出典・現在の単独判定。
 - [INTENT_REVIEW_OUTCOME](INTENT_REVIEW_OUTCOME.md): 別環境で行ったレビューの歴史的記録。

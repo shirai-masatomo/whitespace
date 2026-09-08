@@ -510,3 +510,48 @@ git -c core.safecrlf=false diff --check
 ユーザーの依頼に従い、AGENTS.mdにサブエージェントを敵対的レビューだけに限定するルールを追加。実装・調査・通常レビュー・テスト・文書・設定変更は主エージェントが直接行う。この設定作業でもサブエージェントは使用していない。通常作業を敵対的レビューと呼び替えることも禁止した。
 
 実際の確認: Get-Location、git status --short --branch、git fetch origin、git rev-list --left-right --count HEAD...origin/codex/local-language-comparison。開始時の差分なし、リモートとの差は0/0。文書のみの変更のためアプリのテスト・buildは再実行せず、git diff --checkで確認する。設定の保存範囲はこのworktreeのWhiteSpace。アプリ全体のconfig.tomlは変更していない。現在の会話は明示指示により即時適用。別の既存タスクはファイルの再読込を指示するか、新しい実行で指示を読み込む。参照: https://learn.chatgpt.com/docs/agent-configuration/agents-md
+
+## 2026-09-08 17:05〜18:20頃 +09:00 — 状態に反応する低ポリゴン胸像
+
+目的: 中央の胸像・状態への反応・表示確認パネルを実装し、実ブラウザで改善する。途中の「続けて」も同じ作業として引き継いだ。敵対的レビューを含めサブエージェントは使用していない。
+
+開始時のcwdは C:\Users\masat\.codex\worktrees\2f05\codex_test。ブランチcodex/local-language-comparison、HEAD a3a23a6、未コミット差分なし。権限付きfetch後もoriginの同名ブランチとの差0/0。ユーザー指定の442701d以降にあるサブエージェント制限を保持して、新ブランチcodex/reactive-low-poly-bustへ分岐。mainは変更しない。
+
+実際の主要コマンド（npmはprototypes/001-nadameyo内）:
+
+```powershell
+Get-Location
+git status --short --branch
+git log -4 --oneline
+git fetch origin
+git rev-list --left-right --count HEAD...origin/codex/local-language-comparison
+git branch -avv
+git switch -c codex/reactive-low-poly-bust
+$env:Path = 'C:\Program Files\nodejs;' + $env:Path
+npm.cmd install three --save-exact --cache .npm-cache --no-audit --no-fund
+npm.cmd test
+npm.cmd run lint
+npm.cmd run build
+npm.cmd run dev -- --host 127.0.0.1 --port 5174 --strictPort
+npm.cmd run preview -- --host 127.0.0.1 --port 5175 --strictPort
+git -c core.safecrlf=false diff --check
+```
+
+結果・学び:
+
+- Three.js 0.185.1を1依存だけ追加し、package-lockも更新。公式renderer/cleanup文書を参照。コード生成の造形で外部モデル素材・人物画像の取得は不要だった。
+- 状態→姿勢と発言イベント、造形、描画ループ/照明、資源解放を必要な範囲で分離。ゲームのルール・辞書・LLM契約は変更していない。
+- 初版32テスト、資源解放テスト追加後33テスト。最終33テスト・lint・build成功。3Dを遅延読込する536.56kBチャンクにはサイズ警告が残る（gzip135.24kB）。警告を閾値変更で隠していない。
+- 既存5174は停止しておりHTTP接続拒否。今回のworktreeからViteを起動。既存ブラウザタブが停止時のエラーページになって操作できず、同じローカルURLを新しい検証タブで開いた。継続時に一時タブが閉じたため、保持指定した検証タブで作業を継続。安全設定の変更やACL回避は行っていない。
+- 初回自動フォーカスと送信時のスクロールが顔を画面外へ押し出したため、初回自動フォーカスを廃止し、送信後に人物の先頭へスクロールするよう改善。入力フォーカスを維持し、人物・返答・入力の同時表示を実画面で再確認。
+- 肩/胸の重なり、灰白色の照明、顔の小さな稜線を実画面から調整。確認パネルをPCで人物横、狭い画面で人物下に置いた。手動動き軽減を再挑戦で保持するよう修正。
+- 信頼/緊張4組合せ・各反応プレビューを実操作し、得点と発言数が不変と確認。実ゲームでも未分類/保留・謝罪回復・最終発言成功・緊張失敗・再挑戦を確認。
+- ラボ3往復でcanvas1→0、開発ログactive1→0、破棄時released17を確認。GPUメモリの長時間測定と同一視しない。
+- WebGL接続喪失を開発用ボタンから実際に発生させ、canvas0・代替SVG・会話継続・3D再試行を確認。HMR中に旧インスタンスへ新メソッドを呼んだ1回のエラーは、再読込後に再検証して解消。READMEへ描画コード変更時の再読込手順を追記。
+- 390×844指定で人物/入力/返答とパネル、代替表示を実操作。clientWidthとscrollWidthとも375px。幅指定は確認後解除。
+- production preview5175でcanvas1・開発パネル0・実入力成功、コンソール警告/エラーなし。通常と成功のスクリーンショットを会話へ共有。画像ファイルはリポジトリには保存しない。
+- 実OSの動き軽減切替・実IME・低性能実機/長時間測定は未確認。現在の版を触ってから性格システム/新モードを検討する。
+
+仕様・状態・起動説明・完了条件・TODO・PROJECT_MAPとPLAYTEST_2026-09-08.mdを更新。文書だけの変更でアプリテストを繰り返さず、差分とリンクを確認してコミットする。
+
+最終確認: 改行を正規化して開始版a3a23a6と比較し、辞書・gameEngine・intentMatcher・modelContractの内容保持を確認。Markdown16ファイルの相対リンク63件に欠落なし。diff --check成功。実装はc803326へコミット。確認用preview5175は終了し、開発版5174を起動したままブラウザを戻した。
