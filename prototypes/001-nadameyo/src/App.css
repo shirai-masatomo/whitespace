@@ -1,13 +1,13 @@
-.game-shell { width: min(100% - 40px, 1000px); margin: 0 auto; padding: 48px 0 24px; }
-.game-header { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding-bottom: 22px; border-bottom: 1px solid var(--line); }
+.game-shell { width: min(100% - 40px, 820px); margin: 0 auto; padding: 16px 0 24px; }
+.game-header { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
 .eyebrow { margin: 0; color: var(--muted); font: 11px var(--mono); letter-spacing: .1em; }
-h1 { margin: 12px 0 0; color: var(--text-strong); font-size: 42px; font-weight: 600; }
+h1 { margin: 8px 0 0; color: var(--text-strong); font-size: 34px; font-weight: 600; }
 h1 span { display: inline-block; margin-left: 20px; color: var(--muted); font-size: 14px; font-weight: 400; }
 .turn-counter { margin: 0; flex-shrink: 0; font-size: 12px; }
 .turn-counter strong { display: inline-block; padding-left: 10px; color: var(--text-strong); font: 36px var(--mono); }
 .turn-counter span { font: 13px var(--mono); }
-.intro { margin: 20px 0; font-size: 14px; line-height: 1.8; }
-.status-panel { display: grid; grid-template-columns: 1fr 1fr; gap: 36px; padding: 20px 24px; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; }
+.intro { margin: 12px 0; font-size: 13px; line-height: 1.8; }
+.status-panel { display: grid; grid-template-columns: 1fr 1fr; gap: 36px; padding: 12px 20px; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; }
 .meter { display: grid; gap: 9px; }
 .meter-heading { display: flex; justify-content: space-between; color: var(--text-strong); font-size: 13px; }
 .meter-heading strong { font-family: var(--mono); }
@@ -16,15 +16,15 @@ h1 span { display: inline-block; margin-left: 20px; color: var(--muted); font-si
 .meter-cell { background: var(--meter-empty); border-radius: 2px; }
 .meter-cell.trust { background: var(--trust); }
 .meter-cell.danger { background: var(--danger); }
-.play-layout { display: grid; grid-template-columns: minmax(0, 1fr) 250px; gap: 38px; margin-top: 30px; }
-.conversation { min-height: 205px; display: flex; flex-direction: column; padding: 8px 0 20px; }
+.play-layout { display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; margin-top: 12px; }
+.conversation { min-height: 110px; display: flex; flex-direction: column; padding: 4px 0 12px; }
 .speaker { display: flex; align-items: center; gap: 8px; margin: 0; font-size: 12px; }
 .signal { width: 6px; height: 6px; border-radius: 50%; background: var(--trust); }
 .signal.tense { background: var(--danger); }
 .mood { margin-left: auto; font-size: 11px; }
-.reply { margin: 24px 0; color: var(--text-strong); font-size: 24px; line-height: 1.85; overflow-wrap: anywhere; }
+.reply { margin: 12px 0; color: var(--text-strong); font-size: 22px; line-height: 1.7; overflow-wrap: anywhere; }
 .change { margin: auto 0 0; color: var(--trust); font-size: 12px; }
-.line-form { padding-top: 18px; border-top: 1px solid var(--line); }
+.line-form { padding-top: 12px; border-top: 1px solid var(--line); }
 .form-heading { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 12px; }
 .input-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px; }
 input, button { min-height: 48px; border: 1px solid var(--line); border-radius: 5px; font: inherit; }
@@ -35,7 +35,7 @@ button:disabled { opacity: .4; cursor: not-allowed; }
 :where(input, button, summary):focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
 #line:focus { border-color: var(--accent); }
 #input-help { font-size: 11px; line-height: 1.8; }
-.guide { padding: 8px 0 8px 24px; border-left: 1px solid var(--line); }
+.guide { padding: 8px 0; border-top: 1px solid var(--line); }
 h2 { color: var(--text-strong); font-size: 16px; font-weight: 500; line-height: 1.8; }
 .guide p { font-size: 12px; line-height: 1.9; }
 .guide .eyebrow { font-size: 10px; }
@@ -70,7 +70,7 @@ footer { display: flex; justify-content: space-between; margin-top: 36px; border
   .turn-counter strong { font-size: 28px; }
   .status-panel { padding: 16px; gap: 20px; }
   .play-layout { grid-template-columns: minmax(0, 1fr); gap: 24px; margin-top: 20px; }
-  .conversation { min-height: 190px; }
+  .conversation { min-height: 130px; }
   .reply { font-size: 21px; }
   .guide { border-left: 0; border-top: 1px solid var(--line); padding: 20px 0 0; }
   .guide h2 br { display: none; }
