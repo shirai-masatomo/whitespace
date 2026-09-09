@@ -1,0 +1,44 @@
+.coffee-page { max-width: 1120px; margin: auto; padding: 28px 28px 70px; }
+.coffee-header { border-bottom: 1px solid var(--line); padding-bottom: 20px; }
+.coffee-eyebrow { letter-spacing: .2em; color: #ccb89c; font-size: 12px; }
+.coffee-page h1 { color: var(--text-strong); font-size: 32px; margin: 8px 0; }
+.coffee-page h2 { color: var(--text-strong); font-size: 16px; margin: 16px 0 10px; }
+.coffee-page p { line-height: 1.8; }
+.coffee-condition { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+.coffee-condition select { color: var(--text-strong); background: var(--surface); padding: 10px; border: 1px solid var(--line); border-radius: 4px; font: inherit; }
+.coffee-hint { font-size: 12px; color: var(--muted); }
+.coffee-layout { display: grid; grid-template-columns: minmax(240px, .8fr) minmax(0, 1.4fr); gap: 32px; padding-top: 20px; }
+.coffee-observation { background: #182023; border: 1px solid var(--line); border-radius: 8px; padding: 20px; align-self: start; }
+.coffee-facts { list-style: none; padding: 0; font-size: 13px; }
+.coffee-facts li { padding: 9px 0; border-bottom: 1px solid var(--line); }
+.coffee-table { height: 82px; position: relative; border-bottom: 2px solid #87745c; margin-top: 25px; }
+.coffee-cup { position: absolute; left: 18%; top: 4px; font-size: 42px; color: #d5cec1; }
+.coffee-puddle { position: absolute; top: 42px; left: 28%; width: 80px; height: 20px; border-radius: 65% 30% 70% 30%; background: #735039; }
+.coffee-table.dry .coffee-puddle { display: none; }
+.coffee-paper { position: absolute; right: 5px; bottom: 10px; border: 1px solid #bec7ba; padding: 7px; font-size: 11px; transform: rotate(-5deg); }
+.coffee-dialogue { min-width: 0; }
+.coffee-dialogue .character-stage { height: 260px; }
+.coffee-dialogue .stage-caption { font-size: 10px; }
+.coffee-dialogue .character-description { flex-wrap: wrap; }
+.coffee-reply { padding: 14px 0; min-height: 112px; border-bottom: 1px solid var(--line); }
+.coffee-reply span { font-size: 12px; color: var(--accent); }
+.coffee-reply p { color: var(--text-strong); font-size: 19px; margin: 8px 0; }
+.coffee-choices { display: flex; gap: 8px; flex-wrap: wrap; }
+.coffee-choices button { font-size: 14px; padding: 11px 14px; }
+.coffee-language, .coffee-history, .coffee-debug { margin-top: 24px; padding: 18px 0; border-top: 1px solid var(--line); }
+.coffee-page summary { cursor: pointer; color: #c9d2ce; line-height: 1.8; }
+.coffee-language textarea { display: block; width: 100%; margin: 8px 0 12px; background: var(--surface); color: var(--text-strong); border: 1px solid var(--line); padding: 12px; font: inherit; resize: vertical; }
+.coffee-interpretation { margin-top: 16px; padding: 16px; border: 1px solid var(--accent); }
+.coffee-interpretation button { margin: 4px 8px 4px 0; }
+.coffee-history ol { padding-left: 22px; }
+.coffee-history li { padding: 14px 0; border-bottom: 1px solid var(--line); }
+.coffee-history strong { color: var(--text-strong); }
+.coffee-debug { background: #25201b; padding: 16px; }
+.coffee-debug pre { white-space: pre-wrap; overflow-wrap: anywhere; font-size: 12px; }
+@media (max-width: 700px) { .coffee-page { padding: 18px 16px 45px; } .coffee-layout { grid-template-columns: 1fr; gap: 12px; } .coffee-observation { padding: 14px; } .coffee-observation > p { font-size: 13px; } .coffee-table { display: none; } .coffee-facts { display: grid; grid-template-columns: 1fr 1fr; gap: 0 10px; } .coffee-choices button { flex: 1 1 40%; } .coffee-page h1 { font-size: 28px; } }
+.coffee-header > p { margin: 6px 0 10px; }
+.coffee-header { padding-bottom: 12px; }
+.coffee-dialogue { scroll-margin-top: 12px; }
+.coffee-dialogue .character-stage { height: 220px; }
+.coffee-reply { min-height: 88px; padding: 10px 0; }
+.coffee-intro p { font-size: 13px; }

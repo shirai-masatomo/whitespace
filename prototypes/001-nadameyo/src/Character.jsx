@@ -5,7 +5,7 @@ import './Character.css'
 const motionQuery = () => window.matchMedia('(prefers-reduced-motion: reduce)')
 const subscribeMotion = (notify) => { const query = motionQuery(); query.addEventListener('change', notify); return () => query.removeEventListener('change', notify) }
 
-export default function Character({ game, stageRef, manualReduced, onReducedChange }) {
+export default function Character({ game, displayState, stageRef, manualReduced, onReducedChange }) {
   const host = useRef(null)
   const renderer = useRef(null)
   const latest = useRef(null)
@@ -16,18 +16,18 @@ export default function Character({ game, stageRef, manualReduced, onReducedChan
   const [attempt, setAttempt] = useState(0)
   const systemReduced = useSyncExternalStore(subscribeMotion, () => motionQuery().matches, () => true)
   const reduced = systemReduced || manualReduced
-  const visual = characterState(preview ? { ...preview, history: [] } : game)
-  const event = preview ? { id: `preview:${preview.sequence}`, kind: preview.kind }
+  const visual = displayState ?? characterState(preview ? { ...preview, history: [] } : game)
+  const event = displayState ? displayState.event : preview ? { id: `preview:${preview.sequence}`, kind: preview.kind }
     : game.history.length > resumeAt ? visual.event : null
   const eventId = event?.id
   const eventKind = event?.kind
 
   useEffect(() => {
-    const state = { ...characterState(preview ? { ...preview, history: [] } : game),
+    const state = { ...(displayState ?? characterState(preview ? { ...preview, history: [] } : game)),
       event: eventId ? { id: eventId, kind: eventKind } : null, reduced }
     latest.current = state
     renderer.current?.update(state)
-  }, [game, preview, eventId, eventKind, reduced])
+  }, [game, displayState, preview, eventId, eventKind, reduced])
 
   useEffect(() => {
     if (fallback) return
@@ -64,13 +64,13 @@ export default function Character({ game, stageRef, manualReduced, onReducedChan
         </svg>
         <span>{failure || '静止画で表示しています。'}</span>
       </div>}
-      <div className="stage-caption"><span>SUBJECT / 001</span><span>{preview ? '表示プレビュー · 得点は変わりません' : `信頼 ${game.trust}/4 · 緊張 ${game.tension}/5 · 残り ${game.turnsLeft}回`}</span></div>
+      <div className="stage-caption"><span>SUBJECT / 001</span><span>{displayState ? displayState.caption : preview ? '表示プレビュー · 得点は変わりません' : `信頼 ${game.trust}/4 · 緊張 ${game.tension}/5 · 残り ${game.turnsLeft}回`}</span></div>
     </div>
     <div className="character-description"><p role="status">{visual.description}{eventKind && <span> {REACTION_LABELS[eventKind]}</span>}</p>
       <label className="motion-control"><input type="checkbox" checked={reduced} disabled={systemReduced} onChange={(e) => onReducedChange(e.target.checked)} />動きを減らす{systemReduced && '（OS設定）'}</label>
       {failure && <button className="secondary" onClick={() => { setFailure(''); setAttempt((value) => value + 1) }}>3Dを再試行</button>}
     </div>
-    {import.meta.env.DEV && <details className="debug character-debug"><summary>開発用：人物の表示確認</summary>
+    {import.meta.env.DEV && !displayState && <details className="debug character-debug"><summary>開発用：人物の表示確認</summary>
       <p>{preview ? '表示のみ操作中' : '実ゲームに追従中'}。このパネルは実際の得点・履歴を変更しません。</p>
       <div className="visual-sliders"><label>表示の信頼 <output>{preview?.trust ?? game.trust}</output><input aria-label="表示の信頼" type="range" min="0" max="4" step="1" value={preview?.trust ?? game.trust} onChange={(e) => changePreview({ trust: Number(e.target.value) })} /></label>
         <label>表示の緊張 <output>{preview?.tension ?? game.tension}</output><input aria-label="表示の緊張" type="range" min="0" max="5" step="1" value={preview?.tension ?? game.tension} onChange={(e) => changePreview({ tension: Number(e.target.value) })} /></label></div>

@@ -1,4 +1,6 @@
 import { performance } from 'node:perf_hooks'
+import { evaluateCoffeeModel } from './coffeeModel.js'
+import { validateCoffeeRequest } from '../src/lib/coffeeLanguage.js'
 import { MODEL, OUTPUT_SCHEMA, PROMPT_VERSION, SYSTEM_PROMPT, validateModelOutput } from '../src/lib/modelContract.js'
 
 export const OLLAMA_URL = 'http://127.0.0.1:11435'
@@ -43,11 +45,12 @@ export async function evaluateLocalModel(input, { fetchImpl = fetch, signal, tim
   }
 }
 
-export function createLanguageMiddleware({ evaluate = evaluateLocalModel, fetchImpl = fetch } = {}) {
+export function createLanguageMiddleware({ evaluate = evaluateLocalModel, evaluateScene = evaluateCoffeeModel, fetchImpl = fetch } = {}) {
   let busy = false
   return async (req, res, next) => {
     const path = req.url?.split('?')[0]
-    if (!['/api/language/status', '/api/language/evaluate'].includes(path)) return next()
+    if (!['/api/language/status', '/api/language/evaluate', '/api/coffee/evaluate'].includes(path)) return next()
+    const coffee = path === '/api/coffee/evaluate'
     const send = (status, value) => { res.statusCode = status; res.setHeader('Content-Type', 'application/json; charset=utf-8'); res.setHeader('Cache-Control', 'no-store'); res.end(JSON.stringify(value)) }
     // This bridge only serves the same loopback origin; it is not an open proxy.
     if (!/^(127\.0\.0\.1|localhost|\[::1\])(?::\d+)?$/.test(req.headers.host ?? '')
@@ -72,16 +75,17 @@ export function createLanguageMiddleware({ evaluate = evaluateLocalModel, fetchI
       for await (const chunk of req) {
         chunks.push(chunk)
         size += chunk.length
-        if (size > 4096) return send(413, { error: '入力が大きすぎます。' })
+        if (size > (coffee ? 16384 : 4096)) return send(413, { error: '入力が大きすぎます。' })
       }
       const parsed = JSON.parse(Buffer.concat(chunks).toString('utf8'))
+      if (coffee) validateCoffeeRequest(parsed)
       if (typeof parsed.input !== 'string' || !parsed.input.trim() || parsed.input.length > 280) return send(400, { error: '1〜280文字で入力してください。' })
       if (busy) return send(429, { error: 'モデルが他の入力を処理中です。少し待って再試行してください。' })
       const controller = new AbortController()
       const onClose = () => { if (!res.writableEnded) controller.abort() }
       res.on('close', onClose)
       busy = true
-      try { return send(200, await evaluate(parsed.input, { signal: controller.signal })) }
+      try { return send(200, await (coffee ? evaluateScene(parsed, { signal: controller.signal }) : evaluate(parsed.input, { signal: controller.signal }))) }
       catch (error) { if (!res.destroyed) return send(502, { error: error.message, code: error.code, diagnostic: error.diagnostic }) }
       finally { busy = false; res.off('close', onClose) }
     } catch { return send(400, { error: '入力JSONを読み取れませんでした。' }) }
