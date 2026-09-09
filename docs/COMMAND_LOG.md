@@ -555,3 +555,11 @@ git -c core.safecrlf=false diff --check
 仕様・状態・起動説明・完了条件・TODO・PROJECT_MAPとPLAYTEST_2026-09-08.mdを更新。文書だけの変更でアプリテストを繰り返さず、差分とリンクを確認してコミットする。
 
 最終確認: 改行を正規化して開始版a3a23a6と比較し、辞書・gameEngine・intentMatcher・modelContractの内容保持を確認。Markdown16ファイルの相対リンク63件に欠落なし。diff --check成功。実装はc803326へコミット。確認用preview5175は終了し、開発版5174を起動したままブラウザを戻した。
+
+## 2026-09-10 設計思想書の導入
+
+目的: 添付WhiteSpace_Design_Philosophy.md（版0.2）を設計の参照文書として保存する。文書内の将来構想は今回の実装指示として扱わない。
+
+主要操作: git status --short --branch、git fetch origin、git rev-list --left-right --count HEAD...origin/codex/reactive-low-poly-bust、Test-Path、Copy-Item、Get-FileHash -Algorithm SHA256、git diff --check。
+
+結果: 開始時の未コミット変更なし、最新リモートとの差0/0。保存先は未作成で、独自追記との競合なし。docs/DESIGN_PHILOSOPHY.mdへ原文をそのままコピーし、添付とのSHA256一致を確認。AGENTSに参照ルール、PROJECT_MAPにリンクを追記。既存文書の記述は保持。文書のみのためアプリのテスト・lint・build・ブラウザ確認は実行せず、原文一致・参照先・差分を確認する。言語ジェンガなどの新機能は実装していない。

@@ -2,6 +2,8 @@
 
 ## 最初に読む順番
 
+新しい試作・仕様変更・タスク立案時は [設計思想書](DESIGN_PHILOSOPHY.md) を参照します。将来構想と今回の実装範囲は区別します。
+
 [PROJECT_STATE](../PROJECT_STATE.md) → [SPEC](../SPEC.md) → [ACCEPTANCE](../ACCEPTANCE.md) → [TODO](../TODO.md)。制作方針と自律的な進め方は [AGENTS](../AGENTS.md)。対象アプリの [APP_STATE](../prototypes/001-nadameyo/APP_STATE.md) と [README](../prototypes/001-nadameyo/README.md) も確認します。
 
 ## 現行アプリの流れ
