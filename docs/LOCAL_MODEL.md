@@ -1,6 +1,6 @@
 # ローカルモデルの起動と実測
 
-2026-09-06、`codex/local-language-comparison` で確認。ゲームは辞書方式を維持し、モデルは比較ラボだけで使う。
+2026-09-06、`codex/local-language-comparison` で確認。ゲームは辞書方式を維持。2026-09-10から比較ラボに加え、[コーヒー場面実験](COFFEE_CONTEXT.md) の確認付き自由入力でも同じモデルを使う。
 
 ## PCと選定
 

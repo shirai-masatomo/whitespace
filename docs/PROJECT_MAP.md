@@ -6,6 +6,12 @@
 
 [PROJECT_STATE](../PROJECT_STATE.md) → [SPEC](../SPEC.md) → [ACCEPTANCE](../ACCEPTANCE.md) → [TODO](../TODO.md)。制作方針と自律的な進め方は [AGENTS](../AGENTS.md)。対象アプリの [APP_STATE](../prototypes/001-nadameyo/APP_STATE.md) と [README](../prototypes/001-nadameyo/README.md) も確認します。
 
+## コーヒー場面実験
+
+[COFFEE_CONTEXT](COFFEE_CONTEXT.md): A/B/Cの仕様・判断・実モデル測定・ブラウザ検証。
+
+Workspace → CoffeeScene (#coffee) → coffeeScene（事実/知識/同意/更新） → coffeeCharacter → Character。自由入力は coffeeLanguage → /api/coffee/evaluate → server/coffeeModel → 既存Ollama。解釈をプレイヤーが確認してから同じ状態更新へ渡します。
+
 ## 現行アプリの流れ
 
 ```text

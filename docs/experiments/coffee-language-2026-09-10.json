@@ -1,0 +1,305 @@
+{
+  "date": "2026-09-09T23:03:22.761Z",
+  "note": "Generated cases, not real player input. Expected acts are provisional; model is not ground truth. First request after starting existing Ollama; no new model downloaded.",
+  "rows": [
+    {
+      "id": "A-apology",
+      "origin": "generated-evaluation-case",
+      "condition": "A",
+      "input": "ごめん",
+      "expected": "apologize",
+      "payload": {
+        "input": "ごめん",
+        "context": {
+          "role": "後から来た友人",
+          "table": "机はコーヒーで濡れている",
+          "tissue": "あなたの持ち物：ティッシュ1組",
+          "cause": "こぼした原因はまだ知らない",
+          "injury": "けがの有無はまだ聞いていない",
+          "preference": "どう関わってほしいかはまだ聞いていない",
+          "consent": "援助の同意はまだない"
+        },
+        "history": []
+      },
+      "error": "解釈を中止、または45秒でタイムアウトしました。",
+      "diagnostic": {
+        "elapsedMs": 45012.132
+      }
+    },
+    {
+      "id": "C-apology",
+      "origin": "generated-evaluation-case",
+      "condition": "C",
+      "input": "ごめん",
+      "expected": "apologize",
+      "payload": {
+        "input": "ごめん",
+        "context": {
+          "role": "カップにぶつかった友人",
+          "table": "机はコーヒーで濡れている",
+          "tissue": "あなたの持ち物：ティッシュ1組",
+          "cause": "あなたがぶつかったことを、二人とも知っている",
+          "injury": "けがの有無はまだ聞いていない",
+          "preference": "どう関わってほしいかはまだ聞いていない",
+          "consent": "援助の同意はまだない"
+        },
+        "history": []
+      },
+      "error": "保留・未対応なのに行為が確定しています。",
+      "diagnostic": {
+        "elapsedMs": 23123.891400000008,
+        "loadMs": 3.088,
+        "inferenceMs": 9012.662,
+        "raw": "{\n  \"status\": \"uncertain\",\n  \"act\": \"clarify\",\n  \"target\": \"incident\",\n  \"evidence\": \"ごめん\",\n  \"reason\": \"相手の意図や状況が不明。けがの有無や関与の程度を再確認する必要がある。\"\n}"
+      }
+    },
+    {
+      "id": "A-tissue",
+      "origin": "generated-evaluation-case",
+      "condition": "A",
+      "input": "ティッシュ、使いますか？",
+      "expected": "offer_tissue",
+      "payload": {
+        "input": "ティッシュ、使いますか？",
+        "context": {
+          "role": "後から来た友人",
+          "table": "机はコーヒーで濡れている",
+          "tissue": "あなたの持ち物：ティッシュ1組",
+          "cause": "こぼした原因はまだ知らない",
+          "injury": "けがの有無はまだ聞いていない",
+          "preference": "どう関わってほしいかはまだ聞いていない",
+          "consent": "援助の同意はまだない"
+        },
+        "history": []
+      },
+      "error": "保留・未対応なのに行為が確定しています。",
+      "diagnostic": {
+        "elapsedMs": 510.5405000000028,
+        "loadMs": 2.0453,
+        "inferenceMs": 501.816,
+        "raw": "{\n  \"status\": \"uncertain\",\n  \"act\": \"clarify\",\n  \"target\": \"tissue\",\n  \"evidence\": \"ティッシュ、使いますか？\",\n  \"reason\": \"ユーザーはティッシュを渡すかどうかを明確に確認したいが、受け取る意図や相手の状況（けがの有無）が不明。\"\n}"
+      }
+    },
+    {
+      "id": "B-tissue",
+      "origin": "generated-evaluation-case",
+      "condition": "B",
+      "input": "ティッシュだけ、そっと渡しましょうか？",
+      "expected": "offer_tissue",
+      "payload": {
+        "input": "ティッシュだけ、そっと渡しましょうか？",
+        "context": {
+          "role": "近くの席の客",
+          "table": "机はコーヒーで濡れている",
+          "tissue": "あなたの持ち物：ティッシュ1組",
+          "cause": "こぼした原因はまだ知らない",
+          "injury": "けがの有無はまだ聞いていない",
+          "preference": "どう関わってほしいかはまだ聞いていない",
+          "consent": "援助の同意はまだない"
+        },
+        "history": []
+      },
+      "error": "保留・未対応なのに行為が確定しています。",
+      "diagnostic": {
+        "elapsedMs": 511.09820000000764,
+        "loadMs": 2.0636,
+        "inferenceMs": 502.036,
+        "raw": "{\n  \"status\": \"uncertain\",\n  \"act\": \"clarify\",\n  \"target\": \"tissue\",\n  \"evidence\": \"ティッシュだけ、そっと渡しましょうか？\",\n  \"reason\": \"相手はティッシュを渡すことを提案しているが、受け取る同意や具体的な行動の意向が不明。\"\n}"
+      }
+    },
+    {
+      "id": "give",
+      "origin": "generated-evaluation-case",
+      "condition": "A",
+      "input": "ティッシュを渡す",
+      "expected": "give_tissue",
+      "payload": {
+        "input": "ティッシュを渡す",
+        "context": {
+          "role": "後から来た友人",
+          "table": "机はコーヒーで濡れている",
+          "tissue": "あなたの持ち物：ティッシュ1組",
+          "cause": "こぼした原因はまだ知らない",
+          "injury": "けがの有無はまだ聞いていない",
+          "preference": "どう関わってほしいかはまだ聞いていない",
+          "consent": "援助の同意はまだない"
+        },
+        "history": []
+      },
+      "error": "保留・未対応なのに行為が確定しています。",
+      "diagnostic": {
+        "elapsedMs": 515.8521999999939,
+        "loadMs": 1.5472,
+        "inferenceMs": 508.295,
+        "raw": "{\n  \"status\": \"uncertain\",\n  \"act\": \"clarify\",\n  \"target\": \"tissue\",\n  \"evidence\": \"ティッシュを渡す\",\n  \"reason\": \"ユーザーは「ティッシュを渡す」という指示を出したが、相手（友人）の意向や状況が不明。受け取るべき行為を明確にする必要がある。\"\n}"
+      }
+    },
+    {
+      "id": "negative",
+      "origin": "generated-evaluation-case",
+      "condition": "A",
+      "input": "ティッシュは渡さない",
+      "expected": "clarify",
+      "payload": {
+        "input": "ティッシュは渡さない",
+        "context": {
+          "role": "後から来た友人",
+          "table": "机はコーヒーで濡れている",
+          "tissue": "あなたの持ち物：ティッシュ1組",
+          "cause": "こぼした原因はまだ知らない",
+          "injury": "けがの有無はまだ聞いていない",
+          "preference": "どう関わってほしいかはまだ聞いていない",
+          "consent": "援助の同意はまだない"
+        },
+        "history": []
+      },
+      "error": "保留・未対応なのに行為が確定しています。",
+      "diagnostic": {
+        "elapsedMs": 461.0896999999968,
+        "loadMs": 1.5489,
+        "inferenceMs": 453.082,
+        "raw": "{\n  \"status\": \"uncertain\",\n  \"act\": \"clarify\",\n  \"target\": \"tissue\",\n  \"evidence\": \"ティッシュは渡さない\",\n  \"reason\": \"プレイヤーがティッシュを渡そうとする意向を示していないため、受け取るべき行動を特定できない。\"\n}"
+      }
+    },
+    {
+      "id": "ambiguous",
+      "origin": "generated-evaluation-case",
+      "condition": "A",
+      "input": "それでお願い",
+      "expected": "clarify",
+      "payload": {
+        "input": "それでお願い",
+        "context": {
+          "role": "後から来た友人",
+          "table": "机はコーヒーで濡れている",
+          "tissue": "あなたの持ち物：ティッシュ1組",
+          "cause": "こぼした原因はまだ知らない",
+          "injury": "けがの有無はまだ聞いていない",
+          "preference": "どう関わってほしいかはまだ聞いていない",
+          "consent": "援助の同意はまだない"
+        },
+        "history": []
+      },
+      "result": {
+        "interpretation": {
+          "status": "uncertain",
+          "act": "clarify",
+          "target": "unknown",
+          "evidence": "それでお願い",
+          "reason": "相手は「それで」を言っているが、具体的な要望や内容が不明。また、相手の同意や状況も未確認のため詳細を聞き取る必要がある。",
+          "source": "local-model"
+        },
+        "model": "qwen3.5:2b-q4_K_M",
+        "promptVersion": "coffee-v1",
+        "elapsedMs": 477.3188999999984,
+        "loadMs": 1.5437,
+        "inferenceMs": 470.047,
+        "raw": "{\n  \"status\": \"uncertain\",\n  \"act\": \"clarify\",\n  \"target\": \"unknown\",\n  \"evidence\": \"それでお願い\",\n  \"reason\": \"相手は「それで」を言っているが、具体的な要望や内容が不明。また、相手の同意や状況も未確認のため詳細を聞き取る必要がある。\"\n}"
+      }
+    },
+    {
+      "id": "unsupported",
+      "origin": "generated-evaluation-case",
+      "condition": "A",
+      "input": "店員を呼んで",
+      "expected": "clarify",
+      "payload": {
+        "input": "店員を呼んで",
+        "context": {
+          "role": "後から来た友人",
+          "table": "机はコーヒーで濡れている",
+          "tissue": "あなたの持ち物：ティッシュ1組",
+          "cause": "こぼした原因はまだ知らない",
+          "injury": "けがの有無はまだ聞いていない",
+          "preference": "どう関わってほしいかはまだ聞いていない",
+          "consent": "援助の同意はまだない"
+        },
+        "history": []
+      },
+      "result": {
+        "interpretation": {
+          "status": "unsupported",
+          "act": "clarify",
+          "target": "unknown",
+          "evidence": "店員を呼んで",
+          "reason": "入力内容で具体的な行動が不明。店員を呼ぶ前に相手の意向や状況を確認する必要があるため。",
+          "source": "local-model"
+        },
+        "model": "qwen3.5:2b-q4_K_M",
+        "promptVersion": "coffee-v1",
+        "elapsedMs": 452.978099999993,
+        "loadMs": 1.5422,
+        "inferenceMs": 444.71,
+        "raw": "{\n  \"status\": \"unsupported\",\n  \"act\": \"clarify\",\n  \"target\": \"unknown\",\n  \"evidence\": \"店員を呼んで\",\n  \"reason\": \"入力内容で具体的な行動が不明。店員を呼ぶ前に相手の意向や状況を確認する必要があるため。\"\n}"
+      }
+    },
+    {
+      "id": "repeat",
+      "origin": "generated-evaluation-case",
+      "condition": "A",
+      "input": "さっき何があったって？",
+      "expected": "ask_event",
+      "payload": {
+        "input": "さっき何があったって？",
+        "context": {
+          "role": "後から来た友人",
+          "table": "机はコーヒーで濡れている",
+          "tissue": "あなたの持ち物：ティッシュ1組",
+          "cause": "相手が自分でこぼしたと聞いた",
+          "injury": "けがの有無はまだ聞いていない",
+          "preference": "手短にティッシュを渡してほしいと聞いた",
+          "consent": "援助の同意はまだない"
+        },
+        "history": [
+          {
+            "input": "どうしたの？",
+            "reply": "自分でコーヒーをこぼしちゃって。先に机を拭きたいんだ。"
+          }
+        ]
+      },
+      "result": {
+        "interpretation": {
+          "status": "uncertain",
+          "act": "clarify",
+          "target": "unknown",
+          "evidence": "さっき何があったって？",
+          "reason": "相手の話しかけに対して、具体的な状況や原因を聞き取る必要がある。",
+          "source": "local-model"
+        },
+        "model": "qwen3.5:2b-q4_K_M",
+        "promptVersion": "coffee-v1",
+        "elapsedMs": 488.44710000000487,
+        "loadMs": 1.5363,
+        "inferenceMs": 479.973,
+        "raw": "{\n  \"status\": \"uncertain\",\n  \"act\": \"clarify\",\n  \"target\": \"unknown\",\n  \"evidence\": \"さっき何があったって？\",\n  \"reason\": \"相手の話しかけに対して、具体的な状況や原因を聞き取る必要がある。\"\n}"
+      }
+    },
+    {
+      "id": "mixed",
+      "origin": "generated-evaluation-case",
+      "condition": "C",
+      "input": "ごめん、ティッシュいる？",
+      "expected": "clarify",
+      "payload": {
+        "input": "ごめん、ティッシュいる？",
+        "context": {
+          "role": "カップにぶつかった友人",
+          "table": "机はコーヒーで濡れている",
+          "tissue": "あなたの持ち物：ティッシュ1組",
+          "cause": "あなたがぶつかったことを、二人とも知っている",
+          "injury": "けがの有無はまだ聞いていない",
+          "preference": "どう関わってほしいかはまだ聞いていない",
+          "consent": "援助の同意はまだない"
+        },
+        "history": []
+      },
+      "error": "保留・未対応なのに行為が確定しています。",
+      "diagnostic": {
+        "elapsedMs": 474.11539999999513,
+        "loadMs": 1.5481,
+        "inferenceMs": 465.783,
+        "raw": "{\n  \"status\": \"uncertain\",\n  \"act\": \"clarify\",\n  \"target\": \"tissue\",\n  \"evidence\": \"ごめん、ティッシュいる？\",\n  \"reason\": \"ユーザーはティッシュの存在を提案しているが、受け答えや渡す意図は不明。\"\n}"
+      }
+    }
+  ]
+}

@@ -32,3 +32,5 @@ npm.cmd run dev -- --host 127.0.0.1 --port 5174 --strictPort
 144候補のうち88採用・43保留・13除外。全件の判断理由と出典は [辞書レビュー](docs/INTENT_DICTIONARY_REVIEW.md) に保持しています。ルートのindex.html/app.js/style.cssはVite導入前の旧版で、現行アプリでは使いません。
 
 [GitHubリポジトリ](https://github.com/shirai-masatomo/whitespace)
+
+場面の文脈による違いを試す [コーヒー場面実験](docs/COFFEE_CONTEXT.md) を追加しました。起動後の `#coffee` から、A/B/Cで同じ発言を比較できます。

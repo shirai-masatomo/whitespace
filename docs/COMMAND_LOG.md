@@ -563,3 +563,40 @@ git -c core.safecrlf=false diff --check
 主要操作: git status --short --branch、git fetch origin、git rev-list --left-right --count HEAD...origin/codex/reactive-low-poly-bust、Test-Path、Copy-Item、Get-FileHash -Algorithm SHA256、git diff --check。
 
 結果: 開始時の未コミット変更なし、最新リモートとの差0/0。保存先は未作成で、独自追記との競合なし。docs/DESIGN_PHILOSOPHY.mdへ原文をそのままコピーし、添付とのSHA256一致を確認。AGENTSに参照ルール、PROJECT_MAPにリンクを追記。既存文書の記述は保持。文書のみのためアプリのテスト・lint・build・ブラウザ確認は実行せず、原文一致・参照先・差分を確認する。言語ジェンガなどの新機能は実装していない。
+
+## 2026-09-10 07:50〜08:20頃 コーヒー場面実験
+
+目的: 同じ発言が、原因・間柄・希望に応じて別の反応になることをA/B/Cで検証。設計思想書を参照し、14342c3・未コミットなし・fetch後差0/0から codex/coffee-context-experiment を作成。サブエージェントは使用しなかった。
+
+主要コマンド:
+
+```powershell
+git status --short --branch
+git fetch origin
+git rev-list --left-right --count HEAD...origin/codex/reactive-low-poly-bust
+git switch -c codex/coffee-context-experiment
+# 以下は prototypes/001-nadameyo で実行
+npm.cmd test
+npm.cmd run lint
+npm.cmd run build
+npm.cmd run dev -- --host 127.0.0.1 --port 5174 --strictPort
+./start-local-model.ps1
+node scripts/measure-coffee.mjs
+npm.cmd run preview -- --host 127.0.0.1 --port 5175 --strictPort
+# リポジトリルート
+git -c core.safecrlf=false diff --check
+```
+
+結果・判断:
+
+- 四つの外殻、事実/知識、同意/受け渡し/片付けを分けた。選択肢と検証済み解釈は同じstepCoffeeSceneへ渡す。既存ゲームの得点と手数制は流用しない。胸像は表示値の入力だけ追加し、造形と破棄処理を保持。
+- 最初にnpmをリポジトリルートで実行してpackage.json不在。アプリの作業ディレクトリを指定し直して成功。小さな編集でpythonがPATHに存在しなかったため、同じ編集を既存Nodeで実施。新しい環境や依存は導入していない。
+- 既存モデルだけ起動。v1の初回は45秒タイムアウト、次の9例は3有効/6不正。v2に解釈と実行可否の区別を明示し、10例は2謝罪/7保留/1不正。有効9応答の中央値0.344秒、最大8.148秒。初回読込の完了時間は未測定。rawと既知文脈付き結果を別JSONへ保存し、失敗を代替結果で埋めていない。
+- 実ブラウザでA/C謝罪、A/B援助、拒否後の行動、再質問、同意解除、受け渡し→観察による片付けを確認。選択肢だけでモデル停止中も動作。自由入力C「ごめん」は0.24秒、確認後だけ状態更新。混在入力は形式エラーで状態を保持。推論中の条件切替も確認。
+- 受け取った後にまたティッシュを求める返答を修正し、回帰テストと実操作で確認。開始時説明を折りたたみ現在の物と区別。操作後に胸像と返答・ボタンが見える位置へ戻す。390×844指定で内容幅/scrollWidth375px、横はみ出しなし。
+- 比較ラボで辞書による傾聴、既存ゲームの成功/失敗/再挑戦、場面への復帰を実操作。3Dログactive1→0/released17、ラボcanvas0。GPU長時間測定ではない。
+- production previewで開発用内部情報が非表示、選択肢による片付けまで成功、コンソール警告/エラーなし。46テスト・lint・build成功。3Dチャンク536.56kB警告は従来通り残る。
+- モデルは停止検証後に停止したまま。開発版5174を残し、検証用preview5175は終了する。実IME・実端末・OS動き軽減・長時間測定は未確認。
+- 仕様・状態・完了条件・TODO・参照マップ・起動説明を更新。詳細はCOFFEE_CONTEXT.md。A/Bは間柄と希望の両方が違うため、次は一条件ずつの比較が有力。一般化は未実証。
+
+最終確認: Markdown18ファイル・相対リンク78件に欠落なし。設計思想書・辞書・gameEngine・intentMatcherは開始コミット14342c3から内容保持。diff --check成功。実装コミット5f56782。preview5175を終了し、開発版5174/#coffeeを開いた状態で残した。記録と実測JSONも同じ作業ブランチにコミットし、git push -u origin codex/coffee-context-experimentで保存する。

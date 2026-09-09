@@ -1,6 +1,12 @@
 # APP STATE: 宥めよ
 
-最終更新: 2026-09-08。現在の仕様は [SPEC](../../SPEC.md)、実操作の結果は [検証記録](../../docs/PLAYTEST_2026-09-08.md)。
+最終更新: 2026-09-10。現在の仕様は [SPEC](../../SPEC.md)、実操作の結果は [検証記録](../../docs/PLAYTEST_2026-09-08.md)。
+
+## コーヒー場面実験
+
+#coffee をWorkspaceへ追加。CoffeeScene.jsxが状態/選択肢/自由入力の確認を管理し、lib/coffeeScene.jsが四つの外殻・表示用既知情報・唯一の状態更新境界を持つ。lib/coffeeLanguage.jsは解釈契約、server/coffeeModel.jsは既存ローカルモデル通信。lib/coffeeCharacter.jsが得点なしで表示値へ変換し、CharacterのdisplayState入力で既存造形を使う。条件切替/再開始で人物と推論も初期化する。
+
+全46テスト。自由入力は過剰保留が残る実験であり、選択肢を置き換えない。[仕様・実測・確認](../../docs/COFFEE_CONTEXT.md)。
 
 ## 状態に反応する対話相手
 
@@ -13,7 +19,7 @@
 - `src/Character.css`: 人物・確認パネル・静止SVGの配置。
 - `test/characterState.test.js` / `characterResources.test.js`: 4組合せ、実ゲームイベント、終了優先、重複防止、初期化、補間、動き軽減、共有資源の解放。
 
-合計33テスト。Three.js 0.185.1を1依存だけ追加し、3D部分は動的import。外部モデル/画像/LLMを表示条件にしない。WebGL喪失時はループと資源を解放し、SVGで会話継続。プレビューは得点・履歴を書き換えない。
+胸像版時点で33テスト。Three.js 0.185.1を1依存だけ追加し、3D部分は動的import。外部モデル/画像/LLMを表示条件にしない。WebGL喪失時はループと資源を解放し、SVGで会話継続。プレビューは得点・履歴を書き換えない。
 
 遊び方/履歴を折りたたみ、送信後は人物全体と返答/入力が見える位置へ戻す。確認パネルはPCで人物横、狭い画面で人物下。productionパネル非表示も実操作済み。以下は既存ゲームと比較ラボの構成。
 
