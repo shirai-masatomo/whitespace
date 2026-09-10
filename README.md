@@ -26,4 +26,6 @@ npm.cmd run dev -- --host 127.0.0.1 --port 5174 --strictPort
 
 ## 必要なときだけ
 
+[将来のアイディア](docs/FUTURE_IDEAS.md)：言語ジェンガ、悩みから場面を作る案。次の方向を考えるときに。
+
 [開発・検証の手順](docs/DEVELOPMENT.md) ／ [ローカルモデルの起動・実測](docs/LOCAL_MODEL.md) ／ [辞書の採否・出典・利用条件](docs/INTENT_DICTIONARY_REVIEW.md)。エージェント向けの作業規約は [AGENTS.md](AGENTS.md)です。
