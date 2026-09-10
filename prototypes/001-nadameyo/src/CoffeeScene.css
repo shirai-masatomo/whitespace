@@ -58,3 +58,14 @@
 .coffee-response { min-height: 94px; }
 @media (max-height: 700px) { .coffee-set { height: 210px; } .coffee-set .character-stage { height: 205px; } .coffee-tableau svg { max-height: 100px; } .coffee-response { min-height: 82px; } }
 .coffee-controls > div:first-child .coffee-choices { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.coffee-entry { border: 0; margin: 18px 0 0; padding: 0; min-width: 0; }
+.coffee-entry legend { color: var(--text-muted); font-size: 13px; margin-bottom: 9px; }
+.coffee-entry-options { display: flex; flex-wrap: wrap; gap: 7px; }
+.coffee-entry-options label { display: flex; align-items: center; gap: 7px; cursor: pointer; padding: 8px 11px; border: 1px solid var(--line); border-radius: 6px; color: #aab9b2; font-size: 13px; }
+.coffee-entry-options label:has(:checked) { color: #e4f3e9; background: #29463c; border-color: #739e87; }
+.coffee-entry-options label:has(:focus-visible) { outline: 2px solid #c6decb; outline-offset: 3px; }
+.coffee-entry-options input { width: 14px; height: 14px; min-height: 0; padding: 0; margin: 0; accent-color: #a0c5ab; }
+.coffee-entry-options label { min-height: 40px; box-sizing: border-box; }
+.coffee-entry small { display: block; color: #94a19b; margin-top: 7px; font-size: 11px; }
+.coffee-setting { max-width: 62em; line-height: 1.8; }
+@media (max-width: 500px) { .coffee-entry-options { display: grid; grid-template-columns: 1fr; gap: 5px; } .coffee-entry-options label { padding: 7px 10px; } }

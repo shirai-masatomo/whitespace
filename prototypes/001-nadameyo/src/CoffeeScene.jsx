@@ -5,6 +5,7 @@ import { CONDITIONS, CHOICES, createCoffeeScene, stepCoffeeScene, choiceInterpre
 import { coffeeCharacter } from './lib/coffeeCharacter.js'
 import { coffeeLanguageRequest } from './lib/coffeeLanguage.js'
 import './CoffeeScene.css'
+import { COFFEE_ENTRIES } from './lib/coffeePresentation.js'
 const actorName = actor => ({ player: 'あなた', partner: '相手', scene: '情景' })[actor]
 export default function CoffeeScene() {
   const [scene, setScene] = useState(() => createCoffeeScene())
@@ -30,8 +31,9 @@ export default function CoffeeScene() {
   }
   return <main className="coffee-page">
     <header className="coffee-header"><div><p className="coffee-eyebrow">WHITESPACE / CAFÉ</p><h1>こぼれたコーヒー</h1></div><button className="secondary" onClick={() => restart(scene.condition)}>やり直す</button></header>
+    <fieldset className="coffee-entry"><legend>あなたは、この場にどう居合わせた？</legend><div className="coffee-entry-options">{Object.entries(COFFEE_ENTRIES).map(([id, entry]) => <label key={id}><input type="radio" name="coffee-entry" value={id} checked={scene.condition === id} onChange={() => restart(id)} /><span>{entry.label}</span></label>)}</div><small>選び直すと、場面を最初から。</small></fieldset>
     <div ref={dialogue} className="coffee-focus">
-      <p className="coffee-setting">{scene.condition === 'C' ? 'カップにぶつかった、あなた。その向かいに友人がいる。' : scene.condition === 'A' ? '後から来たあなた。友人の席で、コーヒーがこぼれている。' : '近くの席の、知らない人。こぼした瞬間は見ていない。'}</p>
+      <p className="coffee-setting">{COFFEE_ENTRIES[scene.condition].intro}</p>
       <div className={`coffee-set ${scene.relationship.distance} ${reduced ? 'reduced' : ''}`}><Character key={round} displayState={coffeeCharacter(scene)} manualReduced={reduced} onReducedChange={setReduced} /><CoffeeTable scene={scene} reduced={reduced} /></div>
       <section className="coffee-response" aria-label="最新のやり取り" aria-live="polite">
         {last && <p className="coffee-your-line">あなた{last.kind === 'speech' ? '：「' + last.input + '」' : ' · ' + last.input}</p>}
@@ -50,7 +52,7 @@ export default function CoffeeScene() {
         {error && <p role="alert">{error}</p>}
         {result && <div className="coffee-interpretation" role="status"><p><strong>{result.interpretation.status === 'matched' ? CHOICES.find(x => x.act === result.interpretation.act)?.label : result.interpretation.status === 'unsupported' ? '未対応の行為' : '確認が必要'}</strong> / {result.interpretation.target}</p><p>{result.interpretation.reason}</p><p>根拠：「{result.interpretation.evidence || 'なし'}」 · {(result.elapsedMs / 1000).toFixed(2)}秒</p><button onClick={() => apply(result.interpretation, result.input)}>{result.interpretation.status === 'matched' ? 'この解釈で進める' : '聞き返しとして会話に残す'}</button><button className="secondary" onClick={() => setResult(null)}>採用しない</button></div>}
       </details>
-      <details className="coffee-lab"><summary>条件を変える・検証する</summary><label>固定条件 <select value={scene.condition} onChange={e => restart(e.target.value)}>{Object.entries(CONDITIONS).map(([id,item]) => <option key={id} value={id}>{item.label}</option>)}</select></label><p>条件切替は会話・知識・物を初期化します。通常画面は手元にない物の操作を無効にしますが、対応行為は変わりません。</p>
+      <details className="coffee-lab"><summary>操作と内部情報を検証する</summary><p>現在の条件：{CONDITIONS[scene.condition].label}。通常画面は手元にない物の操作を無効にしますが、対応行為は変わりません。</p>
         <details><summary>全9操作を試す（繰り返し・不適切な順番も含む）</summary><div className="coffee-choices">{CHOICES.map(x => <button className="secondary" key={x.act} onClick={() => apply(choiceInterpretation(x.act), x.label, false)}>検証：{x.label}</button>)}</div></details>
         {import.meta.env.DEV && <details className="coffee-debug"><summary>内部情報・判断理由（未開示の事実を含む）</summary><p>{scene.reason}</p><pre>{JSON.stringify(sceneSnapshot(scene), null, 2)}</pre>{last && <><h3>分岐・解釈・開示の根拠・変更前後</h3><pre>{JSON.stringify({ branch: last.branch, interpretation: last.interpretation, disclosures: last.disclosures, changes: last.changes, before: last.before, after: last.after }, null, 2)}</pre></>}</details>}
       </details>
