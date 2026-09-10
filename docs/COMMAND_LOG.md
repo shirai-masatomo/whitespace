@@ -613,3 +613,5 @@ git -c core.safecrlf=false diff --check
 - `git diff --check` 成功。890cb86からゲーム判定・辞書判定・人物描画・設計思想書には差分なし。
 
 学び: 台詞で開示した事実と内部の希望を同じ値で表さず、根拠の引用を更新に付ける。拒否と事前確認要求も別の記憶にする。図は物/同意の概観と完全状態表を分けると、読みやすさと履歴差の網羅を両立できる。モデル再測定・実IME・実機スマートフォンは未確認。詳細はCOFFEE_PRESENCE_REVIEW.md。
+
+保存結果: `git commit` で実装f4719adと文書585bb97を作成、`git push -u origin codex/coffee-scene-presence` 成功。push後にCUAでGitHubの共通図・条件A/B/CのMermaid描画を確認し、この結果を追記。確認用タブを閉じた。
