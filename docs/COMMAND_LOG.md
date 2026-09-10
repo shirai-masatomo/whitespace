@@ -600,3 +600,16 @@ git -c core.safecrlf=false diff --check
 - 仕様・状態・完了条件・TODO・参照マップ・起動説明を更新。詳細はCOFFEE_CONTEXT.md。A/Bは間柄と希望の両方が違うため、次は一条件ずつの比較が有力。一般化は未実証。
 
 最終確認: Markdown18ファイル・相対リンク78件に欠落なし。設計思想書・辞書・gameEngine・intentMatcherは開始コミット14342c3から内容保持。diff --check成功。実装コミット5f56782。preview5175を終了し、開発版5174/#coffeeを開いた状態で残した。記録と実測JSONも同じ作業ブランチにコミットし、git push -u origin codex/coffee-context-experimentで保存する。
+
+## 2026-09-10 コーヒー場面改善（08:57〜09:05 JST 記録）
+
+目的: 890cb86の一場面を、人物と机上の変化から関われる表示へ改善し、実装全体の分岐をレビュー可能にする。
+
+- 開始時に `Get-Location`、`git status --short --branch`、`git fetch origin`、ブランチとリモートの差を確認。codex/coffee-context-experiment の890cb86、差0/0、変更なし。`git switch -c codex/coffee-scene-presence` で継承。設計思想書・状態文書を読んだ。
+- `npm test`、`npm run lint`、`npm run build`。古い台詞や知識の完全一致を前提とした3テストを現仕様へ調整。最終52テスト成功。lint成功、build成功（既存Three.js約537kBの警告継続）。最終CSS変更後もbuildを再実行した。
+- `node scripts/generate-coffee-map.mjs` で図・全状態表を生成。初回はテンプレート内のMarkdownフェンスのエスケープ不備で失敗し修正。探索スクリプトの最初の読込はcwdが違って失敗し、アプリ内で再実行。生成をもう一度行い `Get-FileHash` で4ファイルが同一と確認。
+- 全状態探索中に「片付け後の初質問でも拭きたいと言う」不整合を追加発見。対応する規則と回帰テストを追加。A/B/C計1,403状態・12,627遷移の不変条件を検証。
+- 既存dev 5174と `npm run preview -- --host 127.0.0.1 --port 5175 --strictPort` をCUAブラウザで操作。改善前の2不整合、改善後のA/B/C主要経路・モデル停止・通常/全操作・履歴・画面往復・既存ゲーム成功失敗再挑戦・比較ラボを確認。390×844と1280×900を指定し、最後に解除。横長で声かけが5+1に崩れたため3列へ修正し、本番ビルドのCSS読み込みと表示を再確認。previewは終了、devは継続。
+- `git diff --check` 成功。890cb86からゲーム判定・辞書判定・人物描画・設計思想書には差分なし。
+
+学び: 台詞で開示した事実と内部の希望を同じ値で表さず、根拠の引用を更新に付ける。拒否と事前確認要求も別の記憶にする。図は物/同意の概観と完全状態表を分けると、読みやすさと履歴差の網羅を両立できる。モデル再測定・実IME・実機スマートフォンは未確認。詳細はCOFFEE_PRESENCE_REVIEW.md。

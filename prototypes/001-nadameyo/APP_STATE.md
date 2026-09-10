@@ -6,7 +6,9 @@
 
 #coffee をWorkspaceへ追加。CoffeeScene.jsxが状態/選択肢/自由入力の確認を管理し、lib/coffeeScene.jsが四つの外殻・表示用既知情報・唯一の状態更新境界を持つ。lib/coffeeLanguage.jsは解釈契約、server/coffeeModel.jsは既存ローカルモデル通信。lib/coffeeCharacter.jsが得点なしで表示値へ変換し、CharacterのdisplayState入力で既存造形を使う。条件切替/再開始で人物と推論も初期化する。
 
-全46テスト。自由入力は過剰保留が残る実験であり、選択肢を置き換えない。[仕様・実測・確認](../../docs/COFFEE_CONTEXT.md)。
+現在は全52テスト。coffeeRules.jsに優先順付きの返答・条件・更新規則を分離。coffeeScene.jsは発話根拠付きの知識更新と履歴を管理する。CoffeeTable.jsxが物の状態から机上を描画し、発話と実動作を別に表示。通常候補/検証操作を分けた。図生成と全到達遷移の検証はscripts/coffeeGraph.mjsを共有する。
+
+[現行仕様・確認](../../docs/COFFEE_PRESENCE_REVIEW.md) / [全体遷移図](../../docs/COFFEE_TRANSITIONS.md)。自由入力は過剰保留が残る実験であり、選択肢を置き換えない。[初版の実測](../../docs/COFFEE_CONTEXT.md)。
 
 ## 状態に反応する対話相手
 

@@ -8,7 +8,13 @@
 
 ## コーヒー場面実験
 
-[COFFEE_CONTEXT](COFFEE_CONTEXT.md): A/B/Cの仕様・判断・実モデル測定・ブラウザ検証。
+[COFFEE_PRESENCE_REVIEW](COFFEE_PRESENCE_REVIEW.md): 現在の場面UI・台詞/実動作・既知情報の仕様と検証。
+
+[COFFEE_TRANSITIONS](COFFEE_TRANSITIONS.md): A/B/Cの全体遷移図・規則表・数え方。完全な行き先は [A](COFFEE_STATES_A.md) / [B](COFFEE_STATES_B.md) / [C](COFFEE_STATES_C.md) の全状態表。
+
+[COFFEE_CONTEXT](COFFEE_CONTEXT.md): 初版の判断・実モデル測定・ブラウザ検証（歴史的記録）。
+
+coffeeRules（条件/発話/効果）→ coffeeScene（更新/根拠/履歴）→ CoffeeScene + CoffeeTable（発話/動作/机上表示）。scripts/coffeeGraph.mjsが全到達状態を探索し、generate-coffee-map.mjsが図と表を生成。test/coffeeGraph.test.jsが全遷移の不変条件を検証。
 
 Workspace → CoffeeScene (#coffee) → coffeeScene（事実/知識/同意/更新） → coffeeCharacter → Character。自由入力は coffeeLanguage → /api/coffee/evaluate → server/coffeeModel → 既存Ollama。解釈をプレイヤーが確認してから同じ状態更新へ渡します。
 
