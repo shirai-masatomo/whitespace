@@ -16,7 +16,7 @@ export const COFFEE_PROMPT = `あなたは日本語の発言・行動の解釈�
 例：input「紙を渡そうか」は対象が曖昧なら {"status":"uncertain","act":"clarify","target":"unknown","evidence":"紙","reason":"何の紙か不明"}。
 matchedのevidenceは現在のinput内の実在する連続文字列。reasonは短い日本語で解釈の理由。確信できなければuncertainにする。JSONの5項目だけ返す。`
 export function coffeeLanguageRequest(state, input) {
-  return { input, context: visibleScene(state), history: state.history.slice(-5).map(x => ({ input: x.input, reply: x.reply })) }
+  return { input, context: visibleScene(state), history: state.history.slice(-5).map(x => ({ input: x.input, reply: [x.reply ? `相手の発話：${x.reply}` : '', ...x.events.map(e => `${e.actor === 'player' ? 'あなたの動作' : e.actor === 'partner' ? '相手の動作' : '情景'}：${e.text}`)].filter(Boolean).join(' / ') })) }
 }
 export function validateCoffeeRequest(value) {
   if (!value || typeof value.input !== 'string' || !value.input.trim() || value.input.length > 280) throw new Error('1〜280文字で入力してください。')

@@ -7,7 +7,7 @@ const act = (s, a) => stepCoffeeScene(s, choiceInterpretation(a))
 test('coffee: same apology corrects responsibility in A, repairs acknowledged responsibility in C', () => {
   const a = act(createCoffeeScene('A'), 'apologize'), c = act(createCoffeeScene('C'), 'apologize')
   assert.match(a.reply, /君のせいじゃない/); assert.equal(a.partner.agitation, 3); assert.equal(a.player.knowledge.cause, 'partner')
-  assert.match(c.reply, /謝ってくれた/); assert.equal(c.partner.agitation, 2); assert.equal(act(c, 'apologize').partner.agitation, 2)
+  assert.match(c.reply, /謝ってくれ/); assert.equal(c.partner.agitation, 2); assert.equal(act(c, 'apologize').partner.agitation, 2)
   assert.equal(a.environment.table, 'wet'); assert.equal(c.environment.table, 'wet')
 })
 test('coffee: B refuses broad help but accepts specific discreet aid, with refusal history constraining action', () => {
@@ -21,7 +21,7 @@ test('coffee: B refuses broad help but accepts specific discreet aid, with refus
 test('coffee: knowledge persists, world facts do not leak into initial player context', () => {
   const initial = createCoffeeScene('B'); assert.equal(initial.relationship.cause, 'partner'); assert.equal(initial.player.knowledge.cause, null)
   const payload = coffeeLanguageRequest(initial, 'どうしたの？'); assert.match(payload.context.cause, /知らない/); assert.match(payload.context.preference, /聞いていない/)
-  const one = act(initial, 'ask_event'), two = act(one, 'ask_event'); assert.deepEqual(one.player.knowledge, two.player.knowledge); assert.deepEqual(two.relationship.shared, ['cause', 'preference']); assert.match(two.reply, /さっき/)
+  const one = act(initial, 'ask_event'), two = act(one, 'ask_event'); assert.equal(two.player.knowledge.cause, one.player.knowledge.cause); assert.equal(two.player.knowledge.quiet, true); assert.equal(two.player.knowledge.wipe, true); assert.deepEqual(two.relationship.shared, ['cause', 'quiet', 'wipe']); assert.match(two.reply, /さっき/)
   assert.equal(initial.history.length, 0); assert.equal(initial.player.knowledge.cause, null)
 })
 test('coffee: proposal, transfer, and cleanup are separate, without a required question path', () => {
@@ -71,7 +71,38 @@ test('coffee: after receiving tissue, responses do not request another before wi
   const supplied = act(act(createCoffeeScene('C'), 'offer_tissue'), 'give_tissue')
   const apologized = act(supplied, 'apologize')
   for (const s of [act(supplied, 'check_wellbeing'), act(supplied, 'support'), act(apologized, 'apologize')]) {
-    assert.match(s.reply, /受け取った|もらった/)
+    assert.doesNotMatch(s.reply, /ティッシュがほしい|ティッシュをもらえる/)
     assert.equal(s.environment.tissue, 'partner'); assert.equal(s.environment.table, 'wet')
+  }
+})
+
+test('coffee: only spoken wishes are learned; wiping does not disclose a tissue request', () => {
+  const a = act(createCoffeeScene('A'), 'ask_event')
+  assert.equal(a.player.knowledge.wipe, true); assert.equal(a.player.knowledge.tissue, false); assert.equal(a.player.knowledge.quiet, false)
+  assert.match(visibleScene(a).preference, /机を拭きたい/); assert.doesNotMatch(visibleScene(a).preference, /ティッシュ|手短/)
+  for (const f of a.history.at(-1).disclosures) assert.ok(a.reply.includes(f.quote))
+})
+test('coffee: two unsolicited handovers recall a confirmation request, never invent a declined offer', () => {
+  const first = act(createCoffeeScene('A'), 'give_tissue'), second = act(first, 'give_tissue')
+  assert.equal(second.relationship.helpRefused, false); assert.equal(second.relationship.confirmationRequested, true)
+  assert.match(second.reply, /渡す前に/); assert.doesNotMatch(second.reply, /手伝い.*断/)
+  assert.equal(second.environment.tissue, 'player'); assert.equal(second.history[0].events[0].type, 'attempt')
+  const refused = act(act(createCoffeeScene('B'), 'offer_help'), 'give_tissue')
+  assert.equal(refused.relationship.helpRefused, true); assert.match(refused.reply, /手伝い.*お断り/)
+})
+test('coffee: speech and actual actions have distinct actors and do not invent receipt or cleanup', () => {
+  const offered = act(createCoffeeScene(), 'offer_tissue'); assert.equal(offered.events.length, 0)
+  const given = act(offered, 'give_tissue'); assert.deepEqual(given.events.map(e => [e.actor,e.type]), [['player','handover'],['partner','receive']])
+  assert.doesNotMatch(given.reply, /受け取る|相手は/); assert.equal(given.environment.table,'wet')
+  const cleaned = act(given,'observe'); assert.equal(cleaned.events[0].type,'wipe'); assert.equal(cleaned.events[0].actor,'partner'); assert.equal(cleaned.environment.table,'dry')
+  assert.equal(act(cleaned,'observe').reply,null)
+})
+
+test('coffee: first question after cleanup explains the past without asking to clean again', () => {
+  for (const id of ['A','B']) {
+    const done = act(act(act(createCoffeeScene(id),'offer_tissue'),'give_tissue'),'observe')
+    const asked = act(done,'ask_event')
+    assert.match(asked.reply,/もう拭け/); assert.doesNotMatch(asked.reply,/拭きたい/)
+    assert.equal(asked.player.knowledge.wipe, false); assert.equal(asked.environment.table,'dry')
   }
 })

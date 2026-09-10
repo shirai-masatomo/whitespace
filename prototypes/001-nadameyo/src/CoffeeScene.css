@@ -1,44 +1,60 @@
-.coffee-page { max-width: 1120px; margin: auto; padding: 28px 28px 70px; }
-.coffee-header { border-bottom: 1px solid var(--line); padding-bottom: 20px; }
-.coffee-eyebrow { letter-spacing: .2em; color: #ccb89c; font-size: 12px; }
-.coffee-page h1 { color: var(--text-strong); font-size: 32px; margin: 8px 0; }
-.coffee-page h2 { color: var(--text-strong); font-size: 16px; margin: 16px 0 10px; }
-.coffee-page p { line-height: 1.8; }
-.coffee-condition { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
-.coffee-condition select { color: var(--text-strong); background: var(--surface); padding: 10px; border: 1px solid var(--line); border-radius: 4px; font: inherit; }
-.coffee-hint { font-size: 12px; color: var(--muted); }
-.coffee-layout { display: grid; grid-template-columns: minmax(240px, .8fr) minmax(0, 1.4fr); gap: 32px; padding-top: 20px; }
-.coffee-observation { background: #182023; border: 1px solid var(--line); border-radius: 8px; padding: 20px; align-self: start; }
-.coffee-facts { list-style: none; padding: 0; font-size: 13px; }
-.coffee-facts li { padding: 9px 0; border-bottom: 1px solid var(--line); }
-.coffee-table { height: 82px; position: relative; border-bottom: 2px solid #87745c; margin-top: 25px; }
-.coffee-cup { position: absolute; left: 18%; top: 4px; font-size: 42px; color: #d5cec1; }
-.coffee-puddle { position: absolute; top: 42px; left: 28%; width: 80px; height: 20px; border-radius: 65% 30% 70% 30%; background: #735039; }
-.coffee-table.dry .coffee-puddle { display: none; }
-.coffee-paper { position: absolute; right: 5px; bottom: 10px; border: 1px solid #bec7ba; padding: 7px; font-size: 11px; transform: rotate(-5deg); }
-.coffee-dialogue { min-width: 0; }
-.coffee-dialogue .character-stage { height: 260px; }
-.coffee-dialogue .stage-caption { font-size: 10px; }
-.coffee-dialogue .character-description { flex-wrap: wrap; }
-.coffee-reply { padding: 14px 0; min-height: 112px; border-bottom: 1px solid var(--line); }
-.coffee-reply span { font-size: 12px; color: var(--accent); }
-.coffee-reply p { color: var(--text-strong); font-size: 19px; margin: 8px 0; }
-.coffee-choices { display: flex; gap: 8px; flex-wrap: wrap; }
-.coffee-choices button { font-size: 14px; padding: 11px 14px; }
-.coffee-language, .coffee-history, .coffee-debug { margin-top: 24px; padding: 18px 0; border-top: 1px solid var(--line); }
-.coffee-page summary { cursor: pointer; color: #c9d2ce; line-height: 1.8; }
+.coffee-page { max-width: 980px; margin: auto; padding: 18px 28px 70px; }
+.coffee-header { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.coffee-eyebrow { letter-spacing: .2em; color: #beab90; font-size: 10px; margin: 0 0 5px; }
+.coffee-page h1 { color: var(--text-strong); font-size: 25px; margin: 0; font-weight: 500; }
+.coffee-page h2 { color: #acb9b1; font-size: 11px; margin: 0 0 9px; letter-spacing: .08em; font-weight: 500; }
+.coffee-page p { line-height: 1.75; }
+.coffee-setting { font-size: 13px; margin: 14px 0 0; color: #b4beb7; }
+.coffee-set { position: relative; height: 350px; }
+.coffee-set .character-section { transition: transform .5s ease; }
+.coffee-set.away .character-section { transform: scale(.91); }
+.coffee-set .character-stage { height: 310px; background: radial-gradient(ellipse at 50% 40%, #24302c70, transparent 65%); }
+.coffee-set .stage-caption { display: none; }
+.coffee-set .character-description { position: absolute; right: 0; top: 8px; border: 0; margin: 0; }
+.coffee-set .character-description > p { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+.coffee-tableau { position: absolute; width: 100%; bottom: 0; pointer-events: none; }
+.coffee-tableau svg { display: block; width: 100%; max-height: 160px; }
+.table-spill { fill: #946238; stroke: #bc8c59; stroke-width: 1; opacity: .88; transition: opacity .65s ease; }
+.dry .table-spill { opacity: 0; }
+.table-tissue { transform: translate(166px, 135px); transition: transform .6s ease; }
+.partner .table-tissue, .used .table-tissue { transform: translate(491px, 49px); }
+.used .table-tissue { transform: translate(535px, 63px) rotate(12deg); }
+.coffee-object-caption { position: absolute; bottom: -7px; left: 20px; font-size: 11px; color: #bec7bd; }
+.wipe-trace { animation: coffee-wipe .9s ease forwards; }
+@keyframes coffee-wipe { from { stroke-dasharray: 0 350; opacity: .5; } to { stroke-dasharray: 350 350; opacity: 0; } }
+.coffee-response { min-height: 122px; padding: 15px 12px 8px; }
+.coffee-your-line { color: #8e9c97; font-size: 12px; margin: 0 0 5px; }
+.coffee-stage-directions p { color: #b6b4a6; font-size: 13px; margin: 3px 0; }
+.coffee-stage-directions span { display: none; }
+.coffee-response blockquote { margin: 8px 0 0; padding: 0; }
+.coffee-response blockquote > span { color: var(--accent); font-size: 11px; }
+.coffee-response blockquote p { color: var(--text-strong); font-size: 20px; margin: 3px 0; }
+.coffee-opening { margin: 3px 0; color: #b6b4a6; font-size: 14px; }
+.coffee-controls { display: grid; grid-template-columns: 1.5fr 1fr; gap: 22px; border-top: 1px solid var(--line); padding-top: 14px; }
+.coffee-choices { display: flex; flex-wrap: wrap; gap: 7px; }
+.coffee-choices button { padding: 10px 13px; font-size: 13px; }
+.coffee-controls .coffee-choices button { background: #293d34; color: #d5e5d9; border: 1px solid #486353; }
+.coffee-controls .actions button { background: #222b29; border-color: #536059; }
+.coffee-controls button:disabled { opacity: .45; cursor: not-allowed; }
+.coffee-controls small { display: block; font-size: 10px; margin-top: 2px; }
+.coffee-drawers { margin-top: 28px; }
+.coffee-drawers > details { border-top: 1px solid var(--line); padding: 15px 0; font-size: 13px; }
+.coffee-page summary { cursor: pointer; color: #bac5bd; line-height: 1.8; }
+.coffee-page select { color: var(--text-strong); background: var(--surface); padding: 10px; border: 1px solid var(--line); font: inherit; }
 .coffee-language textarea { display: block; width: 100%; margin: 8px 0 12px; background: var(--surface); color: var(--text-strong); border: 1px solid var(--line); padding: 12px; font: inherit; resize: vertical; }
 .coffee-interpretation { margin-top: 16px; padding: 16px; border: 1px solid var(--accent); }
 .coffee-interpretation button { margin: 4px 8px 4px 0; }
 .coffee-history ol { padding-left: 22px; }
-.coffee-history li { padding: 14px 0; border-bottom: 1px solid var(--line); }
+.coffee-history li { padding: 12px 0; border-bottom: 1px solid var(--line); }
 .coffee-history strong { color: var(--text-strong); }
-.coffee-debug { background: #25201b; padding: 16px; }
+.coffee-history-event { color: #b6b4a6; }
+.coffee-debug { background: #25201b; padding: 16px; margin-top: 18px; }
 .coffee-debug pre { white-space: pre-wrap; overflow-wrap: anywhere; font-size: 12px; }
-@media (max-width: 700px) { .coffee-page { padding: 18px 16px 45px; } .coffee-layout { grid-template-columns: 1fr; gap: 12px; } .coffee-observation { padding: 14px; } .coffee-observation > p { font-size: 13px; } .coffee-table { display: none; } .coffee-facts { display: grid; grid-template-columns: 1fr 1fr; gap: 0 10px; } .coffee-choices button { flex: 1 1 40%; } .coffee-page h1 { font-size: 28px; } }
-.coffee-header > p { margin: 6px 0 10px; }
-.coffee-header { padding-bottom: 12px; }
-.coffee-dialogue { scroll-margin-top: 12px; }
-.coffee-dialogue .character-stage { height: 220px; }
-.coffee-reply { min-height: 88px; padding: 10px 0; }
-.coffee-intro p { font-size: 13px; }
+.reduced * { transition: none !important; animation: none !important; }
+.reduced .wipe-trace { display: none; }
+@media (prefers-reduced-motion: reduce) { .coffee-set *, .coffee-tableau * { transition: none !important; animation: none !important; } .wipe-trace { display: none; } }
+@media (max-width: 700px) { .coffee-page { padding: 14px 16px 40px; } .coffee-set { height: 280px; } .coffee-set .character-stage { height: 245px; } .coffee-tableau svg { min-height: 90px; } .coffee-page h1 { font-size: 22px; } .coffee-controls { grid-template-columns: 1fr; gap: 15px; } .coffee-choices button { flex: 1 1 30%; } .coffee-response { min-height: 110px; padding: 14px 0 9px; } .coffee-response blockquote p { font-size: 18px; } .coffee-object-caption { left: 5px; font-size: 10px; } .coffee-setting { font-size: 12px; } }
+.workspace-nav:has(a[href="#coffee"][aria-current="page"]) span { display: none; }
+.coffee-response { min-height: 94px; }
+@media (max-height: 700px) { .coffee-set { height: 210px; } .coffee-set .character-stage { height: 205px; } .coffee-tableau svg { max-height: 100px; } .coffee-response { min-height: 82px; } }
+.coffee-controls > div:first-child .coffee-choices { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
