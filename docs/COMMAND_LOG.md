@@ -615,3 +615,13 @@ git -c core.safecrlf=false diff --check
 学び: 台詞で開示した事実と内部の希望を同じ値で表さず、根拠の引用を更新に付ける。拒否と事前確認要求も別の記憶にする。図は物/同意の概観と完全状態表を分けると、読みやすさと履歴差の網羅を両立できる。モデル再測定・実IME・実機スマートフォンは未確認。詳細はCOFFEE_PRESENCE_REVIEW.md。
 
 保存結果: `git commit` で実装f4719adと文書585bb97を作成、`git push -u origin codex/coffee-scene-presence` 成功。push後にCUAでGitHubの共通図・条件A/B/CのMermaid描画を確認し、この結果を追記。確認用タブを閉じた。
+
+## 2026-09-10 プレイヤー視点の分岐図・場面選択
+
+- `Get-Location` / `git status --short --branch` / `git fetch origin` / `git rev-list --left-right --count HEAD...origin/codex/coffee-scene-presence` でccb005d・差0/0・変更なしを確認。PowerShellで引用しないupstream省略記法が誤変換されたため、明示したリモート枝で再確認した。`git switch -c codex/coffee-player-flow`。
+- `node scripts/generate-coffee-player-flow.mjs`：27初手・243通りの2手の組合せ、3入口・27詳細・共通続きのMarkdown/Mermaidを生成。ゲームのcoffeeCandidates/stepCoffeeSceneを直接呼ぶ。手書きの改善案と生成図を分けた。
+- `npm test`（52件成功）、`npm run lint`、`npm run build`成功。CSSのradio高さ調整後もbuild再実行。既存Three.js容量警告は継続。
+- CUAでA/B/Cの切替・導入、会話と紙の状態初期化、1280×900と390×844を確認。生成図の全枝をUIで実行したという意味ではない。
+- `git diff ccb005d -- src/lib/coffeeScene.js src/lib/coffeeRules.js src/lib/coffeeLanguage.js`（アプリ内）で更新規則に差分なし。
+
+判断: 場面選択は相手との関係だけでなく事故への関与を言葉にする。図は小さな縦方向の選択→反応へ分け、番号表を引く必要をなくす。規則の改善候補は今回は実装しない。

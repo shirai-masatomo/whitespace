@@ -8,6 +8,8 @@
 
 ## コーヒー場面実験
 
+[最初に開く：プレイヤー視点の分岐図](COFFEE_PLAYER_FLOW.md)。A/B/Cの初期状況→初手→相手の反応→2手目の全候補と結果を、実際の文言で追う入口。操作を省く・自動化する議論はここから。[今回のUI・図の確認](COFFEE_PLAYER_FLOW_REVIEW.md)。
+
 [COFFEE_PRESENCE_REVIEW](COFFEE_PRESENCE_REVIEW.md): 現在の場面UI・台詞/実動作・既知情報の仕様と検証。
 
 [COFFEE_TRANSITIONS](COFFEE_TRANSITIONS.md): A/B/Cの全体遷移図・規則表・数え方。完全な行き先は [A](COFFEE_STATES_A.md) / [B](COFFEE_STATES_B.md) / [C](COFFEE_STATES_C.md) の全状態表。
