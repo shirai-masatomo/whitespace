@@ -2,8 +2,8 @@ import test from 'node:test'
 import assert from 'node:assert/strict'
 import { exploreCoffee } from '../scripts/coffeeGraph.mjs'
 import { COFFEE_RULES } from '../src/lib/coffeeRules.js'
-import { coffeeCandidates, createCoffeeScene, choiceInterpretation, stepCoffeeScene } from '../src/lib/coffeeScene.js'
-test('coffee: every reachable state and all nine acts preserve disclosure, ownership and event invariants', () => {
+import { CHOICES, coffeeCandidates, createCoffeeScene, choiceInterpretation, stepCoffeeScene } from '../src/lib/coffeeScene.js'
+test('coffee: every reachable state and all supported acts preserve disclosure, ownership and event invariants', () => {
   const covered = new Set()
   for (const id of ['A','B','C']) {
     const graph = exploreCoffee(id, (before, choice, after) => {
@@ -25,15 +25,15 @@ test('coffee: every reachable state and all nine acts preserve disclosure, owner
       if (entry.reply?.includes('手伝いはさっきお断り')) assert.equal(before.relationship.helpRefused,true)
       if (entry.reply?.includes('さっきも言った')) assert.equal(before.relationship.confirmationRequested,true)
     })
-    assert.equal(graph.transitions, graph.states * 9); assert.equal(graph.minDry,3); assert.equal(graph.dryWays,id === 'B' ? 1 : 2)
+    assert.equal(graph.transitions, graph.states * CHOICES.length); assert.equal(graph.minDry,3); assert.equal(graph.dryWays,id === 'B' ? 1 : 2)
   }
-  assert.deepEqual([...covered].sort(), COFFEE_RULES.filter(r => r.act !== 'clarify').map(r => r.id).sort())
+  assert.deepEqual([...covered].filter(id => !id.startsWith('circumstance-')).sort(), COFFEE_RULES.filter(r => r.act !== 'clarify').map(r => r.id).sort())
 })
 test('coffee: normal candidates reflect possessions while full interpreter still handles disabled acts', () => {
   const step = (s, act) => stepCoffeeScene(s,choiceInterpretation(act))
   const s = step(step(createCoffeeScene(),'offer_tissue'),'give_tissue')
   const items = coffeeCandidates(s)
-  assert.equal(items.length,9); assert.equal(items.find(x=>x.act==='give_tissue').disabled,true)
+  assert.equal(items.length,10); assert.equal(items.find(x=>x.act==='give_tissue').disabled,true)
   assert.equal(items.find(x=>x.act==='apologize').disabled,false)
   assert.equal(items.find(x=>x.act==='observe').label,'拭くのを見守る')
   assert.equal(step(s,'give_tissue').history.at(-1).branch,'give-held')

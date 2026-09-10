@@ -69,3 +69,13 @@
 .coffee-entry small { display: block; color: #94a19b; margin-top: 7px; font-size: 11px; }
 .coffee-setting { max-width: 62em; line-height: 1.8; }
 @media (max-width: 500px) { .coffee-entry-options { display: grid; grid-template-columns: 1fr; gap: 5px; } .coffee-entry-options label { padding: 7px 10px; } }
+
+.coffee-circumstances { margin-top: 12px; font-size: 12px; color: var(--text-muted); }
+.coffee-circumstances label { display: block; margin: 12px 0 6px; }
+.coffee-circumstances select { max-width: 100%; }
+.coffee-circumstances p { max-width: 52em; margin: 8px 0; }
+.table-notebook { transform: translate(453px, 90px) rotate(-8deg); transition: transform .6s ease; }
+.table-notebook.safe { transform: translate(609px, 46px) rotate(7deg); }
+
+.coffee-controls button[data-act="listen"] { grid-column: 1 / -1; }
+@media (max-width: 700px) { .coffee-controls button[data-act="move_notebook"] { flex-basis: 100%; } }

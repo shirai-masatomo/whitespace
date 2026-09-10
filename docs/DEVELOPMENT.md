@@ -23,7 +23,7 @@ Three.jsの描画処理を変えたら、HMRに古いインスタンスが残り
 | 画面切替 | Workspace → App / Comparison / CoffeeScene |
 | ゲームの言語評価 | lib/intentMatcher.js。入力・直近最大5件の履歴・状態を受け、intent/disposition/matches/reason等を返す。辞書版は入力のみ使用 |
 | ゲームの進行と返答 | lib/gameEngine.js（数値・反復・回復・終了）→ lib/responses.js（返答・振り返り） |
-| コーヒーの更新 | lib/coffeeScene.js のstepCoffeeSceneが唯一の境界。lib/coffeeRules.jsの優先順付き条件・発話・効果を適用 |
+| コーヒーの更新 | lib/coffeeScene.js のstepCoffeeSceneが唯一の境界。lib/coffeeCircumstances.jsの事情別規則を先に照合し、該当しなければlib/coffeeRules.jsの共通規則を適用 |
 | コーヒーの表示 | coffeePresentation（入口文）/ CoffeeScene（操作・台詞・履歴）/ CoffeeTable（机上）/ coffeeCharacter（胸像への値） |
 | モデル | lib/coffeeLanguage.js / modelContract.jsで契約、server/coffeeModel.js / localModel.jsでローカル通信。実測条件はLOCAL_MODEL |
 | 人物 | Character → lib/characterState.js（姿勢と一時反応）→ character/createCharacterRenderer.js。造形はcreateBust、解放はdisposeScene |
@@ -36,8 +36,20 @@ Three.jsの描画処理を変えたら、HMRに古いインスタンスが残り
 - 援助辞退、事前確認要求、受取同意は別の記憶。同意・所持が揃って初めて紙が移る。離れると未実行の同意を解除し、再び話す/渡そうとすると近くへ戻る。
 - 発話と実際の動作は別。紙が相手の手元→観察で拭く→使用済み。提案だけで物を動かさず、ト書きも実際の更新に対応させる。
 - 謝罪はCの初回だけ、距離取りは初回だけ落ち着く。知識・記憶・落ち着かなさは後の反応/表示に影響。再開始・条件/画面切替で初期化。
-- 通常候補の表示と処理できる行為は別。紙の所持がなければ「渡す」を無効にする。検証欄だけは全9操作を試せる。
+- 通常候補の表示と処理できる行為は別。紙の所持がなければ「渡す」を無効にする。検証欄だけは全11操作を試せる。
 - 自由入力は既知情報と直近履歴だけから解釈し、形式を検証し、ユーザー確認後に同じ更新境界へ渡す。モデルは世界や数値を書き換えない。
+
+## 事情を切り替える小実験
+
+createCoffeeScene('A', circumstance) の第2引数はcleanup / notebook / bad_day。B/Cとの直積は今回作らず、関係・責任をAへ固定して比較します。既存B/Cの規則は保持。新規2操作は傾聴の申し出とノートの移動です。
+
+- partner.circumstance / concern：本人の事情・気がかり。物が片付いても自動でresolvedにしない。
+- environment.notebook / notebookPosition：不在・濡れ・水気を取った状態と位置。水気が取れても染みは残る。紙1組の一部でノート、未使用部分で机を拭く小規模な表現で、容量計算はしない。
+- knowledge：本人が言った大切さ・別の出来事・傾聴の希望。設定名は自由入力モデルにも送らず、見えるノートの状態と発話・観察履歴だけを渡す。
+- notebookConsent：ノートを移す依頼。紙の受取同意とは独立で、実行・相手自身の移動・距離取りで解除。
+- memory.listened：既に話を聞いた記憶。繰り返しで回復を稼がず、問題自体が解決したとも扱わない。
+
+事情規則も開示の引用根拠・出来事・状態差分を既存の境界へ返します。モデル契約はcoffee-v3（既知のノート情報と新操作を追加）。追加操作の実モデル精度は未測定。旧coffee-v2の実測JSONはそのまま保持します。
 
 ## 詳細を必要時だけ出力する
 

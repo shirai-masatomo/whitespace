@@ -1,3 +1,4 @@
+import { resolveCircumstanceRule } from './coffeeCircumstances.js'
 // Rules are ordered per act. A stable branch ID joins runtime, tests and review maps.
 // Disclosures carry the exact spoken evidence; private preferences are never copied.
 const rule = (id, act, guard, when, speech, effect = () => ({})) => ({ id, act, guard, when, speech, effect })
@@ -47,4 +48,4 @@ export const COFFEE_RULES = [
   rule('observe-wet', 'observe', '主人公がティッシュ所持・机が濡れている', () => true, null, () => ({ events: [event('scene', 'observe', 'こぼれたコーヒーが、机の上に溜まっている。')] })),
   rule('clarify', 'clarify', '曖昧・未対応・形式不一致', () => true, '何をしたいのか、もう少し具体的に教えてもらえる？', () => ({ reaction: 'uncertain' })),
 ]
-export function resolveCoffeeRule(state, act) { return COFFEE_RULES.find(r => r.act === act && r.when(state)) }
+export function resolveCoffeeRule(state, act) { return resolveCircumstanceRule(state, act) ?? COFFEE_RULES.find(r => r.act === act && r.when(state)) }

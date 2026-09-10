@@ -1,3 +1,4 @@
+import { CIRCUMSTANCES, circumstanceOpening } from './coffeeCircumstances.js'
 import { resolveCoffeeRule } from './coffeeRules.js'
 export const CONDITIONS = {
   A: { label: 'A · 後から来た友人', relation: 'friend', cause: 'partner', preference: 'brief', role: '後から来た友人', intro: '友人の席へ来ました。倒れたカップとコーヒーで濡れた机が見えます。こぼした瞬間は見ていません。ティッシュを持っています。' },
@@ -11,19 +12,22 @@ export const CHOICES = [
   { act: 'support', label: 'あなたの味方だ', kind: 'speech', target: 'partner' },
   { act: 'offer_help', label: '手伝おうか？', kind: 'speech', target: 'help' },
   { act: 'offer_tissue', label: 'ティッシュいる？', kind: 'speech', target: 'tissue' },
+  { act: 'listen', label: '話せる範囲で聞くよ', kind: 'speech', target: 'partner' },
+  { act: 'move_notebook', label: 'ノートを乾いた場所へ移す', kind: 'action', target: 'notebook' },
   { act: 'give_tissue', label: 'ティッシュを渡す', kind: 'action', target: 'tissue' },
   { act: 'give_space', label: 'そっとしておく', kind: 'action', target: 'partner' },
   { act: 'observe', label: '様子を見る', kind: 'action', target: 'scene' },
 ]
-export function createCoffeeScene(condition = 'A') {
+export function createCoffeeScene(condition = 'A', circumstance = 'cleanup') {
   const setup = CONDITIONS[condition]
   if (!setup) throw new Error('不明な固定条件です。')
+  if (!CIRCUMSTANCES[circumstance] || (condition !== 'A' && circumstance !== 'cleanup')) throw new Error('事情の比較は後から来た友人で行います。')
   return { condition,
-    partner: { agitation: condition === 'B' ? 4 : 3, concern: 'wet_table', preference: setup.preference },
-    environment: { coffee: 'spilled', table: 'wet', tissue: 'player' },
-    player: { role: setup.role, observed: ['spilled_coffee', 'wet_table'], knowledge: { cause: condition === 'C' ? 'player' : null, injury: null, wipe: false, tissue: false, quiet: false, selfWipe: false }, actions: CHOICES.filter(x => x.kind === 'action').map(x => x.act) },
-    relationship: { type: setup.relation, cause: setup.cause, shared: condition === 'C' ? ['cause'] : [], consent: 'none', apologized: false, helpRefused: false, confirmationRequested: false, distance: 'near' },
-    memory: { spaceCalmed: false }, history: [], reply: null, events: [{ actor: 'scene', type: 'opening', text: '相手は濡れた机を見つめている。' }], reason: '場面の開始。原因や望みは、観察と対話で確かめられます。', reaction: null,
+    partner: { circumstance, agitation: circumstance !== 'cleanup' || condition === 'B' ? 4 : 3, concern: circumstance === 'cleanup' ? 'wet_table' : circumstance, preference: setup.preference },
+    environment: { coffee: 'spilled', table: 'wet', tissue: 'player', notebook: circumstance === 'notebook' ? 'wet' : 'absent', notebookPosition: circumstance === 'notebook' ? 'spill' : 'absent' },
+    player: { role: setup.role, observed: ['spilled_coffee', 'wet_table'], knowledge: { cause: condition === 'C' ? 'player' : null, injury: null, wipe: false, tissue: false, quiet: false, selfWipe: false, notebook: false, burden: false, argument: false, listen: false }, actions: CHOICES.filter(x => x.kind === 'action').map(x => x.act) },
+    relationship: { type: setup.relation, cause: setup.cause, shared: condition === 'C' ? ['cause'] : [], consent: 'none', notebookConsent: false, apologized: false, helpRefused: false, confirmationRequested: false, distance: 'near' },
+    memory: { spaceCalmed: false, listened: false }, history: [], reply: null, events: [{ actor: 'scene', type: 'opening', text: circumstanceOpening(circumstance) }], reason: '場面の開始。原因や望みは、観察と対話で確かめられます。', reaction: null,
   }
 }
 export function sceneSnapshot(state) {
@@ -32,10 +36,11 @@ export function sceneSnapshot(state) {
 export function visibleScene(state) {
   const k = state.player.knowledge
   return { role: state.player.role, table: state.environment.table === 'wet' ? '机はコーヒーで濡れている' : '相手が机を拭き、乾いた',
-    tissue: state.environment.tissue === 'player' ? 'あなたの持ち物：ティッシュ1組' : state.environment.tissue === 'partner' ? 'ティッシュは相手の手元（まだ使っていない）' : 'ティッシュは使用済み',
+    tissue: state.environment.tissue === 'player' ? 'あなたの持ち物：ティッシュ1組' : state.environment.tissue === 'partner' ? (state.environment.notebook === 'blotted' ? 'ティッシュは相手の手元（一部をノートに使用。未使用部分が残る）' : 'ティッシュは相手の手元（まだ使っていない）') : 'ティッシュは使用済み',
     cause: k.cause === 'player' ? 'あなたがぶつかったことを、二人とも知っている' : k.cause === 'partner' ? '相手が自分でこぼしたと聞いた' : 'こぼした原因はまだ知らない',
     injury: k.injury === 'none' ? 'けがはないと聞いた' : 'けがの有無はまだ聞いていない',
-    preference: [k.wipe && '机を拭きたいと聞いた', k.tissue && 'ティッシュがほしいと聞いた', k.quiet && '静かに対処したいと聞いた', k.selfWipe && '自分で拭くと聞いた'].filter(Boolean).join('。') || 'どう関わってほしいかはまだ聞いていない',
+    preference: [k.wipe && '机を拭きたいと聞いた', k.tissue && 'ティッシュがほしいと聞いた', k.quiet && '静かに対処したいと聞いた', k.selfWipe && '自分で拭くと聞いた', k.notebook && '大事なノートが気がかりだと聞いた', k.burden && 'ほかにも嫌な出来事があったと聞いた', k.argument && '別の友人と言い合いになったと聞いた', k.listen && '話を聞いてほしいと聞いた'].filter(Boolean).join('。') || 'どう関わってほしいかはまだ聞いていない',
+    notebook: state.environment.notebook === 'absent' ? 'ノートは見当たらない' : `${state.environment.notebook === 'wet' ? 'ノートの端が濡れている' : 'ノートの水気は取れ、染みが残る'}。${state.environment.notebookPosition === 'safe' ? '机の乾いた端にある' : 'こぼれたコーヒーのそばにある'}。${state.relationship.notebookConsent ? '移してほしいと頼まれた' : '移動の依頼はない'}`,
     consent: { none: '援助の同意はまだない', declined: '漠然とした手伝いは断られた', accepted: 'ティッシュを受け取る同意がある', fulfilled: '同意したティッシュを渡した', withdrawn: '距離を取り、以前の同意はいったん解除した' }[state.relationship.consent],
   }
 }
@@ -61,6 +66,7 @@ export function stepCoffeeScene(previous, interpretation, input = '') {
     if (!state.relationship.shared.includes(key)) state.relationship.shared.push(key)
   }
   state.relationship.shared.sort()
+  if (act === 'give_space') state.relationship.notebookConsent = false
   const events = [...(effect.events ?? [])]
   // Returning to conversation is an actual movement, not an inferred intention.
   if (act !== 'give_space' && act !== 'observe' && act !== 'clarify' && state.relationship.distance === 'away') {
@@ -79,11 +85,11 @@ export function choiceInterpretation(act) {
   return { status: 'matched', act, target: choice.target, reason: 'プレイヤーが選択肢を明示。', source: 'choice' }
 }
 
-// Normal candidates differ from supported acts: all nine remain available to verification.
+// Availability is presentation only; the interpreter also guards invalid actions.
 export function coffeeCandidates(state) {
-  return CHOICES.map(choice => ({ ...choice,
-    disabled: choice.act === 'give_tissue' && state.environment.tissue !== 'player',
-    note: choice.act === 'give_tissue' && state.environment.tissue !== 'player' ? '手元にティッシュがない' : '',
-    label: choice.act === 'observe' && state.environment.tissue === 'partner' ? '拭くのを見守る' : choice.act === 'give_space' && state.relationship.distance === 'away' ? '離れたままにする' : choice.label,
+  return CHOICES.filter(choice => choice.act !== 'move_notebook' || state.environment.notebook !== 'absent').map(choice => ({ ...choice,
+    disabled: (choice.act === 'give_tissue' && state.environment.tissue !== 'player') || (choice.act === 'move_notebook' && state.environment.notebookPosition === 'safe'),
+    note: choice.act === 'move_notebook' && state.environment.notebookPosition === 'safe' ? 'すでに乾いた場所にある' : choice.act === 'give_tissue' && state.environment.tissue !== 'player' ? '手元にティッシュがない' : '',
+    label: choice.act === 'observe' && state.environment.tissue === 'partner' ? (state.environment.notebook === 'wet' ? 'ノートの手当てを見守る' : '拭くのを見守る') : choice.act === 'give_space' && state.relationship.distance === 'away' ? '離れたままにする' : choice.label,
   }))
 }

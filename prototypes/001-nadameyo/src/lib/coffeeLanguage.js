@@ -1,5 +1,5 @@
 import { CHOICES, visibleScene } from './coffeeScene.js'
-export const COFFEE_PROMPT_VERSION = 'coffee-v2'
+export const COFFEE_PROMPT_VERSION = 'coffee-v3'
 export const COFFEE_SCHEMA = { type: 'object', additionalProperties: false, properties: {
   status: { type: 'string', enum: ['matched', 'uncertain', 'unsupported'] },
   act: { type: 'string', enum: [...CHOICES.map(x => x.act), 'clarify'] },
@@ -20,7 +20,7 @@ export function coffeeLanguageRequest(state, input) {
 }
 export function validateCoffeeRequest(value) {
   if (!value || typeof value.input !== 'string' || !value.input.trim() || value.input.length > 280) throw new Error('1〜280文字で入力してください。')
-  const keys = ['role', 'table', 'tissue', 'cause', 'injury', 'preference', 'consent']
+  const keys = ['role', 'table', 'tissue', 'cause', 'injury', 'preference', 'consent', 'notebook']
   if (!value.context || Object.keys(value.context).length !== keys.length || keys.some(k => typeof value.context[k] !== 'string' || value.context[k].length > 200)) throw new Error('既知情報の形式が不正です。')
   if (!Array.isArray(value.history) || value.history.length > 5 || value.history.some(x => !x || Object.keys(x).length !== 2 || typeof x.input !== 'string' || x.input.length > 280 || typeof x.reply !== 'string' || x.reply.length > 500)) throw new Error('履歴の形式が不正です。')
   return { input: value.input, context: value.context, history: value.history }
