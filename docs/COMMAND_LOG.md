@@ -625,3 +625,5 @@ git -c core.safecrlf=false diff --check
 - `git diff ccb005d -- src/lib/coffeeScene.js src/lib/coffeeRules.js src/lib/coffeeLanguage.js`（アプリ内）で更新規則に差分なし。
 
 判断: 場面選択は相手との関係だけでなく事故への関与を言葉にする。図は小さな縦方向の選択→反応へ分け、番号表を引く必要をなくす。規則の改善候補は今回は実装しない。
+
+保存・表示確認: d7fb99a（UI）、2aabcd1（図/文書）を作成し `git push -u origin codex/coffee-player-flow` 成功。GitHubで3入口・代表3詳細・共通続きの計58図が描画されることを確認。全298図の個別表示確認ではない。nodeで32ファイルの相対リンク切れ0を確認。Get-FileHashで再生成一致、git diff --check成功。詳細はCOFFEE_PLAYER_FLOW_REVIEW.md。
