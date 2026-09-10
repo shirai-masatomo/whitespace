@@ -7,3 +7,4 @@ dist/
 .vite-dev.*.log
 
 .local-llm/
+.tmp-docs/
