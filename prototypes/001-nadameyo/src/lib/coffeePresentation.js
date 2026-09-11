@@ -1,8 +1,8 @@
 // Entry copy only. The scene's facts and transition rules remain in coffeeScene.
 export const COFFEE_ENTRIES = {
-  A: { label: '後から来た友人', intro: '友人の席に着くと、コーヒーがこぼれていた。' },
-  B: { label: '近くの客', intro: '近くの席で、コーヒーがこぼれている。' },
-  C: { label: '居合わせた友人', intro: 'あなたがカップにぶつかり、友人のコーヒーがこぼれた。' },
+  A: { label: '後から来た友人', intro: '友人の席へ、あなたは今来たところだ。' },
+  B: { label: '近くの客', intro: 'あなたは近くの席の客。この人とは面識がない。' },
+  C: { label: '居合わせた友人', intro: 'あなたが友人のカップにぶつかった。' },
 }
 
 // Randomness selects only an authored setup; it never changes a response.

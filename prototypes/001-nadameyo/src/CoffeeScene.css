@@ -113,3 +113,19 @@
 .coffee-language .coffee-choices { display: flex !important; }
 .coffee-circumstances button { margin: 8px; font-size: 12px; }
 .coffee-revealed { font-size: 12px; color: #a8b6ac; }
+
+.coffee-encounter { margin: 24px 0 0; text-align: center; color: #b5bdb4; font-size: 13px; }
+.coffee-response .coffee-setting { text-align: left; margin: 0 0 10px; color: #bac5ba; }
+.coffee-action-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 14px; }
+.coffee-action-heading .coffee-action-prompt { margin: 0; }
+.coffee-inventory { margin: 0; display: flex; gap: 12px; align-items: baseline; font-size: 12px; }
+.coffee-inventory span { color: #95aa9c; font-size: 11px; }
+.coffee-inventory strong { color: #d9e0cf; font-weight: 400; }
+.coffee-history { padding: 8px 0 20px; }
+.coffee-history h2 { font-size: 15px; color: #d4ddd2; }
+.coffee-history ol { padding: 0; list-style: none; }
+.coffee-history p { margin: 5px 0; font-size: 13px; }
+.coffee-history .coffee-history-player { color: #a6b8ac; }
+.coffee-history .coffee-history-event { color: #959e92; font-size: 12px; padding-left: 12px; }
+.coffee-history .coffee-history-reply { color: #d7dfd2; }
+@media (max-width: 500px) { .coffee-encounter { text-align: left; font-size: 12px; } .coffee-action-heading { flex-wrap: wrap; gap: 6px; } }
