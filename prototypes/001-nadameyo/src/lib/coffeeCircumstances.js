@@ -18,7 +18,7 @@ export function circumstanceOpening(kind) {
 export function resolveCircumstanceRule(s, act) {
   const kind = s.partner.circumstance, e = s.environment, k = s.player.knowledge
   if (act === 'entrust') {
-    if (s.relationship.notebookConsent) return result('entrust-notebook', '任せるという返答を受け、本人が物を動かす', 'うん、じゃあ自分で移すね。', next => {
+    if (s.relationship.notebookConsent) return result('entrust-notebook', '任せるという返答を受け、本人が物を動かす', 'うん、自分で移すね。', next => {
       next.environment.notebookPosition = 'safe'; next.relationship.notebookConsent = false
       return { events: [event('move-notebook', '相手はノートを机の乾いた端へ移す。')] }
     })

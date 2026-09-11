@@ -14,7 +14,7 @@ export const CHOICES = [
   { act: 'offer_tissue', label: 'ティッシュいる？', kind: 'speech', target: 'tissue' },
   { act: 'listen', label: '話せる範囲で聞くよ', kind: 'speech', target: 'partner' },
   { act: 'acknowledge', label: '分かった', kind: 'speech', target: 'partner' },
-  { act: 'entrust', label: '移すのもお願いできる？', kind: 'speech', target: 'partner' },
+  { act: 'entrust', label: 'ノートはそっちで移してもらえる？', kind: 'speech', target: 'partner' },
   { act: 'move_notebook', label: 'ノートを乾いた場所へ移す', kind: 'action', target: 'notebook' },
   { act: 'give_tissue', label: 'ティッシュを差し出す', kind: 'action', target: 'tissue' },
   { act: 'give_space', label: 'そっとしておく', kind: 'action', target: 'partner' },

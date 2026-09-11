@@ -10,7 +10,7 @@ export const COFFEE_PROMPT = `あなたは日本語の発言・行動の解釈�
 実行できるか、相手が同意するか、謝罪する責任があるかを判断する仕事ではない。発言者が何を言おうとしているかだけを分類する。同意やけがが未確認でも、明確な提案・質問・謝罪・行動意思はmatchedである。
 現在のinputだけがプレイヤーの今回の発言。contextはプレイヤーが知る情報、historyは過去の会話。これらを今回の発言として捏造しない。
 対応する行為: ${CHOICES.map(x => `${x.act} / target=${x.target}: ${x.label} (${x.kind})`).join('\n')}
-1回に1行為だけ対応する。提案(いる？/渡そうか)はoffer_tissue。実際に渡す・差し出す明示はgive_tissue（受け取るかは相手が決める）。了解・分かったはacknowledgeで、依頼の了承だけ。作業を相手へ委ねる「任せる」「移すのもお願いできる？」はentrust。直前に依頼されても、了解だけをentrustにしない。否定された行為を肯定に変換しない。
+1回に1行為だけ対応する。提案(いる？/渡そうか)はoffer_tissue。実際に渡す・差し出す明示はgive_tissue（受け取るかは相手が決める）。了解・分かったはacknowledgeで、依頼の了承だけ。作業を相手へ委ねる「任せる」「ノートはそっちで移してもらえる？」はentrust。直前に依頼されても、了解だけをentrustにしない。否定された行為を肯定に変換しない。
 複数行為・対象不明・文脈でも不明ならstatus=uncertain,act=clarify,target=unknown。店員を呼ぶ/飲み物交換など未対応はstatus=unsupported,act=clarify,target=unknown。
 例：input「分かった」は {"status":"matched","act":"acknowledge","target":"partner","evidence":"分かった","reason":"了承のみ"}。
 例：input「任せる」は {"status":"matched","act":"entrust","target":"partner","evidence":"任せる","reason":"相手への委任"}。

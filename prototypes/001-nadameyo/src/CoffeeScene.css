@@ -16,10 +16,7 @@
 .coffee-tableau svg { display: block; width: 100%; max-height: 160px; }
 .table-spill { fill: #946238; stroke: #bc8c59; stroke-width: 1; opacity: .88; transition: opacity .65s ease; }
 .dry .table-spill { opacity: 0; }
-.table-tissue { transform: translate(166px, 135px); transition: transform .6s ease; }
-.partner .table-tissue, .used .table-tissue { transform: translate(491px, 49px); }
-.used .table-tissue { transform: translate(535px, 63px) rotate(12deg); }
-.coffee-object-caption { position: absolute; bottom: -7px; left: 20px; font-size: 11px; color: #bec7bd; }
+
 .wipe-trace { animation: coffee-wipe .9s ease forwards; }
 @keyframes coffee-wipe { from { stroke-dasharray: 0 350; opacity: .5; } to { stroke-dasharray: 350 350; opacity: 0; } }
 .coffee-response { min-height: 122px; padding: 15px 12px 8px; }
@@ -53,7 +50,7 @@
 .reduced * { transition: none !important; animation: none !important; }
 .reduced .wipe-trace { display: none; }
 @media (prefers-reduced-motion: reduce) { .coffee-set *, .coffee-tableau * { transition: none !important; animation: none !important; } .wipe-trace { display: none; } }
-@media (max-width: 700px) { .coffee-page { padding: 14px 16px 40px; } .coffee-set { height: 280px; } .coffee-set .character-stage { height: 245px; } .coffee-tableau svg { min-height: 90px; } .coffee-page h1 { font-size: 22px; } .coffee-controls { grid-template-columns: 1fr; gap: 15px; } .coffee-choices button { flex: 1 1 30%; } .coffee-response { min-height: 110px; padding: 14px 0 9px; } .coffee-response blockquote p { font-size: 18px; } .coffee-object-caption { left: 5px; font-size: 10px; } .coffee-setting { font-size: 12px; } }
+@media (max-width: 700px) { .coffee-page { padding: 14px 16px 40px; } .coffee-set { height: 280px; } .coffee-set .character-stage { height: 245px; } .coffee-tableau svg { min-height: 90px; } .coffee-page h1 { font-size: 22px; } .coffee-controls { grid-template-columns: 1fr; gap: 15px; } .coffee-choices button { flex: 1 1 30%; } .coffee-response { min-height: 110px; padding: 14px 0 9px; } .coffee-response blockquote p { font-size: 18px; }  .coffee-setting { font-size: 12px; } }
 .workspace-nav:has(a[href="#coffee"][aria-current="page"]) span { display: none; }
 .coffee-response { min-height: 94px; }
 @media (max-height: 700px) { .coffee-set { height: 210px; } .coffee-set .character-stage { height: 205px; } .coffee-tableau svg { max-height: 100px; } .coffee-response { min-height: 82px; } }
@@ -77,11 +74,7 @@
 .table-notebook { transform: translate(453px, 90px) rotate(-8deg); transition: transform .6s ease; }
 .table-notebook.safe { transform: translate(609px, 46px) rotate(7deg); }
 
-
 @media (max-width: 700px) { .coffee-controls button[data-act="move_notebook"] { flex-basis: 100%; } }
-
-.coffee-other-lines { margin-top: 10px; font-size: 12px; }
-.coffee-other-lines .coffee-choices { margin-top: 8px; }
 
 @media (max-width: 700px) { .coffee-controls > div:first-child > .coffee-choices { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 .coffee-settings { margin: 18px 0 22px; padding: 12px 0; border-block: 1px solid #65776740; font-size: 12px; }
@@ -113,3 +106,10 @@
   .coffee-action-sequence { grid-template-columns: 1fr; gap: 8px; }
   .coffee-response { padding-inline: 4px; }
 }
+
+.coffee-controls .coffee-language { margin-top: 14px; padding-top: 12px; border-top: 1px solid #526b5855; font-size: 12px; }
+.coffee-controls .coffee-language summary small { display: inline; margin-left: 8px; font-size: 10px; color: #88988e; }
+.coffee-language p { color: #a8b6ac; margin: 10px 0; }
+.coffee-language .coffee-choices { display: flex !important; }
+.coffee-circumstances button { margin: 8px; font-size: 12px; }
+.coffee-revealed { font-size: 12px; color: #a8b6ac; }
