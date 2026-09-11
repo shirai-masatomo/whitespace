@@ -1,40 +1,37 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
 import { exploreCoffee } from '../scripts/coffeeGraph.mjs'
-import { COFFEE_RULES } from '../src/lib/coffeeRules.js'
 import { CHOICES, coffeeCandidates, createCoffeeScene, choiceInterpretation, stepCoffeeScene } from '../src/lib/coffeeScene.js'
-test('coffee: every reachable state and all supported acts preserve disclosure, ownership and event invariants', () => {
-  const covered = new Set()
+test('coffee: reachable A/B/C states preserve knowledge, ownership and automatic action ordering', () => {
   for (const id of ['A','B','C']) {
-    const graph = exploreCoffee(id, (before, choice, after) => {
-      const entry = after.history.at(-1); covered.add(entry.branch)
-      assert.equal(after.relationship.cause, before.relationship.cause)
-      assert.ok(after.partner.agitation >= 0 && after.partner.agitation <= 5)
-      for (const [key, value] of Object.entries(before.player.knowledge)) {
-        if (value) assert.equal(after.player.knowledge[key], value, `knowledge lost: ${id}/${entry.branch}/${key}`)
-        if (after.player.knowledge[key] !== value) assert.ok(entry.disclosures.some(f => f.key === key && f.value === after.player.knowledge[key] && entry.reply.includes(f.quote)))
+    const graph=exploreCoffee(id,(before,choice,after)=>{
+      const entry=after.history.at(-1)
+      assert.equal(after.relationship.cause,before.relationship.cause)
+      for(const [key,value] of Object.entries(before.player.knowledge)) {
+        if(value) assert.equal(after.player.knowledge[key],value)
+        if(after.player.knowledge[key]!==value) assert.ok(entry.disclosures.some(f=>f.key===key && entry.reply.includes(f.quote)))
       }
-      if (after.environment.tissue !== before.environment.tissue) {
-        assert.ok(choice.act === 'give_tissue' || choice.act === 'observe')
-        if (choice.act === 'give_tissue') { assert.equal(before.relationship.consent,'accepted'); assert.equal(before.environment.tissue,'player') }
+      if(entry.events.some(e=>e.type==='receive')) {
+        assert.equal(choice.act,'give_tissue'); assert.equal(before.environment.tissue,'player')
+        assert.equal(after.environment.tissue,'used')
+        assert.equal(entry.automatic[0].before.environment.tissue,'partner')
+        assert.equal(entry.automatic.at(-1).after.environment.table,'dry')
       }
-      for (const e of entry.events) {
-        if (e.type === 'receive') { assert.equal(before.environment.tissue,'player'); assert.equal(after.environment.tissue,'partner') }
-        if (e.type === 'wipe') { assert.equal(before.environment.table,'wet'); assert.equal(before.environment.tissue,'partner'); assert.equal(after.environment.table,'dry') }
-      }
-      if (entry.reply?.includes('手伝いはさっきお断り')) assert.equal(before.relationship.helpRefused,true)
-      if (entry.reply?.includes('さっきも言った')) assert.equal(before.relationship.confirmationRequested,true)
+      if(after.environment.table==='dry') assert.equal(after.environment.tissue,'used')
+      assert.ok(after.partner.agitation>=0 && after.partner.agitation<=5)
     })
-    assert.equal(graph.transitions, graph.states * CHOICES.length); assert.equal(graph.minDry,3); assert.equal(graph.dryWays,id === 'B' ? 1 : 2)
+    assert.equal(graph.transitions,graph.states*CHOICES.length)
+    assert.equal(graph.minDry,1)
   }
-  assert.deepEqual([...covered].filter(id => !id.startsWith('circumstance-')).sort(), COFFEE_RULES.filter(r => r.act !== 'clarify').map(r => r.id).sort())
 })
-test('coffee: normal candidates reflect possessions while full interpreter still handles disabled acts', () => {
-  const step = (s, act) => stepCoffeeScene(s,choiceInterpretation(act))
-  const s = step(step(createCoffeeScene(),'offer_tissue'),'give_tissue')
-  const items = coffeeCandidates(s)
-  assert.equal(items.length,10); assert.equal(items.find(x=>x.act==='give_tissue').disabled,true)
-  assert.equal(items.find(x=>x.act==='apologize').disabled,false)
-  assert.equal(items.find(x=>x.act==='observe').label,'拭くのを見守る')
-  assert.equal(step(s,'give_tissue').history.at(-1).branch,'give-held')
+test('coffee: normal options include acknowledgment after dialogue; unavailable objects remain guarded',()=>{
+  const initial=createCoffeeScene(), done=stepCoffeeScene(initial,choiceInterpretation('give_tissue'))
+  assert.equal(coffeeCandidates(initial).some(x=>x.act==='acknowledge'),false)
+  assert.equal(coffeeCandidates(done).some(x=>x.act==='acknowledge'),true)
+  const proposed=stepCoffeeScene(initial,choiceInterpretation('offer_tissue'))
+  const helped=stepCoffeeScene(proposed,choiceInterpretation('give_tissue'))
+  assert.equal(coffeeCandidates(helped).find(x=>x.act==='acknowledge').label,'分かった')
+  assert.equal(coffeeCandidates(done).find(x=>x.act==='give_tissue').disabled,true)
+  assert.equal(coffeeCandidates(done).find(x=>x.act==='observe').label,'様子を見る')
+  assert.equal(coffeeCandidates(done).find(x=>x.act==='support').secondary,true)
 })

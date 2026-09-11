@@ -7,7 +7,8 @@ export const CIRCUMSTANCES = {
 }
 const fact = (key, value, quote) => ({ key, value, quote })
 const event = (type, text, actor = 'partner') => ({ actor, type, text })
-const result = (id, guard, speech, effect = () => ({})) => ({ id: `circumstance-${id}`, guard, speech, effect })
+const result = (id, guard, speech, effect = () => ({}), wishes = []) => ({ id: `circumstance-${id}`, guard, speech, effect, wishes })
+const wish = (topic, quote) => ({ topic, quote, text: `「${quote}」と聞いた` })
 const calm = s => { s.partner.agitation = Math.max(0, s.partner.agitation - 1) }
 
 export function circumstanceOpening(kind) {
@@ -16,6 +17,13 @@ export function circumstanceOpening(kind) {
 
 export function resolveCircumstanceRule(s, act) {
   const kind = s.partner.circumstance, e = s.environment, k = s.player.knowledge
+  if (act === 'acknowledge') {
+    if (s.relationship.notebookConsent) return result('ack-notebook', '任せるという返答を受け、本人が物を動かす', 'うん、じゃあ自分で移すね。', next => {
+      next.environment.notebookPosition = 'safe'; next.relationship.notebookConsent = false
+      return { events: [event('move-notebook', '相手はノートを机の乾いた端へ移す。')] }
+    })
+    return result('ack', '了解だけで物や気持ちを解決したことにはしない', s.relationship.type === 'stranger' ? 'ありがとうございます。' : s.memory.listened ? 'うん。聞いてくれてありがとう。少し休むよ。' : e.table === 'dry' ? 'うん、ありがとう。' : 'うん。', () => ({}))
+  }
   if (act === 'move_notebook') {
     if (e.notebook === 'absent') return result('no-notebook', 'ノートはこの場にない', 'どのノートのこと？')
     if (e.notebookPosition === 'safe') return result('notebook-safe', 'ノートは既に乾いた場所にある', 'そこなら、もうコーヒーはつかないね。')
@@ -31,22 +39,30 @@ export function resolveCircumstanceRule(s, act) {
       const speech = `${k.cause ? 'さっきのコーヒーで' : '自分でこぼして'}、${repeat ? 'あの' : '大事な'}ノートが濡れたんだ。${e.notebook === 'blotted' ? '水気は取れたけど、染みは残りそう。' : '書いたものが消えないか気になって。'}`
       return result('notebook-ask', '原因とノートへの関心を、現在の物の状態に合わせて開示', speech, () => ({ facts: [fact('cause', 'partner', k.cause ? 'さっきのコーヒー' : '自分でこぼして'), fact('notebook', true, 'ノートが濡れた')] }))
     }
+    if (act === 'check_wellbeing' && k.injury) return result('notebook-well-again', 'けががないことは共有済み。心配の対象はノート', e.notebook === 'wet' ? 'うん、けがはないよ。今はノートの方が心配。' : 'けがはないよ。ノートの染みが気になるだけ。')
     if (act === 'check_wellbeing') return result('notebook-well', 'けがとノートへの心配を区別', `けがはないよ。${e.notebook === 'blotted' ? 'でも、大事なノートの染みが気になる。' : 'それより、大事なノートが濡れちゃって。'}`, () => ({ facts: [fact('injury', 'none', 'けがはない'), fact('notebook', true, '大事なノート')] }))
-    if (act === 'offer_help' && e.notebookPosition === 'spill') return result('notebook-help', '机よりノートの退避を頼む。紙の受取同意とは別', s.relationship.notebookConsent ? 'うん、ノートを乾いた端へお願い。' : 'ノートを乾いた端へ移してもらえる？ 紙で押さえるのは自分でやる。', next => { next.relationship.notebookConsent = true; return {} })
+    if (act === 'offer_help' && e.notebookPosition === 'spill') {
+      const request = 'ノートを乾いた端へ移してもらえる？'
+      return result('notebook-help', 'ノートの退避を頼む。大切さや背景はまだ説明していない', s.relationship.notebookConsent ? 'さっきお願いしたノートを、乾いた端へ。' : request + ' 紙で押さえるのは自分でやる。', next => { next.relationship.notebookConsent = true; return {} }, s.relationship.notebookConsent ? [] : [wish('move', request), wish('selfCare', '紙で押さえるのは自分でやる')])
+    }
     const alreadyAccepted = s.relationship.consent === 'accepted'
-    if (act === 'offer_tissue' && e.tissue === 'player') return result('notebook-paper', 'ノートの水気を取る紙を受諾', s.relationship.consent === 'accepted' ? 'うん、その紙をお願い。' : 'うん、ティッシュがほしい。まずノートの水気を取りたい。', next => { next.relationship.consent = 'accepted'; return alreadyAccepted ? {} : { facts: [fact('tissue', true, 'ティッシュがほしい')] } })
+    if (act === 'offer_tissue' && e.tissue === 'player') return result('notebook-paper', 'ノートの水気を取る紙を受諾', s.relationship.consent === 'accepted' ? 'うん、その紙をお願い。' : 'うん、ティッシュがほしい。まずノートの水気を取りたい。', next => { next.relationship.consent = 'accepted'; return alreadyAccepted ? {} : { facts: [fact('tissue', true, 'ティッシュがほしい')] } }, alreadyAccepted ? [] : [wish('blot', 'まずノートの水気を取りたい')])
     if (act === 'observe' && e.tissue === 'partner' && e.notebook === 'wet') return result('notebook-blot', '先にノートを保護。机はまだ濡れたまま', 'こすらずに押さえてみるね。', next => {
       const events = []
       if (e.notebookPosition === 'spill') events.push(event('move-notebook', '相手はノートを机の乾いた端へ移す。'))
       next.environment.notebookPosition = 'safe'; next.relationship.notebookConsent = false; next.environment.notebook = 'blotted'; calm(next)
-      events.push(event('blot', '相手はティッシュの一部でノートの水気を吸い取る。ページには染みが残る。'))
+      events.push(event('blot', '相手は紙の一部で、ノートの水気を取る。'))
       return { events, reaction: 'recovery' }
     })
-    if (act === 'observe' && e.tissue === 'partner') return result('notebook-table', 'ノートの処置後、紙の未使用部分で机を拭く', '机は拭けたね。ノートは、あとで乾かしてみる。', next => { next.environment.table = 'dry'; next.environment.tissue = 'used'; next.partner.concern = 'notebook_stain'; calm(next); return { events: [event('wipe', '相手はティッシュの未使用部分で机を拭く。ノートの染みは残っている。')], reaction: 'recovery' } })
-    if (act === 'support' || act === 'listen') return result('notebook-support', '気持ちは受け止めつつ関心はノートにある', e.notebook === 'wet' ? 'ありがとう。今はノートの水気を先に取りたい。' : 'ありがとう。書いたものが読めるか、乾いてから確かめたい。')
+    if (act === 'observe' && e.tissue === 'partner') return result('notebook-table', 'ノートの処置後、紙の未使用部分で机を拭く', 'ありがとう。染みは残っちゃったね。', next => { next.environment.table = 'dry'; next.environment.tissue = 'used'; next.partner.concern = 'notebook_stain'; calm(next); return { events: [event('wipe', '続けて、紙の未使用部分で机を拭く。ノートには染みが残る。')], reaction: 'recovery' } })
+    if (act === 'support' || act === 'listen') {
+      const request = e.notebook === 'wet' ? '今はノートの水気を先に取りたい' : '書いたものが読めるか、乾いてから確かめたい'
+      return result('notebook-support', '具体的に話した希望だけを記録。大切さや背景を推測で補わない', 'ありがとう。' + request + '。', () => ({}), [wish(e.notebook === 'wet' ? 'blot' : 'read', request)])
+    }
     if (act === 'observe') return result('notebook-observe', '見えるノートの状態を伝える', null, () => ({ events: [event('observe', e.notebook === 'wet' ? '相手の視線は、濡れたノートに戻る。' : '相手は染みの残ったページをそっと開いている。')] }))
   }
   if (kind === 'bad_day') {
+    if (act === 'ask_event' && k.argument) return result('day-known-story', '既に具体的な出来事を共有済み', k.cause ? 'さっき話した、友人との言い合いのことがまだ気になってる。' : 'コーヒーは自分でこぼしたんだ。さっき話した言い合いのことが頭から離れなくて。', () => k.cause ? {} : ({ facts: [fact('cause', 'partner', '自分でこぼした')] }))
     if (act === 'ask_event' || act === 'check_wellbeing') {
       const speech = act === 'ask_event' ? `${k.cause ? 'コーヒーは自分でこぼしたんだ。' : '自分でこぼしちゃって。'}${k.burden ? 'さっき話した通り、今日はほかにもあって。' : '今日はほかにも嫌なことが重なって、ため息が出ちゃった。'}` : `けがはないよ。${k.burden ? 'でも、今日のことがまだ引っかかってる。' : '今日は嫌なことが重なって、ちょっとしんどい。'}`
       return result('day-question', 'けがや事故だけでなく、別の困り事があると開示', speech, () => ({ facts: [act === 'ask_event' ? fact('cause', 'partner', '自分でこぼし') : fact('injury', 'none', 'けがはない'), fact('burden', true, k.burden ? (act === 'ask_event' ? 'ほかにもあって' : '今日のこと') : '嫌なことが重なって')] }))

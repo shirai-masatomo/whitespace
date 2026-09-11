@@ -1,7 +1,7 @@
 import { resolveCircumstanceRule } from './coffeeCircumstances.js'
 // Rules are ordered per act. A stable branch ID joins runtime, tests and review maps.
 // Disclosures carry the exact spoken evidence; private preferences are never copied.
-const rule = (id, act, guard, when, speech, effect = () => ({})) => ({ id, act, guard, when, speech, effect })
+const rule = (id, act, guard, when, speech, effect = () => ({}), wishes = []) => ({ id, act, guard, when, speech, effect, wishes })
 const dry = s => s.environment.table === 'dry'
 const held = s => s.environment.tissue === 'partner'
 const quiet = s => s.partner.preference === 'quiet'
@@ -37,12 +37,10 @@ export const COFFEE_RULES = [
   ]),
   rule('give-used', 'give_tissue', 'ティッシュは使用済み', dry, 'もう使わせてもらったよ。'),
   rule('give-held', 'give_tissue', '相手が既に所持', held, 'もうもらったよ。ありがとう。'),
-  rule('give-accepted', 'give_tissue', '主人公所持・同意あり', s => s.relationship.consent === 'accepted', 'ありがとう、助かる。', s => { s.environment.tissue = 'partner'; s.relationship.consent = 'fulfilled'; calm(s); return { reaction: 'recovery', events: [event('player', 'handover', 'あなたはティッシュを差し出す。'), event('partner', 'receive', '相手はティッシュを受け取る。')] } }),
-  rule('give-after-refusal', 'give_tissue', '同意なし・援助を実際に断った履歴あり', s => s.relationship.helpRefused, '手伝いはさっきお断りしました。ティッシュだけか、先に聞いてもらえますか。', s => { s.relationship.confirmationRequested = true; s.partner.agitation = Math.min(5, s.partner.agitation + 1); return { reaction: 'uncertain', events: [event('player', 'attempt', 'あなたはティッシュを渡そうとするが、手元に戻す。')] } }),
-  rule('give-after-check', 'give_tissue', '同意なし・事前確認を既に要求', s => s.relationship.confirmationRequested, 'さっきも言ったけど、渡す前に聞いてもらえる？', s => { s.partner.agitation = Math.min(5, s.partner.agitation + 1); return { reaction: 'uncertain', events: [event('player', 'attempt', 'あなたはティッシュを持った手を引っ込める。')] } }),
-  rule('give-no-consent', 'give_tissue', '同意なし・拒否も確認要求もなし', () => true, '待って。渡す前に、必要か聞いてもらえる？', s => { s.relationship.confirmationRequested = true; s.partner.agitation = Math.min(5, s.partner.agitation + 1); return { reaction: 'uncertain', events: [event('player', 'attempt', 'あなたはティッシュを渡そうとして、手を止める。')] } }),
+  rule('give-space-refusal', 'give_tissue', '他人・一度距離を取り・再提案なし', s => quiet(s) && s.relationship.distance === 'away' && s.relationship.consent !== 'accepted', '今は、そっとしておいてください。', () => { return { events: [event('player', 'offer-paper', 'あなたは紙を差し出すが、相手は手を伸ばさない。')] } }, [{ topic: 'space', quote: 'そっとしておいてください', text: '「そっとしておいてください」と聞いた' }]),
+  rule('give-offered', 'give_tissue', '相手が差し出された紙を自分の意思で受け取る', () => true, 'ありがとう、助かる。', s => { s.environment.tissue = 'partner'; s.relationship.consent = 'fulfilled'; calm(s); return { reaction: 'recovery', events: [event('player', 'offer-paper', 'あなたはティッシュを差し出す。'), event('partner', 'receive', '相手は手を伸ばし、紙を受け取る。')] } }),
   rule('space-again', 'give_space', '既に距離を取っている', s => s.relationship.distance === 'away', null, () => ({ events: [event('player', 'stay-away', 'あなたは少し離れたまま、そっとしておく。')] })),
-  rule('space-first', 'give_space', '近くにいる', () => true, 'ありがとう。少し落ち着きたい。', s => { s.relationship.distance = 'away'; if (s.environment.tissue === 'player') s.relationship.consent = 'withdrawn'; if (!s.memory.spaceCalmed) calm(s); s.memory.spaceCalmed = true; return { events: [event('player', 'step-back', 'あなたは一歩下がる。')] } }),
+  rule('space-first', 'give_space', '近くにいる', () => true, 'ありがとう。少し落ち着きたい。', s => { s.relationship.distance = 'away'; if (s.environment.tissue === 'player') s.relationship.consent = 'withdrawn'; if (!s.memory.spaceCalmed) calm(s); s.memory.spaceCalmed = true; return { events: [event('player', 'step-back', 'あなたは一歩下がる。')] } }, [{ topic: 'rest', quote: '少し落ち着きたい', text: '「少し落ち着きたい」と聞いた' }]),
   rule('observe-clean', 'observe', '相手がティッシュ所持・机が濡れている', held, 'これで大丈夫。ありがとう。', s => { s.environment.table = 'dry'; s.environment.tissue = 'used'; s.partner.concern = 'resolved'; calm(s); return { reaction: 'recovery', events: [event('partner', 'wipe', '相手はティッシュで机のコーヒーを拭き取る。')] } }),
   rule('observe-dry', 'observe', '机が乾いている', dry, null, () => ({ events: [event('scene', 'observe', '机には拭いた跡と、使い終えたティッシュが残っている。')] })),
   rule('observe-wet', 'observe', '主人公がティッシュ所持・机が濡れている', () => true, null, () => ({ events: [event('scene', 'observe', 'こぼれたコーヒーが、机の上に溜まっている。')] })),

@@ -1,5 +1,5 @@
 import { CHOICES, visibleScene } from './coffeeScene.js'
-export const COFFEE_PROMPT_VERSION = 'coffee-v3'
+export const COFFEE_PROMPT_VERSION = 'coffee-v4'
 export const COFFEE_SCHEMA = { type: 'object', additionalProperties: false, properties: {
   status: { type: 'string', enum: ['matched', 'uncertain', 'unsupported'] },
   act: { type: 'string', enum: [...CHOICES.map(x => x.act), 'clarify'] },
@@ -10,7 +10,7 @@ export const COFFEE_PROMPT = `あなたは日本語の発言・行動の解釈�
 実行できるか、相手が同意するか、謝罪する責任があるかを判断する仕事ではない。発言者が何を言おうとしているかだけを分類する。同意やけがが未確認でも、明確な提案・質問・謝罪・行動意思はmatchedである。
 現在のinputだけがプレイヤーの今回の発言。contextはプレイヤーが知る情報、historyは過去の会話。これらを今回の発言として捏造しない。
 対応する行為: ${CHOICES.map(x => `${x.act} / target=${x.target}: ${x.label} (${x.kind})`).join('\n')}
-1回に1行為だけ対応する。提案(いる？/渡そうか)はoffer_tissue。実際に渡す明示はgive_tissue。否定された行為を肯定に変換しない。
+1回に1行為だけ対応する。提案(いる？/渡そうか)はoffer_tissue。実際に渡す・差し出す明示はgive_tissue（受け取るかは相手が決める）。了解・任せるはacknowledge。否定された行為を肯定に変換しない。
 複数行為・対象不明・文脈でも不明ならstatus=uncertain,act=clarify,target=unknown。店員を呼ぶ/飲み物交換など未対応はstatus=unsupported,act=clarify,target=unknown。
 例：input「すまない」は {"status":"matched","act":"apologize","target":"incident","evidence":"すまない","reason":"謝罪の発言"}。
 例：input「紙を渡そうか」は対象が曖昧なら {"status":"uncertain","act":"clarify","target":"unknown","evidence":"紙","reason":"何の紙か不明"}。
@@ -21,7 +21,7 @@ export function coffeeLanguageRequest(state, input) {
 export function validateCoffeeRequest(value) {
   if (!value || typeof value.input !== 'string' || !value.input.trim() || value.input.length > 280) throw new Error('1〜280文字で入力してください。')
   const keys = ['role', 'table', 'tissue', 'cause', 'injury', 'preference', 'consent', 'notebook']
-  if (!value.context || Object.keys(value.context).length !== keys.length || keys.some(k => typeof value.context[k] !== 'string' || value.context[k].length > 200)) throw new Error('既知情報の形式が不正です。')
+  if (!value.context || Object.keys(value.context).length !== keys.length || keys.some(k => typeof value.context[k] !== 'string' || value.context[k].length > 600)) throw new Error('既知情報の形式が不正です。')
   if (!Array.isArray(value.history) || value.history.length > 5 || value.history.some(x => !x || Object.keys(x).length !== 2 || typeof x.input !== 'string' || x.input.length > 280 || typeof x.reply !== 'string' || x.reply.length > 500)) throw new Error('履歴の形式が不正です。')
   return { input: value.input, context: value.context, history: value.history }
 }

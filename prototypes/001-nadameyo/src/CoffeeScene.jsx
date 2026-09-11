@@ -39,10 +39,10 @@ export default function CoffeeScene() {
       <div className={`coffee-set ${scene.relationship.distance} ${reduced ? 'reduced' : ''}`}><Character key={round} displayState={coffeeCharacter(scene)} manualReduced={reduced} onReducedChange={setReduced} /><CoffeeTable scene={scene} reduced={reduced} /></div>
       <section className="coffee-response" aria-label="最新のやり取り" aria-live="polite">
         {last && <p className="coffee-your-line">あなた{last.kind === 'speech' ? '：「' + last.input + '」' : ' · ' + last.input}</p>}
-        <div className="coffee-stage-directions">{scene.events.map((event, index) => <p key={index}><span>{actorName(event.actor)}</span>{event.text}</p>)}</div>
+        <div className="coffee-stage-directions">{scene.events.filter(event => event.type !== 'offer-paper' || !scene.events.some(e => e.type === 'receive')).map((event, index) => <p key={index}><span>{actorName(event.actor)}</span>{event.text}</p>)}</div>
         {scene.reply && <blockquote><span>{scene.relationship.type === 'friend' ? '友人' : '近くの席の人'}</span><p>「{scene.reply}」</p></blockquote>}
       </section>
-      <section className="coffee-controls" aria-label="発言と行動"><div><h2>声をかける</h2><div className="coffee-choices">{candidates.filter(x => x.kind === 'speech').map(x => <button key={x.act} data-act={x.act} onClick={() => apply(choiceInterpretation(x.act), x.label)}>{x.label}</button>)}</div></div>
+      <section className="coffee-controls" aria-label="発言と行動"><div><h2>声をかける</h2><div className="coffee-choices">{candidates.filter(x => x.kind === 'speech' && !x.secondary).map(x => <button key={x.act} data-act={x.act} onClick={() => apply(choiceInterpretation(x.act), x.label)}>{x.label}</button>)}</div><details className="coffee-other-lines"><summary>ほかの言い方</summary><div className="coffee-choices">{candidates.filter(x => x.secondary).map(x => <button key={x.act} onClick={() => apply(choiceInterpretation(x.act), x.label)}>{x.label}</button>)}</div></details></div>
         <div><h2>動く</h2><div className="coffee-choices actions">{candidates.filter(x => x.kind === 'action').map(x => <button key={x.act} data-act={x.act} className="secondary" disabled={x.disabled} title={x.note || undefined} onClick={() => apply(choiceInterpretation(x.act), x.label)}>{x.label}{x.note && <small>{x.note}</small>}</button>)}</div></div>
       </section>
     </div>
@@ -56,7 +56,7 @@ export default function CoffeeScene() {
       </details>
       <details className="coffee-lab"><summary>操作と内部情報を検証する</summary><p>現在の条件：{CONDITIONS[scene.condition].label}。通常画面は手元にない物の操作を無効にしますが、対応行為は変わりません。</p>
         <details><summary>全{CHOICES.length}操作を試す（繰り返し・不適切な順番も含む）</summary><div className="coffee-choices">{CHOICES.map(x => <button className="secondary" key={x.act} onClick={() => apply(choiceInterpretation(x.act), x.label, false)}>検証：{x.label}</button>)}</div></details>
-        {import.meta.env.DEV && <details className="coffee-debug"><summary>内部情報・判断理由（未開示の事実を含む）</summary><p>{scene.reason}</p><pre>{JSON.stringify(sceneSnapshot(scene), null, 2)}</pre>{last && <><h3>分岐・解釈・開示の根拠・変更前後</h3><pre>{JSON.stringify({ branch: last.branch, interpretation: last.interpretation, disclosures: last.disclosures, changes: last.changes, before: last.before, after: last.after }, null, 2)}</pre></>}</details>}
+        {import.meta.env.DEV && <details className="coffee-debug"><summary>内部情報・判断理由（未開示の事実を含む）</summary><p>{scene.reason}</p><pre>{JSON.stringify(sceneSnapshot(scene), null, 2)}</pre>{last && <><h3>分岐・解釈・開示の根拠・変更前後</h3><pre>{JSON.stringify({ branch: last.branch, interpretation: last.interpretation, disclosures: last.disclosures, wishes: last.wishes, automatic: last.automatic, changes: last.changes, before: last.before, after: last.after }, null, 2)}</pre></>}</details>}
       </details>
     </div>
   </main>

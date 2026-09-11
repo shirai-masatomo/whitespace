@@ -77,5 +77,10 @@
 .table-notebook { transform: translate(453px, 90px) rotate(-8deg); transition: transform .6s ease; }
 .table-notebook.safe { transform: translate(609px, 46px) rotate(7deg); }
 
-.coffee-controls button[data-act="listen"] { grid-column: 1 / -1; }
+
 @media (max-width: 700px) { .coffee-controls button[data-act="move_notebook"] { flex-basis: 100%; } }
+
+.coffee-other-lines { margin-top: 10px; font-size: 12px; }
+.coffee-other-lines .coffee-choices { margin-top: 8px; }
+
+@media (max-width: 700px) { .coffee-controls > div:first-child > .coffee-choices { grid-template-columns: repeat(2, minmax(0, 1fr)); } }

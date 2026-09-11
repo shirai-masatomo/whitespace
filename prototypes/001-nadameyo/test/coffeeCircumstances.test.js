@@ -9,7 +9,7 @@ test('circumstances: same words change concern, requested help, and subsequent a
   const clean = run('cleanup', ['offer_help']), book = run('notebook', ['offer_help'])
   assert.equal(clean.relationship.consent, 'accepted')
   assert.equal(book.relationship.consent, 'none'); assert.equal(book.relationship.notebookConsent, true)
-  assert.equal(step(book, 'give_tissue').environment.tissue, 'player')
+  assert.equal(step(book, 'give_tissue').environment.tissue, 'used')
   assert.equal(step(book, 'move_notebook').environment.notebookPosition, 'safe')
   const day = run('bad_day', ['support'])
   assert.equal(day.player.knowledge.listen, true); assert.equal(day.player.knowledge.argument, false)
@@ -28,12 +28,12 @@ test('circumstances: initial visible information excludes private concern and ca
 })
 
 test('circumstances: physical care and residual concerns are independent', () => {
-  const sequence = ['offer_tissue','give_tissue','observe']
+  const sequence = ['offer_tissue','give_tissue']
   const clean = run('cleanup',sequence), book = run('notebook',sequence), day = run('bad_day',sequence)
   assert.equal(clean.partner.concern,'resolved')
-  assert.equal(book.environment.notebook,'blotted'); assert.equal(book.environment.table,'wet')
+  assert.equal(book.environment.notebook,'blotted'); assert.equal(book.environment.table,'dry')
   assert.equal(book.environment.notebookPosition,'safe')
-  assert.match(visibleScene(book).tissue,/一部をノートに使用/); assert.doesNotMatch(visibleScene(book).tissue,/まだ使っていない/)
+  assert.match(visibleScene(book).tissue,/使用済み/); assert.equal(book.history.at(-1).automatic[0].after.environment.table,'wet')
   const done = step(book,'observe')
   assert.equal(done.environment.table,'dry'); assert.equal(done.partner.concern,'notebook_stain')
   assert.equal(day.environment.table,'dry'); assert.equal(day.partner.concern,'bad_day')
@@ -83,10 +83,49 @@ test('circumstances: seeded mixed sequences preserve facts, evidence, ownership 
       for(const [key,value] of Object.entries(previous.player.knowledge)) if(value) assert.equal(s.player.knowledge[key],value)
       if(s.environment.table==='dry') { assert.equal(s.environment.tissue,'used'); if(kind==='notebook') assert.equal(s.environment.notebook,'blotted') }
       if(previous.environment.notebookPosition==='safe') assert.equal(s.environment.notebookPosition,'safe')
-      if(entry.events.some(e=>e.type==='receive')) { assert.equal(previous.relationship.consent,'accepted'); assert.equal(s.environment.tissue,'partner') }
+      if(entry.events.some(e=>e.type==='receive')) { assert.equal(previous.environment.tissue,'player'); assert.equal(s.environment.tissue,'used') }
       if(entry.events.some(e=>e.actor==='player' && e.type==='move-notebook')) assert.equal(previous.relationship.notebookConsent,true)
       assert.ok(s.partner.agitation>=0 && s.partner.agitation<=5)
       assert.deepEqual(validateCoffeeRequest(coffeeLanguageRequest(s,'どうしたの？')).input,'どうしたの？')
     }
   }
+})
+
+test('circumstances: wishes retain exact spoken evidence, without inferring importance or background', () => {
+  const support=run('notebook',['support']), help=run('notebook',['offer_help']), paper=run('notebook',['offer_tissue'])
+  for(const s of [support,help,paper]) {
+    assert.equal(s.player.knowledge.notebook,false)
+    assert.doesNotMatch(visibleScene(s).preference,/大事な|まだ聞いていない/)
+    for(const w of s.player.wishes) assert.ok(s.reply.includes(w.quote))
+  }
+  assert.match(visibleScene(support).preference,/水気を先に取りたい/)
+  assert.match(visibleScene(help).preference,/乾いた端へ移して/)
+  const learned=step(support,'ask_event')
+  assert.equal(learned.player.knowledge.notebook,true)
+  assert.match(visibleScene(learned).preference,/大事な/)
+  assert.deepEqual(step(support,'support').player.wishes,support.player.wishes)
+})
+
+test('circumstances: paper is not permission to touch the notebook; entrusting permits the owner to move it', () => {
+  const untouched=run('notebook',['move_notebook'])
+  assert.equal(untouched.environment.notebookPosition,'spill')
+  const requested=run('notebook',['offer_help'])
+  const entrusted=step(requested,'acknowledge')
+  assert.equal(entrusted.environment.notebookPosition,'safe')
+  assert.equal(entrusted.environment.table,'wet'); assert.equal(entrusted.environment.notebook,'wet')
+  assert.deepEqual(entrusted.events.map(e=>[e.actor,e.type]),[['partner','move-notebook']])
+  const direct=run('notebook',['give_tissue'])
+  assert.deepEqual(direct.events.map(e=>e.type),['offer-paper','receive','move-notebook','blot','wipe'])
+  assert.equal(direct.player.knowledge.notebook,false)
+  assert.equal(direct.history.length,1)
+})
+
+test('circumstances: concrete disclosure never rewinds to vague undisclosed circumstances', () => {
+  const heard=run('bad_day',['listen']), again=step(heard,'ask_event')
+  assert.match(again.reply,/言い合い/)
+  assert.equal(again.player.knowledge.argument,true)
+  assert.equal(step(heard,'acknowledge').memory.listened,true)
+  const cleaned=run('bad_day',['give_tissue'])
+  assert.equal(cleaned.partner.concern,'bad_day')
+  assert.match(step(cleaned,'offer_help').reply,/話を聞いて/)
 })
