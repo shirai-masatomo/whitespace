@@ -110,7 +110,7 @@ test('circumstances: paper is not permission to touch the notebook; entrusting p
   const untouched=run('notebook',['move_notebook'])
   assert.equal(untouched.environment.notebookPosition,'spill')
   const requested=run('notebook',['offer_help'])
-  const entrusted=step(requested,'acknowledge')
+  const entrusted=step(requested,'entrust')
   assert.equal(entrusted.environment.notebookPosition,'safe')
   assert.equal(entrusted.environment.table,'wet'); assert.equal(entrusted.environment.notebook,'wet')
   assert.deepEqual(entrusted.events.map(e=>[e.actor,e.type]),[['partner','move-notebook']])

@@ -12,6 +12,6 @@ export default function CoffeeTable({ scene, reduced }) {
       {notebook !== 'absent' && <g className={`table-notebook ${safe ? 'safe' : ''}`}><path d="M0 0h83v54H0Z" fill="#bfc6b1" stroke="#757e73" strokeWidth="2" /><path d="M9 0v54M18 13h52M18 25h52M18 37h40" stroke="#5c6964" strokeWidth="2" /><path d="M53 37q26-18 30-2v19H50Z" fill={notebook === 'wet' ? '#8b5838' : '#b99b76'} opacity=".85" /></g>}
       <g className="table-tissue"><path d="m-28-10 53-6 10 36-60 8Z" fill={tissue === 'used' ? '#a99578' : partlyUsed ? '#d5c6ac' : '#e7e5d8'} /><path d="m-19-8 20 24 22-27" fill="none" stroke="#a8b4ac" strokeWidth="2" /></g>
       {wiping && <path key={`${scene.history.length}`} className="wipe-trace" d="m340 65 130 30-115 14" fill="none" stroke="#d8dfd5" strokeWidth="12" strokeLinecap="round" />}
-    </svg><span className="coffee-object-caption">{tissue === 'player' ? '手元に、ティッシュ。' : tissue === 'partner' ? (partlyUsed ? '紙の一部で、ノートの水気を取った。' : 'ティッシュは相手の手へ。') : '机から、コーヒーの溜まりが消えた。'}</span>
+    </svg><span className="coffee-object-caption">{tissue === 'player' ? '手元に、ティッシュ。' : tissue === 'partner' ? (partlyUsed ? '紙の一部で、ノートの水気を取った。' : 'ティッシュは相手の手へ。') : '使用済みのティッシュ。'}</span>
   </div>
 }

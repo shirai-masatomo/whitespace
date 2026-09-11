@@ -6,18 +6,20 @@ import { coffeeCharacter } from './lib/coffeeCharacter.js'
 import { coffeeLanguageRequest } from './lib/coffeeLanguage.js'
 import './CoffeeScene.css'
 import { CIRCUMSTANCES } from './lib/coffeeCircumstances.js'
-import { COFFEE_ENTRIES } from './lib/coffeePresentation.js'
+import { COFFEE_ENTRIES, pickBlindCircumstance, presentedEvents } from './lib/coffeePresentation.js'
 const actorName = actor => ({ player: 'あなた', partner: '相手', scene: '情景' })[actor]
 export default function CoffeeScene() {
   const [scene, setScene] = useState(() => createCoffeeScene())
+  const [settingsOpen, setSettingsOpen] = useState(true), [blind, setBlind] = useState(false), [revealed, setRevealed] = useState(false)
   const [round, setRound] = useState(0), [reduced, setReduced] = useState(false)
   const [input, setInput] = useState(''), [pending, setPending] = useState(false), [result, setResult] = useState(null), [error, setError] = useState('')
   const request = useRef(null), dialogue = useRef(null)
   useEffect(() => () => request.current?.abort(), [])
-  const known = visibleScene(scene), last = scene.history.at(-1), candidates = coffeeCandidates(scene)
+  const known = visibleScene(scene), last = scene.history.at(-1), candidates = coffeeCandidates(scene), events = presentedEvents(scene)
+  const sequence = Boolean(last?.automatic.length)
   function cancel() { request.current?.abort(); request.current = null; setPending(false) }
-  function restart(condition, circumstance = condition === scene.condition ? scene.partner.circumstance : 'cleanup') { cancel(); setScene(createCoffeeScene(condition, circumstance)); setRound(x => x + 1); setInput(''); setResult(null); setError('') }
-  function apply(interpretation, text, focusScene = true) { cancel(); setScene(current => stepCoffeeScene(current, interpretation, text)); setResult(null); setInput(''); setError(''); if (focusScene) requestAnimationFrame(() => { if (dialogue.current?.getBoundingClientRect().top < -60) dialogue.current.scrollIntoView({ block: 'start' }) }) }
+  function restart(condition, circumstance = condition === scene.condition ? scene.partner.circumstance : 'cleanup') { cancel(); setRevealed(false); setScene(createCoffeeScene(condition, circumstance)); setRound(x => x + 1); setInput(''); setResult(null); setError('') }
+  function apply(interpretation, text, focusScene = true) { cancel(); setSettingsOpen(false); setScene(current => stepCoffeeScene(current, interpretation, text)); setResult(null); setInput(''); setError(''); if (focusScene) requestAnimationFrame(() => { if (dialogue.current?.getBoundingClientRect().top < -60) dialogue.current.scrollIntoView({ block: 'start' }) }) }
   async function interpret(event) {
     event.preventDefault(); if (!input.trim() || pending) return
     const controller = new AbortController(); request.current = controller
@@ -32,22 +34,26 @@ export default function CoffeeScene() {
   }
   return <main className="coffee-page">
     <header className="coffee-header"><div><p className="coffee-eyebrow">WHITESPACE / CAFÉ</p><h1>こぼれたコーヒー</h1></div><button className="secondary" onClick={() => restart(scene.condition)}>やり直す</button></header>
-    <fieldset className="coffee-entry"><legend>あなたは、この場にどう居合わせた？</legend><div className="coffee-entry-options">{Object.entries(COFFEE_ENTRIES).map(([id, entry]) => <label key={id}><input type="radio" name="coffee-entry" value={id} checked={scene.condition === id} onChange={() => restart(id)} /><span>{entry.label}</span></label>)}</div><small>選び直すと、場面を最初から。</small></fieldset>
-    <details className="coffee-circumstances"><summary>同じ場面で、事情を変えてみる</summary><label htmlFor="circumstance">相手が気にしていること</label><select id="circumstance" value={scene.partner.circumstance} onChange={e => restart('A', e.target.value)}>{Object.entries(CIRCUMSTANCES).map(([id, label]) => <option key={id} value={id}>{label}</option>)}</select><p>比較は「後から来た友人」に揃えます。選び直すと会話と物の状態を初期化します。ここで選ぶ事情を、主人公が最初から知っているわけではありません。</p></details>
+    <details className="coffee-settings" open={settingsOpen} onToggle={e => setSettingsOpen(e.currentTarget.open)}>
+      <summary><span>この場への入り方</span><span>{COFFEE_ENTRIES[scene.condition].label}{blind ? ' · 事情は伏せて' : ''}</span></summary>
+      <fieldset className="coffee-entry"><legend>あなたは、この場にどう居合わせた？</legend><div className="coffee-entry-options">{Object.entries(COFFEE_ENTRIES).map(([id, entry]) => <label key={id}><input type="radio" name="coffee-entry" value={id} checked={scene.condition === id} onChange={() => { setBlind(false); restart(id) }} /><span>{entry.label}</span></label>)}</div></fieldset>
+      <div className="coffee-start-options"><button className="secondary" onClick={() => { restart('A', pickBlindCircumstance()); setBlind(true); setSettingsOpen(false) }}>事情を知らずに始める</button><small>友人の席へ。選び直すと最初から。</small></div>
+      {blind ? <div className="coffee-secret"><button className="secondary" onClick={() => { setBlind(false); setRevealed(true) }}>今回の事情を確かめる</button></div> : <details className="coffee-circumstances" key={revealed ? 'revealed' : 'choose'} open={revealed || undefined}><summary>事情を選んで比べる</summary><label htmlFor="circumstance">この友人が気にしていること</label><select id="circumstance" value={scene.partner.circumstance} onChange={e => restart('A', e.target.value)}>{Object.entries(CIRCUMSTANCES).map(([id, label]) => <option key={id} value={id}>{label}</option>)}</select></details>}
+    </details>
     <div ref={dialogue} className="coffee-focus">
-      <p className="coffee-setting">{COFFEE_ENTRIES[scene.condition].intro}</p>
+      {!last && <p className="coffee-setting">{COFFEE_ENTRIES[scene.condition].intro}</p>}
       <div className={`coffee-set ${scene.relationship.distance} ${reduced ? 'reduced' : ''}`}><Character key={round} displayState={coffeeCharacter(scene)} manualReduced={reduced} onReducedChange={setReduced} /><CoffeeTable scene={scene} reduced={reduced} /></div>
       <section className="coffee-response" aria-label="最新のやり取り" aria-live="polite">
         {last && <p className="coffee-your-line">あなた{last.kind === 'speech' ? '：「' + last.input + '」' : ' · ' + last.input}</p>}
-        <div className="coffee-stage-directions">{scene.events.filter(event => event.type !== 'offer-paper' || !scene.events.some(e => e.type === 'receive')).map((event, index) => <p key={index}><span>{actorName(event.actor)}</span>{event.text}</p>)}</div>
+        {sequence ? <ol className="coffee-action-sequence" aria-label="起きた動作の順番">{events.map((event, index) => <li key={index}>{event.text}</li>)}</ol> : <div className="coffee-stage-directions">{events.map((event, index) => <p key={index}><span>{actorName(event.actor)}</span>{event.text}</p>)}</div>}
         {scene.reply && <blockquote><span>{scene.relationship.type === 'friend' ? '友人' : '近くの席の人'}</span><p>「{scene.reply}」</p></blockquote>}
       </section>
-      <section className="coffee-controls" aria-label="発言と行動"><div><h2>声をかける</h2><div className="coffee-choices">{candidates.filter(x => x.kind === 'speech' && !x.secondary).map(x => <button key={x.act} data-act={x.act} onClick={() => apply(choiceInterpretation(x.act), x.label)}>{x.label}</button>)}</div><details className="coffee-other-lines"><summary>ほかの言い方</summary><div className="coffee-choices">{candidates.filter(x => x.secondary).map(x => <button key={x.act} onClick={() => apply(choiceInterpretation(x.act), x.label)}>{x.label}</button>)}</div></details></div>
+      <section className="coffee-action-area" aria-label="次の対応"><p className="coffee-action-prompt">次は、どう関わる？</p><div className="coffee-controls"><div><h2>声をかける</h2><div className="coffee-choices">{candidates.filter(x => x.kind === 'speech' && !x.secondary).map(x => <button key={x.act} data-act={x.act} onClick={() => apply(choiceInterpretation(x.act), x.label)}>{x.label}</button>)}</div><details className="coffee-other-lines"><summary>ほかの言い方</summary><div className="coffee-choices">{candidates.filter(x => x.secondary).map(x => <button key={x.act} onClick={() => apply(choiceInterpretation(x.act), x.label)}>{x.label}</button>)}</div></details></div>
         <div><h2>動く</h2><div className="coffee-choices actions">{candidates.filter(x => x.kind === 'action').map(x => <button key={x.act} data-act={x.act} className="secondary" disabled={x.disabled} title={x.note || undefined} onClick={() => apply(choiceInterpretation(x.act), x.label)}>{x.label}{x.note && <small>{x.note}</small>}</button>)}</div></div>
-      </section>
+      </div></section>
     </div>
     <div className="coffee-drawers">
-      <details className="coffee-notes"><summary>見聞きしたこと</summary><h3>場面の始まり</h3><p>{CONDITIONS[scene.condition].intro}</p><ul>{Object.entries(known).filter(([key]) => key !== 'role').map(([key,value]) => <li key={key}>{value}</li>)}</ul></details>
+      <details className="coffee-notes"><summary>見聞きしたこと</summary><ul>{Object.entries(known).filter(([key]) => key !== 'role').map(([key,value]) => <li key={key}>{value}</li>)}</ul></details>
       <details className="coffee-history"><summary>やり取りを振り返る · {scene.history.length}件</summary>{!last ? <p>まだやり取りはありません。</p> : <ol>{scene.history.map(x => <li key={x.id}><strong>{x.id}. あなた / {x.kind === 'action' ? '行動の選択' : '発言'}：{x.input}</strong>{x.events.map((e,i) => <p className="coffee-history-event" key={i}>{actorName(e.actor)} / {e.text}</p>)}{x.reply && <p>相手：「{x.reply}」</p>}<small>{x.interpretation.source === 'choice' ? '選択肢' : 'モデル解釈を確認して採用'}</small></li>)}</ol>}</details>
       <details className="coffee-language"><summary>自分の言葉で話す · 実験中</summary><p>ローカルモデルで解釈し、確認してから会話へ進めます。未起動・失敗時も選択肢を使えます。</p>
         <form onSubmit={interpret}><label htmlFor="coffee-input">あなたの発言・行動</label><textarea id="coffee-input" maxLength={280} rows={2} value={input} onChange={e => { setInput(e.target.value); setResult(null) }} disabled={pending} placeholder="例：ティッシュ、使いますか？" /><div className="coffee-choices"><button disabled={pending || !input.trim()}>{pending ? '解釈を待っています…' : '解釈を確認する'}</button>{pending && <button type="button" className="secondary" onClick={() => { cancel(); setError('解釈を中止しました。') }}>中止</button>}</div></form>
@@ -56,7 +62,7 @@ export default function CoffeeScene() {
       </details>
       <details className="coffee-lab"><summary>操作と内部情報を検証する</summary><p>現在の条件：{CONDITIONS[scene.condition].label}。通常画面は手元にない物の操作を無効にしますが、対応行為は変わりません。</p>
         <details><summary>全{CHOICES.length}操作を試す（繰り返し・不適切な順番も含む）</summary><div className="coffee-choices">{CHOICES.map(x => <button className="secondary" key={x.act} onClick={() => apply(choiceInterpretation(x.act), x.label, false)}>検証：{x.label}</button>)}</div></details>
-        {import.meta.env.DEV && <details className="coffee-debug"><summary>内部情報・判断理由（未開示の事実を含む）</summary><p>{scene.reason}</p><pre>{JSON.stringify(sceneSnapshot(scene), null, 2)}</pre>{last && <><h3>分岐・解釈・開示の根拠・変更前後</h3><pre>{JSON.stringify({ branch: last.branch, interpretation: last.interpretation, disclosures: last.disclosures, wishes: last.wishes, automatic: last.automatic, changes: last.changes, before: last.before, after: last.after }, null, 2)}</pre></>}</details>}
+        {import.meta.env.DEV && !blind && <details className="coffee-debug"><summary>内部情報・判断理由（未開示の事実を含む）</summary><p>{scene.reason}</p><pre>{JSON.stringify(sceneSnapshot(scene), null, 2)}</pre>{last && <><h3>分岐・解釈・開示の根拠・変更前後</h3><pre>{JSON.stringify({ branch: last.branch, interpretation: last.interpretation, disclosures: last.disclosures, wishes: last.wishes, automatic: last.automatic, changes: last.changes, before: last.before, after: last.after }, null, 2)}</pre></>}</details>}
       </details>
     </div>
   </main>

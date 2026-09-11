@@ -84,3 +84,32 @@
 .coffee-other-lines .coffee-choices { margin-top: 8px; }
 
 @media (max-width: 700px) { .coffee-controls > div:first-child > .coffee-choices { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.coffee-settings { margin: 18px 0 22px; padding: 12px 0; border-block: 1px solid #65776740; font-size: 12px; }
+.coffee-settings > summary { display: flex; justify-content: space-between; gap: 12px; list-style: none; }
+.coffee-settings > summary > span:first-child::before { content: '+ '; color: #a9bfae; }
+.coffee-settings[open] > summary > span:first-child::before { content: '− '; }
+.coffee-settings > summary > span:last-child { color: #85958b; font-size: 11px; }
+.coffee-settings .coffee-entry { margin-top: 16px; }
+.coffee-start-options { display: flex; gap: 12px; align-items: center; margin-top: 12px; }
+.coffee-start-options button, .coffee-secret button { font-size: 12px; padding: 8px 12px; }
+.coffee-start-options small { color: #85958b; font-size: 11px; }
+.coffee-secret { margin-top: 12px; }
+.coffee-focus { background: radial-gradient(ellipse at 50% 22%, #26342c45, transparent 65%); }
+.coffee-setting { text-align: center; color: #a7ada4; }
+.coffee-response { padding: 18px 16px 22px; }
+.coffee-action-area { background: #202d29; padding: 18px 20px 20px; border-radius: 10px; border-top: 2px solid #8ca18c80; margin-top: 12px; }
+.coffee-action-prompt { margin: 0 0 14px; font-size: 14px; color: #e1e5d9; }
+.coffee-controls { border-top: 0; padding-top: 0; }
+.coffee-controls h2 { color: #91a99c; font-size: 11px; }
+.coffee-action-sequence { list-style: none; counter-reset: care; padding: 0; margin: 6px 0 16px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 18px; }
+.coffee-action-sequence li { counter-increment: care; position: relative; color: #bfc6ba; font-size: 13px; line-height: 1.7; padding-left: 28px; border-left: 1px solid #6d8d7755; }
+.coffee-action-sequence li::before { content: counter(care); position: absolute; left: 8px; top: 0; color: #91b39b; font-size: 11px; }
+.coffee-drawers { margin-top: 36px; color: #91a098; }
+.coffee-drawers > .coffee-lab { margin-top: 22px; border-top-style: dashed; opacity: .85; }
+@media (max-width: 700px) {
+  .coffee-settings > summary { flex-direction: column; gap: 2px; }
+  .coffee-start-options { flex-wrap: wrap; gap: 6px; }
+  .coffee-action-area { padding: 15px 12px; margin-inline: -4px; }
+  .coffee-action-sequence { grid-template-columns: 1fr; gap: 8px; }
+  .coffee-response { padding-inline: 4px; }
+}

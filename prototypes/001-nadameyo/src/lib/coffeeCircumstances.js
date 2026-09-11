@@ -17,11 +17,14 @@ export function circumstanceOpening(kind) {
 
 export function resolveCircumstanceRule(s, act) {
   const kind = s.partner.circumstance, e = s.environment, k = s.player.knowledge
-  if (act === 'acknowledge') {
-    if (s.relationship.notebookConsent) return result('ack-notebook', '任せるという返答を受け、本人が物を動かす', 'うん、じゃあ自分で移すね。', next => {
+  if (act === 'entrust') {
+    if (s.relationship.notebookConsent) return result('entrust-notebook', '任せるという返答を受け、本人が物を動かす', 'うん、じゃあ自分で移すね。', next => {
       next.environment.notebookPosition = 'safe'; next.relationship.notebookConsent = false
       return { events: [event('move-notebook', '相手はノートを机の乾いた端へ移す。')] }
     })
+    return result('entrust-unspecified', '委ねる対象が未確定なら物を動かさない', e.table === 'dry' ? '片付けはもう大丈夫だよ。' : '何をお願いしたい？')
+  }
+  if (act === 'acknowledge') {
     return result('ack', '了解だけで物や気持ちを解決したことにはしない', s.relationship.type === 'stranger' ? 'ありがとうございます。' : s.memory.listened ? 'うん。聞いてくれてありがとう。少し休むよ。' : e.table === 'dry' ? 'うん、ありがとう。' : 'うん。', () => ({}))
   }
   if (act === 'move_notebook') {
