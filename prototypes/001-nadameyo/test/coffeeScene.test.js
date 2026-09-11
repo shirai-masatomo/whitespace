@@ -21,7 +21,8 @@ test('coffee: declining broad help still allows offered paper, but space is resp
   assert.match(visibleScene(refused).preference,/そっとしておいて/)
   assert.equal(act(act(createCoffeeScene('B'),'give_space'),'give_tissue').relationship.helpRefused,false)
   const offered = act(refused,'offer_tissue')
-  assert.equal(act(offered,'give_tissue').environment.table,'dry')
+  assert.equal(act(offered,'give_tissue').environment.table,'wet')
+  assert.equal(act(offered,'give_tissue').conversation.ending.kind,'refused')
 })
 
 test('coffee: knowledge persists, world facts do not leak into initial player context', () => {

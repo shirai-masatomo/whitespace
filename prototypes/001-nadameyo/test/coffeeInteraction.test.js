@@ -1,6 +1,6 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
-import { createCoffeeScene, stepCoffeeScene, choiceInterpretation, sceneSnapshot, coffeeCandidates } from '../src/lib/coffeeScene.js'
+import { createCoffeeScene, stepCoffeeScene, choiceInterpretation, coffeeCandidates } from '../src/lib/coffeeScene.js'
 import { pickBlindCircumstance, presentedEvents } from '../src/lib/coffeePresentation.js'
 import { validateCoffeeInterpretation, coffeeLanguageRequest } from '../src/lib/coffeeLanguage.js'
 const act = (s, a) => stepCoffeeScene(s, choiceInterpretation(a))
@@ -10,7 +10,9 @@ test('acknowledgment retains a pending request without executing or delegating i
   for (const input of ['分かった', '了解']) {
     const interpretation = validateCoffeeInterpretation({status:'matched',act:'acknowledge',target:'partner',evidence:input,reason:'了承'}, input)
     const agreed = stepCoffeeScene(requested, interpretation, input)
-    assert.deepEqual(sceneSnapshot(agreed), sceneSnapshot(requested))
+    assert.deepEqual(agreed.environment, requested.environment)
+    assert.deepEqual(agreed.player, requested.player)
+    assert.equal(agreed.conversation.promised,true)
     assert.equal(agreed.events.length, 0)
     assert.equal(coffeeCandidates(agreed).find(x=>x.act==='acknowledge').label, '分かった')
     assert.ok(coffeeCandidates(agreed).some(x=>x.act==='entrust'))
@@ -28,7 +30,8 @@ test('acknowledgment retains a pending request without executing or delegating i
 test('entrusting with no identified job asks for clarification and never moves objects', () => {
   for (const circumstance of ['cleanup','notebook','bad_day']) {
     const initial = createCoffeeScene('A', circumstance)
-    assert.deepEqual(sceneSnapshot(act(initial,'entrust')), sceneSnapshot(initial))
+    assert.deepEqual(act(initial,'entrust').environment, initial.environment)
+    assert.deepEqual(act(initial,'entrust').player, initial.player)
     assert.equal(coffeeCandidates(initial).some(x=>x.act==='entrust'),false)
   }
 })

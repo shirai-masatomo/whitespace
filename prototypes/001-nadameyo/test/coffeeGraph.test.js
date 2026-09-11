@@ -2,7 +2,7 @@ import test from 'node:test'
 import assert from 'node:assert/strict'
 import { exploreCoffee } from '../scripts/coffeeGraph.mjs'
 import { CHOICES, coffeeCandidates, createCoffeeScene, choiceInterpretation, stepCoffeeScene } from '../src/lib/coffeeScene.js'
-test('coffee: reachable A/B/C states preserve knowledge, ownership and automatic action ordering', () => {
+test('coffee: bounded A/B/C exploration preserve knowledge, ownership and automatic action ordering', () => {
   for (const id of ['A','B','C']) {
     const graph=exploreCoffee(id,(before,choice,after)=>{
       const entry=after.history.at(-1)
@@ -20,7 +20,7 @@ test('coffee: reachable A/B/C states preserve knowledge, ownership and automatic
       if(after.environment.table==='dry') assert.equal(after.environment.tissue,'used')
       assert.ok(after.partner.agitation>=0 && after.partner.agitation<=5)
     })
-    assert.equal(graph.transitions,graph.states*CHOICES.length)
+    assert.equal(graph.transitions,graph.expandedStates*CHOICES.length)
     assert.equal(graph.minDry,1)
   }
 })

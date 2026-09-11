@@ -78,6 +78,7 @@ test('circumstances: seeded mixed sequences preserve facts, evidence, ownership 
     for(let turn=0;turn<25;turn++) {
       seed=(Math.imul(seed,1664525)+1013904223)>>>0
       const previous=s; s=step(s,CHOICES[seed%CHOICES.length].act)
+      if (previous.conversation.ending) { assert.equal(s,previous); break }
       const entry=s.history.at(-1)
       for(const f of entry.disclosures) assert.ok(entry.reply.includes(f.quote))
       for(const [key,value] of Object.entries(previous.player.knowledge)) if(value) assert.equal(s.player.knowledge[key],value)

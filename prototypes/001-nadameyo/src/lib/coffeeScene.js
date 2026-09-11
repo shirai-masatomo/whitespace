@@ -1,3 +1,4 @@
+import { freshConversation, conversationRule, afterConversation } from './coffeeConversation.js'
 import { CIRCUMSTANCES, circumstanceOpening } from './coffeeCircumstances.js'
 import { resolveCoffeeRule } from './coffeeRules.js'
 export const CONDITIONS = {
@@ -18,13 +19,15 @@ export const CHOICES = [
   { act: 'move_notebook', label: 'ノートを乾いた場所へ移す', kind: 'action', target: 'notebook' },
   { act: 'give_tissue', label: 'ティッシュを差し出す', kind: 'action', target: 'tissue' },
   { act: 'give_space', label: 'そっとしておく', kind: 'action', target: 'partner' },
+  { act: 'decline_help', label: '今は手を貸せない', kind: 'speech', target: 'help' },
+  { act: 'leave', label: 'じゃあ、またね', kind: 'speech', target: 'partner' },
   { act: 'observe', label: '様子を見る', kind: 'action', target: 'scene' },
 ]
 export function createCoffeeScene(condition = 'A', circumstance = 'cleanup') {
   const setup = CONDITIONS[condition]
   if (!setup) throw new Error('不明な固定条件です。')
   if (!CIRCUMSTANCES[circumstance] || (condition !== 'A' && circumstance !== 'cleanup')) throw new Error('事情の比較は後から来た友人で行います。')
-  return { condition,
+  return { condition, conversation: freshConversation(),
     partner: { circumstance, agitation: circumstance !== 'cleanup' || condition === 'B' ? 4 : 3, concern: circumstance === 'cleanup' ? 'wet_table' : circumstance, preference: setup.preference },
     environment: { coffee: 'spilled', table: 'wet', tissue: 'player', notebook: circumstance === 'notebook' ? 'wet' : 'absent', notebookPosition: circumstance === 'notebook' ? 'spill' : 'absent' },
     player: { wishes: [], role: setup.role, observed: ['spilled_coffee', 'wet_table'], knowledge: { cause: condition === 'C' ? 'player' : null, injury: null, wipe: false, tissue: false, quiet: false, selfWipe: false, notebook: false, burden: false, argument: false, listen: false }, actions: CHOICES.filter(x => x.kind === 'action').map(x => x.act) },
@@ -33,7 +36,7 @@ export function createCoffeeScene(condition = 'A', circumstance = 'cleanup') {
   }
 }
 export function sceneSnapshot(state) {
-  return structuredClone({ partner: state.partner, environment: state.environment, player: state.player, relationship: state.relationship, memory: state.memory })
+  return structuredClone({ partner: state.partner, environment: state.environment, player: state.player, relationship: state.relationship, memory: state.memory, conversation: state.conversation })
 }
 export function visibleScene(state) {
   const k = state.player.knowledge
@@ -56,10 +59,11 @@ function changes(before, after, prefix = '') {
 // Both explicit choices and validated language interpretations enter this boundary.
 // Only this function changes facts; a language model never supplies state patches.
 export function stepCoffeeScene(previous, interpretation, input = '') {
+  if (previous.conversation.ending) return previous
   const state = structuredClone(previous), before = sceneSnapshot(previous)
   const choice = CHOICES.find(x => x.act === interpretation.act && x.target === interpretation.target)
   const act = interpretation.status === 'matched' && choice ? choice.act : 'clarify'
-  const rule = resolveCoffeeRule(state, act)
+  const rule = conversationRule(state, act, resolveCoffeeRule(state, act))
   const effect = rule.effect(state)
   const facts = effect.facts ?? []
   for (const { key, value, quote } of facts) {
@@ -76,7 +80,7 @@ export function stepCoffeeScene(previous, interpretation, input = '') {
   if (act === 'give_space') state.relationship.notebookConsent = false
   const events = [...(effect.events ?? [])]
   // Returning to conversation is an actual movement, not an inferred intention.
-  if (act !== 'give_space' && act !== 'observe' && act !== 'clarify' && act !== 'acknowledge' && act !== 'entrust' && rule.id !== 'give-space-refusal' && state.relationship.distance === 'away') {
+  if (!rule.id.startsWith('conversation-') && act !== 'give_space' && act !== 'observe' && act !== 'clarify' && act !== 'acknowledge' && act !== 'entrust' && rule.id !== 'give-space-refusal' && state.relationship.distance === 'away') {
     state.relationship.distance = 'near'
     events.unshift({ actor: 'player', type: 'return', text: 'あなたは相手のそばに戻る。' })
   }
@@ -93,6 +97,7 @@ export function stepCoffeeScene(previous, interpretation, input = '') {
       reply = care.speech
     }
   }
+  afterConversation(previous, state, act, rule)
   state.reply = reply; state.events = events; state.reason = [rule.guard, ...automatic.map(x=>x.reason)].join(' → '); state.reaction = effect.reaction ?? null
   state.history.push({ id: state.history.length + 1, input: input || choice?.label || '', act, kind: choice?.kind ?? 'speech', interpretation,
     branch: rule.id, reply, events, disclosures: facts, wishes: rule.wishes ?? [], automatic, reason: state.reason, before, after: sceneSnapshot(state), changes: changes(before, sceneSnapshot(state)) })
@@ -107,10 +112,11 @@ export function choiceInterpretation(act) {
 
 // Availability is presentation only; the interpreter also guards invalid actions.
 export function coffeeCandidates(state) {
-  return CHOICES.filter(choice => (choice.act !== 'move_notebook' || state.environment.notebook !== 'absent') && (choice.act !== 'acknowledge' || state.history.length > 0) && (choice.act !== 'entrust' || state.relationship.notebookConsent)).map(choice => ({ ...choice,
+  if (state.conversation.ending) return []
+  return CHOICES.filter(choice => (choice.act !== 'move_notebook' || state.environment.notebook !== 'absent') && (choice.act !== 'acknowledge' || state.history.length > 0) && (choice.act !== 'entrust' || state.relationship.notebookConsent) && (choice.act !== 'decline_help' || state.relationship.notebookConsent)).map(choice => ({ ...choice,
     secondary: choice.act === 'support' || (choice.act === 'apologize' && state.condition !== 'C'),
     disabled: (choice.act === 'give_tissue' && state.environment.tissue !== 'player') || (choice.act === 'move_notebook' && state.environment.notebookPosition === 'safe'),
     note: choice.act === 'move_notebook' && state.environment.notebookPosition === 'safe' ? 'すでに乾いた場所にある' : choice.act === 'give_tissue' && state.environment.tissue !== 'player' ? '手元にティッシュがない' : '',
-    label: choice.act === 'observe' && state.environment.tissue === 'partner' ? (state.environment.notebook === 'wet' ? 'ノートの手当てを見守る' : '拭くのを見守る') : choice.act === 'give_space' && state.relationship.distance === 'away' ? '離れたままにする' : choice.label,
+    label: choice.act === 'leave' ? (state.conversation.closing === 'rest' ? 'ゆっくり休んでね' : state.relationship.type === 'stranger' ? 'では、失礼します' : 'じゃあ、またね') : choice.act === 'observe' && state.environment.tissue === 'partner' ? (state.environment.notebook === 'wet' ? 'ノートの手当てを見守る' : '拭くのを見守る') : choice.act === 'give_space' && state.relationship.distance === 'away' ? '離れたままにする' : choice.label,
   }))
 }
