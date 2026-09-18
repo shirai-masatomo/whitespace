@@ -1,8 +1,8 @@
 # WhiteSpace
 
-WhiteSpaceは、**ゲーム・小説・映像・ARG・仮想現実・Webなど、媒体を限定せず作品や実験を継続的に制作・公開するための制作母体**として扱う。
+WhiteSpaceは、**ゲーム・小説・映像・ARG・仮想現実・Webなど、媒体を限定せず作品や実験を継続的に制作・公開するための制作母体**。
 
-先に媒体を決めず、観念・感情・体験の核に合う形式を選ぶ。制作途中で媒体が変容したり、複数の形式が混ざることも許容する。将来的にはWhiteSpace名義から複数作品を出すことを想定する。成人向け等でブランド分離が必要になった場合は、BlackSpace（仮）など別ブランドを検討する。
+全体の目的、プロジェクトの分け方、AI/Codexの自律度、文書方針は [WhiteSpace 基盤方針](docs/FOUNDATION.md) を正本とする。
 
 ## プロジェクト
 
@@ -31,6 +31,8 @@ WhiteSpaceは、**ゲーム・小説・映像・ARG・仮想現実・Webなど�
 WhiteSpace/
 ├── README.md
 ├── PROJECT_STATE.md         # WhiteSpace全体の現在地
+├── docs/FOUNDATION.md       # WhiteSpace全体の基盤方針
+├── docs/creative/           # 媒体横断の創作ノウハウ
 ├── docs/roadmap/            # 全作品共通のリリース見通し（画像・元テキスト）
 └── projects/
     ├── README.md           # 作品一覧
@@ -42,15 +44,9 @@ WhiteSpace/
         └── app/nadameyo/   # 既存Vite + Reactアプリ
 ```
 
-## リポジトリ方針
-
-当面は1つの `whitespace` repo内で複数作品を管理する。
-
-ただし、各ゲームが本制作・公開・保守フェーズへ進み、依存関係やCI、権限、ブランドを独立させた方がよくなった場合は、そのゲームだけ別repoへ切り出す。
-
 ## 文書とコードの置き場所
 
-ルートには全体の案内・現在地・共通設定だけを置く。各ゲームの仕様、タスク、実装、依存関係は対応するプロジェクト内で管理する。
+ルートには全体の入口と現在地だけを置く。共通方針は基盤文書、各作品の仕様・タスク・実装は対応するプロジェクト内で管理する。
 
 宥めよ・会話ゲーム・intent辞書の既存資産は [言語ジェンガ](projects/language-jenga/README.md) に集約済み。起動・検証コマンドは [宥めよのREADME](projects/language-jenga/app/nadameyo/README.md) を参照する。
 
