@@ -14,12 +14,19 @@ WhiteSpaceは、**複数のゲームや実験作品を継続的に制作・公�
 
 全体一覧: [projects/README.md](projects/README.md)
 
+## リリースまでの見通し
+
+[リリースロードマップ（画像・元テキスト）](docs/roadmap/release-roadmap.md)
+
+今は「ゲーム制作」に集中。広告・集客は「公開準備」で考え始めればOK。将来の心配事や追加工程は、この短いロードマップへ整理する。
+
 ## 現在の構造
 
 ```text
 WhiteSpace/
 ├── README.md
 ├── PROJECT_STATE.md         # WhiteSpace全体の現在地
+├── docs/roadmap/            # 全作品共通のリリース見通し（画像・元テキスト）
 └── projects/
     ├── README.md           # 作品一覧
     ├── 001-first-release/  # 最初の正式リリース候補
