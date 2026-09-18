@@ -29,7 +29,7 @@ WhiteSpace名義で**最初の正式リリースを目指すゲームプロジ�
 
 ## 開発方針
 
-`other task` で試した自律駆動モデルを採用する。
+[プロジェクト固有の自律運用](AUTONOMY.md)を採用する。WhiteSpace全体の自律度と権限境界は [基盤方針](../../docs/FOUNDATION.md) を参照する。
 
 ```text
 PROJECT_STATE
