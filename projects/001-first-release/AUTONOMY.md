@@ -1,5 +1,7 @@
 # AUTONOMY — 001 First Release
 
+この文書は [WhiteSpace基盤方針](../../docs/FOUNDATION.md) に対する、001 First Release固有の運用ルールを定める。
+
 ## 原則
 
 人間へ細かく確認するより、可逆で小さい変更はCodexが自分で進める。
