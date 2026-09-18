@@ -2,13 +2,11 @@
 
 更新: 2026-09-18
 
-## WhiteSpaceの位置づけ
+## 全体
 
-WhiteSpaceは単一ゲームではなく、複数のゲーム・実験作品を生み出す制作母体として扱う。
-
-将来的にWhiteSpace名義で複数ゲームを公開する。成人向け等で区分が必要になればBlackSpace（仮）など別ブランドを検討する。
-
-全体の見通しは [先の心配ごとマップ](docs/roadmap/release-roadmap.md) で管理する。今はゲーム制作に集中し、広告・集客は公開準備で検討する。
+- 基盤方針: [docs/FOUNDATION.md](docs/FOUNDATION.md)
+- 先の見通し: [先の心配ごとマップ](docs/roadmap/release-roadmap.md)
+- 現在はゲーム制作に集中し、広告・集客は公開準備で検討する。
 
 ## 現在のプロジェクト
 
@@ -16,7 +14,7 @@ WhiteSpaceは単一ゲームではなく、複数のゲーム・実験作品を�
 
 - 状態: **Phase 0 / 企画準備**
 - 目的: WhiteSpace名義で最初の正式リリース作品を完成させる。
-- 開発モデル: `other task` で試したCodex自律駆動モデル。
+- 開発モデル: [Codex自律駆動](projects/001-first-release/AUTONOMY.md)。
 - ゲーム案: 未決定。
 - 候補: わらしべ長者 / 水中高難易度アクション / 今後追加する案。
 - 詳細: `projects/001-first-release/`
@@ -27,19 +25,6 @@ WhiteSpaceは単一ゲームではなく、複数のゲーム・実験作品を�
 - 固有文書は `projects/language-jenga/docs/`、既存Vite + React実装は `projects/language-jenga/app/nadameyo/` に集約済み。
 - mainの実装はルールベースの会話ゲーム。別ブランチのコーヒー会話実験は未統合。
 - 詳細: [現在地](projects/language-jenga/PROJECT_STATE.md) / [起動と構成](projects/language-jenga/README.md)
-
-## リポジトリ方針
-
-当面はモノレポ。
-
-```text
-WhiteSpace
-├─ 001 First Release
-├─ 言語ジェンガ（仮）
-└─ 将来のゲーム...
-```
-
-ゲームが大きくなり、独自CI/依存/公開保守/権限分離が必要になった時点で別repoへの切り出しを検討する。
 
 ## 次
 
