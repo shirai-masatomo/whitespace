@@ -1,61 +1,43 @@
 # WhiteSpace
 
-WhiteSpaceは、小さなプロトタイプを作りながら、将来的にPC向けゲーム、ARG、その他の実験的・革新的なサービスへ発展させるための基盤プロジェクトです。
+WhiteSpaceは、**複数のゲームや実験作品を継続的に制作・公開するための制作母体**として扱う。
 
-完成を急ぐだけでなく、アイデアを小さく試し、仕組みと制作過程を記録しながら育てることを重視しています。
+将来的にはWhiteSpace名義から複数タイトルを出すことを想定する。成人向け等でブランド分離が必要になった場合は、BlackSpace（仮）など別ブランドを検討する。
 
-## 現在の状態
+## プロジェクト
 
-現在のアクティブなプロトタイプは、会話ゲーム「宥めよ」です。
+- [001 First Release](projects/001-first-release/README.md)  
+  WhiteSpace名義で最初の正式リリースを目指す新規プロジェクト。Codex自律駆動モデルを採用。現在はゲーム案選定前。
 
-- 場所: [`prototypes/001-nadameyo`](prototypes/001-nadameyo/README.md)
-- 技術: Vite + React
-- 内容: プレイヤーが一文ずつ入力し、相手の信頼度と緊張度を変化させるテキスト会話ゲーム
-- 入力判定: ローカルのルールベースintent辞書
-- 辞書候補: 144件のうち既存20件が有効、124件が人によるレビュー待ち
-- テスト: Node.js標準テスト、ESLint、Vite production build
+- [言語ジェンガ（仮）](projects/language-jenga/README.md)  
+  これまでWhiteSpaceで進めてきた「宥めよ」、会話ゲーム、intent辞書、言語/関係性の実験を引き継ぐ既存プロジェクト。
 
-## 最初に読むもの
+全体一覧: [projects/README.md](projects/README.md)
 
-1. [`docs/PROJECT_MAP.md`](docs/PROJECT_MAP.md): プロジェクト全体の案内図
-2. [`PROJECT_STATE.md`](PROJECT_STATE.md): 現在どこまで進んでいるか
-3. [`TODO.md`](TODO.md): 次に何をするか
-4. [`SPEC.md`](SPEC.md): 何を作るか、現在の仕様
-5. [`ACCEPTANCE.md`](ACCEPTANCE.md): 何を満たせば完了か
-
-## プロジェクト構成
+## 現在の構造
 
 ```text
 WhiteSpace/
+├── projects/
+│   ├── 001-first-release/   # 最初の正式リリース候補
+│   └── language-jenga/      # 既存WhiteSpace/宥めよ系
 ├── prototypes/
-│   └── 001-nadameyo/        # 現在のアクティブなReactプロトタイプ
-├── docs/
-│   ├── PROJECT_MAP.md        # 全体の案内図
-│   ├── COMMAND_LOG.md        # 重要コマンドの実行履歴
-│   └── INTENT_DICTIONARY_REVIEW.md
-├── PROJECT_STATE.md          # リポジトリ全体の現在地
-├── SPEC.md                   # 仕様
-├── ACCEPTANCE.md             # 完了条件
-└── TODO.md                   # 次の作業
+│   └── 001-nadameyo/        # 言語ジェンガ側の既存実装
+├── docs/                    # 既存履歴・辞書資料（言語ジェンガ側）
+└── PROJECT_STATE.md         # WhiteSpace全体の現在地
 ```
 
-詳しい構造は [`docs/PROJECT_MAP.md`](docs/PROJECT_MAP.md) を参照してください。
+## リポジトリ方針
 
-## 「宥めよ」の起動
+当面は1つの `whitespace` repo内で複数作品を管理する。
 
-```powershell
-cd C:\Users\masat\Documents\codex_test\prototypes\001-nadameyo
-npm.cmd install
-npm.cmd run dev -- --host 127.0.0.1
-```
+ただし、各ゲームが本制作・公開・保守フェーズへ進み、依存関係やCI、権限、ブランドを独立させた方がよくなった場合は、そのゲームだけ別repoへ切り出す。
 
-起動後、表示されたURLをブラウザで開きます。現在の標準URLは `http://127.0.0.1:5173/` です。
+## 既存ドキュメントについて
 
-このPCのPowerShellでは `npm` がExecution Policyで止まる場合があるため、`npm.cmd` を使用します。Codex内でPATHが不安定な場合は `C:\Program Files\nodejs\npm.cmd` を直接指定します。
+ルートの `SPEC.md`、`ACCEPTANCE.md`、`TODO.md`、`docs/INTENT_DICTIONARY_REVIEW.md`、既存の `docs/COMMAND_LOG.md`、`prototypes/001-nadameyo/` は、**言語ジェンガ（仮）プロジェクトの既存資産**として扱う。
 
-## ルート直下の旧ファイルについて
-
-ルートの `index.html`、`app.js`、`style.css` は、Vite導入前に作った初期のブラウザ版です。現在のアクティブなアプリではありません。残すか整理するかは `TODO.md` の判断待ち項目です。
+現時点ではリンクや起動環境を壊さないため物理移動は行っていない。
 
 ## GitHub
 
