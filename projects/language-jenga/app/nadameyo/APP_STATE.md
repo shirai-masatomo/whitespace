@@ -74,7 +74,7 @@
 - Sudachi同義語辞書: 確認できた同義語グループ見出しだけを `sudachi` とする。
 - 一般的な日常表現: `generated` とし、人によるレビューを必須とする。
 - 青空文庫: 著作権切れ作品と利用規準の確認が作品単位で必要なため、今回は本文由来候補を採用していない。
-- 一覧と利用条件は `docs/INTENT_DICTIONARY_REVIEW.md` に記録する。
+- 一覧と利用条件は [辞書レビュー](../../docs/INTENT_DICTIONARY_REVIEW.md) に記録する。
 
 ### `rejection`
 

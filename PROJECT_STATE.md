@@ -22,9 +22,9 @@ WhiteSpaceは単一ゲームではなく、複数のゲーム・実験作品を�
 ### 言語ジェンガ（仮）
 
 - これまでのWhiteSpace本体、宥めよ、会話/intent辞書、言語ゲーム構想を引き継ぐ。
-- 既存のルート文書・`docs/`・`prototypes/001-nadameyo/` はこのプロジェクト所属として扱う。
-- 現時点では大量移動をせず、リンクと実行環境を維持する。
-- 詳細: `projects/language-jenga/`
+- 固有文書は `projects/language-jenga/docs/`、既存Vite + React実装は `projects/language-jenga/app/nadameyo/` に集約済み。
+- mainの実装はルールベースの会話ゲーム。別ブランチのコーヒー会話実験は未統合。
+- 詳細: [現在地](projects/language-jenga/PROJECT_STATE.md) / [起動と構成](projects/language-jenga/README.md)
 
 ## リポジトリ方針
 

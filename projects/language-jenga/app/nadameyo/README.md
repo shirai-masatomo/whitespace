@@ -2,39 +2,44 @@
 
 「宥めよ」は、限られた発言回数の中で相手に一文ずつ言葉を送り、信頼を得ることを目指すテキスト会話ゲームです。言葉を選び間違えると緊張度が上がるため、「話さなければ進まないが、発言にはリスクがある」という体験を小さく試作しています。
 
-WhiteSpaceプロジェクトの現在のアクティブなプロトタイプです。
+言語ジェンガ（仮）内の既存プロトタイプです。
 
 ## 起動方法
 
 事前にNode.jsをインストールしておきます。初回だけ依存パッケージをインストールしてください。
 
 ```powershell
-cd C:\Users\masat\Documents\codex_test\prototypes\001-nadameyo
+cd C:\Users\masat\Documents\codex_test\projects\language-jenga\app\nadameyo
 npm.cmd install
 ```
 
 開発サーバーを起動します。
 
 ```powershell
-npm.cmd run dev -- --host 127.0.0.1
+npm.cmd run dev -- --host 127.0.0.1 --port 5181 --strictPort
 ```
 
-起動後、ブラウザで `http://127.0.0.1:5173/` を開きます。
+起動後、ブラウザで `http://127.0.0.1:5181/` を開きます。
 
-Codex内でPATHが不安定な場合は、npmをフルパスで指定できます。
+別セッションと重ならないよう専用ポートを指定しています。使用中なら別の空きポートを指定し、他セッションのプロセスを停止しないでください。
+
+Codex内でPATHが不安定な場合は、Node.jsの場所をこのシェルのPATHへ追加します。
 
 ```powershell
-& 'C:\Program Files\nodejs\npm.cmd' run dev -- --host 127.0.0.1
+$env:Path = 'C:\Program Files\nodejs;' + $env:Path
+npm.cmd run dev -- --host 127.0.0.1 --port 5181 --strictPort
 ```
 
 ## 確認用コマンド
 
 ```powershell
+npm.cmd run review:intents
 npm.cmd run test
 npm.cmd run lint
 npm.cmd run build
 ```
 
+- `review:intents`: 辞書から本プロジェクトの `docs/INTENT_DICTIONARY_REVIEW.md` を再生成
 - `test`: intent辞書と入力判定の自動テスト
 - `lint`: JavaScriptとJSXの書き方を検査
 - `build`: 配布可能なproduction buildを作成できるか検査
@@ -73,4 +78,4 @@ intent辞書には144件の候補があります。既存20件だけが `status:
 
 ゲーム固有の仕様、管理している状態、状態遷移、intentの効果、変更履歴は [`APP_STATE.md`](APP_STATE.md) に記録しています。
 
-プロジェクト全体の現在地は [`../../PROJECT_STATE.md`](../../PROJECT_STATE.md)、次の作業は [`../../TODO.md`](../../TODO.md) を参照してください。
+プロジェクト全体の現在地は [`../../PROJECT_STATE.md`](../../PROJECT_STATE.md)、次の作業は [`../../docs/TODO.md`](../../docs/TODO.md) を参照してください。

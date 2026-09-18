@@ -1,5 +1,7 @@
 # やること（TODO）
 
+パスは `projects/language-jenga/` を基準に記載する。
+
 作業は理解しやすい小さな単位で管理する。実装、確認、必要な修正、再確認が終わった項目だけを `[x]` にする。
 
 ## 記号の見方
@@ -9,6 +11,8 @@
 
 ## 次に行う作業
 
+- [ ] npm auditの既存指摘6件（high 5 / moderate 1）を、資産移動と分けて依存更新・再検証する。
+
 - [ ] `docs/INTENT_DICTIONARY_REVIEW.md` のレビュー待ち124件を確認する。
 - [ ] `confidence: medium` / `low` と、複数intentにまたがる候補を先に分類する。
 - [ ] レビュー結果に基づき、採用する候補を小さい単位で `status: adopted` に変更する。
@@ -16,13 +20,15 @@
 ## 判断が必要な作業
 
 - [ ] 緊張度、信頼度、残り発言数の初期バランスを調整するか決める。
-- [ ] ルート直下に残っている旧ブラウザ版の `index.html`、`app.js`、`style.css` を残すか整理するか決める。
 - [ ] `empathy`、`accountability`、`offering_space` を独立したintentにするか検討する。
 - [ ] 「大丈夫じゃない」のような否定文を部分一致より先に扱うか検討する。
 
 ## 完了した作業
 
-- [x] 基本管理文書 `SPEC.md`、`ACCEPTANCE.md`、`TODO.md` を作成した。
+- [x] 文書とアプリを言語ジェンガ配下へ集約し、リンク・起動・install・test・lint・build・ブラウザ操作を確認した。
+- [x] 未使用のルートReact練習版3ファイルを削除し、案内図をREADMEへ統合した。履歴はGitを正本とする。
+
+- [x] 基本管理文書 `docs/SPEC.md`、`docs/ACCEPTANCE.md`、`docs/TODO.md` を作成した。
 - [x] 現在のアプリ挙動をブラウザで確認した。
 - [x] `normalizeInput` とintent判定の軽量な自動テストを追加した。
 - [x] intent判定処理を `App.jsx` からテスト可能なモジュールへ分離した。

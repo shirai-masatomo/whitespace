@@ -1,22 +1,21 @@
 # 言語ジェンガ（仮）
 
-これまで `whitespace` で進めてきた会話ゲーム、宥めよ、intent辞書、言語/関係性の実験をまとめて扱う既存プロジェクト。
+WhiteSpaceで進めてきた「宥めよ」、会話ゲーム、intent辞書、言語・関係性の実験を扱うプロジェクト。
+「正しい言葉を選ぶ」だけでなく、相手・状況・関係・履歴で同じ言葉の意味が変わるゲームを目指す。現在のmain実装は、ローカルのルールベースで動く小さな会話ゲーム「宥めよ」。
 
-## 現在このプロジェクトに属する既存資産
+## 読む順番
 
-当面、リンクや実行環境を壊さないため物理移動は行わず、以下をこのプロジェクト所属として扱う。
+1. [PROJECT_STATE.md](PROJECT_STATE.md): 現在地と未解決問題。
+2. [TODO](docs/TODO.md): 次に行う小さな作業。
+3. [SPEC](docs/SPEC.md) / [ACCEPTANCE](docs/ACCEPTANCE.md): 仕様と完了条件。
+4. [APP_STATE](app/nadameyo/APP_STATE.md): 宥めよの状態遷移と実装履歴。
 
-- `prototypes/001-nadameyo/`
-- ルート `SPEC.md`
-- ルート `ACCEPTANCE.md`
-- ルート `TODO.md`
-- 旧 `PROJECT_STATE.md` に記録されていた宥めよ関連情報
-- `docs/INTENT_DICTIONARY_REVIEW.md`
-- `docs/COMMAND_LOG.md` の既存履歴
-- ルートの旧ブラウザ版 `index.html / app.js / style.css`
+## 構成と起動
 
-## 方針
+- [app/nadameyo](app/nadameyo/README.md): Vite + Reactアプリ。起動・install・test・lint・buildの手順もここに置く。
+- [辞書レビュー](docs/INTENT_DICTIONARY_REVIEW.md): 候補の採用・保留・除外を確認する一覧。
+- [COMMAND_LOG](docs/COMMAND_LOG.md): 重要なコマンドと既知の環境問題。
 
-「正しい言葉を選ぶ」だけではなく、相手・状況・関係・履歴によって同じ言葉の意味が変わるゲームを目指す。
+入力 → `app/nadameyo/src/App.jsx` → アプリ内の `src/lib/intentMatcher.js` で正規化・判定 → `src/data/intent-dictionary.json` の採用済み表現に応じて緊張度・信頼度・返答を更新する。辞書と判定は `test/intentMatcher.test.js` で検証する。
 
-このプロジェクトのコード/資料を将来 `projects/language-jenga/` 以下へ物理移動する場合は、起動・リンク・履歴の移行を1タスクとして実施する。現時点では整理のための大量移動をしない。
+依存関係とnpmスクリプトはアプリ内で完結する。WhiteSpace全体の方針は [親README](../../README.md) を参照し、このプロジェクト固有の資料は本ディレクトリ内に置く。

@@ -18,13 +18,16 @@ WhiteSpaceは、**複数のゲームや実験作品を継続的に制作・公�
 
 ```text
 WhiteSpace/
-├── projects/
-│   ├── 001-first-release/   # 最初の正式リリース候補
-│   └── language-jenga/      # 既存WhiteSpace/宥めよ系
-├── prototypes/
-│   └── 001-nadameyo/        # 言語ジェンガ側の既存実装
-├── docs/                    # 既存履歴・辞書資料（言語ジェンガ側）
-└── PROJECT_STATE.md         # WhiteSpace全体の現在地
+├── README.md
+├── PROJECT_STATE.md         # WhiteSpace全体の現在地
+└── projects/
+    ├── README.md           # 作品一覧
+    ├── 001-first-release/  # 最初の正式リリース候補
+    └── language-jenga/
+        ├── README.md
+        ├── PROJECT_STATE.md
+        ├── docs/           # 仕様・TODO・辞書レビュー・コマンド履歴
+        └── app/nadameyo/   # 既存Vite + Reactアプリ
 ```
 
 ## リポジトリ方針
@@ -33,11 +36,11 @@ WhiteSpace/
 
 ただし、各ゲームが本制作・公開・保守フェーズへ進み、依存関係やCI、権限、ブランドを独立させた方がよくなった場合は、そのゲームだけ別repoへ切り出す。
 
-## 既存ドキュメントについて
+## 文書とコードの置き場所
 
-ルートの `SPEC.md`、`ACCEPTANCE.md`、`TODO.md`、`docs/INTENT_DICTIONARY_REVIEW.md`、既存の `docs/COMMAND_LOG.md`、`prototypes/001-nadameyo/` は、**言語ジェンガ（仮）プロジェクトの既存資産**として扱う。
+ルートには全体の案内・現在地・共通設定だけを置く。各ゲームの仕様、タスク、実装、依存関係は対応するプロジェクト内で管理する。
 
-現時点ではリンクや起動環境を壊さないため物理移動は行っていない。
+宥めよ・会話ゲーム・intent辞書の既存資産は [言語ジェンガ](projects/language-jenga/README.md) に集約済み。起動・検証コマンドは [宥めよのREADME](projects/language-jenga/app/nadameyo/README.md) を参照する。
 
 ## GitHub
 

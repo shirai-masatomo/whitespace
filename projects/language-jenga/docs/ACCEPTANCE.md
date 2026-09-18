@@ -1,5 +1,7 @@
 # 完了条件（ACCEPTANCE）
 
+パスは `projects/language-jenga/` を基準に記載する。
+
 このファイルは、作業を「完了」と判断するための条件を記録する。TODOは、対応する条件を実装・確認できた場合だけ完了にする。
 
 ## 現在のマイルストーン: intent候補の人手レビュー
@@ -13,12 +15,19 @@
 
 ## 完了済みマイルストーン
 
+### WhiteSpace親プロジェクトへの分離
+
+- 固有文書は `docs/`、アプリは `app/nadameyo/` へ集約。
+- 旧案内図をREADMEへ統合し、未使用のルート練習アプリを削除。履歴はGitに保持。
+- 移動後のinstall・辞書生成・test・lint・build・ブラウザ操作を確認。
+- Markdownリンクと旧パス参照を検査。ゲームコード・依存設定・別作品・別worktreeを維持。
+
 ### 「宥めよ」開発手順の安定化
 
-- `PROJECT_STATE.md`、`SPEC.md`、`ACCEPTANCE.md`、`TODO.md` が存在する。
-- アプリ固有の履歴を `prototypes/001-nadameyo/APP_STATE.md` で管理する。
+- `PROJECT_STATE.md`、`docs/SPEC.md`、`docs/ACCEPTANCE.md`、`docs/TODO.md` が存在する。
+- アプリ固有の履歴を `app/nadameyo/APP_STATE.md` で管理する。
 - コマンド履歴を `docs/COMMAND_LOG.md` で管理する。
-- `prototypes/001-nadameyo` でlintとproduction buildが成功する。
+- `app/nadameyo` でlintとproduction buildが成功する。
 - ローカル開発サーバーがHTTP `200`を返す。
 - マイルストーンの更新をGitへコミットする。
 
@@ -35,10 +44,10 @@
 
 ### プロジェクト文書の日本語化と整理
 
-- `SPEC.md`、`ACCEPTANCE.md`、`TODO.md` の本文が日本語で書かれている。
+- `docs/SPEC.md`、`docs/ACCEPTANCE.md`、`docs/TODO.md` の本文が日本語で書かれている。
 - ルートの `README.md` が現在のWhiteSpaceプロジェクトを説明している。
-- `prototypes/001-nadameyo/README.md` が「宥めよ」の起動方法と構成を説明している。
-- `docs/PROJECT_MAP.md` からプロジェクト構成と各管理文書の役割を理解できる。
+- `app/nadameyo/README.md` が「宥めよ」の起動方法と構成を説明している。
+- 本プロジェクトの `README.md` からプロジェクト構成と各管理文書の役割を理解できる。
 - コード上の識別子、コマンド、intent名が維持されている。
 - Markdownのローカルリンクにリンク切れがない。
 - コードやゲーム挙動に変更がない。
