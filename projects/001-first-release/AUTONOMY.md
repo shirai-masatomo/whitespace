@@ -1,6 +1,8 @@
 # AUTONOMY — DIVE DIVE
 
-[WhiteSpace基盤方針](../../docs/FOUNDATION.md)に対する、本プロジェクトだけの運用ルール。
+**運用モード: 完全自律型**
+
+共通ルールは [WhiteSpace 自律運用](../../docs/AUTONOMY.md) を正本とする。このファイルにはDIVE DIVE固有の例外・判断境界だけを書く。
 
 ## 毎回のループ
 
