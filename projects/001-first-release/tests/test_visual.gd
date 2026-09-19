@@ -17,7 +17,15 @@ func capture(label: String) -> void:
 	for frame in range(3):
 		await process_frame
 		await RenderingServer.frame_post_draw
-	var result := root.get_texture().get_image().save_png("res://artifacts/%s.png" % label)
+	var shot := root.get_texture().get_image()
+	# Catch actual GPU regressions: node visibility alone missed disappearing buttons.
+	if label == "goal":
+		for point in [Vector2i(320, 500), Vector2i(750, 500)]:
+			var color := shot.get_pixelv(point)
+			if color.g < 0.6 or color.b < 0.5:
+				failed = true
+				push_error("Goal replay/exit buttons must render above the deep ocean")
+	var result := shot.save_png("res://artifacts/%s.png" % label)
 	if result != OK:
 		failed = true
 		push_error("Screenshot failed: " + label)

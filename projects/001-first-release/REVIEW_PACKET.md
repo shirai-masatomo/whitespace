@@ -56,11 +56,11 @@
 | 酸素スポット | 260mの深海 |
 | ![補給](review/09-oxygen.png) | ![深海](review/10-deep-ocean.png) |
 
-追加確認: [動くコンテナ](review/moving-container.png) / [酸素切れ直前](review/low-oxygen.png) / [泡で救助](review/emergency-ascent.png) / [再挑戦](review/retry.png)。カメラ比較: [一人称](review/camera-first-person.png) / 上表の三人称 / [俯瞰](review/route-survey.png)。三人称は足元と着地点、俯瞰は候補全体、一人称は海中の視線に向く。V/Fで比較可能。
+追加確認: [動くコンテナ](review/moving-container.png) / [酸素切れ直前](review/low-oxygen.png) / [泡で救助](review/emergency-ascent.png) / [再挑戦](review/retry.png) / [クリア・再プレイ](review/goal.png)。カメラ比較: [一人称](review/camera-first-person.png) / 上表の三人称 / [俯瞰](review/route-survey.png)。三人称は足元と着地点、俯瞰は候補全体、一人称は海中の視線に向く。V/Fで比較可能。
 
 ## Codex自身が気になる点・判定
 
 - Spaceによる自由な修正と瞬時補給で、通常足場を飛ばしやすい。足場を使う安心感と急いで抜けるリスクが面白いかは未判断。
 - 今は景観の方向を見る試作。光線・水・岩の形は簡易で、Only Up級の完成品質ではない。音/アニメーション/物理の側面衝突/低スペック性能は未対応。
 
-**HUMAN_REVIEW**：3サイクル修正後の中核操作の節目。「上下に修正しながら足場と酸素を選ぶ遊びを、続けたくなるか」だけ人間が判断する。数値やUIの修正ごとに再承認は求めない。
+**HUMAN_REVIEW**：4サイクル修正後の中核操作の節目。「上下に修正しながら足場と酸素を選ぶ遊びを、続けたくなるか」だけ人間が判断する。数値やUIの修正ごとに再承認は求めない。

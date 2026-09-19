@@ -1,7 +1,5 @@
 shader_type spatial;
 render_mode unshaded, cull_disabled, fog_disabled;
-uniform float underwater = 0.0;
-uniform float camera_depth = 0.0;
 varying vec3 world_point;
 void vertex() {
  world_point = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz;
@@ -9,6 +7,7 @@ void vertex() {
  VERTEX.y += sin(world_point.z * 0.23 - TIME * 0.65) * 0.08;
 }
 void fragment() {
+ float underwater = 1.0 - smoothstep(-1.5,0.8,CAMERA_POSITION_WORLD.y);
  vec2 p = world_point.xz;
  float a = sin(dot(p, vec2(0.18,0.11)) + TIME * 0.8);
  float b = sin(dot(p, vec2(-0.09,0.23)) - TIME * 0.65);
@@ -23,6 +22,6 @@ void fragment() {
  float window = exp(-dot(p-vec2(15.0,-45.0),p-vec2(15.0,-45.0))/260.0);
  EMISSION = vec3(0.70,0.93,1.0) * window * underwater * 5.0;
  float distance_fade = 1.0 - smoothstep(500.0,1150.0,length(CAMERA_POSITION_WORLD.xz-p));
- float depth_fade = exp(-max(0.0,camera_depth-20.0)/35.0);
+ float depth_fade = exp(-max(0.0,-CAMERA_POSITION_WORLD.y-20.0)/35.0);
  ALPHA = mix(0.97,(0.35 + window * 0.65)*depth_fade,underwater)*distance_fade;
 }

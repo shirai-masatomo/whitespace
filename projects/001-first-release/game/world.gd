@@ -243,8 +243,6 @@ func update_depth(camera_y: float) -> void:
 	environment.ambient_light_energy = lerpf(0.45, lerpf(0.48, 0.30, deep), immersion)
 	sun.light_energy = lerpf(1.25, lerpf(1.15, 0.35, deep), immersion)
 	sun.light_color = Color("fff0c8").lerp(Color("74bed4"), immersion * middle)
-	water_material.set_shader_parameter("underwater", immersion)
-	water_material.set_shader_parameter("camera_depth", depth)
 	shafts.visible = camera_y < 10 and depth < 150
 	sun_disc.visible = camera_y > -1.5
 
