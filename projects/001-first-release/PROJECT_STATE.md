@@ -14,14 +14,14 @@
 
 ## 確認済み
 
-対象コード `e765eac`。`check -BuildFolder windows-preview` 成功: format/lint/依存整合性、ルール479・シーン430・音57・実衝突689・探索比較18、Windows Release build/配布EXE headless起動。上面メッシュ2688点は補助証拠のみ。既存11実経路を維持。
+対象コード `bab488e`。`check -BuildFolder windows-preview` 成功: format/lint/依存整合性、ルール479・シーン430・音57・実衝突689・探索比較19、Windows Release build/配布EXE headless起動。上面メッシュ2688点は補助証拠のみ。既存11実経路を維持。
 
 Forward+/GLで泡→潮流→穴→藻へ連続入力、通常操作/失敗/再挑戦/450m、配布EXE120フレーム起動成功。Forward+で岸壁/沖側の連続試走も成功。画面外・無音・非捕捉で実施、人間のプロセスは停止していない。
 
 - 同じ80m地点: 酸素30%で直行失敗/泡経由7.72秒で生還。100%なら泡なし4.37秒で成功。
 - 無入力4秒: 流れありは曲がり角まで0.37m、なし40.62m。横へ離脱可能。
 - RTX 4070 SUPER / 1280×720 / 6静止場面: Forward+中央値2.04〜3.01ms・P95最大4.21ms、GL1.00〜1.71ms・1.95ms。GPU単体時間/全場面の最悪値ではない。
-- CI: 初回試作 `a26bc09` [成功](https://github.com/shirai-masatomo/whitespace/actions/runs/35443019280)。最終コード `e765eac` [成功](https://github.com/shirai-masatomo/whitespace/actions/runs/35443862891)。
+- CI: 初回試作 `a26bc09` [成功](https://github.com/shirai-masatomo/whitespace/actions/runs/35443019280)。最終コード `bab488e` [成功](https://github.com/shirai-masatomo/whitespace/actions/runs/35444306861)。
 
 ## 未解決と次
 

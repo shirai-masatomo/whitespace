@@ -1,6 +1,6 @@
 # DIVE DIVE — REVIEW PACKET
 
-2026-09-19 / コード `e765eac` / **CHANGES・SELF_CONTINUE**。450m人間試遊は完了。今回は再提出ではなく、面白さを探す比較試作の記録。同一Codexの自己評価。
+2026-09-19 / コード `bab488e` / **CHANGES・SELF_CONTINUE**。450m人間試遊は完了。今回は再提出ではなく、面白さを探す比較試作の記録。同一Codexの自己評価。
 
 ## 今どう遊べるか
 
@@ -37,7 +37,7 @@
 
 ## 検証と自己批評
 
-全check成功: format/lint/依存整合性、ルール479・シーン430・音57・実衝突689・新比較18、既存11実経路、Windows Release build。Forward+/GLで探索・失敗・再挑戦・450m、配布EXE起動を確認。Forward+岸壁/沖側も再試走。[CI状態](PROJECT_STATE.md)。Actionsはheadlessで画質判定を含みません。
+全check成功: format/lint/依存整合性、ルール479・シーン430・音57・実衝突689・新比較19、既存11実経路、Windows Release build。Forward+/GLで探索・失敗・再挑戦・450m、配布EXE起動を確認。Forward+岸壁/沖側も再試走。[CI状態](PROJECT_STATE.md)。Actionsはheadlessで画質判定を含みません。
 
 RTX 4070 SUPER / 1280×720 / 6静止場面: Forward+中央値2.04〜3.01ms、GL1.00〜1.71ms。P95最大4.21/1.95ms。[測定](review/render-forward_plus.json)。別GPUや長時間、音色の主観評価は未確認。
 
