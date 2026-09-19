@@ -16,7 +16,7 @@
 - 全足場をたどる自動操作は104.03秒、失敗0回でゴール。自然沈降・高速下降・減速・着地・補給・連続救助・即再挑戦を検証。
 - `./dev.ps1 visual`: 実描画で指定8状態、同一位置のカメラ比較、浮上後のゴール、再プレイ、960×540ポーズを確認。RTX 4070 SUPER / OpenGL 3.3。
 - 自己レビューで表面の重なりによるちらつき、案内のコントラスト、浮上中の誤表示を修正。代表画像と数値は [README](README.md#今回の評価資料) に集約。
-- CI: 今回の変更をGitHubへpush後、Windows Actionsの結果を確認してからmainへ反映する。
+- CI: [Windows Actions #35418648092](https://github.com/shirai-masatomo/whitespace/actions/runs/35418648092) 成功（コードcommit `7286b5b`）。setup/check/build/EXE起動と配布ZIP・ログのartifact保存を確認。
 
 ## 次の区切り
 
