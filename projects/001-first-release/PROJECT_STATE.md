@@ -4,7 +4,7 @@
 
 ## 現在地
 
-- Phase 1 / 中核プロトタイプ。ユーザーがDIVE DIVEを正式制作対象に決定済み。
+- Phase 1 / 中核プロトタイプ完成・人間のプレイ感レビュー待ち。ユーザーがDIVE DIVEを正式制作対象に決定済み。
 - 目的: 深い海底へ潜る3D高難易度アクションをWindows向けに完成させる。Steam対応は完成が見えてから。
 - Godot 4.7.2 / GDScript / Compatibility描画 / 日本語。オフライン・キーボード/マウス。
 - 0〜300mの3D試験空間、水平/上下移動、深度、圧力、停止回復、限界で最大55mの強制浮上、シームレス再挑戦、ゴール、ポーズ、再プレイが動く。
@@ -16,7 +16,7 @@
 - 慎重に潜る自動ルートは50.47秒で300mへ到達。急降下は約63mで限界になり、約8mへ強制浮上。
 - Windows版起動・開始画面→3D表示を確認。実描画テストで警告、強制浮上、回復、ゴール、再挑戦、縮小ポーズ画面を確認。
 - 画面自己レビューで細すぎる日本語フォントを発見し、ウェイト500へ修正。再描画で確認済み。
-- CI: Windowsでsetup/check/build/artifact保存を行う構成を追加。GitHub実行結果は確認中。
+- CI: [初回Windows実行](https://github.com/shirai-masatomo/whitespace/actions/runs/35417336802)が成功（コードcommit `4a092cd`）。setup/check/build/EXE起動と配布zip・ログのartifact保存まで確認。
 
 ## 次の区切り
 
@@ -38,3 +38,5 @@
 - 権限制限下ではGodotのユーザーデータ作成が失敗した。必要なGodot実行だけ適切な権限で再実行し解決。
 - 初回exportは出力フォルダ不足で失敗。dev.ps1がbuild/windowsを作成してからexportする。
 - 可変フォントのウェイトは整数のOpenTypeタグで指定する。文字列指定では今回の環境で細いままだった。
+
+- シーン単独のexport指定ではpreload依存が欠けた。全ゲーム資産をexportし、tests/tools/build/artifactsを除外する。build/artifactsには.gdignoreも生成し、検証画像をゲームへ混入させない。
