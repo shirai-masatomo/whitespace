@@ -43,7 +43,6 @@ func _make_platforms() -> void:
 		add_child(root)
 		platforms.append(root)
 		Nature.deck(root, data, index)
-		Collision.build(root, index)
 		if data.oxygen:
 			Nature.oxygen_algae(root, index)
 			effects.vent(data.position + Vector3.UP * .4)
@@ -64,6 +63,7 @@ func _make_platforms() -> void:
 					lamp,
 					Vector3(-4 + i * 2, 0, -3)
 				)
+		Collision.build(root, index)
 
 
 func _make_ocean() -> void:

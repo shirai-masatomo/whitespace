@@ -3,6 +3,7 @@ extends "res://tests/test_visual.gd"
 
 
 func run() -> void:
+	sequence_limit_seconds = 140
 	root.unfocusable = true
 	capture_root = "res://artifacts/reef-" + RenderingServer.get_current_rendering_method()
 	DirAccess.make_dir_recursive_absolute(capture_root + "/sequence")
@@ -20,14 +21,18 @@ func run() -> void:
 		if not await steer(target):
 			break
 		if target == 11:
-			game.pitch = -.28
-			game.yaw = -.5
+			var ray_point: Vector3 = game.world.life.rays[0].position
+			var offset: Vector3 = ray_point - game.model.position
+			game.pitch = -.22
+			game.yaw = atan2(-offset.x, -offset.z)
 			await capture("27-ray-and-coast")
 			game.yaw = 0
 			game.pitch = -.65
 		if target == 13:
 			await shelf_walk()
+			game.pitch = -.35
 			await capture("28-cliff-garden")
+			game.pitch = -.65
 		if target == 14:
 			game.pitch = -.22
 			game.yaw = -.8
@@ -35,7 +40,9 @@ func run() -> void:
 			game.yaw = 0
 			game.pitch = -.65
 		if target == 15:
+			game.pitch = -.35
 			await capture("30-open-water-again")
+			game.pitch = -.65
 	if game.model.mode != Model.Mode.COMPLETE:
 		failed = true
 		push_error("Cliff journey must reach the goal")

@@ -126,6 +126,7 @@ func run() -> void:
 	_test_driftwood_footing(game)
 	game.queue_free()
 	await process_frame
+	await create_timer(.1).timeout
 	print("Scene: %d checks, %d failures" % [checks, failures])
 	quit(1 if failures else 0)
 

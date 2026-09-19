@@ -182,7 +182,7 @@ func _update_camera(delta: float = 1.0) -> void:
 	var heading := Vector3.FORWARD.rotated(Vector3.UP, yaw)
 	if third_person:
 		# Looking down leans over the edge while retaining the diver in frame.
-		desired = desired.lerp(focus + heading * 9 + Vector3.UP * 26, ledge_view)
+		desired = desired.lerp(focus + heading * 4 + Vector3.UP * 12, ledge_view)
 	if third_person:
 		var query := PhysicsRayQueryParameters3D.create(focus, desired)
 		query.collision_mask = 3
@@ -192,7 +192,7 @@ func _update_camera(delta: float = 1.0) -> void:
 	camera.position = desired
 	camera.rotation = Vector3(pitch, yaw, 0)
 	if third_person and ledge_view > .001:
-		var direction: Vector3 = focus + heading * 11 - desired
+		var direction: Vector3 = focus + heading * 8 - desired
 		var peek_pitch := atan2(direction.y, Vector2(direction.x, direction.z).length())
 		camera.rotation.x = lerpf(pitch, peek_pitch, ledge_view)
 		var diver_direction := focus - desired

@@ -26,7 +26,7 @@ func probe(label: String, surface: Vector3, direction: Vector3, fast: bool, dt: 
 	game.model.grounded = -1
 	game.yaw = 0
 	var gap := 2.3 if absf(direction.y) > .1 else .8
-	game.model.position = surface - direction * gap - Vector3.UP * .85
+	game.model.position = surface - direction * gap - Vector3.UP * game.motion.HEIGHT * .5
 	game.model.velocity = direction * (15 if fast else 7)
 	var touched := false
 	var first_position := Vector3.ZERO

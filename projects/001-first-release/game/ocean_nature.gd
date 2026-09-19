@@ -32,7 +32,8 @@ static func oxygen_algae(parent: Node3D, seed_value: int) -> void:
 	parent.add_child(root)
 	var mat := ShaderMaterial.new()
 	mat.shader = preload("res://game/shaders/oxygen_algae.gdshader")
-	Geo.put(root, Geo.rock(Vector2(2.8, 2.4), .8, seed_value + 33), stone())
+	# Fronds grow directly from the rock or log; no decorative rock pedestal
+	# should introduce an unexplained step across an otherwise curved trunk.
 	var combined := SurfaceTool.new()
 	combined.begin(Mesh.PRIMITIVE_TRIANGLES)
 	# Leave head and shoulders above the canopy; refilling must not hide the diver.

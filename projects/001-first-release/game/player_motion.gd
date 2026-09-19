@@ -1,8 +1,8 @@
 extends CharacterBody3D
 ## The playable character sweeps a volume against the actual level geometry.
 ## Model-only route estimates deliberately do not replace this integration path.
-const RADIUS := .32
-const HEIGHT := 1.7
+const RADIUS := .38
+const HEIGHT := 2.1
 var world: Node3D
 var contacts: Array[Vector3] = []
 

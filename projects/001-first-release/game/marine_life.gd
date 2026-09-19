@@ -44,6 +44,8 @@ func make_ray() -> Node3D:
 	var mat := ShaderMaterial.new()
 	mat.shader = preload("res://game/shaders/ray.gdshader")
 	Geo.put(animal, st.commit(), mat)
+	for side in [-1, 1]:
+		Geo.sphere(animal, .11, Geo.material(Color("0a1f25")), Vector3(side * .34, .25, -1.35))
 	var tail := Geo.put(
 		animal,
 		Geo.loft([Vector3(0, .13, .13), Vector3(4, .015, .015)], 8),
@@ -58,9 +60,10 @@ func update(player: Vector3, elapsed: float) -> void:
 	for index in range(rays.size()):
 		var phase := elapsed * .075 + index * .65
 		# The school crosses the open water toward an optional rock-garden entrance.
-		rays[index].position = Vector3(
-			-14 + cos(phase) * 40, -153 + sin(phase) * 17, -100 + sin(phase) * 15
-		)
+		var natural := Vector3(-30 + cos(phase) * 25, -143 + sin(phase) * 12, -83 + sin(phase) * 20)
+		var separation := natural - player
+		var avoidance := separation.normalized() * maxf(0, 5 - separation.length())
+		rays[index].position = natural + avoidance
 		rays[index].rotation.y = atan2(sin(phase) * 40, -cos(phase) * 15)
 	for index in range(shoals.size()):
 		var away := origins[index] - player

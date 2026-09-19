@@ -8,6 +8,7 @@ var failed: bool = false
 var simulation_frames: int = 0
 var sequence: Array[Dictionary] = []
 var record_sequence := true
+var sequence_limit_seconds := 65.0
 var capture_root: String
 
 
@@ -70,7 +71,11 @@ func render_step() -> void:
 	await process_frame
 	await RenderingServer.frame_post_draw
 	simulation_frames += 1
-	if record_sequence and simulation_frames % 120 == 0 and game.model.elapsed <= 65:
+	if (
+		record_sequence
+		and simulation_frames % 120 == 0
+		and game.model.elapsed <= sequence_limit_seconds
+	):
 		var filename := "frame-%03d.jpg" % sequence.size()
 		var result := root.get_texture().get_image().save_jpg(
 			capture_root + "/sequence/" + filename, .85
