@@ -9,6 +9,7 @@ var ascent: GPUParticles3D
 var rescue: GPUParticles3D
 var splash: GPUParticles3D
 var entry_cloud: GPUParticles3D
+var cavern_jet: GPUParticles3D
 var previous_y: float = 6
 
 
@@ -25,6 +26,8 @@ func _ready() -> void:
 	entry_cloud = particles(360, 3, .025, .095, Vector3(0, 3.4, 0), Vector3(1.4, 1, 1.4), true)
 	entry_cloud.one_shot = true
 	entry_cloud.explosiveness = .75
+	cavern_jet = particles(260, 4, .065, .22, Vector3.UP * 7, Vector3(3, 16, 3), true)
+	cavern_jet.position = preload("res://game/playground_rules.gd").UPDRAFT
 	for emitter in [breath, wake, fast, ascent, rescue, splash, entry_cloud]:
 		emitter.emitting = false
 
@@ -80,6 +83,9 @@ func current(point: Vector3, direction: Vector3) -> void:
 
 
 func update(model) -> void:
+	cavern_jet.emitting = model.config.cavern_current_enabled
+	cavern_jet.visible = model.config.cavern_current_enabled
+	cavern_jet.speed_scale = model.Playground.updraft_pulse(model.elapsed)
 	var position_above: Vector3 = model.position + Vector3.UP * 1.3
 	motes.position = model.position
 	motes.emitting = model.position.y < 0 and not model.in_dry_cave()

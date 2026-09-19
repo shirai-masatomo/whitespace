@@ -11,6 +11,8 @@
 
 新しい寄り道は桟橋の右側。魚群の向かう海藻林には歩ける岩礁と縦穴があります。さらに横へ泳ぐと二つの入口を持つ洞窟。内部では水面へ上がって歩けます。屋根や外側も通れ、必須経路ではありません。新しい4群落の藻も、実際に接触した安全位置を救助先として記録します。洞窟の側面にも抜け穴があり、両端を通らず入れます。
 
+側面穴の外には泡の上昇流。乗ると上へ戻され、横に泳げば外へ出られます。Eで潜り抜けることもできますが、酸素を多く使います。
+
 この作業環境の最新出力は `windows-preview` です。別PCには `build/DIVE-DIVE-windows.zip` を展開して渡します。Godot/Python不要。[GitHub Actions](https://github.com/shirai-masatomo/whitespace/actions/workflows/dive-dive.yml) の最新成功実行の **DIVE-DIVE-windows** artifactでも配布物を取得できます。
 
 | 操作 | 動作 |

@@ -9,12 +9,13 @@
 - 海上開始、自然沈降/E急降下/Space浮上、450mの既存経路とシームレス救助を維持。
 - 右の浅海に歩ける連続岩礁、ケルプ林、縦穴、二つの口を持つ洞窟。内部の空気溜まりへ泳ぎ、歩いて別出口へ潜れる。屋根/外側/反対口も実操作で到達。
 - 左の巨大泡/曲がる潮流/岩アーチは別候補。18案を比較中。板状地形・長い草・格子状水面を棄却/改修。**面白さPASSではない**。
+- 洞窟側面の泡上昇流に乗る/横へ離れる/Eで逆らう試作。2秒無入力で8.65m浮上（OFFは9m沈降）。11m/sから9m/sへ調整、追加スポットライトは筋が出るため棄却。
 - 最新出力: **build/windows-preview/DIVE DIVE.exe**。人間試遊済みbuild/windowsと旧windows-realは保持。[起動](README.md) / [評価入口](REVIEW_PACKET.md) / [自己批評](AI_REVIEW.md)。
 - Godot 4.7.2、Windows、日本語、Forward+ / Compatibility、独自生成素材。Steam/保存/450m以深は未実装。
 
 ## 確認済み
 
-現在ブランチ `codex/dive-dive-playground` の探索試作。`check -BuildFolder windows-preview` 成功: format/lint/依存整合性、ルール479・シーン430・音57・実衝突689・探索19・新空間88・入水6、既存11実経路、Windows Release build/EXE headless起動。上面メッシュ2688点は補助証拠。
+現在ブランチ `codex/dive-dive-playground` の探索試作。`check -BuildFolder windows-preview` 成功: format/lint/依存整合性、ルール479・シーン430・音57・実衝突689・探索19・新空間96・入水6、既存11実経路、Windows Release build/EXE headless起動。上面メッシュ2688点は補助証拠。
 
 Forward+/GLで桟橋→岩礁歩行→縦穴→洞窟歩行→別出口→125mへ連続入力。屋根/外側/側面穴/逆口は別試走。両方式で配布EXE120フレーム成功。画面外・無音・非捕捉。CI: 最初の探索commit `dec6b4a` は[成功](https://github.com/shirai-masatomo/whitespace/actions/runs/35447154864)。以後の改善差分は再push後に確認する。
 
@@ -23,10 +24,12 @@ Forward+/GLで桟橋→岩礁歩行→縦穴→洞窟歩行→別出口→125m�
 ## 未解決と次
 
 1. DD-061: 側面から入れる洞窟を追加したが、入口/奥行き/材質はまだ模型的。内部/外側の発見を改善。
-2. DD-062: 窓の外の泡上昇流を試作し、乗る/避ける/離脱の比較。弱ければ削除。
+2. DD-063: 窓や屋根から見える次の発見を作る。魚群/暗い穴/未知の影から複数案を比較し、単なる背景増加は棄却。
 3. DD-054: 最初の数分の変化。横探索の後、140m以降の岩列を場所/現象へ置き換える候補を試す。
 
 新しい藻4群落も訪問した安全位置へ救助し、操作復帰まで実検証。太陽の白い広がりを縮め、水中で上を向いた時も主人公が画面に残るよう修正。入水の品質全体は未合格。
+
+GitHub同期: `dec6b4a`までpush済み、[下書きPR #2](https://github.com/shirai-masatomo/whitespace/pull/2)とCI成功。`2f31230`以後の追加送信は自動承認レビューが「この内容を指定先へ送る明示許可がない」と拒否。既存公開repo・admin/push権限・main一致を確認済みでも再拒否されたため、ユーザーへ送信許可を質問中。返答前に別経路で送信しない。ローカル実装/検証は実施可能。ゲーム自体をHUMAN_REVIEWへ戻す理由ではない。
 
 見えた全地形を踏破済みとはしない。洞窟の形、岩の材質、海藻の規則性、140m以降の反復が弱い。音色/別GPU/長時間/初見探索は未確認。外部AIレビューは旧450m対象で、新試作へのPASSではない。HUMAN_DIRECTION / EXTERNAL_AI_REVIEWを必読。
 

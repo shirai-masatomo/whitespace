@@ -5,6 +5,18 @@ const PLANTS: Array[Vector3] = [
 ]
 const CAVE_START := Vector3(68, -54, -42)
 const CAVE_END := Vector3(138, -61, -65)
+const UPDRAFT := Vector3(84, -48, -67)
+
+
+static func updraft_pulse(time: float) -> float:
+	return .35 + .65 * smoothstep(-.6, .3, sin(time * .45))
+
+
+static func updraft(point: Vector3, time: float, speed: float) -> Vector3:
+	var offset := point - UPDRAFT
+	var horizontal := Vector2(offset.x, offset.z).length()
+	var strength := smoothstep(8, 3, horizontal) * smoothstep(24, 15, absf(offset.y))
+	return Vector3.UP * speed * strength * updraft_pulse(time)
 
 
 static func reef_height(x: float, z: float) -> float:

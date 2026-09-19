@@ -22,6 +22,8 @@
 
 [岩礁歩行](review/45-reef-walking.png) / [洞窟の入口](review/46-cavern-mouth.png) / [内部の岸](review/47-air-cave.png) / [側面の抜け穴](review/54-cave-window.png) / [修正した太陽光](review/52-surface-light.png) / [別出口](review/48-other-exit.png) / [屋根](review/49-roof.png) / [GLの内部](review/compatibility/47-air-cave.png)。
 
+[泡の上昇流](review/55-updraft.png) / [GLの上昇流](review/compatibility/55-updraft.png)。流れで上へ戻る・横へ離れる・Eで潜り抜ける操作を比較。2秒無入力でONは8.65m浮上、OFFは9m沈降。追加スポットライトは描画の筋が出るため削除。
+
 [連続画像](review/sequence/index.html)の「岩礁→洞窟」は位置を飛ばさない実入力。屋根/外側/逆向きは別の開始地点からの比較。代表写真は同じゲームカメラで見回して撮影。
 
 ## 実測と限界
@@ -36,8 +38,10 @@
 
 [測定JSON](review/playground.json)。以前の外側比較には壁の縁での足止めと異なる到達精度が混ざっていたため訂正。初見5分/楽しさ/最短経路の証明ではありません。
 
-全check/build成功。既存ルール/音/11実経路/実衝突に、新空間88検査と入水6検査を追加。上下側面を実カプセルで60Hz/15Hz確認。Forward+/GLで新空間、Forward+で入水と配布EXEを検証。CIは[PROJECT_STATE](PROJECT_STATE.md)。
+全check/build成功。既存ルール/音/11実経路/実衝突に、新空間96検査と入水6検査を追加。上下側面を実カプセルで60Hz/15Hz確認。Forward+/GLで新空間、Forward+で入水と配布EXEを検証。CIは[PROJECT_STATE](PROJECT_STATE.md)。
 
 ## まだ不満
 
 太陽光の白い広がり・上向きの主人公フレーム・新しい藻の救助は修正。内部に追加した岩は浮いて見えて遊びにも弱かったため削除。洞窟の模型感、海藻林の規則性と140m以降の岩列は残る。**人間レビューへ戻さず、泡上昇流の比較と場所/現象の探索を継続。**
+
+GitHubは最初の探索commitまで同期済み。その後のローカル改善は自動承認による追加push拒否のため未同期。[状態と許可待ち](PROJECT_STATE.md)。

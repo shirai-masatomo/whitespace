@@ -21,6 +21,13 @@ func run() -> void:
 	await physics_frame
 	game.set_physics_process(false)
 	game.begin()
+	if "--updraft-only" in OS.get_cmdline_user_args():
+		record_sequence = false
+		await compare_updraft()
+		game.queue_free()
+		await process_frame
+		quit(1 if failed else 0)
+		return
 	check(await swim(Reef.PLANTS[0]), "The distant shallow reef is reachable from the pier")
 	await photo("44-kelp-reef-arrival", Vector3(58, -26, -50))
 	for frame in range(30):
@@ -72,6 +79,7 @@ func run() -> void:
 	await compare_spaces()
 	await audit_surfaces()
 	await audit_garden_rescue()
+	await compare_updraft()
 	var file := FileAccess.open("res://artifacts/playground.json", FileAccess.WRITE)
 	file.store_string(
 		JSON.stringify({"checks": checks, "failed": failed, "observations": observations}, "  ")
@@ -242,3 +250,40 @@ func audit_garden_rescue() -> void:
 			game.model.position.distance_to(before) > 2,
 			"Input resumes outside the rock after rescue"
 		)
+
+
+func compare_updraft() -> void:
+	game.model.config = game.model.config.duplicate()
+	for enabled in [false, true]:
+		fixture(Reef.UPDRAFT + Vector3.DOWN * 10)
+		game.model.config.cavern_current_enabled = enabled
+		var initial: float = game.model.position.y
+		for frame in range(120):
+			await tick()
+		observations["updraft_" + str(enabled)] = {
+			"rise": game.model.position.y - initial, "oxygen": game.model.oxygen
+		}
+		check(
+			game.world.effects.cavern_jet.emitting == enabled if gpu else true,
+			"Comparison disables the visible jet too"
+		)
+		await photo("55-updraft-" + str(enabled), Vector3(104, -29, -48))
+		game.avatar.animate(game.model)
+		check(
+			game.avatar.pose == ("ascend" if enabled else "sink"),
+			"Diver pose follows the actual direction through the current"
+		)
+	check(
+		observations.updraft_true.rise > 7 and observations.updraft_false.rise < -8,
+		"The bubble column offers an optional way back upward"
+	)
+	var before: Vector3 = game.model.position
+	for frame in range(150):
+		await tick(Vector2.RIGHT)
+	check(game.model.position.x - before.x > 12, "Horizontal input exits the column freely")
+	check(game.model.velocity.y < 0, "Leaving the column resumes natural sinking")
+	fixture(Reef.UPDRAFT + Vector3.DOWN * 5)
+	before = game.model.position
+	for frame in range(180):
+		await tick(Vector2.ZERO, 1)
+	check(game.model.position.y < before.y - 6, "E can dive against the updraft")

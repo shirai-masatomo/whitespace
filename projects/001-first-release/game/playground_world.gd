@@ -195,15 +195,6 @@ func _make_cave() -> void:
 	glow.light_energy = 2.5
 	glow.omni_range = 24
 	add_child(glow)
-	var window_light := SpotLight3D.new()
-	window_light.position = Vector3(75, -33, -78)
-	window_light.light_color = Color("8bc5ce")
-	window_light.light_energy = 5
-	window_light.spot_range = 55
-	window_light.spot_angle = 23
-	window_light.shadow_enabled = true
-	add_child(window_light)
-	window_light.look_at(Vector3(90, -51, -48))
 
 
 func _cave_window(row: int, side: int) -> bool:

@@ -337,6 +337,8 @@ func _return_step(delta: float) -> void:
 
 func flow_at(point: Vector3) -> Vector3:
 	var flow := Vector3.ZERO
+	if config.cavern_current_enabled:
+		flow += Playground.updraft(point, elapsed, config.cavern_updraft_speed)
 	if config.discovery_enabled:
 		flow += Discovery.bubble_flow(point, elapsed, config.bubble_lift)
 		flow += Discovery.stream_sample(point, config.discovery_stream_speed, config.sink_speed)
