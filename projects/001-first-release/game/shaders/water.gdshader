@@ -3,6 +3,7 @@ render_mode unshaded, cull_disabled, fog_disabled, depth_draw_never;
 uniform sampler2D depth_texture : hint_depth_texture, repeat_disable, filter_nearest;
 uniform sampler2D screen_texture : hint_screen_texture, repeat_disable, filter_linear;
 varying vec3 world_point;
+uniform float surface_level = 0.0;
 float hash(vec2 p){
  uvec2 q=uvec2(ivec2(p));
  uint h=q.x*uint(374761393)+q.y*uint(668265263);
@@ -24,7 +25,7 @@ void vertex(){
  VERTEX.y+=sin(world_point.x*0.17+TIME*0.8)*0.10+sin(world_point.z*0.23-TIME*0.65)*0.08;
 }
 void fragment(){
- float underwater=1.0-smoothstep(-1.5,0.8,CAMERA_POSITION_WORLD.y);
+ float underwater=1.0-smoothstep(-1.5,0.8,CAMERA_POSITION_WORLD.y-surface_level);
  vec2 p=world_point.xz;
  vec2 slope=vec2(ripple(p+vec2(0.2,0))-ripple(p-vec2(0.2,0)),ripple(p+vec2(0,0.2))-ripple(p-vec2(0,0.2)))/0.4;
  vec3 n=normalize(vec3(-slope.x,1.0,-slope.y));
@@ -56,6 +57,6 @@ void fragment(){
  underside+=vec3(0.30,0.60,0.66)*window+vec3(1.0,0.93,0.72)*sun_window*1.6;
  ALBEDO=mix(base,underside,underwater);
  float distance_fade=1.0-smoothstep(500.0,1150.0,length(CAMERA_POSITION_WORLD.xz-p));
- float depth_fade=exp(-max(0.0,-CAMERA_POSITION_WORLD.y-20.0)/35.0);
+ float depth_fade=exp(-max(0.0,surface_level-CAMERA_POSITION_WORLD.y-20.0)/35.0);
  ALPHA=mix(0.99,depth_fade,underwater)*distance_fade;
 }

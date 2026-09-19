@@ -222,7 +222,7 @@ func _update_camera(delta: float = 1.0) -> void:
 	)
 	bubble.position = focus
 	bubble.visible = model.mode == Model.Mode.RETURNING
-	world.update_depth(camera.position.y)
+	world.update_depth(camera.position.y, model.Playground.air_at(camera.position))
 
 
 func next_platform() -> int:

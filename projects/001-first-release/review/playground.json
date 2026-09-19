@@ -1,0 +1,28 @@
+{
+  "checks": 57,
+  "failed": false,
+  "observations": {
+    "cavern_journey_seconds": 37.4166666666658,
+    "horizontal_extent": 132.433258056641,
+    "outside": {
+      "complete": true,
+      "oxygen": 10.4666666666672,
+      "seconds": 23.2833333333333
+    },
+    "outside_fast": {
+      "complete": false,
+      "oxygen": 0.0,
+      "seconds": 21.5000000000001
+    },
+    "reverse": {
+      "complete": true,
+      "oxygen": 100.0,
+      "seconds": 8.33333333333333
+    },
+    "roof": {
+      "complete": true,
+      "oxygen": 47.8333333333337,
+      "seconds": 12.0333333333335
+    }
+  }
+}

@@ -8,6 +8,7 @@ const Driftwood = preload("res://game/driftwood_surface.gd")
 const RockSurface = preload("res://game/rock_surface.gd")
 const Layout = preload("res://game/stage_layout.gd")
 const Discovery = preload("res://game/discovery_rules.gd")
+const Playground = preload("res://game/playground_rules.gd")
 
 var config: Resource
 var collision_motion: Callable
@@ -23,6 +24,10 @@ var best_depth: float = 0.0
 var elapsed: float = 0.0
 var setbacks: int = 0
 var grounded: int = 0
+var terrain_grounded := false
+var standing: bool:
+	get:
+		return grounded >= 0 or terrain_grounded
 var checkpoint: int = 0
 var previous_checkpoint: int = 0
 var visited_oxygen: Array[int] = [0]
@@ -58,6 +63,7 @@ func reset() -> void:
 	elapsed = 0.0
 	setbacks = 0
 	grounded = 0
+	terrain_grounded = false
 	checkpoint = 0
 	previous_checkpoint = 0
 	depth_losses.clear()
@@ -124,7 +130,13 @@ func oxygen_contact() -> int:
 
 
 func at_oxygen() -> bool:
-	return oxygen_contact() >= 0 or in_air_pocket()
+	return (
+		oxygen_contact() >= 0 or in_air_pocket() or in_dry_cave() or Playground.near_plant(position)
+	)
+
+
+func in_dry_cave() -> bool:
+	return Playground.air_at(position + Vector3.UP * 1.4)
 
 
 func in_air_pocket() -> bool:
@@ -147,7 +159,7 @@ func step(delta: float, horizontal: Vector2, descent: float = 0.0, ascend: bool 
 		_return_step(delta)
 		return
 	var acceleration: float = (
-		config.platform_acceleration if grounded >= 0 else config.water_acceleration
+		config.platform_acceleration if standing else config.water_acceleration
 	)
 	var desired: Vector2 = horizontal.limit_length() * config.horizontal_speed
 	var horizontal_velocity := Vector2(velocity.x, velocity.z).move_toward(
@@ -156,13 +168,14 @@ func step(delta: float, horizontal: Vector2, descent: float = 0.0, ascend: bool 
 	velocity.x = horizontal_velocity.x
 	velocity.z = horizontal_velocity.y
 	var start := position
-	current_flow = flow_at(position) if grounded < 0 else Vector3.ZERO
+	current_flow = flow_at(position) if not standing and not in_dry_cave() else Vector3.ZERO
 	if current_flow.length() > .1:
 		interactions.current += 1
 	var next := position + (Vector3(velocity.x, 0, velocity.z) + current_flow) * delta
 	jelly_cooldown = maxf(0, jelly_cooldown - delta)
 	if ascend and position.y < 0.5:
 		grounded = -1
+		terrain_grounded = false
 	if grounded >= 0 and not collision_motion.is_valid() and not inside(next, platforms[grounded]):
 		grounded = -1
 	if grounded < 0 or collision_motion.is_valid():
@@ -171,7 +184,7 @@ func step(delta: float, horizontal: Vector2, descent: float = 0.0, ascend: bool 
 			sink = config.fast_sink_speed
 		elif descent < 0:
 			sink = config.brake_sink_speed
-		if position.y > 0.5:
+		if position.y > 0.5 or Playground.air_at(position):
 			velocity.y = maxf(-20, velocity.y - config.air_gravity * delta)
 		else:
 			var target_speed: float = config.ascent_speed if ascend else -sink
@@ -205,6 +218,7 @@ func step(delta: float, horizontal: Vector2, descent: float = 0.0, ascend: bool 
 		position = result.position
 		velocity = result.velocity
 		grounded = result.grounded
+		terrain_grounded = result.get("terrain_grounded", false)
 	else:
 		position = next
 	# Jelly landing is a readable gentle bounce; rescue and oxygen rules are unchanged.
@@ -217,7 +231,7 @@ func step(delta: float, horizontal: Vector2, descent: float = 0.0, ascend: bool 
 	best_depth = maxf(best_depth, depth)
 	oxygen_rate = 0.0
 	var oxygen_index := oxygen_contact()
-	if oxygen_index >= 0 or position.y >= -1 or in_air_pocket():
+	if at_oxygen() or position.y >= -1:
 		oxygen = config.oxygen_capacity
 		if (
 			oxygen_index >= 0
@@ -229,7 +243,7 @@ func step(delta: float, horizontal: Vector2, descent: float = 0.0, ascend: bool 
 			visited_oxygen.append(oxygen_index)
 	else:
 		var rate: float = config.oxygen_consumption
-		if descent > 0 and not ascend and grounded < 0:
+		if descent > 0 and not ascend and not standing:
 			rate *= config.fast_oxygen_multiplier
 		oxygen_rate = rate
 		oxygen = maxf(0.0, oxygen - rate * delta)
@@ -266,6 +280,7 @@ func begin_return(reason: String) -> void:
 	)
 	return_phase = 0
 	grounded = -1
+	terrain_grounded = false
 	velocity = Vector3.ZERO
 
 

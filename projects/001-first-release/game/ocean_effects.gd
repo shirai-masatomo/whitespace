@@ -8,6 +8,7 @@ var fast: GPUParticles3D
 var ascent: GPUParticles3D
 var rescue: GPUParticles3D
 var splash: GPUParticles3D
+var entry_cloud: GPUParticles3D
 var previous_y: float = 6
 
 
@@ -21,7 +22,10 @@ func _ready() -> void:
 	splash = particles(80, 1.5, .06, .20, Vector3(0, 4, 0), Vector3(1.2, .1, 1.2), true)
 	splash.one_shot = true
 	splash.explosiveness = .95
-	for emitter in [breath, wake, fast, ascent, rescue, splash]:
+	entry_cloud = particles(360, 3, .025, .095, Vector3(0, 3.4, 0), Vector3(1.4, 1, 1.4), true)
+	entry_cloud.one_shot = true
+	entry_cloud.explosiveness = .75
+	for emitter in [breath, wake, fast, ascent, rescue, splash, entry_cloud]:
 		emitter.emitting = false
 
 
@@ -78,13 +82,13 @@ func current(point: Vector3, direction: Vector3) -> void:
 func update(model) -> void:
 	var position_above: Vector3 = model.position + Vector3.UP * 1.3
 	motes.position = model.position
-	motes.emitting = model.position.y < 0
+	motes.emitting = model.position.y < 0 and not model.in_dry_cave()
 	breath.position = position_above + Vector3(0, .25, -.28)
 	wake.position = model.position
 	fast.position = model.position + Vector3.UP * .5
 	ascent.position = model.position
 	rescue.position = position_above
-	var underwater: bool = model.position.y < -1
+	var underwater: bool = model.position.y < -1 and not model.in_dry_cave()
 	var returning: bool = model.mode == model.Mode.RETURNING
 	breath.emitting = underwater and not returning
 	wake.emitting = (
@@ -100,4 +104,8 @@ func update(model) -> void:
 		splash.position = Vector3(model.position.x, 0, model.position.z)
 		splash.restart()
 		splash.emitting = true
+		if model.position.y < -.5:
+			entry_cloud.position = Vector3(model.position.x, -1.6, model.position.z)
+			entry_cloud.restart()
+			entry_cloud.emitting = true
 	previous_y = model.position.y

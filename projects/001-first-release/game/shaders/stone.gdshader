@@ -3,6 +3,7 @@ render_mode cull_disabled;
 #include "res://game/shaders/natural_noise.gdshaderinc"
 varying vec3 wp;
 varying float tint_variation;
+uniform float caustic_strength = 1.0;
 void vertex(){wp=(MODEL_MATRIX*vec4(VERTEX,1.0)).xyz;tint_variation=natural_hash(floor(MODEL_MATRIX[3].xyz*0.31));}
 void fragment(){
  vec3 dx=dFdx(wp),dy=dFdy(wp);
@@ -32,5 +33,5 @@ void fragment(){
   NORMAL=normalize((VIEW_MATRIX*vec4(perturbed,0.0)).xyz);
  }
  float caustic=pow(1.0-abs(sin(wp.x*0.65+sin(wp.z*0.5+TIME*0.5))+sin(wp.z*0.63-TIME*0.3))*0.5,12.0);
- EMISSION=vec3(0.04,0.10,0.08)*caustic*exp(min(0.0,wp.y)/65.0);
+ EMISSION=vec3(0.04,0.10,0.08)*caustic*exp(min(0.0,wp.y)/65.0)*caustic_strength;
 }

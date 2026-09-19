@@ -65,7 +65,7 @@ func _ready() -> void:
 			beams.append(beam)
 
 
-func update(camera_y: float) -> void:
+func update(camera_y: float, cave_air: bool = false) -> void:
 	var immersion := 1.0 - smoothstep(-1.4, 0.8, camera_y)
 	var depth := maxf(0, -camera_y)
 	var middle := smoothstep(25, 170, depth)
@@ -89,3 +89,8 @@ func update(camera_y: float) -> void:
 		environment.volumetric_fog_sky_affect = immersion
 		for beam in beams:
 			beam.light_energy = 9 * immersion * (1 - deep)
+	if cave_air:
+		environment.fog_density = .0005
+		environment.ambient_light_energy = .34
+		if forward:
+			environment.volumetric_fog_density = 0

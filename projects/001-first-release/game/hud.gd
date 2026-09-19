@@ -97,11 +97,13 @@ func _draw() -> void:
 		status = "緊急浮上中 → %dmから、そのまま再挑戦" % int(maxf(0, -model.return_target.y))
 	elif model.in_air_pocket():
 		status = "泡の中でひと息  ·  外へ泳ぐ / Eで下へ抜ける"
+	elif model.in_dry_cave():
+		status = "空気の残る洞窟  ·  WASD 歩く  ·  水へ入ると再び泳げます"
 	elif model.velocity.y < -8:
 		status = "急降下中  ·  酸素を多く使っています"
 	elif model.velocity.y > 1:
 		status = "浮上中  ·  Spaceを離すと沈みます"
-	elif model.grounded > 0:
+	elif model.standing:
 		status = "下を向くと、足場の先を見渡せます  ·  E 急降下  ·  Space 浮上"
 	draw_rect(Rect2(300, 660, 820, 34), Color(0.02, 0.07, 0.1, 0.65))
 	text_at(Vector2(317, 683), status, 17, ORANGE if returning else WHITE)

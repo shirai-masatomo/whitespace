@@ -1,6 +1,6 @@
 # DIVE DIVE
 
-**海へ飛び込み、泡の中で息をつき、潮流と岩の穴の先を探る水中ゲーム。** 450m試遊の「まだ面白くない」を受け、独自の面白さを比較する制作版です。完成版・人間レビュー待ちではありません。
+**海へ飛び込み、海藻林を歩き、洞窟へ泳ぎ、別の口から海へ戻る水中ゲーム。** 「まだ人間がレビューする段階ではない」を受け、海そのものを遊び場にする制作版です。完成版・人間レビュー待ちではありません。
 
 ## 今すぐ遊ぶ（Windows）
 
@@ -8,6 +8,8 @@
 2. 「潜りはじめる」またはEnter。WASDで桟橋の端から海へ飛び込む。
 3. マウスで海を見渡す。光る藻、息ができる大きな泡、泡が流れ込む岩の穴が寄り道の候補。藻と泡は即酸素100%。
 4. 450mの「裂け目の先」に着地するとクリア。
+
+新しい寄り道は桟橋の右側。魚群の向かう海藻林には歩ける岩礁と縦穴があります。さらに横へ泳ぐと二つの入口を持つ洞窟。内部では水面へ上がって歩けます。屋根や外側も通れ、必須経路ではありません。新しい4群落の藻は現在即補給のみで、救助地点の更新は既存足場の藻が対象です（整合改善中）。
 
 この作業環境の最新出力は `windows-preview` です。別PCには `build/DIVE-DIVE-windows.zip` を展開して渡します。Godot/Python不要。[GitHub Actions](https://github.com/shirai-masatomo/whitespace/actions/workflows/dive-dive.yml) の最新成功実行の **DIVE-DIVE-windows** artifactでも配布物を取得できます。
 
@@ -54,6 +56,8 @@ cd projects/001-first-release
 - `visual`: 実GPUで入水→各操作→失敗→再挑戦→450m、カメラ・960×540 UI。`artifacts/<renderer>/` に撮影。
 - `visual-reef`: 岸壁歩行→裂け目、沖側の別経路を連続操作し、`artifacts/reef-<renderer>/` に撮影。どちらも画面外・フォーカスなし・マウス非捕捉。画像を目視確認します。
 - `visual-discovery`: 入水→泡→曲がる潮流→岩の穴→藻への連続入力、酸素残量による寄り道比較。`artifacts/discovery-<renderer>/` に撮影。
+- `visual-playground`: 桟橋→岩礁歩行→縦穴→内部歩行→別出口。屋根/外側/逆口は別試走、上下側面の実衝突も検証。
+- `visual-entry`: 海上から入水、太陽光、魚群の先の海藻林を撮影。`artifacts/entry-<renderer>/`。
 - `gpu-smoke -BuildFolder windows-preview`: 配布EXEを画面外・無音で起動し120フレーム描画。`-Renderer gl_compatibility` でも確認できます。
 - `benchmark -Renderer forward_plus` / `benchmark -Renderer gl_compatibility`: 6場面の1280×720フレーム時間。結果は `artifacts/render-*.json`。
 - `format` / `test` / `lint` / `build` / `editor`: 個別実行。生成ログは `artifacts/`、レビュー用の選別画像は `review/`。
