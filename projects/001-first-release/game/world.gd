@@ -8,6 +8,7 @@ const Diver = preload("res://game/diver.gd")
 const Life = preload("res://game/marine_life.gd")
 const Layout = preload("res://game/stage_layout.gd")
 const TUNING = preload("res://game/default_config.tres")
+const Collision = preload("res://game/level_collision.gd")
 var lighting: Node3D
 var effects: Node3D
 var environment: Environment
@@ -22,7 +23,11 @@ func _ready() -> void:
 	add_child(effects)
 	_make_platforms()
 	_make_ocean()
-	Nature.landscape(self)
+	var landscape := Node3D.new()
+	landscape.name = "ReefLandscape"
+	add_child(landscape)
+	Nature.landscape(landscape)
+	Collision.build(landscape)
 	add_child(Life.new())
 	for zone in Layout.current_zones():
 		effects.current(zone.center, zone.flow)
@@ -35,16 +40,8 @@ func _make_platforms() -> void:
 		root.position = data.position
 		add_child(root)
 		platforms.append(root)
-		if data.kind != "driftwood":
-			var body := StaticBody3D.new()
-			body.position.y = -1
-			var shape := CollisionShape3D.new()
-			var box := BoxShape3D.new()
-			box.size = Vector3(data.size.x, 2, data.size.y)
-			shape.shape = box
-			body.add_child(shape)
-			root.add_child(body)
 		Nature.deck(root, data, index)
+		Collision.build(root, index)
 		if data.oxygen:
 			Nature.oxygen_algae(root, index)
 			effects.vent(data.position + Vector3.UP * .4)
@@ -100,6 +97,7 @@ func _make_ocean() -> void:
 func sync_platforms(data: Array[Dictionary]) -> void:
 	for index in range(platforms.size()):
 		platforms[index].position = data[index].position
+		platforms[index].get_node("SolidGeometry").force_update_transform()
 
 
 func update_depth(camera_y: float) -> void:

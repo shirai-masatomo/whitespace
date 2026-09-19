@@ -194,7 +194,7 @@ func run() -> void:
 		return
 	# Walk to the curved edge and back with player inputs, without repositioning.
 	for goal_offset in [5.6, 0.0]:
-		for frame in range(120):
+		for frame in range(240):
 			var target: Vector3 = game.model.platforms[3].position + Vector3(0, 0, goal_offset)
 			var offset := Vector2(
 				target.x - game.model.position.x, target.z - game.model.position.z

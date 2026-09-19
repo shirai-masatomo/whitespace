@@ -1,5 +1,6 @@
 extends RefCounted
-## Deterministic swept top-surface platform physics. Position is the player's feet.
+## Oxygen/control simulation. Runtime uses swept-volume scene collision;
+## the top-surface fallback only supports lightweight route estimates.
 
 enum Mode { DIVING, RETURNING, COMPLETE }
 const Config = preload("res://game/dive_config.gd")
@@ -8,6 +9,7 @@ const RockSurface = preload("res://game/rock_surface.gd")
 const Layout = preload("res://game/stage_layout.gd")
 
 var config: Resource
+var collision_motion: Callable
 var platforms: Array[Dictionary]
 var position := Vector3.ZERO
 var velocity := Vector3.ZERO
@@ -156,9 +158,9 @@ func step(delta: float, horizontal: Vector2, descent: float = 0.0, ascend: bool 
 	jelly_cooldown = maxf(0, jelly_cooldown - delta)
 	if ascend and position.y < 0.5:
 		grounded = -1
-	if grounded >= 0 and not inside(next, platforms[grounded]):
+	if grounded >= 0 and not collision_motion.is_valid() and not inside(next, platforms[grounded]):
 		grounded = -1
-	if grounded < 0:
+	if grounded < 0 or collision_motion.is_valid():
 		var sink: float = config.sink_speed
 		if descent > 0:
 			sink = config.fast_sink_speed
@@ -175,7 +177,7 @@ func step(delta: float, horizontal: Vector2, descent: float = 0.0, ascend: bool 
 			velocity.y = 0.0
 		# Sweep the whole segment: fast descent cannot tunnel through thin floors.
 		var first_hit: float = 2.0
-		for index in range(platforms.size()):
+		for index in range(0 if collision_motion.is_valid() else platforms.size()):
 			var floor_y: float = surface_height(next, platforms[index])
 			if start.y >= floor_y - 0.001 and next.y <= floor_y and start.y > next.y:
 				var fraction := (start.y - floor_y) / (start.y - next.y)
@@ -187,13 +189,19 @@ func step(delta: float, horizontal: Vector2, descent: float = 0.0, ascend: bool 
 				):
 					first_hit = fraction
 					grounded = index
-		if grounded >= 0:
+		if grounded >= 0 and not collision_motion.is_valid():
 			next.y = surface_height(next, platforms[grounded])
 			velocity.y = 0.0
 	else:
 		velocity.y = 0.0
 		next.y = surface_height(next, platforms[grounded])
-	position = next
+	if collision_motion.is_valid():
+		var result: Dictionary = collision_motion.call(self, start, next)
+		position = result.position
+		velocity = result.velocity
+		grounded = result.grounded
+	else:
+		position = next
 	# Jelly landing is a readable gentle bounce; rescue and oxygen rules are unchanged.
 	if grounded >= 0 and platforms[grounded].kind == "jelly" and jelly_cooldown <= 0:
 		velocity.y = config.jelly_push

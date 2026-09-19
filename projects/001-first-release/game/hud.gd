@@ -108,13 +108,17 @@ func _draw() -> void:
 
 
 func _draw_target(scale_factor: Vector2) -> void:
-	if game.model.mode != Model.Mode.DIVING:
+	# Discover the landscape first. Assistance is requested, not always painted on it.
+	if game.model.mode != Model.Mode.DIVING or not game.navigation_help:
 		return
 	var target_index: int = game.next_platform()
 	var target: Dictionary = game.model.platforms[target_index]
 	draw_rect(Rect2(28, 604, 410, 48), Color(0.02, 0.07, 0.1, 0.65))
 	text_at(
-		Vector2(42, 625), "%s · %dm [Tab 切替]" % [target.label, int(-target.position.y)], 16, CYAN
+		Vector2(42, 625),
+		"%s · %dm [Tab 切替 / H 非表示]" % [target.label, int(-target.position.y)],
+		14,
+		CYAN
 	)
 	text_at(
 		Vector2(42, 644), game.Navigation.bearing(game.model, target_index, game.yaw), 14, MUTED
@@ -160,7 +164,7 @@ func _draw_overlay(scale_factor: Vector2) -> void:
 		text_at(Vector2(310, 330), "光る藻に触れると酸素100%。待たずに進もう。", 21)
 		text_at(Vector2(310, 371), "急降下は酸素を多く使う。酸素0で押し戻される。", 20, MUTED)
 	text_at(Vector2(310, 439), "WASD 移動 / マウス 視点 / E 急降下 / Space 浮上", 19, CYAN)
-	text_at(Vector2(310, 468), "Q 減速 / F 俯瞰 / Tab 目標 / V 視点 / M 音の切替", 16, MUTED)
+	text_at(Vector2(310, 468), "Q 減速 / F 俯瞰 / H 道案内 / Tab 候補 / V 視点 / M 音", 16, MUTED)
 	text_at(Vector2(832, 578), "音: OFF" if game.sound.muted else "音: ON", 16, MUTED)
 	primary.position = Vector2(310, 489) * scale_factor
 	primary.size = Vector2(400, 58) * scale_factor

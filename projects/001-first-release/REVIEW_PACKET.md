@@ -1,6 +1,8 @@
 # DIVE DIVE — REVIEW PACKET
 
-2026-09-19 / **HUMAN_REVIEW** / リアル層300mのVertical Slice候補。旧中核レビューとは別の節目。
+2026-09-19 / **SELF_CONTINUE** / 人間レビューを受領し、リアル層300mを再改善中。旧候補を再度人間待ちにはしない。
+
+全方向の実衝突へ移行。実シーン231検査、6経路、GPU失敗/再挑戦/到達が成功。[流木を歩く実画面](review/25-solid-driftwood.png) / [衝突記録](review/player-collision.json)。以下の旧経路数値は軽量モデルの見積もりで、実衝突の証拠ではない。空間密度と遊びは次サイクルで改善する。
 
 ## 現在どう遊べるか
 

@@ -172,6 +172,7 @@ static func deck(root: Node3D, data: Dictionary, index: int) -> void:
 				root,
 				Geo.loft(
 					[
+						Vector3(-4, .001, .001),
 						Vector3(-4, 4, 3),
 						Vector3(-2, size.x * .58, size.y * .55),
 						Vector3(0, size.x * Layout.BUOY_TOP_SCALE, size.y * Layout.BUOY_TOP_SCALE),

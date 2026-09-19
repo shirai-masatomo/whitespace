@@ -5,6 +5,7 @@ const World = preload("res://game/world.gd")
 const Hud = preload("res://game/hud.gd")
 const Navigation = preload("res://game/navigation.gd")
 const Sound = preload("res://game/ocean_audio.gd")
+const Motion = preload("res://game/player_motion.gd")
 const TUNING = preload("res://game/default_config.tres")
 
 var model = Model.new(TUNING)
@@ -23,6 +24,8 @@ var selected_target: int = 1
 var ledge_view: float = 0.0
 var automated_input: bool = "--smoke-test" in OS.get_cmdline_user_args()
 var sound: Node
+var motion: CharacterBody3D
+var navigation_help := false
 
 
 func _ready() -> void:
@@ -36,6 +39,10 @@ func _ready() -> void:
 	world = Node3D.new()
 	world.set_script(World)
 	add_child(world)
+	motion = Motion.new()
+	motion.world = world
+	add_child(motion)
+	model.collision_motion = motion.resolve
 	avatar = world.make_avatar()
 	bubble = world.make_bubble()
 	camera = Camera3D.new()
@@ -90,6 +97,7 @@ func restart() -> void:
 	pitch = -0.25
 	was_complete = false
 	selected_target = 1
+	navigation_help = false
 	ledge_view = 0
 	begin()
 
@@ -124,7 +132,10 @@ func _unhandled_input(event: InputEvent) -> void:
 		elif event.keycode == KEY_ENTER and (not started or paused):
 			begin()
 		elif event.keycode == KEY_TAB and started and not paused:
+			navigation_help = true
 			cycle_target()
+		elif event.keycode == KEY_H:
+			navigation_help = not navigation_help
 		elif event.keycode == KEY_M:
 			sound.set_muted(not sound.muted)
 		elif event.physical_keycode == KEY_V or event.keycode == KEY_V:
@@ -148,6 +159,7 @@ func _physics_process(delta: float) -> void:
 
 
 func advance(delta: float, axis: Vector2, descent: float = 0.0, ascend: bool = false) -> void:
+	model.collision_motion = motion.resolve
 	var horizontal := Vector3(axis.x, 0.0, axis.y).rotated(Vector3.UP, yaw)
 	model.step(delta, Vector2(horizontal.x, horizontal.z), descent, ascend)
 	sound.observe(model, delta)
@@ -173,6 +185,7 @@ func _update_camera(delta: float = 1.0) -> void:
 		desired = desired.lerp(focus + heading * 9 + Vector3.UP * 26, ledge_view)
 	if third_person:
 		var query := PhysicsRayQueryParameters3D.create(focus, desired)
+		query.collision_mask = 3
 		var hit := get_world_3d().direct_space_state.intersect_ray(query)
 		if not hit.is_empty():
 			desired = hit.position + hit.normal * 0.4

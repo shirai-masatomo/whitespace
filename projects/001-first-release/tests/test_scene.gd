@@ -32,11 +32,15 @@ func run() -> void:
 	check(game.started and not game.paused, "Start button starts play")
 	Input.action_press("dive")
 	Input.action_press("right")
-	for frame in range(180):
+	Input.action_press("forward")
+	for frame in range(240):
 		game._physics_process(1.0 / 60)
 	Input.action_release("dive")
 	Input.action_release("right")
-	check(game.model.depth > 5 and game.model.position.x > 15, "Inputs move and sink after edge")
+	Input.action_release("forward")
+	check(
+		game.model.depth > 5 and game.model.position.x > 10, "Inputs move off pier clear of posts"
+	)
 	check(game.avatar.position == game.model.position, "Avatar follows simulation")
 	Input.action_press("ascend")
 	for frame in range(150):
