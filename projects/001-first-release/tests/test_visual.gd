@@ -46,6 +46,9 @@ func run() -> void:
 	await capture("title")
 	game.begin()
 	await capture("01-start")
+	Input.action_press("survey")
+	await capture("survey-start")
+	Input.action_release("survey")
 	# Look from the starting platform across the open ocean.
 	game.pitch = -0.20
 	game.yaw = -0.48
@@ -71,6 +74,9 @@ func run() -> void:
 		quit(1)
 		return
 	await capture("05-oxygen")
+	Input.action_press("survey")
+	await capture("route-survey")
+	Input.action_release("survey")
 	Driver.refill(game.model)
 	if not steer(3):
 		quit(1)
@@ -96,7 +102,7 @@ func run() -> void:
 	if game.model.grounded != 2 or game.model.depth_losses.size() != 1:
 		failed = true
 		push_error("Emergency ascent must return to oxygen 01")
-	for index in range(3, game.model.platforms.size()):
+	for index in [3, 4, 5, 6, 7, 8, 9]:
 		if not steer(index):
 			failed = true
 			break

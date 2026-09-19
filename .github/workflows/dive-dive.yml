@@ -32,7 +32,7 @@ jobs:
           key: dive-godot-4.7.2-windows-v1
       - name: Install verified Godot and pinned tools
         run: ./tools/setup.ps1
-      - name: Format, lint, dependency check, tests, Windows build and export smoke
+      - name: Quality checks, route evaluation, Windows build and export smoke
         run: ./dev.ps1 check
       - uses: actions/upload-artifact@v4
         with:
@@ -43,4 +43,6 @@ jobs:
         if: always()
         with:
           name: DIVE-DIVE-check-logs
-          path: projects/001-first-release/artifacts/*.log
+          path: |
+            projects/001-first-release/artifacts/*.log
+            projects/001-first-release/artifacts/*.json

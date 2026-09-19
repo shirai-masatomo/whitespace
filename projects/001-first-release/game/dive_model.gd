@@ -16,6 +16,7 @@ var setbacks: int = 0
 var grounded: int = 0
 var checkpoint: int = 0
 var previous_checkpoint: int = 0
+var visited_oxygen: Array[int] = [0]
 var return_checkpoint: int = 0
 var return_target := Vector3.ZERO
 var return_phase: int = 0
@@ -45,6 +46,7 @@ func reset() -> void:
 	checkpoint = 0
 	previous_checkpoint = 0
 	depth_losses.clear()
+	visited_oxygen.assign([0])
 	rescue_reason = ""
 	mode = Mode.DIVING
 
@@ -120,6 +122,7 @@ func step(delta: float, horizontal: Vector2, descent: float = 0.0) -> void:
 		):
 			previous_checkpoint = checkpoint
 			checkpoint = grounded
+			visited_oxygen.append(grounded)
 	else:
 		oxygen = maxf(0.0, oxygen - config.oxygen_consumption * delta)
 	if oxygen <= 0:
@@ -167,9 +170,13 @@ func _return_step(delta: float) -> void:
 			depth_losses.append(maxf(0.0, failure_depth - depth))
 			checkpoint = return_checkpoint
 			previous_checkpoint = 0
-			for index in range(checkpoint):
-				if platforms[index].oxygen:
+			var retained: Array[int] = []
+			for index in visited_oxygen:
+				if platforms[index].position.y >= return_target.y:
+					retained.append(index)
+				if platforms[index].position.y > return_target.y:
 					previous_checkpoint = index
+			visited_oxygen = retained
 			grounded = checkpoint
 			velocity = Vector3.ZERO
 			oxygen = config.oxygen_capacity

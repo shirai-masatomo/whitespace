@@ -3,6 +3,7 @@ extends Node3D
 const Model = preload("res://game/dive_model.gd")
 const World = preload("res://game/world.gd")
 const Hud = preload("res://game/hud.gd")
+const Navigation = preload("res://game/navigation.gd")
 const TUNING = preload("res://game/default_config.tres")
 
 var model = Model.new(TUNING)
@@ -17,6 +18,7 @@ var third_person: bool = true
 var started: bool = false
 var paused: bool = false
 var was_complete: bool = false
+var selected_target: int = 1
 
 
 func _ready() -> void:
@@ -43,6 +45,7 @@ func _ready() -> void:
 func _setup_inputs() -> void:
 	var bindings := {
 		"dive": [KEY_E],
+		"survey": [KEY_F],
 		"brake": [KEY_Q],
 		"forward": [KEY_W, KEY_UP],
 		"back": [KEY_S, KEY_DOWN],
@@ -70,6 +73,7 @@ func restart() -> void:
 	yaw = 0.0
 	pitch = -0.65
 	was_complete = false
+	selected_target = 1
 	begin()
 
 
@@ -93,6 +97,8 @@ func _unhandled_input(event: InputEvent) -> void:
 			toggle_pause()
 		elif event.keycode == KEY_ENTER and (not started or paused):
 			begin()
+		elif event.keycode == KEY_TAB and started and not paused:
+			cycle_target()
 		elif event.physical_keycode == KEY_V or event.keycode == KEY_V:
 			third_person = not third_person
 	if (
@@ -133,17 +139,33 @@ func _update_camera() -> void:
 			desired = hit.position + hit.normal * 0.4
 	camera.position = desired
 	camera.rotation = Vector3(pitch, yaw, 0)
+	if started and Input.is_action_pressed("survey"):
+		camera.position = model.position + Vector3.UP * 55
+		# Keep the survey camera below the water surface near the starting shelf.
+		camera.position.y = minf(camera.position.y, 30)
+		camera.rotation = Vector3(-PI / 2, yaw, 0)
 	avatar.position = model.position
 	if Vector2(model.velocity.x, model.velocity.z).length() > 0.3:
 		avatar.rotation.y = atan2(-model.velocity.x, -model.velocity.z)
-	avatar.visible = third_person and model.mode != Model.Mode.RETURNING
+	avatar.visible = (
+		(third_person or Input.is_action_pressed("survey")) and model.mode != Model.Mode.RETURNING
+	)
 	bubble.position = focus
 	bubble.visible = model.mode == Model.Mode.RETURNING
 	world.update_depth(model.depth)
 
 
 func next_platform() -> int:
-	for index in range(model.platforms.size()):
-		if -model.platforms[index].position.y > model.depth + 0.5:
-			return index
-	return model.platforms.size() - 1
+	var choices := Navigation.candidates(model)
+	if choices.is_empty():
+		return 9
+	if not choices.has(selected_target):
+		selected_target = choices[0]
+	return selected_target
+
+
+func cycle_target() -> void:
+	var current := next_platform()
+	var choices := Navigation.candidates(model)
+	if not choices.is_empty():
+		selected_target = choices[(choices.find(current) + 1) % choices.size()]

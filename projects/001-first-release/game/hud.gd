@@ -83,7 +83,16 @@ func _draw() -> void:
 		MUTED
 	)
 	draw_rect(Rect2(872, 24, 380, 125), Color(0.02, 0.07, 0.1, 0.88))
-	text_at(Vector2(892, 54), "酸素", 19, accent)
+	text_at(
+		Vector2(892, 54),
+		(
+			"酸素 / 補給中"
+			if model.at_oxygen()
+			else "酸素 / 残り約%d秒" % int(ceil(model.oxygen / game.TUNING.oxygen_consumption))
+		),
+		19,
+		accent
+	)
 	text_at(Vector2(1145, 56), "%03d%%" % int(ratio * 100), 23, accent)
 	draw_rect(Rect2(892, 72, 338, 8), Color("284451"))
 	draw_rect(Rect2(892, 72, 338 * ratio, 8), accent)
@@ -99,10 +108,22 @@ func _draw() -> void:
 	if returning:
 		status = "緊急浮上中 · 操作は到着後に戻ります"
 	text_at(Vector2(30, 213), status, 17)
-	text_at(Vector2(30, 239), "カメラ：%s [Vで切替]" % ("三人称" if game.third_person else "一人称"), 16, MUTED)
+	text_at(
+		Vector2(30, 239),
+		(
+			"カメラ：%s [Vで切替]"
+			% (
+				"俯瞰 [Fを離すと戻る]"
+				if Input.is_action_pressed("survey")
+				else ("三人称" if game.third_person else "一人称")
+			)
+		),
+		16,
+		MUTED
+	)
 	_draw_target(scale_factor)
 	draw_rect(Rect2(28, 648, 1224, 48), Color(0.02, 0.07, 0.1, 0.9))
-	text_at(Vector2(46, 678), "WASD 移動  ·  マウス 視点  ·  E 急降下  ·  Q 減速  ·  V 視点切替  ·  Esc 一時停止", 18)
+	text_at(Vector2(46, 678), "WASD 移動 · E 急降下 / Q 減速 · F長押し 見渡す · Tab 目標 · V 視点 · Esc 停止", 18)
 	if returning:
 		draw_rect(Rect2(348, 510, 584, 95), Color(0.03, 0.12, 0.18, 0.92))
 		text_at(Vector2(380, 547), "%s — 泡になって緊急浮上" % model.rescue_reason, 23, ORANGE)
@@ -112,16 +133,35 @@ func _draw() -> void:
 
 
 func _draw_target(scale_factor: Vector2) -> void:
-	if game.model.mode == Model.Mode.RETURNING:
+	if game.model.mode != Model.Mode.DIVING:
 		return
-	draw_rect(Rect2(28, 584, 530, 43), Color(0.02, 0.07, 0.1, 0.88))
-	var target: Dictionary = game.model.platforms[game.next_platform()]
-	text_at(Vector2(30, 612), "次の目印：%s / %dm" % [target.label, int(-target.position.y)], 18, CYAN)
+	var target_index: int = game.next_platform()
+	var target: Dictionary = game.model.platforms[target_index]
+	var choices: Array[int] = game.Navigation.candidates(game.model)
+	draw_rect(Rect2(28, 504, 540, 124), Color(0.02, 0.07, 0.1, 0.88))
+	text_at(
+		Vector2(42, 531),
+		"目標候補 [Tab]   ·   %s" % game.Navigation.bearing(game.model, target_index, game.yaw),
+		17
+	)
+	for row in range(choices.size()):
+		var candidate: Dictionary = game.model.platforms[choices[row]]
+		var selected: bool = choices[row] == target_index
+		var caption := (
+			"%s %s / %dm  %s"
+			% [
+				"▶" if selected else "·",
+				candidate.label,
+				int(-candidate.position.y),
+				"補給" if candidate.oxygen else "足場"
+			]
+		)
+		text_at(Vector2(42, 558 + row * 26), caption, 16, CYAN if selected else MUTED)
 	var point: Vector3 = target.position + Vector3.UP * 2
 	if game.camera.is_position_behind(point):
 		return
 	var screen: Vector2 = game.camera.unproject_position(point) / scale_factor
-	if Rect2(300, 170, 780, 410).has_point(screen):
+	if Rect2(300, 170, 780, 330).has_point(screen):
 		draw_arc(screen, 12, 0, TAU, 32, CYAN, 2, true)
 		draw_circle(screen, 2, WHITE)
 		draw_rect(Rect2(screen + Vector2(18, -17), Vector2(82, 26)), INK)

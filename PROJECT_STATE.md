@@ -12,11 +12,11 @@
 
 ### DIVE DIVE
 
-- 状態: **Phase 1 / 中核改訂試作完成・再レビュー待ち**
+- 状態: **Phase 1 / 中核を自律改善3サイクル・プレイ感レビュー**
 - 目的: WhiteSpace名義で最初の正式リリース作品を完成させる。
 - 開発モデル: [Codex自律駆動](projects/001-first-release/AUTONOMY.md)。
 - ゲーム案: ユーザーがDIVE DIVEを選定。自然沈降・足場・酸素補給・泡での再挑戦を核にする。
-- Windows向け300m試作と自動テスト・CIが成功。ゲームの核を人間が触って評価する段階。
+- 300m試作に補給分岐・俯瞰・経路測定を追加。ゲームの核の好みだけを人間が評価する段階。可逆な実装ごとの承認は不要。
 - 詳細: [起動方法](projects/001-first-release/README.md) / [現在地](projects/001-first-release/PROJECT_STATE.md)
 
 ### 言語ジェンガ（仮）

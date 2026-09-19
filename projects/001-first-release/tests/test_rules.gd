@@ -87,6 +87,7 @@ func _initialize() -> void:
 	tick(model, 2, Vector2.RIGHT)
 	check(model.depth > 0 and model.mode == Model.Mode.DIVING, "Immediate retry without reset")
 	_test_route()
+	_test_branch_history()
 	_test_failure_metrics()
 	_test_edges()
 	print("Rules: %d checks, %d failures" % [checks, failures])
@@ -95,7 +96,7 @@ func _initialize() -> void:
 
 func _test_route() -> void:
 	var model = Model.new()
-	for index in range(1, model.platforms.size()):
+	for index in model.Layout.routes().platforms:
 		check(Driver.reach(model, index), "Route can reach platform %d" % index)
 		if model.platforms[index].oxygen:
 			Driver.refill(model)
@@ -187,3 +188,32 @@ func _test_edges() -> void:
 		"Frame rate changes have small movement error"
 	)
 	check(absf(fine.oxygen - coarse.oxygen) < 0.001, "Oxygen independent of tick rate")
+
+
+func _test_branch_history() -> void:
+	var model = Model.new()
+	for index in [1, 2, 10, 4]:
+		check(Driver.reach(model, index), "Branch reaches %d" % index)
+		if model.at_oxygen():
+			Driver.refill(model)
+	check(
+		model.checkpoint == 4 and model.previous_checkpoint == 10,
+		"History follows visits, not platform array order"
+	)
+	# Empty air just outside the bubble must return to the visited 95m branch.
+	model.position.x += 4
+	model.oxygen = 0.01
+	model.step(1.0 / 60, Vector2.ZERO)
+	check(model.return_checkpoint == 10, "Near-checkpoint failure returns to branch")
+	tick(model, 6)
+	check(
+		model.checkpoint == 10 and model.previous_checkpoint == 2,
+		"Rescue preserves 60m predecessor, not unvisited 260m"
+	)
+	check(model.depth == 95 and model.depth_losses[0] == 30, "Branch failure loses depth")
+	model.position.x += 4
+	model.oxygen = 0.01
+	model.step(1.0 / 60, Vector2.ZERO)
+	check(model.return_checkpoint == 2, "Repeated failure cannot advance to an unvisited deep spot")
+	tick(model, 6)
+	check(model.depth == 60, "Repeated branch rescue reaches correct shallower spot")

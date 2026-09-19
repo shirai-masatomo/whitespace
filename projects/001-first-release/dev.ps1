@@ -1,4 +1,4 @@
-param([ValidateSet('check', 'test', 'lint', 'format', 'build', 'visual', 'play', 'editor')][string]$Task = 'check')
+param([ValidateSet('check', 'evaluate', 'test', 'lint', 'format', 'build', 'visual', 'play', 'editor')][string]$Task = 'check')
 $ErrorActionPreference = 'Stop'
 $projectRoot = $PSScriptRoot
 $godot = Join-Path $projectRoot '.tools/Godot_v4.7.2-stable_win64_console.exe'
@@ -41,12 +41,15 @@ try {
         & './.tools/venv/Scripts/python.exe' -m pip check
         if ($LASTEXITCODE -ne 0) { throw 'Development dependency check failed' }
     }
-    if ($Task -in @('test', 'build', 'check')) {
+    if ($Task -in @('evaluate', 'test', 'build', 'check')) {
         Invoke-Godot 'import' @('--headless', '--editor', '--import')
     }
     if ($Task -in @('test', 'check')) {
         Invoke-Godot 'rules' @('--headless', '--script', 'tests/test_rules.gd')
         Invoke-Godot 'scene' @('--headless', '--script', 'tests/test_scene.gd')
+    }
+    if ($Task -in @('evaluate', 'check')) {
+        Invoke-Godot 'evaluation' @('--headless', '--script', 'tests/test_evaluation.gd')
     }
     if ($Task -in @('build', 'check')) {
         Invoke-Godot 'build' @('--headless', '--export-release', 'Windows Desktop')

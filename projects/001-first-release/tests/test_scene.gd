@@ -63,7 +63,7 @@ func run() -> void:
 	game._notification(Node.NOTIFICATION_APPLICATION_FOCUS_OUT)
 	check(game.paused, "Focus loss pauses game")
 	game.restart()
-	for index in range(1, game.model.platforms.size()):
+	for index in game.model.Layout.routes().platforms:
 		check(Driver.reach(game.model, index), "Scene route platform %d" % index)
 		if game.model.platforms[index].oxygen:
 			Driver.refill(game.model)
@@ -72,6 +72,26 @@ func run() -> void:
 	var scene_id: int = game.get_instance_id()
 	game.hud.primary.pressed.emit()
 	check(game.model.depth == 0 and game.get_instance_id() == scene_id, "Replay uses same scene")
+	var target_before: int = game.next_platform()
+	key.keycode = KEY_TAB
+	game._unhandled_input(key)
+	check(game.next_platform() != target_before, "Tab changes target")
+	game.yaw = atan2(-14.0, 18.0) + PI
+	check(
+		game.Navigation.bearing(game.model, 1, game.yaw) == "後方 / 振り向く",
+		"Offscreen target has behind-camera guidance"
+	)
+	Input.action_press("survey")
+	game._update_camera()
+	check(game.camera.position.y > game.model.position.y + 25, "F shows survey camera")
+	check(game.camera.position.y < 35, "Survey stays below opaque water surface at start")
+	Input.action_release("survey")
+	game._update_camera()
+	check(
+		game.camera.position.y < game.model.position.y + 20, "Releasing F returns to normal camera"
+	)
+	game.restart()
+	check(game.next_platform() == 1, "Replay restores first suggested target")
 	game.queue_free()
 	await process_frame
 	print("Scene: %d checks, %d failures" % [checks, failures])
