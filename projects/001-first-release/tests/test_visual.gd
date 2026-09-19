@@ -46,7 +46,7 @@ func step_toward(index: int, descent_override: float = -2, ascend: bool = false)
 
 
 func render_step() -> void:
-	game._update_camera()
+	game._update_camera(1.0 / 60)
 	game.hud.queue_redraw()
 	await process_frame
 	await RenderingServer.frame_post_draw

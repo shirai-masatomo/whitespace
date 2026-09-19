@@ -19,6 +19,7 @@ var started: bool = false
 var paused: bool = false
 var was_complete: bool = false
 var selected_target: int = 1
+var ledge_view: float = 0.0
 
 
 func _ready() -> void:
@@ -75,6 +76,7 @@ func restart() -> void:
 	pitch = -0.25
 	was_complete = false
 	selected_target = 1
+	ledge_view = 0
 	begin()
 
 
@@ -116,7 +118,7 @@ func _physics_process(delta: float) -> void:
 	if started and not paused:
 		var axis := Input.get_vector("left", "right", "forward", "back")
 		advance(delta, axis, Input.get_axis("brake", "dive"), Input.is_action_pressed("ascend"))
-	_update_camera()
+	_update_camera(delta)
 	hud.queue_redraw()
 
 
@@ -129,11 +131,19 @@ func advance(delta: float, axis: Vector2, descent: float = 0.0, ascend: bool = f
 		hud.sync_buttons()
 
 
-func _update_camera() -> void:
+func _update_camera(delta: float = 1.0) -> void:
 	world.sync_platforms(model.platforms)
 	var focus: Vector3 = model.position + Vector3.UP * 1.4
 	var look := Vector3(0, sin(pitch), -cos(pitch)).rotated(Vector3.UP, yaw)
 	var desired: Vector3 = focus - look * 7.5 if third_person else focus
+	var peek := 0.0
+	if third_person and model.grounded > 0 and model.mode == Model.Mode.DIVING:
+		peek = smoothstep(.25, .8, -pitch)
+	ledge_view = lerpf(ledge_view, peek, 1.0 - exp(-delta * 9))
+	var heading := Vector3.FORWARD.rotated(Vector3.UP, yaw)
+	if third_person:
+		# Looking down leans over the edge while retaining the diver in frame.
+		desired = desired.lerp(focus + heading * 9 + Vector3.UP * 26, ledge_view)
 	if third_person:
 		var query := PhysicsRayQueryParameters3D.create(focus, desired)
 		var hit := get_world_3d().direct_space_state.intersect_ray(query)
@@ -141,6 +151,13 @@ func _update_camera() -> void:
 			desired = hit.position + hit.normal * 0.4
 	camera.position = desired
 	camera.rotation = Vector3(pitch, yaw, 0)
+	if third_person and ledge_view > .001:
+		var direction: Vector3 = focus + heading * 11 - desired
+		var peek_pitch := atan2(direction.y, Vector2(direction.x, direction.z).length())
+		camera.rotation.x = lerpf(pitch, peek_pitch, ledge_view)
+		var diver_direction := focus - desired
+		var diver_pitch := atan2(diver_direction.y, diver_direction.dot(heading))
+		camera.rotation.x = clampf(minf(camera.rotation.x, diver_pitch + .35), -1.48, 1.2)
 	if started and Input.is_action_pressed("survey"):
 		camera.position = model.position + Vector3.UP * 55
 		# Keep the survey camera below the water surface near the starting shelf.

@@ -108,7 +108,35 @@ func run() -> void:
 	)
 	game.restart()
 	check(game.next_platform() == 1, "Replay restores first suggested target")
+	_test_ledge_view(game)
 	game.queue_free()
 	await process_frame
 	print("Scene: %d checks, %d failures" % [checks, failures])
 	quit(1 if failures else 0)
+
+
+func _test_ledge_view(game) -> void:
+	game.model = Model.new()
+	for target in [1, 2, 3]:
+		check(Driver.reach(game.model, target), "Camera fixture reaches its platform")
+		for angle in [-.3, -.4, -.65, -1.2]:
+			for heading in [0.0, 1.7, -2.3]:
+				game.yaw = heading
+				game.pitch = angle
+				game._update_camera()
+				var focus: Vector3 = game.model.position + Vector3.UP
+				check(
+					not game.camera.is_position_behind(focus), "Ledge view retains diver in front"
+				)
+				check(
+					Rect2(0, 0, 1280, 720).has_point(game.camera.unproject_position(focus)),
+					"Ledge view keeps diver framed through mouse pitch and yaw"
+				)
+				check(game.yaw == heading, "Ledge view never rotates the player's horizontal input")
+	game.pitch = -.65
+	game._update_camera()
+	var before: Vector3 = game.camera.position - game.model.position
+	game.model.grounded = -1
+	game._update_camera(1.0 / 60)
+	var after: Vector3 = game.camera.position - game.model.position
+	check(before.distance_to(after) < 5, "Leaving a ledge blends the camera instead of jumping")

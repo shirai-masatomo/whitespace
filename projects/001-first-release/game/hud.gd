@@ -99,6 +99,8 @@ func _draw() -> void:
 		status = "急降下中  ·  酸素を多く使っています"
 	elif model.velocity.y > 1:
 		status = "浮上中  ·  Spaceを離すと沈みます"
+	elif model.grounded > 0:
+		status = "下を向くと、足場の先を見渡せます  ·  E 急降下  ·  Space 浮上"
 	draw_rect(Rect2(300, 660, 820, 34), Color(0.02, 0.07, 0.1, 0.65))
 	text_at(Vector2(317, 683), status, 17, ORANGE if returning else WHITE)
 	if not game.started or game.paused or model.mode == Model.Mode.COMPLETE:

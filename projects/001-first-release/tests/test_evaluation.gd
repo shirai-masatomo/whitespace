@@ -27,6 +27,12 @@ func run() -> void:
 		if result.survey_visible != result.decisions:
 			failures += 1
 			push_error("Survey camera must reveal every evaluated next target: " + result.name)
+		if result.aimed_camera_diver_framed != result.decisions:
+			failures += 1
+			push_error("Ledge view must retain the diver in frame: " + result.name)
+		if result.aimed_camera_visible < result.decisions - 2:
+			failures += 1
+			push_error("Most departures must reveal their target without F: " + result.name)
 	if rescue.controls_restored_seconds > 4 or rescue.lost_depth_m <= 0:
 		failures += 1
 		push_error("Representative rescue must lose depth and restore controls within four seconds")
@@ -55,6 +61,8 @@ func evaluate_route(route_name: String, route: Array) -> Dictionary:
 	var framed := 0
 	var unobstructed := 0
 	var survey_visible := 0
+	var aimed_visible := 0
+	var diver_visible := 0
 	for target in route:
 		game.yaw = 0
 		game.pitch = -0.65
@@ -66,6 +74,22 @@ func evaluate_route(route_name: String, route: Array) -> Dictionary:
 			var ray := PhysicsRayQueryParameters3D.create(game.camera.global_position, point)
 			if game.get_world_3d().direct_space_state.intersect_ray(ray).is_empty():
 				unobstructed += 1
+		var offset: Vector3 = point - game.model.position
+		game.yaw = atan2(-offset.x, -offset.z)
+		game._update_camera()
+		var aimed_screen: Vector2 = game.camera.unproject_position(point)
+		var aimed_ray := PhysicsRayQueryParameters3D.create(game.camera.global_position, point)
+		if (
+			not game.camera.is_position_behind(point)
+			and Rect2(0, 0, 1280, 720).has_point(aimed_screen)
+		):
+			if game.get_world_3d().direct_space_state.intersect_ray(aimed_ray).is_empty():
+				aimed_visible += 1
+		var diver: Vector3 = game.model.position + Vector3.UP
+		if not game.camera.is_position_behind(diver):
+			if Rect2(0, 0, 1280, 720).has_point(game.camera.unproject_position(diver)):
+				diver_visible += 1
+		game.yaw = 0
 		Input.action_press("survey")
 		game.started = true
 		game._update_camera()
@@ -117,6 +141,8 @@ func evaluate_route(route_name: String, route: Array) -> Dictionary:
 		"departure_camera_framed": framed,
 		"departure_camera_unoccluded": unobstructed,
 		"survey_visible": survey_visible,
+		"aimed_camera_visible": aimed_visible,
+		"aimed_camera_diver_framed": diver_visible,
 		"decisions": route.size(),
 		"mean_leg_seconds": snappedf(_mean_leg(legs), 0.01)
 	}
