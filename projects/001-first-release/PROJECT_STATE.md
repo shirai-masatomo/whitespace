@@ -16,7 +16,7 @@
 - `./dev.ps1 visual`: 8状態・カメラ比較・開始/分岐の俯瞰・再挑戦・960×540を実GPU描画し画像確認。RTX 4070 SUPER / OpenGL 3.3。
 - 通常99.85秒 / 補給へ直行93.40秒 / 寄り道103.25秒で自動完走。代表救助は30m損失・2.27秒で操作復帰。詳細と条件は [REVIEW_PACKET](REVIEW_PACKET.md)。
 - 自己改善: 画面外の誘導、俯瞰の遮蔽/水面、分岐での訪問履歴、補給中の案内を修正。[AI_REVIEW](AI_REVIEW.md) に判定と根拠。
-- CI: 今回の変更を作業ブランチで確認し、成功したコードをmainへ統合する。直前のmainは40f2206でCI成功。
+- CI: [Windows Actions #35419675715](https://github.com/shirai-masatomo/whitespace/actions/runs/35419675715) 成功（コード `01a4da4`）。品質チェック・3経路評価・配布ZIPとログ/JSONの保存を確認。
 
 ## 次の判断
 
