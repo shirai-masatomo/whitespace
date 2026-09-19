@@ -1,4 +1,4 @@
-﻿param([ValidateSet('check', 'evaluate', 'test', 'lint', 'format', 'build', 'visual', 'visual-reef', 'benchmark', 'gpu-smoke', 'play', 'editor')][string]$Task = 'check', [ValidateSet('windows','windows-preview','windows-real')][string]$BuildFolder = 'windows', [ValidateSet('forward_plus','gl_compatibility')][string]$Renderer = 'forward_plus')
+﻿param([ValidateSet('check', 'evaluate', 'test', 'lint', 'format', 'build', 'visual', 'visual-reef', 'visual-discovery', 'benchmark', 'gpu-smoke', 'play', 'editor')][string]$Task = 'check', [ValidateSet('windows','windows-preview','windows-real')][string]$BuildFolder = 'windows', [ValidateSet('forward_plus','gl_compatibility')][string]$Renderer = 'forward_plus')
 $ErrorActionPreference = 'Stop'
 $projectRoot = $PSScriptRoot
 $buildRoot = Join-Path $projectRoot ('build/' + $BuildFolder)
@@ -53,6 +53,9 @@ try {
     if ($Task -eq 'benchmark') {
         Invoke-Godot ('benchmark-' + $Renderer) @('--script', 'tests/test_rendering.gd')
     }
+    if ($Task -eq 'visual-discovery') {
+        Invoke-Godot 'visual-discovery' @('--script', 'tests/test_discovery.gd')
+    }
     if ($Task -eq 'visual-reef') {
         Invoke-Godot 'visual-reef' @('--script', 'tests/test_reef_visual.gd')
     }
@@ -76,6 +79,7 @@ try {
         Invoke-Godot 'audio' @('--headless', '--script', 'tests/test_audio.gd')
         Invoke-Godot 'rock-surface' @('--headless', '--script', 'tests/test_rock_surface.gd')
         Invoke-Godot 'player-collision' @('--headless', '--script', 'tests/test_player_collision.gd')
+        Invoke-Godot 'discovery' @('--headless', '--script', 'tests/test_discovery.gd')
     }
     if ($Task -in @('evaluate', 'check')) {
         Invoke-Godot 'evaluation' @('--headless', '--script', 'tests/test_evaluation.gd')

@@ -217,6 +217,8 @@ static func landscape(parent: Node3D) -> void:
 	# One open coastline to the left; the right and horizon remain ocean.
 	for i in range(10):
 		var x := -85 - i % 3 * 24
+		if i == 3:
+			x -= 28  # Leave an actual opening behind the swim-through arch.
 		var y := 9 - i * 15
 		var coast := Geo.put(
 			parent, Geo.boulder(Vector3(65, 90, 85), 100 + i), mat, Vector3(x, y, 30 - i * 27)

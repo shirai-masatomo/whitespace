@@ -26,3 +26,6 @@ extends Resource
 @export var jelly_cooldown: float = 3.0
 
 @export var current_strength: float = 1.0
+@export var discovery_enabled: bool = true
+@export var bubble_lift: float = 8.0
+@export var discovery_stream_speed: float = 12.0

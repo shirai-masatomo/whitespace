@@ -7,6 +7,7 @@ const Config = preload("res://game/dive_config.gd")
 const Driftwood = preload("res://game/driftwood_surface.gd")
 const RockSurface = preload("res://game/rock_surface.gd")
 const Layout = preload("res://game/stage_layout.gd")
+const Discovery = preload("res://game/discovery_rules.gd")
 
 var config: Resource
 var collision_motion: Callable
@@ -123,7 +124,11 @@ func oxygen_contact() -> int:
 
 
 func at_oxygen() -> bool:
-	return oxygen_contact() >= 0
+	return oxygen_contact() >= 0 or in_air_pocket()
+
+
+func in_air_pocket() -> bool:
+	return config.discovery_enabled and Discovery.breathing(position, elapsed)
 
 
 func step(delta: float, horizontal: Vector2, descent: float = 0.0, ascend: bool = false) -> void:
@@ -212,7 +217,7 @@ func step(delta: float, horizontal: Vector2, descent: float = 0.0, ascend: bool 
 	best_depth = maxf(best_depth, depth)
 	oxygen_rate = 0.0
 	var oxygen_index := oxygen_contact()
-	if oxygen_index >= 0 or position.y >= -1:
+	if oxygen_index >= 0 or position.y >= -1 or in_air_pocket():
 		oxygen = config.oxygen_capacity
 		if (
 			oxygen_index >= 0
@@ -298,6 +303,9 @@ func _return_step(delta: float) -> void:
 
 func flow_at(point: Vector3) -> Vector3:
 	var flow := Vector3.ZERO
+	if config.discovery_enabled:
+		flow += Discovery.bubble_flow(point, elapsed, config.bubble_lift)
+		flow += Discovery.stream_sample(point, config.discovery_stream_speed)
 	for zone in Layout.current_zones():
 		var distance: float = ((point - zone.center) / zone.radius).length()
 		flow += zone.flow * maxf(0, 1 - distance)

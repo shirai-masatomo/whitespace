@@ -95,6 +95,8 @@ func _draw() -> void:
 		status = "WASDで桟橋から海へ飛び込もう  ·  マウスで見渡す"
 	elif returning:
 		status = "緊急浮上中 → %dmから、そのまま再挑戦" % int(maxf(0, -model.return_target.y))
+	elif model.in_air_pocket():
+		status = "泡の中でひと息  ·  外へ泳ぐ / Eで下へ抜ける"
 	elif model.velocity.y < -8:
 		status = "急降下中  ·  酸素を多く使っています"
 	elif model.velocity.y > 1:
@@ -145,7 +147,7 @@ func _draw_overlay(scale_factor: Vector2) -> void:
 	var complete: bool = game.model.mode == Model.Mode.COMPLETE
 	draw_rect(Rect2(0, 0, 1280, 720), Color(0.015, 0.045, 0.075, 0.82))
 	draw_rect(Rect2(272, 110, 736, 497), INK)
-	text_at(Vector2(310, 166), "DIVE DIVE  /  海底への足場旅", 20, CYAN)
+	text_at(Vector2(310, 166), "DIVE DIVE  /  その下には、何がある？", 20, CYAN)
 	var heading := "海を見渡し、%dmへ。" % int(game.model.config.goal_depth)
 	if game.paused:
 		heading = "一時停止"
@@ -160,8 +162,8 @@ func _draw_overlay(scale_factor: Vector2) -> void:
 		)
 		text_at(Vector2(310, 352), "次は別のルートでもう一度。", 22, MUTED)
 	else:
-		text_at(Vector2(310, 289), "海へ飛び込み、足場をたどって深く潜ろう。", 21)
-		text_at(Vector2(310, 330), "光る藻に触れると酸素100%。待たずに進もう。", 21)
+		text_at(Vector2(310, 289), "光、泡、海の流れ。気になる方へ潜ろう。", 21)
+		text_at(Vector2(310, 330), "光る藻や大きな泡で、酸素を補給。", 21)
 		text_at(Vector2(310, 371), "急降下は酸素を多く使う。酸素0で押し戻される。", 20, MUTED)
 	text_at(Vector2(310, 439), "WASD 移動 / マウス 視点 / E 急降下 / Space 浮上", 19, CYAN)
 	text_at(Vector2(310, 468), "Q 減速 / F 俯瞰 / H 道案内 / Tab 候補 / V 視点 / M 音", 16, MUTED)

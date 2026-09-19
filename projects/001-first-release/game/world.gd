@@ -9,11 +9,13 @@ const Life = preload("res://game/marine_life.gd")
 const Layout = preload("res://game/stage_layout.gd")
 const TUNING = preload("res://game/default_config.tres")
 const Collision = preload("res://game/level_collision.gd")
+const Discoveries = preload("res://game/discovery_world.gd")
 var lighting: Node3D
 var effects: Node3D
 var environment: Environment
 var platforms: Array[Node3D] = []
 var life: Node3D
+var discoveries: Node3D
 
 
 func _ready() -> void:
@@ -31,6 +33,8 @@ func _ready() -> void:
 	Collision.build(landscape)
 	life = Life.new()
 	add_child(life)
+	discoveries = Discoveries.new()
+	add_child(discoveries)
 	for zone in Layout.current_zones():
 		effects.current(zone.center, zone.flow)
 
@@ -109,6 +113,8 @@ func update_depth(camera_y: float) -> void:
 func update_life(model) -> void:
 	effects.update(model)
 	life.update(model.position, model.elapsed)
+	discoveries.visible = model.config.discovery_enabled
+	discoveries.update(model.elapsed)
 
 
 func make_avatar() -> Node3D:
