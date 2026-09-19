@@ -132,6 +132,6 @@ func make_avatar() -> Node3D:
 
 
 func make_bubble() -> MeshInstance3D:
-	var bubble := Geo.material(Color(.46, .83, .9, .16), .05, .2)
-	bubble.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	var bubble := ShaderMaterial.new()
+	bubble.shader = preload("res://game/shaders/rescue.gdshader")
 	return Geo.sphere(self, 1.25, bubble, Vector3.ZERO)
