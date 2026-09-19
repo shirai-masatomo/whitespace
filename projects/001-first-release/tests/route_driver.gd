@@ -16,10 +16,18 @@ static func input_for(model, target_index: int, fast: bool = false) -> Vector3:
 	return Vector3(axis.x, descent, axis.y)
 
 
-static func reach(model, target_index: int, timeout: float = 40.0, fast: bool = false) -> bool:
+static func reach(
+	model,
+	target_index: int,
+	timeout: float = 40.0,
+	fast: bool = false,
+	observer: Callable = Callable()
+) -> bool:
 	for frame in range(int(timeout * 60)):
 		var command := input_for(model, target_index, fast)
 		model.step(1.0 / 60, Vector2(command.x, command.z), command.y)
+		if observer.is_valid():
+			observer.call(model)
 		if model.grounded == target_index:
 			# Centre on the oxygen spot before advancing the route.
 			if not model.platforms[target_index].oxygen or model.at_oxygen():

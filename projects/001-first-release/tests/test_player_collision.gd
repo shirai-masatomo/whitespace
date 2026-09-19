@@ -8,6 +8,8 @@ var game
 var failures := 0
 var checks := 0
 var evidence: Array[Dictionary] = []
+var oxygen_choices: Array[Dictionary] = []
+var route_metrics: Array[Dictionary] = []
 
 
 func _initialize() -> void:
@@ -21,7 +23,14 @@ func check(ok: bool, label: String) -> void:
 		push_error(label)
 
 
-func probe(label: String, surface: Vector3, direction: Vector3, fast: bool, dt: float) -> void:
+func probe(
+	label: String,
+	surface: Vector3,
+	direction: Vector3,
+	fast: bool,
+	dt: float,
+	expected_body: Object = null
+) -> void:
 	game.model.reset()
 	game.model.grounded = -1
 	game.yaw = 0
@@ -30,17 +39,38 @@ func probe(label: String, surface: Vector3, direction: Vector3, fast: bool, dt: 
 	game.model.velocity = direction * (15 if fast else 7)
 	var touched := false
 	var first_position := Vector3.ZERO
+	var seen: Array[String] = []
 	for frame in range(int(1.8 / dt)):
 		game.model.oxygen = 100
 		var axis := Vector2(direction.x, direction.z).normalized()
 		game.advance(dt, axis, 1 if fast else 0, direction.y > .1)
-		for normal in game.motion.contacts:
-			if normal.dot(direction) < -.25:
+		for index in range(game.motion.contacts.size()):
+			var normal: Vector3 = game.motion.contacts[index]
+			var identity := str(game.motion.contact_bodies[index].get_path())
+			if not seen.has(identity):
+				seen.append(identity)
+			# A capsule may touch an overhang with its head before its centre reaches
+			# the ray's side face. Match the real object, not an arbitrary normal angle.
+			if (
+				(expected_body != null and game.motion.contact_bodies[index] == expected_body)
+				or (expected_body == null and normal.dot(direction) < -.25)
+			):
 				touched = true
 				first_position = game.model.position
 		if touched:
 			break
 	check(touched, "Swept player did not collide: " + label)
+	if not touched:
+		print(
+			"Contact fixture ",
+			surface,
+			" ended ",
+			game.model.position,
+			" expected ",
+			expected_body.get_path() if expected_body != null else "any",
+			" saw ",
+			seen
+		)
 	evidence.append({"case": label, "contact": touched, "position": str(first_position)})
 
 
@@ -63,7 +93,9 @@ func audit_platform(index: int) -> void:
 		Vector3.RIGHT,
 		Vector3.FORWARD,
 		Vector3.BACK,
-		Vector3(-1, 0, -1).normalized()
+		Vector3(-1, 0, -1).normalized(),
+		Vector3(1, -1, 1).normalized(),
+		Vector3(.5, 1, -.5).normalized()
 	]:
 		var origin: Vector3 = center - direction * 40
 		var ray := PhysicsRayQueryParameters3D.create(origin, center + direction * 40, 1)
@@ -73,14 +105,20 @@ func audit_platform(index: int) -> void:
 			continue
 		for dt in [1.0 / 60, 1.0 / 15]:
 			await probe(
-				"%s %s dt=%.3f" % [platform.kind, direction, dt],
+				"%d %s %s dt=%.3f" % [index, platform.kind, direction, dt],
 				hit.position,
 				direction,
 				direction.y < 0,
-				dt
+				dt,
+				hit.collider
 			)
 		await probe(
-			"%s normal %s" % [platform.kind, direction], hit.position, direction, false, 1.0 / 60
+			"%d %s normal %s" % [index, platform.kind, direction],
+			hit.position,
+			direction,
+			false,
+			1.0 / 60,
+			hit.collider
 		)
 
 
@@ -91,7 +129,7 @@ func run() -> void:
 	game.set_physics_process(false)
 	await physics_frame
 	await process_frame
-	for index in [0, 1, 2, 3, 4, 5, 6, 9, 13, 14, 16, 17]:
+	for index in [0, 1, 2, 3, 4, 5, 6, 9, 13, 14, 16, 17, 20, 21, 22, 23, 24, 25]:
 		game.model.reset()
 		game.world.sync_platforms(game.model.platforms)
 		await physics_frame
@@ -119,14 +157,30 @@ func run() -> void:
 	for route_name in game.model.Layout.routes():
 		game.model.reset()
 		var complete := true
+		var measurement := {"name": route_name, "minimum_oxygen": 100.0, "legs": []}
+		var observe := func(state):
+			measurement.minimum_oxygen = minf(measurement.minimum_oxygen, state.oxygen)
 		for index in game.model.Layout.routes()[route_name]:
-			if not Driver.reach(game.model, index, 40, route_name == "fast_drop"):
+			var before: float = game.model.elapsed
+			if not Driver.reach(
+				game.model, index, 40, route_name in game.model.Layout.fast_routes(), observe
+			):
 				complete = false
 				push_error(
 					"Actual route stopped: %s at %d, %s" % [route_name, index, game.model.position]
 				)
 				break
+			measurement.legs.append(
+				{
+					"to": index,
+					"seconds": snappedf(game.model.elapsed - before, .01),
+					"kind": game.model.platforms[index].kind
+				}
+			)
 		check(complete, "Actual collision route " + route_name)
+		measurement["seconds"] = snappedf(game.model.elapsed, .01)
+		measurement["complete"] = complete
+		route_metrics.append(measurement)
 	game.model.reset()
 	for index in [1, 2, 3]:
 		Driver.reach(game.model, index)
@@ -153,7 +207,17 @@ func run() -> void:
 	var file := FileAccess.open("res://artifacts/player-collision.json", FileAccess.WRITE)
 	audit_oxygen_choice()
 	file.store_string(
-		JSON.stringify({"checks": checks, "failures": failures, "cases": evidence}, "  ")
+		JSON.stringify(
+			{
+				"checks": checks,
+				"failures": failures,
+				"cases": evidence,
+				"oxygen_choices": oxygen_choices,
+				"routes": route_metrics,
+				"scope": "Actual playable scene and swept capsule; scripted inputs, not human fun."
+			},
+			"  "
+		)
 	)
 	game.queue_free()
 	await process_frame
@@ -184,7 +248,7 @@ func audit_small_solids() -> void:
 
 
 func audit_oxygen_choice() -> void:
-	var choices: Array[Dictionary] = []
+	oxygen_choices.clear()
 	for air in [100.0, 30.0]:
 		for target in [8, 19]:
 			game.model.reset()
@@ -199,8 +263,8 @@ func audit_oxygen_choice() -> void:
 					break
 			game.model.oxygen = air
 			var arrived := Driver.reach(game.model, target, 40, true)
-			choices.append({"starting_oxygen": air, "target": target, "arrived": arrived})
+			oxygen_choices.append({"starting_oxygen": air, "target": target, "arrived": arrived})
 			check(
 				arrived == (air == 100 or target == 19), "Oxygen changes a meaningful route choice"
 			)
-	print("Oxygen decisions: ", choices)
+	print("Oxygen decisions: ", oxygen_choices)

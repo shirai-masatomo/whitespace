@@ -61,7 +61,7 @@ func _initialize() -> void:
 		model = Model.new()
 		for index in Model.Layout.routes()[route_name]:
 			check(
-				Driver.reach(model, index, 40.0, route_name in ["fast_drop", "current_gardens"]),
+				Driver.reach(model, index, 40.0, route_name in Model.Layout.fast_routes()),
 				"Route %s reaches %d" % [route_name, index]
 			)
 		check(model.mode == Model.Mode.COMPLETE, "Route completes: " + route_name)
@@ -204,6 +204,6 @@ func _test_rescue() -> void:
 		model.position.y == 6 and model.previous_checkpoint == 0,
 		"Rescue returns to outdoor start safely"
 	)
-	model = airborne(346)
+	model = airborne(model.config.missed_goal_depth + 1)
 	model.step(0.1, Vector2.ZERO)
 	check(model.mode == Model.Mode.RETURNING, "Missing goal cannot strand player")

@@ -75,7 +75,7 @@ func _draw() -> void:
 	draw_rect(Rect2(28, 24, 206, 88), Color(0.02, 0.07, 0.1, 0.66))
 	text_at(Vector2(44, 48), "DIVE DIVE", 15, CYAN)
 	text_at(Vector2(44, 94), "%03d" % int(model.depth), 38)
-	text_at(Vector2(130, 93), "m / 300", 17, MUTED)
+	text_at(Vector2(130, 93), "m / %d" % int(model.config.goal_depth), 17, MUTED)
 	draw_rect(Rect2(998, 24, 254, 88), Color(0.02, 0.07, 0.1, 0.66))
 	text_at(Vector2(1014, 50), "酸素", 17, accent)
 	text_at(Vector2(1170, 51), "%d%%" % int(ratio * 100), 20, accent)
@@ -146,11 +146,11 @@ func _draw_overlay(scale_factor: Vector2) -> void:
 	draw_rect(Rect2(0, 0, 1280, 720), Color(0.015, 0.045, 0.075, 0.82))
 	draw_rect(Rect2(272, 110, 736, 497), INK)
 	text_at(Vector2(310, 166), "DIVE DIVE  /  海底への足場旅", 20, CYAN)
-	var heading := "足場をたどって、300mへ。"
+	var heading := "海を見渡し、%dmへ。" % int(game.model.config.goal_depth)
 	if game.paused:
 		heading = "一時停止"
 	elif complete:
-		heading = "海底の灯に到達。"
+		heading = "裂け目の先へ到達。"
 	text_at(Vector2(310, 230), heading, 34)
 	if complete:
 		text_at(

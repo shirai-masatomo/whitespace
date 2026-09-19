@@ -15,20 +15,20 @@
     "lost_depth_m": 30.0001525878906
   },
   "route_tradeoffs": {
-    "current_seconds_saved": 0.56,
+    "current_seconds_saved": 0.57,
     "fast_safe_gardens": {
-      "aimed_camera_diver_framed": 8,
+      "aimed_camera_diver_framed": 12,
       "aimed_camera_visible": 7,
       "complete": true,
-      "decisions": 8,
-      "departure_camera_framed": 7,
+      "decisions": 12,
+      "departure_camera_framed": 11,
       "departure_camera_unoccluded": 6,
       "legs": [
         {
           "arrival_oxygen": 82.17,
           "to": 1,
           "travel_seconds": 4.8,
-          "visible_with_mouse": true
+          "visible_with_mouse": false
         },
         {
           "arrival_oxygen": 100.0,
@@ -46,7 +46,7 @@
           "arrival_oxygen": 100.0,
           "to": 11,
           "travel_seconds": 4.73,
-          "visible_with_mouse": true
+          "visible_with_mouse": false
         },
         {
           "arrival_oxygen": 100.0,
@@ -67,36 +67,60 @@
           "visible_with_mouse": true
         },
         {
-          "arrival_oxygen": 64.23,
+          "arrival_oxygen": 100.0,
           "to": 9,
           "travel_seconds": 5.78,
           "visible_with_mouse": true
+        },
+        {
+          "arrival_oxygen": 100.0,
+          "to": 20,
+          "travel_seconds": 6.3,
+          "visible_with_mouse": true
+        },
+        {
+          "arrival_oxygen": 68.9,
+          "to": 21,
+          "travel_seconds": 5.12,
+          "visible_with_mouse": true
+        },
+        {
+          "arrival_oxygen": 100.0,
+          "to": 22,
+          "travel_seconds": 5.42,
+          "visible_with_mouse": true
+        },
+        {
+          "arrival_oxygen": 46.7,
+          "to": 25,
+          "travel_seconds": 6.5,
+          "visible_with_mouse": false
         }
       ],
-      "mean_leg_seconds": 5.91,
-      "minimum_oxygen": 52.6,
-      "mouse_camera_visible": 8,
+      "mean_leg_seconds": 5.89,
+      "minimum_oxygen": 46.7,
+      "mouse_camera_visible": 9,
       "name": "safe_gardens_fast",
-      "seconds": 47.3,
-      "survey_visible": 8
+      "seconds": 70.63,
+      "survey_visible": 11
     },
-    "fast_shortcut_seconds_saved": 14.22,
-    "without_current_seconds": 40.08
+    "fast_shortcut_seconds_saved": 14.21,
+    "without_current_seconds": 63.42
   },
   "routes": [
     {
-      "aimed_camera_diver_framed": 9,
-      "aimed_camera_visible": 9,
+      "aimed_camera_diver_framed": 13,
+      "aimed_camera_visible": 11,
       "complete": true,
-      "decisions": 9,
-      "departure_camera_framed": 9,
-      "departure_camera_unoccluded": 9,
+      "decisions": 13,
+      "departure_camera_framed": 11,
+      "departure_camera_unoccluded": 7,
       "legs": [
         {
           "arrival_oxygen": 77.2,
           "to": 1,
           "travel_seconds": 8.48,
-          "visible_with_mouse": true
+          "visible_with_mouse": false
         },
         {
           "arrival_oxygen": 100.0,
@@ -141,25 +165,49 @@
           "visible_with_mouse": true
         },
         {
-          "arrival_oxygen": 57.87,
+          "arrival_oxygen": 100.0,
           "to": 9,
           "travel_seconds": 11.17,
           "visible_with_mouse": true
+        },
+        {
+          "arrival_oxygen": 100.0,
+          "to": 20,
+          "travel_seconds": 9.63,
+          "visible_with_mouse": true
+        },
+        {
+          "arrival_oxygen": 64.07,
+          "to": 21,
+          "travel_seconds": 9.62,
+          "visible_with_mouse": true
+        },
+        {
+          "arrival_oxygen": 100.0,
+          "to": 22,
+          "travel_seconds": 5.45,
+          "visible_with_mouse": true
+        },
+        {
+          "arrival_oxygen": 37.67,
+          "to": 25,
+          "travel_seconds": 16.23,
+          "visible_with_mouse": false
         }
       ],
-      "mean_leg_seconds": 9.58,
+      "mean_leg_seconds": 9.78,
       "minimum_oxygen": 25.0,
-      "mouse_camera_visible": 9,
+      "mouse_camera_visible": 11,
       "name": "platforms",
-      "seconds": 86.27,
-      "survey_visible": 9
+      "seconds": 127.2,
+      "survey_visible": 12
     },
     {
-      "aimed_camera_diver_framed": 5,
-      "aimed_camera_visible": 5,
+      "aimed_camera_diver_framed": 9,
+      "aimed_camera_visible": 6,
       "complete": true,
-      "decisions": 5,
-      "departure_camera_framed": 5,
+      "decisions": 9,
+      "departure_camera_framed": 8,
       "departure_camera_unoccluded": 4,
       "legs": [
         {
@@ -187,32 +235,56 @@
           "visible_with_mouse": true
         },
         {
-          "arrival_oxygen": 57.87,
+          "arrival_oxygen": 100.0,
           "to": 9,
           "travel_seconds": 11.17,
           "visible_with_mouse": true
+        },
+        {
+          "arrival_oxygen": 100.0,
+          "to": 20,
+          "travel_seconds": 9.63,
+          "visible_with_mouse": true
+        },
+        {
+          "arrival_oxygen": 64.07,
+          "to": 21,
+          "travel_seconds": 9.62,
+          "visible_with_mouse": true
+        },
+        {
+          "arrival_oxygen": 100.0,
+          "to": 22,
+          "travel_seconds": 5.45,
+          "visible_with_mouse": true
+        },
+        {
+          "arrival_oxygen": 37.67,
+          "to": 25,
+          "travel_seconds": 16.23,
+          "visible_with_mouse": false
         }
       ],
-      "mean_leg_seconds": 16.35,
+      "mean_leg_seconds": 13.63,
       "minimum_oxygen": 31.93,
-      "mouse_camera_visible": 5,
+      "mouse_camera_visible": 8,
       "name": "direct_oxygen",
-      "seconds": 81.73,
-      "survey_visible": 5
+      "seconds": 122.67,
+      "survey_visible": 8
     },
     {
-      "aimed_camera_diver_framed": 9,
-      "aimed_camera_visible": 8,
+      "aimed_camera_diver_framed": 13,
+      "aimed_camera_visible": 9,
       "complete": true,
-      "decisions": 9,
-      "departure_camera_framed": 8,
-      "departure_camera_unoccluded": 8,
+      "decisions": 13,
+      "departure_camera_framed": 10,
+      "departure_camera_unoccluded": 6,
       "legs": [
         {
           "arrival_oxygen": 77.2,
           "to": 1,
           "travel_seconds": 8.48,
-          "visible_with_mouse": true
+          "visible_with_mouse": false
         },
         {
           "arrival_oxygen": 100.0,
@@ -257,32 +329,56 @@
           "visible_with_mouse": true
         },
         {
-          "arrival_oxygen": 57.87,
+          "arrival_oxygen": 100.0,
           "to": 9,
           "travel_seconds": 11.17,
           "visible_with_mouse": true
+        },
+        {
+          "arrival_oxygen": 100.0,
+          "to": 20,
+          "travel_seconds": 9.63,
+          "visible_with_mouse": true
+        },
+        {
+          "arrival_oxygen": 64.07,
+          "to": 21,
+          "travel_seconds": 9.62,
+          "visible_with_mouse": true
+        },
+        {
+          "arrival_oxygen": 100.0,
+          "to": 22,
+          "travel_seconds": 5.45,
+          "visible_with_mouse": true
+        },
+        {
+          "arrival_oxygen": 37.67,
+          "to": 25,
+          "travel_seconds": 16.23,
+          "visible_with_mouse": false
         }
       ],
-      "mean_leg_seconds": 10.01,
+      "mean_leg_seconds": 10.08,
       "minimum_oxygen": 25.0,
-      "mouse_camera_visible": 9,
+      "mouse_camera_visible": 11,
       "name": "extra_oxygen",
-      "seconds": 90.1,
-      "survey_visible": 9
+      "seconds": 131.03,
+      "survey_visible": 12
     },
     {
-      "aimed_camera_diver_framed": 8,
+      "aimed_camera_diver_framed": 12,
       "aimed_camera_visible": 7,
       "complete": true,
-      "decisions": 8,
-      "departure_camera_framed": 7,
+      "decisions": 12,
+      "departure_camera_framed": 11,
       "departure_camera_unoccluded": 6,
       "legs": [
         {
           "arrival_oxygen": 77.2,
           "to": 1,
           "travel_seconds": 8.48,
-          "visible_with_mouse": true
+          "visible_with_mouse": false
         },
         {
           "arrival_oxygen": 100.0,
@@ -321,26 +417,50 @@
           "visible_with_mouse": true
         },
         {
-          "arrival_oxygen": 57.87,
+          "arrival_oxygen": 100.0,
           "to": 9,
           "travel_seconds": 11.17,
           "visible_with_mouse": true
+        },
+        {
+          "arrival_oxygen": 100.0,
+          "to": 20,
+          "travel_seconds": 9.63,
+          "visible_with_mouse": true
+        },
+        {
+          "arrival_oxygen": 64.07,
+          "to": 21,
+          "travel_seconds": 9.62,
+          "visible_with_mouse": true
+        },
+        {
+          "arrival_oxygen": 100.0,
+          "to": 22,
+          "travel_seconds": 5.45,
+          "visible_with_mouse": true
+        },
+        {
+          "arrival_oxygen": 37.67,
+          "to": 25,
+          "travel_seconds": 16.23,
+          "visible_with_mouse": false
         }
       ],
-      "mean_leg_seconds": 10.52,
-      "minimum_oxygen": 46.0,
-      "mouse_camera_visible": 8,
+      "mean_leg_seconds": 10.43,
+      "minimum_oxygen": 37.67,
+      "mouse_camera_visible": 10,
       "name": "safe_gardens",
-      "seconds": 84.2,
-      "survey_visible": 8
+      "seconds": 125.13,
+      "survey_visible": 11
     },
     {
-      "aimed_camera_diver_framed": 5,
-      "aimed_camera_visible": 5,
+      "aimed_camera_diver_framed": 9,
+      "aimed_camera_visible": 4,
       "complete": true,
-      "decisions": 5,
-      "departure_camera_framed": 5,
-      "departure_camera_unoccluded": 4,
+      "decisions": 9,
+      "departure_camera_framed": 8,
+      "departure_camera_unoccluded": 3,
       "legs": [
         {
           "arrival_oxygen": 100.0,
@@ -367,32 +487,56 @@
           "visible_with_mouse": true
         },
         {
-          "arrival_oxygen": 64.17,
+          "arrival_oxygen": 100.0,
           "to": 9,
           "travel_seconds": 5.75,
           "visible_with_mouse": true
+        },
+        {
+          "arrival_oxygen": 100.0,
+          "to": 20,
+          "travel_seconds": 6.3,
+          "visible_with_mouse": true
+        },
+        {
+          "arrival_oxygen": 68.9,
+          "to": 21,
+          "travel_seconds": 5.12,
+          "visible_with_mouse": true
+        },
+        {
+          "arrival_oxygen": 100.0,
+          "to": 22,
+          "travel_seconds": 5.42,
+          "visible_with_mouse": true
+        },
+        {
+          "arrival_oxygen": 46.7,
+          "to": 25,
+          "travel_seconds": 6.5,
+          "visible_with_mouse": false
         }
       ],
-      "mean_leg_seconds": 6.62,
+      "mean_leg_seconds": 6.27,
       "minimum_oxygen": 32.4,
-      "mouse_camera_visible": 5,
+      "mouse_camera_visible": 8,
       "name": "fast_drop",
-      "seconds": 33.08,
-      "survey_visible": 5
+      "seconds": 56.42,
+      "survey_visible": 8
     },
     {
-      "aimed_camera_diver_framed": 7,
-      "aimed_camera_visible": 7,
+      "aimed_camera_diver_framed": 11,
+      "aimed_camera_visible": 6,
       "complete": true,
-      "decisions": 7,
-      "departure_camera_framed": 7,
+      "decisions": 11,
+      "departure_camera_framed": 10,
       "departure_camera_unoccluded": 5,
       "legs": [
         {
           "arrival_oxygen": 82.17,
           "to": 1,
           "travel_seconds": 4.8,
-          "visible_with_mouse": true
+          "visible_with_mouse": false
         },
         {
           "arrival_oxygen": 100.0,
@@ -410,7 +554,7 @@
           "arrival_oxygen": 100.0,
           "to": 11,
           "travel_seconds": 4.73,
-          "visible_with_mouse": true
+          "visible_with_mouse": false
         },
         {
           "arrival_oxygen": 100.0,
@@ -425,32 +569,56 @@
           "visible_with_mouse": true
         },
         {
-          "arrival_oxygen": 64.17,
+          "arrival_oxygen": 100.0,
           "to": 9,
           "travel_seconds": 5.75,
           "visible_with_mouse": true
+        },
+        {
+          "arrival_oxygen": 100.0,
+          "to": 20,
+          "travel_seconds": 6.3,
+          "visible_with_mouse": true
+        },
+        {
+          "arrival_oxygen": 68.9,
+          "to": 21,
+          "travel_seconds": 5.12,
+          "visible_with_mouse": true
+        },
+        {
+          "arrival_oxygen": 100.0,
+          "to": 22,
+          "travel_seconds": 5.42,
+          "visible_with_mouse": true
+        },
+        {
+          "arrival_oxygen": 46.7,
+          "to": 25,
+          "travel_seconds": 6.5,
+          "visible_with_mouse": false
         }
       ],
-      "mean_leg_seconds": 5.64,
+      "mean_leg_seconds": 5.71,
       "minimum_oxygen": 45.2,
-      "mouse_camera_visible": 7,
+      "mouse_camera_visible": 8,
       "name": "current_gardens",
-      "seconds": 39.52,
-      "survey_visible": 7
+      "seconds": 62.85,
+      "survey_visible": 10
     },
     {
-      "aimed_camera_diver_framed": 10,
-      "aimed_camera_visible": 8,
+      "aimed_camera_diver_framed": 14,
+      "aimed_camera_visible": 6,
       "complete": true,
-      "decisions": 10,
-      "departure_camera_framed": 8,
-      "departure_camera_unoccluded": 5,
+      "decisions": 14,
+      "departure_camera_framed": 11,
+      "departure_camera_unoccluded": 4,
       "legs": [
         {
           "arrival_oxygen": 77.2,
           "to": 1,
           "travel_seconds": 8.48,
-          "visible_with_mouse": true
+          "visible_with_mouse": false
         },
         {
           "arrival_oxygen": 100.0,
@@ -480,7 +648,7 @@
           "arrival_oxygen": 100.0,
           "to": 13,
           "travel_seconds": 5.18,
-          "visible_with_mouse": true
+          "visible_with_mouse": false
         },
         {
           "arrival_oxygen": 83.27,
@@ -498,29 +666,53 @@
           "arrival_oxygen": 100.0,
           "to": 8,
           "travel_seconds": 9.83,
-          "visible_with_mouse": false
+          "visible_with_mouse": true
         },
         {
-          "arrival_oxygen": 57.87,
+          "arrival_oxygen": 100.0,
           "to": 9,
           "travel_seconds": 11.17,
           "visible_with_mouse": true
+        },
+        {
+          "arrival_oxygen": 100.0,
+          "to": 20,
+          "travel_seconds": 9.63,
+          "visible_with_mouse": true
+        },
+        {
+          "arrival_oxygen": 64.07,
+          "to": 21,
+          "travel_seconds": 9.62,
+          "visible_with_mouse": true
+        },
+        {
+          "arrival_oxygen": 100.0,
+          "to": 22,
+          "travel_seconds": 5.45,
+          "visible_with_mouse": true
+        },
+        {
+          "arrival_oxygen": 37.67,
+          "to": 25,
+          "travel_seconds": 16.23,
+          "visible_with_mouse": false
         }
       ],
-      "mean_leg_seconds": 8.72,
-      "minimum_oxygen": 46.0,
-      "mouse_camera_visible": 8,
+      "mean_leg_seconds": 9.15,
+      "minimum_oxygen": 37.67,
+      "mouse_camera_visible": 10,
       "name": "cliff_walk",
-      "seconds": 87.23,
-      "survey_visible": 8
+      "seconds": 128.17,
+      "survey_visible": 11
     },
     {
-      "aimed_camera_diver_framed": 8,
+      "aimed_camera_diver_framed": 12,
       "aimed_camera_visible": 8,
       "complete": true,
-      "decisions": 8,
-      "departure_camera_framed": 7,
-      "departure_camera_unoccluded": 7,
+      "decisions": 12,
+      "departure_camera_framed": 10,
+      "departure_camera_unoccluded": 6,
       "legs": [
         {
           "arrival_oxygen": 100.0,
@@ -565,26 +757,50 @@
           "visible_with_mouse": true
         },
         {
-          "arrival_oxygen": 57.87,
+          "arrival_oxygen": 100.0,
           "to": 9,
           "travel_seconds": 11.17,
           "visible_with_mouse": true
+        },
+        {
+          "arrival_oxygen": 100.0,
+          "to": 20,
+          "travel_seconds": 9.63,
+          "visible_with_mouse": true
+        },
+        {
+          "arrival_oxygen": 64.07,
+          "to": 21,
+          "travel_seconds": 9.62,
+          "visible_with_mouse": true
+        },
+        {
+          "arrival_oxygen": 100.0,
+          "to": 22,
+          "travel_seconds": 5.45,
+          "visible_with_mouse": true
+        },
+        {
+          "arrival_oxygen": 37.67,
+          "to": 25,
+          "travel_seconds": 16.23,
+          "visible_with_mouse": false
         }
       ],
-      "mean_leg_seconds": 10.9,
+      "mean_leg_seconds": 10.68,
       "minimum_oxygen": 31.0,
-      "mouse_camera_visible": 8,
+      "mouse_camera_visible": 11,
       "name": "offshore_life",
-      "seconds": 87.2,
-      "survey_visible": 8
+      "seconds": 128.13,
+      "survey_visible": 11
     },
     {
-      "aimed_camera_diver_framed": 7,
-      "aimed_camera_visible": 6,
+      "aimed_camera_diver_framed": 11,
+      "aimed_camera_visible": 5,
       "complete": true,
-      "decisions": 7,
-      "departure_camera_framed": 6,
-      "departure_camera_unoccluded": 6,
+      "decisions": 11,
+      "departure_camera_framed": 10,
+      "departure_camera_unoccluded": 5,
       "legs": [
         {
           "arrival_oxygen": 100.0,
@@ -608,7 +824,7 @@
           "arrival_oxygen": 100.0,
           "to": 19,
           "travel_seconds": 5.37,
-          "visible_with_mouse": true
+          "visible_with_mouse": false
         },
         {
           "arrival_oxygen": 100.0,
@@ -620,21 +836,179 @@
           "arrival_oxygen": 100.0,
           "to": 8,
           "travel_seconds": 9.83,
-          "visible_with_mouse": false
+          "visible_with_mouse": true
         },
         {
-          "arrival_oxygen": 57.87,
+          "arrival_oxygen": 100.0,
           "to": 9,
           "travel_seconds": 11.17,
           "visible_with_mouse": true
+        },
+        {
+          "arrival_oxygen": 100.0,
+          "to": 20,
+          "travel_seconds": 9.63,
+          "visible_with_mouse": true
+        },
+        {
+          "arrival_oxygen": 64.07,
+          "to": 21,
+          "travel_seconds": 9.62,
+          "visible_with_mouse": true
+        },
+        {
+          "arrival_oxygen": 100.0,
+          "to": 22,
+          "travel_seconds": 5.45,
+          "visible_with_mouse": true
+        },
+        {
+          "arrival_oxygen": 37.67,
+          "to": 25,
+          "travel_seconds": 16.23,
+          "visible_with_mouse": false
         }
       ],
-      "mean_leg_seconds": 11.57,
+      "mean_leg_seconds": 11.08,
       "minimum_oxygen": 18.0,
-      "mouse_camera_visible": 6,
+      "mouse_camera_visible": 9,
       "name": "reef_refuge",
-      "seconds": 80.98,
-      "survey_visible": 7
+      "seconds": 121.92,
+      "survey_visible": 10
+    },
+    {
+      "aimed_camera_diver_framed": 11,
+      "aimed_camera_visible": 8,
+      "complete": true,
+      "decisions": 11,
+      "departure_camera_framed": 9,
+      "departure_camera_unoccluded": 6,
+      "legs": [
+        {
+          "arrival_oxygen": 100.0,
+          "to": 2,
+          "travel_seconds": 6.55,
+          "visible_with_mouse": true
+        },
+        {
+          "arrival_oxygen": 100.0,
+          "to": 4,
+          "travel_seconds": 9.48,
+          "visible_with_mouse": true
+        },
+        {
+          "arrival_oxygen": 66.23,
+          "to": 5,
+          "travel_seconds": 7.38,
+          "visible_with_mouse": true
+        },
+        {
+          "arrival_oxygen": 100.0,
+          "to": 6,
+          "travel_seconds": 5.5,
+          "visible_with_mouse": true
+        },
+        {
+          "arrival_oxygen": 61.2,
+          "to": 17,
+          "travel_seconds": 8.67,
+          "visible_with_mouse": true
+        },
+        {
+          "arrival_oxygen": 100.0,
+          "to": 16,
+          "travel_seconds": 4.68,
+          "visible_with_mouse": true
+        },
+        {
+          "arrival_oxygen": 100.0,
+          "to": 8,
+          "travel_seconds": 5.82,
+          "visible_with_mouse": true
+        },
+        {
+          "arrival_oxygen": 100.0,
+          "to": 9,
+          "travel_seconds": 5.75,
+          "visible_with_mouse": true
+        },
+        {
+          "arrival_oxygen": 100.0,
+          "to": 23,
+          "travel_seconds": 5.72,
+          "visible_with_mouse": false
+        },
+        {
+          "arrival_oxygen": 60.1,
+          "to": 24,
+          "travel_seconds": 6.75,
+          "visible_with_mouse": true
+        },
+        {
+          "arrival_oxygen": 13.63,
+          "to": 25,
+          "travel_seconds": 6.32,
+          "visible_with_mouse": true
+        }
+      ],
+      "mean_leg_seconds": 6.6,
+      "minimum_oxygen": 13.63,
+      "mouse_camera_visible": 10,
+      "name": "rift_offshore",
+      "seconds": 72.62,
+      "survey_visible": 11
+    },
+    {
+      "aimed_camera_diver_framed": 6,
+      "aimed_camera_visible": 1,
+      "complete": true,
+      "decisions": 6,
+      "departure_camera_framed": 5,
+      "departure_camera_unoccluded": 1,
+      "legs": [
+        {
+          "arrival_oxygen": 100.0,
+          "to": 2,
+          "travel_seconds": 6.55,
+          "visible_with_mouse": true
+        },
+        {
+          "arrival_oxygen": 100.0,
+          "to": 10,
+          "travel_seconds": 4.82,
+          "visible_with_mouse": true
+        },
+        {
+          "arrival_oxygen": 100.0,
+          "to": 6,
+          "travel_seconds": 8.02,
+          "visible_with_mouse": true
+        },
+        {
+          "arrival_oxygen": 100.0,
+          "to": 8,
+          "travel_seconds": 7.95,
+          "visible_with_mouse": true
+        },
+        {
+          "arrival_oxygen": 100.0,
+          "to": 23,
+          "travel_seconds": 10.4,
+          "visible_with_mouse": false
+        },
+        {
+          "arrival_oxygen": 21.2,
+          "to": 25,
+          "travel_seconds": 11.0,
+          "visible_with_mouse": true
+        }
+      ],
+      "mean_leg_seconds": 8.12,
+      "minimum_oxygen": 21.2,
+      "mouse_camera_visible": 5,
+      "name": "rift_shortcut",
+      "seconds": 48.73,
+      "survey_visible": 5
     }
   ],
   "scope": "Scripted steering, instant contact refill, 60Hz. Movement timers use offshore fixtures. Camera checks are framing/occlusion, not human readability."

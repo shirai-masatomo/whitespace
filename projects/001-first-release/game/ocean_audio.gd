@@ -16,9 +16,13 @@ var warning_timer := 0.0
 var refill_timer := 0.0
 var events: Array[String] = []
 var mix := {"surface": 0.0, "underwater": 0.0, "movement": 0.0}
+var output_enabled := false
 
 
 func _ready() -> void:
+	# Dummy is used by headless and non-interfering GPU automation. Keep PCM and
+	# feedback state testable without queuing playback to an inactive output device.
+	output_enabled = AudioServer.get_driver_name() != "Dummy"
 	for label in LOOP_NAMES + CUE_NAMES:
 		if not bank.has(label):
 			bank[label] = synthesize(label)
@@ -27,13 +31,15 @@ func _ready() -> void:
 		player.volume_db = -80
 		add_child(player)
 		players[label] = player
-		if label in LOOP_NAMES:
+		if label in LOOP_NAMES and output_enabled:
 			player.play()
 
 
 func _exit_tree() -> void:
 	for player in players.values():
 		player.stop()
+		player.stream = null
+	players.clear()
 	# Static Resource caches otherwise retain the script at engine shutdown.
 	bank.clear()
 
@@ -113,7 +119,7 @@ func cue(label: String) -> void:
 	events.append(label)
 	if events.size() > 16:
 		events.pop_front()
-	if not muted:
+	if not muted and output_enabled:
 		players[label].volume_linear = .42
 		players[label].play()
 

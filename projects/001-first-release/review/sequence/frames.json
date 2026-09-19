@@ -6,189 +6,189 @@
     "seconds": 2.0
   },
   {
-    "depth": 7.6,
+    "depth": 7.2,
     "file": "frame-001.jpg",
-    "pose": "sink",
+    "pose": "swim",
     "seconds": 4.0
   },
   {
-    "depth": 17.6,
+    "depth": 17.2,
     "file": "frame-002.jpg",
     "pose": "sink",
     "seconds": 6.0
   },
   {
-    "depth": 27.6,
+    "depth": 27.2,
     "file": "frame-003.jpg",
     "pose": "sink",
     "seconds": 8.0
   },
   {
-    "depth": 30.2,
+    "depth": 30.1,
     "file": "frame-004.jpg",
-    "pose": "swim",
+    "pose": "walk",
     "seconds": 10.0
   },
   {
-    "depth": 36.5,
+    "depth": 30.0,
     "file": "frame-005.jpg",
-    "pose": "swim",
+    "pose": "walk",
     "seconds": 12.0
   },
   {
-    "depth": 54.6,
+    "depth": 30.0,
     "file": "frame-006.jpg",
-    "pose": "dive",
+    "pose": "walk",
     "seconds": 14.0
   },
   {
-    "depth": 55.3,
+    "depth": 33.9,
     "file": "frame-007.jpg",
-    "pose": "ascend",
+    "pose": "swim",
     "seconds": 16.0
   },
   {
-    "depth": 52.5,
+    "depth": 48.9,
     "file": "frame-008.jpg",
-    "pose": "sink",
+    "pose": "dive",
     "seconds": 18.0
   },
   {
-    "depth": 60.0,
+    "depth": 55.1,
     "file": "frame-009.jpg",
-    "pose": "walk",
+    "pose": "ascend",
     "seconds": 20.0
   },
   {
-    "depth": 62.0,
+    "depth": 49.2,
     "file": "frame-010.jpg",
-    "pose": "swim",
+    "pose": "sink",
     "seconds": 22.0
   },
   {
-    "depth": 66.0,
+    "depth": 59.2,
     "file": "frame-011.jpg",
-    "pose": "swim",
+    "pose": "sink",
     "seconds": 24.0
   },
   {
-    "depth": 75.3,
+    "depth": 61.4,
     "file": "frame-012.jpg",
-    "pose": "sink",
+    "pose": "swim",
     "seconds": 26.0
   },
   {
-    "depth": 85.3,
+    "depth": 65.4,
     "file": "frame-013.jpg",
-    "pose": "sink",
+    "pose": "swim",
     "seconds": 28.0
   },
   {
-    "depth": 90.1,
+    "depth": 72.7,
     "file": "frame-014.jpg",
-    "pose": "walk",
+    "pose": "swim",
     "seconds": 30.0
   },
   {
-    "depth": 90.3,
+    "depth": 82.7,
     "file": "frame-015.jpg",
-    "pose": "walk",
+    "pose": "sink",
     "seconds": 32.0
   },
   {
-    "depth": 90.0,
+    "depth": 90.5,
     "file": "frame-016.jpg",
-    "pose": "idle",
+    "pose": "walk",
     "seconds": 34.0
   },
   {
-    "depth": 90.0,
+    "depth": 90.3,
     "file": "frame-017.jpg",
-    "pose": "idle",
+    "pose": "walk",
     "seconds": 36.0
   },
   {
-    "depth": 90.0,
+    "depth": 90.5,
     "file": "frame-018.jpg",
     "pose": "idle",
     "seconds": 38.0
   },
   {
-    "depth": 90.0,
+    "depth": 90.5,
     "file": "frame-019.jpg",
     "pose": "idle",
     "seconds": 40.0
   },
   {
-    "depth": 90.0,
+    "depth": 90.1,
     "file": "frame-020.jpg",
     "pose": "idle",
     "seconds": 42.0
   },
   {
-    "depth": 90.0,
+    "depth": 90.1,
     "file": "frame-021.jpg",
     "pose": "idle",
     "seconds": 44.0
   },
   {
-    "depth": 63.4,
+    "depth": 90.1,
     "file": "frame-022.jpg",
-    "pose": "ascend",
+    "pose": "idle",
     "seconds": 46.0
   },
   {
-    "depth": 60.0,
+    "depth": 90.1,
     "file": "frame-023.jpg",
-    "pose": "walk",
+    "pose": "idle",
     "seconds": 48.0
   },
   {
-    "depth": 62.2,
+    "depth": 83.7,
     "file": "frame-024.jpg",
-    "pose": "swim",
+    "pose": "ascend",
     "seconds": 50.0
   },
   {
-    "depth": 66.2,
+    "depth": 57.5,
     "file": "frame-025.jpg",
-    "pose": "swim",
+    "pose": "dive",
     "seconds": 52.0
   },
   {
-    "depth": 75.7,
+    "depth": 61.5,
     "file": "frame-026.jpg",
-    "pose": "sink",
+    "pose": "swim",
     "seconds": 54.0
   },
   {
-    "depth": 85.7,
+    "depth": 65.5,
     "file": "frame-027.jpg",
-    "pose": "sink",
+    "pose": "swim",
     "seconds": 56.0
   },
   {
-    "depth": 90.3,
+    "depth": 73.0,
     "file": "frame-028.jpg",
-    "pose": "walk",
+    "pose": "sink",
     "seconds": 58.0
   },
   {
-    "depth": 94.6,
+    "depth": 83.0,
     "file": "frame-029.jpg",
-    "pose": "swim",
+    "pose": "sink",
     "seconds": 60.0
   },
   {
-    "depth": 103.3,
+    "depth": 90.3,
     "file": "frame-030.jpg",
-    "pose": "sink",
+    "pose": "walk",
     "seconds": 62.0
   },
   {
-    "depth": 113.3,
+    "depth": 93.3,
     "file": "frame-031.jpg",
-    "pose": "sink",
+    "pose": "swim",
     "seconds": 64.0
   }
 ]

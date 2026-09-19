@@ -5,6 +5,7 @@ const RADIUS := .38
 const HEIGHT := 2.1
 var world: Node3D
 var contacts: Array[Vector3] = []
+var contact_bodies: Array[Object] = []
 
 
 func _ready() -> void:
@@ -23,6 +24,7 @@ func resolve(model, start: Vector3, destination: Vector3) -> Dictionary:
 	world.sync_platforms(model.platforms)
 	global_position = start
 	contacts.clear()
+	contact_bodies.clear()
 	var remaining := destination - start
 	var ground := -1
 	var result_velocity: Vector3 = model.velocity
@@ -37,6 +39,7 @@ func resolve(model, start: Vector3, destination: Vector3) -> Dictionary:
 		for contact in range(hit.get_collision_count()):
 			var normal := hit.get_normal(contact)
 			contacts.append(normal)
+			contact_bodies.append(hit.get_collider(contact))
 			if normal.y > .65 and model.velocity.y <= 0:
 				ground = hit.get_collider(contact).get_meta("platform", -1)
 			if remaining.dot(normal) < 0:
@@ -48,6 +51,7 @@ func resolve(model, start: Vector3, destination: Vector3) -> Dictionary:
 		var support := move_and_collide(Vector3.DOWN * .12, true, .002, false, 4)
 		if support != null and support.get_normal().y > .65:
 			contacts.append(support.get_normal())
+			contact_bodies.append(support.get_collider())
 			ground = support.get_collider().get_meta("platform", -1)
 			if model.grounded >= 0:
 				move_and_collide(Vector3.DOWN * .12, false, .002)

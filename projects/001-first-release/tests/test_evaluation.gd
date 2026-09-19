@@ -23,7 +23,7 @@ func run() -> void:
 			evaluate_route(
 				route_name,
 				Model.Layout.routes()[route_name],
-				route_name in ["fast_drop", "current_gardens"]
+				route_name in Model.Layout.fast_routes()
 			)
 		)
 	for result in results:

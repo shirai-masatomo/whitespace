@@ -239,7 +239,7 @@ func run() -> void:
 	if game.model.grounded != 2 or game.model.depth_losses.size() != 1:
 		failed = true
 		push_error("Emergency ascent must return to oxygen 01")
-	for index in [3, 4, 5, 6, 7, 8, 9]:
+	for index in [3, 4, 5, 6, 7, 8, 9] + Model.Layout.finish_route():
 		if not await steer(index):
 			break
 		if index == 4:

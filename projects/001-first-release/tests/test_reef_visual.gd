@@ -21,10 +21,7 @@ func run() -> void:
 		if not await steer(target):
 			break
 		if target == 11:
-			var ray_point: Vector3 = game.world.life.rays[0].position
-			var offset: Vector3 = ray_point - game.model.position
-			game.pitch = -.22
-			game.yaw = atan2(-offset.x, -offset.z)
+			await watch_ray()
 			await capture("27-ray-and-coast")
 			game.yaw = 0
 			game.pitch = -.65
@@ -43,19 +40,29 @@ func run() -> void:
 			game.pitch = -.35
 			await capture("30-open-water-again")
 			game.pitch = -.65
+		if target == 21:
+			game.pitch = -.3
+			game.yaw = -.5
+			await capture("33-deep-rift")
+			game.pitch = -.65
+			game.yaw = 0
+		if target == 25:
+			await capture("34-rift-opening")
 	if game.model.mode != Model.Mode.COMPLETE:
 		failed = true
 		push_error("Cliff journey must reach the goal")
 	record_sequence = false
 	game.restart()
 	game.pitch = -.65
-	for target in Model.Layout.routes().offshore_life:
-		if not await steer(target):
+	for target in Model.Layout.routes().rift_offshore:
+		if not await steer(target, true):
 			break
 		if target == 17:
 			await capture("31-offshore-jelly")
 		if target == 16:
 			await capture("32-drifting-refuge")
+		if target == 24:
+			await capture("35-updraft-bypass")
 	if game.model.mode != Model.Mode.COMPLETE:
 		failed = true
 		push_error("Offshore journey must reach the goal")
@@ -85,3 +92,24 @@ func shelf_walk() -> void:
 		):
 			failed = true
 			push_error("Cliff shelf should be walkable out and back")
+
+
+func watch_ray() -> void:
+	var spotted := false
+	for frame in range(480):
+		game.advance(1.0 / 60, Vector2.ZERO)
+		var ray_point: Vector3 = game.world.life.rays[0].global_position
+		var offset: Vector3 = ray_point - game.model.position
+		game.pitch = atan2(offset.y - 1.4, Vector2(offset.x, offset.z).length())
+		game.yaw = atan2(-offset.x, -offset.z)
+		await render_step()
+		var sight := PhysicsRayQueryParameters3D.create(game.camera.global_position, ray_point, 1)
+		var block: Dictionary = game.get_world_3d().direct_space_state.intersect_ray(sight)
+		if not game.camera.is_position_behind(ray_point) and block.is_empty():
+			var pixel: Vector2 = game.camera.unproject_position(ray_point)
+			if Rect2(200, 120, 750, 480).has_point(pixel):
+				spotted = true
+				break
+	if not spotted:
+		failed = true
+		push_error("An observant player should see the passing ray from the garden")

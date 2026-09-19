@@ -119,6 +119,16 @@ func run() -> void:
 	)
 	game.restart()
 	check(game.next_platform() == 1, "Replay restores first suggested target")
+	game.pitch = .9
+	game._update_camera()
+	check(
+		game.camera.position.y >= game.model.position.y + 1.4,
+		"Looking up from a platform does not swing camera through its floor"
+	)
+	check(
+		game.camera.position.distance_to(game.model.position + Vector3.UP * 1.4) > 2.8,
+		"Looking up retains viewing distance from the diver"
+	)
 	_test_ledge_view(game)
 	_test_pose_blending(game)
 	_test_oxygen_algae(game)

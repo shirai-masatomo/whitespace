@@ -175,6 +175,11 @@ func _update_camera(delta: float = 1.0) -> void:
 	var focus: Vector3 = model.position + Vector3.UP * 1.4
 	var look := Vector3(0, sin(pitch), -cos(pitch)).rotated(Vector3.UP, yaw)
 	var desired: Vector3 = focus - look * 7.5 if third_person else focus
+	if third_person and pitch > 0:
+		# Looking at surface light or an animal should not swing the camera under
+		# the floor and then push it inside the diver's chest.
+		var back := Vector3(0, 0, 1).rotated(Vector3.UP, yaw)
+		desired = focus + back * maxf(3.0, cos(pitch) * 7.5) + Vector3.UP * .3
 	var peek := 0.0
 	if third_person and model.grounded >= 0 and model.mode == Model.Mode.DIVING:
 		peek = smoothstep(.25, .8, -pitch)
@@ -220,7 +225,7 @@ func _update_camera(delta: float = 1.0) -> void:
 func next_platform() -> int:
 	var choices := Navigation.candidates(model)
 	if choices.is_empty():
-		return 9
+		return model.Layout.goal_index()
 	if not choices.has(selected_target):
 		selected_target = choices[0]
 	return selected_target

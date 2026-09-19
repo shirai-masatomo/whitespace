@@ -1,1264 +1,2434 @@
 {
   "cases": [
     {
-      "case": "pier (0.0, -1.0, 0.0) dt=0.017",
+      "case": "0 pier (0.0, -1.0, 0.0) dt=0.017",
       "contact": true,
       "position": "(0.5, 5.998815, 1.0)"
     },
     {
-      "case": "pier (0.0, -1.0, 0.0) dt=0.067",
+      "case": "0 pier (0.0, -1.0, 0.0) dt=0.067",
       "contact": true,
       "position": "(0.5, 6.004738, 1.0)"
     },
     {
-      "case": "pier normal (0.0, -1.0, 0.0)",
+      "case": "0 pier normal (0.0, -1.0, 0.0)",
       "contact": true,
       "position": "(0.5, 6.077504, 1.0)"
     },
     {
-      "case": "pier (0.0, 1.0, 0.0) dt=0.017",
+      "case": "0 pier (0.0, 1.0, 0.0) dt=0.017",
       "contact": true,
       "position": "(0.5, 3.550051, 1.0)"
     },
     {
-      "case": "pier (0.0, 1.0, 0.0) dt=0.067",
+      "case": "0 pier (0.0, 1.0, 0.0) dt=0.067",
       "contact": true,
       "position": "(0.5, 3.550616, 1.0)"
     },
     {
-      "case": "pier normal (0.0, 1.0, 0.0)",
+      "case": "0 pier normal (0.0, 1.0, 0.0)",
       "contact": true,
       "position": "(0.5, 3.550051, 1.0)"
     },
     {
-      "case": "pier (-1.0, 0.0, 0.0) dt=0.017",
+      "case": "0 pier (-1.0, 0.0, 0.0) dt=0.017",
       "contact": true,
       "position": "(9.350272, 4.747777, 1.0)"
     },
     {
-      "case": "pier (-1.0, 0.0, 0.0) dt=0.067",
+      "case": "0 pier (-1.0, 0.0, 0.0) dt=0.067",
       "contact": true,
       "position": "(9.351641, 4.731444, 1.0)"
     },
     {
-      "case": "pier normal (-1.0, 0.0, 0.0)",
+      "case": "0 pier normal (-1.0, 0.0, 0.0)",
       "contact": true,
       "position": "(9.350272, 4.747777, 1.0)"
     },
     {
-      "case": "pier (1.0, 0.0, 0.0) dt=0.017",
+      "case": "0 pier (1.0, 0.0, 0.0) dt=0.017",
       "contact": true,
       "position": "(-9.350274, 4.747777, 1.0)"
     },
     {
-      "case": "pier (1.0, 0.0, 0.0) dt=0.067",
+      "case": "0 pier (1.0, 0.0, 0.0) dt=0.067",
       "contact": true,
       "position": "(-9.351643, 4.731444, 1.0)"
     },
     {
-      "case": "pier normal (1.0, 0.0, 0.0)",
+      "case": "0 pier normal (1.0, 0.0, 0.0)",
       "contact": true,
       "position": "(-9.350274, 4.747777, 1.0)"
     },
     {
-      "case": "pier (0.0, 0.0, -1.0) dt=0.017",
+      "case": "0 pier (0.0, 0.0, -1.0) dt=0.017",
       "contact": true,
       "position": "(0.5, 4.747777, 8.380273)"
     },
     {
-      "case": "pier (0.0, 0.0, -1.0) dt=0.067",
+      "case": "0 pier (0.0, 0.0, -1.0) dt=0.067",
       "contact": true,
       "position": "(0.5, 4.731444, 8.381641)"
     },
     {
-      "case": "pier normal (0.0, 0.0, -1.0)",
+      "case": "0 pier normal (0.0, 0.0, -1.0)",
       "contact": true,
       "position": "(0.5, 4.747777, 8.380273)"
     },
     {
-      "case": "pier (0.0, 0.0, 1.0) dt=0.017",
+      "case": "0 pier (0.0, 0.0, 1.0) dt=0.017",
       "contact": true,
       "position": "(0.5, 4.747777, -8.380273)"
     },
     {
-      "case": "pier (0.0, 0.0, 1.0) dt=0.067",
+      "case": "0 pier (0.0, 0.0, 1.0) dt=0.067",
       "contact": true,
       "position": "(0.5, 4.731444, -8.381641)"
     },
     {
-      "case": "pier normal (0.0, 0.0, 1.0)",
+      "case": "0 pier normal (0.0, 0.0, 1.0)",
       "contact": true,
       "position": "(0.5, 4.747777, -8.380273)"
     },
     {
-      "case": "pier (-0.707107, 0.0, -0.707107) dt=0.017",
+      "case": "0 pier (-0.707107, 0.0, -0.707107) dt=0.017",
       "contact": true,
       "position": "(7.818198, 4.758666, 8.380553)"
     },
     {
-      "case": "pier (-0.707107, 0.0, -0.707107) dt=0.067",
+      "case": "0 pier (-0.707107, 0.0, -0.707107) dt=0.067",
       "contact": true,
       "position": "(7.735702, 4.731444, 8.381359)"
     },
     {
-      "case": "pier normal (-0.707107, 0.0, -0.707107)",
+      "case": "0 pier normal (-0.707107, 0.0, -0.707107)",
       "contact": true,
       "position": "(7.818198, 4.758666, 8.380553)"
     },
     {
-      "case": "cliff (0.0, -1.0, 0.0) dt=0.017",
+      "case": "0 pier (0.57735, -0.57735, 0.57735) dt=0.017",
+      "contact": true,
+      "position": "(-0.720122, 6.000079, -0.220122)"
+    },
+    {
+      "case": "0 pier (0.57735, -0.57735, 0.57735) dt=0.067",
+      "contact": true,
+      "position": "(-0.456981, 6.001408, 0.043019)"
+    },
+    {
+      "case": "0 pier normal (0.57735, -0.57735, 0.57735)",
+      "contact": true,
+      "position": "(-0.789047, 6.059499, -0.289047)"
+    },
+    {
+      "case": "0 pier (0.408248, 0.816497, -0.408248) dt=0.017",
+      "contact": true,
+      "position": "(0.127084, 3.549664, 1.372916)"
+    },
+    {
+      "case": "0 pier (0.408248, 0.816497, -0.408248) dt=0.067",
+      "contact": true,
+      "position": "(0.233639, 3.550032, 1.266361)"
+    },
+    {
+      "case": "0 pier normal (0.408248, 0.816497, -0.408248)",
+      "contact": true,
+      "position": "(0.127084, 3.549664, 1.372916)"
+    },
+    {
+      "case": "1 cliff (0.0, -1.0, 0.0) dt=0.017",
       "contact": true,
       "position": "(7.622752, -30.0, -15.3685)"
     },
     {
-      "case": "cliff (0.0, -1.0, 0.0) dt=0.067",
+      "case": "1 cliff (0.0, -1.0, 0.0) dt=0.067",
       "contact": true,
       "position": "(7.622752, -30.0, -15.3685)"
     },
     {
-      "case": "cliff normal (0.0, -1.0, 0.0)",
+      "case": "1 cliff normal (0.0, -1.0, 0.0)",
       "contact": true,
       "position": "(7.622752, -29.90001, -15.3685)"
     },
     {
-      "case": "cliff (0.0, 1.0, 0.0) dt=0.017",
+      "case": "1 cliff (0.0, 1.0, 0.0) dt=0.017",
       "contact": true,
       "position": "(7.654749, -56.33105, -15.3682)"
     },
     {
-      "case": "cliff (0.0, 1.0, 0.0) dt=0.067",
+      "case": "1 cliff (0.0, 1.0, 0.0) dt=0.067",
       "contact": true,
       "position": "(7.775532, -56.11947, -15.36705)"
     },
     {
-      "case": "cliff normal (0.0, 1.0, 0.0)",
+      "case": "1 cliff normal (0.0, 1.0, 0.0)",
       "contact": true,
       "position": "(7.654749, -56.33105, -15.3682)"
     },
     {
-      "case": "cliff (-1.0, 0.0, 0.0) dt=0.017",
+      "case": "1 cliff (-1.0, 0.0, 0.0) dt=0.017",
       "contact": true,
       "position": "(17.54178, -45.19191, -15.34751)"
     },
     {
-      "case": "cliff (-1.0, 0.0, 0.0) dt=0.067",
+      "case": "1 cliff (-1.0, 0.0, 0.0) dt=0.067",
       "contact": true,
       "position": "(17.43226, -45.36766, -15.32022)"
     },
     {
-      "case": "cliff normal (-1.0, 0.0, 0.0)",
+      "case": "1 cliff normal (-1.0, 0.0, 0.0)",
       "contact": true,
       "position": "(17.54178, -45.19191, -15.34751)"
     },
     {
-      "case": "cliff (1.0, 0.0, 0.0) dt=0.017",
+      "case": "1 cliff (1.0, 0.0, 0.0) dt=0.017",
       "contact": true,
       "position": "(-6.236714, -45.06578, -15.37574)"
     },
     {
-      "case": "cliff (1.0, 0.0, 0.0) dt=0.067",
+      "case": "1 cliff (1.0, 0.0, 0.0) dt=0.067",
       "contact": true,
       "position": "(-6.189107, -45.15857, -15.44413)"
     },
     {
-      "case": "cliff normal (1.0, 0.0, 0.0)",
+      "case": "1 cliff normal (1.0, 0.0, 0.0)",
       "contact": true,
       "position": "(-6.236714, -45.06578, -15.37574)"
     },
     {
-      "case": "cliff (0.0, 0.0, -1.0) dt=0.017",
+      "case": "1 cliff (0.0, 0.0, -1.0) dt=0.017",
       "contact": true,
       "position": "(7.632513, -45.07326, -8.480211)"
     },
     {
-      "case": "cliff (0.0, 0.0, -1.0) dt=0.067",
+      "case": "1 cliff (0.0, 0.0, -1.0) dt=0.067",
       "contact": true,
       "position": "(7.628163, -45.1218, -8.487079)"
     },
     {
-      "case": "cliff normal (0.0, 0.0, -1.0)",
+      "case": "1 cliff normal (0.0, 0.0, -1.0)",
       "contact": true,
       "position": "(7.632513, -45.07326, -8.480211)"
     },
     {
-      "case": "cliff (0.0, 0.0, 1.0) dt=0.017",
+      "case": "1 cliff (0.0, 0.0, 1.0) dt=0.017",
       "contact": true,
       "position": "(7.679817, -45.07885, -18.79737)"
     },
     {
-      "case": "cliff (0.0, 0.0, 1.0) dt=0.067",
+      "case": "1 cliff (0.0, 0.0, 1.0) dt=0.067",
       "contact": true,
       "position": "(7.703618, -45.13074, -18.78644)"
     },
     {
-      "case": "cliff normal (0.0, 0.0, 1.0)",
+      "case": "1 cliff normal (0.0, 0.0, 1.0)",
       "contact": true,
       "position": "(7.679817, -45.07885, -18.79737)"
     },
     {
-      "case": "cliff (-0.707107, 0.0, -0.707107) dt=0.017",
+      "case": "1 cliff (-0.707107, 0.0, -0.707107) dt=0.017",
       "contact": true,
       "position": "(11.05318, -45.08888, -11.99745)"
     },
     {
-      "case": "cliff (-0.707107, 0.0, -0.707107) dt=0.067",
+      "case": "1 cliff (-0.707107, 0.0, -0.707107) dt=0.067",
       "contact": true,
       "position": "(11.06095, -45.14325, -12.03772)"
     },
     {
-      "case": "cliff normal (-0.707107, 0.0, -0.707107)",
+      "case": "1 cliff normal (-0.707107, 0.0, -0.707107)",
       "contact": true,
       "position": "(11.05318, -45.08888, -11.99745)"
     },
     {
-      "case": "kelp (0.0, -1.0, 0.0) dt=0.017",
+      "case": "1 cliff (0.57735, -0.57735, 0.57735) dt=0.017",
+      "contact": true,
+      "position": "(1.640114, -39.11027, -21.44436)"
+    },
+    {
+      "case": "1 cliff (0.57735, -0.57735, 0.57735) dt=0.067",
+      "contact": true,
+      "position": "(1.932544, -39.49981, -21.34523)"
+    },
+    {
+      "case": "1 cliff normal (0.57735, -0.57735, 0.57735)",
+      "contact": true,
+      "position": "(1.621638, -38.97463, -21.45992)"
+    },
+    {
+      "case": "1 cliff (0.408248, 0.816497, -0.408248) dt=0.017",
+      "contact": true,
+      "position": "(2.399477, -55.69001, -10.13564)"
+    },
+    {
+      "case": "1 cliff (0.408248, 0.816497, -0.408248) dt=0.067",
+      "contact": true,
+      "position": "(2.431572, -55.63168, -10.10049)"
+    },
+    {
+      "case": "1 cliff normal (0.408248, 0.816497, -0.408248)",
+      "contact": true,
+      "position": "(2.399477, -55.69001, -10.13564)"
+    },
+    {
+      "case": "2 kelp (0.0, -1.0, 0.0) dt=0.017",
       "contact": true,
       "position": "(-7.60925, -59.99985, -34.45405)"
     },
     {
-      "case": "kelp (0.0, -1.0, 0.0) dt=0.067",
+      "case": "2 kelp (0.0, -1.0, 0.0) dt=0.067",
       "contact": true,
       "position": "(-7.60925, -59.99414, -34.45405)"
     },
     {
-      "case": "kelp normal (0.0, -1.0, 0.0)",
+      "case": "2 kelp normal (0.0, -1.0, 0.0)",
       "contact": true,
       "position": "(-7.60925, -59.9, -34.45405)"
     },
     {
-      "case": "kelp (0.0, 1.0, 0.0) dt=0.017",
+      "case": "2 kelp (0.0, 1.0, 0.0) dt=0.017",
       "contact": true,
       "position": "(-7.608164, -81.87115, -34.4468)"
     },
     {
-      "case": "kelp (0.0, 1.0, 0.0) dt=0.067",
+      "case": "2 kelp (0.0, 1.0, 0.0) dt=0.067",
       "contact": true,
       "position": "(-7.587288, -81.80764, -34.30747)"
     },
     {
-      "case": "kelp normal (0.0, 1.0, 0.0)",
+      "case": "2 kelp normal (0.0, 1.0, 0.0)",
       "contact": true,
       "position": "(-7.608164, -81.87115, -34.4468)"
     },
     {
-      "case": "kelp (-1.0, 0.0, 0.0) dt=0.017",
+      "case": "2 kelp (-1.0, 0.0, 0.0) dt=0.017",
       "contact": true,
       "position": "(1.353547, -71.05568, -34.45641)"
     },
     {
-      "case": "kelp (-1.0, 0.0, 0.0) dt=0.067",
+      "case": "2 kelp (-1.0, 0.0, 0.0) dt=0.067",
       "contact": true,
       "position": "(1.25887, -71.20432, -34.5555)"
     },
     {
-      "case": "kelp normal (-1.0, 0.0, 0.0)",
+      "case": "2 kelp normal (-1.0, 0.0, 0.0)",
       "contact": true,
       "position": "(1.353547, -71.05568, -34.45641)"
     },
     {
-      "case": "kelp (1.0, 0.0, 0.0) dt=0.017",
+      "case": "2 kelp (1.0, 0.0, 0.0) dt=0.017",
       "contact": true,
       "position": "(-17.52765, -71.07194, -34.48036)"
     },
     {
-      "case": "kelp (1.0, 0.0, 0.0) dt=0.067",
+      "case": "2 kelp (1.0, 0.0, 0.0) dt=0.067",
       "contact": true,
       "position": "(-17.44147, -71.16109, -34.57985)"
     },
     {
-      "case": "kelp normal (1.0, 0.0, 0.0)",
+      "case": "2 kelp normal (1.0, 0.0, 0.0)",
       "contact": true,
       "position": "(-17.52765, -71.07194, -34.48036)"
     },
     {
-      "case": "kelp (0.0, 0.0, -1.0) dt=0.017",
+      "case": "2 kelp (0.0, 0.0, -1.0) dt=0.017",
       "contact": true,
       "position": "(-7.600825, -71.05942, -26.80733)"
     },
     {
-      "case": "kelp (0.0, 0.0, -1.0) dt=0.067",
+      "case": "2 kelp (0.0, 0.0, -1.0) dt=0.067",
       "contact": true,
       "position": "(-7.477591, -71.19836, -26.92285)"
     },
     {
-      "case": "kelp normal (0.0, 0.0, -1.0)",
+      "case": "2 kelp normal (0.0, 0.0, -1.0)",
       "contact": true,
       "position": "(-7.600825, -71.05942, -26.80733)"
     },
     {
-      "case": "kelp (0.0, 0.0, 1.0) dt=0.017",
+      "case": "2 kelp (0.0, 0.0, 1.0) dt=0.017",
       "contact": true,
       "position": "(-7.613398, -71.06248, -41.82334)"
     },
     {
-      "case": "kelp (0.0, 0.0, 1.0) dt=0.067",
+      "case": "2 kelp (0.0, 0.0, 1.0) dt=0.067",
       "contact": true,
       "position": "(-7.686946, -71.14988, -41.77304)"
     },
     {
-      "case": "kelp normal (0.0, 0.0, 1.0)",
+      "case": "2 kelp normal (0.0, 0.0, 1.0)",
       "contact": true,
       "position": "(-7.613398, -71.06248, -41.82334)"
     },
     {
-      "case": "kelp (-0.707107, 0.0, -0.707107) dt=0.017",
+      "case": "2 kelp (-0.707107, 0.0, -0.707107) dt=0.017",
       "contact": true,
       "position": "(-2.427672, -71.0547, -29.26755)"
     },
     {
-      "case": "kelp (-0.707107, 0.0, -0.707107) dt=0.067",
+      "case": "2 kelp (-0.707107, 0.0, -0.707107) dt=0.067",
       "contact": true,
       "position": "(-2.622216, -71.16294, -29.25234)"
     },
     {
-      "case": "kelp normal (-0.707107, 0.0, -0.707107)",
+      "case": "2 kelp normal (-0.707107, 0.0, -0.707107)",
       "contact": true,
       "position": "(-2.427672, -71.0547, -29.26755)"
     },
     {
-      "case": "driftwood (0.0, -1.0, 0.0) dt=0.017",
+      "case": "2 kelp (0.57735, -0.57735, 0.57735) dt=0.017",
+      "contact": true,
+      "position": "(-15.42199, -63.44543, -42.27081)"
+    },
+    {
+      "case": "2 kelp (0.57735, -0.57735, 0.57735) dt=0.067",
+      "contact": true,
+      "position": "(-15.38228, -63.67868, -42.23699)"
+    },
+    {
+      "case": "2 kelp normal (0.57735, -0.57735, 0.57735)",
+      "contact": true,
+      "position": "(-15.44355, -63.31292, -42.29284)"
+    },
+    {
+      "case": "2 kelp (0.408248, 0.816497, -0.408248) dt=0.017",
+      "contact": true,
+      "position": "(-11.28607, -78.52959, -30.81185)"
+    },
+    {
+      "case": "2 kelp (0.408248, 0.816497, -0.408248) dt=0.067",
+      "contact": true,
+      "position": "(-11.28569, -78.5472, -30.82634)"
+    },
+    {
+      "case": "2 kelp normal (0.408248, 0.816497, -0.408248)",
+      "contact": true,
+      "position": "(-11.28607, -78.52959, -30.81185)"
+    },
+    {
+      "case": "3 driftwood (0.0, -1.0, 0.0) dt=0.017",
       "contact": true,
       "position": "(19.70605, -90.02124, -57.80251)"
     },
     {
-      "case": "driftwood (0.0, -1.0, 0.0) dt=0.067",
+      "case": "3 driftwood (0.0, -1.0, 0.0) dt=0.067",
       "contact": true,
       "position": "(19.70605, -90.02988, -57.71088)"
     },
     {
-      "case": "driftwood normal (0.0, -1.0, 0.0)",
+      "case": "3 driftwood normal (0.0, -1.0, 0.0)",
       "contact": true,
       "position": "(19.70605, -89.92437, -57.8029)"
     },
     {
-      "case": "driftwood (0.0, 1.0, 0.0) dt=0.017",
+      "case": "3 driftwood (0.0, 1.0, 0.0) dt=0.017",
       "contact": true,
       "position": "(19.70605, -95.28007, -57.79352)"
     },
     {
-      "case": "driftwood (0.0, 1.0, 0.0) dt=0.067",
+      "case": "3 driftwood (0.0, 1.0, 0.0) dt=0.067",
       "contact": true,
       "position": "(19.70605, -95.27852, -57.76284)"
     },
     {
-      "case": "driftwood normal (0.0, 1.0, 0.0)",
+      "case": "3 driftwood normal (0.0, 1.0, 0.0)",
       "contact": true,
       "position": "(19.70605, -95.28007, -57.79352)"
     },
     {
-      "case": "driftwood (-1.0, 0.0, 0.0) dt=0.017",
+      "case": "3 driftwood (-1.0, 0.0, 0.0) dt=0.017",
       "contact": true,
       "position": "(28.29867, -92.68334, -57.8029)"
     },
     {
-      "case": "driftwood (-1.0, 0.0, 0.0) dt=0.067",
+      "case": "3 driftwood (-1.0, 0.0, 0.0) dt=0.067",
       "contact": true,
       "position": "(28.30004, -92.70334, -57.8029)"
     },
     {
-      "case": "driftwood normal (-1.0, 0.0, 0.0)",
+      "case": "3 driftwood normal (-1.0, 0.0, 0.0)",
       "contact": true,
       "position": "(28.29867, -92.68334, -57.8029)"
     },
     {
-      "case": "driftwood (1.0, 0.0, 0.0) dt=0.017",
+      "case": "3 driftwood (1.0, 0.0, 0.0) dt=0.017",
       "contact": true,
-      "position": "(11.7013, -92.68402, -57.48095)"
+      "position": "(11.40266, -92.65334, -57.51573)"
     },
     {
-      "case": "driftwood (1.0, 0.0, 0.0) dt=0.067",
+      "case": "3 driftwood (1.0, 0.0, 0.0) dt=0.067",
       "contact": true,
       "position": "(11.70166, -92.70335, -57.47861)"
     },
     {
-      "case": "driftwood normal (1.0, 0.0, 0.0)",
+      "case": "3 driftwood normal (1.0, 0.0, 0.0)",
       "contact": true,
-      "position": "(11.7013, -92.68402, -57.48095)"
+      "position": "(11.40266, -92.65334, -57.51573)"
     },
     {
-      "case": "driftwood (0.0, 0.0, -1.0) dt=0.017",
+      "case": "3 driftwood (0.0, 0.0, -1.0) dt=0.017",
       "contact": true,
       "position": "(19.70574, -92.68333, -51.78074)"
     },
     {
-      "case": "driftwood (0.0, 0.0, -1.0) dt=0.067",
+      "case": "3 driftwood (0.0, 0.0, -1.0) dt=0.067",
       "contact": true,
       "position": "(19.70573, -92.70334, -51.77938)"
     },
     {
-      "case": "driftwood normal (0.0, 0.0, -1.0)",
+      "case": "3 driftwood normal (0.0, 0.0, -1.0)",
       "contact": true,
       "position": "(19.70574, -92.68333, -51.78074)"
     },
     {
-      "case": "driftwood (0.0, 0.0, 1.0) dt=0.017",
+      "case": "3 driftwood (0.0, 0.0, 1.0) dt=0.017",
       "contact": true,
       "position": "(19.70539, -92.68333, -64.21626)"
     },
     {
-      "case": "driftwood (0.0, 0.0, 1.0) dt=0.067",
+      "case": "3 driftwood (0.0, 0.0, 1.0) dt=0.067",
       "contact": true,
       "position": "(19.70536, -92.70334, -64.21764)"
     },
     {
-      "case": "driftwood normal (0.0, 0.0, 1.0)",
+      "case": "3 driftwood normal (0.0, 0.0, 1.0)",
       "contact": true,
       "position": "(19.70539, -92.68333, -64.21626)"
     },
     {
-      "case": "driftwood (-0.707107, 0.0, -0.707107) dt=0.017",
+      "case": "3 driftwood (-0.707107, 0.0, -0.707107) dt=0.017",
       "contact": true,
       "position": "(25.49735, -92.67, -51.98153)"
     },
     {
-      "case": "driftwood (-0.707107, 0.0, -0.707107) dt=0.067",
+      "case": "3 driftwood (-0.707107, 0.0, -0.707107) dt=0.067",
       "contact": true,
       "position": "(25.42338, -92.70334, -51.97416)"
     },
     {
-      "case": "driftwood normal (-0.707107, 0.0, -0.707107)",
+      "case": "3 driftwood normal (-0.707107, 0.0, -0.707107)",
       "contact": true,
       "position": "(25.49735, -92.67, -51.98153)"
     },
     {
-      "case": "jelly (0.0, -1.0, 0.0) dt=0.017",
+      "case": "3 driftwood (0.57735, -0.57735, 0.57735) dt=0.017",
+      "contact": true,
+      "position": "(17.74135, -90.70737, -59.80795)"
+    },
+    {
+      "case": "3 driftwood (0.57735, -0.57735, 0.57735) dt=0.067",
+      "contact": true,
+      "position": "(18.08013, -90.70603, -59.83047)"
+    },
+    {
+      "case": "3 driftwood normal (0.57735, -0.57735, 0.57735)",
+      "contact": true,
+      "position": "(17.66139, -90.63244, -59.84757)"
+    },
+    {
+      "case": "3 driftwood (0.408248, 0.816497, -0.408248) dt=0.017",
+      "contact": true,
+      "position": "(18.64004, -94.9978, -56.71883)"
+    },
+    {
+      "case": "3 driftwood (0.408248, 0.816497, -0.408248) dt=0.067",
+      "contact": true,
+      "position": "(18.81277, -95.03362, -56.80027)"
+    },
+    {
+      "case": "3 driftwood normal (0.408248, 0.816497, -0.408248)",
+      "contact": true,
+      "position": "(18.64004, -94.9978, -56.71883)"
+    },
+    {
+      "case": "4 jelly (0.0, -1.0, 0.0) dt=0.017",
       "contact": true,
       "position": "(45.21051, -125.0146, -44.82955)"
     },
     {
-      "case": "jelly (0.0, -1.0, 0.0) dt=0.067",
+      "case": "4 jelly (0.0, -1.0, 0.0) dt=0.067",
       "contact": true,
       "position": "(45.29367, -125.03, -44.75663)"
     },
     {
-      "case": "jelly normal (0.0, -1.0, 0.0)",
+      "case": "4 jelly normal (0.0, -1.0, 0.0)",
       "contact": true,
       "position": "(45.21, -124.9191, -44.83)"
     },
     {
-      "case": "jelly (0.0, 1.0, 0.0) dt=0.017",
+      "case": "4 jelly (0.0, 1.0, 0.0) dt=0.017",
       "contact": true,
       "position": "(45.19883, -127.1418, -44.83656)"
     },
     {
-      "case": "jelly (0.0, 1.0, 0.0) dt=0.067",
+      "case": "4 jelly (0.0, 1.0, 0.0) dt=0.067",
       "contact": true,
       "position": "(45.16903, -127.1369, -44.86571)"
     },
     {
-      "case": "jelly normal (0.0, 1.0, 0.0)",
+      "case": "4 jelly normal (0.0, 1.0, 0.0)",
       "contact": true,
       "position": "(45.19883, -127.1418, -44.83656)"
     },
     {
-      "case": "jelly (-1.0, 0.0, 0.0) dt=0.017",
+      "case": "4 jelly (-1.0, 0.0, 0.0) dt=0.017",
       "contact": true,
       "position": "(55.01481, -130.4677, -44.82504)"
     },
     {
-      "case": "jelly (-1.0, 0.0, 0.0) dt=0.067",
+      "case": "4 jelly (-1.0, 0.0, 0.0) dt=0.067",
       "contact": true,
       "position": "(55.00144, -130.431, -44.81062)"
     },
     {
-      "case": "jelly normal (-1.0, 0.0, 0.0)",
+      "case": "4 jelly normal (-1.0, 0.0, 0.0)",
       "contact": true,
       "position": "(55.01481, -130.4677, -44.82504)"
     },
     {
-      "case": "jelly (1.0, 0.0, 0.0) dt=0.017",
+      "case": "4 jelly (1.0, 0.0, 0.0) dt=0.017",
       "contact": true,
       "position": "(34.98518, -130.4677, -44.82504)"
     },
     {
-      "case": "jelly (1.0, 0.0, 0.0) dt=0.067",
+      "case": "4 jelly (1.0, 0.0, 0.0) dt=0.067",
       "contact": true,
       "position": "(34.99855, -130.431, -44.81063)"
     },
     {
-      "case": "jelly normal (1.0, 0.0, 0.0)",
+      "case": "4 jelly normal (1.0, 0.0, 0.0)",
       "contact": true,
       "position": "(34.98518, -130.4677, -44.82504)"
     },
     {
-      "case": "jelly (0.0, 0.0, -1.0) dt=0.017",
+      "case": "4 jelly (0.0, 0.0, -1.0) dt=0.017",
       "contact": true,
       "position": "(45.21496, -130.4677, -34.9878)"
     },
     {
-      "case": "jelly (0.0, 0.0, -1.0) dt=0.067",
+      "case": "4 jelly (0.0, 0.0, -1.0) dt=0.067",
       "contact": true,
       "position": "(45.22937, -130.431, -35.00116)"
     },
     {
-      "case": "jelly normal (0.0, 0.0, -1.0)",
+      "case": "4 jelly normal (0.0, 0.0, -1.0)",
       "contact": true,
       "position": "(45.21496, -130.4677, -34.9878)"
     },
     {
-      "case": "jelly (0.0, 0.0, 1.0) dt=0.017",
+      "case": "4 jelly (0.0, 0.0, 1.0) dt=0.017",
       "contact": true,
       "position": "(45.21496, -130.4677, -55.01219)"
     },
     {
-      "case": "jelly (0.0, 0.0, 1.0) dt=0.067",
+      "case": "4 jelly (0.0, 0.0, 1.0) dt=0.067",
       "contact": true,
       "position": "(45.22938, -130.431, -54.99882)"
     },
     {
-      "case": "jelly normal (0.0, 0.0, 1.0)",
+      "case": "4 jelly normal (0.0, 0.0, 1.0)",
       "contact": true,
       "position": "(45.21496, -130.4677, -55.01219)"
     },
     {
-      "case": "jelly (-0.707107, 0.0, -0.707107) dt=0.017",
+      "case": "4 jelly (-0.707107, 0.0, -0.707107) dt=0.017",
       "contact": true,
       "position": "(52.11159, -130.4677, -37.93542)"
     },
     {
-      "case": "jelly (-0.707107, 0.0, -0.707107) dt=0.067",
+      "case": "4 jelly (-0.707107, 0.0, -0.707107) dt=0.067",
       "contact": true,
       "position": "(52.11234, -130.431, -37.95506)"
     },
     {
-      "case": "jelly normal (-0.707107, 0.0, -0.707107)",
+      "case": "4 jelly normal (-0.707107, 0.0, -0.707107)",
       "contact": true,
       "position": "(52.11159, -130.4677, -37.93542)"
     },
     {
-      "case": "buoy (0.0, -1.0, 0.0) dt=0.017",
+      "case": "4 jelly (0.57735, -0.57735, 0.57735) dt=0.017",
+      "contact": true,
+      "position": "(40.61107, -125.8981, -49.42893)"
+    },
+    {
+      "case": "4 jelly (0.57735, -0.57735, 0.57735) dt=0.067",
+      "contact": true,
+      "position": "(40.66899, -125.8924, -49.38039)"
+    },
+    {
+      "case": "4 jelly normal (0.57735, -0.57735, 0.57735)",
+      "contact": true,
+      "position": "(40.63523, -125.9145, -49.40477)"
+    },
+    {
+      "case": "4 jelly (0.408248, 0.816497, -0.408248) dt=0.017",
+      "contact": true,
+      "position": "(46.84646, -127.4578, -46.46782)"
+    },
+    {
+      "case": "4 jelly (0.408248, 0.816497, -0.408248) dt=0.067",
+      "contact": true,
+      "position": "(46.99568, -127.4912, -46.62032)"
+    },
+    {
+      "case": "4 jelly normal (0.408248, 0.816497, -0.408248)",
+      "contact": true,
+      "position": "(46.84646, -127.4578, -46.46782)"
+    },
+    {
+      "case": "5 buoy (0.0, -1.0, 0.0) dt=0.017",
       "contact": true,
       "position": "(20.21, -154.9999, -76.83)"
     },
     {
-      "case": "buoy (0.0, -1.0, 0.0) dt=0.067",
+      "case": "5 buoy (0.0, -1.0, 0.0) dt=0.067",
       "contact": true,
       "position": "(20.21, -154.9941, -76.83)"
     },
     {
-      "case": "buoy normal (0.0, -1.0, 0.0)",
+      "case": "5 buoy normal (0.0, -1.0, 0.0)",
       "contact": true,
       "position": "(20.21, -154.9, -76.83)"
     },
     {
-      "case": "buoy (0.0, 1.0, 0.0) dt=0.017",
+      "case": "5 buoy (0.0, 1.0, 0.0) dt=0.017",
       "contact": true,
       "position": "(20.21, -161.0998, -76.83)"
     },
     {
-      "case": "buoy (0.0, 1.0, 0.0) dt=0.067",
+      "case": "5 buoy (0.0, 1.0, 0.0) dt=0.067",
       "contact": true,
       "position": "(20.21, -161.1023, -76.83)"
     },
     {
-      "case": "buoy normal (0.0, 1.0, 0.0)",
+      "case": "5 buoy normal (0.0, 1.0, 0.0)",
       "contact": true,
       "position": "(20.21, -161.0998, -76.83)"
     },
     {
-      "case": "buoy (-1.0, 0.0, 0.0) dt=0.017",
+      "case": "5 buoy (-1.0, 0.0, 0.0) dt=0.017",
       "contact": true,
       "position": "(28.69275, -157.005, -76.81463)"
     },
     {
-      "case": "buoy (-1.0, 0.0, 0.0) dt=0.067",
+      "case": "5 buoy (-1.0, 0.0, 0.0) dt=0.067",
       "contact": true,
       "position": "(28.78916, -157.0028, -76.78178)"
     },
     {
-      "case": "buoy normal (-1.0, 0.0, 0.0)",
+      "case": "5 buoy normal (-1.0, 0.0, 0.0)",
       "contact": true,
       "position": "(28.69275, -157.005, -76.81463)"
     },
     {
-      "case": "buoy (1.0, 0.0, 0.0) dt=0.017",
+      "case": "5 buoy (1.0, 0.0, 0.0) dt=0.017",
       "contact": true,
       "position": "(11.67539, -156.939, -76.81351)"
     },
     {
-      "case": "buoy (1.0, 0.0, 0.0) dt=0.067",
+      "case": "5 buoy (1.0, 0.0, 0.0) dt=0.067",
       "contact": true,
       "position": "(11.82928, -156.9341, -76.79378)"
     },
     {
-      "case": "buoy normal (1.0, 0.0, 0.0)",
+      "case": "5 buoy normal (1.0, 0.0, 0.0)",
       "contact": true,
       "position": "(11.67539, -156.939, -76.81351)"
     },
     {
-      "case": "buoy (0.0, 0.0, -1.0) dt=0.017",
+      "case": "5 buoy (0.0, 0.0, -1.0) dt=0.017",
       "contact": true,
       "position": "(20.20865, -157.0022, -70.04013)"
     },
     {
-      "case": "buoy (0.0, 0.0, -1.0) dt=0.067",
+      "case": "5 buoy (0.0, 0.0, -1.0) dt=0.067",
       "contact": true,
       "position": "(20.21211, -157.0218, -70.03928)"
     },
     {
-      "case": "buoy normal (0.0, 0.0, -1.0)",
+      "case": "5 buoy normal (0.0, 0.0, -1.0)",
       "contact": true,
       "position": "(20.20865, -157.0022, -70.04013)"
     },
     {
-      "case": "buoy (0.0, 0.0, 1.0) dt=0.017",
+      "case": "5 buoy (0.0, 0.0, 1.0) dt=0.017",
       "contact": true,
       "position": "(20.21158, -157.0019, -83.9585)"
     },
     {
-      "case": "buoy (0.0, 0.0, 1.0) dt=0.067",
+      "case": "5 buoy (0.0, 0.0, 1.0) dt=0.067",
       "contact": true,
       "position": "(20.20866, -157.0228, -83.96113)"
     },
     {
-      "case": "buoy normal (0.0, 0.0, 1.0)",
+      "case": "5 buoy normal (0.0, 0.0, 1.0)",
       "contact": true,
       "position": "(20.21158, -157.0019, -83.9585)"
     },
     {
-      "case": "buoy (-0.707107, 0.0, -0.707107) dt=0.017",
+      "case": "5 buoy (-0.707107, 0.0, -0.707107) dt=0.017",
       "contact": true,
       "position": "(25.43832, -156.9934, -71.59745)"
     },
     {
-      "case": "buoy (-0.707107, 0.0, -0.707107) dt=0.067",
+      "case": "5 buoy (-0.707107, 0.0, -0.707107) dt=0.067",
       "contact": true,
       "position": "(25.42852, -157.0081, -71.55882)"
     },
     {
-      "case": "buoy normal (-0.707107, 0.0, -0.707107)",
+      "case": "5 buoy normal (-0.707107, 0.0, -0.707107)",
       "contact": true,
       "position": "(25.43832, -156.9934, -71.59745)"
     },
     {
-      "case": "rock (0.0, -1.0, 0.0) dt=0.017",
+      "case": "5 buoy (0.57735, -0.57735, 0.57735) dt=0.017",
+      "contact": true,
+      "position": "(18.23987, -154.9998, -78.80013)"
+    },
+    {
+      "case": "5 buoy (0.57735, -0.57735, 0.57735) dt=0.067",
+      "contact": true,
+      "position": "(18.50301, -154.998, -78.53699)"
+    },
+    {
+      "case": "5 buoy normal (0.57735, -0.57735, 0.57735)",
+      "contact": true,
+      "position": "(18.17095, -154.9442, -78.86905)"
+    },
+    {
+      "case": "5 buoy (0.408248, 0.816497, -0.408248) dt=0.017",
+      "contact": true,
+      "position": "(18.25058, -161.1014, -74.87059)"
+    },
+    {
+      "case": "5 buoy (0.408248, 0.816497, -0.408248) dt=0.067",
+      "contact": true,
+      "position": "(18.49371, -161.102, -75.11359)"
+    },
+    {
+      "case": "5 buoy normal (0.408248, 0.816497, -0.408248)",
+      "contact": true,
+      "position": "(18.25058, -161.1014, -74.87059)"
+    },
+    {
+      "case": "6 rock (0.0, -1.0, 0.0) dt=0.017",
       "contact": true,
       "position": "(-12.26785, -189.9998, -83.8023)"
     },
     {
-      "case": "rock (0.0, -1.0, 0.0) dt=0.067",
+      "case": "6 rock (0.0, -1.0, 0.0) dt=0.067",
       "contact": true,
       "position": "(-12.26785, -189.9941, -83.8023)"
     },
     {
-      "case": "rock normal (0.0, -1.0, 0.0)",
+      "case": "6 rock normal (0.0, -1.0, 0.0)",
       "contact": true,
       "position": "(-12.26785, -189.9, -83.8023)"
     },
     {
-      "case": "rock (0.0, 1.0, 0.0) dt=0.017",
+      "case": "6 rock (0.0, 1.0, 0.0) dt=0.017",
       "contact": true,
       "position": "(-12.29216, -204.0282, -83.79771)"
     },
     {
-      "case": "rock (0.0, 1.0, 0.0) dt=0.067",
+      "case": "6 rock (0.0, 1.0, 0.0) dt=0.067",
       "contact": true,
       "position": "(-12.36207, -204.0086, -83.78474)"
     },
     {
-      "case": "rock normal (0.0, 1.0, 0.0)",
+      "case": "6 rock normal (0.0, 1.0, 0.0)",
       "contact": true,
       "position": "(-12.29216, -204.0282, -83.79771)"
     },
     {
-      "case": "rock (-1.0, 0.0, 0.0) dt=0.017",
+      "case": "6 rock (-1.0, 0.0, 0.0) dt=0.017",
       "contact": true,
       "position": "(-2.868996, -197.0548, -83.8021)"
     },
     {
-      "case": "rock (-1.0, 0.0, 0.0) dt=0.067",
+      "case": "6 rock (-1.0, 0.0, 0.0) dt=0.067",
       "contact": true,
       "position": "(-2.938435, -197.2207, -83.78656)"
     },
     {
-      "case": "rock normal (-1.0, 0.0, 0.0)",
+      "case": "6 rock normal (-1.0, 0.0, 0.0)",
       "contact": true,
       "position": "(-2.868996, -197.0548, -83.8021)"
     },
     {
-      "case": "rock (1.0, 0.0, 0.0) dt=0.017",
+      "case": "6 rock (1.0, 0.0, 0.0) dt=0.017",
       "contact": true,
       "position": "(-21.50789, -197.157, -83.7654)"
     },
     {
-      "case": "rock (1.0, 0.0, 0.0) dt=0.067",
+      "case": "6 rock (1.0, 0.0, 0.0) dt=0.067",
       "contact": true,
       "position": "(-21.37132, -197.3509, -83.73027)"
     },
     {
-      "case": "rock normal (1.0, 0.0, 0.0)",
+      "case": "6 rock normal (1.0, 0.0, 0.0)",
       "contact": true,
       "position": "(-21.50789, -197.157, -83.7654)"
     },
     {
-      "case": "rock (0.0, 0.0, -1.0) dt=0.017",
+      "case": "6 rock (0.0, 0.0, -1.0) dt=0.017",
       "contact": true,
       "position": "(-12.27281, -197.0963, -76.53054)"
     },
     {
-      "case": "rock (0.0, 0.0, -1.0) dt=0.067",
+      "case": "6 rock (0.0, 0.0, -1.0) dt=0.067",
       "contact": true,
       "position": "(-12.2883, -197.2803, -76.62916)"
     },
     {
-      "case": "rock normal (0.0, 0.0, -1.0)",
+      "case": "6 rock normal (0.0, 0.0, -1.0)",
       "contact": true,
       "position": "(-12.27281, -197.0963, -76.53054)"
     },
     {
-      "case": "rock (0.0, 0.0, 1.0) dt=0.017",
+      "case": "6 rock (0.0, 0.0, 1.0) dt=0.017",
       "contact": true,
       "position": "(-12.27069, -197.0835, -91.79681)"
     },
     {
-      "case": "rock (0.0, 0.0, 1.0) dt=0.067",
+      "case": "6 rock (0.0, 0.0, 1.0) dt=0.067",
       "contact": true,
       "position": "(-12.28298, -197.2639, -91.70775)"
     },
     {
-      "case": "rock normal (0.0, 0.0, 1.0)",
+      "case": "6 rock normal (0.0, 0.0, 1.0)",
       "contact": true,
       "position": "(-12.27069, -197.0835, -91.79681)"
     },
     {
-      "case": "rock (-0.707107, 0.0, -0.707107) dt=0.017",
+      "case": "6 rock (-0.707107, 0.0, -0.707107) dt=0.017",
       "contact": true,
       "position": "(-5.919425, -197.1, -77.40964)"
     },
     {
-      "case": "rock (-0.707107, 0.0, -0.707107) dt=0.067",
+      "case": "6 rock (-0.707107, 0.0, -0.707107) dt=0.067",
       "contact": true,
       "position": "(-6.069445, -197.2941, -77.42759)"
     },
     {
-      "case": "rock normal (-0.707107, 0.0, -0.707107)",
+      "case": "6 rock normal (-0.707107, 0.0, -0.707107)",
       "contact": true,
       "position": "(-5.919425, -197.1, -77.40964)"
     },
     {
-      "case": "rock (0.0, -1.0, 0.0) dt=0.017",
+      "case": "6 rock (0.57735, -0.57735, 0.57735) dt=0.017",
+      "contact": true,
+      "position": "(-33.25889, -176.2312, -104.7814)"
+    },
+    {
+      "case": "6 rock (0.57735, -0.57735, 0.57735) dt=0.067",
+      "contact": true,
+      "position": "(-33.31493, -176.3589, -104.7986)"
+    },
+    {
+      "case": "6 rock normal (0.57735, -0.57735, 0.57735)",
+      "contact": true,
+      "position": "(-33.24157, -176.155, -104.7523)"
+    },
+    {
+      "case": "6 rock (0.408248, 0.816497, -0.408248) dt=0.017",
+      "contact": true,
+      "position": "(-15.20641, -203.0862, -80.88814)"
+    },
+    {
+      "case": "6 rock (0.408248, 0.816497, -0.408248) dt=0.067",
+      "contact": true,
+      "position": "(-15.15187, -203.1296, -81.04134)"
+    },
+    {
+      "case": "6 rock normal (0.408248, 0.816497, -0.408248)",
+      "contact": true,
+      "position": "(-15.20641, -203.0862, -80.88814)"
+    },
+    {
+      "case": "9 rock (0.0, -1.0, 0.0) dt=0.017",
       "contact": true,
       "position": "(20.63465, -299.9999, -54.71865)"
     },
     {
-      "case": "rock (0.0, -1.0, 0.0) dt=0.067",
+      "case": "9 rock (0.0, -1.0, 0.0) dt=0.067",
       "contact": true,
       "position": "(20.63465, -299.9941, -54.71865)"
     },
     {
-      "case": "rock normal (0.0, -1.0, 0.0)",
+      "case": "9 rock normal (0.0, -1.0, 0.0)",
       "contact": true,
       "position": "(20.63465, -299.9, -54.71865)"
     },
     {
-      "case": "rock (0.0, 1.0, 0.0) dt=0.017",
+      "case": "9 rock (0.0, 1.0, 0.0) dt=0.017",
       "contact": true,
       "position": "(20.65025, -313.9709, -54.71189)"
     },
     {
-      "case": "rock (0.0, 1.0, 0.0) dt=0.067",
+      "case": "9 rock (0.0, 1.0, 0.0) dt=0.067",
       "contact": true,
       "position": "(20.69943, -313.9625, -54.69238)"
     },
     {
-      "case": "rock normal (0.0, 1.0, 0.0)",
+      "case": "9 rock normal (0.0, 1.0, 0.0)",
       "contact": true,
       "position": "(20.65025, -313.9709, -54.71189)"
     },
     {
-      "case": "rock (-1.0, 0.0, 0.0) dt=0.017",
+      "case": "9 rock (-1.0, 0.0, 0.0) dt=0.017",
       "contact": true,
-      "position": "(32.78745, -305.7219, -54.80861)"
+      "position": "(31.55298, -307.2219, -54.80861)"
     },
     {
-      "case": "rock (-1.0, 0.0, 0.0) dt=0.067",
+      "case": "9 rock (-1.0, 0.0, 0.0) dt=0.067",
       "contact": true,
-      "position": "(32.60258, -305.9078, -54.88115)"
+      "position": "(31.36811, -307.4078, -54.88114)"
     },
     {
-      "case": "rock normal (-1.0, 0.0, 0.0)",
+      "case": "9 rock normal (-1.0, 0.0, 0.0)",
       "contact": true,
-      "position": "(32.78745, -305.7219, -54.80861)"
+      "position": "(31.55298, -307.2219, -54.80861)"
     },
     {
-      "case": "rock (1.0, 0.0, 0.0) dt=0.017",
+      "case": "9 rock (1.0, 0.0, 0.0) dt=0.017",
       "contact": true,
-      "position": "(7.897173, -305.6047, -54.77555)"
+      "position": "(8.672204, -307.0929, -54.75644)"
     },
     {
-      "case": "rock (1.0, 0.0, 0.0) dt=0.067",
+      "case": "9 rock (1.0, 0.0, 0.0) dt=0.067",
       "contact": true,
-      "position": "(8.053661, -305.7606, -54.89285)"
+      "position": "(8.802069, -307.2543, -54.86296)"
     },
     {
-      "case": "rock normal (1.0, 0.0, 0.0)",
+      "case": "9 rock normal (1.0, 0.0, 0.0)",
       "contact": true,
-      "position": "(7.897173, -305.6047, -54.77555)"
+      "position": "(8.672204, -307.0929, -54.75644)"
     },
     {
-      "case": "rock (0.0, 0.0, -1.0) dt=0.017",
+      "case": "9 rock (0.0, 0.0, -1.0) dt=0.017",
       "contact": true,
-      "position": "(20.70667, -305.7167, -43.5923)"
+      "position": "(20.71793, -307.1825, -44.73587)"
     },
     {
-      "case": "rock (0.0, 0.0, -1.0) dt=0.067",
+      "case": "9 rock (0.0, 0.0, -1.0) dt=0.067",
       "contact": true,
-      "position": "(20.76864, -305.9073, -43.7682)"
+      "position": "(20.81898, -307.3524, -44.91815)"
     },
     {
-      "case": "rock normal (0.0, 0.0, -1.0)",
+      "case": "9 rock normal (0.0, 0.0, -1.0)",
       "contact": true,
-      "position": "(20.70667, -305.7167, -43.5923)"
+      "position": "(20.71793, -307.1825, -44.73587)"
     },
     {
-      "case": "rock (0.0, 0.0, 1.0) dt=0.017",
+      "case": "9 rock (0.0, 0.0, 1.0) dt=0.017",
       "contact": true,
-      "position": "(20.57936, -305.619, -64.41329)"
+      "position": "(20.57936, -307.119, -63.54773)"
     },
     {
-      "case": "rock (0.0, 0.0, 1.0) dt=0.067",
+      "case": "9 rock (0.0, 0.0, 1.0) dt=0.067",
       "contact": true,
-      "position": "(20.47996, -305.7872, -64.268)"
+      "position": "(20.47996, -307.2872, -63.40243)"
     },
     {
-      "case": "rock normal (0.0, 0.0, 1.0)",
+      "case": "9 rock normal (0.0, 0.0, 1.0)",
       "contact": true,
-      "position": "(20.57936, -305.619, -64.41329)"
+      "position": "(20.57936, -307.119, -63.54773)"
     },
     {
-      "case": "rock (-0.707107, 0.0, -0.707107) dt=0.017",
+      "case": "9 rock (-0.707107, 0.0, -0.707107) dt=0.017",
       "contact": true,
-      "position": "(27.80349, -305.6019, -47.54283)"
+      "position": "(27.22168, -307.102, -48.12463)"
     },
     {
-      "case": "rock (-0.707107, 0.0, -0.707107) dt=0.067",
+      "case": "9 rock (-0.707107, 0.0, -0.707107) dt=0.067",
       "contact": true,
-      "position": "(27.72115, -305.7877, -47.60568)"
+      "position": "(27.13924, -307.2877, -48.18759)"
     },
     {
-      "case": "rock normal (-0.707107, 0.0, -0.707107)",
+      "case": "9 rock normal (-0.707107, 0.0, -0.707107)",
       "contact": true,
-      "position": "(27.80349, -305.6019, -47.54283)"
+      "position": "(27.22168, -307.102, -48.12463)"
     },
     {
-      "case": "cliff (0.0, -1.0, 0.0) dt=0.017",
+      "case": "9 rock (0.57735, -0.57735, 0.57735) dt=0.017",
+      "contact": true,
+      "position": "(13.58952, -299.9998, -61.76378)"
+    },
+    {
+      "case": "9 rock (0.57735, -0.57735, 0.57735) dt=0.067",
+      "contact": true,
+      "position": "(13.85266, -299.998, -61.50063)"
+    },
+    {
+      "case": "9 rock normal (0.57735, -0.57735, 0.57735)",
+      "contact": true,
+      "position": "(13.5206, -299.9442, -61.8327)"
+    },
+    {
+      "case": "9 rock (0.408248, 0.816497, -0.408248) dt=0.017",
+      "contact": true,
+      "position": "(17.6241, -313.2879, -51.71107)"
+    },
+    {
+      "case": "9 rock (0.408248, 0.816497, -0.408248) dt=0.067",
+      "contact": true,
+      "position": "(17.75875, -313.3291, -51.8559)"
+    },
+    {
+      "case": "9 rock normal (0.408248, 0.816497, -0.408248)",
+      "contact": true,
+      "position": "(17.6241, -313.2879, -51.71107)"
+    },
+    {
+      "case": "13 cliff (0.0, -1.0, 0.0) dt=0.017",
       "contact": true,
       "position": "(-51.10865, -190.0, -101.4426)"
     },
     {
-      "case": "cliff (0.0, -1.0, 0.0) dt=0.067",
+      "case": "13 cliff (0.0, -1.0, 0.0) dt=0.067",
       "contact": true,
       "position": "(-51.10865, -190.0, -101.4426)"
     },
     {
-      "case": "cliff normal (0.0, -1.0, 0.0)",
+      "case": "13 cliff normal (0.0, -1.0, 0.0)",
       "contact": true,
       "position": "(-51.10865, -189.9, -101.4426)"
     },
     {
-      "case": "cliff (0.0, 1.0, 0.0) dt=0.017",
+      "case": "13 cliff (0.0, 1.0, 0.0) dt=0.017",
       "contact": true,
       "position": "(-51.08839, -199.8428, -101.4302)"
     },
     {
-      "case": "cliff (0.0, 1.0, 0.0) dt=0.067",
+      "case": "13 cliff (0.0, 1.0, 0.0) dt=0.067",
       "contact": true,
       "position": "(-51.09545, -199.8497, -101.4345)"
     },
     {
-      "case": "cliff normal (0.0, 1.0, 0.0)",
+      "case": "13 cliff normal (0.0, 1.0, 0.0)",
       "contact": true,
       "position": "(-51.08839, -199.8428, -101.4302)"
     },
     {
-      "case": "cliff (-1.0, 0.0, 0.0) dt=0.017",
+      "case": "13 cliff (-1.0, 0.0, 0.0) dt=0.017",
       "contact": true,
       "position": "(-52.30392, -205.0823, -101.4603)"
     },
     {
-      "case": "cliff (-1.0, 0.0, 0.0) dt=0.067",
+      "case": "13 cliff (-1.0, 0.0, 0.0) dt=0.067",
       "contact": true,
       "position": "(-52.32029, -205.1345, -101.4872)"
     },
     {
-      "case": "cliff normal (-1.0, 0.0, 0.0)",
+      "case": "13 cliff normal (-1.0, 0.0, 0.0)",
       "contact": true,
       "position": "(-52.30392, -205.0823, -101.4603)"
     },
     {
-      "case": "cliff (1.0, 0.0, 0.0) dt=0.017",
+      "case": "13 cliff (1.0, 0.0, 0.0) dt=0.017",
       "contact": true,
       "position": "(-75.11003, -205.0906, -101.4384)"
     },
     {
-      "case": "cliff (1.0, 0.0, 0.0) dt=0.067",
+      "case": "13 cliff (1.0, 0.0, 0.0) dt=0.067",
       "contact": true,
       "position": "(-75.09495, -205.1477, -101.4335)"
     },
     {
-      "case": "cliff normal (1.0, 0.0, 0.0)",
+      "case": "13 cliff normal (1.0, 0.0, 0.0)",
       "contact": true,
       "position": "(-75.11003, -205.0906, -101.4384)"
     },
     {
-      "case": "cliff (0.0, 0.0, -1.0) dt=0.017",
+      "case": "13 cliff (0.0, 0.0, -1.0) dt=0.017",
       "contact": true,
       "position": "(-51.11427, -205.0832, -102.4012)"
     },
     {
-      "case": "cliff (0.0, 0.0, -1.0) dt=0.067",
+      "case": "13 cliff (0.0, 0.0, -1.0) dt=0.067",
       "contact": true,
       "position": "(-51.12321, -205.1377, -102.4124)"
     },
     {
-      "case": "cliff normal (0.0, 0.0, -1.0)",
+      "case": "13 cliff normal (0.0, 0.0, -1.0)",
       "contact": true,
       "position": "(-51.11427, -205.0832, -102.4012)"
     },
     {
-      "case": "cliff (0.0, 0.0, 1.0) dt=0.017",
+      "case": "13 cliff (0.0, 0.0, 1.0) dt=0.017",
       "contact": true,
       "position": "(-51.11118, -205.063, -107.5063)"
     },
     {
-      "case": "cliff (0.0, 0.0, 1.0) dt=0.067",
+      "case": "13 cliff (0.0, 0.0, 1.0) dt=0.067",
       "contact": true,
       "position": "(-51.15588, -205.1593, -107.4712)"
     },
     {
-      "case": "cliff normal (0.0, 0.0, 1.0)",
+      "case": "13 cliff normal (0.0, 0.0, 1.0)",
       "contact": true,
       "position": "(-51.11118, -205.063, -107.5063)"
     },
     {
-      "case": "cliff (-0.707107, 0.0, -0.707107) dt=0.017",
+      "case": "13 cliff (-0.707107, 0.0, -0.707107) dt=0.017",
       "contact": true,
       "position": "(-52.23137, -205.0745, -102.447)"
     },
     {
-      "case": "cliff (-0.707107, 0.0, -0.707107) dt=0.067",
+      "case": "13 cliff (-0.707107, 0.0, -0.707107) dt=0.067",
       "contact": true,
       "position": "(-52.48148, -205.1658, -102.4664)"
     },
     {
-      "case": "cliff normal (-0.707107, 0.0, -0.707107)",
+      "case": "13 cliff normal (-0.707107, 0.0, -0.707107)",
       "contact": true,
       "position": "(-52.23137, -205.0745, -102.447)"
     },
     {
-      "case": "rock (0.0, -1.0, 0.0) dt=0.017",
+      "case": "13 cliff (0.57735, -0.57735, 0.57735) dt=0.017",
+      "contact": true,
+      "position": "(-62.15377, -193.9998, -112.4878)"
+    },
+    {
+      "case": "13 cliff (0.57735, -0.57735, 0.57735) dt=0.067",
+      "contact": true,
+      "position": "(-61.89063, -194.0005, -112.2246)"
+    },
+    {
+      "case": "13 cliff normal (0.57735, -0.57735, 0.57735)",
+      "contact": true,
+      "position": "(-62.2227, -193.9442, -112.5567)"
+    },
+    {
+      "case": "13 cliff (0.408248, 0.816497, -0.408248) dt=0.017",
+      "contact": true,
+      "position": "(-50.38386, -203.8127, -102.1102)"
+    },
+    {
+      "case": "13 cliff (0.408248, 0.816497, -0.408248) dt=0.067",
+      "contact": true,
+      "position": "(-50.2854, -203.7354, -102.0889)"
+    },
+    {
+      "case": "13 cliff normal (0.408248, 0.816497, -0.408248)",
+      "contact": true,
+      "position": "(-50.38386, -203.8127, -102.1102)"
+    },
+    {
+      "case": "14 rock (0.0, -1.0, 0.0) dt=0.017",
       "contact": true,
       "position": "(-63.93735, -204.9998, -93.202)"
     },
     {
-      "case": "rock (0.0, -1.0, 0.0) dt=0.067",
+      "case": "14 rock (0.0, -1.0, 0.0) dt=0.067",
       "contact": true,
       "position": "(-63.93735, -204.9941, -93.202)"
     },
     {
-      "case": "rock normal (0.0, -1.0, 0.0)",
+      "case": "14 rock normal (0.0, -1.0, 0.0)",
       "contact": true,
       "position": "(-63.93735, -204.9, -93.202)"
     },
     {
-      "case": "rock (0.0, 1.0, 0.0) dt=0.017",
+      "case": "14 rock (0.0, 1.0, 0.0) dt=0.017",
       "contact": true,
       "position": "(-63.93432, -227.0625, -93.20617)"
     },
     {
-      "case": "rock (0.0, 1.0, 0.0) dt=0.067",
+      "case": "14 rock (0.0, 1.0, 0.0) dt=0.067",
       "contact": true,
       "position": "(-63.93717, -227.0636, -93.20226)"
     },
     {
-      "case": "rock normal (0.0, 1.0, 0.0)",
+      "case": "14 rock normal (0.0, 1.0, 0.0)",
       "contact": true,
       "position": "(-63.93432, -227.0625, -93.20617)"
     },
     {
-      "case": "rock (-1.0, 0.0, 0.0) dt=0.017",
+      "case": "14 rock (-1.0, 0.0, 0.0) dt=0.017",
       "contact": true,
       "position": "(-59.55846, -216.0711, -93.20146)"
     },
     {
-      "case": "rock (-1.0, 0.0, 0.0) dt=0.067",
+      "case": "14 rock (-1.0, 0.0, 0.0) dt=0.067",
       "contact": true,
       "position": "(-59.56287, -216.1177, -93.19518)"
     },
     {
-      "case": "rock normal (-1.0, 0.0, 0.0)",
+      "case": "14 rock normal (-1.0, 0.0, 0.0)",
       "contact": true,
       "position": "(-59.55846, -216.0711, -93.20146)"
     },
     {
-      "case": "rock (1.0, 0.0, 0.0) dt=0.017",
+      "case": "14 rock (1.0, 0.0, 0.0) dt=0.017",
       "contact": true,
       "position": "(-74.97707, -216.0717, -93.21951)"
     },
     {
-      "case": "rock (1.0, 0.0, 0.0) dt=0.067",
+      "case": "14 rock (1.0, 0.0, 0.0) dt=0.067",
       "contact": true,
       "position": "(-74.94387, -216.1102, -93.2719)"
     },
     {
-      "case": "rock normal (1.0, 0.0, 0.0)",
+      "case": "14 rock normal (1.0, 0.0, 0.0)",
       "contact": true,
       "position": "(-74.97707, -216.0717, -93.21951)"
     },
     {
-      "case": "rock (0.0, 0.0, -1.0) dt=0.017",
+      "case": "14 rock (0.0, 0.0, -1.0) dt=0.017",
       "contact": true,
       "position": "(-64.07815, -216.1371, -81.52279)"
     },
     {
-      "case": "rock (0.0, 0.0, -1.0) dt=0.067",
+      "case": "14 rock (0.0, 0.0, -1.0) dt=0.067",
       "contact": true,
       "position": "(-64.07893, -216.3097, -81.59792)"
     },
     {
-      "case": "rock normal (0.0, 0.0, -1.0)",
+      "case": "14 rock normal (0.0, 0.0, -1.0)",
       "contact": true,
       "position": "(-64.07815, -216.1371, -81.52279)"
     },
     {
-      "case": "rock (0.0, 0.0, 1.0) dt=0.017",
+      "case": "14 rock (0.0, 0.0, 1.0) dt=0.017",
       "contact": true,
       "position": "(-63.87078, -216.1793, -107.4189)"
     },
     {
-      "case": "rock (0.0, 0.0, 1.0) dt=0.067",
+      "case": "14 rock (0.0, 0.0, 1.0) dt=0.067",
       "contact": true,
       "position": "(-63.80025, -216.3629, -107.2777)"
     },
     {
-      "case": "rock normal (0.0, 0.0, 1.0)",
+      "case": "14 rock normal (0.0, 0.0, 1.0)",
       "contact": true,
       "position": "(-63.87078, -216.1793, -107.4189)"
     },
     {
-      "case": "rock (-0.707107, 0.0, -0.707107) dt=0.017",
+      "case": "14 rock (-0.707107, 0.0, -0.707107) dt=0.017",
       "contact": true,
       "position": "(-60.21177, -216.0651, -89.52747)"
     },
     {
-      "case": "rock (-0.707107, 0.0, -0.707107) dt=0.067",
+      "case": "14 rock (-0.707107, 0.0, -0.707107) dt=0.067",
       "contact": true,
       "position": "(-60.21608, -216.1247, -89.69374)"
     },
     {
-      "case": "rock normal (-0.707107, 0.0, -0.707107)",
+      "case": "14 rock normal (-0.707107, 0.0, -0.707107)",
       "contact": true,
       "position": "(-60.21177, -216.0651, -89.52747)"
     },
     {
-      "case": "driftwood (0.0, -1.0, 0.0) dt=0.017",
+      "case": "14 rock (0.57735, -0.57735, 0.57735) dt=0.017",
+      "contact": true,
+      "position": "(-75.31789, -204.8336, -104.5106)"
+    },
+    {
+      "case": "14 rock (0.57735, -0.57735, 0.57735) dt=0.067",
+      "contact": true,
+      "position": "(-75.16259, -205.4264, -104.1321)"
+    },
+    {
+      "case": "14 rock normal (0.57735, -0.57735, 0.57735)",
+      "contact": true,
+      "position": "(-75.35581, -204.6874, -104.596)"
+    },
+    {
+      "case": "14 rock (0.408248, 0.816497, -0.408248) dt=0.017",
+      "contact": true,
+      "position": "(-75.8638, -240.0379, -81.2868)"
+    },
+    {
+      "case": "14 rock (0.408248, 0.816497, -0.408248) dt=0.067",
+      "contact": true,
+      "position": "(-75.87637, -239.9306, -81.31161)"
+    },
+    {
+      "case": "14 rock normal (0.408248, 0.816497, -0.408248)",
+      "contact": true,
+      "position": "(-75.8638, -240.0379, -81.2868)"
+    },
+    {
+      "case": "16 driftwood (0.0, -1.0, 0.0) dt=0.017",
       "contact": true,
       "position": "(15.31765, -240.0206, -59.8073)"
     },
     {
-      "case": "driftwood (0.0, -1.0, 0.0) dt=0.067",
+      "case": "16 driftwood (0.0, -1.0, 0.0) dt=0.067",
       "contact": true,
       "position": "(15.31765, -240.0293, -59.71568)"
     },
     {
-      "case": "driftwood normal (0.0, -1.0, 0.0)",
+      "case": "16 driftwood normal (0.0, -1.0, 0.0)",
       "contact": true,
       "position": "(15.31765, -239.9238, -59.80769)"
     },
     {
-      "case": "driftwood (0.0, 1.0, 0.0) dt=0.017",
+      "case": "16 driftwood (0.0, 1.0, 0.0) dt=0.017",
       "contact": true,
       "position": "(15.3106, -245.2723, -59.79756)"
     },
     {
-      "case": "driftwood (0.0, 1.0, 0.0) dt=0.067",
+      "case": "16 driftwood (0.0, 1.0, 0.0) dt=0.067",
       "contact": true,
       "position": "(15.28786, -245.2565, -59.76492)"
     },
     {
-      "case": "driftwood normal (0.0, 1.0, 0.0)",
+      "case": "16 driftwood normal (0.0, 1.0, 0.0)",
       "contact": true,
       "position": "(15.3106, -245.2723, -59.79756)"
     },
     {
-      "case": "driftwood (-1.0, 0.0, 0.0) dt=0.017",
+      "case": "16 driftwood (-1.0, 0.0, 0.0) dt=0.017",
       "contact": true,
       "position": "(22.3624, -242.7433, -59.80769)"
     },
     {
-      "case": "driftwood (-1.0, 0.0, 0.0) dt=0.067",
+      "case": "16 driftwood (-1.0, 0.0, 0.0) dt=0.067",
       "contact": true,
       "position": "(22.40956, -242.81, -59.80769)"
     },
     {
-      "case": "driftwood normal (-1.0, 0.0, 0.0)",
+      "case": "16 driftwood normal (-1.0, 0.0, 0.0)",
       "contact": true,
       "position": "(22.3624, -242.7433, -59.80769)"
     },
     {
-      "case": "driftwood (1.0, 0.0, 0.0) dt=0.017",
+      "case": "16 driftwood (1.0, 0.0, 0.0) dt=0.017",
       "contact": true,
-      "position": "(10.05695, -242.66, -59.39883)"
+      "position": "(9.990567, -242.6533, -59.40863)"
     },
     {
-      "case": "driftwood (1.0, 0.0, 0.0) dt=0.067",
+      "case": "16 driftwood (1.0, 0.0, 0.0) dt=0.067",
       "contact": true,
       "position": "(10.15039, -242.7041, -59.38695)"
     },
     {
-      "case": "driftwood normal (1.0, 0.0, 0.0)",
+      "case": "16 driftwood normal (1.0, 0.0, 0.0)",
       "contact": true,
-      "position": "(10.05695, -242.66, -59.39883)"
+      "position": "(9.990567, -242.6533, -59.40863)"
     },
     {
-      "case": "driftwood (0.0, 0.0, -1.0) dt=0.017",
+      "case": "16 driftwood (0.0, 0.0, -1.0) dt=0.017",
       "contact": true,
-      "position": "(15.31643, -242.6833, -53.80419)"
+      "position": "(15.31647, -242.6833, -53.80429)"
     },
     {
-      "case": "driftwood (0.0, 0.0, -1.0) dt=0.067",
+      "case": "16 driftwood (0.0, 0.0, -1.0) dt=0.067",
       "contact": true,
-      "position": "(15.31641, -242.7033, -53.80328)"
+      "position": "(15.31641, -242.7033, -53.80202)"
     },
     {
-      "case": "driftwood normal (0.0, 0.0, -1.0)",
+      "case": "16 driftwood normal (0.0, 0.0, -1.0)",
       "contact": true,
-      "position": "(15.31643, -242.6833, -53.80419)"
+      "position": "(15.31647, -242.6833, -53.80429)"
     },
     {
-      "case": "driftwood (0.0, 0.0, 1.0) dt=0.017",
+      "case": "16 driftwood (0.0, 0.0, 1.0) dt=0.017",
       "contact": true,
       "position": "(15.31585, -242.6833, -66.1856)"
     },
     {
-      "case": "driftwood (0.0, 0.0, 1.0) dt=0.067",
+      "case": "16 driftwood (0.0, 0.0, 1.0) dt=0.067",
       "contact": true,
       "position": "(15.31581, -242.7034, -66.18652)"
     },
     {
-      "case": "driftwood normal (0.0, 0.0, 1.0)",
+      "case": "16 driftwood normal (0.0, 0.0, 1.0)",
       "contact": true,
       "position": "(15.31585, -242.6833, -66.1856)"
     },
     {
-      "case": "driftwood (-0.707107, 0.0, -0.707107) dt=0.017",
+      "case": "16 driftwood (-0.707107, 0.0, -0.707107) dt=0.017",
       "contact": true,
       "position": "(20.97194, -242.6833, -54.13886)"
     },
     {
-      "case": "driftwood (-0.707107, 0.0, -0.707107) dt=0.067",
+      "case": "16 driftwood (-0.707107, 0.0, -0.707107) dt=0.067",
       "contact": true,
       "position": "(20.97319, -242.7033, -54.137)"
     },
     {
-      "case": "driftwood normal (-0.707107, 0.0, -0.707107)",
+      "case": "16 driftwood normal (-0.707107, 0.0, -0.707107)",
       "contact": true,
       "position": "(20.97194, -242.6833, -54.13886)"
     },
     {
-      "case": "jelly (0.0, -1.0, 0.0) dt=0.017",
+      "case": "16 driftwood (0.57735, -0.57735, 0.57735) dt=0.017",
+      "contact": true,
+      "position": "(13.40873, -240.7627, -61.75679)"
+    },
+    {
+      "case": "16 driftwood (0.57735, -0.57735, 0.57735) dt=0.067",
+      "contact": true,
+      "position": "(13.73583, -240.7624, -61.77863)"
+    },
+    {
+      "case": "16 driftwood normal (0.57735, -0.57735, 0.57735)",
+      "contact": true,
+      "position": "(13.33023, -240.6897, -61.7951)"
+    },
+    {
+      "case": "16 driftwood (0.408248, 0.816497, -0.408248) dt=0.017",
+      "contact": true,
+      "position": "(14.27272, -244.9288, -58.75631)"
+    },
+    {
+      "case": "16 driftwood (0.408248, 0.816497, -0.408248) dt=0.067",
+      "contact": true,
+      "position": "(14.42964, -244.9666, -58.84459)"
+    },
+    {
+      "case": "16 driftwood normal (0.408248, 0.816497, -0.408248)",
+      "contact": true,
+      "position": "(14.27272, -244.9288, -58.75631)"
+    },
+    {
+      "case": "17 jelly (0.0, -1.0, 0.0) dt=0.017",
       "contact": true,
       "position": "(35.21052, -215.0147, -72.82954)"
     },
     {
-      "case": "jelly (0.0, -1.0, 0.0) dt=0.067",
+      "case": "17 jelly (0.0, -1.0, 0.0) dt=0.067",
       "contact": true,
       "position": "(35.29387, -215.0302, -72.75643)"
     },
     {
-      "case": "jelly normal (0.0, -1.0, 0.0)",
+      "case": "17 jelly normal (0.0, -1.0, 0.0)",
       "contact": true,
       "position": "(35.21, -214.9192, -72.83)"
     },
     {
-      "case": "jelly (0.0, 1.0, 0.0) dt=0.017",
+      "case": "17 jelly (0.0, 1.0, 0.0) dt=0.017",
       "contact": true,
       "position": "(35.20504, -217.14, -72.86681)"
     },
     {
-      "case": "jelly (0.0, 1.0, 0.0) dt=0.067",
+      "case": "17 jelly (0.0, 1.0, 0.0) dt=0.067",
       "contact": true,
       "position": "(35.20696, -217.1409, -72.86761)"
     },
     {
-      "case": "jelly normal (0.0, 1.0, 0.0)",
+      "case": "17 jelly normal (0.0, 1.0, 0.0)",
       "contact": true,
       "position": "(35.20504, -217.14, -72.86681)"
     },
     {
-      "case": "jelly (-1.0, 0.0, 0.0) dt=0.017",
+      "case": "17 jelly (-1.0, 0.0, 0.0) dt=0.017",
       "contact": true,
       "position": "(39.28131, -217.7695, -72.82554)"
     },
     {
-      "case": "jelly (-1.0, 0.0, 0.0) dt=0.067",
+      "case": "17 jelly (-1.0, 0.0, 0.0) dt=0.067",
       "contact": true,
       "position": "(39.2834, -217.7784, -72.8105)"
     },
     {
-      "case": "jelly normal (-1.0, 0.0, 0.0)",
+      "case": "17 jelly normal (-1.0, 0.0, 0.0)",
       "contact": true,
       "position": "(39.28131, -217.7695, -72.82554)"
     },
     {
-      "case": "jelly (1.0, 0.0, 0.0) dt=0.017",
+      "case": "17 jelly (1.0, 0.0, 0.0) dt=0.017",
       "contact": true,
       "position": "(30.72124, -217.756, -72.83308)"
     },
     {
-      "case": "jelly (1.0, 0.0, 0.0) dt=0.067",
+      "case": "17 jelly (1.0, 0.0, 0.0) dt=0.067",
       "contact": true,
       "position": "(30.72211, -217.7475, -72.82581)"
     },
     {
-      "case": "jelly normal (1.0, 0.0, 0.0)",
+      "case": "17 jelly normal (1.0, 0.0, 0.0)",
       "contact": true,
       "position": "(30.72124, -217.756, -72.83308)"
     },
     {
-      "case": "jelly (0.0, 0.0, -1.0) dt=0.017",
+      "case": "17 jelly (0.0, 0.0, -1.0) dt=0.017",
       "contact": true,
       "position": "(35.21502, -217.7706, -68.72121)"
     },
     {
-      "case": "jelly (0.0, 0.0, -1.0) dt=0.067",
+      "case": "17 jelly (0.0, 0.0, -1.0) dt=0.067",
       "contact": true,
       "position": "(35.23044, -217.7804, -68.71901)"
     },
     {
-      "case": "jelly normal (0.0, 0.0, -1.0)",
+      "case": "17 jelly normal (0.0, 0.0, -1.0)",
       "contact": true,
       "position": "(35.21502, -217.7706, -68.72121)"
     },
     {
-      "case": "jelly (0.0, 0.0, 1.0) dt=0.017",
+      "case": "17 jelly (0.0, 0.0, 1.0) dt=0.017",
       "contact": true,
       "position": "(35.21407, -217.7533, -77.27491)"
     },
     {
-      "case": "jelly (0.0, 0.0, 1.0) dt=0.067",
+      "case": "17 jelly (0.0, 0.0, 1.0) dt=0.067",
       "contact": true,
       "position": "(35.22855, -217.74, -77.27366)"
     },
     {
-      "case": "jelly normal (0.0, 0.0, 1.0)",
+      "case": "17 jelly normal (0.0, 0.0, 1.0)",
       "contact": true,
       "position": "(35.21407, -217.7533, -77.27491)"
     },
     {
-      "case": "jelly (-0.707107, 0.0, -0.707107) dt=0.017",
+      "case": "17 jelly (-0.707107, 0.0, -0.707107) dt=0.017",
       "contact": true,
       "position": "(38.05753, -217.7705, -69.98961)"
     },
     {
-      "case": "jelly (-0.707107, 0.0, -0.707107) dt=0.067",
+      "case": "17 jelly (-0.707107, 0.0, -0.707107) dt=0.067",
       "contact": true,
       "position": "(38.07003, -217.7803, -69.99902)"
     },
     {
-      "case": "jelly normal (-0.707107, 0.0, -0.707107)",
+      "case": "17 jelly normal (-0.707107, 0.0, -0.707107)",
       "contact": true,
       "position": "(38.05753, -217.7705, -69.98961)"
+    },
+    {
+      "case": "17 jelly (0.57735, -0.57735, 0.57735) dt=0.017",
+      "contact": true,
+      "position": "(32.98354, -215.5645, -75.06653)"
+    },
+    {
+      "case": "17 jelly (0.57735, -0.57735, 0.57735) dt=0.067",
+      "contact": true,
+      "position": "(32.97175, -215.5853, -75.07789)"
+    },
+    {
+      "case": "17 jelly normal (0.57735, -0.57735, 0.57735)",
+      "contact": true,
+      "position": "(33.03482, -215.573, -75.02538)"
+    },
+    {
+      "case": "17 jelly (0.408248, 0.816497, -0.408248) dt=0.017",
+      "contact": true,
+      "position": "(35.55943, -217.194, -73.2067)"
+    },
+    {
+      "case": "17 jelly (0.408248, 0.816497, -0.408248) dt=0.067",
+      "contact": true,
+      "position": "(35.75091, -217.2408, -73.43992)"
+    },
+    {
+      "case": "17 jelly normal (0.408248, 0.816497, -0.408248)",
+      "contact": true,
+      "position": "(35.55943, -217.194, -73.2067)"
+    },
+    {
+      "case": "20 cliff (0.0, -1.0, 0.0) dt=0.017",
+      "contact": true,
+      "position": "(-13.47765, -333.0, -76.66035)"
+    },
+    {
+      "case": "20 cliff (0.0, -1.0, 0.0) dt=0.067",
+      "contact": true,
+      "position": "(-13.47765, -333.0, -76.66035)"
+    },
+    {
+      "case": "20 cliff normal (0.0, -1.0, 0.0)",
+      "contact": true,
+      "position": "(-13.47765, -332.9, -76.66035)"
+    },
+    {
+      "case": "20 cliff (0.0, 1.0, 0.0) dt=0.017",
+      "contact": true,
+      "position": "(-13.47219, -356.8967, -76.66117)"
+    },
+    {
+      "case": "20 cliff (0.0, 1.0, 0.0) dt=0.067",
+      "contact": true,
+      "position": "(-13.31629, -356.6005, -76.68447)"
+    },
+    {
+      "case": "20 cliff normal (0.0, 1.0, 0.0)",
+      "contact": true,
+      "position": "(-13.47219, -356.8967, -76.66117)"
+    },
+    {
+      "case": "20 cliff (-1.0, 0.0, 0.0) dt=0.017",
+      "contact": true,
+      "position": "(-5.0234, -345.0507, -76.70969)"
+    },
+    {
+      "case": "20 cliff (-1.0, 0.0, 0.0) dt=0.067",
+      "contact": true,
+      "position": "(-5.0234, -345.0507, -76.70969)"
+    },
+    {
+      "case": "20 cliff normal (-1.0, 0.0, 0.0)",
+      "contact": true,
+      "position": "(-5.0234, -345.0507, -76.70969)"
+    },
+    {
+      "case": "20 cliff (1.0, 0.0, 0.0) dt=0.017",
+      "contact": true,
+      "position": "(-42.57624, -345.0534, -76.66048)"
+    },
+    {
+      "case": "20 cliff (1.0, 0.0, 0.0) dt=0.067",
+      "contact": true,
+      "position": "(-42.43952, -345.1698, -76.80762)"
+    },
+    {
+      "case": "20 cliff normal (1.0, 0.0, 0.0)",
+      "contact": true,
+      "position": "(-42.57624, -345.0534, -76.66048)"
+    },
+    {
+      "case": "20 cliff (0.0, 0.0, -1.0) dt=0.017",
+      "contact": true,
+      "position": "(-13.47935, -345.0735, -70.48759)"
+    },
+    {
+      "case": "20 cliff (0.0, 0.0, -1.0) dt=0.067",
+      "contact": true,
+      "position": "(-13.48689, -345.1221, -70.4942)"
+    },
+    {
+      "case": "20 cliff normal (0.0, 0.0, -1.0)",
+      "contact": true,
+      "position": "(-13.47935, -345.0735, -70.48759)"
+    },
+    {
+      "case": "20 cliff (0.0, 0.0, 1.0) dt=0.017",
+      "contact": true,
+      "position": "(-13.47558, -345.0776, -80.80405)"
+    },
+    {
+      "case": "20 cliff (0.0, 0.0, 1.0) dt=0.067",
+      "contact": true,
+      "position": "(-13.47062, -345.1293, -80.79506)"
+    },
+    {
+      "case": "20 cliff normal (0.0, 0.0, 1.0)",
+      "contact": true,
+      "position": "(-13.47558, -345.0776, -80.80405)"
+    },
+    {
+      "case": "20 cliff (-0.707107, 0.0, -0.707107) dt=0.017",
+      "contact": true,
+      "position": "(-10.187, -345.0724, -73.4487)"
+    },
+    {
+      "case": "20 cliff (-0.707107, 0.0, -0.707107) dt=0.067",
+      "contact": true,
+      "position": "(-10.22328, -345.1761, -73.70325)"
+    },
+    {
+      "case": "20 cliff normal (-0.707107, 0.0, -0.707107)",
+      "contact": true,
+      "position": "(-10.187, -345.0724, -73.4487)"
+    },
+    {
+      "case": "20 cliff (0.57735, -0.57735, 0.57735) dt=0.017",
+      "contact": true,
+      "position": "(-20.4076, -338.2767, -83.65739)"
+    },
+    {
+      "case": "20 cliff (0.57735, -0.57735, 0.57735) dt=0.067",
+      "contact": true,
+      "position": "(-20.30585, -338.4952, -83.6433)"
+    },
+    {
+      "case": "20 cliff normal (0.57735, -0.57735, 0.57735)",
+      "contact": true,
+      "position": "(-20.42375, -338.142, -83.66763)"
+    },
+    {
+      "case": "20 cliff (0.408248, 0.816497, -0.408248) dt=0.017",
+      "contact": true,
+      "position": "(-18.24492, -354.7904, -71.86109)"
+    },
+    {
+      "case": "20 cliff (0.408248, 0.816497, -0.408248) dt=0.067",
+      "contact": true,
+      "position": "(-18.15837, -354.7198, -71.83197)"
+    },
+    {
+      "case": "20 cliff normal (0.408248, 0.816497, -0.408248)",
+      "contact": true,
+      "position": "(-18.24492, -354.7904, -71.86109)"
+    },
+    {
+      "case": "21 rock (0.0, -1.0, 0.0) dt=0.017",
+      "contact": true,
+      "position": "(-26.97475, -364.9998, -99.7137)"
+    },
+    {
+      "case": "21 rock (0.0, -1.0, 0.0) dt=0.067",
+      "contact": true,
+      "position": "(-26.92111, -364.9941, -99.71371)"
+    },
+    {
+      "case": "21 rock normal (0.0, -1.0, 0.0)",
+      "contact": true,
+      "position": "(-26.97475, -364.9, -99.7137)"
+    },
+    {
+      "case": "21 rock (0.0, 1.0, 0.0) dt=0.017",
+      "contact": true,
+      "position": "(-26.97219, -379.0529, -99.69782)"
+    },
+    {
+      "case": "21 rock (0.0, 1.0, 0.0) dt=0.067",
+      "contact": true,
+      "position": "(-26.96906, -379.0453, -99.64769)"
+    },
+    {
+      "case": "21 rock normal (0.0, 1.0, 0.0)",
+      "contact": true,
+      "position": "(-26.97219, -379.0529, -99.69782)"
+    },
+    {
+      "case": "21 rock (-1.0, 0.0, 0.0) dt=0.017",
+      "contact": true,
+      "position": "(-23.19734, -372.0789, -99.70011)"
+    },
+    {
+      "case": "21 rock (-1.0, 0.0, 0.0) dt=0.067",
+      "contact": true,
+      "position": "(-23.21179, -372.1296, -99.67387)"
+    },
+    {
+      "case": "21 rock normal (-1.0, 0.0, 0.0)",
+      "contact": true,
+      "position": "(-23.19734, -372.0789, -99.70011)"
+    },
+    {
+      "case": "21 rock (1.0, 0.0, 0.0) dt=0.017",
+      "contact": true,
+      "position": "(-63.49619, -372.0769, -99.73671)"
+    },
+    {
+      "case": "21 rock (1.0, 0.0, 0.0) dt=0.067",
+      "contact": true,
+      "position": "(-63.49856, -372.0968, -99.73726)"
+    },
+    {
+      "case": "21 rock normal (1.0, 0.0, 0.0)",
+      "contact": true,
+      "position": "(-63.49619, -372.0769, -99.73671)"
+    },
+    {
+      "case": "21 rock (0.0, 0.0, -1.0) dt=0.017",
+      "contact": true,
+      "position": "(-27.06177, -372.1856, -91.31388)"
+    },
+    {
+      "case": "21 rock (0.0, 0.0, -1.0) dt=0.067",
+      "contact": true,
+      "position": "(-27.03617, -372.3941, -91.41702)"
+    },
+    {
+      "case": "21 rock normal (0.0, 0.0, -1.0)",
+      "contact": true,
+      "position": "(-27.06177, -372.1856, -91.31388)"
+    },
+    {
+      "case": "21 rock (0.0, 0.0, 1.0) dt=0.017",
+      "contact": true,
+      "position": "(-26.95755, -372.1579, -110.2772)"
+    },
+    {
+      "case": "21 rock (0.0, 0.0, 1.0) dt=0.067",
+      "contact": true,
+      "position": "(-26.93387, -372.3519, -110.1487)"
+    },
+    {
+      "case": "21 rock normal (0.0, 0.0, 1.0)",
+      "contact": true,
+      "position": "(-26.95755, -372.1579, -110.2772)"
+    },
+    {
+      "case": "21 rock (-0.707107, 0.0, -0.707107) dt=0.017",
+      "contact": true,
+      "position": "(-23.63659, -372.0664, -96.44884)"
+    },
+    {
+      "case": "21 rock (-0.707107, 0.0, -0.707107) dt=0.067",
+      "contact": true,
+      "position": "(-23.67451, -372.1568, -96.71255)"
+    },
+    {
+      "case": "21 rock normal (-0.707107, 0.0, -0.707107)",
+      "contact": true,
+      "position": "(-23.63659, -372.0664, -96.44884)"
+    },
+    {
+      "case": "21 rock (0.57735, -0.57735, 0.57735) dt=0.017",
+      "contact": true,
+      "position": "(-47.61834, -351.498, -120.3383)"
+    },
+    {
+      "case": "21 rock (0.57735, -0.57735, 0.57735) dt=0.067",
+      "contact": true,
+      "position": "(-47.66549, -351.9316, -119.9058)"
+    },
+    {
+      "case": "21 rock normal (0.57735, -0.57735, 0.57735)",
+      "contact": true,
+      "position": "(-47.60565, -351.4493, -120.3411)"
+    },
+    {
+      "case": "21 rock (0.408248, 0.816497, -0.408248) dt=0.017",
+      "contact": true,
+      "position": "(-34.66629, -387.6253, -92.02625)"
+    },
+    {
+      "case": "21 rock (0.408248, 0.816497, -0.408248) dt=0.067",
+      "contact": true,
+      "position": "(-34.68695, -387.523, -92.07024)"
+    },
+    {
+      "case": "21 rock normal (0.408248, 0.816497, -0.408248)",
+      "contact": true,
+      "position": "(-34.66629, -387.6253, -92.02625)"
+    },
+    {
+      "case": "22 kelp (0.0, -1.0, 0.0) dt=0.017",
+      "contact": true,
+      "position": "(-11.9087, -379.9998, -121.5789)"
+    },
+    {
+      "case": "22 kelp (0.0, -1.0, 0.0) dt=0.067",
+      "contact": true,
+      "position": "(-11.9087, -379.9941, -121.5789)"
+    },
+    {
+      "case": "22 kelp normal (0.0, -1.0, 0.0)",
+      "contact": true,
+      "position": "(-11.9087, -379.9, -121.5789)"
+    },
+    {
+      "case": "22 kelp (0.0, 1.0, 0.0) dt=0.017",
+      "contact": true,
+      "position": "(-11.90728, -397.9484, -121.5723)"
+    },
+    {
+      "case": "22 kelp (0.0, 1.0, 0.0) dt=0.067",
+      "contact": true,
+      "position": "(-11.87831, -397.8869, -121.436)"
+    },
+    {
+      "case": "22 kelp normal (0.0, 1.0, 0.0)",
+      "contact": true,
+      "position": "(-11.90728, -397.9484, -121.5723)"
+    },
+    {
+      "case": "22 kelp (-1.0, 0.0, 0.0) dt=0.017",
+      "contact": true,
+      "position": "(-5.981539, -389.0611, -121.578)"
+    },
+    {
+      "case": "22 kelp (-1.0, 0.0, 0.0) dt=0.067",
+      "contact": true,
+      "position": "(-6.014652, -389.156, -121.5334)"
+    },
+    {
+      "case": "22 kelp normal (-1.0, 0.0, 0.0)",
+      "contact": true,
+      "position": "(-5.981539, -389.0611, -121.578)"
+    },
+    {
+      "case": "22 kelp (1.0, 0.0, 0.0) dt=0.017",
+      "contact": true,
+      "position": "(-33.72812, -389.0861, -121.5998)"
+    },
+    {
+      "case": "22 kelp (1.0, 0.0, 0.0) dt=0.067",
+      "contact": true,
+      "position": "(-33.71093, -389.1402, -121.6264)"
+    },
+    {
+      "case": "22 kelp normal (1.0, 0.0, 0.0)",
+      "contact": true,
+      "position": "(-33.72812, -389.0861, -121.5998)"
+    },
+    {
+      "case": "22 kelp (0.0, 0.0, -1.0) dt=0.017",
+      "contact": true,
+      "position": "(-11.91081, -389.0783, -116.3422)"
+    },
+    {
+      "case": "22 kelp (0.0, 0.0, -1.0) dt=0.067",
+      "contact": true,
+      "position": "(-11.91846, -389.1882, -116.3803)"
+    },
+    {
+      "case": "22 kelp normal (0.0, 0.0, -1.0)",
+      "contact": true,
+      "position": "(-11.91081, -389.0783, -116.3422)"
+    },
+    {
+      "case": "22 kelp (0.0, 0.0, 1.0) dt=0.017",
+      "contact": true,
+      "position": "(-11.93448, -389.0632, -159.4744)"
+    },
+    {
+      "case": "22 kelp (0.0, 0.0, 1.0) dt=0.067",
+      "contact": true,
+      "position": "(-11.98107, -389.0844, -159.4523)"
+    },
+    {
+      "case": "22 kelp normal (0.0, 0.0, 1.0)",
+      "contact": true,
+      "position": "(-11.93448, -389.0632, -159.4744)"
+    },
+    {
+      "case": "22 kelp (-0.707107, 0.0, -0.707107) dt=0.017",
+      "contact": true,
+      "position": "(-7.878097, -389.0597, -117.5157)"
+    },
+    {
+      "case": "22 kelp (-0.707107, 0.0, -0.707107) dt=0.067",
+      "contact": true,
+      "position": "(-8.126811, -389.1546, -117.5339)"
+    },
+    {
+      "case": "22 kelp normal (-0.707107, 0.0, -0.707107)",
+      "contact": true,
+      "position": "(-7.878097, -389.0597, -117.5157)"
+    },
+    {
+      "case": "22 kelp (0.57735, -0.57735, 0.57735) dt=0.017",
+      "contact": true,
+      "position": "(-17.12132, -384.1221, -126.7181)"
+    },
+    {
+      "case": "22 kelp (0.57735, -0.57735, 0.57735) dt=0.067",
+      "contact": true,
+      "position": "(-17.09609, -384.352, -126.6399)"
+    },
+    {
+      "case": "22 kelp normal (0.57735, -0.57735, 0.57735)",
+      "contact": true,
+      "position": "(-17.14917, -383.8877, -126.7932)"
+    },
+    {
+      "case": "22 kelp (0.408248, 0.816497, -0.408248) dt=0.017",
+      "contact": true,
+      "position": "(-14.65055, -394.7072, -118.8545)"
+    },
+    {
+      "case": "22 kelp (0.408248, 0.816497, -0.408248) dt=0.067",
+      "contact": true,
+      "position": "(-14.68618, -394.6662, -118.9301)"
+    },
+    {
+      "case": "22 kelp normal (0.408248, 0.816497, -0.408248)",
+      "contact": true,
+      "position": "(-14.65055, -394.7072, -118.8545)"
+    },
+    {
+      "case": "23 driftwood (0.0, -1.0, 0.0) dt=0.017",
+      "contact": true,
+      "position": "(37.80315, -350.0214, -77.80132)"
+    },
+    {
+      "case": "23 driftwood (0.0, -1.0, 0.0) dt=0.067",
+      "contact": true,
+      "position": "(37.80315, -350.03, -77.70968)"
+    },
+    {
+      "case": "23 driftwood normal (0.0, -1.0, 0.0)",
+      "contact": true,
+      "position": "(37.80315, -349.9245, -77.8017)"
+    },
+    {
+      "case": "23 driftwood (0.0, 1.0, 0.0) dt=0.017",
+      "contact": true,
+      "position": "(37.80315, -355.2799, -77.79233)"
+    },
+    {
+      "case": "23 driftwood (0.0, 1.0, 0.0) dt=0.067",
+      "contact": true,
+      "position": "(37.80315, -355.2784, -77.76165)"
+    },
+    {
+      "case": "23 driftwood normal (0.0, 1.0, 0.0)",
+      "contact": true,
+      "position": "(37.80315, -355.2799, -77.79233)"
+    },
+    {
+      "case": "23 driftwood (-1.0, 0.0, 0.0) dt=0.017",
+      "contact": true,
+      "position": "(46.95165, -352.7, -77.8017)"
+    },
+    {
+      "case": "23 driftwood (-1.0, 0.0, 0.0) dt=0.067",
+      "contact": true,
+      "position": "(47.00451, -352.81, -77.8017)"
+    },
+    {
+      "case": "23 driftwood normal (-1.0, 0.0, 0.0)",
+      "contact": true,
+      "position": "(46.95165, -352.7, -77.8017)"
+    },
+    {
+      "case": "23 driftwood (1.0, 0.0, 0.0) dt=0.017",
+      "contact": true,
+      "position": "(28.88261, -352.6534, -77.52977)"
+    },
+    {
+      "case": "23 driftwood (1.0, 0.0, 0.0) dt=0.067",
+      "contact": true,
+      "position": "(29.05876, -352.7033, -77.3921)"
+    },
+    {
+      "case": "23 driftwood normal (1.0, 0.0, 0.0)",
+      "contact": true,
+      "position": "(28.88261, -352.6534, -77.52977)"
+    },
+    {
+      "case": "23 driftwood (0.0, 0.0, -1.0) dt=0.017",
+      "contact": true,
+      "position": "(37.80301, -352.6833, -71.77914)"
+    },
+    {
+      "case": "23 driftwood (0.0, 0.0, -1.0) dt=0.067",
+      "contact": true,
+      "position": "(37.803, -352.7033, -71.77776)"
+    },
+    {
+      "case": "23 driftwood normal (0.0, 0.0, -1.0)",
+      "contact": true,
+      "position": "(37.80301, -352.6833, -71.77914)"
+    },
+    {
+      "case": "23 driftwood (0.0, 0.0, 1.0) dt=0.017",
+      "contact": true,
+      "position": "(37.80267, -352.6833, -84.21808)"
+    },
+    {
+      "case": "23 driftwood (0.0, 0.0, 1.0) dt=0.067",
+      "contact": true,
+      "position": "(37.80265, -352.7033, -84.21945)"
+    },
+    {
+      "case": "23 driftwood normal (0.0, 0.0, 1.0)",
+      "contact": true,
+      "position": "(37.80267, -352.6833, -84.21808)"
+    },
+    {
+      "case": "23 driftwood (-0.707107, 0.0, -0.707107) dt=0.017",
+      "contact": true,
+      "position": "(43.60638, -352.67, -71.9687)"
+    },
+    {
+      "case": "23 driftwood (-0.707107, 0.0, -0.707107) dt=0.067",
+      "contact": true,
+      "position": "(43.53225, -352.7033, -71.95979)"
+    },
+    {
+      "case": "23 driftwood normal (-0.707107, 0.0, -0.707107)",
+      "contact": true,
+      "position": "(43.60638, -352.67, -71.9687)"
+    },
+    {
+      "case": "23 driftwood (0.57735, -0.57735, 0.57735) dt=0.017",
+      "contact": true,
+      "position": "(35.83625, -350.7032, -79.81407)"
+    },
+    {
+      "case": "23 driftwood (0.57735, -0.57735, 0.57735) dt=0.067",
+      "contact": true,
+      "position": "(36.17753, -350.701, -79.83334)"
+    },
+    {
+      "case": "23 driftwood normal (0.57735, -0.57735, 0.57735)",
+      "contact": true,
+      "position": "(35.75677, -350.6307, -79.84809)"
+    },
+    {
+      "case": "23 driftwood (0.408248, 0.816497, -0.408248) dt=0.017",
+      "contact": true,
+      "position": "(36.73724, -354.9976, -76.7177)"
+    },
+    {
+      "case": "23 driftwood (0.408248, 0.816497, -0.408248) dt=0.067",
+      "contact": true,
+      "position": "(36.91019, -355.0316, -76.79987)"
+    },
+    {
+      "case": "23 driftwood normal (0.408248, 0.816497, -0.408248)",
+      "contact": true,
+      "position": "(36.73724, -354.9976, -76.7177)"
+    },
+    {
+      "case": "24 jelly (0.0, -1.0, 0.0) dt=0.017",
+      "contact": true,
+      "position": "(30.21065, -392.0147, -110.8295)"
+    },
+    {
+      "case": "24 jelly (0.0, -1.0, 0.0) dt=0.067",
+      "contact": true,
+      "position": "(30.29683, -392.0301, -110.7604)"
+    },
+    {
+      "case": "24 jelly normal (0.0, -1.0, 0.0)",
+      "contact": true,
+      "position": "(30.21, -391.9193, -110.83)"
+    },
+    {
+      "case": "24 jelly (0.0, 1.0, 0.0) dt=0.017",
+      "contact": true,
+      "position": "(30.20031, -394.1418, -110.8385)"
+    },
+    {
+      "case": "24 jelly (0.0, 1.0, 0.0) dt=0.067",
+      "contact": true,
+      "position": "(30.16893, -394.1369, -110.8658)"
+    },
+    {
+      "case": "24 jelly normal (0.0, 1.0, 0.0)",
+      "contact": true,
+      "position": "(30.20031, -394.1418, -110.8385)"
+    },
+    {
+      "case": "24 jelly (-1.0, 0.0, 0.0) dt=0.017",
+      "contact": true,
+      "position": "(49.03614, -395.3002, -110.8568)"
+    },
+    {
+      "case": "24 jelly (-1.0, 0.0, 0.0) dt=0.067",
+      "contact": true,
+      "position": "(49.03654, -395.3203, -110.857)"
+    },
+    {
+      "case": "24 jelly normal (-1.0, 0.0, 0.0)",
+      "contact": true,
+      "position": "(49.03614, -395.3002, -110.8568)"
+    },
+    {
+      "case": "24 jelly (1.0, 0.0, 0.0) dt=0.017",
+      "contact": true,
+      "position": "(24.67698, -395.25, -110.825)"
+    },
+    {
+      "case": "24 jelly (1.0, 0.0, 0.0) dt=0.067",
+      "contact": true,
+      "position": "(24.69033, -395.2134, -110.8106)"
+    },
+    {
+      "case": "24 jelly normal (1.0, 0.0, 0.0)",
+      "contact": true,
+      "position": "(24.67698, -395.25, -110.825)"
+    },
+    {
+      "case": "24 jelly (0.0, 0.0, -1.0) dt=0.017",
+      "contact": true,
+      "position": "(30.21496, -395.25, -105.6796)"
+    },
+    {
+      "case": "24 jelly (0.0, 0.0, -1.0) dt=0.067",
+      "contact": true,
+      "position": "(30.22937, -395.2134, -105.6929)"
+    },
+    {
+      "case": "24 jelly normal (0.0, 0.0, -1.0)",
+      "contact": true,
+      "position": "(30.21496, -395.25, -105.6796)"
+    },
+    {
+      "case": "24 jelly (0.0, 0.0, 1.0) dt=0.017",
+      "contact": true,
+      "position": "(30.21496, -395.25, -116.3204)"
+    },
+    {
+      "case": "24 jelly (0.0, 0.0, 1.0) dt=0.067",
+      "contact": true,
+      "position": "(30.22937, -395.2134, -116.3071)"
+    },
+    {
+      "case": "24 jelly normal (0.0, 0.0, 1.0)",
+      "contact": true,
+      "position": "(30.21496, -395.25, -116.3204)"
+    },
+    {
+      "case": "24 jelly (-0.707107, 0.0, -0.707107) dt=0.017",
+      "contact": true,
+      "position": "(50.30613, -395.2794, -90.80538)"
+    },
+    {
+      "case": "24 jelly (-0.707107, 0.0, -0.707107) dt=0.067",
+      "contact": true,
+      "position": "(50.2317, -395.3543, -91.09127)"
+    },
+    {
+      "case": "24 jelly normal (-0.707107, 0.0, -0.707107)",
+      "contact": true,
+      "position": "(50.30613, -395.2794, -90.80538)"
+    },
+    {
+      "case": "24 jelly (0.57735, -0.57735, 0.57735) dt=0.017",
+      "contact": true,
+      "position": "(27.57524, -392.664, -113.465)"
+    },
+    {
+      "case": "24 jelly (0.57735, -0.57735, 0.57735) dt=0.067",
+      "contact": true,
+      "position": "(27.56093, -392.6789, -113.4797)"
+    },
+    {
+      "case": "24 jelly normal (0.57735, -0.57735, 0.57735)",
+      "contact": true,
+      "position": "(27.54581, -392.6097, -113.4942)"
+    },
+    {
+      "case": "24 jelly (0.408248, 0.816497, -0.408248) dt=0.017",
+      "contact": true,
+      "position": "(30.84082, -394.2502, -111.4674)"
+    },
+    {
+      "case": "24 jelly (0.408248, 0.816497, -0.408248) dt=0.067",
+      "contact": true,
+      "position": "(30.98463, -394.2862, -111.6271)"
+    },
+    {
+      "case": "24 jelly normal (0.408248, 0.816497, -0.408248)",
+      "contact": true,
+      "position": "(30.84082, -394.2502, -111.4674)"
+    },
+    {
+      "case": "25 rock (0.0, -1.0, 0.0) dt=0.017",
+      "contact": true,
+      "position": "(5.563351, -449.9998, -138.2402)"
+    },
+    {
+      "case": "25 rock (0.0, -1.0, 0.0) dt=0.067",
+      "contact": true,
+      "position": "(5.563351, -449.9941, -138.2402)"
+    },
+    {
+      "case": "25 rock normal (0.0, -1.0, 0.0)",
+      "contact": true,
+      "position": "(5.563351, -449.9, -138.2402)"
+    },
+    {
+      "case": "25 rock (0.0, 1.0, 0.0) dt=0.017",
+      "contact": true,
+      "position": "(5.566558, -467.9322, -138.2397)"
+    },
+    {
+      "case": "25 rock (0.0, 1.0, 0.0) dt=0.067",
+      "contact": true,
+      "position": "(5.692806, -467.8929, -138.2216)"
+    },
+    {
+      "case": "25 rock normal (0.0, 1.0, 0.0)",
+      "contact": true,
+      "position": "(5.566558, -467.9322, -138.2397)"
+    },
+    {
+      "case": "25 rock (-1.0, 0.0, 0.0) dt=0.017",
+      "contact": true,
+      "position": "(18.32536, -457.6235, -138.3908)"
+    },
+    {
+      "case": "25 rock (-1.0, 0.0, 0.0) dt=0.067",
+      "contact": true,
+      "position": "(18.09667, -457.7455, -138.5285)"
+    },
+    {
+      "case": "25 rock normal (-1.0, 0.0, 0.0)",
+      "contact": true,
+      "position": "(18.32536, -457.6235, -138.3908)"
+    },
+    {
+      "case": "25 rock (1.0, 0.0, 0.0) dt=0.017",
+      "contact": true,
+      "position": "(-5.56867, -457.5717, -138.208)"
+    },
+    {
+      "case": "25 rock (1.0, 0.0, 0.0) dt=0.067",
+      "contact": true,
+      "position": "(-5.418144, -457.7022, -138.0673)"
+    },
+    {
+      "case": "25 rock normal (1.0, 0.0, 0.0)",
+      "contact": true,
+      "position": "(-5.56867, -457.5717, -138.208)"
+    },
+    {
+      "case": "25 rock (0.0, 0.0, -1.0) dt=0.017",
+      "contact": true,
+      "position": "(5.560532, -457.5562, -128.7708)"
+    },
+    {
+      "case": "25 rock (0.0, 0.0, -1.0) dt=0.067",
+      "contact": true,
+      "position": "(5.46018, -457.708, -128.8742)"
+    },
+    {
+      "case": "25 rock normal (0.0, 0.0, -1.0)",
+      "contact": true,
+      "position": "(5.560532, -457.5562, -128.7708)"
+    },
+    {
+      "case": "25 rock (0.0, 0.0, 1.0) dt=0.017",
+      "contact": true,
+      "position": "(5.538544, -457.5925, -147.3553)"
+    },
+    {
+      "case": "25 rock (0.0, 0.0, 1.0) dt=0.067",
+      "contact": true,
+      "position": "(5.461557, -457.7641, -147.2419)"
+    },
+    {
+      "case": "25 rock normal (0.0, 0.0, 1.0)",
+      "contact": true,
+      "position": "(5.538544, -457.5925, -147.3553)"
+    },
+    {
+      "case": "25 rock (-0.707107, 0.0, -0.707107) dt=0.017",
+      "contact": true,
+      "position": "(12.55148, -457.5842, -131.2317)"
+    },
+    {
+      "case": "25 rock (-0.707107, 0.0, -0.707107) dt=0.067",
+      "contact": true,
+      "position": "(12.44082, -457.7589, -131.2604)"
+    },
+    {
+      "case": "25 rock normal (-0.707107, 0.0, -0.707107)",
+      "contact": true,
+      "position": "(12.55148, -457.5842, -131.2317)"
+    },
+    {
+      "case": "25 rock (0.57735, -0.57735, 0.57735) dt=0.017",
+      "contact": true,
+      "position": "(-11.06938, -441.0494, -154.8359)"
+    },
+    {
+      "case": "25 rock (0.57735, -0.57735, 0.57735) dt=0.067",
+      "contact": true,
+      "position": "(-10.93234, -441.6577, -154.4906)"
+    },
+    {
+      "case": "25 rock normal (0.57735, -0.57735, 0.57735)",
+      "contact": true,
+      "position": "(-11.0828, -441.0008, -154.8379)"
+    },
+    {
+      "case": "25 rock (0.408248, 0.816497, -0.408248) dt=0.017",
+      "contact": true,
+      "position": "(1.491193, -465.8966, -134.1699)"
+    },
+    {
+      "case": "25 rock (0.408248, 0.816497, -0.408248) dt=0.067",
+      "contact": true,
+      "position": "(1.491002, -465.9159, -134.1984)"
+    },
+    {
+      "case": "25 rock normal (0.408248, 0.816497, -0.408248)",
+      "contact": true,
+      "position": "(1.491193, -465.8966, -134.1699)"
     },
     {
       "case": "6cm thin floor E",
@@ -1316,6 +2486,724 @@
       "position": "(-58.78648, -41.10661, 4.895925)"
     }
   ],
-  "checks": 375,
-  "failures": 0
+  "checks": 689,
+  "failures": 0,
+  "oxygen_choices": [
+    {
+      "arrived": true,
+      "starting_oxygen": 100.0,
+      "target": 8
+    },
+    {
+      "arrived": true,
+      "starting_oxygen": 100.0,
+      "target": 19
+    },
+    {
+      "arrived": false,
+      "starting_oxygen": 30.0,
+      "target": 8
+    },
+    {
+      "arrived": true,
+      "starting_oxygen": 30.0,
+      "target": 19
+    }
+  ],
+  "routes": [
+    {
+      "complete": true,
+      "legs": [
+        {
+          "kind": "cliff",
+          "seconds": 8.53,
+          "to": 1
+        },
+        {
+          "kind": "kelp",
+          "seconds": 8.62,
+          "to": 2
+        },
+        {
+          "kind": "driftwood",
+          "seconds": 9.3,
+          "to": 3
+        },
+        {
+          "kind": "jelly",
+          "seconds": 10.27,
+          "to": 4
+        },
+        {
+          "kind": "buoy",
+          "seconds": 8.92,
+          "to": 5
+        },
+        {
+          "kind": "rock",
+          "seconds": 9.67,
+          "to": 6
+        },
+        {
+          "kind": "kelp",
+          "seconds": 9.88,
+          "to": 7
+        },
+        {
+          "kind": "rock",
+          "seconds": 10.17,
+          "to": 8
+        },
+        {
+          "kind": "rock",
+          "seconds": 11.1,
+          "to": 9
+        },
+        {
+          "kind": "cliff",
+          "seconds": 9.62,
+          "to": 20
+        },
+        {
+          "kind": "rock",
+          "seconds": 9.58,
+          "to": 21
+        },
+        {
+          "kind": "kelp",
+          "seconds": 5.43,
+          "to": 22
+        },
+        {
+          "kind": "rock",
+          "seconds": 16.22,
+          "to": 25
+        }
+      ],
+      "minimum_oxygen": 25.5333333333338,
+      "name": "platforms",
+      "seconds": 127.3
+    },
+    {
+      "complete": true,
+      "legs": [
+        {
+          "kind": "kelp",
+          "seconds": 15.28,
+          "to": 2
+        },
+        {
+          "kind": "jelly",
+          "seconds": 18.73,
+          "to": 4
+        },
+        {
+          "kind": "rock",
+          "seconds": 18.62,
+          "to": 6
+        },
+        {
+          "kind": "rock",
+          "seconds": 18.47,
+          "to": 8
+        },
+        {
+          "kind": "rock",
+          "seconds": 11.1,
+          "to": 9
+        },
+        {
+          "kind": "cliff",
+          "seconds": 9.62,
+          "to": 20
+        },
+        {
+          "kind": "rock",
+          "seconds": 9.58,
+          "to": 21
+        },
+        {
+          "kind": "kelp",
+          "seconds": 5.43,
+          "to": 22
+        },
+        {
+          "kind": "rock",
+          "seconds": 16.22,
+          "to": 25
+        }
+      ],
+      "minimum_oxygen": 31.2666666666671,
+      "name": "direct_oxygen",
+      "seconds": 123.05
+    },
+    {
+      "complete": true,
+      "legs": [
+        {
+          "kind": "cliff",
+          "seconds": 8.53,
+          "to": 1
+        },
+        {
+          "kind": "kelp",
+          "seconds": 8.62,
+          "to": 2
+        },
+        {
+          "kind": "driftwood",
+          "seconds": 9.62,
+          "to": 10
+        },
+        {
+          "kind": "jelly",
+          "seconds": 13.08,
+          "to": 4
+        },
+        {
+          "kind": "buoy",
+          "seconds": 9.5,
+          "to": 5
+        },
+        {
+          "kind": "rock",
+          "seconds": 10.03,
+          "to": 6
+        },
+        {
+          "kind": "kelp",
+          "seconds": 9.88,
+          "to": 7
+        },
+        {
+          "kind": "rock",
+          "seconds": 10.18,
+          "to": 8
+        },
+        {
+          "kind": "rock",
+          "seconds": 11.1,
+          "to": 9
+        },
+        {
+          "kind": "cliff",
+          "seconds": 9.62,
+          "to": 20
+        },
+        {
+          "kind": "rock",
+          "seconds": 9.58,
+          "to": 21
+        },
+        {
+          "kind": "kelp",
+          "seconds": 5.43,
+          "to": 22
+        },
+        {
+          "kind": "rock",
+          "seconds": 16.22,
+          "to": 25
+        }
+      ],
+      "minimum_oxygen": 25.5333333333338,
+      "name": "extra_oxygen",
+      "seconds": 131.4
+    },
+    {
+      "complete": true,
+      "legs": [
+        {
+          "kind": "cliff",
+          "seconds": 8.53,
+          "to": 1
+        },
+        {
+          "kind": "kelp",
+          "seconds": 8.62,
+          "to": 2
+        },
+        {
+          "kind": "driftwood",
+          "seconds": 9.62,
+          "to": 10
+        },
+        {
+          "kind": "kelp",
+          "seconds": 10.47,
+          "to": 11
+        },
+        {
+          "kind": "rock",
+          "seconds": 13.22,
+          "to": 6
+        },
+        {
+          "kind": "rock",
+          "seconds": 12.45,
+          "to": 12
+        },
+        {
+          "kind": "rock",
+          "seconds": 10.28,
+          "to": 8
+        },
+        {
+          "kind": "rock",
+          "seconds": 11.1,
+          "to": 9
+        },
+        {
+          "kind": "cliff",
+          "seconds": 9.62,
+          "to": 20
+        },
+        {
+          "kind": "rock",
+          "seconds": 9.58,
+          "to": 21
+        },
+        {
+          "kind": "kelp",
+          "seconds": 5.43,
+          "to": 22
+        },
+        {
+          "kind": "rock",
+          "seconds": 16.22,
+          "to": 25
+        }
+      ],
+      "minimum_oxygen": 37.7333333333341,
+      "name": "safe_gardens",
+      "seconds": 125.13
+    },
+    {
+      "complete": true,
+      "legs": [
+        {
+          "kind": "kelp",
+          "seconds": 6.57,
+          "to": 2
+        },
+        {
+          "kind": "driftwood",
+          "seconds": 4.8,
+          "to": 10
+        },
+        {
+          "kind": "rock",
+          "seconds": 8.73,
+          "to": 6
+        },
+        {
+          "kind": "rock",
+          "seconds": 7.93,
+          "to": 8
+        },
+        {
+          "kind": "rock",
+          "seconds": 5.75,
+          "to": 9
+        },
+        {
+          "kind": "cliff",
+          "seconds": 6.3,
+          "to": 20
+        },
+        {
+          "kind": "rock",
+          "seconds": 5.1,
+          "to": 21
+        },
+        {
+          "kind": "kelp",
+          "seconds": 5.42,
+          "to": 22
+        },
+        {
+          "kind": "rock",
+          "seconds": 6.53,
+          "to": 25
+        }
+      ],
+      "minimum_oxygen": 30.733333333333,
+      "name": "fast_drop",
+      "seconds": 57.13
+    },
+    {
+      "complete": true,
+      "legs": [
+        {
+          "kind": "cliff",
+          "seconds": 4.85,
+          "to": 1
+        },
+        {
+          "kind": "kelp",
+          "seconds": 5.02,
+          "to": 2
+        },
+        {
+          "kind": "driftwood",
+          "seconds": 4.82,
+          "to": 10
+        },
+        {
+          "kind": "kelp",
+          "seconds": 5.13,
+          "to": 11
+        },
+        {
+          "kind": "rock",
+          "seconds": 6.43,
+          "to": 6
+        },
+        {
+          "kind": "rock",
+          "seconds": 7.92,
+          "to": 8
+        },
+        {
+          "kind": "rock",
+          "seconds": 5.75,
+          "to": 9
+        },
+        {
+          "kind": "cliff",
+          "seconds": 6.3,
+          "to": 20
+        },
+        {
+          "kind": "rock",
+          "seconds": 5.1,
+          "to": 21
+        },
+        {
+          "kind": "kelp",
+          "seconds": 5.42,
+          "to": 22
+        },
+        {
+          "kind": "rock",
+          "seconds": 6.53,
+          "to": 25
+        }
+      ],
+      "minimum_oxygen": 45.2,
+      "name": "current_gardens",
+      "seconds": 63.27
+    },
+    {
+      "complete": true,
+      "legs": [
+        {
+          "kind": "cliff",
+          "seconds": 8.53,
+          "to": 1
+        },
+        {
+          "kind": "kelp",
+          "seconds": 8.62,
+          "to": 2
+        },
+        {
+          "kind": "driftwood",
+          "seconds": 9.62,
+          "to": 10
+        },
+        {
+          "kind": "kelp",
+          "seconds": 10.47,
+          "to": 11
+        },
+        {
+          "kind": "kelp",
+          "seconds": 10.67,
+          "to": 18
+        },
+        {
+          "kind": "cliff",
+          "seconds": 5.25,
+          "to": 13
+        },
+        {
+          "kind": "rock",
+          "seconds": 6.17,
+          "to": 14
+        },
+        {
+          "kind": "rock",
+          "seconds": 8.53,
+          "to": 15
+        },
+        {
+          "kind": "rock",
+          "seconds": 10.15,
+          "to": 8
+        },
+        {
+          "kind": "rock",
+          "seconds": 11.08,
+          "to": 9
+        },
+        {
+          "kind": "cliff",
+          "seconds": 9.62,
+          "to": 20
+        },
+        {
+          "kind": "rock",
+          "seconds": 9.58,
+          "to": 21
+        },
+        {
+          "kind": "kelp",
+          "seconds": 5.43,
+          "to": 22
+        },
+        {
+          "kind": "rock",
+          "seconds": 16.22,
+          "to": 25
+        }
+      ],
+      "minimum_oxygen": 37.7333333333341,
+      "name": "cliff_walk",
+      "seconds": 129.93
+    },
+    {
+      "complete": true,
+      "legs": [
+        {
+          "kind": "kelp",
+          "seconds": 15.28,
+          "to": 2
+        },
+        {
+          "kind": "jelly",
+          "seconds": 18.73,
+          "to": 4
+        },
+        {
+          "kind": "buoy",
+          "seconds": 9.05,
+          "to": 5
+        },
+        {
+          "kind": "rock",
+          "seconds": 10.05,
+          "to": 6
+        },
+        {
+          "kind": "jelly",
+          "seconds": 10.27,
+          "to": 17
+        },
+        {
+          "kind": "driftwood",
+          "seconds": 6.5,
+          "to": 16
+        },
+        {
+          "kind": "rock",
+          "seconds": 7.03,
+          "to": 8
+        },
+        {
+          "kind": "rock",
+          "seconds": 11.08,
+          "to": 9
+        },
+        {
+          "kind": "cliff",
+          "seconds": 9.62,
+          "to": 20
+        },
+        {
+          "kind": "rock",
+          "seconds": 9.58,
+          "to": 21
+        },
+        {
+          "kind": "kelp",
+          "seconds": 5.43,
+          "to": 22
+        },
+        {
+          "kind": "rock",
+          "seconds": 16.22,
+          "to": 25
+        }
+      ],
+      "minimum_oxygen": 29.3333333333338,
+      "name": "offshore_life",
+      "seconds": 128.85
+    },
+    {
+      "complete": true,
+      "legs": [
+        {
+          "kind": "kelp",
+          "seconds": 15.28,
+          "to": 2
+        },
+        {
+          "kind": "driftwood",
+          "seconds": 9.62,
+          "to": 10
+        },
+        {
+          "kind": "rock",
+          "seconds": 22.77,
+          "to": 6
+        },
+        {
+          "kind": "rock",
+          "seconds": 5.23,
+          "to": 19
+        },
+        {
+          "kind": "rock",
+          "seconds": 7.73,
+          "to": 15
+        },
+        {
+          "kind": "rock",
+          "seconds": 10.15,
+          "to": 8
+        },
+        {
+          "kind": "rock",
+          "seconds": 11.08,
+          "to": 9
+        },
+        {
+          "kind": "cliff",
+          "seconds": 9.62,
+          "to": 20
+        },
+        {
+          "kind": "rock",
+          "seconds": 9.58,
+          "to": 21
+        },
+        {
+          "kind": "kelp",
+          "seconds": 5.43,
+          "to": 22
+        },
+        {
+          "kind": "rock",
+          "seconds": 16.22,
+          "to": 25
+        }
+      ],
+      "minimum_oxygen": 16.3333333333338,
+      "name": "reef_refuge",
+      "seconds": 122.72
+    },
+    {
+      "complete": true,
+      "legs": [
+        {
+          "kind": "kelp",
+          "seconds": 6.57,
+          "to": 2
+        },
+        {
+          "kind": "jelly",
+          "seconds": 9.47,
+          "to": 4
+        },
+        {
+          "kind": "buoy",
+          "seconds": 7.43,
+          "to": 5
+        },
+        {
+          "kind": "rock",
+          "seconds": 5.52,
+          "to": 6
+        },
+        {
+          "kind": "jelly",
+          "seconds": 8.63,
+          "to": 17
+        },
+        {
+          "kind": "driftwood",
+          "seconds": 4.63,
+          "to": 16
+        },
+        {
+          "kind": "rock",
+          "seconds": 6.08,
+          "to": 8
+        },
+        {
+          "kind": "rock",
+          "seconds": 5.73,
+          "to": 9
+        },
+        {
+          "kind": "driftwood",
+          "seconds": 5.82,
+          "to": 23
+        },
+        {
+          "kind": "jelly",
+          "seconds": 7.62,
+          "to": 24
+        },
+        {
+          "kind": "rock",
+          "seconds": 6.3,
+          "to": 25
+        }
+      ],
+      "minimum_oxygen": 11.2333333333327,
+      "name": "rift_offshore",
+      "seconds": 73.8
+    },
+    {
+      "complete": true,
+      "legs": [
+        {
+          "kind": "kelp",
+          "seconds": 6.57,
+          "to": 2
+        },
+        {
+          "kind": "driftwood",
+          "seconds": 4.8,
+          "to": 10
+        },
+        {
+          "kind": "rock",
+          "seconds": 8.73,
+          "to": 6
+        },
+        {
+          "kind": "rock",
+          "seconds": 7.93,
+          "to": 8
+        },
+        {
+          "kind": "driftwood",
+          "seconds": 10.43,
+          "to": 23
+        },
+        {
+          "kind": "rock",
+          "seconds": 11.55,
+          "to": 25
+        }
+      ],
+      "minimum_oxygen": 19.1000000000007,
+      "name": "rift_shortcut",
+      "seconds": 50.02
+    }
+  ],
+  "scope": "Actual playable scene and swept capsule; scripted inputs, not human fun."
 }

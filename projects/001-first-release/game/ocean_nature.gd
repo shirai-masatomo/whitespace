@@ -254,9 +254,13 @@ static func landscape(parent: Node3D) -> void:
 	var bridge := Geo.put(parent, Geo.rock(Vector2(60, 25), 12, 73), mat, Vector3(90, -95, -145))
 	bridge.rotation.z = .1
 	# Increasing density on one side leaves an open offshore bypass.
-	for form in Layout.Reef.geology():
+	for form in Layout.Reef.geology() + Layout.Rift.geology():
 		var reef := Geo.put(parent, Geo.boulder(form.size, form.seed), mat, form.point)
 		reef.name = "ApproachingReef%d" % form.seed
 		kelp(parent, form.point + Vector3(6, -8, 2), 9, form.seed)
 	var roof := Geo.put(parent, Geo.rock(Vector2(28, 18), 6, 912), mat, Vector3(-62, -194, -104))
 	roof.name = "WalkThroughArch"
+	var deep_arch := Geo.put(
+		parent, Geo.rock(Vector2(32, 20), 7, 966), mat, Vector3(-25, -350, -115)
+	)
+	deep_arch.name = "RiftRoof"

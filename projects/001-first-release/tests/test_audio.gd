@@ -82,7 +82,19 @@ func run() -> void:
 	for player in sound.players.values():
 		check(player.volume_linear == 0, "Mute reaches every audio layer")
 	sound.suspend(true)
-	check(sound.players.underwater.stream_paused, "Pause also pauses the ambient loop")
+	check(
+		(
+			sound.suspended
+			and (
+				sound.players.underwater.stream_paused
+				if sound.output_enabled
+				else not sound.players.underwater.playing
+			)
+		),
+		"Pause silences playback or keeps Dummy inactive"
+	)
+	if AudioServer.get_driver_name() == "Dummy":
+		check(not sound.output_enabled, "Automation never queues playback on the Dummy driver")
 	var before := sound.events.size()
 	sound.observe(model, 10)
 	check(sound.events.size() == before, "Paused game cannot produce more cues")

@@ -5,6 +5,7 @@ const JELLY_SEGMENTS := 48
 const BUOY_TOP_SCALE := .54
 const BUOY_SEGMENTS := 36
 const Reef = preload("res://game/reef_layout.gd")
+const Rift = preload("res://game/rift_layout.gd")
 
 
 static func platforms() -> Array[Dictionary]:
@@ -18,7 +19,7 @@ static func platforms() -> Array[Dictionary]:
 		make("酸素 03", Vector3(-12, -190, -84), Vector2(18, 16), true),
 		make("深海の棚", Vector3(-32, -225, -60), Vector2(14, 12)),
 		make("酸素 04", Vector3(-7, -260, -36), Vector2(18, 16), true),
-		make("海底の灯", Vector3(20, -300, -55), Vector2(22, 20), false, true),
+		make("岩礁の灯", Vector3(20, -300, -55), Vector2(22, 20), true),
 		make("寄り道の酸素", Vector3(-28, -95, -52), Vector2(16, 14), true),
 		make("潮待ちの藻庭", Vector3(-43, -140, -56), Vector2(17, 15), true),
 		make("静かな藻の棚", Vector3(-42, -225, -32), Vector2(17, 15), true),
@@ -48,7 +49,7 @@ static func platforms() -> Array[Dictionary]:
 		"浮遊岩",
 		"海藻の棚",
 		"深層の藻",
-		"海底の灯",
+		"岩礁の灯",
 		"流木の藻",
 		"潮待ちの藻庭",
 		"静かな藻の棚"
@@ -58,13 +59,13 @@ static func platforms() -> Array[Dictionary]:
 		data[index]["shape_seed"] = index + 8
 		data[index]["label"] = names[index]
 		data[index]["round"] = kinds[index] not in ["pier", "driftwood"]
-	for entry in Reef.platforms():
+	for entry in Reef.platforms() + Rift.platforms():
 		var added := make(
 			entry.label,
 			entry.point,
 			entry.size,
 			entry.get("oxygen", false),
-			false,
+			entry.get("goal", false),
 			entry.get("sway", Vector2.ZERO)
 		)
 		added["kind"] = entry.kind
@@ -94,7 +95,7 @@ static func make(
 
 
 static func routes() -> Dictionary:
-	return {
+	var result := {
 		"platforms": [1, 2, 3, 4, 5, 6, 7, 8, 9],
 		"direct_oxygen": [2, 4, 6, 8, 9],
 		"extra_oxygen": [1, 2, 10, 4, 5, 6, 7, 8, 9],
@@ -105,10 +106,36 @@ static func routes() -> Dictionary:
 		"offshore_life": [2, 4, 5, 6, 17, 16, 8, 9],
 		"reef_refuge": [2, 10, 6, 19, 15, 8, 9],
 	}
+	for route in result.values():
+		route.append_array(finish_route())
+	result["rift_offshore"] = [2, 4, 5, 6, 17, 16, 8, 9, 23, 24, 25]
+	result["rift_shortcut"] = [2, 10, 6, 8, 23, 25]
+	return result
+
+
+static func finish_route() -> Array[int]:
+	return [20, 21, 22, 25]
+
+
+static func fast_routes() -> Array[String]:
+	return ["fast_drop", "current_gardens", "rift_offshore", "rift_shortcut"]
+
+
+static func goal_index() -> int:
+	var entries := platforms()
+	for index in range(entries.size()):
+		if entries[index].goal:
+			return index
+	return -1
 
 
 static func current_zones() -> Array[Dictionary]:
 	return [
+		{
+			"center": Vector3(31, -374, -93),
+			"radius": Vector3(20, 18, 19),
+			"flow": Vector3(-.7, 2.8, -2)
+		},
 		{
 			"center": Vector3(30, -232, -80),
 			"radius": Vector3(18, 20, 16),

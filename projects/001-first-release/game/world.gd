@@ -81,7 +81,7 @@ func _make_ocean() -> void:
 	seabed.subdivide_depth = 160
 	var sand := ShaderMaterial.new()
 	sand.shader = preload("res://game/shaders/seabed.gdshader")
-	Geo.put(self, seabed, sand, Vector3(0, -370, 0))
+	Geo.put(self, seabed, sand, Vector3(0, -520, 0))
 	# Soft light ribbons support the volumetric light; also provide the GL fallback.
 	if true:
 		for i in range(7):

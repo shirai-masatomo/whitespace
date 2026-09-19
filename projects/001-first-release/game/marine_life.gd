@@ -60,7 +60,7 @@ func update(player: Vector3, elapsed: float) -> void:
 	for index in range(rays.size()):
 		var phase := elapsed * .075 + index * .65
 		# The school crosses the open water toward an optional rock-garden entrance.
-		var natural := Vector3(-30 + cos(phase) * 25, -143 + sin(phase) * 12, -83 + sin(phase) * 20)
+		var natural := Vector3(-20 + cos(phase) * 18, -122 + sin(phase) * 12, -78 + sin(phase) * 12)
 		var separation := natural - player
 		var avoidance := separation.normalized() * maxf(0, 5 - separation.length())
 		rays[index].position = natural + avoidance
