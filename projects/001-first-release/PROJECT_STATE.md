@@ -15,7 +15,7 @@
 - `check -BuildFolder windows-preview`: format/lint/依存整合性、ルール274 / シーン30チェック、3経路のevaluate、Windows export・EXE起動を検証。
 - `visual`: 海上/入水/浅海の光/広い海/足場/自然沈降/急降下/浮上/補給/深海、救助・クリア・再プレイ・960×540を実GPUで撮影・確認。RTX 4070 SUPER / OpenGL 3.3。
 - 通常87.50秒 / 補給直行82.33秒 / 寄り道91.43秒で自動完走。最低酸素24.27%以上。代表救助90→60m・2.27秒で操作復帰。
-- 現行差分のCIリンクはpush後に追記。詳細は [REVIEW_PACKET](REVIEW_PACKET.md)、自己レビューは [AI_REVIEW](AI_REVIEW.md)。
+- CI: [Windows Actions #35421555882](https://github.com/shirai-masatomo/whitespace/actions/runs/35421555882) 成功（最終コード `ea6706d`）。setup/check・配布ZIP・測定ログの保存まで完了。詳細は [REVIEW_PACKET](REVIEW_PACKET.md)、自己レビューは [AI_REVIEW](AI_REVIEW.md)。
 
 ## 次の判断と課題
 
