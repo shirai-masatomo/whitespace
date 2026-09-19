@@ -26,4 +26,4 @@
 - デバッグ表示の占有、無個性な板、空虚な遠景は改善。光の奥行き・主人公の存在・流れは確認できるが、Only Up系市販品と並ぶ品質とはまだ判定しない。
 - Godotに移行を要する障害は未確認。Forward+は体積霧/局所散乱が加わり、GLは軽い代わりに近似光線。低性能GPU、長時間/高解像度は未検証。
 
-[REVIEW_PACKET](REVIEW_PACKET.md)に画像・実測・検証範囲。HUMAN_REVIEW解除を維持してDD-034→035から続ける。
+[REVIEW_PACKET](REVIEW_PACKET.md)に画像・実測・検証範囲。HUMAN_REVIEW解除を維持して新規HUMAN_DIRECTIONの酸素藻/複数経路をDD-036→037へ最優先で落とし、その後DD-034→035を続ける。
