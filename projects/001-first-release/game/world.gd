@@ -37,6 +37,7 @@ func _ready() -> void:
 	discoveries = Discoveries.new()
 	add_child(discoveries)
 	add_child(Playground.new())
+	life.make_shoal(Vector3(84, -53, -63), 24)
 	for plant in Playground.Rules.PLANTS:
 		effects.vent(plant)
 		life.make_shoal(plant + Vector3.UP * 4, 28)

@@ -20,13 +20,15 @@ func tick(axis: Vector2 = Vector2.ZERO, descent: float = 0, ascend: bool = false
 		await render_step()
 
 
-func swim(point: Vector3, seconds: float = 25.0, riding: bool = false) -> bool:
+func swim(
+	point: Vector3, seconds: float = 25.0, riding: bool = false, allow_fast: bool = true
+) -> bool:
 	for frame in range(int(seconds * 60)):
 		var difference: Vector3 = point - game.model.position
 		if difference.length() < (6 if riding else 3):
 			return true
 		var axis: Vector2 = (Vector2(difference.x, difference.z) / 4).limit_length()
-		var descent := 1.0 if difference.y < -3 else 0.0
+		var descent := 1.0 if difference.y < -3 and allow_fast else 0.0
 		if riding:
 			descent = 0
 		await tick(axis, descent, difference.y > 1)

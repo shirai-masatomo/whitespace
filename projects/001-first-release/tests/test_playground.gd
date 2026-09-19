@@ -1,5 +1,11 @@
 extends "res://tests/test_discovery.gd"
 const Reef = preload("res://game/playground_rules.gd")
+var minimum_oxygen := 100.0
+
+
+func tick(axis: Vector2 = Vector2.ZERO, descent: float = 0, ascend: bool = false) -> void:
+	await super.tick(axis, descent, ascend)
+	minimum_oxygen = minf(minimum_oxygen, game.model.oxygen)
 
 
 func run() -> void:
@@ -42,6 +48,7 @@ func run() -> void:
 	check(game.model.terrain_grounded, "Player can stand inside the cavern")
 	check(game.model.oxygen == 100, "Air chamber permits route planning without oxygen loss")
 	await photo("47-air-cave", Reef.CAVE_END)
+	await photo("54-cave-window", Vector3(85, -49, -61))
 	start = game.model.position
 	for frame in range(70):
 		await tick(Vector2.RIGHT)
@@ -51,9 +58,20 @@ func run() -> void:
 	await photo("48-other-exit", Vector3(45, -100, -60))
 	observations.cavern_journey_seconds = game.model.elapsed
 	observations.horizontal_extent = game.model.position.x
+	check(await swim(Vector3(144, -74, -80), 25, false, false), "Leave the cave into open water")
+	check(
+		await swim(Vector3(105, -94, -96), 25, false, false),
+		"Choose a lateral descent after the cave"
+	)
+	check(
+		await swim(game.model.platforms[4].position + Vector3.UP, 25, false, false),
+		"The exploratory space reconnects to the deeper game"
+	)
+	observations.journey_to_deeper_route_seconds = game.model.elapsed
 	record_sequence = false
 	await compare_spaces()
 	await audit_surfaces()
+	await audit_garden_rescue()
 	var file := FileAccess.open("res://artifacts/playground.json", FileAccess.WRITE)
 	file.store_string(
 		JSON.stringify({"checks": checks, "failed": failed, "observations": observations}, "  ")
@@ -77,33 +95,36 @@ func compare_spaces() -> void:
 	check(not Reef.air_at(Vector3(94, -30, -65)), "Outside the side wall remains underwater")
 	# These alternate journeys start at the already reached garden. Fixture setup
 	# is separate from the continuous pier-to-cave recording.
-	for route in ["roof", "outside", "outside_fast", "reverse"]:
+	for route in ["roof", "outside", "outside_fast", "window", "reverse"]:
 		fixture(Reef.PLANTS[1] + Vector3.UP * 2)
+		minimum_oxygen = 100
 		var complete := true
 		var points: Array[Vector3] = []
 		if route == "roof":
 			points = [Vector3(85, -20, -66), Vector3(104, -28, -48)]
+		elif route == "window":
+			points = [
+				Vector3(77, -50, -66),
+				Vector3(85, -50, -52),
+				Vector3(94, -44, -44),
+				Vector3(99, -42, -48)
+			]
 		elif route.begins_with("outside"):
 			points = [
-				Vector3(87, -48, -82),
-				Vector3(119, -60, -87),
-				Vector3(143, -61, -70),
+				Vector3(87, -48, -77),
+				Vector3(119, -60, -80),
+				Vector3(145, -61, -83),
+				Vector3(145, -61, -65),
 				Reef.PLANTS[3]
 			]
 		else:
 			fixture(Reef.PLANTS[3] + Vector3.UP)
 			points = [Vector3(125, -53, -62), Vector3(114, -42, -49), Vector3(99, -42, -48)]
 		for point in points:
-			complete = await swim(point, 25, route == "outside") and complete
+			complete = await swim(point, 25, false, route != "outside") and complete
 			if not complete:
 				break
-		if route == "outside_fast":
-			check(
-				game.model.oxygen == 0 and game.model.mode == game.model.Mode.RETURNING,
-				"Repeated fast dives exhaust oxygen before the outer refuge"
-			)
-		else:
-			check(complete, "Alternate approach: " + route)
+		check(complete, "Alternate approach: " + route)
 		if route == "roof":
 			for frame in range(90):
 				await tick()
@@ -111,9 +132,38 @@ func compare_spaces() -> void:
 		if route == "reverse":
 			check(game.model.in_dry_cave(), "The refuge is reachable from either mouth")
 		observations[route] = {
-			"complete": complete, "seconds": game.model.elapsed, "oxygen": game.model.oxygen
+			"complete": complete,
+			"seconds": game.model.elapsed,
+			"oxygen": game.model.oxygen,
+			"minimum_oxygen": minimum_oxygen
 		}
 		await photo("49-" + route, Vector3(95, -42, -48) if route != "reverse" else Reef.CAVE_START)
+	check(
+		observations.outside_fast.minimum_oxygen < observations.outside.minimum_oxygen - 5,
+		"Fast descent spends more oxygen on the same clear outer route"
+	)
+	for route in ["window", "outside"]:
+		fixture(Vector3(74, -44, -74))
+		game.model.oxygen = 35
+		var points: Array[Vector3] = [
+			Vector3(77, -50, -66), Vector3(85, -50, -52), Vector3(99, -42, -48)
+		]
+		if route == "outside":
+			points = [
+				Vector3(87, -48, -77),
+				Vector3(119, -60, -80),
+				Vector3(145, -61, -83),
+				Reef.PLANTS[3]
+			]
+		var complete := true
+		for point in points:
+			if not await swim(point, 25, false, false):
+				complete = false
+				break
+		check(complete if route == "window" else not complete, "35% oxygen decision: " + route)
+		observations["low_" + route] = {
+			"complete": complete, "seconds": game.model.elapsed, "oxygen": game.model.oxygen
+		}
 
 
 func audit_surfaces() -> void:
@@ -148,3 +198,47 @@ func audit_surfaces() -> void:
 				(game.model.position + Vector3.UP * 1.05 - hit.position).dot(direction) < .5,
 				"No tunnelling: %s dt=%s" % [surface[0], dt]
 			)
+
+
+func audit_garden_rescue() -> void:
+	# Enter each plant with real movement. Failure depth is a separate setup;
+	# the whole rescue/re-formation and subsequent input are then continuous.
+	for garden in range(Reef.PLANTS.size()):
+		fixture(Reef.PLANTS[garden] + Vector3.UP * 3)
+		for frame in range(30):
+			await tick()
+		check(
+			game.model.visited_gardens.has(garden),
+			"Visiting a new garden records a real safe position"
+		)
+		var safe: Vector3 = game.model.visited_gardens.get(garden, Vector3.ZERO)
+		game.model.position = safe + Vector3(25, -55, 0)
+		game.model.grounded = -1
+		game.model.terrain_grounded = false
+		game.model.oxygen = .01
+		await tick()
+		check(game.model.return_garden, "Rescue selects the visited garden instead of the pier")
+		var elapsed: float = game.model.elapsed
+		for frame in range(360):
+			if game.model.mode == game.model.Mode.DIVING:
+				break
+			await tick()
+		check(
+			game.model.position.distance_to(safe) < .1,
+			"Re-formation uses the previously occupied clear capsule position"
+		)
+		check(
+			game.model.failure_depth - game.model.depth >= game.model.config.min_setback,
+			"Garden rescue loses depth"
+		)
+		check(
+			game.model.elapsed - elapsed <= game.model.config.rescue_max_seconds + .1,
+			"Rescue remains bounded"
+		)
+		var before: Vector3 = game.model.position
+		for frame in range(45):
+			await tick(Vector2.LEFT, 0, true)
+		check(
+			game.model.position.distance_to(before) > 2,
+			"Input resumes outside the rock after rescue"
+		)

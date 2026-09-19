@@ -114,6 +114,8 @@ func _make_cave() -> void:
 	st.begin(Mesh.PRIMITIVE_TRIANGLES)
 	for row in range(35):
 		for side in range(32):
+			if _cave_window(row, side):
+				continue
 			for thickness in [0.0, 3.5]:
 				var corners: Array[Vector3] = []
 				for offset in [Vector2i(0, 0), Vector2i(1, 0), Vector2i(1, 1), Vector2i(0, 1)]:
@@ -125,6 +127,20 @@ func _make_cave() -> void:
 					corners.append(point)
 				triangle(st, corners[0], corners[1], corners[2])
 				triangle(st, corners[0], corners[2], corners[3])
+			var edges := [
+				[Vector2i(row, side), Vector2i(row + 1, side), row, side - 1],
+				[Vector2i(row + 1, side), Vector2i(row + 1, side + 1), row + 1, side],
+				[Vector2i(row + 1, side + 1), Vector2i(row, side + 1), row, side + 1],
+				[Vector2i(row, side + 1), Vector2i(row, side), row - 1, side]
+			]
+			for edge in edges:
+				if _cave_window(edge[2], edge[3]):
+					var a := _cave_point(edge[0], 0)
+					var b := _cave_point(edge[1], 0)
+					var c := _cave_point(edge[1], 3.5)
+					var d := _cave_point(edge[0], 3.5)
+					triangle(st, a, b, c)
+					triangle(st, a, c, d)
 	# Connect inner and outer shells around both mouths; leave the openings clear.
 	for t in [0.0, 1.0]:
 		for side in range(32):
@@ -179,6 +195,26 @@ func _make_cave() -> void:
 	glow.light_energy = 2.5
 	glow.omni_range = 24
 	add_child(glow)
+	var window_light := SpotLight3D.new()
+	window_light.position = Vector3(75, -33, -78)
+	window_light.light_color = Color("8bc5ce")
+	window_light.light_energy = 5
+	window_light.spot_range = 55
+	window_light.spot_angle = 23
+	window_light.shadow_enabled = true
+	add_child(window_light)
+	window_light.look_at(Vector3(90, -51, -48))
+
+
+func _cave_window(row: int, side: int) -> bool:
+	return Vector2((row - 8.5) / 3.2, (side - 21.0) / 2.6).length_squared() < 1
+
+
+func _cave_point(cell: Vector2i, thickness: float) -> Vector3:
+	var t := cell.x / 35.0
+	var angle := cell.y * TAU / 32
+	var radius := Rules.cave_radius(t, angle) + Vector2.ONE * thickness
+	return Rules.cave_center(t) + Vector3(0, cos(angle) * radius.x, sin(angle) * radius.y)
 
 
 func _water_span(x: float) -> Vector2:

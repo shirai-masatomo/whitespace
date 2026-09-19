@@ -1,28 +1,49 @@
 {
-  "checks": 57,
+  "checks": 88,
   "failed": false,
   "observations": {
     "cavern_journey_seconds": 37.4166666666658,
-    "horizontal_extent": 132.433258056641,
-    "outside": {
-      "complete": true,
-      "oxygen": 10.4666666666672,
-      "seconds": 23.2833333333333
-    },
-    "outside_fast": {
+    "horizontal_extent": 132.432739257813,
+    "journey_to_deeper_route_seconds": 57.3666666666647,
+    "low_outside": {
       "complete": false,
       "oxygen": 0.0,
-      "seconds": 21.5000000000001
+      "seconds": 8.75000000000001
+    },
+    "low_window": {
+      "complete": true,
+      "oxygen": 100.0,
+      "seconds": 6.58333333333332
+    },
+    "outside": {
+      "complete": true,
+      "minimum_oxygen": 31.7333333333338,
+      "oxygen": 100.0,
+      "seconds": 18.2666666666669
+    },
+    "outside_fast": {
+      "complete": true,
+      "minimum_oxygen": 8.33333333333261,
+      "oxygen": 100.0,
+      "seconds": 18.3666666666669
     },
     "reverse": {
       "complete": true,
+      "minimum_oxygen": 89.2000000000006,
       "oxygen": 100.0,
       "seconds": 8.33333333333333
     },
     "roof": {
       "complete": true,
+      "minimum_oxygen": 47.8333333333337,
       "oxygen": 47.8333333333337,
       "seconds": 12.0333333333335
+    },
+    "window": {
+      "complete": true,
+      "minimum_oxygen": 69.8333333333338,
+      "oxygen": 100.0,
+      "seconds": 10.5000000000001
     }
   }
 }

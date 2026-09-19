@@ -53,8 +53,8 @@ void fragment(){
  base=mix(base,vec3(0.65,0.80,0.79),shore*0.7);
  vec3 underside=vec3(0.025,0.15,0.20)+ripple(p)*0.025;
  float window=smoothstep(0.42,0.86,-v.y);
- float sun_window=pow(max(0.0,dot(-v,normalize(vec3(0.18,0.70,-0.67)))),36.0);
- underside+=vec3(0.30,0.60,0.66)*window+vec3(1.0,0.93,0.72)*sun_window*1.6;
+ float sun_window=pow(max(0.0,dot(-v,normalize(vec3(0.18,0.70,-0.67)))),180.0);
+ underside+=vec3(0.18,0.38,0.44)*window+vec3(1.0,0.93,0.72)*sun_window*1.2;
  ALBEDO=mix(base,underside,underwater);
  float distance_fade=1.0-smoothstep(500.0,1150.0,length(CAMERA_POSITION_WORLD.xz-p));
  float depth_fade=exp(-max(0.0,surface_level-CAMERA_POSITION_WORLD.y-20.0)/35.0);

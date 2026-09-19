@@ -22,6 +22,16 @@ func run() -> void:
 		game.model.depth > 5 and game.model.elapsed < 10, "Player enters open water from the pier"
 	)
 	check(game.model.mode == game.model.Mode.DIVING, "Entry is continuous gameplay")
+	game.pitch = .75
+	game._update_camera()
+	var focus: Vector3 = game.model.position + Vector3.UP * 1.4
+	check(
+		(
+			not game.camera.is_position_behind(focus)
+			and Rect2(0, 0, 1280, 720).has_point(game.camera.unproject_position(focus))
+		),
+		"Looking up at sunlight underwater keeps the diver in frame"
+	)
 	await photo("51-enter-ocean", Vector3(35, -20, -28))
 	await photo("52-surface-light", game.model.position + Vector3(3, 16, -18))
 	check(await swim(Vector3(32, -28, -25)), "The shoal's destination is actually reachable")

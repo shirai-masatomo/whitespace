@@ -31,6 +31,8 @@ var standing: bool:
 var checkpoint: int = 0
 var previous_checkpoint: int = 0
 var visited_oxygen: Array[int] = [0]
+var visited_gardens: Dictionary = {}
+var return_garden := false
 var return_checkpoint: int = 0
 var return_target := Vector3.ZERO
 var return_phase: int = 0
@@ -68,6 +70,8 @@ func reset() -> void:
 	previous_checkpoint = 0
 	depth_losses.clear()
 	visited_oxygen.assign([0])
+	visited_gardens.clear()
+	return_garden = false
 	rescue_reason = ""
 	rescue_speed = config.emergency_speed
 	mode = Mode.DIVING
@@ -233,6 +237,11 @@ func step(delta: float, horizontal: Vector2, descent: float = 0.0, ascend: bool 
 	var oxygen_index := oxygen_contact()
 	if at_oxygen() or position.y >= -1:
 		oxygen = config.oxygen_capacity
+		var garden := Playground.plant_index(position)
+		if garden >= 0 and not visited_gardens.has(garden):
+			# Save a position actually occupied by the swept capsule, not the
+			# decorative plant root which may lie beneath the irregular rock.
+			visited_gardens[garden] = position
 		if (
 			oxygen_index >= 0
 			and oxygen_index != checkpoint
@@ -270,6 +279,11 @@ func begin_return(reason: String) -> void:
 		if platforms[index].position.y >= position.y + config.min_setback:
 			return_checkpoint = index
 	return_target = platforms[return_checkpoint].position
+	return_garden = false
+	for safe_point: Vector3 in visited_gardens.values():
+		if safe_point.y >= position.y + config.min_setback and safe_point.y < return_target.y:
+			return_target = safe_point
+			return_garden = true
 	var clearance: Vector3 = return_target + Vector3.UP * config.rescue_clearance
 	var lift := Vector3(position.x, clearance.y, position.z)
 	var distance := position.distance_to(lift) + lift.distance_to(clearance)
@@ -301,7 +315,8 @@ func _return_step(delta: float) -> void:
 			return_phase += 1
 		else:
 			depth_losses.append(maxf(0.0, failure_depth - depth))
-			checkpoint = return_checkpoint
+			if not return_garden:
+				checkpoint = return_checkpoint
 			previous_checkpoint = 0
 			var retained: Array[int] = []
 			for index in visited_oxygen:
@@ -310,7 +325,11 @@ func _return_step(delta: float) -> void:
 				if platforms[index].position.y > return_target.y:
 					previous_checkpoint = index
 			visited_oxygen = retained
-			grounded = checkpoint
+			for garden in visited_gardens.keys():
+				if visited_gardens[garden].y < return_target.y:
+					visited_gardens.erase(garden)
+			grounded = -1 if return_garden else checkpoint
+			terrain_grounded = false
 			velocity = Vector3.ZERO
 			oxygen = config.oxygen_capacity
 			mode = Mode.DIVING

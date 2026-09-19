@@ -42,7 +42,11 @@ static func air_at(point: Vector3) -> bool:
 
 
 static func near_plant(point: Vector3) -> bool:
-	for plant in PLANTS:
-		if (point + Vector3.UP).distance_to(plant + Vector3.UP) < 4.0:
-			return true
-	return false
+	return plant_index(point) >= 0
+
+
+static func plant_index(point: Vector3) -> int:
+	for index in range(PLANTS.size()):
+		if point.distance_to(PLANTS[index]) < 4.0:
+			return index
+	return -1

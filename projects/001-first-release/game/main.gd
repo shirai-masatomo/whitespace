@@ -175,7 +175,7 @@ func _update_camera(delta: float = 1.0) -> void:
 	var focus: Vector3 = model.position + Vector3.UP * 1.4
 	var look := Vector3(0, sin(pitch), -cos(pitch)).rotated(Vector3.UP, yaw)
 	var desired: Vector3 = focus - look * 7.5 if third_person else focus
-	if third_person and pitch > 0:
+	if third_person and pitch > 0 and model.standing:
 		# Looking at surface light or an animal should not swing the camera under
 		# the floor and then push it inside the diver's chest.
 		var back := Vector3(0, 0, 1).rotated(Vector3.UP, yaw)
