@@ -31,6 +31,13 @@ func _ready() -> void:
 			player.play()
 
 
+func _exit_tree() -> void:
+	for player in players.values():
+		player.stop()
+	# Static Resource caches otherwise retain the script at engine shutdown.
+	bank.clear()
+
+
 func reset(model) -> void:
 	previous_mode = model.mode
 	previous_oxygen = model.oxygen

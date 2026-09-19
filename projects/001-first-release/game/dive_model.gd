@@ -4,6 +4,7 @@ extends RefCounted
 enum Mode { DIVING, RETURNING, COMPLETE }
 const Config = preload("res://game/dive_config.gd")
 const Driftwood = preload("res://game/driftwood_surface.gd")
+const RockSurface = preload("res://game/rock_surface.gd")
 const Layout = preload("res://game/stage_layout.gd")
 
 var config: Resource
@@ -64,8 +65,24 @@ func reset() -> void:
 
 
 func inside(point: Vector3, platform: Dictionary, margin: float = 0.0) -> bool:
+	if platform.kind in ["rock", "kelp", "cliff"]:
+		return RockSurface.contains(
+			point - platform.position, platform.size, platform.shape_seed, margin
+		)
 	if platform.kind == "driftwood":
 		return is_finite(Driftwood.height_at(point - platform.position, platform.size))
+	if platform.kind == "jelly":
+		return RockSurface.ellipse_contains(
+			point - platform.position,
+			Vector2.ONE * (platform.size.x * Layout.JELLY_RADIUS_SCALE + margin),
+			Layout.JELLY_SEGMENTS
+		)
+	if platform.kind == "buoy":
+		return RockSurface.ellipse_contains(
+			point - platform.position,
+			platform.size * Layout.BUOY_TOP_SCALE + Vector2.ONE * margin,
+			Layout.BUOY_SEGMENTS
+		)
 	if platform.get("round", false):
 		var offset := Vector2(point.x - platform.position.x, point.z - platform.position.z)
 		var radius: Vector2 = platform.size * .5 + Vector2.ONE * margin
@@ -81,7 +98,7 @@ func surface_height(point: Vector3, platform: Dictionary) -> float:
 		return platform.position.y + Driftwood.height_at(point - platform.position, platform.size)
 	if platform.kind != "jelly":
 		return platform.position.y
-	var radius: float = platform.size.x * .56
+	var radius: float = platform.size.x * Layout.JELLY_RADIUS_SCALE
 	var r := Vector2(point.x - platform.position.x, point.z - platform.position.z).length() / radius
 	# Match the authored bell profile so feet follow its dome, not an invisible plane.
 	var drop: float

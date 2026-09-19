@@ -56,7 +56,7 @@ static func jelly(parent: Node3D, radius: float, point: Vector3) -> Node3D:
 	parent.add_child(root)
 	var mat := ShaderMaterial.new()
 	mat.shader = preload("res://game/shaders/jelly.gdshader")
-	Geo.put(
+	var bell := Geo.put(
 		root,
 		Geo.loft(
 			[
@@ -66,11 +66,12 @@ static func jelly(parent: Node3D, radius: float, point: Vector3) -> Node3D:
 				Vector3(radius * .49, radius * .60, radius * .60),
 				Vector3(radius * .58, .01, .01)
 			],
-			48
+			Layout.JELLY_SEGMENTS
 		),
 		mat,
 		Vector3(0, -radius * .58, 0)
 	)
+	bell.name = "LandingSurface"
 	var tentacle := ShaderMaterial.new()
 	tentacle.shader = preload("res://game/shaders/tentacle.gdshader")
 	var combined := SurfaceTool.new()
@@ -130,7 +131,7 @@ static func deck(root: Node3D, data: Dictionary, index: int) -> void:
 					Vector3(x, 0, 5)
 				)
 		"jelly":
-			jelly(root, size.x * .56, Vector3.ZERO)
+			jelly(root, size.x * Layout.JELLY_RADIUS_SCALE, Vector3.ZERO)
 		"driftwood":
 			var wood := ShaderMaterial.new()
 			wood.shader = WOOD
@@ -167,25 +168,27 @@ static func deck(root: Node3D, data: Dictionary, index: int) -> void:
 		"buoy":
 			var rust := Geo.material(Color("ba673d"), .6, .3)
 			var metal := Geo.material(Color("243f45"), .4, .6)
-			Geo.put(
+			var shell := Geo.put(
 				root,
 				Geo.loft(
 					[
 						Vector3(-4, 4, 3),
 						Vector3(-2, size.x * .58, size.y * .55),
-						Vector3(0, size.x * .54, size.y * .54),
+						Vector3(0, size.x * Layout.BUOY_TOP_SCALE, size.y * Layout.BUOY_TOP_SCALE),
 						Vector3(0, .01, .01)
 					],
-					36
+					Layout.BUOY_SEGMENTS
 				),
 				rust
 			)
+			shell.name = "LandingSurface"
 			for x in [-4, 4]:
 				Geo.box(root, Vector3(.3, 2, .3), metal, Vector3(x, 1, 4))
 			Geo.box(root, Vector3(8.3, .3, .3), metal, Vector3(0, 2, 4))
 			Geo.box(root, Vector3(2.4, 1.2, 1.4), metal, Vector3(-3, .6, 3))
 		_:
-			Geo.put(root, Geo.rock(size, 12 + index % 3 * 4, index + 8), stone())
+			var rock := Geo.put(root, Geo.rock(size, 12 + index % 3 * 4, data.shape_seed), stone())
+			rock.name = "LandingSurface"
 			for edge in range(6):
 				var angle := edge * TAU / 6
 				var spot := Vector3(cos(angle) * size.x * .49, 0, sin(angle) * size.y * .49)

@@ -12,10 +12,10 @@
   },
   "rescue": {
     "controls_restored_seconds": 2.27,
-    "lost_depth_m": 30.0001602172852
+    "lost_depth_m": 30.0001525878906
   },
   "route_tradeoffs": {
-    "current_seconds_saved": 0.58,
+    "current_seconds_saved": 0.56,
     "fast_safe_gardens": {
       "aimed_camera_diver_framed": 8,
       "aimed_camera_visible": 7,
@@ -51,30 +51,30 @@
         {
           "arrival_oxygen": 100.0,
           "to": 6,
-          "travel_seconds": 6.4,
+          "travel_seconds": 6.43,
           "visible_with_mouse": true
         },
         {
           "arrival_oxygen": 100.0,
           "to": 12,
-          "travel_seconds": 9.63,
+          "travel_seconds": 9.62,
           "visible_with_mouse": true
         },
         {
           "arrival_oxygen": 100.0,
           "to": 8,
-          "travel_seconds": 6.08,
+          "travel_seconds": 6.07,
           "visible_with_mouse": true
         },
         {
-          "arrival_oxygen": 64.17,
+          "arrival_oxygen": 64.23,
           "to": 9,
           "travel_seconds": 5.78,
           "visible_with_mouse": true
         }
       ],
       "mean_leg_seconds": 5.91,
-      "minimum_oxygen": 52.63,
+      "minimum_oxygen": 52.6,
       "mouse_camera_visible": 8,
       "name": "safe_gardens_fast",
       "seconds": 47.3,
@@ -101,13 +101,13 @@
         {
           "arrival_oxygen": 100.0,
           "to": 2,
-          "travel_seconds": 8.6,
+          "travel_seconds": 8.63,
           "visible_with_mouse": true
         },
         {
-          "arrival_oxygen": 64.87,
+          "arrival_oxygen": 64.8,
           "to": 3,
-          "travel_seconds": 9.42,
+          "travel_seconds": 9.43,
           "visible_with_mouse": true
         },
         {
@@ -117,27 +117,27 @@
           "visible_with_mouse": true
         },
         {
-          "arrival_oxygen": 66.47,
+          "arrival_oxygen": 69.0,
           "to": 5,
-          "travel_seconds": 9.0,
+          "travel_seconds": 8.37,
           "visible_with_mouse": true
         },
         {
           "arrival_oxygen": 100.0,
           "to": 6,
-          "travel_seconds": 9.67,
+          "travel_seconds": 9.73,
           "visible_with_mouse": true
         },
         {
-          "arrival_oxygen": 62.6,
+          "arrival_oxygen": 62.47,
           "to": 7,
-          "travel_seconds": 9.98,
+          "travel_seconds": 10.02,
           "visible_with_mouse": true
         },
         {
           "arrival_oxygen": 100.0,
           "to": 8,
-          "travel_seconds": 10.17,
+          "travel_seconds": 10.2,
           "visible_with_mouse": true
         },
         {
@@ -147,11 +147,11 @@
           "visible_with_mouse": true
         }
       ],
-      "mean_leg_seconds": 9.64,
-      "minimum_oxygen": 25.27,
+      "mean_leg_seconds": 9.58,
+      "minimum_oxygen": 25.0,
       "mouse_camera_visible": 9,
       "name": "platforms",
-      "seconds": 86.72,
+      "seconds": 86.27,
       "survey_visible": 9
     },
     {
@@ -171,19 +171,19 @@
         {
           "arrival_oxygen": 100.0,
           "to": 4,
-          "travel_seconds": 18.72,
+          "travel_seconds": 18.77,
           "visible_with_mouse": true
         },
         {
           "arrival_oxygen": 100.0,
           "to": 6,
-          "travel_seconds": 18.68,
+          "travel_seconds": 18.07,
           "visible_with_mouse": true
         },
         {
           "arrival_oxygen": 100.0,
           "to": 8,
-          "travel_seconds": 18.42,
+          "travel_seconds": 18.48,
           "visible_with_mouse": true
         },
         {
@@ -193,11 +193,11 @@
           "visible_with_mouse": true
         }
       ],
-      "mean_leg_seconds": 16.45,
-      "minimum_oxygen": 31.07,
+      "mean_leg_seconds": 16.35,
+      "minimum_oxygen": 31.93,
       "mouse_camera_visible": 5,
       "name": "direct_oxygen",
-      "seconds": 82.23,
+      "seconds": 81.73,
       "survey_visible": 5
     },
     {
@@ -217,13 +217,13 @@
         {
           "arrival_oxygen": 100.0,
           "to": 2,
-          "travel_seconds": 8.6,
+          "travel_seconds": 8.63,
           "visible_with_mouse": true
         },
         {
           "arrival_oxygen": 100.0,
           "to": 10,
-          "travel_seconds": 9.57,
+          "travel_seconds": 9.63,
           "visible_with_mouse": true
         },
         {
@@ -233,27 +233,27 @@
           "visible_with_mouse": true
         },
         {
-          "arrival_oxygen": 64.13,
+          "arrival_oxygen": 66.8,
           "to": 5,
-          "travel_seconds": 9.58,
+          "travel_seconds": 8.92,
           "visible_with_mouse": true
         },
         {
           "arrival_oxygen": 100.0,
           "to": 6,
-          "travel_seconds": 10.0,
+          "travel_seconds": 9.93,
           "visible_with_mouse": true
         },
         {
-          "arrival_oxygen": 62.6,
+          "arrival_oxygen": 62.47,
           "to": 7,
-          "travel_seconds": 9.98,
+          "travel_seconds": 10.02,
           "visible_with_mouse": true
         },
         {
           "arrival_oxygen": 100.0,
           "to": 8,
-          "travel_seconds": 10.17,
+          "travel_seconds": 10.2,
           "visible_with_mouse": true
         },
         {
@@ -263,11 +263,11 @@
           "visible_with_mouse": true
         }
       ],
-      "mean_leg_seconds": 10.07,
-      "minimum_oxygen": 25.27,
+      "mean_leg_seconds": 10.01,
+      "minimum_oxygen": 25.0,
       "mouse_camera_visible": 9,
       "name": "extra_oxygen",
-      "seconds": 90.67,
+      "seconds": 90.1,
       "survey_visible": 9
     },
     {
@@ -287,13 +287,13 @@
         {
           "arrival_oxygen": 100.0,
           "to": 2,
-          "travel_seconds": 8.6,
+          "travel_seconds": 8.63,
           "visible_with_mouse": true
         },
         {
           "arrival_oxygen": 100.0,
           "to": 10,
-          "travel_seconds": 9.57,
+          "travel_seconds": 9.63,
           "visible_with_mouse": true
         },
         {
@@ -305,19 +305,19 @@
         {
           "arrival_oxygen": 100.0,
           "to": 6,
-          "travel_seconds": 13.18,
+          "travel_seconds": 13.23,
           "visible_with_mouse": true
         },
         {
           "arrival_oxygen": 100.0,
           "to": 12,
-          "travel_seconds": 12.45,
+          "travel_seconds": 12.48,
           "visible_with_mouse": true
         },
         {
           "arrival_oxygen": 100.0,
           "to": 8,
-          "travel_seconds": 10.33,
+          "travel_seconds": 10.32,
           "visible_with_mouse": true
         },
         {
@@ -327,11 +327,11 @@
           "visible_with_mouse": true
         }
       ],
-      "mean_leg_seconds": 10.5,
-      "minimum_oxygen": 46.2,
+      "mean_leg_seconds": 10.52,
+      "minimum_oxygen": 46.0,
       "mouse_camera_visible": 8,
       "name": "safe_gardens",
-      "seconds": 84.03,
+      "seconds": 84.2,
       "survey_visible": 8
     },
     {
@@ -415,13 +415,13 @@
         {
           "arrival_oxygen": 100.0,
           "to": 6,
-          "travel_seconds": 6.4,
+          "travel_seconds": 6.43,
           "visible_with_mouse": true
         },
         {
           "arrival_oxygen": 100.0,
           "to": 8,
-          "travel_seconds": 7.95,
+          "travel_seconds": 7.93,
           "visible_with_mouse": true
         },
         {
@@ -432,10 +432,10 @@
         }
       ],
       "mean_leg_seconds": 5.64,
-      "minimum_oxygen": 45.33,
+      "minimum_oxygen": 45.2,
       "mouse_camera_visible": 7,
       "name": "current_gardens",
-      "seconds": 39.5,
+      "seconds": 39.52,
       "survey_visible": 7
     }
   ],

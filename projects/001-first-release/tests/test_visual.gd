@@ -151,6 +151,7 @@ func run() -> void:
 		quit(1)
 		return
 	await capture("05-platform")
+	await rock_edge_walk()
 	game.pitch = -.15
 	game.yaw = 1.0
 	await capture("11-cliff")
@@ -290,14 +291,15 @@ func run() -> void:
 func missed_route_rescue() -> void:
 	game.restart()
 	game.pitch = -.4
-	if not await steer(2, true):
-		return
+	for target in [2, 10, 6, 8]:
+		if not await steer(target, true):
+			return
 	var airborne := 0
 	for frame in range(3600):
-		var command := Driver.input_for(game.model, 10, true)
+		var command := Driver.input_for(game.model, 9, true)
 		if game.model.grounded < 0:
 			airborne += 1
-		if airborne > 60 and airborne <= 420:
+		if airborne > 60 and airborne <= 660:
 			command = Vector3.ZERO
 		game.advance(1.0 / 60, Vector2(command.x, command.z), command.y)
 		await render_step()
@@ -321,6 +323,26 @@ func missed_route_rescue() -> void:
 		push_error("GPU missed-route rescue must restore control within 3.5 seconds")
 	await capture("23-long-rescue-retry")
 	print("GPU missed-route rescue: %.2fs, lost %.2fm" % [duration, game.model.depth_losses[0]])
+
+
+func rock_edge_walk() -> void:
+	var center: Vector3 = game.model.platforms[1].position
+	for frame in range(180):
+		game.advance(1.0 / 60, Vector2.RIGHT)
+		await render_step()
+		if game.model.position.x >= center.x + 7.35:
+			break
+	if game.model.grounded != 1:
+		failed = true
+		push_error("Visible rock edge must hold the player beyond the old ellipse")
+	await capture("24-rock-edge")
+	for frame in range(180):
+		await step_toward(1)
+		if (
+			Vector2(game.model.position.x - center.x, game.model.position.z - center.z).length()
+			< .2
+		):
+			break
 
 
 func mirror_capture(source: String, destination: String) -> void:

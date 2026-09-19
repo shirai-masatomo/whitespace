@@ -60,6 +60,7 @@ try {
         Invoke-Godot 'rules' @('--headless', '--script', 'tests/test_rules.gd')
         Invoke-Godot 'scene' @('--headless', '--script', 'tests/test_scene.gd')
         Invoke-Godot 'audio' @('--headless', '--script', 'tests/test_audio.gd')
+        Invoke-Godot 'rock-surface' @('--headless', '--script', 'tests/test_rock_surface.gd')
     }
     if ($Task -in @('evaluate', 'check')) {
         Invoke-Godot 'evaluation' @('--headless', '--script', 'tests/test_evaluation.gd')

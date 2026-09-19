@@ -1,5 +1,6 @@
 extends RefCounted
 ## Authored procedural meshes: shared by scenery and the articulated diver.
+const RockSurface = preload("res://game/rock_surface.gd")
 
 
 static func loft(profile: Array[Vector3], segments: int = 24, seed_value: int = 0) -> ArrayMesh:
@@ -19,10 +20,7 @@ static func loft(profile: Array[Vector3], segments: int = 24, seed_value: int = 
 			for corner in corners:
 				var ring: Vector3 = profile[corner.x]
 				var angle := corner.y * TAU / segments
-				var rough := 1.0
-				if seed_value != 0:
-					rough += 0.09 * sin(angle * 5 + seed_value + corner.x * 0.8)
-					rough += 0.055 * cos(angle * 9 - seed_value * 0.1)
+				var rough := RockSurface.roughness(angle, seed_value, corner.x)
 				st.set_uv(
 					Vector2(float(corner.y) / segments, float(corner.x) / (profile.size() - 1))
 				)
@@ -34,21 +32,7 @@ static func loft(profile: Array[Vector3], segments: int = 24, seed_value: int = 
 
 
 static func rock(size: Vector2, depth: float, seed_value: int) -> ArrayMesh:
-	var x := size.x * 0.5
-	var z := size.y * 0.5
-	return loft(
-		[
-			Vector3(-depth, 0.01, 0.01),
-			Vector3(-depth * 0.92, x * 0.42, z * 0.5),
-			Vector3(-depth * 0.67, x * 0.83, z * 0.73),
-			Vector3(-depth * 0.27, x * 1.12, z * 1.04),
-			Vector3(-1.1, x * 1.16, z * 1.15),
-			Vector3(0, x * 1.1, z * 1.1),
-			Vector3(0, 0.01, 0.01)
-		],
-		32,
-		seed_value
-	)
+	return loft(RockSurface.profile(size, depth), RockSurface.SEGMENTS, seed_value)
 
 
 static func boulder(size: Vector3, seed_value: int) -> ArrayMesh:

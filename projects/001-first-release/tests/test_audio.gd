@@ -98,4 +98,6 @@ func run() -> void:
 	print("Audio: %d checks, %d failures" % [checks, failures])
 	sound.queue_free()
 	await process_frame
+	# Give the audio thread one mix block to release queued playback handles.
+	await create_timer(.1).timeout
 	quit(1 if failures else 0)

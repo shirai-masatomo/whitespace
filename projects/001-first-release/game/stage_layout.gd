@@ -1,5 +1,9 @@
 extends RefCounted
 ## Shared platform data for collision, visuals, route hints and tests.
+const JELLY_RADIUS_SCALE := .56
+const JELLY_SEGMENTS := 48
+const BUOY_TOP_SCALE := .54
+const BUOY_SEGMENTS := 36
 
 
 static func platforms() -> Array[Dictionary]:
@@ -50,6 +54,7 @@ static func platforms() -> Array[Dictionary]:
 	]
 	for index in range(data.size()):
 		data[index]["kind"] = kinds[index]
+		data[index]["shape_seed"] = index + 8
 		data[index]["label"] = names[index]
 		data[index]["round"] = kinds[index] not in ["pier", "driftwood"]
 	return data
