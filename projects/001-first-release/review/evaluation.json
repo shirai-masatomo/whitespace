@@ -16,10 +16,12 @@
   },
   "routes": [
     {
+      "aimed_camera_diver_framed": 9,
+      "aimed_camera_visible": 8,
       "complete": true,
       "decisions": 9,
-      "departure_camera_framed": 6,
-      "departure_camera_unoccluded": 1,
+      "departure_camera_framed": 9,
+      "departure_camera_unoccluded": 7,
       "legs": [
         {
           "arrival_oxygen": 77.2,
@@ -74,10 +76,12 @@
       "survey_visible": 9
     },
     {
+      "aimed_camera_diver_framed": 5,
+      "aimed_camera_visible": 4,
       "complete": true,
       "decisions": 5,
-      "departure_camera_framed": 3,
-      "departure_camera_unoccluded": 0,
+      "departure_camera_framed": 5,
+      "departure_camera_unoccluded": 3,
       "legs": [
         {
           "arrival_oxygen": 100.0,
@@ -112,10 +116,12 @@
       "survey_visible": 5
     },
     {
+      "aimed_camera_diver_framed": 9,
+      "aimed_camera_visible": 7,
       "complete": true,
       "decisions": 9,
-      "departure_camera_framed": 6,
-      "departure_camera_unoccluded": 1,
+      "departure_camera_framed": 8,
+      "departure_camera_unoccluded": 6,
       "legs": [
         {
           "arrival_oxygen": 77.2,

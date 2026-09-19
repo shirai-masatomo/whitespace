@@ -8,20 +8,20 @@
     {
       "depth_m": 12,
       "mean_draw_calls": 374,
-      "median_frame_ms": 2.02,
-      "p95_frame_ms": 2.56
+      "median_frame_ms": 2.03,
+      "p95_frame_ms": 4.06
     },
     {
       "depth_m": 60,
-      "mean_draw_calls": 436,
-      "median_frame_ms": 2.02,
-      "p95_frame_ms": 2.56
+      "mean_draw_calls": 462,
+      "median_frame_ms": 2.03,
+      "p95_frame_ms": 3.33
     },
     {
       "depth_m": 155,
       "mean_draw_calls": 407,
       "median_frame_ms": 2.03,
-      "p95_frame_ms": 2.76
+      "p95_frame_ms": 4.02
     }
   ],
   "vsync": "disabled"

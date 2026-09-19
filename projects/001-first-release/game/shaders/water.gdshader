@@ -9,9 +9,10 @@ void vertex() {
 void fragment() {
  float underwater = 1.0 - smoothstep(-1.5,0.8,CAMERA_POSITION_WORLD.y);
  vec2 p = world_point.xz;
- float a = sin(dot(p, vec2(0.18,0.11)) + TIME * 0.8);
- float b = sin(dot(p, vec2(-0.09,0.23)) - TIME * 0.65);
- float c = sin(dot(p, vec2(0.46,-0.37)) + TIME * 1.4);
+ vec2 waves = p + vec2(sin(p.y * 0.11 + TIME * 0.1) * 1.3, sin(p.x * 0.07) * 0.8);
+ float a = sin(dot(waves, vec2(0.18,0.11)) + TIME * 0.8);
+ float b = sin(dot(waves, vec2(-0.09,0.23)) - TIME * 0.65);
+ float c = sin(dot(waves, vec2(0.46,-0.37)) + TIME * 1.4);
  vec3 n = normalize(vec3(a * 0.055 + c * 0.02, 1.0, b * 0.055));
  vec3 v = normalize(CAMERA_POSITION_WORLD - world_point);
  float fresnel = pow(1.0 - abs(dot(n,v)), 4.0);

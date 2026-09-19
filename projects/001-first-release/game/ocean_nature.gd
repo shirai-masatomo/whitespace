@@ -108,15 +108,21 @@ static func deck(root: Node3D, data: Dictionary, index: int) -> void:
 		"driftwood":
 			var wood := ShaderMaterial.new()
 			wood.shader = WOOD
+			wood.set_shader_parameter("trunk", true)
 			for log_index in range(3):
+				var length_scale := 0.94 + log_index * .07
 				var trunk := Geo.put(
 					root,
 					Geo.loft(
 						[
+							Vector3(-size.x * .56, .001, .001),
 							Vector3(-size.x * .56, .4, 1.1),
-							Vector3(-size.x * .4, 1.8, 2.15),
-							Vector3(size.x * .4, 1.8, 2.1),
-							Vector3(size.x * .56, .6, 1.2)
+							Vector3(-size.x * .4, 1.4, 2.15),
+							Vector3(-size.x * .2, 1.8, 2.3),
+							Vector3(size.x * .12, 1.75, 2.05),
+							Vector3(size.x * .35, 1.4, 1.95),
+							Vector3(size.x * .56, .6, 1.2),
+							Vector3(size.x * .56, .001, .001)
 						],
 						20,
 						18 + log_index
@@ -125,6 +131,25 @@ static func deck(root: Node3D, data: Dictionary, index: int) -> void:
 					Vector3(0, -1.6, (log_index - 1) * 3.7)
 				)
 				trunk.rotation.z = PI / 2
+				trunk.rotation.y = (log_index - 1) * .045
+				trunk.scale.y = length_scale
+				for twig in range(3):
+					var branch := Geo.put(
+						trunk,
+						Geo.loft(
+							[
+								Vector3(0, .5, .55),
+								Vector3(1.4, .28, .3),
+								Vector3(3.4, .06, .08),
+								Vector3(3.5, .001, .001)
+							],
+							12,
+							log_index + twig + 1
+						),
+						wood,
+						Vector3(.35, size.x * .38, (twig - 1) * .5)
+					)
+					branch.rotation.x = (twig - 1) * .55
 			kelp(root, Vector3(-size.x * .3, -.1, size.y * .32), 3.8, index)
 		"buoy":
 			var rust := Geo.material(Color("ba673d"), .6, .3)

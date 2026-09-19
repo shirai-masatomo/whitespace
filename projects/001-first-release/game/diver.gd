@@ -187,12 +187,21 @@ func animate(model) -> void:
 		lean = 0.35
 	torso.rotation.x = lerp_angle(torso.rotation.x, lean, 1 - exp(-dt * 8))
 	torso.position.y = 1.05 - landing * 0.18
+	var blend := 1 - exp(-dt * 12)
 	for i in range(2):
 		var side := -1 if i == 0 else 1
 		var stroke := sin(model.elapsed * (7 if pose == "walk" else 4) + i * PI)
-		arms[i].rotation.z = side * (0.13 if grounded else 0.45)
-		arms[i].rotation.x = stroke * 0.4 if horizontal > 0.5 else -0.1
+		arms[i].rotation.z = lerp_angle(
+			arms[i].rotation.z, side * (0.13 if grounded else 0.45), blend
+		)
+		var arm_pitch: float = stroke * 0.4 if horizontal > 0.5 else -0.1
 		if pose == "ascend":
-			arms[i].rotation.x = -2.1 + stroke * 0.3
-		thighs[i].rotation.x = stroke * (0.5 if horizontal > 0.5 else 0.17)
-		shins[i].rotation.x = maxf(0, stroke) * 0.55 + landing * 0.4
+			arm_pitch = -2.1 + stroke * 0.3
+		arms[i].rotation.x = lerp_angle(arms[i].rotation.x, arm_pitch, blend)
+		var leg_pitch: float = stroke * (0.5 if horizontal > 0.5 else 0.25)
+		var knee_pitch: float = maxf(0, stroke) * 0.55 + landing * 0.4
+		if grounded and horizontal < 0.5:
+			leg_pitch = 0.0
+			knee_pitch = landing * 0.4
+		thighs[i].rotation.x = lerp_angle(thighs[i].rotation.x, leg_pitch, blend)
+		shins[i].rotation.x = lerp_angle(shins[i].rotation.x, knee_pitch, blend)

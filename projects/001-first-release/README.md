@@ -6,7 +6,7 @@
 
 1. このPCの今回の最新版は **`build/windows-real/DIVE DIVE.exe`** をダブルクリック。
 2. 「潜りはじめる」またはEnter。WASDで桟橋の端から海へ飛び込む。
-3. マウスで下を見て足場へ。緑の泡は触れた瞬間に酸素100%。
+3. マウスで下を見て足場へ。足場上で下を向くと、カメラが前上方へ回り込み次の足場を見渡せます。緑の泡は触れた瞬間に酸素100%。
 4. 300mの「海底の灯」に着地するとクリア。
 
 旧版が起動中だったため、今回は `windows-real` に出力しました。`build/windows` の旧EXEはそのままです。別PCには `build/DIVE-DIVE-windows.zip` を展開して渡します。Godot/Python不要。[GitHub Actions](https://github.com/shirai-masatomo/whitespace/actions/workflows/dive-dive.yml) の最新成功実行の **DIVE-DIVE-windows** artifactでも配布物を取得できます。

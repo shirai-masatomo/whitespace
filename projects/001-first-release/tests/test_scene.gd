@@ -109,6 +109,7 @@ func run() -> void:
 	game.restart()
 	check(game.next_platform() == 1, "Replay restores first suggested target")
 	_test_ledge_view(game)
+	_test_pose_blending(game)
 	game.queue_free()
 	await process_frame
 	print("Scene: %d checks, %d failures" % [checks, failures])
@@ -140,3 +141,26 @@ func _test_ledge_view(game) -> void:
 	game._update_camera(1.0 / 60)
 	var after: Vector3 = game.camera.position - game.model.position
 	check(before.distance_to(after) < 5, "Leaving a ledge blends the camera instead of jumping")
+
+
+func _test_pose_blending(game) -> void:
+	game.restart()
+	for target in [1, 2]:
+		check(Driver.reach(game.model, target), "Animation fixture reaches oxygen shelf")
+	for frame in range(120):
+		game.model.step(1.0 / 60, Vector2.ZERO)
+		game.avatar.animate(game.model)
+	check(game.avatar.pose == "idle", "Stationary shelf pose settles after landing")
+	for leg in game.avatar.thighs + game.avatar.shins:
+		check(absf(leg.rotation.x) < 0.01, "Idle feet stop cycling on the platform")
+	var before: float = game.avatar.arms[0].rotation.x
+	game.model.step(1.0 / 60, Vector2.ZERO, 0.0, true)
+	game.avatar.animate(game.model)
+	check(
+		absf(game.avatar.arms[0].rotation.x - before) < 0.5,
+		"Ascent arm pose blends instead of snapping on its first frame"
+	)
+	for frame in range(30):
+		game.model.step(1.0 / 60, Vector2.ZERO, 0.0, true)
+		game.avatar.animate(game.model)
+	check(game.avatar.arms[0].rotation.x < -1.5, "Blended arms reach the ascent stroke")

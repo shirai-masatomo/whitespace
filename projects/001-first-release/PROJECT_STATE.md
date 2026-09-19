@@ -12,16 +12,16 @@
 
 ## 検証
 
-- `check -BuildFolder windows-real`: format/lint/依存整合性、ルール381・シーン143、3経路、Windows Release export/EXE headless起動。
+- `check -BuildFolder windows-real`: format/lint/依存整合性、ルール381・シーン152、3経路、Windows Release export/EXE headless起動。
 - 実GPUのvisual: 入水→足場→急降下/浮上→補給→酸素切れ→救助→再挑戦→300m。Forward+とCompatibilityを実行。クリアボタンの画素検査と960×540も確認。
 - 最終経路: 通常86.93秒 / 補給直行82.23秒 / 寄り道90.95秒。最低酸素25.27%以上。代表救助は30m損失・2.27秒。
-- RTX 4070 SUPER、1280×720、VSyncなし、静止3場面: Forward+中央値2.02〜2.03ms、P95最大2.76ms。GL中央値0.92〜1.06ms。単体GPU時間ではなく描画フレームの実時間。別GPUは未確認。
-- CI: [Windows Actions #35424869533](https://github.com/shirai-masatomo/whitespace/actions/runs/35424869533) 成功。コード `3f90513`（救助の視認性修正まで）、setup/check/配布ZIP/ログ保存まで確認。
+- RTX 4070 SUPER、1280×720、VSyncなし、静止3場面: Forward+中央値2.03ms、P95最大4.06ms。GL中央値0.86〜1.01ms。単体GPU時間ではなく描画フレームの実時間。別GPUは未確認。
+- 前回CI: [Windows Actions #35424869533](https://github.com/shirai-masatomo/whitespace/actions/runs/35424869533) 成功。コード `3f90513`（救助の視認性修正まで）、setup/check/配布ZIP/ログ保存まで確認。
 - [画面・連続画像・評価](REVIEW_PACKET.md) / [自己レビュー](AI_REVIEW.md)。自動操縦の成功を面白さや製品品質の証明にしない。
 
 ## 次
 
-[TASKS](TASKS.md) のDD-033→027。DD-032を実装: 足場上で下を向くと前上方へカメラが回り込み、同じ固定方向で遮蔽なし2→16/23。目標へ向けば19/23、主人公は23/23画面内。海上など残る4場面はFでも補助できる。素材の反復、海面の近景、主人公の姿勢遷移はさらに磨く。音/保存は未実装。Steam SDKはゲームの完成が見えてから。
+[TASKS](TASKS.md) のDD-034→035→027。DD-032を実装: 足場上で下を向くと前上方へカメラが回り込み、同じ固定方向で遮蔽なし2→16/23。目標へ向けば19/23、主人公は23/23画面内。海上など残る4場面はFでも補助できる。DD-033で木目/枝/端面、岩の色差、波の揺らぎ、足場待機の脚と姿勢遷移を改善。海面の等間隔な光の帯、岸壁の境界、流木の端の接地は次に再評価する。音/保存は未実装。Steam SDKはゲームの完成が見えてから。
 
 ## 再実行・既知の環境問題
 
