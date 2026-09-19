@@ -1,15 +1,15 @@
 # DIVE DIVE
 
-**海へ飛び込み、岸壁・沖の生物・酸素藻を選びながら450mへ潜る3Dアクション。** リアル層の探索と深度を失う再挑戦を評価するWindows制作版です。
+**海へ飛び込み、泡の中で息をつき、潮流と岩の穴の先を探る水中ゲーム。** 450m試遊の「まだ面白くない」を受け、独自の面白さを比較する制作版です。完成版・人間レビュー待ちではありません。
 
 ## 今すぐ遊ぶ（Windows）
 
-1. このPCの今回の最新版は **`build/windows/DIVE DIVE.exe`** をダブルクリック。
+1. このPCの今回の最新版は **`build/windows-preview/DIVE DIVE.exe`** をダブルクリック。
 2. 「潜りはじめる」またはEnter。WASDで桟橋の端から海へ飛び込む。
-3. マウスで下を見て足場へ。足場上で下を向くと、カメラが前上方へ回り込み次の足場を見渡せます。光る藻は触れた瞬間に酸素100%。
+3. マウスで海を見渡す。光る藻、息ができる大きな泡、泡が流れ込む岩の穴が寄り道の候補。藻と泡は即酸素100%。
 4. 450mの「裂け目の先」に着地するとクリア。
 
-この作業環境の最新出力は `windows` です。別PCには `build/DIVE-DIVE-windows.zip` を展開して渡します。Godot/Python不要。[GitHub Actions](https://github.com/shirai-masatomo/whitespace/actions/workflows/dive-dive.yml) の最新成功実行の **DIVE-DIVE-windows** artifactでも配布物を取得できます。
+この作業環境の最新出力は `windows-preview` です。別PCには `build/DIVE-DIVE-windows.zip` を展開して渡します。Godot/Python不要。[GitHub Actions](https://github.com/shirai-masatomo/whitespace/actions/workflows/dive-dive.yml) の最新成功実行の **DIVE-DIVE-windows** artifactでも配布物を取得できます。
 
 | 操作 | 動作 |
 | --- | --- |
@@ -24,9 +24,9 @@
 | M | 音のON/OFF（現在の起動中のみ） |
 | Esc / Enter | 一時停止 / 再開 |
 
-足場上では沈降が止まりますが、水中の普通の足場では酸素が減ります。光る藻のそばと海上では減りません。酸素0で泡になって浮上し、訪問済みの浅い安全地点で再挑戦。死亡画面・ロード・ワープなし。フォーカスを外すと一時停止。Spaceは水中の浮上操作で、桟橋上のジャンプではありません。
+足場上では沈降が止まりますが、水中の普通の足場では酸素が減ります。光る藻のそば・巨大泡の内側・海上では減りません。泡は上へ押すためEまたは横移動で抜けられます。救助の帰還地点は藻で更新され、漂う泡は一時的な避難場所です。酸素0で泡になって浮上し、訪問済みの浅い安全地点で再挑戦。死亡画面・ロード・ワープなし。フォーカスを外すと一時停止。Spaceは水中の浮上操作で、桟橋上のジャンプではありません。
 
-26の足場・16か所の海中補給群落。広い海から岩棚を歩き、岩の屋根を抜けて沖へ出るか、クラゲや動く流木へ進むかを選べます。300m以深は狭い裂け目と、その外側の開けた経路。藻・魚群・エイ・潮流が景観と判断の手掛かりになります。道案内は初期OFFで、困った時だけHを使えます。
+序盤には巨大泡2個、内部を抜ける岩アーチ、曲がる潮流、ゆっくり横切る大きな生物。泡を無視して既存の道を進むこともできます。26の足場・16か所の海中補給群落。広い海から岩棚を歩き、岩の屋根を抜けて沖へ出るか、クラゲや動く流木へ進むかを選べます。300m以深は狭い裂け目と、その外側の開けた経路。藻・魚群・エイ・潮流が景観と判断の手掛かりになります。道案内は初期OFFで、困った時だけHを使えます。
 
 足場・岸壁・流木の幹/枝・クラゲの傘は上面以外にも当たります。柔らかい葉・触手、魚・泡は通過可能。救助中は泡の状態で障害物を通り抜けます。波音/水中音と操作音あり。セーブ・Steam SDK・オンライン・450mより深い世界は未実装。
 
@@ -41,19 +41,20 @@ Windows x64、開発時のみPython 3.12以上。リポジトリルートから:
 ```powershell
 cd projects/001-first-release
 ./tools/setup.ps1
-./dev.ps1 check
+./dev.ps1 check -BuildFolder windows-preview
 ./dev.ps1 visual
 ./dev.ps1 play
 ```
 
-使用中のEXEを上書きしないでください。前回の人間レビュー版 `windows-real` は保持し、今回の出力は `build/windows`。出力先が使用中なら未使用の `-BuildFolder windows-preview` 等を選びます。実行制限がある場合は、この信頼したスクリプトに限り `powershell -NoProfile -ExecutionPolicy Bypass -File ./dev.ps1 check`。マシン全体のポリシーは変更しません。
+使用中のEXEを上書きしないでください。人間試遊済みの450m版 `build/windows` と旧版 `windows-real` は保持し、今回の出力は `build/windows-preview`。出力先が使用中なら未使用の `-BuildFolder windows-preview` 等を選びます。実行制限がある場合は、この信頼したスクリプトに限り `powershell -NoProfile -ExecutionPolicy Bypass -File ./dev.ps1 check`。マシン全体のポリシーは変更しません。
 
 - `setup`: Godot 4.7.2・Windowsテンプレートを公式SHA512で検証、固定版の開発ツールを専用venvへ導入。
 - `check`: format / lint / 開発依存整合性 / import / ルール・シーン・音・実プレイヤー全方向衝突テスト / evaluate / release export / EXE headless起動 / 配布zip。
 - `evaluate`: 軽量モデル11経路・対照条件・操作中断の見積もり。実衝突の証明には使いません。`test` の実プレイヤー11経路・689検査が別途 `artifacts/player-collision.json` に実測を残します。
 - `visual`: 実GPUで入水→各操作→失敗→再挑戦→450m、カメラ・960×540 UI。`artifacts/<renderer>/` に撮影。
 - `visual-reef`: 岸壁歩行→裂け目、沖側の別経路を連続操作し、`artifacts/reef-<renderer>/` に撮影。どちらも画面外・フォーカスなし・マウス非捕捉。画像を目視確認します。
-- `gpu-smoke -BuildFolder windows`: 配布EXEを画面外・無音で起動し120フレーム描画。`-Renderer gl_compatibility` でも確認できます。
+- `visual-discovery`: 入水→泡→曲がる潮流→岩の穴→藻への連続入力、酸素残量による寄り道比較。`artifacts/discovery-<renderer>/` に撮影。
+- `gpu-smoke -BuildFolder windows-preview`: 配布EXEを画面外・無音で起動し120フレーム描画。`-Renderer gl_compatibility` でも確認できます。
 - `benchmark -Renderer forward_plus` / `benchmark -Renderer gl_compatibility`: 6場面の1280×720フレーム時間。結果は `artifacts/render-*.json`。
 - `format` / `test` / `lint` / `build` / `editor`: 個別実行。生成ログは `artifacts/`、レビュー用の選別画像は `review/`。
 
@@ -63,6 +64,7 @@ GitHub ActionsはWindowsでsetup/checkを実行しZIP・ログ・測定JSONを�
 
 - `game/dive_config.gd` / `default_config.tres`: 移動・酸素・救助の調整値。
 - `game/stage_layout.gd` / `reef_layout.gd` / `rift_layout.gd`: 足場の位置・大きさ・補給・往復移動の振幅/速さ。
+- `game/discovery_rules.gd` / `discovery_world.gd`: 足場と独立した泡・潮流・穴・生物。調整はconfigのdiscovery/bubble項目、全体比較は`discovery_enabled`。
 - `game/dive_model.gd`: 移動・酸素・救助。実ゲームは `player_motion.gd` の連続掃引カプセルと `level_collision.gd` の固体メッシュ衝突を使用。上面のみの計算は軽量テスト用。
 - `game/diver.gd`: 主人公モデルと姿勢。`ocean_geometry` / `ocean_nature` / `ocean_lighting` / `ocean_effects`: 形状・自然景観・光・泡/粒子。
 - `game/main.gd`: 入力/カメラ、`world.gd` / `shaders/`: 水面・深度別照明・リアル層景観、`hud.gd`: 日本語案内。

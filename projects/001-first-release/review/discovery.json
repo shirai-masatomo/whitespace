@@ -1,0 +1,41 @@
+{
+  "checks": 18,
+  "failed": false,
+  "observations": {
+    "bubble_depth_change": 0.150846481323242,
+    "bubble_off": {
+      "depth": 36.9999465942383,
+      "oxygen": 31.9999999999996
+    },
+    "bubble_on": {
+      "depth": 23.8192253112793,
+      "oxygen": 100.0
+    },
+    "current_off": {
+      "distance_to_bend": 40.6202392578125,
+      "oxygen": 84.0000000000009,
+      "position": "Vector3(-24, -60.99973, -23)"
+    },
+    "current_on": {
+      "distance_to_bend": 0.371943414211273,
+      "oxygen": 84.0000000000009,
+      "position": "Vector3(-63.922943, -67.63613, -22.001923)"
+    },
+    "discovery_seconds": 21.6833333333334,
+    "refuge_detour": {
+      "oxygen": 100.0,
+      "seconds": 7.71666666666664,
+      "success": true
+    },
+    "refuge_skip": {
+      "oxygen": 0.0,
+      "seconds": 2.99999999999999,
+      "success": false
+    },
+    "refuge_skip_full": {
+      "seconds": 4.36666666666666,
+      "success": true
+    }
+  },
+  "scope": "Real swept player and input-driven journey; comparisons do not establish fun"
+}

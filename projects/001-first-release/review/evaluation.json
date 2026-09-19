@@ -114,7 +114,7 @@
       "complete": true,
       "decisions": 13,
       "departure_camera_framed": 11,
-      "departure_camera_unoccluded": 7,
+      "departure_camera_unoccluded": 6,
       "legs": [
         {
           "arrival_oxygen": 77.2,
@@ -208,7 +208,7 @@
       "complete": true,
       "decisions": 9,
       "departure_camera_framed": 8,
-      "departure_camera_unoccluded": 4,
+      "departure_camera_unoccluded": 5,
       "legs": [
         {
           "arrival_oxygen": 100.0,
@@ -460,7 +460,7 @@
       "complete": true,
       "decisions": 9,
       "departure_camera_framed": 8,
-      "departure_camera_unoccluded": 3,
+      "departure_camera_unoccluded": 4,
       "legs": [
         {
           "arrival_oxygen": 100.0,
@@ -530,7 +530,7 @@
       "complete": true,
       "decisions": 11,
       "departure_camera_framed": 10,
-      "departure_camera_unoccluded": 5,
+      "departure_camera_unoccluded": 6,
       "legs": [
         {
           "arrival_oxygen": 82.17,
@@ -712,7 +712,7 @@
       "complete": true,
       "decisions": 12,
       "departure_camera_framed": 10,
-      "departure_camera_unoccluded": 6,
+      "departure_camera_unoccluded": 8,
       "legs": [
         {
           "arrival_oxygen": 100.0,
@@ -882,7 +882,7 @@
       "complete": true,
       "decisions": 11,
       "departure_camera_framed": 9,
-      "departure_camera_unoccluded": 6,
+      "departure_camera_unoccluded": 7,
       "legs": [
         {
           "arrival_oxygen": 100.0,
