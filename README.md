@@ -2,7 +2,7 @@
 
 WhiteSpaceは、**ゲーム・小説・映像・ARG・仮想現実・Webなど、媒体を限定せず作品や実験を継続的に制作・公開するための制作母体**。
 
-全体の目的、プロジェクトの分け方、AI/Codexの自律度、文書方針は [WhiteSpace 基盤方針](docs/FOUNDATION.md) を正本とする。
+全体の目的、プロジェクトの分け方、文書方針は [WhiteSpace 基盤方針](docs/FOUNDATION.md) を正本とする。完全自律型・定期監視の共通設定と監視中PJは [自律運用](docs/AUTONOMY.md) を参照する。
 
 ## プロジェクト
 
