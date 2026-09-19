@@ -2,6 +2,7 @@ extends SceneTree
 
 const SCENE = preload("res://game/main.tscn")
 const Model = preload("res://game/dive_model.gd")
+const Driver = preload("res://tests/route_driver.gd")
 var failures: int = 0
 var checks: int = 0
 
@@ -22,62 +23,55 @@ func run() -> void:
 	root.add_child(game)
 	await process_frame
 	game.set_physics_process(false)
-	check(not game.started and game.hud.primary.visible, "Initial instructions must be visible")
+	check(not game.started and game.hud.primary.visible, "Initial instructions visible")
 	game.hud.primary.pressed.emit()
-	check(game.started and not game.paused, "Start button must start play")
+	check(game.started and not game.paused, "Start button starts play")
 	Input.action_press("dive")
 	Input.action_press("right")
-	for frame in range(120):
+	for frame in range(180):
 		game._physics_process(1.0 / 60)
 	Input.action_release("dive")
 	Input.action_release("right")
-	check(
-		game.model.depth > 20 and game.camera.position.y < -20,
-		"Input must update model and camera depth"
-	)
-	check(game.swimmer.x > 5, "Horizontal movement must work")
+	check(game.model.depth > 5 and game.model.position.x > 15, "Inputs move and sink after edge")
+	check(game.avatar.position == game.model.position, "Avatar follows simulation")
 	var event := InputEventMouseMotion.new()
 	event.relative = Vector2(100, 10)
 	game._unhandled_input(event)
-	check(game.yaw < 0 and game.pitch < -0.42, "Mouse motion must update view")
-	game.toggle_pause()
-	var paused_depth: float = game.model.depth
-	var paused_pressure: float = game.model.pressure
-	Input.action_press("dive")
-	game._physics_process(1.0)
-	Input.action_release("dive")
+	check(game.yaw < 0 and game.pitch < -0.48, "Mouse moves view")
+	var key := InputEventKey.new()
+	key.keycode = KEY_V
+	key.pressed = true
+	game._unhandled_input(key)
+	game._update_camera()
+	check(not game.third_person and not game.avatar.visible, "V toggles first person")
 	check(
-		game.model.depth == paused_depth and game.model.pressure == paused_pressure,
-		"Pause must freeze risk and progress"
+		game.camera.position.distance_to(game.model.position + Vector3.UP * 1.4) < 0.01,
+		"First person uses eye position"
+	)
+	game._unhandled_input(key)
+	game._update_camera()
+	check(game.third_person and game.avatar.visible, "V restores third person")
+	game.toggle_pause()
+	var paused_position: Vector3 = game.model.position
+	var paused_oxygen: float = game.model.oxygen
+	game._physics_process(1)
+	check(
+		game.model.position == paused_position and game.model.oxygen == paused_oxygen,
+		"Pause freezes risk and movement"
 	)
 	game.begin()
 	game._notification(Node.NOTIFICATION_APPLICATION_FOCUS_OUT)
-	check(game.paused, "Focus loss must pause instead of continuing unseen")
-	game.begin()
-	for frame in range(300):
-		game.advance(1.0 / 60, Vector2.ONE, 0, false)
-	check(
-		Vector2(game.swimmer.x, game.swimmer.z).length() <= 23.001,
-		"Player must remain inside test volume"
-	)
-	var recovering := false
-	for frame in range(60 * 180):
-		if game.model.pressure > 65:
-			recovering = true
-		elif game.model.pressure < 15:
-			recovering = false
-		game.advance(1.0 / 60, Vector2.ZERO, 0 if recovering else 1, false)
-		if game.model.mode == Model.Mode.COMPLETE:
-			break
-	check(
-		game.model.mode == Model.Mode.COMPLETE and game.hud.primary.visible,
-		"Goal must offer replay in same scene"
-	)
+	check(game.paused, "Focus loss pauses game")
+	game.restart()
+	for index in range(1, game.model.platforms.size()):
+		check(Driver.reach(game.model, index), "Scene route platform %d" % index)
+		if game.model.platforms[index].oxygen:
+			Driver.refill(game.model)
+	game.advance(0, Vector2.ZERO)
+	check(game.model.mode == Model.Mode.COMPLETE and game.hud.primary.visible, "Goal offers replay")
 	var scene_id: int = game.get_instance_id()
 	game.hud.primary.pressed.emit()
-	check(
-		game.model.depth == 0 and game.get_instance_id() == scene_id, "Replay must reuse the scene"
-	)
+	check(game.model.depth == 0 and game.get_instance_id() == scene_id, "Replay uses same scene")
 	game.queue_free()
 	await process_frame
 	print("Scene: %d checks, %d failures" % [checks, failures])

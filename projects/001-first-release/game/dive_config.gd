@@ -1,18 +1,20 @@
 extends Resource
-## Tuning data, not a fixed specification. Units: metres, seconds, pressure points.
+## Speeds: metres/second; acceleration: metres/second squared; oxygen: points.
 
 @export var goal_depth: float = 300.0
-@export var descend_speed: float = 14.0
-@export var ascend_speed: float = 10.0
-@export var horizontal_speed: float = 9.0
-@export var sprint_multiplier: float = 1.65
-@export var acceleration: float = 24.0
-@export var pressure_per_metre: float = 0.9
-@export var speed_penalty: float = 0.035
-@export var recovery_per_second: float = 13.0
-@export var pressure_limit: float = 100.0
-@export var warning_pressure: float = 70.0
-@export var setback_metres: float = 55.0
-@export var forced_ascent_speed: float = 20.0
-@export var recovery_pressure: float = 20.0
-@export var stage_radius: float = 23.0
+@export var sink_speed: float = 5.0
+@export var fast_sink_speed: float = 9.0
+@export var brake_sink_speed: float = 2.0
+@export var vertical_acceleration: float = 12.0
+@export var horizontal_speed: float = 7.0
+@export var water_acceleration: float = 10.0
+@export var platform_acceleration: float = 22.0
+@export var oxygen_capacity: float = 100.0
+@export var oxygen_consumption: float = 4.0
+@export var oxygen_recovery: float = 25.0
+@export var oxygen_radius: float = 3.5
+@export var emergency_speed: float = 32.0
+@export var rescue_clearance: float = 3.0
+@export var min_setback: float = 2.0
+@export var missed_goal_depth: float = 345.0
+@export var ocean_extent: float = 500.0

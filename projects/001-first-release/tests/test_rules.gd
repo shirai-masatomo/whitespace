@@ -1,7 +1,7 @@
 extends SceneTree
 
 const Model = preload("res://game/dive_model.gd")
-const Config = preload("res://game/dive_config.gd")
+const Driver = preload("res://tests/route_driver.gd")
 var failures: int = 0
 var checks: int = 0
 
@@ -13,89 +13,177 @@ func check(condition: bool, message: String) -> void:
 		push_error(message)
 
 
-func simulate(
-	model, seconds: float, direction: float, sprint: bool = false, fps: float = 60
-) -> void:
-	for frame in range(int(seconds * fps)):
-		model.step(1.0 / fps, direction, sprint)
+func tick(model, seconds: float, axis := Vector2.ZERO, descent: float = 0) -> void:
+	for frame in range(int(seconds * 60)):
+		model.step(1.0 / 60, axis, descent)
+
+
+func airborne(depth: float = 60.0):
+	var model = Model.new()
+	model.position = Vector3(100, -depth, 0)
+	model.grounded = -1
+	return model
 
 
 func _initialize() -> void:
-	var regular = Model.new()
-	var fast = Model.new()
-	simulate(regular, 2, 1)
-	simulate(fast, 2, 1, true)
-	check(regular.depth > 20, "Descending should gain depth")
-	check(fast.depth > regular.depth, "Sprint must descend faster")
-	check(fast.pressure > regular.pressure, "Rapid descent must be riskier")
-	var before: float = regular.pressure
-	simulate(regular, 3, 0)
-	check(regular.pressure < before, "Staying still must recover pressure after braking")
-	check(is_zero_approx(regular.vertical_speed), "Releasing dive must stop vertical drift")
-	simulate(regular, 10, -1)
-	check(regular.depth == 0 and regular.pressure == 0, "Surface and pressure must clamp at zero")
-	var reckless = Model.new()
-	for frame in range(1200):
-		reckless.step(1.0 / 60, 1, true)
-		if reckless.mode == Model.Mode.RETURNING:
-			break
-	check(reckless.mode == Model.Mode.RETURNING, "Continuous rushing must fail")
-	var failure_depth: float = reckless.depth
-	var preserved_best: float = reckless.best_depth
-	var previous_depth: float = reckless.depth
-	while reckless.mode == Model.Mode.RETURNING:
-		reckless.step(1.0 / 60, 1, true)
-		check(reckless.depth <= previous_depth, "Holding dive cannot cancel forced ascent")
+	var model = Model.new()
+	tick(model, 30)
+	check(model.depth == 0 and model.oxygen == 100, "Start is safe on oxygen platform")
+	tick(model, 2, Vector2.RIGHT)
+	check(model.grounded == -1 and model.depth > 0, "Walking off automatically sinks")
+	model = airborne()
+	tick(model, 2)
+	check(is_equal_approx(model.velocity.y, -5), "Natural terminal sink is 5 m/s")
+	tick(model, 2, Vector2.ZERO, 1)
+	check(is_equal_approx(model.velocity.y, -9), "E descent is 9 m/s")
+	tick(model, 2, Vector2.ZERO, -1)
+	check(is_equal_approx(model.velocity.y, -2), "Q slows but cannot hover or rise")
+	tick(model, 1, Vector2.ONE)
+	check(
+		is_equal_approx(Vector2(model.velocity.x, model.velocity.z).length(), 7),
+		"Diagonal speed capped"
+	)
+	tick(model, 1, Vector2.ZERO)
+	check(Vector2(model.velocity.x, model.velocity.z).length() < 0.01, "Water steering can brake")
+	model = Model.new()
+	model.position = Vector3(14, -20, -18)
+	model.grounded = -1
+	model.step(2, Vector2.ZERO, 1)
+	check(model.grounded == 1 and model.depth == 30, "Swept landing cannot tunnel through platform")
+	tick(model, 1)
+	check(model.depth == 30 and model.velocity.y == 0, "Landing stops descent")
+	check(model.oxygen < 90, "Ordinary platforms do not refill oxygen")
+	model.position = model.platforms[2].position
+	model.grounded = 2
+	model.oxygen = 0.1
+	tick(model, 4)
+	check(
+		model.oxygen == 100 and model.checkpoint == 2,
+		"Oxygen refills in four seconds and records safe spot"
+	)
+	model.position.x += 4
+	tick(model, 1)
+	check(
+		is_equal_approx(model.oxygen, 96), "Outside bubble on same platform still consumes oxygen"
+	)
+	model.oxygen = 0.01
+	tick(model, 1.0 / 60)
+	check(
+		model.mode == Model.Mode.RETURNING and model.return_checkpoint == 0,
+		"Failure at checkpoint edge loses previous leg"
+	)
+	var scene_steps := 0
+	while model.mode == Model.Mode.RETURNING and scene_steps < 2000:
+		var before: Vector3 = model.position
+		model.step(1.0 / 60, Vector2.ONE, 1)
 		check(
-			previous_depth - reckless.depth <= 20.0 / 60.0 + 0.0001,
-			"Failure must move continuously, not teleport"
+			before.distance_to(model.position) <= 32.0 / 60 + 0.001, "Rescue must remain continuous"
 		)
-		previous_depth = reckless.depth
-	check(reckless.depth < failure_depth, "Failure must cost depth")
-	check(reckless.best_depth == preserved_best, "Best depth is informational, not a checkpoint")
-	check(reckless.setbacks == 1, "One failure should count once")
-	check(reckless.pressure == 20, "Recovery must leave a playable pressure level")
-	var recovered: float = reckless.depth
-	simulate(reckless, 1, 1)
-	check(reckless.depth > recovered, "Immediate retry must work")
-	var cautious = Model.new()
-	var recovering := false
-	for frame in range(60 * 180):
-		if cautious.pressure > 65:
-			recovering = true
-		elif cautious.pressure < 15:
-			recovering = false
-		cautious.step(1.0 / 60, 0 if recovering else 1)
-		if cautious.mode == Model.Mode.COMPLETE:
-			break
+		scene_steps += 1
 	check(
-		cautious.mode == Model.Mode.COMPLETE,
-		"Alternating descent and rest must reach goal within 3 minutes"
+		model.grounded == 0 and model.oxygen == 100 and model.depth_losses[0] == 60,
+		"Rescue returns to safe platform with oxygen"
 	)
-	check(cautious.setbacks == 0, "Cautious route must not require forced ascent")
-	print("Cautious route: %.2fs, %.1fm" % [cautious.elapsed, cautious.depth])
-	var finished_time: float = cautious.elapsed
-	simulate(cautious, 3, 1, true)
-	check(
-		cautious.depth == 300 and cautious.elapsed == finished_time, "Completion must remain stable"
-	)
-	cautious.reset()
-	check(
-		cautious.depth == 0 and cautious.setbacks == 0 and cautious.mode == Model.Mode.DIVING,
-		"Replay must fully reset"
-	)
-	var config = Config.new()
-	config.goal_depth = 10.0
-	var tie = Model.new(config)
-	tie.depth = 9.99
-	tie.pressure = 99.999
-	tie.step(0.1, 1)
-	check(tie.mode == Model.Mode.RETURNING, "Pressure must win a goal/failure tie")
-	var slow_fps = Model.new()
-	var fast_fps = Model.new()
-	simulate(slow_fps, 2, 1, false, 30)
-	simulate(fast_fps, 2, 1, false, 120)
-	check(absf(slow_fps.depth - fast_fps.depth) < 0.4, "Motion must be timestep stable")
-	check(absf(slow_fps.pressure - fast_fps.pressure) < 1, "Pressure must be timestep stable")
+	tick(model, 2, Vector2.RIGHT)
+	check(model.depth > 0 and model.mode == Model.Mode.DIVING, "Immediate retry without reset")
+	_test_route()
+	_test_failure_metrics()
+	_test_edges()
 	print("Rules: %d checks, %d failures" % [checks, failures])
 	quit(1 if failures else 0)
+
+
+func _test_route() -> void:
+	var model = Model.new()
+	for index in range(1, model.platforms.size()):
+		check(Driver.reach(model, index), "Route can reach platform %d" % index)
+		if model.platforms[index].oxygen:
+			Driver.refill(model)
+	check(
+		model.mode == Model.Mode.COMPLETE and model.setbacks == 0,
+		"Whole route reaches goal without failure"
+	)
+	print("Route completion: %.2f seconds" % model.elapsed)
+	var completed: Vector3 = model.position
+	tick(model, 2, Vector2.ONE)
+	check(model.position == completed, "Completion freezes movement")
+	model.reset()
+	check(
+		model.depth == 0 and model.setbacks == 0 and model.mode == Model.Mode.DIVING,
+		"Replay resets progress"
+	)
+
+
+func _test_failure_metrics() -> void:
+	var losses: Array[float] = []
+	for descent in [0.0, 1.0, -1.0]:
+		var model = airborne()
+		model.checkpoint = 2
+		var frames := 0
+		while model.mode == Model.Mode.DIVING and frames < 1600:
+			model.step(1.0 / 60, Vector2.ZERO, descent)
+			frames += 1
+		check(absf(frames / 60.0 - 25) < 0.02, "Full oxygen lasts 25 seconds")
+		check(model.mode == Model.Mode.RETURNING, "Depletion starts rescue")
+		var loss: float = model.failure_depth + model.return_target.y
+		losses.append(loss)
+		tick(model, 20)
+		check(
+			model.mode == Model.Mode.DIVING and model.grounded == 2,
+			"Airborne rescue returns safely"
+		)
+	var waiting = Model.new()
+	waiting.position = waiting.platforms[3].position
+	waiting.grounded = 3
+	waiting.checkpoint = 2
+	tick(waiting, 25.1)
+	losses.append(waiting.failure_depth + waiting.return_target.y)
+	var total := 0.0
+	for loss in losses:
+		total += loss
+	print(
+		(
+			"Depth loss sample (natural / E / Q / ordinary platform): %s; mean %.2fm"
+			% [losses, total / losses.size()]
+		)
+	)
+	var file := FileAccess.open("res://artifacts/metrics.json", FileAccess.WRITE)
+	file.store_string(
+		JSON.stringify(
+			{
+				"depth_losses_m": losses,
+				"mean_loss_m": total / losses.size(),
+				"oxygen_seconds": 25,
+				"refill_seconds": 4
+			},
+			"  "
+		)
+	)
+
+
+func _test_edges() -> void:
+	var model = airborne(299)
+	model.step(1, Vector2.ZERO)
+	check(model.mode != Model.Mode.COMPLETE, "Passing goal depth without landing is not a win")
+	model = airborne(345)
+	model.step(0.1, Vector2.ZERO)
+	check(
+		model.mode == Model.Mode.RETURNING, "Missing all platforms cannot strand player below goal"
+	)
+	model = Model.new()
+	model.position = model.platforms[9].position
+	model.grounded = 9
+	model.oxygen = 0.01
+	model.step(0.1, Vector2.ZERO)
+	check(model.mode == Model.Mode.RETURNING, "Oxygen depletion takes precedence over goal")
+	var fine = airborne()
+	var coarse = airborne()
+	for frame in range(120):
+		fine.step(1.0 / 120, Vector2.RIGHT)
+	for frame in range(30):
+		coarse.step(1.0 / 30, Vector2.RIGHT)
+	check(
+		fine.position.distance_to(coarse.position) < 0.15,
+		"Frame rate changes have small movement error"
+	)
+	check(absf(fine.oxygen - coarse.oxygen) < 0.001, "Oxygen independent of tick rate")

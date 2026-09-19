@@ -69,13 +69,9 @@ func _draw() -> void:
 	var scale_factor := size / Vector2(1280, 720)
 	draw_set_transform(Vector2.ZERO, 0, scale_factor)
 	var model = game.model
-	var pressure_ratio: float = model.pressure / game.TUNING.pressure_limit
-	var danger: bool = model.pressure >= game.TUNING.warning_pressure
+	var ratio: float = model.oxygen / game.TUNING.oxygen_capacity
 	var returning: bool = model.mode == Model.Mode.RETURNING
-	var complete: bool = model.mode == Model.Mode.COMPLETE
-	var accent := ORANGE if danger or returning else CYAN
-	if danger or returning:
-		draw_rect(Rect2(0, 0, 1280, 720), Color(0.7, 0.2, 0.05, 0.06 + pressure_ratio * 0.06))
+	var accent := ORANGE if ratio < 0.25 or returning else CYAN
 	draw_rect(Rect2(28, 24, 264, 157), Color(0.02, 0.07, 0.1, 0.88))
 	text_at(Vector2(48, 52), "DIVE DIVE   /   潜航記録", 16, CYAN)
 	text_at(Vector2(48, 115), "%03d" % int(model.depth), 54)
@@ -87,60 +83,75 @@ func _draw() -> void:
 		MUTED
 	)
 	draw_rect(Rect2(872, 24, 380, 125), Color(0.02, 0.07, 0.1, 0.88))
-	text_at(Vector2(892, 54), "圧力負荷", 19, accent)
-	text_at(Vector2(1145, 56), "%03d%%" % int(model.pressure), 23, accent)
+	text_at(Vector2(892, 54), "酸素", 19, accent)
+	text_at(Vector2(1145, 56), "%03d%%" % int(ratio * 100), 23, accent)
 	draw_rect(Rect2(892, 72, 338, 8), Color("284451"))
-	draw_rect(Rect2(892, 72, 338 * pressure_ratio, 8), accent)
-	var pressure_hint := "止まる・浮上する → 圧力が下がる"
+	draw_rect(Rect2(892, 72, 338 * ratio, 8), accent)
+	var hint := "緑の泡に入って酸素を補給"
 	if returning:
-		pressure_hint = "強制浮上中  →  %dmで操作復帰" % int(model.return_depth)
-	elif danger:
-		pressure_hint = "危険！ Eを離して圧力を下げよう"
-	text_at(Vector2(892, 114), pressure_hint, 17, accent)
-	# A depth ruler makes upward loss legible even in featureless water.
-	draw_line(Vector2(1229, 202), Vector2(1229, 574), MUTED, 2)
-	for index in range(4):
-		var y := 202.0 + index * 124
-		draw_line(Vector2(1220, y), Vector2(1238, y), MUTED, 2)
-		text_at(Vector2(1152, y + 5), "%dm" % (index * 100), 16, MUTED)
-	var marker_y: float = 202.0 + clampf(model.depth / game.TUNING.goal_depth, 0, 1) * 372
-	draw_circle(Vector2(1229, marker_y), 6, accent)
-	draw_line(Vector2(632, 360), Vector2(648, 360), Color(0.8, 1, 1, 0.6), 1)
-	draw_line(Vector2(640, 352), Vector2(640, 368), Color(0.8, 1, 1, 0.6), 1)
+		hint = "緊急浮上 → %dmから再挑戦" % int(-model.return_target.y)
+	elif model.at_oxygen():
+		hint = "酸素を補給中 · ここが再挑戦地点"
+	elif ratio < 0.25:
+		hint = "酸素が少ない！ 緑の泡を目指そう"
+	text_at(Vector2(892, 114), hint, 16, accent)
+	var status := "足場を離れると、自然に沈みます" if model.grounded >= 0 else "沈降中 · Qで減速 / Eで速く潜る"
+	if returning:
+		status = "緊急浮上中 · 操作は到着後に戻ります"
+	text_at(Vector2(30, 213), status, 17)
+	text_at(Vector2(30, 239), "カメラ：%s [Vで切替]" % ("三人称" if game.third_person else "一人称"), 16, MUTED)
+	_draw_target(scale_factor)
 	draw_rect(Rect2(28, 648, 1224, 48), Color(0.02, 0.07, 0.1, 0.9))
-	text_at(
-		Vector2(46, 678),
-		"WASD 移動   ·   マウス 視点   ·   E 潜る   ·   Q 浮上   ·   Shift+E 急降下   ·   Esc 一時停止",
-		18
-	)
+	text_at(Vector2(46, 678), "WASD 移動  ·  マウス 視点  ·  E 急降下  ·  Q 減速  ·  V 視点切替  ·  Esc 一時停止", 18)
 	if returning:
-		draw_rect(Rect2(360, 514, 560, 90), Color(0.05, 0.13, 0.17, 0.92))
-		text_at(Vector2(391, 549), "圧力限界 — 海があなたを押し戻す", 24, ORANGE)
-		text_at(Vector2(401, 580), "深度を失っても、挑戦はそのまま続く", 19)
-	if not game.started or game.paused or complete:
-		draw_rect(Rect2(0, 0, 1280, 720), Color(0.015, 0.045, 0.075, 0.82))
-		draw_rect(Rect2(302, 134, 676, 457), INK)
-		draw_line(Vector2(334, 168), Vector2(408, 168), CYAN, 3)
-		text_at(Vector2(334, 203), "DIVE DIVE  /  潜航試験 01", 20, CYAN)
-		var heading := "300mの海底へ。"
-		if game.paused:
-			heading = "一時停止"
-		elif complete:
-			heading = "海底に到達。"
-		text_at(Vector2(334, 270), heading, 42)
-		if complete:
-			text_at(
-				Vector2(334, 321),
-				"潜航時間 %d秒   /   強制浮上 %d回" % [int(model.elapsed), model.setbacks],
-				22
-			)
-			text_at(Vector2(334, 365), "急ぐか、待つか。あなたのペースで潜ろう。", 20, MUTED)
-		else:
-			text_at(Vector2(334, 317), "深く進むほど、圧力負荷がたまる。", 22)
-			text_at(Vector2(334, 354), "Eを離して留まると回復。100%で強制浮上。", 20, MUTED)
-			text_at(Vector2(334, 391), "目標は300m。急がず、止まりながら潜ろう。", 20, MUTED)
-		text_at(Vector2(334, 444), "E：潜る   Q：浮上   WASD：移動   マウス：視点", 18, CYAN)
-		primary.position = Vector2(334, 485) * scale_factor
-		primary.size = Vector2(360, 58) * scale_factor
-		quit_button.position = Vector2(724, 485) * scale_factor
-		quit_button.size = Vector2(220, 58) * scale_factor
+		draw_rect(Rect2(348, 510, 584, 95), Color(0.03, 0.12, 0.18, 0.92))
+		text_at(Vector2(380, 547), "%s — 泡になって緊急浮上" % model.rescue_reason, 23, ORANGE)
+		text_at(Vector2(380, 582), "深度を失っても、挑戦はそのまま続く", 19)
+	if not game.started or game.paused or model.mode == Model.Mode.COMPLETE:
+		_draw_overlay(scale_factor)
+
+
+func _draw_target(scale_factor: Vector2) -> void:
+	if game.model.mode == Model.Mode.RETURNING:
+		return
+	draw_rect(Rect2(28, 584, 530, 43), Color(0.02, 0.07, 0.1, 0.88))
+	var target: Dictionary = game.model.platforms[game.next_platform()]
+	text_at(Vector2(30, 612), "次の目印：%s / %dm" % [target.label, int(-target.position.y)], 18, CYAN)
+	var point: Vector3 = target.position + Vector3.UP * 2
+	if game.camera.is_position_behind(point):
+		return
+	var screen: Vector2 = game.camera.unproject_position(point) / scale_factor
+	if Rect2(300, 170, 780, 410).has_point(screen):
+		draw_arc(screen, 12, 0, TAU, 32, CYAN, 2, true)
+		draw_circle(screen, 2, WHITE)
+		draw_rect(Rect2(screen + Vector2(18, -17), Vector2(82, 26)), INK)
+		text_at(screen + Vector2(24, 2), "%dm ↓" % int(-target.position.y), 16, CYAN)
+
+
+func _draw_overlay(scale_factor: Vector2) -> void:
+	var complete: bool = game.model.mode == Model.Mode.COMPLETE
+	draw_rect(Rect2(0, 0, 1280, 720), Color(0.015, 0.045, 0.075, 0.82))
+	draw_rect(Rect2(272, 110, 736, 497), INK)
+	text_at(Vector2(310, 166), "DIVE DIVE  /  海底への足場旅", 20, CYAN)
+	var heading := "足場をたどって、300mへ。"
+	if game.paused:
+		heading = "一時停止"
+	elif complete:
+		heading = "海底の灯に到達。"
+	text_at(Vector2(310, 230), heading, 34)
+	if complete:
+		text_at(
+			Vector2(310, 298),
+			"潜航時間 %d秒 / 緊急浮上 %d回" % [int(game.model.elapsed), game.model.setbacks],
+			22
+		)
+		text_at(Vector2(310, 352), "次は別のルートでもう一度。", 22, MUTED)
+	else:
+		text_at(Vector2(310, 289), "足場を離れると沈む。着地すると止まる。", 21)
+		text_at(Vector2(310, 330), "酸素は減り続ける。緑の泡で補給しよう。", 21)
+		text_at(Vector2(310, 371), "酸素が切れると浮上して、深度を失います。", 20, MUTED)
+	text_at(Vector2(310, 439), "WASD 移動 / マウス 視点 / E 急降下 / Q 減速", 19, CYAN)
+	primary.position = Vector2(310, 489) * scale_factor
+	primary.size = Vector2(400, 58) * scale_factor
+	quit_button.position = Vector2(742, 489) * scale_factor
+	quit_button.size = Vector2(226, 58) * scale_factor
