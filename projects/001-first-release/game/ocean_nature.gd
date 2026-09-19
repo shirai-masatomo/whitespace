@@ -241,6 +241,8 @@ static func landscape(parent: Node3D) -> void:
 		)
 		# Scenic outcrops are kept outside the landable route bounds.
 		point.x += 70 if point.x > 0 else -50
+		if point.x > 35 and point.y > -105 and point.z > -105:
+			continue  # This scenery is replaced by the explorable cavern, not a filled rock.
 		Geo.put(parent, Geo.boulder(Vector3(12, 15, 10), 600 + i), mat, point)
 		kelp(parent, point, 10 + i % 4, i)
 	for i in range(8):

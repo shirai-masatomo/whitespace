@@ -5,6 +5,7 @@ const Layout = preload("res://game/stage_layout.gd")
 var rays: Array[Node3D] = []
 var shoals: Array[Node3D] = []
 var origins: Array[Vector3] = []
+var reef_guide: Node3D
 
 
 func _ready() -> void:
@@ -12,6 +13,8 @@ func _ready() -> void:
 		if platform.oxygen:
 			make_shoal(platform.position + Vector3.UP * 5, 16)
 	make_shoal(Vector3(8, -18, -21), 24)
+	make_shoal(Vector3(15, -12, -19), 48)
+	reef_guide = shoals[-1]
 	for zone in Layout.current_zones():
 		make_shoal(zone.center, 32)
 	for index in range(3):
@@ -72,6 +75,12 @@ func update(player: Vector3, elapsed: float, giant: Vector3 = Vector3.INF) -> vo
 			var disturbance := origins[index] - giant
 			escape += disturbance.normalized() * maxf(0, 42 - disturbance.length()) * .4
 		shoals[index].position = origins[index] + escape
+	# A living lateral clue, with a return path, rather than an arrow or a
+	# mandatory escort. The shoal repeatedly crosses towards the kelp refuge.
+	var progress := .5 - .5 * cos(elapsed * .2)
+	var destination := Vector3(12, -12, -18).lerp(Vector3(35, -22, -28), progress)
+	var separation := destination - player
+	reef_guide.position = destination + separation.normalized() * maxf(0, 6 - separation.length())
 
 
 func make_shoal(point: Vector3, count: int) -> void:

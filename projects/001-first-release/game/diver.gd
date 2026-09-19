@@ -160,7 +160,7 @@ func _ready() -> void:
 func animate(model) -> void:
 	var dt: float = clampf(model.elapsed - previous_time, 0, 0.1)
 	previous_time = model.elapsed
-	var grounded: bool = model.grounded >= 0
+	var grounded: bool = model.standing
 	var horizontal: float = Vector2(model.velocity.x, model.velocity.z).length()
 	if grounded and not previous_grounded:
 		landing = 1.0

@@ -10,6 +10,7 @@ const Layout = preload("res://game/stage_layout.gd")
 const TUNING = preload("res://game/default_config.tres")
 const Collision = preload("res://game/level_collision.gd")
 const Discoveries = preload("res://game/discovery_world.gd")
+const Playground = preload("res://game/playground_world.gd")
 var lighting: Node3D
 var effects: Node3D
 var environment: Environment
@@ -35,6 +36,10 @@ func _ready() -> void:
 	add_child(life)
 	discoveries = Discoveries.new()
 	add_child(discoveries)
+	add_child(Playground.new())
+	for plant in Playground.Rules.PLANTS:
+		effects.vent(plant)
+		life.make_shoal(plant + Vector3.UP * 4, 28)
 	for zone in Layout.current_zones():
 		effects.current(zone.center, zone.flow)
 
@@ -106,8 +111,8 @@ func sync_platforms(data: Array[Dictionary]) -> void:
 		platforms[index].get_node("SolidGeometry").force_update_transform()
 
 
-func update_depth(camera_y: float) -> void:
-	lighting.update(camera_y)
+func update_depth(camera_y: float, cave_air: bool = false) -> void:
+	lighting.update(camera_y, cave_air)
 
 
 func update_life(model) -> void:

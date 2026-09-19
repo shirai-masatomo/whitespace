@@ -100,7 +100,7 @@ func observe(model, delta: float) -> void:
 		if model.grounded >= 0 and previous_grounded < 0 and previous_mode == model.mode:
 			cue("land")
 	var immersion := 1.0 - smoothstep(-2.5, .5, model.position.y + 1.4)
-	if model.in_air_pocket():
+	if model.in_air_pocket() or model.in_dry_cave():
 		immersion *= .15
 	var speed: float = model.velocity.length()
 	var target := {
