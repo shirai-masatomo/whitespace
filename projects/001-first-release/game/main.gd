@@ -21,7 +21,7 @@ var paused: bool = false
 var was_complete: bool = false
 var selected_target: int = 1
 var ledge_view: float = 0.0
-var automated_input: bool = false
+var automated_input: bool = "--smoke-test" in OS.get_cmdline_user_args()
 var sound: Node
 
 
@@ -50,6 +50,8 @@ func _ready() -> void:
 	hud.game = self
 	canvas.add_child(hud)
 	_update_camera()
+	if "--smoke-test" in OS.get_cmdline_user_args():
+		begin()
 
 
 func _setup_inputs() -> void:

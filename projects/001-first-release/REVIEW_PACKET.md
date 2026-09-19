@@ -1,6 +1,6 @@
 # DIVE DIVE — REVIEW PACKET
 
-2026-09-19 / **SELF_CONTINUE** / リアル層Vertical Slice制作中。人間レビュー待ちは解除済み。
+2026-09-19 / **HUMAN_REVIEW** / リアル層300mのVertical Slice候補。旧中核レビューとは別の節目。
 
 ## 現在どう遊べるか
 
@@ -58,12 +58,12 @@ RTX 4070 SUPER / 1280×720 / MSAA 4x / VSyncなし / 12,60,155mの静止場面�
 
 | | Forward+ | Compatibility |
 | --- | --- | --- |
-| 中央値（3場面） | 2.04 / 2.37 / 2.34ms | 0.97 / 1.08 / 0.94ms |
-| P95最大 | 4.09ms | 1.16ms |
+| 中央値（3場面） | 2.32 / 2.31 / 2.41ms | 0.98 / 1.09 / 0.96ms |
+| P95最大 | 4.08ms | 1.26ms |
 | 光・霧 | 体積霧/局所散乱/SSAO、補助光線 | 距離霧と近似光線 |
 | 起動/自動プレイ | 成功 | 成功 |
 
-[Forward+実測](review/render-forward_plus.json) / [GL実測](review/render-gl_compatibility.json) / [GL比較画面](review/compatibility/05-platform.png)。比較画像と性能JSONは今回の酸素藻/経路/魚群修正後。同じPCだけの比較で最低動作環境を確定しない。
+[Forward+実測](review/render-forward_plus.json) / [GL実測](review/render-gl_compatibility.json) / [GL比較画面](review/compatibility/05-platform.png)。比較画像と性能JSONは今回の独自材質修正後。同じPCだけの比較で最低動作環境を確定しない。
 
 Godotの[体積霧](https://docs.godotengine.org/en/4.7/tutorials/3d/volumetric_fog.html)はForward+向け。光と負荷の制御が可能で、今回UE5移行を要する障害は認めない。別GPU・長時間・高解像度は未確認。
 
@@ -79,7 +79,7 @@ Godotの[体積霧](https://docs.godotengine.org/en/4.7/tutorials/3d/volumetric_
 | 主人公 | 専用スーツ/関節動作が識別可能。姿勢ブレンドと待機時の足は改善。シルエットと動作の表現力はさらに磨く |
 | Godotの制約 | 低性能GPUは未確認。現時点はアート制作と配置の課題が主で、移行理由にはしない |
 
-**動くからPASSにはしない。** 製品として見せるVertical Sliceの画質ゲートは未達。DD-036/037は反映。DD-042で材質/景観の反復を磨き、DD-027で画面全体の品質を監査を人間待ちなしで継続。
+画面の8観点を[自己レビュー](AI_REVIEW.md)で再評価し、300m区間のVertical Slice候補として人間試遊へ。Only Up系市販作品との同等品質を外部認定されたものではない。
 
 [海上から足場を見る](review/20-pier-lookdown.png) / [流木の縁の接地](review/21-driftwood-edge.png)。海面の白い筋を旧shaderで再現し、修正後は両rendererの実画素検査を通過。
 
@@ -89,4 +89,8 @@ Godotの[体積霧](https://docs.godotengine.org/en/4.7/tutorials/3d/volumetric_
 
 海上/水中/移動の音と6種の操作音を独自合成。接触回復は待ち時間なし、Mで無音、ポーズで音も停止。52検査でPCMの音量・連打防止・遷移を確認。音色の主観評価は未実施。[音の波形測定](review/audio-metrics.json)。
 
-岩/クラゲ/ブイの上面と着地範囲を共通形状へ修正。実メッシュ1,280点の比較と急降下着地を通過。[岩の縁の歩行](review/24-rock-edge.png)。次はDD-042の材質/景観を改善し、HUMAN_REVIEWはまだ要求しない。
+岩/クラゲ/ブイの上面と着地範囲を共通形状へ修正。実メッシュ1,280点の比較と急降下着地を通過。[岩の縁の歩行](review/24-rock-edge.png)。独自の岩肌/木目/砂を追加調整し、強すぎた粒状感を再レビューで抑えた。外部素材は未使用。
+
+## 今回、人間に見てほしいこと
+
+5〜10分だけ試遊し、①狙った足場へ動けるか、②酸素とルート選択でもう一度潜りたくなるか、③この絵づくりを伸ばすかを確認してください。製品版全体や11,000m世界の完成レビューではありません。別GPUと音色の主観評価は未確認です。

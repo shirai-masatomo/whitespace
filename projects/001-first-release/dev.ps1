@@ -1,4 +1,4 @@
-﻿param([ValidateSet('check', 'evaluate', 'test', 'lint', 'format', 'build', 'visual', 'benchmark', 'play', 'editor')][string]$Task = 'check', [ValidateSet('windows','windows-preview','windows-real')][string]$BuildFolder = 'windows', [ValidateSet('forward_plus','gl_compatibility')][string]$Renderer = 'forward_plus')
+﻿param([ValidateSet('check', 'evaluate', 'test', 'lint', 'format', 'build', 'visual', 'benchmark', 'gpu-smoke', 'play', 'editor')][string]$Task = 'check', [ValidateSet('windows','windows-preview','windows-real')][string]$BuildFolder = 'windows', [ValidateSet('forward_plus','gl_compatibility')][string]$Renderer = 'forward_plus')
 $ErrorActionPreference = 'Stop'
 $projectRoot = $PSScriptRoot
 $buildRoot = Join-Path $projectRoot ('build/' + $BuildFolder)
@@ -27,6 +27,17 @@ function Invoke-Godot([string]$Name, [string[]]$Arguments) {
 
 Push-Location $projectRoot
 try {
+    if ($Task -eq 'gpu-smoke') {
+        $exe = Join-Path $buildRoot 'DIVE DIVE.exe'
+        if (-not (Test-Path -LiteralPath $exe)) { throw 'Build this folder before gpu-smoke.' }
+        $log = Join-Path $projectRoot "artifacts/native-gpu-$Renderer.log"
+        $gpuArgs = @('--rendering-method', $Renderer, '--position', '-20000,-20000', '--audio-driver', 'Dummy', '--quit-after', '120', '--log-file', ('"' + $log + '"'), '--', '--smoke-test')
+        $gpu = Start-Process -FilePath $exe -ArgumentList $gpuArgs -WindowStyle Hidden -PassThru
+        if (-not $gpu.WaitForExit(60000)) { $gpu.Kill(); throw 'Packaged GPU smoke timed out' }
+        if ($gpu.ExitCode -ne 0 -or -not (Test-Path -LiteralPath $log)) { throw 'Packaged GPU smoke failed' }
+        if (Select-String -LiteralPath $log -Pattern 'SCRIPT ERROR:|ERROR:' -Quiet) { throw 'Packaged GPU smoke logged errors' }
+        Write-Output "Packaged GPU startup and 120 frames succeeded: $Renderer"
+    }
     if ($Task -eq 'play') {
         & $godot --path $projectRoot --rendering-method $Renderer
         exit $LASTEXITCODE

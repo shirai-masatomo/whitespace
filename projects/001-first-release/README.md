@@ -1,6 +1,6 @@
 # DIVE DIVE
 
-**海へ飛び込み、足場と酸素を選びながら300mの海底を目指す3Dアクション。** リアル層のVertical Sliceへ向けて制作中のWindows版です。完成品質のビジュアルではありません。
+**海へ飛び込み、足場と酸素を選びながら300mの海底を目指す3Dアクション。** リアル層300mのVertical Slice候補です。操作感・ルート選択・絵づくりの人間レビューへ進むWindows版です。
 
 ## 今すぐ遊ぶ（Windows）
 
@@ -9,7 +9,7 @@
 3. マウスで下を見て足場へ。足場上で下を向くと、カメラが前上方へ回り込み次の足場を見渡せます。光る藻は触れた瞬間に酸素100%。
 4. 300mの「海底の灯」に着地するとクリア。
 
-旧版が起動中だったため、今回は `windows-real` に出力しました。`build/windows` の旧EXEはそのままです。別PCには `build/DIVE-DIVE-windows.zip` を展開して渡します。Godot/Python不要。[GitHub Actions](https://github.com/shirai-masatomo/whitespace/actions/workflows/dive-dive.yml) の最新成功実行の **DIVE-DIVE-windows** artifactでも配布物を取得できます。
+この作業環境の最新出力は `windows-real` です。別PCには `build/DIVE-DIVE-windows.zip` を展開して渡します。Godot/Python不要。[GitHub Actions](https://github.com/shirai-masatomo/whitespace/actions/workflows/dive-dive.yml) の最新成功実行の **DIVE-DIVE-windows** artifactでも配布物を取得できます。
 
 | 操作 | 動作 |
 | --- | --- |
@@ -49,6 +49,7 @@ cd projects/001-first-release
 - `check`: format / lint / 開発依存整合性 / import / ルール・シーンテスト / evaluate / release export / EXE headless起動 / 配布zip。
 - `evaluate`: 6経路と対照条件の時間・最低酸素・カメラ遮蔽・救助、移動速度・酸素切れ時間を `artifacts/evaluation.json` へ。到達失敗、酸素余裕不足、俯瞰の遮蔽はCI失敗。
 - `visual`: 実GPUで海上→入水→各操作→失敗→再挑戦→300mを進め、代表画面・カメラ比較・960×540のUIを `artifacts/<renderer>/` へ。従来の `artifacts/*.png` にも複製。画面外・フォーカスなし・マウス非捕捉で実行し、画像の目視確認も行う。
+- `gpu-smoke -BuildFolder windows-real`: 配布EXEを画面外・マウス非捕捉・無音で起動し120フレーム描画。`-Renderer gl_compatibility` でも確認できます。
 - `benchmark -Renderer forward_plus` / `benchmark -Renderer gl_compatibility`: 同じ3場面の1280×720フレーム時間と描画数。結果は `artifacts/render-*.json`。
 - `format` / `test` / `lint` / `build` / `editor`: 個別実行。生成ログは `artifacts/`、レビュー用の選別画像は `review/`。
 
