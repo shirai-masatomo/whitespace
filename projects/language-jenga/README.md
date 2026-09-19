@@ -1,21 +1,14 @@
 # 言語ジェンガ（仮）
 
-WhiteSpaceで進めてきた「宥めよ」、会話ゲーム、intent辞書、言語・関係性の実験を扱うプロジェクト。
-「正しい言葉を選ぶ」だけでなく、相手・状況・関係・履歴で同じ言葉の意味が変わるゲームを目指す。現在のmain実装は、ローカルのルールベースで動く小さな会話ゲーム「宥めよ」。
+言葉や前提を抜く・変えると、場面の意味はどこまで残るか。現在は「雨の駅前」の六層を直接操作する小さなパズルです。自由入力の日本語全般を解釈するものではありません。
 
-## 読む順番
+- [現在地・次の仮説](PROJECT_STATE.md)
+- [起動方法](app/nadameyo/README.md)
+- [遊び方と規則](docs/SPEC.md)
+- [次の候補](docs/TODO.md)
 
-1. [PROJECT_STATE.md](PROJECT_STATE.md): 現在地と未解決問題。
-2. [TODO](docs/TODO.md): 次に行う小さな作業。
-3. [SPEC](docs/SPEC.md) / [ACCEPTANCE](docs/ACCEPTANCE.md): 仕様と完了条件。
-4. [APP_STATE](app/nadameyo/APP_STATE.md): 宥めよの状態遷移と実装履歴。
+旧試作「宥めよ」は画面上部から開けます。[辞書の採否・出典・利用条件](docs/INTENT_DICTIONARY_REVIEW.md)は保持しています。別ブランチのコーヒー実験は未統合です。
 
-## 構成と起動
+アプリは app/nadameyo にあります。Jenga.jsx が画面、lib/layers.js が層の定義・解釈・操作の境界です。旧App.jsxとintentMatcherは比較用に維持。現行の規則をこのプロジェクト内で育て、他作品には依存しません。
 
-- [app/nadameyo](app/nadameyo/README.md): Vite + Reactアプリ。起動・install・test・lint・buildの手順もここに置く。
-- [辞書レビュー](docs/INTENT_DICTIONARY_REVIEW.md): 候補の採用・保留・除外を確認する一覧。
-- [COMMAND_LOG](docs/COMMAND_LOG.md): 重要なコマンドと既知の環境問題。
-
-入力 → `app/nadameyo/src/App.jsx` → アプリ内の `src/lib/intentMatcher.js` で正規化・判定 → `src/data/intent-dictionary.json` の採用済み表現に応じて緊張度・信頼度・返答を更新する。辞書と判定は `test/intentMatcher.test.js` で検証する。
-
-依存関係とnpmスクリプトはアプリ内で完結する。WhiteSpace全体の方針は [親README](../../README.md) を参照し、このプロジェクト固有の資料は本ディレクトリ内に置く。
+[WhiteSpace全体](../../README.md) / [環境メモ](docs/COMMAND_LOG.md)

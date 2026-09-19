@@ -22,23 +22,8 @@
 - Gitのindex.lock操作に権限が必要な環境では、対象リポジトリのGit操作だけ適切な権限で実行する。
 - 外部辞書の調査元・利用条件は [辞書レビュー](INTENT_DICTIONARY_REVIEW.md) に保持。青空文庫本文は未採取。
 
-## 現在の検証コマンド
+## コマンドと直近の確認
 
-リポジトリルートから:
+起動・検証コマンドは[アプリREADME](../app/nadameyo/README.md)、直近の結果は[現在地](../PROJECT_STATE.md)へ集約する。
 
-```powershell
-$env:Path = 'C:\Program Files\nodejs;' + $env:Path
-cd projects/language-jenga/app/nadameyo
-npm.cmd install
-npm.cmd run review:intents
-npm.cmd run test
-npm.cmd run lint
-npm.cmd run build
-npm.cmd run dev -- --host 127.0.0.1 --port 5181 --strictPort
-```
-
-2026-09-18実行結果: install成功（lockfile変更なし）、辞書レビュー再生成成功、test 6/6、lint成功、Vite 8.0.14 build成功。JS/CSS成果物名は移動前と一致。5181でのブラウザ起動・発言・成功・再挑戦を確認した。
-
-npm auditは既存依存関係に6件（high 5 / moderate 1）を報告。対象はvite、postcss、nanoid、browserslist、brace-expansion、baseline-browser-mapping。更新はTODOへ分離し、今回依存バージョンは変更していない。
-
-移動後の相対Markdownリンク29件を検査し、リンク切れなし。旧パス参照の検索は一致なし。開発サーバーHTTP 200を確認。別worktreeはbbf1e26で未commit変更なし、別作品とアプリの非Markdownファイル計25件は基点commitと内容一致。
+npm auditの既存指摘対象はvite、postcss、nanoid、browserslist、brace-expansion、baseline-browser-mapping。依存更新は別の検証単位で扱う。
