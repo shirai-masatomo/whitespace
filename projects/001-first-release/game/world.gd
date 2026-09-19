@@ -5,6 +5,7 @@ const Nature = preload("res://game/ocean_nature.gd")
 const Lighting = preload("res://game/ocean_lighting.gd")
 const Effects = preload("res://game/ocean_effects.gd")
 const Diver = preload("res://game/diver.gd")
+const Life = preload("res://game/marine_life.gd")
 const Layout = preload("res://game/stage_layout.gd")
 const TUNING = preload("res://game/default_config.tres")
 var lighting: Node3D
@@ -22,6 +23,7 @@ func _ready() -> void:
 	_make_platforms()
 	_make_ocean()
 	Nature.landscape(self)
+	add_child(Life.new())
 	for zone in Layout.current_zones():
 		effects.current(zone.center, zone.flow)
 
@@ -43,29 +45,7 @@ func _make_platforms() -> void:
 		root.add_child(body)
 		Nature.deck(root, data, index)
 		if data.oxygen:
-			var glow := Geo.material(Color("62bbab"), .25, .3)
-			glow.emission_enabled = true
-			glow.emission = Color("249d80")
-			glow.emission_energy_multiplier = .6
-			# A natural vent and green anemones identify instant refill, no debug sphere.
-			Geo.put(root, Geo.rock(Vector2(3.2, 3.0), 1.4, 90 + index), glow, Vector3(0, .05, 0))
-			for petal in range(12):
-				var angle := petal * TAU / 12
-				var stem := Geo.put(
-					root,
-					Geo.loft(
-						[
-							Vector3(0, .18, .18),
-							Vector3(.45, .28, .28),
-							Vector3(.75, .15, .15),
-							Vector3(.85, .01, .01)
-						],
-						12
-					),
-					glow,
-					Vector3(cos(angle) * 2.0, 0, sin(angle) * 2.0)
-				)
-				stem.rotation.z = cos(angle) * .3
+			Nature.oxygen_algae(root, index)
 			effects.vent(data.position + Vector3.UP * .4)
 			var light := OmniLight3D.new()
 			light.position.y = 1.5

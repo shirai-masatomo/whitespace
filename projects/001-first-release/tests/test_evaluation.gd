@@ -17,8 +17,32 @@ func run() -> void:
 	await process_frame
 	game.set_physics_process(false)
 	var results: Array[Dictionary] = []
+	var by_name := {}
 	for route_name in Model.Layout.routes():
-		results.append(evaluate_route(route_name, Model.Layout.routes()[route_name]))
+		results.append(
+			evaluate_route(
+				route_name,
+				Model.Layout.routes()[route_name],
+				route_name in ["fast_drop", "current_gardens"]
+			)
+		)
+	for result in results:
+		by_name[result.name] = result
+	var fast_safe := evaluate_route("safe_gardens_fast", Model.Layout.routes().safe_gardens, true)
+	var without_current := evaluate_route(
+		"current_disabled", Model.Layout.routes().current_gardens, true, 0.0
+	)
+	var current_route: Dictionary = by_name.current_gardens
+	var fast_route: Dictionary = by_name.fast_drop
+	if not fast_safe.complete or fast_route.seconds >= fast_safe.seconds:
+		failures += 1
+		push_error("Shortcut must beat the garden detour with the same fast steering")
+	if fast_safe.minimum_oxygen <= fast_route.minimum_oxygen + 5:
+		failures += 1
+		push_error("Garden detour must provide a measurable oxygen safety advantage")
+	if current_route.seconds >= without_current.seconds - .5:
+		failures += 1
+		push_error("Current corridor must measurably help this route")
 	var rescue := evaluate_rescue()
 	for result in results:
 		if not result.complete or result.minimum_oxygen < 10:
@@ -39,6 +63,13 @@ func run() -> void:
 	var report := {
 		"routes": results,
 		"rescue": rescue,
+		"route_tradeoffs":
+		{
+			"fast_safe_gardens": fast_safe,
+			"without_current_seconds": without_current.seconds,
+			"current_seconds_saved": snappedf(without_current.seconds - current_route.seconds, .01),
+			"fast_shortcut_seconds_saved": snappedf(fast_safe.seconds - fast_route.seconds, .01)
+		},
 		"movement": evaluate_movement(),
 		"scope":
 		(
@@ -54,8 +85,11 @@ func run() -> void:
 	quit(1 if failures else 0)
 
 
-func evaluate_route(route_name: String, route: Array) -> Dictionary:
+func evaluate_route(
+	route_name: String, route: Array, fast: bool = false, currents: float = 1.0
+) -> Dictionary:
 	game.model = Model.new()
+	game.model.config.current_strength = currents
 	var legs: Array[Dictionary] = []
 	var min_air: float = 100
 	var framed := 0
@@ -105,7 +139,7 @@ func evaluate_route(route_name: String, route: Array) -> Dictionary:
 		var start: float = game.model.elapsed
 		var arrived := false
 		for frame in range(2400):
-			var command := Driver.input_for(game.model, target)
+			var command := Driver.input_for(game.model, target, fast)
 			game.model.step(1.0 / 60, Vector2(command.x, command.z), command.y)
 			min_air = minf(min_air, game.model.oxygen)
 			if game.model.mode == Model.Mode.RETURNING:

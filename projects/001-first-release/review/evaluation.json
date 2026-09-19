@@ -14,6 +14,66 @@
     "controls_restored_seconds": 2.27,
     "lost_depth_m": 30.0
   },
+  "route_tradeoffs": {
+    "current_seconds_saved": 0.58,
+    "fast_safe_gardens": {
+      "aimed_camera_diver_framed": 8,
+      "aimed_camera_visible": 6,
+      "complete": true,
+      "decisions": 8,
+      "departure_camera_framed": 7,
+      "departure_camera_unoccluded": 5,
+      "legs": [
+        {
+          "arrival_oxygen": 82.17,
+          "to": 1,
+          "travel_seconds": 4.8
+        },
+        {
+          "arrival_oxygen": 100.0,
+          "to": 2,
+          "travel_seconds": 5.03
+        },
+        {
+          "arrival_oxygen": 100.0,
+          "to": 10,
+          "travel_seconds": 4.83
+        },
+        {
+          "arrival_oxygen": 100.0,
+          "to": 11,
+          "travel_seconds": 5.03
+        },
+        {
+          "arrival_oxygen": 100.0,
+          "to": 6,
+          "travel_seconds": 6.4
+        },
+        {
+          "arrival_oxygen": 100.0,
+          "to": 12,
+          "travel_seconds": 9.63
+        },
+        {
+          "arrival_oxygen": 100.0,
+          "to": 8,
+          "travel_seconds": 6.08
+        },
+        {
+          "arrival_oxygen": 64.17,
+          "to": 9,
+          "travel_seconds": 5.78
+        }
+      ],
+      "mean_leg_seconds": 5.95,
+      "minimum_oxygen": 52.63,
+      "name": "safe_gardens_fast",
+      "seconds": 47.6,
+      "survey_visible": 8
+    },
+    "fast_shortcut_seconds_saved": 14.23,
+    "without_current_seconds": 40.38
+  },
   "routes": [
     {
       "aimed_camera_diver_framed": 9,
@@ -174,6 +234,151 @@
       "name": "extra_oxygen",
       "seconds": 90.95,
       "survey_visible": 9
+    },
+    {
+      "aimed_camera_diver_framed": 8,
+      "aimed_camera_visible": 6,
+      "complete": true,
+      "decisions": 8,
+      "departure_camera_framed": 7,
+      "departure_camera_unoccluded": 5,
+      "legs": [
+        {
+          "arrival_oxygen": 77.2,
+          "to": 1,
+          "travel_seconds": 8.48
+        },
+        {
+          "arrival_oxygen": 100.0,
+          "to": 2,
+          "travel_seconds": 8.6
+        },
+        {
+          "arrival_oxygen": 100.0,
+          "to": 10,
+          "travel_seconds": 9.57
+        },
+        {
+          "arrival_oxygen": 100.0,
+          "to": 11,
+          "travel_seconds": 10.63
+        },
+        {
+          "arrival_oxygen": 100.0,
+          "to": 6,
+          "travel_seconds": 13.18
+        },
+        {
+          "arrival_oxygen": 100.0,
+          "to": 12,
+          "travel_seconds": 12.45
+        },
+        {
+          "arrival_oxygen": 100.0,
+          "to": 8,
+          "travel_seconds": 10.33
+        },
+        {
+          "arrival_oxygen": 57.87,
+          "to": 9,
+          "travel_seconds": 11.17
+        }
+      ],
+      "mean_leg_seconds": 10.55,
+      "minimum_oxygen": 46.2,
+      "name": "safe_gardens",
+      "seconds": 84.42,
+      "survey_visible": 8
+    },
+    {
+      "aimed_camera_diver_framed": 5,
+      "aimed_camera_visible": 4,
+      "complete": true,
+      "decisions": 5,
+      "departure_camera_framed": 5,
+      "departure_camera_unoccluded": 3,
+      "legs": [
+        {
+          "arrival_oxygen": 100.0,
+          "to": 2,
+          "travel_seconds": 6.55
+        },
+        {
+          "arrival_oxygen": 100.0,
+          "to": 10,
+          "travel_seconds": 4.82
+        },
+        {
+          "arrival_oxygen": 100.0,
+          "to": 6,
+          "travel_seconds": 8.3
+        },
+        {
+          "arrival_oxygen": 100.0,
+          "to": 8,
+          "travel_seconds": 7.95
+        },
+        {
+          "arrival_oxygen": 64.17,
+          "to": 9,
+          "travel_seconds": 5.75
+        }
+      ],
+      "mean_leg_seconds": 6.67,
+      "minimum_oxygen": 30.83,
+      "name": "fast_drop",
+      "seconds": 33.37,
+      "survey_visible": 5
+    },
+    {
+      "aimed_camera_diver_framed": 7,
+      "aimed_camera_visible": 6,
+      "complete": true,
+      "decisions": 7,
+      "departure_camera_framed": 7,
+      "departure_camera_unoccluded": 4,
+      "legs": [
+        {
+          "arrival_oxygen": 82.17,
+          "to": 1,
+          "travel_seconds": 4.8
+        },
+        {
+          "arrival_oxygen": 100.0,
+          "to": 2,
+          "travel_seconds": 5.03
+        },
+        {
+          "arrival_oxygen": 100.0,
+          "to": 10,
+          "travel_seconds": 4.83
+        },
+        {
+          "arrival_oxygen": 100.0,
+          "to": 11,
+          "travel_seconds": 5.03
+        },
+        {
+          "arrival_oxygen": 100.0,
+          "to": 6,
+          "travel_seconds": 6.4
+        },
+        {
+          "arrival_oxygen": 100.0,
+          "to": 8,
+          "travel_seconds": 7.95
+        },
+        {
+          "arrival_oxygen": 64.17,
+          "to": 9,
+          "travel_seconds": 5.75
+        }
+      ],
+      "mean_leg_seconds": 5.68,
+      "minimum_oxygen": 45.33,
+      "name": "current_gardens",
+      "seconds": 39.8,
+      "survey_visible": 7
     }
   ],
   "scope": "Scripted steering, instant contact refill, 60Hz. Movement timers use offshore fixtures. Camera checks are framing/occlusion, not human readability."

@@ -23,3 +23,5 @@ extends Resource
 
 @export var jelly_push: float = 4.5
 @export var jelly_cooldown: float = 3.0
+
+@export var current_strength: float = 1.0

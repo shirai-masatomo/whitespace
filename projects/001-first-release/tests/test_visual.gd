@@ -7,6 +7,7 @@ var game
 var failed: bool = false
 var simulation_frames: int = 0
 var sequence: Array[Dictionary] = []
+var record_sequence := true
 
 
 func _initialize() -> void:
@@ -33,8 +34,10 @@ func capture(label: String) -> void:
 		push_error("Screenshot failed: " + label)
 
 
-func step_toward(index: int, descent_override: float = -2, ascend: bool = false) -> void:
-	var command := Driver.input_for(game.model, index)
+func step_toward(
+	index: int, descent_override: float = -2, ascend: bool = false, fast_route: bool = false
+) -> void:
+	var command := Driver.input_for(game.model, index, fast_route)
 	game.advance(
 		1.0 / 60,
 		Vector2(command.x, command.z),
@@ -51,7 +54,7 @@ func render_step() -> void:
 	await process_frame
 	await RenderingServer.frame_post_draw
 	simulation_frames += 1
-	if simulation_frames % 120 == 0 and game.model.elapsed <= 65:
+	if record_sequence and simulation_frames % 120 == 0 and game.model.elapsed <= 65:
 		var filename := "frame-%03d.jpg" % sequence.size()
 		var result := root.get_texture().get_image().save_jpg(
 			"res://artifacts/sequence/" + filename, .85
@@ -68,9 +71,9 @@ func render_step() -> void:
 		)
 
 
-func steer(index: int) -> bool:
+func steer(index: int, fast_route: bool = false) -> bool:
 	for frame in range(2400):
-		await step_toward(index)
+		await step_toward(index, -2, false, fast_route)
 		if game.model.grounded == index:
 			if not game.model.platforms[index].oxygen or game.model.at_oxygen():
 				return true
@@ -193,6 +196,28 @@ func run() -> void:
 	if game.model.mode != Model.Mode.COMPLETE:
 		failed = true
 		push_error("Visual route must finish after rescue")
+	# A second real journey covers new optional gardens and the current corridor.
+	record_sequence = false
+	game.hud.primary.pressed.emit()
+	game.pitch = -.65
+	for target in Model.Layout.routes().safe_gardens:
+		if not await steer(target, true):
+			break
+		if target == 2:
+			for frame in range(60):
+				game.advance(1.0 / 60, Vector2.ZERO)
+				await render_step()
+			await capture("16-route-choices")
+			game.pitch = -.18
+			await capture("17-oxygen-algae")
+			game.pitch = -.65
+		if target == 11:
+			await capture("18-current-garden")
+		if target == 12:
+			await capture("19-safe-detour")
+	if game.model.mode != Model.Mode.COMPLETE:
+		failed = true
+		push_error("Safe garden route must also finish on GPU")
 	game.hud.primary.pressed.emit()
 	root.size = Vector2i(960, 540)
 	game.toggle_pause()

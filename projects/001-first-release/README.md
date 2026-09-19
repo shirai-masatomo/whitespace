@@ -6,7 +6,7 @@
 
 1. このPCの今回の最新版は **`build/windows-real/DIVE DIVE.exe`** をダブルクリック。
 2. 「潜りはじめる」またはEnter。WASDで桟橋の端から海へ飛び込む。
-3. マウスで下を見て足場へ。足場上で下を向くと、カメラが前上方へ回り込み次の足場を見渡せます。緑の泡は触れた瞬間に酸素100%。
+3. マウスで下を見て足場へ。足場上で下を向くと、カメラが前上方へ回り込み次の足場を見渡せます。光る藻は触れた瞬間に酸素100%。
 4. 300mの「海底の灯」に着地するとクリア。
 
 旧版が起動中だったため、今回は `windows-real` に出力しました。`build/windows` の旧EXEはそのままです。別PCには `build/DIVE-DIVE-windows.zip` を展開して渡します。Godot/Python不要。[GitHub Actions](https://github.com/shirai-masatomo/whitespace/actions/workflows/dive-dive.yml) の最新成功実行の **DIVE-DIVE-windows** artifactでも配布物を取得できます。
@@ -22,9 +22,9 @@
 | V | 三人称 / 一人称 |
 | Esc / Enter | 一時停止 / 再開 |
 
-足場上では沈降が止まりますが、水中の普通の足場では酸素が減ります。緑の泡の中と海上では減りません。酸素0で泡になって浮上し、訪問済みの浅い安全地点で再挑戦。死亡画面・ロード・ワープなし。フォーカスを外すと一時停止。Spaceは水中の浮上操作で、桟橋上のジャンプではありません。
+足場上では沈降が止まりますが、水中の普通の足場では酸素が減ります。光る藻のそばと海上では減りません。酸素0で泡になって浮上し、訪問済みの浅い安全地点で再挑戦。死亡画面・ロード・ワープなし。フォーカスを外すと一時停止。Spaceは水中の浮上操作で、桟橋上のジャンプではありません。
 
-11足場、海中の酸素スポット5か所、95mの補給分岐、155mの動く観測ブイがあります。岸壁・自然岩・海藻・流木・クラゲを配置。潮流は横へ流し、クラゲは触れると反発します。遠景の岩は装飾です。セーブ・音・Steam SDK・オンラインは未実装。
+13足場、海中の酸素藻7か所、95/140/225mの補給迂回路、155mの動く観測ブイがあります。岸壁・自然岩・海藻・流木・クラゲを配置。潮流は横へ流し、クラゲは触れると反発します。泡を出す藻の周囲には魚群が集まり、Tabで目指す候補を選べます。遠景の岩は装飾です。セーブ・音・Steam SDK・オンラインは未実装。
 
 **代表画面・連続画像・調整値・性能比較**は [REVIEW_PACKET](REVIEW_PACKET.md)。[現在地](PROJECT_STATE.md) / [次タスク](TASKS.md) / [AIレビュー](AI_REVIEW.md)。
 
@@ -46,7 +46,7 @@ cd projects/001-first-release
 
 - `setup`: Godot 4.7.2・Windowsテンプレートを公式SHA512で検証、固定版の開発ツールを専用venvへ導入。
 - `check`: format / lint / 開発依存整合性 / import / ルール・シーンテスト / evaluate / release export / EXE headless起動 / 配布zip。
-- `evaluate`: 3経路の時間・最低酸素・カメラ遮蔽・救助、移動速度・酸素切れ時間を `artifacts/evaluation.json` へ。到達失敗、酸素余裕不足、俯瞰の遮蔽はCI失敗。
+- `evaluate`: 6経路と対照条件の時間・最低酸素・カメラ遮蔽・救助、移動速度・酸素切れ時間を `artifacts/evaluation.json` へ。到達失敗、酸素余裕不足、俯瞰の遮蔽はCI失敗。
 - `visual`: 実GPUで海上→入水→各操作→失敗→再挑戦→300mを進め、代表画面・カメラ比較・960×540のUIを `artifacts/*.png` へ。画像の目視確認も必要。
 - `benchmark -Renderer forward_plus` / `benchmark -Renderer gl_compatibility`: 同じ3場面の1280×720フレーム時間と描画数。結果は `artifacts/render-*.json`。
 - `format` / `test` / `lint` / `build` / `editor`: 個別実行。生成ログは `artifacts/`、レビュー用の選別画像は `review/`。

@@ -7,21 +7,21 @@
   "scenes": [
     {
       "depth_m": 12,
-      "mean_draw_calls": 374,
-      "median_frame_ms": 2.03,
-      "p95_frame_ms": 4.06
+      "mean_draw_calls": 352,
+      "median_frame_ms": 2.13,
+      "p95_frame_ms": 3.98
     },
     {
       "depth_m": 60,
-      "mean_draw_calls": 462,
-      "median_frame_ms": 2.03,
-      "p95_frame_ms": 3.33
+      "mean_draw_calls": 438,
+      "median_frame_ms": 2.06,
+      "p95_frame_ms": 3.35
     },
     {
       "depth_m": 155,
-      "mean_draw_calls": 407,
-      "median_frame_ms": 2.03,
-      "p95_frame_ms": 4.02
+      "mean_draw_calls": 381,
+      "median_frame_ms": 2.04,
+      "p95_frame_ms": 2.97
     }
   ],
   "vsync": "disabled"

@@ -261,4 +261,4 @@ func flow_at(point: Vector3) -> Vector3:
 	for zone in Layout.current_zones():
 		var distance: float = ((point - zone.center) / zone.radius).length()
 		flow += zone.flow * maxf(0, 1 - distance)
-	return flow
+	return flow * config.current_strength

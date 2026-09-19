@@ -15,6 +15,8 @@ static func platforms() -> Array[Dictionary]:
 		make("酸素 04", Vector3(-7, -260, -36), Vector2(18, 16), true),
 		make("海底の灯", Vector3(20, -300, -55), Vector2(22, 20), false, true),
 		make("寄り道の酸素", Vector3(-28, -95, -52), Vector2(16, 14), true),
+		make("潮待ちの藻庭", Vector3(-43, -140, -56), Vector2(17, 15), true),
+		make("静かな藻の棚", Vector3(-42, -225, -32), Vector2(17, 15), true),
 	]
 	var kinds := [
 		"pier",
@@ -27,10 +29,24 @@ static func platforms() -> Array[Dictionary]:
 		"kelp",
 		"rock",
 		"rock",
-		"driftwood"
+		"driftwood",
+		"kelp",
+		"rock"
 	]
 	var names := [
-		"海へ続く桟橋", "岸壁の岩棚", "海藻の泉", "沈んだ流木", "漂うクラゲ", "観測ブイ", "浮遊岩", "海藻の棚", "深層の泉", "海底の灯", "流木の泉"
+		"海へ続く桟橋",
+		"岸壁の岩棚",
+		"海藻の泉",
+		"沈んだ流木",
+		"漂うクラゲ",
+		"観測ブイ",
+		"浮遊岩",
+		"海藻の棚",
+		"深層の藻",
+		"海底の灯",
+		"流木の藻",
+		"潮待ちの藻庭",
+		"静かな藻の棚"
 	]
 	for index in range(data.size()):
 		data[index]["kind"] = kinds[index]
@@ -63,6 +79,9 @@ static func routes() -> Dictionary:
 		"platforms": [1, 2, 3, 4, 5, 6, 7, 8, 9],
 		"direct_oxygen": [2, 4, 6, 8, 9],
 		"extra_oxygen": [1, 2, 10, 4, 5, 6, 7, 8, 9],
+		"safe_gardens": [1, 2, 10, 11, 6, 12, 8, 9],
+		"fast_drop": [2, 10, 6, 8, 9],
+		"current_gardens": [1, 2, 10, 11, 6, 8, 9],
 	}
 
 
@@ -77,5 +96,10 @@ static func current_zones() -> Array[Dictionary]:
 			"center": Vector3(35, -142, -55),
 			"radius": Vector3(22, 10, 24),
 			"flow": Vector3(-1.6, 0, 0)
+		},
+		{
+			"center": Vector3(-31, -150, -67),
+			"radius": Vector3(32, 16, 28),
+			"flow": Vector3(5.0, 0, -3.5)
 		},
 	]

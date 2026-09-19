@@ -110,6 +110,7 @@ func run() -> void:
 	check(game.next_platform() == 1, "Replay restores first suggested target")
 	_test_ledge_view(game)
 	_test_pose_blending(game)
+	_test_oxygen_algae(game)
 	game.queue_free()
 	await process_frame
 	print("Scene: %d checks, %d failures" % [checks, failures])
@@ -164,3 +165,30 @@ func _test_pose_blending(game) -> void:
 		game.model.step(1.0 / 60, Vector2.ZERO, 0.0, true)
 		game.avatar.animate(game.model)
 	check(game.avatar.arms[0].rotation.x < -1.5, "Blended arms reach the ascent stroke")
+
+
+func _test_oxygen_algae(game) -> void:
+	game.restart()
+	game.model.position = game.model.platforms[2].position
+	var options: Array[int] = game.Navigation.candidates(game.model)
+	check(
+		options.has(3) and options.has(10),
+		"Both the direct descent and refill detour can be selected"
+	)
+	for index in range(game.model.platforms.size()):
+		if not game.model.platforms[index].oxygen:
+			continue
+		var fronds := game.world.platforms[index].get_node("OxygenAlgae/Fronds") as MeshInstance3D
+		check(fronds != null, "Every refill has a visible rooted algae landmark")
+		var vertices: PackedVector3Array = fronds.mesh.surface_get_arrays(0)[Mesh.ARRAY_VERTEX]
+		var covered := true
+		for vertex in vertices:
+			# Include the largest possible shader displacement, not only the static mesh.
+			if vertex.distance_to(Vector3.UP * 1.6) + .47 > game.model.config.oxygen_radius:
+				covered = false
+		check(covered, "Visible algae leaves remain inside the instant refill volume")
+		game.model.position = game.model.platforms[index].position + Vector3.UP * 2
+		game.model.grounded = -1
+		game.model.oxygen = .01
+		game.model.step(1.0 / 60, Vector2.ZERO)
+		check(game.model.oxygen == 100, "Touching each algae stand refills without a waiting state")

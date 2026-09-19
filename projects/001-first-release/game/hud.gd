@@ -81,7 +81,7 @@ func _draw() -> void:
 	text_at(Vector2(1170, 51), "%d%%" % int(ratio * 100), 20, accent)
 	draw_rect(Rect2(1014, 62, 222, 5), Color("284451"))
 	draw_rect(Rect2(1014, 62, 222 * ratio, 5), accent)
-	var hint := "緑の泡で、すぐ満タン"
+	var hint := "光る藻に触れて、酸素補給"
 	if returning:
 		hint = "泡に包まれて救助中"
 	elif model.at_oxygen() or model.position.y >= -1:
@@ -119,13 +119,22 @@ func _draw_target(scale_factor: Vector2) -> void:
 	text_at(
 		Vector2(42, 644), game.Navigation.bearing(game.model, target_index, game.yaw), 14, MUTED
 	)
-	var point: Vector3 = target.position + Vector3.UP * 2
-	if game.camera.is_position_behind(point):
-		return
-	var screen: Vector2 = game.camera.unproject_position(point) / scale_factor
-	if Rect2(240, 120, 760, 470).has_point(screen):
-		draw_arc(screen, 9, 0, TAU, 32, CYAN, 1.5, true)
-		text_at(screen + Vector2(15, 5), "%dm" % int(-target.position.y), 14, CYAN)
+	for candidate in game.Navigation.candidates(game.model):
+		var option: Dictionary = game.model.platforms[candidate]
+		var point: Vector3 = option.position + Vector3.UP * 3
+		if game.camera.is_position_behind(point):
+			continue
+		var screen: Vector2 = game.camera.unproject_position(point) / scale_factor
+		if not Rect2(240, 120, 760, 470).has_point(screen):
+			continue
+		var chosen: bool = candidate == target_index
+		var color := CYAN if option.oxygen else WHITE
+		color.a = 1.0 if chosen else .6
+		draw_arc(screen, 9 if chosen else 5, 0, TAU, 32, color, 1.5, true)
+		var label := "%dm" % int(-option.position.y)
+		if option.oxygen:
+			label += " 藻"
+		text_at(screen + Vector2(15, 5), label, 14 if chosen else 12, color)
 
 
 func _draw_overlay(scale_factor: Vector2) -> void:
@@ -148,7 +157,7 @@ func _draw_overlay(scale_factor: Vector2) -> void:
 		text_at(Vector2(310, 352), "次は別のルートでもう一度。", 22, MUTED)
 	else:
 		text_at(Vector2(310, 289), "海へ飛び込み、足場をたどって深く潜ろう。", 21)
-		text_at(Vector2(310, 330), "緑の泡に触れると酸素100%。待たずに進もう。", 21)
+		text_at(Vector2(310, 330), "光る藻に触れると酸素100%。待たずに進もう。", 21)
 		text_at(Vector2(310, 371), "急降下は酸素を多く使う。酸素0で押し戻される。", 20, MUTED)
 	text_at(Vector2(310, 439), "WASD 移動 / マウス 視点 / E 急降下 / Space 浮上", 19, CYAN)
 	text_at(Vector2(310, 468), "Q 減速 / F 俯瞰 / Tab 目標切替 / V 一人称・三人称", 16, MUTED)

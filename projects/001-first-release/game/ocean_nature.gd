@@ -24,6 +24,30 @@ static func kelp(parent: Node3D, point: Vector3, height: float, seed_value: int)
 		leaf.rotation.z = sin(blade * 2.4) * 0.3
 
 
+static func oxygen_algae(parent: Node3D, seed_value: int) -> void:
+	# A rooted, asymmetric stand of luminous fronds, not a ring of pickups.
+	var root := Node3D.new()
+	root.name = "OxygenAlgae"
+	parent.add_child(root)
+	var mat := ShaderMaterial.new()
+	mat.shader = preload("res://game/shaders/oxygen_algae.gdshader")
+	Geo.put(root, Geo.rock(Vector2(2.8, 2.4), .8, seed_value + 33), stone())
+	var combined := SurfaceTool.new()
+	combined.begin(Mesh.PRIMITIVE_TRIANGLES)
+	for frond in range(19):
+		var angle := frond * 2.399 + seed_value
+		var radius := 1.1 + sqrt(frond / 19.0) * .45
+		var height := 1.8 + .5 * (1 + sin(frond * 5.7 + seed_value))
+		var basis := Basis(Vector3.UP, -angle) * Basis(Vector3.FORWARD, .12 + radius * .04)
+		combined.append_from(
+			Geo.leaf(height, .25 + height * .09),
+			0,
+			Transform3D(basis, Vector3(cos(angle) * radius, .05, sin(angle) * radius))
+		)
+	var leaves := Geo.put(root, combined.commit(), mat)
+	leaves.name = "Fronds"
+
+
 static func jelly(parent: Node3D, radius: float, point: Vector3) -> Node3D:
 	var root := Node3D.new()
 	root.position = point
@@ -194,9 +218,12 @@ static func landscape(parent: Node3D) -> void:
 		)
 	# One open coastline to the left; the right and horizon remain ocean.
 	for i in range(10):
-		var x := -40 - i % 3 * 24
+		var x := -85 - i % 3 * 24
 		var y := 9 - i * 15
-		Geo.put(parent, Geo.boulder(Vector3(65, 90, 85), 100 + i), mat, Vector3(x, y, 30 - i * 27))
+		var coast := Geo.put(
+			parent, Geo.boulder(Vector3(65, 90, 85), 100 + i), mat, Vector3(x, y, 30 - i * 27)
+		)
+		Geo.camera_obstacle(coast)
 	for i in range(35):
 		var point := Vector3(
 			rng.randf_range(-220, 380), rng.randf_range(-330, -200), rng.randf_range(-650, -160)

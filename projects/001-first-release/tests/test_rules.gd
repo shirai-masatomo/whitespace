@@ -60,7 +60,10 @@ func _initialize() -> void:
 	for route_name in Model.Layout.routes():
 		model = Model.new()
 		for index in Model.Layout.routes()[route_name]:
-			check(Driver.reach(model, index), "Route %s reaches %d" % [route_name, index])
+			check(
+				Driver.reach(model, index, 40.0, route_name in ["fast_drop", "current_gardens"]),
+				"Route %s reaches %d" % [route_name, index]
+			)
 		check(model.mode == Model.Mode.COMPLETE, "Route completes: " + route_name)
 	model.reset()
 	check(

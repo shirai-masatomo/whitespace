@@ -12,16 +12,19 @@
 
 ## 検証
 
-- `check -BuildFolder windows-real`: format/lint/依存整合性、ルール381・シーン152、3経路、Windows Release export/EXE headless起動。
+- `check -BuildFolder windows-real`: format/lint/依存整合性、ルール404・シーン174、6経路と対照条件、Windows Release export/EXE headless起動。
 - 実GPUのvisual: 入水→足場→急降下/浮上→補給→酸素切れ→救助→再挑戦→300m。Forward+とCompatibilityを実行。クリアボタンの画素検査と960×540も確認。
 - 最終経路: 通常86.93秒 / 補給直行82.23秒 / 寄り道90.95秒。最低酸素25.27%以上。代表救助は30m損失・2.27秒。
-- RTX 4070 SUPER、1280×720、VSyncなし、静止3場面: Forward+中央値2.03ms、P95最大4.06ms。GL中央値0.86〜1.01ms。単体GPU時間ではなく描画フレームの実時間。別GPUは未確認。
-- CI: [Windows Actions #35429850992](https://github.com/shirai-masatomo/whitespace/actions/runs/35429850992) 成功。コード `9b4d1bc`（足場カメラ・素材・姿勢まで）、setup/check/配布ZIP/ログ保存まで確認。
+- RTX 4070 SUPER、1280×720、VSyncなし、静止3場面: Forward+中央値2.04〜2.13ms、P95最大3.98ms。GL中央値0.89〜1.00ms。単体GPU時間ではなく描画フレームの実時間。別GPUは未確認。
+- 直前CI: [Windows Actions #35429850992](https://github.com/shirai-masatomo/whitespace/actions/runs/35429850992) 成功。コード `9b4d1bc`（足場カメラ・素材・姿勢まで）、setup/check/配布ZIP/ログ保存まで確認。
 - [画面・連続画像・評価](REVIEW_PACKET.md) / [自己レビュー](AI_REVIEW.md)。自動操縦の成功を面白さや製品品質の証明にしない。
 
 ## 次
 
-mainで追加された[人間方針](HUMAN_DIRECTION.md)・[外部AIレビュー](EXTERNAL_AI_REVIEW.md)を確認済み。未反映分を優先し、[TASKS](TASKS.md) のDD-036（酸素藻）→037（選べる経路）→034（海面/岸壁）へ。DD-032を実装: 足場上で下を向くと前上方へカメラが回り込み、同じ固定方向で遮蔽なし2→16/23。目標へ向けば19/23、主人公は23/23画面内。海上など残る4場面はFでも補助できる。DD-033で木目/枝/端面、岩の色差、波の揺らぎ、足場待機の脚と姿勢遷移を改善。海面の等間隔な光の帯、岸壁の境界、流木の端の接地は次に再評価する。音/保存は未実装。Steam SDKはゲームの完成が見えてから。
+[人間方針](HUMAN_DIRECTION.md)の酸素藻と複数ルートを反映。13足場/7補給群落、泡/発光する葉と魚群。急降下直行33.37秒・最低酸素30.83%、同じ急降下で補給迂回47.60秒・52.63%。潮流は無潮流対照より0.58秒速い。海上/流木側など残る遮蔽と着地形状はDD-035、海面/遠景はDD-034、最後にDD-027品質ゲート。音/保存/Steamは未実装。
+
+補給地点の葉先が判定外に出る試作と、迂回路でカメラが岸壁へ入る試作を修正済み。岸壁にもカメラ用メッシュ衝突を追加。通常視点の目標35/43、主人公43/43、F43/43（6経路合計）。メッシュの画素上の読みやすさは別に画面確認する。
+
 
 ## 再実行・既知の環境問題
 
