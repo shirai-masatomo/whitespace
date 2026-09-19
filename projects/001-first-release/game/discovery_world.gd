@@ -58,6 +58,13 @@ func _make_arch() -> void:
 	Collision.build(arch)
 
 
+func set_enabled(value: bool) -> void:
+	if visible == value:
+		return
+	visible = value
+	$SwimThroughArch/SolidGeometry.collision_layer = 3 if value else 0
+
+
 func update(time: float) -> void:
 	var data := Rules.bubbles(time)
 	for index in range(bubbles.size()):

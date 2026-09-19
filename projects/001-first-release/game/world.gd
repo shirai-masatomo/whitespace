@@ -112,7 +112,7 @@ func update_depth(camera_y: float) -> void:
 
 func update_life(model) -> void:
 	effects.update(model)
-	discoveries.visible = model.config.discovery_enabled
+	discoveries.set_enabled(model.config.discovery_enabled)
 	discoveries.update(model.elapsed)
 	life.update(
 		model.position,

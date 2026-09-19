@@ -21,6 +21,7 @@ func _ready() -> void:
 
 
 func resolve(model, start: Vector3, destination: Vector3) -> Dictionary:
+	world.discoveries.set_enabled(model.config.discovery_enabled)
 	world.sync_platforms(model.platforms)
 	global_position = start
 	contacts.clear()

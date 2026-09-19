@@ -185,6 +185,14 @@ func compare_fixtures() -> void:
 			if "SwimThroughArch" in str(body.get_path()):
 				hit = true
 	check(hit, "Solid arch rim blocks the actual player")
+	fixture(Places.ARCH + Vector3(14, 0, 10))
+	game.model.config.discovery_enabled = false
+	for frame in range(120):
+		await tick(Vector2(0, -1), -1)
+	check(
+		game.model.position.z < Places.ARCH.z, "Disabled experiment leaves no invisible arch wall"
+	)
+	game.model.config.discovery_enabled = true
 	for detour in [false, true]:
 		fixture(Vector3(-35, -80, -60))
 		game.model.oxygen = 30
