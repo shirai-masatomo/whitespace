@@ -185,8 +185,12 @@ func _test_rescue() -> void:
 	while model.mode == Model.Mode.RETURNING and frames < 2000:
 		var old: Vector3 = model.position
 		model.step(1.0 / 60, Vector2.ONE, 1, true)
-		check(old.distance_to(model.position) <= 32.0 / 60 + 0.001, "Rescue never teleports")
+		check(
+			old.distance_to(model.position) <= model.rescue_speed / 60 + 0.001,
+			"Rescue never teleports"
+		)
 		frames += 1
+	check(frames / 60.0 <= model.config.rescue_max_seconds, "Rescue respects its time budget")
 	check(model.mode == Model.Mode.DIVING and model.depth == 95, "Rescue finishes with control")
 	check(model.oxygen == 100, "Rescue restarts with oxygen")
 	# Rising above saved spots must never produce a downward rescue or free progress.

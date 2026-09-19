@@ -16,6 +16,7 @@ extends Resource
 @export var air_gravity: float = 9.8
 @export var oxygen_radius: float = 3.5
 @export var emergency_speed: float = 32.0
+@export_range(1.0, 10.0, .1) var rescue_max_seconds: float = 3.5
 @export var rescue_clearance: float = 3.0
 @export var min_setback: float = 2.0
 @export var missed_goal_depth: float = 345.0

@@ -160,7 +160,8 @@ func _draw_overlay(scale_factor: Vector2) -> void:
 		text_at(Vector2(310, 330), "光る藻に触れると酸素100%。待たずに進もう。", 21)
 		text_at(Vector2(310, 371), "急降下は酸素を多く使う。酸素0で押し戻される。", 20, MUTED)
 	text_at(Vector2(310, 439), "WASD 移動 / マウス 視点 / E 急降下 / Space 浮上", 19, CYAN)
-	text_at(Vector2(310, 468), "Q 減速 / F 俯瞰 / Tab 目標切替 / V 一人称・三人称", 16, MUTED)
+	text_at(Vector2(310, 468), "Q 減速 / F 俯瞰 / Tab 目標 / V 視点 / M 音の切替", 16, MUTED)
+	text_at(Vector2(832, 578), "音: OFF" if game.sound.muted else "音: ON", 16, MUTED)
 	primary.position = Vector2(310, 489) * scale_factor
 	primary.size = Vector2(400, 58) * scale_factor
 	quit_button.position = Vector2(742, 489) * scale_factor

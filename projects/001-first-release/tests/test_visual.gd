@@ -272,6 +272,7 @@ func run() -> void:
 	if game.model.mode != Model.Mode.COMPLETE:
 		failed = true
 		push_error("Safe garden route must also finish on GPU")
+	await missed_route_rescue()
 	game.hud.primary.pressed.emit()
 	root.size = Vector2i(960, 540)
 	game.toggle_pause()
@@ -284,6 +285,42 @@ func run() -> void:
 	game.queue_free()
 	await process_frame
 	quit(1 if failed else 0)
+
+
+func missed_route_rescue() -> void:
+	game.restart()
+	game.pitch = -.4
+	if not await steer(2, true):
+		return
+	var airborne := 0
+	for frame in range(3600):
+		var command := Driver.input_for(game.model, 10, true)
+		if game.model.grounded < 0:
+			airborne += 1
+		if airborne > 60 and airborne <= 420:
+			command = Vector3.ZERO
+		game.advance(1.0 / 60, Vector2(command.x, command.z), command.y)
+		await render_step()
+		if game.model.mode == Model.Mode.RETURNING:
+			break
+	if game.model.mode != Model.Mode.RETURNING:
+		failed = true
+		push_error("Missed-route GPU fixture must exercise long-distance rescue")
+		return
+	var begin_time: float = game.model.elapsed
+	for frame in range(300):
+		game.advance(1.0 / 60, Vector2.ZERO)
+		await render_step()
+		if frame == 30:
+			await capture("22-long-rescue")
+		if game.model.mode == Model.Mode.DIVING:
+			break
+	var duration: float = game.model.elapsed - begin_time
+	if duration > 3.52 or game.model.mode != Model.Mode.DIVING:
+		failed = true
+		push_error("GPU missed-route rescue must restore control within 3.5 seconds")
+	await capture("23-long-rescue-retry")
+	print("GPU missed-route rescue: %.2fs, lost %.2fm" % [duration, game.model.depth_losses[0]])
 
 
 func mirror_capture(source: String, destination: String) -> void:

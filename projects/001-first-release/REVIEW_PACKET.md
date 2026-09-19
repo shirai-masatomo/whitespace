@@ -34,7 +34,7 @@
 
 ## テストと実測
 
-成功: format/lint、依存整合性、ルール404・シーン393、6経路と対照条件、Windows export/headless起動、実GPU自動プレイ。Actions証跡は[STATE](PROJECT_STATE.md)。CIはGPU画質を検証しない。配布EXEの通常GPU起動と、ソース側の操作付き画面検証を区別する。
+成功: format/lint、依存整合性、ルール396・シーン397・音52、6経路と対照条件、Windows export/headless起動、実GPU自動プレイ。Actions証跡は[STATE](PROJECT_STATE.md)。CIはGPU画質を検証しない。配布EXEの通常GPU起動と、ソース側の操作付き画面検証を区別する。
 
 | 項目 | 実測/現在値 |
 | --- | --- |
@@ -82,3 +82,11 @@ Godotの[体積霧](https://docs.godotengine.org/en/4.7/tutorials/3d/volumetric_
 **動くからPASSにはしない。** 製品として見せるVertical Sliceの画質ゲートは未達。DD-036/037は反映。DD-027で理想操縦以外の失敗耐性、無音の操作フィードバック、画面全体の品質を監査を人間待ちなしで継続。
 
 [海上から足場を見る](review/20-pier-lookdown.png) / [流木の縁の接地](review/21-driftwood-edge.png)。海面の白い筋を旧shaderで再現し、修正後は両rendererの実画素検査を通過。
+
+## 失敗耐性と操作フィードバック
+
+離陸1秒後に入力を0〜10秒離す試走を、直行/補給迂回の各区間で別々に実行（91ケース）。0〜3秒の中断は全完走。6〜10秒では足場を逃す場合があり、全失敗で連続救助・満タン・操作復帰を確認。長い救助は最大5.25→3.48秒へ調整。[測定](review/route-resilience.json) / [長距離救助](review/22-long-rescue.png) / [再挑戦地点](review/23-long-rescue-retry.png)。実GPUでも113.88mを失い3.48秒で復帰。人間の失敗率ではなく、区間数も違うため単純な完走率でルートの安全性を比較しない。
+
+海上/水中/移動の音と6種の操作音を独自合成。接触回復は待ち時間なし、Mで無音、ポーズで音も停止。52検査でPCMの音量・連打防止・遷移を確認。音色の主観評価は未実施。[音の波形測定](review/audio-metrics.json)。
+
+**追加監査: 岩の縁の見た目と着地判定に不一致を発見。DD-041を優先し、HUMAN_REVIEWはまだ要求しない。**

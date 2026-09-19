@@ -65,7 +65,13 @@ func run() -> void:
 	game._unhandled_input(key)
 	game._update_camera()
 	check(game.third_person and game.avatar.visible, "V restores third person")
+	key.keycode = KEY_M
+	game._unhandled_input(key)
+	check(game.sound.muted, "M mutes game feedback")
+	game._unhandled_input(key)
+	check(not game.sound.muted, "M restores game feedback")
 	game.toggle_pause()
+	check(game.sound.suspended, "Game pause also pauses audio")
 	var paused_position: Vector3 = game.model.position
 	var paused_oxygen: float = game.model.oxygen
 	game._physics_process(1)
@@ -74,6 +80,7 @@ func run() -> void:
 		"Pause freezes risk and movement"
 	)
 	game.begin()
+	check(not game.sound.suspended, "Resume restores sound playback")
 	game._notification(Node.NOTIFICATION_APPLICATION_FOCUS_OUT)
 	check(game.paused, "Focus loss pauses game")
 	game.restart()

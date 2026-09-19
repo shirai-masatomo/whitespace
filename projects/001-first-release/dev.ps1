@@ -59,9 +59,11 @@ try {
     if ($Task -in @('test', 'check')) {
         Invoke-Godot 'rules' @('--headless', '--script', 'tests/test_rules.gd')
         Invoke-Godot 'scene' @('--headless', '--script', 'tests/test_scene.gd')
+        Invoke-Godot 'audio' @('--headless', '--script', 'tests/test_audio.gd')
     }
     if ($Task -in @('evaluate', 'check')) {
         Invoke-Godot 'evaluation' @('--headless', '--script', 'tests/test_evaluation.gd')
+        Invoke-Godot 'route-resilience' @('--headless', '--script', 'tests/test_route_resilience.gd')
     }
     if ($Task -in @('build', 'check')) {
         Invoke-Godot 'build' @('--headless', '--export-release', 'Windows Desktop', (Join-Path $buildRoot 'DIVE DIVE.exe'))

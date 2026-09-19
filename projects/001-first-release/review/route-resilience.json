@@ -1,0 +1,859 @@
+{
+  "results": [
+    {
+      "cases": [
+        {
+          "complete": true,
+          "failed_target": -1,
+          "gap_before_target": 2,
+          "lost_depth_m": 0.0,
+          "minimum_oxygen": 32.4,
+          "rescue_seconds": 0.0
+        },
+        {
+          "complete": true,
+          "failed_target": -1,
+          "gap_before_target": 10,
+          "lost_depth_m": 0.0,
+          "minimum_oxygen": 32.4,
+          "rescue_seconds": 0.0
+        },
+        {
+          "complete": true,
+          "failed_target": -1,
+          "gap_before_target": 6,
+          "lost_depth_m": 0.0,
+          "minimum_oxygen": 32.4,
+          "rescue_seconds": 0.0
+        },
+        {
+          "complete": true,
+          "failed_target": -1,
+          "gap_before_target": 8,
+          "lost_depth_m": 0.0,
+          "minimum_oxygen": 32.4,
+          "rescue_seconds": 0.0
+        },
+        {
+          "complete": true,
+          "failed_target": -1,
+          "gap_before_target": 9,
+          "lost_depth_m": 0.0,
+          "minimum_oxygen": 32.4,
+          "rescue_seconds": 0.0
+        }
+      ],
+      "completed": 5,
+      "gap_seconds": 0.0,
+      "max_rescue_seconds": 0.0,
+      "route": "fast_drop",
+      "trials": 5
+    },
+    {
+      "cases": [
+        {
+          "complete": true,
+          "failed_target": -1,
+          "gap_before_target": 2,
+          "lost_depth_m": 0.0,
+          "minimum_oxygen": 32.4,
+          "rescue_seconds": 0.0
+        },
+        {
+          "complete": true,
+          "failed_target": -1,
+          "gap_before_target": 10,
+          "lost_depth_m": 0.0,
+          "minimum_oxygen": 32.47,
+          "rescue_seconds": 0.0
+        },
+        {
+          "complete": true,
+          "failed_target": -1,
+          "gap_before_target": 6,
+          "lost_depth_m": 0.0,
+          "minimum_oxygen": 31.57,
+          "rescue_seconds": 0.0
+        },
+        {
+          "complete": true,
+          "failed_target": -1,
+          "gap_before_target": 8,
+          "lost_depth_m": 0.0,
+          "minimum_oxygen": 32.4,
+          "rescue_seconds": 0.0
+        },
+        {
+          "complete": true,
+          "failed_target": -1,
+          "gap_before_target": 9,
+          "lost_depth_m": 0.0,
+          "minimum_oxygen": 32.4,
+          "rescue_seconds": 0.0
+        }
+      ],
+      "completed": 5,
+      "gap_seconds": 0.5,
+      "max_rescue_seconds": 0.0,
+      "route": "fast_drop",
+      "trials": 5
+    },
+    {
+      "cases": [
+        {
+          "complete": true,
+          "failed_target": -1,
+          "gap_before_target": 2,
+          "lost_depth_m": 0.0,
+          "minimum_oxygen": 32.4,
+          "rescue_seconds": 0.0
+        },
+        {
+          "complete": true,
+          "failed_target": -1,
+          "gap_before_target": 10,
+          "lost_depth_m": 0.0,
+          "minimum_oxygen": 32.4,
+          "rescue_seconds": 0.0
+        },
+        {
+          "complete": true,
+          "failed_target": -1,
+          "gap_before_target": 6,
+          "lost_depth_m": 0.0,
+          "minimum_oxygen": 30.63,
+          "rescue_seconds": 0.0
+        },
+        {
+          "complete": true,
+          "failed_target": -1,
+          "gap_before_target": 8,
+          "lost_depth_m": 0.0,
+          "minimum_oxygen": 32.4,
+          "rescue_seconds": 0.0
+        },
+        {
+          "complete": true,
+          "failed_target": -1,
+          "gap_before_target": 9,
+          "lost_depth_m": 0.0,
+          "minimum_oxygen": 32.4,
+          "rescue_seconds": 0.0
+        }
+      ],
+      "completed": 5,
+      "gap_seconds": 1.0,
+      "max_rescue_seconds": 0.0,
+      "route": "fast_drop",
+      "trials": 5
+    },
+    {
+      "cases": [
+        {
+          "complete": true,
+          "failed_target": -1,
+          "gap_before_target": 2,
+          "lost_depth_m": 0.0,
+          "minimum_oxygen": 32.4,
+          "rescue_seconds": 0.0
+        },
+        {
+          "complete": true,
+          "failed_target": -1,
+          "gap_before_target": 10,
+          "lost_depth_m": 0.0,
+          "minimum_oxygen": 32.4,
+          "rescue_seconds": 0.0
+        },
+        {
+          "complete": true,
+          "failed_target": -1,
+          "gap_before_target": 6,
+          "lost_depth_m": 0.0,
+          "minimum_oxygen": 30.07,
+          "rescue_seconds": 0.0
+        },
+        {
+          "complete": true,
+          "failed_target": -1,
+          "gap_before_target": 8,
+          "lost_depth_m": 0.0,
+          "minimum_oxygen": 32.4,
+          "rescue_seconds": 0.0
+        },
+        {
+          "complete": true,
+          "failed_target": -1,
+          "gap_before_target": 9,
+          "lost_depth_m": 0.0,
+          "minimum_oxygen": 32.4,
+          "rescue_seconds": 0.0
+        }
+      ],
+      "completed": 5,
+      "gap_seconds": 2.0,
+      "max_rescue_seconds": 0.0,
+      "route": "fast_drop",
+      "trials": 5
+    },
+    {
+      "cases": [
+        {
+          "complete": true,
+          "failed_target": -1,
+          "gap_before_target": 2,
+          "lost_depth_m": 0.0,
+          "minimum_oxygen": 32.4,
+          "rescue_seconds": 0.0
+        },
+        {
+          "complete": true,
+          "failed_target": -1,
+          "gap_before_target": 10,
+          "lost_depth_m": 0.0,
+          "minimum_oxygen": 32.47,
+          "rescue_seconds": 0.0
+        },
+        {
+          "complete": true,
+          "failed_target": -1,
+          "gap_before_target": 6,
+          "lost_depth_m": 0.0,
+          "minimum_oxygen": 29.4,
+          "rescue_seconds": 0.0
+        },
+        {
+          "complete": true,
+          "failed_target": -1,
+          "gap_before_target": 8,
+          "lost_depth_m": 0.0,
+          "minimum_oxygen": 32.4,
+          "rescue_seconds": 0.0
+        },
+        {
+          "complete": true,
+          "failed_target": -1,
+          "gap_before_target": 9,
+          "lost_depth_m": 0.0,
+          "minimum_oxygen": 32.4,
+          "rescue_seconds": 0.0
+        }
+      ],
+      "completed": 5,
+      "gap_seconds": 3.0,
+      "max_rescue_seconds": 0.0,
+      "route": "fast_drop",
+      "trials": 5
+    },
+    {
+      "cases": [
+        {
+          "complete": true,
+          "failed_target": -1,
+          "gap_before_target": 2,
+          "lost_depth_m": 0.0,
+          "minimum_oxygen": 32.4,
+          "rescue_seconds": 0.0
+        },
+        {
+          "complete": false,
+          "failed_target": 10,
+          "gap_before_target": 10,
+          "lost_depth_m": 113.88,
+          "minimum_oxygen": 0.0,
+          "rescue_seconds": 3.48
+        },
+        {
+          "complete": true,
+          "failed_target": -1,
+          "gap_before_target": 6,
+          "lost_depth_m": 0.0,
+          "minimum_oxygen": 27.63,
+          "rescue_seconds": 0.0
+        },
+        {
+          "complete": true,
+          "failed_target": -1,
+          "gap_before_target": 8,
+          "lost_depth_m": 0.0,
+          "minimum_oxygen": 32.4,
+          "rescue_seconds": 0.0
+        },
+        {
+          "complete": true,
+          "failed_target": -1,
+          "gap_before_target": 9,
+          "lost_depth_m": 0.0,
+          "minimum_oxygen": 32.4,
+          "rescue_seconds": 0.0
+        }
+      ],
+      "completed": 4,
+      "gap_seconds": 6.0,
+      "max_rescue_seconds": 3.48,
+      "route": "fast_drop",
+      "trials": 5
+    },
+    {
+      "cases": [
+        {
+          "complete": true,
+          "failed_target": -1,
+          "gap_before_target": 2,
+          "lost_depth_m": 0.0,
+          "minimum_oxygen": 32.4,
+          "rescue_seconds": 0.0
+        },
+        {
+          "complete": false,
+          "failed_target": 10,
+          "gap_before_target": 10,
+          "lost_depth_m": 35.94,
+          "minimum_oxygen": 0.0,
+          "rescue_seconds": 1.9
+        },
+        {
+          "complete": true,
+          "failed_target": -1,
+          "gap_before_target": 6,
+          "lost_depth_m": 0.0,
+          "minimum_oxygen": 25.63,
+          "rescue_seconds": 0.0
+        },
+        {
+          "complete": true,
+          "failed_target": -1,
+          "gap_before_target": 8,
+          "lost_depth_m": 0.0,
+          "minimum_oxygen": 32.13,
+          "rescue_seconds": 0.0
+        },
+        {
+          "complete": false,
+          "failed_target": 9,
+          "gap_before_target": 9,
+          "lost_depth_m": 85.07,
+          "minimum_oxygen": 21.87,
+          "rescue_seconds": 3.48
+        }
+      ],
+      "completed": 3,
+      "gap_seconds": 10.0,
+      "max_rescue_seconds": 3.48,
+      "route": "fast_drop",
+      "trials": 5
+    },
+    {
+      "cases": [
+        {
+          "complete": true,
+          "failed_target": -1,
+          "gap_before_target": 1,
+          "lost_depth_m": 0.0,
+          "minimum_oxygen": 52.63,
+          "rescue_seconds": 0.0
+        },
+        {
+          "complete": true,
+          "failed_target": -1,
+          "gap_before_target": 2,
+          "lost_depth_m": 0.0,
+          "minimum_oxygen": 52.63,
+          "rescue_seconds": 0.0
+        },
+        {
+          "complete": true,
+          "failed_target": -1,
+          "gap_before_target": 10,
+          "lost_depth_m": 0.0,
+          "minimum_oxygen": 52.63,
+          "rescue_seconds": 0.0
+        },
+        {
+          "complete": true,
+          "failed_target": -1,
+          "gap_before_target": 11,
+          "lost_depth_m": 0.0,
+          "minimum_oxygen": 52.63,
+          "rescue_seconds": 0.0
+        },
+        {
+          "complete": true,
+          "failed_target": -1,
+          "gap_before_target": 6,
+          "lost_depth_m": 0.0,
+          "minimum_oxygen": 52.63,
+          "rescue_seconds": 0.0
+        },
+        {
+          "complete": true,
+          "failed_target": -1,
+          "gap_before_target": 12,
+          "lost_depth_m": 0.0,
+          "minimum_oxygen": 52.63,
+          "rescue_seconds": 0.0
+        },
+        {
+          "complete": true,
+          "failed_target": -1,
+          "gap_before_target": 8,
+          "lost_depth_m": 0.0,
+          "minimum_oxygen": 52.63,
+          "rescue_seconds": 0.0
+        },
+        {
+          "complete": true,
+          "failed_target": -1,
+          "gap_before_target": 9,
+          "lost_depth_m": 0.0,
+          "minimum_oxygen": 52.63,
+          "rescue_seconds": 0.0
+        }
+      ],
+      "completed": 8,
+      "gap_seconds": 0.0,
+      "max_rescue_seconds": 0.0,
+      "route": "safe_gardens",
+      "trials": 8
+    },
+    {
+      "cases": [
+        {
+          "complete": true,
+          "failed_target": -1,
+          "gap_before_target": 1,
+          "lost_depth_m": 0.0,
+          "minimum_oxygen": 50.27,
+          "rescue_seconds": 0.0
+        },
+        {
+          "complete": true,
+          "failed_target": -1,
+          "gap_before_target": 2,
+          "lost_depth_m": 0.0,
+          "minimum_oxygen": 52.23,
+          "rescue_seconds": 0.0
+        },
+        {
+          "complete": true,
+          "failed_target": -1,
+          "gap_before_target": 10,
+          "lost_depth_m": 0.0,
+          "minimum_oxygen": 52.63,
+          "rescue_seconds": 0.0
+        },
+        {
+          "complete": true,
+          "failed_target": -1,
+          "gap_before_target": 11,
+          "lost_depth_m": 0.0,
+          "minimum_oxygen": 52.63,
+          "rescue_seconds": 0.0
+        },
+        {
+          "complete": true,
+          "failed_target": -1,
+          "gap_before_target": 6,
+          "lost_depth_m": 0.0,
+          "minimum_oxygen": 52.63,
+          "rescue_seconds": 0.0
+        },
+        {
+          "complete": true,
+          "failed_target": -1,
+          "gap_before_target": 12,
+          "lost_depth_m": 0.0,
+          "minimum_oxygen": 52.63,
+          "rescue_seconds": 0.0
+        },
+        {
+          "complete": true,
+          "failed_target": -1,
+          "gap_before_target": 8,
+          "lost_depth_m": 0.0,
+          "minimum_oxygen": 52.63,
+          "rescue_seconds": 0.0
+        },
+        {
+          "complete": true,
+          "failed_target": -1,
+          "gap_before_target": 9,
+          "lost_depth_m": 0.0,
+          "minimum_oxygen": 52.63,
+          "rescue_seconds": 0.0
+        }
+      ],
+      "completed": 8,
+      "gap_seconds": 0.5,
+      "max_rescue_seconds": 0.0,
+      "route": "safe_gardens",
+      "trials": 8
+    },
+    {
+      "cases": [
+        {
+          "complete": true,
+          "failed_target": -1,
+          "gap_before_target": 1,
+          "lost_depth_m": 0.0,
+          "minimum_oxygen": 49.97,
+          "rescue_seconds": 0.0
+        },
+        {
+          "complete": true,
+          "failed_target": -1,
+          "gap_before_target": 2,
+          "lost_depth_m": 0.0,
+          "minimum_oxygen": 50.77,
+          "rescue_seconds": 0.0
+        },
+        {
+          "complete": true,
+          "failed_target": -1,
+          "gap_before_target": 10,
+          "lost_depth_m": 0.0,
+          "minimum_oxygen": 52.63,
+          "rescue_seconds": 0.0
+        },
+        {
+          "complete": true,
+          "failed_target": -1,
+          "gap_before_target": 11,
+          "lost_depth_m": 0.0,
+          "minimum_oxygen": 52.63,
+          "rescue_seconds": 0.0
+        },
+        {
+          "complete": true,
+          "failed_target": -1,
+          "gap_before_target": 6,
+          "lost_depth_m": 0.0,
+          "minimum_oxygen": 52.63,
+          "rescue_seconds": 0.0
+        },
+        {
+          "complete": true,
+          "failed_target": -1,
+          "gap_before_target": 12,
+          "lost_depth_m": 0.0,
+          "minimum_oxygen": 52.63,
+          "rescue_seconds": 0.0
+        },
+        {
+          "complete": true,
+          "failed_target": -1,
+          "gap_before_target": 8,
+          "lost_depth_m": 0.0,
+          "minimum_oxygen": 52.63,
+          "rescue_seconds": 0.0
+        },
+        {
+          "complete": true,
+          "failed_target": -1,
+          "gap_before_target": 9,
+          "lost_depth_m": 0.0,
+          "minimum_oxygen": 52.63,
+          "rescue_seconds": 0.0
+        }
+      ],
+      "completed": 8,
+      "gap_seconds": 1.0,
+      "max_rescue_seconds": 0.0,
+      "route": "safe_gardens",
+      "trials": 8
+    },
+    {
+      "cases": [
+        {
+          "complete": true,
+          "failed_target": -1,
+          "gap_before_target": 1,
+          "lost_depth_m": 0.0,
+          "minimum_oxygen": 49.47,
+          "rescue_seconds": 0.0
+        },
+        {
+          "complete": true,
+          "failed_target": -1,
+          "gap_before_target": 2,
+          "lost_depth_m": 0.0,
+          "minimum_oxygen": 48.57,
+          "rescue_seconds": 0.0
+        },
+        {
+          "complete": true,
+          "failed_target": -1,
+          "gap_before_target": 10,
+          "lost_depth_m": 0.0,
+          "minimum_oxygen": 52.63,
+          "rescue_seconds": 0.0
+        },
+        {
+          "complete": true,
+          "failed_target": -1,
+          "gap_before_target": 11,
+          "lost_depth_m": 0.0,
+          "minimum_oxygen": 52.63,
+          "rescue_seconds": 0.0
+        },
+        {
+          "complete": true,
+          "failed_target": -1,
+          "gap_before_target": 6,
+          "lost_depth_m": 0.0,
+          "minimum_oxygen": 52.63,
+          "rescue_seconds": 0.0
+        },
+        {
+          "complete": true,
+          "failed_target": -1,
+          "gap_before_target": 12,
+          "lost_depth_m": 0.0,
+          "minimum_oxygen": 52.63,
+          "rescue_seconds": 0.0
+        },
+        {
+          "complete": true,
+          "failed_target": -1,
+          "gap_before_target": 8,
+          "lost_depth_m": 0.0,
+          "minimum_oxygen": 52.63,
+          "rescue_seconds": 0.0
+        },
+        {
+          "complete": true,
+          "failed_target": -1,
+          "gap_before_target": 9,
+          "lost_depth_m": 0.0,
+          "minimum_oxygen": 52.63,
+          "rescue_seconds": 0.0
+        }
+      ],
+      "completed": 8,
+      "gap_seconds": 2.0,
+      "max_rescue_seconds": 0.0,
+      "route": "safe_gardens",
+      "trials": 8
+    },
+    {
+      "cases": [
+        {
+          "complete": true,
+          "failed_target": -1,
+          "gap_before_target": 1,
+          "lost_depth_m": 0.0,
+          "minimum_oxygen": 48.4,
+          "rescue_seconds": 0.0
+        },
+        {
+          "complete": true,
+          "failed_target": -1,
+          "gap_before_target": 2,
+          "lost_depth_m": 0.0,
+          "minimum_oxygen": 50.3,
+          "rescue_seconds": 0.0
+        },
+        {
+          "complete": true,
+          "failed_target": -1,
+          "gap_before_target": 10,
+          "lost_depth_m": 0.0,
+          "minimum_oxygen": 52.63,
+          "rescue_seconds": 0.0
+        },
+        {
+          "complete": true,
+          "failed_target": -1,
+          "gap_before_target": 11,
+          "lost_depth_m": 0.0,
+          "minimum_oxygen": 52.63,
+          "rescue_seconds": 0.0
+        },
+        {
+          "complete": true,
+          "failed_target": -1,
+          "gap_before_target": 6,
+          "lost_depth_m": 0.0,
+          "minimum_oxygen": 52.63,
+          "rescue_seconds": 0.0
+        },
+        {
+          "complete": true,
+          "failed_target": -1,
+          "gap_before_target": 12,
+          "lost_depth_m": 0.0,
+          "minimum_oxygen": 52.63,
+          "rescue_seconds": 0.0
+        },
+        {
+          "complete": true,
+          "failed_target": -1,
+          "gap_before_target": 8,
+          "lost_depth_m": 0.0,
+          "minimum_oxygen": 52.63,
+          "rescue_seconds": 0.0
+        },
+        {
+          "complete": true,
+          "failed_target": -1,
+          "gap_before_target": 9,
+          "lost_depth_m": 0.0,
+          "minimum_oxygen": 52.63,
+          "rescue_seconds": 0.0
+        }
+      ],
+      "completed": 8,
+      "gap_seconds": 3.0,
+      "max_rescue_seconds": 0.0,
+      "route": "safe_gardens",
+      "trials": 8
+    },
+    {
+      "cases": [
+        {
+          "complete": true,
+          "failed_target": -1,
+          "gap_before_target": 1,
+          "lost_depth_m": 0.0,
+          "minimum_oxygen": 47.6,
+          "rescue_seconds": 0.0
+        },
+        {
+          "complete": false,
+          "failed_target": 2,
+          "gap_before_target": 2,
+          "lost_depth_m": 118.93,
+          "minimum_oxygen": 0.0,
+          "rescue_seconds": 3.47
+        },
+        {
+          "complete": false,
+          "failed_target": 10,
+          "gap_before_target": 10,
+          "lost_depth_m": 113.95,
+          "minimum_oxygen": 0.0,
+          "rescue_seconds": 3.48
+        },
+        {
+          "complete": true,
+          "failed_target": -1,
+          "gap_before_target": 11,
+          "lost_depth_m": 0.0,
+          "minimum_oxygen": 52.63,
+          "rescue_seconds": 0.0
+        },
+        {
+          "complete": true,
+          "failed_target": -1,
+          "gap_before_target": 6,
+          "lost_depth_m": 0.0,
+          "minimum_oxygen": 52.63,
+          "rescue_seconds": 0.0
+        },
+        {
+          "complete": false,
+          "failed_target": 12,
+          "gap_before_target": 12,
+          "lost_depth_m": 101.02,
+          "minimum_oxygen": 0.0,
+          "rescue_seconds": 3.47
+        },
+        {
+          "complete": true,
+          "failed_target": -1,
+          "gap_before_target": 8,
+          "lost_depth_m": 0.0,
+          "minimum_oxygen": 52.63,
+          "rescue_seconds": 0.0
+        },
+        {
+          "complete": true,
+          "failed_target": -1,
+          "gap_before_target": 9,
+          "lost_depth_m": 0.0,
+          "minimum_oxygen": 52.63,
+          "rescue_seconds": 0.0
+        }
+      ],
+      "completed": 5,
+      "gap_seconds": 6.0,
+      "max_rescue_seconds": 3.48,
+      "route": "safe_gardens",
+      "trials": 8
+    },
+    {
+      "cases": [
+        {
+          "complete": true,
+          "failed_target": -1,
+          "gap_before_target": 1,
+          "lost_depth_m": 0.0,
+          "minimum_oxygen": 47.6,
+          "rescue_seconds": 0.0
+        },
+        {
+          "complete": false,
+          "failed_target": 2,
+          "gap_before_target": 2,
+          "lost_depth_m": 118.93,
+          "minimum_oxygen": 0.0,
+          "rescue_seconds": 3.47
+        },
+        {
+          "complete": false,
+          "failed_target": 10,
+          "gap_before_target": 10,
+          "lost_depth_m": 36.01,
+          "minimum_oxygen": 0.0,
+          "rescue_seconds": 1.9
+        },
+        {
+          "complete": true,
+          "failed_target": -1,
+          "gap_before_target": 11,
+          "lost_depth_m": 0.0,
+          "minimum_oxygen": 52.63,
+          "rescue_seconds": 0.0
+        },
+        {
+          "complete": false,
+          "failed_target": 6,
+          "gap_before_target": 6,
+          "lost_depth_m": 115.18,
+          "minimum_oxygen": 0.0,
+          "rescue_seconds": 3.48
+        },
+        {
+          "complete": false,
+          "failed_target": 12,
+          "gap_before_target": 12,
+          "lost_depth_m": 101.02,
+          "minimum_oxygen": 0.0,
+          "rescue_seconds": 3.47
+        },
+        {
+          "complete": false,
+          "failed_target": 8,
+          "gap_before_target": 8,
+          "lost_depth_m": 111.61,
+          "minimum_oxygen": 0.0,
+          "rescue_seconds": 3.48
+        },
+        {
+          "complete": false,
+          "failed_target": 9,
+          "gap_before_target": 9,
+          "lost_depth_m": 85.07,
+          "minimum_oxygen": 21.87,
+          "rescue_seconds": 3.48
+        }
+      ],
+      "completed": 2,
+      "gap_seconds": 10.0,
+      "max_rescue_seconds": 3.48,
+      "route": "safe_gardens",
+      "trials": 8
+    }
+  ],
+  "scope": "One input release, 1 second after takeoff, on each leg separately. Fast steering resumes. Not human failure rates."
+}

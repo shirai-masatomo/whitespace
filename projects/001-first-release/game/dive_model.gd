@@ -25,6 +25,7 @@ var visited_oxygen: Array[int] = [0]
 var return_checkpoint: int = 0
 var return_target := Vector3.ZERO
 var return_phase: int = 0
+var rescue_speed: float = 32.0
 var failure_depth: float = 0.0
 var depth_losses: Array[float] = []
 var rescue_reason: String = ""
@@ -58,6 +59,7 @@ func reset() -> void:
 	depth_losses.clear()
 	visited_oxygen.assign([0])
 	rescue_reason = ""
+	rescue_speed = config.emergency_speed
 	mode = Mode.DIVING
 
 
@@ -224,6 +226,14 @@ func begin_return(reason: String) -> void:
 		if platforms[index].position.y >= position.y + config.min_setback:
 			return_checkpoint = index
 	return_target = platforms[return_checkpoint].position
+	var clearance: Vector3 = return_target + Vector3.UP * config.rescue_clearance
+	var lift := Vector3(position.x, clearance.y, position.z)
+	var distance := position.distance_to(lift) + lift.distance_to(clearance)
+	distance += config.rescue_clearance
+	# Long misses lose depth, not extra waiting time. Reserve three 60 Hz phase ticks.
+	rescue_speed = maxf(
+		config.emergency_speed, distance / maxf(.1, config.rescue_max_seconds - .05)
+	)
 	return_phase = 0
 	grounded = -1
 	velocity = Vector3.ZERO
@@ -239,7 +249,7 @@ func _return_step(delta: float) -> void:
 	elif return_phase == 2:
 		target = return_target
 	var old := position
-	position = position.move_toward(target, config.emergency_speed * delta)
+	position = position.move_toward(target, rescue_speed * delta)
 	velocity = (position - old) / delta
 	if position.is_equal_approx(target):
 		if return_phase < 2:

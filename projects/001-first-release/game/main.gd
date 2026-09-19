@@ -4,6 +4,7 @@ const Model = preload("res://game/dive_model.gd")
 const World = preload("res://game/world.gd")
 const Hud = preload("res://game/hud.gd")
 const Navigation = preload("res://game/navigation.gd")
+const Sound = preload("res://game/ocean_audio.gd")
 const TUNING = preload("res://game/default_config.tres")
 
 var model = Model.new(TUNING)
@@ -21,6 +22,7 @@ var was_complete: bool = false
 var selected_target: int = 1
 var ledge_view: float = 0.0
 var automated_input: bool = false
+var sound: Node
 
 
 func _ready() -> void:
@@ -29,6 +31,8 @@ func _ready() -> void:
 		get_window().unfocusable = false
 		get_window().grab_focus()
 	_setup_inputs()
+	sound = Sound.new()
+	add_child(sound)
 	world = Node3D.new()
 	world.set_script(World)
 	add_child(world)
@@ -71,6 +75,7 @@ func _setup_inputs() -> void:
 func begin() -> void:
 	started = true
 	paused = false
+	sound.suspend(false)
 	if not automated_input:
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	hud.sync_buttons()
@@ -78,6 +83,7 @@ func begin() -> void:
 
 func restart() -> void:
 	model.reset()
+	sound.reset(model)
 	yaw = 0.0
 	pitch = -0.25
 	was_complete = false
@@ -90,6 +96,7 @@ func toggle_pause() -> void:
 	if not started or model.mode == Model.Mode.COMPLETE:
 		return
 	paused = not paused
+	sound.suspend(paused)
 	if not automated_input:
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE if paused else Input.MOUSE_MODE_CAPTURED
 	hud.sync_buttons()
@@ -116,6 +123,8 @@ func _unhandled_input(event: InputEvent) -> void:
 			begin()
 		elif event.keycode == KEY_TAB and started and not paused:
 			cycle_target()
+		elif event.keycode == KEY_M:
+			sound.set_muted(not sound.muted)
 		elif event.physical_keycode == KEY_V or event.keycode == KEY_V:
 			third_person = not third_person
 	if (
@@ -139,6 +148,7 @@ func _physics_process(delta: float) -> void:
 func advance(delta: float, axis: Vector2, descent: float = 0.0, ascend: bool = false) -> void:
 	var horizontal := Vector3(axis.x, 0.0, axis.y).rotated(Vector3.UP, yaw)
 	model.step(delta, Vector2(horizontal.x, horizontal.z), descent, ascend)
+	sound.observe(model, delta)
 	if model.mode == Model.Mode.COMPLETE and not was_complete:
 		was_complete = true
 		if not automated_input:
