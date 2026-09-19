@@ -3,6 +3,7 @@ extends RefCounted
 
 enum Mode { DIVING, RETURNING, COMPLETE }
 const Config = preload("res://game/dive_config.gd")
+const Driftwood = preload("res://game/driftwood_surface.gd")
 const Layout = preload("res://game/stage_layout.gd")
 
 var config: Resource
@@ -61,6 +62,8 @@ func reset() -> void:
 
 
 func inside(point: Vector3, platform: Dictionary, margin: float = 0.0) -> bool:
+	if platform.kind == "driftwood":
+		return is_finite(Driftwood.height_at(point - platform.position, platform.size))
 	if platform.get("round", false):
 		var offset := Vector2(point.x - platform.position.x, point.z - platform.position.z)
 		var radius: Vector2 = platform.size * .5 + Vector2.ONE * margin
@@ -72,6 +75,8 @@ func inside(point: Vector3, platform: Dictionary, margin: float = 0.0) -> bool:
 
 
 func surface_height(point: Vector3, platform: Dictionary) -> float:
+	if platform.kind == "driftwood":
+		return platform.position.y + Driftwood.height_at(point - platform.position, platform.size)
 	if platform.kind != "jelly":
 		return platform.position.y
 	var radius: float = platform.size.x * .56

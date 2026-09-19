@@ -54,6 +54,9 @@ func run() -> void:
 		if result.aimed_camera_diver_framed != result.decisions:
 			failures += 1
 			push_error("Ledge view must retain the diver in frame: " + result.name)
+		if result.mouse_camera_visible != result.decisions:
+			failures += 1
+			push_error("Mouse pitch/yaw must reveal each next target without F: " + result.name)
 		if result.aimed_camera_visible < result.decisions - 2:
 			failures += 1
 			push_error("Most departures must reveal their target without F: " + result.name)
@@ -97,6 +100,7 @@ func evaluate_route(
 	var survey_visible := 0
 	var aimed_visible := 0
 	var diver_visible := 0
+	var mouse_visible := 0
 	for target in route:
 		game.yaw = 0
 		game.pitch = -0.65
@@ -123,6 +127,22 @@ func evaluate_route(
 		if not game.camera.is_position_behind(diver):
 			if Rect2(0, 0, 1280, 720).has_point(game.camera.unproject_position(diver)):
 				diver_visible += 1
+		var mouse_found := false
+		for aim_pitch in [-.25, -.4, -.55, -.7, -.85, -1.0]:
+			game.pitch = aim_pitch
+			game._update_camera()
+			var view: Vector2 = game.camera.unproject_position(point)
+			var sight := PhysicsRayQueryParameters3D.create(game.camera.global_position, point)
+			if (
+				not game.camera.is_position_behind(point)
+				and Rect2(30, 30, 1220, 660).has_point(view)
+				and game.get_world_3d().direct_space_state.intersect_ray(sight).is_empty()
+			):
+				mouse_found = true
+				break
+		if mouse_found:
+			mouse_visible += 1
+		game.pitch = -.65
 		game.yaw = 0
 		Input.action_press("survey")
 		game.started = true
@@ -158,7 +178,8 @@ func evaluate_route(
 			{
 				"to": target,
 				"travel_seconds": snappedf(game.model.elapsed - start, 0.01),
-				"arrival_oxygen": snappedf(game.model.oxygen, 0.01)
+				"arrival_oxygen": snappedf(game.model.oxygen, 0.01),
+				"visible_with_mouse": mouse_found
 			}
 		)
 		if game.model.at_oxygen():
@@ -176,6 +197,7 @@ func evaluate_route(
 		"departure_camera_unoccluded": unobstructed,
 		"survey_visible": survey_visible,
 		"aimed_camera_visible": aimed_visible,
+		"mouse_camera_visible": mouse_visible,
 		"aimed_camera_diver_framed": diver_visible,
 		"decisions": route.size(),
 		"mean_leg_seconds": snappedf(_mean_leg(legs), 0.01)

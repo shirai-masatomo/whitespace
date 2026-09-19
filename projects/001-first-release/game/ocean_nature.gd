@@ -1,5 +1,6 @@
 extends RefCounted
 const Geo = preload("res://game/ocean_geometry.gd")
+const Driftwood = preload("res://game/driftwood_surface.gd")
 const Layout = preload("res://game/stage_layout.gd")
 const WOOD = preload("res://game/shaders/wood.gdshader")
 
@@ -34,13 +35,14 @@ static func oxygen_algae(parent: Node3D, seed_value: int) -> void:
 	Geo.put(root, Geo.rock(Vector2(2.8, 2.4), .8, seed_value + 33), stone())
 	var combined := SurfaceTool.new()
 	combined.begin(Mesh.PRIMITIVE_TRIANGLES)
-	for frond in range(19):
+	# Leave head and shoulders above the canopy; refilling must not hide the diver.
+	for frond in range(13):
 		var angle := frond * 2.399 + seed_value
-		var radius := 1.1 + sqrt(frond / 19.0) * .45
-		var height := 1.8 + .5 * (1 + sin(frond * 5.7 + seed_value))
+		var radius := 1.1 + sqrt(frond / 13.0) * .45
+		var height := 1.0 + .4 * (1 + sin(frond * 5.7 + seed_value))
 		var basis := Basis(Vector3.UP, -angle) * Basis(Vector3.FORWARD, .12 + radius * .04)
 		combined.append_from(
-			Geo.leaf(height, .25 + height * .09),
+			Geo.leaf(height, .16 + height * .07),
 			0,
 			Transform3D(basis, Vector3(cos(angle) * radius, .05, sin(angle) * radius))
 		)
@@ -134,29 +136,16 @@ static func deck(root: Node3D, data: Dictionary, index: int) -> void:
 			wood.shader = WOOD
 			wood.set_shader_parameter("trunk", true)
 			for log_index in range(3):
-				var length_scale := 0.94 + log_index * .07
 				var trunk := Geo.put(
 					root,
-					Geo.loft(
-						[
-							Vector3(-size.x * .56, .001, .001),
-							Vector3(-size.x * .56, .4, 1.1),
-							Vector3(-size.x * .4, 1.4, 2.15),
-							Vector3(-size.x * .2, 1.8, 2.3),
-							Vector3(size.x * .12, 1.75, 2.05),
-							Vector3(size.x * .35, 1.4, 1.95),
-							Vector3(size.x * .56, .6, 1.2),
-							Vector3(size.x * .56, .001, .001)
-						],
-						20,
-						18 + log_index
-					),
+					Geo.loft(Driftwood.profile(size.x), Driftwood.SEGMENTS),
 					wood,
-					Vector3(0, -1.6, (log_index - 1) * 3.7)
+					Driftwood.origin(log_index)
 				)
 				trunk.rotation.z = PI / 2
-				trunk.rotation.y = (log_index - 1) * .045
-				trunk.scale.y = length_scale
+				trunk.rotation.y = Driftwood.heading(log_index)
+				trunk.scale.y = Driftwood.length_scale(log_index)
+				Geo.camera_obstacle(trunk)
 				for twig in range(3):
 					var branch := Geo.put(
 						trunk,
@@ -209,13 +198,18 @@ static func landscape(parent: Node3D) -> void:
 	var mat := stone()
 	var rng := RandomNumberGenerator.new()
 	rng.seed = 260919
-	for i in range(4):
-		Geo.put(
-			parent,
-			Geo.boulder(Vector3(95 + i * 20, 50, 80), 800 + i),
-			mat,
-			Vector3(-210 + i * 95, 11 + i % 2 * 8, -450 - i * 50)
+	# Unequal headlands and broken peaks, instead of four repeated island cones.
+	for island in [
+		[Vector3(-225, 25, -460), Vector3(180, 78, 150)],
+		[Vector3(-192, 49, -490), Vector3(75, 115, 85)],
+		[Vector3(-284, 9, -430), Vector3(115, 44, 100)],
+		[Vector3(112, 13, -635), Vector3(245, 66, 180)],
+		[Vector3(173, 34, -655), Vector3(92, 96, 100)]
+	]:
+		var land := Geo.put(
+			parent, Geo.boulder(island[1], rng.randi_range(700, 900)), mat, island[0]
 		)
+		land.rotation.y = rng.randf_range(-.6, .6)
 	# One open coastline to the left; the right and horizon remain ocean.
 	for i in range(10):
 		var x := -85 - i % 3 * 24

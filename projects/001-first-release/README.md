@@ -47,7 +47,7 @@ cd projects/001-first-release
 - `setup`: Godot 4.7.2・Windowsテンプレートを公式SHA512で検証、固定版の開発ツールを専用venvへ導入。
 - `check`: format / lint / 開発依存整合性 / import / ルール・シーンテスト / evaluate / release export / EXE headless起動 / 配布zip。
 - `evaluate`: 6経路と対照条件の時間・最低酸素・カメラ遮蔽・救助、移動速度・酸素切れ時間を `artifacts/evaluation.json` へ。到達失敗、酸素余裕不足、俯瞰の遮蔽はCI失敗。
-- `visual`: 実GPUで海上→入水→各操作→失敗→再挑戦→300mを進め、代表画面・カメラ比較・960×540のUIを `artifacts/*.png` へ。画像の目視確認も必要。
+- `visual`: 実GPUで海上→入水→各操作→失敗→再挑戦→300mを進め、代表画面・カメラ比較・960×540のUIを `artifacts/<renderer>/` へ。従来の `artifacts/*.png` にも複製。画面外・フォーカスなし・マウス非捕捉で実行し、画像の目視確認も行う。
 - `benchmark -Renderer forward_plus` / `benchmark -Renderer gl_compatibility`: 同じ3場面の1280×720フレーム時間と描画数。結果は `artifacts/render-*.json`。
 - `format` / `test` / `lint` / `build` / `editor`: 個別実行。生成ログは `artifacts/`、レビュー用の選別画像は `review/`。
 

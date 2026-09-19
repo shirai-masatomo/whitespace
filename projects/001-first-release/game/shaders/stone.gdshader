@@ -6,7 +6,9 @@ varying vec3 wp;
 varying float tint_variation;
 void vertex(){wp=(MODEL_MATRIX*vec4(VERTEX,1.0)).xyz;tint_variation=hash(MODEL_MATRIX[3].xyz*0.31);}
 void fragment(){
- float n=noise(wp*0.5)*0.5+noise(wp*2.7)*0.3+noise(wp*5.0)*0.2;
+ float footprint=max(length(dFdx(wp)),length(dFdy(wp)));
+ float detail=1.0-smoothstep(0.05,0.55,footprint);
+ float n=noise(wp*0.5)*0.5+mix(0.5,noise(wp*2.7)*0.6+noise(wp*5.0)*0.4,detail)*0.5;
  float strata=sin(wp.y*1.4+n*6.0)*0.5+0.5;
  vec3 stone=mix(vec3(0.10,0.15,0.15),vec3(0.42,0.43,0.34),n);
  stone*=0.7+strata*0.3;

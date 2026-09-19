@@ -8,9 +8,11 @@ func _initialize() -> void:
 
 
 func run() -> void:
+	root.unfocusable = true
 	DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
 	root.size = Vector2i(1280, 720)
 	var game = SCENE.instantiate()
+	game.automated_input = true
 	root.add_child(game)
 	await process_frame
 	game.set_physics_process(false)

@@ -35,14 +35,15 @@ func _make_platforms() -> void:
 		root.position = data.position
 		add_child(root)
 		platforms.append(root)
-		var body := StaticBody3D.new()
-		body.position.y = -1
-		var shape := CollisionShape3D.new()
-		var box := BoxShape3D.new()
-		box.size = Vector3(data.size.x, 2, data.size.y)
-		shape.shape = box
-		body.add_child(shape)
-		root.add_child(body)
+		if data.kind != "driftwood":
+			var body := StaticBody3D.new()
+			body.position.y = -1
+			var shape := CollisionShape3D.new()
+			var box := BoxShape3D.new()
+			box.size = Vector3(data.size.x, 2, data.size.y)
+			shape.shape = box
+			body.add_child(shape)
+			root.add_child(body)
 		Nature.deck(root, data, index)
 		if data.oxygen:
 			Nature.oxygen_algae(root, index)
@@ -77,7 +78,11 @@ func _make_ocean() -> void:
 	sea.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	var seabed := PlaneMesh.new()
 	seabed.size = Vector2(2500, 2500)
-	Geo.put(self, seabed, Nature.stone(), Vector3(0, -370, 0))
+	seabed.subdivide_width = 160
+	seabed.subdivide_depth = 160
+	var sand := ShaderMaterial.new()
+	sand.shader = preload("res://game/shaders/seabed.gdshader")
+	Geo.put(self, seabed, sand, Vector3(0, -370, 0))
 	# Soft light ribbons support the volumetric light; also provide the GL fallback.
 	if true:
 		for i in range(7):

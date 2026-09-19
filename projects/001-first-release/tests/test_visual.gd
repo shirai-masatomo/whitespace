@@ -8,6 +8,7 @@ var failed: bool = false
 var simulation_frames: int = 0
 var sequence: Array[Dictionary] = []
 var record_sequence := true
+var capture_root: String
 
 
 func _initialize() -> void:
@@ -28,7 +29,22 @@ func capture(label: String) -> void:
 			if color.g < 0.6 or color.b < 0.5:
 				failed = true
 				push_error("Goal replay/exit buttons must render above the deep ocean")
-	var result := shot.save_png("res://artifacts/%s.png" % label)
+	if label == "20-pier-lookdown":
+		# Fixed overhead scene: sample ocean outside the pier and HUD.
+		var bright_pixels := 0
+		for x in range(25, 105):
+			for y in range(150, 580):
+				for point in [Vector2i(x, y), Vector2i(1280 - x, y)]:
+					var color := shot.get_pixelv(point)
+					if color.r > .65 and color.g > .7 and color.b > .7:
+						bright_pixels += 1
+		print("Overhead water bright pixels: %d" % bright_pixels)
+		if bright_pixels > 12:
+			failed = true
+			push_error("Overhead water must not contain bright noise-grid streaks")
+	var source := capture_root + "/%s.png" % label
+	var result := shot.save_png(source)
+	mirror_capture(source, "res://artifacts/%s.png" % label)
 	if result != OK:
 		failed = true
 		push_error("Screenshot failed: " + label)
@@ -57,7 +73,10 @@ func render_step() -> void:
 	if record_sequence and simulation_frames % 120 == 0 and game.model.elapsed <= 65:
 		var filename := "frame-%03d.jpg" % sequence.size()
 		var result := root.get_texture().get_image().save_jpg(
-			"res://artifacts/sequence/" + filename, .85
+			capture_root + "/sequence/" + filename, .85
+		)
+		mirror_capture(
+			capture_root + "/sequence/" + filename, "res://artifacts/sequence/" + filename
 		)
 		if result != OK:
 			failed = true
@@ -87,14 +106,31 @@ func steer(index: int, fast_route: bool = false) -> bool:
 
 
 func run() -> void:
+	root.unfocusable = true
+	capture_root = "res://artifacts/" + RenderingServer.get_current_rendering_method()
+	DirAccess.make_dir_recursive_absolute(capture_root + "/sequence")
 	DirAccess.make_dir_recursive_absolute("res://artifacts/sequence")
 	game = SCENE.instantiate()
+	game.automated_input = true
 	root.add_child(game)
 	await process_frame
 	game.set_physics_process(false)
+	game.set_process_unhandled_input(false)
 	await capture("title")
 	game.begin()
+	if Input.mouse_mode != Input.MOUSE_MODE_VISIBLE or not root.unfocusable:
+		push_error("GPU automation must not capture the desktop mouse or take focus")
+		quit(1)
+		return
 	await capture("01-surface-start")
+	game.pitch = -.65
+	await capture("20-pier-lookdown")
+	if "--water-only" in OS.get_cmdline_user_args():
+		game.queue_free()
+		await process_frame
+		quit(1 if failed else 0)
+		return
+	game.pitch = -.25
 	for frame in range(600):
 		await step_toward(1)
 		if game.model.grounded < 0 and game.model.position.y < 2:
@@ -155,6 +191,24 @@ func run() -> void:
 	if not await steer(3):
 		quit(1)
 		return
+	# Walk to the curved edge and back with player inputs, without repositioning.
+	for goal_offset in [5.6, 0.0]:
+		for frame in range(120):
+			var target: Vector3 = game.model.platforms[3].position + Vector3(0, 0, goal_offset)
+			var offset := Vector2(
+				target.x - game.model.position.x, target.z - game.model.position.z
+			)
+			game.advance(1.0 / 60, (offset * 1.6 / 7.0).limit_length())
+			await render_step()
+		if goal_offset > 0:
+			if game.model.grounded != 3 or game.model.position.y >= -90.2:
+				failed = true
+				push_error("Feet must follow the curved wood edge during an actual walk")
+			game.yaw = 1.4
+			game.pitch = -.2
+			await capture("21-driftwood-edge")
+			game.yaw = 0
+			game.pitch = -.65
 	for frame in range(1600):
 		game.advance(1.0 / 60, Vector2.ZERO)
 		await render_step()
@@ -223,9 +277,19 @@ func run() -> void:
 	game.toggle_pause()
 	await capture("pause-960")
 	print("Visual: surface, sun, movement, refill, platform, rescue, goal; failures=%s" % failed)
-	var record := FileAccess.open("res://artifacts/sequence/frames.json", FileAccess.WRITE)
+	var record := FileAccess.open(capture_root + "/sequence/frames.json", FileAccess.WRITE)
 	record.store_string(JSON.stringify(sequence, "  "))
 	record.close()
+	mirror_capture(capture_root + "/sequence/frames.json", "res://artifacts/sequence/frames.json")
 	game.queue_free()
 	await process_frame
 	quit(1 if failed else 0)
+
+
+func mirror_capture(source: String, destination: String) -> void:
+	var result := DirAccess.copy_absolute(
+		ProjectSettings.globalize_path(source), ProjectSettings.globalize_path(destination)
+	)
+	if result != OK:
+		failed = true
+		push_error("Cannot preserve renderer-specific capture: " + source)

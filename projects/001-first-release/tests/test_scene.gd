@@ -111,6 +111,8 @@ func run() -> void:
 	_test_ledge_view(game)
 	_test_pose_blending(game)
 	_test_oxygen_algae(game)
+	await physics_frame
+	_test_driftwood_footing(game)
 	game.queue_free()
 	await process_frame
 	print("Scene: %d checks, %d failures" % [checks, failures])
@@ -119,7 +121,7 @@ func run() -> void:
 
 func _test_ledge_view(game) -> void:
 	game.model = Model.new()
-	for target in [1, 2, 3]:
+	for target in [0, 1, 2, 3]:
 		check(Driver.reach(game.model, target), "Camera fixture reaches its platform")
 		for angle in [-.3, -.4, -.65, -1.2]:
 			for heading in [0.0, 1.7, -2.3]:
@@ -192,3 +194,34 @@ func _test_oxygen_algae(game) -> void:
 		game.model.oxygen = .01
 		game.model.step(1.0 / 60, Vector2.ZERO)
 		check(game.model.oxygen == 100, "Touching each algae stand refills without a waiting state")
+
+
+func _test_driftwood_footing(game) -> void:
+	var largest_error := 0.0
+	var samples := 0
+	for index in [3, 10]:
+		var platform: Dictionary = game.model.platforms[index]
+		for x in [-5.0, -3.0, 0.0, 3.0, 5.0]:
+			for z in [-5.5, -4.5, -2.5, -1.0, 0.0, 1.0, 2.5, 4.5, 5.5]:
+				var point: Vector3 = platform.position + Vector3(x, 0, z)
+				var query := PhysicsRayQueryParameters3D.create(
+					point + Vector3.UP * 8, point + Vector3.DOWN * 8, 2
+				)
+				var hit: Dictionary = game.get_world_3d().direct_space_state.intersect_ray(query)
+				var floor_y: float = game.model.surface_height(point, platform)
+				check(
+					is_finite(floor_y) == (not hit.is_empty()),
+					"Wood footprint agrees with mesh ray"
+				)
+				if hit.is_empty():
+					continue
+				var error: float = absf(floor_y - hit.position.y)
+				largest_error = maxf(largest_error, error)
+				samples += 1
+				check(error < .03, "Wood foot height agrees with rendered trunk within 3cm")
+	var corner: Vector3 = game.model.platforms[10].position + Vector3(0, 0, 6.8)
+	check(
+		not game.model.inside(corner, game.model.platforms[10]), "No invisible floor outside trunks"
+	)
+	check(samples > 60, "Footing test samples both actual rendered log rafts")
+	print("Driftwood: %d mesh samples, max height error %.4fm" % [samples, largest_error])

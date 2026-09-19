@@ -20,9 +20,14 @@ var paused: bool = false
 var was_complete: bool = false
 var selected_target: int = 1
 var ledge_view: float = 0.0
+var automated_input: bool = false
 
 
 func _ready() -> void:
+	# GPU test windows start unfocusable; only an ordinary game may take focus.
+	if not automated_input and DisplayServer.get_name() != "headless":
+		get_window().unfocusable = false
+		get_window().grab_focus()
 	_setup_inputs()
 	world = Node3D.new()
 	world.set_script(World)
@@ -66,7 +71,8 @@ func _setup_inputs() -> void:
 func begin() -> void:
 	started = true
 	paused = false
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	if not automated_input:
+		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	hud.sync_buttons()
 
 
@@ -84,17 +90,25 @@ func toggle_pause() -> void:
 	if not started or model.mode == Model.Mode.COMPLETE:
 		return
 	paused = not paused
-	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE if paused else Input.MOUSE_MODE_CAPTURED
+	if not automated_input:
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE if paused else Input.MOUSE_MODE_CAPTURED
 	hud.sync_buttons()
 
 
 func _notification(what: int) -> void:
-	if what == NOTIFICATION_APPLICATION_FOCUS_OUT and started and not paused:
+	if (
+		not automated_input
+		and what == NOTIFICATION_APPLICATION_FOCUS_OUT
+		and started
+		and not paused
+	):
 		if model.mode != Model.Mode.COMPLETE:
 			toggle_pause()
 
 
 func _unhandled_input(event: InputEvent) -> void:
+	if automated_input:
+		return
 	if event is InputEventKey and event.pressed and not event.echo:
 		if event.keycode == KEY_ESCAPE:
 			toggle_pause()
@@ -127,7 +141,8 @@ func advance(delta: float, axis: Vector2, descent: float = 0.0, ascend: bool = f
 	model.step(delta, Vector2(horizontal.x, horizontal.z), descent, ascend)
 	if model.mode == Model.Mode.COMPLETE and not was_complete:
 		was_complete = true
-		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+		if not automated_input:
+			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 		hud.sync_buttons()
 
 
@@ -137,7 +152,7 @@ func _update_camera(delta: float = 1.0) -> void:
 	var look := Vector3(0, sin(pitch), -cos(pitch)).rotated(Vector3.UP, yaw)
 	var desired: Vector3 = focus - look * 7.5 if third_person else focus
 	var peek := 0.0
-	if third_person and model.grounded > 0 and model.mode == Model.Mode.DIVING:
+	if third_person and model.grounded >= 0 and model.mode == Model.Mode.DIVING:
 		peek = smoothstep(.25, .8, -pitch)
 	ledge_view = lerpf(ledge_view, peek, 1.0 - exp(-delta * 9))
 	var heading := Vector3.FORWARD.rotated(Vector3.UP, yaw)

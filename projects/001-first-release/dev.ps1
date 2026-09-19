@@ -10,8 +10,16 @@ Set-Content -LiteralPath "$projectRoot/build/.gdignore" -Value ''
 
 function Invoke-Godot([string]$Name, [string[]]$Arguments) {
     $log = Join-Path $projectRoot "artifacts/$Name.log"
-    & $godot --path $projectRoot --log-file $log --rendering-method $Renderer @Arguments
-    if ($LASTEXITCODE -ne 0) { throw "$Name failed: exit $LASTEXITCODE" }
+    if ($Name -eq 'visual' -or $Name.StartsWith('benchmark-')) {
+        # Keep a real GPU viewport, but never capture the mouse or cover the desktop.
+        $gpuArgs = @('--path', ('"' + $projectRoot + '"'), '--log-file', ('"' + $log + '"'), '--rendering-method', $Renderer, '--position', '-20000,-20000', '--audio-driver', 'Dummy') + $Arguments
+        $gpu = Start-Process -FilePath $godot -ArgumentList $gpuArgs -WindowStyle Hidden -PassThru
+        if (-not $gpu.WaitForExit(300000)) { $gpu.Kill(); throw "$Name exceeded five minutes" }
+        if ($gpu.ExitCode -ne 0) { throw "$Name failed: exit $($gpu.ExitCode)" }
+    } else {
+        & $godot --path $projectRoot --log-file $log --rendering-method $Renderer @Arguments
+        if ($LASTEXITCODE -ne 0) { throw "$Name failed: exit $LASTEXITCODE" }
+    }
     if (Test-Path $log) {
         if (Select-String -Path $log -Pattern 'SCRIPT ERROR:|ERROR:' -Quiet) { throw "$Name logged errors: $log" }
     }
