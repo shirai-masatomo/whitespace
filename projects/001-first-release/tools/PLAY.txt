@@ -1,0 +1,13 @@
+DIVE DIVE / Windows試作
+
+「DIVE DIVE.exe」をダブルクリック → 「潜りはじめる」。
+WASD: 水平移動 / マウス: 視点 / E: 潜る / Q: 浮上
+Shift + E: 急降下 / Esc: 一時停止 / ウィンドウの×: 終了
+
+300mの海底へ。Eを離して留まると圧力が回復します。
+100%になると最大55m戻され、そのまま再挑戦できます。
+セーブなし・オフライン・日本語。Windows x64 / OpenGL 3.3対応GPU。
+初回は面白さを確かめるための試作です。
+
+Font: Noto Sans JP (SIL Open Font License 1.1), see FONT_LICENSE.txt.
+Engine: Godot 4.7.2 (MIT and third-party notices), see GODOT_COPYRIGHT.txt.

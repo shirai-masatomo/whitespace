@@ -1,0 +1,46 @@
+name: DIVE DIVE
+
+on:
+  push:
+    branches: [main, 'codex/dive-dive-*']
+    paths: ['projects/001-first-release/**', '.github/workflows/dive-dive.yml']
+  pull_request:
+    paths: ['projects/001-first-release/**', '.github/workflows/dive-dive.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  windows:
+    runs-on: windows-latest
+    timeout-minutes: 25
+    defaults:
+      run:
+        shell: pwsh
+        working-directory: projects/001-first-release
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/cache@v4
+        with:
+          path: |
+            projects/001-first-release/.tools/*.exe
+            projects/001-first-release/.tools/templates
+          key: dive-godot-4.7.2-windows-v1
+      - name: Install verified Godot and pinned tools
+        run: ./tools/setup.ps1
+      - name: Format, lint, dependency check, tests, Windows build and export smoke
+        run: ./dev.ps1 check
+      - uses: actions/upload-artifact@v4
+        with:
+          name: DIVE-DIVE-windows
+          path: projects/001-first-release/build/DIVE-DIVE-windows.zip
+          if-no-files-found: error
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: DIVE-DIVE-check-logs
+          path: projects/001-first-release/artifacts/*.log

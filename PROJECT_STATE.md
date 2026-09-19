@@ -1,6 +1,6 @@
 # WhiteSpace — PROJECT STATE
 
-更新: 2026-09-18
+更新: 2026-09-19
 
 ## 全体
 
@@ -10,14 +10,14 @@
 
 ## 現在のプロジェクト
 
-### 001 First Release
+### DIVE DIVE
 
-- 状態: **Phase 0 / 企画準備**
+- 状態: **Phase 1 / 中核プロトタイプ**
 - 目的: WhiteSpace名義で最初の正式リリース作品を完成させる。
 - 開発モデル: [Codex自律駆動](projects/001-first-release/AUTONOMY.md)。
-- ゲーム案: 未決定。
-- 候補: わらしべ長者 / 水中高難易度アクション / 今後追加する案。
-- 詳細: `projects/001-first-release/`
+- ゲーム案: ユーザーがDIVE DIVEを選定。深度/圧力/シームレスな強制浮上を核にする。
+- Windows向け300m試作を実装。ゲームの核を人間が触って評価する段階へ進める。
+- 詳細: [起動方法](projects/001-first-release/README.md) / [現在地](projects/001-first-release/PROJECT_STATE.md)
 
 ### 言語ジェンガ（仮）
 
@@ -28,7 +28,6 @@
 
 ## 次
 
-1. `projects/001-first-release/IDEAS.md` の候補を増やす。
-2. 候補を比較し、最初に本制作するゲームを人間が決める。
-3. 決定後、Codexが最小プロトタイプから自律的に進行する。
-4. 言語ジェンガ側は既存資産を保持し、必要になった時だけ再開する。
+1. DIVE DIVEのWindows試作を人間がプレイし、圧力・待ち時間・深度損失を評価する。
+2. レビュー後、Codexが数値調整・地形試作・配布品質を順に改善する。
+3. 言語ジェンガ側は既存資産を保持し、必要になった時だけ再開する。

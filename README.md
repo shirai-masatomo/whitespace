@@ -6,17 +6,17 @@ WhiteSpaceは、**ゲーム・小説・映像・ARG・仮想現実・Webなど�
 
 ## プロジェクト
 
-- [001 First Release](projects/001-first-release/README.md)  
-  WhiteSpace名義で最初の正式リリースを目指す新規プロジェクト。Codex自律駆動モデルを採用。現在はゲーム案選定前。
+- [DIVE DIVE](projects/001-first-release/README.md)
+  深い海底へ潜る3D高難易度アクション。Codex自律駆動でWindows向け300m試作を開発中。
 
-- [言語ジェンガ（仮）](projects/language-jenga/README.md)  
+- [言語ジェンガ（仮）](projects/language-jenga/README.md)
   これまでWhiteSpaceで進めてきた「宥めよ」、会話ゲーム、intent辞書、言語/関係性の実験を引き継ぐ既存プロジェクト。
 
 全体一覧: [projects/README.md](projects/README.md)
 
 ## クリエイティブ・ノウハウ
 
-[Creative Methods](docs/creative/CREATIVE_METHODS.md)  
+[Creative Methods](docs/creative/CREATIVE_METHODS.md)
 制作時に立ち返るための、媒体横断の短いノウハウ集。AI活用、発想、試作、批評など再利用できる方法をここへ蓄積する。
 
 ## リリースまでの見通し
@@ -36,7 +36,7 @@ WhiteSpace/
 ├── docs/roadmap/            # 全作品共通のリリース見通し（画像・元テキスト）
 └── projects/
     ├── README.md           # 作品一覧
-    ├── 001-first-release/  # 最初の正式リリース候補
+    ├── 001-first-release/  # DIVE DIVE
     └── language-jenga/
         ├── README.md
         ├── PROJECT_STATE.md

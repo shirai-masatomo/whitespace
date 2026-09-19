@@ -1,69 +1,59 @@
-# 001 First Release
+# DIVE DIVE
 
-WhiteSpace名義で**最初の正式リリースを目指すゲームプロジェクト**。
+WhiteSpaceの初期リリースを目指す、3D水中アクション。**早く深く潜りたい。でも急ぐと深度を失う。**
+現在は300mの縦型空間で、この核を試す最小プロトタイプ。まず人間が触って面白さを判断する。
 
-現時点ではゲーム案を固定しない。小さく試作し、「完成させられる」「面白さの核がある」「PCで配布しやすい」案を選び、最初の公開作品にする。
+## 今すぐ遊ぶ（Windows）
 
-## 目的
+1. このPCでは `build/windows/DIVE DIVE.exe` をダブルクリック。
+2. 「潜りはじめる」またはEnter。
+3. Eで潜り、圧力が高くなったらEを離して待つ。300mへ到達するとクリア。
 
-1. 1本のゲームを本当に完成させる。
-2. Windows向けに第三者へ配布できる状態にする。
-3. ゲーム本体の完成を最優先する。
-4. Steam等のストア対応は完成が見えた段階で追加する。
-5. Codexが可能な範囲を自律的に進め、人間の関与を重大判断へ絞る。
+別PCへ渡す場合は `build/DIVE-DIVE-windows.zip` を展開して起動する。Godot・Pythonのインストールは不要。GitHub Actionsの **DIVE-DIVE-windows** artifactからも取得できる。
 
-## 現時点の候補
+| 操作 | 動作 |
+| --- | --- |
+| WASD / 矢印 | 水平移動 |
+| マウス | 視点 |
+| E / Q | 潜る / 浮上 |
+| Shift + E | 急降下（圧力が速く上がる） |
+| Esc / Enter | 一時停止 / 再開 |
 
-- **わらしべ長者ゲーム**: 交換を繰り返し価値を上げる。将来的にオンライン交換へ拡張可能。
-- **水中高難易度アクション**: Only Up系の高難易度進行。急激に深く潜ると水圧で死亡するなど、「深く進みたいが急げない」を中核ルールにする。
-- その他、新しい案は `IDEAS.md` に追加し、制作開始時に比較して決定する。
+負荷100%で最大55m強制浮上し、自動で操作が戻る。死亡画面・ロード・シーン再生成は使わない。フォーカスを外すと一時停止。セーブ・酸素・Steam SDK・オンラインは未導入。
 
-## 最初のゲームを選ぶ基準
+## 開発と検証
 
-- 1人+Codexで完成可能
-- 中核ルールを短期間で試せる
-- 数分遊べば面白さが伝わる
-- PC向けビルドが容易
-- オンラインやSteam固有機能がなくても成立
-- 後から拡張できる
+Windows x64、開発時のみPython 3.12以上が必要。リポジトリルートから:
 
-## 開発方針
-
-[プロジェクト固有の自律運用](AUTONOMY.md)を採用する。WhiteSpace全体の自律度と権限境界は [基盤方針](../../docs/FOUNDATION.md) を参照する。
-
-```text
-PROJECT_STATE
-   ↓
-TASKS
-   ↓
-Codexが最優先タスクを選ぶ
-   ↓
-実装
-   ↓
-テスト / 実プレイ確認
-   ↓
-自己レビュー
-   ↓
-GitHub更新
-   ↓
-次タスク
+```powershell
+cd projects/001-first-release
+./tools/setup.ps1
+./dev.ps1 check
+./dev.ps1 play
 ```
 
-人間の判断が必要なのは、主にゲームコンセプトの大変更・有料サービス・公開/契約・大規模削除・権利リスクがある場合。
+PowerShellでスクリプト実行が制限される場合は、この信頼したスクリプトだけ `powershell -NoProfile -ExecutionPolicy Bypass -File ./dev.ps1 check` のように実行する。マシン全体のポリシーは変更しない。
 
-## リリースの考え方
+- `setup`: Godot 4.7.2とWindowsテンプレートを公式SHA512で検証して取得。専用venvへ固定バージョンの開発ツールを導入。初回テンプレート取得は約1.3GB。
+- `check`: format / lint / 開発依存整合性 / import / ルールとシーンのテスト / Windows release build / 出力EXEのheadless起動 / 配布zip。
+- `visual`: GPU描画で危険・強制浮上・回復・ゴール・再挑戦・960×540表示を再現。`artifacts/*.png` を目視確認する。
+- `format` / `test` / `lint` / `build` / `editor`: 個別実行。重要な実行ログは `artifacts/*.log`（Git対象外）。
 
-まずゲームを完成させる。
+GitHub ActionsはWindows上でsetupとcheckを実行し、ビルドとログをartifactに保存する。GPU画面確認はローカルで行う。
 
-```text
-企画
-→ 最小プロトタイプ
-→ 面白さ確認
-→ 本制作
-→ 配布可能な完成版
-→ 公開先決定
-→ Steam / itch.io / DLsite 等への対応
-→ リリース
-```
+## 構造と仮のルール
 
-Steam対応を先に作り込みすぎない。
+- `game/dive_model.gd`: 深度・圧力・強制浮上・ゴールの独立したルール。
+- `game/dive_config.gd` / `default_config.tres`: 速度・回復・失う深度等の調整値。
+- `game/main.gd`: 入力・カメラ・進行。`world.gd`: オリジナルのプリミティブ3D空間。`hud.gd`: 日本語表示。
+- `tests/`: headlessルール検証、実シーンの入力と一時停止、GPU描画検証。
+- [PROJECT_STATE](PROJECT_STATE.md) / [TASKS](TASKS.md) / [AUTONOMY](AUTONOMY.md): 再開時に読む。
+
+潜降14m/s、急降下約23m/s、圧力は潜った距離と速度で増える。停止・浮上で毎秒13回復、限界で55m戻され、負荷20から再挑戦する。これらはプレイ感レビューで変えてよい。海底ゴールと世界の形はこの300m試験用で、任意の深度のステージ生成は次段階の対象。
+
+Godotを採用した理由は、小さな3D試作をテキスト資産とCLIで反復できるため。UE5の大規模環境機能は、この核の検証には不要と判断した。[Godot CLI公式資料](https://docs.godotengine.org/en/stable/tutorials/editor/command_line_tutorial.html)
+
+## 素材と権利
+
+他ゲームの素材・ステージ・演出は使用していない。コード生成のプリミティブ空間のみ。
+日本語フォントは [Noto Sans JP](https://github.com/google/fonts/tree/main/ofl/notosansjp)、[SIL OFL](assets/fonts/OFL.txt)を同梱。Godotの [著作権・第三者ライセンス表示](assets/GODOT_COPYRIGHT.txt)も配布zipへ同梱する。フォントは2026-09-19に取得したファイルをGitで固定。
