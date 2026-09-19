@@ -16,7 +16,7 @@
 - 実GPUのvisual: 入水→足場→急降下/浮上→補給→酸素切れ→救助→再挑戦→300m。Forward+とCompatibilityを実行。クリアボタンの画素検査と960×540も確認。
 - 最終経路: 通常86.27秒 / 補給直行81.73秒 / 寄り道90.10秒。最低酸素25.00%以上。代表救助は30m損失・2.27秒。
 - RTX 4070 SUPER、1280×720、VSyncなし、静止3場面: Forward+中央値2.31〜2.41ms、P95最大4.08ms。GL中央値0.96〜1.09ms。単体GPU時間ではなく描画フレームの実時間。別GPUは未確認。
-- 直前CI: [Windows Actions #35434116647](https://github.com/shirai-masatomo/whitespace/actions/runs/35434116647) 成功、main `7aca1a8`（救助・音まで）。以後の岩/クラゲ/ブイの縁修正はローカルcheck・GPU確認済み、次commitでCI再確認。
+- 最新実装CI: [Windows Actions #35435377321](https://github.com/shirai-masatomo/whitespace/actions/runs/35435377321) 成功、`6f83e5b`（接地・救助・音・自然素材の最終調整まで）。ローカルcheck、両rendererの実GPU撮影、配布EXEのGPU起動も成功。
 - [画面・連続画像・評価](REVIEW_PACKET.md) / [自己レビュー](AI_REVIEW.md)。自動操縦の成功を面白さや製品品質の証明にしない。
 
 ## 次
