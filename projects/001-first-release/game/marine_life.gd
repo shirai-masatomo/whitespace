@@ -2,6 +2,9 @@ extends Node3D
 ## Original low-cost shoals gather near oxygen algae; no collision or paid assets.
 const Geo = preload("res://game/ocean_geometry.gd")
 const Layout = preload("res://game/stage_layout.gd")
+var rays: Array[Node3D] = []
+var shoals: Array[Node3D] = []
+var origins: Array[Vector3] = []
 
 
 func _ready() -> void:
@@ -9,6 +12,60 @@ func _ready() -> void:
 		if platform.oxygen:
 			make_shoal(platform.position + Vector3.UP * 5, 16)
 	make_shoal(Vector3(8, -18, -21), 24)
+	for zone in Layout.current_zones():
+		make_shoal(zone.center, 32)
+	for index in range(3):
+		var ray := make_ray()
+		ray.name = "RayGuide%d" % index
+		ray.scale = Vector3.ONE * (1.0 - index * .15)
+		add_child(ray)
+		rays.append(ray)
+
+
+func make_ray() -> Node3D:
+	var animal := Node3D.new()
+	var st := SurfaceTool.new()
+	st.begin(Mesh.PRIMITIVE_TRIANGLES)
+	# Original swept diamond silhouette, rounded head and tapered trailing tail.
+	var rim := [
+		Vector3(0, .2, -2),
+		Vector3(1.1, .05, -1.2),
+		Vector3(3.6, 0, .5),
+		Vector3(1.1, -.05, 1),
+		Vector3(0, 0, 1.5),
+		Vector3(-1.1, -.05, 1),
+		Vector3(-3.6, 0, .5),
+		Vector3(-1.1, .05, -1.2)
+	]
+	for index in range(rim.size()):
+		for point in [Vector3(0, .28, 0), rim[(index + 1) % rim.size()], rim[index]]:
+			st.add_vertex(point)
+	st.generate_normals()
+	var mat := ShaderMaterial.new()
+	mat.shader = preload("res://game/shaders/ray.gdshader")
+	Geo.put(animal, st.commit(), mat)
+	var tail := Geo.put(
+		animal,
+		Geo.loft([Vector3(0, .13, .13), Vector3(4, .015, .015)], 8),
+		Geo.material(Color("284b4e")),
+		Vector3(0, 0, 1)
+	)
+	tail.rotation.x = PI / 2
+	return animal
+
+
+func update(player: Vector3, elapsed: float) -> void:
+	for index in range(rays.size()):
+		var phase := elapsed * .075 + index * .65
+		# The school crosses the open water toward an optional rock-garden entrance.
+		rays[index].position = Vector3(
+			-14 + cos(phase) * 40, -153 + sin(phase) * 17, -100 + sin(phase) * 15
+		)
+		rays[index].rotation.y = atan2(sin(phase) * 40, -cos(phase) * 15)
+	for index in range(shoals.size()):
+		var away := origins[index] - player
+		var escape := away.normalized() * maxf(0, 7 - away.length()) * .65
+		shoals[index].position = origins[index] + escape
 
 
 func make_shoal(point: Vector3, count: int) -> void:
@@ -46,3 +103,5 @@ func make_shoal(point: Vector3, count: int) -> void:
 	school.multimesh = swarm
 	school.position = point
 	add_child(school)
+	shoals.append(school)
+	origins.append(point)

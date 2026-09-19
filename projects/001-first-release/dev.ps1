@@ -1,4 +1,4 @@
-﻿param([ValidateSet('check', 'evaluate', 'test', 'lint', 'format', 'build', 'visual', 'benchmark', 'gpu-smoke', 'play', 'editor')][string]$Task = 'check', [ValidateSet('windows','windows-preview','windows-real')][string]$BuildFolder = 'windows', [ValidateSet('forward_plus','gl_compatibility')][string]$Renderer = 'forward_plus')
+﻿param([ValidateSet('check', 'evaluate', 'test', 'lint', 'format', 'build', 'visual', 'visual-reef', 'benchmark', 'gpu-smoke', 'play', 'editor')][string]$Task = 'check', [ValidateSet('windows','windows-preview','windows-real')][string]$BuildFolder = 'windows', [ValidateSet('forward_plus','gl_compatibility')][string]$Renderer = 'forward_plus')
 $ErrorActionPreference = 'Stop'
 $projectRoot = $PSScriptRoot
 $buildRoot = Join-Path $projectRoot ('build/' + $BuildFolder)
@@ -10,7 +10,7 @@ Set-Content -LiteralPath "$projectRoot/build/.gdignore" -Value ''
 
 function Invoke-Godot([string]$Name, [string[]]$Arguments) {
     $log = Join-Path $projectRoot "artifacts/$Name.log"
-    if ($Name -eq 'visual' -or $Name.StartsWith('benchmark-')) {
+    if ($Name.StartsWith('visual') -or $Name.StartsWith('benchmark-')) {
         # Keep a real GPU viewport, but never capture the mouse or cover the desktop.
         $gpuArgs = @('--path', ('"' + $projectRoot + '"'), '--log-file', ('"' + $log + '"'), '--rendering-method', $Renderer, '--position', '-20000,-20000', '--audio-driver', 'Dummy') + $Arguments
         $gpu = Start-Process -FilePath $godot -ArgumentList $gpuArgs -WindowStyle Hidden -PassThru
@@ -52,6 +52,9 @@ try {
     }
     if ($Task -eq 'benchmark') {
         Invoke-Godot ('benchmark-' + $Renderer) @('--script', 'tests/test_rendering.gd')
+    }
+    if ($Task -eq 'visual-reef') {
+        Invoke-Godot 'visual-reef' @('--script', 'tests/test_reef_visual.gd')
     }
     if ($Task -eq 'visual') {
         Invoke-Godot 'visual' @('--script', 'tests/test_visual.gd')

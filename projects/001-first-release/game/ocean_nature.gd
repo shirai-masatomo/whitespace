@@ -146,7 +146,6 @@ static func deck(root: Node3D, data: Dictionary, index: int) -> void:
 				trunk.rotation.z = PI / 2
 				trunk.rotation.y = Driftwood.heading(log_index)
 				trunk.scale.y = Driftwood.length_scale(log_index)
-				Geo.camera_obstacle(trunk)
 				for twig in range(3):
 					var branch := Geo.put(
 						trunk,
@@ -221,7 +220,7 @@ static func landscape(parent: Node3D) -> void:
 		var coast := Geo.put(
 			parent, Geo.boulder(Vector3(65, 90, 85), 100 + i), mat, Vector3(x, y, 30 - i * 27)
 		)
-		Geo.camera_obstacle(coast)
+		coast.name = "Coast%d" % i
 	for i in range(35):
 		var point := Vector3(
 			rng.randf_range(-220, 380), rng.randf_range(-330, -200), rng.randf_range(-650, -160)
@@ -253,3 +252,10 @@ static func landscape(parent: Node3D) -> void:
 		)
 	var bridge := Geo.put(parent, Geo.rock(Vector2(60, 25), 12, 73), mat, Vector3(90, -95, -145))
 	bridge.rotation.z = .1
+	# Increasing density on one side leaves an open offshore bypass.
+	for form in Layout.Reef.geology():
+		var reef := Geo.put(parent, Geo.boulder(form.size, form.seed), mat, form.point)
+		reef.name = "ApproachingReef%d" % form.seed
+		kelp(parent, form.point + Vector3(6, -8, 2), 9, form.seed)
+	var roof := Geo.put(parent, Geo.rock(Vector2(28, 18), 6, 912), mat, Vector3(-62, -194, -104))
+	roof.name = "WalkThroughArch"

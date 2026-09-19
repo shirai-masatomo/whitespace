@@ -99,14 +99,3 @@ static func sphere(parent: Node3D, radius: float, mat: Material, point: Vector3)
 	mesh.radial_segments = 24
 	mesh.rings = 12
 	return put(parent, mesh, mat, point)
-
-
-static func camera_obstacle(instance: MeshInstance3D) -> void:
-	# Camera-only triangles; player locomotion still uses deterministic platform surfaces.
-	var body := StaticBody3D.new()
-	body.collision_layer = 2
-	body.collision_mask = 0
-	var shape := CollisionShape3D.new()
-	shape.shape = instance.mesh.create_trimesh_shape()
-	body.add_child(shape)
-	instance.add_child(body)

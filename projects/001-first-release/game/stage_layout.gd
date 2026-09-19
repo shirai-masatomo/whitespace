@@ -4,6 +4,7 @@ const JELLY_RADIUS_SCALE := .56
 const JELLY_SEGMENTS := 48
 const BUOY_TOP_SCALE := .54
 const BUOY_SEGMENTS := 36
+const Reef = preload("res://game/reef_layout.gd")
 
 
 static func platforms() -> Array[Dictionary]:
@@ -57,6 +58,19 @@ static func platforms() -> Array[Dictionary]:
 		data[index]["shape_seed"] = index + 8
 		data[index]["label"] = names[index]
 		data[index]["round"] = kinds[index] not in ["pier", "driftwood"]
+	for entry in Reef.platforms():
+		var added := make(
+			entry.label,
+			entry.point,
+			entry.size,
+			entry.get("oxygen", false),
+			false,
+			entry.get("sway", Vector2.ZERO)
+		)
+		added["kind"] = entry.kind
+		added["shape_seed"] = 100 + data.size()
+		added["round"] = entry.kind != "driftwood"
+		data.append(added)
 	return data
 
 
@@ -87,11 +101,19 @@ static func routes() -> Dictionary:
 		"safe_gardens": [1, 2, 10, 11, 6, 12, 8, 9],
 		"fast_drop": [2, 10, 6, 8, 9],
 		"current_gardens": [1, 2, 10, 11, 6, 8, 9],
+		"cliff_walk": [1, 2, 10, 11, 18, 13, 14, 15, 8, 9],
+		"offshore_life": [2, 4, 5, 6, 17, 16, 8, 9],
+		"reef_refuge": [2, 10, 6, 19, 15, 8, 9],
 	}
 
 
 static func current_zones() -> Array[Dictionary]:
 	return [
+		{
+			"center": Vector3(30, -232, -80),
+			"radius": Vector3(18, 20, 16),
+			"flow": Vector3(0, 2.5, -1.5)
+		},
 		{
 			"center": Vector3(10, -43, -25),
 			"radius": Vector3(22, 9, 20),

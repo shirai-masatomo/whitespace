@@ -13,6 +13,7 @@ var lighting: Node3D
 var effects: Node3D
 var environment: Environment
 var platforms: Array[Node3D] = []
+var life: Node3D
 
 
 func _ready() -> void:
@@ -28,7 +29,8 @@ func _ready() -> void:
 	add_child(landscape)
 	Nature.landscape(landscape)
 	Collision.build(landscape)
-	add_child(Life.new())
+	life = Life.new()
+	add_child(life)
 	for zone in Layout.current_zones():
 		effects.current(zone.center, zone.flow)
 
@@ -106,6 +108,7 @@ func update_depth(camera_y: float) -> void:
 
 func update_life(model) -> void:
 	effects.update(model)
+	life.update(model.position, model.elapsed)
 
 
 func make_avatar() -> Node3D:

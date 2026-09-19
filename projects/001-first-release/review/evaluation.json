@@ -90,7 +90,7 @@
       "complete": true,
       "decisions": 9,
       "departure_camera_framed": 9,
-      "departure_camera_unoccluded": 8,
+      "departure_camera_unoccluded": 9,
       "legs": [
         {
           "arrival_oxygen": 77.2,
@@ -206,7 +206,7 @@
       "complete": true,
       "decisions": 9,
       "departure_camera_framed": 8,
-      "departure_camera_unoccluded": 7,
+      "departure_camera_unoccluded": 8,
       "legs": [
         {
           "arrival_oxygen": 77.2,
@@ -436,6 +436,204 @@
       "mouse_camera_visible": 7,
       "name": "current_gardens",
       "seconds": 39.52,
+      "survey_visible": 7
+    },
+    {
+      "aimed_camera_diver_framed": 10,
+      "aimed_camera_visible": 8,
+      "complete": true,
+      "decisions": 10,
+      "departure_camera_framed": 8,
+      "departure_camera_unoccluded": 5,
+      "legs": [
+        {
+          "arrival_oxygen": 77.2,
+          "to": 1,
+          "travel_seconds": 8.48,
+          "visible_with_mouse": true
+        },
+        {
+          "arrival_oxygen": 100.0,
+          "to": 2,
+          "travel_seconds": 8.63,
+          "visible_with_mouse": true
+        },
+        {
+          "arrival_oxygen": 100.0,
+          "to": 10,
+          "travel_seconds": 9.63,
+          "visible_with_mouse": true
+        },
+        {
+          "arrival_oxygen": 100.0,
+          "to": 11,
+          "travel_seconds": 10.25,
+          "visible_with_mouse": true
+        },
+        {
+          "arrival_oxygen": 100.0,
+          "to": 18,
+          "travel_seconds": 10.68,
+          "visible_with_mouse": true
+        },
+        {
+          "arrival_oxygen": 100.0,
+          "to": 13,
+          "travel_seconds": 5.18,
+          "visible_with_mouse": true
+        },
+        {
+          "arrival_oxygen": 83.27,
+          "to": 14,
+          "travel_seconds": 4.82,
+          "visible_with_mouse": false
+        },
+        {
+          "arrival_oxygen": 100.0,
+          "to": 15,
+          "travel_seconds": 8.55,
+          "visible_with_mouse": true
+        },
+        {
+          "arrival_oxygen": 100.0,
+          "to": 8,
+          "travel_seconds": 9.83,
+          "visible_with_mouse": false
+        },
+        {
+          "arrival_oxygen": 57.87,
+          "to": 9,
+          "travel_seconds": 11.17,
+          "visible_with_mouse": true
+        }
+      ],
+      "mean_leg_seconds": 8.72,
+      "minimum_oxygen": 46.0,
+      "mouse_camera_visible": 8,
+      "name": "cliff_walk",
+      "seconds": 87.23,
+      "survey_visible": 8
+    },
+    {
+      "aimed_camera_diver_framed": 8,
+      "aimed_camera_visible": 8,
+      "complete": true,
+      "decisions": 8,
+      "departure_camera_framed": 7,
+      "departure_camera_unoccluded": 7,
+      "legs": [
+        {
+          "arrival_oxygen": 100.0,
+          "to": 2,
+          "travel_seconds": 15.25,
+          "visible_with_mouse": true
+        },
+        {
+          "arrival_oxygen": 100.0,
+          "to": 4,
+          "travel_seconds": 18.77,
+          "visible_with_mouse": true
+        },
+        {
+          "arrival_oxygen": 68.4,
+          "to": 5,
+          "travel_seconds": 8.52,
+          "visible_with_mouse": true
+        },
+        {
+          "arrival_oxygen": 100.0,
+          "to": 6,
+          "travel_seconds": 10.18,
+          "visible_with_mouse": true
+        },
+        {
+          "arrival_oxygen": 61.33,
+          "to": 17,
+          "travel_seconds": 10.3,
+          "visible_with_mouse": true
+        },
+        {
+          "arrival_oxygen": 100.0,
+          "to": 16,
+          "travel_seconds": 6.32,
+          "visible_with_mouse": true
+        },
+        {
+          "arrival_oxygen": 100.0,
+          "to": 8,
+          "travel_seconds": 6.7,
+          "visible_with_mouse": true
+        },
+        {
+          "arrival_oxygen": 57.87,
+          "to": 9,
+          "travel_seconds": 11.17,
+          "visible_with_mouse": true
+        }
+      ],
+      "mean_leg_seconds": 10.9,
+      "minimum_oxygen": 31.0,
+      "mouse_camera_visible": 8,
+      "name": "offshore_life",
+      "seconds": 87.2,
+      "survey_visible": 8
+    },
+    {
+      "aimed_camera_diver_framed": 7,
+      "aimed_camera_visible": 6,
+      "complete": true,
+      "decisions": 7,
+      "departure_camera_framed": 6,
+      "departure_camera_unoccluded": 6,
+      "legs": [
+        {
+          "arrival_oxygen": 100.0,
+          "to": 2,
+          "travel_seconds": 15.25,
+          "visible_with_mouse": true
+        },
+        {
+          "arrival_oxygen": 100.0,
+          "to": 10,
+          "travel_seconds": 9.63,
+          "visible_with_mouse": true
+        },
+        {
+          "arrival_oxygen": 100.0,
+          "to": 6,
+          "travel_seconds": 21.97,
+          "visible_with_mouse": true
+        },
+        {
+          "arrival_oxygen": 100.0,
+          "to": 19,
+          "travel_seconds": 5.37,
+          "visible_with_mouse": true
+        },
+        {
+          "arrival_oxygen": 100.0,
+          "to": 15,
+          "travel_seconds": 7.77,
+          "visible_with_mouse": true
+        },
+        {
+          "arrival_oxygen": 100.0,
+          "to": 8,
+          "travel_seconds": 9.83,
+          "visible_with_mouse": false
+        },
+        {
+          "arrival_oxygen": 57.87,
+          "to": 9,
+          "travel_seconds": 11.17,
+          "visible_with_mouse": true
+        }
+      ],
+      "mean_leg_seconds": 11.57,
+      "minimum_oxygen": 18.0,
+      "mouse_camera_visible": 6,
+      "name": "reef_refuge",
+      "seconds": 80.98,
       "survey_visible": 7
     }
   ],

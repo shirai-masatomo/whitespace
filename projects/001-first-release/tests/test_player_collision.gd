@@ -2,6 +2,8 @@ extends SceneTree
 ## Actual capsule + game.advance, with fixture setup only before each contact.
 const SCENE = preload("res://game/main.tscn")
 const Driver = preload("res://tests/route_driver.gd")
+const Geo = preload("res://game/ocean_geometry.gd")
+const Collision = preload("res://game/level_collision.gd")
 var game
 var failures := 0
 var checks := 0
@@ -89,11 +91,31 @@ func run() -> void:
 	game.set_physics_process(false)
 	await physics_frame
 	await process_frame
-	for index in [0, 1, 2, 3, 4, 5, 6, 9]:
+	for index in [0, 1, 2, 3, 4, 5, 6, 9, 13, 14, 16, 17]:
 		game.model.reset()
 		game.world.sync_platforms(game.model.platforms)
 		await physics_frame
 		await audit_platform(index)
+	await audit_small_solids()
+	game.model.reset()
+	game.model.position = game.model.platforms[5].position + Vector3.UP * .003
+	game.model.grounded = 5
+	for frame in range(180):
+		game.advance(1.0 / 60, Vector2.ZERO)
+	check(
+		(
+			game.model.grounded == 5
+			and absf(game.model.position.x - game.model.platforms[5].position.x) < .2
+		),
+		"Moving platform carries the actual capsule"
+	)
+	var cliff_ray := PhysicsRayQueryParameters3D.create(
+		Vector3(-30, -40, 5), Vector3(-150, -40, 5), 1
+	)
+	var cliff_hit: Dictionary = game.get_world_3d().direct_space_state.intersect_ray(cliff_ray)
+	check(not cliff_hit.is_empty(), "Reachable coastline is solid")
+	if not cliff_hit.is_empty():
+		await probe("coastline side", cliff_hit.position, Vector3.LEFT, false, 1.0 / 60)
 	for route_name in game.model.Layout.routes():
 		game.model.reset()
 		var complete := true
@@ -129,6 +151,7 @@ func run() -> void:
 		"Curved wood traversal reaches edge on the surface"
 	)
 	var file := FileAccess.open("res://artifacts/player-collision.json", FileAccess.WRITE)
+	audit_oxygen_choice()
 	file.store_string(
 		JSON.stringify({"checks": checks, "failures": failures, "cases": evidence}, "  ")
 	)
@@ -137,3 +160,47 @@ func run() -> void:
 	await create_timer(.1).timeout
 	print("Actual player collision: %d checks, %d failures" % [checks, failures])
 	quit(1 if failures else 0)
+
+
+func audit_small_solids() -> void:
+	var fixtures := Node3D.new()
+	game.world.add_child(fixtures)
+	var point := Vector3(260, -85, 0)
+	Geo.box(fixtures, Vector3(3, .06, 3), Geo.material(Color.WHITE), point)
+	Geo.box(fixtures, Vector3(.08, 4, 3), Geo.material(Color.WHITE), point + Vector3(6, 0, 0))
+	Geo.sphere(fixtures, .45, Geo.material(Color.WHITE), point + Vector3(12, 0, 0))
+	Collision.build(fixtures)
+	await physics_frame
+	await process_frame
+
+	for dt in [1.0 / 60, 1.0 / 15]:
+		await probe("6cm thin floor E", point + Vector3.UP * .03, Vector3.DOWN, true, dt)
+		await probe("6cm underside Space", point + Vector3.DOWN * .03, Vector3.UP, false, dt)
+		await probe("8cm wall side", point + Vector3(5.96, 0, 0), Vector3.RIGHT, false, dt)
+		await probe("small curved object", point + Vector3(12, .45, 0), Vector3.DOWN, true, dt)
+		await probe("thin floor rim", point + Vector3(1.48, .03, 0), Vector3.DOWN, true, dt)
+	fixtures.queue_free()
+	await process_frame
+
+
+func audit_oxygen_choice() -> void:
+	var choices: Array[Dictionary] = []
+	for air in [100.0, 30.0]:
+		for target in [8, 19]:
+			game.model.reset()
+			for stop in [2, 10, 6]:
+				check(Driver.reach(game.model, stop), "Reach oxygen decision fixture")
+			game.model.oxygen = air
+			# Leave the existing plant before reducing the experimental reserve.
+			for frame in range(120):
+				var command := Driver.input_for(game.model, target, true)
+				game.advance(1.0 / 60, Vector2(command.x, command.z), command.y)
+				if not game.model.at_oxygen():
+					break
+			game.model.oxygen = air
+			var arrived := Driver.reach(game.model, target, 40, true)
+			choices.append({"starting_oxygen": air, "target": target, "arrived": arrived})
+			check(
+				arrived == (air == 100 or target == 19), "Oxygen changes a meaningful route choice"
+			)
+	print("Oxygen decisions: ", choices)
