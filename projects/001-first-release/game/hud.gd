@@ -72,71 +72,35 @@ func _draw() -> void:
 	var ratio: float = model.oxygen / game.TUNING.oxygen_capacity
 	var returning: bool = model.mode == Model.Mode.RETURNING
 	var accent := ORANGE if ratio < 0.25 or returning else CYAN
-	draw_rect(Rect2(28, 24, 264, 157), Color(0.02, 0.07, 0.1, 0.88))
-	text_at(Vector2(48, 52), "DIVE DIVE   /   潜航記録", 16, CYAN)
-	text_at(Vector2(48, 115), "%03d" % int(model.depth), 54)
-	text_at(Vector2(166, 114), "m / 300 m", 19, MUTED)
-	text_at(
-		Vector2(48, 153),
-		"最深 %03dm   ·   浮上 %d回" % [int(model.best_depth), model.setbacks],
-		16,
-		MUTED
-	)
-	draw_rect(Rect2(872, 24, 380, 125), Color(0.02, 0.07, 0.1, 0.88))
-	text_at(
-		Vector2(892, 54),
-		(
-			"酸素 / 呼吸できます"
-			if model.at_oxygen() or model.position.y >= -1
-			else "酸素 / 残り約%d秒" % int(ceil(model.oxygen / maxf(0.01, model.oxygen_rate)))
-		),
-		19,
-		accent
-	)
-	text_at(Vector2(1145, 56), "%03d%%" % int(ratio * 100), 23, accent)
-	draw_rect(Rect2(892, 72, 338, 8), Color("284451"))
-	draw_rect(Rect2(892, 72, 338 * ratio, 8), accent)
-	var hint := "緑の泡に触れると瞬時に満タン"
+	draw_rect(Rect2(28, 24, 206, 88), Color(0.02, 0.07, 0.1, 0.66))
+	text_at(Vector2(44, 48), "DIVE DIVE", 15, CYAN)
+	text_at(Vector2(44, 94), "%03d" % int(model.depth), 38)
+	text_at(Vector2(130, 93), "m / 300", 17, MUTED)
+	draw_rect(Rect2(998, 24, 254, 88), Color(0.02, 0.07, 0.1, 0.66))
+	text_at(Vector2(1014, 50), "酸素", 17, accent)
+	text_at(Vector2(1170, 51), "%d%%" % int(ratio * 100), 20, accent)
+	draw_rect(Rect2(1014, 62, 222, 5), Color("284451"))
+	draw_rect(Rect2(1014, 62, 222 * ratio, 5), accent)
+	var hint := "緑の泡で、すぐ満タン"
 	if returning:
-		hint = "緊急浮上 → %dmから再挑戦" % int(maxf(0, -model.return_target.y))
-	elif model.at_oxygen():
-		hint = "酸素100% · 補給地点を記録"
+		hint = "泡に包まれて救助中"
+	elif model.at_oxygen() or model.position.y >= -1:
+		hint = "ここでは呼吸できます"
 	elif ratio < 0.25:
-		hint = "酸素が少ない！ 緑の泡を目指そう"
-	text_at(Vector2(892, 114), hint, 16, accent)
-	var status := "足場を離れると、自然に沈みます" if model.grounded >= 0 else "水中 · E 急降下 / Space 浮上"
-	if model.position.y > 0.5:
-		status = "WASDで桟橋の端へ。海へ飛び込もう"
-	elif model.velocity.y > 1 and not returning:
-		status = "Space 浮上中 · 離すと自然に沈みます"
-	elif model.oxygen_rate > game.TUNING.oxygen_consumption and not returning:
-		status = "E 急降下中 · 酸素消費 2.5倍"
-	if returning:
-		status = "緊急浮上中 · 操作は到着後に戻ります"
-	draw_rect(Rect2(28, 190, 574, 64), Color(0.02, 0.07, 0.1, 0.78))
-	text_at(Vector2(42, 213), status, 17)
-	text_at(
-		Vector2(42, 239),
-		(
-			"カメラ：%s [Vで切替]"
-			% (
-				"俯瞰 [Fを離すと戻る]"
-				if Input.is_action_pressed("survey")
-				else ("三人称" if game.third_person else "一人称")
-			)
-		),
-		16,
-		MUTED
-	)
+		hint = "酸素が少ない！ 補給を急ごう"
+	text_at(Vector2(1014, 94), hint, 15, accent)
 	_draw_target(scale_factor)
-	draw_rect(Rect2(28, 648, 1224, 48), Color(0.02, 0.07, 0.1, 0.9))
-	text_at(
-		Vector2(46, 678), "WASD 移動 · E 急降下 · Space 浮上 · Q 減速 · F 俯瞰 · Tab 目標 · V 視点 · Esc 停止", 18
-	)
-	if returning:
-		draw_rect(Rect2(348, 510, 584, 95), Color(0.03, 0.12, 0.18, 0.92))
-		text_at(Vector2(380, 547), "%s — 泡になって緊急浮上" % model.rescue_reason, 23, ORANGE)
-		text_at(Vector2(380, 582), "深度を失っても、挑戦はそのまま続く", 19)
+	var status := "WASD 移動  ·  E 急降下  ·  Space 浮上  ·  F 見渡す  ·  Esc 操作説明"
+	if model.position.y > 0.5:
+		status = "WASDで桟橋から海へ飛び込もう  ·  マウスで見渡す"
+	elif returning:
+		status = "緊急浮上中 → %dmから、そのまま再挑戦" % int(maxf(0, -model.return_target.y))
+	elif model.velocity.y < -8:
+		status = "急降下中  ·  酸素を多く使っています"
+	elif model.velocity.y > 1:
+		status = "浮上中  ·  Spaceを離すと沈みます"
+	draw_rect(Rect2(300, 660, 820, 34), Color(0.02, 0.07, 0.1, 0.65))
+	text_at(Vector2(317, 683), status, 17, ORANGE if returning else WHITE)
 	if not game.started or game.paused or model.mode == Model.Mode.COMPLETE:
 		_draw_overlay(scale_factor)
 
@@ -146,35 +110,20 @@ func _draw_target(scale_factor: Vector2) -> void:
 		return
 	var target_index: int = game.next_platform()
 	var target: Dictionary = game.model.platforms[target_index]
-	var choices: Array[int] = game.Navigation.candidates(game.model)
-	draw_rect(Rect2(28, 504, 540, 124), Color(0.02, 0.07, 0.1, 0.88))
+	draw_rect(Rect2(28, 604, 410, 48), Color(0.02, 0.07, 0.1, 0.65))
 	text_at(
-		Vector2(42, 531),
-		"目標候補 [Tab]   ·   %s" % game.Navigation.bearing(game.model, target_index, game.yaw),
-		17
+		Vector2(42, 625), "%s · %dm [Tab 切替]" % [target.label, int(-target.position.y)], 16, CYAN
 	)
-	for row in range(choices.size()):
-		var candidate: Dictionary = game.model.platforms[choices[row]]
-		var selected: bool = choices[row] == target_index
-		var caption := (
-			"%s %s / %dm  %s"
-			% [
-				"▶" if selected else "·",
-				candidate.label,
-				int(-candidate.position.y),
-				"補給" if candidate.oxygen else "足場"
-			]
-		)
-		text_at(Vector2(42, 558 + row * 26), caption, 16, CYAN if selected else MUTED)
+	text_at(
+		Vector2(42, 644), game.Navigation.bearing(game.model, target_index, game.yaw), 14, MUTED
+	)
 	var point: Vector3 = target.position + Vector3.UP * 2
 	if game.camera.is_position_behind(point):
 		return
 	var screen: Vector2 = game.camera.unproject_position(point) / scale_factor
-	if Rect2(300, 170, 780, 330).has_point(screen):
-		draw_arc(screen, 12, 0, TAU, 32, CYAN, 2, true)
-		draw_circle(screen, 2, WHITE)
-		draw_rect(Rect2(screen + Vector2(18, -17), Vector2(82, 26)), INK)
-		text_at(screen + Vector2(24, 2), "%dm ↓" % int(-target.position.y), 16, CYAN)
+	if Rect2(240, 120, 760, 470).has_point(screen):
+		draw_arc(screen, 9, 0, TAU, 32, CYAN, 1.5, true)
+		text_at(screen + Vector2(15, 5), "%dm" % int(-target.position.y), 14, CYAN)
 
 
 func _draw_overlay(scale_factor: Vector2) -> void:
@@ -200,6 +149,7 @@ func _draw_overlay(scale_factor: Vector2) -> void:
 		text_at(Vector2(310, 330), "緑の泡に触れると酸素100%。待たずに進もう。", 21)
 		text_at(Vector2(310, 371), "急降下は酸素を多く使う。酸素0で押し戻される。", 20, MUTED)
 	text_at(Vector2(310, 439), "WASD 移動 / マウス 視点 / E 急降下 / Space 浮上", 19, CYAN)
+	text_at(Vector2(310, 468), "Q 減速 / F 俯瞰 / Tab 目標切替 / V 一人称・三人称", 16, MUTED)
 	primary.position = Vector2(310, 489) * scale_factor
 	primary.size = Vector2(400, 58) * scale_factor
 	quit_button.position = Vector2(742, 489) * scale_factor

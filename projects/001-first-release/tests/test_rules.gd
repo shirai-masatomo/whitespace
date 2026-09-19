@@ -56,6 +56,7 @@ func _initialize() -> void:
 	_test_oxygen()
 	_test_platforms()
 	_test_rescue()
+	_test_interactions()
 	for route_name in Model.Layout.routes():
 		model = Model.new()
 		for index in Model.Layout.routes()[route_name]:
@@ -67,6 +68,50 @@ func _initialize() -> void:
 	)
 	print("Rules: %d checks, %d failures" % [checks, failures])
 	quit(1 if failures else 0)
+
+
+func _test_interactions() -> void:
+	var model = Model.new()
+	model.position = Vector3(10, -43, -25)
+	model.grounded = -1
+	var before: Vector3 = model.position
+	tick(model, .5)
+	check(model.position.x > before.x + .6, "Current physically drifts the player")
+	check(model.interactions.current > 0, "Current interaction measured")
+	check(model.flow_at(Vector3(400, -40, 0)) == Vector3.ZERO, "Current has bounded influence")
+	model = Model.new()
+	model.position = model.platforms[4].position + Vector3.UP * .1
+	model.grounded = -1
+	model.velocity.y = -5
+	tick(model, .1)
+	check(model.velocity.y > 0 and model.interactions.jelly == 1, "Jelly contact lifts player")
+	check(model.oxygen == 100, "Jelly bounce preserves instant oxygen refill")
+	tick(model, 1)
+	check(
+		model.grounded == 4 and model.interactions.jelly == 1,
+		"Jelly cooldown allows stable landing"
+	)
+	model.position = model.platforms[4].position + Vector3(6, .1, 0)
+	model.grounded = -1
+	model.jelly_cooldown = 3
+	tick(model, 1)
+	check(model.grounded == 4 and model.position.y < -125.5, "Feet follow jelly dome near its edge")
+	model = Model.new()
+	model.grounded = 5
+	model.position = model.platforms[5].position
+	tick(model, 2)
+	check(model.position.distance_to(model.platforms[5].position) < .01, "Buoy carries idle player")
+	var geo = load("res://game/ocean_geometry.gd")
+	var mesh: ArrayMesh = geo.rock(Vector2(12, 12), 8, 5)
+	var arrays := mesh.surface_get_arrays(0)
+	var vertices: PackedVector3Array = arrays[Mesh.ARRAY_VERTEX]
+	var normals: PackedVector3Array = arrays[Mesh.ARRAY_NORMAL]
+	var upper_normals := 0
+	for i in range(vertices.size()):
+		if absf(vertices[i].y) < .01 and Vector2(vertices[i].x, vertices[i].z).length() < .1:
+			check(normals[i].y > .9, "Landable cap normal points upward")
+			upper_normals += 1
+	check(upper_normals > 0, "Cap normal test sampled actual vertices")
 
 
 func _test_oxygen() -> void:

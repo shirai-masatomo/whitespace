@@ -11,3 +11,5 @@
 7. STATE/TASKSと節目のREVIEW_PACKETを更新し、commit/push/CI確認。可逆な改善が残るなら次タスクへ進む。
 
 実装完了だけでは人間確認へ移らない。HUMAN_REVIEWは核・好みだけで分かれる案・AIで判定困難なプレイ感、Vertical Slice/ほぼ完成版/RC、支払い・権利・公開判断に限定。定期監視は共通運用に従い、重複する監視を作らない。
+
+現在の例外: 中核HUMAN_REVIEWは解除済み。リアル層の製品品質ゲートまでSELF_CONTINUE/AI_REVIEWを継続。詳細はAUTONOMYのリアル層規則を優先。

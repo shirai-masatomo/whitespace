@@ -133,7 +133,7 @@ func _update_camera() -> void:
 	world.sync_platforms(model.platforms)
 	var focus: Vector3 = model.position + Vector3.UP * 1.4
 	var look := Vector3(0, sin(pitch), -cos(pitch)).rotated(Vector3.UP, yaw)
-	var desired: Vector3 = focus - look * 16.0 if third_person else focus
+	var desired: Vector3 = focus - look * 7.5 if third_person else focus
 	if third_person:
 		var query := PhysicsRayQueryParameters3D.create(focus, desired)
 		var hit := get_world_3d().direct_space_state.intersect_ray(query)
@@ -147,6 +147,8 @@ func _update_camera() -> void:
 		if model.position.y < -1:
 			camera.position.y = minf(camera.position.y, -0.5)
 		camera.rotation = Vector3(-PI / 2, yaw, 0)
+	world.update_life(model)
+	avatar.animate(model)
 	avatar.position = model.position
 	if Vector2(model.velocity.x, model.velocity.z).length() > 0.3:
 		avatar.rotation.y = atan2(-model.velocity.x, -model.velocity.z)

@@ -3,7 +3,7 @@ extends RefCounted
 
 
 static func platforms() -> Array[Dictionary]:
-	return [
+	var data: Array[Dictionary] = [
 		make("海へ続く桟橋", Vector3(0, 6, 0), Vector2(18, 16)),
 		make("漂う棚", Vector3(14, -30, -18), Vector2(14, 12)),
 		make("酸素 01", Vector3(-8, -60, -35), Vector2(18, 16), true),
@@ -16,6 +16,27 @@ static func platforms() -> Array[Dictionary]:
 		make("海底の灯", Vector3(20, -300, -55), Vector2(22, 20), false, true),
 		make("寄り道の酸素", Vector3(-28, -95, -52), Vector2(16, 14), true),
 	]
+	var kinds := [
+		"pier",
+		"cliff",
+		"kelp",
+		"driftwood",
+		"jelly",
+		"buoy",
+		"rock",
+		"kelp",
+		"rock",
+		"rock",
+		"driftwood"
+	]
+	var names := [
+		"海へ続く桟橋", "岸壁の岩棚", "海藻の泉", "沈んだ流木", "漂うクラゲ", "観測ブイ", "浮遊岩", "海藻の棚", "深層の泉", "海底の灯", "流木の泉"
+	]
+	for index in range(data.size()):
+		data[index]["kind"] = kinds[index]
+		data[index]["label"] = names[index]
+		data[index]["round"] = kinds[index] not in ["pier", "driftwood"]
+	return data
 
 
 static func make(
@@ -43,3 +64,18 @@ static func routes() -> Dictionary:
 		"direct_oxygen": [2, 4, 6, 8, 9],
 		"extra_oxygen": [1, 2, 10, 4, 5, 6, 7, 8, 9],
 	}
+
+
+static func current_zones() -> Array[Dictionary]:
+	return [
+		{
+			"center": Vector3(10, -43, -25),
+			"radius": Vector3(22, 9, 20),
+			"flow": Vector3(1.8, 0, .3)
+		},
+		{
+			"center": Vector3(35, -142, -55),
+			"radius": Vector3(22, 10, 24),
+			"flow": Vector3(-1.6, 0, 0)
+		},
+	]

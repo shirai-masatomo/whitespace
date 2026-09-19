@@ -11,6 +11,9 @@ var position := Vector3.ZERO
 var velocity := Vector3.ZERO
 var oxygen: float = 100.0
 var oxygen_rate: float = 0.0
+var current_flow := Vector3.ZERO
+var jelly_cooldown: float = 0.0
+var interactions: Dictionary = {"current": 0, "jelly": 0}
 var best_depth: float = 0.0
 var elapsed: float = 0.0
 var setbacks: int = 0
@@ -42,6 +45,9 @@ func reset() -> void:
 	velocity = Vector3.ZERO
 	oxygen = config.oxygen_capacity
 	oxygen_rate = 0.0
+	current_flow = Vector3.ZERO
+	jelly_cooldown = 0.0
+	interactions = {"current": 0, "jelly": 0}
 	best_depth = 0.0
 	elapsed = 0.0
 	setbacks = 0
@@ -55,10 +61,30 @@ func reset() -> void:
 
 
 func inside(point: Vector3, platform: Dictionary, margin: float = 0.0) -> bool:
+	if platform.get("round", false):
+		var offset := Vector2(point.x - platform.position.x, point.z - platform.position.z)
+		var radius: Vector2 = platform.size * .5 + Vector2.ONE * margin
+		return (offset / radius).length_squared() <= 1.0
 	return (
 		absf(point.x - platform.position.x) <= platform.size.x * 0.5 + margin
 		and absf(point.z - platform.position.z) <= platform.size.y * 0.5 + margin
 	)
+
+
+func surface_height(point: Vector3, platform: Dictionary) -> float:
+	if platform.kind != "jelly":
+		return platform.position.y
+	var radius: float = platform.size.x * .56
+	var r := Vector2(point.x - platform.position.x, point.z - platform.position.z).length() / radius
+	# Match the authored bell profile so feet follow its dome, not an invisible plane.
+	var drop: float
+	if r <= .6:
+		drop = lerpf(0, .09, r / .6)
+	elif r <= .88:
+		drop = lerpf(.09, .30, (r - .6) / .28)
+	else:
+		drop = lerpf(.30, .63, (r - .88) / .12)
+	return platform.position.y - radius * drop
 
 
 func oxygen_contact() -> int:
@@ -99,7 +125,11 @@ func step(delta: float, horizontal: Vector2, descent: float = 0.0, ascend: bool 
 	velocity.x = horizontal_velocity.x
 	velocity.z = horizontal_velocity.y
 	var start := position
-	var next := position + Vector3(velocity.x, 0, velocity.z) * delta
+	current_flow = flow_at(position) if grounded < 0 else Vector3.ZERO
+	if current_flow.length() > .1:
+		interactions.current += 1
+	var next := position + (Vector3(velocity.x, 0, velocity.z) + current_flow) * delta
+	jelly_cooldown = maxf(0, jelly_cooldown - delta)
 	if ascend and position.y < 0.5:
 		grounded = -1
 	if grounded >= 0 and not inside(next, platforms[grounded]):
@@ -122,7 +152,7 @@ func step(delta: float, horizontal: Vector2, descent: float = 0.0, ascend: bool 
 		# Sweep the whole segment: fast descent cannot tunnel through thin floors.
 		var first_hit: float = 2.0
 		for index in range(platforms.size()):
-			var floor_y: float = platforms[index].position.y
+			var floor_y: float = surface_height(next, platforms[index])
 			if start.y >= floor_y - 0.001 and next.y <= floor_y and start.y > next.y:
 				var fraction := (start.y - floor_y) / (start.y - next.y)
 				var hit := start.lerp(next, fraction)
@@ -134,11 +164,19 @@ func step(delta: float, horizontal: Vector2, descent: float = 0.0, ascend: bool 
 					first_hit = fraction
 					grounded = index
 		if grounded >= 0:
-			next.y = platforms[grounded].position.y
+			next.y = surface_height(next, platforms[grounded])
 			velocity.y = 0.0
 	else:
 		velocity.y = 0.0
+		next.y = surface_height(next, platforms[grounded])
 	position = next
+	# Jelly landing is a readable gentle bounce; rescue and oxygen rules are unchanged.
+	if grounded >= 0 and platforms[grounded].kind == "jelly" and jelly_cooldown <= 0:
+		velocity.y = config.jelly_push
+		grounded = -1
+		position.y += 0.02
+		jelly_cooldown = config.jelly_cooldown
+		interactions.jelly += 1
 	best_depth = maxf(best_depth, depth)
 	oxygen_rate = 0.0
 	var oxygen_index := oxygen_contact()
@@ -216,3 +254,11 @@ func _return_step(delta: float) -> void:
 			velocity = Vector3.ZERO
 			oxygen = config.oxygen_capacity
 			mode = Mode.DIVING
+
+
+func flow_at(point: Vector3) -> Vector3:
+	var flow := Vector3.ZERO
+	for zone in Layout.current_zones():
+		var distance: float = ((point - zone.center) / zone.radius).length()
+		flow += zone.flow * maxf(0, 1 - distance)
+	return flow

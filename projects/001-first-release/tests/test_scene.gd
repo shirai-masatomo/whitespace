@@ -19,6 +19,10 @@ func _initialize() -> void:
 
 
 func run() -> void:
+	check(
+		ProjectSettings.get_setting("rendering/anti_aliasing/quality/msaa_3d") == 2,
+		"3D MSAA configured in rendering section"
+	)
 	var game = SCENE.instantiate()
 	root.add_child(game)
 	await process_frame

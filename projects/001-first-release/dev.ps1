@@ -1,4 +1,4 @@
-param([ValidateSet('check', 'evaluate', 'test', 'lint', 'format', 'build', 'visual', 'play', 'editor')][string]$Task = 'check', [ValidateSet('windows','windows-preview')][string]$BuildFolder = 'windows')
+﻿param([ValidateSet('check', 'evaluate', 'test', 'lint', 'format', 'build', 'visual', 'benchmark', 'play', 'editor')][string]$Task = 'check', [ValidateSet('windows','windows-preview','windows-real')][string]$BuildFolder = 'windows', [ValidateSet('forward_plus','gl_compatibility')][string]$Renderer = 'forward_plus')
 $ErrorActionPreference = 'Stop'
 $projectRoot = $PSScriptRoot
 $buildRoot = Join-Path $projectRoot ('build/' + $BuildFolder)
@@ -10,7 +10,7 @@ Set-Content -LiteralPath "$projectRoot/build/.gdignore" -Value ''
 
 function Invoke-Godot([string]$Name, [string[]]$Arguments) {
     $log = Join-Path $projectRoot "artifacts/$Name.log"
-    & $godot --path $projectRoot --log-file $log @Arguments
+    & $godot --path $projectRoot --log-file $log --rendering-method $Renderer @Arguments
     if ($LASTEXITCODE -ne 0) { throw "$Name failed: exit $LASTEXITCODE" }
     if (Test-Path $log) {
         if (Select-String -Path $log -Pattern 'SCRIPT ERROR:|ERROR:' -Quiet) { throw "$Name logged errors: $log" }
@@ -20,16 +20,19 @@ function Invoke-Godot([string]$Name, [string[]]$Arguments) {
 Push-Location $projectRoot
 try {
     if ($Task -eq 'play') {
-        & $godot --path $projectRoot
+        & $godot --path $projectRoot --rendering-method $Renderer
         exit $LASTEXITCODE
     }
     if ($Task -eq 'editor') {
-        & $godot --path $projectRoot --editor
+        & $godot --path $projectRoot --rendering-method $Renderer --editor
         exit $LASTEXITCODE
     }
     if ($Task -eq 'format') {
         & './.tools/venv/Scripts/gdformat.exe' game tests
         if ($LASTEXITCODE -ne 0) { throw 'Formatter failed' }
+    }
+    if ($Task -eq 'benchmark') {
+        Invoke-Godot ('benchmark-' + $Renderer) @('--script', 'tests/test_rendering.gd')
     }
     if ($Task -eq 'visual') {
         Invoke-Godot 'visual' @('--script', 'tests/test_visual.gd')
@@ -57,9 +60,10 @@ try {
         Copy-Item assets/fonts/OFL.txt (Join-Path $buildRoot FONT_LICENSE.txt) -Force
         Copy-Item assets/GODOT_COPYRIGHT.txt (Join-Path $buildRoot GODOT_COPYRIGHT.txt) -Force
         Copy-Item tools/PLAY.txt (Join-Path $buildRoot PLAY.txt) -Force
+        Copy-Item tools/Play-Compatibility.ps1 (Join-Path $buildRoot Play-Compatibility.ps1) -Force
         $smokeLog = Join-Path $projectRoot 'artifacts/export-smoke.log'
         $exe = Join-Path $buildRoot 'DIVE DIVE.exe'
-        $process = Start-Process -FilePath $exe -ArgumentList @('--headless', '--quit-after', '10', '--log-file', ('"' + $smokeLog + '"')) -WindowStyle Hidden -PassThru
+        $process = Start-Process -FilePath $exe -ArgumentList @('--headless', '--rendering-method', $Renderer, '--quit-after', '10', '--log-file', ('"' + $smokeLog + '"')) -WindowStyle Hidden -PassThru
         if (-not $process.WaitForExit(30000)) { $process.Kill(); throw 'Export smoke test timed out' }
         if ($process.ExitCode -ne 0) { throw "Export failed to start: $($process.ExitCode)" }
         if (-not (Test-Path $smokeLog)) { throw 'Export did not produce a smoke log' }

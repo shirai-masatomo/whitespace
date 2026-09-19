@@ -4,33 +4,31 @@
 
 ## 現在地
 
-- **Phase 1 / 中核試作を更新・HUMAN_REVIEW**。海上からの入水、Space浮上、急降下の酸素コスト、接触補給を実装し、4サイクルの自己評価・修正を実施。Vertical Slice完成とは扱わない。
-- 核: 下へ進むOnly Up系。自然沈降 → 足場で停止/見渡す → 酸素を瞬時補給 → さらに下へ。酸素0は泡で浅い訪問済み地点へ戻り再挑戦。死亡画面・ロードなし。
-- 空/太陽/海面の見える桟橋から、同一シーンで300mへ。11足場・海中の補給5地点、95m分岐、155mの動くコンテナ、岩/遺跡/巨大鎖、深度による照明と霧の変化。
-- Godot 4.7.2 / Windows x64 / 日本語 / オフライン。WASD・E急降下・Space浮上・Q減速、Tab候補切替、F俯瞰、V視点切替。
-- 最終目標は正式リリース。今はSteamなしでもゲームが成立することを優先。セーブ・音・Steam SDK未実装。
+- **リアル層のVertical Slice制作中 / SELF_CONTINUE**。前回のHUMAN_REVIEWは解除済み。製品品質ゲートは未達で、個別実装の確認待ちにはしない。
+- 海上の桟橋から、自然沈降・E急降下・Space浮上・足場・接触酸素補給で300mへ。酸素0は泡で浅い訪問済み地点へ連続救助。死亡/ロードなし。
+- 岸壁、自然岩、海藻、流木、クラゲ、動く観測ブイへ更新。潮流の横流れ・クラゲの反発・移動足場の追従。神話/宇宙などの下層は未実装。
+- Godot 4.7.2 / Windows x64 / 日本語 / オフライン。Forward+を標準にし、同じEXEをCompatibilityでも起動可能。原作素材の流用なし。
+- 主人公はスーツ/マスク/タンク/フィンを持つ独自メッシュと関節アニメーション。光・深度霧・流れる微粒子・用途別の泡を追加。完成アートとは判定しない。
 
-## 検証とレビュー
+## 検証
 
-- `check -BuildFolder windows-preview`: format/lint/依存整合性、ルール274 / シーン30チェック、3経路のevaluate、Windows export・EXE起動を検証。
-- `visual`: 海上/入水/浅海の光/広い海/足場/自然沈降/急降下/浮上/補給/深海、救助・クリア・再プレイ・960×540を実GPUで撮影・確認。RTX 4070 SUPER / OpenGL 3.3。
-- 通常87.50秒 / 補給直行82.33秒 / 寄り道91.43秒で自動完走。最低酸素24.27%以上。代表救助90→60m・2.27秒で操作復帰。
-- CI: [Windows Actions #35421555882](https://github.com/shirai-masatomo/whitespace/actions/runs/35421555882) 成功（最終コード `ea6706d`）。setup/check・配布ZIP・測定ログの保存まで完了。詳細は [REVIEW_PACKET](REVIEW_PACKET.md)、自己レビューは [AI_REVIEW](AI_REVIEW.md)。
+- `check -BuildFolder windows-real`: format/lint/依存整合性、ルール381・シーン31、3経路、Windows Release export/EXE headless起動。
+- 実GPUのvisual: 入水→足場→急降下/浮上→補給→酸素切れ→救助→再挑戦→300m。Forward+とCompatibilityを実行。クリアボタンの画素検査と960×540も確認。
+- 最終経路: 通常86.93秒 / 補給直行82.23秒 / 寄り道90.95秒。最低酸素25.27%以上。代表救助は30m損失・2.27秒。
+- RTX 4070 SUPER、1280×720、VSyncなし、静止3場面: Forward+中央値2.02〜2.03ms、P95最大2.76ms。GL中央値0.92〜1.06ms。単体GPU時間ではなく描画フレームの実時間。別GPUは未確認。
+- CI: 今回のブランチをpush後に確認して、この行へ証跡を記録する。
+- [画面・連続画像・評価](REVIEW_PACKET.md) / [自己レビュー](AI_REVIEW.md)。自動操縦の成功を面白さや製品品質の証明にしない。
 
-## 次の判断と課題
+## 次
 
-中核操作を変更した節目として「Spaceで修正しつつ急降下と補給を選ぶ遊びに、足場を経由する楽しさがあるか」を人間が評価する。可逆な実装の個別承認は不要。[起動方法](README.md#今すぐ遊ぶwindows)。次は [TASKS](TASKS.md) のDD-025〜027。
+[TASKS](TASKS.md) のDD-032→033→027。通常視点では足場が次目標を隠すためF俯瞰への依存が残る。素材の反復、海面の近景、主人公の姿勢遷移はさらに磨く。音/保存は未実装。Steam SDKはゲームの完成が見えてから。
 
-- 自動操縦は人間の迷い・入力ミス・面白さを評価しない。通常足場を省く経路が速い点はプレイ感の論点。
-- 今回は照明/水面/スケールの試作。プリミティブ・簡易光線・上面だけの着地判定は完成品質ではない。Only Up級へ向けた素材/アニメーション/音/着地感、別PC性能は今後。
-- 通常視点では足場が次の目標を隠すことがある。F俯瞰/方向案内で補助。水面下の光は簡易シェーダーで、物理的な体積散乱ではない。
+## 再実行・既知の環境問題
 
-## 再実行メモ
-
-- `./tools/setup.ps1` → `./dev.ps1 check` → `./dev.ps1 visual`。測定のみはevaluate。
-- 旧 `build/windows/DIVE DIVE.exe` が起動中のため、今回は **`build/windows-preview/DIVE DIVE.exe`** が最新版。ユーザーの旧プロセスは停止していない。`-BuildFolder windows-preview` で別出力可能。共通ZIPは今回の版。
-- Godotはexit 0でもERRORを出すためログを検査。ユーザーデータへのアクセスは実行許可が必要な場合がある。
-- exportはゲーム資産をすべて含め、tests/tools/build/artifacts/reviewを除外。日本語フォントの可変軸は整数OpenTypeタグ。
-- 明るい空でUIが埋もれたため背景追加。水面の格子状反射を修正。深海で水面メッシュの端が見えるため距離/深度で減衰。
-
-- 深海UI欠けは水面の毎フレームuniform更新で再現。シェーダー内のカメラ座標計算へ移すと解消。visualはクリア時の両ボタンをピクセルでも検証。
+- `./tools/setup.ps1` → `./dev.ps1 check` → `./dev.ps1 visual`。`benchmark -Renderer forward_plus` / `benchmark -Renderer gl_compatibility` で比較。
+- このPCの最新版は **build/windows-real/DIVE DIVE.exe**。旧windows-previewを使用中でも別出力できる。配布はbuild/DIVE-DIVE-windows.zip。[起動方法](README.md)。
+- GPU確認はローカル、Actionsはheadlessのロジック/build確認。成功範囲を混同しない。配布EXEの通常GPU起動・正常終了も両rendererで確認済み。
+- 使用中EXEを上書きするとPCK埋め込みのrenameに失敗する。テストEXE終了後にexportを再実行。ユーザーのプロセスを勝手に停止しない。
+- 配布EXEへ外部`--script`を渡す撮影試行はタイムアウトし不採用。通常EXE起動とソース側visualを別々に検証する。
+- Godotはexit 0でもERRORを出すためdev.ps1はログ検査。shaderの毎フレームuniform更新は以前UI欠けを起こしたため、waterは組み込みカメラ座標を使用。
+- MSAAはproject.godotのrenderingセクション。粒子billboardはscale保持、メッシュ上面はGodotの時計回り頂点順。いずれも初回画面レビューで修正済み。

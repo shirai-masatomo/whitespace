@@ -20,3 +20,6 @@ extends Resource
 @export var min_setback: float = 2.0
 @export var missed_goal_depth: float = 345.0
 @export var ocean_extent: float = 500.0
+
+@export var jelly_push: float = 4.5
+@export var jelly_cooldown: float = 3.0

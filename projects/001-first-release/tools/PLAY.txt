@@ -1,4 +1,4 @@
-DIVE DIVE / Windows中核試作
+DIVE DIVE / Windowsリアル層制作版
 
 「DIVE DIVE.exe」をダブルクリック → 「潜りはじめる」。
 WASDで桟橋の端から海へ飛び込んでください。
@@ -12,10 +12,11 @@ Esc: 一時停止 / ウィンドウの×: 終了
 普通の水中足場では酸素が減ります。酸素0で泡になって浅い安全地点へ。
 死亡画面もロードもなく、戻った場所から再挑戦できます。
 300mの「海底の灯」に着地するとクリア。
-95mの寄り道補給、155mの横に動くコンテナがあります。
+95mの寄り道補給、155mの横に動く観測ブイがあります。
 俯瞰中も時間は進みます。見渡すなら補給地点へ。
 
-セーブ・音なし / オフライン / 日本語 / Windows x64 / OpenGL 3.3対応GPU。
+セーブ・音なし / オフライン / 日本語 / Windows x64 / Vulkan対応GPU（標準Forward+）。
+起動できない場合は Play-Compatibility.ps1 でOpenGL 3.3版を起動できます。
 景観と操作の方向を確かめるための試作で、完成ビジュアルではありません。
 
 Font: Noto Sans JP (SIL Open Font License 1.1), see FONT_LICENSE.txt.

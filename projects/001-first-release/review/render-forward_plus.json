@@ -1,0 +1,28 @@
+{
+  "adapter": "NVIDIA GeForce RTX 4070 SUPER",
+  "metric": "end-to-end render frame wall time, not isolated GPU duration",
+  "renderer": "forward_plus",
+  "resolution": "1280x720",
+  "samples_per_scene": 180,
+  "scenes": [
+    {
+      "depth_m": 12,
+      "mean_draw_calls": 374,
+      "median_frame_ms": 2.02,
+      "p95_frame_ms": 2.56
+    },
+    {
+      "depth_m": 60,
+      "mean_draw_calls": 436,
+      "median_frame_ms": 2.02,
+      "p95_frame_ms": 2.56
+    },
+    {
+      "depth_m": 155,
+      "mean_draw_calls": 407,
+      "median_frame_ms": 2.03,
+      "p95_frame_ms": 2.76
+    }
+  ],
+  "vsync": "disabled"
+}

@@ -18,10 +18,12 @@ void fragment() {
  vec3 base = mix(vec3(0.02,0.16,0.23), vec3(0.38,0.65,0.74), fresnel);
  float glint = pow(max(0.0,dot(reflect(-v,n),normalize(vec3(0.11,0.17,-1.0)))), 180.0);
  base += vec3(1.0,0.89,0.65) * glint * 1.8;
- ALBEDO = mix(base, vec3(0.32,0.67,0.72) + (a+b)*0.014, underwater);
- float window = exp(-dot(p-vec2(15.0,-45.0),p-vec2(15.0,-45.0))/260.0);
- EMISSION = vec3(0.70,0.93,1.0) * window * underwater * 5.0;
+ ALBEDO = mix(base, vec3(0.025,0.15,0.20) + (a+b)*0.008, underwater);
+ float window = smoothstep(0.42,0.86,-v.y);
+ float sun_window = pow(max(0.0, dot(-v,normalize(vec3(0.14,0.7,-0.5)))),36.0);
+ // In unshaded water the transmitted sky belongs in albedo, not only emission.
+ ALBEDO += underwater * (vec3(0.30,0.60,0.66)*window + vec3(1.0,0.93,0.72)*sun_window*2.0);
  float distance_fade = 1.0 - smoothstep(500.0,1150.0,length(CAMERA_POSITION_WORLD.xz-p));
  float depth_fade = exp(-max(0.0,-CAMERA_POSITION_WORLD.y-20.0)/35.0);
- ALPHA = mix(0.97,(0.35 + window * 0.65)*depth_fade,underwater)*distance_fade;
+ ALPHA = mix(0.97,depth_fade,underwater)*distance_fade;
 }

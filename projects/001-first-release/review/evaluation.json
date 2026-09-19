@@ -29,55 +29,55 @@
         {
           "arrival_oxygen": 100.0,
           "to": 2,
-          "travel_seconds": 8.72
+          "travel_seconds": 8.6
         },
         {
-          "arrival_oxygen": 64.13,
+          "arrival_oxygen": 64.87,
           "to": 3,
-          "travel_seconds": 9.6
+          "travel_seconds": 9.42
         },
         {
           "arrival_oxygen": 100.0,
           "to": 4,
-          "travel_seconds": 9.7
+          "travel_seconds": 10.45
         },
         {
-          "arrival_oxygen": 64.0,
+          "arrival_oxygen": 66.4,
           "to": 5,
-          "travel_seconds": 9.63
+          "travel_seconds": 9.02
         },
         {
           "arrival_oxygen": 100.0,
           "to": 6,
-          "travel_seconds": 9.67
+          "travel_seconds": 9.65
         },
         {
-          "arrival_oxygen": 62.13,
+          "arrival_oxygen": 62.6,
           "to": 7,
-          "travel_seconds": 10.1
+          "travel_seconds": 9.98
         },
         {
           "arrival_oxygen": 100.0,
           "to": 8,
-          "travel_seconds": 10.3
+          "travel_seconds": 10.17
         },
         {
-          "arrival_oxygen": 57.33,
+          "arrival_oxygen": 57.87,
           "to": 9,
-          "travel_seconds": 11.3
+          "travel_seconds": 11.17
         }
       ],
-      "mean_leg_seconds": 9.72,
-      "minimum_oxygen": 24.27,
+      "mean_leg_seconds": 9.66,
+      "minimum_oxygen": 25.27,
       "name": "platforms",
-      "seconds": 87.5,
+      "seconds": 86.93,
       "survey_visible": 9
     },
     {
       "complete": true,
       "decisions": 5,
-      "departure_camera_framed": 4,
-      "departure_camera_unoccluded": 1,
+      "departure_camera_framed": 3,
+      "departure_camera_unoccluded": 0,
       "legs": [
         {
           "arrival_oxygen": 100.0,
@@ -87,12 +87,12 @@
         {
           "arrival_oxygen": 100.0,
           "to": 4,
-          "travel_seconds": 17.98
+          "travel_seconds": 18.72
         },
         {
           "arrival_oxygen": 100.0,
           "to": 6,
-          "travel_seconds": 19.38
+          "travel_seconds": 18.68
         },
         {
           "arrival_oxygen": 100.0,
@@ -100,15 +100,15 @@
           "travel_seconds": 18.42
         },
         {
-          "arrival_oxygen": 57.33,
+          "arrival_oxygen": 57.87,
           "to": 9,
-          "travel_seconds": 11.3
+          "travel_seconds": 11.17
         }
       ],
-      "mean_leg_seconds": 16.47,
-      "minimum_oxygen": 28.33,
+      "mean_leg_seconds": 16.45,
+      "minimum_oxygen": 31.07,
       "name": "direct_oxygen",
-      "seconds": 82.33,
+      "seconds": 82.23,
       "survey_visible": 5
     },
     {
@@ -125,48 +125,48 @@
         {
           "arrival_oxygen": 100.0,
           "to": 2,
-          "travel_seconds": 8.72
+          "travel_seconds": 8.6
         },
         {
           "arrival_oxygen": 100.0,
           "to": 10,
-          "travel_seconds": 9.77
+          "travel_seconds": 9.57
         },
         {
           "arrival_oxygen": 100.0,
           "to": 4,
-          "travel_seconds": 12.57
+          "travel_seconds": 13.32
         },
         {
-          "arrival_oxygen": 62.07,
+          "arrival_oxygen": 64.0,
           "to": 5,
-          "travel_seconds": 10.12
+          "travel_seconds": 9.62
         },
         {
           "arrival_oxygen": 100.0,
           "to": 6,
-          "travel_seconds": 10.08
+          "travel_seconds": 10.05
         },
         {
-          "arrival_oxygen": 62.13,
+          "arrival_oxygen": 62.6,
           "to": 7,
-          "travel_seconds": 10.1
+          "travel_seconds": 9.98
         },
         {
           "arrival_oxygen": 100.0,
           "to": 8,
-          "travel_seconds": 10.3
+          "travel_seconds": 10.17
         },
         {
-          "arrival_oxygen": 57.33,
+          "arrival_oxygen": 57.87,
           "to": 9,
-          "travel_seconds": 11.3
+          "travel_seconds": 11.17
         }
       ],
-      "mean_leg_seconds": 10.16,
-      "minimum_oxygen": 24.27,
+      "mean_leg_seconds": 10.11,
+      "minimum_oxygen": 25.27,
       "name": "extra_oxygen",
-      "seconds": 91.43,
+      "seconds": 90.95,
       "survey_visible": 9
     }
   ],
