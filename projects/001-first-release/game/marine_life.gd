@@ -56,7 +56,7 @@ func make_ray() -> Node3D:
 	return animal
 
 
-func update(player: Vector3, elapsed: float) -> void:
+func update(player: Vector3, elapsed: float, giant: Vector3 = Vector3.INF) -> void:
 	for index in range(rays.size()):
 		var phase := elapsed * .075 + index * .65
 		# The school crosses the open water toward an optional rock-garden entrance.
@@ -68,6 +68,9 @@ func update(player: Vector3, elapsed: float) -> void:
 	for index in range(shoals.size()):
 		var away := origins[index] - player
 		var escape := away.normalized() * maxf(0, 7 - away.length()) * .65
+		if giant.is_finite():
+			var disturbance := origins[index] - giant
+			escape += disturbance.normalized() * maxf(0, 42 - disturbance.length()) * .4
 		shoals[index].position = origins[index] + escape
 
 

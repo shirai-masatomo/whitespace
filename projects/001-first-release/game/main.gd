@@ -180,6 +180,9 @@ func _update_camera(delta: float = 1.0) -> void:
 		# the floor and then push it inside the diver's chest.
 		var back := Vector3(0, 0, 1).rotated(Vector3.UP, yaw)
 		desired = focus + back * maxf(3.0, cos(pitch) * 7.5) + Vector3.UP * .3
+	if third_person:
+		# Leave the direction being inspected visible beside the near silhouette.
+		desired += Vector3.RIGHT.rotated(Vector3.UP, yaw) * 1.2
 	var peek := 0.0
 	if third_person and model.grounded >= 0 and model.mode == Model.Mode.DIVING:
 		peek = smoothstep(.25, .8, -pitch)

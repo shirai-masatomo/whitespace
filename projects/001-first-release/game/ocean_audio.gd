@@ -3,7 +3,7 @@ extends Node
 const Model = preload("res://game/dive_model.gd")
 const SAMPLE_RATE := 22050
 const LOOP_NAMES := ["surface", "underwater", "movement"]
-const CUE_NAMES := ["entry", "refill", "warning", "rescue", "land", "goal"]
+const CUE_NAMES := ["entry", "refill", "warning", "rescue", "land", "goal", "distant"]
 static var bank: Dictionary = {}
 var players: Dictionary = {}
 var muted := false
@@ -17,6 +17,7 @@ var refill_timer := 0.0
 var events: Array[String] = []
 var mix := {"surface": 0.0, "underwater": 0.0, "movement": 0.0}
 var output_enabled := false
+var distant_timer := 0.0
 
 
 func _ready() -> void:
@@ -51,6 +52,7 @@ func reset(model) -> void:
 	was_wet = model.position.y < -1
 	warning_timer = 0
 	refill_timer = 0
+	distant_timer = 0
 	events.clear()
 	for label in CUE_NAMES:
 		players[label].stop()
@@ -76,6 +78,11 @@ func observe(model, delta: float) -> void:
 	var wet: bool = model.position.y < -1
 	warning_timer = maxf(0, warning_timer - delta)
 	refill_timer = maxf(0, refill_timer - delta)
+	distant_timer = maxf(0, distant_timer - delta)
+	if model.config.discovery_enabled and model.depth > 60 and model.depth < 180:
+		if distant_timer <= 0 and model.mode == Model.Mode.DIVING:
+			cue("distant")
+			distant_timer = 16
 	if wet and not was_wet and model.mode == Model.Mode.DIVING:
 		cue("entry")
 	if model.mode == Model.Mode.RETURNING and previous_mode != model.mode:
@@ -178,4 +185,6 @@ static func sample_at(label: String, t: float, noise: float, low: float) -> floa
 			return (sin(TAU * 90 * t) * .15 + noise * .2) * exp(-t * 16)
 		"goal":
 			return (sin(TAU * 392 * t) + sin(TAU * 587.33 * t) * .5) * .14 * exp(-t * 3)
+		"distant":
+			return sin(TAU * (62 * t - 12 * t * t)) * .07 * sin(t * PI / .45)
 	return 0

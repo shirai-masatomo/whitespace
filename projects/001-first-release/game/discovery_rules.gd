@@ -28,7 +28,7 @@ static func bubble_flow(point: Vector3, time: float, lift: float) -> Vector3:
 	return result
 
 
-static func stream_sample(point: Vector3, speed: float) -> Vector3:
+static func stream_sample(point: Vector3, speed: float, buoyancy: float = 0) -> Vector3:
 	var nearest := INF
 	var flow := Vector3.ZERO
 	for index in range(STREAM.size() - 1):
@@ -40,8 +40,11 @@ static func stream_sample(point: Vector3, speed: float) -> Vector3:
 			nearest = distance
 			# Gentle attraction keeps the bend readable; lateral input can still leave.
 			flow = segment.normalized() * speed + (origin + segment * t - point) * .3
-	return flow * smoothstep(7.5, 2.5, nearest)
+	# Carry a resting swimmer around bends instead of letting normal sinking cut the tube.
+	return (flow + Vector3.UP * buoyancy) * smoothstep(7.5, 2.5, nearest)
 
 
 static func giant_position(time: float) -> Vector3:
-	return Vector3(5 + sin(time * .06) * 35, -153 + sin(time * .035) * 8, -104)
+	return Vector3(
+		-32 + sin(time * .025) * 20, -139 + sin(time * .035) * 6, -110 + cos(time * .025) * 8
+	)

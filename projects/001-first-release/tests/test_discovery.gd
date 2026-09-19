@@ -28,7 +28,7 @@ func swim(point: Vector3, seconds: float = 25.0, riding: bool = false) -> bool:
 		var axis: Vector2 = (Vector2(difference.x, difference.z) / 4).limit_length()
 		var descent := 1.0 if difference.y < -3 else 0.0
 		if riding:
-			descent = -1
+			descent = 0
 		await tick(axis, descent, difference.y > 1)
 		if game.model.mode != Model.Mode.DIVING:
 			print(
@@ -133,6 +133,21 @@ func fixture(point: Vector3) -> void:
 func compare_fixtures() -> void:
 	# These are isolated comparison fixtures, not part of the continuous recording.
 	for enabled in [false, true]:
+		fixture(Places.STREAM[0])
+		game.model.config = game.model.config.duplicate()
+		game.model.config.discovery_enabled = enabled
+		for frame in range(240):
+			await tick()
+		observations["current_on" if enabled else "current_off"] = {
+			"position": var_to_str(game.model.position),
+			"distance_to_bend": game.model.position.distance_to(Places.STREAM[1]),
+			"oxygen": game.model.oxygen
+		}
+	check(
+		observations.current_on.distance_to_bend + 15 < observations.current_off.distance_to_bend,
+		"A resting player is carried toward the hidden bend, not merely pushed down"
+	)
+	for enabled in [false, true]:
 		fixture(Places.bubbles(0)[0].center)
 		game.model.config = game.model.config.duplicate()
 		game.model.config.discovery_enabled = enabled
@@ -170,3 +185,23 @@ func compare_fixtures() -> void:
 			if "SwimThroughArch" in str(body.get_path()):
 				hit = true
 	check(hit, "Solid arch rim blocks the actual player")
+	for detour in [false, true]:
+		fixture(Vector3(-35, -80, -60))
+		game.model.oxygen = 30
+		var success := true
+		if detour:
+			success = await swim(Places.bubbles(game.model.elapsed)[1].center)
+			success = success and game.model.in_air_pocket()
+			await photo("43-optional-air-lookout", Places.giant_position(game.model.elapsed))
+		if success:
+			success = await swim(game.model.platforms[11].position + Vector3.UP)
+		observations["refuge_detour" if detour else "refuge_skip"] = {
+			"success": success, "seconds": game.model.elapsed, "oxygen": game.model.oxygen
+		}
+	check(observations.refuge_detour.success, "An oxygen-poor swimmer can choose the air detour")
+	check(not observations.refuge_skip.success, "Skipping refuge has a cost at low oxygen")
+	fixture(Vector3(-35, -80, -60))
+	game.model.oxygen = 100
+	var skip_full := await swim(game.model.platforms[11].position + Vector3.UP)
+	observations.refuge_skip_full = {"success": skip_full, "seconds": game.model.elapsed}
+	check(skip_full, "The bubble is optional when oxygen is sufficient")
