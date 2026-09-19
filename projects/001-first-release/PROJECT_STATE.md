@@ -16,7 +16,7 @@
 - 実GPUのvisual: 入水→足場→急降下/浮上→補給→酸素切れ→救助→再挑戦→300m。Forward+とCompatibilityを実行。クリアボタンの画素検査と960×540も確認。
 - 最終経路: 通常86.93秒 / 補給直行82.23秒 / 寄り道90.95秒。最低酸素25.27%以上。代表救助は30m損失・2.27秒。
 - RTX 4070 SUPER、1280×720、VSyncなし、静止3場面: Forward+中央値2.02〜2.03ms、P95最大2.76ms。GL中央値0.92〜1.06ms。単体GPU時間ではなく描画フレームの実時間。別GPUは未確認。
-- CI: 今回のブランチをpush後に確認して、この行へ証跡を記録する。
+- CI: [Windows Actions #35424603690](https://github.com/shirai-masatomo/whitespace/actions/runs/35424603690) 成功。コード `d402f2b`、setup/check/配布ZIP/ログ保存まで確認。
 - [画面・連続画像・評価](REVIEW_PACKET.md) / [自己レビュー](AI_REVIEW.md)。自動操縦の成功を面白さや製品品質の証明にしない。
 
 ## 次

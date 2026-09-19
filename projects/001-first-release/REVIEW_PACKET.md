@@ -58,7 +58,7 @@ RTX 4070 SUPER / 1280×720 / MSAA 4x / VSyncなし / 12,60,155mの静止場面�
 | 光・霧 | 体積霧/局所散乱/SSAO、補助光線 | 距離霧と近似光線 |
 | 起動/自動プレイ | 成功 | 成功 |
 
-[Forward+実測](review/render-forward_plus.json) / [GL実測](review/render-gl_compatibility.json) / [GL比較画面](review/compatibility/05-platform.png)。GL比較画像は曲面接地と透過光の最終微調整前、性能JSONは最終描画構成。同じPCだけの比較で最低動作環境を確定しない。
+[Forward+実測](review/render-forward_plus.json) / [GL実測](review/render-gl_compatibility.json) / [GL比較画面](review/compatibility/05-platform.png)。GL比較画像はMSAA修正・曲面接地と透過光の最終微調整前、性能JSONは最終描画構成。同じPCだけの比較で最低動作環境を確定しない。
 
 Godotの[体積霧](https://docs.godotengine.org/en/4.7/tutorials/3d/volumetric_fog.html)はForward+向け。光と負荷の制御が可能で、今回UE5移行を要する障害は認めない。別GPU・長時間・高解像度は未確認。
 
