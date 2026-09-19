@@ -34,10 +34,20 @@ func run() -> void:
 	Input.action_release("right")
 	check(game.model.depth > 5 and game.model.position.x > 15, "Inputs move and sink after edge")
 	check(game.avatar.position == game.model.position, "Avatar follows simulation")
+	Input.action_press("ascend")
+	for frame in range(150):
+		game._physics_process(1.0 / 60)
+	Input.action_release("ascend")
+	check(game.model.velocity.y > 5, "Space input ascends underwater")
+	check(game.model.oxygen_rate == 4, "Ascent consumes normal oxygen")
+	for frame in range(90):
+		game._physics_process(1.0 / 60)
+	check(game.model.velocity.y == -5, "Space release resumes sinking")
+
 	var event := InputEventMouseMotion.new()
 	event.relative = Vector2(100, 10)
 	game._unhandled_input(event)
-	check(game.yaw < 0 and game.pitch < -0.48, "Mouse moves view")
+	check(game.yaw < 0 and game.pitch < -0.25, "Mouse moves view")
 	var key := InputEventKey.new()
 	key.keycode = KEY_V
 	key.pressed = true
@@ -71,7 +81,9 @@ func run() -> void:
 	check(game.model.mode == Model.Mode.COMPLETE and game.hud.primary.visible, "Goal offers replay")
 	var scene_id: int = game.get_instance_id()
 	game.hud.primary.pressed.emit()
-	check(game.model.depth == 0 and game.get_instance_id() == scene_id, "Replay uses same scene")
+	check(
+		game.model.position.y == 6 and game.get_instance_id() == scene_id, "Replay uses same scene"
+	)
 	var target_before: int = game.next_platform()
 	key.keycode = KEY_TAB
 	game._unhandled_input(key)
@@ -84,7 +96,7 @@ func run() -> void:
 	Input.action_press("survey")
 	game._update_camera()
 	check(game.camera.position.y > game.model.position.y + 25, "F shows survey camera")
-	check(game.camera.position.y < 35, "Survey stays below opaque water surface at start")
+	check(game.camera.position.y > 6, "Outdoor survey remains above the surface")
 	Input.action_release("survey")
 	game._update_camera()
 	check(

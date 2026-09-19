@@ -1,102 +1,64 @@
 # DIVE DIVE
 
-**広い海で足場をたどり、ひたすら下へ進む3Dアクション。** 足場を離れると沈み、着地すると止まる。酸素を補給しながら300mの「海底の灯」を目指す、人間レビュー用の試作です。
+**海へ飛び込み、足場と酸素を選びながら300mの海底を目指す3Dアクション。** 海上開始・自由な浮上・瞬時補給を含む中核評価用のWindows試作です。完成品質のビジュアルではありません。
 
 ## 今すぐ遊ぶ（Windows）
 
-1. このPCでは `build/windows/DIVE DIVE.exe` をダブルクリック。
-2. 「潜りはじめる」またはEnter。WASDで出発点の足場から離れると沈み始める。
-3. マウスで下を見て、次の足場へ移動。緑の泡の中心に着地して酸素を補給する。
-4. 300mのゴール足場に着地するとクリア。深度300mを通過するだけではクリアにならない。
+1. このPCの今回の最新版は **`build/windows-preview/DIVE DIVE.exe`** をダブルクリック。
+2. 「潜りはじめる」またはEnter。WASDで桟橋の端から海へ飛び込む。
+3. マウスで下を見て足場へ。緑の泡は触れた瞬間に酸素100%。
+4. 300mの「海底の灯」に着地するとクリア。
 
-別PCへ渡すときは `build/DIVE-DIVE-windows.zip` を展開して起動。Godot/Pythonのインストール不要。[GitHub Actions](https://github.com/shirai-masatomo/whitespace/actions/workflows/dive-dive.yml) の **DIVE-DIVE-windows** artifactからも取得できます。
+旧版が起動中だったため、今回は `windows-preview` に出力しました。`build/windows` の旧EXEはそのままです。別PCには `build/DIVE-DIVE-windows.zip` を展開して渡します。Godot/Python不要。[GitHub Actions](https://github.com/shirai-masatomo/whitespace/actions/workflows/dive-dive.yml) の最新成功実行の **DIVE-DIVE-windows** artifactでも配布物を取得できます。
 
 | 操作 | 動作 |
 | --- | --- |
-| WASD / 矢印 | 水平移動（沈んでいる間も方向転換可能） |
-| マウス | 視点 |
-| E | 速く沈む |
-| Q | 沈む速度を落とす。浮上・空中停止はできない |
-| F長押し / Tab | 俯瞰で見渡す / 目標候補を切替（俯瞰中も時間は進む） |
+| WASD / 矢印 | 水平移動。水中でも軌道修正可能 |
+| マウス | 見回す |
+| E長押し | 急降下。酸素消費2.5倍 |
+| Space長押し | 水中で浮上。離すと自然沈降。Eとの同時押しは浮上優先 |
+| Q長押し | 沈降を減速 |
+| F長押し / Tab | 俯瞰 / 目標候補の切替 |
 | V | 三人称 / 一人称 |
 | Esc / Enter | 一時停止 / 再開 |
 
-**普通の足場上でも酸素は減る。** 酸素0で泡になって上昇し、最後に補給した地点で操作と酸素が戻る。そこでほぼ深度を失わない場合は一つ前の補給地点へ戻る。死亡画面・ロード・ワープは使わない。フォーカスを外すと一時停止。ルートを大きく外れた場合も救助する。セーブ・音・Steam SDK・オンラインは未導入。
+足場上では沈降が止まりますが、水中の普通の足場では酸素が減ります。緑の泡の中と海上では減りません。酸素0で泡になって浮上し、訪問済みの浅い安全地点で再挑戦。死亡画面・ロード・ワープなし。フォーカスを外すと一時停止。Spaceは水中の浮上操作で、桟橋上のジャンプではありません。
 
-最新の短い評価と判定は [REVIEW_PACKET](REVIEW_PACKET.md)、AIレビューは [AI_REVIEW](AI_REVIEW.md)。可逆な改善は人間確認を挟まず継続します。
+11足場、海中の酸素スポット5か所、95mの補給分岐、155mの動くコンテナがあります。遠景の鎖・遺跡・岩は装飾です。セーブ・音・Steam SDK・オンラインは未実装。
 
-## 今回の評価資料
-
-2026-09-19、圧力・待機回復と円筒壁を撤去し、自然沈降・足場・酸素・泡での再挑戦へ変更。以下は実際のゲームシーンを入力相当の操作で進めて撮影したもの。加工や別シーンによる再現ではありません。
-
-| 開始地点 | 広い海 |
-| --- | --- |
-| ![開始地点](review/01-start.png) | ![広い海](review/02-ocean.png) |
-| 足場上 | 足場間を沈降 |
-| ![足場上](review/03-platform.png) | ![沈降](review/04-sinking.png) |
-| 酸素スポット | 酸素切れ直前 |
-| ![酸素補給](review/05-oxygen.png) | ![酸素切れ直前](review/06-low-oxygen.png) |
-| 泡で強制浮上 | 60mの再挑戦地点 |
-| ![強制浮上](review/07-ascent.png) | ![再挑戦](review/08-retry.png) |
-
-### 仮の調整値
-
-| 項目 | 現在値 |
-| --- | --- |
-| 自然沈降 | 最大5m/s |
-| Eで下降 / Qで減速 | 最大9m/s / 2m/s（縦加速度12m/s²） |
-| 水平移動 | 最大7m/s、斜め移動も同じ上限 |
-| 水中の軌道修正 | 全方向へ加速度10m/s²。静止→最大速0.7秒、逆方向の最大速まで1.4秒。足場上は22m/s² |
-| 酸素満タン→空 | 25秒（100から毎秒4消費） |
-| 酸素スポットで空→満タン | 4秒（毎秒25回復）。救助完了時は即満タン |
-| 緊急浮上 | 最大32m/s。上昇→安全地点の上へ水平移動→着地 |
-| 酸素切れで失う平均深度 | **106.45m：下記4条件の等重みテスト平均**。実プレイヤーの平均ではない |
-
-深度損失の測定条件: 60m補給地点を登録し、足場のない水中で満タンから自然沈降 / E / Qを維持すると、それぞれ124.08 / 221.84 / 49.88mを失う。90mの普通の足場で待つ場合は30m。実際の損失はルートと失敗位置によって変わる。代表画像の失敗は90m→60mで30m損失。元の9区間をたどる自動操作は104.03秒、失敗0回でクリア（各補給4秒固定）。最新の3経路比較は満タンになり次第出発する条件で [REVIEW_PACKET](REVIEW_PACKET.md) に掲載。
-
-### カメラ比較と今の問題点
-
-同じ位置・角度で比較: [三人称](review/03-platform.png) / [一人称](review/camera-first-person.png)。三人称は足元・足場の縁・下の複数足場を見渡せるため標準に採用。一人称は海への没入感がある一方、足場中央から下を見ると床が画面を占め、着地位置も分かりにくい。Vで随時比較可能。三人称カメラは足場との遮蔽をレイ判定で避ける。F長押しの [俯瞰](review/route-survey.png) では下の足場をまとめて確認できる。Tabで候補を選び、画面外でも方向案内が残る。
-
-- 11足場・6補給地点。95mの追加補給を通る分岐と、通常足場を省いて補給地点へ直接進む経路を検証済み。難易度はまだ仮。
-- 通常視点では自分の足場が次の着地点を隠す。俯瞰と方向表示で補助するが、見渡す操作の好みは未評価。
-- 水中らしさは色・霧・遠景・浮遊物まで。音や着地感、泡化の演出は簡易。遠景の岩は着地できない装飾。
-
-次は「着地の操作感」「酸素25秒の忙しさ」「深度損失と再挑戦したさ」を触って評価する。改善候補は [TASKS](TASKS.md)。
+**画面10枚・調整値・経路測定・今回の判断**は [REVIEW_PACKET](REVIEW_PACKET.md)。[現在地](PROJECT_STATE.md) / [次タスク](TASKS.md) / [AIレビュー](AI_REVIEW.md)。
 
 ## 開発と検証
 
-Windows x64、開発時のみPython 3.12以上が必要。リポジトリルートから:
+Windows x64、開発時のみPython 3.12以上。リポジトリルートから:
 
 ```powershell
 cd projects/001-first-release
 ./tools/setup.ps1
 ./dev.ps1 check
+./dev.ps1 visual
 ./dev.ps1 play
 ```
 
-スクリプト実行が制限される場合は、信頼したこのスクリプトだけ `powershell -NoProfile -ExecutionPolicy Bypass -File ./dev.ps1 check` とする。マシン全体のポリシーは変更しない。
+旧ゲームを終了せず再buildする場合は `./dev.ps1 check -BuildFolder windows-preview`。通常の出力は `build/windows`。実行制限がある場合は、この信頼したスクリプトに限り `powershell -NoProfile -ExecutionPolicy Bypass -File ./dev.ps1 check`。マシン全体のポリシーは変更しません。
 
-- `setup`: Godot 4.7.2とWindowsテンプレートを公式SHA512で検証して取得。専用venvへ固定版のツールを導入。初回テンプレート取得は約1.3GB。
-- `check`: format / lint / 開発依存整合性 / import / ルール・シーンテスト / evaluate / Windows release build / 出力EXEのheadless起動 / 配布zip。
-- `evaluate`: 3経路の到達時間・酸素余裕・足場間隔・通常/俯瞰の遮蔽と救助時間を測る。結果は `artifacts/evaluation.json`。到達失敗・酸素余裕不足・俯瞰の目標遮蔽はCIを失敗させる。
-- `visual`: GPUで8状態・カメラ比較・浮上後のゴール・再プレイ・960×540のポーズを検証。`artifacts/*.png` を目視確認し、レビュー用8枚と一人称・俯瞰の比較を `review/` へ更新する。
-- `format` / `test` / `lint` / `build` / `editor`: 個別実行。ログは `artifacts/*.log`、再現測定値は `artifacts/metrics.json`。Git対象外。
+- `setup`: Godot 4.7.2・Windowsテンプレートを公式SHA512で検証、固定版の開発ツールを専用venvへ導入。
+- `check`: format / lint / 開発依存整合性 / import / ルール・シーンテスト / evaluate / release export / EXE headless起動 / 配布zip。
+- `evaluate`: 3経路の時間・最低酸素・カメラ遮蔽・救助、移動速度・酸素切れ時間を `artifacts/evaluation.json` へ。到達失敗、酸素余裕不足、俯瞰の遮蔽はCI失敗。
+- `visual`: 実GPUで海上→入水→各操作→失敗→再挑戦→300mを進め、代表画面・カメラ比較・960×540のUIを `artifacts/*.png` へ。画像の目視確認も必要。
+- `format` / `test` / `lint` / `build` / `editor`: 個別実行。生成ログは `artifacts/`、レビュー用の選別画像は `review/`。
 
-GitHub ActionsはWindows上でsetup/checkを実行し、配布zipとログを保存する。GPU画面確認はローカルで実施。`review/.gdignore` とexport除外指定により評価画像はゲームに混入しない。
+GitHub ActionsはWindowsでsetup/checkを実行しZIP・ログ・測定JSONを保存。GPU確認はローカルで実施します。レビュー画像・開発用ファイルは配布ゲームから除外。
 
-## 構造
+## 構造と変更の入口
 
-- `game/dive_model.gd`: 描画から独立した移動・上面着地・酸素・安全地点・救助・ゴール。
-- `game/dive_config.gd` / `default_config.tres`: 消費/回復・移動速度などの調整値。
-- `game/stage_layout.gd`: 足場の位置・大きさ・酸素/ゴール区分。描画とルールが共有する正本。
-- `game/main.gd`: 入力・カメラ・進行。`world.gd`: プリミティブ空間。`hud.gd`: 日本語表示。
-- `tests/`: headlessルール、実シーンの入力/ポーズ/カメラ、実描画ルート。`route_driver.gd` は入力のみで足場をたどる検証用操縦。
-- [PROJECT_STATE](PROJECT_STATE.md) / [TASKS](TASKS.md) / [AUTONOMY](AUTONOMY.md): 新しいセッションで最初に読む。AI_REVIEWがあれば必読。
-
-Godotを継続採用。既存CLI/Windows export/自動テストを使って、この規模の3D試作を反復できるため。現在は300m固定ステージで、物理は足場の上面への着地を扱う簡易モデル。
+- `game/dive_config.gd` / `default_config.tres`: 移動・酸素・救助の調整値。
+- `game/stage_layout.gd`: 足場の位置・大きさ・補給・往復移動の振幅/速さ。
+- `game/dive_model.gd`: 描画と独立した上面着地・移動・酸素・救助。
+- `game/main.gd`: 入力/カメラ、`world.gd` / `shaders/`: 水面・深度別照明・仮景観、`hud.gd`: 日本語案内。
+- `tests/`: ルール、実シーン入力、自動操縦、GPU撮影。`route_driver.gd` はテスト用の操縦のみ。
+- 自律作業は [AUTONOMY](AUTONOMY.md)。Godotを継続使用。UE5移行を要する具体的な制約はまだ確認していません。
 
 ## 素材と権利
 
-他ゲームの素材・ステージ・演出は使用していない。コード生成のプリミティブ空間のみ。
-日本語フォントは [Noto Sans JP](https://github.com/google/fonts/tree/main/ofl/notosansjp)、[SIL OFL](assets/fonts/OFL.txt)を同梱。Godotの [著作権・第三者ライセンス表示](assets/GODOT_COPYRIGHT.txt)も配布zipへ同梱する。
+他ゲームの素材・ステージは使用していません。景観はコード生成の仮形状・シェーダー。日本語フォントは [Noto Sans JP](https://github.com/google/fonts/tree/main/ofl/notosansjp)、[SIL OFL](assets/fonts/OFL.txt)。[Godotの著作権・第三者表示](assets/GODOT_COPYRIGHT.txt)もZIPへ同梱。

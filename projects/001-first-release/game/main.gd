@@ -13,7 +13,7 @@ var avatar: Node3D
 var bubble: MeshInstance3D
 var hud: Control
 var yaw: float = 0.0
-var pitch: float = -0.65
+var pitch: float = -0.25
 var third_person: bool = true
 var started: bool = false
 var paused: bool = false
@@ -45,6 +45,7 @@ func _ready() -> void:
 func _setup_inputs() -> void:
 	var bindings := {
 		"dive": [KEY_E],
+		"ascend": [KEY_SPACE],
 		"survey": [KEY_F],
 		"brake": [KEY_Q],
 		"forward": [KEY_W, KEY_UP],
@@ -71,7 +72,7 @@ func begin() -> void:
 func restart() -> void:
 	model.reset()
 	yaw = 0.0
-	pitch = -0.65
+	pitch = -0.25
 	was_complete = false
 	selected_target = 1
 	begin()
@@ -114,14 +115,14 @@ func _unhandled_input(event: InputEvent) -> void:
 func _physics_process(delta: float) -> void:
 	if started and not paused:
 		var axis := Input.get_vector("left", "right", "forward", "back")
-		advance(delta, axis, Input.get_axis("brake", "dive"))
+		advance(delta, axis, Input.get_axis("brake", "dive"), Input.is_action_pressed("ascend"))
 	_update_camera()
 	hud.queue_redraw()
 
 
-func advance(delta: float, axis: Vector2, descent: float = 0.0) -> void:
+func advance(delta: float, axis: Vector2, descent: float = 0.0, ascend: bool = false) -> void:
 	var horizontal := Vector3(axis.x, 0.0, axis.y).rotated(Vector3.UP, yaw)
-	model.step(delta, Vector2(horizontal.x, horizontal.z), descent)
+	model.step(delta, Vector2(horizontal.x, horizontal.z), descent, ascend)
 	if model.mode == Model.Mode.COMPLETE and not was_complete:
 		was_complete = true
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
@@ -129,6 +130,7 @@ func advance(delta: float, axis: Vector2, descent: float = 0.0) -> void:
 
 
 func _update_camera() -> void:
+	world.sync_platforms(model.platforms)
 	var focus: Vector3 = model.position + Vector3.UP * 1.4
 	var look := Vector3(0, sin(pitch), -cos(pitch)).rotated(Vector3.UP, yaw)
 	var desired: Vector3 = focus - look * 16.0 if third_person else focus
@@ -142,7 +144,8 @@ func _update_camera() -> void:
 	if started and Input.is_action_pressed("survey"):
 		camera.position = model.position + Vector3.UP * 55
 		# Keep the survey camera below the water surface near the starting shelf.
-		camera.position.y = minf(camera.position.y, 30)
+		if model.position.y < -1:
+			camera.position.y = minf(camera.position.y, -0.5)
 		camera.rotation = Vector3(-PI / 2, yaw, 0)
 	avatar.position = model.position
 	if Vector2(model.velocity.x, model.velocity.z).length() > 0.3:
@@ -152,7 +155,7 @@ func _update_camera() -> void:
 	)
 	bubble.position = focus
 	bubble.visible = model.mode == Model.Mode.RETURNING
-	world.update_depth(model.depth)
+	world.update_depth(camera.position.y)
 
 
 func next_platform() -> int:

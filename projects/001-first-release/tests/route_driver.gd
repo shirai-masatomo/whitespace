@@ -25,5 +25,4 @@ static func reach(model, target_index: int, timeout: float = 40.0) -> bool:
 
 
 static func refill(model) -> void:
-	for frame in range(240):
-		model.step(1.0 / 60, Vector2.ZERO)
+	model.step(1.0 / 60, Vector2.ZERO)

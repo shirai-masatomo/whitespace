@@ -33,9 +33,10 @@ func run() -> void:
 	var report := {
 		"routes": results,
 		"rescue": rescue,
+		"movement": evaluate_movement(),
 		"scope":
 		(
-			"Scripted steering, refill to full, 60Hz. Times include refill. "
+			"Scripted steering, instant contact refill, 60Hz. Movement timers use offshore fixtures. "
 			+ "Camera checks are framing/occlusion, not human readability."
 		)
 	}
@@ -146,3 +147,28 @@ func evaluate_rescue() -> Dictionary:
 		"lost_depth_m": model.depth_losses[0],
 		"controls_restored_seconds": snappedf(model.elapsed - start, 0.01)
 	}
+
+
+func evaluate_movement() -> Dictionary:
+	var report := {}
+	for entry in [["sink", 0.0, false], ["fast", 1.0, false], ["ascend", 0.0, true]]:
+		var model = Model.new()
+		model.position = Vector3(300, -100, 0)
+		model.grounded = -1
+		for frame in range(120):
+			model.step(1.0 / 60, Vector2.RIGHT, entry[1], entry[2])
+		report[entry[0] + "_speed_mps"] = snappedf(absf(model.velocity.y), 0.01)
+		report[entry[0] + "_oxygen_per_second"] = model.oxygen_rate
+		report["horizontal_speed_mps"] = snappedf(model.velocity.x, 0.01)
+	for descent in [0.0, 1.0]:
+		var model = Model.new()
+		model.position = Vector3(300, -10, 0)
+		model.grounded = -1
+		var frames := 0
+		while model.mode == Model.Mode.DIVING and frames < 1800:
+			model.step(1.0 / 60, Vector2.ZERO, descent)
+			frames += 1
+		report["fast_empty_seconds" if descent > 0 else "normal_empty_seconds"] = snappedf(
+			frames / 60.0, 0.01
+		)
+	return report

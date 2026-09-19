@@ -10,6 +10,7 @@ var platforms: Array[Dictionary]
 var position := Vector3.ZERO
 var velocity := Vector3.ZERO
 var oxygen: float = 100.0
+var oxygen_rate: float = 0.0
 var best_depth: float = 0.0
 var elapsed: float = 0.0
 var setbacks: int = 0
@@ -36,9 +37,11 @@ func _init(tuning: Resource = null) -> void:
 
 
 func reset() -> void:
+	platforms = Layout.platforms()
 	position = platforms[0].position
 	velocity = Vector3.ZERO
 	oxygen = config.oxygen_capacity
+	oxygen_rate = 0.0
 	best_depth = 0.0
 	elapsed = 0.0
 	setbacks = 0
@@ -58,17 +61,31 @@ func inside(point: Vector3, platform: Dictionary, margin: float = 0.0) -> bool:
 	)
 
 
+func oxygen_contact() -> int:
+	for index in range(platforms.size()):
+		if platforms[index].oxygen:
+			var center: Vector3 = platforms[index].position + Vector3.UP * 1.6
+			if (position + Vector3.UP).distance_to(center) <= config.oxygen_radius:
+				return index
+	return -1
+
+
 func at_oxygen() -> bool:
-	if grounded < 0 or not platforms[grounded].oxygen:
-		return false
-	var offset: Vector3 = position - platforms[grounded].position
-	return Vector2(offset.x, offset.z).length() <= config.oxygen_radius
+	return oxygen_contact() >= 0
 
 
-func step(delta: float, horizontal: Vector2, descent: float = 0.0) -> void:
+func step(delta: float, horizontal: Vector2, descent: float = 0.0, ascend: bool = false) -> void:
 	if delta <= 0 or mode == Mode.COMPLETE:
 		return
 	elapsed += delta
+	for index in range(platforms.size()):
+		var platform: Dictionary = platforms[index]
+		var old_platform: Vector3 = platform.position
+		platform.position = (
+			platform.origin + Vector3.RIGHT * sin(elapsed * platform.sway.y) * platform.sway.x
+		)
+		if grounded == index:
+			position += platform.position - old_platform
 	if mode == Mode.RETURNING:
 		_return_step(delta)
 		return
@@ -83,6 +100,8 @@ func step(delta: float, horizontal: Vector2, descent: float = 0.0) -> void:
 	velocity.z = horizontal_velocity.y
 	var start := position
 	var next := position + Vector3(velocity.x, 0, velocity.z) * delta
+	if ascend and position.y < 0.5:
+		grounded = -1
 	if grounded >= 0 and not inside(next, platforms[grounded]):
 		grounded = -1
 	if grounded < 0:
@@ -91,8 +110,15 @@ func step(delta: float, horizontal: Vector2, descent: float = 0.0) -> void:
 			sink = config.fast_sink_speed
 		elif descent < 0:
 			sink = config.brake_sink_speed
-		velocity.y = move_toward(velocity.y, -sink, config.vertical_acceleration * delta)
+		if position.y > 0.5:
+			velocity.y = maxf(-20, velocity.y - config.air_gravity * delta)
+		else:
+			var target_speed: float = config.ascent_speed if ascend else -sink
+			velocity.y = move_toward(velocity.y, target_speed, config.vertical_acceleration * delta)
 		next.y += velocity.y * delta
+		if ascend and start.y <= 0.5 and next.y > 0.2:
+			next.y = 0.2
+			velocity.y = 0.0
 		# Sweep the whole segment: fast descent cannot tunnel through thin floors.
 		var first_hit: float = 2.0
 		for index in range(platforms.size()):
@@ -114,17 +140,24 @@ func step(delta: float, horizontal: Vector2, descent: float = 0.0) -> void:
 		velocity.y = 0.0
 	position = next
 	best_depth = maxf(best_depth, depth)
-	if at_oxygen():
-		oxygen = minf(config.oxygen_capacity, oxygen + config.oxygen_recovery * delta)
+	oxygen_rate = 0.0
+	var oxygen_index := oxygen_contact()
+	if oxygen_index >= 0 or position.y >= -1:
+		oxygen = config.oxygen_capacity
 		if (
-			grounded != checkpoint
-			and platforms[grounded].position.y < platforms[checkpoint].position.y
+			oxygen_index >= 0
+			and oxygen_index != checkpoint
+			and platforms[oxygen_index].position.y < platforms[checkpoint].position.y
 		):
 			previous_checkpoint = checkpoint
-			checkpoint = grounded
-			visited_oxygen.append(grounded)
+			checkpoint = oxygen_index
+			visited_oxygen.append(oxygen_index)
 	else:
-		oxygen = maxf(0.0, oxygen - config.oxygen_consumption * delta)
+		var rate: float = config.oxygen_consumption
+		if descent > 0 and not ascend and grounded < 0:
+			rate *= config.fast_oxygen_multiplier
+		oxygen_rate = rate
+		oxygen = maxf(0.0, oxygen - rate * delta)
 	if oxygen <= 0:
 		begin_return("酸素切れ")
 	elif (
@@ -142,9 +175,11 @@ func begin_return(reason: String) -> void:
 	rescue_reason = reason
 	setbacks += 1
 	failure_depth = depth
-	return_checkpoint = checkpoint
-	if depth + platforms[checkpoint].position.y < config.min_setback:
-		return_checkpoint = previous_checkpoint
+	return_checkpoint = 0
+	# Space can move above a saved spot. Never rescue downward to that old spot.
+	for index in visited_oxygen:
+		if platforms[index].position.y >= position.y + config.min_setback:
+			return_checkpoint = index
 	return_target = platforms[return_checkpoint].position
 	return_phase = 0
 	grounded = -1

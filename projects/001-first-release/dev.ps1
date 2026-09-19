@@ -1,9 +1,10 @@
-param([ValidateSet('check', 'evaluate', 'test', 'lint', 'format', 'build', 'visual', 'play', 'editor')][string]$Task = 'check')
+param([ValidateSet('check', 'evaluate', 'test', 'lint', 'format', 'build', 'visual', 'play', 'editor')][string]$Task = 'check', [ValidateSet('windows','windows-preview')][string]$BuildFolder = 'windows')
 $ErrorActionPreference = 'Stop'
 $projectRoot = $PSScriptRoot
+$buildRoot = Join-Path $projectRoot ('build/' + $BuildFolder)
 $godot = Join-Path $projectRoot '.tools/Godot_v4.7.2-stable_win64_console.exe'
 if (-not (Test-Path -LiteralPath $godot)) { throw 'Run ./tools/setup.ps1 first.' }
-New-Item -ItemType Directory -Force "$projectRoot/artifacts", "$projectRoot/build/windows" | Out-Null
+New-Item -ItemType Directory -Force "$projectRoot/artifacts", $buildRoot | Out-Null
 Set-Content -LiteralPath "$projectRoot/artifacts/.gdignore" -Value ''
 Set-Content -LiteralPath "$projectRoot/build/.gdignore" -Value ''
 
@@ -52,18 +53,18 @@ try {
         Invoke-Godot 'evaluation' @('--headless', '--script', 'tests/test_evaluation.gd')
     }
     if ($Task -in @('build', 'check')) {
-        Invoke-Godot 'build' @('--headless', '--export-release', 'Windows Desktop')
-        Copy-Item assets/fonts/OFL.txt build/windows/FONT_LICENSE.txt -Force
-        Copy-Item assets/GODOT_COPYRIGHT.txt build/windows/GODOT_COPYRIGHT.txt -Force
-        Copy-Item tools/PLAY.txt build/windows/PLAY.txt -Force
+        Invoke-Godot 'build' @('--headless', '--export-release', 'Windows Desktop', (Join-Path $buildRoot 'DIVE DIVE.exe'))
+        Copy-Item assets/fonts/OFL.txt (Join-Path $buildRoot FONT_LICENSE.txt) -Force
+        Copy-Item assets/GODOT_COPYRIGHT.txt (Join-Path $buildRoot GODOT_COPYRIGHT.txt) -Force
+        Copy-Item tools/PLAY.txt (Join-Path $buildRoot PLAY.txt) -Force
         $smokeLog = Join-Path $projectRoot 'artifacts/export-smoke.log'
-        $exe = Join-Path $projectRoot 'build/windows/DIVE DIVE.exe'
+        $exe = Join-Path $buildRoot 'DIVE DIVE.exe'
         $process = Start-Process -FilePath $exe -ArgumentList @('--headless', '--quit-after', '10', '--log-file', ('"' + $smokeLog + '"')) -WindowStyle Hidden -PassThru
         if (-not $process.WaitForExit(30000)) { $process.Kill(); throw 'Export smoke test timed out' }
         if ($process.ExitCode -ne 0) { throw "Export failed to start: $($process.ExitCode)" }
         if (-not (Test-Path $smokeLog)) { throw 'Export did not produce a smoke log' }
         if (Select-String -Path $smokeLog -Pattern 'SCRIPT ERROR:|ERROR:' -Quiet) { throw 'Export smoke test logged errors' }
-        Compress-Archive -Path build/windows/* -DestinationPath build/DIVE-DIVE-windows.zip -Force
+        Compress-Archive -Path (Join-Path $buildRoot '*') -DestinationPath build/DIVE-DIVE-windows.zip -Force
         Write-Output "Windows build: $exe"
     }
 } finally { Pop-Location }

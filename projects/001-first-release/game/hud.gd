@@ -86,9 +86,9 @@ func _draw() -> void:
 	text_at(
 		Vector2(892, 54),
 		(
-			"酸素 / 補給中"
-			if model.at_oxygen()
-			else "酸素 / 残り約%d秒" % int(ceil(model.oxygen / game.TUNING.oxygen_consumption))
+			"酸素 / 呼吸できます"
+			if model.at_oxygen() or model.position.y >= -1
+			else "酸素 / 残り約%d秒" % int(ceil(model.oxygen / maxf(0.01, model.oxygen_rate)))
 		),
 		19,
 		accent
@@ -96,20 +96,27 @@ func _draw() -> void:
 	text_at(Vector2(1145, 56), "%03d%%" % int(ratio * 100), 23, accent)
 	draw_rect(Rect2(892, 72, 338, 8), Color("284451"))
 	draw_rect(Rect2(892, 72, 338 * ratio, 8), accent)
-	var hint := "緑の泡に入って酸素を補給"
+	var hint := "緑の泡に触れると瞬時に満タン"
 	if returning:
-		hint = "緊急浮上 → %dmから再挑戦" % int(-model.return_target.y)
+		hint = "緊急浮上 → %dmから再挑戦" % int(maxf(0, -model.return_target.y))
 	elif model.at_oxygen():
-		hint = "酸素を補給中 · ここが再挑戦地点"
+		hint = "酸素100% · 補給地点を記録"
 	elif ratio < 0.25:
 		hint = "酸素が少ない！ 緑の泡を目指そう"
 	text_at(Vector2(892, 114), hint, 16, accent)
-	var status := "足場を離れると、自然に沈みます" if model.grounded >= 0 else "沈降中 · Qで減速 / Eで速く潜る"
+	var status := "足場を離れると、自然に沈みます" if model.grounded >= 0 else "水中 · E 急降下 / Space 浮上"
+	if model.position.y > 0.5:
+		status = "WASDで桟橋の端へ。海へ飛び込もう"
+	elif model.velocity.y > 1 and not returning:
+		status = "Space 浮上中 · 離すと自然に沈みます"
+	elif model.oxygen_rate > game.TUNING.oxygen_consumption and not returning:
+		status = "E 急降下中 · 酸素消費 2.5倍"
 	if returning:
 		status = "緊急浮上中 · 操作は到着後に戻ります"
-	text_at(Vector2(30, 213), status, 17)
+	draw_rect(Rect2(28, 190, 574, 64), Color(0.02, 0.07, 0.1, 0.78))
+	text_at(Vector2(42, 213), status, 17)
 	text_at(
-		Vector2(30, 239),
+		Vector2(42, 239),
 		(
 			"カメラ：%s [Vで切替]"
 			% (
@@ -123,7 +130,9 @@ func _draw() -> void:
 	)
 	_draw_target(scale_factor)
 	draw_rect(Rect2(28, 648, 1224, 48), Color(0.02, 0.07, 0.1, 0.9))
-	text_at(Vector2(46, 678), "WASD 移動 · E 急降下 / Q 減速 · F長押し 見渡す · Tab 目標 · V 視点 · Esc 停止", 18)
+	text_at(
+		Vector2(46, 678), "WASD 移動 · E 急降下 · Space 浮上 · Q 減速 · F 俯瞰 · Tab 目標 · V 視点 · Esc 停止", 18
+	)
 	if returning:
 		draw_rect(Rect2(348, 510, 584, 95), Color(0.03, 0.12, 0.18, 0.92))
 		text_at(Vector2(380, 547), "%s — 泡になって緊急浮上" % model.rescue_reason, 23, ORANGE)
@@ -187,10 +196,10 @@ func _draw_overlay(scale_factor: Vector2) -> void:
 		)
 		text_at(Vector2(310, 352), "次は別のルートでもう一度。", 22, MUTED)
 	else:
-		text_at(Vector2(310, 289), "足場を離れると沈む。着地すると止まる。", 21)
-		text_at(Vector2(310, 330), "酸素は減り続ける。緑の泡で補給しよう。", 21)
-		text_at(Vector2(310, 371), "酸素が切れると浮上して、深度を失います。", 20, MUTED)
-	text_at(Vector2(310, 439), "WASD 移動 / マウス 視点 / E 急降下 / Q 減速", 19, CYAN)
+		text_at(Vector2(310, 289), "海へ飛び込み、足場をたどって深く潜ろう。", 21)
+		text_at(Vector2(310, 330), "緑の泡に触れると酸素100%。待たずに進もう。", 21)
+		text_at(Vector2(310, 371), "急降下は酸素を多く使う。酸素0で押し戻される。", 20, MUTED)
+	text_at(Vector2(310, 439), "WASD 移動 / マウス 視点 / E 急降下 / Space 浮上", 19, CYAN)
 	primary.position = Vector2(310, 489) * scale_factor
 	primary.size = Vector2(400, 58) * scale_factor
 	quit_button.position = Vector2(742, 489) * scale_factor

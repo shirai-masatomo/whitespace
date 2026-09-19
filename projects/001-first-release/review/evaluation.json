@@ -1,0 +1,174 @@
+{
+  "movement": {
+    "ascend_oxygen_per_second": 4.0,
+    "ascend_speed_mps": 6.0,
+    "fast_empty_seconds": 10.0,
+    "fast_oxygen_per_second": 10.0,
+    "fast_speed_mps": 15.0,
+    "horizontal_speed_mps": 7.0,
+    "normal_empty_seconds": 25.02,
+    "sink_oxygen_per_second": 4.0,
+    "sink_speed_mps": 5.0
+  },
+  "rescue": {
+    "controls_restored_seconds": 2.27,
+    "lost_depth_m": 30.0
+  },
+  "routes": [
+    {
+      "complete": true,
+      "decisions": 9,
+      "departure_camera_framed": 6,
+      "departure_camera_unoccluded": 1,
+      "legs": [
+        {
+          "arrival_oxygen": 77.2,
+          "to": 1,
+          "travel_seconds": 8.48
+        },
+        {
+          "arrival_oxygen": 100.0,
+          "to": 2,
+          "travel_seconds": 8.72
+        },
+        {
+          "arrival_oxygen": 64.13,
+          "to": 3,
+          "travel_seconds": 9.6
+        },
+        {
+          "arrival_oxygen": 100.0,
+          "to": 4,
+          "travel_seconds": 9.7
+        },
+        {
+          "arrival_oxygen": 64.0,
+          "to": 5,
+          "travel_seconds": 9.63
+        },
+        {
+          "arrival_oxygen": 100.0,
+          "to": 6,
+          "travel_seconds": 9.67
+        },
+        {
+          "arrival_oxygen": 62.13,
+          "to": 7,
+          "travel_seconds": 10.1
+        },
+        {
+          "arrival_oxygen": 100.0,
+          "to": 8,
+          "travel_seconds": 10.3
+        },
+        {
+          "arrival_oxygen": 57.33,
+          "to": 9,
+          "travel_seconds": 11.3
+        }
+      ],
+      "mean_leg_seconds": 9.72,
+      "minimum_oxygen": 24.27,
+      "name": "platforms",
+      "seconds": 87.5,
+      "survey_visible": 9
+    },
+    {
+      "complete": true,
+      "decisions": 5,
+      "departure_camera_framed": 4,
+      "departure_camera_unoccluded": 1,
+      "legs": [
+        {
+          "arrival_oxygen": 100.0,
+          "to": 2,
+          "travel_seconds": 15.25
+        },
+        {
+          "arrival_oxygen": 100.0,
+          "to": 4,
+          "travel_seconds": 17.98
+        },
+        {
+          "arrival_oxygen": 100.0,
+          "to": 6,
+          "travel_seconds": 19.38
+        },
+        {
+          "arrival_oxygen": 100.0,
+          "to": 8,
+          "travel_seconds": 18.42
+        },
+        {
+          "arrival_oxygen": 57.33,
+          "to": 9,
+          "travel_seconds": 11.3
+        }
+      ],
+      "mean_leg_seconds": 16.47,
+      "minimum_oxygen": 28.33,
+      "name": "direct_oxygen",
+      "seconds": 82.33,
+      "survey_visible": 5
+    },
+    {
+      "complete": true,
+      "decisions": 9,
+      "departure_camera_framed": 6,
+      "departure_camera_unoccluded": 1,
+      "legs": [
+        {
+          "arrival_oxygen": 77.2,
+          "to": 1,
+          "travel_seconds": 8.48
+        },
+        {
+          "arrival_oxygen": 100.0,
+          "to": 2,
+          "travel_seconds": 8.72
+        },
+        {
+          "arrival_oxygen": 100.0,
+          "to": 10,
+          "travel_seconds": 9.77
+        },
+        {
+          "arrival_oxygen": 100.0,
+          "to": 4,
+          "travel_seconds": 12.57
+        },
+        {
+          "arrival_oxygen": 62.07,
+          "to": 5,
+          "travel_seconds": 10.12
+        },
+        {
+          "arrival_oxygen": 100.0,
+          "to": 6,
+          "travel_seconds": 10.08
+        },
+        {
+          "arrival_oxygen": 62.13,
+          "to": 7,
+          "travel_seconds": 10.1
+        },
+        {
+          "arrival_oxygen": 100.0,
+          "to": 8,
+          "travel_seconds": 10.3
+        },
+        {
+          "arrival_oxygen": 57.33,
+          "to": 9,
+          "travel_seconds": 11.3
+        }
+      ],
+      "mean_leg_seconds": 10.16,
+      "minimum_oxygen": 24.27,
+      "name": "extra_oxygen",
+      "seconds": 91.43,
+      "survey_visible": 9
+    }
+  ],
+  "scope": "Scripted steering, instant contact refill, 60Hz. Movement timers use offshore fixtures. Camera checks are framing/occlusion, not human readability."
+}
