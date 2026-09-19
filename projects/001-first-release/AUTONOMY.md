@@ -4,7 +4,7 @@
 
 ## 作業ループ
 
-PROJECT_STATE → TASKS → AI_REVIEW（存在時は必読）→ Git/CI → 最優先タスク → 実装 → テスト/自動プレイ/画面確認 → 自己批評 → 改善 → 再テスト → 文書 → commit/push/CI → 次タスク。
+PROJECT_STATE → TASKS → HUMAN_DIRECTION → AI_REVIEW → EXTERNAL_AI_REVIEW → Git/CI → 最優先タスク → 実装 → テスト/自動プレイ/画面確認 → 自己批評 → 改善 → 再テスト → 文書 → commit/push/CI → 次タスク。
 
 開始・終了は `./dev.ps1 check`。UI/入力変更はvisual、経路/数値変更はevaluateも行う。実装だけで終了しない。中核の節目は数サイクル評価し、明らかな問題を修正してから人間へ渡す。他セッションの変更を保護し、mainに失敗したCIを放置しない。
 
@@ -16,6 +16,8 @@ PROJECT_STATE → TASKS → AI_REVIEW（存在時は必読）→ Git/CI → 最�
 
 ## レビュー
 
+- HUMAN_DIRECTION.md は最新の人間方針として毎回必読。未反映項目があれば最優先でTASKSへ落とす。
+- EXTERNAL_AI_REVIEW.md は外部AIレビューとして毎回必読。CHANGESは人間に聞かず解消する。
 - REVIEW_PACKET.mdを短く更新する。遊び方、変更3〜5件、テスト、画像、重要な懸念、SELF_CONTINUE / AI_REVIEW / HUMAN_REVIEW。
 - AI_REVIEW.mdはPASSなら継続、CHANGESなら人間に聞かず修正し再評価、HUMAN_REVIEWなら具体的な判断点を人間へ渡す。
 - レビュー対象commit/作業差分とレビュー者を明示。同一Codexによる自己レビューを独立レビューと呼ばない。古い指摘は現行コードで再現するか確認。
@@ -29,7 +31,7 @@ PROJECT_STATE → TASKS → AI_REVIEW（存在時は必読）→ Git/CI → 最�
 
 ## 記録
 
-STATEは現在地、TASKSは次の作業、REVIEW_PACKETは評価入口、AI_REVIEWは判定/対応。重要な環境問題はSTATEの再実行メモ、詳細ログはartifacts、過去はGit履歴。人間向け報告は現状2〜4行、変更最大5件、次最大3件、必要時だけ人間判断。
+STATEは現在地、TASKSは次の作業、HUMAN_DIRECTIONは人間の最新方針、EXTERNAL_AI_REVIEWは外部AI指摘、REVIEW_PACKETは評価入口、AI_REVIEWはCodex自己判定/対応。重要な環境問題はSTATEの再実行メモ、詳細ログはartifacts、過去はGit履歴。人間向け報告は現状2〜4行、変更最大5件、次最大3件、必要時だけ人間判断。
 
 ## リアル層の制作中の例外（2026-09-19）
 
