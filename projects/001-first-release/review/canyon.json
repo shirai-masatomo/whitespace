@@ -1,60 +1,60 @@
 {
-  "checks": 124,
+  "checks": 130,
   "failed": false,
   "observations": {
     "cleft_oxygen": 83.2666666666676,
     "cleft_seconds": 4.18333333333332,
     "continuous_current_18_1": {
       "arrived": true,
-      "decision_oxygen": 49.2000000000013,
-      "end": "Vector3(80.89075, -220.02826, -221.70683)",
+      "decision_oxygen": 50.6666666666681,
+      "end": "Vector3(94.71982, -220.10121, -220.38202)",
       "end_oxygen": 100.0,
-      "minimum_oxygen": 4.66666666666722,
-      "seconds": 24.9166666666665
+      "minimum_oxygen": 13.4666666666672,
+      "seconds": 22.6333333333333
     },
     "continuous_current_18_2": {
       "arrived": true,
-      "decision_oxygen": 30.8666666666671,
-      "end": "Vector3(14.69794, -239.13351, -63.20576)",
+      "decision_oxygen": 31.7333333333338,
+      "end": "Vector3(14.394871, -239.40842, -63.013638)",
       "end_oxygen": 100.0,
-      "minimum_oxygen": 0.000000000000548422418589212,
-      "seconds": 25.9166666666665
+      "minimum_oxygen": 1.06666666666721,
+      "seconds": 25.6499999999998
     },
     "continuous_current_21_1": {
       "arrived": true,
-      "decision_oxygen": 50.2000000000014,
-      "end": "Vector3(80.88861, -220.08405, -221.70724)",
+      "decision_oxygen": 52.0000000000015,
+      "end": "Vector3(94.47118, -220.62285, -220.3651)",
       "end_oxygen": 100.0,
-      "minimum_oxygen": 5.80000000000055,
-      "seconds": 24.6499999999999
+      "minimum_oxygen": 14.8000000000005,
+      "seconds": 22.3833333333333
     },
     "continuous_current_21_2": {
-      "arrived": false,
-      "decision_oxygen": 33.7333333333339,
-      "end": "Vector3(15.983369, -239.68121, -66.03436)",
-      "end_oxygen": 0.0,
-      "minimum_oxygen": 0.0,
-      "seconds": 25.9166666666665
+      "arrived": true,
+      "decision_oxygen": 35.2000000000006,
+      "end": "Vector3(14.341964, -239.34398, -63.199905)",
+      "end_oxygen": 100.0,
+      "minimum_oxygen": 0.733333333333882,
+      "seconds": 25.7333333333332
     },
     "continuous_current_24_1": {
       "arrived": true,
-      "decision_oxygen": 51.0666666666681,
-      "end": "Vector3(80.93343, -219.96017, -221.68533)",
+      "decision_oxygen": 52.8666666666682,
+      "end": "Vector3(94.14976, -220.98393, -220.33835)",
       "end_oxygen": 100.0,
-      "minimum_oxygen": 6.46666666666721,
-      "seconds": 24.4666666666666
+      "minimum_oxygen": 15.0666666666672,
+      "seconds": 22.45
     },
     "continuous_current_24_2": {
       "arrived": true,
-      "decision_oxygen": 36.2000000000007,
-      "end": "Vector3(14.216478, -239.56934, -63.08683)",
+      "decision_oxygen": 37.7333333333341,
+      "end": "Vector3(14.010542, -239.11737, -62.90586)",
       "end_oxygen": 100.0,
-      "minimum_oxygen": 1.40000000000055,
-      "seconds": 25.5666666666665
+      "minimum_oxygen": 3.40000000000055,
+      "seconds": 25.0666666666665
     },
     "cove_current_wall_crossings": 0,
-    "cove_dive_seconds": 7.34999999999998,
-    "cove_exit_seconds": 12.4333333333335,
+    "cove_dive_seconds": 8.23333333333332,
+    "cove_exit_seconds": 13.3166666666669,
     "cove_flow_off": {
       "distance": 9.00094604492188,
       "position": "Vector3(129, -268.50095, -221.5)"
@@ -65,15 +65,15 @@
     },
     "cove_rejoin": {
       "arrived": true,
-      "minimum_oxygen": 12.6000000000005,
-      "seconds": 22.7666666666667
+      "minimum_oxygen": 14.2666666666672,
+      "seconds": 22.35
     },
     "cove_rejoin_80": {
       "arrived": false,
       "minimum_oxygen": 0.0,
-      "seconds": 21.8166666666667
+      "seconds": 21.5833333333334
     },
-    "cove_walk_end": "Vector3(88.631004, -222.64116, -222.03674)",
+    "cove_walk_end": "Vector3(102.589584, -221.79643, -220.12619)",
     "cove_walk_grounded": 100,
     "current_18_1_fast": {
       "end": "Vector3(125.661705, -287.15585, -213.77983)",
@@ -198,30 +198,40 @@
     "current_detour_1": {
       "arrived": true,
       "oxygen": 100.0,
-      "seconds": 13.3333333333336
+      "seconds": 11.3333333333335
     },
     "current_detour_2": {
       "arrived": true,
       "oxygen": 100.0,
       "seconds": 9.46666666666672
     },
+    "early_inside_70": {
+      "arrived": true,
+      "minimum_oxygen": 16.6666666666655,
+      "seconds": 14.466666666667
+    },
     "early_inside_80": {
       "arrived": true,
-      "minimum_oxygen": 18.5999999999994,
-      "seconds": 16.466666666667
+      "minimum_oxygen": 26.666666666666,
+      "seconds": 14.466666666667
     },
-    "full_outside_80": {
+    "full_outside_70": {
       "arrived": false,
       "minimum_oxygen": 0.0,
-      "seconds": 20.0000000000001
+      "seconds": 17.5000000000003
+    },
+    "full_outside_80": {
+      "arrived": true,
+      "minimum_oxygen": 3.26666666666608,
+      "seconds": 20.4333333333335
     },
     "inside_seconds": 6.93333333333331,
-    "journey_seconds": 44.7333333333321,
+    "journey_seconds": 44.7166666666654,
     "outside_seconds": 5.11666666666665,
     "oxygen_100_bridge_false": {
       "arrived": true,
       "oxygen": 100.0,
-      "seconds": 8.29999999999999
+      "seconds": 8.61666666666667
     },
     "oxygen_100_bridge_true": {
       "arrived": true,
@@ -270,24 +280,24 @@
     },
     "wildlife_lower_entrance": {
       "arrived": true,
-      "minimum_oxygen": 15.2000000000005,
-      "seconds": 22.4
+      "minimum_oxygen": 23.2666666666672,
+      "seconds": 20.4333333333335
     },
     "wildlife_wall_crossings": 0,
     "window_over": {
       "arrived": true,
-      "minimum_oxygen": 66.4666666666686,
-      "seconds": 9.28333333333337
+      "minimum_oxygen": 61.1333333333352,
+      "seconds": 10.5500000000001
     },
     "window_through": {
       "arrived": true,
-      "minimum_oxygen": 58.2666666666684,
-      "seconds": 11.3333333333335
+      "minimum_oxygen": 59.8000000000018,
+      "seconds": 10.9500000000001
     },
     "window_through_80": {
       "arrived": true,
-      "minimum_oxygen": 41.9333333333331,
-      "seconds": 11.3333333333335
+      "minimum_oxygen": 42.5333333333332,
+      "seconds": 10.9500000000001
     }
   }
 }

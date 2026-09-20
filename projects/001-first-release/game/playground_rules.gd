@@ -1,14 +1,14 @@
 extends RefCounted
 ## Spatial destinations, not a required sequence of platform indices.
 const PLANTS: Array[Vector3] = [
-	Vector3(32, -28.2, -25),
+	Vector3(27, -30, -31),
 	Vector3(55, -34, -69),
 	Vector3(71, -58, -42),
 	Vector3(135, -66, -65),
 	Vector3(103, -26.4, -49),
 	Vector3(67, -160, -135),
 	Vector3(116, -181.83, -194),
-	Vector3(78, -220.45, -222)
+	Vector3(92, -222, -220)
 ]
 const CAVE_START := Vector3(68, -54, -42)
 const CAVE_END := Vector3(138, -61, -65)

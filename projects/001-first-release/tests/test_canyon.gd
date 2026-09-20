@@ -123,7 +123,7 @@ func journeys() -> void:
 		await swim(Vector3(104, -201, -215), 12, false, false), "Drop off promontory into interior"
 	)
 	check(
-		await swim(Vector3(78, -218, -222), 12, false, false),
+		await swim(Gardens.PLANTS[7] + Vector3.UP * 2, 12, false, false),
 		"Interior descent finds sheltered garden"
 	)
 	observations.journey_seconds = game.model.elapsed
@@ -386,38 +386,44 @@ func wildlife_entrance() -> void:
 
 
 func early_return_choice() -> void:
-	for outside in [false, true]:
-		fixture(Gardens.PLANTS[6] + Vector3(4.5, 2, 0))
-		game.model.oxygen = 80
-		minimum_oxygen = 80
-		var targets := [Vector3(131, -178, -211)]
-		if outside:
-			targets.append_array(
-				[Vector3(149, -187, -210), Vector3(166, -200, -207), Vector3(145, -216, -210)]
-			)
-		targets.append_array([Vector3(117, -217, -220), Gardens.PLANTS[7] + Vector3.UP * 2])
-		var arrived := true
-		for target in targets:
+	for initial_oxygen in [80, 70]:
+		var margins := []
+		for outside in [false, true]:
+			fixture(Gardens.PLANTS[6] + Vector3(4.5, 2, 0))
+			game.model.oxygen = initial_oxygen
+			minimum_oxygen = initial_oxygen
+			var targets := [Vector3(131, -178, -211)]
+			if outside:
+				targets.append_array(
+					[Vector3(149, -187, -210), Vector3(166, -200, -207), Vector3(145, -216, -210)]
+				)
+			targets.append_array([Vector3(117, -217, -220), Gardens.PLANTS[7] + Vector3.UP * 2])
+			var arrived := true
+			for target in targets:
+				if arrived:
+					arrived = await swim(target, 15, false, false)
 			if arrived:
-				arrived = await swim(target, 15, false, false)
-		if arrived:
-			for frame in range(60):
-				await tick()
+				for frame in range(60):
+					await tick()
+				check(
+					game.model.standing and game.model.oxygen == 100,
+					"Return reaches the top of the algae shelf"
+				)
+			var label := "full_outside" if outside else "early_inside"
+			observations["%s_%d" % [label, initial_oxygen]] = {
+				"arrived": arrived, "seconds": game.model.elapsed, "minimum_oxygen": minimum_oxygen
+			}
+			margins.append(minimum_oxygen)
 			check(
-				game.model.standing and game.model.oxygen == 100,
-				"Early return reaches the top of the algae shelf"
+				arrived == (initial_oxygen == 80 or not outside),
+				"80%% reaches both exits; at 70%% the inside route preserves a viable return"
 			)
-		observations["early_inside_80" if not outside else "full_outside_80"] = {
-			"arrived": arrived, "seconds": game.model.elapsed, "minimum_oxygen": minimum_oxygen
-		}
-		check(
-			arrived != outside, "At 80% oxygen the early inside descent is safer than the full loop"
-		)
-		if outside:
-			check(
-				game.model.mode == Model.Mode.RETURNING,
-				"The long 80% route ends in seamless rescue, not a blocked-controller timeout"
-			)
+			if outside and initial_oxygen == 70:
+				check(
+					game.model.mode == Model.Mode.RETURNING,
+					"The long 70% route ends in seamless rescue, not a controller timeout"
+				)
+		check(margins[0] > margins[1] + 15, "Inside return retains materially more oxygen")
 
 
 func cleft_passage() -> void:

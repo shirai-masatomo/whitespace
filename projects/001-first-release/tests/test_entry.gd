@@ -1,4 +1,5 @@
 extends "res://tests/test_discovery.gd"
+const Reef = preload("res://game/playground_rules.gd")
 var follow_heading := false
 
 
@@ -64,7 +65,10 @@ func run() -> void:
 	await photo("51-enter-ocean", Vector3(35, -20, -28))
 	check(game.camera.position.y < -1.4, "Camera joins the submerged swimmer after entry")
 	await photo("52-surface-light", game.model.position + Vector3(3, 16, -18))
-	check(await swim(Vector3(32, -28, -25)), "The shoal's destination is actually reachable")
+	check(
+		await swim(Reef.PLANTS[0] + Vector3.UP * .2),
+		"The shoal's destination is actually reachable"
+	)
 	await photo("53-kelp-from-sea", Vector3(53, -20, -50))
 	var guide: Node3D = game.world.life.reef_guide
 	game.world.life.update(Vector3(500, 0, 500), 0)
@@ -109,7 +113,7 @@ func run() -> void:
 		for bubble in [false, true]:
 			fixture(entry_start)
 			game.model.oxygen = oxygen
-			var target: Vector3 = Places.bubbles(0)[0].center if bubble else Vector3(32, -28.2, -25)
+			var target: Vector3 = Places.bubbles(0)[0].center if bubble else Reef.PLANTS[0]
 			var arrived := await reach_oxygen(target)
 			observations["oxygen_%d_bubble_%s" % [oxygen, bubble]] = {
 				"arrived": arrived, "seconds": game.model.elapsed, "oxygen": game.model.oxygen
@@ -117,6 +121,7 @@ func run() -> void:
 			check(arrived or oxygen < 100, "Both initial destinations can be reached with full air")
 	await normal_entry()
 	await garden_shoulder()
+	await fast_garden_approach()
 	var file := FileAccess.open("res://artifacts/entry.json", FileAccess.WRITE)
 	file.store_string(
 		JSON.stringify(
@@ -169,13 +174,13 @@ func normal_entry() -> void:
 		await capture("84-normal-entry")
 	follow_heading = true
 	check(
-		await swim(Vector3(32, -28, -25), 20, false, false),
+		await swim(Reef.PLANTS[0] + Vector3.UP * .2, 20, false, false),
 		"Normal-view entry reaches the optional garden"
 	)
 	if gpu:
 		await capture("85-normal-garden")
 	check(
-		await swim(Vector3(35, -29, -32), 8, false, false),
+		await swim(Reef.PLANTS[0] + Vector3(2, -1, -5), 8, false, false),
 		"The garden lip can be approached with ordinary steering"
 	)
 	if gpu:
@@ -208,7 +213,7 @@ func normal_entry() -> void:
 
 func garden_shoulder() -> void:
 	# A visible high shoulder must be reachable, not a new background mound.
-	fixture(Vector3(32, -26.2, -25))
+	fixture(Reef.PLANTS[0] + Vector3.UP * 2)
 	follow_heading = true
 	check(
 		await swim(Vector3(43, -21, -24), 12, false, false), "Garden permits the rising side route"
@@ -225,3 +230,25 @@ func garden_shoulder() -> void:
 	observations.garden_shoulder_seconds = game.model.elapsed
 	observations.garden_shoulder_oxygen = game.model.oxygen
 	follow_heading = false
+
+
+func fast_garden_approach() -> void:
+	game.restart()
+	var contact := false
+	for frame in range(360):
+		var offset: Vector3 = Reef.PLANTS[0] - game.model.position
+		await tick(
+			(Vector2(offset.x, offset.z) / 4).limit_length(),
+			1 if offset.y < -3 else 0,
+			offset.y > 1
+		)
+		for body in game.motion.contact_bodies:
+			contact = contact or body.get_parent().name == "WalkableKelpReef"
+	check(contact, "Fast direct approach meets the visible coast instead of tunnelling")
+	for frame in range(60):
+		await tick(Vector2(-1, 1).normalized(), 0, true)
+	for frame in range(180):
+		await tick(Vector2.ZERO, 0, true)
+	check(await swim(Reef.PLANTS[0], 15, false, false), "Backing off and Space clears the coast")
+	check(game.model.oxygen == 100, "Fast approach can recover to actual oxygen contact")
+	observations.fast_garden_recovery_seconds = game.model.elapsed

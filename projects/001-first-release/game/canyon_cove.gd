@@ -1,5 +1,6 @@
 extends Node3D
 ## A cliff-rooted shore around an open sinkhole, replacing the long lower ribbon.
+const Reef = preload("res://game/playground_rules.gd")
 const Geo = preload("res://game/ocean_geometry.gd")
 const Nature = preload("res://game/ocean_nature.gd")
 const Collision = preload("res://game/level_collision.gd")
@@ -136,8 +137,12 @@ static func surface(along: float, across: float) -> Vector3:
 	var p := ring(INNER, along).lerp(ring(OUTER, along), across)
 	# The existing living refuge stays on solid land. Elsewhere the shore
 	# descends towards the open water, so walking changes the view into the hole.
-	var refuge := 1 - smoothstep(3, 8, Vector2(p.x - 78, p.z + 222).length())
-	p.y = lerpf(p.y, -220.45, refuge)
+	# Retain the old walkable west bank while moving the living refuge east.
+	var west_bank := 1 - smoothstep(3, 8, Vector2(p.x - 78, p.z + 222).length())
+	p.y = lerpf(p.y, -220.45, west_bank)
+	var garden: Vector3 = Reef.PLANTS[7]
+	var refuge := 1 - smoothstep(3, 8, Vector2(p.x - garden.x, p.z - garden.z).length())
+	p.y = lerpf(p.y, garden.y, refuge)
 	return p
 
 

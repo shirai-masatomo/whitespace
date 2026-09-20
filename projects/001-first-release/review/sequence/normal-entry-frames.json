@@ -18,19 +18,19 @@
     "seconds": 6.0
   },
   {
-    "depth": 28.0,
+    "depth": 28.8,
     "file": "normal-entry-frame-003.jpg",
-    "pose": "land",
+    "pose": "swim",
     "seconds": 8.0
   },
   {
-    "depth": 33.0,
+    "depth": 37.1,
     "file": "normal-entry-frame-004.jpg",
     "pose": "swim",
     "seconds": 10.0
   },
   {
-    "depth": 40.3,
+    "depth": 40.0,
     "file": "normal-entry-frame-005.jpg",
     "pose": "swim",
     "seconds": 12.0

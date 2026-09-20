@@ -2,6 +2,7 @@ extends Node3D
 ## Original low-cost shoals gather near oxygen algae; no collision or paid assets.
 const Geo = preload("res://game/ocean_geometry.gd")
 const Layout = preload("res://game/stage_layout.gd")
+const Reef = preload("res://game/playground_rules.gd")
 var rays: Array[Node3D] = []
 var shoals: Array[Node3D] = []
 var origins: Array[Vector3] = []
@@ -112,7 +113,8 @@ static func reef_passage(time: float) -> Vector3:
 	# Separate outward/return lanes let the group bend round instead of
 	# stopping and flipping every fish through 180 degrees at the refuge.
 	return (
-		Vector3(6, -9, -24).lerp(Vector3(32, -22, -28), progress) + Vector3(0, 0, -6 * sin(phase))
+		Vector3(6, -9, -24).lerp(Reef.PLANTS[0] + Vector3(0, 6, -3), progress)
+		+ Vector3(0, 0, -6 * sin(phase))
 	)
 
 
@@ -185,12 +187,27 @@ func make_shoal(
 	swarm.mesh = mesh
 	swarm.instance_count = count
 	swarm.custom_aabb = AABB(Vector3(-15, -6, -15), Vector3(30, 12, 30))
+	var rng := RandomNumberGenerator.new()
+	rng.seed = 92103 + count
 	for index in range(count):
 		var angle := index * 2.399
 		var radius := sqrt(index / float(count)) * 2.4
 		var offset := Vector3(cos(angle) * radius, sin(index * 3.7), sin(angle) * radius)
+		var size := .65
+		var turn := 0.0
+		if guided:
+			# Unequal overlapping groups, with gaps and small juveniles between.
+			var centres := [Vector3(-1.4, .3, -1.5), Vector3(.9, -.3, .4), Vector3(1.4, .7, 2.0)]
+			offset = (
+				centres[index % 3]
+				+ Vector3(rng.randfn(0, .65), rng.randfn(0, .4), rng.randfn(0, .9))
+			)
+			size = rng.randf_range(.36, .74)
+			turn = rng.randf_range(-.16, .16)
 		offset *= spread
-		swarm.set_instance_transform(index, Transform3D(Basis().scaled(Vector3.ONE * .65), offset))
+		swarm.set_instance_transform(
+			index, Transform3D(Basis(Vector3.UP, turn).scaled(Vector3.ONE * size), offset)
+		)
 		swarm.set_instance_custom_data(index, Color(index / float(count), 0, 0, 1))
 	var school := MultiMeshInstance3D.new()
 	school.multimesh = swarm

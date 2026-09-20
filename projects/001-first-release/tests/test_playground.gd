@@ -36,7 +36,10 @@ func run() -> void:
 		await process_frame
 		quit(1 if failed else 0)
 		return
-	check(await swim(Reef.PLANTS[0]), "The distant shallow reef is reachable from the pier")
+	check(
+		await swim(Reef.PLANTS[0], 25, false, false),
+		"The distant shallow reef is reachable from the pier"
+	)
 	await photo("44-kelp-reef-arrival", Vector3(58, -26, -50))
 	for frame in range(30):
 		await tick()
