@@ -18,6 +18,8 @@ PROJECT_STATE → TASKS → HUMAN_DIRECTION → AI_REVIEW → EXTERNAL_AI_REVIEW
 
 ## レビュー
 
+各試作の前に「この画面で何を迷わせたいか」を一文で定義し、候補ごとの手掛かり/見返り/代償を記録する。代表1〜3画面の同条件比較→実操作→批評を行う。選択が読めることと経路が通れることを混同しない。3択やオブジェクト数を機械的な合格条件にしない。画面比較は既存REVIEW_PACKETへまとめる。
+
 - HUMAN_DIRECTION.md は最新の人間方針として毎回必読。未反映項目があれば最優先でTASKSへ落とす。
 - EXTERNAL_AI_REVIEW.md は外部AIレビューとして毎回必読。CHANGESは人間に聞かず解消する。
 - REVIEW_PACKET.mdを短く更新する。遊び方、変更3〜5件、テスト、画像、重要な懸念、SELF_CONTINUE / AI_REVIEW / HUMAN_REVIEW。
