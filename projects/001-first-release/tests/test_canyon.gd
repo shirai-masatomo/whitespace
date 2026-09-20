@@ -26,6 +26,7 @@ func run() -> void:
 		fixture(view[1])
 		await photo(view[0], view[2])
 	await journeys()
+	await terrace_choices()
 	await oxygen_choices()
 	await collisions()
 	await wildlife_detour()
@@ -45,6 +46,7 @@ func journeys() -> void:
 	# Begin at an established 125m refuge, not a teleport to the new terrace.
 	record_sequence = true
 	fixture(Vector3(45, -124, -45))
+	game.pitch = -.35
 	check(await swim(Vector3(67, -159, -135), 25, false, false), "125m refuge to canyon garden")
 	check(game.model.oxygen == 100, "Terrace garden is reachable and refills")
 	for frame in range(120):
@@ -55,8 +57,13 @@ func journeys() -> void:
 		if game.model.standing:
 			walking_frames += 1
 		if frame == 180:
+			if gpu:
+				await capture("72-walking-view")
 			await photo("67-rock-steps", Vector3(67, -176, -174))
-	check(game.model.position.z < -185, "Walk terraces and descending ramps without Space")
+			game.pitch = -.35
+	check(game.model.position.z < -178, "Walking reaches the collapsed terrace")
+	check(game.model.position.z > -185, "Blind forward input cannot walk through the far rock lip")
+	check(walking_frames < 530, "The collapsed terrace interrupts ground contact")
 	check(walking_frames > 380, "Walking rhythm replaces continuous swimming")
 	observations.walking_frames = walking_frames
 	observations.terrace_end = var_to_str(game.model.position)
@@ -84,6 +91,57 @@ func journeys() -> void:
 		observations["outside_seconds" if outside else "inside_seconds"] = game.model.elapsed
 
 
+func terrace_choices() -> void:
+	for shelf in [true, false]:
+		fixture(Vector3(67, -171, -165))
+		game.pitch = -.35
+		for frame in range(30):
+			await tick()
+		var targets := [Vector3(63, -172, -167), Vector3(63, -178, -184), Vector3(67, -178, -188)]
+		if not shelf:
+			targets = [Vector3(67, -175, -184), Vector3(67, -178, -188)]
+		var grounded_frames := 0
+		var swimming_frames := 0
+		var ascent_frames := 0
+		var reached := 0
+		for target in targets:
+			for frame in range(600):
+				var offset: Vector3 = target - game.model.position
+				if Vector2(offset.x, offset.z).length() < .75:
+					reached += 1
+					break
+				var axis := (Vector2(offset.x, offset.z) / 2).limit_length()
+				var ascend: bool = not shelf and offset.y > 1
+				await tick(axis, 0, ascend)
+				if ascend:
+					ascent_frames += 1
+				if game.model.standing:
+					grounded_frames += 1
+				else:
+					swimming_frames += 1
+				if gpu and frame == 80 and reached == (1 if shelf else 0):
+					await capture("73-ledge-walk" if shelf else "74-swim-break")
+		check(reached == targets.size(), "Terrace choice reaches the far side")
+		observations["terrace_shelf" if shelf else "terrace_swim"] = {
+			"walking_frames": grounded_frames,
+			"swimming_frames": swimming_frames,
+			"ascent_frames": ascent_frames,
+			"seconds": game.model.elapsed,
+			"oxygen": game.model.oxygen,
+			"position": var_to_str(game.model.position)
+		}
+		if shelf:
+			check(
+				ascent_frames == 0 and grounded_frames > swimming_frames * 3,
+				"Wall-side ledge can be walked without Space"
+			)
+		else:
+			check(
+				swimming_frames > 30 and ascent_frames > 15,
+				"Crossing the break changes body state and needs ascent correction"
+			)
+
+
 func collisions() -> void:
 	fixture(Vector3(67, -164, -149))
 	for frame in range(60):
@@ -94,6 +152,14 @@ func collisions() -> void:
 	check(game.model.position.y > -161, "Terrace ramps can also be walked back up without Space")
 	# Actual capsule trajectories against top, sides and underside, at 60/15Hz.
 	for rate in [60, 15]:
+		fixture(Vector3(67, -182, -176))
+		for frame in range(rate):
+			game.advance(1.0 / rate, Vector2(0, -1), 0, false)
+		check(game.model.position.z > -185, "The far fracture face blocks real forward swimming")
+		fixture(Vector3(67, -178, -176))
+		for frame in range(rate):
+			game.advance(1.0 / rate, Vector2.ZERO, 0, true)
+		check(game.model.position.y > -174, "The visible fracture is open to Space ascent")
 		for fast in [false, true]:
 			fixture(Vector3(67, -154, -136))
 			for frame in range(rate * 2):

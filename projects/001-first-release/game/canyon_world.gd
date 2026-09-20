@@ -10,7 +10,7 @@ func _ready() -> void:
 	# Broad shelves alternate with ramps: walk without Space, then choose a drop.
 	_ribbon("WestTerraces", Vector3(67, -160, -130), Vector3(0, 0, -1), 96, 14, 18, 0)
 	_ribbon("EastSlope", Vector3(131, -168, -151), Vector3(0, 0, -1), 85, 12, 22, 1)
-	_ribbon("RockBridge", Vector3(67, -184, -194), Vector3.RIGHT, 66, 11, 7, 2)
+	_ribbon("RockBridge", Vector3(49, -184, -194), Vector3.RIGHT, 116, 11, 7, 2)
 	# Deep enough to enter beneath the bridge and emerge on either side.
 	_ribbon("LowerBalcony", Vector3(78, -211, -187), Vector3(0, 0, -1), 58, 17, 16, 1)
 	# Continuous asymmetric rock strata, with an open tidal saddle at the bridge.
@@ -83,6 +83,23 @@ func _cliff_ring(distance: float, side: int) -> Array[Vector3]:
 		Vector2(1, -31),
 		Vector2(0, -31)
 	]
+	if side > 0:
+		# A recessed, sloping shore with a collapsed bay, not a phase-shifted copy
+		# of the western shelves. The middle opens onto offshore wildlife.
+		top = _east_section(distance, false)
+		inner = _east_section(distance, true)
+		height = top - bottom
+		profile = [
+			Vector2(0, -4),
+			Vector2(.07, 5),
+			Vector2(.24, 8),
+			Vector2(.29, 3),
+			Vector2(.56, 5),
+			Vector2(.73, 17),
+			Vector2(1, 26),
+			Vector2(1, -38),
+			Vector2(.13, -27)
+		]
 	var result: Array[Vector3] = []
 	for index in range(profile.size()):
 		var next := (index + 1) % profile.size()
@@ -104,9 +121,29 @@ func _cliff_ring(distance: float, side: int) -> Array[Vector3]:
 	return result
 
 
+func _east_section(distance: float, horizontal: bool) -> float:
+	var sections := [
+		Vector3(0, -211, 178),
+		Vector3(16, -151, 166),
+		Vector3(38, -178, 174),
+		Vector3(53, -219, 185),
+		Vector3(76, -248, 193),
+		Vector3(98, -190, 165),
+		Vector3(115, -184, 171),
+		Vector3(132, -246, 194)
+	]
+	for index in range(sections.size() - 1):
+		var a: Vector3 = sections[index]
+		var b: Vector3 = sections[index + 1]
+		if distance <= b.x:
+			var p := a.lerp(b, smoothstep(a.x, b.x, distance))
+			return p.z if horizontal else p.y
+	return sections[-1].z if horizontal else sections[-1].y
+
+
 static func height_at(distance: float, style: int) -> float:
 	if style == 2:
-		return sin(distance / 66 * PI) * 3
+		return sin(clampf(distance / 66, 0, 1) * PI) * 3
 	if style == 1:
 		return -distance * .27
 	# Six weathered steps between observation shelves. Bevels are visible and
@@ -140,6 +177,8 @@ func _ribbon(
 			corners.append(_surface(start, direction, across, longitudinal, -1, width, style))
 			corners.append(_surface(start, direction, across, longitudinal, 1, width, style))
 		for lane in range(8):
+			if _terrace_cut(style, row, lane):
+				continue
 			var left := lane / 4.0 - 1
 			var right := (lane + 1) / 4.0 - 1
 			_quad(
@@ -156,6 +195,32 @@ func _ribbon(
 				_under(start, direction, across, row + stride, left, width, thickness, style),
 				_under(start, direction, across, row, left, width, thickness, style)
 			)
+			for edge in [-1, 1]:
+				if _terrace_cut(style, row, lane + edge):
+					var rim := left if edge < 0 else right
+					_quad(
+						st,
+						_surface(start, direction, across, row, rim, width, style),
+						_under(start, direction, across, row, rim, width, thickness, style),
+						_under(
+							start, direction, across, row + stride, rim, width, thickness, style
+						),
+						_surface(start, direction, across, row + stride, rim, width, style)
+					)
+			for edge in [-1, 1]:
+				if _terrace_cut(style, row + edge * stride, lane):
+					_cap(
+						st,
+						start,
+						direction,
+						across,
+						row if edge < 0 else row + stride,
+						lane,
+						width,
+						thickness,
+						style,
+						edge > 0
+					)
 		var under: Array[Vector3] = []
 		for longitudinal in [row, row + stride]:
 			for lane in [-1, 1]:
@@ -163,7 +228,8 @@ func _ribbon(
 					_under(start, direction, across, longitudinal, lane, width, thickness, style)
 				)
 		_quad(st, corners[0], under[0], under[2], corners[2])
-		_quad(st, corners[3], under[3], under[1], corners[1])
+		if not _terrace_cut(style, row, 7):
+			_quad(st, corners[3], under[3], under[1], corners[1])
 		if row == 0:
 			for lane in range(8):
 				_cap(st, start, direction, across, row, lane, width, thickness, style, false)
@@ -179,6 +245,12 @@ func _ribbon(
 	Collision.build(root)
 
 
+func _terrace_cut(style: int, distance: float, lane: int) -> bool:
+	# A collapsed outer terrace leaves a narrow wall-side shelf. Walking around
+	# and swimming through the break are choices within the same piece of rock.
+	return style == 0 and distance >= 40 and distance < 52 and lane >= 3 and lane < 8
+
+
 func _surface(
 	start: Vector3,
 	direction: Vector3,
@@ -188,8 +260,14 @@ func _surface(
 	width: float,
 	style: int
 ) -> Vector3:
+	if style == 0:
+		# Eroded fracture lips, not a rectangular hole cut from a tiled stair.
+		var mouth := exp(-pow((distance - 40) / 3, 2))
+		var far_lip := exp(-pow((distance - 52) / 3, 2))
+		distance = maxf(0, distance + (-mouth * 1.5 + far_lip * 1.8) * (1 - lane * lane))
 	var mid := start + direction * distance
-	mid.y += height_at(distance, style)
+	var section := distance - 18 if style == 2 else distance
+	mid.y += height_at(section, style)
 	var half := width * .5 + sin(distance * .21) * 1.3 + sin(distance * .61) * .4
 	# Irregular outer lips around a reliable walking line; geometry and collision
 	# are the same surface. Broad bays replace a uniform rectangular walkway.
@@ -198,11 +276,19 @@ func _surface(
 		var neck := smoothstep(20, 24, distance) * (1 - smoothstep(34, 38, distance))
 		half *= 1 - .65 * neck
 	if style == 2:
-		var arch := sin(clampf(distance / 66, 0, 1) * PI)
-		half = 7.5 - 4 * arch + sin(distance * .36) * .7
+		var arch := sin(clampf(section / 66, 0, 1) * PI)
+		half = 7.5 - 4 * arch + sin(section * .36) * .7
+		half += pow(maxf(0, sin(section * .21 + .6)), 2) * 3.5
 		mid += across * arch * arch * 1.8
+		# Broad, uneven remnants sink into both shores. The south edge stays open
+		# for the wildlife passage; most of the root mass spreads to the north.
+		var root := (1 - smoothstep(-8, 12, section)) + smoothstep(57, 80, section)
+		half += root * (10 + sin(section * .18) * 2)
+		mid += across * root * (23 if section > 33 else 8)
 	mid += across * half * lane
 	mid.y += pow(absf(lane), 3) * (sin(distance * .4) * .7 - .5)
+	if style == 2:
+		mid.y += lane * lane * (sin(section * .23 + lane) * 2.4 - 1.2)
 	return mid
 
 
@@ -219,7 +305,10 @@ func _under(
 	var point := _surface(start, direction, across, distance, lane, width, style)
 	var depth := thickness
 	if style == 2:
-		depth = 4 + 10 * pow(1 - sin(clampf(distance / 66, 0, 1) * PI), 2)
+		var section := distance - 18
+		depth = 4 + 10 * pow(1 - sin(clampf(section / 66, 0, 1) * PI), 2)
+		depth += 50 * (1 - smoothstep(-7, 9, section))
+		depth += 59 * smoothstep(60, 88, section)
 	depth *= 1 - .32 * lane * lane
 	point.y -= depth
 	point -= across * lane * 1.1

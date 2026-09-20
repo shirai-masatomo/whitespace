@@ -15,16 +15,16 @@
 
 ## 検証と同期
 
-`git fetch origin main` 後、正本2文書は `origin/main` の `773d9c3` を確認。HUMAN_DIRECTIONは正本本文と会話補足を分離、EXTERNAL_AI_REVIEWは正本と一致。最新外部レビューの未実装指示はDD-064/065/067/068を具体化し、酸素以外の見返りをDD-069（P0）へ追加。
+`git fetch origin main` 後、正本2文書は `origin/main` の `f9d5d7a` を確認。HUMAN_DIRECTIONは正本本文と会話補足を分離、EXTERNAL_AI_REVIEWは正本と一致。最新外部レビューの未実装指示はDD-064/065/067/068を具体化し、酸素以外の見返りはDD-069、左右非対称と岩橋の地形統合はDD-070（P0）。
 
-最終コードで `./dev.ps1 check -BuildFolder windows-agent` 成功。format/lint/依存、ルール479・シーン430・音57・実衝突689・探索30・岩礁/藻庭救助157・入水17・峡谷41、補助の表面2688点、既存11経路、Windows export/EXE headless起動。逆向き歩行の速度消失も修正。今回のForward+/Compatibility峡谷画面・両方式の通常入水・Forward+アーチ連続試走/標準visual救助/ゴール・配布EXE Forward+120フレーム描画も成功。生物の中心/翼の移動線が壁を横切らないことを検査。GPUは画面外・無音・非捕捉で行い、Codexが起動したプロセスのみ終了。
+最終コードで `./dev.ps1 check -BuildFolder windows-agent` 成功。format/lint/依存、ルール479・シーン430・音57・実衝突689・探索30・岩礁/藻庭救助157・入水17・峡谷51、補助の表面2688点、既存11経路、Windows export/EXE headless起動。崩落部の実壁接触/Space開口と歩行・遊泳の比較を追加。今回のForward+/Compatibility峡谷画面・両方式の通常入水・Forward+アーチ連続試走/標準visual救助/ゴール・配布EXE Forward+120フレーム描画も成功。生物の中心/翼の移動線が壁を横切らないことを検査。GPUは画面外・無音・非捕捉で行い、Codexが起動したプロセスのみ終了。
 
-GitHubは[下書きPR #2](https://github.com/shirai-masatomo/whitespace/pull/2)、作業ブランチは `codex/dive-dive-playground`。峡谷版 `286e018` のCI（run92）は成功。次のアーチ版はpush後に対象SHAと照合する。ユーザーの継続的な明示許可を受け、30分ごとの自律再開設定 `dive-dive` をACTIVEで作成済み。同じ範囲の再承認は不要。許可範囲・除外事項はAUTONOMYに記録。ゲームの判定はCHANGESのまま。
+GitHubは[下書きPR #2](https://github.com/shirai-masatomo/whitespace/pull/2)、作業ブランチは `codex/dive-dive-playground`。前版 `6d1cf49` のCI（run94）は成功。今回版はpush後に対象SHAと照合する。ユーザーの継続的な明示許可を受け、30分ごとの自律再開設定 `dive-dive` をACTIVEで作成済み。同じ範囲の再承認は不要。許可範囲・除外事項はAUTONOMYに記録。ゲームの判定はCHANGESのまま。
 
 ## 未解決と次の作業
 
 1. DD-064: 通常入水で泡の先のアーチを予告する配置を比較済み。近すぎる重なり案と岩の輪を棄却。次は藻庭の横穴/深部を調べる理由、アーチの自然な輪郭。
-2. DD-065 / DD-068: 層状岸壁へ再試作し、平板だった初案を棄却。反復は減ったが岩橋はまだ人工的。岩段差/狭棚は実入力で往復可能だが、入力/速度/視線のリズム差はまだ弱い。
+2. DD-065 / DD-068: 層状岸壁へ再試作し、平板だった初案を棄却。東岸を退いた崩落湾、西岸を張り出す段丘へ分離。岩橋の根を広く深く壁へ埋めた。段丘の崩落部では狭棚を歩く4.80秒（接地258/258）と泳ぐ3.93秒（浮上50フレーム）が分かれる。岩橋の整った中央線/断崖端の人工物感はまだ残る。
 3. DD-069/067: 生物観察への寄り道は往復可能。次は生物の先に見える別の場所/深部予告を比較。4場面の前後比較では峡谷の反復減少と入水での先の予告を確認。段差の操作リズムは今回改善に数えない。面白さの判定はCHANGES。
 
 環境メモ: sandbox内のGodot importはAppData設定/証明書にアクセスできず失敗する。この環境では通常権限でheadless checkを実行する。

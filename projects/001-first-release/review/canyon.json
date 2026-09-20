@@ -1,9 +1,9 @@
 {
-  "checks": 41,
+  "checks": 51,
   "failed": false,
   "observations": {
     "inside_seconds": 5.96666666666665,
-    "journey_seconds": 39.899999999999,
+    "journey_seconds": 40.2666666666657,
     "outside_seconds": 4.99999999999999,
     "oxygen_100_bridge_false": {
       "arrived": true,
@@ -13,7 +13,7 @@
     "oxygen_100_bridge_true": {
       "arrived": true,
       "oxygen": 100.0,
-      "seconds": 4.79999999999999
+      "seconds": 4.78333333333332
     },
     "oxygen_30_bridge_false": {
       "arrived": false,
@@ -23,15 +23,31 @@
     "oxygen_30_bridge_true": {
       "arrived": true,
       "oxygen": 100.0,
-      "seconds": 4.79999999999999
+      "seconds": 4.78333333333332
     },
-    "terrace_end": "Vector3(66.47063, -183.99934, -198.47678)",
-    "walking_frames": 570,
+    "terrace_end": "Vector3(66.93993, -184.0254, -183.4126)",
+    "terrace_shelf": {
+      "ascent_frames": 0,
+      "oxygen": 80.8000000000011,
+      "position": "Vector3(66.49992, -178.9711, -187.44821)",
+      "seconds": 4.79999999999999,
+      "swimming_frames": 0,
+      "walking_frames": 258
+    },
+    "terrace_swim": {
+      "ascent_frames": 50,
+      "oxygen": 84.2666666666676,
+      "position": "Vector3(67.00006, -176.49069, -187.305)",
+      "seconds": 3.93333333333332,
+      "swimming_frames": 165,
+      "walking_frames": 41
+    },
+    "walking_frames": 416,
     "wildlife_100": {
       "arrived": true,
       "outside_oxygen": 61.7333333333353,
       "returned": true,
-      "seconds": 19.4500000000002
+      "seconds": 19.5000000000002
     },
     "wildlife_35": {
       "arrived": false,
