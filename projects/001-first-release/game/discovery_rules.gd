@@ -8,7 +8,7 @@ const STREAM: Array[Vector3] = [
 
 static func bubbles(time: float) -> Array[Dictionary]:
 	return [
-		{"center": Vector3(-22 + sin(time * .12) * 2, -28, -22), "radius": 7.5},
+		{"center": Vector3(-15 + sin(time * .12) * 2, -20, -32), "radius": 7.5},
 		{"center": Vector3(-52, -99 + sin(time * .1), -60), "radius": 5.0}
 	]
 

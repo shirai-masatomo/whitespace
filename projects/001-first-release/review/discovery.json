@@ -2,13 +2,13 @@
   "checks": 19,
   "failed": false,
   "observations": {
-    "bubble_depth_change": 0.150846481323242,
+    "bubble_depth_change": -5.88191795349121,
     "bubble_off": {
-      "depth": 36.9999465942383,
+      "depth": 29.0000629425049,
       "oxygen": 31.9999999999996
     },
     "bubble_on": {
-      "depth": 23.8192253112793,
+      "depth": 15.8192052841187,
       "oxygen": 100.0
     },
     "current_off": {
@@ -21,7 +21,7 @@
       "oxygen": 84.0000000000009,
       "position": "Vector3(-63.922943, -67.63613, -22.001923)"
     },
-    "discovery_seconds": 21.6833333333334,
+    "discovery_seconds": 22.5333333333333,
     "refuge_detour": {
       "oxygen": 100.0,
       "seconds": 7.71666666666664,

@@ -1,5 +1,37 @@
 {
-  "checks": 10,
+  "checks": 17,
+  "choices": {
+    "oxygen_100_bubble_false": {
+      "arrived": true,
+      "oxygen": 100.0,
+      "seconds": 4.44999999999999
+    },
+    "oxygen_100_bubble_true": {
+      "arrived": true,
+      "oxygen": 100.0,
+      "seconds": 2.3
+    },
+    "oxygen_10_bubble_false": {
+      "arrived": false,
+      "oxygen": 0.0,
+      "seconds": 2.51666666666666
+    },
+    "oxygen_10_bubble_true": {
+      "arrived": true,
+      "oxygen": 100.0,
+      "seconds": 2.3
+    },
+    "oxygen_20_bubble_false": {
+      "arrived": true,
+      "oxygen": 100.0,
+      "seconds": 4.44999999999999
+    },
+    "oxygen_20_bubble_true": {
+      "arrived": true,
+      "oxygen": 100.0,
+      "seconds": 2.3
+    }
+  },
   "failed": false,
   "seconds": 11.5500000000002
 }

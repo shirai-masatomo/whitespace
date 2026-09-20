@@ -13,6 +13,22 @@ func run() -> void:
 	await physics_frame
 	game.set_physics_process(false)
 	game.begin()
+	# Inspect the actual starting view as well as deliberately aimed comparisons.
+	# This journey uses W only, with no mouse/camera changes or target steering.
+	record_sequence = false
+	if gpu:
+		await capture("68-default-pier")
+	for frame in range(600):
+		await tick(Vector2(0, -1))
+		if game.model.depth > 5:
+			break
+	check(game.model.depth > 5, "Straight forward input enters the ocean")
+	var entry_start: Vector3 = game.model.position
+	if gpu:
+		await capture("69-default-entry")
+	game.restart()
+	simulation_frames = 0
+	record_sequence = true
 	await photo("50-pier-choices", Vector3(20, -8, -28))
 	for frame in range(600):
 		await tick(Vector2(1, -1).normalized())
@@ -56,9 +72,29 @@ func run() -> void:
 	check(
 		await swim(Vector3(49, -40, -50), 12, false, false), "The lateral opening joins the shaft"
 	)
+	var journey_seconds: float = game.model.elapsed
+	record_sequence = false
+	for oxygen in [10, 20, 100]:
+		for bubble in [false, true]:
+			fixture(entry_start)
+			game.model.oxygen = oxygen
+			var target: Vector3 = Places.bubbles(0)[0].center if bubble else Vector3(32, -28.2, -25)
+			var arrived := await reach_oxygen(target)
+			observations["oxygen_%d_bubble_%s" % [oxygen, bubble]] = {
+				"arrived": arrived, "seconds": game.model.elapsed, "oxygen": game.model.oxygen
+			}
+			check(arrived or oxygen < 100, "Both initial destinations can be reached with full air")
 	var file := FileAccess.open("res://artifacts/entry.json", FileAccess.WRITE)
 	file.store_string(
-		JSON.stringify({"checks": checks, "failed": failed, "seconds": game.model.elapsed}, "  ")
+		JSON.stringify(
+			{
+				"checks": checks,
+				"failed": failed,
+				"seconds": journey_seconds,
+				"choices": observations
+			},
+			"  "
+		)
 	)
 	file.close()
 	if gpu:
@@ -69,3 +105,14 @@ func run() -> void:
 	await process_frame
 	print("Entry: %d checks, failed=%s" % [checks, failed])
 	quit(1 if failed else 0)
+
+
+func reach_oxygen(target: Vector3) -> bool:
+	for frame in range(900):
+		var offset: Vector3 = target - game.model.position
+		await tick((Vector2(offset.x, offset.z) / 4).limit_length(), 0, offset.y > 1)
+		if game.model.mode != game.model.Mode.DIVING:
+			return false
+		if game.model.oxygen == 100:
+			return true
+	return false

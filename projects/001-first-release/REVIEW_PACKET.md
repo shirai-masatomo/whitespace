@@ -8,16 +8,19 @@
 
 ## 前版との画面比較
 
-峡谷の基準は `417f894`、入水の基準は直前の `7895b60`。裂け目内側は同サイクルの加工前後。峡谷は同じプレイヤー位置・視線の向き・酸素100%から通常カメラで撮影。入水は同じ入力/視線で比較し、今回修正対象のカメラ位置は変わる。GPU粒子の位相は一致しない。到達までの連続プレイと、比較用の開始点は区別する。
+峡谷の基準は `417f894`、入水の基準は直前の `7895b60`。裂け目内側は同サイクルの加工前後。峡谷は同じプレイヤー位置・視線の向き・酸素100%から通常カメラで撮影。入水は同じ入力/視線で比較し、今回修正対象のカメラ位置は変わる。通常視点69は両版とも開始からWだけ、視線を調整していない。GPU粒子の位相は一致しない。到達までの連続プレイと、比較用の開始点は区別する。
 
 | 場面 | 前 | 今 | 自己批評 |
 | --- | --- | --- | --- |
-| 入水5m | [前](review/entry-before/51-enter-ocean.png) | [今](review/51-enter-ocean.png) | 岩礁の法線/影を修正、横の切れ目を追加。海藻の陰で入口は小さく、中央の藻へ向かう一択感は残る。未合格 |
+| 通常視点の入水5m | [前（15a0938）](review/entry-before/69-default-entry.png) | [今](review/69-default-entry.png) | 前進だけの同じ開始カメラ。水面裏の帯を解消し、左の巨大泡/右の藻庭が画面内へ。横穴と未知への誘いはまだ弱い |
+| 藻庭へ視線を合わせた入水5m | [前](review/entry-before/51-enter-ocean.png) | [今](review/51-enter-ocean.png) | 岩礁の法線/影を修正、横の切れ目を追加。海藻の陰で入口は小さく、中央の藻へ向かう一択感は残る。未合格 |
 | 裂け目内35m | [加工前](review/entry-before/66-inside-reef-cleft.png) | [今](review/66-inside-reef-cleft.png) | 垂直な板壁と格子状の縁を、窪みと連続した輪郭へ。まだ均質な岩材と細い通路感が残る |
 | 岸壁の入口140m | [前](review/canyon-before/60-canyon-approach.png) | [今](review/canyon/60-canyon-approach.png) | 旧アーチの下側が塞いだ画面から、歩く段丘と横断橋が見える場所へ。壁の塊と橋は人工的 |
 | 内部177m | [前](review/canyon-before/61-canyon-interior.png) | [今](review/canyon/61-canyon-interior.png) | 橋の中央を削り、上の補給/下の藻庭/外側の切れ目を観察できる。まだ均質な通路感 |
 
-![峡谷の現在](review/canyon/61-canyon-interior.png)
+![通常の入水画面](review/69-default-entry.png)
+
+[通常の海上開始](review/68-default-pier.png) / [GLの入水](review/compatibility/69-default-entry.png) / [峡谷全体](review/canyon/61-canyon-interior.png)
 
 [浅海の横穴を見つける](review/65-cleft-choice.png) / [GLの横穴](review/compatibility/66-inside-reef-cleft.png) / [段丘を歩く](review/canyon/63-walk-terrace.png) / [橋の上から潜る](review/canyon/64-crossing.png) / [外側](review/canyon/62-canyon-exterior.png) / [水面光](review/52-surface-light.png) / [GL峡谷](review/compatibility/61-canyon-interior.png) / [連続画像](review/sequence/index.html)。
 
@@ -56,6 +59,12 @@
 [橋を削る前（333d31c）](review/canyon-before/61-pre-erosion.png) → [今](review/canyon/61-canyon-interior.png)。中央の厚さ/幅を減らして下面を曲面にし、上下の抜けを改善。[段差と狭棚](review/canyon/67-rock-steps.png)は歩いて下降/登り返し可能。粗い1mメッシュで段差が潰れた初案を細分化した。570フレーム連続接地、峡谷周回約40秒、補給の2択は約4.8/8.3秒を維持。
 
 中央のSpace浮上は下面で止まり、端では実接触後に曲面へ沿って滑る。古い平面橋と同じ停止高さを要求する試験を修正し、中央と端を別々に検証。形は変わったが岩材・反復する側壁はまだ模型的。階段の移動感の違いも画面では弱く、DD-068/067を完了にはしない。
+
+## 通常カメラから入水を再評価
+
+視線を合わせた画面だけでは見落としていた、水面裏の平らな帯を発見。水面へ斜めに向く視線の透過と波の法線で作り直した。左の巨大泡は最初の移設でも画面下へ切れたため、20mへ上げて再比較。新しいオブジェクトは増やしていない。
+
+同じ入水点からEなしで、泡は約2.3秒/藻庭は4.45秒で実補給。酸素20%なら両方届き、10%では泡へ届くが藻庭直行は救助。残量条件を明示し、20%の結果を選択差と誤認しない。泡から潮流/アーチへの旅は約22.5秒、通常の岩礁/洞窟/450m経路も維持。前後画像で帯と視野外だった行き先は改善。ただし初見での好奇心や面白さは未合格。
 
 ## 判定と次
 

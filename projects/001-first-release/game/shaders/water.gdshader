@@ -51,12 +51,18 @@ void fragment(){
  base+=vec3(1.0,0.89,0.65)*glint*1.5;
  float shore=(1.0-smoothstep(0.2,1.8,thickness))*smoothstep(0.38,0.70,noise(p*2.1+TIME*0.2));
  base=mix(base,vec3(0.65,0.80,0.79),shore*0.7);
- vec3 underside=vec3(0.025,0.15,0.20)+ripple(p)*0.025;
- float window=smoothstep(0.42,0.86,-v.y);
- float sun_window=pow(max(0.0,dot(-v,normalize(vec3(0.18,0.70,-0.67)))),180.0);
- underside+=vec3(0.18,0.38,0.44)*window+vec3(1.0,0.93,0.72)*sun_window*1.2;
+ // Grazing rays blend into the water column instead of ending in a flat teal
+ // strip. Ripple normals deform the bright surface window and its sun image.
+ float incidence=clamp(dot(-v,n),0.0,1.0);
+ float window=smoothstep(0.54,0.82,incidence);
+ float folds=smoothstep(0.025,0.14,length(slope));
+ vec3 underside=mix(vec3(0.016,0.09,0.16),vec3(0.06,0.21,0.29),folds);
+ vec3 refracted_sun=normalize(vec3(0.18,0.70,-0.67)+vec3(slope.x,0.0,slope.y)*0.7);
+ float sun_window=pow(max(0.0,dot(-v,refracted_sun)),100.0);
+ underside+=vec3(0.20,0.40,0.48)*window+vec3(1.0,0.93,0.72)*sun_window*1.2;
  ALBEDO=mix(base,underside,underwater);
  float distance_fade=1.0-smoothstep(500.0,1150.0,length(CAMERA_POSITION_WORLD.xz-p));
  float depth_fade=exp(-max(0.0,surface_level-CAMERA_POSITION_WORLD.y-20.0)/35.0);
- ALPHA=mix(0.99,depth_fade,underwater)*distance_fade;
+ float grazing_fade=smoothstep(0.01,0.24,max(0.0,-v.y));
+ ALPHA=mix(0.99,depth_fade*grazing_fade,underwater)*distance_fade;
 }
