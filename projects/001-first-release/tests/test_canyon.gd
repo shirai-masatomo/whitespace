@@ -42,6 +42,8 @@ func run() -> void:
 		await cove_exploration()
 		await cove_window_routes()
 		await cove_current_control()
+		await current_choices()
+		await current_detours()
 		await finish("cove")
 		return
 	for view in [
@@ -63,6 +65,8 @@ func run() -> void:
 	await cove_exploration()
 	await cove_window_routes()
 	await cove_current_control()
+	await current_choices()
+	await current_detours()
 	wildlife_clearance()
 	var output := "canyon-authored" if authored else "canyon"
 	await finish(output)
@@ -660,3 +664,82 @@ func cove_current_control() -> void:
 		returned and game.model.oxygen == 100,
 		"At the 80 percent decision point, turning back to the cove algae is viable"
 	)
+
+
+func current_choices() -> void:
+	var original: float = game.model.config.cove_stream_speed
+	for speed in [18.0, 21.0, 24.0]:
+		game.model.config.cove_stream_speed = speed
+		for stage in [1, 2]:
+			var origin: Vector3 = (
+				Places.COVE_STREAM[2]
+				if stage == 1
+				else Places.COVE_STREAM[3].lerp(Places.COVE_STREAM[4], .5)
+			)
+			for mode in ["ride", "side", "space", "fast"]:
+				fixture(origin)
+				for frame in range(180):
+					await tick(
+						Vector2.LEFT if mode == "side" else Vector2.ZERO,
+						1 if mode == "fast" else 0,
+						mode == "space"
+					)
+				var influence := (
+					Places.sample_path(Places.COVE_STREAM, game.model.position, speed).length()
+				)
+				observations["current_%d_%d_%s" % [speed, stage, mode]] = {
+					"end": var_to_str(game.model.position),
+					"oxygen": game.model.oxygen,
+					"influence": influence
+				}
+				if mode != "ride":
+					check(
+						influence < 1,
+						"The %d m/s current allows %s escape at segment %d" % [speed, mode, stage]
+					)
+	game.model.config.cove_stream_speed = original
+
+
+func current_detours() -> void:
+	# Real route continuations after leaving the flow, not empty-water exit checks.
+	for stage in [1, 2]:
+		fixture(
+			(
+				Places.COVE_STREAM[2]
+				if stage == 1
+				else Places.COVE_STREAM[3].lerp(Places.COVE_STREAM[4], .5)
+			)
+		)
+		for frame in range(180):
+			await tick(Vector2.ZERO if stage == 1 else Vector2.LEFT, 0, stage == 1)
+		var targets := [
+			Vector3(123, -236, -238),
+			Vector3(112, -219, -222),
+			Vector3(92, -219, -220),
+			Gardens.PLANTS[7] + Vector3.UP
+		]
+		if stage == 2:
+			targets = [Vector3(38, -244, -96), game.model.platforms[16].position + Vector3.UP]
+		var arrived := true
+		for target in targets:
+			if arrived:
+				arrived = await swim(target, 15, false, false)
+		print(
+			"Current detour ",
+			stage,
+			": ",
+			arrived,
+			" at ",
+			game.model.position,
+			" oxygen ",
+			game.model.oxygen,
+			" seconds ",
+			game.model.elapsed
+		)
+		check(
+			arrived and game.model.oxygen == 100,
+			"Leaving current segment %d can reach an existing refuge" % stage
+		)
+		observations["current_detour_%d" % stage] = {
+			"arrived": arrived, "oxygen": game.model.oxygen, "seconds": game.model.elapsed
+		}

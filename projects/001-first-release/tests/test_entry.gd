@@ -1,4 +1,17 @@
 extends "res://tests/test_discovery.gd"
+var follow_heading := false
+
+
+func tick(axis: Vector2 = Vector2.ZERO, descent: float = 0, ascend: bool = false) -> void:
+	if not follow_heading:
+		await super.tick(axis, descent, ascend)
+		return
+	if axis.length() > .1:
+		game.yaw = lerp_angle(game.yaw, atan2(-axis.x, -axis.y), .035)
+	var local := Vector3(axis.x, 0, axis.y).rotated(Vector3.UP, -game.yaw)
+	game.advance(1.0 / 60, Vector2(local.x, local.z), descent, ascend)
+	if gpu:
+		await render_step()
 
 
 func run() -> void:
@@ -102,6 +115,7 @@ func run() -> void:
 				"arrived": arrived, "seconds": game.model.elapsed, "oxygen": game.model.oxygen
 			}
 			check(arrived or oxygen < 100, "Both initial destinations can be reached with full air")
+	await normal_entry()
 	var file := FileAccess.open("res://artifacts/entry.json", FileAccess.WRITE)
 	file.store_string(
 		JSON.stringify(
@@ -134,3 +148,58 @@ func reach_oxygen(target: Vector3) -> bool:
 		if game.model.oxygen == 100:
 			return true
 	return false
+
+
+func normal_entry() -> void:
+	var old_root := capture_root
+	var old_sequence := sequence.duplicate()
+	capture_root = "res://artifacts/entry-normal-" + RenderingServer.get_current_rendering_method()
+	DirAccess.make_dir_recursive_absolute(capture_root + "/sequence")
+	sequence.clear()
+	simulation_frames = 0
+	record_sequence = true
+	game.restart()
+	game.pitch = -.35
+	for frame in range(600):
+		await tick(Vector2(0, -1))
+		if game.model.depth > 5:
+			break
+	if gpu:
+		await capture("84-normal-entry")
+	follow_heading = true
+	check(
+		await swim(Vector3(32, -28, -25), 20, false, false),
+		"Normal-view entry reaches the optional garden"
+	)
+	if gpu:
+		await capture("85-normal-garden")
+	check(
+		await swim(Vector3(35, -29, -32), 8, false, false),
+		"The garden lip can be approached with ordinary steering"
+	)
+	if gpu:
+		await capture("86-normal-lip")
+	check(
+		await swim(Vector3(30, -32, -41), 10, false, false),
+		"Normal-view travel can enter the lateral cleft"
+	)
+	check(
+		await swim(Vector3(32, -38, -42), 8, false, false),
+		"The cleft permits actual descent into the reef"
+	)
+	if gpu:
+		await capture("87-normal-cleft")
+	check(
+		await swim(Vector3(49, -40, -50), 10, false, false),
+		"The second discovery joins the deeper shaft"
+	)
+	observations.normal_entry_seconds = game.model.elapsed
+	if gpu:
+		await capture("88-normal-shaft")
+		var file := FileAccess.open(capture_root + "/sequence/frames.json", FileAccess.WRITE)
+		file.store_string(JSON.stringify(sequence, "  "))
+		file.close()
+	follow_heading = false
+	record_sequence = false
+	capture_root = old_root
+	sequence = old_sequence

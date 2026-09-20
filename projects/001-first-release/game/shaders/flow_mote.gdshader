@@ -14,6 +14,6 @@ void vertex() {
 void fragment() {
  float core = pow(max(0.0, 1.0 - abs(UV.x * 2.0 - 1.0)), 2.0);
  float tip = sin(UV.y * 3.14159265);
- ALBEDO = vec3(0.48, 0.72, 0.79);
- ALPHA = core * tip * 0.5;
+ ALBEDO = vec3(0.36, 0.57, 0.55);
+ ALPHA = core * tip * 0.42;
 }

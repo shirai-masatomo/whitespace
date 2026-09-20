@@ -43,8 +43,15 @@ func _ready() -> void:
 	streak.shader = preload("res://game/shaders/flow_mote.gdshader")
 	for index in range(100):
 		var quad := QuadMesh.new()
-		quad.size = Vector2(.16, 2.0)
-		var mote := Geo.put(self, quad, streak)
+		# A mixture of fine bubbles and drifting fragments, not uniform speed lines.
+		var t := fposmod(index * .618034, 1.0)
+		var round_mote := index % 3 == 0
+		quad.size = (
+			Vector2.ONE * lerpf(.18, .48, t)
+			if round_mote
+			else Vector2(lerpf(.08, .17, t), lerpf(.25, 1.25, t * t))
+		)
+		var mote := Geo.put(self, quad, glow if round_mote else streak)
 		mote.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 		cove_motes.append(mote)
 	giant = Animal.new()
@@ -114,7 +121,10 @@ func update(time: float, cove_speed: float = 0) -> void:
 		length += Rules.COVE_STREAM[index].distance_to(Rules.COVE_STREAM[index + 1])
 	for index in range(cove_motes.size()):
 		cove_motes[index].visible = cove_speed > 0
-		var distance := fposmod(index * length / cove_motes.size() + time * cove_speed, length)
+		var distance := fposmod(
+			(index + .4 * sin(index * 2.399)) * length / cove_motes.size() + time * cove_speed,
+			length
+		)
 		var section := 0
 		while section < Rules.COVE_STREAM.size() - 2:
 			var span := Rules.COVE_STREAM[section].distance_to(Rules.COVE_STREAM[section + 1])
@@ -124,7 +134,10 @@ func update(time: float, cove_speed: float = 0) -> void:
 			section += 1
 		var flow := Rules.COVE_STREAM[section + 1] - Rules.COVE_STREAM[section]
 		var point := Rules.COVE_STREAM[section] + flow.normalized() * distance
-		point += Vector3(sin(index * 2.399), cos(index * 1.7), sin(index)) * 2.4
+		point += (
+			Vector3(sin(index * 2.399), cos(index * 1.7), sin(index))
+			* (1.2 + 2.0 * fposmod(index * .618034, 1.0))
+		)
 		cove_motes[index].position = point
 		var across := Vector3.UP.cross(flow.normalized()).normalized()
 		cove_motes[index].basis = Basis(across, flow.normalized(), across.cross(flow.normalized()))
