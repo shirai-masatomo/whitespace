@@ -6,6 +6,8 @@ var rays: Array[Node3D] = []
 var shoals: Array[Node3D] = []
 var origins: Array[Vector3] = []
 var reef_guide: Node3D
+var canyon_rays: Array[Node3D] = []
+var canyon_school: Node3D
 
 
 func _ready() -> void:
@@ -24,31 +26,46 @@ func _ready() -> void:
 		add_child(ray)
 		rays.append(ray)
 
+	# Optional wildlife passage: bridge -> open wall cut -> offshore overlook.
+	make_shoal(Vector3(124, -185, -195), 54)
+	canyon_school = shoals[-1]
+	for index in range(3):
+		var ray := make_ray()
+		ray.name = "CanyonRay%d" % index
+		ray.scale = Vector3.ONE * (2.4 if index == 0 else 1.1)
+		add_child(ray)
+		canyon_rays.append(ray)
+
+
+static func canyon_passage(time: float) -> Vector3:
+	# Smooth return trip, no escort objective or forced wait to unlock a route.
+	var progress := .5 - .5 * cos(time * .19)
+	if progress < .5:
+		return Vector3(113, -174, -211).lerp(Vector3(147, -184, -210), progress * 2)
+	return Vector3(147, -184, -210).lerp(Vector3(180, -202, -192), progress * 2 - 1)
+
 
 func make_ray() -> Node3D:
 	var animal := Node3D.new()
 	var st := SurfaceTool.new()
 	st.begin(Mesh.PRIMITIVE_TRIANGLES)
-	# Original swept diamond silhouette, rounded head and tapered trailing tail.
-	var rim := [
-		Vector3(0, .2, -2),
-		Vector3(1.1, .05, -1.2),
-		Vector3(3.6, 0, .5),
-		Vector3(1.1, -.05, 1),
-		Vector3(0, 0, 1.5),
-		Vector3(-1.1, -.05, 1),
-		Vector3(-3.6, 0, .5),
-		Vector3(-1.1, .05, -1.2)
-	]
-	for index in range(rim.size()):
-		for point in [Vector3(0, .28, 0), rim[(index + 1) % rim.size()], rim[index]]:
-			st.add_vertex(point)
+	# Closed, curved disc: nearby wildlife must not be a single paper triangle.
+	for face in [-1, 1]:
+		for row in range(24):
+			for lane in range(20):
+				var a := _ray_point(row / 24.0, lane / 10.0 - 1, face)
+				var b := _ray_point((row + 1) / 24.0, lane / 10.0 - 1, face)
+				var c := _ray_point((row + 1) / 24.0, (lane + 1) / 10.0 - 1, face)
+				var d := _ray_point(row / 24.0, (lane + 1) / 10.0 - 1, face)
+				var points := [a, b, c, a, c, d] if face > 0 else [a, d, c, a, c, b]
+				for point in points:
+					st.add_vertex(point)
 	st.generate_normals()
 	var mat := ShaderMaterial.new()
 	mat.shader = preload("res://game/shaders/ray.gdshader")
 	Geo.put(animal, st.commit(), mat)
 	for side in [-1, 1]:
-		Geo.sphere(animal, .11, Geo.material(Color("0a1f25")), Vector3(side * .34, .25, -1.35))
+		Geo.sphere(animal, .065, Geo.material(Color("0a1f25")), Vector3(side * .34, .32, -1.35))
 	var tail := Geo.put(
 		animal,
 		Geo.loft([Vector3(0, .13, .13), Vector3(4, .015, .015)], 8),
@@ -57,6 +74,14 @@ func make_ray() -> Node3D:
 	)
 	tail.rotation.x = PI / 2
 	return animal
+
+
+func _ray_point(t: float, lane: float, face: int) -> Vector3:
+	var z := -2 + t * 3.5
+	var width := sin(pow(t, .68) * PI) * (1.3 + 2.5 * sin(t * PI))
+	var thickness := .36 * pow(1 - lane * lane, 3) * sin(t * PI)
+	var camber := -.16 * lane * lane * sin(t * PI)
+	return Vector3(lane * width, camber + face * thickness, z)
 
 
 func update(player: Vector3, elapsed: float, giant: Vector3 = Vector3.INF) -> void:
@@ -81,6 +106,22 @@ func update(player: Vector3, elapsed: float, giant: Vector3 = Vector3.INF) -> vo
 	var destination := Vector3(12, -12, -18).lerp(Vector3(35, -22, -28), progress)
 	var separation := destination - player
 	reef_guide.position = destination + separation.normalized() * maxf(0, 6 - separation.length())
+
+	for index in range(canyon_rays.size()):
+		var time := elapsed + index * 1.7
+		var point := canyon_passage(time) + Vector3(0, -index * 1.5, index * 3)
+		var away := point - player
+		point += away.normalized() * maxf(0, 7 - away.length()) * .5
+		canyon_rays[index].position = point
+		var heading := canyon_passage(time + .3) - canyon_passage(time - .3)
+		canyon_rays[index].rotation.y = atan2(-heading.x, -heading.z)
+	var school_point := canyon_passage(elapsed + 3) + Vector3(0, -4, 0)
+	var school_away := school_point - player
+	canyon_school.position = (
+		school_point + school_away.normalized() * maxf(0, 8 - school_away.length())
+	)
+	var school_heading := canyon_passage(elapsed + 3.3) - canyon_passage(elapsed + 2.7)
+	canyon_school.rotation.y = atan2(school_heading.x, school_heading.z)
 
 
 func make_shoal(point: Vector3, count: int) -> void:

@@ -4,6 +4,7 @@ render_mode cull_disabled;
 varying vec3 wp;
 varying float tint_variation;
 uniform float caustic_strength = 1.0;
+uniform float strata_strength = 0.0;
 void vertex(){wp=(MODEL_MATRIX*vec4(VERTEX,1.0)).xyz;tint_variation=natural_hash(floor(MODEL_MATRIX[3].xyz*0.31));}
 void fragment(){
  vec3 dx=dFdx(wp),dy=dFdy(wp);
@@ -15,6 +16,10 @@ void fragment(){
  // Broken mineral seams and weathering, without repeating horizontal strata.
  float seam=1.0-smoothstep(0.015,0.07,abs(weather-0.47));
  vec3 stone=mix(vec3(0.13,0.18,0.18),vec3(0.39,0.37,0.29),broad*0.7+weather*0.3);
+ // Tilted sediment layers interrupted by erosion; restricted to canyon materials.
+ float bedding=natural_noise(vec3(wp.y*0.25+wp.z*0.025,wp.x*0.018,0.0));
+ vec3 layers=mix(vec3(.18,.20,.19),vec3(.43,.37,.27),smoothstep(.25,.7,bedding));
+ stone=mix(stone,layers,strata_strength*0.65);
  stone*=0.83+grain*0.30;
  stone=mix(stone,vec3(0.46,0.45,0.37),seam*0.16);
  stone*=mix(vec3(0.86,1.02,1.04),vec3(1.12,1.01,0.88),tint_variation);

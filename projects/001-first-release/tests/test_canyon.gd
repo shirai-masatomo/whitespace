@@ -28,6 +28,8 @@ func run() -> void:
 	await journeys()
 	await oxygen_choices()
 	await collisions()
+	await wildlife_detour()
+	wildlife_clearance()
 	var file := FileAccess.open("res://artifacts/canyon.json", FileAccess.WRITE)
 	file.store_string(
 		JSON.stringify({"checks": checks, "failed": failed, "observations": observations}, "  ")
@@ -135,3 +137,73 @@ func oxygen_choices() -> void:
 				check(game.model.oxygen == 100, "Arrival reaches the real oxygen volume")
 	check(observations.oxygen_30_bridge_true.arrived, "Low oxygen permits the upper refuge")
 	check(not observations.oxygen_30_bridge_false.arrived, "Low oxygen makes further depth risky")
+
+
+func wildlife_detour() -> void:
+	# From the existing bridge refuge, observe offshore wildlife and return.
+	# No refill, collectible or unlock is added to this optional place.
+	for oxygen in [35, 100]:
+		fixture(Gardens.PLANTS[6] + Vector3(4.5, 2, 0))
+		game.model.oxygen = oxygen
+		var arrived := await swim(Vector3(131, -178, -211), 12, false, false)
+		if arrived:
+			arrived = await swim(Vector3(149, -187, -210), 10, false, false)
+		if arrived:
+			await photo("70-tidal-window", Vector3(176, -204, -192))
+			arrived = await swim(Vector3(171, -202, -194), 10, false, false)
+		var outside_oxygen: float = game.model.oxygen
+		var returned := false
+		if arrived:
+			await photo("71-offshore-wildlife", Vector3(176, -207, -196))
+			returned = await swim(Vector3(149, -185, -210), 12, false, false)
+			if returned:
+				returned = await swim(Vector3(131, -178, -211), 12, false, false)
+			if returned:
+				returned = await swim(Gardens.PLANTS[6], 12, false, false)
+		observations["wildlife_%d" % oxygen] = {
+			"arrived": arrived,
+			"returned": returned,
+			"outside_oxygen": outside_oxygen,
+			"seconds": game.model.elapsed
+		}
+		if oxygen == 100:
+			check(
+				arrived and returned,
+				"Optional wildlife lookout and return are physically reachable"
+			)
+			check(outside_oxygen < 80, "Wildlife detour consumes oxygen; not another refill point")
+			check(game.model.oxygen == 100, "Return actually reaches the original algae")
+	check(
+		not observations.wildlife_35.returned, "Low oxygen makes staying at the refuge meaningful"
+	)
+	# Real capsule contact with the newly shaped wall, not a mesh-point comparison.
+	for rate in [60, 15]:
+		fixture(Vector3(70, -188, -152))
+		var touched := false
+		for frame in range(rate * 5):
+			game.advance(1.0 / rate, Vector2.LEFT, 0, false)
+			for body in game.motion.contact_bodies:
+				if "StratifiedWest" in str(body.get_path()):
+					touched = true
+		check(touched, "Lateral movement meets the visible stratified wall at %dHz" % rate)
+
+
+func wildlife_clearance() -> void:
+	# A moving clue must not suggest passing through solid geology.
+	var life = game.world.life
+	var space: PhysicsDirectSpaceState3D = game.get_world_3d().direct_space_state
+	var hits := 0
+	for frame in range(1, 241):
+		var time := frame * TAU / .19 / 240
+		var previous: Vector3 = life.canyon_passage(time - .04)
+		var current: Vector3 = life.canyon_passage(time)
+		var heading := (current - previous).normalized()
+		var across := Vector3(-heading.z, 0, heading.x)
+		for wing in [-7, 0, 7]:
+			var query := PhysicsRayQueryParameters3D.create(
+				previous + across * wing, current + across * wing, 1
+			)
+			if not space.intersect_ray(query).is_empty():
+				hits += 1
+	observations.wildlife_wall_crossings = hits
+	check(hits == 0, "Wildlife centre and wing corridors never cross solid cliff faces")

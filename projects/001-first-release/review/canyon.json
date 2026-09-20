@@ -1,5 +1,5 @@
 {
-  "checks": 34,
+  "checks": 41,
   "failed": false,
   "observations": {
     "inside_seconds": 5.96666666666665,
@@ -26,6 +26,19 @@
       "seconds": 4.79999999999999
     },
     "terrace_end": "Vector3(66.47063, -183.99934, -198.47678)",
-    "walking_frames": 570
+    "walking_frames": 570,
+    "wildlife_100": {
+      "arrived": true,
+      "outside_oxygen": 61.7333333333353,
+      "returned": true,
+      "seconds": 19.4500000000002
+    },
+    "wildlife_35": {
+      "arrived": false,
+      "outside_oxygen": 0.0,
+      "returned": false,
+      "seconds": 8.75000000000001
+    },
+    "wildlife_wall_crossings": 0
   }
 }
