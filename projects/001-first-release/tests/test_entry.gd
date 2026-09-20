@@ -116,6 +116,7 @@ func run() -> void:
 			}
 			check(arrived or oxygen < 100, "Both initial destinations can be reached with full air")
 	await normal_entry()
+	await garden_shoulder()
 	var file := FileAccess.open("res://artifacts/entry.json", FileAccess.WRITE)
 	file.store_string(
 		JSON.stringify(
@@ -203,3 +204,24 @@ func normal_entry() -> void:
 	record_sequence = false
 	capture_root = old_root
 	sequence = old_sequence
+
+
+func garden_shoulder() -> void:
+	# A visible high shoulder must be reachable, not a new background mound.
+	fixture(Vector3(32, -26.2, -25))
+	follow_heading = true
+	check(
+		await swim(Vector3(43, -21, -24), 12, false, false), "Garden permits the rising side route"
+	)
+	check(await swim(Vector3(54, -13, -15), 12, false, false), "Swim onto the high reef shoulder")
+	for frame in range(90):
+		await tick()
+	check(game.model.standing, "The shoulder actually supports the player")
+	if gpu:
+		await photo("95-garden-shoulder", Vector3(35, -35, -42))
+	check(
+		await swim(Vector3(61, -29, -38), 15, false, false), "The shoulder rejoins the outer reef"
+	)
+	observations.garden_shoulder_seconds = game.model.elapsed
+	observations.garden_shoulder_oxygen = game.model.oxygen
+	follow_heading = false

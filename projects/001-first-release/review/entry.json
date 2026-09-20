@@ -1,6 +1,9 @@
 {
-  "checks": 17,
+  "checks": 28,
   "choices": {
+    "garden_shoulder_oxygen": 65.8666666666686,
+    "garden_shoulder_seconds": 9.05000000000003,
+    "normal_entry_seconds": 13.6166666666669,
     "oxygen_100_bubble_false": {
       "arrived": true,
       "oxygen": 100.0,
@@ -30,8 +33,10 @@
       "arrived": true,
       "oxygen": 100.0,
       "seconds": 2.3
-    }
+    },
+    "shoal_max_turn_degrees_per_tenth": 2.55625549971157,
+    "shoal_wall_crossings": 0
   },
   "failed": false,
-  "seconds": 11.5500000000002
+  "seconds": 10.9833333333335
 }

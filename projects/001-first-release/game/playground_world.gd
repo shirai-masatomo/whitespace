@@ -110,7 +110,12 @@ func _reef_roof(x: float, z: float) -> float:
 	# a place visible from the refuge, instead of a slot hidden beyond a flat slab.
 	var inlet := smoothstep(28, 38, -z) * (1 - smoothstep(46, 54, -z))
 	inlet *= exp(-pow((x - 35) / 11, 2))
-	return Rules.reef_height(x, z) - inlet * 6
+	# A high northern root and a low cleft lip break the broad horizontal
+	# roof into a walk-around shoulder and a descending view into the reef.
+	var root := 12 * exp(-pow((x - 54) / 8, 2) - pow((z + 12) / 15, 2))
+	root += 7 * exp(-pow((x - 62) / 8, 2) - pow((z + 33) / 7, 2))
+	root *= smoothstep(4, 9, Vector2(x - 32, z + 25).length())
+	return Rules.reef_height(x, z) + root - inlet * 6
 
 
 func _reef_cell(x: int, z: int) -> bool:

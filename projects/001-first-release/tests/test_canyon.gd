@@ -44,6 +44,7 @@ func run() -> void:
 		await cove_current_control()
 		await current_choices()
 		await current_detours()
+		await continuous_current_choices()
 		await finish("cove")
 		return
 	for view in [
@@ -67,6 +68,7 @@ func run() -> void:
 	await cove_current_control()
 	await current_choices()
 	await current_detours()
+	await continuous_current_choices()
 	wildlife_clearance()
 	var output := "canyon-authored" if authored else "canyon"
 	await finish(output)
@@ -743,3 +745,74 @@ func current_detours() -> void:
 		observations["current_detour_%d" % stage] = {
 			"arrived": arrived, "oxygen": game.model.oxygen, "seconds": game.model.elapsed
 		}
+
+
+func continuous_current_choices() -> void:
+	var original: float = game.model.config.cove_stream_speed
+	# GPU captures only the selected speed; headless retains the alternatives.
+	for speed in [24.0] if gpu else [18.0, 21.0, 24.0]:
+		game.model.config.cove_stream_speed = speed
+		for stage in [1, 2]:
+			fixture(Gardens.PLANTS[7] + Vector3.UP * 2)
+			minimum_oxygen = 100
+			var entry := [
+				Vector3(88, -226, -230),
+				Vector3(89, -241, -252),
+				Vector3(91, -239, -267),
+				Places.COVE_STREAM[1],
+				Places.COVE_STREAM[2]
+			]
+			if stage == 2:
+				entry.append(Places.COVE_STREAM[3])
+				entry.append(Places.COVE_STREAM[3].lerp(Places.COVE_STREAM[4], .5))
+			var arrived := true
+			for index in range(entry.size()):
+				if arrived:
+					arrived = await swim(entry[index], 15, index >= 3, false)
+			check(
+				arrived, "Continuous oxygen reaches the %d m/s stage %d decision" % [speed, stage]
+			)
+			var decision_air: float = game.model.oxygen
+			if gpu:
+				await photo(
+					"91-current-return-choice" if stage == 1 else "92-current-rejoin-choice",
+					Gardens.PLANTS[7] if stage == 1 else game.model.platforms[16].position
+				)
+			# Leave diagonally: a separate three-second vertical/sideways action
+			# spent the oxygen needed for the last metres back to the refuge.
+			var exits := [
+				Vector3(123, -236, -238),
+				Vector3(112, -219, -222),
+				Vector3(92, -219, -220),
+				Gardens.PLANTS[7] + Vector3.UP
+			]
+			if stage == 2:
+				exits = [Vector3(38, -244, -96)]
+			for target in exits:
+				if arrived:
+					arrived = await swim(target, 15, false, false)
+			if stage == 2 and arrived:
+				# The refuge moves; chase its current position until actual contact,
+				# not an old waypoint within the generic three-metre arrival tolerance.
+				for frame in range(600):
+					if game.model.oxygen == 100 or game.model.mode != Model.Mode.DIVING:
+						break
+					var offset: Vector3 = (
+						game.model.platforms[16].position + Vector3.UP - game.model.position
+					)
+					await tick((Vector2(offset.x, offset.z) / 2).limit_length(), 0, offset.y > .5)
+			var result := {
+				"arrived": arrived and game.model.oxygen == 100,
+				"decision_oxygen": decision_air,
+				"minimum_oxygen": minimum_oxygen,
+				"seconds": game.model.elapsed,
+				"end_oxygen": game.model.oxygen,
+				"end": var_to_str(game.model.position)
+			}
+			observations["continuous_current_%d_%d" % [speed, stage]] = result
+			print("Continuous current ", speed, "/", stage, ": ", result)
+			if speed == 24:
+				check(result.arrived, "Continuous current choice refills without oxygen reset")
+			if gpu:
+				await capture("93-return-contact" if stage == 1 else "94-rejoin-contact")
+	game.model.config.cove_stream_speed = original

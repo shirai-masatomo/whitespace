@@ -1,5 +1,5 @@
 shader_type spatial;
-render_mode cull_disabled;
+render_mode cull_disabled, depth_prepass_alpha;
 varying float belly;
 uniform bool guided_motion = false;
 void vertex(){
@@ -18,8 +18,7 @@ void vertex(){
 void fragment(){
  // Nearby scenery must not cover the third-person camera while turning.
  float visibility = smoothstep(1.2, 3.4, length(VERTEX));
- float dither = fract(sin(dot(FRAGCOORD.xy, vec2(12.9898, 78.233))) * 43758.5453);
- if (dither > visibility) discard;
+ ALPHA = visibility;
  ALBEDO=mix(vec3(0.06,0.24,0.28),vec3(0.68,0.76,0.55),(1.0-smoothstep(-0.12,0.16,belly)));
  ROUGHNESS=0.32;
  METALLIC=0.45;
