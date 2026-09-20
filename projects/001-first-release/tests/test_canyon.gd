@@ -170,9 +170,15 @@ func collisions() -> void:
 	# Actual capsule trajectories against top, sides and underside, at 60/15Hz.
 	for rate in [60, 15]:
 		fixture(Vector3(67, -182, -176))
-		for frame in range(rate):
+		var fracture_contact := false
+		for frame in range(rate * 3):
 			game.advance(1.0 / rate, Vector2(0, -1), 0, false)
-		check(game.model.position.z > -185, "The far fracture face blocks real forward swimming")
+			for body in game.motion.contact_bodies:
+				fracture_contact = fracture_contact or "WestTerraces" in str(body.get_path())
+		check(
+			game.model.position.z > -185 and fracture_contact,
+			"The far fracture face blocks three seconds of real forward swimming"
+		)
 		fixture(Vector3(67, -178, -176))
 		for frame in range(rate):
 			game.advance(1.0 / rate, Vector2.ZERO, 0, true)
@@ -354,3 +360,8 @@ func early_return_choice() -> void:
 		check(
 			arrived != outside, "At 80% oxygen the early inside descent is safer than the full loop"
 		)
+		if outside:
+			check(
+				game.model.mode == Model.Mode.RETURNING,
+				"The long 80% route ends in seamless rescue, not a blocked-controller timeout"
+			)

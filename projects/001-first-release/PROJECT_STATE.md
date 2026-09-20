@@ -15,11 +15,11 @@
 
 ## 検証と同期
 
-`git fetch origin main` 後、正本2文書は `origin/main` の `f9d5d7a` を確認。HUMAN_DIRECTIONは正本本文と会話補足を分離、EXTERNAL_AI_REVIEWは正本と一致。最新外部レビューの未実装指示はDD-064/065/067/068を具体化し、酸素以外の見返りはDD-069、左右非対称と岩橋の地形統合はDD-070（P0）。
+`git fetch origin main` 後、正本2文書は `origin/main` の `510d614` を確認。HUMAN_DIRECTIONは正本本文と会話補足を分離、EXTERNAL_AI_REVIEWは正本と一致。最新外部レビューの未実装指示はDD-064/065/067/068を具体化し、酸素以外の見返りはDD-069、左右非対称と岩橋の地形統合はDD-070（P0）。
 
-最終コードで `./dev.ps1 check -BuildFolder windows-agent` 成功。format/lint/依存、ルール479・シーン430・音57・実衝突689・探索30・岩礁/藻庭救助157・入水17・峡谷54、補助の表面2688点、既存11経路、Windows export/EXE headless起動。崩落部の実壁接触/Space開口と歩行・遊泳の比較を追加。今回のForward+/Compatibility峡谷画面・両方式の通常入水・Forward+アーチ連続試走/標準visual救助/ゴール・配布EXE Forward+120フレーム描画も成功。生物の中心/翼の移動線が壁を横切らないことを検査。GPUは画面外・無音・非捕捉で行い、Codexが起動したプロセスのみ終了。
+最終コードで `./dev.ps1 check -BuildFolder windows-agent` 成功。format/lint/依存、ルール479・シーン430・音57・実衝突689・探索30・岩礁/藻庭救助157・入水17・峡谷55、補助の表面2688点、既存11経路、Windows export/EXE headless起動。今回の峡谷/生物の別入口はForward+/Compatibilityで実GPU画面・連続操作を確認、配布EXE Forward+120フレームも成功。生物の連続移動線（中心/左右7m）の壁横切り0。入水両方式/標準visual救助・ゴールは前版6d1cf49時点の確認を保持し、今回の景観改善には数えない。GPUは画面外・無音・非捕捉、自分のプロセスのみ終了。
 
-GitHubは[下書きPR #2](https://github.com/shirai-masatomo/whitespace/pull/2)、作業ブランチは `codex/dive-dive-playground`。峡谷版 `8fc0448` のCI（run99）は成功。生物の別入口版はpush後に対象SHAと照合する。ユーザーの継続的な明示許可を受け、30分ごとの自律再開設定 `dive-dive` をACTIVEで作成済み。同じ範囲の再承認は不要。許可範囲・除外事項はAUTONOMYに記録。ゲームの判定はCHANGESのまま。
+GitHubは[下書きPR #2](https://github.com/shirai-masatomo/whitespace/pull/2)、作業ブランチは `codex/dive-dive-playground`。峡谷版 `8fc0448` のCI（run99）は成功。生物の別入口版 `733cdd6` のCI（run104）も成功。追加の自己監査で壁検査を3秒の実接触へ強化、救助とタイムアウトを区別（55検査成功）。ユーザーの継続的な明示許可を受け、30分ごとの自律再開設定 `dive-dive` をACTIVEで作成済み。同じ範囲の再承認は不要。許可範囲・除外事項はAUTONOMYに記録。ゲームの判定はCHANGESのまま。
 
 ## 未解決と次の作業
 
