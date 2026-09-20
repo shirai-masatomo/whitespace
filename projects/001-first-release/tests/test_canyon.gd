@@ -45,6 +45,7 @@ func run() -> void:
 	await oxygen_choices()
 	await collisions()
 	await remnant_contacts()
+	await cleft_passage()
 	await wildlife_detour()
 	await wildlife_entrance()
 	await early_return_choice()
@@ -87,7 +88,7 @@ func journeys() -> void:
 	observations.terrace_end = var_to_str(game.model.position)
 	await photo("63-walk-terrace", Vector3(119, -182, -194))
 	check(await swim(Vector3(67, -173, -182), 12, false, false), "Rise within the open cliff cut")
-	check(await swim(Vector3(87, -177, -187), 12, false, false), "Swim over the shoulder lip")
+	check(await swim(Vector3(87, -166, -187), 12, false, false), "Swim over the shoulder lip")
 	check(await swim(Vector3(100, -180, -194), 12, false, false), "Shoulder to observation shelf")
 	check(
 		await swim(Gardens.PLANTS[6], 15, false, false), "Observation shelf reaches oxygen garden"
@@ -392,6 +393,19 @@ func early_return_choice() -> void:
 				game.model.mode == Model.Mode.RETURNING,
 				"The long 80% route ends in seamless rescue, not a blocked-controller timeout"
 			)
+
+
+func cleft_passage() -> void:
+	fixture(Vector3(91, -181, -177))
+	check(
+		await swim(Vector3(89, -186, -194), 8, false, false), "Swim into the visible remnant cleft"
+	)
+	check(
+		await swim(Vector3(89, -173, -194), 8, false, false),
+		"Space rises through the cleft opening"
+	)
+	observations.cleft_seconds = game.model.elapsed
+	observations.cleft_oxygen = game.model.oxygen
 
 
 func remnant_contacts() -> void:

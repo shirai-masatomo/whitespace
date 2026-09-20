@@ -7,6 +7,11 @@ const OUTLINE = [
 	Vector2(59, -188),
 	Vector2(74, -190),
 	Vector2(82, -177),
+	Vector2(88, -183),
+	Vector2(82, -192),
+	Vector2(86, -199),
+	Vector2(94, -197),
+	Vector2(94, -184),
 	Vector2(101, -178),
 	Vector2(108, -186),
 	Vector2(127, -183),
@@ -85,7 +90,10 @@ static func _point(p: Vector2, underside: bool) -> Vector3:
 	# Preserve an almost level patch where the existing oxygen plants grow.
 	var shoulder := exp(-pow((p.x - 65) / 23, 2) - pow((p.y + 176) / 14, 2))
 	var root := 1 - smoothstep(43, 73, p.x)
-	var y := -181.83 + shoulder * 9 + root * 4
+	# The high western remnant and low observation shelf are separated by a
+	# deep cleft, with a southern walk-around. This changes traversal, not noise.
+	var high_shoulder := 1 - smoothstep(73, 96, p.x)
+	var y := -181.83 + high_shoulder * 11 + shoulder * 3 + root * 3
 	y += sin(p.x * .19 + p.y * .13) * .6 * (1 - smoothstep(99, 113, p.x))
 	var weather := sin(p.x * .31 + p.y * .24) * .55
 	weather += sin(p.x * .14 - p.y * .37) * .35
@@ -96,7 +104,11 @@ static func _point(p: Vector2, underside: bool) -> Vector3:
 		y -= sin(p.x * .16 + p.y * .24) * 1.8
 	var horizontal := p
 	if underside:
-		horizontal = p.lerp(Vector2(80, -191), .07)
+		# Different basal footprints: the root plunges into the wall, while the
+		# outer shelf is undercut towards its seaward toe, rather than one band.
+		var outer := smoothstep(84, 110, p.x)
+		var base := Vector2(49, -199).lerp(Vector2(126, -190), outer)
+		horizontal = p.lerp(base, .12 + outer * .13)
 	return Vector3(horizontal.x, y, horizontal.y)
 
 
