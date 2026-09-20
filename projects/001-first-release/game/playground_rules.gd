@@ -1,7 +1,11 @@
 extends RefCounted
 ## Spatial destinations, not a required sequence of platform indices.
 const PLANTS: Array[Vector3] = [
-	Vector3(32, -28.2, -25), Vector3(55, -34, -69), Vector3(71, -58, -42), Vector3(135, -66, -65)
+	Vector3(32, -28.2, -25),
+	Vector3(55, -34, -69),
+	Vector3(71, -58, -42),
+	Vector3(135, -66, -65),
+	Vector3(103, -26.4, -49)
 ]
 const CAVE_START := Vector3(68, -54, -42)
 const CAVE_END := Vector3(138, -61, -65)
@@ -9,7 +13,7 @@ const UPDRAFT := Vector3(84, -48, -67)
 
 
 static func updraft_pulse(time: float) -> float:
-	return .35 + .65 * smoothstep(-.6, .3, sin(time * .45))
+	return .82 + .18 * smoothstep(-.6, .3, sin(time * .45))
 
 
 static func updraft(point: Vector3, time: float, speed: float) -> Vector3:
@@ -36,6 +40,8 @@ static func cave_center(t: float) -> Vector3:
 static func cave_radius(t: float, angle: float) -> Vector2:
 	var swell := sin(t * PI)
 	var rough := 1 + .07 * sin(angle * 5 + t * 17) + .04 * sin(angle * 9 - t * 31)
+	# Broad unequal lobes read at a distance; small roughness alone made a tube.
+	rough += .13 * sin(angle * 3 + t * 8) * swell
 	return Vector2(8 + 3 * swell, 11 + 5 * swell * swell) * rough
 
 

@@ -25,7 +25,9 @@ static func kelp(parent: Node3D, point: Vector3, height: float, seed_value: int)
 		leaf.rotation.z = sin(blade * 2.4) * 0.3
 
 
-static func oxygen_algae(parent: Node3D, seed_value: int) -> void:
+static func oxygen_algae(
+	parent: Node3D, seed_value: int, ground_height: Callable = Callable()
+) -> void:
 	# A rooted, asymmetric stand of luminous fronds, not a ring of pickups.
 	var root := Node3D.new()
 	root.name = "OxygenAlgae"
@@ -42,11 +44,10 @@ static func oxygen_algae(parent: Node3D, seed_value: int) -> void:
 		var radius := 1.1 + sqrt(frond / 13.0) * .45
 		var height := 1.0 + .4 * (1 + sin(frond * 5.7 + seed_value))
 		var basis := Basis(Vector3.UP, -angle) * Basis(Vector3.FORWARD, .12 + radius * .04)
-		combined.append_from(
-			Geo.leaf(height, .16 + height * .07),
-			0,
-			Transform3D(basis, Vector3(cos(angle) * radius, .05, sin(angle) * radius))
-		)
+		var base := Vector3(cos(angle) * radius, .05, sin(angle) * radius)
+		if ground_height.is_valid():
+			base.y = ground_height.call(parent.position + base) - parent.position.y + .04
+		combined.append_from(Geo.leaf(height, .16 + height * .07), 0, Transform3D(basis, base))
 	var leaves := Geo.put(root, combined.commit(), mat)
 	leaves.name = "Fronds"
 

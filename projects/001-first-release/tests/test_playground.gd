@@ -21,6 +21,14 @@ func run() -> void:
 	await physics_frame
 	game.set_physics_process(false)
 	game.begin()
+	if "--loop-only" in OS.get_cmdline_user_args():
+		record_sequence = false
+		await compare_cavern_loop()
+		print("Cavern loop: %d checks, failed=%s, %s" % [checks, failed, observations])
+		game.queue_free()
+		await process_frame
+		quit(1 if failed else 0)
+		return
 	if "--updraft-only" in OS.get_cmdline_user_args():
 		record_sequence = false
 		await compare_updraft()
@@ -80,6 +88,7 @@ func run() -> void:
 	await audit_surfaces()
 	await audit_garden_rescue()
 	await compare_updraft()
+	await compare_cavern_loop()
 	var file := FileAccess.open("res://artifacts/playground.json", FileAccess.WRITE)
 	file.store_string(
 		JSON.stringify({"checks": checks, "failed": failed, "observations": observations}, "  ")
@@ -182,6 +191,7 @@ func audit_surfaces() -> void:
 		["reef underside", Vector3(37, -54, -27), Vector3(37, -25, -27)],
 		["reef side", Vector3(8, -34, -40), Vector3(42, -34, -40)],
 		["cave roof", Vector3(104, -14, -48), Vector3(104, -40, -48)],
+		["chimney rim", Vector3(115, -12, -65), Vector3(115, -50, -65)],
 		["cave side", Vector3(104, -40, -90), Vector3(104, -40, -48)],
 		["cave underside", Vector3(104, -76, -48), Vector3(104, -40, -48)]
 	]
@@ -287,3 +297,104 @@ func compare_updraft() -> void:
 	for frame in range(180):
 		await tick(Vector2.ZERO, 1)
 	check(game.model.position.y < before.y - 6, "E can dive against the updraft")
+
+
+func compare_cavern_loop() -> void:
+	var previous_root := capture_root
+	var previous_sequence := sequence
+	var previous_frames := simulation_frames
+	if gpu:
+		capture_root += "/loop"
+		DirAccess.make_dir_recursive_absolute(capture_root + "/sequence")
+		sequence = []
+		simulation_frames = 0
+		record_sequence = true
+	await run_cavern_loop()
+	if gpu:
+		var file := FileAccess.open(capture_root + "/sequence/frames.json", FileAccess.WRITE)
+		file.store_string(JSON.stringify(sequence, "  "))
+		file.close()
+	capture_root = previous_root
+	sequence = previous_sequence
+	simulation_frames = previous_frames
+	record_sequence = false
+
+
+func run_cavern_loop() -> void:
+	# Start at a previously tested breathing shore. The loop itself is continuous
+	# real input, without teleporting to the roof or through an opening.
+	fixture(Vector3(99, -42, -48))
+	game.model.config = game.model.config.duplicate()
+	game.model.config.cavern_current_enabled = true
+	minimum_oxygen = 100
+	check(await swim(Vector3(85, -49, -52)), "Leave the refuge toward the side window")
+	check(await swim(Vector3(80, -49, -65)), "Swim out through the side opening")
+	check(await swim(Reef.UPDRAFT + Vector3.DOWN * 4), "Enter the visible bubble column")
+	var before: float = game.model.position.y
+	for frame in range(480):
+		await tick()
+	print("Jet ride: ", before, " -> ", game.model.position, " oxygen ", game.model.oxygen)
+	check(game.model.position.y - before > 8, "Ride the flow toward the roof without Space")
+	await photo("56-column-to-roof", Vector3(114, -30, -53))
+	check(await swim(Vector3(104, -23, -48)), "Leave the current onto the cavern roof")
+	for frame in range(100):
+		await tick()
+	print("Roof landing: ", game.model.position, " grounded ", game.model.terrain_grounded)
+	check(game.model.terrain_grounded, "Land on the roof after riding the flow")
+	audit_roof_algae()
+	check(
+		game.model.oxygen == 100, "Roof algae allow looking around rather than rushing a known path"
+	)
+	check(await swim(Vector3(103, -28, -54)), "Walk toward the upper opening")
+	await photo("57-roof-opening", Vector3(114, -41, -53))
+	check(await swim(Vector3(115, -41, -52)), "Drop through the roof into the same breathing shore")
+	for frame in range(90):
+		await tick()
+	check(game.model.in_dry_cave(), "The upper entrance connects back to the air refuge")
+	check(game.model.terrain_grounded, "The upper entrance lands on a walkable shore")
+	check(game.model.oxygen == 100, "Completing the loop restores oxygen without a screen")
+	await photo("58-chimney-from-inside", Vector3(115, -28, -53))
+	observations.cavern_loop = {
+		"seconds": game.model.elapsed, "oxygen": game.model.oxygen, "minimum_oxygen": minimum_oxygen
+	}
+	# Air supports walking, not flying: leave by the underwater mouth rather than
+	# pretending Space can swim upward through the dry chamber to the chimney.
+	check(await swim(Reef.PLANTS[3]), "Leave the completed loop by a different underwater mouth")
+	check(not game.model.in_dry_cave(), "Swimming resumes after leaving the dry chamber")
+	record_sequence = false
+	for fast_drop in [false, true]:
+		fixture(Vector3(115, -23, -52))
+		for frame in range(360):
+			await tick(Vector2.ZERO, 1 if fast_drop else 0)
+			if game.model.terrain_grounded:
+				break
+		check(game.model.terrain_grounded, "Actual chimney drop lands, E=" + str(fast_drop))
+		check(game.model.in_dry_cave(), "Chimney landing stays in the refuge")
+		check(game.model.position.y > -48, "Chimney drop does not tunnel through the shore")
+
+
+func audit_roof_algae() -> void:
+	var leaves: MeshInstance3D = game.world.get_node(
+		"PlayableReef/OxygenGarden4/OxygenAlgae/Fronds"
+	)
+	var arrays := leaves.mesh.surface_get_arrays(0)
+	var vertices: PackedVector3Array = arrays[Mesh.ARRAY_VERTEX]
+	var uv: PackedVector2Array = arrays[Mesh.ARRAY_TEX_UV]
+	var gap := 0.0
+	var roots := 0
+	for index in range(vertices.size()):
+		if uv[index].y > .001:
+			continue
+		var point := leaves.to_global(vertices[index])
+		var query := PhysicsRayQueryParameters3D.create(
+			point + Vector3.UP, point + Vector3.DOWN * 2, 1
+		)
+		var hit: Dictionary = game.get_world_3d().direct_space_state.intersect_ray(query)
+		if hit.is_empty():
+			gap = INF
+		else:
+			gap = maxf(gap, absf(point.y - hit.position.y))
+		roots += 1
+	check(roots > 0, "Roof algae contain visible rooted fronds")
+	check(gap < .16, "Rendered algae roots match the actual sloping collision surface")
+	observations.roof_algae_max_gap = gap

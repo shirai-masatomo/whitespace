@@ -4,6 +4,7 @@ const Rules = preload("res://game/playground_rules.gd")
 const Geo = preload("res://game/ocean_geometry.gd")
 const Nature = preload("res://game/ocean_nature.gd")
 const Collision = preload("res://game/level_collision.gd")
+var cavern_faces := PackedVector3Array()
 
 
 func _ready() -> void:
@@ -12,9 +13,10 @@ func _ready() -> void:
 	_make_cave()
 	for index in range(Rules.PLANTS.size()):
 		var plant := Node3D.new()
+		plant.name = "OxygenGarden%d" % index
 		plant.position = Rules.PLANTS[index]
 		add_child(plant)
-		Nature.oxygen_algae(plant, 80 + index)
+		Nature.oxygen_algae(plant, 80 + index, _roof_height if index == 4 else Callable())
 		var light := OmniLight3D.new()
 		light.light_color = Color("74e2b9")
 		light.light_energy = 1.5
@@ -66,11 +68,25 @@ func _make_reef() -> void:
 			Nature.stone(),
 			Vector3(x, Rules.reef_height(x, z) + 1, z)
 		)
-	for index in range(22):
-		var x := 30 + (index % 4) * 9.0 + sin(index * 3.7) * 3
-		var z := -17 - (index / 4) * 11.0
+	var rng := RandomNumberGenerator.new()
+	rng.seed = 260920
+	# Clumps and clear lanes, not a uniform plantation. Tall upper fronds frame
+	# the view on entry; shorter plants let the swimmer see between the roots.
+	var groves := [Vector2(31, -26), Vector2(55, -33), Vector2(38, -69), Vector2(58, -77)]
+	for index in range(42):
+		var center: Vector2 = groves[index % groves.size()]
+		var angle := rng.randf_range(0, TAU)
+		var radius := sqrt(rng.randf()) * 8
+		var x := center.x + cos(angle) * radius
+		var z := center.y + sin(angle) * radius
+		var clearing := false
+		for plant in [Rules.PLANTS[0], Rules.PLANTS[1]]:
+			clearing = clearing or Vector2(x - plant.x, z - plant.z).length() < 6
+		if clearing:
+			continue
 		if _reef_cell(int(x), int(z)) and Vector2(x - 49, z + 50).length() > 10:
-			_make_kelp(root, Vector3(x, Rules.reef_height(x, z), z), 11 + index % 7, index)
+			var height := rng.randf_range(10, 21)
+			_make_kelp(root, Vector3(x, Rules.reef_height(x, z), z), height, index)
 	Collision.build(root)
 
 
@@ -91,7 +107,7 @@ func _make_kelp(parent: Node3D, point: Vector3, height: float, seed_value: int) 
 	st.begin(Mesh.PRIMITIVE_TRIANGLES)
 	st.append_from(Geo.leaf(height, .09), 0, Transform3D.IDENTITY)
 	for branch in range(12):
-		var t := .18 + branch * .064
+		var t := .3 + branch * .054
 		var angle := branch * 2.399 + seed_value
 		var basis := Basis(Vector3.UP, angle) * Basis(Vector3.FORWARD, 1.0 + .25 * sin(branch))
 		st.append_from(
@@ -119,12 +135,7 @@ func _make_cave() -> void:
 			for thickness in [0.0, 3.5]:
 				var corners: Array[Vector3] = []
 				for offset in [Vector2i(0, 0), Vector2i(1, 0), Vector2i(1, 1), Vector2i(0, 1)]:
-					var t: float = (row + offset.x) / 35.0
-					var angle: float = (side + offset.y) * TAU / 32
-					var radius: Vector2 = Rules.cave_radius(t, angle) + Vector2.ONE * thickness
-					var point := Rules.cave_center(t)
-					point += Vector3(0, cos(angle) * radius.x, sin(angle) * radius.y)
-					corners.append(point)
+					corners.append(_cave_point(Vector2i(row, side) + offset, thickness))
 				triangle(st, corners[0], corners[1], corners[2])
 				triangle(st, corners[0], corners[2], corners[3])
 			var edges := [
@@ -165,7 +176,11 @@ func _make_cave() -> void:
 			for corner in [
 				Vector2(x, z), Vector2(x + 2, z), Vector2(x + 2, z + 2), Vector2(x, z + 2)
 			]:
+				var shoreline := -46 + sin(corner.x * .14) * 1.7
+				var wet_edge := maxf(0, absf(corner.y - shoreline) - 3.5)
 				var y := -43 - maxf(0, absf(corner.x - 103) - 8) * .65
+				y -= wet_edge * .38
+				y += sin(corner.x * .32) * sin(corner.y * .27) * .18
 				points.append(Vector3(corner.x, y, corner.y))
 			triangle(shore, points[0], points[2], points[1])
 			triangle(shore, points[0], points[3], points[2])
@@ -173,6 +188,7 @@ func _make_cave() -> void:
 	Geo.put(root, shore.commit(), rock)
 	Collision.build(root)
 	var water := SurfaceTool.new()
+	Collision.collect(root, Transform3D.IDENTITY, cavern_faces)
 	water.begin(Mesh.PRIMITIVE_TRIANGLES)
 	for index in range(139):
 		var x := 68.0 + index * .5
@@ -198,12 +214,33 @@ func _make_cave() -> void:
 
 
 func _cave_window(row: int, side: int) -> bool:
-	return Vector2((row - 8.5) / 3.2, (side - 21.0) / 2.6).length_squared() < 1
+	# A second, higher opening makes the roof part of the same place: the
+	# external updraft, roof walk and interior shore form an optional loop.
+	var wrapped := posmod(side + 16, 32) - 16
+	var roof_open := Vector2((row - 23.0) / 3.7, (wrapped + .5) / 2.4)
+	var side_open := Vector2((row - 8.5) / 3.2, (side - 21.0) / 2.6)
+	return side_open.length_squared() < 1 or roof_open.length_squared() < 1
 
 
 func _cave_point(cell: Vector2i, thickness: float) -> Vector3:
-	var t := cell.x / 35.0
-	var angle := cell.y * TAU / 32
+	var coordinates := Vector2(cell)
+	var open_count := 0
+	for offset in [Vector2i(-1, -1), Vector2i(-1, 0), Vector2i(0, -1), Vector2i.ZERO]:
+		if _cave_window(cell.x + offset.x, cell.y + offset.y):
+			open_count += 1
+	if open_count > 0 and open_count < 4:
+		# Project shared edge vertices to a continuous aperture. Merely removing
+		# grid cells produced rectangular teeth in both the silhouette and contact.
+		var is_roof := cell.x > 16
+		var center := Vector2(23.5, 0) if is_roof else Vector2(9, 21.5)
+		var radius := Vector2(3.7, 2.4) if is_roof else Vector2(3.2, 2.6)
+		if is_roof:
+			coordinates.y = wrapf(coordinates.y, -16, 16)
+		var radial := ((coordinates - center) / radius).normalized()
+		var uneven := 1 + .065 * sin(radial.angle() * 3 + .8)
+		coordinates = center + radial * radius * uneven
+	var t := coordinates.x / 35.0
+	var angle := coordinates.y * TAU / 32
 	var radius := Rules.cave_radius(t, angle) + Vector2.ONE * thickness
 	return Rules.cave_center(t) + Vector3(0, cos(angle) * radius.x, sin(angle) * radius.y)
 
@@ -228,3 +265,24 @@ func _water_span(x: float) -> Vector2:
 		else:
 			edges.y = center.z + outer
 	return edges
+
+
+func _roof_height(point: Vector3) -> float:
+	# Match the actual rendered triangles, not an analytic surface that differs
+	# between samples. Root each frond on the sloping roof instead of floating.
+	var highest := point.y - 4
+	for index in range(0, cavern_faces.size(), 3):
+		var a := cavern_faces[index]
+		var b := cavern_faces[index + 1] - a
+		var c := cavern_faces[index + 2] - a
+		var offset := point - a
+		var det := b.x * c.z - b.z * c.x
+		if absf(det) < .00001:
+			continue
+		var u := (offset.x * c.z - offset.z * c.x) / det
+		var v := (b.x * offset.z - b.z * offset.x) / det
+		if u >= 0 and v >= 0 and u + v <= 1:
+			var y := a.y + b.y * u + c.y * v
+			if y < point.y + 3:
+				highest = maxf(highest, y)
+	return highest

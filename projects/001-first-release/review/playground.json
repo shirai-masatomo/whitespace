@@ -1,10 +1,15 @@
 {
-  "checks": 96,
+  "checks": 129,
   "failed": false,
   "observations": {
-    "cavern_journey_seconds": 37.4166666666658,
-    "horizontal_extent": 132.432739257813,
-    "journey_to_deeper_route_seconds": 57.3666666666647,
+    "cavern_journey_seconds": 37.7333333333325,
+    "cavern_loop": {
+      "minimum_oxygen": 35.5000000000001,
+      "oxygen": 100.0,
+      "seconds": 22.9
+    },
+    "horizontal_extent": 132.773651123047,
+    "journey_to_deeper_route_seconds": 57.6666666666647,
     "low_outside": {
       "complete": false,
       "oxygen": 0.0,
@@ -13,7 +18,7 @@
     "low_window": {
       "complete": true,
       "oxygen": 100.0,
-      "seconds": 5.99999999999998
+      "seconds": 5.64999999999999
     },
     "outside": {
       "complete": true,
@@ -31,27 +36,28 @@
       "complete": true,
       "minimum_oxygen": 89.2000000000006,
       "oxygen": 100.0,
-      "seconds": 8.33333333333333
+      "seconds": 7.84999999999998
     },
     "roof": {
       "complete": true,
-      "minimum_oxygen": 47.9000000000004,
-      "oxygen": 47.9000000000004,
-      "seconds": 12.0166666666668
+      "minimum_oxygen": 64.5666666666678,
+      "oxygen": 100.0,
+      "seconds": 9.81666666666673
     },
+    "roof_algae_max_gap": 0.045074462890625,
     "updraft_false": {
       "oxygen": 92.0000000000005,
       "rise": -9.00001525878906
     },
     "updraft_true": {
       "oxygen": 92.0000000000005,
-      "rise": 8.64990615844727
+      "rise": 8.90321731567383
     },
     "window": {
       "complete": true,
       "minimum_oxygen": 69.9666666666671,
       "oxygen": 100.0,
-      "seconds": 9.7833333333334
+      "seconds": 9.56666666666672
     }
   }
 }
