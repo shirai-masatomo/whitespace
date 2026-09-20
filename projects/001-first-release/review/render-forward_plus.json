@@ -8,38 +8,38 @@
     {
       "depth_m": 12,
       "mean_draw_calls": 553,
-      "median_frame_ms": 2.18,
-      "p95_frame_ms": 3.56
+      "median_frame_ms": 3.52,
+      "p95_frame_ms": 5.19
     },
     {
       "depth_m": 60,
       "mean_draw_calls": 820,
-      "median_frame_ms": 2.24,
-      "p95_frame_ms": 3.64
+      "median_frame_ms": 3.53,
+      "p95_frame_ms": 5.54
     },
     {
       "depth_m": 155,
       "mean_draw_calls": 1155,
-      "median_frame_ms": 2.32,
-      "p95_frame_ms": 3.53
+      "median_frame_ms": 3.53,
+      "p95_frame_ms": 5.46
     },
     {
       "depth_m": 205,
       "mean_draw_calls": 397,
-      "median_frame_ms": 3.44,
-      "p95_frame_ms": 4.26
+      "median_frame_ms": 3.16,
+      "p95_frame_ms": 4.88
     },
     {
       "depth_m": 235,
-      "mean_draw_calls": 318,
-      "median_frame_ms": 3.47,
-      "p95_frame_ms": 4.2
+      "mean_draw_calls": 320,
+      "median_frame_ms": 3.34,
+      "p95_frame_ms": 5.01
     },
     {
       "depth_m": 365,
       "mean_draw_calls": 462,
-      "median_frame_ms": 3.45,
-      "p95_frame_ms": 4.21
+      "median_frame_ms": 3.53,
+      "p95_frame_ms": 5.0
     }
   ],
   "vsync": "disabled"

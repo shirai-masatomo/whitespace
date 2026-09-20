@@ -1,9 +1,9 @@
 {
-  "checks": 32,
+  "checks": 34,
   "failed": false,
   "observations": {
     "inside_seconds": 5.96666666666665,
-    "journey_seconds": 40.399999999999,
+    "journey_seconds": 39.899999999999,
     "outside_seconds": 4.99999999999999,
     "oxygen_100_bridge_false": {
       "arrived": true,
@@ -13,7 +13,7 @@
     "oxygen_100_bridge_true": {
       "arrived": true,
       "oxygen": 100.0,
-      "seconds": 4.76666666666666
+      "seconds": 4.79999999999999
     },
     "oxygen_30_bridge_false": {
       "arrived": false,
@@ -23,9 +23,9 @@
     "oxygen_30_bridge_true": {
       "arrived": true,
       "oxygen": 100.0,
-      "seconds": 4.76666666666666
+      "seconds": 4.79999999999999
     },
-    "terrace_end": "Vector3(66.47083, -183.99956, -198.50966)",
+    "terrace_end": "Vector3(66.47063, -183.99934, -198.47678)",
     "walking_frames": 570
   }
 }

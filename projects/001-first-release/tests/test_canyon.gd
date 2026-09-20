@@ -52,6 +52,8 @@ func journeys() -> void:
 		await tick(Vector2(0, -1))
 		if game.model.standing:
 			walking_frames += 1
+		if frame == 180:
+			await photo("67-rock-steps", Vector3(67, -176, -174))
 	check(game.model.position.z < -185, "Walk terraces and descending ramps without Space")
 	check(walking_frames > 380, "Walking rhythm replaces continuous swimming")
 	observations.walking_frames = walking_frames
@@ -96,10 +98,18 @@ func collisions() -> void:
 				game.advance(1.0 / rate, Vector2.ZERO, 1 if fast else 0, false)
 			check(game.model.standing, "Normal/fast landing at %dHz" % rate)
 			check(game.model.position.y > -160.1, "Terrace top never tunnels")
-		fixture(Vector3(100, -198, -194))
+		fixture(Vector3(100, -198, -192.2))
 		for frame in range(rate * 3):
 			game.advance(1.0 / rate, Vector2.ZERO, 0, true)
-		check(game.model.position.y < -189, "Space is blocked by bridge underside")
+		print("Bridge ascent: ", game.model.position)
+		check(game.model.position.y < -185.5, "Space is blocked by the eroded bridge underside")
+		fixture(Vector3(100, -198, -194))
+		var touched := false
+		for frame in range(rate * 3):
+			game.advance(1.0 / rate, Vector2.ZERO, 0, true)
+			if not game.motion.contact_bodies.is_empty():
+				touched = true
+		check(touched, "Off-centre ascent contacts the curved underside before sliding off")
 		fixture(Vector3(82, -169, -136))
 		for frame in range(rate):
 			game.advance(1.0 / rate, Vector2(-1, 0), 0, false)
