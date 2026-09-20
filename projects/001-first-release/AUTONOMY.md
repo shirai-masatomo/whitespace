@@ -2,6 +2,24 @@
 
 **完全自律型**。共通方針は [WhiteSpace 自律運用](../../docs/AUTONOMY.md)。このファイルはDIVE DIVE固有の判断境界。
 
+## レビュー受け渡しの正本
+
+人間方針と外部AIレビューの正本は **origin/main** の以下2ファイルとする。
+
+- `projects/001-first-release/HUMAN_DIRECTION.md`
+- `projects/001-first-release/EXTERNAL_AI_REVIEW.md`
+
+各自律ループの最初に必ず `git fetch origin main` を行い、作業ブランチ内のコピーだけを信用せず、
+`git show origin/main:projects/001-first-release/HUMAN_DIRECTION.md`
+`git show origin/main:projects/001-first-release/EXTERNAL_AI_REVIEW.md`
+で最新内容を読む。
+
+main側の方針/レビューが作業ブランチより新しい場合は、**実装開始前にTASKSへ具体的なP0/P1作業として落とす**。
+「読んだ」だけで未タスク化のまま進めない。
+
+PROJECT_STATEには、最後に取り込んだmain側のHUMAN_DIRECTION/EXTERNAL_AI_REVIEWのcommit SHAを記録する。
+これにより外部レビューが未反映かを機械的に確認できる。
+
 ## 作業ループ
 
 PROJECT_STATE → TASKS → HUMAN_DIRECTION → AI_REVIEW → EXTERNAL_AI_REVIEW → Git/CI → 最優先タスク → 実装 → テスト/自動プレイ/画面確認 → 自己批評 → 改善 → 再テスト → 文書 → commit/push/CI → 次タスク。
