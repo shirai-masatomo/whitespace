@@ -23,6 +23,9 @@ func run() -> void:
 	root.unfocusable = true
 	record_sequence = false
 	capture_root = "res://artifacts/canyon-" + RenderingServer.get_current_rendering_method()
+	var authored := "--remnant-authored" in OS.get_cmdline_user_args()
+	if authored:
+		capture_root += "-authored"
 	DirAccess.make_dir_recursive_absolute(capture_root)
 	DirAccess.make_dir_recursive_absolute(capture_root + "/sequence")
 	game = SCENE.instantiate()
@@ -50,7 +53,8 @@ func run() -> void:
 	await wildlife_entrance()
 	await early_return_choice()
 	wildlife_clearance()
-	var file := FileAccess.open("res://artifacts/canyon.json", FileAccess.WRITE)
+	var output := "canyon-authored" if authored else "canyon"
+	var file := FileAccess.open("res://artifacts/" + output + ".json", FileAccess.WRITE)
 	file.store_string(
 		JSON.stringify({"checks": checks, "failed": failed, "observations": observations}, "  ")
 	)

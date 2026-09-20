@@ -15,7 +15,7 @@ func _ready() -> void:
 		if platform.oxygen:
 			make_shoal(platform.position + Vector3.UP * 5, 16)
 	make_shoal(Vector3(8, -18, -21), 24)
-	make_shoal(Vector3(15, -12, -19), 48)
+	make_shoal(Vector3(6, -9, -24), 96, Vector3(2.4, 1.8, 1.0), true)
 	reef_guide = shoals[-1]
 	for zone in Layout.current_zones():
 		make_shoal(zone.center, 32)
@@ -125,9 +125,13 @@ func update(player: Vector3, elapsed: float, giant: Vector3 = Vector3.INF) -> vo
 	# A living lateral clue, with a return path, rather than an arrow or a
 	# mandatory escort. The shoal repeatedly crosses towards the kelp refuge.
 	var progress := .5 - .5 * cos(elapsed * .2)
-	var destination := Vector3(12, -12, -18).lerp(Vector3(35, -22, -28), progress)
+	var source := Vector3(6, -9, -24)
+	var refuge := Vector3(32, -22, -28)
+	var destination := source.lerp(refuge, progress)
 	var separation := destination - player
 	reef_guide.position = destination + separation.normalized() * maxf(0, 6 - separation.length())
+	var reef_heading := (refuge - source) * (1 if sin(elapsed * .2) >= 0 else -1)
+	reef_guide.rotation.y = atan2(reef_heading.x, reef_heading.z)
 
 	for index in range(canyon_rays.size()):
 		var time := elapsed + index * 1.7
@@ -146,7 +150,9 @@ func update(player: Vector3, elapsed: float, giant: Vector3 = Vector3.INF) -> vo
 	canyon_school.rotation.y = atan2(school_heading.x, school_heading.z)
 
 
-func make_shoal(point: Vector3, count: int) -> void:
+func make_shoal(
+	point: Vector3, count: int, spread: Vector3 = Vector3.ONE, guided: bool = false
+) -> void:
 	var shape := Geo.loft(
 		[
 			Vector3(-.8, .02, .3),
@@ -164,6 +170,7 @@ func make_shoal(point: Vector3, count: int) -> void:
 	var mesh := combined.commit()
 	var material := ShaderMaterial.new()
 	material.shader = preload("res://game/shaders/fish.gdshader")
+	material.set_shader_parameter("guided_motion", guided)
 	mesh.surface_set_material(0, material)
 	var swarm := MultiMesh.new()
 	swarm.transform_format = MultiMesh.TRANSFORM_3D
@@ -175,6 +182,7 @@ func make_shoal(point: Vector3, count: int) -> void:
 		var angle := index * 2.399
 		var radius := sqrt(index / float(count)) * 2.4
 		var offset := Vector3(cos(angle) * radius, sin(index * 3.7), sin(angle) * radius)
+		offset *= spread
 		swarm.set_instance_transform(index, Transform3D(Basis().scaled(Vector3.ONE * .65), offset))
 		swarm.set_instance_custom_data(index, Color(index / float(count), 0, 0, 1))
 	var school := MultiMeshInstance3D.new()

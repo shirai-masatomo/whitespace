@@ -1,8 +1,22 @@
 # DIVE DIVE — REVIEW PACKET
 
-**2026-09-20 / Phase 3 / CHANGES・SELF_CONTINUE**。origin/main `05d9a46` の人間方針・外部レビューを同期。人間レビューは求めない。
+**2026-09-20 / Phase 3 / CHANGES・SELF_CONTINUE**。origin/main `2f7e43f` の人間方針・外部レビューを同期。人間レビューは求めない。
 
-## 最新比較: 高い根元・切れ込み・低い観察棚
+## 最新: 局所meshを棄却し、入水の生物の手掛かりへ
+
+張り出し1個でA（c87a402の生成版）とB（手作り断面の静的mesh）を比較した。B初案は尖った面が目立ち、閉じたmeshを2回細分化して再試験したが、丸い大面と刃状の下面になった。[Aの固定視線](review/canyon-before/61-procedural-a.png) / [B修正版](review/canyon-before/61-authored-b.png)。位置・光・視線は同じ、生物/粒子位相は一致しない。[Aの到達地点](review/canyon-before/64-procedural-a.png) / [Bの到達地点](review/canyon-before/64-authored-b.png)は自動操縦の着地結果で、高さは完全同一ではない。
+
+**Bは不採用。** 高い根元/低い棚/切れ込みの到達は維持できたが、自然さが明確に上がらず、細分化で下面が縮んでSpace試走が端へ滑り抜けた。70検査中2件の既存停止条件を満たさない。見えない面を貫通した証明ではないが、判定を緩めて採用もしない。通常ゲームはAのまま。専用meshが常に不要とは断定せず、今回の1案では方式変更の根拠なしと決定。生成assetはartifactsへ隔離、再現用の手作り座標だけ[作者ツール](tools/author_remnant.gd)に保持。
+
+次にDD-064へ進んだ。通常入水では「左の泡に乗るか、右へ横切る魚群と藻の庭を調べるか」を迷わせたい。魚を増やすだけでなく、別方向に周回していたshaderを、群れの実際の横移動と同じ向きへ揃えた。初案は画面右端で切れたため内側へ修正。[入水の前](review/entry-before/69-before-shoal.png) → [今](review/69-default-entry.png)。通常のW入水・マウス変更なしで右の生物がまとまって見える。[庭の前](review/entry-before/65-before-shoal.png) → [今](review/65-cleft-choice.png)では到着後に裂け目を覗ける構成を維持。[連続画像](review/sequence/index.html)。
+
+自己批評: 生物の向きと右側の動機は読みやすくなったが、魚の反復形・折り返し、庭の先の未知は弱い。景観密度の改善であってプレイアブル面積の拡大ではない。製品品質PASSや人間レビュー条件達成とはしない。次はDD-069の入口先の未知、DD-065の帯状骨格から場所への置換。
+
+再現: `Godot --headless --path . --script tools/author_remnant.gd` の後、`Godot --headless --path . --script tests/test_canyon.gd -- --remnant-authored`。後者は棄却理由の2件を再現し失敗終了する。`--rough-cage` を作者ツールへ渡すと初案。比較flagなしの通常checkはAを使う。GPU比較は同じflagを既存の画面外/無音起動設定へ追加し、出力も `canyon-<renderer>-authored` に分離する。
+
+今回の通常版は全check/build成功。峡谷70・入水17、既存の実衝突689/11経路を維持。入水のForward+/Compatibility画像、標準visualの救助/到達、配布EXE Forward+120フレーム成功。棄却Bの失敗は通常版/CIと分離する。GPUは画面外・無音・非捕捉、自分のプロセスは終了済み。
+
+## 前回: 高い根元・切れ込み・低い観察棚
 
 西の根元を持ち上げ、低い藻の棚との間に深い切れ込みを作った。下面の根と沖側も別の輪郭へ。[42467a2の内部](review/canyon-before/61-before-cleaved-remnant.png) → [今回](review/canyon/61-canyon-interior.png)。同じカメラで高さと通り道の分離は読める。一方で左の大きな面は依然模型的。[観察棚の前](review/canyon-before/64-before-cleaved-remnant.png) → [今回](review/canyon/64-crossing.png)では広い上面がまだ単調で、全体の品質合格とはしない。
 

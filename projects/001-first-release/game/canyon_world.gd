@@ -45,7 +45,12 @@ func _cliff(side: int) -> void:
 				else:
 					_quad(st, center, ring[next], ring[index], center)
 	if side < 0:
-		Remnant.append_to(st)
+		if OS.has_feature("editor") and "--remnant-authored" in OS.get_cmdline_user_args():
+			# An opt-in comparison asset, never bundled into normal/release play.
+			var candidate := load("res://artifacts/authored_remnant.tres") as ArrayMesh
+			st.append_from(candidate, 0, Transform3D.IDENTITY)
+		else:
+			Remnant.append_to(st)
 	st.generate_normals()
 	var stone := Nature.stone()
 	stone.set_shader_parameter("strata_strength", 1.0)
