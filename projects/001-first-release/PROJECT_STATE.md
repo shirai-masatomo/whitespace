@@ -15,7 +15,9 @@
 
 ## 最新指示と品質判定
 
-正本はorigin/main **5697d2e** のHUMAN_DIRECTION / EXTERNAL_AI_REVIEW（reviewed_through: c83a0cc）。同期済み。DD-064=魚の動きと庭の先、DD-065/070/072=LowerBalconyを場所へ置換、DD-069=125〜160mからの自然発見と入口の先、DD-067=通常カメラの比較へ具体化。専用mesh方式の再試行は優先せず、前回Bは不採用のまま。
+正本はorigin/main **5697d2e** のHUMAN_DIRECTION / EXTERNAL_AI_REVIEW（reviewed_through: `c83a0cc`）。作業ブランチの `EXTERNAL_AI_REVIEW.md` へ同内容を同期済み。最新レビューは、LowerBalconyを入り江へ置換して歩行/潜水/横抜けの可遊域を増やした点を構造的前進と評価。一方、通常視線で近景の岸面が大きいこと、穴の底が読みにくいこと、岸/穴の人工的な輪郭、入水魚群の同形反復、入り江の先の見返り、125〜240mの場所ごとの主役差は未解決。人間レビューはまだ不要。
+
+DD-072（入り江の通常視線・大面・穴/沖口/周回の見返り）、DD-064（魚群→藻庭→裂け目の二段階発見）、DD-069（入口の先の次の未知）、DD-067（通常視線の画面品質とプレイアブル密度）、DD-065/070（前後区間の場所差）をP0で継続。不要資産整理DD-066はDONE。専用meshの方式比較は前回Bを棄却済みで、方式変更自体を進捗にしない。
 
 景観密度とプレイアブル密度を分ける。今回の入り江は実際に歩く/潜る/横へ抜ける面積を増やしたが、自然地形の質・初見の発見・面白さは未合格。魚の数や深度を増やしていない。次の人間レビュー条件は満たさない。
 
@@ -27,9 +29,9 @@ GPUの結果と制約はREVIEW_PACKETに記録する。通常はheadless。実GP
 
 ## GitHubと再開
 
-[下書きPR #2](https://github.com/shirai-masatomo/whitespace/pull/2)、branch `codex/dive-dive-playground`。直前fcc6955のCI run148成功を確認。今回分はpush後に対象SHAで確認する。
+[下書きPR #2](https://github.com/shirai-masatomo/whitespace/pull/2)、branch `codex/dive-dive-playground`。直前fcc6955のCI run148成功を確認。今回の実装commitは `942fc8b`。並行セッションのレビュー同期も通常マージし、push後に対象SHAのCIを確認する。
 
-30分の常設再開 `dive-dive` は承認済み。再承認不要。18:44の再開が途切れた原因は未特定（承認/テスト待ちではない）。22:23・23:17・翌00:14の再開で開発を実行したが、停止原因が解消したとは扱わない。sandbox内GodotはAppData設定/証明書にアクセスできないため、この環境では通常権限でcheckする。
+30分の常設再開 `dive-dive` は承認済み。再承認不要。18:44の再開が途切れた原因は未特定（承認/テスト待ちではない）。22:23・23:17・翌00:14の再開で開発を実行したが、停止原因が解消したとは扱わない。次回以降も実装commit時刻を確認し、長時間停止が再発する場合は品質とは別の自律運用問題として切り分ける。sandbox内GodotはAppData設定/証明書にアクセスできないため、この環境では通常権限でcheckする。
 
 ## 次の3タスク
 
