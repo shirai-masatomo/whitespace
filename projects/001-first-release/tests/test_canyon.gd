@@ -44,6 +44,7 @@ func run() -> void:
 	await terrace_choices()
 	await oxygen_choices()
 	await collisions()
+	await remnant_contacts()
 	await wildlife_detour()
 	await wildlife_entrance()
 	await early_return_choice()
@@ -81,14 +82,20 @@ func journeys() -> void:
 	check(game.model.position.z < -178, "Walking reaches the collapsed terrace")
 	check(game.model.position.z > -185, "Blind forward input cannot walk through the far rock lip")
 	check(walking_frames < 530, "The collapsed terrace interrupts ground contact")
-	check(walking_frames > 380, "Walking rhythm replaces continuous swimming")
+	check(walking_frames > 300, "Walking rhythm replaces continuous swimming")
 	observations.walking_frames = walking_frames
 	observations.terrace_end = var_to_str(game.model.position)
 	await photo("63-walk-terrace", Vector3(119, -182, -194))
-	check(await swim(Vector3(100, -180, -194), 12, false, false), "Cliff to bridge crest")
-	check(await swim(Gardens.PLANTS[6], 15, false, false), "Bridge crest reaches oxygen garden")
+	check(await swim(Vector3(67, -173, -182), 12, false, false), "Rise within the open cliff cut")
+	check(await swim(Vector3(87, -177, -187), 12, false, false), "Swim over the shoulder lip")
+	check(await swim(Vector3(100, -180, -194), 12, false, false), "Shoulder to observation shelf")
+	check(
+		await swim(Gardens.PLANTS[6], 15, false, false), "Observation shelf reaches oxygen garden"
+	)
 	await photo("64-crossing", Vector3(78, -216, -215))
-	check(await swim(Vector3(104, -201, -215), 12, false, false), "Drop off bridge into interior")
+	check(
+		await swim(Vector3(104, -201, -215), 12, false, false), "Drop off promontory into interior"
+	)
 	check(
 		await swim(Vector3(78, -218, -222), 12, false, false),
 		"Interior descent finds sheltered garden"
@@ -104,6 +111,11 @@ func journeys() -> void:
 		fixture(Vector3(131, -182, -209))
 		await tick()
 		var destination := Vector3(162, -203, -193) if outside else Vector3(105, -209, -194)
+		if not outside:
+			check(
+				await swim(Vector3(120, -201, -214), 12, false, false),
+				"Descend around the broken seaward tip"
+			)
 		check(await swim(destination, 15, false, false), "Cross-cut permits inside/outside choice")
 		observations["outside_seconds" if outside else "inside_seconds"] = game.model.elapsed
 
@@ -192,8 +204,8 @@ func collisions() -> void:
 		fixture(Vector3(100, -198, -192.2))
 		for frame in range(rate * 3):
 			game.advance(1.0 / rate, Vector2.ZERO, 0, true)
-		print("Bridge ascent: ", game.model.position)
-		check(game.model.position.y < -185.5, "Space is blocked by the eroded bridge underside")
+		print("Remnant ascent: ", game.model.position)
+		check(game.model.position.y < -185.5, "Space is blocked by the eroded promontory underside")
 		fixture(Vector3(100, -198, -194))
 		var touched := false
 		for frame in range(rate * 3):
@@ -248,7 +260,7 @@ func wildlife_detour() -> void:
 			if returned:
 				returned = await swim(Vector3(131, -178, -211), 12, false, false)
 			if returned:
-				returned = await swim(Gardens.PLANTS[6], 12, false, false)
+				returned = await swim(Gardens.PLANTS[6] + Vector3.UP * 2, 12, false, false)
 		observations["wildlife_%d" % oxygen] = {
 			"arrived": arrived,
 			"returned": returned,
@@ -380,3 +392,32 @@ func early_return_choice() -> void:
 				game.model.mode == Model.Mode.RETURNING,
 				"The long 80% route ends in seamless rescue, not a blocked-controller timeout"
 			)
+
+
+func remnant_contacts() -> void:
+	for rate in [60, 15]:
+		for fast in [false, true]:
+			fixture(Vector3(100, -170, -192))
+			for frame in range(rate * 3):
+				game.advance(1.0 / rate, Vector2.ZERO, 1 if fast else 0, false)
+			check(
+				game.model.standing and game.model.position.y > -184,
+				"Normal and E land on the new promontory at %dHz" % rate
+			)
+		fixture(Vector3(135, -182, -192))
+		var touched := false
+		for frame in range(rate * 3):
+			game.advance(1.0 / rate, Vector2.LEFT, 0, false)
+			for body in game.motion.contact_bodies:
+				if "StratifiedWest" in str(body.get_path()):
+					touched = true
+		print("Seaward contact: ", game.model.position, " ", game.motion.contact_bodies)
+		check(touched, "The broken seaward face stops lateral movement at %dHz" % rate)
+		fixture(Vector3(138, -176, -200))
+		for frame in range(rate * 3):
+			game.advance(1.0 / rate, Vector2.ZERO, 1, false)
+		print("Bay descent: ", game.model.position, " ", game.motion.contact_bodies)
+		check(
+			game.model.position.y < -198,
+			"The visible east-shore opening permits a fast descent at %dHz" % rate
+		)

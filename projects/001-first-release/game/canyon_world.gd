@@ -1,7 +1,8 @@
 extends Node3D
-## Interlocking walkable terraces, a rock bridge and an open offshore bypass.
+## Interlocking walkable terraces, a broken promontory and an open offshore bypass.
 const Geo = preload("res://game/ocean_geometry.gd")
 const Nature = preload("res://game/ocean_nature.gd")
+const Remnant = preload("res://game/canyon_remnant.gd")
 const Collision = preload("res://game/level_collision.gd")
 
 
@@ -9,11 +10,10 @@ func _ready() -> void:
 	name = "TerracedCanyon"
 	# Broad shelves alternate with ramps: walk without Space, then choose a drop.
 	_ribbon("WestTerraces", Vector3(67, -160, -130), Vector3(0, 0, -1), 96, 14, 18, 0)
-	_ribbon("EastSlope", Vector3(131, -168, -151), Vector3(0, 0, -1), 85, 12, 22, 1)
-	_ribbon("RockBridge", Vector3(49, -184, -194), Vector3.RIGHT, 116, 11, 7, 2)
-	# Deep enough to enter beneath the bridge and emerge on either side.
+	_ribbon("EastSlope", Vector3(131, -168, -151), Vector3(0, 0, -1), 85, 12, 22, 3)
+	# Deep enough to enter beneath the promontory and emerge on either side.
 	_ribbon("LowerBalcony", Vector3(78, -211, -187), Vector3(0, 0, -1), 58, 17, 16, 1)
-	# Continuous asymmetric rock strata, with an open tidal saddle at the bridge.
+	# Continuous asymmetric rock strata, with an open tidal saddle beside the promontory.
 	for side in [-1, 1]:
 		_cliff(side)
 
@@ -44,6 +44,8 @@ func _cliff(side: int) -> void:
 					_quad(st, center, ring[index], ring[next], center)
 				else:
 					_quad(st, center, ring[next], ring[index], center)
+	if side < 0:
+		Remnant.append_to(st)
 	st.generate_normals()
 	var stone := Nature.stone()
 	stone.set_shader_parameter("strata_strength", 1.0)
@@ -142,9 +144,7 @@ func _east_section(distance: float, horizontal: bool) -> float:
 
 
 static func height_at(distance: float, style: int) -> float:
-	if style == 2:
-		return sin(clampf(distance / 66, 0, 1) * PI) * 3
-	if style == 1:
+	if style != 0:
 		return -distance * .27
 	# Six weathered steps between observation shelves. Bevels are visible and
 	# walkable in both directions, rather than an invisible character step-up.
@@ -172,6 +172,8 @@ func _ribbon(
 	var stride := 1.0 / subdivisions
 	for index in range(length_m * subdivisions):
 		var row := index * stride
+		if _terrace_cut(style, row, 0) and _terrace_cut(style, row, 7):
+			continue
 		var corners: Array[Vector3] = []
 		for longitudinal in [row, row + stride]:
 			corners.append(_surface(start, direction, across, longitudinal, -1, width, style))
@@ -248,6 +250,8 @@ func _ribbon(
 func _terrace_cut(style: int, distance: float, lane: int) -> bool:
 	# A collapsed outer terrace leaves a narrow wall-side shelf. Walking around
 	# and swimming through the break are choices within the same piece of rock.
+	if style == 3:
+		return distance >= 38 and distance < 62 and lane >= 0 and lane < 8
 	return style == 0 and distance >= 40 and distance < 52 and lane >= 3 and lane < 8
 
 
@@ -266,8 +270,7 @@ func _surface(
 		var far_lip := exp(-pow((distance - 52) / 3, 2))
 		distance = maxf(0, distance + (-mouth * 1.5 + far_lip * 1.8) * (1 - lane * lane))
 	var mid := start + direction * distance
-	var section := distance - 18 if style == 2 else distance
-	mid.y += height_at(section, style)
+	mid.y += height_at(distance, style)
 	var half := width * .5 + sin(distance * .21) * 1.3 + sin(distance * .61) * .4
 	# Irregular outer lips around a reliable walking line; geometry and collision
 	# are the same surface. Broad bays replace a uniform rectangular walkway.
@@ -275,20 +278,13 @@ func _surface(
 	if style == 0:
 		var neck := smoothstep(20, 24, distance) * (1 - smoothstep(34, 38, distance))
 		half *= 1 - .65 * neck
-	if style == 2:
-		var arch := sin(clampf(section / 66, 0, 1) * PI)
-		half = 7.5 - 4 * arch + sin(section * .36) * .7
-		half += pow(maxf(0, sin(section * .21 + .6)), 2) * 3.5
-		mid += across * arch * arch * 1.8
-		# Broad, uneven remnants sink into both shores. The south edge stays open
-		# for the wildlife passage; most of the root mass spreads to the north.
-		var root := (1 - smoothstep(-8, 12, section)) + smoothstep(57, 80, section)
-		half += root * (10 + sin(section * .18) * 2)
-		mid += across * root * (23 if section > 33 else 8)
+	if style == 3:
+		var taper := (
+			1 - smoothstep(29, 38, distance) if distance < 50 else smoothstep(62, 72, distance)
+		)
+		half *= .12 + .88 * taper
 	mid += across * half * lane
 	mid.y += pow(absf(lane), 3) * (sin(distance * .4) * .7 - .5)
-	if style == 2:
-		mid.y += lane * lane * (sin(section * .23 + lane) * 2.4 - 1.2)
 	return mid
 
 
@@ -304,11 +300,6 @@ func _under(
 ) -> Vector3:
 	var point := _surface(start, direction, across, distance, lane, width, style)
 	var depth := thickness
-	if style == 2:
-		var section := distance - 18
-		depth = 4 + 10 * pow(1 - sin(clampf(section / 66, 0, 1) * PI), 2)
-		depth += 50 * (1 - smoothstep(-7, 9, section))
-		depth += 59 * smoothstep(60, 88, section)
 	depth *= 1 - .32 * lane * lane
 	point.y -= depth
 	point -= across * lane * 1.1

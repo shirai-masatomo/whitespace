@@ -66,57 +66,69 @@
     "seconds": 22.0
   },
   {
-    "depth": 184.0,
+    "depth": 188.7,
     "file": "canyon-frame-011.jpg",
-    "pose": "idle",
+    "pose": "sink",
     "seconds": 24.0
   },
   {
-    "depth": 179.5,
+    "depth": 189.5,
     "file": "canyon-frame-012.jpg",
-    "pose": "swim",
+    "pose": "ascend",
     "seconds": 26.0
   },
   {
-    "depth": 180.4,
+    "depth": 177.5,
     "file": "canyon-frame-013.jpg",
-    "pose": "swim",
+    "pose": "ascend",
     "seconds": 28.0
   },
   {
-    "depth": 180.9,
+    "depth": 179.0,
     "file": "canyon-frame-014.jpg",
-    "pose": "land",
+    "pose": "swim",
     "seconds": 30.0
   },
   {
-    "depth": 181.3,
+    "depth": 178.7,
     "file": "canyon-frame-015.jpg",
-    "pose": "walk",
+    "pose": "ascend",
     "seconds": 32.0
   },
   {
-    "depth": 185.9,
+    "depth": 181.0,
     "file": "canyon-frame-016.jpg",
     "pose": "swim",
     "seconds": 34.0
   },
   {
-    "depth": 195.9,
+    "depth": 181.8,
     "file": "canyon-frame-017.jpg",
-    "pose": "swim",
+    "pose": "walk",
     "seconds": 36.0
   },
   {
-    "depth": 205.9,
+    "depth": 182.0,
     "file": "canyon-frame-018.jpg",
-    "pose": "swim",
+    "pose": "walk",
     "seconds": 38.0
   },
   {
-    "depth": 215.9,
+    "depth": 190.8,
     "file": "canyon-frame-019.jpg",
     "pose": "swim",
     "seconds": 40.0
+  },
+  {
+    "depth": 200.8,
+    "file": "canyon-frame-020.jpg",
+    "pose": "swim",
+    "seconds": 42.0
+  },
+  {
+    "depth": 210.8,
+    "file": "canyon-frame-021.jpg",
+    "pose": "swim",
+    "seconds": 44.0
   }
 ]
