@@ -1,8 +1,8 @@
 extends RefCounted
 ## Places and phenomena, independent of platform targets and navigation arrows.
-const ARCH := Vector3(-64, -72, -42)
+const ARCH := Vector3(-50, -45, -90)
 const STREAM: Array[Vector3] = [
-	Vector3(-24, -42, -23), Vector3(-64, -68, -22), Vector3(-64, -76, -60), Vector3(-40, -112, -66)
+	Vector3(-24, -42, -23), Vector3(-50, -41, -70), Vector3(-50, -49, -108), Vector3(-40, -112, -66)
 ]
 
 

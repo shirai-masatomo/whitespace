@@ -80,7 +80,13 @@ func run() -> void:
 		await tick()
 	observations.bubble_depth_change = game.model.depth - before
 	await photo("38-bubble-choice", Places.ARCH)
-	check(await swim(Places.STREAM[0]), "Player can leave refuge by diving into the stream")
+	check(
+		await swim(Places.STREAM[0], 25, true), "Player can leave refuge by diving into the stream"
+	)
+	check(
+		Places.stream_sample(game.model.position, 12).length() > 2,
+		"Stream entry means actual current influence, not just reaching a waypoint"
+	)
 	await photo("39-current-entrance", Places.ARCH)
 	for index in range(1, Places.STREAM.size()):
 		check(
@@ -195,6 +201,21 @@ func compare_fixtures() -> void:
 		game.model.position.z < Places.ARCH.z, "Disabled experiment leaves no invisible arch wall"
 	)
 	game.model.config.discovery_enabled = true
+	for rate in [60, 15]:
+		for fast in [false, true]:
+			fixture(Places.ARCH + Vector3(0, 55, 0))
+			for frame in range(rate * 4):
+				game.advance(1.0 / rate, Vector2.ZERO, 1 if fast else 0, false)
+			check(game.model.standing, "Normal/fast descent lands on arch crown at %dHz" % rate)
+			check(game.model.position.y > Places.ARCH.y + 34, "Arch crown blocks tunnelling")
+		fixture(Places.ARCH + Vector3(0, 15, 0))
+		var underside := false
+		for frame in range(rate * 4):
+			game.advance(1.0 / rate, Vector2.ZERO, 0, true)
+			for body in game.motion.contact_bodies:
+				if "SwimThroughArch" in str(body.get_path()):
+					underside = true
+		check(underside, "Space meets the visible inner arch at %dHz" % rate)
 	for detour in [false, true]:
 		fixture(Vector3(-35, -80, -60))
 		game.model.oxygen = 30
