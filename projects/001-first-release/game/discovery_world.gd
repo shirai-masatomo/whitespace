@@ -6,6 +6,7 @@ const Collision = preload("res://game/level_collision.gd")
 const Animal = preload("res://game/great_swimmer.gd")
 var bubbles: Array[MeshInstance3D] = []
 var stream_motes: Array[MeshInstance3D] = []
+var cove_motes: Array[MeshInstance3D] = []
 var giant: Node3D
 var surface_bubbles: Array[MeshInstance3D] = []
 
@@ -38,6 +39,14 @@ func _ready() -> void:
 		var bubble_mote := Geo.put(self, quad, glow)
 		bubble_mote.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 		surface_bubbles.append(bubble_mote)
+	var streak := ShaderMaterial.new()
+	streak.shader = preload("res://game/shaders/flow_mote.gdshader")
+	for index in range(100):
+		var quad := QuadMesh.new()
+		quad.size = Vector2(.16, 2.0)
+		var mote := Geo.put(self, quad, streak)
+		mote.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+		cove_motes.append(mote)
 	giant = Animal.new()
 	giant.name = "DistantGiant"
 	add_child(giant)
@@ -98,8 +107,27 @@ func set_enabled(value: bool) -> void:
 	$SwimThroughArch/SolidGeometry.collision_layer = 3 if value else 0
 
 
-func update(time: float) -> void:
+func update(time: float, cove_speed: float = 0) -> void:
 	var data := Rules.bubbles(time)
+	var length := 0.0
+	for index in range(Rules.COVE_STREAM.size() - 1):
+		length += Rules.COVE_STREAM[index].distance_to(Rules.COVE_STREAM[index + 1])
+	for index in range(cove_motes.size()):
+		cove_motes[index].visible = cove_speed > 0
+		var distance := fposmod(index * length / cove_motes.size() + time * cove_speed, length)
+		var section := 0
+		while section < Rules.COVE_STREAM.size() - 2:
+			var span := Rules.COVE_STREAM[section].distance_to(Rules.COVE_STREAM[section + 1])
+			if distance < span:
+				break
+			distance -= span
+			section += 1
+		var flow := Rules.COVE_STREAM[section + 1] - Rules.COVE_STREAM[section]
+		var point := Rules.COVE_STREAM[section] + flow.normalized() * distance
+		point += Vector3(sin(index * 2.399), cos(index * 1.7), sin(index)) * 2.4
+		cove_motes[index].position = point
+		var across := Vector3.UP.cross(flow.normalized()).normalized()
+		cove_motes[index].basis = Basis(across, flow.normalized(), across.cross(flow.normalized()))
 	for index in range(bubbles.size()):
 		bubbles[index].position = data[index].center
 	for index in range(stream_motes.size()):

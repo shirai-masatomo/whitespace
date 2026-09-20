@@ -1,4 +1,4 @@
-param([ValidateSet('check', 'evaluate', 'test', 'lint', 'format', 'build', 'visual', 'visual-reef', 'visual-discovery', 'visual-playground', 'visual-entry', 'visual-canyon', 'benchmark', 'gpu-smoke', 'play', 'editor')][string]$Task = 'check', [ValidateSet('windows','windows-preview','windows-real','windows-agent')][string]$BuildFolder = 'windows', [ValidateSet('forward_plus','gl_compatibility')][string]$Renderer = 'forward_plus')
+param([ValidateSet('check', 'evaluate', 'test', 'lint', 'format', 'build', 'visual', 'visual-reef', 'visual-discovery', 'visual-playground', 'visual-entry', 'visual-canyon', 'visual-cove', 'benchmark', 'gpu-smoke', 'play', 'editor')][string]$Task = 'check', [ValidateSet('windows','windows-preview','windows-real','windows-agent')][string]$BuildFolder = 'windows', [ValidateSet('forward_plus','gl_compatibility')][string]$Renderer = 'forward_plus')
 $ErrorActionPreference = 'Stop'
 $projectRoot = $PSScriptRoot
 $buildRoot = Join-Path $projectRoot ('build/' + $BuildFolder)
@@ -56,6 +56,9 @@ try {
     }
     if ($Task -eq 'visual-entry') {
         Invoke-Godot 'visual-entry' @('--script', 'tests/test_entry.gd')
+    }
+    if ($Task -eq 'visual-cove') {
+        Invoke-Godot 'visual-cove' @('--script', 'tests/test_canyon.gd', '--', '--cove-only')
     }
     if ($Task -eq 'visual-canyon') {
         Invoke-Godot 'visual-canyon' @('--script', 'tests/test_canyon.gd')

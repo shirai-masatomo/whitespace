@@ -1,0 +1,68 @@
+[
+  {
+    "depth": 225.8,
+    "file": "cove-frame-000.jpg",
+    "pose": "swim",
+    "seconds": 2.0
+  },
+  {
+    "depth": 235.8,
+    "file": "cove-frame-001.jpg",
+    "pose": "swim",
+    "seconds": 4.0
+  },
+  {
+    "depth": 239.3,
+    "file": "cove-frame-002.jpg",
+    "pose": "ascend",
+    "seconds": 6.0
+  },
+  {
+    "depth": 243.4,
+    "file": "cove-frame-003.jpg",
+    "pose": "swim",
+    "seconds": 8.0
+  },
+  {
+    "depth": 253.4,
+    "file": "cove-frame-004.jpg",
+    "pose": "swim",
+    "seconds": 10.0
+  },
+  {
+    "depth": 254.8,
+    "file": "cove-frame-005.jpg",
+    "pose": "swim",
+    "seconds": 12.0
+  },
+  {
+    "depth": 254.8,
+    "file": "cove-frame-006.jpg",
+    "pose": "ascend",
+    "seconds": 14.0
+  },
+  {
+    "depth": 251.5,
+    "file": "cove-frame-007.jpg",
+    "pose": "ascend",
+    "seconds": 16.0
+  },
+  {
+    "depth": 246.4,
+    "file": "cove-frame-008.jpg",
+    "pose": "swim",
+    "seconds": 18.0
+  },
+  {
+    "depth": 237.3,
+    "file": "cove-frame-009.jpg",
+    "pose": "ascend",
+    "seconds": 20.0
+  },
+  {
+    "depth": 235.4,
+    "file": "cove-frame-010.jpg",
+    "pose": "swim",
+    "seconds": 22.0
+  }
+]

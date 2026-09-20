@@ -36,6 +36,14 @@ func run() -> void:
 	game.set_physics_process(false)
 	game.set_process_unhandled_input(false)
 	game.begin()
+	if "--cove-only" in OS.get_cmdline_user_args():
+		capture_root = "res://artifacts/cove-" + RenderingServer.get_current_rendering_method()
+		DirAccess.make_dir_recursive_absolute(capture_root)
+		await cove_exploration()
+		await cove_window_routes()
+		await cove_current_control()
+		await finish("cove")
+		return
 	for view in [
 		["60-canyon-approach", Vector3(62, -140, -104), Vector3(92, -181, -170)],
 		["61-canyon-interior", Vector3(81, -177, -165), Vector3(108, -199, -217)],
@@ -53,8 +61,14 @@ func run() -> void:
 	await wildlife_entrance()
 	await early_return_choice()
 	await cove_exploration()
+	await cove_window_routes()
+	await cove_current_control()
 	wildlife_clearance()
 	var output := "canyon-authored" if authored else "canyon"
+	await finish(output)
+
+
+func finish(output: String) -> void:
 	var file := FileAccess.open("res://artifacts/" + output + ".json", FileAccess.WRITE)
 	file.store_string(
 		JSON.stringify({"checks": checks, "failed": failed, "observations": observations}, "  ")
@@ -502,3 +516,147 @@ func cove_exploration() -> void:
 			touched and game.model.position.y < -224,
 			"Space contacts the cove underside instead of entering the shore at %dHz" % rate
 		)
+
+
+func cove_window_routes() -> void:
+	for variant in range(3):
+		var over := variant == 1
+		var low := variant == 2
+		fixture(Gardens.PLANTS[7] + Vector3.UP * 2)
+		game.pitch = -.35
+		follow_heading = true
+		minimum_oxygen = game.model.oxygen
+		var save_sequence := variant == 0 and "/cove-" in capture_root
+		if save_sequence:
+			sequence.clear()
+			simulation_frames = 0
+			record_sequence = true
+			DirAccess.make_dir_recursive_absolute(capture_root + "/sequence")
+		var targets := [
+			Vector3(88, -226, -230),
+			Vector3(89, -241, -252),
+			Vector3(91, -239, -267),
+			Places.COVE_STREAM[1]
+		]
+		if over:
+			targets = [Vector3(74, -219, -241), Vector3(61, -199, -257), Vector3(70, -204, -270)]
+		var arrived := true
+		for index in range(targets.size()):
+			if arrived:
+				arrived = await swim(targets[index], 12, not over and index == 3, false)
+				if low and index == 0:
+					# Compare the decision after leaving the plant's instant refill volume.
+					game.model.oxygen = 80
+				if not over and not low and index == 1 and gpu:
+					await capture("80-window-approach")
+		check(arrived, "The sea window permits %s travel" % ("above" if over else "through"))
+		if over:
+			for frame in range(60):
+				await tick()
+			check(game.model.standing, "The headland crown is an actual observation perch")
+		if gpu and not low:
+			await capture("82-window-crown" if over else "81-window-exit")
+		observations["window_over" if over else ("window_through_80" if low else "window_through")] = {
+			"arrived": arrived, "seconds": game.model.elapsed, "minimum_oxygen": minimum_oxygen
+		}
+		if not over and arrived:
+			for index in range(2, Places.COVE_STREAM.size()):
+				if arrived:
+					arrived = await swim(Places.COVE_STREAM[index], 15, true, false)
+			if arrived:
+				arrived = await swim(
+					game.model.platforms[16].position + Vector3.UP, 10, false, false
+				)
+			if arrived:
+				for frame in range(180):
+					var difference: Vector3 = (
+						game.model.platforms[16].position - game.model.position
+					)
+					await tick(
+						(Vector2(difference.x, difference.z) / 3).limit_length(),
+						0,
+						difference.y > 1
+					)
+					if game.model.oxygen == 100 or game.model.mode != Model.Mode.DIVING:
+						break
+			check(
+				(arrived and game.model.oxygen == 100) != low,
+				"Full oxygen permits the current crossing, while 80 percent requires a shorter choice"
+			)
+			if low:
+				check(
+					game.model.mode == Model.Mode.RETURNING,
+					"The low-oxygen detour ends in seamless rescue"
+				)
+			observations["cove_rejoin_80" if low else "cove_rejoin"] = {
+				"arrived": arrived, "seconds": game.model.elapsed, "minimum_oxygen": minimum_oxygen
+			}
+			if gpu and not low:
+				await capture("83-current-rejoins-reef")
+		if save_sequence:
+			record_sequence = false
+			if gpu:
+				var file := FileAccess.open(
+					capture_root + "/sequence/frames.json", FileAccess.WRITE
+				)
+				file.store_string(JSON.stringify(sequence, "  "))
+				file.close()
+		follow_heading = false
+	for rate in [60, 15]:
+		fixture(Vector3(89, -242, -267))
+		var touched := false
+		for frame in range(rate * 4):
+			game.advance(1.0 / rate, Vector2.ZERO, 0, true)
+			for body in game.motion.contact_bodies:
+				if "SunkenCove" in str(body.get_path()):
+					touched = true
+		check(
+			touched and game.model.position.y < -223,
+			"Space meets the sea window roof at %dHz" % rate
+		)
+
+
+func cove_current_control() -> void:
+	game.model.config = game.model.config.duplicate()
+	var speed: float = game.model.config.cove_stream_speed
+	var origin := Places.COVE_STREAM[2].lerp(Places.COVE_STREAM[3], .25)
+	for enabled in [false, true]:
+		fixture(origin)
+		game.model.config.cove_stream_speed = speed if enabled else 0.0
+		for frame in range(120):
+			await tick()
+		observations["cove_flow_on" if enabled else "cove_flow_off"] = {
+			"position": var_to_str(game.model.position),
+			"distance": origin.distance_to(game.model.position)
+		}
+		if enabled:
+			check(
+				game.model.position.z > origin.z + 25,
+				"A passive swimmer actually rides the returning current"
+			)
+			for frame in range(180):
+				await tick(Vector2.RIGHT)
+			check(
+				Places.sample_path(Places.COVE_STREAM, game.model.position, speed).length() < 1,
+				"Horizontal input can leave the fast current"
+			)
+	game.model.config.cove_stream_speed = speed
+	var hits := 0
+	var space: PhysicsDirectSpaceState3D = game.get_world_3d().direct_space_state
+	for index in range(Places.COVE_STREAM.size() - 1):
+		var query := PhysicsRayQueryParameters3D.create(
+			Places.COVE_STREAM[index], Places.COVE_STREAM[index + 1], 1
+		)
+		if not space.intersect_ray(query).is_empty():
+			hits += 1
+	check(hits == 0, "The current centreline does not promise passage through solid terrain")
+	observations.cove_current_wall_crossings = hits
+	fixture(Vector3(88, -226, -230))
+	game.model.oxygen = 80
+	var returned := await swim(Gardens.PLANTS[7] + Vector3.UP, 8, false, false)
+	for frame in range(60):
+		await tick()
+	check(
+		returned and game.model.oxygen == 100,
+		"At the 80 percent decision point, turning back to the cove algae is viable"
+	)

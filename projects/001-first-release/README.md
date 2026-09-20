@@ -38,7 +38,7 @@
 
 標準はForward+（Vulkan対応GPU）。描画に問題があれば同梱の `Play-Compatibility.ps1`、または `./dev.ps1 play -Renderer gl_compatibility` でOpenGLへ切り替えます。同じゲーム内容で、体積霧は近似光線になります。
 
-160m前後では、125mの補給地点から東南の岸壁へ寄れます。段丘を歩き、岩橋で補給するか、橋の下へ潜って深度を取るか、壁の切れ目から沖へ出るかを試せます。現在も制作中で、初見の誘導と岩の自然さは改善対象です。
+160m前後では、125mの補給地点から東南の岸壁へ寄れます。段丘を歩き、西岸の張り出しで補給するか、切れ込みへ潜るか、沖の生物を追うかを試せます。下側の入り江では、岩の窓をくぐって速い潮に乗ると既存の岩礁へ再合流できます。岩の上側も登れますが、寄り道中も酸素は減ります。現在も制作中で、初見の誘導と岩の自然さは改善対象です。
 
 ## 開発と検証
 
@@ -47,12 +47,12 @@ Windows x64、開発時のみPython 3.12以上。リポジトリルートから:
 ```powershell
 cd projects/001-first-release
 ./tools/setup.ps1
-./dev.ps1 check -BuildFolder windows-preview
+./dev.ps1 check -BuildFolder windows-agent
 ./dev.ps1 visual
 ./dev.ps1 play
 ```
 
-使用中のEXEを上書きしないでください。人間試遊済みの450m版 `build/windows` と旧版 `windows-real` は保持し、今回の出力は `build/windows-preview`。出力先が使用中なら未使用の `-BuildFolder windows-preview` 等を選びます。実行制限がある場合は、この信頼したスクリプトに限り `powershell -NoProfile -ExecutionPolicy Bypass -File ./dev.ps1 check`。マシン全体のポリシーは変更しません。
+使用中のEXEを上書きしないでください。人間試遊済みの450m版 `build/windows` と旧版 `windows-real` は保持し、自律検証の出力は `build/windows-agent`。出力先が使用中なら別の未使用フォルダを選びます。実行制限がある場合は、この信頼したスクリプトに限り `powershell -NoProfile -ExecutionPolicy Bypass -File ./dev.ps1 check`。マシン全体のポリシーは変更しません。
 
 - `setup`: Godot 4.7.2・Windowsテンプレートを公式SHA512で検証、固定版の開発ツールを専用venvへ導入。
 - `check`: format / lint / 開発依存整合性 / import / ルール・シーン・音・実プレイヤー全方向衝突テスト / evaluate / release export / EXE headless起動 / 配布zip。
@@ -62,6 +62,7 @@ cd projects/001-first-release
 - `visual-discovery`: 入水→泡→曲がる潮流→岩の穴→藻への連続入力、酸素残量による寄り道比較。`artifacts/discovery-<renderer>/` に撮影。
 - `visual-playground`: 桟橋→岩礁歩行→縦穴→内部歩行→別出口。屋根/外側/逆口は別試走、上下側面の実衝突も検証。
 - `visual-canyon`: 125mの既存補給地点から峡谷の段丘→橋→内部へ連続入力。内外/酸素比較は別の開始点で試走。`artifacts/canyon-<renderer>/`へ撮影。
+- `visual-cove`: 入り江の岸/岩窓/上側と、潮流に乗って既存岩礁へ戻る区間だけを画面外で比較。`artifacts/cove-<renderer>/`。全峡谷検査の代用ではありません。
 - `visual-entry`: 海上から入水、太陽光、魚群の先の海藻林を撮影。`artifacts/entry-<renderer>/`。
 - `gpu-smoke -BuildFolder windows-agent`: 配布EXEを画面外・無音で起動し120フレーム描画。`-Renderer gl_compatibility` でも確認できます。
 - `benchmark -Renderer forward_plus` / `benchmark -Renderer gl_compatibility`: 6場面の1280×720フレーム時間。結果は `artifacts/render-*.json`。

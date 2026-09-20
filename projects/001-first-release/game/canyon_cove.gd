@@ -53,6 +53,7 @@ func _ready() -> void:
 			for tier in range(3):
 				quad(st, wall(a, tier), wall(a, tier + 1), wall(b, tier + 1), wall(b, tier))
 			quad(st, surface(b, 1), base(b, 1), base(a, 1), surface(a, 1))
+	sea_window(st)
 	st.generate_normals()
 	var stone := Nature.stone()
 	stone.set_shader_parameter("strata_strength", .65)
@@ -67,6 +68,67 @@ static func ring(points: Array, along: float) -> Vector3:
 		points[posmod(i - 1, points.size())],
 		points[(i + 2) % points.size()],
 		fposmod(along, 1)
+	)
+
+
+static func sea_window(st: SurfaceTool) -> void:
+	# A pierced headland rooted in the low southern shore. The opening faces
+	# the arriving walker; swimming below and walking above reveal open water.
+	var inner := [
+		Vector3(71, -247, -260),
+		Vector3(75, -237, -262),
+		Vector3(81, -231, -264),
+		Vector3(91, -228, -266),
+		Vector3(101, -234, -265),
+		Vector3(107, -247, -261)
+	]
+	var outer := [
+		Vector3(48, -256, -256),
+		Vector3(47, -222, -260),
+		Vector3(61, -204, -268),
+		Vector3(86, -212, -278),
+		Vector3(105, -229, -270),
+		Vector3(128, -255, -255)
+	]
+	for step in range(40):
+		var a := step / 8.0
+		var b := (step + 1) / 8.0
+		var ia := open_curve(inner, a)
+		var ib := open_curve(inner, b)
+		var oa := open_curve(outer, a)
+		var ob := open_curve(outer, b)
+		var back := Vector3(0, -2, -11)
+		for lane in range(6):
+			var u := lane / 6.0
+			var v := (lane + 1) / 6.0
+			quad(st, facade(ia, oa, u), facade(ib, ob, u), facade(ib, ob, v), facade(ia, oa, v))
+			quad(
+				st,
+				facade(ia, oa, v, back),
+				facade(ib, ob, v, back),
+				facade(ib, ob, u, back),
+				facade(ia, oa, u, back)
+			)
+		quad(st, ia + back, ib + back, ib, ia)
+		quad(st, oa, ob, ob + back, oa + back)
+		if step == 0:
+			quad(st, oa, oa + back, ia + back, ia)
+		if step == 39:
+			quad(st, ib, ib + back, ob + back, ob)
+
+
+static func facade(inner: Vector3, outer: Vector3, across: float, back := Vector3.ZERO) -> Vector3:
+	var point := inner.lerp(outer, across) + back
+	# A broad eroded shoulder, not a flat ring facing the camera.
+	var bulge := sin(across * PI) * 7
+	point.z += bulge if back == Vector3.ZERO else -bulge * .6
+	return point
+
+
+static func open_curve(points: Array, along: float) -> Vector3:
+	var i := mini(int(along), points.size() - 2)
+	return points[i].cubic_interpolate(
+		points[i + 1], points[maxi(0, i - 1)], points[mini(points.size() - 1, i + 2)], along - i
 	)
 
 

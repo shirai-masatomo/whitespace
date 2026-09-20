@@ -342,6 +342,9 @@ func flow_at(point: Vector3) -> Vector3:
 	if config.discovery_enabled:
 		flow += Discovery.bubble_flow(point, elapsed, config.bubble_lift)
 		flow += Discovery.stream_sample(point, config.discovery_stream_speed, config.sink_speed)
+		flow += Discovery.sample_path(
+			Discovery.COVE_STREAM, point, config.cove_stream_speed, config.sink_speed, true
+		)
 	for zone in Layout.current_zones():
 		var distance: float = ((point - zone.center) / zone.radius).length()
 		flow += zone.flow * maxf(0, 1 - distance)

@@ -103,4 +103,4 @@ PC非干渉は継続。通常headless、GPUはまとめて画面外/非捕捉。
 - スクリーンショットへの具体的な批評を先にCodexが書き、改善案を作る。人間の赤入れが来るまで待つ運用へ変更しない。
 
 
-正本確認: origin/main 2f7e43f。2026-09-20 fetch/merge後。正本本文と上記会話補足を保持。未実装部分はTASKSのDD-064/065/067/068/069/070。CHANGES / SELF_CONTINUE。
+正本確認: origin/main 5697d2e。2026-09-21 fetch/merge後。正本本文と上記会話補足を保持。未実装部分はTASKSのDD-064/065/067/068/069/070。CHANGES / SELF_CONTINUE。

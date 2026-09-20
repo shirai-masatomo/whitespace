@@ -121,7 +121,7 @@ func update_depth(camera_y: float, cave_air: bool = false) -> void:
 func update_life(model) -> void:
 	effects.update(model)
 	discoveries.set_enabled(model.config.discovery_enabled)
-	discoveries.update(model.elapsed)
+	discoveries.update(model.elapsed, model.config.cove_stream_speed)
 	life.update(
 		model.position,
 		model.elapsed,

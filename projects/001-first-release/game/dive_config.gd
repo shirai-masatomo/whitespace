@@ -29,5 +29,6 @@ extends Resource
 @export var discovery_enabled: bool = true
 @export var bubble_lift: float = 8.0
 @export var discovery_stream_speed: float = 12.0
+@export var cove_stream_speed: float = 24.0
 @export var cavern_current_enabled: bool = true
 @export var cavern_updraft_speed: float = 9.0
