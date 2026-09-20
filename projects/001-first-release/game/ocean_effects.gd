@@ -42,6 +42,7 @@ func particles(
 	bubbles: bool
 ) -> GPUParticles3D:
 	var emitter := GPUParticles3D.new()
+	emitter.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	emitter.amount = count
 	emitter.lifetime = life
 	emitter.preprocess = minf(3, life)

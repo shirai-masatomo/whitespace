@@ -26,6 +26,8 @@ func _ready() -> void:
 	environment.ambient_light_source = Environment.AMBIENT_SOURCE_SKY
 	environment.fog_enabled = true
 	if forward:
+		# Resolve the PCSS sampling pattern visible on broad nearby cliff faces.
+		get_viewport().use_taa = true
 		environment.volumetric_fog_enabled = true
 		environment.volumetric_fog_length = 160.0
 		environment.volumetric_fog_detail_spread = 1.5

@@ -19,6 +19,8 @@ renderer/rendering_method.mobile="gl_compatibility"
 environment/defaults/default_clear_color=Color(0.015, 0.06, 0.095, 1)
 
 anti_aliasing/quality/msaa_3d=2
+lights_and_shadows/directional_shadow/soft_shadow_filter_quality=3
+lights_and_shadows/positional_shadow/soft_shadow_filter_quality=3
 
 [physics]
 common/physics_ticks_per_second=60

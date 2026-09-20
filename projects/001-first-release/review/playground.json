@@ -1,15 +1,15 @@
 {
-  "checks": 147,
+  "checks": 157,
   "failed": false,
   "observations": {
-    "cavern_journey_seconds": 37.6166666666658,
+    "cavern_journey_seconds": 37.5666666666658,
     "cavern_loop": {
       "minimum_oxygen": 35.5000000000001,
       "oxygen": 100.0,
       "seconds": 22.9
     },
-    "horizontal_extent": 132.770111083984,
-    "journey_to_deeper_route_seconds": 57.5833333333313,
+    "horizontal_extent": 132.769607543945,
+    "journey_to_deeper_route_seconds": 57.5333333333313,
     "low_outside": {
       "complete": false,
       "oxygen": 0.0,
@@ -28,9 +28,9 @@
     },
     "outside_fast": {
       "complete": true,
-      "minimum_oxygen": 10.0666666666655,
+      "minimum_oxygen": 10.4999999999988,
       "oxygen": 100.0,
-      "seconds": 17.6166666666669
+      "seconds": 17.8000000000003
     },
     "reverse": {
       "complete": true,

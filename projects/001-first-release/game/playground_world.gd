@@ -30,6 +30,12 @@ func triangle(st: SurfaceTool, a: Vector3, b: Vector3, c: Vector3) -> void:
 		st.add_vertex(point)
 
 
+func _reef_triangle(st: SurfaceTool, a: Vector3, b: Vector3, c: Vector3) -> void:
+	# Godot's front faces are clockwise. The original shelf wound its outside
+	# faces inward, producing wrong light and self-shadowing despite backface collision.
+	triangle(st, c, b, a)
+
+
 func _make_reef() -> void:
 	var root := Node3D.new()
 	root.name = "WalkableKelpReef"
@@ -40,28 +46,35 @@ func _make_reef() -> void:
 		for z in range(-90, 2, 2):
 			if not _reef_cell(x, z):
 				continue
-			var a := Vector3(x, Rules.reef_height(x, z), z)
-			var b := Vector3(x + 2, Rules.reef_height(x + 2, z), z)
-			var c := Vector3(x + 2, Rules.reef_height(x + 2, z + 2), z + 2)
-			var d := Vector3(x, Rules.reef_height(x, z + 2), z + 2)
-			triangle(st, a, c, b)
-			triangle(st, a, d, c)
+			var a := _reef_vertex(x, z)
+			var b := _reef_vertex(x + 2, z)
+			var c := _reef_vertex(x + 2, z + 2)
+			var d := _reef_vertex(x, z + 2)
+			_reef_triangle(st, a, c, b)
+			_reef_triangle(st, a, d, c)
 			var bottom := Vector3.DOWN * 12
-			triangle(st, a + bottom, b + bottom, c + bottom)
-			triangle(st, a + bottom, c + bottom, d + bottom)
+			_reef_triangle(st, a + bottom, b + bottom, c + bottom)
+			_reef_triangle(st, a + bottom, c + bottom, d + bottom)
 			# Close every coastline and the shaft: the reef has a traversable roof,
 			# solid edges and an underside, rather than a one-sided scenery sheet.
 			var edges := [[a, b, x, z - 2], [b, c, x + 2, z], [c, d, x, z + 2], [d, a, x - 2, z]]
 			for edge in edges:
 				if not _reef_cell(edge[2], edge[3]):
-					triangle(st, edge[0], edge[1], edge[1] + bottom)
-					triangle(st, edge[0], edge[1] + bottom, edge[0] + bottom)
+					for layer in range(6):
+						var first := _wall_vertex(edge[0], layer)
+						var second := _wall_vertex(edge[1], layer)
+						var third := _wall_vertex(edge[1], layer + 1)
+						var fourth := _wall_vertex(edge[0], layer + 1)
+						_reef_triangle(st, first, second, third)
+						_reef_triangle(st, first, third, fourth)
 	st.generate_normals()
 	Geo.put(root, st.commit(), Nature.stone())
 	for index in range(28):
 		var angle := index * TAU / 28
 		var x := 45 + cos(angle) * (21 + sin(angle * 5) * 3)
 		var z := -45 + sin(angle) * (36 + cos(angle * 3) * 4)
+		if _cleft(x, z, 10):
+			continue
 		Geo.put(
 			root,
 			Geo.boulder(Vector3(10, 15, 13), index + 330),
@@ -84,6 +97,8 @@ func _make_reef() -> void:
 			clearing = clearing or Vector2(x - plant.x, z - plant.z).length() < 6
 		if clearing:
 			continue
+		if x > 34 and x < 50 and z > -48 and z < -24:
+			continue  # A sightline from the first garden into the lateral cleft.
 		if _reef_cell(int(x), int(z)) and Vector2(x - 49, z + 50).length() > 10:
 			var height := rng.randf_range(10, 21)
 			_make_kelp(root, Vector3(x, Rules.reef_height(x, z), z), height, index)
@@ -97,7 +112,68 @@ func _reef_cell(x: int, z: int) -> bool:
 	return (
 		Vector2(p.x / 23, p.y / 39).length() < coast
 		and Vector2(x + 1 - 49, z + 1 + 50).length() > 7
+		and not _cleft(x + 1, z + 1, 4)
 	)
+
+
+func _cleft(x: float, z: float, radius: float) -> bool:
+	var center := -38.0 - (x - 23) * .45 + sin(x * .2)
+	return x < 50 and absf(z - center) < radius
+
+
+func _reef_field(point: Vector2) -> float:
+	var p := point - Vector2(45, -45)
+	var angle := atan2(p.y / 39, p.x / 23)
+	var coast := 1 + .07 * sin(angle * 5) + .04 * cos(angle * 9)
+	var shore := (coast - Vector2(p.x / 23, p.y / 39).length()) * 23
+	var shaft := point.distance_to(Vector2(49, -50)) - 7
+	var center := -38.0 - (point.x - 23) * .45 + sin(point.x * .2)
+	var cleft := maxf(absf(point.y - center) - 4, point.x - 50)
+	return minf(shore, minf(shaft, cleft))
+
+
+func _reef_gradient(point: Vector2) -> Vector2:
+	return (
+		Vector2(
+			_reef_field(point + Vector2(.1, 0)) - _reef_field(point - Vector2(.1, 0)),
+			_reef_field(point + Vector2(0, .1)) - _reef_field(point - Vector2(0, .1))
+		)
+		/ .2
+	)
+
+
+func _reef_vertex(x: int, z: int) -> Vector3:
+	if not _sculpted_cleft(x, z):
+		return Vector3(x, Rules.reef_height(x, z), z)
+	var neighbors := 0
+	for offset in [Vector2i.ZERO, Vector2i(-2, 0), Vector2i(0, -2), Vector2i(-2, -2)]:
+		if _reef_cell(x + offset.x, z + offset.y):
+			neighbors += 1
+	var point := Vector2(x, z)
+	# Shared boundary vertices follow the opening, rather than grid-square teeth.
+	if neighbors > 0 and neighbors < 4:
+		for iteration in range(3):
+			var gradient := _reef_gradient(point)
+			point -= (
+				(gradient * _reef_field(point) / maxf(.1, gradient.length_squared()))
+				. limit_length(1.5)
+			)
+	return Vector3(point.x, Rules.reef_height(point.x, point.y), point.y)
+
+
+func _wall_vertex(top: Vector3, layer: int) -> Vector3:
+	var depth := layer / 6.0
+	if not _sculpted_cleft(top.x, top.z):
+		return top + Vector3.DOWN * 12 * depth
+	var point := Vector2(top.x, top.z)
+	var inward := _reef_gradient(point).normalized()
+	# Eroded bands open swimming alcoves under the lip, without invisible ledges.
+	var recess := sin(depth * PI) * (1.6 + .65 * sin(top.x * .4 + top.z * .3 + layer * 1.7))
+	return top + Vector3(inward.x * recess, -12 * depth, inward.y * recess)
+
+
+func _sculpted_cleft(x: float, z: float) -> bool:
+	return x < 55 and z < -32 and z > -59
 
 
 func _make_kelp(parent: Node3D, point: Vector3, height: float, seed_value: int) -> void:

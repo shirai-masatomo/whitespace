@@ -189,7 +189,10 @@ func audit_surfaces() -> void:
 	var surfaces := [
 		["reef top", Vector3(37, -18, -27), Vector3(37, -42, -27)],
 		["reef underside", Vector3(37, -54, -27), Vector3(37, -25, -27)],
-		["reef side", Vector3(8, -34, -40), Vector3(42, -34, -40)],
+		# The former side-wall fixture at z=-40 is now the intentional cleft mouth.
+		["reef side", Vector3(8, -34, -30), Vector3(42, -34, -30)],
+		["cleft inner side", Vector3(32, -38, -42), Vector3(32, -38, -30)],
+		["cleft opposite side", Vector3(38, -38, -45), Vector3(38, -38, -57)],
 		["cave roof", Vector3(104, -14, -48), Vector3(104, -40, -48)],
 		["chimney rim", Vector3(115, -12, -65), Vector3(115, -50, -65)],
 		["cave side", Vector3(104, -40, -90), Vector3(104, -40, -48)],

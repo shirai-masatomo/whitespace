@@ -35,7 +35,9 @@ func _ready() -> void:
 	for index in range(24):
 		var quad := QuadMesh.new()
 		quad.size = Vector2.ONE * (.3 + index % 4 * .12)
-		surface_bubbles.append(Geo.put(self, quad, glow))
+		var bubble_mote := Geo.put(self, quad, glow)
+		bubble_mote.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+		surface_bubbles.append(bubble_mote)
 	giant = Animal.new()
 	giant.name = "DistantGiant"
 	add_child(giant)

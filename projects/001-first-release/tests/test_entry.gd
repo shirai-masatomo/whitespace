@@ -43,11 +43,28 @@ func run() -> void:
 	game.world.life.update(Vector3(500, 0, 500), PI / .2)
 	check(guide.position.x - first.x > 20, "Fish movement leads sideways into the reef")
 	check(game.model.oxygen == 100, "Exploration reaches the living oxygen refuge")
+	await photo("65-cleft-choice", Vector3(40, -34, -45))
+	check(
+		await swim(Vector3(30, -32, -41), 12, false, false),
+		"Leave the garden sideways into the cleft"
+	)
+	check(
+		await swim(Vector3(32, -38, -42), 12, false, false),
+		"Swim inside the reef instead of hopping between rocks"
+	)
+	await photo("66-inside-reef-cleft", Vector3(49, -39, -50))
+	check(
+		await swim(Vector3(49, -40, -50), 12, false, false), "The lateral opening joins the shaft"
+	)
 	var file := FileAccess.open("res://artifacts/entry.json", FileAccess.WRITE)
 	file.store_string(
 		JSON.stringify({"checks": checks, "failed": failed, "seconds": game.model.elapsed}, "  ")
 	)
 	file.close()
+	if gpu:
+		file = FileAccess.open(capture_root + "/sequence/frames.json", FileAccess.WRITE)
+		file.store_string(JSON.stringify(sequence, "  "))
+		file.close()
 	game.queue_free()
 	await process_frame
 	print("Entry: %d checks, failed=%s" % [checks, failed])
