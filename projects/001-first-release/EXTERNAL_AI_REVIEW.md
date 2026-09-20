@@ -2,6 +2,7 @@
 
 更新: 2026-09-20
 対象: `codex/dive-dive-playground` 実装 head `52f05a00cde79b679a408badc2f486b70e2dba7f`
+reviewed_through: 52f05a00cde79b679a408badc2f486b70e2dba7f
 
 ## 判定: **CHANGES / SELF_CONTINUE**
 
@@ -18,7 +19,7 @@
 - 岩段差・狭棚を既存の場所へ統合し、下降/登り返し、泳ぎへの切替を実入力で確認した。
 - 橋中央を削り、下面/上面/横断口を同じ場所の別経路として使えるようにした。
 - 不要ファイル監査を実施し、旧レビューPNG70枚と不要な旧地形を整理した。
-- ローカルcheck/build、実衝突、既存11経路、両renderer確認は維持。`52f05a00` のGitHub Actionsはこのレビュー時点では実行中であり、成功扱いにはしない。
+- ローカルcheck/build、実衝突、既存11経路、両renderer確認は維持。`52f05a00` のGitHub Actions `DIVE DIVE` run 75 は **success** を確認した。
 
 これらは有効。ただし **機能/経路の成立を、クオリティー合格と混同しないこと。**
 
