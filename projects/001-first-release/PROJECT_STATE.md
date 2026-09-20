@@ -14,7 +14,7 @@
 
 ## 最新指示と品質判定
 
-正本はorigin/main **d0f7354** のHUMAN_DIRECTION / EXTERNAL_AI_REVIEW（reviewed_through: 389c8a3）。同期済み。DD-064=魚の動きと庭の先、DD-072=LowerBalconyを場所へ置換、DD-069=125〜160mからの自然発見と入口の先、DD-067=通常カメラの比較へ具体化。専用mesh方式の再試行は優先せず、前回Bは不採用のまま。
+正本はorigin/main **d0f7354** のHUMAN_DIRECTION / EXTERNAL_AI_REVIEW（reviewed_through: 389c8a3）。同期済み。DD-064=魚の動きと庭の先、DD-065/070/072=LowerBalconyを場所へ置換、DD-069=125〜160mからの自然発見と入口の先、DD-067=通常カメラの比較へ具体化。専用mesh方式の再試行は優先せず、前回Bは不採用のまま。
 
 景観密度とプレイアブル密度を分ける。今回の入り江は実際に歩く/潜る/横へ抜ける面積を増やしたが、自然地形の質・初見の発見・面白さは未合格。魚の数や深度を増やしていない。次の人間レビュー条件は満たさない。
 
