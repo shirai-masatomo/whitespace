@@ -58,6 +58,24 @@ func run() -> void:
 	var first: Vector3 = guide.position
 	game.world.life.update(Vector3(500, 0, 500), PI / .2)
 	check(guide.position.x - first.x > 20, "Fish movement leads sideways into the reef")
+	var turn_max := 0.0
+	var previous_yaw := guide.rotation.y
+	var wall_hits := 0
+	for sample in range(1, 316):
+		var time := sample * .1
+		game.world.life.update(Vector3(500, 0, 500), time)
+		if sample > 1:
+			turn_max = maxf(turn_max, absf(angle_difference(previous_yaw, guide.rotation.y)))
+		previous_yaw = guide.rotation.y
+		var query := PhysicsRayQueryParameters3D.create(
+			game.world.life.reef_passage(time - .1), guide.position, 1
+		)
+		if not game.get_world_3d().direct_space_state.intersect_ray(query).is_empty():
+			wall_hits += 1
+	check(turn_max < .08, "The shoal bends continuously through its return rather than flipping")
+	check(wall_hits == 0, "The shoal's new return centreline stays outside solid reef")
+	observations.shoal_max_turn_degrees_per_tenth = rad_to_deg(turn_max)
+	observations.shoal_wall_crossings = wall_hits
 	check(game.model.oxygen == 100, "Exploration reaches the living oxygen refuge")
 	await photo("65-cleft-choice", Vector3(40, -34, -45))
 	check(

@@ -230,12 +230,13 @@ static func landscape(parent: Node3D) -> void:
 			rng.randf_range(-220, 380), rng.randf_range(-330, -200), rng.randf_range(-650, -160)
 		)
 		var width := rng.randf_range(35, 100)
-		Geo.put(
-			parent,
-			Geo.boulder(Vector3(width, rng.randf_range(60, 140), width * .8), 400 + i),
-			mat,
-			point
-		)
+		var mesh := Geo.boulder(Vector3(width, rng.randf_range(60, 140), width * .8), 400 + i)
+		# The authored cove replaces scenery here; no hidden rock may fill its hole.
+		var bounds := mesh.get_aabb()
+		bounds.position += point
+		if bounds.intersects(AABB(Vector3(70, -275, -258), Vector3(55, 65, 45))):
+			continue
+		Geo.put(parent, mesh, mat, point)
 	for i in range(20):
 		var point := Vector3(
 			rng.randf_range(-55, 80), rng.randf_range(-160, -40), rng.randf_range(-140, -20)

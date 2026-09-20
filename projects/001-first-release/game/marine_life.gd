@@ -106,6 +106,16 @@ func _ray_point(t: float, lane: float, face: int) -> Vector3:
 	return Vector3(lane * width, camber + face * thickness, z)
 
 
+static func reef_passage(time: float) -> Vector3:
+	var phase := time * .2
+	var progress := .5 - .5 * cos(phase)
+	# Separate outward/return lanes let the group bend round instead of
+	# stopping and flipping every fish through 180 degrees at the refuge.
+	return (
+		Vector3(6, -9, -24).lerp(Vector3(32, -22, -28), progress) + Vector3(0, 0, -6 * sin(phase))
+	)
+
+
 func update(player: Vector3, elapsed: float, giant: Vector3 = Vector3.INF) -> void:
 	for index in range(rays.size()):
 		var phase := elapsed * .075 + index * .65
@@ -124,13 +134,10 @@ func update(player: Vector3, elapsed: float, giant: Vector3 = Vector3.INF) -> vo
 		shoals[index].position = origins[index] + escape
 	# A living lateral clue, with a return path, rather than an arrow or a
 	# mandatory escort. The shoal repeatedly crosses towards the kelp refuge.
-	var progress := .5 - .5 * cos(elapsed * .2)
-	var source := Vector3(6, -9, -24)
-	var refuge := Vector3(32, -22, -28)
-	var destination := source.lerp(refuge, progress)
+	var destination := reef_passage(elapsed)
 	var separation := destination - player
 	reef_guide.position = destination + separation.normalized() * maxf(0, 6 - separation.length())
-	var reef_heading := (refuge - source) * (1 if sin(elapsed * .2) >= 0 else -1)
+	var reef_heading := reef_passage(elapsed + .1) - reef_passage(elapsed - .1)
 	reef_guide.rotation.y = atan2(reef_heading.x, reef_heading.z)
 
 	for index in range(canyon_rays.size()):

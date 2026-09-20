@@ -3,6 +3,7 @@ extends Node3D
 const Geo = preload("res://game/ocean_geometry.gd")
 const Nature = preload("res://game/ocean_nature.gd")
 const Remnant = preload("res://game/canyon_remnant.gd")
+const Cove = preload("res://game/canyon_cove.gd")
 const Collision = preload("res://game/level_collision.gd")
 
 
@@ -12,7 +13,7 @@ func _ready() -> void:
 	_ribbon("WestTerraces", Vector3(67, -160, -130), Vector3(0, 0, -1), 96, 14, 18, 0)
 	_ribbon("EastSlope", Vector3(131, -168, -151), Vector3(0, 0, -1), 85, 12, 22, 3)
 	# Deep enough to enter beneath the promontory and emerge on either side.
-	_ribbon("LowerBalcony", Vector3(78, -211, -187), Vector3(0, 0, -1), 58, 17, 16, 1)
+	add_child(Cove.new())
 	# Continuous asymmetric rock strata, with an open tidal saddle beside the promontory.
 	for side in [-1, 1]:
 		_cliff(side)

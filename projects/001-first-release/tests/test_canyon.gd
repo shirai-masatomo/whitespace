@@ -52,6 +52,7 @@ func run() -> void:
 	await wildlife_detour()
 	await wildlife_entrance()
 	await early_return_choice()
+	await cove_exploration()
 	wildlife_clearance()
 	var output := "canyon-authored" if authored else "canyon"
 	var file := FileAccess.open("res://artifacts/" + output + ".json", FileAccess.WRITE)
@@ -438,4 +439,66 @@ func remnant_contacts() -> void:
 		check(
 			game.model.position.y < -198,
 			"The visible east-shore opening permits a fast descent at %dHz" % rate
+		)
+
+
+func cove_exploration() -> void:
+	fixture(Gardens.PLANTS[7] + Vector3.UP * 2)
+	game.pitch = -.35
+	for frame in range(60):
+		await tick()
+	var grounded := 0
+	for frame in range(100):
+		await tick(Vector2.RIGHT)
+		if game.model.standing:
+			grounded += 1
+	check(grounded > 55, "The garden opens onto walkable ground beside the sinkhole")
+	observations.cove_walk_grounded = grounded
+	observations.cove_walk_end = var_to_str(game.model.position)
+	if gpu:
+		await capture("79-cove-normal-view")
+	await photo("77-cove-shore", Vector3(90, -239, -241))
+	check(
+		await swim(Vector3(88, -246, -240), 12, false, false),
+		"Leave the shore and dive inside the sinkhole"
+	)
+	observations.cove_dive_seconds = game.model.elapsed
+	await photo("78-inside-cove", Vector3(121, -236, -237))
+	check(
+		await swim(Vector3(123, -236, -238), 12, false, false),
+		"The sinkhole has a real offshore side opening"
+	)
+	observations.cove_exit_seconds = game.model.elapsed
+	for rate in [60, 15]:
+		for fast in [false, true]:
+			fixture(Vector3(78, -210, -222))
+			for frame in range(rate * 3):
+				game.advance(1.0 / rate, Vector2.ZERO, 1 if fast else 0, false)
+			check(
+				game.model.standing and game.model.position.y > -222,
+				"Normal and E land on the cove refuge at %dHz" % rate
+			)
+		fixture(Vector3(88, -230, -240))
+		for frame in range(rate * 3):
+			game.advance(1.0 / rate, Vector2.ZERO, 1, false)
+		print("Cove fast descent: ", game.model.position, " ", game.motion.contact_bodies)
+		check(game.model.position.y < -262, "Fast descent crosses the open hole at %dHz" % rate)
+		fixture(Vector3(88, -230, -235))
+		var touched := false
+		for frame in range(rate * 3):
+			game.advance(1.0 / rate, Vector2(0, 1), 0, false)
+			for body in game.motion.contact_bodies:
+				if "SunkenCove" in str(body.get_path()):
+					touched = true
+		check(touched, "Lateral input meets the visible cove inner bank at %dHz" % rate)
+		fixture(Vector3(78, -259, -222))
+		touched = false
+		for frame in range(rate * 5):
+			game.advance(1.0 / rate, Vector2.ZERO, 0, true)
+			for body in game.motion.contact_bodies:
+				if "SunkenCove" in str(body.get_path()):
+					touched = true
+		check(
+			touched and game.model.position.y < -224,
+			"Space contacts the cove underside instead of entering the shore at %dHz" % rate
 		)
