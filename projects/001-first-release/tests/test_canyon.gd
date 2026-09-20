@@ -41,6 +41,7 @@ func run() -> void:
 		DirAccess.make_dir_recursive_absolute(capture_root)
 		await cove_exploration()
 		await cove_window_routes()
+		await window_contacts()
 		await cove_current_control()
 		await current_choices()
 		await current_detours()
@@ -65,6 +66,7 @@ func run() -> void:
 	await early_return_choice()
 	await cove_exploration()
 	await cove_window_routes()
+	await window_contacts()
 	await cove_current_control()
 	await current_choices()
 	await current_detours()
@@ -563,8 +565,10 @@ func cove_window_routes() -> void:
 					await capture("80-window-approach")
 		check(arrived, "The sea window permits %s travel" % ("above" if over else "through"))
 		if over:
-			for frame in range(60):
+			for frame in range(180):
 				await tick()
+				if game.model.standing:
+					break
 			check(game.model.standing, "The headland crown is an actual observation perch")
 		if gpu and not low:
 			await capture("82-window-crown" if over else "81-window-exit")
@@ -822,3 +826,36 @@ func continuous_current_choices() -> void:
 			if gpu:
 				await capture("93-return-contact" if stage == 1 else "94-rejoin-contact")
 	game.model.config.cove_stream_speed = original
+
+
+func window_contacts() -> void:
+	var surfaces := [
+		["crown", Vector3(70, -192, -277), Vector3(70, -227, -277)],
+		["front", Vector3(60, -216, -244), Vector3(60, -216, -291)],
+		["back", Vector3(60, -216, -306), Vector3(60, -216, -252)],
+		["soffit", Vector3(89, -242, -266), Vector3(89, -214, -266)]
+	]
+	for surface in surfaces:
+		var direction: Vector3 = (surface[2] - surface[1]).normalized()
+		var query := PhysicsRayQueryParameters3D.create(surface[1], surface[2], 1)
+		var hit: Dictionary = game.get_world_3d().direct_space_state.intersect_ray(query)
+		check(
+			not hit.is_empty() and "SunkenCove" in str(hit.collider.get_path()),
+			"Rock window visible surface exists: " + surface[0]
+		)
+		if hit.is_empty():
+			continue
+		for rate in [60, 15]:
+			fixture(hit.position - direction * 2.5 - Vector3.UP * 1.05)
+			game.model.velocity = direction * 15
+			var touched := false
+			for frame in range(rate * 2):
+				game.advance(1.0 / rate, Vector2(direction.x, direction.z), 1, direction.y > .1)
+				if game.motion.contact_bodies.has(hit.collider):
+					touched = true
+					break
+			check(touched, "Actual rock-window contact: %s at %dHz" % [surface[0], rate])
+			check(
+				(game.model.position + Vector3.UP * 1.05 - hit.position).dot(direction) < .5,
+				"No rock-window tunnelling: %s at %dHz" % [surface[0], rate]
+			)

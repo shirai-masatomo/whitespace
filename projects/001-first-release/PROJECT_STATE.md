@@ -14,23 +14,23 @@
 
 ## 最新指示と品質判定
 
-正本はorigin/main **a702afe** のHUMAN_DIRECTION / EXTERNAL_AI_REVIEW（reviewed_through **e7a758f**）。fetch/merge済み。別セッションのレビュー同期d420050も通常mergeで保持。未実装指示はTASKSのP0へ具体化。
+正本はorigin/main **fb20899** のHUMAN_DIRECTION / EXTERNAL_AI_REVIEW（reviewed_through **28ed30e**）。fetch/merge済み。並行セッションの同期222088d/7ea9f15を通常mergeで保持。mainの古いTASKS/AUTONOMYは上書きしない。未実装指示はTASKSのP0へ具体化。
 
-庭の進入角/藻位置をA/B比較し、既存裂け目へ近いAを採用。Bは大斜面が主役のままで棄却。85/86の対岸への抜けは改善したが、84の入水体験と岩/葉/生物の質は未合格。ゲーム側の強制カメラ誘導は加えていない。
+庭の藻位置は前版を保持し、樹木状の広葉を細長い葉へ。細すぎる初案は存在感を失ったため棄却し、斜めに長葉が重なる案へ改善。魚と岩の模型感、入水84の構図は未合格。
 
-潮の折返しを短くする案は連続6条件すべて失敗し棄却。既存藻を内岸へ寄せる案を実操作で比較し、岸帰還の最低酸素6.47→15.07%へ。ただし最適操縦に近い測定であり、安全性/面白さの証明ではない。91は帰還先が岩に隠れ、79の大面も未改善。景観密度とプレイアブル密度を別評価する。
+入り江の岩窓は丸い一山から左右の肩と低い鞍部へ。追加浸食帯は実画面差が弱く棄却した。岩窓の上・表・裏・下面へ60/15Hzで実カプセル接触20検査を追加。上側は登れるが、その先の見返りが空虚。帰還先を隠す岩と流木再合流の短い猶予も未解決。景観密度とプレイアブル密度を別評価する。
 
 ## 検証
 
-最終check成功: format/lint/依存、ルール479・シーン430・音57・実衝突689・探索30・岩礁157・入水31・峡谷130、補助表面2688点、既存11経路、Windows export/配布EXE headless。
+最終check成功: format/lint/依存、ルール479・シーン430・音57・実衝突689・探索30・岩礁157・入水31・峡谷150、補助表面2688点、既存11経路、Windows export/配布EXE headless。
 
-入水31はForward+/Compatibility GPU、入り江50はForward+ GPU、標準visualの救助/再挑戦/到達、配布EXE両描画120フレームも成功。Eで岸側面へ当たる→退避/Space→藻へ実接触、通常/E/Spaceの既存衝突を維持。GPUは画面外/無音/非捕捉。別GPU・初見探索・長時間プレイは未確認。保存/Steam SDK/450m以深は未実装。
+入水31はForward+/Compatibility GPU、入り江70はForward+ GPU、標準visualの救助/再挑戦/到達、配布EXE両描画120フレームも成功。Eで岸側面へ当たる→退避/Space→藻へ実接触、通常/E/Spaceの既存衝突を維持。GPUは画面外/無音/非捕捉。別GPU・初見探索・長時間プレイは未確認。保存/Steam SDK/450m以深は未実装。
 
 ## GitHubと再開
 
-[下書きPR #2](https://github.com/shirai-masatomo/whitespace/pull/2)、branch `codex/dive-dive-playground`。対象SHAのCI結果はPR Checksを正本とする。開始時にf4ec8e6のCI169成功を確認。通常commit/push後も対象SHAの完了結果を確認する。
+[下書きPR #2](https://github.com/shirai-masatomo/whitespace/pull/2)、branch `codex/dive-dive-playground`。対象SHAのCI結果はPR Checksを正本とする。開始時に28ed30eのCI174成功を確認。通常commit/push後も対象SHAの完了結果を確認する。
 
-30分の常設再開 `dive-dive` は承認済み。再承認不要。今回03:22の再開でも実装/比較/棄却/再検証を実行。過去の無commit時間の原因が解消したとは扱わず、次回も実装commit時刻を確認する。
+30分の常設再開 `dive-dive` は承認済み。再承認不要。今回04:25の再開でも実装/比較/棄却/再検証を実行。過去の無commit時間の原因が解消したとは扱わず、次回も実装commit時刻を確認する。
 
 環境メモ: sandbox内GodotはAppData設定/証明書にアクセスできないため、この環境では通常権限で検証。GPUラッパーはStart-ProcessのExitCodeと専用ログで判定。呼び出し元の未設定LASTEXITCODEを非0と比較すると後続検査を省略するため、連続呼び出しはStop例外/ログで判定する。
 

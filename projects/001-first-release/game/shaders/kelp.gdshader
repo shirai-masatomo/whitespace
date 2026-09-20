@@ -1,10 +1,14 @@
 shader_type spatial;
 render_mode cull_disabled, depth_prepass_alpha;
 varying vec3 wp;
+uniform float stipe_height = 0.0;
+uniform float phase_offset = 0.0;
 void vertex(){
  wp=(MODEL_MATRIX*vec4(VERTEX,1.0)).xyz;
- VERTEX.x+=sin(TIME*0.9+wp.z*0.4+UV.y*3.0)*UV.y*UV.y*0.55;
- VERTEX.z+=cos(TIME*0.7+wp.x*0.3)*UV.y*0.2;
+ float bend = stipe_height > 0.0 ? pow(clamp(VERTEX.y / stipe_height, 0.0, 1.0), 2.0) : UV.y * UV.y;
+ VERTEX.x+=sin(TIME*0.7+wp.z*0.15+phase_offset)*bend*0.7;
+ VERTEX.z+=cos(TIME*0.5+wp.x*0.12+phase_offset)*bend*0.35;
+ VERTEX.x+=sin(TIME*1.3+UV.y*6.0+phase_offset)*UV.y*UV.y*0.08;
 }
 void fragment(){
  // Nearby scenery must not cover the third-person camera while turning.

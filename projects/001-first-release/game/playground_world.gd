@@ -190,22 +190,27 @@ func _sculpted_cleft(x: float, z: float) -> bool:
 
 
 func _make_kelp(parent: Node3D, point: Vector3, height: float, seed_value: int) -> void:
-	# Thin rising stipes with lateral fronds and a canopy leave sightlines at
-	# diver height. Long blades planted at ground level read as terrestrial grass.
+	# Long ascending ribbons and gaps replace the evenly spaced horizontal leaves.
+	var rng := RandomNumberGenerator.new()
+	rng.seed = 92021 + seed_value
 	var st := SurfaceTool.new()
 	st.begin(Mesh.PRIMITIVE_TRIANGLES)
-	st.append_from(Geo.leaf(height, .09), 0, Transform3D.IDENTITY)
-	for branch in range(12):
-		var t := .3 + branch * .054
+	st.append_from(Geo.leaf(height, .045), 0, Transform3D.IDENTITY)
+	var count := rng.randi_range(14, 24)
+	for branch in range(count):
+		var t := .14 + .71 * (branch + rng.randf_range(-.25, .25)) / count
 		var angle := branch * 2.399 + seed_value
-		var basis := Basis(Vector3.UP, angle) * Basis(Vector3.FORWARD, 1.0 + .25 * sin(branch))
+		var basis := Basis(Vector3.UP, angle) * Basis(Vector3.FORWARD, rng.randf_range(.65, 1.25))
+		var length := minf(rng.randf_range(3.4, 7.5), height * (1 - t))
 		st.append_from(
-			Geo.leaf(2.8 + t * 2, .3 + t * .2),
+			Geo.leaf(length, rng.randf_range(.12, .28)),
 			0,
 			Transform3D(basis, Vector3(0, t * height, sin(t * 3.3) * height * .17))
 		)
 	var mat := ShaderMaterial.new()
 	mat.shader = preload("res://game/shaders/kelp.gdshader")
+	mat.set_shader_parameter("stipe_height", height)
+	mat.set_shader_parameter("phase_offset", seed_value * .73)
 	Geo.put(parent, st.commit(), mat, point)
 
 

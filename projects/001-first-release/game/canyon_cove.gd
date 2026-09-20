@@ -86,9 +86,9 @@ static func sea_window(st: SurfaceTool) -> void:
 	var outer := [
 		Vector3(48, -256, -256),
 		Vector3(47, -222, -260),
-		Vector3(61, -204, -268),
-		Vector3(86, -212, -278),
-		Vector3(105, -229, -270),
+		Vector3(57, -202, -275),
+		Vector3(85, -222, -285),
+		Vector3(109, -218, -277),
 		Vector3(128, -255, -255)
 	]
 	for step in range(40):
@@ -121,7 +121,7 @@ static func sea_window(st: SurfaceTool) -> void:
 static func facade(inner: Vector3, outer: Vector3, across: float, back := Vector3.ZERO) -> Vector3:
 	var point := inner.lerp(outer, across) + back
 	# A broad eroded shoulder, not a flat ring facing the camera.
-	var bulge := sin(across * PI) * 7
+	var bulge := (smoothstep(.08, .3, across) - smoothstep(.55, .85, across) * .8) * 9
 	point.z += bulge if back == Vector3.ZERO else -bulge * .6
 	return point
 
