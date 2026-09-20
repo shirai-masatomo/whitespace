@@ -18,7 +18,7 @@
 
 最終コードで `./dev.ps1 check -BuildFolder windows-agent` 成功。format/lint/依存、ルール479・シーン430・音57・実衝突689・探索19・岩礁/藻庭救助147・入水7・峡谷32、補助の表面2688点、既存11経路、Windows export/EXE headless起動。逆向き歩行の速度消失も修正。Forward+/Compatibilityの峡谷32検査・入水撮影、標準visualの救助/ゴール、配布EXEの両方式120フレーム描画も成功。GPUは画面外・無音・非捕捉で行い、Codexが起動したプロセスのみ終了。
 
-GitHubは既存[下書きPR #2](https://github.com/shirai-masatomo/whitespace/pull/2)。remoteの探索commit `dec6b4a86696daea3294b76742c3580ee894af86` のCIは成功。今回の変更のCIはpush後に確認する。以前のpushは自動承認レビューで拒否されており、別経路で回避しない。
+GitHubは既存[下書きPR #2](https://github.com/shirai-masatomo/whitespace/pull/2)。remoteの探索commit `dec6b4a86696daea3294b76742c3580ee894af86` のCIは成功。今回の変更のCIはpush後に確認する。今回のpush実行は承認されたがremote先行で拒否されたため、`be1b24c` の管理文書更新を通常merge。タスクID衝突は内容を統合しDD-068へ分離。再push/CI確認を続ける。
 
 ## 未解決と次の作業
 
