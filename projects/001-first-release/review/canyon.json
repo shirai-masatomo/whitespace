@@ -1,11 +1,11 @@
 {
-  "checks": 55,
+  "checks": 57,
   "failed": false,
   "observations": {
     "early_inside_80": {
       "arrived": true,
-      "minimum_oxygen": 15.5999999999994,
-      "seconds": 16.2833333333337
+      "minimum_oxygen": 16.5999999999994,
+      "seconds": 17.0500000000003
     },
     "full_outside_80": {
       "arrived": false,
@@ -67,8 +67,8 @@
     },
     "wildlife_lower_entrance": {
       "arrived": true,
-      "minimum_oxygen": 5.13333333333388,
-      "seconds": 23.8833333333333
+      "minimum_oxygen": 15.2000000000005,
+      "seconds": 22.4
     },
     "wildlife_wall_crossings": 0
   }

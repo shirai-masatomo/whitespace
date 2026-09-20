@@ -317,7 +317,7 @@ func wildlife_entrance() -> void:
 		Vector3(166, -200, -207),
 		Vector3(145, -216, -210),
 		Vector3(117, -217, -220),
-		Gardens.PLANTS[7]
+		Gardens.PLANTS[7] + Vector3.UP * 2
 	]:
 		if arrived:
 			arrived = await swim(point, 15, false, false)
@@ -327,6 +327,14 @@ func wildlife_entrance() -> void:
 		arrived and game.model.oxygen == 100,
 		"Offshore detour can continue through a lower entrance to the next garden"
 	)
+	for frame in range(60):
+		await tick()
+	check(
+		game.model.standing and game.model.oxygen == 100,
+		"Lower entrance finishes standing on the refuge, not refilling through its side"
+	)
+	if gpu:
+		await capture("76-refuge-landing")
 	observations.wildlife_lower_entrance = {
 		"arrived": arrived, "seconds": game.model.elapsed, "minimum_oxygen": minimum_oxygen
 	}
@@ -349,11 +357,18 @@ func early_return_choice() -> void:
 			targets.append_array(
 				[Vector3(149, -187, -210), Vector3(166, -200, -207), Vector3(145, -216, -210)]
 			)
-		targets.append_array([Vector3(117, -217, -220), Gardens.PLANTS[7]])
+		targets.append_array([Vector3(117, -217, -220), Gardens.PLANTS[7] + Vector3.UP * 2])
 		var arrived := true
 		for target in targets:
 			if arrived:
 				arrived = await swim(target, 15, false, false)
+		if arrived:
+			for frame in range(60):
+				await tick()
+			check(
+				game.model.standing and game.model.oxygen == 100,
+				"Early return reaches the top of the algae shelf"
+			)
 		observations["early_inside_80" if not outside else "full_outside_80"] = {
 			"arrived": arrived, "seconds": game.model.elapsed, "minimum_oxygen": minimum_oxygen
 		}
