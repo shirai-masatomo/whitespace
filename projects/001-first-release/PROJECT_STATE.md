@@ -15,13 +15,13 @@
 
 ## 検証と同期
 
-最新外部レビュー正本は origin/main `ba60b0b`（`reviewed_through: c87a402`）。作業ブランチの `EXTERNAL_AI_REVIEW.md` へ同内容を同期済み。HUMAN_DIRECTION正本も保持。レビューは、高い根元/低い観察棚/深い切れ込みへの2回目の大形状再制作を前進としつつ、左の大面と観察棚の模型感が残るため人間レビューはまだ不要と判定。前回設定した局所専用mesh A/B条件を満たしたため、DD-070では張り出し1個だけのGodot生成版対Blender/手作りmesh版比較を次のP0として扱う。DD-064（入水右の最初の誘い）、DD-069（125〜160mからの自然発見と入口先の好奇心）、DD-067（通常視線の画面品質）、DD-065（ribbon以外の場所単位）もP0のまま。
+最新外部レビュー正本は origin/main `2f7e43f`（`reviewed_through: c87a402`）。作業ブランチの `EXTERNAL_AI_REVIEW.md` へ同内容を同期済み。HUMAN_DIRECTION正本も保持。レビューは、高い根元/低い観察棚/深い切れ込みへの2回目の大形状再制作を前進としつつ、左の大面と観察棚の模型感が残るため人間レビューはまだ不要と判定。前回設定した局所専用mesh A/B条件を満たしたため、DD-070では張り出し1個だけのGodot生成版対Blender/手作りmesh版比較を次のP0として扱う。DD-064（入水右の最初の誘い）、DD-069（125〜160mからの自然発見と入口先の好奇心）、DD-067（通常視線の画面品質）、DD-065（ribbon以外の場所単位）もP0のまま。
 
 張り出しの西根元を高く、酸素の観察棚を低くし、間に泳いで入れる深い切れ込みを追加。下面も根元/沖で別の輪郭へ。旧経路が新しい肩へ衝突したため、上を越える実入力を修正。125mから44.73秒で下側まで到達。切れ込みへ泳ぎ入りSpaceで抜ける4.18秒/残酸素83.27%を追加検査。前版との実画面で高低差は出たが、根元の大面と観察棚の模型感はまだCHANGES。
 
 最終コードで `./dev.ps1 check -BuildFolder windows-agent` 成功。format/lint/依存、ルール479・シーン430・音57・実衝突689・探索30・岩礁/藻庭救助157・入水17・峡谷70、補助の表面2688点、既存11経路、Windows export/EXE headless起動。今回の峡谷/生物の別入口はForward+/Compatibilityで実GPU画面・連続操作を確認、配布EXE Forward+120フレームも成功。生物の連続移動線（中心/左右7m）の壁横切り0。標準visualの救助・ゴールも今回再確認済み。入水の表現自体は今回未変更で、峡谷の制作成果と混同しない。GPUは画面外・無音・非捕捉、自分のプロセスのみ終了。
 
-GitHubは[下書きPR #2](https://github.com/shirai-masatomo/whitespace/pull/2)、作業ブランチは `codex/dive-dive-playground`。峡谷版 `8fc0448` のCI（run99）は成功。生物の別入口版 `733cdd6` のCI（run104）も成功。直前版e7ffe4cのCI run108成功。張り出し/湾版30662dfのCI run117成功。浅海斜面版42467a2のCI run119成功。現在HEAD系のDIVE DIVE CI run129は外部レビュー時点でin_progressのため、最新切れ込み版をCI成功済みとはまだ扱わない。次サイクル開始時に確認し、失敗なら自律修正する。ユーザーの継続的な明示許可を受け、30分ごとの自律再開設定 `dive-dive` をACTIVEで作成済み。同じ範囲の再承認は不要。許可範囲・除外事項はAUTONOMYに記録。ゲームの判定はCHANGESのまま。
+GitHubは[下書きPR #2](https://github.com/shirai-masatomo/whitespace/pull/2)、作業ブランチは `codex/dive-dive-playground`。峡谷版 `8fc0448` のCI（run99）は成功。生物の別入口版 `733cdd6` のCI（run104）も成功。直前版e7ffe4cのCI run108成功。張り出し/湾版30662dfのCI run117成功。浅海斜面版42467a2のCI run119成功。切れ込み版を含むHEAD `2701ab8` のDIVE DIVE CI run129も成功。ユーザーの継続的な明示許可を受け、30分ごとの自律再開設定 `dive-dive` をACTIVEで作成済み。同じ範囲の再承認は不要。許可範囲・除外事項はAUTONOMYに記録。ゲームの判定はCHANGESのまま。
 
 ## 未解決と次の作業
 
