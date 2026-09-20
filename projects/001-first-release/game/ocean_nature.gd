@@ -248,16 +248,7 @@ static func landscape(parent: Node3D) -> void:
 		kelp(parent, point, 10 + i % 4, i)
 	for i in range(8):
 		jelly(parent, 1.3 + i % 3 * .5, Vector3(38 + i * 5, -30 - i * 8, -60 - i * 4))
-	# Fragmented rock arch; no artificial ruin in the real layer.
-	for side in [-1, 1]:
-		Geo.put(
-			parent,
-			Geo.rock(Vector2(20, 25), 75, 88 + side),
-			mat,
-			Vector3(90 + side * 22, -95, -145)
-		)
-	var bridge := Geo.put(parent, Geo.rock(Vector2(60, 25), 12, 73), mat, Vector3(90, -95, -145))
-	bridge.rotation.z = .1
+	# The former isolated eastern arch is replaced by the traversable canyon.
 	# Increasing density on one side leaves an open offshore bypass.
 	for form in Layout.Reef.geology() + Layout.Rift.geology():
 		var reef := Geo.put(parent, Geo.boulder(form.size, form.seed), mat, form.point)

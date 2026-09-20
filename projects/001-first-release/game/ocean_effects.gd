@@ -23,7 +23,7 @@ func _ready() -> void:
 	splash = particles(80, 1.5, .06, .20, Vector3(0, 4, 0), Vector3(1.2, .1, 1.2), true)
 	splash.one_shot = true
 	splash.explosiveness = .95
-	entry_cloud = particles(360, 3, .025, .095, Vector3(0, 3.4, 0), Vector3(1.4, 1, 1.4), true)
+	entry_cloud = particles(280, 2.1, .012, .045, Vector3(0, 3.4, 0), Vector3(1.8, 1, 1.8), true)
 	entry_cloud.one_shot = true
 	entry_cloud.explosiveness = .75
 	cavern_jet = particles(260, 4, .065, .22, Vector3.UP * 7, Vector3(3, 16, 3), true)

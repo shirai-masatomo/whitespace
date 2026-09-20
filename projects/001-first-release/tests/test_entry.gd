@@ -33,6 +33,7 @@ func run() -> void:
 		"Looking up at sunlight underwater keeps the diver in frame"
 	)
 	await photo("51-enter-ocean", Vector3(35, -20, -28))
+	check(game.camera.position.y < -1.4, "Camera joins the submerged swimmer after entry")
 	await photo("52-surface-light", game.model.position + Vector3(3, 16, -18))
 	check(await swim(Vector3(32, -28, -25)), "The shoal's destination is actually reachable")
 	await photo("53-kelp-from-sea", Vector3(53, -20, -50))

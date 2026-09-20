@@ -4,16 +4,16 @@
 
 ## 今すぐ遊ぶ（Windows）
 
-1. このPCの今回の最新版は **`build/windows-preview/DIVE DIVE.exe`** をダブルクリック。
+1. このPCの今回の最新版は **`build/windows-agent/DIVE DIVE.exe`** をダブルクリック。
 2. 「潜りはじめる」またはEnter。WASDで桟橋の端から海へ飛び込む。
 3. マウスで海を見渡す。光る藻、息ができる大きな泡、泡が流れ込む岩の穴が寄り道の候補。藻と泡は即酸素100%。
 4. 450mの「裂け目の先」に着地するとクリア。
 
-新しい寄り道は桟橋の右側。魚群の向かう海藻林には歩ける岩礁と縦穴があります。さらに横へ泳ぐと二つの入口を持つ洞窟。内部では水面へ上がって歩けます。屋根や外側も通れ、必須経路ではありません。新しい4群落の藻も、実際に接触した安全位置を救助先として記録します。洞窟の側面にも抜け穴があり、両端を通らず入れます。
+新しい寄り道は桟橋の右側。魚群の向かう海藻林には歩ける岩礁と縦穴があります。さらに横へ泳ぐと二つの入口を持つ洞窟。内部では水面へ上がって歩けます。屋根や外側も通れ、必須経路ではありません。追加した藻庭も、実際に接触した安全位置を救助先として記録します。洞窟の側面にも抜け穴があり、両端を通らず入れます。
 
 側面穴の外には泡の上昇流。乗ると上へ戻され、横に泳げば外へ出られます。Eで潜り抜けることもできますが、酸素を多く使います。
 
-この作業環境の最新出力は `windows-preview` です。別PCには `build/DIVE-DIVE-windows.zip` を展開して渡します。Godot/Python不要。[GitHub Actions](https://github.com/shirai-masatomo/whitespace/actions/workflows/dive-dive.yml) の最新成功実行の **DIVE-DIVE-windows** artifactでも配布物を取得できます。
+この作業環境の最新出力は `windows-agent` です。別PCには `build/DIVE-DIVE-windows.zip` を展開して渡します。Godot/Python不要。[GitHub Actions](https://github.com/shirai-masatomo/whitespace/actions/workflows/dive-dive.yml) の最新成功実行の **DIVE-DIVE-windows** artifactでも配布物を取得できます。
 
 | 操作 | 動作 |
 | --- | --- |
@@ -38,6 +38,8 @@
 
 標準はForward+（Vulkan対応GPU）。描画に問題があれば同梱の `Play-Compatibility.ps1`、または `./dev.ps1 play -Renderer gl_compatibility` でOpenGLへ切り替えます。同じゲーム内容で、体積霧は近似光線になります。
 
+160m前後では、125mの補給地点から東南の岸壁へ寄れます。段丘を歩き、岩橋で補給するか、橋の下へ潜って深度を取るか、壁の切れ目から沖へ出るかを試せます。現在も制作中で、初見の誘導と岩の自然さは改善対象です。
+
 ## 開発と検証
 
 Windows x64、開発時のみPython 3.12以上。リポジトリルートから:
@@ -59,18 +61,22 @@ cd projects/001-first-release
 - `visual-reef`: 岸壁歩行→裂け目、沖側の別経路を連続操作し、`artifacts/reef-<renderer>/` に撮影。どちらも画面外・フォーカスなし・マウス非捕捉。画像を目視確認します。
 - `visual-discovery`: 入水→泡→曲がる潮流→岩の穴→藻への連続入力、酸素残量による寄り道比較。`artifacts/discovery-<renderer>/` に撮影。
 - `visual-playground`: 桟橋→岩礁歩行→縦穴→内部歩行→別出口。屋根/外側/逆口は別試走、上下側面の実衝突も検証。
+- `visual-canyon`: 125mの既存補給地点から峡谷の段丘→橋→内部へ連続入力。内外/酸素比較は別の開始点で試走。`artifacts/canyon-<renderer>/`へ撮影。
 - `visual-entry`: 海上から入水、太陽光、魚群の先の海藻林を撮影。`artifacts/entry-<renderer>/`。
-- `gpu-smoke -BuildFolder windows-preview`: 配布EXEを画面外・無音で起動し120フレーム描画。`-Renderer gl_compatibility` でも確認できます。
+- `gpu-smoke -BuildFolder windows-agent`: 配布EXEを画面外・無音で起動し120フレーム描画。`-Renderer gl_compatibility` でも確認できます。
 - `benchmark -Renderer forward_plus` / `benchmark -Renderer gl_compatibility`: 6場面の1280×720フレーム時間。結果は `artifacts/render-*.json`。
 - `format` / `test` / `lint` / `build` / `editor`: 個別実行。生成ログは `artifacts/`、レビュー用の選別画像は `review/`。
 
 GitHub ActionsはWindowsでsetup/checkを実行しZIP・ログ・測定JSONを保存。GPU確認はローカルで実施します。レビュー画像・開発用ファイルは配布ゲームから除外。
+
+重要な再現メモ: 使用中のEXEをbuildで置換すると失敗するため、通常の自律検証は `./dev.ps1 check -BuildFolder windows-agent` を使います。Godotは終了コード0でもSCRIPT ERRORを出すことがあるので、ログ存在とERRORなしも必須。EXEへ渡すログパスは絶対パスにします。
 
 ## 構造と変更の入口
 
 - `game/dive_config.gd` / `default_config.tres`: 移動・酸素・救助の調整値。
 - `game/stage_layout.gd` / `reef_layout.gd` / `rift_layout.gd`: 足場の位置・大きさ・補給・往復移動の振幅/速さ。
 - `game/discovery_rules.gd` / `discovery_world.gd`: 足場と独立した泡・潮流・穴・生物。調整はconfigのdiscovery/bubble項目、全体比較は`discovery_enabled`。
+- `game/canyon_world.gd`: 160〜240mの連続段丘・斜面・岩橋・内外の横断口。描画メッシュをそのまま衝突に使用。
 - `game/dive_model.gd`: 移動・酸素・救助。実ゲームは `player_motion.gd` の連続掃引カプセルと `level_collision.gd` の固体メッシュ衝突を使用。上面のみの計算は軽量テスト用。
 - `game/diver.gd`: 主人公モデルと姿勢。`ocean_geometry` / `ocean_nature` / `ocean_lighting` / `ocean_effects`: 形状・自然景観・光・泡/粒子。
 - `game/main.gd`: 入力/カメラ、`world.gd` / `shaders/`: 水面・深度別照明・リアル層景観、`hud.gd`: 日本語案内。

@@ -11,6 +11,7 @@ const TUNING = preload("res://game/default_config.tres")
 const Collision = preload("res://game/level_collision.gd")
 const Discoveries = preload("res://game/discovery_world.gd")
 const Playground = preload("res://game/playground_world.gd")
+const Canyon = preload("res://game/canyon_world.gd")
 var lighting: Node3D
 var effects: Node3D
 var environment: Environment
@@ -37,6 +38,7 @@ func _ready() -> void:
 	discoveries = Discoveries.new()
 	add_child(discoveries)
 	add_child(Playground.new())
+	add_child(Canyon.new())
 	life.make_shoal(Vector3(84, -53, -63), 24)
 	for plant in Playground.Rules.PLANTS:
 		effects.vent(plant)

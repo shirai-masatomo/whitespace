@@ -1,4 +1,4 @@
-param([ValidateSet('check', 'evaluate', 'test', 'lint', 'format', 'build', 'visual', 'visual-reef', 'visual-discovery', 'visual-playground', 'visual-entry', 'benchmark', 'gpu-smoke', 'play', 'editor')][string]$Task = 'check', [ValidateSet('windows','windows-preview','windows-real')][string]$BuildFolder = 'windows', [ValidateSet('forward_plus','gl_compatibility')][string]$Renderer = 'forward_plus')
+param([ValidateSet('check', 'evaluate', 'test', 'lint', 'format', 'build', 'visual', 'visual-reef', 'visual-discovery', 'visual-playground', 'visual-entry', 'visual-canyon', 'benchmark', 'gpu-smoke', 'play', 'editor')][string]$Task = 'check', [ValidateSet('windows','windows-preview','windows-real','windows-agent')][string]$BuildFolder = 'windows', [ValidateSet('forward_plus','gl_compatibility')][string]$Renderer = 'forward_plus')
 $ErrorActionPreference = 'Stop'
 $projectRoot = $PSScriptRoot
 $buildRoot = Join-Path $projectRoot ('build/' + $BuildFolder)
@@ -20,6 +20,7 @@ function Invoke-Godot([string]$Name, [string[]]$Arguments) {
         & $godot --path $projectRoot --log-file $log --rendering-method $Renderer @Arguments
         if ($LASTEXITCODE -ne 0) { throw "$Name failed: exit $LASTEXITCODE" }
     }
+    if (-not (Test-Path -LiteralPath $log)) { throw "$Name did not produce a log" }
     if (Test-Path $log) {
         if (Select-String -Path $log -Pattern 'SCRIPT ERROR:|ERROR:' -Quiet) { throw "$Name logged errors: $log" }
     }
@@ -56,6 +57,9 @@ try {
     if ($Task -eq 'visual-entry') {
         Invoke-Godot 'visual-entry' @('--script', 'tests/test_entry.gd')
     }
+    if ($Task -eq 'visual-canyon') {
+        Invoke-Godot 'visual-canyon' @('--script', 'tests/test_canyon.gd')
+    }
     if ($Task -eq 'visual-playground') {
         Invoke-Godot 'visual-playground' @('--script', 'tests/test_playground.gd')
     }
@@ -88,6 +92,7 @@ try {
         Invoke-Godot 'discovery' @('--headless', '--script', 'tests/test_discovery.gd')
         Invoke-Godot 'playground' @('--headless', '--script', 'tests/test_playground.gd')
         Invoke-Godot 'entry' @('--headless', '--script', 'tests/test_entry.gd')
+        Invoke-Godot 'canyon' @('--headless', '--script', 'tests/test_canyon.gd')
     }
     if ($Task -in @('evaluate', 'check')) {
         Invoke-Godot 'evaluation' @('--headless', '--script', 'tests/test_evaluation.gd')

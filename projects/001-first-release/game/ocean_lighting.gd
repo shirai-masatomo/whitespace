@@ -57,7 +57,7 @@ func _ready() -> void:
 			beam.spot_range = 200
 			beam.spot_angle = 5 + index
 			beam.spot_attenuation = 0.5
-			beam.light_color = Color("b4edf1")
+			beam.light_color = Color("94c9f0")
 			beam.light_energy = 9
 			beam.light_volumetric_fog_energy = 35
 			beam.shadow_enabled = true
@@ -83,7 +83,7 @@ func update(camera_y: float, cave_air: bool = false) -> void:
 	sun.light_color = Color("fff0d3").lerp(Color("6abedb"), middle * immersion)
 	if forward:
 		environment.volumetric_fog_density = immersion * 0.0025
-		environment.volumetric_fog_albedo = Color("9bdce0").lerp(Color("477f99"), deep)
+		environment.volumetric_fog_albedo = Color("79b4d8").lerp(Color("477f99"), deep)
 		environment.volumetric_fog_emission = tint
 		environment.volumetric_fog_emission_energy = immersion * 0.08
 		environment.volumetric_fog_sky_affect = immersion

@@ -191,6 +191,10 @@ func _update_camera(delta: float = 1.0) -> void:
 	if third_person:
 		# Looking down leans over the edge while retaining the diver in frame.
 		desired = desired.lerp(focus + heading * 4 + Vector3.UP * 12, ledge_view)
+		# The chase camera must enter the sea with the swimmer, rather than keep
+		# looking through a bright surface while the player is already submerged.
+		var submerged := 1.0 - smoothstep(-2.2, .4, focus.y)
+		desired.y = lerpf(desired.y, minf(desired.y, -1.8), submerged)
 	if third_person:
 		var query := PhysicsRayQueryParameters3D.create(focus, desired)
 		query.collision_mask = 3
