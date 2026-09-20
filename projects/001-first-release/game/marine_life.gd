@@ -38,11 +38,33 @@ func _ready() -> void:
 
 
 static func canyon_passage(time: float) -> Vector3:
-	# Smooth return trip, no escort objective or forced wait to unlock a route.
-	var progress := .5 - .5 * cos(time * .19)
-	if progress < .5:
-		return Vector3(113, -174, -211).lerp(Vector3(147, -184, -210), progress * 2)
-	return Vector3(147, -184, -210).lerp(Vector3(180, -202, -192), progress * 2 - 1)
+	# The animals disappear around the outer shore and re-enter below it. They
+	# reveal an actual alternate entrance, not a timed gate or escort objective.
+	var places := [
+		Vector3(113, -174, -211),
+		Vector3(147, -184, -210),
+		Vector3(180, -202, -192),
+		Vector3(166, -197, -207),
+		Vector3(146, -216, -210),
+		Vector3(119, -214, -224),
+		Vector3(108, -198, -223)
+	]
+	var progress := fposmod(time / 7, places.size())
+	var index := int(progress)
+	var t := progress - index
+	var p0: Vector3 = places[posmod(index - 1, places.size())]
+	var p1: Vector3 = places[index]
+	var p2: Vector3 = places[(index + 1) % places.size()]
+	var p3: Vector3 = places[(index + 2) % places.size()]
+	return (
+		.5
+		* (
+			(2 * p1)
+			+ (-p0 + p2) * t
+			+ (2 * p0 - 5 * p1 + 4 * p2 - p3) * t * t
+			+ (-p0 + 3 * p1 - 3 * p2 + p3) * t * t * t
+		)
+	)
 
 
 func make_ray() -> Node3D:

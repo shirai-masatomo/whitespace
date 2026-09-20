@@ -1,0 +1,68 @@
+[
+  {
+    "depth": 178.4,
+    "file": "lower-frame-000.jpg",
+    "pose": "ascend",
+    "seconds": 2.0
+  },
+  {
+    "depth": 184.3,
+    "file": "lower-frame-001.jpg",
+    "pose": "swim",
+    "seconds": 4.0
+  },
+  {
+    "depth": 187.7,
+    "file": "lower-frame-002.jpg",
+    "pose": "swim",
+    "seconds": 6.0
+  },
+  {
+    "depth": 197.3,
+    "file": "lower-frame-003.jpg",
+    "pose": "swim",
+    "seconds": 8.0
+  },
+  {
+    "depth": 207.3,
+    "file": "lower-frame-004.jpg",
+    "pose": "swim",
+    "seconds": 10.0
+  },
+  {
+    "depth": 217.3,
+    "file": "lower-frame-005.jpg",
+    "pose": "swim",
+    "seconds": 12.0
+  },
+  {
+    "depth": 218.7,
+    "file": "lower-frame-006.jpg",
+    "pose": "swim",
+    "seconds": 14.0
+  },
+  {
+    "depth": 219.4,
+    "file": "lower-frame-007.jpg",
+    "pose": "swim",
+    "seconds": 16.0
+  },
+  {
+    "depth": 221.0,
+    "file": "lower-frame-008.jpg",
+    "pose": "swim",
+    "seconds": 18.0
+  },
+  {
+    "depth": 222.3,
+    "file": "lower-frame-009.jpg",
+    "pose": "swim",
+    "seconds": 20.0
+  },
+  {
+    "depth": 222.5,
+    "file": "lower-frame-010.jpg",
+    "pose": "sink",
+    "seconds": 22.0
+  }
+]

@@ -1,7 +1,17 @@
 {
-  "checks": 51,
+  "checks": 54,
   "failed": false,
   "observations": {
+    "early_inside_80": {
+      "arrived": true,
+      "minimum_oxygen": 15.5999999999994,
+      "seconds": 16.2833333333337
+    },
+    "full_outside_80": {
+      "arrived": false,
+      "minimum_oxygen": 0.0,
+      "seconds": 20.0000000000001
+    },
     "inside_seconds": 5.96666666666665,
     "journey_seconds": 40.2666666666657,
     "outside_seconds": 4.99999999999999,
@@ -54,6 +64,11 @@
       "outside_oxygen": 0.0,
       "returned": false,
       "seconds": 8.75000000000001
+    },
+    "wildlife_lower_entrance": {
+      "arrived": true,
+      "minimum_oxygen": 5.13333333333388,
+      "seconds": 23.8833333333333
     },
     "wildlife_wall_crossings": 0
   }

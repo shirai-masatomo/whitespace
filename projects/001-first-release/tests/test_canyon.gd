@@ -1,6 +1,21 @@
 extends "res://tests/test_discovery.gd"
 ## Fixed player-camera comparisons; fixtures are not claims of a complete route.
 const Gardens = preload("res://game/playground_rules.gd")
+var follow_heading := false
+var minimum_oxygen := 100.0
+
+
+func tick(axis: Vector2 = Vector2.ZERO, descent: float = 0, ascend: bool = false) -> void:
+	if follow_heading:
+		if axis.length() > .1:
+			game.yaw = lerp_angle(game.yaw, atan2(-axis.x, -axis.y), .035)
+		var local := Vector3(axis.x, 0, axis.y).rotated(Vector3.UP, -game.yaw)
+		game.advance(1.0 / 60, Vector2(local.x, local.z), descent, ascend)
+		if gpu:
+			await render_step()
+	else:
+		await super.tick(axis, descent, ascend)
+	minimum_oxygen = minf(minimum_oxygen, game.model.oxygen)
 
 
 func run() -> void:
@@ -30,6 +45,8 @@ func run() -> void:
 	await oxygen_choices()
 	await collisions()
 	await wildlife_detour()
+	await wildlife_entrance()
+	await early_return_choice()
 	wildlife_clearance()
 	var file := FileAccess.open("res://artifacts/canyon.json", FileAccess.WRITE)
 	file.store_string(
@@ -260,8 +277,8 @@ func wildlife_clearance() -> void:
 	var space: PhysicsDirectSpaceState3D = game.get_world_3d().direct_space_state
 	var hits := 0
 	for frame in range(1, 241):
-		var time := frame * TAU / .19 / 240
-		var previous: Vector3 = life.canyon_passage(time - .04)
+		var time := frame * 49.0 / 240
+		var previous: Vector3 = life.canyon_passage(time - 49.0 / 240)
 		var current: Vector3 = life.canyon_passage(time)
 		var heading := (current - previous).normalized()
 		var across := Vector3(-heading.z, 0, heading.x)
@@ -271,5 +288,69 @@ func wildlife_clearance() -> void:
 			)
 			if not space.intersect_ray(query).is_empty():
 				hits += 1
+				print("Wildlife wall sample: ", time, " ", space.intersect_ray(query))
 	observations.wildlife_wall_crossings = hits
 	check(hits == 0, "Wildlife centre and wing corridors never cross solid cliff faces")
+
+
+func wildlife_entrance() -> void:
+	fixture(Gardens.PLANTS[6] + Vector3(4.5, 2, 0))
+	game.pitch = -.35
+	follow_heading = true
+	minimum_oxygen = 100
+	var old_root := capture_root
+	capture_root += "/lower-entrance"
+	DirAccess.make_dir_recursive_absolute(capture_root + "/sequence")
+	sequence.clear()
+	simulation_frames = 0
+	record_sequence = true
+	var arrived := true
+	for point in [
+		Vector3(131, -178, -211),
+		Vector3(149, -187, -210),
+		Vector3(166, -200, -207),
+		Vector3(145, -216, -210),
+		Vector3(117, -217, -220),
+		Gardens.PLANTS[7]
+	]:
+		if arrived:
+			arrived = await swim(point, 15, false, false)
+			if point.x == 145 and gpu:
+				await capture("75-lower-entrance")
+	check(
+		arrived and game.model.oxygen == 100,
+		"Offshore detour can continue through a lower entrance to the next garden"
+	)
+	observations.wildlife_lower_entrance = {
+		"arrived": arrived, "seconds": game.model.elapsed, "minimum_oxygen": minimum_oxygen
+	}
+	if gpu:
+		var file := FileAccess.open(capture_root + "/sequence/frames.json", FileAccess.WRITE)
+		file.store_string(JSON.stringify(sequence, "  "))
+		file.close()
+	capture_root = old_root
+	record_sequence = false
+	follow_heading = false
+
+
+func early_return_choice() -> void:
+	for outside in [false, true]:
+		fixture(Gardens.PLANTS[6] + Vector3(4.5, 2, 0))
+		game.model.oxygen = 80
+		minimum_oxygen = 80
+		var targets := [Vector3(131, -178, -211)]
+		if outside:
+			targets.append_array(
+				[Vector3(149, -187, -210), Vector3(166, -200, -207), Vector3(145, -216, -210)]
+			)
+		targets.append_array([Vector3(117, -217, -220), Gardens.PLANTS[7]])
+		var arrived := true
+		for target in targets:
+			if arrived:
+				arrived = await swim(target, 15, false, false)
+		observations["early_inside_80" if not outside else "full_outside_80"] = {
+			"arrived": arrived, "seconds": game.model.elapsed, "minimum_oxygen": minimum_oxygen
+		}
+		check(
+			arrived != outside, "At 80% oxygen the early inside descent is safer than the full loop"
+		)
