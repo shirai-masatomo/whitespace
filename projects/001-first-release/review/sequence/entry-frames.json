@@ -1,0 +1,32 @@
+[
+  {
+    "depth": 0.0,
+    "file": "entry-frame-000.jpg",
+    "pose": "swim",
+    "seconds": 2.0
+  },
+  {
+    "depth": 6.8,
+    "file": "entry-frame-001.jpg",
+    "pose": "dive",
+    "seconds": 4.0
+  },
+  {
+    "depth": 28.1,
+    "file": "entry-frame-002.jpg",
+    "pose": "walk",
+    "seconds": 6.0
+  },
+  {
+    "depth": 33.6,
+    "file": "entry-frame-003.jpg",
+    "pose": "swim",
+    "seconds": 8.0
+  },
+  {
+    "depth": 42.0,
+    "file": "entry-frame-004.jpg",
+    "pose": "swim",
+    "seconds": 10.0
+  }
+]

@@ -79,7 +79,7 @@ func _make_reef() -> void:
 			root,
 			Geo.boulder(Vector3(10, 15, 13), index + 330),
 			Nature.stone(),
-			Vector3(x, Rules.reef_height(x, z) + 1, z)
+			Vector3(x, _reef_roof(x, z) + 1, z)
 		)
 	var rng := RandomNumberGenerator.new()
 	rng.seed = 260920
@@ -101,8 +101,16 @@ func _make_reef() -> void:
 			continue  # A sightline from the first garden into the lateral cleft.
 		if _reef_cell(int(x), int(z)) and Vector2(x - 49, z + 50).length() > 10:
 			var height := rng.randf_range(10, 21)
-			_make_kelp(root, Vector3(x, Rules.reef_height(x, z), z), height, index)
+			_make_kelp(root, Vector3(x, _reef_roof(x, z), z), height, index)
 	Collision.build(root)
+
+
+func _reef_roof(x: float, z: float) -> float:
+	# The garden's rim falls away into the lateral opening. The opening becomes
+	# a place visible from the refuge, instead of a slot hidden beyond a flat slab.
+	var inlet := smoothstep(28, 38, -z) * (1 - smoothstep(46, 54, -z))
+	inlet *= exp(-pow((x - 35) / 11, 2))
+	return Rules.reef_height(x, z) - inlet * 6
 
 
 func _reef_cell(x: int, z: int) -> bool:
@@ -144,7 +152,7 @@ func _reef_gradient(point: Vector2) -> Vector2:
 
 func _reef_vertex(x: int, z: int) -> Vector3:
 	if not _sculpted_cleft(x, z):
-		return Vector3(x, Rules.reef_height(x, z), z)
+		return Vector3(x, _reef_roof(x, z), z)
 	var neighbors := 0
 	for offset in [Vector2i.ZERO, Vector2i(-2, 0), Vector2i(0, -2), Vector2i(-2, -2)]:
 		if _reef_cell(x + offset.x, z + offset.y):
@@ -158,7 +166,7 @@ func _reef_vertex(x: int, z: int) -> Vector3:
 				(gradient * _reef_field(point) / maxf(.1, gradient.length_squared()))
 				. limit_length(1.5)
 			)
-	return Vector3(point.x, Rules.reef_height(point.x, point.y), point.y)
+	return Vector3(point.x, _reef_roof(point.x, point.y), point.y)
 
 
 func _wall_vertex(top: Vector3, layer: int) -> Vector3:
