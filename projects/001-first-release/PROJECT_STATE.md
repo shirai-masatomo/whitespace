@@ -14,16 +14,16 @@
 
 ## 検証と同期
 
-`git fetch origin main` 後、正本2文書は `origin/main` の `8b49a60` を確認。HUMAN_DIRECTIONは正本本文と会話補足を分離、EXTERNAL_AI_REVIEWは正本と一致。未実装指示はDD-064〜067のP0/P1へ。
+`git fetch origin main` 後、正本2文書は `origin/main` の `03df20f2b1ac4de8e451a97fdc96b8f230bfb3b6` を確認。HUMAN_DIRECTIONは正本本文と会話補足を分離、EXTERNAL_AI_REVIEWは正本と一致。最新外部レビューの未実装指示はDD-064/065/067/068を具体化し、酸素以外の見返りをDD-069（P0）へ追加。
 
 最終コードで `./dev.ps1 check -BuildFolder windows-agent` 成功。format/lint/依存、ルール479・シーン430・音57・実衝突689・探索19・岩礁/藻庭救助157・入水17・峡谷34、補助の表面2688点、既存11経路、Windows export/EXE headless起動。逆向き歩行の速度消失も修正。Forward+/Compatibilityの峡谷34検査・入水撮影、標準visualの救助/ゴール、配布EXEの両方式120フレーム描画も成功。GPUは画面外・無音・非捕捉で行い、Codexが起動したプロセスのみ終了。
 
-GitHubは[下書きPR #2](https://github.com/shirai-masatomo/whitespace/pull/2)、作業ブランチは `codex/dive-dive-playground`。最新CIはPRのChecksで対象commitと照合する。常設の30分再開設定は自動承認レビューに拒否され未作成（永続的な変更/pushには別の明示許可が必要）。ゲームの判定はCHANGESのまま。
+GitHubは[下書きPR #2](https://github.com/shirai-masatomo/whitespace/pull/2)、作業ブランチは `codex/dive-dive-playground`。最新CIはPRのChecksで対象commitと照合する。ユーザーの継続的な明示許可を受け、30分ごとの自律再開設定 `dive-dive` をACTIVEで作成済み。同じ範囲の再承認は不要。許可範囲・除外事項はAUTONOMYに記録。ゲームの判定はCHANGESのまま。
 
 ## 未解決と次の作業
 
 1. DD-064: 通常の入水で左の泡/右の藻庭は見える。横穴/深部を調べる理由はまだ弱い。泡は早い補給、藻庭は歩いて探索する場所として先の展開を比較。
 2. DD-065: 段丘と岩橋はまだ人工的。自然写真の層状の欠け・窪み・生物密度差を使い、平面の廊下感を減らす。岩段差/狭棚は実入力で往復可能だが、通常カメラでの見分けや移動感の違いはまだ弱い。
-3. DD-067: 前版との画面比較を継続。景観密度とプレイアブル密度を分け、行った先の見返りも確認。テスト成功から面白さを認定しない。
+3. DD-069/067: 酸素以外の寄り道の見返りを試す（生物接近・新しい景色・深部の予告・近道など）。通常入水/140〜160m入口/170〜200m内部/段差使用中の前後画面を比較。景観密度とプレイアブル密度を分け、行った先の見返りも確認。テスト成功から面白さを認定しない。
 
 旧レビューPNG70枚と孤立した旧東側アーチを整理。最新証跡・再現コード・履歴・使用中ビルドは保持。別GPU/初見探索/長時間プレイは未確認。保存/Steam SDK/450m以深は未実装。
