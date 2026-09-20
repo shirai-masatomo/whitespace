@@ -162,21 +162,7 @@ func update(player: Vector3, elapsed: float, giant: Vector3 = Vector3.INF) -> vo
 func make_shoal(
 	point: Vector3, count: int, spread: Vector3 = Vector3.ONE, guided: bool = false
 ) -> void:
-	var shape := Geo.loft(
-		[
-			Vector3(-.8, .02, .3),
-			Vector3(-.53, .025, .035),
-			Vector3(-.32, .08, .14),
-			Vector3(.05, .14, .23),
-			Vector3(.38, .1, .15),
-			Vector3(.62, .02, .03)
-		],
-		12
-	)
-	var combined := SurfaceTool.new()
-	combined.begin(Mesh.PRIMITIVE_TRIANGLES)
-	combined.append_from(shape, 0, Transform3D(Basis(Vector3.RIGHT, PI / 2), Vector3.ZERO))
-	var mesh := combined.commit()
+	var mesh := fish_mesh(not guided and count == 16)
 	var material := ShaderMaterial.new()
 	material.shader = preload("res://game/shaders/fish.gdshader")
 	material.set_shader_parameter("guided_motion", guided)
@@ -193,8 +179,8 @@ func make_shoal(
 		var angle := index * 2.399
 		var radius := sqrt(index / float(count)) * 2.4
 		var offset := Vector3(cos(angle) * radius, sin(index * 3.7), sin(angle) * radius)
-		var size := .65
-		var turn := 0.0
+		var size := rng.randf_range(.4, .65)
+		var turn := rng.randf_range(-.12, .12)
 		if guided:
 			# Unequal overlapping groups, with gaps and small juveniles between.
 			var centres := [Vector3(-1.4, .3, -1.5), Vector3(.9, -.3, .4), Vector3(1.4, .7, 2.0)]
@@ -215,3 +201,57 @@ func make_shoal(
 	add_child(school)
 	shoals.append(school)
 	origins.append(point)
+
+
+static func fish_mesh(deep_body: bool) -> ArrayMesh:
+	# Original streamlined body plus separate forked fins. The old loft expanded
+	# its tail into a solid wedge, making each animal look like the same token.
+	var profile := [
+		Vector3(-.54, .014, .026),
+		Vector3(-.36, .038, .065),
+		Vector3(-.12, .083, .115),
+		Vector3(.18, .09, .125),
+		Vector3(.38, .071, .095),
+		Vector3(.52, .026, .042),
+		Vector3(.57, .001, .006)
+	]
+	var st := SurfaceTool.new()
+	st.begin(Mesh.PRIMITIVE_TRIANGLES)
+	st.set_color(Color(0, 0, 0))
+	for row in range(profile.size() - 1):
+		for side in range(12):
+			for corner in [
+				Vector2i(row, side),
+				Vector2i(row + 1, side),
+				Vector2i(row + 1, side + 1),
+				Vector2i(row, side),
+				Vector2i(row + 1, side + 1),
+				Vector2i(row, side + 1)
+			]:
+				var ring: Vector3 = profile[corner.x]
+				var angle: float = corner.y * TAU / 12
+				st.add_vertex(
+					Vector3(
+						cos(angle) * ring.y,
+						sin(angle) * ring.z * (1.35 if deep_body else 1),
+						ring.x
+					)
+				)
+	st.set_color(Color(1, 0, 0))
+	var fork := .24 if deep_body else .19
+	for side in [-1, 1]:
+		for point in [
+			Vector3(0, 0, -.48), Vector3(0, side * fork, -.78), Vector3(0, side * .045, -.65)
+		]:
+			st.add_vertex(point)
+		for point in [
+			Vector3(side * .065, -.025, .2),
+			Vector3(side * .23, -.08, -.07),
+			Vector3(side * .08, -.05, -.02)
+		]:
+			st.add_vertex(point)
+	var dorsal := .28 if deep_body else .19
+	for point in [Vector3(0, .09, -.18), Vector3(0, dorsal, -.08), Vector3(0, .11, .19)]:
+		st.add_vertex(point)
+	st.generate_normals()
+	return st.commit()

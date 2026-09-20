@@ -36,18 +36,18 @@ func _ready() -> void:
 	st.begin(Mesh.PRIMITIVE_TRIANGLES)
 	for section in range(OUTER.size()):
 		# A genuine opening onto offshore water, not a compulsory circular path.
-		if section == 3:
-			continue
 		for step in range(STEPS):
 			var a := section + step / float(STEPS)
 			var b := section + (step + 1) / float(STEPS)
+			if a >= 2.625 and a < 4:
+				continue
 			for lane in range(LANES):
 				var u := lane / float(LANES)
 				var v := (lane + 1) / float(LANES)
 				quad(st, surface(a, u), surface(b, u), surface(b, v), surface(a, v))
 				quad(st, base(a, v), base(b, v), base(b, u), base(a, u))
-				if (section == 2 and step == STEPS - 1) or (section == 4 and step == 0):
-					var end := b if section == 2 else a
+				if b == 2.625 or a == 4:
+					var end := b if b == 2.625 else a
 					quad(st, surface(end, u), surface(end, v), base(end, v), base(end, u))
 			# The inside is an undercut bank with a narrow submerged ledge,
 			# not one uniformly extruded tube wall.
@@ -143,6 +143,10 @@ static func surface(along: float, across: float) -> Vector3:
 	var garden: Vector3 = Reef.PLANTS[7]
 	var refuge := 1 - smoothstep(3, 8, Vector2(p.x - garden.x, p.z - garden.z).length())
 	p.y = lerpf(p.y, garden.y, refuge)
+	# A broken shore ramps down into the offshore exit. The old vertical lip
+	# hid the living refuge when a swimmer looked back from the current.
+	if along >= 2 and along <= 2.625:
+		p.y -= smoothstep(2.0, 2.625, along) * 8 * (1 - smoothstep(.25, .75, across))
 	return p
 
 

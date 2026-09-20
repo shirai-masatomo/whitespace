@@ -46,6 +46,7 @@ func run() -> void:
 		await current_choices()
 		await current_detours()
 		await continuous_current_choices()
+		await _cleft_return()
 		await finish("cove")
 		return
 	for view in [
@@ -71,6 +72,7 @@ func run() -> void:
 	await current_choices()
 	await current_detours()
 	await continuous_current_choices()
+	await _cleft_return()
 	wildlife_clearance()
 	var output := "canyon-authored" if authored else "canyon"
 	await finish(output)
@@ -783,6 +785,15 @@ func continuous_current_choices() -> void:
 				arrived, "Continuous oxygen reaches the %d m/s stage %d decision" % [speed, stage]
 			)
 			var decision_air: float = game.model.oxygen
+			if stage == 1:
+				var query := PhysicsRayQueryParameters3D.create(
+					game.model.position + Vector3.UP * 1.4, Gardens.PLANTS[7] + Vector3.UP * 2, 1
+				)
+				var hit: Dictionary = game.get_world_3d().direct_space_state.intersect_ray(query)
+				observations["return_sight_%d" % speed] = {
+					"blocked": not hit.is_empty(),
+					"position": var_to_str(hit.get("position", Vector3.ZERO))
+				}
 			if gpu:
 				await photo(
 					"91-current-return-choice" if stage == 1 else "92-current-rejoin-choice",
@@ -828,8 +839,42 @@ func continuous_current_choices() -> void:
 	game.model.config.cove_stream_speed = original
 
 
+func _cleft_return() -> void:
+	# Continuous oxygen from the same refuge: the eroded lip offers an actual
+	# diagonal return, rather than just a prettier opening onto a solid wall.
+	fixture(Gardens.PLANTS[7] + Vector3.UP * 2)
+	minimum_oxygen = 100
+	var arrived := true
+	var targets := [
+		Vector3(88, -226, -230),
+		Vector3(89, -241, -252),
+		Vector3(91, -239, -267),
+		Places.COVE_STREAM[1],
+		Places.COVE_STREAM[2],
+		Vector3(103, -236, -229),
+		Vector3(98, -225, -222),
+		Gardens.PLANTS[7] + Vector3.UP
+	]
+	for index in range(targets.size()):
+		if arrived:
+			arrived = await swim(targets[index], 15, index in [3, 4], false)
+
+		if index == 5 and gpu:
+			await photo("96-cleft-return", Gardens.PLANTS[7] + Vector3.UP)
+	check(
+		arrived and game.model.oxygen == 100, "The eroded lip allows a continuous diagonal return"
+	)
+	observations.cleft_return = {
+		"arrived": arrived,
+		"seconds": game.model.elapsed,
+		"minimum_oxygen": minimum_oxygen,
+		"end_oxygen": game.model.oxygen
+	}
+
+
 func window_contacts() -> void:
 	var surfaces := [
+		["return slope", Vector3(101, -214, -226), Vector3(101, -249, -226)],
 		["crown", Vector3(70, -192, -277), Vector3(70, -227, -277)],
 		["front", Vector3(60, -216, -244), Vector3(60, -216, -291)],
 		["back", Vector3(60, -216, -306), Vector3(60, -216, -252)],

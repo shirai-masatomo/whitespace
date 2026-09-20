@@ -1,8 +1,14 @@
 {
-  "checks": 150,
+  "checks": 156,
   "failed": false,
   "observations": {
     "cleft_oxygen": 83.2666666666676,
+    "cleft_return": {
+      "arrived": true,
+      "end_oxygen": 100.0,
+      "minimum_oxygen": 25.0000000000005,
+      "seconds": 19.8333333333335
+    },
     "cleft_seconds": 4.18333333333332,
     "continuous_current_18_1": {
       "arrived": true,
@@ -53,8 +59,8 @@
       "seconds": 25.0666666666665
     },
     "cove_current_wall_crossings": 0,
-    "cove_dive_seconds": 8.23333333333332,
-    "cove_exit_seconds": 13.3166666666669,
+    "cove_dive_seconds": 6.84999999999998,
+    "cove_exit_seconds": 12.2000000000002,
     "cove_flow_off": {
       "distance": 9.00094604492188,
       "position": "Vector3(129, -268.50095, -221.5)"
@@ -73,8 +79,8 @@
       "minimum_oxygen": 0.0,
       "seconds": 21.5833333333334
     },
-    "cove_walk_end": "Vector3(102.589584, -221.79643, -220.12619)",
-    "cove_walk_grounded": 100,
+    "cove_walk_end": "Vector3(102.63096, -226.33983, -220.00012)",
+    "cove_walk_grounded": 62,
     "current_18_1_fast": {
       "end": "Vector3(125.661705, -287.15585, -213.77983)",
       "influence": 0.0,
@@ -207,13 +213,13 @@
     },
     "early_inside_70": {
       "arrived": true,
-      "minimum_oxygen": 16.6666666666655,
-      "seconds": 14.466666666667
+      "minimum_oxygen": 16.8666666666655,
+      "seconds": 14.566666666667
     },
     "early_inside_80": {
       "arrived": true,
-      "minimum_oxygen": 26.666666666666,
-      "seconds": 14.466666666667
+      "minimum_oxygen": 26.866666666666,
+      "seconds": 14.566666666667
     },
     "full_outside_70": {
       "arrived": false,
@@ -222,8 +228,8 @@
     },
     "full_outside_80": {
       "arrived": true,
-      "minimum_oxygen": 3.26666666666608,
-      "seconds": 20.4333333333335
+      "minimum_oxygen": 2.93333333333275,
+      "seconds": 20.3666666666668
     },
     "inside_seconds": 6.93333333333331,
     "journey_seconds": 44.7166666666654,
@@ -247,6 +253,18 @@
       "arrived": true,
       "oxygen": 100.0,
       "seconds": 4.79999999999999
+    },
+    "return_sight_18": {
+      "blocked": true,
+      "position": "Vector3(97.43409, -224.99063, -222.87167)"
+    },
+    "return_sight_21": {
+      "blocked": true,
+      "position": "Vector3(97.44769, -225.03224, -222.90471)"
+    },
+    "return_sight_24": {
+      "blocked": true,
+      "position": "Vector3(97.46556, -225.0512, -222.89006)"
     },
     "terrace_end": "Vector3(67.00022, -192.23788, -183.41655)",
     "terrace_shelf": {
@@ -280,8 +298,8 @@
     },
     "wildlife_lower_entrance": {
       "arrived": true,
-      "minimum_oxygen": 23.2666666666672,
-      "seconds": 20.4333333333335
+      "minimum_oxygen": 22.9333333333338,
+      "seconds": 20.3666666666668
     },
     "wildlife_wall_crossings": 0,
     "window_over": {
