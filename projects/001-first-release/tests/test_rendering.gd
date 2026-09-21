@@ -18,13 +18,22 @@ func run() -> void:
 	game.set_physics_process(false)
 	game.begin()
 	var scenes: Array[Dictionary] = []
-	for depth in [12, 60, 155, 205, 235, 365]:
+	for depth in [12, 60, 155, 205, 235, 365, 140, 177]:
 		game.model.position = Vector3(10, -depth, -35)
 		if depth > 200:
 			game.model.position = Vector3(-55, -depth, -95)
 		if depth > 300:
 			game.model.position = Vector3(-27, -depth, -100)
 		game.pitch = -.35
+		game.yaw = 0
+		if depth in [140, 177]:
+			game.model.position = (
+				Vector3(62, -140, -104) if depth == 140 else Vector3(81, -177, -165)
+			)
+			var target := Vector3(92, -181, -170) if depth == 140 else Vector3(108, -199, -217)
+			var offset: Vector3 = target - game.model.position - Vector3.UP * 1.4
+			game.yaw = atan2(-offset.x, -offset.z)
+			game.pitch = atan2(offset.y, Vector2(offset.x, offset.z).length())
 		game._update_camera()
 		for warmup in range(90):
 			await process_frame

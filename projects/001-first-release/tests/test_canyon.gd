@@ -36,6 +36,10 @@ func run() -> void:
 	game.set_physics_process(false)
 	game.set_process_unhandled_input(false)
 	game.begin()
+	if "--massif-only" in OS.get_cmdline_user_args():
+		await _massif_exploration()
+		await finish("massif")
+		return
 	if "--cove-only" in OS.get_cmdline_user_args():
 		capture_root = "res://artifacts/cove-" + RenderingServer.get_current_rendering_method()
 		DirAccess.make_dir_recursive_absolute(capture_root)
@@ -57,6 +61,7 @@ func run() -> void:
 		fixture(view[1])
 		await photo(view[0], view[2])
 	await journeys()
+	await _massif_exploration()
 	await terrace_choices()
 	await oxygen_choices()
 	await collisions()
@@ -76,6 +81,71 @@ func run() -> void:
 	wildlife_clearance()
 	var output := "canyon-authored" if authored else "canyon"
 	await finish(output)
+
+
+func _massif_exploration() -> void:
+	for view in [
+		["100-massif-approach", Vector3(62, -140, -104), Vector3(92, -181, -170)],
+		["101-massif-interior", Vector3(81, -177, -165), Vector3(108, -199, -217)],
+		["102-massif-roof", Vector3(100, -135, -195), Vector3(119, -182, -194)]
+	]:
+		fixture(view[1])
+		await photo(view[0], view[2])
+	# Test the real player capsule, including fast impacts and underside ascent.
+	for rate in [60, 15]:
+		for fast in [false, true]:
+			fixture(Vector3(90, -126, -190))
+			for frame in range(rate * 4):
+				game.advance(1.0 / rate, Vector2.ZERO, 1 if fast else 0, false)
+			print("Massif landing ", rate, "/", fast, ": ", game.model.position)
+			check(game.model.standing, "Massif roof catches normal/E descent at %dHz" % rate)
+			check(game.model.position.y > -145, "Roof landing stays above visible rock")
+		fixture(Vector3(90, -170, -181))
+		var contacted := false
+		for frame in range(rate * 4):
+			game.advance(1.0 / rate, Vector2.ZERO, 0, true)
+			for body in game.motion.contact_bodies:
+				contacted = contacted or "CanyonMassif" in str(body.get_path())
+		check(contacted, "Space ascent meets the visible ceiling at %dHz" % rate)
+		check(game.model.position.y < -150, "Ascent cannot tunnel through the thick roof")
+		fixture(Vector3(65, -130, -158))
+		contacted = false
+		for frame in range(rate * 3):
+			game.advance(1.0 / rate, Vector2.LEFT, 0, false)
+			for body in game.motion.contact_bodies:
+				contacted = contacted or "CanyonMassif" in str(body.get_path())
+		check(contacted, "Diagonal descent into the headwall has real side contact at %dHz" % rate)
+		check(game.model.position.x > 40, "The player cannot cross the solid headwall")
+	fixture(Gardens.PLANTS[5] + Vector3.UP * 1.5)
+	await tick()
+	minimum_oxygen = 100
+	check(await swim(Vector3(90, -131, -190), 15, false, false), "Cliff garden to visible headland")
+	for frame in range(120):
+		await tick()
+	check(game.model.standing, "Roof exploration ends on an actual walkable surface")
+	var start: Vector3 = game.model.position
+	var grounded := 0
+	for frame in range(90):
+		await tick(Vector2(1, -.4).normalized())
+		if game.model.standing:
+			grounded += 1
+	check(game.model.position.x - start.x > 7, "Walk along the roof toward its sea-facing edge")
+	check(grounded > 60, "Headland walk is not swimming past decorative scenery")
+	await photo("103-massif-walk", Vector3(119, -182, -194))
+	observations.massif_roof = {
+		"seconds": game.model.elapsed,
+		"minimum_oxygen": minimum_oxygen,
+		"walk_meters": game.model.position.x - start.x,
+		"grounded_frames": grounded
+	}
+	check(
+		await swim(Vector3(122, -150, -182), 10, false, false),
+		"Leave the roof around its open edge"
+	)
+	check(await swim(Gardens.PLANTS[6], 10, false, false), "Roof detour returns to existing oxygen")
+	check(game.model.setbacks == 0, "The headland detour is a survivable route, not a rescue trap")
+	observations.massif_roof["round_trip_seconds"] = game.model.elapsed
+	observations.massif_roof["round_trip_minimum_oxygen"] = minimum_oxygen
 
 
 func finish(output: String) -> void:

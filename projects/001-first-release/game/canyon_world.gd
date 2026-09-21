@@ -5,6 +5,7 @@ const Nature = preload("res://game/ocean_nature.gd")
 const Remnant = preload("res://game/canyon_remnant.gd")
 const Cove = preload("res://game/canyon_cove.gd")
 const Collision = preload("res://game/level_collision.gd")
+const Massif = preload("res://game/canyon_massif.gd")
 
 
 func _ready() -> void:
@@ -17,6 +18,7 @@ func _ready() -> void:
 	# Continuous asymmetric rock strata, with an open tidal saddle beside the promontory.
 	for side in [-1, 1]:
 		_cliff(side)
+	add_child(Massif.new())
 
 
 func _cliff(side: int) -> void:
@@ -66,6 +68,9 @@ func _cliff_ring(distance: float, side: int) -> Array[Vector3]:
 	# A low, broad opening preserves the swim-through; no invisible tunnel.
 	var gap := smoothstep(36, 50, distance) * (1 - smoothstep(87, 99, distance))
 	top -= gap * (55 if side > 0 else 38)
+	if side < 0:
+		# The walking shelves are recesses in a headland, not its entire skyline.
+		top += 52 * smoothstep(24, 48, distance) * (1 - smoothstep(110, 132, distance))
 	var inner := (49.0 if side < 0 else 150.0) + sin(phase * 1.7) * 3
 	var end_taper := smoothstep(0, 16, distance) * (1 - smoothstep(113, 132, distance))
 	top -= (1 - end_taper) * 39
@@ -136,8 +141,9 @@ func _east_section(distance: float, horizontal: bool) -> float:
 		Vector3(38, -178, 174),
 		Vector3(53, -219, 185),
 		Vector3(76, -248, 193),
-		Vector3(98, -190, 165),
-		Vector3(115, -184, 171),
+		Vector3(90, -248, 193),
+		Vector3(106, -145, 165),
+		Vector3(115, -153, 171),
 		Vector3(132, -246, 194)
 	]
 	for index in range(sections.size() - 1):

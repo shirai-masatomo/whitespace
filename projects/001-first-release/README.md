@@ -38,6 +38,8 @@
 
 標準はForward+（Vulkan対応GPU）。描画に問題があれば同梱の `Play-Compatibility.ps1`、または `./dev.ps1 play -Renderer gl_compatibility` でOpenGLへ切り替えます。同じゲーム内容で、体積霧は近似光線になります。
 
+160m前後の岸壁に、棚を囲む大きな岩体と斜めに張り出す天井があります。下をくぐる、岸沿いの段丘を歩く、Spaceで上側へ回り込む、沖へ出る経路を選べます。上側も実際に着地・歩行できますが酸素は減ります。
+
 160m前後では、125mの補給地点から東南の岸壁へ寄れます。段丘を歩き、西岸の張り出しで補給するか、切れ込みへ潜るか、沖の生物を追うかを試せます。下側の入り江では、岩の窓をくぐって速い潮に乗ると既存の岩礁へ再合流できます。岩の上側も登れますが、寄り道中も酸素は減ります。現在も制作中で、初見の誘導と岩の自然さは改善対象です。
 
 ## 開発と検証
@@ -52,7 +54,7 @@ cd projects/001-first-release
 ./dev.ps1 play
 ```
 
-使用中のEXEを上書きしないでください。人間試遊済みの450m版 `build/windows` と旧版 `windows-real` は保持し、自律検証の出力は `build/windows-agent`。出力先が使用中なら別の未使用フォルダを選びます。実行制限がある場合は、この信頼したスクリプトに限り `powershell -NoProfile -ExecutionPolicy Bypass -File ./dev.ps1 check`。マシン全体のポリシーは変更しません。
+build内は最新版の `windows-agent/` と配布用 `DIVE-DIVE-windows.zip` に整理しています。`dev.ps1` の標準出力先も `windows-agent` です。使用中のEXEは上書きせず、終了後にビルドしてください。実行制限がある場合は、この信頼したスクリプトに限り `powershell -NoProfile -ExecutionPolicy Bypass -File ./dev.ps1 check`。マシン全体のポリシーは変更しません。
 
 - `setup`: Godot 4.7.2・Windowsテンプレートを公式SHA512で検証、固定版の開発ツールを専用venvへ導入。
 - `check`: format / lint / 開発依存整合性 / import / ルール・シーン・音・実プレイヤー全方向衝突テスト / evaluate / release export / EXE headless起動 / 配布zip。
@@ -62,6 +64,7 @@ cd projects/001-first-release
 - `visual-discovery`: 入水→泡→曲がる潮流→岩の穴→藻への連続入力、酸素残量による寄り道比較。`artifacts/discovery-<renderer>/` に撮影。
 - `visual-playground`: 桟橋→岩礁歩行→縦穴→内部歩行→別出口。屋根/外側/逆口は別試走、上下側面の実衝突も検証。
 - `visual-canyon`: 125mの既存補給地点から峡谷の段丘→橋→内部へ連続入力。内外/酸素比較は別の開始点で試走。`artifacts/canyon-<renderer>/`へ撮影。
+- `visual-massif`: 新しい張り出しの実接触と、岸の藻→上側歩行→既存藻への往復だけを画面外で確認。全体は`visual-canyon`で検証。
 - `visual-cove`: 入り江の岸/岩窓/上側と、潮流に乗って既存岩礁へ戻る区間だけを画面外で比較。`artifacts/cove-<renderer>/`。全峡谷検査の代用ではありません。
 - `visual-entry`: 海上から入水、太陽光、魚群の先の海藻林を撮影。`artifacts/entry-<renderer>/`。
 - `gpu-smoke -BuildFolder windows-agent`: 配布EXEを画面外・無音で起動し120フレーム描画。`-Renderer gl_compatibility` でも確認できます。

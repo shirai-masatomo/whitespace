@@ -1,5 +1,5 @@
 {
-  "checks": 152,
+  "checks": 175,
   "failed": false,
   "observations": {
     "cleft_oxygen": 83.2666666666676,
@@ -201,6 +201,14 @@
     },
     "inside_seconds": 6.93333333333331,
     "journey_seconds": 44.7166666666654,
+    "massif_roof": {
+      "grounded_frames": 90,
+      "minimum_oxygen": 54.5333333333349,
+      "round_trip_minimum_oxygen": 19.0666666666672,
+      "round_trip_seconds": 21.0500000000001,
+      "seconds": 11.9666666666668,
+      "walk_meters": 8.79521179199219
+    },
     "outside_seconds": 5.11666666666665,
     "oxygen_100_bridge_false": {
       "arrived": true,

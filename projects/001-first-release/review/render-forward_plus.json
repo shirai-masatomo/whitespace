@@ -7,39 +7,51 @@
   "scenes": [
     {
       "depth_m": 12,
-      "mean_draw_calls": 720,
-      "median_frame_ms": 3.25,
-      "p95_frame_ms": 5.51
+      "mean_draw_calls": 724,
+      "median_frame_ms": 3.35,
+      "p95_frame_ms": 5.28
     },
     {
       "depth_m": 60,
-      "mean_draw_calls": 1037,
-      "median_frame_ms": 3.46,
-      "p95_frame_ms": 5.53
-    },
-    {
-      "depth_m": 155,
-      "mean_draw_calls": 1494,
-      "median_frame_ms": 3.52,
+      "mean_draw_calls": 1043,
+      "median_frame_ms": 3.5,
       "p95_frame_ms": 5.55
     },
     {
+      "depth_m": 155,
+      "mean_draw_calls": 1502,
+      "median_frame_ms": 3.57,
+      "p95_frame_ms": 5.49
+    },
+    {
       "depth_m": 205,
-      "mean_draw_calls": 433,
-      "median_frame_ms": 3.46,
-      "p95_frame_ms": 4.77
+      "mean_draw_calls": 439,
+      "median_frame_ms": 3.05,
+      "p95_frame_ms": 4.95
     },
     {
       "depth_m": 235,
-      "mean_draw_calls": 335,
-      "median_frame_ms": 4.02,
-      "p95_frame_ms": 4.89
+      "mean_draw_calls": 340,
+      "median_frame_ms": 4.01,
+      "p95_frame_ms": 5.02
     },
     {
       "depth_m": 365,
       "mean_draw_calls": 551,
+      "median_frame_ms": 3.16,
+      "p95_frame_ms": 4.87
+    },
+    {
+      "depth_m": 140,
+      "mean_draw_calls": 750,
+      "median_frame_ms": 3.42,
+      "p95_frame_ms": 5.17
+    },
+    {
+      "depth_m": 177,
+      "mean_draw_calls": 298,
       "median_frame_ms": 4.02,
-      "p95_frame_ms": 5.04
+      "p95_frame_ms": 4.89
     }
   ],
   "vsync": "disabled"
