@@ -52,6 +52,8 @@ static func radius(t: float) -> Vector2:
 
 static func sand_height(x: float, z: float) -> float:
 	var dunes := sin(x * .09) * 1.1 + cos(z * .11 + x * .025) * .8
+	var dune_bank := exp(-pow((x - 7) / 17, 2) - pow((z + 91) / 15, 2)) * 3.2
+	dunes += dune_bank + exp(-pow((x - 60) / 12, 2) - pow((z + 110) / 19, 2)) * 4
 	var rim := Vector2((x - 38) / 6, (z + 133) / 14).length()
 	# The crevice is the basin's unique low point, not one hole on a level plain.
 	var distance := Vector2(x - 38, z + 133).length()

@@ -38,7 +38,13 @@ func _ready() -> void:
 	add_child(sound)
 	world = Node3D.new()
 	world.set_script(World)
+	if has_node("EditableCoast"):
+		world.authored = get_node("EditableCoast")
 	add_child(world)
+	model.authored_platforms = world.authored.platform_data()
+	model.garden_points = world.authored.gardens()
+	model.oxygen_locator = world.oxygen_position
+	model.reset()
 	motion = Motion.new()
 	motion.world = world
 	add_child(motion)

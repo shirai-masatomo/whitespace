@@ -118,6 +118,7 @@ try {
         Invoke-Godot 'seabed' @('--headless', '--script', 'tests/test_seabed.gd')
         Invoke-Godot 'headland' @('--headless', '--script', 'tests/test_headland.gd')
         Invoke-Godot 'canyon' @('--headless', '--script', 'tests/test_canyon.gd')
+        Invoke-Godot 'authoring' @('--headless', '--script', 'tests/test_authoring.gd')
         Invoke-Godot 'l1-views' @('--headless', '--script', 'tests/test_l1_views.gd')
         Invoke-Godot 'l1-places' @('--headless', '--script', 'tests/test_l1_places.gd')
         Invoke-Godot 'biology' @('--headless', '--script', 'tests/test_biology.gd', '--', '--full')

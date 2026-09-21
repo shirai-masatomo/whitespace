@@ -1,4 +1,5 @@
 extends Node3D
+## Mesh construction reference. Runtime loads saved geometry from levels/l1_editable.tscn.
 ## Displaced strata form places to cross, dive beneath and follow to the final basin.
 const Geo = preload("res://game/ocean_geometry.gd")
 const Nature = preload("res://game/ocean_nature.gd")
@@ -28,10 +29,10 @@ func _ready() -> void:
 		"WindowAboveGarden",
 		[
 			Vector3(-27, -45, -64),
-			Vector3(-24, -26, -64),
-			Vector3(-9, -21, -67),
-			Vector3(9, -28, -65),
-			Vector3(14, -45, -64)
+			Vector3(-24, -25, -66),
+			Vector3(-13, -20, -69),
+			Vector3(3, -25, -69),
+			Vector3(14, -42, -70)
 		],
 		Vector2(4.8, 3.2),
 		53
@@ -185,12 +186,19 @@ static func section(
 		for division in range(3):
 			var p := PROFILE[edge].lerp(PROFILE[(edge + 1) % PROFILE.size()], division / 3.0)
 			var taper := .45 + .55 * pow(sin(t * PI), .35)
+			if seed_value == 53:
+				taper *= lerpf(1.5, .55, t)
+			if seed_value == 13:
+				taper *= 1.0 - .32 * exp(-pow((t - .64) / .08, 2))
 			var width := size.x * taper * (1 + sin(t * 12 + seed_value) * .22)
 			var height := size.y * taper * (1 + cos(t * 9 + seed_value) * .18)
 			var ledge := smoothstep(.3, .45, t) * (1 - smoothstep(.55, .7, t))
 			var point := center + across * (p.x * width + ledge * size.x * .22)
 			point += Vector3.UP * p.y * height
-			var weather := sin(point.z * .19 + seed_value) * sin(point.x * .16) * .9
+			var weather := sin(point.z * .19 + seed_value) * sin(point.x * .16) * 1.4
+			weather += sin(t * 25 + p.y * 4 + seed_value) * .8
+			if seed_value in [21, 31, 32]:
+				weather += sin(t * 17 + seed_value) * (1.0 - absf(p.y)) * 3.0
 			point += across * weather + Vector3.UP * sin(point.x * .22 + point.z * .13) * .65
 			result.append(point)
 	return result

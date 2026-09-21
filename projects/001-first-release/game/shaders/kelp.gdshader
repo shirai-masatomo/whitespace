@@ -8,6 +8,9 @@ void vertex(){
  float bend = stipe_height > 0.0 ? pow(clamp(VERTEX.y / stipe_height, 0.0, 1.0), 2.0) : UV.y * UV.y;
  VERTEX.x+=sin(TIME*0.7+wp.z*0.15+phase_offset)*bend*0.7;
  VERTEX.z+=cos(TIME*0.5+wp.x*0.12+phase_offset)*bend*0.35;
+ vec3 pull_direction=vec3(38.0,-457.0,-133.0)-wp;
+ float pull=1.0-smoothstep(8.0,34.0,length(pull_direction));
+ VERTEX+=(inverse(mat3(MODEL_MATRIX))*normalize(pull_direction))*bend*pull*1.8;
  VERTEX.x+=sin(TIME*1.3+UV.y*6.0+phase_offset)*UV.y*UV.y*0.08;
 }
 void fragment(){

@@ -106,10 +106,11 @@ func observe(model, delta: float) -> void:
 	if model.in_air_pocket() or model.in_dry_cave():
 		immersion *= .15
 	var speed: float = model.velocity.length()
+	var undertow := 1.0 - smoothstep(8, 38, model.position.distance_to(Vector3(38, -453, -125)))
 	var target := {
 		"surface": (1 - immersion) * .28,
 		"underwater": immersion * .30,
-		"movement": immersion * clampf(speed / 20.0, 0, 1) * .33
+		"movement": immersion * clampf(speed / 20.0 + undertow * .65, 0, 1) * .33
 	}
 	for label in LOOP_NAMES:
 		mix[label] = lerpf(mix[label], target[label], 1 - exp(-delta * 5))

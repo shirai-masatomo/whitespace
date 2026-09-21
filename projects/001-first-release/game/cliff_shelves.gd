@@ -1,4 +1,5 @@
 extends Node3D
+## Mesh construction reference. Runtime loads saved geometry from levels/l1_editable.tscn.
 ## Broad fractured beds penetrate the cliff and become its walkable ledges.
 const Geo = preload("res://game/ocean_geometry.gd")
 const Nature = preload("res://game/ocean_nature.gd")
@@ -53,6 +54,12 @@ static func point(
 	var x := origin.x + u * reach * edge
 	var z := origin.z + (v - .5) * width + sin(u * 4 + seed_value) * 2
 	var y := origin.y - (1 - u) * 2 + sin(v * 9 + u * 5) * .35
+	if seed_value in [2, 4]:
+		y -= pow(1 - u, 2) * (8 if seed_value == 2 else 14)
+		y += sin(v * 8 + seed_value) * (1 - u) * 2
+	elif seed_value in [3, 5]:
+		y += sin(v * 12 + u * 6) * (1 - u) * 2.4
+		x -= pow(sin(v * PI), 8) * (1 - u) * 4
 	return Vector3(x, y, z)
 
 

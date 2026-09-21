@@ -59,14 +59,21 @@ func run() -> void:
 	check(game.model.position.y < -465, "Reach below the real-layer seabed")
 	fixture(Vector3(38, -465, -133))
 	check(await swim(Vector3(38, -453, -123), 15), "Space can escape the gate current")
-	for probe in [Vector3(24, -20, -118), Vector3(-42, -126, -126), Vector3(84, -280, -140)]:
+	for probe in [
+		Vector3(24, -20, -118),
+		Vector3(-42, -126, -126),
+		Vector3(-46, -126, -126),
+		Vector3(84, -280, -140)
+	]:
+		# Erosion exposes the headland at the old x=-42 sample; the fault starts at x=-46.
+		var expected := "ShallowHeadland" if probe.x == -42 else "FaultedCoast"
 		for fast_drop in [0.0, 1.0]:
 			fixture(probe)
 			var touched := false
 			for frame in range(600):
 				await tick(Vector2.ZERO, fast_drop)
 				for body in game.motion.contact_bodies:
-					if str(body.get_path()).contains("FaultedCoast"):
+					if str(body.get_path()).contains(expected):
 						touched = true
 				if touched:
 					break

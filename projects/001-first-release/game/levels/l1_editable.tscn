@@ -1,0 +1,433 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://game/levels/geometry/Rock_00_pier.scn" id="1_pfhtm"]
+[ext_resource type="PackedScene" path="res://game/levels/geometry/Rock_01_cliff.scn" id="3_1dvfq"]
+[ext_resource type="PackedScene" path="res://game/levels/geometry/Rock_02_kelp.scn" id="6_l5cg3"]
+[ext_resource type="PackedScene" path="res://game/levels/geometry/Rock_03_driftwood.scn" id="8_8hgdi"]
+[ext_resource type="PackedScene" path="res://game/levels/geometry/Rock_04_jelly.scn" id="9_ogdgp"]
+[ext_resource type="PackedScene" path="res://game/levels/geometry/Rock_05_buoy.scn" id="12_kbdj2"]
+[ext_resource type="PackedScene" path="res://game/levels/geometry/Rock_06_rock.scn" id="13_07gim"]
+[ext_resource type="PackedScene" path="res://game/levels/geometry/Rock_07_kelp.scn" id="14_3obyg"]
+[ext_resource type="PackedScene" path="res://game/levels/geometry/Rock_08_rock.scn" id="15_bk6tb"]
+[ext_resource type="PackedScene" path="res://game/levels/geometry/Rock_09_rock.scn" id="16_dcf63"]
+[ext_resource type="PackedScene" path="res://game/levels/geometry/Rock_10_driftwood.scn" id="17_4r83x"]
+[ext_resource type="PackedScene" path="res://game/levels/geometry/Rock_11_kelp.scn" id="18_eshhs"]
+[ext_resource type="PackedScene" path="res://game/levels/geometry/Rock_12_rock.scn" id="19_rtbji"]
+[ext_resource type="PackedScene" path="res://game/levels/geometry/Rock_13_cliff.scn" id="20_v6oni"]
+[ext_resource type="PackedScene" path="res://game/levels/geometry/Rock_14_rock.scn" id="21_d448d"]
+[ext_resource type="PackedScene" path="res://game/levels/geometry/Rock_15_rock.scn" id="22_q7f2d"]
+[ext_resource type="PackedScene" path="res://game/levels/geometry/Rock_16_driftwood.scn" id="23_nnwvd"]
+[ext_resource type="PackedScene" path="res://game/levels/geometry/Rock_17_jelly.scn" id="24_qp7w7"]
+[ext_resource type="PackedScene" path="res://game/levels/geometry/Rock_18_kelp.scn" id="25_0f1kf"]
+[ext_resource type="PackedScene" path="res://game/levels/geometry/Rock_19_rock.scn" id="26_nagjc"]
+[ext_resource type="PackedScene" path="res://game/levels/geometry/Rock_20_cliff.scn" id="27_gm7ix"]
+[ext_resource type="PackedScene" path="res://game/levels/geometry/Rock_21_rock.scn" id="28_6c2a4"]
+[ext_resource type="PackedScene" path="res://game/levels/geometry/Rock_22_kelp.scn" id="29_xd1x6"]
+[ext_resource type="PackedScene" path="res://game/levels/geometry/Rock_23_driftwood.scn" id="30_2snci"]
+[ext_resource type="PackedScene" path="res://game/levels/geometry/Rock_24_jelly.scn" id="31_qypfd"]
+[ext_resource type="PackedScene" path="res://game/levels/geometry/Rock_25_rock.scn" id="32_hc1dw"]
+[ext_resource type="PackedScene" path="res://game/levels/geometry/Rock_26_water_globe.scn" id="33_o4cxc"]
+[ext_resource type="PackedScene" path="res://game/levels/geometry/Rock_27_water_globe.scn" id="35_soq4j"]
+[ext_resource type="PackedScene" path="res://game/levels/geometry/Rock_28_water_globe.scn" id="36_5lxup"]
+[ext_resource type="PackedScene" path="res://game/levels/geometry/Rock_29_water_globe.scn" id="37_rdqud"]
+[ext_resource type="PackedScene" path="res://game/levels/geometry/Rock_30_water_globe.scn" id="38_7nmpo"]
+[ext_resource type="PackedScene" path="res://game/levels/geometry/Rock_31_water_globe.scn" id="39_1w0ju"]
+[ext_resource type="PackedScene" path="res://game/levels/geometry/Rock_32_water_globe.scn" id="40_eyb6a"]
+[ext_resource type="PackedScene" path="res://game/levels/geometry/Rock_33_water_globe.scn" id="41_jbycy"]
+[ext_resource type="PackedScene" path="res://game/levels/geometry/HighAlgaeLip.scn" id="42_30pju"]
+[ext_resource type="PackedScene" path="res://game/levels/geometry/UpperBalcony.scn" id="43_i45r0"]
+[ext_resource type="PackedScene" path="res://game/levels/geometry/RecessWalk.scn" id="44_y4el3"]
+[ext_resource type="PackedScene" path="res://game/levels/geometry/LowerAlgaeStratum.scn" id="45_eclab"]
+[ext_resource type="PackedScene" path="res://game/levels/geometry/DeepUpperBed.scn" id="46_56qsm"]
+[ext_resource type="PackedScene" path="res://game/levels/geometry/DeepLowerBed.scn" id="47_v2q55"]
+[ext_resource type="PackedScene" path="res://game/levels/geometry/WindowAboveGarden.scn" id="48_h1vdn"]
+[ext_resource type="PackedScene" path="res://game/levels/geometry/ShallowWestRoot.scn" id="49_fm6g4"]
+[ext_resource type="PackedScene" path="res://game/levels/geometry/ShallowEastRoot.scn" id="50_0d85h"]
+[ext_resource type="PackedScene" path="res://game/levels/geometry/BrokenSkyBridge.scn" id="51_lejkr"]
+[ext_resource type="PackedScene" path="res://game/levels/geometry/WestFault160.scn" id="52_f770f"]
+[ext_resource type="PackedScene" path="res://game/levels/geometry/EastFault220.scn" id="53_dmw50"]
+[ext_resource type="PackedScene" path="res://game/levels/geometry/DeepWestUplift.scn" id="54_jdadh"]
+[ext_resource type="PackedScene" path="res://game/levels/geometry/DeepEastUplift.scn" id="55_du37m"]
+[ext_resource type="PackedScene" path="res://game/levels/geometry/TerminalFaultShoulder.scn" id="56_wgmys"]
+[ext_resource type="PackedScene" path="res://game/levels/geometry/ShallowHeadland.scn" id="57_5pqac"]
+[ext_resource type="PackedScene" path="res://game/levels/geometry/OxygenGarden0.scn" id="58_sovwm"]
+[ext_resource type="PackedScene" path="res://game/levels/geometry/OxygenGarden1.scn" id="59_nguyq"]
+[ext_resource type="PackedScene" path="res://game/levels/geometry/OxygenGarden2.scn" id="60_7wo7c"]
+[ext_resource type="PackedScene" path="res://game/levels/geometry/OxygenGarden3.scn" id="61_ktww0"]
+[ext_resource type="PackedScene" path="res://game/levels/geometry/OxygenGarden4.scn" id="62_lmxaw"]
+[ext_resource type="PackedScene" path="res://game/levels/geometry/OxygenGarden5.scn" id="63_hdh3q"]
+[ext_resource type="PackedScene" path="res://game/levels/geometry/OxygenGarden6.scn" id="64_khivs"]
+[ext_resource type="PackedScene" path="res://game/levels/geometry/OxygenGarden7.scn" id="65_dn67n"]
+[ext_resource type="PackedScene" path="res://game/levels/geometry/OxygenGarden8.scn" id="66_an3mq"]
+[ext_resource type="PackedScene" path="res://game/levels/geometry/Ray_0.scn" id="67_5th4w"]
+[ext_resource type="PackedScene" path="res://game/levels/geometry/Ray_1.scn" id="69_otx5l"]
+[ext_resource type="PackedScene" path="res://game/levels/geometry/Ray_2.scn" id="70_rvxx6"]
+
+[ext_resource type="Script" path="res://game/editable_coast.gd" id="authoring"]
+
+[ext_resource type="PackedScene" path="res://game/levels/geometry/SandFloor.scn" id="seabed0"]
+
+[ext_resource type="PackedScene" path="res://game/levels/geometry/GateWestBedrock.scn" id="seabed1"]
+
+[ext_resource type="PackedScene" path="res://game/levels/geometry/GateEastBedrock.scn" id="seabed2"]
+
+[node name="EditableCoast" type="Node3D" unique_id=739100747]
+
+script = ExtResource("authoring")
+
+[node name="RocksAndOxygen" type="Node3D" parent="." unique_id=1523826155]
+
+
+[node name="Rock_00_pier" parent="RocksAndOxygen" unique_id=33794546 instance=ExtResource("1_pfhtm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Rock_01_cliff" parent="RocksAndOxygen" unique_id=456207708 instance=ExtResource("3_1dvfq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, -30, -18)
+
+[node name="Rock_02_kelp" parent="RocksAndOxygen" unique_id=67599557 instance=ExtResource("6_l5cg3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, -60, -35)
+
+[node name="Rock_03_driftwood" parent="RocksAndOxygen" unique_id=1045704223 instance=ExtResource("8_8hgdi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, -90, -58)
+
+[node name="Rock_04_jelly" parent="RocksAndOxygen" unique_id=1715106413 instance=ExtResource("9_ogdgp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 45, -125, -45)
+
+[node name="Rock_05_buoy" parent="RocksAndOxygen" unique_id=186462454 instance=ExtResource("12_kbdj2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, -155, -77)
+
+[node name="Rock_06_rock" parent="RocksAndOxygen" unique_id=379044650 instance=ExtResource("13_07gim")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, -190, -84)
+
+[node name="Rock_07_kelp" parent="RocksAndOxygen" unique_id=876199460 instance=ExtResource("14_3obyg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32, -225, -60)
+
+[node name="Rock_08_rock" parent="RocksAndOxygen" unique_id=18619254 instance=ExtResource("15_bk6tb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, -260, -36)
+
+[node name="Rock_09_rock" parent="RocksAndOxygen" unique_id=687820652 instance=ExtResource("16_dcf63")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, -300, -55)
+
+[node name="Rock_10_driftwood" parent="RocksAndOxygen" unique_id=92635071 instance=ExtResource("17_4r83x")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28, -95, -52)
+
+[node name="Rock_11_kelp" parent="RocksAndOxygen" unique_id=207585041 instance=ExtResource("18_eshhs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -43, -140, -56)
+
+[node name="Rock_12_rock" parent="RocksAndOxygen" unique_id=1128128961 instance=ExtResource("19_rtbji")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42, -225, -32)
+
+[node name="Rock_13_cliff" parent="RocksAndOxygen" unique_id=1850217001 instance=ExtResource("20_v6oni")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50, -190, -105)
+
+[node name="Rock_14_rock" parent="RocksAndOxygen" unique_id=687781587 instance=ExtResource("21_d448d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -64, -205, -93)
+
+[node name="Rock_15_rock" parent="RocksAndOxygen" unique_id=1038459663 instance=ExtResource("22_q7f2d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -49, -235, -71)
+
+[node name="Rock_16_driftwood" parent="RocksAndOxygen" unique_id=1979083762 instance=ExtResource("23_nnwvd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, -240, -60)
+
+[node name="Rock_17_jelly" parent="RocksAndOxygen" unique_id=467684096 instance=ExtResource("24_qp7w7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35, -215, -73)
+
+[node name="Rock_18_kelp" parent="RocksAndOxygen" unique_id=719648737 instance=ExtResource("25_0f1kf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -41, -172, -106)
+
+[node name="Rock_19_rock" parent="RocksAndOxygen" unique_id=1302345285 instance=ExtResource("26_nagjc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28, -208, -88)
+
+[node name="Rock_20_cliff" parent="RocksAndOxygen" unique_id=544188801 instance=ExtResource("27_gm7ix")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, -330, -80)
+
+[node name="Rock_21_rock" parent="RocksAndOxygen" unique_id=1216531678 instance=ExtResource("28_6c2a4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27, -365, -100)
+
+[node name="Rock_22_kelp" parent="RocksAndOxygen" unique_id=554169957 instance=ExtResource("29_xd1x6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, -380, -122)
+
+[node name="Rock_23_driftwood" parent="RocksAndOxygen" unique_id=1707469345 instance=ExtResource("30_2snci")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38, -350, -78)
+
+[node name="Rock_24_jelly" parent="RocksAndOxygen" unique_id=142995230 instance=ExtResource("31_qypfd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, -392, -111)
+
+[node name="Rock_25_rock" parent="RocksAndOxygen" unique_id=887915437 instance=ExtResource("32_hc1dw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, -450, -138)
+
+[node name="Rock_26_water_globe" parent="RocksAndOxygen" unique_id=462571371 instance=ExtResource("33_o4cxc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38, -478, -133)
+
+[node name="Rock_27_water_globe" parent="RocksAndOxygen" unique_id=2098801471 instance=ExtResource("35_soq4j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 47, -505, -119)
+
+[node name="Rock_28_water_globe" parent="RocksAndOxygen" unique_id=450264488 instance=ExtResource("36_5lxup")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, -532, -129)
+
+[node name="Rock_29_water_globe" parent="RocksAndOxygen" unique_id=629188036 instance=ExtResource("37_rdqud")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 48, -559, -140)
+
+[node name="Rock_30_water_globe" parent="RocksAndOxygen" unique_id=2083283677 instance=ExtResource("38_7nmpo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 48, -585, -150)
+
+[node name="Rock_31_water_globe" parent="RocksAndOxygen" unique_id=2090793614 instance=ExtResource("39_1w0ju")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, -619, -166)
+
+[node name="Rock_32_water_globe" parent="RocksAndOxygen" unique_id=2040374975 instance=ExtResource("40_eyb6a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36, -650, -174)
+
+[node name="Rock_33_water_globe" parent="RocksAndOxygen" unique_id=1506534913 instance=ExtResource("41_jbycy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35, -680, -174)
+
+[node name="FaultedCoast" type="Node3D" parent="." unique_id=1014120361]
+
+
+[node name="JoinedTerraces" type="Node3D" parent="FaultedCoast" unique_id=1192392741]
+
+
+[node name="HighAlgaeLip" parent="FaultedCoast/JoinedTerraces" unique_id=1838661627 instance=ExtResource("42_30pju")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -54.8351211547852, -177.497711181641, -106.544235229492)
+
+
+[node name="UpperBalcony" parent="FaultedCoast/JoinedTerraces" unique_id=1721929869 instance=ExtResource("43_i45r0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -57.2171096801758, -195.797714233398, -112.00146484375)
+
+
+[node name="RecessWalk" parent="FaultedCoast/JoinedTerraces" unique_id=1841153337 instance=ExtResource("44_y4el3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -66.2823181152344, -225.309600830078, -103.089660644531)
+
+
+[node name="LowerAlgaeStratum" parent="FaultedCoast/JoinedTerraces" unique_id=916062846 instance=ExtResource("45_eclab")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -62.6174201965332, -247.704925537109, -74.3419647216797)
+
+
+[node name="DeepUpperBed" parent="FaultedCoast/JoinedTerraces" unique_id=740540989 instance=ExtResource("46_56qsm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.5110855102539, -382.207061767578, -103.999168395996)
+
+
+[node name="DeepLowerBed" parent="FaultedCoast/JoinedTerraces" unique_id=1324960731 instance=ExtResource("47_v2q55")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28.1230792999268, -394.904907226563, -124.959136962891)
+
+
+[node name="WindowAboveGarden" parent="FaultedCoast" unique_id=547817401 instance=ExtResource("48_h1vdn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.55109786987305, -31.7027626037598, -67.4352874755859)
+
+
+[node name="ShallowWestRoot" parent="FaultedCoast" unique_id=57967958 instance=ExtResource("49_fm6g4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.156078338623, -104.428649902344, -123.127998352051)
+
+
+[node name="ShallowEastRoot" parent="FaultedCoast" unique_id=208091054 instance=ExtResource("50_0d85h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 83.5212097167969, -132.044860839844, -112.86759185791)
+
+
+[node name="BrokenSkyBridge" parent="FaultedCoast" unique_id=1346548912 instance=ExtResource("51_lejkr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.0030097961426, -51.614372253418, -116.829925537109)
+
+
+[node name="WestFault160" parent="FaultedCoast" unique_id=298719733 instance=ExtResource("52_f770f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -62.584041595459, -209.58056640625, -139.239715576172)
+
+
+[node name="EastFault220" parent="FaultedCoast" unique_id=1276887589 instance=ExtResource("53_dmw50")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 115.844268798828, -260.012664794922, -104.564727783203)
+
+
+[node name="DeepWestUplift" parent="FaultedCoast" unique_id=1085222866 instance=ExtResource("54_jdadh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -64.8407592773438, -385.808624267578, -113.842178344727)
+
+
+[node name="DeepEastUplift" parent="FaultedCoast" unique_id=909214858 instance=ExtResource("55_du37m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 85.2312622070313, -385.4375, -134.715576171875)
+
+
+[node name="TerminalFaultShoulder" parent="FaultedCoast" unique_id=1549980310 instance=ExtResource("56_wgmys")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.5570335388184, -432.628234863281, -180.863525390625)
+
+
+[node name="ShallowHeadland" parent="." unique_id=1459818305 instance=ExtResource("57_5pqac")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -81.0, -286.222961425781, -106.13916015625)
+
+
+[node name="OxygenGardens" type="Node3D" parent="." unique_id=1882814624]
+
+
+[node name="OxygenGarden0" parent="OxygenGardens" unique_id=440655922 instance=ExtResource("58_sovwm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27, -30, -31)
+
+[node name="OxygenGarden1" parent="OxygenGardens" unique_id=643841682 instance=ExtResource("59_nguyq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 55, -34, -69)
+
+[node name="OxygenGarden2" parent="OxygenGardens" unique_id=591964074 instance=ExtResource("60_7wo7c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 71, -58, -42)
+
+[node name="OxygenGarden3" parent="OxygenGardens" unique_id=1434046219 instance=ExtResource("61_ktww0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 135, -66, -65)
+
+[node name="OxygenGarden4" parent="OxygenGardens" unique_id=360648370 instance=ExtResource("62_lmxaw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 103, -26.4, -49)
+
+[node name="OxygenGarden5" parent="OxygenGardens" unique_id=2023449039 instance=ExtResource("63_hdh3q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 67, -160, -135)
+
+[node name="OxygenGarden6" parent="OxygenGardens" unique_id=1750080125 instance=ExtResource("64_khivs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 116, -181.83, -194)
+
+[node name="OxygenGarden7" parent="OxygenGardens" unique_id=1794838471 instance=ExtResource("65_dn67n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 92, -222, -220)
+
+[node name="OxygenGarden8" parent="OxygenGardens" unique_id=572312475 instance=ExtResource("66_an3mq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, -44, -84)
+
+[node name="Animals" type="Node3D" parent="." unique_id=1757275063]
+
+
+[node name="Ray_0" parent="Animals" unique_id=1768125766 instance=ExtResource("67_5th4w")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -2, -122, -78)
+
+[node name="Ray_1" parent="Animals" unique_id=1354978208 instance=ExtResource("69_otx5l")]
+transform = Transform3D(-0.37603298, 0, 0.76229864, 0, 0.85, 0, -0.76229864, 0, -0.37603298, -5.6704917, -114.73776, -70.73776)
+
+[node name="Ray_2" parent="Animals" unique_id=839659870 instance=ExtResource("70_rvxx6")]
+transform = Transform3D(-0.07248235, 0, 0.6962372, 0, 0.7, 0, -0.6962372, 0, -0.07248235, -15.185021, -110.4373, -66.4373)
+
+[editable path="RocksAndOxygen/Rock_00_pier"]
+
+[editable path="RocksAndOxygen/Rock_01_cliff"]
+
+[editable path="RocksAndOxygen/Rock_02_kelp"]
+
+[editable path="RocksAndOxygen/Rock_03_driftwood"]
+
+[editable path="RocksAndOxygen/Rock_04_jelly"]
+
+[editable path="RocksAndOxygen/Rock_05_buoy"]
+
+[editable path="RocksAndOxygen/Rock_06_rock"]
+
+[editable path="RocksAndOxygen/Rock_07_kelp"]
+
+[editable path="RocksAndOxygen/Rock_08_rock"]
+
+[editable path="RocksAndOxygen/Rock_09_rock"]
+
+[editable path="RocksAndOxygen/Rock_10_driftwood"]
+
+[editable path="RocksAndOxygen/Rock_11_kelp"]
+
+[editable path="RocksAndOxygen/Rock_12_rock"]
+
+[editable path="RocksAndOxygen/Rock_13_cliff"]
+
+[editable path="RocksAndOxygen/Rock_14_rock"]
+
+[editable path="RocksAndOxygen/Rock_15_rock"]
+
+[editable path="RocksAndOxygen/Rock_16_driftwood"]
+
+[editable path="RocksAndOxygen/Rock_17_jelly"]
+
+[editable path="RocksAndOxygen/Rock_18_kelp"]
+
+[editable path="RocksAndOxygen/Rock_19_rock"]
+
+[editable path="RocksAndOxygen/Rock_20_cliff"]
+
+[editable path="RocksAndOxygen/Rock_21_rock"]
+
+[editable path="RocksAndOxygen/Rock_22_kelp"]
+
+[editable path="RocksAndOxygen/Rock_23_driftwood"]
+
+[editable path="RocksAndOxygen/Rock_24_jelly"]
+
+[editable path="RocksAndOxygen/Rock_25_rock"]
+
+[editable path="RocksAndOxygen/Rock_26_water_globe"]
+
+[editable path="RocksAndOxygen/Rock_27_water_globe"]
+
+[editable path="RocksAndOxygen/Rock_28_water_globe"]
+
+[editable path="RocksAndOxygen/Rock_29_water_globe"]
+
+[editable path="RocksAndOxygen/Rock_30_water_globe"]
+
+[editable path="RocksAndOxygen/Rock_31_water_globe"]
+
+[editable path="RocksAndOxygen/Rock_32_water_globe"]
+
+[editable path="RocksAndOxygen/Rock_33_water_globe"]
+
+[editable path="FaultedCoast/JoinedTerraces/HighAlgaeLip"]
+
+[editable path="FaultedCoast/JoinedTerraces/UpperBalcony"]
+
+[editable path="FaultedCoast/JoinedTerraces/RecessWalk"]
+
+[editable path="FaultedCoast/JoinedTerraces/LowerAlgaeStratum"]
+
+[editable path="FaultedCoast/JoinedTerraces/DeepUpperBed"]
+
+[editable path="FaultedCoast/JoinedTerraces/DeepLowerBed"]
+
+[editable path="FaultedCoast/WindowAboveGarden"]
+
+[editable path="FaultedCoast/ShallowWestRoot"]
+
+[editable path="FaultedCoast/ShallowEastRoot"]
+
+[editable path="FaultedCoast/BrokenSkyBridge"]
+
+[editable path="FaultedCoast/WestFault160"]
+
+[editable path="FaultedCoast/EastFault220"]
+
+[editable path="FaultedCoast/DeepWestUplift"]
+
+[editable path="FaultedCoast/DeepEastUplift"]
+
+[editable path="FaultedCoast/TerminalFaultShoulder"]
+
+[editable path="ShallowHeadland"]
+
+[editable path="OxygenGardens/OxygenGarden0"]
+
+[editable path="OxygenGardens/OxygenGarden1"]
+
+[editable path="OxygenGardens/OxygenGarden2"]
+
+[editable path="OxygenGardens/OxygenGarden3"]
+
+[editable path="OxygenGardens/OxygenGarden4"]
+
+[editable path="OxygenGardens/OxygenGarden5"]
+
+[editable path="OxygenGardens/OxygenGarden6"]
+
+[editable path="OxygenGardens/OxygenGarden7"]
+
+[editable path="OxygenGardens/OxygenGarden8"]
+
+[editable path="Animals/Ray_0"]
+
+[editable path="Animals/Ray_1"]
+
+[editable path="Animals/Ray_2"]
+
+[node name="SandFloor" parent="." instance=ExtResource("seabed0")]
+
+[editable path="SandFloor"]
+
+[node name="GateWestBedrock" parent="." instance=ExtResource("seabed1")]
+
+[editable path="GateWestBedrock"]
+
+[node name="GateEastBedrock" parent="." instance=ExtResource("seabed2")]
+
+[editable path="GateEastBedrock"]
+
+[node name="EditorPreviewLight" type="DirectionalLight3D" parent="."]
+rotation = Vector3(-0.9, -0.5, 0)
+light_energy = 1.4

@@ -39,7 +39,7 @@ func _initialize() -> void:
 	tick(model, 2, Vector2.ZERO, 1)
 	check(is_equal_approx(model.velocity.y, -15), "Fast sink 15m/s")
 	tick(model, 3, Vector2.ZERO, 0, true)
-	check(is_equal_approx(model.velocity.y, 6), "Space ascends at 6m/s")
+	check(is_equal_approx(model.velocity.y, 6.6), "Space ascends at 6.6m/s")
 	tick(model, 2)
 	check(is_equal_approx(model.velocity.y, -5), "Release Space resumes sinking")
 	model = airborne(2)

@@ -4,6 +4,7 @@ const Nature = preload("res://game/ocean_nature.gd")
 const Collision = preload("res://game/level_collision.gd")
 const Layout = preload("res://game/biology_layout.gd")
 const Octopus = preload("res://game/giant_octopus.gd")
+var authored_coast := false
 var giant: Node3D
 var inflow: Array[MeshInstance3D] = []
 var inflow_length := 0.0
@@ -11,7 +12,8 @@ var inflow_length := 0.0
 
 func _ready() -> void:
 	name = "BiologyEntrance"
-	make_floor()
+	if not authored_coast:
+		make_floor()
 	make_throat()
 	make_inflow()
 	var material := Nature.stone()
@@ -24,6 +26,8 @@ func _ready() -> void:
 		[Vector3(155, -578, -235), Vector3(100, 180, 170)],
 		[Vector3(56, -603, -290), Vector3(180, 140, 65)]
 	]:
+		if authored_coast and data[0].y > -490:
+			continue
 		var part := Node3D.new()
 		add_child(part)
 		Geo.put(part, Geo.boulder(data[1], int(absf(data[0].x))), material, data[0])
@@ -47,7 +51,7 @@ static func globe(parent: Node3D) -> void:
 func update(model) -> void:
 	giant.update(model.elapsed, model.depth)
 	for i in range(inflow.size()):
-		var distance: float = fposmod(i * 1.7 + model.elapsed * 2.4, inflow_length)
+		var distance: float = fposmod(i * 1.7 + model.elapsed * 3.1, inflow_length)
 		var index := 0
 		while index < Layout.APPROACH.size() - 2:
 			var length: float = Layout.APPROACH[index].distance_to(Layout.APPROACH[index + 1])
@@ -100,14 +104,16 @@ func make_floor() -> void:
 			)
 	# Exposed bedding on either side of the sandy runnel. The lane itself stays open.
 	for i in range(15):
-		var x := -16.0 + i * 4.8
-		var z := -94.0 - i * 2.3 - (12 if i % 2 else 0)
+		var clusters := [Vector2(-9, -105), Vector2(26, -91), Vector2(52, -119)]
+		var center: Vector2 = clusters[i % 3]
+		var x := center.x + sin(i * 2.399) * (3 + i % 5)
+		var z := center.y + cos(i * 2.399) * (3 + i % 4)
 		var point := Vector3(x, Layout.sand_height(x, z), z)
 		if Vector2((x - 38) / 10, (z + 133) / 18).length() < 1:
 			continue
 		var slab := Geo.put(
 			floor_root,
-			Geo.fault_block(Vector3(8, 2.5, 5), 90 + i),
+			Geo.fault_block(Vector3(5 + i % 4, 2 + i % 3, 4 + i % 5), 90 + i),
 			Nature.stone(),
 			point + Vector3.UP * .7
 		)

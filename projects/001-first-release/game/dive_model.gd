@@ -12,6 +12,9 @@ const Playground = preload("res://game/playground_rules.gd")
 
 var config: Resource
 var collision_motion: Callable
+var authored_platforms: Array[Dictionary] = []
+var garden_points: Array[Vector3] = Playground.PLANTS.duplicate()
+var oxygen_locator: Callable
 var platforms: Array[Dictionary]
 var position := Vector3.ZERO
 var velocity := Vector3.ZERO
@@ -53,7 +56,9 @@ func _init(tuning: Resource = null) -> void:
 
 
 func reset() -> void:
-	platforms = Layout.platforms()
+	platforms = (
+		Layout.platforms() if authored_platforms.is_empty() else authored_platforms.duplicate(true)
+	)
 	position = platforms[0].position
 	velocity = Vector3.ZERO
 	oxygen = config.oxygen_capacity
@@ -128,15 +133,15 @@ func oxygen_contact() -> int:
 	for index in range(platforms.size()):
 		if platforms[index].oxygen:
 			var center: Vector3 = platforms[index].position + Vector3.UP * 1.6
+			if oxygen_locator.is_valid():
+				center = oxygen_locator.call(index)
 			if (position + Vector3.UP).distance_to(center) <= config.oxygen_radius:
 				return index
 	return -1
 
 
 func at_oxygen() -> bool:
-	return (
-		oxygen_contact() >= 0 or in_air_pocket() or in_dry_cave() or Playground.near_plant(position)
-	)
+	return oxygen_contact() >= 0 or in_air_pocket() or in_dry_cave() or garden_at(position) >= 0
 
 
 func in_dry_cave() -> bool:
@@ -155,7 +160,12 @@ func step(delta: float, horizontal: Vector2, descent: float = 0.0, ascend: bool 
 		var platform: Dictionary = platforms[index]
 		var old_platform: Vector3 = platform.position
 		platform.position = (
-			platform.origin + Vector3.RIGHT * sin(elapsed * platform.sway.y) * platform.sway.x
+			platform.origin
+			+ (
+				platform.get("sway_direction", Vector3.RIGHT)
+				* sin(elapsed * platform.sway.y)
+				* platform.sway.x
+			)
 		)
 		if grounded == index:
 			position += platform.position - old_platform
@@ -239,7 +249,7 @@ func step(delta: float, horizontal: Vector2, descent: float = 0.0, ascend: bool 
 	var oxygen_index := oxygen_contact()
 	if at_oxygen() or position.y >= -1:
 		oxygen = config.oxygen_capacity
-		var garden := Playground.plant_index(position)
+		var garden := garden_at(position)
 		if garden >= 0 and not visited_gardens.has(garden):
 			# Save a position actually occupied by the swept capsule, not the
 			# decorative plant root which may lie beneath the irregular rock.
@@ -363,3 +373,10 @@ func flow_at(point: Vector3) -> Vector3:
 		var distance: float = ((point - zone.center) / zone.radius).length()
 		flow += zone.flow * maxf(0, 1 - distance)
 	return flow * config.current_strength
+
+
+func garden_at(point: Vector3) -> int:
+	for i in range(garden_points.size()):
+		if point.distance_to(garden_points[i]) < 4:
+			return i
+	return -1

@@ -380,8 +380,8 @@ func run_cavern_loop() -> void:
 
 
 func audit_roof_algae() -> void:
-	var leaves: MeshInstance3D = game.world.get_node(
-		"PlayableReef/OxygenGarden4/OxygenAlgae/Fronds"
+	var leaves: MeshInstance3D = game.world.authored.get_node(
+		"OxygenGardens/OxygenGarden4/OxygenAlgae/Fronds"
 	)
 	var arrays := leaves.mesh.surface_get_arrays(0)
 	var vertices: PackedVector3Array = arrays[Mesh.ARRAY_VERTEX]

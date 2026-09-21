@@ -1,4 +1,5 @@
 extends Node3D
+## Mesh construction reference. Runtime loads saved geometry from levels/l1_editable.tscn.
 ## The first landing belongs to a terraced headland rooted in the seabed.
 const Geo = preload("res://game/ocean_geometry.gd")
 const Nature = preload("res://game/ocean_nature.gd")
@@ -7,7 +8,10 @@ const Collision = preload("res://game/level_collision.gd")
 const OUTLINE = [
 	Vector2(8, -12),
 	Vector2(20, -14),
+	Vector2(25, -23),
 	Vector2(20, -29),
+	Vector2(26, -35),
+	Vector2(22, -44),
 	Vector2(17, -49),
 	Vector2(24, -62),
 	Vector2(21, -68),
@@ -22,7 +26,10 @@ const OUTLINE = [
 	Vector2(-32, -73),
 	Vector2(-26, -54),
 	Vector2(-10, -48),
-	Vector2(8, -44)
+	Vector2(1, -44),
+	Vector2(4, -36),
+	Vector2(3, -28),
+	Vector2(8, -22)
 ]
 
 const FISSURE = [
@@ -55,11 +62,11 @@ func _ready() -> void:
 			_triangle(st, _base(a), _base(d), _base(c))
 			for edge in [[a, b, x, z - 1], [b, c, x + 1, z], [c, d, x, z + 1], [d, a, x - 1, z]]:
 				if not _cell(edge[2], edge[3]):
-					for layer in range(4):
-						var upper_a := _wall_point(edge[0], layer / 4.0)
-						var upper_b := _wall_point(edge[1], layer / 4.0)
-						var lower_a := _wall_point(edge[0], (layer + 1) / 4.0)
-						var lower_b := _wall_point(edge[1], (layer + 1) / 4.0)
+					for layer in range(12):
+						var upper_a := _wall_point(edge[0], layer / 12.0)
+						var upper_b := _wall_point(edge[1], layer / 12.0)
+						var lower_a := _wall_point(edge[0], (layer + 1) / 12.0)
+						var lower_b := _wall_point(edge[1], (layer + 1) / 12.0)
 						_triangle(st, upper_a, lower_b, upper_b)
 						_triangle(st, upper_a, lower_a, lower_b)
 	st.generate_normals()
@@ -75,6 +82,8 @@ static func height_at(x: float, z: float) -> float:
 	# Unequal terraces with a broken lip and a raised watershed beside the shaft.
 	var inland := -z - x * .55 + sin(x * .09) * 2
 	var top := -30.4
+	var front := 1 - smoothstep(42, 60, -z)
+	top += (sin(z * .23 + x * .1) * .8 + sin(x * .32) * .65) * front
 	for band in [
 		Vector3(53, 62, 3.2), Vector3(68, 79, 4.8), Vector3(79, 96, 6), Vector3(102, 115, 7)
 	]:
@@ -123,6 +132,9 @@ static func _wall_point(top: Vector3, t: float) -> Vector3:
 	var recess := smoothstep(10, 20, top.x) * exp(-pow((top.z + 66) / 18, 2))
 	point.x -= recess * sin(t * PI) * 7
 	point.z += recess * sin(t * PI) * 2
+	var erosion := sin(t * PI) * sin(top.z * .27 + top.x * .2)
+	point.x += erosion * 1.2
+	point.z += sin(t * PI) * sin(top.x * .3) * .8
 	return point
 
 

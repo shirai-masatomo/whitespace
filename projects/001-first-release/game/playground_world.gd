@@ -11,17 +11,6 @@ func _ready() -> void:
 	name = "PlayableReef"
 	_make_reef()
 	_make_cave()
-	for index in range(Rules.PLANTS.size()):
-		var plant := Node3D.new()
-		plant.name = "OxygenGarden%d" % index
-		plant.position = Rules.PLANTS[index]
-		add_child(plant)
-		Nature.oxygen_algae(plant, 80 + index, _roof_height if index == 4 else Callable())
-		var light := OmniLight3D.new()
-		light.light_color = Color("74e2b9")
-		light.light_energy = 1.5
-		light.omni_range = 12
-		plant.add_child(light)
 
 
 func triangle(st: SurfaceTool, a: Vector3, b: Vector3, c: Vector3) -> void:

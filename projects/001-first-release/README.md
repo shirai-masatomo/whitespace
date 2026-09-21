@@ -50,6 +50,28 @@
 
 160m前後では、125mの補給地点から東南の岸壁へ寄れます。段丘を歩き、西岸の張り出しで補給するか、切れ込みへ潜るか、沖の生物を追うかを試せます。下側の入り江では、岩の窓をくぐって速い潮に乗ると既存の岩礁へ再合流できます。岩の上側も登れますが、寄り道中も酸素は減ります。現在も制作中で、初見の誘導と岩の自然さは改善対象です。
 
+## Godot Editorで配置を編集する
+
+1. Godotのプロジェクト一覧で、このフォルダの `project.godot` をインポートして開く（このPCでは `./dev.ps1 editor` でも起動）。
+2. FileSystemから **`game/levels/l1_editable.tscn`** をダブルクリック。これが配置の正本です。
+3. 左のSceneツリーで下表のNodeを選び、**F**でその場所へ視点を合わせる。**W**で移動、**E**で回転。またはInspector → TransformのPosition / Rotationを数値入力。
+4. **Ctrl+S → F5**でゲームを起動。停止はF8。再編集→保存→F5を繰り返せます。配布EXEへ反映するには `./dev.ps1 build` が必要です。
+
+| Sceneツリー | 編集できるもの |
+| --- | --- |
+| `RocksAndOxygen/Rock_…` | 岩、流木、クラゲ、水球、桟橋の位置・回転。岩の子`OxygenAlgae`は補給位置も一緒に移動 |
+| `FaultedCoast` | 岩窓、隆起岩盤、崖。`JoinedTerraces`内の棚・崩落斜面 |
+| `ShallowHeadland` | 最初の大岩盤全体 |
+| `OxygenGardens/OxygenGarden…` | 独立した酸素藻の群落。補給と救助先も保存位置を使用 |
+| `Animals/Ray_…` | エイの配置・向き。保存位置の周辺で泳ぐ |
+| `SandFloor` / `GateWestBedrock` / `GateEastBedrock` | 海底全体と入口を囲む岩盤 |
+
+**岩や棚は親Nodeを動かしてください。** 子のMeshだけを動かすと、別の子にあるCollisionとの形がずれます。通常は位置・回転を調整し、非均等拡大や形状編集は別途衝突確認が必要です。グループごとの移動も可能。Nodeの削除/名前変更、通路を塞ぐ配置には注意してください。
+
+保存したTransformは起動・リスタートで初期座標へ戻しません。動く足場は編集した位置・向きを基準に往復します。メッシュは `geometry/*.scn` に保存し、配置はテキストの `l1_editable.tscn` に分離しました。自動再生成は行いません。`stage_layout.gd`等の旧座標は軽量モデル試験用の初期値で、実ゲームの配置を上書きしません。
+
+水面・照明・遠景、魚群の経路、潮流とL2狭路は引き続き手続き生成です。海底/ゲートを大きく移動する場合は潮流も調整する必要があります。Editor内の光は形を見るための補助光で、F5の水中照明とは異なります。
+
 ## 開発と検証
 
 通常は軽い起動/対象操作だけ。以下のcheckは節目用。スクショはユーザー/外部AIから対象IDの確認依頼が来た時だけ2〜4枚。`visual-*` は既存の試走を行うが、保存は `-Capture` で選んだラベルのみ（最大4枚）。指定なしならPNG/JPGを生成しない。連続画像は明示的に必要な時だけ `-RecordSequence`。
@@ -97,7 +119,8 @@ GitHub ActionsはWindowsでsetup/checkを実行しZIP・ログ・測定JSONを�
 ## 構造と変更の入口
 
 - `game/dive_config.gd` / `default_config.tres`: 移動・酸素・救助の調整値。
-- `game/stage_layout.gd` / `reef_layout.gd` / `rift_layout.gd`: 足場の位置・大きさ・補給・往復移動の振幅/速さ。
+- `game/levels/l1_editable.tscn`: 実ゲームの岩・藻・主要地形・エイの配置。`editable_coast.gd`が保存Transformをゲームへ渡す。
+- `game/stage_layout.gd` / `reef_layout.gd` / `rift_layout.gd`: 軽量モデル評価用の初期レイアウト。現行シーンを自動再生成しない。
 - `game/discovery_rules.gd` / `discovery_world.gd`: 足場と独立した泡・潮流・穴・生物。調整はconfigのdiscovery/bubble項目、全体比較は`discovery_enabled`。
 - `game/canyon_world.gd`: 160〜240mの連続段丘・斜面・岩橋・内外の横断口。描画メッシュをそのまま衝突に使用。
 - `game/dive_model.gd`: 移動・酸素・救助。実ゲームは `player_motion.gd` の連続掃引カプセルと `level_collision.gd` の固体メッシュ衝突を使用。上面のみの計算は軽量テスト用。

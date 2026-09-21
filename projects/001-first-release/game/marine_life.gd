@@ -4,6 +4,7 @@ enum Role { OPEN_WATER, ALGAE, FLOW, PASSAGE }
 const Geo = preload("res://game/ocean_geometry.gd")
 const Layout = preload("res://game/stage_layout.gd")
 const Reef = preload("res://game/playground_rules.gd")
+var authored_animals := false
 var rays: Array[Node3D] = []
 var shoals: Array[Node3D] = []
 var origins: Array[Vector3] = []
@@ -24,7 +25,7 @@ func _ready() -> void:
 	cleft_guide = shoals[-1]
 	for zone in Layout.current_zones():
 		make_shoal(zone.center, 32, Role.FLOW)
-	for index in range(3):
+	for index in range(0 if authored_animals else 3):
 		var ray := make_ray()
 		ray.name = "RayGuide%d" % index
 		ray.scale = Vector3.ONE * (1.0 - index * .15)
@@ -123,7 +124,7 @@ static func reef_passage(time: float) -> Vector3:
 
 
 func update(player: Vector3, elapsed: float, giant: Vector3 = Vector3.INF) -> void:
-	for index in range(rays.size()):
+	for index in range(0 if authored_animals else rays.size()):
 		var phase := elapsed * .075 + index * .65
 		# The school crosses the open water toward an optional rock-garden entrance.
 		var natural := Vector3(-20 + cos(phase) * 18, -122 + sin(phase) * 12, -78 + sin(phase) * 12)
@@ -223,13 +224,13 @@ func make_shoal(
 
 static func cleft_passage(time: float) -> Vector3:
 	var points := [
-		Vector3(26, -26, -34),
-		Vector3(31, -29, -41),
+		Vector3(32, -26, -42),
+		Vector3(34, -29, -43),
 		Vector3(44, -36, -47),
 		Vector3(49, -43, -50),
 		Vector3(38, -43, -44),
-		Vector3(27, -39, -39),
-		Vector3(26, -32, -40)
+		Vector3(32, -39, -42),
+		Vector3(32, -32, -42)
 	]
 	var progress := fposmod(time / 2.4, points.size())
 	var i := posmod(int(progress), points.size())
