@@ -8,7 +8,8 @@ const PLANTS: Array[Vector3] = [
 	Vector3(103, -26.4, -49),
 	Vector3(67, -160, -135),
 	Vector3(116, -181.83, -194),
-	Vector3(92, -222, -220)
+	Vector3(92, -222, -220),
+	Vector3(-18, -44, -84)
 ]
 const CAVE_START := Vector3(68, -54, -42)
 const CAVE_END := Vector3(138, -61, -65)

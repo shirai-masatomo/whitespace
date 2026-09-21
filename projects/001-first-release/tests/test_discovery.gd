@@ -185,7 +185,9 @@ func compare_fixtures() -> void:
 	fixture(Places.ARCH + Vector3(0, 0, 12))
 	game.model.oxygen = 100
 	check(await swim(Places.ARCH + Vector3(0, 0, -12), 8), "Arch opening is physically traversable")
-	fixture(Places.ARCH + Vector3(14, 0, 10))
+	# The eastern rim now joins permanent bedrock. Isolate the western pillar
+	# when checking the discovery toggle, so solid terrain is not a false failure.
+	fixture(Places.ARCH + Vector3(-14, 0, 10))
 	var hit := false
 	for frame in range(120):
 		await tick(Vector2(0, -1), -1)
@@ -193,7 +195,7 @@ func compare_fixtures() -> void:
 			if "SwimThroughArch" in str(body.get_path()):
 				hit = true
 	check(hit, "Solid arch rim blocks the actual player")
-	fixture(Places.ARCH + Vector3(14, 0, 10))
+	fixture(Places.ARCH + Vector3(-14, 0, 10))
 	game.model.config.discovery_enabled = false
 	for frame in range(120):
 		await tick(Vector2(0, -1), -1)

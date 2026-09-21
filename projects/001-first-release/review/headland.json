@@ -1,0 +1,12 @@
+{
+  "checks": 24,
+  "failed": false,
+  "observations": {
+    "first_landing": "Vector3(0.0032425444, -33.8165, -61.94605)",
+    "journey_seconds": 34.4833333333327,
+    "stairs": {
+      "grounded_frames": 194,
+      "seconds": 13.0166666666669
+    }
+  }
+}
