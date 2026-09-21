@@ -12,6 +12,7 @@ const Collision = preload("res://game/level_collision.gd")
 const Discoveries = preload("res://game/discovery_world.gd")
 const Playground = preload("res://game/playground_world.gd")
 const Canyon = preload("res://game/canyon_world.gd")
+const Seabed = preload("res://game/coastal_seabed.gd")
 const Headland = preload("res://game/shallow_headland.gd")
 var lighting: Node3D
 var effects: Node3D
@@ -41,6 +42,7 @@ func _ready() -> void:
 	add_child(Playground.new())
 	add_child(Canyon.new())
 	add_child(Headland.new())
+	add_child(Seabed.new())
 	life.make_shoal(Vector3(84, -53, -63), 24)
 	for plant in Playground.Rules.PLANTS:
 		effects.vent(plant)
