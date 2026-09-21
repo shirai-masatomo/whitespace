@@ -1,4 +1,4 @@
-param([ValidateSet('check', 'evaluate', 'test', 'lint', 'format', 'build', 'visual', 'visual-reef', 'visual-discovery', 'visual-playground', 'visual-entry', 'visual-canyon', 'visual-cove', 'visual-massif', 'visual-headland', 'visual-seabed', 'benchmark', 'gpu-smoke', 'play', 'editor')][string]$Task = 'check', [ValidateSet('windows','windows-preview','windows-real','windows-agent')][string]$BuildFolder = 'windows-agent', [ValidateSet('forward_plus','gl_compatibility')][string]$Renderer = 'forward_plus')
+param([ValidateSet('check', 'evaluate', 'test', 'lint', 'format', 'build', 'visual', 'visual-reef', 'visual-discovery', 'visual-playground', 'visual-entry', 'visual-canyon', 'visual-cove', 'visual-massif', 'visual-headland', 'visual-seabed', 'visual-biology', 'benchmark', 'gpu-smoke', 'play', 'editor')][string]$Task = 'check', [ValidateSet('windows','windows-preview','windows-real','windows-agent')][string]$BuildFolder = 'windows-agent', [ValidateSet('forward_plus','gl_compatibility')][string]$Renderer = 'forward_plus')
 $ErrorActionPreference = 'Stop'
 $projectRoot = $PSScriptRoot
 $buildRoot = Join-Path $projectRoot ('build/' + $BuildFolder)
@@ -57,6 +57,9 @@ try {
     if ($Task -eq 'visual-entry') {
         Invoke-Godot 'visual-entry' @('--script', 'tests/test_entry.gd')
     }
+    if ($Task -eq 'visual-biology') {
+        Invoke-Godot 'visual-biology' @('--script', 'tests/test_biology.gd')
+    }
     if ($Task -eq 'visual-seabed') {
         Invoke-Godot 'visual-seabed' @('--script', 'tests/test_seabed.gd')
     }
@@ -107,6 +110,7 @@ try {
         Invoke-Godot 'seabed' @('--headless', '--script', 'tests/test_seabed.gd')
         Invoke-Godot 'headland' @('--headless', '--script', 'tests/test_headland.gd')
         Invoke-Godot 'canyon' @('--headless', '--script', 'tests/test_canyon.gd')
+        Invoke-Godot 'biology' @('--headless', '--script', 'tests/test_biology.gd', '--', '--full')
     }
     if ($Task -in @('evaluate', 'check')) {
         Invoke-Godot 'evaluation' @('--headless', '--script', 'tests/test_evaluation.gd')

@@ -159,7 +159,7 @@ func evaluate_route(
 			if game.model.mode == Model.Mode.RETURNING:
 				break
 			if (
-				game.model.grounded == target
+				Driver.arrived(game.model, target)
 				and (not game.model.platforms[target].oxygen or game.model.at_oxygen())
 			):
 				arrived = true

@@ -13,6 +13,8 @@ func _ready() -> void:
 	st.begin(Mesh.PRIMITIVE_TRIANGLES)
 	for x in range(-240, 281, STEP):
 		for z in range(-340, 121, STEP):
+			if Vector2((x + 2 - 40) / 32.0, (z + 2 + 132) / 32.0).length() < 1:
+				continue
 			var a := vertex(x, z)
 			var b := vertex(x + STEP, z)
 			var c := vertex(x + STEP, z + STEP)

@@ -82,6 +82,8 @@ func _draw() -> void:
 	draw_rect(Rect2(1014, 62, 222, 5), Color("284451"))
 	draw_rect(Rect2(1014, 62, 222 * ratio, 5), accent)
 	var hint := "光る藻に触れて、酸素補給"
+	if model.depth > 460:
+		hint = "光る水球に触れて、酸素補給"
 	if returning:
 		hint = "泡に包まれて救助中"
 	elif model.at_oxygen() or model.position.y >= -1:
@@ -141,7 +143,7 @@ func _draw_target(scale_factor: Vector2) -> void:
 		draw_arc(screen, 9 if chosen else 5, 0, TAU, 32, color, 1.5, true)
 		var label := "%dm" % int(-option.position.y)
 		if option.oxygen:
-			label += " 藻"
+			label += " 水球" if option.kind == "water_globe" else " 藻"
 		text_at(screen + Vector2(15, 5), label, 14 if chosen else 12, color)
 
 
@@ -154,7 +156,7 @@ func _draw_overlay(scale_factor: Vector2) -> void:
 	if game.paused:
 		heading = "一時停止"
 	elif complete:
-		heading = "裂け目の先へ到達。"
+		heading = "暗闇の巨影、その先は——。"
 	text_at(Vector2(310, 230), heading, 34)
 	if complete:
 		text_at(
@@ -162,10 +164,10 @@ func _draw_overlay(scale_factor: Vector2) -> void:
 			"潜航時間 %d秒 / 緊急浮上 %d回" % [int(game.model.elapsed), game.model.setbacks],
 			22
 		)
-		text_at(Vector2(310, 352), "次は別のルートでもう一度。", 22, MUTED)
+		text_at(Vector2(310, 352), "今回の探索はここまで。", 22, MUTED)
 	else:
 		text_at(Vector2(310, 289), "光、泡、海の流れ。気になる方へ潜ろう。", 21)
-		text_at(Vector2(310, 330), "光る藻や大きな泡で、酸素を補給。", 21)
+		text_at(Vector2(310, 330), "光る藻・水球・大きな泡で、酸素を補給。", 21)
 		text_at(Vector2(310, 371), "急降下は酸素を多く使う。酸素0で押し戻される。", 20, MUTED)
 	text_at(Vector2(310, 439), "WASD 移動 / マウス 視点 / E 急降下 / Space 浮上", 19, CYAN)
 	text_at(Vector2(310, 468), "Q 減速 / F 俯瞰 / H 道案内 / Tab 候補 / V 視点 / M 音", 16, MUTED)

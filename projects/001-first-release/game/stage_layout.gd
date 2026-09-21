@@ -5,6 +5,7 @@ const JELLY_SEGMENTS := 48
 const BUOY_TOP_SCALE := .54
 const BUOY_SEGMENTS := 36
 const Reef = preload("res://game/reef_layout.gd")
+const Biology = preload("res://game/biology_layout.gd")
 const Rift = preload("res://game/rift_layout.gd")
 
 
@@ -59,7 +60,7 @@ static func platforms() -> Array[Dictionary]:
 		data[index]["shape_seed"] = index + 8
 		data[index]["label"] = names[index]
 		data[index]["round"] = kinds[index] not in ["pier", "driftwood"]
-	for entry in Reef.platforms() + Rift.platforms():
+	for entry in Reef.platforms() + Rift.platforms() + Biology.platforms():
 		var added := make(
 			entry.label,
 			entry.point,
@@ -107,14 +108,16 @@ static func routes() -> Dictionary:
 		"reef_refuge": [2, 10, 6, 19, 15, 8, 9],
 	}
 	for route in result.values():
-		route.append_array(finish_route())
+		route.append_array([20, 21, 22, 25])
 	result["rift_offshore"] = [2, 4, 5, 6, 17, 16, 8, 9, 23, 24, 25]
 	result["rift_shortcut"] = [2, 10, 6, 8, 23, 25]
+	for route in result.values():
+		route.append_array(biology_route())
 	return result
 
 
 static func finish_route() -> Array[int]:
-	return [20, 21, 22, 25]
+	return [20, 21, 22, 25] + biology_route()
 
 
 static func fast_routes() -> Array[String]:
@@ -157,3 +160,7 @@ static func current_zones() -> Array[Dictionary]:
 			"flow": Vector3(5.0, 0, -3.5)
 		},
 	]
+
+
+static func biology_route() -> Array[int]:
+	return [26, 27, 28, 29, 30, 31, 32, 33]

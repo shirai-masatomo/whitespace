@@ -3,7 +3,7 @@ extends Node
 const Model = preload("res://game/dive_model.gd")
 const SAMPLE_RATE := 22050
 const LOOP_NAMES := ["surface", "underwater", "movement"]
-const CUE_NAMES := ["entry", "refill", "warning", "rescue", "land", "goal", "distant"]
+const CUE_NAMES := ["entry", "refill", "warning", "rescue", "land", "goal", "distant", "deep_call"]
 static var bank: Dictionary = {}
 var players: Dictionary = {}
 var muted := false
@@ -83,6 +83,9 @@ func observe(model, delta: float) -> void:
 		if distant_timer <= 0 and model.mode == Model.Mode.DIVING:
 			cue("distant")
 			distant_timer = 16
+	if model.depth > 570 and distant_timer <= 0 and model.mode == Model.Mode.DIVING:
+		cue("deep_call")
+		distant_timer = 12
 	if wet and not was_wet and model.mode == Model.Mode.DIVING:
 		cue("entry")
 	if model.mode == Model.Mode.RETURNING and previous_mode != model.mode:
@@ -185,6 +188,8 @@ static func sample_at(label: String, t: float, noise: float, low: float) -> floa
 			return (sin(TAU * 90 * t) * .15 + noise * .2) * exp(-t * 16)
 		"goal":
 			return (sin(TAU * 392 * t) + sin(TAU * 587.33 * t) * .5) * .14 * exp(-t * 3)
+		"deep_call":
+			return (sin(TAU * (38 * t - 5 * t * t)) * .025 + low * .08) * sin(t * PI / .45)
 		"distant":
 			return sin(TAU * (62 * t - 12 * t * t)) * .07 * sin(t * PI / .45)
 	return 0

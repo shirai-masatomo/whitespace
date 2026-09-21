@@ -12,8 +12,10 @@ const Collision = preload("res://game/level_collision.gd")
 const Discoveries = preload("res://game/discovery_world.gd")
 const Playground = preload("res://game/playground_world.gd")
 const Canyon = preload("res://game/canyon_world.gd")
+const Biology = preload("res://game/biology_world.gd")
 const Seabed = preload("res://game/coastal_seabed.gd")
 const Headland = preload("res://game/shallow_headland.gd")
+var biology: Node3D
 var lighting: Node3D
 var effects: Node3D
 var environment: Environment
@@ -43,6 +45,8 @@ func _ready() -> void:
 	add_child(Canyon.new())
 	add_child(Headland.new())
 	add_child(Seabed.new())
+	biology = Biology.new()
+	add_child(biology)
 	life.make_shoal(Vector3(84, -53, -63), 24)
 	for plant in Playground.Rules.PLANTS:
 		effects.vent(plant)
@@ -58,6 +62,9 @@ func _make_platforms() -> void:
 		root.position = data.position
 		add_child(root)
 		platforms.append(root)
+		if data.kind == "water_globe":
+			Biology.globe(root)
+			continue
 		Nature.deck(root, data, index)
 		if data.oxygen:
 			Nature.oxygen_algae(root, index)
@@ -91,13 +98,6 @@ func _make_ocean() -> void:
 	water.shader = preload("res://game/shaders/water.gdshader")
 	var sea := Geo.put(self, surface, water)
 	sea.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
-	var seabed := PlaneMesh.new()
-	seabed.size = Vector2(2500, 2500)
-	seabed.subdivide_width = 160
-	seabed.subdivide_depth = 160
-	var sand := ShaderMaterial.new()
-	sand.shader = preload("res://game/shaders/seabed.gdshader")
-	Geo.put(self, seabed, sand, Vector3(0, -520, 0))
 	# Soft light ribbons support the volumetric light; also provide the GL fallback.
 	if true:
 		for i in range(7):
@@ -115,7 +115,8 @@ func _make_ocean() -> void:
 func sync_platforms(data: Array[Dictionary]) -> void:
 	for index in range(platforms.size()):
 		platforms[index].position = data[index].position
-		platforms[index].get_node("SolidGeometry").force_update_transform()
+		if platforms[index].has_node("SolidGeometry"):
+			platforms[index].get_node("SolidGeometry").force_update_transform()
 
 
 func update_depth(camera_y: float, cave_air: bool = false) -> void:
@@ -123,6 +124,7 @@ func update_depth(camera_y: float, cave_air: bool = false) -> void:
 
 
 func update_life(model) -> void:
+	biology.update(model)
 	effects.update(model)
 	discoveries.set_enabled(model.config.discovery_enabled)
 	discoveries.update(model.elapsed, model.config.cove_stream_speed)

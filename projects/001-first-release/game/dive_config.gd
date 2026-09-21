@@ -1,7 +1,7 @@
 extends Resource
 ## Speeds: metres/second; acceleration: metres/second squared; oxygen: points.
 
-@export var goal_depth: float = 450.0
+@export var goal_depth: float = 680.0
 @export var sink_speed: float = 5.0
 @export var fast_sink_speed: float = 15.0
 @export var brake_sink_speed: float = 2.0
@@ -19,7 +19,7 @@ extends Resource
 @export_range(1.0, 10.0, .1) var rescue_max_seconds: float = 3.5
 @export var rescue_clearance: float = 3.0
 @export var min_setback: float = 2.0
-@export var missed_goal_depth: float = 495.0
+@export var missed_goal_depth: float = 730.0
 @export var ocean_extent: float = 500.0
 
 @export var jelly_push: float = 4.5

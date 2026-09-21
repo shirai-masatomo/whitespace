@@ -200,6 +200,8 @@ func step(delta: float, horizontal: Vector2, descent: float = 0.0, ascend: bool 
 		# Sweep the whole segment: fast descent cannot tunnel through thin floors.
 		var first_hit: float = 2.0
 		for index in range(0 if collision_motion.is_valid() else platforms.size()):
+			if platforms[index].kind == "water_globe":
+				continue
 			var floor_y: float = surface_height(next, platforms[index])
 			if start.y >= floor_y - 0.001 and next.y <= floor_y and start.y > next.y:
 				var fraction := (start.y - floor_y) / (start.y - next.y)
@@ -263,7 +265,10 @@ func step(delta: float, horizontal: Vector2, descent: float = 0.0, ascend: bool 
 		or Vector2(position.x, position.z).length() > config.ocean_extent
 	):
 		begin_return("航路を外れた")
-	elif grounded >= 0 and platforms[grounded].goal:
+	elif (
+		(grounded >= 0 and platforms[grounded].goal)
+		or (oxygen_index >= 0 and platforms[oxygen_index].goal)
+	):
 		mode = Mode.COMPLETE
 		velocity = Vector3.ZERO
 
@@ -328,7 +333,9 @@ func _return_step(delta: float) -> void:
 			for garden in visited_gardens.keys():
 				if visited_gardens[garden].y < return_target.y:
 					visited_gardens.erase(garden)
-			grounded = -1 if return_garden else checkpoint
+			grounded = (
+				-1 if return_garden or platforms[checkpoint].kind == "water_globe" else checkpoint
+			)
 			terrain_grounded = false
 			velocity = Vector3.ZERO
 			oxygen = config.oxygen_capacity

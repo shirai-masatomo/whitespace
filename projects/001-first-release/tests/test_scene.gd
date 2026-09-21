@@ -202,6 +202,16 @@ func _test_oxygen_algae(game) -> void:
 	for index in range(game.model.platforms.size()):
 		if not game.model.platforms[index].oxygen:
 			continue
+		if game.model.platforms[index].kind == "water_globe":
+			check(
+				not game.world.platforms[index].has_node("SolidGeometry"),
+				"Water globes are passable volumes, never invisible floors"
+			)
+			game.model.position = game.model.platforms[index].position
+			game.model.oxygen = .01
+			game.model.step(1.0 / 60, Vector2.ZERO)
+			check(game.model.oxygen == 100, "Water contact instantly refills oxygen")
+			continue
 		var fronds := game.world.platforms[index].get_node("OxygenAlgae/Fronds") as MeshInstance3D
 		check(fronds != null, "Every refill has a visible rooted algae landmark")
 		var vertices: PackedVector3Array = fronds.mesh.surface_get_arrays(0)[Mesh.ARRAY_VERTEX]

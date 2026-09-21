@@ -80,7 +80,7 @@ func trial(route: Array, gap_leg: int, gap_seconds: float) -> Dictionary:
 			if model.mode == Model.Mode.RETURNING:
 				break
 			if (
-				model.grounded == target
+				Driver.arrived(model, target)
 				and (not model.platforms[target].oxygen or model.at_oxygen())
 			):
 				arrived = true

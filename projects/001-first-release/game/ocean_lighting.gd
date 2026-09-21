@@ -96,3 +96,20 @@ func update(camera_y: float, cave_air: bool = false) -> void:
 		environment.ambient_light_energy = .34
 		if forward:
 			environment.volumetric_fog_density = 0
+
+	# Narrow black water first, then longer visibility into a dark chamber.
+	var biology := smoothstep(478, 530, depth)
+	var chamber := smoothstep(572, 606, depth)
+	if biology > 0:
+		environment.background_color = tint.lerp(Color("010409"), biology)
+		environment.fog_light_color = environment.fog_light_color.lerp(Color("020710"), biology)
+		environment.fog_density = lerpf(
+			environment.fog_density, lerpf(.028, .007, chamber), biology
+		)
+		environment.ambient_light_energy = lerpf(environment.ambient_light_energy, .018, biology)
+		environment.ambient_light_sky_contribution *= 1 - biology
+		sun.light_energy *= 1 - biology
+		if forward:
+			environment.volumetric_fog_density = lerpf(.0025, .006, biology)
+			environment.volumetric_fog_emission_energy *= 1 - biology
+			environment.volumetric_fog_sky_affect *= 1 - biology

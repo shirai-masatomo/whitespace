@@ -28,7 +28,7 @@ static func reach(
 		model.step(1.0 / 60, Vector2(command.x, command.z), command.y)
 		if observer.is_valid():
 			observer.call(model)
-		if model.grounded == target_index:
+		if arrived(model, target_index):
 			# Centre on the oxygen spot before advancing the route.
 			if not model.platforms[target_index].oxygen or model.at_oxygen():
 				return true
@@ -39,3 +39,9 @@ static func reach(
 
 static func refill(model) -> void:
 	model.step(1.0 / 60, Vector2.ZERO)
+
+
+static func arrived(model, index: int) -> bool:
+	if model.platforms[index].kind == "water_globe":
+		return model.oxygen_contact() == index
+	return model.grounded == index

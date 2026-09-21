@@ -98,7 +98,7 @@ func render_step() -> void:
 func steer(index: int, fast_route: bool = false) -> bool:
 	for frame in range(2400):
 		await step_toward(index, -2, false, fast_route)
-		if game.model.grounded == index:
+		if Driver.arrived(game.model, index):
 			if not game.model.platforms[index].oxygen or game.model.at_oxygen():
 				return true
 		if game.model.mode == Model.Mode.RETURNING:
