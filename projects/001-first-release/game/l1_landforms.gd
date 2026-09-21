@@ -3,6 +3,7 @@ extends Node3D
 const Geo = preload("res://game/ocean_geometry.gd")
 const Nature = preload("res://game/ocean_nature.gd")
 const Collision = preload("res://game/level_collision.gd")
+const Shelves = preload("res://game/cliff_shelves.gd")
 const PROFILE: Array[Vector2] = [
 	Vector2(-1, -.5),
 	Vector2(-.92, .4),
@@ -21,6 +22,20 @@ const PROFILE: Array[Vector2] = [
 
 func _ready() -> void:
 	name = "FaultedCoast"
+	add_child(Shelves.new())
+	# Seen above the first landing: fish cross an opening, not another flat target.
+	mass(
+		"WindowAboveGarden",
+		[
+			Vector3(-27, -45, -64),
+			Vector3(-24, -26, -64),
+			Vector3(-9, -21, -67),
+			Vector3(9, -28, -65),
+			Vector3(14, -45, -64)
+		],
+		Vector2(4.8, 3.2),
+		53
+	)
 	# The exposed bridge spans a hollow bay. Its two roots descend into the reef;
 	# the route runs OVER the displaced bed or UNDER it with the current.
 	mass(
@@ -51,9 +66,9 @@ func _ready() -> void:
 	mass(
 		"WestFault160",
 		[
-			Vector3(-66, -277, -127),
-			Vector3(-54, -217, -113),
-			Vector3(-42, -167, -126),
+			Vector3(-86, -277, -139),
+			Vector3(-76, -217, -137),
+			Vector3(-58, -167, -140),
 			Vector3(-40, -146, -153)
 		],
 		Vector2(25, 16),
@@ -155,6 +170,13 @@ static func section(
 	var progress := t * (spine.size() - 1)
 	var index := mini(int(progress), spine.size() - 2)
 	var center := spine[index].lerp(spine[index + 1], progress - index)
+	if seed_value == 53:
+		center = spine[index].cubic_interpolate(
+			spine[index + 1],
+			spine[maxi(0, index - 1)],
+			spine[mini(index + 2, spine.size() - 1)],
+			progress - index
+		)
 	# Use a stable horizontal section to keep steeply tilted strata thick as well.
 	var tangent := spine[-1] - spine[0]
 	var across := Vector3(-tangent.z, 0, tangent.x).normalized()

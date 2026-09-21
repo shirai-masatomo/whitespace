@@ -1,4 +1,4 @@
-param([ValidateSet('check', 'evaluate', 'test', 'lint', 'format', 'build', 'visual', 'visual-reef', 'visual-discovery', 'visual-playground', 'visual-entry', 'visual-canyon', 'visual-cove', 'visual-massif', 'visual-headland', 'visual-seabed', 'visual-biology', 'benchmark', 'gpu-smoke', 'play', 'editor')][string]$Task = 'check', [ValidateSet('windows','windows-preview','windows-real','windows-agent')][string]$BuildFolder = 'windows-agent', [ValidateSet('forward_plus','gl_compatibility')][string]$Renderer = 'forward_plus', [ValidateCount(0,4)][ValidatePattern('^[a-zA-Z0-9-]+$')][string[]]$Capture = @(), [switch]$RecordSequence)
+param([ValidateSet('check', 'evaluate', 'test', 'lint', 'format', 'build', 'visual', 'visual-reef', 'visual-discovery', 'visual-playground', 'visual-entry', 'visual-canyon', 'visual-cove', 'visual-massif', 'visual-headland', 'visual-l1', 'visual-seabed', 'visual-biology', 'benchmark', 'gpu-smoke', 'play', 'editor')][string]$Task = 'check', [ValidateSet('windows','windows-preview','windows-real','windows-agent')][string]$BuildFolder = 'windows-agent', [ValidateSet('forward_plus','gl_compatibility')][string]$Renderer = 'forward_plus', [ValidateCount(0,4)][ValidatePattern('^[a-zA-Z0-9-]+$')][string[]]$Capture = @(), [switch]$RecordSequence)
 $ErrorActionPreference = 'Stop'
 $projectRoot = $PSScriptRoot
 $buildRoot = Join-Path $projectRoot ('build/' + $BuildFolder)
@@ -59,6 +59,9 @@ try {
     if ($Task -eq 'benchmark') {
         Invoke-Godot ('benchmark-' + $Renderer) @('--script', 'tests/test_rendering.gd')
     }
+    if ($Task -eq 'visual-l1') {
+        Invoke-Godot 'visual-l1' @('--script', 'tests/test_l1_views.gd')
+    }
     if ($Task -eq 'visual-entry') {
         Invoke-Godot 'visual-entry' @('--script', 'tests/test_entry.gd')
     }
@@ -115,6 +118,7 @@ try {
         Invoke-Godot 'seabed' @('--headless', '--script', 'tests/test_seabed.gd')
         Invoke-Godot 'headland' @('--headless', '--script', 'tests/test_headland.gd')
         Invoke-Godot 'canyon' @('--headless', '--script', 'tests/test_canyon.gd')
+        Invoke-Godot 'l1-views' @('--headless', '--script', 'tests/test_l1_views.gd')
         Invoke-Godot 'l1-places' @('--headless', '--script', 'tests/test_l1_places.gd')
         Invoke-Godot 'biology' @('--headless', '--script', 'tests/test_biology.gd', '--', '--full')
     }

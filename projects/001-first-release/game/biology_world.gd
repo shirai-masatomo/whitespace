@@ -57,7 +57,12 @@ func update(model) -> void:
 			index += 1
 		var direction: Vector3 = (Layout.APPROACH[index + 1] - Layout.APPROACH[index]).normalized()
 		var point: Vector3 = Layout.APPROACH[index] + direction * distance
-		point += Vector3(sin(i * 2.39) * 2.2, cos(i * 1.7) * 1.2, sin(i) * 1.5)
+		point += Vector3(sin(i * 2.39) * 3.6, cos(i * 1.7) * .5, sin(i) * 2.5)
+		if index < 2:
+			# Sand saltates along the real floor; only near the opening does it fall.
+			point.y = (
+				Layout.sand_height(point.x, point.z) + .25 + absf(sin(i + model.elapsed * 2)) * .9
+			)
 		inflow[i].position = point
 		var across := direction.cross(Vector3.FORWARD).normalized()
 		inflow[i].basis = Basis(across, direction, across.cross(direction))
@@ -93,11 +98,26 @@ func make_floor() -> void:
 			Geo.put(
 				floor_root, Geo.boulder(Vector3(5, 2, 4), i), Nature.stone(), point + Vector3.UP
 			)
+	# Exposed bedding on either side of the sandy runnel. The lane itself stays open.
+	for i in range(15):
+		var x := -16.0 + i * 4.8
+		var z := -94.0 - i * 2.3 - (12 if i % 2 else 0)
+		var point := Vector3(x, Layout.sand_height(x, z), z)
+		if Vector2((x - 38) / 10, (z + 133) / 18).length() < 1:
+			continue
+		var slab := Geo.put(
+			floor_root,
+			Geo.fault_block(Vector3(8, 2.5, 5), 90 + i),
+			Nature.stone(),
+			point + Vector3.UP * .7
+		)
+		slab.rotation.y = .5 + sin(i) * .3
+		Nature.kelp(floor_root, point + Vector3.UP * .5, 1.3, 440 + i)
 	Collision.build(floor_root)
 
 
 static func occupied(x: float, z: float) -> bool:
-	return Vector2((x + 1.5 - 38) / 6, (z + 1.5 + 133) / 14).length() >= 1
+	return not Geometry2D.is_point_in_polygon(Vector2(x + 1.5, z + 1.5), Layout.mouth_outline())
 
 
 static func floor_vertex(x: float, z: float) -> Vector3:
@@ -106,9 +126,18 @@ static func floor_vertex(x: float, z: float) -> Vector3:
 		if occupied(x + offset.x, z + offset.y):
 			neighbors += 1
 	if neighbors > 0 and neighbors < 4:
-		var radial := Vector2((x - 38) / 6, (z + 133) / 14).normalized()
-		x = 38 + radial.x * 6
-		z = -133 + radial.y * 14
+		var outline := Layout.mouth_outline()
+		var nearest := Vector2.INF
+		for side in range(outline.size()):
+			var candidate := Geometry2D.get_closest_point_to_segment(
+				Vector2(x, z), outline[side], outline[(side + 1) % outline.size()]
+			)
+			if (
+				candidate.distance_squared_to(Vector2(x, z))
+				< nearest.distance_squared_to(Vector2(x, z))
+			):
+				nearest = candidate
+		return Vector3(nearest.x, -457, nearest.y)
 	return Vector3(x, Layout.sand_height(x, z), z)
 
 
@@ -142,7 +171,14 @@ static func throat_point(t: float, side: int, outside: bool) -> Vector3:
 	uneven = lerpf(1, uneven, smoothstep(0, .1, t))
 	if outside:
 		radius += Vector2(25, 22)
-	return center + Vector3(cos(angle) * radius.x * uneven, 0, sin(angle) * radius.y * uneven)
+	var result := (
+		center + Vector3(cos(angle) * radius.x * uneven, 0, sin(angle) * radius.y * uneven)
+	)
+	if not outside:
+		var outline := Layout.mouth_outline()[side % 32]
+		var mouth := Vector3(outline.x, center.y, outline.y)
+		result = mouth.lerp(result, smoothstep(0, .16, t))
+	return result
 
 
 func make_inflow() -> void:
@@ -150,9 +186,9 @@ func make_inflow() -> void:
 		inflow_length += Layout.APPROACH[i].distance_to(Layout.APPROACH[i + 1])
 	var material := ShaderMaterial.new()
 	material.shader = preload("res://game/shaders/flow_mote.gdshader")
-	for i in range(70):
+	for i in range(180):
 		var mesh := QuadMesh.new()
-		mesh.size = Vector2(.12 + (i % 3) * .03, .6 + (i % 5) * .22)
+		mesh.size = Vector2(.055 + (i % 3) * .025, .12 + (i % 5) * .06)
 		var mote := Geo.put(self, mesh, material)
 		mote.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 		inflow.append(mote)

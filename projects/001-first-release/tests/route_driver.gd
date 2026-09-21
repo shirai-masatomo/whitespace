@@ -4,6 +4,14 @@ extends RefCounted
 
 static func input_for(model, target_index: int, fast: bool = false) -> Vector3:
 	var target: Vector3 = model.platforms[target_index].position
+	# The upper cliff lip now covers the middle garden. Swim/walk around its
+	# seaward edge before descending, just as a player must; do not drill straight
+	# down through a newly connected terrain layer.
+	if target_index == 13 and model.position.y > -183:
+		target.x = -30
+		target.z = -102
+	if target_index == 14 and model.position.y > -201:
+		target.z = -85
 	var offset := Vector2(target.x - model.position.x, target.z - model.position.z)
 	var axis: Vector2 = (offset * 1.6 / model.config.horizontal_speed).limit_length()
 	# Slow descent while far from the landing surface; never suspend gravity.

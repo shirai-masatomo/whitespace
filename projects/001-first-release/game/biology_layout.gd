@@ -59,3 +59,16 @@ static func sand_height(x: float, z: float) -> float:
 	var gully := 1 - smoothstep(6, 22, absf(x - 38 + (z + 133) * .35))
 	shoulder *= 1 - gully * .35
 	return -457 + shoulder + (dunes + 2.0) * smoothstep(1, 3, rim)
+
+
+static func mouth_outline() -> PackedVector2Array:
+	var result := PackedVector2Array()
+	for side in range(32):
+		var angle := side * TAU / 32
+		var fracture := 1 + sin(angle * 3 + .4) * .18 + sin(angle * 7) * .08
+		result.append(
+			Vector2(
+				38 + cos(angle) * 6 * fracture + sin(angle) * 2, -133 + sin(angle) * 14 * fracture
+			)
+		)
+	return result

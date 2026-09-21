@@ -50,6 +50,7 @@ func _ready() -> void:
 	biology = Biology.new()
 	add_child(biology)
 	life.make_shoal(Vector3(84, -53, -63), 24)
+	life.make_shoal(Vector3(-8, -28, -62), 65, Life.Role.PASSAGE)
 	life.make_shoal(Vector3(27, -65, -115), 90, Life.Role.PASSAGE)
 	life.make_shoal(Vector3(57, -90, -128), 48, Life.Role.FLOW)
 	for point in Layout.SHALLOW_RIDE:

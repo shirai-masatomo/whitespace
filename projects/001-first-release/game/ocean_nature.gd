@@ -190,7 +190,10 @@ static func deck(root: Node3D, data: Dictionary, index: int) -> void:
 			Geo.box(root, Vector3(8.3, .3, .3), metal, Vector3(0, 2, 4))
 			Geo.box(root, Vector3(2.4, 1.2, 1.4), metal, Vector3(-3, .6, 3))
 		_:
-			var rock := Geo.put(root, Geo.rock(size, 12 + index % 3 * 4, data.shape_seed), stone())
+			# Joined cliff shelves are an exposed crust of the larger bedding.
+			# Hanging cone-shaped undersides would plug the new swim-throughs.
+			var depth := 6 if index in [13, 15, 18, 21, 22] else 12 + index % 3 * 4
+			var rock := Geo.put(root, Geo.rock(size, depth, data.shape_seed), stone())
 			rock.name = "LandingSurface"
 			for edge in range(6):
 				var angle := edge * TAU / 6
