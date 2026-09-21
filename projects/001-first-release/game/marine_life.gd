@@ -1,5 +1,6 @@
 extends Node3D
 ## Original low-cost shoals gather near oxygen algae; no collision or paid assets.
+enum Role { OPEN_WATER, ALGAE, FLOW, PASSAGE }
 const Geo = preload("res://game/ocean_geometry.gd")
 const Layout = preload("res://game/stage_layout.gd")
 const Reef = preload("res://game/playground_rules.gd")
@@ -7,6 +8,7 @@ var rays: Array[Node3D] = []
 var shoals: Array[Node3D] = []
 var origins: Array[Vector3] = []
 var reef_guide: Node3D
+var cleft_guide: Node3D
 var canyon_rays: Array[Node3D] = []
 var canyon_school: Node3D
 
@@ -14,12 +16,14 @@ var canyon_school: Node3D
 func _ready() -> void:
 	for platform in Layout.platforms():
 		if platform.oxygen:
-			make_shoal(platform.position + Vector3.UP * 5, 16)
+			make_shoal(platform.position + Vector3.UP * 5, 16, Role.ALGAE)
 	make_shoal(Vector3(8, -18, -21), 24)
-	make_shoal(Vector3(6, -9, -24), 96, Vector3(2.4, 1.8, 1.0), true)
+	make_shoal(Vector3(6, -9, -24), 72, Role.PASSAGE, Vector3(2.4, 1.8, 1.0))
 	reef_guide = shoals[-1]
+	make_shoal(cleft_passage(0), 24, Role.PASSAGE, Vector3(.65, .6, .65))
+	cleft_guide = shoals[-1]
 	for zone in Layout.current_zones():
-		make_shoal(zone.center, 32)
+		make_shoal(zone.center, 32, Role.FLOW)
 	for index in range(3):
 		var ray := make_ray()
 		ray.name = "RayGuide%d" % index
@@ -28,7 +32,7 @@ func _ready() -> void:
 		rays.append(ray)
 
 	# Optional wildlife passage: bridge -> open wall cut -> offshore overlook.
-	make_shoal(Vector3(124, -185, -195), 54)
+	make_shoal(Vector3(124, -185, -195), 54, Role.PASSAGE)
 	canyon_school = shoals[-1]
 	for index in range(3):
 		var ray := make_ray()
@@ -141,6 +145,14 @@ func update(player: Vector3, elapsed: float, giant: Vector3 = Vector3.INF) -> vo
 	reef_guide.position = destination + separation.normalized() * maxf(0, 6 - separation.length())
 	var reef_heading := reef_passage(elapsed + .1) - reef_passage(elapsed - .1)
 	reef_guide.rotation.y = atan2(reef_heading.x, reef_heading.z)
+	# A smaller group leaves the refuge through the real lateral cleft, then
+	# returns below it. Following it is optional; the algae never move away.
+	cleft_guide.position = cleft_passage(elapsed)
+	var cleft_heading := cleft_passage(elapsed + .1) - cleft_passage(elapsed - .1)
+	cleft_guide.rotation.y = atan2(cleft_heading.x, cleft_heading.z)
+	cleft_guide.rotation.x = -atan2(
+		cleft_heading.y, Vector2(cleft_heading.x, cleft_heading.z).length()
+	)
 
 	for index in range(canyon_rays.size()):
 		var time := elapsed + index * 1.7
@@ -160,9 +172,10 @@ func update(player: Vector3, elapsed: float, giant: Vector3 = Vector3.INF) -> vo
 
 
 func make_shoal(
-	point: Vector3, count: int, spread: Vector3 = Vector3.ONE, guided: bool = false
+	point: Vector3, count: int, role: Role = Role.OPEN_WATER, spread: Vector3 = Vector3.ONE
 ) -> void:
-	var mesh := fish_mesh(not guided and count == 16)
+	var guided := role == Role.PASSAGE
+	var mesh := fish_mesh(role == Role.ALGAE)
 	var material := ShaderMaterial.new()
 	material.shader = preload("res://game/shaders/fish.gdshader")
 	material.set_shader_parameter("guided_motion", guided)
@@ -173,6 +186,7 @@ func make_shoal(
 	swarm.mesh = mesh
 	swarm.instance_count = count
 	swarm.custom_aabb = AABB(Vector3(-15, -6, -15), Vector3(30, 12, 30))
+	var placements: Array[Transform3D] = []
 	var rng := RandomNumberGenerator.new()
 	rng.seed = 92103 + count
 	for index in range(count):
@@ -191,16 +205,40 @@ func make_shoal(
 			size = rng.randf_range(.36, .74)
 			turn = rng.randf_range(-.16, .16)
 		offset *= spread
-		swarm.set_instance_transform(
-			index, Transform3D(Basis(Vector3.UP, turn).scaled(Vector3.ONE * size), offset)
-		)
+		var placement := Transform3D(Basis(Vector3.UP, turn).scaled(Vector3.ONE * size), offset)
+		placements.append(placement)
+		swarm.set_instance_transform(index, placement)
 		swarm.set_instance_custom_data(index, Color(index / float(count), 0, 0, 1))
 	var school := MultiMeshInstance3D.new()
+	school.set_meta("role", role)
+	# Dummy rendering does not retain MultiMesh instance transforms. Keep the
+	# authored placement data for the same whole-school checks in headless/CI.
+	school.set_meta("placements", placements)
 	school.multimesh = swarm
 	school.position = point
 	add_child(school)
 	shoals.append(school)
 	origins.append(point)
+
+
+static func cleft_passage(time: float) -> Vector3:
+	var points := [
+		Vector3(26, -26, -34),
+		Vector3(31, -29, -41),
+		Vector3(44, -36, -47),
+		Vector3(49, -43, -50),
+		Vector3(38, -43, -44),
+		Vector3(27, -39, -39),
+		Vector3(26, -32, -40)
+	]
+	var progress := fposmod(time / 2.4, points.size())
+	var i := posmod(int(progress), points.size())
+	return points[i].cubic_interpolate(
+		points[(i + 1) % points.size()],
+		points[posmod(i - 1, points.size())],
+		points[(i + 2) % points.size()],
+		progress - floor(progress)
+	)
 
 
 static func fish_mesh(deep_body: bool) -> ArrayMesh:

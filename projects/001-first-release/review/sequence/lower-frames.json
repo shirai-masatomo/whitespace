@@ -48,21 +48,15 @@
     "seconds": 16.0
   },
   {
-    "depth": 219.0,
+    "depth": 220.9,
     "file": "lower-frame-008.jpg",
-    "pose": "ascend",
+    "pose": "swim",
     "seconds": 18.0
   },
   {
-    "depth": 220.0,
+    "depth": 222.0,
     "file": "lower-frame-009.jpg",
-    "pose": "swim",
+    "pose": "land",
     "seconds": 20.0
-  },
-  {
-    "depth": 219.9,
-    "file": "lower-frame-010.jpg",
-    "pose": "sink",
-    "seconds": 22.0
   }
 ]

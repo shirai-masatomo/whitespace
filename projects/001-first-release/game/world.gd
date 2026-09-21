@@ -42,7 +42,7 @@ func _ready() -> void:
 	life.make_shoal(Vector3(84, -53, -63), 24)
 	for plant in Playground.Rules.PLANTS:
 		effects.vent(plant)
-		life.make_shoal(plant + Vector3.UP * 4, 28)
+		life.make_shoal(plant + Vector3.UP * 4, 28, Life.Role.ALGAE)
 	for zone in Layout.current_zones():
 		effects.current(zone.center, zone.flow)
 

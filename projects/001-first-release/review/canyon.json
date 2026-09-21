@@ -1,5 +1,5 @@
 {
-  "checks": 156,
+  "checks": 152,
   "failed": false,
   "observations": {
     "cleft_oxygen": 83.2666666666676,
@@ -10,38 +10,6 @@
       "seconds": 19.8333333333335
     },
     "cleft_seconds": 4.18333333333332,
-    "continuous_current_18_1": {
-      "arrived": true,
-      "decision_oxygen": 50.8000000000014,
-      "end": "Vector3(94.7351, -220.08688, -220.39008)",
-      "end_oxygen": 100.0,
-      "minimum_oxygen": 13.6000000000005,
-      "seconds": 22.6
-    },
-    "continuous_current_18_2": {
-      "arrived": true,
-      "decision_oxygen": 31.9333333333338,
-      "end": "Vector3(14.354859, -239.60315, -63.006584)",
-      "end_oxygen": 100.0,
-      "minimum_oxygen": 1.33333333333388,
-      "seconds": 25.5833333333332
-    },
-    "continuous_current_21_1": {
-      "arrived": true,
-      "decision_oxygen": 52.0000000000015,
-      "end": "Vector3(94.479355, -220.6416, -220.36932)",
-      "end_oxygen": 100.0,
-      "minimum_oxygen": 14.8000000000005,
-      "seconds": 22.3833333333333
-    },
-    "continuous_current_21_2": {
-      "arrived": true,
-      "decision_oxygen": 35.2666666666673,
-      "end": "Vector3(14.27614, -239.3297, -63.15294)",
-      "end_oxygen": 100.0,
-      "minimum_oxygen": 1.00000000000055,
-      "seconds": 25.6666666666665
-    },
     "continuous_current_24_1": {
       "arrived": true,
       "decision_oxygen": 52.8666666666682,
@@ -253,14 +221,6 @@
       "arrived": true,
       "oxygen": 100.0,
       "seconds": 4.79999999999999
-    },
-    "return_sight_18": {
-      "blocked": true,
-      "position": "Vector3(97.43409, -224.99063, -222.87167)"
-    },
-    "return_sight_21": {
-      "blocked": true,
-      "position": "Vector3(97.44769, -225.03224, -222.90471)"
     },
     "return_sight_24": {
       "blocked": true,

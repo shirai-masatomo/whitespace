@@ -122,6 +122,9 @@ func run() -> void:
 	await normal_entry()
 	await garden_shoulder()
 	await fast_garden_approach()
+	await _cleft_school()
+	if gpu:
+		await observe_cleft()
 	var file := FileAccess.open("res://artifacts/entry.json", FileAccess.WRITE)
 	file.store_string(
 		JSON.stringify(
@@ -154,6 +157,88 @@ func reach_oxygen(target: Vector3) -> bool:
 		if game.model.oxygen == 100:
 			return true
 	return false
+
+
+func _cleft_school() -> void:
+	await physics_frame
+	await physics_frame
+	var life = game.world.life
+	var guide: MultiMeshInstance3D = life.cleft_guide
+	var shape := SphereShape3D.new()
+	shape.radius = 1.0  # Includes fish body and shader tail/school sway.
+	var query := PhysicsShapeQueryParameters3D.new()
+	query.shape = shape
+	query.collision_mask = 1
+	var hits := 0
+	var crossed := 0
+	var previous: Array[Vector3] = []
+	var maximum_depth := 0.0
+	check(
+		life.cleft_passage(-0.00000000000001).distance_to(life.cleft_passage(0)) < .01,
+		"The negative heading sample wraps continuously at the start of the loop"
+	)
+	var placements: Array = guide.get_meta("placements")
+	var matching := placements.size() == guide.multimesh.instance_count
+	for index in range(placements.size()):
+		matching = matching and placements[index].origin.length() > .01
+		if gpu:
+			matching = (
+				matching
+				and placements[index].is_equal_approx(guide.multimesh.get_instance_transform(index))
+			)
+	check(matching, "Headless shoal placements match the actual rendered instances")
+	for sample in range(169):
+		life.update(Vector3(500, 0, 500), sample * .1)
+		maximum_depth = maxf(maximum_depth, -guide.position.y)
+		for index in range(guide.multimesh.instance_count):
+			var point: Vector3 = guide.global_transform * guide.get_meta("placements")[index].origin
+			query.transform = Transform3D(Basis.IDENTITY, point)
+			var contacts: Array = game.get_world_3d().direct_space_state.intersect_shape(query, 1)
+			if not contacts.is_empty():
+				if hits < 8:
+					print(
+						"School contact ", sample, " ", point, " ", contacts[0].collider.get_path()
+					)
+				hits += 1
+			if sample > 0:
+				var ray := PhysicsRayQueryParameters3D.create(previous[index], point, 1)
+				if not game.get_world_3d().direct_space_state.intersect_ray(ray).is_empty():
+					crossed += 1
+				previous[index] = point
+			else:
+				previous.append(point)
+	check(hits == 0 and crossed == 0, "The whole cleft shoal avoids visible solid terrain")
+	check(maximum_depth > 40, "The optional shoal enters the deeper playable cleft")
+	observations.cleft_school = {"overlaps": hits, "crossings": crossed, "depth": maximum_depth}
+	print("Cleft shoal: ", observations.cleft_school)
+
+
+func observe_cleft() -> void:
+	# Separate aimed observation, never substituted for the unchanged 84-88 journey.
+	var old_root := capture_root
+	var old_sequence := sequence.duplicate()
+	capture_root = "res://artifacts/entry-cleft-" + RenderingServer.get_current_rendering_method()
+	DirAccess.make_dir_recursive_absolute(capture_root + "/sequence")
+	sequence.clear()
+	simulation_frames = 0
+	record_sequence = true
+	fixture(Reef.PLANTS[0] + Vector3.UP * .2)
+	var target := Vector3(38, -36, -44)
+	var offset: Vector3 = target - game.model.position - Vector3.UP * 1.4
+	game.yaw = atan2(-offset.x, -offset.z)
+	game.pitch = atan2(offset.y, Vector2(offset.x, offset.z).length())
+	for frame in range(1009):
+		# Stand in the refuge while watching the optional path for one full cycle.
+		game.advance(1.0 / 60, Vector2.ZERO, 0, false)
+		await render_step()
+		if frame in [0, 120, 240]:
+			await capture("%d-cleft-school" % (97 + frame / 120))
+	var file := FileAccess.open(capture_root + "/sequence/frames.json", FileAccess.WRITE)
+	file.store_string(JSON.stringify(sequence, "  "))
+	file.close()
+	record_sequence = false
+	capture_root = old_root
+	sequence = old_sequence
 
 
 func normal_entry() -> void:

@@ -1,6 +1,11 @@
 {
-  "checks": 31,
+  "checks": 35,
   "choices": {
+    "cleft_school": {
+      "crossings": 0,
+      "depth": 43.6987800598145,
+      "overlaps": 0
+    },
     "fast_garden_recovery_seconds": 13.7166666666669,
     "garden_shoulder_oxygen": 61.7333333333353,
     "garden_shoulder_seconds": 10.0833333333334,
