@@ -47,6 +47,6 @@
 
 ## 同期・運用
 
-main `815e26d` のHUMAN_DIRECTION / EXTERNAL_AI_REVIEWを確認。会話の最新指示をHUMAN_DIRECTIONへ反映し、従来の「後続層なし/複数ゲート」を今回範囲では置き換えた。外部レビューの品質CHANGESは維持。
+main `26349f7` のHUMAN_DIRECTION / EXTERNAL_AI_REVIEWを確認。会話の最新指示をHUMAN_DIRECTIONへ反映し、従来の「後続層なし/複数ゲート」を今回範囲では置き換えた。外部レビューの品質CHANGESは維持。並行セッションの方針同期 `b08034c` を通常mergeで取り込み、L1品質優先・人間レビュー条件・必要時だけの前後比較も保持した。
 
 [下書きPR #2](https://github.com/shirai-masatomo/whitespace/pull/2)、branch `codex/dive-dive-playground`。30分の常設再開は**PAUSEDのまま**。通常は軽い変更箇所確認、重い検証は節目だけ。GPUは画面外・無音・非捕捉、人間のプロセスへ干渉しない。
