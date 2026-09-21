@@ -2,6 +2,12 @@
 
 **海へ飛び込み、海藻林を歩き、洞窟へ泳ぎ、別の口から海へ戻る水中ゲーム。** 「まだ人間がレビューする段階ではない」を受け、海そのものを遊び場にする制作版です。完成版・人間レビュー待ちではありません。
 
+## 開発対象の指定
+
+**L=層 / P=層内フェーズ / G=層間ゲート**。[全体のL/P/G構成](HUMAN_DIRECTION.md) / [現行試作との対応](PROJECT_STATE.md) / [対象別タスク](TASKS.md)。現在はL1-P0〜L1-GとL2-P0/P1、可能ならP2の品質を作る。約680m版は圧縮試作であり、目安深度への到達・品質完成を意味しない。
+
+「L1-P2の岸壁」「L2-P0の暗闇」と指定すれば、その区間に集中する。L2-G/L3以降は構想のみ。定期再開はPAUSED。
+
 ## 今すぐ遊ぶ（Windows）
 
 1. このPCの今回の最新版は **`build/windows-agent/DIVE DIVE.exe`** をダブルクリック。
@@ -36,7 +42,7 @@
 
 足場・岸壁・流木の幹/枝・クラゲの傘は上面以外にも当たります。柔らかい葉・クラゲの細い触手、魚・泡は通過可能。巨大タコの身体と太い腕には当たります。救助中は泡の状態で障害物を通り抜けます。波音/水中音と操作音あり。生物層は導入と遭遇のみ。セーブ・Steam SDK・オンライン・ボス戦は未実装。
 
-**代表画面・連続画像・調整値・性能比較**は [REVIEW_PACKET](REVIEW_PACKET.md)。[現在地](PROJECT_STATE.md) / [次タスク](TASKS.md) / [AIレビュー](AI_REVIEW.md)。
+**対象別の代表画面・確認条件**は [REVIEW_PACKET](REVIEW_PACKET.md)。[現在地](PROJECT_STATE.md) / [次タスク](TASKS.md) / [AIレビュー](AI_REVIEW.md)。
 
 標準はForward+（Vulkan対応GPU）。描画に問題があれば同梱の `Play-Compatibility.ps1`、または `./dev.ps1 play -Renderer gl_compatibility` でOpenGLへ切り替えます。同じゲーム内容で、体積霧は近似光線になります。
 
@@ -46,13 +52,22 @@
 
 ## 開発と検証
 
+通常は軽い起動/対象操作だけ。以下のcheckは節目用。スクショはユーザー/外部AIから対象IDの確認依頼が来た時だけ2〜4枚。`visual-*` は既存の試走を行うが、保存は `-Capture` で選んだラベルのみ（最大4枚）。指定なしならPNG/JPGを生成しない。連続画像は明示的に必要な時だけ `-RecordSequence`。
+
+例: L1-G/L2-P0/L2-P2をまとめて依頼された場合のみ:
+
+```powershell
+./dev.ps1 visual-biology -Capture '116-sand-throat','117-dark-throat','118-first-octopus'
+```
+
+生成先は無視対象のartifacts。採用分だけ `review/<対象ID>/entry.png` / `middle.png` / `exit.png` / `issue.png` に上書きし、REVIEW_PACKETの条件を更新する。古い画像を追加保存し続けない。
+
 Windows x64、開発時のみPython 3.12以上。リポジトリルートから:
 
 ```powershell
 cd projects/001-first-release
 ./tools/setup.ps1
 ./dev.ps1 check -BuildFolder windows-agent
-./dev.ps1 visual
 ./dev.ps1 play
 ```
 

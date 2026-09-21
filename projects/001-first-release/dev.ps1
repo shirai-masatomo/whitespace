@@ -1,4 +1,4 @@
-param([ValidateSet('check', 'evaluate', 'test', 'lint', 'format', 'build', 'visual', 'visual-reef', 'visual-discovery', 'visual-playground', 'visual-entry', 'visual-canyon', 'visual-cove', 'visual-massif', 'visual-headland', 'visual-seabed', 'visual-biology', 'benchmark', 'gpu-smoke', 'play', 'editor')][string]$Task = 'check', [ValidateSet('windows','windows-preview','windows-real','windows-agent')][string]$BuildFolder = 'windows-agent', [ValidateSet('forward_plus','gl_compatibility')][string]$Renderer = 'forward_plus')
+param([ValidateSet('check', 'evaluate', 'test', 'lint', 'format', 'build', 'visual', 'visual-reef', 'visual-discovery', 'visual-playground', 'visual-entry', 'visual-canyon', 'visual-cove', 'visual-massif', 'visual-headland', 'visual-seabed', 'visual-biology', 'benchmark', 'gpu-smoke', 'play', 'editor')][string]$Task = 'check', [ValidateSet('windows','windows-preview','windows-real','windows-agent')][string]$BuildFolder = 'windows-agent', [ValidateSet('forward_plus','gl_compatibility')][string]$Renderer = 'forward_plus', [ValidateCount(0,4)][ValidatePattern('^[a-zA-Z0-9-]+$')][string[]]$Capture = @(), [switch]$RecordSequence)
 $ErrorActionPreference = 'Stop'
 $projectRoot = $PSScriptRoot
 $buildRoot = Join-Path $projectRoot ('build/' + $BuildFolder)
@@ -11,6 +11,11 @@ Set-Content -LiteralPath "$projectRoot/build/.gdignore" -Value ''
 function Invoke-Godot([string]$Name, [string[]]$Arguments) {
     $log = Join-Path $projectRoot "artifacts/$Name.log"
     if ($Name.StartsWith('visual') -or $Name.StartsWith('benchmark-')) {
+        if ($Capture.Count -gt 0 -or $RecordSequence) {
+            if ('--' -notin $Arguments) { $Arguments += '--' }
+            if ($Capture.Count -gt 0) { $Arguments += ('--capture=' + ($Capture -join ',')) }
+            if ($RecordSequence) { $Arguments += '--record-sequence' }
+        }
         # Keep a real GPU viewport, but never capture the mouse or cover the desktop.
         $gpuArgs = @('--path', ('"' + $projectRoot + '"'), '--log-file', ('"' + $log + '"'), '--rendering-method', $Renderer, '--position', '-20000,-20000', '--audio-driver', 'Dummy') + $Arguments
         $gpu = Start-Process -FilePath $godot -ArgumentList $gpuArgs -WindowStyle Hidden -PassThru
