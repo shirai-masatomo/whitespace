@@ -18,8 +18,10 @@ func run() -> void:
 	game.set_physics_process(false)
 	game.begin()
 	var scenes: Array[Dictionary] = []
-	for depth in [12, 60, 155, 205, 235, 365, 140, 177]:
+	for depth in [12, 60, 155, 205, 235, 365, 140, 177, 30]:
 		game.model.position = Vector3(10, -depth, -35)
+		if depth == 30:
+			game.model.position = Vector3(0, -30, -61)
 		if depth > 200:
 			game.model.position = Vector3(-55, -depth, -95)
 		if depth > 300:

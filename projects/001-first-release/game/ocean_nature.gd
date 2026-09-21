@@ -2,6 +2,7 @@ extends RefCounted
 const Geo = preload("res://game/ocean_geometry.gd")
 const Driftwood = preload("res://game/driftwood_surface.gd")
 const Layout = preload("res://game/stage_layout.gd")
+const KELP = preload("res://game/shaders/kelp.gdshader")
 const WOOD = preload("res://game/shaders/wood.gdshader")
 
 
@@ -13,7 +14,7 @@ static func stone() -> ShaderMaterial:
 
 static func kelp(parent: Node3D, point: Vector3, height: float, seed_value: int) -> void:
 	var mat := ShaderMaterial.new()
-	mat.shader = preload("res://game/shaders/kelp.gdshader")
+	mat.shader = KELP
 	for blade in range(7):
 		var leaf := Geo.put(
 			parent,
@@ -261,3 +262,28 @@ static func landscape(parent: Node3D) -> void:
 		parent, Geo.rock(Vector2(32, 20), 7, 966), mat, Vector3(-25, -350, -115)
 	)
 	deep_arch.name = "RiftRoof"
+
+
+static func canopy(parent: Node3D, point: Vector3, height: float, seed_value: int) -> void:
+	# Long ascending ribbons and gaps replace the evenly spaced horizontal leaves.
+	var rng := RandomNumberGenerator.new()
+	rng.seed = 92021 + seed_value
+	var st := SurfaceTool.new()
+	st.begin(Mesh.PRIMITIVE_TRIANGLES)
+	st.append_from(Geo.leaf(height, .045), 0, Transform3D.IDENTITY)
+	var count := rng.randi_range(14, 24)
+	for branch in range(count):
+		var t := .14 + .71 * (branch + rng.randf_range(-.25, .25)) / count
+		var angle := branch * 2.399 + seed_value
+		var basis := Basis(Vector3.UP, angle) * Basis(Vector3.FORWARD, rng.randf_range(.65, 1.25))
+		var length := minf(rng.randf_range(3.4, 7.5), height * (1 - t))
+		st.append_from(
+			Geo.leaf(length, rng.randf_range(.12, .28)),
+			0,
+			Transform3D(basis, Vector3(0, t * height, sin(t * 3.3) * height * .17))
+		)
+	var mat := ShaderMaterial.new()
+	mat.shader = KELP
+	mat.set_shader_parameter("stipe_height", height)
+	mat.set_shader_parameter("phase_offset", seed_value * .73)
+	Geo.put(parent, st.commit(), mat, point)

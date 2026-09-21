@@ -29,6 +29,9 @@ func run() -> void:
 	observations.first_landing = var_to_str(game.model.position)
 	if gpu:
 		await capture("105-first-bedrock")
+		game.pitch = -.25
+		await capture("112-default-landing-view")
+		game.pitch = -.35
 		await photo("109-first-terrace-choice", Vector3(-18, -44, -84))
 		game.pitch = -.35
 	var landed: Vector3 = game.model.position
@@ -65,6 +68,7 @@ func run() -> void:
 		frames.store_string(JSON.stringify(sequence, "  "))
 		frames.close()
 	await contacts()
+	await explore_fissure()
 	var file := FileAccess.open("res://artifacts/headland.json", FileAccess.WRITE)
 	file.store_string(
 		JSON.stringify({"checks": checks, "failed": failed, "observations": observations}, "  ")
@@ -115,3 +119,28 @@ func contacts() -> void:
 			for body in game.motion.contact_bodies:
 				side_contact = side_contact or "ShallowHeadland" in str(body.get_path())
 		check(side_contact, "Diagonal swimming meets the bedrock side at %dHz" % rate)
+
+
+func explore_fissure() -> void:
+	# This branch starts at the refuge reached by the continuous journey above.
+	fixture(Vector3(-18, -43, -84))
+	for frame in range(60):
+		await tick()
+	var start: float = game.model.elapsed
+	check(await walk_to(Vector2(-1, -82)) > 60, "Walk from the refuge to the fissure lip")
+	await photo("110-fissure-lip", Vector3(7, -52, -86))
+	check(
+		await swim(Vector3(7, -66, -84), 10), "The visible fissure opens through the entire bedrock"
+	)
+	await photo("111-fissure-exit", Vector3(7, -39, -83))
+	check(
+		await swim(Vector3(17, -70, -68), 10),
+		"Exit below the cliff into a different part of the sea"
+	)
+	check(game.model.setbacks == 0, "The optional fissure needs no rescue")
+	observations.fissure_seconds = game.model.elapsed - start
+	for rate in [60, 15]:
+		fixture(Vector3(7, -29, -84))
+		for frame in range(rate * 3):
+			game.advance(1.0 / rate, Vector2.ZERO, 1, false)
+		check(game.model.depth > 63, "E fits through the real opening at %dHz" % rate)
