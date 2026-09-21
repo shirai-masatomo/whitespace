@@ -343,11 +343,18 @@ func _return_step(delta: float) -> void:
 
 
 func flow_at(point: Vector3) -> Vector3:
-	var flow := Vector3.ZERO
+	var flow := Discovery.sample_path(
+		Layout.Biology.APPROACH,
+		point,
+		2.4,
+		config.sink_speed * (1 - smoothstep(453, 461, -point.y)),
+		true
+	)
 	if config.cavern_current_enabled:
 		flow += Playground.updraft(point, elapsed, config.cavern_updraft_speed)
 	if config.discovery_enabled:
 		flow += Discovery.bubble_flow(point, elapsed, config.bubble_lift)
+		flow += Discovery.sample_path(Layout.SHALLOW_RIDE, point, 5.5, config.sink_speed, true)
 		flow += Discovery.stream_sample(point, config.discovery_stream_speed, config.sink_speed)
 		flow += Discovery.sample_path(
 			Discovery.COVE_STREAM, point, config.cove_stream_speed, config.sink_speed, true

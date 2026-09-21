@@ -1,3 +1,5 @@
+> 最新L1試作では岩橋・断層・盆地・潮流を変更。以下の保存画像は撮影元commit時点の参考です。今回の画面確認は非追跡artifactsの3視点のみ。依頼されたフェーズの画像を次回置き換えます。
+
 # DIVE DIVE — REVIEW PACKET
 
 **対象: L1-P0〜L1-G / L2-P0〜P2の圧縮試作。CHANGES / 定期再開PAUSED。** 人間レビュー要求ではない。計画と現行位置は[PROJECT_STATE](PROJECT_STATE.md)、全体構成は[HUMAN_DIRECTION](HUMAN_DIRECTION.md)。

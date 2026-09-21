@@ -14,6 +14,7 @@ const Playground = preload("res://game/playground_world.gd")
 const Canyon = preload("res://game/canyon_world.gd")
 const Biology = preload("res://game/biology_world.gd")
 const Seabed = preload("res://game/coastal_seabed.gd")
+const Landforms = preload("res://game/l1_landforms.gd")
 const Headland = preload("res://game/shallow_headland.gd")
 var biology: Node3D
 var lighting: Node3D
@@ -45,9 +46,17 @@ func _ready() -> void:
 	add_child(Canyon.new())
 	add_child(Headland.new())
 	add_child(Seabed.new())
+	add_child(Landforms.new())
 	biology = Biology.new()
 	add_child(biology)
 	life.make_shoal(Vector3(84, -53, -63), 24)
+	life.make_shoal(Vector3(27, -65, -115), 90, Life.Role.PASSAGE)
+	life.make_shoal(Vector3(57, -90, -128), 48, Life.Role.FLOW)
+	for point in Layout.SHALLOW_RIDE:
+		effects.current(point, Vector3(3, -.8, -1))
+	for i in range(Biology.Layout.APPROACH.size() - 1):
+		var start: Vector3 = Biology.Layout.APPROACH[i]
+		effects.current(start, (Biology.Layout.APPROACH[i + 1] - start).normalized() * 2.4)
 	for plant in Playground.Rules.PLANTS:
 		effects.vent(plant)
 		life.make_shoal(plant + Vector3.UP * 4, 28, Life.Role.ALGAE)

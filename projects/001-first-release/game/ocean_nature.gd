@@ -253,7 +253,13 @@ static func landscape(parent: Node3D) -> void:
 	# The former isolated eastern arch is replaced by the traversable canyon.
 	# Increasing density on one side leaves an open offshore bypass.
 	for form in Layout.Reef.geology() + Layout.Rift.geology():
-		var reef := Geo.put(parent, Geo.boulder(form.size, form.seed), mat, form.point)
+		# The tidal exit cuts through this rounded bank; preserve its worn clearance.
+		var mesh := (
+			Geo.boulder(form.size, form.seed)
+			if form.seed == 806
+			else Geo.fault_block(form.size, form.seed)
+		)
+		var reef := Geo.put(parent, mesh, mat, form.point)
 		reef.name = "ApproachingReef%d" % form.seed
 		kelp(parent, form.point + Vector3(6, -8, 2), 9, form.seed)
 	var roof := Geo.put(parent, Geo.rock(Vector2(28, 18), 6, 912), mat, Vector3(-62, -194, -104))

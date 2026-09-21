@@ -1,5 +1,12 @@
 extends RefCounted
 ## The sole descending throat opens into a chamber; this is only the next layer's prologue.
+const APPROACH: Array[Vector3] = [
+	Vector3(5, -449, -109),
+	Vector3(26, -449, -109),
+	Vector3(38, -451, -114),
+	Vector3(38, -456, -133),
+	Vector3(38, -477, -133)
+]
 const PATH: Array[Vector3] = [
 	Vector3(38, -457, -133),
 	Vector3(38, -478, -133),
@@ -46,4 +53,9 @@ static func radius(t: float) -> Vector2:
 static func sand_height(x: float, z: float) -> float:
 	var dunes := sin(x * .09) * 1.1 + cos(z * .11 + x * .025) * .8
 	var rim := Vector2((x - 38) / 6, (z + 133) / 14).length()
-	return -457 + dunes * smoothstep(1, 3, rim)
+	# The crevice is the basin's unique low point, not one hole on a level plain.
+	var distance := Vector2(x - 38, z + 133).length()
+	var shoulder := smoothstep(32, 190, distance) * 125
+	var gully := 1 - smoothstep(6, 22, absf(x - 38 + (z + 133) * .35))
+	shoulder *= 1 - gully * .35
+	return -457 + shoulder + (dunes + 2.0) * smoothstep(1, 3, rim)

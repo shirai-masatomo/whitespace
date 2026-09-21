@@ -115,6 +115,7 @@ try {
         Invoke-Godot 'seabed' @('--headless', '--script', 'tests/test_seabed.gd')
         Invoke-Godot 'headland' @('--headless', '--script', 'tests/test_headland.gd')
         Invoke-Godot 'canyon' @('--headless', '--script', 'tests/test_canyon.gd')
+        Invoke-Godot 'l1-places' @('--headless', '--script', 'tests/test_l1_places.gd')
         Invoke-Godot 'biology' @('--headless', '--script', 'tests/test_biology.gd', '--', '--full')
     }
     if ($Task -in @('evaluate', 'check')) {

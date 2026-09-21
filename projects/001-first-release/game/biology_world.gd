@@ -5,16 +5,19 @@ const Collision = preload("res://game/level_collision.gd")
 const Layout = preload("res://game/biology_layout.gd")
 const Octopus = preload("res://game/giant_octopus.gd")
 var giant: Node3D
+var inflow: Array[MeshInstance3D] = []
+var inflow_length := 0.0
 
 
 func _ready() -> void:
 	name = "BiologyEntrance"
 	make_floor()
 	make_throat()
+	make_inflow()
 	var material := Nature.stone()
 	for data in [
-		[Vector3(25, -447, -138), Vector3(15, 18, 48)],
-		[Vector3(52, -440, -131), Vector3(19, 26, 60)],
+		[Vector3(22, -454, -139), Vector3(14, 18, 46)],
+		[Vector3(53, -444, -140), Vector3(19, 26, 60)],
 		[Vector3(-65, -505, -170), Vector3(90, 95, 100)],
 		[Vector3(134, -506, -125), Vector3(100, 100, 120)],
 		[Vector3(-48, -590, -209), Vector3(85, 140, 180)],
@@ -43,6 +46,21 @@ static func globe(parent: Node3D) -> void:
 
 func update(model) -> void:
 	giant.update(model.elapsed, model.depth)
+	for i in range(inflow.size()):
+		var distance: float = fposmod(i * 1.7 + model.elapsed * 2.4, inflow_length)
+		var index := 0
+		while index < Layout.APPROACH.size() - 2:
+			var length: float = Layout.APPROACH[index].distance_to(Layout.APPROACH[index + 1])
+			if distance < length:
+				break
+			distance -= length
+			index += 1
+		var direction: Vector3 = (Layout.APPROACH[index + 1] - Layout.APPROACH[index]).normalized()
+		var point: Vector3 = Layout.APPROACH[index] + direction * distance
+		point += Vector3(sin(i * 2.39) * 2.2, cos(i * 1.7) * 1.2, sin(i) * 1.5)
+		inflow[i].position = point
+		var across := direction.cross(Vector3.FORWARD).normalized()
+		inflow[i].basis = Basis(across, direction, across.cross(direction))
 
 
 func make_floor() -> void:
@@ -125,3 +143,16 @@ static func throat_point(t: float, side: int, outside: bool) -> Vector3:
 	if outside:
 		radius += Vector2(25, 22)
 	return center + Vector3(cos(angle) * radius.x * uneven, 0, sin(angle) * radius.y * uneven)
+
+
+func make_inflow() -> void:
+	for i in range(Layout.APPROACH.size() - 1):
+		inflow_length += Layout.APPROACH[i].distance_to(Layout.APPROACH[i + 1])
+	var material := ShaderMaterial.new()
+	material.shader = preload("res://game/shaders/flow_mote.gdshader")
+	for i in range(70):
+		var mesh := QuadMesh.new()
+		mesh.size = Vector2(.12 + (i % 3) * .03, .6 + (i % 5) * .22)
+		var mote := Geo.put(self, mesh, material)
+		mote.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+		inflow.append(mote)

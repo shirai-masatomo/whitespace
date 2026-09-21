@@ -67,8 +67,8 @@ func run() -> void:
 func audit_contacts() -> void:
 	# Drive the actual swept capsule into the sand and both sides of the throat.
 	for entry in [
-		[Vector3(15, -452, -110), Vector2.ZERO, 0.0, false, "SandFloor"],
-		[Vector3(15, -452, -110), Vector2.ZERO, 1.0, false, "SandFloor"],
+		[Vector3(15, Biology.sand_height(15, -90) + 4, -90), Vector2.ZERO, 0.0, false, "SandFloor"],
+		[Vector3(15, Biology.sand_height(15, -90) + 4, -90), Vector2.ZERO, 1.0, false, "SandFloor"],
 		[Vector3(38, -482, -133), Vector2.RIGHT, 0.0, false, "NarrowThroat"],
 		[Vector3(38, -482, -133), Vector2.LEFT, 0.0, true, "NarrowThroat"],
 		[Vector3(49, -640, -210), Vector2.RIGHT, 0.0, false, "GiantOctopus"]

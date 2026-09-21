@@ -1,5 +1,8 @@
 extends RefCounted
 ## Shared platform data for collision, visuals, route hints and tests.
+const SHALLOW_RIDE: Array[Vector3] = [
+	Vector3(9, -64, -104), Vector3(29, -66, -115), Vector3(53, -77, -128), Vector3(53, -111, -143)
+]
 const JELLY_RADIUS_SCALE := .56
 const JELLY_SEGMENTS := 48
 const BUOY_TOP_SCALE := .54

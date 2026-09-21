@@ -44,6 +44,35 @@ static func boulder(size: Vector3, seed_value: int) -> ArrayMesh:
 	return loft(profile, 32, seed_value)
 
 
+static func fault_block(size: Vector3, seed_value: int) -> ArrayMesh:
+	# Thick tilted beds with a displaced middle ledge. Unlike a boulder, this
+	# supports walking along strata and has recesses beneath the exposed lip.
+	var profile: Array[Vector3] = []
+	for band in [
+		Vector3(-1, .001, .001),
+		Vector3(-.91, .44, .44),
+		Vector3(-.69, .52, .47),
+		Vector3(-.55, .38, .41),
+		Vector3(-.48, .37, .40),
+		Vector3(-.44, .55, .51),
+		Vector3(-.32, .52, .49),
+		Vector3(-.18, .39, .38),
+		Vector3(-.11, .45, .41),
+		Vector3(-.035, .30, .32),
+		Vector3(0, .001, .001)
+	]:
+		profile.append(Vector3(band.x * size.y, band.y * size.x, band.z * size.z))
+	var surface := SurfaceTool.new()
+	surface.begin(Mesh.PRIMITIVE_TRIANGLES)
+	for point in loft(profile, 32, seed_value).get_faces():
+		var t: float = -point.y / size.y
+		point.x += sin(t * 4 + seed_value) * size.x * .10
+		point.z += (smoothstep(.42, .52, t) - .5) * size.z * .13
+		surface.add_vertex(point)
+	surface.generate_normals()
+	return surface.commit()
+
+
 static func leaf(height: float, width: float) -> ArrayMesh:
 	var st := SurfaceTool.new()
 	st.begin(Mesh.PRIMITIVE_TRIANGLES)
