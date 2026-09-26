@@ -84,6 +84,7 @@ func current(point: Vector3, direction: Vector3) -> void:
 
 
 func update(model) -> void:
+	cavern_jet.global_position = model.reef_frame * model.Playground.UPDRAFT
 	cavern_jet.emitting = model.config.cavern_current_enabled
 	cavern_jet.visible = model.config.cavern_current_enabled
 	cavern_jet.speed_scale = model.Playground.updraft_pulse(model.elapsed)

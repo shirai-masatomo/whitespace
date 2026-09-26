@@ -15,6 +15,7 @@ var collision_motion: Callable
 var authored_platforms: Array[Dictionary] = []
 var garden_points: Array[Vector3] = Playground.PLANTS.duplicate()
 var oxygen_locator: Callable
+var reef_frame := Transform3D.IDENTITY
 var platforms: Array[Dictionary]
 var position := Vector3.ZERO
 var velocity := Vector3.ZERO
@@ -145,7 +146,7 @@ func at_oxygen() -> bool:
 
 
 func in_dry_cave() -> bool:
-	return Playground.air_at(position + Vector3.UP * 1.4)
+	return Playground.air_at(reef_frame.affine_inverse() * (position + Vector3.UP * 1.4))
 
 
 func in_air_pocket() -> bool:
@@ -198,7 +199,7 @@ func step(delta: float, horizontal: Vector2, descent: float = 0.0, ascend: bool 
 			sink = config.fast_sink_speed
 		elif descent < 0:
 			sink = config.brake_sink_speed
-		if position.y > 0.5 or Playground.air_at(position):
+		if position.y > 0.5 or Playground.air_at(reef_frame.affine_inverse() * position):
 			velocity.y = maxf(-20, velocity.y - config.air_gravity * delta)
 		else:
 			var target_speed: float = config.ascent_speed if ascend else -sink
@@ -361,7 +362,12 @@ func flow_at(point: Vector3) -> Vector3:
 		true
 	)
 	if config.cavern_current_enabled:
-		flow += Playground.updraft(point, elapsed, config.cavern_updraft_speed)
+		flow += (
+			reef_frame.basis
+			* Playground.updraft(
+				reef_frame.affine_inverse() * point, elapsed, config.cavern_updraft_speed
+			)
+		)
 	if config.discovery_enabled:
 		flow += Discovery.bubble_flow(point, elapsed, config.bubble_lift)
 		flow += Discovery.sample_path(Layout.SHALLOW_RIDE, point, 5.5, config.sink_speed, true)

@@ -16,33 +16,18 @@ func run() -> void:
 	await physics_frame
 	game.set_physics_process(false)
 	game.begin()
-	fixture(Vector3(-3, -37, -89))
-	await photo("l1-p1-bay", Vector3(28, -60, -119))
-	fixture(Vector3(-18, -43, -84))
-	check(await swim(Vector3(-16, -41, -105), 15), "Leave the algae garden toward the upper bridge")
-	check(await swim(Vector3(0, -41, -112), 12), "The raised bed is reachable from the terrace")
-	var walking := 0
-	for frame in range(600):
-		var difference := Vector2(24 - game.model.position.x, -118 - game.model.position.z)
-		if difference.length() < 3:
-			break
-		await tick((difference / 3).limit_length())
-		if game.model.standing:
-			walking += 1
+	# The old 60m lateral ride is no longer an entry branch. Its replacement
+	# becomes available at the P1/P2 threshold; validate actual drift and exit.
 	check(
-		game.model.position.x > 21 and walking > 90,
-		"Walk across the upper bed without Space, instead of descending to a nearby rock"
+		Places.sample_path(Model.Layout.SHALLOW_RIDE, Vector3(30, -67, -115), 5.5).is_zero_approx(),
+		"No obsolete shallow branch current"
 	)
-	fixture(Vector3(8, -62, -103))
-	check(await swim(Vector3(30, -67, -115), 15), "Explore the hollow below the displaced bridge")
-	check(await swim(Vector3(52, -78, -127), 15), "Lateral current has an open passage")
-	check(game.model.setbacks == 0, "The bay detour does not require rescue")
-	fixture(Vector3(30, -67, -115))
+	fixture(Model.Layout.SHALLOW_RIDE[0])
 	var start: Vector3 = game.model.position
 	for frame in range(180):
 		await tick()
-	check(game.model.position.x > start.x + 5, "The bay current carries a resting swimmer sideways")
-	check(await swim(Vector3(25, -78, -99), 12), "Horizontal input can leave the optional current")
+	check(game.model.position.distance_to(start) > 8, "Transition flow carries the swimmer")
+	check(await swim(Vector3(35, -139, -72), 12), "Input can leave the transition current")
 	fixture(Vector3(18, -337, -64))
 	await photo("l1-p3-faults", Vector3(-22, -379, -128))
 	fixture(Vector3(25, -449, -109))
@@ -60,7 +45,7 @@ func run() -> void:
 	fixture(Vector3(38, -465, -133))
 	check(await swim(Vector3(38, -453, -123), 15), "Space can escape the gate current")
 	for probe in [
-		Vector3(24, -20, -118),
+		Vector3(64, -115, -128),
 		Vector3(-42, -126, -126),
 		Vector3(-46, -126, -126),
 		Vector3(84, -280, -140)

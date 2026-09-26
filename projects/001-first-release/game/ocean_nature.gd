@@ -222,8 +222,8 @@ static func landscape(parent: Node3D) -> void:
 	# One open coastline to the left; the right and horizon remain ocean.
 	for i in range(10):
 		var x := -85 - i % 3 * 24
-		if i == 3:
-			x -= 28  # Leave an actual opening behind the swim-through arch.
+		if i in [3, 4]:
+			x -= 48  # Leave the relocated arch crown and its approach outside the coastline.
 		var y := 9 - i * 15
 		var coast := Geo.put(
 			parent, Geo.boulder(Vector3(65, 90, 85), 100 + i), mat, Vector3(x, y, 30 - i * 27)
@@ -251,8 +251,8 @@ static func landscape(parent: Node3D) -> void:
 			continue  # This scenery is replaced by the explorable cavern, not a filled rock.
 		Geo.put(parent, Geo.boulder(Vector3(12, 15, 10), 600 + i), mat, point)
 		kelp(parent, point, 10 + i % 4, i)
-	for i in range(8):
-		jelly(parent, 1.3 + i % 3 * .5, Vector3(38 + i * 5, -30 - i * 8, -60 - i * 4))
+	# The old shallow jelly row read as a second route on entry. The first
+	# jelly encounter is now the authored transition platform, followed by P2 life.
 	# The former isolated eastern arch is replaced by the traversable canyon.
 	# Increasing density on one side leaves an open offshore bypass.
 	for form in Layout.Reef.geology() + Layout.Rift.geology():

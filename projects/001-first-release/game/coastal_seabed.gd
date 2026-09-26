@@ -63,5 +63,10 @@ static func height_at(x: float, z: float) -> float:
 		Vector2(x, z), Vector2(-8, -100), Vector2(8, -165)
 	)
 	cut = maxf(cut, 1 - smoothstep(21, 45, Vector2(x, z).distance_to(deep_axis)))
+	# The relocated P2 cavern opens onto a rock basin, not into the old shelf.
+	var cavern_bay := Vector2((x - 150) / 52, (z + 100) / 32).length()
+	cut = maxf(cut, (1 - smoothstep(.7, 1.4, cavern_bay)) * .6)
+	var arch_bay := Vector2((x + 85) / 42, (z + 45) / 35).length()
+	cut = maxf(cut, (1 - smoothstep(.65, 1.3, arch_bay)) * .55)
 	var coast := maxf(absf(x - 20) / 230, absf(z + 110) / 210)
 	return lerpf(shelf - cut * 435, -535, smoothstep(.87, 1.07, coast))

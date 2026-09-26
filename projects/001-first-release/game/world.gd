@@ -21,6 +21,7 @@ var environment: Environment
 var platforms: Array[Node3D] = []
 var life: Node3D
 var discoveries: Node3D
+var reef: Node3D
 
 
 func _ready() -> void:
@@ -50,18 +51,22 @@ func _ready() -> void:
 	life.authored_animals = true
 	add_child(life)
 	life.rays.assign(authored.get_node("Animals").get_children())
+	life.reef_frame = authored.get_node("ReefExploration").global_transform
 	discoveries = Discoveries.new()
 	add_child(discoveries)
-	add_child(Playground.new())
+	reef = Playground.new()
+	# Placement is an editable scene anchor; rules evaluate in this local frame.
+	reef.transform = authored.get_node("ReefExploration").global_transform
+	add_child(reef)
 	add_child(Canyon.new())
 	add_child(Seabed.new())
 	biology = Biology.new()
 	biology.authored_coast = true
 	add_child(biology)
-	life.make_shoal(Vector3(84, -53, -63), 24)
-	life.make_shoal(Vector3(-8, -28, -62), 65, Life.Role.PASSAGE)
-	life.make_shoal(Vector3(27, -65, -115), 90, Life.Role.PASSAGE)
-	life.make_shoal(Vector3(57, -90, -128), 48, Life.Role.FLOW)
+	life.make_shoal(reef.to_global(Vector3(84, -53, -63)), 24)
+	life.make_shoal(Vector3(-9, -52, -29), 36, Life.Role.PASSAGE)
+	life.make_shoal(Vector3(40, -130, -70), 42, Life.Role.PASSAGE)
+	life.make_shoal(Vector3(42, -157, -106), 32, Life.Role.FLOW)
 	for point in Layout.SHALLOW_RIDE:
 		effects.current(point, Vector3(3, -.8, -1))
 	for i in range(Biology.Layout.APPROACH.size() - 1):

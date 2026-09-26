@@ -109,10 +109,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, -260, -36)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, -300, -55)
 
 [node name="Rock_10_driftwood" parent="RocksAndOxygen" unique_id=92635071 instance=ExtResource("17_4r83x")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28, -95, -52)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28, -160, -52)
 
 [node name="Rock_11_kelp" parent="RocksAndOxygen" unique_id=207585041 instance=ExtResource("18_eshhs")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -43, -140, -56)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -43, -178, -56)
 
 [node name="Rock_12_rock" parent="RocksAndOxygen" unique_id=1128128961 instance=ExtResource("19_rtbji")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42, -225, -32)
@@ -211,7 +211,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28.1230792999268, -394.90490
 
 
 [node name="WindowAboveGarden" parent="FaultedCoast" unique_id=547817401 instance=ExtResource("48_h1vdn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.55109786987305, -31.7027626037598, -67.4352874755859)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.55109787, -131.702763, -67.4352875)
 
 
 [node name="ShallowWestRoot" parent="FaultedCoast" unique_id=57967958 instance=ExtResource("49_fm6g4")]
@@ -223,7 +223,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 83.5212097167969, -132.044860
 
 
 [node name="BrokenSkyBridge" parent="FaultedCoast" unique_id=1346548912 instance=ExtResource("51_lejkr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.0030097961426, -51.614372253418, -116.829925537109)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 61.0030098, -146.614372, -126.829926)
 
 
 [node name="WestFault160" parent="FaultedCoast" unique_id=298719733 instance=ExtResource("52_f770f")]
@@ -254,19 +254,19 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -81.0, -286.222961425781, -10
 
 
 [node name="OxygenGarden0" parent="OxygenGardens" unique_id=440655922 instance=ExtResource("58_sovwm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27, -30, -31)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 67, -140, -71)
 
 [node name="OxygenGarden1" parent="OxygenGardens" unique_id=643841682 instance=ExtResource("59_nguyq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 55, -34, -69)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 95, -144, -109)
 
 [node name="OxygenGarden2" parent="OxygenGardens" unique_id=591964074 instance=ExtResource("60_7wo7c")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 71, -58, -42)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 111, -168, -82)
 
 [node name="OxygenGarden3" parent="OxygenGardens" unique_id=1434046219 instance=ExtResource("61_ktww0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 135, -66, -65)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 175, -176, -105)
 
 [node name="OxygenGarden4" parent="OxygenGardens" unique_id=360648370 instance=ExtResource("62_lmxaw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 103, -26.4, -49)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 143, -136.4, -89)
 
 [node name="OxygenGarden5" parent="OxygenGardens" unique_id=2023449039 instance=ExtResource("63_hdh3q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 67, -160, -135)
@@ -278,7 +278,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 116, -181.83, -194)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 92, -222, -220)
 
 [node name="OxygenGarden8" parent="OxygenGardens" unique_id=572312475 instance=ExtResource("66_an3mq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, -44, -84)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28, -140, -75)
 
 [node name="Animals" type="Node3D" parent="." unique_id=1757275063]
 
@@ -431,3 +431,7 @@ transform = Transform3D(-0.07248235, 0, 0.6962372, 0, 0.7, 0, -0.6962372, 0, -0.
 [node name="EditorPreviewLight" type="DirectionalLight3D" parent="."]
 rotation = Vector3(-0.9, -0.5, 0)
 light_energy = 1.4
+
+[node name="ReefExploration" type="Marker3D" parent="."]
+position = Vector3(40, -110, -40)
+metadata/_editor_description = "L1-P1→P2の分岐先。岩礁・洞窟の生成基準。藻庭0〜4も一緒に調整してください。"

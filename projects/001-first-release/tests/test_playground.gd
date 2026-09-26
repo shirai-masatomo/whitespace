@@ -3,6 +3,22 @@ const Reef = preload("res://game/playground_rules.gd")
 var minimum_oxygen := 100.0
 
 
+# Geometry fixture coordinates remain reef-local; all input and collision use
+# the current authored world placement. This is a P2 excursion, not pier entry.
+func fixture(point: Vector3) -> void:
+	super.fixture(game.model.reef_frame * point)
+
+
+func swim(
+	point: Vector3, seconds: float = 25.0, riding: bool = false, allow_fast: bool = true
+) -> bool:
+	return await super.swim(game.model.reef_frame * point, seconds, riding, allow_fast)
+
+
+func photo(label: String, target: Vector3) -> void:
+	await super.photo(label, game.model.reef_frame * target)
+
+
 func tick(axis: Vector2 = Vector2.ZERO, descent: float = 0, ascend: bool = false) -> void:
 	await super.tick(axis, descent, ascend)
 	minimum_oxygen = minf(minimum_oxygen, game.model.oxygen)
@@ -21,6 +37,7 @@ func run() -> void:
 	await physics_frame
 	game.set_physics_process(false)
 	game.begin()
+	fixture(Vector3(21, -17, -21))
 	if "--loop-only" in OS.get_cmdline_user_args():
 		record_sequence = false
 		await compare_cavern_loop()
@@ -37,8 +54,7 @@ func run() -> void:
 		quit(1 if failed else 0)
 		return
 	check(
-		await swim(Reef.PLANTS[0], 25, false, false),
-		"The distant shallow reef is reachable from the pier"
+		await swim(Reef.PLANTS[0], 25, false, false), "P2 reef is reachable from its entry approach"
 	)
 	await photo("44-kelp-reef-arrival", Vector3(58, -26, -50))
 	for frame in range(30):
@@ -82,7 +98,7 @@ func run() -> void:
 		"Choose a lateral descent after the cave"
 	)
 	check(
-		await swim(game.model.platforms[4].position + Vector3.UP, 25, false, false),
+		await super.swim(game.model.garden_points[5] + Vector3.UP, 25, false, false),
 		"The exploratory space reconnects to the deeper game"
 	)
 	observations.journey_to_deeper_route_seconds = game.model.elapsed
@@ -203,13 +219,15 @@ func audit_surfaces() -> void:
 	]
 	for surface in surfaces:
 		var direction: Vector3 = (surface[2] - surface[1]).normalized()
-		var ray := PhysicsRayQueryParameters3D.create(surface[1], surface[2], 1)
+		var ray := PhysicsRayQueryParameters3D.create(
+			game.model.reef_frame * surface[1], game.model.reef_frame * surface[2], 1
+		)
 		var hit: Dictionary = game.get_world_3d().direct_space_state.intersect_ray(ray)
 		check(not hit.is_empty(), "Visible solid: " + surface[0])
 		if hit.is_empty():
 			continue
 		for dt in [1.0 / 60, 1.0 / 15]:
-			fixture(hit.position - direction * 2.5 - Vector3.UP * 1.05)
+			super.fixture(hit.position - direction * 2.5 - Vector3.UP * 1.05)
 			game.model.velocity = direction * 15
 			var touched := false
 			for frame in range(int(1.5 / dt)):
@@ -228,7 +246,7 @@ func audit_garden_rescue() -> void:
 	# Enter each plant with real movement. Failure depth is a separate setup;
 	# the whole rescue/re-formation and subsequent input are then continuous.
 	for garden in range(Reef.PLANTS.size()):
-		fixture(Reef.PLANTS[garden] + Vector3.UP * 3)
+		super.fixture(game.model.garden_points[garden] + Vector3.UP * 3)
 		for frame in range(30):
 			await tick()
 		check(
@@ -376,7 +394,10 @@ func run_cavern_loop() -> void:
 				break
 		check(game.model.terrain_grounded, "Actual chimney drop lands, E=" + str(fast_drop))
 		check(game.model.in_dry_cave(), "Chimney landing stays in the refuge")
-		check(game.model.position.y > -48, "Chimney drop does not tunnel through the shore")
+		check(
+			(game.model.reef_frame.affine_inverse() * game.model.position).y > -48,
+			"Chimney drop does not tunnel through the shore"
+		)
 
 
 func audit_roof_algae() -> void:

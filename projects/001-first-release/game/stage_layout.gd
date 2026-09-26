@@ -1,7 +1,7 @@
 extends RefCounted
 ## Shared platform data for collision, visuals, route hints and tests.
 const SHALLOW_RIDE: Array[Vector3] = [
-	Vector3(9, -64, -104), Vector3(29, -66, -115), Vector3(53, -77, -128), Vector3(53, -111, -143)
+	Vector3(46, -133, -58), Vector3(52, -141, -75), Vector3(53, -151, -103), Vector3(53, -161, -143)
 ]
 const JELLY_RADIUS_SCALE := .56
 const JELLY_SEGMENTS := 48
@@ -24,8 +24,8 @@ static func platforms() -> Array[Dictionary]:
 		make("深海の棚", Vector3(-32, -225, -60), Vector2(14, 12)),
 		make("酸素 04", Vector3(-7, -260, -36), Vector2(18, 16), true),
 		make("岩礁の灯", Vector3(20, -300, -55), Vector2(22, 20), true),
-		make("寄り道の酸素", Vector3(-28, -95, -52), Vector2(16, 14), true),
-		make("潮待ちの藻庭", Vector3(-43, -140, -56), Vector2(17, 15), true),
+		make("寄り道の酸素", Vector3(-28, -160, -52), Vector2(16, 14), true),
+		make("潮待ちの藻庭", Vector3(-43, -178, -56), Vector2(17, 15), true),
 		make("静かな藻の棚", Vector3(-42, -225, -32), Vector2(17, 15), true),
 	]
 	var kinds := [
@@ -102,11 +102,11 @@ static func routes() -> Dictionary:
 	var result := {
 		"platforms": [1, 2, 3, 4, 5, 6, 7, 8, 9],
 		"direct_oxygen": [2, 4, 6, 8, 9],
-		"extra_oxygen": [1, 2, 10, 4, 5, 6, 7, 8, 9],
+		"extra_oxygen": [1, 2, 10, 4, 6, 7, 8, 9],
 		"safe_gardens": [1, 2, 10, 11, 6, 12, 8, 9],
 		"fast_drop": [2, 10, 6, 8, 9],
 		"current_gardens": [1, 2, 10, 11, 6, 8, 9],
-		"cliff_walk": [1, 2, 10, 11, 18, 13, 14, 15, 8, 9],
+		"cliff_walk": [1, 2, 18, 13, 14, 15, 8, 9],
 		"offshore_life": [2, 4, 5, 6, 17, 16, 8, 9],
 		"reef_refuge": [2, 10, 6, 19, 15, 8, 9],
 	}
@@ -115,6 +115,11 @@ static func routes() -> Dictionary:
 	result["rift_offshore"] = [2, 4, 5, 6, 17, 16, 8, 9, 23, 24, 25]
 	result["rift_shortcut"] = [2, 10, 6, 8, 23, 25]
 	for route in result.values():
+		# Every authored route shares the introduction; choice starts after it.
+		for intro_index in [1, 2, 3, 4]:
+			route.erase(intro_index)
+		for intro_index in [4, 3, 2, 1]:
+			route.push_front(intro_index)
 		route.append_array(biology_route())
 	return result
 
@@ -147,11 +152,7 @@ static func current_zones() -> Array[Dictionary]:
 			"radius": Vector3(18, 20, 16),
 			"flow": Vector3(0, 2.5, -1.5)
 		},
-		{
-			"center": Vector3(10, -43, -25),
-			"radius": Vector3(22, 9, 20),
-			"flow": Vector3(1.8, 0, .3)
-		},
+		{"center": Vector3(10, -43, -25), "radius": Vector3(22, 9, 20), "flow": Vector3(0, 0, -.8)},
 		{
 			"center": Vector3(35, -142, -55),
 			"radius": Vector3(22, 10, 24),

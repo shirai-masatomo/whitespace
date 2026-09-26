@@ -5,6 +5,7 @@ const Geo = preload("res://game/ocean_geometry.gd")
 const Layout = preload("res://game/stage_layout.gd")
 const Reef = preload("res://game/playground_rules.gd")
 var authored_animals := false
+var reef_frame := Transform3D.IDENTITY
 var rays: Array[Node3D] = []
 var shoals: Array[Node3D] = []
 var origins: Array[Vector3] = []
@@ -118,7 +119,7 @@ static func reef_passage(time: float) -> Vector3:
 	# Separate outward/return lanes let the group bend round instead of
 	# stopping and flipping every fish through 180 degrees at the refuge.
 	return (
-		Vector3(6, -9, -24).lerp(Reef.PLANTS[0] + Vector3(0, 6, -3), progress)
+		Vector3(-4, -10, -20).lerp(Vector3(-14, -20, -32), progress)
 		+ Vector3(0, 0, -6 * sin(phase))
 	)
 
@@ -148,8 +149,10 @@ func update(player: Vector3, elapsed: float, giant: Vector3 = Vector3.INF) -> vo
 	reef_guide.rotation.y = atan2(reef_heading.x, reef_heading.z)
 	# A smaller group leaves the refuge through the real lateral cleft, then
 	# returns below it. Following it is optional; the algae never move away.
-	cleft_guide.position = cleft_passage(elapsed)
-	var cleft_heading := cleft_passage(elapsed + .1) - cleft_passage(elapsed - .1)
+	cleft_guide.position = reef_frame * cleft_passage(elapsed)
+	var cleft_heading := (
+		reef_frame.basis * (cleft_passage(elapsed + .1) - cleft_passage(elapsed - .1))
+	)
 	cleft_guide.rotation.y = atan2(cleft_heading.x, cleft_heading.z)
 	cleft_guide.rotation.x = -atan2(
 		cleft_heading.y, Vector2(cleft_heading.x, cleft_heading.z).length()

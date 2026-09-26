@@ -70,8 +70,12 @@ func run() -> void:
 	game.set_process_unhandled_input(false)
 	game.begin()
 	game.pitch = -.5
-	await photo("36-curiosity-from-pier", Places.bubbles(0)[0].center)
-	check(await swim(Places.bubbles(game.model.elapsed)[0].center), "Enter a bubble from the pier")
+	fixture(Vector3(45, -124, -45))
+	await photo("36-transition-bubble", Places.bubbles(0)[0].center)
+	check(
+		await swim(Places.bubbles(game.model.elapsed)[0].center),
+		"Enter a bubble from the P1/P2 transition"
+	)
 	check(game.model.in_air_pocket(), "Bubble is a volume to enter, not a landing platform")
 	check(game.model.oxygen == 100, "Bubble restores air immediately")
 	await photo("37-inside-air", Places.ARCH)
@@ -176,7 +180,7 @@ func compare_fixtures() -> void:
 	check(not game.model.in_air_pocket(), "E can exit the buoyant refuge, never trapped")
 	fixture(Places.STREAM[1])
 	for frame in range(180):
-		await tick(Vector2.RIGHT, -1)
+		await tick(Vector2.LEFT, -1)
 	check(
 		Places.stream_sample(game.model.position, 12).length() < .1,
 		"Lateral controls can leave the fast current"
@@ -208,6 +212,8 @@ func compare_fixtures() -> void:
 			fixture(Places.ARCH + Vector3(0, 55, 0))
 			for frame in range(rate * 4):
 				game.advance(1.0 / rate, Vector2.ZERO, 1 if fast else 0, false)
+				if game.model.standing:
+					break
 			check(game.model.standing, "Normal/fast descent lands on arch crown at %dHz" % rate)
 			check(game.model.position.y > Places.ARCH.y + 34, "Arch crown blocks tunnelling")
 		fixture(Places.ARCH + Vector3(0, 15, 0))
@@ -219,8 +225,8 @@ func compare_fixtures() -> void:
 					underside = true
 		check(underside, "Space meets the visible inner arch at %dHz" % rate)
 	for detour in [false, true]:
-		fixture(Vector3(-35, -80, -60))
-		game.model.oxygen = 30
+		fixture(Vector3(-85, -143, -78))
+		game.model.oxygen = 18
 		var success := true
 		if detour:
 			success = await swim(Places.bubbles(game.model.elapsed)[1].center)
@@ -233,7 +239,7 @@ func compare_fixtures() -> void:
 		}
 	check(observations.refuge_detour.success, "An oxygen-poor swimmer can choose the air detour")
 	check(not observations.refuge_skip.success, "Skipping refuge has a cost at low oxygen")
-	fixture(Vector3(-35, -80, -60))
+	fixture(Vector3(-85, -143, -78))
 	game.model.oxygen = 100
 	var skip_full := await swim(game.model.platforms[11].position + Vector3.UP)
 	observations.refuge_skip_full = {"success": skip_full, "seconds": game.model.elapsed}

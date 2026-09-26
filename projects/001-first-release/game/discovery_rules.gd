@@ -1,8 +1,11 @@
 extends RefCounted
 ## Places and phenomena, independent of platform targets and navigation arrows.
-const ARCH := Vector3(-50, -45, -90)
+const ARCH := Vector3(-85, -145, -45)
 const STREAM: Array[Vector3] = [
-	Vector3(-24, -42, -23), Vector3(-50, -41, -70), Vector3(-50, -49, -108), Vector3(-40, -112, -66)
+	Vector3(-32, -128, -36),
+	Vector3(-85, -139, -30),
+	Vector3(-85, -147, -63),
+	Vector3(-43, -135, -47)
 ]
 const COVE_STREAM: Array[Vector3] = [
 	Vector3(90, -244, -278),
@@ -16,8 +19,8 @@ const COVE_STREAM: Array[Vector3] = [
 
 static func bubbles(time: float) -> Array[Dictionary]:
 	return [
-		{"center": Vector3(-15 + sin(time * .12) * 2, -20, -32), "radius": 7.5},
-		{"center": Vector3(-52, -99 + sin(time * .1), -60), "radius": 5.0}
+		{"center": Vector3(-15 + sin(time * .12) * 2, -130, -72), "radius": 7.5},
+		{"center": Vector3(-75, -140 + sin(time * .1), -67), "radius": 5.0}
 	]
 
 

@@ -1,25 +1,13 @@
 extends "res://tests/test_discovery.gd"
-const Reef = preload("res://game/playground_rules.gd")
-var follow_heading := false
-
-
-func tick(axis: Vector2 = Vector2.ZERO, descent: float = 0, ascend: bool = false) -> void:
-	if not follow_heading:
-		await super.tick(axis, descent, ascend)
-		return
-	if axis.length() > .1:
-		game.yaw = lerp_angle(game.yaw, atan2(-axis.x, -axis.y), .035)
-	var local := Vector3(axis.x, 0, axis.y).rotated(Vector3.UP, -game.yaw)
-	game.advance(1.0 / 60, Vector2(local.x, local.z), descent, ascend)
-	if gpu:
-		await render_step()
+## Current P0/P1 journey: sequential landmarks, then the first two destinations.
 
 
 func run() -> void:
 	gpu = DisplayServer.get_name() != "headless"
 	root.unfocusable = true
-	capture_root = "res://artifacts/entry-" + RenderingServer.get_current_rendering_method()
-	DirAccess.make_dir_recursive_absolute(capture_root + "/sequence")
+	record_sequence = false
+	capture_root = "res://artifacts/intro"
+	DirAccess.make_dir_recursive_absolute(capture_root)
 	game = SCENE.instantiate()
 	game.automated_input = true
 	root.add_child(game)
@@ -27,313 +15,49 @@ func run() -> void:
 	await physics_frame
 	game.set_physics_process(false)
 	game.begin()
-	# Inspect the actual starting view as well as deliberately aimed comparisons.
-	# This journey uses W only, with no mouse/camera changes or target steering.
-	record_sequence = false
-	if gpu:
-		await capture("68-default-pier")
-	for frame in range(600):
-		await tick(Vector2(0, -1))
-		if game.model.depth > 5:
+	var entry_seen := false
+	for target in [1, 2, 3, 4]:
+		var arrived := false
+		for frame in range(1800):
+			var command := Driver.input_for(game.model, target)
+			await tick(Vector2(command.x, command.z), command.y)
+			if not entry_seen and game.model.depth > 7:
+				entry_seen = true
+				await capture("intro-entry")
+			if Driver.arrived(game.model, target):
+				arrived = true
+				break
+			if game.model.mode == Model.Mode.RETURNING:
+				break
+		check(arrived, "Sequential introduction reaches %d at %s" % [target, game.model.position])
+		if not arrived:
 			break
-	check(game.model.depth > 5, "Straight forward input enters the ocean")
-	var entry_start: Vector3 = game.model.position
-	if gpu:
-		await capture("69-default-entry")
-	game.restart()
-	simulation_frames = 0
-	record_sequence = true
-	await photo("50-pier-choices", Vector3(20, -8, -28))
-	for frame in range(600):
-		await tick(Vector2(1, -1).normalized())
-		if game.model.depth > 5:
-			break
+	check(game.model.setbacks == 0, "The introduction needs no forced rescue")
+	var junction: Vector3 = game.model.position
+	await capture("intro-transition")
+	check(junction.y < -115, "Choices open after the shallow introduction")
+	check(game.model.garden_at(Vector3(27, -30, -31)) < 0, "No obsolete entry-side oxygen lure")
+	check(not Places.breathing(Vector3(-15, -20, -32), 0), "No obsolete entry-side air pocket")
+	fixture(Vector3(99, -42, -48))
+	check(not game.model.in_dry_cave(), "Relocated cave leaves no invisible air in the shallows")
+	fixture(junction)
+	var garden: Vector3 = game.world.authored.gardens()[0]
 	check(
-		game.model.depth > 5 and game.model.elapsed < 10, "Player enters open water from the pier"
-	)
-	check(game.model.mode == game.model.Mode.DIVING, "Entry is continuous gameplay")
-	game.pitch = .75
-	game._update_camera()
-	var focus: Vector3 = game.model.position + Vector3.UP * 1.4
-	check(
-		(
-			not game.camera.is_position_behind(focus)
-			and Rect2(0, 0, 1280, 720).has_point(game.camera.unproject_position(focus))
-		),
-		"Looking up at sunlight underwater keeps the diver in frame"
-	)
-	await photo("51-enter-ocean", Vector3(35, -20, -28))
-	check(game.camera.position.y < -1.4, "Camera joins the submerged swimmer after entry")
-	await photo("52-surface-light", game.model.position + Vector3(3, 16, -18))
-	check(
-		await swim(Reef.PLANTS[0] + Vector3.UP * .2),
-		"The shoal's destination is actually reachable"
-	)
-	await photo("53-kelp-from-sea", Vector3(53, -20, -50))
-	var guide: Node3D = game.world.life.reef_guide
-	game.world.life.update(Vector3(500, 0, 500), 0)
-	var first: Vector3 = guide.position
-	game.world.life.update(Vector3(500, 0, 500), PI / .2)
-	check(guide.position.x - first.x > 20, "Fish movement leads sideways into the reef")
-	var turn_max := 0.0
-	var previous_yaw := guide.rotation.y
-	var wall_hits := 0
-	for sample in range(1, 316):
-		var time := sample * .1
-		game.world.life.update(Vector3(500, 0, 500), time)
-		if sample > 1:
-			turn_max = maxf(turn_max, absf(angle_difference(previous_yaw, guide.rotation.y)))
-		previous_yaw = guide.rotation.y
-		var query := PhysicsRayQueryParameters3D.create(
-			game.world.life.reef_passage(time - .1), guide.position, 1
-		)
-		if not game.get_world_3d().direct_space_state.intersect_ray(query).is_empty():
-			wall_hits += 1
-	check(turn_max < .08, "The shoal bends continuously through its return rather than flipping")
-	check(wall_hits == 0, "The shoal's new return centreline stays outside solid reef")
-	observations.shoal_max_turn_degrees_per_tenth = rad_to_deg(turn_max)
-	observations.shoal_wall_crossings = wall_hits
-	check(game.model.oxygen == 100, "Exploration reaches the living oxygen refuge")
-	await photo("65-cleft-choice", Vector3(40, -34, -45))
-	check(
-		await swim(Vector3(30, -32, -41), 12, false, false),
-		"Leave the garden sideways into the cleft"
+		await swim(Vector3(61, -127, -61), 10, false, false),
+		"Swim above the reef lip before landing"
 	)
 	check(
-		await swim(Vector3(32, -38, -42), 12, false, false),
-		"Swim inside the reef instead of hopping between rocks"
+		await swim(garden + Vector3.UP, 20, false, false),
+		"First choice reaches the reef-side garden"
 	)
-	await photo("66-inside-reef-cleft", Vector3(49, -39, -50))
+	check(game.model.oxygen == 100, "The moved visible garden really refills")
+	fixture(junction)
 	check(
-		await swim(Vector3(49, -40, -50), 12, false, false), "The lateral opening joins the shaft"
+		await swim(Places.bubbles(0)[0].center, 22, false, false),
+		"Other choice reaches the cliff-side air pocket"
 	)
-	var journey_seconds: float = game.model.elapsed
-	record_sequence = false
-	for oxygen in [10, 20, 100]:
-		for bubble in [false, true]:
-			fixture(entry_start)
-			game.model.oxygen = oxygen
-			var target: Vector3 = Places.bubbles(0)[0].center if bubble else Reef.PLANTS[0]
-			var arrived := await reach_oxygen(target)
-			observations["oxygen_%d_bubble_%s" % [oxygen, bubble]] = {
-				"arrived": arrived, "seconds": game.model.elapsed, "oxygen": game.model.oxygen
-			}
-			check(arrived or oxygen < 100, "Both initial destinations can be reached with full air")
-	await normal_entry()
-	await garden_shoulder()
-	await fast_garden_approach()
-	await _cleft_school()
-	if gpu:
-		await observe_cleft()
-	var file := FileAccess.open("res://artifacts/entry.json", FileAccess.WRITE)
-	file.store_string(
-		JSON.stringify(
-			{
-				"checks": checks,
-				"failed": failed,
-				"seconds": journey_seconds,
-				"choices": observations
-			},
-			"  "
-		)
-	)
-	file.close()
-	if gpu:
-		file = FileAccess.open(capture_root + "/sequence/frames.json", FileAccess.WRITE)
-		file.store_string(JSON.stringify(sequence, "  "))
-		file.close()
+	check(game.model.in_air_pocket(), "The cliff-side destination provides real air")
+	print("Intro: %d checks, failed=%s, junction=%s" % [checks, failed, junction])
 	game.queue_free()
 	await process_frame
-	print("Entry: %d checks, failed=%s" % [checks, failed])
 	quit(1 if failed else 0)
-
-
-func reach_oxygen(target: Vector3) -> bool:
-	for frame in range(900):
-		var offset: Vector3 = target - game.model.position
-		await tick((Vector2(offset.x, offset.z) / 4).limit_length(), 0, offset.y > 1)
-		if game.model.mode != game.model.Mode.DIVING:
-			return false
-		if game.model.oxygen == 100:
-			return true
-	return false
-
-
-func _cleft_school() -> void:
-	await physics_frame
-	await physics_frame
-	var life = game.world.life
-	var guide: MultiMeshInstance3D = life.cleft_guide
-	var shape := SphereShape3D.new()
-	shape.radius = 1.0  # Includes fish body and shader tail/school sway.
-	var query := PhysicsShapeQueryParameters3D.new()
-	query.shape = shape
-	query.collision_mask = 1
-	var hits := 0
-	var crossed := 0
-	var previous: Array[Vector3] = []
-	var maximum_depth := 0.0
-	check(
-		life.cleft_passage(-0.00000000000001).distance_to(life.cleft_passage(0)) < .01,
-		"The negative heading sample wraps continuously at the start of the loop"
-	)
-	var placements: Array = guide.get_meta("placements")
-	var matching := placements.size() == guide.multimesh.instance_count
-	for index in range(placements.size()):
-		matching = matching and placements[index].origin.length() > .01
-		if gpu:
-			matching = (
-				matching
-				and placements[index].is_equal_approx(guide.multimesh.get_instance_transform(index))
-			)
-	check(matching, "Headless shoal placements match the actual rendered instances")
-	for sample in range(169):
-		life.update(Vector3(500, 0, 500), sample * .1)
-		maximum_depth = maxf(maximum_depth, -guide.position.y)
-		for index in range(guide.multimesh.instance_count):
-			var point: Vector3 = guide.global_transform * guide.get_meta("placements")[index].origin
-			query.transform = Transform3D(Basis.IDENTITY, point)
-			var contacts: Array = game.get_world_3d().direct_space_state.intersect_shape(query, 1)
-			if not contacts.is_empty():
-				if hits < 8:
-					print(
-						"School contact ", sample, " ", point, " ", contacts[0].collider.get_path()
-					)
-				hits += 1
-			if sample > 0:
-				var ray := PhysicsRayQueryParameters3D.create(previous[index], point, 1)
-				if not game.get_world_3d().direct_space_state.intersect_ray(ray).is_empty():
-					crossed += 1
-				previous[index] = point
-			else:
-				previous.append(point)
-	check(hits == 0 and crossed == 0, "The whole cleft shoal avoids visible solid terrain")
-	check(maximum_depth > 40, "The optional shoal enters the deeper playable cleft")
-	observations.cleft_school = {"overlaps": hits, "crossings": crossed, "depth": maximum_depth}
-	print("Cleft shoal: ", observations.cleft_school)
-
-
-func observe_cleft() -> void:
-	# Separate aimed observation, never substituted for the unchanged 84-88 journey.
-	var old_root := capture_root
-	var old_sequence := sequence.duplicate()
-	capture_root = "res://artifacts/entry-cleft-" + RenderingServer.get_current_rendering_method()
-	DirAccess.make_dir_recursive_absolute(capture_root + "/sequence")
-	sequence.clear()
-	simulation_frames = 0
-	record_sequence = true
-	fixture(Reef.PLANTS[0] + Vector3.UP * .2)
-	var target := Vector3(38, -36, -44)
-	var offset: Vector3 = target - game.model.position - Vector3.UP * 1.4
-	game.yaw = atan2(-offset.x, -offset.z)
-	game.pitch = atan2(offset.y, Vector2(offset.x, offset.z).length())
-	for frame in range(1009):
-		# Stand in the refuge while watching the optional path for one full cycle.
-		game.advance(1.0 / 60, Vector2.ZERO, 0, false)
-		await render_step()
-		if frame in [0, 120, 240]:
-			await capture("%d-cleft-school" % (97 + frame / 120))
-	var file := FileAccess.open(capture_root + "/sequence/frames.json", FileAccess.WRITE)
-	file.store_string(JSON.stringify(sequence, "  "))
-	file.close()
-	record_sequence = false
-	capture_root = old_root
-	sequence = old_sequence
-
-
-func normal_entry() -> void:
-	var old_root := capture_root
-	var old_sequence := sequence.duplicate()
-	capture_root = "res://artifacts/entry-normal-" + RenderingServer.get_current_rendering_method()
-	DirAccess.make_dir_recursive_absolute(capture_root + "/sequence")
-	sequence.clear()
-	simulation_frames = 0
-	record_sequence = true
-	game.restart()
-	game.pitch = -.35
-	for frame in range(600):
-		await tick(Vector2(0, -1))
-		if game.model.depth > 5:
-			break
-	if gpu:
-		await capture("84-normal-entry")
-	follow_heading = true
-	check(
-		await swim(Reef.PLANTS[0] + Vector3.UP * .2, 20, false, false),
-		"Normal-view entry reaches the optional garden"
-	)
-	if gpu:
-		await capture("85-normal-garden")
-	check(
-		await swim(Reef.PLANTS[0] + Vector3(2, -1, -5), 8, false, false),
-		"The garden lip can be approached with ordinary steering"
-	)
-	if gpu:
-		await capture("86-normal-lip")
-	check(
-		await swim(Vector3(30, -32, -41), 10, false, false),
-		"Normal-view travel can enter the lateral cleft"
-	)
-	check(
-		await swim(Vector3(32, -38, -42), 8, false, false),
-		"The cleft permits actual descent into the reef"
-	)
-	if gpu:
-		await capture("87-normal-cleft")
-	check(
-		await swim(Vector3(49, -40, -50), 10, false, false),
-		"The second discovery joins the deeper shaft"
-	)
-	observations.normal_entry_seconds = game.model.elapsed
-	if gpu:
-		await capture("88-normal-shaft")
-		var file := FileAccess.open(capture_root + "/sequence/frames.json", FileAccess.WRITE)
-		file.store_string(JSON.stringify(sequence, "  "))
-		file.close()
-	follow_heading = false
-	record_sequence = false
-	capture_root = old_root
-	sequence = old_sequence
-
-
-func garden_shoulder() -> void:
-	# A visible high shoulder must be reachable, not a new background mound.
-	fixture(Reef.PLANTS[0] + Vector3.UP * 2)
-	follow_heading = true
-	check(
-		await swim(Vector3(43, -21, -24), 12, false, false), "Garden permits the rising side route"
-	)
-	check(await swim(Vector3(54, -13, -15), 12, false, false), "Swim onto the high reef shoulder")
-	for frame in range(90):
-		await tick()
-	check(game.model.standing, "The shoulder actually supports the player")
-	if gpu:
-		await photo("95-garden-shoulder", Vector3(35, -35, -42))
-	check(
-		await swim(Vector3(61, -29, -38), 15, false, false), "The shoulder rejoins the outer reef"
-	)
-	observations.garden_shoulder_seconds = game.model.elapsed
-	observations.garden_shoulder_oxygen = game.model.oxygen
-	follow_heading = false
-
-
-func fast_garden_approach() -> void:
-	game.restart()
-	var contact := false
-	for frame in range(360):
-		var offset: Vector3 = Reef.PLANTS[0] - game.model.position
-		await tick(
-			(Vector2(offset.x, offset.z) / 4).limit_length(),
-			1 if offset.y < -3 else 0,
-			offset.y > 1
-		)
-		for body in game.motion.contact_bodies:
-			contact = contact or body.get_parent().name == "WalkableKelpReef"
-	check(contact, "Fast direct approach meets the visible coast instead of tunnelling")
-	for frame in range(60):
-		await tick(Vector2(-1, 1).normalized(), 0, true)
-	for frame in range(180):
-		await tick(Vector2.ZERO, 0, true)
-	check(await swim(Reef.PLANTS[0], 15, false, false), "Backing off and Space clears the coast")
-	check(game.model.oxygen == 100, "Fast approach can recover to actual oxygen contact")
-	observations.fast_garden_recovery_seconds = game.model.elapsed

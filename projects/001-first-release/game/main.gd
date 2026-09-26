@@ -44,6 +44,7 @@ func _ready() -> void:
 	model.authored_platforms = world.authored.platform_data()
 	model.garden_points = world.authored.gardens()
 	model.oxygen_locator = world.oxygen_position
+	model.reef_frame = world.reef.global_transform
 	model.reset()
 	motion = Motion.new()
 	motion.world = world

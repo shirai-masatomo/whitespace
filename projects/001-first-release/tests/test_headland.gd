@@ -14,59 +14,10 @@ func run() -> void:
 	await physics_frame
 	game.set_physics_process(false)
 	game.begin()
-	game.pitch = -.35
-	var entry := false
-	for frame in range(900):
-		await tick(Vector2(0, -1))
-		if not entry and game.model.depth > 5:
-			entry = true
-			if gpu:
-				await capture("104-headland-entry")
-		if game.model.depth > 20 and game.model.standing:
-			break
-	check(entry and game.model.standing, "Ordinary forward entry lands on broad bedrock")
-	check(game.model.depth < 42, "First contact happens in the shallows")
-	observations.first_landing = var_to_str(game.model.position)
-	if gpu:
-		await capture("105-first-bedrock")
-		game.pitch = -.25
-		await capture("112-default-landing-view")
-		game.pitch = -.35
-		await photo("109-first-terrace-choice", Vector3(-18, -44, -84))
-		game.pitch = -.35
-	var landed: Vector3 = game.model.position
-	var walking := await walk_to(Vector2(-18, -84))
-	check(walking > 100, "Cross the rock stairs on foot, without Space")
-	check(game.model.oxygen == 100, "Terraced refuge is rooted and actually refills")
-	check(
-		game.model.position.distance_to(landed) > 20,
-		"The first choice includes substantial lateral travel"
-	)
-	await photo("106-bedrock-stairs", Vector3(-16, -48, -104))
-	observations.stairs = {"grounded_frames": walking, "seconds": game.model.elapsed}
-	var lowest: float = game.model.position.y
-	check(await walk_to(Vector2(5, -65)) > 80, "Climb back up the weathered steps without swimming")
-	check(game.model.position.y > lowest + 5, "Stairs can be walked up as well as down")
-	if gpu:
-		await capture("107-return-steps")
-	check(
-		await swim(Vector3(-8, -60, -35), 18, false, false),
-		"Leave the edge to the existing algae below"
-	)
-	check(game.model.oxygen == 100, "Rejoin the old sea route without a forced checkpoint")
-	check(await swim(Vector3(15, -72, -58), 15, false, false), "Swim through the eroded underside")
-	await photo("108-under-bedrock", Vector3(0, -42, -76))
-	check(
-		await swim(Vector3(20, -90, -58), 10, false, false),
-		"The underside reconnects to the drifting wood"
-	)
-	check(game.model.setbacks == 0, "The full introduction needs no rescue or reset")
-	observations.journey_seconds = game.model.elapsed
-	record_sequence = false
-	if gpu:
-		var frames := FileAccess.open(capture_root + "/sequence/frames.json", FileAccess.WRITE)
-		frames.store_string(JSON.stringify(sequence, "  "))
-		frames.close()
+	# Local terrain regression. The current introduction is test_entry.gd;
+	# this older rock shelf no longer carries a competing oxygen destination.
+	fixture(Vector3(0, -32, -64))
+	check(await walk_to(Vector2(-18, -84)) > 80, "The weathered terrace remains walkable")
 	await contacts()
 	await explore_fissure()
 	var file := FileAccess.open("res://artifacts/headland.json", FileAccess.WRITE)
