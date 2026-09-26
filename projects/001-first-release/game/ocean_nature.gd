@@ -2,6 +2,7 @@ extends RefCounted
 const Geo = preload("res://game/ocean_geometry.gd")
 const Driftwood = preload("res://game/driftwood_surface.gd")
 const Layout = preload("res://game/stage_layout.gd")
+const KELP = preload("res://game/shaders/kelp.gdshader")
 const WOOD = preload("res://game/shaders/wood.gdshader")
 
 
@@ -13,7 +14,7 @@ static func stone() -> ShaderMaterial:
 
 static func kelp(parent: Node3D, point: Vector3, height: float, seed_value: int) -> void:
 	var mat := ShaderMaterial.new()
-	mat.shader = preload("res://game/shaders/kelp.gdshader")
+	mat.shader = KELP
 	for blade in range(7):
 		var leaf := Geo.put(
 			parent,
@@ -25,7 +26,9 @@ static func kelp(parent: Node3D, point: Vector3, height: float, seed_value: int)
 		leaf.rotation.z = sin(blade * 2.4) * 0.3
 
 
-static func oxygen_algae(parent: Node3D, seed_value: int) -> void:
+static func oxygen_algae(
+	parent: Node3D, seed_value: int, ground_height: Callable = Callable()
+) -> void:
 	# A rooted, asymmetric stand of luminous fronds, not a ring of pickups.
 	var root := Node3D.new()
 	root.name = "OxygenAlgae"
@@ -42,11 +45,10 @@ static func oxygen_algae(parent: Node3D, seed_value: int) -> void:
 		var radius := 1.1 + sqrt(frond / 13.0) * .45
 		var height := 1.0 + .4 * (1 + sin(frond * 5.7 + seed_value))
 		var basis := Basis(Vector3.UP, -angle) * Basis(Vector3.FORWARD, .12 + radius * .04)
-		combined.append_from(
-			Geo.leaf(height, .16 + height * .07),
-			0,
-			Transform3D(basis, Vector3(cos(angle) * radius, .05, sin(angle) * radius))
-		)
+		var base := Vector3(cos(angle) * radius, .05, sin(angle) * radius)
+		if ground_height.is_valid():
+			base.y = ground_height.call(parent.position + base) - parent.position.y + .04
+		combined.append_from(Geo.leaf(height, .16 + height * .07), 0, Transform3D(basis, base))
 	var leaves := Geo.put(root, combined.commit(), mat)
 	leaves.name = "Fronds"
 
@@ -188,7 +190,10 @@ static func deck(root: Node3D, data: Dictionary, index: int) -> void:
 			Geo.box(root, Vector3(8.3, .3, .3), metal, Vector3(0, 2, 4))
 			Geo.box(root, Vector3(2.4, 1.2, 1.4), metal, Vector3(-3, .6, 3))
 		_:
-			var rock := Geo.put(root, Geo.rock(size, 12 + index % 3 * 4, data.shape_seed), stone())
+			# Joined cliff shelves are an exposed crust of the larger bedding.
+			# Hanging cone-shaped undersides would plug the new swim-throughs.
+			var depth := 6 if index in [13, 15, 18, 21, 22] else 12 + index % 3 * 4
+			var rock := Geo.put(root, Geo.rock(size, depth, data.shape_seed), stone())
 			rock.name = "LandingSurface"
 			for edge in range(6):
 				var angle := edge * TAU / 6
@@ -217,8 +222,8 @@ static func landscape(parent: Node3D) -> void:
 	# One open coastline to the left; the right and horizon remain ocean.
 	for i in range(10):
 		var x := -85 - i % 3 * 24
-		if i == 3:
-			x -= 28  # Leave an actual opening behind the swim-through arch.
+		if i in [3, 4]:
+			x -= 48  # Leave the relocated arch crown and its approach outside the coastline.
 		var y := 9 - i * 15
 		var coast := Geo.put(
 			parent, Geo.boulder(Vector3(65, 90, 85), 100 + i), mat, Vector3(x, y, 30 - i * 27)
@@ -229,35 +234,35 @@ static func landscape(parent: Node3D) -> void:
 			rng.randf_range(-220, 380), rng.randf_range(-330, -200), rng.randf_range(-650, -160)
 		)
 		var width := rng.randf_range(35, 100)
-		Geo.put(
-			parent,
-			Geo.boulder(Vector3(width, rng.randf_range(60, 140), width * .8), 400 + i),
-			mat,
-			point
-		)
+		var mesh := Geo.boulder(Vector3(width, rng.randf_range(60, 140), width * .8), 400 + i)
+		# The authored cove replaces scenery here; no hidden rock may fill its hole.
+		var bounds := mesh.get_aabb()
+		bounds.position += point
+		if bounds.intersects(AABB(Vector3(70, -275, -258), Vector3(55, 65, 45))):
+			continue
+		Geo.put(parent, mesh, mat, point)
 	for i in range(20):
 		var point := Vector3(
 			rng.randf_range(-55, 80), rng.randf_range(-160, -40), rng.randf_range(-140, -20)
 		)
 		# Scenic outcrops are kept outside the landable route bounds.
 		point.x += 70 if point.x > 0 else -50
+		if point.x > 35 and point.y > -105 and point.z > -105:
+			continue  # This scenery is replaced by the explorable cavern, not a filled rock.
 		Geo.put(parent, Geo.boulder(Vector3(12, 15, 10), 600 + i), mat, point)
 		kelp(parent, point, 10 + i % 4, i)
-	for i in range(8):
-		jelly(parent, 1.3 + i % 3 * .5, Vector3(38 + i * 5, -30 - i * 8, -60 - i * 4))
-	# Fragmented rock arch; no artificial ruin in the real layer.
-	for side in [-1, 1]:
-		Geo.put(
-			parent,
-			Geo.rock(Vector2(20, 25), 75, 88 + side),
-			mat,
-			Vector3(90 + side * 22, -95, -145)
-		)
-	var bridge := Geo.put(parent, Geo.rock(Vector2(60, 25), 12, 73), mat, Vector3(90, -95, -145))
-	bridge.rotation.z = .1
+	# The old shallow jelly row read as a second route on entry. The first
+	# jelly encounter is now the authored transition platform, followed by P2 life.
+	# The former isolated eastern arch is replaced by the traversable canyon.
 	# Increasing density on one side leaves an open offshore bypass.
 	for form in Layout.Reef.geology() + Layout.Rift.geology():
-		var reef := Geo.put(parent, Geo.boulder(form.size, form.seed), mat, form.point)
+		# The tidal exit cuts through this rounded bank; preserve its worn clearance.
+		var mesh := (
+			Geo.boulder(form.size, form.seed)
+			if form.seed == 806
+			else Geo.fault_block(form.size, form.seed)
+		)
+		var reef := Geo.put(parent, mesh, mat, form.point)
 		reef.name = "ApproachingReef%d" % form.seed
 		kelp(parent, form.point + Vector3(6, -8, 2), 9, form.seed)
 	var roof := Geo.put(parent, Geo.rock(Vector2(28, 18), 6, 912), mat, Vector3(-62, -194, -104))
@@ -266,3 +271,28 @@ static func landscape(parent: Node3D) -> void:
 		parent, Geo.rock(Vector2(32, 20), 7, 966), mat, Vector3(-25, -350, -115)
 	)
 	deep_arch.name = "RiftRoof"
+
+
+static func canopy(parent: Node3D, point: Vector3, height: float, seed_value: int) -> void:
+	# Long ascending ribbons and gaps replace the evenly spaced horizontal leaves.
+	var rng := RandomNumberGenerator.new()
+	rng.seed = 92021 + seed_value
+	var st := SurfaceTool.new()
+	st.begin(Mesh.PRIMITIVE_TRIANGLES)
+	st.append_from(Geo.leaf(height, .045), 0, Transform3D.IDENTITY)
+	var count := rng.randi_range(14, 24)
+	for branch in range(count):
+		var t := .14 + .71 * (branch + rng.randf_range(-.25, .25)) / count
+		var angle := branch * 2.399 + seed_value
+		var basis := Basis(Vector3.UP, angle) * Basis(Vector3.FORWARD, rng.randf_range(.65, 1.25))
+		var length := minf(rng.randf_range(3.4, 7.5), height * (1 - t))
+		st.append_from(
+			Geo.leaf(length, rng.randf_range(.12, .28)),
+			0,
+			Transform3D(basis, Vector3(0, t * height, sin(t * 3.3) * height * .17))
+		)
+	var mat := ShaderMaterial.new()
+	mat.shader = KELP
+	mat.set_shader_parameter("stipe_height", height)
+	mat.set_shader_parameter("phase_offset", seed_value * .73)
+	Geo.put(parent, st.commit(), mat, point)

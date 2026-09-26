@@ -39,11 +39,11 @@ static func platforms() -> Array[Dictionary]:
 			"kind": "jelly"
 		},
 		{
-			"label": "裂け目の先",
+			"label": "砂の海底の藻",
 			"point": Vector3(5, -450, -138),
 			"size": Vector2(22, 18),
 			"kind": "rock",
-			"goal": true
+			"oxygen": true
 		},
 	]
 

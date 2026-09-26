@@ -38,7 +38,14 @@ func _ready() -> void:
 	add_child(sound)
 	world = Node3D.new()
 	world.set_script(World)
+	if has_node("EditableCoast"):
+		world.authored = get_node("EditableCoast")
 	add_child(world)
+	model.authored_platforms = world.authored.platform_data()
+	model.garden_points = world.authored.gardens()
+	model.oxygen_locator = world.oxygen_position
+	model.reef_frame = world.reef.global_transform
+	model.reset()
 	motion = Motion.new()
 	motion.world = world
 	add_child(motion)
@@ -175,7 +182,7 @@ func _update_camera(delta: float = 1.0) -> void:
 	var focus: Vector3 = model.position + Vector3.UP * 1.4
 	var look := Vector3(0, sin(pitch), -cos(pitch)).rotated(Vector3.UP, yaw)
 	var desired: Vector3 = focus - look * 7.5 if third_person else focus
-	if third_person and pitch > 0:
+	if third_person and pitch > 0 and model.standing:
 		# Looking at surface light or an animal should not swing the camera under
 		# the floor and then push it inside the diver's chest.
 		var back := Vector3(0, 0, 1).rotated(Vector3.UP, yaw)
@@ -191,6 +198,10 @@ func _update_camera(delta: float = 1.0) -> void:
 	if third_person:
 		# Looking down leans over the edge while retaining the diver in frame.
 		desired = desired.lerp(focus + heading * 4 + Vector3.UP * 12, ledge_view)
+		# The chase camera must enter the sea with the swimmer, rather than keep
+		# looking through a bright surface while the player is already submerged.
+		var submerged := 1.0 - smoothstep(-2.2, .4, focus.y)
+		desired.y = lerpf(desired.y, minf(desired.y, -1.8), submerged)
 	if third_person:
 		var query := PhysicsRayQueryParameters3D.create(focus, desired)
 		query.collision_mask = 3
@@ -222,7 +233,7 @@ func _update_camera(delta: float = 1.0) -> void:
 	)
 	bubble.position = focus
 	bubble.visible = model.mode == Model.Mode.RETURNING
-	world.update_depth(camera.position.y)
+	world.update_depth(camera.position.y, model.Playground.air_at(camera.position))
 
 
 func next_platform() -> int:

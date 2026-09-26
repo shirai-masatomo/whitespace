@@ -160,7 +160,7 @@ func _ready() -> void:
 func animate(model) -> void:
 	var dt: float = clampf(model.elapsed - previous_time, 0, 0.1)
 	previous_time = model.elapsed
-	var grounded: bool = model.grounded >= 0
+	var grounded: bool = model.standing
 	var horizontal: float = Vector2(model.velocity.x, model.velocity.z).length()
 	if grounded and not previous_grounded:
 		landing = 1.0
@@ -170,9 +170,9 @@ func animate(model) -> void:
 	if grounded and horizontal > 0.5:
 		pose = "walk"
 	elif not grounded:
-		if model.velocity.y < -8:
+		if model.velocity.y + model.current_flow.y < -8:
 			pose = "dive"
-		elif model.velocity.y > 1:
+		elif model.velocity.y + model.current_flow.y > 1:
 			pose = "ascend"
 		elif horizontal > 1:
 			pose = "swim"

@@ -102,7 +102,12 @@ func run() -> void:
 	var target_before: int = game.next_platform()
 	key.keycode = KEY_TAB
 	game._unhandled_input(key)
-	check(game.next_platform() != target_before, "Tab changes target")
+	check(game.next_platform() == target_before, "Tab keeps the single introduction destination")
+	game.model.position = game.model.platforms[4].position
+	target_before = game.next_platform()
+	game._unhandled_input(key)
+	check(game.next_platform() != target_before, "Tab changes target after the introduction")
+	game.restart()
 	game.yaw = atan2(-14.0, 18.0) + PI
 	check(
 		game.Navigation.bearing(game.model, 1, game.yaw) == "後方 / 振り向く",
@@ -196,11 +201,24 @@ func _test_oxygen_algae(game) -> void:
 	game.model.position = game.model.platforms[2].position
 	var options: Array[int] = game.Navigation.candidates(game.model)
 	check(
-		options.has(3) and options.has(10),
-		"Both the direct descent and refill detour can be selected"
+		options.size() == 1 and options.has(3),
+		"Optional navigation keeps the shallow introduction on one destination"
 	)
+	game.model.position = game.model.platforms[4].position
+	options = game.Navigation.candidates(game.model)
+	check(options.has(5) and options.has(10), "Destination choices open at the P1/P2 transition")
 	for index in range(game.model.platforms.size()):
 		if not game.model.platforms[index].oxygen:
+			continue
+		if game.model.platforms[index].kind == "water_globe":
+			check(
+				not game.world.platforms[index].has_node("SolidGeometry"),
+				"Water globes are passable volumes, never invisible floors"
+			)
+			game.model.position = game.model.platforms[index].position
+			game.model.oxygen = .01
+			game.model.step(1.0 / 60, Vector2.ZERO)
+			check(game.model.oxygen == 100, "Water contact instantly refills oxygen")
 			continue
 		var fronds := game.world.platforms[index].get_node("OxygenAlgae/Fronds") as MeshInstance3D
 		check(fronds != null, "Every refill has a visible rooted algae landmark")

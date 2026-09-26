@@ -17,6 +17,14 @@ func _initialize() -> void:
 
 
 func capture(label: String) -> void:
+	var requested := false
+	for argument in OS.get_cmdline_user_args():
+		if argument.begins_with("--capture="):
+			requested = argument.trim_prefix("--capture=").split(",").slice(0, 4).has(label)
+			break
+	# Keep GPU regression assertions, but save images only for an explicit review request.
+	if not requested and label not in ["goal", "20-pier-lookdown"]:
+		return
 	game._update_camera()
 	game.hud.queue_redraw()
 	for frame in range(20):
@@ -43,6 +51,8 @@ func capture(label: String) -> void:
 		if bright_pixels > 12:
 			failed = true
 			push_error("Overhead water must not contain bright noise-grid streaks")
+	if not requested:
+		return
 	var source := capture_root + "/%s.png" % label
 	var result := shot.save_png(source)
 	mirror_capture(source, "res://artifacts/%s.png" % label)
@@ -73,6 +83,7 @@ func render_step() -> void:
 	simulation_frames += 1
 	if (
 		record_sequence
+		and "--record-sequence" in OS.get_cmdline_user_args()
 		and simulation_frames % 120 == 0
 		and game.model.elapsed <= sequence_limit_seconds
 	):
@@ -98,7 +109,7 @@ func render_step() -> void:
 func steer(index: int, fast_route: bool = false) -> bool:
 	for frame in range(2400):
 		await step_toward(index, -2, false, fast_route)
-		if game.model.grounded == index:
+		if Driver.arrived(game.model, index):
 			if not game.model.platforms[index].oxygen or game.model.at_oxygen():
 				return true
 		if game.model.mode == Model.Mode.RETURNING:

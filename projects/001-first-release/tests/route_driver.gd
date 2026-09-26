@@ -4,6 +4,14 @@ extends RefCounted
 
 static func input_for(model, target_index: int, fast: bool = false) -> Vector3:
 	var target: Vector3 = model.platforms[target_index].position
+	# The upper cliff lip now covers the middle garden. Swim/walk around its
+	# seaward edge before descending, just as a player must; do not drill straight
+	# down through a newly connected terrain layer.
+	if target_index == 13 and model.position.y > -183:
+		target.x = -30
+		target.z = -102
+	if target_index == 14 and model.position.y > -201:
+		target.z = -85
 	var offset := Vector2(target.x - model.position.x, target.z - model.position.z)
 	var axis: Vector2 = (offset * 1.6 / model.config.horizontal_speed).limit_length()
 	# Slow descent while far from the landing surface; never suspend gravity.
@@ -28,7 +36,7 @@ static func reach(
 		model.step(1.0 / 60, Vector2(command.x, command.z), command.y)
 		if observer.is_valid():
 			observer.call(model)
-		if model.grounded == target_index:
+		if arrived(model, target_index):
 			# Centre on the oxygen spot before advancing the route.
 			if not model.platforms[target_index].oxygen or model.at_oxygen():
 				return true
@@ -39,3 +47,9 @@ static func reach(
 
 static func refill(model) -> void:
 	model.step(1.0 / 60, Vector2.ZERO)
+
+
+static func arrived(model, index: int) -> bool:
+	if model.platforms[index].kind == "water_globe":
+		return model.oxygen_contact() == index
+	return model.grounded == index

@@ -8,9 +8,14 @@ const Driftwood = preload("res://game/driftwood_surface.gd")
 const RockSurface = preload("res://game/rock_surface.gd")
 const Layout = preload("res://game/stage_layout.gd")
 const Discovery = preload("res://game/discovery_rules.gd")
+const Playground = preload("res://game/playground_rules.gd")
 
 var config: Resource
 var collision_motion: Callable
+var authored_platforms: Array[Dictionary] = []
+var garden_points: Array[Vector3] = Playground.PLANTS.duplicate()
+var oxygen_locator: Callable
+var reef_frame := Transform3D.IDENTITY
 var platforms: Array[Dictionary]
 var position := Vector3.ZERO
 var velocity := Vector3.ZERO
@@ -23,9 +28,15 @@ var best_depth: float = 0.0
 var elapsed: float = 0.0
 var setbacks: int = 0
 var grounded: int = 0
+var terrain_grounded := false
+var standing: bool:
+	get:
+		return grounded >= 0 or terrain_grounded
 var checkpoint: int = 0
 var previous_checkpoint: int = 0
 var visited_oxygen: Array[int] = [0]
+var visited_gardens: Dictionary = {}
+var return_garden := false
 var return_checkpoint: int = 0
 var return_target := Vector3.ZERO
 var return_phase: int = 0
@@ -46,7 +57,9 @@ func _init(tuning: Resource = null) -> void:
 
 
 func reset() -> void:
-	platforms = Layout.platforms()
+	platforms = (
+		Layout.platforms() if authored_platforms.is_empty() else authored_platforms.duplicate(true)
+	)
 	position = platforms[0].position
 	velocity = Vector3.ZERO
 	oxygen = config.oxygen_capacity
@@ -58,10 +71,13 @@ func reset() -> void:
 	elapsed = 0.0
 	setbacks = 0
 	grounded = 0
+	terrain_grounded = false
 	checkpoint = 0
 	previous_checkpoint = 0
 	depth_losses.clear()
 	visited_oxygen.assign([0])
+	visited_gardens.clear()
+	return_garden = false
 	rescue_reason = ""
 	rescue_speed = config.emergency_speed
 	mode = Mode.DIVING
@@ -118,13 +134,19 @@ func oxygen_contact() -> int:
 	for index in range(platforms.size()):
 		if platforms[index].oxygen:
 			var center: Vector3 = platforms[index].position + Vector3.UP * 1.6
+			if oxygen_locator.is_valid():
+				center = oxygen_locator.call(index)
 			if (position + Vector3.UP).distance_to(center) <= config.oxygen_radius:
 				return index
 	return -1
 
 
 func at_oxygen() -> bool:
-	return oxygen_contact() >= 0 or in_air_pocket()
+	return oxygen_contact() >= 0 or in_air_pocket() or in_dry_cave() or garden_at(position) >= 0
+
+
+func in_dry_cave() -> bool:
+	return Playground.air_at(reef_frame.affine_inverse() * (position + Vector3.UP * 1.4))
 
 
 func in_air_pocket() -> bool:
@@ -139,7 +161,12 @@ func step(delta: float, horizontal: Vector2, descent: float = 0.0, ascend: bool 
 		var platform: Dictionary = platforms[index]
 		var old_platform: Vector3 = platform.position
 		platform.position = (
-			platform.origin + Vector3.RIGHT * sin(elapsed * platform.sway.y) * platform.sway.x
+			platform.origin
+			+ (
+				platform.get("sway_direction", Vector3.RIGHT)
+				* sin(elapsed * platform.sway.y)
+				* platform.sway.x
+			)
 		)
 		if grounded == index:
 			position += platform.position - old_platform
@@ -147,7 +174,7 @@ func step(delta: float, horizontal: Vector2, descent: float = 0.0, ascend: bool 
 		_return_step(delta)
 		return
 	var acceleration: float = (
-		config.platform_acceleration if grounded >= 0 else config.water_acceleration
+		config.platform_acceleration if standing else config.water_acceleration
 	)
 	var desired: Vector2 = horizontal.limit_length() * config.horizontal_speed
 	var horizontal_velocity := Vector2(velocity.x, velocity.z).move_toward(
@@ -156,13 +183,14 @@ func step(delta: float, horizontal: Vector2, descent: float = 0.0, ascend: bool 
 	velocity.x = horizontal_velocity.x
 	velocity.z = horizontal_velocity.y
 	var start := position
-	current_flow = flow_at(position) if grounded < 0 else Vector3.ZERO
+	current_flow = flow_at(position) if not standing and not in_dry_cave() else Vector3.ZERO
 	if current_flow.length() > .1:
 		interactions.current += 1
 	var next := position + (Vector3(velocity.x, 0, velocity.z) + current_flow) * delta
 	jelly_cooldown = maxf(0, jelly_cooldown - delta)
 	if ascend and position.y < 0.5:
 		grounded = -1
+		terrain_grounded = false
 	if grounded >= 0 and not collision_motion.is_valid() and not inside(next, platforms[grounded]):
 		grounded = -1
 	if grounded < 0 or collision_motion.is_valid():
@@ -171,7 +199,7 @@ func step(delta: float, horizontal: Vector2, descent: float = 0.0, ascend: bool 
 			sink = config.fast_sink_speed
 		elif descent < 0:
 			sink = config.brake_sink_speed
-		if position.y > 0.5:
+		if position.y > 0.5 or Playground.air_at(reef_frame.affine_inverse() * position):
 			velocity.y = maxf(-20, velocity.y - config.air_gravity * delta)
 		else:
 			var target_speed: float = config.ascent_speed if ascend else -sink
@@ -183,6 +211,8 @@ func step(delta: float, horizontal: Vector2, descent: float = 0.0, ascend: bool 
 		# Sweep the whole segment: fast descent cannot tunnel through thin floors.
 		var first_hit: float = 2.0
 		for index in range(0 if collision_motion.is_valid() else platforms.size()):
+			if platforms[index].kind == "water_globe":
+				continue
 			var floor_y: float = surface_height(next, platforms[index])
 			if start.y >= floor_y - 0.001 and next.y <= floor_y and start.y > next.y:
 				var fraction := (start.y - floor_y) / (start.y - next.y)
@@ -205,6 +235,7 @@ func step(delta: float, horizontal: Vector2, descent: float = 0.0, ascend: bool 
 		position = result.position
 		velocity = result.velocity
 		grounded = result.grounded
+		terrain_grounded = result.get("terrain_grounded", false)
 	else:
 		position = next
 	# Jelly landing is a readable gentle bounce; rescue and oxygen rules are unchanged.
@@ -217,8 +248,13 @@ func step(delta: float, horizontal: Vector2, descent: float = 0.0, ascend: bool 
 	best_depth = maxf(best_depth, depth)
 	oxygen_rate = 0.0
 	var oxygen_index := oxygen_contact()
-	if oxygen_index >= 0 or position.y >= -1 or in_air_pocket():
+	if at_oxygen() or position.y >= -1:
 		oxygen = config.oxygen_capacity
+		var garden := garden_at(position)
+		if garden >= 0 and not visited_gardens.has(garden):
+			# Save a position actually occupied by the swept capsule, not the
+			# decorative plant root which may lie beneath the irregular rock.
+			visited_gardens[garden] = position
 		if (
 			oxygen_index >= 0
 			and oxygen_index != checkpoint
@@ -229,7 +265,7 @@ func step(delta: float, horizontal: Vector2, descent: float = 0.0, ascend: bool 
 			visited_oxygen.append(oxygen_index)
 	else:
 		var rate: float = config.oxygen_consumption
-		if descent > 0 and not ascend and grounded < 0:
+		if descent > 0 and not ascend and not standing:
 			rate *= config.fast_oxygen_multiplier
 		oxygen_rate = rate
 		oxygen = maxf(0.0, oxygen - rate * delta)
@@ -240,7 +276,10 @@ func step(delta: float, horizontal: Vector2, descent: float = 0.0, ascend: bool 
 		or Vector2(position.x, position.z).length() > config.ocean_extent
 	):
 		begin_return("航路を外れた")
-	elif grounded >= 0 and platforms[grounded].goal:
+	elif (
+		(grounded >= 0 and platforms[grounded].goal)
+		or (oxygen_index >= 0 and platforms[oxygen_index].goal)
+	):
 		mode = Mode.COMPLETE
 		velocity = Vector3.ZERO
 
@@ -256,6 +295,11 @@ func begin_return(reason: String) -> void:
 		if platforms[index].position.y >= position.y + config.min_setback:
 			return_checkpoint = index
 	return_target = platforms[return_checkpoint].position
+	return_garden = false
+	for safe_point: Vector3 in visited_gardens.values():
+		if safe_point.y >= position.y + config.min_setback and safe_point.y < return_target.y:
+			return_target = safe_point
+			return_garden = true
 	var clearance: Vector3 = return_target + Vector3.UP * config.rescue_clearance
 	var lift := Vector3(position.x, clearance.y, position.z)
 	var distance := position.distance_to(lift) + lift.distance_to(clearance)
@@ -266,6 +310,7 @@ func begin_return(reason: String) -> void:
 	)
 	return_phase = 0
 	grounded = -1
+	terrain_grounded = false
 	velocity = Vector3.ZERO
 
 
@@ -286,7 +331,8 @@ func _return_step(delta: float) -> void:
 			return_phase += 1
 		else:
 			depth_losses.append(maxf(0.0, failure_depth - depth))
-			checkpoint = return_checkpoint
+			if not return_garden:
+				checkpoint = return_checkpoint
 			previous_checkpoint = 0
 			var retained: Array[int] = []
 			for index in visited_oxygen:
@@ -295,18 +341,48 @@ func _return_step(delta: float) -> void:
 				if platforms[index].position.y > return_target.y:
 					previous_checkpoint = index
 			visited_oxygen = retained
-			grounded = checkpoint
+			for garden in visited_gardens.keys():
+				if visited_gardens[garden].y < return_target.y:
+					visited_gardens.erase(garden)
+			grounded = (
+				-1 if return_garden or platforms[checkpoint].kind == "water_globe" else checkpoint
+			)
+			terrain_grounded = false
 			velocity = Vector3.ZERO
 			oxygen = config.oxygen_capacity
 			mode = Mode.DIVING
 
 
 func flow_at(point: Vector3) -> Vector3:
-	var flow := Vector3.ZERO
+	var flow := Discovery.sample_path(
+		Layout.Biology.APPROACH,
+		point,
+		2.4,
+		config.sink_speed * (1 - smoothstep(453, 461, -point.y)),
+		true
+	)
+	if config.cavern_current_enabled:
+		flow += (
+			reef_frame.basis
+			* Playground.updraft(
+				reef_frame.affine_inverse() * point, elapsed, config.cavern_updraft_speed
+			)
+		)
 	if config.discovery_enabled:
 		flow += Discovery.bubble_flow(point, elapsed, config.bubble_lift)
+		flow += Discovery.sample_path(Layout.SHALLOW_RIDE, point, 5.5, config.sink_speed, true)
 		flow += Discovery.stream_sample(point, config.discovery_stream_speed, config.sink_speed)
+		flow += Discovery.sample_path(
+			Discovery.COVE_STREAM, point, config.cove_stream_speed, config.sink_speed, true
+		)
 	for zone in Layout.current_zones():
 		var distance: float = ((point - zone.center) / zone.radius).length()
 		flow += zone.flow * maxf(0, 1 - distance)
 	return flow * config.current_strength
+
+
+func garden_at(point: Vector3) -> int:
+	for i in range(garden_points.size()):
+		if point.distance_to(garden_points[i]) < 4:
+			return i
+	return -1

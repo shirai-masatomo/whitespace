@@ -20,13 +20,15 @@ func tick(axis: Vector2 = Vector2.ZERO, descent: float = 0, ascend: bool = false
 		await render_step()
 
 
-func swim(point: Vector3, seconds: float = 25.0, riding: bool = false) -> bool:
+func swim(
+	point: Vector3, seconds: float = 25.0, riding: bool = false, allow_fast: bool = true
+) -> bool:
 	for frame in range(int(seconds * 60)):
 		var difference: Vector3 = point - game.model.position
 		if difference.length() < (6 if riding else 3):
 			return true
 		var axis: Vector2 = (Vector2(difference.x, difference.z) / 4).limit_length()
-		var descent := 1.0 if difference.y < -3 else 0.0
+		var descent := 1.0 if difference.y < -3 and allow_fast else 0.0
 		if riding:
 			descent = 0
 		await tick(axis, descent, difference.y > 1)
@@ -68,8 +70,12 @@ func run() -> void:
 	game.set_process_unhandled_input(false)
 	game.begin()
 	game.pitch = -.5
-	await photo("36-curiosity-from-pier", Places.bubbles(0)[0].center)
-	check(await swim(Places.bubbles(game.model.elapsed)[0].center), "Enter a bubble from the pier")
+	fixture(Vector3(45, -124, -45))
+	await photo("36-transition-bubble", Places.bubbles(0)[0].center)
+	check(
+		await swim(Places.bubbles(game.model.elapsed)[0].center),
+		"Enter a bubble from the P1/P2 transition"
+	)
 	check(game.model.in_air_pocket(), "Bubble is a volume to enter, not a landing platform")
 	check(game.model.oxygen == 100, "Bubble restores air immediately")
 	await photo("37-inside-air", Places.ARCH)
@@ -78,7 +84,13 @@ func run() -> void:
 		await tick()
 	observations.bubble_depth_change = game.model.depth - before
 	await photo("38-bubble-choice", Places.ARCH)
-	check(await swim(Places.STREAM[0]), "Player can leave refuge by diving into the stream")
+	check(
+		await swim(Places.STREAM[0], 25, true), "Player can leave refuge by diving into the stream"
+	)
+	check(
+		Places.stream_sample(game.model.position, 12).length() > 2,
+		"Stream entry means actual current influence, not just reaching a waypoint"
+	)
 	await photo("39-current-entrance", Places.ARCH)
 	for index in range(1, Places.STREAM.size()):
 		check(
@@ -168,7 +180,7 @@ func compare_fixtures() -> void:
 	check(not game.model.in_air_pocket(), "E can exit the buoyant refuge, never trapped")
 	fixture(Places.STREAM[1])
 	for frame in range(180):
-		await tick(Vector2.RIGHT, -1)
+		await tick(Vector2.LEFT, -1)
 	check(
 		Places.stream_sample(game.model.position, 12).length() < .1,
 		"Lateral controls can leave the fast current"
@@ -177,7 +189,9 @@ func compare_fixtures() -> void:
 	fixture(Places.ARCH + Vector3(0, 0, 12))
 	game.model.oxygen = 100
 	check(await swim(Places.ARCH + Vector3(0, 0, -12), 8), "Arch opening is physically traversable")
-	fixture(Places.ARCH + Vector3(14, 0, 10))
+	# The eastern rim now joins permanent bedrock. Isolate the western pillar
+	# when checking the discovery toggle, so solid terrain is not a false failure.
+	fixture(Places.ARCH + Vector3(-14, 0, 10))
 	var hit := false
 	for frame in range(120):
 		await tick(Vector2(0, -1), -1)
@@ -185,7 +199,7 @@ func compare_fixtures() -> void:
 			if "SwimThroughArch" in str(body.get_path()):
 				hit = true
 	check(hit, "Solid arch rim blocks the actual player")
-	fixture(Places.ARCH + Vector3(14, 0, 10))
+	fixture(Places.ARCH + Vector3(-14, 0, 10))
 	game.model.config.discovery_enabled = false
 	for frame in range(120):
 		await tick(Vector2(0, -1), -1)
@@ -193,9 +207,26 @@ func compare_fixtures() -> void:
 		game.model.position.z < Places.ARCH.z, "Disabled experiment leaves no invisible arch wall"
 	)
 	game.model.config.discovery_enabled = true
+	for rate in [60, 15]:
+		for fast in [false, true]:
+			fixture(Places.ARCH + Vector3(0, 55, 0))
+			for frame in range(rate * 4):
+				game.advance(1.0 / rate, Vector2.ZERO, 1 if fast else 0, false)
+				if game.model.standing:
+					break
+			check(game.model.standing, "Normal/fast descent lands on arch crown at %dHz" % rate)
+			check(game.model.position.y > Places.ARCH.y + 34, "Arch crown blocks tunnelling")
+		fixture(Places.ARCH + Vector3(0, 15, 0))
+		var underside := false
+		for frame in range(rate * 4):
+			game.advance(1.0 / rate, Vector2.ZERO, 0, true)
+			for body in game.motion.contact_bodies:
+				if "SwimThroughArch" in str(body.get_path()):
+					underside = true
+		check(underside, "Space meets the visible inner arch at %dHz" % rate)
 	for detour in [false, true]:
-		fixture(Vector3(-35, -80, -60))
-		game.model.oxygen = 30
+		fixture(Vector3(-85, -143, -78))
+		game.model.oxygen = 18
 		var success := true
 		if detour:
 			success = await swim(Places.bubbles(game.model.elapsed)[1].center)
@@ -208,7 +239,7 @@ func compare_fixtures() -> void:
 		}
 	check(observations.refuge_detour.success, "An oxygen-poor swimmer can choose the air detour")
 	check(not observations.refuge_skip.success, "Skipping refuge has a cost at low oxygen")
-	fixture(Vector3(-35, -80, -60))
+	fixture(Vector3(-85, -143, -78))
 	game.model.oxygen = 100
 	var skip_full := await swim(game.model.platforms[11].position + Vector3.UP)
 	observations.refuge_skip_full = {"success": skip_full, "seconds": game.model.elapsed}

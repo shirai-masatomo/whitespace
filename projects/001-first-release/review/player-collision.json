@@ -2531,7 +2531,7 @@
         },
         {
           "kind": "jelly",
-          "seconds": 10.27,
+          "seconds": 10.23,
           "to": 4
         },
         {
@@ -2551,7 +2551,7 @@
         },
         {
           "kind": "rock",
-          "seconds": 10.17,
+          "seconds": 10.18,
           "to": 8
         },
         {
@@ -2582,7 +2582,7 @@
       ],
       "minimum_oxygen": 25.5333333333338,
       "name": "platforms",
-      "seconds": 127.3
+      "seconds": 127.28
     },
     {
       "complete": true,
@@ -2677,7 +2677,7 @@
         },
         {
           "kind": "rock",
-          "seconds": 10.18,
+          "seconds": 10.17,
           "to": 8
         },
         {
@@ -2708,7 +2708,7 @@
       ],
       "minimum_oxygen": 25.5333333333338,
       "name": "extra_oxygen",
-      "seconds": 131.4
+      "seconds": 131.38
     },
     {
       "complete": true,
@@ -2730,7 +2730,7 @@
         },
         {
           "kind": "kelp",
-          "seconds": 10.47,
+          "seconds": 10.45,
           "to": 11
         },
         {
@@ -2745,7 +2745,7 @@
         },
         {
           "kind": "rock",
-          "seconds": 10.28,
+          "seconds": 10.3,
           "to": 8
         },
         {
@@ -2793,12 +2793,12 @@
         },
         {
           "kind": "rock",
-          "seconds": 8.73,
+          "seconds": 8.08,
           "to": 6
         },
         {
           "kind": "rock",
-          "seconds": 7.93,
+          "seconds": 7.92,
           "to": 8
         },
         {
@@ -2827,9 +2827,9 @@
           "to": 25
         }
       ],
-      "minimum_oxygen": 30.733333333333,
+      "minimum_oxygen": 32.1333333333329,
       "name": "fast_drop",
-      "seconds": 57.13
+      "seconds": 56.47
     },
     {
       "complete": true,
@@ -2914,7 +2914,7 @@
         },
         {
           "kind": "kelp",
-          "seconds": 10.47,
+          "seconds": 10.45,
           "to": 11
         },
         {
@@ -2929,7 +2929,7 @@
         },
         {
           "kind": "rock",
-          "seconds": 6.17,
+          "seconds": 6.4,
           "to": 14
         },
         {
@@ -2970,7 +2970,7 @@
       ],
       "minimum_oxygen": 37.7333333333341,
       "name": "cliff_walk",
-      "seconds": 129.93
+      "seconds": 130.15
     },
     {
       "complete": true,
@@ -3007,7 +3007,7 @@
         },
         {
           "kind": "rock",
-          "seconds": 7.03,
+          "seconds": 6.78,
           "to": 8
         },
         {
@@ -3038,7 +3038,7 @@
       ],
       "minimum_oxygen": 29.3333333333338,
       "name": "offshore_life",
-      "seconds": 128.85
+      "seconds": 128.6
     },
     {
       "complete": true,
@@ -3055,7 +3055,7 @@
         },
         {
           "kind": "rock",
-          "seconds": 22.77,
+          "seconds": 22.13,
           "to": 6
         },
         {
@@ -3099,9 +3099,9 @@
           "to": 25
         }
       ],
-      "minimum_oxygen": 16.3333333333338,
+      "minimum_oxygen": 17.3333333333338,
       "name": "reef_refuge",
-      "seconds": 122.72
+      "seconds": 122.08
     },
     {
       "complete": true,
@@ -3123,7 +3123,7 @@
         },
         {
           "kind": "rock",
-          "seconds": 5.52,
+          "seconds": 5.5,
           "to": 6
         },
         {
@@ -3133,12 +3133,12 @@
         },
         {
           "kind": "driftwood",
-          "seconds": 4.63,
+          "seconds": 4.62,
           "to": 16
         },
         {
           "kind": "rock",
-          "seconds": 6.08,
+          "seconds": 5.72,
           "to": 8
         },
         {
@@ -3148,12 +3148,12 @@
         },
         {
           "kind": "driftwood",
-          "seconds": 5.82,
+          "seconds": 5.83,
           "to": 23
         },
         {
           "kind": "jelly",
-          "seconds": 7.62,
+          "seconds": 6.85,
           "to": 24
         },
         {
@@ -3162,9 +3162,9 @@
           "to": 25
         }
       ],
-      "minimum_oxygen": 11.2333333333327,
+      "minimum_oxygen": 12.7999999999993,
       "name": "rift_offshore",
-      "seconds": 73.8
+      "seconds": 72.65
     },
     {
       "complete": true,
@@ -3181,28 +3181,28 @@
         },
         {
           "kind": "rock",
-          "seconds": 8.73,
+          "seconds": 8.08,
           "to": 6
         },
         {
           "kind": "rock",
-          "seconds": 7.93,
+          "seconds": 7.92,
           "to": 8
         },
         {
           "kind": "driftwood",
-          "seconds": 10.43,
+          "seconds": 10.42,
           "to": 23
         },
         {
           "kind": "rock",
-          "seconds": 11.55,
+          "seconds": 11.05,
           "to": 25
         }
       ],
-      "minimum_oxygen": 19.1000000000007,
+      "minimum_oxygen": 20.8333333333339,
       "name": "rift_shortcut",
-      "seconds": 50.02
+      "seconds": 48.83
     }
   ],
   "scope": "Actual playable scene and swept capsule; scripted inputs, not human fun."

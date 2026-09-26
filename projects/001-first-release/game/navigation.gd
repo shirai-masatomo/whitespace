@@ -13,8 +13,9 @@ static func candidates(model) -> Array[int]:
 	result.sort_custom(
 		func(a, b): return model.platforms[a].position.y > model.platforms[b].position.y
 	)
-	if result.size() > 3:
-		result.resize(3)
+	var limit := 1 if model.position.y > model.platforms[4].position.y + 2 else 3
+	if result.size() > limit:
+		result.resize(limit)
 	return result
 
 

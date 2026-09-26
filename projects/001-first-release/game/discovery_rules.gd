@@ -1,15 +1,26 @@
 extends RefCounted
 ## Places and phenomena, independent of platform targets and navigation arrows.
-const ARCH := Vector3(-64, -72, -42)
+const ARCH := Vector3(-85, -145, -45)
 const STREAM: Array[Vector3] = [
-	Vector3(-24, -42, -23), Vector3(-64, -68, -22), Vector3(-64, -76, -60), Vector3(-40, -112, -66)
+	Vector3(-32, -128, -36),
+	Vector3(-85, -139, -30),
+	Vector3(-85, -147, -63),
+	Vector3(-43, -135, -47)
+]
+const COVE_STREAM: Array[Vector3] = [
+	Vector3(90, -244, -278),
+	Vector3(118, -255, -288),
+	Vector3(136, -261, -237),
+	Vector3(108, -255, -175),
+	Vector3(63, -246, -112),
+	Vector3(16, -237, -60)
 ]
 
 
 static func bubbles(time: float) -> Array[Dictionary]:
 	return [
-		{"center": Vector3(-22 + sin(time * .12) * 2, -28, -22), "radius": 7.5},
-		{"center": Vector3(-52, -99 + sin(time * .1), -60), "radius": 5.0}
+		{"center": Vector3(-15 + sin(time * .12) * 2, -130, -72), "radius": 7.5},
+		{"center": Vector3(-75, -140 + sin(time * .1), -67), "radius": 5.0}
 	]
 
 
@@ -29,19 +40,29 @@ static func bubble_flow(point: Vector3, time: float, lift: float) -> Vector3:
 
 
 static func stream_sample(point: Vector3, speed: float, buoyancy: float = 0) -> Vector3:
+	return sample_path(STREAM, point, speed, buoyancy)
+
+
+static func sample_path(
+	path: Array[Vector3], point: Vector3, speed: float, buoyancy: float = 0, fade_exit: bool = false
+) -> Vector3:
+	if speed <= 0:
+		return Vector3.ZERO
 	var nearest := INF
 	var flow := Vector3.ZERO
-	for index in range(STREAM.size() - 1):
-		var origin := STREAM[index]
-		var segment := STREAM[index + 1] - origin
+	var strength := 1.0
+	for index in range(path.size() - 1):
+		var origin := path[index]
+		var segment := path[index + 1] - origin
 		var t := clampf((point - origin).dot(segment) / segment.length_squared(), 0, 1)
 		var distance := point.distance_to(origin + segment * t)
 		if distance < nearest:
 			nearest = distance
 			# Gentle attraction keeps the bend readable; lateral input can still leave.
 			flow = segment.normalized() * speed + (origin + segment * t - point) * .3
+			strength = 1 - smoothstep(.7, 1, t) if fade_exit and index == path.size() - 2 else 1.0
 	# Carry a resting swimmer around bends instead of letting normal sinking cut the tube.
-	return (flow + Vector3.UP * buoyancy) * smoothstep(7.5, 2.5, nearest)
+	return (flow + Vector3.UP * buoyancy) * smoothstep(7.5, 2.5, nearest) * strength
 
 
 static func giant_position(time: float) -> Vector3:

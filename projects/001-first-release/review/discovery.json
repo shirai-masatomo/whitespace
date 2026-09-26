@@ -1,30 +1,30 @@
 {
-  "checks": 19,
+  "checks": 30,
   "failed": false,
   "observations": {
-    "bubble_depth_change": 0.150846481323242,
+    "bubble_depth_change": -5.88191795349121,
     "bubble_off": {
-      "depth": 36.9999465942383,
+      "depth": 29.0000629425049,
       "oxygen": 31.9999999999996
     },
     "bubble_on": {
-      "depth": 23.8192253112793,
+      "depth": 15.8192052841187,
       "oxygen": 100.0
     },
     "current_off": {
-      "distance_to_bend": 40.6202392578125,
+      "distance_to_bend": 57.314826965332,
       "oxygen": 84.0000000000009,
       "position": "Vector3(-24, -60.99973, -23)"
     },
     "current_on": {
-      "distance_to_bend": 0.371943414211273,
+      "distance_to_bend": 5.71152305603027,
       "oxygen": 84.0000000000009,
-      "position": "Vector3(-63.922943, -67.63613, -22.001923)"
+      "position": "Vector3(-47.23709, -40.792355, -65.00553)"
     },
-    "discovery_seconds": 21.6833333333334,
+    "discovery_seconds": 29.1999999999996,
     "refuge_detour": {
       "oxygen": 100.0,
-      "seconds": 7.71666666666664,
+      "seconds": 7.51666666666665,
       "success": true
     },
     "refuge_skip": {

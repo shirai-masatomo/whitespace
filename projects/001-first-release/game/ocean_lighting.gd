@@ -26,6 +26,8 @@ func _ready() -> void:
 	environment.ambient_light_source = Environment.AMBIENT_SOURCE_SKY
 	environment.fog_enabled = true
 	if forward:
+		# Resolve the PCSS sampling pattern visible on broad nearby cliff faces.
+		get_viewport().use_taa = true
 		environment.volumetric_fog_enabled = true
 		environment.volumetric_fog_length = 160.0
 		environment.volumetric_fog_detail_spread = 1.5
@@ -57,7 +59,7 @@ func _ready() -> void:
 			beam.spot_range = 200
 			beam.spot_angle = 5 + index
 			beam.spot_attenuation = 0.5
-			beam.light_color = Color("b4edf1")
+			beam.light_color = Color("94c9f0")
 			beam.light_energy = 9
 			beam.light_volumetric_fog_energy = 35
 			beam.shadow_enabled = true
@@ -65,7 +67,7 @@ func _ready() -> void:
 			beams.append(beam)
 
 
-func update(camera_y: float) -> void:
+func update(camera_y: float, cave_air: bool = false) -> void:
 	var immersion := 1.0 - smoothstep(-1.4, 0.8, camera_y)
 	var depth := maxf(0, -camera_y)
 	var middle := smoothstep(25, 170, depth)
@@ -83,9 +85,31 @@ func update(camera_y: float) -> void:
 	sun.light_color = Color("fff0d3").lerp(Color("6abedb"), middle * immersion)
 	if forward:
 		environment.volumetric_fog_density = immersion * 0.0025
-		environment.volumetric_fog_albedo = Color("9bdce0").lerp(Color("477f99"), deep)
+		environment.volumetric_fog_albedo = Color("79b4d8").lerp(Color("477f99"), deep)
 		environment.volumetric_fog_emission = tint
 		environment.volumetric_fog_emission_energy = immersion * 0.08
 		environment.volumetric_fog_sky_affect = immersion
 		for beam in beams:
 			beam.light_energy = 9 * immersion * (1 - deep)
+	if cave_air:
+		environment.fog_density = .0005
+		environment.ambient_light_energy = .34
+		if forward:
+			environment.volumetric_fog_density = 0
+
+	# Narrow black water first, then longer visibility into a dark chamber.
+	var biology := smoothstep(478, 530, depth)
+	var chamber := smoothstep(572, 606, depth)
+	if biology > 0:
+		environment.background_color = tint.lerp(Color("010409"), biology)
+		environment.fog_light_color = environment.fog_light_color.lerp(Color("020710"), biology)
+		environment.fog_density = lerpf(
+			environment.fog_density, lerpf(.028, .007, chamber), biology
+		)
+		environment.ambient_light_energy = lerpf(environment.ambient_light_energy, .018, biology)
+		environment.ambient_light_sky_contribution *= 1 - biology
+		sun.light_energy *= 1 - biology
+		if forward:
+			environment.volumetric_fog_density = lerpf(.0025, .006, biology)
+			environment.volumetric_fog_emission_energy *= 1 - biology
+			environment.volumetric_fog_sky_affect *= 1 - biology

@@ -39,7 +39,7 @@ func _initialize() -> void:
 	tick(model, 2, Vector2.ZERO, 1)
 	check(is_equal_approx(model.velocity.y, -15), "Fast sink 15m/s")
 	tick(model, 3, Vector2.ZERO, 0, true)
-	check(is_equal_approx(model.velocity.y, 6), "Space ascends at 6m/s")
+	check(is_equal_approx(model.velocity.y, 6.6), "Space ascends at 6.6m/s")
 	tick(model, 2)
 	check(is_equal_approx(model.velocity.y, -5), "Release Space resumes sinking")
 	model = airborne(2)
@@ -79,7 +79,7 @@ func _test_interactions() -> void:
 	model.grounded = -1
 	var before: Vector3 = model.position
 	tick(model, .5)
-	check(model.position.x > before.x + .6, "Current physically drifts the player")
+	check(model.position.z < before.z - .1, "Current physically drifts the player")
 	check(model.interactions.current > 0, "Current interaction measured")
 	check(model.flow_at(Vector3(400, -40, 0)) == Vector3.ZERO, "Current has bounded influence")
 	model = Model.new()
@@ -175,12 +175,14 @@ func _test_platforms() -> void:
 
 func _test_rescue() -> void:
 	var model = Model.new()
-	for index in [1, 2, 10, 4]:
+	for index in [1, 2, 3, 4]:
 		check(Driver.reach(model, index), "Rescue setup reaches %d" % index)
 	model.position.x += 5
 	model.oxygen = 0.01
 	model.step(1.0 / 60, Vector2.ZERO)
-	check(model.return_checkpoint == 10, "Failure beside 125m spot loses depth to visited branch")
+	check(
+		model.return_checkpoint == 2, "Failure at the transition returns to the shared introduction"
+	)
 	var frames := 0
 	while model.mode == Model.Mode.RETURNING and frames < 2000:
 		var old: Vector3 = model.position
@@ -191,7 +193,7 @@ func _test_rescue() -> void:
 		)
 		frames += 1
 	check(frames / 60.0 <= model.config.rescue_max_seconds, "Rescue respects its time budget")
-	check(model.mode == Model.Mode.DIVING and model.depth == 95, "Rescue finishes with control")
+	check(model.mode == Model.Mode.DIVING and model.depth == 60, "Rescue finishes with control")
 	check(model.oxygen == 100, "Rescue restarts with oxygen")
 	# Rising above saved spots must never produce a downward rescue or free progress.
 	model.position = Vector3(80, -20, 0)

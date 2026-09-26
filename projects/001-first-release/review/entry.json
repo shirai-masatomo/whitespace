@@ -1,0 +1,48 @@
+{
+  "checks": 35,
+  "choices": {
+    "cleft_school": {
+      "crossings": 0,
+      "depth": 43.6987800598145,
+      "overlaps": 0
+    },
+    "fast_garden_recovery_seconds": 13.7166666666669,
+    "garden_shoulder_oxygen": 61.7333333333353,
+    "garden_shoulder_seconds": 10.0833333333334,
+    "normal_entry_seconds": 12.3833333333335,
+    "oxygen_100_bubble_false": {
+      "arrived": true,
+      "oxygen": 100.0,
+      "seconds": 4.44999999999999
+    },
+    "oxygen_100_bubble_true": {
+      "arrived": true,
+      "oxygen": 100.0,
+      "seconds": 2.3
+    },
+    "oxygen_10_bubble_false": {
+      "arrived": false,
+      "oxygen": 0.0,
+      "seconds": 2.51666666666666
+    },
+    "oxygen_10_bubble_true": {
+      "arrived": true,
+      "oxygen": 100.0,
+      "seconds": 2.3
+    },
+    "oxygen_20_bubble_false": {
+      "arrived": true,
+      "oxygen": 100.0,
+      "seconds": 4.44999999999999
+    },
+    "oxygen_20_bubble_true": {
+      "arrived": true,
+      "oxygen": 100.0,
+      "seconds": 2.3
+    },
+    "shoal_max_turn_degrees_per_tenth": 2.61212388580134,
+    "shoal_wall_crossings": 0
+  },
+  "failed": false,
+  "seconds": 10.4666666666668
+}

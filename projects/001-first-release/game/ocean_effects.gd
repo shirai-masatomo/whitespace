@@ -8,6 +8,8 @@ var fast: GPUParticles3D
 var ascent: GPUParticles3D
 var rescue: GPUParticles3D
 var splash: GPUParticles3D
+var entry_cloud: GPUParticles3D
+var cavern_jet: GPUParticles3D
 var previous_y: float = 6
 
 
@@ -21,7 +23,12 @@ func _ready() -> void:
 	splash = particles(80, 1.5, .06, .20, Vector3(0, 4, 0), Vector3(1.2, .1, 1.2), true)
 	splash.one_shot = true
 	splash.explosiveness = .95
-	for emitter in [breath, wake, fast, ascent, rescue, splash]:
+	entry_cloud = particles(280, 2.1, .012, .045, Vector3(0, 3.4, 0), Vector3(1.8, 1, 1.8), true)
+	entry_cloud.one_shot = true
+	entry_cloud.explosiveness = .75
+	cavern_jet = particles(260, 4, .065, .22, Vector3.UP * 7, Vector3(3, 16, 3), true)
+	cavern_jet.position = preload("res://game/playground_rules.gd").UPDRAFT
+	for emitter in [breath, wake, fast, ascent, rescue, splash, entry_cloud]:
 		emitter.emitting = false
 
 
@@ -35,6 +42,7 @@ func particles(
 	bubbles: bool
 ) -> GPUParticles3D:
 	var emitter := GPUParticles3D.new()
+	emitter.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	emitter.amount = count
 	emitter.lifetime = life
 	emitter.preprocess = minf(3, life)
@@ -76,15 +84,19 @@ func current(point: Vector3, direction: Vector3) -> void:
 
 
 func update(model) -> void:
+	cavern_jet.global_position = model.reef_frame * model.Playground.UPDRAFT
+	cavern_jet.emitting = model.config.cavern_current_enabled
+	cavern_jet.visible = model.config.cavern_current_enabled
+	cavern_jet.speed_scale = model.Playground.updraft_pulse(model.elapsed)
 	var position_above: Vector3 = model.position + Vector3.UP * 1.3
 	motes.position = model.position
-	motes.emitting = model.position.y < 0
+	motes.emitting = model.position.y < 0 and not model.in_dry_cave()
 	breath.position = position_above + Vector3(0, .25, -.28)
 	wake.position = model.position
 	fast.position = model.position + Vector3.UP * .5
 	ascent.position = model.position
 	rescue.position = position_above
-	var underwater: bool = model.position.y < -1
+	var underwater: bool = model.position.y < -1 and not model.in_dry_cave()
 	var returning: bool = model.mode == model.Mode.RETURNING
 	breath.emitting = underwater and not returning
 	wake.emitting = (
@@ -100,4 +112,8 @@ func update(model) -> void:
 		splash.position = Vector3(model.position.x, 0, model.position.z)
 		splash.restart()
 		splash.emitting = true
+		if model.position.y < -.5:
+			entry_cloud.position = Vector3(model.position.x, -1.6, model.position.z)
+			entry_cloud.restart()
+			entry_cloud.emitting = true
 	previous_y = model.position.y

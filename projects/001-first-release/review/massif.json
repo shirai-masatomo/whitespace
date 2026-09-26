@@ -1,0 +1,14 @@
+{
+  "checks": 23,
+  "failed": false,
+  "observations": {
+    "massif_roof": {
+      "grounded_frames": 90,
+      "minimum_oxygen": 54.5333333333349,
+      "round_trip_minimum_oxygen": 19.0666666666672,
+      "round_trip_seconds": 21.0500000000001,
+      "seconds": 11.9666666666668,
+      "walk_meters": 8.79521179199219
+    }
+  }
+}
