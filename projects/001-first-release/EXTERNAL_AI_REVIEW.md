@@ -1,147 +1,111 @@
 # DIVE DIVE — EXTERNAL AI REVIEW
 
-更新: 2026-09-21
+更新: 2026-09-26
 対象: `codex/dive-dive-playground`
-active_head: `1b13ef8b9564e52c8455a0775caaef8c54e46fca`
-reviewed_through: 1b13ef8b9564e52c8455a0775caaef8c54e46fca
+active_head: `47d007cd27367e6222a0517b4f003eb8937375e3`
+reviewed_through: 47d007cd27367e6222a0517b4f003eb8937375e3
 
 ## 判定: **CHANGES / SELF_CONTINUE**
 
 人間判断はまだ不要。定期自律開発は **PAUSEDのまま**。
 
-前回 `reviewed_through: 1bee44d3f3d53dab676caa01181f9891ae8b8337` から active branch HEAD まで8 commitをcatch-upした。実装/contentとして品質判断に効く新規対象は **`1b13ef8b` — Make DIVE DIVE coast editor-authorable and weather L1 terrain**。それ以外は前回外部レビューの消費・TASKS/STATE同期・handoff/mergeであり、実装前進には数えていない。
+前回 `reviewed_through: 1b13ef8b9564e52c8455a0775caaef8c54e46fca` から active branch HEAD までをcatch-up。途中の `8ffe3c1` / `9c12dfd` / `4274567` はレビュー/TASKS/STATEの受け渡しのみ。品質判断に効く新規 implementation/content commit は **`47d007c` — Give DIVE DIVE a shared introduction before branching** の1件。
 
-HEAD `1b13ef8b` の GitHub Actions DIVE DIVE run #255 は **success**。実装側でも保存→再読込→移動岩への実着地/酸素補給/動く足場/リスタート16確認、L1入力11/23、岸壁179、実衝突689、全体連続201.1秒/biology35、Windows export/起動成功が記録されている。PC非干渉方針も維持。
+GitHub Actions DIVE DIVE run #261 は **success**。Rules 586 / Scene 459 / Audio 61 / platform-surface 2688 / actual player collision 689 / Discovery 30 / Playground 163 / Intro 14 / Seabed 9 / Headland 19 / Editor authoring 16 / L1 input 11 / L1 places 18 / Canyon 179 / Biology 35 が失敗0。Windows build/export smokeも成功。PC非干渉方針も維持。
 
-mainのHUMAN_DIRECTIONは今回の人間直接編集方針・Space浮上微増・L1-P1〜G集中方針を正本へ同期済み。active branch側は同内容を先行して保持している。
+## 前進
 
-## 前進として数える点
+- P0〜P1を岩棚→海藻→流木→クラゲの共通導入へ整理し、旧P0/P1の競合する酸素藻・洞窟・巨大泡・岩窓・クラゲ列をP1/P2移行帯以深へ移した。
+- 約125〜160mで初めて複数候補を開く構成は、9/26の最新HUMAN_DIRECTION（一本道→段階分岐）と整合。
+- navigation候補は序盤1件へ絞るが、不可視壁/自動搬送で自由遊泳を禁止していない。
+- `ReefExploration` の保存Transformを基準に洞窟・空気・上昇流・魚群を追従させ、旧位置の不可視補給/空気をテストで除去。
 
-- **Editor authoring**: `game/levels/l1_editable.tscn` を実ゲームの主要配置の正本にし、岩/藻/エイ/主要岸壁/棚/初期岩盤/海底/ゲート肩を保存Scene Nodeとして人間が位置・回転調整できるようにした。保存Transformを起動/リスタートが上書きしない設計、親Node移動に衝突が追従する構造は有用。
-- **L1-P1**: 初期岩盤の幅・侵食縁・緩い起伏を増やし、一本道の橋らしさを弱めた。`WindowAboveGarden` も非対称寄りに調整。
-- **L1-P2/P3**: 同型棚の一部を沈んだ斜面/えぐれた岩床へ変え、棚の間の遊泳と外縁歩行を維持。
-- **L1-P4/G**: 露出岩盤を直線列から3つの群落へ崩し、砂丘・海藻の向き・水音・床沿いの砂粒で最深部方向を示すよう改善。
-- **操作**: Space浮上を6.0→6.6m/sへ小幅増加し、自然沈降/E急降下の重さは維持。
-- **obsolete-file cleanup / screenshot policy / collision / PC non-interference**: 旧画像を増やさず固定名置換、実衝突検証、画面外・無音・非捕捉・人間プロセス非終了を維持。
+ただし、これは**導線構造の改善**であり、画面品質がHUMAN_REVIEW候補へ上がった証拠にはならない。
 
-ただし、**編集性は大きく前進したが、地形品質そのものはまだHUMAN_REVIEW候補ではない。** ツール改善を景観/遊びの品質改善と混同しない。
+## P0-1. 最初の目的地が通常視点で読めていない
 
-## P0-1. L1-P1: weathering追加だけでは閉じた掃引形状の模型感は解消しない
-
-`l1_landforms.gd` は現在も `WindowAboveGarden` / `BrokenSkyBridge` / Fault/Uplift群を共通 `PROFILE` の閉じた断面でspineに沿って掃引する `mass()` 生成が中心。今回 `weather` 変位、seed別taper/窪みを増やしたのは前進だが、**トポロジーと生成家系は同じ**で、アーチ/橋/断層が「同じ岩パーツの変形」に見える根本原因は残る。
+route evaluation では共通導入の最初の脚 `to: 1` が全ルートで **`visible_with_mouse: false`**。最新方針の「P0/P1は次の目的地が一つずつ読める」と衝突する。
 
 次:
+- 桟橋/入水直後から最初の岩棚をHUD矢印なしで読めるようにする
+- 水面光、泡、魚群、岩棚シルエット、近景/中景/遠景で主導線を作る
+- カメラ固定・不可視壁で解決しない
+- 固定アンカー通常視点でも確認
 
-- `WindowAboveGarden` は完全な閉環アーチを主役にせず、**岸壁へ根付く片側支持 + 崩れた屋根 + 別岩体の噛み合わせ**へ寄せる
-- `BrokenSkyBridge` も一本の掃引体ではなく、侵食棚/崩落段丘/欠けた根元の複数形状で構成し、左右端の生成則を変える
-- 正面/横/下の2〜3「気になる場所」は維持するが、全部を独立ルート化しない
-- 近景の岩、中景の魚/藻、遠景の岸壁で奥行きを作り、アーチ単体に視線を依存しない
+対応: **DD-064 / DD-055 / DD-067**。
 
-対応: **DD-055 / DD-068 / DD-069**。
+## P0-2. 共通導入が等間隔のランドマーク列に見える危険
 
-## P0-2. L1-P2/P3: seed分岐は増えたが、6棚がまだ同一generator family
-
-`cliff_shelves.gd` は6つの `bed()` を同じ24×18格子、同じ `point()` で生成している。seed 2/4は沈み、3/5はえぐれを追加したが、**表面トポロジー・根付き方・厚みの作り方は共通**。近距離の壁面が単純に見える自己批評とも一致する。
-
-次:
-
-- 6棚を残す前提を捨て、**2〜4個の主形状**へ統合/置換
-- 片側=断層面、別側=崩落楔、別側=張り出し/アンダーカット、奥=根付いた隆起など、別generator/別mesh構造を使う
-- 棚同士の平行感を壊し、角度・根元・端部・厚み・天井の抜け方を大きく変える
-- 160m前後は「棚がある」ではなく、左右/奥/一部頭上の地形に**包まれる**構図を固定アンカー視点で確認
-- 岩階段/段丘は **歩く → 見渡す → 泳ぐ** に接続し、見える棚/穴/張り出しの高い割合を実際に利用可能にする
-
-対応: **DD-065 / DD-070 / DD-084 / DD-067**。
-
-## P0-3. L1-P4: 規則列は改善したが、大地形はまだ一枚の数式盆地
-
-`biology_layout.gd::sand_height()` は砂丘を追加した一方、全体の高さは依然としてゲートからの距離で持ち上げる `shoulder` + 1本の `gully` が支配する。`biology_world.gd` の露出岩盤は3群落へ改善したが、**地形全体は一つの盆地へ装飾を加えた構造**で、場所ごとのシルエット/役割差は弱い。
+主要深度が概ね -30 / -60 / -90 / -125m と規則的で、岩棚→藻→流木→クラゲがチェックポイント列に見える可能性がある。
 
 次:
+- 一本道の読みやすさは維持
+- 横ずれ、高低差、遮蔽、見え隠れ、地形接続で等間隔感を崩す
+- ランドマークを独立オブジェクト列ではなく周囲の地形/生物へ馴染ませる
+- P1/P2移行で初めて左右候補が同時に見え始めるよう段階化
 
-- **砂丘 / 侵食溝 / 露出岩盤肩 / 崩落塊 / 海藻帯**から2〜4の異なる場所を実地形として作る
-- 群落も大小・傾き・埋まり方・密度・空白の幅を場所ごとに変え、3つの同質clusterにしない
-- 海底到達時はいったん広く/落ち着き、そこから低まり・砂粒・海藻・泡・音が最深部へ収束する構図にする
-- 寄り道を増やすより「海底へ着いた→違和感を見つける→隙間へ近づく」の読みやすさを優先
+対応: **DD-089 / DD-055 / DD-068**。
 
-対応: **DD-081 / DD-067**。
+## P0-3. 現行commitの品質比較画像がない
 
-## P0-4. L1-G / L2-P0: 連続管は今回も未解消、最優先
+`REVIEW_PACKET.md` は9/21画像が現在のP0/P1配置を示さないと明記。review/L1-P1, P2, P4, L1-G の6 PNG blob SHAも `1b13ef8` と `47d007c` で全て同一。今回の大きな序盤再配置に対する最新比較画像がないため、**material visual improvementは認定不可**。
 
-`biology_world.gd::make_throat()` は今回も100段×32断面の**連続した閉じた環状メッシュ**のまま。`throat_point()` は同じ断面をPATHに沿わせ、outside側を一定量膨らませる。入口の砂・海藻・音が改善しても、奥へ入ると「岩盤の隙間」ではなく「作られた管」に戻る。
+次の品質ゲート:
+- 現行commitのP0入水固定アンカー通常視点 1枚
+- 約125〜160mのP1→P2移行固定アンカー通常視点 1枚
+- 必要なら内部通常視点を各1枚追加
+- 比較終了後は旧画像を置換/削除し蓄積しない
+- 主役、自然密度、遠近、次の目的地、地形の可遊性を評価
+
+対応: **DD-067を最優先継続**。
+
+## P0-4. 既存の大地形品質課題は未解消
+
+今回の主変更は序盤の順序/配置。以下はテスト成功では相殺しない。
+
+- 約160m canyon/cliff enclosure: 2〜4異種の巨大主形状で左右/奥/一部頭上に包まれる構図
+- rock-stair / terrace / traversal variation: 歩く→見渡す→泳ぐ、見える棚/穴/張り出しを実利用可能に
+- P1/P2の閉じたPROFILE掃引のアーチ/橋模型感
+- P2/P3の同一generator familyによる棚反復
+- P4の一枚数式盆地 + 装飾
+- L1-G/L2-P0の連続管
+- stronger ocean-entry quality / playable-density improvement
+
+対応: **DD-064 / 065 / 068 / 070 / 078 / 081 / 082 / 084**。
+
+## P1-1. ReefExplorationと海底cutoutのEditor同期
+
+`ReefExploration` は保存Transformで岩礁/洞窟/空気/魚群/上昇流を追従させる一方、`coastal_seabed.gd::height_at()` の `cavern_bay` / `arch_bay` は固定world座標。Markerを大きく動かすと洞窟と海底の切り欠きがずれる可能性がある。
 
 次:
+- cutoutをReefExploration基準へ寄せる、または編集可能範囲を明示して大移動を禁止
+- 軽量不整合テストを追加
+- 保存Transformを起動時に上書きしない契約は維持
 
-- `make_throat()` の連続管を廃止
-- 左壁/右壁/天井/床を **2〜4個の独立巨大岩体** へ分解
-- 区間ごとに幅・高さ・傾き・片側の抜け・低天井・短い空洞を変える
-- **狭い → さらに狭い → 短い抜けの予感 → L2-P0暗闇** を段階化
-- 潮流は方向手掛かりに留め、Space離脱を維持して自動搬送だけで突破させない
+対応: **DD-090 / DD-087運用継続**。
 
-対応: **DD-078 / DD-082**。
+## P1-2. 分岐後の潮流の役割
 
-## P0-5. L1-P0: 「海！」第一印象は今回も未変更
+評価値は `current_seconds_saved: -0.79`。時間短縮を必須にしない判断は妥当だが、潮流が誘導/移動補助/リスクのどれなのかは明確にする。
 
-今回の主変更はP1〜GとEditor authoring。必須ディレクティブの **stronger ocean-entry quality** は未解消。
-
-次:
-
-- 太陽光 / 水面 / 泡 / 魚群 / 近景・中景・遠景 / 最初の大地形を一枚の通常視点として設計
-- 強制カメラ/HUD矢印ではなく、世界の重なりで最初の「見たい場所」を作る
-- P1以降の改善を理由に後回しにしない
-
-対応: **DD-064 / DD-058**。
-
-## P1. Editor authoringの境界を明示して壊れにくくする
-
-Editorで主要Nodeを直接動かせるようになったのは良い。一方、README記載どおり水面/魚群経路/潮流/L2狭路は手続き生成で、**SandFloor/GateBedrockを大きく動かすと潮流PATHや固定テスト座標とずれる**。これは人間編集を禁止する理由ではなく、編集可能範囲の安全境界を明確にするべき。
-
-次:
-
-- 親Nodeの位置/回転微調整はそのまま許可
-- L1-Gや海底全体を大きく動かす時だけ「潮流/APPROACH/PATHも要調整」とEditor/README上で明示
-- 人間編集後の軽量検証として、主要経路・実衝突・酸素藻・ゲート流向の不整合を検出する既存テストを維持
-- Editor対応のために数千の個別資産や重複生成系へ戻さない
-
-対応: **DD-087の運用継続 / 新規機能のためだけの大規模化は不要**。
-
-## スクショ品質ゲート
-
-DD-087ではP1選択地点/P2内側/P4/Gの4枚を更新したが、**P1入水とP2全景の固定アンカー2枚は前版 `1bee44d3` の参考画像のまま**。したがって今回の6枚を「全部1b13ef8の最新版」と扱わない。
-
-次の大形状品質ゲートでは対象ごとに:
-
-- 1枚 = **現行commitで撮った固定アンカー通常視点**
-- 1枚 = 内部の通常プレイ視点
-
-を基本2枚として同じ固定名へ置換する。古い同対象は蓄積しない。機能数/テスト数/完走を画質PASSにしない。
-
-対応: **DD-067**。
+対応: **DD-072**。
 
 ## 同期 / 必須ディレクティブ
 
-main HUMAN_DIRECTIONは今回の直接編集方針まで同期。active branchは前回レビューを消費済み。必須項目の状態:
+9/26 implementation commitでHUMAN_DIRECTIONが一本道→段階分岐へ更新されたため、今回mainの正本へ同期する。古い「入水直後に2〜3候補」へ戻さない。
 
-- obsolete-file cleanup: **DONE / 維持**
-- ~160m canyon/cliff enclosure: **部分前進 / DD-065・070継続**
-- rock-stair/terrace/traversal variation: **部分前進 / DD-065・068・070継続**
-- stronger ocean-entry quality: **未解消 / DD-064・058**
-- playable-density improvement: **部分前進だが品質CHANGES / DD-067**
-- quality-gate screenshot comparisons: **運用改善、ただし今回2固定アンカーは前版 / DD-067継続**
-- collision reliability: **維持**
-- PC non-interference: **維持**
-- human editor authoring: **主要配置は実装済み / 微調整運用可能**
+- obsolete-file cleanup: **維持**
+- ~160m canyon/cliff enclosure: **未解消 / DD-065・070**
+- rock-stair/terrace/traversal variation: **未解消 / DD-065・068・070**
+- stronger ocean-entry quality: **構造前進、視覚未証明 / DD-064・058・067**
+- playable-density improvement: **未解消 / DD-055・067・089**
+- quality-gate screenshot comparisons: **今回未達 / DD-067**
+- collision reliability: **PASS維持（689/0）**
+- PC non-interference: **PASS維持**
+- human editor authoring: **維持、DD-090で座標同期を補強**
 
 ## 次回 HUMAN_REVIEW 条件
 
-まだ不要。最低でも:
-
-- L1-P1の岩窓/岩橋が共通閉断面の掃引パーツではなく自然な侵食地形として読める
-- 約160m以降が同型棚のseed変形ではなく、異なる巨大主形状で包まれる
-- L1-P4が一枚盆地+装飾ではなく、複数の場所から最深部へ収束する
-- L1-G/L2-P0の連続管メッシュが解消され、実際に岩盤の隙間をかいくぐる
-- L1-P0の入水第一印象が前版より明確に改善
-- 現行commitの固定アンカー通常視点で空虚さ・模型感・規則反復が明確に減る
-- 実衝突、CI、PC非干渉を維持
+まだ不要。P0入水から最初の岩棚が通常視点で自然に読めること、共通導入が等間隔の足場列ではなく一つの海中地形として見えること、P1/P2移行で選択肢が段階的に開くこと、約160m以降の大地形とP4/G/L2-P0の模型感が減ること、現行比較スクショで前回版より明確な視覚改善が確認できること、実衝突/CI/PC非干渉を維持すること。
 
 それまでは **CHANGES / SELF_CONTINUE**。
