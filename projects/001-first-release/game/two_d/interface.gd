@@ -1,5 +1,6 @@
 extends Control
 
+const DepthMap = preload("res://game/two_d/depth_map.gd")
 const FONT = preload("res://game/ui_font.tres")
 const WHITE := Color("e2f6f2")
 const CYAN := Color("85ecd4")
@@ -16,6 +17,9 @@ func _ready() -> void:
 	start_button.add_theme_font_size_override("font_size", 22)
 	start_button.pressed.connect(game.begin)
 	add_child(start_button)
+	var depth_map := DepthMap.new()
+	depth_map.game = game
+	add_child(depth_map)
 
 
 func _process(_delta: float) -> void:
@@ -47,7 +51,7 @@ func _draw() -> void:
 	draw_rect(Rect2(0, screen.y - 43, screen.x, 43), Color(0.01, 0.04, 0.08, 0.9))
 	text(
 		Vector2(22, screen.y - 15),
-		"A D / ← → 移動   Space 浮上   E 急降下   左クリック 掘る   右クリック 岩を置く   Esc 一時停止   M 音",
+		"左クリック 移動   A D / ← → 移動   Space 浮上   E 急降下   Shift＋左 掘る   右 岩を置く   Esc 停止   M 音",
 		16
 	)
 	if game.message_time > 0 and game.started:
@@ -58,9 +62,9 @@ func _draw() -> void:
 		var center := screen * 0.5
 		text(center + Vector2(-258, -135), "DIVE DIVE", 70)
 		text(center + Vector2(-105, -91), "DEEP OCEAN", 20, CYAN)
-		text(center + Vector2(-255, -31), "横へ泳ぎ、岩を掘り、もっと深い海へ。", 24)
+		text(center + Vector2(-255, -31), "行きたい場所をクリックして、深い海へ。", 24)
 		text(center + Vector2(-255, 8), "光る藻で酸素回復。酸素切れは最後の藻へ戻ります。", 18)
-		text(center + Vector2(-255, 40), "最深部の光を目指そう。金色の遺物は寄り道のお楽しみ。", 16)
+		text(center + Vector2(-255, 40), "Shift＋左クリックで掘る。右上のマップで現在の深さを確認。", 16)
 		text(center + Vector2(-193, 176), "海から、神話と星の底へ / セーブなし", 16, Color("94b7be"))
 	elif game.paused or game.complete:
 		draw_rect(Rect2(Vector2.ZERO, screen), Color(0.01, 0.03, 0.08, 0.78))

@@ -1,19 +1,15 @@
 extends RefCounted
 ## Compact final-act places. Depth is physical prototype distance, not a fake 11km HUD.
 
+const LAYER_STARTS := [240.0, 5900.0, 8976.0, 11760.0, 16896.0, 22152.0]
+const LAYER_NAMES := ["現実海", "生物", "沈没船", "神話", "星海", "最深部"]
+
 
 static func layer(y: float) -> int:
-	if y < 5900:
-		return 1
-	if y < 8976:
-		return 2
-	if y < 11760:
-		return 3
-	if y < 16896:
-		return 4
-	if y < 22152:
-		return 5
-	return 6
+	for index in range(LAYER_STARTS.size() - 1, -1, -1):
+		if y >= LAYER_STARTS[index]:
+			return index + 1
+	return 1
 
 
 static func water_color(y: float, original: Color) -> Color:

@@ -30,6 +30,11 @@ func _draw() -> void:
 	life(visible)
 	Phenomena.paint(self, game, visible)
 	Journey.decorate(self, game, visible)
+	if game.click_swim.active:
+		var destination: Vector2 = game.click_swim.target
+		draw_arc(destination, 10, 0, TAU, 16, Color("ffdc82"), 2)
+		draw_line(destination + Vector2(-15, 0), destination + Vector2(15, 0), Color("ffdc82"), 1)
+		draw_line(destination + Vector2(0, -15), destination + Vector2(0, 15), Color("ffdc82"), 1)
 	for garden in game.markers("algae"):
 		var point: Vector2 = garden.global_position
 		if visible.grow(100).has_point(point):

@@ -98,6 +98,7 @@ func run() -> void:
 	check(not game.complete and game.depth() > 670, "Old 680m goal now leads to the wreck")
 	await final_journey()
 	await editor_and_interactions()
+	await click_controls()
 	print("2D: %d checks, failures=%d; simulated route %.1fs" % [checks, failures, elapsed])
 	game.queue_free()
 	await process_frame
@@ -318,3 +319,109 @@ func photograph(label: String) -> void:
 	await RenderingServer.frame_post_draw
 	DirAccess.make_dir_recursive_absolute("res://artifacts/two-d")
 	root.get_texture().get_image().save_png("res://artifacts/two-d/" + label + ".png")
+
+
+func click_controls() -> void:
+	# Local water fixture with a solid wall; use real CharacterBody2D and mouse events.
+	game.complete = false
+	game.paused = false
+	game.rescuing = false
+	for y in range(20, 46):
+		for x in range(80, 106):
+			game.terrain.set_cell(Vector2i(x, y), 1 if x == 100 else 0)
+		game.rebuild_row(y)
+	game.player.position = Vector2(90, 33) * 24
+	game.player.velocity = Vector2.ZERO
+	game.oxygen = 60
+	await physics_frame
+	game.camera.position = game.player.position + Vector2(0, 85)
+	game.camera.force_update_scroll()
+	var destination: Vector2 = game.player.position + Vector2(120, -90)
+	await mouse_at(destination)
+	check(game.click_swim.active, "A real left click starts swimming")
+	check(
+		game.click_swim.target.distance_to(destination) < 1, "Click respects camera world transform"
+	)
+	for frame in range(300):
+		await physics_frame
+		game.control_step(1.0 / 60.0, 0, false, false)
+		if not game.click_swim.active:
+			break
+	check(
+		game.player.position.distance_to(destination) < 15,
+		"Click swims sideways and upward to target"
+	)
+	check(not game.click_swim.active, "Arrival ends the click command")
+	check(game.oxygen < 60, "Click swimming consumes oxygen")
+	var start_y: float = game.player.position.y
+	for frame in range(30):
+		await physics_frame
+		game.control_step(1.0 / 60.0, 0, false, false)
+	check(game.player.position.y > start_y, "Natural sinking resumes after arrival")
+	await mouse_at(game.player.position + Vector2(25, 85))
+	for frame in range(200):
+		await physics_frame
+		game.control_step(1.0 / 60.0, 0, false, false)
+		if not game.click_swim.active:
+			break
+	check(
+		game.player.position.distance_to(game.click_swim.target) < 15,
+		"Click also descends to target"
+	)
+	await mouse_at(Vector2(103, 34) * 24)
+	for frame in range(400):
+		await physics_frame
+		game.control_step(1.0 / 60.0, 0, false, false)
+		if not game.click_swim.active:
+			break
+	check(game.player.position.x < 2400, "Click cannot cross a solid wall")
+	check(not game.click_swim.active, "Blocked click cancels instead of pushing forever")
+	await mouse_at(game.player.position - Vector2(90, 50))
+	game.control_step(1.0 / 60.0, -1, false, false)
+	check(not game.click_swim.active, "Keyboard immediately overrides click")
+	await mouse_at(game.player.position - Vector2(30, 30), true)
+	check(
+		not game.click_swim.active and game.tool_button == 1,
+		"Shift click selects digging, not movement"
+	)
+	var release := InputEventMouseButton.new()
+	release.button_index = MOUSE_BUTTON_LEFT
+	release.pressed = false
+	root.push_input(release, true)
+	Input.flush_buffered_events()
+	await process_frame
+	check(game.tool_button == 0, "Mouse release clears the mining tool")
+	var map_click := InputEventMouseButton.new()
+	map_click.button_index = MOUSE_BUTTON_LEFT
+	map_click.pressed = true
+	map_click.position = Vector2(root.get_visible_rect().size.x - 80, 140)
+	root.push_input(map_click, true)
+	Input.flush_buffered_events()
+	await process_frame
+	check(not game.click_swim.active, "Depth map consumes clicks without steering")
+	game.click_swim.request(game.player.position - Vector2(60, 0))
+	game.start_rescue()
+	check(not game.click_swim.active, "Rescue clears click destination")
+	var map = load("res://game/two_d/depth_map.gd")
+	check(map.progress(240, game.goal_position().y) == 0, "Depth map starts at sea surface")
+	check(
+		map.progress(game.goal_position().y, game.goal_position().y) == 1,
+		"Depth map uses actual goal"
+	)
+	check(
+		is_equal_approx(
+			map.progress((240 + game.goal_position().y) / 2, game.goal_position().y), 0.5
+		),
+		"Map midpoint is half the journey"
+	)
+
+
+func mouse_at(world: Vector2, shift: bool = false) -> void:
+	var event := InputEventMouseButton.new()
+	event.button_index = MOUSE_BUTTON_LEFT
+	event.pressed = true
+	event.shift_pressed = shift
+	event.position = game.get_canvas_transform() * world
+	root.push_input(event, true)
+	Input.flush_buffered_events()
+	await process_frame

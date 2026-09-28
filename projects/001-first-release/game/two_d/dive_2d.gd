@@ -4,6 +4,7 @@ const Terrain = preload("res://game/two_d/terrain.gd")
 const Art = preload("res://game/two_d/art.gd")
 const Encounters = preload("res://game/two_d/encounters.gd")
 const Sound = preload("res://game/two_d/sound.gd")
+const ClickSwim = preload("res://game/two_d/click_swim.gd")
 const Interface = preload("res://game/two_d/interface.gd")
 const SINK := 70.0
 const DIVE := 190.0
@@ -11,6 +12,8 @@ const ASCEND := 130.0
 const SWIM := 170.0
 const OXYGEN_SECONDS := 65.0
 
+var click_swim := ClickSwim.new()
+var tool_button := 0
 var terrain: RefCounted
 var layout: Node2D
 var encounters: Node
@@ -118,9 +121,29 @@ func _notification(what: int) -> void:
 		paused = true
 
 
+func _input(event: InputEvent) -> void:
+	if event is InputEventMouseButton and not event.pressed:
+		if event.button_index == tool_button:
+			tool_button = 0
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	if not started or paused or complete or rescuing:
+		return
+	if event is InputEventMouseButton and event.pressed:
+		if event.button_index == MOUSE_BUTTON_LEFT and not event.shift_pressed:
+			tool_button = 0
+			click_swim.request(get_canvas_transform().affine_inverse() * event.position)
+		elif event.button_index in [MOUSE_BUTTON_LEFT, MOUSE_BUTTON_RIGHT]:
+			click_swim.active = false
+			tool_button = event.button_index
+
+
 func _unhandled_key_input(event: InputEvent) -> void:
 	if not event.is_pressed() or event.is_echo():
 		return
+	if event.keycode in [KEY_A, KEY_D, KEY_LEFT, KEY_RIGHT, KEY_SPACE, KEY_E, KEY_ESCAPE]:
+		click_swim.active = false
 	if event.keycode == KEY_ENTER and not started:
 		begin()
 	elif event.keycode == KEY_ESCAPE and started:
@@ -142,23 +165,41 @@ func _physics_process(delta: float) -> void:
 		horizontal += float(Input.is_physical_key_pressed(KEY_RIGHT))
 		horizontal -= float(Input.is_physical_key_pressed(KEY_A))
 		horizontal -= float(Input.is_physical_key_pressed(KEY_LEFT))
-		step(
+		control_step(
 			delta,
 			clampf(horizontal, -1, 1),
 			Input.is_physical_key_pressed(KEY_SPACE),
 			Input.is_physical_key_pressed(KEY_E)
 		)
 		if mining_cooldown <= 0 and not rescuing:
-			if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+			if (
+				tool_button == MOUSE_BUTTON_LEFT
+				and Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT)
+				and Input.is_physical_key_pressed(KEY_SHIFT)
+			):
 				edit_tile(get_global_mouse_position(), false)
-			elif Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
+			elif (
+				tool_button == MOUSE_BUTTON_RIGHT
+				and Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT)
+			):
 				edit_tile(get_global_mouse_position(), true)
 	camera.position = camera.position.lerp(player.position + Vector2(0, 85), 1 - exp(-delta * 5))
 	art.queue_redraw()
 	sound.observe(self, delta)
 
 
-func step(delta: float, horizontal: float, ascend: bool, dive: bool) -> void:
+func control_step(delta: float, horizontal: float, ascend: bool, dive: bool) -> void:
+	if horizontal != 0 or ascend or dive:
+		click_swim.active = false
+	if click_swim.active:
+		click_swim.drive(self, delta)
+	else:
+		step(delta, horizontal, ascend, dive)
+
+
+func step(
+	delta: float, horizontal: float, ascend: bool, dive: bool, vertical_command: float = NAN
+) -> void:
 	if complete or paused:
 		return
 	play_seconds += delta
@@ -174,6 +215,8 @@ func step(delta: float, horizontal: float, ascend: bool, dive: bool) -> void:
 	elif dive:
 		target_y = DIVE
 	if underwater:
+		if not is_nan(vertical_command):
+			target_y = vertical_command
 		player.velocity.y = move_toward(player.velocity.y, target_y, 550 * delta)
 	else:
 		player.velocity.y += 650 * delta
@@ -215,9 +258,11 @@ func step(delta: float, horizontal: float, ascend: bool, dive: bool) -> void:
 		start_rescue()
 	if player.position.distance_to(goal_position()) < 55:
 		complete = true
+		click_swim.active = false
 
 
 func start_rescue() -> void:
+	click_swim.active = false
 	rescue_count += 1
 	rescuing = true
 	oxygen = 0
