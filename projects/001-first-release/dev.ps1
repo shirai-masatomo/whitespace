@@ -1,4 +1,4 @@
-param([ValidateSet('check', 'evaluate', 'test', 'lint', 'format', 'build', 'visual', 'visual-reef', 'visual-discovery', 'visual-playground', 'visual-entry', 'visual-canyon', 'visual-cove', 'visual-massif', 'visual-headland', 'visual-l1', 'visual-seabed', 'visual-biology', 'benchmark', 'gpu-smoke', 'play', 'editor')][string]$Task = 'check', [ValidateSet('windows','windows-preview','windows-real','windows-agent')][string]$BuildFolder = 'windows-agent', [ValidateSet('forward_plus','gl_compatibility')][string]$Renderer = 'forward_plus', [ValidateCount(0,4)][ValidatePattern('^[a-zA-Z0-9-]+$')][string[]]$Capture = @(), [switch]$RecordSequence)
+param([ValidateSet('check', 'evaluate', 'test', 'lint', 'format', 'build', 'visual', 'visual-reef', 'visual-discovery', 'visual-playground', 'visual-entry', 'visual-canyon', 'visual-cove', 'visual-massif', 'visual-headland', 'visual-l1', 'visual-seabed', 'visual-biology', 'benchmark', 'gpu-smoke', 'play', 'play-2d', 'test-2d', 'editor')][string]$Task = 'check', [ValidateSet('windows','windows-preview','windows-real','windows-agent')][string]$BuildFolder = 'windows-agent', [ValidateSet('forward_plus','gl_compatibility')][string]$Renderer = 'forward_plus', [ValidateCount(0,4)][ValidatePattern('^[a-zA-Z0-9-]+$')][string[]]$Capture = @(), [switch]$RecordSequence)
 $ErrorActionPreference = 'Stop'
 $projectRoot = $PSScriptRoot
 $buildRoot = Join-Path $projectRoot ('build/' + $BuildFolder)
@@ -46,6 +46,10 @@ try {
     }
     if ($Task -eq 'play') {
         & $godot --path $projectRoot --rendering-method $Renderer
+        exit $LASTEXITCODE
+    }
+    if ($Task -eq 'play-2d') {
+        & $godot --path $projectRoot --rendering-method gl_compatibility -- --two-d
         exit $LASTEXITCODE
     }
     if ($Task -eq 'editor') {
@@ -103,8 +107,11 @@ try {
         & './.tools/venv/Scripts/python.exe' -m pip check
         if ($LASTEXITCODE -ne 0) { throw 'Development dependency check failed' }
     }
-    if ($Task -in @('evaluate', 'test', 'build', 'check')) {
+    if ($Task -in @('evaluate', 'test', 'test-2d', 'build', 'check')) {
         Invoke-Godot 'import' @('--headless', '--editor', '--import')
+    }
+    if ($Task -in @('test-2d', 'check')) {
+        Invoke-Godot 'two-d' @('--headless', '--fixed-fps', '60', '--script', 'tests/test_two_d.gd')
     }
     if ($Task -in @('test', 'check')) {
         Invoke-Godot 'rules' @('--headless', '--script', 'tests/test_rules.gd')
@@ -131,6 +138,7 @@ try {
         Invoke-Godot 'build' @('--headless', '--export-release', 'Windows Desktop', (Join-Path $buildRoot 'DIVE DIVE.exe'))
         Copy-Item assets/fonts/OFL.txt (Join-Path $buildRoot FONT_LICENSE.txt) -Force
         Copy-Item assets/GODOT_COPYRIGHT.txt (Join-Path $buildRoot GODOT_COPYRIGHT.txt) -Force
+        Copy-Item tools/Play-2D.cmd (Join-Path $buildRoot Play-2D.cmd) -Force
         Copy-Item tools/PLAY.txt (Join-Path $buildRoot PLAY.txt) -Force
         Copy-Item tools/Play-Compatibility.ps1 (Join-Path $buildRoot Play-Compatibility.ps1) -Force
         $smokeLog = Join-Path $projectRoot 'artifacts/export-smoke.log'
@@ -140,6 +148,12 @@ try {
         if ($process.ExitCode -ne 0) { throw "Export failed to start: $($process.ExitCode)" }
         if (-not (Test-Path $smokeLog)) { throw 'Export did not produce a smoke log' }
         if (Select-String -Path $smokeLog -Pattern 'SCRIPT ERROR:|ERROR:' -Quiet) { throw 'Export smoke test logged errors' }
+        $twoDLog = Join-Path $projectRoot 'artifacts/export-2d-smoke.log'
+        $twoD = Start-Process -FilePath $exe -ArgumentList @('--headless', '--rendering-method', 'gl_compatibility', '--quit-after', '20', '--log-file', ('"' + $twoDLog + '"'), '--', '--two-d', '--smoke-test') -WindowStyle Hidden -PassThru
+        if (-not $twoD.WaitForExit(30000)) { $twoD.Kill(); throw '2D export smoke timed out' }
+        if ($twoD.ExitCode -ne 0 -or -not (Test-Path $twoDLog)) { throw '2D export failed to start' }
+        if (Select-String -Path $twoDLog -Pattern 'SCRIPT ERROR:|ERROR:' -Quiet) { throw '2D export logged errors' }
+        if (-not (Select-String -Path $twoDLog -Pattern 'DIVE DIVE 2D ready' -Quiet)) { throw '2D export started the wrong scene' }
         Compress-Archive -Path (Join-Path $buildRoot '*') -DestinationPath build/DIVE-DIVE-windows.zip -Force
         Write-Output "Windows build: $exe"
     }
