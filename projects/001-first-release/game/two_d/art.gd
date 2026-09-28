@@ -2,11 +2,23 @@ extends Node2D
 ## Original code-drawn pixel art; no Terraria assets or copied world layout.
 
 const Phenomena = preload("res://game/two_d/phenomena.gd")
+const Atmosphere = preload("res://game/two_d/atmosphere.gd")
 const Terrain = preload("res://game/two_d/terrain.gd")
 const BLUE := Color("8cf4ef")
 const GOLD := Color("ffcf85")
 
 var game: Node2D
+var glow_texture: ImageTexture
+
+
+func _ready() -> void:
+	var source := Image.create(64, 64, false, Image.FORMAT_RGBA8)
+	for y in range(64):
+		for x in range(64):
+			var distance := Vector2(x - 31.5, y - 31.5).length() / 31.5
+			var alpha := pow(maxf(0.0, 1.0 - distance), 2.4)
+			source.set_pixel(x, y, Color(1, 1, 1, alpha))
+	glow_texture = ImageTexture.create_from_image(source)
 
 
 func _draw() -> void:
@@ -19,20 +31,18 @@ func _draw() -> void:
 	for garden in game.markers("algae"):
 		var point: Vector2 = garden.global_position
 		if visible.grow(100).has_point(point):
-			glow(point, 78, Color(0.18, 1, 0.75, 0.035))
+			glow(point, 130, Color(0.12, 0.85, 0.61, 0.075))
+			glow(point + Vector2(0, 10), 48, Color(0.4, 1, 0.7, 0.07))
 			for strand in range(7):
 				var root := point + Vector2((strand - 3) * 7, 30)
 				plant(root, 37 + (strand * 7) % 24, strand, true)
 			for bubble in range(6):
 				var rise := fmod(game.clock * 23 + bubble * 14, 88)
-				draw_arc(
+				Atmosphere.bubble(
+					self,
 					point + Vector2(sin(rise * 0.09 + bubble) * 22, 20 - rise),
 					2 + bubble % 3,
-					0,
-					TAU,
-					8,
-					Color(0.45, 1, 0.88, 0.6),
-					1
+					Color(0.45, 1, 0.88, 0.6 * (1 - rise / 105))
 				)
 	for index in range(game.markers("relic").size()):
 		var point: Vector2 = game.markers("relic")[index].global_position
@@ -51,6 +61,7 @@ func _draw() -> void:
 			)
 			draw_line(point + Vector2(0, -9), point + Vector2(0, 6), Color.WHITE, 2)
 	goal()
+	Atmosphere.motes(self, game, visible)
 	diver()
 	if game.started and not game.paused and not game.complete:
 		var at: Vector2i = game.terrain.tile_at(get_global_mouse_position())
@@ -60,14 +71,7 @@ func _draw() -> void:
 
 
 func background(area: Rect2) -> void:
-	for y in range(int(area.position.y) - 24, int(area.end.y) + 24, 24):
-		var deep := clampf((y - Terrain.SURFACE) / 5500.0, 0, 1)
-		var color := Color("146985").lerp(Color("080f2c"), deep)
-		if y > 5900:
-			color = Color("040917")
-		if y < Terrain.SURFACE:
-			color = Color("96dce0")
-		draw_rect(Rect2(area.position.x, y, area.size.x, 25), color)
+	Atmosphere.water(self, game, area)
 	# Background geology is darker and displaced to give the cave a second depth plane.
 	for i in range(18):
 		var x := i * 240.0 + sin(i * 6.7) * 70
@@ -85,34 +89,13 @@ func background(area: Rect2) -> void:
 			),
 			Color(0.025, 0.10, 0.20, 0.33)
 		)
-	if area.position.y < 850:
-		for i in range(7):
-			var x := 980 + i * 85.0 + sin(game.clock * 0.2 + i) * 12
-			draw_colored_polygon(
-				PackedVector2Array(
-					[
-						Vector2(x, Terrain.SURFACE),
-						Vector2(x + 17, Terrain.SURFACE),
-						Vector2(x - 70, 990),
-						Vector2(x - 190, 990)
-					]
-				),
-				Color(0.7, 1, 0.86, 0.035)
-			)
-		for x in range(0, Terrain.WIDTH * Terrain.TILE, 8):
-			var wave := sin(x * 0.026 + game.clock * 1.5) * 3
-			draw_rect(Rect2(x, Terrain.SURFACE + wave, 8, 3), Color("a5ffed"))
-		draw_circle(Vector2(1390, 55), 27, Color("fff5c2"))
-		glow(Vector2(1390, 55), 65, Color(1, 1, 0.7, 0.035))
-	# Constant density, deterministic locations: subtle drifting marine snow.
-	for i in range(360):
-		var x := fposmod(i * 179.7 + game.clock * 4, Terrain.WIDTH * Terrain.TILE)
-		var y := 250 + fposmod(i * 67.1 - game.clock * 8, 8500)
-		if area.has_point(Vector2(x, y)):
-			draw_rect(Rect2(x, y, 2, 2), Color(0.6, 0.95, 1, 0.25))
 
 
 func land(area: Rect2) -> void:
+	var lamps: Array[Vector2] = []
+	for marker in game.markers("orb"):
+		if area.grow(160).has_point(marker.global_position):
+			lamps.append(marker.global_position)
 	var start: Vector2i = game.terrain.tile_at(area.position) - Vector2i.ONE
 	var end: Vector2i = game.terrain.tile_at(area.end) + Vector2i.ONE
 	for y in range(maxi(0, start.y), mini(Terrain.HEIGHT, end.y + 1)):
@@ -128,20 +111,34 @@ func land(area: Rect2) -> void:
 			if cell == 3:
 				color = Color("9a9872").lerp(Color("4b686b"), y / 190.0)
 				if y > 220:
-					color = Color("93896e")
+					color = Color("968c72").lightened(float(hash_value % 5) * 0.015)
 			if cell == 1:
 				color = Color("253743")
 			if y > 245:
 				var light := clampf(1 - point.distance_to(game.player.position) / 650, 0.16, 0.75)
 				color = color.darkened(1 - light)
+				for lamp in lamps:
+					var falloff := pow(maxf(0, 1 - point.distance_to(lamp) / 170), 2)
+					color = color.lerp(Color("235769"), falloff * 0.5)
 			draw_rect(Rect2(point, Vector2.ONE * Terrain.TILE), color)
 			draw_rect(
 				Rect2(point + Vector2(3 + hash_value % 8, 7), Vector2(9, 2)), color.lightened(0.04)
 			)
+			if cell == 3:
+				for grain in range(3):
+					var offset := Vector2(
+						(hash_value + grain * 7) % 21, (hash_value * 3 + grain * 11) % 20
+					)
+					draw_rect(Rect2(point + offset, Vector2(2, 1)), color.lightened(0.11))
 			if hash_value % 3 == 0 and cell != 3:
 				draw_line(point + Vector2(16, 0), point + Vector2(8, 10), color.darkened(0.25), 1)
 			if game.terrain.get_cell(at + Vector2i.UP) == 0:
-				draw_rect(Rect2(point, Vector2(24, 3)), color.lightened(0.25))
+				draw_rect(Rect2(point, Vector2(24, 3)), color.lightened(0.18))
+				if y < 55 and hash_value % 3 == 0:
+					var glint := 0.09 + sin(game.clock * 1.4 + x * 0.6) * 0.07
+					draw_rect(
+						Rect2(point + Vector2(3, 0), Vector2(12, 2)), Color(0.5, 1, 0.87, glint)
+					)
 				if y > 12 and y < 239 and hash_value % 3 == 0:
 					plant(point + Vector2(10, 0), 20 + hash_value % 40, x, false)
 				elif y > 15 and y < 239 and hash_value % 4 == 0:
@@ -167,8 +164,12 @@ func plant(root: Vector2, length: float, phase: float, oxygen: bool) -> void:
 	var color := Color("52e6ab") if oxygen else Color("318c79")
 	var prior := root
 	for i in range(1, 7):
-		var point := root + Vector2(sin(game.clock * 1.3 + phase + i * 0.6) * i, -i * length / 6)
-		draw_line(prior, point, color, 3)
+		var point := (
+			(root + Vector2(sin(game.clock * 1.3 + phase + i * 0.6) * i, -i * length / 6))
+			. snapped(Vector2(2, 2))
+		)
+		draw_line(prior, point, color.darkened(0.2), 4)
+		draw_line(prior - Vector2(1, 0), point - Vector2(1, 0), color, 2)
 		var side := 1 if i % 2 == 0 else -1
 		draw_line(point, point + Vector2(side * 7, -4), color.lightened(0.07), 3)
 		prior = point
@@ -209,10 +210,11 @@ func life(area: Rect2) -> void:
 
 
 func glow(point: Vector2, radius: float, color: Color) -> void:
-	for i in range(12, 0, -1):
-		var soft := color
-		soft.a *= 0.36
-		draw_circle(point, radius * i / 12, soft)
+	var tint := color
+	tint.a = minf(color.a * 9.0, 0.8)
+	draw_texture_rect(
+		glow_texture, Rect2(point - Vector2.ONE * radius, Vector2.ONE * radius * 2), false, tint
+	)
 
 
 func goal() -> void:
@@ -247,12 +249,9 @@ func diver() -> void:
 	if point.y > Terrain.SURFACE:
 		for i in range(5):
 			var rise := fmod(game.clock * 35 + i * 10, 52)
-			draw_arc(
+			Atmosphere.bubble(
+				self,
 				point + Vector2(9 * flip + sin(i + rise * 0.1) * 3, -15 - rise),
-				2,
-				0,
-				TAU,
-				8,
-				Color(0.6, 1, 1, 1 - rise / 52),
-				1
+				2 + i % 2,
+				Color(0.6, 1, 1, 0.75 * (1 - rise / 52))
 			)
