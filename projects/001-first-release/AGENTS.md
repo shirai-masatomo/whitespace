@@ -1,6 +1,6 @@
 # DIVE DIVEの作業開始
 
-このディレクトリに適用。高速試作フェーズ、定期再開はPAUSED。
+このディレクトリに適用。**2Dが主開発対象、3D開発STOPPED**。高速試作フェーズ、定期再開PAUSED。通常EXE/check/CIは2D。3D専用タスクや重い全3D回帰を再開しない。
 
 1. mainの正本2レビューと会話の最新指示を確認。PROJECT_STATE/TASKS/AUTONOMY/AI_REVIEWを読み、Git/CIと他作業の競合を確認する。
 2. **L=Layer、P=層内Phase、G=層間Gate**。HUMAN_DIRECTIONの構成を正本とする。ユーザー指定のID、なければTASKSから1フェーズを選び、隣接接続以外へ拡散しない。

@@ -7,7 +7,7 @@ WhiteSpaceは、**ゲーム・小説・映像・ARG・仮想現実・Webなど�
 ## プロジェクト
 
 - [DIVE DIVE](projects/001-first-release/README.md)
-  深い海底へ潜る3D高難易度アクション。自然沈降・足場・酸素を核にしたWindows向け300m試作。Forward+の光・自然足場・主人公・潮流を自律改善し、リアル層Vertical Sliceを制作中。
+  深い海底へ潜る2D水中探索ゲーム。地形・酸素・採掘を核に、海上から砂海底、暗い生物層、約680mの巨大タコ遭遇まで制作中。3D版は開発停止・保存、定期再開はPAUSED。
 
 - [言語ジェンガ（仮）](projects/language-jenga/README.md)
   これまでWhiteSpaceで進めてきた「宥めよ」、会話ゲーム、intent辞書、言語/関係性の実験を引き継ぐ既存プロジェクト。

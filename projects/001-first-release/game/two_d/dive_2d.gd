@@ -2,6 +2,8 @@ extends Node2D
 
 const Terrain = preload("res://game/two_d/terrain.gd")
 const Art = preload("res://game/two_d/art.gd")
+const Encounters = preload("res://game/two_d/encounters.gd")
+const Sound = preload("res://game/two_d/sound.gd")
 const Interface = preload("res://game/two_d/interface.gd")
 const SINK := 70.0
 const DIVE := 190.0
@@ -9,7 +11,10 @@ const ASCEND := 130.0
 const SWIM := 170.0
 const OXYGEN_SECONDS := 65.0
 
-var terrain = Terrain.new()
+var terrain: RefCounted
+var layout: Node2D
+var encounters: Node
+var sound: Node
 var player: CharacterBody2D
 var camera: Camera2D
 var art: Node2D
@@ -33,7 +38,9 @@ var message_time := 5.0
 
 
 func _ready() -> void:
-	get_window().title = "DIVE DIVE — 2D prototype"
+	get_window().title = "DIVE DIVE"
+	layout = get_node("OceanLayout")
+	terrain = Terrain.new(layout)
 	if not automated and DisplayServer.get_name() != "headless":
 		get_window().unfocusable = false
 		get_window().grab_focus()
@@ -60,6 +67,11 @@ func _ready() -> void:
 	art.set_script(Art)
 	art.game = self
 	add_child(art)
+	encounters = Encounters.new()
+	encounters.game = self
+	add_child(encounters)
+	sound = Sound.new()
+	add_child(sound)
 	var canvas := CanvasLayer.new()
 	add_child(canvas)
 	var interface := Control.new()
@@ -111,12 +123,16 @@ func _unhandled_key_input(event: InputEvent) -> void:
 		begin()
 	elif event.keycode == KEY_ESCAPE and started:
 		paused = not paused
+	elif event.keycode == KEY_M:
+		sound.muted = not sound.muted
 	elif event.keycode == KEY_R and (paused or complete):
 		get_tree().reload_current_scene()
 
 
 func _physics_process(delta: float) -> void:
-	clock += delta
+	if not paused:
+		clock += delta
+		encounters.update(clock)
 	message_time = maxf(0, message_time - delta)
 	mining_cooldown = maxf(0, mining_cooldown - delta)
 	if started and not paused and not complete and not automated:
@@ -137,6 +153,7 @@ func _physics_process(delta: float) -> void:
 				edit_tile(get_global_mouse_position(), true)
 	camera.position = camera.position.lerp(player.position + Vector2(0, 85), 1 - exp(-delta * 5))
 	art.queue_redraw()
+	sound.observe(self, delta)
 
 
 func step(delta: float, horizontal: float, ascend: bool, dive: bool) -> void:
@@ -145,7 +162,9 @@ func step(delta: float, horizontal: float, ascend: bool, dive: bool) -> void:
 	if rescuing:
 		advance_rescue(delta)
 		return
-	var underwater := player.position.y > Terrain.SURFACE + 8
+	var underwater: bool = (
+		player.position.y > Terrain.SURFACE + 8 and not encounters.air_at(player.position)
+	)
 	var target_y := SINK
 	if ascend:
 		target_y = -ASCEND
@@ -160,31 +179,38 @@ func step(delta: float, horizontal: float, ascend: bool, dive: bool) -> void:
 	player.velocity.x = move_toward(player.velocity.x, horizontal * SWIM, 800 * delta)
 	if absf(horizontal) > 0.1:
 		facing = signf(horizontal)
+	var flow: Vector2 = encounters.current_at(player.position) if underwater else Vector2.ZERO
+	player.velocity += flow
 	player.move_and_slide()
+	# The current is a field, not cumulative acceleration.
+	player.velocity -= flow
 	if underwater:
 		oxygen -= 100.0 / OXYGEN_SECONDS * delta * (2.5 if dive and not ascend else 1.0)
 	else:
 		oxygen = 100
-		checkpoint = Terrain.SPAWN
+		checkpoint = player.position
 		breadcrumbs.clear()
 	if breadcrumbs.is_empty() or breadcrumbs.back().distance_to(player.position) > 22:
 		breadcrumbs.append(player.position)
-	for garden in Terrain.GARDENS:
-		var point: Vector2 = garden * Terrain.TILE
-		if player.position.distance_to(point) < 40:
+	for garden in markers():
+		if garden.kind not in ["algae", "orb", "bubble"]:
+			continue
+		var point: Vector2 = garden.global_position
+		var refill_radius: float = garden.extent.x if garden.kind == "bubble" else 40.0
+		if player.position.distance_to(point) < refill_radius:
 			if oxygen < 92:
 				say("酸素が満タンになった。ここからもう少し深くへ")
 			oxygen = 100
 			checkpoint = point
 			breadcrumbs.clear()
-	for index in range(Terrain.RELICS.size()):
+	for index in range(markers("relic").size()):
 		if not collected.has(index):
-			if player.position.distance_to(Terrain.RELICS[index] * Terrain.TILE) < 35:
+			if player.position.distance_to(markers("relic")[index].global_position) < 35:
 				collected[index] = true
 				say("海の記憶を発見！  %d / 3" % collected.size())
 	if oxygen <= 0:
 		start_rescue()
-	if player.position.distance_to(Terrain.GOAL) < 55:
+	if player.position.distance_to(goal_position()) < 55:
 		complete = true
 
 
@@ -234,6 +260,9 @@ func edit_tile(point: Vector2, placing: bool) -> bool:
 		stones -= 1
 	else:
 		if value < 2:
+			if value == 1:
+				say("硬い岩盤は掘れません。下へ続く隙間を探そう")
+				mining_cooldown = 0.4
 			return false
 		terrain.set_cell(at, 0)
 		stones += 1
@@ -243,10 +272,13 @@ func edit_tile(point: Vector2, placing: bool) -> bool:
 
 
 func safe_to_place(center: Vector2) -> bool:
-	if center.distance_to(player.position) < 38 or center.distance_to(Terrain.GOAL) < 60:
+	if center.distance_to(player.position) < 38 or center.distance_to(goal_position()) < 60:
 		return false
-	for garden in Terrain.GARDENS:
-		if center.distance_to(garden * Terrain.TILE) < 60:
+	for garden in markers():
+		if (
+			garden.kind in ["algae", "orb", "air", "bubble"]
+			and center.distance_to(garden.global_position) < 60
+		):
 			return false
 	for crumb in breadcrumbs:
 		if center.distance_to(crumb) < 32:
@@ -261,3 +293,15 @@ func say(text: String) -> void:
 
 func depth() -> int:
 	return maxi(0, int((player.position.y - Terrain.SURFACE) / 12))
+
+
+func markers(kind: String = "") -> Array:
+	var result: Array = []
+	for marker in layout.get_node("Landmarks").get_children():
+		if kind.is_empty() or marker.kind == kind:
+			result.append(marker)
+	return result
+
+
+func goal_position() -> Vector2:
+	return markers("goal")[0].global_position

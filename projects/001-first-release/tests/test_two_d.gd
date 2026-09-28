@@ -26,11 +26,9 @@ func run() -> void:
 	root.add_child(game)
 	await physics_frame
 	await physics_frame
-	# Walk off the shore using the same controller as the real player.
 	for frame in range(180):
 		await tick(1, false, false)
 	check(game.player.position.y > Terrain.SURFACE, "Walk from shore into the sea")
-	await photograph("entry")
 	var start_y: float = game.player.position.y
 	for frame in range(30):
 		await tick(0, true, false)
@@ -39,25 +37,13 @@ func run() -> void:
 	for frame in range(60):
 		await tick(0, false, true)
 	check(before - game.oxygen > 3.5, "Fast dive consumes more oxygen")
-	for target in [
-		Vector2(58, 25),
-		Vector2(52, 45),
-		Vector2(30, 62),
-		Vector2(32, 65),
-		Vector2(47, 87),
-		Vector2(63, 109)
-	]:
-		check(await swim_to(target), "Continuous input route to %s" % target)
-		if failures > 0:
-			break
-	check(game.collected.has(0), "Optional cave relic is collected by contact")
-	check(game.oxygen > 95, "Algae refill instantly")
-	await photograph("cave")
+	for point in [Vector2(58, 25), Vector2(55, 46), Vector2(64, 73)]:
+		check(await swim_to(point), "Shared introduction to %s" % point)
 	await mining()
-	# A meaningful failure after leaving a safe spot; movement retraces recorded passage.
+	# Exhaustion loses depth; the game remains in the same scene.
 	var safe: Vector2 = game.checkpoint
 	for frame in range(90):
-		await tick(0, false, true)
+		await tick(1, false, true)
 	game.oxygen = 0.01
 	await tick(0, false, false)
 	check(game.rescuing, "Oxygen exhaustion starts seamless rescue")
@@ -67,16 +53,97 @@ func run() -> void:
 			break
 	check(
 		not game.rescuing and game.player.position.distance_to(safe) < 2,
-		"Rescue returns to the last algae without reloading"
+		"Rescue returns to last refill without reloading"
 	)
 	check(game.oxygen == 100, "Rescue restores oxygen")
-	for target in [Vector2(48, 132), Vector2(65, 151), Vector2(58, 174), Vector2(58, 176)]:
-		check(await swim_to(target), "Deep route to %s" % target)
-	check(game.complete, "The final light completes the dive")
+	for point in [Vector2(42, 100), Vector2(35, 109), Vector2(60, 124), Vector2(37, 144)]:
+		check(await swim_to(point), "Cliff / inside route %s" % point)
+	check(game.encounters.air_at(game.player.position), "Swim into an air-filled cave")
+	for frame in range(90):
+		await tick(0, false, false)
+	check(game.player.is_on_floor(), "Stand on the air cave floor")
+	check(game.oxygen == 100, "Air cave is safe to breathe")
+	for point in [
+		Vector2(35, 145),
+		Vector2(38, 152),
+		Vector2(58, 179),
+		Vector2(71, 194),
+		Vector2(82, 192),
+		Vector2(69, 203),
+		Vector2(58, 227),
+		Vector2(68, 234)
+	]:
+		check(await swim_to(point), "Terraces / fault / seafloor %s" % point)
+	check(game.collected.size() == 3, "Three optional discoveries are reachable")
+	check(not game.complete, "Old 330m light is no longer the end")
+	await photograph("seabed")
+	for point in [Vector2(77, 238), Vector2(80, 247), Vector2(73, 262)]:
+		check(await swim_to(point), "Seafloor converges through the rift %s" % point)
+	check(
+		game.encounters.current_at(Vector2(81, 244) * 24).y > 20,
+		"Gate has a physical downward current"
+	)
+	check(game.encounters.stage == 0, "Do not reveal the creature inside the narrows")
+	await photograph("narrows")
+	for point in [Vector2(78, 275), Vector2(70, 287), Vector2(74, 300), Vector2(63, 317)]:
+		check(await swim_to(point), "Follow water orbs through darkness %s" % point)
+	check(game.encounters.stage >= 1, "A shadow precedes the creature reveal")
+	for point in [Vector2(76, 331), Vector2(70, 336)]:
+		check(await swim_to(point), "Open chamber approach %s" % point)
+	check(game.encounters.stage == 3, "The octopus is recognized after shadow and arms")
+	await photograph("encounter")
+	check(await swim_to(Vector2(58, 350)), "Reach final water sphere")
+	check(game.complete and game.depth() > 670, "L2-P2 completion near 680m")
+	await editor_and_interactions()
 	print("2D: %d checks, failures=%d; simulated route %.1fs" % [checks, failures, elapsed])
 	game.queue_free()
 	await process_frame
 	quit(1 if failures > 0 else 0)
+
+
+func editor_and_interactions() -> void:
+	var jelly = game.markers("jelly")[0]
+	game.encounters.update(0)
+	var before: Vector2 = game.encounters.position_of(jelly)
+	game.encounters.update(1)
+	check(
+		before.distance_to(game.encounters.position_of(jelly)) > 10, "Jelly platform actually moves"
+	)
+	game.encounters.stage = 3
+	var animal = game.markers("octopus")[0]
+	var arm: Vector2 = animal.global_position + Vector2(-260, -170 + sin(game.clock) * 40)
+	check(game.encounters.current_at(arm).x < -30, "A nearby tentacle produces an escapable surge")
+	var other = SCENE.instantiate()
+	other.automated = true
+	var algae = other.get_node("OceanLayout/Landmarks/Algae0")
+	algae.position += Vector2(48, 24)
+	var saved: Vector2 = algae.position
+	root.add_child(other)
+	await physics_frame
+	check(algae.position == saved, "Editor marker Transform is not overwritten")
+	other.player.position = algae.global_position
+	other.oxygen = 10
+	other.step(1.0 / 60, 0, false, false)
+	check(other.oxygen == 100, "Moved algae refill at the saved position")
+	var original_game := game
+	game = other
+	var platform = game.markers("jelly")[0]
+	game.player.position = game.encounters.position_of(platform) + Vector2(0, -90)
+	game.player.velocity = Vector2.ZERO
+	var grounded_frames := 0
+	for frame in range(150):
+		await tick(0, false, false)
+		if game.player.is_on_floor():
+			grounded_frames += 1
+	check(grounded_frames > 40, "Land on and ride a moving jelly platform")
+	game.player.position = Vector2(64, 73) * 24
+	game.player.velocity = Vector2.ZERO
+	game.oxygen = 100
+	for point in [Vector2(75, 103), Vector2(60, 124), Vector2(69, 155), Vector2(58, 179)]:
+		check(await swim_to(point), "Outside route is also playable %s" % point)
+	game = original_game
+	other.queue_free()
+	await process_frame
 
 
 func tick(horizontal: float, ascend: bool, dive: bool) -> void:
@@ -116,7 +183,12 @@ func swim_to(tile: Vector2) -> bool:
 			if difference.length() < 18:
 				arrived = true
 				break
-			await tick(clampf(difference.x / 16, -1, 1), difference.y < -3, false)
+			var flow: Vector2 = game.encounters.current_at(game.player.position)
+			await tick(
+				clampf(difference.x / 16, -1, 1),
+				difference.y < -3,
+				flow.y < -40 and difference.y > 3
+			)
 			if game.rescuing:
 				return false
 		if not arrived:
@@ -126,6 +198,14 @@ func swim_to(tile: Vector2) -> bool:
 
 
 func clear_cell(at: Vector2i) -> bool:
+	var point := (Vector2(at) + Vector2(0.5, 0.5)) * Terrain.TILE
+	for marker in game.markers():
+		if marker.kind in ["rock", "jelly"]:
+			var margin: Vector2 = marker.extent + Vector2(10, 15)
+			if marker.kind == "jelly":
+				margin += marker.travel.abs()
+			if Rect2(marker.global_position - margin, margin * 2).has_point(point):
+				return false
 	return (
 		game.terrain.get_cell(at) == 0
 		and game.terrain.get_cell(at + Vector2i.UP) == 0

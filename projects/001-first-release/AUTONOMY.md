@@ -2,6 +2,8 @@
 
 共通方針は[WhiteSpace 自律運用](../../docs/AUTONOMY.md)。現在は高速試作、**定期自動再開はPAUSED**。過去の常設許可より最新の停止・指定範囲を優先する。
 
+**9/28以降は2D主開発、3D開発STOPPED。** 旧3Dレビューを2Dの合格根拠にしない。通常check/CIは2D、3D回帰は明示したcheck-legacyのみ。L/P/Gの体験設計は2Dへ引き継ぐ。
+
 ## 開始と対象選択
 
 1. `git fetch origin main`。mainのHUMAN_DIRECTION / EXTERNAL_AI_REVIEWを読み、作業ブランチの内容と比較する。新しい会話指示を古いmainで上書きしない。

@@ -34,6 +34,6 @@ Codex
 
 | Project | Mode | GitHub監視 | 人間への通知 |
 | --- | --- | --- | --- |
-| [DIVE DIVE](../projects/001-first-release/README.md) | 完全自律型 | 30分ごとに開発再開・Git/CI確認（常設許可あり、設定ID `dive-dive`） | 意味のある改善・失敗・進行不能・必要な人間判断。変化なしの通知は控える |
+| [DIVE DIVE](../projects/001-first-release/README.md) | 2D指定範囲を自律制作・3D開発停止 | **PAUSED**。30分再開は人間の連絡まで停止（設定ID `dive-dive`） | 意味のある改善・失敗・進行不能・必要な人間判断。変化なしの通知は控える |
 
 監視を追加・停止したらこの表だけ更新する。

@@ -32,7 +32,7 @@ jobs:
           key: dive-godot-4.7.2-windows-v1
       - name: Install verified Godot and pinned tools
         run: ./tools/setup.ps1
-      - name: Quality checks, route evaluation, Windows build and export smoke
+      - name: 2D quality, continuous dive, Windows build and export smoke
         run: ./dev.ps1 check
       - uses: actions/upload-artifact@v4
         with:

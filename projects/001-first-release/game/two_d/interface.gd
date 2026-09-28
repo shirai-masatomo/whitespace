@@ -38,11 +38,11 @@ func _draw() -> void:
 	draw_rect(Rect2(84, 62, 200, 14), Color("243a4b"))
 	var color := CYAN if game.oxygen > 25 else Color("ff986f")
 	draw_rect(Rect2(84, 62, maxf(0, game.oxygen) * 2, 14), color)
-	text(Vector2(34, 100), "岩 %d   ｜   深海の光を目指そう" % game.stones, 15)
+	text(Vector2(34, 100), "岩 %d   ｜   海底の先へ潜ろう" % game.stones, 15)
 	draw_rect(Rect2(0, screen.y - 43, screen.x, 43), Color(0.01, 0.04, 0.08, 0.9))
 	text(
 		Vector2(22, screen.y - 15),
-		"A D / ← → 移動   Space 浮上   E 急降下   左クリック 掘る   右クリック 岩を置く   Esc 一時停止",
+		"A D / ← → 移動   Space 浮上   E 急降下   左クリック 掘る   右クリック 岩を置く   Esc 一時停止   M 音",
 		16
 	)
 	if game.message_time > 0 and game.started:
@@ -52,11 +52,11 @@ func _draw() -> void:
 		draw_rect(Rect2(Vector2.ZERO, screen), Color(0.015, 0.05, 0.10, 0.73))
 		var center := screen * 0.5
 		text(center + Vector2(-258, -135), "DIVE DIVE", 70)
-		text(center + Vector2(-105, -91), "2D EXPLORATION", 20, CYAN)
+		text(center + Vector2(-105, -91), "DEEP OCEAN", 20, CYAN)
 		text(center + Vector2(-255, -31), "横へ泳ぎ、岩を掘り、もっと深い海へ。", 24)
 		text(center + Vector2(-255, 8), "光る藻で酸素回復。酸素切れは最後の藻へ戻ります。", 18)
 		text(center + Vector2(-255, 40), "深海の光に触れたら到達。金色の遺物は寄り道のお楽しみ。", 16)
-		text(center + Vector2(-193, 176), "2D試作 / 3D版とは独立 / セーブなし", 16, Color("94b7be"))
+		text(center + Vector2(-193, 176), "現実海層 → 生物層 / セーブなし", 16, Color("94b7be"))
 	elif game.paused or game.complete:
 		draw_rect(Rect2(Vector2.ZERO, screen), Color(0.01, 0.03, 0.08, 0.78))
 		var center := screen * 0.5

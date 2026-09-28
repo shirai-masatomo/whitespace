@@ -1,4 +1,4 @@
-param([ValidateSet('check', 'evaluate', 'test', 'lint', 'format', 'build', 'visual', 'visual-reef', 'visual-discovery', 'visual-playground', 'visual-entry', 'visual-canyon', 'visual-cove', 'visual-massif', 'visual-headland', 'visual-l1', 'visual-seabed', 'visual-biology', 'benchmark', 'gpu-smoke', 'play', 'play-2d', 'test-2d', 'editor')][string]$Task = 'check', [ValidateSet('windows','windows-preview','windows-real','windows-agent')][string]$BuildFolder = 'windows-agent', [ValidateSet('forward_plus','gl_compatibility')][string]$Renderer = 'forward_plus', [ValidateCount(0,4)][ValidatePattern('^[a-zA-Z0-9-]+$')][string[]]$Capture = @(), [switch]$RecordSequence)
+param([ValidateSet('check', 'check-legacy', 'test-legacy', 'evaluate', 'test', 'lint', 'format', 'build', 'visual', 'visual-reef', 'visual-discovery', 'visual-playground', 'visual-entry', 'visual-canyon', 'visual-cove', 'visual-massif', 'visual-headland', 'visual-l1', 'visual-seabed', 'visual-biology', 'benchmark', 'gpu-smoke', 'play', 'play-2d', 'test-2d', 'editor')][string]$Task = 'check', [ValidateSet('windows','windows-preview','windows-real','windows-agent','windows-2d')][string]$BuildFolder = 'windows-2d', [ValidateSet('forward_plus','gl_compatibility')][string]$Renderer = 'gl_compatibility', [ValidateCount(0,4)][ValidatePattern('^[a-zA-Z0-9-]+$')][string[]]$Capture = @(), [switch]$RecordSequence)
 $ErrorActionPreference = 'Stop'
 $projectRoot = $PSScriptRoot
 $buildRoot = Join-Path $projectRoot ('build/' + $BuildFolder)
@@ -99,7 +99,7 @@ try {
     if ($Task -eq 'visual') {
         Invoke-Godot 'visual' @('--script', 'tests/test_visual.gd')
     }
-    if ($Task -in @('lint', 'check')) {
+    if ($Task -in @('lint', 'check', 'check-legacy')) {
         & './.tools/venv/Scripts/gdformat.exe' --check game tests
         if ($LASTEXITCODE -ne 0) { throw 'Format check failed: run ./dev.ps1 format' }
         & './.tools/venv/Scripts/gdlint.exe' game tests
@@ -107,13 +107,13 @@ try {
         & './.tools/venv/Scripts/python.exe' -m pip check
         if ($LASTEXITCODE -ne 0) { throw 'Development dependency check failed' }
     }
-    if ($Task -in @('evaluate', 'test', 'test-2d', 'build', 'check')) {
+    if ($Task -in @('evaluate', 'test', 'test-2d', 'test-legacy', 'build', 'check', 'check-legacy')) {
         Invoke-Godot 'import' @('--headless', '--editor', '--import')
     }
-    if ($Task -in @('test-2d', 'check')) {
+    if ($Task -in @('test-2d', 'test', 'check')) {
         Invoke-Godot 'two-d' @('--headless', '--fixed-fps', '60', '--script', 'tests/test_two_d.gd')
     }
-    if ($Task -in @('test', 'check')) {
+    if ($Task -in @('test-legacy', 'check-legacy')) {
         Invoke-Godot 'rules' @('--headless', '--script', 'tests/test_rules.gd')
         Invoke-Godot 'scene' @('--headless', '--script', 'tests/test_scene.gd')
         Invoke-Godot 'audio' @('--headless', '--script', 'tests/test_audio.gd')
@@ -130,24 +130,26 @@ try {
         Invoke-Godot 'l1-places' @('--headless', '--script', 'tests/test_l1_places.gd')
         Invoke-Godot 'biology' @('--headless', '--script', 'tests/test_biology.gd', '--', '--full')
     }
-    if ($Task -in @('evaluate', 'check')) {
+    if ($Task -in @('evaluate', 'check-legacy')) {
         Invoke-Godot 'evaluation' @('--headless', '--script', 'tests/test_evaluation.gd')
         Invoke-Godot 'route-resilience' @('--headless', '--script', 'tests/test_route_resilience.gd')
     }
-    if ($Task -in @('build', 'check')) {
+    if ($Task -in @('build', 'check', 'check-legacy')) {
         Invoke-Godot 'build' @('--headless', '--export-release', 'Windows Desktop', (Join-Path $buildRoot 'DIVE DIVE.exe'))
         Copy-Item assets/fonts/OFL.txt (Join-Path $buildRoot FONT_LICENSE.txt) -Force
         Copy-Item assets/GODOT_COPYRIGHT.txt (Join-Path $buildRoot GODOT_COPYRIGHT.txt) -Force
+        Copy-Item tools/Play-3D-Legacy.cmd (Join-Path $buildRoot Play-3D-Legacy.cmd) -Force
         Copy-Item tools/Play-2D.cmd (Join-Path $buildRoot Play-2D.cmd) -Force
         Copy-Item tools/PLAY.txt (Join-Path $buildRoot PLAY.txt) -Force
         Copy-Item tools/Play-Compatibility.ps1 (Join-Path $buildRoot Play-Compatibility.ps1) -Force
         $smokeLog = Join-Path $projectRoot 'artifacts/export-smoke.log'
         $exe = Join-Path $buildRoot 'DIVE DIVE.exe'
-        $process = Start-Process -FilePath $exe -ArgumentList @('--headless', '--rendering-method', $Renderer, '--quit-after', '10', '--log-file', ('"' + $smokeLog + '"')) -WindowStyle Hidden -PassThru
+        $process = Start-Process -FilePath $exe -ArgumentList @('--headless', '--rendering-method', $Renderer, '--quit-after', '10', '--log-file', ('"' + $smokeLog + '"'), '--', '--smoke-test') -WindowStyle Hidden -PassThru
         if (-not $process.WaitForExit(30000)) { $process.Kill(); throw 'Export smoke test timed out' }
         if ($process.ExitCode -ne 0) { throw "Export failed to start: $($process.ExitCode)" }
         if (-not (Test-Path $smokeLog)) { throw 'Export did not produce a smoke log' }
         if (Select-String -Path $smokeLog -Pattern 'SCRIPT ERROR:|ERROR:' -Quiet) { throw 'Export smoke test logged errors' }
+        if (-not (Select-String -Path $smokeLog -Pattern 'DIVE DIVE 2D ready' -Quiet)) { throw 'Default export did not start 2D' }
         $twoDLog = Join-Path $projectRoot 'artifacts/export-2d-smoke.log'
         $twoD = Start-Process -FilePath $exe -ArgumentList @('--headless', '--rendering-method', 'gl_compatibility', '--quit-after', '20', '--log-file', ('"' + $twoDLog + '"'), '--', '--two-d', '--smoke-test') -WindowStyle Hidden -PassThru
         if (-not $twoD.WaitForExit(30000)) { $twoD.Kill(); throw '2D export smoke timed out' }

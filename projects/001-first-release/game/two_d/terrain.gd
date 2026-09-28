@@ -1,74 +1,81 @@
 extends RefCounted
-## Small deterministic, editable-by-digging ocean. 1 = bedrock, 2 = rock, 3 = sand.
+## 1 = unbreakable deep bedrock, 2 = diggable rock, 3 = sand.
 
 const TILE := 24
-const WIDTH := 120
-const HEIGHT := 190
+const WIDTH := 140
+const HEIGHT := 375
 const SURFACE := 240.0
 const SPAWN := Vector2(46 * TILE, 8 * TILE)
-const GOAL := Vector2(58 * TILE, 176 * TILE)
-const ROUTE := [
-	Vector2(58, 10),
-	Vector2(60, 25),
-	Vector2(55, 45),
-	Vector2(65, 65),
-	Vector2(47, 85),
-	Vector2(63, 108),
-	Vector2(48, 130),
-	Vector2(65, 149),
-	Vector2(58, 176)
-]
-const GARDENS := [
-	Vector2(58, 25),
-	Vector2(52, 45),
-	Vector2(32, 65),
-	Vector2(65, 67),
-	Vector2(88, 92),
-	Vector2(47, 87),
-	Vector2(63, 109),
-	Vector2(30, 127),
-	Vector2(48, 132),
-	Vector2(65, 151),
-	Vector2(58, 174)
-]
-const RELICS := [Vector2(30, 62), Vector2(92, 95), Vector2(28, 127)]
-
+const GOAL := Vector2(58 * TILE, 350 * TILE)
 var cells := PackedByteArray()
+var route: Array[Vector2] = []
 
 
-func _init() -> void:
+func _init(layout: Node2D) -> void:
 	cells.resize(WIDTH * HEIGHT)
 	for y in range(HEIGHT):
 		for x in range(WIDTH):
 			var cell := 0 if y < 10 else 2
-			if x < 3 or x >= WIDTH - 3 or y >= HEIGHT - 3:
+			if x < 3 or x >= WIDTH - 3 or y >= 240:
 				cell = 1
 			cells[y * WIDTH + x] = cell
-	carve_path(ROUTE, 8.0)
-	carve_path([Vector2(55, 45), Vector2(34, 52), Vector2(30, 67), Vector2(47, 85)], 5)
-	carve_path([Vector2(65, 65), Vector2(87, 77), Vector2(91, 99), Vector2(63, 108)], 6)
-	carve_path([Vector2(63, 108), Vector2(30, 119), Vector2(28, 134), Vector2(48, 130)], 5)
-	carve_disk(Vector2(60, 26), 16)
-	carve_disk(Vector2(65, 66), 12)
-	carve_disk(Vector2(58, 174), 13)
-	# A real shore: walking off the right edge starts the dive.
+	for passage in layout.get_node("Passages").get_children():
+		var points: Array[Vector2] = []
+		for i in range(passage.curve.point_count):
+			points.append(passage.to_global(passage.curve.get_point_position(i)) / TILE)
+		carve_path(points, passage.radius)
+		if (
+			passage.name
+			in ["Introduction", "CanyonOutside", "DeepFault", "DarkNarrows", "BiologyChamber"]
+		):
+			route.append_array(points)
+	carve_disk(Vector2(60, 26), 17)
+	# Broad sand basin, one natural opening at its eastern deepest point.
+	for x in range(31, 90):
+		var floor_y := 238 + int(sin(x * 0.18) * 2)
+		for y in range(228 + int(absf(x - 61) * 0.1), floor_y):
+			set_cell(Vector2i(x, y), 0)
+		for y in range(floor_y, floor_y + 3):
+			set_cell(Vector2i(x, y), 3 if y < 240 else 1)
+	var gate = layout.get_node("Passages/RockGate")
+	var gate_points: Array[Vector2] = []
+	for i in range(gate.curve.point_count):
+		gate_points.append(gate.to_global(gate.curve.get_point_position(i)) / TILE)
+	carve_path(gate_points, gate.radius)
+	# The chamber opens only AFTER a substantial length of narrow dark rock.
+	for y in range(309, 365):
+		for x in range(32, 109):
+			var distance := Vector2((x - 71.0) / 36, (y - 336.0) / 28).length()
+			if distance < 1:
+				set_cell(Vector2i(x, y), 0)
 	for x in range(36, 52):
 		set_cell(Vector2i(x, 10), 1)
 		for y in range(11, 17):
 			set_cell(Vector2i(x, y), 2)
-	# Short shelves remain attached to the cave wall; never seal the passage.
-	for shelf in [Vector2i(48, 42), Vector2i(69, 73), Vector2i(40, 93), Vector2i(67, 121)]:
+	for shelf in [Vector2i(48, 42), Vector2i(39, 107), Vector2i(67, 121), Vector2i(65, 187)]:
 		for dx in range(5):
 			set_cell(shelf + Vector2i(dx, 0), 2)
-	for y in range(11, HEIGHT - 3):
+	# Terraced cliff: walking landings, undercut, and a swim passage alongside.
+	for x in range(32, 47):
+		var top := 111 - (x - 32) / 3
+		for y in range(int(top), 116):
+			set_cell(Vector2i(x, y), 2)
+	for y in range(11, 240):
 		for x in range(3, WIDTH - 3):
 			var at := Vector2i(x, y)
 			if get_cell(at) == 2 and get_cell(at + Vector2i.UP) == 0:
 				set_cell(at, 3)
-	for point in GARDENS:
-		carve_disk(point, 2.5)
-	for point in RELICS:
-		carve_disk(point, 2.5)
+	for marker in layout.get_node("Landmarks").get_children():
+		if marker.kind in ["algae", "orb", "relic", "goal"]:
+			carve_disk(marker.global_position / TILE, 2.5)
+		elif marker.kind == "air":
+			var center: Vector2 = marker.global_position / TILE
+			var half: Vector2 = marker.extent / TILE
+			for y in range(int(center.y - half.y), int(center.y + half.y)):
+				for x in range(int(center.x - half.x) - 1, int(center.x + half.x) + 2):
+					set_cell(Vector2i(x, y), 0)
+			for x in range(int(center.x - half.x), int(center.x + half.x)):
+				set_cell(Vector2i(x, int(center.y + half.y)), 2)
 
 
 func carve_path(points: Array, radius: float) -> void:
