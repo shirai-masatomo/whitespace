@@ -1,4 +1,5 @@
 extends RefCounted
+const Journey = preload("res://game/two_d/journey.gd")
 ## Cheap water layers behind terrain, pixel motes in front. No screen blur/refraction.
 
 
@@ -7,6 +8,7 @@ static func water(art: Node2D, game: Node2D, area: Rect2) -> void:
 		var color := Color("147c99").lerp(Color("123849"), smoothstep(240, 3600, y))
 		color = color.lerp(Color("0c2538"), smoothstep(3500, 5700, y))
 		color = color.lerp(Color("050c20"), smoothstep(5700, 6250, y))
+		color = Journey.water_color(y, color)
 		if y < 240:
 			color = Color("98d9dd")
 		art.draw_rect(Rect2(area.position.x, y, area.size.x, 13), color)

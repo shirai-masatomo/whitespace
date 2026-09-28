@@ -1,12 +1,12 @@
 extends RefCounted
-## 1 = unbreakable deep bedrock, 2 = diggable rock, 3 = sand.
+## 1 bedrock, 2 diggable rock, 3 sand, 4 hull, 5 myth stone, 6 star mineral.
 
 const TILE := 24
 const WIDTH := 140
-const HEIGHT := 375
+const HEIGHT := 1020
 const SURFACE := 240.0
 const SPAWN := Vector2(46 * TILE, 8 * TILE)
-const GOAL := Vector2(58 * TILE, 350 * TILE)
+const GOAL := Vector2(64 * TILE, 992 * TILE)
 var cells := PackedByteArray()
 var route: Array[Vector2] = []
 
@@ -18,6 +18,12 @@ func _init(layout: Node2D) -> void:
 			var cell := 0 if y < 10 else 2
 			if x < 3 or x >= WIDTH - 3 or y >= 240:
 				cell = 1
+			if y >= 374 and y < 472:
+				cell = 4
+			elif y >= 490 and y < 694:
+				cell = 5
+			elif y >= 704 and y < 923:
+				cell = 6
 			cells[y * WIDTH + x] = cell
 	for passage in layout.get_node("Passages").get_children():
 		var points: Array[Vector2] = []
@@ -48,6 +54,14 @@ func _init(layout: Node2D) -> void:
 			var distance := Vector2((x - 71.0) / 36, (y - 336.0) / 28).length()
 			if distance < 1:
 				set_cell(Vector2i(x, y), 0)
+	# Short, hand-shaped chambers rather than stretching the old cave to 11km.
+	carve_disk(Vector2(62, 550), 21)
+	carve_disk(Vector2(65, 987), 17)
+	for x in range(51, 79):
+		set_cell(Vector2i(x, 1001), 1)
+	for y in range(995, 1002):
+		for x in range(62, 67):
+			set_cell(Vector2i(x, y), 1)
 	for x in range(36, 52):
 		set_cell(Vector2i(x, 10), 1)
 		for y in range(11, 17):
@@ -65,6 +79,20 @@ func _init(layout: Node2D) -> void:
 			var at := Vector2i(x, y)
 			if get_cell(at) == 2 and get_cell(at + Vector2i.UP) == 0:
 				set_cell(at, 3)
+	for marker in layout.get_node("Landmarks").get_children():
+		if marker.kind == "shrine":
+			var center := Vector2i(marker.global_position / TILE)
+			for tier in range(3):
+				for x in range(-9 + tier * 3, 10 - tier * 3):
+					set_cell(center + Vector2i(x, -5 - tier), 5)
+			for x in range(-9, 10):
+				if x not in [3, 4, 5, 6]:
+					set_cell(center + Vector2i(x, 6), 5)
+			for y in range(-4, 6):
+				if y in [-1, 0, 1, 2]:
+					continue
+				for x in [-8, 8]:
+					set_cell(center + Vector2i(x, y), 5)
 	for marker in layout.get_node("Landmarks").get_children():
 		if marker.kind in ["algae", "orb", "relic", "goal"]:
 			carve_disk(marker.global_position / TILE, 2.5)

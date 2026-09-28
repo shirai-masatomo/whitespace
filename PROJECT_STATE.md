@@ -13,7 +13,7 @@
 ### DIVE DIVE
 
 - 管理: L=層 / P=層内フェーズ / G=層間ゲート。[構成の正本](projects/001-first-release/HUMAN_DIRECTION.md)。
-- 状態: **2D主開発・3D開発STOPPED**。L1-P0〜L1-G、L2-P0〜P2の圧縮試作 / 品質CHANGES / 定期自律開発PAUSED。
+- 状態: **2D主開発・3D開発STOPPED**。L1〜L6とエンディングまで約1,960mの圧縮試作 / 品質CHANGES / 定期自律開発PAUSED。
 - 現在はL1の完成度とL2の導入が対象。L2-G/L3以降は構想のみ。目安深度を固定仕様にしない。
 - 対象フェーズへ集中し、通常は軽量検証。画像は確認依頼時のみ2〜4枚、旧画像はGit履歴。
 - 詳細: [起動方法](projects/001-first-release/README.md) / [現在地](projects/001-first-release/PROJECT_STATE.md) / [次の作業](projects/001-first-release/TASKS.md)

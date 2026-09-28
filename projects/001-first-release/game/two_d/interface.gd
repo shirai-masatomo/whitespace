@@ -33,7 +33,12 @@ func _draw() -> void:
 	var screen := get_viewport_rect().size
 	draw_rect(Rect2(18, 18, 290, 98), Color(0.015, 0.06, 0.11, 0.9))
 	text(Vector2(34, 48), "%03d m" % game.depth(), 26)
-	text(Vector2(163, 46), "海の記憶 %d / 3" % game.collected.size(), 17, CYAN)
+	text(
+		Vector2(163, 46),
+		"海の記憶 %d / %d" % [game.collected.size(), game.markers("relic").size()],
+		17,
+		CYAN
+	)
 	text(Vector2(34, 75), "酸素", 16)
 	draw_rect(Rect2(84, 62, 200, 14), Color("243a4b"))
 	var color := CYAN if game.oxygen > 25 else Color("ff986f")
@@ -55,13 +60,29 @@ func _draw() -> void:
 		text(center + Vector2(-105, -91), "DEEP OCEAN", 20, CYAN)
 		text(center + Vector2(-255, -31), "横へ泳ぎ、岩を掘り、もっと深い海へ。", 24)
 		text(center + Vector2(-255, 8), "光る藻で酸素回復。酸素切れは最後の藻へ戻ります。", 18)
-		text(center + Vector2(-255, 40), "深海の光に触れたら到達。金色の遺物は寄り道のお楽しみ。", 16)
-		text(center + Vector2(-193, 176), "現実海層 → 生物層 / セーブなし", 16, Color("94b7be"))
+		text(center + Vector2(-255, 40), "最深部の光を目指そう。金色の遺物は寄り道のお楽しみ。", 16)
+		text(center + Vector2(-193, 176), "海から、神話と星の底へ / セーブなし", 16, Color("94b7be"))
 	elif game.paused or game.complete:
 		draw_rect(Rect2(Vector2.ZERO, screen), Color(0.01, 0.03, 0.08, 0.78))
 		var center := screen * 0.5
-		text(center + Vector2(-190, -35), "深海の光へ到達！" if game.complete else "一時停止", 40)
-		text(center + Vector2(-190, 12), "見つけた海の記憶：%d / 3" % game.collected.size(), 21, CYAN)
+		text(center + Vector2(-240, -70), "最深部に、光があった。" if game.complete else "一時停止", 40)
+		text(
+			center + Vector2(-240, -17),
+			"海の記憶：%d / %d" % [game.collected.size(), game.markers("relic").size()],
+			21,
+			CYAN
+		)
 		text(
 			center + Vector2(-190, 57), "R：最初から  /  Esc：再開" if not game.complete else "R：もう一度潜る", 20
 		)
+
+		if game.complete:
+			text(
+				center + Vector2(-240, 20),
+				(
+					"潜水 %d分%02d秒  /  救助 %d回"
+					% [int(game.play_seconds / 60), int(game.play_seconds) % 60, game.rescue_count]
+				),
+				18
+			)
+			text(center + Vector2(-240, 111), "DIVE DIVE — 最後まで潜ってくれて、ありがとう。", 17, CYAN)

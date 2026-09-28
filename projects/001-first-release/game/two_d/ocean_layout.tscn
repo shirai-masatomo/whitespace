@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3]
+[gd_scene load_steps=21 format=3]
 
 [ext_resource type="Script" path="res://game/two_d/cave_path.gd" id="1"]
 [ext_resource type="Script" path="res://game/two_d/landmark.gd" id="2"]
@@ -42,6 +42,38 @@ point_count = 6
 [sub_resource type="Curve2D" id="BiologyChamber"]
 _data = {"points": PackedVector2Array(0, 0, 0, 0, 1584, 7416, 0, 0, 0, 0, 1392, 7680, 0, 0, 0, 0, 1632, 8016, 0, 0, 0, 0, 1392, 8400)}
 point_count = 4
+
+[sub_resource type="Curve2D" id="WreckApproach"]
+_data = {"points": PackedVector2Array(0, 0, 0, 0, 1392, 8400, 0, 0, 0, 0, 1248, 8760, 0, 0, 0, 0, 912, 9096)}
+point_count = 3
+
+[sub_resource type="Curve2D" id="WreckInterior"]
+_data = {"points": PackedVector2Array(0, 0, 0, 0, 912, 9096, 0, 0, 0, 0, 864, 9336, 0, 0, 0, 0, 1248, 9528, 0, 0, 0, 0, 1824, 9528, 0, 0, 0, 0, 1872, 9840, 0, 0, 0, 0, 1560, 10104, 0, 0, 0, 0, 1176, 10392, 0, 0, 0, 0, 1392, 10728, 0, 0, 0, 0, 1560, 11160)}
+point_count = 9
+
+[sub_resource type="Curve2D" id="WreckHold"]
+_data = {"points": PackedVector2Array(0, 0, 0, 0, 1248, 9528, 0, 0, 0, 0, 1080, 9864, 0, 0, 0, 0, 1176, 10392)}
+point_count = 3
+
+[sub_resource type="Curve2D" id="MythEntrance"]
+_data = {"points": PackedVector2Array(0, 0, 0, 0, 1560, 11160, 0, 0, 0, 0, 1320, 11640, 0, 0, 0, 0, 912, 12024)}
+point_count = 3
+
+[sub_resource type="Curve2D" id="MythCourtyard"]
+_data = {"points": PackedVector2Array(0, 0, 0, 0, 912, 12024, 0, 0, 0, 0, 1176, 12624, 0, 0, 0, 0, 1704, 13152, 0, 0, 0, 0, 2040, 13704, 0, 0, 0, 0, 1656, 14256, 0, 0, 0, 0, 1224, 14664, 0, 0, 0, 0, 1128, 15240, 0, 0, 0, 0, 1512, 15696, 0, 0, 0, 0, 1680, 16416)}
+point_count = 9
+
+[sub_resource type="Curve2D" id="MythGarden"]
+_data = {"points": PackedVector2Array(0, 0, 0, 0, 1176, 12624, 0, 0, 0, 0, 744, 12936, 0, 0, 0, 0, 720, 13296, 0, 0, 0, 0, 1224, 13656, 0, 0, 0, 0, 1656, 14256)}
+point_count = 5
+
+[sub_resource type="Curve2D" id="StarSea"]
+_data = {"points": PackedVector2Array(0, 0, 0, 0, 1680, 16416, 0, 0, 0, 0, 1560, 17040, 0, 0, 0, 0, 2016, 17808, 0, 0, 0, 0, 1512, 18456, 0, 0, 0, 0, 1056, 19056, 0, 0, 0, 0, 1560, 19704, 0, 0, 0, 0, 2064, 20232, 0, 0, 0, 0, 1536, 20760, 0, 0, 0, 0, 1008, 21336, 0, 0, 0, 0, 1392, 21960)}
+point_count = 10
+
+[sub_resource type="Curve2D" id="FinalTrench"]
+_data = {"points": PackedVector2Array(0, 0, 0, 0, 1392, 21960, 0, 0, 0, 0, 1320, 22560, 0, 0, 0, 0, 1632, 23064, 0, 0, 0, 0, 1560, 23592, 0, 0, 0, 0, 1536, 23808)}
+point_count = 5
 
 [node name="OceanLayout" type="Node2D"]
 
@@ -96,6 +128,46 @@ curve = SubResource("DarkNarrows")
 script = ExtResource("1")
 radius = 12
 curve = SubResource("BiologyChamber")
+
+[node name="WreckApproach" type="Path2D" parent="Passages"]
+script = ExtResource("1")
+radius = 6
+curve = SubResource("WreckApproach")
+
+[node name="WreckInterior" type="Path2D" parent="Passages"]
+script = ExtResource("1")
+radius = 4.8
+curve = SubResource("WreckInterior")
+
+[node name="WreckHold" type="Path2D" parent="Passages"]
+script = ExtResource("1")
+radius = 5
+curve = SubResource("WreckHold")
+
+[node name="MythEntrance" type="Path2D" parent="Passages"]
+script = ExtResource("1")
+radius = 5
+curve = SubResource("MythEntrance")
+
+[node name="MythCourtyard" type="Path2D" parent="Passages"]
+script = ExtResource("1")
+radius = 9
+curve = SubResource("MythCourtyard")
+
+[node name="MythGarden" type="Path2D" parent="Passages"]
+script = ExtResource("1")
+radius = 5
+curve = SubResource("MythGarden")
+
+[node name="StarSea" type="Path2D" parent="Passages"]
+script = ExtResource("1")
+radius = 17
+curve = SubResource("StarSea")
+
+[node name="FinalTrench" type="Path2D" parent="Passages"]
+script = ExtResource("1")
+radius = 5.5
+curve = SubResource("FinalTrench")
 
 [node name="Landmarks" type="Node2D" parent="."]
 
@@ -271,7 +343,7 @@ extent = Vector2(120, 160)
 [node name="DeepLight" type="Node2D" parent="Landmarks"]
 position = Vector2(1392, 8400)
 script = ExtResource("2")
-kind = "goal"
+kind = "orb"
 
 
 [node name="BubbleRest" type="Node2D" parent="Landmarks"]
@@ -279,3 +351,241 @@ position = Vector2(1128, 2136)
 script = ExtResource("2")
 kind = "bubble"
 extent = Vector2(70, 70)
+
+[node name="WreckAir0" type="Node2D" parent="Landmarks"]
+position = Vector2(1224, 8784)
+script = ExtResource("2")
+kind = "orb"
+
+[node name="WreckAir1" type="Node2D" parent="Landmarks"]
+position = Vector2(912, 9216)
+script = ExtResource("2")
+kind = "orb"
+
+[node name="WreckAir2" type="Node2D" parent="Landmarks"]
+position = Vector2(1248, 9528)
+script = ExtResource("2")
+kind = "orb"
+
+[node name="WreckAir3" type="Node2D" parent="Landmarks"]
+position = Vector2(1848, 9840)
+script = ExtResource("2")
+kind = "orb"
+
+[node name="WreckAir4" type="Node2D" parent="Landmarks"]
+position = Vector2(1176, 10392)
+script = ExtResource("2")
+kind = "orb"
+
+[node name="WreckAir5" type="Node2D" parent="Landmarks"]
+position = Vector2(1392, 10776)
+script = ExtResource("2")
+kind = "orb"
+
+[node name="WreckAir6" type="Node2D" parent="Landmarks"]
+position = Vector2(1440, 11376)
+script = ExtResource("2")
+kind = "orb"
+
+[node name="Lotus0" type="Node2D" parent="Landmarks"]
+position = Vector2(912, 12048)
+script = ExtResource("2")
+kind = "algae"
+
+[node name="Lotus1" type="Node2D" parent="Landmarks"]
+position = Vector2(1176, 12624)
+script = ExtResource("2")
+kind = "algae"
+
+[node name="Lotus2" type="Node2D" parent="Landmarks"]
+position = Vector2(1680, 13152)
+script = ExtResource("2")
+kind = "algae"
+
+[node name="Lotus3" type="Node2D" parent="Landmarks"]
+position = Vector2(2016, 13728)
+script = ExtResource("2")
+kind = "algae"
+
+[node name="Lotus4" type="Node2D" parent="Landmarks"]
+position = Vector2(1632, 14256)
+script = ExtResource("2")
+kind = "algae"
+
+[node name="Lotus5" type="Node2D" parent="Landmarks"]
+position = Vector2(1224, 14688)
+script = ExtResource("2")
+kind = "algae"
+
+[node name="Lotus6" type="Node2D" parent="Landmarks"]
+position = Vector2(1128, 15240)
+script = ExtResource("2")
+kind = "algae"
+
+[node name="Lotus7" type="Node2D" parent="Landmarks"]
+position = Vector2(1488, 15696)
+script = ExtResource("2")
+kind = "algae"
+
+[node name="Lotus8" type="Node2D" parent="Landmarks"]
+position = Vector2(1680, 16296)
+script = ExtResource("2")
+kind = "algae"
+
+[node name="Lotus9" type="Node2D" parent="Landmarks"]
+position = Vector2(720, 13200)
+script = ExtResource("2")
+kind = "algae"
+
+[node name="StarAir0" type="Node2D" parent="Landmarks"]
+position = Vector2(1560, 17040)
+script = ExtResource("2")
+kind = "orb"
+
+[node name="StarAir1" type="Node2D" parent="Landmarks"]
+position = Vector2(1992, 17784)
+script = ExtResource("2")
+kind = "orb"
+
+[node name="StarAir2" type="Node2D" parent="Landmarks"]
+position = Vector2(1512, 18432)
+script = ExtResource("2")
+kind = "orb"
+
+[node name="StarAir3" type="Node2D" parent="Landmarks"]
+position = Vector2(1080, 19056)
+script = ExtResource("2")
+kind = "orb"
+
+[node name="StarAir4" type="Node2D" parent="Landmarks"]
+position = Vector2(1560, 19680)
+script = ExtResource("2")
+kind = "orb"
+
+[node name="StarAir5" type="Node2D" parent="Landmarks"]
+position = Vector2(2040, 20232)
+script = ExtResource("2")
+kind = "orb"
+
+[node name="StarAir6" type="Node2D" parent="Landmarks"]
+position = Vector2(1536, 20784)
+script = ExtResource("2")
+kind = "orb"
+
+[node name="StarAir7" type="Node2D" parent="Landmarks"]
+position = Vector2(1032, 21360)
+script = ExtResource("2")
+kind = "orb"
+
+[node name="StarAir8" type="Node2D" parent="Landmarks"]
+position = Vector2(1368, 21960)
+script = ExtResource("2")
+kind = "orb"
+
+[node name="StarAir9" type="Node2D" parent="Landmarks"]
+position = Vector2(1320, 22536)
+script = ExtResource("2")
+kind = "orb"
+
+[node name="StarAir10" type="Node2D" parent="Landmarks"]
+position = Vector2(1632, 23064)
+script = ExtResource("2")
+kind = "orb"
+
+[node name="StarAir11" type="Node2D" parent="Landmarks"]
+position = Vector2(1560, 23592)
+script = ExtResource("2")
+kind = "orb"
+
+[node name="ShipCabin" type="Node2D" parent="Landmarks"]
+position = Vector2(1608, 9480)
+script = ExtResource("2")
+kind = "air"
+extent = Vector2(180, 72)
+
+[node name="Wreck" type="Node2D" parent="Landmarks"]
+position = Vector2(1416, 9984)
+script = ExtResource("2")
+kind = "wreck"
+extent = Vector2(900, 1056)
+
+[node name="Shrine" type="Node2D" parent="Landmarks"]
+position = Vector2(1536, 13176)
+script = ExtResource("2")
+kind = "shrine"
+extent = Vector2(240, 180)
+
+[node name="Palace" type="Node2D" parent="Landmarks"]
+position = Vector2(1176, 15216)
+script = ExtResource("2")
+kind = "shrine"
+extent = Vector2(190, 150)
+
+[node name="Tamatebako" type="Node2D" parent="Landmarks"]
+position = Vector2(1680, 16320)
+script = ExtResource("2")
+kind = "chest"
+extent = Vector2(40, 26)
+
+[node name="FallingStars" type="Node2D" parent="Landmarks"]
+position = Vector2(1800, 17760)
+script = ExtResource("2")
+kind = "current"
+extent = Vector2(145, 145)
+flow = Vector2(-45, 20)
+
+[node name="StarUpdraft" type="Node2D" parent="Landmarks"]
+position = Vector2(1056, 18960)
+script = ExtResource("2")
+kind = "current"
+extent = Vector2(110, 160)
+flow = Vector2(20, -100)
+
+[node name="LastUndertow" type="Node2D" parent="Landmarks"]
+position = Vector2(1416, 22368)
+script = ExtResource("2")
+kind = "current"
+extent = Vector2(85, 150)
+flow = Vector2(15, 45)
+
+[node name="StarRaft" type="Node2D" parent="Landmarks"]
+position = Vector2(1536, 19776)
+script = ExtResource("2")
+kind = "jelly"
+extent = Vector2(66, 12)
+travel = Vector2(55, 0)
+
+[node name="TrenchLight" type="Node2D" parent="Landmarks"]
+position = Vector2(1536, 23808)
+script = ExtResource("2")
+kind = "goal"
+
+[node name="Memory3" type="Node2D" parent="Landmarks"]
+position = Vector2(1032, 9912)
+script = ExtResource("2")
+kind = "relic"
+
+[node name="Memory4" type="Node2D" parent="Landmarks"]
+position = Vector2(768, 13200)
+script = ExtResource("2")
+kind = "relic"
+
+[node name="Memory5" type="Node2D" parent="Landmarks"]
+position = Vector2(1176, 15192)
+script = ExtResource("2")
+kind = "relic"
+
+[node name="Memory6" type="Node2D" parent="Landmarks"]
+position = Vector2(960, 19152)
+script = ExtResource("2")
+kind = "relic"
+
+[node name="Memory7" type="Node2D" parent="Landmarks"]
+position = Vector2(2160, 20280)
+script = ExtResource("2")
+kind = "relic"
+
+[node name="Memory8" type="Node2D" parent="Landmarks"]
+position = Vector2(1608, 23520)
+script = ExtResource("2")
+kind = "relic"

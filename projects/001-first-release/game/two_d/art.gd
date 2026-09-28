@@ -1,6 +1,7 @@
 extends Node2D
 ## Original code-drawn pixel art; no Terraria assets or copied world layout.
 
+const Journey = preload("res://game/two_d/journey.gd")
 const Phenomena = preload("res://game/two_d/phenomena.gd")
 const Atmosphere = preload("res://game/two_d/atmosphere.gd")
 const Terrain = preload("res://game/two_d/terrain.gd")
@@ -28,9 +29,13 @@ func _draw() -> void:
 	land(visible)
 	life(visible)
 	Phenomena.paint(self, game, visible)
+	Journey.decorate(self, game, visible)
 	for garden in game.markers("algae"):
 		var point: Vector2 = garden.global_position
 		if visible.grow(100).has_point(point):
+			if Journey.layer(point.y) == 4:
+				Journey.lotus(self, point, game.clock)
+				continue
 			glow(point, 130, Color(0.12, 0.85, 0.61, 0.075))
 			glow(point + Vector2(0, 10), 48, Color(0.4, 1, 0.7, 0.07))
 			for strand in range(7):
@@ -90,6 +95,8 @@ func background(area: Rect2) -> void:
 			Color(0.025, 0.10, 0.20, 0.33)
 		)
 
+	Journey.background(self, game, area)
+
 
 func land(area: Rect2) -> void:
 	var lamps: Array[Vector2] = []
@@ -114,6 +121,12 @@ func land(area: Rect2) -> void:
 					color = Color("968c72").lightened(float(hash_value % 5) * 0.015)
 			if cell == 1:
 				color = Color("253743")
+			if cell == 4:
+				color = Color("485958").darkened(float(hash_value % 4) * 0.025)
+			elif cell == 5:
+				color = Color("345158").lightened(float(hash_value % 4) * 0.02)
+			elif cell == 6:
+				color = Color("302d4c").lightened(float(hash_value % 4) * 0.025)
 			if y > 245:
 				var light := clampf(1 - point.distance_to(game.player.position) / 650, 0.16, 0.75)
 				color = color.darkened(1 - light)
@@ -124,13 +137,16 @@ func land(area: Rect2) -> void:
 			draw_rect(
 				Rect2(point + Vector2(3 + hash_value % 8, 7), Vector2(9, 2)), color.lightened(0.04)
 			)
+			if cell == 4 and hash_value % 2 == 0:
+				draw_rect(Rect2(point + Vector2(2, 2), Vector2(3, 3)), color.lightened(0.12))
+				draw_rect(Rect2(point + Vector2(19, 19), Vector2(3, 3)), color.darkened(0.2))
 			if cell == 3:
 				for grain in range(3):
 					var offset := Vector2(
 						(hash_value + grain * 7) % 21, (hash_value * 3 + grain * 11) % 20
 					)
 					draw_rect(Rect2(point + offset, Vector2(2, 1)), color.lightened(0.11))
-			if hash_value % 3 == 0 and cell != 3:
+			if hash_value % 3 == 0 and cell not in [3, 4]:
 				draw_line(point + Vector2(16, 0), point + Vector2(8, 10), color.darkened(0.25), 1)
 			if game.terrain.get_cell(at + Vector2i.UP) == 0:
 				draw_rect(Rect2(point, Vector2(24, 3)), color.lightened(0.18))
@@ -246,7 +262,7 @@ func diver() -> void:
 	var kick := sin(game.clock * 10) * 3 if game.player.velocity.length() > 5 else 0.0
 	draw_rect(Rect2(point + Vector2(-8, 12 + kick), Vector2(7, 3)), Color("f3b46e"))
 	draw_rect(Rect2(point + Vector2(2, 12 - kick), Vector2(7, 3)), Color("f3b46e"))
-	if point.y > Terrain.SURFACE:
+	if point.y > Terrain.SURFACE and not game.encounters.air_at(point):
 		for i in range(5):
 			var rise := fmod(game.clock * 35 + i * 10, 52)
 			Atmosphere.bubble(

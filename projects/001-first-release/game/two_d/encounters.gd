@@ -4,6 +4,7 @@ extends Node
 var game: Node2D
 var solids: Dictionary = {}
 var stage := 0
+var chest_open := false
 var tentacle_contact := false
 
 
@@ -24,6 +25,11 @@ func _ready() -> void:
 
 
 func update(time: float) -> void:
+	for marker in game.markers("chest"):
+		if game.player.position.distance_to(marker.global_position) < 96:
+			if not chest_open:
+				game.say("玉手箱から、星のような泡があふれた")
+			chest_open = true
 	for marker in solids:
 		solids[marker].transform = marker.global_transform
 		if marker.kind == "jelly":

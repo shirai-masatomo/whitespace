@@ -3,7 +3,19 @@ extends Node2D
 ## Saved editor positions are authoritative. Runtime motion is an offset, never a rewrite.
 
 @export_enum(
-	"algae", "orb", "relic", "air", "current", "jelly", "rock", "octopus", "goal", "bubble"
+	"algae",
+	"orb",
+	"relic",
+	"air",
+	"current",
+	"jelly",
+	"rock",
+	"octopus",
+	"goal",
+	"bubble",
+	"wreck",
+	"shrine",
+	"chest"
 )
 var kind := "algae"
 @export var extent := Vector2(48, 48)

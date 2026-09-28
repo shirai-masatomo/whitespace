@@ -30,6 +30,8 @@ var rescue_path: Array[Vector2] = []
 var breadcrumbs: Array[Vector2] = []
 var collected: Dictionary = {}
 var stones := 0
+var play_seconds := 0.0
+var rescue_count := 0
 var clock := 0.0
 var mining_cooldown := 0.0
 var facing := 1.0
@@ -159,6 +161,7 @@ func _physics_process(delta: float) -> void:
 func step(delta: float, horizontal: float, ascend: bool, dive: bool) -> void:
 	if complete or paused:
 		return
+	play_seconds += delta
 	if rescuing:
 		advance_rescue(delta)
 		return
@@ -207,7 +210,7 @@ func step(delta: float, horizontal: float, ascend: bool, dive: bool) -> void:
 		if not collected.has(index):
 			if player.position.distance_to(markers("relic")[index].global_position) < 35:
 				collected[index] = true
-				say("海の記憶を発見！  %d / 3" % collected.size())
+				say("海の記憶を発見！  %d / %d" % [collected.size(), markers("relic").size()])
 	if oxygen <= 0:
 		start_rescue()
 	if player.position.distance_to(goal_position()) < 55:
@@ -215,6 +218,7 @@ func step(delta: float, horizontal: float, ascend: bool, dive: bool) -> void:
 
 
 func start_rescue() -> void:
+	rescue_count += 1
 	rescuing = true
 	oxygen = 0
 	rescue_path.assign(breadcrumbs)
@@ -259,9 +263,9 @@ func edit_tile(point: Vector2, placing: bool) -> bool:
 		terrain.set_cell(at, 2)
 		stones -= 1
 	else:
-		if value < 2:
-			if value == 1:
-				say("硬い岩盤は掘れません。下へ続く隙間を探そう")
+		if value not in [2, 3]:
+			if value != 0:
+				say("硬い壁は掘れません。続く通り道を探そう")
 				mining_cooldown = 0.4
 			return false
 		terrain.set_cell(at, 0)

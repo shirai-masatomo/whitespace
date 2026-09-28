@@ -8,4 +8,4 @@ WhiteSpace全体の目的、ブランド、リポジトリ、自律度の方針�
 | Project | 位置づけ | 自律モード | 状態 |
 | --- | --- | --- | --- |
 | [言語ジェンガ（仮）](language-jenga/README.md) | 宥めよ・会話/言語実験 | 通常 | 資産集約済み・休止中 |
-| [DIVE DIVE](001-first-release/README.md) | 初期リリースを目指す2D水中探索ゲーム | **指定範囲を自律制作 / 定期再開PAUSED** | L1〜L2巨大タコ遭遇・約680m試作。3D開発STOPPED |
+| [DIVE DIVE](001-first-release/README.md) | 初期リリースを目指す2D水中探索ゲーム | **指定範囲を自律制作 / 定期再開PAUSED** | L1〜L6・最深部/結末まで約1,960m通し試作。3D開発STOPPED |

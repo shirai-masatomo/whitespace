@@ -6,6 +6,8 @@ var game: Node2D
 var failures := 0
 var checks := 0
 var elapsed := 0.0
+var obstacle_game: Node2D
+var obstacles: Array = []
 
 
 func _initialize() -> void:
@@ -93,12 +95,60 @@ func run() -> void:
 	check(game.encounters.stage == 3, "The octopus is recognized after shadow and arms")
 	await photograph("encounter")
 	check(await swim_to(Vector2(58, 350)), "Reach final water sphere")
-	check(game.complete and game.depth() > 670, "L2-P2 completion near 680m")
+	check(not game.complete and game.depth() > 670, "Old 680m goal now leads to the wreck")
+	await final_journey()
 	await editor_and_interactions()
 	print("2D: %d checks, failures=%d; simulated route %.1fs" % [checks, failures, elapsed])
 	game.queue_free()
 	await process_frame
 	quit(1 if failures > 0 else 0)
+
+
+func final_journey() -> void:
+	for point in [
+		Vector2(51, 366),
+		Vector2(38, 384),
+		Vector2(52, 397),
+		Vector2(67, 395),
+		Vector2(77, 410),
+		Vector2(49, 433),
+		Vector2(58, 449),
+		Vector2(60, 474),
+		Vector2(38, 502),
+		Vector2(49, 526),
+		Vector2(70, 548),
+		Vector2(84, 572),
+		Vector2(68, 594),
+		Vector2(51, 612),
+		Vector2(47, 635),
+		Vector2(62, 654),
+		Vector2(70, 679),
+	]:
+		check(await swim_to(point), "Wreck / myth route %s" % point)
+	check(
+		game.encounters.chest_open,
+		"Approaching the tamatebako opens it without a button or loading"
+	)
+	for point in [
+		Vector2(65, 710),
+		Vector2(83, 741),
+		Vector2(63, 768),
+		Vector2(45, 794),
+		Vector2(65, 820),
+		Vector2(85, 843),
+		Vector2(64, 866),
+		Vector2(43, 890),
+		Vector2(57, 915),
+		Vector2(55, 939),
+		Vector2(68, 961),
+		Vector2(65, 983),
+		Vector2(64, 992),
+	]:
+		check(await swim_to(point), "Star sea / final trench %s" % point)
+	check(game.complete and game.depth() > 1950, "Surface to final ending is continuous")
+	check(game.play_seconds > 300, "Ending records time spent playing")
+	check(game.markers("relic").size() == 9, "Optional memories extend across the whole journey")
+	check(game.terrain.get_cell(Vector2i(65, 1001)) != 0, "The deepest point has an actual floor")
 
 
 func editor_and_interactions() -> void:
@@ -163,11 +213,18 @@ func swim_to(tile: Vector2) -> bool:
 		cursor += 1
 		for direction in [Vector2i.LEFT, Vector2i.RIGHT, Vector2i.UP, Vector2i.DOWN]:
 			var next: Vector2i = current + direction
+			# Consecutive route samples only need their local corridor, not all prior layers.
+			if (
+				next.y < mini(from.y, destination.y) - 35
+				or next.y > maxi(from.y, destination.y) + 35
+			):
+				continue
 			if previous.has(next) or not clear_cell(next):
 				continue
 			previous[next] = current
 			open.append(next)
 	if not previous.has(destination):
+		print("No clear path from ", from, " to ", destination)
 		return false
 	var path: Array[Vector2i] = [destination]
 	while path.back() != from:
@@ -198,8 +255,17 @@ func swim_to(tile: Vector2) -> bool:
 
 
 func clear_cell(at: Vector2i) -> bool:
+	if (
+		game.terrain.get_cell(at) != 0
+		or game.terrain.get_cell(at + Vector2i.UP) != 0
+		or game.terrain.get_cell(at + Vector2i.DOWN) != 0
+	):
+		return false
+	if obstacle_game != game:
+		obstacle_game = game
+		obstacles = game.markers("rock") + game.markers("jelly")
 	var point := (Vector2(at) + Vector2(0.5, 0.5)) * Terrain.TILE
-	for marker in game.markers():
+	for marker in obstacles:
 		if marker.kind in ["rock", "jelly"]:
 			var margin: Vector2 = marker.extent + Vector2(10, 15)
 			if marker.kind == "jelly":

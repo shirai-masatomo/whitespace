@@ -1,5 +1,6 @@
 extends Node
 ## Reuse our original synthesized sounds; no edits to the frozen 3D game.
+const Journey = preload("res://game/two_d/journey.gd")
 const Synth = preload("res://game/ocean_audio.gd")
 var players: Dictionary = {}
 var muted := false
@@ -8,6 +9,7 @@ var last_rescue := false
 var last_oxygen := 100.0
 var warning_timer := 0.0
 var last_stage := 0
+var last_layer := 1
 var goal_played := false
 
 
@@ -41,6 +43,11 @@ func observe(game: Node2D, delta: float) -> void:
 		game.player.position.y > game.Terrain.SURFACE
 		and not game.encounters.air_at(game.player.position)
 	)
+	var layer: int = Journey.layer(game.player.position.y)
+	players.underwater.pitch_scale = [1.0, 1.0, 0.88, 0.76, 1.12, 1.25, 0.72][layer]
+	if layer > last_layer and not quiet:
+		cue("deep_call" if layer in [2, 3, 6] else "refill")
+		last_layer = layer
 	players.surface.volume_db = -80 if quiet or wet else -22
 	players.underwater.volume_db = -80 if quiet or not wet else -12
 	players.movement.volume_db = (
