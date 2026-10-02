@@ -1,0 +1,428 @@
+{
+  "branch": "codex/sporehollow-prototype",
+  "commit_sha": "2a2e463ba9955444b8eec28aba0a8149fbbcd433",
+  "numbers": {
+    "actual_shiba_attack_seconds": 1.25,
+    "fixed_tick_seconds": 0.25,
+    "kidnapper": {
+      "attack_power": 5,
+      "counter_cooldown": 2.0,
+      "counter_duration": 4.0,
+      "counter_seconds": 1.0,
+      "max_hp": 50,
+      "object_attack_power": 2
+    },
+    "shiba": {
+      "attack_power": 10,
+      "attack_seconds": 1.2,
+      "max_hp": 40,
+      "rescue_multiplier": 1.5,
+      "speed": 2.0
+    }
+  },
+  "resolution": [
+    1280,
+    800
+  ],
+  "scenarios": {
+    "abduction_and_rescue": {
+      "actions_summary": {
+        "place": 1,
+        "place_animal": 1,
+        "start": 1,
+        "stay": 1
+      },
+      "combat": [
+        {
+          "damage": 10,
+          "id": 1,
+          "source": "animal",
+          "target": 0,
+          "tick": 124
+        },
+        {
+          "damage": 5,
+          "id": 0,
+          "source": "enemy",
+          "target": 1,
+          "tick": 124
+        },
+        {
+          "damage": 5,
+          "id": 0,
+          "source": "enemy",
+          "target": 1,
+          "tick": 128
+        },
+        {
+          "damage": 10,
+          "id": 1,
+          "source": "animal",
+          "target": 0,
+          "tick": 129
+        },
+        {
+          "damage": 5,
+          "id": 0,
+          "source": "enemy",
+          "target": 1,
+          "tick": 132
+        },
+        {
+          "damage": 10,
+          "id": 1,
+          "source": "animal",
+          "target": 0,
+          "tick": 134
+        },
+        {
+          "damage": 5,
+          "id": 0,
+          "source": "enemy",
+          "target": 1,
+          "tick": 136
+        },
+        {
+          "damage": 10,
+          "id": 1,
+          "source": "animal",
+          "target": 0,
+          "tick": 139
+        },
+        {
+          "damage": 10,
+          "id": 1,
+          "source": "animal",
+          "target": 0,
+          "tick": 144
+        }
+      ],
+      "dog_remaining_hp": 20,
+      "facilities": [],
+      "initial_positions": {
+        "animals": [
+          {
+            "id": 1,
+            "pos": [
+              19,
+              13
+            ]
+          }
+        ],
+        "keeper": [
+          19,
+          8
+        ]
+      },
+      "milestones": [
+        {
+          "id": 0,
+          "kind": "invasion",
+          "tick": 40
+        },
+        {
+          "id": 0,
+          "kind": "restrained",
+          "tick": 114
+        },
+        {
+          "id": 0,
+          "kind": "carried",
+          "tick": 117
+        },
+        {
+          "id": 0,
+          "kind": "rescue",
+          "tick": 144
+        }
+      ],
+      "result": "win",
+      "seconds": 51.0,
+      "soil_initial": 100,
+      "soil_remaining": 100,
+      "soil_spent_net": 0,
+      "stage_config": {
+        "first_attack_seconds": 10.0,
+        "repeat_interval_seconds": 60.0,
+        "repeat_waves": false,
+        "time_limit_seconds": 180.0,
+        "waves": [
+          {
+            "count": 1,
+            "entries": [
+              [
+                1,
+                5
+              ]
+            ],
+            "interval_seconds": 6.0,
+            "jitter_seconds": 1.0,
+            "lv": 1,
+            "role": "kidnapper",
+            "start_seconds": 0.0
+          }
+        ]
+      }
+    },
+    "combat": {
+      "actions_summary": {
+        "auto": 1,
+        "build_gate": 1,
+        "gate": 1,
+        "pause": 2,
+        "place": 1,
+        "place_animal": 3,
+        "start": 1,
+        "stay": 1,
+        "wall": 1
+      },
+      "combat": [
+        {
+          "damage": 10,
+          "id": 1,
+          "source": "animal",
+          "target": 0,
+          "tick": 99
+        },
+        {
+          "damage": 5,
+          "id": 0,
+          "source": "enemy",
+          "target": 1,
+          "tick": 99
+        },
+        {
+          "damage": 5,
+          "id": 0,
+          "source": "enemy",
+          "target": 1,
+          "tick": 103
+        },
+        {
+          "damage": 10,
+          "id": 1,
+          "source": "animal",
+          "target": 0,
+          "tick": 104
+        },
+        {
+          "damage": 5,
+          "id": 0,
+          "source": "enemy",
+          "target": 1,
+          "tick": 107
+        },
+        {
+          "damage": 10,
+          "id": 1,
+          "source": "animal",
+          "target": 0,
+          "tick": 109
+        },
+        {
+          "damage": 5,
+          "id": 0,
+          "source": "enemy",
+          "target": 1,
+          "tick": 111
+        },
+        {
+          "damage": 10,
+          "id": 1,
+          "source": "animal",
+          "target": 0,
+          "tick": 114
+        },
+        {
+          "damage": 10,
+          "id": 1,
+          "source": "animal",
+          "target": 0,
+          "tick": 119
+        }
+      ],
+      "dog_remaining_hp": 20,
+      "facilities": [
+        {
+          "armor": 0,
+          "cost": 20,
+          "hp": 8,
+          "id": 1,
+          "kind": "wall",
+          "max_hp": 8,
+          "open": false,
+          "pos": [
+            17,
+            7
+          ],
+          "remaining": 0,
+          "status": "ready",
+          "total_ticks": 4
+        },
+        {
+          "armor": 0,
+          "cost": 30,
+          "hp": 6,
+          "id": 2,
+          "kind": "gate",
+          "max_hp": 6,
+          "open": true,
+          "pos": [
+            19,
+            10
+          ],
+          "remaining": 0,
+          "status": "ready",
+          "total_ticks": 4
+        }
+      ],
+      "initial_positions": {
+        "animals": [
+          {
+            "id": 1,
+            "pos": [
+              18,
+              8
+            ]
+          }
+        ],
+        "keeper": [
+          19,
+          8
+        ]
+      },
+      "milestones": [
+        {
+          "id": 0,
+          "kind": "invasion",
+          "tick": 40
+        }
+      ],
+      "result": "win",
+      "seconds": 43.5,
+      "soil_initial": 100,
+      "soil_remaining": 50,
+      "soil_spent_net": 50,
+      "stage_config": {
+        "first_attack_seconds": 10.0,
+        "repeat_interval_seconds": 60.0,
+        "repeat_waves": false,
+        "time_limit_seconds": 180.0,
+        "waves": [
+          {
+            "count": 1,
+            "entries": [
+              [
+                1,
+                5
+              ]
+            ],
+            "interval_seconds": 6.0,
+            "jitter_seconds": 1.0,
+            "lv": 1,
+            "role": "kidnapper",
+            "start_seconds": 0.0
+          }
+        ]
+      }
+    },
+    "poor_placement": {
+      "actions_summary": {
+        "place": 1,
+        "place_animal": 1,
+        "start": 1
+      },
+      "combat": [],
+      "dog_remaining_hp": 40,
+      "facilities": [],
+      "initial_positions": {
+        "animals": [
+          {
+            "id": 1,
+            "pos": [
+              23,
+              15
+            ]
+          }
+        ],
+        "keeper": [
+          3,
+          5
+        ]
+      },
+      "milestones": [
+        {
+          "id": 0,
+          "kind": "invasion",
+          "tick": 40
+        },
+        {
+          "id": 0,
+          "kind": "restrained",
+          "tick": 51
+        },
+        {
+          "id": 0,
+          "kind": "carried",
+          "tick": 54
+        }
+      ],
+      "result": "loss",
+      "seconds": 16.0,
+      "soil_initial": 100,
+      "soil_remaining": 100,
+      "soil_spent_net": 0,
+      "stage_config": {
+        "first_attack_seconds": 10.0,
+        "repeat_interval_seconds": 60.0,
+        "repeat_waves": false,
+        "time_limit_seconds": 180.0,
+        "waves": [
+          {
+            "count": 1,
+            "entries": [
+              [
+                1,
+                5
+              ]
+            ],
+            "interval_seconds": 6.0,
+            "jitter_seconds": 1.0,
+            "lv": 1,
+            "role": "kidnapper",
+            "start_seconds": 0.0
+          }
+        ]
+      }
+    }
+  },
+  "screenshots": {
+    "abduction": {
+      "alert": "主人公が連れ去られている！",
+      "camera": [
+        600.0,
+        357.0
+      ],
+      "keeper_state": "captured",
+      "tick": 118
+    },
+    "combat": {
+      "alert": "",
+      "camera": [
+        600.0,
+        357.0
+      ],
+      "keeper_state": "free",
+      "tick": 104
+    },
+    "placement": {
+      "alert": "",
+      "camera": [
+        600.0,
+        357.0
+      ],
+      "keeper_state": "free",
+      "tick": 0
+    }
+  }
+}

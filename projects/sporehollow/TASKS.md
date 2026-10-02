@@ -9,7 +9,7 @@
 | WR-037 | P0 | DONE | 主人公→個体一覧→動物配置→開始。プレビュー/再配置、開始後テレポート禁止、選択個体への指示 |
 | WR-038 | P0 | DONE | 反撃1.0/1.2秒を比較、固定攻撃値を変えず正面で犬が傷つきつつ勝利。悪配置で誘拐敗北 |
 | WR-039 | P0 | DONE | 右パネル撤去、上下HUD、小パレット4分類、WASD Camera2D、文脈表示、警告/短音/画面外通知、壁損傷/修理見積り |
-| WR-040 | P0 | DOING | review/currentの固定3枚・短いJSON・対象SHA・PACKETをGit管理。入力/GPU/check/build/CI確認 |
+| WR-040 | P0 | DONE | review/currentの固定3枚・短いJSON・対象SHA・PACKETをGit管理。入力/GPU/check/build/CI確認 |
 
 ## 前回Stage1の制作単位
 
