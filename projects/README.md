@@ -7,6 +7,6 @@ WhiteSpace全体の目的、ブランド、リポジトリ、自律度の方針�
 
 | Project | 位置づけ | 自律モード | 状態 |
 | --- | --- | --- | --- |
-| [胞庭（SPOREHOLLOW・仮）](sporehollow/README.md) | 地下の生態系による間接防衛 | 指定範囲の自律試作 / 定期再開なし | 掘削・食物連鎖・侵入・勝敗・再挑戦の1画面試作 |
+| [ホイッスル牧場（仮）](sporehollow/README.md) | 動物の育成・経営・間接防衛 | 指定範囲の自律試作 / 定期再開なし | Windows試作。柴犬→育成・購入→鶏と卵のStage 2 |
 | [言語ジェンガ（仮）](language-jenga/README.md) | 宥めよ・会話/言語実験 | 通常 | 資産集約済み・休止中 |
 | [DIVE DIVE](001-first-release/README.md) | 初期リリースを目指す2D水中探索ゲーム | **指定範囲を自律制作 / 定期再開PAUSED** | L1〜L6・最深部/結末まで約1,960m通し試作。3D開発STOPPED |

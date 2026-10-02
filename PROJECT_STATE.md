@@ -10,10 +10,10 @@
 
 ## 現在のプロジェクト
 
-### 胞庭（SPOREHOLLOW・仮）
+### ホイッスル牧場（仮）
 
-- 地形を掘り、3種の食物連鎖で侵入者を防ぐ独立2D試作。DIVE DIVEのコード・タスクとは分離。
-- 1画面の掘削・生態系・侵入・勝敗・再挑戦が動作。現在は生態系と経路の因果を試す段階。定期再開は設定しない。
+- 旧「胞庭」を人間の新方針で更新。柴犬を育て、笛・餌・門で防衛するGodot製Windows試作。DIVE DIVEのコード・タスクとは分離。
+- Stage 1→EXP・Gold・購入→Stage 2へ引継ぎ。鶏の産卵・盗難・卵の売却/餌交換まで動作。現在は侵入中の間接操作を試す段階。定期再開は設定しない。
 - 詳細: [起動方法](projects/sporehollow/README.md) / [現在地](projects/sporehollow/PROJECT_STATE.md) / [次の仮説](projects/sporehollow/TASKS.md)
 
 ### DIVE DIVE

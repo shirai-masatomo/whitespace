@@ -1,4 +1,4 @@
-name: SPOREHOLLOW
+name: WHISTLE RANCH
 
 on:
   push:
@@ -12,28 +12,34 @@ permissions:
   contents: read
 
 jobs:
-  prototype:
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
+  windows:
+    runs-on: windows-latest
+    timeout-minutes: 15
     defaults:
       run:
+        shell: pwsh
         working-directory: projects/sporehollow
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/cache@v4
         with:
-          node-version: '22'
-      - run: npm ci --ignore-scripts --no-audit --no-fund
-      - run: npm run lint
-      - run: npm test
-      - run: npm run build
-      - name: Compare five ecological strategies
-        run: |
-          mkdir -p artifacts
-          node tools/evaluate.cjs 100 > artifacts/evaluation.json
+          path: |
+            projects/sporehollow/.tools/*.exe
+            projects/sporehollow/.tools/templates
+          key: whistle-ranch-godot-4.7.2-v1
+      - name: Install verified native tools
+        run: ./tools/setup.ps1
+      - name: Rules, intervention comparison, Windows export and exe smoke
+        run: ./dev.ps1 check
       - uses: actions/upload-artifact@v4
         with:
-          name: sporehollow-prototype
+          name: WhistleRanch-windows
+          path: projects/sporehollow/build/
+          if-no-files-found: error
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: WhistleRanch-observations
           path: |
-            projects/sporehollow/build/
-            projects/sporehollow/artifacts/evaluation.json
+            projects/sporehollow/artifacts/*.json
+            projects/sporehollow/artifacts/*.log
