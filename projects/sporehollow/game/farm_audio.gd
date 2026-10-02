@@ -7,15 +7,19 @@ var last_play: Dictionary = {}
 var played: Dictionary = {}
 var seconds = 0.0
 var night = false
+var birds: AudioStreamPlayer
+var ambience_rng = RandomNumberGenerator.new()
+var next_bird = 12.0
+var danger_until = 0.0
 
 func _ready():
 	for i in range(3):
 		var player = AudioStreamPlayer.new()
-		player.volume_db = -9 if i == 2 else -5
+		player.volume_db = -6 if i == 2 else (-12 if i == 1 else -2)
 		add_child(player)
 		voices.append(player)
-	for kind in ["build", "repair", "remove", "collect", "gate", "attack", "object", "bark", "invasion", "restrained", "carried", "rescue", "win", "lose", "animal_danger", "auto_start"]:
-		cache[kind] = synth(kind, 0.42 if kind in ["win", "rescue", "invasion", "carried", "restrained"] else 0.22)
+	for kind in ["build", "repair", "remove", "collect", "gate", "attack", "object", "bark", "invasion", "restrained", "carried", "rescue", "win", "lose", "animal_danger", "auto_start", "early_clear"]:
+		cache[kind] = synth(kind, 0.85 if kind in ["win", "rescue", "invasion", "carried", "early_clear"] else 0.22)
 	ambient = AudioStreamPlayer.new()
 	ambient.stream = synth("ambient", 8.0)
 	cache.ambient = ambient.stream
@@ -23,12 +27,23 @@ func _ready():
 	ambient.volume_db = -19
 	add_child(ambient)
 	ambient.play()
+	birds = AudioStreamPlayer.new()
+	birds.stream = synth("bird", 0.32)
+	birds.volume_db = -23
+	add_child(birds)
+	ambience_rng.seed = 371
 
-func _process(delta): seconds += delta
+func _process(delta):
+	seconds += delta
+	if seconds >= next_bird:
+		next_bird = seconds + ambience_rng.randf_range(8, 20)
+		if not night: birds.play()
 
 func set_night(value: bool):
 	if night == value: return
 	night = value
+	birds.stop()
+	next_bird = seconds + ambience_rng.randf_range(8, 20)
 	ambient.stream = cache.night if night else cache.ambient
 	ambient.play()
 
@@ -37,10 +52,14 @@ func tension(active: bool):
 
 func cue(kind: String):
 	if not cache.has(kind): return
+	var urgent = kind in ["carried", "restrained", "lose", "animal_danger"]
+	if kind in ["invasion", "auto_start"] and seconds < danger_until: return
+	if urgent: danger_until = seconds + 0.9
 	if seconds - last_play.get(kind, -100.0) < (0.4 if kind in ["attack", "object", "bark"] else 0.12): return
 	last_play[kind] = seconds
 	played[kind] = played.get(kind, 0) + 1
-	var channel = 2 if kind in ["attack", "object", "bark"] else (0 if kind in ["invasion", "carried", "restrained", "rescue", "win", "lose", "animal_danger"] else 1)
+	var channel = 2 if kind in ["attack", "object", "bark"] else (0 if kind in ["invasion", "carried", "restrained", "rescue", "win", "lose", "animal_danger", "early_clear"] else 1)
+	voices[channel].volume_db = (-1 if urgent else -4) if channel == 0 else (-7 if channel == 2 else -12)
 	voices[channel].stream = cache[kind]
 	voices[channel].play()
 
@@ -69,8 +88,18 @@ func synth(kind: String, length: float) -> AudioStreamWAV:
 			"ambient":
 				var seam = minf(1, minf(t, length - t) * 5)
 				value = wind * 1.8 * seam
-				var bird = fmod(t, 3.1)
-				if bird < 0.19: value += sin(TAU * (1900 * t + 90 * sin(t * 24))) * sin(bird / 0.19 * PI) * 0.1
+			"bird": value = sin(TAU * (1700 * t + 65 * sin(t * 18))) * sin(t / length * PI) * 0.22
+			"invasion":
+				value = wooden_bell(t, 146) * 0.85
+			"restrained":
+				value = (wooden_bell(t, 220) + noise * exp(-t * 42) * 0.25) * 0.9
+			"carried":
+				value = wooden_bell(t, 196) * 0.65
+				if t >= 0.28: value += wooden_bell(t - 0.28, 246) * 0.9
+			"rescue", "win", "early_clear":
+				value = wooden_bell(t, 392) * 0.55
+				if t >= 0.15: value += wooden_bell(t - 0.15, 494) * 0.45
+				if t >= 0.30: value += wooden_bell(t - 0.30, 587) * 0.45
 			"bark": value = (sin(TAU * (185 * t - 140 * t * t)) + noise * 0.5) * sin(fmod(t, 0.11) / 0.11 * PI) * envelope * 0.55
 			"build", "remove", "object": value = (noise * 0.45 + sin(t * TAU * 95) * 0.55) * envelope
 			"repair", "gate": value = (sin(t * TAU * (370 if kind == "repair" else 210)) * 0.6 + noise * 0.1) * envelope
@@ -89,3 +118,6 @@ func synth(kind: String, length: float) -> AudioStreamWAV:
 		stream.loop_mode = AudioStreamWAV.LOOP_FORWARD
 		stream.loop_end = count
 	return stream
+
+func wooden_bell(t: float, hz: float) -> float:
+	return minf(1, t * 200) * (sin(TAU * hz * t) * exp(-t * 6) + sin(TAU * hz * 2.76 * t) * exp(-t * 16) * 0.32 + sin(TAU * hz * 4.1 * t) * exp(-t * 25) * 0.12)

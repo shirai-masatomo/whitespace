@@ -288,7 +288,7 @@ func run():
 	reserve.finish(true)
 	check(reserve.campaign.animals[1].xp == 0, "Unfielded reserve receives no participation XP")
 	var original = Trial.run_trial("guided", 17)
-	var replay = night({}, original.seed_value)
+	var replay = Farm.new(original.checkpoint, original.seed_value)
 	for action in original.actions:
 		while replay.tick < action.tick: replay.step()
 		check(replay.act(action.kind, Vector2i(action.pos[0], action.pos[1]), action.animal_id) == action.accepted, "Replay action accepted identically")
@@ -307,6 +307,7 @@ func run():
 	check_rest_and_kennels()
 	check_dismantle()
 	check_economy()
+	sight_and_skills()
 	print("PASS: %d Stage1 and campaign checks" % checks)
 	quit()
 
@@ -638,3 +639,78 @@ func check_economy():
 	Trial.deploy(duplicate)
 	while duplicate.phase == "defend": duplicate.step()
 	check(JSON.stringify(duplicate.observation()) == JSON.stringify(full_night.observation()), "Day biology and AI reproduce from identical seed/actions")
+func sight_and_skills():
+	var w = started()
+	w.spawn_enemy(w.spawn_schedule[0])
+	var e = w.enemies[0]
+	e.pos = Vector2i(5, 8)
+	Farm.RaiderAI.perceive(e, w)
+	check(not e.can_see_keeper and e.last_known_keeper_position == null, "No knowledge outside sight range")
+	var goal = Farm.RaiderAI.target(e, w)
+	w.keeper.pos = Vector2i(23, 14)
+	check(Farm.RaiderAI.target(e, w) == goal, "Unseen keeper changes do not change exploration goal")
+	w.keeper.pos = Vector2i(9, 8)
+	w.act("wall", Vector2i(7, 8))
+	w.structures[Vector2i(7, 8)].status = "ready"
+	Farm.RaiderAI.perceive(e, w)
+	check(not e.can_see_keeper, "Wall occludes a keeper within range")
+	w.structures[Vector2i(7, 8)].kind = "gate"
+	w.structures[Vector2i(7, 8)].open = false
+	Farm.RaiderAI.perceive(e, w)
+	check(not e.can_see_keeper, "Closed gate occludes")
+	w.structures[Vector2i(7, 8)].open = true
+	Farm.RaiderAI.perceive(e, w)
+	check(e.can_see_keeper and e.last_known_keeper_position == Vector2i(9, 8) and e.sight_reaction == "!", "Open gate reveals keeper with brief reaction")
+	w.keeper.pos = Vector2i(23, 14)
+	Farm.RaiderAI.perceive(e, w)
+	check(not e.can_see_keeper and e.sight_reaction == "?" and Farm.RaiderAI.target(e, w) == Vector2i(9, 8), "Lost target follows last seen position, not true position")
+	e.pos = Vector2i(9, 8)
+	var next = Farm.RaiderAI.target(e, w)
+	check(e.last_known_keeper_position == null and next != w.keeper.pos, "Empty last known position returns to searching")
+	w.structures[Vector2i(7, 8)].open = false
+	check(not w.line_of_sight(Vector2i(6, 8), Vector2i(7, 9)), "No sight through blocked diagonal corner")
+	var a = w.animals[0]
+	a.pos = Vector2i(18, 8)
+	a.detection_range = 1
+	a.attack_target_range = 4
+	e.pos = Vector2i(13, 8)
+	w.share_detection(a, e.id)
+	check(w.animal_targets(a).is_empty(), "Shared detection cannot exceed attack target range")
+	e.pos = Vector2i(15, 8)
+	check(w.animal_targets(a).size() == 1, "Shared sight supplies knowledge within target range")
+	check(a.object_attack_power == 0 and a.skills == ["bark", "rescue"], "Generic object attack and skills present")
+	var morning = Farm.new({}, 91)
+	var stock = morning.shop_stock.duplicate(true)
+	check(not stock.any(func(row): return row.product == "shiba" or Farm.Shop.FOOD.has(row.product)), "No companion dog or food stocked")
+	check(morning.buy("cat"), "Cat remains a funded alternative")
+	var night_world = morning.begin_night()
+	var reset = Farm.new(night_world.morning_checkpoint, night_world.seed_value)
+	check(reset.phase == "shop" and reset.campaign.gold == 40 and reset.campaign.animals.size() == 1 and reset.shop_stock == stock, "Morning retry undoes purchases and reproduces stock")
+	var cat = night_world.animals[1]
+	cat.lv = 1
+	cat.pos = Vector2i(4, 8)
+	night_world.spawn_enemy(night_world.spawn_schedule[0])
+	night_world.enemies[0].pos = Vector2i(5, 8)
+	night_world.try_meow(cat)
+	check(night_world.skill_log.is_empty(), "Lv1 cat has passive charm only")
+	cat.lv = 2
+	night_world.try_meow(cat)
+	check(night_world.enemies[0].weakened_until == 16 and cat.skill_ready.meow == 48, "Lv2 meow weakens for four seconds with twelve-second cooldown")
+	night_world.try_meow(cat)
+	check(night_world.skill_log.size() == 1 and cat.attack_power == 0, "Meow respects cooldown and is not an attack")
+	var raider = night_world.enemies[0]
+	var dog = night_world.animals[0]
+	dog.placed = true
+	dog.pos = Vector2i(5, 9)
+	raider.attacker = dog.id
+	raider.threat_until = 100
+	raider.ai_context = "under_attack"
+	raider.next_decision = 100
+	raider.intent = "counter"
+	night_world.tick = 1
+	night_world.enemy_step(raider)
+	check(dog.hp == 36, "Meow reduces a real counterattack from five to four after integer rounding")
+	night_world.tick = 17
+	raider.counter_until = 100
+	night_world.enemy_step(raider)
+	check(dog.hp == 31 and raider.attack_power == 5, "Weakening expires without mutating base AttackPower")

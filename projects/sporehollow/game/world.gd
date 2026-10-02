@@ -24,11 +24,10 @@ var early_finish_bonus = 0
 var dawn_summary: Dictionary = {}
 var field_items: Array = []
 var daily_rng = RandomNumberGenerator.new()
-const SPECIES = {
-	"shiba": {"title": "柴犬", "category": "dog", "hp": 40, "commands": true, "mortal": false, "affinity": false},
-	"hen": {"title": "鶏", "category": "bird", "hp": 20, "commands": false, "mortal": false, "affinity": false},
-	"cat": {"title": "猫", "category": "cat", "hp": 20, "commands": false, "mortal": false, "affinity": true,
-		"abilities": {"charm": {"implemented": false}, "meow": {"implemented": false, "cooldown": 12.0, "range": 3, "attack_reduction": 0.15, "duration": 4.0}}}}
+const AnimalData = preload("res://game/animal_data.gd")
+const SPECIES = AnimalData.SPECIES
+var sight_log: Array = []
+var morning_checkpoint: Dictionary
 var result = ""
 var paused = false
 var command_power = 10.0
@@ -92,6 +91,8 @@ func _init(data: Dictionary = {}, seed_number: int = 17, stage_override: Diction
 		owned.unavailable_through_day = owned.get("unavailable_through_day", 0)
 		if owned.get("hp", 1) <= 0 and campaign.day > owned.unavailable_through_day:
 			owned.hp = maxi(1, (SPECIES[owned.species].hp + (owned.lv - 1) * 4) / 2) # Provisional return after one full day off.
+	morning_checkpoint = campaign.get("morning_checkpoint", campaign).duplicate(true)
+	morning_checkpoint.erase("morning_checkpoint")
 	checkpoint = campaign.duplicate(true)
 	phase = "prepare" if campaign.night_ready else "shop"
 	stage = campaign.stage
@@ -131,7 +132,15 @@ func _init(data: Dictionary = {}, seed_number: int = 17, stage_override: Diction
 		if not clear_cells.is_empty(): nest = clear_cells[0]
 	for owned in campaign.animals:
 		var a = owned.duplicate(true)
-		a.loyalty = a.get("loyalty", 0)
+		a.loyalty = a.get("loyalty", SPECIES[a.species].loyalty)
+		a.move_speed = SPECIES[a.species].move_speed
+		a.detection_range = SPECIES[a.species].detection_range
+		a.attack_target_range = SPECIES[a.species].attack_target_range
+		a.attack_seconds = SPECIES[a.species].attack_seconds
+		a.object_attack_power = SPECIES[a.species].object_attack
+		a.skills = SPECIES[a.species].skills.duplicate()
+		a.skill_ready = {}
+		a.known_enemies = {}
 		a.pos = Vector2i(-10, -10)
 		a.placed = false
 		a.home = a.pos
@@ -140,7 +149,7 @@ func _init(data: Dictionary = {}, seed_number: int = 17, stage_override: Diction
 		a.hp = clampi(a.get("hp", a.max_hp), 0, a.max_hp)
 		a.next_bark = 0
 		a.last_bark = -100
-		a.attack_power = Rules.SHIBA.attack_power + (a.lv - 1) * 2 if a.species == "shiba" else 0
+		a.attack_power = SPECIES[a.species].attack + ((a.lv - 1) * 2 if a.species == "shiba" else 0)
 		a.next_attack = 0
 		a.move_credit = 0.0
 		a.rescuing = false
@@ -160,7 +169,7 @@ func _init(data: Dictionary = {}, seed_number: int = 17, stage_override: Diction
 		a.path = [a.pos]
 		animals.append(a)
 	shop_stock = Shop.generate(stage, seed_value, campaign.unlocked_blueprints)
-	say("主人公を配置してください")
+	say("今夜はどこで過ごす？")
 
 func make_schedule():
 	# Each wave has a start time relative to the first attack. Jitter affects gaps, never prep length.
@@ -350,7 +359,9 @@ func spawn_enemy(event: Dictionary):
 		"attacker": -1, "threat_until": 0,
 		"move_stopped_until": 0,
 		"flee": false, "carry": "", "done": false, "capture_progress": 0,
-		"born": tick, "path": [origin], "role": event.role, "state": "主人公へ"})
+		"sight_range": event.get("sight_range", Rules.KIDNAPPER.sight_range), "can_see_keeper": false, "last_known_keeper_position": null, "search_state": "探索中",
+		"search_goal": null, "search_goal_until": 0, "search_visits": {}, "sight_reaction": "", "sight_reaction_until": 0,
+		"weakened_until": 0, "born": tick, "path": [origin], "role": event.role, "state": "探索中"})
 	spawned += 1
 	milestones.append({"tick": tick, "kind": "invasion", "id": spawned - 1})
 	say("入口から誘拐役！ 牧場主を守ろう。")
@@ -388,10 +399,13 @@ func animal_step(a: Dictionary):
 		a.ai_context = "new_order"
 	if a.mode != "rest" and tick >= a.order_until: a.mode = "auto"
 	if a.species in ["hen", "cat"]:
-		var threat = enemies.filter(func(e): return not e.done and not e.flee and distance(a.pos, e.pos) <= 4)
+		try_meow(a)
+		var threat = enemies.filter(func(e): return not e.done and not e.flee and distance(a.pos, e.pos) <= a.detection_range)
 		a.fear = 28 if not threat.is_empty() else maxi(0, a.fear - 1)
 		a.state = "怖がる" if a.fear > 0 else ("ついばむ" if a.species == "hen" else "散歩")
-		if not threat.is_empty() and tick % 3 == 0:
+		a.move_credit = minf(1.0, a.move_credit + a.move_speed * DT)
+		if not threat.is_empty() and a.move_credit >= 1:
+			a.move_credit -= 1
 			var options = neighbors(a.pos).filter(func(p): return walkable(p))
 			options.sort_custom(func(p, q): return distance(p, threat[0].pos) > distance(q, threat[0].pos))
 			if not options.is_empty(): a.pos = options[0]
@@ -405,7 +419,8 @@ func animal_step(a: Dictionary):
 						if a.pos == coops[0]: a.hp = mini(a.max_hp, a.hp + 1)
 					a.state = "鶏小屋"
 					return
-			if tick % 8 == 0:
+			if a.move_credit >= 1 and tick % 4 == 0:
+				a.move_credit -= 1
 				var options = neighbors(a.pos).filter(func(p): return walkable(p) and not occupied(p))
 				if not options.is_empty(): a.pos = options[daily_rng.randi_range(0, options.size() - 1)]
 		return
@@ -415,8 +430,8 @@ func animal_step(a: Dictionary):
 		rest_step(a, true)
 		return
 	var carrier = enemies.filter(func(e): return not e.done and not e.flee and e.carry == "keeper")
-	a.rescuing = not carrier.is_empty()
-	var targets = enemies.filter(func(e): return not e.done and not e.flee and distance(a.pos, e.pos) <= Rules.SHIBA.detection_range)
+	a.rescuing = AnimalData.has_skill(a, "rescue") and not carrier.is_empty()
+	var targets = animal_targets(a)
 	targets.sort_custom(func(e, f): return distance(a.pos, e.pos) < distance(a.pos, f.pos))
 	if a.mode == "auto" and not a.rescuing and targets.is_empty() and a.hp < a.max_hp and (a.auto_recovering or a.hp <= a.max_hp * Rules.REST.auto_hp_fraction):
 		a.auto_recovering = true
@@ -428,7 +443,7 @@ func animal_step(a: Dictionary):
 	a.rest_ticks = 0
 	try_bark(a)
 	if a.mode == "attack_target":
-		var selected = enemies.filter(func(e): return e.id == a.target_id and not e.done and not e.flee)
+		var selected = enemies.filter(func(e): return e.id == a.target_id and not e.done and not e.flee and distance(a.pos, e.pos) <= a.attack_target_range)
 		if not selected.is_empty(): targets = selected
 		else: a.mode = "auto"
 	if a.rescuing: targets = carrier
@@ -463,7 +478,7 @@ func animal_step(a: Dictionary):
 				a.side_step_used = true
 			return
 		if distance(a.pos, goal) <= 1 and tick >= a.next_attack:
-			a.next_attack = tick + ceili(Rules.SHIBA.attack_seconds / DT)
+			a.next_attack = tick + ceili(a.attack_seconds / DT)
 			a.stamina = maxf(0, a.stamina - 8)
 			var enemy = targets[0]
 			enemy.hp = maxi(0, enemy.hp - a.attack_power)
@@ -486,7 +501,7 @@ func animal_step(a: Dictionary):
 		a.ai_context = "idle"
 		a.state = "待機" if a.mode == "stay" else "見張り"
 		a.stamina = minf(100, a.stamina + (1.6 if campaign.shelter and distance(a.pos, nest) <= 3 else 0.3))
-	a.move_credit = minf(1.75, a.move_credit + Rules.SHIBA.speed * DT * (Rules.SHIBA.rescue_multiplier if a.rescuing else 1.0))
+	a.move_credit = minf(1.75, a.move_credit + a.move_speed * DT * (Rules.SHIBA.rescue_multiplier if a.rescuing else 1.0))
 	if a.move_credit >= 1 and distance(a.pos, goal) > (1 if chasing else 0):
 		a.move_credit -= 1
 		var move = next_step(a.pos, goal)
@@ -525,7 +540,7 @@ func rest_step(a: Dictionary, explicit: bool):
 	if a.kennel_id >= 0 and a.pos != destination:
 		a.state = "小屋へ休養"
 		a.rest_ticks = 0
-		a.move_credit += Rules.SHIBA.speed * DT
+		a.move_credit += a.move_speed * DT
 		if a.move_credit >= 1:
 			a.move_credit -= 1
 			var next = next_step(a.pos, destination)
@@ -563,6 +578,7 @@ func side_step(p: Vector2i, goal: Vector2i, roll: float) -> Vector2i:
 
 func enemy_step(e: Dictionary):
 	if e.done: return
+	RaiderAI.perceive(e, self)
 	if not e.flee:
 		var threatened = tick < e.threat_until and tick >= e.counter_ready and animals.any(func(a): return a.placed and a.id == e.attacker and a.hp > 0)
 		var context = "under_attack" if threatened else ("carrying" if e.carry == "keeper" else "kidnap")
@@ -595,10 +611,11 @@ func enemy_step(e: Dictionary):
 				if tick >= e.next_attack:
 					e.next_attack = tick + ceili(e.counter_seconds / DT)
 					var previous_hp: int = target.hp
-					target.hp = maxi(0, target.hp - e.attack_power)
+					var damage = roundi(e.attack_power * (1.0 - AnimalData.SKILLS.meow.reduction if tick < e.weakened_until else 1.0))
+					target.hp = maxi(0, target.hp - damage)
 					if previous_hp > target.max_hp * Rules.LOW_HP_FRACTION and target.hp <= target.max_hp * Rules.LOW_HP_FRACTION:
 						milestones.append({"tick": tick, "kind": "animal_danger", "id": target.id})
-					combat_log.append({"tick": tick, "source": "enemy", "id": e.id, "target": target.id, "damage": e.attack_power})
+					combat_log.append({"tick": tick, "source": "enemy", "id": e.id, "target": target.id, "damage": damage})
 			elif tick % 3 == 0:
 				move_enemy(e, next_step(e.pos, target.pos, true))
 			return
@@ -616,7 +633,7 @@ func enemy_step(e: Dictionary):
 			keeper.state = "abducted"
 			finish(false)
 			return
-		if keeper.carrier < 0:
+		if e.can_see_keeper and e.pos == keeper.pos and keeper.carrier < 0:
 			e.capture_progress += 1
 			if e.capture_progress == 1:
 				keeper.state = "restrained"
@@ -662,7 +679,7 @@ func move_enemy(e: Dictionary, next: Vector2i):
 		e.pos = next
 		e.path.append(next)
 		interrupt_site(next)
-		e.state = "退散" if e.flee else ("反撃" if e.counter_target >= 0 else ("連れ去り" if e.carry == "keeper" else "主人公へ"))
+		e.state = "退散" if e.flee else ("反撃" if e.counter_target >= 0 else ("連れ去り" if e.carry == "keeper" else e.search_state))
 		if e.carry == "keeper":
 			keeper.pos = e.pos
 			if not inside(e.pos):
@@ -785,6 +802,7 @@ func finish(won: bool):
 
 func next_campaign() -> Dictionary:
 	var data = campaign.duplicate(true)
+	data.erase("morning_checkpoint")
 	data.day += 1
 	data.night_ready = false
 	return data
@@ -803,6 +821,9 @@ func observation() -> Dictionary:
 		row.pos = [e.pos.x, e.pos.y]
 		row.entry = [e.entry.x, e.entry.y]
 		row.path = e.path.map(func(p): return [p.x, p.y])
+		for key in ["last_known_keeper_position", "search_goal"]:
+			if row[key] != null: row[key] = [row[key].x, row[key].y]
+		row.search_visits = e.search_visits.keys().map(func(p): return {"pos": [p.x, p.y], "visits": e.search_visits[p]})
 		raiders.append(row)
 	var built = []
 	for p in structures:
@@ -826,17 +847,17 @@ func observation() -> Dictionary:
 		"campaign": campaign.duplicate(true), "animals": positions, "raiders": raiders, "keeper": owner,
 		"metrics": metrics.duplicate(true), "score": score.duplicate(true), "structures": built, "materials": materials,
 		"combat": combat_log.duplicate(true), "resources": resource_snapshot(), "shop_stock": shop_stock.duplicate(true), "shop_log": shop_log.duplicate(true), "actions": actions.duplicate(true), "samples": traces.duplicate(true), "schedule": schedule,
-		"ai_settings": Rules.AI, "decision_log": decision_log.duplicate(true), "decision_count": decision_count, "decision_counts": decision_counts.duplicate(true),
+		"sight_log": sight_log.duplicate(true), "ai_settings": Rules.AI, "decision_log": decision_log.duplicate(true), "decision_count": decision_count, "decision_counts": decision_counts.duplicate(true),
 		"bark_settings": Rules.BARK, "skill_log": skill_log.duplicate(true), "nature_settings": nature_config,
 		"natural": natural.keys().map(func(p): return {"pos": [p.x, p.y], "kind": natural[p]}), "mushrooms": campaign.mushrooms,
 		"initial_positions": initial_positions.duplicate(true), "milestones": milestones.duplicate(true), "stage_config": config.duplicate(true), "eggs": eggs, "command_power": command_power}
 
 func try_bark(a: Dictionary):
-	if a.mode == "rest": return
+	if a.mode == "rest" or not AnimalData.has_skill(a, "bark"): return
 	if tick < a.next_bark: return
-	var nearby = enemies.filter(func(e): return not e.done and not e.flee and distance(a.pos, e.pos) <= Rules.SHIBA.detection_range)
+	var nearby = enemies.filter(func(e): return not e.done and not e.flee and distance(a.pos, e.pos) <= a.detection_range)
 	if nearby.is_empty(): return
-	a.next_bark = tick + ceili(Rules.BARK.cooldown / DT)
+	a.next_bark = tick + ceili(AnimalData.SKILLS.bark.cooldown / DT)
 	a.last_bark = tick
 	var targets = []
 	for enemy in nearby:
@@ -980,6 +1001,7 @@ func begin_night():
 	persist_farm()
 	var data = campaign.duplicate(true)
 	data.night_ready = true
+	data.morning_checkpoint = morning_checkpoint.duplicate(true)
 	return get_script().new(data, seed_value, config)
 
 func rename_animal(id: int, text: String) -> bool:
@@ -1035,7 +1057,43 @@ func process_dawn():
 			"protected_by": structures[a.pos].id if structures.get(a.pos, {}).get("kind") == "coop" and live_structure(a.pos) else -1})
 		dawn_summary.eggs += 1
 		metrics.eggs_produced += 1
-		if daily_rng.randf() < 0.15:
+		if AnimalData.has_skill(a, "feather") and daily_rng.randf() < 0.15:
 			field_items.append({"kind": "feather", "pos": a.pos, "born_day": campaign.day})
 			dawn_summary.feathers += 1
 	milestones.append({"tick": tick, "kind": "dawn"})
+
+func line_of_sight(from: Vector2i, to: Vector2i) -> bool:
+	# Supercover: no peeking through touching wall corners.
+	var delta = to - from
+	var count = maxi(absi(delta.x), absi(delta.y)) * 4
+	var previous = from
+	for i in range(1, count + 1):
+		var p = Vector2i((Vector2(from) + Vector2(delta) * float(i) / count).round())
+		if p != previous and p.x != previous.x and p.y != previous.y:
+			if blocks_sight(Vector2i(p.x, previous.y)) or blocks_sight(Vector2i(previous.x, p.y)): return false
+		if p != from and blocks_sight(p): return false
+		previous = p
+	return true
+
+func blocks_sight(p: Vector2i) -> bool:
+	if not structures.has(p) or structures[p].status != "ready": return false
+	var b = structures[p]
+	return b.get("blocks_sight", b.kind not in ["kennel", "coop"]) and not b.open
+
+func animal_targets(a: Dictionary) -> Array:
+	for e in enemies:
+		if not e.done and not e.flee and distance(a.pos, e.pos) <= a.detection_range:
+			a.known_enemies[e.id] = tick + 8
+	return enemies.filter(func(e): return not e.done and not e.flee and a.known_enemies.get(e.id, -1) >= tick and distance(a.pos, e.pos) <= a.attack_target_range)
+
+func share_detection(a: Dictionary, enemy_id: int, seconds: float = 2.0):
+	a.known_enemies[enemy_id] = tick + ceili(seconds / DT)
+
+func try_meow(a: Dictionary):
+	if not AnimalData.has_skill(a, "meow") or tick < a.skill_ready.get("meow", 0): return
+	var skill = AnimalData.SKILLS.meow
+	var nearby = enemies.filter(func(e): return not e.done and not e.flee and distance(a.pos, e.pos) <= skill.range)
+	if nearby.is_empty(): return
+	a.skill_ready.meow = tick + ceili(skill.cooldown / DT)
+	for e in nearby: e.weakened_until = tick + ceili(skill.duration / DT)
+	skill_log.append({"tick": tick, "actor": "cat_%d" % a.id, "skill": "meow", "targets": nearby.map(func(e): return e.id)})

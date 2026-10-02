@@ -5,9 +5,9 @@ const FOOD = {"dog_food": {"category": "dog", "hp": 10}, "hen_food": {"category"
 
 static func table() -> Dictionary:
 	var rows = [
-		["shiba", "柴犬 Lv1", "animals", 42, 15, 1, 1.0, false, 1],
+		["shiba", "柴犬 Lv1", "animals", 42, 15, 1, 0.0, false, 0],
 		["hen", "鶏 Lv1", "animals", 30, 10, 1, 1.0, true, 1],
-		["cat", "猫 Lv1（能力は準備中）", "animals", 38, 12, 1, 1.0, true, 1],
+		["cat", "猫 Lv1", "animals", 38, 12, 1, 1.0, true, 1],
 		["soil", "土 50", "materials", 15, 5, 50, 0.0, true, 4],
 		["wood", "木材 20", "materials", 12, 4, 20, 0.0, true, 3],
 		["stone", "石 10", "materials", 10, 3, 10, 0.0, true, 3],
@@ -21,7 +21,7 @@ static func table() -> Dictionary:
 	var products = {}
 	for r in rows:
 		products[r[0]] = {"ProductID": r[0], "Name": r[1], "Category": r[2], "BuyPrice": r[3], "SellPrice": r[4], "Amount": r[5],
-			"Rarity": "common" if r[7] else "uncommon", "Weight": r[6], "UnlockCondition": "", "StageMin": 1, "Guaranteed": r[7], "Stock": r[8]}
+			"Rarity": "common" if r[7] else "uncommon", "Weight": r[6], "UnlockCondition": "", "StageMin": 1, "Enabled": r[0] != "shiba" and not FOOD.has(r[0]), "Guaranteed": r[7], "Stock": r[8]}
 	return products
 
 static func generate(stage: int, seed_value: int, blueprints: Array) -> Array:
@@ -31,7 +31,7 @@ static func generate(stage: int, seed_value: int, blueprints: Array) -> Array:
 	var candidates = []
 	var total = 0.0
 	for product in table().values():
-		if stage < product.StageMin or (product.UnlockCondition != "" and product.UnlockCondition not in blueprints): continue
+		if not product.Enabled or stage < product.StageMin or (product.UnlockCondition != "" and product.UnlockCondition not in blueprints): continue
 		if product.Guaranteed: stock.append({"product": product.ProductID, "remaining": product.Stock, "individual": {"loyalty": 0}})
 		elif product.Category == "animals" and product.Weight > 0:
 			candidates.append(product)
