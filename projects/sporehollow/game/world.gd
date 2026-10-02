@@ -23,8 +23,10 @@ var command_power = 10.0
 var materials = 100 # Soil only; Gold is never spent by construction or repair.
 var next_structure_id = 1
 var combat_log: Array = []
+var milestones: Array = []
+var initial_positions: Dictionary = {}
 var structures: Dictionary = {}
-var keeper = {"pos": Vector2i(19, 8), "placed": false, "carrier": -1, "state": "free"}
+var keeper = {"pos": Vector2i(19, 8), "placed": false, "carrier": -1, "state": "free", "restrainer": -1}
 var animals: Array = []
 var enemies: Array = []
 var foods: Array = []
@@ -79,7 +81,8 @@ func _init(data: Dictionary = {}, seed_number: int = 17, stage_override: Diction
 	for owned in campaign.animals:
 		var a = owned.duplicate(true)
 		a.loyalty = a.get("loyalty", 0)
-		a.pos = Vector2i(17, 8) if a.species == "shiba" else nest
+		a.pos = Vector2i(-10, -10)
+		a.placed = false
 		a.home = a.pos
 		a.stamina = 100.0
 		a.max_hp = Rules.SHIBA.max_hp if a.species == "shiba" else 20
@@ -97,7 +100,7 @@ func _init(data: Dictionary = {}, seed_number: int = 17, stage_override: Diction
 		a.state = "見張り" if a.species == "shiba" else "ついばむ"
 		a.path = [a.pos]
 		animals.append(a)
-	say("牧場主の位置を選んで、時計を動かそう。")
+	say("牧場主、動物の順に配置して時計を始めよう。")
 
 func make_schedule():
 	# Each wave has a start time relative to the first attack. Jitter affects gaps, never prep length.
@@ -133,7 +136,7 @@ func live_structure(p: Vector2i) -> bool:
 	return structures.has(p) and structures[p].status in ["ready", "building"]
 
 func occupied(p: Vector2i) -> bool:
-	return p == keeper.pos or animals.any(func(a): return a.pos == p) or enemies.any(func(e): return not e.done and e.pos == p) or foods.any(func(f): return f.pos == p)
+	return (keeper.placed and p == keeper.pos) or animals.any(func(a): return a.placed and a.pos == p) or enemies.any(func(e): return not e.done and e.pos == p) or foods.any(func(f): return f.pos == p)
 
 func has_nest() -> bool:
 	return campaign.animals.any(func(a): return a.species == "hen")
@@ -177,27 +180,39 @@ func next_step(start: Vector2i, goal: Vector2i, raider: bool = false) -> Vector2
 static func distance(a: Vector2i, b: Vector2i) -> int:
 	return absi(a.x - b.x) + absi(a.y - b.y)
 
-func act(kind: String, p: Vector2i = Vector2i.ZERO) -> bool:
+func can_place_animal(id: int, p: Vector2i) -> bool:
+	return animals.any(func(a): return a.id == id) and phase == "prepare" and keeper.placed and walkable(p) and not live_structure(p) and p not in entries and p != keeper.pos and not animals.any(func(a): return a.placed and a.id != id and a.pos == p)
+
+func ready_to_start() -> bool:
+	return keeper.placed and animals.all(func(a): return a.placed)
+
+func act(kind: String, p: Vector2i = Vector2i.ZERO, animal_id: int = -1) -> bool:
 	var accepted = false
 	if phase == "prepare":
-		if kind == "place" and walkable(p) and neighbors(p).any(func(n): return walkable(n)) and p not in entries and not (p == nest and has_nest()):
+		if kind == "place" and walkable(p) and not live_structure(p) and p not in entries and not animals.any(func(a): return a.placed and a.pos == p) and not (p == nest and has_nest()):
 			keeper.pos = p
 			keeper.placed = true
-			var nearby = [p + Vector2i.LEFT, p + Vector2i.RIGHT, p + Vector2i.UP, p + Vector2i.DOWN].filter(func(n): return walkable(n))
-			animals[0].pos = nearby[0]
-			animals[0].home = animals[0].pos
-			animals[0].path = [animals[0].pos]
 			accepted = true
-		elif kind == "start" and keeper.placed:
+		elif kind == "place_animal" and can_place_animal(animal_id, p):
+			for a in animals:
+				if a.id == animal_id:
+					a.pos = p
+					a.home = p
+					a.order = p
+					a.path = [p]
+					a.placed = true
+					accepted = true
+		elif kind == "start" and ready_to_start():
 			phase = "defend"
-			say("時計開始。襲来前に壁・門を築こう。")
+			initial_positions = {"keeper": [keeper.pos.x, keeper.pos.y], "animals": animals.map(func(a): return {"id": a.id, "pos": [a.pos.x, a.pos.y]})}
+			say("時計開始。壁と門で備えよう。")
 			accepted = true
 	elif phase == "defend":
 		if kind == "pause":
 			paused = not paused
 			accepted = true
 		elif kind in ORDERS:
-			accepted = issue_order(kind, p)
+			accepted = issue_order(kind, p, animal_id)
 		elif not paused:
 			if BUILD.has(kind):
 				if can_build(kind, p):
@@ -229,10 +244,10 @@ func act(kind: String, p: Vector2i = Vector2i.ZERO) -> bool:
 				metrics.eggs_collected += eggs
 				eggs = 0
 				accepted = true
-	actions.append({"tick": tick, "kind": kind, "pos": [p.x, p.y], "accepted": accepted, "paused": paused})
+	actions.append({"tick": tick, "kind": kind, "pos": [p.x, p.y], "accepted": accepted, "paused": paused, "animal_id": animal_id})
 	return accepted
 
-func issue_order(kind: String, p: Vector2i) -> bool:
+func issue_order(kind: String, p: Vector2i, animal_id: int = -1) -> bool:
 	var target_id = -1
 	if kind == "attack_target":
 		var found = enemies.filter(func(e): return not e.done and not e.flee and e.pos == p)
@@ -241,7 +256,7 @@ func issue_order(kind: String, p: Vector2i) -> bool:
 	elif kind in ["whistle", "stay", "wander"] and not walkable(p): return false
 	var accepted = false
 	for a in animals:
-		if a.loyalty <= 0: continue
+		if not a.placed or a.loyalty <= 0 or (animal_id >= 0 and a.id != animal_id): continue
 		# Paused orders change intent only. Their reaction countdown starts with resumed simulation.
 		a.pending = {"kind": kind, "pos": p, "target_id": target_id,
 			"at": tick + 1 + ceili((100 - a.loyalty) / 25.0)}
@@ -254,10 +269,11 @@ func spawn_enemy(event: Dictionary):
 	var origin = exit_for(entry) if blocks(entry) else entry
 	enemies.append({"id": spawned, "pos": origin, "entry": entry, "lv": event.get("lv", 1), "hp": Rules.KIDNAPPER.max_hp, "max_hp": Rules.KIDNAPPER.max_hp,
 		"attack_power": Rules.KIDNAPPER.attack_power, "object_attack_power": Rules.KIDNAPPER.object_attack_power,
-		"counter_target": -1, "counter_until": 0, "counter_ready": 0, "next_attack": 0,
+		"counter_seconds": Rules.KIDNAPPER.counter_seconds, "counter_target": -1, "counter_until": 0, "counter_ready": 0, "next_attack": 0,
 		"flee": false, "carry": "", "done": false, "capture_progress": 0,
 		"born": tick, "path": [origin], "role": event.role, "state": "主人公へ"})
 	spawned += 1
+	milestones.append({"tick": tick, "kind": "invasion", "id": spawned - 1})
 	say("入口から誘拐役！ 牧場主を守ろう。")
 
 func release_keeper(e: Dictionary):
@@ -267,9 +283,12 @@ func release_keeper(e: Dictionary):
 		keeper.state = "free"
 		keeper.pos = e.pos
 		metrics.rescues += 1
+		keeper.restrainer = -1
+		milestones.append({"tick": tick, "kind": "rescue", "id": e.id})
 		say("救出！ 牧場主はその場で待っています。")
 
 func animal_step(a: Dictionary):
+	if not a.placed: return
 	if a.hp <= 0:
 		a.state = "休養中"
 		a.rescuing = false
@@ -339,6 +358,10 @@ func animal_step(a: Dictionary):
 				say("侵入者を追い返した！")
 			elif tick >= enemy.counter_ready and enemy.counter_target < 0:
 				enemy.counter_target = a.id
+				if keeper.restrainer == enemy.id and enemy.carry == "":
+					keeper.state = "free"
+					keeper.restrainer = -1
+					enemy.capture_progress = 0
 				enemy.counter_until = tick + ceili(Rules.KIDNAPPER.counter_duration / DT)
 	elif a.mode == "wander":
 		a.state = "徘徊"
@@ -371,8 +394,11 @@ func enemy_step(e: Dictionary):
 			e.state = "反撃"
 			if distance(e.pos, target.pos) <= 1:
 				if tick >= e.next_attack:
-					e.next_attack = tick + ceili(Rules.KIDNAPPER.counter_seconds / DT)
+					e.next_attack = tick + ceili(e.counter_seconds / DT)
+					var previous_hp: int = target.hp
 					target.hp = maxi(0, target.hp - e.attack_power)
+					if previous_hp > target.max_hp * Rules.LOW_HP_FRACTION and target.hp <= target.max_hp * Rules.LOW_HP_FRACTION:
+						milestones.append({"tick": tick, "kind": "animal_danger", "id": target.id})
 					combat_log.append({"tick": tick, "source": "enemy", "id": e.id, "target": target.id, "damage": e.attack_power})
 			elif tick % 3 == 0:
 				move_enemy(e, next_step(e.pos, target.pos, true))
@@ -395,12 +421,17 @@ func enemy_step(e: Dictionary):
 			return
 		if keeper.carrier < 0:
 			e.capture_progress += 1
+			if e.capture_progress == 1:
+				keeper.state = "restrained"
+				keeper.restrainer = e.id
+				milestones.append({"tick": tick, "kind": "restrained", "id": e.id})
 			e.state = "拘束中"
 			if e.capture_progress >= 2:
 				e.carry = "keeper"
 				keeper.carrier = e.id
 				keeper.state = "captured"
 				metrics.captures += 1
+				milestones.append({"tick": tick, "kind": "carried", "id": e.id})
 				say("連れ去り中！ 犬で追い返すと救出できます。")
 		return
 	e.capture_progress = 0
@@ -453,18 +484,21 @@ func construction_step():
 			b.hp = b.max_hp
 			metrics.built += 1
 
-func repair(p: Vector2i) -> bool:
-	if phase != "defend" or paused: return false
-	if not structures.has(p) or structures[p].status != "ready": return false
+func repair_quote(p: Vector2i) -> Dictionary:
+	if not structures.has(p) or structures[p].status != "ready": return {"hp": 0, "cost": 0}
 	var b = structures[p]
 	var unit_cost: float = b.cost * Rules.REPAIR_FACTOR / b.max_hp
 	var recovery = mini(b.max_hp - b.hp, floori(materials / unit_cost))
-	if recovery <= 0: return false
-	var cost = ceili(recovery * unit_cost)
-	materials -= cost
-	b.hp += recovery
-	metrics.repaired += recovery
-	metrics.soil_repair += cost
+	return {"hp": recovery, "cost": ceili(recovery * unit_cost)}
+
+func repair(p: Vector2i) -> bool:
+	if phase != "defend" or paused: return false
+	var quote = repair_quote(p)
+	if quote.hp <= 0: return false
+	materials -= quote.cost
+	structures[p].hp += quote.hp
+	metrics.repaired += quote.hp
+	metrics.soil_repair += quote.cost
 	return true
 
 func persist_farm():
@@ -592,4 +626,4 @@ func observation() -> Dictionary:
 		"campaign": campaign.duplicate(true), "animals": positions, "raiders": raiders, "keeper": owner,
 		"metrics": metrics.duplicate(true), "score": score.duplicate(true), "structures": built, "materials": materials,
 		"combat": combat_log.duplicate(true), "resources": {"soil": materials}, "actions": actions.duplicate(true), "samples": traces.duplicate(true), "schedule": schedule,
-		"stage_config": config.duplicate(true), "eggs": eggs, "command_power": command_power}
+		"initial_positions": initial_positions.duplicate(true), "milestones": milestones.duplicate(true), "stage_config": config.duplicate(true), "eggs": eggs, "command_power": command_power}
