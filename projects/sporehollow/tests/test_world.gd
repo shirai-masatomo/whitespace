@@ -304,6 +304,7 @@ func run():
 	check(saved.decision_log.filter(func(d): return d.rescue_mode).all(func(d): return d.selected in ["attack", "approach"]), "Rescue never chooses passive behavior")
 	check(saved.decision_log.size() <= Farm.Rules.AI.log_limit, "Decision log is bounded")
 	check_new_rules()
+	check_rest_and_kennels()
 	print("PASS: %d Stage1 and campaign checks" % checks)
 	quit()
 
@@ -372,3 +373,108 @@ func check_new_rules():
 	check(full.animals[0].hp == 40 and full.campaign.mushrooms == 2, "Healing capped; surplus mushrooms retained")
 	var wander = started()
 	check(wander.act("wander", Vector2i(-100, -100), 1) and wander.animals[0].pending.pos == wander.animals[0].pos, "Wander uses current position without destination")
+
+func quiet_farm(two_dogs: bool = false):
+	var data = Farm.new_campaign()
+	if two_dogs:
+		var second = data.animals[0].duplicate(true)
+		second.id = 2
+		data.animals.append(second)
+	var conf = Farm.StageData.STAGES[1].duplicate(true)
+	conf.first_attack_seconds = 999.0
+	var w = Farm.new(data, 17, conf)
+	w.act("place", Vector2i(19, 8))
+	w.act("place_animal", Vector2i(12, 8), 1)
+	if two_dogs: w.act("place_animal", Vector2i(12, 10), 2)
+	return w
+
+func check_rest_and_kennels():
+	var w = quiet_farm()
+	var a = w.animals[0]
+	a.hp = 20
+	w.act("pause")
+	check(w.act("rest", Vector2i.ZERO, 1) and a.mode == "auto", "Pause queues rest without immediate AI or HP changes")
+	advance(w, 40)
+	check(a.hp == 20 and w.tick == 0, "Paused rest never heals or advances")
+	w.act("pause")
+	advance(w, 2)
+	check(a.mode == "rest" and a.state == "休む", "Rest accepted at loyalty response deadline")
+	var base = a.hp
+	advance(w, 19)
+	check(a.hp == base + 1, "Five stationary rest seconds heals exactly1")
+	advance(w, 240)
+	check(a.mode == "rest", "Explicit rest outlasts ordinary order timeout")
+	w.spawn_enemy(w.spawn_schedule[0])
+	var e = w.enemies[0]
+	e.pos = a.pos + Vector2i.RIGHT
+	e.carry = "keeper"
+	w.keeper.carrier = e.id
+	w.keeper.state = "captured"
+	var pos = a.pos
+	var casts = w.metrics.bark_casts
+	for i in range(20):
+		w.tick += 1
+		w.animal_step(a)
+	check(a.pos == pos and e.hp == 50 and not a.rescuing and w.metrics.bark_casts == casts, "Rest ignores carrier and nearby threat: no chase, attack or bark")
+	w.act("auto", Vector2i.ZERO, 1)
+	for i in range(2):
+		w.tick += 1
+		w.animal_step(a)
+	check(a.mode == "auto" and a.rescuing, "Auto cancels rest and restores rescue priority")
+
+	w = quiet_farm(true)
+	var house = Vector2i(13, 8)
+	check(w.act("kennel", house), "Kennel build uses normal live construction")
+	advance(w, 8)
+	check(w.structures[house].status == "ready" and w.walkable(house), "Kennel completes and is enterable")
+	for dog in w.animals:
+		dog.hp = 20
+		w.act("rest", Vector2i.ZERO, dog.id)
+	advance(w, 10)
+	check(w.animals[0].pos == house and w.animals[0].kennel_id == w.structures[house].id, "Nearest available kennel claimed")
+	check(w.animals[1].kennel_id == -1 and w.animals[1].state == "休む", "Second dog rests in place when house reserved")
+	var owner = w.animals[0]
+	owner.hp = 20
+	owner.rest_ticks = 0
+	owner.kennel_ticks = 0
+	advance(w, 20)
+	check(owner.hp == 26, "Five seconds: kennel+5 and rest+1 stack")
+	owner.hp = 39
+	advance(w, 20)
+	check(owner.hp == 40, "Stacked healing capped at max HP")
+	w.act("stay", Vector2i(17, 8), owner.id)
+	advance(w, 10)
+	check(owner.pos != house and w.kennel_owner(house) == -1, "Leaving releases exclusive house")
+	w.act("rest", Vector2i.ZERO, 2)
+	advance(w, 12)
+	check(w.animals[1].pos == house, "Next dog can use released kennel")
+	# Stationary stay still receives the facility effect, independent of the rest command.
+	w.act("stay", house, 2)
+	advance(w, 2)
+	w.animals[1].hp = 20
+	w.animals[1].kennel_ticks = 0
+	advance(w, 20)
+	check(w.animals[1].hp == 25, "Kennel alone heals1 per second without rest bonus")
+
+	w = quiet_farm()
+	w.act("kennel", Vector2i(13, 8))
+	advance(w, 8)
+	w.animals[0].hp = 15
+	advance(w, 12)
+	check(w.animals[0].auto_recovering and w.animals[0].kennel_id >= 0, "Hurt auto dog seeks available nearby house")
+	w.spawn_enemy(w.spawn_schedule[0])
+	w.enemies[0].pos = Vector2i(18, 8)
+	w.enemies[0].carry = "keeper"
+	w.keeper.carrier = 0
+	w.keeper.state = "captured"
+	w.tick += 1
+	w.animal_step(w.animals[0])
+	check(w.animals[0].rescuing and w.animals[0].kennel_id == -1, "Auto recovery yields immediately to rescue")
+	w = quiet_farm()
+	w.act("kennel", Vector2i(13, 8))
+	advance(w, 8)
+	w.act("rest", Vector2i.ZERO, 1)
+	advance(w, 8)
+	w.structures[Vector2i(13, 8)].status = "destroyed"
+	advance(w, 8)
+	check(w.animals[0].kennel_id == -1 and w.animals[0].mode == "rest", "Destroyed house releases claim, rest continues in place")

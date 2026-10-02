@@ -3,14 +3,17 @@ const Farm = preload("res://game/world.gd")
 const FONT = preload("res://assets/fonts/ui_font.tres")
 const TILE = Vector2(48, 42)
 const GROUPS = ["建設", "動物", "回収"]
-const TOOLS = {"wall": "壁  10 / 1秒", "build_gate": "門  30（仮）", "repair": "修理", "gate": "門開閉", "remove": "撤去",
-	"auto": "おまかせ", "stay": "待機", "wander": "徘徊", "collect": "草・キノコ・卵", "feed": "餌を置く"}
-const GROUP_TOOLS = [["wall", "build_gate"], ["auto", "stay", "wander"], ["collect", "feed"]]
+const TOOLS = {"wall": "壁  10 / 1秒", "build_gate": "門  30（仮）", "repair": "修理", "gate": "門開閉", "remove": "撤去", "kennel": "犬小屋 30（仮）",
+	"auto": "おまかせ", "stay": "待機", "wander": "徘徊", "rest": "休む", "collect": "草・キノコ・卵", "feed": "餌を置く"}
+const GROUP_TOOLS = [["wall", "build_gate", "kennel"], ["auto", "stay", "wander", "rest"], ["collect", "feed"]]
 const BoardArt = preload("res://game/board_art.gd")
 var world = Farm.new({}, randi_range(1, 2147483646))
 var tool = "place_keeper"
 var group = -1
 var selected_animal = -1
+var selected_animals: Array = []
+var dragging = false
+var drag_start = Vector2.ZERO
 var selected: Dictionary = {}
 var speed = 1.0
 var accumulated = 0.0
@@ -76,6 +79,7 @@ func _ready():
 func add_button(parent: Control, id: String, text_value: String, area: Rect2, callback: Callable):
 	var button = Button.new()
 	button.text = text_value
+	button.focus_mode = Control.FOCUS_NONE
 	button.position = area.position
 	button.size = area.size
 	var box = StyleBoxFlat.new()
@@ -107,17 +111,52 @@ func select_group(index: int):
 	tool = "place_animal" if index == 1 and selected_animal >= 0 and world.animals.any(func(a): return a.id == selected_animal and not a.placed) else ""
 	refresh()
 
-func select_tool(id: String):
+func select_tool(id: String, execute: bool = true):
 	tool = id
-	if id in ["auto", "wander"] and selected_animal >= 0:
-		world.act(id, Vector2i.ZERO, selected_animal)
-		notice(TOOLS[id] + "を予約")
+	if execute and id in ["auto", "wander", "rest"]: command_selected(id, Vector2i.ZERO)
 	refresh()
 
-func choose_animal(id: int):
-	selected_animal = id
-	selected = {"kind": "animal", "id": id}
-	tool = "place_animal" if world.animals.any(func(a): return a.id == id and not a.placed) else ""
+func command_selected(id: String, cell: Vector2i):
+	var accepted = 0
+	for animal_id in selected_animals:
+		if world.act(id, cell, animal_id): accepted += 1
+	notice("%d匹へ%sを予約" % [accepted, TOOLS[id]] if accepted else "指示できる動物を選択してください")
+
+func cycle_subtool(reverse: bool = false):
+	if world.phase != "defend" or group not in [0, 1]: return
+	if group == 1 and not world.animals.any(func(a): return a.placed and a.id in selected_animals): return
+	var choices = GROUP_TOOLS[group]
+	var index = choices.find(tool)
+	var next = (choices.size() - 1 if reverse else 0) if index < 0 else posmod(index + (-1 if reverse else 1), choices.size())
+	select_tool(choices[next], false)
+
+func choose_animal(id: int, toggle: bool = false):
+	var reserve = world.animals.any(func(a): return a.id == id and not a.placed)
+	if toggle and not reserve:
+		selected_animals = selected_animals.filter(func(other): return world.animals.any(func(a): return a.id == other and a.placed))
+		if id in selected_animals: selected_animals.erase(id)
+		else: selected_animals.append(id)
+	else: selected_animals = [id]
+	group = 1
+	selected_animal = selected_animals[0] if not selected_animals.is_empty() else -1
+	selected = {"kind": "animal", "id": selected_animal} if selected_animal >= 0 else {}
+	tool = "place_animal" if reserve else (tool if tool in GROUP_TOOLS[1] else "auto")
+	refresh()
+
+func collectible(cell: Vector2i) -> bool:
+	return world.natural.has(cell) or (world.has_nest() and cell == world.nest and world.eggs > 0)
+
+func select_resource(cell: Vector2i):
+	if group == 2 and tool == "collect" and selected.get("kind") == "resource" and selected.get("pos") == cell:
+		if world.act("collect", cell):
+			selected.clear()
+			notice("回収しました")
+		else: notice("停止中は回収できません")
+	else:
+		group = 2
+		tool = "collect"
+		selected = {"kind": "resource", "pos": cell}
+		notice("もう一度クリックで回収")
 	refresh()
 
 func refresh():
@@ -148,22 +187,22 @@ func refresh():
 	elif group == 1:
 		for i in range(world.animals.size()):
 			var a = world.animals[i]
-			add_button(palette, "animal%d" % a.id, "%s Lv%d%s" % ["柴犬" if a.species == "shiba" else "鶏", a.lv, " 出撃済" if a.placed else " 未配置"], Rect2(16 + i * 196, 704, 188, 36), choose_animal.bind(a.id))
+			add_button(palette, "animal%d" % a.id, "%s Lv%d%s" % ["柴犬" if a.species == "shiba" else "鶏", a.lv, " 出撃済" if a.placed else " 未配置"], Rect2(16 + i * 146, 704, 138, 36), choose_animal.bind(a.id))
 		if world.animals.any(func(a): return a.id == selected_animal and a.placed):
 			for i in range(GROUP_TOOLS[1].size()):
 				var id = GROUP_TOOLS[1][i]
-				add_button(palette, id, TOOLS[id], Rect2(220 + i * 126, 704, 118, 36), select_tool.bind(id))
+				add_button(palette, id, TOOLS[id], Rect2(22 + world.animals.size() * 146 + i * 126, 704, 118, 36), select_tool.bind(id))
 	elif group >= 0 and world.phase == "defend":
 		for i in range(GROUP_TOOLS[group].size()):
 			var id = GROUP_TOOLS[group][i]
 			add_button(palette, id, TOOLS[id], Rect2(16 + i * 190, 704, 182, 36), select_tool.bind(id))
-			buttons[id].tooltip_text = {"wall": "壁：土10、建設1秒", "build_gate": "門：土30（仮）、建設1秒", "collect": "雑草：1 Gold / キノコ：終了時HP5回復 / 卵：回収"}.get(id, TOOLS[id])
-			if id in ["wall", "build_gate"]: buttons[id].icon = BoardArt.icon("soil")
+			buttons[id].tooltip_text = {"wall": "壁：土10、建設1秒", "build_gate": "門：土30（仮）、建設1秒", "kennel": "犬小屋：土30・2秒（仮）。1匹専用、毎秒HP1回復", "collect": "雑草：1 Gold / キノコ：終了時HP5回復 / 卵：回収"}.get(id, TOOLS[id])
+			if id in ["wall", "build_gate", "kennel"]: buttons[id].icon = BoardArt.icon("soil")
 		if group == 0 and selected.get("kind") == "structure":
-			add_button(palette, "repair", "E 修理", Rect2(414, 704, 116, 36), facility_action.bind("repair"))
-			add_button(palette, "remove", "Del 撤去", Rect2(540, 704, 124, 36), facility_action.bind("remove"))
+			add_button(palette, "repair", "E 修理", Rect2(596, 704, 116, 36), facility_action.bind("repair"))
+			add_button(palette, "remove", "Del 撤去", Rect2(722, 704, 124, 36), facility_action.bind("remove"))
 			if world.structures.get(selected.pos, {}).get("kind") == "gate":
-				add_button(palette, "gate", "門を開閉", Rect2(674, 704, 124, 36), facility_action.bind("gate"))
+				add_button(palette, "gate", "門を開閉", Rect2(856, 704, 124, 36), facility_action.bind("gate"))
 	for id in TOOLS:
 		if buttons.has(id): buttons[id].modulate = Color("ffe0a0") if tool == id else Color.WHITE
 	last_phase = world.phase
@@ -185,6 +224,8 @@ func reset_view():
 	group = -1
 	tool = "place_keeper"
 	selected_animal = -1
+	selected_animals.clear()
+	dragging = false
 	selected.clear()
 	view_positions.clear()
 	seen_milestones = 0
@@ -223,6 +264,10 @@ func _input(event):
 	if event is InputEventMouseMotion: pointer = event.position
 	if event is InputEventMouseButton:
 		pointer = event.position
+		if dragging and not event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+			_unhandled_input(event)
+			get_viewport().set_input_as_handled()
+			return
 		if event.pressed and event.button_index in [MOUSE_BUTTON_WHEEL_UP, MOUSE_BUTTON_WHEEL_DOWN]:
 			if event.ctrl_pressed:
 				var scale_value = clampf(camera.zoom.x * (1.12 if event.button_index == MOUSE_BUTTON_WHEEL_UP else 1.0 / 1.12), 0.65, 1.8)
@@ -235,6 +280,8 @@ func _input(event):
 			tool = "place_keeper" if world.phase == "prepare" else ""
 			selected.clear()
 			selected_animal = -1
+			selected_animals.clear()
+			dragging = false
 			refresh()
 			get_viewport().set_input_as_handled()
 	if event is InputEventKey:
@@ -242,7 +289,7 @@ func _input(event):
 		if not event.pressed or event.echo: return
 		match event.physical_keycode:
 			KEY_SPACE: toggle_pause()
-			KEY_TAB: toggle_speed()
+			KEY_TAB: cycle_subtool(event.shift_pressed)
 			KEY_HOME: recenter()
 			KEY_F3: debug_view = not debug_view
 			KEY_F8: export_record()
@@ -250,6 +297,9 @@ func _input(event):
 				group = -1
 				tool = "place_keeper" if world.phase == "prepare" else ""
 				selected.clear()
+				selected_animals.clear()
+				selected_animal = -1
+				dragging = false
 				refresh()
 			KEY_E: facility_action("repair")
 			KEY_DELETE: facility_action("remove")
@@ -267,50 +317,68 @@ func pointer_over_ui() -> bool:
 	return false
 
 func _unhandled_input(event):
-	if not (event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT): return
-	if pointer_over_ui(): return
+	if not (event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT): return
+	if dragging and not event.pressed:
+		dragging = false
+		var end = get_canvas_transform().affine_inverse() * event.position
+		var area = Rect2(drag_start, end - drag_start).abs()
+		selected_animals.clear()
+		for a in world.animals:
+			if a.placed and area.has_point(actor_pixel("a%d" % a.id, a.pos)): selected_animals.append(a.id)
+		group = 1
+		selected_animal = selected_animals[0] if not selected_animals.is_empty() else -1
+		selected = {"kind": "animal", "id": selected_animal} if selected_animal >= 0 else {}
+		tool = "auto"
+		refresh()
+		return
+	if not event.pressed or pointer_over_ui(): return
 	var cell = Vector2i(get_canvas_transform().affine_inverse() * event.position / TILE)
 	if world.phase == "prepare":
 		if world.act("place", cell):
-			selected_animal = world.animals[0].id
-			select_group(1)
+			choose_animal(world.animals[0].id)
 			notice("未配置の動物を選んで出撃。出撃は任意です")
 		else: notice("ここには主人公を配置できません")
 		return
 	if world.phase != "defend": return
-	if group == 0 and world.live_structure(cell):
+	if event.shift_pressed:
+		dragging = true
+		drag_start = get_canvas_transform().affine_inverse() * event.position
+		return
+	# Context selection takes precedence over the previously armed tool, even while paused.
+	for a in world.animals:
+		if a.placed and event.position.distance_to(get_canvas_transform() * actor_pixel("a%d" % a.id, a.pos)) < 25 * camera.zoom.x:
+			choose_animal(a.id, event.ctrl_pressed)
+			return
+	if world.live_structure(cell):
+		group = 0
 		selected = {"kind": "structure", "pos": cell}
+		tool = ""
 		refresh()
 		return
-	if tool != "":
-		if tool == "attack_target":
-			for e in world.enemies:
-				if not e.done and not e.flee and event.position.distance_to(screen_cell(view_positions.get("e%d" % e.id, Vector2(e.pos)))) < 23:
-					cell = e.pos
-					break
-		if not world.act(tool, cell, selected_animal if tool in Farm.ORDERS or tool == "place_animal" else -1):
+	if collectible(cell):
+		select_resource(cell)
+		return
+	for e in world.enemies:
+		if not e.done and event.position.distance_to(get_canvas_transform() * actor_pixel("e%d" % e.id, e.pos)) < 25 * camera.zoom.x:
+			selected = {"kind": "enemy", "id": e.id}
+			refresh()
+			return
+	if tool in Farm.ORDERS:
+		command_selected(tool, cell)
+	elif tool != "":
+		if not world.act(tool, cell, selected_animal if tool == "place_animal" else -1):
 			notice("停止中は動物指示だけ" if world.paused else "対象・土・占有状態を確認してください")
 		elif tool == "place_animal":
-			tool = ""
+			choose_animal(selected_animal)
 			notice("出撃しました。移動は指示で行います")
-			refresh()
-		elif tool in Farm.ORDERS: notice("指示を予約しました")
-		elif tool == "repair": notice("修理しました")
 	else:
 		selected.clear()
-		for a in world.animals:
-			if a.placed and event.position.distance_to(screen_cell(view_positions.get("a%d" % a.id, Vector2(a.pos)))) < 23:
-				select_group(1)
-				choose_animal(a.id)
-				return
-		for e in world.enemies:
-			if not e.done and event.position.distance_to(screen_cell(view_positions.get("e%d" % e.id, Vector2(e.pos)))) < 23:
-				selected = {"kind": "enemy", "id": e.id}
-				return
-		if world.structures.has(cell): selected = {"kind": "structure", "pos": cell}
+	refresh()
 
 func _notification(what):
-	if what == NOTIFICATION_WM_WINDOW_FOCUS_OUT: keys_down.clear()
+	if what == NOTIFICATION_WM_WINDOW_FOCUS_OUT:
+		keys_down.clear()
+		dragging = false
 
 func _process(delta):
 	clock += delta
@@ -354,6 +422,7 @@ func smooth_actor(id: String, p: Vector2i, delta: float):
 
 func actor_pixel(id: String, cell: Vector2i) -> Vector2:
 	var p = center(view_positions.get(id, Vector2(cell)))
+	if id.begins_with("a") and world.structures.get(cell, {}).get("kind") == "kennel": p.y += 13
 	# Presentation only: slight side separation plus a short lunge/recoil. No stagger or tick changes.
 	if id.begins_with("a"):
 		for e in world.enemies:
@@ -418,7 +487,14 @@ func draw_structure(p: Vector2, b: Dictionary, preview: bool = false):
 		draw_line(p - Vector2(14, 10), p + Vector2(14, 10), Color("e5c982"), 2)
 		draw_rect(Rect2(p + Vector2(-17, 17), Vector2(34 * (1.0 - float(b.remaining) / b.total_ticks), 3)), Color("b2ebcf"))
 		return
-	if b.kind == "wall":
+	if b.kind == "kennel":
+		draw_rect(Rect2(p + Vector2(-19, -7), Vector2(38, 29)), Color("b99160"))
+		draw_colored_polygon(PackedVector2Array([p + Vector2(-23, -7), p + Vector2(0, -21), p + Vector2(23, -7)]), Color("96624a"))
+		draw_rect(Rect2(p + Vector2(-9, 4), Vector2(18, 18)), Color("39443b"))
+		var owner = world.kennel_owner(Vector2i(p / TILE))
+		if owner >= 0:
+			draw_circle(p + Vector2(14, -1), 4, Color("c1e6a6"))
+	elif b.kind == "wall":
 		draw_rect(Rect2(p - Vector2(20, 13), Vector2(40, 29)), Color("797257"))
 		draw_rect(Rect2(p - Vector2(20, 13), Vector2(40, 6)), shade)
 		draw_line(p - Vector2(20, -2), p + Vector2(20, 2), Color("545642"), 2)
@@ -493,7 +569,12 @@ func _draw():
 		if not a.placed: continue
 		var p = actor_pixel("a%d" % a.id, a.pos)
 		draw_circle(p + Vector2(0, 13), 18, Color(0.1, 0.2, 0.13, 0.25))
-		if a.species == "shiba": draw_dog(p)
+		if a.species == "shiba":
+			if world.structures.get(a.pos, {}).get("kind") == "kennel":
+				draw_set_transform(p, 0, Vector2.ONE * 0.65)
+				draw_dog(Vector2.ZERO)
+				draw_set_transform(Vector2.ZERO)
+			else: draw_dog(p)
 		else: draw_hen(p)
 		var in_combat = world.enemies.any(func(e): return not e.done and not e.flee and Farm.distance(a.pos, e.pos) <= 1)
 		if a.hp <= a.max_hp * 0.5 or in_combat:
@@ -505,6 +586,7 @@ func _draw():
 				color.a = 0.65 + 0.25 * sin(clock * 4)
 				draw_arc(p, 28, 0, TAU, 28, color, 3)
 				label_on(self, p + Vector2(-4, -29), "!", 23, color)
+		if a.state in ["休む", "自主休養"]: label_on(self, p + Vector2(14, -25), "Zz", 18, Color("c1e3db"))
 		if a.rescuing: draw_arc(p, 25, -PI, 0, 16, Color("b0f0de"), 3)
 		if world.tick - a.last_bark < 4:
 			var ripple = float(world.tick - a.last_bark) / 4.0
@@ -515,7 +597,7 @@ func _draw():
 			draw_arc(p + Vector2(25, -8), 9, -0.8, 0.8, 8, Color("ffe3a0"), 2)
 			draw_arc(p + Vector2(25, -8), 15, -0.8, 0.8, 8, Color("ffe3a0"), 2)
 		elif a.state == "様子見": label_on(self, p + Vector2(17, -24), "…", 18, Color("ffe3a0"))
-		if selected.get("kind") == "animal" and selected.get("id") == a.id:
+		if group == 1 and a.id in selected_animals:
 			draw_arc(p, 23, 0, TAU, 24, Color("ffe2a3"), 2)
 			if a.mode in ["stay", "wander"]: draw_arc(center(a.order), 36 if a.mode == "stay" else 120, 0, TAU, 40, Color(1, 0.9, 0.5, 0.35), 2)
 		if debug_view: label_on(self, p + Vector2(25, 0), a.state, 12)
@@ -552,12 +634,17 @@ func _draw():
 			rect(p + Vector2(-8, 3), Vector2(17, 20), "80d4cd")
 			art_alpha = 1.0
 		if show_preview: draw_rect(Rect2(Vector2(cell) * TILE + Vector2(2, 2), TILE - Vector2(4, 4)), Color("a3e5ba") if valid else Color("ee8a77"), false, 3)
-	if selected.get("kind") == "structure":
+	if selected.get("kind") in ["structure", "resource"]:
 		draw_rect(Rect2(Vector2(selected.pos) * TILE + Vector2(1, 1), TILE - Vector2(2, 2)), Color("ffe2a3"), false, 3)
 
 func panel(area: Rect2): hud.draw_rect(area, Color(0.09, 0.16, 0.12, 0.94))
 
 func draw_hud():
+	if dragging:
+		var start = get_canvas_transform() * drag_start
+		var area = Rect2(start, pointer - start).abs()
+		hud.draw_rect(area, Color(0.65, 0.9, 0.76, 0.15))
+		hud.draw_rect(area, Color("b6ebc5"), false, 2)
 	if world.phase == "prepare":
 		panel(Rect2(428, 26, 424, 71))
 		label_on(hud, Vector2(464, 55), "主人公を配置してください", 24)
@@ -595,16 +682,19 @@ func draw_hud():
 	if alert_kind == "invasion" and alert_visible():
 		for entry in world.entries: draw_edge(entry, "侵入 !", Color("f5d483"))
 	var details = ""
-	if selected.get("kind") == "animal":
+	if selected.get("kind") == "resource":
+		details = "もう一度クリックで回収" if collectible(selected.pos) else "回収済み"
+	elif selected.get("kind") == "animal":
 		for a in world.animals:
 			if a.id == selected.id: details = "%s Lv%d   HP %d/%d   忠誠 %d\n指示：%s / %s" % ["柴犬" if a.species == "shiba" else "鶏", a.lv, a.hp, a.max_hp, a.loyalty, TOOLS.get(a.mode, a.mode), a.state if a.placed else "未配置"]
+		if selected_animals.size() > 1: details = "%d匹を選択\n%s → クリックで一括指示" % [selected_animals.size(), TOOLS.get(tool, "Tabで操作選択")]
 	elif selected.get("kind") == "enemy":
 		for e in world.enemies:
 			if e.id == selected.id: details = "誘拐者 Lv%d   HP %d/%d\n目的：%s" % [e.lv, e.hp, e.max_hp, e.state]
 	elif selected.get("kind") == "structure" and world.structures.has(selected.pos):
 		var b = world.structures[selected.pos]
 		var quote = world.repair_quote(selected.pos)
-		details = "%s Lv1   耐久 %d/%d\nE 修理 +%d（土%d） / Del 撤去" % ["壁" if b.kind == "wall" else "門", b.hp, b.max_hp, quote.hp, quote.cost]
+		details = "%s Lv1   耐久 %d/%d\nE 修理 +%d（土%d） / Del 撤去" % [{"wall": "壁", "gate": "門", "kennel": "犬小屋"}.get(b.kind, b.kind), b.hp, b.max_hp, quote.hp, quote.cost]
 	if details != "":
 		panel(Rect2(16, 610, 422, 76))
 		var lines = details.split("\n")
@@ -619,7 +709,7 @@ func draw_hud():
 		var quote = world.repair_quote(cell)
 		var p = pointer.clamp(Vector2(8, 120), Vector2(950, 628)) + Vector2(15, -55)
 		panel(Rect2(p, Vector2(266, 56)))
-		label_on(hud, p + Vector2(10, 22), "%s %d/%d → 修理 +%d" % ["壁" if b.kind == "wall" else "門", b.hp, b.max_hp, quote.hp], 16)
+		label_on(hud, p + Vector2(10, 22), "%s %d/%d → 修理 +%d" % [{"wall": "壁", "gate": "門", "kennel": "犬小屋"}.get(b.kind, b.kind), b.hp, b.max_hp, quote.hp], 16)
 		label_on(hud, p + Vector2(10, 45), "土 %d%s" % [quote.cost, " / 停止中は不可" if world.paused else ""], 16)
 	if world.phase == "result":
 		panel(Rect2(362, 225, 554, 340))

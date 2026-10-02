@@ -3,11 +3,13 @@ extends RefCounted
 const SHIBA = {"attack_power": 10, "max_hp": 40, "attack_seconds": 1.2, "speed": 2.0, "rescue_multiplier": 1.5, "detection_range": 4}
 const BARK = {"cooldown": 6.0, "range": 4, "stop_seconds": 1.0}
 const NATURE = {"interval": 4.0, "mushroom_chance": 0.2, "limit": 16, "weed_gold": 1, "mushroom_hp": 5}
+const REST = {"seconds": 5.0, "kennel_seconds": 1.0, "nearby": 6, "auto_hp_fraction": 0.5}
 const KIDNAPPER = {"max_hp": 50, "attack_power": 5, "object_attack_power": 2,
 	"counter_seconds": 1.0, "counter_duration": 4.0, "counter_cooldown": 2.0}
 # Gate cost/HP/time, repair coefficient, interruption refund and animal HP are PROVISIONAL.
 const BUILD = {"wall": {"cost": 10, "hp": 8, "seconds": 1.0},
-	"build_gate": {"cost": 30, "hp": 6, "seconds": 1.0}}
+	"build_gate": {"cost": 30, "hp": 6, "seconds": 1.0},
+	"kennel": {"cost": 30, "hp": 12, "seconds": 2.0}} # Kennel construction values are provisional.
 const REPAIR_FACTOR = 1.0
 const INTERRUPT_REFUND = 0.5
 const SOIL_PACK = 50

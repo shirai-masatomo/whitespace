@@ -10,7 +10,7 @@ const NEST = Vector2i(20, 12)
 const PRICES = {"hen": 30, "feed": 8, "shelter": 28, "fence": 24, "soil": 15}
 const Rules = preload("res://game/rules.gd")
 const BUILD = Rules.BUILD
-const ORDERS = ["auto", "stay", "wander", "attack_target", "whistle"]
+const ORDERS = ["auto", "stay", "wander", "rest", "attack_target", "whistle"]
 var campaign: Dictionary
 var checkpoint: Dictionary
 var stage = 1
@@ -104,6 +104,12 @@ func _init(data: Dictionary = {}, seed_number: int = 17, stage_override: Diction
 		a.next_attack = 0
 		a.move_credit = 0.0
 		a.rescuing = false
+		a.kennel_id = -1
+		a.rest_settled = false
+		a.rest_ticks = 0
+		a.kennel_ticks = 0
+		a.healing_kennel = -1
+		a.auto_recovering = false
 		a.fear = 0
 		a.order_until = 0
 		a.order = a.pos
@@ -143,7 +149,7 @@ func walkable(p: Vector2i) -> bool:
 	return inside(p) and not blocks(p)
 
 func blocks(p: Vector2i) -> bool:
-	return structures.has(p) and structures[p].status == "ready" and not structures[p].open
+	return structures.has(p) and structures[p].status == "ready" and structures[p].kind != "kennel" and not structures[p].open
 
 func live_structure(p: Vector2i) -> bool:
 	return structures.has(p) and structures[p].status in ["ready", "building"]
@@ -231,7 +237,7 @@ func act(kind: String, p: Vector2i = Vector2i.ZERO, animal_id: int = -1) -> bool
 				if can_build(kind, p):
 					materials -= BUILD[kind].cost
 					var hp: int = BUILD[kind].hp + (campaign.fence * 4 if kind == "build_gate" else 0)
-					structures[p] = {"id": next_structure_id, "kind": "gate" if kind == "build_gate" else "wall",
+					structures[p] = {"id": next_structure_id, "kind": "gate" if kind == "build_gate" else kind,
 						"hp": 0, "max_hp": hp, "armor": 0, "open": false, "cost": BUILD[kind].cost,
 						"status": "building", "remaining": ceili(BUILD[kind].seconds / DT), "total_ticks": ceili(BUILD[kind].seconds / DT)}
 					next_structure_id += 1
@@ -278,6 +284,7 @@ func issue_order(kind: String, p: Vector2i, animal_id: int = -1) -> bool:
 	var accepted = false
 	for a in animals:
 		if not a.placed or a.loyalty <= 0 or (animal_id >= 0 and a.id != animal_id): continue
+		if kind == "rest" and a.category != "dog": continue
 		# Paused orders change intent only. Their reaction countdown starts with resumed simulation.
 		a.pending = {"kind": kind, "pos": a.pos if kind == "wander" else p, "target_id": target_id,
 			"at": tick + 1 + ceili((100 - a.loyalty) / 25.0)}
@@ -315,8 +322,13 @@ func animal_step(a: Dictionary):
 	if a.hp <= 0:
 		a.state = "休養中"
 		a.rescuing = false
+		release_kennel(a)
 		return
 	if not a.pending.is_empty() and tick >= a.pending.at:
+		release_kennel(a)
+		a.rest_settled = false
+		a.rest_ticks = 0
+		a.auto_recovering = false
 		a.mode = a.pending.kind
 		a.order = a.pending.pos
 		a.target_id = a.pending.target_id
@@ -324,7 +336,7 @@ func animal_step(a: Dictionary):
 		a.order_until = tick + 40 + a.loyalty * 2
 		a.pending = {}
 		a.ai_context = "new_order"
-	if tick >= a.order_until: a.mode = "auto"
+	if a.mode != "rest" and tick >= a.order_until: a.mode = "auto"
 	if a.species == "hen":
 		var threat = enemies.filter(func(e): return not e.done and not e.flee and distance(a.pos, e.pos) <= 4)
 		a.fear = 28 if not threat.is_empty() else maxi(0, a.fear - 1)
@@ -339,11 +351,24 @@ func animal_step(a: Dictionary):
 				eggs += 1
 				metrics.eggs_produced += 1
 		return
-	try_bark(a)
+	# Explicit rest suppresses all threat detection, barking and rescue, until another order.
+	if a.mode == "rest":
+		a.rescuing = false
+		rest_step(a, true)
+		return
 	var carrier = enemies.filter(func(e): return not e.done and not e.flee and e.carry == "keeper")
 	a.rescuing = not carrier.is_empty()
 	var targets = enemies.filter(func(e): return not e.done and not e.flee and distance(a.pos, e.pos) <= Rules.SHIBA.detection_range)
 	targets.sort_custom(func(e, f): return distance(a.pos, e.pos) < distance(a.pos, f.pos))
+	if a.mode == "auto" and not a.rescuing and targets.is_empty() and a.hp < a.max_hp and (a.auto_recovering or a.hp <= a.max_hp * Rules.REST.auto_hp_fraction):
+		a.auto_recovering = true
+		rest_step(a, false)
+		return
+	release_kennel(a)
+	a.auto_recovering = false
+	a.rest_settled = false
+	a.rest_ticks = 0
+	try_bark(a)
 	if a.mode == "attack_target":
 		var selected = enemies.filter(func(e): return e.id == a.target_id and not e.done and not e.flee)
 		if not selected.is_empty(): targets = selected
@@ -400,7 +425,7 @@ func animal_step(a: Dictionary):
 			else:
 				enemy.attacker = a.id
 				enemy.threat_until = tick + ceili(Rules.KIDNAPPER.counter_duration / DT)
-	elif a.mode == "wander":
+	elif a.mode in ["wander", "auto"]:
 		a.state = "徘徊"
 		if tick % 12 == 0:
 			var options = neighbors(a.pos).filter(func(p): return walkable(p) and distance(p, a.home) <= 3)
@@ -414,11 +439,71 @@ func animal_step(a: Dictionary):
 	if a.move_credit >= 1 and distance(a.pos, goal) > (1 if chasing else 0):
 		a.move_credit -= 1
 		var move = next_step(a.pos, goal)
-		if move != a.pos:
+		if move != a.pos and kennel_owner(move) in [-1, a.id]:
 			a.pos = move
 			a.stamina = maxf(0, a.stamina - 0.65)
 	else:
 		a.move_credit = minf(a.move_credit, 0.75)
+
+func kennel_owner(p: Vector2i) -> int:
+	if not structures.has(p) or structures[p].kind != "kennel": return -1
+	for dog in animals:
+		if dog.category == "dog" and dog.placed and dog.hp > 0 and (dog.kennel_id == structures[p].id or dog.pos == p): return dog.id
+	return -1
+
+func release_kennel(a: Dictionary):
+	a.kennel_id = -1
+
+func kennel_cell(a: Dictionary) -> Vector2i:
+	for p in structures:
+		if structures[p].id == a.kennel_id and structures[p].status == "ready" and structures[p].kind == "kennel": return p
+	return Vector2i(-1, -1)
+
+func rest_step(a: Dictionary, explicit: bool):
+	var destination = kennel_cell(a)
+	if a.kennel_id >= 0 and (destination.x < 0 or (a.rest_settled and a.pos != destination)):
+		release_kennel(a)
+		a.rest_settled = true
+	if not a.rest_settled and a.kennel_id < 0:
+		var options = structures.keys().filter(func(p): return structures[p].kind == "kennel" and structures[p].status == "ready" and distance(a.pos, p) <= Rules.REST.nearby and kennel_owner(p) in [-1, a.id] and (p == a.pos or (not occupied(p) and next_step(a.pos, p) != a.pos)))
+		options.sort_custom(func(p, q): return distance(a.pos, p) < distance(a.pos, q) if distance(a.pos, p) != distance(a.pos, q) else structures[p].id < structures[q].id)
+		if not options.is_empty():
+			destination = options[0]
+			a.kennel_id = structures[destination].id # Reserve also while approaching: never double book.
+		else: a.rest_settled = true
+	if a.kennel_id >= 0 and a.pos != destination:
+		a.state = "小屋へ休養"
+		a.rest_ticks = 0
+		a.move_credit += Rules.SHIBA.speed * DT
+		if a.move_credit >= 1:
+			a.move_credit -= 1
+			var next = next_step(a.pos, destination)
+			if next == a.pos or kennel_owner(next) not in [-1, a.id]:
+				release_kennel(a)
+				a.rest_settled = true
+			else: a.pos = next
+		return
+	a.rest_settled = true
+	a.state = "休む" if explicit else "自主休養"
+	a.stamina = minf(100, a.stamina + 0.8)
+	a.rest_ticks += 1
+	if a.rest_ticks >= ceili(Rules.REST.seconds / DT):
+		a.hp = mini(a.max_hp, a.hp + 1)
+		a.rest_ticks = 0
+
+func kennel_heal_step(a: Dictionary):
+	var house = structures.get(a.pos, {})
+	if not a.placed or a.hp <= 0 or a.category != "dog" or house.get("kind") != "kennel" or house.get("status") != "ready" or kennel_owner(a.pos) != a.id:
+		a.healing_kennel = -1
+		a.kennel_ticks = 0
+		return
+	if a.healing_kennel != house.id:
+		a.healing_kennel = house.id
+		a.kennel_ticks = 0
+	a.kennel_ticks += 1
+	if a.kennel_ticks >= ceili(Rules.REST.kennel_seconds / DT):
+		a.hp = mini(a.max_hp, a.hp + 1)
+		a.kennel_ticks = 0
 
 func side_step(p: Vector2i, goal: Vector2i, roll: float) -> Vector2i:
 	var options = neighbors(p).filter(func(n): return walkable(n) and not occupied(n) and distance(n, goal) <= distance(p, goal) + 1)
@@ -595,6 +680,7 @@ func step():
 		make_schedule()
 	for a in animals:
 		animal_step(a)
+		kennel_heal_step(a)
 		interrupt_site(a.pos)
 		if a.path.back() != a.pos: a.path.append(a.pos)
 	for e in enemies:
@@ -710,6 +796,7 @@ func observation() -> Dictionary:
 		"initial_positions": initial_positions.duplicate(true), "milestones": milestones.duplicate(true), "stage_config": config.duplicate(true), "eggs": eggs, "command_power": command_power}
 
 func try_bark(a: Dictionary):
+	if a.mode == "rest": return
 	if tick < a.next_bark: return
 	var nearby = enemies.filter(func(e): return not e.done and not e.flee and distance(a.pos, e.pos) <= Rules.SHIBA.detection_range)
 	if nearby.is_empty(): return

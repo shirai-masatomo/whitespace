@@ -14,9 +14,10 @@ func move_pointer(position: Vector2):
 	Input.parse_input_event(event)
 	await process_frame
 
-func mouse(position: Vector2, button: int = MOUSE_BUTTON_LEFT):
+func mouse(position: Vector2, button: int = MOUSE_BUTTON_LEFT, ctrl: bool = false):
 	var event = InputEventMouseButton.new()
 	event.button_index = button
+	event.ctrl_pressed = ctrl
 	event.position = position
 	event.pressed = true
 	Input.parse_input_event(event)
@@ -30,9 +31,10 @@ func click(id: String):
 	assert(game.buttons.has(id), "Missing button " + id)
 	await mouse(game.buttons[id].get_global_rect().get_center())
 
-func key(code: int, pressed: bool = true):
+func key(code: int, pressed: bool = true, shift: bool = false):
 	var event = InputEventKey.new()
 	event.physical_keycode = code
+	event.shift_pressed = shift
 	event.pressed = pressed
 	Input.parse_input_event(event)
 	await process_frame
@@ -169,10 +171,13 @@ func run():
 	for p in game.world.natural.keys():
 		collected.append(game.world.natural[p])
 		await mouse(game.screen_cell(Vector2(p)))
+		assert(game.world.natural.has(p) and game.selected.kind == "resource")
+		await mouse(game.screen_cell(Vector2(p)))
 	assert(collected.size() == 2 and game.world.natural.is_empty())
 	var fixture = {"note": "Damaged-wall component fixture: HP set to3 for repair UI. Resources generated normally at4s/8s.",
 		"metrics": game.world.metrics.duplicate(true), "collected": collected, "actions": game.world.actions.duplicate(true)}
-	var record = {"commit_sha": OS.get_environment("REVIEW_COMMIT") if OS.has_environment("REVIEW_COMMIT") else "WORKTREE",
+	var context_checks = await context_trial()
+	var record = {"context_checks": context_checks, "rest_settings": Farm.Rules.REST, "commit_sha": OS.get_environment("REVIEW_COMMIT") if OS.has_environment("REVIEW_COMMIT") else "WORKTREE",
 		"branch": "codex/sporehollow-prototype", "resolution": [1280, 800], "seed": 17,
 		"ai_settings": Farm.Rules.AI, "bark_settings": Farm.Rules.BARK, "nature_settings": Farm.Rules.NATURE,
 		"ui_checks": {"auto_start": true, "initial_animal_mode": true, "pause_deployment_denied": true, "three_modes": true,
@@ -184,5 +189,100 @@ func run():
 	record.multi_seed = {"seed_range": evaluation.seed_range, "strategies": {}}
 	for strategy in evaluation.strategies: record.multi_seed.strategies[strategy] = evaluation.strategies[strategy].summary
 	FileAccess.open("res://review/current/stage1-observation.json", FileAccess.WRITE).store_string(JSON.stringify(record, "  "))
-	print("PASS: minimal placement, auto start, optional deployment, one-click wander, zoom, 0.5x construction, bark, harvest, selected repair/dismantle and pause restrictions")
+	print("PASS: Stage1 input, context clicks, two-click harvest, Tab/Shift+Tab, Ctrl/drag selection, queued batch rest, kennel exclusivity and pause restrictions")
 	quit()
+
+func context_trial() -> Dictionary:
+	var data = Farm.new_campaign()
+	var second = data.animals[0].duplicate(true)
+	second.id = 2
+	data.animals.append(second)
+	var config = Farm.StageData.STAGES[1].duplicate(true)
+	config.first_attack_seconds = 999.0
+	game.world = Farm.new(data, 17, config)
+	game.reset_view()
+	game.refresh()
+	await mouse(game.screen_cell(Vector2(19, 8)))
+	await mouse(game.screen_cell(Vector2(12, 8)))
+	await click("animal2")
+	await mouse(game.screen_cell(Vector2(12, 10)))
+	await click("group0")
+	await key(KEY_TAB)
+	await key(KEY_TAB, false)
+	assert(game.tool == "wall")
+	await key(KEY_TAB)
+	await key(KEY_TAB, false)
+	assert(game.tool == "build_gate")
+	await key(KEY_TAB)
+	await key(KEY_TAB, false)
+	assert(game.tool == "kennel")
+	await key(KEY_TAB, true, true)
+	await key(KEY_TAB, false, true)
+	assert(game.tool == "build_gate" and game.speed == 1)
+	await click("kennel")
+	await mouse(game.screen_cell(Vector2(13, 8)))
+	await step(8)
+	# Direct animal click wins over the armed construction tool.
+	await mouse(game.screen_cell(Vector2(game.world.animals[0].pos)))
+	assert(game.group == 1 and game.selected_animals == [1])
+	await mouse(game.screen_cell(Vector2(game.world.animals[1].pos)), MOUSE_BUTTON_LEFT, true)
+	assert(game.selected_animals == [1, 2])
+	await mouse(game.screen_cell(Vector2(game.world.animals[0].pos)), MOUSE_BUTTON_LEFT, true)
+	assert(game.selected_animals == [2])
+	await mouse(game.screen_cell(Vector2(game.world.animals[0].pos)))
+	assert(game.selected_animals == [1])
+	# Shift drag selects from rendered world positions; no OS mouse control.
+	var drag = InputEventMouseButton.new()
+	drag.button_index = MOUSE_BUTTON_LEFT
+	drag.shift_pressed = true
+	drag.pressed = true
+	drag.position = game.screen_cell(Vector2(11, 7))
+	Input.parse_input_event(drag)
+	await process_frame
+	await move_pointer(game.screen_cell(Vector2(14, 11)))
+	drag = drag.duplicate()
+	drag.pressed = false
+	drag.position = game.screen_cell(Vector2(14, 11))
+	Input.parse_input_event(drag)
+	await process_frame
+	assert(game.selected_animals == [1, 2] and not game.dragging)
+	await key(KEY_SPACE)
+	await key(KEY_SPACE, false)
+	for i in range(3):
+		await key(KEY_TAB)
+		await key(KEY_TAB, false)
+	assert(game.tool == "rest" and game.world.animals.all(func(a): return a.pending.is_empty()))
+	await mouse(game.screen_cell(Vector2(15, 9)))
+	assert(game.world.animals.all(func(a): return a.pending.kind == "rest" and a.mode == "auto"))
+	for a in game.world.animals: a.hp = 20
+	await key(KEY_SPACE)
+	await key(KEY_SPACE, false)
+	await step(12)
+	assert(game.world.animals.all(func(a): return a.mode == "rest"))
+	assert(game.world.animals[0].kennel_id >= 0 and game.world.animals[1].kennel_id == -1)
+	await capture("harvest_or_build")
+	# Click the roof outside the dog's hit area to select the occupied house.
+	await mouse(game.screen_cell(Vector2(13, 8)) + Vector2(0, -19))
+	assert(game.group == 0 and game.selected.kind == "structure")
+	var weed = Vector2i(16, 10)
+	game.world.natural[weed] = "weed" # Explicit UI component fixture.
+	await click("wall")
+	var soil = game.world.materials
+	await mouse(game.screen_cell(Vector2(weed)))
+	assert(game.group == 2 and game.selected.kind == "resource" and game.world.materials == soil and game.world.natural.has(weed))
+	await key(KEY_SPACE)
+	await key(KEY_SPACE, false)
+	await mouse(game.screen_cell(Vector2(weed)))
+	assert(game.world.natural.has(weed))
+	await key(KEY_TAB)
+	await key(KEY_TAB, false)
+	assert(game.tool == "collect")
+	await key(KEY_SPACE)
+	await key(KEY_SPACE, false)
+	var gold = game.world.campaign.gold
+	await mouse(game.screen_cell(Vector2(weed)))
+	assert(not game.world.natural.has(weed) and game.world.campaign.gold == gold + 1)
+	return {"direct_animal": true, "direct_facility": true, "direct_harvest_two_clicks": true,
+		"pause_harvest_denied": true, "ctrl_toggle": true, "shift_drag": true,
+		"tab_selects_without_execution": true, "shift_tab": true, "batch_rest_after_resume": true,
+		"one_kennel_one_dog": true, "fixture": "Two owned Shibas and delayed invasion only for multi-selection UI; normal Stage1 still starts with one."}
