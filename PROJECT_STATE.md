@@ -12,8 +12,8 @@
 
 ### ホイッスル牧場（仮）
 
-- 旧「胞庭」を人間の新方針で更新。柴犬を育て、笛・餌・門で防衛するGodot製Windows試作。DIVE DIVEのコード・タスクとは分離。
-- Stage 1→EXP・Gold・購入→Stage 2へ引継ぎ。鶏の産卵・盗難・卵の売却/餌交換まで動作。現在は侵入中の間接操作を試す段階。定期再開は設定しない。
+- 空き地で牧場主を配置し、侵攻中も壁・門を築くGodot製Windows試作。誘拐役から柴犬で守り、拘束後にも救出できる。DIVE DIVEのコード・タスクとは分離。
+- Stage 1→EXP・Gold・購入→Stage 2へ引継ぎ。鶏の産卵・卵回収・売却/餌交換も維持。現在はリアルタイム建築と救出の中核試作。定期再開は設定しない。
 - 詳細: [起動方法](projects/sporehollow/README.md) / [現在地](projects/sporehollow/PROJECT_STATE.md) / [次の仮説](projects/sporehollow/TASKS.md)
 
 ### DIVE DIVE

@@ -3,36 +3,49 @@ const Farm = preload("res://game/world.gd")
 const FONT = preload("res://assets/fonts/ui_font.tres")
 const ORIGIN = Vector2(28, 174)
 const TILE = 32.0
+const TOOL_INFO = {
+	"wall": ["1  壁 / 資材3", "空きマスに壁。犬も敵も通れず、敵は壊せます。"],
+	"build_gate": ["2  門 / 資材5", "閉じた門を建築。開閉モードで犬の通り道を作ろう。"],
+	"gate": ["3  門を開閉", "門をクリックして開閉。上に誰かいる間は操作できません。"],
+	"feed": ["4  餌 / 指示力3", "餌1個を設置。疲れた犬が自分で向かい回復します。"],
+	"remove": ["5  撤去 / 一部返却", "壁・門を撤去。耐久に応じ資材の半分以下を回収。"],
+	"collect": ["6  卵を回収", "巣をクリックして卵を所持品へ。停止中は回収できません。"],
+	"whistle": ["Q  笛で呼ぶ", "地点を指定。犬は近くの敵に反応しつつ、その場所を守ります。"],
+	"stay": ["W  待機", "地点で待機。隣の敵に吠えますが、追いかけません。"],
+	"wander": ["E  徘徊", "地点の周辺を歩き回り、侵入者を見つけます。"],
+	"attack_target": ["R  敵を指定", "侵入者をクリック。犬がその相手を追い返しに向かいます。"]}
 var world = Farm.new()
-var tool = "whistle"
-var paused = false
+var tool = "wall"
 var speed = 1
 var accumulated = 0.0
 var clock = 0.0
 var automated = false
 var view_positions: Dictionary = {}
 var buttons: Dictionary = {}
-var message = "最初の仲間は柴犬 Lv1。柵の内側をクリックして見張り位置を決めよう。"
+var message = "牧場内をクリックして牧場主を配置 → 時計開始。柴犬はそばから始まります。"
 var last_phase = ""
 
 func _ready():
 	var theme = Theme.new()
 	theme.default_font = FONT
-	theme.default_font_size = 17
+	theme.default_font_size = 16
 	var controls = Control.new()
 	controls.theme = theme
 	controls.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(controls)
-	for data in [["whistle", "1  ホイッスル  /  指示力 2", 342], ["feed", "2  餌を置く  /  指示力 3", 387], ["gate", "3  門の開閉  /  指示力 1", 432]]:
-		add_button(controls, data[0], data[1], Rect2(860, data[2], 390, 39), select_tool.bind(data[0]))
-	add_button(controls, "advance", "朝をはじめる", Rect2(860, 585, 390, 46), advance)
-	add_button(controls, "pause", "一時停止", Rect2(860, 640, 188, 38), toggle_pause)
+	var index = 0
+	for id in TOOL_INFO:
+		add_button(controls, id, TOOL_INFO[id][0], Rect2(860 + (index % 2) * 200, 304 + (index / 2) * 42, 190, 36), select_tool.bind(id))
+		index += 1
+	add_button(controls, "auto", "A  おまかせに戻す", Rect2(860, 514, 390, 34), auto_order)
+	add_button(controls, "advance", "位置を選び、時計を開始", Rect2(860, 585, 390, 46), advance)
+	add_button(controls, "pause", "停止 / Space", Rect2(860, 640, 188, 38), toggle_pause)
 	add_button(controls, "speed", "速度 ×1", Rect2(1062, 640, 188, 38), toggle_speed)
 	add_button(controls, "retry", "この日の最初から", Rect2(860, 689, 188, 38), retry_stage)
 	add_button(controls, "export", "観察JSON", Rect2(1062, 689, 188, 38), export_record)
-	var shop = [["hen", "鶏を迎える  30G"], ["feed_buy", "餌 ×3  8G"], ["shelter", "休憩小屋  28G"], ["fence", "補強門  24G"], ["sell_egg", "卵 → 9G"], ["cook_egg", "卵 → 餌 ×2"]]
+	var shop = [["hen", "鶏を迎える  30G"], ["feed_buy", "餌 ×3  8G"], ["shelter", "巣周辺の休憩所 28G"], ["fence", "新設門の補強 24G"], ["sell_egg", "卵 → 9G"], ["cook_egg", "卵 → 餌 ×2"]]
 	for i in range(shop.size()):
-		add_button(controls, shop[i][0], shop[i][1], Rect2(860 + (i % 2) * 201, 380 + (i / 2) * 51, 189, 42), purchase.bind(shop[i][0]))
+		add_button(controls, shop[i][0], shop[i][1], Rect2(860 + (i % 2) * 200, 380 + (i / 2) * 51, 190, 42), purchase.bind(shop[i][0]))
 	refresh_buttons()
 	if "--automated" in OS.get_cmdline_user_args():
 		automated = true
@@ -62,26 +75,26 @@ func add_button(parent: Control, id: String, text_value: String, rect: Rect2, ca
 
 func select_tool(value: String):
 	tool = value
-	message = {"whistle": "左クリック：柴犬に見張り場所を知らせる。近くの敵への反応は犬に任せよう。", "feed": "左クリック：餌を置く。疲れた柴犬は餌へ向かうため、置くタイミングに注意。", "gate": "金色の門をクリック：開閉する。閉めると柴犬も通れず、泥棒は門を壊します。"}[value]
+	message = TOOL_INFO[value][1]
 	refresh_buttons()
+
+func auto_order():
+	world.act("auto")
+	message = "おまかせを指示。忠誠度に応じて少し遅れて反応します。"
 
 func advance():
 	if world.phase == "prepare":
-		world.act("start")
-		message = "門は上下の2か所。侵入を見つけたら笛で知らせよう。"
-	elif world.result == "win" and world.stage == 1:
-		world = Farm.new(world.next_campaign(), world.seed_value + 1)
+		if world.act("start"): message = "敵が来るまで建築。襲来中も作れます。壁で犬を閉じ込めないように！"
+	elif world.result == "win":
+		world = Farm.new(world.next_campaign(), world.seed_value + 1) if world.stage == 1 else Farm.new()
 		view_positions.clear()
-		paused = false
-		message = "2日目。鶏は落ち着くと卵を産みます。巣へ来る泥棒にも注意。"
-	elif world.result == "win" and world.stage == 2:
-		world = Farm.new()
-		view_positions.clear()
-		message = "別の育て方・買い方を試そう。最初は柴犬1匹です。"
+		accumulated = 0
+		message = "新しい空き地です。牧場主を配置してから時計を動かそう。"
 	refresh_buttons()
 
 func toggle_pause():
-	paused = not paused
+	world.act("pause")
+	accumulated = 0
 	refresh_buttons()
 
 func toggle_speed():
@@ -91,14 +104,12 @@ func toggle_speed():
 func retry_stage():
 	world = Farm.new(world.checkpoint, world.seed_value)
 	view_positions.clear()
-	paused = false
 	accumulated = 0
-	message = "この日の開始状態へ戻しました。配置や介入を変えて試せます。"
+	message = "当日開始時へ戻しました。主人公の位置・建築・指示を変えて試そう。"
 	refresh_buttons()
 
 func purchase(id: String):
-	var item = "feed" if id == "feed_buy" else id
-	message = "購入・交換しました。次の日へ持ち越します。" if world.buy(item) else "Gold・卵が足りないか、すでに所有しています。"
+	message = "購入しました。次の日へ持ち越します。" if world.buy("feed" if id == "feed_buy" else id) else "Gold・卵が足りないか、すでに所有しています。"
 	refresh_buttons()
 
 func export_record():
@@ -106,41 +117,46 @@ func export_record():
 	var file = FileAccess.open("user://observations/latest.json", FileAccess.WRITE)
 	if file:
 		file.store_string(JSON.stringify(world.observation(), "  "))
-		message = "観察JSONを保存： %s" % ProjectSettings.globalize_path("user://observations/latest.json")
+		message = "観察JSONを user://observations/latest.json に保存しました。"
 
 func refresh_buttons():
 	var shop = world.result == "win"
-	for id in ["hen", "feed_buy", "shelter", "fence", "sell_egg", "cook_egg"]:
-		buttons[id].visible = shop
-	for id in ["whistle", "feed", "gate"]:
-		buttons[id].visible = not shop
+	for id in ["hen", "feed_buy", "shelter", "fence", "sell_egg", "cook_egg"]: buttons[id].visible = shop
+	for id in TOOL_INFO:
+		buttons[id].visible = world.phase != "result"
 		buttons[id].modulate = Color("ffe2a0") if tool == id else Color.WHITE
-		buttons[id].disabled = world.phase != "defend"
-	buttons.advance.disabled = world.result == "loss"
-	buttons.advance.text = "朝をはじめる" if world.phase == "prepare" else ("Stage 2 へ進む" if shop and world.stage == 1 else ("試作完了 / 別の育て方へ" if shop else "防衛中"))
-	if world.phase == "defend": buttons.advance.disabled = true
+		buttons[id].disabled = world.phase != "defend" or (world.paused and id not in Farm.ORDERS)
+	buttons.auto.visible = world.phase != "result"
+	buttons.auto.disabled = world.phase != "defend"
+	buttons.advance.disabled = world.phase == "defend" or world.result == "loss" or (world.phase == "prepare" and not world.keeper.placed)
+	buttons.advance.text = "時計を開始 / 建築準備へ" if world.phase == "prepare" else ("Stage 2 へ進む" if shop and world.stage == 1 else ("別の牧場づくりを試す" if shop else "防衛中"))
 	buttons.pause.disabled = world.phase != "defend"
-	buttons.pause.text = "再開" if paused else "一時停止"
+	buttons.pause.text = "再開 / Space" if world.paused else "停止 / Space"
 	buttons.speed.text = "速度 ×%d" % speed
 	last_phase = world.phase
 
 func _unhandled_input(event):
 	if event is InputEventKey and event.pressed and not event.echo:
-		match event.physical_keycode:
-			KEY_1: select_tool("whistle")
-			KEY_2: select_tool("feed")
-			KEY_3: select_tool("gate")
-			KEY_SPACE: toggle_pause()
+		var keys = {KEY_1: "wall", KEY_2: "build_gate", KEY_3: "gate", KEY_4: "feed", KEY_5: "remove", KEY_6: "collect", KEY_Q: "whistle", KEY_W: "stay", KEY_E: "wander", KEY_R: "attack_target"}
+		if keys.has(event.physical_keycode): select_tool(keys[event.physical_keycode])
+		if event.physical_keycode == KEY_SPACE: toggle_pause()
+		if event.physical_keycode == KEY_A: auto_order()
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-		var p = Vector2i((event.position - ORIGIN) / TILE)
 		if Rect2(ORIGIN, Vector2(Farm.W, Farm.H) * TILE).has_point(event.position):
-			var accepted = world.act("place" if world.phase == "prepare" else tool, p)
-			if not accepted:
-				message = "その操作は使えません。指示力・餌・門の状態を確認してください。"
+			var p = Vector2i((event.position - ORIGIN) / TILE)
+			if tool == "attack_target":
+				# Hit-test the displayed actor, then issue a stable model ID via its current cell.
+				for e in world.enemies:
+					if not e.done and not e.flee and event.position.distance_to(center(view_positions.get("e%d" % e.id, Vector2(e.pos)))) <= 20:
+						p = e.pos
+						break
+			if not world.act("place" if world.phase == "prepare" else tool, p):
+				message = "停止中は動物指示だけ。資材・対象・占有中のマスも確認してください。"
+			refresh_buttons()
 
 func _process(delta):
 	clock += delta
-	if not paused and not automated:
+	if not world.paused and not automated and world.phase == "defend":
 		accumulated += minf(delta, 0.1) * speed
 		while accumulated >= Farm.DT:
 			world.step()
@@ -163,6 +179,116 @@ func rect(p: Vector2, size: Vector2, color: String):
 func center(p: Vector2) -> Vector2:
 	return ORIGIN + (p + Vector2.ONE * 0.5) * TILE
 
+func _draw():
+	rect(Vector2.ZERO, Vector2(1280, 800), "192e2b")
+	label_at(Vector2(30, 35), "WHITESPACE  /  SMALL FARM STORIES", 13, Color("9bb9a1"))
+	label_at(Vector2(28, 77), "ホイッスル牧場", 32)
+	label_at(Vector2(315, 76), "築く。まかせる。連れ去りから救う。", 17, Color("b7ccb4"))
+	label_at(Vector2(861, 45), "DAY %02d  /  資材 %d" % [world.stage, world.materials], 22)
+	label_at(Vector2(861, 77), "Gold %d   餌 %d   卵 %d + 巣%d" % [world.campaign.gold, world.campaign.feed, world.campaign.eggs, world.eggs], 18, Color("f1cd85"))
+	rect(Vector2(28, 98), Vector2(800, 55), "263f37")
+	var status = "位置を選ぶ → 時計開始"
+	if world.phase == "defend":
+		status = "停止中：動物への指示だけ可能" if world.paused else ("建築準備" if world.spawned == 0 else "防衛中")
+		if world.keeper.carrier >= 0: status = "連れ去り中！ 犬で救出しよう"
+	elif world.phase == "result": status = "守りきった！" if world.result == "win" else ("牧場主が連れ去られた" if world.keeper.state == "abducted" else "防衛時間切れ")
+	label_at(Vector2(43, 132), status, 20)
+	var upcoming = world.next_attack_seconds()
+	label_at(Vector2(490, 132), "次の襲来 %.0f秒 / 経過 %.0f秒" % [upcoming, world.tick * Farm.DT] if upcoming >= 0 else "全員を追い返そう / %.0f秒" % (world.tick * Farm.DT), 16)
+	for y in range(Farm.H):
+		for x in range(Farm.W):
+			var q = Vector2i(x, y)
+			var p = ORIGIN + Vector2(q) * TILE
+			var border = not world.inside(q)
+			rect(p, Vector2(TILE, TILE), "345447" if border else ("608252" if (x + y) % 2 == 0 else "658757"))
+			if not border and (x * 7 + y * 3) % 5 == 0:
+				rect(p + Vector2(7, 19), Vector2(2, 6), "92a86a")
+			if q in world.entries or Vector2i(1, y) in world.entries and x == 0:
+				rect(p, Vector2(TILE, TILE), "b19867")
+	for entry in world.entries: label_at(center(entry) + Vector2(-22, -22), "入口", 14)
+	for p in world.structures:
+		var b = world.structures[p]
+		var c = center(p)
+		if b.kind == "wall":
+			rect(c - Vector2(14, 13), Vector2(28, 27), "71674c")
+			rect(c - Vector2(14, 13), Vector2(28, 5), "b2a481")
+			draw_line(c - Vector2(13, 0), c + Vector2(13, 0), Color("4d523f"), 2)
+		else:
+			rect(c - Vector2(14, 13), Vector2(5, 28), "d1ad65")
+			rect(c + Vector2(9, -13), Vector2(5, 28), "d1ad65")
+			draw_line(c - Vector2(10, 10), c + Vector2(10, -10) if b.open else c + Vector2(10, 10), Color("ffdc83"), 5)
+			label_at(c + Vector2(-7, 7), "開" if b.open else "閉", 12)
+		rect(c + Vector2(-14, 16), Vector2(28, 3), "343e34")
+		rect(c + Vector2(-14, 16), Vector2(28.0 * b.hp / b.max_hp, 3), "edc874")
+	if world.campaign.animals.size() > 1:
+		var n = center(world.nest)
+		draw_circle(n, 20, Color("947448"))
+		for i in range(mini(world.eggs, 8)): draw_circle(n + Vector2((i % 4) * 7 - 10, (i / 4) * 7 - 3), 4, Color("fff0c9"))
+		label_at(n + Vector2(-23, 35), "卵の巣", 14)
+		if world.campaign.shelter: draw_arc(n, 50, 0, TAU, 32, Color("bbaa74"), 2)
+	for f in world.foods:
+		var p = center(f.pos)
+		draw_circle(p, 13, Color("e7b968"))
+		draw_circle(p, 9, Color("75503c"))
+	for e in world.enemies:
+		if e.done: continue
+		var p = center(view_positions.get("e%d" % e.id, Vector2(e.pos)))
+		rect(p + Vector2(-10, -6), Vector2(21, 22), "817393" if not e.flee else "929388")
+		draw_circle(p + Vector2(0, -10), 10, Color("d2b396"))
+		rect(p + Vector2(-12, -18), Vector2(24, 8), "454453")
+		rect(p + Vector2(-9, -11), Vector2(18, 5), "474954")
+		rect(p + Vector2(-6, -10), Vector2(3, 2), "fff3ce")
+		rect(p + Vector2(4, -10), Vector2(3, 2), "fff3ce")
+		label_at(p + Vector2(-24, -44 if e.carry == "keeper" else -28), e.state, 13)
+		for i in range(e.morale): draw_circle(p + Vector2(-10 + i * 6, 21), 2, Color("e8b98f"))
+	var owner = center(world.keeper.pos)
+	if world.keeper.carrier >= 0: owner += Vector2(17, 5)
+	draw_circle(owner + Vector2(0, -8), 9, Color("f3cda2"))
+	rect(owner + Vector2(-12, -18), Vector2(24, 6), "f1d690")
+	rect(owner + Vector2(-8, 1), Vector2(17, 20), "80d4cd")
+	rect(owner + Vector2(-7, 20), Vector2(5, 6), "30484a")
+	rect(owner + Vector2(3, 20), Vector2(5, 6), "30484a")
+	label_at(owner + Vector2(-24, 43), "牧場主", 14, Color("aaffed"))
+	if world.keeper.carrier >= 0: draw_arc(owner, 21, 0, TAU, 20, Color("fa996b"), 3)
+	for a in world.animals:
+		var p = center(view_positions.get("a%d" % a.id, Vector2(a.pos)))
+		draw_circle(p + Vector2(0, 13), 16, Color(0.1, 0.2, 0.13, 0.25))
+		if a.species == "shiba": draw_dog(p)
+		else: draw_hen(p)
+		label_at(p + Vector2(-25, -29), "%s Lv%d" % ["柴犬" if a.species == "shiba" else "鶏", a.lv], 14)
+		if a.species == "shiba":
+			rect(p + Vector2(-17, 22), Vector2(34, 4), "35523f")
+			rect(p + Vector2(-17, 22), Vector2(a.stamina * 0.34, 4), "efd187")
+			if not a.pending.is_empty(): draw_arc(center(a.pending.pos) if a.pending.kind != "auto" else p, 17, 0, TAU, 24, Color("fff0bd"), 2)
+	# A placement preview makes construction legible without mutating the model.
+	var mouse = get_global_mouse_position()
+	var cell = Vector2i((mouse - ORIGIN) / TILE)
+	if world.inside(cell) and Rect2(ORIGIN, Vector2(Farm.W, Farm.H) * TILE).has_point(mouse):
+		var tint = Color(1, 0.95, 0.7, 0.6)
+		if Farm.BUILD.has(tool) and world.phase == "defend": tint = Color("a9ecd1") if world.can_build(tool, cell) else Color("e88c78")
+		draw_rect(Rect2(ORIGIN + Vector2(cell) * TILE, Vector2.ONE * TILE), tint, false, 2)
+	label_at(Vector2(40, 750), message.left(65), 15, Color("decba8"))
+	label_at(Vector2(40, 780), "数字キー：建築・操作   Q/W/E/R：動物指示   A：おまかせ   Space：停止     ※直接攻撃なし", 14, Color("9db69b"))
+	draw_sidebar()
+
+func draw_sidebar():
+	rect(Vector2(847, 98), Vector2(417, 661), "223b35")
+	var dog = world.animals[0]
+	if world.result == "":
+		label_at(Vector2(868, 133), "柴犬 Lv%d / %s" % [dog.lv, dog.state], 22)
+		label_at(Vector2(868, 168), "元気 %d%%   忠誠 %d   指示力 %.0f" % [dog.stamina, dog.loyalty, world.command_power], 18)
+		label_at(Vector2(868, 202), "牧場主を入口の外へ連れ去られると敗北。", 16)
+		label_at(Vector2(868, 229), "拘束中でも、犬で追い返せば救出できます。", 16)
+		label_at(Vector2(868, 261), "停止 = 動物指示だけ / 再開 = 建築・実行", 16, Color("f3d08c"))
+		label_at(Vector2(868, 290), "壁HP8 / 門HP%d   入り口には建築不可" % (6 + world.campaign.fence * 4), 14)
+		if not world.events.is_empty(): label_at(Vector2(868, 572), world.events.back().text.left(29), 13, Color("d2c9a7"))
+	else:
+		label_at(Vector2(868, 143), "防衛成功 / 購入と育成" if world.result == "win" else "防衛失敗 / もう一度", 24)
+		label_at(Vector2(868, 186), "評価 %d点   EXP +%d   Gold +%d" % [world.score.rating, world.score.xp, world.score.gold], 18)
+		label_at(Vector2(868, 225), "追返 %d / 拘束 %d / 救出 %d" % [world.metrics.repelled, world.metrics.captures, world.metrics.rescues], 18)
+		label_at(Vector2(868, 262), "建築 %d / 破壊 %d / 元気 %d%%" % [world.metrics.built, world.metrics.destroyed, world.score.condition], 18)
+		label_at(Vector2(868, 308), "柴犬 Lv%d   EXP %d / %d" % [dog.lv, dog.xp, dog.lv * 20], 20, Color("f5d395"))
+		label_at(Vector2(868, 349), "育成と購入は引継ぎ。次の日は新しい空き地。", 15)
 func draw_dog(p: Vector2):
 	# Original small pixel silhouette: curled tail, cream muzzle and pointed ears.
 	rect(p + Vector2(-14, -7), Vector2(26, 19), "bd713c")
@@ -183,117 +309,3 @@ func draw_hen(p: Vector2):
 	rect(p + Vector2(11, -10), Vector2(2, 2), "243d36")
 	rect(p + Vector2(-6, 11), Vector2(3, 6), "d69a4e")
 	rect(p + Vector2(4, 11), Vector2(3, 6), "d69a4e")
-
-func _draw():
-	rect(Vector2.ZERO, Vector2(1280, 800), "192e2b")
-	label_at(Vector2(30, 35), "WHITESPACE  /  SMALL FARM STORIES", 13, Color("9bb9a1"))
-	label_at(Vector2(28, 77), "ホイッスル牧場", 32)
-	label_at(Vector2(315, 76), "育てる。まかせる。ちょっと手を貸す。", 17, Color("b7ccb4"))
-	label_at(Vector2(861, 45), "DAY %02d   /   柴犬と、ちいさな牧場" % world.stage, 18)
-	label_at(Vector2(861, 77), "Gold %d    餌 %d    卵 %d" % [world.campaign.gold, world.campaign.feed, world.eggs if world.phase == "defend" else world.campaign.eggs], 20, Color("f1cd85"))
-	rect(Vector2(28, 98), Vector2(800, 55), "263f37")
-	var phase_name = {"prepare": "準備：柴犬を配置", "defend": "防衛中" if not paused else "一時停止", "result": "守りきった！" if world.result == "win" else "今日はうまくいかなかった"}[world.phase]
-	label_at(Vector2(43, 133), "%s     持出 %d / 2     追返 %d" % [phase_name, world.metrics.stolen, world.metrics.repelled], 20)
-	label_at(Vector2(674, 133), "%3.0f 秒" % (world.tick * Farm.DT), 19)
-	for y in range(Farm.H):
-		for x in range(Farm.W):
-			var q = Vector2i(x, y)
-			var p = ORIGIN + Vector2(q) * TILE
-			var border = not world.inside(q)
-			var col = "345447" if border else ("668956" if x > 12 else "52744a")
-			if (y == 5 or y == 12) and not border: col = "b19867"
-			rect(p, Vector2(TILE, TILE), col)
-			if not border and y not in [5, 12] and (x * 7 + y * 3) % 5 == 0:
-				rect(p + Vector2(7, 19), Vector2(2, 6), "92a86a")
-				rect(p + Vector2(12, 21), Vector2(2, 4), "809e63")
-			if world.is_fence(q):
-				rect(p + Vector2(10, 0), Vector2(12, TILE), "66513c")
-				rect(p + Vector2(7, 5), Vector2(18, 5), "c4a378")
-				rect(p + Vector2(7, 23), Vector2(18, 4), "c4a378")
-	for g in range(2):
-		var p = center(Farm.GATES[g])
-		if world.gate_hp[g] <= 0:
-			draw_line(p - Vector2(10, 9), p + Vector2(13, 10), Color("806145"), 6)
-		else:
-			draw_line(p + Vector2(-12, -14), p + Vector2(12, -14) if world.gate_open[g] else p + Vector2(-12, 14), Color("f5cf80"), 7)
-		label_at(p + Vector2(-20, -23), "破損" if world.gate_hp[g] <= 0 else ("開" if world.gate_open[g] else "閉"), 14, Color("fff0ba"))
-	var s = center(world.store)
-	rect(s + Vector2(-26, -24), Vector2(53, 46), "765d43")
-	rect(s + Vector2(-31, -30), Vector2(64, 12), "c47b52")
-	for i in range(world.supplies):
-		draw_circle(s + Vector2(-17 + i * 11, 6), 6, Color("e7c987"))
-	label_at(s + Vector2(-27, -38), "飼料庫", 15)
-	var n = center(world.nest)
-	draw_ellipse_patch(n, Color("947448"))
-	for i in range(mini(world.eggs, 8)):
-		draw_circle(n + Vector2((i % 4) * 7 - 10, (i / 4) * 7 - 3), 4, Color("fff0c9"))
-	label_at(n + Vector2(-24, 33), "卵の巣", 14)
-	if world.campaign.shelter:
-		var hut = center(Vector2(17, 3))
-		rect(hut - Vector2(22, 12), Vector2(44, 30), "9c7857")
-		draw_colored_polygon(PackedVector2Array([hut + Vector2(-29, -12), hut + Vector2(0, -31), hut + Vector2(29, -12)]), Color("d08c64"))
-		label_at(hut + Vector2(-25, 39), "休憩小屋", 14)
-	for f in world.foods:
-		var p = center(f.pos)
-		draw_circle(p, 13, Color("e7b968"))
-		draw_circle(p, 9, Color("75503c"))
-		label_at(p + Vector2(-8, 27), "餌", 14)
-	for e in world.enemies:
-		if e.done: continue
-		var p = center(view_positions.get("e%d" % e.id, Vector2(e.pos)))
-		rect(p + Vector2(-10, -6), Vector2(21, 22), "817393" if not e.flee else "929388")
-		draw_circle(p + Vector2(0, -10), 10, Color("d2b396"))
-		rect(p + Vector2(-12, -18), Vector2(24, 8), "454453")
-		rect(p + Vector2(-9, -11), Vector2(18, 5), "474954")
-		rect(p + Vector2(-6, -10), Vector2(3, 2), "fff3ce")
-		rect(p + Vector2(4, -10), Vector2(3, 2), "fff3ce")
-		if e.carry != "": draw_circle(p + Vector2(14, 7), 8, Color("e5ce8d"))
-		label_at(p + Vector2(-18, -27), "退散！" if e.flee else ("斥候" if e.role == "scout" else "泥棒"), 13)
-	for a in world.animals:
-		var p = center(view_positions.get("a%d" % a.id, Vector2(a.pos)))
-		if world.phase == "prepare" and a.species == "shiba":
-			draw_arc(p, 3 * TILE, 0, TAU, 40, Color(1, 0.9, 0.65, 0.45), 2)
-		draw_circle(p + Vector2(0, 13), 16, Color(0.1, 0.2, 0.13, 0.25))
-		if a.species == "shiba": draw_dog(p)
-		else: draw_hen(p)
-		label_at(p + Vector2(-25, -29), "%s Lv%d" % ["柴犬" if a.species == "shiba" else "鶏", a.lv], 14)
-		if a.species == "shiba":
-			rect(p + Vector2(-17, 22), Vector2(34, 4), "35523f")
-			rect(p + Vector2(-17, 22), Vector2(a.stamina * 0.34, 4), "efd187")
-			if a.order_until > world.tick:
-				draw_arc(center(a.order), 17 + sin(clock * 5) * 2, 0, TAU, 24, Color("fff0bd"), 2)
-	label_at(Vector2(40, 750), message.left(70), 15, Color("decba8"))
-	label_at(Vector2(40, 780), "左クリックで介入 / 1 笛  2 餌  3 門 / Space 一時停止     ※ プレイヤーの直接攻撃はありません", 14, Color("9db69b"))
-	draw_sidebar()
-
-func draw_ellipse_patch(p: Vector2, color: Color):
-	draw_set_transform(p, 0, Vector2(1.7, 0.7))
-	draw_circle(Vector2.ZERO, 17, color)
-	draw_set_transform(Vector2.ZERO)
-
-func draw_sidebar():
-	rect(Vector2(847, 98), Vector2(417, 661), "223b35")
-	label_at(Vector2(868, 134), "THE CARETAKER'S NOTE", 13, Color("a6be9f"))
-	var dog = world.animals[0]
-	if world.result == "":
-		label_at(Vector2(868, 177), "柴犬 Lv%d  /  %s" % [dog.lv, dog.state], 22)
-		label_at(Vector2(868, 212), "元気 %d%%   /   指示力 %d / 10" % [dog.stamina, world.command_power], 19)
-		rect(Vector2(868, 229), Vector2(364, 7), "142c27")
-		rect(Vector2(868, 229), Vector2(world.command_power * 36.4, 7), "d9ca8a")
-		label_at(Vector2(868, 272), "笛は場所を伝える。戦いは犬にまかせる。", 16)
-		label_at(Vector2(868, 300), "疲れたら餌へ。門を閉めると犬も通れない。", 16)
-		label_at(Vector2(868, 328), "畜産物・飼料を2個持ち出されると失敗。", 15, Color("c4bc9c"))
-	else:
-		label_at(Vector2(868, 178), "防衛成功 / 購入と育成" if world.result == "win" else "防衛失敗 / もう一度", 24)
-		label_at(Vector2(868, 214), "評価 %d 点   EXP +%d   Gold +%d" % [world.score.rating, world.score.xp, world.score.gold], 18)
-		label_at(Vector2(868, 248), "追返 %d / 持出 %d / 門被害 %d" % [world.metrics.repelled, world.metrics.stolen, world.metrics.gate_damage], 17)
-		label_at(Vector2(868, 280), "元気 %d%%  /  指示力使用 %.0f" % [world.score.condition, world.metrics.commands], 17)
-		var owned = world.campaign.animals[0]
-		label_at(Vector2(868, 314), "柴犬 Lv%d   EXP %d / %d" % [owned.lv, owned.xp, owned.lv * 20], 20, Color("f5d395"))
-		label_at(Vector2(868, 350), "鶏は生産と逃避、犬は追跡。役割が違います。", 15)
-	if world.result == "win":
-		label_at(Vector2(868, 560), "所有 %d匹 / 小屋 %s / 門補強 %d" % [world.campaign.animals.size(), "有" if world.campaign.shelter else "無", world.campaign.fence], 17)
-	else:
-		var recent = world.events.slice(-3)
-		for i in range(recent.size()):
-			label_at(Vector2(868, 511 + i * 24), recent[i].text.left(24), 14, Color("d2c9a7"))
