@@ -1,0 +1,39 @@
+name: SPOREHOLLOW
+
+on:
+  push:
+    branches: [main, 'codex/sporehollow-*']
+    paths: ['projects/sporehollow/**', '.github/workflows/sporehollow.yml']
+  pull_request:
+    paths: ['projects/sporehollow/**', '.github/workflows/sporehollow.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  prototype:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    defaults:
+      run:
+        working-directory: projects/sporehollow
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - run: npm run lint
+      - run: npm test
+      - run: npm run build
+      - name: Compare five ecological strategies
+        run: |
+          mkdir -p artifacts
+          node tools/evaluate.cjs 100 > artifacts/evaluation.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: sporehollow-prototype
+          path: |
+            projects/sporehollow/build/
+            projects/sporehollow/artifacts/evaluation.json

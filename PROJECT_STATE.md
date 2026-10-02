@@ -1,6 +1,6 @@
 # WhiteSpace — PROJECT STATE
 
-更新: 2026-09-28
+更新: 2026-10-02
 
 ## 全体
 
@@ -9,6 +9,12 @@
 - 現在はゲーム制作に集中し、広告・集客は公開準備で検討する。
 
 ## 現在のプロジェクト
+
+### 胞庭（SPOREHOLLOW・仮）
+
+- 地形を掘り、3種の食物連鎖で侵入者を防ぐ独立2D試作。DIVE DIVEのコード・タスクとは分離。
+- 1画面の掘削・生態系・侵入・勝敗・再挑戦が動作。現在は生態系と経路の因果を試す段階。定期再開は設定しない。
+- 詳細: [起動方法](projects/sporehollow/README.md) / [現在地](projects/sporehollow/PROJECT_STATE.md) / [次の仮説](projects/sporehollow/TASKS.md)
 
 ### DIVE DIVE
 

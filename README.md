@@ -6,6 +6,9 @@ WhiteSpaceは、**ゲーム・小説・映像・ARG・仮想現実・Webなど�
 
 ## プロジェクト
 
+- [胞庭（SPOREHOLLOW・仮）](projects/sporehollow/README.md)
+  掘った地下の食物連鎖で侵入者を退ける、独立した2D生態系試作。ブラウザでオフライン起動。DIVE DIVEとは別管理。
+
 - [DIVE DIVE](projects/001-first-release/README.md)
   深い海底へ潜る2D水中探索ゲーム。地形・酸素・採掘を核に、海上から生物・沈没船・神話・星海を経て最深部と結末まで、約1,960mの通し試作が動作。3D版は開発停止・保存、定期再開はPAUSED。
 
@@ -37,6 +40,7 @@ WhiteSpace/
 └── projects/
     ├── README.md           # 作品一覧
     ├── 001-first-release/  # DIVE DIVE
+    ├── sporehollow/        # 胞庭・地下生態系の独立試作
     └── language-jenga/
         ├── README.md
         ├── PROJECT_STATE.md

@@ -1,0 +1,16 @@
+{
+  "name": "sporehollow",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Independent underground ecosystem prototype",
+  "scripts": {
+    "test": "node --test tests/*.test.cjs",
+    "lint": "node --check src/sim.js && node --check src/app.js && node --check tools/evaluate.cjs && node --check tools/build.cjs && node --check tools/replay.cjs && node --check tools/serve.cjs",
+    "evaluate": "node tools/evaluate.cjs 40",
+    "build": "node tools/build.cjs",
+    "start": "node tools/serve.cjs"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
