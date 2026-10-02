@@ -3,7 +3,7 @@ const Farm = preload("res://game/world.gd")
 const FONT = preload("res://assets/fonts/ui_font.tres")
 const TILE = Vector2(48, 42)
 const GROUPS = ["建設", "動物", "回収"]
-const TOOLS = {"wall": "壁  10 / 1秒", "build_gate": "門  30（仮）", "repair": "修理", "gate": "門開閉", "remove": "撤去", "kennel": "犬小屋 30（仮）",
+const TOOLS = {"wall": "壁  10 / 1秒", "build_gate": "門  30（仮）", "repair": "修理", "gate": "門開閉", "remove": "解体", "kennel": "犬小屋 30（仮）",
 	"auto": "おまかせ", "stay": "待機", "wander": "徘徊", "rest": "休む", "collect": "草・キノコ・卵", "feed": "餌を置く"}
 const GROUP_TOOLS = [["wall", "build_gate", "kennel"], ["auto", "stay", "wander", "rest"], ["collect", "feed"]]
 const BoardArt = preload("res://game/board_art.gd")
@@ -12,6 +12,7 @@ var tool = "place_keeper"
 var group = -1
 var selected_animal = -1
 var selected_animals: Array = []
+var selected_structures: Array = []
 var dragging = false
 var drag_start = Vector2.ZERO
 var selected: Dictionary = {}
@@ -41,7 +42,12 @@ var seen_combat = 0
 var seen_skills = 0
 var hit_effects: Array = []
 var last_phase = ""
-var audio: AudioStreamPlayer
+var audio: Node
+var seen_actions = 0
+var structure_views: Dictionary = {}
+var gate_views: Dictionary = {}
+var dust: Array = []
+var visual_time = 0.0
 
 func _ready():
 	camera = Camera2D.new()
@@ -69,7 +75,7 @@ func _ready():
 	add_button(controls, "retry", "再挑戦", Rect2(556, 514, 168, 38), retry_stage)
 	for i in range(GROUPS.size()):
 		add_button(controls, "group%d" % i, GROUPS[i], Rect2(16 + i * 122, 754, 116, 36), select_group.bind(i))
-	audio = AudioStreamPlayer.new()
+	audio = preload("res://game/farm_audio.gd").new()
 	add_child(audio)
 	refresh()
 	if "--automated" in OS.get_cmdline_user_args(): automated = true
@@ -108,6 +114,7 @@ func notice(text_value: String):
 func select_group(index: int):
 	group = index
 	selected.clear()
+	selected_structures.clear()
 	tool = "place_animal" if index == 1 and selected_animal >= 0 and world.animals.any(func(a): return a.id == selected_animal and not a.placed) else ""
 	refresh()
 
@@ -200,7 +207,7 @@ func refresh():
 			if id in ["wall", "build_gate", "kennel"]: buttons[id].icon = BoardArt.icon("soil")
 		if group == 0 and selected.get("kind") == "structure":
 			add_button(palette, "repair", "E 修理", Rect2(596, 704, 116, 36), facility_action.bind("repair"))
-			add_button(palette, "remove", "Del 撤去", Rect2(722, 704, 124, 36), facility_action.bind("remove"))
+			add_button(palette, "remove", "Del 解体", Rect2(722, 704, 124, 36), facility_action.bind("remove"))
 			if world.structures.get(selected.pos, {}).get("kind") == "gate":
 				add_button(palette, "gate", "門を開閉", Rect2(856, 704, 124, 36), facility_action.bind("gate"))
 	for id in TOOLS:
@@ -209,9 +216,15 @@ func refresh():
 
 func facility_action(action: String):
 	if world.phase != "defend" or group != 0 or selected.get("kind") != "structure": return
-	var ok = world.act(action, selected.pos)
-	notice(TOOLS[action] + "しました" if ok else ("停止中は動物指示だけ" if world.paused else "耐久・土・施設の状態を確認してください"))
-	if action == "remove" and ok: selected.clear()
+	var targets = selected_structures.duplicate() if action == "remove" else [selected.pos]
+	var count = 0
+	var before = world.materials
+	for cell in targets:
+		if world.act(action, cell): count += 1
+	notice(("%d施設を解体 → 土%d" % [count, world.materials - before] if action == "remove" else TOOLS[action] + "しました") if count else ("停止中は実行できません" if world.paused else "占有・耐久・土を確認してください"))
+	if action == "remove" and count:
+		selected_structures = selected_structures.filter(func(p): return world.live_structure(p))
+		selected = {"kind": "structure", "pos": selected_structures[0]} if not selected_structures.is_empty() else {}
 	refresh()
 
 func advance():
@@ -225,6 +238,7 @@ func reset_view():
 	tool = "place_keeper"
 	selected_animal = -1
 	selected_animals.clear()
+	selected_structures.clear()
 	dragging = false
 	selected.clear()
 	view_positions.clear()
@@ -232,6 +246,10 @@ func reset_view():
 	seen_combat = 0
 	seen_skills = 0
 	hit_effects.clear()
+	seen_actions = 0
+	structure_views.clear()
+	gate_views.clear()
+	dust.clear()
 	alert_until = 0
 	accumulated = 0
 	recenter()
@@ -322,6 +340,12 @@ func _unhandled_input(event):
 		dragging = false
 		var end = get_canvas_transform().affine_inverse() * event.position
 		var area = Rect2(drag_start, end - drag_start).abs()
+		if group == 0:
+			selected_structures = world.structures.keys().filter(func(p): return world.live_structure(p) and area.has_point(center(p)))
+			selected = {"kind": "structure", "pos": selected_structures[0]} if not selected_structures.is_empty() else {}
+			tool = ""
+			refresh()
+			return
 		selected_animals.clear()
 		for a in world.animals:
 			if a.placed and area.has_point(actor_pixel("a%d" % a.id, a.pos)): selected_animals.append(a.id)
@@ -350,8 +374,11 @@ func _unhandled_input(event):
 			choose_animal(a.id, event.ctrl_pressed)
 			return
 	if world.live_structure(cell):
+		if not event.ctrl_pressed or group != 0 or selected.get("kind") != "structure": selected_structures.clear()
+		if cell in selected_structures: selected_structures.erase(cell)
+		else: selected_structures.append(cell)
 		group = 0
-		selected = {"kind": "structure", "pos": cell}
+		selected = {"kind": "structure", "pos": selected_structures[0]} if not selected_structures.is_empty() else {}
 		tool = ""
 		refresh()
 		return
@@ -382,6 +409,7 @@ func _notification(what):
 
 func _process(delta):
 	clock += delta
+	if not world.paused: visual_time += delta
 	var direction = Vector2(int(keys_down.get(KEY_D, false)) - int(keys_down.get(KEY_A, false)), int(keys_down.get(KEY_S, false)) - int(keys_down.get(KEY_W, false)))
 	camera.position += direction.normalized() * delta * 420
 	var middle = Vector2(Farm.W, Farm.H) * TILE * 0.5
@@ -391,7 +419,11 @@ func _process(delta):
 		while accumulated >= Farm.DT:
 			world.step()
 			accumulated -= Farm.DT
-	if last_phase != world.phase: refresh()
+	if last_phase != world.phase:
+		if world.phase == "result": play_alert(world.result)
+		refresh()
+	audio.tension(world.phase == "defend" and world.enemies.any(func(e): return not e.done and not e.flee))
+	update_facility_effects(delta)
 	for a in world.animals:
 		if a.placed: smooth_actor("a%d" % a.id, a.pos, delta)
 	for e in world.enemies: smooth_actor("e%d" % e.id, e.pos, delta)
@@ -400,6 +432,11 @@ func _process(delta):
 		seen_combat += 1
 		if hit.source in ["animal", "enemy"]:
 			hit_effects.append({"source": ("a" if hit.source == "animal" else "e") + str(hit.id), "target": ("e" if hit.source == "animal" else "a") + str(hit.target), "at": clock})
+			play_alert("attack")
+		elif hit.source == "object":
+			for cell in world.structures:
+				if world.structures[cell].id == hit.target: puff(center(cell), "hit")
+			play_alert("object")
 	hit_effects = hit_effects.filter(func(hit): return clock - hit.at < 0.3)
 	while seen_milestones < world.milestones.size():
 		var event = world.milestones[seen_milestones]
@@ -444,24 +481,31 @@ func alert_visible() -> bool:
 	return clock < alert_until and world.tick < alert_until_tick
 
 func play_alert(kind: String):
-	# Short original two-note signal; Dummy audio is used by automated visual runs.
-	var stream = AudioStreamWAV.new()
-	stream.format = AudioStreamWAV.FORMAT_16_BITS
-	stream.mix_rate = 22050
-	var samples = PackedByteArray()
-	samples.resize(6615 * 2)
-	var frequency = 440.0 if kind in ["carried", "restrained", "animal_danger"] else 660.0
-	for i in range(6615):
-		var t = float(i) / 22050.0
-		var envelope = minf(t * 70, 1) * maxf(0, 1 - t / 0.3)
-		var value = int(sin(t * TAU * frequency * (1.25 if t > 0.14 else 1.0)) * 2800 * envelope)
-		if kind == "bark":
-			var pulse = fmod(t, 0.15) / 0.15
-			value = int((sin(t * TAU * (180 - pulse * 90)) + 0.3 * sin(t * TAU * 971)) * 2300 * sin(pulse * PI) * envelope)
-		samples.encode_s16(i * 2, value)
-	stream.data = samples
-	audio.stream = stream
-	audio.play()
+	audio.cue(kind)
+
+func puff(p: Vector2, kind: String):
+	dust.append({"pos": p, "at": visual_time, "kind": kind})
+	if dust.size() > 32: dust.pop_front()
+
+func update_facility_effects(delta: float):
+	while seen_actions < world.actions.size():
+		var action = world.actions[seen_actions]
+		seen_actions += 1
+		if not action.accepted: continue
+		var kind = action.kind
+		if kind in ["repair", "remove", "collect", "gate"]:
+			play_alert(kind)
+			puff(center(Vector2i(action.pos[0], action.pos[1])), kind)
+	for cell in world.structures:
+		var b = world.structures[cell]
+		var old = structure_views.get(b.id, "")
+		if old != "" and old != b.status and b.status in ["ready", "destroyed"]:
+			puff(center(cell), "build" if b.status == "ready" else "break")
+			play_alert("build" if b.status == "ready" else "object")
+		structure_views[b.id] = b.status
+		if b.kind == "gate":
+			gate_views[b.id] = move_toward(gate_views.get(b.id, 1.0 if b.open else 0.0), 1.0 if b.open else 0.0, delta * 5) if not world.paused else gate_views.get(b.id, 0.0)
+	dust = dust.filter(func(f): return visual_time - f.at < 0.55)
 
 func export_record():
 	DirAccess.make_dir_recursive_absolute("user://observations")
@@ -487,6 +531,7 @@ func draw_structure(p: Vector2, b: Dictionary, preview: bool = false):
 		draw_line(p - Vector2(14, 10), p + Vector2(14, 10), Color("e5c982"), 2)
 		draw_rect(Rect2(p + Vector2(-17, 17), Vector2(34 * (1.0 - float(b.remaining) / b.total_ticks), 3)), Color("b2ebcf"))
 		return
+	draw_colored_polygon(PackedVector2Array([p + Vector2(-20, 10), p + Vector2(20, 10), p + Vector2(28, 24), p + Vector2(-12, 24)]), Color(0.12, 0.22, 0.13, 0.25))
 	if b.kind == "kennel":
 		draw_rect(Rect2(p + Vector2(-19, -7), Vector2(38, 29)), Color("b99160"))
 		draw_colored_polygon(PackedVector2Array([p + Vector2(-23, -7), p + Vector2(0, -21), p + Vector2(23, -7)]), Color("96624a"))
@@ -501,7 +546,10 @@ func draw_structure(p: Vector2, b: Dictionary, preview: bool = false):
 	else:
 		draw_rect(Rect2(p - Vector2(20, 13), Vector2(6, 30)), shade)
 		draw_rect(Rect2(p + Vector2(14, -13), Vector2(6, 30)), shade)
-		draw_line(p - Vector2(15, 8), p + (Vector2(-12, 15) if b.open else Vector2(15, 8)), shade, 5)
+		var hinge = p - Vector2(15, 8)
+		var tip = p + Vector2(15, 8).lerp(Vector2(-12, 15), gate_views.get(b.id, 1.0 if b.open else 0.0))
+		draw_line(hinge, tip, shade, 5)
+		draw_line(hinge + Vector2(0, 9), tip + Vector2(0, 9), Color("897447"), 4)
 	if b.hp < b.max_hp:
 		var crack = PackedVector2Array([p + Vector2(2, -12), p + Vector2(-5, -3), p + Vector2(2, 3)])
 		if b.hp <= b.max_hp * 0.5:
@@ -511,9 +559,9 @@ func draw_structure(p: Vector2, b: Dictionary, preview: bool = false):
 		draw_rect(Rect2(p + Vector2(-18, 19), Vector2(36.0 * b.hp / b.max_hp, 3)), Color("ebc171"))
 
 func _draw():
-	BoardArt.draw_ground(self, world, TILE)
+	BoardArt.draw_ground(self, world, TILE, visual_time)
 	for p in world.natural:
-		BoardArt.draw_resource(self, center(p), world.natural[p])
+		BoardArt.draw_resource(self, center(p) + Vector2(sin(visual_time * 1.3 + p.x) * (1.5 if world.natural[p] == "weed" else 0.3), 0), world.natural[p])
 	for p in world.structures: draw_structure(center(p), world.structures[p])
 	if world.has_nest():
 		draw_circle(center(world.nest), 18, Color("99794b"))
@@ -524,6 +572,11 @@ func _draw():
 	for e in world.enemies:
 		if e.done: continue
 		var p = actor_pixel("e%d" % e.id, e.pos)
+		var walking = Vector2(e.pos).distance_to(view_positions.get("e%d" % e.id, Vector2(e.pos))) > 0.025
+		var stride = sin(visual_time * 16 + e.id) * (3 if walking else 0.5)
+		draw_line(p + Vector2(-5, 14), p + Vector2(-6 + stride, 25), Color("42424c"), 5)
+		draw_line(p + Vector2(5, 14), p + Vector2(6 - stride, 25), Color("42424c"), 5)
+		p.y += absf(stride) * -0.4
 		rect(p + Vector2(-10, -5), Vector2(21, 23), "87768e" if not e.flee else "98947f")
 		draw_circle(p + Vector2(0, -10), 10, Color("d2b396"))
 		rect(p + Vector2(-12, -18), Vector2(24, 8), "454453")
@@ -534,7 +587,6 @@ func _draw():
 			draw_rect(Rect2(p + Vector2(-18, -48), Vector2(36, 4)), Color("3e4534"))
 			draw_rect(Rect2(p + Vector2(-18, -48), Vector2(36.0 * e.hp / e.max_hp, 4)), Color("e3aa88"))
 		if world.tick < e.move_stopped_until:
-			draw_arc(p, 28, 0, TAU, 24, Color("f5d575"), 3)
 			label_on(self, p + Vector2(-16, -53), "足止め", 13, Color("ffe5a0"))
 		if e.counter_target >= 0 and not e.flee:
 			draw_line(p + Vector2(-7, -37), p + Vector2(7, -25), Color("ffda91"), 3)
@@ -549,6 +601,7 @@ func _draw():
 		if e.state == "迷う": label_on(self, p + Vector2(15, -23), "?", 18, Color("f5cd89"))
 	if world.keeper.placed:
 		var p = center(world.keeper.pos)
+		p.y += sin(visual_time * 1.7) * 0.8
 		if world.keeper.carrier >= 0:
 			var carrier_pos = view_positions.get("e%d" % world.keeper.carrier, Vector2(world.keeper.pos))
 			p = center(carrier_pos) + Vector2(34, -36)
@@ -562,7 +615,7 @@ func _draw():
 		rect(p + Vector2(-7, 20), Vector2(5, 6), "30484a")
 		rect(p + Vector2(3, 20), Vector2(5, 6), "30484a")
 		if world.keeper.state in ["restrained", "captured"]:
-			draw_arc(p, 25, 0, TAU, 24, Color("f69773"), 3)
+			label_on(self, p + Vector2(14, -18), "!", 18, Color("f69773"))
 			draw_line(p + Vector2(-10, 8), p + Vector2(10, 8), Color("513f39"), 3)
 		draw_set_transform(Vector2.ZERO)
 	for a in world.animals:
@@ -572,9 +625,9 @@ func _draw():
 		if a.species == "shiba":
 			if world.structures.get(a.pos, {}).get("kind") == "kennel":
 				draw_set_transform(p, 0, Vector2.ONE * 0.65)
-				draw_dog(Vector2.ZERO)
+				draw_dog(Vector2.ZERO, a)
 				draw_set_transform(Vector2.ZERO)
-			else: draw_dog(p)
+			else: draw_dog(p, a)
 		else: draw_hen(p)
 		var in_combat = world.enemies.any(func(e): return not e.done and not e.flee and Farm.distance(a.pos, e.pos) <= 1)
 		if a.hp <= a.max_hp * 0.5 or in_combat:
@@ -584,27 +637,27 @@ func _draw():
 			draw_rect(Rect2(p + Vector2(-20, 23), Vector2(40.0 * a.hp / a.max_hp, 5)), color)
 			if danger:
 				color.a = 0.65 + 0.25 * sin(clock * 4)
-				draw_arc(p, 28, 0, TAU, 28, color, 3)
 				label_on(self, p + Vector2(-4, -29), "!", 23, color)
 		if a.state in ["休む", "自主休養"]: label_on(self, p + Vector2(14, -25), "Zz", 18, Color("c1e3db"))
-		if a.rescuing: draw_arc(p, 25, -PI, 0, 16, Color("b0f0de"), 3)
+		if a.rescuing: label_on(self, p + Vector2(-25, -20), "!!", 16, Color("b0f0de"))
 		if world.tick - a.last_bark < 4:
-			var ripple = float(world.tick - a.last_bark) / 4.0
-			for ring in range(3):
-				draw_arc(p, 28 + ring * 17 + ripple * 35, -PI, PI, 40, Color(1, 0.89, 0.55, 0.7 - ring * 0.16), 2)
-			label_on(self, p + Vector2(-13, -35), "ワン！", 16, Color("ffe3a0"))
-		if a.state == "吠える":
 			draw_arc(p + Vector2(25, -8), 9, -0.8, 0.8, 8, Color("ffe3a0"), 2)
 			draw_arc(p + Vector2(25, -8), 15, -0.8, 0.8, 8, Color("ffe3a0"), 2)
 		elif a.state == "様子見": label_on(self, p + Vector2(17, -24), "…", 18, Color("ffe3a0"))
 		if group == 1 and a.id in selected_animals:
-			draw_arc(p, 23, 0, TAU, 24, Color("ffe2a3"), 2)
-			if a.mode in ["stay", "wander"]: draw_arc(center(a.order), 36 if a.mode == "stay" else 120, 0, TAU, 40, Color(1, 0.9, 0.5, 0.35), 2)
+			draw_line(p + Vector2(-11, 21), p + Vector2(11, 21), Color("ffe2a3"), 3)
 		if debug_view: label_on(self, p + Vector2(25, 0), a.state, 12)
 	for hit in hit_effects:
 		var p = center(view_positions.get(hit.target, Vector2.ZERO))
 		var fade = 1.0 - (clock - hit.at) / 0.3
 		draw_arc(p, 17, -0.8, 1.1, 8, Color(1, 0.85, 0.45, fade), 3)
+	for f in dust:
+		var age = (visual_time - f.at) / 0.55
+		for i in range(6):
+			var q = f.pos + Vector2(cos(i * 2.4) * age * 22, -sin(age * PI) * (8 + i * 2))
+			var tint = Color("b8a47b") if f.kind != "collect" else Color("b5cd83")
+			tint.a = (1 - age) * 0.7
+			draw_rect(Rect2(q, Vector2(3, 3) if f.kind in ["break", "remove"] else Vector2(5, 3)), tint)
 	var cell = Vector2i(get_canvas_transform().affine_inverse() * pointer / TILE)
 	if world.inside(cell) and not pointer_over_ui():
 		var valid = false
@@ -636,6 +689,9 @@ func _draw():
 		if show_preview: draw_rect(Rect2(Vector2(cell) * TILE + Vector2(2, 2), TILE - Vector2(4, 4)), Color("a3e5ba") if valid else Color("ee8a77"), false, 3)
 	if selected.get("kind") in ["structure", "resource"]:
 		draw_rect(Rect2(Vector2(selected.pos) * TILE + Vector2(1, 1), TILE - Vector2(2, 2)), Color("ffe2a3"), false, 3)
+	if group == 0 and selected.get("kind") == "structure":
+		for p in selected_structures:
+			if world.live_structure(p): draw_rect(Rect2(Vector2(p) * TILE + Vector2(2, 2), TILE - Vector2(4, 4)), Color("ffe2a3"), false, 2)
 
 func panel(area: Rect2): hud.draw_rect(area, Color(0.09, 0.16, 0.12, 0.94))
 
@@ -656,11 +712,10 @@ func draw_hud():
 	label_on(hud, Vector2(181, 31), str(world.materials), 20)
 	BoardArt.draw_resource(hud, Vector2(262, 24), "gold")
 	label_on(hud, Vector2(281, 31), str(world.campaign.gold), 20)
-	BoardArt.draw_resource(hud, Vector2(352, 24), "mushroom")
-	label_on(hud, Vector2(372, 31), str(world.campaign.mushrooms), 20)
+	label_on(hud, Vector2(342, 31), "木材 —", 17, Color("acb99a"))
 	if Rect2(142, 0, 272, 49).has_point(pointer):
 		panel(Rect2(145, 50, 390, 30))
-		label_on(hud, Vector2(154, 71), "土：建築・修理 / Gold：購入 / キノコ：終了時回復", 14)
+		label_on(hud, Vector2(154, 71), "土：建築・修理 / 木材：未使用 / キノコ %d" % world.campaign.mushrooms, 14)
 	label_on(hud, Vector2(796, 31), "%02d:%02d   %s" % [int(world.tick * Farm.DT) / 60, int(world.tick * Farm.DT) % 60, "PAUSE" if world.paused else ""], 20)
 	panel(Rect2(0, 748, 1280, 52))
 	if world.phase == "prepare":
@@ -686,7 +741,7 @@ func draw_hud():
 		details = "もう一度クリックで回収" if collectible(selected.pos) else "回収済み"
 	elif selected.get("kind") == "animal":
 		for a in world.animals:
-			if a.id == selected.id: details = "%s Lv%d   HP %d/%d   忠誠 %d\n指示：%s / %s" % ["柴犬" if a.species == "shiba" else "鶏", a.lv, a.hp, a.max_hp, a.loyalty, TOOLS.get(a.mode, a.mode), a.state if a.placed else "未配置"]
+			if a.id == selected.id: details = "%s Lv%d   HP %d/%d\n現在：%s" % ["柴犬" if a.species == "shiba" else "鶏", a.lv, a.hp, a.max_hp, (TOOLS.get(a.mode, a.mode) if a.mode != "auto" else "おまかせ") if a.placed else "未配置"]
 		if selected_animals.size() > 1: details = "%d匹を選択\n%s → クリックで一括指示" % [selected_animals.size(), TOOLS.get(tool, "Tabで操作選択")]
 	elif selected.get("kind") == "enemy":
 		for e in world.enemies:
@@ -694,7 +749,11 @@ func draw_hud():
 	elif selected.get("kind") == "structure" and world.structures.has(selected.pos):
 		var b = world.structures[selected.pos]
 		var quote = world.repair_quote(selected.pos)
-		details = "%s Lv1   耐久 %d/%d\nE 修理 +%d（土%d） / Del 撤去" % [{"wall": "壁", "gate": "門", "kennel": "犬小屋"}.get(b.kind, b.kind), b.hp, b.max_hp, quote.hp, quote.cost]
+		details = "%s Lv1   耐久 %d/%d\n[E] 修理 / [Del] 解体 → 土%d" % [{"wall": "壁", "gate": "門", "kennel": "犬小屋"}.get(b.kind, b.kind), b.hp, b.max_hp, world.dismantle_quote(selected.pos)]
+		if selected_structures.size() > 1:
+			var refund = 0
+			for cell in selected_structures: refund += world.dismantle_quote(cell)
+			details = "%d施設を選択\n[Del] 一括解体 → 土%d" % [selected_structures.size(), refund]
 	if details != "":
 		panel(Rect2(16, 610, 422, 76))
 		var lines = details.split("\n")
@@ -729,16 +788,26 @@ func draw_edge(cell: Vector2i, title: String, color: Color):
 	hud.draw_circle(edge + Vector2(-10, 17), 5, color)
 	label_on(hud, (edge + Vector2(0, 32)).clamp(Vector2(24, 120), Vector2(1140, 700)), title, 16, color)
 
-func draw_dog(p: Vector2):
+func draw_dog(p: Vector2, animal: Dictionary = {}):
 	# Original small pixel silhouette: curled tail, cream muzzle and pointed ears.
+	var resting = animal.get("state", "") in ["休む", "自主休養"]
+	var walking = not animal.is_empty() and Vector2(animal.pos).distance_to(view_positions.get("a%d" % animal.id, Vector2(animal.pos))) > 0.025
+	var stride = sin(visual_time * 16) * (3 if walking else 0)
+	if resting:
+		rect(p + Vector2(-16, 4), Vector2(34, 12), "bd713c")
+		rect(p + Vector2(7, 1), Vector2(16, 13), "d9924f")
+		rect(p + Vector2(14, 9), Vector2(12, 6), "f4deb0")
+		rect(p + Vector2(18, 6), Vector2(5, 2), "293d37")
+		return
+	p.y -= absf(stride) * 0.5 + sin(visual_time * 2) * 0.5
 	rect(p + Vector2(-14, -7), Vector2(26, 19), "bd713c")
 	rect(p + Vector2(2, -13), Vector2(19, 18), "d9924f")
 	rect(p + Vector2(3, -20), Vector2(5, 9), "9c5630")
 	rect(p + Vector2(16, -20), Vector2(5, 9), "9c5630")
 	rect(p + Vector2(9, -2), Vector2(14, 8), "f4deb0")
 	rect(p + Vector2(18, -6), Vector2(3, 3), "293d37")
-	rect(p + Vector2(-12, 10), Vector2(6, 7), "e5b27c")
-	rect(p + Vector2(6, 10), Vector2(6, 7), "e5b27c")
+	rect(p + Vector2(-12 + stride, 10), Vector2(6, 7), "e5b27c")
+	rect(p + Vector2(6 - stride, 10), Vector2(6, 7), "e5b27c")
 	draw_arc(p + Vector2(-15, -8), 8, 0.1, 5.4, 9, Color(Color("f2d3a4"), art_alpha), 5)
 
 func draw_hen(p: Vector2):

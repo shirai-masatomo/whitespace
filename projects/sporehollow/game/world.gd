@@ -249,7 +249,7 @@ func act(kind: String, p: Vector2i = Vector2i.ZERO, animal_id: int = -1) -> bool
 			elif kind == "repair":
 				accepted = repair(p)
 			elif kind == "remove" and live_structure(p) and not occupied(p):
-				materials += floori(structures[p].cost * 0.5 * structures[p].hp / structures[p].max_hp)
+				materials += dismantle_quote(p)
 				structures[p].status = "removed"
 				structures[p].hp = 0
 				accepted = true
@@ -639,6 +639,11 @@ func construction_step():
 			b.status = "ready"
 			b.hp = b.max_hp
 			metrics.built += 1
+
+func dismantle_quote(p: Vector2i) -> int:
+	if not live_structure(p): return 0
+	var b = structures[p]
+	return floori(b.cost * clampf(float(b.hp) / b.max_hp, 0, 1) * Rules.DISMANTLE_REFUND)
 
 func repair_quote(p: Vector2i) -> Dictionary:
 	if not structures.has(p) or structures[p].status != "ready": return {"hp": 0, "cost": 0}

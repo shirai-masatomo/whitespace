@@ -305,8 +305,34 @@ func run():
 	check(saved.decision_log.size() <= Farm.Rules.AI.log_limit, "Decision log is bounded")
 	check_new_rules()
 	check_rest_and_kennels()
+	check_dismantle()
 	print("PASS: %d Stage1 and campaign checks" % checks)
 	quit()
+
+func check_dismantle():
+	var w = quiet_farm()
+	var p = Vector2i(5, 5)
+	check(w.act("wall", p), "Build refund fixture")
+	check(w.dismantle_quote(p) == 0, "Unfinished construction has no completed durability to refund")
+	for i in range(4): w.step()
+	check(w.dismantle_quote(p) == 8, "Full 10-soil wall refunds 8")
+	w.structures[p].hp = 4
+	check(w.dismantle_quote(p) == 4, "Half wall refunds 4")
+	w.structures[p].hp = 3
+	check(w.dismantle_quote(p) == 3, "Damaged wall refund floors per facility")
+	var before = w.materials
+	w.paused = true
+	check(not w.act("remove", p) and w.materials == before, "Paused dismantle cannot refund")
+	w.paused = false
+	check(w.act("remove", p) and w.materials == before + 3, "Remove credits quoted soil")
+	check(not w.act("remove", p) and w.dismantle_quote(p) == 0 and w.materials == before + 3, "Cannot refund a facility twice")
+	check(w.act("build_gate", p), "Gate refund fixture")
+	for i in range(4): w.step()
+	w.structures[p].hp = 1
+	check(w.dismantle_quote(p) == 4, "Gate shares the cost/durability formula")
+	w.structures[p].status = "destroyed"
+	w.structures[p].hp = 0
+	check(w.dismantle_quote(p) == 0 and not w.act("remove", p), "Destroyed facility has no refund")
 
 func check_new_rules():
 	var w = started()

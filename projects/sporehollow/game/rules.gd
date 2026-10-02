@@ -12,6 +12,7 @@ const BUILD = {"wall": {"cost": 10, "hp": 8, "seconds": 1.0},
 	"kennel": {"cost": 30, "hp": 12, "seconds": 2.0}} # Kennel construction values are provisional.
 const REPAIR_FACTOR = 1.0
 const INTERRUPT_REFUND = 0.5
+const DISMANTLE_REFUND = 0.8 # Provisional: floor each facility's remaining-durability refund.
 const SOIL_PACK = 50
 
 const LOW_HP_FRACTION = 0.30 # Provisional visual-warning threshold.

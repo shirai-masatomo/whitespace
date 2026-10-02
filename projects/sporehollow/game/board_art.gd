@@ -1,23 +1,37 @@
 extends RefCounted
 # Original code-drawn farm. Visual detail does not alter collision or simulation RNG.
-static func draw_ground(c: CanvasItem, world, tile: Vector2):
+static func draw_ground(c: CanvasItem, world, tile: Vector2, time: float = 0):
 	c.draw_rect(Rect2(-1500, -1500, 4200, 3600), Color("42634b"))
 	for y in range(world.H):
 		for x in range(world.W):
 			var p = Vector2(x, y) * tile
-			var color = Color("718d50").lerp(Color("8a9e5d"), (sin(x * 0.37 + y * 0.29) + 1) * 0.22)
+			var patch = (sin(x * 0.37 + y * 0.29) + sin(x * 0.19 - y * 0.48) + 2) * 0.25
+			var color = Color("637c48").lerp(Color("90a562"), patch * 0.75)
 			if not world.inside(Vector2i(x, y)): color = Color("526d43")
-			c.draw_rect(Rect2(p, tile + Vector2.ONE), color)
+			var corners = PackedVector2Array([p, p + Vector2(tile.x, 0), p + tile, p + Vector2(0, tile.y)])
+			var colors = PackedColorArray()
+			for corner in corners:
+				var v = corner / tile
+				var blend = (sin(v.x * 0.37 + v.y * 0.29) + sin(v.x * 0.19 - v.y * 0.48) + 2) * 0.25
+				colors.append(Color("637c48").lerp(Color("90a562"), blend * 0.75) if world.inside(Vector2i(x, y)) else color)
+			c.draw_polygon(corners, colors)
 			var n = (x * 173 + y * 317) % 137
 			for i in range(1 + n % 4 if sin(x * 0.63 + y * 0.4) > -0.2 else 0):
 				var q = p + Vector2((n * (i + 3)) % 43 + 2, (n * (i + 7)) % 35 + 3)
-				c.draw_line(q, q + Vector2(2, -4), Color("91a961"), 2)
+				var sway = sin(time * 1.4 + x * 0.4 + y) * 1.4 if n % 5 == 0 else 0.0
+				c.draw_line(q, q + Vector2(2 + sway, -4), Color("91a961"), 2)
 				c.draw_line(q + Vector2(3, 0), q + Vector2(5, -5), Color("617c45"), 2)
 			if n < 19:
 				c.draw_rect(Rect2(p + Vector2(12, 23), Vector2(23, 7)), Color("a0a06a"))
 				c.draw_rect(Rect2(p + Vector2(17, 20), Vector2(11, 3)), Color("96955f"))
 			if n > 124:
 				c.draw_rect(Rect2(p + Vector2(31, 20), Vector2(3, 3)), Color("ded3a2"))
+	# Sparse drifting moths; never cover actors with a particle carpet.
+	for i in range(3):
+		var q = Vector2(230 + i * 370 + sin(time * 0.26 + i) * 34, 165 + i * 96 + cos(time * 0.38 + i) * 18)
+		var wing = 2 + absf(sin(time * 7 + i)) * 2
+		c.draw_line(q - Vector2(wing, 2), q, Color("d5d7a1"), 2)
+		c.draw_line(q, q + Vector2(wing, -2), Color("c0c793"), 2)
 	# Worn entrance trail stops short of the meadow, never implying a mandatory route.
 	for entry in world.entries:
 		var p = (Vector2(entry) + Vector2.ONE * 0.5) * tile

@@ -43,7 +43,21 @@ func capture(name: String):
 	await create_timer(0.4).timeout
 	for i in range(3): await process_frame
 	await RenderingServer.frame_post_draw
-	assert(root.get_texture().get_image().save_png("res://review/current/" + name + ".png") == OK)
+	# Windows preview/indexing may briefly hold the old PNG. Encode once, replace atomically.
+	var temporary = "res://artifacts/" + name + "-pending.png"
+	if root.get_texture().get_image().save_png(temporary) != OK:
+		quit(1)
+		return
+	var saved = false
+	for attempt in range(20):
+		if DirAccess.rename_absolute(temporary, "res://review/current/" + name + ".png") == OK:
+			saved = true
+			break
+		await create_timer(0.1).timeout
+	if not saved:
+		push_error("Cannot replace review image " + name)
+		quit(1)
+		return
 	captures[name] = {"tick": game.world.tick, "camera": [game.camera.position.x, game.camera.position.y], "alert": game.alert_text if game.alert_visible() else "", "keeper_state": game.world.keeper.state}
 	print("Captured ", name)
 
@@ -138,7 +152,7 @@ func run():
 	game.world.structures[Vector2i(14, 8)].hp = 3
 	await mouse(game.screen_cell(Vector2(14, 8)))
 	assert(game.selected.kind == "structure" and game.buttons.has("repair") and game.buttons.has("remove"))
-	await capture("harvest_or_build")
+
 	await key(KEY_SPACE)
 	await key(KEY_SPACE, false)
 	await key(KEY_E)
@@ -177,7 +191,8 @@ func run():
 	var fixture = {"note": "Damaged-wall component fixture: HP set to3 for repair UI. Resources generated normally at4s/8s.",
 		"metrics": game.world.metrics.duplicate(true), "collected": collected, "actions": game.world.actions.duplicate(true)}
 	var context_checks = await context_trial()
-	var record = {"context_checks": context_checks, "rest_settings": Farm.Rules.REST, "commit_sha": OS.get_environment("REVIEW_COMMIT") if OS.has_environment("REVIEW_COMMIT") else "WORKTREE",
+	var polish_checks = await polish_trial()
+	var record = {"polish_checks": polish_checks, "context_checks": context_checks, "rest_settings": Farm.Rules.REST, "commit_sha": OS.get_environment("REVIEW_COMMIT") if OS.has_environment("REVIEW_COMMIT") else "WORKTREE",
 		"branch": "codex/sporehollow-prototype", "resolution": [1280, 800], "seed": 17,
 		"ai_settings": Farm.Rules.AI, "bark_settings": Farm.Rules.BARK, "nature_settings": Farm.Rules.NATURE,
 		"ui_checks": {"auto_start": true, "initial_animal_mode": true, "pause_deployment_denied": true, "three_modes": true,
@@ -260,7 +275,7 @@ func context_trial() -> Dictionary:
 	await step(12)
 	assert(game.world.animals.all(func(a): return a.mode == "rest"))
 	assert(game.world.animals[0].kennel_id >= 0 and game.world.animals[1].kennel_id == -1)
-	await capture("harvest_or_build")
+
 	# Click the roof outside the dog's hit area to select the occupied house.
 	await mouse(game.screen_cell(Vector2(13, 8)) + Vector2(0, -19))
 	assert(game.group == 0 and game.selected.kind == "structure")
@@ -286,3 +301,53 @@ func context_trial() -> Dictionary:
 		"pause_harvest_denied": true, "ctrl_toggle": true, "shift_drag": true,
 		"tab_selects_without_execution": true, "shift_tab": true, "batch_rest_after_resume": true,
 		"one_kennel_one_dog": true, "fixture": "Two owned Shibas and delayed invasion only for multi-selection UI; normal Stage1 still starts with one."}
+
+func polish_trial() -> Dictionary:
+	game.world = Farm.new({}, 17)
+	game.reset_view()
+	game.refresh()
+	await mouse(game.screen_cell(Vector2(19, 8)))
+	await click("group0")
+	await click("wall")
+	await mouse(game.screen_cell(Vector2(12, 8)))
+	await mouse(game.screen_cell(Vector2(13, 8)))
+	await step(4)
+	game.world.structures[Vector2i(13, 8)].hp = 4 # Damaged facility UI fixture.
+	await step(12) # Start announcement has finished; evaluate the real facility details.
+	await mouse(game.screen_cell(Vector2(12, 8)))
+	await mouse(game.screen_cell(Vector2(13, 8)), MOUSE_BUTTON_LEFT, true)
+	assert(game.selected_structures.size() == 2)
+	await move_pointer(Vector2(960, 560))
+	await capture("harvest_or_build")
+	await key(KEY_SPACE)
+	await key(KEY_SPACE, false)
+	var soil = game.world.materials
+	await key(KEY_DELETE)
+	await key(KEY_DELETE, false)
+	assert(game.world.materials == soil and game.selected_structures.size() == 2)
+	await key(KEY_SPACE)
+	await key(KEY_SPACE, false)
+	await key(KEY_DELETE)
+	await key(KEY_DELETE, false)
+	assert(game.world.materials == soil + 12 and game.selected_structures.is_empty())
+	await key(KEY_DELETE)
+	await key(KEY_DELETE, false)
+	assert(game.world.materials == soil + 12)
+	# Validate all generated clips, without playing through the user's speakers.
+	var clips = {}
+	for kind in game.audio.cache:
+		var stream = game.audio.cache[kind]
+		var peak = 0
+		for i in range(0, stream.data.size(), 2): peak = maxi(peak, absi(stream.data.decode_s16(i)))
+		assert(peak > 0 and peak < 32767)
+		clips[kind] = {"duration": stream.get_length(), "peak": peak}
+	assert(game.audio.ambient.playing)
+	assert(game.audio.played.has("build") and game.audio.played.has("remove") and game.audio.played.has("collect") and game.audio.played.has("gate") and game.audio.played.has("attack"))
+	var count = game.audio.played.get("object", 0)
+	game.play_alert("object")
+	game.play_alert("object")
+	assert(game.audio.played.get("object", 0) <= count + 1)
+	return {"batch_delete_refund": 12, "wall_hp": [8, 4], "refund_rate": Farm.Rules.DISMANTLE_REFUND,
+		"pause_rejected": true, "no_double_refund": true, "clips": clips,
+		"sound_triggers": game.audio.played.duplicate(), "sound_rate_limit": true,
+		"audio_note": "Original synthesized clips; Dummy driver, no speaker audition. Two-wall damaged UI fixture."}
