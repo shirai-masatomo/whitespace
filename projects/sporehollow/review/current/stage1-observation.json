@@ -27,7 +27,7 @@
     "stop_seconds": 1.0
   },
   "branch": "codex/sporehollow-prototype",
-  "commit_sha": "e66b0b220f178574bbd9ff33e5aa669a5dfa5b68",
+  "commit_sha": "3a4f6aa70132d944c9a4ae0a8728a0f10cc2d002",
   "context_checks": {
     "batch_rest_after_resume": true,
     "ctrl_toggle": true,
@@ -180,6 +180,97 @@
     "mushroom_chance": 0.2,
     "mushroom_hp": 5,
     "weed_gold": 1
+  },
+  "polish_checks": {
+    "audio_note": "Original synthesized clips; Dummy driver, no speaker audition. Two-wall damaged UI fixture.",
+    "batch_delete_refund": 12,
+    "clips": {
+      "animal_danger": {
+        "duration": 0.22,
+        "peak": 4347
+      },
+      "attack": {
+        "duration": 0.22,
+        "peak": 5438
+      },
+      "auto_start": {
+        "duration": 0.22,
+        "peak": 5049
+      },
+      "bark": {
+        "duration": 0.22,
+        "peak": 4271
+      },
+      "build": {
+        "duration": 0.22,
+        "peak": 7530
+      },
+      "carried": {
+        "duration": 0.42,
+        "peak": 4721
+      },
+      "collect": {
+        "duration": 0.22,
+        "peak": 4088
+      },
+      "gate": {
+        "duration": 0.22,
+        "peak": 5597
+      },
+      "invasion": {
+        "duration": 0.42,
+        "peak": 5308
+      },
+      "lose": {
+        "duration": 0.22,
+        "peak": 4347
+      },
+      "object": {
+        "duration": 0.22,
+        "peak": 7530
+      },
+      "remove": {
+        "duration": 0.22,
+        "peak": 7530
+      },
+      "repair": {
+        "duration": 0.22,
+        "peak": 5714
+      },
+      "rescue": {
+        "duration": 0.42,
+        "peak": 5308
+      },
+      "restrained": {
+        "duration": 0.42,
+        "peak": 4721
+      },
+      "win": {
+        "duration": 0.42,
+        "peak": 5308
+      }
+    },
+    "no_double_refund": true,
+    "pause_rejected": true,
+    "refund_rate": 0.8,
+    "sound_rate_limit": true,
+    "sound_triggers": {
+      "attack": 2,
+      "auto_start": 4,
+      "bark": 1,
+      "build": 5,
+      "collect": 2,
+      "gate": 1,
+      "invasion": 1,
+      "object": 1,
+      "remove": 3,
+      "repair": 1,
+      "win": 1
+    },
+    "wall_hp": [
+      8,
+      4
+    ]
   },
   "resolution": [
     1280,
@@ -987,8 +1078,8 @@
         }
       ],
       "soil_initial": 100,
-      "soil_remaining": 95,
-      "soil_spent_net": 5,
+      "soil_remaining": 98,
+      "soil_spent_net": 2,
       "stage_config": {
         "first_attack_seconds": 10.0,
         "repeat_interval_seconds": 60.0,
@@ -1446,7 +1537,7 @@
         357.0
       ],
       "keeper_state": "free",
-      "tick": 20
+      "tick": 16
     },
     "placement": {
       "alert": "",
