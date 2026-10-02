@@ -7,7 +7,7 @@ static func deploy(w, keeper: Vector2i = Vector2i(19, 8), dog: Vector2i = Vector
 	for a in w.animals: w.act("place_animal", dog if a.species == "shiba" else w.nest, a.id)
 
 static func run_trial(strategy: String, number: int = 17):
-	var w = Farm.new({}, number)
+	var w = Farm.new({}, number).begin_night()
 	if strategy == "poor": deploy(w, Vector2i(3, 5), Vector2i(23, 15))
 	elif strategy == "rescue": deploy(w, Vector2i(19, 8), Vector2i(19, 13))
 	elif strategy in ["ordered", "uncommanded"]: deploy(w, Vector2i(8, 5), Vector2i(20, 13))
@@ -22,6 +22,7 @@ static func run_trial(strategy: String, number: int = 17):
 		w.act("stay", Vector2i(18, 8), 1)
 	while w.phase == "defend" and w.tick < 1200:
 		w.step()
+		if w.early_clear: w.act("end_night")
 		if w.keeper.carrier >= 0 and w.phase == "defend": assert(w.keeper.state == "captured")
 	return w
 

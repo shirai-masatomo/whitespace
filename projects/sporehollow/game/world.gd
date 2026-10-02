@@ -18,6 +18,17 @@ var seed_value = 1
 var rng = RandomNumberGenerator.new()
 var tick = 0
 var phase = "prepare"
+var early_clear = false
+var early_clear_tick = -1
+var early_finish_bonus = 0
+var dawn_summary: Dictionary = {}
+var field_items: Array = []
+var daily_rng = RandomNumberGenerator.new()
+const SPECIES = {
+	"shiba": {"title": "柴犬", "category": "dog", "hp": 40, "commands": true, "mortal": false, "affinity": false},
+	"hen": {"title": "鶏", "category": "bird", "hp": 20, "commands": false, "mortal": false, "affinity": false},
+	"cat": {"title": "猫", "category": "cat", "hp": 20, "commands": false, "mortal": false, "affinity": true,
+		"abilities": {"charm": {"implemented": false}, "meow": {"implemented": false}}}}
 var result = ""
 var paused = false
 var command_power = 10.0
@@ -61,7 +72,7 @@ var metrics = {"repelled": 0, "stolen": 0, "structure_damage": 0, "commands": 0.
 	"bark_casts": 0, "bark_targets": 0, "weed_spawned": 0, "mushroom_spawned": 0, "weed_collected": 0, "mushroom_collected": 0, "stump_spawned": 0, "stump_collected": 0, "nature_rolls": 0, "mushrooms_used": 0, "mushroom_healing": 0}
 
 static func new_campaign() -> Dictionary:
-	return {"stage": 1, "gold": 12, "eggs": 0, "mushrooms": 0, "shelter": false,
+	return {"stage": 1, "day": 1, "exp_pool": 0, "night_ready": false, "gold": 45, "field_items": [], "eggs": 0, "mushrooms": 0, "shelter": false,
 		"fence": 0, "resources": {"soil": 100, "wood": 0, "stone": 0}, "items": {"dog_food": 2, "hen_food": 0}, "unlocked_blueprints": [], "facilities": [], "next_structure_id": 1, "animals": [{"id": 1, "category": "dog", "species": "shiba", "lv": 1, "xp": 0, "loyalty": 75}]}
 
 func _init(data: Dictionary = {}, seed_number: int = 17, stage_override: Dictionary = {}):
@@ -70,11 +81,27 @@ func _init(data: Dictionary = {}, seed_number: int = 17, stage_override: Diction
 		if not campaign.resources.has(resource): campaign.resources[resource] = 0
 	campaign.items = campaign.get("items", {"dog_food": 2, "hen_food": 0})
 	campaign.unlocked_blueprints = campaign.get("unlocked_blueprints", [])
+	campaign.day = campaign.get("day", 1)
+	campaign.exp_pool = campaign.get("exp_pool", 0)
+	campaign.night_ready = campaign.get("night_ready", false)
+	campaign.field_items = campaign.get("field_items", [])
+	for owned in campaign.animals:
+		owned.name = owned.get("name", "")
+		owned.affinity = owned.get("affinity", 0 if SPECIES[owned.species].affinity else null)
+		owned.unavailable_through_day = owned.get("unavailable_through_day", 0)
+		if owned.get("hp", 1) <= 0 and campaign.day > owned.unavailable_through_day:
+			owned.hp = maxi(1, (SPECIES[owned.species].hp + (owned.lv - 1) * 4) / 2) # Provisional return after one full day off.
 	checkpoint = campaign.duplicate(true)
+	phase = "prepare" if campaign.night_ready else "shop"
 	stage = campaign.stage
 	seed_value = seed_number
 	rng.seed = seed_number
 	nature_rng.seed = seed_number * 1009 + 9871
+	daily_rng.seed = seed_number * 727 + campaign.day * 1597
+	for item in campaign.field_items:
+		var row = item.duplicate(true)
+		row.pos = Vector2i(item.pos[0], item.pos[1])
+		field_items.append(row)
 	campaign.mushrooms = campaign.get("mushrooms", 0)
 	config = (StageData.STAGES[stage] if stage_override.is_empty() else stage_override).duplicate(true)
 	materials = campaign.resources.soil
@@ -108,11 +135,11 @@ func _init(data: Dictionary = {}, seed_number: int = 17, stage_override: Diction
 		a.placed = false
 		a.home = a.pos
 		a.stamina = 100.0
-		a.max_hp = Rules.SHIBA.max_hp if a.species == "shiba" else 20
+		a.max_hp = SPECIES[a.species].hp + (a.lv - 1) * 4
 		a.hp = clampi(a.get("hp", a.max_hp), 0, a.max_hp)
 		a.next_bark = 0
 		a.last_bark = -100
-		a.attack_power = Rules.SHIBA.attack_power if a.species == "shiba" else 0
+		a.attack_power = Rules.SHIBA.attack_power + (a.lv - 1) * 2 if a.species == "shiba" else 0
 		a.next_attack = 0
 		a.move_credit = 0.0
 		a.rescuing = false
@@ -131,6 +158,7 @@ func _init(data: Dictionary = {}, seed_number: int = 17, stage_override: Diction
 		a.state = "見張り" if a.species == "shiba" else "ついばむ"
 		a.path = [a.pos]
 		animals.append(a)
+	shop_stock = Shop.generate(stage, seed_value, campaign.unlocked_blueprints)
 	say("主人公を配置してください")
 
 func make_schedule():
@@ -161,7 +189,7 @@ func walkable(p: Vector2i) -> bool:
 	return inside(p) and not blocks(p)
 
 func blocks(p: Vector2i) -> bool:
-	return structures.has(p) and structures[p].status == "ready" and structures[p].kind != "kennel" and not structures[p].open
+	return structures.has(p) and structures[p].status == "ready" and structures[p].kind not in ["kennel", "coop"] and not structures[p].open
 
 func live_structure(p: Vector2i) -> bool:
 	return structures.has(p) and structures[p].status in ["ready", "building"]
@@ -173,7 +201,7 @@ func has_nest() -> bool:
 	return campaign.animals.any(func(a): return a.species == "hen")
 
 func can_build(kind: String, p: Vector2i) -> bool:
-	return phase == "defend" and not paused and BUILD.has(kind) and inside(p) and p not in entries and not (p == nest and has_nest()) and not occupied(p) and not live_structure(p) and BUILD[kind].get("blueprint", "") in ([""] + campaign.unlocked_blueprints) and resource_amount(BUILD[kind].get("resource", "soil")) >= BUILD[kind].cost
+	return phase == "defend" and not paused and BUILD.has(kind) and inside(p) and p not in entries and not field_items.any(func(item): return item.pos == p) and not occupied(p) and not live_structure(p) and BUILD[kind].get("blueprint", "") in ([""] + campaign.unlocked_blueprints) and resource_amount(BUILD[kind].get("resource", "soil")) >= BUILD[kind].cost
 
 func neighbors(p: Vector2i) -> Array:
 	return [p + Vector2i.RIGHT, p + Vector2i.LEFT, p + Vector2i.UP, p + Vector2i.DOWN]
@@ -212,7 +240,7 @@ static func distance(a: Vector2i, b: Vector2i) -> int:
 	return absi(a.x - b.x) + absi(a.y - b.y)
 
 func valid_animal_site(id: int, p: Vector2i) -> bool:
-	return animals.any(func(a): return a.id == id and not a.placed) and keeper.placed and walkable(p) and not live_structure(p) and p not in entries and not occupied(p)
+	return animals.any(func(a): return a.id == id and available(a)) and keeper.placed and walkable(p) and not live_structure(p) and p not in entries and not occupied(p)
 
 func can_place_animal(id: int, p: Vector2i) -> bool:
 	return phase == "defend" and not paused and valid_animal_site(id, p)
@@ -220,7 +248,7 @@ func can_place_animal(id: int, p: Vector2i) -> bool:
 func act(kind: String, p: Vector2i = Vector2i.ZERO, animal_id: int = -1) -> bool:
 	var accepted = false
 	if phase == "prepare":
-		if kind == "place" and not keeper.placed and walkable(p) and not live_structure(p) and p not in entries and not (p == nest and has_nest()):
+		if kind == "place" and not keeper.placed and walkable(p) and not live_structure(p) and p not in entries and not field_items.any(func(item): return item.pos == p):
 			keeper.pos = p
 			keeper.placed = true
 			phase = "defend"
@@ -235,7 +263,11 @@ func act(kind: String, p: Vector2i = Vector2i.ZERO, animal_id: int = -1) -> bool
 		elif kind in ORDERS:
 			accepted = issue_order(kind, p, animal_id)
 		elif not paused:
-			if kind == "place_animal" and can_place_animal(animal_id, p):
+			if kind == "end_night" and early_clear:
+				early_finish_bonus = floori(remaining_night() / 10.0)
+				finish(true)
+				accepted = true
+			elif kind == "place_animal" and can_place_animal(animal_id, p):
 				for a in animals:
 					if a.id != animal_id: continue
 					a.pos = p
@@ -267,6 +299,13 @@ func act(kind: String, p: Vector2i = Vector2i.ZERO, animal_id: int = -1) -> bool
 				accepted = true
 			elif Shop.FOOD.has(kind):
 				accepted = use_food(kind, animal_id, p)
+			elif kind == "collect" and not items_at(p).is_empty():
+				var item = items_at(p)[0]
+				if item.kind == "kennel_plan": grant_blueprint("kennel", p)
+				else: add_item(item.kind, 1)
+				field_items.erase(item)
+				milestones.append({"tick": tick, "kind": "item_collected", "item": item.kind})
+				accepted = true
 			elif kind == "collect" and natural.has(p):
 				var harvest: String = natural[p]
 				natural.erase(p)
@@ -292,7 +331,7 @@ func issue_order(kind: String, p: Vector2i, animal_id: int = -1) -> bool:
 	elif kind in ["whistle", "stay"] and not walkable(p): return false
 	var accepted = false
 	for a in animals:
-		if not a.placed or a.loyalty <= 0 or (animal_id >= 0 and a.id != animal_id): continue
+		if not a.placed or a.hp <= 0 or not SPECIES[a.species].commands or a.loyalty <= 0 or (animal_id >= 0 and a.id != animal_id): continue
 		if kind == "rest" and a.category != "dog": continue
 		# Paused orders change intent only. Their reaction countdown starts with resumed simulation.
 		a.pending = {"kind": kind, "pos": a.pos if kind == "wander" else p, "target_id": target_id,
@@ -329,7 +368,8 @@ func release_keeper(e: Dictionary):
 func animal_step(a: Dictionary):
 	if not a.placed: return
 	if a.hp <= 0:
-		a.state = "休養中"
+		a.state = "気絶"
+		a.unavailable_through_day = maxi(a.unavailable_through_day, campaign.day + 1)
 		a.rescuing = false
 		release_kennel(a)
 		return
@@ -346,19 +386,27 @@ func animal_step(a: Dictionary):
 		a.pending = {}
 		a.ai_context = "new_order"
 	if a.mode != "rest" and tick >= a.order_until: a.mode = "auto"
-	if a.species == "hen":
+	if a.species in ["hen", "cat"]:
 		var threat = enemies.filter(func(e): return not e.done and not e.flee and distance(a.pos, e.pos) <= 4)
 		a.fear = 28 if not threat.is_empty() else maxi(0, a.fear - 1)
-		a.state = "怖がる" if a.fear > 0 else "卵を育てる"
+		a.state = "怖がる" if a.fear > 0 else ("ついばむ" if a.species == "hen" else "散歩")
 		if not threat.is_empty() and tick % 3 == 0:
 			var options = neighbors(a.pos).filter(func(p): return walkable(p))
 			options.sort_custom(func(p, q): return distance(p, threat[0].pos) > distance(q, threat[0].pos))
 			if not options.is_empty(): a.pos = options[0]
 		elif threat.is_empty():
-			if tick % 4 == 0: a.pos = next_step(a.pos, nest)
-			if tick % maxi(24, 40 - (a.lv - 1) * 4) == 0 and a.fear == 0 and eggs < 8:
-				eggs += 1
-				metrics.eggs_produced += 1
+			if a.species == "hen":
+				var coops = structures.keys().filter(func(p): return structures[p].kind == "coop" and structures[p].status == "ready" and (not occupied(p) or p == a.pos))
+				coops.sort_custom(func(p, q): return distance(a.pos, p) < distance(a.pos, q))
+				if not coops.is_empty() and distance(a.pos, coops[0]) <= 6:
+					if tick % 4 == 0:
+						a.pos = next_step(a.pos, coops[0])
+						if a.pos == coops[0]: a.hp = mini(a.max_hp, a.hp + 1)
+					a.state = "鶏小屋"
+					return
+			if tick % 8 == 0:
+				var options = neighbors(a.pos).filter(func(p): return walkable(p) and not occupied(p))
+				if not options.is_empty(): a.pos = options[daily_rng.randi_range(0, options.size() - 1)]
 		return
 	# Explicit rest suppresses all threat detection, barking and rescue, until another order.
 	if a.mode == "rest":
@@ -421,7 +469,7 @@ func animal_step(a: Dictionary):
 			combat_log.append({"tick": tick, "source": "animal", "id": a.id, "target": enemy.id, "damage": a.attack_power})
 			if enemy.hp == 0:
 				enemy.flee = true
-				if stage == 1 and enemy.id == 0: grant_blueprint("kennel", enemy.pos)
+				if stage == 1 and enemy.id == 0: drop_blueprint(enemy.pos)
 				release_keeper(enemy)
 				say("侵入者を追い返した！")
 			else:
@@ -673,6 +721,10 @@ func persist_farm():
 		var b = structures[p].duplicate(true)
 		b.pos = [p.x, p.y]
 		campaign.facilities.append(b)
+	campaign.field_items = field_items.map(func(item):
+		var row = item.duplicate(true)
+		row.pos = [item.pos.x, item.pos.y]
+		return row)
 
 func step():
 	if phase != "defend" or paused: return
@@ -699,47 +751,41 @@ func step():
 		traces.append({"tick": tick, "stamina": snappedf(animals[0].stamina, 0.1), "eggs": eggs,
 			"materials": materials, "keeper": keeper.state, "structures": structures.size()})
 	if phase != "defend": return
-	if config.repeat_waves and tick * DT >= config.time_limit_seconds:
+	if remaining_night() <= 0:
 		finish(true)
-		say("継続襲来を守りきりました。")
-	elif not config.repeat_waves and schedule_index == spawn_schedule.size() and enemies.all(func(e): return e.done):
-		finish(true)
+	elif not early_clear and not config.repeat_waves and schedule_index == spawn_schedule.size() and enemies.all(func(e): return e.done or e.flee):
+		early_clear = true
+		early_clear_tick = tick
+		milestones.append({"tick": tick, "kind": "early_clear"})
+		say("撃退完了。作業を続けるか、ボーナスを受け取って朝へ。")
 
 func finish(won: bool):
 	if result != "": return
 	result = "win" if won else "loss"
-	phase = "shop" if won else "result"
+	phase = "dawn" if won else "result"
 	paused = false
 	var condition = float(animals[0].hp) / animals[0].max_hp
 	var rating = (35 if won else 0) + maxi(0, 25 - metrics.captures * 8) + roundi(condition * 20) + maxi(0, 10 - metrics.structure_damage / 3) + maxi(0, 10 - int(metrics.commands / 3))
 	var xp = 16 + rating / 10 if won else 0
 	var gold = (32 + rating / 5 + metrics.coins) if won else 0
-	score = {"rating": rating, "xp": int(xp), "gold": int(gold), "seconds": tick * DT, "condition": roundi(condition * 100), "time_bonus": 0}
+	score = {"rating": rating, "xp": int(xp), "gold": int(gold), "seconds": tick * DT, "condition": roundi(condition * 100), "time_bonus": early_finish_bonus}
 	heal_with_mushrooms()
 	for owned in campaign.animals:
 		for a in animals:
-			if a.id == owned.id: owned.hp = a.hp
+			if a.id == owned.id:
+				owned.hp = a.hp
+				if a.hp <= 0 and a.placed: owned.unavailable_through_day = campaign.day + 1
 	if won:
+		campaign.gold += int(gold) + early_finish_bonus
+		campaign.exp_pool += int(xp)
+		process_dawn()
 		persist_farm()
-		campaign.gold += int(gold)
-		campaign.eggs += eggs
-		eggs = 0
-		for owned in campaign.animals:
-			if not animals.any(func(a): return a.id == owned.id and a.placed): continue
-			owned.xp += int(xp)
-			while owned.xp >= owned.lv * 20:
-				owned.xp -= owned.lv * 20
-				owned.lv += 1
-			for a in animals:
-				if a.id == owned.id:
-					a.lv = owned.lv
-					a.xp = owned.xp
-		shop_stock = Shop.generate(stage, seed_value, campaign.unlocked_blueprints)
 	say("防衛成功！ 育成と購入をして次の日へ。")
 
 func next_campaign() -> Dictionary:
 	var data = campaign.duplicate(true)
-	data.stage = 2
+	data.day += 1
+	data.night_ready = false
 	return data
 
 func observation() -> Dictionary:
@@ -769,7 +815,12 @@ func observation() -> Dictionary:
 		var row = event.duplicate(true)
 		row.entry = [event.entry.x, event.entry.y]
 		schedule.append(row)
-	return {"seed": seed_value, "stage": stage, "tick": tick, "phase": phase, "paused": paused, "result": result,
+	return {"seed": seed_value, "stage": stage, "day": campaign.day, "tick": tick, "phase": phase, "paused": paused, "result": result,
+		"remaining_night": remaining_night(), "early_clear": early_clear, "early_clear_tick": early_clear_tick, "early_finish_bonus": early_finish_bonus,
+		"exp_pool": campaign.exp_pool, "dawn": dawn_summary, "field_items": field_items.map(func(item):
+			var row = item.duplicate(true)
+			row.pos = [item.pos.x, item.pos.y]
+			return row),
 		"initial_campaign": checkpoint.duplicate(true),
 		"campaign": campaign.duplicate(true), "animals": positions, "raiders": raiders, "keeper": owner,
 		"metrics": metrics.duplicate(true), "score": score.duplicate(true), "structures": built, "materials": materials,
@@ -849,7 +900,7 @@ func grow_nature():
 	for y in range(1, H - 1):
 		for x in range(1, W - 1):
 			var p = Vector2i(x, y)
-			if walkable(p) and not occupied(p) and not live_structure(p) and not natural.has(p) and p not in entries and not (has_nest() and p == nest): sites.append(p)
+			if walkable(p) and not occupied(p) and not live_structure(p) and not natural.has(p) and p not in entries and not field_items.any(func(item): return item.pos == p): sites.append(p)
 	if sites.is_empty(): return
 	var p = sites[nature_rng.randi_range(0, sites.size() - 1)]
 	natural[p] = kind
@@ -888,9 +939,11 @@ func buy(id: String) -> bool:
 	if product.Category == "animals":
 		var next_id = 1
 		for a in campaign.animals: next_id = maxi(next_id, a.id + 1)
-		campaign.animals.append({"id": next_id, "category": "dog" if id == "shiba" else "bird", "species": id, "lv": 1, "xp": 0, "loyalty": row.individual.loyalty, "traits": {}})
+		campaign.animals.append({"id": next_id, "category": SPECIES[id].category, "species": id, "lv": 1, "xp": 0, "loyalty": row.individual.loyalty, "traits": {}, "name": "", "affinity": 0 if SPECIES[id].affinity else null, "unavailable_through_day": 0})
 	elif product.Category == "materials": add_resource(id, product.Amount)
-	else: add_item(id, product.Amount)
+	else:
+		add_item(id, product.Amount)
+		if id == "kennel_plan" and "kennel" not in campaign.unlocked_blueprints: campaign.unlocked_blueprints.append("kennel")
 	shop_log.append({"side": "buy", "product": id, "amount": product.Amount, "gold": -product.BuyPrice})
 	return true
 
@@ -911,3 +964,77 @@ func sell(id: String, animal_id: int = -1) -> bool:
 	campaign.gold += p.SellPrice
 	shop_log.append({"side": "sell", "product": id, "animal_id": animal_id, "amount": p.Amount, "gold": p.SellPrice})
 	return true
+
+func remaining_night() -> float:
+	return maxf(0, config.time_limit_seconds - tick * DT)
+
+func available(a: Dictionary) -> bool:
+	return not a.placed and a.hp > 0 and campaign.day > a.unavailable_through_day
+
+static func animal_name(a: Dictionary) -> String:
+	return a.get("name", "") if a.get("name", "") != "" else SPECIES[a.species].title
+
+func begin_night():
+	if phase != "shop" or paused: return null
+	persist_farm()
+	var data = campaign.duplicate(true)
+	data.night_ready = true
+	return get_script().new(data, seed_value, config)
+
+func rename_animal(id: int, text: String) -> bool:
+	if phase != "shop" or paused: return false
+	for a in campaign.animals:
+		if a.id == id:
+			a.name = text.strip_edges().left(12)
+			return true
+	return false
+
+func level_cost(id: int) -> int:
+	for a in campaign.animals:
+		if a.id == id: return a.lv * 20
+	return 0
+
+func train_animal(id: int) -> bool:
+	if phase != "shop" or paused: return false
+	for a in campaign.animals:
+		if a.id == id and a.lv < 5 and campaign.exp_pool >= level_cost(id):
+			campaign.exp_pool -= level_cost(id)
+			a.lv += 1
+			return true
+	return false
+
+func items_at(p: Vector2i) -> Array:
+	return field_items.filter(func(item): return item.pos == p and item.kind != "chick")
+
+func drop_blueprint(p: Vector2i):
+	if "kennel" in campaign.unlocked_blueprints or field_items.any(func(item): return item.kind == "kennel_plan"): return
+	field_items.append({"kind": "kennel_plan", "pos": p, "born_day": campaign.day})
+	milestones.append({"tick": tick, "kind": "blueprint_dropped", "pos": [p.x, p.y]})
+
+func process_dawn():
+	dawn_summary = {"eggs": 0, "chicks": 0, "hens": 0, "feathers": 0, "unconscious": [], "pending_blueprints": 0}
+	# Age existing field items before laying new eggs; one transition per dawn.
+	for item in field_items.duplicate():
+		if item.kind == "kennel_plan": dawn_summary.pending_blueprints += 1
+		if item.get("born_day", campaign.day) >= campaign.day: continue
+		if item.kind == "egg":
+			item.kind = "chick"
+			item.born_day = campaign.day
+			dawn_summary.chicks += 1
+		elif item.kind == "chick":
+			var id = 1
+			for a in campaign.animals: id = maxi(id, a.id + 1)
+			campaign.animals.append({"id": id, "species": "hen", "category": "bird", "lv": 1, "xp": 0, "loyalty": 0, "name": "", "affinity": null, "unavailable_through_day": 0})
+			field_items.erase(item)
+			dawn_summary.hens += 1
+	for a in animals:
+		if a.hp <= 0 and a.placed: dawn_summary.unconscious.append(a.id)
+		if a.species != "hen" or not a.placed or a.hp <= 0: continue
+		field_items.append({"kind": "egg", "pos": a.pos, "born_day": campaign.day,
+			"protected_by": structures[a.pos].id if structures.get(a.pos, {}).get("kind") == "coop" and live_structure(a.pos) else -1})
+		dawn_summary.eggs += 1
+		metrics.eggs_produced += 1
+		if daily_rng.randf() < 0.15:
+			field_items.append({"kind": "feather", "pos": a.pos, "born_day": campaign.day})
+			dawn_summary.feathers += 1
+	milestones.append({"tick": tick, "kind": "dawn"})

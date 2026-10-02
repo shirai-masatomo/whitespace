@@ -6,6 +6,7 @@ var cache: Dictionary = {}
 var last_play: Dictionary = {}
 var played: Dictionary = {}
 var seconds = 0.0
+var night = false
 
 func _ready():
 	for i in range(3):
@@ -17,11 +18,19 @@ func _ready():
 		cache[kind] = synth(kind, 0.42 if kind in ["win", "rescue", "invasion", "carried", "restrained"] else 0.22)
 	ambient = AudioStreamPlayer.new()
 	ambient.stream = synth("ambient", 8.0)
+	cache.ambient = ambient.stream
+	cache.night = synth("night", 8.0)
 	ambient.volume_db = -19
 	add_child(ambient)
 	ambient.play()
 
 func _process(delta): seconds += delta
+
+func set_night(value: bool):
+	if night == value: return
+	night = value
+	ambient.stream = cache.night if night else cache.ambient
+	ambient.play()
 
 func tension(active: bool):
 	ambient.volume_db = -25 if active else -19
@@ -52,6 +61,11 @@ func synth(kind: String, length: float) -> AudioStreamWAV:
 		var envelope = minf(t * 100, 1) * pow(maxf(0, 1 - t / length), 2)
 		var value = 0.0
 		match kind:
+			"night":
+				var seam = minf(1, minf(t, length - t) * 5)
+				var chirp = fmod(t, 1.7)
+				value = wind * 0.8 * seam
+				if chirp < 0.42: value += sin(t * TAU * 3300) * pow(maxf(0, sin(chirp * 80)), 4) * 0.06 * seam
 			"ambient":
 				var seam = minf(1, minf(t, length - t) * 5)
 				value = wind * 1.8 * seam
@@ -71,7 +85,7 @@ func synth(kind: String, length: float) -> AudioStreamWAV:
 				value = (sin(t * TAU * hz) + sin(t * TAU * hz * (1.07 if danger else 1.5)) * 0.3) * envelope * 0.5
 		bytes.encode_s16(i * 2, int(clampf(value, -1, 1) * 9000))
 	stream.data = bytes
-	if kind == "ambient":
+	if kind in ["ambient", "night"]:
 		stream.loop_mode = AudioStreamWAV.LOOP_FORWARD
 		stream.loop_end = count
 	return stream

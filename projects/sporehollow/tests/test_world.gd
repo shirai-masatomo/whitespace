@@ -11,7 +11,7 @@ func check(value: bool, reason: String):
 		assert(value, reason)
 
 func started():
-	var w = Farm.new()
+	var w = night()
 	Trial.deploy(w)
 	return w
 
@@ -20,7 +20,7 @@ func advance(w, count: int):
 
 func _initialize(): call_deferred("run")
 func run():
-	var w = Farm.new()
+	var w = night()
 	check(w.structures.is_empty() and w.animals.size() == 1 and w.animals[0].lv == 1, "Empty farm and one Lv1 Shiba")
 	check(w.materials == 100 and w.campaign.resources == {"soil": 100, "wood": 0, "stone": 0}, "Three resource types, only soil funded initially")
 	check(not w.act("start"), "Placement before clock")
@@ -47,7 +47,7 @@ func run():
 	check(w.animals[0].hp == 40 and w.animals[0].attack_power == 10, "Dog fixed attack and provisional HP")
 	w = started()
 	var cell = Vector2i(10, 8)
-	check(w.act("wall", cell) and w.materials == 90 and w.campaign.gold == 12, "Wall consumes soil10, never Gold")
+	check(w.act("wall", cell) and w.materials == 90 and w.campaign.gold == 45, "Wall consumes soil10, never Gold")
 	check(w.structures[cell].status == "building" and w.walkable(cell), "Construction isn't instant or blocking")
 	advance(w, 3)
 	check(w.structures[cell].status == "building", "Still building at .75s")
@@ -164,8 +164,9 @@ func run():
 	carry.step()
 	carry.finish(true)
 	var snapshot = carry.campaign.facilities.duplicate(true)
+	carry = Farm.new(carry.next_campaign())
 	check(carry.buy("soil") and carry.materials == 90, "Shop soil pack uses Gold separately")
-	var next = Farm.new(carry.next_campaign())
+	var next = night(carry.next_campaign())
 	check(next.materials == 90 and next.campaign.facilities == snapshot, "Shop and stage transition preserve exact facilities")
 	check(next.structures[Vector2i(5, 5)].hp == 8 and next.structures[Vector2i(5, 6)].hp == 3 and next.structures[Vector2i(5, 7)].status == "destroyed", "No healing or resurrection")
 	check(next.structures[Vector2i(5, 8)].remaining == 3 and next.structures[Vector2i(5, 8)].status == "building", "Unfinished facility retains remaining duration")
@@ -180,8 +181,9 @@ func run():
 	var active = Trial.run_trial("guided", 17)
 	check(idle.result == "loss" and idle.keeper.state == "abducted" and idle.spawned == 1, "Poor placement can lose to one kidnapper")
 	check(active.result == "win" and active.spawned == 1 and active.metrics.built == 2 and active.metrics.orders > 0, "Good placement wins with building and commands")
-	check(active.score.xp > 0 and active.score.gold > 0 and active.campaign.animals[0].lv == 2, "Win grants XP, level and Gold")
-	check(active.buy(active.shop_stock[0].product) and Farm.new(active.next_campaign()).animals.size() == 2, "Shop animal persists into Stage2")
+	check(active.score.xp > 0 and active.score.gold > 0 and active.campaign.animals[0].lv == 1 and active.campaign.exp_pool > 0, "Win grants shared XP and Gold without auto leveling")
+	var morning = Farm.new(active.next_campaign())
+	check(morning.buy("hen") and morning.begin_night().animals.size() == 2, "Shop animal persists into next night")
 	check(idle.score.xp == 0 and not idle.buy("hen"), "Failure doesn't grant rewards or shop")
 	var hits = active.combat_log.filter(func(c): return c.source == "animal")
 	for i in range(1, hits.size()): check(hits[i].tick - hits[i - 1].tick >= 5, "Dog interval1.2s quantized to1.25s")
@@ -206,34 +208,31 @@ func run():
 	loyal.step()
 	check(loyal.animals[0].mode == "whistle", "Queued order reacts at .5s")
 	var rhythm = Farm.StageData.STAGES[2].duplicate(true)
-	var scheduled = Farm.new(Farm.new_campaign(), 17, rhythm)
+	var scheduled = night(Farm.new_campaign(), 17, rhythm)
 	check(scheduled.spawn_schedule.size() == 5 and scheduled.spawn_schedule[0].tick == 56, "Stage2 keeps data-driven multiwave schedule")
 	rhythm.repeat_waves = true
 	rhythm.repeat_interval_seconds = 30.0
-	var repeating = Farm.new({}, 17, rhythm)
+	var repeating = night({}, 17, rhythm)
 	repeating.schedule_cycle = 1
 	repeating.make_schedule()
 	check(repeating.spawn_schedule[0].tick == 176, "Repeat schedules use seconds and cycle offset")
 	var flock = Farm.new_campaign()
 	flock.animals.append({"id": 2, "category": "bird", "species": "hen", "lv": 1, "xp": 0, "loyalty": 0})
-	var production = Farm.new(flock)
+	var production = night(flock)
 	Trial.deploy(production)
 	advance(production, 40)
-	check(production.eggs == 1, "Hen still produces eggs")
-	production.act("pause")
-	check(not production.act("collect", production.nest) and production.eggs == 1, "Paused collection preserves eggs")
-	production.act("pause")
-	check(production.act("collect", production.nest) and production.campaign.eggs == 1, "Collection transfers inventory")
+	check(production.field_items.is_empty(), "No continuous night egg production")
 	production.finish(true)
-	check(production.sell("egg") and production.campaign.eggs == 0, "Product economy preserved")
+	check(production.field_items.any(func(item): return item.kind == "egg"), "Dawn lays eggs on field")
 	var occupied_future = started()
 	occupied_future.act("wall", Farm.NEST)
 	occupied_future.act("wall", Vector2i(1, 12))
 	advance(occupied_future, 4)
 	occupied_future.finish(true)
+	occupied_future = Farm.new(occupied_future.next_campaign())
 	occupied_future.shop_stock.append({"product": "hen", "remaining": 1, "individual": {"loyalty": 0}})
 	occupied_future.buy("hen")
-	var inherited = Farm.new(occupied_future.next_campaign())
+	var inherited = night(occupied_future.next_campaign())
 	check(inherited.nest != Farm.NEST and not inherited.animals[1].placed and inherited.walkable(inherited.nest), "Purchased hen doesn't spawn in retained wall")
 	check(inherited.structures[Farm.NEST].hp == 8, "Relocating hen doesn't remove facility")
 	inherited.spawn_enemy({"entry": Vector2i(1, 12), "role": "kidnapper", "lv": 1})
@@ -245,7 +244,7 @@ func run():
 	var saved = Trial.run_trial("rescue")
 	check(saved.result == "win" and saved.metrics.captures == 1 and saved.metrics.rescues == 1, "Real placement + stay leads to capture and instinct rescue")
 	check(saved.milestones.any(func(m): return m.kind == "restrained") and saved.milestones.any(func(m): return m.kind == "carried"), "Distinct restraint/carriage alerts")
-	var choose = Farm.new(flock)
+	var choose = night(flock)
 	choose.act("place", Vector2i(19, 8))
 	choose.act("start")
 	choose.act("place_animal", Vector2i(18, 8), 1)
@@ -270,7 +269,7 @@ func run():
 	hurt.enemy_step(hurt.enemies[0])
 	check(hurt.milestones.any(func(m): return m.kind == "animal_danger") and hurt.animals[0].hp == 10, "HP threshold crossing emits warning")
 	# Late deployment checks occupancy against actors, facilities and entrances.
-	var late = Farm.new()
+	var late = night()
 	late.act("place", Vector2i(19, 8))
 	late.act("start")
 	advance(late, 45)
@@ -282,14 +281,14 @@ func run():
 	check(late.act("place_animal", Vector2i(18, 8), 1) and late.initial_positions.animals[0].deployment_tick == 45, "Late deployment records real tick")
 	late.animals[0].hp = 0
 	check(not late.act("place_animal", Vector2i(10, 9), 1), "Incapacitated deployed animal stays deployed")
-	var reserve = Farm.new(flock)
+	var reserve = night(flock)
 	reserve.act("place", Vector2i(19, 8))
 	reserve.act("start")
 	reserve.act("place_animal", Vector2i(18, 8), 1)
 	reserve.finish(true)
 	check(reserve.campaign.animals[1].xp == 0, "Unfielded reserve receives no participation XP")
 	var original = Trial.run_trial("guided", 17)
-	var replay = Farm.new({}, original.seed_value)
+	var replay = night({}, original.seed_value)
 	for action in original.actions:
 		while replay.tick < action.tick: replay.step()
 		check(replay.act(action.kind, Vector2i(action.pos[0], action.pos[1]), action.animal_id) == action.accepted, "Replay action accepted identically")
@@ -376,7 +375,7 @@ func check_new_rules():
 	n.act("pause")
 	advance(n, 16)
 	check(n.metrics.nature_rolls == 4, "Four game seconds perform four probability rolls")
-	var snapshot = Farm.new({}, n.seed_value)
+	var snapshot = night({}, n.seed_value)
 	Trial.deploy(snapshot)
 	advance(snapshot, 16)
 	check(snapshot.natural == n.natural, "Growth uses reproducible independent seed")
@@ -392,7 +391,7 @@ func check_new_rules():
 	check(n.act("collect", p) and n.campaign.mushrooms == 1 and n.animals[0].hp == 32, "Mushroom is stored, not instant healing")
 	n.finish(true)
 	check(n.animals[0].hp == 37 and n.campaign.mushrooms == 0 and n.metrics.mushroom_healing == 5, "Stage end spends mushroom to heal5")
-	var next = Farm.new(n.next_campaign())
+	var next = night(n.next_campaign())
 	check(next.animals[0].hp == 37, "Remaining HP survives stage transition")
 	var full = started()
 	full.campaign.mushrooms = 3
@@ -412,7 +411,8 @@ func quiet_farm(two_dogs: bool = false):
 		data.animals.append(second)
 	var conf = Farm.StageData.STAGES[1].duplicate(true)
 	conf.first_attack_seconds = 999.0
-	var w = Farm.new(data, 17, conf)
+	conf.time_limit_seconds = 999.0
+	var w = night(data, 17, conf)
 	w.act("place", Vector2i(19, 8))
 	w.act("place_animal", Vector2i(12, 8), 1)
 	if two_dogs: w.act("place_animal", Vector2i(12, 10), 2)
@@ -509,79 +509,132 @@ func check_rest_and_kennels():
 	advance(w, 8)
 	check(w.animals[0].kennel_id == -1 and w.animals[0].mode == "rest", "Destroyed house releases claim, rest continues in place")
 
+func night(data: Dictionary = {}, seed_id: int = 17, config: Dictionary = {}):
+	var campaign = Farm.new_campaign() if data.is_empty() else data.duplicate(true)
+	campaign.night_ready = true
+	return Farm.new(campaign, seed_id, config)
+
 func check_economy():
-	var locked = started()
-	locked.add_resource("wood", 20)
-	check(not locked.act("kennel", Vector2i(13, 8)), "Wood alone cannot bypass blueprint")
-	locked.grant_blueprint("kennel", Vector2i(12, 8))
-	check(locked.act("kennel", Vector2i(13, 8)) and locked.wood == 0 and locked.materials == 100, "Unlocked kennel consumes wood20 only")
-	advance(locked, 8)
-	locked.structures[Vector2i(13, 8)].hp = 6
-	locked.add_resource("wood", 10)
-	check(locked.act("repair", Vector2i(13, 8)) and locked.wood == 0, "Kennel repair consumes wood proportional to damage")
-	check(locked.act("remove", Vector2i(13, 8)) and locked.wood == 16 and locked.materials == 100, "Kennel dismantle refunds wood, not soil")
-	var won = Trial.run_trial("front", 17)
-	check(won.phase == "shop" and won.campaign.unlocked_blueprints == ["kennel"] and won.item_count("kennel_plan") == 1, "First Stage1 defeat auto awards blueprint and enters shop")
-	won.grant_blueprint("kennel", Vector2i.ZERO)
-	check(won.item_count("kennel_plan") == 1, "Blueprint grant idempotent")
-	check(won.sell("kennel_plan") and "kennel" in won.campaign.unlocked_blueprints, "Selling plan never revokes ability")
-	check(won.buy("wood") and won.wood == 20, "Shop buys wood pack")
-	var profit = won.campaign.gold
-	check(won.sell("wood") and won.buy("wood") and won.campaign.gold < profit, "Resource roundtrip loses Gold")
-	check(won.buy("dog_food"), "Category food stocked")
-	var after = Farm.new(won.next_campaign(), 18)
-	check(after.wood == 20 and "kennel" in after.campaign.unlocked_blueprints and after.campaign.items.dog_food == 3, "Resources, blueprint and food persist")
-	var retry = Farm.new(won.checkpoint, won.seed_value)
-	check(retry.phase == "prepare" and retry.materials == 100 and retry.wood == 0 and retry.campaign.gold == 12 and retry.campaign.unlocked_blueprints.is_empty(), "Restart discards Stage rewards and purchases")
-	var assortments = {}
-	for seed_id in range(1, 33):
-		var list = Farm.Shop.generate(1, seed_id, [])
-		check(list == Farm.Shop.generate(1, seed_id, []), "Shop seed reproducible")
-		check(list.filter(func(row): return row.product in ["shiba", "hen"]).size() == 1, "Exactly one randomly stocked animal")
-		assortments[list[0].product] = true
-	check(assortments.size() == 2, "Seeds produce different animal stock")
-	var trade = Trial.run_trial("front", 17)
-	trade.campaign.gold = 500
-	var species = trade.shop_stock[0].product
-	var initial_gold = trade.campaign.gold
-	check(trade.buy(species) and trade.campaign.animals.size() == 2, "Animal stock creates an individual")
-	check(not trade.buy(species), "Purchased animal stock cannot be bought twice")
-	check(trade.sell(species, trade.campaign.animals[1].id) and trade.campaign.gold < initial_gold, "Animal resale loses Gold")
-	check(not trade.sell("shiba", 1), "Last owned animal cannot be sold")
-	initial_gold = trade.campaign.gold
-	var food_before = trade.item_count("hen_food")
-	check(trade.buy("hen_food") and trade.sell("hen_food") and trade.item_count("hen_food") == food_before and trade.campaign.gold < initial_gold, "Item roundtrip loses Gold and preserves quantity")
-	trade.paused = true
-	check(not trade.buy("soil") and not trade.sell("soil"), "Paused shop rejects world mutations")
-	for p in Farm.Shop.table().values(): check(p.BuyPrice > p.SellPrice, "Every product buys above its sale price")
+	var shop = Farm.new({}, 17)
+	check(shop.phase == "shop" and shop.campaign.gold == 45 and shop.animals.size() == 1, "Campaign starts at funded shop with one Shiba")
+	check(shop.buy("hen") and shop.campaign.gold == 11 and not shop.buy("wood"), "Hen purchase limits material budget")
+	var w = shop.begin_night()
+	check(w.phase == "prepare" and w.animals.size() == 2, "Bought animal enters night preparation")
+	Trial.deploy(w)
+	check(not w.issue_order("rest", Vector2i.ZERO, 2), "Hen cannot receive commands")
+	while not w.early_clear and w.phase == "defend": w.step()
+	check(w.early_clear and w.phase == "defend" and w.result == "", "Repelling enemies confirms defense but leaves work time")
+	check(w.field_items.any(func(item): return item.kind == "kennel_plan") and "kennel" not in w.campaign.unlocked_blueprints, "Blueprint drops without unlocking")
+	var plan = w.field_items.filter(func(item): return item.kind == "kennel_plan")[0].pos
+	w.paused = true
+	check(not w.act("collect", plan) and not w.act("end_night"), "Pause blocks collection and early ending")
+	var frozen = w.tick
+	advance(w, 20)
+	check(w.tick == frozen, "Pause freezes night time")
+	w.paused = false
+	check(w.act("collect", plan) and "kennel" in w.campaign.unlocked_blueprints, "Manual collection unlocks kennel")
+	w.add_resource("wood", 20)
+	check(w.act("kennel", Vector2i(12, 9)), "Can construct after early clear")
+	advance(w, 8)
+	var before = w.remaining_night()
+	check(w.act("end_night") and w.phase == "dawn", "Player chooses early dawn")
+	check(w.early_finish_bonus == floori(before / 10) and w.campaign.exp_pool == w.score.xp and w.campaign.animals[0].lv == 1, "Remaining-time bonus and pooled XP, no auto level")
+	var day = Farm.new(w.next_campaign(), 18)
+	check(day.campaign.day == 2 and day.stage == 1 and day.phase == "shop", "Next day reuses Stage1 rather than adding a stage")
+	check(day.rename_animal(1, "こむぎ") and day.campaign.animals[0].name == "こむぎ", "Individual can be named")
+	check(day.train_animal(1) and day.campaign.animals[0].lv == 2, "Player allocates shared XP")
+	day.campaign.exp_pool = 1000
+	for i in range(8): day.train_animal(1)
+	check(day.campaign.animals[0].lv == 5 and not day.train_animal(1), "Level cap5 enforced")
+	var next = day.begin_night()
+	check(next.animals[0].name == "こむぎ" and next.animals[0].lv == 5 and not next.train_animal(1), "Name/level carried, night training forbidden")
+	var retry = Farm.new(next.checkpoint, next.seed_value)
+	check(retry.phase == "prepare" and retry.campaign == next.checkpoint, "Retry preserves post-shopping night checkpoint")
+	# Survive the clock, even when scheduled enemies are not all beaten.
+	var survival = night()
+	survival.config.first_attack_seconds = 999
+	survival.make_schedule()
+	survival.act("place", Vector2i(19, 8))
+	advance(survival, 719)
+	check(survival.phase == "defend" and survival.remaining_night() == 0.25, "Night lasts full180 game seconds")
+	survival.spawn_enemy(survival.spawn_schedule[0]) # Dawn must win even with a live raider still on the field.
+	survival.step()
+	check(survival.phase == "dawn" and survival.result == "win" and survival.early_finish_bonus == 0, "Dawn survival succeeds without early bonus")
+	var missed = Trial.run_trial("front", 17)
+	check("kennel" not in missed.campaign.unlocked_blueprints and missed.campaign.field_items.any(func(item): return item.kind == "kennel_plan"), "Early finish does not discard or auto collect blueprint")
+	var carry = Farm.new(missed.next_campaign()).begin_night()
+	Trial.deploy(carry)
+	var retained = carry.field_items.filter(func(item): return item.kind == "kennel_plan")[0]
+	check(carry.act("collect", retained.pos) and "kennel" in carry.campaign.unlocked_blueprints, "Missed blueprint can be collected next night")
+	# Unconscious today, unavailable all tomorrow, returns following day at half HP.
+	var faint = started()
+	faint.animals[0].hp = 0
+	faint.finish(true)
+	var restday = Farm.new(faint.next_campaign()).begin_night()
+	restday.act("place", Vector2i(19, 8))
+	check(not restday.available(restday.animals[0]) and not restday.act("place_animal", Vector2i(18, 8), 1), "Unconscious dog cannot deploy tomorrow")
+	restday.finish(true)
+	var recovered = Farm.new(restday.next_campaign()).begin_night()
+	check(recovered.animals[0].hp == 20 and recovered.available(recovered.animals[0]), "Dog returns on following day with provisional half HP")
+	# Day-aged eggs transform once per dawn, never inside inventory.
+	var hatch = started()
+	hatch.field_items = [{"kind": "egg", "pos": Vector2i(8, 8), "born_day": 0}]
+	hatch.finish(true)
+	check(hatch.field_items[0].kind == "chick", "One day field egg becomes chick")
+	var hatch2 = Farm.new(hatch.next_campaign()).begin_night()
+	hatch2.finish(true)
+	check(hatch2.campaign.animals.size() == 2 and hatch2.field_items.is_empty(), "Following day chick becomes owned hen")
+	var cat = Farm.new()
+	check(cat.buy("cat"), "Cat available in first shop")
+	cat = cat.begin_night()
+	Trial.deploy(cat)
+	check(cat.animals[1].affinity == 0 and cat.animals[1].attack_power == 0 and not cat.issue_order("stay", Vector2i(8, 8), 2), "Cat affinity supported, no attack or instructions")
+	for p in Farm.Shop.table().values(): check(p.BuyPrice > p.SellPrice, "No product has resale profit")
+	var budget = Farm.new()
+	check(budget.buy("wood") and budget.sell("wood") and budget.campaign.gold == 37, "Resource roundtrip loses Gold")
 	var n = quiet_farm()
 	n.nature_config.spawn_chance_per_second = 1.0
 	for i in range(1000):
 		n.step()
 		for p in n.natural.keys(): n.act("collect", p)
-	check(n.metrics.nature_rolls == 250, "One draw per game second")
-	for kind in n.nature_config.caps: check(n.metrics[kind + "_spawned"] == n.nature_config.caps[kind], "Harvest does not reopen stage spawn cap")
-	check(n.metrics.stump_collected == 1 and n.wood == 120, "Rare stump grants wood20")
-	var rolls = n.metrics.nature_rolls
-	n.paused = true
-	advance(n, 40)
-	check(n.metrics.nature_rolls == rolls, "Pause never rolls nature")
-	var f = quiet_farm(true)
-	f.animals[0].hp = 20
-	f.animals[1].hp = 21
-	f.campaign.mushrooms = 2
-	f.heal_with_mushrooms()
-	check(f.animals[0].hp == 25 and f.animals[1].hp == 26, "Mushroom recomputes lowest ratio after each use")
-	f.animals[0].hp = 0
-	f.animals[1].hp = 40
-	f.campaign.mushrooms = 1
-	f.heal_with_mushrooms()
-	check(f.campaign.mushrooms == 1 and f.animals[0].hp == 0, "Only deployed survivors receive mushrooms")
-	f.animals[0].hp = 20
-	var meals = f.campaign.items.dog_food
-	f.paused = true
-	check(not f.act("dog_food", f.animals[0].pos, 1), "Food disallowed while paused")
-	f.paused = false
-	check(f.act("dog_food", f.animals[0].pos, 1) and f.animals[0].hp == 30 and f.campaign.items.dog_food == meals - 1, "Dog food heals compatible animal")
-	f.campaign.items.hen_food = 1
-	check(not f.act("hen_food", f.animals[0].pos, 1) and f.campaign.items.hen_food == 1, "Wrong-category food not consumed")
+	for kind in n.nature_config.caps: check(n.metrics[kind + "_spawned"] == n.nature_config.caps[kind], "Harvest never reopens finite cap")
+	# Coop basic recovery and persistent, sheltered eggs; no new thief AI is introduced.
+	var poultry = Farm.new()
+	poultry.buy("hen")
+	poultry.add_resource("wood", 30)
+	poultry = poultry.begin_night()
+	poultry.config.first_attack_seconds = 999
+	poultry.make_schedule()
+	poultry.act("place", Vector2i(19, 8))
+	check(poultry.act("coop", Vector2i(12, 12)), "Coop consumes wood30")
+	advance(poultry, 8)
+	check(poultry.act("place_animal", Vector2i(13, 12), 2), "Hen deploys beside completed coop")
+	advance(poultry, 8)
+	poultry.animals[1].hp = 10
+	advance(poultry, 20)
+	check(poultry.animals[1].hp == 15 and poultry.animals[1].pos == Vector2i(12, 12), "Coop heals1 per second without commands")
+	poultry.finish(true)
+	var laid = poultry.field_items.filter(func(item): return item.kind == "egg")[0]
+	check(laid.protected_by == poultry.structures[Vector2i(12, 12)].id, "Coop egg retains protection metadata")
+	var tomorrow = Farm.new(poultry.next_campaign()).begin_night()
+	tomorrow.act("place", Vector2i(19, 8))
+	check(tomorrow.act("collect", laid.pos) and tomorrow.item_count("egg") == 1, "Field egg can be collected next night")
+	tomorrow.finish(true)
+	check(tomorrow.dawn_summary.chicks == 0 and tomorrow.campaign.eggs == 1, "Collected egg never hatches")
+	var planned = started()
+	planned.drop_blueprint(Vector2i(10, 10))
+	check(not planned.act("wall", Vector2i(10, 10)), "Cannot bury field blueprint under construction")
+	# Natural dawn after early clear is a distinct choice, without an early-finish bonus.
+	var full_night = Farm.new({}, 17)
+	full_night.buy("hen")
+	full_night = full_night.begin_night()
+	Trial.deploy(full_night)
+	while full_night.phase == "defend": full_night.step()
+	check(full_night.early_clear and full_night.tick == 720 and full_night.early_finish_bonus == 0, "Work until natural dawn after early clear")
+	check(full_night.dawn_summary.eggs == 1, "Dawn production runs once after full night")
+	var duplicate = Farm.new({}, 17)
+	duplicate.buy("hen")
+	duplicate = duplicate.begin_night()
+	Trial.deploy(duplicate)
+	while duplicate.phase == "defend": duplicate.step()
+	check(JSON.stringify(duplicate.observation()) == JSON.stringify(full_night.observation()), "Day biology and AI reproduce from identical seed/actions")

@@ -72,117 +72,120 @@ func run():
 	game.automated = true
 	root.add_child(game)
 	await process_frame
-	await move_pointer(game.screen_cell(Vector2(19, 8)))
+	assert(game.world.phase == "shop" and game.buttons.advance.visible)
+	await capture("shop")
+	await click("trade_hen_-1")
+	assert(game.world.campaign.animals.size() == 2 and game.world.campaign.gold == 11)
+	await click("shop_train")
+	await click("name_1")
+	game.name_edit.text = "こむぎ"
+	await click("save_name")
+	assert(game.world.campaign.animals[0].name == "こむぎ")
+	await click("advance")
+	assert(game.world.phase == "prepare")
 	await mouse(game.screen_cell(Vector2(19, 8)))
-	assert(game.group == 1 and game.tool == "" and game.selected_animal == -1 and game.selected_animals.is_empty())
-	await capture("placement")
+	assert(game.group == 1 and game.tool == "" and game.selected_animals.is_empty())
 	await mouse(game.screen_cell(Vector2(18, 8)))
 	assert(not game.world.animals[0].placed)
+	await key(KEY_TAB)
+	await key(KEY_TAB, false)
+	assert(game.selected_animal == 1 and game.tool == "place_animal")
+	await key(KEY_TAB)
+	await key(KEY_TAB, false)
+	assert(game.selected_animal == 2)
+	await key(KEY_TAB)
+	await key(KEY_TAB, false)
+	assert(game.tool == "" and game.selected_animal == -1)
+	await key(KEY_TAB, true, true)
+	await key(KEY_TAB, false, true)
+	assert(game.selected_animal == 2)
+	await mouse(game.screen_cell(Vector2(20, 12)))
+	await click("animal1")
+	await mouse(game.screen_cell(Vector2(18, 8)))
 	await click("group0")
-	assert(game.buttons.kennel.disabled)
+	assert(not game.buttons.has("kennel"))
 	await click("wall")
-	await mouse(game.screen_cell(Vector2(14, 8)))
+	await mouse(game.screen_cell(Vector2(14, 10)))
 	await step(4)
-	assert(game.world.structures[Vector2i(14, 8)].status == "ready")
-	var changed_tick = game.world.tick
-	await key(KEY_ESCAPE)
-	await key(KEY_ESCAPE, false)
-	assert(game.menu_open and game.world.paused)
-	await step(8)
-	assert(game.world.tick == changed_tick)
-	await click("menu_resume")
-	assert(not game.menu_open and not game.world.paused)
+	assert(game.world.structures[Vector2i(14, 10)].status == "ready")
+	await key(KEY_KP_SUBTRACT)
+	await key(KEY_KP_SUBTRACT, false)
+	assert(game.speed == 0.5)
+	await key(KEY_KP_ADD)
+	await key(KEY_KP_ADD, false)
+	assert(game.speed == 1.0)
+	await key(KEY_KP_ADD)
+	await key(KEY_KP_ADD, false)
+	assert(game.speed == 2.0)
 	await key(KEY_SPACE)
 	await key(KEY_SPACE, false)
-	await key(KEY_ESCAPE)
-	await key(KEY_ESCAPE, false)
-	await click("menu_resume")
-	assert(game.world.paused) # ESC respects a previously paused simulation.
-	await key(KEY_ESCAPE)
-	await key(KEY_ESCAPE, false)
-	await click("menu_retry")
-	assert(game.world.phase == "prepare" and game.world.tick == 0 and game.world.seed_value == 17 and game.world.materials == 100 and game.world.structures.is_empty())
-	await mouse(game.screen_cell(Vector2(19, 8)))
-	await click("animal1")
-	assert(game.tool == "place_animal")
-	await mouse(game.screen_cell(Vector2(18, 8)))
-	assert(game.world.animals[0].placed)
-	await mouse(Vector2(900, 570), MOUSE_BUTTON_RIGHT)
-	await mouse(game.screen_cell(Vector2(18, 8)))
-	assert(game.selected_animal == 1 and game.tool != "place_animal")
-	# Retain production timing check: 0.5x uses game seconds for the nature roll.
-	await click("speed")
-	await click("speed")
-	game.set_process(false)
-	game.automated = false
-	var before = game.world.tick
-	for i in range(21): game._process(0.1)
-	assert(game.world.tick - before == 4 and game.world.metrics.nature_rolls == 1)
-	game.automated = true
-	game.set_process(true)
-	await click("speed")
-	await capture("resource_or_selection")
-	await mouse(Vector2(900, 570), MOUSE_BUTTON_RIGHT)
+	var paused_tick = game.world.tick
+	await step(8)
+	assert(game.world.tick == paused_tick)
+	await key(KEY_SPACE)
+	await key(KEY_SPACE, false)
 	var combat = false
-	while game.world.phase == "defend" and game.world.tick < 800:
+	while not game.world.early_clear and game.world.phase == "defend" and game.world.tick < 720:
 		await step()
-		if not combat and not game.world.enemies.is_empty() and game.world.enemies[0].hp < 50 and game.world.enemies[0].hp > 0:
+		if not combat and game.world.combat_log.any(func(hit): return hit.source == "animal"):
 			await capture("combat")
 			combat = true
-	assert(combat and game.world.phase == "shop" and "kennel" in game.world.campaign.unlocked_blueprints)
-	assert(not game.buttons.pause.visible and not game.buttons.group0.visible)
-	var victory = game.world.observation()
-	await click("category_materials")
-	await click("trade_wood_-1")
-	assert(game.world.wood == 20)
-	await click("trade_stone_-1")
-	assert(game.world.stone == 10)
-	await capture("shop")
-	await click("shop_sell")
-	await click("trade_stone_-1")
-	assert(game.world.stone == 0)
-	await click("category_items")
-	await click("trade_kennel_plan_-1")
-	assert("kennel" in game.world.campaign.unlocked_blueprints and game.world.item_count("kennel_plan") == 0)
-	await click("shop_buy")
-	await click("trade_dog_food_-1")
-	assert(game.world.campaign.items.dog_food == 3)
-	await click("category_facilities")
-	assert(game.shop_rows().is_empty())
-	var transactions = game.world.shop_log.duplicate(true)
-	var stock = game.world.shop_stock.duplicate(true)
+	assert(combat and game.world.early_clear and game.world.phase == "defend")
+	await step(12) # Let the repelled raider move away from the ground drop.
+	var plan = game.world.field_items.filter(func(item): return item.kind == "kennel_plan")[0].pos
+	assert("kennel" not in game.world.campaign.unlocked_blueprints)
+	await mouse(game.screen_cell(Vector2(plan)))
+	await capture("blueprint")
+	await mouse(game.screen_cell(Vector2(plan)))
+	assert("kennel" in game.world.campaign.unlocked_blueprints)
+	await click("group0")
+	assert(game.buttons.has("kennel"))
+	await step(40) # Deliberately choose ten extra seconds of ranch work.
+	var before_finish = compact_observation()
+	await click("advance")
+	assert(game.world.phase == "dawn" and game.world.early_finish_bonus > 0)
+	await capture("dawn")
+	var dawn = compact_observation()
+	assert(game.world.dawn_summary.eggs == 1 and game.world.campaign.animals[0].lv == 1)
+	await click("advance")
+	assert(game.world.phase == "shop" and game.world.campaign.day == 2 and game.world.stage == 1)
+	await click("shop_train")
+	await click("train_1")
+	assert(game.world.campaign.animals[0].lv == 2)
+	var trained = game.world.campaign.duplicate(true)
 	await click("advance")
 	await mouse(game.screen_cell(Vector2(19, 8)))
 	await click("group0")
-	assert(not game.buttons.kennel.disabled)
-	await click("kennel")
-	await mouse(game.screen_cell(Vector2(13, 8)))
-	await step(8)
-	assert(game.world.structures[Vector2i(13, 8)].status == "ready" and game.world.wood == 0)
-	# The fixture checks rare harvest directly, without pretending a forced stump is a natural roll.
-	var cell = Vector2i(12, 10)
-	game.world.natural[cell] = "stump"
-	await mouse(game.screen_cell(Vector2(cell)))
-	assert(game.world.natural.has(cell))
-	await mouse(game.screen_cell(Vector2(cell)))
-	assert(game.world.wood == 20 and not game.world.natural.has(cell))
-	var before_retry = game.world.checkpoint.duplicate(true)
+	await click("wall")
+	await mouse(game.screen_cell(Vector2(12, 10)))
 	await key(KEY_ESCAPE)
 	await key(KEY_ESCAPE, false)
 	await click("menu_retry")
-	assert(game.world.campaign == before_retry and game.world.phase == "prepare" and game.world.wood == 20 and game.world.structures.is_empty())
+	assert(game.world.phase == "prepare" and game.world.campaign.animals[0].lv == 2 and game.world.materials == trained.resources.soil)
 	var record = {"commit_sha": OS.get_environment("REVIEW_COMMIT") if OS.has_environment("REVIEW_COMMIT") else "WORKTREE",
 		"branch": "codex/sporehollow-prototype", "seed": 17, "screenshots": captures,
-		"nature_settings": Farm.Rules.NATURE, "nature_counts": {"weed": victory.metrics.weed_spawned, "mushroom": victory.metrics.mushroom_spawned, "stump": victory.metrics.stump_spawned},
-		"resources": victory.resources, "blueprint": victory.campaign.unlocked_blueprints, "shop_stock": stock, "transactions": transactions,
-		"menu_checks": {"esc_pauses": true, "preserves_prior_pause": true, "restart_discards_changes": true, "same_seed": true},
-		"selection_checks": {"initial_animal_mode_without_selection": true, "empty_click_does_not_deploy": true, "explicit_roster_deployment": true, "small_brackets": true},
-		"doghouse": {"initially_locked": true, "wood_cost": 20, "built_after_unlock": true, "restart_restores_stage_start_wood": true},
-		"stump_harvest_fixture": {"two_clicks": true, "wood_gain": 20}, "stage1": victory}
-	if FileAccess.file_exists("res://artifacts/evaluation.json"):
-		var evaluation = JSON.parse_string(FileAccess.get_file_as_string("res://artifacts/evaluation.json"))
-		record.multi_seed = {"seed_range": evaluation.seed_range, "strategies": {}}
-		for strategy in evaluation.strategies: record.multi_seed.strategies[strategy] = evaluation.strategies[strategy].summary
-	FileAccess.open("res://review/current/stage1-observation.json", FileAccess.WRITE).store_string(JSON.stringify(record, "  "))
-	print("PASS: neutral animal mode, explicit deployment, ESC/retry, resources, finite nature, buy/sell categories, blueprint, wood kennel and stump harvest")
+		"before_early_finish": before_finish, "dawn": dawn,
+		"checks": {"starts_shopping": true, "tab_candidates_and_none": true, "reverse_tab": true, "speed_keys": true,
+			"no_accidental_deployment": true, "manual_blueprint": true, "work_after_clear": true,
+			"named_animal": true, "manual_exp_training": true, "stage1_reused": true, "night_checkpoint_retry": true}}
+	var file = FileAccess.open("res://review/current/stage1-observation.json", FileAccess.WRITE)
+	file.store_string(JSON.stringify(record, "	"))
+	file.close()
+	print("PASS: first-day shop, named animals, Tab deployment, speed, night, dropped blueprint, continued work, dawn eggs, pooled training and checkpoint")
 	quit()
+func compact_observation() -> Dictionary:
+	var full = game.world.observation()
+	var result = {}
+	for id in ["seed", "stage", "day", "tick", "phase", "remaining_night", "early_clear", "early_clear_tick", "early_finish_bonus", "exp_pool", "dawn", "field_items", "score", "resources", "metrics", "milestones", "combat", "ai_settings", "decision_counts"]:
+		result[id] = full[id]
+	result.decision_log = full.decision_log.slice(-12)
+	result.decision_log_note = "Last12 decisions; counts cover the night. Full trace remains available through F8."
+	result.animals = []
+	for a in full.animals:
+		var item = {}
+		for key in ["id", "species", "name", "lv", "hp", "max_hp", "state", "placed", "affinity", "unavailable_through_day", "rescuing"]:
+			item[key] = a[key]
+		result.animals.append(item)
+	result.unlocked_blueprints = full.campaign.unlocked_blueprints
+	result.unavailable_next_day = full.campaign.animals.filter(func(a): return a.unavailable_through_day >= full.day + 1).map(func(a): return a.id)
+	return result

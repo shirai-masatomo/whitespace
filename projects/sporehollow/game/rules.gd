@@ -11,7 +11,8 @@ const KIDNAPPER = {"max_hp": 50, "attack_power": 5, "object_attack_power": 2,
 # Gate cost/HP/time, repair coefficient, interruption refund and animal HP are PROVISIONAL.
 const BUILD = {"wall": {"cost": 10, "hp": 8, "seconds": 1.0},
 	"build_gate": {"cost": 30, "hp": 6, "seconds": 1.0},
-	"kennel": {"cost": 20, "resource": "wood", "blueprint": "kennel", "hp": 12, "seconds": 2.0}} # HP/time provisional; wood20/unlock fixed.
+	"kennel": {"cost": 20, "resource": "wood", "blueprint": "kennel", "hp": 12, "seconds": 2.0},
+	"coop": {"cost": 30, "resource": "wood", "hp": 12, "seconds": 2.0}} # Coop numbers provisional.
 const REPAIR_FACTOR = 1.0
 const INTERRUPT_REFUND = 0.5
 const DISMANTLE_REFUND = 0.8 # Provisional: floor each facility's remaining-durability refund.
