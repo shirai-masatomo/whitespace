@@ -75,7 +75,7 @@ func run():
 	assert(game.world.phase == "shop" and game.buttons.advance.visible)
 	await capture("shop")
 	await click("trade_hen_-1")
-	assert(game.world.campaign.animals.size() == 2 and game.world.campaign.gold == 11)
+	assert(game.world.campaign.animals.size() == 2 and game.world.campaign.gold == 10)
 	await click("shop_train")
 	await click("name_1")
 	game.name_edit.text = "こむぎ"

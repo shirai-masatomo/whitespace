@@ -47,7 +47,7 @@ func run():
 	check(w.animals[0].hp == 40 and w.animals[0].attack_power == 10, "Dog fixed attack and provisional HP")
 	w = started()
 	var cell = Vector2i(10, 8)
-	check(w.act("wall", cell) and w.materials == 90 and w.campaign.gold == 45, "Wall consumes soil10, never Gold")
+	check(w.act("wall", cell) and w.materials == 90 and w.campaign.gold == 40, "Wall consumes soil10, never Gold")
 	check(w.structures[cell].status == "building" and w.walkable(cell), "Construction isn't instant or blocking")
 	advance(w, 3)
 	check(w.structures[cell].status == "building", "Still building at .75s")
@@ -516,8 +516,8 @@ func night(data: Dictionary = {}, seed_id: int = 17, config: Dictionary = {}):
 
 func check_economy():
 	var shop = Farm.new({}, 17)
-	check(shop.phase == "shop" and shop.campaign.gold == 45 and shop.animals.size() == 1, "Campaign starts at funded shop with one Shiba")
-	check(shop.buy("hen") and shop.campaign.gold == 11 and not shop.buy("wood"), "Hen purchase limits material budget")
+	check(shop.phase == "shop" and shop.campaign.gold == 40 and shop.animals.size() == 1, "Campaign starts at funded shop with one Shiba")
+	check(shop.buy("hen") and shop.campaign.gold == 10 and not shop.buy("wood"), "Hen purchase limits material budget")
 	var w = shop.begin_night()
 	check(w.phase == "prepare" and w.animals.size() == 2, "Bought animal enters night preparation")
 	Trial.deploy(w)
@@ -591,7 +591,7 @@ func check_economy():
 	check(cat.animals[1].affinity == 0 and cat.animals[1].attack_power == 0 and not cat.issue_order("stay", Vector2i(8, 8), 2), "Cat affinity supported, no attack or instructions")
 	for p in Farm.Shop.table().values(): check(p.BuyPrice > p.SellPrice, "No product has resale profit")
 	var budget = Farm.new()
-	check(budget.buy("wood") and budget.sell("wood") and budget.campaign.gold == 37, "Resource roundtrip loses Gold")
+	check(budget.buy("wood") and budget.sell("wood") and budget.campaign.gold == 32, "Resource roundtrip loses Gold")
 	var n = quiet_farm()
 	n.nature_config.spawn_chance_per_second = 1.0
 	for i in range(1000):
