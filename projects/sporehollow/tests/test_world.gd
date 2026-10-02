@@ -28,9 +28,9 @@ func run():
 	check(w.tick == 0, "Placement freezes clock")
 	check(w.act("place", Vector2i(19, 8)) and not w.animals[0].placed, "Keeper placement never places dog")
 	check(not w.act("place", Vector2i(10, 8)), "Keeper placement is once per stage")
-	check(w.ready_to_start(), "Keeper alone enables clock")
-	check(w.valid_animal_site(1, Vector2i(18, 8)) and not w.act("place_animal", Vector2i(18, 8), 1), "Preview before clock, no world deployment")
-	check(w.act("start") and not w.animals[0].placed, "Clock can start with every animal in reserve")
+	check(w.phase == "defend" and w.tick == 0, "Keeper placement starts clock immediately")
+	check(w.valid_animal_site(1, Vector2i(18, 8)), "Deployment preview after autostart")
+	check(not w.act("start") and not w.animals[0].placed, "No separate start action; animal remains optional")
 	w.act("pause")
 	check(w.valid_animal_site(1, Vector2i(18, 8)) and not w.act("place_animal", Vector2i(18, 8), 1), "Pause permits preview only")
 	check(not w.act("stay", Vector2i(18, 8), 1), "Reserve animal cannot receive battlefield orders")
@@ -47,7 +47,7 @@ func run():
 	check(w.animals[0].hp == 40 and w.animals[0].attack_power == 10, "Dog fixed attack and provisional HP")
 	w = started()
 	var cell = Vector2i(10, 8)
-	check(w.act("wall", cell) and w.materials == 80 and w.campaign.gold == 12, "Wall consumes soil20, never Gold")
+	check(w.act("wall", cell) and w.materials == 90 and w.campaign.gold == 12, "Wall consumes soil10, never Gold")
 	check(w.structures[cell].status == "building" and w.walkable(cell), "Construction isn't instant or blocking")
 	advance(w, 3)
 	check(w.structures[cell].status == "building", "Still building at .75s")
@@ -76,7 +76,7 @@ func run():
 	crossing.animals[0].home = Vector2i(20, 8)
 	check(crossing.act("wall", Vector2i(20, 8)), "Start site ahead of animal")
 	advance(crossing, 4)
-	check(crossing.structures[Vector2i(20, 8)].status == "interrupted" and crossing.materials == 90, "Actor entry at completion interrupts, partial refund only")
+	check(crossing.structures[Vector2i(20, 8)].status == "interrupted" and crossing.materials == 95, "Actor entry at completion interrupts, partial refund only")
 	check(crossing.walkable(Vector2i(20, 8)) and crossing.metrics.built == 0, "Interrupted site cannot entomb or block")
 	var enemy_site = started()
 	check(enemy_site.act("wall", Vector2i(2, 5)), "Enemy worksite")
@@ -85,17 +85,18 @@ func run():
 	check(enemy_site.structures[Vector2i(2, 5)].status == "interrupted", "Actual enemy movement interrupts immediately")
 	w.structures[cell].hp = 3
 	var before = w.materials
-	check(w.act("repair", cell) and w.structures[cell].hp == 8 and before - w.materials == 13, "Proportional rounded repair of five HP")
+	check(w.act("repair", cell) and w.structures[cell].hp == 8 and before - w.materials == 7, "Proportional rounded repair of five HP")
 	check(not w.act("repair", cell), "No overrepair")
 	w.structures[cell].hp = 3
 	w.materials = 4
-	check(w.act("repair", cell) and w.structures[cell].hp == 4 and w.materials == 1, "Partial repair never overspends")
-	check(not w.act("repair", cell) and w.materials == 1, "No free fractional repair")
+	check(w.act("repair", cell) and w.structures[cell].hp == 6 and w.materials == 0, "Partial repair never overspends")
+	check(not w.act("repair", cell) and w.materials == 0, "No free fractional repair")
 	w.act("pause")
 	check(not w.repair(cell), "Direct repair entry respects pause too")
 	w.act("pause")
 	w.spawn_enemy(w.spawn_schedule[0])
 	var e = w.enemies[0]
+	w.structures[cell].hp = 4
 	w.move_enemy(e, cell)
 	check(w.structures[cell].hp == 2, "Object damage2 not animal damage5")
 	w.move_enemy(e, cell)
@@ -163,9 +164,9 @@ func run():
 	carry.step()
 	carry.finish(true)
 	var snapshot = carry.campaign.facilities.duplicate(true)
-	check(carry.buy("soil") and carry.materials == 60, "Shop soil pack uses Gold separately")
+	check(carry.buy("soil") and carry.materials == 90, "Shop soil pack uses Gold separately")
 	var next = Farm.new(carry.next_campaign())
-	check(next.materials == 60 and next.campaign.facilities == snapshot, "Shop and stage transition preserve exact facilities")
+	check(next.materials == 90 and next.campaign.facilities == snapshot, "Shop and stage transition preserve exact facilities")
 	check(next.structures[Vector2i(5, 5)].hp == 8 and next.structures[Vector2i(5, 6)].hp == 3 and next.structures[Vector2i(5, 7)].status == "destroyed", "No healing or resurrection")
 	check(next.structures[Vector2i(5, 8)].remaining == 3 and next.structures[Vector2i(5, 8)].status == "building", "Unfinished facility retains remaining duration")
 	check(not next.act("place", Vector2i(5, 5)), "Keeper can't start inside persisted wall")
@@ -174,7 +175,7 @@ func run():
 	check(next.structures[Vector2i(5, 8)].status == "ready", "Construction resumes next stage")
 	next.structures[Vector2i(5, 6)].hp = 1
 	check(carry.campaign.facilities == snapshot and next.checkpoint.facilities == snapshot, "Runtime cannot mutate prior campaign or retry checkpoint")
-	check(next.observation().resources.soil == 60 and not JSON.stringify(next.observation()).is_empty(), "Observation includes resources and serializable history")
+	check(next.observation().resources.soil == 90 and not JSON.stringify(next.observation()).is_empty(), "Observation includes resources and serializable history")
 	var idle = Trial.run_trial("poor", 17)
 	var active = Trial.run_trial("guided", 17)
 	check(idle.result == "loss" and idle.keeper.state == "abducted" and idle.spawned == 1, "Poor placement can lose to one kidnapper")
@@ -193,8 +194,8 @@ func run():
 	check(paths.next_step(Vector2i(9, 8), Vector2i(12, 8), true) == Vector2i(10, 8), "Breach cheaper than detour for damaged wall")
 	check(paths.next_step(Vector2i(9, 8), Vector2i(12, 8)) != Vector2i(10, 8), "Animal can't breach")
 	var spam = started()
-	for y in range(1, 10): spam.act("wall", Vector2i(10, y))
-	check(spam.structures.size() == 5 and spam.materials == 0, "Soil100 caps wall spam to five sites")
+	for y in range(1, 13): spam.act("wall", Vector2i(10, y))
+	check(spam.structures.size() == 10 and spam.materials == 0, "Soil100 caps wall spam to ten sites")
 	var loyal = started()
 	loyal.animals[0].loyalty = 0
 	check(not loyal.act("whistle", Vector2i(5, 5)) and loyal.animals[0].attack_power == 10, "Zero loyalty blocks command, never lowers attack")
@@ -302,5 +303,72 @@ func run():
 	check(held.decision_count == count_before, "Unchanged context holds decision, no per-tick draw")
 	check(saved.decision_log.filter(func(d): return d.rescue_mode).all(func(d): return d.selected in ["attack", "approach"]), "Rescue never chooses passive behavior")
 	check(saved.decision_log.size() <= Farm.Rules.AI.log_limit, "Decision log is bounded")
+	check_new_rules()
 	print("PASS: %d Stage1 and campaign checks" % checks)
 	quit()
+
+func check_new_rules():
+	var w = started()
+	w.spawn_enemy(w.spawn_schedule[0])
+	var a = w.animals[0]
+	var e = w.enemies[0]
+	e.pos = a.pos - Vector2i(4, 0)
+	w.try_bark(a)
+	check(w.metrics.bark_casts == 1 and w.metrics.bark_targets == 1 and e.hp == 50, "Bark detects at range4 without damage")
+	var from: Vector2i = e.pos
+	w.move_enemy(e, from + Vector2i.RIGHT)
+	check(e.pos == from, "Bark blocks movement")
+	w.tick = 3
+	w.move_enemy(e, from + Vector2i.RIGHT)
+	check(e.pos == from, "Stop persists through .75s")
+	w.tick = 4
+	w.move_enemy(e, from + Vector2i.RIGHT)
+	check(e.pos != from, "Stop ends at 1s")
+	w.tick = 23
+	w.try_bark(a)
+	check(w.metrics.bark_casts == 1, "Bark not ready at 5.75s")
+	w.tick = 24
+	w.try_bark(a)
+	check(w.metrics.bark_casts == 2 and w.skill_log.size() == 2, "Bark cooldown6s logged")
+	e.pos = a.pos - Vector2i.RIGHT
+	e.attacker = a.id
+	e.threat_until = 100
+	e.counter_target = a.id
+	e.counter_until = 100
+	e.ai_context = "under_attack"
+	e.intent = "counter"
+	e.next_decision = 100
+	w.enemy_step(e)
+	check(a.hp == 35, "Movement stop does not interrupt enemy attacks")
+	var n = started()
+	n.act("pause")
+	advance(n, 32)
+	check(n.natural.is_empty(), "Paused world cannot grow resources")
+	n.act("pause")
+	advance(n, 16)
+	check(n.natural.size() == 1, "Nature first grows after4s")
+	var snapshot = Farm.new({}, n.seed_value)
+	Trial.deploy(snapshot)
+	advance(snapshot, 16)
+	check(snapshot.natural == n.natural, "Growth uses reproducible independent seed")
+	var p = Vector2i(10, 7)
+	n.natural[p] = "weed"
+	var gold = n.campaign.gold
+	n.act("pause")
+	check(not n.act("collect", p) and n.natural.has(p), "Paused harvest denied")
+	n.act("pause")
+	check(n.act("collect", p) and n.campaign.gold == gold + 1 and not n.act("collect", p), "Weed grants1Gold exactly once")
+	n.natural[p] = "mushroom"
+	n.animals[0].hp = 32
+	check(n.act("collect", p) and n.campaign.mushrooms == 1 and n.animals[0].hp == 32, "Mushroom is stored, not instant healing")
+	n.finish(true)
+	check(n.animals[0].hp == 37 and n.campaign.mushrooms == 0 and n.metrics.mushroom_healing == 5, "Stage end spends mushroom to heal5")
+	var next = Farm.new(n.next_campaign())
+	check(next.animals[0].hp == 37, "Remaining HP survives stage transition")
+	var full = started()
+	full.campaign.mushrooms = 3
+	full.animals[0].hp = 39
+	full.finish(true)
+	check(full.animals[0].hp == 40 and full.campaign.mushrooms == 2, "Healing capped; surplus mushrooms retained")
+	var wander = started()
+	check(wander.act("wander", Vector2i(-100, -100), 1) and wander.animals[0].pending.pos == wander.animals[0].pos, "Wander uses current position without destination")

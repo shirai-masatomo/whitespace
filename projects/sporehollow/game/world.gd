@@ -28,6 +28,9 @@ var decision_log: Array = []
 var decision_count = 0
 var decision_counts: Dictionary = {}
 var actor_rngs: Dictionary = {}
+var nature_rng = RandomNumberGenerator.new()
+var natural: Dictionary = {}
+var skill_log: Array = []
 var milestones: Array = []
 var initial_positions: Dictionary = {}
 var structures: Dictionary = {}
@@ -49,10 +52,11 @@ var schedule_cycle = 0
 var entries: Array = []
 var metrics = {"repelled": 0, "stolen": 0, "structure_damage": 0, "commands": 0.0,
 	"eggs_produced": 0, "eggs_collected": 0, "barks": 0, "fed": 0, "coins": 0,
-	"captures": 0, "rescues": 0, "built": 0, "destroyed": 0, "orders": 0, "interrupted": 0, "repaired": 0, "soil_repair": 0}
+	"captures": 0, "rescues": 0, "built": 0, "destroyed": 0, "orders": 0, "interrupted": 0, "repaired": 0, "soil_repair": 0,
+	"bark_casts": 0, "bark_targets": 0, "weed_spawned": 0, "mushroom_spawned": 0, "weed_collected": 0, "mushroom_collected": 0, "mushrooms_used": 0, "mushroom_healing": 0}
 
 static func new_campaign() -> Dictionary:
-	return {"stage": 1, "gold": 12, "feed": 4, "eggs": 0, "shelter": false,
+	return {"stage": 1, "gold": 12, "feed": 4, "eggs": 0, "mushrooms": 0, "shelter": false,
 		"fence": 0, "resources": {"soil": 100}, "facilities": [], "next_structure_id": 1, "animals": [{"id": 1, "category": "dog", "species": "shiba", "lv": 1, "xp": 0, "loyalty": 75}]}
 
 func _init(data: Dictionary = {}, seed_number: int = 17, stage_override: Dictionary = {}):
@@ -61,6 +65,8 @@ func _init(data: Dictionary = {}, seed_number: int = 17, stage_override: Diction
 	stage = campaign.stage
 	seed_value = seed_number
 	rng.seed = seed_number
+	nature_rng.seed = seed_number * 1009 + 9871
+	campaign.mushrooms = campaign.get("mushrooms", 0)
 	config = (StageData.STAGES[stage] if stage_override.is_empty() else stage_override).duplicate(true)
 	materials = campaign.get("resources", {"soil": 100}).soil
 	next_structure_id = campaign.get("next_structure_id", 1)
@@ -91,7 +97,9 @@ func _init(data: Dictionary = {}, seed_number: int = 17, stage_override: Diction
 		a.home = a.pos
 		a.stamina = 100.0
 		a.max_hp = Rules.SHIBA.max_hp if a.species == "shiba" else 20
-		a.hp = a.max_hp
+		a.hp = clampi(a.get("hp", a.max_hp), 0, a.max_hp)
+		a.next_bark = 0
+		a.last_bark = -100
 		a.attack_power = Rules.SHIBA.attack_power if a.species == "shiba" else 0
 		a.next_attack = 0
 		a.move_credit = 0.0
@@ -105,7 +113,7 @@ func _init(data: Dictionary = {}, seed_number: int = 17, stage_override: Diction
 		a.state = "見張り" if a.species == "shiba" else "ついばむ"
 		a.path = [a.pos]
 		animals.append(a)
-	say("牧場主を配置して時計開始。動物は好きなタイミングで出撃。")
+	say("主人公を配置してください")
 
 func make_schedule():
 	# Each wave has a start time relative to the first attack. Jitter affects gaps, never prep length.
@@ -191,20 +199,16 @@ func valid_animal_site(id: int, p: Vector2i) -> bool:
 func can_place_animal(id: int, p: Vector2i) -> bool:
 	return phase == "defend" and not paused and valid_animal_site(id, p)
 
-func ready_to_start() -> bool:
-	return phase == "prepare" and keeper.placed
-
 func act(kind: String, p: Vector2i = Vector2i.ZERO, animal_id: int = -1) -> bool:
 	var accepted = false
 	if phase == "prepare":
 		if kind == "place" and not keeper.placed and walkable(p) and not live_structure(p) and p not in entries and not (p == nest and has_nest()):
 			keeper.pos = p
 			keeper.placed = true
-			accepted = true
-		elif kind == "start" and ready_to_start():
 			phase = "defend"
 			initial_positions = {"keeper": [keeper.pos.x, keeper.pos.y], "animals": []}
-			say("時計開始。壁と門で備えよう。")
+			milestones.append({"tick": 0, "kind": "auto_start", "id": -1})
+			say("敵の襲来に備えよ")
 			accepted = true
 	elif phase == "defend":
 		if kind == "pause":
@@ -231,6 +235,7 @@ func act(kind: String, p: Vector2i = Vector2i.ZERO, animal_id: int = -1) -> bool
 						"hp": 0, "max_hp": hp, "armor": 0, "open": false, "cost": BUILD[kind].cost,
 						"status": "building", "remaining": ceili(BUILD[kind].seconds / DT), "total_ticks": ceili(BUILD[kind].seconds / DT)}
 					next_structure_id += 1
+					natural.erase(p)
 					accepted = true
 			elif kind == "gate" and live_structure(p) and structures[p].status == "ready" and structures[p].kind == "gate" and not occupied(p):
 				structures[p].open = not structures[p].open
@@ -248,6 +253,13 @@ func act(kind: String, p: Vector2i = Vector2i.ZERO, animal_id: int = -1) -> bool
 				metrics.commands += 3
 				foods.append({"pos": p, "until": tick + 64})
 				accepted = true
+			elif kind == "collect" and natural.has(p):
+				var harvest: String = natural[p]
+				natural.erase(p)
+				metrics[harvest + "_collected"] += 1
+				if harvest == "weed": campaign.gold += Rules.NATURE.weed_gold
+				else: campaign.mushrooms += 1
+				accepted = true
 			elif kind == "collect" and p == nest and eggs > 0:
 				campaign.eggs += eggs
 				metrics.eggs_collected += eggs
@@ -262,12 +274,12 @@ func issue_order(kind: String, p: Vector2i, animal_id: int = -1) -> bool:
 		var found = enemies.filter(func(e): return not e.done and not e.flee and e.pos == p)
 		if found.is_empty(): return false
 		target_id = found[0].id
-	elif kind in ["whistle", "stay", "wander"] and not walkable(p): return false
+	elif kind in ["whistle", "stay"] and not walkable(p): return false
 	var accepted = false
 	for a in animals:
 		if not a.placed or a.loyalty <= 0 or (animal_id >= 0 and a.id != animal_id): continue
 		# Paused orders change intent only. Their reaction countdown starts with resumed simulation.
-		a.pending = {"kind": kind, "pos": p, "target_id": target_id,
+		a.pending = {"kind": kind, "pos": a.pos if kind == "wander" else p, "target_id": target_id,
 			"at": tick + 1 + ceili((100 - a.loyalty) / 25.0)}
 		accepted = true
 	if accepted: metrics.orders += 1
@@ -280,6 +292,7 @@ func spawn_enemy(event: Dictionary):
 		"attack_power": Rules.KIDNAPPER.attack_power, "object_attack_power": Rules.KIDNAPPER.object_attack_power,
 		"counter_seconds": Rules.KIDNAPPER.counter_seconds, "counter_target": -1, "counter_until": 0, "counter_ready": 0, "next_attack": 0,
 		"attacker": -1, "threat_until": 0,
+		"move_stopped_until": 0,
 		"flee": false, "carry": "", "done": false, "capture_progress": 0,
 		"born": tick, "path": [origin], "role": event.role, "state": "主人公へ"})
 	spawned += 1
@@ -326,9 +339,10 @@ func animal_step(a: Dictionary):
 				eggs += 1
 				metrics.eggs_produced += 1
 		return
+	try_bark(a)
 	var carrier = enemies.filter(func(e): return not e.done and not e.flee and e.carry == "keeper")
 	a.rescuing = not carrier.is_empty()
-	var targets = enemies.filter(func(e): return not e.done and not e.flee and distance(a.pos, e.pos) <= 4)
+	var targets = enemies.filter(func(e): return not e.done and not e.flee and distance(a.pos, e.pos) <= Rules.SHIBA.detection_range)
 	targets.sort_custom(func(e, f): return distance(a.pos, e.pos) < distance(a.pos, f.pos))
 	if a.mode == "attack_target":
 		var selected = enemies.filter(func(e): return e.id == a.target_id and not e.done and not e.flee)
@@ -379,7 +393,6 @@ func animal_step(a: Dictionary):
 			var enemy = targets[0]
 			enemy.hp = maxi(0, enemy.hp - a.attack_power)
 			combat_log.append({"tick": tick, "source": "animal", "id": a.id, "target": enemy.id, "damage": a.attack_power})
-			metrics.barks += 1
 			if enemy.hp == 0:
 				enemy.flee = true
 				release_keeper(enemy)
@@ -509,6 +522,7 @@ func move_enemy(e: Dictionary, next: Vector2i):
 			metrics.destroyed += 1
 			say("施設が破壊された。土で建て直せます。")
 	else:
+		if tick < e.move_stopped_until and next != e.pos: return
 		e.pos = next
 		e.path.append(next)
 		interrupt_site(next)
@@ -570,6 +584,7 @@ func persist_farm():
 func step():
 	if phase != "defend" or paused: return
 	tick += 1
+	if tick % ceili(Rules.NATURE.interval / DT) == 0: grow_nature()
 	command_power = minf(10, command_power + 0.07)
 	foods = foods.filter(func(f): return f.until > tick)
 	while schedule_index < spawn_schedule.size() and tick >= spawn_schedule[schedule_index].tick:
@@ -606,6 +621,10 @@ func finish(won: bool):
 	var xp = 16 + rating / 10 if won else 0
 	var gold = (32 + rating / 5 + metrics.coins) if won else 0
 	score = {"rating": rating, "xp": int(xp), "gold": int(gold), "seconds": tick * DT, "condition": roundi(condition * 100), "time_bonus": 0}
+	heal_with_mushrooms()
+	for owned in campaign.animals:
+		for a in animals:
+			if a.id == owned.id: owned.hp = a.hp
 	if won:
 		persist_farm()
 		campaign.gold += int(gold)
@@ -686,4 +705,46 @@ func observation() -> Dictionary:
 		"metrics": metrics.duplicate(true), "score": score.duplicate(true), "structures": built, "materials": materials,
 		"combat": combat_log.duplicate(true), "resources": {"soil": materials}, "actions": actions.duplicate(true), "samples": traces.duplicate(true), "schedule": schedule,
 		"ai_settings": Rules.AI, "decision_log": decision_log.duplicate(true), "decision_count": decision_count, "decision_counts": decision_counts.duplicate(true),
+		"bark_settings": Rules.BARK, "skill_log": skill_log.duplicate(true), "nature_settings": Rules.NATURE,
+		"natural": natural.keys().map(func(p): return {"pos": [p.x, p.y], "kind": natural[p]}), "mushrooms": campaign.mushrooms,
 		"initial_positions": initial_positions.duplicate(true), "milestones": milestones.duplicate(true), "stage_config": config.duplicate(true), "eggs": eggs, "command_power": command_power}
+
+func try_bark(a: Dictionary):
+	if tick < a.next_bark: return
+	var nearby = enemies.filter(func(e): return not e.done and not e.flee and distance(a.pos, e.pos) <= Rules.SHIBA.detection_range)
+	if nearby.is_empty(): return
+	a.next_bark = tick + ceili(Rules.BARK.cooldown / DT)
+	a.last_bark = tick
+	var targets = []
+	for enemy in nearby:
+		if distance(a.pos, enemy.pos) <= Rules.BARK.range:
+			enemy.move_stopped_until = maxi(enemy.move_stopped_until, tick + ceili(Rules.BARK.stop_seconds / DT))
+			targets.append(enemy.id)
+	metrics.barks += 1
+	metrics.bark_casts += 1
+	metrics.bark_targets += targets.size()
+	skill_log.append({"tick": tick, "time": tick * DT, "actor": "shiba_%d" % a.id, "skill": "bark", "targets": targets, "ready_tick": a.next_bark})
+	if skill_log.size() > 64: skill_log.pop_front()
+
+func grow_nature():
+	if natural.size() >= Rules.NATURE.limit: return
+	var sites = []
+	for y in range(1, H - 1):
+		for x in range(1, W - 1):
+			var p = Vector2i(x, y)
+			if walkable(p) and not occupied(p) and not live_structure(p) and not natural.has(p) and p not in entries and not (has_nest() and p == nest): sites.append(p)
+	if sites.is_empty(): return
+	var p = sites[nature_rng.randi_range(0, sites.size() - 1)]
+	var kind = "mushroom" if nature_rng.randf() < Rules.NATURE.mushroom_chance else "weed"
+	natural[p] = kind
+	metrics[kind + "_spawned"] += 1
+
+func heal_with_mushrooms():
+	for a in animals:
+		if not a.placed: continue
+		while campaign.mushrooms > 0 and a.hp < a.max_hp:
+			var restored = mini(Rules.NATURE.mushroom_hp, a.max_hp - a.hp)
+			a.hp += restored
+			campaign.mushrooms -= 1
+			metrics.mushrooms_used += 1
+			metrics.mushroom_healing += restored

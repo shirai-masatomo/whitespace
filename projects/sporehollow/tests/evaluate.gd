@@ -4,7 +4,6 @@ const SEEDS = 32
 
 static func deploy(w, keeper: Vector2i = Vector2i(19, 8), dog: Vector2i = Vector2i(18, 8)):
 	w.act("place", keeper)
-	w.act("start")
 	for a in w.animals: w.act("place_animal", dog if a.species == "shiba" else w.nest, a.id)
 
 static func run_trial(strategy: String, number: int = 17):
@@ -14,10 +13,9 @@ static func run_trial(strategy: String, number: int = 17):
 	elif strategy in ["ordered", "uncommanded"]: deploy(w, Vector2i(8, 5), Vector2i(20, 13))
 	elif strategy == "reserve":
 		w.act("place", Vector2i(19, 8))
-		w.act("start")
 	else: deploy(w)
 	if strategy == "rescue": w.act("stay", Vector2i(19, 13), 1)
-	if strategy == "ordered": w.act("whistle", Vector2i(9, 5), 1)
+	if strategy == "ordered": w.act("stay", Vector2i(9, 5), 1)
 	if strategy == "guided":
 		w.act("wall", Vector2i(17, 7))
 		w.act("wall", Vector2i(17, 9))
@@ -43,7 +41,7 @@ static func compact(w) -> Dictionary:
 	log.sort_custom(func(a, b): return a.tick < b.tick)
 	return {"seed": w.seed_value, "stage_config": w.config, "initial_positions": w.initial_positions,
 		"result": w.result, "seconds": w.tick * Farm.DT, "dog_remaining_hp": w.animals[0].hp,
-		"milestones": w.milestones, "combat": w.combat_log,
+		"milestones": w.milestones, "combat": w.combat_log, "skill_log": w.skill_log, "metrics": w.metrics,
 		"decision_log": log, "decision_total": w.decision_count, "decision_log_omitted": w.decision_count - log.size(), "decision_counts": w.decision_counts,
 		"facilities": w.observation().structures, "soil_initial": 100, "soil_remaining": w.materials,
 		"soil_spent_net": 100 - w.materials, "actions_summary": counts}
