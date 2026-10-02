@@ -7,7 +7,7 @@ const W = 25
 const H = 17
 const DT = 0.25
 const NEST = Vector2i(20, 12)
-const PRICES = {"hen": 30, "feed": 8, "shelter": 28, "fence": 24, "soil": 15}
+const Shop = preload("res://game/shop_table.gd")
 const Rules = preload("res://game/rules.gd")
 const BUILD = Rules.BUILD
 const ORDERS = ["auto", "stay", "wander", "rest", "attack_target", "whistle"]
@@ -21,7 +21,12 @@ var phase = "prepare"
 var result = ""
 var paused = false
 var command_power = 10.0
-var materials = 100 # Soil only; Gold is never spent by construction or repair.
+var materials = 100 # Compatibility alias for soil; all costs carry an explicit ResourceType.
+var wood = 0
+var stone = 0
+var shop_stock: Array = []
+var shop_log: Array = []
+var nature_config: Dictionary
 var next_structure_id = 1
 var combat_log: Array = []
 var decision_log: Array = []
@@ -53,14 +58,18 @@ var entries: Array = []
 var metrics = {"repelled": 0, "stolen": 0, "structure_damage": 0, "commands": 0.0,
 	"eggs_produced": 0, "eggs_collected": 0, "barks": 0, "fed": 0, "coins": 0,
 	"captures": 0, "rescues": 0, "built": 0, "destroyed": 0, "orders": 0, "interrupted": 0, "repaired": 0, "soil_repair": 0,
-	"bark_casts": 0, "bark_targets": 0, "weed_spawned": 0, "mushroom_spawned": 0, "weed_collected": 0, "mushroom_collected": 0, "mushrooms_used": 0, "mushroom_healing": 0}
+	"bark_casts": 0, "bark_targets": 0, "weed_spawned": 0, "mushroom_spawned": 0, "weed_collected": 0, "mushroom_collected": 0, "stump_spawned": 0, "stump_collected": 0, "nature_rolls": 0, "mushrooms_used": 0, "mushroom_healing": 0}
 
 static func new_campaign() -> Dictionary:
-	return {"stage": 1, "gold": 12, "feed": 4, "eggs": 0, "mushrooms": 0, "shelter": false,
-		"fence": 0, "resources": {"soil": 100}, "facilities": [], "next_structure_id": 1, "animals": [{"id": 1, "category": "dog", "species": "shiba", "lv": 1, "xp": 0, "loyalty": 75}]}
+	return {"stage": 1, "gold": 12, "eggs": 0, "mushrooms": 0, "shelter": false,
+		"fence": 0, "resources": {"soil": 100, "wood": 0, "stone": 0}, "items": {"dog_food": 2, "hen_food": 0}, "unlocked_blueprints": [], "facilities": [], "next_structure_id": 1, "animals": [{"id": 1, "category": "dog", "species": "shiba", "lv": 1, "xp": 0, "loyalty": 75}]}
 
 func _init(data: Dictionary = {}, seed_number: int = 17, stage_override: Dictionary = {}):
 	campaign = new_campaign() if data.is_empty() else data.duplicate(true)
+	for resource in Rules.RESOURCE_TYPES:
+		if not campaign.resources.has(resource): campaign.resources[resource] = 0
+	campaign.items = campaign.get("items", {"dog_food": 2, "hen_food": 0})
+	campaign.unlocked_blueprints = campaign.get("unlocked_blueprints", [])
 	checkpoint = campaign.duplicate(true)
 	stage = campaign.stage
 	seed_value = seed_number
@@ -68,7 +77,10 @@ func _init(data: Dictionary = {}, seed_number: int = 17, stage_override: Diction
 	nature_rng.seed = seed_number * 1009 + 9871
 	campaign.mushrooms = campaign.get("mushrooms", 0)
 	config = (StageData.STAGES[stage] if stage_override.is_empty() else stage_override).duplicate(true)
-	materials = campaign.get("resources", {"soil": 100}).soil
+	materials = campaign.resources.soil
+	wood = campaign.resources.wood
+	stone = campaign.resources.stone
+	nature_config = config.get("nature", Rules.NATURE).duplicate(true)
 	next_structure_id = campaign.get("next_structure_id", 1)
 	for saved in campaign.get("facilities", []):
 		var record = saved.duplicate(true)
@@ -161,7 +173,7 @@ func has_nest() -> bool:
 	return campaign.animals.any(func(a): return a.species == "hen")
 
 func can_build(kind: String, p: Vector2i) -> bool:
-	return phase == "defend" and not paused and BUILD.has(kind) and inside(p) and p not in entries and not (p == nest and has_nest()) and not occupied(p) and not live_structure(p) and materials >= BUILD[kind].cost
+	return phase == "defend" and not paused and BUILD.has(kind) and inside(p) and p not in entries and not (p == nest and has_nest()) and not occupied(p) and not live_structure(p) and BUILD[kind].get("blueprint", "") in ([""] + campaign.unlocked_blueprints) and resource_amount(BUILD[kind].get("resource", "soil")) >= BUILD[kind].cost
 
 func neighbors(p: Vector2i) -> Array:
 	return [p + Vector2i.RIGHT, p + Vector2i.LEFT, p + Vector2i.UP, p + Vector2i.DOWN]
@@ -235,10 +247,10 @@ func act(kind: String, p: Vector2i = Vector2i.ZERO, animal_id: int = -1) -> bool
 					accepted = true
 			elif BUILD.has(kind):
 				if can_build(kind, p):
-					materials -= BUILD[kind].cost
+					add_resource(BUILD[kind].get("resource", "soil"), -BUILD[kind].cost)
 					var hp: int = BUILD[kind].hp + (campaign.fence * 4 if kind == "build_gate" else 0)
 					structures[p] = {"id": next_structure_id, "kind": "gate" if kind == "build_gate" else kind,
-						"hp": 0, "max_hp": hp, "armor": 0, "open": false, "cost": BUILD[kind].cost,
+						"hp": 0, "max_hp": hp, "armor": 0, "open": false, "cost": BUILD[kind].cost, "resource": BUILD[kind].get("resource", "soil"),
 						"status": "building", "remaining": ceili(BUILD[kind].seconds / DT), "total_ticks": ceili(BUILD[kind].seconds / DT)}
 					next_structure_id += 1
 					natural.erase(p)
@@ -249,22 +261,19 @@ func act(kind: String, p: Vector2i = Vector2i.ZERO, animal_id: int = -1) -> bool
 			elif kind == "repair":
 				accepted = repair(p)
 			elif kind == "remove" and live_structure(p) and not occupied(p):
-				materials += dismantle_quote(p)
+				add_resource(structures[p].get("resource", "soil"), dismantle_quote(p))
 				structures[p].status = "removed"
 				structures[p].hp = 0
 				accepted = true
-			elif kind == "feed" and walkable(p) and command_power >= 3 and campaign.feed > 0:
-				campaign.feed -= 1
-				command_power -= 3
-				metrics.commands += 3
-				foods.append({"pos": p, "until": tick + 64})
-				accepted = true
+			elif Shop.FOOD.has(kind):
+				accepted = use_food(kind, animal_id, p)
 			elif kind == "collect" and natural.has(p):
 				var harvest: String = natural[p]
 				natural.erase(p)
 				metrics[harvest + "_collected"] += 1
 				if harvest == "weed": campaign.gold += Rules.NATURE.weed_gold
-				else: campaign.mushrooms += 1
+				elif harvest == "mushroom": campaign.mushrooms += 1
+				elif harvest == "stump": add_resource("wood", Rules.NATURE.stump_wood)
 				accepted = true
 			elif kind == "collect" and p == nest and eggs > 0:
 				campaign.eggs += eggs
@@ -376,15 +385,7 @@ func animal_step(a: Dictionary):
 	if a.rescuing: targets = carrier
 	var goal: Vector2i = a.home
 	var chasing = false
-	var food = foods.filter(func(f): return distance(a.pos, f.pos) <= 8)
-	if not a.rescuing and not food.is_empty() and a.stamina < 68:
-		goal = food[0].pos
-		a.state = "餌へ"
-		if a.pos == goal:
-			a.stamina = minf(100, a.stamina + 48)
-			foods.erase(food[0])
-			metrics.fed += 1
-	elif not a.rescuing and a.mode == "whistle" and a.pos != a.order:
+	if not a.rescuing and a.mode == "whistle" and a.pos != a.order:
 		goal = a.order
 		a.state = "呼び戻し"
 	elif not a.rescuing and a.stamina < 14:
@@ -420,6 +421,7 @@ func animal_step(a: Dictionary):
 			combat_log.append({"tick": tick, "source": "animal", "id": a.id, "target": enemy.id, "damage": a.attack_power})
 			if enemy.hp == 0:
 				enemy.flee = true
+				if stage == 1 and enemy.id == 0: grant_blueprint("kennel", enemy.pos)
 				release_keeper(enemy)
 				say("侵入者を追い返した！")
 			else:
@@ -622,9 +624,9 @@ func move_enemy(e: Dictionary, next: Vector2i):
 func interrupt_site(p: Vector2i):
 	if structures.has(p) and structures[p].status == "building":
 		structures[p].status = "interrupted"
-		materials += floori(structures[p].cost * Rules.INTERRUPT_REFUND)
+		add_resource(structures[p].get("resource", "soil"), floori(structures[p].cost * Rules.INTERRUPT_REFUND))
 		metrics.interrupted += 1
-		say("建設中断：接触により土を半分返却。")
+		say("建設中断：接触により建築素材を半分返却。")
 
 func construction_step():
 	# Actors move first: entry on the completion tick always interrupts, never entombs actors.
@@ -649,21 +651,22 @@ func repair_quote(p: Vector2i) -> Dictionary:
 	if not structures.has(p) or structures[p].status != "ready": return {"hp": 0, "cost": 0}
 	var b = structures[p]
 	var unit_cost: float = b.cost * Rules.REPAIR_FACTOR / b.max_hp
-	var recovery = mini(b.max_hp - b.hp, floori(materials / unit_cost))
+	var recovery = mini(b.max_hp - b.hp, floori(resource_amount(b.get("resource", "soil")) / unit_cost))
 	return {"hp": recovery, "cost": ceili(recovery * unit_cost)}
 
 func repair(p: Vector2i) -> bool:
 	if phase != "defend" or paused: return false
 	var quote = repair_quote(p)
 	if quote.hp <= 0: return false
-	materials -= quote.cost
+	add_resource(structures[p].get("resource", "soil"), -quote.cost)
 	structures[p].hp += quote.hp
 	metrics.repaired += quote.hp
-	metrics.soil_repair += quote.cost
+	var resource = structures[p].get("resource", "soil")
+	metrics[resource + "_repair"] = metrics.get(resource + "_repair", 0) + quote.cost
 	return true
 
 func persist_farm():
-	campaign.resources = {"soil": materials}
+	campaign.resources = resource_snapshot()
 	campaign.next_structure_id = next_structure_id
 	campaign.facilities = []
 	for p in structures:
@@ -690,7 +693,7 @@ func step():
 		if a.path.back() != a.pos: a.path.append(a.pos)
 	for e in enemies:
 		enemy_step(e)
-		if phase == "result": break
+		if phase != "defend": break
 	if phase == "defend": construction_step()
 	if tick % 8 == 0:
 		traces.append({"tick": tick, "stamina": snappedf(animals[0].stamina, 0.1), "eggs": eggs,
@@ -705,7 +708,7 @@ func step():
 func finish(won: bool):
 	if result != "": return
 	result = "win" if won else "loss"
-	phase = "result"
+	phase = "shop" if won else "result"
 	paused = false
 	var condition = float(animals[0].hp) / animals[0].max_hp
 	var rating = (35 if won else 0) + maxi(0, 25 - metrics.captures * 8) + roundi(condition * 20) + maxi(0, 10 - metrics.structure_damage / 3) + maxi(0, 10 - int(metrics.commands / 3))
@@ -731,32 +734,8 @@ func finish(won: bool):
 				if a.id == owned.id:
 					a.lv = owned.lv
 					a.xp = owned.xp
-		say("防衛成功！ 育成と購入をして次の日へ。")
-
-func buy(kind: String) -> bool:
-	if result != "win" or paused: return false
-	if kind == "sell_egg" and campaign.eggs > 0:
-		campaign.eggs -= 1
-		campaign.gold += 9
-		return true
-	if kind == "cook_egg" and campaign.eggs > 0:
-		campaign.eggs -= 1
-		campaign.feed += 2
-		return true
-	if not PRICES.has(kind) or campaign.gold < PRICES[kind]: return false
-	if kind == "hen" and campaign.animals.size() >= 2: return false
-	if kind == "shelter" and campaign.shelter: return false
-	if kind == "fence" and campaign.fence >= 1: return false
-	campaign.gold -= PRICES[kind]
-	match kind:
-		"hen": campaign.animals.append({"id": 2, "category": "bird", "species": "hen", "lv": 1, "xp": 0, "loyalty": 0})
-		"feed": campaign.feed += 3
-		"shelter": campaign.shelter = true
-		"fence": campaign.fence += 1
-		"soil":
-			materials += Rules.SOIL_PACK
-			campaign.resources.soil = materials
-	return true
+		shop_stock = Shop.generate(stage, seed_value, campaign.unlocked_blueprints)
+	say("防衛成功！ 育成と購入をして次の日へ。")
 
 func next_campaign() -> Dictionary:
 	var data = campaign.duplicate(true)
@@ -794,9 +773,9 @@ func observation() -> Dictionary:
 		"initial_campaign": checkpoint.duplicate(true),
 		"campaign": campaign.duplicate(true), "animals": positions, "raiders": raiders, "keeper": owner,
 		"metrics": metrics.duplicate(true), "score": score.duplicate(true), "structures": built, "materials": materials,
-		"combat": combat_log.duplicate(true), "resources": {"soil": materials}, "actions": actions.duplicate(true), "samples": traces.duplicate(true), "schedule": schedule,
+		"combat": combat_log.duplicate(true), "resources": resource_snapshot(), "shop_stock": shop_stock.duplicate(true), "shop_log": shop_log.duplicate(true), "actions": actions.duplicate(true), "samples": traces.duplicate(true), "schedule": schedule,
 		"ai_settings": Rules.AI, "decision_log": decision_log.duplicate(true), "decision_count": decision_count, "decision_counts": decision_counts.duplicate(true),
-		"bark_settings": Rules.BARK, "skill_log": skill_log.duplicate(true), "nature_settings": Rules.NATURE,
+		"bark_settings": Rules.BARK, "skill_log": skill_log.duplicate(true), "nature_settings": nature_config,
 		"natural": natural.keys().map(func(p): return {"pos": [p.x, p.y], "kind": natural[p]}), "mushrooms": campaign.mushrooms,
 		"initial_positions": initial_positions.duplicate(true), "milestones": milestones.duplicate(true), "stage_config": config.duplicate(true), "eggs": eggs, "command_power": command_power}
 
@@ -818,8 +797,54 @@ func try_bark(a: Dictionary):
 	skill_log.append({"tick": tick, "time": tick * DT, "actor": "shiba_%d" % a.id, "skill": "bark", "targets": targets, "ready_tick": a.next_bark})
 	if skill_log.size() > 64: skill_log.pop_front()
 
+func resource_snapshot() -> Dictionary:
+	return {"soil": materials, "wood": wood, "stone": stone}
+
+func resource_amount(kind: String) -> int:
+	return resource_snapshot().get(kind, 0)
+
+func add_resource(kind: String, amount: int):
+	match kind:
+		"soil": materials += amount
+		"wood": wood += amount
+		"stone": stone += amount
+	campaign.resources = resource_snapshot()
+
+func grant_blueprint(id: String, p: Vector2i):
+	if id in campaign.unlocked_blueprints: return
+	campaign.unlocked_blueprints.append(id)
+	campaign.items[id + "_plan"] = campaign.items.get(id + "_plan", 0) + 1
+	milestones.append({"tick": tick, "kind": "blueprint", "id": id, "pos": [p.x, p.y]})
+
+func use_food(kind: String, animal_id: int, p: Vector2i) -> bool:
+	if campaign.items.get(kind, 0) <= 0: return false
+	var food = Shop.FOOD[kind]
+	for a in animals:
+		if (a.id == animal_id or (animal_id < 0 and a.pos == p)) and a.placed and a.category == food.category and a.hp > 0 and a.hp < a.max_hp:
+			a.hp = mini(a.max_hp, a.hp + food.hp)
+			campaign.items[kind] -= 1
+			metrics.fed += 1
+			return true
+	return false
+
 func grow_nature():
-	if natural.size() >= Rules.NATURE.limit: return
+	metrics.nature_rolls += 1
+	if nature_rng.randf() >= nature_config.spawn_chance_per_second or natural.size() >= nature_config.limit: return
+	var choices = {}
+	var total = 0.0
+	for kind in nature_config.weights:
+		if metrics[kind + "_spawned"] < nature_config.caps[kind]:
+			choices[kind] = nature_config.weights[kind]
+			total += choices[kind]
+	if total <= 0: return
+	var roll = nature_rng.randf() * total
+	var kind = ""
+	for candidate in choices:
+		roll -= choices[candidate]
+		if roll <= 0:
+			kind = candidate
+			break
+	if kind == "": return
 	var sites = []
 	for y in range(1, H - 1):
 		for x in range(1, W - 1):
@@ -827,16 +852,62 @@ func grow_nature():
 			if walkable(p) and not occupied(p) and not live_structure(p) and not natural.has(p) and p not in entries and not (has_nest() and p == nest): sites.append(p)
 	if sites.is_empty(): return
 	var p = sites[nature_rng.randi_range(0, sites.size() - 1)]
-	var kind = "mushroom" if nature_rng.randf() < Rules.NATURE.mushroom_chance else "weed"
 	natural[p] = kind
 	metrics[kind + "_spawned"] += 1
 
 func heal_with_mushrooms():
-	for a in animals:
-		if not a.placed: continue
-		while campaign.mushrooms > 0 and a.hp < a.max_hp:
-			var restored = mini(Rules.NATURE.mushroom_hp, a.max_hp - a.hp)
-			a.hp += restored
-			campaign.mushrooms -= 1
-			metrics.mushrooms_used += 1
-			metrics.mushroom_healing += restored
+	while campaign.mushrooms > 0:
+		var candidates = animals.filter(func(a): return a.placed and a.hp > 0 and a.hp < a.max_hp)
+		if candidates.is_empty(): break
+		candidates.sort_custom(func(a, b): return a.id < b.id if a.hp * b.max_hp == b.hp * a.max_hp else a.hp * b.max_hp < b.hp * a.max_hp)
+		var a = candidates[0]
+		var restored = mini(Rules.NATURE.mushroom_hp, a.max_hp - a.hp)
+		a.hp += restored
+		campaign.mushrooms -= 1
+		metrics.mushrooms_used += 1
+		metrics.mushroom_healing += restored
+
+func item_count(id: String) -> int:
+	if id == "egg": return campaign.eggs
+	if id == "mushroom": return campaign.mushrooms
+	return campaign.items.get(id, 0)
+
+func add_item(id: String, count: int):
+	if id == "egg": campaign.eggs += count
+	elif id == "mushroom": campaign.mushrooms += count
+	else: campaign.items[id] = campaign.items.get(id, 0) + count
+
+func buy(id: String) -> bool:
+	if phase != "shop" or paused or not Shop.table().has(id): return false
+	var product = Shop.table()[id]
+	var available = shop_stock.filter(func(row): return row.product == id and row.remaining > 0)
+	if available.is_empty() or campaign.gold < product.BuyPrice: return false
+	var row = available[0]
+	campaign.gold -= product.BuyPrice
+	row.remaining -= 1
+	if product.Category == "animals":
+		var next_id = 1
+		for a in campaign.animals: next_id = maxi(next_id, a.id + 1)
+		campaign.animals.append({"id": next_id, "category": "dog" if id == "shiba" else "bird", "species": id, "lv": 1, "xp": 0, "loyalty": row.individual.loyalty, "traits": {}})
+	elif product.Category == "materials": add_resource(id, product.Amount)
+	else: add_item(id, product.Amount)
+	shop_log.append({"side": "buy", "product": id, "amount": product.Amount, "gold": -product.BuyPrice})
+	return true
+
+func sell(id: String, animal_id: int = -1) -> bool:
+	if phase != "shop" or paused or not Shop.table().has(id): return false
+	var p = Shop.table()[id]
+	if p.Category == "animals":
+		var found = campaign.animals.filter(func(a): return a.id == animal_id and a.species == id)
+		if found.is_empty() or campaign.animals.size() <= 1: return false
+		campaign.animals.erase(found[0]) # No last-animal softlock. Placed facilities are not sale inventory.
+	elif p.Category == "materials":
+		if resource_amount(id) < p.Amount: return false
+		add_resource(id, -p.Amount)
+	elif p.Category == "items":
+		if item_count(id) < p.Amount: return false
+		add_item(id, -p.Amount) # Registry is independent: selling a plan never revokes unlock.
+	else: return false
+	campaign.gold += p.SellPrice
+	shop_log.append({"side": "sell", "product": id, "animal_id": animal_id, "amount": p.Amount, "gold": p.SellPrice})
+	return true

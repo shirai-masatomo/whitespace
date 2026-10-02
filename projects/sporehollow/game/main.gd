@@ -3,9 +3,9 @@ const Farm = preload("res://game/world.gd")
 const FONT = preload("res://assets/fonts/ui_font.tres")
 const TILE = Vector2(48, 42)
 const GROUPS = ["建設", "動物", "回収"]
-const TOOLS = {"wall": "壁  10 / 1秒", "build_gate": "門  30（仮）", "repair": "修理", "gate": "門開閉", "remove": "解体", "kennel": "犬小屋 30（仮）",
-	"auto": "おまかせ", "stay": "待機", "wander": "徘徊", "rest": "休む", "collect": "草・キノコ・卵", "feed": "餌を置く"}
-const GROUP_TOOLS = [["wall", "build_gate", "kennel"], ["auto", "stay", "wander", "rest"], ["collect", "feed"]]
+const TOOLS = {"wall": "壁  10 / 1秒", "build_gate": "門  30（仮）", "repair": "修理", "gate": "門開閉", "remove": "解体", "kennel": "犬小屋 木20",
+	"auto": "おまかせ", "stay": "待機", "wander": "徘徊", "rest": "休む", "collect": "草・キノコ・卵", "dog_food": "犬用餌 HP+10", "hen_food": "鶏用餌 HP+8"}
+const GROUP_TOOLS = [["wall", "build_gate", "kennel"], ["auto", "stay", "wander", "rest"], ["collect", "dog_food", "hen_food"]]
 const BoardArt = preload("res://game/board_art.gd")
 var world = Farm.new({}, randi_range(1, 2147483646))
 var tool = "place_keeper"
@@ -13,6 +13,12 @@ var group = -1
 var selected_animal = -1
 var selected_animals: Array = []
 var selected_structures: Array = []
+var menu_open = false
+var menu_was_paused = false
+var menu: Control
+var shop_side = "buy"
+var shop_category = "animals"
+var shop_notice = ""
 var dragging = false
 var drag_start = Vector2.ZERO
 var selected: Dictionary = {}
@@ -77,6 +83,7 @@ func _ready():
 		add_button(controls, "group%d" % i, GROUPS[i], Rect2(16 + i * 122, 754, 116, 36), select_group.bind(i))
 	audio = preload("res://game/farm_audio.gd").new()
 	add_child(audio)
+	setup_menu()
 	refresh()
 	if "--automated" in OS.get_cmdline_user_args(): automated = true
 	if automated: get_window().unfocusable = true
@@ -115,7 +122,9 @@ func select_group(index: int):
 	group = index
 	selected.clear()
 	selected_structures.clear()
-	tool = "place_animal" if index == 1 and selected_animal >= 0 and world.animals.any(func(a): return a.id == selected_animal and not a.placed) else ""
+	tool = ""
+	selected_animal = -1
+	selected_animals.clear()
 	refresh()
 
 func select_tool(id: String, execute: bool = true):
@@ -147,7 +156,7 @@ func choose_animal(id: int, toggle: bool = false):
 	group = 1
 	selected_animal = selected_animals[0] if not selected_animals.is_empty() else -1
 	selected = {"kind": "animal", "id": selected_animal} if selected_animal >= 0 else {}
-	tool = "place_animal" if reserve else (tool if tool in GROUP_TOOLS[1] else "auto")
+	tool = "place_animal" if reserve else ""
 	refresh()
 
 func collectible(cell: Vector2i) -> bool:
@@ -171,10 +180,10 @@ func refresh():
 		palette.remove_child(child)
 		child.queue_free()
 	for id in buttons.keys():
-		if id not in ["pause", "speed", "home", "advance", "retry", "group0", "group1", "group2"]: buttons.erase(id)
+		if id not in ["pause", "speed", "home", "advance", "retry", "group0", "group1", "group2", "menu_resume", "menu_retry"]: buttons.erase(id)
 	buttons.pause.visible = world.phase == "defend"
 	buttons.speed.visible = world.phase == "defend"
-	buttons.home.visible = world.phase != "prepare"
+	buttons.home.visible = world.phase == "defend"
 	buttons.pause.text = "再開" if world.paused else "停止"
 	buttons.speed.text = "×%s" % speed
 	buttons.advance.visible = world.result == "win"
@@ -187,10 +196,8 @@ func refresh():
 	if world.phase == "prepare":
 		last_phase = world.phase
 		return
-	if world.result == "win":
-		var shop = [["hen", "鶏 30G"], ["soil", "土50 15G（仮）"], ["feed", "餌3 8G"], ["shelter", "休憩所 28G"], ["fence", "門補強 24G"], ["sell_egg", "卵を売る"], ["cook_egg", "卵を餌へ"]]
-		for i in range(shop.size()):
-			add_button(palette, "buy_" + shop[i][0], shop[i][1], Rect2(398 + (i % 3) * 164, 352 + (i / 3) * 46, 154, 38), purchase.bind(shop[i][0]))
+	if world.phase == "shop":
+		build_shop()
 	elif group == 1:
 		for i in range(world.animals.size()):
 			var a = world.animals[i]
@@ -203,8 +210,13 @@ func refresh():
 		for i in range(GROUP_TOOLS[group].size()):
 			var id = GROUP_TOOLS[group][i]
 			add_button(palette, id, TOOLS[id], Rect2(16 + i * 190, 704, 182, 36), select_tool.bind(id))
-			buttons[id].tooltip_text = {"wall": "壁：土10、建設1秒", "build_gate": "門：土30（仮）、建設1秒", "kennel": "犬小屋：土30・2秒（仮）。1匹専用、毎秒HP1回復", "collect": "雑草：1 Gold / キノコ：終了時HP5回復 / 卵：回収"}.get(id, TOOLS[id])
-			if id in ["wall", "build_gate", "kennel"]: buttons[id].icon = BoardArt.icon("soil")
+			buttons[id].tooltip_text = {"wall": "壁：土10、建設1秒", "build_gate": "門：土30（仮）、建設1秒", "kennel": "設計図で解放、木材20。1匹専用、毎秒HP1回復", "collect": "雑草：1 Gold / キノコ：終了時HP5回復 / 卵：回収"}.get(id, TOOLS[id])
+			if Farm.Shop.FOOD.has(id):
+				buttons[id].text += " ×%d" % world.item_count(id)
+			if id in ["wall", "build_gate", "kennel"]:
+				buttons[id].icon = BoardArt.icon("wood" if id == "kennel" else "soil")
+				buttons[id].disabled = id == "kennel" and "kennel" not in world.campaign.unlocked_blueprints
+				if buttons[id].disabled: buttons[id].text = "犬小屋：設計図が必要"
 		if group == 0 and selected.get("kind") == "structure":
 			add_button(palette, "repair", "E 修理", Rect2(596, 704, 116, 36), facility_action.bind("repair"))
 			add_button(palette, "remove", "Del 解体", Rect2(722, 704, 124, 36), facility_action.bind("remove"))
@@ -218,10 +230,10 @@ func facility_action(action: String):
 	if world.phase != "defend" or group != 0 or selected.get("kind") != "structure": return
 	var targets = selected_structures.duplicate() if action == "remove" else [selected.pos]
 	var count = 0
-	var before = world.materials
+	var before = world.resource_snapshot()
 	for cell in targets:
 		if world.act(action, cell): count += 1
-	notice(("%d施設を解体 → 土%d" % [count, world.materials - before] if action == "remove" else TOOLS[action] + "しました") if count else ("停止中は実行できません" if world.paused else "占有・耐久・土を確認してください"))
+	notice(("%d施設を解体 → %s" % [count, resource_text({"soil": world.materials - before.soil, "wood": world.wood - before.wood, "stone": world.stone - before.stone})] if action == "remove" else TOOLS[action] + "しました") if count else ("停止中は実行できません" if world.paused else "占有・耐久・土を確認してください"))
 	if action == "remove" and count:
 		selected_structures = selected_structures.filter(func(p): return world.live_structure(p))
 		selected = {"kind": "structure", "pos": selected_structures[0]} if not selected_structures.is_empty() else {}
@@ -234,6 +246,11 @@ func advance():
 	refresh()
 
 func reset_view():
+	menu_open = false
+	menu.visible = false
+	shop_side = "buy"
+	shop_category = "animals"
+	shop_notice = ""
 	group = -1
 	tool = "place_keeper"
 	selected_animal = -1
@@ -251,16 +268,15 @@ func reset_view():
 	gate_views.clear()
 	dust.clear()
 	alert_until = 0
+	message = ""
+	message_until = 0
+	message_until_tick = 0
 	accumulated = 0
 	recenter()
 
 func retry_stage():
 	world = Farm.new(world.checkpoint, world.seed_value)
 	reset_view()
-	refresh()
-
-func purchase(id: String):
-	notice("購入しました" if world.buy(id) else "購入できません")
 	refresh()
 
 func toggle_pause():
@@ -279,6 +295,11 @@ func screen_cell(p: Vector2) -> Vector2:
 	return get_canvas_transform() * center(p)
 
 func _input(event):
+	if event is InputEventKey and event.pressed and not event.echo and event.physical_keycode == KEY_ESCAPE:
+		toggle_menu()
+		get_viewport().set_input_as_handled()
+		return
+	if menu_open: return
 	if event is InputEventMouseMotion: pointer = event.position
 	if event is InputEventMouseButton:
 		pointer = event.position
@@ -311,14 +332,6 @@ func _input(event):
 			KEY_HOME: recenter()
 			KEY_F3: debug_view = not debug_view
 			KEY_F8: export_record()
-			KEY_ESCAPE:
-				group = -1
-				tool = "place_keeper" if world.phase == "prepare" else ""
-				selected.clear()
-				selected_animals.clear()
-				selected_animal = -1
-				dragging = false
-				refresh()
 			KEY_E: facility_action("repair")
 			KEY_DELETE: facility_action("remove")
 			KEY_1, KEY_2, KEY_3:
@@ -331,10 +344,11 @@ func pointer_over_ui() -> bool:
 	if pointer.y < 49 or pointer.y > 748: return true
 	if not selected.is_empty() and Rect2(16, 610, 422, 76).has_point(pointer): return true
 	for button in buttons.values():
-		if is_instance_valid(button) and button.visible and button.get_global_rect().has_point(pointer): return true
+		if is_instance_valid(button) and button.is_visible_in_tree() and button.get_global_rect().has_point(pointer): return true
 	return false
 
 func _unhandled_input(event):
+	if menu_open: return
 	if not (event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT): return
 	if dragging and not event.pressed:
 		dragging = false
@@ -359,8 +373,8 @@ func _unhandled_input(event):
 	var cell = Vector2i(get_canvas_transform().affine_inverse() * event.position / TILE)
 	if world.phase == "prepare":
 		if world.act("place", cell):
-			choose_animal(world.animals[0].id)
-			notice("未配置の動物を選んで出撃。出撃は任意です")
+			select_group(1)
+			message_until = 0
 		else: notice("ここには主人公を配置できません")
 		return
 	if world.phase != "defend": return
@@ -371,7 +385,10 @@ func _unhandled_input(event):
 	# Context selection takes precedence over the previously armed tool, even while paused.
 	for a in world.animals:
 		if a.placed and event.position.distance_to(get_canvas_transform() * actor_pixel("a%d" % a.id, a.pos)) < 25 * camera.zoom.x:
-			choose_animal(a.id, event.ctrl_pressed)
+			if Farm.Shop.FOOD.has(tool):
+				notice("餌で回復しました" if world.act(tool, a.pos, a.id) else "対象・在庫・HP・停止状態を確認")
+				refresh()
+			else: choose_animal(a.id, event.ctrl_pressed)
 			return
 	if world.live_structure(cell):
 		if not event.ctrl_pressed or group != 0 or selected.get("kind") != "structure": selected_structures.clear()
@@ -411,7 +428,7 @@ func _process(delta):
 	clock += delta
 	if not world.paused: visual_time += delta
 	var direction = Vector2(int(keys_down.get(KEY_D, false)) - int(keys_down.get(KEY_A, false)), int(keys_down.get(KEY_S, false)) - int(keys_down.get(KEY_W, false)))
-	camera.position += direction.normalized() * delta * 420
+	if not menu_open and world.phase != "shop": camera.position += direction.normalized() * delta * 420
 	var middle = Vector2(Farm.W, Farm.H) * TILE * 0.5
 	camera.position = camera.position.clamp(middle - Vector2(500, 360), middle + Vector2(500, 360))
 	if not world.paused and not automated and world.phase == "defend":
@@ -420,7 +437,7 @@ func _process(delta):
 			world.step()
 			accumulated -= Farm.DT
 	if last_phase != world.phase:
-		if world.phase == "result": play_alert(world.result)
+		if world.phase in ["result", "shop"]: play_alert("win" if world.result == "win" else "lose")
 		refresh()
 	audio.tension(world.phase == "defend" and world.enemies.any(func(e): return not e.done and not e.flee))
 	update_facility_effects(delta)
@@ -441,13 +458,13 @@ func _process(delta):
 	while seen_milestones < world.milestones.size():
 		var event = world.milestones[seen_milestones]
 		seen_milestones += 1
-		var names = {"auto_start": "敵の襲来に備えよ", "invasion": "！ 侵入者接近", "restrained": "主人公が拘束された！", "carried": "主人公が連れ去られている！", "rescue": "主人公を救出した！", "animal_danger": "動物のHPが危険！"}
+		var names = {"auto_start": "敵の襲来に備えよ", "invasion": "！ 侵入者接近", "restrained": "主人公が拘束された！", "carried": "主人公が連れ去られている！", "rescue": "主人公を救出した！", "animal_danger": "動物のHPが危険！", "blueprint": "犬小屋を建築できるようになった"}
 		if names.has(event.kind):
 			alert_text = names[event.kind]
 			alert_kind = event.kind
 			alert_until = clock + (4.0 if event.kind in ["carried", "restrained"] else 2.5)
 			alert_until_tick = event.tick + (16 if event.kind in ["carried", "restrained"] else 10)
-			play_alert(event.kind)
+			play_alert("rescue" if event.kind == "blueprint" else event.kind)
 	while seen_skills < world.skill_log.size():
 		seen_skills += 1
 		play_alert("bark")
@@ -645,7 +662,11 @@ func _draw():
 			draw_arc(p + Vector2(25, -8), 15, -0.8, 0.8, 8, Color("ffe3a0"), 2)
 		elif a.state == "様子見": label_on(self, p + Vector2(17, -24), "…", 18, Color("ffe3a0"))
 		if group == 1 and a.id in selected_animals:
-			draw_line(p + Vector2(-11, 21), p + Vector2(11, 21), Color("ffe2a3"), 3)
+			for side in [-1, 1]:
+				for vertical in [-1, 1]:
+					var corner = p + Vector2(side * 23, vertical * 24)
+					draw_line(corner, corner - Vector2(side * 7, 0), Color("ffe2a3"), 3 if a.id == selected_animal else 2)
+					draw_line(corner, corner - Vector2(0, vertical * 7), Color("ffe2a3"), 3 if a.id == selected_animal else 2)
 		if debug_view: label_on(self, p + Vector2(25, 0), a.state, 12)
 	for hit in hit_effects:
 		var p = center(view_positions.get(hit.target, Vector2.ZERO))
@@ -696,6 +717,9 @@ func _draw():
 func panel(area: Rect2): hud.draw_rect(area, Color(0.09, 0.16, 0.12, 0.94))
 
 func draw_hud():
+	if world.phase == "shop":
+		draw_shop()
+		return
 	if dragging:
 		var start = get_canvas_transform() * drag_start
 		var area = Rect2(start, pointer - start).abs()
@@ -708,14 +732,13 @@ func draw_hud():
 		return
 	panel(Rect2(0, 0, 1280, 49))
 	label_on(hud, Vector2(18, 31), "STAGE %d" % world.stage, 20)
-	BoardArt.draw_resource(hud, Vector2(162, 24), "soil")
-	label_on(hud, Vector2(181, 31), str(world.materials), 20)
-	BoardArt.draw_resource(hud, Vector2(262, 24), "gold")
-	label_on(hud, Vector2(281, 31), str(world.campaign.gold), 20)
-	label_on(hud, Vector2(342, 31), "木材 —", 17, Color("acb99a"))
-	if Rect2(142, 0, 272, 49).has_point(pointer):
+	for i in range(4):
+		var kind = ["soil", "wood", "stone", "gold"][i]
+		BoardArt.draw_resource(hud, Vector2(162 + i * 115, 24), kind)
+		label_on(hud, Vector2(181 + i * 115, 31), str(world.campaign.gold if kind == "gold" else world.resource_amount(kind)), 20)
+	if Rect2(142, 0, 480, 49).has_point(pointer):
 		panel(Rect2(145, 50, 390, 30))
-		label_on(hud, Vector2(154, 71), "土：建築・修理 / 木材：未使用 / キノコ %d" % world.campaign.mushrooms, 14)
+		label_on(hud, Vector2(154, 71), "土 / 木材 / 石 / Gold  ·  キノコ %d" % world.campaign.mushrooms, 14)
 	label_on(hud, Vector2(796, 31), "%02d:%02d   %s" % [int(world.tick * Farm.DT) / 60, int(world.tick * Farm.DT) % 60, "PAUSE" if world.paused else ""], 20)
 	panel(Rect2(0, 748, 1280, 52))
 	if world.phase == "prepare":
@@ -749,11 +772,11 @@ func draw_hud():
 	elif selected.get("kind") == "structure" and world.structures.has(selected.pos):
 		var b = world.structures[selected.pos]
 		var quote = world.repair_quote(selected.pos)
-		details = "%s Lv1   耐久 %d/%d\n[E] 修理 / [Del] 解体 → 土%d" % [{"wall": "壁", "gate": "門", "kennel": "犬小屋"}.get(b.kind, b.kind), b.hp, b.max_hp, world.dismantle_quote(selected.pos)]
+		details = "%s Lv1   耐久 %d/%d\n[E] 修理 / [Del] 解体 → %s" % [{"wall": "壁", "gate": "門", "kennel": "犬小屋"}.get(b.kind, b.kind), b.hp, b.max_hp, resource_text({b.get("resource", "soil"): world.dismantle_quote(selected.pos)})]
 		if selected_structures.size() > 1:
-			var refund = 0
-			for cell in selected_structures: refund += world.dismantle_quote(cell)
-			details = "%d施設を選択\n[Del] 一括解体 → 土%d" % [selected_structures.size(), refund]
+			var refund = {"soil": 0, "wood": 0, "stone": 0}
+			for cell in selected_structures: refund[world.structures[cell].get("resource", "soil")] += world.dismantle_quote(cell)
+			details = "%d施設を選択\n[Del] 一括解体 → %s" % [selected_structures.size(), resource_text(refund)]
 	if details != "":
 		panel(Rect2(16, 610, 422, 76))
 		var lines = details.split("\n")
@@ -762,14 +785,14 @@ func draw_hud():
 	if tool == "collect" and world.natural.has(cell) and not pointer_over_ui():
 		var p = pointer.clamp(Vector2(8, 120), Vector2(950, 628)) + Vector2(15, -45)
 		panel(Rect2(p, Vector2(270, 34)))
-		label_on(hud, p + Vector2(10, 24), "雑草：回収で +1 Gold" if world.natural[cell] == "weed" else "キノコ：終了時に HP +5", 16)
+		label_on(hud, p + Vector2(10, 24), {"weed": "雑草：回収で +1 Gold", "mushroom": "キノコ：終了時に HP +5", "stump": "切り株：回収で 木材 +20"}[world.natural[cell]], 16)
 	if tool == "repair" and world.structures.has(cell) and not pointer_over_ui():
 		var b = world.structures[cell]
 		var quote = world.repair_quote(cell)
 		var p = pointer.clamp(Vector2(8, 120), Vector2(950, 628)) + Vector2(15, -55)
 		panel(Rect2(p, Vector2(266, 56)))
 		label_on(hud, p + Vector2(10, 22), "%s %d/%d → 修理 +%d" % [{"wall": "壁", "gate": "門", "kennel": "犬小屋"}.get(b.kind, b.kind), b.hp, b.max_hp, quote.hp], 16)
-		label_on(hud, p + Vector2(10, 45), "土 %d%s" % [quote.cost, " / 停止中は不可" if world.paused else ""], 16)
+		label_on(hud, p + Vector2(10, 45), "%s%s" % [resource_text({b.get("resource", "soil"): quote.cost}), " / 停止中は不可" if world.paused else ""], 16)
 	if world.phase == "result":
 		panel(Rect2(362, 225, 554, 340))
 		label_on(hud, Vector2(398, 271), "守りきった！" if world.result == "win" else "主人公が連れ去られた", 27)
@@ -818,3 +841,98 @@ func draw_hen(p: Vector2):
 	rect(p + Vector2(11, -10), Vector2(2, 2), "243d36")
 	rect(p + Vector2(-6, 11), Vector2(3, 6), "d69a4e")
 	rect(p + Vector2(4, 11), Vector2(3, 6), "d69a4e")
+
+func resource_text(values: Dictionary) -> String:
+	var parts: Array[String] = []
+	for kind in values:
+		if values[kind] != 0: parts.append("%s%d" % [{"soil": "土", "wood": "木", "stone": "石"}.get(kind, kind), values[kind]])
+	return "0" if parts.is_empty() else " / ".join(parts)
+
+func setup_menu():
+	menu = Control.new()
+	menu.size = Vector2(1280, 800)
+	menu.mouse_filter = Control.MOUSE_FILTER_STOP
+	controls.add_child(menu)
+	var shade = ColorRect.new()
+	shade.size = Vector2(1280, 800)
+	shade.color = Color(0.03, 0.08, 0.06, 0.88)
+	menu.add_child(shade)
+	var title = Label.new()
+	title.text = "PAUSE"
+	title.position = Vector2(570, 250)
+	title.add_theme_font_size_override("font_size", 28)
+	menu.add_child(title)
+	add_button(menu, "menu_resume", "続ける", Rect2(480, 320, 320, 50), toggle_menu)
+	add_button(menu, "menu_retry", "Stageを最初から", Rect2(480, 390, 320, 50), restart_menu)
+	menu.visible = false
+
+func toggle_menu():
+	if menu_open:
+		world.paused = menu_was_paused
+		menu_open = false
+	else:
+		menu_was_paused = world.paused
+		world.paused = true
+		menu_open = true
+		keys_down.clear()
+		dragging = false
+	menu.visible = menu_open
+	menu.move_to_front()
+	refresh()
+
+func restart_menu():
+	retry_stage()
+
+func shop_choose(side: String, category: String):
+	shop_side = side
+	shop_category = category
+	shop_notice = ""
+	refresh()
+
+func trade(id: String, animal_id: int = -1):
+	var ok = world.buy(id) if shop_side == "buy" else world.sell(id, animal_id)
+	shop_notice = ("購入しました" if shop_side == "buy" else "売却しました") if ok else "Gold・在庫を確認（最後の動物は売却不可）"
+	if ok: play_alert("collect")
+	refresh()
+
+func shop_rows() -> Array:
+	var rows = []
+	var table = Farm.Shop.table()
+	if shop_side == "buy":
+		for row in world.shop_stock:
+			if table[row.product].Category == shop_category: rows.append({"id": row.product, "count": row.remaining, "animal_id": -1})
+	elif shop_category == "animals":
+		for a in world.campaign.animals: rows.append({"id": a.species, "count": 1, "animal_id": a.id, "lv": a.lv})
+	else:
+		for p in table.values():
+			if p.Category != shop_category: continue
+			var count = world.resource_amount(p.ProductID) / p.Amount if shop_category == "materials" else world.item_count(p.ProductID)
+			if count > 0: rows.append({"id": p.ProductID, "count": count, "animal_id": -1})
+	return rows
+
+func build_shop():
+	add_button(palette, "shop_buy", "買う", Rect2(235, 150, 390, 48), shop_choose.bind("buy", shop_category))
+	add_button(palette, "shop_sell", "売る", Rect2(645, 150, 390, 48), shop_choose.bind("sell", shop_category))
+	buttons["shop_" + shop_side].modulate = Color("ffe0a0")
+	var i = 0
+	for category in Farm.Shop.CATEGORIES:
+		add_button(palette, "category_" + category, Farm.Shop.CATEGORIES[category], Rect2(235 + i * 205, 215, 185, 40), shop_choose.bind(shop_side, category))
+		buttons["category_" + category].modulate = Color("ffe0a0") if category == shop_category else Color.WHITE
+		i += 1
+	i = 0
+	for row in shop_rows():
+		var p = Farm.Shop.table()[row.id]
+		var price = p.BuyPrice if shop_side == "buy" else p.SellPrice
+		var name = p.Name if row.animal_id < 0 else "%s Lv%d #%d" % ["柴犬" if row.id == "shiba" else "鶏", row.lv, row.animal_id]
+		add_button(palette, "trade_" + row.id + "_" + str(row.animal_id), "%s   %dG   ×%d" % [name, price, row.count], Rect2(255, 285 + i * 56, 740, 46), trade.bind(row.id, row.animal_id))
+		buttons["trade_" + row.id + "_" + str(row.animal_id)].disabled = row.count <= 0
+		i += 1
+
+func draw_shop():
+	hud.draw_rect(Rect2(0, 0, 1280, 800), Color("20372e"))
+	label_on(hud, Vector2(235, 62), "防衛成功  /  購入・育成", 28)
+	label_on(hud, Vector2(235, 104), "評価 %d  EXP +%d   Gold %d" % [world.score.rating, world.score.xp, world.campaign.gold], 19)
+	label_on(hud, Vector2(670, 104), resource_text(world.resource_snapshot()), 19)
+	if shop_rows().is_empty(): label_on(hud, Vector2(280, 316), "現在の商品・在庫はありません", 20)
+	label_on(hud, Vector2(255, 676), shop_notice, 18)
+	label_on(hud, Vector2(235, 727), "犬小屋：木材20で建築可能" if "kennel" in world.campaign.unlocked_blueprints else "設計図で新しい建築を解放", 18)

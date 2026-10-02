@@ -52,10 +52,18 @@ static func draw_ground(c: CanvasItem, world, tile: Vector2, time: float = 0):
 			c.draw_rect(Rect2(p - Vector2(4, 13), Vector2(8, 5)), Color("d0b17a"))
 	for entry in world.entries:
 		var p = (Vector2(entry) + Vector2.ONE * 0.5) * tile
-		# Open wooden gate leaves folded along the fence, not across the path.
+		var warning = world.phase == "defend" and (world.next_attack_seconds() >= 0 and world.next_attack_seconds() < 3 or world.enemies.any(func(e): return not e.done and not e.flee and e.entry == entry))
+		# Heavy paired gate posts, open leaves and pennants; actual entrance remains walkable.
 		for side in [-1, 1]:
-			c.draw_rect(Rect2(p + Vector2(-tile.x, side * 28 - 8), Vector2(10, 24)), Color("d0b17a"))
-			c.draw_line(p + Vector2(-tile.x + 4, side * 23), p + Vector2(-tile.x + 4, side * 44), Color("ab8351"), 6)
+			var post = p + Vector2(-24, side * 33)
+			c.draw_rect(Rect2(post + Vector2(-3, 4), Vector2(20, 32)), Color(0.14, 0.22, 0.12, 0.4))
+			c.draw_rect(Rect2(post - Vector2(8, 19), Vector2(16, 40)), Color("876044"))
+			c.draw_rect(Rect2(post - Vector2(10, 21), Vector2(20, 7)), Color("d2b67e"))
+			c.draw_line(post, post + Vector2(28, side * 15), Color("b49665"), 6)
+			c.draw_line(post + Vector2(0, 9), post + Vector2(28, side * 15 + 9), Color("94714d"), 5)
+			c.draw_line(post + Vector2(0, -16), post + Vector2(0, -49), Color("e0cca2"), 2)
+			var flutter = sin(time * (9 if warning else 2) + side) * (5 if warning else 2)
+			c.draw_colored_polygon(PackedVector2Array([post + Vector2(1, -48), post + Vector2(23, -42 + flutter), post + Vector2(1, -34)]), Color("e89559") if warning else Color("9ab6b0"))
 	# Quiet props outside the playable area; no invisible obstacles on the board.
 	for x in [3, 9, 19, 23]:
 		var p = Vector2(x * tile.x, -8)
@@ -82,13 +90,25 @@ static func draw_resource(c: CanvasItem, p: Vector2, kind: String):
 			c.draw_circle(p + Vector2(-1, -2), 8, Color("ebc767"))
 			c.draw_line(p + Vector2(-2, -7), p + Vector2(-2, 3), Color("fff0ac"), 2)
 		"soil":
-			c.draw_colored_polygon(PackedVector2Array([p + Vector2(-12, 7), p + Vector2(-7, -3), p + Vector2(1, -10), p + Vector2(8, -2), p + Vector2(13, 7)]), Color("b58d59"))
-			c.draw_line(p + Vector2(-6, -1), p + Vector2(0, -6), Color("e0bb7c"), 3)
+			c.draw_rect(Rect2(p - Vector2(11, 9), Vector2(22, 19)), Color("987045"))
+			c.draw_rect(Rect2(p - Vector2(11, 10), Vector2(22, 5)), Color("97b168"))
+			c.draw_line(p + Vector2(-9, 1), p + Vector2(9, 3), Color("c3a277"), 3)
+		"wood", "stump":
+			if kind == "stump":
+				c.draw_rect(Rect2(p + Vector2(-10, -3), Vector2(20, 18)), Color("84593d"))
+				c.draw_circle(p + Vector2(0, -4), 11, Color("c6a277"))
+				c.draw_arc(p + Vector2(0, -4), 6, 0, TAU, 12, Color("927149"), 2)
+			else:
+				for y in [-4, 5]:
+					c.draw_line(p + Vector2(-9, y), p + Vector2(7, y - 4), Color("8b6040"), 8)
+					c.draw_circle(p + Vector2(8, y - 4), 4, Color("dbc094"))
+		"stone":
+			for offset in [Vector2(-7, 4), Vector2(6, 5), Vector2(0, -5)]:
+				c.draw_colored_polygon(PackedVector2Array([p + offset + Vector2(-7, 4), p + offset + Vector2(-4, -4), p + offset + Vector2(4, -6), p + offset + Vector2(7, 4)]), Color("9caaa7"))
 
-static func icon(_kind: String) -> Texture2D:
+static func icon(kind: String) -> Texture2D:
 	var img = Image.create(20, 20, false, Image.FORMAT_RGBA8)
 	for y in range(4, 18):
 		for x in range(2, 18):
-			if abs(x - 10) <= y * 0.6:
-				img.set_pixel(x, y, Color("d5af71") if y < 12 else Color("a47b4e"))
+			img.set_pixel(x, y, (Color("98ac6d") if y < 8 else Color("a47b4e")) if kind == "soil" else Color("c6a277"))
 	return ImageTexture.create_from_image(img)

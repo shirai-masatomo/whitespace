@@ -22,7 +22,7 @@ func _initialize(): call_deferred("run")
 func run():
 	var w = Farm.new()
 	check(w.structures.is_empty() and w.animals.size() == 1 and w.animals[0].lv == 1, "Empty farm and one Lv1 Shiba")
-	check(w.materials == 100 and w.campaign.resources == {"soil": 100}, "Only soil as building material")
+	check(w.materials == 100 and w.campaign.resources == {"soil": 100, "wood": 0, "stone": 0}, "Three resource types, only soil funded initially")
 	check(not w.act("start"), "Placement before clock")
 	w.step()
 	check(w.tick == 0, "Placement freezes clock")
@@ -181,7 +181,7 @@ func run():
 	check(idle.result == "loss" and idle.keeper.state == "abducted" and idle.spawned == 1, "Poor placement can lose to one kidnapper")
 	check(active.result == "win" and active.spawned == 1 and active.metrics.built == 2 and active.metrics.orders > 0, "Good placement wins with building and commands")
 	check(active.score.xp > 0 and active.score.gold > 0 and active.campaign.animals[0].lv == 2, "Win grants XP, level and Gold")
-	check(active.buy("hen") and Farm.new(active.next_campaign()).animals.size() == 2, "Shop animal persists into Stage2")
+	check(active.buy(active.shop_stock[0].product) and Farm.new(active.next_campaign()).animals.size() == 2, "Shop animal persists into Stage2")
 	check(idle.score.xp == 0 and not idle.buy("hen"), "Failure doesn't grant rewards or shop")
 	var hits = active.combat_log.filter(func(c): return c.source == "animal")
 	for i in range(1, hits.size()): check(hits[i].tick - hits[i - 1].tick >= 5, "Dog interval1.2s quantized to1.25s")
@@ -225,12 +225,13 @@ func run():
 	production.act("pause")
 	check(production.act("collect", production.nest) and production.campaign.eggs == 1, "Collection transfers inventory")
 	production.finish(true)
-	check(production.buy("sell_egg") and production.campaign.eggs == 0, "Product economy preserved")
+	check(production.sell("egg") and production.campaign.eggs == 0, "Product economy preserved")
 	var occupied_future = started()
 	occupied_future.act("wall", Farm.NEST)
 	occupied_future.act("wall", Vector2i(1, 12))
 	advance(occupied_future, 4)
 	occupied_future.finish(true)
+	occupied_future.shop_stock.append({"product": "hen", "remaining": 1, "individual": {"loyalty": 0}})
 	occupied_future.buy("hen")
 	var inherited = Farm.new(occupied_future.next_campaign())
 	check(inherited.nest != Farm.NEST and not inherited.animals[1].placed and inherited.walkable(inherited.nest), "Purchased hen doesn't spawn in retained wall")
@@ -306,6 +307,7 @@ func run():
 	check_new_rules()
 	check_rest_and_kennels()
 	check_dismantle()
+	check_economy()
 	print("PASS: %d Stage1 and campaign checks" % checks)
 	quit()
 
@@ -373,7 +375,7 @@ func check_new_rules():
 	check(n.natural.is_empty(), "Paused world cannot grow resources")
 	n.act("pause")
 	advance(n, 16)
-	check(n.natural.size() == 1, "Nature first grows after4s")
+	check(n.metrics.nature_rolls == 4, "Four game seconds perform four probability rolls")
 	var snapshot = Farm.new({}, n.seed_value)
 	Trial.deploy(snapshot)
 	advance(snapshot, 16)
@@ -402,6 +404,8 @@ func check_new_rules():
 
 func quiet_farm(two_dogs: bool = false):
 	var data = Farm.new_campaign()
+	data.unlocked_blueprints = ["kennel"] # Isolated rest/kennel fixture.
+	data.resources.wood = 100
 	if two_dogs:
 		var second = data.animals[0].duplicate(true)
 		second.id = 2
@@ -504,3 +508,80 @@ func check_rest_and_kennels():
 	w.structures[Vector2i(13, 8)].status = "destroyed"
 	advance(w, 8)
 	check(w.animals[0].kennel_id == -1 and w.animals[0].mode == "rest", "Destroyed house releases claim, rest continues in place")
+
+func check_economy():
+	var locked = started()
+	locked.add_resource("wood", 20)
+	check(not locked.act("kennel", Vector2i(13, 8)), "Wood alone cannot bypass blueprint")
+	locked.grant_blueprint("kennel", Vector2i(12, 8))
+	check(locked.act("kennel", Vector2i(13, 8)) and locked.wood == 0 and locked.materials == 100, "Unlocked kennel consumes wood20 only")
+	advance(locked, 8)
+	locked.structures[Vector2i(13, 8)].hp = 6
+	locked.add_resource("wood", 10)
+	check(locked.act("repair", Vector2i(13, 8)) and locked.wood == 0, "Kennel repair consumes wood proportional to damage")
+	check(locked.act("remove", Vector2i(13, 8)) and locked.wood == 16 and locked.materials == 100, "Kennel dismantle refunds wood, not soil")
+	var won = Trial.run_trial("front", 17)
+	check(won.phase == "shop" and won.campaign.unlocked_blueprints == ["kennel"] and won.item_count("kennel_plan") == 1, "First Stage1 defeat auto awards blueprint and enters shop")
+	won.grant_blueprint("kennel", Vector2i.ZERO)
+	check(won.item_count("kennel_plan") == 1, "Blueprint grant idempotent")
+	check(won.sell("kennel_plan") and "kennel" in won.campaign.unlocked_blueprints, "Selling plan never revokes ability")
+	check(won.buy("wood") and won.wood == 20, "Shop buys wood pack")
+	var profit = won.campaign.gold
+	check(won.sell("wood") and won.buy("wood") and won.campaign.gold < profit, "Resource roundtrip loses Gold")
+	check(won.buy("dog_food"), "Category food stocked")
+	var after = Farm.new(won.next_campaign(), 18)
+	check(after.wood == 20 and "kennel" in after.campaign.unlocked_blueprints and after.campaign.items.dog_food == 3, "Resources, blueprint and food persist")
+	var retry = Farm.new(won.checkpoint, won.seed_value)
+	check(retry.phase == "prepare" and retry.materials == 100 and retry.wood == 0 and retry.campaign.gold == 12 and retry.campaign.unlocked_blueprints.is_empty(), "Restart discards Stage rewards and purchases")
+	var assortments = {}
+	for seed_id in range(1, 33):
+		var list = Farm.Shop.generate(1, seed_id, [])
+		check(list == Farm.Shop.generate(1, seed_id, []), "Shop seed reproducible")
+		check(list.filter(func(row): return row.product in ["shiba", "hen"]).size() == 1, "Exactly one randomly stocked animal")
+		assortments[list[0].product] = true
+	check(assortments.size() == 2, "Seeds produce different animal stock")
+	var trade = Trial.run_trial("front", 17)
+	trade.campaign.gold = 500
+	var species = trade.shop_stock[0].product
+	var initial_gold = trade.campaign.gold
+	check(trade.buy(species) and trade.campaign.animals.size() == 2, "Animal stock creates an individual")
+	check(not trade.buy(species), "Purchased animal stock cannot be bought twice")
+	check(trade.sell(species, trade.campaign.animals[1].id) and trade.campaign.gold < initial_gold, "Animal resale loses Gold")
+	check(not trade.sell("shiba", 1), "Last owned animal cannot be sold")
+	initial_gold = trade.campaign.gold
+	var food_before = trade.item_count("hen_food")
+	check(trade.buy("hen_food") and trade.sell("hen_food") and trade.item_count("hen_food") == food_before and trade.campaign.gold < initial_gold, "Item roundtrip loses Gold and preserves quantity")
+	trade.paused = true
+	check(not trade.buy("soil") and not trade.sell("soil"), "Paused shop rejects world mutations")
+	for p in Farm.Shop.table().values(): check(p.BuyPrice > p.SellPrice, "Every product buys above its sale price")
+	var n = quiet_farm()
+	n.nature_config.spawn_chance_per_second = 1.0
+	for i in range(1000):
+		n.step()
+		for p in n.natural.keys(): n.act("collect", p)
+	check(n.metrics.nature_rolls == 250, "One draw per game second")
+	for kind in n.nature_config.caps: check(n.metrics[kind + "_spawned"] == n.nature_config.caps[kind], "Harvest does not reopen stage spawn cap")
+	check(n.metrics.stump_collected == 1 and n.wood == 120, "Rare stump grants wood20")
+	var rolls = n.metrics.nature_rolls
+	n.paused = true
+	advance(n, 40)
+	check(n.metrics.nature_rolls == rolls, "Pause never rolls nature")
+	var f = quiet_farm(true)
+	f.animals[0].hp = 20
+	f.animals[1].hp = 21
+	f.campaign.mushrooms = 2
+	f.heal_with_mushrooms()
+	check(f.animals[0].hp == 25 and f.animals[1].hp == 26, "Mushroom recomputes lowest ratio after each use")
+	f.animals[0].hp = 0
+	f.animals[1].hp = 40
+	f.campaign.mushrooms = 1
+	f.heal_with_mushrooms()
+	check(f.campaign.mushrooms == 1 and f.animals[0].hp == 0, "Only deployed survivors receive mushrooms")
+	f.animals[0].hp = 20
+	var meals = f.campaign.items.dog_food
+	f.paused = true
+	check(not f.act("dog_food", f.animals[0].pos, 1), "Food disallowed while paused")
+	f.paused = false
+	check(f.act("dog_food", f.animals[0].pos, 1) and f.animals[0].hp == 30 and f.campaign.items.dog_food == meals - 1, "Dog food heals compatible animal")
+	f.campaign.items.hen_food = 1
+	check(not f.act("hen_food", f.animals[0].pos, 1) and f.campaign.items.hen_food == 1, "Wrong-category food not consumed")
