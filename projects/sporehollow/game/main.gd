@@ -4,16 +4,17 @@ const FONT = preload("res://assets/fonts/ui_font.tres")
 const ORIGIN = Vector2(28, 174)
 const TILE = 32.0
 const TOOL_INFO = {
-	"wall": ["1  壁 / 資材3", "空きマスに壁。犬も敵も通れず、敵は壊せます。"],
-	"build_gate": ["2  門 / 資材5", "閉じた門を建築。開閉モードで犬の通り道を作ろう。"],
+	"wall": ["1  壁 / 土20・1秒", "空きマスに壁。犬も敵も通れず、敵は壊せます。"],
+	"build_gate": ["2  門 / 土30（仮）", "閉じた門を建築。開閉モードで犬の通り道を作ろう。"],
 	"gate": ["3  門を開閉", "門をクリックして開閉。上に誰かいる間は操作できません。"],
 	"feed": ["4  餌 / 指示力3", "餌1個を設置。疲れた犬が自分で向かい回復します。"],
 	"remove": ["5  撤去 / 一部返却", "壁・門を撤去。耐久に応じ資材の半分以下を回収。"],
 	"collect": ["6  卵を回収", "巣をクリックして卵を所持品へ。停止中は回収できません。"],
-	"whistle": ["Q  笛で呼ぶ", "地点を指定。犬は近くの敵に反応しつつ、その場所を守ります。"],
+	"whistle": ["Q  笛で呼ぶ", "地点へ呼び戻す。反撃中の敵から離し、落ち着いてから再追跡。救出中は本能を優先。"],
 	"stay": ["W  待機", "地点で待機。隣の敵に吠えますが、追いかけません。"],
 	"wander": ["E  徘徊", "地点の周辺を歩き回り、侵入者を見つけます。"],
-	"attack_target": ["R  敵を指定", "侵入者をクリック。犬がその相手を追い返しに向かいます。"]}
+	"attack_target": ["R  敵を指定", "侵入者をクリック。犬がその相手を追い返しに向かいます。"],
+	"repair": ["7  修理 / 土を消費", "施設をクリック。必要な土を消費して修理。不足時は可能な分だけ。停止中は不可。"]}
 var world = Farm.new()
 var tool = "wall"
 var speed = 1
@@ -37,13 +38,13 @@ func _ready():
 	for id in TOOL_INFO:
 		add_button(controls, id, TOOL_INFO[id][0], Rect2(860 + (index % 2) * 200, 304 + (index / 2) * 42, 190, 36), select_tool.bind(id))
 		index += 1
-	add_button(controls, "auto", "A  おまかせに戻す", Rect2(860, 514, 390, 34), auto_order)
+	add_button(controls, "auto", "A  おまかせに戻す", Rect2(1060, 514, 190, 36), auto_order)
 	add_button(controls, "advance", "位置を選び、時計を開始", Rect2(860, 585, 390, 46), advance)
 	add_button(controls, "pause", "停止 / Space", Rect2(860, 640, 188, 38), toggle_pause)
 	add_button(controls, "speed", "速度 ×1", Rect2(1062, 640, 188, 38), toggle_speed)
 	add_button(controls, "retry", "この日の最初から", Rect2(860, 689, 188, 38), retry_stage)
 	add_button(controls, "export", "観察JSON", Rect2(1062, 689, 188, 38), export_record)
-	var shop = [["hen", "鶏を迎える  30G"], ["feed_buy", "餌 ×3  8G"], ["shelter", "巣周辺の休憩所 28G"], ["fence", "新設門の補強 24G"], ["sell_egg", "卵 → 9G"], ["cook_egg", "卵 → 餌 ×2"]]
+	var shop = [["hen", "鶏を迎える  30G"], ["feed_buy", "餌 ×3  8G"], ["shelter", "巣周辺の休憩所 28G"], ["fence", "新設門の補強 24G"], ["sell_egg", "卵 → 9G"], ["cook_egg", "卵 → 餌 ×2"], ["soil", "土50（仮） 15G"]]
 	for i in range(shop.size()):
 		add_button(controls, shop[i][0], shop[i][1], Rect2(860 + (i % 2) * 200, 380 + (i / 2) * 51, 190, 42), purchase.bind(shop[i][0]))
 	refresh_buttons()
@@ -89,7 +90,7 @@ func advance():
 		world = Farm.new(world.next_campaign(), world.seed_value + 1) if world.stage == 1 else Farm.new()
 		view_positions.clear()
 		accumulated = 0
-		message = "新しい空き地です。牧場主を配置してから時計を動かそう。"
+		message = "牧場の施設・損傷・土を引き継ぎました。牧場主を配置して時計を動かそう。"
 	refresh_buttons()
 
 func toggle_pause():
@@ -121,11 +122,11 @@ func export_record():
 
 func refresh_buttons():
 	var shop = world.result == "win"
-	for id in ["hen", "feed_buy", "shelter", "fence", "sell_egg", "cook_egg"]: buttons[id].visible = shop
+	for id in ["hen", "feed_buy", "shelter", "fence", "sell_egg", "cook_egg", "soil"]: buttons[id].visible = shop
 	for id in TOOL_INFO:
 		buttons[id].visible = world.phase != "result"
 		buttons[id].modulate = Color("ffe2a0") if tool == id else Color.WHITE
-		buttons[id].disabled = world.phase != "defend" or (world.paused and id not in Farm.ORDERS)
+		buttons[id].disabled = world.phase != "defend"
 	buttons.auto.visible = world.phase != "result"
 	buttons.auto.disabled = world.phase != "defend"
 	buttons.advance.disabled = world.phase == "defend" or world.result == "loss" or (world.phase == "prepare" and not world.keeper.placed)
@@ -135,9 +136,22 @@ func refresh_buttons():
 	buttons.speed.text = "速度 ×%d" % speed
 	last_phase = world.phase
 
+func _input(event):
+	if event is InputEventMouseButton and event.pressed:
+		if event.button_index in [MOUSE_BUTTON_WHEEL_UP, MOUSE_BUTTON_WHEEL_DOWN]:
+			var modes = TOOL_INFO.keys()
+			var index = modes.find(tool)
+			select_tool(modes[posmod(index + (1 if event.button_index == MOUSE_BUTTON_WHEEL_DOWN else -1), modes.size())])
+			get_viewport().set_input_as_handled()
+		elif event.button_index == MOUSE_BUTTON_RIGHT:
+			tool = ""
+			message = "選択を解除しました。ホイールでモードを選べます。"
+			refresh_buttons()
+			get_viewport().set_input_as_handled()
+
 func _unhandled_input(event):
 	if event is InputEventKey and event.pressed and not event.echo:
-		var keys = {KEY_1: "wall", KEY_2: "build_gate", KEY_3: "gate", KEY_4: "feed", KEY_5: "remove", KEY_6: "collect", KEY_Q: "whistle", KEY_W: "stay", KEY_E: "wander", KEY_R: "attack_target"}
+		var keys = {KEY_1: "wall", KEY_2: "build_gate", KEY_3: "gate", KEY_4: "feed", KEY_5: "remove", KEY_6: "collect", KEY_7: "repair", KEY_Q: "whistle", KEY_W: "stay", KEY_E: "wander", KEY_R: "attack_target"}
 		if keys.has(event.physical_keycode): select_tool(keys[event.physical_keycode])
 		if event.physical_keycode == KEY_SPACE: toggle_pause()
 		if event.physical_keycode == KEY_A: auto_order()
@@ -184,7 +198,7 @@ func _draw():
 	label_at(Vector2(30, 35), "WHITESPACE  /  SMALL FARM STORIES", 13, Color("9bb9a1"))
 	label_at(Vector2(28, 77), "ホイッスル牧場", 32)
 	label_at(Vector2(315, 76), "築く。まかせる。連れ去りから救う。", 17, Color("b7ccb4"))
-	label_at(Vector2(861, 45), "DAY %02d  /  資材 %d" % [world.stage, world.materials], 22)
+	label_at(Vector2(861, 45), "DAY %02d  /  土 %d" % [world.stage, world.materials], 22)
 	label_at(Vector2(861, 77), "Gold %d   餌 %d   卵 %d + 巣%d" % [world.campaign.gold, world.campaign.feed, world.campaign.eggs, world.eggs], 18, Color("f1cd85"))
 	rect(Vector2(28, 98), Vector2(800, 55), "263f37")
 	var status = "位置を選ぶ → 時計開始"
@@ -210,6 +224,17 @@ func _draw():
 	for p in world.structures:
 		var b = world.structures[p]
 		var c = center(p)
+		if b.status in ["destroyed", "interrupted", "removed"]:
+			if b.status != "removed":
+				rect(c + Vector2(-10, 5), Vector2(9, 7), "817057")
+				rect(c + Vector2(3, 7), Vector2(7, 5), "817057")
+			continue
+		if b.status == "building":
+			draw_rect(Rect2(c - Vector2(14, 14), Vector2(28, 28)), Color("f6cf83"), false, 2)
+			draw_line(c - Vector2(10, 10), c + Vector2(10, 10), Color("f6cf83"), 2)
+			label_at(c + Vector2(-18, -19), "建設中", 12)
+			rect(c + Vector2(-14, 16), Vector2(28.0 * (1.0 - float(b.remaining) / b.total_ticks), 4), "a8eee0")
+			continue
 		if b.kind == "wall":
 			rect(c - Vector2(14, 13), Vector2(28, 27), "71674c")
 			rect(c - Vector2(14, 13), Vector2(28, 5), "b2a481")
@@ -241,7 +266,8 @@ func _draw():
 		rect(p + Vector2(-6, -10), Vector2(3, 2), "fff3ce")
 		rect(p + Vector2(4, -10), Vector2(3, 2), "fff3ce")
 		label_at(p + Vector2(-24, -44 if e.carry == "keeper" else -28), e.state, 13)
-		for i in range(e.morale): draw_circle(p + Vector2(-10 + i * 6, 21), 2, Color("e8b98f"))
+		rect(p + Vector2(-15, 21), Vector2(30, 4), "433a44")
+		rect(p + Vector2(-15, 21), Vector2(30.0 * e.hp / e.max_hp, 4), "e8b98f")
 	var owner = center(world.keeper.pos)
 	if world.keeper.carrier >= 0: owner += Vector2(17, 5)
 	draw_circle(owner + Vector2(0, -8), 9, Color("f3cda2"))
@@ -259,17 +285,20 @@ func _draw():
 		label_at(p + Vector2(-25, -29), "%s Lv%d" % ["柴犬" if a.species == "shiba" else "鶏", a.lv], 14)
 		if a.species == "shiba":
 			rect(p + Vector2(-17, 22), Vector2(34, 4), "35523f")
-			rect(p + Vector2(-17, 22), Vector2(a.stamina * 0.34, 4), "efd187")
+			rect(p + Vector2(-17, 22), Vector2(34.0 * a.hp / a.max_hp, 4), "efd187")
 			if not a.pending.is_empty(): draw_arc(center(a.pending.pos) if a.pending.kind != "auto" else p, 17, 0, TAU, 24, Color("fff0bd"), 2)
 	# A placement preview makes construction legible without mutating the model.
 	var mouse = get_global_mouse_position()
 	var cell = Vector2i((mouse - ORIGIN) / TILE)
+	if world.structures.has(cell):
+		var hovered = world.structures[cell]
+		label_at(Vector2(40, 733), "%s  耐久 %d/%d" % ["壁" if hovered.kind == "wall" else "門", hovered.hp, hovered.max_hp], 13)
 	if world.inside(cell) and Rect2(ORIGIN, Vector2(Farm.W, Farm.H) * TILE).has_point(mouse):
 		var tint = Color(1, 0.95, 0.7, 0.6)
 		if Farm.BUILD.has(tool) and world.phase == "defend": tint = Color("a9ecd1") if world.can_build(tool, cell) else Color("e88c78")
 		draw_rect(Rect2(ORIGIN + Vector2(cell) * TILE, Vector2.ONE * TILE), tint, false, 2)
 	label_at(Vector2(40, 750), message.left(65), 15, Color("decba8"))
-	label_at(Vector2(40, 780), "数字キー：建築・操作   Q/W/E/R：動物指示   A：おまかせ   Space：停止     ※直接攻撃なし", 14, Color("9db69b"))
+	label_at(Vector2(40, 780), "ホイール：モード選択   左：実行   右：解除   Space：停止   現在：" + (TOOL_INFO[tool][0] if TOOL_INFO.has(tool) else "選択なし"), 14, Color("9db69b"))
 	draw_sidebar()
 
 func draw_sidebar():
@@ -277,9 +306,9 @@ func draw_sidebar():
 	var dog = world.animals[0]
 	if world.result == "":
 		label_at(Vector2(868, 133), "柴犬 Lv%d / %s" % [dog.lv, dog.state], 22)
-		label_at(Vector2(868, 168), "元気 %d%%   忠誠 %d   指示力 %.0f" % [dog.stamina, dog.loyalty, world.command_power], 18)
-		label_at(Vector2(868, 202), "牧場主を入口の外へ連れ去られると敗北。", 16)
-		label_at(Vector2(868, 229), "拘束中でも、犬で追い返せば救出できます。", 16)
+		label_at(Vector2(868, 168), "HP %d/%d   元気 %d%%   忠誠 %d" % [dog.hp, dog.max_hp, dog.stamina, dog.loyalty], 18)
+		label_at(Vector2(868, 202), "反撃されたら笛で退避 → 敵を再指定。", 16)
+		label_at(Vector2(868, 229), "連れ去り中は救出本能：犬の速度1.5倍。", 16)
 		label_at(Vector2(868, 261), "停止 = 動物指示だけ / 再開 = 建築・実行", 16, Color("f3d08c"))
 		label_at(Vector2(868, 290), "壁HP8 / 門HP%d   入り口には建築不可" % (6 + world.campaign.fence * 4), 14)
 		if not world.events.is_empty(): label_at(Vector2(868, 572), world.events.back().text.left(29), 13, Color("d2c9a7"))
@@ -287,9 +316,9 @@ func draw_sidebar():
 		label_at(Vector2(868, 143), "防衛成功 / 購入と育成" if world.result == "win" else "防衛失敗 / もう一度", 24)
 		label_at(Vector2(868, 186), "評価 %d点   EXP +%d   Gold +%d" % [world.score.rating, world.score.xp, world.score.gold], 18)
 		label_at(Vector2(868, 225), "追返 %d / 拘束 %d / 救出 %d" % [world.metrics.repelled, world.metrics.captures, world.metrics.rescues], 18)
-		label_at(Vector2(868, 262), "建築 %d / 破壊 %d / 元気 %d%%" % [world.metrics.built, world.metrics.destroyed, world.score.condition], 18)
+		label_at(Vector2(868, 262), "建築 %d / 破壊 %d / 残HP %d%%" % [world.metrics.built, world.metrics.destroyed, world.score.condition], 18)
 		label_at(Vector2(868, 308), "柴犬 Lv%d   EXP %d / %d" % [dog.lv, dog.xp, dog.lv * 20], 20, Color("f5d395"))
-		label_at(Vector2(868, 349), "育成と購入は引継ぎ。次の日は新しい空き地。", 15)
+		label_at(Vector2(868, 349), "配置・損傷・土も持越し。土購入か育成か。", 15)
 func draw_dog(p: Vector2):
 	# Original small pixel silhouette: curled tail, cream muzzle and pointed ears.
 	rect(p + Vector2(-14, -7), Vector2(26, 19), "bd713c")
