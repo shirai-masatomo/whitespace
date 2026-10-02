@@ -21,7 +21,7 @@ e3af959の固定中央柵・固定門2つ・主人公不在・資源2個盗難�
 - 壁8/8・3/8・破壊済みと工事途中を、購入→次Stageへ回復なしで維持。リトライ用チェックポイントと共有参照しない。
 - 標準配置(19,8)で放置 **0/4勝（55秒で誘拐）**、壁だけ0/4勝、退避/再指示4/4勝（残HP15）、壁＋指示4/4勝（残HP20）。4 seedsはStage1では同じ結果になるので、多様な攻略の証明ではない。
 - 画面外・無音・非フォーカスの実GPUで入力確認：配置/時計、ホイール/右解除、工事表示、停止時拒否、修理、門、笛/敵指定、購入、施設を残したStage2、リトライ。代表画面はignored `artifacts/construction.png`, `defense.png`, `shop.png`。
-- `dev.ps1 check`成功：import・87項目・16試行・Windows export・生成exeのheadless起動。GitHub CIはpush後に対象commitを確認する。
+- `dev.ps1 check`成功：import・87項目・16試行・Windows export・生成exeのheadless起動。実装commit `1aba461` の[GitHub CI](https://github.com/shirai-masatomo/whitespace/actions/runs/37003883620)も成功。
 
 ## 面白さの現在地・未確認
 
