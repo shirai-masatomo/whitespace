@@ -114,6 +114,12 @@ func can_build(kind: String, p: Vector2i) -> bool:
 func neighbors(p: Vector2i) -> Array:
 	return [p + Vector2i.RIGHT, p + Vector2i.LEFT, p + Vector2i.UP, p + Vector2i.DOWN]
 
+func exit_for(entry: Vector2i) -> Vector2i:
+	# Configured entrance determines the return edge, not a fixed left-hand exit.
+	var exits = [Vector2i(0, entry.y), Vector2i(W - 1, entry.y), Vector2i(entry.x, 0), Vector2i(entry.x, H - 1)]
+	exits.sort_custom(func(a, b): return distance(entry, a) < distance(entry, b))
+	return exits[0]
+
 func next_step(start: Vector2i, goal: Vector2i, raider: bool = false) -> Vector2i:
 	if start == goal: return start
 	var frontier = [start]
@@ -126,7 +132,7 @@ func next_step(start: Vector2i, goal: Vector2i, raider: bool = false) -> Vector2
 		var p: Vector2i = frontier.pop_at(best)
 		if p == goal: return first[p]
 		for n in neighbors(p):
-			var exit_cell = raider and n == goal and n.x == 0 and Vector2i(1, n.y) in entries
+			var exit_cell = raider and n == goal and entries.any(func(entry): return exit_for(entry) == n)
 			if not inside(n) and not exit_cell: continue
 			var blocked = structures.has(n) and not structures[n].open
 			if blocked and not raider: continue

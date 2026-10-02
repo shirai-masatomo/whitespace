@@ -141,6 +141,19 @@ func run():
 		w.enemy_step(e)
 	check(w.result == "loss" and w.keeper.pos.x == 0, "Loss exactly when carried outside, not one tick later")
 	check(w.campaign.gold == w.checkpoint.gold and w.score.xp == 0, "Failed abduction defense gives no clear rewards")
+	for pair in [[Vector2i(23, 8), Vector2i(24, 8)], [Vector2i(12, 1), Vector2i(12, 0)], [Vector2i(12, 15), Vector2i(12, 16)]]:
+		var side_config = Farm.StageData.STAGES[1].duplicate(true)
+		side_config.waves = [{"start_seconds": 0.0, "count": 1, "interval_seconds": 1.0, "jitter_seconds": 0.0, "role": "kidnapper", "entries": [[pair[0].x, pair[0].y]], "morale": 4}]
+		w = Farm.new({}, 17, side_config)
+		w.act("place", Vector2i(19, 8))
+		w.act("start")
+		w.spawn_enemy(event_at(pair[0]))
+		e = w.enemies[0]
+		w.keeper.pos = pair[0]
+		for at in [3, 6, 8]:
+			w.tick = at
+			w.enemy_step(e)
+		check(w.keeper.pos == pair[1] and w.result == "loss", "Capture exits through configured entrance edge")
 
 	# Configuration and seed are explicit inputs, including repeating waves.
 	var cfg = Farm.StageData.STAGES[1].duplicate(true)

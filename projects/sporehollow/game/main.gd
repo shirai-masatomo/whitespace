@@ -195,6 +195,7 @@ func _draw():
 	label_at(Vector2(43, 132), status, 20)
 	var upcoming = world.next_attack_seconds()
 	label_at(Vector2(490, 132), "次の襲来 %.0f秒 / 経過 %.0f秒" % [upcoming, world.tick * Farm.DT] if upcoming >= 0 else "全員を追い返そう / %.0f秒" % (world.tick * Farm.DT), 16)
+	var exits = world.entries.map(func(entry): return world.exit_for(entry))
 	for y in range(Farm.H):
 		for x in range(Farm.W):
 			var q = Vector2i(x, y)
@@ -203,7 +204,7 @@ func _draw():
 			rect(p, Vector2(TILE, TILE), "345447" if border else ("608252" if (x + y) % 2 == 0 else "658757"))
 			if not border and (x * 7 + y * 3) % 5 == 0:
 				rect(p + Vector2(7, 19), Vector2(2, 6), "92a86a")
-			if q in world.entries or Vector2i(1, y) in world.entries and x == 0:
+			if q in world.entries or q in exits:
 				rect(p, Vector2(TILE, TILE), "b19867")
 	for entry in world.entries: label_at(center(entry) + Vector2(-22, -22), "入口", 14)
 	for p in world.structures:
