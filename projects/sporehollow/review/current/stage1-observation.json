@@ -12,6 +12,7 @@
 			"collect": 2,
 			"early_clear": 1,
 			"invasion": 1,
+			"merchant": 2,
 			"rescue": 1,
 			"win": 1
 		},
@@ -508,7 +509,10 @@
 	},
 	"branch": "codex/sporehollow-prototype",
 	"checks": {
+		"arrival_before_shop": true,
+		"cinematic_hides_ui": true,
 		"click_only_animal_candidates": true,
+		"dawn_to_arrival": true,
 		"hen_has_no_commands": true,
 		"manual_blueprint": true,
 		"manual_exp_training": true,
@@ -516,10 +520,11 @@
 		"named_animal": true,
 		"no_accidental_deployment": true,
 		"no_shiba_or_food_sale": true,
+		"retired_enemy_deselected": true,
 		"three_way_shop": true,
 		"work_after_clear": true
 	},
-	"commit_sha": "f5b59d1b641d983607832cec1fee8b3aaa427fbe",
+	"commit_sha": "315419b499814900ac4d8d36bc9159959937bf30",
 	"dawn": {
 		"ai_settings": {
 			"counter": {
@@ -1039,6 +1044,15 @@
 	},
 	"screenshots": {
 		"animal": {
+			"alert": "今夜の襲撃を退けた",
+			"camera": [
+				600.0,
+				357.0
+			],
+			"keeper_state": "free",
+			"tick": 226
+		},
+		"arrival": {
 			"alert": "",
 			"camera": [
 				600.0,
@@ -1047,23 +1061,14 @@
 			"keeper_state": "free",
 			"tick": 0
 		},
-		"combat": {
+		"dawn": {
 			"alert": "",
 			"camera": [
 				600.0,
 				357.0
 			],
 			"keeper_state": "free",
-			"tick": 187
-		},
-		"early_clear": {
-			"alert": "今夜の襲撃を退けた",
-			"camera": [
-				600.0,
-				357.0
-			],
-			"keeper_state": "free",
-			"tick": 226
+			"tick": 238
 		},
 		"shop": {
 			"alert": "",
