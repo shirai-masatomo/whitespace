@@ -6,7 +6,7 @@ const GROUPS = ["建設", "修理・施設", "動物", "回収"]
 const TOOLS = {"wall": "壁  土20 / 1秒", "build_gate": "門  土30（仮）", "repair": "修理", "gate": "門開閉", "remove": "撤去",
 	"auto": "おまかせ", "stay": "待機", "wander": "徘徊", "attack_target": "敵を指定", "whistle": "呼び戻す", "collect": "卵を回収", "feed": "餌を置く"}
 const GROUP_TOOLS = [["wall", "build_gate"], ["repair", "gate", "remove"], ["auto", "stay", "wander", "attack_target", "whistle"], ["collect", "feed"]]
-var world = Farm.new()
+var world = Farm.new({}, randi_range(1, 2147483646))
 var tool = "place_keeper"
 var group = -1
 var selected_animal = -1
@@ -33,6 +33,8 @@ var alert_until = 0.0
 var alert_until_tick = 0
 var alert_kind = ""
 var seen_milestones = 0
+var seen_combat = 0
+var hit_effects: Array = []
 var last_phase = ""
 var audio: AudioStreamPlayer
 
@@ -99,7 +101,7 @@ func notice(text_value: String):
 func select_group(index: int):
 	group = index
 	selected.clear()
-	tool = "place_animal" if world.phase == "prepare" and index == 2 else ""
+	tool = "place_animal" if index == 2 and selected_animal >= 0 and world.animals.any(func(a): return a.id == selected_animal and not a.placed) else ""
 	refresh()
 
 func select_tool(id: String):
@@ -112,7 +114,7 @@ func select_tool(id: String):
 func choose_animal(id: int):
 	selected_animal = id
 	selected = {"kind": "animal", "id": id}
-	tool = "place_animal" if world.phase == "prepare" else ""
+	tool = "place_animal" if world.animals.any(func(a): return a.id == id and not a.placed) else ""
 	refresh()
 
 func refresh():
@@ -130,11 +132,12 @@ func refresh():
 	buttons.advance.disabled = world.phase == "prepare" and not world.ready_to_start()
 	buttons.advance.text = "時計開始" if world.phase == "prepare" else ("Stage 2へ" if world.stage == 1 else "新しい牧場")
 	buttons.retry.visible = world.phase == "result"
+	buttons.group2.text = "動物配置" if world.phase == "prepare" or tool == "place_animal" else "動物"
 	for i in range(4):
 		buttons["group%d" % i].visible = world.phase != "result"
 		buttons["group%d" % i].disabled = world.phase == "prepare" and i != 2
 		buttons["group%d" % i].modulate = Color("ffe0a0") if i == group else Color.WHITE
-	if world.phase == "prepare":
+	if world.phase == "prepare" and not world.keeper.placed:
 		add_button(palette, "keeper", "主人公を配置", Rect2(512, 754, 154, 36), select_tool.bind("place_keeper"))
 	if world.result == "win":
 		var shop = [["hen", "鶏 30G"], ["soil", "土50 15G（仮）"], ["feed", "餌3 8G"], ["shelter", "休憩所 28G"], ["fence", "門補強 24G"], ["sell_egg", "卵を売る"], ["cook_egg", "卵を餌へ"]]
@@ -143,8 +146,8 @@ func refresh():
 	elif group == 2:
 		for i in range(world.animals.size()):
 			var a = world.animals[i]
-			add_button(palette, "animal%d" % a.id, "%s Lv%d%s" % ["柴犬" if a.species == "shiba" else "鶏", a.lv, " ✓" if a.placed else " 未配置"], Rect2(16 + i * 196, 704, 188, 36), choose_animal.bind(a.id))
-		if world.phase == "defend" and selected_animal >= 0:
+			add_button(palette, "animal%d" % a.id, "%s Lv%d%s" % ["柴犬" if a.species == "shiba" else "鶏", a.lv, " 出撃済" if a.placed else " 未配置"], Rect2(16 + i * 196, 704, 188, 36), choose_animal.bind(a.id))
+		if world.phase == "defend" and world.animals.any(func(a): return a.id == selected_animal and a.placed):
 			for i in range(GROUP_TOOLS[2].size()):
 				var id = GROUP_TOOLS[2][i]
 				add_button(palette, id, TOOLS[id], Rect2(220 + i * 126, 704, 118, 36), select_tool.bind(id))
@@ -162,12 +165,9 @@ func refresh():
 func advance():
 	if world.phase == "prepare":
 		if world.act("start"):
-			group = -1
-			tool = ""
-			selected.clear()
-			notice("防衛開始")
+			notice("時計開始。未配置の動物はいつでも出撃できます")
 	elif world.result == "win":
-		world = Farm.new(world.next_campaign(), world.seed_value + 1) if world.stage == 1 else Farm.new()
+		world = Farm.new(world.next_campaign(), world.seed_value + 1) if world.stage == 1 else Farm.new({}, randi_range(1, 2147483646))
 		reset_view()
 	refresh()
 
@@ -178,6 +178,8 @@ func reset_view():
 	selected.clear()
 	view_positions.clear()
 	seen_milestones = 0
+	seen_combat = 0
+	hit_effects.clear()
 	alert_until = 0
 	accumulated = 0
 	recenter()
@@ -253,14 +255,10 @@ func _unhandled_input(event):
 		if tool == "place_keeper":
 			if world.act("place", cell):
 				select_group(2)
-				notice("動物を一覧から選び、配置してください")
+				notice("時計を開始できます。動物の出撃は任意です")
 			else: notice("ここには主人公を配置できません")
 		elif tool == "place_animal" and selected_animal >= 0:
-			if world.act("place_animal", cell, selected_animal):
-				tool = ""
-				notice("配置しました。時計開始前なら再配置できます")
-				refresh()
-			else: notice("ここには動物を配置できません")
+			notice("時計開始後に出撃できます")
 		return
 	if world.phase != "defend": return
 	if tool != "":
@@ -269,8 +267,12 @@ func _unhandled_input(event):
 				if not e.done and not e.flee and event.position.distance_to(screen_cell(view_positions.get("e%d" % e.id, Vector2(e.pos)))) < 23:
 					cell = e.pos
 					break
-		if not world.act(tool, cell, selected_animal if tool in Farm.ORDERS else -1):
+		if not world.act(tool, cell, selected_animal if tool in Farm.ORDERS or tool == "place_animal" else -1):
 			notice("停止中は動物指示だけ" if world.paused else "対象・土・占有状態を確認してください")
+		elif tool == "place_animal":
+			tool = ""
+			notice("出撃しました。移動は指示で行います")
+			refresh()
 		elif tool in Farm.ORDERS: notice("指示を予約しました")
 		elif tool == "repair": notice("修理しました")
 	else:
@@ -304,6 +306,12 @@ func _process(delta):
 	for a in world.animals:
 		if a.placed: smooth_actor("a%d" % a.id, a.pos, delta)
 	for e in world.enemies: smooth_actor("e%d" % e.id, e.pos, delta)
+	while seen_combat < world.combat_log.size():
+		var hit = world.combat_log[seen_combat]
+		seen_combat += 1
+		if hit.source in ["animal", "enemy"]:
+			hit_effects.append({"source": ("a" if hit.source == "animal" else "e") + str(hit.id), "target": ("e" if hit.source == "animal" else "a") + str(hit.target), "at": clock})
+	hit_effects = hit_effects.filter(func(hit): return clock - hit.at < 0.3)
 	while seen_milestones < world.milestones.size():
 		var event = world.milestones[seen_milestones]
 		seen_milestones += 1
@@ -319,6 +327,25 @@ func _process(delta):
 
 func smooth_actor(id: String, p: Vector2i, delta: float):
 	view_positions[id] = Vector2(p) if not view_positions.has(id) else view_positions[id].lerp(Vector2(p), minf(delta * 14, 1))
+
+func actor_pixel(id: String, cell: Vector2i) -> Vector2:
+	var p = center(view_positions.get(id, Vector2(cell)))
+	# Presentation only: slight side separation plus a short lunge/recoil. No stagger or tick changes.
+	if id.begins_with("a"):
+		for e in world.enemies:
+			if not e.done and Farm.distance(cell, e.pos) <= 1: p.x -= 8
+	else:
+		for a in world.animals:
+			if a.placed and Farm.distance(cell, a.pos) <= 1: p.x += 8
+	for hit in hit_effects:
+		if id not in [hit.source, hit.target]: continue
+		var from = center(view_positions.get(hit.source, Vector2(cell)))
+		var to = center(view_positions.get(hit.target, Vector2(cell)))
+		var direction = (to - from).normalized()
+		if direction == Vector2.ZERO: direction = Vector2.RIGHT
+		var pulse = sin(clampf((clock - hit.at) / 0.3, 0, 1) * PI)
+		p += direction * pulse * (7 if id == hit.source else 4)
+	return p
 
 func alert_visible() -> bool:
 	return clock < alert_until and world.tick < alert_until_tick
@@ -406,14 +433,16 @@ func _draw():
 		draw_circle(center(f.pos), 6, Color("70513b"))
 	for e in world.enemies:
 		if e.done: continue
-		var p = center(view_positions.get("e%d" % e.id, Vector2(e.pos)))
+		var p = actor_pixel("e%d" % e.id, e.pos)
 		rect(p + Vector2(-10, -5), Vector2(21, 23), "87768e" if not e.flee else "98947f")
 		draw_circle(p + Vector2(0, -10), 10, Color("d2b396"))
 		rect(p + Vector2(-12, -18), Vector2(24, 8), "454453")
 		rect(p + Vector2(-9, -11), Vector2(18, 5), "474954")
 		rect(p + Vector2(-6, -10), Vector2(3, 2), "fff3ce")
 		rect(p + Vector2(4, -10), Vector2(3, 2), "fff3ce")
-		if e.hp < e.max_hp: draw_rect(Rect2(p + Vector2(-16, 23), Vector2(32.0 * e.hp / e.max_hp, 3)), Color("e3aa88"))
+		if e.hp < e.max_hp:
+			draw_rect(Rect2(p + Vector2(-18, -48), Vector2(36, 4)), Color("3e4534"))
+			draw_rect(Rect2(p + Vector2(-18, -48), Vector2(36.0 * e.hp / e.max_hp, 4)), Color("e3aa88"))
 		if e.counter_target >= 0 and not e.flee:
 			draw_line(p + Vector2(-7, -37), p + Vector2(7, -25), Color("ffda91"), 3)
 			draw_line(p + Vector2(7, -37), p + Vector2(-7, -25), Color("ffda91"), 3)
@@ -424,12 +453,16 @@ func _draw():
 			draw_circle(p + Vector2(0, -32), 4, Color("8bd2c5"))
 			draw_line(p + Vector2(-6, -24), p + Vector2(6, -24), Color("8bd2c5"), 3)
 		if debug_view: label_on(self, p + Vector2(20, 0), e.state, 12)
+		if e.state == "迷う": label_on(self, p + Vector2(15, -23), "?", 18, Color("f5cd89"))
 	if world.keeper.placed:
 		var p = center(world.keeper.pos)
 		if world.keeper.carrier >= 0:
 			var carrier_pos = view_positions.get("e%d" % world.keeper.carrier, Vector2(world.keeper.pos))
-			p = center(carrier_pos) + Vector2(16, -8)
-			draw_line(p + Vector2(-8, 5), p + Vector2(12, 7), Color("e7c794"), 4)
+			p = center(carrier_pos) + Vector2(34, -36)
+			draw_line(center(carrier_pos) + Vector2(8, 0), p + Vector2(0, 14), Color("d2b396"), 7)
+			draw_line(p + Vector2(-11, 11), p + Vector2(12, 11), Color("e7c794"), 4)
+			draw_set_transform(p, -PI * 0.5)
+			p = Vector2.ZERO
 		draw_circle(p + Vector2(0, -8), 9, Color("f3cda2"))
 		rect(p + Vector2(-12, -18), Vector2(24, 6), "f1d690")
 		rect(p + Vector2(-8, 1), Vector2(17, 20), "80d4cd")
@@ -438,13 +471,15 @@ func _draw():
 		if world.keeper.state in ["restrained", "captured"]:
 			draw_arc(p, 25, 0, TAU, 24, Color("f69773"), 3)
 			draw_line(p + Vector2(-10, 8), p + Vector2(10, 8), Color("513f39"), 3)
+		draw_set_transform(Vector2.ZERO)
 	for a in world.animals:
 		if not a.placed: continue
-		var p = center(view_positions.get("a%d" % a.id, Vector2(a.pos)))
+		var p = actor_pixel("a%d" % a.id, a.pos)
 		draw_circle(p + Vector2(0, 13), 18, Color(0.1, 0.2, 0.13, 0.25))
 		if a.species == "shiba": draw_dog(p)
 		else: draw_hen(p)
-		if a.hp <= a.max_hp * 0.5:
+		var in_combat = world.enemies.any(func(e): return not e.done and not e.flee and Farm.distance(a.pos, e.pos) <= 1)
+		if a.hp <= a.max_hp * 0.5 or in_combat:
 			var danger = a.hp <= a.max_hp * Farm.Rules.LOW_HP_FRACTION
 			var color = Color("f38c73") if danger else Color("efcc7f")
 			draw_rect(Rect2(p + Vector2(-20, 23), Vector2(40, 5)), Color("3e4534"))
@@ -454,16 +489,24 @@ func _draw():
 				draw_arc(p, 28, 0, TAU, 28, color, 3)
 				label_on(self, p + Vector2(-4, -29), "!", 23, color)
 		if a.rescuing: draw_arc(p, 25, -PI, 0, 16, Color("b0f0de"), 3)
+		if a.state == "吠える":
+			draw_arc(p + Vector2(25, -8), 9, -0.8, 0.8, 8, Color("ffe3a0"), 2)
+			draw_arc(p + Vector2(25, -8), 15, -0.8, 0.8, 8, Color("ffe3a0"), 2)
+		elif a.state == "様子見": label_on(self, p + Vector2(17, -24), "…", 18, Color("ffe3a0"))
 		if selected.get("kind") == "animal" and selected.get("id") == a.id:
 			draw_arc(p, 23, 0, TAU, 24, Color("ffe2a3"), 2)
 			if a.mode in ["stay", "wander"]: draw_arc(center(a.order), 36 if a.mode == "stay" else 120, 0, TAU, 40, Color(1, 0.9, 0.5, 0.35), 2)
 		if debug_view: label_on(self, p + Vector2(25, 0), a.state, 12)
+	for hit in hit_effects:
+		var p = center(view_positions.get(hit.target, Vector2.ZERO))
+		var fade = 1.0 - (clock - hit.at) / 0.3
+		draw_arc(p, 17, -0.8, 1.1, 8, Color(1, 0.85, 0.45, fade), 3)
 	var cell = Vector2i(get_canvas_transform().affine_inverse() * pointer / TILE)
 	if world.inside(cell) and not pointer_over_ui():
 		var valid = false
 		var show_preview = false
 		if tool == "place_animal" and selected_animal >= 0:
-			valid = world.can_place_animal(selected_animal, cell)
+			valid = world.valid_animal_site(selected_animal, cell)
 			show_preview = true
 			var p = center(cell)
 			draw_set_transform(p, 0, Vector2.ONE)
@@ -490,9 +533,9 @@ func draw_hud():
 	label_on(hud, Vector2(796, 31), "%02d:%02d   %s" % [int(world.tick * Farm.DT) / 60, int(world.tick * Farm.DT) % 60, "PAUSE" if world.paused else ""], 20)
 	panel(Rect2(0, 748, 1280, 52))
 	if world.phase == "prepare":
-		label_on(hud, Vector2(690, 778), "主人公 → 動物 → 時計開始", 15)
+		label_on(hud, Vector2(650, 778), "動物の出撃は時計開始後・任意" if world.keeper.placed else "主人公を一度だけ配置", 15)
 	elif world.phase == "defend":
-		label_on(hud, Vector2(530, 779), (TOOLS.get(tool, "対象を選択") if tool != "" else "選択なし") + "   WASD:移動 / Space:停止", 14)
+		label_on(hud, Vector2(530, 779), ("動物配置：再配置不可" if tool == "place_animal" else (TOOLS.get(tool, "対象を選択") if tool != "" else "選択なし")) + "   WASD:移動 / Space:停止", 14)
 	if clock < message_until and world.tick < message_until_tick and world.phase != "result":
 		panel(Rect2(16, 60, minf(800, message.length() * 16 + 28), 35))
 		label_on(hud, Vector2(28, 84), message, 16)
@@ -532,7 +575,7 @@ func draw_hud():
 		panel(Rect2(362, 225, 554, 340))
 		label_on(hud, Vector2(398, 271), "守りきった！" if world.result == "win" else "主人公が連れ去られた", 27)
 		label_on(hud, Vector2(398, 311), "評価 %d   EXP +%d   GOLD +%d" % [world.score.rating, world.score.xp, world.score.gold], 18)
-	if debug_view: label_on(hud, Vector2(15, 125), "DEBUG: tick %d  F8:観察JSON" % world.tick, 14)
+	if debug_view: label_on(hud, Vector2(15, 125), "DEBUG: seed %d / tick %d  F8:観察JSON" % [world.seed_value, world.tick], 14)
 
 func draw_edge(cell: Vector2i, title: String, color: Color):
 	var p = screen_cell(cell)

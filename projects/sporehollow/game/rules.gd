@@ -11,3 +11,9 @@ const INTERRUPT_REFUND = 0.5
 const SOIL_PACK = 50
 
 const LOW_HP_FRACTION = 0.30 # Provisional visual-warning threshold.
+# Lv1 prototype only: weights and cadence are tuning, not fixed game rules.
+const AI = {"decision_min": 0.6, "decision_max": 1.4, "randomness": 1.0,
+	"rescue_randomness": 0.12, "log_limit": 96,
+	"dog": {"engage": 0.68, "watch": 0.10, "bark": 0.14, "reposition": 0.08},
+	"raider": {"advance": 0.76, "hesitate": 0.10, "detour": 0.14},
+	"counter": {"counter": 0.80, "hesitate": 0.10, "resume": 0.10}}

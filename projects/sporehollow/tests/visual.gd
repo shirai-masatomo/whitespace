@@ -52,29 +52,34 @@ func step(count: int = 1):
 
 func run():
 	game = load("res://game/main.tscn").instantiate()
+	game.world = Farm.new({}, 17)
 	game.automated = true
 	root.add_child(game)
 	await process_frame
 	assert(not game.world.animals[0].placed)
 	await mouse(game.screen_cell(Vector2(19, 8)))
-	assert(game.world.keeper.placed and not game.world.animals[0].placed and game.buttons.advance.disabled)
+	assert(game.world.keeper.placed and not game.world.animals[0].placed and not game.buttons.advance.disabled and game.group == 2)
 	await click("animal1")
 	await move_pointer(game.screen_cell(Vector2(18, 8)))
 	await capture("placement")
 	await mouse(game.screen_cell(Vector2(19, 8)))
 	assert(not game.world.animals[0].placed)
 	await mouse(game.screen_cell(Vector2(18, 8)))
-	assert(game.world.animals[0].placed and not game.buttons.advance.disabled)
-	# Reposition only before time starts.
-	await click("animal1")
-	await mouse(game.screen_cell(Vector2(18, 9)))
-	assert(game.world.animals[0].pos == Vector2i(18, 9))
-	await click("animal1")
-	await mouse(game.screen_cell(Vector2(18, 8)))
+	assert(not game.world.animals[0].placed)
 	await click("advance")
-	assert(game.world.phase == "defend" and not game.world.act("place_animal", Vector2i(6, 6), 1))
-	await mouse(Vector2(700, 500), MOUSE_BUTTON_WHEEL_DOWN)
-	assert(game.group == 0)
+	assert(game.world.phase == "defend" and not game.world.animals[0].placed and game.tool == "place_animal")
+	await key(KEY_SPACE)
+	await key(KEY_SPACE, false)
+	await mouse(game.screen_cell(Vector2(18, 8)))
+	assert(not game.world.animals[0].placed)
+	await key(KEY_SPACE)
+	await key(KEY_SPACE, false)
+	await step(2)
+	await mouse(game.screen_cell(Vector2(18, 8)))
+	assert(game.world.animals[0].placed and game.world.initial_positions.animals[0].deployment_tick == 2)
+	await click("animal1")
+	assert(game.tool != "place_animal" and not game.world.act("place_animal", Vector2i(6, 6), 1))
+	await click("group0")
 	await click("wall")
 	await mouse(game.screen_cell(Vector2(17, 7)))
 	await step(2)
@@ -135,8 +140,8 @@ func run():
 	game.refresh()
 	await mouse(game.screen_cell(Vector2(19, 8)))
 	await click("animal1")
-	await mouse(game.screen_cell(Vector2(19, 13)))
 	await click("advance")
+	await mouse(game.screen_cell(Vector2(19, 13)))
 	await click("group2")
 	await click("animal1")
 	await click("stay")
@@ -153,8 +158,12 @@ func run():
 	var rescue_trial = Trial.compact(game.world)
 	var record = {"commit_sha": OS.get_environment("REVIEW_COMMIT") if OS.has_environment("REVIEW_COMMIT") else "WORKTREE",
 		"branch": "codex/sporehollow-prototype", "resolution": [1280, 800],
+		"seed": game.world.seed_value, "ai_settings": Farm.Rules.AI,
 		"numbers": {"shiba": Farm.Rules.SHIBA, "kidnapper": Farm.Rules.KIDNAPPER, "fixed_tick_seconds": Farm.DT, "actual_shiba_attack_seconds": 1.25},
 		"screenshots": captures, "scenarios": {"combat": combat_trial, "abduction_and_rescue": rescue_trial, "poor_placement": Trial.compact(Trial.run_trial("poor"))}}
+	var evaluation = JSON.parse_string(FileAccess.get_file_as_string("res://artifacts/evaluation.json"))
+	record.multi_seed = {"seed_range": evaluation.seed_range, "strategies": {}}
+	for strategy in evaluation.strategies: record.multi_seed.strategies[strategy] = evaluation.strategies[strategy].summary
 	FileAccess.open("res://review/current/stage1-observation.json", FileAccess.WRITE).store_string(JSON.stringify(record, "  "))
 	# Controlled component fixture: damage/repair, danger, and offscreen warnings; not review-trial data.
 	game.world = Farm.new()
@@ -175,6 +184,11 @@ func run():
 	game.world.enemies[0].pos = Vector2i(17, 8)
 	game.world.enemies[0].counter_target = 1
 	game.world.enemies[0].counter_until = 100
+	game.world.enemies[0].attacker = 1
+	game.world.enemies[0].threat_until = 100
+	game.world.enemies[0].ai_context = "under_attack"
+	game.world.enemies[0].intent = "counter"
+	game.world.enemies[0].next_decision = 100
 	game.world.enemy_step(game.world.enemies[0])
 	await process_frame
 	assert(game.alert_kind == "animal_danger")
@@ -184,5 +198,5 @@ func run():
 	await RenderingServer.frame_post_draw
 	assert(not root.get_texture().get_image().is_empty())
 	root.get_texture().get_image().save_png("res://artifacts/danger-ui.png")
-	print("PASS: placement/reposition/no teleport, grouped wheel, pause, camera-aware input, repair, damage, danger/edge indicators, combat, abduction/rescue and retained farm")
+	print("PASS: optional/late deployment, pause preview/no deployment, no reposition, grouped wheel, camera-aware input, repair, danger/edge indicators, seeded combat, abduction/rescue and retained farm")
 	quit()

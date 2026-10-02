@@ -27,11 +27,17 @@ func run():
 	w.step()
 	check(w.tick == 0, "Placement freezes clock")
 	check(w.act("place", Vector2i(19, 8)) and not w.animals[0].placed, "Keeper placement never places dog")
-	check(not w.act("start"), "Clock requires explicit animal placement")
+	check(not w.act("place", Vector2i(10, 8)), "Keeper placement is once per stage")
+	check(w.ready_to_start(), "Keeper alone enables clock")
+	check(w.valid_animal_site(1, Vector2i(18, 8)) and not w.act("place_animal", Vector2i(18, 8), 1), "Preview before clock, no world deployment")
+	check(w.act("start") and not w.animals[0].placed, "Clock can start with every animal in reserve")
+	w.act("pause")
+	check(w.valid_animal_site(1, Vector2i(18, 8)) and not w.act("place_animal", Vector2i(18, 8), 1), "Pause permits preview only")
+	check(not w.act("stay", Vector2i(18, 8), 1), "Reserve animal cannot receive battlefield orders")
+	w.act("pause")
 	check(not w.act("place_animal", Vector2i(19, 8), 1), "No animal on keeper")
-	check(w.act("place_animal", Vector2i(15, 9), 1), "Choose animal initial position")
-	check(w.act("place_animal", Vector2i(18, 8), 1), "Reposition before clock")
-	check(w.act("start") and not w.act("place_animal", Vector2i(5, 5), 1), "No teleport after clock starts")
+	check(w.act("place_animal", Vector2i(18, 8), 1), "Deploy only during running time")
+	check(not w.act("place_animal", Vector2i(5, 5), 1), "Deployment is irreversible within stage")
 	check(w.spawn_schedule.size() == 1 and w.spawn_schedule[0].tick == 40 and not w.config.repeat_waves, "Exactly one enemy scheduled at 10s")
 	advance(w, 39)
 	check(w.enemies.is_empty(), "No early invasion")
@@ -94,10 +100,16 @@ func run():
 	check(w.structures[cell].hp == 2, "Object damage2 not animal damage5")
 	w.move_enemy(e, cell)
 	check(w.structures[cell].hp == 0 and w.structures[cell].status == "destroyed" and w.walkable(cell), "Destroyed record retained without collision")
-	# Counterattack begins on an actual dog hit, no hit stun or skipped retaliation.
+	# Damage/cooldown fixture holds a chosen intent; probabilistic reactions are evaluated separately.
 	var fight = started()
 	fight.spawn_enemy(fight.spawn_schedule[0])
 	fight.enemies[0].pos = Vector2i(17, 8)
+	fight.animals[0].ai_context = "enemy_attack"
+	fight.animals[0].intent = "attack"
+	fight.animals[0].next_decision = 100
+	fight.enemies[0].ai_context = "under_attack"
+	fight.enemies[0].intent = "counter"
+	fight.enemies[0].next_decision = 100
 	fight.step()
 	check(fight.enemies[0].hp == 40 and fight.animals[0].hp == 35, "Dog attack10 and immediate counter5, no stagger")
 	check(fight.enemies[0].counter_target == 1, "Counterattack targets aggressor")
@@ -227,12 +239,13 @@ func run():
 	inherited.move_enemy(inherited.enemies[0], Vector2i(1, 12))
 	check(inherited.structures[Vector2i(1, 12)].hp == 6 and inherited.enemies[0].pos == Vector2i(0, 12), "Enemy must break persisted entry wall before entering")
 	var front = Trial.run_trial("front")
-	check(front.result == "win" and front.animals[0].hp == 20 and front.enemies[0].hp == 0, "Full-HP 1v1: Shiba wins, takes damage")
+	check(front.result == "win" and front.animals[0].hp > 0 and front.animals[0].hp < 40 and front.enemies[0].hp == 0, "Full-HP 1v1: Shiba wins, takes variable damage")
 	var saved = Trial.run_trial("rescue")
 	check(saved.result == "win" and saved.metrics.captures == 1 and saved.metrics.rescues == 1, "Real placement + stay leads to capture and instinct rescue")
 	check(saved.milestones.any(func(m): return m.kind == "restrained") and saved.milestones.any(func(m): return m.kind == "carried"), "Distinct restraint/carriage alerts")
 	var choose = Farm.new(flock)
 	choose.act("place", Vector2i(19, 8))
+	choose.act("start")
 	choose.act("place_animal", Vector2i(18, 8), 1)
 	check(not choose.act("place_animal", Vector2i(18, 8), 2), "Animals cannot overlap at placement")
 	choose.act("place_animal", choose.nest, 2)
@@ -246,8 +259,48 @@ func run():
 	hurt.enemies[0].pos = Vector2i(17, 8)
 	hurt.enemies[0].counter_target = 1
 	hurt.enemies[0].counter_until = 100
+	hurt.enemies[0].attacker = 1
+	hurt.enemies[0].threat_until = 100
+	hurt.enemies[0].ai_context = "under_attack"
+	hurt.enemies[0].intent = "counter"
+	hurt.enemies[0].next_decision = 100
 	hurt.animals[0].hp = 15
 	hurt.enemy_step(hurt.enemies[0])
 	check(hurt.milestones.any(func(m): return m.kind == "animal_danger") and hurt.animals[0].hp == 10, "HP threshold crossing emits warning")
+	# Late deployment checks occupancy against actors, facilities and entrances.
+	var late = Farm.new()
+	late.act("place", Vector2i(19, 8))
+	late.act("start")
+	advance(late, 45)
+	check(not late.animals[0].placed and late.animals[0].path.size() == 1, "Reserve animal neither moves nor attacks")
+	check(not late.act("place_animal", late.enemies[0].pos, 1), "Cannot deploy on intruder")
+	check(not late.act("place_animal", late.entries[0], 1), "Cannot deploy at entrance")
+	late.act("wall", Vector2i(10, 8))
+	check(not late.act("place_animal", Vector2i(10, 8), 1), "Cannot deploy inside construction")
+	check(late.act("place_animal", Vector2i(18, 8), 1) and late.initial_positions.animals[0].deployment_tick == 45, "Late deployment records real tick")
+	late.animals[0].hp = 0
+	check(not late.act("place_animal", Vector2i(10, 9), 1), "Incapacitated deployed animal stays deployed")
+	var reserve = Farm.new(flock)
+	reserve.act("place", Vector2i(19, 8))
+	reserve.act("start")
+	reserve.act("place_animal", Vector2i(18, 8), 1)
+	reserve.finish(true)
+	check(reserve.campaign.animals[1].xp == 0, "Unfielded reserve receives no participation XP")
+	var original = Trial.run_trial("guided", 17)
+	var replay = Farm.new({}, original.seed_value)
+	for action in original.actions:
+		while replay.tick < action.tick: replay.step()
+		check(replay.act(action.kind, Vector2i(action.pos[0], action.pos[1]), action.animal_id) == action.accepted, "Replay action accepted identically")
+	while replay.phase == "defend" and replay.tick < 1200: replay.step()
+	check(JSON.stringify(replay.observation()) == JSON.stringify(original.observation()), "Seed + exact timed actions reproduce full observation")
+	check(JSON.stringify(front.decision_log) != JSON.stringify(Trial.run_trial("front", 18).decision_log), "Different seed changes decisions")
+	var held = started()
+	held.spawn_enemy(held.spawn_schedule[0])
+	held.step()
+	var count_before = held.decision_count
+	held.step()
+	check(held.decision_count == count_before, "Unchanged context holds decision, no per-tick draw")
+	check(saved.decision_log.filter(func(d): return d.rescue_mode).all(func(d): return d.selected in ["attack", "approach"]), "Rescue never chooses passive behavior")
+	check(saved.decision_log.size() <= Farm.Rules.AI.log_limit, "Decision log is bounded")
 	print("PASS: %d Stage1 and campaign checks" % checks)
 	quit()

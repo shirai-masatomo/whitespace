@@ -1,6 +1,7 @@
 extends RefCounted
 ## Deterministic fixed-tick rules. No scene, Input, frame clock or rendering dependencies.
 const RaiderAI = preload("res://game/raider_ai.gd")
+const Decisions = preload("res://game/decision_ai.gd")
 const StageData = preload("res://game/stages.gd")
 const W = 25
 const H = 17
@@ -23,6 +24,10 @@ var command_power = 10.0
 var materials = 100 # Soil only; Gold is never spent by construction or repair.
 var next_structure_id = 1
 var combat_log: Array = []
+var decision_log: Array = []
+var decision_count = 0
+var decision_counts: Dictionary = {}
+var actor_rngs: Dictionary = {}
 var milestones: Array = []
 var initial_positions: Dictionary = {}
 var structures: Dictionary = {}
@@ -100,7 +105,7 @@ func _init(data: Dictionary = {}, seed_number: int = 17, stage_override: Diction
 		a.state = "見張り" if a.species == "shiba" else "ついばむ"
 		a.path = [a.pos]
 		animals.append(a)
-	say("牧場主、動物の順に配置して時計を始めよう。")
+	say("牧場主を配置して時計開始。動物は好きなタイミングで出撃。")
 
 func make_schedule():
 	# Each wave has a start time relative to the first attack. Jitter affects gaps, never prep length.
@@ -180,31 +185,25 @@ func next_step(start: Vector2i, goal: Vector2i, raider: bool = false) -> Vector2
 static func distance(a: Vector2i, b: Vector2i) -> int:
 	return absi(a.x - b.x) + absi(a.y - b.y)
 
+func valid_animal_site(id: int, p: Vector2i) -> bool:
+	return animals.any(func(a): return a.id == id and not a.placed) and keeper.placed and walkable(p) and not live_structure(p) and p not in entries and not occupied(p)
+
 func can_place_animal(id: int, p: Vector2i) -> bool:
-	return animals.any(func(a): return a.id == id) and phase == "prepare" and keeper.placed and walkable(p) and not live_structure(p) and p not in entries and p != keeper.pos and not animals.any(func(a): return a.placed and a.id != id and a.pos == p)
+	return phase == "defend" and not paused and valid_animal_site(id, p)
 
 func ready_to_start() -> bool:
-	return keeper.placed and animals.all(func(a): return a.placed)
+	return phase == "prepare" and keeper.placed
 
 func act(kind: String, p: Vector2i = Vector2i.ZERO, animal_id: int = -1) -> bool:
 	var accepted = false
 	if phase == "prepare":
-		if kind == "place" and walkable(p) and not live_structure(p) and p not in entries and not animals.any(func(a): return a.placed and a.pos == p) and not (p == nest and has_nest()):
+		if kind == "place" and not keeper.placed and walkable(p) and not live_structure(p) and p not in entries and not (p == nest and has_nest()):
 			keeper.pos = p
 			keeper.placed = true
 			accepted = true
-		elif kind == "place_animal" and can_place_animal(animal_id, p):
-			for a in animals:
-				if a.id == animal_id:
-					a.pos = p
-					a.home = p
-					a.order = p
-					a.path = [p]
-					a.placed = true
-					accepted = true
 		elif kind == "start" and ready_to_start():
 			phase = "defend"
-			initial_positions = {"keeper": [keeper.pos.x, keeper.pos.y], "animals": animals.map(func(a): return {"id": a.id, "pos": [a.pos.x, a.pos.y]})}
+			initial_positions = {"keeper": [keeper.pos.x, keeper.pos.y], "animals": []}
 			say("時計開始。壁と門で備えよう。")
 			accepted = true
 	elif phase == "defend":
@@ -214,7 +213,17 @@ func act(kind: String, p: Vector2i = Vector2i.ZERO, animal_id: int = -1) -> bool
 		elif kind in ORDERS:
 			accepted = issue_order(kind, p, animal_id)
 		elif not paused:
-			if BUILD.has(kind):
+			if kind == "place_animal" and can_place_animal(animal_id, p):
+				for a in animals:
+					if a.id != animal_id: continue
+					a.pos = p
+					a.home = p
+					a.order = p
+					a.path = [p]
+					a.placed = true
+					initial_positions.animals.append({"id": a.id, "pos": [p.x, p.y], "deployment_tick": tick})
+					accepted = true
+			elif BUILD.has(kind):
 				if can_build(kind, p):
 					materials -= BUILD[kind].cost
 					var hp: int = BUILD[kind].hp + (campaign.fence * 4 if kind == "build_gate" else 0)
@@ -270,6 +279,7 @@ func spawn_enemy(event: Dictionary):
 	enemies.append({"id": spawned, "pos": origin, "entry": entry, "lv": event.get("lv", 1), "hp": Rules.KIDNAPPER.max_hp, "max_hp": Rules.KIDNAPPER.max_hp,
 		"attack_power": Rules.KIDNAPPER.attack_power, "object_attack_power": Rules.KIDNAPPER.object_attack_power,
 		"counter_seconds": Rules.KIDNAPPER.counter_seconds, "counter_target": -1, "counter_until": 0, "counter_ready": 0, "next_attack": 0,
+		"attacker": -1, "threat_until": 0,
 		"flee": false, "carry": "", "done": false, "capture_progress": 0,
 		"born": tick, "path": [origin], "role": event.role, "state": "主人公へ"})
 	spawned += 1
@@ -300,6 +310,7 @@ func animal_step(a: Dictionary):
 		if a.mode in ["stay", "wander", "whistle"]: a.home = a.order
 		a.order_until = tick + 40 + a.loyalty * 2
 		a.pending = {}
+		a.ai_context = "new_order"
 	if tick >= a.order_until: a.mode = "auto"
 	if a.species == "hen":
 		var threat = enemies.filter(func(e): return not e.done and not e.flee and distance(a.pos, e.pos) <= 4)
@@ -342,9 +353,26 @@ func animal_step(a: Dictionary):
 		a.stamina = minf(100, a.stamina + 0.8)
 		return
 	elif not targets.is_empty() and (a.rescuing or a.mode != "stay" or distance(a.pos, targets[0].pos) <= 1):
+		if not a.has("first_contact_tick"): a.first_contact_tick = tick
 		chasing = true
 		goal = targets[0].pos
 		a.state = "救出本能" if a.rescuing else "追跡"
+		var active_action = "attack" if distance(a.pos, goal) <= 1 else "approach"
+		var choices = Rules.AI.dog.duplicate(true)
+		choices[active_action] = choices.engage
+		choices.erase("engage")
+		# Rescue always pursues the carrier. Noise affects cadence, never the rescue objective.
+		if a.rescuing or a.mode == "attack_target": choices = {active_action: 1.0}
+		var intent = Decisions.choose(self, a, "shiba", ("rescue_" if a.rescuing else "enemy_") + active_action, choices, a.rescuing)
+		if intent in ["watch", "bark"]:
+			a.state = "様子見" if intent == "watch" else "吠える"
+			return
+		if intent == "reposition":
+			a.state = "位置調整"
+			if not a.side_step_used:
+				a.pos = side_step(a.pos, goal, a.intent_roll)
+				a.side_step_used = true
+			return
 		if distance(a.pos, goal) <= 1 and tick >= a.next_attack:
 			a.next_attack = tick + ceili(Rules.SHIBA.attack_seconds / DT)
 			a.stamina = maxf(0, a.stamina - 8)
@@ -356,13 +384,9 @@ func animal_step(a: Dictionary):
 				enemy.flee = true
 				release_keeper(enemy)
 				say("侵入者を追い返した！")
-			elif tick >= enemy.counter_ready and enemy.counter_target < 0:
-				enemy.counter_target = a.id
-				if keeper.restrainer == enemy.id and enemy.carry == "":
-					keeper.state = "free"
-					keeper.restrainer = -1
-					enemy.capture_progress = 0
-				enemy.counter_until = tick + ceili(Rules.KIDNAPPER.counter_duration / DT)
+			else:
+				enemy.attacker = a.id
+				enemy.threat_until = tick + ceili(Rules.KIDNAPPER.counter_duration / DT)
 	elif a.mode == "wander":
 		a.state = "徘徊"
 		if tick % 12 == 0:
@@ -370,6 +394,7 @@ func animal_step(a: Dictionary):
 			if not options.is_empty(): a.order = options[rng.randi_range(0, options.size() - 1)]
 		goal = a.order
 	else:
+		a.ai_context = "idle"
 		a.state = "待機" if a.mode == "stay" else "見張り"
 		a.stamina = minf(100, a.stamina + (1.6 if campaign.shelter and distance(a.pos, nest) <= 3 else 0.3))
 	a.move_credit = minf(1.75, a.move_credit + Rules.SHIBA.speed * DT * (Rules.SHIBA.rescue_multiplier if a.rescuing else 1.0))
@@ -382,8 +407,33 @@ func animal_step(a: Dictionary):
 	else:
 		a.move_credit = minf(a.move_credit, 0.75)
 
+func side_step(p: Vector2i, goal: Vector2i, roll: float) -> Vector2i:
+	var options = neighbors(p).filter(func(n): return walkable(n) and not occupied(n) and distance(n, goal) <= distance(p, goal) + 1)
+	if options.is_empty(): return p
+	return options[mini(int(roll * options.size()), options.size() - 1)]
+
 func enemy_step(e: Dictionary):
 	if e.done: return
+	if not e.flee:
+		var threatened = tick < e.threat_until and tick >= e.counter_ready and animals.any(func(a): return a.placed and a.id == e.attacker and a.hp > 0)
+		var context = "under_attack" if threatened else ("carrying" if e.carry == "keeper" else "kidnap")
+		var choices = Rules.AI.counter if threatened else Rules.AI.raider
+		var intent = Decisions.choose(self, e, "kidnapper", context, choices)
+		if intent == "counter" and threatened:
+			if e.counter_target < 0:
+				e.counter_target = e.attacker
+				e.counter_until = tick + ceili(Rules.KIDNAPPER.counter_duration / DT)
+			if keeper.restrainer == e.id and e.carry == "":
+				keeper.state = "free"
+				keeper.restrainer = -1
+				e.capture_progress = 0
+		else:
+			if e.counter_target >= 0:
+				e.counter_target = -1
+				e.counter_ready = tick + ceili(Rules.KIDNAPPER.counter_cooldown / DT)
+			if intent == "hesitate":
+				e.state = "迷う"
+				return
 	if not e.flee and e.counter_target >= 0:
 		var found = animals.filter(func(a): return a.id == e.counter_target and a.hp > 0)
 		if found.is_empty() or tick >= e.counter_until:
@@ -403,8 +453,6 @@ func enemy_step(e: Dictionary):
 			elif tick % 3 == 0:
 				move_enemy(e, next_step(e.pos, target.pos, true))
 			return
-	# Lv1 occasionally hesitates while approaching, but does not stagger when hit.
-	if not e.flee and e.carry == "" and tick % 24 == 0: return
 	var interval = 4 if e.carry == "keeper" else 3
 	if tick % interval != 0: return
 	var goal = RaiderAI.target(e, self)
@@ -436,9 +484,18 @@ func enemy_step(e: Dictionary):
 		return
 	e.capture_progress = 0
 	var next = next_step(e.pos, goal, true)
+	if not e.flee and e.get("intent", "") == "detour" and not e.side_step_used:
+		next = side_step(e.pos, goal, e.intent_roll)
+		e.side_step_used = true
 	move_enemy(e, next)
 
 func move_enemy(e: Dictionary, next: Vector2i):
+	# Living animals occupy space; carrying the keeper is the only deliberate actor overlap.
+	var defenders = animals.filter(func(a): return a.placed and a.hp > 0 and a.pos == next)
+	if not e.flee and not defenders.is_empty():
+		e.attacker = defenders[0].id
+		e.threat_until = tick + ceili(Rules.KIDNAPPER.counter_duration / DT)
+		return
 	if blocks(next):
 		var b = structures[next]
 		var damage = maxi(0, e.object_attack_power - b.armor)
@@ -555,6 +612,7 @@ func finish(won: bool):
 		campaign.eggs += eggs
 		eggs = 0
 		for owned in campaign.animals:
+			if not animals.any(func(a): return a.id == owned.id and a.placed): continue
 			owned.xp += int(xp)
 			while owned.xp >= owned.lv * 20:
 				owned.xp -= owned.lv * 20
@@ -623,7 +681,9 @@ func observation() -> Dictionary:
 		row.entry = [event.entry.x, event.entry.y]
 		schedule.append(row)
 	return {"seed": seed_value, "stage": stage, "tick": tick, "phase": phase, "paused": paused, "result": result,
+		"initial_campaign": checkpoint.duplicate(true),
 		"campaign": campaign.duplicate(true), "animals": positions, "raiders": raiders, "keeper": owner,
 		"metrics": metrics.duplicate(true), "score": score.duplicate(true), "structures": built, "materials": materials,
 		"combat": combat_log.duplicate(true), "resources": {"soil": materials}, "actions": actions.duplicate(true), "samples": traces.duplicate(true), "schedule": schedule,
+		"ai_settings": Rules.AI, "decision_log": decision_log.duplicate(true), "decision_count": decision_count, "decision_counts": decision_counts.duplicate(true),
 		"initial_positions": initial_positions.duplicate(true), "milestones": milestones.duplicate(true), "stage_config": config.duplicate(true), "eggs": eggs, "command_power": command_power}
