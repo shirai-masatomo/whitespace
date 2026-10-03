@@ -21,6 +21,121 @@
       "speed": 1.0,
       "tick": 0
     },
+    "context_collection": {
+      "alert": "",
+      "camera": [
+        600.0,
+        357.0
+      ],
+      "display_order": [
+        {
+          "job_id": 1,
+          "kind": "wall",
+          "number": 1,
+          "pos": [
+            18,
+            5
+          ]
+        },
+        {
+          "job_id": 2,
+          "kind": "wall",
+          "number": 2,
+          "pos": [
+            19,
+            5
+          ]
+        },
+        {
+          "job_id": 3,
+          "kind": "wall",
+          "number": 3,
+          "pos": [
+            20,
+            5
+          ]
+        },
+        {
+          "job_id": 4,
+          "kind": "wall",
+          "number": 4,
+          "pos": [
+            21,
+            5
+          ]
+        },
+        {
+          "job_id": 5,
+          "kind": "wall",
+          "number": 5,
+          "pos": [
+            22,
+            5
+          ]
+        },
+        {
+          "job_id": 6,
+          "kind": "collect",
+          "number": 6,
+          "pos": [
+            10,
+            9
+          ]
+        },
+        {
+          "job_id": 7,
+          "kind": "collect",
+          "number": 7,
+          "pos": [
+            10,
+            8
+          ]
+        },
+        {
+          "job_id": 8,
+          "kind": "collect",
+          "number": 8,
+          "pos": [
+            11,
+            9
+          ]
+        }
+      ],
+      "gold": 40,
+      "held": false,
+      "keeper_hp": 30,
+      "keeper_state": "free",
+      "paused": true,
+      "phase": "day",
+      "rest_elapsed": 0,
+      "resting": false,
+      "shop_level": "categories",
+      "shop_side": "home",
+      "sleepiness": 0.0,
+      "speed": 1.0,
+      "tick": 0
+    },
+    "context_facility": {
+      "alert": "",
+      "camera": [
+        600.0,
+        357.0
+      ],
+      "display_order": [],
+      "gold": 40,
+      "held": false,
+      "keeper_hp": 30,
+      "keeper_state": "free",
+      "paused": true,
+      "phase": "day",
+      "rest_elapsed": 0,
+      "resting": false,
+      "shop_level": "categories",
+      "shop_side": "home",
+      "sleepiness": 0.0,
+      "speed": 1.0,
+      "tick": 0
+    },
     "destinations": {
       "alert": "",
       "camera": [
@@ -76,6 +191,27 @@
       "shop_level": "categories",
       "shop_side": "home",
       "sleepiness": 0.0,
+      "speed": 1.0,
+      "tick": 0
+    },
+    "drowsy": {
+      "alert": "",
+      "camera": [
+        600.0,
+        357.0
+      ],
+      "display_order": [],
+      "gold": 40,
+      "held": false,
+      "keeper_hp": 30,
+      "keeper_state": "free",
+      "paused": false,
+      "phase": "day",
+      "rest_elapsed": 0,
+      "resting": false,
+      "shop_level": "categories",
+      "shop_side": "home",
+      "sleepiness": 65,
       "speed": 1.0,
       "tick": 0
     },
@@ -211,19 +347,40 @@
         357.0
       ],
       "display_order": [],
-      "gold": 11,
+      "gold": 40,
       "held": true,
       "keeper_hp": 30,
       "keeper_state": "free",
       "paused": false,
       "phase": "day",
-      "rest_elapsed": 6.0,
+      "rest_elapsed": 5.25,
       "resting": true,
       "shop_level": "categories",
       "shop_side": "home",
-      "sleepiness": 88.0,
+      "sleepiness": 84.5,
       "speed": 1.0,
-      "tick": 93
+      "tick": 21
+    },
+    "settling": {
+      "alert": "",
+      "camera": [
+        600.0,
+        357.0
+      ],
+      "display_order": [],
+      "gold": 40,
+      "held": true,
+      "keeper_hp": 30,
+      "keeper_state": "free",
+      "paused": false,
+      "phase": "day",
+      "rest_elapsed": 0.0,
+      "resting": true,
+      "shop_level": "categories",
+      "shop_side": "home",
+      "sleepiness": 85,
+      "speed": 1.0,
+      "tick": 0
     },
     "shop": {
       "alert": "",
@@ -253,7 +410,7 @@
         357.0
       ],
       "display_order": [],
-      "gold": 11,
+      "gold": 40,
       "held": false,
       "keeper_hp": 30,
       "keeper_state": "free",
@@ -263,9 +420,9 @@
       "resting": false,
       "shop_level": "categories",
       "shop_side": "home",
-      "sleepiness": 90,
+      "sleepiness": 85,
       "speed": 1.0,
-      "tick": 69
+      "tick": 0
     },
     "transport": {
       "alert": "",
@@ -3926,21 +4083,40 @@
     ],
     "tick": 104
   },
-  "source_commit": "db140d1263b34c0b9fbbbb3573e2a79ec1f86f7a",
-  "validation": {
-    "rules": 241,
-    "jobs": 98,
-    "keeper": 49,
-    "planning_transport_rest": 44,
-    "existing_battle_trials": 192,
-    "windows_export_smoke": true
+  "selection_context_checks": {
+    "batch_reserved": 3,
+    "batch_unregistered": 5,
+    "context_camera_clamp": true,
+    "ctrl_cap_all_classes": 8,
+    "drag_cap_all_classes": 8,
+    "paused_world_unchanged": true,
+    "right_click_selected_facility": true,
+    "ui_priority_disabled_and_release": true,
+    "enabled_button_over_animal": true
   },
-  "fixtures": "Seed17で通常の買い物・予約・搬送を実入力。範囲選択では犬の位置/自然物を配置し、休息確認は眠気90を設定。夜の回帰前に眠気のみ0へ戻す。戦闘と翌朝育成は実ルール。",
-  "provisional": {
-    "book_open_close_seconds": 0.4,
-    "book_turn_seconds": 0.3,
-    "rest_settling_game_seconds": 5,
-    "transport_cancel": "同じJobIDで待機小屋への帰還。保留中なら仕事へ戻るで再開。",
-    "background": "減光のみ。前景は鮮明。"
+  "source_commit": "61acaf6c64e2c867f36caa8fbafbad9b768e6021",
+  "fatigue_visual_rules": {
+    "normal": "sleepiness <= 50",
+    "mild": "50 < sleepiness <= 80",
+    "severe": "sleepiness > 80",
+    "debuff_unchanged": ">= 80",
+    "rest_settling_seconds": 5,
+    "current_state_priority": [
+      "carried",
+      "unconscious",
+      "settling / sleeping",
+      "awake fatigue"
+    ],
+    "unselected_keeper": true
+  },
+  "verification": {
+    "rules": 241,
+    "local_jobs": 98,
+    "keeper": 64,
+    "planning": 44,
+    "real_input_full_day": true,
+    "focused_input_log": "artifacts/focused.log",
+    "windows_export_smoke": true,
+    "fixtures": "Selection tests use 10 same-class objects, 8 selected / 5 preexisting jobs. Fatigue screenshots use 65 and 85 percent; gameplay rules unchanged."
   }
 }
