@@ -42,8 +42,8 @@ static func cancel(w, id: int, reason: String = "cancelled") -> bool:
 	return false
 
 static func step(w):
-	if w.keeper.state != "free" or w.jobs.is_empty():
-		w.keeper.move_credit = 0.0
+	if not w.Life.able(w) or w.jobs_held or w.manual_goal != null or w.jobs.is_empty():
+		if w.manual_goal == null: w.keeper.move_credit = 0.0
 		return
 	var j = w.jobs[0]
 	if j.started:
@@ -61,20 +61,25 @@ static func step(w):
 	var at_site = w.keeper.pos == j.pos if j.kind == "move" else w.distance(w.keeper.pos, j.pos) == 1
 	if not at_site:
 		j.state = "walking"
-		w.keeper.move_credit = minf(1.9, w.keeper.move_credit + SPEED * w.DT)
+		w.keeper.move_credit = minf(1.9, w.keeper.move_credit + SPEED * w.Life.factor(w) * w.DT)
 		if w.keeper.move_credit < 1: return
 		# Choose a reachable adjacent work cell. A blocked near side must not hide an open far side.
 		var goals = [j.pos] if j.kind == "move" else w.neighbors(j.pos)
 		goals = goals.filter(func(p): return w.walkable(p))
+		var solid_goals = goals.duplicate()
+		goals = goals.filter(func(p): return not w.actor_occupied(p, w.keeper.pos))
+		if goals.is_empty() and not solid_goals.is_empty(): return
 		goals.sort_custom(func(a, b): return w.distance(w.keeper.pos, a) < w.distance(w.keeper.pos, b))
 		var next: Vector2i = w.keeper.pos
 		for goal in goals:
-			next = w.next_step(w.keeper.pos, goal)
+			next = w.next_step(w.keeper.pos, goal, false, true)
 			if next != w.keeper.pos: break
 		if next == w.keeper.pos:
+			if goals.any(func(g): return w.next_step(w.keeper.pos, g) != w.keeper.pos): return
 			cancel(w, j.id, "unreachable")
 			w.say("道がふさがっている。予定を取り消したよ。")
 			return
+		if w.actor_occupied(next, w.keeper.pos): return
 		w.keeper.move_credit -= 1.0
 		w.keeper.pos = next
 		w.keeper_path.append([next.x, next.y])
@@ -86,6 +91,9 @@ static func step(w):
 		j.started = true
 		j.state = "working"
 		return
+	if not w.BUILD.has(j.kind):
+		j["work_credit"] = j.get("work_credit", 0.0) + w.Life.factor(w)
+		if j.work_credit < 1: return
 	# Revalidate at arrival. Resources are held while walking, and consumed only for actual work.
 	if j.reserved > 0:
 		w.add_resource(j.resource, j.reserved)

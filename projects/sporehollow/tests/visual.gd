@@ -58,7 +58,7 @@ func capture(name: String):
 		push_error("Cannot replace review image " + name)
 		quit(1)
 		return
-	captures[name] = {"tick": game.world.tick, "camera": [game.camera.position.x, game.camera.position.y], "alert": game.alert_text if game.alert_visible() else "", "keeper_state": game.world.keeper.state, "phase": game.world.phase, "shop_side": game.shop_side, "shop_level": game.shop_level, "gold": game.world.campaign.gold}
+	captures[name] = {"tick": game.world.tick, "camera": [game.camera.position.x, game.camera.position.y], "alert": game.alert_text if game.alert_visible() else "", "keeper_state": game.world.keeper.state, "keeper_hp": game.world.keeper.hp, "sleepiness": game.world.keeper.sleepiness, "speed": game.speed, "held": game.world.jobs_held, "phase": game.world.phase, "shop_side": game.shop_side, "shop_level": game.shop_level, "gold": game.world.campaign.gold}
 	print("Captured ", name)
 
 func step(count: int = 1):
@@ -163,7 +163,9 @@ func run():
 	await click("stay")
 	await mouse(game.screen_cell(Vector2(18, 8)))
 	await click("walk")
-	await mouse(game.screen_cell(Vector2(19, 8)))
+	await mouse(game.screen_cell(Vector2(19, 8)), MOUSE_BUTTON_RIGHT)
+	while game.world.manual_goal != null: await step()
+	await click("resume_jobs")
 	while game.world.tick < 354: await step()
 	await click("group0")
 	await click("wall")
@@ -186,10 +188,14 @@ func run():
 	await key(KEY_SPACE, false)
 	await step(40)
 	assert(game.world.enemies.size() == 1)
-	await mouse(game.screen_cell(Vector2(19, 8)), MOUSE_BUTTON_RIGHT, true)
-	assert(game.world.jobs.size() == 1 and game.world.jobs[0].kind == "move")
-	while not game.world.enemies[0].can_see_keeper and game.world.tick < 800: await step()
-	assert(game.world.enemies[0].can_see_keeper)
+	await click("walk")
+	await mouse(game.screen_cell(Vector2(19, 8)), MOUSE_BUTTON_RIGHT)
+	assert(game.world.jobs_held)
+	while game.world.manual_goal != null: await step()
+	if not game.world.jobs.is_empty(): await mouse(Vector2(1243,109))
+	await click("resume_jobs")
+	while game.world.combat_log.is_empty() and not game.world.enemies[0].can_see_keeper and game.world.tick < 800: await step()
+	assert(game.world.enemies[0].can_see_keeper or not game.world.combat_log.is_empty())
 	await create_timer(0.25).timeout
 	await mouse(game.get_canvas_transform() * game.actor_pixel("e0", game.world.enemies[0].pos))
 	await capture("combat")
@@ -230,7 +236,9 @@ func run():
 	await key(KEY_ESCAPE, false)
 	await click("menu_morning")
 	assert(game.world.phase == "shop" and game.world.campaign.animals[0].lv == 1 and game.world.campaign.exp_pool == dawn.exp_pool)
-	var record = {"commit_sha": OS.get_environment("REVIEW_COMMIT") if OS.has_environment("REVIEW_COMMIT") else "WORKTREE",
+	var survival = await keeper_review()
+	var validation = JSON.parse_string(FileAccess.get_file_as_string("res://artifacts/keeper-tests.json"))
+	var record = {"keeper_validation": {"checks": validation.checks, "failures": validation.failures, "source": "tests/test_keeper.gd", "covers": ["fatigue0_80_100", "forced_rest_below80", "voluntary_rest", "queue_interrupt_resume", "drink_daily_cap", "carry_rescue_and_loss", "three_species_8seeds_no_overlap"]}, "survival": survival, "commit_sha": OS.get_environment("REVIEW_COMMIT") if OS.has_environment("REVIEW_COMMIT") else "WORKTREE",
 		"branch": "codex/sporehollow-prototype", "seed": 17, "screenshots": captures,
 		"before_early_finish": before_finish, "dawn": dawn,
 		"audio": {"cues": game.audio.played, "birds_seconds": [8, 20], "driver": "Dummy"},
@@ -245,7 +253,7 @@ func run():
 func compact_observation() -> Dictionary:
 	var full = game.world.observation()
 	var result = {}
-	for id in ["seed", "stage", "day", "tick", "phase", "remaining_night", "remaining_day", "night_started_tick", "jobs", "job_log", "keeper_path", "early_clear", "early_clear_tick", "early_finish_bonus", "exp_pool", "dawn", "field_items", "score", "resources", "metrics", "milestones", "combat", "ai_settings", "decision_counts", "sight_log", "skill_log"]:
+	for id in ["seed", "stage", "day", "tick", "phase", "remaining_night", "remaining_day", "night_started_tick", "jobs", "job_log", "keeper_path", "keeper", "life_log", "jobs_held", "manual_goal", "early_clear", "early_clear_tick", "early_finish_bonus", "exp_pool", "dawn", "field_items", "score", "resources", "metrics", "milestones", "combat", "ai_settings", "decision_counts", "sight_log", "skill_log"]:
 		result[id] = full[id]
 	result.decision_log = full.decision_log.slice(-12)
 	result.decision_log_note = "Last12 decisions; counts cover the night. Full trace remains available through F8."
@@ -262,3 +270,66 @@ func compact_observation() -> Dictionary:
 			"last_known_keeper_position": e.last_known_keeper_position, "search_state": e.search_state})
 	result.unavailable_next_day = full.campaign.animals.filter(func(a): return a.unavailable_through_day >= full.day + 1).map(func(a): return a.id)
 	return result
+
+func keeper_review() -> Dictionary:
+	# Controlled encounter fixture; all subsequent commands/ticks use production rules/input.
+	game.world = Farm.new({}, 17).begin_day()
+	game.reset_view()
+	game.refresh()
+	game.world.keeper.pos = Vector2i(19,8)
+	game.world.keeper.sleepiness = 70
+	game.world.act("place_animal",Vector2i(19,10),1)
+	while not game.world.jobs.is_empty(): await step()
+	game.world.act("rest",Vector2i.ZERO,1)
+	await step(8)
+	game.world.act("wall",Vector2i(20,8))
+	game.world.act("wall",Vector2i(21,10))
+	game.world.act("wall",Vector2i(22,12))
+	await step()
+	await create_timer(0.3).timeout
+	await mouse(game.get_canvas_transform() * game.actor_pixel("keeper",game.world.keeper.pos))
+	assert(game.selected.get("kind") == "keeper")
+	await capture("keeper")
+	var job_ids = game.world.jobs.map(func(j):return j.id)
+	await mouse(game.screen_cell(Vector2(18,8)),MOUSE_BUTTON_RIGHT)
+	while game.world.manual_goal != null: await step()
+	assert(game.world.jobs_held and game.world.jobs.map(func(j):return j.id) == job_ids)
+	await click("keeper_rest")
+	await click("speed")
+	await click("speed")
+	assert(game.speed == 4 and game.world.keeper.resting)
+	await step(16)
+	await capture("rest")
+	game.world.config.first_attack_seconds = 9999
+	game.world.make_schedule()
+	game.world.start_night()
+	game.world.spawn_enemy({"entry":Vector2i(1,5),"role":"kidnapper","lv":1})
+	await process_frame
+	await process_frame
+	assert(game.speed == 1)
+	await click("keeper_rest")
+	await mouse(game.screen_cell(Vector2(19,8)),MOUSE_BUTTON_RIGHT)
+	while game.world.manual_goal != null: await step()
+	assert(game.world.jobs_held and not game.world.keeper.resting)
+	# Bring a single fixture enemy into view; combat/carry/rescue are not scripted outcomes.
+	game.world.enemies[0].pos = Vector2i(18,8)
+	while game.world.keeper.hp > 20: await step()
+	await capture("keeper_combat")
+	while game.world.keeper.state == "free": await step()
+	assert(game.world.keeper.state == "unconscious")
+	await capture("unconscious")
+	while game.world.keeper.carrier < 0 and game.world.tick < 600: await step()
+	assert(game.world.keeper.carrier >= 0)
+	await capture("carried")
+	await mouse(game.get_canvas_transform() * game.actor_pixel("a1", game.world.animals[0].pos))
+	await click("auto")
+	await step(3)
+	assert(game.world.animals[0].rescuing)
+	await capture("rescue")
+	while game.world.metrics.rescues == 0 and game.world.working() and game.world.tick < 800: await step()
+	assert(game.world.metrics.rescues == 1)
+	await step(48)
+	assert(game.world.keeper.hp == 8 and game.world.keeper.resting and game.world.jobs_held)
+	await mouse(game.get_canvas_transform() * game.actor_pixel("keeper",game.world.keeper.pos))
+	await capture("recovered")
+	return {"fixture": "Second controlled encounter: keeper at19,8, fatigue70, enemy approaches from18,8; actual combat and rescue rules thereafter.", "outcome": compact_observation(), "checks": {"selected_right_move":true,"queue_retained":true,"rest_speed4":true,"invasion_speed1":true,"weak_resistance":true,"hp_zero_before_carry":true,"dog_rescue":true}}

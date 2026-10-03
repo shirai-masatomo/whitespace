@@ -70,6 +70,7 @@ func run():
 	check(w.act("gate", Vector2i(10, 9)) and not w.walkable(Vector2i(10, 9)), "Closed gate blocks")
 	# A real order walks into the site exactly on its completion tick.
 	var crossing = started()
+	crossing.keeper.pos = Vector2i(19, 7)
 	crossing.animals[0].mode = "whistle"
 	crossing.animals[0].order_until = 100
 	crossing.animals[0].order = Vector2i(20, 8)
@@ -243,7 +244,7 @@ func run():
 	check(front.result == "win" and front.animals[0].hp > 0 and front.animals[0].hp < 40 and front.enemies[0].hp == 0, "Full-HP 1v1: Shiba wins, takes variable damage")
 	var saved = Trial.run_trial("rescue")
 	check(saved.result == "win" and saved.metrics.captures == 1 and saved.metrics.rescues == 1, "Real placement + stay leads to capture and instinct rescue")
-	check(saved.milestones.any(func(m): return m.kind == "restrained") and saved.milestones.any(func(m): return m.kind == "carried"), "Distinct restraint/carriage alerts")
+	check(saved.milestones.any(func(m): return m.kind == "keeper_down") and saved.milestones.any(func(m): return m.kind == "carried"), "Distinct unconscious/carriage alerts")
 	var choose = night(flock)
 	choose.act("place", Vector2i(19, 8))
 	choose.act("start")

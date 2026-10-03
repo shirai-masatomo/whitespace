@@ -3,6 +3,7 @@ extends RefCounted
 static func perceive(e: Dictionary, w):
 	var visible = w.keeper.placed and w.distance(e.pos, w.keeper.pos) <= e.sight_range and w.line_of_sight(e.pos, w.keeper.pos)
 	if visible != e.can_see_keeper:
+		if visible: w.Life.danger(w, "spotted")
 		e.sight_reaction = "!" if visible else "?"
 		e.sight_reaction_until = w.tick + 6
 		w.sight_log.append({"tick": w.tick, "id": e.id, "visible": visible, "position": [e.pos.x, e.pos.y]})

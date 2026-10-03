@@ -31,6 +31,9 @@ var dragging = false
 var drag_start = Vector2.ZERO
 var selected: Dictionary = {}
 var speed = 1.0
+var seen_danger = 0
+var keeper_ui_signature = ""
+var keeper_hint_shown = false
 var accumulated = 0.0
 var clock = 0.0
 var automated = false
@@ -111,7 +114,7 @@ func _ready():
 	queue_controls = Control.new()
 	queue_controls.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	controls.add_child(queue_controls)
-	add_button(controls, "walk", "歩く", Rect2(405, 754, 95, 36), choose_walk)
+	add_button(controls, "walk", "牧場主", Rect2(405, 754, 95, 36), choose_walk)
 	setup_menu()
 	overlay = Node2D.new()
 	layer.add_child(overlay)
@@ -236,6 +239,19 @@ func refresh():
 		return
 	if world.phase == "shop":
 		build_shop()
+	elif selected.get("kind") == "keeper" and world.working():
+		add_button(palette, "keeper_rest", "起きる" if world.keeper.resting else "ひと休み", Rect2(16, 704, 125, 36), keeper_action.bind("keeper_rest"))
+		buttons.keeper_rest.icon = UI.icon("moon")
+		buttons.keeper_rest.disabled = world.keeper.forced_rest or world.keeper.state != "free"
+		add_button(palette, "resume_jobs", "仕事へ戻る", Rect2(150, 704, 145, 36), keeper_action.bind("resume_jobs"))
+		buttons.resume_jobs.icon = UI.icon("hammer")
+		buttons.resume_jobs.disabled = world.keeper.forced_rest or world.keeper.state != "free"
+		for i in range(2):
+			var drink = ["coffee", "energy_drink"][i]
+			if world.item_count(drink) > 0:
+				add_button(palette, drink, ("コーヒー" if i == 0 else "活力ドリンク") + " ×%d" % world.item_count(drink), Rect2(305 + i * 175, 704, 165, 36), keeper_action.bind(drink))
+				buttons[drink].icon = UI.icon("cup")
+				buttons[drink].disabled = world.keeper.drinks_today >= 2 or world.keeper.state != "free"
 	elif group == 1:
 		var deployed_selection = world.animals.filter(func(a): return a.id in selected_animals and a.placed)
 		if deployed_selection.is_empty():
@@ -352,10 +368,24 @@ func toggle_pause():
 
 func choose_walk():
 	group = -1
-	tool = "move"
-	selected.clear()
+	tool = ""
+	selected = {"kind": "keeper"}
 	selected_animals.clear()
 	refresh()
+
+func keeper_action(kind: String):
+	if not world.act(kind): notice("今はできないよ")
+	if not world.keeper.resting and speed > 2: speed = 1
+	refresh()
+
+func sync_danger():
+	if seen_danger == world.danger_serial: return
+	seen_danger = world.danger_serial
+	if speed > 1:
+		speed = 1
+		accumulated = 0
+		notice("危険が近い！")
+		refresh()
 
 func cancel_work(id: int):
 	world.act("cancel_job", Vector2i.ZERO, id)
@@ -364,7 +394,7 @@ func cancel_work(id: int):
 
 func refresh_jobs():
 	queue_controls.visible = world.working()
-	var signature = str(world.jobs) + str(world.keeper.state) + str(world.paused)
+	var signature = str(world.jobs) + str(world.keeper.state) + str(world.paused) + str(world.jobs_held) + str(world.keeper.resting)
 	if signature == queue_signature: return
 	queue_signature = signature
 	for child in queue_controls.get_children():
@@ -373,7 +403,7 @@ func refresh_jobs():
 	if world.jobs.is_empty(): return
 	var title = Label.new()
 	title.position = Vector2(1020, 64)
-	title.text = "今日の仕事  %d/8" % world.jobs.size()
+	title.text = ("ひと休み" if world.keeper.resting else ("預けた仕事" if world.jobs_held else "おしごと")) + "  · %d" % world.jobs.size()
 	queue_controls.add_child(title)
 	for i in range(world.jobs.size()):
 		var j = world.jobs[i]
@@ -383,8 +413,10 @@ func refresh_jobs():
 		row.focus_mode = Control.FOCUS_NONE
 		UI.button(row, Color("c6d1ac") if i == 0 else UI.PAPER)
 		var names = {"wall": "壁", "build_gate": "門", "kennel": "犬小屋", "coop": "鶏小屋", "move": "歩く", "collect": "回収", "repair": "修理", "remove": "解体", "gate": "門を開閉", "place_animal": "仲間を連れていく"}
-		row.text = "%d  %s%s" % [i + 1, names.get(j.kind, "仕事"), " · 救出待ち" if i == 0 and world.keeper.state != "free" else (" · 作業中" if j.state == "working" else (" · 移動中" if j.state == "walking" else ""))]
-		row.tooltip_text = "右クリックでこの予定だけを取り消す"
+		row.text = names.get(j.kind, "仕事")
+		row.icon = UI.icon("basket" if j.kind == "collect" else ("paw" if j.kind == "place_animal" else ("next" if j.kind == "move" else "hammer")))
+		row.tooltip_text = "%d番目 · %s" % [i + 1, "保留" if world.jobs_held else {"pending":"これから", "walking":"向かっている", "working":"作業中"}.get(j.state,"仕事")]
+		row.tooltip_text += " · 右クリックで取消"
 		row.gui_input.connect(func(event):
 			if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_RIGHT: cancel_work(j.id))
 		queue_controls.add_child(row)
@@ -409,15 +441,18 @@ func draw_work_plans():
 			for x in [-18, 18]:
 				draw_line(q + Vector2(x, 11), q + Vector2(x, -12), Color("bdac7a"), 3)
 		else: draw_line(q + Vector2(-9, 10), q + Vector2(9, 10), Color("cfdfaa"), 3)
-		label_on(self, q + Vector2(-4, -15), str(i + 1), 16, Color("f7e7b5"))
+		draw_line(q + Vector2(-10, -12), q + Vector2(-10, -27), Color("9b774e"), 3)
+		draw_rect(Rect2(q + Vector2(-16, -29), Vector2(16, 12)), Color("d8c692"))
+		label_on(self, q + Vector2(-13, -19), str(i + 1), 10, UI.INK)
 
 func toggle_speed():
-	speed = {0.5: 1.0, 1.0: 2.0, 2.0: 0.5}[speed]
+	var steps = [0.5, 1.0, 2.0, 4.0] if world.keeper.resting else [0.5, 1.0, 2.0]
+	speed = steps[posmod(steps.find(speed) + 1, steps.size())]
 	refresh()
 
 func change_speed(direction: int):
-	var steps = [0.5, 1.0, 2.0]
-	speed = steps[clampi(steps.find(speed) + direction, 0, 2)]
+	var steps = [0.5, 1.0, 2.0, 4.0] if world.keeper.resting else [0.5, 1.0, 2.0]
+	speed = steps[clampi(steps.find(speed) + direction, 0, steps.size() - 1)]
 	refresh()
 
 func center(p: Vector2) -> Vector2:
@@ -453,9 +488,12 @@ func _input(event):
 			get_viewport().set_input_as_handled()
 		elif event.pressed and event.button_index == MOUSE_BUTTON_RIGHT:
 			if queue_controls.visible and Rect2(1010, 94, 248, world.jobs.size() * 35).has_point(pointer): return
-			if event.ctrl_pressed and world.working():
+			if selected.get("kind") == "keeper" and world.working() and not pointer_over_ui():
 				var destination = Vector2i(get_canvas_transform().affine_inverse() * event.position / TILE)
-				world.act("move_now", destination)
+				if not world.act("move" if event.shift_pressed else "keeper_move", destination): notice("今はそこへ行けないよ")
+				refresh()
+				get_viewport().set_input_as_handled()
+				return
 			tool = ""
 			selected.clear()
 			selected_animal = -1
@@ -489,7 +527,7 @@ func _input(event):
 func pointer_over_ui() -> bool:
 	if pointer.y < 49 or pointer.y > 748: return true
 	if world.working() and Rect2(1010, 64, 248, 30 + world.jobs.size() * 35).has_point(pointer): return true
-	if not selected.is_empty() and Rect2(16, 610, 422, 76).has_point(pointer): return true
+	if not selected.is_empty() and Rect2(16, 595, 422, 91).has_point(pointer): return true
 	for button in buttons.values():
 		if is_instance_valid(button) and button.is_visible_in_tree() and button.get_global_rect().has_point(pointer): return true
 	return false
@@ -522,6 +560,12 @@ func _unhandled_input(event):
 	if event.shift_pressed:
 		dragging = true
 		drag_start = get_canvas_transform().affine_inverse() * event.position
+		return
+	if world.keeper.placed and event.position.distance_to(get_canvas_transform() * keeper_pixel()) < 24 * camera.zoom.x:
+		choose_walk()
+		if not keeper_hint_shown:
+			keeper_hint_shown = true
+			notice("右クリックで歩く。仕事は預けておけるよ")
 		return
 	# Context selection takes precedence over the previously armed tool, even while paused.
 	if not world.items_at(cell).is_empty():
@@ -567,7 +611,6 @@ func _unhandled_input(event):
 			selected.clear()
 	else:
 		selected.clear()
-		world.act("move", cell)
 	refresh()
 
 func _notification(what):
@@ -587,7 +630,16 @@ func _process(delta):
 		while accumulated >= Farm.DT:
 			world.step()
 			accumulated -= Farm.DT
+			sync_danger()
 	if last_phase != world.phase:
+		refresh()
+	sync_danger()
+	if speed > 2 and not world.keeper.resting:
+		speed = 1
+		refresh()
+	var vitals_signature = str(world.keeper.state) + str(world.keeper.resting) + str(world.keeper.forced_rest)
+	if selected.get("kind") == "keeper" and vitals_signature != keeper_ui_signature:
+		keeper_ui_signature = vitals_signature
 		refresh()
 	refresh_jobs()
 	smooth_actor("keeper", world.keeper.pos, delta)
@@ -622,6 +674,9 @@ func _process(delta):
 		if hit.source in ["animal", "enemy"]:
 			hit_effects.append({"source": ("a" if hit.source == "animal" else "e") + str(hit.id), "target": ("e" if hit.source == "animal" else "a") + str(hit.target), "at": clock})
 			play_alert("attack")
+		elif hit.source in ["keeper", "keeper_hit"]:
+			hit_effects.append({"source": "keeper" if hit.source == "keeper" else "e%d" % hit.id, "target": "e%d" % hit.target if hit.source == "keeper" else "keeper", "at": clock})
+			play_alert("attack")
 		elif hit.source == "object":
 			for cell in world.structures:
 				if world.structures[cell].id == hit.target: puff(center(cell), "hit")
@@ -630,7 +685,8 @@ func _process(delta):
 	while seen_milestones < world.milestones.size():
 		var event = world.milestones[seen_milestones]
 		seen_milestones += 1
-		var names = {"auto_start": "敵の襲来に備えよ", "invasion": "！ 侵入者接近", "restrained": "主人公が拘束された！", "carried": "主人公が連れ去られている！", "rescue": "主人公を救出した！", "animal_danger": "動物のHPが危険！", "blueprint": "犬小屋の作り方を覚えた", "blueprint_dropped": "作り方のメモが落ちた", "early_clear": "今夜の襲撃を退けた", "dawn": "夜明け。生産と成長の時間です"}
+		var names = {"auto_start": "敵の襲来に備えよ", "invasion": "！ 侵入者接近", "keeper_down": "倒れた！ 仲間に助けてもらおう", "keeper_recovered": "目が覚めた。少し休もう", "restrained": "主人公が拘束された！", "carried": "主人公が連れ去られている！", "rescue": "主人公を救出した！", "animal_danger": "動物のHPが危険！", "blueprint": "犬小屋の作り方を覚えた", "blueprint_dropped": "作り方のメモが落ちた", "early_clear": "今夜の襲撃を退けた", "dawn": "夜明け。生産と成長の時間です"}
+		if event.kind == "sleep_warning": notice("もう限界、少し休もう" if event.value >= 100 else ("かなり眠そうだ" if event.value >= 80 else "眠くなってきた"))
 		if event.kind == "early_clear":
 			victory_started = clock
 			for a in world.animals:
@@ -643,7 +699,7 @@ func _process(delta):
 			alert_kind = event.kind
 			alert_until = clock + (4.0 if event.kind in ["carried", "restrained"] else 2.5)
 			alert_until_tick = event.tick + (16 if event.kind in ["carried", "restrained"] else 10)
-			play_alert("rescue" if event.kind == "blueprint" else event.kind)
+			play_alert("rescue" if event.kind in ["blueprint", "keeper_recovered"] else ("restrained" if event.kind == "keeper_down" else event.kind))
 	while seen_skills < world.skill_log.size():
 		play_alert("bark" if world.skill_log[seen_skills].skill == "bark" else "collect")
 		seen_skills += 1
@@ -804,8 +860,8 @@ func _draw():
 		if selected.get("kind") == "enemy" and selected.id == e.id:
 			draw_rect(Rect2(p - Vector2(18, 23), Vector2(36, 49)), Color("e6c998"), false, 2)
 	if world.keeper.placed:
-		var p = center(view_positions.get("keeper", Vector2(world.keeper.pos)))
-		var walking = not world.jobs.is_empty() and world.jobs[0].state == "walking" and world.keeper.state == "free"
+		var p = actor_pixel("keeper", world.keeper.pos)
+		var walking = Farm.Life.able(world) and (world.manual_goal != null or (not world.jobs_held and not world.jobs.is_empty() and world.jobs[0].state == "walking"))
 		if walking: p.y += sin(visual_time * 15) * 2
 		p.y += sin(visual_time * 1.7) * 0.8
 		if world.keeper.carrier >= 0:
@@ -815,12 +871,15 @@ func _draw():
 			draw_line(p + Vector2(-11, 11), p + Vector2(12, 11), Color("e7c794"), 4)
 			draw_set_transform(p, -PI * 0.5)
 			p = Vector2.ZERO
+		elif world.keeper.state == "unconscious" or world.keeper.resting:
+			draw_set_transform(p + Vector2(0, 12), -PI * 0.5)
+			p = Vector2.ZERO
 		draw_circle(p + Vector2(0, -8), 9, Color("f3cda2"))
 		rect(p + Vector2(-12, -18), Vector2(24, 6), "f1d690")
 		rect(p + Vector2(-8, 1), Vector2(17, 20), "80d4cd")
 		rect(p + Vector2(-7, 20), Vector2(5, 6), "30484a")
 		rect(p + Vector2(3, 20), Vector2(5, 6), "30484a")
-		if not world.jobs.is_empty() and world.jobs[0].state == "working" and world.keeper.state == "free":
+		if not world.jobs_held and Farm.Life.able(world) and not world.jobs.is_empty() and world.jobs[0].state == "working":
 			var hand = p + Vector2(12, 5)
 			var hammer = hand + Vector2(8, -8 + sin(visual_time * 18) * 6)
 			draw_line(hand, hammer, Color("a58051"), 3)
@@ -829,8 +888,18 @@ func _draw():
 			label_on(self, p + Vector2(14, -18), "!", 18, Color("f69773"))
 			draw_line(p + Vector2(-10, 8), p + Vector2(10, 8), Color("513f39"), 3)
 		draw_set_transform(Vector2.ZERO)
+		var owner_pixel = center(view_positions.get("keeper", Vector2(world.keeper.pos)))
+		if world.keeper.carrier < 0:
+			if selected.get("kind") == "keeper": draw_rect(Rect2(owner_pixel - Vector2(18, 23), Vector2(36, 48)), Color("ffe2a3"), false, 2)
+			if world.keeper.resting or world.keeper.sleepiness >= 60:
+				label_on(self, owner_pixel + Vector2(15, -20), "Zzz" if world.keeper.resting else ("Z!" if world.keeper.sleepiness >= 90 else "z"), 18, Color("efb383") if world.keeper.sleepiness >= 80 else Color("dce8c2"))
+			if world.keeper.state == "unconscious": label_on(self, owner_pixel + Vector2(12, -18), "!", 22, Color("efa084"))
+			if world.tick < world.keeper.hurt_until or selected.get("kind") == "keeper":
+				draw_rect(Rect2(owner_pixel + Vector2(-17, -33), Vector2(34, 4)), Color("684b46"))
+				draw_rect(Rect2(owner_pixel + Vector2(-17, -33), Vector2(34 * float(world.keeper.hp) / world.keeper.max_hp, 4)), Color("d68b74"))
 	for item in world.field_items:
 		var q = center(item.pos) + (Vector2(7, 8) if item.kind == "kennel_plan" else Vector2.ZERO)
+		if item.kind == "kennel_plan" and world.keeper.placed and item.pos == world.keeper.pos: q = center(item.pos) + Vector2(-25,-22)
 		if item.kind == "kennel_plan":
 			draw_rect(Rect2(q - Vector2(15, 11), Vector2(30, 24)), Color("75c6d8"))
 			draw_line(q + Vector2(-9, 0), q + Vector2(0, -7), Color("ffffff"), 2)
@@ -973,12 +1042,6 @@ func draw_hud():
 	var remaining = maxf(0, world.day_seconds - world.tick * Farm.DT) if world.phase == "day" else world.remaining_night()
 	label_on(hud, Vector2(720, 31), "%s %02d:%02d" % ["日暮れまで" if world.phase == "day" else "夜明けまで", int(remaining) / 60, int(remaining) % 60], 18)
 	panel(Rect2(0, 748, 505, 52))
-	if world.working() and pointer.y > 748:
-		label_on(hud, Vector2(530, 779), "空き地:歩く / Ctrl+右:予定をやめて避難 / WASD:視点", 14)
-	elif world.working() and (tool == "place_animal" or Farm.BUILD.has(tool)) and not pointer_over_ui():
-		var hint_pos = (pointer + Vector2(24, 28)).clamp(Vector2(10, 90), Vector2(1070, 660))
-		panel(Rect2(hint_pos, Vector2(193, 29)))
-		label_on(hud, hint_pos + Vector2(9, 20), "左で予定 / 右でやめる", 14)
 	if clock < message_until and world.tick < message_until_tick and world.phase != "result":
 		panel(Rect2(16, 60, minf(800, message.length() * 16 + 28), 35))
 		label_on(hud, Vector2(28, 84), message, 16)
@@ -997,6 +1060,8 @@ func draw_hud():
 	if selected.get("kind") == "resource":
 		details = "もう一度クリックで回収を頼む" if collectible(selected.pos) else "回収済み"
 		if world.items_at(selected.pos).any(func(item): return item.kind == "kennel_plan"): details = "犬小屋の設計図\nもう一度クリックで回収・建築解放"
+	elif selected.get("kind") == "keeper":
+		draw_keeper_card()
 	elif selected.get("kind") == "animal":
 		draw_companion_card()
 	elif selected.get("kind") == "enemy":
@@ -1021,7 +1086,7 @@ func draw_hud():
 			for cell in selected_structures: refund[world.structures[cell].get("resource", "soil")] += world.dismantle_quote(cell)
 			details = "まとめて %dか所\n[Del] 解体 → %s" % [selected_structures.size(), resource_text(refund)]
 	if details != "":
-		panel(Rect2(16, 610, 422, 76))
+		panel(Rect2(16, 595, 422, 91))
 		var lines = details.split("\n")
 		for i in range(lines.size()): label_on(hud, Vector2(30, 638 + i * 25), lines[i], 16)
 	var cell = Vector2i(get_canvas_transform().affine_inverse() * pointer / TILE)
@@ -1253,6 +1318,8 @@ func product_title(row: Dictionary) -> String:
 	return Farm.Shop.table()[row.id].Name
 
 func product_description(id: String) -> String:
+	if id == "coffee": return "眠気を少し和らげる。飲み物は1日2杯まで"
+	if id == "energy_drink": return "眠気をぐっと和らげる。休息も忘れずに"
 	return {"hen": "朝に卵を産む、のんびりした仲間。", "cat": "牧場を気ままに歩く、小さな仲間。", "soil": "壁や門を築くための、よく締まる土。", "wood": "小屋づくりに使う、丈夫な木材。", "stone": "重くて丈夫な石。", "egg": "牧場で産まれた新鮮な卵。", "feather": "鶏が落とした、軽く柔らかな羽。", "mushroom": "夜明けの休養に。傷ついた仲間を癒す。", "kennel_plan": "犬が落ち着いて休める、小屋の作り方。"}.get(id, "牧場で使う品物。")
 func next_shop_page(count: int):
 	shop_page = (shop_page + 1) % count
@@ -1426,6 +1493,17 @@ func draw_card_icon(c: CanvasItem, kind: String, p: Vector2, scale_value: float)
 		c.draw_rect(Rect2(13, -7, 15, 10), Color("f8e5bd"))
 		c.draw_circle(Vector2(18, -12), 2, Color("273a35"))
 		c.draw_line(Vector2(-19, 3), Vector2(-28, -7), fur, 5)
+	elif kind in ["coffee", "energy_drink"]:
+		if kind == "coffee":
+			c.draw_arc(Vector2(18, 3), 9, -PI/2, PI/2, 10, UI.WOOD, 5)
+			c.draw_rect(Rect2(-18, -12, 34, 33), UI.PAPER)
+			c.draw_rect(Rect2(-15, -10, 28, 5), Color("674736"))
+			c.draw_line(Vector2(-26, 25), Vector2(26, 25), UI.WOOD, 4)
+		else:
+			c.draw_rect(Rect2(-10, -22, 20, 7), UI.WOOD)
+			c.draw_rect(Rect2(-15, -14, 30, 39), Color("93ab73"))
+			c.draw_rect(Rect2(-12, -2, 24, 17), UI.PAPER)
+			c.draw_texture_rect(UI.icon("spark"), Rect2(-7, 0, 14, 14), false)
 	elif kind == "hen":
 		c.draw_circle(Vector2(-3, 4), 17, Color("f5e8bd"))
 		c.draw_rect(Rect2(5, -20, 17, 23), Color("fff0ce"))
@@ -1576,3 +1654,29 @@ func dog_facing(a: Dictionary) -> float:
 	if not enemies.is_empty(): return -1.0 if enemies[0].pos.x < a.pos.x else 1.0
 	var previous = view_positions.get("a%d" % a.id, Vector2(a.pos))
 	return -1.0 if a.pos.x < previous.x - 0.02 else 1.0
+
+func draw_keeper_card():
+	var k = world.keeper
+	hud.draw_style_box(UI.surface(UI.PAPER), Rect2(16, 595, 422, 91))
+	hud.draw_circle(Vector2(48, 629), 12, Color("e9bd8b"))
+	hud.draw_rect(Rect2(32, 616, 32, 6), UI.GOLD)
+	label_on(hud, Vector2(78, 615), "牧場主", 17, UI.INK)
+	for i in range(2):
+		var y = 626 + i * 18
+		hud.draw_texture_rect(UI.icon("heart" if i == 0 else "moon"), Rect2(78, y, 14, 14), false)
+		hud.draw_rect(Rect2(100, y + 3, 170, 8), Color("b9b69c"))
+		var ratio = float(k.hp) / k.max_hp if i == 0 else k.sleepiness / 100.0
+		hud.draw_rect(Rect2(100, y + 3, 170 * ratio, 8), Color("bf7661") if i == 0 else Color("8087a7"))
+		label_on(hud, Vector2(279, y + 12), "%d/%d" % [k.hp, k.max_hp] if i == 0 else "%d%%" % k.sleepiness, 13, UI.INK)
+	var activity = "連れ去り" if k.carrier >= 0 else ("気絶" if k.state == "unconscious" else ("ぐっすり" if k.forced_rest else ("ひと休み" if k.resting else ("散歩中" if world.manual_goal != null else ("仕事は保留" if world.jobs_held else ("仕事中" if not world.jobs.is_empty() else "のんびり"))))))
+	label_on(hud, Vector2(30, 676), activity, 15, UI.INK)
+	if not world.jobs.is_empty():
+		var names = {"wall": "壁", "build_gate": "門", "collect": "回収", "move": "歩く", "place_animal": "仲間", "repair": "修理", "remove": "解体", "gate": "門", "kennel": "犬小屋", "coop": "鶏小屋"}
+		var next = names.get(world.jobs[0].kind, "仕事")
+		if world.jobs.size() > 1: next += " → " + names.get(world.jobs[1].kind, "仕事")
+		label_on(hud, Vector2(166, 676), next, 14, UI.INK)
+
+func keeper_pixel() -> Vector2:
+	if world.keeper.carrier >= 0:
+		return center(view_positions.get("e%d" % world.keeper.carrier, Vector2(world.keeper.pos))) + Vector2(34,-36)
+	return actor_pixel("keeper", world.keeper.pos)

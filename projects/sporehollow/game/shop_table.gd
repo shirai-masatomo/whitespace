@@ -5,6 +5,8 @@ const FOOD = {"dog_food": {"category": "dog", "hp": 10}, "hen_food": {"category"
 
 static func table() -> Dictionary:
 	var rows = [
+		["coffee", "コーヒー", "items", 8, 2, 1, 0.0, true, 1],
+		["energy_drink", "活力ドリンク", "items", 15, 4, 1, 0.0, true, 1],
 		["shiba", "柴犬 Lv1", "animals", 42, 15, 1, 0.0, false, 0],
 		["hen", "鶏 Lv1", "animals", 30, 10, 1, 1.0, true, 1],
 		["cat", "猫 Lv1", "animals", 38, 12, 1, 1.0, true, 1],

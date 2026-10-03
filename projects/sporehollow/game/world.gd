@@ -18,6 +18,11 @@ var seed_value = 1
 var rng = RandomNumberGenerator.new()
 var tick = 0
 var phase = "shop"
+const Life = preload("res://game/keeper_life.gd")
+var jobs_held = false
+var manual_goal = null
+var life_log: Array = []
+var danger_serial = 0
 const Jobs = preload("res://game/keeper_jobs.gd")
 var jobs: Array = []
 var next_job_id = 1
@@ -56,7 +61,7 @@ var skill_log: Array = []
 var milestones: Array = []
 var initial_positions: Dictionary = {}
 var structures: Dictionary = {}
-var keeper = {"pos": Vector2i(6, 13), "placed": false, "carrier": -1, "state": "free", "restrainer": -1, "move_credit": 0.0}
+var keeper = {"pos": Vector2i(6, 13), "placed": false, "carrier": -1, "state": "free", "restrainer": -1, "move_credit": 0.0, "hp": 30, "max_hp": 30, "sleepiness": 0.0, "resting": false, "forced_rest": false, "warned": 0, "heal_credit": 0.0, "recover_ticks": 0, "next_attack": 0, "hurt_until": 0, "drinks_today": 0}
 var animals: Array = []
 var enemies: Array = []
 var foods: Array = []
@@ -100,6 +105,12 @@ func _init(data: Dictionary = {}, seed_number: int = 17, stage_override: Diction
 			owned.hp = maxi(1, (SPECIES[owned.species].hp + (owned.lv - 1) * 4) / 2) # Provisional return after one full day off.
 	morning_checkpoint = campaign.get("morning_checkpoint", campaign).duplicate(true)
 	morning_checkpoint.erase("morning_checkpoint")
+	for key in ["hp", "sleepiness", "drinks_today"]:
+		keeper[key] = campaign.get("keeper_vitals", {}).get(key, keeper[key])
+	if keeper.hp <= 0: keeper.state = "unconscious"
+	if keeper.sleepiness >= 100:
+		keeper.forced_rest = true
+		keeper.resting = true
 	checkpoint = campaign.duplicate(true)
 	phase = "day" if campaign.night_ready else "shop"
 	stage = campaign.stage
@@ -205,6 +216,8 @@ func make_schedule():
 			var cell = wave.entries[j % wave.entries.size()]
 			spawn_schedule.append({"tick": ceili(seconds / DT), "wave": i + 1, "role": wave.role,
 				"entry": Vector2i(cell[0], cell[1]), "lv": wave.get("lv", 1)})
+			for key in ["move_speed", "sight_range"]:
+				if wave.has(key): spawn_schedule.back()[key] = wave[key]
 	spawn_schedule.sort_custom(func(a, b): return a.tick < b.tick)
 
 func next_attack_seconds() -> float:
@@ -245,7 +258,11 @@ func exit_for(entry: Vector2i) -> Vector2i:
 	exits.sort_custom(func(a, b): return distance(entry, a) < distance(entry, b))
 	return exits[0]
 
-func next_step(start: Vector2i, goal: Vector2i, raider: bool = false) -> Vector2i:
+func actor_occupied(p: Vector2i, origin: Vector2i) -> bool:
+	if p == origin: return false
+	return (keeper.placed and keeper.pos == p) or animals.any(func(a): return a.placed and a.pos == p) or enemies.any(func(e): return not e.done and e.pos == p)
+
+func next_step(start: Vector2i, goal: Vector2i, raider: bool = false, avoid_actors: bool = false) -> Vector2i:
 	if start == goal: return start
 	var frontier = [start]
 	var cost = {start: 0.0}
@@ -259,6 +276,7 @@ func next_step(start: Vector2i, goal: Vector2i, raider: bool = false) -> Vector2
 		for n in neighbors(p):
 			var exit_cell = raider and n == goal and entries.any(func(entry): return exit_for(entry) == n)
 			if not inside(n) and not exit_cell: continue
+			if avoid_actors and n != goal and actor_occupied(n, start): continue
 			var blocked = blocks(n)
 			if blocked and not raider: continue
 			# Compare walking actions with the actual number of object attacks needed.
@@ -289,13 +307,13 @@ func start_night():
 
 func act(kind: String, p: Vector2i = Vector2i.ZERO, animal_id: int = -1) -> bool:
 	var accepted = false
-	if kind in ORDERS or kind in ["pause", "end_night"]:
+	if kind in ["keeper_move", "keeper_rest", "resume_jobs", "coffee", "energy_drink"]:
+		accepted = Life.command(self, kind, p)
+	elif kind in ORDERS or kind in ["pause", "end_night"]:
 		accepted = _execute_local(kind, p, animal_id)
 	elif kind == "cancel_job" and working() and not paused:
 		accepted = Jobs.cancel(self, animal_id)
-	elif kind == "move_now" and working() and not paused and walkable(p) and keeper.state == "free":
-		for j in jobs.duplicate(): Jobs.cancel(self, j.id)
-		accepted = Jobs.enqueue(self, "move", p, -1)
+
 	else:
 		accepted = Jobs.enqueue(self, kind, p, animal_id)
 	actions.append({"tick": tick, "kind": kind, "pos": [p.x, p.y], "accepted": accepted, "paused": paused, "animal_id": animal_id})
@@ -388,9 +406,10 @@ func issue_order(kind: String, p: Vector2i, animal_id: int = -1) -> bool:
 
 func spawn_enemy(event: Dictionary):
 	var entry: Vector2i = event.entry
-	var origin = exit_for(entry) if blocks(entry) else entry
-	enemies.append({"id": spawned, "pos": origin, "entry": entry, "lv": event.get("lv", 1), "hp": Rules.KIDNAPPER.max_hp, "max_hp": Rules.KIDNAPPER.max_hp,
-		"attack_power": Rules.KIDNAPPER.attack_power, "object_attack_power": Rules.KIDNAPPER.object_attack_power,
+	var origin = exit_for(entry) if blocks(entry) or occupied(entry) else entry
+	var progress = mini(6, maxi(0, campaign.day - 1))
+	enemies.append({"move_speed": event.get("move_speed", 1.333333 + progress * 0.27), "move_credit": 0.0, "id": spawned, "pos": origin, "entry": entry, "lv": event.get("lv", 1), "hp": Rules.KIDNAPPER.max_hp + progress * 4, "max_hp": Rules.KIDNAPPER.max_hp + progress * 4,
+		"attack_power": Rules.KIDNAPPER.attack_power + progress / 2, "object_attack_power": Rules.KIDNAPPER.object_attack_power,
 		"counter_seconds": Rules.KIDNAPPER.counter_seconds, "counter_target": -1, "counter_until": 0, "counter_ready": 0, "next_attack": 0,
 		"attacker": -1, "threat_until": 0,
 		"move_stopped_until": 0,
@@ -398,6 +417,7 @@ func spawn_enemy(event: Dictionary):
 		"sight_range": event.get("sight_range", Rules.KIDNAPPER.sight_range), "can_see_keeper": false, "last_known_keeper_position": null, "search_state": "探索中",
 		"search_goal": null, "search_goal_until": 0, "search_visits": {}, "sight_reaction": "", "sight_reaction_until": 0,
 		"weakened_until": 0, "born": tick, "path": [origin], "role": event.role, "state": "探索中"})
+	Life.danger(self, "invasion")
 	spawned += 1
 	milestones.append({"tick": tick, "kind": "invasion", "id": spawned - 1})
 	say("入口から誘拐役！ 牧場主を守ろう。")
@@ -406,8 +426,15 @@ func release_keeper(e: Dictionary):
 	if e.carry == "keeper":
 		e.carry = ""
 		keeper.carrier = -1
-		keeper.state = "free"
+		keeper.state = "unconscious" if keeper.hp <= 0 else "free"
+		keeper.recover_ticks = 0
 		keeper.pos = e.pos
+		jobs_held = true
+		var clear = neighbors(e.pos).filter(func(p): return walkable(p) and not occupied(p))
+		if not clear.is_empty(): e.pos = clear[0]
+		else:
+			e.done = true
+			metrics.repelled += 1
 		metrics.rescues += 1
 		keeper.restrainer = -1
 		milestones.append({"tick": tick, "kind": "rescue", "id": e.id})
@@ -442,7 +469,7 @@ func animal_step(a: Dictionary):
 		a.move_credit = minf(1.0, a.move_credit + a.move_speed * DT)
 		if not threat.is_empty() and a.move_credit >= 1:
 			a.move_credit -= 1
-			var options = neighbors(a.pos).filter(func(p): return walkable(p))
+			var options = neighbors(a.pos).filter(func(p): return walkable(p) and not actor_occupied(p, a.pos))
 			options.sort_custom(func(p, q): return distance(p, threat[0].pos) > distance(q, threat[0].pos))
 			if not options.is_empty(): a.pos = options[0]
 		elif threat.is_empty():
@@ -451,7 +478,7 @@ func animal_step(a: Dictionary):
 				coops.sort_custom(func(p, q): return distance(a.pos, p) < distance(a.pos, q))
 				if not coops.is_empty() and distance(a.pos, coops[0]) <= 6:
 					if tick % 4 == 0:
-						a.pos = next_step(a.pos, coops[0])
+						a.pos = next_step(a.pos, coops[0], false, true)
 						if a.pos == coops[0]: a.hp = mini(a.max_hp, a.hp + 1)
 					a.state = "鶏小屋"
 					return
@@ -465,7 +492,7 @@ func animal_step(a: Dictionary):
 		a.rescuing = false
 		rest_step(a, true)
 		return
-	var carrier = enemies.filter(func(e): return not e.done and not e.flee and e.carry == "keeper")
+	var carrier = enemies.filter(func(e): return not e.done and not e.flee and (e.carry == "keeper" or (keeper.state in ["unconscious", "restrained"] and distance(e.pos, keeper.pos) <= 2)))
 	a.rescuing = AnimalData.has_skill(a, "rescue") and not carrier.is_empty()
 	var targets = animal_targets(a)
 	targets.sort_custom(func(e, f): return distance(a.pos, e.pos) < distance(a.pos, f.pos))
@@ -540,8 +567,8 @@ func animal_step(a: Dictionary):
 	a.move_credit = minf(1.75, a.move_credit + a.move_speed * DT * (Rules.SHIBA.rescue_multiplier if a.rescuing else 1.0))
 	if a.move_credit >= 1 and distance(a.pos, goal) > (1 if chasing else 0):
 		a.move_credit -= 1
-		var move = next_step(a.pos, goal)
-		if move != a.pos and kennel_owner(move) in [-1, a.id]:
+		var move = next_step(a.pos, goal, false, true)
+		if move != a.pos and not actor_occupied(move, a.pos) and kennel_owner(move) in [-1, a.id]:
 			a.pos = move
 			a.stamina = maxf(0, a.stamina - 0.65)
 	else:
@@ -579,8 +606,8 @@ func rest_step(a: Dictionary, explicit: bool):
 		a.move_credit += a.move_speed * DT
 		if a.move_credit >= 1:
 			a.move_credit -= 1
-			var next = next_step(a.pos, destination)
-			if next == a.pos or kennel_owner(next) not in [-1, a.id]:
+			var next = next_step(a.pos, destination, false, true)
+			if next == a.pos or actor_occupied(next, a.pos) or kennel_owner(next) not in [-1, a.id]:
 				release_kennel(a)
 				a.rest_settled = true
 			else: a.pos = next
@@ -650,13 +677,32 @@ func enemy_step(e: Dictionary):
 					var damage = roundi(e.attack_power * (1.0 - AnimalData.SKILLS.meow.reduction if tick < e.weakened_until else 1.0))
 					target.hp = maxi(0, target.hp - damage)
 					if previous_hp > target.max_hp * Rules.LOW_HP_FRACTION and target.hp <= target.max_hp * Rules.LOW_HP_FRACTION:
+						Life.danger(self, "animal_danger")
 						milestones.append({"tick": tick, "kind": "animal_danger", "id": target.id})
 					combat_log.append({"tick": tick, "source": "enemy", "id": e.id, "target": target.id, "damage": damage})
 			elif tick % 3 == 0:
 				move_enemy(e, next_step(e.pos, target.pos, true))
 			return
-	var interval = 4 if e.carry == "keeper" else 3
-	if tick % interval != 0: return
+	if not e.flee and e.carry == "" and e.can_see_keeper and distance(e.pos, keeper.pos) <= 1 and keeper.carrier < 0:
+		e.state = "主人公へ攻撃" if keeper.hp > 0 else "担ぎ上げる"
+		if keeper.hp > 0:
+			if tick >= e.next_attack:
+				e.next_attack = tick + ceili(e.counter_seconds / DT)
+				Life.hurt(self, e)
+		else:
+			e.capture_progress += 1
+			if e.capture_progress >= 4:
+				e.carry = "keeper"
+				keeper.carrier = e.id
+				keeper.state = "captured"
+				keeper.pos = e.pos
+				metrics.captures += 1
+				Life.danger(self, "carried")
+				milestones.append({"tick": tick, "kind": "carried", "id": e.id})
+		return
+	e.move_credit = minf(1.9, e.move_credit + (1.0 if e.carry == "keeper" else e.move_speed) * DT)
+	if e.move_credit < 1: return
+	e.move_credit -= 1
 	var goal = RaiderAI.target(e, self)
 	if e.pos == goal:
 		if e.flee:
@@ -669,20 +715,6 @@ func enemy_step(e: Dictionary):
 			keeper.state = "abducted"
 			finish(false)
 			return
-		if e.can_see_keeper and e.pos == keeper.pos and keeper.carrier < 0:
-			e.capture_progress += 1
-			if e.capture_progress == 1:
-				keeper.state = "restrained"
-				keeper.restrainer = e.id
-				milestones.append({"tick": tick, "kind": "restrained", "id": e.id})
-			e.state = "拘束中"
-			if e.capture_progress >= 2:
-				e.carry = "keeper"
-				keeper.carrier = e.id
-				keeper.state = "captured"
-				metrics.captures += 1
-				milestones.append({"tick": tick, "kind": "carried", "id": e.id})
-				say("連れ去り中！ 犬で追い返すと救出できます。")
 		return
 	e.capture_progress = 0
 	var next = next_step(e.pos, goal, true)
@@ -698,6 +730,14 @@ func move_enemy(e: Dictionary, next: Vector2i):
 		e.attacker = defenders[0].id
 		e.threat_until = tick + ceili(Rules.KIDNAPPER.counter_duration / DT)
 		return
+	if actor_occupied(next, e.pos) and not (e.carry == "keeper" and next == keeper.pos):
+		var around = neighbors(e.pos).filter(func(p): return walkable(p) and not actor_occupied(p, e.pos) and distance(p, next) <= 2)
+		if around.is_empty(): return
+		var goal = RaiderAI.target(e, self)
+		var go = around[0]
+		for p in around:
+			if distance(p, goal) < distance(go, goal): go = p
+		next = go
 	if blocks(next):
 		var b = structures[next]
 		var damage = maxi(0, e.object_attack_power - b.armor)
@@ -731,7 +771,7 @@ func interrupt_site(p: Vector2i):
 		say("建設中断：接触により建築素材を半分返却。")
 
 func construction_step():
-	if keeper.state != "free" or jobs.is_empty(): return
+	if not Life.able(self) or jobs_held or manual_goal != null or jobs.is_empty(): return
 	var j = jobs[0]
 	if j.started and distance(keeper.pos, j.pos) == 1: advance_site(j.pos)
 
@@ -741,7 +781,7 @@ func advance_site(p: Vector2i):
 	if occupied(p):
 		interrupt_site(p)
 		return
-	b.remaining -= 1
+	b.remaining -= Life.factor(self)
 	if b.remaining <= 0:
 		b.status = "ready"
 		b.hp = b.max_hp
@@ -771,6 +811,7 @@ func repair(p: Vector2i) -> bool:
 	return true
 
 func persist_farm():
+	campaign.keeper_vitals = {"hp": keeper.hp, "sleepiness": keeper.sleepiness, "drinks_today": keeper.drinks_today}
 	campaign.keeper_position = [keeper.pos.x, keeper.pos.y]
 	campaign.resources = resource_snapshot()
 	campaign.next_structure_id = next_structure_id
@@ -788,6 +829,7 @@ func step():
 	if not working() or paused: return
 	tick += 1
 	if phase == "day" and tick * DT >= day_seconds: start_night()
+	Life.step(self)
 	Jobs.step(self)
 	if tick % ceili(Rules.NATURE.interval / DT) == 0: grow_nature()
 	command_power = minf(10, command_power + 0.07)
@@ -849,6 +891,9 @@ func next_campaign() -> Dictionary:
 	var data = campaign.duplicate(true)
 	data.erase("morning_checkpoint")
 	data.day += 1
+	if data.has("keeper_vitals"):
+		data.keeper_vitals.drinks_today = 0
+		data.keeper_vitals.hp = maxi(8, data.keeper_vitals.hp)
 	data.night_ready = false
 	return data
 
@@ -884,7 +929,7 @@ func observation() -> Dictionary:
 		schedule.append(row)
 	return {"seed": seed_value, "stage": stage, "day": campaign.day, "tick": tick, "phase": phase, "paused": paused, "result": result,
 		"remaining_day": maxf(0, day_seconds - tick * DT), "night_started_tick": night_started_tick,
-		"keeper_path": keeper_path, "job_log": job_log, "jobs": jobs.map(func(j):
+		"keeper_path": keeper_path, "life_log": life_log, "jobs_held": jobs_held, "manual_goal": [manual_goal.x, manual_goal.y] if manual_goal != null else null, "job_log": job_log, "jobs": jobs.map(func(j):
 			var row = j.duplicate(true)
 			row.pos = [j.pos.x, j.pos.y]
 			return row),
