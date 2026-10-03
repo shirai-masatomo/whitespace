@@ -23,6 +23,7 @@ if ($Task -in @('play', 'editor')) {
 if ($Task -in @('check', 'test', 'build')) {
     Run-Headless 'import' @('--editor', '--import', '--quit')
     Run-Headless 'tests' @('--script', 'tests/test_world.gd')
+    Run-Headless 'jobs' @('--script', 'tests/test_jobs.gd')
 }
 if ($Task -in @('check', 'evaluate')) { Run-Headless 'evaluate' @('--script', 'tests/evaluate.gd') }
 if ($Task -in @('check', 'build')) {

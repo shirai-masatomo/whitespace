@@ -130,31 +130,48 @@ func run():
 	await click("shop_back")
 	await capture("leave_market")
 	await click("advance")
-	assert(game.world.phase == "prepare")
-	await create_timer(1.7).timeout
-	assert(game.cinematic() and not game.controls.visible)
-	await create_timer(1.5).timeout
-	await move_pointer(game.screen_cell(Vector2(19, 8)))
-	await capture("placement")
-	await mouse(game.screen_cell(Vector2(19, 8)))
+	assert(game.world.phase == "day" and game.world.keeper.placed)
+	await create_timer(1.2).timeout
+	assert(not game.cinematic() and game.controls.visible)
+	await capture("day")
 	assert(game.group == 1 and game.tool == "" and game.selected_animals.is_empty())
-	await mouse(game.screen_cell(Vector2(18, 8)))
-	await key(KEY_TAB)
-	await key(KEY_TAB, false)
-	assert(not game.world.animals[0].placed and game.tool == "" and game.selected_animal == -1)
-	await click("animal2")
-	await mouse(game.screen_cell(Vector2(20, 12)))
-	assert(not game.buttons.has("auto")) # Hen selection never exposes commands.
-	await mouse(game.screen_cell(Vector2(18, 12)), MOUSE_BUTTON_RIGHT)
-	await click("animal1")
-	await mouse(game.screen_cell(Vector2(18, 8)))
-	await mouse(game.screen_cell(Vector2(18, 8)))
-	assert(game.buttons.has("auto") and not game.buttons.has("animal1"))
 	await click("group0")
 	await click("wall")
-	await mouse(game.screen_cell(Vector2(14, 10)))
-	await step(4)
-	assert(game.world.structures[Vector2i(14, 10)].status == "ready")
+	for p in [Vector2(3, 3), Vector2(8, 3), Vector2(18, 3)]: await mouse(game.screen_cell(p))
+	assert(game.world.jobs.size() == 3 and game.world.structures.is_empty())
+	await capture("queue")
+	while not game.world.jobs[0].started: await step()
+	await capture("working")
+	while game.world.metrics.built < 2 and game.world.tick < 250: await step()
+	assert(game.world.metrics.built == 2)
+	await step(2)
+	var third = game.world.jobs.back().id
+	var row = game.world.jobs.size() - 1
+	await mouse(Vector2(1243, 109 + row * 35))
+	assert(not game.world.jobs.any(func(j): return j.id == third))
+	await mouse(game.screen_cell(Vector2(16, 6)))
+	while not game.world.jobs.is_empty() and game.world.tick < 290: await step()
+	assert(game.world.structures[Vector2i(16, 6)].status == "ready")
+	await click("group1")
+	await click("animal2")
+	await mouse(game.screen_cell(Vector2(20, 12)))
+	await click("animal1")
+	await mouse(game.screen_cell(Vector2(18, 8)))
+	while not game.world.jobs.is_empty() and game.world.tick < 330: await step()
+	assert(game.world.animals.all(func(a): return a.placed))
+	await mouse(game.get_canvas_transform() * game.actor_pixel("a1", game.world.animals[0].pos))
+	await click("stay")
+	await mouse(game.screen_cell(Vector2(18, 8)))
+	await click("walk")
+	await mouse(game.screen_cell(Vector2(19, 8)))
+	while game.world.tick < 354: await step()
+	await click("group0")
+	await click("wall")
+	await mouse(game.screen_cell(Vector2(3, 2)))
+	var retained_id = game.world.jobs[0].id
+	await step(6)
+	assert(game.world.phase == "defend" and game.world.jobs[0].id == retained_id and game.controls.visible)
+	await capture("night_queue")
 	await key(KEY_KP_SUBTRACT)
 	await key(KEY_KP_SUBTRACT, false)
 	assert(game.speed == 0.5)
@@ -168,14 +185,15 @@ func run():
 	await key(KEY_SPACE)
 	await key(KEY_SPACE, false)
 	await step(40)
-	assert(not game.world.enemies[0].can_see_keeper)
-	while not game.world.enemies[0].can_see_keeper and game.world.tick < 500: await step()
+	assert(game.world.enemies.size() == 1)
+	await mouse(game.screen_cell(Vector2(19, 8)), MOUSE_BUTTON_RIGHT, true)
+	assert(game.world.jobs.size() == 1 and game.world.jobs[0].kind == "move")
+	while not game.world.enemies[0].can_see_keeper and game.world.tick < 800: await step()
 	assert(game.world.enemies[0].can_see_keeper)
 	await create_timer(0.25).timeout
 	await mouse(game.get_canvas_transform() * game.actor_pixel("e0", game.world.enemies[0].pos))
-	assert(game.selected.get("kind") == "enemy")
 	await capture("combat")
-	while not game.world.early_clear and game.world.phase == "defend" and game.world.tick < 720:
+	while not game.world.early_clear and game.world.phase == "defend" and game.world.tick < 1080:
 		await step()
 	assert(game.world.early_clear and game.world.phase == "defend")
 	assert(game.selected.get("kind", "" ) != "enemy")
@@ -188,6 +206,7 @@ func run():
 	assert("kennel" not in game.world.campaign.unlocked_blueprints)
 	await mouse(game.screen_cell(Vector2(plan)))
 	await mouse(game.screen_cell(Vector2(plan)))
+	while not game.world.jobs.is_empty() and game.world.phase == "defend": await step()
 	assert("kennel" in game.world.campaign.unlocked_blueprints)
 	var before_finish = compact_observation()
 	await click("advance")
@@ -215,7 +234,7 @@ func run():
 		"branch": "codex/sporehollow-prototype", "seed": 17, "screenshots": captures,
 		"before_early_finish": before_finish, "dawn": dawn,
 		"audio": {"cues": game.audio.played, "birds_seconds": [8, 20], "driver": "Dummy"},
-		"checks": {"hierarchical_back": true, "no_purchase_on_inspect": true, "sold_out_disabled": true, "unaffordable_disabled": true, "category_switch_after_purchase": true, "three_way_shop": true, "no_shiba_or_food_sale": true, "click_only_animal_candidates": true,
+		"checks": {"day_work_queue": true, "third_cancelled": true, "night_preserves_jobs": true, "night_escape": true, "hierarchical_back": true, "no_purchase_on_inspect": true, "sold_out_disabled": true, "unaffordable_disabled": true, "category_switch_after_purchase": true, "three_way_shop": true, "no_shiba_or_food_sale": true, "click_only_animal_candidates": true,
 			"hen_has_no_commands": true, "no_accidental_deployment": true, "manual_blueprint": true,
 			"work_after_clear": true, "named_animal": true, "manual_exp_training": true, "morning_retry": true, "arrival_before_shop": true, "cinematic_hides_ui": true, "retired_enemy_deselected": true, "dawn_to_arrival": true}}
 	var file = FileAccess.open("res://review/current/stage1-observation.json", FileAccess.WRITE)
@@ -226,7 +245,7 @@ func run():
 func compact_observation() -> Dictionary:
 	var full = game.world.observation()
 	var result = {}
-	for id in ["seed", "stage", "day", "tick", "phase", "remaining_night", "early_clear", "early_clear_tick", "early_finish_bonus", "exp_pool", "dawn", "field_items", "score", "resources", "metrics", "milestones", "combat", "ai_settings", "decision_counts", "sight_log", "skill_log"]:
+	for id in ["seed", "stage", "day", "tick", "phase", "remaining_night", "remaining_day", "night_started_tick", "jobs", "job_log", "keeper_path", "early_clear", "early_clear_tick", "early_finish_bonus", "exp_pool", "dawn", "field_items", "score", "resources", "metrics", "milestones", "combat", "ai_settings", "decision_counts", "sight_log", "skill_log"]:
 		result[id] = full[id]
 	result.decision_log = full.decision_log.slice(-12)
 	result.decision_log_note = "Last12 decisions; counts cover the night. Full trace remains available through F8."

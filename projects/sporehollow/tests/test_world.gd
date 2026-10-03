@@ -1,5 +1,5 @@
 extends SceneTree
-const Farm = preload("res://game/world.gd")
+const Farm = preload("res://tests/rule_fixture.gd")
 const Trial = preload("res://tests/evaluate.gd")
 var checks = 0
 

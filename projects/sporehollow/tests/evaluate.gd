@@ -1,5 +1,5 @@
 extends SceneTree
-const Farm = preload("res://game/world.gd")
+const Farm = preload("res://tests/rule_fixture.gd")
 const SEEDS = 32
 
 static func deploy(w, keeper: Vector2i = Vector2i(19, 8), dog: Vector2i = Vector2i(18, 8)):

@@ -17,7 +17,14 @@ var stage = 1
 var seed_value = 1
 var rng = RandomNumberGenerator.new()
 var tick = 0
-var phase = "prepare"
+var phase = "shop"
+const Jobs = preload("res://game/keeper_jobs.gd")
+var jobs: Array = []
+var next_job_id = 1
+var job_log: Array = []
+var keeper_path: Array = []
+var night_started_tick = 0
+var day_seconds = 90.0
 var early_clear = false
 var early_clear_tick = -1
 var early_finish_bonus = 0
@@ -49,7 +56,7 @@ var skill_log: Array = []
 var milestones: Array = []
 var initial_positions: Dictionary = {}
 var structures: Dictionary = {}
-var keeper = {"pos": Vector2i(19, 8), "placed": false, "carrier": -1, "state": "free", "restrainer": -1}
+var keeper = {"pos": Vector2i(6, 13), "placed": false, "carrier": -1, "state": "free", "restrainer": -1, "move_credit": 0.0}
 var animals: Array = []
 var enemies: Array = []
 var foods: Array = []
@@ -94,7 +101,7 @@ func _init(data: Dictionary = {}, seed_number: int = 17, stage_override: Diction
 	morning_checkpoint = campaign.get("morning_checkpoint", campaign).duplicate(true)
 	morning_checkpoint.erase("morning_checkpoint")
 	checkpoint = campaign.duplicate(true)
-	phase = "prepare" if campaign.night_ready else "shop"
+	phase = "day" if campaign.night_ready else "shop"
 	stage = campaign.stage
 	seed_value = seed_number
 	rng.seed = seed_number
@@ -109,6 +116,7 @@ func _init(data: Dictionary = {}, seed_number: int = 17, stage_override: Diction
 	materials = campaign.resources.soil
 	wood = campaign.resources.wood
 	stone = campaign.resources.stone
+	day_seconds = config.get("day_seconds", 90.0)
 	nature_config = config.get("nature", Rules.NATURE).duplicate(true)
 	next_structure_id = campaign.get("next_structure_id", 1)
 	for saved in campaign.get("facilities", []):
@@ -168,8 +176,22 @@ func _init(data: Dictionary = {}, seed_number: int = 17, stage_override: Diction
 		a.state = "見張り" if a.species == "shiba" else "ついばむ"
 		a.path = [a.pos]
 		animals.append(a)
+	if phase == "day":
+		keeper.placed = true
+		var saved_pos = campaign.get("keeper_position", [6, 13])
+		keeper.pos = Vector2i(saved_pos[0], saved_pos[1])
+		if not walkable(keeper.pos):
+			for y in range(1, H - 1):
+				for x in range(1, W - 1):
+					if walkable(Vector2i(x, y)): keeper.pos = Vector2i(x, y)
+		initial_positions = {"keeper": [keeper.pos.x, keeper.pos.y], "animals": []}
+		keeper_path = [[keeper.pos.x, keeper.pos.y]]
+		for p in structures:
+			if structures[p].status == "building":
+				jobs.append({"id": next_job_id, "kind": "build_gate" if structures[p].kind == "gate" else structures[p].kind, "pos": p, "animal_id": -1, "state": "pending", "resource": "", "reserved": 0, "started": false, "resume": true})
+				next_job_id += 1
 	shop_stock = Shop.generate(stage, seed_value, campaign.unlocked_blueprints)
-	say("今夜はどこで過ごす？")
+	say("牧場を整えよう")
 
 func make_schedule():
 	# Each wave has a start time relative to the first attack. Jitter affects gaps, never prep length.
@@ -186,7 +208,8 @@ func make_schedule():
 	spawn_schedule.sort_custom(func(a, b): return a.tick < b.tick)
 
 func next_attack_seconds() -> float:
-	return maxf(0, (spawn_schedule[schedule_index].tick - tick) * DT) if schedule_index < spawn_schedule.size() else -1.0
+	if phase == "day": return maxf(0, day_seconds - tick * DT) + config.first_attack_seconds
+	return maxf(0, (spawn_schedule[schedule_index].tick - (tick - night_started_tick)) * DT) if schedule_index < spawn_schedule.size() else -1.0
 
 func say(message: String):
 	events.append({"tick": tick, "text": message})
@@ -211,7 +234,7 @@ func has_nest() -> bool:
 	return campaign.animals.any(func(a): return a.species == "hen")
 
 func can_build(kind: String, p: Vector2i) -> bool:
-	return phase == "defend" and not paused and BUILD.has(kind) and inside(p) and p not in entries and not field_items.any(func(item): return item.pos == p) and not occupied(p) and not live_structure(p) and BUILD[kind].get("blueprint", "") in ([""] + campaign.unlocked_blueprints) and resource_amount(BUILD[kind].get("resource", "soil")) >= BUILD[kind].cost
+	return working() and not paused and BUILD.has(kind) and inside(p) and p not in entries and not field_items.any(func(item): return item.pos == p) and not occupied(p) and not live_structure(p) and BUILD[kind].get("blueprint", "") in ([""] + campaign.unlocked_blueprints) and resource_amount(BUILD[kind].get("resource", "soil")) >= BUILD[kind].cost
 
 func neighbors(p: Vector2i) -> Array:
 	return [p + Vector2i.RIGHT, p + Vector2i.LEFT, p + Vector2i.UP, p + Vector2i.DOWN]
@@ -253,27 +276,41 @@ func valid_animal_site(id: int, p: Vector2i) -> bool:
 	return animals.any(func(a): return a.id == id and available(a)) and keeper.placed and walkable(p) and not live_structure(p) and p not in entries and not occupied(p)
 
 func can_place_animal(id: int, p: Vector2i) -> bool:
-	return phase == "defend" and not paused and valid_animal_site(id, p)
+	return working() and not paused and valid_animal_site(id, p)
+
+func working() -> bool:
+	return phase in ["day", "defend"]
+
+func start_night():
+	if phase != "day": return
+	phase = "defend"
+	night_started_tick = tick
+	milestones.append({"tick": tick, "kind": "nightfall"})
 
 func act(kind: String, p: Vector2i = Vector2i.ZERO, animal_id: int = -1) -> bool:
 	var accepted = false
-	if phase == "prepare":
-		if kind == "place" and not keeper.placed and walkable(p) and not live_structure(p) and p not in entries and not field_items.any(func(item): return item.pos == p):
-			keeper.pos = p
-			keeper.placed = true
-			phase = "defend"
-			initial_positions = {"keeper": [keeper.pos.x, keeper.pos.y], "animals": []}
-			milestones.append({"tick": 0, "kind": "auto_start", "id": -1})
-			say("敵の襲来に備えよ")
-			accepted = true
-	elif phase == "defend":
+	if kind in ORDERS or kind in ["pause", "end_night"]:
+		accepted = _execute_local(kind, p, animal_id)
+	elif kind == "cancel_job" and working() and not paused:
+		accepted = Jobs.cancel(self, animal_id)
+	elif kind == "move_now" and working() and not paused and walkable(p) and keeper.state == "free":
+		for j in jobs.duplicate(): Jobs.cancel(self, j.id)
+		accepted = Jobs.enqueue(self, "move", p, -1)
+	else:
+		accepted = Jobs.enqueue(self, kind, p, animal_id)
+	actions.append({"tick": tick, "kind": kind, "pos": [p.x, p.y], "accepted": accepted, "paused": paused, "animal_id": animal_id})
+	return accepted
+
+func _execute_local(kind: String, p: Vector2i = Vector2i.ZERO, animal_id: int = -1) -> bool:
+	var accepted = false
+	if working():
 		if kind == "pause":
 			paused = not paused
 			accepted = true
 		elif kind in ORDERS:
 			accepted = issue_order(kind, p, animal_id)
 		elif not paused:
-			if kind == "end_night" and early_clear:
+			if kind == "end_night" and phase == "defend" and early_clear:
 				early_finish_bonus = floori(remaining_night() / 10.0)
 				finish(true)
 				accepted = true
@@ -329,7 +366,6 @@ func act(kind: String, p: Vector2i = Vector2i.ZERO, animal_id: int = -1) -> bool
 				metrics.eggs_collected += eggs
 				eggs = 0
 				accepted = true
-	actions.append({"tick": tick, "kind": kind, "pos": [p.x, p.y], "accepted": accepted, "paused": paused, "animal_id": animal_id})
 	return accepted
 
 func issue_order(kind: String, p: Vector2i, animal_id: int = -1) -> bool:
@@ -375,7 +411,7 @@ func release_keeper(e: Dictionary):
 		metrics.rescues += 1
 		keeper.restrainer = -1
 		milestones.append({"tick": tick, "kind": "rescue", "id": e.id})
-		say("救出！ 牧場主はその場で待っています。")
+		say("救出！ 牧場の仕事へ戻れます。")
 
 func animal_step(a: Dictionary):
 	if not a.placed: return
@@ -695,18 +731,21 @@ func interrupt_site(p: Vector2i):
 		say("建設中断：接触により建築素材を半分返却。")
 
 func construction_step():
-	# Actors move first: entry on the completion tick always interrupts, never entombs actors.
-	for p in structures:
-		var b = structures[p]
-		if b.status != "building": continue
-		if occupied(p):
-			interrupt_site(p)
-			continue
-		b.remaining -= 1
-		if b.remaining <= 0:
-			b.status = "ready"
-			b.hp = b.max_hp
-			metrics.built += 1
+	if keeper.state != "free" or jobs.is_empty(): return
+	var j = jobs[0]
+	if j.started and distance(keeper.pos, j.pos) == 1: advance_site(j.pos)
+
+func advance_site(p: Vector2i):
+	var b = structures.get(p, {})
+	if b.get("status") != "building": return
+	if occupied(p):
+		interrupt_site(p)
+		return
+	b.remaining -= 1
+	if b.remaining <= 0:
+		b.status = "ready"
+		b.hp = b.max_hp
+		metrics.built += 1
 
 func dismantle_quote(p: Vector2i) -> int:
 	if not live_structure(p): return 0
@@ -721,7 +760,7 @@ func repair_quote(p: Vector2i) -> Dictionary:
 	return {"hp": recovery, "cost": ceili(recovery * unit_cost)}
 
 func repair(p: Vector2i) -> bool:
-	if phase != "defend" or paused: return false
+	if not working() or paused: return false
 	var quote = repair_quote(p)
 	if quote.hp <= 0: return false
 	add_resource(structures[p].get("resource", "soil"), -quote.cost)
@@ -732,6 +771,7 @@ func repair(p: Vector2i) -> bool:
 	return true
 
 func persist_farm():
+	campaign.keeper_position = [keeper.pos.x, keeper.pos.y]
 	campaign.resources = resource_snapshot()
 	campaign.next_structure_id = next_structure_id
 	campaign.facilities = []
@@ -745,15 +785,17 @@ func persist_farm():
 		return row)
 
 func step():
-	if phase != "defend" or paused: return
+	if not working() or paused: return
 	tick += 1
+	if phase == "day" and tick * DT >= day_seconds: start_night()
+	Jobs.step(self)
 	if tick % ceili(Rules.NATURE.interval / DT) == 0: grow_nature()
 	command_power = minf(10, command_power + 0.07)
 	foods = foods.filter(func(f): return f.until > tick)
-	while schedule_index < spawn_schedule.size() and tick >= spawn_schedule[schedule_index].tick:
+	while phase == "defend" and schedule_index < spawn_schedule.size() and tick - night_started_tick >= spawn_schedule[schedule_index].tick:
 		spawn_enemy(spawn_schedule[schedule_index])
 		schedule_index += 1
-	if config.repeat_waves and schedule_index == spawn_schedule.size():
+	if phase == "defend" and config.repeat_waves and schedule_index == spawn_schedule.size():
 		schedule_cycle += 1
 		make_schedule()
 	for a in animals:
@@ -764,7 +806,7 @@ func step():
 	for e in enemies:
 		enemy_step(e)
 		if phase != "defend": break
-	if phase == "defend": construction_step()
+	if working(): construction_step()
 	if tick % 8 == 0:
 		traces.append({"tick": tick, "stamina": snappedf(animals[0].stamina, 0.1), "eggs": eggs,
 			"materials": materials, "keeper": keeper.state, "structures": structures.size()})
@@ -786,13 +828,16 @@ func finish(won: bool):
 	var rating = (35 if won else 0) + maxi(0, 25 - metrics.captures * 8) + roundi(condition * 20) + maxi(0, 10 - metrics.structure_damage / 3) + maxi(0, 10 - int(metrics.commands / 3))
 	var xp = 16 + rating / 10 if won else 0
 	var gold = (32 + rating / 5 + metrics.coins) if won else 0
-	score = {"rating": rating, "xp": int(xp), "gold": int(gold), "seconds": tick * DT, "condition": roundi(condition * 100), "time_bonus": early_finish_bonus}
+	score = {"rating": rating, "xp": int(xp), "gold": int(gold), "seconds": (tick - night_started_tick) * DT, "condition": roundi(condition * 100), "time_bonus": early_finish_bonus}
 	heal_with_mushrooms()
 	for owned in campaign.animals:
 		for a in animals:
 			if a.id == owned.id:
 				owned.hp = a.hp
 				if a.hp <= 0 and a.placed: owned.unavailable_through_day = campaign.day + 1
+	for j in jobs.duplicate():
+		if j.reserved > 0: add_resource(j.resource, j.reserved)
+	jobs.clear()
 	if won:
 		campaign.gold += int(gold) + early_finish_bonus
 		campaign.exp_pool += int(xp)
@@ -838,6 +883,11 @@ func observation() -> Dictionary:
 		row.entry = [event.entry.x, event.entry.y]
 		schedule.append(row)
 	return {"seed": seed_value, "stage": stage, "day": campaign.day, "tick": tick, "phase": phase, "paused": paused, "result": result,
+		"remaining_day": maxf(0, day_seconds - tick * DT), "night_started_tick": night_started_tick,
+		"keeper_path": keeper_path, "job_log": job_log, "jobs": jobs.map(func(j):
+			var row = j.duplicate(true)
+			row.pos = [j.pos.x, j.pos.y]
+			return row),
 		"remaining_night": remaining_night(), "early_clear": early_clear, "early_clear_tick": early_clear_tick, "early_finish_bonus": early_finish_bonus,
 		"exp_pool": campaign.exp_pool, "dawn": dawn_summary, "field_items": field_items.map(func(item):
 			var row = item.duplicate(true)
@@ -988,7 +1038,8 @@ func sell(id: String, animal_id: int = -1) -> bool:
 	return true
 
 func remaining_night() -> float:
-	return maxf(0, config.time_limit_seconds - tick * DT)
+	if phase in ["shop", "day"]: return config.time_limit_seconds
+	return maxf(0, config.time_limit_seconds - (tick - night_started_tick) * DT)
 
 func available(a: Dictionary) -> bool:
 	return not a.placed and a.hp > 0 and campaign.day > a.unavailable_through_day
@@ -996,7 +1047,7 @@ func available(a: Dictionary) -> bool:
 static func animal_name(a: Dictionary) -> String:
 	return a.get("name", "") if a.get("name", "") != "" else SPECIES[a.species].title
 
-func begin_night():
+func begin_day():
 	if phase != "shop" or paused: return null
 	persist_farm()
 	var data = campaign.duplicate(true)
