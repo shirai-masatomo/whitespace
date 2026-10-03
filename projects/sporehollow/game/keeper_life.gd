@@ -16,7 +16,7 @@ static func presentation(w) -> String:
 	if k.carrier >= 0: return "carried"
 	if k.state != "free": return "unconscious"
 	if k.resting: return "settling" if k.get("rest_elapsed", 0.0) < 5.0 else "sleeping"
-	return "exhausted" if k.sleepiness >= 90 else ("tired" if k.sleepiness >= 80 else ("drowsy" if k.sleepiness >= 60 else "awake"))
+	return "exhausted" if k.sleepiness >= 90 else ("tired" if k.sleepiness > 80 else ("drowsy" if k.sleepiness > 50 else "awake"))
 
 static func danger(w, kind: String):
 	w.danger_serial += 1

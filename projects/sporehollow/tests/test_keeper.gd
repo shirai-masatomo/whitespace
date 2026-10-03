@@ -37,6 +37,28 @@ func no_overlap(w) -> bool:
 func run():
 	var w = safe()
 	check(w.keeper.hp == 30 and w.keeper.sleepiness == 0, "Healthy starting keeper")
+	for sample in [[0,"awake"],[50,"awake"],[50.01,"drowsy"],[80,"drowsy"],[80.01,"tired"],[90,"exhausted"],[50,"awake"]]:
+		w.keeper.sleepiness = sample[0]
+		check(Farm.Life.presentation(w)==sample[1],"Current fatigue visual boundary " + str(sample))
+	w.keeper.sleepiness=80
+	check(Farm.Life.factor(w)==0.6,"Mechanical debuff still starts at 80, independent of visual boundary")
+	w.keeper.sleepiness=51
+	check(Farm.Life.factor(w)==1.0,"Mild appearance does not add a debuff")
+	w.keeper.sleepiness=85
+	w.campaign.items.coffee=1
+	check(w.act("coffee") and Farm.Life.presentation(w)=="drowsy","Drink immediately clears severe visual state")
+	w.keeper.resting=true
+	w.keeper.rest_elapsed=0
+	check(Farm.Life.presentation(w)=="settling","Rest onset is not awake fatigue or sleep")
+	w.keeper.rest_elapsed=5
+	check(Farm.Life.presentation(w)=="sleeping","Five elapsed seconds show sleep")
+	w.keeper.state="unconscious"
+	check(Farm.Life.presentation(w)=="unconscious","Unconscious overrides historical rest")
+	w.keeper.carrier=0
+	check(Farm.Life.presentation(w)=="carried","Transport overrides historical rest")
+	w = safe()
+	check(Farm.Life.presentation(w)=="awake","Retry begins with no retained sleep appearance")
+
 	for cell in [Vector2i(7,13), Vector2i(10,10), Vector2i(14,10)]: w.act("wall", cell)
 	w.step()
 	var ids = w.jobs.map(func(j): return j.id)

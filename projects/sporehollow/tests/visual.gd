@@ -92,6 +92,11 @@ func run():
 	game.automated = true
 	root.add_child(game)
 	await create_timer(3.2).timeout
+	if "--selection-only" in OS.get_cmdline_user_args():
+		await focused_selection_checks()
+		print("PASS: focused selection/context/fatigue input")
+		quit()
+		return
 	assert(game.morning_screen == "morning" and not game.buttons.has("shop_buy"))
 	await click("open_market")
 	await capture("shop")
@@ -223,8 +228,147 @@ func run():
 	assert(game.world.campaign.animals[0].lv==2)
 	await click("close_market")
 	await create_timer(0.45).timeout
-	var record={"source_commit":OS.get_environment("REVIEW_COMMIT"),"captures":captures,"planning":planning,"rest":rest,"next_morning":game.world.observation(),"input_checks":{"market_back_close":true,"book_open_turn_close":true,"name_shortcut_guard":true,"paused_planning":true,"queue_drag":true,"board_cancel_no_move":true,"mixed_class_drag":true,"shed_transport":true,"five_second_rest":true,"awake_no_sleep_effect":true,"morning_training":true}}
+	var next_morning = game.world.observation()
+	await focused_selection_checks()
+	var record={"source_commit":OS.get_environment("REVIEW_COMMIT"),"captures":captures,"planning":planning,"rest":rest,"next_morning":next_morning,"selection_context_checks":{"drag_cap_all_classes":8,"ctrl_cap_all_classes":8,"batch_reserved":3,"batch_unregistered":5,"ui_priority_disabled_and_release":true,"context_camera_clamp":true,"paused_world_unchanged":true,"right_click_selected_facility":true},"input_checks":{"market_back_close":true,"book_open_turn_close":true,"name_shortcut_guard":true,"paused_planning":true,"queue_drag":true,"board_cancel_no_move":true,"mixed_class_drag":true,"shed_transport":true,"five_second_rest":true,"awake_no_sleep_effect":true,"morning_training":true}}
 	var file=FileAccess.open("res://review/current/stage1-observation.json",FileAccess.WRITE)
 	file.store_string(JSON.stringify(record,"  "))
 	print("PASS: real-input market/book/planning/transport/rest/day-night flow")
 	quit()
+
+
+func selection_fixture(kind: String):
+	game.world = Farm.new({},17).begin_day()
+	game.world.paused = true
+	game.world.natural.clear()
+	game.world.field_items.clear()
+	game.world.structures.clear()
+	var base = game.world.animals[0].duplicate(true)
+	game.world.animals.clear()
+	for i in range(10):
+		var cell = Vector2i(10+i%5,8+i/5)
+		if kind == "animal":
+			var a=base.duplicate(true)
+			a.id=i+1
+			a.placed=true
+			a.deployment="deployed"
+			a.pos=cell
+			game.world.animals.append(a)
+		elif kind == "resource": game.world.natural[cell]="weed"
+		else: game.world.structures[cell]={"id":i+1,"kind":"wall","hp":8,"max_hp":8,"status":"ready","cost":10,"resource":"soil","open":false}
+	if kind != "animal": game.world.animals.append(base)
+	game.reset_view()
+	game.refresh()
+	await process_frame
+
+func selection_count(kind: String):
+	return game.selected_animals.size() if kind=="animal" else (game.selected_resources.size() if kind=="resource" else game.selected_structures.size())
+
+func focused_selection_checks():
+	for kind in ["animal","resource","structure"]:
+		await selection_fixture(kind)
+		await drag(game.screen_cell(Vector2(9.5,7.5)),game.screen_cell(Vector2(14.5,9.5)))
+		assert(selection_count(kind)==8,"Drag cap " + kind)
+		var first = game.selected_animals.duplicate() if kind=="animal" else (game.selected_resources.duplicate() if kind=="resource" else game.selected_structures.duplicate())
+		await selection_fixture(kind)
+		# Reverse storage order must not change geometric encounter selection.
+		if kind=="animal": game.world.animals.reverse()
+		else:
+			var source=game.world.natural if kind=="resource" else game.world.structures
+			var keys=source.keys(); keys.reverse()
+			var reordered={}
+			for cell in keys: reordered[cell]=source[cell]
+			if kind=="resource": game.world.natural=reordered
+			else: game.world.structures=reordered
+		await drag(game.screen_cell(Vector2(9.5,7.5)),game.screen_cell(Vector2(14.5,9.5)))
+		var second=game.selected_animals if kind=="animal" else (game.selected_resources if kind=="resource" else game.selected_structures)
+		assert(first==second,"Order independent from storage " + kind)
+		await selection_fixture(kind)
+		for i in range(10): await mouse(game.screen_cell(Vector2(10+i%5,8+i/5)),MOUSE_BUTTON_LEFT,true)
+		assert(selection_count(kind)==8,"Ctrl cap " + kind)
+		assert(game.world.jobs.is_empty(),"Selection does not create work")
+	# Eight selected objects are distinct from the three free work slots.
+	await selection_fixture("resource")
+	for x in range(18,23): assert(game.world.act("wall",Vector2i(x,5)))
+	await drag(game.screen_cell(Vector2(9.5,7.5)),game.screen_cell(Vector2(14.5,9.5)))
+	await click("collect_selection")
+	assert(game.world.jobs.size()==8 and game.selected_resources.size()==5)
+	assert(game.message.contains("3件予約") and game.message.contains("5件未登録"))
+	await capture("context_collection")
+	await click("collect_selection")
+	assert(game.world.jobs.size()==8 and game.selected_resources.size()==5)
+	# Local facility buttons, shortcuts and selected-object right click share reservations.
+	await selection_fixture("structure")
+	var cell=Vector2i(10,8)
+	game.world.structures[cell].hp=4
+	await mouse(game.screen_cell(cell))
+	assert(game.buttons.has("repair") and not game.buttons.repair.disabled)
+	var anchor=game.screen_cell(cell)
+	assert(game.context_panel.position.distance_to(anchor)<180)
+	await capture("context_facility")
+	await click("repair")
+	await key(KEY_E)
+	assert(game.world.jobs.size()==1 and game.world.structures[cell].hp==4)
+	assert(game.buttons.repair.disabled)
+	var button_point=game.buttons.repair.get_global_rect().get_center()
+	# Place a live selectable creature and a cancellable plan behind disabled UI.
+	var behind=Vector2i(game.get_canvas_transform().affine_inverse()*button_point/game.TILE)
+	game.world.natural[behind]="mushroom"
+	assert(game.world.act("collect",behind))
+	await process_frame
+	await mouse(button_point)
+	await mouse(button_point,MOUSE_BUTTON_RIGHT)
+	assert(game.world.jobs.size()==2 and game.selected.get("kind")=="structure")
+	# UI press dragged/released over the board must never become board selection.
+	await drag(button_point,game.screen_cell(Vector2(15,12)))
+	assert(game.world.jobs.size()==2 and game.selected.get("kind")=="structure")
+	var removal_point=game.buttons.remove.get_global_rect().get_center()
+	game.world.animals[0].placed=true
+	game.world.animals[0].pos=Vector2i(game.get_canvas_transform().affine_inverse()*removal_point/game.TILE)
+	game.view_positions.clear()
+	await process_frame
+	await click("remove")
+	assert(game.selected.get("kind")=="structure","Enabled button wins over animal underneath")
+	await key(KEY_DELETE)
+	assert(game.world.jobs.size()==3 and game.world.live_structure(cell))
+	await step(12)
+	assert(game.world.tick==0 and game.world.structures[cell].hp==4)
+	# Camera/zoom move the anchored panel; clamping keeps every button inside view.
+	game.camera.position += Vector2(400,240)
+	game.camera.zoom=Vector2.ONE*1.6
+	await process_frame
+	await process_frame
+	var bounds=game.context_panel.get_global_rect()
+	assert(Rect2(0,49,1280,650).encloses(bounds))
+	game.world.structures.erase(cell)
+	await process_frame
+	assert(not is_instance_valid(game.context_panel))
+	await selection_fixture("structure")
+	await mouse(game.screen_cell(Vector2(10,8)),MOUSE_BUTTON_RIGHT)
+	assert(game.world.jobs.is_empty(),"Unselected wall cannot be dismantled by right click")
+	await mouse(game.screen_cell(Vector2(10,8)))
+	assert(not game.buttons.has("repair"),"No repair button for full health")
+	await mouse(game.screen_cell(Vector2(10,8)),MOUSE_BUTTON_RIGHT)
+	assert(game.world.jobs.size()==1 and game.world.jobs[0].kind=="remove" and game.world.manual_goal==null)
+	await mouse(game.screen_cell(Vector2(10,8)),MOUSE_BUTTON_RIGHT)
+	assert(game.world.jobs.is_empty(),"Reserved work cancellation precedes dismantling")
+	# Unselected keeper, matching composition: awake fatigue vs rest onset vs sleep.
+	await selection_fixture("resource")
+	game.world.paused=false
+	game.refresh()
+	game.world.keeper.pos=Vector2i(13,10)
+	game.view_positions.clear()
+	game.world.keeper.sleepiness=65
+	await capture("drowsy")
+	game.world.keeper.sleepiness=85
+	await capture("tired")
+	game.world.act("keeper_rest")
+	await capture("settling")
+	await step(21)
+	await capture("rest")
+	game.world.act("keeper_rest")
+	# Explicit direct movement also wakes rest; no historical sleep overlay.
+	game.world.act("keeper_move",Vector2i(15,10))
+	assert(Farm.Life.presentation(game.world) not in ["settling","sleeping"])
+	game.world.keeper.sleepiness=50
+	assert(Farm.Life.presentation(game.world)=="awake")

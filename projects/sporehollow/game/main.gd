@@ -30,7 +30,12 @@ var product_row: Dictionary = {}
 var dragging = false
 var press_pending = false
 var press_position = Vector2.ZERO
+const SELECTION_LIMIT = 8
 var drag_class = ""
+var drag_encounters: Array = []
+var context_panel: Panel
+var ui_pointer_capture = false
+var context_signature = ""
 var selected_resources: Array = []
 var queue_drag_id = -1
 var queue_drag_start = Vector2.ZERO
@@ -196,7 +201,7 @@ func choose_animal(id: int, toggle: bool = false):
 	if toggle and not reserve:
 		selected_animals = selected_animals.filter(func(other): return world.animals.any(func(a): return a.id == other and a.placed))
 		if id in selected_animals: selected_animals.erase(id)
-		else: selected_animals.append(id)
+		else: toggle_selection(selected_animals, id)
 	else: selected_animals = [id]
 	group = 1
 	selected_animal = selected_animals[0] if not selected_animals.is_empty() else -1
@@ -208,9 +213,26 @@ func choose_animal(id: int, toggle: bool = false):
 func collectible(cell: Vector2i) -> bool:
 	return world.natural.has(cell) or not world.items_at(cell).is_empty()
 
-func select_resource(cell: Vector2i):
-	if world.act("collect", cell): notice("回収を頼んだよ")
-	else: notice("予約済み" if world.jobs.any(func(j): return j.kind == "collect" and j.pos == cell) else "予定は8件まで")
+func toggle_selection(targets: Array, id):
+	if id in targets: targets.erase(id)
+	elif targets.size() < SELECTION_LIMIT: targets.append(id)
+	else: notice("選択 8/8")
+
+func job_reserved(kind: String, cell: Vector2i) -> bool:
+	return world.jobs.any(func(j): return j.kind == kind and j.pos == cell)
+
+func select_resource(cell: Vector2i, toggle: bool = false):
+	selected.clear()
+	selected_animals.clear()
+	selected_structures.clear()
+	group = -1
+	tool = ""
+	if toggle:
+		toggle_selection(selected_resources, cell)
+	else:
+		selected_resources = [cell]
+		if world.act("collect", cell): notice("回収を頼んだよ")
+		else: notice("予約済み" if job_reserved("collect", cell) else "予定は8件まで")
 	refresh()
 
 func collect_selected():
@@ -220,6 +242,9 @@ func collect_selected():
 		return da < db if da != db else (a.y * Farm.W + a.x < b.y * Farm.W + b.x))
 	var count = 0
 	for cell in selected_resources.duplicate():
+		if job_reserved("collect", cell):
+			selected_resources.erase(cell)
+			continue
 		if world.act("collect", cell):
 			count += 1
 			selected_resources.erase(cell)
@@ -227,6 +252,7 @@ func collect_selected():
 	refresh()
 
 func refresh():
+	context_panel = null
 	if last_phase != world.phase:
 		transition_at = clock
 		if world.phase in ["dawn", "result"]: play_alert("win" if world.result == "win" else "lose")
@@ -259,8 +285,7 @@ func refresh():
 	if world.phase == "shop":
 		build_shop()
 	elif not selected_resources.is_empty():
-		add_button(palette, "collect_selection", "回収  %d" % selected_resources.size(), Rect2(16, 704, 180, 36), collect_selected)
-		buttons.collect_selection.icon = UI.icon("basket")
+		pass
 	elif selected.get("kind") == "keeper" and world.working():
 		add_button(palette, "keeper_rest", "起きる" if world.keeper.resting else "ひと休み", Rect2(16, 704, 125, 36), keeper_action.bind("keeper_rest"))
 		buttons.keeper_rest.icon = UI.icon("moon")
@@ -298,26 +323,90 @@ func refresh():
 				buttons[id].icon = BoardArt.icon("wood" if id in ["kennel", "coop"] else "soil")
 				buttons[id].disabled = id == "kennel" and "kennel" not in world.campaign.unlocked_blueprints
 				if buttons[id].disabled: buttons[id].text = "犬小屋：設計図が必要"
-		if group == 0 and selected.get("kind") == "structure":
-			add_button(palette, "repair", "E 修理", Rect2(800, 704, 108, 36), facility_action.bind("repair"))
-			add_button(palette, "remove", "Del 解体", Rect2(916, 704, 114, 36), facility_action.bind("remove"))
-			if world.structures.get(selected.pos, {}).get("kind") == "gate":
-				add_button(palette, "gate", "門を開閉", Rect2(1040, 704, 114, 36), facility_action.bind("gate"))
 	for id in TOOLS:
 		if buttons.has(id): UI.selected(buttons[id], tool == id)
+	build_context_actions()
 	last_phase = world.phase
 
 func facility_action(action: String):
 	if not world.working() or group != 0 or selected.get("kind") != "structure": return
-	var targets = selected_structures.duplicate() if action == "remove" else [selected.pos]
+	var targets = selected_structures.duplicate() if action in ["remove", "repair"] else [selected.pos]
 	var count = 0
 	for cell in targets:
+		if action == "repair" and world.repair_quote(cell).hp <= 0: continue
 		if world.act(action, cell): count += 1
 	notice("%dか所の仕事を頼んだよ" % count if count else ("予定は8件まで" if world.jobs.size() >= 8 else "今は使えないか、資材が足りません"))
 	if action == "remove" and count:
 		selected_structures = selected_structures.filter(func(p): return world.live_structure(p))
 		selected = {"kind": "structure", "pos": selected_structures[0]} if not selected_structures.is_empty() else {}
 	refresh()
+
+func context_targets() -> Array:
+	if not selected_resources.is_empty(): return selected_resources
+	if selected.get("kind") == "structure": return selected_structures
+	return []
+
+func context_state() -> String:
+	return str(selected_resources) + str(selected) + str(selected_structures) + str(selected_structures.map(func(p): return world.structures.get(p,{}))) + str(world.jobs.map(func(j): return [j.kind, j.pos])) + str(world.materials) + str(world.wood)
+
+func build_context_actions():
+	context_signature = context_state()
+	if not world.working() or context_targets().is_empty(): return
+	context_panel = Panel.new()
+	context_panel.mouse_filter = Control.MOUSE_FILTER_STOP
+	context_panel.add_theme_stylebox_override("panel", UI.surface(UI.PAPER))
+	palette.add_child(context_panel)
+	var rows = []
+	if not selected_resources.is_empty():
+		var pending = selected_resources.any(func(p): return not job_reserved("collect", p))
+		rows.append(["collect_selection", "回収する" if pending else "予約済み", "basket", collect_selected, not pending, "主人公が現地で回収する"])
+	else:
+		var damaged = selected_structures.filter(func(p): return world.live_structure(p) and world.structures[p].status == "ready" and world.structures[p].hp < world.structures[p].max_hp)
+		if not damaged.is_empty():
+			var can_repair = damaged.any(func(p): return not job_reserved("repair", p) and world.repair_quote(p).hp > 0)
+			var costs = {"soil":0,"wood":0,"stone":0}
+			for p in damaged: costs[world.structures[p].get("resource","soil")] += world.repair_quote(p).cost
+			rows.append(["repair", "修理", "hammer", facility_action.bind("repair"), not can_repair, "E · " + resource_text(costs)])
+		var returns = {"soil":0,"wood":0,"stone":0}
+		for p in selected_structures: returns[world.structures[p].get("resource","soil")] += world.dismantle_quote(p)
+		rows.append(["remove", "解体", "cross", facility_action.bind("remove"), selected_structures.all(func(p):return job_reserved("remove",p)), "Del · 返却 " + resource_text(returns)])
+		if selected_structures.size() == 1 and world.structures[selected_structures[0]].kind == "gate":
+			rows.append(["gate", "開閉", "next", facility_action.bind("gate"), job_reserved("gate",selected_structures[0]), "主人公が現地で開閉する"])
+	var count = context_targets().size()
+	context_panel.size = Vector2(rows.size() * 112 + 12, 68)
+	var title = Label.new()
+	title.text = "選択 %d/8" % count if count > 1 else ("落とし物" if not selected_resources.is_empty() else "施設")
+	title.position = Vector2(9,3)
+	title.add_theme_color_override("font_color",UI.INK)
+	context_panel.add_child(title)
+	for i in range(rows.size()):
+		var row = rows[i]
+		add_button(context_panel,row[0],row[1],Rect2(6+i*112,27,106,34),row[3])
+		buttons[row[0]].icon = UI.icon(row[2])
+		buttons[row[0]].disabled = row[4]
+		buttons[row[0]].tooltip_text = row[5]
+	position_context_actions()
+
+func position_context_actions():
+	if not is_instance_valid(context_panel) or context_targets().is_empty(): return
+	var anchor = screen_cell(context_targets()[0])
+	var size_value = context_panel.size
+	var p = anchor + Vector2(28,-size_value.y-15)
+	if p.x + size_value.x > 1268: p.x = anchor.x-size_value.x-28
+	p = p.clamp(Vector2(12,55),Vector2(1268-size_value.x,690-size_value.y))
+	var queue_area = Rect2(1006,60,256,34+world.jobs.size()*35)
+	if not world.jobs.is_empty() and Rect2(p,size_value).intersects(queue_area): p.x = minf(p.x,queue_area.position.x-size_value.x-8)
+	context_panel.position = p
+
+func prune_selection():
+	var resources = selected_resources.filter(func(p):return collectible(p))
+	var structures = selected_structures.filter(func(p):return world.live_structure(p))
+	var changed = resources != selected_resources or structures != selected_structures
+	selected_resources = resources
+	selected_structures = structures
+	if selected.get("kind") == "structure":
+		selected = {"kind":"structure","pos":structures[0]} if not structures.is_empty() else {}
+	if changed: refresh()
 
 func advance():
 	if cinematic() or menu_open: return
@@ -557,7 +646,17 @@ func _input(event):
 		elif world.working() and not pointer_over_ui(): hover_job = job_at(Vector2i(get_canvas_transform().affine_inverse() * pointer / TILE))
 	if event is InputEventMouseButton:
 		pointer = event.position
+		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed and pointer_over_ui():
+			ui_pointer_capture = true
+			press_pending = false
+			dragging = false
+		if event.button_index == MOUSE_BUTTON_LEFT and not event.pressed and ui_pointer_capture and queue_drag_id < 0:
+			ui_pointer_capture = false
+			press_pending = false
+			dragging = false
+			return
 		if event.button_index == MOUSE_BUTTON_LEFT and not event.pressed:
+			ui_pointer_capture = false
 			if queue_drag_id >= 0:
 				if pointer.distance_to(queue_drag_start) >= 7: world.Jobs.reorder(world, queue_drag_id, queue_drop_index)
 				queue_drag_id = -1
@@ -568,7 +667,7 @@ func _input(event):
 				return
 			if press_pending:
 				press_pending = false
-				if dragging: finish_drag()
+				if dragging and not pointer_over_ui(): finish_drag()
 				elif not pointer_over_ui(): board_click(event)
 				dragging = false
 				get_viewport().set_input_as_handled()
@@ -584,6 +683,8 @@ func _input(event):
 			var destination = Vector2i(get_canvas_transform().affine_inverse() * pointer / TILE)
 			var id = job_at(destination)
 			if id >= 0: cancel_work(id)
+			elif selected.get("kind") == "structure" and destination in selected_structures and world.live_structure(destination):
+				facility_action("remove")
 			elif selected.get("kind") == "keeper" and world.working():
 				if not world.act("keeper_move", destination): notice("今はそこへ行けないよ")
 			else:
@@ -617,6 +718,7 @@ func _input(event):
 			get_viewport().set_input_as_handled()
 
 func pointer_over_ui() -> bool:
+	if is_instance_valid(context_panel) and context_panel.is_visible_in_tree() and context_panel.get_global_rect().has_point(pointer): return true
 	if pointer.y < 49 or pointer.y > 748: return true
 	if world.working() and Rect2(1010, 64, 248, 30 + world.jobs.size() * 35).has_point(pointer): return true
 	if not selected.is_empty() and Rect2(16, 595, 422, 91).has_point(pointer): return true
@@ -641,18 +743,21 @@ func selection_candidates() -> Array:
 	return result
 
 func update_drag_class():
-	if drag_class != "": return
 	var end = get_canvas_transform().affine_inverse() * pointer
 	var area = Rect2(drag_start, end - drag_start).abs().grow(1)
 	for candidate in selection_candidates():
-		if area.has_point(candidate.point):
-			drag_class = candidate["class"]
-			return
+		if not area.has_point(candidate.point): continue
+		if drag_class == "": drag_class = candidate["class"]
+		if candidate["class"] == drag_class:
+			var key = [candidate["class"], candidate.id]
+			if key not in drag_encounters: drag_encounters.append(key)
 
 func finish_drag():
 	update_drag_class()
 	var area = Rect2(drag_start, get_canvas_transform().affine_inverse() * pointer - drag_start).abs().grow(1)
 	var targets = selection_candidates().filter(func(c): return c["class"] == drag_class and area.has_point(c.point))
+	targets.sort_custom(func(a,b):return drag_encounters.find([a["class"],a.id]) < drag_encounters.find([b["class"],b.id]))
+	targets = targets.slice(0,SELECTION_LIMIT)
 	selected.clear()
 	selected_animals.clear()
 	selected_resources.clear()
@@ -679,6 +784,7 @@ func _unhandled_input(event):
 	press_position = event.position
 	drag_start = get_canvas_transform().affine_inverse() * pointer
 	drag_class = ""
+	drag_encounters.clear()
 	for candidate in selection_candidates():
 		if drag_start.distance_to(candidate.point) < 20:
 			drag_class = candidate["class"]
@@ -686,7 +792,7 @@ func _unhandled_input(event):
 
 func board_click(event):
 	var cell = Vector2i(get_canvas_transform().affine_inverse() * event.position / TILE)
-	selected_resources.clear()
+	if not event.ctrl_pressed: selected_resources.clear()
 	if world.keeper.placed and event.position.distance_to(get_canvas_transform() * keeper_pixel()) < 24 * camera.zoom.x:
 		choose_walk()
 		if not keeper_hint_shown:
@@ -695,7 +801,7 @@ func board_click(event):
 		return
 	# Context selection takes precedence over the previously armed tool, even while paused.
 	if not world.items_at(cell).is_empty():
-		select_resource(cell)
+		select_resource(cell, event.ctrl_pressed)
 		return
 	for a in world.animals:
 		if a.placed and event.position.distance_to(get_canvas_transform() * actor_pixel("a%d" % a.id, a.pos)) < 25 * camera.zoom.x:
@@ -705,16 +811,18 @@ func board_click(event):
 			else: choose_animal(a.id, event.ctrl_pressed)
 			return
 	if world.live_structure(cell):
+		selected_resources.clear()
+		selected_animals.clear()
 		if not event.ctrl_pressed or group != 0 or selected.get("kind") != "structure": selected_structures.clear()
 		if cell in selected_structures: selected_structures.erase(cell)
-		else: selected_structures.append(cell)
+		else: toggle_selection(selected_structures, cell)
 		group = 0
 		selected = {"kind": "structure", "pos": selected_structures[0]} if not selected_structures.is_empty() else {}
 		tool = ""
 		refresh()
 		return
 	if collectible(cell):
-		select_resource(cell)
+		select_resource(cell, event.ctrl_pressed)
 		return
 	for e in world.enemies:
 		if not e.done and event.position.distance_to(get_canvas_transform() * actor_pixel("e%d" % e.id, e.pos)) < 25 * camera.zoom.x:
@@ -780,6 +888,9 @@ func _process(delta):
 	if selected.get("kind") == "keeper" and vitals_signature != keeper_ui_signature:
 		keeper_ui_signature = vitals_signature
 		refresh()
+	prune_selection()
+	if not ui_pointer_capture and not context_targets().is_empty() and context_signature != context_state(): refresh()
+	position_context_actions()
 	refresh_jobs()
 	smooth_actor("keeper", world.keeper.pos, delta)
 	if world.phase == "dawn" and clock - transition_at > 4.8 and not menu_open: advance()
@@ -1011,14 +1122,23 @@ func _draw():
 			draw_line(p + Vector2(-11, 11), p + Vector2(12, 11), Color("e7c794"), 4)
 			draw_set_transform(p, -PI * 0.5)
 			p = Vector2.ZERO
-		elif world.keeper.state == "unconscious" or world.keeper.resting:
+		elif Farm.Life.presentation(world) in ["unconscious","sleeping"]:
 			draw_set_transform(p + Vector2(0, 12), -PI * 0.5)
+			p = Vector2.ZERO
+		elif Farm.Life.presentation(world) == "settling":
+			p.y += 7
+		elif Farm.Life.presentation(world) in ["tired","exhausted"]:
+			draw_set_transform(p+Vector2(0,4),0.16)
 			p = Vector2.ZERO
 		draw_circle(p + Vector2(0, -8), 9, Color("f3cda2"))
 		rect(p + Vector2(-12, -18), Vector2(24, 6), "f1d690")
-		rect(p + Vector2(-8, 1), Vector2(17, 20), "80d4cd")
-		rect(p + Vector2(-7, 20), Vector2(5, 6), "30484a")
-		rect(p + Vector2(3, 20), Vector2(5, 6), "30484a")
+		var body_height = 12 if Farm.Life.presentation(world) == "settling" else 20
+		rect(p + Vector2(-8, 1), Vector2(17, body_height), "719b99" if Farm.Life.presentation(world) in ["tired","exhausted"] else "80d4cd")
+		rect(p + Vector2(-7, body_height), Vector2(5, 6), "30484a")
+		rect(p + Vector2(3, body_height), Vector2(5, 6), "30484a")
+		if Farm.Life.presentation(world) in ["drowsy","tired","exhausted"]:
+			draw_line(p+Vector2(-6,-10),p+Vector2(-1,-10),Color("766b59"),2)
+			draw_line(p+Vector2(3,-10),p+Vector2(8,-10),Color("766b59"),2)
 		if not world.jobs_held and Farm.Life.able(world) and not world.jobs.is_empty() and world.jobs[0].state == "working":
 			var hand = p + Vector2(12, 5)
 			var hammer = hand + Vector2(8, -8 + sin(visual_time * 18) * 6)
@@ -1034,10 +1154,21 @@ func _draw():
 			if Farm.Life.presentation(world) in ["settling", "sleeping"]:
 				label_on(self, owner_pixel + Vector2(15, -20), "…" if world.keeper.get("rest_elapsed", 0) < 5 else "Zzz", 18, Color("dce8c2"))
 			elif Farm.Life.presentation(world) in ["drowsy", "tired", "exhausted"]:
-				var tired = Color("dfac87") if world.keeper.sleepiness >= 80 else Color("dbcdb0")
-				draw_line(owner_pixel+Vector2(-6,-15),owner_pixel+Vector2(-1,-15),tired,2)
-				draw_line(owner_pixel+Vector2(3,-15),owner_pixel+Vector2(8,-15),tired,2)
-				label_on(self,owner_pixel+Vector2(15,-22), "☾!" if world.keeper.sleepiness >= 90 else "☾",16,tired)
+				var severe = world.keeper.sleepiness > 80
+				var tired = Color("edba89") if severe else Color("e3d3a8")
+				var badge = owner_pixel + Vector2(18,-34)
+				draw_rect(Rect2(badge,Vector2(27 if severe else 18,20)),Color("4d5550"))
+				draw_circle(badge+Vector2(9,9),6,tired)
+				draw_circle(badge+Vector2(12,7),5,Color("4d5550"))
+				if severe:
+					draw_line(badge+Vector2(21,5),badge+Vector2(21,14),tired,2)
+					draw_polyline(PackedVector2Array([badge+Vector2(18,11),badge+Vector2(21,14),badge+Vector2(24,11)]),tired,2)
+				if severe:
+					for i in range(2):
+						var drift = fmod(visual_time * 5 + i * 8,16)
+						draw_rect(Rect2(owner_pixel+Vector2(-17-i*4,drift-4),Vector2(3,4)),Color(0.24,0.25,0.29,0.38*(1-drift/20)))
+				elif fmod(visual_time,9) < 1.2:
+					draw_arc(owner_pixel+Vector2(1,-3),3,0,TAU,8,tired,1.5)
 			if world.keeper.state == "unconscious": label_on(self, owner_pixel + Vector2(12, -18), "!", 22, Color("efa084"))
 			if world.tick < world.keeper.hurt_until or selected.get("kind") == "keeper":
 				draw_rect(Rect2(owner_pixel + Vector2(-17, -33), Vector2(34, 4)), Color("684b46"))
