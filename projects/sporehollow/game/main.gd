@@ -7,6 +7,8 @@ const TOOLS = {"wall": "壁  10 / 1秒", "build_gate": "門  30", "repair": "修
 	"auto": "おまかせ", "stay": "待機", "wander": "徘徊", "rest": "休む", "collect": "資源・卵・設計図", "dog_food": "犬用餌 HP+10", "hen_food": "鶏用餌 HP+8", "cat_food": "猫用餌 HP+8"}
 const GROUP_TOOLS = [["wall", "build_gate", "kennel", "coop"], ["auto", "stay", "wander", "rest"], ["collect"]]
 const BoardArt = preload("res://game/board_art.gd")
+const UI = preload("res://game/ui_style.gd")
+const MARKET_CATEGORIES = {"animals": ["動物", "animals", "牧場の仲間"], "materials": ["資材", "wood", "土・木・石"], "facilities": ["小屋と設備", "kennel", "牧場づくり"], "items": ["小物と恵み", "basket", "卵・羽・道具"]}
 var world = Farm.new({}, randi_range(1, 2147483646))
 var tool = "place_keeper"
 var group = -1
@@ -19,6 +21,8 @@ var menu: Control
 var shop_side = "home"
 var shop_category = "animals"
 var shop_notice = ""
+var shop_level = "categories"
+var product_row: Dictionary = {}
 var dragging = false
 var drag_start = Vector2.ZERO
 var selected: Dictionary = {}
@@ -92,8 +96,9 @@ func _ready():
 	controls.add_child(palette)
 	add_button(controls, "pause", "停止", Rect2(1040, 7, 88, 32), toggle_pause)
 	add_button(controls, "speed", "×1", Rect2(1136, 7, 64, 32), toggle_speed)
-	add_button(controls, "home", "中央", Rect2(1208, 7, 62, 32), recenter)
-	add_button(controls, "advance", "時計開始", Rect2(1074, 754, 190, 36), advance)
+	add_button(controls, "home", "", Rect2(1208, 7, 62, 32), recenter)
+	buttons.home.tooltip_text = "牧場の中央へ"
+	add_button(controls, "advance", "買い物を終える", Rect2(1074, 754, 190, 36), advance)
 	add_button(controls, "retry", "再挑戦", Rect2(556, 514, 168, 38), retry_stage)
 	for i in range(GROUPS.size()):
 		add_button(controls, "group%d" % i, GROUPS[i], Rect2(16 + i * 122, 754, 116, 36), select_group.bind(i))
@@ -116,16 +121,9 @@ func add_button(parent: Control, id: String, text_value: String, area: Rect2, ca
 	button.focus_mode = Control.FOCUS_NONE
 	button.position = area.position
 	button.size = area.size
-	var box = StyleBoxFlat.new()
-	box.bg_color = Color("263d32")
-	box.border_color = Color("728467")
-	box.set_border_width_all(1)
-	box.set_corner_radius_all(5)
-	button.add_theme_stylebox_override("normal", box)
-	var hover = box.duplicate()
-	hover.bg_color = Color("476448")
-	button.add_theme_stylebox_override("hover", hover)
-	button.add_theme_stylebox_override("pressed", hover)
+	UI.button(button)
+	var symbol = {"shop_back": "back", "advance": "next", "retry": "back", "group0": "hammer", "group1": "paw", "group2": "basket", "pause": "pause", "home": "spark", "rename": "paw", "save_name": "check", "repair": "hammer", "remove": "cross", "menu_resume": "next", "menu_retry": "back", "menu_morning": "back"}.get(id, "")
+	if symbol != "": button.icon = UI.icon(symbol)
 	button.pressed.connect(callback)
 	parent.add_child(button)
 	buttons[id] = button
@@ -157,7 +155,7 @@ func command_selected(id: String, cell: Vector2i):
 	var accepted = 0
 	for animal_id in selected_animals:
 		if world.act(id, cell, animal_id): accepted += 1
-	notice("%d匹へ%sを予約" % [accepted, TOOLS[id]] if accepted else "指示できる動物を選択してください")
+	notice("%d匹に「%s」" % [accepted, TOOLS[id]] if accepted else "指示する仲間をクリックしてください")
 
 func cycle_subtool(reverse: bool = false):
 	if world.phase != "defend" or group != 0: return
@@ -213,14 +211,16 @@ func refresh():
 	buttons.speed.visible = world.phase == "defend"
 	buttons.home.visible = world.phase == "defend"
 	buttons.pause.text = "再開" if world.paused else "停止"
+	buttons.pause.icon = UI.icon("next" if world.paused else "pause")
 	buttons.speed.text = "×%s" % speed
 	buttons.advance.visible = world.phase == "shop" or (world.phase == "defend" and world.early_clear)
-	buttons.advance.text = "商人を見送る" if world.phase == "shop" else ("朝の市へ" if world.phase == "dawn" else "今夜を終える +%dG" % floori(world.remaining_night() / 10.0))
+	buttons.advance.text = "買い物を終える" if world.phase == "shop" else "今夜を終える +%dG" % floori(world.remaining_night() / 10.0)
+	buttons.advance.tooltip_text = "商人を見送って、今夜の見張り場所を決める" if world.phase == "shop" else ""
 	buttons.retry.visible = world.phase == "result"
-	buttons.group1.text = "動物配置" if tool == "place_animal" else "動物"
+	buttons.group1.text = "動物"
 	for i in range(3):
 		buttons["group%d" % i].visible = world.phase == "defend"
-		buttons["group%d" % i].modulate = Color("ffe0a0") if i == group else Color.WHITE
+		UI.selected(buttons["group%d" % i], i == group)
 	if world.phase in ["prepare", "dawn"]:
 		last_phase = world.phase
 		return
@@ -256,7 +256,7 @@ func refresh():
 			if world.structures.get(selected.pos, {}).get("kind") == "gate":
 				add_button(palette, "gate", "門を開閉", Rect2(1040, 704, 114, 36), facility_action.bind("gate"))
 	for id in TOOLS:
-		if buttons.has(id): buttons[id].modulate = Color("ffe0a0") if tool == id else Color.WHITE
+		if buttons.has(id): UI.selected(buttons[id], tool == id)
 	last_phase = world.phase
 
 func facility_action(action: String):
@@ -266,7 +266,7 @@ func facility_action(action: String):
 	var before = world.resource_snapshot()
 	for cell in targets:
 		if world.act(action, cell): count += 1
-	notice(("%d施設を解体 → %s" % [count, resource_text({"soil": world.materials - before.soil, "wood": world.wood - before.wood, "stone": world.stone - before.stone})] if action == "remove" else TOOLS[action] + "しました") if count else ("停止中は実行できません" if world.paused else "占有・耐久・土を確認してください"))
+	notice(("%d施設を解体 → %s" % [count, resource_text({"soil": world.materials - before.soil, "wood": world.wood - before.wood, "stone": world.stone - before.stone})] if action == "remove" else TOOLS[action] + "しました") if count else ("停止中は実行できません" if world.paused else "今は使えないか、資材が足りません"))
 	if action == "remove" and count:
 		selected_structures = selected_structures.filter(func(p): return world.live_structure(p))
 		selected = {"kind": "structure", "pos": selected_structures[0]} if not selected_structures.is_empty() else {}
@@ -302,6 +302,8 @@ func reset_view():
 	menu_open = false
 	menu.visible = false
 	shop_side = "home"
+	shop_level = "categories"
+	product_row.clear()
 	shop_category = "animals"
 	shop_notice = ""
 	group = -1
@@ -389,13 +391,14 @@ func _input(event):
 		if event.physical_keycode in [KEY_W, KEY_A, KEY_S, KEY_D]: keys_down[event.physical_keycode] = event.pressed
 		if not event.pressed or event.echo: return
 		if event.keycode in [KEY_MINUS, KEY_KP_SUBTRACT] or event.physical_keycode in [KEY_MINUS, KEY_KP_SUBTRACT] or event.unicode == 45:
-			change_speed(-1)
+			if world.phase == "defend": change_speed(-1)
 			return
 		if event.keycode in [KEY_PLUS, KEY_KP_ADD, KEY_EQUAL] or event.physical_keycode in [KEY_KP_ADD, KEY_EQUAL] or event.unicode == 43:
-			change_speed(1)
+			if world.phase == "defend": change_speed(1)
 			return
 		match event.physical_keycode:
-			KEY_SPACE: toggle_pause()
+			KEY_SPACE:
+				if world.phase == "defend": toggle_pause()
 			KEY_TAB: cycle_subtool(event.shift_pressed)
 			KEY_HOME: recenter()
 			KEY_F3: debug_view = not debug_view
@@ -443,7 +446,7 @@ func _unhandled_input(event):
 		if world.act("place", cell):
 			select_group(1)
 			message_until = 0
-		else: notice("ここには主人公を配置できません")
+		else: notice("ここでは見張れないようだ")
 		return
 	if world.phase != "defend": return
 	if event.shift_pressed:
@@ -486,7 +489,7 @@ func _unhandled_input(event):
 		command_selected(tool, cell)
 	elif tool != "":
 		if not world.act(tool, cell, selected_animal if tool == "place_animal" else -1):
-			notice("停止中は動物指示だけ" if world.paused else "対象・土・占有状態を確認してください")
+			notice("時を進めてから行おう" if world.paused else "ここは使えないか、資材が足りません")
 		elif tool == "place_animal":
 			choose_animal(selected_animal)
 			react(selected_animal, "wag", 1.5)
@@ -831,14 +834,21 @@ func _draw():
 			rect(p + Vector2(-7, -9), Vector2(15, 12), "f3cda2")
 			rect(p + Vector2(-8, 3), Vector2(17, 20), "80d4cd")
 			art_alpha = 1.0
-		if show_preview: draw_rect(Rect2(Vector2(cell) * TILE + Vector2(2, 2), TILE - Vector2(4, 4)), Color("a3e5ba") if valid else Color("ee8a77"), false, 3)
+		if show_preview:
+			draw_rect(Rect2(Vector2(cell) * TILE + Vector2(2, 2), TILE - Vector2(4, 4)), Color("a3e5ba") if valid else Color("ee8a77"), false, 3)
+			var mark = center(cell) + Vector2(17, -22)
+			if valid:
+				draw_polyline(PackedVector2Array([mark + Vector2(-5, 0), mark + Vector2(-1, 4), mark + Vector2(6, -5)]), Color("d7edb7"), 3)
+			else:
+				draw_line(mark - Vector2(4, 4), mark + Vector2(4, 4), Color("f2ab90"), 3)
+				draw_line(mark + Vector2(-4, 4), mark + Vector2(4, -4), Color("f2ab90"), 3)
 	if selected.get("kind") in ["structure", "resource"]:
 		draw_rect(Rect2(Vector2(selected.pos) * TILE + Vector2(1, 1), TILE - Vector2(2, 2)), Color("ffe2a3"), false, 3)
 	if group == 0 and selected.get("kind") == "structure":
 		for p in selected_structures:
 			if world.live_structure(p): draw_rect(Rect2(Vector2(p) * TILE + Vector2(2, 2), TILE - Vector2(4, 4)), Color("ffe2a3"), false, 2)
 
-func panel(area: Rect2): hud.draw_rect(area, Color(0.09, 0.16, 0.12, 0.94))
+func panel(area: Rect2): hud.draw_style_box(UI.surface(Color("485d46")), area)
 
 func draw_hud():
 	hud.draw_rect(Rect2(0, 49, 1280, 703), Color(0.04, 0.07, 0.22, night_tint))
@@ -852,9 +862,10 @@ func draw_hud():
 		draw_shop()
 		return
 	if world.phase == "dawn":
-		hud.draw_rect(Rect2(330, 72, 620, 106), Color("e1d6af"))
+		hud.draw_style_box(UI.surface(UI.PAPER), Rect2(330, 72, 620, 106))
 		label_on(hud, Vector2(365, 118), "夜明け", 30, Color("485e48"))
 		label_on(hud, Vector2(368, 153), "よく守ったね", 18, Color("526444"))
+		hud.draw_texture(UI.icon("spark"), Vector2(533, 119))
 		label_on(hud, Vector2(560, 138), "+%d EXP" % world.score.xp, 27, Color("456358"))
 		draw_card_icon(hud, "gold", Vector2(786, 127), 0.9)
 		label_on(hud, Vector2(819, 138), "+%d" % (world.score.gold + world.early_finish_bonus), 27, Color("85652f"))
@@ -874,8 +885,12 @@ func draw_hud():
 		hud.draw_rect(area, Color(0.65, 0.9, 0.76, 0.15))
 		hud.draw_rect(area, Color("b6ebc5"), false, 2)
 	if world.phase == "prepare":
-		panel(Rect2(428, 26, 424, 71))
-		label_on(hud, Vector2(464, 55), "今夜はどこで過ごす？", 24)
+		panel(Rect2(428, 26, 424, 48))
+		label_on(hud, Vector2(464, 59), "今夜はどこで見張る？", 24)
+		if pointer.y > 80 and pointer.y < 740:
+			var hint_pos = (pointer + Vector2(24, 28)).clamp(Vector2(10, 90), Vector2(1070, 710))
+			panel(Rect2(hint_pos, Vector2(184, 29)))
+			label_on(hud, hint_pos + Vector2(9, 20), "クリックでここに決める", 14)
 		return
 	panel(Rect2(0, 0, 1280, 49))
 	label_on(hud, Vector2(18, 31), "%d日目 夜" % world.campaign.day, 20)
@@ -887,19 +902,21 @@ func draw_hud():
 		panel(Rect2(145, 50, 390, 30))
 		label_on(hud, Vector2(154, 71), "土 / 木材 / 石 / Gold  ·  キノコ %d" % world.campaign.mushrooms, 14)
 	label_on(hud, Vector2(796, 31), "残 %02d:%02d %s" % [int(world.remaining_night()) / 60, int(world.remaining_night()) % 60, "PAUSE" if world.paused else ""], 20)
-	panel(Rect2(0, 748, 1280, 52))
-	if world.phase == "prepare":
-		label_on(hud, Vector2(650, 778), "動物の出撃は時計開始後・任意" if world.keeper.placed else "主人公を一度だけ配置", 15)
-	elif world.phase == "defend" and pointer.y > 748:
+	panel(Rect2(0, 748, 390, 52))
+	if world.phase == "defend" and pointer.y > 748:
 		label_on(hud, Vector2(530, 779), "WASD:移動 / Ctrl+ホイール:拡縮 / Space:停止", 14)
+	elif world.phase == "defend" and (tool == "place_animal" or Farm.BUILD.has(tool)) and not pointer_over_ui():
+		var hint_pos = (pointer + Vector2(24, 28)).clamp(Vector2(10, 90), Vector2(1070, 660))
+		panel(Rect2(hint_pos, Vector2(193, 29)))
+		label_on(hud, hint_pos + Vector2(9, 20), "左で置く / 右でやめる", 14)
 	if clock < message_until and world.tick < message_until_tick and world.phase != "result":
 		panel(Rect2(16, 60, minf(800, message.length() * 16 + 28), 35))
 		label_on(hud, Vector2(28, 84), message, 16)
 	if alert_visible() and alert_kind != "early_clear":
 		var urgent = alert_kind in ["restrained", "carried", "animal_danger"]
 		var top = 330 if alert_kind == "auto_start" else 62
-		hud.draw_rect(Rect2(410, top, 460, 48), Color("814a3d") if urgent else Color("685d37"))
-		label_on(hud, Vector2(434, top + 32), alert_text, 23)
+		hud.draw_style_box(UI.surface(UI.DANGER if urgent else UI.MOSS), Rect2(440, top, 400, 42))
+		label_on(hud, Vector2(455, top + 29), alert_text, 20)
 	if world.keeper.state in ["restrained", "captured"]:
 		draw_edge(world.keeper.pos, "主人公 !", Color("ffa58a"))
 	for a in world.animals:
@@ -914,7 +931,17 @@ func draw_hud():
 		draw_companion_card()
 	elif selected.get("kind") == "enemy":
 		for e in world.enemies:
-			if e.id == selected.id: details = "誘拐者 Lv%d   HP %d/%d\n視界 %d / %s" % [e.lv, e.hp, e.max_hp, e.sight_range, "撃退済み" if e.hp <= 0 or e.flee or e.done else ("主人公を発見" if e.can_see_keeper else e.search_state)]
+			if e.id != selected.id: continue
+			hud.draw_style_box(companion_box(), Rect2(16, 609, 344, 80))
+			hud.draw_circle(Vector2(53, 642), 13, Color("d2b396"))
+			hud.draw_rect(Rect2(37, 625, 32, 8), Color("454453"))
+			hud.draw_rect(Rect2(40, 639, 27, 6), Color("454453"))
+			label_on(hud, Vector2(92, 634), "誘拐者", 20)
+			label_on(hud, Vector2(286, 634), "Lv%d" % e.lv, 15)
+			hud.draw_rect(Rect2(92, 646, 150, 9), Color("293d35"))
+			hud.draw_rect(Rect2(92, 646, 150.0 * e.hp / e.max_hp, 9), Color("d2aa80"))
+			var status = "撃退済み" if e.hp <= 0 or e.flee or e.done else ("主人公を発見" if e.can_see_keeper else e.search_state)
+			label_on(hud, Vector2(92, 677), "%d/%d  視界%d" % [e.hp, e.max_hp, e.sight_range] if Rect2(16, 609, 344, 80).has_point(pointer) else status, 15)
 	elif selected.get("kind") == "structure" and world.structures.has(selected.pos):
 		var b = world.structures[selected.pos]
 		var quote = world.repair_quote(selected.pos)
@@ -922,7 +949,7 @@ func draw_hud():
 		if selected_structures.size() > 1:
 			var refund = {"soil": 0, "wood": 0, "stone": 0}
 			for cell in selected_structures: refund[world.structures[cell].get("resource", "soil")] += world.dismantle_quote(cell)
-			details = "%d施設を選択\n[Del] 一括解体 → %s" % [selected_structures.size(), resource_text(refund)]
+			details = "まとめて %dか所\n[Del] 解体 → %s" % [selected_structures.size(), resource_text(refund)]
 	if details != "":
 		panel(Rect2(16, 610, 422, 76))
 		var lines = details.split("\n")
@@ -1020,7 +1047,7 @@ func setup_menu():
 	shade.color = Color(0.03, 0.08, 0.06, 0.88)
 	menu.add_child(shade)
 	var title = Label.new()
-	title.text = "PAUSE"
+	title.text = "ひと休み"
 	title.position = Vector2(570, 250)
 	title.add_theme_font_size_override("font_size", 28)
 	menu.add_child(title)
@@ -1050,15 +1077,45 @@ func shop_choose(side: String, category: String):
 	shop_side = side
 	shop_page = 0
 	shop_category = category
+	shop_level = "categories"
+	product_row.clear()
+	training_id = -1
 	shop_notice = ""
+	refresh()
+
+func choose_category(category: String):
+	shop_category = category
+	shop_level = "list"
+	shop_page = 0
+	product_row.clear()
+	shop_notice = ""
+	refresh()
+
+func inspect_product(row: Dictionary):
+	product_row = row.duplicate()
+	shop_level = "detail"
+	shop_notice = ""
+	refresh()
+
+func market_back():
+	shop_notice = ""
+	if shop_side == "animals" and training_id >= 0:
+		training_id = -1
+		rename_open = false
+	elif shop_level == "detail":
+		shop_level = "list"
+		product_row.clear()
+	elif shop_level == "list":
+		shop_level = "categories"
+	else:
+		shop_side = "home"
 	refresh()
 
 func trade(id: String, animal_id: int = -1):
 	var ok = world.buy(id) if shop_side == "buy" else world.sell(id, animal_id)
-	shop_notice = ("購入しました" if shop_side == "buy" else "売却しました") if ok else "Gold・在庫を確認（最後の動物は売却不可）"
+	shop_notice = ("ありがとう。\n大事にしてね。" if shop_side == "buy" else "ありがとう、助かるよ。") if ok else "今は取引できないね。"
 	if ok: play_alert("collect")
 	refresh()
-
 func shop_rows() -> Array:
 	var rows = []
 	var table = Farm.Shop.table()
@@ -1078,87 +1135,132 @@ func shop_rows() -> Array:
 
 func build_shop():
 	if shop_side == "home":
-		var titles = ["買う", "売る", "動物"]
-		var subtitles = ["今日の品", "牧場の恵み", "大切な仲間"]
-		var ids = ["buy", "sell", "animals"]
 		for i in range(3):
-			add_card("shop_" + ids[i], titles[i] + "
-" + subtitles[i], ids[i], Rect2(295 + i * 292, 250, 270, 280), shop_choose.bind(ids[i], "animals"), [Color("b87b54"), Color("ad9047"), Color("70957d")][i])
+			var id = ["buy", "sell", "animals"][i]
+			add_card("shop_" + id, ["買う\n今日の品", "売る\n牧場の恵み", "動物\n大切な仲間"][i], id, Rect2(300 + i * 285, 263, 260, 246), shop_choose.bind(id, "animals"), [Color("d8b784"), Color("dcc783"), Color("bbcca3")][i])
 		return
-	add_button(palette, "shop_back", "← 広場へ", Rect2(290, 155, 160, 40), shop_choose.bind("home", "animals"))
+	var back_label = "戻る"
+	if shop_side == "animals" and training_id >= 0: back_label = "仲間たちへ"
+	elif shop_level == "detail": back_label = "商品一覧へ"
+	elif shop_level == "list": back_label = "品の種類へ"
+	add_button(palette, "shop_back", back_label, Rect2(288, 167, 174, 40), market_back)
 	if shop_side == "animals":
 		build_training()
 		return
-	var i = 0
-	for category in Farm.Shop.CATEGORIES:
-		add_button(palette, "category_" + category, Farm.Shop.CATEGORIES[category], Rect2(465 + i * 170, 155, 157, 40), shop_choose.bind(shop_side, category))
-		buttons["category_" + category].modulate = Color("ffdca6") if category == shop_category else Color.WHITE
-		i += 1
+	if shop_level == "categories":
+		var i = 0
+		for category in MARKET_CATEGORIES:
+			var row = MARKET_CATEGORIES[category]
+			add_card("category_" + category, row[0] + "\n" + row[2], row[1], Rect2(360 + (i % 2) * 355, 230 + (i / 2) * 190, 327, 169), choose_category.bind(category), Color("cfbd96") if i % 2 == 0 else Color("bdc69d"))
+			i += 1
+		return
+	if shop_level == "detail":
+		var p = Farm.Shop.table()[product_row.id]
+		var rows = shop_rows().filter(func(row): return row.id == product_row.id and row.animal_id == product_row.animal_id)
+		var count = rows[0].count if not rows.is_empty() else 0
+		var price = p.BuyPrice if shop_side == "buy" else p.SellPrice
+		var can_trade = count > 0 and (world.campaign.gold >= price if shop_side == "buy" else (product_row.animal_id < 0 or world.campaign.animals.size() > 1))
+		add_button(palette, "confirm_trade", ("迎える" if p.Category == "animals" else "買う") if shop_side == "buy" else "売る", Rect2(865, 492, 224, 54), trade.bind(p.ProductID, product_row.animal_id))
+		buttons.confirm_trade.icon = UI.icon("coin")
+		buttons.confirm_trade.disabled = not can_trade
+		buttons.confirm_trade.tooltip_text = "売り切れ" if count <= 0 else ("手持ちが足りない" if shop_side == "buy" and world.campaign.gold < price else ("最後の仲間は手放せません" if not can_trade else ""))
+		return
 	var rows = shop_rows()
 	for index in range(shop_page * 6, mini(rows.size(), shop_page * 6 + 6)):
 		var row = rows[index]
 		var p = Farm.Shop.table()[row.id]
 		var price = p.BuyPrice if shop_side == "buy" else p.SellPrice
-		var title = p.Name
-		if row.animal_id >= 0:
-			for a in world.campaign.animals:
-				if a.id == row.animal_id: title = Farm.animal_name(a) + " Lv%d" % a.lv
-		var desc = {"hen": "朝に卵を産む", "cat": "気ままな仲間", "soil": "壁を築く", "wood": "小屋づくりに", "stone": "重くて丈夫", "egg": "牧場の新鮮な卵", "feather": "軽くて柔らかい", "mushroom": "休養のお供"}.get(row.id, "牧場の道具")
 		var n = index % 6
-		add_card("trade_" + row.id + "_" + str(row.animal_id), "%s
-%d G  ·  残%d
-%s" % [title, price, row.count, desc], row.id, Rect2(290 + n % 3 * 292, 220 + n / 3 * 218, 272, 198), trade.bind(row.id, row.animal_id), Color("8b805d") if shop_category == "materials" else Color("8a9c79"))
-		buttons["trade_" + row.id + "_" + str(row.animal_id)].disabled = row.count <= 0 or (shop_side == "buy" and world.campaign.gold < price)
-	if rows.size() > 6:
-		add_button(palette, "shop_page", "次の品へ →", Rect2(935, 675, 215, 38), next_shop_page.bind(ceili(rows.size() / 6.0)))
+		var price_tag = "%d G" % price if row.count > 0 else "売り切れ"
+		add_card("trade_" + row.id + "_" + str(row.animal_id), product_title(row) + "\n" + price_tag, row.id, Rect2(300 + (n % 3) * 285, 237 + (n / 3) * 194, 260, 176), inspect_product.bind(row), Color("d4c29b") if row.count > 0 else Color("b9b99e"))
+		buttons["trade_" + row.id + "_" + str(row.animal_id)].tooltip_text = product_description(row.id)
+	if rows.size() > 6: add_button(palette, "shop_page", "次の品へ →", Rect2(935, 640, 215, 38), next_shop_page.bind(ceili(rows.size() / 6.0)))
 
+func product_title(row: Dictionary) -> String:
+	if row.get("animal_id", -1) >= 0:
+		for a in world.campaign.animals:
+			if a.id == row.animal_id: return Farm.animal_name(a) + " Lv%d" % a.lv
+	return Farm.Shop.table()[row.id].Name
+
+func product_description(id: String) -> String:
+	return {"hen": "朝に卵を産む、のんびりした仲間。", "cat": "牧場を気ままに歩く、小さな仲間。", "soil": "壁や門を築くための、よく締まる土。", "wood": "小屋づくりに使う、丈夫な木材。", "stone": "重くて丈夫な石。", "egg": "牧場で産まれた新鮮な卵。", "feather": "鶏が落とした、軽く柔らかな羽。", "mushroom": "夜明けの休養に。傷ついた仲間を癒す。", "kennel_plan": "犬が落ち着いて休める、小屋の作り方。"}.get(id, "牧場で使う品物。")
 func next_shop_page(count: int):
 	shop_page = (shop_page + 1) % count
 	refresh()
 
 func add_card(id: String, title: String, icon: String, area: Rect2, callback: Callable, color: Color):
-	add_button(palette, id, "
-
-
-" + title, area, callback)
+	add_button(palette, id, "", area, callback)
 	var button = buttons[id]
-	button.add_theme_font_size_override("font_size", 20)
-	button.add_theme_color_override("font_color", Color("fff3dc"))
-	var box = StyleBoxFlat.new()
-	box.bg_color = color.darkened(0.22)
-	box.border_color = color.lightened(0.25)
-	box.set_border_width_all(2)
-	box.set_corner_radius_all(14)
-	button.add_theme_stylebox_override("normal", box)
-	var hover = box.duplicate()
-	hover.bg_color = color
-	button.add_theme_stylebox_override("hover", hover)
-	button.draw.connect(draw_card_icon.bind(button, icon, Vector2(area.size.x / 2, 48 if area.size.y < 220 else 76), 1.6))
+	UI.button(button, color)
+	button.draw.connect(draw_market_card.bind(button, icon, title))
+
+func draw_market_card(button: Button, icon: String, title: String):
+	var p = Vector2(button.size.x / 2, 55 if button.size.y < 220 else 75)
+	draw_card_icon(button, icon, p, (2.3 if icon in ["soil", "wood", "stone"] else 1.3) if button.size.y < 220 else 1.6)
+	var lines = title.split("\n")
+	for i in range(lines.size()):
+		var size_value = 22 if i == 0 else 16
+		var width = FONT.get_string_size(lines[i], HORIZONTAL_ALIGNMENT_LEFT, -1, size_value).x
+		label_on(button, Vector2((button.size.x - width) / 2, button.size.y - 49 + i * 26), lines[i], size_value, UI.INK)
 
 func draw_shop():
-	var table_top = 228 if shop_side == "home" else 155
-	var table_bottom = 555 if shop_side == "home" else 734
-	hud.draw_rect(Rect2(265, table_top, 915, table_bottom - table_top), Color("554633"))
-	# Short, quiet grain marks instead of a grid across the information.
-	for i in range(18):
-		var grain = Vector2(275 + (i * 193) % 885, table_top + 8 + (i * 97) % (table_bottom - table_top - 16))
-		hud.draw_line(grain, grain + Vector2(16, 0), Color("615039"), 1)
+	# The canopy, shelves and small paper tickets sit over the actual ranch.
 	for i in range(15):
 		hud.draw_rect(Rect2(265 + i * 61, 42, 61, 83), Color("d4b782") if i % 2 == 0 else Color("729187"))
 		hud.draw_circle(Vector2(295 + i * 61, 125), 30, Color("d4b782") if i % 2 == 0 else Color("729187"))
 	hud.draw_rect(Rect2(265, 40, 915, 8), Color("d9ba78"))
-	hud.draw_rect(Rect2(280, 60, 875, 57), Color("46564a"))
+	hud.draw_style_box(UI.surface(UI.MOSS), Rect2(280, 60, 875, 57))
 	label_on(hud, Vector2(295, 101), "朝の市", 32)
-	label_on(hud, Vector2(785, 99), "%d G    %d EXP" % [world.campaign.gold, world.campaign.exp_pool], 22, Color("f8d885"))
-	if shop_side == "home":
-		panel(Rect2(48, 350, 197, 66))
-		label_on(hud, Vector2(65, 380), "いい朝だね。", 19)
-		label_on(hud, Vector2(65, 404), "今日はいい品があるよ。", 15)
-	elif shop_side in ["buy", "sell"] and shop_rows().is_empty():
-		label_on(hud, Vector2(470, 363), "今は並んでいないようだ", 23)
-	label_on(hud, Vector2(295, 708), shop_notice, 18)
+	draw_card_icon(hud, "gold", Vector2(833, 88), 0.65)
+	label_on(hud, Vector2(865, 99), str(world.campaign.gold), 23)
+	draw_card_icon(hud, "spark", Vector2(972, 88), 0.6)
+	label_on(hud, Vector2(990, 99), "%d EXP" % world.campaign.exp_pool, 20)
+	var heading = ""
+	if shop_side == "animals": heading = "仲間たち" + ("  /  いつもの様子" if training_id >= 0 else "")
+	elif shop_side != "home":
+		heading = "買う" if shop_side == "buy" else "売る"
+		if shop_level != "categories": heading += "  /  " + MARKET_CATEGORIES[shop_category][0]
+		if shop_level == "detail": heading += "  /  " + product_title(product_row)
+	if heading != "":
+		hud.draw_style_box(UI.surface(UI.PAPER), Rect2(486, 167, 650, 40))
+		label_on(hud, Vector2(503, 194), heading, 18, UI.INK)
+	var shelf_y = [519] if shop_side == "home" else ([407, 600] if shop_level == "categories" and shop_side != "animals" else ([418, 611] if shop_rows().size() > 3 else ([418] if not shop_rows().is_empty() else [])))
+	if shop_level != "detail" and shop_side != "animals":
+		for y in shelf_y:
+			hud.draw_style_box(UI.surface(Color("ab8655")), Rect2(285, y, 877, 14))
+			for x in [307, 1126]: hud.draw_rect(Rect2(x, y + 14, 8, 22), UI.WOOD)
+	var greeting = "いい朝だね。\n今日はいい品があるよ。" if shop_side == "home" else "ゆっくり見ていって。"
+	if shop_notice != "": greeting = shop_notice
+	hud.draw_style_box(UI.surface(UI.PAPER), Rect2(42, 353, 208, 90))
+	hud.draw_colored_polygon(PackedVector2Array([Vector2(170, 353), Vector2(194, 334), Vector2(192, 353)]), UI.PAPER)
+	var words = greeting.split("\n")
+	for i in range(words.size()): label_on(hud, Vector2(55, 385 + i * 25), words[i], 16, UI.INK)
+	if shop_side in ["buy", "sell"] and shop_level == "list" and shop_rows().is_empty():
+		hud.draw_style_box(UI.surface(UI.PAPER), Rect2(485, 288, 430, 118))
+		draw_card_icon(hud, "basket", Vector2(544, 342), 1.1)
+		label_on(hud, Vector2(597, 344), "今日は空っぽだね。", 22, UI.INK)
+		label_on(hud, Vector2(597, 377), "ほかの品も見ていこう。", 16, UI.INK)
+	if shop_side in ["buy", "sell"] and shop_level == "detail": draw_product_detail()
 	if shop_side == "animals" and training_id >= 0: draw_animal_detail()
 
+func draw_product_detail():
+	var p = Farm.Shop.table()[product_row.id]
+	var rows = shop_rows().filter(func(row): return row.id == product_row.id and row.animal_id == product_row.animal_id)
+	var count = rows[0].count if not rows.is_empty() else 0
+	var price = p.BuyPrice if shop_side == "buy" else p.SellPrice
+	hud.draw_style_box(UI.surface(UI.PAPER), Rect2(355, 237, 777, 340))
+	hud.draw_style_box(UI.surface(Color("c2cda4")), Rect2(380, 267, 205, 231))
+	draw_card_icon(hud, p.ProductID, Vector2(478, 360), 2.7)
+	label_on(hud, Vector2(622, 294), product_title(product_row), 30, UI.INK)
+	label_on(hud, Vector2(622, 339), product_description(p.ProductID), 17, UI.INK)
+	draw_card_icon(hud, "gold", Vector2(642, 395), 0.8)
+	label_on(hud, Vector2(677, 405), "%d G" % price, 29, UI.INK)
+	label_on(hud, Vector2(622, 452), "売り切れ" if count <= 0 else ("残り %d" % count if shop_side == "buy" else "手持ち %d" % count), 17, UI.INK)
+	var hint = ""
+	if shop_side == "buy" and count > 0 and world.campaign.gold < price: hint = "手持ちが足りないね。"
+	elif shop_side == "sell" and product_row.animal_id >= 0 and world.campaign.animals.size() <= 1: hint = "最後の仲間は手放せない。"
+	elif shop_notice != "": hint = "受け取りました" if shop_side == "buy" else "渡しました"
+	label_on(hud, Vector2(622, 527), hint, 17, UI.INK)
 func train(id: int):
 	shop_notice = "ひとつ成長した！" if world.train_animal(id) else "経験を積んでからまた来よう"
 	refresh()
@@ -1179,27 +1281,31 @@ func open_name():
 
 func build_training():
 	var owned = world.campaign.animals
-	for i in range(shop_page * 4, mini(owned.size(), shop_page * 4 + 4)):
-		var a = owned[i]
-		add_button(palette, "name_%d" % a.id, "%s
-Lv%d  HP%d/%d" % [Farm.animal_name(a), a.lv, a.get("hp", animal_hp(a)), animal_hp(a)], Rect2(290, 216 + (i % 4) * 104, 242, 92), edit_name.bind(a.id))
-		buttons["name_%d" % a.id].draw.connect(draw_card_icon.bind(buttons["name_%d" % a.id], a.species, Vector2(28, 42), 0.8))
-		buttons["name_%d" % a.id].modulate = Color("ffe1a3") if a.id == training_id else Color.WHITE
-	if owned.size() > 4: add_button(palette, "animal_page", "次の仲間 →", Rect2(290, 646, 242, 36), next_shop_page.bind(ceili(owned.size() / 4.0)))
-	if training_id < 0: return
-	add_button(palette, "train_%d" % training_id, "Lvアップ  %d EXP" % world.level_cost(training_id), Rect2(610, 606, 302, 44), train.bind(training_id))
+	if training_id < 0:
+		for i in range(shop_page * 4, mini(owned.size(), shop_page * 4 + 4)):
+			var a = owned[i]
+			var n = i % 4
+			add_card("name_%d" % a.id, "%s\nLv%d" % [Farm.animal_name(a), a.lv], a.species, Rect2(355 + (n % 2) * 370, 235 + (n / 2) * 191, 340, 170), edit_name.bind(a.id), Color("c4cea7"))
+		if owned.size() > 4: add_button(palette, "animal_page", "次の仲間 →", Rect2(925, 639, 170, 38), next_shop_page.bind(ceili(owned.size() / 4.0)))
+		return
+	add_button(palette, "train_%d" % training_id, "育てる  %d EXP" % world.level_cost(training_id), Rect2(611, 608, 286, 46), train.bind(training_id))
+	buttons["train_%d" % training_id].icon = UI.icon("spark")
 	for a in owned:
-		if a.id == training_id: buttons["train_%d" % training_id].disabled = a.lv >= 5 or world.campaign.exp_pool < world.level_cost(training_id)
-	add_button(palette, "rename", "名前を変える", Rect2(942, 606, 192, 44), open_name)
+		if a.id == training_id:
+			buttons["train_%d" % training_id].disabled = a.lv >= 5 or world.campaign.exp_pool < world.level_cost(training_id)
+			if a.lv >= 5: buttons["train_%d" % training_id].text = "立派に育ったね"
+	add_button(palette, "rename", "名前を変える", Rect2(924, 608, 192, 46), open_name)
 	if rename_open:
 		name_edit = LineEdit.new()
-		name_edit.position = Vector2(600, 547)
-		name_edit.size = Vector2(320, 44)
+		name_edit.position = Vector2(610, 550)
+		name_edit.size = Vector2(285, 42)
 		name_edit.max_length = 12
+		name_edit.add_theme_stylebox_override("normal", UI.surface(UI.PAPER))
+		name_edit.add_theme_color_override("font_color", UI.INK)
 		for a in owned:
 			if a.id == training_id: name_edit.text = a.name
 		palette.add_child(name_edit)
-		add_button(palette, "save_name", "決める", Rect2(945, 547, 150, 44), save_name)
+		add_button(palette, "save_name", "この名前にする", Rect2(924, 550, 192, 42), save_name)
 
 func animal_hp(a: Dictionary) -> int:
 	return Farm.SPECIES[a.species].hp + (a.lv - 1) * 4
@@ -1207,19 +1313,30 @@ func animal_hp(a: Dictionary) -> int:
 func draw_animal_detail():
 	for a in world.campaign.animals:
 		if a.id != training_id: continue
-		draw_card_icon(hud, a.species, Vector2(625, 250), 1.8)
-		label_on(hud, Vector2(703, 245), "%s  Lv%d" % [Farm.animal_name(a), a.lv], 26)
-		label_on(hud, Vector2(703, 278), "HP %d / %d" % [a.get("hp", animal_hp(a)), animal_hp(a)], 20)
-		label_on(hud, Vector2(595, 325), "忠誠 %d%s" % [a.get("loyalty", 0), "  ·  親密度 %d" % a.affinity if a.affinity != null else ""], 19)
-		var y = 375
+		hud.draw_style_box(UI.surface(UI.PAPER), Rect2(355, 235, 783, 437))
+		hud.draw_style_box(UI.surface(Color("c4cea7")), Rect2(375, 259, 210, 258))
+		draw_card_icon(hud, a.species, Vector2(475, 340), 2.5)
+		var hp = a.get("hp", animal_hp(a))
+		var hp_max = animal_hp(a)
+		label_on(hud, Vector2(404, 458), "休養中" if a.get("unavailable_through_day", 0) >= world.campaign.day else ("元気いっぱい" if hp == hp_max else "少しひと休み"), 19, UI.INK)
+		hud.draw_style_box(UI.surface(UI.MOSS, UI.MOSS), Rect2(400, 479, 158, 10))
+		hud.draw_rect(Rect2(402, 481, 154.0 * hp / hp_max, 6), Color("b5d28a"))
+		label_on(hud, Vector2(609, 287), Farm.animal_name(a), 32, UI.INK)
+		label_on(hud, Vector2(1003, 284), "Lv%d" % a.lv, 18, UI.INK)
+		hud.draw_texture(UI.icon("heart"), Vector2(610, 308))
+		label_on(hud, Vector2(635, 322), "%d / %d" % [hp, hp_max], 17, UI.INK)
+		label_on(hud, Vector2(819, 322), "忠誠 %d%s" % [a.get("loyalty", 0), "  親密 %d" % a.affinity if a.affinity != null else ""], 15, UI.INK)
+		var y = 367
 		for id in Farm.SPECIES[a.species].skills:
 			var skill = Farm.AnimalData.SKILLS[id]
 			var ready = a.lv >= skill.unlock_level
-			label_on(hud, Vector2(595, y), "%s %s  Lv%d%s" % ["✓" if ready else "鍵", skill.name, skill.unlock_level, " / CT%d秒" % skill.cooldown if skill.has("cooldown") else " / 常時"], 20, Color("f7dda0") if ready else Color("a8b7ac"))
-			label_on(hud, Vector2(615, y + 26), skill.effect, 17, Color("bdcbb9"))
-			y += 70
-		if a.species == "shiba": label_on(hud, Vector2(595, y), "Lv3 / Lv5   これからの成長", 18, Color("a8b7ac"))
-
+			hud.draw_style_box(UI.surface(Color("d1d8b2") if ready else Color("d3cbb4")), Rect2(607, y - 18, 510, 74))
+			hud.draw_texture(UI.icon("spark" if ready else "pause"), Vector2(622, y - 1))
+			label_on(hud, Vector2(649, y + 10), skill.name, 21, UI.INK)
+			var summary = {"bark": "ひと吠えで、近くの敵の足を止める。", "rescue": "連れ去られた主人公を急いで助けに行く。", "lay": "朝になると卵を産む。", "feather": "時々、きれいな羽を落とす。", "charm": "動物と仲良くなる素質。", "meow": "鳴き声で、敵の勢いを弱める。"}.get(id, skill.effect)
+			label_on(hud, Vector2(624, y + 38), summary if ready else "Lv%dになったら覚える" % skill.unlock_level, 16, UI.INK)
+			if skill.has("cooldown") and ready: label_on(hud, Vector2(997, y + 10), "%d秒ごと" % skill.cooldown, 14, UI.INK)
+			y += 88
 func restart_morning():
 	world = Farm.new(world.morning_checkpoint, world.seed_value)
 	reset_view()
@@ -1246,13 +1363,24 @@ func draw_card_icon(c: CanvasItem, kind: String, p: Vector2, scale_value: float)
 		c.draw_circle(Vector2(17, -11), 2, Color("293a34"))
 		c.draw_colored_polygon(PackedVector2Array([Vector2(22,-7), Vector2(30,-4), Vector2(22,0)]), Color("e3ac54"))
 	elif kind == "animals":
-		c.draw_circle(Vector2(0, 6), 15, Color("f2d6a0"))
-		for q in [Vector2(-17,-13), Vector2(-5,-23), Vector2(10,-23), Vector2(22,-10)]: c.draw_circle(q, 7, Color("f2d6a0"))
+		c.draw_circle(Vector2(0, 6), 15, UI.MOSS)
+		for q in [Vector2(-17,-13), Vector2(-5,-23), Vector2(10,-23), Vector2(22,-10)]: c.draw_circle(q, 7, UI.MOSS)
+	elif kind == "kennel":
+		c.draw_rect(Rect2(-22, -4, 44, 29), Color("bb8d56"))
+		c.draw_colored_polygon(PackedVector2Array([Vector2(-28,-4), Vector2(0,-28), Vector2(28,-4)]), Color("81563b"))
+		c.draw_rect(Rect2(-8, 6, 16, 19), UI.INK)
+	elif kind == "basket":
+		c.draw_arc(Vector2(0, -5), 19, PI, TAU, 12, UI.WOOD, 4)
+		c.draw_rect(Rect2(-24, -5, 48, 28), Color("bc955c"))
+		for x in [-16, 0, 16]: c.draw_line(Vector2(x, -5), Vector2(x, 23), UI.WOOD, 3)
+		c.draw_line(Vector2(-24, 8), Vector2(24, 8), UI.WOOD, 3)
 	elif kind == "buy":
-		c.draw_line(Vector2(-30,-25), Vector2(-22,-25), Color("f9deb0"), 4)
-		c.draw_line(Vector2(-22,-25), Vector2(-13,15), Color("f9deb0"), 4)
-		c.draw_rect(Rect2(-17,-18,43,26), Color("e5bd76"), false, 4)
-		for x in [-10,21]: c.draw_circle(Vector2(x,24), 5, Color("f9deb0"))
+		c.draw_line(Vector2(-30,-25), Vector2(-22,-25), UI.WOOD, 4)
+		c.draw_line(Vector2(-22,-25), Vector2(-13,15), UI.WOOD, 4)
+		c.draw_rect(Rect2(-17,-18,43,26), UI.WOOD, false, 4)
+		for x in [-10,21]: c.draw_circle(Vector2(x,24), 5, UI.WOOD)
+	elif kind == "spark":
+		c.draw_colored_polygon(PackedVector2Array([Vector2(0,-18), Vector2(6,-5), Vector2(18,0), Vector2(6,6), Vector2(0,18), Vector2(-6,6), Vector2(-18,0), Vector2(-6,-5)]), UI.GOLD)
 	elif kind == "sell" or kind == "gold":
 		for q in [Vector2(-12,6), Vector2(12,6), Vector2(0,-10)]: BoardArt.draw_resource(c, q, "gold")
 	elif kind in ["egg", "feather"]:
@@ -1367,12 +1495,7 @@ func draw_companion_card():
 		if selected_animals.size() > 1: label_on(hud, Vector2(301, 677), "×%d" % selected_animals.size(), 16)
 
 func companion_box() -> StyleBoxFlat:
-	var box = StyleBoxFlat.new()
-	box.bg_color = Color("334b40")
-	box.border_color = Color("a9ad82")
-	box.set_border_width_all(1)
-	box.set_corner_radius_all(12)
-	return box
+	return UI.surface(UI.MOSS)
 
 func dog_part(p: Vector2, offset: Vector2, size_value: Vector2, tint: String, facing: float):
 	rect(p + Vector2(facing * (offset.x + size_value.x / 2) - size_value.x / 2, offset.y), size_value, tint)
