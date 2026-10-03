@@ -5,6 +5,50 @@ const ATTACK = 2
 const FATIGUE_SECONDS = 270.0 # One 90s day + 180s night represents an active day.
 const DRINKS = {"coffee": 12.0, "energy_drink": 25.0}
 
+static func rest_until_reason(w, target: String) -> String:
+	if not w.working(): return "今は休息できません"
+	if w.keeper.state != "free" or w.keeper.carrier >= 0: return "牧場主が行動できません"
+	if w.jobs.any(func(j): return j.get("transport","") in ["carrying","returning","drop_pending"]): return "仲間の配置か返却を先に終えてください"
+	if target == "night" and w.phase != "day": return "昼のみ使えます"
+	if target == "dawn" and (w.phase != "defend" or w.config.repeat_waves or w.schedule_index < w.spawn_schedule.size() or not w.enemies.all(func(e):return e.done or e.flee)):
+		return "襲来がまだ終わっていません"
+	if w.enemies.any(func(e):return not e.done and not e.flee): return "敵が近くにいます"
+	return ""
+
+static func plan_rest_until(w, target: String) -> bool:
+	if not w.rest_skip.is_empty() or rest_until_reason(w,target)!="": return false
+	w.rest_skip = {"target":target,"pending":true,"danger":w.danger_serial,"bonus":floori(w.remaining_night()/10.0) if target=="dawn" else 0}
+	w.life_log.append({"tick":w.tick,"event":"rest_until_planned","target":target})
+	return true
+
+static func begin_rest_until(w):
+	if w.rest_skip.is_empty() or not w.rest_skip.pending: return
+	if rest_until_reason(w,w.rest_skip.target)!="":
+		stop_rest_until(w,"unavailable")
+		return
+	w.rest_skip.pending=false
+	w.keeper.erase("pending_command")
+	w.keeper.hold_before_rest="rest_end"
+	set_rest(w,true)
+	w.manual_goal=null
+	w.Jobs.hold(w,"rest")
+	w.life_log.append({"tick":w.tick,"event":"rest_until_started"})
+
+static func stop_rest_until(w, reason: String):
+	if w.rest_skip.is_empty(): return
+	w.rest_skip.clear()
+	w.life_log.append({"tick":w.tick,"event":"rest_until_stopped","reason":reason})
+	# Stopping the clock advance does not secretly wake forced sleepers or resume work.
+	if reason=="nightfall":
+		if not w.keeper.forced_rest: set_rest(w,false)
+		w.Jobs.hold(w,"rest_end")
+
+static func check_rest_until(w):
+	if w.rest_skip.is_empty(): return
+	if w.danger_serial != w.rest_skip.danger or w.keeper.state!="free":
+		stop_rest_until(w,"danger")
+	elif w.rest_skip.target=="night" and w.phase!="day": stop_rest_until(w,"nightfall")
+
 static func factor(w) -> float:
 	return 0.6 if w.keeper.sleepiness >= 80 else 1.0
 
@@ -28,16 +72,20 @@ static func command(w, kind: String, p: Vector2i) -> bool:
 	if w.paused:
 		if kind == "keeper_move":
 			if k.state != "free" or k.forced_rest or not w.walkable(p) or w.actor_occupied(p, k.pos): return false
+			stop_rest_until(w,"manual")
 			w.manual_goal = p
 			w.Jobs.hold(w, "manual" if not w.jobs.is_empty() else "travel")
 			k.pending_command = {"kind": kind, "pos": p, "hold_reason":w.job_hold_reason}
 			return true
 		if kind in ["keeper_rest", "resume_jobs"]:
+			if k.state != "free" or k.forced_rest: return false
+			stop_rest_until(w,"manual")
 			k.pending_command = {"kind": kind, "pos": p}
 			return true
 		return false
 	if kind == "keeper_move":
 		if k.state != "free" or k.forced_rest or not w.walkable(p) or w.actor_occupied(p, k.pos): return false
+		stop_rest_until(w,"manual")
 		set_rest(w, false)
 		w.Jobs.hold(w, "manual" if not w.jobs.is_empty() else "travel")
 		w.manual_goal = p
@@ -45,6 +93,7 @@ static func command(w, kind: String, p: Vector2i) -> bool:
 		return true
 	if kind == "keeper_rest":
 		if k.state != "free" or k.forced_rest: return false
+		stop_rest_until(w,"manual")
 		if not k.resting:
 			k.hold_before_rest = w.job_hold_reason if w.jobs_held else ""
 			set_rest(w, true)
@@ -57,6 +106,7 @@ static func command(w, kind: String, p: Vector2i) -> bool:
 		return true
 	if kind == "resume_jobs":
 		if k.state != "free" or k.forced_rest: return false
+		stop_rest_until(w,"manual")
 		set_rest(w, false)
 		w.manual_goal = null
 		w.Jobs.hold(w, "")
@@ -108,7 +158,7 @@ static func step(w):
 			k.heal_credit -= 5
 		if k.forced_rest and k.sleepiness < 80:
 			k.forced_rest = false
-			set_rest(w, false)
+			if w.rest_skip.is_empty(): set_rest(w, false)
 	else:
 		k.sleepiness = minf(100, k.sleepiness + 100.0 / FATIGUE_SECONDS * w.DT)
 		for threshold in [60, 80, 90, 100]:

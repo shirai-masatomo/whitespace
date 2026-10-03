@@ -26,6 +26,7 @@ if ($Task -in @('check', 'test', 'build')) {
     Run-Headless 'jobs' @('--script', 'tests/test_jobs.gd')
     Run-Headless 'keeper' @('--script', 'tests/test_keeper.gd')
     Run-Headless 'planning' @('--script', 'tests/test_planning.gd')
+    Run-Headless 'rest-until' @('--script', 'tests/test_rest_until.gd')
 }
 if ($Task -in @('check', 'evaluate')) { Run-Headless 'evaluate' @('--script', 'tests/evaluate.gd') }
 if ($Task -in @('check', 'build')) {
@@ -35,6 +36,7 @@ if ($Task -in @('check', 'build')) {
     if (-not $smoke.WaitForExit(30000)) { $smoke.Kill(); throw 'Owned export smoke timed out' }
     if ($smoke.ExitCode -ne 0) { throw 'Export smoke failed' }
     if (Select-String -LiteralPath "$farmRoot/artifacts/export-smoke.log" -Pattern 'SCRIPT ERROR:|ERROR:' -Quiet) { throw 'Export smoke logged errors' }
+    Copy-Item -LiteralPath "$farmRoot/assets/ui/SOURCES.md" -Destination "$farmRoot/build/UI_SOURCES.txt"
     Copy-Item -LiteralPath "$farmRoot/assets/fonts/OFL.txt" -Destination "$farmRoot/build/FONT_LICENSE.txt"
     Copy-Item -LiteralPath "$farmRoot/assets/GODOT_COPYRIGHT.txt" -Destination "$farmRoot/build/GODOT_COPYRIGHT.txt"
 }

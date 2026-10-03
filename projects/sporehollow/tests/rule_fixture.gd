@@ -20,6 +20,7 @@ func begin_night():
 	return get_script().new(data, seed_value, config)
 
 func act(kind: String, p: Vector2i = Vector2i.ZERO, animal_id: int = -1) -> bool:
+	if kind in ["end_night", "cancel_rest_until"]: return super.act(kind,p,animal_id)
 	var accepted = false
 	if phase == "prepare":
 		if kind == "place" and not keeper.placed and walkable(p) and not live_structure(p) and p not in entries and not field_items.any(func(item): return item.pos == p):

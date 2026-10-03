@@ -34,6 +34,7 @@ var day_seconds = 90.0
 var early_clear = false
 var early_clear_tick = -1
 var early_finish_bonus = 0
+var rest_skip: Dictionary = {}
 var dawn_summary: Dictionary = {}
 var field_items: Array = []
 var daily_rng = RandomNumberGenerator.new()
@@ -267,16 +268,25 @@ func actor_occupied(p: Vector2i, origin: Vector2i) -> bool:
 	return (keeper.placed and keeper.pos == p) or animals.any(func(a): return a.placed and a.pos == p) or enemies.any(func(e): return not e.done and e.pos == p)
 
 func next_step(start: Vector2i, goal: Vector2i, raider: bool = false, avoid_actors: bool = false) -> Vector2i:
-	if start == goal: return start
+	var path = find_path(start,goal,raider,avoid_actors)
+	return path[1] if path.size()>1 else start
+
+func find_path(start: Vector2i, goal: Vector2i, raider: bool = false, avoid_actors: bool = false) -> Array:
+	if start == goal: return [start]
 	var frontier = [start]
 	var cost = {start: 0.0}
-	var first = {start: start}
+	var previous = {start: start}
 	while not frontier.is_empty():
 		var best = 0
 		for i in range(1, frontier.size()):
 			if cost[frontier[i]] + distance(frontier[i], goal) < cost[frontier[best]] + distance(frontier[best], goal): best = i
 		var p: Vector2i = frontier.pop_at(best)
-		if p == goal: return first[p]
+		if p == goal:
+			var path=[p]
+			while p != start:
+				p=previous[p]
+				path.push_front(p)
+			return path
 		for n in neighbors(p):
 			var exit_cell = raider and n == goal and entries.any(func(entry): return exit_for(entry) == n)
 			if not inside(n) and not exit_cell: continue
@@ -288,9 +298,9 @@ func next_step(start: Vector2i, goal: Vector2i, raider: bool = false, avoid_acto
 			var value: float = cost[p] + 1.0 + (ceilf(float(structures[n].hp) / Rules.KIDNAPPER.object_attack_power) if blocked else 0)
 			if not cost.has(n) or value < cost[n]:
 				cost[n] = value
-				first[n] = n if p == start else first[p]
+				previous[n] = p
 				if n not in frontier: frontier.append(n)
-	return start
+	return []
 
 static func distance(a: Vector2i, b: Vector2i) -> int:
 	return absi(a.x - b.x) + absi(a.y - b.y)
@@ -312,9 +322,14 @@ func start_night():
 
 func act(kind: String, p: Vector2i = Vector2i.ZERO, animal_id: int = -1) -> bool:
 	var accepted = false
-	if kind in ["keeper_move", "keeper_rest", "resume_jobs", "coffee", "energy_drink"]:
+	if kind in ["rest_until_night", "end_night"]:
+		accepted = Life.plan_rest_until(self, "night" if kind == "rest_until_night" else "dawn")
+	elif kind == "cancel_rest_until":
+		accepted = not rest_skip.is_empty()
+		Life.stop_rest_until(self, "cancelled")
+	elif kind in ["keeper_move", "keeper_rest", "resume_jobs", "coffee", "energy_drink"]:
 		accepted = Life.command(self, kind, p)
-	elif kind in ORDERS or kind in ["pause", "end_night"]:
+	elif kind in ORDERS or kind == "pause":
 		accepted = _execute_local(kind, p, animal_id)
 	elif kind == "cancel_job" and working():
 		accepted = Jobs.cancel(self, animal_id)
@@ -333,11 +348,7 @@ func _execute_local(kind: String, p: Vector2i = Vector2i.ZERO, animal_id: int = 
 		elif kind in ORDERS:
 			accepted = issue_order(kind, p, animal_id)
 		elif not paused:
-			if kind == "end_night" and phase == "defend" and early_clear:
-				early_finish_bonus = floori(remaining_night() / 10.0)
-				finish(true)
-				accepted = true
-			elif kind == "place_animal" and can_place_animal(animal_id, p):
+			if kind == "place_animal" and can_place_animal(animal_id, p):
 				for a in animals:
 					if a.id != animal_id: continue
 					a.pos = p
@@ -833,6 +844,7 @@ func persist_farm():
 
 func step():
 	if not working() or paused: return
+	Life.begin_rest_until(self)
 	tick += 1
 	if phase == "day" and tick * DT >= day_seconds: start_night()
 	Life.step(self)
@@ -858,18 +870,22 @@ func step():
 	if tick % 8 == 0:
 		traces.append({"tick": tick, "stamina": snappedf(animals[0].stamina, 0.1), "eggs": eggs,
 			"materials": materials, "keeper": keeper.state, "structures": structures.size()})
+	Life.check_rest_until(self)
 	if phase != "defend": return
 	if remaining_night() <= 0:
+		if rest_skip.get("target", "") == "dawn": early_finish_bonus = rest_skip.get("bonus",0)
+		rest_skip.clear()
 		finish(true)
 	elif not early_clear and not config.repeat_waves and schedule_index == spawn_schedule.size() and enemies.all(func(e): return e.done or e.flee):
 		early_clear = true
 		early_clear_tick = tick
 		milestones.append({"tick": tick, "kind": "early_clear"})
-		say("撃退完了。作業を続けるか、ボーナスを受け取って朝へ。")
+		say("襲撃を退けた")
 
 func finish(won: bool):
 	if result != "": return
 	result = "win" if won else "loss"
+	rest_skip.clear()
 	phase = "dawn" if won else "result"
 	paused = false
 	var condition = float(animals[0].hp) / animals[0].max_hp
@@ -941,7 +957,7 @@ func observation() -> Dictionary:
 			var row = j.duplicate(true)
 			row.pos = [j.pos.x, j.pos.y]
 			return row),
-		"remaining_night": remaining_night(), "early_clear": early_clear, "early_clear_tick": early_clear_tick, "early_finish_bonus": early_finish_bonus,
+		"rest_until": rest_skip.duplicate(true), "remaining_night": remaining_night(), "early_clear": early_clear, "early_clear_tick": early_clear_tick, "early_finish_bonus": early_finish_bonus,
 		"exp_pool": campaign.exp_pool, "dawn": dawn_summary, "field_items": field_items.map(func(item):
 			var row = item.duplicate(true)
 			row.pos = [item.pos.x, item.pos.y]

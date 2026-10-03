@@ -8,26 +8,38 @@ const GOLD = Color("ddba70")
 const DANGER = Color("9c5748")
 static var textures: Dictionary = {}
 
-static func surface(color: Color, edge: Color = WOOD) -> StyleBoxFlat:
-	var box = StyleBoxFlat.new()
-	box.bg_color = color
-	box.border_color = edge
-	box.set_border_width_all(2)
-	box.border_width_bottom = 4
-	box.set_corner_radius_all(7)
-	box.shadow_color = Color(0.12, 0.16, 0.1, 0.22)
-	box.shadow_size = 4
-	box.shadow_offset = Vector2(0, 3)
-	box.content_margin_left = 10
-	box.content_margin_right = 10
+const FRAME = preload("res://assets/ui/paper-frame.svg")
+const SHIBA = preload("res://assets/ui/shiba-source.png")
+const STALL = preload("res://assets/ui/market-stall.png")
+const BOOK = preload("res://assets/ui/book-open.png")
+static var sprite_material: ShaderMaterial
+
+static func material() -> ShaderMaterial:
+	if sprite_material == null:
+		sprite_material=ShaderMaterial.new()
+		sprite_material.shader=preload("res://assets/ui/shiba-key.gdshader")
+	return sprite_material
+
+static func shiba(c: CanvasItem, p: Vector2, size_value: Vector2, pose: int=2, alpha: float=1.0):
+	c.material=material()
+	c.texture_filter=CanvasItem.TEXTURE_FILTER_NEAREST
+	var regions=[Rect2(528,58,474,508),Rect2(1095,58,316,508),Rect2(1498,58,482,508)]
+	c.draw_texture_rect_region(SHIBA,Rect2(p-size_value*0.5,size_value),regions[pose],Color(1,1,1,alpha))
+
+static func surface(color: Color, edge: Color = WOOD) -> StyleBoxTexture:
+	var box=StyleBoxTexture.new()
+	box.texture=FRAME
+	box.modulate_color=color.lightened(0.14)
+	for side in [SIDE_LEFT,SIDE_TOP,SIDE_RIGHT,SIDE_BOTTOM]:
+		box.set_texture_margin(side,7)
+		box.set_content_margin(side,10)
 	return box
 
 static func button(button: Button, color: Color = PAPER):
 	button.add_theme_stylebox_override("normal", surface(color))
 	button.add_theme_stylebox_override("hover", surface(color.lightened(0.12), GOLD))
 	var pressed = surface(color.darkened(0.12), MOSS)
-	pressed.shadow_size = 0
-	pressed.border_width_bottom = 2
+	pressed.modulate_color = color.darkened(0.08)
 	button.add_theme_stylebox_override("pressed", pressed)
 	button.add_theme_stylebox_override("disabled", surface(Color("a8a48c"), Color("7d8068")))
 	button.add_theme_color_override("font_color", INK)
@@ -42,6 +54,7 @@ static func selected(button: Button, active: bool):
 static func icon(kind: String) -> Texture2D:
 	if textures.has(kind): return textures[kind]
 	var patterns = {
+		"book": ["1110111", "1011101", "1011101", "1011101", "1011101", "1111111", "0001000"],
 		"moon": ["0001110", "0011000", "0110000", "0110000", "0110001", "0011111", "0001110"],
 		"cup": ["0101000", "0010000", "1111100", "1000111", "1000101", "0111110", "1111110"],
 		"back": ["0001000", "0011000", "0111111", "1111111", "0111111", "0011000", "0001000"],
@@ -77,6 +90,10 @@ static func cursor(kind: String) -> Texture2D:
 		picture.fill_rect(Rect2i(19,14,5,16),WOOD)
 		picture.fill_rect(Rect2i(12,10,18,9),INK)
 		picture.fill_rect(Rect2i(13,11,16,6),GOLD)
+	elif kind=="move":
+		picture.fill_rect(Rect2i(17,12,3,18),INK)
+		picture.fill_rect(Rect2i(20,12,11,7),MOSS)
+		picture.fill_rect(Rect2i(20,12,10,2),PAPER)
 	else:
 		picture.fill_rect(Rect2i(14,14,14,12),INK)
 		picture.fill_rect(Rect2i(15,15,12,9),GOLD)

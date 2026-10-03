@@ -241,7 +241,7 @@ func run():
 	inherited.move_enemy(inherited.enemies[0], Vector2i(1, 12))
 	check(inherited.structures[Vector2i(1, 12)].hp == 6 and inherited.enemies[0].pos == Vector2i(0, 12), "Enemy must break persisted entry wall before entering")
 	var front = Trial.run_trial("front")
-	check(front.result == "win" and front.animals[0].hp > 0 and front.animals[0].hp < 40 and front.enemies[0].hp == 0, "Full-HP 1v1: Shiba wins, takes variable damage")
+	check(front.result == "win" and front.animals[0].hp > 0 and front.combat_log.any(func(hit): return hit.source == "enemy" and hit.damage > 0) and front.enemies[0].hp == 0, "Full-HP 1v1: Shiba wins, takes variable damage")
 	var saved = Trial.run_trial("rescue")
 	check(saved.result == "win" and saved.metrics.captures == 1 and saved.metrics.rescues == 1, "Real placement + stay leads to capture and instinct rescue")
 	check(saved.milestones.any(func(m): return m.kind == "keeper_down") and saved.milestones.any(func(m): return m.kind == "carried"), "Distinct unconscious/carriage alerts")
@@ -529,17 +529,19 @@ func check_economy():
 	check(w.field_items.any(func(item): return item.kind == "kennel_plan") and "kennel" not in w.campaign.unlocked_blueprints, "Blueprint drops without unlocking")
 	var plan = w.field_items.filter(func(item): return item.kind == "kennel_plan")[0].pos
 	w.paused = true
-	check(not w.act("collect", plan) and not w.act("end_night"), "Pause blocks collection and early ending")
+	check(not w.act("collect", plan) and w.act("end_night"), "Pause allows rest plan, not local collection")
 	var frozen = w.tick
 	advance(w, 20)
 	check(w.tick == frozen, "Pause freezes night time")
+	w.act("cancel_rest_until")
 	w.paused = false
 	check(w.act("collect", plan) and "kennel" in w.campaign.unlocked_blueprints, "Manual collection unlocks kennel")
 	w.add_resource("wood", 20)
 	check(w.act("kennel", Vector2i(12, 9)), "Can construct after early clear")
 	advance(w, 8)
 	var before = w.remaining_night()
-	check(w.act("end_night") and w.phase == "dawn", "Player chooses early dawn")
+	check(w.act("end_night") and w.phase == "defend", "Player rests through remaining night")
+	while w.working(): w.step()
 	check(w.early_finish_bonus == floori(before / 10) and w.campaign.exp_pool == w.score.xp and w.campaign.animals[0].lv == 1, "Remaining-time bonus and pooled XP, no auto level")
 	var day = Farm.new(w.next_campaign(), 18)
 	check(day.campaign.day == 2 and day.stage == 1 and day.phase == "shop", "Next day reuses Stage1 rather than adding a stage")
