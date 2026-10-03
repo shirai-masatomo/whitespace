@@ -80,7 +80,11 @@ func drag(from: Vector2, to: Vector2, shot: String = ""):
 	event.pressed = true
 	Input.parse_input_event(event)
 	await process_frame
-	for i in range(1,9): await move_pointer(from.lerp(to,float(i)/8))
+	for i in range(1,9):
+		await move_pointer(from.lerp(to,float(i)/8))
+		if shot!="":
+			await RenderingServer.frame_post_draw
+			root.get_texture().get_image().save_png("res://artifacts/queue-move-%02d.png" % i)
 	if shot != "":
 		await capture(shot)
 		await motion_frames("queue-lift",4)
@@ -96,6 +100,29 @@ func run():
 	game.automated = true
 	root.add_child(game)
 	await create_timer(3.2).timeout
+	if "--motion-only" in OS.get_cmdline_user_args():
+		game.world.buy("hen")
+		await click("open_book")
+		await motion_frames("book-open",9)
+		await click("book_next")
+		await motion_frames("book-turn",7)
+		await click("close_market")
+		await motion_frames("book-close",9)
+		await click("advance")
+		game.world.paused=true
+		game.world.act("wall",Vector2i(10,8))
+		game.world.act("wall",Vector2i(11,8))
+		game.world.act("wall",Vector2i(12,8))
+		game.refresh()
+		await drag(Vector2(1120,180),Vector2(1120,100),"queue_motion")
+		await motion_frames("queue-drop",5)
+		for j in game.world.jobs.duplicate():game.world.act("cancel_job",Vector2i.ZERO,j.id)
+		for cell in [Vector2i(18,10),Vector2i(8,10),Vector2i(18,11)]:game.world.act("move",cell)
+		game.choose_walk()
+		await capture("return_route")
+		print("PASS: actual input motion capture")
+		quit()
+		return
 	if "--selection-only" in OS.get_cmdline_user_args():
 		await focused_selection_checks()
 		print("PASS: focused selection/context/fatigue input")

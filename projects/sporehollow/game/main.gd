@@ -816,7 +816,7 @@ func pointer_over_ui() -> bool:
 	if is_instance_valid(context_panel) and context_panel.is_visible_in_tree() and context_panel.get_global_rect().has_point(pointer): return true
 	if pointer.y < 49 or pointer.y > 748: return true
 	if world.working() and Rect2(1010, 64, 248, 66 + world.jobs.size() * 35).has_point(pointer): return true
-	if not selected.is_empty() and Rect2(16, 595, 422, 91).has_point(pointer): return true
+	if not selected.is_empty() and (keeper_card_rect() if selected.get("kind")=="keeper" else Rect2(16,595,422,91)).has_point(pointer): return true
 	for button in buttons.values():
 		if is_instance_valid(button) and button.is_visible_in_tree() and button.get_global_rect().has_point(pointer): return true
 	return false
@@ -2175,8 +2175,13 @@ func dog_facing(a: Dictionary) -> float:
 	var previous = view_positions.get("a%d" % a.id, Vector2(a.pos))
 	return -1.0 if a.pos.x < previous.x - 0.02 else 1.0
 
+func keeper_card_rect() -> Rect2:
+	var owner_screen=get_canvas_transform()*keeper_pixel()
+	return Rect2(16,485 if Rect2(8,575,450,125).has_point(owner_screen) else 595,422,91)
+
 func draw_keeper_card():
 	var k = world.keeper
+	hud.draw_set_transform(keeper_card_rect().position-Vector2(16,595))
 	hud.draw_style_box(UI.surface(UI.PAPER), Rect2(16, 595, 422, 91))
 	hud.draw_circle(Vector2(48, 629), 12, Color("e9bd8b"))
 	hud.draw_rect(Rect2(32, 616, 32, 6), UI.GOLD)
@@ -2188,13 +2193,14 @@ func draw_keeper_card():
 		var ratio = float(k.hp) / k.max_hp if i == 0 else k.sleepiness / 100.0
 		hud.draw_rect(Rect2(100, y + 3, 170 * ratio, 8), Color("bf7661") if i == 0 else Color("8087a7"))
 		label_on(hud, Vector2(279, y + 12), "%d/%d" % [k.hp, k.max_hp] if i == 0 else "%d%%" % k.sleepiness, 13, UI.INK)
-	var activity = "連れ去り" if k.carrier >= 0 else ("気絶" if k.state == "unconscious" else ("ぐっすり" if k.forced_rest else ("休息" if k.resting else ("散歩中" if world.manual_goal != null else (world.Jobs.status(world) if world.jobs_held else ("仕事中" if not world.jobs.is_empty() else "のんびり"))))))
+	var activity = "連れ去り" if k.carrier >= 0 else ("気絶" if k.state == "unconscious" else ("限界休息" if k.forced_rest else (("寝入り待ち" if k.get("rest_elapsed",0)<5 else "睡眠") if k.resting else ("散歩中" if world.manual_goal != null else ("再開待ち" if world.jobs_held else ("仕事中" if not world.jobs.is_empty() else "のんびり"))))))
 	label_on(hud, Vector2(30, 676), activity, 15, UI.INK)
 	if not world.jobs.is_empty():
 		var names = {"wall": "壁", "build_gate": "門", "collect": "回収", "move": "歩く", "place_animal": "仲間", "repair": "修理", "remove": "解体", "gate": "門", "kennel": "犬小屋", "coop": "鶏小屋"}
 		var next = names.get(world.jobs[0].kind, "仕事")
 		if world.jobs.size() > 1: next += " → " + names.get(world.jobs[1].kind, "仕事")
 		label_on(hud, Vector2(166, 676), next, 14, UI.INK)
+	hud.draw_set_transform(Vector2.ZERO)
 
 func keeper_pixel() -> Vector2:
 	if world.keeper.carrier >= 0:
