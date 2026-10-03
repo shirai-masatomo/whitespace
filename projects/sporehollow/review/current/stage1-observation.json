@@ -21,7 +21,7 @@
       "speed": 1.0,
       "tick": 0
     },
-    "cursor_animal": {
+    "destinations": {
       "alert": "",
       "camera": [
         600.0,
@@ -29,20 +29,99 @@
       ],
       "display_order": [
         {
+          "job_id": 5,
+          "kind": "place_animal",
+          "number": 1,
+          "pos": [
+            16,
+            9
+          ]
+        },
+        {
           "job_id": 1,
           "kind": "wall",
-          "number": 1,
+          "number": 2,
           "pos": [
             10,
             8
           ]
         },
         {
-          "job_id": 2,
+          "job_id": 3,
+          "kind": "wall",
+          "number": 3,
+          "pos": [
+            12,
+            8
+          ]
+        },
+        {
+          "job_id": 4,
+          "kind": "collect",
+          "number": 4,
+          "pos": [
+            9,
+            8
+          ]
+        }
+      ],
+      "gold": 10,
+      "held": true,
+      "keeper_hp": 30,
+      "keeper_state": "free",
+      "paused": true,
+      "phase": "day",
+      "rest_elapsed": 0,
+      "resting": false,
+      "shop_level": "categories",
+      "shop_side": "home",
+      "sleepiness": 0.0,
+      "speed": 1.0,
+      "tick": 0
+    },
+    "drowsy": {
+      "alert": "",
+      "camera": [
+        600.0,
+        357.0
+      ],
+      "display_order": [],
+      "gold": 40,
+      "held": false,
+      "keeper_hp": 30,
+      "keeper_state": "free",
+      "paused": false,
+      "phase": "day",
+      "rest_elapsed": 0,
+      "resting": false,
+      "shop_level": "categories",
+      "shop_side": "home",
+      "sleepiness": 65,
+      "speed": 1.0,
+      "tick": 0
+    },
+    "keeper_selected": {
+      "alert": "",
+      "camera": [
+        600.0,
+        357.0
+      ],
+      "display_order": [
+        {
+          "job_id": 5,
+          "kind": "place_animal",
+          "number": 1,
+          "pos": [
+            16,
+            9
+          ]
+        },
+        {
+          "job_id": 1,
           "kind": "wall",
           "number": 2,
           "pos": [
-            11,
+            10,
             8
           ]
         },
@@ -79,15 +158,73 @@
       "speed": 1.0,
       "tick": 0
     },
-    "cursor_build": {
+    "morning": {
       "alert": "",
       "camera": [
         600.0,
         357.0
       ],
       "display_order": [],
-      "gold": 10,
+      "gold": 40,
       "held": false,
+      "keeper_hp": 30,
+      "keeper_state": "free",
+      "paused": false,
+      "phase": "shop",
+      "rest_elapsed": 0,
+      "resting": false,
+      "shop_level": "categories",
+      "shop_side": "home",
+      "sleepiness": 0.0,
+      "speed": 1.0,
+      "tick": 0
+    },
+    "neutral": {
+      "alert": "",
+      "camera": [
+        600.0,
+        357.0
+      ],
+      "display_order": [
+        {
+          "job_id": 5,
+          "kind": "place_animal",
+          "number": 1,
+          "pos": [
+            16,
+            9
+          ]
+        },
+        {
+          "job_id": 1,
+          "kind": "wall",
+          "number": 2,
+          "pos": [
+            10,
+            8
+          ]
+        },
+        {
+          "job_id": 3,
+          "kind": "wall",
+          "number": 3,
+          "pos": [
+            12,
+            8
+          ]
+        },
+        {
+          "job_id": 4,
+          "kind": "collect",
+          "number": 4,
+          "pos": [
+            9,
+            8
+          ]
+        }
+      ],
+      "gold": 10,
+      "held": true,
       "keeper_hp": 30,
       "keeper_state": "free",
       "paused": true,
@@ -101,73 +238,6 @@
       "tick": 0
     },
     "paused_queue": {
-      "alert": "",
-      "camera": [
-        600.0,
-        357.0
-      ],
-      "display_order": [
-        {
-          "job_id": 1,
-          "kind": "wall",
-          "number": 1,
-          "pos": [
-            10,
-            8
-          ]
-        },
-        {
-          "job_id": 2,
-          "kind": "wall",
-          "number": 2,
-          "pos": [
-            11,
-            8
-          ]
-        },
-        {
-          "job_id": 3,
-          "kind": "wall",
-          "number": 3,
-          "pos": [
-            12,
-            8
-          ]
-        },
-        {
-          "job_id": 4,
-          "kind": "collect",
-          "number": 4,
-          "pos": [
-            9,
-            8
-          ]
-        },
-        {
-          "job_id": 5,
-          "kind": "place_animal",
-          "number": 5,
-          "pos": [
-            16,
-            9
-          ]
-        }
-      ],
-      "gold": 10,
-      "held": false,
-      "keeper_hp": 30,
-      "keeper_state": "free",
-      "paused": true,
-      "phase": "day",
-      "rest_elapsed": 0,
-      "resting": false,
-      "shop_level": "categories",
-      "shop_side": "home",
-      "sleepiness": 0.0,
-      "speed": 1.0,
-      "tick": 0
-    },
-    "queue_drag": {
       "alert": "",
       "camera": [
         600.0,
@@ -292,6 +362,90 @@
       "speed": 1.0,
       "tick": 0
     },
+    "rest": {
+      "alert": "",
+      "camera": [
+        600.0,
+        357.0
+      ],
+      "display_order": [],
+      "gold": 40,
+      "held": true,
+      "keeper_hp": 30,
+      "keeper_state": "free",
+      "paused": false,
+      "phase": "day",
+      "rest_elapsed": 5.25,
+      "resting": true,
+      "shop_level": "categories",
+      "shop_side": "home",
+      "sleepiness": 84.5,
+      "speed": 1.0,
+      "tick": 21
+    },
+    "rest_until_dawn": {
+      "alert": "",
+      "camera": [
+        600.0,
+        357.0
+      ],
+      "display_order": [],
+      "gold": 11,
+      "held": true,
+      "keeper_hp": 30,
+      "keeper_state": "free",
+      "paused": false,
+      "phase": "defend",
+      "rest_elapsed": 5.25,
+      "resting": true,
+      "shop_level": "categories",
+      "shop_side": "home",
+      "sleepiness": 12.925925925926,
+      "speed": 1.0,
+      "tick": 526
+    },
+    "rest_until_night": {
+      "alert": "",
+      "camera": [
+        600.0,
+        357.0
+      ],
+      "display_order": [],
+      "gold": 11,
+      "held": true,
+      "keeper_hp": 30,
+      "keeper_state": "free",
+      "paused": false,
+      "phase": "day",
+      "rest_elapsed": 5.25,
+      "resting": true,
+      "shop_level": "categories",
+      "shop_side": "home",
+      "sleepiness": 0.0,
+      "speed": 1.0,
+      "tick": 138
+    },
+    "settling": {
+      "alert": "",
+      "camera": [
+        600.0,
+        357.0
+      ],
+      "display_order": [],
+      "gold": 40,
+      "held": true,
+      "keeper_hp": 30,
+      "keeper_state": "free",
+      "paused": false,
+      "phase": "day",
+      "rest_elapsed": 0.0,
+      "resting": true,
+      "shop_level": "categories",
+      "shop_side": "home",
+      "sleepiness": 85,
+      "speed": 1.0,
+      "tick": 0
+    },
     "shop": {
       "alert": "",
       "camera": [
@@ -309,6 +463,27 @@
       "resting": false,
       "shop_level": "categories",
       "shop_side": "home",
+      "sleepiness": 0.0,
+      "speed": 1.0,
+      "tick": 0
+    },
+    "shop_detail": {
+      "alert": "",
+      "camera": [
+        600.0,
+        357.0
+      ],
+      "display_order": [],
+      "gold": 40,
+      "held": false,
+      "keeper_hp": 30,
+      "keeper_state": "free",
+      "paused": false,
+      "phase": "shop",
+      "rest_elapsed": 0,
+      "resting": false,
+      "shop_level": "detail",
+      "shop_side": "buy",
       "sleepiness": 0.0,
       "speed": 1.0,
       "tick": 0
@@ -331,6 +506,27 @@
       "shop_level": "list",
       "shop_side": "buy",
       "sleepiness": 0.0,
+      "speed": 1.0,
+      "tick": 0
+    },
+    "tired": {
+      "alert": "",
+      "camera": [
+        600.0,
+        357.0
+      ],
+      "display_order": [],
+      "gold": 40,
+      "held": false,
+      "keeper_hp": 30,
+      "keeper_state": "free",
+      "paused": false,
+      "phase": "day",
+      "rest_elapsed": 0,
+      "resting": false,
+      "shop_level": "categories",
+      "shop_side": "home",
+      "sleepiness": 85,
       "speed": 1.0,
       "tick": 0
     },
@@ -391,27 +587,6 @@
       "sleepiness": 3.24074074074074,
       "speed": 1.0,
       "tick": 35
-    },
-    "transport_attack": {
-      "alert": "",
-      "camera": [
-        600.0,
-        357.0
-      ],
-      "display_order": [],
-      "gold": 40,
-      "held": true,
-      "keeper_hp": 25,
-      "keeper_state": "free",
-      "paused": false,
-      "phase": "day",
-      "rest_elapsed": 0,
-      "resting": false,
-      "shop_level": "categories",
-      "shop_side": "home",
-      "sleepiness": 2.5,
-      "speed": 1.0,
-      "tick": 27
     }
   },
   "input_checks": {
@@ -424,8 +599,10 @@
     "mode_cursors": true,
     "morning_training": true,
     "name_shortcut_guard": true,
+    "neutral_left_move_right_deselect": true,
     "paused_planning": true,
     "queue_drag": true,
+    "rest_until_fixed_tick_accelerator": true,
     "shed_transport": true,
     "speed_shortcuts": true,
     "transport_attack_lowered": true,
@@ -472,7 +649,7 @@
           -10,
           -10
         ],
-        "hp": 10,
+        "hp": 38,
         "id": 1,
         "kennel_id": -1,
         "kennel_ticks": 0,
@@ -595,7 +772,7 @@
         {
           "affinity": null,
           "category": "dog",
-          "hp": 10,
+          "hp": 38,
           "id": 1,
           "loyalty": 75,
           "lv": 2,
@@ -622,7 +799,7 @@
       ],
       "day": 2,
       "eggs": 0,
-      "exp_pool": 4,
+      "exp_pool": 5,
       "facilities": [
         {
           "armor": 0,
@@ -670,7 +847,7 @@
           ]
         }
       ],
-      "gold": 74,
+      "gold": 79,
       "items": {
         "dog_food": 2,
         "hen_food": 0
@@ -682,7 +859,7 @@
       "keeper_vitals": {
         "drinks_today": 0,
         "hp": 30,
-        "sleepiness": 35.925925925926
+        "sleepiness": 0.0
       },
       "mushrooms": 0,
       "next_structure_id": 3,
@@ -707,7 +884,7 @@
     "early_clear_tick": -1,
     "early_finish_bonus": 0,
     "eggs": 0,
-    "exp_pool": 4,
+    "exp_pool": 5,
     "field_items": [
       {
         "born_day": 1,
@@ -723,7 +900,7 @@
         {
           "affinity": null,
           "category": "dog",
-          "hp": 10,
+          "hp": 38,
           "id": 1,
           "loyalty": 75,
           "lv": 1,
@@ -750,7 +927,7 @@
       ],
       "day": 2,
       "eggs": 0,
-      "exp_pool": 24,
+      "exp_pool": 25,
       "facilities": [
         {
           "armor": 0,
@@ -798,7 +975,7 @@
           ]
         }
       ],
-      "gold": 74,
+      "gold": 79,
       "items": {
         "dog_food": 2,
         "hen_food": 0
@@ -810,7 +987,7 @@
       "keeper_vitals": {
         "drinks_today": 0,
         "hp": 30,
-        "sleepiness": 35.925925925926
+        "sleepiness": 0.0
       },
       "mushrooms": 0,
       "next_structure_id": 3,
@@ -847,7 +1024,7 @@
       "recover_ticks": 0,
       "resting": false,
       "restrainer": -1,
-      "sleepiness": 35.925925925926,
+      "sleepiness": 0.0,
       "state": "free",
       "warned": 0
     },
@@ -917,6 +1094,7 @@
       "stone": 0,
       "wood": 20
     },
+    "rest_until": {},
     "result": "",
     "samples": [],
     "schedule": [
@@ -1874,6 +2052,21 @@
         "event": "hold_changed",
         "reason": "",
         "tick": 117
+      },
+      {
+        "event": "hold_changed",
+        "reason": "rest",
+        "tick": 117
+      },
+      {
+        "event": "hold_changed",
+        "reason": "rest_end",
+        "tick": 360
+      },
+      {
+        "event": "hold_changed",
+        "reason": "rest",
+        "tick": 505
       }
     ],
     "jobs": [],
@@ -1967,24 +2160,24 @@
         12
       ],
       [
-        20,
+        21,
+        12
+      ],
+      [
+        21,
         13
       ],
       [
         20,
-        14
+        13
       ],
       [
         19,
-        14
+        13
       ],
       [
         18,
-        14
-      ],
-      [
-        17,
-        14
+        13
       ],
       [
         17,
@@ -2063,28 +2256,28 @@
         9
       ],
       [
-        11,
-        10
-      ],
-      [
-        11,
-        11
-      ],
-      [
-        11,
-        12
+        12,
+        9
       ],
       [
         12,
-        12
+        10
+      ],
+      [
+        12,
+        11
       ],
       [
         13,
-        12
+        11
       ],
       [
         14,
-        12
+        11
+      ],
+      [
+        15,
+        11
       ],
       [
         15,
@@ -2109,22 +2302,65 @@
         "tick": 106
       },
       {
+        "event": "rest_until_planned",
+        "target": "night",
+        "tick": 117
+      },
+      {
+        "event": "rest_started",
+        "tick": 117
+      },
+      {
+        "event": "rest_until_started",
+        "tick": 117
+      },
+      {
+        "event": "rest_recovery_started",
+        "tick": 137
+      },
+      {
+        "event": "rest_until_stopped",
+        "reason": "nightfall",
+        "tick": 360
+      },
+      {
+        "event": "rest_ended",
+        "tick": 360
+      },
+      {
         "event": "invasion",
         "hp": 30,
-        "sleepiness": 26.2,
+        "sleepiness": 3.7,
         "tick": 400
       },
       {
         "event": "spotted",
         "hp": 30,
-        "sleepiness": 33.8,
+        "sleepiness": 11.3,
         "tick": 482
       },
       {
         "event": "animal_danger",
         "hp": 30,
-        "sleepiness": 35.7,
+        "sleepiness": 13.2,
         "tick": 503
+      },
+      {
+        "event": "rest_until_planned",
+        "target": "dawn",
+        "tick": 505
+      },
+      {
+        "event": "rest_started",
+        "tick": 505
+      },
+      {
+        "event": "rest_until_started",
+        "tick": 505
+      },
+      {
+        "event": "rest_recovery_started",
+        "tick": 525
       }
     ],
     "manual_goal": null,
@@ -2213,6 +2449,7 @@
       "stone": 0,
       "wood": 20
     },
+    "rest_until": {},
     "result": "",
     "samples": [
       {
@@ -3517,6 +3754,21 @@
         "event": "hold_changed",
         "reason": "",
         "tick": 117
+      },
+      {
+        "event": "hold_changed",
+        "reason": "rest",
+        "tick": 117
+      },
+      {
+        "event": "hold_changed",
+        "reason": "rest_end",
+        "tick": 360
+      },
+      {
+        "event": "hold_changed",
+        "reason": "rest",
+        "tick": 505
       }
     ],
     "jobs": [],
@@ -3612,24 +3864,24 @@
         12
       ],
       [
-        20,
+        21,
+        12
+      ],
+      [
+        21,
         13
       ],
       [
         20,
-        14
+        13
       ],
       [
         19,
-        14
+        13
       ],
       [
         18,
-        14
-      ],
-      [
-        17,
-        14
+        13
       ],
       [
         17,
@@ -3708,28 +3960,28 @@
         9
       ],
       [
-        11,
-        10
-      ],
-      [
-        11,
-        11
-      ],
-      [
-        11,
-        12
+        12,
+        9
       ],
       [
         12,
-        12
+        10
+      ],
+      [
+        12,
+        11
       ],
       [
         13,
-        12
+        11
       ],
       [
         14,
-        12
+        11
+      ],
+      [
+        15,
+        11
       ],
       [
         15,
@@ -3754,22 +4006,65 @@
         "tick": 106
       },
       {
+        "event": "rest_until_planned",
+        "target": "night",
+        "tick": 117
+      },
+      {
+        "event": "rest_started",
+        "tick": 117
+      },
+      {
+        "event": "rest_until_started",
+        "tick": 117
+      },
+      {
+        "event": "rest_recovery_started",
+        "tick": 137
+      },
+      {
+        "event": "rest_until_stopped",
+        "reason": "nightfall",
+        "tick": 360
+      },
+      {
+        "event": "rest_ended",
+        "tick": 360
+      },
+      {
         "event": "invasion",
         "hp": 30,
-        "sleepiness": 26.2,
+        "sleepiness": 3.7,
         "tick": 400
       },
       {
         "event": "spotted",
         "hp": 30,
-        "sleepiness": 33.8,
+        "sleepiness": 11.3,
         "tick": 482
       },
       {
         "event": "animal_danger",
         "hp": 30,
-        "sleepiness": 35.7,
+        "sleepiness": 13.2,
         "tick": 503
+      },
+      {
+        "event": "rest_until_planned",
+        "target": "dawn",
+        "tick": 505
+      },
+      {
+        "event": "rest_started",
+        "tick": 505
+      },
+      {
+        "event": "rest_until_started",
+        "tick": 505
+      },
+      {
+        "event": "rest_recovery_started",
+        "tick": 525
       }
     ],
     "manual_goal": null,
@@ -3842,13 +4137,6 @@
       {
         "kind": "weed",
         "pos": [
-          15,
-          12
-        ]
-      },
-      {
-        "kind": "weed",
-        "pos": [
           16,
           12
         ]
@@ -3904,6 +4192,7 @@
       "stone": 0,
       "wood": 20
     },
+    "rest_until": {},
     "result": "",
     "samples": [
       {
@@ -4152,7 +4441,10 @@
     "changes_world": false,
     "color": "thin red",
     "includes_shed_pickup": true,
-    "terrain": "current static walkability"
+    "terrain": "shared A-star with actual movement; adjacent work cells; present terrain",
+    "overlap": "second traversal offset and dashed, two lines maximum",
+    "held": "dashed",
+    "visibility": "keeper selection or queue edit/hover"
   },
   "selection_context_checks": {
     "batch_reserved": 3,
@@ -4161,10 +4453,10 @@
     "ctrl_cap_all_classes": 8,
     "drag_cap_all_classes": 8,
     "paused_world_unchanged": true,
-    "right_click_selected_facility": true,
+    "right_click_deselect_only": true,
     "ui_priority_disabled_and_release": true
   },
-  "source_commit": "8f2ef01dd2b822ca111293d8c36a45e371876798",
+  "source_commit": "919e8e630919e3c904dc75430a805d4ccfaebcea",
   "transport_attack": {
     "actions": [
       {
@@ -4236,8 +4528,8 @@
         "fear": 0.0,
         "healing_kennel": -1.0,
         "home": [
-          21.0,
-          14.0
+          22.0,
+          13.0
         ],
         "hp": 40.0,
         "id": 1.0,
@@ -4256,21 +4548,21 @@
         "next_bark": 0.0,
         "object_attack_power": 0.0,
         "order": [
-          21.0,
-          14.0
+          22.0,
+          13.0
         ],
         "order_until": 0.0,
         "path": [
           [
-            21.0,
-            14.0
+            22.0,
+            13.0
           ]
         ],
         "pending": {},
         "placed": true,
         "pos": [
-          21.0,
-          14.0
+          22.0,
+          13.0
         ],
         "rescuing": false,
         "rest_settled": false,
@@ -4490,8 +4782,8 @@
           "deployment_tick": 27.0,
           "id": 1.0,
           "pos": [
-            21.0,
-            14.0
+            22.0,
+            13.0
           ]
         }
       ],
@@ -4577,8 +4869,8 @@
         "animal_id": 1.0,
         "event": "companion_lowered",
         "pos": [
-          21.0,
-          14.0
+          22.0,
+          13.0
         ],
         "tick": 27.0
       },
@@ -4609,8 +4901,8 @@
       "next_attack": 0.0,
       "placed": true,
       "pos": [
-        20.0,
-        14.0
+        21.0,
+        13.0
       ],
       "recover_ticks": 0.0,
       "resting": false,
@@ -4681,8 +4973,8 @@
         13.0
       ],
       [
-        20.0,
-        14.0
+        21.0,
+        13.0
       ]
     ],
     "life_log": [
@@ -4797,8 +5089,8 @@
         "counter_until": 0.0,
         "done": false,
         "entry": [
-          20.0,
-          13.0
+          21.0,
+          12.0
         ],
         "flee": false,
         "hp": 50.0,
@@ -4813,13 +5105,13 @@
         "object_attack_power": 2.0,
         "path": [
           [
-            20.0,
-            13.0
+            21.0,
+            12.0
           ]
         ],
         "pos": [
-          20.0,
-          13.0
+          21.0,
+          12.0
         ],
         "role": "kidnapper",
         "search_goal": null,
@@ -4841,6 +5133,7 @@
       "stone": 0.0,
       "wood": 0.0
     },
+    "rest_until": {},
     "result": "",
     "samples": [
       {
@@ -4961,5 +5254,25 @@
     },
     "structures": [],
     "tick": 27.0
+  },
+  "motion_review": {
+    "source_commit": "919e8e630919e3c904dc75430a805d4ccfaebcea",
+    "fixture": "3 paused wall plans; separate 3 move plans for overlapping route display",
+    "input": "actual InputEvent drag and book open/next/close",
+    "book": "book-motion.gif",
+    "queue": "queue-motion.gif",
+    "route": "return_route.png",
+    "frames_unmodified": true
+  },
+  "validation": {
+    "rules_checks": 737,
+    "jobs_checks": 98,
+    "keeper_checks": 64,
+    "planning_checks": 67,
+    "rest_until_checks": 24,
+    "ai_trials": 192,
+    "windows_export": true,
+    "export_smoke": true,
+    "human_playtest": false
   }
 }
