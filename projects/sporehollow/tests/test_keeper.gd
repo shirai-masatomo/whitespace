@@ -68,17 +68,17 @@ func run():
 	steps(w, 216)
 	check(w.keeper.forced_rest and w.keeper.resting, "270 seconds reaches forced rest")
 	check(not w.act("keeper_move", Vector2i(10,13)) and not w.act("keeper_rest"), "Limit blocks walking and waking")
-	steps(w, 41)
+	steps(w, 61)
 	check(w.keeper.sleepiness < 80 and not w.keeper.forced_rest and not w.keeper.resting, "Below80 returns normal activity")
 	w.keeper.sleepiness = 70
 	w.keeper.hp = 20
 	w.act("keeper_rest")
 	var before = w.tick
 	steps(w, 20)
-	check(w.tick == before + 20 and w.keeper.hp == 21 and w.keeper.sleepiness == 60, "Rest heals slowly while world runs")
+	check(w.tick == before + 20 and w.keeper.hp == 21 and w.keeper.sleepiness == 70, "First five seconds settle; existing HP healing unchanged")
 	w.act("pause")
 	steps(w, 20)
-	check(w.tick == before + 20 and w.keeper.sleepiness == 60, "Pause freezes body as well as world")
+	check(w.tick == before + 20 and w.keeper.sleepiness == 70, "Pause freezes body as well as world")
 	w.act("pause")
 	check(w.act("keeper_rest") and not w.keeper.resting, "Voluntary wake anytime")
 	w.keeper.sleepiness = 90

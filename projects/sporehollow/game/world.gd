@@ -61,6 +61,7 @@ var skill_log: Array = []
 var milestones: Array = []
 var initial_positions: Dictionary = {}
 var structures: Dictionary = {}
+const HOLDING_SHED = Vector2i(4, 12) # Pickup apron; kept clear of construction.
 var keeper = {"pos": Vector2i(6, 13), "placed": false, "carrier": -1, "state": "free", "restrainer": -1, "move_credit": 0.0, "hp": 30, "max_hp": 30, "sleepiness": 0.0, "resting": false, "forced_rest": false, "warned": 0, "heal_credit": 0.0, "recover_ticks": 0, "next_attack": 0, "hurt_until": 0, "drinks_today": 0}
 var animals: Array = []
 var enemies: Array = []
@@ -162,6 +163,7 @@ func _init(data: Dictionary = {}, seed_number: int = 17, stage_override: Diction
 		a.known_enemies = {}
 		a.pos = Vector2i(-10, -10)
 		a.placed = false
+		a.deployment = "unplaced"
 		a.home = a.pos
 		a.stamina = 100.0
 		a.max_hp = SPECIES[a.species].hp + (a.lv - 1) * 4
@@ -247,7 +249,7 @@ func has_nest() -> bool:
 	return campaign.animals.any(func(a): return a.species == "hen")
 
 func can_build(kind: String, p: Vector2i) -> bool:
-	return working() and not paused and BUILD.has(kind) and inside(p) and p not in entries and not field_items.any(func(item): return item.pos == p) and not occupied(p) and not live_structure(p) and BUILD[kind].get("blueprint", "") in ([""] + campaign.unlocked_blueprints) and resource_amount(BUILD[kind].get("resource", "soil")) >= BUILD[kind].cost
+	return working() and BUILD.has(kind) and inside(p) and p not in [HOLDING_SHED, HOLDING_SHED + Vector2i.UP] and p not in entries and not field_items.any(func(item): return item.pos == p) and not occupied(p) and not live_structure(p) and BUILD[kind].get("blueprint", "") in ([""] + campaign.unlocked_blueprints) and resource_amount(BUILD[kind].get("resource", "soil")) >= BUILD[kind].cost
 
 func neighbors(p: Vector2i) -> Array:
 	return [p + Vector2i.RIGHT, p + Vector2i.LEFT, p + Vector2i.UP, p + Vector2i.DOWN]
@@ -294,7 +296,7 @@ func valid_animal_site(id: int, p: Vector2i) -> bool:
 	return animals.any(func(a): return a.id == id and available(a)) and keeper.placed and walkable(p) and not live_structure(p) and p not in entries and not occupied(p)
 
 func can_place_animal(id: int, p: Vector2i) -> bool:
-	return working() and not paused and valid_animal_site(id, p)
+	return working() and valid_animal_site(id, p)
 
 func working() -> bool:
 	return phase in ["day", "defend"]
@@ -311,7 +313,7 @@ func act(kind: String, p: Vector2i = Vector2i.ZERO, animal_id: int = -1) -> bool
 		accepted = Life.command(self, kind, p)
 	elif kind in ORDERS or kind in ["pause", "end_night"]:
 		accepted = _execute_local(kind, p, animal_id)
-	elif kind == "cancel_job" and working() and not paused:
+	elif kind == "cancel_job" and working():
 		accepted = Jobs.cancel(self, animal_id)
 
 	else:
@@ -340,6 +342,7 @@ func _execute_local(kind: String, p: Vector2i = Vector2i.ZERO, animal_id: int = 
 					a.order = p
 					a.path = [p]
 					a.placed = true
+					a.deployment = "placed"
 					initial_positions.animals.append({"id": a.id, "pos": [p.x, p.y], "deployment_tick": tick})
 					accepted = true
 			elif BUILD.has(kind):
@@ -879,7 +882,9 @@ func finish(won: bool):
 				if a.hp <= 0 and a.placed: owned.unavailable_through_day = campaign.day + 1
 	for j in jobs.duplicate():
 		if j.reserved > 0: add_resource(j.resource, j.reserved)
+		if j.kind == "place_animal": Jobs.deployment(self, j.animal_id, "unplaced")
 	jobs.clear()
+	manual_goal = null
 	if won:
 		campaign.gold += int(gold) + early_finish_bonus
 		campaign.exp_pool += int(xp)
@@ -1017,7 +1022,7 @@ func grow_nature():
 	for y in range(1, H - 1):
 		for x in range(1, W - 1):
 			var p = Vector2i(x, y)
-			if walkable(p) and not occupied(p) and not live_structure(p) and not natural.has(p) and p not in entries and not field_items.any(func(item): return item.pos == p): sites.append(p)
+			if walkable(p) and not occupied(p) and not live_structure(p) and not natural.has(p) and p not in [HOLDING_SHED, HOLDING_SHED + Vector2i.UP] and p not in entries and not field_items.any(func(item): return item.pos == p): sites.append(p)
 	if sites.is_empty(): return
 	var p = sites[nature_rng.randi_range(0, sites.size() - 1)]
 	natural[p] = kind

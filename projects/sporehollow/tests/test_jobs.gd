@@ -54,7 +54,7 @@ func run():
 	cap.act("pause")
 	var frozen = JSON.stringify(cap.observation())
 	steps(cap, 10)
-	check(JSON.stringify(cap.observation()) == frozen and not cap.act("wall", Vector2i(15, 3)), "Pause freezes work and rejects new world work")
+	check(JSON.stringify(cap.observation()) == frozen and cap.act("wall", Vector2i(15, 3)), "Pause freezes work and accepts reserved plans")
 	cap.act("pause")
 	# Finished wall blocks the direct path; movement must go around it.
 	var path = Farm.new().begin_day()

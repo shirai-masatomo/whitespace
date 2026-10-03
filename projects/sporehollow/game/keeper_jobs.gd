@@ -4,7 +4,7 @@ const LIMIT = 8
 const SPEED = 2.5 # Cells/second, provisional.
 
 static func enqueue(w, kind: String, p: Vector2i, animal_id: int) -> bool:
-	if not w.working() or w.paused or w.jobs.size() >= LIMIT or not w.inside(p): return false
+	if not w.working() or w.jobs.size() >= LIMIT or not w.inside(p): return false
 	if w.jobs.any(func(j): return (j.pos == p and j.kind == kind) or (kind == "place_animal" and j.kind == kind and j.animal_id == animal_id)): return false
 	var resource = ""
 	var cost = 0
@@ -27,6 +27,9 @@ static func enqueue(w, kind: String, p: Vector2i, animal_id: int) -> bool:
 		"state": "pending", "resource": resource, "reserved": cost, "started": false}
 	if cost > 0: w.add_resource(resource, -cost)
 	w.next_job_id += 1
+	if kind == "place_animal":
+		j.transport = "to_shed"
+		deployment(w, animal_id, "reserved")
 	w.jobs.append(j)
 	w.job_log.append({"tick": w.tick, "event": "queued", "id": j.id, "kind": kind, "pos": [p.x, p.y]})
 	return true
@@ -34,6 +37,15 @@ static func enqueue(w, kind: String, p: Vector2i, animal_id: int) -> bool:
 static func cancel(w, id: int, reason: String = "cancelled") -> bool:
 	for j in w.jobs:
 		if j.id != id: continue
+		if j.get("transport", "") in ["carrying", "returning"]:
+			j.transport = "returning"
+			j.state = "returning"
+			w.job_log.append({"tick": w.tick, "event": "return_requested", "id": id})
+			return true
+		if w.paused and (j.started or j.get("resume", false)):
+			j.cancel_requested = true
+			return true
+		if j.kind == "place_animal": deployment(w, j.animal_id, "unplaced")
 		if j.reserved > 0: w.add_resource(j.resource, j.reserved)
 		if (j.started or j.get("resume", false)) and w.structures.get(j.pos, {}).get("status") == "building": w.interrupt_site(j.pos)
 		w.jobs.erase(j)
@@ -41,7 +53,28 @@ static func cancel(w, id: int, reason: String = "cancelled") -> bool:
 		return true
 	return false
 
+static func deployment(w, id: int, value: String):
+	for a in w.animals:
+		if a.id == id: a.deployment = value
+	w.job_log.append({"tick": w.tick, "event": "deployment", "animal_id": id, "state": value})
+
+static func reorder(w, id: int, destination: int) -> bool:
+	if not w.working(): return false
+	var index = -1
+	for i in range(w.jobs.size()):
+		if w.jobs[i].id == id: index = i
+	var locked = not w.jobs.is_empty() and w.jobs[0].state != "pending"
+	var minimum = 1 if locked else 0
+	if index < minimum or index < 0: return false
+	destination = clampi(destination, minimum, w.jobs.size() - 1)
+	var job = w.jobs.pop_at(index)
+	w.jobs.insert(destination, job)
+	w.job_log.append({"tick": w.tick, "event": "reordered", "id": id, "order": w.jobs.map(func(j): return j.id)})
+	return true
+
 static func step(w):
+	for pending in w.jobs.duplicate():
+		if pending.get("cancel_requested", false): cancel(w, pending.id)
 	if not w.Life.able(w) or w.jobs_held or w.manual_goal != null or w.jobs.is_empty():
 		if w.manual_goal == null: w.keeper.move_credit = 0.0
 		return
@@ -58,13 +91,18 @@ static func step(w):
 		else:
 			complete(w, j, status == "ready")
 			return
-	var at_site = w.keeper.pos == j.pos if j.kind == "move" else w.distance(w.keeper.pos, j.pos) == 1
+	var target: Vector2i = w.HOLDING_SHED if j.get("transport", "") in ["to_shed", "returning"] else j.pos
+	var at_site = w.keeper.pos == target if j.kind == "move" else w.distance(w.keeper.pos, target) == 1
+	if j.get("transport", "") in ["to_shed", "returning"] and w.keeper.pos == target: at_site = true
+	if j.kind == "place_animal" and j.get("transport", "") == "carrying" and j.pos != w.keeper.pos and not w.valid_animal_site(j.animal_id, j.pos):
+		j.state = "blocked"
+		return
 	if not at_site:
 		j.state = "walking"
 		w.keeper.move_credit = minf(1.9, w.keeper.move_credit + SPEED * w.Life.factor(w) * w.DT)
 		if w.keeper.move_credit < 1: return
 		# Choose a reachable adjacent work cell. A blocked near side must not hide an open far side.
-		var goals = [j.pos] if j.kind == "move" else w.neighbors(j.pos)
+		var goals = [target] if j.kind == "move" else w.neighbors(target)
 		goals = goals.filter(func(p): return w.walkable(p))
 		var solid_goals = goals.duplicate()
 		goals = goals.filter(func(p): return not w.actor_occupied(p, w.keeper.pos))
@@ -76,6 +114,9 @@ static func step(w):
 			if next != w.keeper.pos: break
 		if next == w.keeper.pos:
 			if goals.any(func(g): return w.next_step(w.keeper.pos, g) != w.keeper.pos): return
+			if j.kind == "place_animal" and j.transport in ["carrying", "returning"]:
+				j.state = "blocked"
+				return
 			cancel(w, j.id, "unreachable")
 			w.say("道がふさがっている。予定を取り消したよ。")
 			return
@@ -84,6 +125,15 @@ static func step(w):
 		w.keeper.pos = next
 		w.keeper_path.append([next.x, next.y])
 		return
+	if j.kind == "place_animal":
+		if j.transport == "to_shed":
+			j.transport = "carrying"
+			deployment(w, j.animal_id, "transporting")
+			return
+		if j.transport == "returning":
+			deployment(w, j.animal_id, "unplaced")
+			complete(w, j, true)
+			return
 	if j.kind == "move":
 		complete(w, j, true)
 		return
