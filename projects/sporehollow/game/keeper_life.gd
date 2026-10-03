@@ -29,8 +29,8 @@ static func command(w, kind: String, p: Vector2i) -> bool:
 		if kind == "keeper_move":
 			if k.state != "free" or k.forced_rest or not w.walkable(p) or w.actor_occupied(p, k.pos): return false
 			w.manual_goal = p
-			w.jobs_held = true
-			k.pending_command = {"kind": kind, "pos": p}
+			w.Jobs.hold(w, "manual" if not w.jobs.is_empty() else "travel")
+			k.pending_command = {"kind": kind, "pos": p, "hold_reason":w.job_hold_reason}
 			return true
 		if kind in ["keeper_rest", "resume_jobs"]:
 			k.pending_command = {"kind": kind, "pos": p}
@@ -39,22 +39,27 @@ static func command(w, kind: String, p: Vector2i) -> bool:
 	if kind == "keeper_move":
 		if k.state != "free" or k.forced_rest or not w.walkable(p) or w.actor_occupied(p, k.pos): return false
 		set_rest(w, false)
-		w.jobs_held = true
+		w.Jobs.hold(w, "manual" if not w.jobs.is_empty() else "travel")
 		w.manual_goal = p
 		w.job_log.append({"tick": w.tick, "event": "manual_move", "pos": [p.x, p.y]})
 		return true
 	if kind == "keeper_rest":
 		if k.state != "free" or k.forced_rest: return false
-		set_rest(w, not k.resting)
+		if not k.resting:
+			k.hold_before_rest = w.job_hold_reason if w.jobs_held else ""
+			set_rest(w, true)
+			w.Jobs.hold(w, "rest")
+		else:
+			set_rest(w, false)
+			w.Jobs.hold(w, k.get("hold_before_rest", "") if k.get("hold_before_rest", "") != "travel" else "")
 		w.manual_goal = null
-		w.jobs_held = true
 		w.life_log.append({"tick": w.tick, "event": "rest" if k.resting else "wake"})
 		return true
 	if kind == "resume_jobs":
 		if k.state != "free" or k.forced_rest: return false
 		set_rest(w, false)
 		w.manual_goal = null
-		w.jobs_held = false
+		w.Jobs.hold(w, "")
 		return true
 	if DRINKS.has(kind):
 		if k.state != "free" or w.campaign.items.get(kind, 0) <= 0 or k.drinks_today >= 2 or k.sleepiness <= 0: return false
@@ -78,13 +83,15 @@ static func step(w):
 		var request = k.pending_command
 		k.erase("pending_command")
 		command(w, request.kind, request.pos)
+		if request.kind=="keeper_move":w.Jobs.hold(w,request.get("hold_reason","manual"))
 	if k.state == "unconscious":
 		k.recover_ticks += 1
 		if k.recover_ticks >= 48:
 			k.hp = 8
 			k.state = "free"
 			set_rest(w, true)
-			w.jobs_held = true
+			k.hold_before_rest = "rescue"
+			w.Jobs.hold(w, "rescue")
 			w.milestones.append({"tick": w.tick, "kind": "keeper_recovered"})
 		return
 	if k.state != "free": return
@@ -127,6 +134,7 @@ static func step(w):
 	if able(w) and w.manual_goal != null:
 		if k.pos == w.manual_goal:
 			w.manual_goal = null
+			if w.job_hold_reason == "travel": w.Jobs.hold(w, "")
 			return
 		k.move_credit = minf(1.9, k.move_credit + w.Jobs.SPEED * factor(w) * w.DT)
 		if k.move_credit < 1: return
@@ -141,7 +149,9 @@ static func step(w):
 		k.move_credit -= 1
 		k.pos = next
 		w.keeper_path.append([next.x, next.y])
-		if k.pos == w.manual_goal: w.manual_goal = null
+		if k.pos == w.manual_goal:
+			w.manual_goal = null
+			if w.job_hold_reason == "travel": w.Jobs.hold(w, "")
 
 static func hurt(w, e):
 	var k = w.keeper
@@ -149,11 +159,12 @@ static func hurt(w, e):
 	k.hp = maxi(0, k.hp - e.attack_power)
 	k.hurt_until = w.tick + 8
 	danger(w, "keeper_hit")
+	w.Jobs.interrupt_transport(w)
 	w.combat_log.append({"tick": w.tick, "source": "keeper_hit", "id": e.id, "target": -1, "damage": e.attack_power})
 	if k.hp == 0:
 		k.state = "unconscious"
 		k.recover_ticks = 0
 		set_rest(w, false)
 		w.manual_goal = null
-		w.jobs_held = true
+		w.Jobs.hold(w, "rescue")
 		w.milestones.append({"tick": w.tick, "kind": "keeper_down", "id": e.id})

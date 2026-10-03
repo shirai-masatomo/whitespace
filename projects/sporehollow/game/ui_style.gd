@@ -63,3 +63,25 @@ static func icon(kind: String) -> Texture2D:
 			if pixels[y][x] == "1": picture.fill_rect(Rect2i(x * 2, y * 2, 2, 2), INK)
 	textures[kind] = ImageTexture.create_from_image(picture)
 	return textures[kind]
+
+
+static func cursor(kind: String) -> Texture2D:
+	var key="cursor_"+kind
+	if textures.has(key):return textures[key]
+	var picture=Image.create(32,32,false,Image.FORMAT_RGBA8)
+	picture.fill(Color.TRANSPARENT)
+	# Clear arrow tip is the exact click hotspot; the tool is offset to its right.
+	for y in range(14):
+		for x in range(y/2+1):picture.set_pixel(2+x,2+y,PAPER if x>0 and y>1 else INK)
+	if kind=="hammer":
+		picture.fill_rect(Rect2i(19,14,5,16),WOOD)
+		picture.fill_rect(Rect2i(12,10,18,9),INK)
+		picture.fill_rect(Rect2i(13,11,16,6),GOLD)
+	else:
+		picture.fill_rect(Rect2i(14,14,14,12),INK)
+		picture.fill_rect(Rect2i(15,15,12,9),GOLD)
+		picture.fill_rect(Rect2i(24,11,7,6),PAPER)
+		picture.fill_rect(Rect2i(17,17,4,4),INK)
+		picture.fill_rect(Rect2i(11,23,4,4),PAPER)
+	textures[key]=ImageTexture.create_from_image(picture)
+	return textures[key]

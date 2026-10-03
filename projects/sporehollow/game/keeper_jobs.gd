@@ -30,6 +30,7 @@ static func enqueue(w, kind: String, p: Vector2i, animal_id: int) -> bool:
 	if kind == "place_animal":
 		j.transport = "to_shed"
 		deployment(w, animal_id, "reserved")
+	if w.job_hold_reason == "travel" and w.manual_goal == null and w.Life.able(w): hold(w, "")
 	w.jobs.append(j)
 	w.job_log.append({"tick": w.tick, "event": "queued", "id": j.id, "kind": kind, "pos": [p.x, p.y]})
 	return true
@@ -37,6 +38,7 @@ static func enqueue(w, kind: String, p: Vector2i, animal_id: int) -> bool:
 static func cancel(w, id: int, reason: String = "cancelled") -> bool:
 	for j in w.jobs:
 		if j.id != id: continue
+		if j.get("transport", "") == "drop_pending": return false
 		if j.get("transport", "") in ["carrying", "returning"]:
 			j.transport = "returning"
 			j.state = "returning"
@@ -73,6 +75,8 @@ static func reorder(w, id: int, destination: int) -> bool:
 	return true
 
 static func step(w):
+	for pending in w.jobs.duplicate():
+		if pending.get("transport", "") == "drop_pending": drop_companion(w, pending)
 	for pending in w.jobs.duplicate():
 		if pending.get("cancel_requested", false): cancel(w, pending.id)
 	if not w.Life.able(w) or w.jobs_held or w.manual_goal != null or w.jobs.is_empty():
@@ -159,3 +163,78 @@ static func complete(w, j: Dictionary, ok: bool):
 	w.jobs.erase(j)
 	w.job_log.append({"tick": w.tick, "event": "completed" if ok else "invalid", "id": j.id, "kind": j.kind, "pos": [j.pos.x, j.pos.y], "animal_id": j.animal_id})
 	if not ok: w.say("この仕事はできなくなったので、次へ進むよ。")
+
+
+static func hold(w, reason: String):
+	if w.job_hold_reason != reason:
+		w.job_log.append({"tick":w.tick,"event":"hold_changed","reason":reason})
+	w.job_hold_reason = reason
+	w.jobs_held = reason != ""
+
+static func status(w) -> String:
+	if w.keeper.carrier >= 0: return "連れ去り中"
+	if w.keeper.state != "free": return "気絶中"
+	if w.keeper.resting: return "ひと休み"
+	if w.manual_goal != null: return "歩いている"
+	if w.jobs_held: return {"manual":"避難・再開待ち","rest":"起床待ち","rescue":"救出後・再開待ち","danger":"被弾・再開待ち","travel":"移動後・再開待ち"}.get(w.job_hold_reason,"再開待ち")
+	if not w.jobs.is_empty() and w.jobs[0].state == "blocked": return "通り道・行き先がふさがっている"
+	return ""
+
+static func interrupt_transport(w):
+	for j in w.jobs.duplicate():
+		if j.get("transport", "") not in ["carrying","returning","drop_pending"]: continue
+		j.transport = "drop_pending"
+		j.state = "blocked"
+		hold(w,"danger")
+		drop_companion(w,j)
+
+static func drop_companion(w,j):
+	# Adjacent only: never teleport through walls, never overwrite another actor.
+	var sites = w.neighbors(w.keeper.pos).filter(func(p):return w.valid_animal_site(j.animal_id,p))
+	if sites.is_empty(): return
+	var site=sites[0]
+	if w._execute_local("place_animal",site,j.animal_id):
+		w.job_log.append({"tick":w.tick,"event":"companion_lowered","animal_id":j.animal_id,"pos":[site.x,site.y]})
+		complete(w,j,true)
+		w.say("仲間を降ろした！")
+
+static func path_to(w,start: Vector2i,goals: Array) -> Array:
+	var frontier=[start]
+	var previous={start:start}
+	var index=0
+	while index<frontier.size():
+		var p=frontier[index]; index+=1
+		if p in goals:
+			var route=[p]
+			while p!=start:
+				p=previous[p]
+				route.push_front(p)
+			return route
+		for n in w.neighbors(p):
+			if w.walkable(n) and not previous.has(n):
+				previous[n]=p
+				frontier.append(n)
+	return []
+
+static func preview(w) -> Array:
+	var legs=[]
+	var origin=w.keeper.pos
+	if w.manual_goal!=null:
+		var path=path_to(w,origin,[w.manual_goal])
+		if path.is_empty(): return legs
+		legs.append({"number":0,"path":path})
+		origin=path[-1]
+	for i in range(w.jobs.size()):
+		var j=w.jobs[i]
+		var targets=[]
+		if j.get("transport","") == "drop_pending": break
+		if j.get("transport","") in ["to_shed","returning"]: targets.append(w.HOLDING_SHED)
+		if j.get("transport","") != "returning": targets.append(j.pos)
+		for target in targets:
+			var goals=[target] if j.kind=="move" else w.neighbors(target)
+			if target==w.HOLDING_SHED: goals.append(target)
+			var path=path_to(w,origin,goals.filter(func(p):return w.walkable(p)))
+			if path.is_empty(): return legs
+			legs.append({"number":i+1,"path":path})
+			origin=path[-1]
+	return legs

@@ -20,6 +20,7 @@ var tick = 0
 var phase = "shop"
 const Life = preload("res://game/keeper_life.gd")
 var jobs_held = false
+var job_hold_reason = ""
 var manual_goal = null
 var life_log: Array = []
 var danger_serial = 0
@@ -61,7 +62,7 @@ var skill_log: Array = []
 var milestones: Array = []
 var initial_positions: Dictionary = {}
 var structures: Dictionary = {}
-const HOLDING_SHED = Vector2i(4, 12) # Pickup apron; kept clear of construction.
+const HOLDING_SHED = Vector2i(21, 14) # Inward-facing pickup apron, southeast of the ranch.
 var keeper = {"pos": Vector2i(6, 13), "placed": false, "carrier": -1, "state": "free", "restrainer": -1, "move_credit": 0.0, "hp": 30, "max_hp": 30, "sleepiness": 0.0, "resting": false, "forced_rest": false, "warned": 0, "heal_credit": 0.0, "recover_ticks": 0, "next_attack": 0, "hurt_until": 0, "drinks_today": 0}
 var animals: Array = []
 var enemies: Array = []
@@ -237,6 +238,7 @@ func walkable(p: Vector2i) -> bool:
 	return inside(p) and not blocks(p)
 
 func blocks(p: Vector2i) -> bool:
+	if p == HOLDING_SHED + Vector2i.RIGHT: return true
 	return structures.has(p) and structures[p].status == "ready" and structures[p].kind not in ["kennel", "coop"] and not structures[p].open
 
 func live_structure(p: Vector2i) -> bool:
@@ -249,7 +251,7 @@ func has_nest() -> bool:
 	return campaign.animals.any(func(a): return a.species == "hen")
 
 func can_build(kind: String, p: Vector2i) -> bool:
-	return working() and BUILD.has(kind) and inside(p) and p not in [HOLDING_SHED, HOLDING_SHED + Vector2i.UP] and p not in entries and not field_items.any(func(item): return item.pos == p) and not occupied(p) and not live_structure(p) and BUILD[kind].get("blueprint", "") in ([""] + campaign.unlocked_blueprints) and resource_amount(BUILD[kind].get("resource", "soil")) >= BUILD[kind].cost
+	return working() and BUILD.has(kind) and inside(p) and p not in [HOLDING_SHED, HOLDING_SHED + Vector2i.RIGHT] and p not in entries and not field_items.any(func(item): return item.pos == p) and not occupied(p) and not live_structure(p) and BUILD[kind].get("blueprint", "") in ([""] + campaign.unlocked_blueprints) and resource_amount(BUILD[kind].get("resource", "soil")) >= BUILD[kind].cost
 
 func neighbors(p: Vector2i) -> Array:
 	return [p + Vector2i.RIGHT, p + Vector2i.LEFT, p + Vector2i.UP, p + Vector2i.DOWN]
@@ -279,6 +281,7 @@ func next_step(start: Vector2i, goal: Vector2i, raider: bool = false, avoid_acto
 			var exit_cell = raider and n == goal and entries.any(func(entry): return exit_for(entry) == n)
 			if not inside(n) and not exit_cell: continue
 			if avoid_actors and n != goal and actor_occupied(n, start): continue
+			if n == HOLDING_SHED + Vector2i.RIGHT: continue
 			var blocked = blocks(n)
 			if blocked and not raider: continue
 			# Compare walking actions with the actual number of object attacks needed.
@@ -432,7 +435,7 @@ func release_keeper(e: Dictionary):
 		keeper.state = "unconscious" if keeper.hp <= 0 else "free"
 		keeper.recover_ticks = 0
 		keeper.pos = e.pos
-		jobs_held = true
+		Jobs.hold(self, "rescue")
 		var clear = neighbors(e.pos).filter(func(p): return walkable(p) and not occupied(p))
 		if not clear.is_empty(): e.pos = clear[0]
 		else:
@@ -934,7 +937,7 @@ func observation() -> Dictionary:
 		schedule.append(row)
 	return {"seed": seed_value, "stage": stage, "day": campaign.day, "tick": tick, "phase": phase, "paused": paused, "result": result,
 		"remaining_day": maxf(0, day_seconds - tick * DT), "night_started_tick": night_started_tick,
-		"keeper_path": keeper_path, "life_log": life_log, "jobs_held": jobs_held, "manual_goal": [manual_goal.x, manual_goal.y] if manual_goal != null else null, "job_log": job_log, "jobs": jobs.map(func(j):
+		"keeper_path": keeper_path, "life_log": life_log, "jobs_held": jobs_held, "job_hold_reason": job_hold_reason, "manual_goal": [manual_goal.x, manual_goal.y] if manual_goal != null else null, "job_log": job_log, "jobs": jobs.map(func(j):
 			var row = j.duplicate(true)
 			row.pos = [j.pos.x, j.pos.y]
 			return row),
@@ -1022,7 +1025,7 @@ func grow_nature():
 	for y in range(1, H - 1):
 		for x in range(1, W - 1):
 			var p = Vector2i(x, y)
-			if walkable(p) and not occupied(p) and not live_structure(p) and not natural.has(p) and p not in [HOLDING_SHED, HOLDING_SHED + Vector2i.UP] and p not in entries and not field_items.any(func(item): return item.pos == p): sites.append(p)
+			if walkable(p) and not occupied(p) and not live_structure(p) and not natural.has(p) and p not in [HOLDING_SHED, HOLDING_SHED + Vector2i.RIGHT] and p not in entries and not field_items.any(func(item): return item.pos == p): sites.append(p)
 	if sites.is_empty(): return
 	var p = sites[nature_rng.randi_range(0, sites.size() - 1)]
 	natural[p] = kind

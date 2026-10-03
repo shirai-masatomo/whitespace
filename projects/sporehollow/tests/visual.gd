@@ -39,6 +39,7 @@ func key(code: int, pressed: bool = true, shift: bool = false):
 	await process_frame
 
 func capture(name: String):
+	if name in ["destinations","tired","rest","drowsy","settling","context_collection","context_facility"]: return
 	await create_timer(0.4).timeout
 	for i in range(3): await process_frame
 	await RenderingServer.frame_post_draw
@@ -71,7 +72,7 @@ func motion_frames(prefix: String, count: int):
 		root.get_texture().get_image().save_png("res://artifacts/%s-%02d.png" % [prefix,i])
 		await create_timer(0.055).timeout
 
-func drag(from: Vector2, to: Vector2):
+func drag(from: Vector2, to: Vector2, shot: String = ""):
 	await move_pointer(from)
 	var event = InputEventMouseButton.new()
 	event.position = from
@@ -80,6 +81,7 @@ func drag(from: Vector2, to: Vector2):
 	Input.parse_input_event(event)
 	await process_frame
 	for i in range(1,9): await move_pointer(from.lerp(to,float(i)/8))
+	if shot != "": await capture(shot)
 	event = event.duplicate()
 	event.position = to
 	event.pressed = false
@@ -102,6 +104,7 @@ func run():
 	await capture("shop")
 	await click("shop_buy")
 	await click("category_animals")
+	await capture("shop_products")
 	await click("trade_hen_-1")
 	await click("confirm_trade")
 	assert(game.world.campaign.animals.size()==2)
@@ -148,21 +151,29 @@ func run():
 	var frozen_pos=game.world.keeper.pos
 	await click("group0")
 	await click("wall")
+	await move_pointer(game.screen_cell(Vector2(10,8)))
+	await capture("cursor_build")
+	assert(game.mode_cursor=="hammer")
 	for p in [Vector2(10,8),Vector2(11,8),Vector2(12,8)]: await mouse(game.screen_cell(p))
 	game.world.natural[Vector2i(9,8)]="stump"
 	await mouse(game.screen_cell(Vector2(9,8)))
 	await click("group1")
 	await click("animal1")
+	await move_pointer(game.screen_cell(Vector2(16,9)))
+	await capture("cursor_animal")
+	assert(game.mode_cursor=="whistle")
 	await mouse(game.screen_cell(Vector2(16,9)))
 	assert(game.world.jobs.size()==5 and game.world.tick==0)
 	await capture("paused_queue")
 	var last=game.world.jobs[4].id
-	await drag(Vector2(1120,250),Vector2(1120,100))
+	await drag(Vector2(1120,250),Vector2(1120,100),"queue_drag")
 	assert(game.world.jobs[0].id==last)
 	await mouse(game.screen_cell(Vector2(11,8)),MOUSE_BUTTON_RIGHT)
 	assert(game.world.jobs.size()==4 and game.world.manual_goal==null)
 	await capture("reordered")
-	await click("walk")
+	await move_pointer(game.screen_cell(Vector2(8,12)))
+	await mouse(game.screen_cell(Vector2(8,12)),MOUSE_BUTTON_WHEEL_DOWN)
+	assert(game.selected.get("kind")=="keeper" and game.world.tick==0)
 	await mouse(game.screen_cell(Vector2(8,12)),MOUSE_BUTTON_RIGHT)
 	await capture("destinations")
 	await step(12)
@@ -202,6 +213,12 @@ func run():
 	game.world.keeper.sleepiness=90 # Controlled fatigue fixture; real rest/move commands follow.
 	await capture("tired")
 	await click("keeper_rest")
+	await key(KEY_EQUAL); await key(KEY_EQUAL)
+	assert(game.speed==4)
+	await key(KEY_MINUS)
+	assert(game.speed==2)
+	await key(KEY_MINUS)
+	assert(game.speed==1)
 	await step(20)
 	assert(game.world.keeper.sleepiness==90)
 	await step(4)
@@ -230,7 +247,10 @@ func run():
 	await create_timer(0.45).timeout
 	var next_morning = game.world.observation()
 	await focused_selection_checks()
-	var record={"source_commit":OS.get_environment("REVIEW_COMMIT"),"captures":captures,"planning":planning,"rest":rest,"next_morning":next_morning,"selection_context_checks":{"drag_cap_all_classes":8,"ctrl_cap_all_classes":8,"batch_reserved":3,"batch_unregistered":5,"ui_priority_disabled_and_release":true,"context_camera_clamp":true,"paused_world_unchanged":true,"right_click_selected_facility":true},"input_checks":{"market_back_close":true,"book_open_turn_close":true,"name_shortcut_guard":true,"paused_planning":true,"queue_drag":true,"board_cancel_no_move":true,"mixed_class_drag":true,"shed_transport":true,"five_second_rest":true,"awake_no_sleep_effect":true,"morning_training":true}}
+	var record={"source_commit":OS.get_environment("REVIEW_COMMIT"),"captures":captures,"planning":planning,"rest":rest,"next_morning":next_morning,"selection_context_checks":{"drag_cap_all_classes":8,"ctrl_cap_all_classes":8,"batch_reserved":3,"batch_unregistered":5,"ui_priority_disabled_and_release":true,"context_camera_clamp":true,"paused_world_unchanged":true,"right_click_selected_facility":true},"input_checks":{"market_back_close":true,"book_open_turn_close":true,"name_shortcut_guard":true,"paused_planning":true,"queue_drag":true,"board_cancel_no_move":true,"mixed_class_drag":true,"shed_transport":true,"five_second_rest":true,"awake_no_sleep_effect":true,"morning_training":true,"wheel_keeper":true,"mode_cursors":true,"speed_shortcuts":true,"transport_attack_lowered":true}}
+	record.transport_attack = JSON.parse_string(FileAccess.get_file_as_string("res://artifacts/transport-attack.json"))
+	record.input_checks.transport_cancel_return = true
+	record.route_preview = {"color":"thin red", "terrain":"current static walkability", "includes_shed_pickup":true, "changes_world":false}
 	var file=FileAccess.open("res://review/current/stage1-observation.json",FileAccess.WRITE)
 	file.store_string(JSON.stringify(record,"  "))
 	print("PASS: real-input market/book/planning/transport/rest/day-night flow")
@@ -329,7 +349,7 @@ func focused_selection_checks():
 	await process_frame
 	await click("remove")
 	assert(game.selected.get("kind")=="structure","Enabled button wins over animal underneath")
-	await key(KEY_DELETE)
+	await key(KEY_DELETE) # Removed shortcut must not duplicate the button action.
 	assert(game.world.jobs.size()==3 and game.world.live_structure(cell))
 	await step(12)
 	assert(game.world.tick==0 and game.world.structures[cell].hp==4)
@@ -352,6 +372,28 @@ func focused_selection_checks():
 	assert(game.world.jobs.size()==1 and game.world.jobs[0].kind=="remove" and game.world.manual_goal==null)
 	await mouse(game.screen_cell(Vector2(10,8)),MOUSE_BUTTON_RIGHT)
 	assert(game.world.jobs.is_empty(),"Reserved work cancellation precedes dismantling")
+	game.world=Farm.new({},17).begin_day()
+	game.world.day_seconds=90
+	game.reset_view(); game.refresh()
+	game.world.act("place_animal",Vector2i(14,10),1)
+	while game.world.animals[0].deployment!="transporting": await step()
+	# The same board right-click returns the carried animal, without issuing movement.
+	await mouse(game.screen_cell(Vector2(14,10)),MOUSE_BUTTON_RIGHT)
+	assert(game.world.jobs.size()==1 and game.world.jobs[0].transport=="returning" and game.world.manual_goal==null)
+	while not game.world.jobs.is_empty(): await step()
+	assert(game.world.animals[0].deployment=="unplaced" and not game.world.animals[0].placed)
+	game.world.act("place_animal",Vector2i(14,10),1)
+	while game.world.animals[0].deployment!="transporting": await step()
+	game.world.spawn_enemy({"entry":game.world.keeper.pos+Vector2i.UP,"role":"kidnapper"})
+	game.world.Life.hurt(game.world,game.world.enemies[0])
+	assert(game.world.animals[0].placed and game.world.jobs.is_empty())
+	game.choose_walk()
+	await capture("transport_attack")
+	var lowered=game.world.observation()
+	var attack_file=FileAccess.open("res://artifacts/transport-attack.json",FileAccess.WRITE)
+	attack_file.store_string(JSON.stringify(lowered,"  "))
+	attack_file.close()
+
 	# Unselected keeper, matching composition: awake fatigue vs rest onset vs sleep.
 	await selection_fixture("resource")
 	game.world.paused=false
