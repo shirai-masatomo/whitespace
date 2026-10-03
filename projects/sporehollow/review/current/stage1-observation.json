@@ -1,1222 +1,2511 @@
 {
-  "audio": {
-    "birds_seconds": [
-      8,
-      20
-    ],
-    "cues": {
-      "attack": 1,
-      "auto_start": 1,
-      "bark": 1,
-      "build": 1,
-      "collect": 2,
-      "early_clear": 1,
-      "invasion": 1,
-      "merchant": 2,
-      "rescue": 1,
-      "win": 1
-    },
-    "driver": "Dummy"
-  },
-  "before_early_finish": {
-    "ai_settings": {
-      "counter": {
-        "counter": 0.8,
-        "hesitate": 0.1,
-        "resume": 0.1
-      },
-      "decision_max": 1.4,
-      "decision_min": 0.6,
-      "dog": {
-        "engage": 0.76,
-        "reposition": 0.08,
-        "watch": 0.16
-      },
-      "log_limit": 96,
-      "raider": {
-        "advance": 0.76,
-        "detour": 0.14,
-        "hesitate": 0.1
-      },
-      "randomness": 1.0,
-      "rescue_randomness": 0.12
-    },
-    "animals": [
-      {
-        "affinity": null,
-        "attack_target_range": 4,
-        "detection_range": 4,
-        "hp": 20,
-        "id": 1,
-        "lv": 1,
-        "max_hp": 40,
-        "name": "こむぎ",
-        "object_attack_power": 0,
-        "placed": true,
-        "rescuing": false,
-        "skills": [
-          "bark",
-          "rescue"
-        ],
-        "species": "shiba",
-        "state": "自主休養",
-        "unavailable_through_day": 0
-      },
-      {
-        "affinity": null,
-        "attack_target_range": 0,
-        "detection_range": 3,
-        "hp": 20,
-        "id": 2,
-        "lv": 1,
-        "max_hp": 20,
-        "name": "",
-        "object_attack_power": 0,
-        "placed": true,
-        "rescuing": false,
-        "skills": [
-          "lay",
-          "feather"
-        ],
-        "species": "hen",
-        "state": "ついばむ",
-        "unavailable_through_day": 0
-      }
-    ],
-    "combat": [
-      {
-        "damage": 10,
-        "id": 1,
-        "source": "animal",
-        "target": 0,
-        "tick": 197
-      },
-      {
-        "damage": 5,
-        "id": 0,
-        "source": "enemy",
-        "target": 1,
-        "tick": 203
-      },
-      {
-        "damage": 5,
-        "id": 0,
-        "source": "enemy",
-        "target": 1,
-        "tick": 207
-      },
-      {
-        "damage": 10,
-        "id": 1,
-        "source": "animal",
-        "target": 0,
-        "tick": 208
-      },
-      {
-        "damage": 5,
-        "id": 0,
-        "source": "enemy",
-        "target": 1,
-        "tick": 211
-      },
-      {
-        "damage": 10,
-        "id": 1,
-        "source": "animal",
-        "target": 0,
-        "tick": 213
-      },
-      {
-        "damage": 5,
-        "id": 0,
-        "source": "enemy",
-        "target": 1,
-        "tick": 215
-      },
-      {
-        "damage": 10,
-        "id": 1,
-        "source": "animal",
-        "target": 0,
-        "tick": 218
-      },
-      {
-        "damage": 10,
-        "id": 1,
-        "source": "animal",
-        "target": 0,
-        "tick": 226
-      }
-    ],
-    "dawn": {},
-    "day": 1,
-    "decision_counts": {
-      "kidnapper:advance": 29,
-      "kidnapper:counter": 4,
-      "kidnapper:detour": 4,
-      "kidnapper:hesitate": 5,
-      "shiba:approach": 2,
-      "shiba:attack": 6,
-      "shiba:reposition": 1,
-      "shiba:watch": 2
-    },
-    "decision_log": [
-      {
-        "actor": "shiba_1",
-        "actor_type": "shiba",
-        "choices": {
-          "attack": 0.76,
-          "reposition": 0.08,
-          "watch": 0.16
-        },
-        "lv": 1,
-        "next_tick": 208,
-        "randomness": 1.0,
-        "rescue_mode": false,
-        "roll": 0.12598,
-        "selected": "watch",
-        "state": "enemy_attack",
-        "tick": 204,
-        "time": 51.0
-      },
-      {
-        "actor": "kidnapper_0",
-        "actor_type": "kidnapper",
-        "choices": {
-          "counter": 0.8,
-          "hesitate": 0.1,
-          "resume": 0.1
-        },
-        "lv": 1,
-        "next_tick": 211,
-        "randomness": 1.0,
-        "rescue_mode": false,
-        "roll": 0.26728,
-        "selected": "counter",
-        "state": "under_attack",
-        "tick": 207,
-        "time": 51.75
-      },
-      {
-        "actor": "shiba_1",
-        "actor_type": "shiba",
-        "choices": {
-          "attack": 0.76
-        },
-        "lv": 1,
-        "next_tick": 211,
-        "randomness": 1.0,
-        "rescue_mode": false,
-        "roll": 0.45385,
-        "selected": "attack",
-        "state": "enemy_attack",
-        "tick": 208,
-        "time": 52.0
-      },
-      {
-        "actor": "shiba_1",
-        "actor_type": "shiba",
-        "choices": {
-          "attack": 0.76,
-          "reposition": 0.08,
-          "watch": 0.16
-        },
-        "lv": 1,
-        "next_tick": 216,
-        "randomness": 1.0,
-        "rescue_mode": false,
-        "roll": 0.40393,
-        "selected": "attack",
-        "state": "enemy_attack",
-        "tick": 211,
-        "time": 52.75
-      },
-      {
-        "actor": "kidnapper_0",
-        "actor_type": "kidnapper",
-        "choices": {
-          "counter": 0.8,
-          "hesitate": 0.1,
-          "resume": 0.1
-        },
-        "lv": 1,
-        "next_tick": 214,
-        "randomness": 1.0,
-        "rescue_mode": false,
-        "roll": 0.34161,
-        "selected": "counter",
-        "state": "under_attack",
-        "tick": 211,
-        "time": 52.75
-      },
-      {
-        "actor": "kidnapper_0",
-        "actor_type": "kidnapper",
-        "choices": {
-          "counter": 0.8,
-          "hesitate": 0.1,
-          "resume": 0.1
-        },
-        "lv": 1,
-        "next_tick": 220,
-        "randomness": 1.0,
-        "rescue_mode": false,
-        "roll": 0.75175,
-        "selected": "counter",
-        "state": "under_attack",
-        "tick": 214,
-        "time": 53.5
-      },
-      {
-        "actor": "shiba_1",
-        "actor_type": "shiba",
-        "choices": {
-          "attack": 0.76,
-          "reposition": 0.08,
-          "watch": 0.16
-        },
-        "lv": 1,
-        "next_tick": 219,
-        "randomness": 1.0,
-        "rescue_mode": false,
-        "roll": 0.68361,
-        "selected": "attack",
-        "state": "enemy_attack",
-        "tick": 216,
-        "time": 54.0
-      },
-      {
-        "actor": "shiba_1",
-        "actor_type": "shiba",
-        "choices": {
-          "attack": 0.76,
-          "reposition": 0.08,
-          "watch": 0.16
-        },
-        "lv": 1,
-        "next_tick": 225,
-        "randomness": 1.0,
-        "rescue_mode": false,
-        "roll": 0.70034,
-        "selected": "attack",
-        "state": "enemy_attack",
-        "tick": 219,
-        "time": 54.75
-      },
-      {
-        "actor": "kidnapper_0",
-        "actor_type": "kidnapper",
-        "choices": {
-          "advance": 0.76,
-          "detour": 0.14,
-          "hesitate": 0.1
-        },
-        "lv": 1,
-        "next_tick": 225,
-        "randomness": 1.0,
-        "rescue_mode": false,
-        "roll": 0.89441,
-        "selected": "detour",
-        "state": "kidnap",
-        "tick": 219,
-        "time": 54.75
-      },
-      {
-        "actor": "shiba_1",
-        "actor_type": "shiba",
-        "choices": {
-          "approach": 0.76,
-          "reposition": 0.08,
-          "watch": 0.16
-        },
-        "lv": 1,
-        "next_tick": 228,
-        "randomness": 1.0,
-        "rescue_mode": false,
-        "roll": 0.15784,
-        "selected": "watch",
-        "state": "enemy_approach",
-        "tick": 223,
-        "time": 55.75
-      },
-      {
-        "actor": "kidnapper_0",
-        "actor_type": "kidnapper",
-        "choices": {
-          "advance": 0.76
-        },
-        "lv": 1,
-        "next_tick": 228,
-        "randomness": 1.0,
-        "rescue_mode": false,
-        "roll": 0.58652,
-        "selected": "advance",
-        "state": "kidnap",
-        "tick": 225,
-        "time": 56.25
-      },
-      {
-        "actor": "shiba_1",
-        "actor_type": "shiba",
-        "choices": {
-          "attack": 0.76
-        },
-        "lv": 1,
-        "next_tick": 230,
-        "randomness": 1.0,
-        "rescue_mode": false,
-        "roll": 0.87281,
-        "selected": "attack",
-        "state": "enemy_attack",
-        "tick": 226,
-        "time": 56.5
-      }
-    ],
-    "decision_log_note": "Last12 decisions; counts cover the night. Full trace remains available through F8.",
-    "early_clear": true,
-    "early_clear_tick": 226,
-    "early_finish_bonus": 0,
-    "exp_pool": 0,
-    "field_items": [],
-    "metrics": {
-      "bark_casts": 2,
-      "bark_targets": 2,
-      "barks": 2,
-      "built": 1,
-      "captures": 0,
-      "coins": 0,
-      "commands": 0.0,
-      "destroyed": 0,
-      "eggs_collected": 0,
-      "eggs_produced": 0,
-      "fed": 0,
-      "interrupted": 0,
-      "mushroom_collected": 0,
-      "mushroom_healing": 0,
-      "mushroom_spawned": 1,
-      "mushrooms_used": 0,
-      "nature_rolls": 59,
-      "orders": 0,
-      "repaired": 0,
-      "repelled": 0,
-      "rescues": 0,
-      "soil_repair": 0,
-      "stolen": 0,
-      "structure_damage": 0,
-      "stump_collected": 0,
-      "stump_spawned": 0,
-      "weed_collected": 0,
-      "weed_spawned": 8
-    },
-    "milestones": [
-      {
-        "id": -1,
-        "kind": "auto_start",
-        "tick": 0
-      },
-      {
-        "id": 0,
-        "kind": "invasion",
-        "tick": 40
-      },
-      {
-        "kind": "blueprint_dropped",
-        "pos": [
-          19,
-          6
-        ],
-        "tick": 226
-      },
-      {
-        "kind": "early_clear",
-        "tick": 226
-      },
-      {
-        "id": "kennel",
-        "kind": "blueprint",
-        "pos": [
-          19,
-          6
-        ],
-        "tick": 238
-      },
-      {
-        "item": "kennel_plan",
-        "kind": "item_collected",
-        "tick": 238
-      }
-    ],
-    "phase": "defend",
-    "raiders": [
-      {
-        "can_see_keeper": true,
-        "id": 0,
-        "last_known_keeper_position": [
-          19,
-          8
-        ],
-        "search_state": "追跡",
-        "sight_range": 6
-      }
-    ],
-    "remaining_night": 120.5,
-    "resources": {
-      "soil": 90,
-      "stone": 0,
-      "wood": 0
-    },
-    "score": {},
-    "seed": 17,
-    "sight_log": [
-      {
-        "id": 0,
-        "position": [
-          16,
-          5
-        ],
-        "tick": 187,
-        "visible": true
-      }
-    ],
-    "skill_log": [
-      {
-        "actor": "shiba_1",
-        "ready_tick": 217,
-        "skill": "bark",
-        "targets": [
-          0
-        ],
-        "tick": 193,
-        "time": 48.25
-      },
-      {
-        "actor": "shiba_1",
-        "ready_tick": 241,
-        "skill": "bark",
-        "targets": [
-          0
-        ],
-        "tick": 217,
-        "time": 54.25
-      }
-    ],
-    "stage": 1,
-    "tick": 238,
-    "unavailable_next_day": [],
-    "unlocked_blueprints": [
-      "kennel"
-    ]
-  },
-  "branch": "codex/sporehollow-prototype",
-  "checks": {
-    "arrival_before_shop": true,
-    "category_switch_after_purchase": true,
-    "cinematic_hides_ui": true,
-    "click_only_animal_candidates": true,
-    "dawn_to_arrival": true,
-    "hen_has_no_commands": true,
-    "hierarchical_back": true,
-    "manual_blueprint": true,
-    "manual_exp_training": true,
-    "morning_retry": true,
-    "named_animal": true,
-    "no_accidental_deployment": true,
-    "no_purchase_on_inspect": true,
-    "no_shiba_or_food_sale": true,
-    "retired_enemy_deselected": true,
-    "sold_out_disabled": true,
-    "three_way_shop": true,
-    "unaffordable_disabled": true,
-    "work_after_clear": true
-  },
-  "dawn": {
-    "ai_settings": {
-      "counter": {
-        "counter": 0.8,
-        "hesitate": 0.1,
-        "resume": 0.1
-      },
-      "decision_max": 1.4,
-      "decision_min": 0.6,
-      "dog": {
-        "engage": 0.76,
-        "reposition": 0.08,
-        "watch": 0.16
-      },
-      "log_limit": 96,
-      "raider": {
-        "advance": 0.76,
-        "detour": 0.14,
-        "hesitate": 0.1
-      },
-      "randomness": 1.0,
-      "rescue_randomness": 0.12
-    },
-    "animals": [
-      {
-        "affinity": null,
-        "attack_target_range": 4,
-        "detection_range": 4,
-        "hp": 20,
-        "id": 1,
-        "lv": 1,
-        "max_hp": 40,
-        "name": "こむぎ",
-        "object_attack_power": 0,
-        "placed": true,
-        "rescuing": false,
-        "skills": [
-          "bark",
-          "rescue"
-        ],
-        "species": "shiba",
-        "state": "自主休養",
-        "unavailable_through_day": 0
-      },
-      {
-        "affinity": null,
-        "attack_target_range": 0,
-        "detection_range": 3,
-        "hp": 20,
-        "id": 2,
-        "lv": 1,
-        "max_hp": 20,
-        "name": "",
-        "object_attack_power": 0,
-        "placed": true,
-        "rescuing": false,
-        "skills": [
-          "lay",
-          "feather"
-        ],
-        "species": "hen",
-        "state": "ついばむ",
-        "unavailable_through_day": 0
-      }
-    ],
-    "combat": [
-      {
-        "damage": 10,
-        "id": 1,
-        "source": "animal",
-        "target": 0,
-        "tick": 197
-      },
-      {
-        "damage": 5,
-        "id": 0,
-        "source": "enemy",
-        "target": 1,
-        "tick": 203
-      },
-      {
-        "damage": 5,
-        "id": 0,
-        "source": "enemy",
-        "target": 1,
-        "tick": 207
-      },
-      {
-        "damage": 10,
-        "id": 1,
-        "source": "animal",
-        "target": 0,
-        "tick": 208
-      },
-      {
-        "damage": 5,
-        "id": 0,
-        "source": "enemy",
-        "target": 1,
-        "tick": 211
-      },
-      {
-        "damage": 10,
-        "id": 1,
-        "source": "animal",
-        "target": 0,
-        "tick": 213
-      },
-      {
-        "damage": 5,
-        "id": 0,
-        "source": "enemy",
-        "target": 1,
-        "tick": 215
-      },
-      {
-        "damage": 10,
-        "id": 1,
-        "source": "animal",
-        "target": 0,
-        "tick": 218
-      },
-      {
-        "damage": 10,
-        "id": 1,
-        "source": "animal",
-        "target": 0,
-        "tick": 226
-      }
-    ],
-    "dawn": {
-      "chicks": 0,
-      "eggs": 1,
-      "feathers": 0,
-      "hens": 0,
-      "pending_blueprints": 0,
-      "unconscious": []
-    },
-    "day": 1,
-    "decision_counts": {
-      "kidnapper:advance": 29,
-      "kidnapper:counter": 4,
-      "kidnapper:detour": 4,
-      "kidnapper:hesitate": 5,
-      "shiba:approach": 2,
-      "shiba:attack": 6,
-      "shiba:reposition": 1,
-      "shiba:watch": 2
-    },
-    "decision_log": [
-      {
-        "actor": "shiba_1",
-        "actor_type": "shiba",
-        "choices": {
-          "attack": 0.76,
-          "reposition": 0.08,
-          "watch": 0.16
-        },
-        "lv": 1,
-        "next_tick": 208,
-        "randomness": 1.0,
-        "rescue_mode": false,
-        "roll": 0.12598,
-        "selected": "watch",
-        "state": "enemy_attack",
-        "tick": 204,
-        "time": 51.0
-      },
-      {
-        "actor": "kidnapper_0",
-        "actor_type": "kidnapper",
-        "choices": {
-          "counter": 0.8,
-          "hesitate": 0.1,
-          "resume": 0.1
-        },
-        "lv": 1,
-        "next_tick": 211,
-        "randomness": 1.0,
-        "rescue_mode": false,
-        "roll": 0.26728,
-        "selected": "counter",
-        "state": "under_attack",
-        "tick": 207,
-        "time": 51.75
-      },
-      {
-        "actor": "shiba_1",
-        "actor_type": "shiba",
-        "choices": {
-          "attack": 0.76
-        },
-        "lv": 1,
-        "next_tick": 211,
-        "randomness": 1.0,
-        "rescue_mode": false,
-        "roll": 0.45385,
-        "selected": "attack",
-        "state": "enemy_attack",
-        "tick": 208,
-        "time": 52.0
-      },
-      {
-        "actor": "shiba_1",
-        "actor_type": "shiba",
-        "choices": {
-          "attack": 0.76,
-          "reposition": 0.08,
-          "watch": 0.16
-        },
-        "lv": 1,
-        "next_tick": 216,
-        "randomness": 1.0,
-        "rescue_mode": false,
-        "roll": 0.40393,
-        "selected": "attack",
-        "state": "enemy_attack",
-        "tick": 211,
-        "time": 52.75
-      },
-      {
-        "actor": "kidnapper_0",
-        "actor_type": "kidnapper",
-        "choices": {
-          "counter": 0.8,
-          "hesitate": 0.1,
-          "resume": 0.1
-        },
-        "lv": 1,
-        "next_tick": 214,
-        "randomness": 1.0,
-        "rescue_mode": false,
-        "roll": 0.34161,
-        "selected": "counter",
-        "state": "under_attack",
-        "tick": 211,
-        "time": 52.75
-      },
-      {
-        "actor": "kidnapper_0",
-        "actor_type": "kidnapper",
-        "choices": {
-          "counter": 0.8,
-          "hesitate": 0.1,
-          "resume": 0.1
-        },
-        "lv": 1,
-        "next_tick": 220,
-        "randomness": 1.0,
-        "rescue_mode": false,
-        "roll": 0.75175,
-        "selected": "counter",
-        "state": "under_attack",
-        "tick": 214,
-        "time": 53.5
-      },
-      {
-        "actor": "shiba_1",
-        "actor_type": "shiba",
-        "choices": {
-          "attack": 0.76,
-          "reposition": 0.08,
-          "watch": 0.16
-        },
-        "lv": 1,
-        "next_tick": 219,
-        "randomness": 1.0,
-        "rescue_mode": false,
-        "roll": 0.68361,
-        "selected": "attack",
-        "state": "enemy_attack",
-        "tick": 216,
-        "time": 54.0
-      },
-      {
-        "actor": "shiba_1",
-        "actor_type": "shiba",
-        "choices": {
-          "attack": 0.76,
-          "reposition": 0.08,
-          "watch": 0.16
-        },
-        "lv": 1,
-        "next_tick": 225,
-        "randomness": 1.0,
-        "rescue_mode": false,
-        "roll": 0.70034,
-        "selected": "attack",
-        "state": "enemy_attack",
-        "tick": 219,
-        "time": 54.75
-      },
-      {
-        "actor": "kidnapper_0",
-        "actor_type": "kidnapper",
-        "choices": {
-          "advance": 0.76,
-          "detour": 0.14,
-          "hesitate": 0.1
-        },
-        "lv": 1,
-        "next_tick": 225,
-        "randomness": 1.0,
-        "rescue_mode": false,
-        "roll": 0.89441,
-        "selected": "detour",
-        "state": "kidnap",
-        "tick": 219,
-        "time": 54.75
-      },
-      {
-        "actor": "shiba_1",
-        "actor_type": "shiba",
-        "choices": {
-          "approach": 0.76,
-          "reposition": 0.08,
-          "watch": 0.16
-        },
-        "lv": 1,
-        "next_tick": 228,
-        "randomness": 1.0,
-        "rescue_mode": false,
-        "roll": 0.15784,
-        "selected": "watch",
-        "state": "enemy_approach",
-        "tick": 223,
-        "time": 55.75
-      },
-      {
-        "actor": "kidnapper_0",
-        "actor_type": "kidnapper",
-        "choices": {
-          "advance": 0.76
-        },
-        "lv": 1,
-        "next_tick": 228,
-        "randomness": 1.0,
-        "rescue_mode": false,
-        "roll": 0.58652,
-        "selected": "advance",
-        "state": "kidnap",
-        "tick": 225,
-        "time": 56.25
-      },
-      {
-        "actor": "shiba_1",
-        "actor_type": "shiba",
-        "choices": {
-          "attack": 0.76
-        },
-        "lv": 1,
-        "next_tick": 230,
-        "randomness": 1.0,
-        "rescue_mode": false,
-        "roll": 0.87281,
-        "selected": "attack",
-        "state": "enemy_attack",
-        "tick": 226,
-        "time": 56.5
-      }
-    ],
-    "decision_log_note": "Last12 decisions; counts cover the night. Full trace remains available through F8.",
-    "early_clear": true,
-    "early_clear_tick": 226,
-    "early_finish_bonus": 12,
-    "exp_pool": 25,
-    "field_items": [
-      {
-        "born_day": 1,
-        "kind": "egg",
-        "pos": [
-          22,
-          9
-        ],
-        "protected_by": -1
-      }
-    ],
-    "metrics": {
-      "bark_casts": 2,
-      "bark_targets": 2,
-      "barks": 2,
-      "built": 1,
-      "captures": 0,
-      "coins": 0,
-      "commands": 0.0,
-      "destroyed": 0,
-      "eggs_collected": 0,
-      "eggs_produced": 1,
-      "fed": 0,
-      "interrupted": 0,
-      "mushroom_collected": 0,
-      "mushroom_healing": 0,
-      "mushroom_spawned": 1,
-      "mushrooms_used": 0,
-      "nature_rolls": 59,
-      "orders": 0,
-      "repaired": 0,
-      "repelled": 0,
-      "rescues": 0,
-      "soil_repair": 0,
-      "stolen": 0,
-      "structure_damage": 0,
-      "stump_collected": 0,
-      "stump_spawned": 0,
-      "weed_collected": 0,
-      "weed_spawned": 8
-    },
-    "milestones": [
-      {
-        "id": -1,
-        "kind": "auto_start",
-        "tick": 0
-      },
-      {
-        "id": 0,
-        "kind": "invasion",
-        "tick": 40
-      },
-      {
-        "kind": "blueprint_dropped",
-        "pos": [
-          19,
-          6
-        ],
-        "tick": 226
-      },
-      {
-        "kind": "early_clear",
-        "tick": 226
-      },
-      {
-        "id": "kennel",
-        "kind": "blueprint",
-        "pos": [
-          19,
-          6
-        ],
-        "tick": 238
-      },
-      {
-        "item": "kennel_plan",
-        "kind": "item_collected",
-        "tick": 238
-      },
-      {
-        "kind": "dawn",
-        "tick": 238
-      }
-    ],
-    "phase": "dawn",
-    "raiders": [
-      {
-        "can_see_keeper": true,
-        "id": 0,
-        "last_known_keeper_position": [
-          19,
-          8
-        ],
-        "search_state": "追跡",
-        "sight_range": 6
-      }
-    ],
-    "remaining_night": 120.5,
-    "resources": {
-      "soil": 90,
-      "stone": 0,
-      "wood": 0
-    },
-    "score": {
-      "condition": 50,
-      "gold": 50,
-      "rating": 90,
-      "seconds": 59.5,
-      "time_bonus": 12,
-      "xp": 25
-    },
-    "seed": 17,
-    "sight_log": [
-      {
-        "id": 0,
-        "position": [
-          16,
-          5
-        ],
-        "tick": 187,
-        "visible": true
-      }
-    ],
-    "skill_log": [
-      {
-        "actor": "shiba_1",
-        "ready_tick": 217,
-        "skill": "bark",
-        "targets": [
-          0
-        ],
-        "tick": 193,
-        "time": 48.25
-      },
-      {
-        "actor": "shiba_1",
-        "ready_tick": 241,
-        "skill": "bark",
-        "targets": [
-          0
-        ],
-        "tick": 217,
-        "time": 54.25
-      }
-    ],
-    "stage": 1,
-    "tick": 238,
-    "unavailable_next_day": [],
-    "unlocked_blueprints": [
-      "kennel"
-    ]
-  },
-  "screenshots": {
-    "animal": {
-      "alert": "今夜の襲撃を退けた",
-      "camera": [
-        600.0,
-        357.0
-      ],
-      "gold": 10,
-      "keeper_state": "free",
-      "phase": "defend",
-      "shop_level": "categories",
-      "shop_side": "home",
-      "tick": 226
-    },
-    "animal_detail": {
-      "alert": "",
-      "camera": [
-        600.0,
-        357.0
-      ],
-      "gold": 10,
-      "keeper_state": "free",
-      "phase": "shop",
-      "shop_level": "categories",
-      "shop_side": "animals",
-      "tick": 0
-    },
-    "arrival": {
-      "alert": "",
-      "camera": [
-        600.0,
-        357.0
-      ],
-      "gold": 40,
-      "keeper_state": "free",
-      "phase": "shop",
-      "shop_level": "categories",
-      "shop_side": "home",
-      "tick": 0
-    },
-    "categories": {
-      "alert": "",
-      "camera": [
-        600.0,
-        357.0
-      ],
-      "gold": 40,
-      "keeper_state": "free",
-      "phase": "shop",
-      "shop_level": "categories",
-      "shop_side": "buy",
-      "tick": 0
-    },
-    "combat": {
-      "alert": "",
-      "camera": [
-        600.0,
-        357.0
-      ],
-      "gold": 10,
-      "keeper_state": "free",
-      "phase": "defend",
-      "shop_level": "categories",
-      "shop_side": "home",
-      "tick": 187
-    },
-    "dawn": {
-      "alert": "",
-      "camera": [
-        600.0,
-        357.0
-      ],
-      "gold": 72,
-      "keeper_state": "free",
-      "phase": "dawn",
-      "shop_level": "categories",
-      "shop_side": "home",
-      "tick": 238
-    },
-    "leave_market": {
-      "alert": "",
-      "camera": [
-        600.0,
-        357.0
-      ],
-      "gold": 10,
-      "keeper_state": "free",
-      "phase": "shop",
-      "shop_level": "categories",
-      "shop_side": "home",
-      "tick": 0
-    },
-    "next_morning": {
-      "alert": "",
-      "camera": [
-        600.0,
-        357.0
-      ],
-      "gold": 72,
-      "keeper_state": "free",
-      "phase": "shop",
-      "shop_level": "categories",
-      "shop_side": "home",
-      "tick": 0
-    },
-    "placement": {
-      "alert": "",
-      "camera": [
-        600.0,
-        357.0
-      ],
-      "gold": 10,
-      "keeper_state": "free",
-      "phase": "prepare",
-      "shop_level": "categories",
-      "shop_side": "home",
-      "tick": 0
-    },
-    "products": {
-      "alert": "",
-      "camera": [
-        600.0,
-        357.0
-      ],
-      "gold": 40,
-      "keeper_state": "free",
-      "phase": "shop",
-      "shop_level": "list",
-      "shop_side": "buy",
-      "tick": 0
-    },
-    "purchase": {
-      "alert": "",
-      "camera": [
-        600.0,
-        357.0
-      ],
-      "gold": 40,
-      "keeper_state": "free",
-      "phase": "shop",
-      "shop_level": "detail",
-      "shop_side": "buy",
-      "tick": 0
-    },
-    "returned": {
-      "alert": "",
-      "camera": [
-        600.0,
-        357.0
-      ],
-      "gold": 10,
-      "keeper_state": "free",
-      "phase": "shop",
-      "shop_level": "list",
-      "shop_side": "buy",
-      "tick": 0
-    },
-    "shop": {
-      "alert": "",
-      "camera": [
-        600.0,
-        357.0
-      ],
-      "gold": 40,
-      "keeper_state": "free",
-      "phase": "shop",
-      "shop_level": "categories",
-      "shop_side": "home",
-      "tick": 0
-    }
-  },
-  "seed": 17,
-  "commit_sha": "2ac03d7f411c53dd37e9715975aac6af33063ef1"
+	"audio": {
+		"birds_seconds": [
+			8,
+			20
+		],
+		"cues": {
+			"animal_danger": 1,
+			"attack": 1,
+			"bark": 1,
+			"build": 3,
+			"collect": 2,
+			"early_clear": 1,
+			"invasion": 1,
+			"merchant": 2,
+			"rescue": 1,
+			"win": 1
+		},
+		"driver": "Dummy"
+	},
+	"before_early_finish": {
+		"ai_settings": {
+			"counter": {
+				"counter": 0.8,
+				"hesitate": 0.1,
+				"resume": 0.1
+			},
+			"decision_max": 1.4,
+			"decision_min": 0.6,
+			"dog": {
+				"engage": 0.76,
+				"reposition": 0.08,
+				"watch": 0.16
+			},
+			"log_limit": 96,
+			"raider": {
+				"advance": 0.76,
+				"detour": 0.14,
+				"hesitate": 0.1
+			},
+			"randomness": 1.0,
+			"rescue_randomness": 0.12
+		},
+		"animals": [
+			{
+				"affinity": null,
+				"attack_target_range": 4,
+				"detection_range": 4,
+				"hp": 10,
+				"id": 1,
+				"lv": 1,
+				"max_hp": 40,
+				"name": "こむぎ",
+				"object_attack_power": 0,
+				"placed": true,
+				"rescuing": false,
+				"skills": [
+					"bark",
+					"rescue"
+				],
+				"species": "shiba",
+				"state": "自主休養",
+				"unavailable_through_day": 0
+			},
+			{
+				"affinity": null,
+				"attack_target_range": 0,
+				"detection_range": 3,
+				"hp": 20,
+				"id": 2,
+				"lv": 1,
+				"max_hp": 20,
+				"name": "",
+				"object_attack_power": 0,
+				"placed": true,
+				"rescuing": false,
+				"skills": [
+					"lay",
+					"feather"
+				],
+				"species": "hen",
+				"state": "ついばむ",
+				"unavailable_through_day": 0
+			}
+		],
+		"combat": [
+			{
+				"damage": 10,
+				"id": 1,
+				"source": "animal",
+				"target": 0,
+				"tick": 585
+			},
+			{
+				"damage": 5,
+				"id": 0,
+				"source": "enemy",
+				"target": 1,
+				"tick": 585
+			},
+			{
+				"damage": 5,
+				"id": 0,
+				"source": "enemy",
+				"target": 1,
+				"tick": 589
+			},
+			{
+				"damage": 5,
+				"id": 0,
+				"source": "enemy",
+				"target": 1,
+				"tick": 593
+			},
+			{
+				"damage": 10,
+				"id": 1,
+				"source": "animal",
+				"target": 0,
+				"tick": 596
+			},
+			{
+				"damage": 5,
+				"id": 0,
+				"source": "enemy",
+				"target": 1,
+				"tick": 605
+			},
+			{
+				"damage": 10,
+				"id": 1,
+				"source": "animal",
+				"target": 0,
+				"tick": 606
+			},
+			{
+				"damage": 5,
+				"id": 0,
+				"source": "enemy",
+				"target": 1,
+				"tick": 609
+			},
+			{
+				"damage": 10,
+				"id": 1,
+				"source": "animal",
+				"target": 0,
+				"tick": 611
+			},
+			{
+				"damage": 5,
+				"id": 0,
+				"source": "enemy",
+				"target": 1,
+				"tick": 613
+			},
+			{
+				"damage": 10,
+				"id": 1,
+				"source": "animal",
+				"target": 0,
+				"tick": 616
+			}
+		],
+		"dawn": {},
+		"day": 1,
+		"decision_counts": {
+			"kidnapper:advance": 33,
+			"kidnapper:counter": 6,
+			"kidnapper:detour": 5,
+			"kidnapper:hesitate": 5,
+			"kidnapper:resume": 1,
+			"shiba:approach": 5,
+			"shiba:attack": 6,
+			"shiba:reposition": 1,
+			"shiba:watch": 2
+		},
+		"decision_log": [
+			{
+				"actor": "kidnapper_0",
+				"actor_type": "kidnapper",
+				"choices": {
+					"advance": 0.76,
+					"detour": 0.14,
+					"hesitate": 0.1
+				},
+				"lv": 1,
+				"next_tick": 601,
+				"randomness": 1.0,
+				"rescue_mode": false,
+				"roll": 0.14021,
+				"selected": "advance",
+				"state": "kidnap",
+				"tick": 598,
+				"time": 149.5
+			},
+			{
+				"actor": "shiba_1",
+				"actor_type": "shiba",
+				"choices": {
+					"attack": 0.76,
+					"reposition": 0.08,
+					"watch": 0.16
+				},
+				"lv": 1,
+				"next_tick": 602,
+				"randomness": 1.0,
+				"rescue_mode": false,
+				"roll": 0.68361,
+				"selected": "attack",
+				"state": "enemy_attack",
+				"tick": 599,
+				"time": 149.75
+			},
+			{
+				"actor": "shiba_1",
+				"actor_type": "shiba",
+				"choices": {
+					"approach": 0.76,
+					"reposition": 0.08,
+					"watch": 0.16
+				},
+				"lv": 1,
+				"next_tick": 607,
+				"randomness": 1.0,
+				"rescue_mode": false,
+				"roll": 0.70034,
+				"selected": "approach",
+				"state": "enemy_approach",
+				"tick": 601,
+				"time": 150.25
+			},
+			{
+				"actor": "kidnapper_0",
+				"actor_type": "kidnapper",
+				"choices": {
+					"advance": 0.76,
+					"detour": 0.14,
+					"hesitate": 0.1
+				},
+				"lv": 1,
+				"next_tick": 606,
+				"randomness": 1.0,
+				"rescue_mode": false,
+				"roll": 0.96918,
+				"selected": "detour",
+				"state": "kidnap",
+				"tick": 601,
+				"time": 150.25
+			},
+			{
+				"actor": "shiba_1",
+				"actor_type": "shiba",
+				"choices": {
+					"attack": 0.76,
+					"reposition": 0.08,
+					"watch": 0.16
+				},
+				"lv": 1,
+				"next_tick": 607,
+				"randomness": 1.0,
+				"rescue_mode": false,
+				"roll": 0.15784,
+				"selected": "watch",
+				"state": "enemy_attack",
+				"tick": 602,
+				"time": 150.5
+			},
+			{
+				"actor": "shiba_1",
+				"actor_type": "shiba",
+				"choices": {
+					"approach": 0.76
+				},
+				"lv": 1,
+				"next_tick": 608,
+				"randomness": 1.0,
+				"rescue_mode": false,
+				"roll": 0.87281,
+				"selected": "approach",
+				"state": "enemy_approach",
+				"tick": 604,
+				"time": 151.0
+			},
+			{
+				"actor": "kidnapper_0",
+				"actor_type": "kidnapper",
+				"choices": {
+					"counter": 0.8,
+					"resume": 0.1
+				},
+				"lv": 1,
+				"next_tick": 611,
+				"randomness": 1.0,
+				"rescue_mode": false,
+				"roll": 0.09286,
+				"selected": "counter",
+				"state": "under_attack",
+				"tick": 605,
+				"time": 151.25
+			},
+			{
+				"actor": "shiba_1",
+				"actor_type": "shiba",
+				"choices": {
+					"attack": 0.76,
+					"reposition": 0.08,
+					"watch": 0.16
+				},
+				"lv": 1,
+				"next_tick": 612,
+				"randomness": 1.0,
+				"rescue_mode": false,
+				"roll": 0.92834,
+				"selected": "attack",
+				"state": "enemy_attack",
+				"tick": 606,
+				"time": 151.5
+			},
+			{
+				"actor": "kidnapper_0",
+				"actor_type": "kidnapper",
+				"choices": {
+					"counter": 0.8,
+					"hesitate": 0.1,
+					"resume": 0.1
+				},
+				"lv": 1,
+				"next_tick": 615,
+				"randomness": 1.0,
+				"rescue_mode": false,
+				"roll": 0.00956,
+				"selected": "counter",
+				"state": "under_attack",
+				"tick": 611,
+				"time": 152.75
+			},
+			{
+				"actor": "shiba_1",
+				"actor_type": "shiba",
+				"choices": {
+					"attack": 0.76,
+					"reposition": 0.08,
+					"watch": 0.16
+				},
+				"lv": 1,
+				"next_tick": 615,
+				"randomness": 1.0,
+				"rescue_mode": false,
+				"roll": 0.60532,
+				"selected": "attack",
+				"state": "enemy_attack",
+				"tick": 612,
+				"time": 153.0
+			},
+			{
+				"actor": "shiba_1",
+				"actor_type": "shiba",
+				"choices": {
+					"attack": 0.76,
+					"reposition": 0.08,
+					"watch": 0.16
+				},
+				"lv": 1,
+				"next_tick": 621,
+				"randomness": 1.0,
+				"rescue_mode": false,
+				"roll": 0.36961,
+				"selected": "attack",
+				"state": "enemy_attack",
+				"tick": 615,
+				"time": 153.75
+			},
+			{
+				"actor": "kidnapper_0",
+				"actor_type": "kidnapper",
+				"choices": {
+					"counter": 0.8,
+					"hesitate": 0.1,
+					"resume": 0.1
+				},
+				"lv": 1,
+				"next_tick": 621,
+				"randomness": 1.0,
+				"rescue_mode": false,
+				"roll": 0.04847,
+				"selected": "counter",
+				"state": "under_attack",
+				"tick": 615,
+				"time": 153.75
+			}
+		],
+		"decision_log_note": "Last12 decisions; counts cover the night. Full trace remains available through F8.",
+		"early_clear": true,
+		"early_clear_tick": 616,
+		"early_finish_bonus": 0,
+		"exp_pool": 0,
+		"field_items": [],
+		"job_log": [
+			{
+				"event": "queued",
+				"id": 1,
+				"kind": "wall",
+				"pos": [
+					3,
+					3
+				],
+				"tick": 0
+			},
+			{
+				"event": "queued",
+				"id": 2,
+				"kind": "wall",
+				"pos": [
+					8,
+					3
+				],
+				"tick": 0
+			},
+			{
+				"event": "queued",
+				"id": 3,
+				"kind": "wall",
+				"pos": [
+					18,
+					3
+				],
+				"tick": 0
+			},
+			{
+				"event": "started",
+				"id": 1,
+				"pos": [
+					3,
+					3
+				],
+				"tick": 21
+			},
+			{
+				"animal_id": -1,
+				"event": "completed",
+				"id": 1,
+				"kind": "wall",
+				"pos": [
+					3,
+					3
+				],
+				"tick": 25
+			},
+			{
+				"event": "started",
+				"id": 2,
+				"pos": [
+					8,
+					3
+				],
+				"tick": 30
+			},
+			{
+				"animal_id": -1,
+				"event": "completed",
+				"id": 2,
+				"kind": "wall",
+				"pos": [
+					8,
+					3
+				],
+				"tick": 34
+			},
+			{
+				"event": "cancelled",
+				"id": 3,
+				"tick": 35
+			},
+			{
+				"event": "queued",
+				"id": 4,
+				"kind": "wall",
+				"pos": [
+					16,
+					6
+				],
+				"tick": 35
+			},
+			{
+				"event": "started",
+				"id": 4,
+				"pos": [
+					16,
+					6
+				],
+				"tick": 53
+			},
+			{
+				"animal_id": -1,
+				"event": "completed",
+				"id": 4,
+				"kind": "wall",
+				"pos": [
+					16,
+					6
+				],
+				"tick": 57
+			},
+			{
+				"event": "queued",
+				"id": 5,
+				"kind": "place_animal",
+				"pos": [
+					20,
+					12
+				],
+				"tick": 57
+			},
+			{
+				"event": "queued",
+				"id": 6,
+				"kind": "place_animal",
+				"pos": [
+					18,
+					8
+				],
+				"tick": 57
+			},
+			{
+				"animal_id": 2,
+				"event": "completed",
+				"id": 5,
+				"kind": "place_animal",
+				"pos": [
+					20,
+					12
+				],
+				"tick": 74
+			},
+			{
+				"animal_id": 1,
+				"event": "completed",
+				"id": 6,
+				"kind": "place_animal",
+				"pos": [
+					18,
+					8
+				],
+				"tick": 81
+			},
+			{
+				"event": "queued",
+				"id": 7,
+				"kind": "move",
+				"pos": [
+					19,
+					8
+				],
+				"tick": 81
+			},
+			{
+				"animal_id": -1,
+				"event": "completed",
+				"id": 7,
+				"kind": "move",
+				"pos": [
+					19,
+					8
+				],
+				"tick": 82
+			},
+			{
+				"event": "queued",
+				"id": 8,
+				"kind": "wall",
+				"pos": [
+					3,
+					2
+				],
+				"tick": 354
+			},
+			{
+				"event": "started",
+				"id": 8,
+				"pos": [
+					3,
+					2
+				],
+				"tick": 389
+			},
+			{
+				"animal_id": -1,
+				"event": "completed",
+				"id": 8,
+				"kind": "wall",
+				"pos": [
+					3,
+					2
+				],
+				"tick": 393
+			},
+			{
+				"event": "queued",
+				"id": 9,
+				"kind": "move",
+				"pos": [
+					19,
+					8
+				],
+				"tick": 400
+			},
+			{
+				"animal_id": -1,
+				"event": "completed",
+				"id": 9,
+				"kind": "move",
+				"pos": [
+					19,
+					8
+				],
+				"tick": 435
+			},
+			{
+				"event": "queued",
+				"id": 10,
+				"kind": "collect",
+				"pos": [
+					19,
+					10
+				],
+				"tick": 628
+			},
+			{
+				"animal_id": -1,
+				"event": "completed",
+				"id": 10,
+				"kind": "collect",
+				"pos": [
+					19,
+					10
+				],
+				"tick": 631
+			}
+		],
+		"jobs": [],
+		"keeper_path": [
+			[
+				6,
+				13
+			],
+			[
+				5,
+				13
+			],
+			[
+				4,
+				13
+			],
+			[
+				4,
+				12
+			],
+			[
+				4,
+				11
+			],
+			[
+				4,
+				10
+			],
+			[
+				4,
+				9
+			],
+			[
+				4,
+				8
+			],
+			[
+				4,
+				7
+			],
+			[
+				4,
+				6
+			],
+			[
+				4,
+				5
+			],
+			[
+				4,
+				4
+			],
+			[
+				4,
+				3
+			],
+			[
+				5,
+				3
+			],
+			[
+				6,
+				3
+			],
+			[
+				7,
+				3
+			],
+			[
+				7,
+				4
+			],
+			[
+				8,
+				4
+			],
+			[
+				9,
+				4
+			],
+			[
+				10,
+				4
+			],
+			[
+				11,
+				4
+			],
+			[
+				12,
+				4
+			],
+			[
+				13,
+				4
+			],
+			[
+				14,
+				4
+			],
+			[
+				15,
+				4
+			],
+			[
+				15,
+				5
+			],
+			[
+				15,
+				6
+			],
+			[
+				15,
+				7
+			],
+			[
+				16,
+				7
+			],
+			[
+				17,
+				7
+			],
+			[
+				18,
+				7
+			],
+			[
+				19,
+				7
+			],
+			[
+				19,
+				8
+			],
+			[
+				19,
+				9
+			],
+			[
+				19,
+				10
+			],
+			[
+				19,
+				11
+			],
+			[
+				19,
+				12
+			],
+			[
+				19,
+				11
+			],
+			[
+				19,
+				10
+			],
+			[
+				19,
+				9
+			],
+			[
+				19,
+				8
+			],
+			[
+				18,
+				8
+			],
+			[
+				17,
+				8
+			],
+			[
+				16,
+				8
+			],
+			[
+				15,
+				8
+			],
+			[
+				14,
+				8
+			],
+			[
+				13,
+				8
+			],
+			[
+				12,
+				8
+			],
+			[
+				11,
+				8
+			],
+			[
+				10,
+				8
+			],
+			[
+				9,
+				8
+			],
+			[
+				8,
+				8
+			],
+			[
+				7,
+				8
+			],
+			[
+				6,
+				8
+			],
+			[
+				5,
+				8
+			],
+			[
+				4,
+				8
+			],
+			[
+				4,
+				7
+			],
+			[
+				4,
+				6
+			],
+			[
+				4,
+				5
+			],
+			[
+				4,
+				4
+			],
+			[
+				4,
+				3
+			],
+			[
+				4,
+				2
+			],
+			[
+				5,
+				2
+			],
+			[
+				6,
+				2
+			],
+			[
+				7,
+				2
+			],
+			[
+				8,
+				2
+			],
+			[
+				9,
+				2
+			],
+			[
+				10,
+				2
+			],
+			[
+				11,
+				2
+			],
+			[
+				12,
+				2
+			],
+			[
+				13,
+				2
+			],
+			[
+				14,
+				2
+			],
+			[
+				15,
+				2
+			],
+			[
+				16,
+				2
+			],
+			[
+				17,
+				2
+			],
+			[
+				18,
+				2
+			],
+			[
+				19,
+				2
+			],
+			[
+				19,
+				3
+			],
+			[
+				19,
+				4
+			],
+			[
+				19,
+				5
+			],
+			[
+				19,
+				6
+			],
+			[
+				19,
+				7
+			],
+			[
+				19,
+				8
+			],
+			[
+				19,
+				9
+			]
+		],
+		"metrics": {
+			"bark_casts": 2,
+			"bark_targets": 2,
+			"barks": 2,
+			"built": 4,
+			"captures": 0,
+			"coins": 0,
+			"commands": 0.0,
+			"destroyed": 0,
+			"eggs_collected": 0,
+			"eggs_produced": 0,
+			"fed": 0,
+			"interrupted": 0,
+			"mushroom_collected": 0,
+			"mushroom_healing": 0,
+			"mushroom_spawned": 3,
+			"mushrooms_used": 0,
+			"nature_rolls": 157,
+			"orders": 0,
+			"repaired": 0,
+			"repelled": 0,
+			"rescues": 0,
+			"soil_repair": 0,
+			"stolen": 0,
+			"structure_damage": 0,
+			"stump_collected": 0,
+			"stump_spawned": 1,
+			"weed_collected": 0,
+			"weed_spawned": 10
+		},
+		"milestones": [
+			{
+				"kind": "nightfall",
+				"tick": 360
+			},
+			{
+				"id": 0,
+				"kind": "invasion",
+				"tick": 400
+			},
+			{
+				"id": 1,
+				"kind": "animal_danger",
+				"tick": 613
+			},
+			{
+				"kind": "blueprint_dropped",
+				"pos": [
+					19,
+					10
+				],
+				"tick": 616
+			},
+			{
+				"kind": "early_clear",
+				"tick": 616
+			},
+			{
+				"id": "kennel",
+				"kind": "blueprint",
+				"pos": [
+					19,
+					10
+				],
+				"tick": 631
+			},
+			{
+				"item": "kennel_plan",
+				"kind": "item_collected",
+				"tick": 631
+			}
+		],
+		"night_started_tick": 360,
+		"phase": "defend",
+		"raiders": [
+			{
+				"can_see_keeper": true,
+				"id": 0,
+				"last_known_keeper_position": [
+					19,
+					9
+				],
+				"search_state": "追跡",
+				"sight_range": 6
+			}
+		],
+		"remaining_day": 0.0,
+		"remaining_night": 112.25,
+		"resources": {
+			"soil": 60,
+			"stone": 0,
+			"wood": 0
+		},
+		"score": {},
+		"seed": 17,
+		"sight_log": [
+			{
+				"id": 0,
+				"position": [
+					2,
+					5
+				],
+				"tick": 403,
+				"visible": true
+			},
+			{
+				"id": 0,
+				"position": [
+					2,
+					5
+				],
+				"tick": 404,
+				"visible": false
+			},
+			{
+				"id": 0,
+				"position": [
+					14,
+					9
+				],
+				"tick": 571,
+				"visible": true
+			}
+		],
+		"skill_log": [
+			{
+				"actor": "shiba_1",
+				"ready_tick": 604,
+				"skill": "bark",
+				"targets": [
+					0
+				],
+				"tick": 580,
+				"time": 145.0
+			},
+			{
+				"actor": "shiba_1",
+				"ready_tick": 628,
+				"skill": "bark",
+				"targets": [
+					0
+				],
+				"tick": 604,
+				"time": 151.0
+			}
+		],
+		"stage": 1,
+		"tick": 631,
+		"unavailable_next_day": [],
+		"unlocked_blueprints": [
+			"kennel"
+		]
+	},
+	"branch": "codex/sporehollow-prototype",
+	"checks": {
+		"arrival_before_shop": true,
+		"category_switch_after_purchase": true,
+		"cinematic_hides_ui": true,
+		"click_only_animal_candidates": true,
+		"dawn_to_arrival": true,
+		"day_work_queue": true,
+		"hen_has_no_commands": true,
+		"hierarchical_back": true,
+		"manual_blueprint": true,
+		"manual_exp_training": true,
+		"morning_retry": true,
+		"named_animal": true,
+		"night_escape": true,
+		"night_preserves_jobs": true,
+		"no_accidental_deployment": true,
+		"no_purchase_on_inspect": true,
+		"no_shiba_or_food_sale": true,
+		"retired_enemy_deselected": true,
+		"sold_out_disabled": true,
+		"third_cancelled": true,
+		"three_way_shop": true,
+		"unaffordable_disabled": true,
+		"work_after_clear": true
+	},
+	"commit_sha": "5bde62058f1459007ac5b0fa8885b7c742c949f5",
+	"dawn": {
+		"ai_settings": {
+			"counter": {
+				"counter": 0.8,
+				"hesitate": 0.1,
+				"resume": 0.1
+			},
+			"decision_max": 1.4,
+			"decision_min": 0.6,
+			"dog": {
+				"engage": 0.76,
+				"reposition": 0.08,
+				"watch": 0.16
+			},
+			"log_limit": 96,
+			"raider": {
+				"advance": 0.76,
+				"detour": 0.14,
+				"hesitate": 0.1
+			},
+			"randomness": 1.0,
+			"rescue_randomness": 0.12
+		},
+		"animals": [
+			{
+				"affinity": null,
+				"attack_target_range": 4,
+				"detection_range": 4,
+				"hp": 10,
+				"id": 1,
+				"lv": 1,
+				"max_hp": 40,
+				"name": "こむぎ",
+				"object_attack_power": 0,
+				"placed": true,
+				"rescuing": false,
+				"skills": [
+					"bark",
+					"rescue"
+				],
+				"species": "shiba",
+				"state": "自主休養",
+				"unavailable_through_day": 0
+			},
+			{
+				"affinity": null,
+				"attack_target_range": 0,
+				"detection_range": 3,
+				"hp": 20,
+				"id": 2,
+				"lv": 1,
+				"max_hp": 20,
+				"name": "",
+				"object_attack_power": 0,
+				"placed": true,
+				"rescuing": false,
+				"skills": [
+					"lay",
+					"feather"
+				],
+				"species": "hen",
+				"state": "ついばむ",
+				"unavailable_through_day": 0
+			}
+		],
+		"combat": [
+			{
+				"damage": 10,
+				"id": 1,
+				"source": "animal",
+				"target": 0,
+				"tick": 585
+			},
+			{
+				"damage": 5,
+				"id": 0,
+				"source": "enemy",
+				"target": 1,
+				"tick": 585
+			},
+			{
+				"damage": 5,
+				"id": 0,
+				"source": "enemy",
+				"target": 1,
+				"tick": 589
+			},
+			{
+				"damage": 5,
+				"id": 0,
+				"source": "enemy",
+				"target": 1,
+				"tick": 593
+			},
+			{
+				"damage": 10,
+				"id": 1,
+				"source": "animal",
+				"target": 0,
+				"tick": 596
+			},
+			{
+				"damage": 5,
+				"id": 0,
+				"source": "enemy",
+				"target": 1,
+				"tick": 605
+			},
+			{
+				"damage": 10,
+				"id": 1,
+				"source": "animal",
+				"target": 0,
+				"tick": 606
+			},
+			{
+				"damage": 5,
+				"id": 0,
+				"source": "enemy",
+				"target": 1,
+				"tick": 609
+			},
+			{
+				"damage": 10,
+				"id": 1,
+				"source": "animal",
+				"target": 0,
+				"tick": 611
+			},
+			{
+				"damage": 5,
+				"id": 0,
+				"source": "enemy",
+				"target": 1,
+				"tick": 613
+			},
+			{
+				"damage": 10,
+				"id": 1,
+				"source": "animal",
+				"target": 0,
+				"tick": 616
+			}
+		],
+		"dawn": {
+			"chicks": 0,
+			"eggs": 1,
+			"feathers": 0,
+			"hens": 0,
+			"pending_blueprints": 0,
+			"unconscious": []
+		},
+		"day": 1,
+		"decision_counts": {
+			"kidnapper:advance": 33,
+			"kidnapper:counter": 6,
+			"kidnapper:detour": 5,
+			"kidnapper:hesitate": 5,
+			"kidnapper:resume": 1,
+			"shiba:approach": 5,
+			"shiba:attack": 6,
+			"shiba:reposition": 1,
+			"shiba:watch": 2
+		},
+		"decision_log": [
+			{
+				"actor": "kidnapper_0",
+				"actor_type": "kidnapper",
+				"choices": {
+					"advance": 0.76,
+					"detour": 0.14,
+					"hesitate": 0.1
+				},
+				"lv": 1,
+				"next_tick": 601,
+				"randomness": 1.0,
+				"rescue_mode": false,
+				"roll": 0.14021,
+				"selected": "advance",
+				"state": "kidnap",
+				"tick": 598,
+				"time": 149.5
+			},
+			{
+				"actor": "shiba_1",
+				"actor_type": "shiba",
+				"choices": {
+					"attack": 0.76,
+					"reposition": 0.08,
+					"watch": 0.16
+				},
+				"lv": 1,
+				"next_tick": 602,
+				"randomness": 1.0,
+				"rescue_mode": false,
+				"roll": 0.68361,
+				"selected": "attack",
+				"state": "enemy_attack",
+				"tick": 599,
+				"time": 149.75
+			},
+			{
+				"actor": "shiba_1",
+				"actor_type": "shiba",
+				"choices": {
+					"approach": 0.76,
+					"reposition": 0.08,
+					"watch": 0.16
+				},
+				"lv": 1,
+				"next_tick": 607,
+				"randomness": 1.0,
+				"rescue_mode": false,
+				"roll": 0.70034,
+				"selected": "approach",
+				"state": "enemy_approach",
+				"tick": 601,
+				"time": 150.25
+			},
+			{
+				"actor": "kidnapper_0",
+				"actor_type": "kidnapper",
+				"choices": {
+					"advance": 0.76,
+					"detour": 0.14,
+					"hesitate": 0.1
+				},
+				"lv": 1,
+				"next_tick": 606,
+				"randomness": 1.0,
+				"rescue_mode": false,
+				"roll": 0.96918,
+				"selected": "detour",
+				"state": "kidnap",
+				"tick": 601,
+				"time": 150.25
+			},
+			{
+				"actor": "shiba_1",
+				"actor_type": "shiba",
+				"choices": {
+					"attack": 0.76,
+					"reposition": 0.08,
+					"watch": 0.16
+				},
+				"lv": 1,
+				"next_tick": 607,
+				"randomness": 1.0,
+				"rescue_mode": false,
+				"roll": 0.15784,
+				"selected": "watch",
+				"state": "enemy_attack",
+				"tick": 602,
+				"time": 150.5
+			},
+			{
+				"actor": "shiba_1",
+				"actor_type": "shiba",
+				"choices": {
+					"approach": 0.76
+				},
+				"lv": 1,
+				"next_tick": 608,
+				"randomness": 1.0,
+				"rescue_mode": false,
+				"roll": 0.87281,
+				"selected": "approach",
+				"state": "enemy_approach",
+				"tick": 604,
+				"time": 151.0
+			},
+			{
+				"actor": "kidnapper_0",
+				"actor_type": "kidnapper",
+				"choices": {
+					"counter": 0.8,
+					"resume": 0.1
+				},
+				"lv": 1,
+				"next_tick": 611,
+				"randomness": 1.0,
+				"rescue_mode": false,
+				"roll": 0.09286,
+				"selected": "counter",
+				"state": "under_attack",
+				"tick": 605,
+				"time": 151.25
+			},
+			{
+				"actor": "shiba_1",
+				"actor_type": "shiba",
+				"choices": {
+					"attack": 0.76,
+					"reposition": 0.08,
+					"watch": 0.16
+				},
+				"lv": 1,
+				"next_tick": 612,
+				"randomness": 1.0,
+				"rescue_mode": false,
+				"roll": 0.92834,
+				"selected": "attack",
+				"state": "enemy_attack",
+				"tick": 606,
+				"time": 151.5
+			},
+			{
+				"actor": "kidnapper_0",
+				"actor_type": "kidnapper",
+				"choices": {
+					"counter": 0.8,
+					"hesitate": 0.1,
+					"resume": 0.1
+				},
+				"lv": 1,
+				"next_tick": 615,
+				"randomness": 1.0,
+				"rescue_mode": false,
+				"roll": 0.00956,
+				"selected": "counter",
+				"state": "under_attack",
+				"tick": 611,
+				"time": 152.75
+			},
+			{
+				"actor": "shiba_1",
+				"actor_type": "shiba",
+				"choices": {
+					"attack": 0.76,
+					"reposition": 0.08,
+					"watch": 0.16
+				},
+				"lv": 1,
+				"next_tick": 615,
+				"randomness": 1.0,
+				"rescue_mode": false,
+				"roll": 0.60532,
+				"selected": "attack",
+				"state": "enemy_attack",
+				"tick": 612,
+				"time": 153.0
+			},
+			{
+				"actor": "shiba_1",
+				"actor_type": "shiba",
+				"choices": {
+					"attack": 0.76,
+					"reposition": 0.08,
+					"watch": 0.16
+				},
+				"lv": 1,
+				"next_tick": 621,
+				"randomness": 1.0,
+				"rescue_mode": false,
+				"roll": 0.36961,
+				"selected": "attack",
+				"state": "enemy_attack",
+				"tick": 615,
+				"time": 153.75
+			},
+			{
+				"actor": "kidnapper_0",
+				"actor_type": "kidnapper",
+				"choices": {
+					"counter": 0.8,
+					"hesitate": 0.1,
+					"resume": 0.1
+				},
+				"lv": 1,
+				"next_tick": 621,
+				"randomness": 1.0,
+				"rescue_mode": false,
+				"roll": 0.04847,
+				"selected": "counter",
+				"state": "under_attack",
+				"tick": 615,
+				"time": 153.75
+			}
+		],
+		"decision_log_note": "Last12 decisions; counts cover the night. Full trace remains available through F8.",
+		"early_clear": true,
+		"early_clear_tick": 616,
+		"early_finish_bonus": 11,
+		"exp_pool": 24,
+		"field_items": [
+			{
+				"born_day": 1,
+				"kind": "egg",
+				"pos": [
+					17,
+					7
+				],
+				"protected_by": -1
+			}
+		],
+		"job_log": [
+			{
+				"event": "queued",
+				"id": 1,
+				"kind": "wall",
+				"pos": [
+					3,
+					3
+				],
+				"tick": 0
+			},
+			{
+				"event": "queued",
+				"id": 2,
+				"kind": "wall",
+				"pos": [
+					8,
+					3
+				],
+				"tick": 0
+			},
+			{
+				"event": "queued",
+				"id": 3,
+				"kind": "wall",
+				"pos": [
+					18,
+					3
+				],
+				"tick": 0
+			},
+			{
+				"event": "started",
+				"id": 1,
+				"pos": [
+					3,
+					3
+				],
+				"tick": 21
+			},
+			{
+				"animal_id": -1,
+				"event": "completed",
+				"id": 1,
+				"kind": "wall",
+				"pos": [
+					3,
+					3
+				],
+				"tick": 25
+			},
+			{
+				"event": "started",
+				"id": 2,
+				"pos": [
+					8,
+					3
+				],
+				"tick": 30
+			},
+			{
+				"animal_id": -1,
+				"event": "completed",
+				"id": 2,
+				"kind": "wall",
+				"pos": [
+					8,
+					3
+				],
+				"tick": 34
+			},
+			{
+				"event": "cancelled",
+				"id": 3,
+				"tick": 35
+			},
+			{
+				"event": "queued",
+				"id": 4,
+				"kind": "wall",
+				"pos": [
+					16,
+					6
+				],
+				"tick": 35
+			},
+			{
+				"event": "started",
+				"id": 4,
+				"pos": [
+					16,
+					6
+				],
+				"tick": 53
+			},
+			{
+				"animal_id": -1,
+				"event": "completed",
+				"id": 4,
+				"kind": "wall",
+				"pos": [
+					16,
+					6
+				],
+				"tick": 57
+			},
+			{
+				"event": "queued",
+				"id": 5,
+				"kind": "place_animal",
+				"pos": [
+					20,
+					12
+				],
+				"tick": 57
+			},
+			{
+				"event": "queued",
+				"id": 6,
+				"kind": "place_animal",
+				"pos": [
+					18,
+					8
+				],
+				"tick": 57
+			},
+			{
+				"animal_id": 2,
+				"event": "completed",
+				"id": 5,
+				"kind": "place_animal",
+				"pos": [
+					20,
+					12
+				],
+				"tick": 74
+			},
+			{
+				"animal_id": 1,
+				"event": "completed",
+				"id": 6,
+				"kind": "place_animal",
+				"pos": [
+					18,
+					8
+				],
+				"tick": 81
+			},
+			{
+				"event": "queued",
+				"id": 7,
+				"kind": "move",
+				"pos": [
+					19,
+					8
+				],
+				"tick": 81
+			},
+			{
+				"animal_id": -1,
+				"event": "completed",
+				"id": 7,
+				"kind": "move",
+				"pos": [
+					19,
+					8
+				],
+				"tick": 82
+			},
+			{
+				"event": "queued",
+				"id": 8,
+				"kind": "wall",
+				"pos": [
+					3,
+					2
+				],
+				"tick": 354
+			},
+			{
+				"event": "started",
+				"id": 8,
+				"pos": [
+					3,
+					2
+				],
+				"tick": 389
+			},
+			{
+				"animal_id": -1,
+				"event": "completed",
+				"id": 8,
+				"kind": "wall",
+				"pos": [
+					3,
+					2
+				],
+				"tick": 393
+			},
+			{
+				"event": "queued",
+				"id": 9,
+				"kind": "move",
+				"pos": [
+					19,
+					8
+				],
+				"tick": 400
+			},
+			{
+				"animal_id": -1,
+				"event": "completed",
+				"id": 9,
+				"kind": "move",
+				"pos": [
+					19,
+					8
+				],
+				"tick": 435
+			},
+			{
+				"event": "queued",
+				"id": 10,
+				"kind": "collect",
+				"pos": [
+					19,
+					10
+				],
+				"tick": 628
+			},
+			{
+				"animal_id": -1,
+				"event": "completed",
+				"id": 10,
+				"kind": "collect",
+				"pos": [
+					19,
+					10
+				],
+				"tick": 631
+			}
+		],
+		"jobs": [],
+		"keeper_path": [
+			[
+				6,
+				13
+			],
+			[
+				5,
+				13
+			],
+			[
+				4,
+				13
+			],
+			[
+				4,
+				12
+			],
+			[
+				4,
+				11
+			],
+			[
+				4,
+				10
+			],
+			[
+				4,
+				9
+			],
+			[
+				4,
+				8
+			],
+			[
+				4,
+				7
+			],
+			[
+				4,
+				6
+			],
+			[
+				4,
+				5
+			],
+			[
+				4,
+				4
+			],
+			[
+				4,
+				3
+			],
+			[
+				5,
+				3
+			],
+			[
+				6,
+				3
+			],
+			[
+				7,
+				3
+			],
+			[
+				7,
+				4
+			],
+			[
+				8,
+				4
+			],
+			[
+				9,
+				4
+			],
+			[
+				10,
+				4
+			],
+			[
+				11,
+				4
+			],
+			[
+				12,
+				4
+			],
+			[
+				13,
+				4
+			],
+			[
+				14,
+				4
+			],
+			[
+				15,
+				4
+			],
+			[
+				15,
+				5
+			],
+			[
+				15,
+				6
+			],
+			[
+				15,
+				7
+			],
+			[
+				16,
+				7
+			],
+			[
+				17,
+				7
+			],
+			[
+				18,
+				7
+			],
+			[
+				19,
+				7
+			],
+			[
+				19,
+				8
+			],
+			[
+				19,
+				9
+			],
+			[
+				19,
+				10
+			],
+			[
+				19,
+				11
+			],
+			[
+				19,
+				12
+			],
+			[
+				19,
+				11
+			],
+			[
+				19,
+				10
+			],
+			[
+				19,
+				9
+			],
+			[
+				19,
+				8
+			],
+			[
+				18,
+				8
+			],
+			[
+				17,
+				8
+			],
+			[
+				16,
+				8
+			],
+			[
+				15,
+				8
+			],
+			[
+				14,
+				8
+			],
+			[
+				13,
+				8
+			],
+			[
+				12,
+				8
+			],
+			[
+				11,
+				8
+			],
+			[
+				10,
+				8
+			],
+			[
+				9,
+				8
+			],
+			[
+				8,
+				8
+			],
+			[
+				7,
+				8
+			],
+			[
+				6,
+				8
+			],
+			[
+				5,
+				8
+			],
+			[
+				4,
+				8
+			],
+			[
+				4,
+				7
+			],
+			[
+				4,
+				6
+			],
+			[
+				4,
+				5
+			],
+			[
+				4,
+				4
+			],
+			[
+				4,
+				3
+			],
+			[
+				4,
+				2
+			],
+			[
+				5,
+				2
+			],
+			[
+				6,
+				2
+			],
+			[
+				7,
+				2
+			],
+			[
+				8,
+				2
+			],
+			[
+				9,
+				2
+			],
+			[
+				10,
+				2
+			],
+			[
+				11,
+				2
+			],
+			[
+				12,
+				2
+			],
+			[
+				13,
+				2
+			],
+			[
+				14,
+				2
+			],
+			[
+				15,
+				2
+			],
+			[
+				16,
+				2
+			],
+			[
+				17,
+				2
+			],
+			[
+				18,
+				2
+			],
+			[
+				19,
+				2
+			],
+			[
+				19,
+				3
+			],
+			[
+				19,
+				4
+			],
+			[
+				19,
+				5
+			],
+			[
+				19,
+				6
+			],
+			[
+				19,
+				7
+			],
+			[
+				19,
+				8
+			],
+			[
+				19,
+				9
+			]
+		],
+		"metrics": {
+			"bark_casts": 2,
+			"bark_targets": 2,
+			"barks": 2,
+			"built": 4,
+			"captures": 0,
+			"coins": 0,
+			"commands": 0.0,
+			"destroyed": 0,
+			"eggs_collected": 0,
+			"eggs_produced": 1,
+			"fed": 0,
+			"interrupted": 0,
+			"mushroom_collected": 0,
+			"mushroom_healing": 0,
+			"mushroom_spawned": 3,
+			"mushrooms_used": 0,
+			"nature_rolls": 157,
+			"orders": 0,
+			"repaired": 0,
+			"repelled": 0,
+			"rescues": 0,
+			"soil_repair": 0,
+			"stolen": 0,
+			"structure_damage": 0,
+			"stump_collected": 0,
+			"stump_spawned": 1,
+			"weed_collected": 0,
+			"weed_spawned": 10
+		},
+		"milestones": [
+			{
+				"kind": "nightfall",
+				"tick": 360
+			},
+			{
+				"id": 0,
+				"kind": "invasion",
+				"tick": 400
+			},
+			{
+				"id": 1,
+				"kind": "animal_danger",
+				"tick": 613
+			},
+			{
+				"kind": "blueprint_dropped",
+				"pos": [
+					19,
+					10
+				],
+				"tick": 616
+			},
+			{
+				"kind": "early_clear",
+				"tick": 616
+			},
+			{
+				"id": "kennel",
+				"kind": "blueprint",
+				"pos": [
+					19,
+					10
+				],
+				"tick": 631
+			},
+			{
+				"item": "kennel_plan",
+				"kind": "item_collected",
+				"tick": 631
+			},
+			{
+				"kind": "dawn",
+				"tick": 631
+			}
+		],
+		"night_started_tick": 360,
+		"phase": "dawn",
+		"raiders": [
+			{
+				"can_see_keeper": true,
+				"id": 0,
+				"last_known_keeper_position": [
+					19,
+					9
+				],
+				"search_state": "追跡",
+				"sight_range": 6
+			}
+		],
+		"remaining_day": 0.0,
+		"remaining_night": 112.25,
+		"resources": {
+			"soil": 60,
+			"stone": 0,
+			"wood": 0
+		},
+		"score": {
+			"condition": 25,
+			"gold": 49,
+			"rating": 85,
+			"seconds": 67.75,
+			"time_bonus": 11,
+			"xp": 24
+		},
+		"seed": 17,
+		"sight_log": [
+			{
+				"id": 0,
+				"position": [
+					2,
+					5
+				],
+				"tick": 403,
+				"visible": true
+			},
+			{
+				"id": 0,
+				"position": [
+					2,
+					5
+				],
+				"tick": 404,
+				"visible": false
+			},
+			{
+				"id": 0,
+				"position": [
+					14,
+					9
+				],
+				"tick": 571,
+				"visible": true
+			}
+		],
+		"skill_log": [
+			{
+				"actor": "shiba_1",
+				"ready_tick": 604,
+				"skill": "bark",
+				"targets": [
+					0
+				],
+				"tick": 580,
+				"time": 145.0
+			},
+			{
+				"actor": "shiba_1",
+				"ready_tick": 628,
+				"skill": "bark",
+				"targets": [
+					0
+				],
+				"tick": 604,
+				"time": 151.0
+			}
+		],
+		"stage": 1,
+		"tick": 631,
+		"unavailable_next_day": [],
+		"unlocked_blueprints": [
+			"kennel"
+		]
+	},
+	"screenshots": {
+		"animal": {
+			"alert": "今夜の襲撃を退けた",
+			"camera": [
+				600.0,
+				357.0
+			],
+			"gold": 10,
+			"keeper_state": "free",
+			"phase": "defend",
+			"shop_level": "categories",
+			"shop_side": "home",
+			"tick": 616
+		},
+		"animal_detail": {
+			"alert": "",
+			"camera": [
+				600.0,
+				357.0
+			],
+			"gold": 10,
+			"keeper_state": "free",
+			"phase": "shop",
+			"shop_level": "categories",
+			"shop_side": "animals",
+			"tick": 0
+		},
+		"arrival": {
+			"alert": "",
+			"camera": [
+				600.0,
+				357.0
+			],
+			"gold": 40,
+			"keeper_state": "free",
+			"phase": "shop",
+			"shop_level": "categories",
+			"shop_side": "home",
+			"tick": 0
+		},
+		"categories": {
+			"alert": "",
+			"camera": [
+				600.0,
+				357.0
+			],
+			"gold": 40,
+			"keeper_state": "free",
+			"phase": "shop",
+			"shop_level": "categories",
+			"shop_side": "buy",
+			"tick": 0
+		},
+		"combat": {
+			"alert": "",
+			"camera": [
+				600.0,
+				357.0
+			],
+			"gold": 10,
+			"keeper_state": "free",
+			"phase": "defend",
+			"shop_level": "categories",
+			"shop_side": "home",
+			"tick": 403
+		},
+		"dawn": {
+			"alert": "",
+			"camera": [
+				600.0,
+				357.0
+			],
+			"gold": 70,
+			"keeper_state": "free",
+			"phase": "dawn",
+			"shop_level": "categories",
+			"shop_side": "home",
+			"tick": 631
+		},
+		"day": {
+			"alert": "",
+			"camera": [
+				600.0,
+				357.0
+			],
+			"gold": 10,
+			"keeper_state": "free",
+			"phase": "day",
+			"shop_level": "categories",
+			"shop_side": "home",
+			"tick": 0
+		},
+		"leave_market": {
+			"alert": "",
+			"camera": [
+				600.0,
+				357.0
+			],
+			"gold": 10,
+			"keeper_state": "free",
+			"phase": "shop",
+			"shop_level": "categories",
+			"shop_side": "home",
+			"tick": 0
+		},
+		"next_morning": {
+			"alert": "",
+			"camera": [
+				600.0,
+				357.0
+			],
+			"gold": 70,
+			"keeper_state": "free",
+			"phase": "shop",
+			"shop_level": "categories",
+			"shop_side": "home",
+			"tick": 0
+		},
+		"night_queue": {
+			"alert": "",
+			"camera": [
+				600.0,
+				357.0
+			],
+			"gold": 10,
+			"keeper_state": "free",
+			"phase": "defend",
+			"shop_level": "categories",
+			"shop_side": "home",
+			"tick": 360
+		},
+		"products": {
+			"alert": "",
+			"camera": [
+				600.0,
+				357.0
+			],
+			"gold": 40,
+			"keeper_state": "free",
+			"phase": "shop",
+			"shop_level": "list",
+			"shop_side": "buy",
+			"tick": 0
+		},
+		"purchase": {
+			"alert": "",
+			"camera": [
+				600.0,
+				357.0
+			],
+			"gold": 40,
+			"keeper_state": "free",
+			"phase": "shop",
+			"shop_level": "detail",
+			"shop_side": "buy",
+			"tick": 0
+		},
+		"queue": {
+			"alert": "",
+			"camera": [
+				600.0,
+				357.0
+			],
+			"gold": 10,
+			"keeper_state": "free",
+			"phase": "day",
+			"shop_level": "categories",
+			"shop_side": "home",
+			"tick": 0
+		},
+		"returned": {
+			"alert": "",
+			"camera": [
+				600.0,
+				357.0
+			],
+			"gold": 10,
+			"keeper_state": "free",
+			"phase": "shop",
+			"shop_level": "list",
+			"shop_side": "buy",
+			"tick": 0
+		},
+		"shop": {
+			"alert": "",
+			"camera": [
+				600.0,
+				357.0
+			],
+			"gold": 40,
+			"keeper_state": "free",
+			"phase": "shop",
+			"shop_level": "categories",
+			"shop_side": "home",
+			"tick": 0
+		},
+		"working": {
+			"alert": "",
+			"camera": [
+				600.0,
+				357.0
+			],
+			"gold": 10,
+			"keeper_state": "free",
+			"phase": "day",
+			"shop_level": "categories",
+			"shop_side": "home",
+			"tick": 21
+		}
+	},
+	"seed": 17
 }
