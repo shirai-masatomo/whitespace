@@ -31,6 +31,7 @@ func frame():
 	game._process(1.0/30.0)
 	await RenderingServer.frame_post_draw
 func capture(name: String):
+	game.refresh()
 	await frame()
 	check(root.get_texture().get_image().save_png(output+"/"+name+".png")==OK,"save "+name)
 	observations.captures[name]={"tick":game.world.tick,"speed":game.speed,"paused":game.world.paused,"keeper_pos":[game.world.keeper.pos.x,game.world.keeper.pos.y],"keeper_facing":game.world.keeper.get("facing",1),"dog_facing":game.world.animals[0].get("facing",1),"rest":game.world.Life.presentation(game.world),"zoom":game.camera.zoom.x,"selection":str(game.selected)}
@@ -52,6 +53,9 @@ func run():
 	game=load("res://game/main.tscn").instantiate();game.automated=true
 	root.add_child(game);await process_frame;game.set_process(false);game.automated=false
 	await reset_case()
+	game.camera.zoom=Vector2.ONE
+	await capture("native_scale")
+	game.camera.zoom=Vector2.ONE*1.5
 	await capture("characters")
 	await mouse(game.get_canvas_transform()*(game.keeper_pixel()+Vector2(0,-10)))
 	check(game.selected.get("kind")=="keeper","Keeper sprite click selects keeper")
