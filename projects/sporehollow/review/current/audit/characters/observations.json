@@ -1,5 +1,5 @@
 {
-  "asset_delivery_commit": "7e408375f19b86759fc614508fc3e5f413f67ff9",
+  "asset_delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
   "captures": {
     "all_animals": {
       "dog_facing": 1,
@@ -326,7 +326,7 @@
   ],
   "dirty": "False",
   "failures": 0,
-  "implementation_commit": "24ddf180c908d1b5035fc882fc0e3d197513918d",
+  "implementation_commit": "e13e16ed9477c92e4057d10b70d7025b2288908b",
   "method": "GPU rendering on private noninteractive Windows station; game-local InputEvent injection, no OS input",
   "motion": [
     {

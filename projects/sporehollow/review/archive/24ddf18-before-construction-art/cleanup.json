@@ -1,0 +1,400 @@
+[
+  {
+    "action": "archive",
+    "reason": "Previous evidence; not proof of current implementation",
+    "source": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\review\\current\\characters",
+    "category": "C",
+    "destination": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\review\\archive\\pre-input-art-b09a420\\characters"
+  },
+  {
+    "action": "archive",
+    "reason": "Previous evidence; not proof of current implementation",
+    "source": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\review\\current\\animal.png",
+    "category": "C",
+    "destination": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\review\\archive\\pre-input-art-b09a420\\animal.png"
+  },
+  {
+    "action": "archive",
+    "reason": "Previous evidence; not proof of current implementation",
+    "source": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\review\\current\\asset-receipt.json",
+    "category": "C",
+    "destination": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\review\\archive\\pre-input-art-b09a420\\asset-receipt.json"
+  },
+  {
+    "action": "archive",
+    "reason": "Previous evidence; not proof of current implementation",
+    "source": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\review\\current\\book_turn.png",
+    "category": "C",
+    "destination": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\review\\archive\\pre-input-art-b09a420\\book_turn.png"
+  },
+  {
+    "action": "archive",
+    "reason": "Previous evidence; not proof of current implementation",
+    "source": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\review\\current\\book-motion.gif",
+    "category": "C",
+    "destination": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\review\\archive\\pre-input-art-b09a420\\book-motion.gif"
+  },
+  {
+    "action": "archive",
+    "reason": "Previous evidence; not proof of current implementation",
+    "source": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\review\\current\\broken_lock.png",
+    "category": "C",
+    "destination": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\review\\archive\\pre-input-art-b09a420\\broken_lock.png"
+  },
+  {
+    "action": "archive",
+    "reason": "Previous evidence; not proof of current implementation",
+    "source": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\review\\current\\character-observation.json",
+    "category": "C",
+    "destination": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\review\\archive\\pre-input-art-b09a420\\character-observation.json"
+  },
+  {
+    "action": "archive",
+    "reason": "Previous evidence; not proof of current implementation",
+    "source": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\review\\current\\cleanup.json",
+    "category": "C",
+    "destination": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\review\\archive\\pre-input-art-b09a420\\cleanup.json"
+  },
+  {
+    "action": "archive",
+    "reason": "Previous evidence; not proof of current implementation",
+    "source": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\review\\current\\dawn.png",
+    "category": "C",
+    "destination": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\review\\archive\\pre-input-art-b09a420\\dawn.png"
+  },
+  {
+    "action": "archive",
+    "reason": "Previous evidence; not proof of current implementation",
+    "source": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\review\\current\\guidance-motion.gif",
+    "category": "C",
+    "destination": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\review\\archive\\pre-input-art-b09a420\\guidance-motion.gif"
+  },
+  {
+    "action": "archive",
+    "reason": "Previous evidence; not proof of current implementation",
+    "source": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\review\\current\\guidance.png",
+    "category": "C",
+    "destination": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\review\\archive\\pre-input-art-b09a420\\guidance.png"
+  },
+  {
+    "action": "archive",
+    "reason": "Previous evidence; not proof of current implementation",
+    "source": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\review\\current\\indoor_sleep.png",
+    "category": "C",
+    "destination": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\review\\archive\\pre-input-art-b09a420\\indoor_sleep.png"
+  },
+  {
+    "action": "archive",
+    "reason": "Previous evidence; not proof of current implementation",
+    "source": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\review\\current\\indoors.png",
+    "category": "C",
+    "destination": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\review\\archive\\pre-input-art-b09a420\\indoors.png"
+  },
+  {
+    "action": "archive",
+    "reason": "Previous evidence; not proof of current implementation",
+    "source": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\review\\current\\instructions.png",
+    "category": "C",
+    "destination": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\review\\archive\\pre-input-art-b09a420\\instructions.png"
+  },
+  {
+    "action": "archive",
+    "reason": "Previous evidence; not proof of current implementation",
+    "source": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\review\\current\\isolated-render.json",
+    "category": "C",
+    "destination": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\review\\archive\\pre-input-art-b09a420\\isolated-render.json"
+  },
+  {
+    "action": "archive",
+    "reason": "Previous evidence; not proof of current implementation",
+    "source": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\review\\current\\isolated-render.log",
+    "category": "C",
+    "destination": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\review\\archive\\pre-input-art-b09a420\\isolated-render.log"
+  },
+  {
+    "action": "archive",
+    "reason": "Previous evidence; not proof of current implementation",
+    "source": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\review\\current\\launch-build.json",
+    "category": "C",
+    "destination": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\review\\archive\\pre-input-art-b09a420\\launch-build.json"
+  },
+  {
+    "action": "archive",
+    "reason": "Previous evidence; not proof of current implementation",
+    "source": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\review\\current\\launch-validation.jsonl",
+    "category": "C",
+    "destination": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\review\\archive\\pre-input-art-b09a420\\launch-validation.jsonl"
+  },
+  {
+    "action": "archive",
+    "reason": "Previous evidence; not proof of current implementation",
+    "source": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\review\\current\\morning.png",
+    "category": "C",
+    "destination": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\review\\archive\\pre-input-art-b09a420\\morning.png"
+  },
+  {
+    "action": "archive",
+    "reason": "Previous evidence; not proof of current implementation",
+    "source": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\review\\current\\motion-delivery-receipt.json",
+    "category": "C",
+    "destination": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\review\\archive\\pre-input-art-b09a420\\motion-delivery-receipt.json"
+  },
+  {
+    "action": "archive",
+    "reason": "Previous evidence; not proof of current implementation",
+    "source": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\review\\current\\next_morning.png",
+    "category": "C",
+    "destination": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\review\\archive\\pre-input-art-b09a420\\next_morning.png"
+  },
+  {
+    "action": "archive",
+    "reason": "Previous evidence; not proof of current implementation",
+    "source": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\review\\current\\PACKET.md",
+    "category": "C",
+    "destination": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\review\\archive\\pre-input-art-b09a420\\PACKET.md"
+  },
+  {
+    "action": "archive",
+    "reason": "Previous evidence; not proof of current implementation",
+    "source": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\review\\current\\paused_queue.png",
+    "category": "C",
+    "destination": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\review\\archive\\pre-input-art-b09a420\\paused_queue.png"
+  },
+  {
+    "action": "archive",
+    "reason": "Previous evidence; not proof of current implementation",
+    "source": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\review\\current\\queue_motion.png",
+    "category": "C",
+    "destination": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\review\\archive\\pre-input-art-b09a420\\queue_motion.png"
+  },
+  {
+    "action": "archive",
+    "reason": "Previous evidence; not proof of current implementation",
+    "source": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\review\\current\\queue-motion.gif",
+    "category": "C",
+    "destination": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\review\\archive\\pre-input-art-b09a420\\queue-motion.gif"
+  },
+  {
+    "action": "archive",
+    "reason": "Previous evidence; not proof of current implementation",
+    "source": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\review\\current\\shop_detail.png",
+    "category": "C",
+    "destination": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\review\\archive\\pre-input-art-b09a420\\shop_detail.png"
+  },
+  {
+    "action": "archive",
+    "reason": "Previous evidence; not proof of current implementation",
+    "source": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\review\\current\\shop_products.png",
+    "category": "C",
+    "destination": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\review\\archive\\pre-input-art-b09a420\\shop_products.png"
+  },
+  {
+    "action": "archive",
+    "reason": "Previous evidence; not proof of current implementation",
+    "source": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\review\\current\\shop.png",
+    "category": "C",
+    "destination": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\review\\archive\\pre-input-art-b09a420\\shop.png"
+  },
+  {
+    "action": "archive",
+    "reason": "Previous evidence; not proof of current implementation",
+    "source": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\review\\current\\stage1-observation.json",
+    "category": "C",
+    "destination": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\review\\archive\\pre-input-art-b09a420\\stage1-observation.json"
+  },
+  {
+    "action": "archive",
+    "reason": "Previous evidence; not proof of current implementation",
+    "source": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\review\\current\\validation-launches.jsonl",
+    "category": "C",
+    "destination": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\review\\archive\\pre-input-art-b09a420\\validation-launches.jsonl"
+  },
+  {
+    "action": "archive",
+    "reason": "Original or superseded art preserved, no runtime reference",
+    "source": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\assets\\ui\\shiba-source.png",
+    "category": "B",
+    "destination": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\assets\\reference\\legacy-ui\\shiba-source.png"
+  },
+  {
+    "action": "archive",
+    "reason": "Original or superseded art preserved, no runtime reference",
+    "source": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\assets\\ui\\market-stall.png",
+    "category": "B",
+    "destination": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\assets\\reference\\legacy-ui\\market-stall.png"
+  },
+  {
+    "action": "archive",
+    "reason": "Original or superseded art preserved, no runtime reference",
+    "source": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\assets\\ui\\book-open.png",
+    "category": "B",
+    "destination": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\assets\\reference\\legacy-ui\\book-open.png"
+  },
+  {
+    "action": "delete",
+    "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\assets\\ui\\shiba-key.gdshader",
+    "category": "E",
+    "reason": "Unreferenced retired shader, original-image import or superseded interactive review fixture"
+  },
+  {
+    "action": "delete",
+    "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\assets\\ui\\shiba-key.gdshader.uid",
+    "category": "E",
+    "reason": "Unreferenced retired shader, original-image import or superseded interactive review fixture"
+  },
+  {
+    "action": "delete",
+    "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\assets\\ui\\shiba-source.png.import",
+    "category": "E",
+    "reason": "Unreferenced retired shader, original-image import or superseded interactive review fixture"
+  },
+  {
+    "action": "delete",
+    "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\assets\\ui\\market-stall.png.import",
+    "category": "E",
+    "reason": "Unreferenced retired shader, original-image import or superseded interactive review fixture"
+  },
+  {
+    "action": "delete",
+    "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\assets\\ui\\book-open.png.import",
+    "category": "E",
+    "reason": "Unreferenced retired shader, original-image import or superseded interactive review fixture"
+  },
+  {
+    "action": "delete",
+    "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\tests\\visual.gd",
+    "category": "E",
+    "reason": "Unreferenced retired shader, original-image import or superseded interactive review fixture"
+  },
+  {
+    "action": "delete",
+    "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\tests\\visual.gd.uid",
+    "category": "E",
+    "reason": "Unreferenced retired shader, original-image import or superseded interactive review fixture"
+  },
+  {
+    "action": "delete",
+    "path": "C:\\Users\\masat\\Documents\\codex_test\\update_ui.py",
+    "category": "D",
+    "reason": "One-time patch helper created by this task; applied source is in Git"
+  },
+  {
+    "action": "delete",
+    "path": "C:\\Users\\masat\\Documents\\codex_test\\integrate_art.py",
+    "category": "D",
+    "reason": "One-time patch helper created by this task; applied source is in Git"
+  },
+  {
+    "action": "delete",
+    "path": "C:\\Users\\masat\\Documents\\codex_test\\patch_art_runtime.py",
+    "category": "D",
+    "reason": "One-time patch helper created by this task; applied source is in Git"
+  },
+  {
+    "action": "delete",
+    "path": "C:\\Users\\masat\\Documents\\codex_test\\patch_book.py",
+    "category": "D",
+    "reason": "One-time patch helper created by this task; applied source is in Git"
+  },
+  {
+    "action": "delete",
+    "path": "C:\\Users\\masat\\Documents\\codex_test\\patch_walls.py",
+    "category": "D",
+    "reason": "One-time patch helper created by this task; applied source is in Git"
+  },
+  {
+    "action": "delete",
+    "path": "C:\\Users\\masat\\Documents\\codex_test\\finalize_presentation.py",
+    "category": "D",
+    "reason": "One-time patch helper created by this task; applied source is in Git"
+  },
+  {
+    "action": "delete",
+    "path": "C:\\Users\\masat\\Documents\\codex_test\\update_docs.py",
+    "category": "D",
+    "reason": "One-time patch helper created by this task; applied source is in Git"
+  },
+  {
+    "action": "delete",
+    "path": "C:\\Users\\masat\\Documents\\codex_test\\cleanup_sources.py",
+    "category": "D",
+    "reason": "One-time patch helper created by this task; applied source is in Git"
+  },
+  {
+    "category": "D",
+    "reason": "Superseded generated validation output; final matching build and evidence retained",
+    "source": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\artifacts\\validation\\20261004-205242-935",
+    "bytes": 122175260.0,
+    "action": "delete"
+  },
+  {
+    "category": "D",
+    "reason": "Superseded generated validation output; final matching build and evidence retained",
+    "source": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\artifacts\\validation\\20261004-210925-784",
+    "bytes": 3316090.0,
+    "action": "delete"
+  },
+  {
+    "category": "D",
+    "reason": "Superseded generated validation output; final matching build and evidence retained",
+    "source": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\artifacts\\validation\\20261004-211230-010",
+    "bytes": 3290496.0,
+    "action": "delete"
+  },
+  {
+    "category": "D",
+    "reason": "Superseded generated validation output; final matching build and evidence retained",
+    "source": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\artifacts\\validation\\20261004-211356-281",
+    "bytes": 3291107.0,
+    "action": "delete"
+  },
+  {
+    "category": "D",
+    "reason": "Superseded generated validation output; final matching build and evidence retained",
+    "source": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\artifacts\\validation\\20261004-211416-374",
+    "bytes": 3291754.0,
+    "action": "delete"
+  },
+  {
+    "category": "D",
+    "reason": "Superseded generated validation output; final matching build and evidence retained",
+    "source": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\artifacts\\validation\\20261004-211548-244",
+    "bytes": 3479890.0,
+    "action": "delete"
+  },
+  {
+    "category": "D",
+    "reason": "Superseded generated validation output; final matching build and evidence retained",
+    "source": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\artifacts\\validation\\20261004-212046-733",
+    "bytes": 122441414.0,
+    "action": "delete"
+  },
+  {
+    "category": "D",
+    "reason": "Superseded generated validation output; final matching build and evidence retained",
+    "source": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\artifacts\\validation\\20261004-212616-945",
+    "bytes": 3291900.0,
+    "action": "delete"
+  },
+  {
+    "category": "D",
+    "reason": "Superseded generated validation output; final matching build and evidence retained",
+    "source": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\artifacts\\isolated\\20261004-211622-846",
+    "bytes": 5858698.0,
+    "action": "delete"
+  },
+  {
+    "category": "D",
+    "reason": "Superseded generated validation output; final matching build and evidence retained",
+    "source": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\artifacts\\isolated\\20261004-211807-633",
+    "bytes": 6558514.0,
+    "action": "delete"
+  },
+  {
+    "category": "D",
+    "reason": "Superseded generated validation output; final matching build and evidence retained",
+    "source": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\artifacts\\isolated\\20261004-211849-898",
+    "bytes": 29585625.0,
+    "action": "delete"
+  }
+]

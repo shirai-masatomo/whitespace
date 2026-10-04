@@ -6079,5 +6079,11 @@
       "runtime_reference": false,
       "hash_in_manifest": false
     }
-  ]
+  ],
+  "verification": {
+    "implementation_commit": "e13e16ed9477c92e4057d10b70d7025b2288908b",
+    "manifest_hashes": "All 285 referenced PNGs match",
+    "render_evidence": "media-index.json",
+    "scope": "All connection masks and representative actors/UI states rendered; not every action frame manually inspected."
+  }
 }

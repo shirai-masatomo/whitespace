@@ -1,24 +1,24 @@
 {
-  "parent_pid": 30360,
-  "executable": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\.tools\\Godot_v4.7.2-stable_win64.exe",
-  "end_utc": "2026-10-04T12:34:06.4551892Z",
-  "implementation_commit": "24ddf180c908d1b5035fc882fc0e3d197513918d",
-  "data_root": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\artifacts\\isolated\\20261004-213328-431/user-data",
-  "asset_delivery_commit": "7e408375f19b86759fc614508fc3e5f413f67ff9",
+  "implementation_commit": "e13e16ed9477c92e4057d10b70d7025b2288908b",
+  "start_utc": "2026-10-04T12:50:00.8704236Z",
   "dirty": false,
   "result": {
-    "PID": 35332,
-    "ThreadID": 18848,
+    "PID": 23020,
+    "ThreadID": 43020,
     "ExitCode": 0,
     "OwnedWindowCount": 2,
     "Station": "Service-0x0-3ba69$",
-    "Desktop": "Render_5fc76358eadb4e64bfef0df8244dff85",
-    "ObservedDesktop": "Render_5fc76358eadb4e64bfef0df8244dff85",
+    "Desktop": "Render_8fa54aa5edb841a5ab59cb54458a1b0e",
+    "ObservedDesktop": "Render_8fa54aa5edb841a5ab59cb54458a1b0e",
     "NonInteractive": true,
     "DesktopMatched": true,
     "TimedOut": false
   },
-  "command": "\"C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\.tools\\Godot_v4.7.2-stable_win64.exe\" --path \"C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\" --audio-driver Dummy --rendering-method gl_compatibility --max-fps 30 --resolution 1280x800 --log-file \"C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\artifacts\\isolated\\20261004-213328-431/render.log\" --script tests/visual_characters.gd -- --isolated-review --output=\"C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\artifacts\\isolated\\20261004-213328-431\"",
   "purpose": "characters",
-  "start_utc": "2026-10-04T12:33:28.8425178Z"
+  "command": "\"C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\.tools\\Godot_v4.7.2-stable_win64.exe\" --path \"C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\" --audio-driver Dummy --rendering-method gl_compatibility --max-fps 30 --resolution 1280x800 --log-file \"C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\artifacts\\isolated\\20261004-215000-071/render.log\" --script tests/visual_characters.gd -- --isolated-review --output=\"C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\artifacts\\isolated\\20261004-215000-071\"",
+  "executable": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\.tools\\Godot_v4.7.2-stable_win64.exe",
+  "asset_delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+  "end_utc": "2026-10-04T12:50:39.1806563Z",
+  "parent_pid": 34596,
+  "data_root": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\artifacts\\isolated\\20261004-215000-071/user-data"
 }

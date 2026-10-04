@@ -1,5 +1,5 @@
 {
-  "asset_commit": "7e408375f19b86759fc614508fc3e5f413f67ff9",
+  "asset_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
   "captures": [
     {
       "animal_id": -1,
@@ -390,7 +390,7 @@
     },
     {
       "animal_id": 1,
-      "book": "closing",
+      "book": "",
       "file": "book_close_03.png",
       "group": -1,
       "jobs": [],
@@ -1350,5 +1350,5 @@
       "tick": 0
     }
   ],
-  "implementation_commit": "24ddf180c908d1b5035fc882fc0e3d197513918d"
+  "implementation_commit": "e13e16ed9477c92e4057d10b70d7025b2288908b"
 }

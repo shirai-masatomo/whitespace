@@ -1,0 +1,1097 @@
+{
+  "frames": [
+    {
+      "clock": 0.1,
+      "file": "arrival_000.png",
+      "jobs": [],
+      "phase": "shop",
+      "tick": 0
+    },
+    {
+      "clock": 0.266666666666667,
+      "file": "arrival_003.png",
+      "jobs": [],
+      "phase": "shop",
+      "tick": 0
+    },
+    {
+      "clock": 0.433333333333333,
+      "file": "arrival_006.png",
+      "jobs": [],
+      "phase": "shop",
+      "tick": 0
+    },
+    {
+      "clock": 0.6,
+      "file": "arrival_009.png",
+      "jobs": [],
+      "phase": "shop",
+      "tick": 0
+    },
+    {
+      "clock": 0.766666666666667,
+      "file": "arrival_012.png",
+      "jobs": [],
+      "phase": "shop",
+      "tick": 0
+    },
+    {
+      "clock": 0.933333333333333,
+      "file": "arrival_015.png",
+      "jobs": [],
+      "phase": "shop",
+      "tick": 0
+    },
+    {
+      "clock": 1.1,
+      "file": "arrival_018.png",
+      "jobs": [],
+      "phase": "shop",
+      "tick": 0
+    },
+    {
+      "clock": 1.26666666666667,
+      "file": "arrival_021.png",
+      "jobs": [],
+      "phase": "shop",
+      "tick": 0
+    },
+    {
+      "clock": 1.43333333333333,
+      "file": "arrival_024.png",
+      "jobs": [],
+      "phase": "shop",
+      "tick": 0
+    },
+    {
+      "clock": 1.6,
+      "file": "arrival_027.png",
+      "jobs": [],
+      "phase": "shop",
+      "tick": 0
+    },
+    {
+      "clock": 1.76666666666667,
+      "file": "arrival_030.png",
+      "jobs": [],
+      "phase": "shop",
+      "tick": 0
+    },
+    {
+      "clock": 1.93333333333334,
+      "file": "arrival_033.png",
+      "jobs": [],
+      "phase": "shop",
+      "tick": 0
+    },
+    {
+      "clock": 2.1,
+      "file": "arrival_036.png",
+      "jobs": [],
+      "phase": "shop",
+      "tick": 0
+    },
+    {
+      "clock": 2.26666666666667,
+      "file": "arrival_039.png",
+      "jobs": [],
+      "phase": "shop",
+      "tick": 0
+    },
+    {
+      "clock": 2.43333333333333,
+      "file": "arrival_042.png",
+      "jobs": [],
+      "phase": "shop",
+      "tick": 0
+    },
+    {
+      "clock": 2.6,
+      "file": "arrival_045.png",
+      "jobs": [],
+      "phase": "shop",
+      "tick": 0
+    },
+    {
+      "clock": 2.76666666666667,
+      "file": "arrival_048.png",
+      "jobs": [],
+      "phase": "shop",
+      "tick": 0
+    },
+    {
+      "clock": 2.93333333333333,
+      "file": "arrival_051.png",
+      "jobs": [],
+      "phase": "shop",
+      "tick": 0
+    },
+    {
+      "clock": 3.1,
+      "file": "arrival_054.png",
+      "jobs": [],
+      "phase": "shop",
+      "tick": 0
+    },
+    {
+      "clock": 3.26666666666666,
+      "file": "arrival_057.png",
+      "jobs": [],
+      "phase": "shop",
+      "tick": 0
+    },
+    {
+      "clock": 3.43333333333333,
+      "file": "arrival_060.png",
+      "jobs": [],
+      "phase": "shop",
+      "tick": 0
+    },
+    {
+      "clock": 3.6,
+      "file": "arrival_063.png",
+      "jobs": [],
+      "phase": "shop",
+      "tick": 0
+    },
+    {
+      "clock": 3.73333333333333,
+      "file": "waiting_cart.png",
+      "jobs": [],
+      "phase": "shop",
+      "tick": 0
+    },
+    {
+      "clock": 3.83333333333333,
+      "file": "departure_000.png",
+      "jobs": [],
+      "phase": "day",
+      "tick": 0
+    },
+    {
+      "clock": 4.0,
+      "file": "departure_003.png",
+      "jobs": [],
+      "phase": "day",
+      "tick": 1
+    },
+    {
+      "clock": 4.16666666666666,
+      "file": "departure_006.png",
+      "jobs": [],
+      "phase": "day",
+      "tick": 1
+    },
+    {
+      "clock": 4.33333333333333,
+      "file": "departure_009.png",
+      "jobs": [],
+      "phase": "day",
+      "tick": 2
+    },
+    {
+      "clock": 4.49999999999999,
+      "file": "departure_012.png",
+      "jobs": [],
+      "phase": "day",
+      "tick": 3
+    },
+    {
+      "clock": 4.66666666666666,
+      "file": "departure_015.png",
+      "jobs": [],
+      "phase": "day",
+      "tick": 3
+    },
+    {
+      "clock": 4.83333333333333,
+      "file": "departure_018.png",
+      "jobs": [],
+      "phase": "day",
+      "tick": 4
+    },
+    {
+      "clock": 4.99999999999999,
+      "file": "departure_021.png",
+      "jobs": [],
+      "phase": "day",
+      "tick": 5
+    },
+    {
+      "clock": 5.13333333333332,
+      "file": "queue_before.png",
+      "jobs": [
+        {
+          "animal_id": -1,
+          "id": 1,
+          "kind": "wall",
+          "pos": "(8, 4)",
+          "reserved": 10,
+          "resource": "soil",
+          "started": false,
+          "state": "pending"
+        },
+        {
+          "animal_id": -1,
+          "id": 2,
+          "kind": "wall",
+          "pos": "(16, 4)",
+          "reserved": 10,
+          "resource": "soil",
+          "started": false,
+          "state": "pending"
+        },
+        {
+          "animal_id": -1,
+          "id": 3,
+          "kind": "wall",
+          "pos": "(8, 6)",
+          "reserved": 10,
+          "resource": "soil",
+          "started": false,
+          "state": "pending"
+        }
+      ],
+      "phase": "day",
+      "tick": 5
+    },
+    {
+      "clock": 5.19999999999999,
+      "file": "queue_drag_00.png",
+      "jobs": [
+        {
+          "animal_id": -1,
+          "id": 1,
+          "kind": "wall",
+          "pos": "(8, 4)",
+          "reserved": 10,
+          "resource": "soil",
+          "started": false,
+          "state": "pending"
+        },
+        {
+          "animal_id": -1,
+          "id": 2,
+          "kind": "wall",
+          "pos": "(16, 4)",
+          "reserved": 10,
+          "resource": "soil",
+          "started": false,
+          "state": "pending"
+        },
+        {
+          "animal_id": -1,
+          "id": 3,
+          "kind": "wall",
+          "pos": "(8, 6)",
+          "reserved": 10,
+          "resource": "soil",
+          "started": false,
+          "state": "pending"
+        }
+      ],
+      "phase": "day",
+      "tick": 5
+    },
+    {
+      "clock": 5.26666666666666,
+      "file": "queue_drag_01.png",
+      "jobs": [
+        {
+          "animal_id": -1,
+          "id": 1,
+          "kind": "wall",
+          "pos": "(8, 4)",
+          "reserved": 10,
+          "resource": "soil",
+          "started": false,
+          "state": "pending"
+        },
+        {
+          "animal_id": -1,
+          "id": 2,
+          "kind": "wall",
+          "pos": "(16, 4)",
+          "reserved": 10,
+          "resource": "soil",
+          "started": false,
+          "state": "pending"
+        },
+        {
+          "animal_id": -1,
+          "id": 3,
+          "kind": "wall",
+          "pos": "(8, 6)",
+          "reserved": 10,
+          "resource": "soil",
+          "started": false,
+          "state": "pending"
+        }
+      ],
+      "phase": "day",
+      "tick": 5
+    },
+    {
+      "clock": 5.33333333333332,
+      "file": "queue_drag_02.png",
+      "jobs": [
+        {
+          "animal_id": -1,
+          "id": 1,
+          "kind": "wall",
+          "pos": "(8, 4)",
+          "reserved": 10,
+          "resource": "soil",
+          "started": false,
+          "state": "pending"
+        },
+        {
+          "animal_id": -1,
+          "id": 2,
+          "kind": "wall",
+          "pos": "(16, 4)",
+          "reserved": 10,
+          "resource": "soil",
+          "started": false,
+          "state": "pending"
+        },
+        {
+          "animal_id": -1,
+          "id": 3,
+          "kind": "wall",
+          "pos": "(8, 6)",
+          "reserved": 10,
+          "resource": "soil",
+          "started": false,
+          "state": "pending"
+        }
+      ],
+      "phase": "day",
+      "tick": 5
+    },
+    {
+      "clock": 5.39999999999999,
+      "file": "queue_drag_03.png",
+      "jobs": [
+        {
+          "animal_id": -1,
+          "id": 1,
+          "kind": "wall",
+          "pos": "(8, 4)",
+          "reserved": 10,
+          "resource": "soil",
+          "started": false,
+          "state": "pending"
+        },
+        {
+          "animal_id": -1,
+          "id": 2,
+          "kind": "wall",
+          "pos": "(16, 4)",
+          "reserved": 10,
+          "resource": "soil",
+          "started": false,
+          "state": "pending"
+        },
+        {
+          "animal_id": -1,
+          "id": 3,
+          "kind": "wall",
+          "pos": "(8, 6)",
+          "reserved": 10,
+          "resource": "soil",
+          "started": false,
+          "state": "pending"
+        }
+      ],
+      "phase": "day",
+      "tick": 5
+    },
+    {
+      "clock": 5.46666666666666,
+      "file": "queue_drag_04.png",
+      "jobs": [
+        {
+          "animal_id": -1,
+          "id": 1,
+          "kind": "wall",
+          "pos": "(8, 4)",
+          "reserved": 10,
+          "resource": "soil",
+          "started": false,
+          "state": "pending"
+        },
+        {
+          "animal_id": -1,
+          "id": 2,
+          "kind": "wall",
+          "pos": "(16, 4)",
+          "reserved": 10,
+          "resource": "soil",
+          "started": false,
+          "state": "pending"
+        },
+        {
+          "animal_id": -1,
+          "id": 3,
+          "kind": "wall",
+          "pos": "(8, 6)",
+          "reserved": 10,
+          "resource": "soil",
+          "started": false,
+          "state": "pending"
+        }
+      ],
+      "phase": "day",
+      "tick": 5
+    },
+    {
+      "clock": 5.53333333333332,
+      "file": "queue_drag_05.png",
+      "jobs": [
+        {
+          "animal_id": -1,
+          "id": 1,
+          "kind": "wall",
+          "pos": "(8, 4)",
+          "reserved": 10,
+          "resource": "soil",
+          "started": false,
+          "state": "pending"
+        },
+        {
+          "animal_id": -1,
+          "id": 2,
+          "kind": "wall",
+          "pos": "(16, 4)",
+          "reserved": 10,
+          "resource": "soil",
+          "started": false,
+          "state": "pending"
+        },
+        {
+          "animal_id": -1,
+          "id": 3,
+          "kind": "wall",
+          "pos": "(8, 6)",
+          "reserved": 10,
+          "resource": "soil",
+          "started": false,
+          "state": "pending"
+        }
+      ],
+      "phase": "day",
+      "tick": 5
+    },
+    {
+      "clock": 5.59999999999999,
+      "file": "queue_drag_06.png",
+      "jobs": [
+        {
+          "animal_id": -1,
+          "id": 1,
+          "kind": "wall",
+          "pos": "(8, 4)",
+          "reserved": 10,
+          "resource": "soil",
+          "started": false,
+          "state": "pending"
+        },
+        {
+          "animal_id": -1,
+          "id": 2,
+          "kind": "wall",
+          "pos": "(16, 4)",
+          "reserved": 10,
+          "resource": "soil",
+          "started": false,
+          "state": "pending"
+        },
+        {
+          "animal_id": -1,
+          "id": 3,
+          "kind": "wall",
+          "pos": "(8, 6)",
+          "reserved": 10,
+          "resource": "soil",
+          "started": false,
+          "state": "pending"
+        }
+      ],
+      "phase": "day",
+      "tick": 5
+    },
+    {
+      "clock": 5.66666666666666,
+      "file": "queue_drag_07.png",
+      "jobs": [
+        {
+          "animal_id": -1,
+          "id": 1,
+          "kind": "wall",
+          "pos": "(8, 4)",
+          "reserved": 10,
+          "resource": "soil",
+          "started": false,
+          "state": "pending"
+        },
+        {
+          "animal_id": -1,
+          "id": 2,
+          "kind": "wall",
+          "pos": "(16, 4)",
+          "reserved": 10,
+          "resource": "soil",
+          "started": false,
+          "state": "pending"
+        },
+        {
+          "animal_id": -1,
+          "id": 3,
+          "kind": "wall",
+          "pos": "(8, 6)",
+          "reserved": 10,
+          "resource": "soil",
+          "started": false,
+          "state": "pending"
+        }
+      ],
+      "phase": "day",
+      "tick": 5
+    },
+    {
+      "clock": 5.73333333333332,
+      "file": "queue_drag_08.png",
+      "jobs": [
+        {
+          "animal_id": -1,
+          "id": 1,
+          "kind": "wall",
+          "pos": "(8, 4)",
+          "reserved": 10,
+          "resource": "soil",
+          "started": false,
+          "state": "pending"
+        },
+        {
+          "animal_id": -1,
+          "id": 2,
+          "kind": "wall",
+          "pos": "(16, 4)",
+          "reserved": 10,
+          "resource": "soil",
+          "started": false,
+          "state": "pending"
+        },
+        {
+          "animal_id": -1,
+          "id": 3,
+          "kind": "wall",
+          "pos": "(8, 6)",
+          "reserved": 10,
+          "resource": "soil",
+          "started": false,
+          "state": "pending"
+        }
+      ],
+      "phase": "day",
+      "tick": 5
+    },
+    {
+      "clock": 5.79999999999999,
+      "file": "queue_drag_09.png",
+      "jobs": [
+        {
+          "animal_id": -1,
+          "id": 1,
+          "kind": "wall",
+          "pos": "(8, 4)",
+          "reserved": 10,
+          "resource": "soil",
+          "started": false,
+          "state": "pending"
+        },
+        {
+          "animal_id": -1,
+          "id": 2,
+          "kind": "wall",
+          "pos": "(16, 4)",
+          "reserved": 10,
+          "resource": "soil",
+          "started": false,
+          "state": "pending"
+        },
+        {
+          "animal_id": -1,
+          "id": 3,
+          "kind": "wall",
+          "pos": "(8, 6)",
+          "reserved": 10,
+          "resource": "soil",
+          "started": false,
+          "state": "pending"
+        }
+      ],
+      "phase": "day",
+      "tick": 5
+    },
+    {
+      "clock": 5.86666666666666,
+      "file": "queue_after.png",
+      "jobs": [
+        {
+          "animal_id": -1,
+          "id": 3,
+          "kind": "wall",
+          "pos": "(8, 6)",
+          "reserved": 10,
+          "resource": "soil",
+          "started": false,
+          "state": "pending"
+        },
+        {
+          "animal_id": -1,
+          "id": 1,
+          "kind": "wall",
+          "pos": "(8, 4)",
+          "reserved": 10,
+          "resource": "soil",
+          "started": false,
+          "state": "pending"
+        },
+        {
+          "animal_id": -1,
+          "id": 2,
+          "kind": "wall",
+          "pos": "(16, 4)",
+          "reserved": 10,
+          "resource": "soil",
+          "started": false,
+          "state": "pending"
+        }
+      ],
+      "phase": "day",
+      "tick": 5
+    },
+    {
+      "clock": 5.93333333333332,
+      "file": "operation_drag_00.png",
+      "jobs": [
+        {
+          "animal_id": -1,
+          "id": 3,
+          "kind": "wall",
+          "pos": "(8, 6)",
+          "reserved": 10,
+          "resource": "soil",
+          "started": false,
+          "state": "pending"
+        },
+        {
+          "animal_id": -1,
+          "id": 1,
+          "kind": "wall",
+          "pos": "(8, 4)",
+          "reserved": 10,
+          "resource": "soil",
+          "started": false,
+          "state": "pending"
+        },
+        {
+          "animal_id": -1,
+          "id": 2,
+          "kind": "wall",
+          "pos": "(16, 4)",
+          "reserved": 10,
+          "resource": "soil",
+          "started": false,
+          "state": "pending"
+        }
+      ],
+      "phase": "day",
+      "tick": 5
+    },
+    {
+      "clock": 5.99999999999999,
+      "file": "operation_drag_01.png",
+      "jobs": [
+        {
+          "animal_id": -1,
+          "id": 3,
+          "kind": "wall",
+          "pos": "(8, 6)",
+          "reserved": 10,
+          "resource": "soil",
+          "started": false,
+          "state": "pending"
+        },
+        {
+          "animal_id": -1,
+          "id": 1,
+          "kind": "wall",
+          "pos": "(8, 4)",
+          "reserved": 10,
+          "resource": "soil",
+          "started": false,
+          "state": "pending"
+        },
+        {
+          "animal_id": -1,
+          "id": 2,
+          "kind": "wall",
+          "pos": "(16, 4)",
+          "reserved": 10,
+          "resource": "soil",
+          "started": false,
+          "state": "pending"
+        }
+      ],
+      "phase": "day",
+      "tick": 5
+    },
+    {
+      "clock": 6.06666666666665,
+      "file": "operation_drag_02.png",
+      "jobs": [
+        {
+          "animal_id": -1,
+          "id": 3,
+          "kind": "wall",
+          "pos": "(8, 6)",
+          "reserved": 10,
+          "resource": "soil",
+          "started": false,
+          "state": "pending"
+        },
+        {
+          "animal_id": -1,
+          "id": 1,
+          "kind": "wall",
+          "pos": "(8, 4)",
+          "reserved": 10,
+          "resource": "soil",
+          "started": false,
+          "state": "pending"
+        },
+        {
+          "animal_id": -1,
+          "id": 2,
+          "kind": "wall",
+          "pos": "(16, 4)",
+          "reserved": 10,
+          "resource": "soil",
+          "started": false,
+          "state": "pending"
+        }
+      ],
+      "phase": "day",
+      "tick": 5
+    },
+    {
+      "clock": 6.13333333333332,
+      "file": "operation_drag_03.png",
+      "jobs": [
+        {
+          "animal_id": -1,
+          "id": 3,
+          "kind": "wall",
+          "pos": "(8, 6)",
+          "reserved": 10,
+          "resource": "soil",
+          "started": false,
+          "state": "pending"
+        },
+        {
+          "animal_id": -1,
+          "id": 1,
+          "kind": "wall",
+          "pos": "(8, 4)",
+          "reserved": 10,
+          "resource": "soil",
+          "started": false,
+          "state": "pending"
+        },
+        {
+          "animal_id": -1,
+          "id": 2,
+          "kind": "wall",
+          "pos": "(16, 4)",
+          "reserved": 10,
+          "resource": "soil",
+          "started": false,
+          "state": "pending"
+        }
+      ],
+      "phase": "day",
+      "tick": 5
+    },
+    {
+      "clock": 6.19999999999999,
+      "file": "operation_drag_04.png",
+      "jobs": [
+        {
+          "animal_id": -1,
+          "id": 3,
+          "kind": "wall",
+          "pos": "(8, 6)",
+          "reserved": 10,
+          "resource": "soil",
+          "started": false,
+          "state": "pending"
+        },
+        {
+          "animal_id": -1,
+          "id": 1,
+          "kind": "wall",
+          "pos": "(8, 4)",
+          "reserved": 10,
+          "resource": "soil",
+          "started": false,
+          "state": "pending"
+        },
+        {
+          "animal_id": -1,
+          "id": 2,
+          "kind": "wall",
+          "pos": "(16, 4)",
+          "reserved": 10,
+          "resource": "soil",
+          "started": false,
+          "state": "pending"
+        }
+      ],
+      "phase": "day",
+      "tick": 5
+    },
+    {
+      "clock": 6.26666666666665,
+      "file": "operation_drag_05.png",
+      "jobs": [
+        {
+          "animal_id": -1,
+          "id": 3,
+          "kind": "wall",
+          "pos": "(8, 6)",
+          "reserved": 10,
+          "resource": "soil",
+          "started": false,
+          "state": "pending"
+        },
+        {
+          "animal_id": -1,
+          "id": 1,
+          "kind": "wall",
+          "pos": "(8, 4)",
+          "reserved": 10,
+          "resource": "soil",
+          "started": false,
+          "state": "pending"
+        },
+        {
+          "animal_id": -1,
+          "id": 2,
+          "kind": "wall",
+          "pos": "(16, 4)",
+          "reserved": 10,
+          "resource": "soil",
+          "started": false,
+          "state": "pending"
+        }
+      ],
+      "phase": "day",
+      "tick": 5
+    },
+    {
+      "clock": 6.33333333333332,
+      "file": "operation_drag_06.png",
+      "jobs": [
+        {
+          "animal_id": -1,
+          "id": 3,
+          "kind": "wall",
+          "pos": "(8, 6)",
+          "reserved": 10,
+          "resource": "soil",
+          "started": false,
+          "state": "pending"
+        },
+        {
+          "animal_id": -1,
+          "id": 1,
+          "kind": "wall",
+          "pos": "(8, 4)",
+          "reserved": 10,
+          "resource": "soil",
+          "started": false,
+          "state": "pending"
+        },
+        {
+          "animal_id": -1,
+          "id": 2,
+          "kind": "wall",
+          "pos": "(16, 4)",
+          "reserved": 10,
+          "resource": "soil",
+          "started": false,
+          "state": "pending"
+        }
+      ],
+      "phase": "day",
+      "tick": 5
+    },
+    {
+      "clock": 6.39999999999999,
+      "file": "operation_drag_07.png",
+      "jobs": [
+        {
+          "animal_id": -1,
+          "id": 3,
+          "kind": "wall",
+          "pos": "(8, 6)",
+          "reserved": 10,
+          "resource": "soil",
+          "started": false,
+          "state": "pending"
+        },
+        {
+          "animal_id": -1,
+          "id": 1,
+          "kind": "wall",
+          "pos": "(8, 4)",
+          "reserved": 10,
+          "resource": "soil",
+          "started": false,
+          "state": "pending"
+        },
+        {
+          "animal_id": -1,
+          "id": 2,
+          "kind": "wall",
+          "pos": "(16, 4)",
+          "reserved": 10,
+          "resource": "soil",
+          "started": false,
+          "state": "pending"
+        }
+      ],
+      "phase": "day",
+      "tick": 5
+    },
+    {
+      "clock": 6.46666666666665,
+      "file": "operation_drag_08.png",
+      "jobs": [
+        {
+          "animal_id": -1,
+          "id": 3,
+          "kind": "wall",
+          "pos": "(8, 6)",
+          "reserved": 10,
+          "resource": "soil",
+          "started": false,
+          "state": "pending"
+        },
+        {
+          "animal_id": -1,
+          "id": 1,
+          "kind": "wall",
+          "pos": "(8, 4)",
+          "reserved": 10,
+          "resource": "soil",
+          "started": false,
+          "state": "pending"
+        },
+        {
+          "animal_id": -1,
+          "id": 2,
+          "kind": "wall",
+          "pos": "(16, 4)",
+          "reserved": 10,
+          "resource": "soil",
+          "started": false,
+          "state": "pending"
+        }
+      ],
+      "phase": "day",
+      "tick": 5
+    },
+    {
+      "clock": 6.53333333333332,
+      "file": "operation_drag_09.png",
+      "jobs": [
+        {
+          "animal_id": -1,
+          "id": 3,
+          "kind": "wall",
+          "pos": "(8, 6)",
+          "reserved": 10,
+          "resource": "soil",
+          "started": false,
+          "state": "pending"
+        },
+        {
+          "animal_id": -1,
+          "id": 1,
+          "kind": "wall",
+          "pos": "(8, 4)",
+          "reserved": 10,
+          "resource": "soil",
+          "started": false,
+          "state": "pending"
+        },
+        {
+          "animal_id": -1,
+          "id": 2,
+          "kind": "wall",
+          "pos": "(16, 4)",
+          "reserved": 10,
+          "resource": "soil",
+          "started": false,
+          "state": "pending"
+        }
+      ],
+      "phase": "day",
+      "tick": 5
+    },
+    {
+      "clock": 6.59999999999999,
+      "file": "operation_after.png",
+      "jobs": [
+        {
+          "animal_id": -1,
+          "id": 3,
+          "kind": "wall",
+          "pos": "(8, 6)",
+          "reserved": 10,
+          "resource": "soil",
+          "started": false,
+          "state": "pending"
+        },
+        {
+          "animal_id": -1,
+          "id": 1,
+          "kind": "wall",
+          "pos": "(8, 4)",
+          "reserved": 10,
+          "resource": "soil",
+          "started": false,
+          "state": "pending"
+        },
+        {
+          "animal_id": -1,
+          "id": 2,
+          "kind": "wall",
+          "pos": "(16, 4)",
+          "reserved": 10,
+          "resource": "soil",
+          "started": false,
+          "state": "pending"
+        }
+      ],
+      "phase": "day",
+      "tick": 5
+    }
+  ],
+  "implementation_commit": "24ddf180c908d1b5035fc882fc0e3d197513918d",
+  "method": "isolated viewport; game-local mouse events; controlled 1/30 second process steps"
+}

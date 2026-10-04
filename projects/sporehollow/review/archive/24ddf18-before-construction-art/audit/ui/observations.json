@@ -1,0 +1,1354 @@
+{
+  "asset_commit": "7e408375f19b86759fc614508fc3e5f413f67ff9",
+  "captures": [
+    {
+      "animal_id": -1,
+      "book": "",
+      "file": "subtask_drag_locked_door_0.png",
+      "group": 0,
+      "jobs": [],
+      "tick": 0,
+      "tool": "locked_door"
+    },
+    {
+      "animal_id": -1,
+      "book": "",
+      "file": "subtask_drag_rest_1.png",
+      "group": 1,
+      "jobs": [],
+      "tick": 0,
+      "tool": "guide"
+    },
+    {
+      "animal_id": -1,
+      "book": "",
+      "file": "subtask_drag_rest_2.png",
+      "group": 1,
+      "jobs": [],
+      "tick": 0,
+      "tool": "rest"
+    },
+    {
+      "animal_id": -1,
+      "book": "",
+      "file": "subtask_drag_rest_3.png",
+      "group": 1,
+      "jobs": [],
+      "tick": 0,
+      "tool": "rest"
+    },
+    {
+      "animal_id": -1,
+      "book": "",
+      "file": "commands_reordered.png",
+      "group": 1,
+      "jobs": [],
+      "tick": 0,
+      "tool": "rest"
+    },
+    {
+      "animal_id": -1,
+      "book": "",
+      "file": "morning.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": -1,
+      "book": "",
+      "file": "market_home.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": -1,
+      "book": "",
+      "file": "market_categories.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": -1,
+      "book": "",
+      "file": "market_list.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": -1,
+      "book": "",
+      "file": "market_detail.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": 1,
+      "book": "opening",
+      "file": "book_open_00.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": 1,
+      "book": "opening",
+      "file": "book_open_01.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": 1,
+      "book": "opening",
+      "file": "book_open_02.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": 1,
+      "book": "opening",
+      "file": "book_open_03.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": 1,
+      "book": "",
+      "file": "book_open_04.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": 1,
+      "book": "",
+      "file": "book_open_05.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": 1,
+      "book": "",
+      "file": "book_open_06.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": 1,
+      "book": "",
+      "file": "book_open_07.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": 1,
+      "book": "",
+      "file": "book_open_08.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": 1,
+      "book": "",
+      "file": "book_open_09.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": 1,
+      "book": "",
+      "file": "book_open_10.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": 1,
+      "book": "",
+      "file": "book_opened.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": 1,
+      "book": "turning_next",
+      "file": "book_next_00.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": 1,
+      "book": "turning_next",
+      "file": "book_next_01.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": 1,
+      "book": "turning_next",
+      "file": "book_next_02.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": 2,
+      "book": "",
+      "file": "book_next_03.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": 2,
+      "book": "",
+      "file": "book_next_04.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": 2,
+      "book": "",
+      "file": "book_next_05.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": 2,
+      "book": "",
+      "file": "book_next_06.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": 2,
+      "book": "",
+      "file": "book_next_07.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": 2,
+      "book": "",
+      "file": "book_next_08.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": 2,
+      "book": "turning_previous",
+      "file": "book_previous_00.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": 2,
+      "book": "turning_previous",
+      "file": "book_previous_01.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": 2,
+      "book": "turning_previous",
+      "file": "book_previous_02.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": 1,
+      "book": "",
+      "file": "book_previous_03.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": 1,
+      "book": "",
+      "file": "book_previous_04.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": 1,
+      "book": "",
+      "file": "book_previous_05.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": 1,
+      "book": "",
+      "file": "book_previous_06.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": 1,
+      "book": "",
+      "file": "book_previous_07.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": 1,
+      "book": "",
+      "file": "book_previous_08.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": 1,
+      "book": "closing",
+      "file": "book_close_00.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": 1,
+      "book": "closing",
+      "file": "book_close_01.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": 1,
+      "book": "closing",
+      "file": "book_close_02.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": 1,
+      "book": "closing",
+      "file": "book_close_03.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": 1,
+      "book": "",
+      "file": "book_close_04.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": 1,
+      "book": "",
+      "file": "book_close_05.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": 1,
+      "book": "",
+      "file": "book_close_06.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": 1,
+      "book": "",
+      "file": "book_close_07.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": 1,
+      "book": "",
+      "file": "book_close_08.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": 1,
+      "book": "",
+      "file": "book_close_09.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": 1,
+      "book": "",
+      "file": "book_close_10.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": -1,
+      "book": "",
+      "file": "wall_connections.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": -1,
+      "book": "",
+      "file": "wall_door_open.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": -1,
+      "book": "",
+      "file": "wall_removed.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": -1,
+      "book": "",
+      "file": "wall_corners_and_tees.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": -1,
+      "book": "",
+      "file": "wall_vertical_door_depth.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": -1,
+      "book": "",
+      "file": "wall_vertical_door_open.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    }
+  ],
+  "checks": [
+    {
+      "check": "Only headless or isolated station",
+      "passed": true
+    },
+    {
+      "check": "Neutral Tab never selects keeper",
+      "passed": true
+    },
+    {
+      "check": "Wheel reaches build at (700.0, 20.0)",
+      "passed": true
+    },
+    {
+      "check": "Wheel command mode does not choose animal",
+      "passed": true
+    },
+    {
+      "check": "Wheel keeper sync",
+      "passed": true
+    },
+    {
+      "check": "Wheel has no neutral slot",
+      "passed": true
+    },
+    {
+      "check": "Wheel reaches build at (700.0, 775.0)",
+      "passed": true
+    },
+    {
+      "check": "Wheel command mode does not choose animal",
+      "passed": true
+    },
+    {
+      "check": "Wheel keeper sync",
+      "passed": true
+    },
+    {
+      "check": "Wheel has no neutral slot",
+      "passed": true
+    },
+    {
+      "check": "Wheel reaches build at (1240.0, 440.0)",
+      "passed": true
+    },
+    {
+      "check": "Wheel command mode does not choose animal",
+      "passed": true
+    },
+    {
+      "check": "Wheel keeper sync",
+      "passed": true
+    },
+    {
+      "check": "Wheel has no neutral slot",
+      "passed": true
+    },
+    {
+      "check": "Wheel reaches build at (8.0, 430.0)",
+      "passed": true
+    },
+    {
+      "check": "Wheel command mode does not choose animal",
+      "passed": true
+    },
+    {
+      "check": "Wheel keeper sync",
+      "passed": true
+    },
+    {
+      "check": "Wheel has no neutral slot",
+      "passed": true
+    },
+    {
+      "check": "Wheel reaches build at (700.0, 430.0)",
+      "passed": true
+    },
+    {
+      "check": "Wheel command mode does not choose animal",
+      "passed": true
+    },
+    {
+      "check": "Wheel keeper sync",
+      "passed": true
+    },
+    {
+      "check": "Wheel has no neutral slot",
+      "passed": true
+    },
+    {
+      "check": "Wheel reaches build at (1018.0, 200.0)",
+      "passed": true
+    },
+    {
+      "check": "Wheel command mode does not choose animal",
+      "passed": true
+    },
+    {
+      "check": "Wheel keeper sync",
+      "passed": true
+    },
+    {
+      "check": "Wheel has no neutral slot",
+      "passed": true
+    },
+    {
+      "check": "Neutral wheel up keeper",
+      "passed": true
+    },
+    {
+      "check": "Ctrl wheel only zooms",
+      "passed": true
+    },
+    {
+      "check": "Build first Tab selects first operation",
+      "passed": true
+    },
+    {
+      "check": "Build Shift Tab wraps backwards",
+      "passed": true
+    },
+    {
+      "check": "Tab key repeat ignored",
+      "passed": true
+    },
+    {
+      "check": "Reorder keeps selected operation ID",
+      "passed": true
+    },
+    {
+      "check": "Tab follows reordered display",
+      "passed": true
+    },
+    {
+      "check": "First command Tab selects resident only",
+      "passed": true
+    },
+    {
+      "check": "Next Tab selects guide without issuing",
+      "passed": true
+    },
+    {
+      "check": "Command button order independent of build order",
+      "passed": true
+    },
+    {
+      "check": "Reverse Tab uses changed order",
+      "passed": true
+    },
+    {
+      "check": "Out-of-range drop restores order",
+      "passed": true
+    },
+    {
+      "check": "Escape cancels just subtask drag",
+      "passed": true
+    },
+    {
+      "check": "Tab and reordering never execute or advance paused world",
+      "passed": true
+    },
+    {
+      "check": "Mode/refresh preserves order",
+      "passed": true
+    },
+    {
+      "check": "UI-only order saves and restores",
+      "passed": true
+    },
+    {
+      "check": "Cat Tab has no unsupported command",
+      "passed": true
+    },
+    {
+      "check": "Hen only guides",
+      "passed": true
+    },
+    {
+      "check": "Mixed species selection and Tab do not issue",
+      "passed": true
+    },
+    {
+      "check": "Nearest eligible resident excludes recuperating dog",
+      "passed": true
+    },
+    {
+      "check": "No animals keeps command mode",
+      "passed": true
+    },
+    {
+      "check": "Market root has buy/sell",
+      "passed": true
+    },
+    {
+      "check": "No duplicate trade choice in category",
+      "passed": true
+    },
+    {
+      "check": "Back is fixed across levels",
+      "passed": true
+    },
+    {
+      "check": "Explicit purchase alone trades",
+      "passed": true
+    },
+    {
+      "check": "Right click one level to list",
+      "passed": true
+    },
+    {
+      "check": "Right click one level to categories",
+      "passed": true
+    },
+    {
+      "check": "Category returns to trade entry",
+      "passed": true
+    },
+    {
+      "check": "Root returns to morning only",
+      "passed": true
+    },
+    {
+      "check": "Back never trades",
+      "passed": true
+    },
+    {
+      "check": "Selling has separate hierarchy",
+      "passed": true
+    },
+    {
+      "check": "Menu button never starts day",
+      "passed": true
+    },
+    {
+      "check": "Book opens from closed state",
+      "passed": true
+    },
+    {
+      "check": "Opening completes with world paused",
+      "passed": true
+    },
+    {
+      "check": "Page commits correct next animal",
+      "passed": true
+    },
+    {
+      "check": "Previous returns ID without world time",
+      "passed": true
+    },
+    {
+      "check": "Naming Tab and plus do not affect board",
+      "passed": true
+    },
+    {
+      "check": "Book right-click closes to morning",
+      "passed": true
+    },
+    {
+      "check": "Opening interrupted safely",
+      "passed": true
+    },
+    {
+      "check": "Single animal page controls disabled",
+      "passed": true
+    },
+    {
+      "check": "Empty book is safe and cannot turn",
+      "passed": true
+    },
+    {
+      "check": "No active huts",
+      "passed": true
+    },
+    {
+      "check": "Keeper Tab never rests",
+      "passed": true
+    },
+    {
+      "check": "Speed-up key 61",
+      "passed": true
+    },
+    {
+      "check": "Speed-up key 43",
+      "passed": true
+    },
+    {
+      "check": "Speed-up key 4194437",
+      "passed": true
+    },
+    {
+      "check": "Speed-down key 45",
+      "passed": true
+    },
+    {
+      "check": "Speed-down key 4194435",
+      "passed": true
+    }
+  ],
+  "dirty": "False",
+  "events": [
+    {
+      "echo": false,
+      "key": 4194306,
+      "shift": false,
+      "tick": 0
+    },
+    {
+      "button": 5,
+      "ctrl": false,
+      "mouse": [
+        700.0,
+        20.0
+      ],
+      "tick": 0
+    },
+    {
+      "button": 5,
+      "ctrl": false,
+      "mouse": [
+        700.0,
+        20.0
+      ],
+      "tick": 0
+    },
+    {
+      "button": 5,
+      "ctrl": false,
+      "mouse": [
+        700.0,
+        20.0
+      ],
+      "tick": 0
+    },
+    {
+      "button": 5,
+      "ctrl": false,
+      "mouse": [
+        700.0,
+        20.0
+      ],
+      "tick": 0
+    },
+    {
+      "button": 5,
+      "ctrl": false,
+      "mouse": [
+        700.0,
+        775.0
+      ],
+      "tick": 0
+    },
+    {
+      "button": 5,
+      "ctrl": false,
+      "mouse": [
+        700.0,
+        775.0
+      ],
+      "tick": 0
+    },
+    {
+      "button": 5,
+      "ctrl": false,
+      "mouse": [
+        700.0,
+        775.0
+      ],
+      "tick": 0
+    },
+    {
+      "button": 5,
+      "ctrl": false,
+      "mouse": [
+        700.0,
+        775.0
+      ],
+      "tick": 0
+    },
+    {
+      "button": 5,
+      "ctrl": false,
+      "mouse": [
+        1240.0,
+        440.0
+      ],
+      "tick": 0
+    },
+    {
+      "button": 5,
+      "ctrl": false,
+      "mouse": [
+        1240.0,
+        440.0
+      ],
+      "tick": 0
+    },
+    {
+      "button": 5,
+      "ctrl": false,
+      "mouse": [
+        1240.0,
+        440.0
+      ],
+      "tick": 0
+    },
+    {
+      "button": 5,
+      "ctrl": false,
+      "mouse": [
+        1240.0,
+        440.0
+      ],
+      "tick": 0
+    },
+    {
+      "button": 5,
+      "ctrl": false,
+      "mouse": [
+        8.0,
+        430.0
+      ],
+      "tick": 0
+    },
+    {
+      "button": 5,
+      "ctrl": false,
+      "mouse": [
+        8.0,
+        430.0
+      ],
+      "tick": 0
+    },
+    {
+      "button": 5,
+      "ctrl": false,
+      "mouse": [
+        8.0,
+        430.0
+      ],
+      "tick": 0
+    },
+    {
+      "button": 5,
+      "ctrl": false,
+      "mouse": [
+        8.0,
+        430.0
+      ],
+      "tick": 0
+    },
+    {
+      "button": 5,
+      "ctrl": false,
+      "mouse": [
+        700.0,
+        430.0
+      ],
+      "tick": 0
+    },
+    {
+      "button": 5,
+      "ctrl": false,
+      "mouse": [
+        700.0,
+        430.0
+      ],
+      "tick": 0
+    },
+    {
+      "button": 5,
+      "ctrl": false,
+      "mouse": [
+        700.0,
+        430.0
+      ],
+      "tick": 0
+    },
+    {
+      "button": 5,
+      "ctrl": false,
+      "mouse": [
+        700.0,
+        430.0
+      ],
+      "tick": 0
+    },
+    {
+      "button": 5,
+      "ctrl": false,
+      "mouse": [
+        1018.0,
+        200.0
+      ],
+      "tick": 0
+    },
+    {
+      "button": 5,
+      "ctrl": false,
+      "mouse": [
+        1018.0,
+        200.0
+      ],
+      "tick": 0
+    },
+    {
+      "button": 5,
+      "ctrl": false,
+      "mouse": [
+        1018.0,
+        200.0
+      ],
+      "tick": 0
+    },
+    {
+      "button": 5,
+      "ctrl": false,
+      "mouse": [
+        1018.0,
+        200.0
+      ],
+      "tick": 0
+    },
+    {
+      "button": 4,
+      "ctrl": false,
+      "mouse": [
+        700.0,
+        430.0
+      ],
+      "tick": 0
+    },
+    {
+      "button": 4,
+      "ctrl": true,
+      "mouse": [
+        700.0,
+        430.0
+      ],
+      "tick": 0
+    },
+    {
+      "echo": false,
+      "key": 4194306,
+      "shift": false,
+      "tick": 0
+    },
+    {
+      "echo": false,
+      "key": 4194306,
+      "shift": true,
+      "tick": 0
+    },
+    {
+      "echo": true,
+      "key": 4194306,
+      "shift": false,
+      "tick": 0
+    },
+    {
+      "echo": false,
+      "key": 4194306,
+      "shift": false,
+      "tick": 0
+    },
+    {
+      "echo": false,
+      "key": 4194306,
+      "shift": false,
+      "tick": 0
+    },
+    {
+      "echo": false,
+      "key": 4194306,
+      "shift": false,
+      "tick": 0
+    },
+    {
+      "echo": false,
+      "key": 4194306,
+      "shift": true,
+      "tick": 0
+    },
+    {
+      "echo": false,
+      "key": 4194305,
+      "shift": false,
+      "tick": 0
+    },
+    {
+      "echo": false,
+      "key": 4194306,
+      "shift": false,
+      "tick": 0
+    },
+    {
+      "echo": false,
+      "key": 4194306,
+      "shift": false,
+      "tick": 0
+    },
+    {
+      "echo": false,
+      "key": 4194306,
+      "shift": false,
+      "tick": 0
+    },
+    {
+      "echo": false,
+      "key": 4194306,
+      "shift": false,
+      "tick": 0
+    },
+    {
+      "echo": false,
+      "key": 4194306,
+      "shift": false,
+      "tick": 0
+    },
+    {
+      "button": 1,
+      "ctrl": false,
+      "mouse": [
+        487.0,
+        520.0
+      ],
+      "tick": 0
+    },
+    {
+      "button": 1,
+      "ctrl": false,
+      "mouse": [
+        544.0,
+        380.5
+      ],
+      "tick": 0
+    },
+    {
+      "button": 1,
+      "ctrl": false,
+      "mouse": [
+        930.0,
+        365.5
+      ],
+      "tick": 0
+    },
+    {
+      "button": 1,
+      "ctrl": false,
+      "mouse": [
+        588.5,
+        453.0
+      ],
+      "tick": 0
+    },
+    {
+      "button": 1,
+      "ctrl": false,
+      "mouse": [
+        977.0,
+        519.0
+      ],
+      "tick": 0
+    },
+    {
+      "button": 2,
+      "ctrl": false,
+      "mouse": [
+        600.0,
+        500.0
+      ],
+      "tick": 0
+    },
+    {
+      "button": 2,
+      "ctrl": false,
+      "mouse": [
+        600.0,
+        500.0
+      ],
+      "tick": 0
+    },
+    {
+      "button": 2,
+      "ctrl": false,
+      "mouse": [
+        600.0,
+        500.0
+      ],
+      "tick": 0
+    },
+    {
+      "button": 2,
+      "ctrl": false,
+      "mouse": [
+        600.0,
+        500.0
+      ],
+      "tick": 0
+    },
+    {
+      "button": 1,
+      "ctrl": false,
+      "mouse": [
+        889.0,
+        380.5
+      ],
+      "tick": 0
+    },
+    {
+      "button": 1,
+      "ctrl": false,
+      "mouse": [
+        930.0,
+        365.5
+      ],
+      "tick": 0
+    },
+    {
+      "button": 1,
+      "ctrl": false,
+      "mouse": [
+        1102.0,
+        138.0
+      ],
+      "tick": 0
+    },
+    {
+      "button": 1,
+      "ctrl": false,
+      "mouse": [
+        835.0,
+        520.0
+      ],
+      "tick": 0
+    },
+    {
+      "button": 1,
+      "ctrl": false,
+      "mouse": [
+        970.0,
+        698.0
+      ],
+      "tick": 0
+    },
+    {
+      "button": 1,
+      "ctrl": false,
+      "mouse": [
+        306.0,
+        698.0
+      ],
+      "tick": 0
+    },
+    {
+      "button": 1,
+      "ctrl": false,
+      "mouse": [
+        968.5,
+        592.0
+      ],
+      "tick": 0
+    },
+    {
+      "echo": false,
+      "key": 4194306,
+      "shift": false,
+      "tick": 0
+    },
+    {
+      "echo": false,
+      "key": 4194437,
+      "shift": false,
+      "tick": 0
+    },
+    {
+      "button": 2,
+      "ctrl": false,
+      "mouse": [
+        600.0,
+        500.0
+      ],
+      "tick": 0
+    },
+    {
+      "button": 1,
+      "ctrl": false,
+      "mouse": [
+        835.0,
+        520.0
+      ],
+      "tick": 0
+    },
+    {
+      "echo": false,
+      "key": 4194305,
+      "shift": false,
+      "tick": 0
+    },
+    {
+      "echo": false,
+      "key": 4194306,
+      "shift": false,
+      "tick": 0
+    },
+    {
+      "echo": false,
+      "key": 61,
+      "shift": false,
+      "tick": 0
+    },
+    {
+      "echo": false,
+      "key": 43,
+      "shift": false,
+      "tick": 0
+    },
+    {
+      "echo": false,
+      "key": 4194437,
+      "shift": false,
+      "tick": 0
+    },
+    {
+      "echo": false,
+      "key": 45,
+      "shift": false,
+      "tick": 0
+    },
+    {
+      "echo": false,
+      "key": 4194435,
+      "shift": false,
+      "tick": 0
+    }
+  ],
+  "implementation_commit": "24ddf180c908d1b5035fc882fc0e3d197513918d"
+}

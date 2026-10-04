@@ -396,5 +396,117 @@
     "source": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\artifacts\\isolated\\20261004-211849-898",
     "bytes": 29585625.0,
     "action": "delete"
+  },
+  {
+    "destination": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\review\\archive\\24ddf18-before-construction-art\\ui",
+    "reason": "Verified 24ddf18 evidence superseded by delivered construction art; retain separately",
+    "action": "archive",
+    "source": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\review\\current\\ui",
+    "category": "C"
+  },
+  {
+    "destination": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\review\\archive\\24ddf18-before-construction-art\\characters",
+    "reason": "Verified 24ddf18 evidence superseded by delivered construction art; retain separately",
+    "action": "archive",
+    "source": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\review\\current\\characters",
+    "category": "C"
+  },
+  {
+    "destination": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\review\\archive\\24ddf18-before-construction-art\\audit",
+    "reason": "Verified 24ddf18 evidence superseded by delivered construction art; retain separately",
+    "action": "archive",
+    "source": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\review\\current\\audit",
+    "category": "C"
+  },
+  {
+    "destination": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\review\\archive\\24ddf18-before-construction-art\\PACKET.md",
+    "reason": "Verified 24ddf18 evidence superseded by delivered construction art; retain separately",
+    "action": "archive",
+    "source": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\review\\current\\PACKET.md",
+    "category": "C"
+  },
+  {
+    "destination": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\review\\archive\\24ddf18-before-construction-art\\stage1-observation.json",
+    "reason": "Verified 24ddf18 evidence superseded by delivered construction art; retain separately",
+    "action": "archive",
+    "source": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\review\\current\\stage1-observation.json",
+    "category": "C"
+  },
+  {
+    "destination": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\review\\archive\\24ddf18-before-construction-art\\media-index.json",
+    "reason": "Verified 24ddf18 evidence superseded by delivered construction art; retain separately",
+    "action": "archive",
+    "source": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\review\\current\\media-index.json",
+    "category": "C"
+  },
+  {
+    "destination": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\review\\archive\\24ddf18-before-construction-art\\build.json",
+    "reason": "Verified 24ddf18 evidence superseded by delivered construction art; retain separately",
+    "action": "archive",
+    "source": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\review\\current\\build.json",
+    "category": "C"
+  },
+  {
+    "reason": "Superseded generated build/render; packet retained in 24ddf18 archive, final e13e16e evidence retained",
+    "category": "D",
+    "source": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\artifacts\\validation\\20261004-212918-053",
+    "action": "delete",
+    "bytes": 120075287.0
+  },
+  {
+    "reason": "Superseded generated build/render; packet retained in 24ddf18 archive, final e13e16e evidence retained",
+    "category": "D",
+    "source": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\artifacts\\validation\\20261004-214326-587",
+    "action": "delete",
+    "bytes": 3304144.0
+  },
+  {
+    "reason": "Superseded generated build/render; packet retained in 24ddf18 archive, final e13e16e evidence retained",
+    "category": "D",
+    "source": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\artifacts\\validation\\20261004-214433-196",
+    "action": "delete",
+    "bytes": 3291630.0
+  },
+  {
+    "reason": "Superseded generated build/render; packet retained in 24ddf18 archive, final e13e16e evidence retained",
+    "category": "D",
+    "source": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\artifacts\\validation\\20261004-214605-916",
+    "action": "delete",
+    "bytes": 120200011.0
+  },
+  {
+    "reason": "Superseded generated build/render; packet retained in 24ddf18 archive, final e13e16e evidence retained",
+    "category": "D",
+    "source": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\artifacts\\validation\\20261004-214753-538",
+    "action": "delete",
+    "bytes": 3307765.0
+  },
+  {
+    "reason": "Superseded generated build/render; packet retained in 24ddf18 archive, final e13e16e evidence retained",
+    "category": "D",
+    "source": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\artifacts\\isolated\\20261004-213255-410",
+    "action": "delete",
+    "bytes": 6981926.0
+  },
+  {
+    "reason": "Superseded generated build/render; packet retained in 24ddf18 archive, final e13e16e evidence retained",
+    "category": "D",
+    "source": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\artifacts\\isolated\\20261004-213328-431",
+    "action": "delete",
+    "bytes": 38578892.0
+  },
+  {
+    "reason": "Superseded generated build/render; packet retained in 24ddf18 archive, final e13e16e evidence retained",
+    "category": "D",
+    "source": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\artifacts\\isolated\\20261004-final-supplement",
+    "action": "delete",
+    "bytes": 8555464.0
+  },
+  {
+    "reason": "Superseded generated build/render; packet retained in 24ddf18 archive, final e13e16e evidence retained",
+    "category": "D",
+    "source": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\artifacts\\isolated\\20261004-214450-030",
+    "action": "delete",
+    "bytes": 3518531.0
   }
 ]

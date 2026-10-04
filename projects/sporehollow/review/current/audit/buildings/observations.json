@@ -1,0 +1,645 @@
+{
+  "asset_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+  "captures": [
+    {
+      "animal_id": -1,
+      "book": "",
+      "file": "wall_masks_0_normal.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": -1,
+      "book": "",
+      "file": "wall_masks_1_normal.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": -1,
+      "book": "",
+      "file": "wall_masks_0_damaged.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": -1,
+      "book": "",
+      "file": "wall_masks_1_damaged.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": -1,
+      "book": "",
+      "file": "wood_wall_masks_0_normal.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": -1,
+      "book": "",
+      "file": "wood_wall_masks_1_normal.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": -1,
+      "book": "",
+      "file": "wood_wall_masks_0_damaged.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": -1,
+      "book": "",
+      "file": "wood_wall_masks_1_damaged.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": -1,
+      "book": "",
+      "file": "stone_wall_masks_0_normal.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": -1,
+      "book": "",
+      "file": "stone_wall_masks_1_normal.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": -1,
+      "book": "",
+      "file": "stone_wall_masks_0_damaged.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": -1,
+      "book": "",
+      "file": "stone_wall_masks_1_damaged.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": -1,
+      "book": "",
+      "file": "wood_doors_closed.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": -1,
+      "book": "",
+      "file": "wood_doors_open.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": -1,
+      "book": "",
+      "file": "wood_doors_broken_lock.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": -1,
+      "book": "",
+      "file": "wood_doors_damaged.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": -1,
+      "book": "",
+      "file": "door_walk_00.png",
+      "group": 2,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": -1,
+      "book": "",
+      "file": "door_walk_05.png",
+      "group": 2,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": -1,
+      "book": "",
+      "file": "door_walk_10.png",
+      "group": 2,
+      "jobs": [],
+      "tick": 1,
+      "tool": ""
+    },
+    {
+      "animal_id": -1,
+      "book": "",
+      "file": "door_walk_15.png",
+      "group": 2,
+      "jobs": [],
+      "tick": 2,
+      "tool": ""
+    },
+    {
+      "animal_id": -1,
+      "book": "",
+      "file": "door_walk_20.png",
+      "group": 2,
+      "jobs": [],
+      "tick": 2,
+      "tool": ""
+    },
+    {
+      "animal_id": -1,
+      "book": "",
+      "file": "door_walk_25.png",
+      "group": 2,
+      "jobs": [],
+      "tick": 3,
+      "tool": ""
+    },
+    {
+      "animal_id": -1,
+      "book": "",
+      "file": "door_walk_30.png",
+      "group": 2,
+      "jobs": [],
+      "tick": 4,
+      "tool": ""
+    },
+    {
+      "animal_id": -1,
+      "book": "",
+      "file": "door_walk_35.png",
+      "group": 2,
+      "jobs": [],
+      "tick": 4,
+      "tool": ""
+    },
+    {
+      "animal_id": -1,
+      "book": "",
+      "file": "door_walk_40.png",
+      "group": 2,
+      "jobs": [],
+      "tick": 5,
+      "tool": ""
+    },
+    {
+      "animal_id": -1,
+      "book": "",
+      "file": "wood_floor_boundaries.png",
+      "group": 2,
+      "jobs": [],
+      "tick": 5,
+      "tool": ""
+    }
+  ],
+  "checks": [
+    {
+      "check": "Wall mask 0",
+      "passed": true
+    },
+    {
+      "check": "Wall mask 1",
+      "passed": true
+    },
+    {
+      "check": "Wall mask 2",
+      "passed": true
+    },
+    {
+      "check": "Wall mask 3",
+      "passed": true
+    },
+    {
+      "check": "Wall mask 4",
+      "passed": true
+    },
+    {
+      "check": "Wall mask 5",
+      "passed": true
+    },
+    {
+      "check": "Wall mask 6",
+      "passed": true
+    },
+    {
+      "check": "Wall mask 7",
+      "passed": true
+    },
+    {
+      "check": "Wall mask 8",
+      "passed": true
+    },
+    {
+      "check": "Wall mask 9",
+      "passed": true
+    },
+    {
+      "check": "Wall mask 10",
+      "passed": true
+    },
+    {
+      "check": "Wall mask 11",
+      "passed": true
+    },
+    {
+      "check": "Wall mask 12",
+      "passed": true
+    },
+    {
+      "check": "Wall mask 13",
+      "passed": true
+    },
+    {
+      "check": "Wall mask 14",
+      "passed": true
+    },
+    {
+      "check": "Wall mask 15",
+      "passed": true
+    },
+    {
+      "check": "Wall mask 0",
+      "passed": true
+    },
+    {
+      "check": "Wall mask 1",
+      "passed": true
+    },
+    {
+      "check": "Wall mask 2",
+      "passed": true
+    },
+    {
+      "check": "Wall mask 3",
+      "passed": true
+    },
+    {
+      "check": "Wall mask 4",
+      "passed": true
+    },
+    {
+      "check": "Wall mask 5",
+      "passed": true
+    },
+    {
+      "check": "Wall mask 6",
+      "passed": true
+    },
+    {
+      "check": "Wall mask 7",
+      "passed": true
+    },
+    {
+      "check": "Wall mask 8",
+      "passed": true
+    },
+    {
+      "check": "Wall mask 9",
+      "passed": true
+    },
+    {
+      "check": "Wall mask 10",
+      "passed": true
+    },
+    {
+      "check": "Wall mask 11",
+      "passed": true
+    },
+    {
+      "check": "Wall mask 12",
+      "passed": true
+    },
+    {
+      "check": "Wall mask 13",
+      "passed": true
+    },
+    {
+      "check": "Wall mask 14",
+      "passed": true
+    },
+    {
+      "check": "Wall mask 15",
+      "passed": true
+    },
+    {
+      "check": "Wall mask 0",
+      "passed": true
+    },
+    {
+      "check": "Wall mask 1",
+      "passed": true
+    },
+    {
+      "check": "Wall mask 2",
+      "passed": true
+    },
+    {
+      "check": "Wall mask 3",
+      "passed": true
+    },
+    {
+      "check": "Wall mask 4",
+      "passed": true
+    },
+    {
+      "check": "Wall mask 5",
+      "passed": true
+    },
+    {
+      "check": "Wall mask 6",
+      "passed": true
+    },
+    {
+      "check": "Wall mask 7",
+      "passed": true
+    },
+    {
+      "check": "Wall mask 8",
+      "passed": true
+    },
+    {
+      "check": "Wall mask 9",
+      "passed": true
+    },
+    {
+      "check": "Wall mask 10",
+      "passed": true
+    },
+    {
+      "check": "Wall mask 11",
+      "passed": true
+    },
+    {
+      "check": "Wall mask 12",
+      "passed": true
+    },
+    {
+      "check": "Wall mask 13",
+      "passed": true
+    },
+    {
+      "check": "Wall mask 14",
+      "passed": true
+    },
+    {
+      "check": "Wall mask 15",
+      "passed": true
+    },
+    {
+      "check": "Wall mask 0",
+      "passed": true
+    },
+    {
+      "check": "Wall mask 1",
+      "passed": true
+    },
+    {
+      "check": "Wall mask 2",
+      "passed": true
+    },
+    {
+      "check": "Wall mask 3",
+      "passed": true
+    },
+    {
+      "check": "Wall mask 4",
+      "passed": true
+    },
+    {
+      "check": "Wall mask 5",
+      "passed": true
+    },
+    {
+      "check": "Wall mask 6",
+      "passed": true
+    },
+    {
+      "check": "Wall mask 7",
+      "passed": true
+    },
+    {
+      "check": "Wall mask 8",
+      "passed": true
+    },
+    {
+      "check": "Wall mask 9",
+      "passed": true
+    },
+    {
+      "check": "Wall mask 10",
+      "passed": true
+    },
+    {
+      "check": "Wall mask 11",
+      "passed": true
+    },
+    {
+      "check": "Wall mask 12",
+      "passed": true
+    },
+    {
+      "check": "Wall mask 13",
+      "passed": true
+    },
+    {
+      "check": "Wall mask 14",
+      "passed": true
+    },
+    {
+      "check": "Wall mask 15",
+      "passed": true
+    },
+    {
+      "check": "Wall mask 0",
+      "passed": true
+    },
+    {
+      "check": "Wall mask 1",
+      "passed": true
+    },
+    {
+      "check": "Wall mask 2",
+      "passed": true
+    },
+    {
+      "check": "Wall mask 3",
+      "passed": true
+    },
+    {
+      "check": "Wall mask 4",
+      "passed": true
+    },
+    {
+      "check": "Wall mask 5",
+      "passed": true
+    },
+    {
+      "check": "Wall mask 6",
+      "passed": true
+    },
+    {
+      "check": "Wall mask 7",
+      "passed": true
+    },
+    {
+      "check": "Wall mask 8",
+      "passed": true
+    },
+    {
+      "check": "Wall mask 9",
+      "passed": true
+    },
+    {
+      "check": "Wall mask 10",
+      "passed": true
+    },
+    {
+      "check": "Wall mask 11",
+      "passed": true
+    },
+    {
+      "check": "Wall mask 12",
+      "passed": true
+    },
+    {
+      "check": "Wall mask 13",
+      "passed": true
+    },
+    {
+      "check": "Wall mask 14",
+      "passed": true
+    },
+    {
+      "check": "Wall mask 15",
+      "passed": true
+    },
+    {
+      "check": "Wall mask 0",
+      "passed": true
+    },
+    {
+      "check": "Wall mask 1",
+      "passed": true
+    },
+    {
+      "check": "Wall mask 2",
+      "passed": true
+    },
+    {
+      "check": "Wall mask 3",
+      "passed": true
+    },
+    {
+      "check": "Wall mask 4",
+      "passed": true
+    },
+    {
+      "check": "Wall mask 5",
+      "passed": true
+    },
+    {
+      "check": "Wall mask 6",
+      "passed": true
+    },
+    {
+      "check": "Wall mask 7",
+      "passed": true
+    },
+    {
+      "check": "Wall mask 8",
+      "passed": true
+    },
+    {
+      "check": "Wall mask 9",
+      "passed": true
+    },
+    {
+      "check": "Wall mask 10",
+      "passed": true
+    },
+    {
+      "check": "Wall mask 11",
+      "passed": true
+    },
+    {
+      "check": "Wall mask 12",
+      "passed": true
+    },
+    {
+      "check": "Wall mask 13",
+      "passed": true
+    },
+    {
+      "check": "Wall mask 14",
+      "passed": true
+    },
+    {
+      "check": "Wall mask 15",
+      "passed": true
+    },
+    {
+      "check": "Keeper traverses open door",
+      "passed": true
+    },
+    {
+      "check": "Door art does not remove structure",
+      "passed": true
+    }
+  ],
+  "events": [
+    {
+      "button": 1,
+      "ctrl": false,
+      "mouse": [
+        400.0,
+        316.0
+      ],
+      "tick": 0
+    }
+  ],
+  "implementation_commit": "e13e16ed9477c92e4057d10b70d7025b2288908b"
+}
