@@ -3,7 +3,7 @@ const Farm = preload("res://game/world.gd")
 const FONT = preload("res://assets/fonts/ui_font.tres")
 const TILE = Vector2(48, 42)
 const GROUPS = ["建設", "指示"]
-const TOOLS = {"wall": "壁  10 / 1秒", "wood_wall":"木壁 木10", "stone_wall":"石壁 石10", "soil_tile":"土タイル 土2", "wood_tile":"木タイル 木2", "stone_tile":"石タイル 石2", "door":"ドア 木10", "locked_door":"施錠ドア 木20", "guide":"連れていく", "repair": "修理", "gate": "ドア開閉", "remove": "解体", "kennel": "犬小屋 木20", "coop": "鶏小屋 木30",
+const TOOLS = {"wall": "壁  10 / 1秒", "wood_wall":"木壁 木10", "stone_wall":"石壁 石10", "soil_tile":"土タイル 土2", "wood_tile":"木タイル 木2", "stone_tile":"石タイル 石2", "door":"ドア 木10", "locked_door":"施錠ドア 木20", "guide":"連れていく", "repair": "修理", "gate": "ドア開閉", "remove": "解体",
 	"auto": "おまかせ", "stay": "待機", "wander": "徘徊", "rest": "休む", "collect": "資源・卵・設計図", "dog_food": "犬用餌 HP+10", "hen_food": "鶏用餌 HP+8", "cat_food": "猫用餌 HP+8"}
 const GROUP_TOOLS = [["wall", "wood_wall", "stone_wall", "soil_tile", "wood_tile", "stone_tile", "door", "locked_door"], ["guide", "auto", "stay", "wander", "rest"], ["collect"]]
 const BoardArt = preload("res://game/board_art.gd")
@@ -1263,17 +1263,7 @@ func draw_structure(p: Vector2, b: Dictionary, preview: bool = false):
 		draw_rect(Rect2(p + Vector2(-17, 17), Vector2(34 * (1.0 - float(b.remaining) / b.total_ticks), 3)), Color("b2ebcf"))
 		return
 	if b.kind not in Farm.Buildings.WALLS: draw_colored_polygon(PackedVector2Array([p + Vector2(-20, 10), p + Vector2(20, 10), p + Vector2(28, 24), p + Vector2(-12, 24)]), Color(0.12, 0.22, 0.13, 0.25))
-	if b.kind in ["kennel", "coop"]:
-		draw_rect(Rect2(p + Vector2(-19, -7), Vector2(38, 29)), Color("b99160"))
-		draw_colored_polygon(PackedVector2Array([p + Vector2(-23, -7), p + Vector2(0, -21), p + Vector2(23, -7)]), Color("96624a"))
-		draw_rect(Rect2(p + Vector2(-9, 4), Vector2(18, 18)), Color("39443b"))
-		var owner = world.kennel_owner(Vector2i(p / TILE))
-		if owner >= 0:
-			draw_circle(p + Vector2(14, -1), 4, Color("c1e6a6"))
-		if b.kind == "coop":
-			draw_line(p + Vector2(-12, 6), p + Vector2(12, 6), Color("f1d79b"), 3)
-			draw_circle(p + Vector2(0, -10), 4, Color("fff0c7"))
-	elif b.kind in Farm.Buildings.WALLS:
+	if b.kind in Farm.Buildings.WALLS:
 		draw_connected_wall(p,b,shade,preview)
 
 	else:
@@ -1839,18 +1829,6 @@ func draw_shop():
 		label_on(hud, Vector2(597, 377), "ほかの品も見ていこう。", 16, UI.INK)
 	if shop_side in ["buy", "sell"] and shop_level == "detail": draw_product_detail()
 
-func draw_market_merchant(p: Vector2):
-	hud.draw_rect(Rect2(p+Vector2(-44,4),Vector2(88,75)),Color("69816b"))
-	hud.draw_rect(Rect2(p+Vector2(-18,9),Vector2(35,65)),Color("dbc592"))
-	hud.draw_circle(p+Vector2(0,-27),35,Color("e1b68e"))
-	hud.draw_style_box(UI.surface(Color("c7a66f")),Rect2(p+Vector2(-33,-88),Vector2(66,42)))
-	hud.draw_style_box(UI.surface(Color("d8bc86")),Rect2(p+Vector2(-55,-54),Vector2(110,14)))
-	for x in [-13,13]:hud.draw_circle(p+Vector2(x,-25),3,UI.INK)
-	hud.draw_arc(p+Vector2(0,-20),15,0.35,PI-0.35,10,UI.WOOD,2)
-	hud.draw_rect(Rect2(p+Vector2(-65,80),Vector2(130,15)),UI.WOOD)
-	draw_card_icon(hud,"wood",p+Vector2(-43,98),0.8)
-
-
 func draw_product_detail():
 	var p = Farm.Shop.table()[product_row.id]
 	var rows = shop_rows().filter(func(row): return row.id == product_row.id and row.animal_id == product_row.animal_id)
@@ -2094,9 +2072,6 @@ func draw_companion_card():
 func companion_box() -> StyleBox:
 	return UI.surface(UI.MOSS)
 
-func dog_part(p: Vector2, offset: Vector2, size_value: Vector2, tint: String, facing: float):
-	rect(p + Vector2(facing * (offset.x + size_value.x / 2) - size_value.x / 2, offset.y), size_value, tint)
-
 func dog_facing(a: Dictionary) -> float:
 	return float(a.get("facing",1))
 
@@ -2321,5 +2296,3 @@ func draw_connected_wall(p: Vector2, b: Dictionary, shade: Color, preview: bool)
 		draw_rect(Rect2(q,Vector2(6,9 if up and cell.y==-3 else 3 if down and cell.y==3 else 6)),shade)
 		if not cells.has(cell+Vector2i.LEFT) and not (left and cell.x==-4): draw_line(q,q+Vector2(0,6),shade.darkened(0.18),1)
 		if not cells.has(cell+Vector2i.RIGHT) and not (right and cell.x==3): draw_line(q+Vector2(6,0),q+Vector2(6,6),shade.darkened(0.18),1)
-
-

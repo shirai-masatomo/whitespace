@@ -28,5 +28,3 @@ finally { $record.end_utc=[DateTime]::UtcNow.ToString('o'); $record | ConvertTo-
 if($result.ExitCode -ne 0 -or -not $result.NonInteractive -or -not $result.DesktopMatched) { throw 'Isolated rendering failed; no interactive fallback is permitted.' }
 if(Select-String -LiteralPath "$runRoot/render.log" -Pattern 'SCRIPT ERROR:|ERROR:' -Quiet) { throw 'Renderer reported an error. Inspect the isolated log.' }
 Write-Output "Isolated render output: $runRoot"
-
-

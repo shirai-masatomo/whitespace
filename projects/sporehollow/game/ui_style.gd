@@ -11,8 +11,6 @@ static var textures: Dictionary = {}
 const FRAME = preload("res://assets/ui/paper-frame.svg")
 const SHIBA = [preload("res://art_delivery/characters_v1/shiba_idle_left_00.png"),preload("res://art_delivery/characters_v1/shiba_idle_front_00.png"),preload("res://art_delivery/characters_v1/shiba_idle_right_00.png")]
 const KEEPER = preload("res://art_delivery/characters_v1/keeper_idle_right_00.png")
-const STALL = preload("res://assets/ui/market-stall.png")
-const BOOK = preload("res://assets/ui/book-open.png")
 
 static func shiba(c: CanvasItem, foot: Vector2, pose: int=2, alpha: float=1.0):
 	c.texture_filter=CanvasItem.TEXTURE_FILTER_NEAREST

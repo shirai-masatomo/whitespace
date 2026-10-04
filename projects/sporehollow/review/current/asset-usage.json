@@ -1,0 +1,2802 @@
+{
+  "deliveries": {
+    "characters_v1": "f3e4ae82b68c342b928dfb5dfcebb451353f9b8d",
+    "characters_motion_v1": "ae950a3df8de7a3dbbd14f40dc3ef9df05e22fd4",
+    "ranch_assets_v1": "57aab97c3efc495d7553ee412c68696945d8e846",
+    "merchant_cart_v2": "0bbbc1c104acd13e7a9458c141a4a52921c05587",
+    "merchant_board_v1": "7e408375f19b86759fc614508fc3e5f413f67ff9"
+  },
+  "runtime_count": 106,
+  "files": [
+    {
+      "path": "art_delivery/characters_v1/keeper_idle_right_00.png",
+      "delivery_commit": "f3e4ae82b68c342b928dfb5dfcebb451353f9b8d",
+      "sha256": "c2ea9f9d7cdebd5a007d881fd17af4bb121c3f1afc2a373de56f49f859293c1e",
+      "size": [
+        32,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        4,
+        2,
+        29,
+        44
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/characters_v1/review/comparison-v2.png",
+      "delivery_commit": "f3e4ae82b68c342b928dfb5dfcebb451353f9b8d",
+      "sha256": "83ce1bcc76b3656f272ae057f9be6d0229190799ed7d204ed2c7e0fcf6ccfe53",
+      "size": [
+        1040,
+        920
+      ],
+      "mode": "RGB",
+      "bbox": [
+        0,
+        0,
+        1040,
+        920
+      ],
+      "runtime_reference": false,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/characters_v1/shiba_idle_front_00.png",
+      "delivery_commit": "f3e4ae82b68c342b928dfb5dfcebb451353f9b8d",
+      "sha256": "72d441d20b63e0df23fba270ac26722ef1f71142d0ebc33b3018bcb68a6092aa",
+      "size": [
+        48,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        16,
+        16,
+        33,
+        44
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/characters_v1/shiba_idle_left_00.png",
+      "delivery_commit": "f3e4ae82b68c342b928dfb5dfcebb451353f9b8d",
+      "sha256": "65a7c12c0bc1f742248e6ba2380e453d466d23b636121495cee35a53fc769105",
+      "size": [
+        48,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        12,
+        16,
+        37,
+        44
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/characters_v1/shiba_idle_right_00.png",
+      "delivery_commit": "f3e4ae82b68c342b928dfb5dfcebb451353f9b8d",
+      "sha256": "6b394d938fd8c8ba4f9afc94be43def55223d5097a1d9f9759965e1e2d1dede9",
+      "size": [
+        48,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        12,
+        16,
+        37,
+        44
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/characters_motion_v1/keeper/idle_left_00.png",
+      "delivery_commit": "ae950a3df8de7a3dbbd14f40dc3ef9df05e22fd4",
+      "sha256": "2f90923192a42877c5fd1b10a4f115d130e52ee9c81a6e5d0876687ab589e124",
+      "size": [
+        32,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        4,
+        2,
+        29,
+        44
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/characters_motion_v1/keeper/rest_left_00.png",
+      "delivery_commit": "ae950a3df8de7a3dbbd14f40dc3ef9df05e22fd4",
+      "sha256": "31ac0ffeac46f16b45d7615cf892012afcb91ed1aca245a091a45964601b1106",
+      "size": [
+        32,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        4,
+        10,
+        29,
+        44
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/characters_motion_v1/keeper/rest_left_01.png",
+      "delivery_commit": "ae950a3df8de7a3dbbd14f40dc3ef9df05e22fd4",
+      "sha256": "194f45a74a8e35a305d16243c63ffd033ec2cbee1269fd465c181680cbd551d1",
+      "size": [
+        32,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        4,
+        10,
+        29,
+        44
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/characters_motion_v1/keeper/rest_left_sheet.png",
+      "delivery_commit": "ae950a3df8de7a3dbbd14f40dc3ef9df05e22fd4",
+      "sha256": "ecb0e2f8414b02ed4780e76c19dc3d40f02bacc3e89db9dc464fb677fa48f477",
+      "size": [
+        64,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        4,
+        10,
+        61,
+        44
+      ],
+      "runtime_reference": false,
+      "hash_in_manifest": false
+    },
+    {
+      "path": "art_delivery/characters_motion_v1/keeper/rest_right_00.png",
+      "delivery_commit": "ae950a3df8de7a3dbbd14f40dc3ef9df05e22fd4",
+      "sha256": "718f06f76bc8e2191ed8c081c6ec18899625edb1d13ef676859ebf6e6210a1bb",
+      "size": [
+        32,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        4,
+        10,
+        29,
+        44
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/characters_motion_v1/keeper/rest_right_01.png",
+      "delivery_commit": "ae950a3df8de7a3dbbd14f40dc3ef9df05e22fd4",
+      "sha256": "059b8389b514414c9ff4842d1e42db9fdbc7679110528fbaec09de018063d228",
+      "size": [
+        32,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        4,
+        10,
+        29,
+        44
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/characters_motion_v1/keeper/rest_right_sheet.png",
+      "delivery_commit": "ae950a3df8de7a3dbbd14f40dc3ef9df05e22fd4",
+      "sha256": "0534bb94d148a8be7da22065f0e7119db77784ce1ed08eed39cda49cd04588b0",
+      "size": [
+        64,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        4,
+        10,
+        61,
+        44
+      ],
+      "runtime_reference": false,
+      "hash_in_manifest": false
+    },
+    {
+      "path": "art_delivery/characters_motion_v1/keeper/settle_left_00.png",
+      "delivery_commit": "ae950a3df8de7a3dbbd14f40dc3ef9df05e22fd4",
+      "sha256": "bc2db9f5d90616e389e381d626038d0d298a6713d4c8bbf6464b24ea93ca8a8a",
+      "size": [
+        32,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        4,
+        6,
+        29,
+        44
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/characters_motion_v1/keeper/settle_left_01.png",
+      "delivery_commit": "ae950a3df8de7a3dbbd14f40dc3ef9df05e22fd4",
+      "sha256": "31ac0ffeac46f16b45d7615cf892012afcb91ed1aca245a091a45964601b1106",
+      "size": [
+        32,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        4,
+        10,
+        29,
+        44
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/characters_motion_v1/keeper/settle_left_sheet.png",
+      "delivery_commit": "ae950a3df8de7a3dbbd14f40dc3ef9df05e22fd4",
+      "sha256": "a62b916d0e6fefc47bd9d620b018c7ec3987f8a8e9fa4ac522220f11cc1a4f81",
+      "size": [
+        64,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        4,
+        6,
+        61,
+        44
+      ],
+      "runtime_reference": false,
+      "hash_in_manifest": false
+    },
+    {
+      "path": "art_delivery/characters_motion_v1/keeper/settle_right_00.png",
+      "delivery_commit": "ae950a3df8de7a3dbbd14f40dc3ef9df05e22fd4",
+      "sha256": "57c18b89f7beb9d4012564039447f1794f17d57296e8fcb62f2d84e1cdf4aad7",
+      "size": [
+        32,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        4,
+        6,
+        29,
+        44
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/characters_motion_v1/keeper/settle_right_01.png",
+      "delivery_commit": "ae950a3df8de7a3dbbd14f40dc3ef9df05e22fd4",
+      "sha256": "718f06f76bc8e2191ed8c081c6ec18899625edb1d13ef676859ebf6e6210a1bb",
+      "size": [
+        32,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        4,
+        10,
+        29,
+        44
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/characters_motion_v1/keeper/settle_right_sheet.png",
+      "delivery_commit": "ae950a3df8de7a3dbbd14f40dc3ef9df05e22fd4",
+      "sha256": "3f29b89a9a1b191fa67c3581bb07efdceffb6cfbe35a64867ff66a7a97c7e219",
+      "size": [
+        64,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        4,
+        6,
+        61,
+        44
+      ],
+      "runtime_reference": false,
+      "hash_in_manifest": false
+    },
+    {
+      "path": "art_delivery/characters_motion_v1/keeper/sleep_left_00.png",
+      "delivery_commit": "ae950a3df8de7a3dbbd14f40dc3ef9df05e22fd4",
+      "sha256": "506a19330d38e0dd7e9a7bfd49c16daf9c9512cbe833603ffaa7edcb1cb00234",
+      "size": [
+        32,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        4,
+        16,
+        29,
+        44
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/characters_motion_v1/keeper/sleep_left_01.png",
+      "delivery_commit": "ae950a3df8de7a3dbbd14f40dc3ef9df05e22fd4",
+      "sha256": "468a9e798a04a56176d7d4719e74a447b46ca86fd26616c4d3561637688a1ca5",
+      "size": [
+        32,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        4,
+        16,
+        29,
+        44
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/characters_motion_v1/keeper/sleep_left_sheet.png",
+      "delivery_commit": "ae950a3df8de7a3dbbd14f40dc3ef9df05e22fd4",
+      "sha256": "b8482d7f72aaf0347cd47cb4768e6c76c5e3667f45abee35eb367cad0c956f90",
+      "size": [
+        64,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        4,
+        16,
+        61,
+        44
+      ],
+      "runtime_reference": false,
+      "hash_in_manifest": false
+    },
+    {
+      "path": "art_delivery/characters_motion_v1/keeper/sleep_right_00.png",
+      "delivery_commit": "ae950a3df8de7a3dbbd14f40dc3ef9df05e22fd4",
+      "sha256": "354e0c887193db7a375b9d0b079f13b211fc85f28401ee6ce1988e4b1290af4c",
+      "size": [
+        32,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        4,
+        16,
+        29,
+        44
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/characters_motion_v1/keeper/sleep_right_01.png",
+      "delivery_commit": "ae950a3df8de7a3dbbd14f40dc3ef9df05e22fd4",
+      "sha256": "6e87fbe1bb80b18569d99161991a74b526f3576e935c5d7d0ae72c7bbb88d5f2",
+      "size": [
+        32,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        4,
+        16,
+        29,
+        44
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/characters_motion_v1/keeper/sleep_right_sheet.png",
+      "delivery_commit": "ae950a3df8de7a3dbbd14f40dc3ef9df05e22fd4",
+      "sha256": "da8908cd9ac36cca6f140ec173b3b3fd557179c9269450185c69c3fe26ac977f",
+      "size": [
+        64,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        4,
+        16,
+        61,
+        44
+      ],
+      "runtime_reference": false,
+      "hash_in_manifest": false
+    },
+    {
+      "path": "art_delivery/characters_motion_v1/keeper/wake_left_00.png",
+      "delivery_commit": "ae950a3df8de7a3dbbd14f40dc3ef9df05e22fd4",
+      "sha256": "31ac0ffeac46f16b45d7615cf892012afcb91ed1aca245a091a45964601b1106",
+      "size": [
+        32,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        4,
+        10,
+        29,
+        44
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/characters_motion_v1/keeper/wake_left_01.png",
+      "delivery_commit": "ae950a3df8de7a3dbbd14f40dc3ef9df05e22fd4",
+      "sha256": "bc2db9f5d90616e389e381d626038d0d298a6713d4c8bbf6464b24ea93ca8a8a",
+      "size": [
+        32,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        4,
+        6,
+        29,
+        44
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/characters_motion_v1/keeper/wake_left_sheet.png",
+      "delivery_commit": "ae950a3df8de7a3dbbd14f40dc3ef9df05e22fd4",
+      "sha256": "7bb29b2f19adf6b7d02a1dc5f2df06914d434fff8f1eb5e9a2377bddf9b3bdc3",
+      "size": [
+        64,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        4,
+        6,
+        61,
+        44
+      ],
+      "runtime_reference": false,
+      "hash_in_manifest": false
+    },
+    {
+      "path": "art_delivery/characters_motion_v1/keeper/wake_right_00.png",
+      "delivery_commit": "ae950a3df8de7a3dbbd14f40dc3ef9df05e22fd4",
+      "sha256": "718f06f76bc8e2191ed8c081c6ec18899625edb1d13ef676859ebf6e6210a1bb",
+      "size": [
+        32,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        4,
+        10,
+        29,
+        44
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/characters_motion_v1/keeper/wake_right_01.png",
+      "delivery_commit": "ae950a3df8de7a3dbbd14f40dc3ef9df05e22fd4",
+      "sha256": "57c18b89f7beb9d4012564039447f1794f17d57296e8fcb62f2d84e1cdf4aad7",
+      "size": [
+        32,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        4,
+        6,
+        29,
+        44
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/characters_motion_v1/keeper/wake_right_sheet.png",
+      "delivery_commit": "ae950a3df8de7a3dbbd14f40dc3ef9df05e22fd4",
+      "sha256": "c5e2937f66da915057f3de5a09ebedf49695c79d479e32e9bde47610485f8b1f",
+      "size": [
+        64,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        4,
+        6,
+        61,
+        44
+      ],
+      "runtime_reference": false,
+      "hash_in_manifest": false
+    },
+    {
+      "path": "art_delivery/characters_motion_v1/keeper/walk_left_00.png",
+      "delivery_commit": "ae950a3df8de7a3dbbd14f40dc3ef9df05e22fd4",
+      "sha256": "0ae8c638ae70f053f1d9996d4040cc8e2dbde0103e483a905dc9e741a3a1696f",
+      "size": [
+        32,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        4,
+        2,
+        29,
+        44
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/characters_motion_v1/keeper/walk_left_01.png",
+      "delivery_commit": "ae950a3df8de7a3dbbd14f40dc3ef9df05e22fd4",
+      "sha256": "04aad25d2ad5e004ba941b29ad71f33cef5d2f6928e59d4a8496d467825b325a",
+      "size": [
+        32,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        4,
+        2,
+        29,
+        44
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/characters_motion_v1/keeper/walk_left_02.png",
+      "delivery_commit": "ae950a3df8de7a3dbbd14f40dc3ef9df05e22fd4",
+      "sha256": "050c23ba5ba7727368bc91baa55b2023873944d3cc1c34aea33e6839bac63180",
+      "size": [
+        32,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        4,
+        2,
+        29,
+        44
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/characters_motion_v1/keeper/walk_left_03.png",
+      "delivery_commit": "ae950a3df8de7a3dbbd14f40dc3ef9df05e22fd4",
+      "sha256": "e4a68833ce0ac8ace98faef76966adf8c9b5c311008148ef3b65437d30deb5d6",
+      "size": [
+        32,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        4,
+        2,
+        29,
+        44
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/characters_motion_v1/keeper/walk_left_sheet.png",
+      "delivery_commit": "ae950a3df8de7a3dbbd14f40dc3ef9df05e22fd4",
+      "sha256": "8734f8f0efb307e9c51551bac5b8fff3880d7aa188fc21e4da6a26707e64d9bc",
+      "size": [
+        128,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        4,
+        2,
+        125,
+        44
+      ],
+      "runtime_reference": false,
+      "hash_in_manifest": false
+    },
+    {
+      "path": "art_delivery/characters_motion_v1/keeper/walk_right_00.png",
+      "delivery_commit": "ae950a3df8de7a3dbbd14f40dc3ef9df05e22fd4",
+      "sha256": "607314fe0ef1b9a340e8a9e79e48309eb73c754942e5c980e87095bbc2c4b690",
+      "size": [
+        32,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        4,
+        2,
+        29,
+        44
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/characters_motion_v1/keeper/walk_right_01.png",
+      "delivery_commit": "ae950a3df8de7a3dbbd14f40dc3ef9df05e22fd4",
+      "sha256": "9d19590832b5ac2b0abab67e172d75adaa77a9f35c86992b72a28903c9e7349b",
+      "size": [
+        32,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        4,
+        2,
+        29,
+        44
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/characters_motion_v1/keeper/walk_right_02.png",
+      "delivery_commit": "ae950a3df8de7a3dbbd14f40dc3ef9df05e22fd4",
+      "sha256": "9f5907c641d598f9548008caa6ee79899800f48c5eff1415f4a7641fc10e2e30",
+      "size": [
+        32,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        4,
+        2,
+        29,
+        44
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/characters_motion_v1/keeper/walk_right_03.png",
+      "delivery_commit": "ae950a3df8de7a3dbbd14f40dc3ef9df05e22fd4",
+      "sha256": "d10ab2b94347f9a7987da1911d32c5433938d42b992523b64d598696f8826f52",
+      "size": [
+        32,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        4,
+        2,
+        29,
+        44
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/characters_motion_v1/keeper/walk_right_sheet.png",
+      "delivery_commit": "ae950a3df8de7a3dbbd14f40dc3ef9df05e22fd4",
+      "sha256": "b616edf8514f876d9bcf6fe1d84156c30c427aa0150b1d808f82745364c5299a",
+      "size": [
+        128,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        4,
+        2,
+        125,
+        44
+      ],
+      "runtime_reference": false,
+      "hash_in_manifest": false
+    },
+    {
+      "path": "art_delivery/characters_motion_v1/review/rest-proof.png",
+      "delivery_commit": "ae950a3df8de7a3dbbd14f40dc3ef9df05e22fd4",
+      "sha256": "7feb2225f5ee70b0ae838e1f8be742d67d0ad35128eb1549df8f1335319e0d7d",
+      "size": [
+        1080,
+        760
+      ],
+      "mode": "RGB",
+      "bbox": [
+        0,
+        0,
+        1080,
+        760
+      ],
+      "runtime_reference": false,
+      "hash_in_manifest": false
+    },
+    {
+      "path": "art_delivery/characters_motion_v1/shiba/rest_left_00.png",
+      "delivery_commit": "ae950a3df8de7a3dbbd14f40dc3ef9df05e22fd4",
+      "sha256": "55cc0d1ad2f66551d01a86d605b4d65d30994593f8194648a0b9377ea81c2858",
+      "size": [
+        48,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        11,
+        26,
+        39,
+        44
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/characters_motion_v1/shiba/rest_left_01.png",
+      "delivery_commit": "ae950a3df8de7a3dbbd14f40dc3ef9df05e22fd4",
+      "sha256": "13097c925cb79c0ea6eaa48717a38281f4449373e2e48b48b8b6aee0f55a2296",
+      "size": [
+        48,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        11,
+        26,
+        39,
+        44
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/characters_motion_v1/shiba/rest_left_sheet.png",
+      "delivery_commit": "ae950a3df8de7a3dbbd14f40dc3ef9df05e22fd4",
+      "sha256": "3c31c053dc221373d6871aa89c239a739d1e0ed2c5cbe9187f30a0d64170d05b",
+      "size": [
+        96,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        11,
+        26,
+        87,
+        44
+      ],
+      "runtime_reference": false,
+      "hash_in_manifest": false
+    },
+    {
+      "path": "art_delivery/characters_motion_v1/shiba/rest_right_00.png",
+      "delivery_commit": "ae950a3df8de7a3dbbd14f40dc3ef9df05e22fd4",
+      "sha256": "3cb8019884919ef86650308b8071d04023602e1ed9196570383f2d6718a7ca43",
+      "size": [
+        48,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        10,
+        26,
+        38,
+        44
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/characters_motion_v1/shiba/rest_right_01.png",
+      "delivery_commit": "ae950a3df8de7a3dbbd14f40dc3ef9df05e22fd4",
+      "sha256": "8eb004f8690df00b3f776a6907ba74611d218321495c70aaff6c542748888296",
+      "size": [
+        48,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        10,
+        26,
+        38,
+        44
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/characters_motion_v1/shiba/rest_right_sheet.png",
+      "delivery_commit": "ae950a3df8de7a3dbbd14f40dc3ef9df05e22fd4",
+      "sha256": "78909e64a658d5b3e088baab61a50697144e78429cdff303488531a44d9dee04",
+      "size": [
+        96,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        10,
+        26,
+        86,
+        44
+      ],
+      "runtime_reference": false,
+      "hash_in_manifest": false
+    },
+    {
+      "path": "art_delivery/characters_motion_v1/shiba/settle_left_00.png",
+      "delivery_commit": "ae950a3df8de7a3dbbd14f40dc3ef9df05e22fd4",
+      "sha256": "3be1417e0c5006a7cc29975d9f5f45b41cb716a28b494b687469a784a38d2341",
+      "size": [
+        48,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        12,
+        21,
+        37,
+        44
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/characters_motion_v1/shiba/settle_left_01.png",
+      "delivery_commit": "ae950a3df8de7a3dbbd14f40dc3ef9df05e22fd4",
+      "sha256": "55cc0d1ad2f66551d01a86d605b4d65d30994593f8194648a0b9377ea81c2858",
+      "size": [
+        48,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        11,
+        26,
+        39,
+        44
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/characters_motion_v1/shiba/settle_left_sheet.png",
+      "delivery_commit": "ae950a3df8de7a3dbbd14f40dc3ef9df05e22fd4",
+      "sha256": "525c1f85967fc0dbd76f2b1dab09019f3f8b87248113c6eda67b51a71e215b45",
+      "size": [
+        96,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        12,
+        21,
+        87,
+        44
+      ],
+      "runtime_reference": false,
+      "hash_in_manifest": false
+    },
+    {
+      "path": "art_delivery/characters_motion_v1/shiba/settle_right_00.png",
+      "delivery_commit": "ae950a3df8de7a3dbbd14f40dc3ef9df05e22fd4",
+      "sha256": "d8dcf791a89b8951eccf76ce5b355dd2fff9afcf28546f56dc390da0733800f3",
+      "size": [
+        48,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        12,
+        21,
+        37,
+        44
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/characters_motion_v1/shiba/settle_right_01.png",
+      "delivery_commit": "ae950a3df8de7a3dbbd14f40dc3ef9df05e22fd4",
+      "sha256": "3cb8019884919ef86650308b8071d04023602e1ed9196570383f2d6718a7ca43",
+      "size": [
+        48,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        10,
+        26,
+        38,
+        44
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/characters_motion_v1/shiba/settle_right_sheet.png",
+      "delivery_commit": "ae950a3df8de7a3dbbd14f40dc3ef9df05e22fd4",
+      "sha256": "8f5b8184bb6bee4295af374d60393e3de6752bc3c29d645fd7eae88420aab4ee",
+      "size": [
+        96,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        12,
+        21,
+        86,
+        44
+      ],
+      "runtime_reference": false,
+      "hash_in_manifest": false
+    },
+    {
+      "path": "art_delivery/characters_motion_v1/shiba/wake_left_00.png",
+      "delivery_commit": "ae950a3df8de7a3dbbd14f40dc3ef9df05e22fd4",
+      "sha256": "55cc0d1ad2f66551d01a86d605b4d65d30994593f8194648a0b9377ea81c2858",
+      "size": [
+        48,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        11,
+        26,
+        39,
+        44
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/characters_motion_v1/shiba/wake_left_01.png",
+      "delivery_commit": "ae950a3df8de7a3dbbd14f40dc3ef9df05e22fd4",
+      "sha256": "3be1417e0c5006a7cc29975d9f5f45b41cb716a28b494b687469a784a38d2341",
+      "size": [
+        48,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        12,
+        21,
+        37,
+        44
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/characters_motion_v1/shiba/wake_left_sheet.png",
+      "delivery_commit": "ae950a3df8de7a3dbbd14f40dc3ef9df05e22fd4",
+      "sha256": "78686a3372fe9dd9b2c2032200399265bcd68d57db1e2abbd8df45288d1b6bd4",
+      "size": [
+        96,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        11,
+        21,
+        85,
+        44
+      ],
+      "runtime_reference": false,
+      "hash_in_manifest": false
+    },
+    {
+      "path": "art_delivery/characters_motion_v1/shiba/wake_right_00.png",
+      "delivery_commit": "ae950a3df8de7a3dbbd14f40dc3ef9df05e22fd4",
+      "sha256": "3cb8019884919ef86650308b8071d04023602e1ed9196570383f2d6718a7ca43",
+      "size": [
+        48,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        10,
+        26,
+        38,
+        44
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/characters_motion_v1/shiba/wake_right_01.png",
+      "delivery_commit": "ae950a3df8de7a3dbbd14f40dc3ef9df05e22fd4",
+      "sha256": "d8dcf791a89b8951eccf76ce5b355dd2fff9afcf28546f56dc390da0733800f3",
+      "size": [
+        48,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        12,
+        21,
+        37,
+        44
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/characters_motion_v1/shiba/wake_right_sheet.png",
+      "delivery_commit": "ae950a3df8de7a3dbbd14f40dc3ef9df05e22fd4",
+      "sha256": "568d5e2e8b688eadabab0b332f8c2cc5580d8c0672dcdeafe33d305ea76d1e0b",
+      "size": [
+        96,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        10,
+        21,
+        85,
+        44
+      ],
+      "runtime_reference": false,
+      "hash_in_manifest": false
+    },
+    {
+      "path": "art_delivery/characters_motion_v1/shiba/walk_left_00.png",
+      "delivery_commit": "ae950a3df8de7a3dbbd14f40dc3ef9df05e22fd4",
+      "sha256": "4f74c302059357facf9fe6a96e53f0e8eafec0d81660eabcde3c3abccab67825",
+      "size": [
+        48,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        12,
+        16,
+        40,
+        44
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/characters_motion_v1/shiba/walk_left_01.png",
+      "delivery_commit": "ae950a3df8de7a3dbbd14f40dc3ef9df05e22fd4",
+      "sha256": "f544d04642180805818d5b4a7e49250aca15b2be596bc03bf882b240267cc3ca",
+      "size": [
+        48,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        12,
+        16,
+        38,
+        44
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/characters_motion_v1/shiba/walk_left_02.png",
+      "delivery_commit": "ae950a3df8de7a3dbbd14f40dc3ef9df05e22fd4",
+      "sha256": "b8e4b81594217911d0e246841eff31e00a0d1f399b5f73e11b48d3b04cf8d6da",
+      "size": [
+        48,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        12,
+        16,
+        40,
+        44
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/characters_motion_v1/shiba/walk_left_03.png",
+      "delivery_commit": "ae950a3df8de7a3dbbd14f40dc3ef9df05e22fd4",
+      "sha256": "333e8407afeba8a4c901fe6c35f2d12fde56024750b34c98940511cb86ea8515",
+      "size": [
+        48,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        12,
+        16,
+        37,
+        44
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/characters_motion_v1/shiba/walk_left_sheet.png",
+      "delivery_commit": "ae950a3df8de7a3dbbd14f40dc3ef9df05e22fd4",
+      "sha256": "9f429d7c4fac2515be59450cafc94d60bb8f0c94b7833c48110ea8701070a0db",
+      "size": [
+        192,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        12,
+        16,
+        181,
+        44
+      ],
+      "runtime_reference": false,
+      "hash_in_manifest": false
+    },
+    {
+      "path": "art_delivery/characters_motion_v1/shiba/walk_right_00.png",
+      "delivery_commit": "ae950a3df8de7a3dbbd14f40dc3ef9df05e22fd4",
+      "sha256": "003ea9746dc9e8ec41aef2de2d566cba5b654a2c6b5420704d5a49417fcd515e",
+      "size": [
+        48,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        9,
+        16,
+        37,
+        44
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/characters_motion_v1/shiba/walk_right_01.png",
+      "delivery_commit": "ae950a3df8de7a3dbbd14f40dc3ef9df05e22fd4",
+      "sha256": "575b6c02e4c88591534e8ca8024097dda7692e12b1550441253323007557370a",
+      "size": [
+        48,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        11,
+        16,
+        37,
+        44
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/characters_motion_v1/shiba/walk_right_02.png",
+      "delivery_commit": "ae950a3df8de7a3dbbd14f40dc3ef9df05e22fd4",
+      "sha256": "2b78dc6189e9f218506ce959d71d25f1e253c66259b40e5c1ff922f1a3d82145",
+      "size": [
+        48,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        9,
+        16,
+        37,
+        44
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/characters_motion_v1/shiba/walk_right_03.png",
+      "delivery_commit": "ae950a3df8de7a3dbbd14f40dc3ef9df05e22fd4",
+      "sha256": "9a384eb5b05304d9cab65e3f9782a9e536f7c3101ea36230abd4bad4a5462d98",
+      "size": [
+        48,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        12,
+        16,
+        37,
+        44
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/characters_motion_v1/shiba/walk_right_sheet.png",
+      "delivery_commit": "ae950a3df8de7a3dbbd14f40dc3ef9df05e22fd4",
+      "sha256": "a144c0ec46412deb60c849f07a165521c043190c168200e0831eb05b49ec4799",
+      "size": [
+        192,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        9,
+        16,
+        181,
+        44
+      ],
+      "runtime_reference": false,
+      "hash_in_manifest": false
+    },
+    {
+      "path": "art_delivery/ranch_assets_v1/book/binding_shadow_layer.png",
+      "delivery_commit": "57aab97c3efc495d7553ee412c68696945d8e846",
+      "sha256": "b7b503c3c0d506219c4a9161b02a010c5780d78411811d6b4116b85fad980e37",
+      "size": [
+        1024,
+        640
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        504,
+        52,
+        521,
+        556
+      ],
+      "runtime_reference": false,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/ranch_assets_v1/book/closed_00.png",
+      "delivery_commit": "57aab97c3efc495d7553ee412c68696945d8e846",
+      "sha256": "7a8a967c0e3364345bff237de083e42a858af86be8661fb3abc68cbaed896f82",
+      "size": [
+        256,
+        320
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        20,
+        12,
+        244,
+        308
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/ranch_assets_v1/book/closing_00.png",
+      "delivery_commit": "57aab97c3efc495d7553ee412c68696945d8e846",
+      "sha256": "34eec1958c6159a982691b8f9755e8e98d7588ff90230afdeb2d51e7e959d367",
+      "size": [
+        1024,
+        640
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        72,
+        36,
+        952,
+        604
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/ranch_assets_v1/book/closing_01.png",
+      "delivery_commit": "57aab97c3efc495d7553ee412c68696945d8e846",
+      "sha256": "35207080a3c5161b8461965dfbe3a235f0aaf875478966f5fc56cf0153f89a0e",
+      "size": [
+        1024,
+        640
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        184,
+        36,
+        952,
+        604
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/ranch_assets_v1/book/closing_02.png",
+      "delivery_commit": "57aab97c3efc495d7553ee412c68696945d8e846",
+      "sha256": "f8103dbb1a2ac0de80a4b774ebe5835f06f49c4b482635dd8c6b64013cbce69e",
+      "size": [
+        1024,
+        640
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        400,
+        36,
+        952,
+        604
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/ranch_assets_v1/book/closing_03.png",
+      "delivery_commit": "57aab97c3efc495d7553ee412c68696945d8e846",
+      "sha256": "3e1a689a17034e4cb3d9d76e8e9136cb637b19d8613cd25225b020103d4cccc8",
+      "size": [
+        1024,
+        640
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        504,
+        36,
+        952,
+        604
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/ranch_assets_v1/book/closing_04.png",
+      "delivery_commit": "57aab97c3efc495d7553ee412c68696945d8e846",
+      "sha256": "5fa6df0d56ff5c5d8a2674c16027722ccbf913b5113bca1abaafd14e74b36dcd",
+      "size": [
+        1024,
+        640
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        504,
+        36,
+        952,
+        604
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/ranch_assets_v1/book/closing_05.png",
+      "delivery_commit": "57aab97c3efc495d7553ee412c68696945d8e846",
+      "sha256": "318a86e9f4780dc07dd1dc587340e7d45c68c1a31e1eef939af8a9f3fccba156",
+      "size": [
+        1024,
+        640
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        504,
+        36,
+        960,
+        604
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/ranch_assets_v1/book/cover_layer.png",
+      "delivery_commit": "57aab97c3efc495d7553ee412c68696945d8e846",
+      "sha256": "a9c6132924a563117e254e1c15956a508729816058134622a1a4b3a8a2a9bc8a",
+      "size": [
+        1024,
+        640
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        72,
+        36,
+        952,
+        604
+      ],
+      "runtime_reference": false,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/ranch_assets_v1/book/front_cover_hinge_layer.png",
+      "delivery_commit": "57aab97c3efc495d7553ee412c68696945d8e846",
+      "sha256": "9f0472dace817700865441b47f7783bf63d6f9156bee5499c6755fcd47ed362c",
+      "size": [
+        1024,
+        640
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        512,
+        36,
+        960,
+        564
+      ],
+      "runtime_reference": false,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/ranch_assets_v1/book/open_00.png",
+      "delivery_commit": "57aab97c3efc495d7553ee412c68696945d8e846",
+      "sha256": "34eec1958c6159a982691b8f9755e8e98d7588ff90230afdeb2d51e7e959d367",
+      "size": [
+        1024,
+        640
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        72,
+        36,
+        952,
+        604
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/ranch_assets_v1/book/opening_00.png",
+      "delivery_commit": "57aab97c3efc495d7553ee412c68696945d8e846",
+      "sha256": "318a86e9f4780dc07dd1dc587340e7d45c68c1a31e1eef939af8a9f3fccba156",
+      "size": [
+        1024,
+        640
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        504,
+        36,
+        960,
+        604
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/ranch_assets_v1/book/opening_01.png",
+      "delivery_commit": "57aab97c3efc495d7553ee412c68696945d8e846",
+      "sha256": "5fa6df0d56ff5c5d8a2674c16027722ccbf913b5113bca1abaafd14e74b36dcd",
+      "size": [
+        1024,
+        640
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        504,
+        36,
+        952,
+        604
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/ranch_assets_v1/book/opening_02.png",
+      "delivery_commit": "57aab97c3efc495d7553ee412c68696945d8e846",
+      "sha256": "3e1a689a17034e4cb3d9d76e8e9136cb637b19d8613cd25225b020103d4cccc8",
+      "size": [
+        1024,
+        640
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        504,
+        36,
+        952,
+        604
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/ranch_assets_v1/book/opening_03.png",
+      "delivery_commit": "57aab97c3efc495d7553ee412c68696945d8e846",
+      "sha256": "f8103dbb1a2ac0de80a4b774ebe5835f06f49c4b482635dd8c6b64013cbce69e",
+      "size": [
+        1024,
+        640
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        400,
+        36,
+        952,
+        604
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/ranch_assets_v1/book/opening_04.png",
+      "delivery_commit": "57aab97c3efc495d7553ee412c68696945d8e846",
+      "sha256": "35207080a3c5161b8461965dfbe3a235f0aaf875478966f5fc56cf0153f89a0e",
+      "size": [
+        1024,
+        640
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        184,
+        36,
+        952,
+        604
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/ranch_assets_v1/book/opening_05.png",
+      "delivery_commit": "57aab97c3efc495d7553ee412c68696945d8e846",
+      "sha256": "34eec1958c6159a982691b8f9755e8e98d7588ff90230afdeb2d51e7e959d367",
+      "size": [
+        1024,
+        640
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        72,
+        36,
+        952,
+        604
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/ranch_assets_v1/book/page_next_00.png",
+      "delivery_commit": "57aab97c3efc495d7553ee412c68696945d8e846",
+      "sha256": "34eec1958c6159a982691b8f9755e8e98d7588ff90230afdeb2d51e7e959d367",
+      "size": [
+        1024,
+        640
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        72,
+        36,
+        952,
+        604
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/ranch_assets_v1/book/page_next_01.png",
+      "delivery_commit": "57aab97c3efc495d7553ee412c68696945d8e846",
+      "sha256": "bcd2a93f782e7123928f7968cd58bf44f28356572026ce0fac3126ecdf884ec7",
+      "size": [
+        1024,
+        640
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        72,
+        36,
+        952,
+        604
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/ranch_assets_v1/book/page_next_02.png",
+      "delivery_commit": "57aab97c3efc495d7553ee412c68696945d8e846",
+      "sha256": "6c49df79d6865df78291dfe6a874485ee22340f4ed2b6a232a5546a2c89e5458",
+      "size": [
+        1024,
+        640
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        72,
+        36,
+        952,
+        604
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/ranch_assets_v1/book/page_next_03.png",
+      "delivery_commit": "57aab97c3efc495d7553ee412c68696945d8e846",
+      "sha256": "788c042d67185d076fb961c93c890643a554f333b37d1e0576adcacff175b6fd",
+      "size": [
+        1024,
+        640
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        72,
+        36,
+        952,
+        604
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/ranch_assets_v1/book/page_next_04.png",
+      "delivery_commit": "57aab97c3efc495d7553ee412c68696945d8e846",
+      "sha256": "2502e520a3f78ffdf2e9f2d96ecf27acee6482b4a74df82f370f126a05474344",
+      "size": [
+        1024,
+        640
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        72,
+        36,
+        952,
+        604
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/ranch_assets_v1/book/page_next_05.png",
+      "delivery_commit": "57aab97c3efc495d7553ee412c68696945d8e846",
+      "sha256": "34eec1958c6159a982691b8f9755e8e98d7588ff90230afdeb2d51e7e959d367",
+      "size": [
+        1024,
+        640
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        72,
+        36,
+        952,
+        604
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/ranch_assets_v1/book/page_previous_00.png",
+      "delivery_commit": "57aab97c3efc495d7553ee412c68696945d8e846",
+      "sha256": "34eec1958c6159a982691b8f9755e8e98d7588ff90230afdeb2d51e7e959d367",
+      "size": [
+        1024,
+        640
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        72,
+        36,
+        952,
+        604
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/ranch_assets_v1/book/page_previous_01.png",
+      "delivery_commit": "57aab97c3efc495d7553ee412c68696945d8e846",
+      "sha256": "2502e520a3f78ffdf2e9f2d96ecf27acee6482b4a74df82f370f126a05474344",
+      "size": [
+        1024,
+        640
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        72,
+        36,
+        952,
+        604
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/ranch_assets_v1/book/page_previous_02.png",
+      "delivery_commit": "57aab97c3efc495d7553ee412c68696945d8e846",
+      "sha256": "788c042d67185d076fb961c93c890643a554f333b37d1e0576adcacff175b6fd",
+      "size": [
+        1024,
+        640
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        72,
+        36,
+        952,
+        604
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/ranch_assets_v1/book/page_previous_03.png",
+      "delivery_commit": "57aab97c3efc495d7553ee412c68696945d8e846",
+      "sha256": "6c49df79d6865df78291dfe6a874485ee22340f4ed2b6a232a5546a2c89e5458",
+      "size": [
+        1024,
+        640
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        72,
+        36,
+        952,
+        604
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/ranch_assets_v1/book/page_previous_04.png",
+      "delivery_commit": "57aab97c3efc495d7553ee412c68696945d8e846",
+      "sha256": "bcd2a93f782e7123928f7968cd58bf44f28356572026ce0fac3126ecdf884ec7",
+      "size": [
+        1024,
+        640
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        72,
+        36,
+        952,
+        604
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/ranch_assets_v1/book/page_previous_05.png",
+      "delivery_commit": "57aab97c3efc495d7553ee412c68696945d8e846",
+      "sha256": "34eec1958c6159a982691b8f9755e8e98d7588ff90230afdeb2d51e7e959d367",
+      "size": [
+        1024,
+        640
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        72,
+        36,
+        952,
+        604
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/ranch_assets_v1/book/paper_layer.png",
+      "delivery_commit": "57aab97c3efc495d7553ee412c68696945d8e846",
+      "sha256": "a3886a5f26ffefdd72a6c356b2413dcc2703ba142083447601582e9eb3c1749f",
+      "size": [
+        1024,
+        640
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        92,
+        48,
+        932,
+        584
+      ],
+      "runtime_reference": false,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/ranch_assets_v1/cat/idle_left_00.png",
+      "delivery_commit": "57aab97c3efc495d7553ee412c68696945d8e846",
+      "sha256": "cd3c93d6a3913728ab6ea90c7e186331847310d0a93b23689bda0dd12f025e4a",
+      "size": [
+        48,
+        40
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        13,
+        12,
+        37,
+        36
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/ranch_assets_v1/cat/idle_left_sheet.png",
+      "delivery_commit": "57aab97c3efc495d7553ee412c68696945d8e846",
+      "sha256": "cd3c93d6a3913728ab6ea90c7e186331847310d0a93b23689bda0dd12f025e4a",
+      "size": [
+        48,
+        40
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        13,
+        12,
+        37,
+        36
+      ],
+      "runtime_reference": false,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/ranch_assets_v1/cat/idle_right_00.png",
+      "delivery_commit": "57aab97c3efc495d7553ee412c68696945d8e846",
+      "sha256": "aa8c80b01e4c43ed4c5325dd0ea9176f436d4262be9b9c9e9623e38eecefe5f5",
+      "size": [
+        48,
+        40
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        12,
+        12,
+        36,
+        36
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/ranch_assets_v1/cat/idle_right_sheet.png",
+      "delivery_commit": "57aab97c3efc495d7553ee412c68696945d8e846",
+      "sha256": "aa8c80b01e4c43ed4c5325dd0ea9176f436d4262be9b9c9e9623e38eecefe5f5",
+      "size": [
+        48,
+        40
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        12,
+        12,
+        36,
+        36
+      ],
+      "runtime_reference": false,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/ranch_assets_v1/cat/stretch_left_00.png",
+      "delivery_commit": "57aab97c3efc495d7553ee412c68696945d8e846",
+      "sha256": "3ef003799eff2e8440fa743876b313633fd9be190bbca6fbae644259bf0a13c1",
+      "size": [
+        48,
+        40
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        11,
+        13,
+        38,
+        36
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/ranch_assets_v1/cat/stretch_left_01.png",
+      "delivery_commit": "57aab97c3efc495d7553ee412c68696945d8e846",
+      "sha256": "77c963c415aa7fb4b08f8ee83b4385ad6b924d4ae29c712688631b269582bf1c",
+      "size": [
+        48,
+        40
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        11,
+        12,
+        38,
+        36
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/ranch_assets_v1/cat/stretch_left_sheet.png",
+      "delivery_commit": "57aab97c3efc495d7553ee412c68696945d8e846",
+      "sha256": "b9d90f156d966340ae467c21989aefa8bec86ef5b2c4ef573b01dba40524b9b5",
+      "size": [
+        96,
+        40
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        11,
+        12,
+        86,
+        36
+      ],
+      "runtime_reference": false,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/ranch_assets_v1/cat/stretch_right_00.png",
+      "delivery_commit": "57aab97c3efc495d7553ee412c68696945d8e846",
+      "sha256": "678b1ffc7bd1129d05768355a3422c1d86ab364d7c11d04e559e2eaa93e79f49",
+      "size": [
+        48,
+        40
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        11,
+        13,
+        38,
+        36
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/ranch_assets_v1/cat/stretch_right_01.png",
+      "delivery_commit": "57aab97c3efc495d7553ee412c68696945d8e846",
+      "sha256": "5fa4238fbe964eb028d7545b330d0f8da1921351f3ed9efd85315aaf466c55a7",
+      "size": [
+        48,
+        40
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        11,
+        12,
+        38,
+        36
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/ranch_assets_v1/cat/stretch_right_sheet.png",
+      "delivery_commit": "57aab97c3efc495d7553ee412c68696945d8e846",
+      "sha256": "c9e1d2dd30cb4c7477d2ad9732c8f8d12979f3e5721f1b3b00ea85e1da850636",
+      "size": [
+        96,
+        40
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        11,
+        12,
+        86,
+        36
+      ],
+      "runtime_reference": false,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/ranch_assets_v1/cat/walk_left_00.png",
+      "delivery_commit": "57aab97c3efc495d7553ee412c68696945d8e846",
+      "sha256": "4d553ae10faf68e1eb1b879b8dde1bce17e7f0cf2eda8c1bd7180c1c58234b19",
+      "size": [
+        48,
+        40
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        13,
+        12,
+        37,
+        36
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/ranch_assets_v1/cat/walk_left_01.png",
+      "delivery_commit": "57aab97c3efc495d7553ee412c68696945d8e846",
+      "sha256": "73c909ace0e106ddb36e52d26e464b95beaa0a8c5e9d51b339b1059ec92c581a",
+      "size": [
+        48,
+        40
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        13,
+        12,
+        37,
+        36
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/ranch_assets_v1/cat/walk_left_02.png",
+      "delivery_commit": "57aab97c3efc495d7553ee412c68696945d8e846",
+      "sha256": "714af3dfccfe393741ed6b0d1d4d34bc5227226a2acdcb5b9872c53373fdbbf9",
+      "size": [
+        48,
+        40
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        13,
+        12,
+        37,
+        36
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/ranch_assets_v1/cat/walk_left_03.png",
+      "delivery_commit": "57aab97c3efc495d7553ee412c68696945d8e846",
+      "sha256": "bdef58ea6b85ff86852adf1ec14b907e4e1fa48b7ba3a7e82619f7bd2330ec9a",
+      "size": [
+        48,
+        40
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        13,
+        12,
+        37,
+        36
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/ranch_assets_v1/cat/walk_left_sheet.png",
+      "delivery_commit": "57aab97c3efc495d7553ee412c68696945d8e846",
+      "sha256": "efe0a3c1e3d0559bebcdac7d26364ace87ef7a75c022875640368b9ef06dddc5",
+      "size": [
+        192,
+        40
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        13,
+        12,
+        181,
+        36
+      ],
+      "runtime_reference": false,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/ranch_assets_v1/cat/walk_right_00.png",
+      "delivery_commit": "57aab97c3efc495d7553ee412c68696945d8e846",
+      "sha256": "3c17daf593eddab66a377e40262aeb819d76680cb108758e0e235b89a159fc31",
+      "size": [
+        48,
+        40
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        12,
+        12,
+        36,
+        36
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/ranch_assets_v1/cat/walk_right_01.png",
+      "delivery_commit": "57aab97c3efc495d7553ee412c68696945d8e846",
+      "sha256": "64c18337a4bbdbaa4dd062dfccbb3e98a43f9c6d8b202db2a91374564918bee0",
+      "size": [
+        48,
+        40
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        12,
+        12,
+        36,
+        36
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/ranch_assets_v1/cat/walk_right_02.png",
+      "delivery_commit": "57aab97c3efc495d7553ee412c68696945d8e846",
+      "sha256": "55116959a843becc744065678b1d405149061b1bfe93a288a0f4529075735df4",
+      "size": [
+        48,
+        40
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        12,
+        12,
+        36,
+        36
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/ranch_assets_v1/cat/walk_right_03.png",
+      "delivery_commit": "57aab97c3efc495d7553ee412c68696945d8e846",
+      "sha256": "65e20721f2861b03475e9ebbcfa8ac728108262efea57e5a940ac70352d3cf97",
+      "size": [
+        48,
+        40
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        12,
+        12,
+        36,
+        36
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/ranch_assets_v1/cat/walk_right_sheet.png",
+      "delivery_commit": "57aab97c3efc495d7553ee412c68696945d8e846",
+      "sha256": "4d778c69f2cd1e5c376a8977f28a42ee1b2e54915fb4c0a51b2a7091f493590f",
+      "size": [
+        192,
+        40
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        12,
+        12,
+        180,
+        36
+      ],
+      "runtime_reference": false,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/ranch_assets_v1/hen/idle_left_00.png",
+      "delivery_commit": "57aab97c3efc495d7553ee412c68696945d8e846",
+      "sha256": "b8ca11b4c8cd220c5c027ed3281b3719aefa222878180e9df50204f8e650586e",
+      "size": [
+        32,
+        32
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        9,
+        11,
+        25,
+        29
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/ranch_assets_v1/hen/idle_left_sheet.png",
+      "delivery_commit": "57aab97c3efc495d7553ee412c68696945d8e846",
+      "sha256": "b8ca11b4c8cd220c5c027ed3281b3719aefa222878180e9df50204f8e650586e",
+      "size": [
+        32,
+        32
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        9,
+        11,
+        25,
+        29
+      ],
+      "runtime_reference": false,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/ranch_assets_v1/hen/idle_right_00.png",
+      "delivery_commit": "57aab97c3efc495d7553ee412c68696945d8e846",
+      "sha256": "ddf873837acdd77868b2b20d9ad3615d60d672f21dc00048e85c6964722331aa",
+      "size": [
+        32,
+        32
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        8,
+        11,
+        24,
+        29
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/ranch_assets_v1/hen/idle_right_sheet.png",
+      "delivery_commit": "57aab97c3efc495d7553ee412c68696945d8e846",
+      "sha256": "ddf873837acdd77868b2b20d9ad3615d60d672f21dc00048e85c6964722331aa",
+      "size": [
+        32,
+        32
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        8,
+        11,
+        24,
+        29
+      ],
+      "runtime_reference": false,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/ranch_assets_v1/hen/peck_left_00.png",
+      "delivery_commit": "57aab97c3efc495d7553ee412c68696945d8e846",
+      "sha256": "142562cf5a526bcfbc4229fbe31111fee4bc935f3f997578cd50d3fc85fce34c",
+      "size": [
+        32,
+        32
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        8,
+        16,
+        25,
+        29
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/ranch_assets_v1/hen/peck_left_01.png",
+      "delivery_commit": "57aab97c3efc495d7553ee412c68696945d8e846",
+      "sha256": "ca196986d26b9ea969dc23d3bb48272b5f787ae455d6e1dfe9e42660d758095c",
+      "size": [
+        32,
+        32
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        8,
+        15,
+        25,
+        29
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/ranch_assets_v1/hen/peck_left_sheet.png",
+      "delivery_commit": "57aab97c3efc495d7553ee412c68696945d8e846",
+      "sha256": "5509841809364067327c1fda580582fe5f18d59d793889587eabd323b5c2af84",
+      "size": [
+        64,
+        32
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        8,
+        15,
+        57,
+        29
+      ],
+      "runtime_reference": false,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/ranch_assets_v1/hen/peck_right_00.png",
+      "delivery_commit": "57aab97c3efc495d7553ee412c68696945d8e846",
+      "sha256": "fefbbc6d6edf7013e17ef7004df1c820dd06f75872ee2853be42ef3e79c510ca",
+      "size": [
+        32,
+        32
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        8,
+        16,
+        25,
+        29
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/ranch_assets_v1/hen/peck_right_01.png",
+      "delivery_commit": "57aab97c3efc495d7553ee412c68696945d8e846",
+      "sha256": "894449e8fa921e99588edbff29b2e3673acb39b30b93408253a99f5b697ab16a",
+      "size": [
+        32,
+        32
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        8,
+        15,
+        25,
+        29
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/ranch_assets_v1/hen/peck_right_sheet.png",
+      "delivery_commit": "57aab97c3efc495d7553ee412c68696945d8e846",
+      "sha256": "cca72c1b26a76850b93dc66b14515017d29a035f2dce5a7a5b3ae86ff000c46f",
+      "size": [
+        64,
+        32
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        8,
+        15,
+        57,
+        29
+      ],
+      "runtime_reference": false,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/ranch_assets_v1/hen/walk_left_00.png",
+      "delivery_commit": "57aab97c3efc495d7553ee412c68696945d8e846",
+      "sha256": "d513db5e831f4ffcf087059fc351f4fbafdeec24cca5164d97271bfcc23e612b",
+      "size": [
+        32,
+        32
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        9,
+        11,
+        25,
+        29
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/ranch_assets_v1/hen/walk_left_01.png",
+      "delivery_commit": "57aab97c3efc495d7553ee412c68696945d8e846",
+      "sha256": "08134f48a9a411ae75fa8464bbc458e6c6e959d41057adbdd4443d12b72b8ef0",
+      "size": [
+        32,
+        32
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        9,
+        11,
+        25,
+        29
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/ranch_assets_v1/hen/walk_left_02.png",
+      "delivery_commit": "57aab97c3efc495d7553ee412c68696945d8e846",
+      "sha256": "2a6e3bdb0732405205dfa1c839b091bdc14c2de7f4229c579be218da3ad93eab",
+      "size": [
+        32,
+        32
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        9,
+        11,
+        25,
+        29
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/ranch_assets_v1/hen/walk_left_03.png",
+      "delivery_commit": "57aab97c3efc495d7553ee412c68696945d8e846",
+      "sha256": "cc98bfc3e8224fe4096d5110ec2aea49d6c29996f1a482dd7e2321175cfc78ef",
+      "size": [
+        32,
+        32
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        9,
+        11,
+        25,
+        29
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/ranch_assets_v1/hen/walk_left_sheet.png",
+      "delivery_commit": "57aab97c3efc495d7553ee412c68696945d8e846",
+      "sha256": "a8c8f6d079f73a08d038ad619ca9636649a99c63113fefb5ed430fc408626b43",
+      "size": [
+        128,
+        32
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        9,
+        11,
+        121,
+        29
+      ],
+      "runtime_reference": false,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/ranch_assets_v1/hen/walk_right_00.png",
+      "delivery_commit": "57aab97c3efc495d7553ee412c68696945d8e846",
+      "sha256": "a6929db094427b94ff3aaaf848af66c155307620314c41cbf301d7bcaa4249bc",
+      "size": [
+        32,
+        32
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        8,
+        11,
+        24,
+        29
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/ranch_assets_v1/hen/walk_right_01.png",
+      "delivery_commit": "57aab97c3efc495d7553ee412c68696945d8e846",
+      "sha256": "e17f037266c0a365db0083d4b2e7cf1b13a915a740124037849b2c3c724a3c2a",
+      "size": [
+        32,
+        32
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        8,
+        11,
+        24,
+        29
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/ranch_assets_v1/hen/walk_right_02.png",
+      "delivery_commit": "57aab97c3efc495d7553ee412c68696945d8e846",
+      "sha256": "be0bf6ddc6577d44d80063eb0ca664870b89ad0963a8ff63afac7b469ab00a16",
+      "size": [
+        32,
+        32
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        8,
+        11,
+        24,
+        29
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/ranch_assets_v1/hen/walk_right_03.png",
+      "delivery_commit": "57aab97c3efc495d7553ee412c68696945d8e846",
+      "sha256": "1fc509526df979af6aff2a7a075d8b74665318660f9f5587809320a6716d4a2d",
+      "size": [
+        32,
+        32
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        8,
+        11,
+        24,
+        29
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/ranch_assets_v1/hen/walk_right_sheet.png",
+      "delivery_commit": "57aab97c3efc495d7553ee412c68696945d8e846",
+      "sha256": "78f8d7b62b5ae747cee9bc0757b395a1c5f876782c1a35f3b448e88d11691a6d",
+      "size": [
+        128,
+        32
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        8,
+        11,
+        120,
+        29
+      ],
+      "runtime_reference": false,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/ranch_assets_v1/merchant/idle_right_00.png",
+      "delivery_commit": "57aab97c3efc495d7553ee412c68696945d8e846",
+      "sha256": "e63bedfb03babc234d3460376aa53082d7a7f6ca9ff9de74ba2220e19605539d",
+      "size": [
+        32,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        2,
+        3,
+        30,
+        44
+      ],
+      "runtime_reference": false,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/ranch_assets_v1/merchant/idle_right_sheet.png",
+      "delivery_commit": "57aab97c3efc495d7553ee412c68696945d8e846",
+      "sha256": "e63bedfb03babc234d3460376aa53082d7a7f6ca9ff9de74ba2220e19605539d",
+      "size": [
+        32,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        2,
+        3,
+        30,
+        44
+      ],
+      "runtime_reference": false,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/ranch_assets_v1/review/animal-actions.png",
+      "delivery_commit": "57aab97c3efc495d7553ee412c68696945d8e846",
+      "sha256": "220b7898e0c26f1c960e47295df9da9ea9d44829319bb3694919c456e065bd79",
+      "size": [
+        1120,
+        480
+      ],
+      "mode": "RGB",
+      "bbox": [
+        0,
+        0,
+        1120,
+        480
+      ],
+      "runtime_reference": false,
+      "hash_in_manifest": false
+    },
+    {
+      "path": "art_delivery/ranch_assets_v1/review/animals-walk-frames.png",
+      "delivery_commit": "57aab97c3efc495d7553ee412c68696945d8e846",
+      "sha256": "c47f10328b802aa6609db16d9577a1f78f146de46ab0e848b5489975f2db5585",
+      "size": [
+        1100,
+        460
+      ],
+      "mode": "RGB",
+      "bbox": [
+        0,
+        0,
+        1100,
+        460
+      ],
+      "runtime_reference": false,
+      "hash_in_manifest": false
+    },
+    {
+      "path": "art_delivery/ranch_assets_v1/review/book-opening.png",
+      "delivery_commit": "57aab97c3efc495d7553ee412c68696945d8e846",
+      "sha256": "8fd03aaea814cda16dad56b1095c078ce975ba663934d212892b5bfc84f28da3",
+      "size": [
+        1050,
+        620
+      ],
+      "mode": "RGB",
+      "bbox": [
+        0,
+        0,
+        1050,
+        620
+      ],
+      "runtime_reference": false,
+      "hash_in_manifest": false
+    },
+    {
+      "path": "art_delivery/ranch_assets_v1/review/overview.png",
+      "delivery_commit": "57aab97c3efc495d7553ee412c68696945d8e846",
+      "sha256": "20c6175ae575546e3a94866528c85d28a17a6ccef96114bd49fdf8ae62eab776",
+      "size": [
+        1100,
+        920
+      ],
+      "mode": "RGB",
+      "bbox": [
+        0,
+        0,
+        1100,
+        920
+      ],
+      "runtime_reference": false,
+      "hash_in_manifest": false
+    },
+    {
+      "path": "art_delivery/ranch_assets_v1/scroll/idle_none_00.png",
+      "delivery_commit": "57aab97c3efc495d7553ee412c68696945d8e846",
+      "sha256": "509f2fe971653bc2a2a598ecdc9668433fb1479a12320b64ba0267b9723405ed",
+      "size": [
+        24,
+        24
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        1,
+        3,
+        23,
+        22
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/ranch_assets_v1/scroll/idle_none_sheet.png",
+      "delivery_commit": "57aab97c3efc495d7553ee412c68696945d8e846",
+      "sha256": "509f2fe971653bc2a2a598ecdc9668433fb1479a12320b64ba0267b9723405ed",
+      "size": [
+        24,
+        24
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        1,
+        3,
+        23,
+        22
+      ],
+      "runtime_reference": false,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/ranch_assets_v1/stall/idle_front_00.png",
+      "delivery_commit": "57aab97c3efc495d7553ee412c68696945d8e846",
+      "sha256": "c3fe1863b4f0708f66fa6409f31207e93dd24f28d8676f65341bfef93bd29102",
+      "size": [
+        768,
+        512
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        132,
+        16,
+        640,
+        496
+      ],
+      "runtime_reference": false,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/ranch_assets_v1/stall/idle_front_sheet.png",
+      "delivery_commit": "57aab97c3efc495d7553ee412c68696945d8e846",
+      "sha256": "c3fe1863b4f0708f66fa6409f31207e93dd24f28d8676f65341bfef93bd29102",
+      "size": [
+        768,
+        512
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        132,
+        16,
+        640,
+        496
+      ],
+      "runtime_reference": false,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/merchant_cart_v2/cart/idle_front_00.png",
+      "delivery_commit": "0bbbc1c104acd13e7a9458c141a4a52921c05587",
+      "sha256": "9cbd68eba904e249583c80c825fbd5f0154da78fe4e6dbaae7b9f622d99463e4",
+      "size": [
+        768,
+        512
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        28,
+        32,
+        744,
+        496
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/merchant_cart_v2/merchant/idle_right_00.png",
+      "delivery_commit": "0bbbc1c104acd13e7a9458c141a4a52921c05587",
+      "sha256": "dae25e011076fe020ad3617fbb8b96b1feeb0152b25d90c74265966c8cb3795c",
+      "size": [
+        32,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        2,
+        2,
+        31,
+        44
+      ],
+      "runtime_reference": false,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/merchant_cart_v2/review/alpha-check.png",
+      "delivery_commit": "0bbbc1c104acd13e7a9458c141a4a52921c05587",
+      "sha256": "577904ddead66e5511ea0a7682142607de81143264b972eb9133c1b39f1a2c38",
+      "size": [
+        900,
+        600
+      ],
+      "mode": "RGB",
+      "bbox": [
+        0,
+        0,
+        900,
+        600
+      ],
+      "runtime_reference": false,
+      "hash_in_manifest": false
+    },
+    {
+      "path": "art_delivery/merchant_cart_v2/review/comparison.png",
+      "delivery_commit": "0bbbc1c104acd13e7a9458c141a4a52921c05587",
+      "sha256": "a8531b415d74eaceb4ce096c123f69212ccd41690fda19fdfb87c2b5e797c376",
+      "size": [
+        1000,
+        800
+      ],
+      "mode": "RGB",
+      "bbox": [
+        0,
+        0,
+        1000,
+        800
+      ],
+      "runtime_reference": false,
+      "hash_in_manifest": false
+    },
+    {
+      "path": "art_delivery/merchant_board_v1/cart_idle_00.png",
+      "delivery_commit": "7e408375f19b86759fc614508fc3e5f413f67ff9",
+      "sha256": "eefcfcf6a53a18ee7f480a17d16124d42c96b6e5fa1b0e41c95c53f2e821fae0",
+      "size": [
+        128,
+        96
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        4,
+        6,
+        124,
+        88
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/merchant_board_v1/review/board-comparison.png",
+      "delivery_commit": "7e408375f19b86759fc614508fc3e5f413f67ff9",
+      "sha256": "e47197dce08547a482ce2c6cb2203a2241bb3de65ef73594d64a1e841fa614be",
+      "size": [
+        950,
+        660
+      ],
+      "mode": "RGB",
+      "bbox": [
+        0,
+        0,
+        950,
+        660
+      ],
+      "runtime_reference": false,
+      "hash_in_manifest": false
+    }
+  ]
+}
