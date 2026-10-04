@@ -19,7 +19,7 @@ $staging=Join-Path $buildRoot ('WhistleRanch-'+[Guid]::NewGuid().ToString('N')+'
 try {
     Copy-Item -LiteralPath $source -Destination $staging
     # Atomic replacement also fails safely if the game opens after the process check.
-    if(Test-Path -LiteralPath $target) { [IO.File]::Replace($staging,$target,$null) }
+    if(Test-Path -LiteralPath $target) { [IO.File]::Replace($staging,$target,[NullString]::Value) }
     else { [IO.File]::Move($staging,$target) }
 } finally {
     if(Test-Path -LiteralPath $staging) { Remove-Item -LiteralPath $staging }
