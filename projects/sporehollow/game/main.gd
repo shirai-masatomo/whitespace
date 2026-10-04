@@ -7,6 +7,7 @@ const TOOLS = {"wall": "壁  10 / 1秒", "wood_wall":"木壁 木10", "stone_wall
 	"auto": "おまかせ", "stay": "待機", "wander": "徘徊", "rest": "休む", "collect": "資源・卵・設計図", "dog_food": "犬用餌 HP+10", "hen_food": "鶏用餌 HP+8", "cat_food": "猫用餌 HP+8"}
 const GROUP_TOOLS = [["wall", "wood_wall", "stone_wall", "soil_tile", "wood_tile", "stone_tile", "door", "locked_door"], ["guide", "auto", "stay", "wander", "rest"], ["collect"]]
 const BoardArt = preload("res://game/board_art.gd")
+const BuildingArt = preload("res://game/building_art.gd")
 const Art = preload("res://game/adopted_art.gd")
 var actor_art: Dictionary = {}
 const UI = preload("res://game/ui_style.gd")
@@ -1264,28 +1265,13 @@ func draw_structure(p: Vector2, b: Dictionary, preview: bool = false):
 		return
 	if b.kind not in Farm.Buildings.WALLS: draw_colored_polygon(PackedVector2Array([p + Vector2(-20, 10), p + Vector2(20, 10), p + Vector2(28, 24), p + Vector2(-12, 24)]), Color(0.12, 0.22, 0.13, 0.25))
 	if b.kind in Farm.Buildings.WALLS:
-		draw_connected_wall(p,b,shade,preview)
+		if b.kind=="wood_wall": BuildingArt.wall(self,p,b,preview)
+		else: draw_connected_wall(p,b,shade,preview)
 
 	else:
-		var cell=Vector2i(p/TILE)
-		var links=wall_links(cell)
-		var vertical=int(links[Vector2i.UP])+int(links[Vector2i.DOWN])>int(links[Vector2i.LEFT])+int(links[Vector2i.RIGHT])
-		if vertical:
-			draw_rect(Rect2(p+Vector2(-6,-34),Vector2(12,22)),shade)
-			draw_rect(Rect2(p+Vector2(-6,8),Vector2(12,22)),shade)
-		else:
-			draw_rect(Rect2(p - Vector2(24, 13), Vector2(6, 30)), shade)
-			draw_rect(Rect2(p + Vector2(18, -13), Vector2(6, 30)), shade)
-		var hinge = p + (Vector2(0,-26) if vertical else Vector2(-15,-8))
-		var closed_tip=Vector2(0,5) if vertical else Vector2(15,8)
-		var open_tip=Vector2(18,-23) if vertical else Vector2(-12,15)
-		var tip = p + closed_tip.lerp(open_tip, gate_views.get(b.id, 1.0 if b.open else 0.0))
-		draw_line(hinge, tip, shade, 5)
-		draw_line(hinge + Vector2(0, 9), tip + Vector2(0, 9), Color("897447"), 4)
-	if b.kind=="locked_door":
-		draw_rect(Rect2(p+Vector2(-4,-6),Vector2(9,11)),Color("dfbf62") if b.get("lock_hp",0)>0 else Color("665e58"))
-		if b.get("lock_hp",0)<=0: label_on(self,p+Vector2(-4,1),"×",12)
-	if b.hp < b.max_hp:
+		for part in ["frame_rear","leaf","frame_front"]: BuildingArt.door_layer(self,p,b,part)
+
+	if b.hp < b.max_hp and b.kind!="wood_wall":
 		var crack = PackedVector2Array([p + Vector2(2, -12), p + Vector2(-5, -3), p + Vector2(2, 3)])
 		if b.hp <= b.max_hp * 0.5:
 			crack.append(p + Vector2(-8, 15))
@@ -1298,9 +1284,13 @@ func _draw():
 	for cell in world.floors:
 		var floor_data=world.floors[cell]
 		if floor_data.status!="ready": continue
+		if floor_data.kind=="wood_tile":
+			BuildingArt.floor_tile(self,cell)
+			continue
 		var tint={"soil_tile":Color("ad946b"),"wood_tile":Color("bc9367"),"stone_tile":Color("929b95")}.get(floor_data.kind,Color("ad946b"))
 		draw_rect(Rect2(Vector2(cell)*TILE,TILE),tint)
 		for offset in [12,25,38]: draw_line(Vector2(cell)*TILE+Vector2(offset,2),Vector2(cell)*TILE+Vector2(offset,40),Color(tint.darkened(0.12)),1)
+	BuildingArt.boundaries(self)
 	for cell in world.indoor:
 		draw_rect(Rect2(Vector2(cell)*TILE,TILE),Color(0.22,0.35,0.45,0.22 if debug_view else 0.08))
 	for p in world.natural:
@@ -1321,7 +1311,12 @@ func _draw():
 			draw_line(q, q + Vector2(10, 2), Color("d78d37"), 3)
 		else: draw_line(q + Vector2(-5, 6), q + Vector2(6, -8), Color("eee8cf"), 5)
 	var actors=[]
-	for cell in world.structures: actors.append({"y":center(cell).y,"x":cell.x,"kind":"building","data":cell})
+	for cell in world.structures:
+		var b=world.structures[cell]
+		if b.kind in Farm.Buildings.DOORS and b.status=="ready":
+			for part in [["frame_rear",-16],["leaf",0],["frame_front",16]]:
+				actors.append({"y":center(cell).y+part[1],"x":cell.x,"kind":"door_part","data":cell,"part":part[0]})
+		else: actors.append({"y":center(cell).y,"x":cell.x,"kind":"building","data":cell})
 	for a in world.animals:
 		if a.placed: actors.append({"y":actor_pixel("a%d"%a.id,a.pos).y,"x":a.pos.x,"kind":"animal","data":a})
 	for e in world.enemies:
@@ -1330,6 +1325,7 @@ func _draw():
 	actors.sort_custom(func(a,b): return a.y<b.y if a.y!=b.y else (a.x<b.x if a.x!=b.x else a.kind<b.kind))
 	for actor in actors:
 		match actor.kind:
+			"door_part": BuildingArt.door_layer(self,center(actor.data),world.structures[actor.data],actor.part)
 			"building": draw_structure(center(actor.data),world.structures[actor.data])
 			"animal": draw_animal_actor(actor.data)
 			"enemy": draw_enemy_actor(actor.data)

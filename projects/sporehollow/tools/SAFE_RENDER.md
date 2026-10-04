@@ -18,3 +18,5 @@ Windows、同梱Godot 4.7.2 GUIバイナリ、非対話station/desktopの作成�
 実GPUの画面とゲーム内入力経路を確認できるが、人間の物理マウス操作・実スピーカー聴感・長時間試遊とは区別する。素材の納品・ゲーム取り込み・実画面検証も別の段階として記録する。
 
 根拠：Microsoftの[Window Stations](https://learn.microsoft.com/en-us/windows/win32/winstation/window-stations)、[Desktops](https://learn.microsoft.com/en-us/windows/win32/winstation/desktops)、[STARTUPINFOW.lpDesktop](https://learn.microsoft.com/en-us/windows/win32/api/processthreadsapi/ns-processthreadsapi-startupinfow)。表示とユーザー入力を扱えるstationはWinSta0。headlessは[Godot DisplayServer](https://docs.godotengine.org/en/4.6/classes/class_displayserver.html)のdummy描画であり、PNG検証の代用にはしない。
+
+木建材16接続/損傷/床境界/ドア通行は `-Scenario buildings`。通常デスクトップを使わず同じ隔離ヘルパーで検証する。

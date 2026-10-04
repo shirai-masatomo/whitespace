@@ -1,4 +1,4 @@
-param([ValidateSet('probe','characters','controls')][string]$Scenario='probe')
+param([ValidateSet('probe','characters','controls','buildings')][string]$Scenario='probe')
 $ErrorActionPreference='Stop'
 $farmRoot=Split-Path -Parent $PSScriptRoot
 $runRoot=Join-Path $farmRoot ('artifacts/isolated/'+(Get-Date -Format 'yyyyMMdd-HHmmss-fff'))
@@ -6,7 +6,7 @@ New-Item -ItemType Directory -Force $runRoot,"$runRoot/user-data" | Out-Null
 $revision=(git -C $farmRoot rev-parse HEAD).Trim()
 $dirty=[bool](git -C $farmRoot status --porcelain)
 $exe=Join-Path $farmRoot '.tools/Godot_v4.7.2-stable_win64.exe'
-$script=if($Scenario -eq 'probe'){'tests/render_probe.gd'}elseif($Scenario -eq 'controls'){'tests/test_controls.gd'}else{'tests/visual_characters.gd'}
+$script=if($Scenario -eq 'probe'){'tests/render_probe.gd'}elseif($Scenario -eq 'buildings'){'tests/test_building_art.gd'}elseif($Scenario -eq 'controls'){'tests/test_controls.gd'}else{'tests/visual_characters.gd'}
 $cmd='"'+$exe+'" --path "'+$farmRoot+'" --audio-driver Dummy --rendering-method gl_compatibility --max-fps 30 --resolution 1280x800 --log-file "'+$runRoot+'/render.log" --script '+$script+' -- --isolated-review --output="'+$runRoot+'"'
 # No interactive desktop fallback. No SwitchDesktop, SendInput, cursor movement, or user-process discovery.
 Add-Type -Path (Join-Path $PSScriptRoot 'isolated_desktop.cs')
@@ -17,7 +17,7 @@ $environment['LOCALAPPDATA']="$runRoot/user-data"
 $environment['FARM_REVIEW_OUTPUT']=$runRoot
 $environment['FARM_REVIEW_COMMIT']=$revision
 $environment['FARM_REVIEW_DIRTY']=$dirty.ToString()
-$record=@{implementation_commit=$revision;dirty=$dirty;asset_delivery_commit='7e408375f19b86759fc614508fc3e5f413f67ff9';parent_pid=$PID;purpose=$Scenario;executable=$exe;command=$cmd;start_utc=[DateTime]::UtcNow.ToString('o');data_root="$runRoot/user-data"}
+$record=@{implementation_commit=$revision;dirty=$dirty;asset_delivery_commit=(Get-Content -LiteralPath (Join-Path $farmRoot 'game/art_provenance.json') -Raw | ConvertFrom-Json).latest_delivery_commit;parent_pid=$PID;purpose=$Scenario;executable=$exe;command=$cmd;start_utc=[DateTime]::UtcNow.ToString('o');data_root="$runRoot/user-data"}
 $auditPath=Join-Path $runRoot 'isolation.json'
 $record | ConvertTo-Json -Depth 5 | Set-Content -LiteralPath $auditPath
 try {

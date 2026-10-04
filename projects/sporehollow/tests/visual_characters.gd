@@ -47,7 +47,7 @@ func run():
 	if not "--isolated-review" in OS.get_cmdline_user_args() or output=="":quit(2);return
 	observations.implementation_commit=OS.get_environment("FARM_REVIEW_COMMIT")
 	observations.dirty=OS.get_environment("FARM_REVIEW_DIRTY")
-	observations.asset_delivery_commit="7e408375f19b86759fc614508fc3e5f413f67ff9"
+	observations.asset_delivery_commit=JSON.parse_string(FileAccess.get_file_as_string("res://game/art_provenance.json")).latest_delivery_commit
 	observations.method="GPU rendering on private noninteractive Windows station; game-local InputEvent injection, no OS input"
 	observations.renderer=RenderingServer.get_video_adapter_name()
 	root.size=Vector2i(1280,800)

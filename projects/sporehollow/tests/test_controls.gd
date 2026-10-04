@@ -183,7 +183,7 @@ func run():
 		game.speed=1;await key(code);check(game.speed==0.5,"Speed-down key "+str(code))
 	if output!="":
 		record.implementation_commit=OS.get_environment("FARM_REVIEW_COMMIT")
-		record.asset_commit="7e408375f19b86759fc614508fc3e5f413f67ff9"
+		record.asset_commit=JSON.parse_string(FileAccess.get_file_as_string("res://game/art_provenance.json")).latest_delivery_commit
 		record.dirty=OS.get_environment("FARM_REVIEW_DIRTY")
 		FileAccess.open(output+"/observations.json",FileAccess.WRITE).store_string(JSON.stringify(record,"  "))
 	print("CONTROLS: ",checks," checks failures=",failures)
