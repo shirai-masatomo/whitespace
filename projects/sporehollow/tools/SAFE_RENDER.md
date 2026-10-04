@@ -1,6 +1,6 @@
 # 非干渉の描画検証（Windows）
 
-`./dev.ps1 visual` は `isolated_visual.ps1 -Scenario characters` を実行する。初回の環境確認だけなら `-Scenario probe`。通常の `play` / `editor` は呼ばない。
+`./dev.ps1 visual` は `isolated_visual.ps1 -Scenario characters` を実行する。市場・本・サブタスク・壁は `./tools/isolated_visual.ps1 -Scenario controls`。同時に実行せず直列で確認する。初回の環境確認だけなら `-Scenario probe`。通常の `play` / `editor` は呼ばない。
 
 ## 隔離境界
 
@@ -15,6 +15,6 @@
 
 Windows、同梱Godot 4.7.2 GUIバイナリ、非対話station/desktopの作成権限、そのstationで初期化できるOpenGLドライバが必要。本環境のNVIDIA GPUで確認。他PCで初期化不能なら、同方式に対応するドライバまたは隔離VM/別テストマシンを用意する。ユーザーのデスクトップで試す代替は行わない。
 
-実GPUの画面とゲーム内入力経路を確認できるが、人間の物理マウス操作・実スピーカー聴感・長時間試遊とは区別する。静止素材からの仮歩行/仮睡眠と、正式動作素材の完成も別。
+実GPUの画面とゲーム内入力経路を確認できるが、人間の物理マウス操作・実スピーカー聴感・長時間試遊とは区別する。素材の納品・ゲーム取り込み・実画面検証も別の段階として記録する。
 
 根拠：Microsoftの[Window Stations](https://learn.microsoft.com/en-us/windows/win32/winstation/window-stations)、[Desktops](https://learn.microsoft.com/en-us/windows/win32/winstation/desktops)、[STARTUPINFOW.lpDesktop](https://learn.microsoft.com/en-us/windows/win32/api/processthreadsapi/ns-processthreadsapi-startupinfow)。表示とユーザー入力を扱えるstationはWinSta0。headlessは[Godot DisplayServer](https://docs.godotengine.org/en/4.6/classes/class_displayserver.html)のdummy描画であり、PNG検証の代用にはしない。

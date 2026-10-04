@@ -1,0 +1,691 @@
+{
+  "delivery": "characters_motion_v1",
+  "requires_static_delivery": "../characters_v1",
+  "assets": [
+    {
+      "character": "keeper",
+      "action": "settle",
+      "direction": "right",
+      "canvas": [
+        32,
+        48
+      ],
+      "foot_anchor": [
+        16,
+        44
+      ],
+      "frame_order": [
+        0,
+        1
+      ],
+      "frame_duration_ms": [
+        180,
+        180
+      ],
+      "loop": false,
+      "files": [
+        "keeper/settle_right_00.png",
+        "keeper/settle_right_01.png"
+      ],
+      "sheet": "keeper/settle_right_sheet.png",
+      "status": "art_complete_game_integration_unverified",
+      "sha256": {
+        "keeper/settle_right_00.png": "57c18b89f7beb9d4012564039447f1794f17d57296e8fcb62f2d84e1cdf4aad7",
+        "keeper/settle_right_01.png": "718f06f76bc8e2191ed8c081c6ec18899625edb1d13ef676859ebf6e6210a1bb"
+      }
+    },
+    {
+      "character": "keeper",
+      "action": "settle",
+      "direction": "left",
+      "canvas": [
+        32,
+        48
+      ],
+      "foot_anchor": [
+        16,
+        44
+      ],
+      "frame_order": [
+        0,
+        1
+      ],
+      "frame_duration_ms": [
+        180,
+        180
+      ],
+      "loop": false,
+      "files": [
+        "keeper/settle_left_00.png",
+        "keeper/settle_left_01.png"
+      ],
+      "sheet": "keeper/settle_left_sheet.png",
+      "status": "art_complete_game_integration_unverified",
+      "sha256": {
+        "keeper/settle_left_00.png": "bc2db9f5d90616e389e381d626038d0d298a6713d4c8bbf6464b24ea93ca8a8a",
+        "keeper/settle_left_01.png": "31ac0ffeac46f16b45d7615cf892012afcb91ed1aca245a091a45964601b1106"
+      }
+    },
+    {
+      "character": "keeper",
+      "action": "rest",
+      "direction": "right",
+      "canvas": [
+        32,
+        48
+      ],
+      "foot_anchor": [
+        16,
+        44
+      ],
+      "frame_order": [
+        0,
+        1
+      ],
+      "frame_duration_ms": [
+        650,
+        650
+      ],
+      "loop": true,
+      "files": [
+        "keeper/rest_right_00.png",
+        "keeper/rest_right_01.png"
+      ],
+      "sheet": "keeper/rest_right_sheet.png",
+      "status": "art_complete_game_integration_unverified",
+      "sha256": {
+        "keeper/rest_right_00.png": "718f06f76bc8e2191ed8c081c6ec18899625edb1d13ef676859ebf6e6210a1bb",
+        "keeper/rest_right_01.png": "059b8389b514414c9ff4842d1e42db9fdbc7679110528fbaec09de018063d228"
+      }
+    },
+    {
+      "character": "keeper",
+      "action": "rest",
+      "direction": "left",
+      "canvas": [
+        32,
+        48
+      ],
+      "foot_anchor": [
+        16,
+        44
+      ],
+      "frame_order": [
+        0,
+        1
+      ],
+      "frame_duration_ms": [
+        650,
+        650
+      ],
+      "loop": true,
+      "files": [
+        "keeper/rest_left_00.png",
+        "keeper/rest_left_01.png"
+      ],
+      "sheet": "keeper/rest_left_sheet.png",
+      "status": "art_complete_game_integration_unverified",
+      "sha256": {
+        "keeper/rest_left_00.png": "31ac0ffeac46f16b45d7615cf892012afcb91ed1aca245a091a45964601b1106",
+        "keeper/rest_left_01.png": "194f45a74a8e35a305d16243c63ffd033ec2cbee1269fd465c181680cbd551d1"
+      }
+    },
+    {
+      "character": "keeper",
+      "action": "sleep",
+      "direction": "right",
+      "canvas": [
+        32,
+        48
+      ],
+      "foot_anchor": [
+        16,
+        44
+      ],
+      "frame_order": [
+        0,
+        1
+      ],
+      "frame_duration_ms": [
+        650,
+        650
+      ],
+      "loop": true,
+      "files": [
+        "keeper/sleep_right_00.png",
+        "keeper/sleep_right_01.png"
+      ],
+      "sheet": "keeper/sleep_right_sheet.png",
+      "status": "art_complete_game_integration_unverified",
+      "sha256": {
+        "keeper/sleep_right_00.png": "354e0c887193db7a375b9d0b079f13b211fc85f28401ee6ce1988e4b1290af4c",
+        "keeper/sleep_right_01.png": "6e87fbe1bb80b18569d99161991a74b526f3576e935c5d7d0ae72c7bbb88d5f2"
+      }
+    },
+    {
+      "character": "keeper",
+      "action": "sleep",
+      "direction": "left",
+      "canvas": [
+        32,
+        48
+      ],
+      "foot_anchor": [
+        16,
+        44
+      ],
+      "frame_order": [
+        0,
+        1
+      ],
+      "frame_duration_ms": [
+        650,
+        650
+      ],
+      "loop": true,
+      "files": [
+        "keeper/sleep_left_00.png",
+        "keeper/sleep_left_01.png"
+      ],
+      "sheet": "keeper/sleep_left_sheet.png",
+      "status": "art_complete_game_integration_unverified",
+      "sha256": {
+        "keeper/sleep_left_00.png": "506a19330d38e0dd7e9a7bfd49c16daf9c9512cbe833603ffaa7edcb1cb00234",
+        "keeper/sleep_left_01.png": "468a9e798a04a56176d7d4719e74a447b46ca86fd26616c4d3561637688a1ca5"
+      }
+    },
+    {
+      "character": "keeper",
+      "action": "wake",
+      "direction": "right",
+      "canvas": [
+        32,
+        48
+      ],
+      "foot_anchor": [
+        16,
+        44
+      ],
+      "frame_order": [
+        0,
+        1
+      ],
+      "frame_duration_ms": [
+        180,
+        180
+      ],
+      "loop": false,
+      "files": [
+        "keeper/wake_right_00.png",
+        "keeper/wake_right_01.png"
+      ],
+      "sheet": "keeper/wake_right_sheet.png",
+      "status": "art_complete_game_integration_unverified",
+      "sha256": {
+        "keeper/wake_right_00.png": "718f06f76bc8e2191ed8c081c6ec18899625edb1d13ef676859ebf6e6210a1bb",
+        "keeper/wake_right_01.png": "57c18b89f7beb9d4012564039447f1794f17d57296e8fcb62f2d84e1cdf4aad7"
+      }
+    },
+    {
+      "character": "keeper",
+      "action": "wake",
+      "direction": "left",
+      "canvas": [
+        32,
+        48
+      ],
+      "foot_anchor": [
+        16,
+        44
+      ],
+      "frame_order": [
+        0,
+        1
+      ],
+      "frame_duration_ms": [
+        180,
+        180
+      ],
+      "loop": false,
+      "files": [
+        "keeper/wake_left_00.png",
+        "keeper/wake_left_01.png"
+      ],
+      "sheet": "keeper/wake_left_sheet.png",
+      "status": "art_complete_game_integration_unverified",
+      "sha256": {
+        "keeper/wake_left_00.png": "31ac0ffeac46f16b45d7615cf892012afcb91ed1aca245a091a45964601b1106",
+        "keeper/wake_left_01.png": "bc2db9f5d90616e389e381d626038d0d298a6713d4c8bbf6464b24ea93ca8a8a"
+      }
+    },
+    {
+      "character": "keeper",
+      "action": "walk",
+      "direction": "right",
+      "canvas": [
+        32,
+        48
+      ],
+      "foot_anchor": [
+        16,
+        44
+      ],
+      "frame_order": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "frame_duration_ms": [
+        100,
+        100,
+        100,
+        100
+      ],
+      "loop": true,
+      "files": [
+        "keeper/walk_right_00.png",
+        "keeper/walk_right_01.png",
+        "keeper/walk_right_02.png",
+        "keeper/walk_right_03.png"
+      ],
+      "sheet": "keeper/walk_right_sheet.png",
+      "status": "art_complete_game_integration_unverified",
+      "sha256": {
+        "keeper/walk_right_00.png": "607314fe0ef1b9a340e8a9e79e48309eb73c754942e5c980e87095bbc2c4b690",
+        "keeper/walk_right_01.png": "9d19590832b5ac2b0abab67e172d75adaa77a9f35c86992b72a28903c9e7349b",
+        "keeper/walk_right_02.png": "9f5907c641d598f9548008caa6ee79899800f48c5eff1415f4a7641fc10e2e30",
+        "keeper/walk_right_03.png": "d10ab2b94347f9a7987da1911d32c5433938d42b992523b64d598696f8826f52"
+      }
+    },
+    {
+      "character": "keeper",
+      "action": "walk",
+      "direction": "left",
+      "canvas": [
+        32,
+        48
+      ],
+      "foot_anchor": [
+        16,
+        44
+      ],
+      "frame_order": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "frame_duration_ms": [
+        100,
+        100,
+        100,
+        100
+      ],
+      "loop": true,
+      "files": [
+        "keeper/walk_left_00.png",
+        "keeper/walk_left_01.png",
+        "keeper/walk_left_02.png",
+        "keeper/walk_left_03.png"
+      ],
+      "sheet": "keeper/walk_left_sheet.png",
+      "status": "art_complete_game_integration_unverified",
+      "sha256": {
+        "keeper/walk_left_00.png": "0ae8c638ae70f053f1d9996d4040cc8e2dbde0103e483a905dc9e741a3a1696f",
+        "keeper/walk_left_01.png": "04aad25d2ad5e004ba941b29ad71f33cef5d2f6928e59d4a8496d467825b325a",
+        "keeper/walk_left_02.png": "050c23ba5ba7727368bc91baa55b2023873944d3cc1c34aea33e6839bac63180",
+        "keeper/walk_left_03.png": "e4a68833ce0ac8ace98faef76966adf8c9b5c311008148ef3b65437d30deb5d6"
+      }
+    },
+    {
+      "character": "shiba",
+      "action": "settle",
+      "direction": "right",
+      "canvas": [
+        48,
+        48
+      ],
+      "foot_anchor": [
+        24,
+        44
+      ],
+      "frame_order": [
+        0,
+        1
+      ],
+      "frame_duration_ms": [
+        180,
+        180
+      ],
+      "loop": false,
+      "files": [
+        "shiba/settle_right_00.png",
+        "shiba/settle_right_01.png"
+      ],
+      "sheet": "shiba/settle_right_sheet.png",
+      "status": "art_complete_game_integration_unverified",
+      "sha256": {
+        "shiba/settle_right_00.png": "d8dcf791a89b8951eccf76ce5b355dd2fff9afcf28546f56dc390da0733800f3",
+        "shiba/settle_right_01.png": "3cb8019884919ef86650308b8071d04023602e1ed9196570383f2d6718a7ca43"
+      }
+    },
+    {
+      "character": "shiba",
+      "action": "settle",
+      "direction": "left",
+      "canvas": [
+        48,
+        48
+      ],
+      "foot_anchor": [
+        24,
+        44
+      ],
+      "frame_order": [
+        0,
+        1
+      ],
+      "frame_duration_ms": [
+        180,
+        180
+      ],
+      "loop": false,
+      "files": [
+        "shiba/settle_left_00.png",
+        "shiba/settle_left_01.png"
+      ],
+      "sheet": "shiba/settle_left_sheet.png",
+      "status": "art_complete_game_integration_unverified",
+      "sha256": {
+        "shiba/settle_left_00.png": "3be1417e0c5006a7cc29975d9f5f45b41cb716a28b494b687469a784a38d2341",
+        "shiba/settle_left_01.png": "55cc0d1ad2f66551d01a86d605b4d65d30994593f8194648a0b9377ea81c2858"
+      }
+    },
+    {
+      "character": "shiba",
+      "action": "rest",
+      "direction": "right",
+      "canvas": [
+        48,
+        48
+      ],
+      "foot_anchor": [
+        24,
+        44
+      ],
+      "frame_order": [
+        0,
+        1
+      ],
+      "frame_duration_ms": [
+        650,
+        650
+      ],
+      "loop": true,
+      "files": [
+        "shiba/rest_right_00.png",
+        "shiba/rest_right_01.png"
+      ],
+      "sheet": "shiba/rest_right_sheet.png",
+      "status": "art_complete_game_integration_unverified",
+      "sha256": {
+        "shiba/rest_right_00.png": "3cb8019884919ef86650308b8071d04023602e1ed9196570383f2d6718a7ca43",
+        "shiba/rest_right_01.png": "8eb004f8690df00b3f776a6907ba74611d218321495c70aaff6c542748888296"
+      }
+    },
+    {
+      "character": "shiba",
+      "action": "rest",
+      "direction": "left",
+      "canvas": [
+        48,
+        48
+      ],
+      "foot_anchor": [
+        24,
+        44
+      ],
+      "frame_order": [
+        0,
+        1
+      ],
+      "frame_duration_ms": [
+        650,
+        650
+      ],
+      "loop": true,
+      "files": [
+        "shiba/rest_left_00.png",
+        "shiba/rest_left_01.png"
+      ],
+      "sheet": "shiba/rest_left_sheet.png",
+      "status": "art_complete_game_integration_unverified",
+      "sha256": {
+        "shiba/rest_left_00.png": "55cc0d1ad2f66551d01a86d605b4d65d30994593f8194648a0b9377ea81c2858",
+        "shiba/rest_left_01.png": "13097c925cb79c0ea6eaa48717a38281f4449373e2e48b48b8b6aee0f55a2296"
+      }
+    },
+    {
+      "character": "shiba",
+      "action": "wake",
+      "direction": "right",
+      "canvas": [
+        48,
+        48
+      ],
+      "foot_anchor": [
+        24,
+        44
+      ],
+      "frame_order": [
+        0,
+        1
+      ],
+      "frame_duration_ms": [
+        180,
+        180
+      ],
+      "loop": false,
+      "files": [
+        "shiba/wake_right_00.png",
+        "shiba/wake_right_01.png"
+      ],
+      "sheet": "shiba/wake_right_sheet.png",
+      "status": "art_complete_game_integration_unverified",
+      "sha256": {
+        "shiba/wake_right_00.png": "3cb8019884919ef86650308b8071d04023602e1ed9196570383f2d6718a7ca43",
+        "shiba/wake_right_01.png": "d8dcf791a89b8951eccf76ce5b355dd2fff9afcf28546f56dc390da0733800f3"
+      }
+    },
+    {
+      "character": "shiba",
+      "action": "wake",
+      "direction": "left",
+      "canvas": [
+        48,
+        48
+      ],
+      "foot_anchor": [
+        24,
+        44
+      ],
+      "frame_order": [
+        0,
+        1
+      ],
+      "frame_duration_ms": [
+        180,
+        180
+      ],
+      "loop": false,
+      "files": [
+        "shiba/wake_left_00.png",
+        "shiba/wake_left_01.png"
+      ],
+      "sheet": "shiba/wake_left_sheet.png",
+      "status": "art_complete_game_integration_unverified",
+      "sha256": {
+        "shiba/wake_left_00.png": "55cc0d1ad2f66551d01a86d605b4d65d30994593f8194648a0b9377ea81c2858",
+        "shiba/wake_left_01.png": "3be1417e0c5006a7cc29975d9f5f45b41cb716a28b494b687469a784a38d2341"
+      }
+    },
+    {
+      "character": "shiba",
+      "action": "walk",
+      "direction": "right",
+      "canvas": [
+        48,
+        48
+      ],
+      "foot_anchor": [
+        24,
+        44
+      ],
+      "frame_order": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "frame_duration_ms": [
+        100,
+        100,
+        100,
+        100
+      ],
+      "loop": true,
+      "files": [
+        "shiba/walk_right_00.png",
+        "shiba/walk_right_01.png",
+        "shiba/walk_right_02.png",
+        "shiba/walk_right_03.png"
+      ],
+      "sheet": "shiba/walk_right_sheet.png",
+      "status": "art_complete_game_integration_unverified",
+      "sha256": {
+        "shiba/walk_right_00.png": "003ea9746dc9e8ec41aef2de2d566cba5b654a2c6b5420704d5a49417fcd515e",
+        "shiba/walk_right_01.png": "575b6c02e4c88591534e8ca8024097dda7692e12b1550441253323007557370a",
+        "shiba/walk_right_02.png": "2b78dc6189e9f218506ce959d71d25f1e253c66259b40e5c1ff922f1a3d82145",
+        "shiba/walk_right_03.png": "9a384eb5b05304d9cab65e3f9782a9e536f7c3101ea36230abd4bad4a5462d98"
+      }
+    },
+    {
+      "character": "shiba",
+      "action": "walk",
+      "direction": "left",
+      "canvas": [
+        48,
+        48
+      ],
+      "foot_anchor": [
+        24,
+        44
+      ],
+      "frame_order": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "frame_duration_ms": [
+        100,
+        100,
+        100,
+        100
+      ],
+      "loop": true,
+      "files": [
+        "shiba/walk_left_00.png",
+        "shiba/walk_left_01.png",
+        "shiba/walk_left_02.png",
+        "shiba/walk_left_03.png"
+      ],
+      "sheet": "shiba/walk_left_sheet.png",
+      "status": "art_complete_game_integration_unverified",
+      "sha256": {
+        "shiba/walk_left_00.png": "4f74c302059357facf9fe6a96e53f0e8eafec0d81660eabcde3c3abccab67825",
+        "shiba/walk_left_01.png": "f544d04642180805818d5b4a7e49250aca15b2be596bc03bf882b240267cc3ca",
+        "shiba/walk_left_02.png": "b8e4b81594217911d0e246841eff31e00a0d1f399b5f73e11b48d3b04cf8d6da",
+        "shiba/walk_left_03.png": "333e8407afeba8a4c901fe6c35f2d12fde56024750b34c98940511cb86ea8515"
+      }
+    },
+    {
+      "character": "keeper",
+      "action": "idle",
+      "direction": "left",
+      "canvas": [
+        32,
+        48
+      ],
+      "foot_anchor": [
+        16,
+        44
+      ],
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "duration_mode": "hold_until_state_change",
+      "loop": false,
+      "files": [
+        "keeper/idle_left_00.png"
+      ],
+      "status": "art_complete_game_integration_unverified",
+      "derivation": "Exact adopted v1 pixel reflection about foot x16; no face redraw",
+      "sha256": {
+        "keeper/idle_left_00.png": "2f90923192a42877c5fd1b10a4f115d130e52ee9c81a6e5d0876687ab589e124"
+      }
+    }
+  ],
+  "head_reuse_checks": [
+    {
+      "character": "keeper",
+      "pose": 0,
+      "head_opaque_pixels_match_approved_source": true
+    },
+    {
+      "character": "keeper",
+      "pose": 1,
+      "head_opaque_pixels_match_approved_source": true
+    },
+    {
+      "character": "keeper",
+      "pose": 2,
+      "head_opaque_pixels_match_approved_source": true
+    },
+    {
+      "character": "shiba",
+      "pose": 0,
+      "head_opaque_pixels_match_approved_source": true
+    },
+    {
+      "character": "shiba",
+      "pose": 1,
+      "head_opaque_pixels_match_approved_source": true
+    },
+    {
+      "character": "shiba",
+      "pose": 2,
+      "head_opaque_pixels_match_approved_source": true
+    }
+  ],
+  "notes": [
+    "Faces are not regenerated; existing opaque head pixels composited unchanged for rest",
+    "Keeper sleep lowers the same hat over existing face; no new facial design",
+    "Existing static delivery untouched",
+    "All frames preserve canvas and foot y44; pose heights naturally change during sitting/lying",
+    "Game runtime visual verification pending"
+  ],
+  "source_art": "../../art-production/characters-motion-v1",
+  "generator": "image_gen.imagegen",
+  "prompts": "../../art-production/characters-motion-v1/prompts.json",
+  "verification": {
+    "all_44_frames_single_connected_body": true,
+    "all_foot_y44": true,
+    "opaque_head_source_checks_passed": true,
+    "gameplay_verified": false
+  }
+}

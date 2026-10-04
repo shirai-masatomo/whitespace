@@ -1,0 +1,1946 @@
+{
+  "delivery": "ranch_assets_v1",
+  "adopted_basis": "keeper_v1 + Shiba C; existing hen/cat/merchant/book identities",
+  "animations": [
+    {
+      "asset": "hen",
+      "action": "idle",
+      "direction": "right",
+      "files": [
+        "hen/idle_right_00.png"
+      ],
+      "sheet": "hen/idle_right_sheet.png",
+      "frame_size": [
+        32,
+        32
+      ],
+      "foot_anchor": [
+        16,
+        29
+      ],
+      "frame_order": [
+        0
+      ],
+      "duration_ms": [
+        null
+      ],
+      "loop": false,
+      "status": "art_complete_integration_unverified"
+    },
+    {
+      "asset": "hen",
+      "action": "walk",
+      "direction": "right",
+      "files": [
+        "hen/walk_right_00.png",
+        "hen/walk_right_01.png",
+        "hen/walk_right_02.png",
+        "hen/walk_right_03.png"
+      ],
+      "sheet": "hen/walk_right_sheet.png",
+      "frame_size": [
+        32,
+        32
+      ],
+      "foot_anchor": [
+        16,
+        29
+      ],
+      "frame_order": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "duration_ms": [
+        120,
+        120,
+        120,
+        120
+      ],
+      "loop": true,
+      "status": "art_complete_integration_unverified"
+    },
+    {
+      "asset": "hen",
+      "action": "peck",
+      "direction": "right",
+      "files": [
+        "hen/peck_right_00.png",
+        "hen/peck_right_01.png"
+      ],
+      "sheet": "hen/peck_right_sheet.png",
+      "frame_size": [
+        32,
+        32
+      ],
+      "foot_anchor": [
+        16,
+        29
+      ],
+      "frame_order": [
+        0,
+        1
+      ],
+      "duration_ms": [
+        260,
+        260
+      ],
+      "loop": true,
+      "status": "art_complete_integration_unverified"
+    },
+    {
+      "asset": "hen",
+      "action": "idle",
+      "direction": "left",
+      "files": [
+        "hen/idle_left_00.png"
+      ],
+      "sheet": "hen/idle_left_sheet.png",
+      "frame_size": [
+        32,
+        32
+      ],
+      "foot_anchor": [
+        16,
+        29
+      ],
+      "frame_order": [
+        0
+      ],
+      "duration_ms": [
+        null
+      ],
+      "loop": false,
+      "status": "art_complete_integration_unverified"
+    },
+    {
+      "asset": "hen",
+      "action": "walk",
+      "direction": "left",
+      "files": [
+        "hen/walk_left_00.png",
+        "hen/walk_left_01.png",
+        "hen/walk_left_02.png",
+        "hen/walk_left_03.png"
+      ],
+      "sheet": "hen/walk_left_sheet.png",
+      "frame_size": [
+        32,
+        32
+      ],
+      "foot_anchor": [
+        16,
+        29
+      ],
+      "frame_order": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "duration_ms": [
+        120,
+        120,
+        120,
+        120
+      ],
+      "loop": true,
+      "status": "art_complete_integration_unverified"
+    },
+    {
+      "asset": "hen",
+      "action": "peck",
+      "direction": "left",
+      "files": [
+        "hen/peck_left_00.png",
+        "hen/peck_left_01.png"
+      ],
+      "sheet": "hen/peck_left_sheet.png",
+      "frame_size": [
+        32,
+        32
+      ],
+      "foot_anchor": [
+        16,
+        29
+      ],
+      "frame_order": [
+        0,
+        1
+      ],
+      "duration_ms": [
+        260,
+        260
+      ],
+      "loop": true,
+      "status": "art_complete_integration_unverified"
+    },
+    {
+      "asset": "cat",
+      "action": "idle",
+      "direction": "right",
+      "files": [
+        "cat/idle_right_00.png"
+      ],
+      "sheet": "cat/idle_right_sheet.png",
+      "frame_size": [
+        48,
+        40
+      ],
+      "foot_anchor": [
+        24,
+        36
+      ],
+      "frame_order": [
+        0
+      ],
+      "duration_ms": [
+        null
+      ],
+      "loop": false,
+      "status": "art_complete_integration_unverified"
+    },
+    {
+      "asset": "cat",
+      "action": "walk",
+      "direction": "right",
+      "files": [
+        "cat/walk_right_00.png",
+        "cat/walk_right_01.png",
+        "cat/walk_right_02.png",
+        "cat/walk_right_03.png"
+      ],
+      "sheet": "cat/walk_right_sheet.png",
+      "frame_size": [
+        48,
+        40
+      ],
+      "foot_anchor": [
+        24,
+        36
+      ],
+      "frame_order": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "duration_ms": [
+        120,
+        120,
+        120,
+        120
+      ],
+      "loop": true,
+      "status": "art_complete_integration_unverified"
+    },
+    {
+      "asset": "cat",
+      "action": "stretch",
+      "direction": "right",
+      "files": [
+        "cat/stretch_right_00.png",
+        "cat/stretch_right_01.png"
+      ],
+      "sheet": "cat/stretch_right_sheet.png",
+      "frame_size": [
+        48,
+        40
+      ],
+      "foot_anchor": [
+        24,
+        36
+      ],
+      "frame_order": [
+        0,
+        1
+      ],
+      "duration_ms": [
+        260,
+        260
+      ],
+      "loop": false,
+      "status": "art_complete_integration_unverified"
+    },
+    {
+      "asset": "cat",
+      "action": "idle",
+      "direction": "left",
+      "files": [
+        "cat/idle_left_00.png"
+      ],
+      "sheet": "cat/idle_left_sheet.png",
+      "frame_size": [
+        48,
+        40
+      ],
+      "foot_anchor": [
+        24,
+        36
+      ],
+      "frame_order": [
+        0
+      ],
+      "duration_ms": [
+        null
+      ],
+      "loop": false,
+      "status": "art_complete_integration_unverified"
+    },
+    {
+      "asset": "cat",
+      "action": "walk",
+      "direction": "left",
+      "files": [
+        "cat/walk_left_00.png",
+        "cat/walk_left_01.png",
+        "cat/walk_left_02.png",
+        "cat/walk_left_03.png"
+      ],
+      "sheet": "cat/walk_left_sheet.png",
+      "frame_size": [
+        48,
+        40
+      ],
+      "foot_anchor": [
+        24,
+        36
+      ],
+      "frame_order": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "duration_ms": [
+        120,
+        120,
+        120,
+        120
+      ],
+      "loop": true,
+      "status": "art_complete_integration_unverified"
+    },
+    {
+      "asset": "cat",
+      "action": "stretch",
+      "direction": "left",
+      "files": [
+        "cat/stretch_left_00.png",
+        "cat/stretch_left_01.png"
+      ],
+      "sheet": "cat/stretch_left_sheet.png",
+      "frame_size": [
+        48,
+        40
+      ],
+      "foot_anchor": [
+        24,
+        36
+      ],
+      "frame_order": [
+        0,
+        1
+      ],
+      "duration_ms": [
+        260,
+        260
+      ],
+      "loop": false,
+      "status": "art_complete_integration_unverified"
+    },
+    {
+      "asset": "merchant",
+      "action": "idle",
+      "direction": "right",
+      "files": [
+        "merchant/idle_right_00.png"
+      ],
+      "sheet": "merchant/idle_right_sheet.png",
+      "frame_size": [
+        32,
+        48
+      ],
+      "foot_anchor": [
+        16,
+        44
+      ],
+      "frame_order": [
+        0
+      ],
+      "duration_ms": [
+        null
+      ],
+      "loop": false,
+      "status": "art_complete_integration_unverified"
+    },
+    {
+      "asset": "scroll",
+      "action": "idle",
+      "direction": "none",
+      "files": [
+        "scroll/idle_none_00.png"
+      ],
+      "sheet": "scroll/idle_none_sheet.png",
+      "frame_size": [
+        24,
+        24
+      ],
+      "foot_anchor": [
+        12,
+        22
+      ],
+      "frame_order": [
+        0
+      ],
+      "duration_ms": [
+        null
+      ],
+      "loop": false,
+      "status": "art_complete_integration_unverified"
+    },
+    {
+      "asset": "stall",
+      "action": "idle",
+      "direction": "front",
+      "files": [
+        "stall/idle_front_00.png"
+      ],
+      "sheet": "stall/idle_front_sheet.png",
+      "frame_size": [
+        768,
+        512
+      ],
+      "foot_anchor": [
+        384,
+        496
+      ],
+      "frame_order": [
+        0
+      ],
+      "duration_ms": [
+        null
+      ],
+      "loop": false,
+      "status": "art_complete_integration_unverified"
+    }
+  ],
+  "book": {
+    "closed": {
+      "file": "book/closed_00.png",
+      "size": [
+        256,
+        320
+      ],
+      "spine_anchor_x": 20,
+      "action": "idle",
+      "frame_order": [
+        0
+      ],
+      "duration_ms": [
+        null
+      ],
+      "duration_mode": "hold_until_state_change",
+      "loop": false
+    },
+    "open": {
+      "file": "book/open_00.png",
+      "size": [
+        1024,
+        640
+      ],
+      "spine_anchor_x": 512,
+      "action": "idle",
+      "frame_order": [
+        0
+      ],
+      "duration_ms": [
+        null
+      ],
+      "duration_mode": "hold_until_state_change",
+      "loop": false
+    },
+    "layers": [
+      "book/cover_layer.png",
+      "book/paper_layer.png",
+      "book/binding_shadow_layer.png"
+    ],
+    "text_baked": false,
+    "open_close_page_turn": "complete_blank_page_art",
+    "animations": {
+      "open": {
+        "files": [
+          "book/opening_00.png",
+          "book/opening_01.png",
+          "book/opening_02.png",
+          "book/opening_03.png",
+          "book/opening_04.png",
+          "book/opening_05.png"
+        ],
+        "frame_size": [
+          1024,
+          640
+        ],
+        "hinge": [
+          512,
+          36
+        ],
+        "frame_order": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "duration_ms": [
+          110,
+          110,
+          110,
+          110,
+          110,
+          110
+        ],
+        "loop": false,
+        "status": "art_complete_integration_unverified"
+      },
+      "close": {
+        "files": [
+          "book/closing_00.png",
+          "book/closing_01.png",
+          "book/closing_02.png",
+          "book/closing_03.png",
+          "book/closing_04.png",
+          "book/closing_05.png"
+        ],
+        "frame_size": [
+          1024,
+          640
+        ],
+        "hinge": [
+          512,
+          36
+        ],
+        "frame_order": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "duration_ms": [
+          110,
+          110,
+          110,
+          110,
+          110,
+          110
+        ],
+        "loop": false,
+        "status": "art_complete_integration_unverified"
+      },
+      "page_next": {
+        "files": [
+          "book/page_next_00.png",
+          "book/page_next_01.png",
+          "book/page_next_02.png",
+          "book/page_next_03.png",
+          "book/page_next_04.png",
+          "book/page_next_05.png"
+        ],
+        "frame_size": [
+          1024,
+          640
+        ],
+        "hinge": [
+          512,
+          36
+        ],
+        "frame_order": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "duration_ms": [
+          100,
+          100,
+          100,
+          100,
+          100,
+          100
+        ],
+        "loop": false,
+        "status": "art_complete_integration_unverified"
+      },
+      "page_previous": {
+        "files": [
+          "book/page_previous_00.png",
+          "book/page_previous_01.png",
+          "book/page_previous_02.png",
+          "book/page_previous_03.png",
+          "book/page_previous_04.png",
+          "book/page_previous_05.png"
+        ],
+        "frame_size": [
+          1024,
+          640
+        ],
+        "hinge": [
+          512,
+          36
+        ],
+        "frame_order": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "duration_ms": [
+          100,
+          100,
+          100,
+          100,
+          100,
+          100
+        ],
+        "loop": false,
+        "status": "art_complete_integration_unverified"
+      }
+    },
+    "hinge": [
+      512,
+      36
+    ],
+    "front_cover_hinge_layer": "book/front_cover_hinge_layer.png",
+    "page_content_quads": {
+      "next": [
+        null,
+        [
+          [
+            512,
+            52
+          ],
+          [
+            828,
+            52
+          ],
+          [
+            828,
+            536
+          ],
+          [
+            512,
+            536
+          ]
+        ],
+        [
+          [
+            512,
+            52
+          ],
+          [
+            632,
+            52
+          ],
+          [
+            632,
+            536
+          ],
+          [
+            512,
+            536
+          ]
+        ],
+        [
+          [
+            392,
+            52
+          ],
+          [
+            512,
+            52
+          ],
+          [
+            512,
+            536
+          ],
+          [
+            392,
+            536
+          ]
+        ],
+        [
+          [
+            196,
+            52
+          ],
+          [
+            512,
+            52
+          ],
+          [
+            512,
+            536
+          ],
+          [
+            196,
+            536
+          ]
+        ],
+        null
+      ],
+      "previous": [
+        null,
+        [
+          [
+            196,
+            52
+          ],
+          [
+            512,
+            52
+          ],
+          [
+            512,
+            536
+          ],
+          [
+            196,
+            536
+          ]
+        ],
+        [
+          [
+            392,
+            52
+          ],
+          [
+            512,
+            52
+          ],
+          [
+            512,
+            536
+          ],
+          [
+            392,
+            536
+          ]
+        ],
+        [
+          [
+            512,
+            52
+          ],
+          [
+            632,
+            52
+          ],
+          [
+            632,
+            536
+          ],
+          [
+            512,
+            536
+          ]
+        ],
+        [
+          [
+            512,
+            52
+          ],
+          [
+            828,
+            52
+          ],
+          [
+            828,
+            536
+          ],
+          [
+            512,
+            536
+          ]
+        ],
+        null
+      ]
+    },
+    "render_rule": "opening/closing canvas stays1024x640. Use closed_00 only for independent compact icon, not directly interpolated. Text and prices rendered separately. Perspective narrows width only during hinge rotation.",
+    "page_text_safe_rects": [
+      [
+        152,
+        112,
+        440,
+        484
+      ],
+      [
+        584,
+        112,
+        872,
+        484
+      ]
+    ]
+  },
+  "generator": "image_gen.imagegen",
+  "source_prompts": "../../art-production/ranch-assets-v1/prompts.json",
+  "processing": "Native palette cleanup, exact canvas/anchor placement, equal-scale output; book blank center extended without stretching edge textures",
+  "runtime_verified": false,
+  "files": [
+    {
+      "file": "book/binding_shadow_layer.png",
+      "size": [
+        1024,
+        640
+      ],
+      "visible_bbox": [
+        504,
+        52,
+        521,
+        556
+      ],
+      "sha256": "b7b503c3c0d506219c4a9161b02a010c5780d78411811d6b4116b85fad980e37",
+      "alpha": "binary"
+    },
+    {
+      "file": "book/closed_00.png",
+      "size": [
+        256,
+        320
+      ],
+      "visible_bbox": [
+        20,
+        12,
+        244,
+        308
+      ],
+      "sha256": "7a8a967c0e3364345bff237de083e42a858af86be8661fb3abc68cbaed896f82",
+      "alpha": "binary"
+    },
+    {
+      "file": "book/closing_00.png",
+      "size": [
+        1024,
+        640
+      ],
+      "visible_bbox": [
+        72,
+        36,
+        952,
+        604
+      ],
+      "sha256": "34eec1958c6159a982691b8f9755e8e98d7588ff90230afdeb2d51e7e959d367",
+      "alpha": "binary"
+    },
+    {
+      "file": "book/closing_01.png",
+      "size": [
+        1024,
+        640
+      ],
+      "visible_bbox": [
+        184,
+        36,
+        952,
+        604
+      ],
+      "sha256": "35207080a3c5161b8461965dfbe3a235f0aaf875478966f5fc56cf0153f89a0e",
+      "alpha": "binary"
+    },
+    {
+      "file": "book/closing_02.png",
+      "size": [
+        1024,
+        640
+      ],
+      "visible_bbox": [
+        400,
+        36,
+        952,
+        604
+      ],
+      "sha256": "f8103dbb1a2ac0de80a4b774ebe5835f06f49c4b482635dd8c6b64013cbce69e",
+      "alpha": "binary"
+    },
+    {
+      "file": "book/closing_03.png",
+      "size": [
+        1024,
+        640
+      ],
+      "visible_bbox": [
+        504,
+        36,
+        952,
+        604
+      ],
+      "sha256": "3e1a689a17034e4cb3d9d76e8e9136cb637b19d8613cd25225b020103d4cccc8",
+      "alpha": "binary"
+    },
+    {
+      "file": "book/closing_04.png",
+      "size": [
+        1024,
+        640
+      ],
+      "visible_bbox": [
+        504,
+        36,
+        952,
+        604
+      ],
+      "sha256": "5fa6df0d56ff5c5d8a2674c16027722ccbf913b5113bca1abaafd14e74b36dcd",
+      "alpha": "binary"
+    },
+    {
+      "file": "book/closing_05.png",
+      "size": [
+        1024,
+        640
+      ],
+      "visible_bbox": [
+        504,
+        36,
+        960,
+        604
+      ],
+      "sha256": "318a86e9f4780dc07dd1dc587340e7d45c68c1a31e1eef939af8a9f3fccba156",
+      "alpha": "binary"
+    },
+    {
+      "file": "book/cover_layer.png",
+      "size": [
+        1024,
+        640
+      ],
+      "visible_bbox": [
+        72,
+        36,
+        952,
+        604
+      ],
+      "sha256": "a9c6132924a563117e254e1c15956a508729816058134622a1a4b3a8a2a9bc8a",
+      "alpha": "binary"
+    },
+    {
+      "file": "book/front_cover_hinge_layer.png",
+      "size": [
+        1024,
+        640
+      ],
+      "visible_bbox": [
+        512,
+        36,
+        960,
+        564
+      ],
+      "sha256": "9f0472dace817700865441b47f7783bf63d6f9156bee5499c6755fcd47ed362c",
+      "alpha": "binary"
+    },
+    {
+      "file": "book/open_00.png",
+      "size": [
+        1024,
+        640
+      ],
+      "visible_bbox": [
+        72,
+        36,
+        952,
+        604
+      ],
+      "sha256": "34eec1958c6159a982691b8f9755e8e98d7588ff90230afdeb2d51e7e959d367",
+      "alpha": "binary"
+    },
+    {
+      "file": "book/opening_00.png",
+      "size": [
+        1024,
+        640
+      ],
+      "visible_bbox": [
+        504,
+        36,
+        960,
+        604
+      ],
+      "sha256": "318a86e9f4780dc07dd1dc587340e7d45c68c1a31e1eef939af8a9f3fccba156",
+      "alpha": "binary"
+    },
+    {
+      "file": "book/opening_01.png",
+      "size": [
+        1024,
+        640
+      ],
+      "visible_bbox": [
+        504,
+        36,
+        952,
+        604
+      ],
+      "sha256": "5fa6df0d56ff5c5d8a2674c16027722ccbf913b5113bca1abaafd14e74b36dcd",
+      "alpha": "binary"
+    },
+    {
+      "file": "book/opening_02.png",
+      "size": [
+        1024,
+        640
+      ],
+      "visible_bbox": [
+        504,
+        36,
+        952,
+        604
+      ],
+      "sha256": "3e1a689a17034e4cb3d9d76e8e9136cb637b19d8613cd25225b020103d4cccc8",
+      "alpha": "binary"
+    },
+    {
+      "file": "book/opening_03.png",
+      "size": [
+        1024,
+        640
+      ],
+      "visible_bbox": [
+        400,
+        36,
+        952,
+        604
+      ],
+      "sha256": "f8103dbb1a2ac0de80a4b774ebe5835f06f49c4b482635dd8c6b64013cbce69e",
+      "alpha": "binary"
+    },
+    {
+      "file": "book/opening_04.png",
+      "size": [
+        1024,
+        640
+      ],
+      "visible_bbox": [
+        184,
+        36,
+        952,
+        604
+      ],
+      "sha256": "35207080a3c5161b8461965dfbe3a235f0aaf875478966f5fc56cf0153f89a0e",
+      "alpha": "binary"
+    },
+    {
+      "file": "book/opening_05.png",
+      "size": [
+        1024,
+        640
+      ],
+      "visible_bbox": [
+        72,
+        36,
+        952,
+        604
+      ],
+      "sha256": "34eec1958c6159a982691b8f9755e8e98d7588ff90230afdeb2d51e7e959d367",
+      "alpha": "binary"
+    },
+    {
+      "file": "book/page_next_00.png",
+      "size": [
+        1024,
+        640
+      ],
+      "visible_bbox": [
+        72,
+        36,
+        952,
+        604
+      ],
+      "sha256": "34eec1958c6159a982691b8f9755e8e98d7588ff90230afdeb2d51e7e959d367",
+      "alpha": "binary"
+    },
+    {
+      "file": "book/page_next_01.png",
+      "size": [
+        1024,
+        640
+      ],
+      "visible_bbox": [
+        72,
+        36,
+        952,
+        604
+      ],
+      "sha256": "bcd2a93f782e7123928f7968cd58bf44f28356572026ce0fac3126ecdf884ec7",
+      "alpha": "binary"
+    },
+    {
+      "file": "book/page_next_02.png",
+      "size": [
+        1024,
+        640
+      ],
+      "visible_bbox": [
+        72,
+        36,
+        952,
+        604
+      ],
+      "sha256": "6c49df79d6865df78291dfe6a874485ee22340f4ed2b6a232a5546a2c89e5458",
+      "alpha": "binary"
+    },
+    {
+      "file": "book/page_next_03.png",
+      "size": [
+        1024,
+        640
+      ],
+      "visible_bbox": [
+        72,
+        36,
+        952,
+        604
+      ],
+      "sha256": "788c042d67185d076fb961c93c890643a554f333b37d1e0576adcacff175b6fd",
+      "alpha": "binary"
+    },
+    {
+      "file": "book/page_next_04.png",
+      "size": [
+        1024,
+        640
+      ],
+      "visible_bbox": [
+        72,
+        36,
+        952,
+        604
+      ],
+      "sha256": "2502e520a3f78ffdf2e9f2d96ecf27acee6482b4a74df82f370f126a05474344",
+      "alpha": "binary"
+    },
+    {
+      "file": "book/page_next_05.png",
+      "size": [
+        1024,
+        640
+      ],
+      "visible_bbox": [
+        72,
+        36,
+        952,
+        604
+      ],
+      "sha256": "34eec1958c6159a982691b8f9755e8e98d7588ff90230afdeb2d51e7e959d367",
+      "alpha": "binary"
+    },
+    {
+      "file": "book/page_previous_00.png",
+      "size": [
+        1024,
+        640
+      ],
+      "visible_bbox": [
+        72,
+        36,
+        952,
+        604
+      ],
+      "sha256": "34eec1958c6159a982691b8f9755e8e98d7588ff90230afdeb2d51e7e959d367",
+      "alpha": "binary"
+    },
+    {
+      "file": "book/page_previous_01.png",
+      "size": [
+        1024,
+        640
+      ],
+      "visible_bbox": [
+        72,
+        36,
+        952,
+        604
+      ],
+      "sha256": "2502e520a3f78ffdf2e9f2d96ecf27acee6482b4a74df82f370f126a05474344",
+      "alpha": "binary"
+    },
+    {
+      "file": "book/page_previous_02.png",
+      "size": [
+        1024,
+        640
+      ],
+      "visible_bbox": [
+        72,
+        36,
+        952,
+        604
+      ],
+      "sha256": "788c042d67185d076fb961c93c890643a554f333b37d1e0576adcacff175b6fd",
+      "alpha": "binary"
+    },
+    {
+      "file": "book/page_previous_03.png",
+      "size": [
+        1024,
+        640
+      ],
+      "visible_bbox": [
+        72,
+        36,
+        952,
+        604
+      ],
+      "sha256": "6c49df79d6865df78291dfe6a874485ee22340f4ed2b6a232a5546a2c89e5458",
+      "alpha": "binary"
+    },
+    {
+      "file": "book/page_previous_04.png",
+      "size": [
+        1024,
+        640
+      ],
+      "visible_bbox": [
+        72,
+        36,
+        952,
+        604
+      ],
+      "sha256": "bcd2a93f782e7123928f7968cd58bf44f28356572026ce0fac3126ecdf884ec7",
+      "alpha": "binary"
+    },
+    {
+      "file": "book/page_previous_05.png",
+      "size": [
+        1024,
+        640
+      ],
+      "visible_bbox": [
+        72,
+        36,
+        952,
+        604
+      ],
+      "sha256": "34eec1958c6159a982691b8f9755e8e98d7588ff90230afdeb2d51e7e959d367",
+      "alpha": "binary"
+    },
+    {
+      "file": "book/paper_layer.png",
+      "size": [
+        1024,
+        640
+      ],
+      "visible_bbox": [
+        92,
+        48,
+        932,
+        584
+      ],
+      "sha256": "a3886a5f26ffefdd72a6c356b2413dcc2703ba142083447601582e9eb3c1749f",
+      "alpha": "binary"
+    },
+    {
+      "file": "cat/idle_left_00.png",
+      "size": [
+        48,
+        40
+      ],
+      "visible_bbox": [
+        13,
+        12,
+        37,
+        36
+      ],
+      "sha256": "cd3c93d6a3913728ab6ea90c7e186331847310d0a93b23689bda0dd12f025e4a",
+      "alpha": "binary"
+    },
+    {
+      "file": "cat/idle_left_sheet.png",
+      "size": [
+        48,
+        40
+      ],
+      "visible_bbox": [
+        13,
+        12,
+        37,
+        36
+      ],
+      "sha256": "cd3c93d6a3913728ab6ea90c7e186331847310d0a93b23689bda0dd12f025e4a",
+      "alpha": "binary"
+    },
+    {
+      "file": "cat/idle_right_00.png",
+      "size": [
+        48,
+        40
+      ],
+      "visible_bbox": [
+        12,
+        12,
+        36,
+        36
+      ],
+      "sha256": "aa8c80b01e4c43ed4c5325dd0ea9176f436d4262be9b9c9e9623e38eecefe5f5",
+      "alpha": "binary"
+    },
+    {
+      "file": "cat/idle_right_sheet.png",
+      "size": [
+        48,
+        40
+      ],
+      "visible_bbox": [
+        12,
+        12,
+        36,
+        36
+      ],
+      "sha256": "aa8c80b01e4c43ed4c5325dd0ea9176f436d4262be9b9c9e9623e38eecefe5f5",
+      "alpha": "binary"
+    },
+    {
+      "file": "cat/stretch_left_00.png",
+      "size": [
+        48,
+        40
+      ],
+      "visible_bbox": [
+        11,
+        13,
+        38,
+        36
+      ],
+      "sha256": "3ef003799eff2e8440fa743876b313633fd9be190bbca6fbae644259bf0a13c1",
+      "alpha": "binary"
+    },
+    {
+      "file": "cat/stretch_left_01.png",
+      "size": [
+        48,
+        40
+      ],
+      "visible_bbox": [
+        11,
+        12,
+        38,
+        36
+      ],
+      "sha256": "77c963c415aa7fb4b08f8ee83b4385ad6b924d4ae29c712688631b269582bf1c",
+      "alpha": "binary"
+    },
+    {
+      "file": "cat/stretch_left_sheet.png",
+      "size": [
+        96,
+        40
+      ],
+      "visible_bbox": [
+        11,
+        12,
+        86,
+        36
+      ],
+      "sha256": "b9d90f156d966340ae467c21989aefa8bec86ef5b2c4ef573b01dba40524b9b5",
+      "alpha": "binary"
+    },
+    {
+      "file": "cat/stretch_right_00.png",
+      "size": [
+        48,
+        40
+      ],
+      "visible_bbox": [
+        11,
+        13,
+        38,
+        36
+      ],
+      "sha256": "678b1ffc7bd1129d05768355a3422c1d86ab364d7c11d04e559e2eaa93e79f49",
+      "alpha": "binary"
+    },
+    {
+      "file": "cat/stretch_right_01.png",
+      "size": [
+        48,
+        40
+      ],
+      "visible_bbox": [
+        11,
+        12,
+        38,
+        36
+      ],
+      "sha256": "5fa4238fbe964eb028d7545b330d0f8da1921351f3ed9efd85315aaf466c55a7",
+      "alpha": "binary"
+    },
+    {
+      "file": "cat/stretch_right_sheet.png",
+      "size": [
+        96,
+        40
+      ],
+      "visible_bbox": [
+        11,
+        12,
+        86,
+        36
+      ],
+      "sha256": "c9e1d2dd30cb4c7477d2ad9732c8f8d12979f3e5721f1b3b00ea85e1da850636",
+      "alpha": "binary"
+    },
+    {
+      "file": "cat/walk_left_00.png",
+      "size": [
+        48,
+        40
+      ],
+      "visible_bbox": [
+        13,
+        12,
+        37,
+        36
+      ],
+      "sha256": "4d553ae10faf68e1eb1b879b8dde1bce17e7f0cf2eda8c1bd7180c1c58234b19",
+      "alpha": "binary"
+    },
+    {
+      "file": "cat/walk_left_01.png",
+      "size": [
+        48,
+        40
+      ],
+      "visible_bbox": [
+        13,
+        12,
+        37,
+        36
+      ],
+      "sha256": "73c909ace0e106ddb36e52d26e464b95beaa0a8c5e9d51b339b1059ec92c581a",
+      "alpha": "binary"
+    },
+    {
+      "file": "cat/walk_left_02.png",
+      "size": [
+        48,
+        40
+      ],
+      "visible_bbox": [
+        13,
+        12,
+        37,
+        36
+      ],
+      "sha256": "714af3dfccfe393741ed6b0d1d4d34bc5227226a2acdcb5b9872c53373fdbbf9",
+      "alpha": "binary"
+    },
+    {
+      "file": "cat/walk_left_03.png",
+      "size": [
+        48,
+        40
+      ],
+      "visible_bbox": [
+        13,
+        12,
+        37,
+        36
+      ],
+      "sha256": "bdef58ea6b85ff86852adf1ec14b907e4e1fa48b7ba3a7e82619f7bd2330ec9a",
+      "alpha": "binary"
+    },
+    {
+      "file": "cat/walk_left_sheet.png",
+      "size": [
+        192,
+        40
+      ],
+      "visible_bbox": [
+        13,
+        12,
+        181,
+        36
+      ],
+      "sha256": "efe0a3c1e3d0559bebcdac7d26364ace87ef7a75c022875640368b9ef06dddc5",
+      "alpha": "binary"
+    },
+    {
+      "file": "cat/walk_right_00.png",
+      "size": [
+        48,
+        40
+      ],
+      "visible_bbox": [
+        12,
+        12,
+        36,
+        36
+      ],
+      "sha256": "3c17daf593eddab66a377e40262aeb819d76680cb108758e0e235b89a159fc31",
+      "alpha": "binary"
+    },
+    {
+      "file": "cat/walk_right_01.png",
+      "size": [
+        48,
+        40
+      ],
+      "visible_bbox": [
+        12,
+        12,
+        36,
+        36
+      ],
+      "sha256": "64c18337a4bbdbaa4dd062dfccbb3e98a43f9c6d8b202db2a91374564918bee0",
+      "alpha": "binary"
+    },
+    {
+      "file": "cat/walk_right_02.png",
+      "size": [
+        48,
+        40
+      ],
+      "visible_bbox": [
+        12,
+        12,
+        36,
+        36
+      ],
+      "sha256": "55116959a843becc744065678b1d405149061b1bfe93a288a0f4529075735df4",
+      "alpha": "binary"
+    },
+    {
+      "file": "cat/walk_right_03.png",
+      "size": [
+        48,
+        40
+      ],
+      "visible_bbox": [
+        12,
+        12,
+        36,
+        36
+      ],
+      "sha256": "65e20721f2861b03475e9ebbcfa8ac728108262efea57e5a940ac70352d3cf97",
+      "alpha": "binary"
+    },
+    {
+      "file": "cat/walk_right_sheet.png",
+      "size": [
+        192,
+        40
+      ],
+      "visible_bbox": [
+        12,
+        12,
+        180,
+        36
+      ],
+      "sha256": "4d778c69f2cd1e5c376a8977f28a42ee1b2e54915fb4c0a51b2a7091f493590f",
+      "alpha": "binary"
+    },
+    {
+      "file": "hen/idle_left_00.png",
+      "size": [
+        32,
+        32
+      ],
+      "visible_bbox": [
+        9,
+        11,
+        25,
+        29
+      ],
+      "sha256": "b8ca11b4c8cd220c5c027ed3281b3719aefa222878180e9df50204f8e650586e",
+      "alpha": "binary"
+    },
+    {
+      "file": "hen/idle_left_sheet.png",
+      "size": [
+        32,
+        32
+      ],
+      "visible_bbox": [
+        9,
+        11,
+        25,
+        29
+      ],
+      "sha256": "b8ca11b4c8cd220c5c027ed3281b3719aefa222878180e9df50204f8e650586e",
+      "alpha": "binary"
+    },
+    {
+      "file": "hen/idle_right_00.png",
+      "size": [
+        32,
+        32
+      ],
+      "visible_bbox": [
+        8,
+        11,
+        24,
+        29
+      ],
+      "sha256": "ddf873837acdd77868b2b20d9ad3615d60d672f21dc00048e85c6964722331aa",
+      "alpha": "binary"
+    },
+    {
+      "file": "hen/idle_right_sheet.png",
+      "size": [
+        32,
+        32
+      ],
+      "visible_bbox": [
+        8,
+        11,
+        24,
+        29
+      ],
+      "sha256": "ddf873837acdd77868b2b20d9ad3615d60d672f21dc00048e85c6964722331aa",
+      "alpha": "binary"
+    },
+    {
+      "file": "hen/peck_left_00.png",
+      "size": [
+        32,
+        32
+      ],
+      "visible_bbox": [
+        8,
+        16,
+        25,
+        29
+      ],
+      "sha256": "142562cf5a526bcfbc4229fbe31111fee4bc935f3f997578cd50d3fc85fce34c",
+      "alpha": "binary"
+    },
+    {
+      "file": "hen/peck_left_01.png",
+      "size": [
+        32,
+        32
+      ],
+      "visible_bbox": [
+        8,
+        15,
+        25,
+        29
+      ],
+      "sha256": "ca196986d26b9ea969dc23d3bb48272b5f787ae455d6e1dfe9e42660d758095c",
+      "alpha": "binary"
+    },
+    {
+      "file": "hen/peck_left_sheet.png",
+      "size": [
+        64,
+        32
+      ],
+      "visible_bbox": [
+        8,
+        15,
+        57,
+        29
+      ],
+      "sha256": "5509841809364067327c1fda580582fe5f18d59d793889587eabd323b5c2af84",
+      "alpha": "binary"
+    },
+    {
+      "file": "hen/peck_right_00.png",
+      "size": [
+        32,
+        32
+      ],
+      "visible_bbox": [
+        8,
+        16,
+        25,
+        29
+      ],
+      "sha256": "fefbbc6d6edf7013e17ef7004df1c820dd06f75872ee2853be42ef3e79c510ca",
+      "alpha": "binary"
+    },
+    {
+      "file": "hen/peck_right_01.png",
+      "size": [
+        32,
+        32
+      ],
+      "visible_bbox": [
+        8,
+        15,
+        25,
+        29
+      ],
+      "sha256": "894449e8fa921e99588edbff29b2e3673acb39b30b93408253a99f5b697ab16a",
+      "alpha": "binary"
+    },
+    {
+      "file": "hen/peck_right_sheet.png",
+      "size": [
+        64,
+        32
+      ],
+      "visible_bbox": [
+        8,
+        15,
+        57,
+        29
+      ],
+      "sha256": "cca72c1b26a76850b93dc66b14515017d29a035f2dce5a7a5b3ae86ff000c46f",
+      "alpha": "binary"
+    },
+    {
+      "file": "hen/walk_left_00.png",
+      "size": [
+        32,
+        32
+      ],
+      "visible_bbox": [
+        9,
+        11,
+        25,
+        29
+      ],
+      "sha256": "d513db5e831f4ffcf087059fc351f4fbafdeec24cca5164d97271bfcc23e612b",
+      "alpha": "binary"
+    },
+    {
+      "file": "hen/walk_left_01.png",
+      "size": [
+        32,
+        32
+      ],
+      "visible_bbox": [
+        9,
+        11,
+        25,
+        29
+      ],
+      "sha256": "08134f48a9a411ae75fa8464bbc458e6c6e959d41057adbdd4443d12b72b8ef0",
+      "alpha": "binary"
+    },
+    {
+      "file": "hen/walk_left_02.png",
+      "size": [
+        32,
+        32
+      ],
+      "visible_bbox": [
+        9,
+        11,
+        25,
+        29
+      ],
+      "sha256": "2a6e3bdb0732405205dfa1c839b091bdc14c2de7f4229c579be218da3ad93eab",
+      "alpha": "binary"
+    },
+    {
+      "file": "hen/walk_left_03.png",
+      "size": [
+        32,
+        32
+      ],
+      "visible_bbox": [
+        9,
+        11,
+        25,
+        29
+      ],
+      "sha256": "cc98bfc3e8224fe4096d5110ec2aea49d6c29996f1a482dd7e2321175cfc78ef",
+      "alpha": "binary"
+    },
+    {
+      "file": "hen/walk_left_sheet.png",
+      "size": [
+        128,
+        32
+      ],
+      "visible_bbox": [
+        9,
+        11,
+        121,
+        29
+      ],
+      "sha256": "a8c8f6d079f73a08d038ad619ca9636649a99c63113fefb5ed430fc408626b43",
+      "alpha": "binary"
+    },
+    {
+      "file": "hen/walk_right_00.png",
+      "size": [
+        32,
+        32
+      ],
+      "visible_bbox": [
+        8,
+        11,
+        24,
+        29
+      ],
+      "sha256": "a6929db094427b94ff3aaaf848af66c155307620314c41cbf301d7bcaa4249bc",
+      "alpha": "binary"
+    },
+    {
+      "file": "hen/walk_right_01.png",
+      "size": [
+        32,
+        32
+      ],
+      "visible_bbox": [
+        8,
+        11,
+        24,
+        29
+      ],
+      "sha256": "e17f037266c0a365db0083d4b2e7cf1b13a915a740124037849b2c3c724a3c2a",
+      "alpha": "binary"
+    },
+    {
+      "file": "hen/walk_right_02.png",
+      "size": [
+        32,
+        32
+      ],
+      "visible_bbox": [
+        8,
+        11,
+        24,
+        29
+      ],
+      "sha256": "be0bf6ddc6577d44d80063eb0ca664870b89ad0963a8ff63afac7b469ab00a16",
+      "alpha": "binary"
+    },
+    {
+      "file": "hen/walk_right_03.png",
+      "size": [
+        32,
+        32
+      ],
+      "visible_bbox": [
+        8,
+        11,
+        24,
+        29
+      ],
+      "sha256": "1fc509526df979af6aff2a7a075d8b74665318660f9f5587809320a6716d4a2d",
+      "alpha": "binary"
+    },
+    {
+      "file": "hen/walk_right_sheet.png",
+      "size": [
+        128,
+        32
+      ],
+      "visible_bbox": [
+        8,
+        11,
+        120,
+        29
+      ],
+      "sha256": "78f8d7b62b5ae747cee9bc0757b395a1c5f876782c1a35f3b448e88d11691a6d",
+      "alpha": "binary"
+    },
+    {
+      "file": "merchant/idle_right_00.png",
+      "size": [
+        32,
+        48
+      ],
+      "visible_bbox": [
+        2,
+        3,
+        30,
+        44
+      ],
+      "sha256": "e63bedfb03babc234d3460376aa53082d7a7f6ca9ff9de74ba2220e19605539d",
+      "alpha": "binary"
+    },
+    {
+      "file": "merchant/idle_right_sheet.png",
+      "size": [
+        32,
+        48
+      ],
+      "visible_bbox": [
+        2,
+        3,
+        30,
+        44
+      ],
+      "sha256": "e63bedfb03babc234d3460376aa53082d7a7f6ca9ff9de74ba2220e19605539d",
+      "alpha": "binary"
+    },
+    {
+      "file": "scroll/idle_none_00.png",
+      "size": [
+        24,
+        24
+      ],
+      "visible_bbox": [
+        1,
+        3,
+        23,
+        22
+      ],
+      "sha256": "509f2fe971653bc2a2a598ecdc9668433fb1479a12320b64ba0267b9723405ed",
+      "alpha": "binary"
+    },
+    {
+      "file": "scroll/idle_none_sheet.png",
+      "size": [
+        24,
+        24
+      ],
+      "visible_bbox": [
+        1,
+        3,
+        23,
+        22
+      ],
+      "sha256": "509f2fe971653bc2a2a598ecdc9668433fb1479a12320b64ba0267b9723405ed",
+      "alpha": "binary"
+    },
+    {
+      "file": "stall/idle_front_00.png",
+      "size": [
+        768,
+        512
+      ],
+      "visible_bbox": [
+        132,
+        16,
+        640,
+        496
+      ],
+      "sha256": "c3fe1863b4f0708f66fa6409f31207e93dd24f28d8676f65341bfef93bd29102",
+      "alpha": "binary"
+    },
+    {
+      "file": "stall/idle_front_sheet.png",
+      "size": [
+        768,
+        512
+      ],
+      "visible_bbox": [
+        132,
+        16,
+        640,
+        496
+      ],
+      "sha256": "c3fe1863b4f0708f66fa6409f31207e93dd24f28d8676f65341bfef93bd29102",
+      "alpha": "binary"
+    }
+  ],
+  "review_only": [
+    "review/animal-actions.png",
+    "review/animals-walk-frames.png",
+    "review/animals-walk.gif",
+    "review/book-opening.png",
+    "review/book-sequence.gif",
+    "review/overview.png"
+  ]
+}

@@ -33,6 +33,7 @@ func frame():
 func capture(name: String):
 	game.refresh()
 	await frame()
+	await frame()
 	check(root.get_texture().get_image().save_png(output+"/"+name+".png")==OK,"save "+name)
 	observations.captures[name]={"tick":game.world.tick,"speed":game.speed,"paused":game.world.paused,"keeper_pos":[game.world.keeper.pos.x,game.world.keeper.pos.y],"keeper_facing":game.world.keeper.get("facing",1),"dog_facing":game.world.animals[0].get("facing",1),"rest":game.world.Life.presentation(game.world),"zoom":game.camera.zoom.x,"selection":str(game.selected)}
 func segment(prefix: String, count: int):
@@ -46,7 +47,7 @@ func run():
 	if not "--isolated-review" in OS.get_cmdline_user_args() or output=="":quit(2);return
 	observations.implementation_commit=OS.get_environment("FARM_REVIEW_COMMIT")
 	observations.dirty=OS.get_environment("FARM_REVIEW_DIRTY")
-	observations.asset_delivery_commit="f3e4ae82b68c342b928dfb5dfcebb451353f9b8d"
+	observations.asset_delivery_commit="7e408375f19b86759fc614508fc3e5f413f67ff9"
 	observations.method="GPU rendering on private noninteractive Windows station; game-local InputEvent injection, no OS input"
 	observations.renderer=RenderingServer.get_video_adapter_name()
 	root.size=Vector2i(1280,800)
@@ -98,6 +99,21 @@ func run():
 	game.world.paused=false;game.keeper_action("keeper_rest");await frame()
 	check(not game.world.keeper.resting,"Wake clears sleep state")
 	game.world.paused=true;await capture("awake")
+	game.world.paused=false
+	await segment("wake",18)
+	check(game.actor_art.keeper.action=="idle","Wake animation settles back to idle")
+	game.world.paused=true;await capture("awake_idle")
+	game.world.debug_enabled=true;game.world.debug_action("hen",{});game.world.debug_action("cat",{})
+	var hen=game.world.animals.filter(func(a):return a.species=="hen")[0]
+	var cat=game.world.animals.filter(func(a):return a.species=="cat")[0]
+	hen.pos=Vector2i(11,9);cat.pos=Vector2i(12,9)
+	game.view_positions["a%d"%hen.id]=Vector2(hen.pos);game.view_positions["a%d"%cat.id]=Vector2(cat.pos)
+	await capture("all_animals")
+	game.world.paused=false;await segment("animal_motion",60)
+	game.choose_animal(1)
+	await mouse(game.buttons.rest.get_global_rect().get_center())
+	await segment("dog_rest",120)
+	await capture("dog_resting")
 	check(game.material==null and game.hud.material==null,"No legacy white key material")
 	FileAccess.open(output+"/observations.json",FileAccess.WRITE).store_string(JSON.stringify(observations,"  "))
 	print("ISOLATED CHARACTER REVIEW: ",observations.checks.size()," checks failures=",observations.failures)

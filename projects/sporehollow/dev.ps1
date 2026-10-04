@@ -1,4 +1,4 @@
-param([ValidateSet('check', 'test', 'evaluate', 'build', 'visual', 'play', 'editor')][string]$Task = 'check', [string[]]$Suites = @('revisions','residents','world','jobs','keeper','planning','rest_until','input'))
+param([ValidateSet('check', 'test', 'evaluate', 'build', 'visual', 'play', 'editor')][string]$Task = 'check', [string[]]$Suites = @('revisions','residents','world','jobs','keeper','planning','rest_until','input','controls'))
 $ErrorActionPreference = 'Stop'
 $farmRoot = $PSScriptRoot
 $godot = Join-Path $farmRoot '.tools/Godot_v4.7.2-stable_win64_console.exe'
@@ -16,7 +16,8 @@ New-Item -ItemType Directory -Force $runRoot, "$runRoot/user-data" | Out-Null
 Set-Content -LiteralPath "$farmRoot/artifacts/.gdignore" -Value ''
 $revision = (git -C $farmRoot rev-parse --short HEAD).Trim()
 $dirty = [bool](git -C $farmRoot status --porcelain)
-@{commit=$revision; dirty=$dirty} | ConvertTo-Json | Set-Content -LiteralPath "$farmRoot/game/build_stamp.json"
+$artProvenance=Get-Content -LiteralPath "$farmRoot/game/art_provenance.json" -Raw | ConvertFrom-Json
+@{commit=$revision; dirty=$dirty; asset_delivery_commit=$artProvenance.latest_delivery_commit} | ConvertTo-Json | Set-Content -LiteralPath "$farmRoot/game/build_stamp.json"
 function Run-Headless([string]$Name, [string[]]$Arguments, [string]$Executable=$godot) {
     $log = Join-Path $runRoot "$Name.log"
     $info = [System.Diagnostics.ProcessStartInfo]::new()

@@ -27,5 +27,6 @@ try {
 Copy-Item -LiteralPath "$farmRoot/assets/fonts/OFL.txt" -Destination "$buildRoot/FONT_LICENSE.txt"
 Copy-Item -LiteralPath "$farmRoot/assets/GODOT_COPYRIGHT.txt" -Destination "$buildRoot/GODOT_COPYRIGHT.txt"
 Copy-Item -LiteralPath "$farmRoot/assets/ui/SOURCES.md" -Destination "$buildRoot/UI_SOURCES.txt"
-@{commit=$Revision;dirty=$Dirty;sha256=(Get-FileHash -LiteralPath $target -Algorithm SHA256).Hash;source=$source;published_utc=[DateTime]::UtcNow.ToString('o')} | ConvertTo-Json | Set-Content -LiteralPath "$buildRoot/BUILD.json"
+$artProvenance=Get-Content -LiteralPath "$farmRoot/game/art_provenance.json" -Raw | ConvertFrom-Json
+@{commit=$Revision;dirty=$Dirty;asset_delivery_commit=$artProvenance.latest_delivery_commit;sha256=(Get-FileHash -LiteralPath $target -Algorithm SHA256).Hash;source=$source;published_utc=[DateTime]::UtcNow.ToString('o')} | ConvertTo-Json | Set-Content -LiteralPath "$buildRoot/BUILD.json"
 Write-Output "Ready: $farmRoot/Play.cmd (build $Revision)"

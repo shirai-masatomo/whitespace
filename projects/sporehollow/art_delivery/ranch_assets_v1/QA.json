@@ -1,0 +1,14 @@
+{
+  "static_adopted_files_unchanged": 4,
+  "motion_frame_files": 45,
+  "ranch_production_pngs": 76,
+  "canvas_alpha_anchor_hash_checks": "passed",
+  "book_hinge_frames_and_layer_reconstruction": "passed",
+  "reviewed": [
+    "overview.png",
+    "animal-actions.png",
+    "animals-walk-frames.png",
+    "book-opening.png"
+  ],
+  "runtime_integration": "not_checked_by_art_task"
+}

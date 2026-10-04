@@ -7,9 +7,12 @@ const TOOLS = {"wall": "壁  10 / 1秒", "wood_wall":"木壁 木10", "stone_wall
 	"auto": "おまかせ", "stay": "待機", "wander": "徘徊", "rest": "休む", "collect": "資源・卵・設計図", "dog_food": "犬用餌 HP+10", "hen_food": "鶏用餌 HP+8", "cat_food": "猫用餌 HP+8"}
 const GROUP_TOOLS = [["wall", "wood_wall", "stone_wall", "soil_tile", "wood_tile", "stone_tile", "door", "locked_door"], ["guide", "auto", "stay", "wander", "rest"], ["collect"]]
 const BoardArt = preload("res://game/board_art.gd")
+const Art = preload("res://game/adopted_art.gd")
+var actor_art: Dictionary = {}
 const UI = preload("res://game/ui_style.gd")
 const MARKET_CATEGORIES = {"animals": ["動物", "animals", "牧場の仲間"], "materials": ["資材", "wood", "土・木・石"], "facilities": ["施設", "hammer", "牧場づくり"], "items": ["小物と恵み", "basket", "卵・羽・道具"]}
 var world = Farm.new({}, randi_range(1, 2147483646))
+var subtasks = preload("res://game/subtasks.gd").new()
 var tool = ""
 var queue_controls: Control
 var queue_signature = ""
@@ -48,6 +51,7 @@ var queue_drag_start = Vector2.ZERO
 var queue_drop_index = -1
 var hover_job = -1
 var morning_screen = "morning"
+var book_view
 var book_motion = ""
 var book_direction = 1
 var book_started = -10.0
@@ -108,6 +112,7 @@ var reactions: Dictionary = {}
 var noticed: Dictionary = {}
 
 func _ready():
+	subtasks.load_settings()
 	camera = Camera2D.new()
 	camera.position = Vector2(Farm.W, Farm.H) * TILE * 0.5
 	add_child(camera)
@@ -141,11 +146,14 @@ func _ready():
 	queue_controls.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	controls.add_child(queue_controls)
 	add_button(controls, "walk", "牧場主", Rect2(270, 754, 110, 36), choose_walk)
-	buttons.walk.tooltip_text = "ホイール：解除 → 建設 → 指示 → 牧場主。Ctrl+ホイール：ズーム"
+	buttons.walk.tooltip_text = "ホイール：建設 → 指示 → 牧場主。Tab：操作選択。Ctrl+ホイール：ズーム"
 	setup_menu()
 	overlay = Node2D.new()
 	layer.add_child(overlay)
 	overlay.draw.connect(draw_transition)
+	book_view = preload("res://game/book_view.gd").new()
+	add_child(book_view)
+	book_view.setup(self)
 	if world.phase == "shop": arrival_started = clock
 	refresh()
 	controls.visible = not cinematic()
@@ -157,6 +165,7 @@ func add_button(parent: Control, id: String, text_value: String, area: Rect2, ca
 	var button = Button.new()
 	button.text = text_value
 	button.focus_mode = Control.FOCUS_NONE
+	if parent == palette and world.phase == "shop": button.focus_mode = Control.FOCUS_ALL
 	button.position = area.position
 	button.size = area.size
 	UI.button(button)
@@ -194,15 +203,42 @@ func command_selected(id: String, cell: Vector2i):
 	world.queue_order(id,selected_animals,cell)
 	notice(world.events.back().text)
 
+func subtask_choices() -> Array:
+	var available: Array = []
+	if group == 0:
+		available = GROUP_TOOLS[0].filter(func(id): return Farm.BUILD[id].get("blueprint", "") in ([""] + world.campaign.unlocked_blueprints))
+	elif group == 1:
+		var animals = world.animals.filter(func(a): return a.id in selected_animals and a.placed and world.available(a))
+		available = GROUP_TOOLS[1].filter(func(id): return animals.any(func(a): return id in Farm.SPECIES[a.species].orders))
+	elif group == 2:
+		available = ["keeper_rest", "resume_jobs", "coffee", "energy_drink"].filter(func(id): return buttons.has(id) and not buttons[id].disabled and buttons[id].is_visible_in_tree())
+	return subtasks.choices(group, available) if group >= 0 else []
+
 func cycle_subtool(reverse: bool = false):
-	if not world.working(): return
-	if group != 0:
-		choose_walk()
+	if not world.working() or menu_open: return
+	if group == 1 and selected_animals.is_empty():
+		var nearby = world.animals.filter(func(a): return a.placed and world.available(a) and not Farm.SPECIES[a.species].orders.is_empty())
+		nearby.sort_custom(func(a,b):
+			var da = Farm.distance(world.keeper.pos,a.pos)
+			var db = Farm.distance(world.keeper.pos,b.pos)
+			return da < db if da != db else a.id < b.id)
+		if nearby.is_empty(): notice("指示できる動物がいません")
+		else: choose_animal(nearby[0].id)
 		return
-	var choices = GROUP_TOOLS[0].filter(func(id): return Farm.BUILD[id].get("blueprint", "") in ([""] + world.campaign.unlocked_blueprints))
-	var index = choices.find(tool)
-	var next = (choices.size() - 1 if reverse else 0) if index < 0 else posmod(index + (-1 if reverse else 1), choices.size())
-	select_tool(choices[next], false)
+	var choices = subtask_choices()
+	if choices.is_empty(): return
+	var index = choices.find(subtasks.selected[group] if group == 2 else tool)
+	var next = (choices.size()-1 if reverse else 0) if index < 0 else posmod(index+(-1 if reverse else 1),choices.size())
+	subtasks.selected[group] = choices[next]
+	if group != 2: select_tool(choices[next],false)
+	else: refresh()
+
+func wheel_scroll_ui() -> bool:
+	var hovered = get_viewport().gui_get_hovered_control()
+	while is_instance_valid(hovered):
+		if hovered is ScrollContainer or hovered is TextEdit or hovered is ItemList: return true
+		hovered = hovered.get_parent() as Control
+	return false
 
 func choose_animal(id: int, toggle: bool = false):
 	selected_resources.clear()
@@ -314,12 +350,14 @@ func refresh():
 				buttons[drink].disabled = world.keeper.drinks_today >= 2 or world.keeper.state != "free"
 	elif group == 1:
 		var deployed_selection = world.animals.filter(func(a): return a.id in selected_animals and a.placed)
-		var choices=GROUP_TOOLS[1].filter(func(order):return deployed_selection.any(func(a):return order in Farm.SPECIES[a.species].orders))
+		var choices = subtask_choices()
 		for i in range(choices.size()):
 			var id=choices[i]
 			add_button(palette,id,TOOLS[id],Rect2(16+i*126,704,118,36),select_tool.bind(id))
+			var supported=deployed_selection.filter(func(a):return id in Farm.SPECIES[a.species].orders).size()
+			buttons[id].tooltip_text="対応 %d / 選択 %d。クリックで予約（誘導は行き先を指定）"%[supported,selected_animals.size()]
 	elif group == 0 and world.working():
-		var choices = GROUP_TOOLS[group].filter(func(id): return id != "kennel" or "kennel" in world.campaign.unlocked_blueprints)
+		var choices = subtask_choices()
 		for i in range(choices.size()):
 			var id = choices[i]
 			add_button(palette, id, TOOLS[id], Rect2(16 + (i%6)*164, 685+(i/6)*40, 156, 36), select_tool.bind(id))
@@ -330,6 +368,8 @@ func refresh():
 				buttons[id].icon = BoardArt.icon("wood" if id in ["kennel", "coop"] else "soil")
 	for id in TOOLS:
 		if buttons.has(id): UI.selected(buttons[id], tool == id)
+	if group == 2:
+		for id in subtask_choices(): UI.selected(buttons[id], subtasks.selected[2] == id)
 	build_context_actions()
 	if debug_view: build_debug_controls()
 	last_phase = world.phase
@@ -470,6 +510,8 @@ func cancel_selected_work():
 	refresh()
 
 func reset_view():
+	actor_art.clear()
+	subtasks.cancel()
 	arrival_started = -10.0
 	arrival_bell = false
 	reactions.clear()
@@ -718,7 +760,25 @@ func job_at(cell: Vector2i) -> int:
 	return -1
 
 func _input(event):
+	if event is InputEventMouse: pointer = event.position
+	if subtasks.input(self,event):
+		press_pending = false
+		dragging = false
+		get_viewport().set_input_as_handled()
+		return
 	if is_instance_valid(name_edit) and name_edit.has_focus(): return
+	if world.phase == "shop" and event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT:
+		if event.pressed:
+			if morning_screen == "book": close_morning_screen()
+			elif morning_screen == "market": market_back()
+		get_viewport().set_input_as_handled()
+		return
+	if book_motion != "" and event is InputEventKey and event.pressed and event.physical_keycode == KEY_ESCAPE:
+		close_morning_screen()
+		get_viewport().set_input_as_handled()
+		return
+	if book_motion != "" and event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and buttons.has("close_market") and buttons.close_market.get_global_rect().has_point(event.position):
+		return
 	if cinematic() or book_motion != "":
 		keys_down.clear()
 		get_viewport().set_input_as_handled()
@@ -729,6 +789,7 @@ func _input(event):
 		get_viewport().set_input_as_handled()
 		return
 	if menu_open: return
+	if world.phase == "shop" and event is InputEventKey and event.physical_keycode == KEY_TAB: return
 	if event is InputEventMouseMotion:
 		pointer = event.position
 		if queue_drag_id >= 0:
@@ -771,13 +832,12 @@ func _input(event):
 				get_viewport().set_input_as_handled()
 				return
 		if event.pressed and event.button_index in [MOUSE_BUTTON_WHEEL_UP, MOUSE_BUTTON_WHEEL_DOWN]:
-			if world.phase == "shop" or pointer_over_ui(): return
+			if world.phase == "shop" or wheel_scroll_ui(): return
 			if event.ctrl_pressed:
 				camera.zoom = Vector2.ONE * clampf(camera.zoom.x * (1.12 if event.button_index == MOUSE_BUTTON_WHEEL_UP else 1.0 / 1.12), 0.65, 1.8)
 			elif world.working():
-				var next_mode = posmod(group + 1 + (1 if event.button_index == MOUSE_BUTTON_WHEEL_DOWN else -1),4)-1
+				var next_mode = (0 if event.button_index == MOUSE_BUTTON_WHEEL_DOWN else 2) if group < 0 else posmod(group + (1 if event.button_index == MOUSE_BUTTON_WHEEL_DOWN else -1),3)
 				if next_mode == 2: choose_walk()
-				elif next_mode == -1: neutral()
 				else: select_group(next_mode)
 			get_viewport().set_input_as_handled()
 		elif event.pressed and event.button_index == MOUSE_BUTTON_RIGHT:
@@ -966,15 +1026,17 @@ func _notification(what):
 
 func _process(delta):
 	if book_motion != "":
-		var duration = 0.3 if book_motion == "turn" else 0.4
+		var duration = 0.42 if book_motion.begins_with("turning") else 0.54
 		if clock - book_started >= duration:
-			if book_motion == "turn": training_id = book_next_id
-			elif book_motion == "close":
+			if book_motion.begins_with("turning"): training_id = book_next_id
+			elif book_motion == "closing":
 				morning_screen = "morning"
 				shop_side = "home"
 			book_motion = ""
 			refresh()
-	palette.visible = book_motion == ""
+	palette.visible = true
+	for child in palette.get_children():
+		child.visible = book_motion == "" or child == buttons.get("close_market")
 
 	if not menu_open: clock += delta
 	if not world.paused and not menu_open and world.working(): visual_time += delta * (24.0 if not world.rest_skip.is_empty() else speed)
@@ -1200,7 +1262,7 @@ func draw_structure(p: Vector2, b: Dictionary, preview: bool = false):
 		draw_line(p - Vector2(14, 10), p + Vector2(14, 10), Color("e5c982"), 2)
 		draw_rect(Rect2(p + Vector2(-17, 17), Vector2(34 * (1.0 - float(b.remaining) / b.total_ticks), 3)), Color("b2ebcf"))
 		return
-	draw_colored_polygon(PackedVector2Array([p + Vector2(-20, 10), p + Vector2(20, 10), p + Vector2(28, 24), p + Vector2(-12, 24)]), Color(0.12, 0.22, 0.13, 0.25))
+	if b.kind not in Farm.Buildings.WALLS: draw_colored_polygon(PackedVector2Array([p + Vector2(-20, 10), p + Vector2(20, 10), p + Vector2(28, 24), p + Vector2(-12, 24)]), Color(0.12, 0.22, 0.13, 0.25))
 	if b.kind in ["kennel", "coop"]:
 		draw_rect(Rect2(p + Vector2(-19, -7), Vector2(38, 29)), Color("b99160"))
 		draw_colored_polygon(PackedVector2Array([p + Vector2(-23, -7), p + Vector2(0, -21), p + Vector2(23, -7)]), Color("96624a"))
@@ -1212,21 +1274,22 @@ func draw_structure(p: Vector2, b: Dictionary, preview: bool = false):
 			draw_line(p + Vector2(-12, 6), p + Vector2(12, 6), Color("f1d79b"), 3)
 			draw_circle(p + Vector2(0, -10), 4, Color("fff0c7"))
 	elif b.kind in Farm.Buildings.WALLS:
-		if not preview:
-			var cell=Vector2i(p/TILE)
-			for n in world.neighbors(cell):
-				if not Farm.Buildings.enclosure(world.structures.get(n,{})): continue
-				var offset=Vector2(n-cell)*TILE*0.5
-				draw_line(p+Vector2(0,3),p+offset+Vector2(0,3),Color("797257"),24)
-				draw_line(p-Vector2(0,10),p+offset-Vector2(0,10),shade,6)
-		draw_rect(Rect2(p - Vector2(20, 13), Vector2(40, 29)), Color("797257"))
-		draw_rect(Rect2(p - Vector2(20, 13), Vector2(40, 6)), shade)
-		draw_line(p - Vector2(20, -2), p + Vector2(20, 2), Color("545642"), 2)
+		draw_connected_wall(p,b,shade,preview)
+
 	else:
-		draw_rect(Rect2(p - Vector2(24, 13), Vector2(6, 30)), shade)
-		draw_rect(Rect2(p + Vector2(18, -13), Vector2(6, 30)), shade)
-		var hinge = p - Vector2(15, 8)
-		var tip = p + Vector2(15, 8).lerp(Vector2(-12, 15), gate_views.get(b.id, 1.0 if b.open else 0.0))
+		var cell=Vector2i(p/TILE)
+		var links=wall_links(cell)
+		var vertical=int(links[Vector2i.UP])+int(links[Vector2i.DOWN])>int(links[Vector2i.LEFT])+int(links[Vector2i.RIGHT])
+		if vertical:
+			draw_rect(Rect2(p+Vector2(-6,-34),Vector2(12,22)),shade)
+			draw_rect(Rect2(p+Vector2(-6,8),Vector2(12,22)),shade)
+		else:
+			draw_rect(Rect2(p - Vector2(24, 13), Vector2(6, 30)), shade)
+			draw_rect(Rect2(p + Vector2(18, -13), Vector2(6, 30)), shade)
+		var hinge = p + (Vector2(0,-26) if vertical else Vector2(-15,-8))
+		var closed_tip=Vector2(0,5) if vertical else Vector2(15,8)
+		var open_tip=Vector2(18,-23) if vertical else Vector2(-12,15)
+		var tip = p + closed_tip.lerp(open_tip, gate_views.get(b.id, 1.0 if b.open else 0.0))
 		draw_line(hinge, tip, shade, 5)
 		draw_line(hinge + Vector2(0, 9), tip + Vector2(0, 9), Color("897447"), 4)
 	if b.kind=="locked_door":
@@ -1252,147 +1315,35 @@ func _draw():
 		draw_rect(Rect2(Vector2(cell)*TILE,TILE),Color(0.22,0.35,0.45,0.22 if debug_view else 0.08))
 	for p in world.natural:
 		BoardArt.draw_resource(self, center(p) + Vector2(sin(visual_time * 1.3 + p.x) * (1.5 if world.natural[p] == "weed" else 0.3), 0), world.natural[p])
-	for p in world.structures: draw_structure(center(p), world.structures[p])
 	for f in world.foods:
 		draw_circle(center(f.pos), 10, Color("d3a762"))
 		draw_circle(center(f.pos), 6, Color("70513b"))
 	draw_market_world()
-	for e in world.enemies:
-		if e.done or not world.working(): continue
-		var p = actor_pixel("e%d" % e.id, e.pos)
-		var walking = Vector2(e.pos).distance_to(view_positions.get("e%d" % e.id, Vector2(e.pos))) > 0.025
-		var stride = sin(visual_time * 16 + e.id) * (3 if walking else 0.5)
-		draw_line(p + Vector2(-5, 14), p + Vector2(-6 + stride, 25), Color("42424c"), 5)
-		draw_line(p + Vector2(5, 14), p + Vector2(6 - stride, 25), Color("42424c"), 5)
-		p.y += absf(stride) * -0.4
-		rect(p + Vector2(-10, -5), Vector2(21, 23), "87768e" if not e.flee else "98947f")
-		draw_circle(p + Vector2(0, -10), 10, Color("d2b396"))
-		rect(p + Vector2(-12, -18), Vector2(24, 8), "454453")
-		rect(p + Vector2(-9, -11), Vector2(18, 5), "474954")
-		rect(p + Vector2(-6, -10), Vector2(3, 2), "fff3ce")
-		rect(p + Vector2(4, -10), Vector2(3, 2), "fff3ce")
-		if e.hp < e.max_hp:
-			draw_rect(Rect2(p + Vector2(-18, -48), Vector2(36, 4)), Color("3e4534"))
-			draw_rect(Rect2(p + Vector2(-18, -48), Vector2(36.0 * e.hp / e.max_hp, 4)), Color("e3aa88"))
-		if world.tick < e.move_stopped_until:
-			label_on(self, p + Vector2(-16, -53), "足止め", 13, Color("ffe5a0"))
-		if e.counter_target >= 0 and not e.flee:
-			draw_line(p + Vector2(-7, -37), p + Vector2(7, -25), Color("ffda91"), 3)
-			draw_line(p + Vector2(7, -37), p + Vector2(-7, -25), Color("ffda91"), 3)
-		elif "壊す" in e.state:
-			draw_line(p + Vector2(0, -24), p + Vector2(0, -38), Color("dfb981"), 3)
-			draw_line(p + Vector2(-7, -37), p + Vector2(7, -37), Color("dfb981"), 5)
-		elif not e.flee and e.carry == "":
-			draw_circle(p + Vector2(0, -32), 4, Color("8bd2c5"))
-			draw_line(p + Vector2(-6, -24), p + Vector2(6, -24), Color("8bd2c5"), 3)
-		if debug_view: label_on(self, p + Vector2(20, 0), e.state, 12)
-		if e.hp > 0 and not e.flee and world.tick < e.sight_reaction_until: label_on(self, p + Vector2(15, -30), e.sight_reaction, 26, Color("ffe0a0"))
-		elif e.hp > 0 and not e.flee and e.state == "迷う": label_on(self, p + Vector2(15, -23), "?", 16, Color("c8cfb4"))
-		if selected.get("kind") == "enemy" and selected.id == e.id:
-			draw_rect(Rect2(p - Vector2(18, 23), Vector2(36, 49)), Color("e6c998"), false, 2)
-	if world.keeper.placed:
-		var p = actor_pixel("keeper", world.keeper.pos)
-		var walking = Farm.Life.able(world) and (world.manual_goal != null or (not world.jobs_held and not world.jobs.is_empty() and world.jobs[0].state == "walking"))
-		if walking: p.y += sin(visual_time * 15) * 2
-		p.y += sin(visual_time * 1.7) * 0.8
-		if world.keeper.carrier >= 0:
-			var carrier_pos = view_positions.get("e%d" % world.keeper.carrier, Vector2(world.keeper.pos))
-			p = center(carrier_pos) + Vector2(34, -36)
-			draw_line(center(carrier_pos) + Vector2(8, 0), p + Vector2(0, 14), Color("d2b396"), 7)
-			draw_line(p + Vector2(-11, 11), p + Vector2(12, 11), Color("e7c794"), 4)
-			draw_set_transform(p, -PI * 0.5)
-			p = Vector2.ZERO
-		elif Farm.Life.presentation(world) in ["unconscious","sleeping"]:
-			draw_set_transform(p + Vector2(0, 12), -PI * 0.5)
-			p = Vector2.ZERO
-		elif Farm.Life.presentation(world) == "settling":
-			p.y += 7
-		elif Farm.Life.presentation(world) in ["tired","exhausted"]:
-			draw_set_transform(p+Vector2(0,4),0.16)
-			p = Vector2.ZERO
-		# Static v1 at its delivered foot anchor. Walking/sleep poses remain provisional.
-		UI.keeper(self,(p+Vector2(0,14)).round(),world.keeper.get("facing",1))
-		if not world.jobs_held and Farm.Life.able(world) and not world.jobs.is_empty() and world.jobs[0].state == "working":
-			var hand = p + Vector2(12, 5)
-			var hammer = hand + Vector2(8, -8 + sin(visual_time * 18) * 6)
-			draw_line(hand, hammer, Color("a58051"), 3)
-			draw_rect(Rect2(hammer - Vector2(5, 3), Vector2(10, 6)), Color("c9c5a5"))
-		if world.keeper.state in ["restrained", "captured"]:
-			label_on(self, p + Vector2(14, -18), "!", 18, Color("f69773"))
-			draw_line(p + Vector2(-10, 8), p + Vector2(10, 8), Color("513f39"), 3)
-		draw_set_transform(Vector2.ZERO)
-		var owner_pixel = center(view_positions.get("keeper", Vector2(world.keeper.pos)))
-		if world.keeper.carrier < 0:
-			if selected.get("kind") == "keeper": draw_rect(keeper_hit_rect(), Color("ffe2a3"), false, 2)
-			if Farm.Life.presentation(world) in ["settling", "sleeping"]:
-				label_on(self, owner_pixel + Vector2(15, -20), "…" if Farm.Life.presentation(world)=="settling" else "Zzz", 18, Color("dce8c2"))
-			elif Farm.Life.presentation(world) in ["drowsy", "tired", "exhausted"]:
-				var severe = world.keeper.sleepiness > 80
-				var tired = Color("edba89") if severe else Color("e3d3a8")
-				var badge = owner_pixel + Vector2(18,-34)
-				draw_rect(Rect2(badge,Vector2(27 if severe else 18,20)),Color("4d5550"))
-				draw_circle(badge+Vector2(9,9),6,tired)
-				draw_circle(badge+Vector2(12,7),5,Color("4d5550"))
-				if severe:
-					draw_line(badge+Vector2(21,5),badge+Vector2(21,14),tired,2)
-					draw_polyline(PackedVector2Array([badge+Vector2(18,11),badge+Vector2(21,14),badge+Vector2(24,11)]),tired,2)
-				if severe:
-					for i in range(2):
-						var drift = fmod(visual_time * 5 + i * 8,16)
-						draw_rect(Rect2(owner_pixel+Vector2(-17-i*4,drift-4),Vector2(3,4)),Color(0.24,0.25,0.29,0.38*(1-drift/20)))
-				elif fmod(visual_time,9) < 1.2:
-					draw_arc(owner_pixel+Vector2(1,-3),3,0,TAU,8,tired,1.5)
-			if world.tick < world.keeper.get("whistle_until",-1): label_on(self,owner_pixel+Vector2(16,-22),"♪",20,Color("f1d99d"))
-			if world.keeper.state == "unconscious": label_on(self, owner_pixel + Vector2(12, -18), "!", 22, Color("efa084"))
-			if world.tick < world.keeper.hurt_until or selected.get("kind") == "keeper":
-				draw_rect(Rect2(owner_pixel + Vector2(-17, -37), Vector2(34, 4)), Color("684b46"))
-				draw_rect(Rect2(owner_pixel + Vector2(-17, -37), Vector2(34 * float(world.keeper.hp) / world.keeper.max_hp, 4)), Color("d68b74"))
 	for item in world.field_items:
 		var q = center(item.pos) + (Vector2(7, 8) if item.kind.ends_with("_plan") else Vector2.ZERO)
 		if item.kind.ends_with("_plan") and world.keeper.placed and item.pos == world.keeper.pos: q = center(item.pos) + Vector2(-25,-22)
 		if item.kind.ends_with("_plan"):
-			draw_rect(Rect2(q-Vector2(11,9),Vector2(22,20)),Color("eddbad"))
-			for side in [-1,1]:
-				draw_rect(Rect2(q+Vector2(side*12-3,-12),Vector2(6,26)),Color("bb9762"))
-			for y in [-4,1,6]: draw_line(q+Vector2(-6,y),q+Vector2(6,y),Color("8c795e"),1)
+			draw_texture(Art.SCROLL,(q-Vector2(12,10)).round())
 		elif item.kind == "egg":
 			draw_circle(q, 7, Color("fff0c7"))
 		elif item.kind == "chick":
 			draw_circle(q, 8, Color("efd160"))
 			draw_line(q, q + Vector2(10, 2), Color("d78d37"), 3)
 		else: draw_line(q + Vector2(-5, 6), q + Vector2(6, -8), Color("eee8cf"), 5)
+	var actors=[]
+	for cell in world.structures: actors.append({"y":center(cell).y,"x":cell.x,"kind":"building","data":cell})
 	for a in world.animals:
-		if not a.placed: continue
-		var p = actor_pixel("a%d" % a.id, a.pos)
-		draw_circle(p + Vector2(0, 13), 18, Color(0.1, 0.2, 0.13, 0.25))
-		if a.species == "shiba": draw_dog(p, a)
-		elif a.species == "cat": draw_cat(p,a)
-		else: draw_hen(p,a)
-		var in_combat = world.enemies.any(func(e): return not e.done and not e.flee and Farm.distance(a.pos, e.pos) <= 1)
-		if a.hp <= a.max_hp * 0.5 or in_combat:
-			var danger = a.hp <= a.max_hp * Farm.Rules.LOW_HP_FRACTION
-			var color = Color("f38c73") if danger else Color("efcc7f")
-			draw_rect(Rect2(p + Vector2(-20, 23), Vector2(40, 5)), Color("3e4534"))
-			draw_rect(Rect2(p + Vector2(-20, 23), Vector2(40.0 * a.hp / a.max_hp, 5)), color)
-			if danger:
-				color.a = 0.65 + 0.25 * sin(clock * 4)
-				label_on(self, p + Vector2(-4, -29), "!", 23, color)
-		if a.hp <= 0: label_on(self, p + Vector2(-18, -27), a.state, 16, Color("e2bcb3"))
-		elif a.state in ["休む", "自主休養"]: label_on(self, p + Vector2(14, -25), "Zz", 18, Color("c1e3db"))
-		if a.rescuing: label_on(self, p + Vector2(-25, -20), "!!", 16, Color("b0f0de"))
-		if world.tick - a.last_bark < 4:
-			var f = dog_facing(a)
-			draw_arc(p + Vector2(25 * f, -8), 9, -0.8 + (PI if f < 0 else 0), 0.8 + (PI if f < 0 else 0), 8, Color("ffe3a0"), 2)
-			draw_arc(p + Vector2(25 * f, -8), 15, -0.8 + (PI if f < 0 else 0), 0.8 + (PI if f < 0 else 0), 8, Color("ffe3a0"), 2)
-		elif a.state == "様子見": label_on(self, p + Vector2(17, -24), "…", 18, Color("ffe3a0"))
-		if not cinematic() and group == 1 and a.id in selected_animals:
-			for side in [-1, 1]:
-				for vertical in [-1, 1]:
-					var bounds=animal_hit_rect(a)
-					var corner = bounds.get_center() + bounds.size*Vector2(side,vertical)*0.5
-					draw_line(corner, corner - Vector2(side * 7, 0), Color("ffe2a3"), 3 if a.id == selected_animal else 2)
-					draw_line(corner, corner - Vector2(0, vertical * 7), Color("ffe2a3"), 3 if a.id == selected_animal else 2)
-		if debug_view: label_on(self, p + Vector2(25, 0), a.state, 12)
+		if a.placed: actors.append({"y":actor_pixel("a%d"%a.id,a.pos).y,"x":a.pos.x,"kind":"animal","data":a})
+	for e in world.enemies:
+		if not e.done: actors.append({"y":actor_pixel("e%d"%e.id,e.pos).y,"x":e.pos.x,"kind":"enemy","data":e})
+	if world.keeper.placed: actors.append({"y":keeper_pixel().y,"x":world.keeper.pos.x,"kind":"keeper"})
+	actors.sort_custom(func(a,b): return a.y<b.y if a.y!=b.y else (a.x<b.x if a.x!=b.x else a.kind<b.kind))
+	for actor in actors:
+		match actor.kind:
+			"building": draw_structure(center(actor.data),world.structures[actor.data])
+			"animal": draw_animal_actor(actor.data)
+			"enemy": draw_enemy_actor(actor.data)
+			"keeper": draw_keeper_actor()
 	for hit in hit_effects:
 		var p = center(view_positions.get(hit.target, Vector2.ZERO))
 		var fade = 1.0 - (clock - hit.at) / 0.3
@@ -1579,32 +1530,35 @@ func draw_edge(cell: Vector2i, title: String, color: Color):
 	hud.draw_circle(edge + Vector2(-10, 17), 5, color)
 	label_on(hud, (edge + Vector2(0, 32)).clamp(Vector2(24, 120), Vector2(1140, 700)), title, 16, color)
 
+func actor_pose(id: String, resting: bool, sleeping: bool, walking: bool, who: String) -> Dictionary:
+	var state = actor_art.get(id,{"resting":false,"since":visual_time,"action":"idle","at":visual_time})
+	if resting != state.resting:
+		state.resting = resting
+		state.since = visual_time
+	var age = visual_time-state.since
+	var action = "walk" if walking else "idle"
+	if resting: action = "settle" if age<0.36 else ("sleep" if sleeping and who=="keeper" else "rest")
+	elif state.action in ["settle","rest","sleep","wake"] and age<0.36: action="wake"
+	if who in ["hen","cat"]:
+		if walking: action="walk"
+		elif fmod(visual_time+float(id.hash()%17),8)<0.52: action="peck" if who=="hen" else "stretch"
+		else: action="idle"
+	if action != state.action: state.action=action; state.at=visual_time
+	actor_art[id]=state
+	return {"action":action,"elapsed":visual_time-state.at}
+
+func draw_animal_sprite(p: Vector2, animal: Dictionary, who: String):
+	var id = "a%d" % animal.get("id",-1)
+	var walking = not animal.is_empty() and Vector2(animal.pos).distance_to(view_positions.get(id,Vector2(animal.pos)))>0.025
+	var resting = animal.get("state","") in ["休む","自主休養"] or animal.get("hp",1)<=0
+	var pose = actor_pose(id,resting,resting,walking,who) if not animal.is_empty() else {"action":"idle","elapsed":0.0}
+	Art.sprite(self,who,pose.action,int(animal.get("facing",1)),p+Vector2(0,14),pose.elapsed,art_alpha)
+
 func draw_dog(p: Vector2, animal: Dictionary = {}):
-	var resting=animal.get("state","") in ["休む","自主休養"]
-	var walking=not animal.is_empty() and Vector2(animal.pos).distance_to(view_positions.get("a%d" % animal.id,Vector2(animal.pos)))>0.025
-	var reaction=reactions.get(animal.get("id",-1),{})
-	var mood=reaction.get("kind","") if clock<reaction.get("until",-1) else ""
-	p.y-=absf(sin(visual_time*(13 if walking else 2)))*(2.0 if walking else 0.5)
-	if mood=="happy":p.y-=absf(sin(visual_time*9))*5
-	if mood=="wag":p.x+=sin(visual_time*12)*1.5
-	var alert=not animal.is_empty() and world.enemies.any(func(e):return not e.done and not e.flee and Farm.distance(animal.pos,e.pos)<=animal.get("detection_range",4))
-	var pose=1 if mood=="hello" else (0 if dog_facing(animal)<0 else 2)
-	UI.shiba(self,(p+Vector2(0,14)).round(),pose,art_alpha)
+	draw_animal_sprite(p,animal,"shiba")
 
 func draw_hen(p: Vector2, animal: Dictionary = {}):
-	if not animal.is_empty():
-		draw_set_transform(p,0,Vector2(animal.get("facing",1),1))
-		p=Vector2.ZERO
-	var peck = maxf(0, sin(visual_time * 2.8 + p.x)) * 5
-	draw_circle(p, 12, Color(Color("f4ebcf"), art_alpha))
-	var head = p + Vector2(peck * 0.5, peck)
-	rect(head + Vector2(3, -13), Vector2(12, 14), "fff4d8")
-	rect(head + Vector2(5, -18), Vector2(8, 5), "c45d4d")
-	rect(head + Vector2(15, -7), Vector2(5, 4), "edb65a")
-	rect(head + Vector2(11, -10), Vector2(2, 2), "243d36")
-	rect(p + Vector2(-6, 11), Vector2(3, 6), "d69a4e")
-	rect(p + Vector2(4, 11), Vector2(3, 6), "d69a4e")
-	if not animal.is_empty(): draw_set_transform(Vector2.ZERO)
+	draw_animal_sprite(p,animal,"hen")
 
 func resource_text(values: Dictionary) -> String:
 	var parts: Array[String] = []
@@ -1632,9 +1586,15 @@ func setup_menu():
 	var stamp=Label.new()
 	var metadata=JSON.parse_string(FileAccess.get_file_as_string("res://game/build_stamp.json")) if FileAccess.file_exists("res://game/build_stamp.json") else {}
 	stamp.text="ビルド "+str(metadata.get("commit","未記録"))+(" + 未コミット変更" if metadata.get("dirty",true) else "")
+	stamp.text+="  素材 "+str(metadata.get("asset_delivery_commit","未記録")).left(8)
 	stamp.position=Vector2(480,532)
 	stamp.add_theme_font_size_override("font_size",14)
 	menu.add_child(stamp)
+	var guide = Label.new()
+	guide.text = "ホイール：建設 / 指示 / 牧場主　Ctrl＋ホイール：ズーム\nTab / Shift＋Tab：操作選択　操作ボタンをドラッグ：並べ替え\n左クリック：選択・行動　右クリック：牧場で解除 / 市場で戻る\nSpace：停止 / 再開　−：遅く　＋ / ＝ / テンキー＋：速く\n通常 0.5 / 1 / 2倍　休息中 4倍　危険時 1倍\n夜まで / 朝まで休む：別の時間送り（中断して倍率を変更）"
+	guide.position=Vector2(288,580)
+	guide.add_theme_font_size_override("font_size",16)
+	menu.add_child(guide)
 	menu.visible = false
 
 func toggle_menu():
@@ -1682,6 +1642,9 @@ func inspect_product(row: Dictionary):
 
 func market_back():
 	shop_notice = ""
+	if shop_side == "home":
+		close_morning_screen()
+		return
 	if shop_side == "animals" and training_id >= 0:
 		training_id = -1
 		rename_open = false
@@ -1725,14 +1688,15 @@ func open_market():
 func open_book():
 	morning_screen = "book"
 	shop_side = "animals"
-	training_id = world.campaign.animals[0].id
+	training_id = world.campaign.animals[0].id if not world.campaign.animals.is_empty() else -1
 	book_started = clock
-	book_motion = "open"
+	book_motion = "opening"
 	refresh()
 
 func close_morning_screen():
 	if morning_screen == "book":
-		book_motion = "close"
+		if book_motion == "closing": return
+		book_motion = "closing"
 		book_started = clock
 	else:
 		morning_screen = "morning"
@@ -1742,13 +1706,14 @@ func close_morning_screen():
 func turn_book(direction: int):
 	if book_motion != "": return
 	var owned = world.campaign.animals
+	if owned.size() < 2: return
 	var index = 0
 	for i in range(owned.size()):
 		if owned[i].id == training_id: index = i
 	book_direction = direction
 	book_next_id = owned[posmod(index + direction, owned.size())].id
 	book_started = clock
-	book_motion = "turn"
+	book_motion = "turning_next" if direction>0 else "turning_previous"
 	rename_open = false
 	refresh()
 
@@ -1759,29 +1724,21 @@ func build_shop():
 		add_button(palette,"open_book","図鑑を開く",Rect2(725,497,220,46),open_book)
 		buttons.open_book.icon=UI.icon("book")
 		return
-	add_button(palette, "close_market", "閉じる", Rect2(1048, 122, 116, 38), close_morning_screen)
+	add_button(palette, "close_market", "メニューへ", Rect2(1040, 116, 124, 44), close_morning_screen)
 	buttons.close_market.icon = UI.icon("cross")
 	if morning_screen == "book":
 		build_training()
-		add_button(palette, "book_prev", "←", Rect2(215, 690, 80, 36), turn_book.bind(-1))
-		add_button(palette, "book_next", "→", Rect2(1000, 690, 80, 36), turn_book.bind(1))
+		add_button(palette, "book_prev", "←", Rect2(266,676,80,36), turn_book.bind(-1))
+		add_button(palette, "book_next", "→", Rect2(930,676,80,36), turn_book.bind(1))
 		buttons.book_prev.disabled = world.campaign.animals.size() < 2
 		buttons.book_next.disabled = world.campaign.animals.size() < 2
 		return
+	add_button(palette, "shop_back", "戻る", Rect2(900,116,128,44), market_back)
 	if shop_side == "home":
 		for i in range(2):
 			var id = ["buy", "sell"][i]
 			add_card("shop_" + id, ["買う\n今日の品", "売る\n牧場の恵み", "動物\n大切な仲間"][i], id, Rect2(392 + i * 345, 273, 304, 215), shop_choose.bind(id, "animals"), [Color("d8b784"), Color("dcc783"), Color("bbcca3")][i])
 		return
-	for side in ["buy","sell"]:
-		add_button(palette,"market_"+side,"買う" if side=="buy" else "売る",Rect2(640 if side=="buy" else 809,211,156,37),shop_choose.bind(side,"animals"))
-		buttons["market_"+side].icon=UI.icon("basket" if side=="buy" else "coin")
-		UI.selected(buttons["market_"+side],shop_side==side)
-	var back_label = "戻る"
-	if shop_side == "animals" and training_id >= 0: back_label = "仲間たちへ"
-	elif shop_level == "detail": back_label = "商品一覧へ"
-	elif shop_level == "list": back_label = "品の種類へ"
-	add_button(palette, "shop_back", back_label, Rect2(135, 654, 172, 38), market_back)
 	if shop_side == "animals":
 		build_training()
 		return
@@ -1823,7 +1780,7 @@ func product_title(row: Dictionary) -> String:
 func product_description(id: String) -> String:
 	if id == "coffee": return "眠気を少し和らげる。飲み物は1日2杯まで"
 	if id == "energy_drink": return "眠気をぐっと和らげる。休息も忘れずに"
-	return {"hen": "朝に卵を産む、のんびりした仲間。", "cat": "牧場を気ままに歩く、小さな仲間。", "soil": "壁や床を築くための、よく締まる土。", "wood": "小屋づくりに使う、丈夫な木材。", "stone": "重くて丈夫な石。", "egg": "牧場で産まれた新鮮な卵。", "feather": "鶏が落とした、軽く柔らかな羽。", "mushroom": "夜明けの休養に。傷ついた仲間を癒す。", "whistle":"6マス先へ呼びかけ、仲間を一緒に誘導する。", "kennel_plan": "犬が落ち着いて休める、小屋の作り方。"}.get(id, "牧場で使う品物。")
+	return {"hen": "朝に卵を産む、のんびりした仲間。", "cat": "牧場を気ままに歩く、小さな仲間。", "soil": "壁や床を築くための、よく締まる土。", "wood": "壁や床を作る、丈夫な木材。", "stone": "重くて丈夫な石。", "egg": "牧場で産まれた新鮮な卵。", "feather": "鶏が落とした、軽く柔らかな羽。", "mushroom": "夜明けの休養に。傷ついた仲間を癒す。", "whistle":"6マス先へ呼びかけ、仲間を一緒に誘導する。", "kennel_plan": "犬が落ち着いて休める、小屋の作り方。"}.get(id, "牧場で使う品物。")
 func next_shop_page(count: int):
 	shop_page = (shop_page + 1) % count
 	refresh()
@@ -1846,8 +1803,8 @@ func draw_market_card(button: Button, icon: String, title: String):
 func draw_shop():
 	if morning_screen == "morning":
 		hud.draw_style_box(UI.surface(Color("d6c6a1")),Rect2(330,128,656,437))
-		hud.draw_texture_rect(UI.STALL,Rect2(346,154,282,317),false)
-		hud.draw_texture_rect(UI.icon("book_closed"),Rect2(778,265,120,132),false)
+		Art.fit(hud,Art.CART,Rect2(342,220,318,246))
+		Art.fit(hud,Art.CLOSED,Rect2(748,235,176,220))
 		label_on(hud,Vector2(716,204),"牧場の仲間",22,UI.INK)
 		label_on(hud,Vector2(379,153),"%d日目の朝" % world.campaign.day,19,UI.INK)
 		return
@@ -1865,11 +1822,11 @@ func draw_shop():
 		hud.draw_rect(Rect2(x,105,61,17),color)
 	hud.draw_line(Vector2(143,195),Vector2(1138,195),Color("c5b084"),2)
 	label_on(hud,Vector2(146,174),"朝の市",36,UI.INK)
-	draw_card_icon(hud,"gold",Vector2(918,159),0.65)
-	label_on(hud,Vector2(952,170),"%d G" % world.campaign.gold,25,UI.INK)
+	draw_card_icon(hud,"gold",Vector2(730,159),0.65)
+	label_on(hud,Vector2(764,170),"%d G" % world.campaign.gold,25,UI.INK)
 	if shop_side != "home":
 		label_on(hud,Vector2(355,263),("買う" if shop_side=="buy" else "売る")+"  /  "+(MARKET_CATEGORIES[shop_category][0] if shop_level!="categories" else "今日の品"),20,UI.INK)
-	hud.draw_texture_rect(UI.STALL,Rect2(124,237,272,345),false)
+	Art.fit(hud,Art.CART,Rect2(114,272,292,242))
 	var greeting=shop_notice if shop_notice!="" else "いらっしゃい"
 	label_on(hud,Vector2(160,614),greeting,16,UI.INK)
 	hud.draw_rect(Rect2(335,611,802,12),Color("a98d61"))
@@ -1881,7 +1838,6 @@ func draw_shop():
 		label_on(hud, Vector2(597, 344), "今日は空っぽだね。", 22, UI.INK)
 		label_on(hud, Vector2(597, 377), "ほかの品も見ていこう。", 16, UI.INK)
 	if shop_side in ["buy", "sell"] and shop_level == "detail": draw_product_detail()
-	if shop_side == "animals" and training_id >= 0: draw_animal_detail()
 
 func draw_market_merchant(p: Vector2):
 	hud.draw_rect(Rect2(p+Vector2(-44,4),Vector2(88,75)),Color("69816b"))
@@ -1940,17 +1896,17 @@ func build_training():
 			add_card("name_%d" % a.id, "%s\nLv%d" % [Farm.animal_name(a), a.lv], a.species, Rect2(355 + (n % 2) * 370, 235 + (n / 2) * 191, 340, 170), edit_name.bind(a.id), Color("c4cea7"))
 		if owned.size() > 4: add_button(palette, "animal_page", "次の仲間 →", Rect2(925, 639, 170, 38), next_shop_page.bind(ceili(owned.size() / 4.0)))
 		return
-	add_button(palette, "train_%d" % training_id, "育てる  %d EXP" % world.level_cost(training_id), Rect2(659, 608, 216, 46), train.bind(training_id))
+	add_button(palette, "train_%d" % training_id, "育てる  %d EXP" % world.level_cost(training_id), Rect2(712,570,180,40), train.bind(training_id))
 	buttons["train_%d" % training_id].icon = UI.icon("spark")
 	for a in owned:
 		if a.id == training_id:
 			buttons["train_%d" % training_id].disabled = a.lv >= 5 or world.campaign.exp_pool < world.level_cost(training_id)
 			if a.lv >= 5: buttons["train_%d" % training_id].text = "最大Lv"
-	add_button(palette, "rename", "名前を変える", Rect2(886, 608, 178, 46), open_name)
+	add_button(palette, "rename", "名前を変える", Rect2(900,570,136,40), open_name)
 	if rename_open:
 		name_edit = LineEdit.new()
-		name_edit.position = Vector2(659, 550)
-		name_edit.size = Vector2(215, 42)
+		name_edit.position = Vector2(712,620)
+		name_edit.size = Vector2(174,40)
 		name_edit.max_length = 12
 		name_edit.call_deferred("grab_focus")
 		name_edit.add_theme_stylebox_override("normal", UI.surface(UI.PAPER))
@@ -1958,49 +1914,43 @@ func build_training():
 		for a in owned:
 			if a.id == training_id: name_edit.text = a.name
 		palette.add_child(name_edit)
-		add_button(palette, "save_name", "この名前にする", Rect2(886, 550, 178, 42), save_name)
+		add_button(palette, "save_name", "この名前にする", Rect2(896,620,140,40), save_name)
 
 func animal_hp(a: Dictionary) -> int:
 	return Farm.SPECIES[a.species].hp + (a.lv - 1) * 4
 
 func draw_book():
-	hud.draw_texture_rect(UI.BOOK,Rect2(153,115,972,623),false)
-	label_on(hud,Vector2(250,221),"動物図鑑",24,UI.INK)
-	draw_animal_detail()
-	var index=0
-	for i in range(world.campaign.animals.size()):
-		if world.campaign.animals[i].id==training_id:index=i
-	label_on(hud,Vector2(610,676),"%d / %d" % [index+1,world.campaign.animals.size()],14,UI.INK)
+	book_view.draw(hud)
 
-func draw_animal_detail():
+func draw_book_content(canvas: CanvasItem, animal_id: int):
+	label_on(canvas,Vector2(152,137),"動物図鑑",24,UI.INK)
+	if animal_id<0:
+		label_on(canvas,Vector2(156,205),"まだ仲間がいません",18,UI.INK)
+		return
 	for a in world.campaign.animals:
-		if a.id != training_id: continue
-
-		hud.draw_style_box(UI.surface(Color("c4cea7")), Rect2(262, 256, 299, 270))
-		draw_card_icon(hud, a.species, Vector2(416, 354), 2.5)
-		var hp = a.get("hp", animal_hp(a))
-		var hp_max = animal_hp(a)
-		label_on(hud, Vector2(310, 466), "休養中" if a.get("unavailable_through_day", 0) >= world.campaign.day else ("元気いっぱい" if hp == hp_max else "休養が必要"), 19, UI.INK)
-		hud.draw_style_box(UI.surface(UI.MOSS, UI.MOSS), Rect2(332, 489, 158, 10))
-		hud.draw_rect(Rect2(334, 491, 154.0 * hp / hp_max, 6), Color("b5d28a"))
-		label_on(hud, Vector2(265, 562), Farm.animal_name(a), 26, UI.INK)
-		label_on(hud, Vector2(265, 596), "%s · Lv%d" % [Farm.SPECIES[a.species].title, a.lv], 18, UI.INK)
-		label_on(hud, Vector2(665, 275), "この子のこと", 26, UI.INK)
-		label_on(hud, Vector2(960, 284), "%d EXP" % world.campaign.exp_pool, 18, UI.INK)
-		hud.draw_texture(UI.icon("heart"), Vector2(666, 308))
-		label_on(hud, Vector2(691, 322), "%d / %d" % [hp, hp_max], 17, UI.INK)
-		label_on(hud, Vector2(819, 322), "忠誠 %d%s" % [a.get("loyalty", 0), "  親密 %d" % a.affinity if a.affinity != null else ""], 15, UI.INK)
-		var y = 367
+		if a.id != animal_id: continue
+		draw_card_icon(canvas,a.species,Vector2(296,270),3.0)
+		label_on(canvas,Vector2(156,363),Farm.animal_name(a),24,UI.INK)
+		label_on(canvas,Vector2(156,395),"%s · Lv%d" %[Farm.SPECIES[a.species].title,a.lv],17,UI.INK)
+		var hp=a.get("hp",animal_hp(a));var maximum=animal_hp(a)
+		canvas.draw_rect(Rect2(156,418,264,8),Color("b9b69c"))
+		canvas.draw_rect(Rect2(156,418,264.0*hp/maximum,8),Color("789965"))
+		label_on(canvas,Vector2(156,452),"HP %d / %d   %s" %[hp,maximum,"療養中" if a.get("unavailable_through_day",0)>=world.campaign.day else "活動中"],16,UI.INK)
+		label_on(canvas,Vector2(584,137),"この子のこと",22,UI.INK)
+		label_on(canvas,Vector2(584,170),"忠誠 %d%s" %[a.get("loyalty",0),"  親密 %d" %a.affinity if a.get("affinity")!=null else ""],16,UI.INK)
+		var y=214
 		for id in Farm.SPECIES[a.species].skills:
-			var skill = Farm.AnimalData.SKILLS[id]
-			var ready = a.lv >= skill.unlock_level
-			hud.draw_style_box(UI.surface(Color("d1d8b2") if ready else Color("d3cbb4")), Rect2(659, y - 18, 405, 74))
-			hud.draw_texture(UI.icon("spark" if ready else "pause"), Vector2(671, y - 1))
-			label_on(hud, Vector2(695, y + 10), skill.name, 21, UI.INK)
-			var summary = {"bark": "敵検知時。周囲4マスの敵の移動を1秒停止。", "rescue": "牧場主の気絶・連れ去り時、救出を優先。", "lay": "朝になると卵を産む。", "feather": "時々、きれいな羽を落とす。", "charm": "動物と仲良くなる素質。", "meow": "鳴き声で、敵の勢いを弱める。"}.get(id, skill.effect)
-			label_on(hud, Vector2(669, y + 38), summary if ready else "Lv%dで解放" % skill.unlock_level, 13, UI.INK)
-			label_on(hud,Vector2(817,y+10),("発動" if skill.type=="active" else "パッシブ")+" / Lv%d" % skill.unlock_level+(" / CT %d秒" % skill.cooldown if skill.has("cooldown") else ""),12,UI.INK)
-			y += 88
+			var skill=Farm.AnimalData.SKILLS[id]
+			var ready=a.lv>=skill.unlock_level
+			label_on(canvas,Vector2(584,y),skill.name+("" if ready else "（未解放）"),19,UI.INK)
+			label_on(canvas,Vector2(584,y+24),("発動" if skill.type=="active" else "パッシブ")+" / Lv%d"%skill.unlock_level+(" / CT %d秒"%skill.cooldown if skill.has("cooldown") else ""),13,UI.INK)
+			var summary={"bark":"敵検知時、周囲4マスの敵の移動を\n1秒停止。", "rescue":"牧場主の気絶・連れ去り時、救出優先。\n屋内の出口では外で待つ。", "lay":"朝になると卵を産む。", "feather":"時々、きれいな羽を落とす。", "charm":"動物と仲良くなる素質。", "meow":"鳴き声で、敵の勢いを弱める。"}.get(id,skill.effect)
+			label_on(canvas,Vector2(584,y+47),summary,13,UI.INK)
+			y+=92
+		var index=world.campaign.animals.find(a)+1
+		label_on(canvas,Vector2(470,510),"%d / %d"%[index,world.campaign.animals.size()],14,UI.INK)
+		label_on(canvas,Vector2(584,452),"共通EXP %d"%world.campaign.exp_pool,16,UI.INK)
+
 func restart_morning():
 	world = Farm.new(world.morning_checkpoint, world.seed_value)
 	reset_view()
@@ -2014,22 +1964,7 @@ func draw_card_icon(c: CanvasItem, kind: String, p: Vector2, scale_value: float)
 	if kind=="shiba":
 		UI.shiba(c,Vector2(0,20),1)
 	elif kind == "cat":
-		var fur = Color("d49a5c") if kind == "shiba" else Color("aeb9c4")
-		c.draw_rect(Rect2(-20, -5, 31, 21), fur)
-		c.draw_rect(Rect2(1, -19, 24, 24), fur.lightened(0.16))
-		c.draw_colored_polygon(PackedVector2Array([Vector2(1, -15), Vector2(3, -29), Vector2(12, -18)]), fur)
-		c.draw_colored_polygon(PackedVector2Array([Vector2(17, -18), Vector2(23, -28), Vector2(25, -13)]), fur)
-		c.draw_rect(Rect2(13, -7, 15, 10), Color("f8e5bd"))
-		c.draw_circle(Vector2(18, -12), 2, Color("273a35"))
-		c.draw_line(Vector2(-19, 3), Vector2(-28, -7), fur, 5)
-		c.draw_rect(Rect2(-13,7,22,8),Color("f0dfbd"))
-		for x in [-16,4]: c.draw_rect(Rect2(x,13,7,10),fur.darkened(0.1))
-		c.draw_rect(Rect2(25,-5,4,4),UI.INK)
-		c.draw_line(Vector2(17,0),Vector2(22,2),UI.WOOD,1)
-		if kind=="cat":
-			c.draw_line(Vector2(7,-3),Vector2(-1,-5),UI.INK,1)
-			c.draw_line(Vector2(22,-1),Vector2(30,2),UI.INK,1)
-			c.draw_rect(Rect2(6,-24,4,8),Color("d9b7a4"))
+		Art.sprite(c,"cat","idle",1,Vector2(0,20))
 	elif kind in ["coffee", "energy_drink"]:
 		if kind == "coffee":
 			c.draw_arc(Vector2(18, 3), 9, -PI/2, PI/2, 10, UI.WOOD, 5)
@@ -2042,16 +1977,7 @@ func draw_card_icon(c: CanvasItem, kind: String, p: Vector2, scale_value: float)
 			c.draw_rect(Rect2(-12, -2, 24, 17), UI.PAPER)
 			c.draw_texture_rect(UI.icon("spark"), Rect2(-7, 0, 14, 14), false)
 	elif kind == "hen":
-		c.draw_circle(Vector2(-3, 4), 17, Color("f5e8bd"))
-		c.draw_rect(Rect2(5, -20, 17, 23), Color("fff0ce"))
-		c.draw_rect(Rect2(6, -26, 13, 7), Color("bd5e48"))
-		c.draw_arc(Vector2(-5,3),10,0.1,PI,10,Color("d3bd8b"),2)
-		c.draw_colored_polygon(PackedVector2Array([Vector2(-18,0),Vector2(-30,-12),Vector2(-26,9)]),Color("fff0ce"))
-		for x in [-9,6]:
-			c.draw_line(Vector2(x,18),Vector2(x,25),Color("bb904f"),2)
-			c.draw_line(Vector2(x-4,25),Vector2(x+3,25),Color("bb904f"),2)
-		c.draw_circle(Vector2(17, -11), 2, Color("293a34"))
-		c.draw_colored_polygon(PackedVector2Array([Vector2(22,-7), Vector2(30,-4), Vector2(22,0)]), Color("e3ac54"))
+		Art.sprite(c,"hen","idle",1,Vector2(0,16))
 	elif kind == "animals":
 		c.draw_circle(Vector2(0, 6), 15, UI.MOSS)
 		for q in [Vector2(-17,-13), Vector2(-5,-23), Vector2(10,-23), Vector2(22,-10)]: c.draw_circle(q, 7, UI.MOSS)
@@ -2079,20 +2005,7 @@ func draw_card_icon(c: CanvasItem, kind: String, p: Vector2, scale_value: float)
 	else: BoardArt.draw_resource(c, Vector2.ZERO, kind)
 	c.draw_set_transform(Vector2.ZERO)
 func draw_cat(p: Vector2, animal: Dictionary = {}):
-	if not animal.is_empty():
-		draw_set_transform(p,0,Vector2(animal.get("facing",1),1))
-		p=Vector2.ZERO
-	var stretch = maxf(0, sin(visual_time * 0.5 + p.x)) * 5
-	draw_line(p + Vector2(-14 - stretch, 9), p + Vector2(9 + stretch, 9), Color("8f969d"), 6)
-	rect(p + Vector2(-13, -4), Vector2(27, 15), "8f969d")
-	rect(p + Vector2(3, -15), Vector2(17, 17), "b4bbc0")
-	rect(p + Vector2(3, -21), Vector2(5, 9), "8f969d")
-	rect(p + Vector2(16, -21), Vector2(4, 9), "8f969d")
-	rect(p + Vector2(7, -9), Vector2(3, 3), "dadf81")
-	rect(p + Vector2(16, -9), Vector2(3, 3), "dadf81")
-	draw_line(p + Vector2(-12, 1), p + Vector2(-23, -15), Color("8f969d"), 5)
-	for x in [-9, 7]: rect(p + Vector2(x, 8), Vector2(4, 8), "c0c5c4")
-	if not animal.is_empty(): draw_set_transform(Vector2.ZERO)
+	draw_animal_sprite(p,animal,"cat")
 
 func draw_queue_badge(row: Button, number: int):
 	row.draw_style_box(UI.surface(UI.PAPER),Rect2(5,3,27,25))
@@ -2119,23 +2032,9 @@ func draw_queue_drag():
 
 func draw_transition():
 	draw_queue_drag()
+	subtasks.draw(self)
 	if mode_cursor != "":
 		overlay.draw_texture(UI.cursor(mode_cursor),pointer-Vector2(2,2))
-	if book_motion != "":
-		var duration = 0.3 if book_motion == "turn" else 0.4
-		var t = clampf((clock - book_started) / duration, 0, 1)
-		if book_motion == "turn":
-			var edge=638+book_direction*425*cos(PI*t)
-			var lift=sin(PI*t)*38
-			var sheet=PackedVector2Array([Vector2(638,182),Vector2(edge,182-lift),Vector2(edge,674-lift*0.3),Vector2(638,674)])
-			overlay.draw_colored_polygon(PackedVector2Array([Vector2(638,187),Vector2(edge+12,195),Vector2(edge+12,685),Vector2(638,679)]),Color(0.22,0.18,0.12,0.18*sin(PI*t)))
-			overlay.draw_polygon(sheet,PackedColorArray([Color.WHITE]),PackedVector2Array([Vector2(0.5,0.12),Vector2(0.94,0.12),Vector2(0.94,0.84),Vector2(0.5,0.84)]),UI.BOOK)
-			overlay.draw_polyline(PackedVector2Array([sheet[1],sheet[2],sheet[3]]),Color("bba77e"),2)
-		else:
-			var openness=t if book_motion=="open" else 1-t
-			var x=200+430*openness
-			var alpha=1-smoothstep(0.55,1.0,openness)
-			overlay.draw_colored_polygon(PackedVector2Array([Vector2(638,170),Vector2(x,174+10*openness),Vector2(x,685-10*openness),Vector2(638,691)]),Color(0.46,0.40,0.28,alpha))
 	var elapsed = clock - sky_started
 	if elapsed >= 0 and elapsed < 2.0:
 		var t = elapsed / 2.0
@@ -2173,31 +2072,8 @@ func draw_market_world():
 	if world.phase == "day": q = center(Vector2(1.8, 5)) - Vector2((clock - departure_started) * 280, 0)
 	var rolling = world.phase == "day" or t < 1
 	q.y += sin(visual_time * 18) * (1.3 if rolling else 0.25)
-	draw_rect(Rect2(q + Vector2(-36, 14), Vector2(100, 22)), Color(0.13, 0.20, 0.13, 0.3))
-	for dx in [-22, 20]:
-		var wheel = q + Vector2(dx, 20)
-		draw_circle(wheel, 10, Color("4c4438"))
-		draw_arc(wheel, 7, 0, TAU, 12, Color("b69565"), 2)
-		for i in range(3):
-			var angle = i * TAU / 3 + (visual_time * 6 if rolling else 0)
-			draw_line(wheel, wheel + Vector2.from_angle(angle) * 8, Color("b69565"), 2)
-	draw_rect(Rect2(q - Vector2(34, 18), Vector2(60, 32)), Color("af7b43"))
-	for i in range(5): draw_line(q + Vector2(-33 + i * 12, -15), q + Vector2(-33 + i * 12, 13), Color("795432"), 2)
-	draw_rect(Rect2(q - Vector2(38, 44), Vector2(68, 15)), Color("dfbe6c"))
-	for x in [-32, 30]: draw_line(q + Vector2(x, -34), q + Vector2(x, 6), Color("815d40"), 3)
-	BoardArt.draw_resource(self, q + Vector2(-18, -12), "wood")
-	BoardArt.draw_resource(self, q + Vector2(11, -12), "stone")
-	draw_circle(q + Vector2(43, -8), 9, Color("edc492"))
-	rect(q + Vector2(33, -19), Vector2(23, 6), "bb7852")
-	rect(q + Vector2(34, 1), Vector2(18, 26), "bf795e")
-	if not rolling:
-		# Crates, coin purse and poultry basket stay beside the actual cart.
-		for dx in [-25, 17]:
-			draw_rect(Rect2(q + Vector2(dx - 17, 49), Vector2(31, 27)), Color("b88954"))
-			draw_line(q + Vector2(dx - 15, 52), q + Vector2(dx + 11, 72), Color("765537"), 3)
-		BoardArt.draw_resource(self, q + Vector2(-25, 46), "gold")
-		draw_hen(q + Vector2(21, 47))
-		for dx in [7, 16, 25, 34]: draw_line(q + Vector2(dx, 30), q + Vector2(dx, 65), Color("ac8757"), 2)
+	# The adopted cart contains its merchant. No second figure or old cargo overlay.
+	draw_texture(Art.BOARD_CART,(q+Vector2(20,30)-Vector2(64,88)).round())
 
 func draw_companion_card():
 	for a in world.animals:
@@ -2274,9 +2150,176 @@ func debug_action(action: String):
 
 func keeper_hit_rect() -> Rect2:
 	var p=keeper_pixel()
-	if Farm.Life.presentation(world) in ["sleeping","unconscious","carried"]: return Rect2(p+Vector2(-32,-12),Vector2(58,34))
+	if Farm.Life.presentation(world) in ["unconscious","carried"]: return Rect2(p+Vector2(-25,-12),Vector2(50,34))
+	var pose=actor_art.get("keeper",{})
+	if pose.get("action", "idle") != "idle":
+		return Art.bounds("keeper",pose.action,int(world.keeper.get("facing",1)),p+Vector2(0,14),visual_time-pose.get("at",visual_time)).grow(3)
 	return Rect2(p+Vector2(-17,-32),Vector2(34,49))
 
 func animal_hit_rect(a: Dictionary) -> Rect2:
 	var p=actor_pixel("a%d" % a.id,a.pos)
-	return Rect2(p+Vector2(-17,-18),Vector2(34,37)) if a.species=="shiba" else Rect2(p-Vector2(25,25),Vector2(50,50))
+	var pose=actor_art.get("a%d"%a.id,{})
+	if a.species in ["hen","cat"] or pose.get("action","idle")!="idle":
+		return Art.bounds(a.species,pose.get("action","idle"),int(a.get("facing",1)),p+Vector2(0,14),visual_time-pose.get("at",visual_time)).grow(3)
+	return Rect2(p+Vector2(-17,-18),Vector2(34,37))
+
+func draw_enemy_actor(e: Dictionary):
+	if e.done or not world.working(): return
+	var p = actor_pixel("e%d" % e.id, e.pos)
+	var walking = Vector2(e.pos).distance_to(view_positions.get("e%d" % e.id, Vector2(e.pos))) > 0.025
+	var stride = sin(visual_time * 16 + e.id) * (3 if walking else 0.5)
+	draw_line(p + Vector2(-5, 14), p + Vector2(-6 + stride, 25), Color("42424c"), 5)
+	draw_line(p + Vector2(5, 14), p + Vector2(6 - stride, 25), Color("42424c"), 5)
+	p.y += absf(stride) * -0.4
+	rect(p + Vector2(-10, -5), Vector2(21, 23), "87768e" if not e.flee else "98947f")
+	draw_circle(p + Vector2(0, -10), 10, Color("d2b396"))
+	rect(p + Vector2(-12, -18), Vector2(24, 8), "454453")
+	rect(p + Vector2(-9, -11), Vector2(18, 5), "474954")
+	rect(p + Vector2(-6, -10), Vector2(3, 2), "fff3ce")
+	rect(p + Vector2(4, -10), Vector2(3, 2), "fff3ce")
+	if e.hp < e.max_hp:
+		draw_rect(Rect2(p + Vector2(-18, -48), Vector2(36, 4)), Color("3e4534"))
+		draw_rect(Rect2(p + Vector2(-18, -48), Vector2(36.0 * e.hp / e.max_hp, 4)), Color("e3aa88"))
+	if world.tick < e.move_stopped_until:
+		label_on(self, p + Vector2(-16, -53), "足止め", 13, Color("ffe5a0"))
+	if e.counter_target >= 0 and not e.flee:
+		draw_line(p + Vector2(-7, -37), p + Vector2(7, -25), Color("ffda91"), 3)
+		draw_line(p + Vector2(7, -37), p + Vector2(-7, -25), Color("ffda91"), 3)
+	elif "壊す" in e.state:
+		draw_line(p + Vector2(0, -24), p + Vector2(0, -38), Color("dfb981"), 3)
+		draw_line(p + Vector2(-7, -37), p + Vector2(7, -37), Color("dfb981"), 5)
+	elif not e.flee and e.carry == "":
+		draw_circle(p + Vector2(0, -32), 4, Color("8bd2c5"))
+		draw_line(p + Vector2(-6, -24), p + Vector2(6, -24), Color("8bd2c5"), 3)
+	if debug_view: label_on(self, p + Vector2(20, 0), e.state, 12)
+	if e.hp > 0 and not e.flee and world.tick < e.sight_reaction_until: label_on(self, p + Vector2(15, -30), e.sight_reaction, 26, Color("ffe0a0"))
+	elif e.hp > 0 and not e.flee and e.state == "迷う": label_on(self, p + Vector2(15, -23), "?", 16, Color("c8cfb4"))
+	if selected.get("kind") == "enemy" and selected.id == e.id:
+		draw_rect(Rect2(p - Vector2(18, 23), Vector2(36, 49)), Color("e6c998"), false, 2)
+
+
+func draw_keeper_actor():
+	var p = actor_pixel("keeper", world.keeper.pos)
+	var walking = Farm.Life.able(world) and Vector2(world.keeper.pos).distance_to(view_positions.get("keeper",Vector2(world.keeper.pos)))>0.025
+	if world.keeper.carrier >= 0:
+		var carrier_pos = view_positions.get("e%d" % world.keeper.carrier, Vector2(world.keeper.pos))
+		p = center(carrier_pos) + Vector2(34, -36)
+		draw_line(center(carrier_pos) + Vector2(8, 0), p + Vector2(0, 14), Color("d2b396"), 7)
+		draw_line(p + Vector2(-11, 11), p + Vector2(12, 11), Color("e7c794"), 4)
+		draw_set_transform(p, -PI * 0.5)
+		p = Vector2.ZERO
+	elif Farm.Life.presentation(world) == "unconscious":
+		draw_set_transform(p + Vector2(0, 12), -PI * 0.5)
+		p = Vector2.ZERO
+	elif Farm.Life.presentation(world) in ["tired","exhausted"]:
+		draw_set_transform(p+Vector2(0,4),0.16)
+		p = Vector2.ZERO
+	var pose = actor_pose("keeper",world.keeper.resting,Farm.Life.presentation(world)=="sleeping",walking,"keeper")
+	Art.sprite(self,"keeper",pose.action,int(world.keeper.get("facing",1)),p+Vector2(0,14),pose.elapsed)
+
+	if not world.jobs_held and Farm.Life.able(world) and not world.jobs.is_empty() and world.jobs[0].state == "working":
+		var hand = p + Vector2(12, 5)
+		var hammer = hand + Vector2(8, -8 + sin(visual_time * 18) * 6)
+		draw_line(hand, hammer, Color("a58051"), 3)
+		draw_rect(Rect2(hammer - Vector2(5, 3), Vector2(10, 6)), Color("c9c5a5"))
+	if world.keeper.state in ["restrained", "captured"]:
+		label_on(self, p + Vector2(14, -18), "!", 18, Color("f69773"))
+		draw_line(p + Vector2(-10, 8), p + Vector2(10, 8), Color("513f39"), 3)
+	draw_set_transform(Vector2.ZERO)
+	var owner_pixel = center(view_positions.get("keeper", Vector2(world.keeper.pos)))
+	if world.keeper.carrier < 0:
+		if selected.get("kind") == "keeper": draw_rect(keeper_hit_rect(), Color("ffe2a3"), false, 2)
+		if Farm.Life.presentation(world) in ["settling", "sleeping"]:
+			label_on(self, owner_pixel + Vector2(15, -20), "…" if Farm.Life.presentation(world)=="settling" else "Zzz", 18, Color("dce8c2"))
+		elif Farm.Life.presentation(world) in ["drowsy", "tired", "exhausted"]:
+			var severe = world.keeper.sleepiness > 80
+			var tired = Color("edba89") if severe else Color("e3d3a8")
+			var badge = owner_pixel + Vector2(18,-34)
+			draw_rect(Rect2(badge,Vector2(27 if severe else 18,20)),Color("4d5550"))
+			draw_circle(badge+Vector2(9,9),6,tired)
+			draw_circle(badge+Vector2(12,7),5,Color("4d5550"))
+			if severe:
+				draw_line(badge+Vector2(21,5),badge+Vector2(21,14),tired,2)
+				draw_polyline(PackedVector2Array([badge+Vector2(18,11),badge+Vector2(21,14),badge+Vector2(24,11)]),tired,2)
+			if severe:
+				for i in range(2):
+					var drift = fmod(visual_time * 5 + i * 8,16)
+					draw_rect(Rect2(owner_pixel+Vector2(-17-i*4,drift-4),Vector2(3,4)),Color(0.24,0.25,0.29,0.38*(1-drift/20)))
+			elif fmod(visual_time,9) < 1.2:
+				draw_arc(owner_pixel+Vector2(1,-3),3,0,TAU,8,tired,1.5)
+		if world.tick < world.keeper.get("whistle_until",-1): label_on(self,owner_pixel+Vector2(16,-22),"♪",20,Color("f1d99d"))
+		if world.keeper.state == "unconscious": label_on(self, owner_pixel + Vector2(12, -18), "!", 22, Color("efa084"))
+		if world.tick < world.keeper.hurt_until or selected.get("kind") == "keeper":
+			draw_rect(Rect2(owner_pixel + Vector2(-17, -37), Vector2(34, 4)), Color("684b46"))
+			draw_rect(Rect2(owner_pixel + Vector2(-17, -37), Vector2(34 * float(world.keeper.hp) / world.keeper.max_hp, 4)), Color("d68b74"))
+
+
+func draw_animal_actor(a: Dictionary):
+	if not a.placed: return
+	var p = actor_pixel("a%d" % a.id, a.pos)
+	draw_circle(p + Vector2(0, 13), 18, Color(0.1, 0.2, 0.13, 0.25))
+	if a.species == "shiba": draw_dog(p, a)
+	elif a.species == "cat": draw_cat(p,a)
+	else: draw_hen(p,a)
+	var in_combat = world.enemies.any(func(e): return not e.done and not e.flee and Farm.distance(a.pos, e.pos) <= 1)
+	if a.hp <= a.max_hp * 0.5 or in_combat:
+		var danger = a.hp <= a.max_hp * Farm.Rules.LOW_HP_FRACTION
+		var color = Color("f38c73") if danger else Color("efcc7f")
+		draw_rect(Rect2(p + Vector2(-20, 23), Vector2(40, 5)), Color("3e4534"))
+		draw_rect(Rect2(p + Vector2(-20, 23), Vector2(40.0 * a.hp / a.max_hp, 5)), color)
+		if danger:
+			color.a = 0.65 + 0.25 * sin(clock * 4)
+			label_on(self, p + Vector2(-4, -29), "!", 23, color)
+	if a.hp <= 0: label_on(self, p + Vector2(-18, -27), a.state, 16, Color("e2bcb3"))
+	elif a.state in ["休む", "自主休養"]: label_on(self, p + Vector2(14, -25), "Zz", 18, Color("c1e3db"))
+	if a.rescuing: label_on(self, p + Vector2(-25, -20), "!!", 16, Color("b0f0de"))
+	if world.tick - a.last_bark < 4:
+		var f = dog_facing(a)
+		draw_arc(p + Vector2(25 * f, -8), 9, -0.8 + (PI if f < 0 else 0), 0.8 + (PI if f < 0 else 0), 8, Color("ffe3a0"), 2)
+		draw_arc(p + Vector2(25 * f, -8), 15, -0.8 + (PI if f < 0 else 0), 0.8 + (PI if f < 0 else 0), 8, Color("ffe3a0"), 2)
+	elif a.state == "様子見": label_on(self, p + Vector2(17, -24), "…", 18, Color("ffe3a0"))
+	if not cinematic() and group == 1 and a.id in selected_animals:
+		for side in [-1, 1]:
+			for vertical in [-1, 1]:
+				var bounds=animal_hit_rect(a)
+				var corner = bounds.get_center() + bounds.size*Vector2(side,vertical)*0.5
+				draw_line(corner, corner - Vector2(side * 7, 0), Color("ffe2a3"), 3 if a.id == selected_animal else 2)
+				draw_line(corner, corner - Vector2(0, vertical * 7), Color("ffe2a3"), 3 if a.id == selected_animal else 2)
+	if debug_view: label_on(self, p + Vector2(25, 0), a.state, 12)
+
+
+func wall_links(cell: Vector2i) -> Dictionary:
+	var result={}
+	for d in [Vector2i.UP,Vector2i.DOWN,Vector2i.LEFT,Vector2i.RIGHT]:
+		result[d]=Farm.Buildings.enclosure(world.structures.get(cell+d,{}))
+	return result
+
+func draw_connected_wall(p: Vector2, b: Dictionary, shade: Color, preview: bool):
+	var links=wall_links(Vector2i(p/TILE)) if not preview else {}
+	var up=links.get(Vector2i.UP,false);var down=links.get(Vector2i.DOWN,false)
+	var left=links.get(Vector2i.LEFT,false);var right=links.get(Vector2i.RIGHT,false)
+	# Six-pixel sections exactly divide both tile dimensions; the top is a union, not overlapping blocks.
+	var cells={}
+	for y in range(-3,4):
+		for x in range(-4,4):
+			var horizontal=y in [-1,0] and x>=(-4 if left else (-1 if up or down else -3)) and x<(4 if right else (1 if up or down else 3))
+			var vertical=x in [-1,0] and y>=(-3 if up else -1) and y<=(3 if down else 0)
+			if horizontal or vertical: cells[Vector2i(x,y)]=true
+	var top=p-Vector2(0,12)
+	var face=shade.darkened(0.28)
+	for cell in cells:
+		if not cells.has(cell+Vector2i.DOWN) and not (down and cell.y==3):
+			var q=top+Vector2(cell.x*6,cell.y*6-3 if up and cell.y==-3 else cell.y*6)+Vector2(0,6)
+			draw_rect(Rect2(q,Vector2(6,24)),face)
+			draw_line(q+Vector2(0,24),q+Vector2(6,24),shade.darkened(0.42),1)
+		if not cells.has(cell+Vector2i.RIGHT) and not (right and cell.x==3):
+			var edge=top+Vector2(cell.x*6+6,cell.y*6-3 if up and cell.y==-3 else cell.y*6)
+			var height=9 if up and cell.y==-3 else 3 if down and cell.y==3 else 6
+			draw_colored_polygon(PackedVector2Array([edge,edge+Vector2(4,24),edge+Vector2(4,24+height),edge+Vector2(0,height)]),shade.darkened(0.4))
+	for cell in cells:
+		var q=top+Vector2(cell.x*6,cell.y*6-3 if up and cell.y==-3 else cell.y*6)
+		draw_rect(Rect2(q,Vector2(6,9 if up and cell.y==-3 else 3 if down and cell.y==3 else 6)),shade)
+		if not cells.has(cell+Vector2i.LEFT) and not (left and cell.x==-4): draw_line(q,q+Vector2(0,6),shade.darkened(0.18),1)
+		if not cells.has(cell+Vector2i.RIGHT) and not (right and cell.x==3): draw_line(q+Vector2(6,0),q+Vector2(6,6),shade.darkened(0.18),1)
+
+
