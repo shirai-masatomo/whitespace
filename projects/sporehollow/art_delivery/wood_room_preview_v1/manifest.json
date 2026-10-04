@@ -1,0 +1,303 @@
+{
+  "delivery": "wood_room_preview_v1",
+  "status": "direction_carried_forward_to_wood_buildings_v1",
+  "spec_source": "latest implementation ART_SPEC/BUILDINGS read2026-10-04",
+  "cell_px": [
+    48,
+    42
+  ],
+  "wall": {
+    "canvas": [
+      48,
+      68
+    ],
+    "anchor": [
+      24,
+      34
+    ],
+    "top_center_local": [
+      24,
+      22
+    ],
+    "projected_ground_center_local": [
+      24,
+      46
+    ],
+    "extrusion_height_px": 24,
+    "connection_bits": {
+      "N": 1,
+      "E": 2,
+      "S": 4,
+      "W": 8
+    },
+    "included_masks": [
+      0,
+      3,
+      5,
+      6,
+      9,
+      10,
+      12
+    ],
+    "shadow": "No external ground shadow baked. Frontface shading is material, do not remove."
+  },
+  "assets": [
+    {
+      "file": "wall/wood_mask_00.png",
+      "canvas_size_px": [
+        48,
+        68
+      ],
+      "anchor_px": [
+        24,
+        34
+      ],
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "use": "wood wall preview",
+      "sha256": "4917e92c6a83397d42d1a782634aa80ed68fb88dda65c612647a19535c4bea67",
+      "connection_mask": 0
+    },
+    {
+      "file": "wall/wood_mask_03.png",
+      "canvas_size_px": [
+        48,
+        68
+      ],
+      "anchor_px": [
+        24,
+        34
+      ],
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "use": "wood wall preview",
+      "sha256": "a84a272e3440b22282818ebfd2536bfaf7e41dbc26263b73c17c92ffe1f78cb4",
+      "connection_mask": 3
+    },
+    {
+      "file": "wall/wood_mask_05.png",
+      "canvas_size_px": [
+        48,
+        68
+      ],
+      "anchor_px": [
+        24,
+        34
+      ],
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "use": "wood wall preview",
+      "sha256": "5e2ac6591b64b61579b30192869122d9046ee53aefa237706f2fe0f6e619e45d",
+      "connection_mask": 5
+    },
+    {
+      "file": "wall/wood_mask_06.png",
+      "canvas_size_px": [
+        48,
+        68
+      ],
+      "anchor_px": [
+        24,
+        34
+      ],
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "use": "wood wall preview",
+      "sha256": "ed2e522d662b136cf6508b7933ac2a996f06f064b5d0fb42f9441f721e07e60a",
+      "connection_mask": 6
+    },
+    {
+      "file": "wall/wood_mask_09.png",
+      "canvas_size_px": [
+        48,
+        68
+      ],
+      "anchor_px": [
+        24,
+        34
+      ],
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "use": "wood wall preview",
+      "sha256": "5c4731d873a149db0baa4fd75e297e5157f5fcd010b6ded583b8dffac36335ec",
+      "connection_mask": 9
+    },
+    {
+      "file": "wall/wood_mask_10.png",
+      "canvas_size_px": [
+        48,
+        68
+      ],
+      "anchor_px": [
+        24,
+        34
+      ],
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "use": "wood wall preview",
+      "sha256": "b3df06d8257881b85d6d6cc5ff04e5917fdf52fec6101253b7bce4e1312b6c52",
+      "connection_mask": 10
+    },
+    {
+      "file": "wall/wood_mask_12.png",
+      "canvas_size_px": [
+        48,
+        68
+      ],
+      "anchor_px": [
+        24,
+        34
+      ],
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "use": "wood wall preview",
+      "sha256": "8b1af9f4065a207c2ed0c90c3b200270dd0cde5f061e9daaef1785f941ea6eb5",
+      "connection_mask": 12
+    },
+    {
+      "file": "floor/wood_00.png",
+      "canvas_size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        0,
+        0
+      ],
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "use": "opaque floor tile",
+      "sha256": "c945f5ad4363a0afdcd659524d706f810de8083f2120d1ed3349c7bc0193e817"
+    },
+    {
+      "file": "door/frame_horizontal.png",
+      "canvas_size_px": [
+        48,
+        68
+      ],
+      "anchor_px": [
+        24,
+        34
+      ],
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "use": "door posts; clear aperture",
+      "sha256": "811c33a0eddb0372be772479ff585260998f3c46a5be86b88d109cd59e20cff8"
+    },
+    {
+      "file": "door/leaf_horizontal_closed.png",
+      "canvas_size_px": [
+        48,
+        68
+      ],
+      "anchor_px": [
+        24,
+        34
+      ],
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "use": "door leaf; composite with frame",
+      "sha256": "77a8ff52a35ee04c83239bf5f752b4af737976dca63ffb1c7b046940bdeb40e2",
+      "door_state": "closed"
+    },
+    {
+      "file": "door/leaf_horizontal_open.png",
+      "canvas_size_px": [
+        48,
+        68
+      ],
+      "anchor_px": [
+        24,
+        34
+      ],
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "use": "door leaf; composite with frame",
+      "sha256": "ffd72291f880ef5c8f9722e19a65e81b359397d08272c0806a4bd6065a1c31e4",
+      "door_state": "open"
+    }
+  ],
+  "review_only": [
+    "review/room-size.png",
+    "review/door-open-close.gif"
+  ],
+  "unfinished": [
+    "remaining connection masks",
+    "soil/stone materials",
+    "damage states",
+    "floor perimeter/boundary parts",
+    "vertical doors",
+    "lock components",
+    "runtime integration validation"
+  ],
+  "unchanged_characters": {
+    "keeper": "../characters_v1/keeper_idle_right_00.png",
+    "shiba": "../characters_v1/shiba_idle_right_00.png"
+  }
+}

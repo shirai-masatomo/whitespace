@@ -1,0 +1,1843 @@
+{
+  "delivery": "wood_buildings_v1",
+  "status": "ready_for_implementation_integration",
+  "cell_px": [
+    48,
+    42
+  ],
+  "wall": {
+    "canvas_px": [
+      48,
+      68
+    ],
+    "anchor_px": [
+      24,
+      34
+    ],
+    "top_center_px": [
+      24,
+      22
+    ],
+    "ground_center_px": [
+      24,
+      46
+    ],
+    "extrusion_px": 24,
+    "connection_bits": {
+      "N": 1,
+      "E": 2,
+      "S": 4,
+      "W": 8
+    },
+    "connection_masks": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ],
+    "damage": "existing HP <= 50% contract; no gameplay change",
+    "neighbor_rule": "completed walls of ANY material and completed door bodies connect; construction reservations do not"
+  },
+  "floor": {
+    "canvas_px": [
+      48,
+      42
+    ],
+    "anchor_px": [
+      0,
+      0
+    ],
+    "perimeter_bits": {
+      "N": 1,
+      "E": 2,
+      "S": 4,
+      "W": 8
+    },
+    "boundary_ownership": "apply shared boundary on north/west tile's E/S edge once, not on both cells"
+  },
+  "door": {
+    "anchor_px": [
+      24,
+      34
+    ],
+    "orientation_rule": "existing implementation compares N+S completed neighbors vs E+W; vertical only if greater",
+    "layer_order": [
+      "frame_rear",
+      "leaf",
+      "lock if locked door",
+      "frame_front"
+    ],
+    "collision": "image state does not define passability or enclosure",
+    "lock_damage": "existing lock HP <= 0; closing does not repair it",
+    "depth_note": "frame halves are separate; actors must be depth sorted with leaf/posts by projected ground; final renderer responsibility"
+  },
+  "assets": [
+    {
+      "file": "wall/normal/wood_mask_00.png",
+      "canvas_size_px": [
+        48,
+        68
+      ],
+      "anchor_px": [
+        24,
+        34
+      ],
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "duration_mode": "hold_until_state_change",
+      "loop": false,
+      "sha256": "4917e92c6a83397d42d1a782634aa80ed68fb88dda65c612647a19535c4bea67",
+      "use": "connected wood wall",
+      "connection_mask": 0,
+      "state": "normal"
+    },
+    {
+      "file": "wall/damaged/wood_mask_00.png",
+      "canvas_size_px": [
+        48,
+        68
+      ],
+      "anchor_px": [
+        24,
+        34
+      ],
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "duration_mode": "hold_until_state_change",
+      "loop": false,
+      "sha256": "87dfad68df53af7134ec6e7caefee26a56f44917ffbabf36e58b40943b9c26ec",
+      "use": "connected wood wall",
+      "connection_mask": 0,
+      "state": "damaged"
+    },
+    {
+      "file": "wall/normal/wood_mask_01.png",
+      "canvas_size_px": [
+        48,
+        68
+      ],
+      "anchor_px": [
+        24,
+        34
+      ],
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "duration_mode": "hold_until_state_change",
+      "loop": false,
+      "sha256": "2b39da71bbe19dfcda9677c33f2c639b817486b43e116b8d974da75ea008e0a5",
+      "use": "connected wood wall",
+      "connection_mask": 1,
+      "state": "normal"
+    },
+    {
+      "file": "wall/damaged/wood_mask_01.png",
+      "canvas_size_px": [
+        48,
+        68
+      ],
+      "anchor_px": [
+        24,
+        34
+      ],
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "duration_mode": "hold_until_state_change",
+      "loop": false,
+      "sha256": "0752be192e66e44b5ed540f1bad7b671caf826c700d32db5994f34165099a5b0",
+      "use": "connected wood wall",
+      "connection_mask": 1,
+      "state": "damaged"
+    },
+    {
+      "file": "wall/normal/wood_mask_02.png",
+      "canvas_size_px": [
+        48,
+        68
+      ],
+      "anchor_px": [
+        24,
+        34
+      ],
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "duration_mode": "hold_until_state_change",
+      "loop": false,
+      "sha256": "734e5f68a7e065a62a35f923683f04cb04aafb20bb82b8603e79e3e7b99634b6",
+      "use": "connected wood wall",
+      "connection_mask": 2,
+      "state": "normal"
+    },
+    {
+      "file": "wall/damaged/wood_mask_02.png",
+      "canvas_size_px": [
+        48,
+        68
+      ],
+      "anchor_px": [
+        24,
+        34
+      ],
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "duration_mode": "hold_until_state_change",
+      "loop": false,
+      "sha256": "2b7940ab1f8f63d69206caebc04f7980ba96e8f6b792ecdfa0df38fe33ab7481",
+      "use": "connected wood wall",
+      "connection_mask": 2,
+      "state": "damaged"
+    },
+    {
+      "file": "wall/normal/wood_mask_03.png",
+      "canvas_size_px": [
+        48,
+        68
+      ],
+      "anchor_px": [
+        24,
+        34
+      ],
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "duration_mode": "hold_until_state_change",
+      "loop": false,
+      "sha256": "a84a272e3440b22282818ebfd2536bfaf7e41dbc26263b73c17c92ffe1f78cb4",
+      "use": "connected wood wall",
+      "connection_mask": 3,
+      "state": "normal"
+    },
+    {
+      "file": "wall/damaged/wood_mask_03.png",
+      "canvas_size_px": [
+        48,
+        68
+      ],
+      "anchor_px": [
+        24,
+        34
+      ],
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "duration_mode": "hold_until_state_change",
+      "loop": false,
+      "sha256": "de0ef3f6a6857ed50553ee18ae9d4c737e2df78d5da21081b1ba9e9c9febf559",
+      "use": "connected wood wall",
+      "connection_mask": 3,
+      "state": "damaged"
+    },
+    {
+      "file": "wall/normal/wood_mask_04.png",
+      "canvas_size_px": [
+        48,
+        68
+      ],
+      "anchor_px": [
+        24,
+        34
+      ],
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "duration_mode": "hold_until_state_change",
+      "loop": false,
+      "sha256": "ebcfa727217484c0b79d1f94682b283efda87cbfd239175ea986aec25267780c",
+      "use": "connected wood wall",
+      "connection_mask": 4,
+      "state": "normal"
+    },
+    {
+      "file": "wall/damaged/wood_mask_04.png",
+      "canvas_size_px": [
+        48,
+        68
+      ],
+      "anchor_px": [
+        24,
+        34
+      ],
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "duration_mode": "hold_until_state_change",
+      "loop": false,
+      "sha256": "de62a23717b09806807f99f458a125e60e1a5f3694077603243eb54c2a49de60",
+      "use": "connected wood wall",
+      "connection_mask": 4,
+      "state": "damaged"
+    },
+    {
+      "file": "wall/normal/wood_mask_05.png",
+      "canvas_size_px": [
+        48,
+        68
+      ],
+      "anchor_px": [
+        24,
+        34
+      ],
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "duration_mode": "hold_until_state_change",
+      "loop": false,
+      "sha256": "5e2ac6591b64b61579b30192869122d9046ee53aefa237706f2fe0f6e619e45d",
+      "use": "connected wood wall",
+      "connection_mask": 5,
+      "state": "normal"
+    },
+    {
+      "file": "wall/damaged/wood_mask_05.png",
+      "canvas_size_px": [
+        48,
+        68
+      ],
+      "anchor_px": [
+        24,
+        34
+      ],
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "duration_mode": "hold_until_state_change",
+      "loop": false,
+      "sha256": "856720ff8b1e79ed464a7d5fd2903cef1b1c2963e0164e2aa3d1d90a8c87c504",
+      "use": "connected wood wall",
+      "connection_mask": 5,
+      "state": "damaged"
+    },
+    {
+      "file": "wall/normal/wood_mask_06.png",
+      "canvas_size_px": [
+        48,
+        68
+      ],
+      "anchor_px": [
+        24,
+        34
+      ],
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "duration_mode": "hold_until_state_change",
+      "loop": false,
+      "sha256": "ed2e522d662b136cf6508b7933ac2a996f06f064b5d0fb42f9441f721e07e60a",
+      "use": "connected wood wall",
+      "connection_mask": 6,
+      "state": "normal"
+    },
+    {
+      "file": "wall/damaged/wood_mask_06.png",
+      "canvas_size_px": [
+        48,
+        68
+      ],
+      "anchor_px": [
+        24,
+        34
+      ],
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "duration_mode": "hold_until_state_change",
+      "loop": false,
+      "sha256": "67f50960e53fbe2ab8bd1299c4b84416c943e316beedae61f7d890e34d9e00e2",
+      "use": "connected wood wall",
+      "connection_mask": 6,
+      "state": "damaged"
+    },
+    {
+      "file": "wall/normal/wood_mask_07.png",
+      "canvas_size_px": [
+        48,
+        68
+      ],
+      "anchor_px": [
+        24,
+        34
+      ],
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "duration_mode": "hold_until_state_change",
+      "loop": false,
+      "sha256": "588c5f47eb3404e85aac9f7dd649465d2e2d534c79b5abd56d518afa68f60e06",
+      "use": "connected wood wall",
+      "connection_mask": 7,
+      "state": "normal"
+    },
+    {
+      "file": "wall/damaged/wood_mask_07.png",
+      "canvas_size_px": [
+        48,
+        68
+      ],
+      "anchor_px": [
+        24,
+        34
+      ],
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "duration_mode": "hold_until_state_change",
+      "loop": false,
+      "sha256": "ca292ef311c9ba25cdbe6bcdb0814e45ddca5638dd99c85f078aef5021276a1c",
+      "use": "connected wood wall",
+      "connection_mask": 7,
+      "state": "damaged"
+    },
+    {
+      "file": "wall/normal/wood_mask_08.png",
+      "canvas_size_px": [
+        48,
+        68
+      ],
+      "anchor_px": [
+        24,
+        34
+      ],
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "duration_mode": "hold_until_state_change",
+      "loop": false,
+      "sha256": "8e97d61e4d14bb9ad149e2c32807f2a6711d1efbf07ebbac5e4a34f70e8cadff",
+      "use": "connected wood wall",
+      "connection_mask": 8,
+      "state": "normal"
+    },
+    {
+      "file": "wall/damaged/wood_mask_08.png",
+      "canvas_size_px": [
+        48,
+        68
+      ],
+      "anchor_px": [
+        24,
+        34
+      ],
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "duration_mode": "hold_until_state_change",
+      "loop": false,
+      "sha256": "bb46f4b5a3012f84cfab081a3f9d856bc7d77da0898f164bfd6696c7750dc4ff",
+      "use": "connected wood wall",
+      "connection_mask": 8,
+      "state": "damaged"
+    },
+    {
+      "file": "wall/normal/wood_mask_09.png",
+      "canvas_size_px": [
+        48,
+        68
+      ],
+      "anchor_px": [
+        24,
+        34
+      ],
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "duration_mode": "hold_until_state_change",
+      "loop": false,
+      "sha256": "5c4731d873a149db0baa4fd75e297e5157f5fcd010b6ded583b8dffac36335ec",
+      "use": "connected wood wall",
+      "connection_mask": 9,
+      "state": "normal"
+    },
+    {
+      "file": "wall/damaged/wood_mask_09.png",
+      "canvas_size_px": [
+        48,
+        68
+      ],
+      "anchor_px": [
+        24,
+        34
+      ],
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "duration_mode": "hold_until_state_change",
+      "loop": false,
+      "sha256": "e90ef3cd877889a3952362b09fcfebd67318ceba2bf0250407d3e9d52cc1731f",
+      "use": "connected wood wall",
+      "connection_mask": 9,
+      "state": "damaged"
+    },
+    {
+      "file": "wall/normal/wood_mask_10.png",
+      "canvas_size_px": [
+        48,
+        68
+      ],
+      "anchor_px": [
+        24,
+        34
+      ],
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "duration_mode": "hold_until_state_change",
+      "loop": false,
+      "sha256": "b3df06d8257881b85d6d6cc5ff04e5917fdf52fec6101253b7bce4e1312b6c52",
+      "use": "connected wood wall",
+      "connection_mask": 10,
+      "state": "normal"
+    },
+    {
+      "file": "wall/damaged/wood_mask_10.png",
+      "canvas_size_px": [
+        48,
+        68
+      ],
+      "anchor_px": [
+        24,
+        34
+      ],
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "duration_mode": "hold_until_state_change",
+      "loop": false,
+      "sha256": "76b53e7944273a04d8596429a6db01356d2bb40d37c308144eb48d46b8c7a8fe",
+      "use": "connected wood wall",
+      "connection_mask": 10,
+      "state": "damaged"
+    },
+    {
+      "file": "wall/normal/wood_mask_11.png",
+      "canvas_size_px": [
+        48,
+        68
+      ],
+      "anchor_px": [
+        24,
+        34
+      ],
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "duration_mode": "hold_until_state_change",
+      "loop": false,
+      "sha256": "ef1ef7ca7ecfa9c5b002cd3b881642cca68d0d312964c3cfd0c09fdffad30fe1",
+      "use": "connected wood wall",
+      "connection_mask": 11,
+      "state": "normal"
+    },
+    {
+      "file": "wall/damaged/wood_mask_11.png",
+      "canvas_size_px": [
+        48,
+        68
+      ],
+      "anchor_px": [
+        24,
+        34
+      ],
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "duration_mode": "hold_until_state_change",
+      "loop": false,
+      "sha256": "6311eb213431b55dafe1e60fef8b2e67ea126ce715b27e76d912736c901506f6",
+      "use": "connected wood wall",
+      "connection_mask": 11,
+      "state": "damaged"
+    },
+    {
+      "file": "wall/normal/wood_mask_12.png",
+      "canvas_size_px": [
+        48,
+        68
+      ],
+      "anchor_px": [
+        24,
+        34
+      ],
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "duration_mode": "hold_until_state_change",
+      "loop": false,
+      "sha256": "8b1af9f4065a207c2ed0c90c3b200270dd0cde5f061e9daaef1785f941ea6eb5",
+      "use": "connected wood wall",
+      "connection_mask": 12,
+      "state": "normal"
+    },
+    {
+      "file": "wall/damaged/wood_mask_12.png",
+      "canvas_size_px": [
+        48,
+        68
+      ],
+      "anchor_px": [
+        24,
+        34
+      ],
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "duration_mode": "hold_until_state_change",
+      "loop": false,
+      "sha256": "7c9129942ceb3f5f4129cc4481bdf91fb97d64b194e3961c8fddc42622335a13",
+      "use": "connected wood wall",
+      "connection_mask": 12,
+      "state": "damaged"
+    },
+    {
+      "file": "wall/normal/wood_mask_13.png",
+      "canvas_size_px": [
+        48,
+        68
+      ],
+      "anchor_px": [
+        24,
+        34
+      ],
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "duration_mode": "hold_until_state_change",
+      "loop": false,
+      "sha256": "8b06c5eaed799c99336928a302a399f73a200e9d898152c925550e6c538c4867",
+      "use": "connected wood wall",
+      "connection_mask": 13,
+      "state": "normal"
+    },
+    {
+      "file": "wall/damaged/wood_mask_13.png",
+      "canvas_size_px": [
+        48,
+        68
+      ],
+      "anchor_px": [
+        24,
+        34
+      ],
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "duration_mode": "hold_until_state_change",
+      "loop": false,
+      "sha256": "848aa82fd9195589d8fb3fc54993bcc95b818cc4c63babd8500ba807bbbf2173",
+      "use": "connected wood wall",
+      "connection_mask": 13,
+      "state": "damaged"
+    },
+    {
+      "file": "wall/normal/wood_mask_14.png",
+      "canvas_size_px": [
+        48,
+        68
+      ],
+      "anchor_px": [
+        24,
+        34
+      ],
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "duration_mode": "hold_until_state_change",
+      "loop": false,
+      "sha256": "dd979b3e03d4722d03baf9e4d472ce82e59f18141177ddb5cc5919cb158ccf58",
+      "use": "connected wood wall",
+      "connection_mask": 14,
+      "state": "normal"
+    },
+    {
+      "file": "wall/damaged/wood_mask_14.png",
+      "canvas_size_px": [
+        48,
+        68
+      ],
+      "anchor_px": [
+        24,
+        34
+      ],
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "duration_mode": "hold_until_state_change",
+      "loop": false,
+      "sha256": "df3a3a99ce9b46e7d4749fcb5c4545f9aeb6daa525982bc36c786874f8707925",
+      "use": "connected wood wall",
+      "connection_mask": 14,
+      "state": "damaged"
+    },
+    {
+      "file": "wall/normal/wood_mask_15.png",
+      "canvas_size_px": [
+        48,
+        68
+      ],
+      "anchor_px": [
+        24,
+        34
+      ],
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "duration_mode": "hold_until_state_change",
+      "loop": false,
+      "sha256": "971d7f511536e924615a16fbf77ca04e30cf2e3a7117ef7892c061396f4253ac",
+      "use": "connected wood wall",
+      "connection_mask": 15,
+      "state": "normal"
+    },
+    {
+      "file": "wall/damaged/wood_mask_15.png",
+      "canvas_size_px": [
+        48,
+        68
+      ],
+      "anchor_px": [
+        24,
+        34
+      ],
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "duration_mode": "hold_until_state_change",
+      "loop": false,
+      "sha256": "f26324c8646e55e6f754dfcf4c3e60b3d09d0986035e1c6c2ae6ae39245d39f5",
+      "use": "connected wood wall",
+      "connection_mask": 15,
+      "state": "damaged"
+    },
+    {
+      "file": "floor/wood_00.png",
+      "canvas_size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        0,
+        0
+      ],
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "duration_mode": "hold_until_state_change",
+      "loop": false,
+      "sha256": "c945f5ad4363a0afdcd659524d706f810de8083f2120d1ed3349c7bc0193e817",
+      "use": "full opaque constructed wood floor"
+    },
+    {
+      "file": "floor/perimeter/mask_00.png",
+      "canvas_size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        0,
+        0
+      ],
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "duration_mode": "hold_until_state_change",
+      "loop": false,
+      "sha256": "48839a609771ba196b4cd34b4f3cc545f70c2d0597d591686e69e32dafe112ea",
+      "use": "optional exposed floor perimeter over full tile",
+      "exposed_edges_mask": 0
+    },
+    {
+      "file": "floor/perimeter/mask_01.png",
+      "canvas_size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        0,
+        0
+      ],
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "duration_mode": "hold_until_state_change",
+      "loop": false,
+      "sha256": "39d3206877539df6f50dda36aa42205889a2896c665844db42ec4e1d8a0a0204",
+      "use": "optional exposed floor perimeter over full tile",
+      "exposed_edges_mask": 1
+    },
+    {
+      "file": "floor/perimeter/mask_02.png",
+      "canvas_size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        0,
+        0
+      ],
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "duration_mode": "hold_until_state_change",
+      "loop": false,
+      "sha256": "2ea7730ba089e8c01fec486c5332ec6f224967926e52bb00493292de9ab0bfd2",
+      "use": "optional exposed floor perimeter over full tile",
+      "exposed_edges_mask": 2
+    },
+    {
+      "file": "floor/perimeter/mask_03.png",
+      "canvas_size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        0,
+        0
+      ],
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "duration_mode": "hold_until_state_change",
+      "loop": false,
+      "sha256": "0f583c37aa0d1be10e63def7fb09c2c5729976abb8789cdb914e100c112a6991",
+      "use": "optional exposed floor perimeter over full tile",
+      "exposed_edges_mask": 3
+    },
+    {
+      "file": "floor/perimeter/mask_04.png",
+      "canvas_size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        0,
+        0
+      ],
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "duration_mode": "hold_until_state_change",
+      "loop": false,
+      "sha256": "84a3f7ef504139616be77dcb03690b1b44ce7eef8d56868e5b08a4861a875428",
+      "use": "optional exposed floor perimeter over full tile",
+      "exposed_edges_mask": 4
+    },
+    {
+      "file": "floor/perimeter/mask_05.png",
+      "canvas_size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        0,
+        0
+      ],
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "duration_mode": "hold_until_state_change",
+      "loop": false,
+      "sha256": "975b38fab1dd013ebbb7cf897d96c59246872d2e780dffb2bb7e681e7ac7a27b",
+      "use": "optional exposed floor perimeter over full tile",
+      "exposed_edges_mask": 5
+    },
+    {
+      "file": "floor/perimeter/mask_06.png",
+      "canvas_size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        0,
+        0
+      ],
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "duration_mode": "hold_until_state_change",
+      "loop": false,
+      "sha256": "c86d080203140bd4a1d285eca3c3ce42f70325fb6ffbc6e6430149f8147cc54a",
+      "use": "optional exposed floor perimeter over full tile",
+      "exposed_edges_mask": 6
+    },
+    {
+      "file": "floor/perimeter/mask_07.png",
+      "canvas_size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        0,
+        0
+      ],
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "duration_mode": "hold_until_state_change",
+      "loop": false,
+      "sha256": "ab23ffa4b15fa2651806f019348326502f83755520f7466e541aff0b50ae074b",
+      "use": "optional exposed floor perimeter over full tile",
+      "exposed_edges_mask": 7
+    },
+    {
+      "file": "floor/perimeter/mask_08.png",
+      "canvas_size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        0,
+        0
+      ],
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "duration_mode": "hold_until_state_change",
+      "loop": false,
+      "sha256": "2c6561c046daefd407a7f180dda7185ea9e49049097cda5878584faa95ecf6f4",
+      "use": "optional exposed floor perimeter over full tile",
+      "exposed_edges_mask": 8
+    },
+    {
+      "file": "floor/perimeter/mask_09.png",
+      "canvas_size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        0,
+        0
+      ],
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "duration_mode": "hold_until_state_change",
+      "loop": false,
+      "sha256": "55f6477f77c8978d8f344e6e8827bff6ec53d07c66973bbc6dc744f48920f37a",
+      "use": "optional exposed floor perimeter over full tile",
+      "exposed_edges_mask": 9
+    },
+    {
+      "file": "floor/perimeter/mask_10.png",
+      "canvas_size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        0,
+        0
+      ],
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "duration_mode": "hold_until_state_change",
+      "loop": false,
+      "sha256": "e7b52d5f8fa8a8fee1143e785c545a2702cf45d721e6713dd5f18c559b505d57",
+      "use": "optional exposed floor perimeter over full tile",
+      "exposed_edges_mask": 10
+    },
+    {
+      "file": "floor/perimeter/mask_11.png",
+      "canvas_size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        0,
+        0
+      ],
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "duration_mode": "hold_until_state_change",
+      "loop": false,
+      "sha256": "286acd6e595262e2ef41f885094a3860035aaf66088518c4d3e0d3725fadcf36",
+      "use": "optional exposed floor perimeter over full tile",
+      "exposed_edges_mask": 11
+    },
+    {
+      "file": "floor/perimeter/mask_12.png",
+      "canvas_size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        0,
+        0
+      ],
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "duration_mode": "hold_until_state_change",
+      "loop": false,
+      "sha256": "503755e427cb07d4935d9d6e1c990fc6e43c779f4b619251f406feef989c7df2",
+      "use": "optional exposed floor perimeter over full tile",
+      "exposed_edges_mask": 12
+    },
+    {
+      "file": "floor/perimeter/mask_13.png",
+      "canvas_size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        0,
+        0
+      ],
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "duration_mode": "hold_until_state_change",
+      "loop": false,
+      "sha256": "a1a2e9821cad8da03fad36279702b215063898f7ce2891c71251a7be84e81238",
+      "use": "optional exposed floor perimeter over full tile",
+      "exposed_edges_mask": 13
+    },
+    {
+      "file": "floor/perimeter/mask_14.png",
+      "canvas_size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        0,
+        0
+      ],
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "duration_mode": "hold_until_state_change",
+      "loop": false,
+      "sha256": "6462aa808063877443b7a9707676c747c60fac76bedb9282be959c43b18ee87b",
+      "use": "optional exposed floor perimeter over full tile",
+      "exposed_edges_mask": 14
+    },
+    {
+      "file": "floor/perimeter/mask_15.png",
+      "canvas_size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        0,
+        0
+      ],
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "duration_mode": "hold_until_state_change",
+      "loop": false,
+      "sha256": "b7c1422947c5e50a0ebba83e8f4f7f84b1571d0b057c21b8ed5d86583f2c0bf1",
+      "use": "optional exposed floor perimeter over full tile",
+      "exposed_edges_mask": 15
+    },
+    {
+      "file": "floor/boundary/n.png",
+      "canvas_size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        0,
+        0
+      ],
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "duration_mode": "hold_until_state_change",
+      "loop": false,
+      "sha256": "da3605cd854c435ce55b17005baaadbcd261599cf4287346a57951a605672b4c",
+      "use": "optional mixed-material seam; apply once per edge",
+      "edge": "n"
+    },
+    {
+      "file": "floor/boundary/e.png",
+      "canvas_size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        0,
+        0
+      ],
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "duration_mode": "hold_until_state_change",
+      "loop": false,
+      "sha256": "761d19e42d71f900fadd3488e7b0d35cfaccea4b449ed07631b6e3df57588f90",
+      "use": "optional mixed-material seam; apply once per edge",
+      "edge": "e"
+    },
+    {
+      "file": "floor/boundary/s.png",
+      "canvas_size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        0,
+        0
+      ],
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "duration_mode": "hold_until_state_change",
+      "loop": false,
+      "sha256": "2f15d61f0ec29c935a79f84d2ac9e50a845cb49835577faad9ae31152b7bbb3b",
+      "use": "optional mixed-material seam; apply once per edge",
+      "edge": "s"
+    },
+    {
+      "file": "floor/boundary/w.png",
+      "canvas_size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        0,
+        0
+      ],
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "duration_mode": "hold_until_state_change",
+      "loop": false,
+      "sha256": "3523151c67dad228153599af059df5734cb71fba9ddc48e9898b896ea4c27eda",
+      "use": "optional mixed-material seam; apply once per edge",
+      "edge": "w"
+    },
+    {
+      "file": "door/horizontal_frame_rear.png",
+      "canvas_size_px": [
+        48,
+        68
+      ],
+      "anchor_px": [
+        24,
+        34
+      ],
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "duration_mode": "hold_until_state_change",
+      "loop": false,
+      "sha256": "2027f75e4f88baecf36cb4d3678f2b4bbd8dba9207322d4737107ebce8591210",
+      "use": "normal wood door frame depth layer",
+      "orientation": "horizontal",
+      "layer": "frame_rear"
+    },
+    {
+      "file": "door/horizontal_frame_front.png",
+      "canvas_size_px": [
+        48,
+        68
+      ],
+      "anchor_px": [
+        24,
+        34
+      ],
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "duration_mode": "hold_until_state_change",
+      "loop": false,
+      "sha256": "f8a9b031e7094c53bb6a610db4ae08d34816e7e2ff94a77113792a3de7fbc72e",
+      "use": "normal wood door frame depth layer",
+      "orientation": "horizontal",
+      "layer": "frame_front"
+    },
+    {
+      "file": "door/horizontal_leaf_closed_normal.png",
+      "canvas_size_px": [
+        48,
+        68
+      ],
+      "anchor_px": [
+        24,
+        34
+      ],
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "duration_mode": "hold_until_state_change",
+      "loop": false,
+      "sha256": "77a8ff52a35ee04c83239bf5f752b4af737976dca63ffb1c7b046940bdeb40e2",
+      "use": "door leaf; never stack wall in aperture",
+      "orientation": "horizontal",
+      "door_state": "closed",
+      "state": "normal"
+    },
+    {
+      "file": "door/horizontal_leaf_closed_damaged.png",
+      "canvas_size_px": [
+        48,
+        68
+      ],
+      "anchor_px": [
+        24,
+        34
+      ],
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "duration_mode": "hold_until_state_change",
+      "loop": false,
+      "sha256": "32437ebf7deebda4218004206bbb6a4318885ae14b684509088b9ce6aa32110c",
+      "use": "door leaf; never stack wall in aperture",
+      "orientation": "horizontal",
+      "door_state": "closed",
+      "state": "damaged"
+    },
+    {
+      "file": "door/horizontal_lock_closed_normal.png",
+      "canvas_size_px": [
+        48,
+        68
+      ],
+      "anchor_px": [
+        24,
+        34
+      ],
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "duration_mode": "hold_until_state_change",
+      "loop": false,
+      "sha256": "60d577d8f98d6989e54ef1b5c7e777e89721a994093d10335fa6c276749cd80a",
+      "use": "locked-door only hardware; independent lock HP state",
+      "orientation": "horizontal",
+      "door_state": "closed",
+      "lock_state": "normal"
+    },
+    {
+      "file": "door/horizontal_lock_closed_broken.png",
+      "canvas_size_px": [
+        48,
+        68
+      ],
+      "anchor_px": [
+        24,
+        34
+      ],
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "duration_mode": "hold_until_state_change",
+      "loop": false,
+      "sha256": "1f7686fe1be90ae2a2ab90abbdc1d479b4722d55b1f0d6e5046ee0143cc63832",
+      "use": "locked-door only hardware; independent lock HP state",
+      "orientation": "horizontal",
+      "door_state": "closed",
+      "lock_state": "broken"
+    },
+    {
+      "file": "door/horizontal_leaf_open_normal.png",
+      "canvas_size_px": [
+        48,
+        68
+      ],
+      "anchor_px": [
+        24,
+        34
+      ],
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "duration_mode": "hold_until_state_change",
+      "loop": false,
+      "sha256": "ffd72291f880ef5c8f9722e19a65e81b359397d08272c0806a4bd6065a1c31e4",
+      "use": "door leaf; never stack wall in aperture",
+      "orientation": "horizontal",
+      "door_state": "open",
+      "state": "normal"
+    },
+    {
+      "file": "door/horizontal_leaf_open_damaged.png",
+      "canvas_size_px": [
+        48,
+        68
+      ],
+      "anchor_px": [
+        24,
+        34
+      ],
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "duration_mode": "hold_until_state_change",
+      "loop": false,
+      "sha256": "10ff44db899bca56d9743e48a990d5363287d96239c3783bf51183d3f7a41232",
+      "use": "door leaf; never stack wall in aperture",
+      "orientation": "horizontal",
+      "door_state": "open",
+      "state": "damaged"
+    },
+    {
+      "file": "door/horizontal_lock_open_normal.png",
+      "canvas_size_px": [
+        48,
+        68
+      ],
+      "anchor_px": [
+        24,
+        34
+      ],
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "duration_mode": "hold_until_state_change",
+      "loop": false,
+      "sha256": "8ce332d4d430e28f32fde1db705a7ac9a2a673f6b865d9a1c791c7c24dd621b5",
+      "use": "locked-door only hardware; independent lock HP state",
+      "orientation": "horizontal",
+      "door_state": "open",
+      "lock_state": "normal"
+    },
+    {
+      "file": "door/horizontal_lock_open_broken.png",
+      "canvas_size_px": [
+        48,
+        68
+      ],
+      "anchor_px": [
+        24,
+        34
+      ],
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "duration_mode": "hold_until_state_change",
+      "loop": false,
+      "sha256": "0895e5d095830c4780cde737f4fcb4b650415a7e0edc1a679eafc4d4bb9986b7",
+      "use": "locked-door only hardware; independent lock HP state",
+      "orientation": "horizontal",
+      "door_state": "open",
+      "lock_state": "broken"
+    },
+    {
+      "file": "door/vertical_frame_rear.png",
+      "canvas_size_px": [
+        48,
+        68
+      ],
+      "anchor_px": [
+        24,
+        34
+      ],
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "duration_mode": "hold_until_state_change",
+      "loop": false,
+      "sha256": "79a68746b389594eb9ac4eadcf9c20fada051d68242ff3dda540466beabf6d5c",
+      "use": "normal wood door frame depth layer",
+      "orientation": "vertical",
+      "layer": "frame_rear"
+    },
+    {
+      "file": "door/vertical_frame_front.png",
+      "canvas_size_px": [
+        48,
+        68
+      ],
+      "anchor_px": [
+        24,
+        34
+      ],
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "duration_mode": "hold_until_state_change",
+      "loop": false,
+      "sha256": "81e9b6d5361a97d2b9efe51150282523e7a4ab1ffb5166e31e4ad0584208b150",
+      "use": "normal wood door frame depth layer",
+      "orientation": "vertical",
+      "layer": "frame_front"
+    },
+    {
+      "file": "door/vertical_leaf_closed_normal.png",
+      "canvas_size_px": [
+        48,
+        68
+      ],
+      "anchor_px": [
+        24,
+        34
+      ],
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "duration_mode": "hold_until_state_change",
+      "loop": false,
+      "sha256": "d81eae6c5585f23ea2b04dce19aca5ff440c1088720de1625df984d657ae6c0e",
+      "use": "door leaf; never stack wall in aperture",
+      "orientation": "vertical",
+      "door_state": "closed",
+      "state": "normal"
+    },
+    {
+      "file": "door/vertical_leaf_closed_damaged.png",
+      "canvas_size_px": [
+        48,
+        68
+      ],
+      "anchor_px": [
+        24,
+        34
+      ],
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "duration_mode": "hold_until_state_change",
+      "loop": false,
+      "sha256": "3586c4a53139383bcdd3908a8efc6f0f1081f74e36f5fc4ded9bdc1580619fbe",
+      "use": "door leaf; never stack wall in aperture",
+      "orientation": "vertical",
+      "door_state": "closed",
+      "state": "damaged"
+    },
+    {
+      "file": "door/vertical_lock_closed_normal.png",
+      "canvas_size_px": [
+        48,
+        68
+      ],
+      "anchor_px": [
+        24,
+        34
+      ],
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "duration_mode": "hold_until_state_change",
+      "loop": false,
+      "sha256": "7835309fbc6219dee5e0d432c7aedba5d7a07f13e55b5c16e2697e0667cc2182",
+      "use": "locked-door only hardware; independent lock HP state",
+      "orientation": "vertical",
+      "door_state": "closed",
+      "lock_state": "normal"
+    },
+    {
+      "file": "door/vertical_lock_closed_broken.png",
+      "canvas_size_px": [
+        48,
+        68
+      ],
+      "anchor_px": [
+        24,
+        34
+      ],
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "duration_mode": "hold_until_state_change",
+      "loop": false,
+      "sha256": "7ede1fbc4a4c164863dbc0e3dc9b05d9119beb9b1c4fffe9826d16bbbeabe5dc",
+      "use": "locked-door only hardware; independent lock HP state",
+      "orientation": "vertical",
+      "door_state": "closed",
+      "lock_state": "broken"
+    },
+    {
+      "file": "door/vertical_leaf_open_normal.png",
+      "canvas_size_px": [
+        48,
+        68
+      ],
+      "anchor_px": [
+        24,
+        34
+      ],
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "duration_mode": "hold_until_state_change",
+      "loop": false,
+      "sha256": "9bfaed3da29007e4071c9a68845e13740f46249eca0d534769348015c4b2d058",
+      "use": "door leaf; never stack wall in aperture",
+      "orientation": "vertical",
+      "door_state": "open",
+      "state": "normal"
+    },
+    {
+      "file": "door/vertical_leaf_open_damaged.png",
+      "canvas_size_px": [
+        48,
+        68
+      ],
+      "anchor_px": [
+        24,
+        34
+      ],
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "duration_mode": "hold_until_state_change",
+      "loop": false,
+      "sha256": "3602902bc11ae6fbe790f928726217faf7325fec1f81244373e286f62ea2abd6",
+      "use": "door leaf; never stack wall in aperture",
+      "orientation": "vertical",
+      "door_state": "open",
+      "state": "damaged"
+    },
+    {
+      "file": "door/vertical_lock_open_normal.png",
+      "canvas_size_px": [
+        48,
+        68
+      ],
+      "anchor_px": [
+        24,
+        34
+      ],
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "duration_mode": "hold_until_state_change",
+      "loop": false,
+      "sha256": "c4a87050b79c36ba339442562e0d67a1cfd15ecdd2b71de03357abb3e909e49b",
+      "use": "locked-door only hardware; independent lock HP state",
+      "orientation": "vertical",
+      "door_state": "open",
+      "lock_state": "normal"
+    },
+    {
+      "file": "door/vertical_lock_open_broken.png",
+      "canvas_size_px": [
+        48,
+        68
+      ],
+      "anchor_px": [
+        24,
+        34
+      ],
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "duration_mode": "hold_until_state_change",
+      "loop": false,
+      "sha256": "7db6da254f85027b3edb5eaed999f7d4594aec271a317f04ccd11f716a4052b2",
+      "use": "locked-door only hardware; independent lock HP state",
+      "orientation": "vertical",
+      "door_state": "open",
+      "lock_state": "broken"
+    }
+  ],
+  "shadow": "No external ground shadow. Material face shading only.",
+  "review_only": [
+    "review/connections.png",
+    "review/approved-room-preview.png"
+  ],
+  "unfinished": [
+    "soil/stone compatible set follows separately",
+    "runtime integration and isolated rendering checks are implementation responsibility"
+  ]
+}
