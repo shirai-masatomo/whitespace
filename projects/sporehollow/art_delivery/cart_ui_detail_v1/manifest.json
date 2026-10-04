@@ -1,0 +1,53 @@
+{
+  "delivery": "cart_ui_detail_v1",
+  "assets": [
+    {
+      "file": "cart.png",
+      "canvas_size_px": [
+        768,
+        512
+      ],
+      "anchor_px": [
+        384,
+        496
+      ],
+      "visible_bbox_exclusive_px": [
+        26,
+        33,
+        742,
+        496
+      ],
+      "logical_pixel_size": 1,
+      "action": "static_ui",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "sha256": "7541dd6310d0ca7b6b09b420f3759251b11da5c72de8cb477796b7487cae7cb7",
+      "use": "morning and market UI only",
+      "source": "../../art-production/merchant-cart-v2/originals/cart.png"
+    }
+  ],
+  "filter": "nearest",
+  "alpha": "normal RGBA binary; no white-key shader",
+  "contains_merchant": true,
+  "source_method": "existing adopted raw art processed at finer resolution; no AI regeneration or face redesign",
+  "replaces_for_ui": "../merchant_cart_v2/cart/idle_front_00.png",
+  "keep_unchanged": [
+    "board cart128x96",
+    "book all assets",
+    "keeper/Shiba/merchant actor sprites"
+  ],
+  "shadow": "no external ground shadow",
+  "review_only": [
+    "review/before-after.png",
+    "review/morning-size.png",
+    "review/alpha-and-zoom.png"
+  ],
+  "unfinished": [
+    "runtime integration and isolated render verification"
+  ]
+}
