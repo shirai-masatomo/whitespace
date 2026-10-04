@@ -1,0 +1,21 @@
+{
+  "implementation_commit": "d9f4edf8c898f2a5d8f6ea908831e7f34261fdf6",
+  "asset_delivery_commit": "f3e4ae82b68c342b928dfb5dfcebb451353f9b8d",
+  "image": {
+    "sha256": "2a76d006edc79aebb669b62f317f15ceac4e0920d867c4693d53417f04e0fdfc",
+    "dog_facing": 1,
+    "keeper_facing": 1,
+    "keeper_pos": [
+      10,
+      8
+    ],
+    "paused": true,
+    "rest": "awake",
+    "selection": "{  }",
+    "speed": 1,
+    "tick": 0,
+    "zoom": 1.0
+  },
+  "source_path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\review\\current\\characters\\native_scale.png",
+  "note": "Saved capture from implementation task; art task did not start game"
+}

@@ -1,0 +1,14 @@
+from pathlib import Path
+from PIL import Image,ImageDraw,ImageFont,ImageOps
+import json,hashlib,shutil
+R=Path(__file__).resolve().parents[2];P=R/"art-production/ranch-assets-v1";D=R/"art_delivery/ranch_assets_v1"
+ref=P/"references";ref.mkdir(exist_ok=True)
+src=Path(r"C:\Users\masat\Documents\codex_test\projects\sporehollow\review\current\characters")
+shutil.copy2(src/"native_scale.png",ref/"implementation-native-scale.png")
+j=json.loads((src/"index.json").read_text(encoding="utf-8-sig"))
+assert hashlib.sha256((ref/"implementation-native-scale.png").read_bytes()).hexdigest()==j["images"]["native_scale.png"]["sha256"]
+(ref/"capture-source.json").write_text(json.dumps({"implementation_commit":j["implementation_commit"],"asset_delivery_commit":j["asset_delivery_commit"],"image":j["images"]["native_scale.png"],"source_path":str(src/"native_scale.png"),"note":"Saved capture from implementation task; art task did not start game"},ensure_ascii=False,indent=2),encoding="utf8")
+p=P/"prepare_assets.py";s=p.read_text(encoding="utf8").replace('R/"review/current/indoors.png"','P/"references/implementation-native-scale.png"');p.write_text(s,encoding="utf8")
+# Preserve reproducible derivation of the supplemental left-facing stop.
+(R/"art-production/characters-motion-v1/add_left_idle.py").write_text("from pathlib import Path\nfrom PIL import Image,ImageOps\nimport json,hashlib\nR=Path(r\"C:\\Users\\masat\\.codex\\worktrees\\sporehollow-art\\codex_test\\projects\\sporehollow\")\nD=R/\"art_delivery/characters_motion_v1\"\nf=Image.open(R/\"art_delivery/characters_v1/keeper_idle_right_00.png\").convert(\"RGBA\")\nleft=Image.new(\"RGBA\",f.size);left.alpha_composite(ImageOps.mirror(f),(1,0))\np=D/\"keeper/idle_left_00.png\";left.save(p)\nm=json.loads((D/\"manifest.json\").read_text(encoding=\"utf8\"))\nm[\"assets\"]=[r for r in m[\"assets\"] if not (r[\"character\"]==\"keeper\" and r[\"action\"]==\"idle\")]\nm[\"assets\"].append({\"character\":\"keeper\",\"action\":\"idle\",\"direction\":\"left\",\"canvas\":[32,48],\"foot_anchor\":[16,44],\"frame_order\":[0],\"frame_duration_ms\":[None],\"duration_mode\":\"hold_until_state_change\",\"loop\":False,\"files\":[\"keeper/idle_left_00.png\"],\"status\":\"art_complete_game_integration_unverified\",\"derivation\":\"Exact adopted v1 pixel reflection about foot x16; no face redraw\",\"sha256\":{\"keeper/idle_left_00.png\":hashlib.sha256(p.read_bytes()).hexdigest()}})\n(D/\"manifest.json\").write_text(json.dumps(m,ensure_ascii=False,indent=2),encoding=\"utf8\")\np=D/\"HANDOFF.md\";s=p.read_text(encoding=\"utf8\").replace(\"計44コマと横シート\",\"計45コマ（追加動作44＋左向き停止1）と横シート\").replace(\"静止は先行納品を使う。\",\"右向き静止・柴犬静止は先行納品を使う。主人公の左向き停止は本納品 keeper/idle_left_00.png を使用する。採用v1を足元x16で反転したもので顔の描き直しはない。\")\np.write_text(s,encoding=\"utf8\")\nassert left.getbbox()[3]==44\nprint(\"Added keeper left stop\",left.getbbox())\n",encoding="utf8")
+
