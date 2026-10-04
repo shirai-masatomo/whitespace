@@ -4,6 +4,10 @@
 
 **Play.cmdの通常版は e65f7d1 / 素材5848c4f8**。UI荷車、資源12PNG、誘拐者50PNG、小演出40PNGを実描画へ接続。[取り込み結果と残る差](materials/REVIEW.md)、[取り込み後ショップ29画面](materials/shop/index.html)、[敵・運搬・演出](materials/enemies-effects/index.html)、[ビルド情報](materials/build.json)。回帰668項目・AI192試行・隔離GPU・Windows export/出力EXE起動を確認。以下のe13e16e記録とshop/の29枚は取り込み前の比較証拠。
 
+## 図鑑UI改善に向けた現状撮影（2026-10-04）
+
+実装内容e65f7d1／素材5848c4f8の図鑑を追加撮影。[レビュー観点](book/HANDOFF.md) / [代表画像](book/SCREENS.md) / [ギャラリー](book/index.html)。朝の閉表紙、柴犬・鶏・猫、育成前後、命名、開閉・ページ送りの59PNGと確認用連番GIF6本。通常初期状態と、資源を用意したレビュー状態を区別。ゲーム/UIコード・通常EXEは変更していない。
+
 ## ショップUI改善に向けた現状撮影（2026-10-04）
 
 購入/売却の各階層・全カテゴリ・初日の商品詳細・取引後を新規撮影した29枚は [ショップレビュー依頼](shop/HANDOFF.md) / [ギャラリー](shop/index.html) / [原寸一覧](shop/SCREENS.md)。abebfd3時点のゲーム内容を通常初期在庫で実操作。新納品のUI荷車・資源アイコンは未取り込みのため、差し替え前の現状として扱う。

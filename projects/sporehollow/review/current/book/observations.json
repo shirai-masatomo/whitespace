@@ -1,0 +1,6863 @@
+{
+  "events": [
+    {
+      "button": "open_book",
+      "gold": 40,
+      "position": [
+        835.0,
+        520.0
+      ]
+    },
+    {
+      "button": "rename",
+      "gold": 40,
+      "position": [
+        968.5,
+        592.0
+      ]
+    },
+    {
+      "button": "save_name",
+      "gold": 40,
+      "position": [
+        973.0,
+        642.0
+      ]
+    },
+    {
+      "button": "close_market",
+      "gold": 40,
+      "position": [
+        1102.0,
+        138.0
+      ]
+    },
+    {
+      "button": "open_market",
+      "gold": 150,
+      "position": [
+        487.0,
+        520.0
+      ]
+    },
+    {
+      "button": "shop_buy",
+      "gold": 150,
+      "position": [
+        544.0,
+        380.5
+      ]
+    },
+    {
+      "button": "category_animals",
+      "gold": 150,
+      "position": [
+        576.0,
+        365.5
+      ]
+    },
+    {
+      "button": "trade_hen_-1",
+      "gold": 150,
+      "position": [
+        678.5,
+        453.0
+      ]
+    },
+    {
+      "button": "confirm_trade",
+      "gold": 150,
+      "position": [
+        977.0,
+        519.0
+      ]
+    },
+    {
+      "button": "shop_back",
+      "gold": 120,
+      "position": [
+        964.0,
+        138.0
+      ]
+    },
+    {
+      "button": "trade_cat_-1",
+      "gold": 120,
+      "position": [
+        858.5,
+        453.0
+      ]
+    },
+    {
+      "button": "confirm_trade",
+      "gold": 120,
+      "position": [
+        977.0,
+        519.0
+      ]
+    },
+    {
+      "button": "close_market",
+      "gold": 82,
+      "position": [
+        1102.0,
+        138.0
+      ]
+    },
+    {
+      "button": "open_book",
+      "gold": 82,
+      "position": [
+        835.0,
+        520.0
+      ]
+    },
+    {
+      "button": "train_1",
+      "gold": 82,
+      "position": [
+        802.0,
+        592.0
+      ]
+    },
+    {
+      "button": "book_next",
+      "gold": 82,
+      "position": [
+        970.0,
+        698.0
+      ]
+    },
+    {
+      "button": "book_next",
+      "gold": 82,
+      "position": [
+        970.0,
+        698.0
+      ]
+    },
+    {
+      "button": "book_prev",
+      "gold": 82,
+      "position": [
+        306.0,
+        698.0
+      ]
+    }
+  ],
+  "implementation_commit": "1b1910c1ca0a651e2f819fbad86d94be75b8b7e9",
+  "method": "Current main.tscn on isolated GPU desktop. Game-local mouse press/release, LineEdit text input. Normal new campaign first; then explicitly provisioned 150 G / 100 EXP, hen and cat purchased through UI. Animation frames are viewport snapshots, not authored artwork.",
+  "runtime_commit": "e65f7d1",
+  "shots": [
+    {
+      "animal_id": -1,
+      "animals": [
+        {
+          "affinity": null,
+          "category": "dog",
+          "id": 1,
+          "loyalty": 75,
+          "lv": 1,
+          "name": "",
+          "object_attack_power": 0,
+          "species": "shiba",
+          "unavailable_through_day": 0,
+          "xp": 0
+        }
+      ],
+      "book_motion": "",
+      "buttons": {
+        "advance": {
+          "disabled": false,
+          "visible": true
+        },
+        "group0": {
+          "disabled": false,
+          "visible": false
+        },
+        "group1": {
+          "disabled": false,
+          "visible": false
+        },
+        "home": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_morning": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_resume": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "open_book": {
+          "disabled": false,
+          "visible": true
+        },
+        "open_market": {
+          "disabled": false,
+          "visible": true
+        },
+        "pause": {
+          "disabled": false,
+          "visible": false
+        },
+        "retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "speed": {
+          "disabled": false,
+          "visible": false
+        },
+        "walk": {
+          "disabled": false,
+          "visible": false
+        }
+      },
+      "category": "animals",
+      "exp_pool": 0,
+      "file": "01_morning_closed_cover.png",
+      "fixture": "normal_new_campaign",
+      "gold": 40,
+      "label": "morning_closed_cover",
+      "level": "categories",
+      "next_animal_id": -1,
+      "page": 0,
+      "product": {},
+      "rename_open": false,
+      "screen": "morning",
+      "side": "home",
+      "tick": 0
+    },
+    {
+      "animal_id": 1,
+      "animals": [
+        {
+          "affinity": null,
+          "category": "dog",
+          "id": 1,
+          "loyalty": 75,
+          "lv": 1,
+          "name": "",
+          "object_attack_power": 0,
+          "species": "shiba",
+          "unavailable_through_day": 0,
+          "xp": 0
+        }
+      ],
+      "book_motion": "opening",
+      "buttons": {
+        "advance": {
+          "disabled": false,
+          "visible": false
+        },
+        "book_next": {
+          "disabled": true,
+          "visible": false
+        },
+        "book_prev": {
+          "disabled": true,
+          "visible": false
+        },
+        "close_market": {
+          "disabled": false,
+          "visible": true
+        },
+        "group0": {
+          "disabled": false,
+          "visible": false
+        },
+        "group1": {
+          "disabled": false,
+          "visible": false
+        },
+        "home": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_morning": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_resume": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "pause": {
+          "disabled": false,
+          "visible": false
+        },
+        "rename": {
+          "disabled": false,
+          "visible": false
+        },
+        "retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "speed": {
+          "disabled": false,
+          "visible": false
+        },
+        "train_1": {
+          "disabled": true,
+          "visible": false
+        },
+        "walk": {
+          "disabled": false,
+          "visible": false
+        }
+      },
+      "category": "animals",
+      "exp_pool": 0,
+      "file": "02_opening_frame_0.png",
+      "fixture": "normal_new_campaign",
+      "gold": 40,
+      "label": "opening_frame_0",
+      "level": "categories",
+      "next_animal_id": -1,
+      "page": 0,
+      "product": {},
+      "rename_open": false,
+      "screen": "book",
+      "side": "animals",
+      "tick": 0
+    },
+    {
+      "animal_id": 1,
+      "animals": [
+        {
+          "affinity": null,
+          "category": "dog",
+          "id": 1,
+          "loyalty": 75,
+          "lv": 1,
+          "name": "",
+          "object_attack_power": 0,
+          "species": "shiba",
+          "unavailable_through_day": 0,
+          "xp": 0
+        }
+      ],
+      "book_motion": "opening",
+      "buttons": {
+        "advance": {
+          "disabled": false,
+          "visible": false
+        },
+        "book_next": {
+          "disabled": true,
+          "visible": false
+        },
+        "book_prev": {
+          "disabled": true,
+          "visible": false
+        },
+        "close_market": {
+          "disabled": false,
+          "visible": true
+        },
+        "group0": {
+          "disabled": false,
+          "visible": false
+        },
+        "group1": {
+          "disabled": false,
+          "visible": false
+        },
+        "home": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_morning": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_resume": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "pause": {
+          "disabled": false,
+          "visible": false
+        },
+        "rename": {
+          "disabled": false,
+          "visible": false
+        },
+        "retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "speed": {
+          "disabled": false,
+          "visible": false
+        },
+        "train_1": {
+          "disabled": true,
+          "visible": false
+        },
+        "walk": {
+          "disabled": false,
+          "visible": false
+        }
+      },
+      "category": "animals",
+      "exp_pool": 0,
+      "file": "03_opening_frame_1.png",
+      "fixture": "normal_new_campaign",
+      "gold": 40,
+      "label": "opening_frame_1",
+      "level": "categories",
+      "next_animal_id": -1,
+      "page": 0,
+      "product": {},
+      "rename_open": false,
+      "screen": "book",
+      "side": "animals",
+      "tick": 0
+    },
+    {
+      "animal_id": 1,
+      "animals": [
+        {
+          "affinity": null,
+          "category": "dog",
+          "id": 1,
+          "loyalty": 75,
+          "lv": 1,
+          "name": "",
+          "object_attack_power": 0,
+          "species": "shiba",
+          "unavailable_through_day": 0,
+          "xp": 0
+        }
+      ],
+      "book_motion": "opening",
+      "buttons": {
+        "advance": {
+          "disabled": false,
+          "visible": false
+        },
+        "book_next": {
+          "disabled": true,
+          "visible": false
+        },
+        "book_prev": {
+          "disabled": true,
+          "visible": false
+        },
+        "close_market": {
+          "disabled": false,
+          "visible": true
+        },
+        "group0": {
+          "disabled": false,
+          "visible": false
+        },
+        "group1": {
+          "disabled": false,
+          "visible": false
+        },
+        "home": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_morning": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_resume": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "pause": {
+          "disabled": false,
+          "visible": false
+        },
+        "rename": {
+          "disabled": false,
+          "visible": false
+        },
+        "retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "speed": {
+          "disabled": false,
+          "visible": false
+        },
+        "train_1": {
+          "disabled": true,
+          "visible": false
+        },
+        "walk": {
+          "disabled": false,
+          "visible": false
+        }
+      },
+      "category": "animals",
+      "exp_pool": 0,
+      "file": "04_opening_frame_2.png",
+      "fixture": "normal_new_campaign",
+      "gold": 40,
+      "label": "opening_frame_2",
+      "level": "categories",
+      "next_animal_id": -1,
+      "page": 0,
+      "product": {},
+      "rename_open": false,
+      "screen": "book",
+      "side": "animals",
+      "tick": 0
+    },
+    {
+      "animal_id": 1,
+      "animals": [
+        {
+          "affinity": null,
+          "category": "dog",
+          "id": 1,
+          "loyalty": 75,
+          "lv": 1,
+          "name": "",
+          "object_attack_power": 0,
+          "species": "shiba",
+          "unavailable_through_day": 0,
+          "xp": 0
+        }
+      ],
+      "book_motion": "opening",
+      "buttons": {
+        "advance": {
+          "disabled": false,
+          "visible": false
+        },
+        "book_next": {
+          "disabled": true,
+          "visible": false
+        },
+        "book_prev": {
+          "disabled": true,
+          "visible": false
+        },
+        "close_market": {
+          "disabled": false,
+          "visible": true
+        },
+        "group0": {
+          "disabled": false,
+          "visible": false
+        },
+        "group1": {
+          "disabled": false,
+          "visible": false
+        },
+        "home": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_morning": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_resume": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "pause": {
+          "disabled": false,
+          "visible": false
+        },
+        "rename": {
+          "disabled": false,
+          "visible": false
+        },
+        "retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "speed": {
+          "disabled": false,
+          "visible": false
+        },
+        "train_1": {
+          "disabled": true,
+          "visible": false
+        },
+        "walk": {
+          "disabled": false,
+          "visible": false
+        }
+      },
+      "category": "animals",
+      "exp_pool": 0,
+      "file": "05_opening_frame_3.png",
+      "fixture": "normal_new_campaign",
+      "gold": 40,
+      "label": "opening_frame_3",
+      "level": "categories",
+      "next_animal_id": -1,
+      "page": 0,
+      "product": {},
+      "rename_open": false,
+      "screen": "book",
+      "side": "animals",
+      "tick": 0
+    },
+    {
+      "animal_id": 1,
+      "animals": [
+        {
+          "affinity": null,
+          "category": "dog",
+          "id": 1,
+          "loyalty": 75,
+          "lv": 1,
+          "name": "",
+          "object_attack_power": 0,
+          "species": "shiba",
+          "unavailable_through_day": 0,
+          "xp": 0
+        }
+      ],
+      "book_motion": "opening",
+      "buttons": {
+        "advance": {
+          "disabled": false,
+          "visible": false
+        },
+        "book_next": {
+          "disabled": true,
+          "visible": false
+        },
+        "book_prev": {
+          "disabled": true,
+          "visible": false
+        },
+        "close_market": {
+          "disabled": false,
+          "visible": true
+        },
+        "group0": {
+          "disabled": false,
+          "visible": false
+        },
+        "group1": {
+          "disabled": false,
+          "visible": false
+        },
+        "home": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_morning": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_resume": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "pause": {
+          "disabled": false,
+          "visible": false
+        },
+        "rename": {
+          "disabled": false,
+          "visible": false
+        },
+        "retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "speed": {
+          "disabled": false,
+          "visible": false
+        },
+        "train_1": {
+          "disabled": true,
+          "visible": false
+        },
+        "walk": {
+          "disabled": false,
+          "visible": false
+        }
+      },
+      "category": "animals",
+      "exp_pool": 0,
+      "file": "06_opening_frame_4.png",
+      "fixture": "normal_new_campaign",
+      "gold": 40,
+      "label": "opening_frame_4",
+      "level": "categories",
+      "next_animal_id": -1,
+      "page": 0,
+      "product": {},
+      "rename_open": false,
+      "screen": "book",
+      "side": "animals",
+      "tick": 0
+    },
+    {
+      "animal_id": 1,
+      "animals": [
+        {
+          "affinity": null,
+          "category": "dog",
+          "id": 1,
+          "loyalty": 75,
+          "lv": 1,
+          "name": "",
+          "object_attack_power": 0,
+          "species": "shiba",
+          "unavailable_through_day": 0,
+          "xp": 0
+        }
+      ],
+      "book_motion": "opening",
+      "buttons": {
+        "advance": {
+          "disabled": false,
+          "visible": false
+        },
+        "book_next": {
+          "disabled": true,
+          "visible": false
+        },
+        "book_prev": {
+          "disabled": true,
+          "visible": false
+        },
+        "close_market": {
+          "disabled": false,
+          "visible": true
+        },
+        "group0": {
+          "disabled": false,
+          "visible": false
+        },
+        "group1": {
+          "disabled": false,
+          "visible": false
+        },
+        "home": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_morning": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_resume": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "pause": {
+          "disabled": false,
+          "visible": false
+        },
+        "rename": {
+          "disabled": false,
+          "visible": false
+        },
+        "retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "speed": {
+          "disabled": false,
+          "visible": false
+        },
+        "train_1": {
+          "disabled": true,
+          "visible": false
+        },
+        "walk": {
+          "disabled": false,
+          "visible": false
+        }
+      },
+      "category": "animals",
+      "exp_pool": 0,
+      "file": "07_opening_frame_5.png",
+      "fixture": "normal_new_campaign",
+      "gold": 40,
+      "label": "opening_frame_5",
+      "level": "categories",
+      "next_animal_id": -1,
+      "page": 0,
+      "product": {},
+      "rename_open": false,
+      "screen": "book",
+      "side": "animals",
+      "tick": 0
+    },
+    {
+      "animal_id": 1,
+      "animals": [
+        {
+          "affinity": null,
+          "category": "dog",
+          "id": 1,
+          "loyalty": 75,
+          "lv": 1,
+          "name": "",
+          "object_attack_power": 0,
+          "species": "shiba",
+          "unavailable_through_day": 0,
+          "xp": 0
+        }
+      ],
+      "book_motion": "opening",
+      "buttons": {
+        "advance": {
+          "disabled": false,
+          "visible": false
+        },
+        "book_next": {
+          "disabled": true,
+          "visible": false
+        },
+        "book_prev": {
+          "disabled": true,
+          "visible": false
+        },
+        "close_market": {
+          "disabled": false,
+          "visible": true
+        },
+        "group0": {
+          "disabled": false,
+          "visible": false
+        },
+        "group1": {
+          "disabled": false,
+          "visible": false
+        },
+        "home": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_morning": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_resume": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "pause": {
+          "disabled": false,
+          "visible": false
+        },
+        "rename": {
+          "disabled": false,
+          "visible": false
+        },
+        "retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "speed": {
+          "disabled": false,
+          "visible": false
+        },
+        "train_1": {
+          "disabled": true,
+          "visible": false
+        },
+        "walk": {
+          "disabled": false,
+          "visible": false
+        }
+      },
+      "category": "animals",
+      "exp_pool": 0,
+      "file": "08_opening_frame_6.png",
+      "fixture": "normal_new_campaign",
+      "gold": 40,
+      "label": "opening_frame_6",
+      "level": "categories",
+      "next_animal_id": -1,
+      "page": 0,
+      "product": {},
+      "rename_open": false,
+      "screen": "book",
+      "side": "animals",
+      "tick": 0
+    },
+    {
+      "animal_id": 1,
+      "animals": [
+        {
+          "affinity": null,
+          "category": "dog",
+          "id": 1,
+          "loyalty": 75,
+          "lv": 1,
+          "name": "",
+          "object_attack_power": 0,
+          "species": "shiba",
+          "unavailable_through_day": 0,
+          "xp": 0
+        }
+      ],
+      "book_motion": "opening",
+      "buttons": {
+        "advance": {
+          "disabled": false,
+          "visible": false
+        },
+        "book_next": {
+          "disabled": true,
+          "visible": false
+        },
+        "book_prev": {
+          "disabled": true,
+          "visible": false
+        },
+        "close_market": {
+          "disabled": false,
+          "visible": true
+        },
+        "group0": {
+          "disabled": false,
+          "visible": false
+        },
+        "group1": {
+          "disabled": false,
+          "visible": false
+        },
+        "home": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_morning": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_resume": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "pause": {
+          "disabled": false,
+          "visible": false
+        },
+        "rename": {
+          "disabled": false,
+          "visible": false
+        },
+        "retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "speed": {
+          "disabled": false,
+          "visible": false
+        },
+        "train_1": {
+          "disabled": true,
+          "visible": false
+        },
+        "walk": {
+          "disabled": false,
+          "visible": false
+        }
+      },
+      "category": "animals",
+      "exp_pool": 0,
+      "file": "09_opening_frame_7.png",
+      "fixture": "normal_new_campaign",
+      "gold": 40,
+      "label": "opening_frame_7",
+      "level": "categories",
+      "next_animal_id": -1,
+      "page": 0,
+      "product": {},
+      "rename_open": false,
+      "screen": "book",
+      "side": "animals",
+      "tick": 0
+    },
+    {
+      "animal_id": 1,
+      "animals": [
+        {
+          "affinity": null,
+          "category": "dog",
+          "id": 1,
+          "loyalty": 75,
+          "lv": 1,
+          "name": "",
+          "object_attack_power": 0,
+          "species": "shiba",
+          "unavailable_through_day": 0,
+          "xp": 0
+        }
+      ],
+      "book_motion": "",
+      "buttons": {
+        "advance": {
+          "disabled": false,
+          "visible": false
+        },
+        "book_next": {
+          "disabled": true,
+          "visible": true
+        },
+        "book_prev": {
+          "disabled": true,
+          "visible": true
+        },
+        "close_market": {
+          "disabled": false,
+          "visible": true
+        },
+        "group0": {
+          "disabled": false,
+          "visible": false
+        },
+        "group1": {
+          "disabled": false,
+          "visible": false
+        },
+        "home": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_morning": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_resume": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "pause": {
+          "disabled": false,
+          "visible": false
+        },
+        "rename": {
+          "disabled": false,
+          "visible": true
+        },
+        "retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "speed": {
+          "disabled": false,
+          "visible": false
+        },
+        "train_1": {
+          "disabled": true,
+          "visible": true
+        },
+        "walk": {
+          "disabled": false,
+          "visible": false
+        }
+      },
+      "category": "animals",
+      "exp_pool": 0,
+      "file": "10_opening_frame_8.png",
+      "fixture": "normal_new_campaign",
+      "gold": 40,
+      "label": "opening_frame_8",
+      "level": "categories",
+      "next_animal_id": -1,
+      "page": 0,
+      "product": {},
+      "rename_open": false,
+      "screen": "book",
+      "side": "animals",
+      "tick": 0
+    },
+    {
+      "animal_id": 1,
+      "animals": [
+        {
+          "affinity": null,
+          "category": "dog",
+          "id": 1,
+          "loyalty": 75,
+          "lv": 1,
+          "name": "",
+          "object_attack_power": 0,
+          "species": "shiba",
+          "unavailable_through_day": 0,
+          "xp": 0
+        }
+      ],
+      "book_motion": "",
+      "buttons": {
+        "advance": {
+          "disabled": false,
+          "visible": false
+        },
+        "book_next": {
+          "disabled": true,
+          "visible": true
+        },
+        "book_prev": {
+          "disabled": true,
+          "visible": true
+        },
+        "close_market": {
+          "disabled": false,
+          "visible": true
+        },
+        "group0": {
+          "disabled": false,
+          "visible": false
+        },
+        "group1": {
+          "disabled": false,
+          "visible": false
+        },
+        "home": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_morning": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_resume": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "pause": {
+          "disabled": false,
+          "visible": false
+        },
+        "rename": {
+          "disabled": false,
+          "visible": true
+        },
+        "retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "speed": {
+          "disabled": false,
+          "visible": false
+        },
+        "train_1": {
+          "disabled": true,
+          "visible": true
+        },
+        "walk": {
+          "disabled": false,
+          "visible": false
+        }
+      },
+      "category": "animals",
+      "exp_pool": 0,
+      "file": "11_shiba_initial_single_animal.png",
+      "fixture": "normal_new_campaign",
+      "gold": 40,
+      "label": "shiba_initial_single_animal",
+      "level": "categories",
+      "next_animal_id": -1,
+      "page": 0,
+      "product": {},
+      "rename_open": false,
+      "screen": "book",
+      "side": "animals",
+      "tick": 0
+    },
+    {
+      "animal_id": 1,
+      "animals": [
+        {
+          "affinity": null,
+          "category": "dog",
+          "id": 1,
+          "loyalty": 75,
+          "lv": 1,
+          "name": "",
+          "object_attack_power": 0,
+          "species": "shiba",
+          "unavailable_through_day": 0,
+          "xp": 0
+        }
+      ],
+      "book_motion": "",
+      "buttons": {
+        "advance": {
+          "disabled": false,
+          "visible": false
+        },
+        "book_next": {
+          "disabled": true,
+          "visible": true
+        },
+        "book_prev": {
+          "disabled": true,
+          "visible": true
+        },
+        "close_market": {
+          "disabled": false,
+          "visible": true
+        },
+        "group0": {
+          "disabled": false,
+          "visible": false
+        },
+        "group1": {
+          "disabled": false,
+          "visible": false
+        },
+        "home": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_morning": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_resume": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "pause": {
+          "disabled": false,
+          "visible": false
+        },
+        "rename": {
+          "disabled": false,
+          "visible": true
+        },
+        "retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "save_name": {
+          "disabled": false,
+          "visible": true
+        },
+        "speed": {
+          "disabled": false,
+          "visible": false
+        },
+        "train_1": {
+          "disabled": true,
+          "visible": true
+        },
+        "walk": {
+          "disabled": false,
+          "visible": false
+        }
+      },
+      "category": "animals",
+      "exp_pool": 0,
+      "file": "12_name_input.png",
+      "fixture": "normal_new_campaign",
+      "gold": 40,
+      "label": "name_input",
+      "level": "categories",
+      "next_animal_id": -1,
+      "page": 0,
+      "product": {},
+      "rename_open": true,
+      "screen": "book",
+      "side": "animals",
+      "tick": 0
+    },
+    {
+      "animal_id": 1,
+      "animals": [
+        {
+          "affinity": null,
+          "category": "dog",
+          "id": 1,
+          "loyalty": 75,
+          "lv": 1,
+          "name": "",
+          "object_attack_power": 0,
+          "species": "shiba",
+          "unavailable_through_day": 0,
+          "xp": 0
+        }
+      ],
+      "book_motion": "",
+      "buttons": {
+        "advance": {
+          "disabled": false,
+          "visible": false
+        },
+        "book_next": {
+          "disabled": true,
+          "visible": true
+        },
+        "book_prev": {
+          "disabled": true,
+          "visible": true
+        },
+        "close_market": {
+          "disabled": false,
+          "visible": true
+        },
+        "group0": {
+          "disabled": false,
+          "visible": false
+        },
+        "group1": {
+          "disabled": false,
+          "visible": false
+        },
+        "home": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_morning": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_resume": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "pause": {
+          "disabled": false,
+          "visible": false
+        },
+        "rename": {
+          "disabled": false,
+          "visible": true
+        },
+        "retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "save_name": {
+          "disabled": false,
+          "visible": true
+        },
+        "speed": {
+          "disabled": false,
+          "visible": false
+        },
+        "train_1": {
+          "disabled": true,
+          "visible": true
+        },
+        "walk": {
+          "disabled": false,
+          "visible": false
+        }
+      },
+      "category": "animals",
+      "exp_pool": 0,
+      "file": "13_name_edited.png",
+      "fixture": "normal_new_campaign",
+      "gold": 40,
+      "label": "name_edited",
+      "level": "categories",
+      "next_animal_id": -1,
+      "page": 0,
+      "product": {},
+      "rename_open": true,
+      "screen": "book",
+      "side": "animals",
+      "tick": 0
+    },
+    {
+      "animal_id": 1,
+      "animals": [
+        {
+          "affinity": null,
+          "category": "dog",
+          "id": 1,
+          "loyalty": 75,
+          "lv": 1,
+          "name": "こむぎ",
+          "object_attack_power": 0,
+          "species": "shiba",
+          "unavailable_through_day": 0,
+          "xp": 0
+        }
+      ],
+      "book_motion": "",
+      "buttons": {
+        "advance": {
+          "disabled": false,
+          "visible": false
+        },
+        "book_next": {
+          "disabled": true,
+          "visible": true
+        },
+        "book_prev": {
+          "disabled": true,
+          "visible": true
+        },
+        "close_market": {
+          "disabled": false,
+          "visible": true
+        },
+        "group0": {
+          "disabled": false,
+          "visible": false
+        },
+        "group1": {
+          "disabled": false,
+          "visible": false
+        },
+        "home": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_morning": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_resume": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "pause": {
+          "disabled": false,
+          "visible": false
+        },
+        "rename": {
+          "disabled": false,
+          "visible": true
+        },
+        "retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "speed": {
+          "disabled": false,
+          "visible": false
+        },
+        "train_1": {
+          "disabled": true,
+          "visible": true
+        },
+        "walk": {
+          "disabled": false,
+          "visible": false
+        }
+      },
+      "category": "animals",
+      "exp_pool": 0,
+      "file": "14_name_saved.png",
+      "fixture": "normal_new_campaign",
+      "gold": 40,
+      "label": "name_saved",
+      "level": "categories",
+      "next_animal_id": -1,
+      "page": 0,
+      "product": {},
+      "rename_open": false,
+      "screen": "book",
+      "side": "animals",
+      "tick": 0
+    },
+    {
+      "animal_id": 1,
+      "animals": [
+        {
+          "affinity": null,
+          "category": "dog",
+          "id": 1,
+          "loyalty": 75,
+          "lv": 1,
+          "name": "こむぎ",
+          "object_attack_power": 0,
+          "species": "shiba",
+          "unavailable_through_day": 0,
+          "xp": 0
+        }
+      ],
+      "book_motion": "closing",
+      "buttons": {
+        "advance": {
+          "disabled": false,
+          "visible": false
+        },
+        "book_next": {
+          "disabled": true,
+          "visible": false
+        },
+        "book_prev": {
+          "disabled": true,
+          "visible": false
+        },
+        "close_market": {
+          "disabled": false,
+          "visible": true
+        },
+        "group0": {
+          "disabled": false,
+          "visible": false
+        },
+        "group1": {
+          "disabled": false,
+          "visible": false
+        },
+        "home": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_morning": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_resume": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "pause": {
+          "disabled": false,
+          "visible": false
+        },
+        "rename": {
+          "disabled": false,
+          "visible": false
+        },
+        "retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "speed": {
+          "disabled": false,
+          "visible": false
+        },
+        "train_1": {
+          "disabled": true,
+          "visible": false
+        },
+        "walk": {
+          "disabled": false,
+          "visible": false
+        }
+      },
+      "category": "animals",
+      "exp_pool": 0,
+      "file": "15_closing_frame_0.png",
+      "fixture": "normal_new_campaign",
+      "gold": 40,
+      "label": "closing_frame_0",
+      "level": "categories",
+      "next_animal_id": -1,
+      "page": 0,
+      "product": {},
+      "rename_open": false,
+      "screen": "book",
+      "side": "animals",
+      "tick": 0
+    },
+    {
+      "animal_id": 1,
+      "animals": [
+        {
+          "affinity": null,
+          "category": "dog",
+          "id": 1,
+          "loyalty": 75,
+          "lv": 1,
+          "name": "こむぎ",
+          "object_attack_power": 0,
+          "species": "shiba",
+          "unavailable_through_day": 0,
+          "xp": 0
+        }
+      ],
+      "book_motion": "closing",
+      "buttons": {
+        "advance": {
+          "disabled": false,
+          "visible": false
+        },
+        "book_next": {
+          "disabled": true,
+          "visible": false
+        },
+        "book_prev": {
+          "disabled": true,
+          "visible": false
+        },
+        "close_market": {
+          "disabled": false,
+          "visible": true
+        },
+        "group0": {
+          "disabled": false,
+          "visible": false
+        },
+        "group1": {
+          "disabled": false,
+          "visible": false
+        },
+        "home": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_morning": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_resume": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "pause": {
+          "disabled": false,
+          "visible": false
+        },
+        "rename": {
+          "disabled": false,
+          "visible": false
+        },
+        "retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "speed": {
+          "disabled": false,
+          "visible": false
+        },
+        "train_1": {
+          "disabled": true,
+          "visible": false
+        },
+        "walk": {
+          "disabled": false,
+          "visible": false
+        }
+      },
+      "category": "animals",
+      "exp_pool": 0,
+      "file": "16_closing_frame_1.png",
+      "fixture": "normal_new_campaign",
+      "gold": 40,
+      "label": "closing_frame_1",
+      "level": "categories",
+      "next_animal_id": -1,
+      "page": 0,
+      "product": {},
+      "rename_open": false,
+      "screen": "book",
+      "side": "animals",
+      "tick": 0
+    },
+    {
+      "animal_id": 1,
+      "animals": [
+        {
+          "affinity": null,
+          "category": "dog",
+          "id": 1,
+          "loyalty": 75,
+          "lv": 1,
+          "name": "こむぎ",
+          "object_attack_power": 0,
+          "species": "shiba",
+          "unavailable_through_day": 0,
+          "xp": 0
+        }
+      ],
+      "book_motion": "closing",
+      "buttons": {
+        "advance": {
+          "disabled": false,
+          "visible": false
+        },
+        "book_next": {
+          "disabled": true,
+          "visible": false
+        },
+        "book_prev": {
+          "disabled": true,
+          "visible": false
+        },
+        "close_market": {
+          "disabled": false,
+          "visible": true
+        },
+        "group0": {
+          "disabled": false,
+          "visible": false
+        },
+        "group1": {
+          "disabled": false,
+          "visible": false
+        },
+        "home": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_morning": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_resume": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "pause": {
+          "disabled": false,
+          "visible": false
+        },
+        "rename": {
+          "disabled": false,
+          "visible": false
+        },
+        "retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "speed": {
+          "disabled": false,
+          "visible": false
+        },
+        "train_1": {
+          "disabled": true,
+          "visible": false
+        },
+        "walk": {
+          "disabled": false,
+          "visible": false
+        }
+      },
+      "category": "animals",
+      "exp_pool": 0,
+      "file": "17_closing_frame_2.png",
+      "fixture": "normal_new_campaign",
+      "gold": 40,
+      "label": "closing_frame_2",
+      "level": "categories",
+      "next_animal_id": -1,
+      "page": 0,
+      "product": {},
+      "rename_open": false,
+      "screen": "book",
+      "side": "animals",
+      "tick": 0
+    },
+    {
+      "animal_id": 1,
+      "animals": [
+        {
+          "affinity": null,
+          "category": "dog",
+          "id": 1,
+          "loyalty": 75,
+          "lv": 1,
+          "name": "こむぎ",
+          "object_attack_power": 0,
+          "species": "shiba",
+          "unavailable_through_day": 0,
+          "xp": 0
+        }
+      ],
+      "book_motion": "closing",
+      "buttons": {
+        "advance": {
+          "disabled": false,
+          "visible": false
+        },
+        "book_next": {
+          "disabled": true,
+          "visible": false
+        },
+        "book_prev": {
+          "disabled": true,
+          "visible": false
+        },
+        "close_market": {
+          "disabled": false,
+          "visible": true
+        },
+        "group0": {
+          "disabled": false,
+          "visible": false
+        },
+        "group1": {
+          "disabled": false,
+          "visible": false
+        },
+        "home": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_morning": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_resume": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "pause": {
+          "disabled": false,
+          "visible": false
+        },
+        "rename": {
+          "disabled": false,
+          "visible": false
+        },
+        "retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "speed": {
+          "disabled": false,
+          "visible": false
+        },
+        "train_1": {
+          "disabled": true,
+          "visible": false
+        },
+        "walk": {
+          "disabled": false,
+          "visible": false
+        }
+      },
+      "category": "animals",
+      "exp_pool": 0,
+      "file": "18_closing_frame_3.png",
+      "fixture": "normal_new_campaign",
+      "gold": 40,
+      "label": "closing_frame_3",
+      "level": "categories",
+      "next_animal_id": -1,
+      "page": 0,
+      "product": {},
+      "rename_open": false,
+      "screen": "book",
+      "side": "animals",
+      "tick": 0
+    },
+    {
+      "animal_id": 1,
+      "animals": [
+        {
+          "affinity": null,
+          "category": "dog",
+          "id": 1,
+          "loyalty": 75,
+          "lv": 1,
+          "name": "こむぎ",
+          "object_attack_power": 0,
+          "species": "shiba",
+          "unavailable_through_day": 0,
+          "xp": 0
+        }
+      ],
+      "book_motion": "closing",
+      "buttons": {
+        "advance": {
+          "disabled": false,
+          "visible": false
+        },
+        "book_next": {
+          "disabled": true,
+          "visible": false
+        },
+        "book_prev": {
+          "disabled": true,
+          "visible": false
+        },
+        "close_market": {
+          "disabled": false,
+          "visible": true
+        },
+        "group0": {
+          "disabled": false,
+          "visible": false
+        },
+        "group1": {
+          "disabled": false,
+          "visible": false
+        },
+        "home": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_morning": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_resume": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "pause": {
+          "disabled": false,
+          "visible": false
+        },
+        "rename": {
+          "disabled": false,
+          "visible": false
+        },
+        "retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "speed": {
+          "disabled": false,
+          "visible": false
+        },
+        "train_1": {
+          "disabled": true,
+          "visible": false
+        },
+        "walk": {
+          "disabled": false,
+          "visible": false
+        }
+      },
+      "category": "animals",
+      "exp_pool": 0,
+      "file": "19_closing_frame_4.png",
+      "fixture": "normal_new_campaign",
+      "gold": 40,
+      "label": "closing_frame_4",
+      "level": "categories",
+      "next_animal_id": -1,
+      "page": 0,
+      "product": {},
+      "rename_open": false,
+      "screen": "book",
+      "side": "animals",
+      "tick": 0
+    },
+    {
+      "animal_id": 1,
+      "animals": [
+        {
+          "affinity": null,
+          "category": "dog",
+          "id": 1,
+          "loyalty": 75,
+          "lv": 1,
+          "name": "こむぎ",
+          "object_attack_power": 0,
+          "species": "shiba",
+          "unavailable_through_day": 0,
+          "xp": 0
+        }
+      ],
+      "book_motion": "closing",
+      "buttons": {
+        "advance": {
+          "disabled": false,
+          "visible": false
+        },
+        "book_next": {
+          "disabled": true,
+          "visible": false
+        },
+        "book_prev": {
+          "disabled": true,
+          "visible": false
+        },
+        "close_market": {
+          "disabled": false,
+          "visible": true
+        },
+        "group0": {
+          "disabled": false,
+          "visible": false
+        },
+        "group1": {
+          "disabled": false,
+          "visible": false
+        },
+        "home": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_morning": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_resume": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "pause": {
+          "disabled": false,
+          "visible": false
+        },
+        "rename": {
+          "disabled": false,
+          "visible": false
+        },
+        "retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "speed": {
+          "disabled": false,
+          "visible": false
+        },
+        "train_1": {
+          "disabled": true,
+          "visible": false
+        },
+        "walk": {
+          "disabled": false,
+          "visible": false
+        }
+      },
+      "category": "animals",
+      "exp_pool": 0,
+      "file": "20_closing_frame_5.png",
+      "fixture": "normal_new_campaign",
+      "gold": 40,
+      "label": "closing_frame_5",
+      "level": "categories",
+      "next_animal_id": -1,
+      "page": 0,
+      "product": {},
+      "rename_open": false,
+      "screen": "book",
+      "side": "animals",
+      "tick": 0
+    },
+    {
+      "animal_id": 1,
+      "animals": [
+        {
+          "affinity": null,
+          "category": "dog",
+          "id": 1,
+          "loyalty": 75,
+          "lv": 1,
+          "name": "こむぎ",
+          "object_attack_power": 0,
+          "species": "shiba",
+          "unavailable_through_day": 0,
+          "xp": 0
+        }
+      ],
+      "book_motion": "closing",
+      "buttons": {
+        "advance": {
+          "disabled": false,
+          "visible": false
+        },
+        "book_next": {
+          "disabled": true,
+          "visible": false
+        },
+        "book_prev": {
+          "disabled": true,
+          "visible": false
+        },
+        "close_market": {
+          "disabled": false,
+          "visible": true
+        },
+        "group0": {
+          "disabled": false,
+          "visible": false
+        },
+        "group1": {
+          "disabled": false,
+          "visible": false
+        },
+        "home": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_morning": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_resume": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "pause": {
+          "disabled": false,
+          "visible": false
+        },
+        "rename": {
+          "disabled": false,
+          "visible": false
+        },
+        "retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "speed": {
+          "disabled": false,
+          "visible": false
+        },
+        "train_1": {
+          "disabled": true,
+          "visible": false
+        },
+        "walk": {
+          "disabled": false,
+          "visible": false
+        }
+      },
+      "category": "animals",
+      "exp_pool": 0,
+      "file": "21_closing_frame_6.png",
+      "fixture": "normal_new_campaign",
+      "gold": 40,
+      "label": "closing_frame_6",
+      "level": "categories",
+      "next_animal_id": -1,
+      "page": 0,
+      "product": {},
+      "rename_open": false,
+      "screen": "book",
+      "side": "animals",
+      "tick": 0
+    },
+    {
+      "animal_id": 1,
+      "animals": [
+        {
+          "affinity": null,
+          "category": "dog",
+          "id": 1,
+          "loyalty": 75,
+          "lv": 1,
+          "name": "こむぎ",
+          "object_attack_power": 0,
+          "species": "shiba",
+          "unavailable_through_day": 0,
+          "xp": 0
+        }
+      ],
+      "book_motion": "closing",
+      "buttons": {
+        "advance": {
+          "disabled": false,
+          "visible": false
+        },
+        "book_next": {
+          "disabled": true,
+          "visible": false
+        },
+        "book_prev": {
+          "disabled": true,
+          "visible": false
+        },
+        "close_market": {
+          "disabled": false,
+          "visible": true
+        },
+        "group0": {
+          "disabled": false,
+          "visible": false
+        },
+        "group1": {
+          "disabled": false,
+          "visible": false
+        },
+        "home": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_morning": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_resume": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "pause": {
+          "disabled": false,
+          "visible": false
+        },
+        "rename": {
+          "disabled": false,
+          "visible": false
+        },
+        "retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "speed": {
+          "disabled": false,
+          "visible": false
+        },
+        "train_1": {
+          "disabled": true,
+          "visible": false
+        },
+        "walk": {
+          "disabled": false,
+          "visible": false
+        }
+      },
+      "category": "animals",
+      "exp_pool": 0,
+      "file": "22_closing_frame_7.png",
+      "fixture": "normal_new_campaign",
+      "gold": 40,
+      "label": "closing_frame_7",
+      "level": "categories",
+      "next_animal_id": -1,
+      "page": 0,
+      "product": {},
+      "rename_open": false,
+      "screen": "book",
+      "side": "animals",
+      "tick": 0
+    },
+    {
+      "animal_id": 1,
+      "animals": [
+        {
+          "affinity": null,
+          "category": "dog",
+          "id": 1,
+          "loyalty": 75,
+          "lv": 1,
+          "name": "こむぎ",
+          "object_attack_power": 0,
+          "species": "shiba",
+          "unavailable_through_day": 0,
+          "xp": 0
+        }
+      ],
+      "book_motion": "",
+      "buttons": {
+        "advance": {
+          "disabled": false,
+          "visible": true
+        },
+        "group0": {
+          "disabled": false,
+          "visible": false
+        },
+        "group1": {
+          "disabled": false,
+          "visible": false
+        },
+        "home": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_morning": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_resume": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "open_book": {
+          "disabled": false,
+          "visible": true
+        },
+        "open_market": {
+          "disabled": false,
+          "visible": true
+        },
+        "pause": {
+          "disabled": false,
+          "visible": false
+        },
+        "retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "speed": {
+          "disabled": false,
+          "visible": false
+        },
+        "walk": {
+          "disabled": false,
+          "visible": false
+        }
+      },
+      "category": "animals",
+      "exp_pool": 0,
+      "file": "23_closing_frame_8.png",
+      "fixture": "normal_new_campaign",
+      "gold": 40,
+      "label": "closing_frame_8",
+      "level": "categories",
+      "next_animal_id": -1,
+      "page": 0,
+      "product": {},
+      "rename_open": false,
+      "screen": "morning",
+      "side": "home",
+      "tick": 0
+    },
+    {
+      "animal_id": 1,
+      "animals": [
+        {
+          "affinity": null,
+          "category": "dog",
+          "id": 1,
+          "loyalty": 75,
+          "lv": 1,
+          "name": "こむぎ",
+          "object_attack_power": 0,
+          "species": "shiba",
+          "unavailable_through_day": 0,
+          "xp": 0
+        }
+      ],
+      "book_motion": "",
+      "buttons": {
+        "advance": {
+          "disabled": false,
+          "visible": true
+        },
+        "group0": {
+          "disabled": false,
+          "visible": false
+        },
+        "group1": {
+          "disabled": false,
+          "visible": false
+        },
+        "home": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_morning": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_resume": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "open_book": {
+          "disabled": false,
+          "visible": true
+        },
+        "open_market": {
+          "disabled": false,
+          "visible": true
+        },
+        "pause": {
+          "disabled": false,
+          "visible": false
+        },
+        "retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "speed": {
+          "disabled": false,
+          "visible": false
+        },
+        "walk": {
+          "disabled": false,
+          "visible": false
+        }
+      },
+      "category": "animals",
+      "exp_pool": 0,
+      "file": "24_closed_back_to_morning.png",
+      "fixture": "normal_new_campaign",
+      "gold": 40,
+      "label": "closed_back_to_morning",
+      "level": "categories",
+      "next_animal_id": -1,
+      "page": 0,
+      "product": {},
+      "rename_open": false,
+      "screen": "morning",
+      "side": "home",
+      "tick": 0
+    },
+    {
+      "animal_id": 1,
+      "animals": [
+        {
+          "affinity": null,
+          "category": "dog",
+          "id": 1,
+          "loyalty": 75,
+          "lv": 1,
+          "name": "こむぎ",
+          "object_attack_power": 0,
+          "species": "shiba",
+          "unavailable_through_day": 0,
+          "xp": 0
+        },
+        {
+          "affinity": null,
+          "category": "bird",
+          "id": 2,
+          "loyalty": 0,
+          "lv": 1,
+          "name": "",
+          "species": "hen",
+          "traits": {},
+          "unavailable_through_day": 0,
+          "xp": 0
+        },
+        {
+          "affinity": 0,
+          "category": "cat",
+          "id": 3,
+          "loyalty": 0,
+          "lv": 1,
+          "name": "",
+          "species": "cat",
+          "traits": {},
+          "unavailable_through_day": 0,
+          "xp": 0
+        }
+      ],
+      "book_motion": "",
+      "buttons": {
+        "advance": {
+          "disabled": false,
+          "visible": false
+        },
+        "book_next": {
+          "disabled": false,
+          "visible": true
+        },
+        "book_prev": {
+          "disabled": false,
+          "visible": true
+        },
+        "close_market": {
+          "disabled": false,
+          "visible": true
+        },
+        "group0": {
+          "disabled": false,
+          "visible": false
+        },
+        "group1": {
+          "disabled": false,
+          "visible": false
+        },
+        "home": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_morning": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_resume": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "pause": {
+          "disabled": false,
+          "visible": false
+        },
+        "rename": {
+          "disabled": false,
+          "visible": true
+        },
+        "retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "speed": {
+          "disabled": false,
+          "visible": false
+        },
+        "train_1": {
+          "disabled": false,
+          "visible": true
+        },
+        "walk": {
+          "disabled": false,
+          "visible": false
+        }
+      },
+      "category": "animals",
+      "exp_pool": 100,
+      "file": "25_shiba_training_available.png",
+      "fixture": "review_resources_gold_150_exp_100",
+      "gold": 82,
+      "label": "shiba_training_available",
+      "level": "detail",
+      "next_animal_id": -1,
+      "page": 0,
+      "product": {
+        "animal_id": -1,
+        "count": 1,
+        "id": "cat"
+      },
+      "rename_open": false,
+      "screen": "book",
+      "side": "animals",
+      "tick": 0
+    },
+    {
+      "animal_id": 1,
+      "animals": [
+        {
+          "affinity": null,
+          "category": "dog",
+          "id": 1,
+          "loyalty": 75,
+          "lv": 2,
+          "name": "こむぎ",
+          "object_attack_power": 0,
+          "species": "shiba",
+          "unavailable_through_day": 0,
+          "xp": 0
+        },
+        {
+          "affinity": null,
+          "category": "bird",
+          "id": 2,
+          "loyalty": 0,
+          "lv": 1,
+          "name": "",
+          "species": "hen",
+          "traits": {},
+          "unavailable_through_day": 0,
+          "xp": 0
+        },
+        {
+          "affinity": 0,
+          "category": "cat",
+          "id": 3,
+          "loyalty": 0,
+          "lv": 1,
+          "name": "",
+          "species": "cat",
+          "traits": {},
+          "unavailable_through_day": 0,
+          "xp": 0
+        }
+      ],
+      "book_motion": "",
+      "buttons": {
+        "advance": {
+          "disabled": false,
+          "visible": false
+        },
+        "book_next": {
+          "disabled": false,
+          "visible": true
+        },
+        "book_prev": {
+          "disabled": false,
+          "visible": true
+        },
+        "close_market": {
+          "disabled": false,
+          "visible": true
+        },
+        "group0": {
+          "disabled": false,
+          "visible": false
+        },
+        "group1": {
+          "disabled": false,
+          "visible": false
+        },
+        "home": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_morning": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_resume": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "pause": {
+          "disabled": false,
+          "visible": false
+        },
+        "rename": {
+          "disabled": false,
+          "visible": true
+        },
+        "retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "speed": {
+          "disabled": false,
+          "visible": false
+        },
+        "train_1": {
+          "disabled": false,
+          "visible": true
+        },
+        "walk": {
+          "disabled": false,
+          "visible": false
+        }
+      },
+      "category": "animals",
+      "exp_pool": 80,
+      "file": "26_shiba_after_training.png",
+      "fixture": "review_resources_gold_150_exp_100",
+      "gold": 82,
+      "label": "shiba_after_training",
+      "level": "detail",
+      "next_animal_id": -1,
+      "page": 0,
+      "product": {
+        "animal_id": -1,
+        "count": 1,
+        "id": "cat"
+      },
+      "rename_open": false,
+      "screen": "book",
+      "side": "animals",
+      "tick": 0
+    },
+    {
+      "animal_id": 1,
+      "animals": [
+        {
+          "affinity": null,
+          "category": "dog",
+          "id": 1,
+          "loyalty": 75,
+          "lv": 2,
+          "name": "こむぎ",
+          "object_attack_power": 0,
+          "species": "shiba",
+          "unavailable_through_day": 0,
+          "xp": 0
+        },
+        {
+          "affinity": null,
+          "category": "bird",
+          "id": 2,
+          "loyalty": 0,
+          "lv": 1,
+          "name": "",
+          "species": "hen",
+          "traits": {},
+          "unavailable_through_day": 0,
+          "xp": 0
+        },
+        {
+          "affinity": 0,
+          "category": "cat",
+          "id": 3,
+          "loyalty": 0,
+          "lv": 1,
+          "name": "",
+          "species": "cat",
+          "traits": {},
+          "unavailable_through_day": 0,
+          "xp": 0
+        }
+      ],
+      "book_motion": "turning_next",
+      "buttons": {
+        "advance": {
+          "disabled": false,
+          "visible": false
+        },
+        "book_next": {
+          "disabled": false,
+          "visible": false
+        },
+        "book_prev": {
+          "disabled": false,
+          "visible": false
+        },
+        "close_market": {
+          "disabled": false,
+          "visible": true
+        },
+        "group0": {
+          "disabled": false,
+          "visible": false
+        },
+        "group1": {
+          "disabled": false,
+          "visible": false
+        },
+        "home": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_morning": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_resume": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "pause": {
+          "disabled": false,
+          "visible": false
+        },
+        "rename": {
+          "disabled": false,
+          "visible": false
+        },
+        "retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "speed": {
+          "disabled": false,
+          "visible": false
+        },
+        "train_1": {
+          "disabled": false,
+          "visible": false
+        },
+        "walk": {
+          "disabled": false,
+          "visible": false
+        }
+      },
+      "category": "animals",
+      "exp_pool": 80,
+      "file": "27_turn_next_hen_frame_0.png",
+      "fixture": "review_resources_gold_150_exp_100",
+      "gold": 82,
+      "label": "turn_next_hen_frame_0",
+      "level": "detail",
+      "next_animal_id": 2,
+      "page": 0,
+      "product": {
+        "animal_id": -1,
+        "count": 1,
+        "id": "cat"
+      },
+      "rename_open": false,
+      "screen": "book",
+      "side": "animals",
+      "tick": 0
+    },
+    {
+      "animal_id": 1,
+      "animals": [
+        {
+          "affinity": null,
+          "category": "dog",
+          "id": 1,
+          "loyalty": 75,
+          "lv": 2,
+          "name": "こむぎ",
+          "object_attack_power": 0,
+          "species": "shiba",
+          "unavailable_through_day": 0,
+          "xp": 0
+        },
+        {
+          "affinity": null,
+          "category": "bird",
+          "id": 2,
+          "loyalty": 0,
+          "lv": 1,
+          "name": "",
+          "species": "hen",
+          "traits": {},
+          "unavailable_through_day": 0,
+          "xp": 0
+        },
+        {
+          "affinity": 0,
+          "category": "cat",
+          "id": 3,
+          "loyalty": 0,
+          "lv": 1,
+          "name": "",
+          "species": "cat",
+          "traits": {},
+          "unavailable_through_day": 0,
+          "xp": 0
+        }
+      ],
+      "book_motion": "turning_next",
+      "buttons": {
+        "advance": {
+          "disabled": false,
+          "visible": false
+        },
+        "book_next": {
+          "disabled": false,
+          "visible": false
+        },
+        "book_prev": {
+          "disabled": false,
+          "visible": false
+        },
+        "close_market": {
+          "disabled": false,
+          "visible": true
+        },
+        "group0": {
+          "disabled": false,
+          "visible": false
+        },
+        "group1": {
+          "disabled": false,
+          "visible": false
+        },
+        "home": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_morning": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_resume": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "pause": {
+          "disabled": false,
+          "visible": false
+        },
+        "rename": {
+          "disabled": false,
+          "visible": false
+        },
+        "retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "speed": {
+          "disabled": false,
+          "visible": false
+        },
+        "train_1": {
+          "disabled": false,
+          "visible": false
+        },
+        "walk": {
+          "disabled": false,
+          "visible": false
+        }
+      },
+      "category": "animals",
+      "exp_pool": 80,
+      "file": "28_turn_next_hen_frame_1.png",
+      "fixture": "review_resources_gold_150_exp_100",
+      "gold": 82,
+      "label": "turn_next_hen_frame_1",
+      "level": "detail",
+      "next_animal_id": 2,
+      "page": 0,
+      "product": {
+        "animal_id": -1,
+        "count": 1,
+        "id": "cat"
+      },
+      "rename_open": false,
+      "screen": "book",
+      "side": "animals",
+      "tick": 0
+    },
+    {
+      "animal_id": 1,
+      "animals": [
+        {
+          "affinity": null,
+          "category": "dog",
+          "id": 1,
+          "loyalty": 75,
+          "lv": 2,
+          "name": "こむぎ",
+          "object_attack_power": 0,
+          "species": "shiba",
+          "unavailable_through_day": 0,
+          "xp": 0
+        },
+        {
+          "affinity": null,
+          "category": "bird",
+          "id": 2,
+          "loyalty": 0,
+          "lv": 1,
+          "name": "",
+          "species": "hen",
+          "traits": {},
+          "unavailable_through_day": 0,
+          "xp": 0
+        },
+        {
+          "affinity": 0,
+          "category": "cat",
+          "id": 3,
+          "loyalty": 0,
+          "lv": 1,
+          "name": "",
+          "species": "cat",
+          "traits": {},
+          "unavailable_through_day": 0,
+          "xp": 0
+        }
+      ],
+      "book_motion": "turning_next",
+      "buttons": {
+        "advance": {
+          "disabled": false,
+          "visible": false
+        },
+        "book_next": {
+          "disabled": false,
+          "visible": false
+        },
+        "book_prev": {
+          "disabled": false,
+          "visible": false
+        },
+        "close_market": {
+          "disabled": false,
+          "visible": true
+        },
+        "group0": {
+          "disabled": false,
+          "visible": false
+        },
+        "group1": {
+          "disabled": false,
+          "visible": false
+        },
+        "home": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_morning": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_resume": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "pause": {
+          "disabled": false,
+          "visible": false
+        },
+        "rename": {
+          "disabled": false,
+          "visible": false
+        },
+        "retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "speed": {
+          "disabled": false,
+          "visible": false
+        },
+        "train_1": {
+          "disabled": false,
+          "visible": false
+        },
+        "walk": {
+          "disabled": false,
+          "visible": false
+        }
+      },
+      "category": "animals",
+      "exp_pool": 80,
+      "file": "29_turn_next_hen_frame_2.png",
+      "fixture": "review_resources_gold_150_exp_100",
+      "gold": 82,
+      "label": "turn_next_hen_frame_2",
+      "level": "detail",
+      "next_animal_id": 2,
+      "page": 0,
+      "product": {
+        "animal_id": -1,
+        "count": 1,
+        "id": "cat"
+      },
+      "rename_open": false,
+      "screen": "book",
+      "side": "animals",
+      "tick": 0
+    },
+    {
+      "animal_id": 1,
+      "animals": [
+        {
+          "affinity": null,
+          "category": "dog",
+          "id": 1,
+          "loyalty": 75,
+          "lv": 2,
+          "name": "こむぎ",
+          "object_attack_power": 0,
+          "species": "shiba",
+          "unavailable_through_day": 0,
+          "xp": 0
+        },
+        {
+          "affinity": null,
+          "category": "bird",
+          "id": 2,
+          "loyalty": 0,
+          "lv": 1,
+          "name": "",
+          "species": "hen",
+          "traits": {},
+          "unavailable_through_day": 0,
+          "xp": 0
+        },
+        {
+          "affinity": 0,
+          "category": "cat",
+          "id": 3,
+          "loyalty": 0,
+          "lv": 1,
+          "name": "",
+          "species": "cat",
+          "traits": {},
+          "unavailable_through_day": 0,
+          "xp": 0
+        }
+      ],
+      "book_motion": "turning_next",
+      "buttons": {
+        "advance": {
+          "disabled": false,
+          "visible": false
+        },
+        "book_next": {
+          "disabled": false,
+          "visible": false
+        },
+        "book_prev": {
+          "disabled": false,
+          "visible": false
+        },
+        "close_market": {
+          "disabled": false,
+          "visible": true
+        },
+        "group0": {
+          "disabled": false,
+          "visible": false
+        },
+        "group1": {
+          "disabled": false,
+          "visible": false
+        },
+        "home": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_morning": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_resume": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "pause": {
+          "disabled": false,
+          "visible": false
+        },
+        "rename": {
+          "disabled": false,
+          "visible": false
+        },
+        "retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "speed": {
+          "disabled": false,
+          "visible": false
+        },
+        "train_1": {
+          "disabled": false,
+          "visible": false
+        },
+        "walk": {
+          "disabled": false,
+          "visible": false
+        }
+      },
+      "category": "animals",
+      "exp_pool": 80,
+      "file": "30_turn_next_hen_frame_3.png",
+      "fixture": "review_resources_gold_150_exp_100",
+      "gold": 82,
+      "label": "turn_next_hen_frame_3",
+      "level": "detail",
+      "next_animal_id": 2,
+      "page": 0,
+      "product": {
+        "animal_id": -1,
+        "count": 1,
+        "id": "cat"
+      },
+      "rename_open": false,
+      "screen": "book",
+      "side": "animals",
+      "tick": 0
+    },
+    {
+      "animal_id": 1,
+      "animals": [
+        {
+          "affinity": null,
+          "category": "dog",
+          "id": 1,
+          "loyalty": 75,
+          "lv": 2,
+          "name": "こむぎ",
+          "object_attack_power": 0,
+          "species": "shiba",
+          "unavailable_through_day": 0,
+          "xp": 0
+        },
+        {
+          "affinity": null,
+          "category": "bird",
+          "id": 2,
+          "loyalty": 0,
+          "lv": 1,
+          "name": "",
+          "species": "hen",
+          "traits": {},
+          "unavailable_through_day": 0,
+          "xp": 0
+        },
+        {
+          "affinity": 0,
+          "category": "cat",
+          "id": 3,
+          "loyalty": 0,
+          "lv": 1,
+          "name": "",
+          "species": "cat",
+          "traits": {},
+          "unavailable_through_day": 0,
+          "xp": 0
+        }
+      ],
+      "book_motion": "turning_next",
+      "buttons": {
+        "advance": {
+          "disabled": false,
+          "visible": false
+        },
+        "book_next": {
+          "disabled": false,
+          "visible": false
+        },
+        "book_prev": {
+          "disabled": false,
+          "visible": false
+        },
+        "close_market": {
+          "disabled": false,
+          "visible": true
+        },
+        "group0": {
+          "disabled": false,
+          "visible": false
+        },
+        "group1": {
+          "disabled": false,
+          "visible": false
+        },
+        "home": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_morning": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_resume": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "pause": {
+          "disabled": false,
+          "visible": false
+        },
+        "rename": {
+          "disabled": false,
+          "visible": false
+        },
+        "retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "speed": {
+          "disabled": false,
+          "visible": false
+        },
+        "train_1": {
+          "disabled": false,
+          "visible": false
+        },
+        "walk": {
+          "disabled": false,
+          "visible": false
+        }
+      },
+      "category": "animals",
+      "exp_pool": 80,
+      "file": "31_turn_next_hen_frame_4.png",
+      "fixture": "review_resources_gold_150_exp_100",
+      "gold": 82,
+      "label": "turn_next_hen_frame_4",
+      "level": "detail",
+      "next_animal_id": 2,
+      "page": 0,
+      "product": {
+        "animal_id": -1,
+        "count": 1,
+        "id": "cat"
+      },
+      "rename_open": false,
+      "screen": "book",
+      "side": "animals",
+      "tick": 0
+    },
+    {
+      "animal_id": 1,
+      "animals": [
+        {
+          "affinity": null,
+          "category": "dog",
+          "id": 1,
+          "loyalty": 75,
+          "lv": 2,
+          "name": "こむぎ",
+          "object_attack_power": 0,
+          "species": "shiba",
+          "unavailable_through_day": 0,
+          "xp": 0
+        },
+        {
+          "affinity": null,
+          "category": "bird",
+          "id": 2,
+          "loyalty": 0,
+          "lv": 1,
+          "name": "",
+          "species": "hen",
+          "traits": {},
+          "unavailable_through_day": 0,
+          "xp": 0
+        },
+        {
+          "affinity": 0,
+          "category": "cat",
+          "id": 3,
+          "loyalty": 0,
+          "lv": 1,
+          "name": "",
+          "species": "cat",
+          "traits": {},
+          "unavailable_through_day": 0,
+          "xp": 0
+        }
+      ],
+      "book_motion": "turning_next",
+      "buttons": {
+        "advance": {
+          "disabled": false,
+          "visible": false
+        },
+        "book_next": {
+          "disabled": false,
+          "visible": false
+        },
+        "book_prev": {
+          "disabled": false,
+          "visible": false
+        },
+        "close_market": {
+          "disabled": false,
+          "visible": true
+        },
+        "group0": {
+          "disabled": false,
+          "visible": false
+        },
+        "group1": {
+          "disabled": false,
+          "visible": false
+        },
+        "home": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_morning": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_resume": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "pause": {
+          "disabled": false,
+          "visible": false
+        },
+        "rename": {
+          "disabled": false,
+          "visible": false
+        },
+        "retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "speed": {
+          "disabled": false,
+          "visible": false
+        },
+        "train_1": {
+          "disabled": false,
+          "visible": false
+        },
+        "walk": {
+          "disabled": false,
+          "visible": false
+        }
+      },
+      "category": "animals",
+      "exp_pool": 80,
+      "file": "32_turn_next_hen_frame_5.png",
+      "fixture": "review_resources_gold_150_exp_100",
+      "gold": 82,
+      "label": "turn_next_hen_frame_5",
+      "level": "detail",
+      "next_animal_id": 2,
+      "page": 0,
+      "product": {
+        "animal_id": -1,
+        "count": 1,
+        "id": "cat"
+      },
+      "rename_open": false,
+      "screen": "book",
+      "side": "animals",
+      "tick": 0
+    },
+    {
+      "animal_id": 2,
+      "animals": [
+        {
+          "affinity": null,
+          "category": "dog",
+          "id": 1,
+          "loyalty": 75,
+          "lv": 2,
+          "name": "こむぎ",
+          "object_attack_power": 0,
+          "species": "shiba",
+          "unavailable_through_day": 0,
+          "xp": 0
+        },
+        {
+          "affinity": null,
+          "category": "bird",
+          "id": 2,
+          "loyalty": 0,
+          "lv": 1,
+          "name": "",
+          "species": "hen",
+          "traits": {},
+          "unavailable_through_day": 0,
+          "xp": 0
+        },
+        {
+          "affinity": 0,
+          "category": "cat",
+          "id": 3,
+          "loyalty": 0,
+          "lv": 1,
+          "name": "",
+          "species": "cat",
+          "traits": {},
+          "unavailable_through_day": 0,
+          "xp": 0
+        }
+      ],
+      "book_motion": "",
+      "buttons": {
+        "advance": {
+          "disabled": false,
+          "visible": false
+        },
+        "book_next": {
+          "disabled": false,
+          "visible": true
+        },
+        "book_prev": {
+          "disabled": false,
+          "visible": true
+        },
+        "close_market": {
+          "disabled": false,
+          "visible": true
+        },
+        "group0": {
+          "disabled": false,
+          "visible": false
+        },
+        "group1": {
+          "disabled": false,
+          "visible": false
+        },
+        "home": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_morning": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_resume": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "pause": {
+          "disabled": false,
+          "visible": false
+        },
+        "rename": {
+          "disabled": false,
+          "visible": true
+        },
+        "retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "speed": {
+          "disabled": false,
+          "visible": false
+        },
+        "train_2": {
+          "disabled": false,
+          "visible": true
+        },
+        "walk": {
+          "disabled": false,
+          "visible": false
+        }
+      },
+      "category": "animals",
+      "exp_pool": 80,
+      "file": "33_turn_next_hen_frame_6.png",
+      "fixture": "review_resources_gold_150_exp_100",
+      "gold": 82,
+      "label": "turn_next_hen_frame_6",
+      "level": "detail",
+      "next_animal_id": 2,
+      "page": 0,
+      "product": {
+        "animal_id": -1,
+        "count": 1,
+        "id": "cat"
+      },
+      "rename_open": false,
+      "screen": "book",
+      "side": "animals",
+      "tick": 0
+    },
+    {
+      "animal_id": 2,
+      "animals": [
+        {
+          "affinity": null,
+          "category": "dog",
+          "id": 1,
+          "loyalty": 75,
+          "lv": 2,
+          "name": "こむぎ",
+          "object_attack_power": 0,
+          "species": "shiba",
+          "unavailable_through_day": 0,
+          "xp": 0
+        },
+        {
+          "affinity": null,
+          "category": "bird",
+          "id": 2,
+          "loyalty": 0,
+          "lv": 1,
+          "name": "",
+          "species": "hen",
+          "traits": {},
+          "unavailable_through_day": 0,
+          "xp": 0
+        },
+        {
+          "affinity": 0,
+          "category": "cat",
+          "id": 3,
+          "loyalty": 0,
+          "lv": 1,
+          "name": "",
+          "species": "cat",
+          "traits": {},
+          "unavailable_through_day": 0,
+          "xp": 0
+        }
+      ],
+      "book_motion": "",
+      "buttons": {
+        "advance": {
+          "disabled": false,
+          "visible": false
+        },
+        "book_next": {
+          "disabled": false,
+          "visible": true
+        },
+        "book_prev": {
+          "disabled": false,
+          "visible": true
+        },
+        "close_market": {
+          "disabled": false,
+          "visible": true
+        },
+        "group0": {
+          "disabled": false,
+          "visible": false
+        },
+        "group1": {
+          "disabled": false,
+          "visible": false
+        },
+        "home": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_morning": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_resume": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "pause": {
+          "disabled": false,
+          "visible": false
+        },
+        "rename": {
+          "disabled": false,
+          "visible": true
+        },
+        "retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "speed": {
+          "disabled": false,
+          "visible": false
+        },
+        "train_2": {
+          "disabled": false,
+          "visible": true
+        },
+        "walk": {
+          "disabled": false,
+          "visible": false
+        }
+      },
+      "category": "animals",
+      "exp_pool": 80,
+      "file": "34_hen_page.png",
+      "fixture": "review_resources_gold_150_exp_100",
+      "gold": 82,
+      "label": "hen_page",
+      "level": "detail",
+      "next_animal_id": 2,
+      "page": 0,
+      "product": {
+        "animal_id": -1,
+        "count": 1,
+        "id": "cat"
+      },
+      "rename_open": false,
+      "screen": "book",
+      "side": "animals",
+      "tick": 0
+    },
+    {
+      "animal_id": 2,
+      "animals": [
+        {
+          "affinity": null,
+          "category": "dog",
+          "id": 1,
+          "loyalty": 75,
+          "lv": 2,
+          "name": "こむぎ",
+          "object_attack_power": 0,
+          "species": "shiba",
+          "unavailable_through_day": 0,
+          "xp": 0
+        },
+        {
+          "affinity": null,
+          "category": "bird",
+          "id": 2,
+          "loyalty": 0,
+          "lv": 1,
+          "name": "",
+          "species": "hen",
+          "traits": {},
+          "unavailable_through_day": 0,
+          "xp": 0
+        },
+        {
+          "affinity": 0,
+          "category": "cat",
+          "id": 3,
+          "loyalty": 0,
+          "lv": 1,
+          "name": "",
+          "species": "cat",
+          "traits": {},
+          "unavailable_through_day": 0,
+          "xp": 0
+        }
+      ],
+      "book_motion": "turning_next",
+      "buttons": {
+        "advance": {
+          "disabled": false,
+          "visible": false
+        },
+        "book_next": {
+          "disabled": false,
+          "visible": false
+        },
+        "book_prev": {
+          "disabled": false,
+          "visible": false
+        },
+        "close_market": {
+          "disabled": false,
+          "visible": true
+        },
+        "group0": {
+          "disabled": false,
+          "visible": false
+        },
+        "group1": {
+          "disabled": false,
+          "visible": false
+        },
+        "home": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_morning": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_resume": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "pause": {
+          "disabled": false,
+          "visible": false
+        },
+        "rename": {
+          "disabled": false,
+          "visible": false
+        },
+        "retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "speed": {
+          "disabled": false,
+          "visible": false
+        },
+        "train_2": {
+          "disabled": false,
+          "visible": false
+        },
+        "walk": {
+          "disabled": false,
+          "visible": false
+        }
+      },
+      "category": "animals",
+      "exp_pool": 80,
+      "file": "35_turn_next_cat_frame_0.png",
+      "fixture": "review_resources_gold_150_exp_100",
+      "gold": 82,
+      "label": "turn_next_cat_frame_0",
+      "level": "detail",
+      "next_animal_id": 3,
+      "page": 0,
+      "product": {
+        "animal_id": -1,
+        "count": 1,
+        "id": "cat"
+      },
+      "rename_open": false,
+      "screen": "book",
+      "side": "animals",
+      "tick": 0
+    },
+    {
+      "animal_id": 2,
+      "animals": [
+        {
+          "affinity": null,
+          "category": "dog",
+          "id": 1,
+          "loyalty": 75,
+          "lv": 2,
+          "name": "こむぎ",
+          "object_attack_power": 0,
+          "species": "shiba",
+          "unavailable_through_day": 0,
+          "xp": 0
+        },
+        {
+          "affinity": null,
+          "category": "bird",
+          "id": 2,
+          "loyalty": 0,
+          "lv": 1,
+          "name": "",
+          "species": "hen",
+          "traits": {},
+          "unavailable_through_day": 0,
+          "xp": 0
+        },
+        {
+          "affinity": 0,
+          "category": "cat",
+          "id": 3,
+          "loyalty": 0,
+          "lv": 1,
+          "name": "",
+          "species": "cat",
+          "traits": {},
+          "unavailable_through_day": 0,
+          "xp": 0
+        }
+      ],
+      "book_motion": "turning_next",
+      "buttons": {
+        "advance": {
+          "disabled": false,
+          "visible": false
+        },
+        "book_next": {
+          "disabled": false,
+          "visible": false
+        },
+        "book_prev": {
+          "disabled": false,
+          "visible": false
+        },
+        "close_market": {
+          "disabled": false,
+          "visible": true
+        },
+        "group0": {
+          "disabled": false,
+          "visible": false
+        },
+        "group1": {
+          "disabled": false,
+          "visible": false
+        },
+        "home": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_morning": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_resume": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "pause": {
+          "disabled": false,
+          "visible": false
+        },
+        "rename": {
+          "disabled": false,
+          "visible": false
+        },
+        "retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "speed": {
+          "disabled": false,
+          "visible": false
+        },
+        "train_2": {
+          "disabled": false,
+          "visible": false
+        },
+        "walk": {
+          "disabled": false,
+          "visible": false
+        }
+      },
+      "category": "animals",
+      "exp_pool": 80,
+      "file": "36_turn_next_cat_frame_1.png",
+      "fixture": "review_resources_gold_150_exp_100",
+      "gold": 82,
+      "label": "turn_next_cat_frame_1",
+      "level": "detail",
+      "next_animal_id": 3,
+      "page": 0,
+      "product": {
+        "animal_id": -1,
+        "count": 1,
+        "id": "cat"
+      },
+      "rename_open": false,
+      "screen": "book",
+      "side": "animals",
+      "tick": 0
+    },
+    {
+      "animal_id": 2,
+      "animals": [
+        {
+          "affinity": null,
+          "category": "dog",
+          "id": 1,
+          "loyalty": 75,
+          "lv": 2,
+          "name": "こむぎ",
+          "object_attack_power": 0,
+          "species": "shiba",
+          "unavailable_through_day": 0,
+          "xp": 0
+        },
+        {
+          "affinity": null,
+          "category": "bird",
+          "id": 2,
+          "loyalty": 0,
+          "lv": 1,
+          "name": "",
+          "species": "hen",
+          "traits": {},
+          "unavailable_through_day": 0,
+          "xp": 0
+        },
+        {
+          "affinity": 0,
+          "category": "cat",
+          "id": 3,
+          "loyalty": 0,
+          "lv": 1,
+          "name": "",
+          "species": "cat",
+          "traits": {},
+          "unavailable_through_day": 0,
+          "xp": 0
+        }
+      ],
+      "book_motion": "turning_next",
+      "buttons": {
+        "advance": {
+          "disabled": false,
+          "visible": false
+        },
+        "book_next": {
+          "disabled": false,
+          "visible": false
+        },
+        "book_prev": {
+          "disabled": false,
+          "visible": false
+        },
+        "close_market": {
+          "disabled": false,
+          "visible": true
+        },
+        "group0": {
+          "disabled": false,
+          "visible": false
+        },
+        "group1": {
+          "disabled": false,
+          "visible": false
+        },
+        "home": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_morning": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_resume": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "pause": {
+          "disabled": false,
+          "visible": false
+        },
+        "rename": {
+          "disabled": false,
+          "visible": false
+        },
+        "retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "speed": {
+          "disabled": false,
+          "visible": false
+        },
+        "train_2": {
+          "disabled": false,
+          "visible": false
+        },
+        "walk": {
+          "disabled": false,
+          "visible": false
+        }
+      },
+      "category": "animals",
+      "exp_pool": 80,
+      "file": "37_turn_next_cat_frame_2.png",
+      "fixture": "review_resources_gold_150_exp_100",
+      "gold": 82,
+      "label": "turn_next_cat_frame_2",
+      "level": "detail",
+      "next_animal_id": 3,
+      "page": 0,
+      "product": {
+        "animal_id": -1,
+        "count": 1,
+        "id": "cat"
+      },
+      "rename_open": false,
+      "screen": "book",
+      "side": "animals",
+      "tick": 0
+    },
+    {
+      "animal_id": 2,
+      "animals": [
+        {
+          "affinity": null,
+          "category": "dog",
+          "id": 1,
+          "loyalty": 75,
+          "lv": 2,
+          "name": "こむぎ",
+          "object_attack_power": 0,
+          "species": "shiba",
+          "unavailable_through_day": 0,
+          "xp": 0
+        },
+        {
+          "affinity": null,
+          "category": "bird",
+          "id": 2,
+          "loyalty": 0,
+          "lv": 1,
+          "name": "",
+          "species": "hen",
+          "traits": {},
+          "unavailable_through_day": 0,
+          "xp": 0
+        },
+        {
+          "affinity": 0,
+          "category": "cat",
+          "id": 3,
+          "loyalty": 0,
+          "lv": 1,
+          "name": "",
+          "species": "cat",
+          "traits": {},
+          "unavailable_through_day": 0,
+          "xp": 0
+        }
+      ],
+      "book_motion": "turning_next",
+      "buttons": {
+        "advance": {
+          "disabled": false,
+          "visible": false
+        },
+        "book_next": {
+          "disabled": false,
+          "visible": false
+        },
+        "book_prev": {
+          "disabled": false,
+          "visible": false
+        },
+        "close_market": {
+          "disabled": false,
+          "visible": true
+        },
+        "group0": {
+          "disabled": false,
+          "visible": false
+        },
+        "group1": {
+          "disabled": false,
+          "visible": false
+        },
+        "home": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_morning": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_resume": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "pause": {
+          "disabled": false,
+          "visible": false
+        },
+        "rename": {
+          "disabled": false,
+          "visible": false
+        },
+        "retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "speed": {
+          "disabled": false,
+          "visible": false
+        },
+        "train_2": {
+          "disabled": false,
+          "visible": false
+        },
+        "walk": {
+          "disabled": false,
+          "visible": false
+        }
+      },
+      "category": "animals",
+      "exp_pool": 80,
+      "file": "38_turn_next_cat_frame_3.png",
+      "fixture": "review_resources_gold_150_exp_100",
+      "gold": 82,
+      "label": "turn_next_cat_frame_3",
+      "level": "detail",
+      "next_animal_id": 3,
+      "page": 0,
+      "product": {
+        "animal_id": -1,
+        "count": 1,
+        "id": "cat"
+      },
+      "rename_open": false,
+      "screen": "book",
+      "side": "animals",
+      "tick": 0
+    },
+    {
+      "animal_id": 2,
+      "animals": [
+        {
+          "affinity": null,
+          "category": "dog",
+          "id": 1,
+          "loyalty": 75,
+          "lv": 2,
+          "name": "こむぎ",
+          "object_attack_power": 0,
+          "species": "shiba",
+          "unavailable_through_day": 0,
+          "xp": 0
+        },
+        {
+          "affinity": null,
+          "category": "bird",
+          "id": 2,
+          "loyalty": 0,
+          "lv": 1,
+          "name": "",
+          "species": "hen",
+          "traits": {},
+          "unavailable_through_day": 0,
+          "xp": 0
+        },
+        {
+          "affinity": 0,
+          "category": "cat",
+          "id": 3,
+          "loyalty": 0,
+          "lv": 1,
+          "name": "",
+          "species": "cat",
+          "traits": {},
+          "unavailable_through_day": 0,
+          "xp": 0
+        }
+      ],
+      "book_motion": "turning_next",
+      "buttons": {
+        "advance": {
+          "disabled": false,
+          "visible": false
+        },
+        "book_next": {
+          "disabled": false,
+          "visible": false
+        },
+        "book_prev": {
+          "disabled": false,
+          "visible": false
+        },
+        "close_market": {
+          "disabled": false,
+          "visible": true
+        },
+        "group0": {
+          "disabled": false,
+          "visible": false
+        },
+        "group1": {
+          "disabled": false,
+          "visible": false
+        },
+        "home": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_morning": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_resume": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "pause": {
+          "disabled": false,
+          "visible": false
+        },
+        "rename": {
+          "disabled": false,
+          "visible": false
+        },
+        "retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "speed": {
+          "disabled": false,
+          "visible": false
+        },
+        "train_2": {
+          "disabled": false,
+          "visible": false
+        },
+        "walk": {
+          "disabled": false,
+          "visible": false
+        }
+      },
+      "category": "animals",
+      "exp_pool": 80,
+      "file": "39_turn_next_cat_frame_4.png",
+      "fixture": "review_resources_gold_150_exp_100",
+      "gold": 82,
+      "label": "turn_next_cat_frame_4",
+      "level": "detail",
+      "next_animal_id": 3,
+      "page": 0,
+      "product": {
+        "animal_id": -1,
+        "count": 1,
+        "id": "cat"
+      },
+      "rename_open": false,
+      "screen": "book",
+      "side": "animals",
+      "tick": 0
+    },
+    {
+      "animal_id": 2,
+      "animals": [
+        {
+          "affinity": null,
+          "category": "dog",
+          "id": 1,
+          "loyalty": 75,
+          "lv": 2,
+          "name": "こむぎ",
+          "object_attack_power": 0,
+          "species": "shiba",
+          "unavailable_through_day": 0,
+          "xp": 0
+        },
+        {
+          "affinity": null,
+          "category": "bird",
+          "id": 2,
+          "loyalty": 0,
+          "lv": 1,
+          "name": "",
+          "species": "hen",
+          "traits": {},
+          "unavailable_through_day": 0,
+          "xp": 0
+        },
+        {
+          "affinity": 0,
+          "category": "cat",
+          "id": 3,
+          "loyalty": 0,
+          "lv": 1,
+          "name": "",
+          "species": "cat",
+          "traits": {},
+          "unavailable_through_day": 0,
+          "xp": 0
+        }
+      ],
+      "book_motion": "turning_next",
+      "buttons": {
+        "advance": {
+          "disabled": false,
+          "visible": false
+        },
+        "book_next": {
+          "disabled": false,
+          "visible": false
+        },
+        "book_prev": {
+          "disabled": false,
+          "visible": false
+        },
+        "close_market": {
+          "disabled": false,
+          "visible": true
+        },
+        "group0": {
+          "disabled": false,
+          "visible": false
+        },
+        "group1": {
+          "disabled": false,
+          "visible": false
+        },
+        "home": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_morning": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_resume": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "pause": {
+          "disabled": false,
+          "visible": false
+        },
+        "rename": {
+          "disabled": false,
+          "visible": false
+        },
+        "retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "speed": {
+          "disabled": false,
+          "visible": false
+        },
+        "train_2": {
+          "disabled": false,
+          "visible": false
+        },
+        "walk": {
+          "disabled": false,
+          "visible": false
+        }
+      },
+      "category": "animals",
+      "exp_pool": 80,
+      "file": "40_turn_next_cat_frame_5.png",
+      "fixture": "review_resources_gold_150_exp_100",
+      "gold": 82,
+      "label": "turn_next_cat_frame_5",
+      "level": "detail",
+      "next_animal_id": 3,
+      "page": 0,
+      "product": {
+        "animal_id": -1,
+        "count": 1,
+        "id": "cat"
+      },
+      "rename_open": false,
+      "screen": "book",
+      "side": "animals",
+      "tick": 0
+    },
+    {
+      "animal_id": 3,
+      "animals": [
+        {
+          "affinity": null,
+          "category": "dog",
+          "id": 1,
+          "loyalty": 75,
+          "lv": 2,
+          "name": "こむぎ",
+          "object_attack_power": 0,
+          "species": "shiba",
+          "unavailable_through_day": 0,
+          "xp": 0
+        },
+        {
+          "affinity": null,
+          "category": "bird",
+          "id": 2,
+          "loyalty": 0,
+          "lv": 1,
+          "name": "",
+          "species": "hen",
+          "traits": {},
+          "unavailable_through_day": 0,
+          "xp": 0
+        },
+        {
+          "affinity": 0,
+          "category": "cat",
+          "id": 3,
+          "loyalty": 0,
+          "lv": 1,
+          "name": "",
+          "species": "cat",
+          "traits": {},
+          "unavailable_through_day": 0,
+          "xp": 0
+        }
+      ],
+      "book_motion": "",
+      "buttons": {
+        "advance": {
+          "disabled": false,
+          "visible": false
+        },
+        "book_next": {
+          "disabled": false,
+          "visible": true
+        },
+        "book_prev": {
+          "disabled": false,
+          "visible": true
+        },
+        "close_market": {
+          "disabled": false,
+          "visible": true
+        },
+        "group0": {
+          "disabled": false,
+          "visible": false
+        },
+        "group1": {
+          "disabled": false,
+          "visible": false
+        },
+        "home": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_morning": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_resume": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "pause": {
+          "disabled": false,
+          "visible": false
+        },
+        "rename": {
+          "disabled": false,
+          "visible": true
+        },
+        "retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "speed": {
+          "disabled": false,
+          "visible": false
+        },
+        "train_3": {
+          "disabled": false,
+          "visible": true
+        },
+        "walk": {
+          "disabled": false,
+          "visible": false
+        }
+      },
+      "category": "animals",
+      "exp_pool": 80,
+      "file": "41_turn_next_cat_frame_6.png",
+      "fixture": "review_resources_gold_150_exp_100",
+      "gold": 82,
+      "label": "turn_next_cat_frame_6",
+      "level": "detail",
+      "next_animal_id": 3,
+      "page": 0,
+      "product": {
+        "animal_id": -1,
+        "count": 1,
+        "id": "cat"
+      },
+      "rename_open": false,
+      "screen": "book",
+      "side": "animals",
+      "tick": 0
+    },
+    {
+      "animal_id": 3,
+      "animals": [
+        {
+          "affinity": null,
+          "category": "dog",
+          "id": 1,
+          "loyalty": 75,
+          "lv": 2,
+          "name": "こむぎ",
+          "object_attack_power": 0,
+          "species": "shiba",
+          "unavailable_through_day": 0,
+          "xp": 0
+        },
+        {
+          "affinity": null,
+          "category": "bird",
+          "id": 2,
+          "loyalty": 0,
+          "lv": 1,
+          "name": "",
+          "species": "hen",
+          "traits": {},
+          "unavailable_through_day": 0,
+          "xp": 0
+        },
+        {
+          "affinity": 0,
+          "category": "cat",
+          "id": 3,
+          "loyalty": 0,
+          "lv": 1,
+          "name": "",
+          "species": "cat",
+          "traits": {},
+          "unavailable_through_day": 0,
+          "xp": 0
+        }
+      ],
+      "book_motion": "",
+      "buttons": {
+        "advance": {
+          "disabled": false,
+          "visible": false
+        },
+        "book_next": {
+          "disabled": false,
+          "visible": true
+        },
+        "book_prev": {
+          "disabled": false,
+          "visible": true
+        },
+        "close_market": {
+          "disabled": false,
+          "visible": true
+        },
+        "group0": {
+          "disabled": false,
+          "visible": false
+        },
+        "group1": {
+          "disabled": false,
+          "visible": false
+        },
+        "home": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_morning": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_resume": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "pause": {
+          "disabled": false,
+          "visible": false
+        },
+        "rename": {
+          "disabled": false,
+          "visible": true
+        },
+        "retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "speed": {
+          "disabled": false,
+          "visible": false
+        },
+        "train_3": {
+          "disabled": false,
+          "visible": true
+        },
+        "walk": {
+          "disabled": false,
+          "visible": false
+        }
+      },
+      "category": "animals",
+      "exp_pool": 80,
+      "file": "42_cat_page.png",
+      "fixture": "review_resources_gold_150_exp_100",
+      "gold": 82,
+      "label": "cat_page",
+      "level": "detail",
+      "next_animal_id": 3,
+      "page": 0,
+      "product": {
+        "animal_id": -1,
+        "count": 1,
+        "id": "cat"
+      },
+      "rename_open": false,
+      "screen": "book",
+      "side": "animals",
+      "tick": 0
+    },
+    {
+      "animal_id": 3,
+      "animals": [
+        {
+          "affinity": null,
+          "category": "dog",
+          "id": 1,
+          "loyalty": 75,
+          "lv": 2,
+          "name": "こむぎ",
+          "object_attack_power": 0,
+          "species": "shiba",
+          "unavailable_through_day": 0,
+          "xp": 0
+        },
+        {
+          "affinity": null,
+          "category": "bird",
+          "id": 2,
+          "loyalty": 0,
+          "lv": 1,
+          "name": "",
+          "species": "hen",
+          "traits": {},
+          "unavailable_through_day": 0,
+          "xp": 0
+        },
+        {
+          "affinity": 0,
+          "category": "cat",
+          "id": 3,
+          "loyalty": 0,
+          "lv": 1,
+          "name": "",
+          "species": "cat",
+          "traits": {},
+          "unavailable_through_day": 0,
+          "xp": 0
+        }
+      ],
+      "book_motion": "turning_previous",
+      "buttons": {
+        "advance": {
+          "disabled": false,
+          "visible": false
+        },
+        "book_next": {
+          "disabled": false,
+          "visible": false
+        },
+        "book_prev": {
+          "disabled": false,
+          "visible": false
+        },
+        "close_market": {
+          "disabled": false,
+          "visible": true
+        },
+        "group0": {
+          "disabled": false,
+          "visible": false
+        },
+        "group1": {
+          "disabled": false,
+          "visible": false
+        },
+        "home": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_morning": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_resume": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "pause": {
+          "disabled": false,
+          "visible": false
+        },
+        "rename": {
+          "disabled": false,
+          "visible": false
+        },
+        "retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "speed": {
+          "disabled": false,
+          "visible": false
+        },
+        "train_3": {
+          "disabled": false,
+          "visible": false
+        },
+        "walk": {
+          "disabled": false,
+          "visible": false
+        }
+      },
+      "category": "animals",
+      "exp_pool": 80,
+      "file": "43_turn_previous_hen_frame_0.png",
+      "fixture": "review_resources_gold_150_exp_100",
+      "gold": 82,
+      "label": "turn_previous_hen_frame_0",
+      "level": "detail",
+      "next_animal_id": 2,
+      "page": 0,
+      "product": {
+        "animal_id": -1,
+        "count": 1,
+        "id": "cat"
+      },
+      "rename_open": false,
+      "screen": "book",
+      "side": "animals",
+      "tick": 0
+    },
+    {
+      "animal_id": 3,
+      "animals": [
+        {
+          "affinity": null,
+          "category": "dog",
+          "id": 1,
+          "loyalty": 75,
+          "lv": 2,
+          "name": "こむぎ",
+          "object_attack_power": 0,
+          "species": "shiba",
+          "unavailable_through_day": 0,
+          "xp": 0
+        },
+        {
+          "affinity": null,
+          "category": "bird",
+          "id": 2,
+          "loyalty": 0,
+          "lv": 1,
+          "name": "",
+          "species": "hen",
+          "traits": {},
+          "unavailable_through_day": 0,
+          "xp": 0
+        },
+        {
+          "affinity": 0,
+          "category": "cat",
+          "id": 3,
+          "loyalty": 0,
+          "lv": 1,
+          "name": "",
+          "species": "cat",
+          "traits": {},
+          "unavailable_through_day": 0,
+          "xp": 0
+        }
+      ],
+      "book_motion": "turning_previous",
+      "buttons": {
+        "advance": {
+          "disabled": false,
+          "visible": false
+        },
+        "book_next": {
+          "disabled": false,
+          "visible": false
+        },
+        "book_prev": {
+          "disabled": false,
+          "visible": false
+        },
+        "close_market": {
+          "disabled": false,
+          "visible": true
+        },
+        "group0": {
+          "disabled": false,
+          "visible": false
+        },
+        "group1": {
+          "disabled": false,
+          "visible": false
+        },
+        "home": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_morning": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_resume": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "pause": {
+          "disabled": false,
+          "visible": false
+        },
+        "rename": {
+          "disabled": false,
+          "visible": false
+        },
+        "retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "speed": {
+          "disabled": false,
+          "visible": false
+        },
+        "train_3": {
+          "disabled": false,
+          "visible": false
+        },
+        "walk": {
+          "disabled": false,
+          "visible": false
+        }
+      },
+      "category": "animals",
+      "exp_pool": 80,
+      "file": "44_turn_previous_hen_frame_1.png",
+      "fixture": "review_resources_gold_150_exp_100",
+      "gold": 82,
+      "label": "turn_previous_hen_frame_1",
+      "level": "detail",
+      "next_animal_id": 2,
+      "page": 0,
+      "product": {
+        "animal_id": -1,
+        "count": 1,
+        "id": "cat"
+      },
+      "rename_open": false,
+      "screen": "book",
+      "side": "animals",
+      "tick": 0
+    },
+    {
+      "animal_id": 3,
+      "animals": [
+        {
+          "affinity": null,
+          "category": "dog",
+          "id": 1,
+          "loyalty": 75,
+          "lv": 2,
+          "name": "こむぎ",
+          "object_attack_power": 0,
+          "species": "shiba",
+          "unavailable_through_day": 0,
+          "xp": 0
+        },
+        {
+          "affinity": null,
+          "category": "bird",
+          "id": 2,
+          "loyalty": 0,
+          "lv": 1,
+          "name": "",
+          "species": "hen",
+          "traits": {},
+          "unavailable_through_day": 0,
+          "xp": 0
+        },
+        {
+          "affinity": 0,
+          "category": "cat",
+          "id": 3,
+          "loyalty": 0,
+          "lv": 1,
+          "name": "",
+          "species": "cat",
+          "traits": {},
+          "unavailable_through_day": 0,
+          "xp": 0
+        }
+      ],
+      "book_motion": "turning_previous",
+      "buttons": {
+        "advance": {
+          "disabled": false,
+          "visible": false
+        },
+        "book_next": {
+          "disabled": false,
+          "visible": false
+        },
+        "book_prev": {
+          "disabled": false,
+          "visible": false
+        },
+        "close_market": {
+          "disabled": false,
+          "visible": true
+        },
+        "group0": {
+          "disabled": false,
+          "visible": false
+        },
+        "group1": {
+          "disabled": false,
+          "visible": false
+        },
+        "home": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_morning": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_resume": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "pause": {
+          "disabled": false,
+          "visible": false
+        },
+        "rename": {
+          "disabled": false,
+          "visible": false
+        },
+        "retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "speed": {
+          "disabled": false,
+          "visible": false
+        },
+        "train_3": {
+          "disabled": false,
+          "visible": false
+        },
+        "walk": {
+          "disabled": false,
+          "visible": false
+        }
+      },
+      "category": "animals",
+      "exp_pool": 80,
+      "file": "45_turn_previous_hen_frame_2.png",
+      "fixture": "review_resources_gold_150_exp_100",
+      "gold": 82,
+      "label": "turn_previous_hen_frame_2",
+      "level": "detail",
+      "next_animal_id": 2,
+      "page": 0,
+      "product": {
+        "animal_id": -1,
+        "count": 1,
+        "id": "cat"
+      },
+      "rename_open": false,
+      "screen": "book",
+      "side": "animals",
+      "tick": 0
+    },
+    {
+      "animal_id": 3,
+      "animals": [
+        {
+          "affinity": null,
+          "category": "dog",
+          "id": 1,
+          "loyalty": 75,
+          "lv": 2,
+          "name": "こむぎ",
+          "object_attack_power": 0,
+          "species": "shiba",
+          "unavailable_through_day": 0,
+          "xp": 0
+        },
+        {
+          "affinity": null,
+          "category": "bird",
+          "id": 2,
+          "loyalty": 0,
+          "lv": 1,
+          "name": "",
+          "species": "hen",
+          "traits": {},
+          "unavailable_through_day": 0,
+          "xp": 0
+        },
+        {
+          "affinity": 0,
+          "category": "cat",
+          "id": 3,
+          "loyalty": 0,
+          "lv": 1,
+          "name": "",
+          "species": "cat",
+          "traits": {},
+          "unavailable_through_day": 0,
+          "xp": 0
+        }
+      ],
+      "book_motion": "turning_previous",
+      "buttons": {
+        "advance": {
+          "disabled": false,
+          "visible": false
+        },
+        "book_next": {
+          "disabled": false,
+          "visible": false
+        },
+        "book_prev": {
+          "disabled": false,
+          "visible": false
+        },
+        "close_market": {
+          "disabled": false,
+          "visible": true
+        },
+        "group0": {
+          "disabled": false,
+          "visible": false
+        },
+        "group1": {
+          "disabled": false,
+          "visible": false
+        },
+        "home": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_morning": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_resume": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "pause": {
+          "disabled": false,
+          "visible": false
+        },
+        "rename": {
+          "disabled": false,
+          "visible": false
+        },
+        "retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "speed": {
+          "disabled": false,
+          "visible": false
+        },
+        "train_3": {
+          "disabled": false,
+          "visible": false
+        },
+        "walk": {
+          "disabled": false,
+          "visible": false
+        }
+      },
+      "category": "animals",
+      "exp_pool": 80,
+      "file": "46_turn_previous_hen_frame_3.png",
+      "fixture": "review_resources_gold_150_exp_100",
+      "gold": 82,
+      "label": "turn_previous_hen_frame_3",
+      "level": "detail",
+      "next_animal_id": 2,
+      "page": 0,
+      "product": {
+        "animal_id": -1,
+        "count": 1,
+        "id": "cat"
+      },
+      "rename_open": false,
+      "screen": "book",
+      "side": "animals",
+      "tick": 0
+    },
+    {
+      "animal_id": 3,
+      "animals": [
+        {
+          "affinity": null,
+          "category": "dog",
+          "id": 1,
+          "loyalty": 75,
+          "lv": 2,
+          "name": "こむぎ",
+          "object_attack_power": 0,
+          "species": "shiba",
+          "unavailable_through_day": 0,
+          "xp": 0
+        },
+        {
+          "affinity": null,
+          "category": "bird",
+          "id": 2,
+          "loyalty": 0,
+          "lv": 1,
+          "name": "",
+          "species": "hen",
+          "traits": {},
+          "unavailable_through_day": 0,
+          "xp": 0
+        },
+        {
+          "affinity": 0,
+          "category": "cat",
+          "id": 3,
+          "loyalty": 0,
+          "lv": 1,
+          "name": "",
+          "species": "cat",
+          "traits": {},
+          "unavailable_through_day": 0,
+          "xp": 0
+        }
+      ],
+      "book_motion": "turning_previous",
+      "buttons": {
+        "advance": {
+          "disabled": false,
+          "visible": false
+        },
+        "book_next": {
+          "disabled": false,
+          "visible": false
+        },
+        "book_prev": {
+          "disabled": false,
+          "visible": false
+        },
+        "close_market": {
+          "disabled": false,
+          "visible": true
+        },
+        "group0": {
+          "disabled": false,
+          "visible": false
+        },
+        "group1": {
+          "disabled": false,
+          "visible": false
+        },
+        "home": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_morning": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_resume": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "pause": {
+          "disabled": false,
+          "visible": false
+        },
+        "rename": {
+          "disabled": false,
+          "visible": false
+        },
+        "retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "speed": {
+          "disabled": false,
+          "visible": false
+        },
+        "train_3": {
+          "disabled": false,
+          "visible": false
+        },
+        "walk": {
+          "disabled": false,
+          "visible": false
+        }
+      },
+      "category": "animals",
+      "exp_pool": 80,
+      "file": "47_turn_previous_hen_frame_4.png",
+      "fixture": "review_resources_gold_150_exp_100",
+      "gold": 82,
+      "label": "turn_previous_hen_frame_4",
+      "level": "detail",
+      "next_animal_id": 2,
+      "page": 0,
+      "product": {
+        "animal_id": -1,
+        "count": 1,
+        "id": "cat"
+      },
+      "rename_open": false,
+      "screen": "book",
+      "side": "animals",
+      "tick": 0
+    },
+    {
+      "animal_id": 3,
+      "animals": [
+        {
+          "affinity": null,
+          "category": "dog",
+          "id": 1,
+          "loyalty": 75,
+          "lv": 2,
+          "name": "こむぎ",
+          "object_attack_power": 0,
+          "species": "shiba",
+          "unavailable_through_day": 0,
+          "xp": 0
+        },
+        {
+          "affinity": null,
+          "category": "bird",
+          "id": 2,
+          "loyalty": 0,
+          "lv": 1,
+          "name": "",
+          "species": "hen",
+          "traits": {},
+          "unavailable_through_day": 0,
+          "xp": 0
+        },
+        {
+          "affinity": 0,
+          "category": "cat",
+          "id": 3,
+          "loyalty": 0,
+          "lv": 1,
+          "name": "",
+          "species": "cat",
+          "traits": {},
+          "unavailable_through_day": 0,
+          "xp": 0
+        }
+      ],
+      "book_motion": "turning_previous",
+      "buttons": {
+        "advance": {
+          "disabled": false,
+          "visible": false
+        },
+        "book_next": {
+          "disabled": false,
+          "visible": false
+        },
+        "book_prev": {
+          "disabled": false,
+          "visible": false
+        },
+        "close_market": {
+          "disabled": false,
+          "visible": true
+        },
+        "group0": {
+          "disabled": false,
+          "visible": false
+        },
+        "group1": {
+          "disabled": false,
+          "visible": false
+        },
+        "home": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_morning": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_resume": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "pause": {
+          "disabled": false,
+          "visible": false
+        },
+        "rename": {
+          "disabled": false,
+          "visible": false
+        },
+        "retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "speed": {
+          "disabled": false,
+          "visible": false
+        },
+        "train_3": {
+          "disabled": false,
+          "visible": false
+        },
+        "walk": {
+          "disabled": false,
+          "visible": false
+        }
+      },
+      "category": "animals",
+      "exp_pool": 80,
+      "file": "48_turn_previous_hen_frame_5.png",
+      "fixture": "review_resources_gold_150_exp_100",
+      "gold": 82,
+      "label": "turn_previous_hen_frame_5",
+      "level": "detail",
+      "next_animal_id": 2,
+      "page": 0,
+      "product": {
+        "animal_id": -1,
+        "count": 1,
+        "id": "cat"
+      },
+      "rename_open": false,
+      "screen": "book",
+      "side": "animals",
+      "tick": 0
+    },
+    {
+      "animal_id": 2,
+      "animals": [
+        {
+          "affinity": null,
+          "category": "dog",
+          "id": 1,
+          "loyalty": 75,
+          "lv": 2,
+          "name": "こむぎ",
+          "object_attack_power": 0,
+          "species": "shiba",
+          "unavailable_through_day": 0,
+          "xp": 0
+        },
+        {
+          "affinity": null,
+          "category": "bird",
+          "id": 2,
+          "loyalty": 0,
+          "lv": 1,
+          "name": "",
+          "species": "hen",
+          "traits": {},
+          "unavailable_through_day": 0,
+          "xp": 0
+        },
+        {
+          "affinity": 0,
+          "category": "cat",
+          "id": 3,
+          "loyalty": 0,
+          "lv": 1,
+          "name": "",
+          "species": "cat",
+          "traits": {},
+          "unavailable_through_day": 0,
+          "xp": 0
+        }
+      ],
+      "book_motion": "",
+      "buttons": {
+        "advance": {
+          "disabled": false,
+          "visible": false
+        },
+        "book_next": {
+          "disabled": false,
+          "visible": true
+        },
+        "book_prev": {
+          "disabled": false,
+          "visible": true
+        },
+        "close_market": {
+          "disabled": false,
+          "visible": true
+        },
+        "group0": {
+          "disabled": false,
+          "visible": false
+        },
+        "group1": {
+          "disabled": false,
+          "visible": false
+        },
+        "home": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_morning": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_resume": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "pause": {
+          "disabled": false,
+          "visible": false
+        },
+        "rename": {
+          "disabled": false,
+          "visible": true
+        },
+        "retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "speed": {
+          "disabled": false,
+          "visible": false
+        },
+        "train_2": {
+          "disabled": false,
+          "visible": true
+        },
+        "walk": {
+          "disabled": false,
+          "visible": false
+        }
+      },
+      "category": "animals",
+      "exp_pool": 80,
+      "file": "49_turn_previous_hen_frame_6.png",
+      "fixture": "review_resources_gold_150_exp_100",
+      "gold": 82,
+      "label": "turn_previous_hen_frame_6",
+      "level": "detail",
+      "next_animal_id": 2,
+      "page": 0,
+      "product": {
+        "animal_id": -1,
+        "count": 1,
+        "id": "cat"
+      },
+      "rename_open": false,
+      "screen": "book",
+      "side": "animals",
+      "tick": 0
+    },
+    {
+      "animal_id": 2,
+      "animals": [
+        {
+          "affinity": null,
+          "category": "dog",
+          "id": 1,
+          "loyalty": 75,
+          "lv": 2,
+          "name": "こむぎ",
+          "object_attack_power": 0,
+          "species": "shiba",
+          "unavailable_through_day": 0,
+          "xp": 0
+        },
+        {
+          "affinity": null,
+          "category": "bird",
+          "id": 2,
+          "loyalty": 0,
+          "lv": 1,
+          "name": "",
+          "species": "hen",
+          "traits": {},
+          "unavailable_through_day": 0,
+          "xp": 0
+        },
+        {
+          "affinity": 0,
+          "category": "cat",
+          "id": 3,
+          "loyalty": 0,
+          "lv": 1,
+          "name": "",
+          "species": "cat",
+          "traits": {},
+          "unavailable_through_day": 0,
+          "xp": 0
+        }
+      ],
+      "book_motion": "",
+      "buttons": {
+        "advance": {
+          "disabled": false,
+          "visible": false
+        },
+        "book_next": {
+          "disabled": false,
+          "visible": true
+        },
+        "book_prev": {
+          "disabled": false,
+          "visible": true
+        },
+        "close_market": {
+          "disabled": false,
+          "visible": true
+        },
+        "group0": {
+          "disabled": false,
+          "visible": false
+        },
+        "group1": {
+          "disabled": false,
+          "visible": false
+        },
+        "home": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_morning": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_resume": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "pause": {
+          "disabled": false,
+          "visible": false
+        },
+        "rename": {
+          "disabled": false,
+          "visible": true
+        },
+        "retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "speed": {
+          "disabled": false,
+          "visible": false
+        },
+        "train_2": {
+          "disabled": false,
+          "visible": true
+        },
+        "walk": {
+          "disabled": false,
+          "visible": false
+        }
+      },
+      "category": "animals",
+      "exp_pool": 80,
+      "file": "50_hen_page_returned.png",
+      "fixture": "review_resources_gold_150_exp_100",
+      "gold": 82,
+      "label": "hen_page_returned",
+      "level": "detail",
+      "next_animal_id": 2,
+      "page": 0,
+      "product": {
+        "animal_id": -1,
+        "count": 1,
+        "id": "cat"
+      },
+      "rename_open": false,
+      "screen": "book",
+      "side": "animals",
+      "tick": 0
+    },
+    {
+      "animal_id": 2,
+      "animals": [
+        {
+          "affinity": null,
+          "category": "dog",
+          "id": 1,
+          "loyalty": 75,
+          "lv": 2,
+          "name": "こむぎ",
+          "object_attack_power": 0,
+          "species": "shiba",
+          "unavailable_through_day": 0,
+          "xp": 0
+        },
+        {
+          "affinity": null,
+          "category": "bird",
+          "id": 2,
+          "loyalty": 0,
+          "lv": 1,
+          "name": "",
+          "species": "hen",
+          "traits": {},
+          "unavailable_through_day": 0,
+          "xp": 0
+        },
+        {
+          "affinity": 0,
+          "category": "cat",
+          "id": 3,
+          "loyalty": 0,
+          "lv": 1,
+          "name": "",
+          "species": "cat",
+          "traits": {},
+          "unavailable_through_day": 0,
+          "xp": 0
+        }
+      ],
+      "book_motion": "closing",
+      "buttons": {
+        "advance": {
+          "disabled": false,
+          "visible": false
+        },
+        "book_next": {
+          "disabled": false,
+          "visible": false
+        },
+        "book_prev": {
+          "disabled": false,
+          "visible": false
+        },
+        "close_market": {
+          "disabled": false,
+          "visible": true
+        },
+        "group0": {
+          "disabled": false,
+          "visible": false
+        },
+        "group1": {
+          "disabled": false,
+          "visible": false
+        },
+        "home": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_morning": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_resume": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "pause": {
+          "disabled": false,
+          "visible": false
+        },
+        "rename": {
+          "disabled": false,
+          "visible": false
+        },
+        "retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "speed": {
+          "disabled": false,
+          "visible": false
+        },
+        "train_2": {
+          "disabled": false,
+          "visible": false
+        },
+        "walk": {
+          "disabled": false,
+          "visible": false
+        }
+      },
+      "category": "animals",
+      "exp_pool": 80,
+      "file": "51_right_click_closing_frame_0.png",
+      "fixture": "review_resources_gold_150_exp_100",
+      "gold": 82,
+      "label": "right_click_closing_frame_0",
+      "level": "detail",
+      "next_animal_id": 2,
+      "page": 0,
+      "product": {
+        "animal_id": -1,
+        "count": 1,
+        "id": "cat"
+      },
+      "rename_open": false,
+      "screen": "book",
+      "side": "animals",
+      "tick": 0
+    },
+    {
+      "animal_id": 2,
+      "animals": [
+        {
+          "affinity": null,
+          "category": "dog",
+          "id": 1,
+          "loyalty": 75,
+          "lv": 2,
+          "name": "こむぎ",
+          "object_attack_power": 0,
+          "species": "shiba",
+          "unavailable_through_day": 0,
+          "xp": 0
+        },
+        {
+          "affinity": null,
+          "category": "bird",
+          "id": 2,
+          "loyalty": 0,
+          "lv": 1,
+          "name": "",
+          "species": "hen",
+          "traits": {},
+          "unavailable_through_day": 0,
+          "xp": 0
+        },
+        {
+          "affinity": 0,
+          "category": "cat",
+          "id": 3,
+          "loyalty": 0,
+          "lv": 1,
+          "name": "",
+          "species": "cat",
+          "traits": {},
+          "unavailable_through_day": 0,
+          "xp": 0
+        }
+      ],
+      "book_motion": "closing",
+      "buttons": {
+        "advance": {
+          "disabled": false,
+          "visible": false
+        },
+        "book_next": {
+          "disabled": false,
+          "visible": false
+        },
+        "book_prev": {
+          "disabled": false,
+          "visible": false
+        },
+        "close_market": {
+          "disabled": false,
+          "visible": true
+        },
+        "group0": {
+          "disabled": false,
+          "visible": false
+        },
+        "group1": {
+          "disabled": false,
+          "visible": false
+        },
+        "home": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_morning": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_resume": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "pause": {
+          "disabled": false,
+          "visible": false
+        },
+        "rename": {
+          "disabled": false,
+          "visible": false
+        },
+        "retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "speed": {
+          "disabled": false,
+          "visible": false
+        },
+        "train_2": {
+          "disabled": false,
+          "visible": false
+        },
+        "walk": {
+          "disabled": false,
+          "visible": false
+        }
+      },
+      "category": "animals",
+      "exp_pool": 80,
+      "file": "52_right_click_closing_frame_1.png",
+      "fixture": "review_resources_gold_150_exp_100",
+      "gold": 82,
+      "label": "right_click_closing_frame_1",
+      "level": "detail",
+      "next_animal_id": 2,
+      "page": 0,
+      "product": {
+        "animal_id": -1,
+        "count": 1,
+        "id": "cat"
+      },
+      "rename_open": false,
+      "screen": "book",
+      "side": "animals",
+      "tick": 0
+    },
+    {
+      "animal_id": 2,
+      "animals": [
+        {
+          "affinity": null,
+          "category": "dog",
+          "id": 1,
+          "loyalty": 75,
+          "lv": 2,
+          "name": "こむぎ",
+          "object_attack_power": 0,
+          "species": "shiba",
+          "unavailable_through_day": 0,
+          "xp": 0
+        },
+        {
+          "affinity": null,
+          "category": "bird",
+          "id": 2,
+          "loyalty": 0,
+          "lv": 1,
+          "name": "",
+          "species": "hen",
+          "traits": {},
+          "unavailable_through_day": 0,
+          "xp": 0
+        },
+        {
+          "affinity": 0,
+          "category": "cat",
+          "id": 3,
+          "loyalty": 0,
+          "lv": 1,
+          "name": "",
+          "species": "cat",
+          "traits": {},
+          "unavailable_through_day": 0,
+          "xp": 0
+        }
+      ],
+      "book_motion": "closing",
+      "buttons": {
+        "advance": {
+          "disabled": false,
+          "visible": false
+        },
+        "book_next": {
+          "disabled": false,
+          "visible": false
+        },
+        "book_prev": {
+          "disabled": false,
+          "visible": false
+        },
+        "close_market": {
+          "disabled": false,
+          "visible": true
+        },
+        "group0": {
+          "disabled": false,
+          "visible": false
+        },
+        "group1": {
+          "disabled": false,
+          "visible": false
+        },
+        "home": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_morning": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_resume": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "pause": {
+          "disabled": false,
+          "visible": false
+        },
+        "rename": {
+          "disabled": false,
+          "visible": false
+        },
+        "retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "speed": {
+          "disabled": false,
+          "visible": false
+        },
+        "train_2": {
+          "disabled": false,
+          "visible": false
+        },
+        "walk": {
+          "disabled": false,
+          "visible": false
+        }
+      },
+      "category": "animals",
+      "exp_pool": 80,
+      "file": "53_right_click_closing_frame_2.png",
+      "fixture": "review_resources_gold_150_exp_100",
+      "gold": 82,
+      "label": "right_click_closing_frame_2",
+      "level": "detail",
+      "next_animal_id": 2,
+      "page": 0,
+      "product": {
+        "animal_id": -1,
+        "count": 1,
+        "id": "cat"
+      },
+      "rename_open": false,
+      "screen": "book",
+      "side": "animals",
+      "tick": 0
+    },
+    {
+      "animal_id": 2,
+      "animals": [
+        {
+          "affinity": null,
+          "category": "dog",
+          "id": 1,
+          "loyalty": 75,
+          "lv": 2,
+          "name": "こむぎ",
+          "object_attack_power": 0,
+          "species": "shiba",
+          "unavailable_through_day": 0,
+          "xp": 0
+        },
+        {
+          "affinity": null,
+          "category": "bird",
+          "id": 2,
+          "loyalty": 0,
+          "lv": 1,
+          "name": "",
+          "species": "hen",
+          "traits": {},
+          "unavailable_through_day": 0,
+          "xp": 0
+        },
+        {
+          "affinity": 0,
+          "category": "cat",
+          "id": 3,
+          "loyalty": 0,
+          "lv": 1,
+          "name": "",
+          "species": "cat",
+          "traits": {},
+          "unavailable_through_day": 0,
+          "xp": 0
+        }
+      ],
+      "book_motion": "closing",
+      "buttons": {
+        "advance": {
+          "disabled": false,
+          "visible": false
+        },
+        "book_next": {
+          "disabled": false,
+          "visible": false
+        },
+        "book_prev": {
+          "disabled": false,
+          "visible": false
+        },
+        "close_market": {
+          "disabled": false,
+          "visible": true
+        },
+        "group0": {
+          "disabled": false,
+          "visible": false
+        },
+        "group1": {
+          "disabled": false,
+          "visible": false
+        },
+        "home": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_morning": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_resume": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "pause": {
+          "disabled": false,
+          "visible": false
+        },
+        "rename": {
+          "disabled": false,
+          "visible": false
+        },
+        "retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "speed": {
+          "disabled": false,
+          "visible": false
+        },
+        "train_2": {
+          "disabled": false,
+          "visible": false
+        },
+        "walk": {
+          "disabled": false,
+          "visible": false
+        }
+      },
+      "category": "animals",
+      "exp_pool": 80,
+      "file": "54_right_click_closing_frame_3.png",
+      "fixture": "review_resources_gold_150_exp_100",
+      "gold": 82,
+      "label": "right_click_closing_frame_3",
+      "level": "detail",
+      "next_animal_id": 2,
+      "page": 0,
+      "product": {
+        "animal_id": -1,
+        "count": 1,
+        "id": "cat"
+      },
+      "rename_open": false,
+      "screen": "book",
+      "side": "animals",
+      "tick": 0
+    },
+    {
+      "animal_id": 2,
+      "animals": [
+        {
+          "affinity": null,
+          "category": "dog",
+          "id": 1,
+          "loyalty": 75,
+          "lv": 2,
+          "name": "こむぎ",
+          "object_attack_power": 0,
+          "species": "shiba",
+          "unavailable_through_day": 0,
+          "xp": 0
+        },
+        {
+          "affinity": null,
+          "category": "bird",
+          "id": 2,
+          "loyalty": 0,
+          "lv": 1,
+          "name": "",
+          "species": "hen",
+          "traits": {},
+          "unavailable_through_day": 0,
+          "xp": 0
+        },
+        {
+          "affinity": 0,
+          "category": "cat",
+          "id": 3,
+          "loyalty": 0,
+          "lv": 1,
+          "name": "",
+          "species": "cat",
+          "traits": {},
+          "unavailable_through_day": 0,
+          "xp": 0
+        }
+      ],
+      "book_motion": "closing",
+      "buttons": {
+        "advance": {
+          "disabled": false,
+          "visible": false
+        },
+        "book_next": {
+          "disabled": false,
+          "visible": false
+        },
+        "book_prev": {
+          "disabled": false,
+          "visible": false
+        },
+        "close_market": {
+          "disabled": false,
+          "visible": true
+        },
+        "group0": {
+          "disabled": false,
+          "visible": false
+        },
+        "group1": {
+          "disabled": false,
+          "visible": false
+        },
+        "home": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_morning": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_resume": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "pause": {
+          "disabled": false,
+          "visible": false
+        },
+        "rename": {
+          "disabled": false,
+          "visible": false
+        },
+        "retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "speed": {
+          "disabled": false,
+          "visible": false
+        },
+        "train_2": {
+          "disabled": false,
+          "visible": false
+        },
+        "walk": {
+          "disabled": false,
+          "visible": false
+        }
+      },
+      "category": "animals",
+      "exp_pool": 80,
+      "file": "55_right_click_closing_frame_4.png",
+      "fixture": "review_resources_gold_150_exp_100",
+      "gold": 82,
+      "label": "right_click_closing_frame_4",
+      "level": "detail",
+      "next_animal_id": 2,
+      "page": 0,
+      "product": {
+        "animal_id": -1,
+        "count": 1,
+        "id": "cat"
+      },
+      "rename_open": false,
+      "screen": "book",
+      "side": "animals",
+      "tick": 0
+    },
+    {
+      "animal_id": 2,
+      "animals": [
+        {
+          "affinity": null,
+          "category": "dog",
+          "id": 1,
+          "loyalty": 75,
+          "lv": 2,
+          "name": "こむぎ",
+          "object_attack_power": 0,
+          "species": "shiba",
+          "unavailable_through_day": 0,
+          "xp": 0
+        },
+        {
+          "affinity": null,
+          "category": "bird",
+          "id": 2,
+          "loyalty": 0,
+          "lv": 1,
+          "name": "",
+          "species": "hen",
+          "traits": {},
+          "unavailable_through_day": 0,
+          "xp": 0
+        },
+        {
+          "affinity": 0,
+          "category": "cat",
+          "id": 3,
+          "loyalty": 0,
+          "lv": 1,
+          "name": "",
+          "species": "cat",
+          "traits": {},
+          "unavailable_through_day": 0,
+          "xp": 0
+        }
+      ],
+      "book_motion": "closing",
+      "buttons": {
+        "advance": {
+          "disabled": false,
+          "visible": false
+        },
+        "book_next": {
+          "disabled": false,
+          "visible": false
+        },
+        "book_prev": {
+          "disabled": false,
+          "visible": false
+        },
+        "close_market": {
+          "disabled": false,
+          "visible": true
+        },
+        "group0": {
+          "disabled": false,
+          "visible": false
+        },
+        "group1": {
+          "disabled": false,
+          "visible": false
+        },
+        "home": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_morning": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_resume": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "pause": {
+          "disabled": false,
+          "visible": false
+        },
+        "rename": {
+          "disabled": false,
+          "visible": false
+        },
+        "retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "speed": {
+          "disabled": false,
+          "visible": false
+        },
+        "train_2": {
+          "disabled": false,
+          "visible": false
+        },
+        "walk": {
+          "disabled": false,
+          "visible": false
+        }
+      },
+      "category": "animals",
+      "exp_pool": 80,
+      "file": "56_right_click_closing_frame_5.png",
+      "fixture": "review_resources_gold_150_exp_100",
+      "gold": 82,
+      "label": "right_click_closing_frame_5",
+      "level": "detail",
+      "next_animal_id": 2,
+      "page": 0,
+      "product": {
+        "animal_id": -1,
+        "count": 1,
+        "id": "cat"
+      },
+      "rename_open": false,
+      "screen": "book",
+      "side": "animals",
+      "tick": 0
+    },
+    {
+      "animal_id": 2,
+      "animals": [
+        {
+          "affinity": null,
+          "category": "dog",
+          "id": 1,
+          "loyalty": 75,
+          "lv": 2,
+          "name": "こむぎ",
+          "object_attack_power": 0,
+          "species": "shiba",
+          "unavailable_through_day": 0,
+          "xp": 0
+        },
+        {
+          "affinity": null,
+          "category": "bird",
+          "id": 2,
+          "loyalty": 0,
+          "lv": 1,
+          "name": "",
+          "species": "hen",
+          "traits": {},
+          "unavailable_through_day": 0,
+          "xp": 0
+        },
+        {
+          "affinity": 0,
+          "category": "cat",
+          "id": 3,
+          "loyalty": 0,
+          "lv": 1,
+          "name": "",
+          "species": "cat",
+          "traits": {},
+          "unavailable_through_day": 0,
+          "xp": 0
+        }
+      ],
+      "book_motion": "closing",
+      "buttons": {
+        "advance": {
+          "disabled": false,
+          "visible": false
+        },
+        "book_next": {
+          "disabled": false,
+          "visible": false
+        },
+        "book_prev": {
+          "disabled": false,
+          "visible": false
+        },
+        "close_market": {
+          "disabled": false,
+          "visible": true
+        },
+        "group0": {
+          "disabled": false,
+          "visible": false
+        },
+        "group1": {
+          "disabled": false,
+          "visible": false
+        },
+        "home": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_morning": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_resume": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "pause": {
+          "disabled": false,
+          "visible": false
+        },
+        "rename": {
+          "disabled": false,
+          "visible": false
+        },
+        "retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "speed": {
+          "disabled": false,
+          "visible": false
+        },
+        "train_2": {
+          "disabled": false,
+          "visible": false
+        },
+        "walk": {
+          "disabled": false,
+          "visible": false
+        }
+      },
+      "category": "animals",
+      "exp_pool": 80,
+      "file": "57_right_click_closing_frame_6.png",
+      "fixture": "review_resources_gold_150_exp_100",
+      "gold": 82,
+      "label": "right_click_closing_frame_6",
+      "level": "detail",
+      "next_animal_id": 2,
+      "page": 0,
+      "product": {
+        "animal_id": -1,
+        "count": 1,
+        "id": "cat"
+      },
+      "rename_open": false,
+      "screen": "book",
+      "side": "animals",
+      "tick": 0
+    },
+    {
+      "animal_id": 2,
+      "animals": [
+        {
+          "affinity": null,
+          "category": "dog",
+          "id": 1,
+          "loyalty": 75,
+          "lv": 2,
+          "name": "こむぎ",
+          "object_attack_power": 0,
+          "species": "shiba",
+          "unavailable_through_day": 0,
+          "xp": 0
+        },
+        {
+          "affinity": null,
+          "category": "bird",
+          "id": 2,
+          "loyalty": 0,
+          "lv": 1,
+          "name": "",
+          "species": "hen",
+          "traits": {},
+          "unavailable_through_day": 0,
+          "xp": 0
+        },
+        {
+          "affinity": 0,
+          "category": "cat",
+          "id": 3,
+          "loyalty": 0,
+          "lv": 1,
+          "name": "",
+          "species": "cat",
+          "traits": {},
+          "unavailable_through_day": 0,
+          "xp": 0
+        }
+      ],
+      "book_motion": "",
+      "buttons": {
+        "advance": {
+          "disabled": false,
+          "visible": true
+        },
+        "group0": {
+          "disabled": false,
+          "visible": false
+        },
+        "group1": {
+          "disabled": false,
+          "visible": false
+        },
+        "home": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_morning": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_resume": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "open_book": {
+          "disabled": false,
+          "visible": true
+        },
+        "open_market": {
+          "disabled": false,
+          "visible": true
+        },
+        "pause": {
+          "disabled": false,
+          "visible": false
+        },
+        "retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "speed": {
+          "disabled": false,
+          "visible": false
+        },
+        "walk": {
+          "disabled": false,
+          "visible": false
+        }
+      },
+      "category": "animals",
+      "exp_pool": 80,
+      "file": "58_right_click_closing_frame_7.png",
+      "fixture": "review_resources_gold_150_exp_100",
+      "gold": 82,
+      "label": "right_click_closing_frame_7",
+      "level": "detail",
+      "next_animal_id": 2,
+      "page": 0,
+      "product": {
+        "animal_id": -1,
+        "count": 1,
+        "id": "cat"
+      },
+      "rename_open": false,
+      "screen": "morning",
+      "side": "home",
+      "tick": 0
+    },
+    {
+      "animal_id": 2,
+      "animals": [
+        {
+          "affinity": null,
+          "category": "dog",
+          "id": 1,
+          "loyalty": 75,
+          "lv": 2,
+          "name": "こむぎ",
+          "object_attack_power": 0,
+          "species": "shiba",
+          "unavailable_through_day": 0,
+          "xp": 0
+        },
+        {
+          "affinity": null,
+          "category": "bird",
+          "id": 2,
+          "loyalty": 0,
+          "lv": 1,
+          "name": "",
+          "species": "hen",
+          "traits": {},
+          "unavailable_through_day": 0,
+          "xp": 0
+        },
+        {
+          "affinity": 0,
+          "category": "cat",
+          "id": 3,
+          "loyalty": 0,
+          "lv": 1,
+          "name": "",
+          "species": "cat",
+          "traits": {},
+          "unavailable_through_day": 0,
+          "xp": 0
+        }
+      ],
+      "book_motion": "",
+      "buttons": {
+        "advance": {
+          "disabled": false,
+          "visible": true
+        },
+        "group0": {
+          "disabled": false,
+          "visible": false
+        },
+        "group1": {
+          "disabled": false,
+          "visible": false
+        },
+        "home": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_morning": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_resume": {
+          "disabled": false,
+          "visible": false
+        },
+        "menu_retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "open_book": {
+          "disabled": false,
+          "visible": true
+        },
+        "open_market": {
+          "disabled": false,
+          "visible": true
+        },
+        "pause": {
+          "disabled": false,
+          "visible": false
+        },
+        "retry": {
+          "disabled": false,
+          "visible": false
+        },
+        "speed": {
+          "disabled": false,
+          "visible": false
+        },
+        "walk": {
+          "disabled": false,
+          "visible": false
+        }
+      },
+      "category": "animals",
+      "exp_pool": 80,
+      "file": "59_final_morning.png",
+      "fixture": "review_resources_gold_150_exp_100",
+      "gold": 82,
+      "label": "final_morning",
+      "level": "detail",
+      "next_animal_id": 2,
+      "page": 0,
+      "product": {
+        "animal_id": -1,
+        "count": 1,
+        "id": "cat"
+      },
+      "rename_open": false,
+      "screen": "morning",
+      "side": "home",
+      "tick": 0
+    }
+  ]
+}
