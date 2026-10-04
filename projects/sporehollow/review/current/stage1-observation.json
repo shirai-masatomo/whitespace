@@ -1,0 +1,29 @@
+{
+  "implementation_commit": "24ddf180c908d1b5035fc882fc0e3d197513918d",
+  "asset_delivery_commit": "7e408375f19b86759fc614508fc3e5f413f67ff9",
+  "dirty": false,
+  "headless": {
+    "checks": 534,
+    "failed": 0,
+    "ai_scenarios": 192,
+    "windows_export": true,
+    "exported_headless_smoke": true
+  },
+  "isolated": {
+    "controls_checks": 74,
+    "character_checks": 31,
+    "failed": 0,
+    "reports": {
+      "ui": "audit\\ui\\observations.json",
+      "characters": "audit\\characters\\observations.json"
+    },
+    "supplement": "audit/supplement/observations.json"
+  },
+  "fixture_note": "Wall patterns and animal states include controlled fixtures; input events run inside isolated game, not user OS input.",
+  "limits": [
+    "Physical Japanese keyboard/IME not tested",
+    "Merchant dedicated wheel/opening/walking animation not delivered",
+    "Wall/floor final PNG not delivered"
+  ],
+  "build_sha256": "3bf6deb9bdfa50d6ab7853d2fc64e4683f1f80fd30798d6e40390ba773ba8fc2"
+}

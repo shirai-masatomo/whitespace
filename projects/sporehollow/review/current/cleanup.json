@@ -319,5 +319,82 @@
     "path": "C:\\Users\\masat\\Documents\\codex_test\\cleanup_sources.py",
     "category": "D",
     "reason": "One-time patch helper created by this task; applied source is in Git"
+  },
+  {
+    "category": "D",
+    "reason": "Superseded generated validation output; final matching build and evidence retained",
+    "source": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\artifacts\\validation\\20261004-205242-935",
+    "bytes": 122175260.0,
+    "action": "delete"
+  },
+  {
+    "category": "D",
+    "reason": "Superseded generated validation output; final matching build and evidence retained",
+    "source": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\artifacts\\validation\\20261004-210925-784",
+    "bytes": 3316090.0,
+    "action": "delete"
+  },
+  {
+    "category": "D",
+    "reason": "Superseded generated validation output; final matching build and evidence retained",
+    "source": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\artifacts\\validation\\20261004-211230-010",
+    "bytes": 3290496.0,
+    "action": "delete"
+  },
+  {
+    "category": "D",
+    "reason": "Superseded generated validation output; final matching build and evidence retained",
+    "source": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\artifacts\\validation\\20261004-211356-281",
+    "bytes": 3291107.0,
+    "action": "delete"
+  },
+  {
+    "category": "D",
+    "reason": "Superseded generated validation output; final matching build and evidence retained",
+    "source": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\artifacts\\validation\\20261004-211416-374",
+    "bytes": 3291754.0,
+    "action": "delete"
+  },
+  {
+    "category": "D",
+    "reason": "Superseded generated validation output; final matching build and evidence retained",
+    "source": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\artifacts\\validation\\20261004-211548-244",
+    "bytes": 3479890.0,
+    "action": "delete"
+  },
+  {
+    "category": "D",
+    "reason": "Superseded generated validation output; final matching build and evidence retained",
+    "source": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\artifacts\\validation\\20261004-212046-733",
+    "bytes": 122441414.0,
+    "action": "delete"
+  },
+  {
+    "category": "D",
+    "reason": "Superseded generated validation output; final matching build and evidence retained",
+    "source": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\artifacts\\validation\\20261004-212616-945",
+    "bytes": 3291900.0,
+    "action": "delete"
+  },
+  {
+    "category": "D",
+    "reason": "Superseded generated validation output; final matching build and evidence retained",
+    "source": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\artifacts\\isolated\\20261004-211622-846",
+    "bytes": 5858698.0,
+    "action": "delete"
+  },
+  {
+    "category": "D",
+    "reason": "Superseded generated validation output; final matching build and evidence retained",
+    "source": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\artifacts\\isolated\\20261004-211807-633",
+    "bytes": 6558514.0,
+    "action": "delete"
+  },
+  {
+    "category": "D",
+    "reason": "Superseded generated validation output; final matching build and evidence retained",
+    "source": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\artifacts\\isolated\\20261004-211849-898",
+    "bytes": 29585625.0,
+    "action": "delete"
   }
 ]

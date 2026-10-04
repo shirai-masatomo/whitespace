@@ -1,0 +1,2558 @@
+{
+  "asset_delivery_commit": "7e408375f19b86759fc614508fc3e5f413f67ff9",
+  "captures": {
+    "all_animals": {
+      "dog_facing": 1,
+      "keeper_facing": 1,
+      "keeper_pos": [
+        10,
+        8
+      ],
+      "paused": true,
+      "rest": "awake",
+      "selection": "{ \"kind\": \"keeper\" }",
+      "speed": 1,
+      "tick": 24,
+      "zoom": 1.5
+    },
+    "awake": {
+      "dog_facing": 1,
+      "keeper_facing": 1,
+      "keeper_pos": [
+        10,
+        8
+      ],
+      "paused": true,
+      "rest": "awake",
+      "selection": "{ \"kind\": \"keeper\" }",
+      "speed": 1,
+      "tick": 22,
+      "zoom": 1.5
+    },
+    "awake_idle": {
+      "dog_facing": 1,
+      "keeper_facing": 1,
+      "keeper_pos": [
+        10,
+        8
+      ],
+      "paused": true,
+      "rest": "awake",
+      "selection": "{ \"kind\": \"keeper\" }",
+      "speed": 1,
+      "tick": 24,
+      "zoom": 1.5
+    },
+    "characters": {
+      "dog_facing": 1,
+      "keeper_facing": 1,
+      "keeper_pos": [
+        10,
+        8
+      ],
+      "paused": true,
+      "rest": "awake",
+      "selection": "{  }",
+      "speed": 1,
+      "tick": 0,
+      "zoom": 1.5
+    },
+    "dog_left_stop": {
+      "dog_facing": -1,
+      "keeper_facing": -1,
+      "keeper_pos": [
+        12,
+        9
+      ],
+      "paused": true,
+      "rest": "awake",
+      "selection": "{ \"kind\": \"animal\", \"id\": 1 }",
+      "speed": 2,
+      "tick": 64,
+      "zoom": 1.5
+    },
+    "dog_resting": {
+      "dog_facing": 1,
+      "keeper_facing": 1,
+      "keeper_pos": [
+        11,
+        8
+      ],
+      "paused": false,
+      "rest": "awake",
+      "selection": "{ \"kind\": \"animal\", \"id\": 1 }",
+      "speed": 1,
+      "tick": 49,
+      "zoom": 1.5
+    },
+    "floor_guide": {
+      "dog_facing": 1,
+      "keeper_facing": 1,
+      "keeper_pos": [
+        10,
+        8
+      ],
+      "paused": true,
+      "rest": "awake",
+      "selection": "{ \"kind\": \"animal\", \"id\": 1 }",
+      "speed": 1,
+      "tick": 0,
+      "zoom": 1.5
+    },
+    "floor_move": {
+      "dog_facing": 1,
+      "keeper_facing": 1,
+      "keeper_pos": [
+        10,
+        8
+      ],
+      "paused": true,
+      "rest": "awake",
+      "selection": "{ \"kind\": \"keeper\" }",
+      "speed": 1,
+      "tick": 0,
+      "zoom": 1.5
+    },
+    "floor_selected": {
+      "dog_facing": 1,
+      "keeper_facing": 1,
+      "keeper_pos": [
+        10,
+        8
+      ],
+      "paused": true,
+      "rest": "awake",
+      "selection": "{ \"kind\": \"floor\", \"pos\": (8, 7), \"target_id\": 1 }",
+      "speed": 1,
+      "tick": 0,
+      "zoom": 1.5
+    },
+    "keeper_selected": {
+      "dog_facing": 1,
+      "keeper_facing": 1,
+      "keeper_pos": [
+        10,
+        8
+      ],
+      "paused": true,
+      "rest": "awake",
+      "selection": "{ \"kind\": \"keeper\" }",
+      "speed": 1,
+      "tick": 0,
+      "zoom": 1.5
+    },
+    "left_stop": {
+      "dog_facing": 1,
+      "keeper_facing": -1,
+      "keeper_pos": [
+        10,
+        8
+      ],
+      "paused": false,
+      "rest": "awake",
+      "selection": "{ \"kind\": \"keeper\" }",
+      "speed": 1.0,
+      "tick": 17,
+      "zoom": 1.5
+    },
+    "native_scale": {
+      "dog_facing": 1,
+      "keeper_facing": 1,
+      "keeper_pos": [
+        10,
+        8
+      ],
+      "paused": true,
+      "rest": "awake",
+      "selection": "{  }",
+      "speed": 1,
+      "tick": 0,
+      "zoom": 1.0
+    },
+    "settling": {
+      "dog_facing": 1,
+      "keeper_facing": 1,
+      "keeper_pos": [
+        10,
+        8
+      ],
+      "paused": false,
+      "rest": "settling",
+      "selection": "{ \"kind\": \"keeper\" }",
+      "speed": 1,
+      "tick": 0,
+      "zoom": 1.5
+    },
+    "sleeping": {
+      "dog_facing": 1,
+      "keeper_facing": 1,
+      "keeper_pos": [
+        10,
+        8
+      ],
+      "paused": true,
+      "rest": "sleeping",
+      "selection": "{ \"kind\": \"keeper\" }",
+      "speed": 1,
+      "tick": 22,
+      "zoom": 1.5
+    }
+  },
+  "checks": [
+    {
+      "check": "save native_scale",
+      "passed": true
+    },
+    {
+      "check": "save characters",
+      "passed": true
+    },
+    {
+      "check": "Keeper sprite click selects keeper",
+      "passed": true
+    },
+    {
+      "check": "save keeper_selected",
+      "passed": true
+    },
+    {
+      "check": "Paused floor movement plans without execution",
+      "passed": true
+    },
+    {
+      "check": "save floor_move",
+      "passed": true
+    },
+    {
+      "check": "Deselect preserves movement",
+      "passed": true
+    },
+    {
+      "check": "Neutral floor click selects floor",
+      "passed": true
+    },
+    {
+      "check": "save floor_selected",
+      "passed": true
+    },
+    {
+      "check": "Right arrival at speed 0.5",
+      "passed": true
+    },
+    {
+      "check": "Left stop keeps facing at speed 0.5",
+      "passed": true
+    },
+    {
+      "check": "Right arrival at speed 1.0",
+      "passed": true
+    },
+    {
+      "check": "Left stop keeps facing at speed 1.0",
+      "passed": true
+    },
+    {
+      "check": "save left_stop",
+      "passed": true
+    },
+    {
+      "check": "Right arrival at speed 2.0",
+      "passed": true
+    },
+    {
+      "check": "Left stop keeps facing at speed 2.0",
+      "passed": true
+    },
+    {
+      "check": "Paused floor guidance accepted",
+      "passed": true
+    },
+    {
+      "check": "save floor_guide",
+      "passed": true
+    },
+    {
+      "check": "Dog physically arrives on target floor",
+      "passed": true
+    },
+    {
+      "check": "Dog left guidance and facing on stop",
+      "passed": true
+    },
+    {
+      "check": "save dog_left_stop",
+      "passed": true
+    },
+    {
+      "check": "save settling",
+      "passed": true
+    },
+    {
+      "check": "Rest reaches sleep",
+      "passed": true
+    },
+    {
+      "check": "save sleeping",
+      "passed": true
+    },
+    {
+      "check": "Wake clears sleep state",
+      "passed": true
+    },
+    {
+      "check": "save awake",
+      "passed": true
+    },
+    {
+      "check": "Wake animation settles back to idle",
+      "passed": true
+    },
+    {
+      "check": "save awake_idle",
+      "passed": true
+    },
+    {
+      "check": "save all_animals",
+      "passed": true
+    },
+    {
+      "check": "save dog_resting",
+      "passed": true
+    },
+    {
+      "check": "No legacy white key material",
+      "passed": true
+    }
+  ],
+  "dirty": "False",
+  "failures": 0,
+  "implementation_commit": "24ddf180c908d1b5035fc882fc0e3d197513918d",
+  "method": "GPU rendering on private noninteractive Windows station; game-local InputEvent injection, no OS input",
+  "motion": [
+    {
+      "dog_facing": 1,
+      "file": "move_0p5_right_000.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(10.0, 8.0)",
+      "speed": 0.5,
+      "tick": 0
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_0p5_right_003.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(10.0, 8.0)",
+      "speed": 0.5,
+      "tick": 0
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_0p5_right_006.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(10.0, 8.0)",
+      "speed": 0.5,
+      "tick": 0
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_0p5_right_009.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(10.0, 8.0)",
+      "speed": 0.5,
+      "tick": 0
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_0p5_right_012.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(10.0, 8.0)",
+      "speed": 0.5,
+      "tick": 0
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_0p5_right_015.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(10.0, 8.0)",
+      "speed": 0.5,
+      "tick": 1
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_0p5_right_018.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(10.0, 8.0)",
+      "speed": 0.5,
+      "tick": 1
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_0p5_right_021.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(10.0, 8.0)",
+      "speed": 0.5,
+      "tick": 1
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_0p5_right_024.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(10.0, 8.0)",
+      "speed": 0.5,
+      "tick": 1
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_0p5_right_027.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(10.0, 8.0)",
+      "speed": 0.5,
+      "tick": 1
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_0p5_right_030.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(10.04167, 8.0)",
+      "speed": 0.5,
+      "tick": 2
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_0p5_right_033.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(10.16667, 8.0)",
+      "speed": 0.5,
+      "tick": 2
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_0p5_right_036.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(10.29167, 8.0)",
+      "speed": 0.5,
+      "tick": 2
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_0p5_right_039.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(10.41667, 8.0)",
+      "speed": 0.5,
+      "tick": 2
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_0p5_right_042.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(10.54167, 8.0)",
+      "speed": 0.5,
+      "tick": 2
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_0p5_right_045.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(10.66667, 8.0)",
+      "speed": 0.5,
+      "tick": 3
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_0p5_right_048.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(10.79167, 8.0)",
+      "speed": 0.5,
+      "tick": 3
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_0p5_right_051.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(10.91667, 8.0)",
+      "speed": 0.5,
+      "tick": 3
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_0p5_right_054.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(11.0, 8.0)",
+      "speed": 0.5,
+      "tick": 3
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_0p5_right_057.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(11.0, 8.0)",
+      "speed": 0.5,
+      "tick": 3
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_0p5_right_060.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(11.0, 8.0)",
+      "speed": 0.5,
+      "tick": 4
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_0p5_right_063.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(11.0, 8.0)",
+      "speed": 0.5,
+      "tick": 4
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_0p5_left_000.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(11.0, 8.0)",
+      "speed": 0.5,
+      "tick": 4
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_0p5_left_003.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(11.0, 8.0)",
+      "speed": 0.5,
+      "tick": 4
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_0p5_left_006.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(11.0, 8.0)",
+      "speed": 0.5,
+      "tick": 4
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_0p5_left_009.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(11.0, 8.0)",
+      "speed": 0.5,
+      "tick": 5
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_0p5_left_012.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(11.0, 8.0)",
+      "speed": 0.5,
+      "tick": 5
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_0p5_left_015.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(11.0, 8.0)",
+      "speed": 0.5,
+      "tick": 5
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_0p5_left_018.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(11.0, 8.0)",
+      "speed": 0.5,
+      "tick": 5
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_0p5_left_021.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(11.0, 8.0)",
+      "speed": 0.5,
+      "tick": 5
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_0p5_left_024.png",
+      "keeper_facing": -1,
+      "keeper_visual": "(10.95833, 8.0)",
+      "speed": 0.5,
+      "tick": 6
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_0p5_left_027.png",
+      "keeper_facing": -1,
+      "keeper_visual": "(10.83333, 8.0)",
+      "speed": 0.5,
+      "tick": 6
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_0p5_left_030.png",
+      "keeper_facing": -1,
+      "keeper_visual": "(10.70833, 8.0)",
+      "speed": 0.5,
+      "tick": 6
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_0p5_left_033.png",
+      "keeper_facing": -1,
+      "keeper_visual": "(10.58333, 8.0)",
+      "speed": 0.5,
+      "tick": 6
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_0p5_left_036.png",
+      "keeper_facing": -1,
+      "keeper_visual": "(10.45833, 8.0)",
+      "speed": 0.5,
+      "tick": 6
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_0p5_left_039.png",
+      "keeper_facing": -1,
+      "keeper_visual": "(10.33333, 8.0)",
+      "speed": 0.5,
+      "tick": 7
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_0p5_left_042.png",
+      "keeper_facing": -1,
+      "keeper_visual": "(10.20833, 8.0)",
+      "speed": 0.5,
+      "tick": 7
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_0p5_left_045.png",
+      "keeper_facing": -1,
+      "keeper_visual": "(10.08333, 8.0)",
+      "speed": 0.5,
+      "tick": 7
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_0p5_left_048.png",
+      "keeper_facing": -1,
+      "keeper_visual": "(10.0, 8.0)",
+      "speed": 0.5,
+      "tick": 7
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_0p5_left_051.png",
+      "keeper_facing": -1,
+      "keeper_visual": "(10.0, 8.0)",
+      "speed": 0.5,
+      "tick": 7
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_0p5_left_054.png",
+      "keeper_facing": -1,
+      "keeper_visual": "(10.0, 8.0)",
+      "speed": 0.5,
+      "tick": 8
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_0p5_left_057.png",
+      "keeper_facing": -1,
+      "keeper_visual": "(10.0, 8.0)",
+      "speed": 0.5,
+      "tick": 8
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_0p5_left_060.png",
+      "keeper_facing": -1,
+      "keeper_visual": "(10.0, 8.0)",
+      "speed": 0.5,
+      "tick": 8
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_0p5_left_063.png",
+      "keeper_facing": -1,
+      "keeper_visual": "(10.0, 8.0)",
+      "speed": 0.5,
+      "tick": 8
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_1p0_right_000.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(10.0, 8.0)",
+      "speed": 1.0,
+      "tick": 0
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_1p0_right_003.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(10.0, 8.0)",
+      "speed": 1.0,
+      "tick": 0
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_1p0_right_006.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(10.0, 8.0)",
+      "speed": 1.0,
+      "tick": 0
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_1p0_right_009.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(10.0, 8.0)",
+      "speed": 1.0,
+      "tick": 1
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_1p0_right_012.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(10.0, 8.0)",
+      "speed": 1.0,
+      "tick": 1
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_1p0_right_015.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(10.08333, 8.0)",
+      "speed": 1.0,
+      "tick": 2
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_1p0_right_018.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(10.33333, 8.0)",
+      "speed": 1.0,
+      "tick": 2
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_1p0_right_021.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(10.58333, 8.0)",
+      "speed": 1.0,
+      "tick": 2
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_1p0_right_024.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(10.83333, 8.0)",
+      "speed": 1.0,
+      "tick": 3
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_1p0_right_027.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(11.0, 8.0)",
+      "speed": 1.0,
+      "tick": 3
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_1p0_right_030.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(11.0, 8.0)",
+      "speed": 1.0,
+      "tick": 4
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_1p0_right_033.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(11.0, 8.0)",
+      "speed": 1.0,
+      "tick": 4
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_1p0_right_036.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(11.0, 8.0)",
+      "speed": 1.0,
+      "tick": 4
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_1p0_right_039.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(11.0, 8.0)",
+      "speed": 1.0,
+      "tick": 5
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_1p0_right_042.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(11.0, 8.0)",
+      "speed": 1.0,
+      "tick": 5
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_1p0_right_045.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(11.0, 8.0)",
+      "speed": 1.0,
+      "tick": 6
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_1p0_right_048.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(11.0, 8.0)",
+      "speed": 1.0,
+      "tick": 6
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_1p0_right_051.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(11.0, 8.0)",
+      "speed": 1.0,
+      "tick": 6
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_1p0_right_054.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(11.0, 8.0)",
+      "speed": 1.0,
+      "tick": 7
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_1p0_right_057.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(11.0, 8.0)",
+      "speed": 1.0,
+      "tick": 7
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_1p0_right_060.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(11.0, 8.0)",
+      "speed": 1.0,
+      "tick": 8
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_1p0_right_063.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(11.0, 8.0)",
+      "speed": 1.0,
+      "tick": 8
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_1p0_left_000.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(11.0, 8.0)",
+      "speed": 1.0,
+      "tick": 8
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_1p0_left_003.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(11.0, 8.0)",
+      "speed": 1.0,
+      "tick": 9
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_1p0_left_006.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(11.0, 8.0)",
+      "speed": 1.0,
+      "tick": 9
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_1p0_left_009.png",
+      "keeper_facing": -1,
+      "keeper_visual": "(10.91667, 8.0)",
+      "speed": 1.0,
+      "tick": 10
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_1p0_left_012.png",
+      "keeper_facing": -1,
+      "keeper_visual": "(10.66667, 8.0)",
+      "speed": 1.0,
+      "tick": 10
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_1p0_left_015.png",
+      "keeper_facing": -1,
+      "keeper_visual": "(10.41667, 8.0)",
+      "speed": 1.0,
+      "tick": 10
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_1p0_left_018.png",
+      "keeper_facing": -1,
+      "keeper_visual": "(10.16667, 8.0)",
+      "speed": 1.0,
+      "tick": 11
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_1p0_left_021.png",
+      "keeper_facing": -1,
+      "keeper_visual": "(10.0, 8.0)",
+      "speed": 1.0,
+      "tick": 11
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_1p0_left_024.png",
+      "keeper_facing": -1,
+      "keeper_visual": "(10.0, 8.0)",
+      "speed": 1.0,
+      "tick": 12
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_1p0_left_027.png",
+      "keeper_facing": -1,
+      "keeper_visual": "(10.0, 8.0)",
+      "speed": 1.0,
+      "tick": 12
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_1p0_left_030.png",
+      "keeper_facing": -1,
+      "keeper_visual": "(10.0, 8.0)",
+      "speed": 1.0,
+      "tick": 12
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_1p0_left_033.png",
+      "keeper_facing": -1,
+      "keeper_visual": "(10.0, 8.0)",
+      "speed": 1.0,
+      "tick": 13
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_1p0_left_036.png",
+      "keeper_facing": -1,
+      "keeper_visual": "(10.0, 8.0)",
+      "speed": 1.0,
+      "tick": 13
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_1p0_left_039.png",
+      "keeper_facing": -1,
+      "keeper_visual": "(10.0, 8.0)",
+      "speed": 1.0,
+      "tick": 14
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_1p0_left_042.png",
+      "keeper_facing": -1,
+      "keeper_visual": "(10.0, 8.0)",
+      "speed": 1.0,
+      "tick": 14
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_1p0_left_045.png",
+      "keeper_facing": -1,
+      "keeper_visual": "(10.0, 8.0)",
+      "speed": 1.0,
+      "tick": 14
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_1p0_left_048.png",
+      "keeper_facing": -1,
+      "keeper_visual": "(10.0, 8.0)",
+      "speed": 1.0,
+      "tick": 15
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_1p0_left_051.png",
+      "keeper_facing": -1,
+      "keeper_visual": "(10.0, 8.0)",
+      "speed": 1.0,
+      "tick": 15
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_1p0_left_054.png",
+      "keeper_facing": -1,
+      "keeper_visual": "(10.0, 8.0)",
+      "speed": 1.0,
+      "tick": 16
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_1p0_left_057.png",
+      "keeper_facing": -1,
+      "keeper_visual": "(10.0, 8.0)",
+      "speed": 1.0,
+      "tick": 16
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_1p0_left_060.png",
+      "keeper_facing": -1,
+      "keeper_visual": "(10.0, 8.0)",
+      "speed": 1.0,
+      "tick": 16
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_1p0_left_063.png",
+      "keeper_facing": -1,
+      "keeper_visual": "(10.0, 8.0)",
+      "speed": 1.0,
+      "tick": 17
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_2p0_right_000.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(10.0, 8.0)",
+      "speed": 2.0,
+      "tick": 0
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_2p0_right_003.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(10.0, 8.0)",
+      "speed": 2.0,
+      "tick": 1
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_2p0_right_006.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(10.0, 8.0)",
+      "speed": 2.0,
+      "tick": 1
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_2p0_right_009.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(10.5, 8.0)",
+      "speed": 2.0,
+      "tick": 2
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_2p0_right_012.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(11.0, 8.0)",
+      "speed": 2.0,
+      "tick": 3
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_2p0_right_015.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(11.0, 8.0)",
+      "speed": 2.0,
+      "tick": 4
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_2p0_right_018.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(11.0, 8.0)",
+      "speed": 2.0,
+      "tick": 5
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_2p0_right_021.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(11.0, 8.0)",
+      "speed": 2.0,
+      "tick": 5
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_2p0_right_024.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(11.0, 8.0)",
+      "speed": 2.0,
+      "tick": 6
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_2p0_right_027.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(11.0, 8.0)",
+      "speed": 2.0,
+      "tick": 7
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_2p0_right_030.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(11.0, 8.0)",
+      "speed": 2.0,
+      "tick": 8
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_2p0_right_033.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(11.0, 8.0)",
+      "speed": 2.0,
+      "tick": 9
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_2p0_right_036.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(11.0, 8.0)",
+      "speed": 2.0,
+      "tick": 9
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_2p0_right_039.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(11.0, 8.0)",
+      "speed": 2.0,
+      "tick": 10
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_2p0_right_042.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(11.0, 8.0)",
+      "speed": 2.0,
+      "tick": 11
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_2p0_right_045.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(11.0, 8.0)",
+      "speed": 2.0,
+      "tick": 12
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_2p0_right_048.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(11.0, 8.0)",
+      "speed": 2.0,
+      "tick": 13
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_2p0_right_051.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(11.0, 8.0)",
+      "speed": 2.0,
+      "tick": 13
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_2p0_right_054.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(11.0, 8.0)",
+      "speed": 2.0,
+      "tick": 14
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_2p0_right_057.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(11.0, 8.0)",
+      "speed": 2.0,
+      "tick": 15
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_2p0_right_060.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(11.0, 8.0)",
+      "speed": 2.0,
+      "tick": 16
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_2p0_right_063.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(11.0, 8.0)",
+      "speed": 2.0,
+      "tick": 17
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_2p0_left_000.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(11.0, 8.0)",
+      "speed": 2.0,
+      "tick": 17
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_2p0_left_003.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(11.0, 8.0)",
+      "speed": 2.0,
+      "tick": 18
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_2p0_left_006.png",
+      "keeper_facing": -1,
+      "keeper_visual": "(10.66667, 8.0)",
+      "speed": 2.0,
+      "tick": 19
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_2p0_left_009.png",
+      "keeper_facing": -1,
+      "keeper_visual": "(10.16667, 8.0)",
+      "speed": 2.0,
+      "tick": 20
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_2p0_left_012.png",
+      "keeper_facing": -1,
+      "keeper_visual": "(10.0, 8.0)",
+      "speed": 2.0,
+      "tick": 21
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_2p0_left_015.png",
+      "keeper_facing": -1,
+      "keeper_visual": "(10.0, 8.0)",
+      "speed": 2.0,
+      "tick": 21
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_2p0_left_018.png",
+      "keeper_facing": -1,
+      "keeper_visual": "(10.0, 8.0)",
+      "speed": 2.0,
+      "tick": 22
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_2p0_left_021.png",
+      "keeper_facing": -1,
+      "keeper_visual": "(10.0, 8.0)",
+      "speed": 2.0,
+      "tick": 23
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_2p0_left_024.png",
+      "keeper_facing": -1,
+      "keeper_visual": "(10.0, 8.0)",
+      "speed": 2.0,
+      "tick": 24
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_2p0_left_027.png",
+      "keeper_facing": -1,
+      "keeper_visual": "(10.0, 8.0)",
+      "speed": 2.0,
+      "tick": 25
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_2p0_left_030.png",
+      "keeper_facing": -1,
+      "keeper_visual": "(10.0, 8.0)",
+      "speed": 2.0,
+      "tick": 25
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_2p0_left_033.png",
+      "keeper_facing": -1,
+      "keeper_visual": "(10.0, 8.0)",
+      "speed": 2.0,
+      "tick": 26
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_2p0_left_036.png",
+      "keeper_facing": -1,
+      "keeper_visual": "(10.0, 8.0)",
+      "speed": 2.0,
+      "tick": 27
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_2p0_left_039.png",
+      "keeper_facing": -1,
+      "keeper_visual": "(10.0, 8.0)",
+      "speed": 2.0,
+      "tick": 28
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_2p0_left_042.png",
+      "keeper_facing": -1,
+      "keeper_visual": "(10.0, 8.0)",
+      "speed": 2.0,
+      "tick": 29
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_2p0_left_045.png",
+      "keeper_facing": -1,
+      "keeper_visual": "(10.0, 8.0)",
+      "speed": 2.0,
+      "tick": 29
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_2p0_left_048.png",
+      "keeper_facing": -1,
+      "keeper_visual": "(10.0, 8.0)",
+      "speed": 2.0,
+      "tick": 30
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_2p0_left_051.png",
+      "keeper_facing": -1,
+      "keeper_visual": "(10.0, 8.0)",
+      "speed": 2.0,
+      "tick": 31
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_2p0_left_054.png",
+      "keeper_facing": -1,
+      "keeper_visual": "(10.0, 8.0)",
+      "speed": 2.0,
+      "tick": 32
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_2p0_left_057.png",
+      "keeper_facing": -1,
+      "keeper_visual": "(10.0, 8.0)",
+      "speed": 2.0,
+      "tick": 33
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_2p0_left_060.png",
+      "keeper_facing": -1,
+      "keeper_visual": "(10.0, 8.0)",
+      "speed": 2.0,
+      "tick": 33
+    },
+    {
+      "dog_facing": 1,
+      "file": "move_2p0_left_063.png",
+      "keeper_facing": -1,
+      "keeper_visual": "(10.0, 8.0)",
+      "speed": 2.0,
+      "tick": 34
+    },
+    {
+      "dog_facing": 1,
+      "file": "guide_000.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(10.0, 8.0)",
+      "speed": 2,
+      "tick": 0
+    },
+    {
+      "dog_facing": 1,
+      "file": "guide_003.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(10.0, 8.0)",
+      "speed": 2,
+      "tick": 1
+    },
+    {
+      "dog_facing": 1,
+      "file": "guide_006.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(10.0, 8.0)",
+      "speed": 2,
+      "tick": 1
+    },
+    {
+      "dog_facing": 1,
+      "file": "guide_009.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(10.5, 8.0)",
+      "speed": 2,
+      "tick": 2
+    },
+    {
+      "dog_facing": 1,
+      "file": "guide_012.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(11.0, 8.0)",
+      "speed": 2,
+      "tick": 3
+    },
+    {
+      "dog_facing": 1,
+      "file": "guide_015.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(11.0, 8.0)",
+      "speed": 2,
+      "tick": 4
+    },
+    {
+      "dog_facing": 1,
+      "file": "guide_018.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(11.0, 8.166667)",
+      "speed": 2,
+      "tick": 5
+    },
+    {
+      "dog_facing": 1,
+      "file": "guide_021.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(11.0, 8.666668)",
+      "speed": 2,
+      "tick": 5
+    },
+    {
+      "dog_facing": 1,
+      "file": "guide_024.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(11.16667, 9.0)",
+      "speed": 2,
+      "tick": 6
+    },
+    {
+      "dog_facing": 1,
+      "file": "guide_027.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(11.66667, 9.0)",
+      "speed": 2,
+      "tick": 7
+    },
+    {
+      "dog_facing": 1,
+      "file": "guide_030.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(12.16667, 9.0)",
+      "speed": 2,
+      "tick": 8
+    },
+    {
+      "dog_facing": 1,
+      "file": "guide_033.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(12.66667, 9.0)",
+      "speed": 2,
+      "tick": 9
+    },
+    {
+      "dog_facing": 1,
+      "file": "guide_036.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(13.16667, 9.0)",
+      "speed": 2,
+      "tick": 9
+    },
+    {
+      "dog_facing": 1,
+      "file": "guide_039.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(13.66667, 9.0)",
+      "speed": 2,
+      "tick": 10
+    },
+    {
+      "dog_facing": 1,
+      "file": "guide_042.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(14.0, 9.0)",
+      "speed": 2,
+      "tick": 11
+    },
+    {
+      "dog_facing": 1,
+      "file": "guide_045.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(14.0, 9.0)",
+      "speed": 2,
+      "tick": 12
+    },
+    {
+      "dog_facing": 1,
+      "file": "guide_048.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(14.0, 9.0)",
+      "speed": 2,
+      "tick": 13
+    },
+    {
+      "dog_facing": 1,
+      "file": "guide_051.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(14.0, 9.0)",
+      "speed": 2,
+      "tick": 13
+    },
+    {
+      "dog_facing": 1,
+      "file": "guide_054.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(14.0, 9.0)",
+      "speed": 2,
+      "tick": 14
+    },
+    {
+      "dog_facing": 1,
+      "file": "guide_057.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(14.0, 9.0)",
+      "speed": 2,
+      "tick": 15
+    },
+    {
+      "dog_facing": 1,
+      "file": "guide_060.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(14.0, 9.0)",
+      "speed": 2,
+      "tick": 16
+    },
+    {
+      "dog_facing": 1,
+      "file": "guide_063.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(14.0, 9.0)",
+      "speed": 2,
+      "tick": 17
+    },
+    {
+      "dog_facing": 1,
+      "file": "guide_066.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(14.0, 9.0)",
+      "speed": 2,
+      "tick": 17
+    },
+    {
+      "dog_facing": 1,
+      "file": "guide_069.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(14.0, 9.0)",
+      "speed": 2,
+      "tick": 18
+    },
+    {
+      "dog_facing": 1,
+      "file": "guide_072.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(14.0, 9.0)",
+      "speed": 2,
+      "tick": 19
+    },
+    {
+      "dog_facing": 1,
+      "file": "guide_075.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(14.0, 9.0)",
+      "speed": 2,
+      "tick": 20
+    },
+    {
+      "dog_facing": 1,
+      "file": "guide_078.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(14.0, 9.0)",
+      "speed": 2,
+      "tick": 21
+    },
+    {
+      "dog_facing": 1,
+      "file": "guide_081.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(14.0, 9.0)",
+      "speed": 2,
+      "tick": 21
+    },
+    {
+      "dog_facing": 1,
+      "file": "guide_084.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(14.0, 9.0)",
+      "speed": 2,
+      "tick": 22
+    },
+    {
+      "dog_facing": 1,
+      "file": "guide_087.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(14.0, 9.0)",
+      "speed": 2,
+      "tick": 23
+    },
+    {
+      "dog_facing": 1,
+      "file": "guide_090.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(14.0, 9.0)",
+      "speed": 2,
+      "tick": 24
+    },
+    {
+      "dog_facing": 1,
+      "file": "guide_093.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(14.0, 9.0)",
+      "speed": 2,
+      "tick": 25
+    },
+    {
+      "dog_facing": 1,
+      "file": "guide_096.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(14.0, 9.0)",
+      "speed": 2,
+      "tick": 25
+    },
+    {
+      "dog_facing": 1,
+      "file": "guide_099.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(14.0, 9.0)",
+      "speed": 2,
+      "tick": 26
+    },
+    {
+      "dog_facing": 1,
+      "file": "guide_102.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(14.0, 9.0)",
+      "speed": 2,
+      "tick": 27
+    },
+    {
+      "dog_facing": 1,
+      "file": "guide_105.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(14.0, 9.0)",
+      "speed": 2,
+      "tick": 28
+    },
+    {
+      "dog_facing": 1,
+      "file": "guide_108.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(14.0, 9.0)",
+      "speed": 2,
+      "tick": 29
+    },
+    {
+      "dog_facing": 1,
+      "file": "guide_111.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(14.0, 9.0)",
+      "speed": 2,
+      "tick": 29
+    },
+    {
+      "dog_facing": 1,
+      "file": "guide_114.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(14.0, 9.0)",
+      "speed": 2,
+      "tick": 30
+    },
+    {
+      "dog_facing": 1,
+      "file": "guide_117.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(14.0, 9.0)",
+      "speed": 2,
+      "tick": 31
+    },
+    {
+      "dog_facing": 1,
+      "file": "guide_left_000.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(14.0, 9.0)",
+      "speed": 2,
+      "tick": 32
+    },
+    {
+      "dog_facing": 1,
+      "file": "guide_left_003.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(14.0, 9.0)",
+      "speed": 2,
+      "tick": 33
+    },
+    {
+      "dog_facing": 1,
+      "file": "guide_left_006.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(14.0, 9.0)",
+      "speed": 2,
+      "tick": 33
+    },
+    {
+      "dog_facing": 1,
+      "file": "guide_left_009.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(14.0, 9.0)",
+      "speed": 2,
+      "tick": 34
+    },
+    {
+      "dog_facing": 1,
+      "file": "guide_left_012.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(14.0, 8.666666)",
+      "speed": 2,
+      "tick": 35
+    },
+    {
+      "dog_facing": 1,
+      "file": "guide_left_015.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(14.0, 8.166665)",
+      "speed": 2,
+      "tick": 36
+    },
+    {
+      "dog_facing": 1,
+      "file": "guide_left_018.png",
+      "keeper_facing": -1,
+      "keeper_visual": "(13.83333, 8.0)",
+      "speed": 2,
+      "tick": 37
+    },
+    {
+      "dog_facing": 1,
+      "file": "guide_left_021.png",
+      "keeper_facing": -1,
+      "keeper_visual": "(13.33333, 8.0)",
+      "speed": 2,
+      "tick": 37
+    },
+    {
+      "dog_facing": 1,
+      "file": "guide_left_024.png",
+      "keeper_facing": -1,
+      "keeper_visual": "(12.83333, 8.0)",
+      "speed": 2,
+      "tick": 38
+    },
+    {
+      "dog_facing": 1,
+      "file": "guide_left_027.png",
+      "keeper_facing": -1,
+      "keeper_visual": "(12.33333, 8.0)",
+      "speed": 2,
+      "tick": 39
+    },
+    {
+      "dog_facing": 1,
+      "file": "guide_left_030.png",
+      "keeper_facing": -1,
+      "keeper_visual": "(12.0, 8.166671)",
+      "speed": 2,
+      "tick": 40
+    },
+    {
+      "dog_facing": 1,
+      "file": "guide_left_033.png",
+      "keeper_facing": -1,
+      "keeper_visual": "(12.0, 8.666672)",
+      "speed": 2,
+      "tick": 41
+    },
+    {
+      "dog_facing": 1,
+      "file": "guide_left_036.png",
+      "keeper_facing": -1,
+      "keeper_visual": "(12.0, 9.0)",
+      "speed": 2,
+      "tick": 41
+    },
+    {
+      "dog_facing": 1,
+      "file": "guide_left_039.png",
+      "keeper_facing": -1,
+      "keeper_visual": "(12.0, 9.0)",
+      "speed": 2,
+      "tick": 42
+    },
+    {
+      "dog_facing": -1,
+      "file": "guide_left_042.png",
+      "keeper_facing": -1,
+      "keeper_visual": "(12.0, 9.0)",
+      "speed": 2,
+      "tick": 43
+    },
+    {
+      "dog_facing": -1,
+      "file": "guide_left_045.png",
+      "keeper_facing": -1,
+      "keeper_visual": "(12.0, 9.0)",
+      "speed": 2,
+      "tick": 44
+    },
+    {
+      "dog_facing": -1,
+      "file": "guide_left_048.png",
+      "keeper_facing": -1,
+      "keeper_visual": "(12.0, 9.0)",
+      "speed": 2,
+      "tick": 45
+    },
+    {
+      "dog_facing": -1,
+      "file": "guide_left_051.png",
+      "keeper_facing": -1,
+      "keeper_visual": "(12.0, 9.0)",
+      "speed": 2,
+      "tick": 45
+    },
+    {
+      "dog_facing": -1,
+      "file": "guide_left_054.png",
+      "keeper_facing": -1,
+      "keeper_visual": "(12.0, 9.0)",
+      "speed": 2,
+      "tick": 46
+    },
+    {
+      "dog_facing": -1,
+      "file": "guide_left_057.png",
+      "keeper_facing": -1,
+      "keeper_visual": "(12.0, 9.0)",
+      "speed": 2,
+      "tick": 47
+    },
+    {
+      "dog_facing": -1,
+      "file": "guide_left_060.png",
+      "keeper_facing": -1,
+      "keeper_visual": "(12.0, 9.0)",
+      "speed": 2,
+      "tick": 48
+    },
+    {
+      "dog_facing": -1,
+      "file": "guide_left_063.png",
+      "keeper_facing": -1,
+      "keeper_visual": "(12.0, 9.0)",
+      "speed": 2,
+      "tick": 49
+    },
+    {
+      "dog_facing": -1,
+      "file": "guide_left_066.png",
+      "keeper_facing": -1,
+      "keeper_visual": "(12.0, 9.0)",
+      "speed": 2,
+      "tick": 49
+    },
+    {
+      "dog_facing": -1,
+      "file": "guide_left_069.png",
+      "keeper_facing": -1,
+      "keeper_visual": "(12.0, 9.0)",
+      "speed": 2,
+      "tick": 50
+    },
+    {
+      "dog_facing": -1,
+      "file": "guide_left_072.png",
+      "keeper_facing": -1,
+      "keeper_visual": "(12.0, 9.0)",
+      "speed": 2,
+      "tick": 51
+    },
+    {
+      "dog_facing": -1,
+      "file": "guide_left_075.png",
+      "keeper_facing": -1,
+      "keeper_visual": "(12.0, 9.0)",
+      "speed": 2,
+      "tick": 52
+    },
+    {
+      "dog_facing": -1,
+      "file": "guide_left_078.png",
+      "keeper_facing": -1,
+      "keeper_visual": "(12.0, 9.0)",
+      "speed": 2,
+      "tick": 53
+    },
+    {
+      "dog_facing": -1,
+      "file": "guide_left_081.png",
+      "keeper_facing": -1,
+      "keeper_visual": "(12.0, 9.0)",
+      "speed": 2,
+      "tick": 53
+    },
+    {
+      "dog_facing": -1,
+      "file": "guide_left_084.png",
+      "keeper_facing": -1,
+      "keeper_visual": "(12.0, 9.0)",
+      "speed": 2,
+      "tick": 54
+    },
+    {
+      "dog_facing": -1,
+      "file": "guide_left_087.png",
+      "keeper_facing": -1,
+      "keeper_visual": "(12.0, 9.0)",
+      "speed": 2,
+      "tick": 55
+    },
+    {
+      "dog_facing": -1,
+      "file": "guide_left_090.png",
+      "keeper_facing": -1,
+      "keeper_visual": "(12.0, 9.0)",
+      "speed": 2,
+      "tick": 56
+    },
+    {
+      "dog_facing": -1,
+      "file": "guide_left_093.png",
+      "keeper_facing": -1,
+      "keeper_visual": "(12.0, 9.0)",
+      "speed": 2,
+      "tick": 57
+    },
+    {
+      "dog_facing": -1,
+      "file": "guide_left_096.png",
+      "keeper_facing": -1,
+      "keeper_visual": "(12.0, 9.0)",
+      "speed": 2,
+      "tick": 57
+    },
+    {
+      "dog_facing": -1,
+      "file": "guide_left_099.png",
+      "keeper_facing": -1,
+      "keeper_visual": "(12.0, 9.0)",
+      "speed": 2,
+      "tick": 58
+    },
+    {
+      "dog_facing": -1,
+      "file": "guide_left_102.png",
+      "keeper_facing": -1,
+      "keeper_visual": "(12.0, 9.0)",
+      "speed": 2,
+      "tick": 59
+    },
+    {
+      "dog_facing": -1,
+      "file": "guide_left_105.png",
+      "keeper_facing": -1,
+      "keeper_visual": "(12.0, 9.0)",
+      "speed": 2,
+      "tick": 60
+    },
+    {
+      "dog_facing": -1,
+      "file": "guide_left_108.png",
+      "keeper_facing": -1,
+      "keeper_visual": "(12.0, 9.0)",
+      "speed": 2,
+      "tick": 61
+    },
+    {
+      "dog_facing": -1,
+      "file": "guide_left_111.png",
+      "keeper_facing": -1,
+      "keeper_visual": "(12.0, 9.0)",
+      "speed": 2,
+      "tick": 61
+    },
+    {
+      "dog_facing": -1,
+      "file": "guide_left_114.png",
+      "keeper_facing": -1,
+      "keeper_visual": "(12.0, 9.0)",
+      "speed": 2,
+      "tick": 62
+    },
+    {
+      "dog_facing": -1,
+      "file": "guide_left_117.png",
+      "keeper_facing": -1,
+      "keeper_visual": "(12.0, 9.0)",
+      "speed": 2,
+      "tick": 63
+    },
+    {
+      "dog_facing": 1,
+      "file": "wake_000.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(10.0, 8.0)",
+      "speed": 1,
+      "tick": 22
+    },
+    {
+      "dog_facing": 1,
+      "file": "wake_003.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(10.0, 8.0)",
+      "speed": 1,
+      "tick": 22
+    },
+    {
+      "dog_facing": 1,
+      "file": "wake_006.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(10.0, 8.0)",
+      "speed": 1,
+      "tick": 23
+    },
+    {
+      "dog_facing": 1,
+      "file": "wake_009.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(10.0, 8.0)",
+      "speed": 1,
+      "tick": 23
+    },
+    {
+      "dog_facing": 1,
+      "file": "wake_012.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(10.0, 8.0)",
+      "speed": 1,
+      "tick": 24
+    },
+    {
+      "dog_facing": 1,
+      "file": "wake_015.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(10.0, 8.0)",
+      "speed": 1,
+      "tick": 24
+    },
+    {
+      "dog_facing": 1,
+      "file": "animal_motion_000.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(10.0, 8.0)",
+      "speed": 1,
+      "tick": 24
+    },
+    {
+      "dog_facing": 1,
+      "file": "animal_motion_003.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(10.0, 8.0)",
+      "speed": 1,
+      "tick": 25
+    },
+    {
+      "dog_facing": 1,
+      "file": "animal_motion_006.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(10.0, 8.0)",
+      "speed": 1,
+      "tick": 25
+    },
+    {
+      "dog_facing": 1,
+      "file": "animal_motion_009.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(10.0, 8.0)",
+      "speed": 1,
+      "tick": 26
+    },
+    {
+      "dog_facing": 1,
+      "file": "animal_motion_012.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(10.0, 8.0)",
+      "speed": 1,
+      "tick": 26
+    },
+    {
+      "dog_facing": 1,
+      "file": "animal_motion_015.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(10.0, 8.0)",
+      "speed": 1,
+      "tick": 26
+    },
+    {
+      "dog_facing": 1,
+      "file": "animal_motion_018.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(10.0, 8.0)",
+      "speed": 1,
+      "tick": 27
+    },
+    {
+      "dog_facing": 1,
+      "file": "animal_motion_021.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(10.0, 8.0)",
+      "speed": 1,
+      "tick": 27
+    },
+    {
+      "dog_facing": 1,
+      "file": "animal_motion_024.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(10.0, 8.0)",
+      "speed": 1,
+      "tick": 28
+    },
+    {
+      "dog_facing": 1,
+      "file": "animal_motion_027.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(10.0, 8.0)",
+      "speed": 1,
+      "tick": 28
+    },
+    {
+      "dog_facing": 1,
+      "file": "animal_motion_030.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(10.0, 8.0)",
+      "speed": 1,
+      "tick": 28
+    },
+    {
+      "dog_facing": 1,
+      "file": "animal_motion_033.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(10.0, 8.0)",
+      "speed": 1,
+      "tick": 29
+    },
+    {
+      "dog_facing": 1,
+      "file": "animal_motion_036.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(10.0, 8.0)",
+      "speed": 1,
+      "tick": 29
+    },
+    {
+      "dog_facing": 1,
+      "file": "animal_motion_039.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(10.0, 8.0)",
+      "speed": 1,
+      "tick": 30
+    },
+    {
+      "dog_facing": 1,
+      "file": "animal_motion_042.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(10.0, 8.0)",
+      "speed": 1,
+      "tick": 30
+    },
+    {
+      "dog_facing": 1,
+      "file": "animal_motion_045.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(10.0, 8.0)",
+      "speed": 1,
+      "tick": 30
+    },
+    {
+      "dog_facing": 1,
+      "file": "animal_motion_048.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(10.0, 8.0)",
+      "speed": 1,
+      "tick": 31
+    },
+    {
+      "dog_facing": 1,
+      "file": "animal_motion_051.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(10.0, 8.0)",
+      "speed": 1,
+      "tick": 31
+    },
+    {
+      "dog_facing": 1,
+      "file": "animal_motion_054.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(10.0, 8.0)",
+      "speed": 1,
+      "tick": 32
+    },
+    {
+      "dog_facing": 1,
+      "file": "animal_motion_057.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(10.0, 8.0)",
+      "speed": 1,
+      "tick": 32
+    },
+    {
+      "dog_facing": 1,
+      "file": "dog_rest_000.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(10.0, 8.0)",
+      "speed": 1,
+      "tick": 32
+    },
+    {
+      "dog_facing": 1,
+      "file": "dog_rest_003.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(10.0, 8.0)",
+      "speed": 1,
+      "tick": 33
+    },
+    {
+      "dog_facing": 1,
+      "file": "dog_rest_006.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(10.0, 8.0)",
+      "speed": 1,
+      "tick": 33
+    },
+    {
+      "dog_facing": 1,
+      "file": "dog_rest_009.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(10.08333, 8.0)",
+      "speed": 1,
+      "tick": 34
+    },
+    {
+      "dog_facing": 1,
+      "file": "dog_rest_012.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(10.33333, 8.0)",
+      "speed": 1,
+      "tick": 34
+    },
+    {
+      "dog_facing": 1,
+      "file": "dog_rest_015.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(10.58333, 8.0)",
+      "speed": 1,
+      "tick": 34
+    },
+    {
+      "dog_facing": 1,
+      "file": "dog_rest_018.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(10.83333, 8.0)",
+      "speed": 1,
+      "tick": 35
+    },
+    {
+      "dog_facing": 1,
+      "file": "dog_rest_021.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(11.0, 8.0)",
+      "speed": 1,
+      "tick": 35
+    },
+    {
+      "dog_facing": 1,
+      "file": "dog_rest_024.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(11.0, 8.0)",
+      "speed": 1,
+      "tick": 36
+    },
+    {
+      "dog_facing": 1,
+      "file": "dog_rest_027.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(11.0, 8.0)",
+      "speed": 1,
+      "tick": 36
+    },
+    {
+      "dog_facing": 1,
+      "file": "dog_rest_030.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(11.0, 8.0)",
+      "speed": 1,
+      "tick": 36
+    },
+    {
+      "dog_facing": 1,
+      "file": "dog_rest_033.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(11.0, 8.0)",
+      "speed": 1,
+      "tick": 37
+    },
+    {
+      "dog_facing": 1,
+      "file": "dog_rest_036.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(11.0, 8.0)",
+      "speed": 1,
+      "tick": 37
+    },
+    {
+      "dog_facing": 1,
+      "file": "dog_rest_039.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(11.0, 8.0)",
+      "speed": 1,
+      "tick": 38
+    },
+    {
+      "dog_facing": 1,
+      "file": "dog_rest_042.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(11.0, 8.0)",
+      "speed": 1,
+      "tick": 38
+    },
+    {
+      "dog_facing": 1,
+      "file": "dog_rest_045.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(11.0, 8.0)",
+      "speed": 1,
+      "tick": 38
+    },
+    {
+      "dog_facing": 1,
+      "file": "dog_rest_048.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(11.0, 8.0)",
+      "speed": 1,
+      "tick": 39
+    },
+    {
+      "dog_facing": 1,
+      "file": "dog_rest_051.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(11.0, 8.0)",
+      "speed": 1,
+      "tick": 39
+    },
+    {
+      "dog_facing": 1,
+      "file": "dog_rest_054.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(11.0, 8.0)",
+      "speed": 1,
+      "tick": 40
+    },
+    {
+      "dog_facing": 1,
+      "file": "dog_rest_057.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(11.0, 8.0)",
+      "speed": 1,
+      "tick": 40
+    },
+    {
+      "dog_facing": 1,
+      "file": "dog_rest_060.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(11.0, 8.0)",
+      "speed": 1,
+      "tick": 40
+    },
+    {
+      "dog_facing": 1,
+      "file": "dog_rest_063.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(11.0, 8.0)",
+      "speed": 1,
+      "tick": 41
+    },
+    {
+      "dog_facing": 1,
+      "file": "dog_rest_066.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(11.0, 8.0)",
+      "speed": 1,
+      "tick": 41
+    },
+    {
+      "dog_facing": 1,
+      "file": "dog_rest_069.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(11.0, 8.0)",
+      "speed": 1,
+      "tick": 42
+    },
+    {
+      "dog_facing": 1,
+      "file": "dog_rest_072.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(11.0, 8.0)",
+      "speed": 1,
+      "tick": 42
+    },
+    {
+      "dog_facing": 1,
+      "file": "dog_rest_075.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(11.0, 8.0)",
+      "speed": 1,
+      "tick": 42
+    },
+    {
+      "dog_facing": 1,
+      "file": "dog_rest_078.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(11.0, 8.0)",
+      "speed": 1,
+      "tick": 43
+    },
+    {
+      "dog_facing": 1,
+      "file": "dog_rest_081.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(11.0, 8.0)",
+      "speed": 1,
+      "tick": 43
+    },
+    {
+      "dog_facing": 1,
+      "file": "dog_rest_084.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(11.0, 8.0)",
+      "speed": 1,
+      "tick": 44
+    },
+    {
+      "dog_facing": 1,
+      "file": "dog_rest_087.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(11.0, 8.0)",
+      "speed": 1,
+      "tick": 44
+    },
+    {
+      "dog_facing": 1,
+      "file": "dog_rest_090.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(11.0, 8.0)",
+      "speed": 1,
+      "tick": 44
+    },
+    {
+      "dog_facing": 1,
+      "file": "dog_rest_093.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(11.0, 8.0)",
+      "speed": 1,
+      "tick": 45
+    },
+    {
+      "dog_facing": 1,
+      "file": "dog_rest_096.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(11.0, 8.0)",
+      "speed": 1,
+      "tick": 45
+    },
+    {
+      "dog_facing": 1,
+      "file": "dog_rest_099.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(11.0, 8.0)",
+      "speed": 1,
+      "tick": 46
+    },
+    {
+      "dog_facing": 1,
+      "file": "dog_rest_102.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(11.0, 8.0)",
+      "speed": 1,
+      "tick": 46
+    },
+    {
+      "dog_facing": 1,
+      "file": "dog_rest_105.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(11.0, 8.0)",
+      "speed": 1,
+      "tick": 46
+    },
+    {
+      "dog_facing": 1,
+      "file": "dog_rest_108.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(11.0, 8.0)",
+      "speed": 1,
+      "tick": 47
+    },
+    {
+      "dog_facing": 1,
+      "file": "dog_rest_111.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(11.0, 8.0)",
+      "speed": 1,
+      "tick": 47
+    },
+    {
+      "dog_facing": 1,
+      "file": "dog_rest_114.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(11.0, 8.0)",
+      "speed": 1,
+      "tick": 48
+    },
+    {
+      "dog_facing": 1,
+      "file": "dog_rest_117.png",
+      "keeper_facing": 1,
+      "keeper_visual": "(11.0, 8.0)",
+      "speed": 1,
+      "tick": 48
+    }
+  ],
+  "renderer": "NVIDIA GeForce RTX 4070 SUPER"
+}

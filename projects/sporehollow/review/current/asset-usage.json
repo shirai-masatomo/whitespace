@@ -24,7 +24,8 @@
         44
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/characters_v1/review/comparison-v2.png",
@@ -42,7 +43,8 @@
         920
       ],
       "runtime_reference": false,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "retained delivery/reference, not runtime"
     },
     {
       "path": "art_delivery/characters_v1/shiba_idle_front_00.png",
@@ -60,7 +62,8 @@
         44
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/characters_v1/shiba_idle_left_00.png",
@@ -78,7 +81,8 @@
         44
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/characters_v1/shiba_idle_right_00.png",
@@ -96,7 +100,8 @@
         44
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/characters_motion_v1/keeper/idle_left_00.png",
@@ -114,7 +119,8 @@
         44
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/characters_motion_v1/keeper/rest_left_00.png",
@@ -132,7 +138,8 @@
         44
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/characters_motion_v1/keeper/rest_left_01.png",
@@ -150,7 +157,8 @@
         44
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/characters_motion_v1/keeper/rest_left_sheet.png",
@@ -168,7 +176,8 @@
         44
       ],
       "runtime_reference": false,
-      "hash_in_manifest": false
+      "hash_in_manifest": false,
+      "integration_status": "retained delivery/reference, not runtime"
     },
     {
       "path": "art_delivery/characters_motion_v1/keeper/rest_right_00.png",
@@ -186,7 +195,8 @@
         44
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/characters_motion_v1/keeper/rest_right_01.png",
@@ -204,7 +214,8 @@
         44
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/characters_motion_v1/keeper/rest_right_sheet.png",
@@ -222,7 +233,8 @@
         44
       ],
       "runtime_reference": false,
-      "hash_in_manifest": false
+      "hash_in_manifest": false,
+      "integration_status": "retained delivery/reference, not runtime"
     },
     {
       "path": "art_delivery/characters_motion_v1/keeper/settle_left_00.png",
@@ -240,7 +252,8 @@
         44
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/characters_motion_v1/keeper/settle_left_01.png",
@@ -258,7 +271,8 @@
         44
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/characters_motion_v1/keeper/settle_left_sheet.png",
@@ -276,7 +290,8 @@
         44
       ],
       "runtime_reference": false,
-      "hash_in_manifest": false
+      "hash_in_manifest": false,
+      "integration_status": "retained delivery/reference, not runtime"
     },
     {
       "path": "art_delivery/characters_motion_v1/keeper/settle_right_00.png",
@@ -294,7 +309,8 @@
         44
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/characters_motion_v1/keeper/settle_right_01.png",
@@ -312,7 +328,8 @@
         44
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/characters_motion_v1/keeper/settle_right_sheet.png",
@@ -330,7 +347,8 @@
         44
       ],
       "runtime_reference": false,
-      "hash_in_manifest": false
+      "hash_in_manifest": false,
+      "integration_status": "retained delivery/reference, not runtime"
     },
     {
       "path": "art_delivery/characters_motion_v1/keeper/sleep_left_00.png",
@@ -348,7 +366,8 @@
         44
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/characters_motion_v1/keeper/sleep_left_01.png",
@@ -366,7 +385,8 @@
         44
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/characters_motion_v1/keeper/sleep_left_sheet.png",
@@ -384,7 +404,8 @@
         44
       ],
       "runtime_reference": false,
-      "hash_in_manifest": false
+      "hash_in_manifest": false,
+      "integration_status": "retained delivery/reference, not runtime"
     },
     {
       "path": "art_delivery/characters_motion_v1/keeper/sleep_right_00.png",
@@ -402,7 +423,8 @@
         44
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/characters_motion_v1/keeper/sleep_right_01.png",
@@ -420,7 +442,8 @@
         44
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/characters_motion_v1/keeper/sleep_right_sheet.png",
@@ -438,7 +461,8 @@
         44
       ],
       "runtime_reference": false,
-      "hash_in_manifest": false
+      "hash_in_manifest": false,
+      "integration_status": "retained delivery/reference, not runtime"
     },
     {
       "path": "art_delivery/characters_motion_v1/keeper/wake_left_00.png",
@@ -456,7 +480,8 @@
         44
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/characters_motion_v1/keeper/wake_left_01.png",
@@ -474,7 +499,8 @@
         44
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/characters_motion_v1/keeper/wake_left_sheet.png",
@@ -492,7 +518,8 @@
         44
       ],
       "runtime_reference": false,
-      "hash_in_manifest": false
+      "hash_in_manifest": false,
+      "integration_status": "retained delivery/reference, not runtime"
     },
     {
       "path": "art_delivery/characters_motion_v1/keeper/wake_right_00.png",
@@ -510,7 +537,8 @@
         44
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/characters_motion_v1/keeper/wake_right_01.png",
@@ -528,7 +556,8 @@
         44
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/characters_motion_v1/keeper/wake_right_sheet.png",
@@ -546,7 +575,8 @@
         44
       ],
       "runtime_reference": false,
-      "hash_in_manifest": false
+      "hash_in_manifest": false,
+      "integration_status": "retained delivery/reference, not runtime"
     },
     {
       "path": "art_delivery/characters_motion_v1/keeper/walk_left_00.png",
@@ -564,7 +594,8 @@
         44
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/characters_motion_v1/keeper/walk_left_01.png",
@@ -582,7 +613,8 @@
         44
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/characters_motion_v1/keeper/walk_left_02.png",
@@ -600,7 +632,8 @@
         44
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/characters_motion_v1/keeper/walk_left_03.png",
@@ -618,7 +651,8 @@
         44
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/characters_motion_v1/keeper/walk_left_sheet.png",
@@ -636,7 +670,8 @@
         44
       ],
       "runtime_reference": false,
-      "hash_in_manifest": false
+      "hash_in_manifest": false,
+      "integration_status": "retained delivery/reference, not runtime"
     },
     {
       "path": "art_delivery/characters_motion_v1/keeper/walk_right_00.png",
@@ -654,7 +689,8 @@
         44
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/characters_motion_v1/keeper/walk_right_01.png",
@@ -672,7 +708,8 @@
         44
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/characters_motion_v1/keeper/walk_right_02.png",
@@ -690,7 +727,8 @@
         44
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/characters_motion_v1/keeper/walk_right_03.png",
@@ -708,7 +746,8 @@
         44
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/characters_motion_v1/keeper/walk_right_sheet.png",
@@ -726,7 +765,8 @@
         44
       ],
       "runtime_reference": false,
-      "hash_in_manifest": false
+      "hash_in_manifest": false,
+      "integration_status": "retained delivery/reference, not runtime"
     },
     {
       "path": "art_delivery/characters_motion_v1/review/rest-proof.png",
@@ -744,7 +784,8 @@
         760
       ],
       "runtime_reference": false,
-      "hash_in_manifest": false
+      "hash_in_manifest": false,
+      "integration_status": "retained delivery/reference, not runtime"
     },
     {
       "path": "art_delivery/characters_motion_v1/shiba/rest_left_00.png",
@@ -762,7 +803,8 @@
         44
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/characters_motion_v1/shiba/rest_left_01.png",
@@ -780,7 +822,8 @@
         44
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/characters_motion_v1/shiba/rest_left_sheet.png",
@@ -798,7 +841,8 @@
         44
       ],
       "runtime_reference": false,
-      "hash_in_manifest": false
+      "hash_in_manifest": false,
+      "integration_status": "retained delivery/reference, not runtime"
     },
     {
       "path": "art_delivery/characters_motion_v1/shiba/rest_right_00.png",
@@ -816,7 +860,8 @@
         44
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/characters_motion_v1/shiba/rest_right_01.png",
@@ -834,7 +879,8 @@
         44
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/characters_motion_v1/shiba/rest_right_sheet.png",
@@ -852,7 +898,8 @@
         44
       ],
       "runtime_reference": false,
-      "hash_in_manifest": false
+      "hash_in_manifest": false,
+      "integration_status": "retained delivery/reference, not runtime"
     },
     {
       "path": "art_delivery/characters_motion_v1/shiba/settle_left_00.png",
@@ -870,7 +917,8 @@
         44
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/characters_motion_v1/shiba/settle_left_01.png",
@@ -888,7 +936,8 @@
         44
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/characters_motion_v1/shiba/settle_left_sheet.png",
@@ -906,7 +955,8 @@
         44
       ],
       "runtime_reference": false,
-      "hash_in_manifest": false
+      "hash_in_manifest": false,
+      "integration_status": "retained delivery/reference, not runtime"
     },
     {
       "path": "art_delivery/characters_motion_v1/shiba/settle_right_00.png",
@@ -924,7 +974,8 @@
         44
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/characters_motion_v1/shiba/settle_right_01.png",
@@ -942,7 +993,8 @@
         44
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/characters_motion_v1/shiba/settle_right_sheet.png",
@@ -960,7 +1012,8 @@
         44
       ],
       "runtime_reference": false,
-      "hash_in_manifest": false
+      "hash_in_manifest": false,
+      "integration_status": "retained delivery/reference, not runtime"
     },
     {
       "path": "art_delivery/characters_motion_v1/shiba/wake_left_00.png",
@@ -978,7 +1031,8 @@
         44
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/characters_motion_v1/shiba/wake_left_01.png",
@@ -996,7 +1050,8 @@
         44
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/characters_motion_v1/shiba/wake_left_sheet.png",
@@ -1014,7 +1069,8 @@
         44
       ],
       "runtime_reference": false,
-      "hash_in_manifest": false
+      "hash_in_manifest": false,
+      "integration_status": "retained delivery/reference, not runtime"
     },
     {
       "path": "art_delivery/characters_motion_v1/shiba/wake_right_00.png",
@@ -1032,7 +1088,8 @@
         44
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/characters_motion_v1/shiba/wake_right_01.png",
@@ -1050,7 +1107,8 @@
         44
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/characters_motion_v1/shiba/wake_right_sheet.png",
@@ -1068,7 +1126,8 @@
         44
       ],
       "runtime_reference": false,
-      "hash_in_manifest": false
+      "hash_in_manifest": false,
+      "integration_status": "retained delivery/reference, not runtime"
     },
     {
       "path": "art_delivery/characters_motion_v1/shiba/walk_left_00.png",
@@ -1086,7 +1145,8 @@
         44
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/characters_motion_v1/shiba/walk_left_01.png",
@@ -1104,7 +1164,8 @@
         44
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/characters_motion_v1/shiba/walk_left_02.png",
@@ -1122,7 +1183,8 @@
         44
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/characters_motion_v1/shiba/walk_left_03.png",
@@ -1140,7 +1202,8 @@
         44
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/characters_motion_v1/shiba/walk_left_sheet.png",
@@ -1158,7 +1221,8 @@
         44
       ],
       "runtime_reference": false,
-      "hash_in_manifest": false
+      "hash_in_manifest": false,
+      "integration_status": "retained delivery/reference, not runtime"
     },
     {
       "path": "art_delivery/characters_motion_v1/shiba/walk_right_00.png",
@@ -1176,7 +1240,8 @@
         44
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/characters_motion_v1/shiba/walk_right_01.png",
@@ -1194,7 +1259,8 @@
         44
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/characters_motion_v1/shiba/walk_right_02.png",
@@ -1212,7 +1278,8 @@
         44
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/characters_motion_v1/shiba/walk_right_03.png",
@@ -1230,7 +1297,8 @@
         44
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/characters_motion_v1/shiba/walk_right_sheet.png",
@@ -1248,7 +1316,8 @@
         44
       ],
       "runtime_reference": false,
-      "hash_in_manifest": false
+      "hash_in_manifest": false,
+      "integration_status": "retained delivery/reference, not runtime"
     },
     {
       "path": "art_delivery/ranch_assets_v1/book/binding_shadow_layer.png",
@@ -1266,7 +1335,8 @@
         556
       ],
       "runtime_reference": false,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "retained delivery/reference, not runtime"
     },
     {
       "path": "art_delivery/ranch_assets_v1/book/closed_00.png",
@@ -1284,7 +1354,8 @@
         308
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/ranch_assets_v1/book/closing_00.png",
@@ -1302,7 +1373,8 @@
         604
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/ranch_assets_v1/book/closing_01.png",
@@ -1320,7 +1392,8 @@
         604
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/ranch_assets_v1/book/closing_02.png",
@@ -1338,7 +1411,8 @@
         604
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/ranch_assets_v1/book/closing_03.png",
@@ -1356,7 +1430,8 @@
         604
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/ranch_assets_v1/book/closing_04.png",
@@ -1374,7 +1449,8 @@
         604
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/ranch_assets_v1/book/closing_05.png",
@@ -1392,7 +1468,8 @@
         604
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/ranch_assets_v1/book/cover_layer.png",
@@ -1410,7 +1487,8 @@
         604
       ],
       "runtime_reference": false,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "retained delivery/reference, not runtime"
     },
     {
       "path": "art_delivery/ranch_assets_v1/book/front_cover_hinge_layer.png",
@@ -1428,7 +1506,8 @@
         564
       ],
       "runtime_reference": false,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "retained delivery/reference, not runtime"
     },
     {
       "path": "art_delivery/ranch_assets_v1/book/open_00.png",
@@ -1446,7 +1525,8 @@
         604
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/ranch_assets_v1/book/opening_00.png",
@@ -1464,7 +1544,8 @@
         604
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/ranch_assets_v1/book/opening_01.png",
@@ -1482,7 +1563,8 @@
         604
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/ranch_assets_v1/book/opening_02.png",
@@ -1500,7 +1582,8 @@
         604
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/ranch_assets_v1/book/opening_03.png",
@@ -1518,7 +1601,8 @@
         604
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/ranch_assets_v1/book/opening_04.png",
@@ -1536,7 +1620,8 @@
         604
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/ranch_assets_v1/book/opening_05.png",
@@ -1554,7 +1639,8 @@
         604
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/ranch_assets_v1/book/page_next_00.png",
@@ -1572,7 +1658,8 @@
         604
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/ranch_assets_v1/book/page_next_01.png",
@@ -1590,7 +1677,8 @@
         604
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/ranch_assets_v1/book/page_next_02.png",
@@ -1608,7 +1696,8 @@
         604
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/ranch_assets_v1/book/page_next_03.png",
@@ -1626,7 +1715,8 @@
         604
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/ranch_assets_v1/book/page_next_04.png",
@@ -1644,7 +1734,8 @@
         604
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/ranch_assets_v1/book/page_next_05.png",
@@ -1662,7 +1753,8 @@
         604
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/ranch_assets_v1/book/page_previous_00.png",
@@ -1680,7 +1772,8 @@
         604
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/ranch_assets_v1/book/page_previous_01.png",
@@ -1698,7 +1791,8 @@
         604
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/ranch_assets_v1/book/page_previous_02.png",
@@ -1716,7 +1810,8 @@
         604
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/ranch_assets_v1/book/page_previous_03.png",
@@ -1734,7 +1829,8 @@
         604
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/ranch_assets_v1/book/page_previous_04.png",
@@ -1752,7 +1848,8 @@
         604
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/ranch_assets_v1/book/page_previous_05.png",
@@ -1770,7 +1867,8 @@
         604
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/ranch_assets_v1/book/paper_layer.png",
@@ -1788,7 +1886,8 @@
         584
       ],
       "runtime_reference": false,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "retained delivery/reference, not runtime"
     },
     {
       "path": "art_delivery/ranch_assets_v1/cat/idle_left_00.png",
@@ -1806,7 +1905,8 @@
         36
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/ranch_assets_v1/cat/idle_left_sheet.png",
@@ -1824,7 +1924,8 @@
         36
       ],
       "runtime_reference": false,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "retained delivery/reference, not runtime"
     },
     {
       "path": "art_delivery/ranch_assets_v1/cat/idle_right_00.png",
@@ -1842,7 +1943,8 @@
         36
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/ranch_assets_v1/cat/idle_right_sheet.png",
@@ -1860,7 +1962,8 @@
         36
       ],
       "runtime_reference": false,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "retained delivery/reference, not runtime"
     },
     {
       "path": "art_delivery/ranch_assets_v1/cat/stretch_left_00.png",
@@ -1878,7 +1981,8 @@
         36
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/ranch_assets_v1/cat/stretch_left_01.png",
@@ -1896,7 +2000,8 @@
         36
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/ranch_assets_v1/cat/stretch_left_sheet.png",
@@ -1914,7 +2019,8 @@
         36
       ],
       "runtime_reference": false,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "retained delivery/reference, not runtime"
     },
     {
       "path": "art_delivery/ranch_assets_v1/cat/stretch_right_00.png",
@@ -1932,7 +2038,8 @@
         36
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/ranch_assets_v1/cat/stretch_right_01.png",
@@ -1950,7 +2057,8 @@
         36
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/ranch_assets_v1/cat/stretch_right_sheet.png",
@@ -1968,7 +2076,8 @@
         36
       ],
       "runtime_reference": false,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "retained delivery/reference, not runtime"
     },
     {
       "path": "art_delivery/ranch_assets_v1/cat/walk_left_00.png",
@@ -1986,7 +2095,8 @@
         36
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/ranch_assets_v1/cat/walk_left_01.png",
@@ -2004,7 +2114,8 @@
         36
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/ranch_assets_v1/cat/walk_left_02.png",
@@ -2022,7 +2133,8 @@
         36
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/ranch_assets_v1/cat/walk_left_03.png",
@@ -2040,7 +2152,8 @@
         36
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/ranch_assets_v1/cat/walk_left_sheet.png",
@@ -2058,7 +2171,8 @@
         36
       ],
       "runtime_reference": false,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "retained delivery/reference, not runtime"
     },
     {
       "path": "art_delivery/ranch_assets_v1/cat/walk_right_00.png",
@@ -2076,7 +2190,8 @@
         36
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/ranch_assets_v1/cat/walk_right_01.png",
@@ -2094,7 +2209,8 @@
         36
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/ranch_assets_v1/cat/walk_right_02.png",
@@ -2112,7 +2228,8 @@
         36
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/ranch_assets_v1/cat/walk_right_03.png",
@@ -2130,7 +2247,8 @@
         36
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/ranch_assets_v1/cat/walk_right_sheet.png",
@@ -2148,7 +2266,8 @@
         36
       ],
       "runtime_reference": false,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "retained delivery/reference, not runtime"
     },
     {
       "path": "art_delivery/ranch_assets_v1/hen/idle_left_00.png",
@@ -2166,7 +2285,8 @@
         29
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/ranch_assets_v1/hen/idle_left_sheet.png",
@@ -2184,7 +2304,8 @@
         29
       ],
       "runtime_reference": false,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "retained delivery/reference, not runtime"
     },
     {
       "path": "art_delivery/ranch_assets_v1/hen/idle_right_00.png",
@@ -2202,7 +2323,8 @@
         29
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/ranch_assets_v1/hen/idle_right_sheet.png",
@@ -2220,7 +2342,8 @@
         29
       ],
       "runtime_reference": false,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "retained delivery/reference, not runtime"
     },
     {
       "path": "art_delivery/ranch_assets_v1/hen/peck_left_00.png",
@@ -2238,7 +2361,8 @@
         29
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/ranch_assets_v1/hen/peck_left_01.png",
@@ -2256,7 +2380,8 @@
         29
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/ranch_assets_v1/hen/peck_left_sheet.png",
@@ -2274,7 +2399,8 @@
         29
       ],
       "runtime_reference": false,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "retained delivery/reference, not runtime"
     },
     {
       "path": "art_delivery/ranch_assets_v1/hen/peck_right_00.png",
@@ -2292,7 +2418,8 @@
         29
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/ranch_assets_v1/hen/peck_right_01.png",
@@ -2310,7 +2437,8 @@
         29
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/ranch_assets_v1/hen/peck_right_sheet.png",
@@ -2328,7 +2456,8 @@
         29
       ],
       "runtime_reference": false,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "retained delivery/reference, not runtime"
     },
     {
       "path": "art_delivery/ranch_assets_v1/hen/walk_left_00.png",
@@ -2346,7 +2475,8 @@
         29
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/ranch_assets_v1/hen/walk_left_01.png",
@@ -2364,7 +2494,8 @@
         29
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/ranch_assets_v1/hen/walk_left_02.png",
@@ -2382,7 +2513,8 @@
         29
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/ranch_assets_v1/hen/walk_left_03.png",
@@ -2400,7 +2532,8 @@
         29
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/ranch_assets_v1/hen/walk_left_sheet.png",
@@ -2418,7 +2551,8 @@
         29
       ],
       "runtime_reference": false,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "retained delivery/reference, not runtime"
     },
     {
       "path": "art_delivery/ranch_assets_v1/hen/walk_right_00.png",
@@ -2436,7 +2570,8 @@
         29
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/ranch_assets_v1/hen/walk_right_01.png",
@@ -2454,7 +2589,8 @@
         29
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/ranch_assets_v1/hen/walk_right_02.png",
@@ -2472,7 +2608,8 @@
         29
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/ranch_assets_v1/hen/walk_right_03.png",
@@ -2490,7 +2627,8 @@
         29
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/ranch_assets_v1/hen/walk_right_sheet.png",
@@ -2508,7 +2646,8 @@
         29
       ],
       "runtime_reference": false,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "retained delivery/reference, not runtime"
     },
     {
       "path": "art_delivery/ranch_assets_v1/merchant/idle_right_00.png",
@@ -2526,7 +2665,8 @@
         44
       ],
       "runtime_reference": false,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "retained delivery/reference, not runtime"
     },
     {
       "path": "art_delivery/ranch_assets_v1/merchant/idle_right_sheet.png",
@@ -2544,7 +2684,8 @@
         44
       ],
       "runtime_reference": false,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "retained delivery/reference, not runtime"
     },
     {
       "path": "art_delivery/ranch_assets_v1/review/animal-actions.png",
@@ -2562,7 +2703,8 @@
         480
       ],
       "runtime_reference": false,
-      "hash_in_manifest": false
+      "hash_in_manifest": false,
+      "integration_status": "retained delivery/reference, not runtime"
     },
     {
       "path": "art_delivery/ranch_assets_v1/review/animals-walk-frames.png",
@@ -2580,7 +2722,8 @@
         460
       ],
       "runtime_reference": false,
-      "hash_in_manifest": false
+      "hash_in_manifest": false,
+      "integration_status": "retained delivery/reference, not runtime"
     },
     {
       "path": "art_delivery/ranch_assets_v1/review/book-opening.png",
@@ -2598,7 +2741,8 @@
         620
       ],
       "runtime_reference": false,
-      "hash_in_manifest": false
+      "hash_in_manifest": false,
+      "integration_status": "retained delivery/reference, not runtime"
     },
     {
       "path": "art_delivery/ranch_assets_v1/review/overview.png",
@@ -2616,7 +2760,8 @@
         920
       ],
       "runtime_reference": false,
-      "hash_in_manifest": false
+      "hash_in_manifest": false,
+      "integration_status": "retained delivery/reference, not runtime"
     },
     {
       "path": "art_delivery/ranch_assets_v1/scroll/idle_none_00.png",
@@ -2634,7 +2779,8 @@
         22
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/ranch_assets_v1/scroll/idle_none_sheet.png",
@@ -2652,7 +2798,8 @@
         22
       ],
       "runtime_reference": false,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "retained delivery/reference, not runtime"
     },
     {
       "path": "art_delivery/ranch_assets_v1/stall/idle_front_00.png",
@@ -2670,7 +2817,8 @@
         496
       ],
       "runtime_reference": false,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "retained delivery/reference, not runtime"
     },
     {
       "path": "art_delivery/ranch_assets_v1/stall/idle_front_sheet.png",
@@ -2688,7 +2836,8 @@
         496
       ],
       "runtime_reference": false,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "retained delivery/reference, not runtime"
     },
     {
       "path": "art_delivery/merchant_cart_v2/cart/idle_front_00.png",
@@ -2706,7 +2855,8 @@
         496
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/merchant_cart_v2/merchant/idle_right_00.png",
@@ -2724,7 +2874,8 @@
         44
       ],
       "runtime_reference": false,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "retained delivery/reference, not runtime"
     },
     {
       "path": "art_delivery/merchant_cart_v2/review/alpha-check.png",
@@ -2742,7 +2893,8 @@
         600
       ],
       "runtime_reference": false,
-      "hash_in_manifest": false
+      "hash_in_manifest": false,
+      "integration_status": "retained delivery/reference, not runtime"
     },
     {
       "path": "art_delivery/merchant_cart_v2/review/comparison.png",
@@ -2760,7 +2912,8 @@
         800
       ],
       "runtime_reference": false,
-      "hash_in_manifest": false
+      "hash_in_manifest": false,
+      "integration_status": "retained delivery/reference, not runtime"
     },
     {
       "path": "art_delivery/merchant_board_v1/cart_idle_00.png",
@@ -2778,7 +2931,8 @@
         88
       ],
       "runtime_reference": true,
-      "hash_in_manifest": true
+      "hash_in_manifest": true,
+      "integration_status": "runtime referenced"
     },
     {
       "path": "art_delivery/merchant_board_v1/review/board-comparison.png",
@@ -2796,7 +2950,14 @@
         660
       ],
       "runtime_reference": false,
-      "hash_in_manifest": false
+      "hash_in_manifest": false,
+      "integration_status": "retained delivery/reference, not runtime"
     }
-  ]
+  ],
+  "verification": {
+    "implementation_commit": "24ddf180c908d1b5035fc882fc0e3d197513918d",
+    "manifest_hashes": "all runtime references match",
+    "render_evidence": "media-index.json",
+    "scope": "Representative action frames and display locations exercised; hash verification covers every referenced PNG, not manual inspection of every animation frame."
+  }
 }
