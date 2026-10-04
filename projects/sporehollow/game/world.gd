@@ -69,7 +69,7 @@ var skill_log: Array = []
 var milestones: Array = []
 var initial_positions: Dictionary = {}
 var structures: Dictionary = {}
-const HOLDING_SHED = Vector2i(21, 14) # Inward-facing pickup apron, southeast of the ranch.
+const HOLDING_SHED = Vector2i(21, 14) # Legacy coordinate only; no building or reserved cells.
 var keeper = {"pos": Vector2i(6, 13), "placed": false, "carrier": -1, "state": "free", "restrainer": -1, "move_credit": 0.0, "hp": 30, "max_hp": 30, "sleepiness": 0.0, "resting": false, "forced_rest": false, "warned": 0, "heal_credit": 0.0, "recover_ticks": 0, "next_attack": 0, "hurt_until": 0, "drinks_today": 0}
 var animals: Array = []
 var enemies: Array = []
@@ -101,6 +101,15 @@ func _init(data: Dictionary = {}, seed_number: int = 17, stage_override: Diction
 		if not campaign.resources.has(resource): campaign.resources[resource] = 0
 	campaign.items = campaign.get("items", {"dog_food": 2, "hen_food": 0})
 	campaign.unlocked_blueprints = campaign.get("unlocked_blueprints", [])
+	campaign.blueprint_records=campaign.get("blueprint_records",[])
+	for id in campaign.unlocked_blueprints:
+		if id not in campaign.blueprint_records: campaign.blueprint_records.append(id)
+	for id in Buildings.NAMES:
+		var key=id+"_plan"
+		if campaign.items.get(key,0)>0:
+			if id not in campaign.blueprint_records: campaign.blueprint_records.append(id)
+			if id not in campaign.unlocked_blueprints: campaign.unlocked_blueprints.append(id)
+			campaign.items.erase(key)
 	campaign.day = campaign.get("day", 1)
 	campaign.exp_pool = campaign.get("exp_pool", 0)
 	campaign.night_ready = campaign.get("night_ready", false)
@@ -114,12 +123,13 @@ func _init(data: Dictionary = {}, seed_number: int = 17, stage_override: Diction
 			owned.hp = maxi(1, (SPECIES[owned.species].hp + (owned.lv - 1) * 4) / 2) # Provisional return after one full day off.
 	morning_checkpoint = campaign.get("morning_checkpoint", campaign).duplicate(true)
 	morning_checkpoint.erase("morning_checkpoint")
-	for key in ["hp", "sleepiness", "drinks_today"]:
-		keeper[key] = campaign.get("keeper_vitals", {}).get(key, keeper[key])
+	for key in ["hp", "sleepiness", "drinks_today","facing"]:
+		keeper[key] = campaign.get("keeper_vitals", {}).get(key, keeper.get(key,1))
 	if keeper.hp <= 0: keeper.state = "unconscious"
 	if keeper.sleepiness >= 100:
 		keeper.forced_rest = true
 		keeper.resting = true
+		keeper.rest_kind="forced"
 	checkpoint = campaign.duplicate(true)
 	phase = "day" if campaign.night_ready else "shop"
 	stage = campaign.stage
@@ -139,11 +149,19 @@ func _init(data: Dictionary = {}, seed_number: int = 17, stage_override: Diction
 	day_seconds = config.get("day_seconds", 90.0)
 	nature_config = config.get("nature", Rules.NATURE).duplicate(true)
 	next_structure_id = campaign.get("next_structure_id", 1)
+	campaign.retired_facilities=campaign.get("retired_facilities",[])
 	for saved in campaign.get("facilities", []):
 		var record = saved.duplicate(true)
 		var cell = Vector2i(record.pos[0], record.pos[1])
 		record.erase("pos")
 		if record.kind == "gate": record.kind = "door"
+		if record.kind in ["kennel","coop"]:
+			if not campaign.retired_facilities.any(func(b):return b.id==record.id): campaign.retired_facilities.append(saved.duplicate(true))
+			if record.status=="building" and not record.get("migration_refunded",false) and not campaign.get("work_jobs",[]).any(func(j):return j.pos==saved.pos and j.kind==record.kind):
+				add_resource(record.get("resource","wood"),record.get("cost",0))
+				saved.migration_refunded=true
+			record.status="disabled"
+			saved.status="disabled"
 		structures[cell] = record
 	for wave in config.waves:
 		for cell in wave.entries:
@@ -181,11 +199,15 @@ func _init(data: Dictionary = {}, seed_number: int = 17, stage_override: Diction
 	for saved in campaign.get("work_jobs",[]):
 		var j=saved.duplicate(true); j.pos=Vector2i(j.pos[0],j.pos[1])
 		if j.kind=="build_gate": j.kind="door"
+		if j.kind in ["kennel","coop"]:
+			add_resource(j.get("resource","wood"),j.get("reserved",0))
+			continue
 		jobs.append(j); next_job_id=maxi(next_job_id,j.id+1)
+	campaign.work_jobs=campaign.get("work_jobs",[]).filter(func(j):return j.kind not in ["kennel","coop"])
 	# Migrate paid unfinished legacy construction that predates persisted job records.
 	for p in structures:
 		var b=structures[p]
-		if b.status=="building" and not jobs.any(func(j):return j.pos==p):
+		if b.kind not in ["kennel","coop"] and b.status=="building" and not jobs.any(func(j):return j.pos==p):
 			jobs.append({"id":next_job_id,"kind":b.kind,"pos":p,"animal_id":-1,"state":"pending","resource":b.get("resource","soil"),"reserved":b.cost,"started":true,"old":{},"remaining":b.remaining})
 			next_job_id+=1
 	shop_stock = Shop.generate(stage, seed_value, campaign.unlocked_blueprints)
@@ -222,7 +244,6 @@ func walkable(p: Vector2i) -> bool:
 	return inside(p) and (not blocks(p) or (structures.get(p,{}).get("kind") in Buildings.DOORS))
 
 func blocks(p: Vector2i) -> bool:
-	if p == HOLDING_SHED + Vector2i.RIGHT: return true
 	return structures.has(p) and structures[p].status == "ready" and structures[p].kind not in ["kennel", "coop"] and not structures[p].open
 
 func live_structure(p: Vector2i) -> bool:
@@ -275,7 +296,6 @@ func find_path(start: Vector2i, goal: Vector2i, raider: bool = false, avoid_acto
 			if not inside(n) and not exit_cell: continue
 			if outdoor_only and is_indoor(n): continue
 			if avoid_actors and n != goal and actor_occupied(n, start): continue
-			if n == HOLDING_SHED + Vector2i.RIGHT: continue
 			var blocked = blocks(n)
 			if blocked and not raider and structures.get(n,{}).get("kind") not in Buildings.DOORS: continue
 			# Compare walking actions with the actual number of object attacks needed.
@@ -331,19 +351,24 @@ func _execute_local(kind: String, p: Vector2i = Vector2i.ZERO, animal_id: int = 
 			if kind == "gate" and live_structure(p) and structures[p].status == "ready" and structures[p].kind in Buildings.DOORS and not occupied(p):
 				structures[p].open = not structures[p].open
 				accepted = true
-			elif kind == "repair":
-				accepted = repair(p)
-			elif kind == "remove" and live_structure(p) and not occupied(p):
-				add_resource(structures[p].get("resource", "soil"), dismantle_quote(p))
-				structures[p].status = "removed"
-				structures[p].hp = 0
+			elif kind in ["repair","repair_floor"]:
+				accepted = repair(p,"floor" if kind=="repair_floor" else "structure")
+			elif kind in ["remove","remove_floor"] and not occupied(p):
+				var target_layer="floor" if kind=="remove_floor" else "structure"
+				var store=building_store(target_layer)
+				if store.get(p,{}).get("status")!="ready" or (target_layer=="floor" and live_structure(p)): return false
+				add_resource(store[p].get("resource","soil"),dismantle_quote(p,target_layer))
+				if target_layer=="floor": store.erase(p)
+				else: store[p].status="removed"; store[p].hp=0
 				refresh_indoor()
 				accepted = true
 			elif Shop.FOOD.has(kind):
 				accepted = use_food(kind, animal_id, p)
 			elif kind == "collect" and not items_at(p).is_empty():
 				var item = items_at(p)[0]
-				if item.kind == "kennel_plan": grant_blueprint("kennel", p)
+				if item.kind.ends_with("_plan"):
+					if not Buildings.NAMES.has(item.kind.trim_suffix("_plan")): return false
+					grant_blueprint(item.kind.trim_suffix("_plan"), p)
 				else: add_item(item.kind, 1)
 				field_items.erase(item)
 				milestones.append({"tick": tick, "kind": "item_collected", "item": item.kind})
@@ -453,15 +478,6 @@ func animal_step(a: Dictionary):
 			options.sort_custom(func(p, q): return distance(p, threat[0].pos) > distance(q, threat[0].pos))
 			if not options.is_empty(): a.pos = options[0]
 		elif threat.is_empty():
-			if a.species == "hen":
-				var coops = structures.keys().filter(func(p): return structures[p].kind == "coop" and structures[p].status == "ready" and (not occupied(p) or p == a.pos))
-				coops.sort_custom(func(p, q): return distance(a.pos, p) < distance(a.pos, q))
-				if not coops.is_empty() and distance(a.pos, coops[0]) <= 6:
-					if tick % 4 == 0:
-						a.pos = animal_next(a, coops[0])
-						if a.pos == coops[0]: a.hp = mini(a.max_hp, a.hp + 1)
-					a.state = "鶏小屋"
-					return
 			if a.move_credit >= 1 and tick % 4 == 0:
 				a.move_credit -= 1
 				var options = neighbors(a.pos).filter(func(p): return walkable(p) and not occupied(p))
@@ -495,7 +511,7 @@ func animal_step(a: Dictionary):
 			a.state="外で待つ"
 			a.move_credit=minf(1.75,a.move_credit+a.move_speed*DT*Rules.SHIBA.rescue_multiplier)
 			if a.move_credit>=1:
-				var exit_cell=animal_next(a,rescue_exit(a))
+				var exit_cell=animal_next(a,rescue_exit(a,targets[0].pos))
 				if exit_cell!=a.pos: a.move_credit-=1; open_for_ally(exit_cell); a.pos=exit_cell
 			return
 		targets=targets.filter(func(e):return not is_indoor(e.pos))
@@ -512,6 +528,7 @@ func animal_step(a: Dictionary):
 		if not a.has("first_contact_tick"): a.first_contact_tick = tick
 		chasing = true
 		goal = targets[0].pos
+		if goal.x!=a.pos.x: a.facing=signi(goal.x-a.pos.x)
 		a.state = "救出本能" if a.rescuing else "追跡"
 		var active_action = "attack" if distance(a.pos, goal) <= 1 else "approach"
 		var choices = Rules.AI.dog.duplicate(true)
@@ -553,56 +570,22 @@ func animal_step(a: Dictionary):
 	else:
 		a.ai_context = "idle"
 		a.state = "待機" if a.mode == "stay" else "見張り"
-		a.stamina = minf(100, a.stamina + (1.6 if campaign.shelter and distance(a.pos, nest) <= 3 else 0.3))
+		a.stamina = minf(100, a.stamina + (0.3))
 	a.move_credit = minf(1.75, a.move_credit + a.move_speed * DT * (Rules.SHIBA.rescue_multiplier if a.rescuing else 1.0))
 	if a.move_credit >= 1 and distance(a.pos, goal) > (1 if chasing else 0):
 		a.move_credit -= 1
 		var move = animal_next(a, goal)
-		if move != a.pos and not actor_occupied(move, a.pos) and kennel_owner(move) in [-1, a.id]:
+		if move != a.pos and not actor_occupied(move, a.pos):
 			open_for_ally(move)
 			a.pos = move
 			a.stamina = maxf(0, a.stamina - 0.65)
 	else:
 		a.move_credit = minf(a.move_credit, 0.75)
 
-func kennel_owner(p: Vector2i) -> int:
-	if not structures.has(p) or structures[p].kind != "kennel": return -1
-	for dog in animals:
-		if dog.category == "dog" and dog.placed and dog.hp > 0 and (dog.kennel_id == structures[p].id or dog.pos == p): return dog.id
-	return -1
-
 func release_kennel(a: Dictionary):
 	a.kennel_id = -1
 
-func kennel_cell(a: Dictionary) -> Vector2i:
-	for p in structures:
-		if structures[p].get("id",-2) == a.kennel_id and structures[p].status == "ready" and structures[p].kind == "kennel": return p
-	return Vector2i(-1, -1)
-
 func rest_step(a: Dictionary, explicit: bool):
-	var destination = kennel_cell(a)
-	if a.kennel_id >= 0 and (destination.x < 0 or (a.rest_settled and a.pos != destination)):
-		release_kennel(a)
-		a.rest_settled = true
-	if not a.rest_settled and a.kennel_id < 0:
-		var options = structures.keys().filter(func(p): return structures[p].kind == "kennel" and structures[p].status == "ready" and animal_walkable(a,p) and distance(a.pos, p) <= Rules.REST.nearby and kennel_owner(p) in [-1, a.id] and (p == a.pos or (not occupied(p) and animal_next(a, p) != a.pos)))
-		options.sort_custom(func(p, q): return distance(a.pos, p) < distance(a.pos, q) if distance(a.pos, p) != distance(a.pos, q) else structures[p].id < structures[q].id)
-		if not options.is_empty():
-			destination = options[0]
-			a.kennel_id = structures[destination].id # Reserve also while approaching: never double book.
-		else: a.rest_settled = true
-	if a.kennel_id >= 0 and a.pos != destination:
-		a.state = "小屋へ休養"
-		a.rest_ticks = 0
-		a.move_credit += a.move_speed * DT
-		if a.move_credit >= 1:
-			a.move_credit -= 1
-			var next = animal_next(a, destination)
-			if next == a.pos or actor_occupied(next, a.pos) or kennel_owner(next) not in [-1, a.id]:
-				release_kennel(a)
-				a.rest_settled = true
-			else: open_for_ally(next); a.pos = next
-		return
 	a.rest_settled = true
 	a.state = "休む" if explicit else "自主休養"
 	a.stamina = minf(100, a.stamina + 0.8)
@@ -610,20 +593,6 @@ func rest_step(a: Dictionary, explicit: bool):
 	if a.rest_ticks >= ceili(Rules.REST.seconds / DT):
 		a.hp = mini(a.max_hp, a.hp + 1)
 		a.rest_ticks = 0
-
-func kennel_heal_step(a: Dictionary):
-	var house = structures.get(a.pos, {})
-	if not a.placed or a.hp <= 0 or a.category != "dog" or house.get("kind") != "kennel" or house.get("status") != "ready" or kennel_owner(a.pos) != a.id:
-		a.healing_kennel = -1
-		a.kennel_ticks = 0
-		return
-	if a.healing_kennel != house.id:
-		a.healing_kennel = house.id
-		a.kennel_ticks = 0
-	a.kennel_ticks += 1
-	if a.kennel_ticks >= ceili(Rules.REST.kennel_seconds / DT):
-		a.hp = mini(a.max_hp, a.hp + 1)
-		a.kennel_ticks = 0
 
 func side_step(p: Vector2i, goal: Vector2i, roll: float) -> Vector2i:
 	var options = neighbors(p).filter(func(n): return walkable(n) and not occupied(n) and distance(n, goal) <= distance(p, goal) + 1)
@@ -765,24 +734,27 @@ func move_enemy(e: Dictionary, next: Vector2i):
 				keeper.state = "abducted"
 				finish(false)
 
-func dismantle_quote(p: Vector2i) -> int:
-	if not live_structure(p): return 0
-	var b = structures[p]
+func building_store(target_layer: String) -> Dictionary:
+	return floors if target_layer=="floor" else structures
+
+func dismantle_quote(p: Vector2i, target_layer: String="structure") -> int:
+	if building_store(target_layer).get(p,{}).get("status")!="ready": return 0
+	var b = building_store(target_layer)[p]
 	return floori(b.cost * clampf(float(b.hp) / b.max_hp, 0, 1) * Rules.DISMANTLE_REFUND)
 
-func repair_quote(p: Vector2i) -> Dictionary:
-	if not structures.has(p) or structures[p].status != "ready": return {"hp": 0, "cost": 0}
-	var b = structures[p]
+func repair_quote(p: Vector2i, target_layer: String="structure") -> Dictionary:
+	if building_store(target_layer).get(p,{}).get("status") != "ready": return {"hp": 0, "cost": 0}
+	var b = building_store(target_layer)[p]
 	var unit_cost: float = maxf(1,b.cost) * Rules.REPAIR_FACTOR / b.max_hp
 	var missing=b.max_hp-b.hp+b.get("max_lock_hp",0)-b.get("lock_hp",0)
 	var recovery=(missing if debug_enabled and debug_infinite else mini(missing,floori(resource_amount(b.get("resource","soil"))/unit_cost)))
 	return {"hp":recovery,"cost":ceili(recovery*unit_cost)}
 
-func repair(p: Vector2i) -> bool:
+func repair(p: Vector2i, target_layer: String="structure") -> bool:
 	if not working() or paused: return false
-	var quote=repair_quote(p)
+	var quote=repair_quote(p,target_layer)
 	if quote.hp<=0: return false
-	var b=structures[p]
+	var b=building_store(target_layer)[p]
 	if not(debug_enabled and debug_infinite): add_resource(b.get("resource","soil"),-quote.cost)
 	var body=mini(quote.hp,b.max_hp-b.hp)
 	b.hp+=body
@@ -798,12 +770,13 @@ func persist_farm():
 		var a=Orders.animal(self,owned.id)
 		if not a.is_empty():
 			if a.placed: owned.position=[a.pos.x,a.pos.y]
+			owned.facing=a.get("facing",1)
 			owned.hp=a.hp; owned.mode=a.mode; owned.order_remaining=maxi(0,a.order_until-tick); owned.unavailable_through_day=a.unavailable_through_day
 	campaign.work_jobs=[]
 	for j in jobs:
 		if not BUILD.has(j.kind): continue
 		var row=j.duplicate(true); row.pos=[j.pos.x,j.pos.y]; campaign.work_jobs.append(row)
-	campaign.keeper_vitals = {"hp": keeper.hp, "sleepiness": keeper.sleepiness, "drinks_today": keeper.drinks_today}
+	campaign.keeper_vitals = {"hp": keeper.hp, "sleepiness": keeper.sleepiness, "drinks_today": keeper.drinks_today,"facing":keeper.get("facing",1)}
 	campaign.keeper_position = [keeper.pos.x, keeper.pos.y]
 	campaign.resources = resource_snapshot()
 	campaign.next_structure_id = next_structure_id
@@ -819,8 +792,10 @@ func persist_farm():
 
 func step():
 	if not working() or paused: return
+	var previous_positions={"keeper":keeper.pos}
+	for a in animals: previous_positions[a.id]=a.pos
 	for a in animals:
-		if not a.placed: admit(a,HOLDING_SHED)
+		if not a.placed: admit(a,entries[0])
 	Life.begin_rest_until(self)
 	tick += 1
 	if phase == "day" and tick * DT >= day_seconds: start_night()
@@ -838,7 +813,6 @@ func step():
 	for a in animals:
 		animal_step(a)
 		if a.placed: open_for_ally(a.pos)
-		kennel_heal_step(a)
 
 		if a.path.back() != a.pos: a.path.append(a.pos)
 	for e in enemies:
@@ -848,6 +822,8 @@ func step():
 	if tick % 8 == 0:
 		traces.append({"tick": tick, "stamina": snappedf(animals[0].stamina, 0.1), "eggs": eggs,
 			"materials": materials, "keeper": keeper.state, "structures": structures.size()})
+	update_facing(keeper,previous_positions.keeper)
+	for a in animals: update_facing(a,previous_positions.get(a.id,a.pos))
 	Life.check_rest_until(self)
 	if phase != "defend": return
 	if remaining_night() <= 0:
@@ -986,10 +962,14 @@ func add_resource(kind: String, amount: int):
 	campaign.resources = resource_snapshot()
 
 func grant_blueprint(id: String, p: Vector2i):
-	if id in campaign.unlocked_blueprints: return
-	campaign.unlocked_blueprints.append(id)
-	campaign.items[id + "_plan"] = campaign.items.get(id + "_plan", 0) + 1
-	milestones.append({"tick": tick, "kind": "blueprint", "id": id, "pos": [p.x, p.y]})
+	if not Buildings.NAMES.has(id): return
+	var title=Buildings.NAMES[id]
+	var text=title+"の設計図を手に入れた。"
+	if id not in campaign.blueprint_records: campaign.blueprint_records.append(id)
+	if id not in campaign.unlocked_blueprints:
+		campaign.unlocked_blueprints.append(id)
+		text+="\n"+title+"の作り方を覚えた。"
+	milestones.append({"tick":tick,"kind":"blueprint","id":id,"text":text,"pos":[p.x,p.y]})
 
 func use_food(kind: String, animal_id: int, p: Vector2i) -> bool:
 	if campaign.items.get(kind, 0) <= 0: return false
@@ -1024,7 +1004,7 @@ func grow_nature():
 	for y in range(1, H - 1):
 		for x in range(1, W - 1):
 			var p = Vector2i(x, y)
-			if walkable(p) and not occupied(p) and not live_structure(p) and not natural.has(p) and not floors.has(p) and p not in [HOLDING_SHED, HOLDING_SHED + Vector2i.RIGHT] and p not in entries and not field_items.any(func(item): return item.pos == p): sites.append(p)
+			if walkable(p) and not occupied(p) and not live_structure(p) and not natural.has(p) and floors.get(p,{}).get("status") not in ["ready","building"] and p not in entries and not field_items.any(func(item): return item.pos == p): sites.append(p)
 	if sites.is_empty(): return
 	var p = sites[nature_rng.randi_range(0, sites.size() - 1)]
 	natural[p] = kind
@@ -1053,7 +1033,7 @@ func add_item(id: String, count: int):
 	else: campaign.items[id] = campaign.items.get(id, 0) + count
 
 func buy(id: String) -> bool:
-	if phase != "shop" or paused or not Shop.table().has(id): return false
+	if phase != "shop" or paused or not Shop.table().has(id) or not Shop.table()[id].Enabled: return false
 	var product = Shop.table()[id]
 	var available = shop_stock.filter(func(row): return row.product == id and row.remaining > 0)
 	if available.is_empty() or campaign.gold < product.BuyPrice: return false
@@ -1068,7 +1048,8 @@ func buy(id: String) -> bool:
 	elif product.Category == "materials": add_resource(id, product.Amount)
 	else:
 		add_item(id, product.Amount)
-		if id == "kennel_plan" and "kennel" not in campaign.unlocked_blueprints: campaign.unlocked_blueprints.append("kennel")
+		if id.ends_with("_plan"):
+			grant_blueprint(id.trim_suffix("_plan"),keeper.pos); campaign.items.erase(id)
 	shop_log.append({"side": "buy", "product": id, "amount": product.Amount, "gold": -product.BuyPrice})
 	return true
 
@@ -1134,10 +1115,9 @@ func train_animal(id: int) -> bool:
 func items_at(p: Vector2i) -> Array:
 	return field_items.filter(func(item): return item.pos == p and item.kind != "chick")
 
-func drop_blueprint(p: Vector2i):
-	if "kennel" in campaign.unlocked_blueprints or field_items.any(func(item): return item.kind == "kennel_plan"): return
-	field_items.append({"kind": "kennel_plan", "pos": p, "born_day": campaign.day})
-	milestones.append({"tick": tick, "kind": "blueprint_dropped", "pos": [p.x, p.y]})
+func drop_blueprint(_p: Vector2i):
+	# All active recipes are already available; disabled hut plans no longer drop.
+	pass
 
 func process_dawn():
 	dawn_summary = {"eggs": 0, "chicks": 0, "hens": 0, "feathers": 0, "unconscious": [], "pending_blueprints": 0}
@@ -1159,7 +1139,7 @@ func process_dawn():
 		if a.hp <= 0 and a.placed: dawn_summary.unconscious.append(a.id)
 		if a.species != "hen" or not available(a): continue
 		field_items.append({"kind": "egg", "pos": a.pos, "born_day": campaign.day,
-			"protected_by": structures[a.pos].id if structures.get(a.pos, {}).get("kind") == "coop" and live_structure(a.pos) else -1})
+			"protected_by": -1})
 		dawn_summary.eggs += 1
 		metrics.eggs_produced += 1
 		if AnimalData.has_skill(a, "feather") and daily_rng.randf() < 0.15:
@@ -1243,21 +1223,29 @@ func add_resident(owned: Dictionary):
 	a.path = [a.pos]
 	animals.append(a)
 
-	var location=owned.get("position",[HOLDING_SHED.x,HOLDING_SHED.y])
-	var preferred=Vector2i(location[0],location[1]) if owned.has("position") else (keeper.pos+Vector2i(2,0) if a.id==1 else HOLDING_SHED)
+	var location=owned.get("position",[entries[0].x,entries[0].y])
+	var preferred=Vector2i(location[0],location[1]) if owned.has("position") else (keeper.pos+Vector2i(2,0) if a.id==1 else entries[0])
 	admit(a,preferred)
 
 func admit(a: Dictionary,preferred: Vector2i):
 	var sites=[]
-	for y in range(1,H-1):
-		for x in range(1,W-1):
-			var cell=Vector2i(x,y)
-			if animal_walkable(a,cell) and not occupied(cell) and cell not in entries: sites.append(cell)
-	sites.sort_custom(func(c,d):
-		var dc=distance(c,preferred); var dd=distance(d,preferred)
-		return dc<dd if dc!=dd else (c.y<d.y if c.y!=d.y else c.x<d.x))
+	var owned=campaign.animals.filter(func(row):return row.id==a.id)
+	var retained=not owned.is_empty() and owned[0].has("position") and animal_walkable(a,preferred) and not occupied(preferred)
+	if retained or (a.id==1 and preferred==keeper.pos+Vector2i(2,0) and animal_walkable(a,preferred) and not occupied(preferred)):
+		sites.append(preferred)
+	else:
+		for entry in entries:
+			if blocks(entry): continue
+			for y in range(1,H-1):
+				for x in range(1,W-1):
+					var cell=Vector2i(x,y)
+					if distance(entry,cell)>4 or cell in entries or not animal_walkable(a,cell) or occupied(cell): continue
+					if not find_path(entry,cell,false,true,not SPECIES[a.species].can_enter_indoor).is_empty() and cell not in sites: sites.append(cell)
+		sites.sort_custom(func(c,d):
+			var dc=distance(c,entries[0]); var dd=distance(d,entries[0])
+			return dc<dd if dc!=dd else (c.y<d.y if c.y!=d.y else c.x<d.x))
 	if sites.is_empty():
-		if a.state!="受入待ち": Orders.report(self,"受入口付近の場所を空けてください")
+		if a.state!="受入待ち": Orders.report(self,"入口付近の通路と場所を空けてください")
 		a.state="受入待ち"; return
 	a.pos=sites[0]; a.home=a.pos; a.order=a.pos; a.path=[a.pos]; a.placed=true; a.deployment="resident"
 	job_log.append({"tick":tick,"event":"admitted","animal_id":a.id,"pos":[a.pos.x,a.pos.y]})
@@ -1284,17 +1272,28 @@ func open_for_ally(p: Vector2i):
 func queue_order(kind: String,ids: Array,p: Vector2i) -> bool:
 	return Orders.enqueue(self,kind,ids,p)
 
-func rescue_exit(a: Dictionary) -> Vector2i:
+func rescue_exit(a: Dictionary, target: Vector2i=Vector2i(-1,-1)) -> Vector2i:
+	if target.x<0: target=keeper.pos
+	var region={}
+	var frontier=[target] if is_indoor(target) else []
+	while not frontier.is_empty():
+		var cell=frontier.pop_back()
+		if region.has(cell): continue
+		region[cell]=true
+		for n in neighbors(cell):
+			if is_indoor(n) and not region.has(n): frontier.append(n)
 	var sites=[]
 	for p in structures:
 		if structures[p].kind not in Buildings.DOORS or structures[p].status!="ready": continue
+		if not neighbors(p).any(func(n):return region.has(n)): continue
 		for cell in neighbors(p):
-			if animal_walkable(a,cell) and not is_indoor(cell) and not animal_path(a,a.pos,cell).is_empty(): sites.append(cell)
-	sites.sort_custom(func(c,d):return distance(a.pos,c)<distance(a.pos,d))
+				if animal_walkable(a,cell) and not is_indoor(cell) and not actor_occupied(cell,a.pos) and not animal_path(a,a.pos,cell).is_empty(): sites.append(cell)
+	sites.sort_custom(func(c,d):return distance(a.pos,c)<distance(a.pos,d) if distance(a.pos,c)!=distance(a.pos,d) else (c.y<d.y if c.y!=d.y else c.x<d.x))
 	return sites[0] if not sites.is_empty() else a.pos
 
 func debug_action(action: String, selection: Dictionary = {}) -> bool:
 	if not debug_enabled: return false
+	if action=="lock" and (selection.get("kind")!="structure" or structures.get(selection.get("pos"),{}).get("kind")!="locked_door" or structures.get(selection.get("pos"),{}).get("status")!="ready"): return false
 	if action=="infinite": debug_infinite=not debug_infinite
 	elif action=="whistle": campaign.items.whistle=1
 	elif SPECIES.has(action):
@@ -1318,9 +1317,9 @@ func debug_action(action: String, selection: Dictionary = {}) -> bool:
 					if e.id!=selection.id: continue
 					e.hp=clampi(e.hp+amount,0,e.max_hp)
 					if e.hp==0: e.flee=true; release_keeper(e); drop_blueprint(e.pos)
-			"structure":
-				var b=structures.get(selection.pos,{})
-				if b.is_empty(): return false
+			"structure", "floor":
+				var b=building_store(selection.kind).get(selection.pos,{})
+				if b.is_empty() or b.get("status")!="ready" or (selection.has("target_id") and selection.target_id!=b.id): return false
 				if action=="lock": b.lock_hp=maxi(0,b.get("lock_hp",0)-4)
 				else:
 					b.hp=clampi(b.hp+amount,0,b.max_hp)
@@ -1329,3 +1328,6 @@ func debug_action(action: String, selection: Dictionary = {}) -> bool:
 	else: return false
 	job_log.append({"tick":tick,"event":"debug","action":action})
 	return true
+
+func update_facing(actor: Dictionary, previous: Vector2i):
+	if actor.pos.x!=previous.x: actor.facing=signi(actor.pos.x-previous.x)

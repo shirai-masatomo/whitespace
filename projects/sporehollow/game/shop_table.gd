@@ -24,7 +24,7 @@ static func table() -> Dictionary:
 	var products = {}
 	for r in rows:
 		products[r[0]] = {"ProductID": r[0], "Name": r[1], "Category": r[2], "BuyPrice": r[3], "SellPrice": r[4], "Amount": r[5],
-			"Rarity": "common" if r[7] else "uncommon", "Weight": r[6], "UnlockCondition": "", "StageMin": 1, "Enabled": r[0] != "shiba" and not FOOD.has(r[0]), "Guaranteed": r[7], "Stock": r[8]}
+			"Rarity": "common" if r[7] else "uncommon", "Weight": r[6], "UnlockCondition": "", "StageMin": 1, "Enabled": r[0] not in ["shiba","kennel_plan"] and not FOOD.has(r[0]), "Guaranteed": r[7], "Stock": r[8]}
 	return products
 
 static func generate(stage: int, seed_value: int, blueprints: Array) -> Array:

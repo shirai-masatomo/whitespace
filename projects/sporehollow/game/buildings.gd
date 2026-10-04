@@ -1,5 +1,6 @@
 extends RefCounted
 ## Shared topology, two construction layers and transactional onsite upgrades.
+const NAMES = {"wall":"土壁","wood_wall":"木壁","stone_wall":"石壁","soil_tile":"土タイル","wood_tile":"木タイル","stone_tile":"石タイル","door":"ドア","locked_door":"ロック付きドア","kennel":"犬小屋","coop":"鶏小屋"}
 const WALLS = ["wall", "wood_wall", "stone_wall"]
 const DOORS = ["door", "locked_door", "gate"]
 
@@ -43,10 +44,11 @@ static func rooms(w, proposed: Dictionary = {}) -> Dictionary:
 	return indoor
 
 static func reason(w, kind: String, p: Vector2i, check_cost: bool = true) -> String:
+	if kind in ["kennel","coop"]: return "この建物は休止中です"
 	if not w.BUILD.has(kind) or not w.inside(p): return "ここには建てられません"
-	if p in [w.HOLDING_SHED, w.HOLDING_SHED + Vector2i.RIGHT] or p in w.entries: return "受入口と通路を空けてください"
+	if p in w.entries: return "受入口と通路を空けてください"
 	if w.occupied(p): return "ここに誰かいます"
-	if w.natural.has(p) or not w.items_at(p).is_empty() or w.field_items.any(func(i):return i.pos==p): return "先に回収してください"
+	if w.natural.has(p) or not w.items_at(p).is_empty() or w.field_items.any(func(i):return i.pos==p): return "物があるため建設できません"
 	var data = w.BUILD[kind]
 	if data.get("blueprint", "") not in [""] + w.campaign.unlocked_blueprints: return "作り方をまだ知りません"
 	var old = layer(w,kind).get(p,{})

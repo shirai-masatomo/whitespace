@@ -10,23 +10,31 @@ static func enqueue(w, kind: String, p: Vector2i, animal_id: int) -> bool:
 	if w.BUILD.has(kind):
 		var why=w.Buildings.reason(w,kind,p)
 		if why!="": w.say(why); return false
-		if w.jobs.any(func(j):return w.BUILD.has(j.kind) and j.pos==p and w.BUILD[j.kind].layer==w.BUILD[kind].layer): return false
+		if w.jobs.any(func(j):return j.pos==p and ((w.BUILD.has(j.kind) and w.BUILD[j.kind].layer==w.BUILD[kind].layer) or j.get("target_layer")==w.BUILD[kind].layer)): return false
 		resource=w.BUILD[kind].get("resource","soil")
 		cost=0 if w.debug_enabled and w.debug_infinite else w.BUILD[kind].cost
 	elif kind=="move":
 		if not w.walkable(p): return false
 	elif kind=="collect":
 		if w.items_at(p).is_empty() and not w.natural.has(p) and not(p==w.nest and w.eggs>0): return false
-	elif kind=="repair":
-		if w.repair_quote(p).hp<=0: return false
-	elif kind in ["remove","gate"]:
-		if not w.live_structure(p) or (kind=="gate" and w.structures[p].kind not in w.Buildings.DOORS): return false
+	elif kind in ["repair", "repair_floor"]:
+		if w.repair_quote(p, "floor" if kind=="repair_floor" else "structure").hp<=0: return false
+	elif kind in ["remove","remove_floor","gate"]:
+		var store=w.floors if kind=="remove_floor" else w.structures
+		if store.get(p,{}).get("status")!="ready" or (kind=="gate" and store[p].kind not in w.Buildings.DOORS): return false
+		if kind=="remove_floor" and w.live_structure(p): w.say("先に上の建物を解体してください"); return false
 	else: return false
 	var j={"id":w.next_job_id,"kind":kind,"pos":p,"animal_id":animal_id,"state":"pending","resource":resource,"reserved":cost,"started":false}
+	if kind in ["remove","remove_floor","repair","repair_floor","gate"]:
+		j.target_layer="floor" if kind.ends_with("_floor") else "structure"
+		var b=w.building_store(j.target_layer).get(p,{})
+		j.target_id=b.id; j.target_kind=b.kind
+		if w.jobs.any(func(other):return other.pos==p and ((w.BUILD.has(other.kind) and w.BUILD[other.kind].layer==j.target_layer) or other.get("target_layer")==j.target_layer)): return false
 	if cost>0: w.add_resource(resource,-cost)
 	w.next_job_id+=1
 	if w.jobs.is_empty() and w.manual_goal==null and w.Life.able(w) and w.job_hold_reason in ["travel","manual","rescue","danger","rest_end"]: hold(w,"")
 	w.jobs.append(j)
+	w.Life.wake_auto(w)
 	w.job_log.append({"tick":w.tick,"event":"queued","id":j.id,"kind":kind,"pos":[p.x,p.y]})
 	return true
 
@@ -65,7 +73,7 @@ static func walk(w,j,goals: Array) -> bool:
 	var route=path_to(w,w.keeper.pos,goals,outdoor)
 	if route.size()<2:
 		j.state="blocked"; j.block_reason="通路がふさがっています"
-		if j.kind in ["move","collect","repair","remove","gate"]: cancel(w,j.id,"unreachable")
+		if j.kind in ["move","collect","repair","repair_floor","remove","remove_floor","gate"]: cancel(w,j.id,"unreachable")
 		return false
 	var next=route[1]
 	if w.actor_occupied(next,w.keeper.pos):
@@ -86,6 +94,11 @@ static func step(w):
 		if pending.get("cancel_requested",false): cancel(w,pending.id)
 	if not w.Life.able(w) or w.jobs_held or w.manual_goal!=null or w.jobs.is_empty(): return
 	var j=w.jobs[0]
+	if j.has("target_id"):
+		var b=w.building_store(j.target_layer).get(j.pos,{})
+		if b.get("id")!=j.target_id or b.get("kind")!=j.target_kind or b.get("status")!="ready": complete(w,j,false); return
+		if j.kind=="remove_floor" and w.live_structure(j.pos): j.state="blocked"; j.block_reason="先に上の建物を解体してください"; return
+		if j.kind in ["remove","remove_floor"] and w.occupied(j.pos) and w.keeper.pos!=j.pos: j.state="blocked"; j.block_reason="誰かがいます"; return
 	if j.kind=="animal_order": w.Orders.step(w,j); return
 	if w.BUILD.has(j.kind) and not j.started:
 		var why=w.Buildings.reason(w,j.kind,j.pos,false)
@@ -101,6 +114,7 @@ static func step(w):
 			w.Buildings.begin(w,j)
 		w.Buildings.advance(w,j)
 		return
+	if j.kind in ["remove","remove_floor"] and w.occupied(j.pos): j.state="blocked"; j.block_reason="誰かがいます"; return
 	j.work_credit=j.get("work_credit",0.0)+w.Life.factor(w)
 	if j.work_credit<1: return
 	complete(w,j,w._execute_local(j.kind,j.pos,j.animal_id))
@@ -121,7 +135,7 @@ static func status(w) -> String:
 	if w.keeper.state != "free": return "気絶中"
 	if w.keeper.resting: return "休息"
 	if w.manual_goal != null: return "歩いている"
-	if w.jobs_held: return {"manual":"移動で中断","rest":"休息","rescue":"救出後・再開待ち","danger":"被弾・再開待ち","travel":"移動後・再開待ち","rest_end":"休息終了・再開待ち","explicit":"作業停止"}.get(w.job_hold_reason,"再開待ち")
+	if w.jobs_held: return {"manual":"移動で中断","rest":"休息","auto_rest":"自動休息","rescue":"救出後・再開待ち","danger":"被弾・再開待ち","travel":"移動後・再開待ち","rest_end":"休息終了・再開待ち","explicit":"作業停止"}.get(w.job_hold_reason,"再開待ち")
 	if not w.jobs.is_empty() and w.jobs[0].state == "blocked": return w.jobs[0].get("block_reason","通路がふさがっています")
 	return ""
 

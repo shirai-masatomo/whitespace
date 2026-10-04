@@ -67,6 +67,7 @@ func run():
 	w=fresh(); w.debug_enabled=true; w.debug_action("whistle")
 	w.animals[0].loyalty=100
 	for i in range(7): w.debug_action("hen")
+	steps(w,12) # Entrance arrivals wait for their occupied neighbors to move, then join.
 	check(w.queue_order("guide",w.animals.map(func(a):return a.id),Vector2i(15,12)),"Eight residents reserve one group")
 	drain(w,1600)
 	var arrivals=w.job_log.filter(func(e):return e.event=="guide_arrived")
@@ -122,8 +123,8 @@ func run():
 	drain(w); check(w.floors.has(floor_cell) and w.structures.has(floor_cell),"Both layers survive")
 	w.field_items.append({"kind":"egg","pos":Vector2i(8,12),"born_day":1})
 	check(not w.act("soil_tile",Vector2i(8,12)) and w.field_items.size()==1,"Floor cannot delete an existing item")
-	w.drop_blueprint(floor_cell)
-	check(w.items_at(floor_cell).size()==1,"Blueprint can drop onto a floor")
+	w.field_items.append({"kind":"kennel_plan","pos":floor_cell,"born_day":1})
+	check(w.items_at(floor_cell).size()==1,"Legacy blueprint remains collectible on a floor")
 	w=fresh(); var tile=Vector2i(7,12)
 	w.act("soil_tile",tile); drain(w); w.floors[tile].hp=4
 	for kind in ["wood_tile","stone_tile"]:
@@ -173,8 +174,8 @@ func run():
 	for y in range(1,w.H-1):
 		for x in range(1,w.W-1): site(w,"wall",Vector2i(x,y))
 	w.debug_action("hen");check(not w.animals[1].placed and w.animals[1].state=="受入待ち","Full ranch keeps single pending individual")
-	w.structures.erase(Vector2i(20,14));w.admit(w.animals[1],w.HOLDING_SHED)
-	check(w.animals.size()==2 and w.animals[1].placed and w.animals[1].pos==Vector2i(20,14),"Admission retry uses a valid vacancy without duplication")
+	w.structures.erase(w.entries[0]);w.structures.erase(w.entries[0]+Vector2i.RIGHT);w.admit(w.animals[1],w.entries[0])
+	check(w.animals.size()==2 and w.animals[1].placed and w.animals[1].pos==w.entries[0]+Vector2i.RIGHT,"Admission retry uses a valid vacancy without duplication")
 	# Door lock can break independently and cannot be restored by toggling.
 	w=fresh(); var door=Vector2i(8,12); site(w,"locked_door",door)
 	w.spawn_enemy({"entry":Vector2i(9,12),"role":"kidnapper"}); var e=w.enemies[0]

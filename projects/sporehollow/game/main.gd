@@ -5,10 +5,10 @@ const TILE = Vector2(48, 42)
 const GROUPS = ["建設", "指示"]
 const TOOLS = {"wall": "壁  10 / 1秒", "wood_wall":"木壁 木10", "stone_wall":"石壁 石10", "soil_tile":"土タイル 土2", "wood_tile":"木タイル 木2", "stone_tile":"石タイル 石2", "door":"ドア 木10", "locked_door":"施錠ドア 木20", "guide":"連れていく", "repair": "修理", "gate": "ドア開閉", "remove": "解体", "kennel": "犬小屋 木20", "coop": "鶏小屋 木30",
 	"auto": "おまかせ", "stay": "待機", "wander": "徘徊", "rest": "休む", "collect": "資源・卵・設計図", "dog_food": "犬用餌 HP+10", "hen_food": "鶏用餌 HP+8", "cat_food": "猫用餌 HP+8"}
-const GROUP_TOOLS = [["wall", "wood_wall", "stone_wall", "soil_tile", "wood_tile", "stone_tile", "door", "locked_door", "kennel", "coop"], ["guide", "auto", "stay", "wander", "rest"], ["collect"]]
+const GROUP_TOOLS = [["wall", "wood_wall", "stone_wall", "soil_tile", "wood_tile", "stone_tile", "door", "locked_door"], ["guide", "auto", "stay", "wander", "rest"], ["collect"]]
 const BoardArt = preload("res://game/board_art.gd")
 const UI = preload("res://game/ui_style.gd")
-const MARKET_CATEGORIES = {"animals": ["動物", "animals", "牧場の仲間"], "materials": ["資材", "wood", "土・木・石"], "facilities": ["小屋と設備", "kennel", "牧場づくり"], "items": ["小物と恵み", "basket", "卵・羽・道具"]}
+const MARKET_CATEGORIES = {"animals": ["動物", "animals", "牧場の仲間"], "materials": ["資材", "wood", "土・木・石"], "facilities": ["施設", "hammer", "牧場づくり"], "items": ["小物と恵み", "basket", "卵・羽・道具"]}
 var world = Farm.new({}, randi_range(1, 2147483646))
 var tool = ""
 var queue_controls: Control
@@ -19,6 +19,8 @@ var group = -1
 var selected_animal = -1
 var selected_animals: Array = []
 var selected_structures: Array = []
+var selection_layer = "structure"
+var selection_ids: Dictionary = {}
 var menu_open = false
 var menu_was_paused = false
 var menu: Control
@@ -62,6 +64,7 @@ var automated = false
 var debug_view = false
 var art_alpha = 1.0
 var view_positions: Dictionary = {}
+var actor_tracks: Dictionary = {}
 var buttons: Dictionary = {}
 var camera: Camera2D
 var hud: Node2D
@@ -138,7 +141,7 @@ func _ready():
 	queue_controls.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	controls.add_child(queue_controls)
 	add_button(controls, "walk", "牧場主", Rect2(270, 754, 110, 36), choose_walk)
-	buttons.walk.tooltip_text = "ホイール：解除 → 建設 → 動物 → 牧場主。Ctrl+ホイール：ズーム"
+	buttons.walk.tooltip_text = "ホイール：解除 → 建設 → 指示 → 牧場主。Ctrl+ホイール：ズーム"
 	setup_menu()
 	overlay = Node2D.new()
 	layer.add_child(overlay)
@@ -320,40 +323,55 @@ func refresh():
 		for i in range(choices.size()):
 			var id = choices[i]
 			add_button(palette, id, TOOLS[id], Rect2(16 + (i%6)*164, 685+(i/6)*40, 156, 36), select_tool.bind(id))
-			buttons[id].tooltip_text = {"wall": "壁：土10、建設1秒", "kennel": "設計図で解放、木材20。1匹専用、毎秒HP1回復", "collect": "雑草：1 Gold / キノコ：終了時HP5回復 / 卵：回収"}.get(id, TOOLS[id])
+			buttons[id].tooltip_text = {"wall": "壁：土10、建設1秒", "collect": "雑草：1 Gold / キノコ：終了時HP5回復 / 卵：回収"}.get(id, TOOLS[id])
 			if Farm.Shop.FOOD.has(id):
 				buttons[id].text += " ×%d" % world.item_count(id)
 			if id in ["wall", "wood_wall", "stone_wall", "soil_tile", "wood_tile", "stone_tile", "door", "locked_door", "kennel", "coop"]:
 				buttons[id].icon = BoardArt.icon("wood" if id in ["kennel", "coop"] else "soil")
-				buttons[id].disabled = id == "kennel" and "kennel" not in world.campaign.unlocked_blueprints
-				if buttons[id].disabled: buttons[id].text = "犬小屋：設計図が必要"
 	for id in TOOLS:
 		if buttons.has(id): UI.selected(buttons[id], tool == id)
 	build_context_actions()
 	if debug_view: build_debug_controls()
 	last_phase = world.phase
 
+func selected_store() -> Dictionary:
+	return world.building_store(selection_layer)
+
+func select_building(cell: Vector2i, layer_name: String, toggle: bool=false):
+	if not toggle or selection_layer!=layer_name: selected_structures.clear(); selection_ids.clear()
+	selection_layer=layer_name
+	selected_resources.clear(); selected_animals.clear()
+	if cell in selected_structures: selected_structures.erase(cell); selection_ids.erase(cell)
+	else:
+		toggle_selection(selected_structures,cell)
+		if cell in selected_structures: selection_ids[cell]=[selected_store()[cell].id,selected_store()[cell].kind]
+	selected={"kind":layer_name,"pos":selected_structures[0],"target_id":selection_ids[selected_structures[0]][0]} if not selected_structures.is_empty() else {}
+	group=0; tool=""; refresh()
+
+func switch_layer():
+	if not selected.has("pos"): return
+	select_building(selected.pos,"floor" if selection_layer=="structure" else "structure")
+
 func facility_action(action: String):
-	if not world.working() or group != 0 or selected.get("kind") != "structure": return
-	var targets = selected_structures.duplicate() if action in ["remove", "repair"] else [selected.pos]
-	var count = 0
+	if not world.working() or selected.get("kind") not in ["structure","floor"]: return
+	prune_selection()
+	var count=0
+	var targets=selected_structures.duplicate()
+	var kind=action+"_floor" if selection_layer=="floor" and action in ["remove","repair"] else action
 	for cell in targets:
-		if action == "repair" and world.repair_quote(cell).hp <= 0: continue
-		if world.act(action, cell): count += 1
-	notice("%dか所の仕事を頼んだよ" % count if count else ("予定は8件まで" if world.jobs.size() >= 8 else "今は使えないか、資材が足りません"))
-	if action == "remove" and count:
-		selected_structures = selected_structures.filter(func(p): return world.live_structure(p))
-		selected = {"kind": "structure", "pos": selected_structures[0]} if not selected_structures.is_empty() else {}
+		if action=="repair" and world.repair_quote(cell,selection_layer).hp<=0: continue
+		if world.act(kind,cell): count+=1
+	notice("%d件予約・%d件未登録" % [count,targets.size()-count])
 	refresh()
 
 func context_targets() -> Array:
 	if selected.get("kind") == "job": return [selected.pos]
 	if not selected_resources.is_empty(): return selected_resources
-	if selected.get("kind") == "structure": return selected_structures
+	if selected.get("kind") in ["structure","floor"]: return selected_structures
 	return []
 
 func context_state() -> String:
-	return str(selected_resources) + str(selected) + str(selected_structures) + str(selected_structures.map(func(p): return world.structures.get(p,{}))) + str(world.jobs.map(func(j): return [j.kind, j.pos])) + str(world.materials) + str(world.wood)
+	return str(selected_resources) + str(selected) + str(selected_structures) + str(selected_structures.map(func(p): return selected_store().get(p,{}))) + str(world.jobs.map(func(j): return [j.kind, j.pos])) + str(world.materials) + str(world.wood)
 
 func build_context_actions():
 	context_signature = context_state()
@@ -371,21 +389,23 @@ func build_context_actions():
 		if selected_resources.any(func(p):return job_reserved("collect",p)):
 			rows.append(["cancel_near","取消","cross",cancel_selected_work,false,"選んだ回収予定を取り消す"])
 	else:
-		var damaged = selected_structures.filter(func(p): return world.live_structure(p) and world.structures[p].status == "ready" and (world.structures[p].hp < world.structures[p].max_hp or world.structures[p].get("lock_hp",0)<world.structures[p].get("max_lock_hp",0)))
+		var damaged = selected_structures.filter(func(p): return selected_store().get(p,{}).get("status")=="ready" and selected_store()[p].status == "ready" and (selected_store()[p].hp < selected_store()[p].max_hp or selected_store()[p].get("lock_hp",0)<selected_store()[p].get("max_lock_hp",0)))
 		if not damaged.is_empty():
-			var can_repair = damaged.any(func(p): return not job_reserved("repair", p) and world.repair_quote(p).hp > 0)
+			var can_repair = damaged.any(func(p): return not job_reserved("repair_floor" if selection_layer=="floor" else "repair", p) and world.repair_quote(p,selection_layer).hp > 0)
 			var costs = {"soil":0,"wood":0,"stone":0}
-			for p in damaged: costs[world.structures[p].get("resource","soil")] += world.repair_quote(p).cost
+			for p in damaged: costs[selected_store()[p].get("resource","soil")] += world.repair_quote(p,selection_layer).cost
 			rows.append(["repair", "修理", "hammer", facility_action.bind("repair"), not can_repair, "E · " + resource_text(costs)])
 		var returns = {"soil":0,"wood":0,"stone":0}
-		for p in selected_structures: returns[world.structures[p].get("resource","soil")] += world.dismantle_quote(p)
-		rows.append(["remove", "解体", "cross", facility_action.bind("remove"), selected_structures.all(func(p):return job_reserved("remove",p)), "返却 " + resource_text(returns)])
-		if selected_structures.size() == 1 and world.structures[selected_structures[0]].kind in Farm.Buildings.DOORS:
+		for p in selected_structures: returns[selected_store()[p].get("resource","soil")] += world.dismantle_quote(p,selection_layer)
+		rows.append(["remove", "タイルを解体" if selection_layer=="floor" else "解体", "cross", facility_action.bind("remove"), (selection_layer=="floor" and selected_structures.all(func(p):return world.live_structure(p))) or selected_structures.all(func(p):return job_reserved("remove_floor" if selection_layer=="floor" else "remove",p)), "先に上の建物を解体してください" if selection_layer=="floor" and selected_structures.any(func(p):return world.live_structure(p)) else "返却 " + resource_text(returns)])
+		if selected_structures.size() == 1 and selected_store()[selected_structures[0]].kind in Farm.Buildings.DOORS:
 			rows.append(["gate", "開閉", "next", facility_action.bind("gate"), job_reserved("gate",selected_structures[0]), "牧場主が現地で開閉する"])
+		if selected_structures.size()==1 and world.live_structure(selected.pos) and world.floors.get(selected.pos,{}).get("status")=="ready":
+			rows.append(["switch_layer","床を見る" if selection_layer=="structure" else "建物を見る","next",switch_layer,false,"同じマスの別の層を選択"])
 	var count = context_targets().size()
 	context_panel.size = Vector2(rows.size() * 112 + 12, 68)
 	var title = Label.new()
-	title.text = "選択 %d/8" % count if count > 1 else ("落とし物" if not selected_resources.is_empty() else "施設")
+	title.text = "選択 %d/8" % count if count > 1 else ("落とし物" if not selected_resources.is_empty() else ("床" if selection_layer=="floor" else "建物"))
 	title.position = Vector2(9,3)
 	title.add_theme_color_override("font_color",UI.INK)
 	context_panel.add_child(title)
@@ -413,12 +433,12 @@ func prune_selection():
 		selected.clear()
 		refresh()
 	var resources = selected_resources.filter(func(p):return collectible(p))
-	var structures = selected_structures.filter(func(p):return world.live_structure(p))
+	var structures = selected_structures.filter(func(p):return selected_store().get(p,{}).get("status") in ["ready","building"] and selection_ids.get(p)==[selected_store()[p].id,selected_store()[p].kind])
 	var changed = resources != selected_resources or structures != selected_structures
 	selected_resources = resources
 	selected_structures = structures
-	if selected.get("kind") == "structure":
-		selected = {"kind":"structure","pos":structures[0]} if not structures.is_empty() else {}
+	if selected.get("kind") in ["structure","floor"]:
+		selected = {"kind":selection_layer,"pos":structures[0],"target_id":selection_ids[structures[0]][0]} if not structures.is_empty() else {}
 	if changed: refresh()
 
 func advance():
@@ -477,6 +497,7 @@ func reset_view():
 	dragging = false
 	selected.clear()
 	view_positions.clear()
+	actor_tracks.clear()
 	seen_milestones = 0
 	seen_combat = 0
 	seen_skills = 0
@@ -569,7 +590,7 @@ func refresh_jobs():
 		row.size = Vector2(214, 31)
 		row.focus_mode = Control.FOCUS_NONE
 		UI.button(row, Color("c6d1ac") if i == 0 else UI.PAPER)
-		var names = {"wall": "壁", "door":"ドア","locked_door":"施錠ドア","wood_wall":"木壁","stone_wall":"石壁","soil_tile":"土タイル","wood_tile":"木タイル","stone_tile":"石タイル", "kennel": "犬小屋", "coop": "鶏小屋", "move": "歩く", "collect": "回収", "repair": "修理", "remove": "解体", "gate": "ドアを開閉", "animal_order": "仲間へ指示"}
+		var names = {"wall": "壁", "door":"ドア","locked_door":"施錠ドア","wood_wall":"木壁","stone_wall":"石壁","soil_tile":"土タイル","wood_tile":"木タイル","stone_tile":"石タイル", "kennel": "犬小屋", "coop": "鶏小屋", "move": "歩く", "collect": "回収", "repair": "修理", "remove": "解体", "remove_floor":"タイル解体", "repair_floor":"床修理", "gate": "ドアを開閉", "animal_order": "仲間へ指示"}
 		row.text = "%s%s" % [ "› " if j.state != "pending" else "", ("待機 · " if j.state == "blocked" else "") + names.get(j.kind, "仕事")]
 		row.draw.connect(draw_queue_badge.bind(row,i+1))
 		row.set_meta("job_id",j.id)
@@ -663,17 +684,6 @@ func draw_animal_silhouette(p: Vector2, species: String, alpha: float, size_valu
 	else: draw_hen(Vector2.ZERO)
 	art_alpha = 1.0
 	draw_set_transform(Vector2.ZERO)
-
-func draw_holding_shed():
-	var p = center(Farm.HOLDING_SHED + Vector2i.RIGHT)
-	draw_rect(Rect2(p+Vector2(-39,-30),Vector2(78,52)), Color("806045"))
-	draw_colored_polygon(PackedVector2Array([p+Vector2(-47,-29),p+Vector2(0,-52),p+Vector2(47,-29)]),Color("637b64"))
-	draw_rect(Rect2(p+Vector2(-37,-18),Vector2(25,40)),Color("393e35"))
-	for x in [-32,29]: draw_line(p+Vector2(x,-23),p+Vector2(x,20),Color("bfa577"),4)
-	draw_line(center(Farm.HOLDING_SHED)+Vector2(21,-16),center(Farm.HOLDING_SHED)+Vector2(21,16),Color("d4c397"),5)
-	label_on(self,p+Vector2(-31,-31),"受入小屋",12,UI.PAPER)
-	var count = world.animals.filter(func(a): return not a.placed ).size()
-	label_on(self,p+Vector2(23,-4),str(count),14,UI.PAPER)
 
 func toggle_speed():
 	var steps = [0.5, 1.0, 2.0, 4.0] if world.keeper.resting else [0.5, 1.0, 2.0]
@@ -821,7 +831,9 @@ func selection_candidates() -> Array:
 		if item.pos not in cells: cells.append(item.pos)
 	for cell in cells: result.append({"class": "resource", "id": cell, "point": center(cell)})
 	for cell in world.structures:
-		if world.live_structure(cell): result.append({"class":"structure","id":cell,"point":center(cell)})
+		if world.live_structure(cell) and selection_layer!="floor": result.append({"class":"structure","id":cell,"point":center(cell)})
+	for cell in world.floors:
+		if world.floors[cell].status=="ready" and (selection_layer=="floor" or not world.live_structure(cell)): result.append({"class":"floor","id":cell,"point":center(cell)})
 	result.sort_custom(func(a,b):
 		var da = drag_start.distance_squared_to(a.point)
 		var db = drag_start.distance_squared_to(b.point)
@@ -857,15 +869,22 @@ func finish_drag():
 	elif drag_class == "resource":
 		group = -1
 		selected_resources = targets.map(func(c): return c.id)
-	elif drag_class == "structure":
+	elif drag_class in ["structure","floor"]:
+		selection_layer=drag_class
 		group = 0
 		selected_structures = targets.map(func(c): return c.id)
-		if not selected_structures.is_empty(): selected = {"kind": "structure", "pos": selected_structures[0]}
+		selection_ids.clear()
+		for p in selected_structures: selection_ids[p]=[selected_store()[p].id,selected_store()[p].kind]
+		if not selected_structures.is_empty(): selected = {"kind":selection_layer,"pos":selected_structures[0],"target_id":selection_ids[selected_structures[0]][0]}
 	refresh()
 
 func _unhandled_input(event):
 	if menu_open or cinematic() or not world.working(): return
 	if not (event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT) or pointer_over_ui(): return
+	if Farm.BUILD.has(tool):
+		board_click(event)
+		get_viewport().set_input_as_handled()
+		return
 	press_pending = true
 	press_position = event.position
 	drag_start = get_canvas_transform().affine_inverse() * pointer
@@ -878,6 +897,9 @@ func _unhandled_input(event):
 
 func board_click(event):
 	var cell = Vector2i(get_canvas_transform().affine_inverse() * event.position / TILE)
+	if Farm.BUILD.has(tool):
+		if not world.act(tool,cell): notice("予定は8件まで" if world.jobs.size()>=8 else world.Buildings.reason(world,tool,cell))
+		refresh(); return
 	if not event.ctrl_pressed: selected_resources.clear()
 	if world.keeper.placed and event.position.distance_to(get_canvas_transform() * keeper_pixel()) < 24 * camera.zoom.x:
 		choose_walk()
@@ -907,16 +929,9 @@ func board_click(event):
 	if Farm.BUILD.has(tool) and (world.live_structure(cell) or world.floors.has(cell)):
 		if not world.act(tool,cell): notice(world.Buildings.reason(world,tool,cell))
 		refresh(); return
-	if world.live_structure(cell):
-		selected_resources.clear()
-		selected_animals.clear()
-		if not event.ctrl_pressed or group != 0 or selected.get("kind") != "structure": selected_structures.clear()
-		if cell in selected_structures: selected_structures.erase(cell)
-		else: toggle_selection(selected_structures, cell)
-		group = 0
-		selected = {"kind": "structure", "pos": selected_structures[0]} if not selected_structures.is_empty() else {}
-		tool = ""
-		refresh()
+	if world.live_structure(cell) or world.floors.get(cell,{}).get("status")=="ready":
+		var layer_name="floor" if world.floors.get(cell,{}).get("status")=="ready" and (selection_layer=="floor" or not world.live_structure(cell)) else "structure"
+		select_building(cell,layer_name,event.ctrl_pressed)
 		return
 	if collectible(cell):
 		select_resource(cell, event.ctrl_pressed)
@@ -962,7 +977,7 @@ func _process(delta):
 	palette.visible = book_motion == ""
 
 	if not menu_open: clock += delta
-	if not world.paused: visual_time += delta
+	if not world.paused and not menu_open and world.working(): visual_time += delta * (24.0 if not world.rest_skip.is_empty() else speed)
 	var direction = Vector2(int(keys_down.get(KEY_D, false)) - int(keys_down.get(KEY_A, false)), int(keys_down.get(KEY_S, false)) - int(keys_down.get(KEY_W, false)))
 	if not menu_open and not cinematic() and world.phase != "shop": camera.position += direction.normalized() * delta * 420
 	var middle = Vector2(Farm.W, Farm.H) * TILE * 0.5
@@ -972,6 +987,7 @@ func _process(delta):
 		while accumulated >= Farm.DT:
 			var was_sending = not world.rest_skip.is_empty()
 			world.step()
+			record_actor_tracks()
 			accumulated -= Farm.DT
 			sync_danger()
 			if was_sending and world.rest_skip.is_empty():
@@ -1048,7 +1064,7 @@ func _process(delta):
 	while seen_milestones < world.milestones.size():
 		var event = world.milestones[seen_milestones]
 		seen_milestones += 1
-		var names = {"whistle": "", "auto_start": "敵の襲来に備えよ", "invasion": "！ 侵入者接近", "keeper_down": "倒れた！ 仲間に助けてもらおう", "keeper_recovered": "目が覚めた。少し休もう", "restrained": "牧場主が拘束された！", "carried": "牧場主が連れ去られている！", "rescue": "牧場主を救出した！", "animal_danger": "動物のHPが危険！", "blueprint": "犬小屋の作り方を覚えた", "blueprint_dropped": "作り方のメモが落ちた", "early_clear": "今夜の襲撃を退けた", "dawn": "夜明け"}
+		var names = {"whistle": "", "auto_start": "敵の襲来に備えよ", "invasion": "！ 侵入者接近", "keeper_down": "倒れた！ 仲間に助けてもらおう", "keeper_recovered": "目が覚めた。少し休もう", "restrained": "牧場主が拘束された！", "carried": "牧場主が連れ去られている！", "rescue": "牧場主を救出した！", "animal_danger": "動物のHPが危険！", "blueprint": event.get("text","設計図を手に入れた。"), "blueprint_dropped": "作り方のメモが落ちた", "early_clear": "今夜の襲撃を退けた", "dawn": "夜明け"}
 		if event.kind == "order_notice": notice(event.text); continue
 		if event.kind == "whistle":
 			audio.cue("whistle"); continue
@@ -1073,19 +1089,46 @@ func _process(delta):
 	hud.queue_redraw()
 	overlay.queue_redraw()
 
+func record_actor_tracks():
+	record_actor("keeper",world.keeper.pos)
+	for a in world.animals:
+		if a.placed: record_actor("a%d" % a.id,a.pos)
+	for e in world.enemies: record_actor("e%d" % e.id,e.pos)
+
+func record_actor(id: String, cell: Vector2i):
+	if not actor_tracks.has(id): actor_tracks[id]=[]
+	var track=actor_tracks[id]
+	var previous=track[-1] if not track.is_empty() else view_positions.get(id,Vector2(cell))
+	if previous!=Vector2(cell): track.append(Vector2(cell))
+
 func smooth_actor(id: String, p: Vector2i, delta: float):
-	view_positions[id] = Vector2(p) if not view_positions.has(id) else view_positions[id].lerp(Vector2(p), minf(delta * 14, 1))
+	if not view_positions.has(id): view_positions[id]=Vector2(p)
+	record_actor(id,p)
+	if world.paused or menu_open: return
+	var rate=2.5*Farm.Life.factor(world)
+	if id.begins_with("a"):
+		var a=world.Orders.animal(world,int(id.substr(1)))
+		rate=a.get("move_speed",2.0)*(1.5 if a.get("rescuing",false) else 1.0)
+	elif id.begins_with("e"):
+		for e in world.enemies:
+			if e.id==int(id.substr(1)): rate=1.0 if e.carry=="keeper" else e.move_speed; break
+	elif id=="keeper" and world.keeper.carrier>=0: rate=1.0
+	var budget=delta*rate*(24.0 if not world.rest_skip.is_empty() else speed)
+	var track=actor_tracks[id]
+	while not track.is_empty() and budget>0:
+		var current: Vector2=view_positions[id]
+		var target: Vector2=track[0]
+		var remaining=current.distance_to(target)
+		# Non-cardinal discontinuities are explicit fixture/phase placement, not walking.
+		if absf(current.x-target.x)>0.001 and absf(current.y-target.y)>0.001:
+			view_positions[id]=target; track.pop_front(); continue
+		var distance=minf(budget,remaining)
+		view_positions[id]=current.move_toward(target,distance)
+		budget-=distance
+		if distance>=remaining: track.pop_front()
 
 func actor_pixel(id: String, cell: Vector2i) -> Vector2:
 	var p = center(view_positions.get(id, Vector2(cell)))
-	if id.begins_with("a") and world.structures.get(cell, {}).get("kind") == "kennel": p.y += 13
-	# Presentation only: slight side separation plus a short lunge/recoil. No stagger or tick changes.
-	if id.begins_with("a"):
-		for e in world.enemies:
-			if not e.done and Farm.distance(cell, e.pos) <= 1: p.x -= 8
-	else:
-		for a in world.animals:
-			if a.placed and Farm.distance(cell, a.pos) <= 1: p.x += 8
 	for hit in hit_effects:
 		if id not in [hit.source, hit.target]: continue
 		var from = center(view_positions.get(hit.source, Vector2(cell)))
@@ -1135,7 +1178,8 @@ func export_record():
 	notice("開発用観察JSONを保存しました")
 
 func label_on(target: CanvasItem, p: Vector2, text_value: String, size: int = 17, color: Color = Color("f3ead1")):
-	target.draw_string(FONT, p, text_value, HORIZONTAL_ALIGNMENT_LEFT, -1, size, color)
+	for i in range(text_value.split("\n").size()):
+		target.draw_string(FONT, p+Vector2(0,i*22), text_value.split("\n")[i], HORIZONTAL_ALIGNMENT_LEFT, -1, size, color)
 
 func rect(p: Vector2, size: Vector2, color: String): draw_rect(Rect2(p, size), Color(Color(color), art_alpha))
 
@@ -1144,6 +1188,7 @@ func draw_structure(p: Vector2, b: Dictionary, preview: bool = false):
 	if b.kind=="wood_wall": shade=Color("bc9367")
 	if b.kind=="stone_wall": shade=Color("9ba4a3")
 	if preview: shade.a = 0.45
+	if b.kind in ["kennel","coop"] or b.status=="disabled": return
 	if b.status in ["destroyed", "interrupted", "removed"]:
 		if b.status != "removed":
 			rect(p + Vector2(-15, 4), Vector2(13, 8), "82775d")
@@ -1167,12 +1212,19 @@ func draw_structure(p: Vector2, b: Dictionary, preview: bool = false):
 			draw_line(p + Vector2(-12, 6), p + Vector2(12, 6), Color("f1d79b"), 3)
 			draw_circle(p + Vector2(0, -10), 4, Color("fff0c7"))
 	elif b.kind in Farm.Buildings.WALLS:
+		if not preview:
+			var cell=Vector2i(p/TILE)
+			for n in world.neighbors(cell):
+				if not Farm.Buildings.enclosure(world.structures.get(n,{})): continue
+				var offset=Vector2(n-cell)*TILE*0.5
+				draw_line(p+Vector2(0,3),p+offset+Vector2(0,3),Color("797257"),24)
+				draw_line(p-Vector2(0,10),p+offset-Vector2(0,10),shade,6)
 		draw_rect(Rect2(p - Vector2(20, 13), Vector2(40, 29)), Color("797257"))
 		draw_rect(Rect2(p - Vector2(20, 13), Vector2(40, 6)), shade)
 		draw_line(p - Vector2(20, -2), p + Vector2(20, 2), Color("545642"), 2)
 	else:
-		draw_rect(Rect2(p - Vector2(20, 13), Vector2(6, 30)), shade)
-		draw_rect(Rect2(p + Vector2(14, -13), Vector2(6, 30)), shade)
+		draw_rect(Rect2(p - Vector2(24, 13), Vector2(6, 30)), shade)
+		draw_rect(Rect2(p + Vector2(18, -13), Vector2(6, 30)), shade)
 		var hinge = p - Vector2(15, 8)
 		var tip = p + Vector2(15, 8).lerp(Vector2(-12, 15), gate_views.get(b.id, 1.0 if b.open else 0.0))
 		draw_line(hinge, tip, shade, 5)
@@ -1194,11 +1246,10 @@ func _draw():
 		var floor_data=world.floors[cell]
 		if floor_data.status!="ready": continue
 		var tint={"soil_tile":Color("ad946b"),"wood_tile":Color("bc9367"),"stone_tile":Color("929b95")}.get(floor_data.kind,Color("ad946b"))
-		draw_rect(Rect2(Vector2(cell)*TILE+Vector2(1,1),TILE-Vector2(2,2)),tint)
+		draw_rect(Rect2(Vector2(cell)*TILE,TILE),tint)
 		for offset in [12,25,38]: draw_line(Vector2(cell)*TILE+Vector2(offset,2),Vector2(cell)*TILE+Vector2(offset,40),Color(tint.darkened(0.12)),1)
 	for cell in world.indoor:
 		draw_rect(Rect2(Vector2(cell)*TILE,TILE),Color(0.22,0.35,0.45,0.22 if debug_view else 0.08))
-	draw_holding_shed()
 	for p in world.natural:
 		BoardArt.draw_resource(self, center(p) + Vector2(sin(visual_time * 1.3 + p.x) * (1.5 if world.natural[p] == "weed" else 0.3), 0), world.natural[p])
 	for p in world.structures: draw_structure(center(p), world.structures[p])
@@ -1260,6 +1311,7 @@ func _draw():
 			draw_set_transform(p+Vector2(0,4),0.16)
 			p = Vector2.ZERO
 		draw_circle(p + Vector2(0, -8), 9, Color("f3cda2"))
+		rect(p+Vector2(7*world.keeper.get("facing",1),-8),Vector2(3,3),"b98565")
 		rect(p + Vector2(-12, -18), Vector2(24, 6), "f1d690")
 		var body_height = 12 if Farm.Life.presentation(world) == "settling" else 20
 		rect(p + Vector2(-8, 1), Vector2(17, body_height), "719b99" if Farm.Life.presentation(world) in ["tired","exhausted"] else "80d4cd")
@@ -1304,13 +1356,13 @@ func _draw():
 				draw_rect(Rect2(owner_pixel + Vector2(-17, -33), Vector2(34, 4)), Color("684b46"))
 				draw_rect(Rect2(owner_pixel + Vector2(-17, -33), Vector2(34 * float(world.keeper.hp) / world.keeper.max_hp, 4)), Color("d68b74"))
 	for item in world.field_items:
-		var q = center(item.pos) + (Vector2(7, 8) if item.kind == "kennel_plan" else Vector2.ZERO)
-		if item.kind == "kennel_plan" and world.keeper.placed and item.pos == world.keeper.pos: q = center(item.pos) + Vector2(-25,-22)
-		if item.kind == "kennel_plan":
-			draw_rect(Rect2(q - Vector2(15, 11), Vector2(30, 24)), Color("75c6d8"))
-			draw_line(q + Vector2(-9, 0), q + Vector2(0, -7), Color("ffffff"), 2)
-			draw_line(q + Vector2(0, -7), q + Vector2(9, 0), Color("ffffff"), 2)
-			draw_rect(Rect2(q + Vector2(-6, 0), Vector2(12, 8)), Color("ffffff"), false, 2)
+		var q = center(item.pos) + (Vector2(7, 8) if item.kind.ends_with("_plan") else Vector2.ZERO)
+		if item.kind.ends_with("_plan") and world.keeper.placed and item.pos == world.keeper.pos: q = center(item.pos) + Vector2(-25,-22)
+		if item.kind.ends_with("_plan"):
+			draw_rect(Rect2(q-Vector2(11,9),Vector2(22,20)),Color("eddbad"))
+			for side in [-1,1]:
+				draw_rect(Rect2(q+Vector2(side*12-3,-12),Vector2(6,26)),Color("bb9762"))
+			for y in [-4,1,6]: draw_line(q+Vector2(-6,y),q+Vector2(6,y),Color("8c795e"),1)
 		elif item.kind == "egg":
 			draw_circle(q, 7, Color("fff0c7"))
 		elif item.kind == "chick":
@@ -1327,8 +1379,8 @@ func _draw():
 				draw_dog(Vector2.ZERO, a)
 				draw_set_transform(Vector2.ZERO)
 			else: draw_dog(p, a)
-		elif a.species == "cat": draw_cat(p)
-		else: draw_hen(p)
+		elif a.species == "cat": draw_cat(p,a)
+		else: draw_hen(p,a)
 		var in_combat = world.enemies.any(func(e): return not e.done and not e.flee and Farm.distance(a.pos, e.pos) <= 1)
 		if a.hp <= a.max_hp * 0.5 or in_combat:
 			var danger = a.hp <= a.max_hp * Farm.Rules.LOW_HP_FRACTION
@@ -1367,7 +1419,7 @@ func _draw():
 	draw_work_plans()
 	for cell in selected_resources: draw_rect(Rect2(center(cell)-Vector2(20,20),Vector2(40,40)),Color("ffe2a3"),false,2)
 	if dragging:
-		label_on(self,get_canvas_transform().affine_inverse()*pointer+Vector2(10,-10),{"animal":"仲間","resource":"回収物","structure":"施設"}.get(drag_class,""),16,UI.PAPER)
+		label_on(self,get_canvas_transform().affine_inverse()*pointer+Vector2(10,-10),{"animal":"仲間","resource":"回収物","structure":"建物","floor":"床"}.get(drag_class,""),16,UI.PAPER)
 	if cinematic(): return
 	var cell = Vector2i(get_canvas_transform().affine_inverse() * pointer / TILE)
 	if world.working() and world.inside(cell) and not pointer_over_ui():
@@ -1399,7 +1451,7 @@ func _draw():
 				draw_line(mark + Vector2(-4, 4), mark + Vector2(4, -4), Color("f2ab90"), 3)
 	if selected.get("kind") in ["structure", "resource"]:
 		draw_rect(Rect2(Vector2(selected.pos) * TILE + Vector2(1, 1), TILE - Vector2(2, 2)), Color("ffe2a3"), false, 3)
-	if group == 0 and selected.get("kind") == "structure":
+	if group == 0 and selected.get("kind") in ["structure","floor"]:
 		for p in selected_structures:
 			if world.live_structure(p): draw_rect(Rect2(Vector2(p) * TILE + Vector2(2, 2), TILE - Vector2(4, 4)), Color("ffe2a3"), false, 2)
 
@@ -1460,8 +1512,8 @@ func draw_hud():
 	if alert_visible() and alert_kind != "early_clear":
 		var urgent = alert_kind in ["restrained", "carried", "animal_danger"]
 		var top = 330 if alert_kind == "auto_start" else 62
-		hud.draw_style_box(UI.surface(UI.DANGER if urgent else UI.MOSS), Rect2(440, top, 400, 42))
-		label_on(hud, Vector2(455, top + 29), alert_text, 20)
+		hud.draw_style_box(UI.surface(UI.DANGER if urgent else UI.MOSS), Rect2(380, top, 520, 42+22*(alert_text.count("\n"))))
+		label_on(hud, Vector2(395, top + 29), alert_text, 20)
 	if world.keeper.state in ["restrained", "captured"]:
 		draw_edge(world.keeper.pos, "牧場主 !", Color("ffa58a"))
 	for a in world.animals:
@@ -1471,7 +1523,8 @@ func draw_hud():
 	var details = ""
 	if selected.get("kind") == "resource":
 		details = "回収予定" if collectible(selected.pos) else "回収済み"
-		if world.items_at(selected.pos).any(func(item): return item.kind == "kennel_plan"): details = "犬小屋の設計図\n現地で回収すると建築解放"
+		for item in world.items_at(selected.pos):
+			if item.kind.ends_with("_plan"): details = Farm.Buildings.NAMES.get(item.kind.trim_suffix("_plan"),"建築")+"の設計図\n回収して習得を記録"
 	elif selected.get("kind") == "keeper":
 		draw_keeper_card()
 	elif selected.get("kind") == "animal":
@@ -1489,13 +1542,13 @@ func draw_hud():
 			hud.draw_rect(Rect2(92, 646, 150.0 * e.hp / e.max_hp, 9), Color("d2aa80"))
 			var status = "撃退済み" if e.hp <= 0 or e.flee or e.done else ("牧場主を発見" if e.can_see_keeper else e.search_state)
 			label_on(hud, Vector2(92, 677), "%d/%d  視界%d" % [e.hp, e.max_hp, e.sight_range] if Rect2(16, 609, 344, 80).has_point(pointer) else status, 15)
-	elif selected.get("kind") == "structure" and world.structures.has(selected.pos):
-		var b = world.structures[selected.pos]
-		var quote = world.repair_quote(selected.pos)
-		details = "%s Lv1   耐久 %d/%d\n解体返却 %s" % [{"wall":"土壁","wood_wall":"木壁","stone_wall":"石壁","door":"ドア","locked_door":"ロック付きドア","kennel":"犬小屋","coop":"鶏小屋"}.get(b.kind,"施設"), b.hp, b.max_hp, resource_text({b.get("resource", "soil"): world.dismantle_quote(selected.pos)})]
+	elif selected.get("kind") in ["structure","floor"] and selected_store().has(selected.pos):
+		var b = selected_store()[selected.pos]
+		var quote = world.repair_quote(selected.pos,selection_layer)
+		details = "%s Lv1   耐久 %d/%d\n解体返却 %s" % [Farm.Buildings.NAMES.get(b.kind,"建物"), b.hp, b.max_hp, resource_text({b.get("resource", "soil"): world.dismantle_quote(selected.pos,selection_layer)})]
 		if selected_structures.size() > 1:
 			var refund = {"soil": 0, "wood": 0, "stone": 0}
-			for cell in selected_structures: refund[world.structures[cell].get("resource", "soil")] += world.dismantle_quote(cell)
+			for cell in selected_structures: refund[selected_store()[cell].get("resource", "soil")] += world.dismantle_quote(cell,selection_layer)
 			details = "まとめて %dか所\n解体返却 %s" % [selected_structures.size(), resource_text(refund)]
 	if details != "":
 		panel(Rect2(16, 595, 422, 91))
@@ -1519,7 +1572,7 @@ func draw_hud():
 		label_on(hud, Vector2(398, 311), "評価 %d   EXP +%d   GOLD +%d" % [world.score.rating, world.score.xp, world.score.gold], 18)
 	if world.working() and world.early_clear:
 		label_on(hud, Vector2(935, 735), "夜明けまで自由に", 16)
-	if debug_view: label_on(hud, Vector2(15, 125), "DEBUG: seed %d / tick %d  F8:観察JSON" % [world.seed_value, world.tick], 14)
+	if debug_view: label_on(hud, Vector2(15, 125), "DEBUG ON: seed %d / tick %d  F3:OFF" % [world.seed_value, world.tick], 14)
 
 func draw_edge(cell: Vector2i, title: String, color: Color):
 	var p = screen_cell(cell)
@@ -1539,13 +1592,16 @@ func draw_dog(p: Vector2, animal: Dictionary = {}):
 	var reaction=reactions.get(animal.get("id",-1),{})
 	var mood=reaction.get("kind","") if clock<reaction.get("until",-1) else ""
 	p.y-=absf(sin(visual_time*(13 if walking else 2)))*(2.0 if walking else 0.5)
-	if mood=="happy":p.y-=absf(sin(clock*9))*5
-	if mood=="wag":p.x+=sin(clock*12)*1.5
+	if mood=="happy":p.y-=absf(sin(visual_time*9))*5
+	if mood=="wag":p.x+=sin(visual_time*12)*1.5
 	var alert=not animal.is_empty() and world.enemies.any(func(e):return not e.done and not e.flee and Farm.distance(animal.pos,e.pos)<=animal.get("detection_range",4))
-	var pose=1 if (animal.get("mode","")=="stay" and not walking and not alert) or mood=="hello" else (0 if dog_facing(animal)<0 else 2)
-	UI.shiba(self,p+Vector2(0,-5),Vector2(30 if pose==1 else 46,30 if resting else 48),pose,art_alpha)
+	var pose=1 if mood=="hello" else (0 if dog_facing(animal)<0 else 2)
+	UI.shiba(self,p+Vector2(0,-5),Vector2(30 if pose==1 else 46,48),pose,art_alpha)
 
-func draw_hen(p: Vector2):
+func draw_hen(p: Vector2, animal: Dictionary = {}):
+	if not animal.is_empty():
+		draw_set_transform(p,0,Vector2(animal.get("facing",1),1))
+		p=Vector2.ZERO
 	var peck = maxf(0, sin(visual_time * 2.8 + p.x)) * 5
 	draw_circle(p, 12, Color(Color("f4ebcf"), art_alpha))
 	var head = p + Vector2(peck * 0.5, peck)
@@ -1555,6 +1611,7 @@ func draw_hen(p: Vector2):
 	rect(head + Vector2(11, -10), Vector2(2, 2), "243d36")
 	rect(p + Vector2(-6, 11), Vector2(3, 6), "d69a4e")
 	rect(p + Vector2(4, 11), Vector2(3, 6), "d69a4e")
+	if not animal.is_empty(): draw_set_transform(Vector2.ZERO)
 
 func resource_text(values: Dictionary) -> String:
 	var parts: Array[String] = []
@@ -1579,6 +1636,12 @@ func setup_menu():
 	add_button(menu, "menu_resume", "続ける", Rect2(480, 320, 320, 50), toggle_menu)
 	add_button(menu, "menu_retry", "昼からやり直す", Rect2(480, 390, 320, 50), restart_menu)
 	add_button(menu, "menu_morning", "今朝からやり直す", Rect2(480, 460, 320, 50), restart_morning)
+	var stamp=Label.new()
+	var metadata=JSON.parse_string(FileAccess.get_file_as_string("res://game/build_stamp.json")) if FileAccess.file_exists("res://game/build_stamp.json") else {}
+	stamp.text="ビルド "+str(metadata.get("commit","未記録"))+(" + 未コミット変更" if metadata.get("dirty",true) else "")
+	stamp.position=Vector2(480,532)
+	stamp.add_theme_font_size_override("font_size",14)
+	menu.add_child(stamp)
 	menu.visible = false
 
 func toggle_menu():
@@ -1791,7 +1854,7 @@ func draw_shop():
 	if morning_screen == "morning":
 		hud.draw_style_box(UI.surface(Color("d6c6a1")),Rect2(330,128,656,437))
 		hud.draw_texture_rect(UI.STALL,Rect2(346,154,282,317),false)
-		hud.draw_texture_rect(UI.BOOK,Rect2(692,232,288,193),false)
+		hud.draw_texture_rect(UI.icon("book_closed"),Rect2(778,265,120,132),false)
 		label_on(hud,Vector2(716,204),"牧場の仲間",22,UI.INK)
 		label_on(hud,Vector2(379,153),"%d日目の朝" % world.campaign.day,19,UI.INK)
 		return
@@ -2022,7 +2085,10 @@ func draw_card_icon(c: CanvasItem, kind: String, p: Vector2, scale_value: float)
 		else: c.draw_line(Vector2(-10,12), Vector2(12,-20), Color("f2dfbc"), 9)
 	else: BoardArt.draw_resource(c, Vector2.ZERO, kind)
 	c.draw_set_transform(Vector2.ZERO)
-func draw_cat(p: Vector2):
+func draw_cat(p: Vector2, animal: Dictionary = {}):
+	if not animal.is_empty():
+		draw_set_transform(p,0,Vector2(animal.get("facing",1),1))
+		p=Vector2.ZERO
 	var stretch = maxf(0, sin(visual_time * 0.5 + p.x)) * 5
 	draw_line(p + Vector2(-14 - stretch, 9), p + Vector2(9 + stretch, 9), Color("8f969d"), 6)
 	rect(p + Vector2(-13, -4), Vector2(27, 15), "8f969d")
@@ -2033,6 +2099,7 @@ func draw_cat(p: Vector2):
 	rect(p + Vector2(16, -9), Vector2(3, 3), "dadf81")
 	draw_line(p + Vector2(-12, 1), p + Vector2(-23, -15), Color("8f969d"), 5)
 	for x in [-9, 7]: rect(p + Vector2(x, 8), Vector2(4, 8), "c0c5c4")
+	if not animal.is_empty(): draw_set_transform(Vector2.ZERO)
 
 func draw_queue_badge(row: Button, number: int):
 	row.draw_style_box(UI.surface(UI.PAPER),Rect2(5,3,27,25))
@@ -2162,11 +2229,7 @@ func dog_part(p: Vector2, offset: Vector2, size_value: Vector2, tint: String, fa
 	rect(p + Vector2(facing * (offset.x + size_value.x / 2) - size_value.x / 2, offset.y), size_value, tint)
 
 func dog_facing(a: Dictionary) -> float:
-	if a.is_empty() or a.get("mode", "") == "rest": return 1.0
-	var enemies = world.enemies.filter(func(e): return not e.done and not e.flee and Farm.distance(e.pos, a.pos) <= a.detection_range)
-	if not enemies.is_empty(): return -1.0 if enemies[0].pos.x < a.pos.x else 1.0
-	var previous = view_positions.get("a%d" % a.id, Vector2(a.pos))
-	return -1.0 if a.pos.x < previous.x - 0.02 else 1.0
+	return float(a.get("facing",1))
 
 func keeper_card_rect() -> Rect2:
 	var owner_screen=get_canvas_transform()*keeper_pixel()
@@ -2189,7 +2252,7 @@ func draw_keeper_card():
 	var activity = "連れ去り" if k.carrier >= 0 else ("気絶" if k.state == "unconscious" else ("限界休息" if k.forced_rest else (("寝入り待ち" if Farm.Life.presentation(world)=="settling" else "睡眠") if k.resting else ("散歩中" if world.manual_goal != null else ("再開待ち" if world.jobs_held else ("仕事中" if not world.jobs.is_empty() else "のんびり"))))))
 	label_on(hud, Vector2(30, 676), activity, 15, UI.INK)
 	if not world.jobs.is_empty():
-		var names = {"wall": "壁", "door":"ドア","locked_door":"施錠ドア","wood_wall":"木壁","stone_wall":"石壁","soil_tile":"土タイル","wood_tile":"木タイル","stone_tile":"石タイル", "collect": "回収", "move": "歩く", "animal_order": "仲間へ指示", "repair": "修理", "remove": "解体", "gate": "ドア", "kennel": "犬小屋", "coop": "鶏小屋"}
+		var names = {"wall": "壁", "door":"ドア","locked_door":"施錠ドア","wood_wall":"木壁","stone_wall":"石壁","soil_tile":"土タイル","wood_tile":"木タイル","stone_tile":"石タイル", "collect": "回収", "move": "歩く", "animal_order": "仲間へ指示", "repair": "修理", "remove": "解体", "remove_floor":"タイル解体", "repair_floor":"床修理", "gate": "ドア", "kennel": "犬小屋", "coop": "鶏小屋"}
 		var next = names.get(world.jobs[0].kind, "仕事")
 		if world.jobs.size() > 1: next += " → " + names.get(world.jobs[1].kind, "仕事")
 		label_on(hud, Vector2(166, 676), next, 14, UI.INK)
@@ -2209,7 +2272,9 @@ func build_debug_controls():
 	var entries=[["infinite","素材∞"],["whistle","ホイッスル"],["shiba","柴犬＋"],["hen","鶏＋"],["cat","猫＋"],["hurt","HP−10"],["heal","HP＋10"],["lock","ロック−4"]]
 	for i in range(entries.size()):
 		var row=entries[i]
-		add_button(palette,"debug_"+row[0],row[1],Rect2(16+(i%2)*124,145+(i/2)*37,118,32),debug_action.bind(row[0]))
+		add_button(palette,"debug_"+row[0],("素材∞ ON" if world.debug_infinite else "素材∞ OFF") if row[0]=="infinite" else row[1],Rect2(16+(i%2)*124,145+(i/2)*37,118,32),debug_action.bind(row[0]))
+
+	buttons.debug_lock.disabled=selected.get("kind")!="structure" or world.structures.get(selected.get("pos"),{}).get("kind")!="locked_door" or world.structures.get(selected.get("pos"),{}).get("status")!="ready"
 
 func debug_action(action: String):
 	world.debug_action(action,selected)

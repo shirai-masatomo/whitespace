@@ -24,7 +24,9 @@ static func shiba(c: CanvasItem, p: Vector2, size_value: Vector2, pose: int=2, a
 	c.material=material()
 	c.texture_filter=CanvasItem.TEXTURE_FILTER_NEAREST
 	var regions=[Rect2(528,58,474,508),Rect2(1095,58,316,508),Rect2(1498,58,482,508)]
-	c.draw_texture_rect_region(SHIBA,Rect2(p-size_value*0.5,size_value),regions[pose],Color(1,1,1,alpha))
+	var source: Rect2=regions[pose]
+	var fitted=source.size*minf(size_value.x/source.size.x,size_value.y/source.size.y)
+	c.draw_texture_rect_region(SHIBA,Rect2(p+Vector2(-fitted.x*0.5,size_value.y*0.5-fitted.y),fitted),source,Color(1,1,1,alpha))
 
 static func surface(color: Color, edge: Color = WOOD) -> StyleBoxTexture:
 	var box=StyleBoxTexture.new()
@@ -54,6 +56,7 @@ static func selected(button: Button, active: bool):
 static func icon(kind: String) -> Texture2D:
 	if textures.has(kind): return textures[kind]
 	var patterns = {
+		"book_closed": ["0111110", "1100011", "1101011", "1101011", "1100011", "1111111", "0111110"],
 		"book": ["1110111", "1011101", "1011101", "1011101", "1011101", "1111111", "0001000"],
 		"moon": ["0001110", "0011000", "0110000", "0110000", "0110001", "0011111", "0001110"],
 		"cup": ["0101000", "0010000", "1111100", "1000111", "1000101", "0111110", "1111110"],

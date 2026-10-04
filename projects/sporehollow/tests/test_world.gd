@@ -59,10 +59,10 @@ func run():
 	next=Farm.new(w.next_campaign()).begin_day();next.finish(true);check(next.campaign.animals.size()==2 and next.field_items.is_empty(),"Chick ages to owned hen")
 	shop=Farm.new();shop.buy("hen");w=shop.begin_day();w.finish(true);check(w.dawn_summary.eggs==1,"Resident hen daily egg")
 	var eggs=w.field_items.size();w.finish(true);check(w.field_items.size()==eggs,"No repeated dawn production")
-	w=quiet();w.drop_blueprint(Vector2i(6,12));check("kennel" not in w.campaign.unlocked_blueprints,"Drop not auto-unlock")
+	w=quiet();w.field_items.append({"kind":"kennel_plan","pos":Vector2i(6,12),"born_day":1});check("kennel" not in w.campaign.unlocked_blueprints,"Drop not auto-unlock")
 	w.act("collect",Vector2i(6,12));drain(w);check("kennel" in w.campaign.unlocked_blueprints,"Onsite pickup unlocks")
 	w.wood=100;w.act("kennel",Vector2i(7,13));drain(w);w.animals[0].pos=Vector2i(7,13);w.animals[0].hp=20;w.animals[0].mode="rest";steps(w,20)
-	check(w.animals[0].hp>=25,"Outdoor kennel heals resting dog")
+	check(w.animals[0].hp==21 and not w.structures.has(Vector2i(7,13)),"Normal rest heals without disabled kennel")
 	w=quiet();w.nature_config.spawn_chance_per_second=1.0
 	for y in range(1,w.H-1):
 		for x in range(1,w.W-1):w.floors[Vector2i(x,y)]={"kind":"soil_tile","status":"ready"}

@@ -63,6 +63,7 @@ static func presentation(w) -> String:
 	return "exhausted" if k.sleepiness >= 90 else ("tired" if k.sleepiness > 80 else ("drowsy" if k.sleepiness > 50 else "awake"))
 
 static func danger(w, kind: String):
+	wake_auto(w)
 	w.danger_serial += 1
 	w.life_log.append({"tick": w.tick, "event": kind, "hp": w.keeper.hp, "sleepiness": snappedf(w.keeper.sleepiness, 0.1)})
 
@@ -120,16 +121,44 @@ static func command(w, kind: String, p: Vector2i) -> bool:
 		return true
 	return false
 
-static func set_rest(w, value: bool):
+static func end_move(w):
+	w.manual_goal=null
+	if w.job_hold_reason=="travel": w.Jobs.hold(w,"")
+
+static func wake_auto(w):
+	var k=w.keeper
+	if k.get("rest_kind","")!="auto" or not k.resting: return
+	if w.paused: k.auto_wake_pending=true; return
+	set_rest(w,false)
+	if w.job_hold_reason=="auto_rest": w.Jobs.hold(w,"")
+
+static func idle_step(w, near: bool):
+	var k=w.keeper
+	var idle=able(w) and k.sleepiness<100 and not near and w.tick>=k.hurt_until and w.manual_goal==null and w.jobs.is_empty() and not w.jobs_held
+	k.idle_elapsed=k.get("idle_elapsed",0.0)+w.DT if idle else 0.0
+	if k.idle_elapsed>=5.0 and (k.sleepiness>0 or k.hp<k.max_hp):
+		set_rest(w,true,"auto")
+		w.Jobs.hold(w,"auto_rest")
+
+static func set_rest(w, value: bool, origin: String="manual"):
 	var k = w.keeper
-	if k.resting == value: return
+	if k.resting == value:
+		if value: k.rest_kind=origin
+		return
 	k.resting = value
+	k.rest_kind = origin if value else ""
+	if value: k.rest_started_tick=w.tick
+	if origin=="auto" and value: k.hold_before_rest=""
+	k.idle_elapsed=0.0
 	k.rest_elapsed = 0.0
 	k.asleep = false
 	w.life_log.append({"tick": w.tick, "event": "rest_started" if value else "rest_ended"})
 
 static func step(w):
 	var k = w.keeper
+	if k.get("auto_wake_pending",false):
+		k.erase("auto_wake_pending")
+		wake_auto(w)
 	if k.has("pending_command"):
 		var request = k.pending_command
 		k.erase("pending_command")
@@ -149,8 +178,10 @@ static func step(w):
 	var near = w.enemies.any(func(e): return not e.done and not e.flee and w.distance(e.pos, k.pos) <= 3)
 	if near and not k.get("danger_near", false): danger(w, "approaching")
 	k.danger_near = near
+	if near: wake_auto(w)
+	idle_step(w,near)
 	if k.resting:
-		k.rest_elapsed = k.get("rest_elapsed", 0.0) + w.DT
+		k.rest_elapsed = k.get("rest_elapsed", 0.0) + (0.0 if k.get("rest_started_tick",-1)==w.tick else w.DT)
 		var onset=3.0 if w.is_indoor(k.pos) else 5.0
 		if k.get("asleep",false): k.sleepiness=maxf(0,k.sleepiness-(4.0 if w.is_indoor(k.pos) else 2.0)*w.DT)
 		elif k.rest_elapsed>=onset:
@@ -171,8 +202,8 @@ static func step(w):
 				w.milestones.append({"tick": w.tick, "kind": "sleep_warning", "value": threshold})
 		if k.sleepiness >= 100:
 			k.forced_rest = true
-			set_rest(w, true)
-			w.manual_goal = null
+			set_rest(w, true,"forced")
+			end_move(w)
 	if k.sleepiness < 60: k.warned = 0
 	# Minimum self-defense, never chasing; deliberately much weaker than the dog.
 	if able(w) and w.tick >= k.next_attack:
@@ -196,8 +227,8 @@ static func step(w):
 		if next == k.pos:
 			# Wait for moving actors; solid unreachable destinations end just this direct order.
 			if w.next_step(k.pos, w.manual_goal) == k.pos:
-				w.manual_goal = null
-				w.say("道がふさがっているよ")
+				end_move(w)
+				w.say("通路がふさがっています")
 			return
 		if w.actor_occupied(next, k.pos): return
 		k.move_credit -= 1

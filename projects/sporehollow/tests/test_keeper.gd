@@ -88,6 +88,7 @@ func run():
 	check(unique and w.keeper.pos == Vector2i(10,13), "Manual path skirts deployed animal")
 	# Every awake second counts, pause does not; exact thresholds and recovery.
 	w = safe()
+	w.Jobs.hold(w,"explicit") # An outstanding wait prevents the new idle rest; test continuous waking fatigue.
 	steps(w, 864)
 	check(w.keeper.sleepiness >= 79.9 and w.Life.factor(w) < 1, "216 seconds reaches 80 percent fatigue")
 	steps(w, 216)

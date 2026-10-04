@@ -46,6 +46,7 @@ static func enqueue(w,kind: String,ids: Array,p: Vector2i) -> bool:
 		w.say(rejected[0].reason if not rejected.is_empty() else "仲間を選んでください"); return false
 	if w.jobs.is_empty() and w.manual_goal==null and w.Life.able(w) and w.job_hold_reason in ["travel","manual","rescue","danger","rest_end"]: w.Jobs.hold(w,"")
 	w.jobs.append({"id":w.next_job_id,"kind":"animal_order","order":kind,"leader_goal":leader_goal,"command_pos":p,"targets":targets,"pos":p if kind=="guide" else animal(w,targets[0].id).pos,"animal_id":targets[0].id,"state":"pending","started":false,"reserved":0,"resource":"","range":w.Rules.WHISTLE.range if whistle else 1})
+	w.Life.wake_auto(w)
 	w.say("指示 %d匹" % targets.size() + ("・未割当 %d匹（%s）" % [rejected.size(),rejected[0].reason] if not rejected.is_empty() else ""))
 	w.next_job_id+=1
 	w.job_log.append({"tick":w.tick,"event":"order_reserved","id":w.next_job_id-1,"unassigned":rejected,"targets":targets.map(func(t):return t.id),"order":kind})
