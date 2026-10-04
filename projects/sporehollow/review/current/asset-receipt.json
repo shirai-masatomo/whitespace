@@ -1,0 +1,101 @@
+{
+  "source_delivery_commit": "f3e4ae82b68c342b928dfb5dfcebb451353f9b8d",
+  "received_commit": "28f0e3f",
+  "checks": [
+    {
+      "file": "keeper_idle_right_00.png",
+      "sha256": "c2ea9f9d7cdebd5a007d881fd17af4bb121c3f1afc2a373de56f49f859293c1e",
+      "size": [
+        32,
+        48
+      ],
+      "bounds": [
+        4,
+        2,
+        29,
+        44
+      ],
+      "anchor": [
+        16,
+        44
+      ],
+      "alpha_values": [
+        0,
+        255
+      ],
+      "verified": true
+    },
+    {
+      "file": "shiba_idle_right_00.png",
+      "sha256": "6b394d938fd8c8ba4f9afc94be43def55223d5097a1d9f9759965e1e2d1dede9",
+      "size": [
+        48,
+        48
+      ],
+      "bounds": [
+        12,
+        16,
+        37,
+        44
+      ],
+      "anchor": [
+        24,
+        44
+      ],
+      "alpha_values": [
+        0,
+        255
+      ],
+      "verified": true
+    },
+    {
+      "file": "shiba_idle_left_00.png",
+      "sha256": "65a7c12c0bc1f742248e6ba2380e453d466d23b636121495cee35a53fc769105",
+      "size": [
+        48,
+        48
+      ],
+      "bounds": [
+        12,
+        16,
+        37,
+        44
+      ],
+      "anchor": [
+        24,
+        44
+      ],
+      "alpha_values": [
+        0,
+        255
+      ],
+      "verified": true
+    },
+    {
+      "file": "shiba_idle_front_00.png",
+      "sha256": "72d441d20b63e0df23fba270ac26722ef1f71142d0ebc33b3018bcb68a6092aa",
+      "size": [
+        48,
+        48
+      ],
+      "bounds": [
+        16,
+        16,
+        33,
+        44
+      ],
+      "anchor": [
+        24,
+        44
+      ],
+      "alpha_values": [
+        0,
+        255
+      ],
+      "verified": true
+    }
+  ],
+  "runtime_integrated": false,
+  "gui_started": false,
+  "note": "Manifest SHA256 and pixel properties verified. Source-processed hashes match manifest claims; no regeneration, crop, rescale or image modification."
+}
