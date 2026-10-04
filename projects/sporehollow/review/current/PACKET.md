@@ -1,5 +1,9 @@
 # 操作・正式素材・図鑑・壁の統合レビュー
 
+## ショップUI改善に向けた現状撮影（2026-10-04）
+
+購入/売却の各階層・全カテゴリ・初日の商品詳細・取引後を新規撮影した29枚は [ショップレビュー依頼](shop/HANDOFF.md) / [ギャラリー](shop/index.html) / [原寸一覧](shop/SCREENS.md)。abebfd3時点のゲーム内容を通常初期在庫で実操作。新納品のUI荷車・資源アイコンは未取り込みのため、差し替え前の現状として扱う。
+
 ## Play.cmd起動修正（2026-10-04）
 
 LF改行の旧Play.cmdをcmd.exeで解析すると、存在するEXEの起動行へ到達せず、`'ev.ps1' is not recognized`となることを再現。CRLFへ修正し、`.gitattributes`で再発を防止。実cmdを使う`tests/test_launcher.ps1`で、空白/日本語を含むパス・EXE存在/欠落の分岐を検査（起動命令のみ検査用echoへ置換、通常画面へは起動しない）。check/test/buildにも組み込んだ。

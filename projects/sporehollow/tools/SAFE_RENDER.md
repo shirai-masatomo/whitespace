@@ -20,3 +20,5 @@ Windows、同梱Godot 4.7.2 GUIバイナリ、非対話station/desktopの作成�
 根拠：Microsoftの[Window Stations](https://learn.microsoft.com/en-us/windows/win32/winstation/window-stations)、[Desktops](https://learn.microsoft.com/en-us/windows/win32/winstation/desktops)、[STARTUPINFOW.lpDesktop](https://learn.microsoft.com/en-us/windows/win32/api/processthreadsapi/ns-processthreadsapi-startupinfow)。表示とユーザー入力を扱えるstationはWinSta0。headlessは[Godot DisplayServer](https://docs.godotengine.org/en/4.6/classes/class_displayserver.html)のdummy描画であり、PNG検証の代用にはしない。
 
 木建材16接続/損傷/床境界/ドア通行は `-Scenario buildings`。通常デスクトップを使わず同じ隔離ヘルパーで検証する。
+
+ショップの購入/売却全カテゴリと初日の商品詳細の撮影は `-Scenario shop`。通常の新規開始状態からゲーム内入力で画面を巡回し、PNGとobservations.jsonを保存する。所持金や在庫をデバッグで増やさず、購入/売却も専用APPDATA内だけで行う。
