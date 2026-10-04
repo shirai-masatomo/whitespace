@@ -5,6 +5,7 @@ from PIL import Image
 
 ROOT = Path(__file__).resolve().parents[1]
 DELIVERIES = {
+    'earth_stone_buildings_v1': 'ebe446e5329aa7780b6ef5f13268ceb9433c9796',
     'wood_buildings_v1': 'e648cf75a288219887733c5fa2d9536a113dae83',
     'characters_v1': 'f3e4ae82b68c342b928dfb5dfcebb451353f9b8d',
     'characters_motion_v1': 'ae950a3df8de7a3dbbd14f40dc3ef9df05e22fd4',

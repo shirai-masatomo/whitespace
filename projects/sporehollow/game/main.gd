@@ -1265,13 +1265,12 @@ func draw_structure(p: Vector2, b: Dictionary, preview: bool = false):
 		return
 	if b.kind not in Farm.Buildings.WALLS: draw_colored_polygon(PackedVector2Array([p + Vector2(-20, 10), p + Vector2(20, 10), p + Vector2(28, 24), p + Vector2(-12, 24)]), Color(0.12, 0.22, 0.13, 0.25))
 	if b.kind in Farm.Buildings.WALLS:
-		if b.kind=="wood_wall": BuildingArt.wall(self,p,b,preview)
-		else: draw_connected_wall(p,b,shade,preview)
+		BuildingArt.wall(self,p,b,preview)
 
 	else:
 		for part in ["frame_rear","leaf","frame_front"]: BuildingArt.door_layer(self,p,b,part)
 
-	if b.hp < b.max_hp and b.kind!="wood_wall":
+	if b.hp < b.max_hp and b.kind not in Farm.Buildings.WALLS:
 		var crack = PackedVector2Array([p + Vector2(2, -12), p + Vector2(-5, -3), p + Vector2(2, 3)])
 		if b.hp <= b.max_hp * 0.5:
 			crack.append(p + Vector2(-8, 15))
@@ -1284,12 +1283,7 @@ func _draw():
 	for cell in world.floors:
 		var floor_data=world.floors[cell]
 		if floor_data.status!="ready": continue
-		if floor_data.kind=="wood_tile":
-			BuildingArt.floor_tile(self,cell)
-			continue
-		var tint={"soil_tile":Color("ad946b"),"wood_tile":Color("bc9367"),"stone_tile":Color("929b95")}.get(floor_data.kind,Color("ad946b"))
-		draw_rect(Rect2(Vector2(cell)*TILE,TILE),tint)
-		for offset in [12,25,38]: draw_line(Vector2(cell)*TILE+Vector2(offset,2),Vector2(cell)*TILE+Vector2(offset,40),Color(tint.darkened(0.12)),1)
+		BuildingArt.floor_tile(self,cell)
 	BuildingArt.boundaries(self)
 	for cell in world.indoor:
 		draw_rect(Rect2(Vector2(cell)*TILE,TILE),Color(0.22,0.35,0.45,0.22 if debug_view else 0.08))
@@ -2265,30 +2259,3 @@ func wall_links(cell: Vector2i) -> Dictionary:
 		result[d]=Farm.Buildings.enclosure(world.structures.get(cell+d,{}))
 	return result
 
-func draw_connected_wall(p: Vector2, b: Dictionary, shade: Color, preview: bool):
-	var links=wall_links(Vector2i(p/TILE)) if not preview else {}
-	var up=links.get(Vector2i.UP,false);var down=links.get(Vector2i.DOWN,false)
-	var left=links.get(Vector2i.LEFT,false);var right=links.get(Vector2i.RIGHT,false)
-	# Six-pixel sections exactly divide both tile dimensions; the top is a union, not overlapping blocks.
-	var cells={}
-	for y in range(-3,4):
-		for x in range(-4,4):
-			var horizontal=y in [-1,0] and x>=(-4 if left else (-1 if up or down else -3)) and x<(4 if right else (1 if up or down else 3))
-			var vertical=x in [-1,0] and y>=(-3 if up else -1) and y<=(3 if down else 0)
-			if horizontal or vertical: cells[Vector2i(x,y)]=true
-	var top=p-Vector2(0,12)
-	var face=shade.darkened(0.28)
-	for cell in cells:
-		if not cells.has(cell+Vector2i.DOWN) and not (down and cell.y==3):
-			var q=top+Vector2(cell.x*6,cell.y*6-3 if up and cell.y==-3 else cell.y*6)+Vector2(0,6)
-			draw_rect(Rect2(q,Vector2(6,24)),face)
-			draw_line(q+Vector2(0,24),q+Vector2(6,24),shade.darkened(0.42),1)
-		if not cells.has(cell+Vector2i.RIGHT) and not (right and cell.x==3):
-			var edge=top+Vector2(cell.x*6+6,cell.y*6-3 if up and cell.y==-3 else cell.y*6)
-			var height=9 if up and cell.y==-3 else 3 if down and cell.y==3 else 6
-			draw_colored_polygon(PackedVector2Array([edge,edge+Vector2(4,24),edge+Vector2(4,24+height),edge+Vector2(0,height)]),shade.darkened(0.4))
-	for cell in cells:
-		var q=top+Vector2(cell.x*6,cell.y*6-3 if up and cell.y==-3 else cell.y*6)
-		draw_rect(Rect2(q,Vector2(6,9 if up and cell.y==-3 else 3 if down and cell.y==3 else 6)),shade)
-		if not cells.has(cell+Vector2i.LEFT) and not (left and cell.x==-4): draw_line(q,q+Vector2(0,6),shade.darkened(0.18),1)
-		if not cells.has(cell+Vector2i.RIGHT) and not (right and cell.x==3): draw_line(q+Vector2(6,0),q+Vector2(6,6),shade.darkened(0.18),1)

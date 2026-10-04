@@ -6,19 +6,21 @@ func run():
 	game=load("res://game/main.tscn").instantiate();game.automated=true
 	game.world=Farm.new({},17).begin_day();game.world.paused=true;game.world.natural.clear()
 	root.add_child(game);await process_frame;game.reset_view();game.refresh()
-	for damaged in [false,true]:
-		for page in range(2):
-			game.world.structures.clear()
-			for index in range(8):
-				var mask=page*8+index
-				var origin=Vector2i(3+(index%4)*6,4+(index/4)*6)
-				site("wood_wall",origin)
-				for pair in [[Vector2i.UP,1],[Vector2i.RIGHT,2],[Vector2i.DOWN,4],[Vector2i.LEFT,8]]:
-					if mask & pair[1]:site("wood_wall",origin+pair[0])
-				check(game.BuildingArt.wall_mask(game,origin)==mask,"Wall mask %d"%mask)
-			if damaged:
-				for b in game.world.structures.values():b.hp=b.max_hp/2.0
-			await capture("wood_masks_%d_%s"%[page,"damaged" if damaged else "normal"])
+	for material in ["wall","wood_wall","stone_wall"]:
+		for damaged in [false,true]:
+			for page in range(2):
+				game.world.structures.clear()
+				for index in range(8):
+					var mask=page*8+index
+					var origin=Vector2i(3+(index%4)*6,4+(index/4)*6)
+					site(material,origin)
+					for pair in [[Vector2i.UP,1],[Vector2i.RIGHT,2],[Vector2i.DOWN,4],[Vector2i.LEFT,8]]:
+						if mask & pair[1]:site(material,origin+pair[0])
+					check(game.BuildingArt.wall_mask(game,origin)==mask,"Wall mask %d"%mask)
+				if damaged:
+					for b in game.world.structures.values():b.hp=b.max_hp/2.0
+				await capture("%s_masks_%d_%s"%[material,page,"damaged" if damaged else "normal"])
+
 	game.world.structures.clear()
 	for row in range(2):
 		for column in range(2):
@@ -51,7 +53,7 @@ func run():
 	await capture("wood_floor_boundaries")
 	if output!="":
 		record.implementation_commit=OS.get_environment("FARM_REVIEW_COMMIT")
-		record.asset_commit="e648cf75a288219887733c5fa2d9536a113dae83"
+		record.asset_commit="ebe446e5329aa7780b6ef5f13268ceb9433c9796"
 		FileAccess.open(output+"/observations.json",FileAccess.WRITE).store_string(JSON.stringify(record,"  "))
 	print("BUILDING ART: ",checks," checks failures=",failures)
 	quit(1 if failures else 0)

@@ -1,5 +1,6 @@
 {
   "deliveries": {
+    "earth_stone_buildings_v1": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
     "wood_buildings_v1": "e648cf75a288219887733c5fa2d9536a113dae83",
     "characters_v1": "f3e4ae82b68c342b928dfb5dfcebb451353f9b8d",
     "characters_motion_v1": "ae950a3df8de7a3dbbd14f40dc3ef9df05e22fd4",
@@ -7,8 +8,1942 @@
     "merchant_cart_v2": "0bbbc1c104acd13e7a9458c141a4a52921c05587",
     "merchant_board_v1": "7e408375f19b86759fc614508fc3e5f413f67ff9"
   },
-  "runtime_count": 179,
+  "runtime_count": 285,
   "files": [
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/review/materials-and-seams.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "bc72ad70d5ac02315a5e6586c3a01d630cd87c5cbfca7c6000f25c7336f7d28c",
+      "size": [
+        1120,
+        920
+      ],
+      "mode": "RGB",
+      "bbox": [
+        0,
+        0,
+        1120,
+        920
+      ],
+      "runtime_reference": false,
+      "hash_in_manifest": false
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/review/mixed-room-native.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "9d782fe9799c6ca9051d5ad48d2ab272846680ceba6e2d2cc629a255196802c0",
+      "size": [
+        350,
+        300
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        0,
+        0,
+        350,
+        300
+      ],
+      "runtime_reference": false,
+      "hash_in_manifest": false
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/soil/floor/base.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "e5c478ba5911c3bb48f34f3f4f66b398f14c9a4960f3001435404ab22b1fd1d1",
+      "size": [
+        48,
+        42
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        0,
+        0,
+        48,
+        42
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/soil/floor/boundary/e.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "4dc8391f5d385fc630a87dd88ef2a9ed057a9bfdec801d65531e57699e7deb38",
+      "size": [
+        48,
+        42
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        47,
+        0,
+        48,
+        42
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/soil/floor/boundary/n.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "750f3c8982f3d841eeb547459793380b15c4147a391a54f516daf4af09806fb0",
+      "size": [
+        48,
+        42
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        0,
+        0,
+        48,
+        1
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/soil/floor/boundary/s.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "3bb6e5f2fcf3b1b794bf18a28fc835128362e62c4610896895667016ff04c0df",
+      "size": [
+        48,
+        42
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        0,
+        41,
+        48,
+        42
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/soil/floor/boundary/w.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "1ed29c0be02223225914397584b5d6194806887ee365019d251afb8825bd4634",
+      "size": [
+        48,
+        42
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        0,
+        0,
+        1,
+        42
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/soil/floor/perimeter/mask_00.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "48839a609771ba196b4cd34b4f3cc545f70c2d0597d591686e69e32dafe112ea",
+      "size": [
+        48,
+        42
+      ],
+      "mode": "RGBA",
+      "bbox": null,
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/soil/floor/perimeter/mask_01.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "750f3c8982f3d841eeb547459793380b15c4147a391a54f516daf4af09806fb0",
+      "size": [
+        48,
+        42
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        0,
+        0,
+        48,
+        1
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/soil/floor/perimeter/mask_02.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "4dc8391f5d385fc630a87dd88ef2a9ed057a9bfdec801d65531e57699e7deb38",
+      "size": [
+        48,
+        42
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        47,
+        0,
+        48,
+        42
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/soil/floor/perimeter/mask_03.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "6879a0aab1808b3ede6f7c0c6f000452a700489406e097a70b1af9b7ef9d1850",
+      "size": [
+        48,
+        42
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        0,
+        0,
+        48,
+        42
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/soil/floor/perimeter/mask_04.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "3bb6e5f2fcf3b1b794bf18a28fc835128362e62c4610896895667016ff04c0df",
+      "size": [
+        48,
+        42
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        0,
+        41,
+        48,
+        42
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/soil/floor/perimeter/mask_05.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "4b9035163220463fcce0f168d8578887f57cc2963e91c3270fedb4b411653891",
+      "size": [
+        48,
+        42
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        0,
+        0,
+        48,
+        42
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/soil/floor/perimeter/mask_06.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "00b05061da7762df123e9f5455a99986d957aabdaa7e12b9a0549ec8e0f4b481",
+      "size": [
+        48,
+        42
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        0,
+        0,
+        48,
+        42
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/soil/floor/perimeter/mask_07.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "a07e718c175ce6e6083144eeb295a784b6a21981a154418231502202742bc071",
+      "size": [
+        48,
+        42
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        0,
+        0,
+        48,
+        42
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/soil/floor/perimeter/mask_08.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "1ed29c0be02223225914397584b5d6194806887ee365019d251afb8825bd4634",
+      "size": [
+        48,
+        42
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        0,
+        0,
+        1,
+        42
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/soil/floor/perimeter/mask_09.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "e5c6b98e2d5f0c919f377844e57b1ddb2390fb5bc4163d7beb509243943476fe",
+      "size": [
+        48,
+        42
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        0,
+        0,
+        48,
+        42
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/soil/floor/perimeter/mask_10.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "7b2ccc4eba5ec4f55425186c6d40291e888ddfbcf5ba2839bc7ade61f22f4981",
+      "size": [
+        48,
+        42
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        0,
+        0,
+        48,
+        42
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/soil/floor/perimeter/mask_11.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "a4ecefa32a9fe3804c4ccef2b9fb6ce5a53ea8fb0a7801c82e7c346a360caf37",
+      "size": [
+        48,
+        42
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        0,
+        0,
+        48,
+        42
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/soil/floor/perimeter/mask_12.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "6fe592d4b078a2fc43dc29a372c99457baf6fd23bddb09d9fe2999552455702b",
+      "size": [
+        48,
+        42
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        0,
+        0,
+        48,
+        42
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/soil/floor/perimeter/mask_13.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "772cdf3792947ec78e0f851bd2ee5d257d3895c0bd96209cd08ceedc24ef4e20",
+      "size": [
+        48,
+        42
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        0,
+        0,
+        48,
+        42
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/soil/floor/perimeter/mask_14.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "3937db31084bc1d2fa5afaa5b19e6cfc65273cd1aa3db4ee0433665646ef02d9",
+      "size": [
+        48,
+        42
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        0,
+        0,
+        48,
+        42
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/soil/floor/perimeter/mask_15.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "e9aa66346c596d0e23a9fc75de976662e535766946927249832f29b938e0018f",
+      "size": [
+        48,
+        42
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        0,
+        0,
+        48,
+        42
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/soil/wall/damaged/mask_00.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "be40d021156c57c4d4af1b65f6acfa536cbb0ce3ad3942a3b062f97d07f3e93c",
+      "size": [
+        48,
+        68
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        6,
+        16,
+        42,
+        52
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/soil/wall/damaged/mask_01.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "fe69a367baa75e9e9362623ba0451d651352dc6815bc276f8d371878ba52435c",
+      "size": [
+        48,
+        68
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        18,
+        1,
+        30,
+        52
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/soil/wall/damaged/mask_02.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "c291ef3a2f5860daf7868e7387824022ffe6ddff74291686b6ccf75ff01c54e1",
+      "size": [
+        48,
+        68
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        18,
+        16,
+        48,
+        52
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/soil/wall/damaged/mask_03.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "9fd37ae25e6e7c6a744c4f0386dd0419c8716d112c46f0159f0125ef74e6b2b8",
+      "size": [
+        48,
+        68
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        18,
+        1,
+        48,
+        52
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/soil/wall/damaged/mask_04.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "50898104821a2f39a02fd54702c7b2ca11fdecee5d0ab5d07a770f3445db7e59",
+      "size": [
+        48,
+        68
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        18,
+        16,
+        30,
+        43
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/soil/wall/damaged/mask_05.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "d7844cea88d42af1726c8e8ecab9c52c192598e6af8cb8d8deacc51f95c8c1ea",
+      "size": [
+        48,
+        68
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        18,
+        1,
+        30,
+        43
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/soil/wall/damaged/mask_06.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "e5079123f7963942dd39d04ea42714398d363e2a6a745674dea040f7cdb9b4e5",
+      "size": [
+        48,
+        68
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        18,
+        16,
+        48,
+        52
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/soil/wall/damaged/mask_07.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "6ef9b55b56d6368098464faac144b601fadece6cc733c047aa810900e50ae526",
+      "size": [
+        48,
+        68
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        18,
+        1,
+        48,
+        52
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/soil/wall/damaged/mask_08.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "9885c594f96608fdcd05750e81928d9df85a2d6266eace0737f904003985079e",
+      "size": [
+        48,
+        68
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        0,
+        16,
+        30,
+        52
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/soil/wall/damaged/mask_09.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "409bf8e0a9d067a1ac49a1390e6f9cc859b1c56316cb1f0b6b7905aca2a337f7",
+      "size": [
+        48,
+        68
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        0,
+        1,
+        30,
+        52
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/soil/wall/damaged/mask_10.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "244504e247b1a8652a0de4d52d3d65b661359ee99ac927bdd5a5ae7bcf5090e5",
+      "size": [
+        48,
+        68
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        0,
+        16,
+        48,
+        52
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/soil/wall/damaged/mask_11.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "bbe78c51c46791c60fd248ed0dd9da80d65de59497285524e025a4a9556828a2",
+      "size": [
+        48,
+        68
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        0,
+        1,
+        48,
+        52
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/soil/wall/damaged/mask_12.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "c83db93f82ab772d703ea1f4cdf4002f42804f94d4815b8e51d5a8ac26fa6bf3",
+      "size": [
+        48,
+        68
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        0,
+        16,
+        30,
+        52
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/soil/wall/damaged/mask_13.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "97ca1d28137ed43d4ad8d21ee87b3c46f06424b605e72ed0c8aa62e0dd6211fc",
+      "size": [
+        48,
+        68
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        0,
+        1,
+        30,
+        52
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/soil/wall/damaged/mask_14.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "578e5cb0ccbe10d0461b4622b957cfe6824fe54979c4e0a9ad330831e961d874",
+      "size": [
+        48,
+        68
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        0,
+        16,
+        48,
+        52
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/soil/wall/damaged/mask_15.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "6a427073fcc0672a2bd4a3b3b7b9d7c706f310f4e15368e957386f66dfde5144",
+      "size": [
+        48,
+        68
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        0,
+        1,
+        48,
+        52
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/soil/wall/normal/mask_00.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "dec3cfa169bbdf06c37d733902320d5ae3730396a283646a948d4fce0a8be8f3",
+      "size": [
+        48,
+        68
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        6,
+        16,
+        42,
+        52
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/soil/wall/normal/mask_01.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "a966663f2c15e1095636fe33dfab966e77f2f159f6fa7efd627d7e6a93034535",
+      "size": [
+        48,
+        68
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        18,
+        1,
+        30,
+        52
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/soil/wall/normal/mask_02.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "198fa8eeff6509ef6ce8adf781a1fc1ae5ba9c11ee6a56ccdc396da0bc062a7c",
+      "size": [
+        48,
+        68
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        18,
+        16,
+        48,
+        52
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/soil/wall/normal/mask_03.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "df3abf9ddb843982427c975611f4b21678573f2ed222ce8cde4c59371e14fbf1",
+      "size": [
+        48,
+        68
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        18,
+        1,
+        48,
+        52
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/soil/wall/normal/mask_04.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "66103e9ce794479863a59d2bae6cdba6f8e79560581d75b43fe3fca6755c915e",
+      "size": [
+        48,
+        68
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        18,
+        16,
+        30,
+        43
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/soil/wall/normal/mask_05.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "b1e01f9e6054e62c936ea15bf29a8e67f1b5c7badef90da7af8f61a9cffeb6d9",
+      "size": [
+        48,
+        68
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        18,
+        1,
+        30,
+        43
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/soil/wall/normal/mask_06.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "deb5bddd93fabd704e91503529c42e4d8a2682a4c06090ac820d1ec3b12eb966",
+      "size": [
+        48,
+        68
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        18,
+        16,
+        48,
+        52
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/soil/wall/normal/mask_07.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "e5bc2bdf35cc205547af902578d1f5942cb4dd442e2b0e26ab2f3d6c765ba7bd",
+      "size": [
+        48,
+        68
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        18,
+        1,
+        48,
+        52
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/soil/wall/normal/mask_08.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "d1a1025f82073ed297f4867d1b9c58a7bc17fcb112da67e4be1e60b01cbd4260",
+      "size": [
+        48,
+        68
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        0,
+        16,
+        30,
+        52
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/soil/wall/normal/mask_09.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "19f67c49f3e664aa215fb1967fe6c96386161f50975957c5ac57434916025604",
+      "size": [
+        48,
+        68
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        0,
+        1,
+        30,
+        52
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/soil/wall/normal/mask_10.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "332acf618735f1d6feaf0bb48b593899b55854b90e21369e367443b7738cb456",
+      "size": [
+        48,
+        68
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        0,
+        16,
+        48,
+        52
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/soil/wall/normal/mask_11.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "65b2aa3d1d3259319c28d5bda38d8237404c97c19a66f601f3b051ce575ca47b",
+      "size": [
+        48,
+        68
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        0,
+        1,
+        48,
+        52
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/soil/wall/normal/mask_12.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "e228ca189b1975293259026df6b1991b1ed8876c09ccdba9c7c64cd160928bff",
+      "size": [
+        48,
+        68
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        0,
+        16,
+        30,
+        52
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/soil/wall/normal/mask_13.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "a7f9905dbafe1610867d2cc7e7cafab57744eefb8daa73b345f83022570ede79",
+      "size": [
+        48,
+        68
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        0,
+        1,
+        30,
+        52
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/soil/wall/normal/mask_14.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "a3c6ca8f3eee8445a1c5cd5108cb57e807487ba906e72bb5651af65b11437c28",
+      "size": [
+        48,
+        68
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        0,
+        16,
+        48,
+        52
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/soil/wall/normal/mask_15.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "87babf3e8f8a452847ec23893c4e014f6ac3869bb245eac8143b5bc8aef21e60",
+      "size": [
+        48,
+        68
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        0,
+        1,
+        48,
+        52
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/stone/floor/base.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "8afcafe62b713b81baca8544d79273c753e5a2ca386976f55689f32c2655c564",
+      "size": [
+        48,
+        42
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        0,
+        0,
+        48,
+        42
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/stone/floor/boundary/e.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "65740f5f3842865e44a49d2924fc69a8c1ca0b39689c8ed0de800bfbbff3f867",
+      "size": [
+        48,
+        42
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        47,
+        0,
+        48,
+        42
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/stone/floor/boundary/n.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "5d8cbb58cc85f53245d27d0e1b7c4a4d09b033fc6d2bb780007ad1b7c7a2534e",
+      "size": [
+        48,
+        42
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        0,
+        0,
+        48,
+        1
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/stone/floor/boundary/s.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "f8a88f84d56237de313dbc2bd9fa28d58b8db05661981bc3df2162f5ac6925b2",
+      "size": [
+        48,
+        42
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        0,
+        41,
+        48,
+        42
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/stone/floor/boundary/w.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "db517bf42cfd29329462f8fffd20a078de59bf67711c125813ef2357d2adad40",
+      "size": [
+        48,
+        42
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        0,
+        0,
+        1,
+        42
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/stone/floor/perimeter/mask_00.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "48839a609771ba196b4cd34b4f3cc545f70c2d0597d591686e69e32dafe112ea",
+      "size": [
+        48,
+        42
+      ],
+      "mode": "RGBA",
+      "bbox": null,
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/stone/floor/perimeter/mask_01.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "5d8cbb58cc85f53245d27d0e1b7c4a4d09b033fc6d2bb780007ad1b7c7a2534e",
+      "size": [
+        48,
+        42
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        0,
+        0,
+        48,
+        1
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/stone/floor/perimeter/mask_02.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "65740f5f3842865e44a49d2924fc69a8c1ca0b39689c8ed0de800bfbbff3f867",
+      "size": [
+        48,
+        42
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        47,
+        0,
+        48,
+        42
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/stone/floor/perimeter/mask_03.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "da6fcf92a8d166ebe8c85a544bb82e923bd9d92ad22eb0878986a8d5cb861296",
+      "size": [
+        48,
+        42
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        0,
+        0,
+        48,
+        42
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/stone/floor/perimeter/mask_04.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "f8a88f84d56237de313dbc2bd9fa28d58b8db05661981bc3df2162f5ac6925b2",
+      "size": [
+        48,
+        42
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        0,
+        41,
+        48,
+        42
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/stone/floor/perimeter/mask_05.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "ead86d5ecc58df626498090a987ee54566b447012eb8cc76f1256f4ee5868b99",
+      "size": [
+        48,
+        42
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        0,
+        0,
+        48,
+        42
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/stone/floor/perimeter/mask_06.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "fd1695c391dec728a1540463182eae80575cb701818e6b687f36e8a51c1533eb",
+      "size": [
+        48,
+        42
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        0,
+        0,
+        48,
+        42
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/stone/floor/perimeter/mask_07.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "c1307decfd14dd0c9296f6a9f14299eb46e0275059046c2aeb710d0a0a3e2ba3",
+      "size": [
+        48,
+        42
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        0,
+        0,
+        48,
+        42
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/stone/floor/perimeter/mask_08.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "db517bf42cfd29329462f8fffd20a078de59bf67711c125813ef2357d2adad40",
+      "size": [
+        48,
+        42
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        0,
+        0,
+        1,
+        42
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/stone/floor/perimeter/mask_09.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "8591028c159aa58fdd4780e91e09f46d8cd8e8093a2209acc994c2335deed952",
+      "size": [
+        48,
+        42
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        0,
+        0,
+        48,
+        42
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/stone/floor/perimeter/mask_10.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "86b37aa443b929a55afb7b977b8292329be4ac70499fc62938fb54be0f9fc55f",
+      "size": [
+        48,
+        42
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        0,
+        0,
+        48,
+        42
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/stone/floor/perimeter/mask_11.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "79f61e51ea9ecbc907da3030e6f76dead992271aac79d91e6cf5d3c83016f7c1",
+      "size": [
+        48,
+        42
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        0,
+        0,
+        48,
+        42
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/stone/floor/perimeter/mask_12.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "c523ca28de1ca91ca3d4eb65b31f40a8fba12427b047ee9f57da2902edf86265",
+      "size": [
+        48,
+        42
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        0,
+        0,
+        48,
+        42
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/stone/floor/perimeter/mask_13.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "7f5555895dd6598b98094f303ff47b71b73d2a69c86b7efa78c7cc09650c19c7",
+      "size": [
+        48,
+        42
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        0,
+        0,
+        48,
+        42
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/stone/floor/perimeter/mask_14.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "11f47ea1e458971dd86d629c74bc54cab0ba53a710a7e0a5ae5f0d9762b4ed87",
+      "size": [
+        48,
+        42
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        0,
+        0,
+        48,
+        42
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/stone/floor/perimeter/mask_15.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "85073490ec9daba291ab2dbfdf74d3cb8af13e9579b631ba1e8f4b4d538a31b0",
+      "size": [
+        48,
+        42
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        0,
+        0,
+        48,
+        42
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/stone/wall/damaged/mask_00.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "ed2c77983e1ab9923c1a14c9dc9a42fa04a9715fdb4161ce73f80b8a7f2dca87",
+      "size": [
+        48,
+        68
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        6,
+        16,
+        42,
+        52
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/stone/wall/damaged/mask_01.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "94bd1e4bc4ef02643f80ea29f396e44ebb02cf7eb0f3b1a5fce3138c0a1437c8",
+      "size": [
+        48,
+        68
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        18,
+        1,
+        30,
+        52
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/stone/wall/damaged/mask_02.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "6ba6d8c406a2ac4b3c05a95cd7b2b7b0da9c1d6cbdb4b6d7b9ef3393cf61ce58",
+      "size": [
+        48,
+        68
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        18,
+        16,
+        48,
+        52
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/stone/wall/damaged/mask_03.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "f3f794870b4cda423992fff4a69b0c091e9494a708afa8c2be027ed83ebcd6b7",
+      "size": [
+        48,
+        68
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        18,
+        1,
+        48,
+        52
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/stone/wall/damaged/mask_04.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "0d011c7ca9941077a4fe1ad2b09dab7bad0d6d60f4b37abb09988c6f4404dbda",
+      "size": [
+        48,
+        68
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        18,
+        16,
+        30,
+        43
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/stone/wall/damaged/mask_05.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "579f99d4edcc3d5ddd0610f9f67ede99790bf9068a35427aabeb8d6b2492c059",
+      "size": [
+        48,
+        68
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        18,
+        1,
+        30,
+        43
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/stone/wall/damaged/mask_06.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "19d58408f901b2b7efbc1b082549b42b013c3cf84dec1136e7a06daf37348b5c",
+      "size": [
+        48,
+        68
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        18,
+        16,
+        48,
+        52
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/stone/wall/damaged/mask_07.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "00ffc9676503251d8dd4a0474769b8110afc1b9723e85e67fa28fff5150b1fb2",
+      "size": [
+        48,
+        68
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        18,
+        1,
+        48,
+        52
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/stone/wall/damaged/mask_08.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "bc4d48c98868925bbd4ef008c1cb1913633c0b44965b7de4bd5406a55e5903d2",
+      "size": [
+        48,
+        68
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        0,
+        16,
+        30,
+        52
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/stone/wall/damaged/mask_09.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "f37ff1d4185095ec396bdfdbd7ad56719b4651b6ba49e770fed6a6f36db37e17",
+      "size": [
+        48,
+        68
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        0,
+        1,
+        30,
+        52
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/stone/wall/damaged/mask_10.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "3da25a44703046cc9183832a70c8f13847781a62da9d7dabc8567945ced8a9e0",
+      "size": [
+        48,
+        68
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        0,
+        16,
+        48,
+        52
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/stone/wall/damaged/mask_11.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "d31add2847742fa5be77fdfc6f38bd71354b480b0119fd5140e479537e7b4ede",
+      "size": [
+        48,
+        68
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        0,
+        1,
+        48,
+        52
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/stone/wall/damaged/mask_12.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "8e25a2ebd1dd7bd65422980217010a2cb97cdb517dfde241d78195364eac1acc",
+      "size": [
+        48,
+        68
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        0,
+        16,
+        30,
+        52
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/stone/wall/damaged/mask_13.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "7fd25f0570620648ed374561ca492f997dba9447a6fa701532ea29f212533203",
+      "size": [
+        48,
+        68
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        0,
+        1,
+        30,
+        52
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/stone/wall/damaged/mask_14.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "595ee1701acd97d2b76dc395e1bb1d6516742dea464f0549fc68ce1b6d8450a7",
+      "size": [
+        48,
+        68
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        0,
+        16,
+        48,
+        52
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/stone/wall/damaged/mask_15.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "c83cd00719e664434bac871843546c6418615a7ebebdcc8e29064b3a9cf1f8b0",
+      "size": [
+        48,
+        68
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        0,
+        1,
+        48,
+        52
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/stone/wall/normal/mask_00.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "8ed65410d79dff13eb4203323012545494887145d4675c63b8100ff619102a16",
+      "size": [
+        48,
+        68
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        6,
+        16,
+        42,
+        52
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/stone/wall/normal/mask_01.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "010a5f39fb05939a3f7871bf9d6b66d15790b9351d5152396b15867710824e9d",
+      "size": [
+        48,
+        68
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        18,
+        1,
+        30,
+        52
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/stone/wall/normal/mask_02.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "c210ca23d160d99c7b132cb942f776e133cd37cfa7436c241af5a47934bed001",
+      "size": [
+        48,
+        68
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        18,
+        16,
+        48,
+        52
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/stone/wall/normal/mask_03.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "ae7ffa9e35e90ec84c9bf5fa17051fc97caa7487cf6604e4380fe6375d0b7711",
+      "size": [
+        48,
+        68
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        18,
+        1,
+        48,
+        52
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/stone/wall/normal/mask_04.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "a6f24765539d4fc2535b2dd3cd501423d25cd114fcea3bd354f16576fb6fe57c",
+      "size": [
+        48,
+        68
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        18,
+        16,
+        30,
+        43
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/stone/wall/normal/mask_05.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "fc3fe2eecfe0e3ace0b0dd6d5ac33f39874da8d87b5a739e7a72ca0172c35645",
+      "size": [
+        48,
+        68
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        18,
+        1,
+        30,
+        43
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/stone/wall/normal/mask_06.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "8edc51c7060f550793d70b260c47810d501684df576dfad3ad2c8ab99bf671e8",
+      "size": [
+        48,
+        68
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        18,
+        16,
+        48,
+        52
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/stone/wall/normal/mask_07.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "3c50a1daf5c5b38e95705e590f0a637f912054ece50f592d8441776878912cbc",
+      "size": [
+        48,
+        68
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        18,
+        1,
+        48,
+        52
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/stone/wall/normal/mask_08.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "a179ea4321d7a7d81a567564cbdbd751b9789723720b1fb36188f52fc551b26d",
+      "size": [
+        48,
+        68
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        0,
+        16,
+        30,
+        52
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/stone/wall/normal/mask_09.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "03125adc48f8d90fc5f03e408f47690b47c25cc7a46921256a3a37922acc605d",
+      "size": [
+        48,
+        68
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        0,
+        1,
+        30,
+        52
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/stone/wall/normal/mask_10.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "de4f631a8cb82b707cb8dcbc6784e045f1f6fd3b8f876a7cd64359a9132af65e",
+      "size": [
+        48,
+        68
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        0,
+        16,
+        48,
+        52
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/stone/wall/normal/mask_11.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "52cd04a061b600b291aeb2bc3baa6d069e9881026c8e2423f1c5d96599c66620",
+      "size": [
+        48,
+        68
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        0,
+        1,
+        48,
+        52
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/stone/wall/normal/mask_12.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "dc0c21a65ff97c64391456e4fa94fe90f652394d4edd22cf07e068d004a50dda",
+      "size": [
+        48,
+        68
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        0,
+        16,
+        30,
+        52
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/stone/wall/normal/mask_13.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "a81acc9248ddfa00bf0ccf4c1fc2af09c7622fa740bf96e717e230cb49f70cdf",
+      "size": [
+        48,
+        68
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        0,
+        1,
+        30,
+        52
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/stone/wall/normal/mask_14.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "8823af291e30e99fde9e402d43cc5e5e63da9e368551c5fb52757f0224fcd88f",
+      "size": [
+        48,
+        68
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        0,
+        16,
+        48,
+        52
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/earth_stone_buildings_v1/stone/wall/normal/mask_15.png",
+      "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+      "sha256": "3994a659f3862301e19ed44e22ab1d2d0ba00ce555f400088d1f1337f9a2f81a",
+      "size": [
+        48,
+        68
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        0,
+        1,
+        48,
+        52
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
     {
       "path": "art_delivery/wood_buildings_v1/door/horizontal_frame_front.png",
       "delivery_commit": "e648cf75a288219887733c5fa2d9536a113dae83",
