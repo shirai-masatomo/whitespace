@@ -609,6 +609,35 @@
         "shiba/walk_left_02.png": "b8e4b81594217911d0e246841eff31e00a0d1f399b5f73e11b48d3b04cf8d6da",
         "shiba/walk_left_03.png": "333e8407afeba8a4c901fe6c35f2d12fde56024750b34c98940511cb86ea8515"
       }
+    },
+    {
+      "character": "keeper",
+      "action": "idle",
+      "direction": "left",
+      "canvas": [
+        32,
+        48
+      ],
+      "foot_anchor": [
+        16,
+        44
+      ],
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "duration_mode": "hold_until_state_change",
+      "loop": false,
+      "files": [
+        "keeper/idle_left_00.png"
+      ],
+      "status": "art_complete_game_integration_unverified",
+      "derivation": "Exact adopted v1 pixel reflection about foot x16; no face redraw",
+      "sha256": {
+        "keeper/idle_left_00.png": "2f90923192a42877c5fd1b10a4f115d130e52ee9c81a6e5d0876687ab589e124"
+      }
     }
   ],
   "head_reuse_checks": [
