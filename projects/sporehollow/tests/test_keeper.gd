@@ -13,7 +13,9 @@ func safe(seed_id: int = 17):
 	var config = Farm.StageData.STAGES[1].duplicate(true)
 	config.day_seconds = 600.0
 	config.first_attack_seconds = 9999.0
-	return Farm.new({}, seed_id, config).begin_day()
+	var w=Farm.new({}, seed_id, config).begin_day()
+	w.nature_config.spawn_chance_per_second=0
+	return w
 func steps(w, count: int):
 	for i in range(count): w.step()
 func clear_jobs(w):
@@ -51,6 +53,7 @@ func run():
 	w.keeper.rest_elapsed=0
 	check(Farm.Life.presentation(w)=="settling","Rest onset is not awake fatigue or sleep")
 	w.keeper.rest_elapsed=5
+	w.keeper.asleep=true
 	check(Farm.Life.presentation(w)=="sleeping","Five elapsed seconds show sleep")
 	w.keeper.state="unconscious"
 	check(Farm.Life.presentation(w)=="unconscious","Unconscious overrides historical rest")
@@ -73,7 +76,7 @@ func run():
 	check(no_overlap(w), "No wall/keeper overlap on completion")
 	# An occupied corridor must not be silently crossed.
 	w = safe()
-	w.act("place_animal", Vector2i(8,13), 1)
+	w.act("guide", Vector2i(8,13), 1)
 	clear_jobs(w)
 	w.act("stay", Vector2i(8,13), 1)
 	steps(w, 8)
@@ -134,11 +137,8 @@ func run():
 	for rescued in [false,true]:
 		w = safe()
 		w.keeper.pos = Vector2i(19,8)
-		if rescued:
-			w.act("place_animal",Vector2i(19,10),1)
-			clear_jobs(w)
-			w.act("rest",Vector2i.ZERO,1)
-			steps(w,8)
+		w.animals[0].pos=Vector2i(19,10)
+		w.animals[0].mode="rest"
 		w.start_night()
 		w.spawn_enemy({"entry":Vector2i(1,5),"role":"kidnapper","lv":1})
 		w.enemies[0].pos = Vector2i(18,8)
@@ -150,7 +150,7 @@ func run():
 			down = down or w.keeper.state == "unconscious"
 			if w.keeper.carrier >= 0 and not carried:
 				carried = true
-				if rescued: w.act("auto",Vector2i.ZERO,1)
+				if rescued: w.animals[0].mode="auto" # Fixture releases explicit rest to isolate rescue, not a remote player order.
 			unique = unique and no_overlap(w)
 			if (rescued and w.metrics.rescues > 0) or w.result != "": break
 		check(down and carried, "Keeper must lose HP before being carried")
@@ -183,11 +183,11 @@ func run():
 		morning.buy("hen")
 		morning.buy("cat")
 		var sim = morning.begin_day()
-		sim.act("place_animal",Vector2i(17,8),1)
-		sim.act("place_animal",Vector2i(19,10),2)
-		sim.act("place_animal",Vector2i(20,12),3)
+		sim.act("guide",Vector2i(17,8),1)
+		sim.act("guide",Vector2i(19,10),2)
+		sim.act("guide",Vector2i(20,12),3)
 		sim.act("wall",Vector2i(15,7))
-		sim.act("build_gate",Vector2i(15,8))
+		sim.act("door",Vector2i(15,8))
 		sim.act("move",Vector2i(19,8))
 		clear_jobs(sim)
 		var all_clear = no_overlap(sim)

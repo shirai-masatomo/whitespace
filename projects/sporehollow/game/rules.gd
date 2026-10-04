@@ -2,6 +2,7 @@ extends RefCounted
 ## Fixed design values and explicitly provisional tuning. Seconds are converted only at the simulation boundary.
 const SHIBA = {"attack_power": 10, "max_hp": 40, "attack_seconds": 1.2, "speed": 2.0, "rescue_multiplier": 1.5, "detection_range": 4}
 const BARK = {"cooldown": 6.0, "range": 4, "stop_seconds": 1.0}
+const WHISTLE = {"range":6,"through_walls":true} # Provisional, independent of physical paths.
 const RESOURCE_TYPES = ["soil", "wood", "stone"]
 const NATURE = {"interval": 1.0, "spawn_chance_per_second": 0.2, "weights": {"weed": 80.0, "mushroom": 15.0, "stump": 5.0},
 	"caps": {"weed": 10, "mushroom": 3, "stump": 1}, "limit": 16, "weed_gold": 1, "mushroom_hp": 5, "stump_wood": 20}
@@ -10,10 +11,17 @@ const KIDNAPPER = {"max_hp": 50, "attack_power": 5, "object_attack_power": 2,
 	"sight_range": 6,
 	"counter_seconds": 1.0, "counter_duration": 4.0, "counter_cooldown": 2.0}
 # Gate cost/HP/time, repair coefficient, interruption refund and animal HP are PROVISIONAL.
-const BUILD = {"wall": {"cost": 10, "hp": 8, "seconds": 1.0},
-	"build_gate": {"cost": 30, "hp": 6, "seconds": 1.0},
-	"kennel": {"cost": 20, "resource": "wood", "blueprint": "kennel", "hp": 12, "seconds": 2.0},
-	"coop": {"cost": 30, "resource": "wood", "hp": 12, "seconds": 2.0}} # Coop numbers provisional.
+const BUILD = {
+ "wall": {"cost":10,"hp":8,"seconds":1.0,"tier":0,"layer":"structure"},
+ "wood_wall": {"cost":10,"resource":"wood","hp":16,"seconds":2.0,"tier":1,"layer":"structure"},
+ "stone_wall": {"cost":10,"resource":"stone","hp":28,"seconds":3.0,"tier":2,"layer":"structure"},
+ "soil_tile": {"cost":2,"hp":8,"seconds":1.0,"tier":0,"layer":"floor"},
+ "wood_tile": {"cost":2,"resource":"wood","hp":16,"seconds":1.0,"tier":1,"layer":"floor"},
+ "stone_tile": {"cost":2,"resource":"stone","hp":28,"seconds":1.0,"tier":2,"layer":"floor"},
+ "door": {"cost":10,"resource":"wood","hp":16,"seconds":2.0,"layer":"structure"},
+ "locked_door": {"cost":20,"resource":"wood","hp":16,"seconds":2.0,"lock_hp":8,"layer":"structure"},
+ "kennel": {"cost":20,"resource":"wood","blueprint":"kennel","hp":12,"seconds":2.0,"layer":"structure"},
+ "coop": {"cost":30,"resource":"wood","hp":12,"seconds":2.0,"layer":"structure"}}
 const REPAIR_FACTOR = 1.0
 const INTERRUPT_REFUND = 0.5
 const DISMANTLE_REFUND = 0.8 # Provisional: floor each facility's remaining-durability refund.

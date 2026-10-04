@@ -58,9 +58,9 @@ func run():
 	fast=fresh();fast.day_seconds=1;fast.keeper.sleepiness=100;fast.keeper.forced_rest=true;fast.Life.set_rest(fast,true)
 	fast.act("rest_until_night");steps(fast,4)
 	check(fast.keeper.resting and fast.keeper.forced_rest,"Night boundary never bypasses forced rest")
-	fast=fresh();fast.act("place_animal",Vector2i(15,10),1)
-	while fast.animals[0].deployment!="transporting":fast.step()
-	check(not fast.act("rest_until_night"),"Unresolved animal transport prevents bulk rest")
+	fast=fresh();fast.animals[0].loyalty=100;fast.act("guide",Vector2i(15,10),1)
+	steps(fast,4)
+	check(not fast.act("rest_until_night"),"Unfinished animal guidance prevents bulk rest")
 	# Empty stale holds are cleared by a new request, active interrupted work is not.
 	fast=fresh();fast.Jobs.hold(fast,"manual")
 	check(fast.act("wall",Vector2i(7,12)) and not fast.jobs_held,"New request with an empty queue clears obsolete manual hold")

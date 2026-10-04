@@ -1,9 +1,9 @@
 extends RefCounted
 ## Only playable species; future species stay in ANIMALS.md.
 const SPECIES = {
-	"shiba": {"title": "柴犬", "category": "dog", "hp": 40, "attack": 10, "object_attack": 0, "attack_seconds": 1.2, "move_speed": 2.0, "detection_range": 4, "attack_target_range": 4, "loyalty": 75, "commands": true, "mortal": false, "affinity": false, "skills": ["bark", "rescue"]},
-	"hen": {"title": "鶏", "category": "bird", "hp": 20, "attack": 0, "object_attack": 0, "attack_seconds": 0, "move_speed": 1.3, "detection_range": 3, "attack_target_range": 0, "loyalty": 0, "commands": false, "mortal": false, "affinity": false, "skills": ["lay", "feather"]},
-	"cat": {"title": "猫", "category": "cat", "hp": 28, "attack": 0, "object_attack": 0, "attack_seconds": 0, "move_speed": 1.8, "detection_range": 3, "attack_target_range": 0, "loyalty": 0, "commands": false, "mortal": false, "affinity": true, "skills": ["charm", "meow"]}}
+	"shiba": {"title": "柴犬", "category": "dog", "hp": 40, "attack": 10, "object_attack": 0, "attack_seconds": 1.2, "move_speed": 2.0, "detection_range": 4, "attack_target_range": 4, "loyalty": 75, "can_enter_indoor": false, "orders": ["auto","stay","wander","rest","attack_target","guide"], "commands": true, "mortal": false, "affinity": false, "skills": ["bark", "rescue"]},
+	"hen": {"title": "鶏", "category": "bird", "hp": 20, "attack": 0, "object_attack": 0, "attack_seconds": 0, "move_speed": 1.3, "detection_range": 3, "attack_target_range": 0, "loyalty": 0, "can_enter_indoor": true, "orders": ["guide"], "commands": false, "mortal": false, "affinity": false, "skills": ["lay", "feather"]},
+	"cat": {"title": "猫", "category": "cat", "hp": 28, "attack": 0, "object_attack": 0, "attack_seconds": 0, "move_speed": 1.8, "detection_range": 3, "attack_target_range": 0, "loyalty": 0, "can_enter_indoor": true, "orders": [], "commands": false, "mortal": false, "affinity": true, "skills": ["charm", "meow"]}}
 const SKILLS = {
 	"bark": {"name": "吠える", "type": "active", "unlock_level": 1, "cooldown": 6.0, "condition": "敵を検知", "effect": "周囲4マスの敵を1秒足止め"},
 	"rescue": {"name": "救出本能", "type": "passive", "unlock_level": 1, "condition": "主人公が連れ去られる", "effect": "運搬者を最優先 / 移動1.5倍"},

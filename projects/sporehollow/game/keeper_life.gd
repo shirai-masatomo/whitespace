@@ -8,7 +8,7 @@ const DRINKS = {"coffee": 12.0, "energy_drink": 25.0}
 static func rest_until_reason(w, target: String) -> String:
 	if not w.working(): return "今は休息できません"
 	if w.keeper.state != "free" or w.keeper.carrier >= 0: return "牧場主が行動できません"
-	if w.jobs.any(func(j): return j.get("transport","") in ["carrying","returning","drop_pending"]): return "仲間の配置か返却を先に終えてください"
+	if w.jobs.any(func(j): return j.kind=="animal_order" and j.order=="guide"): return "仲間の誘導を先に終えてください"
 	if target == "night" and w.phase != "day": return "昼のみ使えます"
 	if target == "dawn" and (w.phase != "defend" or w.config.repeat_waves or w.schedule_index < w.spawn_schedule.size() or not w.enemies.all(func(e):return e.done or e.flee)):
 		return "襲来がまだ終わっていません"
@@ -59,7 +59,7 @@ static func presentation(w) -> String:
 	var k = w.keeper
 	if k.carrier >= 0: return "carried"
 	if k.state != "free": return "unconscious"
-	if k.resting: return "settling" if k.get("rest_elapsed", 0.0) < 5.0 else "sleeping"
+	if k.resting: return "settling" if not k.get("asleep",false) else "sleeping"
 	return "exhausted" if k.sleepiness >= 90 else ("tired" if k.sleepiness > 80 else ("drowsy" if k.sleepiness > 50 else "awake"))
 
 static func danger(w, kind: String):
@@ -125,6 +125,7 @@ static func set_rest(w, value: bool):
 	if k.resting == value: return
 	k.resting = value
 	k.rest_elapsed = 0.0
+	k.asleep = false
 	w.life_log.append({"tick": w.tick, "event": "rest_started" if value else "rest_ended"})
 
 static func step(w):
@@ -150,8 +151,11 @@ static func step(w):
 	k.danger_near = near
 	if k.resting:
 		k.rest_elapsed = k.get("rest_elapsed", 0.0) + w.DT
-		if k.rest_elapsed == 5.0: w.life_log.append({"tick": w.tick, "event": "rest_recovery_started"})
-		if k.rest_elapsed > 5.0: k.sleepiness = maxf(0, k.sleepiness - 2.0 * w.DT)
+		var onset=3.0 if w.is_indoor(k.pos) else 5.0
+		if k.get("asleep",false): k.sleepiness=maxf(0,k.sleepiness-(4.0 if w.is_indoor(k.pos) else 2.0)*w.DT)
+		elif k.rest_elapsed>=onset:
+			k.asleep=true
+			w.life_log.append({"tick":w.tick,"event":"rest_recovery_started","indoor":w.is_indoor(k.pos)})
 		k.heal_credit += w.DT
 		if k.heal_credit >= 5:
 			k.hp = mini(k.max_hp, k.hp + 1)
@@ -197,6 +201,7 @@ static func step(w):
 			return
 		if w.actor_occupied(next, k.pos): return
 		k.move_credit -= 1
+		w.open_for_ally(next)
 		k.pos = next
 		w.keeper_path.append([next.x, next.y])
 		if k.pos == w.manual_goal:
@@ -209,7 +214,7 @@ static func hurt(w, e):
 	k.hp = maxi(0, k.hp - e.attack_power)
 	k.hurt_until = w.tick + 8
 	danger(w, "keeper_hit")
-	w.Jobs.interrupt_transport(w)
+	w.Orders.interrupt(w)
 	w.combat_log.append({"tick": w.tick, "source": "keeper_hit", "id": e.id, "target": -1, "damage": e.attack_power})
 	if k.hp == 0:
 		k.state = "unconscious"

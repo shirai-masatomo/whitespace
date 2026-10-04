@@ -18,7 +18,7 @@ func _ready():
 		player.volume_db = -6 if i == 2 else (-12 if i == 1 else -2)
 		add_child(player)
 		voices.append(player)
-	for kind in ["build", "repair", "remove", "collect", "gate", "attack", "object", "bark", "invasion", "restrained", "carried", "rescue", "win", "lose", "animal_danger", "auto_start", "early_clear", "merchant"]:
+	for kind in ["whistle", "build", "repair", "remove", "collect", "gate", "attack", "object", "bark", "invasion", "restrained", "carried", "rescue", "win", "lose", "animal_danger", "auto_start", "early_clear", "merchant"]:
 		cache[kind] = synth(kind, 0.85 if kind in ["win", "rescue", "invasion", "carried", "early_clear", "merchant"] else 0.22)
 	ambient = AudioStreamPlayer.new()
 	ambient.stream = synth("ambient", 8.0)
@@ -88,6 +88,7 @@ func synth(kind: String, length: float) -> AudioStreamWAV:
 			"ambient":
 				var seam = minf(1, minf(t, length - t) * 5)
 				value = wind * 1.8 * seam
+			"whistle": value = sin(TAU*(1800*t+8*sin(t*25))) * envelope * 0.35
 			"bird": value = sin(TAU * (1700 * t + 65 * sin(t * 18))) * sin(t / length * PI) * 0.22
 			"invasion":
 				value = wooden_bell(t, 146) * 0.85

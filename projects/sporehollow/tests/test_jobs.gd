@@ -89,13 +89,15 @@ func run():
 	check(transition.keeper.pos != before, "Player keeps moving during invasion")
 	# Local collection and deployment use exactly the same queue.
 	var local = Farm.new().begin_day()
+	local.nature_config.spawn_chance_per_second=0
+	local.animals[0].loyalty=100
 	local.natural[Vector2i(20, 13)] = "stump"
 	local.act("collect", Vector2i(20, 13))
 	check(local.wood == 0 and local.natural.size() == 1, "Distant harvest isn't immediate")
 	drain(local)
 	check(local.wood == 20, "Harvest at arrival")
-	local.act("place_animal", Vector2i(19, 12), 1)
-	check(not local.animals[0].placed and not local.act("place_animal", Vector2i(18, 12), 1), "Single pending deployment per animal")
+	local.act("guide", Vector2i(19, 12), 1)
+	check(local.animals[0].placed and not local.act("guide", Vector2i(18, 12), 1), "Single pending deployment per animal")
 	drain(local)
 	check(local.animals[0].placed, "Animal deployed locally, AI retained")
 	local.act("wall", Vector2i(22, 12))
@@ -107,10 +109,12 @@ func run():
 	drain(local)
 	check(local.structures[Vector2i(22, 12)].status == "ready", "Rescued keeper resumes work")
 	var maintenance = Farm.new().begin_day()
-	maintenance.act("build_gate", Vector2i(7, 13))
+	maintenance.wood=100
+	maintenance.act("door", Vector2i(7, 13))
 	drain(maintenance)
 	maintenance.act("move", Vector2i(20, 13))
 	drain(maintenance)
+	maintenance.structures[Vector2i(7,13)].open=false
 	maintenance.act("gate", Vector2i(7, 13))
 	check(not maintenance.structures[Vector2i(7, 13)].open, "Remote gate request is only intent")
 	drain(maintenance)
@@ -119,7 +123,7 @@ func run():
 	maintenance.act("repair", Vector2i(7, 13))
 	check(maintenance.structures[Vector2i(7, 13)].hp == 2, "Repair waits for work tick")
 	drain(maintenance)
-	check(maintenance.structures[Vector2i(7, 13)].hp == 6, "Local repair preserves durability/cost rule")
+	check(maintenance.structures[Vector2i(7, 13)].hp == 16, "Local repair preserves durability/cost rule")
 	maintenance.act("remove", Vector2i(7, 13))
 	drain(maintenance)
 	check(maintenance.structures[Vector2i(7, 13)].status == "removed", "Dismantle also performed locally")
@@ -137,22 +141,23 @@ func run():
 	check(unfinished.jobs[0].state == "walking" and unfinished.structures[Vector2i(7, 13)].remaining == 3, "Rescued away from unfinished site walks back before hammering")
 	unfinished.act("wall", Vector2i(22, 3))
 	unfinished.finish(true)
-	check(unfinished.materials == 90, "Dawn refunds unstarted reservations, retains paid unfinished site")
+	check(unfinished.materials == 80, "Dawn carries reserved jobs and unfinished construction")
 	var tomorrow = Farm.new(unfinished.next_campaign()).begin_day()
-	check(tomorrow.jobs.size() == 1 and tomorrow.structures[Vector2i(7, 13)].remaining == 3, "Unfinished site gets a local resume job next day")
+	check(tomorrow.jobs.size() == 2 and tomorrow.structures[Vector2i(7, 13)].remaining == 3, "Unfinished site gets a local resume job next day")
 	drain(tomorrow)
-	check(tomorrow.structures[Vector2i(7, 13)].hp == 8 and tomorrow.materials == 90, "Resume charges no second cost")
+	check(tomorrow.structures[Vector2i(7, 13)].hp == 8 and tomorrow.materials == 80, "Resume charges no second cost")
 	var interrupted = Farm.new().begin_day()
 	interrupted.act("wall", Vector2i(7, 13))
 	interrupted.step()
 	interrupted.act("cancel_job", Vector2i.ZERO, interrupted.jobs[0].id)
-	check(interrupted.materials == 95 and interrupted.structures[Vector2i(7, 13)].status == "interrupted", "Cancelling paid work uses existing half-refund rule")
+	check(interrupted.materials == 95 and not interrupted.structures.has(Vector2i(7,13)), "Cancelling paid work uses existing half-refund rule")
 	# The same timed player requests reproduce movement, natural growth, work and enemy AI.
 	var replay_a = Farm.new({}, 29).begin_day()
 	var replay_b = Farm.new({}, 29).begin_day()
 	for sim in [replay_a, replay_b]:
 		sim.act("wall", Vector2i(10, 10))
-		sim.act("place_animal", Vector2i(18, 8), 1)
+		sim.animals[0].loyalty=100
+		sim.act("guide", Vector2i(18, 8), 1)
 		sim.act("move", Vector2i(19, 8))
 		steps(sim, 400)
 		sim.act("stay", Vector2i(18, 8), 1)
@@ -161,7 +166,8 @@ func run():
 	# End-to-end real production worlds, not the isolated combat fixture.
 	for seed_id in range(1, 9):
 		var sim = Farm.new({}, seed_id).begin_day()
-		sim.act("place_animal", Vector2i(18, 8), 1)
+		sim.animals[0].loyalty=100
+		sim.act("guide", Vector2i(18, 8), 1)
 		sim.act("move", Vector2i(19, 8))
 		drain(sim)
 		sim.act("stay", Vector2i(18, 8), 1)

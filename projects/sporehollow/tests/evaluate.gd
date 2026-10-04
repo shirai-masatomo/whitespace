@@ -1,18 +1,20 @@
 extends SceneTree
-const Farm = preload("res://tests/rule_fixture.gd")
+const Farm = preload("res://game/world.gd")
 const SEEDS = 32
 
 static func deploy(w, keeper: Vector2i = Vector2i(19, 8), dog: Vector2i = Vector2i(18, 8)):
-	w.act("place", keeper)
-	for a in w.animals: w.act("place_animal", dog if a.species == "shiba" else w.nest, a.id)
+	# Explicit initial-layout fixture for AI evaluation, not a player placement API.
+	w.keeper.pos=keeper
+	for a in w.animals: a.pos=dog; a.home=dog; a.order=dog
 
 static func run_trial(strategy: String, number: int = 17):
-	var w = Farm.new({}, number).begin_night()
+	var w = Farm.new({}, number).begin_day()
 	if strategy == "poor": deploy(w, Vector2i(3, 5), Vector2i(23, 15))
 	elif strategy == "rescue": deploy(w, Vector2i(19, 8), Vector2i(19, 13))
 	elif strategy in ["ordered", "uncommanded"]: deploy(w, Vector2i(8, 5), Vector2i(20, 13))
 	elif strategy == "reserve":
-		w.act("place", Vector2i(19, 8))
+		deploy(w)
+		w.animals[0].mode="rest"
 	else: deploy(w)
 	if strategy == "rescue": w.act("stay", Vector2i(19, 13), 1)
 	if strategy == "ordered": w.act("stay", Vector2i(9, 5), 1)
@@ -20,6 +22,7 @@ static func run_trial(strategy: String, number: int = 17):
 		w.act("wall", Vector2i(17, 7))
 		w.act("wall", Vector2i(17, 9))
 		w.act("stay", Vector2i(18, 8), 1)
+	w.start_night()
 	while w.phase == "defend" and w.tick < 1200:
 		w.step()
 		if w.early_clear: w.act("end_night")
@@ -96,6 +99,6 @@ func run():
 		report.strategies[strategy] = {"summary": summary, "samples": rows}
 		print(strategy, ": ", JSON.stringify(summary))
 		if strategy == "front": failed = failed or wins < SEEDS * 0.75 or passive == 0 or hp_distribution.size() < 2
-		if strategy == "reserve": failed = failed or wins > 0
+		if strategy == "reserve": failed = failed or wins > 0 # Explicitly resting dog never rescues.
 	FileAccess.open("res://artifacts/evaluation.json", FileAccess.WRITE).store_string(JSON.stringify(report, "  "))
 	quit(1 if failed else 0)

@@ -10,7 +10,13 @@ const NEST = Vector2i(20, 12)
 const Shop = preload("res://game/shop_table.gd")
 const Rules = preload("res://game/rules.gd")
 const BUILD = Rules.BUILD
-const ORDERS = ["auto", "stay", "wander", "rest", "attack_target", "whistle"]
+const ORDERS = ["auto", "stay", "wander", "rest", "attack_target", "guide"]
+const Buildings = preload("res://game/buildings.gd")
+const Orders = preload("res://game/animal_orders.gd")
+var floors: Dictionary = {}
+var indoor: Dictionary = {}
+var debug_enabled = false
+var debug_infinite = false
 var campaign: Dictionary
 var checkpoint: Dictionary
 var stage = 1
@@ -137,6 +143,7 @@ func _init(data: Dictionary = {}, seed_number: int = 17, stage_override: Diction
 		var record = saved.duplicate(true)
 		var cell = Vector2i(record.pos[0], record.pos[1])
 		record.erase("pos")
+		if record.kind == "gate": record.kind = "door"
 		structures[cell] = record
 	for wave in config.waves:
 		for cell in wave.entries:
@@ -152,45 +159,15 @@ func _init(data: Dictionary = {}, seed_number: int = 17, stage_override: Diction
 				if walkable(p) and not live_structure(p) and p not in entries: clear_cells.append(p)
 		clear_cells.sort_custom(func(a, b): return distance(a, NEST) < distance(b, NEST))
 		if not clear_cells.is_empty(): nest = clear_cells[0]
-	for owned in campaign.animals:
-		var a = owned.duplicate(true)
-		a.loyalty = a.get("loyalty", SPECIES[a.species].loyalty)
-		a.move_speed = SPECIES[a.species].move_speed
-		a.detection_range = SPECIES[a.species].detection_range
-		a.attack_target_range = SPECIES[a.species].attack_target_range
-		a.attack_seconds = SPECIES[a.species].attack_seconds
-		a.object_attack_power = SPECIES[a.species].object_attack
-		a.skills = SPECIES[a.species].skills.duplicate()
-		a.skill_ready = {}
-		a.known_enemies = {}
-		a.pos = Vector2i(-10, -10)
-		a.placed = false
-		a.deployment = "unplaced"
-		a.home = a.pos
-		a.stamina = 100.0
-		a.max_hp = SPECIES[a.species].hp + (a.lv - 1) * 4
-		a.hp = clampi(a.get("hp", a.max_hp), 0, a.max_hp)
-		a.next_bark = 0
-		a.last_bark = -100
-		a.attack_power = SPECIES[a.species].attack + ((a.lv - 1) * 2 if a.species == "shiba" else 0)
-		a.next_attack = 0
-		a.move_credit = 0.0
-		a.rescuing = false
-		a.kennel_id = -1
-		a.rest_settled = false
-		a.rest_ticks = 0
-		a.kennel_ticks = 0
-		a.healing_kennel = -1
-		a.auto_recovering = false
-		a.fear = 0
-		a.order_until = 0
-		a.order = a.pos
-		a.mode = "auto"
-		a.pending = {}
-		a.target_id = -1
-		a.state = "見張り" if a.species == "shiba" else "ついばむ"
-		a.path = [a.pos]
-		animals.append(a)
+	for saved in campaign.get("floors",[]):
+		var row=saved.duplicate(true)
+		var cell=Vector2i(row.pos[0],row.pos[1]); row.erase("pos")
+		floors[cell]=row
+	refresh_indoor()
+	keeper.placed=true
+	var location=campaign.get("keeper_position",[6,13])
+	keeper.pos=Vector2i(location[0],location[1])
+	for owned in campaign.animals: add_resident(owned)
 	if phase == "day":
 		keeper.placed = true
 		var saved_pos = campaign.get("keeper_position", [6, 13])
@@ -201,10 +178,16 @@ func _init(data: Dictionary = {}, seed_number: int = 17, stage_override: Diction
 					if walkable(Vector2i(x, y)): keeper.pos = Vector2i(x, y)
 		initial_positions = {"keeper": [keeper.pos.x, keeper.pos.y], "animals": []}
 		keeper_path = [[keeper.pos.x, keeper.pos.y]]
-		for p in structures:
-			if structures[p].status == "building":
-				jobs.append({"id": next_job_id, "kind": "build_gate" if structures[p].kind == "gate" else structures[p].kind, "pos": p, "animal_id": -1, "state": "pending", "resource": "", "reserved": 0, "started": false, "resume": true})
-				next_job_id += 1
+	for saved in campaign.get("work_jobs",[]):
+		var j=saved.duplicate(true); j.pos=Vector2i(j.pos[0],j.pos[1])
+		if j.kind=="build_gate": j.kind="door"
+		jobs.append(j); next_job_id=maxi(next_job_id,j.id+1)
+	# Migrate paid unfinished legacy construction that predates persisted job records.
+	for p in structures:
+		var b=structures[p]
+		if b.status=="building" and not jobs.any(func(j):return j.pos==p):
+			jobs.append({"id":next_job_id,"kind":b.kind,"pos":p,"animal_id":-1,"state":"pending","resource":b.get("resource","soil"),"reserved":b.cost,"started":true,"old":{},"remaining":b.remaining})
+			next_job_id+=1
 	shop_stock = Shop.generate(stage, seed_value, campaign.unlocked_blueprints)
 	say("牧場を整えよう")
 
@@ -236,7 +219,7 @@ func inside(p: Vector2i) -> bool:
 	return p.x >= 1 and p.x < W - 1 and p.y >= 1 and p.y < H - 1
 
 func walkable(p: Vector2i) -> bool:
-	return inside(p) and not blocks(p)
+	return inside(p) and (not blocks(p) or (structures.get(p,{}).get("kind") in Buildings.DOORS))
 
 func blocks(p: Vector2i) -> bool:
 	if p == HOLDING_SHED + Vector2i.RIGHT: return true
@@ -252,7 +235,7 @@ func has_nest() -> bool:
 	return campaign.animals.any(func(a): return a.species == "hen")
 
 func can_build(kind: String, p: Vector2i) -> bool:
-	return working() and BUILD.has(kind) and inside(p) and p not in [HOLDING_SHED, HOLDING_SHED + Vector2i.RIGHT] and p not in entries and not field_items.any(func(item): return item.pos == p) and not occupied(p) and not live_structure(p) and BUILD[kind].get("blueprint", "") in ([""] + campaign.unlocked_blueprints) and resource_amount(BUILD[kind].get("resource", "soil")) >= BUILD[kind].cost
+	return working() and Buildings.reason(self,kind,p)==""
 
 func neighbors(p: Vector2i) -> Array:
 	return [p + Vector2i.RIGHT, p + Vector2i.LEFT, p + Vector2i.UP, p + Vector2i.DOWN]
@@ -271,7 +254,7 @@ func next_step(start: Vector2i, goal: Vector2i, raider: bool = false, avoid_acto
 	var path = find_path(start,goal,raider,avoid_actors)
 	return path[1] if path.size()>1 else start
 
-func find_path(start: Vector2i, goal: Vector2i, raider: bool = false, avoid_actors: bool = false) -> Array:
+func find_path(start: Vector2i, goal: Vector2i, raider: bool = false, avoid_actors: bool = false, outdoor_only: bool = false) -> Array:
 	if start == goal: return [start]
 	var frontier = [start]
 	var cost = {start: 0.0}
@@ -290,10 +273,11 @@ func find_path(start: Vector2i, goal: Vector2i, raider: bool = false, avoid_acto
 		for n in neighbors(p):
 			var exit_cell = raider and n == goal and entries.any(func(entry): return exit_for(entry) == n)
 			if not inside(n) and not exit_cell: continue
+			if outdoor_only and is_indoor(n): continue
 			if avoid_actors and n != goal and actor_occupied(n, start): continue
 			if n == HOLDING_SHED + Vector2i.RIGHT: continue
 			var blocked = blocks(n)
-			if blocked and not raider: continue
+			if blocked and not raider and structures.get(n,{}).get("kind") not in Buildings.DOORS: continue
 			# Compare walking actions with the actual number of object attacks needed.
 			var value: float = cost[p] + 1.0 + (ceilf(float(structures[n].hp) / Rules.KIDNAPPER.object_attack_power) if blocked else 0)
 			if not cost.has(n) or value < cost[n]:
@@ -304,12 +288,6 @@ func find_path(start: Vector2i, goal: Vector2i, raider: bool = false, avoid_acto
 
 static func distance(a: Vector2i, b: Vector2i) -> int:
 	return absi(a.x - b.x) + absi(a.y - b.y)
-
-func valid_animal_site(id: int, p: Vector2i) -> bool:
-	return animals.any(func(a): return a.id == id and available(a)) and keeper.placed and walkable(p) and not live_structure(p) and p not in entries and not occupied(p)
-
-func can_place_animal(id: int, p: Vector2i) -> bool:
-	return working() and valid_animal_site(id, p)
 
 func working() -> bool:
 	return phase in ["day", "defend"]
@@ -329,7 +307,9 @@ func act(kind: String, p: Vector2i = Vector2i.ZERO, animal_id: int = -1) -> bool
 		Life.stop_rest_until(self, "cancelled")
 	elif kind in ["keeper_move", "keeper_rest", "resume_jobs", "coffee", "energy_drink"]:
 		accepted = Life.command(self, kind, p)
-	elif kind in ORDERS or kind == "pause":
+	elif kind in ORDERS:
+		accepted = Orders.enqueue(self,kind,[animal_id],p)
+	elif kind == "pause":
 		accepted = _execute_local(kind, p, animal_id)
 	elif kind == "cancel_job" and working():
 		accepted = Jobs.cancel(self, animal_id)
@@ -348,28 +328,7 @@ func _execute_local(kind: String, p: Vector2i = Vector2i.ZERO, animal_id: int = 
 		elif kind in ORDERS:
 			accepted = issue_order(kind, p, animal_id)
 		elif not paused:
-			if kind == "place_animal" and can_place_animal(animal_id, p):
-				for a in animals:
-					if a.id != animal_id: continue
-					a.pos = p
-					a.home = p
-					a.order = p
-					a.path = [p]
-					a.placed = true
-					a.deployment = "placed"
-					initial_positions.animals.append({"id": a.id, "pos": [p.x, p.y], "deployment_tick": tick})
-					accepted = true
-			elif BUILD.has(kind):
-				if can_build(kind, p):
-					add_resource(BUILD[kind].get("resource", "soil"), -BUILD[kind].cost)
-					var hp: int = BUILD[kind].hp + (campaign.fence * 4 if kind == "build_gate" else 0)
-					structures[p] = {"id": next_structure_id, "kind": "gate" if kind == "build_gate" else kind,
-						"hp": 0, "max_hp": hp, "armor": 0, "open": false, "cost": BUILD[kind].cost, "resource": BUILD[kind].get("resource", "soil"),
-						"status": "building", "remaining": ceili(BUILD[kind].seconds / DT), "total_ticks": ceili(BUILD[kind].seconds / DT)}
-					next_structure_id += 1
-					natural.erase(p)
-					accepted = true
-			elif kind == "gate" and live_structure(p) and structures[p].status == "ready" and structures[p].kind == "gate" and not occupied(p):
+			if kind == "gate" and live_structure(p) and structures[p].status == "ready" and structures[p].kind in Buildings.DOORS and not occupied(p):
 				structures[p].open = not structures[p].open
 				accepted = true
 			elif kind == "repair":
@@ -378,6 +337,7 @@ func _execute_local(kind: String, p: Vector2i = Vector2i.ZERO, animal_id: int = 
 				add_resource(structures[p].get("resource", "soil"), dismantle_quote(p))
 				structures[p].status = "removed"
 				structures[p].hp = 0
+				refresh_indoor()
 				accepted = true
 			elif Shop.FOOD.has(kind):
 				accepted = use_food(kind, animal_id, p)
@@ -459,12 +419,15 @@ func release_keeper(e: Dictionary):
 
 func animal_step(a: Dictionary):
 	if not a.placed: return
+	if campaign.day <= a.unavailable_through_day:
+		a.state="療養中" if campaign.day==a.unavailable_through_day else "気絶"; return
 	if a.hp <= 0:
 		a.state = "気絶"
 		a.unavailable_through_day = maxi(a.unavailable_through_day, campaign.day + 1)
 		a.rescuing = false
 		release_kennel(a)
 		return
+	if Orders.follow(self,a): return
 	if not a.pending.is_empty() and tick >= a.pending.at:
 		release_kennel(a)
 		a.rest_settled = false
@@ -495,7 +458,7 @@ func animal_step(a: Dictionary):
 				coops.sort_custom(func(p, q): return distance(a.pos, p) < distance(a.pos, q))
 				if not coops.is_empty() and distance(a.pos, coops[0]) <= 6:
 					if tick % 4 == 0:
-						a.pos = next_step(a.pos, coops[0], false, true)
+						a.pos = animal_next(a, coops[0])
 						if a.pos == coops[0]: a.hp = mini(a.max_hp, a.hp + 1)
 					a.state = "鶏小屋"
 					return
@@ -527,6 +490,15 @@ func animal_step(a: Dictionary):
 		if not selected.is_empty(): targets = selected
 		else: a.mode = "auto"
 	if a.rescuing: targets = carrier
+	if not SPECIES[a.species].can_enter_indoor:
+		if a.rescuing and not targets.is_empty() and is_indoor(targets[0].pos):
+			a.state="外で待つ"
+			a.move_credit=minf(1.75,a.move_credit+a.move_speed*DT*Rules.SHIBA.rescue_multiplier)
+			if a.move_credit>=1:
+				var exit_cell=animal_next(a,rescue_exit(a))
+				if exit_cell!=a.pos: a.move_credit-=1; open_for_ally(exit_cell); a.pos=exit_cell
+			return
+		targets=targets.filter(func(e):return not is_indoor(e.pos))
 	var goal: Vector2i = a.home
 	var chasing = false
 	if not a.rescuing and a.mode == "whistle" and a.pos != a.order:
@@ -554,10 +526,11 @@ func animal_step(a: Dictionary):
 		if intent == "reposition":
 			a.state = "位置調整"
 			if not a.side_step_used:
-				a.pos = side_step(a.pos, goal, a.intent_roll)
+				var side=side_step(a.pos, goal, a.intent_roll)
+				if animal_walkable(a,side): open_for_ally(side); a.pos=side
 				a.side_step_used = true
 			return
-		if distance(a.pos, goal) <= 1 and tick >= a.next_attack:
+		if distance(a.pos, goal) <= 1 and line_of_sight(a.pos,goal) and tick >= a.next_attack:
 			a.next_attack = tick + ceili(a.attack_seconds / DT)
 			a.stamina = maxf(0, a.stamina - 8)
 			var enemy = targets[0]
@@ -574,7 +547,7 @@ func animal_step(a: Dictionary):
 	elif a.mode in ["wander", "auto"]:
 		a.state = "徘徊"
 		if tick % 12 == 0:
-			var options = neighbors(a.pos).filter(func(p): return walkable(p) and distance(p, a.home) <= 3)
+			var options = neighbors(a.pos).filter(func(p): return animal_walkable(a,p) and distance(p, a.home) <= 3)
 			if not options.is_empty(): a.order = options[rng.randi_range(0, options.size() - 1)]
 		goal = a.order
 	else:
@@ -584,8 +557,9 @@ func animal_step(a: Dictionary):
 	a.move_credit = minf(1.75, a.move_credit + a.move_speed * DT * (Rules.SHIBA.rescue_multiplier if a.rescuing else 1.0))
 	if a.move_credit >= 1 and distance(a.pos, goal) > (1 if chasing else 0):
 		a.move_credit -= 1
-		var move = next_step(a.pos, goal, false, true)
+		var move = animal_next(a, goal)
 		if move != a.pos and not actor_occupied(move, a.pos) and kennel_owner(move) in [-1, a.id]:
+			open_for_ally(move)
 			a.pos = move
 			a.stamina = maxf(0, a.stamina - 0.65)
 	else:
@@ -602,7 +576,7 @@ func release_kennel(a: Dictionary):
 
 func kennel_cell(a: Dictionary) -> Vector2i:
 	for p in structures:
-		if structures[p].id == a.kennel_id and structures[p].status == "ready" and structures[p].kind == "kennel": return p
+		if structures[p].get("id",-2) == a.kennel_id and structures[p].status == "ready" and structures[p].kind == "kennel": return p
 	return Vector2i(-1, -1)
 
 func rest_step(a: Dictionary, explicit: bool):
@@ -611,7 +585,7 @@ func rest_step(a: Dictionary, explicit: bool):
 		release_kennel(a)
 		a.rest_settled = true
 	if not a.rest_settled and a.kennel_id < 0:
-		var options = structures.keys().filter(func(p): return structures[p].kind == "kennel" and structures[p].status == "ready" and distance(a.pos, p) <= Rules.REST.nearby and kennel_owner(p) in [-1, a.id] and (p == a.pos or (not occupied(p) and next_step(a.pos, p) != a.pos)))
+		var options = structures.keys().filter(func(p): return structures[p].kind == "kennel" and structures[p].status == "ready" and animal_walkable(a,p) and distance(a.pos, p) <= Rules.REST.nearby and kennel_owner(p) in [-1, a.id] and (p == a.pos or (not occupied(p) and animal_next(a, p) != a.pos)))
 		options.sort_custom(func(p, q): return distance(a.pos, p) < distance(a.pos, q) if distance(a.pos, p) != distance(a.pos, q) else structures[p].id < structures[q].id)
 		if not options.is_empty():
 			destination = options[0]
@@ -623,11 +597,11 @@ func rest_step(a: Dictionary, explicit: bool):
 		a.move_credit += a.move_speed * DT
 		if a.move_credit >= 1:
 			a.move_credit -= 1
-			var next = next_step(a.pos, destination, false, true)
+			var next = animal_next(a, destination)
 			if next == a.pos or actor_occupied(next, a.pos) or kennel_owner(next) not in [-1, a.id]:
 				release_kennel(a)
 				a.rest_settled = true
-			else: a.pos = next
+			else: open_for_ally(next); a.pos = next
 		return
 	a.rest_settled = true
 	a.state = "休む" if explicit else "自主休養"
@@ -755,6 +729,16 @@ func move_enemy(e: Dictionary, next: Vector2i):
 		for p in around:
 			if distance(p, goal) < distance(go, goal): go = p
 		next = go
+	if blocks(next) and structures.get(next,{}).get("kind") in Buildings.DOORS:
+		var door=structures[next]
+		if door.get("lock_hp",0)>0:
+			door.lock_hp=maxi(0,door.lock_hp-e.object_attack_power)
+			e.state="ロックを壊す"
+			combat_log.append({"tick":tick,"source":"lock","id":e.id,"target":door.id,"damage":e.object_attack_power})
+			return
+		door.open=true
+		e.state="ドアを開ける"
+		return
 	if blocks(next):
 		var b = structures[next]
 		var damage = maxi(0, e.object_attack_power - b.armor)
@@ -762,16 +746,17 @@ func move_enemy(e: Dictionary, next: Vector2i):
 		b.hp -= applied
 		metrics.structure_damage += applied
 		combat_log.append({"tick": tick, "source": "object", "id": e.id, "target": b.id, "damage": applied})
-		e.state = "門を壊す" if b.kind == "gate" else "壁を壊す"
+		e.state = "ドアを壊す" if b.kind in Buildings.DOORS else "壁を壊す"
 		if b.hp <= 0:
 			b.status = "destroyed"
+			refresh_indoor()
 			metrics.destroyed += 1
-			say("施設が破壊された。土で建て直せます。")
+			say("施設が壊れました")
 	else:
 		if tick < e.move_stopped_until and next != e.pos: return
 		e.pos = next
 		e.path.append(next)
-		interrupt_site(next)
+
 		e.state = "退散" if e.flee else ("反撃" if e.counter_target >= 0 else ("連れ去り" if e.carry == "keeper" else e.search_state))
 		if e.carry == "keeper":
 			keeper.pos = e.pos
@@ -779,30 +764,6 @@ func move_enemy(e: Dictionary, next: Vector2i):
 				e.done = true
 				keeper.state = "abducted"
 				finish(false)
-
-func interrupt_site(p: Vector2i):
-	if structures.has(p) and structures[p].status == "building":
-		structures[p].status = "interrupted"
-		add_resource(structures[p].get("resource", "soil"), floori(structures[p].cost * Rules.INTERRUPT_REFUND))
-		metrics.interrupted += 1
-		say("建設中断：接触により建築素材を半分返却。")
-
-func construction_step():
-	if not Life.able(self) or jobs_held or manual_goal != null or jobs.is_empty(): return
-	var j = jobs[0]
-	if j.started and distance(keeper.pos, j.pos) == 1: advance_site(j.pos)
-
-func advance_site(p: Vector2i):
-	var b = structures.get(p, {})
-	if b.get("status") != "building": return
-	if occupied(p):
-		interrupt_site(p)
-		return
-	b.remaining -= Life.factor(self)
-	if b.remaining <= 0:
-		b.status = "ready"
-		b.hp = b.max_hp
-		metrics.built += 1
 
 func dismantle_quote(p: Vector2i) -> int:
 	if not live_structure(p): return 0
@@ -812,22 +773,36 @@ func dismantle_quote(p: Vector2i) -> int:
 func repair_quote(p: Vector2i) -> Dictionary:
 	if not structures.has(p) or structures[p].status != "ready": return {"hp": 0, "cost": 0}
 	var b = structures[p]
-	var unit_cost: float = b.cost * Rules.REPAIR_FACTOR / b.max_hp
-	var recovery = mini(b.max_hp - b.hp, floori(resource_amount(b.get("resource", "soil")) / unit_cost))
-	return {"hp": recovery, "cost": ceili(recovery * unit_cost)}
+	var unit_cost: float = maxf(1,b.cost) * Rules.REPAIR_FACTOR / b.max_hp
+	var missing=b.max_hp-b.hp+b.get("max_lock_hp",0)-b.get("lock_hp",0)
+	var recovery=(missing if debug_enabled and debug_infinite else mini(missing,floori(resource_amount(b.get("resource","soil"))/unit_cost)))
+	return {"hp":recovery,"cost":ceili(recovery*unit_cost)}
 
 func repair(p: Vector2i) -> bool:
 	if not working() or paused: return false
-	var quote = repair_quote(p)
-	if quote.hp <= 0: return false
-	add_resource(structures[p].get("resource", "soil"), -quote.cost)
-	structures[p].hp += quote.hp
-	metrics.repaired += quote.hp
-	var resource = structures[p].get("resource", "soil")
-	metrics[resource + "_repair"] = metrics.get(resource + "_repair", 0) + quote.cost
+	var quote=repair_quote(p)
+	if quote.hp<=0: return false
+	var b=structures[p]
+	if not(debug_enabled and debug_infinite): add_resource(b.get("resource","soil"),-quote.cost)
+	var body=mini(quote.hp,b.max_hp-b.hp)
+	b.hp+=body
+	b.lock_hp=b.get("lock_hp",0)+quote.hp-body
+	metrics.repaired+=quote.hp
 	return true
 
 func persist_farm():
+	campaign.floors=[]
+	for p in floors:
+		var row=floors[p].duplicate(true); row.pos=[p.x,p.y]; campaign.floors.append(row)
+	for owned in campaign.animals:
+		var a=Orders.animal(self,owned.id)
+		if not a.is_empty():
+			if a.placed: owned.position=[a.pos.x,a.pos.y]
+			owned.hp=a.hp; owned.mode=a.mode; owned.order_remaining=maxi(0,a.order_until-tick); owned.unavailable_through_day=a.unavailable_through_day
+	campaign.work_jobs=[]
+	for j in jobs:
+		if not BUILD.has(j.kind): continue
+		var row=j.duplicate(true); row.pos=[j.pos.x,j.pos.y]; campaign.work_jobs.append(row)
 	campaign.keeper_vitals = {"hp": keeper.hp, "sleepiness": keeper.sleepiness, "drinks_today": keeper.drinks_today}
 	campaign.keeper_position = [keeper.pos.x, keeper.pos.y]
 	campaign.resources = resource_snapshot()
@@ -844,6 +819,8 @@ func persist_farm():
 
 func step():
 	if not working() or paused: return
+	for a in animals:
+		if not a.placed: admit(a,HOLDING_SHED)
 	Life.begin_rest_until(self)
 	tick += 1
 	if phase == "day" and tick * DT >= day_seconds: start_night()
@@ -860,13 +837,14 @@ func step():
 		make_schedule()
 	for a in animals:
 		animal_step(a)
+		if a.placed: open_for_ally(a.pos)
 		kennel_heal_step(a)
-		interrupt_site(a.pos)
+
 		if a.path.back() != a.pos: a.path.append(a.pos)
 	for e in enemies:
 		enemy_step(e)
 		if phase != "defend": break
-	if working(): construction_step()
+
 	if tick % 8 == 0:
 		traces.append({"tick": tick, "stamina": snappedf(animals[0].stamina, 0.1), "eggs": eggs,
 			"materials": materials, "keeper": keeper.state, "structures": structures.size()})
@@ -898,11 +876,13 @@ func finish(won: bool):
 		for a in animals:
 			if a.id == owned.id:
 				owned.hp = a.hp
-				if a.hp <= 0 and a.placed: owned.unavailable_through_day = campaign.day + 1
+				if a.hp <= 0 and a.placed:
+					if a.unavailable_through_day<campaign.day: a.unavailable_through_day=campaign.day+1
+					owned.unavailable_through_day=a.unavailable_through_day
 	for j in jobs.duplicate():
-		if j.reserved > 0: add_resource(j.resource, j.reserved)
-		if j.kind == "place_animal": Jobs.deployment(self, j.animal_id, "unplaced")
-	jobs.clear()
+		if BUILD.has(j.kind): continue
+		if j.kind=="animal_order": Orders.stop(self,j)
+		jobs.erase(j)
 	manual_goal = null
 	if won:
 		campaign.gold += int(gold) + early_finish_bonus
@@ -951,11 +931,14 @@ func observation() -> Dictionary:
 		var row = event.duplicate(true)
 		row.entry = [event.entry.x, event.entry.y]
 		schedule.append(row)
-	return {"seed": seed_value, "stage": stage, "day": campaign.day, "tick": tick, "phase": phase, "paused": paused, "result": result,
+	return {"indoor":indoor.keys().map(func(p):return [p.x,p.y]), "floors":floors.keys().map(func(p):return {"pos":[p.x,p.y],"kind":floors[p].kind,"status":floors[p].status}), "debug":debug_enabled, "seed": seed_value, "stage": stage, "day": campaign.day, "tick": tick, "phase": phase, "paused": paused, "result": result,
 		"remaining_day": maxf(0, day_seconds - tick * DT), "night_started_tick": night_started_tick,
 		"keeper_path": keeper_path, "life_log": life_log, "jobs_held": jobs_held, "job_hold_reason": job_hold_reason, "manual_goal": [manual_goal.x, manual_goal.y] if manual_goal != null else null, "job_log": job_log, "jobs": jobs.map(func(j):
 			var row = j.duplicate(true)
 			row.pos = [j.pos.x, j.pos.y]
+			for key in ["leader_goal","command_pos"]:
+				if row.has(key): row[key]=[j[key].x,j[key].y]
+			for target in row.get("targets",[]): target.dest=[target.dest.x,target.dest.y]
 			return row),
 		"rest_until": rest_skip.duplicate(true), "remaining_night": remaining_night(), "early_clear": early_clear, "early_clear_tick": early_clear_tick, "early_finish_bonus": early_finish_bonus,
 		"exp_pool": campaign.exp_pool, "dawn": dawn_summary, "field_items": field_items.map(func(item):
@@ -1041,7 +1024,7 @@ func grow_nature():
 	for y in range(1, H - 1):
 		for x in range(1, W - 1):
 			var p = Vector2i(x, y)
-			if walkable(p) and not occupied(p) and not live_structure(p) and not natural.has(p) and p not in [HOLDING_SHED, HOLDING_SHED + Vector2i.RIGHT] and p not in entries and not field_items.any(func(item): return item.pos == p): sites.append(p)
+			if walkable(p) and not occupied(p) and not live_structure(p) and not natural.has(p) and not floors.has(p) and p not in [HOLDING_SHED, HOLDING_SHED + Vector2i.RIGHT] and p not in entries and not field_items.any(func(item): return item.pos == p): sites.append(p)
 	if sites.is_empty(): return
 	var p = sites[nature_rng.randi_range(0, sites.size() - 1)]
 	natural[p] = kind
@@ -1081,6 +1064,7 @@ func buy(id: String) -> bool:
 		var next_id = 1
 		for a in campaign.animals: next_id = maxi(next_id, a.id + 1)
 		campaign.animals.append({"id": next_id, "category": SPECIES[id].category, "species": id, "lv": 1, "xp": 0, "loyalty": row.individual.loyalty, "traits": {}, "name": "", "affinity": 0 if SPECIES[id].affinity else null, "unavailable_through_day": 0})
+		add_resident(campaign.animals.back())
 	elif product.Category == "materials": add_resource(id, product.Amount)
 	else:
 		add_item(id, product.Amount)
@@ -1094,6 +1078,7 @@ func sell(id: String, animal_id: int = -1) -> bool:
 	if p.Category == "animals":
 		var found = campaign.animals.filter(func(a): return a.id == animal_id and a.species == id)
 		if found.is_empty() or campaign.animals.size() <= 1: return false
+		animals=animals.filter(func(a):return a.id!=animal_id)
 		campaign.animals.erase(found[0]) # No last-animal softlock. Placed facilities are not sale inventory.
 	elif p.Category == "materials":
 		if resource_amount(id) < p.Amount: return false
@@ -1111,7 +1096,7 @@ func remaining_night() -> float:
 	return maxf(0, config.time_limit_seconds - (tick - night_started_tick) * DT)
 
 func available(a: Dictionary) -> bool:
-	return not a.placed and a.hp > 0 and campaign.day > a.unavailable_through_day
+	return a.placed and a.hp > 0 and campaign.day > a.unavailable_through_day
 
 static func animal_name(a: Dictionary) -> String:
 	return a.get("name", "") if a.get("name", "") != "" else SPECIES[a.species].title
@@ -1172,7 +1157,7 @@ func process_dawn():
 			dawn_summary.hens += 1
 	for a in animals:
 		if a.hp <= 0 and a.placed: dawn_summary.unconscious.append(a.id)
-		if a.species != "hen" or not a.placed or a.hp <= 0: continue
+		if a.species != "hen" or not available(a): continue
 		field_items.append({"kind": "egg", "pos": a.pos, "born_day": campaign.day,
 			"protected_by": structures[a.pos].id if structures.get(a.pos, {}).get("kind") == "coop" and live_structure(a.pos) else -1})
 		dawn_summary.eggs += 1
@@ -1217,3 +1202,130 @@ func try_meow(a: Dictionary):
 	a.skill_ready.meow = tick + ceili(skill.cooldown / DT)
 	for e in nearby: e.weakened_until = tick + ceili(skill.duration / DT)
 	skill_log.append({"tick": tick, "actor": "cat_%d" % a.id, "skill": "meow", "targets": nearby.map(func(e): return e.id)})
+
+func add_resident(owned: Dictionary):
+	var a = owned.duplicate(true)
+	a.loyalty = a.get("loyalty", SPECIES[a.species].loyalty)
+	a.move_speed = SPECIES[a.species].move_speed
+	a.detection_range = SPECIES[a.species].detection_range
+	a.attack_target_range = SPECIES[a.species].attack_target_range
+	a.attack_seconds = SPECIES[a.species].attack_seconds
+	a.object_attack_power = SPECIES[a.species].object_attack
+	a.skills = SPECIES[a.species].skills.duplicate()
+	a.skill_ready = {}
+	a.known_enemies = {}
+	a.pos = Vector2i(-10, -10)
+	a.placed = false
+	a.deployment = "admission_pending"
+	a.home = a.pos
+	a.stamina = 100.0
+	a.max_hp = SPECIES[a.species].hp + (a.lv - 1) * 4
+	a.hp = clampi(a.get("hp", a.max_hp), 0, a.max_hp)
+	a.next_bark = 0
+	a.last_bark = -100
+	a.attack_power = SPECIES[a.species].attack + ((a.lv - 1) * 2 if a.species == "shiba" else 0)
+	a.next_attack = 0
+	a.move_credit = 0.0
+	a.rescuing = false
+	a.kennel_id = -1
+	a.rest_settled = false
+	a.rest_ticks = 0
+	a.kennel_ticks = 0
+	a.healing_kennel = -1
+	a.auto_recovering = false
+	a.fear = 0
+	a.order_until = tick + owned.get("order_remaining",40+a.loyalty*2)
+	a.order = a.pos
+	a.mode = owned.get("mode", "auto")
+	a.pending = {}
+	a.target_id = -1
+	a.state = "見張り" if a.species == "shiba" else "ついばむ"
+	a.path = [a.pos]
+	animals.append(a)
+
+	var location=owned.get("position",[HOLDING_SHED.x,HOLDING_SHED.y])
+	var preferred=Vector2i(location[0],location[1]) if owned.has("position") else (keeper.pos+Vector2i(2,0) if a.id==1 else HOLDING_SHED)
+	admit(a,preferred)
+
+func admit(a: Dictionary,preferred: Vector2i):
+	var sites=[]
+	for y in range(1,H-1):
+		for x in range(1,W-1):
+			var cell=Vector2i(x,y)
+			if animal_walkable(a,cell) and not occupied(cell) and cell not in entries: sites.append(cell)
+	sites.sort_custom(func(c,d):
+		var dc=distance(c,preferred); var dd=distance(d,preferred)
+		return dc<dd if dc!=dd else (c.y<d.y if c.y!=d.y else c.x<d.x))
+	if sites.is_empty():
+		if a.state!="受入待ち": Orders.report(self,"受入口付近の場所を空けてください")
+		a.state="受入待ち"; return
+	a.pos=sites[0]; a.home=a.pos; a.order=a.pos; a.path=[a.pos]; a.placed=true; a.deployment="resident"
+	job_log.append({"tick":tick,"event":"admitted","animal_id":a.id,"pos":[a.pos.x,a.pos.y]})
+
+func refresh_indoor():
+	indoor=Buildings.rooms(self)
+
+func is_indoor(p: Vector2i) -> bool:
+	return indoor.has(p)
+
+func animal_walkable(a: Dictionary,p: Vector2i) -> bool:
+	return walkable(p) and (SPECIES[a.species].can_enter_indoor or not is_indoor(p))
+
+func animal_path(a: Dictionary,start: Vector2i,goal: Vector2i) -> Array:
+	return find_path(start,goal,false,true,not SPECIES[a.species].can_enter_indoor)
+
+func animal_next(a: Dictionary,goal: Vector2i) -> Vector2i:
+	var path=animal_path(a,a.pos,goal)
+	return path[1] if path.size()>1 and not actor_occupied(path[1],a.pos) else a.pos
+
+func open_for_ally(p: Vector2i):
+	if structures.get(p,{}).get("kind") in Buildings.DOORS and structures[p].status=="ready": structures[p].open=true
+
+func queue_order(kind: String,ids: Array,p: Vector2i) -> bool:
+	return Orders.enqueue(self,kind,ids,p)
+
+func rescue_exit(a: Dictionary) -> Vector2i:
+	var sites=[]
+	for p in structures:
+		if structures[p].kind not in Buildings.DOORS or structures[p].status!="ready": continue
+		for cell in neighbors(p):
+			if animal_walkable(a,cell) and not is_indoor(cell) and not animal_path(a,a.pos,cell).is_empty(): sites.append(cell)
+	sites.sort_custom(func(c,d):return distance(a.pos,c)<distance(a.pos,d))
+	return sites[0] if not sites.is_empty() else a.pos
+
+func debug_action(action: String, selection: Dictionary = {}) -> bool:
+	if not debug_enabled: return false
+	if action=="infinite": debug_infinite=not debug_infinite
+	elif action=="whistle": campaign.items.whistle=1
+	elif SPECIES.has(action):
+		var id=1
+		for a in campaign.animals: id=maxi(id,a.id+1)
+		var owned={"id":id,"species":action,"category":SPECIES[action].category,"lv":1,"xp":0,"loyalty":SPECIES[action].loyalty,"unavailable_through_day":0}
+		campaign.animals.append(owned); add_resident(owned)
+	elif action in ["hurt","heal","lock"]:
+		var amount=-10 if action=="hurt" else 10
+		match selection.get("kind"):
+			"keeper":
+				if amount<0: Life.hurt(self,{"id":-1,"attack_power":10})
+				else: keeper.hp=mini(keeper.max_hp,keeper.hp+10)
+			"animal":
+				var a=Orders.animal(self,selection.id)
+				if a.is_empty(): return false
+				a.hp=clampi(a.hp+amount,0,a.max_hp)
+				if a.hp==0: a.unavailable_through_day=campaign.day+1; a.state="気絶"
+			"enemy":
+				for e in enemies:
+					if e.id!=selection.id: continue
+					e.hp=clampi(e.hp+amount,0,e.max_hp)
+					if e.hp==0: e.flee=true; release_keeper(e); drop_blueprint(e.pos)
+			"structure":
+				var b=structures.get(selection.pos,{})
+				if b.is_empty(): return false
+				if action=="lock": b.lock_hp=maxi(0,b.get("lock_hp",0)-4)
+				else:
+					b.hp=clampi(b.hp+amount,0,b.max_hp)
+					if b.hp==0: b.status="destroyed"; refresh_indoor()
+			_: return false
+	else: return false
+	job_log.append({"tick":tick,"event":"debug","action":action})
+	return true
