@@ -1,5 +1,7 @@
 # ホイッスル牧場 — 現在地
 
+追加素材：UI荷車、資源12PNG、既存誘拐者50PNG、演出40PNGを接続。本・盤面荷車は維持。素材の使用記録はART_SPEC、実画面/出力確認はreview/current/PACKET。
+
 正本：[README](README.md) / [ANIMALS](ANIMALS.md) / [ENEMIES](ENEMIES.md) / [BUILDINGS](BUILDINGS.md)
 
 ## 今回の追加修正

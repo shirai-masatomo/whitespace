@@ -1,4 +1,5 @@
 extends RefCounted
+const Delivered = preload("res://game/delivered_art.gd")
 # Original code-drawn farm. Visual detail does not alter collision or simulation RNG.
 static func draw_ground(c: CanvasItem, world, tile: Vector2, time: float = 0):
 	c.draw_rect(Rect2(-1500, -1500, 4200, 3600), Color("42634b"))
@@ -73,6 +74,9 @@ static func draw_ground(c: CanvasItem, world, tile: Vector2, time: float = 0):
 		c.draw_rect(Rect2(p + Vector2(-2, 0), Vector2(5, 16)), Color("795a40"))
 
 static func draw_resource(c: CanvasItem, p: Vector2, kind: String):
+	if Delivered.RESOURCES.has(kind):
+		Delivered.resource(c,kind,p,24)
+		return
 	match kind:
 		"weed":
 			c.draw_circle(p + Vector2(0, 7), 11, Color("516c3e"))
@@ -85,28 +89,13 @@ static func draw_resource(c: CanvasItem, p: Vector2, kind: String):
 			c.draw_circle(p + Vector2(0, -5), 10, Color("b66653"))
 			c.draw_rect(Rect2(p + Vector2(-10, -4), Vector2(20, 5)), Color("db9170"))
 			c.draw_rect(Rect2(p + Vector2(-5, -9), Vector2(4, 3)), Color("fae4b0"))
-		"gold":
-			c.draw_circle(p, 10, Color("a77732"))
-			c.draw_circle(p + Vector2(-1, -2), 8, Color("ebc767"))
-			c.draw_line(p + Vector2(-2, -7), p + Vector2(-2, 3), Color("fff0ac"), 2)
-		"soil":
-			c.draw_rect(Rect2(p - Vector2(11, 9), Vector2(22, 19)), Color("987045"))
-			c.draw_rect(Rect2(p - Vector2(11, 10), Vector2(22, 5)), Color("97b168"))
-			c.draw_line(p + Vector2(-9, 1), p + Vector2(9, 3), Color("c3a277"), 3)
-		"wood", "stump":
-			if kind == "stump":
-				c.draw_rect(Rect2(p + Vector2(-10, -3), Vector2(20, 18)), Color("84593d"))
-				c.draw_circle(p + Vector2(0, -4), 11, Color("c6a277"))
-				c.draw_arc(p + Vector2(0, -4), 6, 0, TAU, 12, Color("927149"), 2)
-			else:
-				for y in [-4, 5]:
-					c.draw_line(p + Vector2(-9, y), p + Vector2(7, y - 4), Color("8b6040"), 8)
-					c.draw_circle(p + Vector2(8, y - 4), 4, Color("dbc094"))
-		"stone":
-			for offset in [Vector2(-7, 4), Vector2(6, 5), Vector2(0, -5)]:
-				c.draw_colored_polygon(PackedVector2Array([p + offset + Vector2(-7, 4), p + offset + Vector2(-4, -4), p + offset + Vector2(4, -6), p + offset + Vector2(7, 4)]), Color("9caaa7"))
+		"stump":
+			c.draw_rect(Rect2(p + Vector2(-10, -3), Vector2(20, 18)), Color("84593d"))
+			c.draw_circle(p + Vector2(0, -4), 11, Color("c6a277"))
+			c.draw_arc(p + Vector2(0, -4), 6, 0, TAU, 12, Color("927149"), 2)
 
 static func icon(kind: String) -> Texture2D:
+	if Delivered.RESOURCES.has(kind):return Delivered.RESOURCES[kind][24]
 	var img = Image.create(20, 20, false, Image.FORMAT_RGBA8)
 	for y in range(4, 18):
 		for x in range(2, 18):

@@ -5,6 +5,12 @@ from PIL import Image
 
 ROOT = Path(__file__).resolve().parents[1]
 DELIVERIES = {
+    'kidnapper_basic_v1': 'a038dc062d75e77e6c0c1c1a23d8e65db0c13725',
+    'kidnapper_reactions_v1': 'd300d8ae905d5dcedf9d6e022807b51d9a3097d7',
+    'effects_v1': 'e6371377565aa71a3b7979e6ee7edd57878048bb',
+    'cart_ui_detail_v1': '2cb05b6679bea777a02162a35d3693489f381c3c',
+    'resource_icons_v1': '5848c4f8aedde4acfa33586f82c3397d1b6d58a0',
+
     'earth_stone_buildings_v1': 'ebe446e5329aa7780b6ef5f13268ceb9433c9796',
     'wood_buildings_v1': 'e648cf75a288219887733c5fa2d9536a113dae83',
     'characters_v1': 'f3e4ae82b68c342b928dfb5dfcebb451353f9b8d',

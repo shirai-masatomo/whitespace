@@ -1,5 +1,10 @@
 {
   "deliveries": {
+    "kidnapper_basic_v1": "a038dc062d75e77e6c0c1c1a23d8e65db0c13725",
+    "kidnapper_reactions_v1": "d300d8ae905d5dcedf9d6e022807b51d9a3097d7",
+    "effects_v1": "e6371377565aa71a3b7979e6ee7edd57878048bb",
+    "cart_ui_detail_v1": "2cb05b6679bea777a02162a35d3693489f381c3c",
+    "resource_icons_v1": "5848c4f8aedde4acfa33586f82c3397d1b6d58a0",
     "earth_stone_buildings_v1": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
     "wood_buildings_v1": "e648cf75a288219887733c5fa2d9536a113dae83",
     "characters_v1": "f3e4ae82b68c342b928dfb5dfcebb451353f9b8d",
@@ -8,8 +13,2024 @@
     "merchant_cart_v2": "0bbbc1c104acd13e7a9458c141a4a52921c05587",
     "merchant_board_v1": "7e408375f19b86759fc614508fc3e5f413f67ff9"
   },
-  "runtime_count": 285,
+  "runtime_count": 387,
   "files": [
+    {
+      "path": "art_delivery/kidnapper_basic_v1/attack/left_00.png",
+      "delivery_commit": "a038dc062d75e77e6c0c1c1a23d8e65db0c13725",
+      "sha256": "5639ad11d12b3d635dff3803f876ff51623726aa9072d3f59c68e5b3d55859e8",
+      "size": [
+        32,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        4,
+        2,
+        29,
+        44
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/kidnapper_basic_v1/attack/left_01.png",
+      "delivery_commit": "a038dc062d75e77e6c0c1c1a23d8e65db0c13725",
+      "sha256": "f7cd53c04dbc6e269412fdd1fc7720c70ed16380c7decd68b599e7b9ec1bdedb",
+      "size": [
+        32,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        2,
+        2,
+        29,
+        44
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/kidnapper_basic_v1/attack/left_02.png",
+      "delivery_commit": "a038dc062d75e77e6c0c1c1a23d8e65db0c13725",
+      "sha256": "0ec1d7d7d47a98283e23cc082461804c7e17c180552ebce24c12934b02e86bf9",
+      "size": [
+        32,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        4,
+        2,
+        28,
+        44
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/kidnapper_basic_v1/attack/right_00.png",
+      "delivery_commit": "a038dc062d75e77e6c0c1c1a23d8e65db0c13725",
+      "sha256": "4ec70c8dff80cfd9a1af76900c5edf75308107df110f05876b2696c6d22e5f2c",
+      "size": [
+        32,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        4,
+        2,
+        29,
+        44
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/kidnapper_basic_v1/attack/right_01.png",
+      "delivery_commit": "a038dc062d75e77e6c0c1c1a23d8e65db0c13725",
+      "sha256": "6c2ea690d5dee312d7c07a940b7d93ba87c2a8a0258111a10764c203315de0a2",
+      "size": [
+        32,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        4,
+        2,
+        31,
+        44
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/kidnapper_basic_v1/attack/right_02.png",
+      "delivery_commit": "a038dc062d75e77e6c0c1c1a23d8e65db0c13725",
+      "sha256": "68d3117d8382fb198737857f2deb6949b793050a41da04e55ad3b3979d9813df",
+      "size": [
+        32,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        5,
+        2,
+        29,
+        44
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/kidnapper_basic_v1/carry/left_00_front.png",
+      "delivery_commit": "a038dc062d75e77e6c0c1c1a23d8e65db0c13725",
+      "sha256": "ad8033943570a609ccc2826ecd9af4ad9b77b8bac66ea85f57da8e71528ffbd6",
+      "size": [
+        32,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        4,
+        2,
+        27,
+        29
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/kidnapper_basic_v1/carry/left_00_rear.png",
+      "delivery_commit": "a038dc062d75e77e6c0c1c1a23d8e65db0c13725",
+      "sha256": "5e2e564ec0da7f0b9a128514cdc58fd261f5f66687ca2f6b8db70f7bcf53f27b",
+      "size": [
+        32,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        7,
+        19,
+        27,
+        44
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/kidnapper_basic_v1/carry/left_01_front.png",
+      "delivery_commit": "a038dc062d75e77e6c0c1c1a23d8e65db0c13725",
+      "sha256": "142aa83d454ec09fb213f9893d918d807e3b259b60a375230527a2f72a8b3fef",
+      "size": [
+        32,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        4,
+        2,
+        28,
+        29
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/kidnapper_basic_v1/carry/left_01_rear.png",
+      "delivery_commit": "a038dc062d75e77e6c0c1c1a23d8e65db0c13725",
+      "sha256": "56d22dfa5089e3d7fc8cefdb16acfca0da058181d4219bbbfbb64aafb0976ec4",
+      "size": [
+        32,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        6,
+        19,
+        29,
+        44
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/kidnapper_basic_v1/carry/left_02_front.png",
+      "delivery_commit": "a038dc062d75e77e6c0c1c1a23d8e65db0c13725",
+      "sha256": "fe88f98d98b5b0f768cecda9226a0cbc75100252b607b875d54cdcaf1e2fe5fa",
+      "size": [
+        32,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        4,
+        2,
+        29,
+        29
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/kidnapper_basic_v1/carry/left_02_rear.png",
+      "delivery_commit": "a038dc062d75e77e6c0c1c1a23d8e65db0c13725",
+      "sha256": "a94d3709f51df8708e3e44aaf2c424f0fd0d422a26a8f4bf56e0e574bc5f7ba6",
+      "size": [
+        32,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        4,
+        19,
+        30,
+        44
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/kidnapper_basic_v1/carry/right_00_front.png",
+      "delivery_commit": "a038dc062d75e77e6c0c1c1a23d8e65db0c13725",
+      "sha256": "efab83ba641a82528797ad2b40a6a2835d6d7f748549b70fa9bcc966f1b2920b",
+      "size": [
+        32,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        6,
+        2,
+        29,
+        29
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/kidnapper_basic_v1/carry/right_00_rear.png",
+      "delivery_commit": "a038dc062d75e77e6c0c1c1a23d8e65db0c13725",
+      "sha256": "7fdb24f758d866336a15ee923f5f69d4642566e90048e6fe54e5478d97c7391e",
+      "size": [
+        32,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        6,
+        19,
+        26,
+        44
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/kidnapper_basic_v1/carry/right_01_front.png",
+      "delivery_commit": "a038dc062d75e77e6c0c1c1a23d8e65db0c13725",
+      "sha256": "aa1f53946d8f2f2a28867299753f780de510e2611a4a1d9fa84393126ed07385",
+      "size": [
+        32,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        5,
+        2,
+        29,
+        29
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/kidnapper_basic_v1/carry/right_01_rear.png",
+      "delivery_commit": "a038dc062d75e77e6c0c1c1a23d8e65db0c13725",
+      "sha256": "063d2fb90ad379e7e797489021651101fc625d060d0c4b56dca045e39c77d4e0",
+      "size": [
+        32,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        4,
+        19,
+        27,
+        44
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/kidnapper_basic_v1/carry/right_02_front.png",
+      "delivery_commit": "a038dc062d75e77e6c0c1c1a23d8e65db0c13725",
+      "sha256": "3a83bf97456289f3e05c5492555e6005fcbc6bc12c4dc86060ad8ed2070c5ab6",
+      "size": [
+        32,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        4,
+        2,
+        29,
+        29
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/kidnapper_basic_v1/carry/right_02_rear.png",
+      "delivery_commit": "a038dc062d75e77e6c0c1c1a23d8e65db0c13725",
+      "sha256": "83c8bbdd305a705b46dab26fc466b3afbaa607c50fb4d1d11260824b217f5472",
+      "size": [
+        32,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        3,
+        19,
+        29,
+        44
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/kidnapper_basic_v1/idle/left_00.png",
+      "delivery_commit": "a038dc062d75e77e6c0c1c1a23d8e65db0c13725",
+      "sha256": "6f3a29624c748ce8402b11376353be9dbd5fd3aaa50aa609eb9d6b674c273c93",
+      "size": [
+        32,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        4,
+        2,
+        30,
+        44
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/kidnapper_basic_v1/idle/right_00.png",
+      "delivery_commit": "a038dc062d75e77e6c0c1c1a23d8e65db0c13725",
+      "sha256": "8fc95841353eb858704f74d27702322638be2e40a27cc0f2fe8134c4cf25f880",
+      "size": [
+        32,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        3,
+        2,
+        29,
+        44
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/kidnapper_basic_v1/review/basic-poses.png",
+      "delivery_commit": "a038dc062d75e77e6c0c1c1a23d8e65db0c13725",
+      "sha256": "60ae7da293a920806611d07cdfe250d6ff6953e7c03a65d23c1dba3bb579aff0",
+      "size": [
+        1060,
+        680
+      ],
+      "mode": "RGB",
+      "bbox": [
+        0,
+        0,
+        1060,
+        680
+      ],
+      "runtime_reference": false,
+      "hash_in_manifest": false
+    },
+    {
+      "path": "art_delivery/kidnapper_basic_v1/review/carry-left-right.png",
+      "delivery_commit": "a038dc062d75e77e6c0c1c1a23d8e65db0c13725",
+      "sha256": "24661bf46829fa7bcf914dad24ac025f29c9e22fe8166d8ed51b56579df200f4",
+      "size": [
+        900,
+        350
+      ],
+      "mode": "RGB",
+      "bbox": [
+        0,
+        0,
+        900,
+        350
+      ],
+      "runtime_reference": false,
+      "hash_in_manifest": false
+    },
+    {
+      "path": "art_delivery/kidnapper_basic_v1/walk/left_00.png",
+      "delivery_commit": "a038dc062d75e77e6c0c1c1a23d8e65db0c13725",
+      "sha256": "17058de23365c2b7867ebff218c814a106e6163ad608449e4fa0be89a5a6f9c7",
+      "size": [
+        32,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        4,
+        2,
+        29,
+        44
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/kidnapper_basic_v1/walk/left_01.png",
+      "delivery_commit": "a038dc062d75e77e6c0c1c1a23d8e65db0c13725",
+      "sha256": "eb5ea40a989fcde2e707567041665eec4868f75c49892fb45d66b5d600815cfa",
+      "size": [
+        32,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        4,
+        2,
+        25,
+        44
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/kidnapper_basic_v1/walk/left_02.png",
+      "delivery_commit": "a038dc062d75e77e6c0c1c1a23d8e65db0c13725",
+      "sha256": "4fbae0d05999090c08d9340a43309b779817c07d8e0da8ae5b8c368113bcebee",
+      "size": [
+        32,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        4,
+        2,
+        29,
+        44
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/kidnapper_basic_v1/walk/left_03.png",
+      "delivery_commit": "a038dc062d75e77e6c0c1c1a23d8e65db0c13725",
+      "sha256": "58553ed6ae186fc45409f4ced25b3b9fbc033035532a097396809421988bf1d1",
+      "size": [
+        32,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        4,
+        2,
+        24,
+        44
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/kidnapper_basic_v1/walk/right_00.png",
+      "delivery_commit": "a038dc062d75e77e6c0c1c1a23d8e65db0c13725",
+      "sha256": "c7fcea22be2dd750e0de2e92ee6ae0fd92d06ebe7e818fc2b1f9208cc79ffcc1",
+      "size": [
+        32,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        4,
+        2,
+        29,
+        44
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/kidnapper_basic_v1/walk/right_01.png",
+      "delivery_commit": "a038dc062d75e77e6c0c1c1a23d8e65db0c13725",
+      "sha256": "a4efcc69476443b57e9d7426c3ceb955f5eab30811fab1a80695086b121e8291",
+      "size": [
+        32,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        8,
+        2,
+        29,
+        44
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/kidnapper_basic_v1/walk/right_02.png",
+      "delivery_commit": "a038dc062d75e77e6c0c1c1a23d8e65db0c13725",
+      "sha256": "c75556a018855a4bd36bffbf8d80e6591e13b4ff49574c0f358a0066184dd3ff",
+      "size": [
+        32,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        4,
+        2,
+        29,
+        44
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/kidnapper_basic_v1/walk/right_03.png",
+      "delivery_commit": "a038dc062d75e77e6c0c1c1a23d8e65db0c13725",
+      "sha256": "bb9f398a0a72b6c7612116cc49be68b881fe1cb74972ec52de73f56bfaf2e791",
+      "size": [
+        32,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        9,
+        2,
+        29,
+        44
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/kidnapper_reactions_v1/discovery/left_00.png",
+      "delivery_commit": "d300d8ae905d5dcedf9d6e022807b51d9a3097d7",
+      "sha256": "e8eb6b5aa730316817bce095dde031ba926866e41e8b3de2fe84fc0092a5ba3f",
+      "size": [
+        32,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        4,
+        1,
+        28,
+        44
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/kidnapper_reactions_v1/discovery/left_01.png",
+      "delivery_commit": "d300d8ae905d5dcedf9d6e022807b51d9a3097d7",
+      "sha256": "1c7422c4f9e503201be4f0031e3cfd4a1a3c1deb9e9291b1720050ad9a09fdfe",
+      "size": [
+        32,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        4,
+        2,
+        28,
+        44
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/kidnapper_reactions_v1/discovery/right_00.png",
+      "delivery_commit": "d300d8ae905d5dcedf9d6e022807b51d9a3097d7",
+      "sha256": "16b848c1f8d6843085f8a1c32bd8b79f2bc3d090234fe288b75e97a1fa1c5a27",
+      "size": [
+        32,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        5,
+        1,
+        29,
+        44
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/kidnapper_reactions_v1/discovery/right_01.png",
+      "delivery_commit": "d300d8ae905d5dcedf9d6e022807b51d9a3097d7",
+      "sha256": "b52a967a2e92d66dcba8c25dcc242bd788a764bd3ebcb05341ee39085c8f4eff",
+      "size": [
+        32,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        5,
+        2,
+        29,
+        44
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/kidnapper_reactions_v1/hit/left_00.png",
+      "delivery_commit": "d300d8ae905d5dcedf9d6e022807b51d9a3097d7",
+      "sha256": "a0f7731decedaf65e61ebb5cd044e40f512f1ed68a2d4e6d4bcad372278c8319",
+      "size": [
+        32,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        6,
+        2,
+        32,
+        44
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/kidnapper_reactions_v1/hit/left_01.png",
+      "delivery_commit": "d300d8ae905d5dcedf9d6e022807b51d9a3097d7",
+      "sha256": "b3dd79d3d670627ffbfb5d26ce28009e208816a251c98a3ccb2342ba0f2f1a3e",
+      "size": [
+        32,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        5,
+        2,
+        31,
+        44
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/kidnapper_reactions_v1/hit/right_00.png",
+      "delivery_commit": "d300d8ae905d5dcedf9d6e022807b51d9a3097d7",
+      "sha256": "17b5a43cea02b56ae622d5afbe5688cfbeaaad60193b89e88d0ff94478bbfb93",
+      "size": [
+        32,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        1,
+        2,
+        27,
+        44
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/kidnapper_reactions_v1/hit/right_01.png",
+      "delivery_commit": "d300d8ae905d5dcedf9d6e022807b51d9a3097d7",
+      "sha256": "cc3da29ba130d3eda385d71ff1694df57fcf1f5977f8b17d96085c931b2f8e43",
+      "size": [
+        32,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        2,
+        2,
+        28,
+        44
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/kidnapper_reactions_v1/retreat/left_00.png",
+      "delivery_commit": "d300d8ae905d5dcedf9d6e022807b51d9a3097d7",
+      "sha256": "9eef85fec308153dda03d8934021913ca7e3bf58177549b5109f8039cf3fc3be",
+      "size": [
+        32,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        4,
+        2,
+        29,
+        44
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/kidnapper_reactions_v1/retreat/left_01.png",
+      "delivery_commit": "d300d8ae905d5dcedf9d6e022807b51d9a3097d7",
+      "sha256": "a6dc27bae4bc35cc2b93ce80e3b17a0a6fb17f68f53beaf127d413da3ccc5ee3",
+      "size": [
+        32,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        9,
+        2,
+        29,
+        44
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/kidnapper_reactions_v1/retreat/left_02.png",
+      "delivery_commit": "d300d8ae905d5dcedf9d6e022807b51d9a3097d7",
+      "sha256": "44f64d12349d2e61f9d13412835a4ad6d8fdfd04e54385317ed00aaca8c6e502",
+      "size": [
+        32,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        4,
+        2,
+        29,
+        44
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/kidnapper_reactions_v1/retreat/left_03.png",
+      "delivery_commit": "d300d8ae905d5dcedf9d6e022807b51d9a3097d7",
+      "sha256": "51b452bb794efa3bc0142817a5160c83f2d6344252920f8df7a40a9884de3984",
+      "size": [
+        32,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        9,
+        2,
+        29,
+        44
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/kidnapper_reactions_v1/retreat/right_00.png",
+      "delivery_commit": "d300d8ae905d5dcedf9d6e022807b51d9a3097d7",
+      "sha256": "f763128fbdc224281b183c167c8db9e63b1696d37274c5542095287cb6b7ffd3",
+      "size": [
+        32,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        4,
+        2,
+        29,
+        44
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/kidnapper_reactions_v1/retreat/right_01.png",
+      "delivery_commit": "d300d8ae905d5dcedf9d6e022807b51d9a3097d7",
+      "sha256": "6bfdacc736e0338b0f8287fe2f089075f6ef3e7fdcbceb2df81181c2e383ced7",
+      "size": [
+        32,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        4,
+        2,
+        24,
+        44
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/kidnapper_reactions_v1/retreat/right_02.png",
+      "delivery_commit": "d300d8ae905d5dcedf9d6e022807b51d9a3097d7",
+      "sha256": "02988150fea06af59a1508b21aefa97328bf7ce36f7b02d0e60eb131608a0043",
+      "size": [
+        32,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        4,
+        2,
+        29,
+        44
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/kidnapper_reactions_v1/retreat/right_03.png",
+      "delivery_commit": "d300d8ae905d5dcedf9d6e022807b51d9a3097d7",
+      "sha256": "aa712f2c9d3e1d88596fe8fa3a6d82458d33dc2db6c999c7ad5fff14fe193562",
+      "size": [
+        32,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        4,
+        2,
+        24,
+        44
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/kidnapper_reactions_v1/review/reactions.png",
+      "delivery_commit": "d300d8ae905d5dcedf9d6e022807b51d9a3097d7",
+      "sha256": "39db1dd28557700f241136b296aa33f72d34061e7f68a42bbf785697ee0fd26a",
+      "size": [
+        980,
+        940
+      ],
+      "mode": "RGB",
+      "bbox": [
+        0,
+        0,
+        980,
+        940
+      ],
+      "runtime_reference": false,
+      "hash_in_manifest": false
+    },
+    {
+      "path": "art_delivery/kidnapper_reactions_v1/search/left_00.png",
+      "delivery_commit": "d300d8ae905d5dcedf9d6e022807b51d9a3097d7",
+      "sha256": "13e5627347b60d78b4acea9fa8c4f9fa539b325d6f2865fc1845767a835d50e5",
+      "size": [
+        32,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        4,
+        2,
+        30,
+        44
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/kidnapper_reactions_v1/search/left_01.png",
+      "delivery_commit": "d300d8ae905d5dcedf9d6e022807b51d9a3097d7",
+      "sha256": "af046f0ac13ce589527e362e4c7c011b294d1d34ef725ac6385d4e754b418d02",
+      "size": [
+        32,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        6,
+        2,
+        30,
+        44
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/kidnapper_reactions_v1/search/left_02.png",
+      "delivery_commit": "d300d8ae905d5dcedf9d6e022807b51d9a3097d7",
+      "sha256": "13e5627347b60d78b4acea9fa8c4f9fa539b325d6f2865fc1845767a835d50e5",
+      "size": [
+        32,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        4,
+        2,
+        30,
+        44
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/kidnapper_reactions_v1/search/right_00.png",
+      "delivery_commit": "d300d8ae905d5dcedf9d6e022807b51d9a3097d7",
+      "sha256": "21d6364dc02009fa0cc13d73d567d6d40ca99e7c3946fc7b927674e0d21e23d7",
+      "size": [
+        32,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        3,
+        2,
+        29,
+        44
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/kidnapper_reactions_v1/search/right_01.png",
+      "delivery_commit": "d300d8ae905d5dcedf9d6e022807b51d9a3097d7",
+      "sha256": "4852a6c170957fe12cebc7faa3661c698562ec6de967799bbb0686fdc7e47edf",
+      "size": [
+        32,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        3,
+        2,
+        27,
+        44
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/kidnapper_reactions_v1/search/right_02.png",
+      "delivery_commit": "d300d8ae905d5dcedf9d6e022807b51d9a3097d7",
+      "sha256": "21d6364dc02009fa0cc13d73d567d6d40ca99e7c3946fc7b927674e0d21e23d7",
+      "size": [
+        32,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        3,
+        2,
+        29,
+        44
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/effects_v1/attack_hit/00.png",
+      "delivery_commit": "e6371377565aa71a3b7979e6ee7edd57878048bb",
+      "sha256": "1476ddf2fcdb417e708b781300a0c3bbc6cbd449a8a57e590499dc26974072f7",
+      "size": [
+        32,
+        32
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        13,
+        12,
+        21,
+        20
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/effects_v1/attack_hit/01.png",
+      "delivery_commit": "e6371377565aa71a3b7979e6ee7edd57878048bb",
+      "sha256": "8f221bbbe6f80ea17da8fb0ffcf8dc4bf4c8f54e2949fd29ef53b5083f237fd8",
+      "size": [
+        32,
+        32
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        8,
+        9,
+        24,
+        24
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/effects_v1/attack_hit/02.png",
+      "delivery_commit": "e6371377565aa71a3b7979e6ee7edd57878048bb",
+      "sha256": "bcfc567af29615fa849e5d47743077ff4ceb15c4bf3314aea5bec8c1f4a6b6d0",
+      "size": [
+        32,
+        32
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        6,
+        7,
+        26,
+        25
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/effects_v1/attack_hit/03.png",
+      "delivery_commit": "e6371377565aa71a3b7979e6ee7edd57878048bb",
+      "sha256": "23be33493ab2944d91094f9040c3fe07b6e6c13443752f61f4285139e2955331",
+      "size": [
+        32,
+        32
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        8,
+        7,
+        28,
+        21
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/effects_v1/build_complete/00.png",
+      "delivery_commit": "e6371377565aa71a3b7979e6ee7edd57878048bb",
+      "sha256": "de525c16b9143683dd7212747e7cbd7eb88c9e0a1d6a5b5c83921bf91ae534fc",
+      "size": [
+        32,
+        32
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        12,
+        12,
+        20,
+        20
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/effects_v1/build_complete/01.png",
+      "delivery_commit": "e6371377565aa71a3b7979e6ee7edd57878048bb",
+      "sha256": "cc043ed5d1d8661cb47af4de9d4f5394e7715a918d78407e1633fbbfb8e4ec2d",
+      "size": [
+        32,
+        32
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        9,
+        9,
+        23,
+        23
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/effects_v1/build_complete/02.png",
+      "delivery_commit": "e6371377565aa71a3b7979e6ee7edd57878048bb",
+      "sha256": "78d2dc567f711e987141a872ba4301a969bbe88b40eb68dc88e0302e76fe8e6e",
+      "size": [
+        32,
+        32
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        7,
+        7,
+        25,
+        24
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/effects_v1/build_complete/03.png",
+      "delivery_commit": "e6371377565aa71a3b7979e6ee7edd57878048bb",
+      "sha256": "ea8251b3203c0069f1d8edf8907dd0d9ab49308f96033b762f015934575baffb",
+      "size": [
+        32,
+        32
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        7,
+        9,
+        22,
+        24
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/effects_v1/hurt/00.png",
+      "delivery_commit": "e6371377565aa71a3b7979e6ee7edd57878048bb",
+      "sha256": "ac8e855ba27f36cfffec354532b5aae61f987042ed1ab6e27d32e7f2ff45cce5",
+      "size": [
+        32,
+        32
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        13,
+        12,
+        20,
+        20
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/effects_v1/hurt/01.png",
+      "delivery_commit": "e6371377565aa71a3b7979e6ee7edd57878048bb",
+      "sha256": "d36ec78829a61fb2e36fca16cf775faf6a5aaa38cdd4d6a11bae29c983d3fadd",
+      "size": [
+        32,
+        32
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        10,
+        9,
+        23,
+        23
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/effects_v1/hurt/02.png",
+      "delivery_commit": "e6371377565aa71a3b7979e6ee7edd57878048bb",
+      "sha256": "5398cce3e3f3fef1a0ee77b222877e891c4823f262d4d3da3a0cf8f952e365b2",
+      "size": [
+        32,
+        32
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        8,
+        7,
+        25,
+        24
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/effects_v1/hurt/03.png",
+      "delivery_commit": "e6371377565aa71a3b7979e6ee7edd57878048bb",
+      "sha256": "73d57b4b8156912ae9f464833d018cf7fea18f34f9fff334c84b544a7d499256",
+      "size": [
+        32,
+        32
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        8,
+        10,
+        23,
+        24
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/effects_v1/item_collect/00.png",
+      "delivery_commit": "e6371377565aa71a3b7979e6ee7edd57878048bb",
+      "sha256": "ad7d6d650b90cef9397b1382dc1738a50719f1dac00043ed4fc6e7627222d0ed",
+      "size": [
+        32,
+        32
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        15,
+        14,
+        18,
+        18
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/effects_v1/item_collect/01.png",
+      "delivery_commit": "e6371377565aa71a3b7979e6ee7edd57878048bb",
+      "sha256": "e86628fe5ab5eb68f81266cbd34bf7cd262ebb4eb6155c1300941b57b38698ec",
+      "size": [
+        32,
+        32
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        10,
+        11,
+        22,
+        22
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/effects_v1/item_collect/02.png",
+      "delivery_commit": "e6371377565aa71a3b7979e6ee7edd57878048bb",
+      "sha256": "6951ed840ac1834a6db23d2c9889f14257d046a80a2ccd116dbfd466dd603058",
+      "size": [
+        32,
+        32
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        8,
+        9,
+        24,
+        23
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/effects_v1/item_collect/03.png",
+      "delivery_commit": "e6371377565aa71a3b7979e6ee7edd57878048bb",
+      "sha256": "b1a2e6e8fa70502dd093804fd4aa7e6e846599734da392e411c966c37da9fc54",
+      "size": [
+        32,
+        32
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        8,
+        10,
+        22,
+        18
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/effects_v1/lock_break/00.png",
+      "delivery_commit": "e6371377565aa71a3b7979e6ee7edd57878048bb",
+      "sha256": "a5dd2aaf53a75b21c2c43b7b32687b0733e2791b34b35bdb2ccbb1ecaa89c1db",
+      "size": [
+        32,
+        32
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        12,
+        12,
+        21,
+        21
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/effects_v1/lock_break/01.png",
+      "delivery_commit": "e6371377565aa71a3b7979e6ee7edd57878048bb",
+      "sha256": "690211214246689691e88c708f42975877053aaaf5846362e65317edf8437da2",
+      "size": [
+        32,
+        32
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        8,
+        8,
+        24,
+        24
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/effects_v1/lock_break/02.png",
+      "delivery_commit": "e6371377565aa71a3b7979e6ee7edd57878048bb",
+      "sha256": "5197f2472b0de3770b7feb3cc85240e1c7d611a7c854075409d6b198de667683",
+      "size": [
+        32,
+        32
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        6,
+        8,
+        26,
+        27
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/effects_v1/lock_break/03.png",
+      "delivery_commit": "e6371377565aa71a3b7979e6ee7edd57878048bb",
+      "sha256": "4b8af47df6c3bb1de6d09d85a957ff7321902bd549df2e373d049346374abe36",
+      "size": [
+        32,
+        32
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        5,
+        9,
+        28,
+        27
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/effects_v1/review/effect-frames.png",
+      "delivery_commit": "e6371377565aa71a3b7979e6ee7edd57878048bb",
+      "sha256": "00209182e0b99fbadcd97421336cca936e963335e911da6dc6dbbdc427e5eb04",
+      "size": [
+        1180,
+        940
+      ],
+      "mode": "RGB",
+      "bbox": [
+        0,
+        0,
+        1180,
+        940
+      ],
+      "runtime_reference": false,
+      "hash_in_manifest": false
+    },
+    {
+      "path": "art_delivery/effects_v1/review/farm-native.png",
+      "delivery_commit": "e6371377565aa71a3b7979e6ee7edd57878048bb",
+      "sha256": "947c8929591faecf2d5b549ce764f0d1f5e33c848ea58bab7f89ebb9c081318c",
+      "size": [
+        900,
+        320
+      ],
+      "mode": "RGB",
+      "bbox": [
+        0,
+        0,
+        900,
+        320
+      ],
+      "runtime_reference": false,
+      "hash_in_manifest": false
+    },
+    {
+      "path": "art_delivery/effects_v1/soil_dust/00.png",
+      "delivery_commit": "e6371377565aa71a3b7979e6ee7edd57878048bb",
+      "sha256": "3d4ad8a852b1e21b4b495d0fde07811b67bf68ea39c624984fa721604bcb9ba5",
+      "size": [
+        32,
+        32
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        11,
+        14,
+        21,
+        24
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/effects_v1/soil_dust/01.png",
+      "delivery_commit": "e6371377565aa71a3b7979e6ee7edd57878048bb",
+      "sha256": "bdd1c36b1e5e2af040b94928542364af80c3e83273b944bef9e11db349c31b6d",
+      "size": [
+        32,
+        32
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        7,
+        10,
+        26,
+        28
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/effects_v1/soil_dust/02.png",
+      "delivery_commit": "e6371377565aa71a3b7979e6ee7edd57878048bb",
+      "sha256": "e671c691ee5e3d4c789289ea1c73728e9b6c3c11a2cb7b544af681b2d3b092cb",
+      "size": [
+        32,
+        32
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        5,
+        8,
+        28,
+        29
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/effects_v1/soil_dust/03.png",
+      "delivery_commit": "e6371377565aa71a3b7979e6ee7edd57878048bb",
+      "sha256": "76212b5e7cf87c5774383eb0c9fec8a89ac6de8ce7183ee1c77c1f0f280344ed",
+      "size": [
+        32,
+        32
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        3,
+        12,
+        26,
+        29
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/effects_v1/sound_wave/00.png",
+      "delivery_commit": "e6371377565aa71a3b7979e6ee7edd57878048bb",
+      "sha256": "3322ba74761f1fc05dc05b93ec9ece714f8e5c51da3acc917e8d95eb85af6e15",
+      "size": [
+        32,
+        32
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        5,
+        11,
+        10,
+        20
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/effects_v1/sound_wave/01.png",
+      "delivery_commit": "e6371377565aa71a3b7979e6ee7edd57878048bb",
+      "sha256": "cf1fb7427de0c7341e24bc6efe6d9c9e4d68a0f6dcc7a5bdd9eb6cdf5541c5c2",
+      "size": [
+        32,
+        32
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        5,
+        8,
+        16,
+        23
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/effects_v1/sound_wave/02.png",
+      "delivery_commit": "e6371377565aa71a3b7979e6ee7edd57878048bb",
+      "sha256": "7f84537b05ca386e0b5b80a2bd8e9490b6c55511cb1919c5287b229086b347d7",
+      "size": [
+        32,
+        32
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        5,
+        5,
+        23,
+        27
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/effects_v1/sound_wave/03.png",
+      "delivery_commit": "e6371377565aa71a3b7979e6ee7edd57878048bb",
+      "sha256": "f50a6aad4144c615f02dee607bfc5a20df324dc249143bdbd8be4c018e5135da",
+      "size": [
+        32,
+        32
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        15,
+        5,
+        23,
+        27
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/effects_v1/sound_wave_left/00.png",
+      "delivery_commit": "e6371377565aa71a3b7979e6ee7edd57878048bb",
+      "sha256": "39b792debbbfc8843348e0d5e4f30ca708bc96ef1487c0cc863056ec697c93ab",
+      "size": [
+        32,
+        32
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        22,
+        11,
+        27,
+        20
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/effects_v1/sound_wave_left/01.png",
+      "delivery_commit": "e6371377565aa71a3b7979e6ee7edd57878048bb",
+      "sha256": "c425e0d7a1fcac21892ede8f28150b1529ad3a307037e61a7649f9906356fca5",
+      "size": [
+        32,
+        32
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        16,
+        8,
+        27,
+        23
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/effects_v1/sound_wave_left/02.png",
+      "delivery_commit": "e6371377565aa71a3b7979e6ee7edd57878048bb",
+      "sha256": "c8dc9f2c55e9077eec30b642049f1e44b5f45a0f336d205a661b57a4a3fb2db1",
+      "size": [
+        32,
+        32
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        9,
+        5,
+        27,
+        27
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/effects_v1/sound_wave_left/03.png",
+      "delivery_commit": "e6371377565aa71a3b7979e6ee7edd57878048bb",
+      "sha256": "b3fe2293121787716610141abe423209c1b6c8c84d8ea105eb9226e72e970256",
+      "size": [
+        32,
+        32
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        9,
+        5,
+        17,
+        27
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/effects_v1/stone_powder/00.png",
+      "delivery_commit": "e6371377565aa71a3b7979e6ee7edd57878048bb",
+      "sha256": "67601bd12976fbee416f74b43723664e9a31cc70f63160348a9c2557cc95a344",
+      "size": [
+        32,
+        32
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        11,
+        14,
+        21,
+        24
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/effects_v1/stone_powder/01.png",
+      "delivery_commit": "e6371377565aa71a3b7979e6ee7edd57878048bb",
+      "sha256": "f28dbcc35c6df5c2f81d11d39265f711dab8740d4adf928321247803d1810a45",
+      "size": [
+        32,
+        32
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        7,
+        10,
+        25,
+        28
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/effects_v1/stone_powder/02.png",
+      "delivery_commit": "e6371377565aa71a3b7979e6ee7edd57878048bb",
+      "sha256": "88e8e7b32cbb737ce86264f47d73b934425f6296976508d78e371ef939d250b1",
+      "size": [
+        32,
+        32
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        5,
+        10,
+        27,
+        31
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/effects_v1/stone_powder/03.png",
+      "delivery_commit": "e6371377565aa71a3b7979e6ee7edd57878048bb",
+      "sha256": "b95edebe8f3bfb300649e552b630ed0eed607e85d433e993b3da4c19c0da7f90",
+      "size": [
+        32,
+        32
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        3,
+        11,
+        26,
+        30
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/effects_v1/wood_chips/00.png",
+      "delivery_commit": "e6371377565aa71a3b7979e6ee7edd57878048bb",
+      "sha256": "27fa126bed889facf119571796ce0df6144fdf8fbe7c2141a6eda68439f15f1e",
+      "size": [
+        32,
+        32
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        11,
+        14,
+        21,
+        24
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/effects_v1/wood_chips/01.png",
+      "delivery_commit": "e6371377565aa71a3b7979e6ee7edd57878048bb",
+      "sha256": "b830d7ad8cee31a59422f93111bea3a25c4079bfb9d3145275e9a6cf6a968ac9",
+      "size": [
+        32,
+        32
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        7,
+        10,
+        26,
+        28
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/effects_v1/wood_chips/02.png",
+      "delivery_commit": "e6371377565aa71a3b7979e6ee7edd57878048bb",
+      "sha256": "8ab8ff27264a5459f879f516f2a40f40a00916c71f6675a6810249683d064a01",
+      "size": [
+        32,
+        32
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        5,
+        10,
+        28,
+        31
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/effects_v1/wood_chips/03.png",
+      "delivery_commit": "e6371377565aa71a3b7979e6ee7edd57878048bb",
+      "sha256": "651e9116aa361c8d99e40fdb95f49c237595c0ffac9f94eceb196a5db7e38907",
+      "size": [
+        32,
+        32
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        4,
+        13,
+        30,
+        30
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/cart_ui_detail_v1/cart.png",
+      "delivery_commit": "2cb05b6679bea777a02162a35d3693489f381c3c",
+      "sha256": "7541dd6310d0ca7b6b09b420f3759251b11da5c72de8cb477796b7487cae7cb7",
+      "size": [
+        768,
+        512
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        26,
+        33,
+        742,
+        496
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/cart_ui_detail_v1/review/alpha-and-zoom.png",
+      "delivery_commit": "2cb05b6679bea777a02162a35d3693489f381c3c",
+      "sha256": "9d7cb3badb210f49468ffa69e51cd610ac0a4937db64c6a36f06e59d8ecd52da",
+      "size": [
+        1040,
+        710
+      ],
+      "mode": "RGB",
+      "bbox": [
+        0,
+        0,
+        1040,
+        710
+      ],
+      "runtime_reference": false,
+      "hash_in_manifest": false
+    },
+    {
+      "path": "art_delivery/cart_ui_detail_v1/review/before-after.png",
+      "delivery_commit": "2cb05b6679bea777a02162a35d3693489f381c3c",
+      "sha256": "52ef57ae1c42552d880b2bb754f2ad3e2c48b31a23e095472b9d453bacf147d7",
+      "size": [
+        1348,
+        523
+      ],
+      "mode": "RGB",
+      "bbox": [
+        0,
+        0,
+        1348,
+        523
+      ],
+      "runtime_reference": false,
+      "hash_in_manifest": false
+    },
+    {
+      "path": "art_delivery/cart_ui_detail_v1/review/morning-size.png",
+      "delivery_commit": "2cb05b6679bea777a02162a35d3693489f381c3c",
+      "sha256": "e085811b28fd4a9dac3cc941020face60fa3d25492dde65e2683695771e24569",
+      "size": [
+        656,
+        437
+      ],
+      "mode": "RGB",
+      "bbox": [
+        0,
+        0,
+        656,
+        437
+      ],
+      "runtime_reference": false,
+      "hash_in_manifest": false
+    },
+    {
+      "path": "art_delivery/resource_icons_v1/hud24/gold.png",
+      "delivery_commit": "5848c4f8aedde4acfa33586f82c3397d1b6d58a0",
+      "sha256": "e0aff73d5f8ffe6ee2ad29dac819374f00cbacfa8422e45b2ca2daab766759b9",
+      "size": [
+        24,
+        24
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        2,
+        4,
+        22,
+        19
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/resource_icons_v1/hud24/soil.png",
+      "delivery_commit": "5848c4f8aedde4acfa33586f82c3397d1b6d58a0",
+      "sha256": "00004cd2e6ebcbab2c82819653368679772e7e889f84e84cfb8a55274f35cb30",
+      "size": [
+        24,
+        24
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        2,
+        5,
+        22,
+        18
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/resource_icons_v1/hud24/stone.png",
+      "delivery_commit": "5848c4f8aedde4acfa33586f82c3397d1b6d58a0",
+      "sha256": "70f3e655371499a3370612135e6edfb5992a2b3250a67460589f05ba12e24da7",
+      "size": [
+        24,
+        24
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        2,
+        3,
+        22,
+        21
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/resource_icons_v1/hud24/wood.png",
+      "delivery_commit": "5848c4f8aedde4acfa33586f82c3397d1b6d58a0",
+      "sha256": "6fb678b9c82dad4066cbbb46fad0ed434477a1b89b7061911f69e9ece3056966",
+      "size": [
+        24,
+        24
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        2,
+        3,
+        22,
+        21
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/resource_icons_v1/review/sizes-and-alpha.png",
+      "delivery_commit": "5848c4f8aedde4acfa33586f82c3397d1b6d58a0",
+      "sha256": "6c2afa40cb3a86e9a5793f21d9f022b8c5a80e02f0cd8d18d095723a5a3bde49",
+      "size": [
+        960,
+        700
+      ],
+      "mode": "RGB",
+      "bbox": [
+        0,
+        0,
+        960,
+        700
+      ],
+      "runtime_reference": false,
+      "hash_in_manifest": false
+    },
+    {
+      "path": "art_delivery/resource_icons_v1/ui48/gold.png",
+      "delivery_commit": "5848c4f8aedde4acfa33586f82c3397d1b6d58a0",
+      "sha256": "6619a898ebf6162f2c3c0a399947767fa4b498a8e8f0d55780939856556f2a1b",
+      "size": [
+        48,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        4,
+        8,
+        44,
+        39
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/resource_icons_v1/ui48/soil.png",
+      "delivery_commit": "5848c4f8aedde4acfa33586f82c3397d1b6d58a0",
+      "sha256": "7934b2510a6da7eb1d538fe8a0c0faf503723dda0109f09524ef0678d84d89e4",
+      "size": [
+        48,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        4,
+        11,
+        44,
+        36
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/resource_icons_v1/ui48/stone.png",
+      "delivery_commit": "5848c4f8aedde4acfa33586f82c3397d1b6d58a0",
+      "sha256": "486ed04ce7940695be86f45be655daeb4317fce4f9f8521f069e4abb458f2320",
+      "size": [
+        48,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        4,
+        6,
+        44,
+        41
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/resource_icons_v1/ui48/wood.png",
+      "delivery_commit": "5848c4f8aedde4acfa33586f82c3397d1b6d58a0",
+      "sha256": "74bfb40680e41b7f192d62d170b0d80137e9e3d8386532aece78d3227b1b1f6f",
+      "size": [
+        48,
+        48
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        4,
+        6,
+        44,
+        42
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/resource_icons_v1/ui96/gold.png",
+      "delivery_commit": "5848c4f8aedde4acfa33586f82c3397d1b6d58a0",
+      "sha256": "4fc2ff06ecc5ce271e79cae3230694057141c76f6e1e028a8baac41d6b0ee558",
+      "size": [
+        96,
+        96
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        8,
+        17,
+        88,
+        78
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/resource_icons_v1/ui96/soil.png",
+      "delivery_commit": "5848c4f8aedde4acfa33586f82c3397d1b6d58a0",
+      "sha256": "99be092acea945d87db374bee33aeba9e280b640f2cb71dfeba30be5a39c54cf",
+      "size": [
+        96,
+        96
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        8,
+        23,
+        88,
+        73
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/resource_icons_v1/ui96/stone.png",
+      "delivery_commit": "5848c4f8aedde4acfa33586f82c3397d1b6d58a0",
+      "sha256": "c6e6b5b003189fb083df7dc47b41758e0899e1d529a29f3cb586e22247f85954",
+      "size": [
+        96,
+        96
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        8,
+        12,
+        88,
+        83
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
+    {
+      "path": "art_delivery/resource_icons_v1/ui96/wood.png",
+      "delivery_commit": "5848c4f8aedde4acfa33586f82c3397d1b6d58a0",
+      "sha256": "c127a2137b1dab472dce9a621266ce7700826b1afb16b4beff04ef556d8bd11c",
+      "size": [
+        96,
+        96
+      ],
+      "mode": "RGBA",
+      "bbox": [
+        8,
+        12,
+        88,
+        84
+      ],
+      "runtime_reference": true,
+      "hash_in_manifest": true
+    },
     {
       "path": "art_delivery/earth_stone_buildings_v1/review/materials-and-seams.png",
       "delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
@@ -5986,7 +8007,7 @@
         744,
         496
       ],
-      "runtime_reference": true,
+      "runtime_reference": false,
       "hash_in_manifest": true
     },
     {
@@ -6079,11 +8100,5 @@
       "runtime_reference": false,
       "hash_in_manifest": false
     }
-  ],
-  "verification": {
-    "implementation_commit": "e13e16ed9477c92e4057d10b70d7025b2288908b",
-    "manifest_hashes": "All 285 referenced PNGs match",
-    "render_evidence": "media-index.json",
-    "scope": "All connection masks and representative actors/UI states rendered; not every action frame manually inspected."
-  }
+  ]
 }

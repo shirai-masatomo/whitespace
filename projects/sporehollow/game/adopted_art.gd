@@ -33,7 +33,7 @@ const CLIPS = {
 	"cat/stretch/left": {"frames":[preload("res://art_delivery/ranch_assets_v1/cat/stretch_left_00.png"),preload("res://art_delivery/ranch_assets_v1/cat/stretch_left_01.png")],"anchor":Vector2(24,36),"duration":0.26,"loop":false},
 }
 const BOARD_CART = preload("res://art_delivery/merchant_board_v1/cart_idle_00.png")
-const CART = preload("res://art_delivery/merchant_cart_v2/cart/idle_front_00.png")
+const CART = preload("res://art_delivery/cart_ui_detail_v1/cart.png")
 const CLOSED = preload("res://art_delivery/ranch_assets_v1/book/closed_00.png")
 const SCROLL = preload("res://art_delivery/ranch_assets_v1/scroll/idle_none_00.png")
 

@@ -15,3 +15,5 @@
 生成物はそのままテクスチャとして導入し、コード側で表示サイズとページの頂点/UVを指定する。柴犬は新たに生成し直さず、指定された原画を採用。
 
 現在はart_delivery/characters_motion_v1、ranch_assets_v1、merchant_cart_v2、merchant_board_v1を使用。出典・原画所在は各HANDOFF/manifest、実際の参照とSHA256はART_SPECとreview/current/asset-usage.json。旧原画は参照用に保全しexportから除外。
+
+追加：cart_ui_detail_v1 / resource_icons_v1 / kidnapper_basic_v1 / kidnapper_reactions_v1 / effects_v1。内蔵生成原画を素材担当が加工した正式納品PNGを無改変で使用。出典説明はart-production各SOURCES、原画と再制作スクリプトは[素材コミット5848c4f8](https://github.com/shirai-masatomo/whitespace/tree/5848c4f8aedde4acfa33586f82c3397d1b6d58a0/projects/sporehollow/art-production)へ保管。外部素材パックや追加ライブラリなし。

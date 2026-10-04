@@ -9,6 +9,9 @@ const GROUP_TOOLS = [["wall", "wood_wall", "stone_wall", "soil_tile", "wood_tile
 const BoardArt = preload("res://game/board_art.gd")
 const BuildingArt = preload("res://game/building_art.gd")
 const Art = preload("res://game/adopted_art.gd")
+const Delivered = preload("res://game/delivered_art.gd")
+var enemy_art: Dictionary = {}
+var work_dust_at = -1.0
 var actor_art: Dictionary = {}
 const UI = preload("res://game/ui_style.gd")
 const MARKET_CATEGORIES = {"animals": ["動物", "animals", "牧場の仲間"], "materials": ["資材", "wood", "土・木・石"], "facilities": ["施設", "hammer", "牧場づくり"], "items": ["小物と恵み", "basket", "卵・羽・道具"]}
@@ -545,6 +548,8 @@ func reset_view():
 	seen_combat = 0
 	seen_skills = 0
 	hit_effects.clear()
+	enemy_art.clear()
+	work_dust_at = -1.0
 	seen_actions = 0
 	seen_jobs = 0
 	queue_signature = ""
@@ -1119,10 +1124,16 @@ func _process(delta):
 		elif hit.source in ["keeper", "keeper_hit"]:
 			hit_effects.append({"source": "keeper" if hit.source == "keeper" else "e%d" % hit.id, "target": "e%d" % hit.target if hit.source == "keeper" else "keeper", "at": clock})
 			play_alert("attack")
-		elif hit.source == "object":
+		elif hit.source in ["object","lock"]:
 			for cell in world.structures:
-				if world.structures[cell].id == hit.target: puff(center(cell), "hit")
+				if world.structures[cell].id == hit.target:
+					puff(center(cell), "lock_break" if hit.source=="lock" and world.structures[cell].get("lock_hp",0)<=0 else "hit")
 			play_alert("object")
+		if hit.source in ["enemy","keeper_hit","object","lock"]: enemy_reaction(hit.id,"attack")
+		elif hit.source in ["animal","keeper"]: enemy_reaction(hit.target,"hit")
+		if hit.source in ["animal","enemy","keeper","keeper_hit"]:
+			var target=hit_effects[-1].target
+			puff(center(view_positions.get(target,Vector2.ZERO)),"hurt" if hit.source in ["enemy","keeper_hit"] else "attack_hit")
 	hit_effects = hit_effects.filter(func(hit): return clock - hit.at < 0.3)
 	while seen_milestones < world.milestones.size():
 		var event = world.milestones[seen_milestones]
@@ -1130,6 +1141,7 @@ func _process(delta):
 		var names = {"whistle": "", "auto_start": "敵の襲来に備えよ", "invasion": "！ 侵入者接近", "keeper_down": "倒れた！ 仲間に助けてもらおう", "keeper_recovered": "目が覚めた。少し休もう", "restrained": "牧場主が拘束された！", "carried": "牧場主が連れ去られている！", "rescue": "牧場主を救出した！", "animal_danger": "動物のHPが危険！", "blueprint": event.get("text","設計図を手に入れた。"), "blueprint_dropped": "作り方のメモが落ちた", "early_clear": "今夜の襲撃を退けた", "dawn": "夜明け"}
 		if event.kind == "order_notice": notice(event.text); continue
 		if event.kind == "whistle":
+			sound_wave(actor_pixel("keeper",world.keeper.pos),int(world.keeper.get("facing",1)))
 			audio.cue("whistle"); continue
 		if event.kind == "sleep_warning": notice("もう限界、少し休もう" if event.value >= 100 else ("かなり眠そうだ" if event.value >= 80 else "眠くなってきた"))
 		if event.kind == "early_clear":
@@ -1146,8 +1158,14 @@ func _process(delta):
 			alert_until_tick = event.tick + (16 if event.kind in ["carried", "restrained"] else 10)
 			play_alert("rescue" if event.kind in ["blueprint", "keeper_recovered"] else ("restrained" if event.kind == "keeper_down" else event.kind))
 	while seen_skills < world.skill_log.size():
+		var skill=world.skill_log[seen_skills]
+		if skill.skill=="bark":
+			var id=int(skill.actor.trim_prefix("shiba_"))
+			for a in world.animals:
+				if a.id==id:sound_wave(actor_pixel("a%d"%id,a.pos),int(a.get("facing",1)))
 		play_alert("bark" if world.skill_log[seen_skills].skill == "bark" else "collect")
 		seen_skills += 1
+	update_enemy_art()
 	queue_redraw()
 	hud.queue_redraw()
 	overlay.queue_redraw()
@@ -1209,8 +1227,13 @@ func play_alert(kind: String):
 	audio.cue(kind)
 
 func puff(p: Vector2, kind: String):
-	dust.append({"pos": p, "at": visual_time, "kind": kind})
+	var action={"hit":"attack_hit","build":"build_complete","collect":"item_collect","repair":"wood_chips","remove":"soil_dust","break":"stone_powder","gate":"wood_chips"}.get(kind,kind)
+	if not Delivered.CLIPS.has("fx/"+action):return
+	dust.append({"pos": p, "at": visual_time, "kind": action})
 	if dust.size() > 32: dust.pop_front()
+
+func sound_wave(p: Vector2, facing: int):
+	puff(p+Vector2(facing*10,-8),"sound_wave_left" if facing<0 else "sound_wave")
 
 func update_facility_effects(delta: float):
 	while seen_jobs < world.job_log.size():
@@ -1222,18 +1245,25 @@ func update_facility_effects(delta: float):
 		if event.kind in ["repair", "remove", "collect", "gate"]:
 			play_alert(event.kind)
 			puff(center(Vector2i(event.pos[0], event.pos[1])), event.kind)
+		elif event.kind in Farm.BUILD:
+			puff(center(Vector2i(event.pos[0],event.pos[1])),"build")
 		if event.kind == "guide": react(event.animal_id, "wag", 1.5)
 		refresh()
 	for cell in world.structures:
 		var b = world.structures[cell]
 		var old = structure_views.get(b.id, "")
 		if old != "" and old != b.status and b.status in ["ready", "destroyed"]:
-			puff(center(cell), "build" if b.status == "ready" else "break")
+			if b.status=="destroyed":puff(center(cell),"break")
 			play_alert("build" if b.status == "ready" else "object")
 		structure_views[b.id] = b.status
 		if b.kind in Farm.Buildings.DOORS:
 			gate_views[b.id] = move_toward(gate_views.get(b.id, 1.0 if b.open else 0.0), 1.0 if b.open else 0.0, delta * 5) if not world.paused else gate_views.get(b.id, 0.0)
-	dust = dust.filter(func(f): return visual_time - f.at < 0.55)
+	if not world.paused and not world.jobs_held and not world.jobs.is_empty() and world.jobs[0].state=="working" and visual_time-work_dust_at>=0.5:
+		var job=world.jobs[0]
+		if job.kind in Farm.BUILD or job.kind in ["repair","repair_floor","remove","remove_floor"]:
+			puff(center(job.pos),{"wood":"wood_chips","stone":"stone_powder"}.get(job.get("resource","soil"),"soil_dust"))
+			work_dust_at=visual_time
+	dust = dust.filter(func(f): return visual_time - f.at < Delivered.duration("fx/"+f.kind))
 
 func export_record():
 	DirAccess.make_dir_recursive_absolute("user://observations")
@@ -1315,7 +1345,7 @@ func _draw():
 		if a.placed: actors.append({"y":actor_pixel("a%d"%a.id,a.pos).y,"x":a.pos.x,"kind":"animal","data":a})
 	for e in world.enemies:
 		if not e.done: actors.append({"y":actor_pixel("e%d"%e.id,e.pos).y,"x":e.pos.x,"kind":"enemy","data":e})
-	if world.keeper.placed: actors.append({"y":keeper_pixel().y,"x":world.keeper.pos.x,"kind":"keeper"})
+	if world.keeper.placed and world.keeper.carrier<0: actors.append({"y":keeper_pixel().y,"x":world.keeper.pos.x,"kind":"keeper"})
 	actors.sort_custom(func(a,b): return a.y<b.y if a.y!=b.y else (a.x<b.x if a.x!=b.x else a.kind<b.kind))
 	for actor in actors:
 		match actor.kind:
@@ -1324,17 +1354,8 @@ func _draw():
 			"animal": draw_animal_actor(actor.data)
 			"enemy": draw_enemy_actor(actor.data)
 			"keeper": draw_keeper_actor()
-	for hit in hit_effects:
-		var p = center(view_positions.get(hit.target, Vector2.ZERO))
-		var fade = 1.0 - (clock - hit.at) / 0.3
-		draw_arc(p, 17, -0.8, 1.1, 8, Color(1, 0.85, 0.45, fade), 3)
 	for f in dust:
-		var age = (visual_time - f.at) / 0.55
-		for i in range(6):
-			var q = f.pos + Vector2(cos(i * 2.4) * age * 22, -sin(age * PI) * (8 + i * 2))
-			var tint = Color("b8a47b") if f.kind != "collect" else Color("b5cd83")
-			tint.a = (1 - age) * 0.7
-			draw_rect(Rect2(q, Vector2(3, 3) if f.kind in ["break", "remove"] else Vector2(5, 3)), tint)
+		Delivered.draw_clip(self,"fx/"+f.kind,f.pos,visual_time-f.at)
 	draw_work_plans()
 	for cell in selected_resources: draw_rect(Rect2(center(cell)-Vector2(20,20),Vector2(40,40)),Color("ffe2a3"),false,2)
 	if dragging:
@@ -1928,6 +1949,11 @@ func restart_morning():
 	refresh()
 
 func draw_card_icon(c: CanvasItem, kind: String, p: Vector2, scale_value: float):
+	if Delivered.RESOURCES.has(kind) or kind=="sell":
+		# Delivered tiers have their own pixel density, not the old diagram scale.
+		var size=96.0 if scale_value>=2 else (48.0 if scale_value>=1 else 24.0)
+		Delivered.resource(c,"gold" if kind=="sell" else kind,p,size)
+		return
 	c.draw_set_transform(p, 0, Vector2.ONE * scale_value)
 	if kind=="shiba":
 		UI.shiba(c,Vector2(0,20),1)
@@ -1965,8 +1991,6 @@ func draw_card_icon(c: CanvasItem, kind: String, p: Vector2, scale_value: float)
 		for x in [-10,21]: c.draw_circle(Vector2(x,24), 5, UI.WOOD)
 	elif kind == "spark":
 		c.draw_colored_polygon(PackedVector2Array([Vector2(0,-18), Vector2(6,-5), Vector2(18,0), Vector2(6,6), Vector2(0,18), Vector2(-6,6), Vector2(-18,0), Vector2(-6,-5)]), UI.GOLD)
-	elif kind == "sell" or kind == "gold":
-		for q in [Vector2(-12,6), Vector2(12,6), Vector2(0,-10)]: BoardArt.draw_resource(c, q, "gold")
 	elif kind in ["egg", "feather"]:
 		if kind == "egg": c.draw_circle(Vector2.ZERO, 14, Color("f6e6b6"))
 		else: c.draw_line(Vector2(-10,12), Vector2(12,-20), Color("f2dfbc"), 9)
@@ -2093,8 +2117,14 @@ func draw_keeper_card():
 
 func keeper_pixel() -> Vector2:
 	if world.keeper.carrier >= 0:
-		return center(view_positions.get("e%d" % world.keeper.carrier, Vector2(world.keeper.pos))) + Vector2(34,-36)
+		return carried_keeper_rect().get_center()
 	return actor_pixel("keeper", world.keeper.pos)
+
+func carried_keeper_rect() -> Rect2:
+	var facing=enemy_art.get(world.keeper.carrier,{}).get("facing",1)
+	var foot=center(view_positions.get("e%d"%world.keeper.carrier,Vector2(world.keeper.pos)))+Vector2(0,14)
+	var support=foot-Vector2(16,44)+Vector2(20 if facing<0 else 12,16)
+	return Rect2(support+Vector2(-22 if facing<0 else -26,-26),Vector2(48,32))
 
 func rest_button_text() -> String:
 	if not world.rest_skip.is_empty(): return "時間送りを中断"
@@ -2114,6 +2144,7 @@ func debug_action(action: String):
 	refresh()
 
 func keeper_hit_rect() -> Rect2:
+	if world.keeper.carrier>=0:return carried_keeper_rect().grow(3)
 	var p=keeper_pixel()
 	if Farm.Life.presentation(world) in ["unconscious","carried"]: return Rect2(p+Vector2(-25,-12),Vector2(50,34))
 	var pose=actor_art.get("keeper",{})
@@ -2128,20 +2159,48 @@ func animal_hit_rect(a: Dictionary) -> Rect2:
 		return Art.bounds(a.species,pose.get("action","idle"),int(a.get("facing",1)),p+Vector2(0,14),visual_time-pose.get("at",visual_time)).grow(3)
 	return Rect2(p+Vector2(-17,-18),Vector2(34,37))
 
+func enemy_reaction(id: int, action: String):
+	if not enemy_art.has(id):enemy_art[id]={"action":"idle","facing":1,"at":visual_time}
+	enemy_art[id].reaction=action
+	enemy_art[id].reaction_at=visual_time
+	if enemy_art[id].action==action:enemy_art[id].at=visual_time
+
+func update_enemy_art():
+	for e in world.enemies:
+		var previous=enemy_art.get(e.id,{"action":"idle","facing":1,"at":visual_time,"cell":e.pos,"sight":0,"searching":false})
+		var dx=e.pos.x-previous.get("cell",e.pos).x
+		if dx!=0:previous.facing=1 if dx>0 else -1
+		elif e.can_see_keeper and world.keeper.carrier!=e.id and not e.flee and world.keeper.pos.x!=e.pos.x:previous.facing=1 if world.keeper.pos.x>e.pos.x else -1
+		previous.cell=e.pos
+		var walking=Vector2(e.pos).distance_to(view_positions.get("e%d"%e.id,Vector2(e.pos)))>0.025
+		previous.walking=walking
+		var searching=not walking and e.carry=="" and not e.flee and not e.can_see_keeper
+		if e.sight_reaction_until>previous.get("sight",0) and e.sight_reaction=="!" and not previous.has("reaction"):
+			previous.reaction="discovery";previous.reaction_at=visual_time
+		elif searching and not previous.get("searching",false) and not previous.has("reaction"):
+			previous.reaction="search";previous.reaction_at=visual_time
+		previous.sight=e.sight_reaction_until
+		previous.searching=searching
+		var action="walk" if walking else "idle"
+		if previous.has("reaction"):
+			if visual_time-previous.reaction_at<Delivered.duration("enemy/"+previous.reaction+"_right"):action=previous.reaction
+			else:previous.erase("reaction")
+		if e.flee:action="retreat" if walking else "idle"
+		if e.carry=="keeper":action="carry_walk" if walking else "carry_idle"
+		if action!=previous.action:
+			previous.action=action
+			previous.at=previous.reaction_at if action==previous.get("reaction","") else visual_time
+		enemy_art[e.id]=previous
+
 func draw_enemy_actor(e: Dictionary):
 	if e.done or not world.working(): return
 	var p = actor_pixel("e%d" % e.id, e.pos)
-	var walking = Vector2(e.pos).distance_to(view_positions.get("e%d" % e.id, Vector2(e.pos))) > 0.025
-	var stride = sin(visual_time * 16 + e.id) * (3 if walking else 0.5)
-	draw_line(p + Vector2(-5, 14), p + Vector2(-6 + stride, 25), Color("42424c"), 5)
-	draw_line(p + Vector2(5, 14), p + Vector2(6 - stride, 25), Color("42424c"), 5)
-	p.y += absf(stride) * -0.4
-	rect(p + Vector2(-10, -5), Vector2(21, 23), "87768e" if not e.flee else "98947f")
-	draw_circle(p + Vector2(0, -10), 10, Color("d2b396"))
-	rect(p + Vector2(-12, -18), Vector2(24, 8), "454453")
-	rect(p + Vector2(-9, -11), Vector2(18, 5), "474954")
-	rect(p + Vector2(-6, -10), Vector2(3, 2), "fff3ce")
-	rect(p + Vector2(4, -10), Vector2(3, 2), "fff3ce")
+	var pose=enemy_art.get(e.id,{"action":"idle","facing":1,"at":visual_time})
+	var foot=p+Vector2(0,14)
+	if e.carry=="keeper":
+		Delivered.carry(self,"carry_walk" if pose.get("walking",false) else "carry_idle",pose.facing,foot,visual_time-pose.at)
+	else:
+		Delivered.draw_clip(self,"enemy/"+pose.action+("_left" if pose.facing<0 else "_right"),foot,visual_time-pose.at)
 	if e.hp < e.max_hp:
 		draw_rect(Rect2(p + Vector2(-18, -48), Vector2(36, 4)), Color("3e4534"))
 		draw_rect(Rect2(p + Vector2(-18, -48), Vector2(36.0 * e.hp / e.max_hp, 4)), Color("e3aa88"))
@@ -2166,14 +2225,8 @@ func draw_enemy_actor(e: Dictionary):
 func draw_keeper_actor():
 	var p = actor_pixel("keeper", world.keeper.pos)
 	var walking = Farm.Life.able(world) and Vector2(world.keeper.pos).distance_to(view_positions.get("keeper",Vector2(world.keeper.pos)))>0.025
-	if world.keeper.carrier >= 0:
-		var carrier_pos = view_positions.get("e%d" % world.keeper.carrier, Vector2(world.keeper.pos))
-		p = center(carrier_pos) + Vector2(34, -36)
-		draw_line(center(carrier_pos) + Vector2(8, 0), p + Vector2(0, 14), Color("d2b396"), 7)
-		draw_line(p + Vector2(-11, 11), p + Vector2(12, 11), Color("e7c794"), 4)
-		draw_set_transform(p, -PI * 0.5)
-		p = Vector2.ZERO
-	elif Farm.Life.presentation(world) == "unconscious":
+	if world.keeper.carrier>=0:return # Composited once between the carrier rear/front layers.
+	if Farm.Life.presentation(world) == "unconscious":
 		draw_set_transform(p + Vector2(0, 12), -PI * 0.5)
 		p = Vector2.ZERO
 	elif Farm.Life.presentation(world) in ["tired","exhausted"]:

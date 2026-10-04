@@ -47,6 +47,7 @@ static func selected(button: Button, active: bool):
 	button.add_theme_stylebox_override("normal", surface(Color("c5d1a2") if active else PAPER, MOSS if active else WOOD))
 
 static func icon(kind: String) -> Texture2D:
+	if kind=="coin":return preload("res://game/delivered_art.gd").RESOURCES.gold[24]
 	if textures.has(kind): return textures[kind]
 	var patterns = {
 		"book_closed": ["0111110", "1100011", "1101011", "1101011", "1100011", "1111111", "0111110"],
