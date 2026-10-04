@@ -1,91 +1,199 @@
 {
-  "implementation_commit": "f46029e85a2219735ee1e973d30ccc85a34129d0",
-  "base_commit": "491be96ca7992e6b0bb9d8c05314baec32e2e562",
-  "build_stamp": {
-    "commit": "f46029e",
-    "dirty": false
-  },
-  "verification": {
-    "method": "headless; game-local Input.parse_input_event only; no OS input or GUI capture",
-    "suites": {
-      "revisions": 62,
-      "residents": 76,
-      "world": 56,
-      "jobs": 95,
-      "keeper": 64,
-      "planning": 43,
-      "rest_until": 24,
-      "input": 22
-    },
-    "checks": 442,
+  "scope": "floor input priority and approved static character art",
+  "implementation_commit": "d9f4edf8c898f2a5d8f6ea908831e7f34261fdf6",
+  "runtime_commit": "62514753bce2e67bdc2ae7c9a11eb799a94d16d4",
+  "asset_delivery_commit": "f3e4ae82b68c342b928dfb5dfcebb451353f9b8d",
+  "debug_fixture": true,
+  "normal_human_play": false,
+  "input_method": "Game-local InputEvent in headless and isolated GPU; no OS input",
+  "headless": {
+    "checks": 460,
     "failures": 0,
-    "ai_evaluation_runs": 192,
-    "full_regression_run": "20261004-183806-118",
-    "affected_recheck_runs": [
-      "20261004-184332-438",
-      "20261004-184453-461"
-    ],
-    "export_run": "20261004-184536-308",
-    "export_exit": 0,
-    "export_smoke_exit": 0,
-    "gui_real_input_verified": false,
-    "visual_verified": false,
-    "past_focus_incident_identified": false,
-    "dedicated_data_dir_observed": "artifacts/validation/20261004-184453-461/user-data/Godot/app_userdata/ホイッスル牧場",
-    "launch_audit": "validation-launches.jsonl"
+    "input_checks": 40,
+    "ai_evaluation_trials": 192,
+    "source_dir": "projects\\sporehollow\\artifacts\\validation\\20261004-200358-761"
   },
-  "observations": {
-    "auto_rest": [
-      {
-        "event": "rest_started",
-        "tick": 20
+  "gpu": {
+    "checks": 27,
+    "failures": 0,
+    "captures": {
+      "awake": {
+        "dog_facing": 1,
+        "keeper_facing": 1,
+        "keeper_pos": [
+          10,
+          8
+        ],
+        "paused": true,
+        "rest": "awake",
+        "selection": "{ \"kind\": \"keeper\" }",
+        "speed": 1,
+        "tick": 22,
+        "zoom": 1.5
       },
-      {
-        "event": "rest_recovery_started",
-        "indoor": false,
-        "tick": 40
+      "characters": {
+        "dog_facing": 1,
+        "keeper_facing": 1,
+        "keeper_pos": [
+          10,
+          8
+        ],
+        "paused": true,
+        "rest": "awake",
+        "selection": "{  }",
+        "speed": 1,
+        "tick": 0,
+        "zoom": 1.5
+      },
+      "dog_left_stop": {
+        "dog_facing": -1,
+        "keeper_facing": -1,
+        "keeper_pos": [
+          12,
+          9
+        ],
+        "paused": true,
+        "rest": "awake",
+        "selection": "{ \"kind\": \"animal\", \"id\": 1 }",
+        "speed": 2,
+        "tick": 64,
+        "zoom": 1.5
+      },
+      "floor_guide": {
+        "dog_facing": 1,
+        "keeper_facing": 1,
+        "keeper_pos": [
+          10,
+          8
+        ],
+        "paused": true,
+        "rest": "awake",
+        "selection": "{ \"kind\": \"animal\", \"id\": 1 }",
+        "speed": 1,
+        "tick": 0,
+        "zoom": 1.5
+      },
+      "floor_move": {
+        "dog_facing": 1,
+        "keeper_facing": 1,
+        "keeper_pos": [
+          10,
+          8
+        ],
+        "paused": true,
+        "rest": "awake",
+        "selection": "{ \"kind\": \"keeper\" }",
+        "speed": 1,
+        "tick": 0,
+        "zoom": 1.5
+      },
+      "floor_selected": {
+        "dog_facing": 1,
+        "keeper_facing": 1,
+        "keeper_pos": [
+          10,
+          8
+        ],
+        "paused": true,
+        "rest": "awake",
+        "selection": "{ \"kind\": \"floor\", \"pos\": (8, 7), \"target_id\": 1 }",
+        "speed": 1,
+        "tick": 0,
+        "zoom": 1.5
+      },
+      "keeper_selected": {
+        "dog_facing": 1,
+        "keeper_facing": 1,
+        "keeper_pos": [
+          10,
+          8
+        ],
+        "paused": true,
+        "rest": "awake",
+        "selection": "{ \"kind\": \"keeper\" }",
+        "speed": 1,
+        "tick": 0,
+        "zoom": 1.5
+      },
+      "left_stop": {
+        "dog_facing": 1,
+        "keeper_facing": -1,
+        "keeper_pos": [
+          10,
+          8
+        ],
+        "paused": false,
+        "rest": "awake",
+        "selection": "{ \"kind\": \"keeper\" }",
+        "speed": 1.0,
+        "tick": 17,
+        "zoom": 1.5
+      },
+      "native_scale": {
+        "dog_facing": 1,
+        "keeper_facing": 1,
+        "keeper_pos": [
+          10,
+          8
+        ],
+        "paused": true,
+        "rest": "awake",
+        "selection": "{  }",
+        "speed": 1,
+        "tick": 0,
+        "zoom": 1.0
+      },
+      "settling": {
+        "dog_facing": 1,
+        "keeper_facing": 1,
+        "keeper_pos": [
+          10,
+          8
+        ],
+        "paused": false,
+        "rest": "settling",
+        "selection": "{ \"kind\": \"keeper\" }",
+        "speed": 1,
+        "tick": 0,
+        "zoom": 1.5
+      },
+      "sleeping": {
+        "dog_facing": 1,
+        "keeper_facing": 1,
+        "keeper_pos": [
+          10,
+          8
+        ],
+        "paused": true,
+        "rest": "sleeping",
+        "selection": "{ \"kind\": \"keeper\" }",
+        "speed": 1,
+        "tick": 22,
+        "zoom": 1.5
       }
-    ],
-    "checks": 62,
-    "failures": 0,
-    "forced_hold": {
-      "goal": null,
-      "hold": "",
-      "jobs": 1
     },
-    "normal_rest_hp": [
-      14,
-      18,
-      22
-    ],
-    "rescue_exit": [
-      13,
-      6
-    ]
+    "source_dir": "projects\\sporehollow\\artifacts\\isolated\\20261004-200840-203",
+    "render_audit": "isolated-render.json"
   },
-  "fixtures": {
-    "floor": "Layer/ID/kind matching, existing upper structure prevents floor demolition, occupancy blocks; items retained; eight selected plus five existing jobs yields three queued/five unregistered",
-    "room_rescue": "Two separated rooms; selected exit (13,6) borders keeper room; another dog occupying candidate excludes it",
-    "three_day_recovery": "Fixed 20-second rest per day; debug-fixture HP10 ->14 ->18 ->22; not full natural-play balance evaluation",
-    "blueprints": "Legacy plan placed by fixture; first pickup consumes and records/unlocks, duplicate no second unlock; no new hut drops in normal play"
+  "export": {
+    "implementation_commit": "62514753bce2e67bdc2ae7c9a11eb799a94d16d4",
+    "dirty": false,
+    "path": "projects\\sporehollow\\artifacts\\validation\\20261004-200716-423\\WhistleRanch-test.exe",
+    "sha256": "6ae3584bc0a541396339cd5d9fb4e313488eeeed6646cc0a1ba74f757229f831",
+    "headless_smoke_exit": 0
   },
-  "material_status": {
-    "new_assets_generated": false,
-    "reference_assets_unchanged": true,
-    "closed_cover_animation": "waiting",
-    "page_content_turn": "not implemented; waiting assets",
-    "walking_rest_frames": "waiting",
-    "scroll_wall_floor_final_art": "waiting"
-  },
-  "existing_images": {
-    "commit": "823f876de93700cdfda1a2cd8377250e8c4ec4b9",
-    "status": "previous baseline only; NOT current verification"
-  },
-  "export_files": {
-    "WhistleRanch-test.exe": {
-      "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\artifacts\\validation\\20261004-184536-308\\WhistleRanch-test.exe",
-      "sha256": "4f9a2f5507765bb7c1ebb967a555ce3cb753e2fa8f36c38b81c40e9b10c37c2b",
-      "bytes": 118866416
-    }
-  }
+  "limits": [
+    "Static art only; walking bob and sleep rotation provisional",
+    "Additional 44 motion frames delivered and manifest checked but not integrated",
+    "No physical mouse/audio/long-term play verification"
+  ],
+  "visual_inspection": [
+    "native 42px keeper / 28px Shiba body heights, shared foot baseline",
+    "nearest edges and opaque pale fur, no white-key material",
+    "keeper and dog left-facing stops",
+    "keeper selection surrounds sprite",
+    "floor dismantle remains accessible",
+    "wake clears Zzz",
+    "guide cursor no longer overprints arrived animal"
+  ]
 }
