@@ -1,5 +1,9 @@
 # 操作・正式素材・図鑑・壁の統合レビュー
 
+## 現在の試遊版：追加素材取り込み
+
+**Play.cmdの通常版は e65f7d1 / 素材5848c4f8**。UI荷車、資源12PNG、誘拐者50PNG、小演出40PNGを実描画へ接続。[取り込み結果と残る差](materials/REVIEW.md)、[取り込み後ショップ29画面](materials/shop/index.html)、[敵・運搬・演出](materials/enemies-effects/index.html)、[ビルド情報](materials/build.json)。回帰668項目・AI192試行・隔離GPU・Windows export/出力EXE起動を確認。以下のe13e16e記録とshop/の29枚は取り込み前の比較証拠。
+
 ## ショップUI改善に向けた現状撮影（2026-10-04）
 
 購入/売却の各階層・全カテゴリ・初日の商品詳細・取引後を新規撮影した29枚は [ショップレビュー依頼](shop/HANDOFF.md) / [ギャラリー](shop/index.html) / [原寸一覧](shop/SCREENS.md)。abebfd3時点のゲーム内容を通常初期在庫で実操作。新納品のUI荷車・資源アイコンは未取り込みのため、差し替え前の現状として扱う。
@@ -10,9 +14,9 @@ LF改行の旧Play.cmdをcmd.exeで解析すると、存在するEXEの起動行
 
 公開済みEXE e13e16e（素材ebe446e5、上記と同一SHA256）そのものを、分離APPDATAと非対話desktopで150フレーム描画し、エラーなし/終了0/desktop所属一致を確認。[監査](audit/launcher/isolation.json) / [描画ログ](audit/launcher/render.log)。ゲームコード・EXE・通常セーブは変更なし。人間のダブルクリックは未実施。
 
-## 試遊する版
+## 前回のUI・建材検証（e13e16e）
 
-**[Play.cmd](../../Play.cmd)をダブルクリック。** 通常版は `build/WhistleRanch.exe`。ESCで **ビルドe13e16e / 素材ebe446e5** を確認する。検証フォルダのEXEを探す必要はない。自動起動はしていない。
+起動先は引き続き **[Play.cmd](../../Play.cmd)**。以下は前回ビルドe13e16e / 素材ebe446e5の検証記録。現在の通常版は上記e65f7d1へ更新済み。
 
 検証実装：`e13e16ed9477c92e4057d10b70d7025b2288908b`（clean）。機能変更ecd1488、整理24ddf18。後続レビュー記録コミットはゲームコードを変更しない。最新素材：`ebe446e5329aa7780b6ef5f13268ceb9433c9796`。納品内訳・実参照・SHA256は [使用一覧](asset-usage.json) と [ART_SPEC](../../ART_SPEC.md)。285 runtime PNGが納品manifestと一致。
 

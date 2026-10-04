@@ -1,0 +1,848 @@
+{
+  "events": [
+    {
+      "button": "open_market",
+      "gold": 40,
+      "position": [
+        487.0,
+        520.0
+      ]
+    },
+    {
+      "button": "shop_buy",
+      "gold": 40,
+      "position": [
+        544.0,
+        380.5
+      ]
+    },
+    {
+      "button": "category_animals",
+      "gold": 40,
+      "position": [
+        576.0,
+        365.5
+      ]
+    },
+    {
+      "button": "trade_hen_-1",
+      "gold": 40,
+      "position": [
+        678.5,
+        453.0
+      ]
+    },
+    {
+      "button": "shop_back",
+      "gold": 40,
+      "position": [
+        964.0,
+        138.0
+      ]
+    },
+    {
+      "button": "trade_cat_-1",
+      "gold": 40,
+      "position": [
+        858.5,
+        453.0
+      ]
+    },
+    {
+      "button": "shop_back",
+      "gold": 40,
+      "position": [
+        964.0,
+        138.0
+      ]
+    },
+    {
+      "button": "shop_back",
+      "gold": 40,
+      "position": [
+        964.0,
+        138.0
+      ]
+    },
+    {
+      "button": "category_materials",
+      "gold": 40,
+      "position": [
+        930.0,
+        365.5
+      ]
+    },
+    {
+      "button": "trade_soil_-1",
+      "gold": 40,
+      "position": [
+        588.5,
+        453.0
+      ]
+    },
+    {
+      "button": "shop_back",
+      "gold": 40,
+      "position": [
+        964.0,
+        138.0
+      ]
+    },
+    {
+      "button": "trade_wood_-1",
+      "gold": 40,
+      "position": [
+        768.5,
+        453.0
+      ]
+    },
+    {
+      "button": "shop_back",
+      "gold": 40,
+      "position": [
+        964.0,
+        138.0
+      ]
+    },
+    {
+      "button": "trade_stone_-1",
+      "gold": 40,
+      "position": [
+        948.5,
+        453.0
+      ]
+    },
+    {
+      "button": "shop_back",
+      "gold": 40,
+      "position": [
+        964.0,
+        138.0
+      ]
+    },
+    {
+      "button": "shop_back",
+      "gold": 40,
+      "position": [
+        964.0,
+        138.0
+      ]
+    },
+    {
+      "button": "category_facilities",
+      "gold": 40,
+      "position": [
+        576.0,
+        545.5
+      ]
+    },
+    {
+      "button": "shop_back",
+      "gold": 40,
+      "position": [
+        964.0,
+        138.0
+      ]
+    },
+    {
+      "button": "category_items",
+      "gold": 40,
+      "position": [
+        930.0,
+        545.5
+      ]
+    },
+    {
+      "button": "trade_whistle_-1",
+      "gold": 40,
+      "position": [
+        588.5,
+        453.0
+      ]
+    },
+    {
+      "button": "shop_back",
+      "gold": 40,
+      "position": [
+        964.0,
+        138.0
+      ]
+    },
+    {
+      "button": "trade_coffee_-1",
+      "gold": 40,
+      "position": [
+        768.5,
+        453.0
+      ]
+    },
+    {
+      "button": "shop_back",
+      "gold": 40,
+      "position": [
+        964.0,
+        138.0
+      ]
+    },
+    {
+      "button": "trade_energy_drink_-1",
+      "gold": 40,
+      "position": [
+        948.5,
+        453.0
+      ]
+    },
+    {
+      "button": "shop_back",
+      "gold": 40,
+      "position": [
+        964.0,
+        138.0
+      ]
+    },
+    {
+      "button": "shop_back",
+      "gold": 40,
+      "position": [
+        964.0,
+        138.0
+      ]
+    },
+    {
+      "button": "shop_back",
+      "gold": 40,
+      "position": [
+        964.0,
+        138.0
+      ]
+    },
+    {
+      "button": "shop_buy",
+      "gold": 40,
+      "position": [
+        544.0,
+        380.5
+      ]
+    },
+    {
+      "button": "category_materials",
+      "gold": 40,
+      "position": [
+        930.0,
+        365.5
+      ]
+    },
+    {
+      "button": "trade_wood_-1",
+      "gold": 40,
+      "position": [
+        768.5,
+        453.0
+      ]
+    },
+    {
+      "button": "confirm_trade",
+      "gold": 40,
+      "position": [
+        977.0,
+        519.0
+      ]
+    },
+    {
+      "button": "shop_back",
+      "gold": 28,
+      "position": [
+        964.0,
+        138.0
+      ]
+    },
+    {
+      "button": "shop_back",
+      "gold": 28,
+      "position": [
+        964.0,
+        138.0
+      ]
+    },
+    {
+      "button": "category_animals",
+      "gold": 28,
+      "position": [
+        576.0,
+        365.5
+      ]
+    },
+    {
+      "button": "close_market",
+      "gold": 28,
+      "position": [
+        1102.0,
+        138.0
+      ]
+    },
+    {
+      "button": "open_market",
+      "gold": 28,
+      "position": [
+        487.0,
+        520.0
+      ]
+    },
+    {
+      "button": "shop_sell",
+      "gold": 28,
+      "position": [
+        889.0,
+        380.5
+      ]
+    },
+    {
+      "button": "category_animals",
+      "gold": 28,
+      "position": [
+        576.0,
+        365.5
+      ]
+    },
+    {
+      "button": "shop_back",
+      "gold": 28,
+      "position": [
+        964.0,
+        138.0
+      ]
+    },
+    {
+      "button": "category_materials",
+      "gold": 28,
+      "position": [
+        930.0,
+        365.5
+      ]
+    },
+    {
+      "button": "trade_soil_-1",
+      "gold": 28,
+      "position": [
+        678.5,
+        453.0
+      ]
+    },
+    {
+      "button": "shop_back",
+      "gold": 28,
+      "position": [
+        964.0,
+        138.0
+      ]
+    },
+    {
+      "button": "trade_wood_-1",
+      "gold": 28,
+      "position": [
+        858.5,
+        453.0
+      ]
+    },
+    {
+      "button": "shop_back",
+      "gold": 28,
+      "position": [
+        964.0,
+        138.0
+      ]
+    },
+    {
+      "button": "shop_back",
+      "gold": 28,
+      "position": [
+        964.0,
+        138.0
+      ]
+    },
+    {
+      "button": "category_facilities",
+      "gold": 28,
+      "position": [
+        576.0,
+        545.5
+      ]
+    },
+    {
+      "button": "shop_back",
+      "gold": 28,
+      "position": [
+        964.0,
+        138.0
+      ]
+    },
+    {
+      "button": "category_items",
+      "gold": 28,
+      "position": [
+        930.0,
+        545.5
+      ]
+    },
+    {
+      "button": "shop_back",
+      "gold": 28,
+      "position": [
+        964.0,
+        138.0
+      ]
+    },
+    {
+      "button": "shop_back",
+      "gold": 28,
+      "position": [
+        964.0,
+        138.0
+      ]
+    },
+    {
+      "button": "shop_sell",
+      "gold": 28,
+      "position": [
+        889.0,
+        380.5
+      ]
+    },
+    {
+      "button": "category_materials",
+      "gold": 28,
+      "position": [
+        930.0,
+        365.5
+      ]
+    },
+    {
+      "button": "trade_wood_-1",
+      "gold": 28,
+      "position": [
+        858.5,
+        453.0
+      ]
+    },
+    {
+      "button": "confirm_trade",
+      "gold": 28,
+      "position": [
+        977.0,
+        519.0
+      ]
+    },
+    {
+      "button": "close_market",
+      "gold": 32,
+      "position": [
+        1102.0,
+        138.0
+      ]
+    }
+  ],
+  "implementation_commit": "e65f7d10a2ccbe3a4d8bdebbf5147e0334adc8ee",
+  "method": "Current main.tscn, isolated GPU viewport, game-local mouse press/release. Default new campaign; no debug money or stock changes.",
+  "shots": [
+    {
+      "category": "animals",
+      "file": "01_morning_menu.png",
+      "gold": 40,
+      "label": "morning_menu",
+      "level": "categories",
+      "page": 0,
+      "product": {},
+      "screen": "morning",
+      "side": "home",
+      "tick": 0
+    },
+    {
+      "category": "animals",
+      "file": "02_market_entry.png",
+      "gold": 40,
+      "label": "market_entry",
+      "level": "categories",
+      "page": 0,
+      "product": {},
+      "screen": "market",
+      "side": "home",
+      "tick": 0
+    },
+    {
+      "category": "animals",
+      "file": "03_buy_categories.png",
+      "gold": 40,
+      "label": "buy_categories",
+      "level": "categories",
+      "page": 0,
+      "product": {},
+      "screen": "market",
+      "side": "buy",
+      "tick": 0
+    },
+    {
+      "category": "animals",
+      "file": "04_buy_animals_list_1.png",
+      "gold": 40,
+      "label": "buy_animals_list_1",
+      "level": "list",
+      "page": 0,
+      "product": {},
+      "screen": "market",
+      "side": "buy",
+      "tick": 0
+    },
+    {
+      "category": "animals",
+      "file": "05_buy_animals_hen_-1.png",
+      "gold": 40,
+      "label": "buy_animals_hen_-1",
+      "level": "detail",
+      "page": 0,
+      "product": {
+        "animal_id": -1,
+        "count": 1,
+        "id": "hen"
+      },
+      "screen": "market",
+      "side": "buy",
+      "tick": 0
+    },
+    {
+      "category": "animals",
+      "file": "06_buy_animals_cat_-1.png",
+      "gold": 40,
+      "label": "buy_animals_cat_-1",
+      "level": "detail",
+      "page": 0,
+      "product": {
+        "animal_id": -1,
+        "count": 1,
+        "id": "cat"
+      },
+      "screen": "market",
+      "side": "buy",
+      "tick": 0
+    },
+    {
+      "category": "materials",
+      "file": "07_buy_materials_list_1.png",
+      "gold": 40,
+      "label": "buy_materials_list_1",
+      "level": "list",
+      "page": 0,
+      "product": {},
+      "screen": "market",
+      "side": "buy",
+      "tick": 0
+    },
+    {
+      "category": "materials",
+      "file": "08_buy_materials_soil_-1.png",
+      "gold": 40,
+      "label": "buy_materials_soil_-1",
+      "level": "detail",
+      "page": 0,
+      "product": {
+        "animal_id": -1,
+        "count": 4,
+        "id": "soil"
+      },
+      "screen": "market",
+      "side": "buy",
+      "tick": 0
+    },
+    {
+      "category": "materials",
+      "file": "09_buy_materials_wood_-1.png",
+      "gold": 40,
+      "label": "buy_materials_wood_-1",
+      "level": "detail",
+      "page": 0,
+      "product": {
+        "animal_id": -1,
+        "count": 3,
+        "id": "wood"
+      },
+      "screen": "market",
+      "side": "buy",
+      "tick": 0
+    },
+    {
+      "category": "materials",
+      "file": "10_buy_materials_stone_-1.png",
+      "gold": 40,
+      "label": "buy_materials_stone_-1",
+      "level": "detail",
+      "page": 0,
+      "product": {
+        "animal_id": -1,
+        "count": 3,
+        "id": "stone"
+      },
+      "screen": "market",
+      "side": "buy",
+      "tick": 0
+    },
+    {
+      "category": "facilities",
+      "file": "11_buy_facilities_list_1.png",
+      "gold": 40,
+      "label": "buy_facilities_list_1",
+      "level": "list",
+      "page": 0,
+      "product": {},
+      "screen": "market",
+      "side": "buy",
+      "tick": 0
+    },
+    {
+      "category": "items",
+      "file": "12_buy_items_list_1.png",
+      "gold": 40,
+      "label": "buy_items_list_1",
+      "level": "list",
+      "page": 0,
+      "product": {},
+      "screen": "market",
+      "side": "buy",
+      "tick": 0
+    },
+    {
+      "category": "items",
+      "file": "13_buy_items_whistle_-1.png",
+      "gold": 40,
+      "label": "buy_items_whistle_-1",
+      "level": "detail",
+      "page": 0,
+      "product": {
+        "animal_id": -1,
+        "count": 1,
+        "id": "whistle"
+      },
+      "screen": "market",
+      "side": "buy",
+      "tick": 0
+    },
+    {
+      "category": "items",
+      "file": "14_buy_items_coffee_-1.png",
+      "gold": 40,
+      "label": "buy_items_coffee_-1",
+      "level": "detail",
+      "page": 0,
+      "product": {
+        "animal_id": -1,
+        "count": 1,
+        "id": "coffee"
+      },
+      "screen": "market",
+      "side": "buy",
+      "tick": 0
+    },
+    {
+      "category": "items",
+      "file": "15_buy_items_energy_drink_-1.png",
+      "gold": 40,
+      "label": "buy_items_energy_drink_-1",
+      "level": "detail",
+      "page": 0,
+      "product": {
+        "animal_id": -1,
+        "count": 1,
+        "id": "energy_drink"
+      },
+      "screen": "market",
+      "side": "buy",
+      "tick": 0
+    },
+    {
+      "category": "materials",
+      "file": "16_purchase_complete.png",
+      "gold": 28,
+      "label": "purchase_complete",
+      "level": "detail",
+      "page": 0,
+      "product": {
+        "animal_id": -1,
+        "count": 3,
+        "id": "wood"
+      },
+      "screen": "market",
+      "side": "buy",
+      "tick": 0
+    },
+    {
+      "category": "materials",
+      "file": "17_purchase_back_to_list.png",
+      "gold": 28,
+      "label": "purchase_back_to_list",
+      "level": "list",
+      "page": 0,
+      "product": {},
+      "screen": "market",
+      "side": "buy",
+      "tick": 0
+    },
+    {
+      "category": "materials",
+      "file": "18_purchase_back_to_categories.png",
+      "gold": 28,
+      "label": "purchase_back_to_categories",
+      "level": "categories",
+      "page": 0,
+      "product": {},
+      "screen": "market",
+      "side": "buy",
+      "tick": 0
+    },
+    {
+      "category": "animals",
+      "file": "19_another_category_after_purchase.png",
+      "gold": 28,
+      "label": "another_category_after_purchase",
+      "level": "list",
+      "page": 0,
+      "product": {},
+      "screen": "market",
+      "side": "buy",
+      "tick": 0
+    },
+    {
+      "category": "animals",
+      "file": "20_market_closed_morning.png",
+      "gold": 28,
+      "label": "market_closed_morning",
+      "level": "list",
+      "page": 0,
+      "product": {},
+      "screen": "morning",
+      "side": "home",
+      "tick": 0
+    },
+    {
+      "category": "animals",
+      "file": "21_sell_categories.png",
+      "gold": 28,
+      "label": "sell_categories",
+      "level": "categories",
+      "page": 0,
+      "product": {},
+      "screen": "market",
+      "side": "sell",
+      "tick": 0
+    },
+    {
+      "category": "animals",
+      "file": "22_sell_animals_list_1.png",
+      "gold": 28,
+      "label": "sell_animals_list_1",
+      "level": "list",
+      "page": 0,
+      "product": {},
+      "screen": "market",
+      "side": "sell",
+      "tick": 0
+    },
+    {
+      "category": "materials",
+      "file": "23_sell_materials_list_1.png",
+      "gold": 28,
+      "label": "sell_materials_list_1",
+      "level": "list",
+      "page": 0,
+      "product": {},
+      "screen": "market",
+      "side": "sell",
+      "tick": 0
+    },
+    {
+      "category": "materials",
+      "file": "24_sell_materials_soil_-1.png",
+      "gold": 28,
+      "label": "sell_materials_soil_-1",
+      "level": "detail",
+      "page": 0,
+      "product": {
+        "animal_id": -1,
+        "count": 2,
+        "id": "soil"
+      },
+      "screen": "market",
+      "side": "sell",
+      "tick": 0
+    },
+    {
+      "category": "materials",
+      "file": "25_sell_materials_wood_-1.png",
+      "gold": 28,
+      "label": "sell_materials_wood_-1",
+      "level": "detail",
+      "page": 0,
+      "product": {
+        "animal_id": -1,
+        "count": 1,
+        "id": "wood"
+      },
+      "screen": "market",
+      "side": "sell",
+      "tick": 0
+    },
+    {
+      "category": "facilities",
+      "file": "26_sell_facilities_list_1.png",
+      "gold": 28,
+      "label": "sell_facilities_list_1",
+      "level": "list",
+      "page": 0,
+      "product": {},
+      "screen": "market",
+      "side": "sell",
+      "tick": 0
+    },
+    {
+      "category": "items",
+      "file": "27_sell_items_list_1.png",
+      "gold": 28,
+      "label": "sell_items_list_1",
+      "level": "list",
+      "page": 0,
+      "product": {},
+      "screen": "market",
+      "side": "sell",
+      "tick": 0
+    },
+    {
+      "category": "materials",
+      "file": "28_sale_complete.png",
+      "gold": 32,
+      "label": "sale_complete",
+      "level": "detail",
+      "page": 0,
+      "product": {
+        "animal_id": -1,
+        "count": 1,
+        "id": "wood"
+      },
+      "screen": "market",
+      "side": "sell",
+      "tick": 0
+    },
+    {
+      "category": "materials",
+      "file": "29_final_morning.png",
+      "gold": 32,
+      "label": "final_morning",
+      "level": "detail",
+      "page": 0,
+      "product": {
+        "animal_id": -1,
+        "count": 1,
+        "id": "wood"
+      },
+      "screen": "morning",
+      "side": "home",
+      "tick": 0
+    }
+  ]
+}

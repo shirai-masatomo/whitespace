@@ -26,5 +26,15 @@
     "Physical Japanese keyboard/IME not tested",
     "Merchant dedicated wheel/opening/walking animation not delivered"
   ],
-  "build_sha256": "b44a2fb8c7b526fe9e457824ce7662d5c25ab718d653de5e3f5916a17e31c7d0"
+  "build_sha256": "b44a2fb8c7b526fe9e457824ce7662d5c25ab718d653de5e3f5916a17e31c7d0",
+  "latest_material_integration": {
+    "implementation_commit": "e65f7d10a2ccbe3a4d8bdebbf5147e0334adc8ee",
+    "asset_delivery_commit": "5848c4f8aedde4acfa33586f82c3397d1b6d58a0",
+    "headless_checks": 668,
+    "ai_trials": 192,
+    "runtime_pngs": 387,
+    "shop_observations": "materials/shop/observations.json",
+    "actor_effect_observations": "materials/enemies-effects/observations.json",
+    "published_build": "materials/build.json"
+  }
 }

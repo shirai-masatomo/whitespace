@@ -1,0 +1,988 @@
+{
+  "checks": 36,
+  "failures": 0,
+  "implementation_commit": "e65f7d10a2ccbe3a4d8bdebbf5147e0334adc8ee",
+  "method": "Actual game draw functions; scripted presentation fixtures for all delivered frames, normal construction/collection simulation; not a full night playthrough",
+  "shots": [
+    {
+      "effects": [],
+      "enemies": {
+        "0": {
+          "action": "search",
+          "at": 0.033333,
+          "cell": "(10, 8)",
+          "facing": 1,
+          "reaction": "search",
+          "reaction_at": 0.033333,
+          "searching": true,
+          "sight": 0,
+          "walking": false
+        }
+      },
+      "file": "enemy_search.png",
+      "tick": 0
+    },
+    {
+      "effects": [],
+      "enemies": {
+        "0": {
+          "action": "idle",
+          "at": 0.023333,
+          "facing": -1,
+          "walking": false
+        }
+      },
+      "file": "idle_left_00.png",
+      "tick": 0
+    },
+    {
+      "effects": [],
+      "enemies": {
+        "0": {
+          "action": "walk",
+          "at": 0.023333,
+          "facing": -1,
+          "walking": false
+        }
+      },
+      "file": "walk_left_00.png",
+      "tick": 0
+    },
+    {
+      "effects": [],
+      "enemies": {
+        "0": {
+          "action": "walk",
+          "at": -0.096667,
+          "facing": -1,
+          "walking": false
+        }
+      },
+      "file": "walk_left_01.png",
+      "tick": 0
+    },
+    {
+      "effects": [],
+      "enemies": {
+        "0": {
+          "action": "walk",
+          "at": -0.216667,
+          "facing": -1,
+          "walking": false
+        }
+      },
+      "file": "walk_left_02.png",
+      "tick": 0
+    },
+    {
+      "effects": [],
+      "enemies": {
+        "0": {
+          "action": "walk",
+          "at": -0.336667,
+          "facing": -1,
+          "walking": false
+        }
+      },
+      "file": "walk_left_03.png",
+      "tick": 0
+    },
+    {
+      "effects": [],
+      "enemies": {
+        "0": {
+          "action": "attack",
+          "at": 0.023333,
+          "facing": -1,
+          "walking": false
+        }
+      },
+      "file": "attack_left_00.png",
+      "tick": 0
+    },
+    {
+      "effects": [],
+      "enemies": {
+        "0": {
+          "action": "attack",
+          "at": -0.106667,
+          "facing": -1,
+          "walking": false
+        }
+      },
+      "file": "attack_left_01.png",
+      "tick": 0
+    },
+    {
+      "effects": [],
+      "enemies": {
+        "0": {
+          "action": "attack",
+          "at": -0.186667,
+          "facing": -1,
+          "walking": false
+        }
+      },
+      "file": "attack_left_02.png",
+      "tick": 0
+    },
+    {
+      "effects": [],
+      "enemies": {
+        "0": {
+          "action": "search",
+          "at": 0.023333,
+          "facing": -1,
+          "walking": false
+        }
+      },
+      "file": "search_left_00.png",
+      "tick": 0
+    },
+    {
+      "effects": [],
+      "enemies": {
+        "0": {
+          "action": "search",
+          "at": -0.276667,
+          "facing": -1,
+          "walking": false
+        }
+      },
+      "file": "search_left_01.png",
+      "tick": 0
+    },
+    {
+      "effects": [],
+      "enemies": {
+        "0": {
+          "action": "search",
+          "at": -0.726667,
+          "facing": -1,
+          "walking": false
+        }
+      },
+      "file": "search_left_02.png",
+      "tick": 0
+    },
+    {
+      "effects": [],
+      "enemies": {
+        "0": {
+          "action": "discovery",
+          "at": 0.023333,
+          "facing": -1,
+          "walking": false
+        }
+      },
+      "file": "discovery_left_00.png",
+      "tick": 0
+    },
+    {
+      "effects": [],
+      "enemies": {
+        "0": {
+          "action": "discovery",
+          "at": -0.096667,
+          "facing": -1,
+          "walking": false
+        }
+      },
+      "file": "discovery_left_01.png",
+      "tick": 0
+    },
+    {
+      "effects": [],
+      "enemies": {
+        "0": {
+          "action": "hit",
+          "at": 0.023333,
+          "facing": -1,
+          "walking": false
+        }
+      },
+      "file": "hit_left_00.png",
+      "tick": 0
+    },
+    {
+      "effects": [],
+      "enemies": {
+        "0": {
+          "action": "hit",
+          "at": -0.076667,
+          "facing": -1,
+          "walking": false
+        }
+      },
+      "file": "hit_left_01.png",
+      "tick": 0
+    },
+    {
+      "effects": [],
+      "enemies": {
+        "0": {
+          "action": "retreat",
+          "at": 0.023333,
+          "facing": -1,
+          "walking": false
+        }
+      },
+      "file": "retreat_left_00.png",
+      "tick": 0
+    },
+    {
+      "effects": [],
+      "enemies": {
+        "0": {
+          "action": "retreat",
+          "at": -0.066667,
+          "facing": -1,
+          "walking": false
+        }
+      },
+      "file": "retreat_left_01.png",
+      "tick": 0
+    },
+    {
+      "effects": [],
+      "enemies": {
+        "0": {
+          "action": "retreat",
+          "at": -0.156667,
+          "facing": -1,
+          "walking": false
+        }
+      },
+      "file": "retreat_left_02.png",
+      "tick": 0
+    },
+    {
+      "effects": [],
+      "enemies": {
+        "0": {
+          "action": "retreat",
+          "at": -0.246667,
+          "facing": -1,
+          "walking": false
+        }
+      },
+      "file": "retreat_left_03.png",
+      "tick": 0
+    },
+    {
+      "effects": [],
+      "enemies": {
+        "0": {
+          "action": "carry_idle",
+          "at": 0.023333,
+          "facing": -1,
+          "walking": false
+        }
+      },
+      "file": "carry_idle_left_00.png",
+      "tick": 0
+    },
+    {
+      "effects": [],
+      "enemies": {
+        "0": {
+          "action": "carry_walk",
+          "at": 0.023333,
+          "facing": -1,
+          "walking": true
+        }
+      },
+      "file": "carry_walk_left_00.png",
+      "tick": 0
+    },
+    {
+      "effects": [],
+      "enemies": {
+        "0": {
+          "action": "carry_walk",
+          "at": -0.126667,
+          "facing": -1,
+          "walking": true
+        }
+      },
+      "file": "carry_walk_left_01.png",
+      "tick": 0
+    },
+    {
+      "effects": [],
+      "enemies": {
+        "0": {
+          "action": "idle",
+          "at": 0.023333,
+          "facing": 1,
+          "walking": false
+        }
+      },
+      "file": "idle_right_00.png",
+      "tick": 0
+    },
+    {
+      "effects": [],
+      "enemies": {
+        "0": {
+          "action": "walk",
+          "at": 0.023333,
+          "facing": 1,
+          "walking": false
+        }
+      },
+      "file": "walk_right_00.png",
+      "tick": 0
+    },
+    {
+      "effects": [],
+      "enemies": {
+        "0": {
+          "action": "walk",
+          "at": -0.096667,
+          "facing": 1,
+          "walking": false
+        }
+      },
+      "file": "walk_right_01.png",
+      "tick": 0
+    },
+    {
+      "effects": [],
+      "enemies": {
+        "0": {
+          "action": "walk",
+          "at": -0.216667,
+          "facing": 1,
+          "walking": false
+        }
+      },
+      "file": "walk_right_02.png",
+      "tick": 0
+    },
+    {
+      "effects": [],
+      "enemies": {
+        "0": {
+          "action": "walk",
+          "at": -0.336667,
+          "facing": 1,
+          "walking": false
+        }
+      },
+      "file": "walk_right_03.png",
+      "tick": 0
+    },
+    {
+      "effects": [],
+      "enemies": {
+        "0": {
+          "action": "attack",
+          "at": 0.023333,
+          "facing": 1,
+          "walking": false
+        }
+      },
+      "file": "attack_right_00.png",
+      "tick": 0
+    },
+    {
+      "effects": [],
+      "enemies": {
+        "0": {
+          "action": "attack",
+          "at": -0.106667,
+          "facing": 1,
+          "walking": false
+        }
+      },
+      "file": "attack_right_01.png",
+      "tick": 0
+    },
+    {
+      "effects": [],
+      "enemies": {
+        "0": {
+          "action": "attack",
+          "at": -0.186667,
+          "facing": 1,
+          "walking": false
+        }
+      },
+      "file": "attack_right_02.png",
+      "tick": 0
+    },
+    {
+      "effects": [],
+      "enemies": {
+        "0": {
+          "action": "search",
+          "at": 0.023333,
+          "facing": 1,
+          "walking": false
+        }
+      },
+      "file": "search_right_00.png",
+      "tick": 0
+    },
+    {
+      "effects": [],
+      "enemies": {
+        "0": {
+          "action": "search",
+          "at": -0.276667,
+          "facing": 1,
+          "walking": false
+        }
+      },
+      "file": "search_right_01.png",
+      "tick": 0
+    },
+    {
+      "effects": [],
+      "enemies": {
+        "0": {
+          "action": "search",
+          "at": -0.726667,
+          "facing": 1,
+          "walking": false
+        }
+      },
+      "file": "search_right_02.png",
+      "tick": 0
+    },
+    {
+      "effects": [],
+      "enemies": {
+        "0": {
+          "action": "discovery",
+          "at": 0.023333,
+          "facing": 1,
+          "walking": false
+        }
+      },
+      "file": "discovery_right_00.png",
+      "tick": 0
+    },
+    {
+      "effects": [],
+      "enemies": {
+        "0": {
+          "action": "discovery",
+          "at": -0.096667,
+          "facing": 1,
+          "walking": false
+        }
+      },
+      "file": "discovery_right_01.png",
+      "tick": 0
+    },
+    {
+      "effects": [],
+      "enemies": {
+        "0": {
+          "action": "hit",
+          "at": 0.023333,
+          "facing": 1,
+          "walking": false
+        }
+      },
+      "file": "hit_right_00.png",
+      "tick": 0
+    },
+    {
+      "effects": [],
+      "enemies": {
+        "0": {
+          "action": "hit",
+          "at": -0.076667,
+          "facing": 1,
+          "walking": false
+        }
+      },
+      "file": "hit_right_01.png",
+      "tick": 0
+    },
+    {
+      "effects": [],
+      "enemies": {
+        "0": {
+          "action": "retreat",
+          "at": 0.023333,
+          "facing": 1,
+          "walking": false
+        }
+      },
+      "file": "retreat_right_00.png",
+      "tick": 0
+    },
+    {
+      "effects": [],
+      "enemies": {
+        "0": {
+          "action": "retreat",
+          "at": -0.066667,
+          "facing": 1,
+          "walking": false
+        }
+      },
+      "file": "retreat_right_01.png",
+      "tick": 0
+    },
+    {
+      "effects": [],
+      "enemies": {
+        "0": {
+          "action": "retreat",
+          "at": -0.156667,
+          "facing": 1,
+          "walking": false
+        }
+      },
+      "file": "retreat_right_02.png",
+      "tick": 0
+    },
+    {
+      "effects": [],
+      "enemies": {
+        "0": {
+          "action": "retreat",
+          "at": -0.246667,
+          "facing": 1,
+          "walking": false
+        }
+      },
+      "file": "retreat_right_03.png",
+      "tick": 0
+    },
+    {
+      "effects": [],
+      "enemies": {
+        "0": {
+          "action": "carry_idle",
+          "at": 0.023333,
+          "facing": 1,
+          "walking": false
+        }
+      },
+      "file": "carry_idle_right_00.png",
+      "tick": 0
+    },
+    {
+      "effects": [],
+      "enemies": {
+        "0": {
+          "action": "carry_walk",
+          "at": 0.023333,
+          "facing": 1,
+          "walking": true
+        }
+      },
+      "file": "carry_walk_right_00.png",
+      "tick": 0
+    },
+    {
+      "effects": [],
+      "enemies": {
+        "0": {
+          "action": "carry_walk",
+          "at": -0.126667,
+          "facing": 1,
+          "walking": true
+        }
+      },
+      "file": "carry_walk_right_01.png",
+      "tick": 0
+    },
+    {
+      "effects": [
+        {
+          "at": 0.099999,
+          "kind": "attack_hit",
+          "pos": "(504.0, 357.0)"
+        }
+      ],
+      "enemies": {
+        "0": {
+          "action": "hit",
+          "at": 0.099999,
+          "cell": "(10, 8)",
+          "facing": 1,
+          "reaction": "hit",
+          "reaction_at": 0.099999,
+          "searching": true,
+          "sight": 0,
+          "walking": false
+        }
+      },
+      "file": "event_hit.png",
+      "tick": 0
+    },
+    {
+      "effects": [
+        {
+          "at": 0.589994,
+          "kind": "soil_dust",
+          "pos": "(408.0, 315.0)"
+        },
+        {
+          "at": 0.589994,
+          "kind": "wood_chips",
+          "pos": "(456.0, 315.0)"
+        },
+        {
+          "at": 0.589994,
+          "kind": "stone_powder",
+          "pos": "(504.0, 315.0)"
+        },
+        {
+          "at": 0.589994,
+          "kind": "build_complete",
+          "pos": "(552.0, 315.0)"
+        },
+        {
+          "at": 0.589994,
+          "kind": "attack_hit",
+          "pos": "(600.0, 315.0)"
+        },
+        {
+          "at": 0.589994,
+          "kind": "hurt",
+          "pos": "(408.0, 357.0)"
+        },
+        {
+          "at": 0.589994,
+          "kind": "item_collect",
+          "pos": "(456.0, 357.0)"
+        },
+        {
+          "at": 0.589994,
+          "kind": "sound_wave",
+          "pos": "(504.0, 357.0)"
+        },
+        {
+          "at": 0.589994,
+          "kind": "sound_wave_left",
+          "pos": "(552.0, 357.0)"
+        },
+        {
+          "at": 0.589994,
+          "kind": "lock_break",
+          "pos": "(600.0, 357.0)"
+        }
+      ],
+      "enemies": {
+        "0": {
+          "action": "idle",
+          "at": 0.366663,
+          "cell": "(10, 8)",
+          "facing": 1,
+          "reaction_at": 0.099999,
+          "searching": true,
+          "sight": 0,
+          "walking": false
+        }
+      },
+      "file": "effects_00.png",
+      "tick": 0
+    },
+    {
+      "effects": [
+        {
+          "at": 0.519994,
+          "kind": "soil_dust",
+          "pos": "(408.0, 315.0)"
+        },
+        {
+          "at": 0.529994,
+          "kind": "wood_chips",
+          "pos": "(456.0, 315.0)"
+        },
+        {
+          "at": 0.519994,
+          "kind": "stone_powder",
+          "pos": "(504.0, 315.0)"
+        },
+        {
+          "at": 0.509994,
+          "kind": "build_complete",
+          "pos": "(552.0, 315.0)"
+        },
+        {
+          "at": 0.539994,
+          "kind": "attack_hit",
+          "pos": "(600.0, 315.0)"
+        },
+        {
+          "at": 0.529994,
+          "kind": "hurt",
+          "pos": "(408.0, 357.0)"
+        },
+        {
+          "at": 0.519994,
+          "kind": "item_collect",
+          "pos": "(456.0, 357.0)"
+        },
+        {
+          "at": 0.519994,
+          "kind": "sound_wave",
+          "pos": "(504.0, 357.0)"
+        },
+        {
+          "at": 0.519994,
+          "kind": "sound_wave_left",
+          "pos": "(552.0, 357.0)"
+        },
+        {
+          "at": 0.519994,
+          "kind": "lock_break",
+          "pos": "(600.0, 357.0)"
+        }
+      ],
+      "enemies": {
+        "0": {
+          "action": "idle",
+          "at": 0.366663,
+          "cell": "(10, 8)",
+          "facing": 1,
+          "reaction_at": 0.099999,
+          "searching": true,
+          "sight": 0,
+          "walking": false
+        }
+      },
+      "file": "effects_01.png",
+      "tick": 0
+    },
+    {
+      "effects": [
+        {
+          "at": 0.439994,
+          "kind": "soil_dust",
+          "pos": "(408.0, 315.0)"
+        },
+        {
+          "at": 0.459994,
+          "kind": "wood_chips",
+          "pos": "(456.0, 315.0)"
+        },
+        {
+          "at": 0.439994,
+          "kind": "stone_powder",
+          "pos": "(504.0, 315.0)"
+        },
+        {
+          "at": 0.399994,
+          "kind": "build_complete",
+          "pos": "(552.0, 315.0)"
+        },
+        {
+          "at": 0.479994,
+          "kind": "attack_hit",
+          "pos": "(600.0, 315.0)"
+        },
+        {
+          "at": 0.459994,
+          "kind": "hurt",
+          "pos": "(408.0, 357.0)"
+        },
+        {
+          "at": 0.429994,
+          "kind": "item_collect",
+          "pos": "(456.0, 357.0)"
+        },
+        {
+          "at": 0.429994,
+          "kind": "sound_wave",
+          "pos": "(504.0, 357.0)"
+        },
+        {
+          "at": 0.429994,
+          "kind": "sound_wave_left",
+          "pos": "(552.0, 357.0)"
+        },
+        {
+          "at": 0.439994,
+          "kind": "lock_break",
+          "pos": "(600.0, 357.0)"
+        }
+      ],
+      "enemies": {
+        "0": {
+          "action": "idle",
+          "at": 0.366663,
+          "cell": "(10, 8)",
+          "facing": 1,
+          "reaction_at": 0.099999,
+          "searching": true,
+          "sight": 0,
+          "walking": false
+        }
+      },
+      "file": "effects_02.png",
+      "tick": 0
+    },
+    {
+      "effects": [
+        {
+          "at": 0.349994,
+          "kind": "soil_dust",
+          "pos": "(408.0, 315.0)"
+        },
+        {
+          "at": 0.369994,
+          "kind": "wood_chips",
+          "pos": "(456.0, 315.0)"
+        },
+        {
+          "at": 0.349994,
+          "kind": "stone_powder",
+          "pos": "(504.0, 315.0)"
+        },
+        {
+          "at": 0.299994,
+          "kind": "build_complete",
+          "pos": "(552.0, 315.0)"
+        },
+        {
+          "at": 0.409994,
+          "kind": "attack_hit",
+          "pos": "(600.0, 315.0)"
+        },
+        {
+          "at": 0.379994,
+          "kind": "hurt",
+          "pos": "(408.0, 357.0)"
+        },
+        {
+          "at": 0.339994,
+          "kind": "item_collect",
+          "pos": "(456.0, 357.0)"
+        },
+        {
+          "at": 0.329994,
+          "kind": "sound_wave",
+          "pos": "(504.0, 357.0)"
+        },
+        {
+          "at": 0.329994,
+          "kind": "sound_wave_left",
+          "pos": "(552.0, 357.0)"
+        },
+        {
+          "at": 0.349994,
+          "kind": "lock_break",
+          "pos": "(600.0, 357.0)"
+        }
+      ],
+      "enemies": {
+        "0": {
+          "action": "idle",
+          "at": 0.366663,
+          "cell": "(10, 8)",
+          "facing": 1,
+          "reaction_at": 0.099999,
+          "searching": true,
+          "sight": 0,
+          "walking": false
+        }
+      },
+      "file": "effects_03.png",
+      "tick": 0
+    },
+    {
+      "effects": [
+        {
+          "at": 2.58331,
+          "kind": "attack_hit",
+          "pos": "(888.0, 357.0)"
+        },
+        {
+          "at": 2.58331,
+          "kind": "hurt",
+          "pos": "(936.0, 357.0)"
+        }
+      ],
+      "enemies": {
+        "0": {
+          "action": "attack",
+          "at": 2.58331,
+          "cell": "(18, 8)",
+          "facing": 1,
+          "reaction": "attack",
+          "reaction_at": 2.58331,
+          "searching": false,
+          "sight": 7,
+          "walking": false
+        }
+      },
+      "file": "live_combat.png",
+      "tick": 1
+    },
+    {
+      "effects": [
+        {
+          "at": 7.58331,
+          "kind": "hurt",
+          "pos": "(936.0, 357.0)"
+        }
+      ],
+      "enemies": {
+        "0": {
+          "action": "attack",
+          "at": 7.58331,
+          "cell": "(18, 8)",
+          "facing": 1,
+          "reaction": "attack",
+          "reaction_at": 7.58331,
+          "searching": false,
+          "sight": 7,
+          "walking": false
+        }
+      },
+      "file": "live_unconscious.png",
+      "tick": 21
+    },
+    {
+      "effects": [],
+      "enemies": {
+        "0": {
+          "action": "carry_idle",
+          "at": 8.58331,
+          "cell": "(18, 8)",
+          "facing": 1,
+          "reaction_at": 7.58331,
+          "searching": false,
+          "sight": 7,
+          "walking": false
+        }
+      },
+      "file": "live_carried.png",
+      "tick": 25
+    },
+    {
+      "effects": [
+        {
+          "at": 14.58331,
+          "kind": "attack_hit",
+          "pos": "(888.0, 315.0)"
+        }
+      ],
+      "enemies": {
+        "0": {
+          "action": "idle",
+          "at": 14.58331,
+          "cell": "(18, 7)",
+          "facing": 1,
+          "reaction": "hit",
+          "reaction_at": 14.58331,
+          "searching": false,
+          "sight": 7,
+          "walking": false
+        }
+      },
+      "file": "live_rescued.png",
+      "tick": 49
+    }
+  ]
+}

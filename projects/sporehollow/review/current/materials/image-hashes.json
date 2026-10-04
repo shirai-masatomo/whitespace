@@ -1,0 +1,334 @@
+[
+  {
+    "file": "enemies-effects/attack_left_00.png",
+    "sha256": "71d0c0f96b5ed23c766ca6bbe7d59ce788b90446d944463382b760d89afa6737"
+  },
+  {
+    "file": "enemies-effects/attack_left_01.png",
+    "sha256": "90b1750418419a802a5ff89455aa48849ff98d5f33eab0756969d8de2783113d"
+  },
+  {
+    "file": "enemies-effects/attack_left_02.png",
+    "sha256": "71eb2b6ffc7c58f33d8e6bee09f75eff7f52b43f4e39afcaae5624126ba47521"
+  },
+  {
+    "file": "enemies-effects/attack_right_00.png",
+    "sha256": "71172bd89d5105b1c474050882458ac35d442e7b5620133126b77eb4d9ca0e99"
+  },
+  {
+    "file": "enemies-effects/attack_right_01.png",
+    "sha256": "fcc54f51c81dd7d4a729de8775e99ba91f2d6d26024c5929f13de23fe92e3575"
+  },
+  {
+    "file": "enemies-effects/attack_right_02.png",
+    "sha256": "543d6e71cc4edb37d1d78bcf3be7e50cdf93f4e7b2dd58ea8ccf72ce601b834b"
+  },
+  {
+    "file": "enemies-effects/carry_idle_left_00.png",
+    "sha256": "337e15c9dca7aad8648f5e6c5b000b0491af85efd33379a39d23e3c995b17c58"
+  },
+  {
+    "file": "enemies-effects/carry_idle_right_00.png",
+    "sha256": "02a74b0c0c95d67ece7a0e9a1314995fe3b5415f50bab4a149a4d420306983a6"
+  },
+  {
+    "file": "enemies-effects/carry_walk_left_00.png",
+    "sha256": "5ae0761818435c55c9d678637fb610ad2313c5450c823b06f6db688e236fa2e3"
+  },
+  {
+    "file": "enemies-effects/carry_walk_left_01.png",
+    "sha256": "cac74f7b8ecd8fc22f5120e2b387f408f4968a8983da37ae2b659d6d993fbfc3"
+  },
+  {
+    "file": "enemies-effects/carry_walk_right_00.png",
+    "sha256": "20fac85ad2e03485d54bf8548a4dca943d903e781597b50ec5f739ae5ae03752"
+  },
+  {
+    "file": "enemies-effects/carry_walk_right_01.png",
+    "sha256": "a59caee9bda1f4d43e5666cc8a6948792bffce019439221d7c071adfc0442b52"
+  },
+  {
+    "file": "enemies-effects/discovery_left_00.png",
+    "sha256": "739c27b46bb8a8800fee444f24f1952913faf592e1aadfcbf69b41ba368006c3"
+  },
+  {
+    "file": "enemies-effects/discovery_left_01.png",
+    "sha256": "2efd8c214b01e74750920767507f9fb3e9c34ae613810610c41588459aa30ca9"
+  },
+  {
+    "file": "enemies-effects/discovery_right_00.png",
+    "sha256": "66195c11d1083add0677f685cd46b40a698d13b8395b4a83e9dec563d691f2f9"
+  },
+  {
+    "file": "enemies-effects/discovery_right_01.png",
+    "sha256": "c027608136927c00cd2641c41f944cccf29fc255e245a6aa7ed8338cfd8723ca"
+  },
+  {
+    "file": "enemies-effects/effects_00.png",
+    "sha256": "7a35ae3171bc90867cd288a4d871dc0db3b55b3cc428337308240738739d1159"
+  },
+  {
+    "file": "enemies-effects/effects_01.png",
+    "sha256": "6dbecd4b762af5870e1e1fe9bde7e48868e47b7c13d62ab82df8772732e3db74"
+  },
+  {
+    "file": "enemies-effects/effects_02.png",
+    "sha256": "16a5caf61a5497c51783418bac93563ecfdf4f49acfeae98ef6adc214e955766"
+  },
+  {
+    "file": "enemies-effects/effects_03.png",
+    "sha256": "58ef8e3f8f615f340308e4c5f333390025d9ea713cdc43ee788d06a18788cf72"
+  },
+  {
+    "file": "enemies-effects/enemy_search.png",
+    "sha256": "7205db4d654413a80749b20e4df9870507718c56d0ace0d1fbd21147cf8b04d2"
+  },
+  {
+    "file": "enemies-effects/event_hit.png",
+    "sha256": "a21c5480a5d2d5074724e67b138b4bde66b2dd20ed03abb6f86b39c8cae2b690"
+  },
+  {
+    "file": "enemies-effects/hit_left_00.png",
+    "sha256": "4ec65dbb8a0ff7fd3db239fe8f357f93a24aa31f2b68756c3b8aecb02d4ee345"
+  },
+  {
+    "file": "enemies-effects/hit_left_01.png",
+    "sha256": "5879bd742867ecd9f943d4881169d9bd6a5fd67e6c20294dd7ab4bfe0bce7b5b"
+  },
+  {
+    "file": "enemies-effects/hit_right_00.png",
+    "sha256": "d5c29438e156f2301819f8b8403ee887e86a4c8414e5947997d1f4e91d81748e"
+  },
+  {
+    "file": "enemies-effects/hit_right_01.png",
+    "sha256": "0b20b7f36ca481c36d476c1afd1614ad65cd3c1b16915dd07e06de49c2888cb5"
+  },
+  {
+    "file": "enemies-effects/idle_left_00.png",
+    "sha256": "6b30507781a910a208652491a98198b5f8d68cdc079d64dd2a1d9baac7622d72"
+  },
+  {
+    "file": "enemies-effects/idle_right_00.png",
+    "sha256": "e0b2cd4180a47dd34f4df9a183ab333dac4c08f92db7ed5d913c30d7cb14e2ff"
+  },
+  {
+    "file": "enemies-effects/live_carried.png",
+    "sha256": "7c240fa5eee160032832f8b86f300674e050cabd93562fae9e196fc67d5e0fe2"
+  },
+  {
+    "file": "enemies-effects/live_combat.png",
+    "sha256": "dbe2481bacb1619db8f8921660cb03174125343b57ce0f024a0ff7f18ce50dc9"
+  },
+  {
+    "file": "enemies-effects/live_rescued.png",
+    "sha256": "f3a88431c5dfa756d47b2f42fc9edd5a5fb33309ad482eba16bbe6cf54295b92"
+  },
+  {
+    "file": "enemies-effects/live_unconscious.png",
+    "sha256": "bf823bb2dec4e860083db8b8d1678f2c57eb39fe89344b4b86fb62a006250169"
+  },
+  {
+    "file": "enemies-effects/retreat_left_00.png",
+    "sha256": "852acea31233a22c07e35a3d9099c60f95b4da07394e5f4635c24e3e50c1bfb3"
+  },
+  {
+    "file": "enemies-effects/retreat_left_01.png",
+    "sha256": "25cc97f2a9a8cd3fed77d697b385b5f73753f089fd93ae5667aaf6d158dc8002"
+  },
+  {
+    "file": "enemies-effects/retreat_left_02.png",
+    "sha256": "9a859bfafa28e7ecc39872417f49a0dca490e1699197db6c50a273f25ded12d0"
+  },
+  {
+    "file": "enemies-effects/retreat_left_03.png",
+    "sha256": "99d61b6c3e85b0fd7af0bf97594990e65c5485d1943fa8fd4bbf66354a85a4c0"
+  },
+  {
+    "file": "enemies-effects/retreat_right_00.png",
+    "sha256": "646f53ea0f03cd9d57e0dffac5345cb79d22628c7cad663b9e2aca42e424d5cb"
+  },
+  {
+    "file": "enemies-effects/retreat_right_01.png",
+    "sha256": "166a2bd5f2af2b699fbaec8f059c534867cb2a15d56bd2a56e7b040b9f9fc96c"
+  },
+  {
+    "file": "enemies-effects/retreat_right_02.png",
+    "sha256": "ee3de25481510a766dad395570ad6d8f3a81f435933f6cb64917c7ebc32bdfa0"
+  },
+  {
+    "file": "enemies-effects/retreat_right_03.png",
+    "sha256": "edfc32cf17aece1aa0d9e208d595addb8b21a80f3c09caa673b413ce4ef9f158"
+  },
+  {
+    "file": "enemies-effects/search_left_00.png",
+    "sha256": "5eb2c0775a0f7ec806319195afc6d7f8c3dc7f96cb189003ddb1cb44fe2ddaa2"
+  },
+  {
+    "file": "enemies-effects/search_left_01.png",
+    "sha256": "49bf02289bcb91276ece1ff0147ead5ebfc4f64b33c90cefd179c06ce80955dd"
+  },
+  {
+    "file": "enemies-effects/search_left_02.png",
+    "sha256": "5eb2c0775a0f7ec806319195afc6d7f8c3dc7f96cb189003ddb1cb44fe2ddaa2"
+  },
+  {
+    "file": "enemies-effects/search_right_00.png",
+    "sha256": "7205db4d654413a80749b20e4df9870507718c56d0ace0d1fbd21147cf8b04d2"
+  },
+  {
+    "file": "enemies-effects/search_right_01.png",
+    "sha256": "617605cef24a3ad536591375036040352b90b2ff8d59572a24ef3fe754744133"
+  },
+  {
+    "file": "enemies-effects/search_right_02.png",
+    "sha256": "7205db4d654413a80749b20e4df9870507718c56d0ace0d1fbd21147cf8b04d2"
+  },
+  {
+    "file": "enemies-effects/walk_left_00.png",
+    "sha256": "887bc904b77b65fd0d911a1a01e84b9e44929bd71215336e083efcf3792944e2"
+  },
+  {
+    "file": "enemies-effects/walk_left_01.png",
+    "sha256": "dbf736d8eb348eb71b948616801a1ec75baa2c2a8111fc173057d239b2e520fe"
+  },
+  {
+    "file": "enemies-effects/walk_left_02.png",
+    "sha256": "3cf460fed88210f6c152ed2229c6af9e0a4f9876aad022aefbe807699afb1671"
+  },
+  {
+    "file": "enemies-effects/walk_left_03.png",
+    "sha256": "3aa513c35bc2455291639d02155edb71e7a1fe6720bb5be759488ec33451cb80"
+  },
+  {
+    "file": "enemies-effects/walk_right_00.png",
+    "sha256": "3e5a6d137ec8d896222b59969e690af74c397033462c9a18b8a9a1cd9ac4705c"
+  },
+  {
+    "file": "enemies-effects/walk_right_01.png",
+    "sha256": "0c3e3c2a67cc40f67d4025cc722a771860abc70e5537eb37c966fe5ae9369ace"
+  },
+  {
+    "file": "enemies-effects/walk_right_02.png",
+    "sha256": "52fbddfb0e657405c24769e20ef7aaa431845885819a82e8b0b02bf2ff5592d6"
+  },
+  {
+    "file": "enemies-effects/walk_right_03.png",
+    "sha256": "62140f60f1740272d3ee5ec45e683fd59336efd2eb604bedb9c0fdbb2839897b"
+  },
+  {
+    "file": "shop/01_morning_menu.png",
+    "sha256": "66e707301309545f704b7fce0b1128d9cbbbe5676aebc52910f625798151ad7d"
+  },
+  {
+    "file": "shop/02_market_entry.png",
+    "sha256": "a50b34fb4630adc16685eb4c23907b3c2da144b64bbd92f598d6a1e7ce7ee60c"
+  },
+  {
+    "file": "shop/03_buy_categories.png",
+    "sha256": "7129636bd76dba01c0b800681b9895fb69a2ae178aeae7a21036fd5ab8ac607c"
+  },
+  {
+    "file": "shop/04_buy_animals_list_1.png",
+    "sha256": "d42e417e7c404580552ee1dfeeed0991fadca78dd5003228e0fea442b4bb4189"
+  },
+  {
+    "file": "shop/05_buy_animals_hen_-1.png",
+    "sha256": "021961c27fc509ce0c292092e0be489901c93cac30edb769cf3e59eb5468c594"
+  },
+  {
+    "file": "shop/06_buy_animals_cat_-1.png",
+    "sha256": "f883aeb341586547c82fdfbad49667dce491a978831f428dfb0fecc4b132d377"
+  },
+  {
+    "file": "shop/07_buy_materials_list_1.png",
+    "sha256": "57526ac473d8043ae52a6192b1bac72f0ae67dd0678021bbe24ac13ae7e4a129"
+  },
+  {
+    "file": "shop/08_buy_materials_soil_-1.png",
+    "sha256": "46b2fd2dfeacadb4f18c892bba72dc19c9c171db54a717fde8838fb5195245fe"
+  },
+  {
+    "file": "shop/09_buy_materials_wood_-1.png",
+    "sha256": "6f77e68ef5a988839329eb00263ef08e7b0aec1d44c61b30f84a014966242d7f"
+  },
+  {
+    "file": "shop/10_buy_materials_stone_-1.png",
+    "sha256": "a5522f27dcda6b079ef1d4941ea07b626f231d9d6beadbf75653e69cfe808586"
+  },
+  {
+    "file": "shop/11_buy_facilities_list_1.png",
+    "sha256": "86e0d189b41c57bef85f02f37d15e2bc5dce296a8220b18c9f8c96b8b8169f55"
+  },
+  {
+    "file": "shop/12_buy_items_list_1.png",
+    "sha256": "a705284af8776f9c15256ebbe7a95008ca71bfb1680aaa069d007b44eb61be0b"
+  },
+  {
+    "file": "shop/13_buy_items_whistle_-1.png",
+    "sha256": "e928591e61baf4b361bbc398d5c26ae6bce3cee1473eeeb86a724e55b44c6247"
+  },
+  {
+    "file": "shop/14_buy_items_coffee_-1.png",
+    "sha256": "94a606df186492f7060da2fa3096a0d0d5a679eddc68e8029c74326c21d54f15"
+  },
+  {
+    "file": "shop/15_buy_items_energy_drink_-1.png",
+    "sha256": "cfca80c88ffff0911901e0684d04c8b935722d945631d6a8e273ba58b84d64b8"
+  },
+  {
+    "file": "shop/16_purchase_complete.png",
+    "sha256": "e02594380f396226e00d88a1f0c8a3a643cd50508bf8ae3e421d67ac3ebcc7cf"
+  },
+  {
+    "file": "shop/17_purchase_back_to_list.png",
+    "sha256": "b2e69b4b3e23abdc596ec8000cda1e90ace7f8a5a2a780a402457f93902c43b0"
+  },
+  {
+    "file": "shop/18_purchase_back_to_categories.png",
+    "sha256": "008593e4f4996fa2448a74824093f9e8d3db198a13ba667557152b9b45e5deef"
+  },
+  {
+    "file": "shop/19_another_category_after_purchase.png",
+    "sha256": "2a07d29720d8b252602c073c8008549aec5008380394f884d0c0fa5fe925fc03"
+  },
+  {
+    "file": "shop/20_market_closed_morning.png",
+    "sha256": "66e707301309545f704b7fce0b1128d9cbbbe5676aebc52910f625798151ad7d"
+  },
+  {
+    "file": "shop/21_sell_categories.png",
+    "sha256": "6d3a9904be753007b81021c05cd9da0a951f4079cbac76bed479e444b4bce71b"
+  },
+  {
+    "file": "shop/22_sell_animals_list_1.png",
+    "sha256": "2dd0fbbc3f4ddd076aa3369abaf371d5fcd29542d30f7e719d8988239f7e233f"
+  },
+  {
+    "file": "shop/23_sell_materials_list_1.png",
+    "sha256": "8017cdd51cb0f84b4188f5357ad26b060548eb93ada3583027fbcb8845efe0f6"
+  },
+  {
+    "file": "shop/24_sell_materials_soil_-1.png",
+    "sha256": "2f7fc0d0bd85da69fa1a9f553ee60690c4006774e987014b7656ce6f82baaacf"
+  },
+  {
+    "file": "shop/25_sell_materials_wood_-1.png",
+    "sha256": "1a174aafccfa8c33549778c46b3d19510fa2ffc1991f0c7ae16d2c0b4e38102f"
+  },
+  {
+    "file": "shop/26_sell_facilities_list_1.png",
+    "sha256": "3dd30ca06801fbe4aae80255f9c10c2fddd591d07e8a5721112b25debecaeb6d"
+  },
+  {
+    "file": "shop/27_sell_items_list_1.png",
+    "sha256": "219372063f24598bf04b923605a1ae3640550c67961055db7a0e6db602fce64a"
+  },
+  {
+    "file": "shop/28_sale_complete.png",
+    "sha256": "14daa20c73962e3d1571e662bcb21b244fede0086bddc1d20b3eee7850a054b2"
+  },
+  {
+    "file": "shop/29_final_morning.png",
+    "sha256": "66e707301309545f704b7fce0b1128d9cbbbe5676aebc52910f625798151ad7d"
+  }
+]
