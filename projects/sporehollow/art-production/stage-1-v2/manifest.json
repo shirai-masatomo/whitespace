@@ -1,0 +1,413 @@
+{
+  "revision": "stage-1-v2",
+  "status": "style_and_C_size_adopted_by_user",
+  "keeper": {
+    "source": "C:\\Users\\masat\\.codex\\worktrees\\sporehollow-art\\codex_test\\projects\\sporehollow\\art-production\\stage-1\\processed\\keeper_idle_right_00.png",
+    "file": "processed/keeper_idle_right_00.png",
+    "sha256": "c2ea9f9d7cdebd5a007d881fd17af4bb121c3f1afc2a373de56f49f859293c1e",
+    "unchanged": true,
+    "canvas": [
+      32,
+      48
+    ],
+    "anchor": [
+      16,
+      44
+    ]
+  },
+  "variants": [
+    {
+      "id": "a50",
+      "target_prompt_percent": 50,
+      "actual_body_height": 22,
+      "actual_height_percent": 50.0,
+      "note": "Whole-pixel size, tentative comparison only"
+    },
+    {
+      "id": "b58",
+      "target_prompt_percent": 58,
+      "actual_body_height": 25,
+      "actual_height_percent": 56.82,
+      "note": "Whole-pixel size, tentative comparison only"
+    },
+    {
+      "id": "c65",
+      "target_prompt_percent": 65,
+      "actual_body_height": 28,
+      "actual_height_percent": 63.64,
+      "note": "Whole-pixel size, tentative comparison only"
+    }
+  ],
+  "assets": [
+    {
+      "variant": "a50",
+      "pose": "right",
+      "file": "processed/a50/idle_right_00.png",
+      "canvas": [
+        48,
+        48
+      ],
+      "anchor": [
+        24,
+        44
+      ],
+      "visible_bounds": [
+        14,
+        22,
+        34,
+        44
+      ],
+      "body_size": [
+        20,
+        22
+      ],
+      "height_ratio_to_v1": 0.5,
+      "frame_order": [
+        0
+      ],
+      "duration_ms": null,
+      "playback": "static hold; no animation yet",
+      "status": "comparison_not_selected",
+      "alpha_values": [
+        0,
+        255
+      ],
+      "rgba": true
+    },
+    {
+      "variant": "a50",
+      "pose": "left",
+      "file": "processed/a50/idle_left_00.png",
+      "canvas": [
+        48,
+        48
+      ],
+      "anchor": [
+        24,
+        44
+      ],
+      "visible_bounds": [
+        14,
+        22,
+        34,
+        44
+      ],
+      "body_size": [
+        20,
+        22
+      ],
+      "height_ratio_to_v1": 0.5,
+      "frame_order": [
+        0
+      ],
+      "duration_ms": null,
+      "playback": "static hold; no animation yet",
+      "status": "comparison_not_selected",
+      "alpha_values": [
+        0,
+        255
+      ],
+      "rgba": true
+    },
+    {
+      "variant": "a50",
+      "pose": "front",
+      "file": "processed/a50/idle_front_00.png",
+      "canvas": [
+        48,
+        48
+      ],
+      "anchor": [
+        24,
+        44
+      ],
+      "visible_bounds": [
+        18,
+        22,
+        31,
+        44
+      ],
+      "body_size": [
+        13,
+        22
+      ],
+      "height_ratio_to_v1": 0.5,
+      "frame_order": [
+        0
+      ],
+      "duration_ms": null,
+      "playback": "static hold; no animation yet",
+      "status": "comparison_not_selected",
+      "alpha_values": [
+        0,
+        255
+      ],
+      "rgba": true
+    },
+    {
+      "variant": "b58",
+      "pose": "right",
+      "file": "processed/b58/idle_right_00.png",
+      "canvas": [
+        48,
+        48
+      ],
+      "anchor": [
+        24,
+        44
+      ],
+      "visible_bounds": [
+        12,
+        19,
+        36,
+        44
+      ],
+      "body_size": [
+        24,
+        25
+      ],
+      "height_ratio_to_v1": 0.5681818181818182,
+      "frame_order": [
+        0
+      ],
+      "duration_ms": null,
+      "playback": "static hold; no animation yet",
+      "status": "comparison_not_selected",
+      "alpha_values": [
+        0,
+        255
+      ],
+      "rgba": true
+    },
+    {
+      "variant": "b58",
+      "pose": "left",
+      "file": "processed/b58/idle_left_00.png",
+      "canvas": [
+        48,
+        48
+      ],
+      "anchor": [
+        24,
+        44
+      ],
+      "visible_bounds": [
+        12,
+        19,
+        36,
+        44
+      ],
+      "body_size": [
+        24,
+        25
+      ],
+      "height_ratio_to_v1": 0.5681818181818182,
+      "frame_order": [
+        0
+      ],
+      "duration_ms": null,
+      "playback": "static hold; no animation yet",
+      "status": "comparison_not_selected",
+      "alpha_values": [
+        0,
+        255
+      ],
+      "rgba": true
+    },
+    {
+      "variant": "b58",
+      "pose": "front",
+      "file": "processed/b58/idle_front_00.png",
+      "canvas": [
+        48,
+        48
+      ],
+      "anchor": [
+        24,
+        44
+      ],
+      "visible_bounds": [
+        17,
+        19,
+        31,
+        44
+      ],
+      "body_size": [
+        14,
+        25
+      ],
+      "height_ratio_to_v1": 0.5681818181818182,
+      "frame_order": [
+        0
+      ],
+      "duration_ms": null,
+      "playback": "static hold; no animation yet",
+      "status": "comparison_not_selected",
+      "alpha_values": [
+        0,
+        255
+      ],
+      "rgba": true
+    },
+    {
+      "variant": "c65",
+      "pose": "right",
+      "file": "processed/c65/idle_right_00.png",
+      "canvas": [
+        48,
+        48
+      ],
+      "anchor": [
+        24,
+        44
+      ],
+      "visible_bounds": [
+        12,
+        16,
+        37,
+        44
+      ],
+      "body_size": [
+        25,
+        28
+      ],
+      "height_ratio_to_v1": 0.6363636363636364,
+      "frame_order": [
+        0
+      ],
+      "duration_ms": null,
+      "playback": "static hold; no animation yet",
+      "status": "adopted",
+      "alpha_values": [
+        0,
+        255
+      ],
+      "rgba": true
+    },
+    {
+      "variant": "c65",
+      "pose": "left",
+      "file": "processed/c65/idle_left_00.png",
+      "canvas": [
+        48,
+        48
+      ],
+      "anchor": [
+        24,
+        44
+      ],
+      "visible_bounds": [
+        12,
+        16,
+        37,
+        44
+      ],
+      "body_size": [
+        25,
+        28
+      ],
+      "height_ratio_to_v1": 0.6363636363636364,
+      "frame_order": [
+        0
+      ],
+      "duration_ms": null,
+      "playback": "static hold; no animation yet",
+      "status": "adopted",
+      "alpha_values": [
+        0,
+        255
+      ],
+      "rgba": true
+    },
+    {
+      "variant": "c65",
+      "pose": "front",
+      "file": "processed/c65/idle_front_00.png",
+      "canvas": [
+        48,
+        48
+      ],
+      "anchor": [
+        24,
+        44
+      ],
+      "visible_bounds": [
+        16,
+        16,
+        33,
+        44
+      ],
+      "body_size": [
+        17,
+        28
+      ],
+      "height_ratio_to_v1": 0.6363636363636364,
+      "frame_order": [
+        0
+      ],
+      "duration_ms": null,
+      "playback": "static hold; no animation yet",
+      "status": "adopted",
+      "alpha_values": [
+        0,
+        255
+      ],
+      "rgba": true
+    }
+  ],
+  "palette": [
+    "382519",
+    "171d19",
+    "784321",
+    "ae622b",
+    "d88332",
+    "eda146",
+    "f7bc65",
+    "fff0ce",
+    "e5c89c",
+    "bc9569",
+    "d46e6b",
+    "f1aba0"
+  ],
+  "pixel_repairs": {
+    "a50": {
+      "right_changed_pixels": 44,
+      "front_changed_pixels": 43,
+      "left_derived_from_right": "mirrored geometry plus screen-upper-left body highlight"
+    },
+    "b58": {
+      "right_changed_pixels": 56,
+      "front_changed_pixels": 58,
+      "left_derived_from_right": "mirrored geometry plus screen-upper-left body highlight"
+    },
+    "c65": {
+      "right_changed_pixels": 68,
+      "front_changed_pixels": 63,
+      "left_derived_from_right": "mirrored geometry plus screen-upper-left body highlight"
+    }
+  },
+  "generator": "image_gen.imagegen",
+  "prompt_set": "prompts.json",
+  "external_paid_api": false,
+  "reference_capture": {
+    "path": "../review/current/indoors.png (relative to project)",
+    "implementation": "823f876",
+    "current_game_verification": false,
+    "hen_cat": "Existing rendered pixels extracted for review only; no animal redesign"
+  },
+  "limitations": [
+    "Side geometry mirrored for exact size consistency; small upper-left highlight corrected afterward",
+    "ImageGen did not honor native resolution or requested first pose in A; normalized and repaired at native size",
+    "50% option intentionally has minimal eye/mouth marks; choose based on 1x appearance",
+    "Latest game was not launched; screenshot composite only",
+    "Walk/stop sample begins after user selects size",
+    "No mass production or UI/hen/cat redesign"
+  ],
+  "next_sequence": [
+    "walk right",
+    "stop facing right",
+    "walk left",
+    "stop facing left"
+  ],
+  "selected_variant": "c65"
+}

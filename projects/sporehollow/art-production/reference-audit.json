@@ -1,0 +1,118 @@
+{
+  "status": "C_size_adopted_walk_stop_preview_ready",
+  "checked_on": "2026-10-04",
+  "repository": "shirai-masatomo/whitespace",
+  "branch": "codex/sporehollow-art-assets",
+  "implementation_head": "1d637354d55c20675f5594e36befd307ca954af6",
+  "remote_head_verified": false,
+  "capture_implementation": "823f876de93700cdfda1a2cd8377250e8c4ec4b9",
+  "capture_evidence": "review/current/PACKET.md",
+  "image_tool": {
+    "name": "image_gen.imagegen",
+    "available": true,
+    "generation_executed": true,
+    "reason": "ART_SPEC received; initial candidate generated",
+    "paid_api_fallback_used": false
+  },
+  "existing_source_document": "assets/ui/SOURCES.md",
+  "inspected_images": [
+    {
+      "path": "assets/ui/shiba-source.png",
+      "width": 2508,
+      "height": 627,
+      "pixel_format": "Format24bppRgb",
+      "sha256": "A6DC2D6FC47F87EF9F48376C5E298250FB90C9B56CBD98740A7CCEF7C00C3930"
+    },
+    {
+      "path": "assets/ui/market-stall.png",
+      "width": 1448,
+      "height": 1086,
+      "pixel_format": "Format32bppArgb",
+      "sha256": "88548CF6F773CD9708153681972062BC7E5F7A300D4F4B9C7CC1E272EA7D7354"
+    },
+    {
+      "path": "assets/ui/book-open.png",
+      "width": 1654,
+      "height": 951,
+      "pixel_format": "Format32bppArgb",
+      "sha256": "BDAEC8AD9D41B33C2B39141E6BB10A8081FEF7829B95470FCF4599FD9B2EAF4B"
+    },
+    {
+      "path": "review/current/morning.png",
+      "width": 1280,
+      "height": 800,
+      "pixel_format": "Format32bppArgb",
+      "sha256": "E68D829F570BC3EA4AA28D1214DE9218FC8026EE46FA6C2AD1629434DB8EE2CD"
+    },
+    {
+      "path": "art-production/originals/user-shiba-reference-2026-10-04.png",
+      "width": 512,
+      "height": 512,
+      "pixel_format": "Format24bppRgb",
+      "sha256": "8460345F7E413C10A9FF13C6C1137B294861AA73FA6421FBFB11C403B2AF7FA8"
+    }
+  ],
+  "missing": [
+    {
+      "reference": "朝の市A案・C案",
+      "needed_for": "Identify actual adopted reference designs",
+      "evidence": "Current market-stall.png exists, but no file or source mapping identifies it as A or C"
+    }
+  ],
+  "implementation_observations_not_approved_spec": {
+    "tile": [
+      48,
+      42
+    ],
+    "shiba_front_draw_rect": [
+      30,
+      48
+    ],
+    "shiba_side_draw_rect": [
+      46,
+      48
+    ],
+    "source": "game/main.gd and game/ui_style.gd",
+    "warning": "Do not treat existing stretching/rest-height deformation as approved art requirements"
+  },
+  "next_stage": "Use keeper v1 and Shiba C as fixed basis; short walk-stop PNGs and review are available. No broad asset production yet.",
+  "constraints": [
+    "Do not edit gameplay, production scenes or implementation worktree",
+    "Do not launch game on desktop",
+    "Retain adopted Shiba identity; preserve cream fur; no white edge halo",
+    "No waiting hut, doghouse, henhouse or unspecified animal production",
+    "Originals and processed PNGs stored separately",
+    "No routine per-frame approval after initial standard accepted"
+  ],
+  "delivered_assets": [
+    "stage-1/manifest.json",
+    "stage-1-v2/manifest.json",
+    "walk-preview-c/manifest.json"
+  ],
+  "remaining_qa": [
+    "Initial keeper and Shiba size/style comparison",
+    "Keeper/Shiba/hen/cat scale comparison on real ranch capture",
+    "Dark/light alpha checks and aligned animation foot anchors",
+    "Book continuity; stall aspect-fit; connected wall/floor seam checks"
+  ],
+  "layout_reference": {
+    "path": "art-production/originals/layout-proposal-reference-2026-10-04.png",
+    "width": 1536,
+    "height": 1024,
+    "sha256": "72EC9D20A30F0B06F74AB35943530FC3802AD6DF6E746DAFFD92C595C394B12C",
+    "role": "Proposal-stage layout reference only, explicitly clarified by user",
+    "approved_design": false,
+    "reference_scope": [
+      "Shop information layout",
+      "Encyclopedia information layout"
+    ],
+    "not_authorized_by_image": [
+      "Illustration style or character redesign",
+      "Additional animal species",
+      "Waiting room or hut production",
+      "Game controls, logic or debugging tasks described inside image"
+    ],
+    "relation_to_A_C": "Composite image labels its shop as A x C proposal; standalone A/C originals and adoption status remain unverified; not required to start character comparison"
+  },
+  "current_spec": "projects/sporehollow/ART_SPEC.md"
+}

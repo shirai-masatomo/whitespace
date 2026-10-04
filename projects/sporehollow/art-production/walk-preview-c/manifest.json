@@ -1,0 +1,549 @@
+{
+  "status": "C_size_adopted_walk_stop_preview_ready",
+  "selected_variant": "stage-1-v2/c65",
+  "body_heights": {
+    "keeper": 42,
+    "shiba": 28
+  },
+  "frames": {
+    "keeper": {
+      "size": [
+        32,
+        48
+      ],
+      "anchor": [
+        16,
+        44
+      ]
+    },
+    "shiba": {
+      "size": [
+        48,
+        48
+      ],
+      "anchor": [
+        24,
+        44
+      ]
+    }
+  },
+  "walk": {
+    "frame_order": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "duration_ms_per_frame": 100,
+    "cycle_ms": 400,
+    "loop": true,
+    "directions": [
+      "right",
+      "left"
+    ],
+    "frames_per_direction": 4
+  },
+  "idle": {
+    "duration_ms": null,
+    "behavior": "hold until new state; maintain last facing",
+    "right_source": "approved originals copied byte-for-byte",
+    "shiba_left_source": "approved C left copied byte-for-byte",
+    "keeper_left_source": "mirrored approved keeper around anchor"
+  },
+  "preview_sequence": [
+    {
+      "start_ms": 0,
+      "end_ms": 2000,
+      "action": "walk",
+      "direction": "right",
+      "label": "右へ歩く",
+      "x_start": 32,
+      "x_end": 92
+    },
+    {
+      "start_ms": 2000,
+      "end_ms": 3000,
+      "action": "idle",
+      "direction": "right",
+      "label": "停止（右向き）",
+      "x_start": 92,
+      "x_end": 92
+    },
+    {
+      "start_ms": 3000,
+      "end_ms": 5000,
+      "action": "walk",
+      "direction": "left",
+      "label": "左へ歩く",
+      "x_start": 92,
+      "x_end": 32
+    },
+    {
+      "start_ms": 5000,
+      "end_ms": 6500,
+      "action": "idle",
+      "direction": "left",
+      "label": "停止（左向きを保持）",
+      "x_start": 32,
+      "x_end": 32
+    }
+  ],
+  "preview_duration_ms": 6500,
+  "preview_speed_px_per_second": 30,
+  "preview_rate_fps": 20,
+  "source_capture": "review/current/indoors.png (823f876, old captured frame)",
+  "game_launched": false,
+  "production_scenes_or_logic_modified": false,
+  "generation": {
+    "tool": "image_gen.imagegen",
+    "prompts": "prompts.json",
+    "originals": [
+      "originals/keeper-walk-guide.png",
+      "originals/shiba-walk-guide.png"
+    ],
+    "external_paid_api": false
+  },
+  "processing": [
+    "Generated lower-limb motion shapes normalized proportionally to approved frame",
+    "Approved head/torso preserved pixel for pixel; keeper hands preserved through y34",
+    "Native-pixel correction of limb depth and contour; nearly repeated contact frames differentiated",
+    "Left motion mirrored about fixed anchor, with approved left upper-body pixels restored",
+    "No per-frame resizing in preview; stops switch to approved idle"
+  ],
+  "native_pixel_repairs": {
+    "keeper_0": 15,
+    "keeper_1": 0,
+    "keeper_2": 22,
+    "keeper_3": 0,
+    "shiba_0": 27,
+    "shiba_1": 29,
+    "shiba_2": 34,
+    "shiba_3": 23
+  },
+  "qa": [
+    {
+      "character": "keeper",
+      "direction": "right",
+      "frame": 0,
+      "size": [
+        32,
+        48
+      ],
+      "anchor": [
+        16,
+        44
+      ],
+      "visible_bounds": [
+        4,
+        2,
+        29,
+        44
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "connected_components": 1,
+      "upper_body_matches_approved_idle": true,
+      "pixel_sha256": "3aca2fedca0c295398235e9523bdbdaff75a5c8b00c0bc7ee57c9a461c627a3a"
+    },
+    {
+      "character": "keeper",
+      "direction": "right",
+      "frame": 1,
+      "size": [
+        32,
+        48
+      ],
+      "anchor": [
+        16,
+        44
+      ],
+      "visible_bounds": [
+        4,
+        2,
+        29,
+        44
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "connected_components": 1,
+      "upper_body_matches_approved_idle": true,
+      "pixel_sha256": "3b179c41a8c5a178f56cafc15197861b631907b57ee430cd5f0b080eab500f9c"
+    },
+    {
+      "character": "keeper",
+      "direction": "right",
+      "frame": 2,
+      "size": [
+        32,
+        48
+      ],
+      "anchor": [
+        16,
+        44
+      ],
+      "visible_bounds": [
+        4,
+        2,
+        29,
+        44
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "connected_components": 1,
+      "upper_body_matches_approved_idle": true,
+      "pixel_sha256": "9646c2fd68046699452b5f4a38261142b163dfb410551952b6a32a35c2ae8ba3"
+    },
+    {
+      "character": "keeper",
+      "direction": "right",
+      "frame": 3,
+      "size": [
+        32,
+        48
+      ],
+      "anchor": [
+        16,
+        44
+      ],
+      "visible_bounds": [
+        4,
+        2,
+        29,
+        44
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "connected_components": 1,
+      "upper_body_matches_approved_idle": true,
+      "pixel_sha256": "295cfe83323e9a75ddac0da9d7b8954aae6c12a7a1e07a41a85d6266456266cf"
+    },
+    {
+      "character": "keeper",
+      "direction": "left",
+      "frame": 0,
+      "size": [
+        32,
+        48
+      ],
+      "anchor": [
+        16,
+        44
+      ],
+      "visible_bounds": [
+        4,
+        2,
+        29,
+        44
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "connected_components": 1,
+      "upper_body_matches_approved_idle": true,
+      "pixel_sha256": "2fd974128b025196bffece01cdb506fe0cf99957172128f17a215601206e05c7"
+    },
+    {
+      "character": "keeper",
+      "direction": "left",
+      "frame": 1,
+      "size": [
+        32,
+        48
+      ],
+      "anchor": [
+        16,
+        44
+      ],
+      "visible_bounds": [
+        4,
+        2,
+        29,
+        44
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "connected_components": 1,
+      "upper_body_matches_approved_idle": true,
+      "pixel_sha256": "86f7d4dbfd42d022a1221b10c093146ead7a4cc248f4460da41675f7e0c845a5"
+    },
+    {
+      "character": "keeper",
+      "direction": "left",
+      "frame": 2,
+      "size": [
+        32,
+        48
+      ],
+      "anchor": [
+        16,
+        44
+      ],
+      "visible_bounds": [
+        4,
+        2,
+        29,
+        44
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "connected_components": 1,
+      "upper_body_matches_approved_idle": true,
+      "pixel_sha256": "72f9b99927b81bae78c0aaa228c699416372f74611b2f501f0ceb85b0f830969"
+    },
+    {
+      "character": "keeper",
+      "direction": "left",
+      "frame": 3,
+      "size": [
+        32,
+        48
+      ],
+      "anchor": [
+        16,
+        44
+      ],
+      "visible_bounds": [
+        4,
+        2,
+        29,
+        44
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "connected_components": 1,
+      "upper_body_matches_approved_idle": true,
+      "pixel_sha256": "b4d8c37880655a10ce991a940ba65606709c2d8c6baf69d224d0574743654a9b"
+    },
+    {
+      "character": "shiba",
+      "direction": "right",
+      "frame": 0,
+      "size": [
+        48,
+        48
+      ],
+      "anchor": [
+        24,
+        44
+      ],
+      "visible_bounds": [
+        9,
+        16,
+        37,
+        44
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "connected_components": 1,
+      "upper_body_matches_approved_idle": true,
+      "pixel_sha256": "d658de1b91014662566f6b02da61f3b7e0cfe33b98b60476875b1a18c7a7f515"
+    },
+    {
+      "character": "shiba",
+      "direction": "right",
+      "frame": 1,
+      "size": [
+        48,
+        48
+      ],
+      "anchor": [
+        24,
+        44
+      ],
+      "visible_bounds": [
+        11,
+        16,
+        37,
+        44
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "connected_components": 1,
+      "upper_body_matches_approved_idle": true,
+      "pixel_sha256": "99335ac8688cf333d53a14511ad49d8df1b67592782120e0b923755875a9cbdf"
+    },
+    {
+      "character": "shiba",
+      "direction": "right",
+      "frame": 2,
+      "size": [
+        48,
+        48
+      ],
+      "anchor": [
+        24,
+        44
+      ],
+      "visible_bounds": [
+        9,
+        16,
+        37,
+        44
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "connected_components": 1,
+      "upper_body_matches_approved_idle": true,
+      "pixel_sha256": "1a7eb0bd6a91813b99a57a9c939368d08c8183b12dbfa1b4e9da41d0b6138e95"
+    },
+    {
+      "character": "shiba",
+      "direction": "right",
+      "frame": 3,
+      "size": [
+        48,
+        48
+      ],
+      "anchor": [
+        24,
+        44
+      ],
+      "visible_bounds": [
+        12,
+        16,
+        37,
+        44
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "connected_components": 1,
+      "upper_body_matches_approved_idle": true,
+      "pixel_sha256": "bac6f32806a5b94680795ec613fe02fbcc296eb38d61601fb849bf14f3d11e7e"
+    },
+    {
+      "character": "shiba",
+      "direction": "left",
+      "frame": 0,
+      "size": [
+        48,
+        48
+      ],
+      "anchor": [
+        24,
+        44
+      ],
+      "visible_bounds": [
+        12,
+        16,
+        40,
+        44
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "connected_components": 1,
+      "upper_body_matches_approved_idle": true,
+      "pixel_sha256": "8b9fb4ab7a15e946fa81134db43d6f657e1eb5ea1de443547b4af2dae57b5a79"
+    },
+    {
+      "character": "shiba",
+      "direction": "left",
+      "frame": 1,
+      "size": [
+        48,
+        48
+      ],
+      "anchor": [
+        24,
+        44
+      ],
+      "visible_bounds": [
+        12,
+        16,
+        38,
+        44
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "connected_components": 1,
+      "upper_body_matches_approved_idle": true,
+      "pixel_sha256": "5688b99059566497ab75342cb9942629e496528ba9070cff31c7aa4e1a442914"
+    },
+    {
+      "character": "shiba",
+      "direction": "left",
+      "frame": 2,
+      "size": [
+        48,
+        48
+      ],
+      "anchor": [
+        24,
+        44
+      ],
+      "visible_bounds": [
+        12,
+        16,
+        40,
+        44
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "connected_components": 1,
+      "upper_body_matches_approved_idle": true,
+      "pixel_sha256": "6547bac5a790254b49905e92e10f30569f9a6224b0ea5c8b7b265da0097b2c96"
+    },
+    {
+      "character": "shiba",
+      "direction": "left",
+      "frame": 3,
+      "size": [
+        48,
+        48
+      ],
+      "anchor": [
+        24,
+        44
+      ],
+      "visible_bounds": [
+        12,
+        16,
+        37,
+        44
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "connected_components": 1,
+      "upper_body_matches_approved_idle": true,
+      "pixel_sha256": "b3bc5731a80f082217f9ecb172f4fd735d55ef070a306deea6927dc391af245c"
+    }
+  ],
+  "limitations": [
+    "Short walk prototype; arms/head remain fixed to prevent appearance drift",
+    "Preview speed is for comparison; implementation should synchronize step cycle to movement",
+    "No rest/sleep/wake or tool-use frames in this preview",
+    "No current gameplay integration or GUI verification",
+    "No hen/cat/UI mass production"
+  ],
+  "state_trace": "review/sequence-trace.json"
+}

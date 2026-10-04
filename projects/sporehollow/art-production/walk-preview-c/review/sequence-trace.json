@@ -1,0 +1,1042 @@
+[
+  {
+    "time_ms": 0,
+    "phase": "右へ歩く",
+    "direction": "right",
+    "action": "walk",
+    "frame": 0,
+    "x": 32
+  },
+  {
+    "time_ms": 50,
+    "phase": "右へ歩く",
+    "direction": "right",
+    "action": "walk",
+    "frame": 0,
+    "x": 34
+  },
+  {
+    "time_ms": 100,
+    "phase": "右へ歩く",
+    "direction": "right",
+    "action": "walk",
+    "frame": 1,
+    "x": 35
+  },
+  {
+    "time_ms": 150,
+    "phase": "右へ歩く",
+    "direction": "right",
+    "action": "walk",
+    "frame": 1,
+    "x": 36
+  },
+  {
+    "time_ms": 200,
+    "phase": "右へ歩く",
+    "direction": "right",
+    "action": "walk",
+    "frame": 2,
+    "x": 38
+  },
+  {
+    "time_ms": 250,
+    "phase": "右へ歩く",
+    "direction": "right",
+    "action": "walk",
+    "frame": 2,
+    "x": 40
+  },
+  {
+    "time_ms": 300,
+    "phase": "右へ歩く",
+    "direction": "right",
+    "action": "walk",
+    "frame": 3,
+    "x": 41
+  },
+  {
+    "time_ms": 350,
+    "phase": "右へ歩く",
+    "direction": "right",
+    "action": "walk",
+    "frame": 3,
+    "x": 42
+  },
+  {
+    "time_ms": 400,
+    "phase": "右へ歩く",
+    "direction": "right",
+    "action": "walk",
+    "frame": 0,
+    "x": 44
+  },
+  {
+    "time_ms": 450,
+    "phase": "右へ歩く",
+    "direction": "right",
+    "action": "walk",
+    "frame": 0,
+    "x": 46
+  },
+  {
+    "time_ms": 500,
+    "phase": "右へ歩く",
+    "direction": "right",
+    "action": "walk",
+    "frame": 1,
+    "x": 47
+  },
+  {
+    "time_ms": 550,
+    "phase": "右へ歩く",
+    "direction": "right",
+    "action": "walk",
+    "frame": 1,
+    "x": 48
+  },
+  {
+    "time_ms": 600,
+    "phase": "右へ歩く",
+    "direction": "right",
+    "action": "walk",
+    "frame": 2,
+    "x": 50
+  },
+  {
+    "time_ms": 650,
+    "phase": "右へ歩く",
+    "direction": "right",
+    "action": "walk",
+    "frame": 2,
+    "x": 52
+  },
+  {
+    "time_ms": 700,
+    "phase": "右へ歩く",
+    "direction": "right",
+    "action": "walk",
+    "frame": 3,
+    "x": 53
+  },
+  {
+    "time_ms": 750,
+    "phase": "右へ歩く",
+    "direction": "right",
+    "action": "walk",
+    "frame": 3,
+    "x": 54
+  },
+  {
+    "time_ms": 800,
+    "phase": "右へ歩く",
+    "direction": "right",
+    "action": "walk",
+    "frame": 0,
+    "x": 56
+  },
+  {
+    "time_ms": 850,
+    "phase": "右へ歩く",
+    "direction": "right",
+    "action": "walk",
+    "frame": 0,
+    "x": 58
+  },
+  {
+    "time_ms": 900,
+    "phase": "右へ歩く",
+    "direction": "right",
+    "action": "walk",
+    "frame": 1,
+    "x": 59
+  },
+  {
+    "time_ms": 950,
+    "phase": "右へ歩く",
+    "direction": "right",
+    "action": "walk",
+    "frame": 1,
+    "x": 60
+  },
+  {
+    "time_ms": 1000,
+    "phase": "右へ歩く",
+    "direction": "right",
+    "action": "walk",
+    "frame": 2,
+    "x": 62
+  },
+  {
+    "time_ms": 1050,
+    "phase": "右へ歩く",
+    "direction": "right",
+    "action": "walk",
+    "frame": 2,
+    "x": 64
+  },
+  {
+    "time_ms": 1100,
+    "phase": "右へ歩く",
+    "direction": "right",
+    "action": "walk",
+    "frame": 3,
+    "x": 65
+  },
+  {
+    "time_ms": 1150,
+    "phase": "右へ歩く",
+    "direction": "right",
+    "action": "walk",
+    "frame": 3,
+    "x": 66
+  },
+  {
+    "time_ms": 1200,
+    "phase": "右へ歩く",
+    "direction": "right",
+    "action": "walk",
+    "frame": 0,
+    "x": 68
+  },
+  {
+    "time_ms": 1250,
+    "phase": "右へ歩く",
+    "direction": "right",
+    "action": "walk",
+    "frame": 0,
+    "x": 70
+  },
+  {
+    "time_ms": 1300,
+    "phase": "右へ歩く",
+    "direction": "right",
+    "action": "walk",
+    "frame": 1,
+    "x": 71
+  },
+  {
+    "time_ms": 1350,
+    "phase": "右へ歩く",
+    "direction": "right",
+    "action": "walk",
+    "frame": 1,
+    "x": 72
+  },
+  {
+    "time_ms": 1400,
+    "phase": "右へ歩く",
+    "direction": "right",
+    "action": "walk",
+    "frame": 2,
+    "x": 74
+  },
+  {
+    "time_ms": 1450,
+    "phase": "右へ歩く",
+    "direction": "right",
+    "action": "walk",
+    "frame": 2,
+    "x": 76
+  },
+  {
+    "time_ms": 1500,
+    "phase": "右へ歩く",
+    "direction": "right",
+    "action": "walk",
+    "frame": 3,
+    "x": 77
+  },
+  {
+    "time_ms": 1550,
+    "phase": "右へ歩く",
+    "direction": "right",
+    "action": "walk",
+    "frame": 3,
+    "x": 78
+  },
+  {
+    "time_ms": 1600,
+    "phase": "右へ歩く",
+    "direction": "right",
+    "action": "walk",
+    "frame": 0,
+    "x": 80
+  },
+  {
+    "time_ms": 1650,
+    "phase": "右へ歩く",
+    "direction": "right",
+    "action": "walk",
+    "frame": 0,
+    "x": 82
+  },
+  {
+    "time_ms": 1700,
+    "phase": "右へ歩く",
+    "direction": "right",
+    "action": "walk",
+    "frame": 1,
+    "x": 83
+  },
+  {
+    "time_ms": 1750,
+    "phase": "右へ歩く",
+    "direction": "right",
+    "action": "walk",
+    "frame": 1,
+    "x": 84
+  },
+  {
+    "time_ms": 1800,
+    "phase": "右へ歩く",
+    "direction": "right",
+    "action": "walk",
+    "frame": 2,
+    "x": 86
+  },
+  {
+    "time_ms": 1850,
+    "phase": "右へ歩く",
+    "direction": "right",
+    "action": "walk",
+    "frame": 2,
+    "x": 88
+  },
+  {
+    "time_ms": 1900,
+    "phase": "右へ歩く",
+    "direction": "right",
+    "action": "walk",
+    "frame": 3,
+    "x": 89
+  },
+  {
+    "time_ms": 1950,
+    "phase": "右へ歩く",
+    "direction": "right",
+    "action": "walk",
+    "frame": 3,
+    "x": 90
+  },
+  {
+    "time_ms": 2000,
+    "phase": "停止（右向き）",
+    "direction": "right",
+    "action": "idle",
+    "frame": null,
+    "x": 92
+  },
+  {
+    "time_ms": 2050,
+    "phase": "停止（右向き）",
+    "direction": "right",
+    "action": "idle",
+    "frame": null,
+    "x": 92
+  },
+  {
+    "time_ms": 2100,
+    "phase": "停止（右向き）",
+    "direction": "right",
+    "action": "idle",
+    "frame": null,
+    "x": 92
+  },
+  {
+    "time_ms": 2150,
+    "phase": "停止（右向き）",
+    "direction": "right",
+    "action": "idle",
+    "frame": null,
+    "x": 92
+  },
+  {
+    "time_ms": 2200,
+    "phase": "停止（右向き）",
+    "direction": "right",
+    "action": "idle",
+    "frame": null,
+    "x": 92
+  },
+  {
+    "time_ms": 2250,
+    "phase": "停止（右向き）",
+    "direction": "right",
+    "action": "idle",
+    "frame": null,
+    "x": 92
+  },
+  {
+    "time_ms": 2300,
+    "phase": "停止（右向き）",
+    "direction": "right",
+    "action": "idle",
+    "frame": null,
+    "x": 92
+  },
+  {
+    "time_ms": 2350,
+    "phase": "停止（右向き）",
+    "direction": "right",
+    "action": "idle",
+    "frame": null,
+    "x": 92
+  },
+  {
+    "time_ms": 2400,
+    "phase": "停止（右向き）",
+    "direction": "right",
+    "action": "idle",
+    "frame": null,
+    "x": 92
+  },
+  {
+    "time_ms": 2450,
+    "phase": "停止（右向き）",
+    "direction": "right",
+    "action": "idle",
+    "frame": null,
+    "x": 92
+  },
+  {
+    "time_ms": 2500,
+    "phase": "停止（右向き）",
+    "direction": "right",
+    "action": "idle",
+    "frame": null,
+    "x": 92
+  },
+  {
+    "time_ms": 2550,
+    "phase": "停止（右向き）",
+    "direction": "right",
+    "action": "idle",
+    "frame": null,
+    "x": 92
+  },
+  {
+    "time_ms": 2600,
+    "phase": "停止（右向き）",
+    "direction": "right",
+    "action": "idle",
+    "frame": null,
+    "x": 92
+  },
+  {
+    "time_ms": 2650,
+    "phase": "停止（右向き）",
+    "direction": "right",
+    "action": "idle",
+    "frame": null,
+    "x": 92
+  },
+  {
+    "time_ms": 2700,
+    "phase": "停止（右向き）",
+    "direction": "right",
+    "action": "idle",
+    "frame": null,
+    "x": 92
+  },
+  {
+    "time_ms": 2750,
+    "phase": "停止（右向き）",
+    "direction": "right",
+    "action": "idle",
+    "frame": null,
+    "x": 92
+  },
+  {
+    "time_ms": 2800,
+    "phase": "停止（右向き）",
+    "direction": "right",
+    "action": "idle",
+    "frame": null,
+    "x": 92
+  },
+  {
+    "time_ms": 2850,
+    "phase": "停止（右向き）",
+    "direction": "right",
+    "action": "idle",
+    "frame": null,
+    "x": 92
+  },
+  {
+    "time_ms": 2900,
+    "phase": "停止（右向き）",
+    "direction": "right",
+    "action": "idle",
+    "frame": null,
+    "x": 92
+  },
+  {
+    "time_ms": 2950,
+    "phase": "停止（右向き）",
+    "direction": "right",
+    "action": "idle",
+    "frame": null,
+    "x": 92
+  },
+  {
+    "time_ms": 3000,
+    "phase": "左へ歩く",
+    "direction": "left",
+    "action": "walk",
+    "frame": 0,
+    "x": 92
+  },
+  {
+    "time_ms": 3050,
+    "phase": "左へ歩く",
+    "direction": "left",
+    "action": "walk",
+    "frame": 0,
+    "x": 90
+  },
+  {
+    "time_ms": 3100,
+    "phase": "左へ歩く",
+    "direction": "left",
+    "action": "walk",
+    "frame": 1,
+    "x": 89
+  },
+  {
+    "time_ms": 3150,
+    "phase": "左へ歩く",
+    "direction": "left",
+    "action": "walk",
+    "frame": 1,
+    "x": 88
+  },
+  {
+    "time_ms": 3200,
+    "phase": "左へ歩く",
+    "direction": "left",
+    "action": "walk",
+    "frame": 2,
+    "x": 86
+  },
+  {
+    "time_ms": 3250,
+    "phase": "左へ歩く",
+    "direction": "left",
+    "action": "walk",
+    "frame": 2,
+    "x": 84
+  },
+  {
+    "time_ms": 3300,
+    "phase": "左へ歩く",
+    "direction": "left",
+    "action": "walk",
+    "frame": 3,
+    "x": 83
+  },
+  {
+    "time_ms": 3350,
+    "phase": "左へ歩く",
+    "direction": "left",
+    "action": "walk",
+    "frame": 3,
+    "x": 82
+  },
+  {
+    "time_ms": 3400,
+    "phase": "左へ歩く",
+    "direction": "left",
+    "action": "walk",
+    "frame": 0,
+    "x": 80
+  },
+  {
+    "time_ms": 3450,
+    "phase": "左へ歩く",
+    "direction": "left",
+    "action": "walk",
+    "frame": 0,
+    "x": 78
+  },
+  {
+    "time_ms": 3500,
+    "phase": "左へ歩く",
+    "direction": "left",
+    "action": "walk",
+    "frame": 1,
+    "x": 77
+  },
+  {
+    "time_ms": 3550,
+    "phase": "左へ歩く",
+    "direction": "left",
+    "action": "walk",
+    "frame": 1,
+    "x": 76
+  },
+  {
+    "time_ms": 3600,
+    "phase": "左へ歩く",
+    "direction": "left",
+    "action": "walk",
+    "frame": 2,
+    "x": 74
+  },
+  {
+    "time_ms": 3650,
+    "phase": "左へ歩く",
+    "direction": "left",
+    "action": "walk",
+    "frame": 2,
+    "x": 72
+  },
+  {
+    "time_ms": 3700,
+    "phase": "左へ歩く",
+    "direction": "left",
+    "action": "walk",
+    "frame": 3,
+    "x": 71
+  },
+  {
+    "time_ms": 3750,
+    "phase": "左へ歩く",
+    "direction": "left",
+    "action": "walk",
+    "frame": 3,
+    "x": 70
+  },
+  {
+    "time_ms": 3800,
+    "phase": "左へ歩く",
+    "direction": "left",
+    "action": "walk",
+    "frame": 0,
+    "x": 68
+  },
+  {
+    "time_ms": 3850,
+    "phase": "左へ歩く",
+    "direction": "left",
+    "action": "walk",
+    "frame": 0,
+    "x": 66
+  },
+  {
+    "time_ms": 3900,
+    "phase": "左へ歩く",
+    "direction": "left",
+    "action": "walk",
+    "frame": 1,
+    "x": 65
+  },
+  {
+    "time_ms": 3950,
+    "phase": "左へ歩く",
+    "direction": "left",
+    "action": "walk",
+    "frame": 1,
+    "x": 64
+  },
+  {
+    "time_ms": 4000,
+    "phase": "左へ歩く",
+    "direction": "left",
+    "action": "walk",
+    "frame": 2,
+    "x": 62
+  },
+  {
+    "time_ms": 4050,
+    "phase": "左へ歩く",
+    "direction": "left",
+    "action": "walk",
+    "frame": 2,
+    "x": 60
+  },
+  {
+    "time_ms": 4100,
+    "phase": "左へ歩く",
+    "direction": "left",
+    "action": "walk",
+    "frame": 3,
+    "x": 59
+  },
+  {
+    "time_ms": 4150,
+    "phase": "左へ歩く",
+    "direction": "left",
+    "action": "walk",
+    "frame": 3,
+    "x": 58
+  },
+  {
+    "time_ms": 4200,
+    "phase": "左へ歩く",
+    "direction": "left",
+    "action": "walk",
+    "frame": 0,
+    "x": 56
+  },
+  {
+    "time_ms": 4250,
+    "phase": "左へ歩く",
+    "direction": "left",
+    "action": "walk",
+    "frame": 0,
+    "x": 54
+  },
+  {
+    "time_ms": 4300,
+    "phase": "左へ歩く",
+    "direction": "left",
+    "action": "walk",
+    "frame": 1,
+    "x": 53
+  },
+  {
+    "time_ms": 4350,
+    "phase": "左へ歩く",
+    "direction": "left",
+    "action": "walk",
+    "frame": 1,
+    "x": 52
+  },
+  {
+    "time_ms": 4400,
+    "phase": "左へ歩く",
+    "direction": "left",
+    "action": "walk",
+    "frame": 2,
+    "x": 50
+  },
+  {
+    "time_ms": 4450,
+    "phase": "左へ歩く",
+    "direction": "left",
+    "action": "walk",
+    "frame": 2,
+    "x": 48
+  },
+  {
+    "time_ms": 4500,
+    "phase": "左へ歩く",
+    "direction": "left",
+    "action": "walk",
+    "frame": 3,
+    "x": 47
+  },
+  {
+    "time_ms": 4550,
+    "phase": "左へ歩く",
+    "direction": "left",
+    "action": "walk",
+    "frame": 3,
+    "x": 46
+  },
+  {
+    "time_ms": 4600,
+    "phase": "左へ歩く",
+    "direction": "left",
+    "action": "walk",
+    "frame": 0,
+    "x": 44
+  },
+  {
+    "time_ms": 4650,
+    "phase": "左へ歩く",
+    "direction": "left",
+    "action": "walk",
+    "frame": 0,
+    "x": 42
+  },
+  {
+    "time_ms": 4700,
+    "phase": "左へ歩く",
+    "direction": "left",
+    "action": "walk",
+    "frame": 1,
+    "x": 41
+  },
+  {
+    "time_ms": 4750,
+    "phase": "左へ歩く",
+    "direction": "left",
+    "action": "walk",
+    "frame": 1,
+    "x": 40
+  },
+  {
+    "time_ms": 4800,
+    "phase": "左へ歩く",
+    "direction": "left",
+    "action": "walk",
+    "frame": 2,
+    "x": 38
+  },
+  {
+    "time_ms": 4850,
+    "phase": "左へ歩く",
+    "direction": "left",
+    "action": "walk",
+    "frame": 2,
+    "x": 36
+  },
+  {
+    "time_ms": 4900,
+    "phase": "左へ歩く",
+    "direction": "left",
+    "action": "walk",
+    "frame": 3,
+    "x": 35
+  },
+  {
+    "time_ms": 4950,
+    "phase": "左へ歩く",
+    "direction": "left",
+    "action": "walk",
+    "frame": 3,
+    "x": 34
+  },
+  {
+    "time_ms": 5000,
+    "phase": "停止（左向きを保持）",
+    "direction": "left",
+    "action": "idle",
+    "frame": null,
+    "x": 32
+  },
+  {
+    "time_ms": 5050,
+    "phase": "停止（左向きを保持）",
+    "direction": "left",
+    "action": "idle",
+    "frame": null,
+    "x": 32
+  },
+  {
+    "time_ms": 5100,
+    "phase": "停止（左向きを保持）",
+    "direction": "left",
+    "action": "idle",
+    "frame": null,
+    "x": 32
+  },
+  {
+    "time_ms": 5150,
+    "phase": "停止（左向きを保持）",
+    "direction": "left",
+    "action": "idle",
+    "frame": null,
+    "x": 32
+  },
+  {
+    "time_ms": 5200,
+    "phase": "停止（左向きを保持）",
+    "direction": "left",
+    "action": "idle",
+    "frame": null,
+    "x": 32
+  },
+  {
+    "time_ms": 5250,
+    "phase": "停止（左向きを保持）",
+    "direction": "left",
+    "action": "idle",
+    "frame": null,
+    "x": 32
+  },
+  {
+    "time_ms": 5300,
+    "phase": "停止（左向きを保持）",
+    "direction": "left",
+    "action": "idle",
+    "frame": null,
+    "x": 32
+  },
+  {
+    "time_ms": 5350,
+    "phase": "停止（左向きを保持）",
+    "direction": "left",
+    "action": "idle",
+    "frame": null,
+    "x": 32
+  },
+  {
+    "time_ms": 5400,
+    "phase": "停止（左向きを保持）",
+    "direction": "left",
+    "action": "idle",
+    "frame": null,
+    "x": 32
+  },
+  {
+    "time_ms": 5450,
+    "phase": "停止（左向きを保持）",
+    "direction": "left",
+    "action": "idle",
+    "frame": null,
+    "x": 32
+  },
+  {
+    "time_ms": 5500,
+    "phase": "停止（左向きを保持）",
+    "direction": "left",
+    "action": "idle",
+    "frame": null,
+    "x": 32
+  },
+  {
+    "time_ms": 5550,
+    "phase": "停止（左向きを保持）",
+    "direction": "left",
+    "action": "idle",
+    "frame": null,
+    "x": 32
+  },
+  {
+    "time_ms": 5600,
+    "phase": "停止（左向きを保持）",
+    "direction": "left",
+    "action": "idle",
+    "frame": null,
+    "x": 32
+  },
+  {
+    "time_ms": 5650,
+    "phase": "停止（左向きを保持）",
+    "direction": "left",
+    "action": "idle",
+    "frame": null,
+    "x": 32
+  },
+  {
+    "time_ms": 5700,
+    "phase": "停止（左向きを保持）",
+    "direction": "left",
+    "action": "idle",
+    "frame": null,
+    "x": 32
+  },
+  {
+    "time_ms": 5750,
+    "phase": "停止（左向きを保持）",
+    "direction": "left",
+    "action": "idle",
+    "frame": null,
+    "x": 32
+  },
+  {
+    "time_ms": 5800,
+    "phase": "停止（左向きを保持）",
+    "direction": "left",
+    "action": "idle",
+    "frame": null,
+    "x": 32
+  },
+  {
+    "time_ms": 5850,
+    "phase": "停止（左向きを保持）",
+    "direction": "left",
+    "action": "idle",
+    "frame": null,
+    "x": 32
+  },
+  {
+    "time_ms": 5900,
+    "phase": "停止（左向きを保持）",
+    "direction": "left",
+    "action": "idle",
+    "frame": null,
+    "x": 32
+  },
+  {
+    "time_ms": 5950,
+    "phase": "停止（左向きを保持）",
+    "direction": "left",
+    "action": "idle",
+    "frame": null,
+    "x": 32
+  },
+  {
+    "time_ms": 6000,
+    "phase": "停止（左向きを保持）",
+    "direction": "left",
+    "action": "idle",
+    "frame": null,
+    "x": 32
+  },
+  {
+    "time_ms": 6050,
+    "phase": "停止（左向きを保持）",
+    "direction": "left",
+    "action": "idle",
+    "frame": null,
+    "x": 32
+  },
+  {
+    "time_ms": 6100,
+    "phase": "停止（左向きを保持）",
+    "direction": "left",
+    "action": "idle",
+    "frame": null,
+    "x": 32
+  },
+  {
+    "time_ms": 6150,
+    "phase": "停止（左向きを保持）",
+    "direction": "left",
+    "action": "idle",
+    "frame": null,
+    "x": 32
+  },
+  {
+    "time_ms": 6200,
+    "phase": "停止（左向きを保持）",
+    "direction": "left",
+    "action": "idle",
+    "frame": null,
+    "x": 32
+  },
+  {
+    "time_ms": 6250,
+    "phase": "停止（左向きを保持）",
+    "direction": "left",
+    "action": "idle",
+    "frame": null,
+    "x": 32
+  },
+  {
+    "time_ms": 6300,
+    "phase": "停止（左向きを保持）",
+    "direction": "left",
+    "action": "idle",
+    "frame": null,
+    "x": 32
+  },
+  {
+    "time_ms": 6350,
+    "phase": "停止（左向きを保持）",
+    "direction": "left",
+    "action": "idle",
+    "frame": null,
+    "x": 32
+  },
+  {
+    "time_ms": 6400,
+    "phase": "停止（左向きを保持）",
+    "direction": "left",
+    "action": "idle",
+    "frame": null,
+    "x": 32
+  },
+  {
+    "time_ms": 6450,
+    "phase": "停止（左向きを保持）",
+    "direction": "left",
+    "action": "idle",
+    "frame": null,
+    "x": 32
+  }
+]

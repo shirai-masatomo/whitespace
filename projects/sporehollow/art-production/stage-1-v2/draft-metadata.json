@@ -1,0 +1,35 @@
+{
+  "a50": {
+    "height": 22,
+    "side_size": [
+      20,
+      22
+    ],
+    "front_size": [
+      13,
+      22
+    ]
+  },
+  "b58": {
+    "height": 25,
+    "side_size": [
+      24,
+      25
+    ],
+    "front_size": [
+      14,
+      25
+    ]
+  },
+  "c65": {
+    "height": 28,
+    "side_size": [
+      25,
+      28
+    ],
+    "front_size": [
+      17,
+      28
+    ]
+  }
+}

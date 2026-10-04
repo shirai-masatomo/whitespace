@@ -1,0 +1,99 @@
+{
+  "stage": 1,
+  "status": "style_direction_approved_keeper_size_fixed_dog_size_superseded_by_v2_candidates",
+  "implementation_base": "1d637354d55c20675f5594e36befd307ca954af6",
+  "spec": "../ART_SPEC.md (relative to art-production)",
+  "generation": {
+    "tool": "image_gen.imagegen",
+    "prompt": "prompt.txt",
+    "source": "originals/generated-pair-v1.png",
+    "paid_external_api": false
+  },
+  "assets": [
+    {
+      "file": "processed/keeper_idle_right_00.png",
+      "size": [
+        32,
+        48
+      ],
+      "foot_anchor": [
+        16,
+        44
+      ],
+      "state": "idle_right",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": null,
+      "playback": "hold until state changes; single static candidate",
+      "status": "candidate_not_adopted",
+      "qa": {
+        "rgba": true,
+        "alpha_values": [
+          0,
+          255
+        ],
+        "visible_bounds": [
+          4,
+          2,
+          29,
+          44
+        ],
+        "opaque_colors": 16,
+        "bottom_visible_row": 43,
+        "horizontal_and_bottom_margins_clear": true
+      }
+    },
+    {
+      "file": "processed/shiba_idle_right_00.png",
+      "size": [
+        48,
+        48
+      ],
+      "foot_anchor": [
+        24,
+        44
+      ],
+      "state": "idle_right",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": null,
+      "playback": "hold until state changes; single static candidate",
+      "status": "candidate_not_adopted",
+      "qa": {
+        "rgba": true,
+        "alpha_values": [
+          0,
+          255
+        ],
+        "visible_bounds": [
+          3,
+          0,
+          45,
+          44
+        ],
+        "opaque_colors": 24,
+        "bottom_visible_row": 43,
+        "horizontal_and_bottom_margins_clear": true
+      }
+    }
+  ],
+  "processing": [
+    "Separate generated characters by transparent gutter",
+    "Alpha threshold 128 removes faint fringe; preserve opaque cream fur",
+    "Uniform aspect-fit then nearest-neighbor sampling, no anisotropic stretch",
+    "Shared 24-color palette without dithering",
+    "Align soles at y43, foot anchor y44; transparent frame margins",
+    "Inspect at native size and enlarged on source ranch, light and dark backgrounds"
+  ],
+  "limitations": [
+    "ImageGen output did not follow requested canvas or exact pixel grid; normalized output is a candidate",
+    "Source ranch capture is old 823f876; no game was launched",
+    "Hen/cat are unmodified old screenshot crops for context, not delivered assets",
+    "Only one right-facing static candidate each; no walk, front or rest frames yet",
+    "Keeper tool readability awaits later working-pose sample",
+    "Dog visible height 44 vs keeper 42 follows provisional ART_SPEC; user should judge relative size",
+    "Final in-game integration and visual acceptance remain implementation-owner work"
+  ]
+}
