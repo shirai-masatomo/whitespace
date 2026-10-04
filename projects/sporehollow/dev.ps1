@@ -49,6 +49,7 @@ function Run-Headless([string]$Name, [string[]]$Arguments, [string]$Executable=$
     if ($owned.ExitCode -ne 0 -or $record.result -is [string] -or "$out $err" -match 'SCRIPT ERROR:|ERROR:' -or ((Test-Path $log) -and (Select-String -LiteralPath $log -Pattern 'SCRIPT ERROR:|ERROR:' -Quiet))) { throw "$Name failed: $err" }
 }
 if ($Task -in @('check','test','build')) {
+    & "$farmRoot/tests/test_launcher.ps1"
     Run-Headless 'import' @('--editor','--import','--quit')
     foreach ($suite in $Suites) { Run-Headless $suite @('--script',"tests/test_$suite.gd") }
 }

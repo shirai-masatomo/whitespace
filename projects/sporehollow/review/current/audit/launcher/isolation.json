@@ -1,0 +1,20 @@
+{
+  "implementation_commit": "e13e16ed9477c92e4057d10b70d7025b2288908b",
+  "executable_sha256": "B44A2FB8C7B526FE9E457824CE7662D5C25AB718D653DE5E3F5916A17E31C7D0",
+  "data_root": "artifacts/isolated/launcher-diagnosis/user-data",
+  "purpose": "Published EXE GPU startup, launcher parser diagnosed separately",
+  "result": {
+    "PID": 41552,
+    "ThreadID": 41816,
+    "ExitCode": 0,
+    "OwnedWindowCount": 2,
+    "Station": "Service-0x0-3ba69$",
+    "Desktop": "Render_0bf7396a426542588d602cd90de5fb4c",
+    "ObservedDesktop": "Render_0bf7396a426542588d602cd90de5fb4c",
+    "NonInteractive": true,
+    "DesktopMatched": true,
+    "TimedOut": false
+  },
+  "asset_delivery_commit": "ebe446e5329aa7780b6ef5f13268ceb9433c9796",
+  "arguments": "--audio-driver Dummy --rendering-method gl_compatibility --max-fps 30 --quit-after 150 --log-file <isolated>/render.log"
+}

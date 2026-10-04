@@ -1,5 +1,11 @@
 # 操作・正式素材・図鑑・壁の統合レビュー
 
+## Play.cmd起動修正（2026-10-04）
+
+LF改行の旧Play.cmdをcmd.exeで解析すると、存在するEXEの起動行へ到達せず、`'ev.ps1' is not recognized`となることを再現。CRLFへ修正し、`.gitattributes`で再発を防止。実cmdを使う`tests/test_launcher.ps1`で、空白/日本語を含むパス・EXE存在/欠落の分岐を検査（起動命令のみ検査用echoへ置換、通常画面へは起動しない）。check/test/buildにも組み込んだ。
+
+公開済みEXE e13e16e（素材ebe446e5、上記と同一SHA256）そのものを、分離APPDATAと非対話desktopで150フレーム描画し、エラーなし/終了0/desktop所属一致を確認。[監査](audit/launcher/isolation.json) / [描画ログ](audit/launcher/render.log)。ゲームコード・EXE・通常セーブは変更なし。人間のダブルクリックは未実施。
+
 ## 試遊する版
 
 **[Play.cmd](../../Play.cmd)をダブルクリック。** 通常版は `build/WhistleRanch.exe`。ESCで **ビルドe13e16e / 素材ebe446e5** を確認する。検証フォルダのEXEを探す必要はない。自動起動はしていない。

@@ -1,0 +1,2 @@
+# cmd.exe requires Windows line endings, especially with UTF-8 messages.
+*.cmd text eol=crlf

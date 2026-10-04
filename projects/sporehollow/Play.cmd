@@ -1,4 +1,5 @@
 @echo off
+rem Keep CRLF line endings (enforced by .gitattributes).
 chcp 65001 >nul
 if not exist "%~dp0build\WhistleRanch.exe" (
   echo ゲーム本体がありません。dev.ps1 build で作成してください。
