@@ -9,24 +9,19 @@ const DANGER = Color("9c5748")
 static var textures: Dictionary = {}
 
 const FRAME = preload("res://assets/ui/paper-frame.svg")
-const SHIBA = preload("res://assets/ui/shiba-source.png")
+const SHIBA = [preload("res://art_delivery/characters_v1/shiba_idle_left_00.png"),preload("res://art_delivery/characters_v1/shiba_idle_front_00.png"),preload("res://art_delivery/characters_v1/shiba_idle_right_00.png")]
+const KEEPER = preload("res://art_delivery/characters_v1/keeper_idle_right_00.png")
 const STALL = preload("res://assets/ui/market-stall.png")
 const BOOK = preload("res://assets/ui/book-open.png")
-static var sprite_material: ShaderMaterial
 
-static func material() -> ShaderMaterial:
-	if sprite_material == null:
-		sprite_material=ShaderMaterial.new()
-		sprite_material.shader=preload("res://assets/ui/shiba-key.gdshader")
-	return sprite_material
-
-static func shiba(c: CanvasItem, p: Vector2, size_value: Vector2, pose: int=2, alpha: float=1.0):
-	c.material=material()
+static func shiba(c: CanvasItem, foot: Vector2, pose: int=2, alpha: float=1.0):
 	c.texture_filter=CanvasItem.TEXTURE_FILTER_NEAREST
-	var regions=[Rect2(528,58,474,508),Rect2(1095,58,316,508),Rect2(1498,58,482,508)]
-	var source: Rect2=regions[pose]
-	var fitted=source.size*minf(size_value.x/source.size.x,size_value.y/source.size.y)
-	c.draw_texture_rect_region(SHIBA,Rect2(p+Vector2(-fitted.x*0.5,size_value.y*0.5-fitted.y),fitted),source,Color(1,1,1,alpha))
+	c.draw_texture(SHIBA[pose],foot-Vector2(24,44),Color(1,1,1,alpha))
+
+static func keeper(c: CanvasItem, foot: Vector2, facing: int=1):
+	c.texture_filter=CanvasItem.TEXTURE_FILTER_NEAREST
+	# Left is a provisional mirrored static; preserve the delivered canvas and face.
+	c.draw_texture_rect(KEEPER,Rect2(foot-Vector2(16,44),Vector2(-32 if facing<0 else 32,48)),false)
 
 static func surface(color: Color, edge: Color = WOOD) -> StyleBoxTexture:
 	var box=StyleBoxTexture.new()

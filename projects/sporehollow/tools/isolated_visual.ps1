@@ -1,0 +1,31 @@
+param([ValidateSet('probe','characters')][string]$Scenario='probe')
+$ErrorActionPreference='Stop'
+$farmRoot=Split-Path -Parent $PSScriptRoot
+$runRoot=Join-Path $farmRoot ('artifacts/isolated/'+(Get-Date -Format 'yyyyMMdd-HHmmss-fff'))
+New-Item -ItemType Directory -Force $runRoot,"$runRoot/user-data" | Out-Null
+$revision=(git -C $farmRoot rev-parse HEAD).Trim()
+$dirty=[bool](git -C $farmRoot status --porcelain)
+$exe=Join-Path $farmRoot '.tools/Godot_v4.7.2-stable_win64.exe'
+$script=if($Scenario -eq 'probe'){'tests/render_probe.gd'}else{'tests/visual_characters.gd'}
+$cmd='"'+$exe+'" --path "'+$farmRoot+'" --audio-driver Dummy --rendering-method gl_compatibility --max-fps 30 --resolution 1280x800 --log-file "'+$runRoot+'/render.log" --script '+$script+' -- --isolated-review --output="'+$runRoot+'"'
+# No interactive desktop fallback. No SwitchDesktop, SendInput, cursor movement, or user-process discovery.
+Add-Type -Path (Join-Path $PSScriptRoot 'isolated_desktop.cs')
+$environment=[System.Collections.Generic.SortedDictionary[string,string]]::new([StringComparer]::OrdinalIgnoreCase)
+[Environment]::GetEnvironmentVariables().GetEnumerator() | ForEach-Object { $environment[$_.Key]=[string]$_.Value }
+$environment['APPDATA']="$runRoot/user-data"
+$environment['LOCALAPPDATA']="$runRoot/user-data"
+$environment['FARM_REVIEW_OUTPUT']=$runRoot
+$environment['FARM_REVIEW_COMMIT']=$revision
+$environment['FARM_REVIEW_DIRTY']=$dirty.ToString()
+$record=@{implementation_commit=$revision;dirty=$dirty;asset_delivery_commit='f3e4ae82b68c342b928dfb5dfcebb451353f9b8d';parent_pid=$PID;purpose=$Scenario;executable=$exe;command=$cmd;start_utc=[DateTime]::UtcNow.ToString('o');data_root="$runRoot/user-data"}
+$auditPath=Join-Path $runRoot 'isolation.json'
+$record | ConvertTo-Json -Depth 5 | Set-Content -LiteralPath $auditPath
+try {
+    $result=[FarmIsolatedDesktop]::Run($exe,$cmd,$farmRoot,$environment,120)
+    $record.result=$result
+} catch { $record.error=$_.Exception.Message; throw }
+finally { $record.end_utc=[DateTime]::UtcNow.ToString('o'); $record | ConvertTo-Json -Depth 8 | Set-Content -LiteralPath $auditPath; Write-Output "Isolated render audit: $auditPath" }
+if($result.ExitCode -ne 0 -or -not $result.NonInteractive -or -not $result.DesktopMatched) { throw 'Isolated rendering failed; no interactive fallback is permitted.' }
+if(Select-String -LiteralPath "$runRoot/render.log" -Pattern 'SCRIPT ERROR:|ERROR:' -Quiet) { throw 'Renderer reported an error. Inspect the isolated log.' }
+Write-Output "Isolated render output: $runRoot"
+

@@ -3,7 +3,7 @@ $ErrorActionPreference = 'Stop'
 $farmRoot = $PSScriptRoot
 $godot = Join-Path $farmRoot '.tools/Godot_v4.7.2-stable_win64_console.exe'
 if (-not (Test-Path -LiteralPath $godot)) { throw 'Run ./tools/setup.ps1 first.' }
-if ($Task -eq 'visual') { throw 'GUI verification deferred: focus safety at window creation is not verified. Use headless tests.' }
+if ($Task -eq 'visual') { & "$farmRoot/tools/isolated_visual.ps1" -Scenario characters; exit $LASTEXITCODE }
 # Only explicit user launch paths may create windows. Verification never calls these.
 if ($Task -in @('play', 'editor')) {
     $launchArgs = @('--path', $farmRoot)

@@ -77,6 +77,35 @@ func run():
 	game.world.animals[0].facing=-1;game.world.animals[0].mode="rest"
 	check(game.dog_facing(game.world.animals[0])==-1,"Rest selection retains last dog facing")
 	game.toggle_menu();check(game.menu.get_children().any(func(c):return c is Label and c.text.begins_with("ビルド ")),"ESC menu contains build provenance")
+	game.toggle_menu()
+	for paused in [false,true]: await floor_intents(paused)
+	check(game.UI.KEEPER.get_size()==Vector2(32,48) and game.UI.SHIBA.all(func(t):return t.get_size()==Vector2(48,48)),"Delivered frame dimensions remain native")
+	check(game.material==null and game.hud.material==null,"RGBA art does not attach white-key shader to canvas")
+	check(not game.guide_ghost_visible(game.world.animals[0].pos),"Guide cursor never overprints an existing animal")
+	check(game.guide_ghost_visible(Vector2i(11,8)),"Guide ghost remains available at empty destination")
 	print("INPUT HEADLESS: ",checks," checks, failures=",failures)
 	game.queue_free();await process_frame
 	quit(1 if failures else 0)
+
+func floor_intents(paused: bool):
+	game.world=Farm.new({},17).begin_day();game.world.paused=paused
+	game.reset_view();game.refresh();await process_frame
+	var p=Vector2i(10,8);site("soil_tile",p)
+	game.choose_walk();await mouse(game.screen_cell(p))
+	check(game.world.manual_goal==p and game.selected.get("kind")=="keeper","Keeper left click on empty floor moves, paused="+str(paused))
+	var before=game.world.keeper.pos
+	if paused: game.world.step();check(game.world.tick==0 and game.world.keeper.pos==before,"Paused floor move is only a plan")
+	game.world.manual_goal=null;game.world.keeper.erase("pending_command");game.world.Jobs.hold(game.world,"")
+	game.choose_animal(1);game.select_tool("guide",false);await mouse(game.screen_cell(p))
+	check(game.world.jobs.size()==1 and game.world.jobs[0].kind=="animal_order" and game.world.jobs[0].command_pos==p,"Guide target uses floor as ground, paused="+str(paused))
+	if paused:game.world.step();check(game.world.tick==0 and game.world.keeper.pos==before,"Paused guidance does not execute")
+	game.world.Jobs.cancel(game.world,game.world.jobs[0].id)
+	game.world.indoor[p]=true;await mouse(game.screen_cell(p))
+	check(game.world.jobs.is_empty() and game.tool=="guide","Indoor floor still rejects outdoor-only dog, paused="+str(paused))
+	game.world.indoor.clear();game.neutral();await mouse(game.screen_cell(p))
+	check(game.selected.get("kind")=="floor" and game.buttons.has("remove"),"Neutral floor selection retains dismantle, paused="+str(paused))
+	game.world.wood=50;game.select_group(0);game.select_tool("wood_tile",false);await mouse(game.screen_cell(p))
+	check(game.world.jobs.size()==1 and game.world.jobs[0].kind=="wood_tile","Armed tool upgrades floor, paused="+str(paused))
+	game.world.Jobs.cancel(game.world,game.world.jobs[0].id)
+	game.choose_walk();game.world.field_items.append({"kind":"egg","pos":p,"born_day":1});await mouse(game.screen_cell(p))
+	check(game.world.manual_goal==null and game.world.jobs.size()==1 and game.world.jobs[0].kind=="collect","Item on floor overrides ground movement, paused="+str(paused))

@@ -901,7 +901,7 @@ func board_click(event):
 		if not world.act(tool,cell): notice("予定は8件まで" if world.jobs.size()>=8 else world.Buildings.reason(world,tool,cell))
 		refresh(); return
 	if not event.ctrl_pressed: selected_resources.clear()
-	if world.keeper.placed and event.position.distance_to(get_canvas_transform() * keeper_pixel()) < 24 * camera.zoom.x:
+	if world.keeper.placed and keeper_hit_rect().has_point(get_canvas_transform().affine_inverse()*event.position):
 		choose_walk()
 		if not keeper_hint_shown:
 			keeper_hint_shown = true
@@ -920,7 +920,7 @@ func board_click(event):
 		select_resource(cell, event.ctrl_pressed)
 		return
 	for a in world.animals:
-		if a.placed and event.position.distance_to(get_canvas_transform() * actor_pixel("a%d" % a.id, a.pos)) < 25 * camera.zoom.x:
+		if a.placed and animal_hit_rect(a).has_point(get_canvas_transform().affine_inverse()*event.position):
 			if Farm.Shop.FOOD.has(tool):
 				notice("餌で回復しました" if world.act(tool, a.pos, a.id) else "対象・在庫・HP・停止状態を確認")
 				refresh()
@@ -929,7 +929,7 @@ func board_click(event):
 	if Farm.BUILD.has(tool) and (world.live_structure(cell) or world.floors.has(cell)):
 		if not world.act(tool,cell): notice(world.Buildings.reason(world,tool,cell))
 		refresh(); return
-	if world.live_structure(cell) or world.floors.get(cell,{}).get("status")=="ready":
+	if world.live_structure(cell) or (world.floors.get(cell,{}).get("status")=="ready" and selected.get("kind")!="keeper" and tool!="guide"):
 		var layer_name="floor" if world.floors.get(cell,{}).get("status")=="ready" and (selection_layer=="floor" or not world.live_structure(cell)) else "structure"
 		select_building(cell,layer_name,event.ctrl_pressed)
 		return
@@ -1310,16 +1310,8 @@ func _draw():
 		elif Farm.Life.presentation(world) in ["tired","exhausted"]:
 			draw_set_transform(p+Vector2(0,4),0.16)
 			p = Vector2.ZERO
-		draw_circle(p + Vector2(0, -8), 9, Color("f3cda2"))
-		rect(p+Vector2(7*world.keeper.get("facing",1),-8),Vector2(3,3),"b98565")
-		rect(p + Vector2(-12, -18), Vector2(24, 6), "f1d690")
-		var body_height = 12 if Farm.Life.presentation(world) == "settling" else 20
-		rect(p + Vector2(-8, 1), Vector2(17, body_height), "719b99" if Farm.Life.presentation(world) in ["tired","exhausted"] else "80d4cd")
-		rect(p + Vector2(-7, body_height), Vector2(5, 6), "30484a")
-		rect(p + Vector2(3, body_height), Vector2(5, 6), "30484a")
-		if Farm.Life.presentation(world) in ["drowsy","tired","exhausted"]:
-			draw_line(p+Vector2(-6,-10),p+Vector2(-1,-10),Color("766b59"),2)
-			draw_line(p+Vector2(3,-10),p+Vector2(8,-10),Color("766b59"),2)
+		# Static v1 at its delivered foot anchor. Walking/sleep poses remain provisional.
+		UI.keeper(self,(p+Vector2(0,14)).round(),world.keeper.get("facing",1))
 		if not world.jobs_held and Farm.Life.able(world) and not world.jobs.is_empty() and world.jobs[0].state == "working":
 			var hand = p + Vector2(12, 5)
 			var hammer = hand + Vector2(8, -8 + sin(visual_time * 18) * 6)
@@ -1331,7 +1323,7 @@ func _draw():
 		draw_set_transform(Vector2.ZERO)
 		var owner_pixel = center(view_positions.get("keeper", Vector2(world.keeper.pos)))
 		if world.keeper.carrier < 0:
-			if selected.get("kind") == "keeper": draw_rect(Rect2(owner_pixel - Vector2(18, 23), Vector2(36, 48)), Color("ffe2a3"), false, 2)
+			if selected.get("kind") == "keeper": draw_rect(keeper_hit_rect(), Color("ffe2a3"), false, 2)
 			if Farm.Life.presentation(world) in ["settling", "sleeping"]:
 				label_on(self, owner_pixel + Vector2(15, -20), "…" if Farm.Life.presentation(world)=="settling" else "Zzz", 18, Color("dce8c2"))
 			elif Farm.Life.presentation(world) in ["drowsy", "tired", "exhausted"]:
@@ -1353,8 +1345,8 @@ func _draw():
 			if world.tick < world.keeper.get("whistle_until",-1): label_on(self,owner_pixel+Vector2(16,-22),"♪",20,Color("f1d99d"))
 			if world.keeper.state == "unconscious": label_on(self, owner_pixel + Vector2(12, -18), "!", 22, Color("efa084"))
 			if world.tick < world.keeper.hurt_until or selected.get("kind") == "keeper":
-				draw_rect(Rect2(owner_pixel + Vector2(-17, -33), Vector2(34, 4)), Color("684b46"))
-				draw_rect(Rect2(owner_pixel + Vector2(-17, -33), Vector2(34 * float(world.keeper.hp) / world.keeper.max_hp, 4)), Color("d68b74"))
+				draw_rect(Rect2(owner_pixel + Vector2(-17, -37), Vector2(34, 4)), Color("684b46"))
+				draw_rect(Rect2(owner_pixel + Vector2(-17, -37), Vector2(34 * float(world.keeper.hp) / world.keeper.max_hp, 4)), Color("d68b74"))
 	for item in world.field_items:
 		var q = center(item.pos) + (Vector2(7, 8) if item.kind.ends_with("_plan") else Vector2.ZERO)
 		if item.kind.ends_with("_plan") and world.keeper.placed and item.pos == world.keeper.pos: q = center(item.pos) + Vector2(-25,-22)
@@ -1373,12 +1365,7 @@ func _draw():
 		if not a.placed: continue
 		var p = actor_pixel("a%d" % a.id, a.pos)
 		draw_circle(p + Vector2(0, 13), 18, Color(0.1, 0.2, 0.13, 0.25))
-		if a.species == "shiba":
-			if world.structures.get(a.pos, {}).get("kind") == "kennel":
-				draw_set_transform(p, 0, Vector2.ONE * 0.65)
-				draw_dog(Vector2.ZERO, a)
-				draw_set_transform(Vector2.ZERO)
-			else: draw_dog(p, a)
+		if a.species == "shiba": draw_dog(p, a)
 		elif a.species == "cat": draw_cat(p,a)
 		else: draw_hen(p,a)
 		var in_combat = world.enemies.any(func(e): return not e.done and not e.flee and Farm.distance(a.pos, e.pos) <= 1)
@@ -1401,7 +1388,8 @@ func _draw():
 		if not cinematic() and group == 1 and a.id in selected_animals:
 			for side in [-1, 1]:
 				for vertical in [-1, 1]:
-					var corner = p + Vector2(side * 23, vertical * 24)
+					var bounds=animal_hit_rect(a)
+					var corner = bounds.get_center() + bounds.size*Vector2(side,vertical)*0.5
 					draw_line(corner, corner - Vector2(side * 7, 0), Color("ffe2a3"), 3 if a.id == selected_animal else 2)
 					draw_line(corner, corner - Vector2(0, vertical * 7), Color("ffe2a3"), 3 if a.id == selected_animal else 2)
 		if debug_view: label_on(self, p + Vector2(25, 0), a.state, 12)
@@ -1428,15 +1416,17 @@ func _draw():
 		if tool == "guide" and selected_animal >= 0:
 			valid = world.animal_walkable(world.Orders.animal(world,selected_animal),cell)
 			show_preview = true
-			var p = center(cell)
-			draw_set_transform(p, 0, Vector2.ONE)
-			art_alpha = 0.45
-			var animal = world.animals.filter(func(a): return a.id == selected_animal)[0]
-			if animal.species == "shiba": draw_dog(Vector2.ZERO)
-			elif animal.species == "cat": draw_cat(Vector2.ZERO)
-			else: draw_hen(Vector2.ZERO)
-			art_alpha = 1.0
-			draw_set_transform(Vector2.ZERO)
+			# A resident at the cursor already shows the species; do not overprint a second body.
+			if guide_ghost_visible(cell):
+				var p = center(cell)
+				draw_set_transform(p, 0, Vector2.ONE)
+				art_alpha = 0.45
+				var animal = world.animals.filter(func(a): return a.id == selected_animal)[0]
+				if animal.species == "shiba": draw_dog(Vector2.ZERO)
+				elif animal.species == "cat": draw_cat(Vector2.ZERO)
+				else: draw_hen(Vector2.ZERO)
+				art_alpha = 1.0
+				draw_set_transform(Vector2.ZERO)
 		elif Farm.BUILD.has(tool):
 			valid = world.can_build(tool, cell)
 			show_preview = true
@@ -1454,6 +1444,9 @@ func _draw():
 	if group == 0 and selected.get("kind") in ["structure","floor"]:
 		for p in selected_structures:
 			if world.live_structure(p): draw_rect(Rect2(Vector2(p) * TILE + Vector2(2, 2), TILE - Vector2(4, 4)), Color("ffe2a3"), false, 2)
+
+func guide_ghost_visible(cell: Vector2i) -> bool:
+	return not world.animals.any(func(a): return a.pos == cell)
 
 func panel(area: Rect2): hud.draw_style_box(UI.surface(Color("485d46")), area)
 
@@ -1596,7 +1589,7 @@ func draw_dog(p: Vector2, animal: Dictionary = {}):
 	if mood=="wag":p.x+=sin(visual_time*12)*1.5
 	var alert=not animal.is_empty() and world.enemies.any(func(e):return not e.done and not e.flee and Farm.distance(animal.pos,e.pos)<=animal.get("detection_range",4))
 	var pose=1 if mood=="hello" else (0 if dog_facing(animal)<0 else 2)
-	UI.shiba(self,p+Vector2(0,-5),Vector2(30 if pose==1 else 46,48),pose,art_alpha)
+	UI.shiba(self,(p+Vector2(0,14)).round(),pose,art_alpha)
 
 func draw_hen(p: Vector2, animal: Dictionary = {}):
 	if not animal.is_empty():
@@ -2019,7 +2012,7 @@ func restart_morning():
 func draw_card_icon(c: CanvasItem, kind: String, p: Vector2, scale_value: float):
 	c.draw_set_transform(p, 0, Vector2.ONE * scale_value)
 	if kind=="shiba":
-		UI.shiba(c,Vector2.ZERO,Vector2(34,55),1)
+		UI.shiba(c,Vector2(0,20),1)
 	elif kind == "cat":
 		var fur = Color("d49a5c") if kind == "shiba" else Color("aeb9c4")
 		c.draw_rect(Rect2(-20, -5, 31, 21), fur)
@@ -2239,8 +2232,7 @@ func draw_keeper_card():
 	var k = world.keeper
 	hud.draw_set_transform(keeper_card_rect().position-Vector2(16,595))
 	hud.draw_style_box(UI.surface(UI.PAPER), Rect2(16, 595, 422, 91))
-	hud.draw_circle(Vector2(48, 629), 12, Color("e9bd8b"))
-	hud.draw_rect(Rect2(32, 616, 32, 6), UI.GOLD)
+	UI.keeper(hud,Vector2(48,653))
 	label_on(hud, Vector2(78, 615), "牧場主", 17, UI.INK)
 	for i in range(2):
 		var y = 626 + i * 18
@@ -2279,3 +2271,12 @@ func build_debug_controls():
 func debug_action(action: String):
 	world.debug_action(action,selected)
 	refresh()
+
+func keeper_hit_rect() -> Rect2:
+	var p=keeper_pixel()
+	if Farm.Life.presentation(world) in ["sleeping","unconscious","carried"]: return Rect2(p+Vector2(-32,-12),Vector2(58,34))
+	return Rect2(p+Vector2(-17,-32),Vector2(34,49))
+
+func animal_hit_rect(a: Dictionary) -> Rect2:
+	var p=actor_pixel("a%d" % a.id,a.pos)
+	return Rect2(p+Vector2(-17,-18),Vector2(34,37)) if a.species=="shiba" else Rect2(p-Vector2(25,25),Vector2(50,50))

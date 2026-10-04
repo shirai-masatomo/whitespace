@@ -1,0 +1,406 @@
+{
+  "delivery_commit": "a5b6f55f8233724792faa0b90d1f2f22e7ab0851",
+  "branch": "codex/sporehollow-art-assets",
+  "folder": "projects/sporehollow/art_delivery/characters_motion_v1/",
+  "inspection": "read-only Git blobs; no game code copied",
+  "game_integration": false,
+  "game_visual_verified": false,
+  "frames": [
+    {
+      "file": "keeper/settle_right_00.png",
+      "sha256": "57c18b89f7beb9d4012564039447f1794f17d57296e8fcb62f2d84e1cdf4aad7",
+      "dimensions": [
+        32,
+        48
+      ],
+      "verified": true
+    },
+    {
+      "file": "keeper/settle_right_01.png",
+      "sha256": "718f06f76bc8e2191ed8c081c6ec18899625edb1d13ef676859ebf6e6210a1bb",
+      "dimensions": [
+        32,
+        48
+      ],
+      "verified": true
+    },
+    {
+      "file": "keeper/settle_left_00.png",
+      "sha256": "bc2db9f5d90616e389e381d626038d0d298a6713d4c8bbf6464b24ea93ca8a8a",
+      "dimensions": [
+        32,
+        48
+      ],
+      "verified": true
+    },
+    {
+      "file": "keeper/settle_left_01.png",
+      "sha256": "31ac0ffeac46f16b45d7615cf892012afcb91ed1aca245a091a45964601b1106",
+      "dimensions": [
+        32,
+        48
+      ],
+      "verified": true
+    },
+    {
+      "file": "keeper/rest_right_00.png",
+      "sha256": "718f06f76bc8e2191ed8c081c6ec18899625edb1d13ef676859ebf6e6210a1bb",
+      "dimensions": [
+        32,
+        48
+      ],
+      "verified": true
+    },
+    {
+      "file": "keeper/rest_right_01.png",
+      "sha256": "059b8389b514414c9ff4842d1e42db9fdbc7679110528fbaec09de018063d228",
+      "dimensions": [
+        32,
+        48
+      ],
+      "verified": true
+    },
+    {
+      "file": "keeper/rest_left_00.png",
+      "sha256": "31ac0ffeac46f16b45d7615cf892012afcb91ed1aca245a091a45964601b1106",
+      "dimensions": [
+        32,
+        48
+      ],
+      "verified": true
+    },
+    {
+      "file": "keeper/rest_left_01.png",
+      "sha256": "194f45a74a8e35a305d16243c63ffd033ec2cbee1269fd465c181680cbd551d1",
+      "dimensions": [
+        32,
+        48
+      ],
+      "verified": true
+    },
+    {
+      "file": "keeper/sleep_right_00.png",
+      "sha256": "354e0c887193db7a375b9d0b079f13b211fc85f28401ee6ce1988e4b1290af4c",
+      "dimensions": [
+        32,
+        48
+      ],
+      "verified": true
+    },
+    {
+      "file": "keeper/sleep_right_01.png",
+      "sha256": "6e87fbe1bb80b18569d99161991a74b526f3576e935c5d7d0ae72c7bbb88d5f2",
+      "dimensions": [
+        32,
+        48
+      ],
+      "verified": true
+    },
+    {
+      "file": "keeper/sleep_left_00.png",
+      "sha256": "506a19330d38e0dd7e9a7bfd49c16daf9c9512cbe833603ffaa7edcb1cb00234",
+      "dimensions": [
+        32,
+        48
+      ],
+      "verified": true
+    },
+    {
+      "file": "keeper/sleep_left_01.png",
+      "sha256": "468a9e798a04a56176d7d4719e74a447b46ca86fd26616c4d3561637688a1ca5",
+      "dimensions": [
+        32,
+        48
+      ],
+      "verified": true
+    },
+    {
+      "file": "keeper/wake_right_00.png",
+      "sha256": "718f06f76bc8e2191ed8c081c6ec18899625edb1d13ef676859ebf6e6210a1bb",
+      "dimensions": [
+        32,
+        48
+      ],
+      "verified": true
+    },
+    {
+      "file": "keeper/wake_right_01.png",
+      "sha256": "57c18b89f7beb9d4012564039447f1794f17d57296e8fcb62f2d84e1cdf4aad7",
+      "dimensions": [
+        32,
+        48
+      ],
+      "verified": true
+    },
+    {
+      "file": "keeper/wake_left_00.png",
+      "sha256": "31ac0ffeac46f16b45d7615cf892012afcb91ed1aca245a091a45964601b1106",
+      "dimensions": [
+        32,
+        48
+      ],
+      "verified": true
+    },
+    {
+      "file": "keeper/wake_left_01.png",
+      "sha256": "bc2db9f5d90616e389e381d626038d0d298a6713d4c8bbf6464b24ea93ca8a8a",
+      "dimensions": [
+        32,
+        48
+      ],
+      "verified": true
+    },
+    {
+      "file": "keeper/walk_right_00.png",
+      "sha256": "607314fe0ef1b9a340e8a9e79e48309eb73c754942e5c980e87095bbc2c4b690",
+      "dimensions": [
+        32,
+        48
+      ],
+      "verified": true
+    },
+    {
+      "file": "keeper/walk_right_01.png",
+      "sha256": "9d19590832b5ac2b0abab67e172d75adaa77a9f35c86992b72a28903c9e7349b",
+      "dimensions": [
+        32,
+        48
+      ],
+      "verified": true
+    },
+    {
+      "file": "keeper/walk_right_02.png",
+      "sha256": "9f5907c641d598f9548008caa6ee79899800f48c5eff1415f4a7641fc10e2e30",
+      "dimensions": [
+        32,
+        48
+      ],
+      "verified": true
+    },
+    {
+      "file": "keeper/walk_right_03.png",
+      "sha256": "d10ab2b94347f9a7987da1911d32c5433938d42b992523b64d598696f8826f52",
+      "dimensions": [
+        32,
+        48
+      ],
+      "verified": true
+    },
+    {
+      "file": "keeper/walk_left_00.png",
+      "sha256": "0ae8c638ae70f053f1d9996d4040cc8e2dbde0103e483a905dc9e741a3a1696f",
+      "dimensions": [
+        32,
+        48
+      ],
+      "verified": true
+    },
+    {
+      "file": "keeper/walk_left_01.png",
+      "sha256": "04aad25d2ad5e004ba941b29ad71f33cef5d2f6928e59d4a8496d467825b325a",
+      "dimensions": [
+        32,
+        48
+      ],
+      "verified": true
+    },
+    {
+      "file": "keeper/walk_left_02.png",
+      "sha256": "050c23ba5ba7727368bc91baa55b2023873944d3cc1c34aea33e6839bac63180",
+      "dimensions": [
+        32,
+        48
+      ],
+      "verified": true
+    },
+    {
+      "file": "keeper/walk_left_03.png",
+      "sha256": "e4a68833ce0ac8ace98faef76966adf8c9b5c311008148ef3b65437d30deb5d6",
+      "dimensions": [
+        32,
+        48
+      ],
+      "verified": true
+    },
+    {
+      "file": "shiba/settle_right_00.png",
+      "sha256": "d8dcf791a89b8951eccf76ce5b355dd2fff9afcf28546f56dc390da0733800f3",
+      "dimensions": [
+        48,
+        48
+      ],
+      "verified": true
+    },
+    {
+      "file": "shiba/settle_right_01.png",
+      "sha256": "3cb8019884919ef86650308b8071d04023602e1ed9196570383f2d6718a7ca43",
+      "dimensions": [
+        48,
+        48
+      ],
+      "verified": true
+    },
+    {
+      "file": "shiba/settle_left_00.png",
+      "sha256": "3be1417e0c5006a7cc29975d9f5f45b41cb716a28b494b687469a784a38d2341",
+      "dimensions": [
+        48,
+        48
+      ],
+      "verified": true
+    },
+    {
+      "file": "shiba/settle_left_01.png",
+      "sha256": "55cc0d1ad2f66551d01a86d605b4d65d30994593f8194648a0b9377ea81c2858",
+      "dimensions": [
+        48,
+        48
+      ],
+      "verified": true
+    },
+    {
+      "file": "shiba/rest_right_00.png",
+      "sha256": "3cb8019884919ef86650308b8071d04023602e1ed9196570383f2d6718a7ca43",
+      "dimensions": [
+        48,
+        48
+      ],
+      "verified": true
+    },
+    {
+      "file": "shiba/rest_right_01.png",
+      "sha256": "8eb004f8690df00b3f776a6907ba74611d218321495c70aaff6c542748888296",
+      "dimensions": [
+        48,
+        48
+      ],
+      "verified": true
+    },
+    {
+      "file": "shiba/rest_left_00.png",
+      "sha256": "55cc0d1ad2f66551d01a86d605b4d65d30994593f8194648a0b9377ea81c2858",
+      "dimensions": [
+        48,
+        48
+      ],
+      "verified": true
+    },
+    {
+      "file": "shiba/rest_left_01.png",
+      "sha256": "13097c925cb79c0ea6eaa48717a38281f4449373e2e48b48b8b6aee0f55a2296",
+      "dimensions": [
+        48,
+        48
+      ],
+      "verified": true
+    },
+    {
+      "file": "shiba/wake_right_00.png",
+      "sha256": "3cb8019884919ef86650308b8071d04023602e1ed9196570383f2d6718a7ca43",
+      "dimensions": [
+        48,
+        48
+      ],
+      "verified": true
+    },
+    {
+      "file": "shiba/wake_right_01.png",
+      "sha256": "d8dcf791a89b8951eccf76ce5b355dd2fff9afcf28546f56dc390da0733800f3",
+      "dimensions": [
+        48,
+        48
+      ],
+      "verified": true
+    },
+    {
+      "file": "shiba/wake_left_00.png",
+      "sha256": "55cc0d1ad2f66551d01a86d605b4d65d30994593f8194648a0b9377ea81c2858",
+      "dimensions": [
+        48,
+        48
+      ],
+      "verified": true
+    },
+    {
+      "file": "shiba/wake_left_01.png",
+      "sha256": "3be1417e0c5006a7cc29975d9f5f45b41cb716a28b494b687469a784a38d2341",
+      "dimensions": [
+        48,
+        48
+      ],
+      "verified": true
+    },
+    {
+      "file": "shiba/walk_right_00.png",
+      "sha256": "003ea9746dc9e8ec41aef2de2d566cba5b654a2c6b5420704d5a49417fcd515e",
+      "dimensions": [
+        48,
+        48
+      ],
+      "verified": true
+    },
+    {
+      "file": "shiba/walk_right_01.png",
+      "sha256": "575b6c02e4c88591534e8ca8024097dda7692e12b1550441253323007557370a",
+      "dimensions": [
+        48,
+        48
+      ],
+      "verified": true
+    },
+    {
+      "file": "shiba/walk_right_02.png",
+      "sha256": "2b78dc6189e9f218506ce959d71d25f1e253c66259b40e5c1ff922f1a3d82145",
+      "dimensions": [
+        48,
+        48
+      ],
+      "verified": true
+    },
+    {
+      "file": "shiba/walk_right_03.png",
+      "sha256": "9a384eb5b05304d9cab65e3f9782a9e536f7c3101ea36230abd4bad4a5462d98",
+      "dimensions": [
+        48,
+        48
+      ],
+      "verified": true
+    },
+    {
+      "file": "shiba/walk_left_00.png",
+      "sha256": "4f74c302059357facf9fe6a96e53f0e8eafec0d81660eabcde3c3abccab67825",
+      "dimensions": [
+        48,
+        48
+      ],
+      "verified": true
+    },
+    {
+      "file": "shiba/walk_left_01.png",
+      "sha256": "f544d04642180805818d5b4a7e49250aca15b2be596bc03bf882b240267cc3ca",
+      "dimensions": [
+        48,
+        48
+      ],
+      "verified": true
+    },
+    {
+      "file": "shiba/walk_left_02.png",
+      "sha256": "b8e4b81594217911d0e246841eff31e00a0d1f399b5f73e11b48d3b04cf8d6da",
+      "dimensions": [
+        48,
+        48
+      ],
+      "verified": true
+    },
+    {
+      "file": "shiba/walk_left_03.png",
+      "sha256": "333e8407afeba8a4c901fe6c35f2d12fde56024750b34c98940511cb86ea8515",
+      "dimensions": [
+        48,
+        48
+      ],
+      "verified": true
+    }
+  ]
+}
