@@ -56,5 +56,6 @@ if ($Task -in @('check','build')) {
     $testExe=Join-Path $runRoot 'WhistleRanch-test.exe'
     Run-Headless 'export' @('--export-release','Windows Desktop',$testExe)
     Run-Headless 'export-smoke' @('--','--smoke') $testExe
+    if ($Task -eq 'build') { & "$farmRoot/tools/publish_build.ps1" -Executable $testExe -Revision $revision -Dirty $dirty }
 }
 Write-Output "Verification artifacts: $runRoot"
