@@ -432,7 +432,12 @@
         6,
         26
       ],
-      "keeper_rotation_screen_degrees": -90
+      "keeper_rotation_screen_degrees": -90,
+      "keeper_mirror_after_rotation_x": false,
+      "keeper_transformed_pivot_px": [
+        26,
+        25
+      ]
     },
     {
       "file": "carry/right_00_front.png",
@@ -465,7 +470,12 @@
         6,
         26
       ],
-      "keeper_rotation_screen_degrees": -90
+      "keeper_rotation_screen_degrees": -90,
+      "keeper_mirror_after_rotation_x": false,
+      "keeper_transformed_pivot_px": [
+        26,
+        25
+      ]
     },
     {
       "file": "carry/left_00_rear.png",
@@ -498,7 +508,12 @@
         6,
         26
       ],
-      "keeper_rotation_screen_degrees": 90
+      "keeper_rotation_screen_degrees": -90,
+      "keeper_mirror_after_rotation_x": true,
+      "keeper_transformed_pivot_px": [
+        21,
+        25
+      ]
     },
     {
       "file": "carry/left_00_front.png",
@@ -531,7 +546,12 @@
         6,
         26
       ],
-      "keeper_rotation_screen_degrees": 90
+      "keeper_rotation_screen_degrees": -90,
+      "keeper_mirror_after_rotation_x": true,
+      "keeper_transformed_pivot_px": [
+        21,
+        25
+      ]
     },
     {
       "file": "carry/right_01_rear.png",
@@ -564,7 +584,12 @@
         6,
         26
       ],
-      "keeper_rotation_screen_degrees": -90
+      "keeper_rotation_screen_degrees": -90,
+      "keeper_mirror_after_rotation_x": false,
+      "keeper_transformed_pivot_px": [
+        26,
+        25
+      ]
     },
     {
       "file": "carry/right_01_front.png",
@@ -597,7 +622,12 @@
         6,
         26
       ],
-      "keeper_rotation_screen_degrees": -90
+      "keeper_rotation_screen_degrees": -90,
+      "keeper_mirror_after_rotation_x": false,
+      "keeper_transformed_pivot_px": [
+        26,
+        25
+      ]
     },
     {
       "file": "carry/left_01_rear.png",
@@ -630,7 +660,12 @@
         6,
         26
       ],
-      "keeper_rotation_screen_degrees": 90
+      "keeper_rotation_screen_degrees": -90,
+      "keeper_mirror_after_rotation_x": true,
+      "keeper_transformed_pivot_px": [
+        21,
+        25
+      ]
     },
     {
       "file": "carry/left_01_front.png",
@@ -663,7 +698,12 @@
         6,
         26
       ],
-      "keeper_rotation_screen_degrees": 90
+      "keeper_rotation_screen_degrees": -90,
+      "keeper_mirror_after_rotation_x": true,
+      "keeper_transformed_pivot_px": [
+        21,
+        25
+      ]
     },
     {
       "file": "carry/right_02_rear.png",
@@ -696,7 +736,12 @@
         6,
         26
       ],
-      "keeper_rotation_screen_degrees": -90
+      "keeper_rotation_screen_degrees": -90,
+      "keeper_mirror_after_rotation_x": false,
+      "keeper_transformed_pivot_px": [
+        26,
+        25
+      ]
     },
     {
       "file": "carry/right_02_front.png",
@@ -729,7 +774,12 @@
         6,
         26
       ],
-      "keeper_rotation_screen_degrees": -90
+      "keeper_rotation_screen_degrees": -90,
+      "keeper_mirror_after_rotation_x": false,
+      "keeper_transformed_pivot_px": [
+        26,
+        25
+      ]
     },
     {
       "file": "carry/left_02_rear.png",
@@ -762,7 +812,12 @@
         6,
         26
       ],
-      "keeper_rotation_screen_degrees": 90
+      "keeper_rotation_screen_degrees": -90,
+      "keeper_mirror_after_rotation_x": true,
+      "keeper_transformed_pivot_px": [
+        21,
+        25
+      ]
     },
     {
       "file": "carry/left_02_front.png",
@@ -795,7 +850,12 @@
         6,
         26
       ],
-      "keeper_rotation_screen_degrees": 90
+      "keeper_rotation_screen_degrees": -90,
+      "keeper_mirror_after_rotation_x": true,
+      "keeper_transformed_pivot_px": [
+        21,
+        25
+      ]
     }
   ],
   "animations": {
@@ -921,7 +981,12 @@
             6,
             26
           ],
-          "keeper_rotation_screen_degrees": -90
+          "keeper_rotation_screen_degrees": -90,
+          "keeper_mirror_after_rotation_x": false,
+          "keeper_transformed_pivot_px": [
+            26,
+            25
+          ]
         }
       ]
     },
@@ -947,7 +1012,12 @@
             6,
             26
           ],
-          "keeper_rotation_screen_degrees": -90
+          "keeper_rotation_screen_degrees": -90,
+          "keeper_mirror_after_rotation_x": false,
+          "keeper_transformed_pivot_px": [
+            26,
+            25
+          ]
         },
         {
           "rear": "carry/right_02_rear.png",
@@ -960,7 +1030,12 @@
             6,
             26
           ],
-          "keeper_rotation_screen_degrees": -90
+          "keeper_rotation_screen_degrees": -90,
+          "keeper_mirror_after_rotation_x": false,
+          "keeper_transformed_pivot_px": [
+            26,
+            25
+          ]
         }
       ]
     },
@@ -984,7 +1059,12 @@
             6,
             26
           ],
-          "keeper_rotation_screen_degrees": 90
+          "keeper_rotation_screen_degrees": -90,
+          "keeper_mirror_after_rotation_x": true,
+          "keeper_transformed_pivot_px": [
+            21,
+            25
+          ]
         }
       ]
     },
@@ -1010,7 +1090,12 @@
             6,
             26
           ],
-          "keeper_rotation_screen_degrees": 90
+          "keeper_rotation_screen_degrees": -90,
+          "keeper_mirror_after_rotation_x": true,
+          "keeper_transformed_pivot_px": [
+            21,
+            25
+          ]
         },
         {
           "rear": "carry/left_02_rear.png",
@@ -1023,7 +1108,12 @@
             6,
             26
           ],
-          "keeper_rotation_screen_degrees": 90
+          "keeper_rotation_screen_degrees": -90,
+          "keeper_mirror_after_rotation_x": true,
+          "keeper_transformed_pivot_px": [
+            21,
+            25
+          ]
         }
       ]
     },
@@ -1095,7 +1185,8 @@
   "review_only": [
     "review/basic-poses.png",
     "review/walk-stop.gif",
-    "review/carry.gif"
+    "review/carry.gif",
+    "review/carry-left-right.png"
   ],
   "unfinished": [
     "search",
