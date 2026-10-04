@@ -77,14 +77,14 @@ for action,row,count,timing in [("walk",0,4,[120]*4),("attack",1,3,[130,80,140])
     rear=Image.fromarray(rear)
     if direction=="left":rear=reflect(rear);front=reflect(front)
     for layer,img in [("rear",rear),("front",front)]:
-     save(img,action,direction,i,timing[i],i>0,layer=layer,shoulder_px=[12 if direction=="right" else 20,16],keeper_source_pivot_px=[6,26],keeper_rotation_screen_degrees=-90 if direction=="right" else 90)
+     save(img,action,direction,i,timing[i],i>0,layer=layer,shoulder_px=[12 if direction=="right" else 20,16],keeper_source_pivot_px=[6,26],keeper_rotation_screen_degrees=-90,keeper_mirror_after_rotation_x=direction=="left",keeper_transformed_pivot_px=[26 if direction=="right" else 21,25])
    else:save(f,action,direction,i,timing[i],action=="walk",contact=(action=="attack" and i==1))
  for direction in ["right","left"]:
   if action!="carry":
    clips[f"{action}_{direction}"]=dict(frames=[f"{action}/{direction}_{i:02}.png" for i in range(count)],frame_order=list(range(count)),frame_duration_ms=timing,loop=action=="walk",contact_frame_index=1 if action=="attack" else None)
   else:
    for state,indices,durations,loop in [("idle",[0],[None],False),("walk",[1,2],[150,150],True)]:
-    clips[f"carry_{state}_{direction}"]=dict(frame_order=indices,frame_duration_ms=durations,loop=loop,frames=[dict(rear=f"carry/{direction}_{i:02}_rear.png",front=f"carry/{direction}_{i:02}_front.png",shoulder_px=[12 if direction=="right" else 20,16],keeper_source_pivot_px=[6,26],keeper_rotation_screen_degrees=-90 if direction=="right" else 90) for i in indices])
+    clips[f"carry_{state}_{direction}"]=dict(frame_order=indices,frame_duration_ms=durations,loop=loop,frames=[dict(rear=f"carry/{direction}_{i:02}_rear.png",front=f"carry/{direction}_{i:02}_front.png",shoulder_px=[12 if direction=="right" else 20,16],keeper_source_pivot_px=[6,26],keeper_rotation_screen_degrees=-90,keeper_mirror_after_rotation_x=direction=="left",keeper_transformed_pivot_px=[26 if direction=="right" else 21,25]) for i in indices])
 # Structure attacks reuse the same empty-handed clip; no new gameplay event timing.
 for direction in ["right","left"]:
  clips[f"structure_attack_{direction}"]=dict(clips[f"attack_{direction}"],use="wall and door attack visual; damage timing remains existing logic")
