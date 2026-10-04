@@ -1,0 +1,117 @@
+{
+  "schema_version": 1,
+  "delivery": "merchant_cart_v2",
+  "scope": [
+    "merchant",
+    "stall replacement by travelling cart"
+  ],
+  "assets": [
+    {
+      "asset": "merchant",
+      "file": "merchant/idle_right_00.png",
+      "replaces": "../ranch_assets_v1/merchant/idle_right_00.png",
+      "canvas_size_px": [
+        32,
+        48
+      ],
+      "foot_anchor_px": [
+        16,
+        44
+      ],
+      "visible_bbox_exclusive_px": [
+        2,
+        2,
+        31,
+        44
+      ],
+      "visible_body_size_px": [
+        29,
+        42
+      ],
+      "logical_pixel_size": 1,
+      "action": "idle",
+      "direction": "right_three_quarter",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "duration_mode": "hold_until_state_change",
+      "loop": false,
+      "sha256": "dae25e011076fe020ad3617fbb8b96b1feeb0152b25d90c74265966c8cb3795c",
+      "status": "art_ready_runtime_unverified"
+    },
+    {
+      "asset": "cart",
+      "file": "cart/idle_front_00.png",
+      "replaces": "../ranch_assets_v1/stall/idle_front_00.png",
+      "canvas_size_px": [
+        768,
+        512
+      ],
+      "foot_anchor_px": [
+        384,
+        496
+      ],
+      "visible_bbox_exclusive_px": [
+        28,
+        32,
+        744,
+        496
+      ],
+      "visible_body_size_px": [
+        716,
+        464
+      ],
+      "logical_pixel_size": 4,
+      "action": "idle",
+      "direction": "front_three_quarter",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "duration_mode": "hold_until_state_change",
+      "loop": false,
+      "sha256": "9cbd68eba904e249583c80c825fbd5f0154da78fe4e6dbaae7b9f622d99463e4",
+      "status": "art_ready_runtime_unverified"
+    }
+  ],
+  "generator": "image_gen.imagegen",
+  "source_directory": "../../art-production/merchant-cart-v2",
+  "prompt_file": "../../art-production/merchant-cart-v2/prompts.json",
+  "import_rules": {
+    "filter": "nearest",
+    "alpha": "normal RGBA; no white-key shader",
+    "preserve_transparent_margins": true,
+    "equal_scale": true,
+    "cart_includes_merchant": true,
+    "position_formula": "top_left = target_foot - foot_anchor"
+  },
+  "review_only": [
+    "review/comparison.png",
+    "review/alpha-check.png"
+  ],
+  "quality": {
+    "binary_alpha": true,
+    "native_size_checked": true,
+    "cart_logical_grid": [
+      192,
+      128
+    ],
+    "adopted_character_pngs_unchanged": [
+      "keeper_idle_right_00.png",
+      "shiba_idle_right_00.png",
+      "shiba_idle_left_00.png",
+      "shiba_idle_front_00.png"
+    ],
+    "previous_ranch_pngs_unchanged": 76,
+    "runtime_verified": false
+  },
+  "unfinished": [
+    "merchant walk/rest",
+    "cart moving/opening states"
+  ]
+}
