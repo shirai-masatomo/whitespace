@@ -21,7 +21,70 @@
       "speed": 1.0,
       "tick": 0
     },
-    "destinations": {
+    "book_turn": {
+      "alert": "",
+      "camera": [
+        600.0,
+        357.0
+      ],
+      "display_order": [],
+      "gold": 10,
+      "held": false,
+      "keeper_hp": 30,
+      "keeper_state": "free",
+      "paused": false,
+      "phase": "shop",
+      "rest_elapsed": 0,
+      "resting": false,
+      "shop_level": "list",
+      "shop_side": "animals",
+      "sleepiness": 0.0,
+      "speed": 1.0,
+      "tick": 0
+    },
+    "broken_lock": {
+      "alert": "",
+      "camera": [
+        600.0,
+        357.0
+      ],
+      "display_order": [],
+      "gold": 10,
+      "held": false,
+      "keeper_hp": 30,
+      "keeper_state": "free",
+      "paused": false,
+      "phase": "day",
+      "rest_elapsed": 0.0,
+      "resting": false,
+      "shop_level": "categories",
+      "shop_side": "home",
+      "sleepiness": 70,
+      "speed": 1.0,
+      "tick": 97
+    },
+    "dawn": {
+      "alert": "",
+      "camera": [
+        600.0,
+        357.0
+      ],
+      "display_order": [],
+      "gold": 71,
+      "held": true,
+      "keeper_hp": 30,
+      "keeper_state": "free",
+      "paused": false,
+      "phase": "dawn",
+      "rest_elapsed": 109.0,
+      "resting": true,
+      "shop_level": "categories",
+      "shop_side": "home",
+      "sleepiness": 0.0,
+      "speed": 1.0,
+      "tick": 1080
+    },
+    "guidance": {
       "alert": "",
       "camera": [
         600.0,
@@ -29,64 +92,16 @@
       ],
       "display_order": [
         {
-          "job_id": 5,
-          "kind": "place_animal",
+          "job_id": 4,
+          "kind": "animal_order",
           "number": 1,
           "pos": [
-            16,
-            9
-          ]
-        },
-        {
-          "job_id": 1,
-          "kind": "wall",
-          "number": 2,
-          "pos": [
-            10,
-            8
-          ]
-        },
-        {
-          "job_id": 3,
-          "kind": "wall",
-          "number": 3,
-          "pos": [
-            12,
-            8
-          ]
-        },
-        {
-          "job_id": 4,
-          "kind": "collect",
-          "number": 4,
-          "pos": [
-            9,
+            20,
             8
           ]
         }
       ],
       "gold": 10,
-      "held": true,
-      "keeper_hp": 30,
-      "keeper_state": "free",
-      "paused": true,
-      "phase": "day",
-      "rest_elapsed": 0,
-      "resting": false,
-      "shop_level": "categories",
-      "shop_side": "home",
-      "sleepiness": 0.0,
-      "speed": 1.0,
-      "tick": 0
-    },
-    "drowsy": {
-      "alert": "",
-      "camera": [
-        600.0,
-        357.0
-      ],
-      "display_order": [],
-      "gold": 40,
       "held": false,
       "keeper_hp": 30,
       "keeper_state": "free",
@@ -96,11 +111,53 @@
       "resting": false,
       "shop_level": "categories",
       "shop_side": "home",
-      "sleepiness": 65,
+      "sleepiness": 3.88888888888889,
       "speed": 1.0,
-      "tick": 0
+      "tick": 42
     },
-    "keeper_selected": {
+    "indoor_sleep": {
+      "alert": "",
+      "camera": [
+        600.0,
+        357.0
+      ],
+      "display_order": [],
+      "gold": 10,
+      "held": true,
+      "keeper_hp": 30,
+      "keeper_state": "free",
+      "paused": false,
+      "phase": "day",
+      "rest_elapsed": 3.0,
+      "resting": true,
+      "shop_level": "categories",
+      "shop_side": "home",
+      "sleepiness": 70,
+      "speed": 1.0,
+      "tick": 97
+    },
+    "indoors": {
+      "alert": "",
+      "camera": [
+        600.0,
+        357.0
+      ],
+      "display_order": [],
+      "gold": 10,
+      "held": false,
+      "keeper_hp": 30,
+      "keeper_state": "free",
+      "paused": false,
+      "phase": "day",
+      "rest_elapsed": 0,
+      "resting": false,
+      "shop_level": "categories",
+      "shop_side": "home",
+      "sleepiness": 5.37037037037037,
+      "speed": 1.0,
+      "tick": 58
+    },
+    "instructions": {
       "alert": "",
       "camera": [
         600.0,
@@ -108,38 +165,29 @@
       ],
       "display_order": [
         {
-          "job_id": 5,
-          "kind": "place_animal",
+          "job_id": 3,
+          "kind": "wall",
           "number": 1,
           "pos": [
-            16,
-            9
+            12,
+            10
           ]
         },
         {
-          "job_id": 1,
+          "job_id": 2,
           "kind": "wall",
           "number": 2,
           "pos": [
-            10,
-            8
-          ]
-        },
-        {
-          "job_id": 3,
-          "kind": "wall",
-          "number": 3,
-          "pos": [
-            12,
-            8
+            11,
+            10
           ]
         },
         {
           "job_id": 4,
-          "kind": "collect",
-          "number": 4,
+          "kind": "animal_order",
+          "number": 3,
           "pos": [
-            9,
+            20,
             8
           ]
         }
@@ -179,56 +227,19 @@
       "speed": 1.0,
       "tick": 0
     },
-    "neutral": {
+    "next_morning": {
       "alert": "",
       "camera": [
         600.0,
         357.0
       ],
-      "display_order": [
-        {
-          "job_id": 5,
-          "kind": "place_animal",
-          "number": 1,
-          "pos": [
-            16,
-            9
-          ]
-        },
-        {
-          "job_id": 1,
-          "kind": "wall",
-          "number": 2,
-          "pos": [
-            10,
-            8
-          ]
-        },
-        {
-          "job_id": 3,
-          "kind": "wall",
-          "number": 3,
-          "pos": [
-            12,
-            8
-          ]
-        },
-        {
-          "job_id": 4,
-          "kind": "collect",
-          "number": 4,
-          "pos": [
-            9,
-            8
-          ]
-        }
-      ],
-      "gold": 10,
-      "held": true,
+      "display_order": [],
+      "gold": 71,
+      "held": false,
       "keeper_hp": 30,
       "keeper_state": "free",
-      "paused": true,
-      "phase": "day",
+      "paused": false,
+      "phase": "shop",
       "rest_elapsed": 0,
       "resting": false,
       "shop_level": "categories",
@@ -245,12 +256,61 @@
       ],
       "display_order": [
         {
+          "job_id": 3,
+          "kind": "wall",
+          "number": 1,
+          "pos": [
+            12,
+            10
+          ]
+        },
+        {
+          "job_id": 1,
+          "kind": "wall",
+          "number": 2,
+          "pos": [
+            10,
+            10
+          ]
+        },
+        {
+          "job_id": 2,
+          "kind": "wall",
+          "number": 3,
+          "pos": [
+            11,
+            10
+          ]
+        }
+      ],
+      "gold": 10,
+      "held": false,
+      "keeper_hp": 30,
+      "keeper_state": "free",
+      "paused": true,
+      "phase": "day",
+      "rest_elapsed": 0,
+      "resting": false,
+      "shop_level": "categories",
+      "shop_side": "home",
+      "sleepiness": 0.0,
+      "speed": 1.0,
+      "tick": 0
+    },
+    "queue_motion": {
+      "alert": "",
+      "camera": [
+        600.0,
+        357.0
+      ],
+      "display_order": [
+        {
           "job_id": 1,
           "kind": "wall",
           "number": 1,
           "pos": [
             10,
-            8
+            10
           ]
         },
         {
@@ -259,7 +319,7 @@
           "number": 2,
           "pos": [
             11,
-            8
+            10
           ]
         },
         {
@@ -268,25 +328,7 @@
           "number": 3,
           "pos": [
             12,
-            8
-          ]
-        },
-        {
-          "job_id": 4,
-          "kind": "collect",
-          "number": 4,
-          "pos": [
-            9,
-            8
-          ]
-        },
-        {
-          "job_id": 5,
-          "kind": "place_animal",
-          "number": 5,
-          "pos": [
-            16,
-            9
+            10
           ]
         }
       ],
@@ -301,148 +343,6 @@
       "shop_level": "categories",
       "shop_side": "home",
       "sleepiness": 0.0,
-      "speed": 1.0,
-      "tick": 0
-    },
-    "reordered": {
-      "alert": "",
-      "camera": [
-        600.0,
-        357.0
-      ],
-      "display_order": [
-        {
-          "job_id": 5,
-          "kind": "place_animal",
-          "number": 1,
-          "pos": [
-            16,
-            9
-          ]
-        },
-        {
-          "job_id": 1,
-          "kind": "wall",
-          "number": 2,
-          "pos": [
-            10,
-            8
-          ]
-        },
-        {
-          "job_id": 3,
-          "kind": "wall",
-          "number": 3,
-          "pos": [
-            12,
-            8
-          ]
-        },
-        {
-          "job_id": 4,
-          "kind": "collect",
-          "number": 4,
-          "pos": [
-            9,
-            8
-          ]
-        }
-      ],
-      "gold": 10,
-      "held": false,
-      "keeper_hp": 30,
-      "keeper_state": "free",
-      "paused": true,
-      "phase": "day",
-      "rest_elapsed": 0,
-      "resting": false,
-      "shop_level": "categories",
-      "shop_side": "home",
-      "sleepiness": 0.0,
-      "speed": 1.0,
-      "tick": 0
-    },
-    "rest": {
-      "alert": "",
-      "camera": [
-        600.0,
-        357.0
-      ],
-      "display_order": [],
-      "gold": 40,
-      "held": true,
-      "keeper_hp": 30,
-      "keeper_state": "free",
-      "paused": false,
-      "phase": "day",
-      "rest_elapsed": 5.25,
-      "resting": true,
-      "shop_level": "categories",
-      "shop_side": "home",
-      "sleepiness": 84.5,
-      "speed": 1.0,
-      "tick": 21
-    },
-    "rest_until_dawn": {
-      "alert": "",
-      "camera": [
-        600.0,
-        357.0
-      ],
-      "display_order": [],
-      "gold": 11,
-      "held": true,
-      "keeper_hp": 30,
-      "keeper_state": "free",
-      "paused": false,
-      "phase": "defend",
-      "rest_elapsed": 5.25,
-      "resting": true,
-      "shop_level": "categories",
-      "shop_side": "home",
-      "sleepiness": 12.925925925926,
-      "speed": 1.0,
-      "tick": 526
-    },
-    "rest_until_night": {
-      "alert": "",
-      "camera": [
-        600.0,
-        357.0
-      ],
-      "display_order": [],
-      "gold": 11,
-      "held": true,
-      "keeper_hp": 30,
-      "keeper_state": "free",
-      "paused": false,
-      "phase": "day",
-      "rest_elapsed": 5.25,
-      "resting": true,
-      "shop_level": "categories",
-      "shop_side": "home",
-      "sleepiness": 0.0,
-      "speed": 1.0,
-      "tick": 138
-    },
-    "settling": {
-      "alert": "",
-      "camera": [
-        600.0,
-        357.0
-      ],
-      "display_order": [],
-      "gold": 40,
-      "held": true,
-      "keeper_hp": 30,
-      "keeper_state": "free",
-      "paused": false,
-      "phase": "day",
-      "rest_elapsed": 0.0,
-      "resting": true,
-      "shop_level": "categories",
-      "shop_side": "home",
-      "sleepiness": 85,
       "speed": 1.0,
       "tick": 0
     },
@@ -508,4771 +408,1190 @@
       "sleepiness": 0.0,
       "speed": 1.0,
       "tick": 0
-    },
-    "tired": {
-      "alert": "",
-      "camera": [
-        600.0,
-        357.0
-      ],
-      "display_order": [],
-      "gold": 40,
-      "held": false,
-      "keeper_hp": 30,
-      "keeper_state": "free",
-      "paused": false,
-      "phase": "day",
-      "rest_elapsed": 0,
-      "resting": false,
-      "shop_level": "categories",
-      "shop_side": "home",
-      "sleepiness": 85,
-      "speed": 1.0,
-      "tick": 0
-    },
-    "transport": {
-      "alert": "",
-      "camera": [
-        600.0,
-        357.0
-      ],
-      "display_order": [
-        {
-          "job_id": 5,
-          "kind": "place_animal",
-          "number": 1,
-          "pos": [
-            16,
-            9
-          ]
-        },
-        {
-          "job_id": 1,
-          "kind": "wall",
-          "number": 2,
-          "pos": [
-            10,
-            8
-          ]
-        },
-        {
-          "job_id": 3,
-          "kind": "wall",
-          "number": 3,
-          "pos": [
-            12,
-            8
-          ]
-        },
-        {
-          "job_id": 4,
-          "kind": "collect",
-          "number": 4,
-          "pos": [
-            9,
-            8
-          ]
-        }
-      ],
-      "gold": 10,
-      "held": false,
-      "keeper_hp": 30,
-      "keeper_state": "free",
-      "paused": false,
-      "phase": "day",
-      "rest_elapsed": 0,
-      "resting": false,
-      "shop_level": "categories",
-      "shop_side": "home",
-      "sleepiness": 3.24074074074074,
-      "speed": 1.0,
-      "tick": 35
     }
   },
-  "input_checks": {
-    "awake_no_sleep_effect": true,
-    "board_cancel_no_move": true,
-    "book_open_turn_close": true,
-    "five_second_rest": true,
-    "market_back_close": true,
-    "mixed_class_drag": true,
-    "mode_cursors": true,
-    "morning_training": true,
-    "name_shortcut_guard": true,
-    "neutral_left_move_right_deselect": true,
-    "paused_planning": true,
-    "queue_drag": true,
-    "rest_until_fixed_tick_accelerator": true,
-    "shed_transport": true,
-    "speed_shortcuts": true,
-    "transport_attack_lowered": true,
-    "transport_cancel_return": true,
-    "wheel_keeper": true
+  "debug_inputs": {
+    "add_cat": true,
+    "grant_whistle": true,
+    "indoor_sleep": true,
+    "keeper_left_click_indoor_move": true,
+    "lock_damage_and_onsite_repair": true,
+    "room_fixture": true
   },
-  "next_morning": {
-    "actions": [],
-    "ai_settings": {
-      "counter": {
-        "counter": 0.8,
-        "hesitate": 0.1,
-        "resume": 0.1
-      },
-      "decision_max": 1.4,
-      "decision_min": 0.6,
-      "dog": {
-        "engage": 0.76,
-        "reposition": 0.08,
-        "watch": 0.16
-      },
-      "log_limit": 96,
-      "raider": {
-        "advance": 0.76,
-        "detour": 0.14,
-        "hesitate": 0.1
-      },
-      "randomness": 1.0,
-      "rescue_randomness": 0.12
-    },
-    "animals": [
+  "final_world": {
+    "seed": 17,
+    "day": 1,
+    "tick": 1080,
+    "phase": "dawn",
+    "result": "win",
+    "debug": false,
+    "indoor": [],
+    "floors": [
       {
-        "affinity": null,
-        "attack_power": 10,
-        "attack_seconds": 1.2,
-        "attack_target_range": 4,
-        "auto_recovering": false,
-        "category": "dog",
-        "deployment": "unplaced",
-        "detection_range": 4,
-        "fear": 0,
-        "healing_kennel": -1,
-        "home": [
-          -10,
-          -10
-        ],
-        "hp": 38,
-        "id": 1,
-        "kennel_id": -1,
-        "kennel_ticks": 0,
-        "known_enemies": {},
-        "last_bark": -100,
-        "loyalty": 75,
-        "lv": 1,
-        "max_hp": 40,
-        "mode": "auto",
-        "move_credit": 0.0,
-        "move_speed": 2.0,
-        "name": "こむぎ",
-        "next_attack": 0,
-        "next_bark": 0,
-        "object_attack_power": 0,
-        "order": [
-          -10,
-          -10
-        ],
-        "order_until": 0,
-        "path": [
-          [
-            -10,
-            -10
-          ]
-        ],
-        "pending": {},
-        "placed": false,
+        "kind": "wood_tile",
         "pos": [
-          -10,
-          -10
+          11,
+          6
         ],
-        "rescuing": false,
-        "rest_settled": false,
-        "rest_ticks": 0,
-        "skill_ready": {},
-        "skills": [
-          "bark",
-          "rescue"
-        ],
-        "species": "shiba",
-        "stamina": 100.0,
-        "state": "見張り",
-        "target_id": -1,
-        "unavailable_through_day": 0,
-        "xp": 0
+        "status": "ready"
       },
       {
-        "affinity": null,
-        "attack_power": 0,
-        "attack_seconds": 0,
-        "attack_target_range": 0,
-        "auto_recovering": false,
-        "category": "bird",
-        "deployment": "unplaced",
-        "detection_range": 3,
-        "fear": 0,
-        "healing_kennel": -1,
-        "home": [
-          -10,
-          -10
-        ],
-        "hp": 20,
-        "id": 2,
-        "kennel_id": -1,
-        "kennel_ticks": 0,
-        "known_enemies": {},
-        "last_bark": -100,
-        "loyalty": 0,
-        "lv": 1,
-        "max_hp": 20,
-        "mode": "auto",
-        "move_credit": 0.0,
-        "move_speed": 1.3,
-        "name": "",
-        "next_attack": 0,
-        "next_bark": 0,
-        "object_attack_power": 0,
-        "order": [
-          -10,
-          -10
-        ],
-        "order_until": 0,
-        "path": [
-          [
-            -10,
-            -10
-          ]
-        ],
-        "pending": {},
-        "placed": false,
+        "kind": "wood_tile",
         "pos": [
-          -10,
-          -10
+          12,
+          6
         ],
-        "rescuing": false,
-        "rest_settled": false,
-        "rest_ticks": 0,
-        "skill_ready": {},
-        "skills": [
-          "lay",
-          "feather"
+        "status": "ready"
+      },
+      {
+        "kind": "wood_tile",
+        "pos": [
+          13,
+          6
         ],
-        "species": "hen",
-        "stamina": 100.0,
-        "state": "ついばむ",
-        "target_id": -1,
-        "traits": {},
-        "unavailable_through_day": 0,
-        "xp": 0
+        "status": "ready"
+      },
+      {
+        "kind": "wood_tile",
+        "pos": [
+          11,
+          7
+        ],
+        "status": "ready"
+      },
+      {
+        "kind": "wood_tile",
+        "pos": [
+          12,
+          7
+        ],
+        "status": "ready"
+      },
+      {
+        "kind": "wood_tile",
+        "pos": [
+          13,
+          7
+        ],
+        "status": "ready"
+      },
+      {
+        "kind": "wood_tile",
+        "pos": [
+          11,
+          8
+        ],
+        "status": "ready"
+      },
+      {
+        "kind": "wood_tile",
+        "pos": [
+          12,
+          8
+        ],
+        "status": "ready"
+      },
+      {
+        "kind": "wood_tile",
+        "pos": [
+          13,
+          8
+        ],
+        "status": "ready"
       }
     ],
-    "bark_settings": {
-      "cooldown": 6.0,
-      "range": 4,
-      "stop_seconds": 1.0
+    "resources": {
+      "soil": 80,
+      "stone": 0,
+      "wood": 0
     },
-    "campaign": {
-      "animals": [
-        {
-          "affinity": null,
-          "category": "dog",
-          "hp": 38,
-          "id": 1,
-          "loyalty": 75,
-          "lv": 2,
-          "name": "こむぎ",
-          "object_attack_power": 0,
-          "species": "shiba",
-          "unavailable_through_day": 0,
-          "xp": 0
-        },
-        {
-          "affinity": null,
-          "category": "bird",
-          "hp": 20,
-          "id": 2,
-          "loyalty": 0,
-          "lv": 1,
-          "name": "",
-          "object_attack_power": 0,
-          "species": "hen",
-          "traits": {},
-          "unavailable_through_day": 0,
-          "xp": 0
-        }
-      ],
-      "day": 2,
-      "eggs": 0,
-      "exp_pool": 5,
-      "facilities": [
-        {
-          "armor": 0,
-          "cost": 10,
-          "hp": 8,
-          "id": 1,
-          "kind": "wall",
-          "max_hp": 8,
-          "open": false,
-          "pos": [
-            10,
-            8
-          ],
-          "remaining": 0.0,
-          "resource": "soil",
-          "status": "ready",
-          "total_ticks": 4
-        },
-        {
-          "armor": 0,
-          "cost": 10,
-          "hp": 8,
-          "id": 2,
-          "kind": "wall",
-          "max_hp": 8,
-          "open": false,
-          "pos": [
-            12,
-            8
-          ],
-          "remaining": 0.0,
-          "resource": "soil",
-          "status": "ready",
-          "total_ticks": 4
-        }
-      ],
-      "fence": 0,
-      "field_items": [
-        {
-          "born_day": 1,
-          "kind": "kennel_plan",
-          "pos": [
-            12,
-            13
-          ]
-        }
-      ],
-      "gold": 79,
-      "items": {
-        "dog_food": 2,
-        "hen_food": 0
+    "score": {
+      "condition": 63,
+      "gold": 51,
+      "rating": 80,
+      "seconds": 180.0,
+      "time_bonus": 10,
+      "xp": 24
+    },
+    "dawn": {
+      "chicks": 0,
+      "eggs": 1,
+      "feathers": 0,
+      "hens": 0,
+      "pending_blueprints": 1,
+      "unconscious": []
+    },
+    "early_finish_bonus": 10,
+    "exp_pool": 24,
+    "life_log": [
+      {
+        "event": "rest_started",
+        "tick": 85
       },
-      "keeper_position": [
-        15,
-        12
-      ],
-      "keeper_vitals": {
-        "drinks_today": 0,
+      {
+        "event": "rest",
+        "tick": 85
+      },
+      {
+        "event": "rest_recovery_started",
+        "indoor": true,
+        "tick": 97
+      },
+      {
+        "event": "rest_ended",
+        "tick": 97
+      },
+      {
+        "event": "wake",
+        "tick": 97
+      },
+      {
+        "event": "rest_until_planned",
+        "target": "night",
+        "tick": 100
+      },
+      {
+        "event": "rest_started",
+        "tick": 100
+      },
+      {
+        "event": "rest_until_started",
+        "tick": 100
+      },
+      {
+        "event": "rest_recovery_started",
+        "indoor": true,
+        "tick": 112
+      },
+      {
+        "event": "rest_until_stopped",
+        "reason": "nightfall",
+        "tick": 360
+      },
+      {
+        "event": "rest_ended",
+        "tick": 360
+      },
+      {
+        "event": "invasion",
         "hp": 30,
-        "sleepiness": 0.0
+        "sleepiness": 3.7,
+        "tick": 400
       },
-      "mushrooms": 0,
-      "next_structure_id": 3,
-      "night_ready": false,
-      "resources": {
-        "soil": 80,
-        "stone": 0,
-        "wood": 20
+      {
+        "event": "approaching",
+        "hp": 30,
+        "sleepiness": 12.3,
+        "tick": 494
       },
-      "shelter": false,
-      "stage": 1,
-      "unlocked_blueprints": []
-    },
-    "combat": [],
-    "command_power": 10.0,
-    "dawn": {},
-    "day": 2,
-    "decision_count": 0,
-    "decision_counts": {},
-    "decision_log": [],
-    "early_clear": false,
-    "early_clear_tick": -1,
-    "early_finish_bonus": 0,
-    "eggs": 0,
-    "exp_pool": 5,
+      {
+        "event": "approaching",
+        "hp": 30,
+        "sleepiness": 12.9,
+        "tick": 500
+      },
+      {
+        "event": "spotted",
+        "hp": 30,
+        "sleepiness": 16.2,
+        "tick": 535
+      },
+      {
+        "event": "keeper_hit",
+        "hp": 25,
+        "sleepiness": 16.8,
+        "tick": 541
+      },
+      {
+        "event": "keeper_hit",
+        "hp": 20,
+        "sleepiness": 17.1,
+        "tick": 545
+      },
+      {
+        "event": "keeper_hit",
+        "hp": 15,
+        "sleepiness": 17.5,
+        "tick": 549
+      },
+      {
+        "event": "keeper_hit",
+        "hp": 10,
+        "sleepiness": 17.9,
+        "tick": 553
+      },
+      {
+        "event": "keeper_hit",
+        "hp": 5,
+        "sleepiness": 18.7,
+        "tick": 562
+      },
+      {
+        "event": "keeper_hit",
+        "hp": 0,
+        "sleepiness": 19.1,
+        "tick": 566
+      },
+      {
+        "event": "carried",
+        "hp": 0,
+        "sleepiness": 19.1,
+        "tick": 570
+      },
+      {
+        "event": "rest_started",
+        "tick": 644
+      },
+      {
+        "event": "rest_until_planned",
+        "target": "dawn",
+        "tick": 644
+      },
+      {
+        "event": "rest_until_started",
+        "tick": 644
+      },
+      {
+        "event": "rest_recovery_started",
+        "indoor": false,
+        "tick": 664
+      }
+    ],
+    "job_log": [
+      {
+        "animal_id": 1,
+        "event": "admitted",
+        "pos": [
+          8,
+          13
+        ],
+        "tick": 0
+      },
+      {
+        "animal_id": 2,
+        "event": "admitted",
+        "pos": [
+          21,
+          14
+        ],
+        "tick": 0
+      },
+      {
+        "event": "queued",
+        "id": 1,
+        "kind": "wall",
+        "pos": [
+          10,
+          10
+        ],
+        "tick": 0
+      },
+      {
+        "event": "queued",
+        "id": 2,
+        "kind": "wall",
+        "pos": [
+          11,
+          10
+        ],
+        "tick": 0
+      },
+      {
+        "event": "queued",
+        "id": 3,
+        "kind": "wall",
+        "pos": [
+          12,
+          10
+        ],
+        "tick": 0
+      },
+      {
+        "event": "reordered",
+        "id": 3,
+        "order": [
+          3,
+          1,
+          2
+        ],
+        "tick": 0
+      },
+      {
+        "event": "cancelled",
+        "id": 1,
+        "tick": 0
+      },
+      {
+        "event": "order_reserved",
+        "id": 4,
+        "order": "guide",
+        "targets": [
+          1
+        ],
+        "tick": 0,
+        "unassigned": []
+      },
+      {
+        "animal_id": -1,
+        "event": "completed",
+        "id": 3,
+        "kind": "wall",
+        "pos": [
+          12,
+          10
+        ],
+        "tick": 17
+      },
+      {
+        "animal_id": -1,
+        "event": "completed",
+        "id": 2,
+        "kind": "wall",
+        "pos": [
+          11,
+          10
+        ],
+        "tick": 23
+      },
+      {
+        "animal_id": 1,
+        "destination": [
+          20,
+          8
+        ],
+        "distance": 1,
+        "event": "order_issued",
+        "tick": 38
+      },
+      {
+        "event": "cancelled",
+        "id": 4,
+        "tick": 58
+      },
+      {
+        "action": "whistle",
+        "event": "debug",
+        "tick": 58
+      },
+      {
+        "action": "infinite",
+        "event": "debug",
+        "tick": 58
+      },
+      {
+        "animal_id": 3,
+        "event": "admitted",
+        "pos": [
+          21,
+          14
+        ],
+        "tick": 58
+      },
+      {
+        "action": "cat",
+        "event": "debug",
+        "tick": 58
+      },
+      {
+        "event": "hold_changed",
+        "reason": "travel",
+        "tick": 58
+      },
+      {
+        "event": "manual_move",
+        "pos": [
+          12,
+          7
+        ],
+        "tick": 58
+      },
+      {
+        "event": "hold_changed",
+        "reason": "",
+        "tick": 85
+      },
+      {
+        "event": "hold_changed",
+        "reason": "rest",
+        "tick": 85
+      },
+      {
+        "event": "hold_changed",
+        "reason": "",
+        "tick": 97
+      },
+      {
+        "action": "lock",
+        "event": "debug",
+        "tick": 97
+      },
+      {
+        "action": "lock",
+        "event": "debug",
+        "tick": 97
+      },
+      {
+        "event": "queued",
+        "id": 5,
+        "kind": "repair",
+        "pos": [
+          10,
+          7
+        ],
+        "tick": 97
+      },
+      {
+        "animal_id": -1,
+        "event": "completed",
+        "id": 5,
+        "kind": "repair",
+        "pos": [
+          10,
+          7
+        ],
+        "tick": 100
+      },
+      {
+        "event": "hold_changed",
+        "reason": "rest",
+        "tick": 100
+      },
+      {
+        "event": "hold_changed",
+        "reason": "rest_end",
+        "tick": 360
+      },
+      {
+        "event": "hold_changed",
+        "reason": "rescue",
+        "tick": 566
+      },
+      {
+        "event": "hold_changed",
+        "reason": "rest",
+        "tick": 644
+      }
+    ],
+    "jobs": [],
     "field_items": [
       {
         "born_day": 1,
         "kind": "kennel_plan",
         "pos": [
-          12,
-          13
-        ]
-      }
-    ],
-    "initial_campaign": {
-      "animals": [
-        {
-          "affinity": null,
-          "category": "dog",
-          "hp": 38,
-          "id": 1,
-          "loyalty": 75,
-          "lv": 1,
-          "name": "こむぎ",
-          "object_attack_power": 0,
-          "species": "shiba",
-          "unavailable_through_day": 0,
-          "xp": 0
-        },
-        {
-          "affinity": null,
-          "category": "bird",
-          "hp": 20,
-          "id": 2,
-          "loyalty": 0,
-          "lv": 1,
-          "name": "",
-          "object_attack_power": 0,
-          "species": "hen",
-          "traits": {},
-          "unavailable_through_day": 0,
-          "xp": 0
-        }
-      ],
-      "day": 2,
-      "eggs": 0,
-      "exp_pool": 25,
-      "facilities": [
-        {
-          "armor": 0,
-          "cost": 10,
-          "hp": 8,
-          "id": 1,
-          "kind": "wall",
-          "max_hp": 8,
-          "open": false,
-          "pos": [
-            10,
-            8
-          ],
-          "remaining": 0.0,
-          "resource": "soil",
-          "status": "ready",
-          "total_ticks": 4
-        },
-        {
-          "armor": 0,
-          "cost": 10,
-          "hp": 8,
-          "id": 2,
-          "kind": "wall",
-          "max_hp": 8,
-          "open": false,
-          "pos": [
-            12,
-            8
-          ],
-          "remaining": 0.0,
-          "resource": "soil",
-          "status": "ready",
-          "total_ticks": 4
-        }
-      ],
-      "fence": 0,
-      "field_items": [
-        {
-          "born_day": 1,
-          "kind": "kennel_plan",
-          "pos": [
-            12,
-            13
-          ]
-        }
-      ],
-      "gold": 79,
-      "items": {
-        "dog_food": 2,
-        "hen_food": 0
-      },
-      "keeper_position": [
-        15,
-        12
-      ],
-      "keeper_vitals": {
-        "drinks_today": 0,
-        "hp": 30,
-        "sleepiness": 0.0
-      },
-      "mushrooms": 0,
-      "next_structure_id": 3,
-      "night_ready": false,
-      "resources": {
-        "soil": 80,
-        "stone": 0,
-        "wood": 20
-      },
-      "shelter": false,
-      "stage": 1,
-      "unlocked_blueprints": []
-    },
-    "initial_positions": {},
-    "job_hold_reason": "",
-    "job_log": [],
-    "jobs": [],
-    "jobs_held": false,
-    "keeper": {
-      "carrier": -1,
-      "drinks_today": 0,
-      "forced_rest": false,
-      "heal_credit": 0.0,
-      "hp": 30,
-      "hurt_until": 0,
-      "max_hp": 30,
-      "move_credit": 0.0,
-      "next_attack": 0,
-      "placed": false,
-      "pos": [
-        6,
-        13
-      ],
-      "recover_ticks": 0,
-      "resting": false,
-      "restrainer": -1,
-      "sleepiness": 0.0,
-      "state": "free",
-      "warned": 0
-    },
-    "keeper_path": [],
-    "life_log": [],
-    "manual_goal": null,
-    "materials": 80,
-    "metrics": {
-      "bark_casts": 0,
-      "bark_targets": 0,
-      "barks": 0,
-      "built": 0,
-      "captures": 0,
-      "coins": 0,
-      "commands": 0.0,
-      "destroyed": 0,
-      "eggs_collected": 0,
-      "eggs_produced": 0,
-      "fed": 0,
-      "interrupted": 0,
-      "mushroom_collected": 0,
-      "mushroom_healing": 0,
-      "mushroom_spawned": 0,
-      "mushrooms_used": 0,
-      "nature_rolls": 0,
-      "orders": 0,
-      "repaired": 0,
-      "repelled": 0,
-      "rescues": 0,
-      "soil_repair": 0,
-      "stolen": 0,
-      "structure_damage": 0,
-      "stump_collected": 0,
-      "stump_spawned": 0,
-      "weed_collected": 0,
-      "weed_spawned": 0
-    },
-    "milestones": [],
-    "mushrooms": 0,
-    "natural": [],
-    "nature_settings": {
-      "caps": {
-        "mushroom": 3,
-        "stump": 1,
-        "weed": 10
-      },
-      "interval": 1.0,
-      "limit": 16,
-      "mushroom_hp": 5,
-      "spawn_chance_per_second": 0.2,
-      "stump_wood": 20,
-      "weed_gold": 1,
-      "weights": {
-        "mushroom": 15.0,
-        "stump": 5.0,
-        "weed": 80.0
-      }
-    },
-    "night_started_tick": 0,
-    "paused": false,
-    "phase": "shop",
-    "raiders": [],
-    "remaining_day": 90.0,
-    "remaining_night": 180.0,
-    "resources": {
-      "soil": 80,
-      "stone": 0,
-      "wood": 20
-    },
-    "rest_until": {},
-    "result": "",
-    "samples": [],
-    "schedule": [
-      {
-        "entry": [
-          1,
-          5
-        ],
-        "lv": 1,
-        "role": "kidnapper",
-        "tick": 40,
-        "wave": 1
-      }
-    ],
-    "score": {},
-    "seed": 18,
-    "shop_log": [],
-    "shop_stock": [
-      {
-        "individual": {
-          "loyalty": 0
-        },
-        "product": "coffee",
-        "remaining": 1
-      },
-      {
-        "individual": {
-          "loyalty": 0
-        },
-        "product": "energy_drink",
-        "remaining": 1
-      },
-      {
-        "individual": {
-          "loyalty": 0
-        },
-        "product": "hen",
-        "remaining": 1
-      },
-      {
-        "individual": {
-          "loyalty": 0
-        },
-        "product": "cat",
-        "remaining": 1
-      },
-      {
-        "individual": {
-          "loyalty": 0
-        },
-        "product": "soil",
-        "remaining": 4
-      },
-      {
-        "individual": {
-          "loyalty": 0
-        },
-        "product": "wood",
-        "remaining": 3
-      },
-      {
-        "individual": {
-          "loyalty": 0
-        },
-        "product": "stone",
-        "remaining": 3
-      }
-    ],
-    "sight_log": [],
-    "skill_log": [],
-    "stage": 1,
-    "stage_config": {
-      "first_attack_seconds": 10.0,
-      "repeat_interval_seconds": 60.0,
-      "repeat_waves": false,
-      "time_limit_seconds": 180.0,
-      "waves": [
-        {
-          "count": 1,
-          "entries": [
-            [
-              1,
-              5
-            ]
-          ],
-          "interval_seconds": 6.0,
-          "jitter_seconds": 1.0,
-          "lv": 1,
-          "role": "kidnapper",
-          "start_seconds": 0.0
-        }
-      ]
-    },
-    "structures": [
-      {
-        "armor": 0,
-        "cost": 10,
-        "hp": 8,
-        "id": 1,
-        "kind": "wall",
-        "max_hp": 8,
-        "open": false,
-        "pos": [
           10,
           8
-        ],
-        "remaining": 0.0,
-        "resource": "soil",
-        "status": "ready",
-        "total_ticks": 4
-      },
-      {
-        "armor": 0,
-        "cost": 10,
-        "hp": 8,
-        "id": 2,
-        "kind": "wall",
-        "max_hp": 8,
-        "open": false,
-        "pos": [
-          12,
-          8
-        ],
-        "remaining": 0.0,
-        "resource": "soil",
-        "status": "ready",
-        "total_ticks": 4
-      }
-    ],
-    "tick": 0
-  },
-  "planning": {
-    "actions": [
-      {
-        "accepted": true,
-        "animal_id": -1,
-        "kind": "pause",
-        "paused": true,
-        "pos": [
-          0,
-          0
-        ],
-        "tick": 0
-      },
-      {
-        "accepted": true,
-        "animal_id": -1,
-        "kind": "wall",
-        "paused": true,
-        "pos": [
-          10,
-          8
-        ],
-        "tick": 0
-      },
-      {
-        "accepted": true,
-        "animal_id": -1,
-        "kind": "wall",
-        "paused": true,
-        "pos": [
-          11,
-          8
-        ],
-        "tick": 0
-      },
-      {
-        "accepted": true,
-        "animal_id": -1,
-        "kind": "wall",
-        "paused": true,
-        "pos": [
-          12,
-          8
-        ],
-        "tick": 0
-      },
-      {
-        "accepted": true,
-        "animal_id": -1,
-        "kind": "collect",
-        "paused": true,
-        "pos": [
-          9,
-          8
-        ],
-        "tick": 0
-      },
-      {
-        "accepted": true,
-        "animal_id": 1,
-        "kind": "place_animal",
-        "paused": true,
-        "pos": [
-          16,
-          9
-        ],
-        "tick": 0
-      },
-      {
-        "accepted": true,
-        "animal_id": 2,
-        "kind": "cancel_job",
-        "paused": true,
-        "pos": [
-          0,
-          0
-        ],
-        "tick": 0
-      },
-      {
-        "accepted": true,
-        "animal_id": -1,
-        "kind": "keeper_move",
-        "paused": true,
-        "pos": [
-          8,
-          12
-        ],
-        "tick": 0
-      },
-      {
-        "accepted": true,
-        "animal_id": -1,
-        "kind": "pause",
-        "paused": false,
-        "pos": [
-          0,
-          0
-        ],
-        "tick": 0
-      },
-      {
-        "accepted": true,
-        "animal_id": -1,
-        "kind": "resume_jobs",
-        "paused": false,
-        "pos": [
-          0,
-          0
-        ],
-        "tick": 5
-      }
-    ],
-    "ai_settings": {
-      "counter": {
-        "counter": 0.8,
-        "hesitate": 0.1,
-        "resume": 0.1
-      },
-      "decision_max": 1.4,
-      "decision_min": 0.6,
-      "dog": {
-        "engage": 0.76,
-        "reposition": 0.08,
-        "watch": 0.16
-      },
-      "log_limit": 96,
-      "raider": {
-        "advance": 0.76,
-        "detour": 0.14,
-        "hesitate": 0.1
-      },
-      "randomness": 1.0,
-      "rescue_randomness": 0.12
-    },
-    "animals": [
-      {
-        "affinity": null,
-        "attack_power": 10,
-        "attack_seconds": 1.2,
-        "attack_target_range": 4,
-        "auto_recovering": false,
-        "category": "dog",
-        "deployment": "placed",
-        "detection_range": 4,
-        "fear": 0,
-        "healing_kennel": -1,
-        "home": [
-          16,
-          9
-        ],
-        "hp": 40,
-        "id": 1,
-        "kennel_id": -1,
-        "kennel_ticks": 0,
-        "known_enemies": {},
-        "last_bark": -100,
-        "loyalty": 75,
-        "lv": 1,
-        "max_hp": 40,
-        "mode": "auto",
-        "move_credit": 0.75,
-        "move_speed": 2.0,
-        "name": "こむぎ",
-        "next_attack": 0,
-        "next_bark": 0,
-        "object_attack_power": 0,
-        "order": [
-          14,
-          9
-        ],
-        "order_until": 0,
-        "path": [
-          [
-            16,
-            9
-          ],
-          [
-            15,
-            9
-          ],
-          [
-            14,
-            9
-          ]
-        ],
-        "pending": {},
-        "placed": true,
-        "pos": [
-          14,
-          9
-        ],
-        "rescuing": false,
-        "rest_settled": false,
-        "rest_ticks": 0,
-        "skill_ready": {},
-        "skills": [
-          "bark",
-          "rescue"
-        ],
-        "species": "shiba",
-        "stamina": 98.7,
-        "state": "徘徊",
-        "target_id": -1,
-        "unavailable_through_day": 0,
-        "xp": 0
-      },
-      {
-        "affinity": null,
-        "attack_power": 0,
-        "attack_seconds": 0,
-        "attack_target_range": 0,
-        "auto_recovering": false,
-        "category": "bird",
-        "deployment": "unplaced",
-        "detection_range": 3,
-        "fear": 0,
-        "healing_kennel": -1,
-        "home": [
-          -10,
-          -10
-        ],
-        "hp": 20,
-        "id": 2,
-        "kennel_id": -1,
-        "kennel_ticks": 0,
-        "known_enemies": {},
-        "last_bark": -100,
-        "loyalty": 0,
-        "lv": 1,
-        "max_hp": 20,
-        "mode": "auto",
-        "move_credit": 0.0,
-        "move_speed": 1.3,
-        "name": "",
-        "next_attack": 0,
-        "next_bark": 0,
-        "object_attack_power": 0,
-        "order": [
-          -10,
-          -10
-        ],
-        "order_until": 0,
-        "path": [
-          [
-            -10,
-            -10
-          ]
-        ],
-        "pending": {},
-        "placed": false,
-        "pos": [
-          -10,
-          -10
-        ],
-        "rescuing": false,
-        "rest_settled": false,
-        "rest_ticks": 0,
-        "skill_ready": {},
-        "skills": [
-          "lay",
-          "feather"
-        ],
-        "species": "hen",
-        "stamina": 100.0,
-        "state": "ついばむ",
-        "target_id": -1,
-        "traits": {},
-        "unavailable_through_day": 0,
-        "xp": 0
-      }
-    ],
-    "bark_settings": {
-      "cooldown": 6.0,
-      "range": 4,
-      "stop_seconds": 1.0
-    },
-    "campaign": {
-      "animals": [
-        {
-          "affinity": null,
-          "category": "dog",
-          "id": 1,
-          "loyalty": 75,
-          "lv": 1,
-          "name": "こむぎ",
-          "object_attack_power": 0,
-          "species": "shiba",
-          "unavailable_through_day": 0,
-          "xp": 0
-        },
-        {
-          "affinity": null,
-          "category": "bird",
-          "id": 2,
-          "loyalty": 0,
-          "lv": 1,
-          "name": "",
-          "object_attack_power": 0,
-          "species": "hen",
-          "traits": {},
-          "unavailable_through_day": 0,
-          "xp": 0
-        }
-      ],
-      "day": 1,
-      "eggs": 0,
-      "exp_pool": 0,
-      "facilities": [],
-      "fence": 0,
-      "field_items": [],
-      "gold": 10,
-      "items": {
-        "dog_food": 2,
-        "hen_food": 0
-      },
-      "keeper_position": [
-        6,
-        13
-      ],
-      "keeper_vitals": {
-        "drinks_today": 0,
-        "hp": 30,
-        "sleepiness": 0.0
-      },
-      "morning_checkpoint": {
-        "animals": [
-          {
-            "affinity": null,
-            "category": "dog",
-            "id": 1,
-            "loyalty": 75,
-            "lv": 1,
-            "name": "",
-            "object_attack_power": 0,
-            "species": "shiba",
-            "unavailable_through_day": 0,
-            "xp": 0
-          }
-        ],
-        "day": 1,
-        "eggs": 0,
-        "exp_pool": 0,
-        "facilities": [],
-        "fence": 0,
-        "field_items": [],
-        "gold": 40,
-        "items": {
-          "dog_food": 2,
-          "hen_food": 0
-        },
-        "mushrooms": 0,
-        "next_structure_id": 1,
-        "night_ready": false,
-        "resources": {
-          "soil": 100,
-          "stone": 0,
-          "wood": 0
-        },
-        "shelter": false,
-        "stage": 1,
-        "unlocked_blueprints": []
-      },
-      "mushrooms": 0,
-      "next_structure_id": 1,
-      "night_ready": true,
-      "resources": {
-        "soil": 80,
-        "stone": 0,
-        "wood": 20
-      },
-      "shelter": false,
-      "stage": 1,
-      "unlocked_blueprints": []
-    },
-    "combat": [],
-    "command_power": 10.0,
-    "dawn": {},
-    "day": 1,
-    "decision_count": 0,
-    "decision_counts": {},
-    "decision_log": [],
-    "early_clear": false,
-    "early_clear_tick": -1,
-    "early_finish_bonus": 0,
-    "eggs": 0,
-    "exp_pool": 0,
-    "field_items": [],
-    "initial_campaign": {
-      "animals": [
-        {
-          "affinity": null,
-          "category": "dog",
-          "id": 1,
-          "loyalty": 75,
-          "lv": 1,
-          "name": "こむぎ",
-          "object_attack_power": 0,
-          "species": "shiba",
-          "unavailable_through_day": 0,
-          "xp": 0
-        },
-        {
-          "affinity": null,
-          "category": "bird",
-          "id": 2,
-          "loyalty": 0,
-          "lv": 1,
-          "name": "",
-          "object_attack_power": 0,
-          "species": "hen",
-          "traits": {},
-          "unavailable_through_day": 0,
-          "xp": 0
-        }
-      ],
-      "day": 1,
-      "eggs": 0,
-      "exp_pool": 0,
-      "facilities": [],
-      "fence": 0,
-      "field_items": [],
-      "gold": 10,
-      "items": {
-        "dog_food": 2,
-        "hen_food": 0
-      },
-      "keeper_position": [
-        6,
-        13
-      ],
-      "keeper_vitals": {
-        "drinks_today": 0,
-        "hp": 30,
-        "sleepiness": 0.0
-      },
-      "morning_checkpoint": {
-        "animals": [
-          {
-            "affinity": null,
-            "category": "dog",
-            "id": 1,
-            "loyalty": 75,
-            "lv": 1,
-            "name": "",
-            "object_attack_power": 0,
-            "species": "shiba",
-            "unavailable_through_day": 0,
-            "xp": 0
-          }
-        ],
-        "day": 1,
-        "eggs": 0,
-        "exp_pool": 0,
-        "facilities": [],
-        "fence": 0,
-        "field_items": [],
-        "gold": 40,
-        "items": {
-          "dog_food": 2,
-          "hen_food": 0
-        },
-        "mushrooms": 0,
-        "next_structure_id": 1,
-        "night_ready": false,
-        "resources": {
-          "soil": 100,
-          "stone": 0,
-          "wood": 0
-        },
-        "shelter": false,
-        "stage": 1,
-        "unlocked_blueprints": []
-      },
-      "mushrooms": 0,
-      "next_structure_id": 1,
-      "night_ready": true,
-      "resources": {
-        "soil": 100,
-        "stone": 0,
-        "wood": 0
-      },
-      "shelter": false,
-      "stage": 1,
-      "unlocked_blueprints": []
-    },
-    "initial_positions": {
-      "animals": [
-        {
-          "deployment_tick": 43,
-          "id": 1,
-          "pos": [
-            16,
-            9
-          ]
-        }
-      ],
-      "keeper": [
-        6,
-        13
-      ]
-    },
-    "job_hold_reason": "",
-    "job_log": [
-      {
-        "event": "queued",
-        "id": 1,
-        "kind": "wall",
-        "pos": [
-          10,
-          8
-        ],
-        "tick": 0
-      },
-      {
-        "event": "queued",
-        "id": 2,
-        "kind": "wall",
-        "pos": [
-          11,
-          8
-        ],
-        "tick": 0
-      },
-      {
-        "event": "queued",
-        "id": 3,
-        "kind": "wall",
-        "pos": [
-          12,
-          8
-        ],
-        "tick": 0
-      },
-      {
-        "event": "queued",
-        "id": 4,
-        "kind": "collect",
-        "pos": [
-          9,
-          8
-        ],
-        "tick": 0
-      },
-      {
-        "animal_id": 1,
-        "event": "deployment",
-        "state": "reserved",
-        "tick": 0
-      },
-      {
-        "event": "queued",
-        "id": 5,
-        "kind": "place_animal",
-        "pos": [
-          16,
-          9
-        ],
-        "tick": 0
-      },
-      {
-        "event": "reordered",
-        "id": 5,
-        "order": [
-          5,
-          1,
-          2,
-          3,
-          4
-        ],
-        "tick": 0
-      },
-      {
-        "event": "cancelled",
-        "id": 2,
-        "tick": 0
-      },
-      {
-        "event": "hold_changed",
-        "reason": "manual",
-        "tick": 0
-      },
-      {
-        "event": "manual_move",
-        "pos": [
-          8,
-          12
-        ],
-        "tick": 1
-      },
-      {
-        "event": "hold_changed",
-        "reason": "",
-        "tick": 5
-      },
-      {
-        "animal_id": 1,
-        "event": "deployment",
-        "state": "transporting",
-        "tick": 29
-      },
-      {
-        "animal_id": 1,
-        "event": "completed",
-        "id": 5,
-        "kind": "place_animal",
-        "pos": [
-          16,
-          9
-        ],
-        "tick": 43
-      },
-      {
-        "event": "started",
-        "id": 1,
-        "pos": [
-          10,
-          8
-        ],
-        "tick": 55
-      },
-      {
-        "animal_id": -1,
-        "event": "completed",
-        "id": 1,
-        "kind": "wall",
-        "pos": [
-          10,
-          8
-        ],
-        "tick": 59
-      },
-      {
-        "event": "started",
-        "id": 3,
-        "pos": [
-          12,
-          8
-        ],
-        "tick": 60
-      },
-      {
-        "animal_id": -1,
-        "event": "completed",
-        "id": 3,
-        "kind": "wall",
-        "pos": [
-          12,
-          8
-        ],
-        "tick": 64
-      },
-      {
-        "animal_id": -1,
-        "event": "completed",
-        "id": 4,
-        "kind": "collect",
-        "pos": [
-          9,
-          8
-        ],
-        "tick": 70
-      },
-      {
-        "event": "queued",
-        "id": 6,
-        "kind": "collect",
-        "pos": [
-          12,
-          12
-        ],
-        "tick": 70
-      },
-      {
-        "animal_id": -1,
-        "event": "completed",
-        "id": 6,
-        "kind": "collect",
-        "pos": [
-          12,
-          12
-        ],
-        "tick": 82
-      },
-      {
-        "event": "queued",
-        "id": 7,
-        "kind": "wall",
-        "pos": [
-          18,
-          5
-        ],
-        "tick": 82
-      },
-      {
-        "event": "queued",
-        "id": 8,
-        "kind": "wall",
-        "pos": [
-          19,
-          5
-        ],
-        "tick": 82
-      },
-      {
-        "event": "queued",
-        "id": 9,
-        "kind": "wall",
-        "pos": [
-          20,
-          5
-        ],
-        "tick": 82
-      },
-      {
-        "event": "queued",
-        "id": 10,
-        "kind": "wall",
-        "pos": [
-          21,
-          5
-        ],
-        "tick": 82
-      },
-      {
-        "event": "queued",
-        "id": 11,
-        "kind": "wall",
-        "pos": [
-          22,
-          5
-        ],
-        "tick": 82
-      },
-      {
-        "event": "queued",
-        "id": 12,
-        "kind": "collect",
-        "pos": [
-          12,
-          12
-        ],
-        "tick": 82
-      },
-      {
-        "event": "queued",
-        "id": 13,
-        "kind": "collect",
-        "pos": [
-          13,
-          12
-        ],
-        "tick": 82
-      },
-      {
-        "event": "queued",
-        "id": 14,
-        "kind": "collect",
-        "pos": [
-          14,
-          12
-        ],
-        "tick": 82
-      },
-      {
-        "event": "cancelled",
-        "id": 7,
-        "tick": 82
-      },
-      {
-        "event": "cancelled",
-        "id": 8,
-        "tick": 82
-      },
-      {
-        "event": "cancelled",
-        "id": 9,
-        "tick": 82
-      },
-      {
-        "event": "cancelled",
-        "id": 10,
-        "tick": 82
-      },
-      {
-        "event": "cancelled",
-        "id": 11,
-        "tick": 82
-      },
-      {
-        "event": "cancelled",
-        "id": 12,
-        "tick": 82
-      },
-      {
-        "event": "cancelled",
-        "id": 13,
-        "tick": 82
-      },
-      {
-        "event": "cancelled",
-        "id": 14,
-        "tick": 82
-      },
-      {
-        "event": "hold_changed",
-        "reason": "rest",
-        "tick": 82
-      },
-      {
-        "event": "hold_changed",
-        "reason": "travel",
-        "tick": 106
-      },
-      {
-        "event": "manual_move",
-        "pos": [
-          15,
-          12
-        ],
-        "tick": 106
-      },
-      {
-        "event": "hold_changed",
-        "reason": "",
-        "tick": 117
-      },
-      {
-        "event": "hold_changed",
-        "reason": "rest",
-        "tick": 117
-      },
-      {
-        "event": "hold_changed",
-        "reason": "rest_end",
-        "tick": 360
-      },
-      {
-        "event": "hold_changed",
-        "reason": "rest",
-        "tick": 505
-      }
-    ],
-    "jobs": [],
-    "jobs_held": false,
-    "keeper": {
-      "carrier": -1,
-      "danger_near": false,
-      "drinks_today": 0,
-      "forced_rest": false,
-      "heal_credit": 0.0,
-      "hp": 30,
-      "hurt_until": 0,
-      "max_hp": 30,
-      "move_credit": 0.5,
-      "next_attack": 0,
-      "placed": true,
-      "pos": [
-        9,
-        7
-      ],
-      "recover_ticks": 0,
-      "resting": false,
-      "restrainer": -1,
-      "sleepiness": 6.48148148148148,
-      "state": "free",
-      "warned": 0
-    },
-    "keeper_path": [
-      [
-        6,
-        13
-      ],
-      [
-        7,
-        13
-      ],
-      [
-        8,
-        13
-      ],
-      [
-        8,
-        12
-      ],
-      [
-        9,
-        12
-      ],
-      [
-        10,
-        12
-      ],
-      [
-        11,
-        12
-      ],
-      [
-        12,
-        12
-      ],
-      [
-        13,
-        12
-      ],
-      [
-        14,
-        12
-      ],
-      [
-        15,
-        12
-      ],
-      [
-        16,
-        12
-      ],
-      [
-        17,
-        12
-      ],
-      [
-        18,
-        12
-      ],
-      [
-        19,
-        12
-      ],
-      [
-        20,
-        12
-      ],
-      [
-        21,
-        12
-      ],
-      [
-        21,
-        13
-      ],
-      [
-        20,
-        13
-      ],
-      [
-        19,
-        13
-      ],
-      [
-        18,
-        13
-      ],
-      [
-        17,
-        13
-      ],
-      [
-        17,
-        12
-      ],
-      [
-        17,
-        11
-      ],
-      [
-        17,
-        10
-      ],
-      [
-        17,
-        9
-      ],
-      [
-        17,
-        8
-      ],
-      [
-        16,
-        8
-      ],
-      [
-        15,
-        8
-      ],
-      [
-        14,
-        8
-      ],
-      [
-        13,
-        8
-      ],
-      [
-        12,
-        8
-      ],
-      [
-        11,
-        8
-      ],
-      [
-        11,
-        7
-      ],
-      [
-        10,
-        7
-      ],
-      [
-        9,
-        7
-      ],
-      [
-        10,
-        7
-      ],
-      [
-        11,
-        7
-      ],
-      [
-        11,
-        8
-      ],
-      [
-        11,
-        9
-      ],
-      [
-        12,
-        9
-      ],
-      [
-        12,
-        10
-      ],
-      [
-        12,
-        11
-      ],
-      [
-        13,
-        11
-      ],
-      [
-        14,
-        11
-      ],
-      [
-        15,
-        11
-      ],
-      [
-        15,
-        12
-      ]
-    ],
-    "life_log": [
-      {
-        "event": "rest_started",
-        "tick": 82
-      },
-      {
-        "event": "rest",
-        "tick": 82
-      },
-      {
-        "event": "rest_recovery_started",
-        "tick": 102
-      },
-      {
-        "event": "rest_ended",
-        "tick": 106
-      },
-      {
-        "event": "rest_until_planned",
-        "target": "night",
-        "tick": 117
-      },
-      {
-        "event": "rest_started",
-        "tick": 117
-      },
-      {
-        "event": "rest_until_started",
-        "tick": 117
-      },
-      {
-        "event": "rest_recovery_started",
-        "tick": 137
-      },
-      {
-        "event": "rest_until_stopped",
-        "reason": "nightfall",
-        "tick": 360
-      },
-      {
-        "event": "rest_ended",
-        "tick": 360
-      },
-      {
-        "event": "invasion",
-        "hp": 30,
-        "sleepiness": 3.7,
-        "tick": 400
-      },
-      {
-        "event": "spotted",
-        "hp": 30,
-        "sleepiness": 11.3,
-        "tick": 482
-      },
-      {
-        "event": "animal_danger",
-        "hp": 30,
-        "sleepiness": 13.2,
-        "tick": 503
-      },
-      {
-        "event": "rest_until_planned",
-        "target": "dawn",
-        "tick": 505
-      },
-      {
-        "event": "rest_started",
-        "tick": 505
-      },
-      {
-        "event": "rest_until_started",
-        "tick": 505
-      },
-      {
-        "event": "rest_recovery_started",
-        "tick": 525
-      }
-    ],
-    "manual_goal": null,
-    "materials": 80,
-    "metrics": {
-      "bark_casts": 0,
-      "bark_targets": 0,
-      "barks": 0,
-      "built": 2,
-      "captures": 0,
-      "coins": 0,
-      "commands": 0.0,
-      "destroyed": 0,
-      "eggs_collected": 0,
-      "eggs_produced": 0,
-      "fed": 0,
-      "interrupted": 0,
-      "mushroom_collected": 0,
-      "mushroom_healing": 0,
-      "mushroom_spawned": 0,
-      "mushrooms_used": 0,
-      "nature_rolls": 17,
-      "orders": 0,
-      "repaired": 0,
-      "repelled": 0,
-      "rescues": 0,
-      "soil_repair": 0,
-      "stolen": 0,
-      "structure_damage": 0,
-      "stump_collected": 1,
-      "stump_spawned": 0,
-      "weed_collected": 0,
-      "weed_spawned": 3
-    },
-    "milestones": [],
-    "mushrooms": 0,
-    "natural": [
-      {
-        "kind": "weed",
-        "pos": [
-          11,
-          11
         ]
       },
       {
-        "kind": "weed",
-        "pos": [
-          2,
-          11
-        ]
-      },
-      {
-        "kind": "weed",
-        "pos": [
-          10,
-          9
-        ]
-      }
-    ],
-    "nature_settings": {
-      "caps": {
-        "mushroom": 3,
-        "stump": 1,
-        "weed": 10
-      },
-      "interval": 1.0,
-      "limit": 16,
-      "mushroom_hp": 5,
-      "spawn_chance_per_second": 0.2,
-      "stump_wood": 20,
-      "weed_gold": 1,
-      "weights": {
-        "mushroom": 15.0,
-        "stump": 5.0,
-        "weed": 80.0
-      }
-    },
-    "night_started_tick": 0,
-    "paused": false,
-    "phase": "day",
-    "raiders": [],
-    "remaining_day": 72.5,
-    "remaining_night": 180.0,
-    "resources": {
-      "soil": 80,
-      "stone": 0,
-      "wood": 20
-    },
-    "rest_until": {},
-    "result": "",
-    "samples": [
-      {
-        "eggs": 0,
-        "keeper": "free",
-        "materials": 80,
-        "stamina": 100.0,
-        "structures": 0,
-        "tick": 8
-      },
-      {
-        "eggs": 0,
-        "keeper": "free",
-        "materials": 80,
-        "stamina": 100.0,
-        "structures": 0,
-        "tick": 16
-      },
-      {
-        "eggs": 0,
-        "keeper": "free",
-        "materials": 80,
-        "stamina": 100.0,
-        "structures": 0,
-        "tick": 24
-      },
-      {
-        "eggs": 0,
-        "keeper": "free",
-        "materials": 80,
-        "stamina": 100.0,
-        "structures": 0,
-        "tick": 32
-      },
-      {
-        "eggs": 0,
-        "keeper": "free",
-        "materials": 80,
-        "stamina": 100.0,
-        "structures": 0,
-        "tick": 40
-      },
-      {
-        "eggs": 0,
-        "keeper": "free",
-        "materials": 80,
-        "stamina": 99.3,
-        "structures": 0,
-        "tick": 48
-      },
-      {
-        "eggs": 0,
-        "keeper": "free",
-        "materials": 80,
-        "stamina": 99.3,
-        "structures": 1,
-        "tick": 56
-      },
-      {
-        "eggs": 0,
-        "keeper": "free",
-        "materials": 80,
-        "stamina": 98.7,
-        "structures": 2,
-        "tick": 64
-      }
-    ],
-    "schedule": [
-      {
-        "entry": [
-          1,
-          5
-        ],
-        "lv": 1,
-        "role": "kidnapper",
-        "tick": 40,
-        "wave": 1
-      }
-    ],
-    "score": {},
-    "seed": 17,
-    "shop_log": [],
-    "shop_stock": [
-      {
-        "individual": {
-          "loyalty": 0
-        },
-        "product": "coffee",
-        "remaining": 1
-      },
-      {
-        "individual": {
-          "loyalty": 0
-        },
-        "product": "energy_drink",
-        "remaining": 1
-      },
-      {
-        "individual": {
-          "loyalty": 0
-        },
-        "product": "hen",
-        "remaining": 1
-      },
-      {
-        "individual": {
-          "loyalty": 0
-        },
-        "product": "cat",
-        "remaining": 1
-      },
-      {
-        "individual": {
-          "loyalty": 0
-        },
-        "product": "soil",
-        "remaining": 4
-      },
-      {
-        "individual": {
-          "loyalty": 0
-        },
-        "product": "wood",
-        "remaining": 3
-      },
-      {
-        "individual": {
-          "loyalty": 0
-        },
-        "product": "stone",
-        "remaining": 3
-      }
-    ],
-    "sight_log": [],
-    "skill_log": [],
-    "stage": 1,
-    "stage_config": {
-      "first_attack_seconds": 10.0,
-      "repeat_interval_seconds": 60.0,
-      "repeat_waves": false,
-      "time_limit_seconds": 180.0,
-      "waves": [
-        {
-          "count": 1,
-          "entries": [
-            [
-              1,
-              5
-            ]
-          ],
-          "interval_seconds": 6.0,
-          "jitter_seconds": 1.0,
-          "lv": 1,
-          "role": "kidnapper",
-          "start_seconds": 0.0
-        }
-      ]
-    },
-    "structures": [
-      {
-        "armor": 0,
-        "cost": 10,
-        "hp": 8,
-        "id": 1,
-        "kind": "wall",
-        "max_hp": 8,
-        "open": false,
-        "pos": [
-          10,
-          8
-        ],
-        "remaining": 0.0,
-        "resource": "soil",
-        "status": "ready",
-        "total_ticks": 4
-      },
-      {
-        "armor": 0,
-        "cost": 10,
-        "hp": 8,
-        "id": 2,
-        "kind": "wall",
-        "max_hp": 8,
-        "open": false,
-        "pos": [
-          12,
-          8
-        ],
-        "remaining": 0.0,
-        "resource": "soil",
-        "status": "ready",
-        "total_ticks": 4
-      }
-    ],
-    "tick": 70
-  },
-  "rest": {
-    "actions": [
-      {
-        "accepted": true,
-        "animal_id": -1,
-        "kind": "pause",
-        "paused": true,
-        "pos": [
-          0,
-          0
-        ],
-        "tick": 0
-      },
-      {
-        "accepted": true,
-        "animal_id": -1,
-        "kind": "wall",
-        "paused": true,
-        "pos": [
-          10,
-          8
-        ],
-        "tick": 0
-      },
-      {
-        "accepted": true,
-        "animal_id": -1,
-        "kind": "wall",
-        "paused": true,
-        "pos": [
-          11,
-          8
-        ],
-        "tick": 0
-      },
-      {
-        "accepted": true,
-        "animal_id": -1,
-        "kind": "wall",
-        "paused": true,
-        "pos": [
-          12,
-          8
-        ],
-        "tick": 0
-      },
-      {
-        "accepted": true,
-        "animal_id": -1,
-        "kind": "collect",
-        "paused": true,
-        "pos": [
-          9,
-          8
-        ],
-        "tick": 0
-      },
-      {
-        "accepted": true,
-        "animal_id": 1,
-        "kind": "place_animal",
-        "paused": true,
-        "pos": [
-          16,
-          9
-        ],
-        "tick": 0
-      },
-      {
-        "accepted": true,
-        "animal_id": 2,
-        "kind": "cancel_job",
-        "paused": true,
-        "pos": [
-          0,
-          0
-        ],
-        "tick": 0
-      },
-      {
-        "accepted": true,
-        "animal_id": -1,
-        "kind": "keeper_move",
-        "paused": true,
-        "pos": [
-          8,
-          12
-        ],
-        "tick": 0
-      },
-      {
-        "accepted": true,
-        "animal_id": -1,
-        "kind": "pause",
-        "paused": false,
-        "pos": [
-          0,
-          0
-        ],
-        "tick": 0
-      },
-      {
-        "accepted": true,
-        "animal_id": -1,
-        "kind": "resume_jobs",
-        "paused": false,
-        "pos": [
-          0,
-          0
-        ],
-        "tick": 5
-      },
-      {
-        "accepted": true,
-        "animal_id": -1,
-        "kind": "collect",
-        "paused": false,
-        "pos": [
-          12,
-          12
-        ],
-        "tick": 70
-      },
-      {
-        "accepted": true,
-        "animal_id": -1,
-        "kind": "wall",
-        "paused": false,
-        "pos": [
-          18,
-          5
-        ],
-        "tick": 82
-      },
-      {
-        "accepted": true,
-        "animal_id": -1,
-        "kind": "wall",
-        "paused": false,
-        "pos": [
-          19,
-          5
-        ],
-        "tick": 82
-      },
-      {
-        "accepted": true,
-        "animal_id": -1,
-        "kind": "wall",
-        "paused": false,
-        "pos": [
-          20,
-          5
-        ],
-        "tick": 82
-      },
-      {
-        "accepted": true,
-        "animal_id": -1,
-        "kind": "wall",
-        "paused": false,
-        "pos": [
-          21,
-          5
-        ],
-        "tick": 82
-      },
-      {
-        "accepted": true,
-        "animal_id": -1,
-        "kind": "wall",
-        "paused": false,
-        "pos": [
-          22,
-          5
-        ],
-        "tick": 82
-      },
-      {
-        "accepted": true,
-        "animal_id": -1,
-        "kind": "collect",
-        "paused": false,
-        "pos": [
-          12,
-          12
-        ],
-        "tick": 82
-      },
-      {
-        "accepted": true,
-        "animal_id": -1,
-        "kind": "collect",
-        "paused": false,
-        "pos": [
-          13,
-          12
-        ],
-        "tick": 82
-      },
-      {
-        "accepted": true,
-        "animal_id": -1,
-        "kind": "collect",
-        "paused": false,
-        "pos": [
-          14,
-          12
-        ],
-        "tick": 82
-      },
-      {
-        "accepted": false,
-        "animal_id": -1,
-        "kind": "collect",
-        "paused": false,
-        "pos": [
-          15,
-          12
-        ],
-        "tick": 82
-      },
-      {
-        "accepted": false,
-        "animal_id": -1,
-        "kind": "collect",
-        "paused": false,
-        "pos": [
-          16,
-          12
-        ],
-        "tick": 82
-      },
-      {
-        "accepted": false,
-        "animal_id": -1,
-        "kind": "collect",
-        "paused": false,
-        "pos": [
-          17,
-          12
-        ],
-        "tick": 82
-      },
-      {
-        "accepted": true,
-        "animal_id": 7,
-        "kind": "cancel_job",
-        "paused": false,
-        "pos": [
-          0,
-          0
-        ],
-        "tick": 82
-      },
-      {
-        "accepted": true,
-        "animal_id": 8,
-        "kind": "cancel_job",
-        "paused": false,
-        "pos": [
-          0,
-          0
-        ],
-        "tick": 82
-      },
-      {
-        "accepted": true,
-        "animal_id": 9,
-        "kind": "cancel_job",
-        "paused": false,
-        "pos": [
-          0,
-          0
-        ],
-        "tick": 82
-      },
-      {
-        "accepted": true,
-        "animal_id": 10,
-        "kind": "cancel_job",
-        "paused": false,
-        "pos": [
-          0,
-          0
-        ],
-        "tick": 82
-      },
-      {
-        "accepted": true,
-        "animal_id": 11,
-        "kind": "cancel_job",
-        "paused": false,
-        "pos": [
-          0,
-          0
-        ],
-        "tick": 82
-      },
-      {
-        "accepted": true,
-        "animal_id": 12,
-        "kind": "cancel_job",
-        "paused": false,
-        "pos": [
-          0,
-          0
-        ],
-        "tick": 82
-      },
-      {
-        "accepted": true,
-        "animal_id": 13,
-        "kind": "cancel_job",
-        "paused": false,
-        "pos": [
-          0,
-          0
-        ],
-        "tick": 82
-      },
-      {
-        "accepted": true,
-        "animal_id": 14,
-        "kind": "cancel_job",
-        "paused": false,
-        "pos": [
-          0,
-          0
-        ],
-        "tick": 82
-      },
-      {
-        "accepted": true,
-        "animal_id": -1,
-        "kind": "keeper_rest",
-        "paused": false,
-        "pos": [
-          0,
-          0
-        ],
-        "tick": 82
-      },
-      {
-        "accepted": true,
-        "animal_id": -1,
-        "kind": "keeper_move",
-        "paused": false,
-        "pos": [
-          15,
-          12
-        ],
-        "tick": 106
-      }
-    ],
-    "ai_settings": {
-      "counter": {
-        "counter": 0.8,
-        "hesitate": 0.1,
-        "resume": 0.1
-      },
-      "decision_max": 1.4,
-      "decision_min": 0.6,
-      "dog": {
-        "engage": 0.76,
-        "reposition": 0.08,
-        "watch": 0.16
-      },
-      "log_limit": 96,
-      "raider": {
-        "advance": 0.76,
-        "detour": 0.14,
-        "hesitate": 0.1
-      },
-      "randomness": 1.0,
-      "rescue_randomness": 0.12
-    },
-    "animals": [
-      {
-        "affinity": null,
-        "attack_power": 10,
-        "attack_seconds": 1.2,
-        "attack_target_range": 4,
-        "auto_recovering": false,
-        "category": "dog",
-        "deployment": "placed",
-        "detection_range": 4,
-        "fear": 0,
-        "healing_kennel": -1,
-        "home": [
-          16,
-          9
-        ],
-        "hp": 40,
-        "id": 1,
-        "kennel_id": -1,
-        "kennel_ticks": 0,
-        "known_enemies": {},
-        "last_bark": -100,
-        "loyalty": 75,
-        "lv": 1,
-        "max_hp": 40,
-        "mode": "auto",
-        "move_credit": 0.75,
-        "move_speed": 2.0,
-        "name": "こむぎ",
-        "next_attack": 0,
-        "next_bark": 0,
-        "object_attack_power": 0,
-        "order": [
-          16,
-          10
-        ],
-        "order_until": 0,
-        "path": [
-          [
-            16,
-            9
-          ],
-          [
-            15,
-            9
-          ],
-          [
-            14,
-            9
-          ],
-          [
-            11,
-            12
-          ],
-          [
-            12,
-            12
-          ],
-          [
-            13,
-            12
-          ],
-          [
-            14,
-            12
-          ],
-          [
-            14,
-            11
-          ],
-          [
-            14,
-            10
-          ],
-          [
-            14,
-            9
-          ],
-          [
-            14,
-            10
-          ],
-          [
-            15,
-            10
-          ],
-          [
-            16,
-            10
-          ]
-        ],
-        "pending": {},
-        "placed": true,
-        "pos": [
-          16,
-          10
-        ],
-        "rescuing": false,
-        "rest_settled": false,
-        "rest_ticks": 0,
-        "skill_ready": {},
-        "skills": [
-          "bark",
-          "rescue"
-        ],
-        "species": "shiba",
-        "stamina": 92.1999999999999,
-        "state": "徘徊",
-        "target_id": -1,
-        "unavailable_through_day": 0,
-        "xp": 0
-      },
-      {
-        "affinity": null,
-        "attack_power": 0,
-        "attack_seconds": 0,
-        "attack_target_range": 0,
-        "auto_recovering": false,
-        "category": "bird",
-        "deployment": "unplaced",
-        "detection_range": 3,
-        "fear": 0,
-        "healing_kennel": -1,
-        "home": [
-          -10,
-          -10
-        ],
-        "hp": 20,
-        "id": 2,
-        "kennel_id": -1,
-        "kennel_ticks": 0,
-        "known_enemies": {},
-        "last_bark": -100,
-        "loyalty": 0,
-        "lv": 1,
-        "max_hp": 20,
-        "mode": "auto",
-        "move_credit": 0.0,
-        "move_speed": 1.3,
-        "name": "",
-        "next_attack": 0,
-        "next_bark": 0,
-        "object_attack_power": 0,
-        "order": [
-          -10,
-          -10
-        ],
-        "order_until": 0,
-        "path": [
-          [
-            -10,
-            -10
-          ]
-        ],
-        "pending": {},
-        "placed": false,
-        "pos": [
-          -10,
-          -10
-        ],
-        "rescuing": false,
-        "rest_settled": false,
-        "rest_ticks": 0,
-        "skill_ready": {},
-        "skills": [
-          "lay",
-          "feather"
-        ],
-        "species": "hen",
-        "stamina": 100.0,
-        "state": "ついばむ",
-        "target_id": -1,
-        "traits": {},
-        "unavailable_through_day": 0,
-        "xp": 0
-      }
-    ],
-    "bark_settings": {
-      "cooldown": 6.0,
-      "range": 4,
-      "stop_seconds": 1.0
-    },
-    "campaign": {
-      "animals": [
-        {
-          "affinity": null,
-          "category": "dog",
-          "id": 1,
-          "loyalty": 75,
-          "lv": 1,
-          "name": "こむぎ",
-          "object_attack_power": 0,
-          "species": "shiba",
-          "unavailable_through_day": 0,
-          "xp": 0
-        },
-        {
-          "affinity": null,
-          "category": "bird",
-          "id": 2,
-          "loyalty": 0,
-          "lv": 1,
-          "name": "",
-          "object_attack_power": 0,
-          "species": "hen",
-          "traits": {},
-          "unavailable_through_day": 0,
-          "xp": 0
-        }
-      ],
-      "day": 1,
-      "eggs": 0,
-      "exp_pool": 0,
-      "facilities": [],
-      "fence": 0,
-      "field_items": [],
-      "gold": 11,
-      "items": {
-        "dog_food": 2,
-        "hen_food": 0
-      },
-      "keeper_position": [
-        6,
-        13
-      ],
-      "keeper_vitals": {
-        "drinks_today": 0,
-        "hp": 30,
-        "sleepiness": 0.0
-      },
-      "morning_checkpoint": {
-        "animals": [
-          {
-            "affinity": null,
-            "category": "dog",
-            "id": 1,
-            "loyalty": 75,
-            "lv": 1,
-            "name": "",
-            "object_attack_power": 0,
-            "species": "shiba",
-            "unavailable_through_day": 0,
-            "xp": 0
-          }
-        ],
-        "day": 1,
-        "eggs": 0,
-        "exp_pool": 0,
-        "facilities": [],
-        "fence": 0,
-        "field_items": [],
-        "gold": 40,
-        "items": {
-          "dog_food": 2,
-          "hen_food": 0
-        },
-        "mushrooms": 0,
-        "next_structure_id": 1,
-        "night_ready": false,
-        "resources": {
-          "soil": 100,
-          "stone": 0,
-          "wood": 0
-        },
-        "shelter": false,
-        "stage": 1,
-        "unlocked_blueprints": []
-      },
-      "mushrooms": 0,
-      "next_structure_id": 1,
-      "night_ready": true,
-      "resources": {
-        "soil": 80,
-        "stone": 0,
-        "wood": 20
-      },
-      "shelter": false,
-      "stage": 1,
-      "unlocked_blueprints": []
-    },
-    "combat": [],
-    "command_power": 10.0,
-    "dawn": {},
-    "day": 1,
-    "decision_count": 0,
-    "decision_counts": {},
-    "decision_log": [],
-    "early_clear": false,
-    "early_clear_tick": -1,
-    "early_finish_bonus": 0,
-    "eggs": 0,
-    "exp_pool": 0,
-    "field_items": [],
-    "initial_campaign": {
-      "animals": [
-        {
-          "affinity": null,
-          "category": "dog",
-          "id": 1,
-          "loyalty": 75,
-          "lv": 1,
-          "name": "こむぎ",
-          "object_attack_power": 0,
-          "species": "shiba",
-          "unavailable_through_day": 0,
-          "xp": 0
-        },
-        {
-          "affinity": null,
-          "category": "bird",
-          "id": 2,
-          "loyalty": 0,
-          "lv": 1,
-          "name": "",
-          "object_attack_power": 0,
-          "species": "hen",
-          "traits": {},
-          "unavailable_through_day": 0,
-          "xp": 0
-        }
-      ],
-      "day": 1,
-      "eggs": 0,
-      "exp_pool": 0,
-      "facilities": [],
-      "fence": 0,
-      "field_items": [],
-      "gold": 10,
-      "items": {
-        "dog_food": 2,
-        "hen_food": 0
-      },
-      "keeper_position": [
-        6,
-        13
-      ],
-      "keeper_vitals": {
-        "drinks_today": 0,
-        "hp": 30,
-        "sleepiness": 0.0
-      },
-      "morning_checkpoint": {
-        "animals": [
-          {
-            "affinity": null,
-            "category": "dog",
-            "id": 1,
-            "loyalty": 75,
-            "lv": 1,
-            "name": "",
-            "object_attack_power": 0,
-            "species": "shiba",
-            "unavailable_through_day": 0,
-            "xp": 0
-          }
-        ],
-        "day": 1,
-        "eggs": 0,
-        "exp_pool": 0,
-        "facilities": [],
-        "fence": 0,
-        "field_items": [],
-        "gold": 40,
-        "items": {
-          "dog_food": 2,
-          "hen_food": 0
-        },
-        "mushrooms": 0,
-        "next_structure_id": 1,
-        "night_ready": false,
-        "resources": {
-          "soil": 100,
-          "stone": 0,
-          "wood": 0
-        },
-        "shelter": false,
-        "stage": 1,
-        "unlocked_blueprints": []
-      },
-      "mushrooms": 0,
-      "next_structure_id": 1,
-      "night_ready": true,
-      "resources": {
-        "soil": 100,
-        "stone": 0,
-        "wood": 0
-      },
-      "shelter": false,
-      "stage": 1,
-      "unlocked_blueprints": []
-    },
-    "initial_positions": {
-      "animals": [
-        {
-          "deployment_tick": 43,
-          "id": 1,
-          "pos": [
-            16,
-            9
-          ]
-        }
-      ],
-      "keeper": [
-        6,
-        13
-      ]
-    },
-    "job_hold_reason": "",
-    "job_log": [
-      {
-        "event": "queued",
-        "id": 1,
-        "kind": "wall",
-        "pos": [
-          10,
-          8
-        ],
-        "tick": 0
-      },
-      {
-        "event": "queued",
-        "id": 2,
-        "kind": "wall",
-        "pos": [
-          11,
-          8
-        ],
-        "tick": 0
-      },
-      {
-        "event": "queued",
-        "id": 3,
-        "kind": "wall",
-        "pos": [
-          12,
-          8
-        ],
-        "tick": 0
-      },
-      {
-        "event": "queued",
-        "id": 4,
-        "kind": "collect",
-        "pos": [
-          9,
-          8
-        ],
-        "tick": 0
-      },
-      {
-        "animal_id": 1,
-        "event": "deployment",
-        "state": "reserved",
-        "tick": 0
-      },
-      {
-        "event": "queued",
-        "id": 5,
-        "kind": "place_animal",
-        "pos": [
-          16,
-          9
-        ],
-        "tick": 0
-      },
-      {
-        "event": "reordered",
-        "id": 5,
-        "order": [
-          5,
-          1,
-          2,
-          3,
-          4
-        ],
-        "tick": 0
-      },
-      {
-        "event": "cancelled",
-        "id": 2,
-        "tick": 0
-      },
-      {
-        "event": "hold_changed",
-        "reason": "manual",
-        "tick": 0
-      },
-      {
-        "event": "manual_move",
-        "pos": [
-          8,
-          12
-        ],
-        "tick": 1
-      },
-      {
-        "event": "hold_changed",
-        "reason": "",
-        "tick": 5
-      },
-      {
-        "animal_id": 1,
-        "event": "deployment",
-        "state": "transporting",
-        "tick": 29
-      },
-      {
-        "animal_id": 1,
-        "event": "completed",
-        "id": 5,
-        "kind": "place_animal",
-        "pos": [
-          16,
-          9
-        ],
-        "tick": 43
-      },
-      {
-        "event": "started",
-        "id": 1,
-        "pos": [
-          10,
-          8
-        ],
-        "tick": 55
-      },
-      {
-        "animal_id": -1,
-        "event": "completed",
-        "id": 1,
-        "kind": "wall",
-        "pos": [
-          10,
-          8
-        ],
-        "tick": 59
-      },
-      {
-        "event": "started",
-        "id": 3,
-        "pos": [
-          12,
-          8
-        ],
-        "tick": 60
-      },
-      {
-        "animal_id": -1,
-        "event": "completed",
-        "id": 3,
-        "kind": "wall",
-        "pos": [
-          12,
-          8
-        ],
-        "tick": 64
-      },
-      {
-        "animal_id": -1,
-        "event": "completed",
-        "id": 4,
-        "kind": "collect",
-        "pos": [
-          9,
-          8
-        ],
-        "tick": 70
-      },
-      {
-        "event": "queued",
-        "id": 6,
-        "kind": "collect",
-        "pos": [
-          12,
-          12
-        ],
-        "tick": 70
-      },
-      {
-        "animal_id": -1,
-        "event": "completed",
-        "id": 6,
-        "kind": "collect",
-        "pos": [
-          12,
-          12
-        ],
-        "tick": 82
-      },
-      {
-        "event": "queued",
-        "id": 7,
-        "kind": "wall",
-        "pos": [
-          18,
-          5
-        ],
-        "tick": 82
-      },
-      {
-        "event": "queued",
-        "id": 8,
-        "kind": "wall",
-        "pos": [
-          19,
-          5
-        ],
-        "tick": 82
-      },
-      {
-        "event": "queued",
-        "id": 9,
-        "kind": "wall",
-        "pos": [
-          20,
-          5
-        ],
-        "tick": 82
-      },
-      {
-        "event": "queued",
-        "id": 10,
-        "kind": "wall",
-        "pos": [
-          21,
-          5
-        ],
-        "tick": 82
-      },
-      {
-        "event": "queued",
-        "id": 11,
-        "kind": "wall",
-        "pos": [
-          22,
-          5
-        ],
-        "tick": 82
-      },
-      {
-        "event": "queued",
-        "id": 12,
-        "kind": "collect",
-        "pos": [
-          12,
-          12
-        ],
-        "tick": 82
-      },
-      {
-        "event": "queued",
-        "id": 13,
-        "kind": "collect",
-        "pos": [
-          13,
-          12
-        ],
-        "tick": 82
-      },
-      {
-        "event": "queued",
-        "id": 14,
-        "kind": "collect",
-        "pos": [
-          14,
-          12
-        ],
-        "tick": 82
-      },
-      {
-        "event": "cancelled",
-        "id": 7,
-        "tick": 82
-      },
-      {
-        "event": "cancelled",
-        "id": 8,
-        "tick": 82
-      },
-      {
-        "event": "cancelled",
-        "id": 9,
-        "tick": 82
-      },
-      {
-        "event": "cancelled",
-        "id": 10,
-        "tick": 82
-      },
-      {
-        "event": "cancelled",
-        "id": 11,
-        "tick": 82
-      },
-      {
-        "event": "cancelled",
-        "id": 12,
-        "tick": 82
-      },
-      {
-        "event": "cancelled",
-        "id": 13,
-        "tick": 82
-      },
-      {
-        "event": "cancelled",
-        "id": 14,
-        "tick": 82
-      },
-      {
-        "event": "hold_changed",
-        "reason": "rest",
-        "tick": 82
-      },
-      {
-        "event": "hold_changed",
-        "reason": "travel",
-        "tick": 106
-      },
-      {
-        "event": "manual_move",
-        "pos": [
-          15,
-          12
-        ],
-        "tick": 106
-      },
-      {
-        "event": "hold_changed",
-        "reason": "",
-        "tick": 117
-      },
-      {
-        "event": "hold_changed",
-        "reason": "rest",
-        "tick": 117
-      },
-      {
-        "event": "hold_changed",
-        "reason": "rest_end",
-        "tick": 360
-      },
-      {
-        "event": "hold_changed",
-        "reason": "rest",
-        "tick": 505
-      }
-    ],
-    "jobs": [],
-    "jobs_held": false,
-    "keeper": {
-      "carrier": -1,
-      "danger_near": false,
-      "drinks_today": 0,
-      "forced_rest": false,
-      "heal_credit": 1.0,
-      "hold_before_rest": "",
-      "hp": 30,
-      "hurt_until": 0,
-      "max_hp": 30,
-      "move_credit": 0.0,
-      "next_attack": 0,
-      "placed": true,
-      "pos": [
-        15,
-        12
-      ],
-      "recover_ticks": 0,
-      "rest_elapsed": 0.0,
-      "resting": false,
-      "restrainer": -1,
-      "sleepiness": 89.0185185185185,
-      "state": "free",
-      "warned": 80
-    },
-    "keeper_path": [
-      [
-        6,
-        13
-      ],
-      [
-        7,
-        13
-      ],
-      [
-        8,
-        13
-      ],
-      [
-        8,
-        12
-      ],
-      [
-        9,
-        12
-      ],
-      [
-        10,
-        12
-      ],
-      [
-        11,
-        12
-      ],
-      [
-        12,
-        12
-      ],
-      [
-        13,
-        12
-      ],
-      [
-        14,
-        12
-      ],
-      [
-        15,
-        12
-      ],
-      [
-        16,
-        12
-      ],
-      [
-        17,
-        12
-      ],
-      [
-        18,
-        12
-      ],
-      [
-        19,
-        12
-      ],
-      [
-        20,
-        12
-      ],
-      [
-        21,
-        12
-      ],
-      [
-        21,
-        13
-      ],
-      [
-        20,
-        13
-      ],
-      [
-        19,
-        13
-      ],
-      [
-        18,
-        13
-      ],
-      [
-        17,
-        13
-      ],
-      [
-        17,
-        12
-      ],
-      [
-        17,
-        11
-      ],
-      [
-        17,
-        10
-      ],
-      [
-        17,
-        9
-      ],
-      [
-        17,
-        8
-      ],
-      [
-        16,
-        8
-      ],
-      [
-        15,
-        8
-      ],
-      [
-        14,
-        8
-      ],
-      [
-        13,
-        8
-      ],
-      [
-        12,
-        8
-      ],
-      [
-        11,
-        8
-      ],
-      [
-        11,
-        7
-      ],
-      [
-        10,
-        7
-      ],
-      [
-        9,
-        7
-      ],
-      [
-        10,
-        7
-      ],
-      [
-        11,
-        7
-      ],
-      [
-        11,
-        8
-      ],
-      [
-        11,
-        9
-      ],
-      [
-        12,
-        9
-      ],
-      [
-        12,
-        10
-      ],
-      [
-        12,
-        11
-      ],
-      [
-        13,
-        11
-      ],
-      [
-        14,
-        11
-      ],
-      [
-        15,
-        11
-      ],
-      [
-        15,
-        12
-      ]
-    ],
-    "life_log": [
-      {
-        "event": "rest_started",
-        "tick": 82
-      },
-      {
-        "event": "rest",
-        "tick": 82
-      },
-      {
-        "event": "rest_recovery_started",
-        "tick": 102
-      },
-      {
-        "event": "rest_ended",
-        "tick": 106
-      },
-      {
-        "event": "rest_until_planned",
-        "target": "night",
-        "tick": 117
-      },
-      {
-        "event": "rest_started",
-        "tick": 117
-      },
-      {
-        "event": "rest_until_started",
-        "tick": 117
-      },
-      {
-        "event": "rest_recovery_started",
-        "tick": 137
-      },
-      {
-        "event": "rest_until_stopped",
-        "reason": "nightfall",
-        "tick": 360
-      },
-      {
-        "event": "rest_ended",
-        "tick": 360
-      },
-      {
-        "event": "invasion",
-        "hp": 30,
-        "sleepiness": 3.7,
-        "tick": 400
-      },
-      {
-        "event": "spotted",
-        "hp": 30,
-        "sleepiness": 11.3,
-        "tick": 482
-      },
-      {
-        "event": "animal_danger",
-        "hp": 30,
-        "sleepiness": 13.2,
-        "tick": 503
-      },
-      {
-        "event": "rest_until_planned",
-        "target": "dawn",
-        "tick": 505
-      },
-      {
-        "event": "rest_started",
-        "tick": 505
-      },
-      {
-        "event": "rest_until_started",
-        "tick": 505
-      },
-      {
-        "event": "rest_recovery_started",
-        "tick": 525
-      }
-    ],
-    "manual_goal": null,
-    "materials": 80,
-    "metrics": {
-      "bark_casts": 0,
-      "bark_targets": 0,
-      "barks": 0,
-      "built": 2,
-      "captures": 0,
-      "coins": 0,
-      "commands": 0.0,
-      "destroyed": 0,
-      "eggs_collected": 0,
-      "eggs_produced": 0,
-      "fed": 0,
-      "interrupted": 0,
-      "mushroom_collected": 0,
-      "mushroom_healing": 0,
-      "mushroom_spawned": 0,
-      "mushrooms_used": 0,
-      "nature_rolls": 29,
-      "orders": 0,
-      "repaired": 0,
-      "repelled": 0,
-      "rescues": 0,
-      "soil_repair": 0,
-      "stolen": 0,
-      "structure_damage": 0,
-      "stump_collected": 1,
-      "stump_spawned": 0,
-      "weed_collected": 1,
-      "weed_spawned": 5
-    },
-    "milestones": [
-      {
-        "kind": "sleep_warning",
-        "tick": 107,
-        "value": 60
-      },
-      {
-        "kind": "sleep_warning",
-        "tick": 107,
-        "value": 80
-      }
-    ],
-    "mushrooms": 0,
-    "natural": [
-      {
-        "kind": "weed",
-        "pos": [
-          12,
-          12
-        ]
-      },
-      {
-        "kind": "weed",
-        "pos": [
-          13,
-          12
-        ]
-      },
-      {
-        "kind": "weed",
-        "pos": [
-          14,
-          12
-        ]
-      },
-      {
-        "kind": "weed",
-        "pos": [
-          16,
-          12
-        ]
-      },
-      {
-        "kind": "weed",
-        "pos": [
-          17,
-          12
-        ]
-      },
-      {
-        "kind": "weed",
+        "born_day": 1,
+        "kind": "egg",
         "pos": [
           7,
-          4
-        ]
-      },
-      {
-        "kind": "weed",
-        "pos": [
-          17,
           14
-        ]
-      }
-    ],
-    "nature_settings": {
-      "caps": {
-        "mushroom": 3,
-        "stump": 1,
-        "weed": 10
-      },
-      "interval": 1.0,
-      "limit": 16,
-      "mushroom_hp": 5,
-      "spawn_chance_per_second": 0.2,
-      "stump_wood": 20,
-      "weed_gold": 1,
-      "weights": {
-        "mushroom": 15.0,
-        "stump": 5.0,
-        "weed": 80.0
-      }
-    },
-    "night_started_tick": 0,
-    "paused": false,
-    "phase": "day",
-    "raiders": [],
-    "remaining_day": 60.75,
-    "remaining_night": 180.0,
-    "resources": {
-      "soil": 80,
-      "stone": 0,
-      "wood": 20
-    },
-    "rest_until": {},
-    "result": "",
-    "samples": [
-      {
-        "eggs": 0,
-        "keeper": "free",
-        "materials": 80,
-        "stamina": 100.0,
-        "structures": 0,
-        "tick": 8
-      },
-      {
-        "eggs": 0,
-        "keeper": "free",
-        "materials": 80,
-        "stamina": 100.0,
-        "structures": 0,
-        "tick": 16
-      },
-      {
-        "eggs": 0,
-        "keeper": "free",
-        "materials": 80,
-        "stamina": 100.0,
-        "structures": 0,
-        "tick": 24
-      },
-      {
-        "eggs": 0,
-        "keeper": "free",
-        "materials": 80,
-        "stamina": 100.0,
-        "structures": 0,
-        "tick": 32
-      },
-      {
-        "eggs": 0,
-        "keeper": "free",
-        "materials": 80,
-        "stamina": 100.0,
-        "structures": 0,
-        "tick": 40
-      },
-      {
-        "eggs": 0,
-        "keeper": "free",
-        "materials": 80,
-        "stamina": 99.3,
-        "structures": 0,
-        "tick": 48
-      },
-      {
-        "eggs": 0,
-        "keeper": "free",
-        "materials": 80,
-        "stamina": 99.3,
-        "structures": 1,
-        "tick": 56
-      },
-      {
-        "eggs": 0,
-        "keeper": "free",
-        "materials": 80,
-        "stamina": 98.7,
-        "structures": 2,
-        "tick": 64
-      },
-      {
-        "eggs": 0,
-        "keeper": "free",
-        "materials": 80,
-        "stamina": 98.0,
-        "structures": 2,
-        "tick": 72
-      },
-      {
-        "eggs": 0,
-        "keeper": "free",
-        "materials": 80,
-        "stamina": 95.4,
-        "structures": 2,
-        "tick": 80
-      },
-      {
-        "eggs": 0,
-        "keeper": "free",
-        "materials": 80,
-        "stamina": 93.5,
-        "structures": 2,
-        "tick": 88
-      },
-      {
-        "eggs": 0,
-        "keeper": "free",
-        "materials": 80,
-        "stamina": 92.8,
-        "structures": 2,
-        "tick": 96
-      },
-      {
-        "eggs": 0,
-        "keeper": "free",
-        "materials": 80,
-        "stamina": 92.8,
-        "structures": 2,
-        "tick": 104
-      },
-      {
-        "eggs": 0,
-        "keeper": "free",
-        "materials": 80,
-        "stamina": 92.2,
-        "structures": 2,
-        "tick": 112
-      }
-    ],
-    "schedule": [
-      {
-        "entry": [
-          1,
-          5
         ],
-        "lv": 1,
-        "role": "kidnapper",
-        "tick": 40,
-        "wave": 1
+        "protected_by": -1
       }
     ],
-    "score": {},
-    "seed": 17,
-    "shop_log": [],
-    "shop_stock": [
+    "animals": [
       {
-        "individual": {
-          "loyalty": 0
-        },
-        "product": "coffee",
-        "remaining": 1
+        "id": 1,
+        "species": "shiba",
+        "name": "こむぎ",
+        "pos": [
+          14,
+          15
+        ],
+        "hp": 25,
+        "mode": "auto",
+        "state": "徘徊",
+        "deployment": "resident",
+        "unavailable_through_day": 0,
+        "affinity": null
       },
       {
-        "individual": {
-          "loyalty": 0
-        },
-        "product": "energy_drink",
-        "remaining": 1
+        "id": 2,
+        "species": "hen",
+        "name": "",
+        "pos": [
+          7,
+          14
+        ],
+        "hp": 20,
+        "mode": "auto",
+        "state": "ついばむ",
+        "deployment": "resident",
+        "unavailable_through_day": 0,
+        "affinity": null
       },
       {
-        "individual": {
-          "loyalty": 0
-        },
-        "product": "hen",
-        "remaining": 1
-      },
-      {
-        "individual": {
-          "loyalty": 0
-        },
-        "product": "cat",
-        "remaining": 1
-      },
-      {
-        "individual": {
-          "loyalty": 0
-        },
-        "product": "soil",
-        "remaining": 4
-      },
-      {
-        "individual": {
-          "loyalty": 0
-        },
-        "product": "wood",
-        "remaining": 3
-      },
-      {
-        "individual": {
-          "loyalty": 0
-        },
-        "product": "stone",
-        "remaining": 3
+        "id": 3,
+        "species": "cat",
+        "name": null,
+        "pos": [
+          19,
+          7
+        ],
+        "hp": 28,
+        "mode": "auto",
+        "state": "散歩",
+        "deployment": "resident",
+        "unavailable_through_day": 0,
+        "affinity": null
       }
     ],
-    "sight_log": [],
-    "skill_log": [],
-    "stage": 1,
-    "stage_config": {
-      "first_attack_seconds": 10.0,
-      "repeat_interval_seconds": 60.0,
-      "repeat_waves": false,
-      "time_limit_seconds": 180.0,
-      "waves": [
+    "keeper": {
+      "pos": [
+        10,
+        8
+      ],
+      "state": "free",
+      "hp": 30,
+      "sleepiness": 0.0,
+      "resting": true,
+      "rest_elapsed": 109.0,
+      "asleep": true,
+      "carrier": -1
+    }
+  },
+  "normal_inputs": {
+    "market_book": true,
+    "pause_queue_reorder_cancel": true,
+    "resident_guidance": true,
+    "right_click_deselect": true
+  },
+  "requirements": {
+    "enclosure": {
+      "indoor": [
+        [
+          11.0,
+          6.0
+        ],
+        [
+          11.0,
+          7.0
+        ],
+        [
+          11.0,
+          8.0
+        ],
+        [
+          12.0,
+          8.0
+        ],
+        [
+          13.0,
+          8.0
+        ],
+        [
+          13.0,
+          7.0
+        ],
+        [
+          13.0,
+          6.0
+        ],
+        [
+          12.0,
+          7.0
+        ],
+        [
+          12.0,
+          6.0
+        ]
+      ],
+      "jobs": [
         {
-          "count": 1,
-          "entries": [
-            [
-              1,
-              5
-            ]
+          "animal_id": 1.0,
+          "event": "admitted",
+          "pos": [
+            8.0,
+            13.0
           ],
-          "interval_seconds": 6.0,
-          "jitter_seconds": 1.0,
-          "lv": 1,
-          "role": "kidnapper",
-          "start_seconds": 0.0
+          "tick": 0.0
+        },
+        {
+          "event": "queued",
+          "id": 1.0,
+          "kind": "soil_tile",
+          "pos": [
+            12.0,
+            7.0
+          ],
+          "tick": 0.0
+        },
+        {
+          "animal_id": -1.0,
+          "event": "completed",
+          "id": 1.0,
+          "kind": "soil_tile",
+          "pos": [
+            12.0,
+            7.0
+          ],
+          "tick": 142.0
         }
       ]
     },
-    "structures": [
-      {
-        "armor": 0,
-        "cost": 10,
-        "hp": 8,
-        "id": 1,
-        "kind": "wall",
-        "max_hp": 8,
-        "open": false,
-        "pos": [
-          10,
-          8
-        ],
-        "remaining": 0.0,
-        "resource": "soil",
-        "status": "ready",
-        "total_ticks": 4
-      },
-      {
-        "armor": 0,
-        "cost": 10,
-        "hp": 8,
-        "id": 2,
-        "kind": "wall",
-        "max_hp": 8,
-        "open": false,
-        "pos": [
-          12,
-          8
-        ],
-        "remaining": 0.0,
-        "resource": "soil",
-        "status": "ready",
-        "total_ticks": 4
-      }
-    ],
-    "tick": 117
-  },
-  "route_preview": {
-    "changes_world": false,
-    "color": "thin red",
-    "includes_shed_pickup": true,
-    "terrain": "shared A-star with actual movement; adjacent work cells; present terrain",
-    "overlap": "second traversal offset and dashed, two lines maximum",
-    "held": "dashed",
-    "visibility": "keeper selection or queue edit/hover"
-  },
-  "selection_context_checks": {
-    "batch_reserved": 3,
-    "batch_unregistered": 5,
-    "context_camera_clamp": true,
-    "ctrl_cap_all_classes": 8,
-    "drag_cap_all_classes": 8,
-    "paused_world_unchanged": true,
-    "right_click_deselect_only": true,
-    "ui_priority_disabled_and_release": true
-  },
-  "source_commit": "919e8e630919e3c904dc75430a805d4ccfaebcea",
-  "transport_attack": {
-    "actions": [
-      {
-        "accepted": true,
-        "animal_id": 1.0,
-        "kind": "place_animal",
-        "paused": false,
-        "pos": [
-          14.0,
-          10.0
-        ],
-        "tick": 0.0
-      },
-      {
-        "accepted": true,
-        "animal_id": 1.0,
-        "kind": "cancel_job",
-        "paused": false,
-        "pos": [
-          0.0,
-          0.0
-        ],
-        "tick": 25.0
-      },
-      {
-        "accepted": true,
-        "animal_id": 1.0,
-        "kind": "place_animal",
-        "paused": false,
-        "pos": [
-          14.0,
-          10.0
-        ],
-        "tick": 26.0
-      }
-    ],
-    "ai_settings": {
-      "counter": {
-        "counter": 0.8,
-        "hesitate": 0.1,
-        "resume": 0.1
-      },
-      "decision_max": 1.4,
-      "decision_min": 0.6,
-      "dog": {
-        "engage": 0.76,
-        "reposition": 0.08,
-        "watch": 0.16
-      },
-      "log_limit": 96.0,
-      "raider": {
-        "advance": 0.76,
-        "detour": 0.14,
-        "hesitate": 0.1
-      },
-      "randomness": 1.0,
-      "rescue_randomness": 0.12
-    },
-    "animals": [
-      {
-        "affinity": null,
-        "attack_power": 10.0,
-        "attack_seconds": 1.2,
-        "attack_target_range": 4.0,
-        "auto_recovering": false,
-        "category": "dog",
-        "deployment": "placed",
-        "detection_range": 4.0,
-        "fear": 0.0,
-        "healing_kennel": -1.0,
-        "home": [
-          22.0,
-          13.0
-        ],
-        "hp": 40.0,
-        "id": 1.0,
-        "kennel_id": -1.0,
-        "kennel_ticks": 0.0,
-        "known_enemies": {},
-        "last_bark": -100.0,
-        "loyalty": 75.0,
-        "lv": 1.0,
-        "max_hp": 40.0,
-        "mode": "auto",
-        "move_credit": 0.0,
-        "move_speed": 2.0,
-        "name": "",
-        "next_attack": 0.0,
-        "next_bark": 0.0,
-        "object_attack_power": 0.0,
-        "order": [
-          22.0,
-          13.0
-        ],
-        "order_until": 0.0,
-        "path": [
-          [
-            22.0,
+    "group_eight": {
+      "arrivals": [
+        {
+          "animal_id": 1.0,
+          "destination": [
+            15.0,
+            12.0
+          ],
+          "event": "guide_arrived",
+          "id": 1.0,
+          "tick": 122.0
+        },
+        {
+          "animal_id": 2.0,
+          "destination": [
+            15.0,
+            11.0
+          ],
+          "event": "guide_arrived",
+          "id": 1.0,
+          "tick": 124.0
+        },
+        {
+          "animal_id": 8.0,
+          "destination": [
+            13.0,
+            12.0
+          ],
+          "event": "guide_arrived",
+          "id": 1.0,
+          "tick": 126.0
+        },
+        {
+          "animal_id": 3.0,
+          "destination": [
+            14.0,
+            12.0
+          ],
+          "event": "guide_arrived",
+          "id": 1.0,
+          "tick": 131.0
+        },
+        {
+          "animal_id": 6.0,
+          "destination": [
+            14.0,
+            11.0
+          ],
+          "event": "guide_arrived",
+          "id": 1.0,
+          "tick": 133.0
+        },
+        {
+          "animal_id": 7.0,
+          "destination": [
+            16.0,
+            11.0
+          ],
+          "event": "guide_arrived",
+          "id": 1.0,
+          "tick": 134.0
+        },
+        {
+          "animal_id": 5.0,
+          "destination": [
+            15.0,
+            10.0
+          ],
+          "event": "guide_arrived",
+          "id": 1.0,
+          "tick": 135.0
+        },
+        {
+          "animal_id": 4.0,
+          "destination": [
+            15.0,
             13.0
-          ]
-        ],
-        "pending": {},
-        "placed": true,
-        "pos": [
-          22.0,
-          13.0
-        ],
-        "rescuing": false,
-        "rest_settled": false,
-        "rest_ticks": 0.0,
-        "skill_ready": {},
-        "skills": [
-          "bark",
-          "rescue"
-        ],
-        "species": "shiba",
-        "stamina": 100.0,
-        "state": "見張り",
-        "target_id": -1.0,
-        "unavailable_through_day": 0.0,
-        "xp": 0.0
-      }
-    ],
-    "bark_settings": {
-      "cooldown": 6.0,
-      "range": 4.0,
-      "stop_seconds": 1.0
-    },
-    "campaign": {
-      "animals": [
-        {
-          "affinity": null,
-          "category": "dog",
+          ],
+          "event": "guide_arrived",
           "id": 1.0,
-          "loyalty": 75.0,
-          "lv": 1.0,
-          "name": "",
-          "object_attack_power": 0.0,
-          "species": "shiba",
-          "unavailable_through_day": 0.0,
-          "xp": 0.0
+          "tick": 155.0
         }
       ],
-      "day": 1.0,
-      "eggs": 0.0,
-      "exp_pool": 0.0,
-      "facilities": [],
-      "fence": 0.0,
-      "field_items": [],
-      "gold": 40.0,
-      "items": {
-        "dog_food": 2.0,
-        "hen_food": 0.0
-      },
-      "keeper_position": [
-        6.0,
-        13.0
-      ],
-      "keeper_vitals": {
-        "drinks_today": 0.0,
-        "hp": 30.0,
-        "sleepiness": 0.0
-      },
-      "morning_checkpoint": {
-        "animals": [
-          {
-            "affinity": null,
-            "category": "dog",
-            "id": 1.0,
-            "loyalty": 75.0,
-            "lv": 1.0,
-            "name": "",
-            "object_attack_power": 0.0,
-            "species": "shiba",
-            "unavailable_through_day": 0.0,
-            "xp": 0.0
-          }
-        ],
-        "day": 1.0,
-        "eggs": 0.0,
-        "exp_pool": 0.0,
-        "facilities": [],
-        "fence": 0.0,
-        "field_items": [],
-        "gold": 40.0,
-        "items": {
-          "dog_food": 2.0,
-          "hen_food": 0.0
-        },
-        "mushrooms": 0.0,
-        "next_structure_id": 1.0,
-        "night_ready": false,
-        "resources": {
-          "soil": 100.0,
-          "stone": 0.0,
-          "wood": 0.0
-        },
-        "shelter": false,
-        "stage": 1.0,
-        "unlocked_blueprints": []
-      },
-      "mushrooms": 0.0,
-      "next_structure_id": 1.0,
-      "night_ready": true,
-      "resources": {
-        "soil": 100.0,
-        "stone": 0.0,
-        "wood": 0.0
-      },
-      "shelter": false,
-      "stage": 1.0,
-      "unlocked_blueprints": []
-    },
-    "combat": [
-      {
-        "damage": 5.0,
-        "id": 0.0,
-        "source": "keeper_hit",
-        "target": -1.0,
-        "tick": 27.0
-      }
-    ],
-    "command_power": 10.0,
-    "dawn": {},
-    "day": 1.0,
-    "decision_count": 0.0,
-    "decision_counts": {},
-    "decision_log": [],
-    "early_clear": false,
-    "early_clear_tick": -1.0,
-    "early_finish_bonus": 0.0,
-    "eggs": 0.0,
-    "exp_pool": 0.0,
-    "field_items": [],
-    "initial_campaign": {
-      "animals": [
+      "log": [
         {
-          "affinity": null,
-          "category": "dog",
-          "id": 1.0,
-          "loyalty": 75.0,
-          "lv": 1.0,
-          "name": "",
-          "object_attack_power": 0.0,
-          "species": "shiba",
-          "unavailable_through_day": 0.0,
-          "xp": 0.0
-        }
-      ],
-      "day": 1.0,
-      "eggs": 0.0,
-      "exp_pool": 0.0,
-      "facilities": [],
-      "fence": 0.0,
-      "field_items": [],
-      "gold": 40.0,
-      "items": {
-        "dog_food": 2.0,
-        "hen_food": 0.0
-      },
-      "keeper_position": [
-        6.0,
-        13.0
-      ],
-      "keeper_vitals": {
-        "drinks_today": 0.0,
-        "hp": 30.0,
-        "sleepiness": 0.0
-      },
-      "morning_checkpoint": {
-        "animals": [
-          {
-            "affinity": null,
-            "category": "dog",
-            "id": 1.0,
-            "loyalty": 75.0,
-            "lv": 1.0,
-            "name": "",
-            "object_attack_power": 0.0,
-            "species": "shiba",
-            "unavailable_through_day": 0.0,
-            "xp": 0.0
-          }
-        ],
-        "day": 1.0,
-        "eggs": 0.0,
-        "exp_pool": 0.0,
-        "facilities": [],
-        "fence": 0.0,
-        "field_items": [],
-        "gold": 40.0,
-        "items": {
-          "dog_food": 2.0,
-          "hen_food": 0.0
+          "animal_id": 1.0,
+          "event": "admitted",
+          "pos": [
+            8.0,
+            13.0
+          ],
+          "tick": 0.0
         },
-        "mushrooms": 0.0,
-        "next_structure_id": 1.0,
-        "night_ready": false,
-        "resources": {
-          "soil": 100.0,
-          "stone": 0.0,
-          "wood": 0.0
-        },
-        "shelter": false,
-        "stage": 1.0,
-        "unlocked_blueprints": []
-      },
-      "mushrooms": 0.0,
-      "next_structure_id": 1.0,
-      "night_ready": true,
-      "resources": {
-        "soil": 100.0,
-        "stone": 0.0,
-        "wood": 0.0
-      },
-      "shelter": false,
-      "stage": 1.0,
-      "unlocked_blueprints": []
-    },
-    "initial_positions": {
-      "animals": [
         {
-          "deployment_tick": 27.0,
-          "id": 1.0,
+          "action": "whistle",
+          "event": "debug",
+          "tick": 0.0
+        },
+        {
+          "animal_id": 2.0,
+          "event": "admitted",
+          "pos": [
+            21.0,
+            14.0
+          ],
+          "tick": 0.0
+        },
+        {
+          "action": "hen",
+          "event": "debug",
+          "tick": 0.0
+        },
+        {
+          "animal_id": 3.0,
+          "event": "admitted",
+          "pos": [
+            21.0,
+            13.0
+          ],
+          "tick": 0.0
+        },
+        {
+          "action": "hen",
+          "event": "debug",
+          "tick": 0.0
+        },
+        {
+          "animal_id": 4.0,
+          "event": "admitted",
+          "pos": [
+            20.0,
+            14.0
+          ],
+          "tick": 0.0
+        },
+        {
+          "action": "hen",
+          "event": "debug",
+          "tick": 0.0
+        },
+        {
+          "animal_id": 5.0,
+          "event": "admitted",
+          "pos": [
+            21.0,
+            15.0
+          ],
+          "tick": 0.0
+        },
+        {
+          "action": "hen",
+          "event": "debug",
+          "tick": 0.0
+        },
+        {
+          "animal_id": 6.0,
+          "event": "admitted",
+          "pos": [
+            21.0,
+            12.0
+          ],
+          "tick": 0.0
+        },
+        {
+          "action": "hen",
+          "event": "debug",
+          "tick": 0.0
+        },
+        {
+          "animal_id": 7.0,
+          "event": "admitted",
+          "pos": [
+            20.0,
+            13.0
+          ],
+          "tick": 0.0
+        },
+        {
+          "action": "hen",
+          "event": "debug",
+          "tick": 0.0
+        },
+        {
+          "animal_id": 8.0,
+          "event": "admitted",
           "pos": [
             22.0,
             13.0
-          ]
-        }
-      ],
-      "keeper": [
-        6.0,
-        13.0
-      ]
-    },
-    "job_hold_reason": "danger",
-    "job_log": [
-      {
-        "animal_id": 1.0,
-        "event": "deployment",
-        "state": "reserved",
-        "tick": 0.0
-      },
-      {
-        "event": "queued",
-        "id": 1.0,
-        "kind": "place_animal",
-        "pos": [
-          14.0,
-          10.0
-        ],
-        "tick": 0.0
-      },
-      {
-        "animal_id": 1.0,
-        "event": "deployment",
-        "state": "transporting",
-        "tick": 25.0
-      },
-      {
-        "event": "return_requested",
-        "id": 1.0,
-        "tick": 25.0
-      },
-      {
-        "animal_id": 1.0,
-        "event": "deployment",
-        "state": "unplaced",
-        "tick": 26.0
-      },
-      {
-        "animal_id": 1.0,
-        "event": "completed",
-        "id": 1.0,
-        "kind": "place_animal",
-        "pos": [
-          14.0,
-          10.0
-        ],
-        "tick": 26.0
-      },
-      {
-        "animal_id": 1.0,
-        "event": "deployment",
-        "state": "reserved",
-        "tick": 26.0
-      },
-      {
-        "event": "queued",
-        "id": 2.0,
-        "kind": "place_animal",
-        "pos": [
-          14.0,
-          10.0
-        ],
-        "tick": 26.0
-      },
-      {
-        "animal_id": 1.0,
-        "event": "deployment",
-        "state": "transporting",
-        "tick": 27.0
-      },
-      {
-        "event": "hold_changed",
-        "reason": "danger",
-        "tick": 27.0
-      },
-      {
-        "animal_id": 1.0,
-        "event": "companion_lowered",
-        "pos": [
-          22.0,
-          13.0
-        ],
-        "tick": 27.0
-      },
-      {
-        "animal_id": 1.0,
-        "event": "completed",
-        "id": 2.0,
-        "kind": "place_animal",
-        "pos": [
-          14.0,
-          10.0
-        ],
-        "tick": 27.0
-      }
-    ],
-    "jobs": [],
-    "jobs_held": true,
-    "keeper": {
-      "carrier": -1.0,
-      "danger_near": false,
-      "drinks_today": 0.0,
-      "forced_rest": false,
-      "heal_credit": 0.0,
-      "hp": 25.0,
-      "hurt_until": 35.0,
-      "max_hp": 30.0,
-      "move_credit": 0.0,
-      "next_attack": 0.0,
-      "placed": true,
-      "pos": [
-        21.0,
-        13.0
-      ],
-      "recover_ticks": 0.0,
-      "resting": false,
-      "restrainer": -1.0,
-      "sleepiness": 2.5,
-      "state": "free",
-      "warned": 0.0
-    },
-    "keeper_path": [
-      [
-        6.0,
-        13.0
-      ],
-      [
-        7.0,
-        13.0
-      ],
-      [
-        8.0,
-        13.0
-      ],
-      [
-        9.0,
-        13.0
-      ],
-      [
-        10.0,
-        13.0
-      ],
-      [
-        11.0,
-        13.0
-      ],
-      [
-        12.0,
-        13.0
-      ],
-      [
-        13.0,
-        13.0
-      ],
-      [
-        14.0,
-        13.0
-      ],
-      [
-        15.0,
-        13.0
-      ],
-      [
-        16.0,
-        13.0
-      ],
-      [
-        17.0,
-        13.0
-      ],
-      [
-        18.0,
-        13.0
-      ],
-      [
-        19.0,
-        13.0
-      ],
-      [
-        20.0,
-        13.0
-      ],
-      [
-        21.0,
-        13.0
-      ]
-    ],
-    "life_log": [
-      {
-        "event": "invasion",
-        "hp": 30.0,
-        "sleepiness": 2.5,
-        "tick": 27.0
-      },
-      {
-        "event": "keeper_hit",
-        "hp": 25.0,
-        "sleepiness": 2.5,
-        "tick": 27.0
-      }
-    ],
-    "manual_goal": null,
-    "materials": 100.0,
-    "metrics": {
-      "bark_casts": 0.0,
-      "bark_targets": 0.0,
-      "barks": 0.0,
-      "built": 0.0,
-      "captures": 0.0,
-      "coins": 0.0,
-      "commands": 0.0,
-      "destroyed": 0.0,
-      "eggs_collected": 0.0,
-      "eggs_produced": 0.0,
-      "fed": 0.0,
-      "interrupted": 0.0,
-      "mushroom_collected": 0.0,
-      "mushroom_healing": 0.0,
-      "mushroom_spawned": 0.0,
-      "mushrooms_used": 0.0,
-      "nature_rolls": 6.0,
-      "orders": 0.0,
-      "repaired": 0.0,
-      "repelled": 0.0,
-      "rescues": 0.0,
-      "soil_repair": 0.0,
-      "stolen": 0.0,
-      "structure_damage": 0.0,
-      "stump_collected": 0.0,
-      "stump_spawned": 0.0,
-      "weed_collected": 0.0,
-      "weed_spawned": 3.0
-    },
-    "milestones": [
-      {
-        "id": 0.0,
-        "kind": "invasion",
-        "tick": 27.0
-      }
-    ],
-    "mushrooms": 0.0,
-    "natural": [
-      {
-        "kind": "weed",
-        "pos": [
-          6.0,
-          1.0
-        ]
-      },
-      {
-        "kind": "weed",
-        "pos": [
-          6.0,
-          13.0
-        ]
-      },
-      {
-        "kind": "weed",
-        "pos": [
-          2.0,
-          13.0
-        ]
-      }
-    ],
-    "nature_settings": {
-      "caps": {
-        "mushroom": 3.0,
-        "stump": 1.0,
-        "weed": 10.0
-      },
-      "interval": 1.0,
-      "limit": 16.0,
-      "mushroom_hp": 5.0,
-      "spawn_chance_per_second": 0.2,
-      "stump_wood": 20.0,
-      "weed_gold": 1.0,
-      "weights": {
-        "mushroom": 15.0,
-        "stump": 5.0,
-        "weed": 80.0
-      }
-    },
-    "night_started_tick": 0.0,
-    "paused": false,
-    "phase": "day",
-    "raiders": [
-      {
-        "attack_power": 5.0,
-        "attacker": -1.0,
-        "born": 27.0,
-        "can_see_keeper": false,
-        "capture_progress": 0.0,
-        "carry": "",
-        "counter_ready": 0.0,
-        "counter_seconds": 1.0,
-        "counter_target": -1.0,
-        "counter_until": 0.0,
-        "done": false,
-        "entry": [
-          21.0,
-          12.0
-        ],
-        "flee": false,
-        "hp": 50.0,
-        "id": 0.0,
-        "last_known_keeper_position": null,
-        "lv": 1.0,
-        "max_hp": 50.0,
-        "move_credit": 0.0,
-        "move_speed": 1.333333,
-        "move_stopped_until": 0.0,
-        "next_attack": 0.0,
-        "object_attack_power": 2.0,
-        "path": [
-          [
-            21.0,
-            12.0
-          ]
-        ],
-        "pos": [
-          21.0,
-          12.0
-        ],
-        "role": "kidnapper",
-        "search_goal": null,
-        "search_goal_until": 0.0,
-        "search_state": "探索中",
-        "search_visits": [],
-        "sight_range": 6.0,
-        "sight_reaction": "",
-        "sight_reaction_until": 0.0,
-        "state": "探索中",
-        "threat_until": 0.0,
-        "weakened_until": 0.0
-      }
-    ],
-    "remaining_day": 83.25,
-    "remaining_night": 180.0,
-    "resources": {
-      "soil": 100.0,
-      "stone": 0.0,
-      "wood": 0.0
-    },
-    "rest_until": {},
-    "result": "",
-    "samples": [
-      {
-        "eggs": 0.0,
-        "keeper": "free",
-        "materials": 100.0,
-        "stamina": 100.0,
-        "structures": 0.0,
-        "tick": 8.0
-      },
-      {
-        "eggs": 0.0,
-        "keeper": "free",
-        "materials": 100.0,
-        "stamina": 100.0,
-        "structures": 0.0,
-        "tick": 16.0
-      },
-      {
-        "eggs": 0.0,
-        "keeper": "free",
-        "materials": 100.0,
-        "stamina": 100.0,
-        "structures": 0.0,
-        "tick": 24.0
-      }
-    ],
-    "schedule": [
-      {
-        "entry": [
-          1.0,
-          5.0
-        ],
-        "lv": 1.0,
-        "role": "kidnapper",
-        "tick": 40.0,
-        "wave": 1.0
-      }
-    ],
-    "score": {},
-    "seed": 17.0,
-    "shop_log": [],
-    "shop_stock": [
-      {
-        "individual": {
-          "loyalty": 0.0
-        },
-        "product": "coffee",
-        "remaining": 1.0
-      },
-      {
-        "individual": {
-          "loyalty": 0.0
-        },
-        "product": "energy_drink",
-        "remaining": 1.0
-      },
-      {
-        "individual": {
-          "loyalty": 0.0
-        },
-        "product": "hen",
-        "remaining": 1.0
-      },
-      {
-        "individual": {
-          "loyalty": 0.0
-        },
-        "product": "cat",
-        "remaining": 1.0
-      },
-      {
-        "individual": {
-          "loyalty": 0.0
-        },
-        "product": "soil",
-        "remaining": 4.0
-      },
-      {
-        "individual": {
-          "loyalty": 0.0
-        },
-        "product": "wood",
-        "remaining": 3.0
-      },
-      {
-        "individual": {
-          "loyalty": 0.0
-        },
-        "product": "stone",
-        "remaining": 3.0
-      }
-    ],
-    "sight_log": [],
-    "skill_log": [],
-    "stage": 1.0,
-    "stage_config": {
-      "first_attack_seconds": 10.0,
-      "repeat_interval_seconds": 60.0,
-      "repeat_waves": false,
-      "time_limit_seconds": 180.0,
-      "waves": [
-        {
-          "count": 1.0,
-          "entries": [
-            [
-              1.0,
-              5.0
-            ]
           ],
-          "interval_seconds": 6.0,
-          "jitter_seconds": 1.0,
-          "lv": 1.0,
-          "role": "kidnapper",
-          "start_seconds": 0.0
+          "tick": 0.0
+        },
+        {
+          "action": "hen",
+          "event": "debug",
+          "tick": 0.0
+        },
+        {
+          "event": "order_reserved",
+          "id": 1.0,
+          "order": "guide",
+          "targets": [
+            1.0,
+            2.0,
+            3.0,
+            4.0,
+            5.0,
+            6.0,
+            7.0,
+            8.0
+          ],
+          "tick": 0.0,
+          "unassigned": []
+        },
+        {
+          "animal_id": 1.0,
+          "destination": [
+            15.0,
+            12.0
+          ],
+          "distance": 2.0,
+          "event": "order_issued",
+          "tick": 1.0
+        },
+        {
+          "animal_id": 2.0,
+          "destination": [
+            15.0,
+            11.0
+          ],
+          "distance": 6.0,
+          "event": "order_issued",
+          "tick": 22.0
+        },
+        {
+          "animal_id": 3.0,
+          "destination": [
+            14.0,
+            12.0
+          ],
+          "distance": 6.0,
+          "event": "order_issued",
+          "tick": 24.0
+        },
+        {
+          "animal_id": 4.0,
+          "destination": [
+            15.0,
+            13.0
+          ],
+          "distance": 4.0,
+          "event": "order_issued",
+          "tick": 25.0
+        },
+        {
+          "animal_id": 5.0,
+          "destination": [
+            15.0,
+            10.0
+          ],
+          "distance": 2.0,
+          "event": "order_issued",
+          "tick": 26.0
+        },
+        {
+          "animal_id": 6.0,
+          "destination": [
+            14.0,
+            11.0
+          ],
+          "distance": 3.0,
+          "event": "order_issued",
+          "tick": 27.0
+        },
+        {
+          "animal_id": 7.0,
+          "destination": [
+            16.0,
+            11.0
+          ],
+          "distance": 3.0,
+          "event": "order_issued",
+          "tick": 28.0
+        },
+        {
+          "animal_id": 8.0,
+          "destination": [
+            13.0,
+            12.0
+          ],
+          "distance": 6.0,
+          "event": "order_issued",
+          "tick": 32.0
+        },
+        {
+          "animal_id": 1.0,
+          "destination": [
+            15.0,
+            12.0
+          ],
+          "event": "guide_arrived",
+          "id": 1.0,
+          "tick": 122.0
+        },
+        {
+          "animal_id": 2.0,
+          "destination": [
+            15.0,
+            11.0
+          ],
+          "event": "guide_arrived",
+          "id": 1.0,
+          "tick": 124.0
+        },
+        {
+          "animal_id": 8.0,
+          "destination": [
+            13.0,
+            12.0
+          ],
+          "event": "guide_arrived",
+          "id": 1.0,
+          "tick": 126.0
+        },
+        {
+          "animal_id": 3.0,
+          "destination": [
+            14.0,
+            12.0
+          ],
+          "event": "guide_arrived",
+          "id": 1.0,
+          "tick": 131.0
+        },
+        {
+          "animal_id": 6.0,
+          "destination": [
+            14.0,
+            11.0
+          ],
+          "event": "guide_arrived",
+          "id": 1.0,
+          "tick": 133.0
+        },
+        {
+          "animal_id": 7.0,
+          "destination": [
+            16.0,
+            11.0
+          ],
+          "event": "guide_arrived",
+          "id": 1.0,
+          "tick": 134.0
+        },
+        {
+          "animal_id": 5.0,
+          "destination": [
+            15.0,
+            10.0
+          ],
+          "event": "guide_arrived",
+          "id": 1.0,
+          "tick": 135.0
+        },
+        {
+          "animal_id": 4.0,
+          "destination": [
+            15.0,
+            13.0
+          ],
+          "event": "guide_arrived",
+          "id": 1.0,
+          "tick": 155.0
+        },
+        {
+          "animal_id": 1.0,
+          "event": "completed",
+          "id": 1.0,
+          "kind": "animal_order",
+          "pos": [
+            15.0,
+            12.0
+          ],
+          "tick": 156.0
         }
       ]
     },
-    "structures": [],
-    "tick": 27.0
+    "orders": [
+      {
+        "animal_id": 1.0,
+        "event": "admitted",
+        "pos": [
+          8.0,
+          13.0
+        ],
+        "tick": 0.0
+      },
+      {
+        "animal_id": 2.0,
+        "event": "admitted",
+        "pos": [
+          21.0,
+          14.0
+        ],
+        "tick": 0.0
+      },
+      {
+        "action": "hen",
+        "event": "debug",
+        "tick": 0.0
+      },
+      {
+        "action": "whistle",
+        "event": "debug",
+        "tick": 0.0
+      },
+      {
+        "event": "order_reserved",
+        "id": 1.0,
+        "order": "guide",
+        "targets": [
+          1.0,
+          2.0
+        ],
+        "tick": 0.0,
+        "unassigned": []
+      },
+      {
+        "animal_id": 1.0,
+        "destination": [
+          15.0,
+          12.0
+        ],
+        "distance": 2.0,
+        "event": "order_issued",
+        "tick": 1.0
+      },
+      {
+        "animal_id": 2.0,
+        "destination": [
+          15.0,
+          11.0
+        ],
+        "distance": 6.0,
+        "event": "order_issued",
+        "tick": 18.0
+      },
+      {
+        "animal_id": 1.0,
+        "destination": [
+          15.0,
+          12.0
+        ],
+        "event": "guide_arrived",
+        "id": 1.0,
+        "tick": 32.0
+      },
+      {
+        "animal_id": 2.0,
+        "destination": [
+          15.0,
+          11.0
+        ],
+        "event": "guide_arrived",
+        "id": 1.0,
+        "tick": 46.0
+      },
+      {
+        "animal_id": 1.0,
+        "event": "completed",
+        "id": 1.0,
+        "kind": "animal_order",
+        "pos": [
+          15.0,
+          12.0
+        ],
+        "tick": 47.0
+      }
+    ],
+    "sleep": {
+      "breached_sleepiness": 56.0,
+      "indoor": [
+        {
+          "event": "rest_started",
+          "tick": 0.0
+        },
+        {
+          "event": "rest",
+          "tick": 0.0
+        },
+        {
+          "event": "rest_recovery_started",
+          "indoor": true,
+          "tick": 12.0
+        }
+      ],
+      "outdoor": [
+        {
+          "event": "rest_started",
+          "tick": 0.0
+        },
+        {
+          "event": "rest",
+          "tick": 0.0
+        },
+        {
+          "event": "rest_recovery_started",
+          "indoor": false,
+          "tick": 20.0
+        }
+      ],
+      "outdoor_sleepiness": 68.0
+    }
   },
-  "motion_review": {
-    "source_commit": "919e8e630919e3c904dc75430a805d4ccfaebcea",
-    "fixture": "3 paused wall plans; separate 3 move plans for overlapping route display",
-    "input": "actual InputEvent drag and book open/next/close",
-    "book": "book-motion.gif",
-    "queue": "queue-motion.gif",
-    "route": "return_route.png",
-    "frames_unmodified": true
-  },
+  "source_commit": "823f876de93700cdfda1a2cd8377250e8c4ec4b9",
   "validation": {
-    "rules_checks": 737,
-    "jobs_checks": 98,
-    "keeper_checks": 64,
-    "planning_checks": 67,
-    "rest_until_checks": 24,
+    "source_commit": "823f876de93700cdfda1a2cd8377250e8c4ec4b9",
+    "normal_input_run": {
+      "market_book": true,
+      "pause_queue_reorder_cancel": true,
+      "resident_guidance": true,
+      "right_click_deselect": true
+    },
+    "debug_fixture_run": {
+      "add_cat": true,
+      "grant_whistle": true,
+      "indoor_sleep": true,
+      "keeper_left_click_indoor_move": true,
+      "lock_damage_and_onsite_repair": true,
+      "room_fixture": true
+    },
+    "automated_checks": {
+      "residents": 76,
+      "world": 56,
+      "jobs": 95,
+      "keeper": 64,
+      "planning": 43,
+      "rest_until": 24
+    },
     "ai_trials": 192,
     "windows_export": true,
     "export_smoke": true,
-    "human_playtest": false
+    "enclosure_assertions": {
+      "reservation_refused_with_dog_inside": true,
+      "completion_rechecked_after_dog_enters": true,
+      "progress_preserved_while_blocked": true,
+      "guide_reordered_before_blocked_construction": true,
+      "construction_finishes_after_dog_leaves": true
+    },
+    "comparison": {
+      "sleep_test_elapsed_seconds": 6,
+      "outdoor_sleepiness": 68,
+      "indoor_sleepiness": 58,
+      "after_breach_one_second": 56,
+      "hp_recovery_equal": true
+    },
+    "limitations": [
+      "GPU InputEvent replay; not human manual play",
+      "Indoor layout is a debug fixture; construction and upgrades separately verified through production job APIs",
+      "Real speaker listening and multi-day balance not reviewed"
+    ],
+    "windows_exe_sha256": "65c19ee7b25605b97b42fee8491e6399c5dccc4ecbe81fd9efe3349f77b0329e"
   }
 }
