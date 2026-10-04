@@ -1,0 +1,384 @@
+{
+  "delivery": "resource_icons_v1",
+  "assets": [
+    {
+      "file": "hud24/wood.png",
+      "canvas_size_px": [
+        24,
+        24
+      ],
+      "anchor_px": [
+        12,
+        12
+      ],
+      "anchor_use": "visual center",
+      "resource_id": "wood",
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "use": "HUD/small button",
+      "visible_bbox_exclusive_px": [
+        2,
+        3,
+        22,
+        21
+      ],
+      "sha256": "6fb678b9c82dad4066cbbb46fad0ed434477a1b89b7061911f69e9ece3056966",
+      "source": "../../art-production/resource-icons-v1/originals/wood.png"
+    },
+    {
+      "file": "ui48/wood.png",
+      "canvas_size_px": [
+        48,
+        48
+      ],
+      "anchor_px": [
+        24,
+        24
+      ],
+      "anchor_use": "visual center",
+      "resource_id": "wood",
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "use": "market card and resource UI",
+      "visible_bbox_exclusive_px": [
+        4,
+        6,
+        44,
+        42
+      ],
+      "sha256": "74bfb40680e41b7f192d62d170b0d80137e9e3d8386532aece78d3227b1b1f6f",
+      "source": "../../art-production/resource-icons-v1/originals/wood.png"
+    },
+    {
+      "file": "ui96/wood.png",
+      "canvas_size_px": [
+        96,
+        96
+      ],
+      "anchor_px": [
+        48,
+        48
+      ],
+      "anchor_use": "visual center",
+      "resource_id": "wood",
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "use": "market card and resource UI",
+      "visible_bbox_exclusive_px": [
+        8,
+        12,
+        88,
+        84
+      ],
+      "sha256": "c127a2137b1dab472dce9a621266ce7700826b1afb16b4beff04ef556d8bd11c",
+      "source": "../../art-production/resource-icons-v1/originals/wood.png"
+    },
+    {
+      "file": "hud24/soil.png",
+      "canvas_size_px": [
+        24,
+        24
+      ],
+      "anchor_px": [
+        12,
+        12
+      ],
+      "anchor_use": "visual center",
+      "resource_id": "soil",
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "use": "HUD/small button",
+      "visible_bbox_exclusive_px": [
+        2,
+        5,
+        22,
+        18
+      ],
+      "sha256": "00004cd2e6ebcbab2c82819653368679772e7e889f84e84cfb8a55274f35cb30",
+      "source": "../../art-production/resource-icons-v1/originals/soil.png"
+    },
+    {
+      "file": "ui48/soil.png",
+      "canvas_size_px": [
+        48,
+        48
+      ],
+      "anchor_px": [
+        24,
+        24
+      ],
+      "anchor_use": "visual center",
+      "resource_id": "soil",
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "use": "market card and resource UI",
+      "visible_bbox_exclusive_px": [
+        4,
+        11,
+        44,
+        36
+      ],
+      "sha256": "7934b2510a6da7eb1d538fe8a0c0faf503723dda0109f09524ef0678d84d89e4",
+      "source": "../../art-production/resource-icons-v1/originals/soil.png"
+    },
+    {
+      "file": "ui96/soil.png",
+      "canvas_size_px": [
+        96,
+        96
+      ],
+      "anchor_px": [
+        48,
+        48
+      ],
+      "anchor_use": "visual center",
+      "resource_id": "soil",
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "use": "market card and resource UI",
+      "visible_bbox_exclusive_px": [
+        8,
+        23,
+        88,
+        73
+      ],
+      "sha256": "99be092acea945d87db374bee33aeba9e280b640f2cb71dfeba30be5a39c54cf",
+      "source": "../../art-production/resource-icons-v1/originals/soil.png"
+    },
+    {
+      "file": "hud24/stone.png",
+      "canvas_size_px": [
+        24,
+        24
+      ],
+      "anchor_px": [
+        12,
+        12
+      ],
+      "anchor_use": "visual center",
+      "resource_id": "stone",
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "use": "HUD/small button",
+      "visible_bbox_exclusive_px": [
+        2,
+        3,
+        22,
+        21
+      ],
+      "sha256": "70f3e655371499a3370612135e6edfb5992a2b3250a67460589f05ba12e24da7",
+      "source": "../../art-production/resource-icons-v1/originals/stone.png"
+    },
+    {
+      "file": "ui48/stone.png",
+      "canvas_size_px": [
+        48,
+        48
+      ],
+      "anchor_px": [
+        24,
+        24
+      ],
+      "anchor_use": "visual center",
+      "resource_id": "stone",
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "use": "market card and resource UI",
+      "visible_bbox_exclusive_px": [
+        4,
+        6,
+        44,
+        41
+      ],
+      "sha256": "486ed04ce7940695be86f45be655daeb4317fce4f9f8521f069e4abb458f2320",
+      "source": "../../art-production/resource-icons-v1/originals/stone.png"
+    },
+    {
+      "file": "ui96/stone.png",
+      "canvas_size_px": [
+        96,
+        96
+      ],
+      "anchor_px": [
+        48,
+        48
+      ],
+      "anchor_use": "visual center",
+      "resource_id": "stone",
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "use": "market card and resource UI",
+      "visible_bbox_exclusive_px": [
+        8,
+        12,
+        88,
+        83
+      ],
+      "sha256": "c6e6b5b003189fb083df7dc47b41758e0899e1d529a29f3cb586e22247f85954",
+      "source": "../../art-production/resource-icons-v1/originals/stone.png"
+    },
+    {
+      "file": "hud24/gold.png",
+      "canvas_size_px": [
+        24,
+        24
+      ],
+      "anchor_px": [
+        12,
+        12
+      ],
+      "anchor_use": "visual center",
+      "resource_id": "gold",
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "use": "HUD/small button",
+      "visible_bbox_exclusive_px": [
+        2,
+        4,
+        22,
+        19
+      ],
+      "sha256": "e0aff73d5f8ffe6ee2ad29dac819374f00cbacfa8422e45b2ca2daab766759b9",
+      "source": "../../art-production/resource-icons-v1/originals/gold.png"
+    },
+    {
+      "file": "ui48/gold.png",
+      "canvas_size_px": [
+        48,
+        48
+      ],
+      "anchor_px": [
+        24,
+        24
+      ],
+      "anchor_use": "visual center",
+      "resource_id": "gold",
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "use": "market card and resource UI",
+      "visible_bbox_exclusive_px": [
+        4,
+        8,
+        44,
+        39
+      ],
+      "sha256": "6619a898ebf6162f2c3c0a399947767fa4b498a8e8f0d55780939856556f2a1b",
+      "source": "../../art-production/resource-icons-v1/originals/gold.png"
+    },
+    {
+      "file": "ui96/gold.png",
+      "canvas_size_px": [
+        96,
+        96
+      ],
+      "anchor_px": [
+        48,
+        48
+      ],
+      "anchor_use": "visual center",
+      "resource_id": "gold",
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "use": "market card and resource UI",
+      "visible_bbox_exclusive_px": [
+        8,
+        17,
+        88,
+        78
+      ],
+      "sha256": "4fc2ff06ecc5ce271e79cae3230694057141c76f6e1e028a8baac41d6b0ee558",
+      "source": "../../art-production/resource-icons-v1/originals/gold.png"
+    }
+  ],
+  "resource_ids": [
+    "wood",
+    "soil",
+    "stone",
+    "gold"
+  ],
+  "generator": "image_gen.imagegen",
+  "prompt_file": "../../art-production/resource-icons-v1/prompts.json",
+  "filter": "nearest",
+  "alpha": "normal RGBA binary; pale endgrain and highlights preserved",
+  "shadow": "no ground shadow",
+  "selection": "24px HUD;48px standard card;96px close-up card. Pick nearest adequate source size and fit isotropically to existing UI bounds.",
+  "integration": "These are resource icons, not new resource types or world facilities. Do not apply old primitive-drawing scale2.3 directly to a96px texture.",
+  "review_only": [
+    "review/sizes-and-alpha.png"
+  ],
+  "unfinished": [
+    "runtime integration and isolated render verification"
+  ]
+}
