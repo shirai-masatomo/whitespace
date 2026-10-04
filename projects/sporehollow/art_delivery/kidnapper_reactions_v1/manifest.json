@@ -1,0 +1,539 @@
+{
+  "delivery": "kidnapper_reactions_v1",
+  "status": "ready_for_implementation_integration",
+  "assets": [
+    {
+      "file": "search/right_00.png",
+      "canvas_size_px": [
+        32,
+        48
+      ],
+      "foot_anchor_px": [
+        16,
+        44
+      ],
+      "action": "search",
+      "direction": "right",
+      "frame_index": 0,
+      "frame_duration_ms": 300,
+      "loop": false,
+      "sha256": "21d6364dc02009fa0cc13d73d567d6d40ca99e7c3946fc7b927674e0d21e23d7"
+    },
+    {
+      "file": "search/right_01.png",
+      "canvas_size_px": [
+        32,
+        48
+      ],
+      "foot_anchor_px": [
+        16,
+        44
+      ],
+      "action": "search",
+      "direction": "right",
+      "frame_index": 1,
+      "frame_duration_ms": 450,
+      "loop": false,
+      "sha256": "4852a6c170957fe12cebc7faa3661c698562ec6de967799bbb0686fdc7e47edf"
+    },
+    {
+      "file": "search/right_02.png",
+      "canvas_size_px": [
+        32,
+        48
+      ],
+      "foot_anchor_px": [
+        16,
+        44
+      ],
+      "action": "search",
+      "direction": "right",
+      "frame_index": 2,
+      "frame_duration_ms": 250,
+      "loop": false,
+      "sha256": "21d6364dc02009fa0cc13d73d567d6d40ca99e7c3946fc7b927674e0d21e23d7"
+    },
+    {
+      "file": "search/left_00.png",
+      "canvas_size_px": [
+        32,
+        48
+      ],
+      "foot_anchor_px": [
+        16,
+        44
+      ],
+      "action": "search",
+      "direction": "left",
+      "frame_index": 0,
+      "frame_duration_ms": 300,
+      "loop": false,
+      "sha256": "13e5627347b60d78b4acea9fa8c4f9fa539b325d6f2865fc1845767a835d50e5"
+    },
+    {
+      "file": "search/left_01.png",
+      "canvas_size_px": [
+        32,
+        48
+      ],
+      "foot_anchor_px": [
+        16,
+        44
+      ],
+      "action": "search",
+      "direction": "left",
+      "frame_index": 1,
+      "frame_duration_ms": 450,
+      "loop": false,
+      "sha256": "af046f0ac13ce589527e362e4c7c011b294d1d34ef725ac6385d4e754b418d02"
+    },
+    {
+      "file": "search/left_02.png",
+      "canvas_size_px": [
+        32,
+        48
+      ],
+      "foot_anchor_px": [
+        16,
+        44
+      ],
+      "action": "search",
+      "direction": "left",
+      "frame_index": 2,
+      "frame_duration_ms": 250,
+      "loop": false,
+      "sha256": "13e5627347b60d78b4acea9fa8c4f9fa539b325d6f2865fc1845767a835d50e5"
+    },
+    {
+      "file": "discovery/right_00.png",
+      "canvas_size_px": [
+        32,
+        48
+      ],
+      "foot_anchor_px": [
+        16,
+        44
+      ],
+      "action": "discovery",
+      "direction": "right",
+      "frame_index": 0,
+      "frame_duration_ms": 120,
+      "loop": false,
+      "sha256": "16b848c1f8d6843085f8a1c32bd8b79f2bc3d090234fe288b75e97a1fa1c5a27"
+    },
+    {
+      "file": "discovery/right_01.png",
+      "canvas_size_px": [
+        32,
+        48
+      ],
+      "foot_anchor_px": [
+        16,
+        44
+      ],
+      "action": "discovery",
+      "direction": "right",
+      "frame_index": 1,
+      "frame_duration_ms": 180,
+      "loop": false,
+      "sha256": "b52a967a2e92d66dcba8c25dcc242bd788a764bd3ebcb05341ee39085c8f4eff"
+    },
+    {
+      "file": "discovery/left_00.png",
+      "canvas_size_px": [
+        32,
+        48
+      ],
+      "foot_anchor_px": [
+        16,
+        44
+      ],
+      "action": "discovery",
+      "direction": "left",
+      "frame_index": 0,
+      "frame_duration_ms": 120,
+      "loop": false,
+      "sha256": "e8eb6b5aa730316817bce095dde031ba926866e41e8b3de2fe84fc0092a5ba3f"
+    },
+    {
+      "file": "discovery/left_01.png",
+      "canvas_size_px": [
+        32,
+        48
+      ],
+      "foot_anchor_px": [
+        16,
+        44
+      ],
+      "action": "discovery",
+      "direction": "left",
+      "frame_index": 1,
+      "frame_duration_ms": 180,
+      "loop": false,
+      "sha256": "1c7422c4f9e503201be4f0031e3cfd4a1a3c1deb9e9291b1720050ad9a09fdfe"
+    },
+    {
+      "file": "hit/right_00.png",
+      "canvas_size_px": [
+        32,
+        48
+      ],
+      "foot_anchor_px": [
+        16,
+        44
+      ],
+      "action": "hit",
+      "direction": "right",
+      "frame_index": 0,
+      "frame_duration_ms": 100,
+      "loop": false,
+      "sha256": "17b5a43cea02b56ae622d5afbe5688cfbeaaad60193b89e88d0ff94478bbfb93"
+    },
+    {
+      "file": "hit/right_01.png",
+      "canvas_size_px": [
+        32,
+        48
+      ],
+      "foot_anchor_px": [
+        16,
+        44
+      ],
+      "action": "hit",
+      "direction": "right",
+      "frame_index": 1,
+      "frame_duration_ms": 140,
+      "loop": false,
+      "sha256": "cc3da29ba130d3eda385d71ff1694df57fcf1f5977f8b17d96085c931b2f8e43"
+    },
+    {
+      "file": "hit/left_00.png",
+      "canvas_size_px": [
+        32,
+        48
+      ],
+      "foot_anchor_px": [
+        16,
+        44
+      ],
+      "action": "hit",
+      "direction": "left",
+      "frame_index": 0,
+      "frame_duration_ms": 100,
+      "loop": false,
+      "sha256": "a0f7731decedaf65e61ebb5cd044e40f512f1ed68a2d4e6d4bcad372278c8319"
+    },
+    {
+      "file": "hit/left_01.png",
+      "canvas_size_px": [
+        32,
+        48
+      ],
+      "foot_anchor_px": [
+        16,
+        44
+      ],
+      "action": "hit",
+      "direction": "left",
+      "frame_index": 1,
+      "frame_duration_ms": 140,
+      "loop": false,
+      "sha256": "b3dd79d3d670627ffbfb5d26ce28009e208816a251c98a3ccb2342ba0f2f1a3e"
+    },
+    {
+      "file": "retreat/right_00.png",
+      "canvas_size_px": [
+        32,
+        48
+      ],
+      "foot_anchor_px": [
+        16,
+        44
+      ],
+      "action": "retreat",
+      "direction": "right",
+      "frame_index": 0,
+      "frame_duration_ms": 90,
+      "loop": true,
+      "sha256": "f763128fbdc224281b183c167c8db9e63b1696d37274c5542095287cb6b7ffd3"
+    },
+    {
+      "file": "retreat/right_01.png",
+      "canvas_size_px": [
+        32,
+        48
+      ],
+      "foot_anchor_px": [
+        16,
+        44
+      ],
+      "action": "retreat",
+      "direction": "right",
+      "frame_index": 1,
+      "frame_duration_ms": 90,
+      "loop": true,
+      "sha256": "6bfdacc736e0338b0f8287fe2f089075f6ef3e7fdcbceb2df81181c2e383ced7"
+    },
+    {
+      "file": "retreat/right_02.png",
+      "canvas_size_px": [
+        32,
+        48
+      ],
+      "foot_anchor_px": [
+        16,
+        44
+      ],
+      "action": "retreat",
+      "direction": "right",
+      "frame_index": 2,
+      "frame_duration_ms": 90,
+      "loop": true,
+      "sha256": "02988150fea06af59a1508b21aefa97328bf7ce36f7b02d0e60eb131608a0043"
+    },
+    {
+      "file": "retreat/right_03.png",
+      "canvas_size_px": [
+        32,
+        48
+      ],
+      "foot_anchor_px": [
+        16,
+        44
+      ],
+      "action": "retreat",
+      "direction": "right",
+      "frame_index": 3,
+      "frame_duration_ms": 90,
+      "loop": true,
+      "sha256": "aa712f2c9d3e1d88596fe8fa3a6d82458d33dc2db6c999c7ad5fff14fe193562"
+    },
+    {
+      "file": "retreat/left_00.png",
+      "canvas_size_px": [
+        32,
+        48
+      ],
+      "foot_anchor_px": [
+        16,
+        44
+      ],
+      "action": "retreat",
+      "direction": "left",
+      "frame_index": 0,
+      "frame_duration_ms": 90,
+      "loop": true,
+      "sha256": "9eef85fec308153dda03d8934021913ca7e3bf58177549b5109f8039cf3fc3be"
+    },
+    {
+      "file": "retreat/left_01.png",
+      "canvas_size_px": [
+        32,
+        48
+      ],
+      "foot_anchor_px": [
+        16,
+        44
+      ],
+      "action": "retreat",
+      "direction": "left",
+      "frame_index": 1,
+      "frame_duration_ms": 90,
+      "loop": true,
+      "sha256": "a6dc27bae4bc35cc2b93ce80e3b17a0a6fb17f68f53beaf127d413da3ccc5ee3"
+    },
+    {
+      "file": "retreat/left_02.png",
+      "canvas_size_px": [
+        32,
+        48
+      ],
+      "foot_anchor_px": [
+        16,
+        44
+      ],
+      "action": "retreat",
+      "direction": "left",
+      "frame_index": 2,
+      "frame_duration_ms": 90,
+      "loop": true,
+      "sha256": "44f64d12349d2e61f9d13412835a4ad6d8fdfd04e54385317ed00aaca8c6e502"
+    },
+    {
+      "file": "retreat/left_03.png",
+      "canvas_size_px": [
+        32,
+        48
+      ],
+      "foot_anchor_px": [
+        16,
+        44
+      ],
+      "action": "retreat",
+      "direction": "left",
+      "frame_index": 3,
+      "frame_duration_ms": 90,
+      "loop": true,
+      "sha256": "51b452bb794efa3bc0142817a5160c83f2d6344252920f8df7a40a9884de3984"
+    }
+  ],
+  "animations": {
+    "search_right": {
+      "frames": [
+        "search/right_00.png",
+        "search/right_01.png",
+        "search/right_02.png"
+      ],
+      "frame_order": [
+        0,
+        1,
+        2
+      ],
+      "frame_duration_ms": [
+        300,
+        450,
+        250
+      ],
+      "loop": false,
+      "after": "return to existing state"
+    },
+    "search_left": {
+      "frames": [
+        "search/left_00.png",
+        "search/left_01.png",
+        "search/left_02.png"
+      ],
+      "frame_order": [
+        0,
+        1,
+        2
+      ],
+      "frame_duration_ms": [
+        300,
+        450,
+        250
+      ],
+      "loop": false,
+      "after": "return to existing state"
+    },
+    "discovery_right": {
+      "frames": [
+        "discovery/right_00.png",
+        "discovery/right_01.png"
+      ],
+      "frame_order": [
+        0,
+        1
+      ],
+      "frame_duration_ms": [
+        120,
+        180
+      ],
+      "loop": false,
+      "after": "return to existing state"
+    },
+    "discovery_left": {
+      "frames": [
+        "discovery/left_00.png",
+        "discovery/left_01.png"
+      ],
+      "frame_order": [
+        0,
+        1
+      ],
+      "frame_duration_ms": [
+        120,
+        180
+      ],
+      "loop": false,
+      "after": "return to existing state"
+    },
+    "hit_right": {
+      "frames": [
+        "hit/right_00.png",
+        "hit/right_01.png"
+      ],
+      "frame_order": [
+        0,
+        1
+      ],
+      "frame_duration_ms": [
+        100,
+        140
+      ],
+      "loop": false,
+      "after": "return to existing state"
+    },
+    "hit_left": {
+      "frames": [
+        "hit/left_00.png",
+        "hit/left_01.png"
+      ],
+      "frame_order": [
+        0,
+        1
+      ],
+      "frame_duration_ms": [
+        100,
+        140
+      ],
+      "loop": false,
+      "after": "return to existing state"
+    },
+    "retreat_right": {
+      "frames": [
+        "retreat/right_00.png",
+        "retreat/right_01.png",
+        "retreat/right_02.png",
+        "retreat/right_03.png"
+      ],
+      "frame_order": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "frame_duration_ms": [
+        90,
+        90,
+        90,
+        90
+      ],
+      "loop": true,
+      "after": "hide/despawn according to existing retreat processing"
+    },
+    "retreat_left": {
+      "frames": [
+        "retreat/left_00.png",
+        "retreat/left_01.png",
+        "retreat/left_02.png",
+        "retreat/left_03.png"
+      ],
+      "frame_order": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "frame_duration_ms": [
+        90,
+        90,
+        90,
+        90
+      ],
+      "loop": true,
+      "after": "hide/despawn according to existing retreat processing"
+    }
+  },
+  "source": "../kidnapper_basic_v1",
+  "face": "same adopted v2 head pixel data, translations and horizontal reflection only",
+  "shadow": "no ground shadow",
+  "review_only": [
+    "review/reactions.png",
+    "review/reactions.gif"
+  ],
+  "rules": "Existing kidnapper only. HP0 retreat, no corpse/death. No damage/speed/detection changes. Discovery contains no baked punctuation or UI.",
+  "unfinished": [
+    "runtime integration and isolated rendering validation"
+  ]
+}
