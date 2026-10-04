@@ -1,0 +1,240 @@
+{
+  "schema_version": 1,
+  "delivery": "characters_v1_static",
+  "asset_branch": "codex/sporehollow-art-assets",
+  "source_asset_commit": "c698d8b",
+  "adopted": {
+    "keeper": "v1 exact processed image; no redraw",
+    "shiba": "size comparison v2 C; existing face unchanged"
+  },
+  "coordinate_convention": "top-left origin; bbox right/bottom exclusive; lowest opaque row43; foot baseline y44",
+  "assets": [
+    {
+      "file": "keeper_idle_right_00.png",
+      "character": "keeper",
+      "action": "idle",
+      "direction": "right",
+      "canvas_size_px": [
+        32,
+        48
+      ],
+      "foot_anchor_px": [
+        16,
+        44
+      ],
+      "visible_bounds_exclusive_px": [
+        4,
+        2,
+        29,
+        44
+      ],
+      "visible_body_size_px": [
+        25,
+        42
+      ],
+      "frame_order": [
+        0
+      ],
+      "frame_count": 1,
+      "frame_duration_ms": null,
+      "duration_mode": "hold_until_state_change",
+      "loop": false,
+      "ready_for_static_import": true,
+      "status": "completed_adopted_static",
+      "display_scale": 1.0,
+      "rescale_64_percent": false,
+      "source_processed_file": "art-production/stage-1/processed/keeper_idle_right_00.png",
+      "source_sha256": "c2ea9f9d7cdebd5a007d881fd17af4bb121c3f1afc2a373de56f49f859293c1e",
+      "delivery_sha256": "c2ea9f9d7cdebd5a007d881fd17af4bb121c3f1afc2a373de56f49f859293c1e",
+      "byte_identical_to_source": true,
+      "alpha_values": [
+        0,
+        255
+      ]
+    },
+    {
+      "file": "shiba_idle_right_00.png",
+      "character": "shiba",
+      "action": "idle",
+      "direction": "right",
+      "canvas_size_px": [
+        48,
+        48
+      ],
+      "foot_anchor_px": [
+        24,
+        44
+      ],
+      "visible_bounds_exclusive_px": [
+        12,
+        16,
+        37,
+        44
+      ],
+      "visible_body_size_px": [
+        25,
+        28
+      ],
+      "frame_order": [
+        0
+      ],
+      "frame_count": 1,
+      "frame_duration_ms": null,
+      "duration_mode": "hold_until_state_change",
+      "loop": false,
+      "ready_for_static_import": true,
+      "status": "completed_adopted_static",
+      "display_scale": 1.0,
+      "rescale_64_percent": false,
+      "source_processed_file": "art-production/stage-1-v2/processed/c65/idle_right_00.png",
+      "source_sha256": "6b394d938fd8c8ba4f9afc94be43def55223d5097a1d9f9759965e1e2d1dede9",
+      "delivery_sha256": "6b394d938fd8c8ba4f9afc94be43def55223d5097a1d9f9759965e1e2d1dede9",
+      "byte_identical_to_source": true,
+      "alpha_values": [
+        0,
+        255
+      ]
+    },
+    {
+      "file": "shiba_idle_left_00.png",
+      "character": "shiba",
+      "action": "idle",
+      "direction": "left",
+      "canvas_size_px": [
+        48,
+        48
+      ],
+      "foot_anchor_px": [
+        24,
+        44
+      ],
+      "visible_bounds_exclusive_px": [
+        12,
+        16,
+        37,
+        44
+      ],
+      "visible_body_size_px": [
+        25,
+        28
+      ],
+      "frame_order": [
+        0
+      ],
+      "frame_count": 1,
+      "frame_duration_ms": null,
+      "duration_mode": "hold_until_state_change",
+      "loop": false,
+      "ready_for_static_import": true,
+      "status": "completed_adopted_static",
+      "display_scale": 1.0,
+      "rescale_64_percent": false,
+      "source_processed_file": "art-production/stage-1-v2/processed/c65/idle_left_00.png",
+      "source_sha256": "65a7c12c0bc1f742248e6ba2380e453d466d23b636121495cee35a53fc769105",
+      "delivery_sha256": "65a7c12c0bc1f742248e6ba2380e453d466d23b636121495cee35a53fc769105",
+      "byte_identical_to_source": true,
+      "alpha_values": [
+        0,
+        255
+      ]
+    },
+    {
+      "file": "shiba_idle_front_00.png",
+      "character": "shiba",
+      "action": "idle",
+      "direction": "front",
+      "canvas_size_px": [
+        48,
+        48
+      ],
+      "foot_anchor_px": [
+        24,
+        44
+      ],
+      "visible_bounds_exclusive_px": [
+        16,
+        16,
+        33,
+        44
+      ],
+      "visible_body_size_px": [
+        17,
+        28
+      ],
+      "frame_order": [
+        0
+      ],
+      "frame_count": 1,
+      "frame_duration_ms": null,
+      "duration_mode": "hold_until_state_change",
+      "loop": false,
+      "ready_for_static_import": true,
+      "status": "completed_adopted_static",
+      "display_scale": 1.0,
+      "rescale_64_percent": false,
+      "source_processed_file": "art-production/stage-1-v2/processed/c65/idle_front_00.png",
+      "source_sha256": "72d441d20b63e0df23fba270ac26722ef1f71142d0ebc33b3018bcb68a6092aa",
+      "delivery_sha256": "72d441d20b63e0df23fba270ac26722ef1f71142d0ebc33b3018bcb68a6092aa",
+      "byte_identical_to_source": true,
+      "alpha_values": [
+        0,
+        255
+      ]
+    }
+  ],
+  "review_files": [
+    {
+      "file": "review/comparison-v2.png",
+      "purpose": "comparison_only_not_runtime_texture",
+      "selected_row": "C (third row); A/B are unselected historical comparisons",
+      "sha256": "83ce1bcc76b3656f272ae057f9be6d0229190799ed7d204ed2c7e0fcf6ccfe53"
+    }
+  ],
+  "import_rules": {
+    "native_scale": 1.0,
+    "filter": "nearest",
+    "preserve_transparent_margins": true,
+    "white_key_shader": false,
+    "crop_to_visible_bounds": false,
+    "position_formula": "top_left_px = desired_foot_world_px - foot_anchor_px",
+    "shiba_scale_warning": "Already processed to approximately28px body height. DO NOT multiply by0.64 again.",
+    "keeper_values_verified": {
+      "frame": [
+        32,
+        48
+      ],
+      "anchor": [
+        16,
+        44
+      ],
+      "visible_body": [
+        25,
+        42
+      ]
+    }
+  },
+  "not_completed_for_this_delivery": {
+    "keeper": [
+      "walk finalization (preview exists)",
+      "left/front final static beyond requested v1 right",
+      "settling",
+      "sleep",
+      "wake",
+      "tool use"
+    ],
+    "shiba": [
+      "walk finalization (preview exists)",
+      "settling/rest",
+      "wake"
+    ]
+  },
+  "verification": {
+    "all_four_byte_identical_to_processed_sources": true,
+    "dimensions_match": true,
+    "foot_baseline_matches": true,
+    "shiba_three_directions_body_height_px": 28,
+    "shiba_three_directions_baseline_px": 44,
+    "current_game_visual_verification": false
+  },
+  "no_game_code_changes": true
+}
