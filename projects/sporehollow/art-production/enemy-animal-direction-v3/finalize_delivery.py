@@ -18,7 +18,7 @@ palettes={'salaryman':'青灰・生成りの曇り眼鏡・くすんだ赤','des
 accepted={'martial_artist','tamer','doberman','bullfrog'};posemap={}
 for p in poses:
  n=p['character'];i=p['key_pose'];p['action']=labels[n][i];p['direction']='right';p['runtime_ready']=False
- p['design_status']='accepted_v2_preserved' if n in accepted or (n=='hedgehog' and i in [0,1,2,5]) else 'revision_v3_pending_review'
+ p['design_status']='accepted_v2_preserved' if n in accepted or (n=='hedgehog' and i in [0,1,2,5]) else 'accepted_v3'
  p['foot_baseline_y']=p['anchor'][1];p['contains_cast_shadow']=False
  if n=='destroyer' and i==3:p['contact_note']='Boot soles y64; low fist extends to y66. Lowest opaque pixel is not the floor.'
  posemap[p['file']]=p
@@ -59,23 +59,24 @@ for n in ['collar','healing_berry']:
  frozen.append({'file':q.relative_to(OUT).as_posix(),'sha256':sha(q)})
 actions={'phone_take':('salaryman',[1,2,3]),'phone_call':('salaryman',[4]),'phone_put':('salaryman',[5,6]),'destroyer_swing':('destroyer',[0,1,2,3,4,5]),'bow_start':('martial_artist',[0,1,2,3]),'bow_end':('martial_artist',[3,0,2,6]),'ninja_throw':('ninja',[0,1,2,3]),'tamer_lure':('tamer',[1,2,3,4,4,5]),'runner_fatigue':('runner',[1,2,3,4,5,1]),'bullfrog_tongue':('bullfrog',[0,1,1,2,2,0]),'bullfrog_alarm':('bullfrog',[3,4,5,0]),'hedgehog_defense':('hedgehog',[0,1,2,3,4,5])}
 actions={k:{'character':n,'keys':idx,'frame_duration_ms':None,'loop':False,'status':'storyboard_order_only_not_animation'} for k,(n,idx) in actions.items()}
-manifest={'schema_version':1,'delivery':'enemy_animal_direction_v3','date':'2026-10-06','branch':'codex/sporehollow-art-assets','status':'direction_review_ready_not_runtime_delivery','base_art_commit':'5848c4f8aedde4acfa33586f82c3397d1b6d58a0','stop_condition':'修正5体の採用/修正/別案をユーザーが判断するまで正式制作へ進まない','coordinate_convention':'top-left origin; bbox right/bottom exclusive; foot anchor is ground contact, not lowest opaque pixel','characters':chars,'actions':actions,
+manifest={'schema_version':1,'delivery':'enemy_animal_direction_v3','date':'2026-10-06','branch':'codex/sporehollow-art-assets','status':'design_adopted_motion_production_authorized','base_art_commit':'5848c4f8aedde4acfa33586f82c3397d1b6d58a0','stop_condition':'採用済み。デザインを大きく変える場合だけユーザーへ確認する','coordinate_convention':'top-left origin; bbox right/bottom exclusive; foot anchor is ground contact, not lowest opaque pixel','characters':chars,'actions':actions,
 'layers':{'destroyer':['actor_with_permanent_wrapped_chain','separate_extended_chain','separate_iron_ball'],'bullfrog':['tongue_wrap_back','target_actor','frog_actor','tongue_body','tongue_wrap_front','tongue_tip','optional_existing_sound_wave'],'ninja':['actor','independent_shuriken_or_dagger','existing_scroll_drop']},
 'attachments_proposed':{'destroyer_grip_px':[[48,49],[14,38],[25,11],[57,64],[70,43],[46,51]],'destroyer_visual_contact_key':3,'ninja_visual_release_key':2,'bullfrog_mouth_px':{'key_01':[53,31],'key_02':[57,33]},'bullfrog_review_range':{'cell_width_px':48,'anchor_cell_distance':3,'anchor_distance_px':144,'note':'足元38→182。舌の見える長さは体幅を除く。射程ロジック未編集。'},'runner_doberman_review_anchor_distance_px':61},
 'background':{'source':'review/current/story/06_ranch_idol_and_forest.png in implementation checkout','snapshot':'../../art-production/enemy-animal-direction-v3/references/farm-day.png','sha256':sha(SRC/'references/farm-day.png'),'game_launched':False,'in_game_verified':False},
 'spec_snapshots':[{'file':n,'sha256':sha(SRC/'references'/n)} for n in ['ART_SPEC.md','ENEMIES.md','ANIMALS.md','ITEMS.md']],
 'approved_existing_references':refs,'preserved_v2_files':frozen,'assets':assets,'unfinished':['正式な全方向の歩行・攻撃・被弾・退散等','フレーム時間・ループ・接触判定の確定','鎖と巻き付きの連続補間','ゲーム取り込みと隔離描画検証']}
+manifest['adoption'] = {'date': '2026-10-06', 'user_message': '修正分採用で！', 'revised_characters': ['salaryman', 'destroyer', 'ninja', 'runner', 'hedgehog'], 'all_previous_acceptances_preserved': True, 'scope': 'design and special-motion direction; runtime animations delivered separately'}
 (OUT/'manifest.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2),encoding='utf-8')
 rows=[]
 for n,v in chars.items():
- c=v['canvas'];a=v['anchor'];h=v['standing_body_height_px'];status='v2方向維持' if n in accepted else ('通常v2 / 迎撃v3確認待ち' if n=='hedgehog' else 'v3確認待ち')
+ c=v['canvas'];a=v['anchor'];h=v['standing_body_height_px'];status='v2方向維持' if n in accepted else ('通常v2 / 迎撃v3採用済み' if n=='hedgehog' else 'v3採用済み')
  rows.append(f"| {v['name_ja']} | {c[0]}×{c[1]} | ({a[0]},{a[1]}) | {h}px | {palettes[n]} | {status} |")
 previews=sorted([p for d in ['preview','motion_storyboards'] for p in (OUT/d).glob('*.png')],key=lambda p:p.name)
 links='\n'.join(f"- [{p.name}]({p.relative_to(OUT).as_posix()})" for p in previews)
 doc="""# 第一段階 v3 — 方向確認用 HANDOFF
 
-**基本デザインと特殊モーションの方向確認準備完了。正式素材完成ではありません。**
-修正5体（サラリーマン、デストロイマン、忍者、ランナー、ハリネズミ迎撃）の確認待ちです。正式アニメーションの量産へ進んでいません。
+**基本デザインと特殊モーションの方向性を採用済み。正式動作は別セットで順次納品します。**
+2026-10-06、ユーザーの「修正分採用で！」により修正5体を採用。以前の採用分も維持し、この絵柄・寸法を正式動作制作の基準にします。ここに保存した絵コンテ自体は正式アニメーションではありません。
 
 - ブランチ: codex/sporehollow-art-assets
 - 納品: projects/sporehollow/art_delivery/enemy_animal_direction_v3/
@@ -86,7 +87,7 @@ doc="""# 第一段階 v3 — 方向確認用 HANDOFF
 ## 最新の変更と維持
 
 サラリーマンは添付の顔の面構成を参考に、曇り眼鏡・細い手足・前へ出る腹。デストロイマン（仕様ID destroyer）は革の継ぎ目、金具、暗いゴーグル、真鍮の鼻先のある覆面へ。忍者は目を完全に隠し、脱力した姿勢から素早く投げる案。
-ランナーは小さい頭と長い首/手足。身体高54pxは比較用の仮値で、主人公42pxに対して高い頭身を優先しました。
+ランナーは小さい頭と長い首/手足。身体高54pxを採用。主人公42pxに対して高い頭身を維持します。
 ハリネズミは通常18pxを残し、迎撃だけ変更。棘を立てたキー21px、丸い防御キー23pxです。
 
 「他はいい」に基づき、武闘家、ムッツゴロウ、ドーベルマン、描き直したウシガエル、首輪、薄黄色一粒きのみ、ハリネズミ通常/被弾/縮む/戻るはv2加工済みPNGを維持。既存主人公v1・柴犬C・鶏・猫・誘拐者・商人も未変更。ハッシュ結果はQA.jsonとmanifest.jsonへ記録。
@@ -97,7 +98,7 @@ doc="""# 第一段階 v3 — 方向確認用 HANDOFF
 
 LINKS
 
-## 暫定規格
+## 採用基準
 
 身体高は通常キーの不透明bbox高。各キーの実bboxはmanifestへ記録。透明余白は切り詰めないこと。
 
@@ -134,9 +135,9 @@ ART_SPEC / ENEMIES / ANIMALS / ITEMSは開始時の実装側内容を保存し�
 
 ## 未確定・次工程
 
-修正5体の採用/修正/別案、特にランナー54pxの高さ・細い手足の読みやすさが確認点です。
+修正5体を含むデザインは採用済み。通常の動作追加で再承認は求めません。大きなデザイン変更が必要な場合だけ確認します。
 正式な全方向歩行/攻撃/被弾/退散、通話口パク、鎖の連続回転、巻き付きの距離/向き補間、時間とループは未完成。
-採用後に正式制作へ進みます。ゲームコード・本番シーン・UID・設定は未編集。取り込み、座標、描画順、隔離描画検証は実装担当へ引き継ぎます。
+正式制作へ進み、使える動作セットから独立した納品フォルダ・コミットで受け渡します。ゲームコード・本番シーン・UID・設定は未編集。取り込み、座標、描画順、隔離描画検証は実装担当へ引き継ぎます。
 """
 (OUT/'HANDOFF.md').write_text(doc.replace('LINKS',links).replace('ROWS','\n'.join(rows)),encoding='utf-8')
 qa={'status':'pass','png_count':len(assets),'native_rgba_draft_count':native_count,'review_sheet_count':len(previews),'preserved_v2_png_count':len(frozen),'existing_reference_hash_count':len(refs),'alpha':'native PNGs binary 0/255','prototype_only':True,'game_launched':False,'runtime_verification':False}
