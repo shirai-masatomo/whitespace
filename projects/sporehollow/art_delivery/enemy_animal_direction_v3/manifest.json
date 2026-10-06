@@ -3297,9 +3297,8 @@
     }
   ],
   "unfinished": [
-    "正式な全方向の歩行・攻撃・被弾・退散等",
-    "フレーム時間・ループ・接触判定の確定",
-    "鎖と巻き付きの連続補間",
+    "本フォルダの絵コンテは正式動作ではない。FORMAL_DELIVERIESの個別納品を使用",
+    "正面・背面の専用動作、レベル差分は今回の横向き契約外",
     "ゲーム取り込みと隔離描画検証"
   ],
   "source_commit": "e9bcfbf697cc7e97ff09f9d15b7ef7daecb00226",
@@ -3325,6 +3324,156 @@
     {
       "path": "../salaryman_motion_v1/",
       "scope": "salaryman left/right idle, walk, hurt, phone_take/call/put, retreat"
+    },
+    {
+      "id": "destroyer",
+      "path": "../destroyer_motion_v1/",
+      "commit": "13674fb364d0697711b51e8f541a2eb938527834",
+      "runtime_png_count": 78,
+      "action_count": 6,
+      "complete_actions": [
+        "idle",
+        "walk",
+        "hurt",
+        "retreat",
+        "iron_ball_windup",
+        "iron_ball_hit"
+      ],
+      "in_game_verified": false
+    },
+    {
+      "id": "martial_artist",
+      "path": "../martial_artist_motion_v1/",
+      "commit": "335ebc44a1775a1eb92b5c51658d3f57bf122053",
+      "runtime_png_count": 54,
+      "action_count": 9,
+      "complete_actions": [
+        "idle",
+        "walk",
+        "hurt",
+        "retreat",
+        "bow",
+        "bow_end",
+        "stance",
+        "attack",
+        "kick"
+      ],
+      "in_game_verified": false
+    },
+    {
+      "id": "ninja",
+      "path": "../ninja_motion_v1/",
+      "commit": "6dede82e1b5fbdd6d44dd8d914ad23ec56b556ff",
+      "runtime_png_count": 56,
+      "action_count": 6,
+      "complete_actions": [
+        "idle",
+        "walk",
+        "hurt",
+        "retreat",
+        "shuriken",
+        "dagger"
+      ],
+      "in_game_verified": false
+    },
+    {
+      "id": "animal_tamer",
+      "path": "../animal_tamer_motion_v1/",
+      "commit": "c2296eb44590f15fc94cf29fe8e193becc957dda",
+      "runtime_png_count": 48,
+      "action_count": 7,
+      "complete_actions": [
+        "idle",
+        "walk",
+        "hurt",
+        "retreat",
+        "tame",
+        "tame_end",
+        "lead"
+      ],
+      "in_game_verified": false
+    },
+    {
+      "id": "runner",
+      "path": "../runner_motion_v1/",
+      "commit": "bfd62008579d7ba22351228f2c0ea2c63d21da64",
+      "runtime_png_count": 48,
+      "action_count": 8,
+      "complete_actions": [
+        "idle",
+        "run",
+        "hurt",
+        "retreat",
+        "tired_enter",
+        "tired",
+        "tired_exit",
+        "attack"
+      ],
+      "in_game_verified": false
+    },
+    {
+      "id": "doberman",
+      "path": "../doberman_motion_v1/",
+      "commit": "5026a91ec06d7876db63bed57e92c1468abd3161",
+      "runtime_png_count": 36,
+      "action_count": 6,
+      "complete_actions": [
+        "idle",
+        "walk",
+        "run",
+        "attack",
+        "hurt",
+        "death"
+      ],
+      "in_game_verified": false
+    },
+    {
+      "id": "bullfrog",
+      "path": "../bullfrog_motion_v1/",
+      "commit": "10269ec50ebc5b6dd0edf26612f7d5054eb27458",
+      "runtime_png_count": 44,
+      "action_count": 7,
+      "complete_actions": [
+        "idle",
+        "move",
+        "tongue_extend",
+        "tongue",
+        "tongue_retract",
+        "croak",
+        "hurt"
+      ],
+      "in_game_verified": false
+    },
+    {
+      "id": "hedgehog",
+      "path": "../hedgehog_motion_v1/",
+      "commit": "a8a427c490a0915027cbc2cbedebcdbf76a8010b",
+      "runtime_png_count": 32,
+      "action_count": 6,
+      "complete_actions": [
+        "idle",
+        "move",
+        "defense_enter",
+        "defense",
+        "defense_exit",
+        "hurt"
+      ],
+      "in_game_verified": false
+    }
+  ],
+  "formal_delivery_index": "FORMAL_DELIVERIES.md",
+  "formal_overview": [
+    {
+      "file": "preview/formal_motion_overview.png",
+      "sha256": "697a92137da059f8a7d7e6feb50d2f0e35768a537f26672ef45327e3334a28e1",
+      "review_only": true,
+      "in_game_verified": false
+    },
+    {
+      "file": "preview/formal_motion_overview.gif",
+      "sha256": "8da127e82ca5a6c575ea1e1ef633924d20fec82505bc2760581189b6aa7309bd",
+      "review_only": true,
+      "in_game_verified": false
     }
   ]
 }

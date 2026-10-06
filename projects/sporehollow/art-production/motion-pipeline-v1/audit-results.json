@@ -1,0 +1,226 @@
+{
+  "status": "pass",
+  "sets": 8,
+  "runtime_png_count": 396,
+  "action_count": 55,
+  "results": [
+    {
+      "id": "destroyer",
+      "runtime_png_count": 78,
+      "action_count": 6,
+      "required_action_ids": [
+        "idle",
+        "walk",
+        "iron_ball_windup",
+        "iron_ball_hit",
+        "hurt",
+        "retreat"
+      ],
+      "hashes_alpha_dimensions_mirrors_actions": "pass",
+      "adopted_idle_unchanged": true,
+      "weapon_grips_on_opaque_body": "pass",
+      "preview_gifs": [
+        {
+          "file": "motion.gif",
+          "decoded_frames": 37,
+          "duration_ms": 6230
+        },
+        {
+          "file": "special_motion.gif",
+          "decoded_frames": 9,
+          "duration_ms": 1400
+        }
+      ],
+      "in_game_verified": false
+    },
+    {
+      "id": "martial_artist",
+      "runtime_png_count": 54,
+      "action_count": 9,
+      "required_action_ids": [
+        "idle",
+        "walk",
+        "bow",
+        "stance",
+        "attack",
+        "hurt",
+        "retreat"
+      ],
+      "hashes_alpha_dimensions_mirrors_actions": "pass",
+      "adopted_idle_unchanged": true,
+      "weapon_grips_on_opaque_body": "not applicable",
+      "preview_gifs": [
+        {
+          "file": "motion.gif",
+          "decoded_frames": 48,
+          "duration_ms": 7980
+        }
+      ],
+      "in_game_verified": false
+    },
+    {
+      "id": "ninja",
+      "runtime_png_count": 56,
+      "action_count": 6,
+      "required_action_ids": [
+        "idle",
+        "walk",
+        "shuriken",
+        "dagger",
+        "hurt",
+        "retreat"
+      ],
+      "hashes_alpha_dimensions_mirrors_actions": "pass",
+      "adopted_idle_unchanged": true,
+      "weapon_grips_on_opaque_body": "pass",
+      "preview_gifs": [
+        {
+          "file": "motion.gif",
+          "decoded_frames": 39,
+          "duration_ms": 5500
+        },
+        {
+          "file": "special_motion.gif",
+          "decoded_frames": 16,
+          "duration_ms": 2240
+        }
+      ],
+      "in_game_verified": false
+    },
+    {
+      "id": "animal_tamer",
+      "runtime_png_count": 48,
+      "action_count": 7,
+      "required_action_ids": [
+        "idle",
+        "walk",
+        "tame",
+        "lead",
+        "hurt",
+        "retreat"
+      ],
+      "hashes_alpha_dimensions_mirrors_actions": "pass",
+      "adopted_idle_unchanged": true,
+      "weapon_grips_on_opaque_body": "not applicable",
+      "preview_gifs": [
+        {
+          "file": "motion.gif",
+          "decoded_frames": 47,
+          "duration_ms": 7670
+        },
+        {
+          "file": "special_motion.gif",
+          "decoded_frames": 19,
+          "duration_ms": 3220
+        }
+      ],
+      "in_game_verified": false
+    },
+    {
+      "id": "runner",
+      "runtime_png_count": 48,
+      "action_count": 8,
+      "required_action_ids": [
+        "idle",
+        "run",
+        "tired",
+        "attack",
+        "hurt",
+        "retreat"
+      ],
+      "hashes_alpha_dimensions_mirrors_actions": "pass",
+      "adopted_idle_unchanged": true,
+      "weapon_grips_on_opaque_body": "not applicable",
+      "preview_gifs": [
+        {
+          "file": "motion.gif",
+          "decoded_frames": 46,
+          "duration_ms": 8080
+        },
+        {
+          "file": "special_motion.gif",
+          "decoded_frames": 22,
+          "duration_ms": 3700
+        }
+      ],
+      "in_game_verified": false
+    },
+    {
+      "id": "doberman",
+      "runtime_png_count": 36,
+      "action_count": 6,
+      "required_action_ids": [
+        "idle",
+        "walk",
+        "run",
+        "attack",
+        "hurt",
+        "death"
+      ],
+      "hashes_alpha_dimensions_mirrors_actions": "pass",
+      "adopted_idle_unchanged": true,
+      "weapon_grips_on_opaque_body": "not applicable",
+      "preview_gifs": [
+        {
+          "file": "motion.gif",
+          "decoded_frames": 36,
+          "duration_ms": 5830
+        }
+      ],
+      "in_game_verified": false
+    },
+    {
+      "id": "bullfrog",
+      "runtime_png_count": 44,
+      "action_count": 7,
+      "required_action_ids": [
+        "idle",
+        "move",
+        "tongue",
+        "croak",
+        "hurt"
+      ],
+      "hashes_alpha_dimensions_mirrors_actions": "pass",
+      "adopted_idle_unchanged": true,
+      "weapon_grips_on_opaque_body": "not applicable",
+      "preview_gifs": [
+        {
+          "file": "motion.gif",
+          "decoded_frames": 35,
+          "duration_ms": 6710
+        },
+        {
+          "file": "special_motion.gif",
+          "decoded_frames": 12,
+          "duration_ms": 2640
+        }
+      ],
+      "in_game_verified": false
+    },
+    {
+      "id": "hedgehog",
+      "runtime_png_count": 32,
+      "action_count": 6,
+      "required_action_ids": [
+        "idle",
+        "move",
+        "defense_enter",
+        "defense",
+        "hurt"
+      ],
+      "hashes_alpha_dimensions_mirrors_actions": "pass",
+      "adopted_idle_unchanged": true,
+      "weapon_grips_on_opaque_body": "not applicable",
+      "preview_gifs": [
+        {
+          "file": "motion.gif",
+          "decoded_frames": 30,
+          "duration_ms": 5370
+        }
+      ],
+      "in_game_verified": false
+    }
+  ],
+  "game_launched": false,
+  "game_code_modified": false
+}
