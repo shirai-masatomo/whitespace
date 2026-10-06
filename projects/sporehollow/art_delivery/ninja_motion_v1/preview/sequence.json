@@ -1,0 +1,90 @@
+{
+  "review_only": true,
+  "in_game_verified": false,
+  "frames": [
+    {
+      "action": "shuriken",
+      "frame_index": 0,
+      "preview_duration_ms": 140
+    },
+    {
+      "action": "shuriken",
+      "frame_index": 1,
+      "preview_duration_ms": 140
+    },
+    {
+      "action": "shuriken",
+      "frame_index": 2,
+      "preview_duration_ms": 140
+    },
+    {
+      "action": "shuriken",
+      "frame_index": 3,
+      "preview_duration_ms": 140
+    },
+    {
+      "action": "shuriken",
+      "frame_index": 4,
+      "preview_duration_ms": 140
+    },
+    {
+      "action": "dagger",
+      "frame_index": 0,
+      "preview_duration_ms": 140
+    },
+    {
+      "action": "dagger",
+      "frame_index": 1,
+      "preview_duration_ms": 140
+    },
+    {
+      "action": "dagger",
+      "frame_index": 2,
+      "preview_duration_ms": 140
+    },
+    {
+      "action": "dagger",
+      "frame_index": 3,
+      "preview_duration_ms": 140
+    },
+    {
+      "action": "hurt",
+      "frame_index": 0,
+      "preview_duration_ms": 140
+    },
+    {
+      "action": "hurt",
+      "frame_index": 1,
+      "preview_duration_ms": 140
+    },
+    {
+      "action": "hurt",
+      "frame_index": 2,
+      "preview_duration_ms": 140
+    },
+    {
+      "action": "retreat",
+      "frame_index": 0,
+      "preview_duration_ms": 140,
+      "scroll_spawn": "one separate drop, held while ninja leaves"
+    },
+    {
+      "action": "retreat",
+      "frame_index": 1,
+      "preview_duration_ms": 140,
+      "scroll_spawn": "one separate drop, held while ninja leaves"
+    },
+    {
+      "action": "retreat",
+      "frame_index": 2,
+      "preview_duration_ms": 140,
+      "scroll_spawn": "one separate drop, held while ninja leaves"
+    },
+    {
+      "action": "retreat",
+      "frame_index": 3,
+      "preview_duration_ms": 140,
+      "scroll_spawn": "one separate drop, held while ninja leaves"
+    }
+  ]
+}

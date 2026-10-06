@@ -1,0 +1,90 @@
+[
+  {
+    "source_cell": 0,
+    "bbox": [
+      24,
+      16,
+      44,
+      50
+    ],
+    "scale": 0.10625,
+    "head_reused": true
+  },
+  {
+    "source_cell": 1,
+    "bbox": [
+      24,
+      16,
+      45,
+      50
+    ],
+    "scale": 0.10625,
+    "head_reused": true
+  },
+  {
+    "source_cell": 2,
+    "bbox": [
+      24,
+      16,
+      45,
+      50
+    ],
+    "scale": 0.10625,
+    "head_reused": true
+  },
+  {
+    "source_cell": 3,
+    "bbox": [
+      24,
+      16,
+      44,
+      50
+    ],
+    "scale": 0.10625,
+    "head_reused": true
+  },
+  {
+    "source_cell": 4,
+    "bbox": [
+      18,
+      17,
+      42,
+      50
+    ],
+    "scale": 0.10625,
+    "head_reused": true
+  },
+  {
+    "source_cell": 5,
+    "bbox": [
+      22,
+      16,
+      44,
+      50
+    ],
+    "scale": 0.10625,
+    "head_reused": true
+  },
+  {
+    "source_cell": 6,
+    "bbox": [
+      20,
+      17,
+      47,
+      50
+    ],
+    "scale": 0.10625,
+    "head_reused": true
+  },
+  {
+    "source_cell": 7,
+    "bbox": [
+      18,
+      17,
+      48,
+      50
+    ],
+    "scale": 0.10625,
+    "head_reused": true
+  }
+]
