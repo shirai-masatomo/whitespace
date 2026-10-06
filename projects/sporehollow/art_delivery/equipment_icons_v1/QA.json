@@ -1,0 +1,12 @@
+{
+  "status": "pass",
+  "native_png_count": 2,
+  "dimensions": "32x32",
+  "alpha_values": [
+    0,
+    255
+  ],
+  "adopted_source_hash_match_count": 2,
+  "game_launched": false,
+  "in_game_verified": false
+}
