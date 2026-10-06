@@ -1,0 +1,285 @@
+{
+	"checks": [
+		{
+			"check": "Rarity safely migrates missing/legacy values",
+			"passed": true
+		},
+		{
+			"check": "Rescue is fixed, not rollable",
+			"passed": true
+		},
+		{
+			"check": "Day1 fixed kidnapper only",
+			"passed": true
+		},
+		{
+			"check": "Table deterministic",
+			"passed": true
+		},
+		{
+			"check": "Hybrid contains fixed and drawn slots",
+			"passed": true
+		},
+		{
+			"check": "Low karma excludes Infected",
+			"passed": true
+		},
+		{
+			"check": "Low karma excludes Mutation",
+			"passed": true
+		},
+		{
+			"check": "Low karma excludes Cult",
+			"passed": true
+		},
+		{
+			"check": "Low karma excludes Military",
+			"passed": true
+		},
+		{
+			"check": "Low karma excludes Alien",
+			"passed": true
+		},
+		{
+			"check": "Morning reset keeps encounter plan and entry directions",
+			"passed": true
+		},
+		{
+			"check": "Low karma route does not accept obsolete fixed-gold prayer",
+			"passed": true
+		},
+		{
+			"check": "Morning individual stock reproducible",
+			"passed": true
+		},
+		{
+			"check": "Individual seed stable shop",
+			"passed": true
+		},
+		{
+			"check": "Individual seed stable idol",
+			"passed": true
+		},
+		{
+			"check": "Separate rarity weights and low shop bonus rate",
+			"passed": true
+		},
+		{
+			"check": "Idol animal reward pool always excludes Shiba",
+			"passed": true
+		},
+		{
+			"check": "Destroyer first adjacent hit 4",
+			"passed": true
+		},
+		{
+			"check": "Destroyer second hit breaks soil wall",
+			"passed": true
+		},
+		{
+			"check": "Destroyer structural priority statistically follows category weight",
+			"passed": true
+		},
+		{
+			"check": "Martial artist bows before combat without invulnerability",
+			"passed": true
+		},
+		{
+			"check": "Bowing enemy can be damaged",
+			"passed": true
+		},
+		{
+			"check": "Nonlethal keeper hit stops at 1 and bows after",
+			"passed": true
+		},
+		{
+			"check": "Nonlethal mortal animal remains alive",
+			"passed": true
+		},
+		{
+			"check": "Salaryman can start delayed call from damage",
+			"passed": true
+		},
+		{
+			"check": "One successful call schedules one reinforcement",
+			"passed": true
+		},
+		{
+			"check": "Successful caller never calls twice",
+			"passed": true
+		},
+		{
+			"check": "Completed call survives caller defeat",
+			"passed": true
+		},
+		{
+			"check": "Reinforcement starts outside forest boundary",
+			"passed": true
+		},
+		{
+			"check": "Salaryman drops 2-5 gold exactly once",
+			"passed": true
+		},
+		{
+			"check": "Ninja cannot throw through wall",
+			"passed": true
+		},
+		{
+			"check": "Visible ranged ninja throw deals 7",
+			"passed": true
+		},
+		{
+			"check": "Ninja always drops exactly one usable scroll",
+			"passed": true
+		},
+		{
+			"check": "Shiba resistance halves temporary tame loss, base unchanged",
+			"passed": true
+		},
+		{
+			"check": "Temporary loyalty recovers with simulation time",
+			"passed": true
+		},
+		{
+			"check": "Tamer leads low-loyalty animal without turning it into cargo",
+			"passed": true
+		},
+		{
+			"check": "Defeating tamer releases same animal in place",
+			"passed": true
+		},
+		{
+			"check": "Runner gets four-second fatigue without permanent speed rewrite",
+			"passed": true
+		},
+		{
+			"check": "Runner and Doberman share base speed",
+			"passed": true
+		},
+		{
+			"check": "Runner has seeded chance to schedule companion",
+			"passed": true
+		},
+		{
+			"check": "Enemy dog uses shared species stats and enters from exterior",
+			"passed": true
+		},
+		{
+			"check": "Shiba HP0 remains unconscious",
+			"passed": true
+		},
+		{
+			"check": "hen dies and leaves active roster",
+			"passed": true
+		},
+		{
+			"check": "cat dies and leaves active roster",
+			"passed": true
+		},
+		{
+			"check": "doberman dies and leaves active roster",
+			"passed": true
+		},
+		{
+			"check": "bullfrog dies and leaves active roster",
+			"passed": true
+		},
+		{
+			"check": "hedgehog dies and leaves active roster",
+			"passed": true
+		},
+		{
+			"check": "Only Shiba recovers later; mortal animals never revive",
+			"passed": true
+		},
+		{
+			"check": "Reactive hedgehog does not acquire on sight alone",
+			"passed": true
+		},
+		{
+			"check": "Frog warning activates reactive but never noncombatant",
+			"passed": true
+		},
+		{
+			"check": "Frog tongue stops visible enemy movement",
+			"passed": true
+		},
+		{
+			"check": "Spines reflect once per enemy per tick",
+			"passed": true
+		},
+		{
+			"check": "Collar rejected for non-dog",
+			"passed": true
+		},
+		{
+			"check": "Equip can be planned paused",
+			"passed": true
+		},
+		{
+			"check": "Paused equip does not move or consume",
+			"passed": true
+		},
+		{
+			"check": "Duplicate equip job rejected",
+			"passed": true
+		},
+		{
+			"check": "Local collar applies modifiers without rewriting base",
+			"passed": true
+		},
+		{
+			"check": "Unequip returns exactly one collar and removes only modifiers",
+			"passed": true
+		},
+		{
+			"check": "Berry consumes once after surviving half-HP hit and heals quarter max",
+			"passed": true
+		},
+		{
+			"check": "Berry never prevents lethal hit or revives unconscious Shiba",
+			"passed": true
+		},
+		{
+			"check": "Unseen spawned enemy stays unknown",
+			"passed": true
+		},
+		{
+			"check": "Sight reveals name only",
+			"passed": true
+		},
+		{
+			"check": "Observed action reveals behavior",
+			"passed": true
+		},
+		{
+			"check": "Defeat unlocks drop information",
+			"passed": true
+		},
+		{
+			"check": "Closed door blocks shuriken exactly like wall",
+			"passed": true
+		},
+		{
+			"check": "Ninja scroll collects once and applies real eligible skill",
+			"passed": true
+		},
+		{
+			"check": "Repeated collection never grants scroll twice",
+			"passed": true
+		},
+		{
+			"check": "Farm without surviving animals still finishes safely",
+			"passed": true
+		}
+	],
+	"idol_rare": 459,
+	"shop_bonus": 46,
+	"shop_rare": 97,
+	"target_distribution": {
+		"animal": 195,
+		"idol": 196,
+		"keeper": 211,
+		"structure": 1398
+	}
+}

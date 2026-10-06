@@ -1,6 +1,14 @@
 # ホイッスル牧場 — 最新レビュー
 
-## 最新：父の黄金像・森・祈り（2026-10-06）
+## 最新：低カルマ基準ルート K0〜K5（2026-10-06）
+
+**試遊版 c443e5b / 素材5848c4f8**。[実装・仮決定・未確認](progression/REVIEW.md) / [13代表画面](progression/SCREENS.md) / [ギャラリー](progression/index.html) / [8日運用](progression/progression-flow.json) / [ビルド](progression/build.json)。起動は [Play.cmd](../../Play.cmd)、ESCの版表示はc443e5b。レビュー保存コミットはゲームを変更しない。
+
+共通データ、低カルマ遭遇、敵6種Lv1、動物3種、柴犬以外の死亡、迎撃型、現地装備、既存本への敵図鑑を統合。既存770＋新規117検査、AI192試行、最終clean版の関連242検査、Windows出力と配布EXEの非対話GPUを確認。新敵/動物の正式素材は不足し仮表示。カテゴリ祈りは抽選サービスまでで、旧固定60Gの新規受付は停止。人間の難度評価・本番カルマ接続は残る。
+
+以下は**過去の対応版の証拠**で、現在の仕様・ビルドを示さない。
+
+## 前回：父の黄金像・森・祈り（2026-10-06）
 
 **試遊版 afb8e1b / 素材5848c4f8**。[実装・仮決定・検証・未確認](story/REVIEW.md) / [29画面](story/SCREENS.md) / [実画面ギャラリー](story/index.html) / [観察](story/story-observation.json) / [ビルド](story/build.json)。
 

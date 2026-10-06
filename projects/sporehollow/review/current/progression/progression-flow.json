@@ -1,0 +1,629 @@
+{
+  "abduction_path": [
+    {
+      "animal": [
+        5,
+        5
+      ],
+      "enemy": [
+        4,
+        5
+      ],
+      "tick": 1
+    },
+    {
+      "animal": [
+        5,
+        5
+      ],
+      "enemy": [
+        4,
+        5
+      ],
+      "tick": 2
+    },
+    {
+      "animal": [
+        5,
+        5
+      ],
+      "enemy": [
+        3,
+        5
+      ],
+      "tick": 3
+    },
+    {
+      "animal": [
+        5,
+        5
+      ],
+      "enemy": [
+        3,
+        5
+      ],
+      "tick": 4
+    },
+    {
+      "animal": [
+        5,
+        5
+      ],
+      "enemy": [
+        3,
+        5
+      ],
+      "tick": 5
+    },
+    {
+      "animal": [
+        4,
+        5
+      ],
+      "enemy": [
+        3,
+        5
+      ],
+      "tick": 6
+    },
+    {
+      "animal": [
+        4,
+        5
+      ],
+      "enemy": [
+        3,
+        5
+      ],
+      "tick": 7
+    },
+    {
+      "animal": [
+        4,
+        5
+      ],
+      "enemy": [
+        3,
+        5
+      ],
+      "tick": 8
+    },
+    {
+      "animal": [
+        4,
+        5
+      ],
+      "enemy": [
+        2,
+        5
+      ],
+      "tick": 9
+    },
+    {
+      "animal": [
+        4,
+        5
+      ],
+      "enemy": [
+        2,
+        5
+      ],
+      "tick": 10
+    },
+    {
+      "animal": [
+        3,
+        5
+      ],
+      "enemy": [
+        2,
+        5
+      ],
+      "tick": 11
+    },
+    {
+      "animal": [
+        3,
+        5
+      ],
+      "enemy": [
+        2,
+        5
+      ],
+      "tick": 12
+    },
+    {
+      "animal": [
+        3,
+        5
+      ],
+      "enemy": [
+        1,
+        5
+      ],
+      "tick": 13
+    },
+    {
+      "animal": [
+        3,
+        5
+      ],
+      "enemy": [
+        1,
+        5
+      ],
+      "tick": 14
+    },
+    {
+      "animal": [
+        2,
+        5
+      ],
+      "enemy": [
+        1,
+        5
+      ],
+      "tick": 15
+    },
+    {
+      "animal": [
+        2,
+        5
+      ],
+      "enemy": [
+        1,
+        5
+      ],
+      "tick": 16
+    },
+    {
+      "animal": [
+        2,
+        5
+      ],
+      "enemy": [
+        1,
+        5
+      ],
+      "tick": 17
+    },
+    {
+      "animal": [
+        2,
+        5
+      ],
+      "enemy": [
+        0,
+        5
+      ],
+      "tick": 18
+    },
+    {
+      "animal": [
+        2,
+        5
+      ],
+      "enemy": [
+        0,
+        5
+      ],
+      "tick": 19
+    },
+    {
+      "animal": [
+        1,
+        5
+      ],
+      "enemy": [
+        0,
+        5
+      ],
+      "tick": 20
+    },
+    {
+      "animal": [
+        1,
+        5
+      ],
+      "enemy": [
+        0,
+        5
+      ],
+      "tick": 21
+    },
+    {
+      "animal": [
+        1,
+        5
+      ],
+      "enemy": [
+        0,
+        5
+      ],
+      "tick": 22
+    },
+    {
+      "animal": [
+        1,
+        5
+      ],
+      "enemy": [
+        0,
+        5
+      ],
+      "tick": 23
+    },
+    {
+      "animal": [
+        0,
+        5
+      ],
+      "enemy": [
+        -1,
+        5
+      ],
+      "tick": 24
+    }
+  ],
+  "checks": [
+    {
+      "check": "Solid wall surface is a visible target",
+      "passed": true
+    },
+    {
+      "check": "Normal enemy step breaks soil wall with two timed hits",
+      "passed": true
+    },
+    {
+      "check": "Tamer physically crosses exterior boundary with animal",
+      "passed": true
+    },
+    {
+      "check": "Abduction keeps distinct cells and one-cell animal steps",
+      "passed": true
+    },
+    {
+      "check": "Enemy Doberman dies, never joins or revives",
+      "passed": true
+    },
+    {
+      "check": "Actual running accumulates fatigue",
+      "passed": true
+    },
+    {
+      "check": "Cancelling unexecuted equipment preserves inventory",
+      "passed": true
+    },
+    {
+      "check": "Missing stock at execution cancels without negative inventory",
+      "passed": true
+    },
+    {
+      "check": "Day 1 remains low-karma Human/Animal",
+      "passed": true
+    },
+    {
+      "check": "Day 2 remains low-karma Human/Animal",
+      "passed": true
+    },
+    {
+      "check": "Day 3 remains low-karma Human/Animal",
+      "passed": true
+    },
+    {
+      "check": "Day 4 remains low-karma Human/Animal",
+      "passed": true
+    },
+    {
+      "check": "Day 5 remains low-karma Human/Animal",
+      "passed": true
+    },
+    {
+      "check": "Day 6 remains low-karma Human/Animal",
+      "passed": true
+    },
+    {
+      "check": "Day 7 remains low-karma Human/Animal",
+      "passed": true
+    },
+    {
+      "check": "Day 8 remains low-karma Human/Animal",
+      "passed": true
+    },
+    {
+      "check": "Normal economy and fixed-tick play reaches morning after day8",
+      "passed": true
+    }
+  ],
+  "days": [
+    {
+      "animals": [
+        {
+          "hp": 25,
+          "id": 1,
+          "species": "shiba"
+        }
+      ],
+      "day": 1,
+      "encounters": [
+        "kidnapper"
+      ],
+      "gold": 65,
+      "history": [],
+      "karma": 0,
+      "result": "win",
+      "steps": 1079
+    },
+    {
+      "animals": [
+        {
+          "hp": 44,
+          "id": 1,
+          "species": "shiba"
+        }
+      ],
+      "day": 2,
+      "encounters": [
+        "salaryman",
+        "salaryman",
+        "salaryman"
+      ],
+      "gold": 79,
+      "history": [
+        {
+          "day": 2,
+          "equipment": {},
+          "id": 2,
+          "name": "",
+          "reason": "death",
+          "species": "bullfrog"
+        }
+      ],
+      "karma": 0,
+      "result": "win",
+      "steps": 1079
+    },
+    {
+      "animals": [
+        {
+          "hp": 44,
+          "id": 1,
+          "species": "shiba"
+        },
+        {
+          "hp": 55,
+          "id": 3,
+          "species": "doberman"
+        }
+      ],
+      "day": 3,
+      "encounters": [
+        "destroyer"
+      ],
+      "gold": 56,
+      "history": [
+        {
+          "day": 2,
+          "equipment": {},
+          "id": 2,
+          "name": "",
+          "reason": "death",
+          "species": "bullfrog"
+        }
+      ],
+      "karma": 0,
+      "result": "win",
+      "steps": 1079
+    },
+    {
+      "animals": [
+        {
+          "hp": 44,
+          "id": 1,
+          "species": "shiba"
+        },
+        {
+          "hp": 52,
+          "id": 3,
+          "species": "doberman"
+        },
+        {
+          "hp": 28,
+          "id": 4,
+          "species": "bullfrog"
+        }
+      ],
+      "day": 4,
+      "encounters": [
+        "salaryman",
+        "destroyer"
+      ],
+      "gold": 65,
+      "history": [
+        {
+          "day": 2,
+          "equipment": {},
+          "id": 2,
+          "name": "",
+          "reason": "death",
+          "species": "bullfrog"
+        }
+      ],
+      "karma": 0,
+      "result": "win",
+      "steps": 1079
+    },
+    {
+      "animals": [
+        {
+          "hp": 26,
+          "id": 1,
+          "species": "shiba"
+        },
+        {
+          "hp": 52,
+          "id": 3,
+          "species": "doberman"
+        },
+        {
+          "hp": 28,
+          "id": 4,
+          "species": "bullfrog"
+        },
+        {
+          "hp": 38,
+          "id": 5,
+          "species": "hedgehog"
+        }
+      ],
+      "day": 5,
+      "encounters": [
+        "martial_artist",
+        "salaryman"
+      ],
+      "gold": 78,
+      "history": [
+        {
+          "day": 2,
+          "equipment": {},
+          "id": 2,
+          "name": "",
+          "reason": "death",
+          "species": "bullfrog"
+        }
+      ],
+      "karma": 0,
+      "result": "win",
+      "steps": 1079
+    },
+    {
+      "animals": [
+        {
+          "hp": 32,
+          "id": 1,
+          "species": "shiba"
+        },
+        {
+          "hp": 44,
+          "id": 3,
+          "species": "doberman"
+        },
+        {
+          "hp": 29,
+          "id": 4,
+          "species": "bullfrog"
+        },
+        {
+          "hp": 38,
+          "id": 5,
+          "species": "hedgehog"
+        }
+      ],
+      "day": 6,
+      "encounters": [
+        "ninja",
+        "martial_artist"
+      ],
+      "gold": 126,
+      "history": [
+        {
+          "day": 2,
+          "equipment": {},
+          "id": 2,
+          "name": "",
+          "reason": "death",
+          "species": "bullfrog"
+        }
+      ],
+      "karma": 0,
+      "result": "win",
+      "steps": 1079
+    },
+    {
+      "animals": [
+        {
+          "hp": 32,
+          "id": 1,
+          "species": "shiba"
+        },
+        {
+          "hp": 36,
+          "id": 3,
+          "species": "doberman"
+        },
+        {
+          "hp": 29,
+          "id": 4,
+          "species": "bullfrog"
+        },
+        {
+          "hp": 38,
+          "id": 5,
+          "species": "hedgehog"
+        }
+      ],
+      "day": 7,
+      "encounters": [
+        "animal_tamer",
+        "martial_artist"
+      ],
+      "gold": 171,
+      "history": [
+        {
+          "day": 2,
+          "equipment": {},
+          "id": 2,
+          "name": "",
+          "reason": "death",
+          "species": "bullfrog"
+        }
+      ],
+      "karma": 0,
+      "result": "win",
+      "steps": 1079
+    },
+    {
+      "animals": [
+        {
+          "hp": 32,
+          "id": 1,
+          "species": "shiba"
+        },
+        {
+          "hp": 36,
+          "id": 3,
+          "species": "doberman"
+        },
+        {
+          "hp": 29,
+          "id": 4,
+          "species": "bullfrog"
+        },
+        {
+          "hp": 38,
+          "id": 5,
+          "species": "hedgehog"
+        }
+      ],
+      "day": 8,
+      "encounters": [
+        "runner",
+        "kidnapper"
+      ],
+      "gold": 213,
+      "history": [
+        {
+          "day": 2,
+          "equipment": {},
+          "id": 2,
+          "name": "",
+          "reason": "death",
+          "species": "bullfrog"
+        }
+      ],
+      "karma": 0,
+      "result": "win",
+      "steps": 1079
+    }
+  ]
+}

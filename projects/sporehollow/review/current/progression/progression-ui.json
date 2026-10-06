@@ -1,0 +1,547 @@
+{
+  "captures": [
+    {
+      "animal_id": -1,
+      "book": "",
+      "file": "01_morning.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": -1,
+      "book": "",
+      "file": "02_shop_individuals.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": -1,
+      "book": "",
+      "file": "03_doberman_detail.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": -1,
+      "book": "",
+      "file": "04_equipment_shop.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": -1,
+      "book": "",
+      "file": "05_collar_detail.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": 0,
+      "book": "",
+      "file": "06_enemy_unknown.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": 0,
+      "book": "",
+      "file": "07_enemy_seen.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": 0,
+      "book": "",
+      "file": "08_enemy_observed.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": 0,
+      "book": "",
+      "file": "09_enemy_defeated.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": 0,
+      "book": "turning_next",
+      "file": "book_turn_00.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": 0,
+      "book": "turning_next",
+      "file": "book_turn_01.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": 0,
+      "book": "turning_next",
+      "file": "book_turn_02.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": 1,
+      "book": "",
+      "file": "book_turn_03.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": 1,
+      "book": "",
+      "file": "book_turn_04.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": 1,
+      "book": "",
+      "file": "book_turn_05.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": 1,
+      "book": "",
+      "file": "book_turn_06.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": 1,
+      "book": "",
+      "file": "10_equipment_picker.png",
+      "group": 1,
+      "jobs": [],
+      "tick": 0,
+      "tool": "equip"
+    },
+    {
+      "animal_id": 1,
+      "book": "",
+      "file": "11_equipment_queued_paused.png",
+      "group": 1,
+      "jobs": [
+        {
+          "animal_id": 1,
+          "expected_equipment": {},
+          "id": 1,
+          "item_id": "collar",
+          "kind": "equip",
+          "pos": "(8, 13)",
+          "reserved": 0,
+          "resource": "",
+          "started": false,
+          "state": "pending"
+        }
+      ],
+      "tick": 0,
+      "tool": "equip"
+    },
+    {
+      "animal_id": 1,
+      "book": "",
+      "file": "12_equipped.png",
+      "group": 1,
+      "jobs": [],
+      "tick": 3,
+      "tool": "equip"
+    },
+    {
+      "animal_id": 1,
+      "book": "",
+      "file": "13_new_roles_placeholder.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 3,
+      "tool": ""
+    }
+  ],
+  "checks": [
+    {
+      "check": "Only isolated or headless rendering",
+      "passed": true
+    },
+    {
+      "check": "UI button exists: open_market",
+      "passed": true
+    },
+    {
+      "check": "UI button exists: shop_buy",
+      "passed": true
+    },
+    {
+      "check": "UI button exists: category_animals",
+      "passed": true
+    },
+    {
+      "check": "UI button exists: trade_doberman_-1",
+      "passed": true
+    },
+    {
+      "check": "UI button exists: close_market",
+      "passed": true
+    },
+    {
+      "check": "UI button exists: open_market",
+      "passed": true
+    },
+    {
+      "check": "UI button exists: shop_buy",
+      "passed": true
+    },
+    {
+      "check": "UI button exists: category_animals",
+      "passed": true
+    },
+    {
+      "check": "UI button exists: trade_doberman_-1",
+      "passed": true
+    },
+    {
+      "check": "Close/reopen keeps individual rarity and bonus skills",
+      "passed": true
+    },
+    {
+      "check": "UI button exists: confirm_trade",
+      "passed": true
+    },
+    {
+      "check": "UI button exists: close_market",
+      "passed": true
+    },
+    {
+      "check": "UI button exists: open_market",
+      "passed": true
+    },
+    {
+      "check": "UI button exists: shop_buy",
+      "passed": true
+    },
+    {
+      "check": "UI button exists: category_items",
+      "passed": true
+    },
+    {
+      "check": "UI button exists: trade_collar_-1",
+      "passed": true
+    },
+    {
+      "check": "UI button exists: confirm_trade",
+      "passed": true
+    },
+    {
+      "check": "UI button exists: close_market",
+      "passed": true
+    },
+    {
+      "check": "Real shop transactions buy new animal and equipment",
+      "passed": true
+    },
+    {
+      "check": "UI button exists: open_book",
+      "passed": true
+    },
+    {
+      "check": "UI button exists: book_enemies",
+      "passed": true
+    },
+    {
+      "check": "UI button exists: book_next",
+      "passed": true
+    },
+    {
+      "check": "Existing page turn changes enemy page safely",
+      "passed": true
+    },
+    {
+      "check": "Book closes to morning without world time",
+      "passed": true
+    },
+    {
+      "check": "Board selects original Shiba",
+      "passed": true
+    },
+    {
+      "check": "Equipment selection alone never executes",
+      "passed": true
+    },
+    {
+      "check": "UI button exists: equip",
+      "passed": true
+    },
+    {
+      "check": "UI button exists: equip_collar",
+      "passed": true
+    },
+    {
+      "check": "Paused local equipment queued exactly once",
+      "passed": true
+    },
+    {
+      "check": "Queued equipment reaches animal and executes",
+      "passed": true
+    },
+    {
+      "check": "New actors share existing farm scene",
+      "passed": true
+    }
+  ],
+  "events": [
+    {
+      "button": 1,
+      "ctrl": false,
+      "mouse": [
+        487.0,
+        513.0
+      ],
+      "tick": 0
+    },
+    {
+      "button": 1,
+      "ctrl": false,
+      "mouse": [
+        560.0,
+        428.0
+      ],
+      "tick": 0
+    },
+    {
+      "button": 1,
+      "ctrl": false,
+      "mouse": [
+        560.0,
+        354.0
+      ],
+      "tick": 0
+    },
+    {
+      "button": 1,
+      "ctrl": false,
+      "mouse": [
+        464.0,
+        446.0
+      ],
+      "tick": 0
+    },
+    {
+      "button": 1,
+      "ctrl": false,
+      "mouse": [
+        1078.5,
+        154.0
+      ],
+      "tick": 0
+    },
+    {
+      "button": 1,
+      "ctrl": false,
+      "mouse": [
+        487.0,
+        513.0
+      ],
+      "tick": 0
+    },
+    {
+      "button": 1,
+      "ctrl": false,
+      "mouse": [
+        560.0,
+        428.0
+      ],
+      "tick": 0
+    },
+    {
+      "button": 1,
+      "ctrl": false,
+      "mouse": [
+        560.0,
+        354.0
+      ],
+      "tick": 0
+    },
+    {
+      "button": 1,
+      "ctrl": false,
+      "mouse": [
+        464.0,
+        446.0
+      ],
+      "tick": 0
+    },
+    {
+      "button": 1,
+      "ctrl": false,
+      "mouse": [
+        1004.0,
+        591.0
+      ],
+      "tick": 0
+    },
+    {
+      "button": 1,
+      "ctrl": false,
+      "mouse": [
+        1078.5,
+        154.0
+      ],
+      "tick": 0
+    },
+    {
+      "button": 1,
+      "ctrl": false,
+      "mouse": [
+        487.0,
+        513.0
+      ],
+      "tick": 0
+    },
+    {
+      "button": 1,
+      "ctrl": false,
+      "mouse": [
+        560.0,
+        428.0
+      ],
+      "tick": 0
+    },
+    {
+      "button": 1,
+      "ctrl": false,
+      "mouse": [
+        944.0,
+        528.0
+      ],
+      "tick": 0
+    },
+    {
+      "button": 1,
+      "ctrl": false,
+      "mouse": [
+        464.0,
+        446.0
+      ],
+      "tick": 0
+    },
+    {
+      "button": 1,
+      "ctrl": false,
+      "mouse": [
+        1004.0,
+        591.0
+      ],
+      "tick": 0
+    },
+    {
+      "button": 1,
+      "ctrl": false,
+      "mouse": [
+        1078.5,
+        154.0
+      ],
+      "tick": 0
+    },
+    {
+      "button": 1,
+      "ctrl": false,
+      "mouse": [
+        835.0,
+        513.0
+      ],
+      "tick": 0
+    },
+    {
+      "button": 1,
+      "ctrl": false,
+      "mouse": [
+        532.0,
+        138.0
+      ],
+      "tick": 0
+    },
+    {
+      "button": 1,
+      "ctrl": false,
+      "mouse": [
+        970.0,
+        698.0
+      ],
+      "tick": 0
+    },
+    {
+      "button": 2,
+      "ctrl": false,
+      "mouse": [
+        700.0,
+        400.0
+      ],
+      "tick": 0
+    },
+    {
+      "button": 1,
+      "ctrl": false,
+      "mouse": [
+        448.0,
+        610.0
+      ],
+      "tick": 0
+    },
+    {
+      "button": 1,
+      "ctrl": false,
+      "mouse": [
+        705.0,
+        726.0
+      ],
+      "tick": 0
+    },
+    {
+      "button": 1,
+      "ctrl": false,
+      "mouse": [
+        456.0,
+        672.0
+      ],
+      "tick": 0
+    }
+  ],
+  "implementation_commit": "c443e5b63d6f0b694b2d0ea88a9e54e1b7703389",
+  "method": "Current game, real local input. Controlled day3/180G shop, role render fixtures explicitly marked. No user save."
+}

@@ -1,0 +1,91 @@
+{
+  "implementation_commit": "c443e5b63d6f0b694b2d0ea88a9e54e1b7703389",
+  "asset_delivery_commit": "5848c4f8aedde4acfa33586f82c3397d1b6d58a0",
+  "source": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\artifacts\\isolated\\20261006-174935-153",
+  "media": [
+    {
+      "file": "01_morning.png",
+      "sha256": "b9351c4e54520e0bec32dee1a3d13496591c831450dabf76180046c687d8d654"
+    },
+    {
+      "file": "02_shop_individuals.png",
+      "sha256": "d5081593c05f55ab55880a4eba45dfaf3699d54441d0dec62d3cb09a73015865"
+    },
+    {
+      "file": "03_doberman_detail.png",
+      "sha256": "1b8eca2b0ceedf68912c7a40ac308713fd64ee351a7332e72bdb9092326c8291"
+    },
+    {
+      "file": "04_equipment_shop.png",
+      "sha256": "f66428b3706d841ca6a26fc71947b13a4496f08a99e64634f0c2c852eb3a5e68"
+    },
+    {
+      "file": "05_collar_detail.png",
+      "sha256": "2e9cca27c7086229347eb071392da29d4e7e229aa777b0015da5684bbb96e35d"
+    },
+    {
+      "file": "06_enemy_unknown.png",
+      "sha256": "f915cfd3e0ee3c823bd495c21349f02704aab9fff1646870dc2b08f94be7f3a1"
+    },
+    {
+      "file": "07_enemy_seen.png",
+      "sha256": "60a489bac8799c154c265ad7c1802f5a800481a08a41646826ba82d04fe26b20"
+    },
+    {
+      "file": "08_enemy_observed.png",
+      "sha256": "f76c22cb0757c36d15b7d879b9b18be052b9deee0121805e96f9dbb279ffcff4"
+    },
+    {
+      "file": "09_enemy_defeated.png",
+      "sha256": "5404eaa634eaddd084fc5a35f009f33cf0735ac3972b27d43f9c72e6c2c5e2b8"
+    },
+    {
+      "file": "10_equipment_picker.png",
+      "sha256": "758dc2b34eb160159623439025ba5346989c968c63fab0b5eee025a109336f25"
+    },
+    {
+      "file": "11_equipment_queued_paused.png",
+      "sha256": "6041c510331837d6f9854cd64891f90c6ff23f73827a913ae10eb87b4e630c05"
+    },
+    {
+      "file": "12_equipped.png",
+      "sha256": "37acdc09e5663e5f1adcdad7ffa92fad74f39203c18b604e80535d08f2900ffe"
+    },
+    {
+      "file": "13_new_roles_placeholder.png",
+      "sha256": "e96d41fa3c8e79b99568396781c8260b9ee38f5efe029e2faf7b01c8e470cc08"
+    },
+    {
+      "file": "book_turn_00.png",
+      "sha256": "8286ddddbb01a413d9657184ba42bd2129be89c71f284c23ccc12c01fb7ec3f5"
+    },
+    {
+      "file": "book_turn_01.png",
+      "sha256": "193ce16bc674ceae8dc46a4736c7e326f8c114a111b6d9328d148ec1a301169c"
+    },
+    {
+      "file": "book_turn_02.png",
+      "sha256": "62a7f9b6dcbf0cd3f8293822bed5311acbaa6a1fcca86ba3add870045b758661"
+    },
+    {
+      "file": "book_turn_03.png",
+      "sha256": "dfc73b08fa947b891fc32065047b7e6092d9a1c2f10c9f47d507c589bb3985e5"
+    },
+    {
+      "file": "book_turn_04.png",
+      "sha256": "dfc73b08fa947b891fc32065047b7e6092d9a1c2f10c9f47d507c589bb3985e5"
+    },
+    {
+      "file": "book_turn_05.png",
+      "sha256": "dfc73b08fa947b891fc32065047b7e6092d9a1c2f10c9f47d507c589bb3985e5"
+    },
+    {
+      "file": "book_turn_06.png",
+      "sha256": "dfc73b08fa947b891fc32065047b7e6092d9a1c2f10c9f47d507c589bb3985e5"
+    },
+    {
+      "file": "enemy-book-turn.gif",
+      "sha256": "de0cb2625afbac2222928697408487e43c5f329ef720a47de8ca5913f2c0e959"
+    }
+  ]
+}
