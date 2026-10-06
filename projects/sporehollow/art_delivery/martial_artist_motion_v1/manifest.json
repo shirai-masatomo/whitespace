@@ -1,0 +1,1768 @@
+{
+  "schema_version": 1,
+  "delivery": "martial_artist_motion_v1",
+  "date": "2026-10-06",
+  "branch": "codex/sporehollow-art-assets",
+  "status": "ready_for_implementation",
+  "character_id": "martial_artist",
+  "name_ja": "武闘家",
+  "adopted_design": "../enemy_animal_direction_v3/",
+  "adoption_commit": "f26498d2bafe6e274a197aef0a025d5016c8691e",
+  "canvas_size_px": [
+    64,
+    56
+  ],
+  "foot_anchor_px": {
+    "right": [
+      24,
+      50
+    ],
+    "left": [
+      40,
+      50
+    ]
+  },
+  "standing_body_height_px": 42,
+  "rendering": {
+    "format": "RGBA",
+    "filter": "nearest",
+    "alpha": [
+      0,
+      255
+    ],
+    "color_key": false,
+    "trim_transparent_margin": false,
+    "baked_ground_shadow": false
+  },
+  "assets": [
+    {
+      "file": "idle/right_00.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        24,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        12,
+        8,
+        35,
+        50
+      ],
+      "action": "idle",
+      "direction": "right",
+      "frame_index": 0,
+      "frame_duration_ms": null,
+      "loop": false,
+      "layer": "body",
+      "sha256": "62fb197738a835fcb0012ac11a536c8fe04baa41c48e00d75b8955575eb93180",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "idle/left_00.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        40,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        29,
+        8,
+        52,
+        50
+      ],
+      "action": "idle",
+      "direction": "left",
+      "frame_index": 0,
+      "frame_duration_ms": null,
+      "loop": false,
+      "layer": "body",
+      "sha256": "31a2ebe5db412785c2a2f3cffea8ed1e4320c9b31ba295ec8dd0875eb376c549",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "walk/right_00.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        24,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        10,
+        8,
+        35,
+        50
+      ],
+      "action": "walk",
+      "direction": "right",
+      "frame_index": 0,
+      "frame_duration_ms": 140,
+      "loop": true,
+      "layer": "body",
+      "sha256": "0e5dc2f31865d3e55380e248ecf02ea4e479c08b54f16575d7cd173ce1413fec",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "walk/right_01.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        24,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        10,
+        8,
+        36,
+        50
+      ],
+      "action": "walk",
+      "direction": "right",
+      "frame_index": 1,
+      "frame_duration_ms": 140,
+      "loop": true,
+      "layer": "body",
+      "sha256": "994282d9f50748606635ce1054c6e886ebe2ede9e1350c282184fb2a0d4f0c71",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "walk/right_02.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        24,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        10,
+        8,
+        35,
+        50
+      ],
+      "action": "walk",
+      "direction": "right",
+      "frame_index": 2,
+      "frame_duration_ms": 140,
+      "loop": true,
+      "layer": "body",
+      "sha256": "6a5788885fe6de422721ba881f7bb7cd1d03825dec65f460cc33347dbdd08a8d",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "walk/right_03.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        24,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        10,
+        8,
+        36,
+        50
+      ],
+      "action": "walk",
+      "direction": "right",
+      "frame_index": 3,
+      "frame_duration_ms": 140,
+      "loop": true,
+      "layer": "body",
+      "sha256": "dd9136f1e491d274f67e5ac7a3f3dba5b40d88713d22f0022a40d747c425dde0",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "walk/left_00.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        40,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        29,
+        8,
+        54,
+        50
+      ],
+      "action": "walk",
+      "direction": "left",
+      "frame_index": 0,
+      "frame_duration_ms": 140,
+      "loop": true,
+      "layer": "body",
+      "sha256": "0731e95e02c4ad57fa1a5d080899aeddc9df9c726785f5ca5bd0135fc608e38c",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "walk/left_01.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        40,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        28,
+        8,
+        54,
+        50
+      ],
+      "action": "walk",
+      "direction": "left",
+      "frame_index": 1,
+      "frame_duration_ms": 140,
+      "loop": true,
+      "layer": "body",
+      "sha256": "45a4c4906f2bc5ec8daa4d7ad463dcc0fd2284a587ea21a5a770e9c036300e7c",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "walk/left_02.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        40,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        29,
+        8,
+        54,
+        50
+      ],
+      "action": "walk",
+      "direction": "left",
+      "frame_index": 2,
+      "frame_duration_ms": 140,
+      "loop": true,
+      "layer": "body",
+      "sha256": "18bd6073770e1c24a4defbdc12c140f79eeefdda86a2ddc6aa7b848e23ce6187",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "walk/left_03.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        40,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        28,
+        8,
+        54,
+        50
+      ],
+      "action": "walk",
+      "direction": "left",
+      "frame_index": 3,
+      "frame_duration_ms": 140,
+      "loop": true,
+      "layer": "body",
+      "sha256": "b37e50feddb2d530b166c08384def468e4ce9ccbbfcb8119870a8af0012577b2",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "hurt/right_00.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        24,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        11,
+        9,
+        52,
+        50
+      ],
+      "action": "hurt",
+      "direction": "right",
+      "frame_index": 0,
+      "frame_duration_ms": 80,
+      "loop": false,
+      "layer": "body",
+      "sha256": "f7f0f9c52e0eaf80c215ce00c7cb39dcbc02a87555f3c0bef4fef4891d328973",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "hurt/right_01.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        24,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        7,
+        8,
+        34,
+        50
+      ],
+      "action": "hurt",
+      "direction": "right",
+      "frame_index": 1,
+      "frame_duration_ms": 120,
+      "loop": false,
+      "layer": "body",
+      "sha256": "d248928fba26e52f76b93b0cb6c22418cbe18903a6f9c94531c7673ac095c798",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "hurt/right_02.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        24,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        12,
+        8,
+        35,
+        50
+      ],
+      "action": "hurt",
+      "direction": "right",
+      "frame_index": 2,
+      "frame_duration_ms": 120,
+      "loop": false,
+      "layer": "body",
+      "sha256": "62fb197738a835fcb0012ac11a536c8fe04baa41c48e00d75b8955575eb93180",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "hurt/left_00.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        40,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        12,
+        9,
+        53,
+        50
+      ],
+      "action": "hurt",
+      "direction": "left",
+      "frame_index": 0,
+      "frame_duration_ms": 80,
+      "loop": false,
+      "layer": "body",
+      "sha256": "75e1f492b3b0f97b12bd2d28fcb96860894e8619b83d0c6991022aea6bfeba3c",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "hurt/left_01.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        40,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        30,
+        8,
+        57,
+        50
+      ],
+      "action": "hurt",
+      "direction": "left",
+      "frame_index": 1,
+      "frame_duration_ms": 120,
+      "loop": false,
+      "layer": "body",
+      "sha256": "10dc4ee1dad60a4c76593f261e0061b2254d7f34196e905933474f627afa5ade",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "hurt/left_02.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        40,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        29,
+        8,
+        52,
+        50
+      ],
+      "action": "hurt",
+      "direction": "left",
+      "frame_index": 2,
+      "frame_duration_ms": 120,
+      "loop": false,
+      "layer": "body",
+      "sha256": "31a2ebe5db412785c2a2f3cffea8ed1e4320c9b31ba295ec8dd0875eb376c549",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "retreat/right_00.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        24,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        8,
+        9,
+        33,
+        50
+      ],
+      "action": "retreat",
+      "direction": "right",
+      "frame_index": 0,
+      "frame_duration_ms": 100,
+      "loop": true,
+      "layer": "body",
+      "sha256": "40993d5c04141f3541a3d41dbf848cb64dcd4bc6a2614340aff2a21faa286ad6",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "retreat/right_01.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        24,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        8,
+        9,
+        33,
+        50
+      ],
+      "action": "retreat",
+      "direction": "right",
+      "frame_index": 1,
+      "frame_duration_ms": 100,
+      "loop": true,
+      "layer": "body",
+      "sha256": "85bdbcbb66e05cc51bc63af7b47ca1fe5d45cedd9c086b79eef6f0083d088cea",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "retreat/right_02.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        24,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        8,
+        9,
+        35,
+        50
+      ],
+      "action": "retreat",
+      "direction": "right",
+      "frame_index": 2,
+      "frame_duration_ms": 100,
+      "loop": true,
+      "layer": "body",
+      "sha256": "f5855c78881c8807c7c27d29fe9f2cd046b7a36cc693d5a477419443ee102387",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "retreat/right_03.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        24,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        8,
+        9,
+        33,
+        50
+      ],
+      "action": "retreat",
+      "direction": "right",
+      "frame_index": 3,
+      "frame_duration_ms": 100,
+      "loop": true,
+      "layer": "body",
+      "sha256": "b042bea5e5a249349b4ddae53fbd34c09ec0dd4620724d5374efa994d9d64e66",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "retreat/left_00.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        40,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        31,
+        9,
+        56,
+        50
+      ],
+      "action": "retreat",
+      "direction": "left",
+      "frame_index": 0,
+      "frame_duration_ms": 100,
+      "loop": true,
+      "layer": "body",
+      "sha256": "b786f2b9ce4522bea911bf4ef423ad77a3368fd4170fc717685f62d1dd93651b",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "retreat/left_01.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        40,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        31,
+        9,
+        56,
+        50
+      ],
+      "action": "retreat",
+      "direction": "left",
+      "frame_index": 1,
+      "frame_duration_ms": 100,
+      "loop": true,
+      "layer": "body",
+      "sha256": "e274fc5054582bf5531ea6cf1f49741f4df5013252419e904e08bbfa366fb39e",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "retreat/left_02.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        40,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        29,
+        9,
+        56,
+        50
+      ],
+      "action": "retreat",
+      "direction": "left",
+      "frame_index": 2,
+      "frame_duration_ms": 100,
+      "loop": true,
+      "layer": "body",
+      "sha256": "e85c357c05e211dde14f946c9599673c85373d64801f1461b28f4eaab3dc52b9",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "retreat/left_03.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        40,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        31,
+        9,
+        56,
+        50
+      ],
+      "action": "retreat",
+      "direction": "left",
+      "frame_index": 3,
+      "frame_duration_ms": 100,
+      "loop": true,
+      "layer": "body",
+      "sha256": "43a2bba6ba64c24df6abb1d3f0a4db33cef92dc34dcd0eab5858a4ebaceff990",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "bow/right_00.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        24,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        10,
+        7,
+        32,
+        50
+      ],
+      "action": "bow",
+      "direction": "right",
+      "frame_index": 0,
+      "frame_duration_ms": 60,
+      "loop": false,
+      "layer": "body",
+      "sha256": "8e554285ec6b284af44badfd3bca47d5ebc63afd8a041c66ccbd3c5356d65daa",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "bow/right_01.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        24,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        15,
+        14,
+        41,
+        50
+      ],
+      "action": "bow",
+      "direction": "right",
+      "frame_index": 1,
+      "frame_duration_ms": 150,
+      "loop": false,
+      "layer": "body",
+      "sha256": "542ef9a128e24bd05fc037743dc72e1892240a13b4fc619078e3cca3959179dd",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "bow/right_02.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        24,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        10,
+        7,
+        32,
+        50
+      ],
+      "action": "bow",
+      "direction": "right",
+      "frame_index": 2,
+      "frame_duration_ms": 70,
+      "loop": false,
+      "layer": "body",
+      "sha256": "8e554285ec6b284af44badfd3bca47d5ebc63afd8a041c66ccbd3c5356d65daa",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "bow/right_03.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        24,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        8,
+        11,
+        39,
+        50
+      ],
+      "action": "bow",
+      "direction": "right",
+      "frame_index": 3,
+      "frame_duration_ms": 80,
+      "loop": false,
+      "layer": "body",
+      "sha256": "620b20d6675efb14c2fd4e9a9701d217e4a68e804029c8878f9680ac68b29a38",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "bow/left_00.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        40,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        32,
+        7,
+        54,
+        50
+      ],
+      "action": "bow",
+      "direction": "left",
+      "frame_index": 0,
+      "frame_duration_ms": 60,
+      "loop": false,
+      "layer": "body",
+      "sha256": "23205e0802601fc158cb6314086a1011e7546bc2c0bd2fdb5a0e1d44894cacc9",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "bow/left_01.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        40,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        23,
+        14,
+        49,
+        50
+      ],
+      "action": "bow",
+      "direction": "left",
+      "frame_index": 1,
+      "frame_duration_ms": 150,
+      "loop": false,
+      "layer": "body",
+      "sha256": "8f2e158108facadece5b547e648875bb8e2e2db54c4be38ba501b8f7734b0b68",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "bow/left_02.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        40,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        32,
+        7,
+        54,
+        50
+      ],
+      "action": "bow",
+      "direction": "left",
+      "frame_index": 2,
+      "frame_duration_ms": 70,
+      "loop": false,
+      "layer": "body",
+      "sha256": "23205e0802601fc158cb6314086a1011e7546bc2c0bd2fdb5a0e1d44894cacc9",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "bow/left_03.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        40,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        25,
+        11,
+        56,
+        50
+      ],
+      "action": "bow",
+      "direction": "left",
+      "frame_index": 3,
+      "frame_duration_ms": 80,
+      "loop": false,
+      "layer": "body",
+      "sha256": "9ee90ef272b6b9a55f13756917b5cdbeb23a7d368b74f7385a14c8823cba55a7",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "bow_end/right_00.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        24,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        8,
+        11,
+        39,
+        50
+      ],
+      "action": "bow_end",
+      "direction": "right",
+      "frame_index": 0,
+      "frame_duration_ms": 70,
+      "loop": false,
+      "layer": "body",
+      "sha256": "620b20d6675efb14c2fd4e9a9701d217e4a68e804029c8878f9680ac68b29a38",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "bow_end/right_01.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        24,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        10,
+        7,
+        32,
+        50
+      ],
+      "action": "bow_end",
+      "direction": "right",
+      "frame_index": 1,
+      "frame_duration_ms": 60,
+      "loop": false,
+      "layer": "body",
+      "sha256": "8e554285ec6b284af44badfd3bca47d5ebc63afd8a041c66ccbd3c5356d65daa",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "bow_end/right_02.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        24,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        15,
+        14,
+        41,
+        50
+      ],
+      "action": "bow_end",
+      "direction": "right",
+      "frame_index": 2,
+      "frame_duration_ms": 150,
+      "loop": false,
+      "layer": "body",
+      "sha256": "542ef9a128e24bd05fc037743dc72e1892240a13b4fc619078e3cca3959179dd",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "bow_end/right_03.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        24,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        10,
+        7,
+        32,
+        50
+      ],
+      "action": "bow_end",
+      "direction": "right",
+      "frame_index": 3,
+      "frame_duration_ms": 80,
+      "loop": false,
+      "layer": "body",
+      "sha256": "8e554285ec6b284af44badfd3bca47d5ebc63afd8a041c66ccbd3c5356d65daa",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "bow_end/left_00.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        40,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        25,
+        11,
+        56,
+        50
+      ],
+      "action": "bow_end",
+      "direction": "left",
+      "frame_index": 0,
+      "frame_duration_ms": 70,
+      "loop": false,
+      "layer": "body",
+      "sha256": "9ee90ef272b6b9a55f13756917b5cdbeb23a7d368b74f7385a14c8823cba55a7",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "bow_end/left_01.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        40,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        32,
+        7,
+        54,
+        50
+      ],
+      "action": "bow_end",
+      "direction": "left",
+      "frame_index": 1,
+      "frame_duration_ms": 60,
+      "loop": false,
+      "layer": "body",
+      "sha256": "23205e0802601fc158cb6314086a1011e7546bc2c0bd2fdb5a0e1d44894cacc9",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "bow_end/left_02.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        40,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        23,
+        14,
+        49,
+        50
+      ],
+      "action": "bow_end",
+      "direction": "left",
+      "frame_index": 2,
+      "frame_duration_ms": 150,
+      "loop": false,
+      "layer": "body",
+      "sha256": "8f2e158108facadece5b547e648875bb8e2e2db54c4be38ba501b8f7734b0b68",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "bow_end/left_03.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        40,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        32,
+        7,
+        54,
+        50
+      ],
+      "action": "bow_end",
+      "direction": "left",
+      "frame_index": 3,
+      "frame_duration_ms": 80,
+      "loop": false,
+      "layer": "body",
+      "sha256": "23205e0802601fc158cb6314086a1011e7546bc2c0bd2fdb5a0e1d44894cacc9",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "stance/right_00.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        24,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        8,
+        11,
+        39,
+        50
+      ],
+      "action": "stance",
+      "direction": "right",
+      "frame_index": 0,
+      "frame_duration_ms": null,
+      "loop": false,
+      "layer": "body",
+      "sha256": "620b20d6675efb14c2fd4e9a9701d217e4a68e804029c8878f9680ac68b29a38",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "stance/left_00.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        40,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        25,
+        11,
+        56,
+        50
+      ],
+      "action": "stance",
+      "direction": "left",
+      "frame_index": 0,
+      "frame_duration_ms": null,
+      "loop": false,
+      "layer": "body",
+      "sha256": "9ee90ef272b6b9a55f13756917b5cdbeb23a7d368b74f7385a14c8823cba55a7",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "attack/right_00.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        24,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        8,
+        11,
+        39,
+        50
+      ],
+      "action": "attack",
+      "direction": "right",
+      "frame_index": 0,
+      "frame_duration_ms": 100,
+      "loop": false,
+      "layer": "body",
+      "sha256": "620b20d6675efb14c2fd4e9a9701d217e4a68e804029c8878f9680ac68b29a38",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "attack/right_01.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        24,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        10,
+        11,
+        44,
+        50
+      ],
+      "action": "attack",
+      "direction": "right",
+      "frame_index": 1,
+      "frame_duration_ms": 80,
+      "loop": false,
+      "layer": "body",
+      "sha256": "9161c76f48e53745ee462070bada975e4d1b04cf16bff6d6ec84de666707e102",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "attack/right_02.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        24,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        8,
+        11,
+        39,
+        50
+      ],
+      "action": "attack",
+      "direction": "right",
+      "frame_index": 2,
+      "frame_duration_ms": 150,
+      "loop": false,
+      "layer": "body",
+      "sha256": "620b20d6675efb14c2fd4e9a9701d217e4a68e804029c8878f9680ac68b29a38",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "attack/left_00.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        40,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        25,
+        11,
+        56,
+        50
+      ],
+      "action": "attack",
+      "direction": "left",
+      "frame_index": 0,
+      "frame_duration_ms": 100,
+      "loop": false,
+      "layer": "body",
+      "sha256": "9ee90ef272b6b9a55f13756917b5cdbeb23a7d368b74f7385a14c8823cba55a7",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "attack/left_01.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        40,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        20,
+        11,
+        54,
+        50
+      ],
+      "action": "attack",
+      "direction": "left",
+      "frame_index": 1,
+      "frame_duration_ms": 80,
+      "loop": false,
+      "layer": "body",
+      "sha256": "dc3bc10c3847986cb15d7322393db0bbb7123b34b038df64e785c5df4fbce172",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "attack/left_02.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        40,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        25,
+        11,
+        56,
+        50
+      ],
+      "action": "attack",
+      "direction": "left",
+      "frame_index": 2,
+      "frame_duration_ms": 150,
+      "loop": false,
+      "layer": "body",
+      "sha256": "9ee90ef272b6b9a55f13756917b5cdbeb23a7d368b74f7385a14c8823cba55a7",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "kick/right_00.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        24,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        8,
+        11,
+        39,
+        50
+      ],
+      "action": "kick",
+      "direction": "right",
+      "frame_index": 0,
+      "frame_duration_ms": 130,
+      "loop": false,
+      "layer": "body",
+      "sha256": "620b20d6675efb14c2fd4e9a9701d217e4a68e804029c8878f9680ac68b29a38",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "kick/right_01.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        24,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        10,
+        9,
+        46,
+        50
+      ],
+      "action": "kick",
+      "direction": "right",
+      "frame_index": 1,
+      "frame_duration_ms": 100,
+      "loop": false,
+      "layer": "body",
+      "sha256": "d130b5a2399f535cba13cac4106f894c9068bbbe756277dd6889fdd1c8a57916",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "kick/right_02.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        24,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        8,
+        11,
+        39,
+        50
+      ],
+      "action": "kick",
+      "direction": "right",
+      "frame_index": 2,
+      "frame_duration_ms": 150,
+      "loop": false,
+      "layer": "body",
+      "sha256": "620b20d6675efb14c2fd4e9a9701d217e4a68e804029c8878f9680ac68b29a38",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "kick/left_00.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        40,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        25,
+        11,
+        56,
+        50
+      ],
+      "action": "kick",
+      "direction": "left",
+      "frame_index": 0,
+      "frame_duration_ms": 130,
+      "loop": false,
+      "layer": "body",
+      "sha256": "9ee90ef272b6b9a55f13756917b5cdbeb23a7d368b74f7385a14c8823cba55a7",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "kick/left_01.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        40,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        18,
+        9,
+        54,
+        50
+      ],
+      "action": "kick",
+      "direction": "left",
+      "frame_index": 1,
+      "frame_duration_ms": 100,
+      "loop": false,
+      "layer": "body",
+      "sha256": "99154e125087a88f9cb7e4c93ad0b709f4d27fc4feeeb14574bdaa07fada2233",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "kick/left_02.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        40,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        25,
+        11,
+        56,
+        50
+      ],
+      "action": "kick",
+      "direction": "left",
+      "frame_index": 2,
+      "frame_duration_ms": 150,
+      "loop": false,
+      "layer": "body",
+      "sha256": "9ee90ef272b6b9a55f13756917b5cdbeb23a7d368b74f7385a14c8823cba55a7",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    }
+  ],
+  "actions": {
+    "idle_right": {
+      "action_id": "idle",
+      "direction": "right",
+      "frames": [
+        "idle/right_00.png"
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "end_behavior": "hold"
+    },
+    "idle_left": {
+      "action_id": "idle",
+      "direction": "left",
+      "frames": [
+        "idle/left_00.png"
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "end_behavior": "hold"
+    },
+    "walk_right": {
+      "action_id": "walk",
+      "direction": "right",
+      "frames": [
+        "walk/right_00.png",
+        "walk/right_01.png",
+        "walk/right_02.png",
+        "walk/right_03.png"
+      ],
+      "frame_duration_ms": [
+        140,
+        140,
+        140,
+        140
+      ],
+      "loop": true,
+      "end_behavior": "repeat while state active"
+    },
+    "walk_left": {
+      "action_id": "walk",
+      "direction": "left",
+      "frames": [
+        "walk/left_00.png",
+        "walk/left_01.png",
+        "walk/left_02.png",
+        "walk/left_03.png"
+      ],
+      "frame_duration_ms": [
+        140,
+        140,
+        140,
+        140
+      ],
+      "loop": true,
+      "end_behavior": "repeat while state active"
+    },
+    "hurt_right": {
+      "action_id": "hurt",
+      "direction": "right",
+      "frames": [
+        "hurt/right_00.png",
+        "hurt/right_01.png",
+        "hurt/right_02.png"
+      ],
+      "frame_duration_ms": [
+        80,
+        120,
+        120
+      ],
+      "loop": false,
+      "end_behavior": "return to state-selected pose"
+    },
+    "hurt_left": {
+      "action_id": "hurt",
+      "direction": "left",
+      "frames": [
+        "hurt/left_00.png",
+        "hurt/left_01.png",
+        "hurt/left_02.png"
+      ],
+      "frame_duration_ms": [
+        80,
+        120,
+        120
+      ],
+      "loop": false,
+      "end_behavior": "return to state-selected pose"
+    },
+    "retreat_right": {
+      "action_id": "retreat",
+      "direction": "right",
+      "frames": [
+        "retreat/right_00.png",
+        "retreat/right_01.png",
+        "retreat/right_02.png",
+        "retreat/right_03.png"
+      ],
+      "frame_duration_ms": [
+        100,
+        100,
+        100,
+        100
+      ],
+      "loop": true,
+      "end_behavior": "repeat while state active",
+      "alive": true
+    },
+    "retreat_left": {
+      "action_id": "retreat",
+      "direction": "left",
+      "frames": [
+        "retreat/left_00.png",
+        "retreat/left_01.png",
+        "retreat/left_02.png",
+        "retreat/left_03.png"
+      ],
+      "frame_duration_ms": [
+        100,
+        100,
+        100,
+        100
+      ],
+      "loop": true,
+      "end_behavior": "repeat while state active",
+      "alive": true
+    },
+    "bow_right": {
+      "action_id": "bow",
+      "direction": "right",
+      "frames": [
+        "bow/right_00.png",
+        "bow/right_01.png",
+        "bow/right_02.png",
+        "bow/right_03.png"
+      ],
+      "frame_duration_ms": [
+        60,
+        150,
+        70,
+        80
+      ],
+      "loop": false,
+      "end_behavior": "return to state-selected pose"
+    },
+    "bow_left": {
+      "action_id": "bow",
+      "direction": "left",
+      "frames": [
+        "bow/left_00.png",
+        "bow/left_01.png",
+        "bow/left_02.png",
+        "bow/left_03.png"
+      ],
+      "frame_duration_ms": [
+        60,
+        150,
+        70,
+        80
+      ],
+      "loop": false,
+      "end_behavior": "return to state-selected pose"
+    },
+    "bow_end_right": {
+      "action_id": "bow_end",
+      "direction": "right",
+      "frames": [
+        "bow_end/right_00.png",
+        "bow_end/right_01.png",
+        "bow_end/right_02.png",
+        "bow_end/right_03.png"
+      ],
+      "frame_duration_ms": [
+        70,
+        60,
+        150,
+        80
+      ],
+      "loop": false,
+      "end_behavior": "return to state-selected pose"
+    },
+    "bow_end_left": {
+      "action_id": "bow_end",
+      "direction": "left",
+      "frames": [
+        "bow_end/left_00.png",
+        "bow_end/left_01.png",
+        "bow_end/left_02.png",
+        "bow_end/left_03.png"
+      ],
+      "frame_duration_ms": [
+        70,
+        60,
+        150,
+        80
+      ],
+      "loop": false,
+      "end_behavior": "return to state-selected pose"
+    },
+    "stance_right": {
+      "action_id": "stance",
+      "direction": "right",
+      "frames": [
+        "stance/right_00.png"
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "end_behavior": "hold"
+    },
+    "stance_left": {
+      "action_id": "stance",
+      "direction": "left",
+      "frames": [
+        "stance/left_00.png"
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "end_behavior": "hold"
+    },
+    "attack_right": {
+      "action_id": "attack",
+      "direction": "right",
+      "frames": [
+        "attack/right_00.png",
+        "attack/right_01.png",
+        "attack/right_02.png"
+      ],
+      "frame_duration_ms": [
+        100,
+        80,
+        150
+      ],
+      "loop": false,
+      "end_behavior": "return to state-selected pose",
+      "visual_contact_frame": 1
+    },
+    "attack_left": {
+      "action_id": "attack",
+      "direction": "left",
+      "frames": [
+        "attack/left_00.png",
+        "attack/left_01.png",
+        "attack/left_02.png"
+      ],
+      "frame_duration_ms": [
+        100,
+        80,
+        150
+      ],
+      "loop": false,
+      "end_behavior": "return to state-selected pose",
+      "visual_contact_frame": 1
+    },
+    "kick_right": {
+      "action_id": "kick",
+      "direction": "right",
+      "frames": [
+        "kick/right_00.png",
+        "kick/right_01.png",
+        "kick/right_02.png"
+      ],
+      "frame_duration_ms": [
+        130,
+        100,
+        150
+      ],
+      "loop": false,
+      "end_behavior": "return to state-selected pose",
+      "visual_contact_frame": 1
+    },
+    "kick_left": {
+      "action_id": "kick",
+      "direction": "left",
+      "frames": [
+        "kick/left_00.png",
+        "kick/left_01.png",
+        "kick/left_02.png"
+      ],
+      "frame_duration_ms": [
+        130,
+        100,
+        150
+      ],
+      "loop": false,
+      "end_behavior": "return to state-selected pose",
+      "visual_contact_frame": 1
+    }
+  },
+  "parts": {},
+  "sockets": {},
+  "timing_policy": "Presentation cadence only; synchronize existing visual clock and pause. State durations, damage, range, speed, HP and probabilities remain implementation rules. Contact/release indices are visual cues, not gameplay triggers.",
+  "sources": {
+    "original": "../../art-production/martial-artist-motion-v1/originals/motion-sheet.png",
+    "generation_record": "../../art-production/martial-artist-motion-v1/generation-record.json",
+    "processing": "../../art-production/motion-pipeline-v1/build.py",
+    "adopted_keys": "../enemy_animal_direction_v3/pose_drafts/martial_artist/"
+  },
+  "spec_snapshots": [
+    {
+      "file": "../../art-production/martial-artist-motion-v1/references/ART_SPEC.md",
+      "sha256": "c399f4d5aaa06be8d2a5792f25adacf815c449ca8ddb6947e82a9b7e6d6a25e6"
+    },
+    {
+      "file": "../../art-production/martial-artist-motion-v1/references/ENEMIES.md",
+      "sha256": "5d74287e74b84a705a14eee9cd53844e3392d959b42b71b6f952f90be1dd9004"
+    },
+    {
+      "file": "../../art-production/martial-artist-motion-v1/references/ANIMALS.md",
+      "sha256": "c379cf5328455558712d4e856bc398336456697449a8d0efc773a8c4f3c1c935"
+    }
+  ],
+  "unfinished": [
+    "正面・背面の専用動作は今回の横向き契約外",
+    "ゲーム取り込みと隔離描画検証は実装担当"
+  ],
+  "game_launched": false,
+  "in_game_verified": false
+}
