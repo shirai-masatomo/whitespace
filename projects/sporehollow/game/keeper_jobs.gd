@@ -96,6 +96,7 @@ static func step(w):
 		if pending.get("cancel_requested",false): cancel(w,pending.id)
 	if not w.Life.able(w) or w.jobs_held or w.manual_goal!=null or w.jobs.is_empty(): return
 	var j=w.jobs[0]
+	if j.kind=="equip": w.Progression.equip_step(w,j); return
 	if j.kind in w.Story.ACTIONS: w.Story.step_job(w,j); return
 	if j.has("target_id"):
 		var b=w.building_store(j.target_layer).get(j.pos,{})
@@ -159,7 +160,10 @@ static func preview(w) -> Array:
 	if w.manual_goal!=null: plans.append({"number":0,"goals":[w.manual_goal]})
 	for i in range(w.jobs.size()):
 		var j=w.jobs[i]
-		if j.kind=="animal_order":
+		if j.kind=="equip":
+			var a=w.Orders.animal(w,j.animal_id)
+			if not a.is_empty(): plans.append({"number":i+1,"goals":w.neighbors(a.pos)})
+		elif j.kind=="animal_order":
 			for t in j.targets:
 				if not t.issued and not t.done:
 					var a=w.Orders.animal(w,t.id)

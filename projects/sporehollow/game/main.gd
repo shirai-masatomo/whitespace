@@ -1,4 +1,7 @@
 extends Node2D
+const ProgressView=preload("res://game/progression_view.gd")
+var book_section="animals"
+var equipment_open=false
 const StoryView = preload("res://game/story_view.gd")
 var story_modal=""
 var story_page=0
@@ -8,9 +11,9 @@ const Farm = preload("res://game/world.gd")
 const FONT = preload("res://assets/fonts/ui_font.tres")
 const TILE = Vector2(48, 42)
 const GROUPS = ["建設", "指示"]
-const TOOLS = {"wall": "壁  10 / 1秒", "wood_wall":"木壁 木10", "stone_wall":"石壁 石10", "soil_tile":"土タイル 土2", "wood_tile":"木タイル 木2", "stone_tile":"石タイル 石2", "door":"ドア 木10", "locked_door":"施錠ドア 木20", "guide":"連れていく", "repair": "修理", "gate": "ドア開閉", "remove": "解体",
+const TOOLS = {"wall": "壁  10 / 1秒", "wood_wall":"木壁 木10", "stone_wall":"石壁 石10", "soil_tile":"土タイル 土2", "wood_tile":"木タイル 木2", "stone_tile":"石タイル 石2", "door":"ドア 木10", "locked_door":"施錠ドア 木20", "guide":"連れていく", "equip":"装備", "repair": "修理", "gate": "ドア開閉", "remove": "解体",
 	"auto": "おまかせ", "stay": "待機", "wander": "徘徊", "rest": "休む", "collect": "資源・卵・設計図", "dog_food": "犬用餌 HP+10", "hen_food": "鶏用餌 HP+8", "cat_food": "猫用餌 HP+8"}
-const GROUP_TOOLS = [["wall", "wood_wall", "stone_wall", "soil_tile", "wood_tile", "stone_tile", "door", "locked_door"], ["guide", "auto", "stay", "wander", "rest"], ["collect"]]
+const GROUP_TOOLS = [["wall", "wood_wall", "stone_wall", "soil_tile", "wood_tile", "stone_tile", "door", "locked_door"], ["guide", "auto", "stay", "wander", "rest", "equip"], ["collect"]]
 const BoardArt = preload("res://game/board_art.gd")
 const BuildingArt = preload("res://game/building_art.gd")
 const Art = preload("res://game/adopted_art.gd")
@@ -207,6 +210,7 @@ func select_group(index: int):
 
 func select_tool(id: String, execute: bool = true):
 	tool = id
+	if execute and id=="equip": equipment_open=not equipment_open
 	if execute and id in ["auto", "stay", "wander", "rest"]: command_selected(id, Vector2i.ZERO)
 	refresh()
 
@@ -220,7 +224,7 @@ func subtask_choices() -> Array:
 		available = GROUP_TOOLS[0].filter(func(id): return Farm.BUILD[id].get("blueprint", "") in ([""] + world.campaign.unlocked_blueprints))
 	elif group == 1:
 		var animals = world.animals.filter(func(a): return a.id in selected_animals and a.placed and world.available(a))
-		available = GROUP_TOOLS[1].filter(func(id): return animals.any(func(a): return id in Farm.SPECIES[a.species].orders))
+		available = GROUP_TOOLS[1].filter(func(id): return animals.any(func(a): return id in Farm.SPECIES[a.species].orders or (id=="equip" and selected_animals.size()==1 and Farm.ProgressData.ITEMS.keys().any(func(item):return Farm.Progression.can_equip(a,item)))))
 	elif group == 2:
 		available = ["keeper_rest", "resume_jobs", "coffee", "energy_drink"].filter(func(id): return buttons.has(id) and not buttons[id].disabled and buttons[id].is_visible_in_tree())
 	return subtasks.choices(group, available) if group >= 0 else []
@@ -367,8 +371,9 @@ func refresh():
 		for i in range(choices.size()):
 			var id=choices[i]
 			add_button(palette,id,TOOLS[id],Rect2(16+i*126,704,118,36),select_tool.bind(id))
-			var supported=deployed_selection.filter(func(a):return id in Farm.SPECIES[a.species].orders).size()
+			var supported=deployed_selection.filter(func(a):return id in Farm.SPECIES[a.species].orders or (id=="equip" and Farm.ProgressData.ITEMS.keys().any(func(item):return Farm.Progression.can_equip(a,item)))).size()
 			buttons[id].tooltip_text="対応 %d / 選択 %d。クリックで予約（誘導は行き先を指定）"%[supported,selected_animals.size()]
+		if equipment_open: ProgressView.equipment_buttons(self)
 	elif group == 0 and world.working():
 		var choices = subtask_choices()
 		for i in range(choices.size()):
@@ -442,7 +447,7 @@ func build_context_actions():
 		rows.append(["clear_tree","開拓する","hammer",story_action.bind("clear_tree"),selected_trees.all(func(p):return job_reserved("clear_tree",p)),"現地4秒・木材 +8"] )
 		if selected_trees.any(func(p):return job_reserved("clear_tree",p)): rows.append(["cancel_near","取消","cross",cancel_selected_work,false,"開拓予定を取り消す"])
 	elif selected.get("kind")=="idol":
-		for kind in ["inspect_idol","pray_wealth","repair_idol","recover_idol"]:
+		for kind in ["inspect_idol","repair_idol","recover_idol"]:
 			if kind=="pray_wealth" and not world.story.investigated: continue
 			if kind=="repair_idol" and world.story.idol.hp>=world.story.idol.max_hp: continue
 			if kind=="recover_idol" and world.story.idol.state!="interrupted": continue
@@ -668,7 +673,7 @@ func refresh_jobs():
 		row.size = Vector2(214, 31)
 		row.focus_mode = Control.FOCUS_NONE
 		UI.button(row, Color("c6d1ac") if i == 0 else UI.PAPER)
-		var names = {"wall": "壁", "door":"ドア","locked_door":"施錠ドア","wood_wall":"木壁","stone_wall":"石壁","soil_tile":"土タイル","wood_tile":"木タイル","stone_tile":"石タイル", "kennel": "犬小屋", "coop": "鶏小屋", "move": "歩く", "collect": "回収", "repair": "修理", "remove": "解体", "remove_floor":"タイル解体", "repair_floor":"床修理", "gate": "ドアを開閉", "animal_order": "仲間へ指示"}
+		var names = {"wall": "壁", "door":"ドア","locked_door":"施錠ドア","wood_wall":"木壁","stone_wall":"石壁","soil_tile":"土タイル","wood_tile":"木タイル","stone_tile":"石タイル", "kennel": "犬小屋", "coop": "鶏小屋", "move": "歩く", "collect": "回収", "repair": "修理", "remove": "解体", "remove_floor":"タイル解体", "repair_floor":"床修理", "gate": "ドアを開閉", "equip":"装備", "animal_order": "仲間へ指示"}
 		row.text = "%s%s" % [ "› " if j.state != "pending" else "", ("待機 · " if j.state == "blocked" else "") + names.get(j.kind, StoryView.LABELS.get(j.kind,"仕事"))]
 		row.draw.connect(draw_queue_badge.bind(row,i+1))
 		row.set_meta("job_id",j.id)
@@ -1376,7 +1381,7 @@ func _draw():
 	for item in world.field_items:
 		var q = center(item.pos) + (Vector2(7, 8) if item.kind.ends_with("_plan") else Vector2.ZERO)
 		if item.kind.ends_with("_plan") and world.keeper.placed and item.pos == world.keeper.pos: q = center(item.pos) + Vector2(-25,-22)
-		if item.kind.ends_with("_plan"):
+		if item.kind.ends_with("_plan") or item.kind=="skill_scroll":
 			draw_texture(Art.SCROLL,(q-Vector2(12,10)).round())
 		elif item.kind == "egg":
 			draw_circle(q, 7, Color("fff0c7"))
@@ -1746,6 +1751,7 @@ func open_market():
 	refresh()
 
 func open_book():
+	book_section="animals"
 	morning_screen = "book"
 	shop_side = "animals"
 	training_id = world.campaign.animals[0].id if not world.campaign.animals.is_empty() else -1
@@ -1765,7 +1771,7 @@ func close_morning_screen():
 
 func turn_book(direction: int):
 	if book_motion != "": return
-	var owned = world.campaign.animals
+	var owned = book_records()
 	if owned.size() < 2: return
 	var index = 0
 	for i in range(owned.size()):
@@ -1784,11 +1790,14 @@ func build_shop():
 		return
 	add_button(palette, "close_market", "メニューへ", Rect2(1040, 116, 124, 44), close_morning_screen)
 	buttons.close_market.icon = UI.icon("cross")
-	build_training()
+	add_button(palette,"book_animals","牧場の仲間",Rect2(300,116,170,44),switch_book_section.bind("animals"))
+	add_button(palette,"book_enemies","敵",Rect2(482,116,100,44),switch_book_section.bind("enemies"))
+	UI.selected(buttons.book_animals,book_section=="animals"); UI.selected(buttons.book_enemies,book_section=="enemies")
+	if book_section=="animals": build_training()
 	add_button(palette, "book_prev", "←", Rect2(266,676,80,36), turn_book.bind(-1))
 	add_button(palette, "book_next", "→", Rect2(930,676,80,36), turn_book.bind(1))
-	buttons.book_prev.disabled = world.campaign.animals.size() < 2
-	buttons.book_next.disabled = world.campaign.animals.size() < 2
+	buttons.book_prev.disabled = book_records().size() < 2
+	buttons.book_next.disabled = book_records().size() < 2
 
 func product_title(row: Dictionary) -> String:
 	if row.get("animal_id", -1) >= 0:
@@ -1870,12 +1879,13 @@ func build_training():
 		add_button(palette, "save_name", "この名前にする", Rect2(896,620,140,40), save_name)
 
 func animal_hp(a: Dictionary) -> int:
-	return Farm.SPECIES[a.species].hp + (a.lv - 1) * 4
+	return Farm.SPECIES[a.species].hp + (a.lv - 1) * 4 + (4 if "hardy" in a.get("bonus_skills",[]) else 0)
 
 func draw_book():
 	book_view.draw(hud)
 
 func draw_book_content(canvas: CanvasItem, animal_id: int):
+	if book_section=="enemies": ProgressView.enemy_page(self,canvas,animal_id); return
 	label_on(canvas,Vector2(152,137),"動物図鑑",24,UI.INK)
 	if animal_id<0:
 		label_on(canvas,Vector2(156,205),"まだ仲間がいません",18,UI.INK)
@@ -1884,7 +1894,7 @@ func draw_book_content(canvas: CanvasItem, animal_id: int):
 		if a.id != animal_id: continue
 		draw_card_icon(canvas,a.species,Vector2(296,270),3.0)
 		label_on(canvas,Vector2(156,363),Farm.animal_name(a),24,UI.INK)
-		label_on(canvas,Vector2(156,395),"%s · Lv%d" %[Farm.SPECIES[a.species].title,a.lv],17,UI.INK)
+		label_on(canvas,Vector2(156,395),"%s · Lv%d · %s" %[Farm.SPECIES[a.species].title,a.lv,Farm.ProgressData.RARITY_NAMES[Farm.ProgressData.rarity(a.get("rarity",0))]],17,UI.INK)
 		var hp=a.get("hp",animal_hp(a));var maximum=animal_hp(a)
 		canvas.draw_rect(Rect2(156,418,264,8),Color("b9b69c"))
 		canvas.draw_rect(Rect2(156,418,264.0*hp/maximum,8),Color("789965"))
@@ -1892,14 +1902,15 @@ func draw_book_content(canvas: CanvasItem, animal_id: int):
 		label_on(canvas,Vector2(584,137),"この子のこと",22,UI.INK)
 		label_on(canvas,Vector2(584,170),"忠誠 %d%s" %[a.get("loyalty",0),"  親密 %d" %a.affinity if a.get("affinity")!=null else ""],16,UI.INK)
 		var y=214
-		for id in Farm.SPECIES[a.species].skills:
-			var skill=Farm.AnimalData.SKILLS[id]
+		for id in Farm.SPECIES[a.species].skills+a.get("bonus_skills",[]):
+			var skill=Farm.AnimalData.skill(id)
 			var ready=a.lv>=skill.unlock_level
 			label_on(canvas,Vector2(584,y),skill.name+("" if ready else "（未解放）"),19,UI.INK)
-			label_on(canvas,Vector2(584,y+24),("発動" if skill.type=="active" else "パッシブ")+" / Lv%d"%skill.unlock_level+(" / CT %d秒"%skill.cooldown if skill.has("cooldown") else ""),13,UI.INK)
+			label_on(canvas,Vector2(584,y+24),("発動" if skill.type=="active" else "パッシブ")+" / Lv%d"%skill.unlock_level+(" / CT %d秒"%skill.cooldown if skill.type=="active" and skill.get("cooldown",0)>0 else ""),13,UI.INK)
 			var summary={"bark":"敵検知時、周囲4マスの敵の移動を\n1秒停止。", "rescue":"牧場主の気絶・連れ去り時、救出優先。\n屋内の出口では外で待つ。", "lay":"朝になると卵を産む。", "feather":"時々、きれいな羽を落とす。", "charm":"動物と仲良くなる素質。", "meow":"鳴き声で、敵の勢いを弱める。"}.get(id,skill.effect)
 			label_on(canvas,Vector2(584,y+47),summary,13,UI.INK)
 			y+=92
+		label_on(canvas,Vector2(156,485),"装備："+Farm.ProgressData.ITEMS.get(a.get("equipment",{}).get("item_id",""),{}).get("name","なし"),15,UI.INK)
 		var index=world.campaign.animals.find(a)+1
 		label_on(canvas,Vector2(470,510),"%d / %d"%[index,world.campaign.animals.size()],14,UI.INK)
 		label_on(canvas,Vector2(584,452),"共通EXP %d"%world.campaign.exp_pool,16,UI.INK)
@@ -1913,6 +1924,9 @@ func restart_morning():
 	refresh()
 
 func draw_card_icon(c: CanvasItem, kind: String, p: Vector2, scale_value: float):
+	if kind in ["doberman","bullfrog","hedgehog","collar","berry"]:
+		if kind in Farm.SPECIES: ProgressView.placeholder(self,c,kind,p,scale_value); return
+		c.draw_texture_rect(UI.icon("paw" if kind=="collar" else "basket"),Rect2(p-Vector2(18,18)*scale_value,Vector2(36,36)*scale_value),false); return
 	if Delivered.RESOURCES.has(kind) or kind=="sell":
 		# Delivered tiers have their own pixel density, not the old diagram scale.
 		var size=96.0 if scale_value>=2 else (48.0 if scale_value>=1 else 24.0)
@@ -2044,6 +2058,7 @@ func draw_companion_card():
 		var state = "Zz" if resting or a.hp <= 0 else ("!" if a.rescuing else ("…" if a.mode == "stay" else "♪"))
 		label_on(hud, Vector2(260, 660), state, 25, Color("edd49f"))
 		var caption = "気絶" if a.hp <= 0 else ("助けに行く！" if a.rescuing else ("休息" if resting else ("そばにいるよ" if a.mode == "stay" else "気ままに")))
+		caption += " · " + Farm.ProgressData.ITEMS.get(a.get("equipment",{}).get("item_id",""),{}).get("name","装備なし")
 		label_on(hud, Vector2(92, 678), "%d / %d" % [a.hp, a.max_hp] if Rect2(16, 609, 344, 80).has_point(pointer) else caption, 14, Color("b9c9b5"))
 		if selected_animals.size() > 1: label_on(hud, Vector2(301, 677), "×%d" % selected_animals.size(), 16)
 
@@ -2073,7 +2088,7 @@ func draw_keeper_card():
 	var activity = "連れ去り" if k.carrier >= 0 else ("気絶" if k.state == "unconscious" else ("限界休息" if k.forced_rest else (("寝入り待ち" if Farm.Life.presentation(world)=="settling" else "睡眠") if k.resting else ("散歩中" if world.manual_goal != null else ("再開待ち" if world.jobs_held else ("仕事中" if not world.jobs.is_empty() else "のんびり"))))))
 	label_on(hud, Vector2(30, 676), activity, 15, UI.INK)
 	if not world.jobs.is_empty():
-		var names = {"wall": "壁", "door":"ドア","locked_door":"施錠ドア","wood_wall":"木壁","stone_wall":"石壁","soil_tile":"土タイル","wood_tile":"木タイル","stone_tile":"石タイル", "collect": "回収", "move": "歩く", "animal_order": "仲間へ指示", "repair": "修理", "remove": "解体", "remove_floor":"タイル解体", "repair_floor":"床修理", "gate": "ドア", "kennel": "犬小屋", "coop": "鶏小屋"}
+		var names = {"wall": "壁", "door":"ドア","locked_door":"施錠ドア","wood_wall":"木壁","stone_wall":"石壁","soil_tile":"土タイル","wood_tile":"木タイル","stone_tile":"石タイル", "collect": "回収", "move": "歩く", "equip":"装備", "animal_order": "仲間へ指示", "repair": "修理", "remove": "解体", "remove_floor":"タイル解体", "repair_floor":"床修理", "gate": "ドア", "kennel": "犬小屋", "coop": "鶏小屋"}
 		var next = names.get(world.jobs[0].kind, "仕事")
 		if world.jobs.size() > 1: next += " → " + names.get(world.jobs[1].kind, "仕事")
 		label_on(hud, Vector2(166, 676), next, 14, UI.INK)
@@ -2161,7 +2176,10 @@ func draw_enemy_actor(e: Dictionary):
 	var p = actor_pixel("e%d" % e.id, e.pos)
 	var pose=enemy_art.get(e.id,{"action":"idle","facing":1,"at":visual_time})
 	var foot=p+Vector2(0,14)
-	if e.carry=="keeper":
+	if e.get("archetype","kidnapper")!="kidnapper":
+		ProgressView.placeholder(self,self,e.archetype,p,1.0)
+		label_on(self,p+Vector2(-20,31),e.state,12,UI.PAPER)
+	elif e.carry=="keeper":
 		Delivered.carry(self,"carry_walk" if pose.get("walking",false) else "carry_idle",pose.facing,foot,visual_time-pose.at)
 	else:
 		Delivered.draw_clip(self,"enemy/"+pose.action+("_left" if pose.facing<0 else "_right"),foot,visual_time-pose.at)
@@ -2242,7 +2260,10 @@ func draw_animal_actor(a: Dictionary):
 	draw_circle(p + Vector2(0, 13), 18, Color(0.1, 0.2, 0.13, 0.25))
 	if a.species == "shiba": draw_dog(p, a)
 	elif a.species == "cat": draw_cat(p,a)
-	else: draw_hen(p,a)
+	elif a.species=="hen": draw_hen(p,a)
+	else: ProgressView.placeholder(self,self,a.species,p,1.0)
+	if a.get("abductor",-1)>=0: label_on(self,p+Vector2(-20,30),"連れ去り中",12,UI.DANGER)
+	if world.tick<a.get("spines_until",0): label_on(self,p+Vector2(15,-15),"棘",14,UI.GOLD)
 	var in_combat = world.enemies.any(func(e): return not e.done and not e.flee and Farm.distance(a.pos, e.pos) <= 1)
 	if a.hp <= a.max_hp * 0.5 or in_combat:
 		var danger = a.hp <= a.max_hp * Farm.Rules.LOW_HP_FRACTION
@@ -2283,3 +2304,16 @@ func story_action(kind: String):
 		if world.act(kind,p): count+=1
 	notice("%d件予約"%count if count>0 else world.events.back().text)
 	refresh()
+
+func book_records() -> Array:
+	return ProgressView.ENEMY_ORDER.map(func(id):return {"id":ProgressView.ENEMY_ORDER.find(id)}) if book_section=="enemies" else world.campaign.animals
+
+func switch_book_section(section: String):
+	if book_motion!="" or rename_open: return
+	book_section=section
+	training_id=0 if section=="enemies" else (world.campaign.animals[0].id if not world.campaign.animals.is_empty() else -1)
+	book_next_id=training_id; refresh()
+
+func reserve_equipment(animal_id: int,item_id: String):
+	notice("装備を予約しました" if Farm.Progression.equip_job(world,animal_id,item_id) else "今は装備を予約できません")
+	equipment_open=false; refresh()

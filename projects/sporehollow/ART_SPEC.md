@@ -63,3 +63,21 @@ HANDOFF/manifest/原画/ライセンスを保全する。ranch v1の商人/露�
 | ラジオ・日誌 | UI48/96、等比 | 入手・通常・放送/ページ。本文はゲーム側の動的文字 |
 
 納品済み/取り込み済み/画面確認済みと混同しない。新規素材の完成までは上記を仮表示としてレビューへ記録する。
+
+## K0〜K5の差し替え待ち（2026-10-06）
+
+素材ブランチ5848c4f8を再確認。以下は納品なし。game/progression_view.gdの名前付き「仮」トークンを盤面/市場/図鑑へ接続し、正式デザインとは扱わない。新しい絵柄の無断生成はしていない。既存誘拐者・正式キャラクター・本・荷車・建材は従来参照を保持。
+
+| ID | 必要ActionID |
+|---|---|
+| destroyer | idle / walk / iron_ball_windup / iron_ball_hit / hurt / retreat |
+| martial_artist | idle / walk / bow / stance / attack / hurt / retreat |
+| salaryman | idle / walk / hurt / phone_take / phone_call / phone_put / retreat |
+| ninja | idle / walk / shuriken / dagger / hurt / retreat |
+| animal_tamer | idle / walk / tame / lead / hurt / retreat |
+| runner | idle / run / tired / attack / hurt / retreat |
+| bullfrog | idle / move / tongue / croak / hurt |
+| hedgehog | idle / move / defense_enter / defense / hurt |
+| doberman | idle / walk / run / attack / hurt / death |
+
+Lv1能力と状態IDは実装済み。特殊動作の正式モーションは未実装。首輪/きのみ商品は既存UIアイコンを暫定使用し、キャラクターへの装備外見は追加しない。実画面の証拠はreview/current/progressionへまとめる。

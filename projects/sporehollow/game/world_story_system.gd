@@ -87,6 +87,7 @@ static func reason(w,kind: String,p: Vector2i) -> String:
 	if w.story.idol.is_empty(): return w.story.get("migration_error","黄金像が見つかりません")
 	if w.story.idol.state in ["preparing","transporting","lost"]: return "像が危険です。先に運び手を止めてください"
 	if kind=="pray_wealth":
+		if not w.config.get("legacy_prayer",false): return "祈りの報酬は準備中です"
 		if not w.story.investigated: return "最初の夜を越えたら、像を調べてください"
 		if w.story.prayed_day==w.campaign.day: return "今日は祈りを捧げました"
 	if kind=="repair_idol":

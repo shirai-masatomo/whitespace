@@ -6,7 +6,7 @@ static func animal(w,id: int) -> Dictionary:
 	return {}
 
 static func active(w,a) -> bool:
-	return not a.is_empty() and a.placed and a.hp>0 and w.campaign.day>a.unavailable_through_day
+	return not a.is_empty() and not a.get("dead",false) and not a.get("lost",false) and a.get("abductor",-1)<0 and a.get("faction","owned")=="owned" and a.placed and a.hp>0 and w.campaign.day>a.unavailable_through_day
 
 static func enqueue(w,kind: String,ids: Array,p: Vector2i) -> bool:
 	if not w.working() or w.jobs.size()>=8: w.say("予定は8件までです"); return false
@@ -90,7 +90,7 @@ static func step(w,j):
 				w.milestones.append({"tick":w.tick,"kind":"whistle"})
 			w.job_log.append({"tick":w.tick,"event":"order_issued","animal_id":a.id,"distance":w.distance(w.keeper.pos,a.pos),"destination":[t.dest.x,t.dest.y]})
 			# One bounded response, with loyalty influencing refusal; hens accept guidance provisionally.
-			if a.species=="shiba" and w.daily_rng.randf()>0.90+a.loyalty*0.001:
+			if a.species=="shiba" and w.daily_rng.randf()>0.90+w.Progression.loyalty(a)*0.001:
 				t.done=true; report(w,"今は気が乗らないようです"); continue
 			if j.order!="guide":
 				w.issue_order(j.order,j.command_pos if j.order=="attack_target" else a.pos,a.id); t.done=true

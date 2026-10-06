@@ -211,7 +211,7 @@ static func step(w):
 		if not threats.is_empty():
 			var e = threats[0]
 			k.next_attack = w.tick + ceili(1.5 / factor(w) / w.DT)
-			e.hp = maxi(0, e.hp - ATTACK)
+			w.Progression.enemy_hurt(w,e,ATTACK)
 			w.combat_log.append({"tick": w.tick, "source": "keeper", "id": -1, "target": e.id, "damage": ATTACK})
 			if e.hp == 0:
 				e.flee = true

@@ -1,5 +1,7 @@
 extends RefCounted
 ## Deterministic fixed-tick rules. No scene, Input, frame clock or rendering dependencies.
+const Progression = preload("res://game/progression.gd")
+const ProgressData = preload("res://game/progression_data.gd")
 const Story = preload("res://game/world_story_system.gd")
 var story: Dictionary = {}
 var trees: Dictionary = {}
@@ -118,12 +120,13 @@ func _init(data: Dictionary = {}, seed_number: int = 17, stage_override: Diction
 	campaign.exp_pool = campaign.get("exp_pool", 0)
 	campaign.night_ready = campaign.get("night_ready", false)
 	campaign.field_items = campaign.get("field_items", [])
+	Progression.migrate(self)
 	for owned in campaign.animals:
 		owned.name = owned.get("name", "")
 		owned.object_attack_power = owned.get("object_attack_power", 0)
 		owned.affinity = owned.get("affinity", 0 if SPECIES[owned.species].affinity else null)
 		owned.unavailable_through_day = owned.get("unavailable_through_day", 0)
-		if owned.get("hp", 1) <= 0 and campaign.day > owned.unavailable_through_day:
+		if owned.species=="shiba" and owned.get("hp", 1) <= 0 and campaign.day > owned.unavailable_through_day:
 			owned.hp = maxi(1, (SPECIES[owned.species].hp + (owned.lv - 1) * 4) / 2) # Provisional return after one full day off.
 	morning_checkpoint = campaign.get("morning_checkpoint", campaign).duplicate(true)
 	morning_checkpoint.erase("morning_checkpoint")
@@ -146,7 +149,7 @@ func _init(data: Dictionary = {}, seed_number: int = 17, stage_override: Diction
 		row.pos = Vector2i(item.pos[0], item.pos[1])
 		field_items.append(row)
 	campaign.mushrooms = campaign.get("mushrooms", 0)
-	config = (StageData.STAGES[stage] if stage_override.is_empty() else stage_override).duplicate(true)
+	config = (Progression.Encounters.plan(campaign.day,seed_number,campaign.get("world_story",{}).get("hidden",{}).get("karma",0),stage,[],campaign.encounter_counts) if stage_override.is_empty() else stage_override).duplicate(true)
 	materials = campaign.resources.soil
 	wood = campaign.resources.wood
 	stone = campaign.resources.stone
@@ -217,7 +220,7 @@ func _init(data: Dictionary = {}, seed_number: int = 17, stage_override: Diction
 	if not campaign.night_ready:
 		morning_checkpoint=campaign.duplicate(true)
 		morning_checkpoint.erase("morning_checkpoint")
-	shop_stock = Shop.generate(stage, seed_value, campaign.unlocked_blueprints)
+	shop_stock = Shop.generate(stage, seed_value, campaign.unlocked_blueprints, campaign.day)
 	say("牧場を整えよう")
 
 func make_schedule():
@@ -376,7 +379,15 @@ func _execute_local(kind: String, p: Vector2i = Vector2i.ZERO, animal_id: int = 
 				accepted = use_food(kind, animal_id, p)
 			elif kind == "collect" and not items_at(p).is_empty():
 				var item = items_at(p)[0]
-				if item.kind.ends_with("_plan"):
+				if item.kind=="skill_scroll":
+					campaign.skill_scrolls=campaign.get("skill_scrolls",[])
+					if not campaign.skill_scrolls.any(func(record):return record.id==item.id):
+						campaign.skill_scrolls.append({"id":item.id,"skill_id":item.skill_id,"rarity":item.rarity})
+						var target=animals.filter(func(a):return a.placed and a.hp>0 and item.skill_id not in a.bonus_skills)
+						target.sort_custom(func(a,b):return a.id<b.id)
+						if not target.is_empty():
+							target[0].bonus_skills.append(item.skill_id); target[0].max_hp+=4; Progression.sync_owned(self,target[0]); campaign.skill_scrolls.back().animal_id=target[0].id
+				elif item.kind.ends_with("_plan"):
 					if not Buildings.NAMES.has(item.kind.trim_suffix("_plan")): return false
 					grant_blueprint(item.kind.trim_suffix("_plan"), p)
 				else: add_item(item.kind, 1)
@@ -433,6 +444,7 @@ func spawn_enemy(event: Dictionary):
 		"sight_range": event.get("sight_range", Rules.KIDNAPPER.sight_range), "can_see_keeper": false, "last_known_keeper_position": null, "search_state": "探索中",
 		"search_goal": null, "search_goal_until": 0, "search_visits": {}, "sight_reaction": "", "sight_reaction_until": 0,
 		"weakened_until": 0, "born": tick, "path": [origin], "role": event.role, "state": "探索中"})
+	Progression.spawn_data(self,enemies.back(),event)
 	Life.danger(self, "invasion")
 	spawned += 1
 	milestones.append({"tick": tick, "kind": "invasion", "id": spawned - 1})
@@ -457,10 +469,12 @@ func release_keeper(e: Dictionary):
 		say("救出！ 牧場の仕事へ戻れます。")
 
 func animal_step(a: Dictionary):
-	if not a.placed: return
+	if not a.placed or a.get("dead",false) or a.get("lost",false): return
+	if a.get("abductor",-1)>=0: return
 	if campaign.day <= a.unavailable_through_day:
 		a.state="療養中" if campaign.day==a.unavailable_through_day else "気絶"; return
 	if a.hp <= 0:
+		if SPECIES[a.species].mortal: Progression.remove_animal(self,a,"death"); return
 		a.state = "気絶"
 		a.unavailable_through_day = maxi(a.unavailable_through_day, campaign.day + 1)
 		a.rescuing = false
@@ -515,6 +529,12 @@ func animal_step(a: Dictionary):
 	a.rest_settled = false
 	a.rest_ticks = 0
 	try_bark(a)
+	if a.species=="bullfrog" and not targets.is_empty() and tick>=a.skill_ready.get("tongue",0):
+		var enemy=targets[0]
+		if distance(a.pos,enemy.pos)<=ProgressData.SPECIAL.tongue_range and line_of_sight(a.pos,enemy.pos):
+			a.skill_ready.tongue=tick+ceili(ProgressData.SPECIAL.tongue_ct/DT)
+			enemy.move_stopped_until=maxi(enemy.move_stopped_until,tick+ceili(ProgressData.SPECIAL.tongue_stop/DT))
+			a.action_id="tongue"; skill_log.append({"tick":tick,"actor":a.id,"skill":"tongue","target":enemy.id})
 	if a.mode == "attack_target":
 		var selected = enemies.filter(func(e): return e.id == a.target_id and not e.done and not e.flee and distance(a.pos, e.pos) <= a.attack_target_range)
 		if not selected.is_empty(): targets = selected
@@ -548,8 +568,9 @@ func animal_step(a: Dictionary):
 		var choices = Rules.AI.dog.duplicate(true)
 		choices[active_action] = choices.engage
 		choices.erase("engage")
+		if not AnimalData.has_skill(a,"bark"): choices.erase("bark")
 		# Rescue always pursues the carrier. Noise affects cadence, never the rescue objective.
-		if a.rescuing or a.mode == "attack_target": choices = {active_action: 1.0}
+		if a.rescuing or a.mode == "attack_target" or a.species=="doberman": choices = {active_action: 1.0}
 		var intent = Decisions.choose(self, a, "shiba", ("rescue_" if a.rescuing else "enemy_") + active_action, choices, a.rescuing)
 		if intent in ["watch", "bark"]:
 			a.state = "様子見" if intent == "watch" else "吠える"
@@ -565,7 +586,7 @@ func animal_step(a: Dictionary):
 			a.next_attack = tick + ceili(a.attack_seconds / DT)
 			a.stamina = maxf(0, a.stamina - 8)
 			var enemy = targets[0]
-			enemy.hp = maxi(0, enemy.hp - a.attack_power)
+			Progression.enemy_hurt(self,enemy,a.attack_power,a.id)
 			combat_log.append({"tick": tick, "source": "animal", "id": a.id, "target": enemy.id, "damage": a.attack_power})
 			if enemy.hp == 0:
 				enemy.flee = true
@@ -616,6 +637,7 @@ func side_step(p: Vector2i, goal: Vector2i, roll: float) -> Vector2i:
 func enemy_step(e: Dictionary):
 	if e.done: return
 	RaiderAI.perceive(e, self)
+	if Progression.enemy_step(self,e): return
 	if not e.flee:
 		var threatened = tick < e.threat_until and tick >= e.counter_ready and animals.any(func(a): return a.placed and a.id == e.attacker and a.hp > 0)
 		var context = "under_attack" if threatened else ("carrying" if e.carry == "keeper" else "kidnap")
@@ -649,7 +671,7 @@ func enemy_step(e: Dictionary):
 					e.next_attack = tick + ceili(e.counter_seconds / DT)
 					var previous_hp: int = target.hp
 					var damage = roundi(e.attack_power * (1.0 - AnimalData.SKILLS.meow.reduction if tick < e.weakened_until else 1.0))
-					target.hp = maxi(0, target.hp - damage)
+					Progression.animal_hurt(self,target,e,damage)
 					if previous_hp > target.max_hp * Rules.LOW_HP_FRACTION and target.hp <= target.max_hp * Rules.LOW_HP_FRACTION:
 						Life.danger(self, "animal_danger")
 						milestones.append({"tick": tick, "kind": "animal_danger", "id": target.id})
@@ -660,6 +682,7 @@ func enemy_step(e: Dictionary):
 	if Story.idol_enemy(self,e): return
 	if not e.flee and e.carry == "" and e.can_see_keeper and distance(e.pos, keeper.pos) <= 1 and keeper.carrier < 0:
 		e.state = "主人公へ攻撃" if keeper.hp > 0 else "担ぎ上げる"
+		e.observed_action=true
 		if keeper.hp > 0:
 			if tick >= e.next_attack:
 				e.next_attack = tick + ceili(e.counter_seconds / DT)
@@ -683,7 +706,7 @@ func enemy_step(e: Dictionary):
 		if e.flee:
 			e.done = true
 			metrics.repelled += 1
-			metrics.coins += 3
+			metrics.coins += 0 if e.get("archetype")=="salaryman" else 3
 			return
 		if e.carry == "keeper":
 			e.done = true
@@ -714,6 +737,13 @@ func move_enemy(e: Dictionary, next: Vector2i):
 		for p in around:
 			if distance(p, goal) < distance(go, goal): go = p
 		next = go
+	if blocks(next) and e.get("archetype","kidnapper")!="kidnapper":
+		var obstacle=structures[next]
+		var attack_needed=obstacle.kind not in Buildings.DOORS or obstacle.get("lock_hp",0)>0
+		if attack_needed:
+			if e.object_attack_power<=0 or tick<e.next_attack: return
+			e.next_attack=tick+ceili(e.attack_interval/DT)
+			e.observed_action=true
 	if blocks(next) and structures.get(next,{}).get("kind") in Buildings.DOORS:
 		var door=structures[next]
 		if door.get("lock_hp",0)>0:
@@ -788,6 +818,7 @@ func persist_farm():
 		if not a.is_empty():
 			if a.placed: owned.position=[a.pos.x,a.pos.y]
 			owned.facing=a.get("facing",1)
+			for key in ["equipment","rarity","bonus_skills"]: owned[key]=a.get(key)
 			owned.hp=a.hp; owned.mode=a.mode; owned.order_remaining=maxi(0,a.order_until-tick); owned.unavailable_through_day=a.unavailable_through_day
 	campaign.work_jobs=[]
 	for j in jobs:
@@ -841,14 +872,15 @@ func step():
 			"materials": materials, "keeper": keeper.state, "structures": structures.size()})
 	update_facing(keeper,previous_positions.keeper)
 	for a in animals: update_facing(a,previous_positions.get(a.id,a.pos))
+	Progression.tick(self)
 	Story.tick(self)
 	Life.check_rest_until(self)
 	if phase != "defend": return
-	if remaining_night() <= 0 and not Story.crisis(self):
+	if remaining_night() <= 0 and not Story.crisis(self) and not spawn_schedule.slice(schedule_index).any(func(event):return event.get("wave",0)==999) and not enemies.any(func(e):return not e.done and not e.flee and e.get("phone_started",false)):
 		if rest_skip.get("target", "") == "dawn": early_finish_bonus = rest_skip.get("bonus",0)
 		rest_skip.clear()
 		finish(true)
-	elif not early_clear and not config.repeat_waves and schedule_index == spawn_schedule.size() and enemies.all(func(e): return e.done or e.flee):
+	elif not early_clear and not enemies.any(func(e):return e.get("phone_started",false) and not e.done and not e.flee) and not config.repeat_waves and schedule_index == spawn_schedule.size() and enemies.all(func(e): return e.done or e.flee):
 		early_clear = true
 		early_clear_tick = tick
 		milestones.append({"tick": tick, "kind": "early_clear"})
@@ -856,13 +888,13 @@ func step():
 
 func finish(won: bool):
 	if result != "": return
-	if won and Story.crisis(self): return
+	if won and (Story.crisis(self) or enemies.any(func(e):return not e.done and not e.flee and e.get("led_animal",-1)>=0)): return
 	if not won and story.get("defeat_reason","")=="": story.defeat_reason="keeper_abducted"
 	result = "win" if won else "loss"
 	rest_skip.clear()
 	phase = "dawn" if won else "result"
 	paused = false
-	var condition = float(animals[0].hp) / animals[0].max_hp
+	var condition = float(animals[0].hp) / animals[0].max_hp if not animals.is_empty() else 0.0
 	var rating = (35 if won else 0) + maxi(0, 25 - metrics.captures * 8) + roundi(condition * 20) + maxi(0, 10 - metrics.structure_damage / 3) + maxi(0, 10 - int(metrics.commands / 3))
 	var xp = 16 + rating / 10 if won else 0
 	var gold = (32 + rating / 5 + metrics.coins) if won else 0
@@ -1062,9 +1094,10 @@ func buy(id: String) -> bool:
 	campaign.gold -= product.BuyPrice
 	row.remaining -= 1
 	if product.Category == "animals":
-		var next_id = 1
-		for a in campaign.animals: next_id = maxi(next_id, a.id + 1)
+		var next_id = campaign.next_animal_id
+		campaign.next_animal_id+=1
 		campaign.animals.append({"id": next_id, "category": SPECIES[id].category, "species": id, "lv": 1, "xp": 0, "loyalty": row.individual.loyalty, "traits": {}, "name": "", "affinity": 0 if SPECIES[id].affinity else null, "unavailable_through_day": 0})
+		for key in ["rarity","bonus_skills","equipment","source"]: campaign.animals.back()[key]=row.individual.get(key,{} if key=="equipment" else ([] if key=="bonus_skills" else (0 if key=="rarity" else "shop")))
 		add_resident(campaign.animals.back())
 	elif product.Category == "materials": add_resource(id, product.Amount)
 	else:
@@ -1079,7 +1112,9 @@ func sell(id: String, animal_id: int = -1) -> bool:
 	var p = Shop.table()[id]
 	if p.Category == "animals":
 		var found = campaign.animals.filter(func(a): return a.id == animal_id and a.species == id)
-		if found.is_empty() or campaign.animals.size() <= 1: return false
+		if found.is_empty() or found[0].get("dead",false) or found[0].get("hp",1)<=0 or campaign.animals.size() <= 1: return false
+		var resident=Orders.animal(self,animal_id)
+		if not resident.get("equipment",{}).is_empty(): add_item(resident.equipment.item_id,1)
 		animals=animals.filter(func(a):return a.id!=animal_id)
 		campaign.animals.erase(found[0]) # No last-animal softlock. Placed facilities are not sale inventory.
 	elif p.Category == "materials":
@@ -1098,7 +1133,7 @@ func remaining_night() -> float:
 	return maxf(0, config.time_limit_seconds - (tick - night_started_tick) * DT)
 
 func available(a: Dictionary) -> bool:
-	return a.placed and a.hp > 0 and campaign.day > a.unavailable_through_day
+	return a.placed and a.hp > 0 and not a.get("dead",false) and not a.get("lost",false) and a.get("abductor",-1)<0 and campaign.day > a.unavailable_through_day
 
 static func animal_name(a: Dictionary) -> String:
 	return a.get("name", "") if a.get("name", "") != "" else SPECIES[a.species].title
@@ -1154,8 +1189,8 @@ func process_dawn():
 			item.born_day = campaign.day
 			dawn_summary.chicks += 1
 		elif item.kind == "chick":
-			var id = 1
-			for a in campaign.animals: id = maxi(id, a.id + 1)
+			var id = campaign.next_animal_id
+			campaign.next_animal_id+=1
 			campaign.animals.append({"id": id, "species": "hen", "category": "bird", "lv": 1, "xp": 0, "loyalty": 0, "name": "", "affinity": null, "unavailable_through_day": 0})
 			field_items.erase(item)
 			dawn_summary.hens += 1
@@ -1171,7 +1206,7 @@ func process_dawn():
 			dawn_summary.feathers += 1
 	milestones.append({"tick": tick, "kind": "dawn"})
 
-func line_of_sight(from: Vector2i, to: Vector2i) -> bool:
+func line_of_sight(from: Vector2i, to: Vector2i, target_surface: bool=false) -> bool:
 	# Supercover: no peeking through touching wall corners.
 	var delta = to - from
 	var count = maxi(absi(delta.x), absi(delta.y)) * 4
@@ -1180,7 +1215,7 @@ func line_of_sight(from: Vector2i, to: Vector2i) -> bool:
 		var p = Vector2i((Vector2(from) + Vector2(delta) * float(i) / count).round())
 		if p != previous and p.x != previous.x and p.y != previous.y:
 			if blocks_sight(Vector2i(p.x, previous.y)) or blocks_sight(Vector2i(previous.x, p.y)): return false
-		if p != from and blocks_sight(p): return false
+		if p != from and blocks_sight(p) and not (target_surface and p==to): return false
 		previous = p
 	return true
 
@@ -1191,8 +1226,9 @@ func blocks_sight(p: Vector2i) -> bool:
 	return b.get("blocks_sight", b.kind not in ["kennel", "coop"]) and not b.open
 
 func animal_targets(a: Dictionary) -> Array:
+	if SPECIES[a.species].combat_response==ProgressData.CombatResponse.NONE: return []
 	for e in enemies:
-		if not e.done and not e.flee and distance(a.pos, e.pos) <= a.detection_range:
+		if SPECIES[a.species].combat_response==ProgressData.CombatResponse.AUTO and not e.done and not e.flee and distance(a.pos, e.pos) <= a.detection_range and line_of_sight(a.pos,e.pos):
 			a.known_enemies[e.id] = tick + 8
 	return enemies.filter(func(e): return not e.done and not e.flee and a.known_enemies.get(e.id, -1) >= tick and distance(a.pos, e.pos) <= a.attack_target_range)
 
@@ -1209,7 +1245,9 @@ func try_meow(a: Dictionary):
 	skill_log.append({"tick": tick, "actor": "cat_%d" % a.id, "skill": "meow", "targets": nearby.map(func(e): return e.id)})
 
 func add_resident(owned: Dictionary):
+	if owned.get("dead",false): return
 	var a = owned.duplicate(true)
+	a.rarity=ProgressData.rarity(a.get("rarity",0)); a.bonus_skills=a.get("bonus_skills",[]); a.equipment=a.get("equipment",{}); a.faction=a.get("faction","owned")
 	a.loyalty = a.get("loyalty", SPECIES[a.species].loyalty)
 	a.move_speed = SPECIES[a.species].move_speed
 	a.detection_range = SPECIES[a.species].detection_range
@@ -1224,7 +1262,7 @@ func add_resident(owned: Dictionary):
 	a.deployment = "admission_pending"
 	a.home = a.pos
 	a.stamina = 100.0
-	a.max_hp = SPECIES[a.species].hp + (a.lv - 1) * 4
+	a.max_hp = SPECIES[a.species].hp + (a.lv - 1) * 4 + (4 if "hardy" in a.bonus_skills else 0)
 	a.hp = clampi(a.get("hp", a.max_hp), 0, a.max_hp)
 	a.next_bark = 0
 	a.last_bark = -100
@@ -1253,6 +1291,7 @@ func add_resident(owned: Dictionary):
 	admit(a,preferred)
 
 func admit(a: Dictionary,preferred: Vector2i):
+	if a.get("dead",false) or a.get("lost",false): return
 	var sites=[]
 	var owned=campaign.animals.filter(func(row):return row.id==a.id)
 	var retained=not owned.is_empty() and owned[0].has("position") and animal_walkable(a,preferred) and not occupied(preferred)
@@ -1322,8 +1361,8 @@ func debug_action(action: String, selection: Dictionary = {}) -> bool:
 	if action=="infinite": debug_infinite=not debug_infinite
 	elif action=="whistle": campaign.items.whistle=1
 	elif SPECIES.has(action):
-		var id=1
-		for a in campaign.animals: id=maxi(id,a.id+1)
+		var id=campaign.next_animal_id
+		campaign.next_animal_id+=1
 		var owned={"id":id,"species":action,"category":SPECIES[action].category,"lv":1,"xp":0,"loyalty":SPECIES[action].loyalty,"unavailable_through_day":0}
 		campaign.animals.append(owned); add_resident(owned)
 	elif action in ["hurt","heal","lock"]:
@@ -1340,12 +1379,14 @@ func debug_action(action: String, selection: Dictionary = {}) -> bool:
 				var a=Orders.animal(self,selection.id)
 				if a.is_empty(): return false
 				a.hp=clampi(a.hp+amount,0,a.max_hp)
-				if a.hp==0: a.unavailable_through_day=campaign.day+1; a.state="気絶"
+				if a.hp==0:
+					if SPECIES[a.species].mortal: Progression.remove_animal(self,a,"death")
+					else: a.unavailable_through_day=campaign.day+1; a.state="気絶"
 			"enemy":
 				for e in enemies:
 					if e.id!=selection.id: continue
 					e.hp=clampi(e.hp+amount,0,e.max_hp)
-					if e.hp==0: e.flee=true; release_keeper(e); drop_blueprint(e.pos)
+					if e.hp==0: e.flee=true; release_keeper(e); Progression.release_animal(self,e); Progression.loot(self,e)
 			"structure", "floor":
 				var b=building_store(selection.kind).get(selection.pos,{})
 				if b.is_empty() or b.get("status")!="ready" or (selection.has("target_id") and selection.target_id!=b.id): return false

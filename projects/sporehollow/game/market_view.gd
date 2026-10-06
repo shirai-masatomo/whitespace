@@ -38,14 +38,14 @@ static func button_style(button: Button, primary: bool=false):
 static func product_name(row: Dictionary) -> String:
 	var p=Shop.table()[row.id]
 	if p.Category=="materials":return {"soil":"土","wood":"木材","stone":"石"}[row.id]+" ×%d"%p.Amount
-	if p.Category=="animals":return {"shiba":"柴犬","hen":"鶏","cat":"猫"}[row.id]
+	if p.Category=="animals":return Shop.Animals.SPECIES[row.id].title
 	return p.Name
 
 static func role(id: String) -> String:
-	return {"hen":"朝に卵を産む", "cat":"気ままな仲間", "soil":"土の壁・床に", "wood":"木の壁・床に", "stone":"石の壁・床に", "whistle":"遠くの仲間へ指示", "coffee":"眠気を12軽減", "energy_drink":"眠気を25軽減", "egg":"牧場の生産物", "feather":"鶏の落とし物", "mushroom":"仲間の回復に"}.get(id,"牧場で使う品")
+	return {"doberman":"屋外で強く迎撃","bullfrog":"舌拘束と警報","hedgehog":"被弾と警報で迎撃","collar":"犬の忠誠・防御を補助","berry":"ピンチで一度回復","hen":"朝に卵を産む", "cat":"気ままな仲間", "soil":"土の壁・床に", "wood":"木の壁・床に", "stone":"石の壁・床に", "whistle":"遠くの仲間へ指示", "coffee":"眠気を12軽減", "energy_drink":"眠気を25軽減", "egg":"牧場の生産物", "feather":"鶏の落とし物", "mushroom":"仲間の回復に"}.get(id,"牧場で使う品")
 
 static func description(id: String) -> String:
-	return {"hen":"朝に卵を産みます。\n移動の誘導に応じます。攻撃はしません。", "cat":"気ままに牧場を歩きます。\n指示には従いません。", "soil":"土の壁や床を作る資材。", "wood":"木の壁・床・ドアを作る資材。", "stone":"石の壁や床を作る資材。", "whistle":"6マス先まで指示できます。\n対応する仲間を最大8匹、一緒に誘導。\n非消耗。猫は指示に従いません。", "coffee":"眠気を12軽減します。\n飲み物は合計1日2本まで。", "energy_drink":"眠気を25軽減します。\n飲み物は合計1日2本まで。", "egg":"牧場で産まれた卵。", "feather":"鶏が落とした柔らかな羽。", "mushroom":"夜明けに傷ついた仲間を癒します。"}.get(id,"牧場で使う品です。")
+	return {"doberman":"屋外専用の自律迎撃犬。救出本能はありません。", "bullfrog":"舌で敵の移動を止め、被弾すると警報を共有。", "hedgehog":"被弾や共有情報に反応して迎撃。棘で防御します。", "collar":"犬系の忠誠+25、防御+2。非消耗。現地で装備。", "berry":"生存中HP50%以下で消費し、最大HPの1/4回復。", "hen":"朝に卵を産みます。\n移動の誘導に応じます。攻撃はしません。", "cat":"気ままに牧場を歩きます。\n指示には従いません。", "soil":"土の壁や床を作る資材。", "wood":"木の壁・床・ドアを作る資材。", "stone":"石の壁や床を作る資材。", "whistle":"6マス先まで指示できます。\n対応する仲間を最大8匹、一緒に誘導。\n非消耗。猫は指示に従いません。", "coffee":"眠気を12軽減します。\n飲み物は合計1日2本まで。", "energy_drink":"眠気を25軽減します。\n飲み物は合計1日2本まで。", "egg":"牧場で産まれた卵。", "feather":"鶏が落とした柔らかな羽。", "mushroom":"夜明けに傷ついた仲間を癒します。"}.get(id,"牧場で使う品です。")
 
 static func owned(world, row: Dictionary) -> int:
 	var p=Shop.table()[row.id]
@@ -81,6 +81,8 @@ static func texture_for(id: String) -> Texture2D:
 	return null
 
 static func art(c: CanvasItem, id: String, area: Rect2, game):
+	if id in ["doberman","bullfrog","hedgehog","collar","berry"]:
+		game.draw_card_icon(c,id,area.get_center(),1.5); return
 	c.texture_filter=CanvasItem.TEXTURE_FILTER_NEAREST
 	var texture=texture_for(id)
 	if texture:
@@ -197,7 +199,7 @@ static func draw_product(game,b,row: Dictionary):
 	var title=product_name(row)
 	if row.animal_id>=0:title=game.product_title(row).split(" Lv")[0]
 	text(game,b,Rect2(18,166,CARD_WIDTH-36,55),title,20)
-	var subtitle="Lv%d · "%row.get("lv",1) if Shop.table()[row.id].Category=="animals" else ""
+	var subtitle=rarity_label(game,row)+" · " if Shop.table()[row.id].Category=="animals" else ""
 	text(game,b,Rect2(18,224,CARD_WIDTH-36,38),subtitle+role(row.id),15,MUTED)
 	var p=Shop.table()[row.id]
 	price(game,b,Vector2(18,267),p.BuyPrice if game.shop_side=="buy" else p.SellPrice,24)
@@ -245,6 +247,7 @@ static func draw_detail(game):
 	c.draw_style_box(panel(Color("e3e6cd"),Color("d1d6bb")),Rect2(LEFT,320,212,204))
 	art(c,row.id,Rect2(LEFT+36,350,140,142),game)
 	text(game,c,Rect2(616,322,510,80),description(row.id),18)
+	if p.Category=="animals": text(game,c,Rect2(616,392,510,25),rarity_label(game,row)+bonus_label(game,row),15,MUTED)
 	var quantity="店の在庫：%d%s"%[row.count,unit(p)] if buying else "売却可能：%d%s"%[row.count,unit(p)]
 	var own="所持：%s %d%s"%[product_name({"id":row.id}).split(" ×")[0],owned(game.world,row),"匹" if p.Category=="animals" else ""]
 	var one="1回の%s：%s"%["購入" if buying else "売却",product_name(row)+(" ×1" if p.Amount==1 else "")]
@@ -258,3 +261,17 @@ static func draw_detail(game):
 	if game.shop_notice!="":
 		c.draw_style_box(panel(Color("dce5ca"),Color("9dac88")),Rect2(LEFT,642,752,38))
 		text(game,c,Rect2(LEFT+14,650,724,28),game.shop_notice,17,UI.INK)
+
+static func individual(game,row) -> Dictionary:
+	if row.get("animal_id",-1)>=0:
+		for a in game.world.campaign.animals:
+			if a.id==row.animal_id:return a
+	for item in game.world.shop_stock:
+		if item.product==row.id:return item.individual
+	return {}
+
+static func rarity_label(game,row) -> String:
+	return Shop.Data.RARITY_NAMES[Shop.Data.rarity(individual(game,row).get("rarity",0))]
+
+static func bonus_label(game,row) -> String:
+	return " / 丈夫：最大HP+4" if "hardy" in individual(game,row).get("bonus_skills",[]) else ""

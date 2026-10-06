@@ -10,7 +10,7 @@ func check(ok: bool,text: String):
 	if not ok: failures+=1;push_error(text)
 func quiet(day: int=1):
 	var c=Farm.new_campaign();c.day=day
-	var w=Farm.new(c,17).begin_day();w.day_seconds=10000;w.nature_config.spawn_chance_per_second=0
+	var w=Farm.new(c,17).begin_day();w.config.legacy_prayer=true;w.day_seconds=10000;w.nature_config.spawn_chance_per_second=0
 	w.animals[0].mode="rest";w.animals[0].order_until=999999
 	return w
 func drain(w,n: int=800):

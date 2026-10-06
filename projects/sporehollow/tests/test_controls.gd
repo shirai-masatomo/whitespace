@@ -93,8 +93,8 @@ func run():
 	game.world.debug_enabled=true;game.world.debug_action("cat",{});game.world.debug_action("hen",{})
 	var cat=game.world.animals.filter(func(a):return a.species=="cat")[0]
 	var hen=game.world.animals.filter(func(a):return a.species=="hen")[0]
-	game.choose_animal(cat.id);await key(KEY_TAB);check(game.tool=="" and game.group==1,"Cat Tab has no unsupported command")
-	game.choose_animal(hen.id);await key(KEY_TAB);check(game.tool=="guide" and game.subtask_choices()==["guide"],"Hen only guides")
+	game.choose_animal(cat.id);await key(KEY_TAB);check(game.tool=="equip" and game.group==1 and game.world.jobs.is_empty(),"Cat Tab selects equipment only, never animal command")
+	game.choose_animal(hen.id);await key(KEY_TAB);check(game.tool=="guide" and game.subtask_choices()==["guide","equip"],"Hen guides or receives equipment, no dog commands")
 	game.choose_animal(1);game.choose_animal(hen.id,true);await key(KEY_TAB)
 	check(game.world.jobs.is_empty(),"Mixed species selection and Tab do not issue")
 	game.world.animals[0].unavailable_through_day=99

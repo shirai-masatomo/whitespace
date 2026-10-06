@@ -176,7 +176,7 @@ func run():
 	check(w.act("keeper_move",Vector2i(12,13)), "Wake and escape during danger")
 	var day7 = safe()
 	day7.campaign.day = 7
-	day7.spawn_enemy(day7.spawn_schedule[0])
+	day7.spawn_enemy({"entry":day7.entries[0],"role":"runner"})
 	check(day7.enemies[0].move_speed > Farm.Jobs.SPEED, "Later invader can outrun rested keeper")
 	for seed_id in range(1,9):
 		var morning = Farm.new({},seed_id)

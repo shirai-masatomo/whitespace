@@ -99,6 +99,8 @@ func run():
 		report.strategies[strategy] = {"summary": summary, "samples": rows}
 		print(strategy, ": ", JSON.stringify(summary))
 		if strategy == "front": failed = failed or wins < SEEDS * 0.75 or passive == 0 or hp_distribution.size() < 2
-		if strategy == "reserve": failed = failed or wins > 0 # Explicitly resting dog never rescues.
+		# TargetWeights now permit diversion to resting animals/structures; survival is measured,
+		# not assumed impossible. Explicit rest must still suppress rescue AND attacks.
+		if strategy == "reserve": failed = failed or rescues > 0 or attacks > 0
 	FileAccess.open("res://artifacts/evaluation.json", FileAccess.WRITE).store_string(JSON.stringify(report, "  "))
 	quit(1 if failed else 0)

@@ -9,7 +9,8 @@ static func choose(w, actor: Dictionary, type: String, state: String, choices: D
 		w.actor_rngs[key] = generator
 	var rng: RandomNumberGenerator = w.actor_rngs[key]
 	var weights = choices.duplicate(true)
-	var noise: float = w.Rules.AI.rescue_randomness if rescue else w.Rules.AI.randomness
+	var accuracy=actor.get("ai_accuracy",40)
+	var noise: float = w.Rules.AI.rescue_randomness if rescue else w.Rules.AI.randomness*(100-accuracy)/60.0
 	for action in ["watch", "bark", "reposition", "hesitate", "detour"]:
 		if weights.has(action): weights[action] *= noise
 	# Bound inattentiveness: never chain two passive/inefficient decisions.
@@ -25,7 +26,7 @@ static func choose(w, actor: Dictionary, type: String, state: String, choices: D
 		if cursor <= 0:
 			selected = action
 			break
-	var seconds = rng.randf_range(w.Rules.AI.decision_min, w.Rules.AI.decision_max)
+	var seconds = rng.randf_range(w.Rules.AI.decision_min, w.Rules.AI.decision_max)*(1.0+(40-accuracy)/100.0)
 	var ticks = ceili(seconds / w.DT)
 	if rescue: ticks = 2 + int(roll < w.Rules.AI.rescue_randomness)
 	actor.next_decision = w.tick + ticks
