@@ -33,7 +33,8 @@ static func enqueue(w,kind: String,ids: Array,p: Vector2i) -> bool:
 					var cell=Vector2i(x,y)
 					if cell!=leader_goal and cell not in assigned and w.animal_walkable(a,cell) and not w.actor_occupied(cell,a.pos): sites.append(cell)
 			sites.sort_custom(func(a1,b1):
-				var da=w.distance(a1,p); var db=w.distance(b1,p)
+				var da=w.distance(a1,p)+(20 if targets.size()>0 and assigned.any(func(c):return w.distance(a1,c)<=1) else 0)
+				var db=w.distance(b1,p)+(20 if targets.size()>0 and assigned.any(func(c):return w.distance(b1,c)<=1) else 0)
 				return da<db if da!=db else (a1.y<b1.y if a1.y!=b1.y else a1.x<b1.x))
 			var found=false
 			for cell in sites:
@@ -72,6 +73,7 @@ static func step(w,j):
 		j.blocked_ticks=j.get("blocked_ticks",0)+1
 		if j.blocked_ticks>=80:
 			report(w,"道が開かないため誘導を終了しました"); stop(w,j); w.Jobs.complete(w,j,false); return
+	else: j.blocked_ticks=0
 	for t in j.targets:
 		if t.done: continue
 		var a=animal(w,t.id)
@@ -104,17 +106,24 @@ static func step(w,j):
 	var at_end=w.keeper.pos in goals
 	j.leading=not at_end
 	if not at_end:
-		if not w.is_indoor(w.keeper.pos) and pending.any(func(t):return w.distance(animal(w,t.id).pos,w.keeper.pos)>3):
+		if not w.is_indoor(w.keeper.pos) and pending.any(func(t):return w.distance(animal(w,t.id).pos,w.keeper.pos)>(4 if pending.size()>4 else 3)):
 			j.state="guiding"; return
 		w.Jobs.walk(w,j,goals)
-	else: j.state="guiding"
+	else:
+		j.state="guiding"
+		if not pending.any(func(t):return t.id==j.get("arrival_target",-1)):
+			pending.sort_custom(func(a,b):return w.distance(a.dest,w.keeper.pos)>w.distance(b.dest,w.keeper.pos))
+			j.arrival_target=pending[0].id
 	for t in pending:
 		var a=animal(w,t.id)
 		if a.pos==t.dest and at_end:
 			t.done=true
-			w.job_log.append({"tick":w.tick,"event":"guide_arrived","id":j.id,"animal_id":a.id,"destination":[a.pos.x,a.pos.y]})
+			if not t.get("arrival_logged",false):
+				w.job_log.append({"tick":w.tick,"event":"guide_arrived","id":j.id,"animal_id":a.id,"destination":[a.pos.x,a.pos.y]})
+				t.arrival_logged=true
 
 static func follow(w,a) -> bool:
+	if a.get("guide_yield_tick",-1)==w.tick or w.tick<a.get("guide_yield_until",-1): return true
 	if not a.has("guide_job"): return false
 	var found=w.jobs.filter(func(j):return j.id==a.guide_job)
 	if found.is_empty(): a.erase("guide_job"); return false
@@ -128,14 +137,16 @@ static func follow(w,a) -> bool:
 			if a.move_credit>=1: a.move_credit-=1; a.pos=spaces[0]; w.open_for_ally(a.pos)
 			a.state="道を空ける"; return true
 	if t.done: a.state="誘導先で待つ"; return true
+	if not j.get("leading",true) and j.get("arrival_target",a.id)!=a.id: a.state="到着順を待つ"; return true
 	var goal=t.dest
 	if j.get("leading",true) or not j.targets.all(func(t):return t.issued or t.done):
-		if w.distance(a.pos,w.keeper.pos)<=2: a.state="ついていく"; return true
+		var radius=3 if j.targets.size()>4 else 2
+		if w.distance(a.pos,w.keeper.pos)<=radius: a.state="ついていく"; return true
 		var cells=[]
-		for y in range(w.keeper.pos.y-2,w.keeper.pos.y+3):
-			for x in range(w.keeper.pos.x-2,w.keeper.pos.x+3):
+		for y in range(w.keeper.pos.y-radius,w.keeper.pos.y+radius+1):
+			for x in range(w.keeper.pos.x-radius,w.keeper.pos.x+radius+1):
 				var c=Vector2i(x,y)
-				if w.distance(c,w.keeper.pos)<=2 and w.animal_walkable(a,c) and not w.actor_occupied(c,a.pos) and not w.animal_path(a,a.pos,c).is_empty(): cells.append(c)
+				if w.distance(c,w.keeper.pos)<=radius and w.animal_walkable(a,c) and not w.actor_occupied(c,a.pos) and not w.animal_path(a,a.pos,c).is_empty(): cells.append(c)
 		cells.sort_custom(func(c,d):return w.distance(a.pos,c)<w.distance(a.pos,d))
 		if cells.is_empty(): return true
 		goal=cells[0]
@@ -144,8 +155,10 @@ static func follow(w,a) -> bool:
 	if a.move_credit>=1:
 		var next=w.animal_next(a,goal)
 		if next!=a.pos:
-			a.move_credit-=1; w.open_for_ally(next); a.pos=next
+			a.move_credit-=1; w.open_for_ally(next); a.pos=next; j.blocked_ticks=0
 		elif a.pos!=goal:
+			var route=w.find_path(a.pos,goal,false,false,not w.SPECIES[a.species].can_enter_indoor)
+			if route.size()>1: clear_guide_path(w,j,route[1])
 			j.state="blocked"; j.block_reason="誘導先への通路を空けてください"
 	return true
 
@@ -160,3 +173,29 @@ static func command_goals(w,a,reach: int) -> Array:
 static func report(w,text: String):
 	w.say(text)
 	w.milestones.append({"tick":w.tick,"kind":"order_notice","text":text})
+
+static func clear_guide_path(w,j,start: Vector2i):
+	# Move the last member of a short occupied chain into a real free cell.
+	# One grid step with normal move credit, never teleport the group or overlap the keeper.
+	var members={}
+	for t in j.targets:
+		var a=animal(w,t.id)
+		if active(w,a): members[a.pos]=a
+	if not members.has(start): return
+	var open=[start]; var previous={start:start}
+	while not open.is_empty():
+		var p=open.pop_front()
+		for n in w.neighbors(p):
+			if previous.has(n) or n==w.keeper.pos or not w.animal_walkable(members[p],n):continue
+			previous[n]=p
+			if not w.actor_occupied(n,p):
+				var a=members[p]
+				a.move_credit=minf(1.9,a.move_credit+a.move_speed*w.DT)
+				a.guide_yield_tick=w.tick
+				if a.move_credit>=1:
+					a.move_credit-=1;a.pos=n;w.open_for_ally(n);a.guide_yield_until=w.tick+8;j.blocked_ticks=0
+					for t in j.targets:
+						if t.id==a.id and t.done: t.done=false
+				a.state="道を空ける"
+				return
+			if members.has(n):open.append(n)

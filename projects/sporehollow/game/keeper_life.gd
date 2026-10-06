@@ -245,6 +245,7 @@ static func hurt(w, e):
 	k.hp = maxi(0, k.hp - e.attack_power)
 	k.hurt_until = w.tick + 8
 	danger(w, "keeper_hit")
+	w.Story.interrupt_prayer(w)
 	w.Orders.interrupt(w)
 	w.combat_log.append({"tick": w.tick, "source": "keeper_hit", "id": e.id, "target": -1, "damage": e.attack_power})
 	if k.hp == 0:

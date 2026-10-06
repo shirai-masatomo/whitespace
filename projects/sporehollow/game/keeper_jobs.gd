@@ -77,10 +77,12 @@ static func walk(w,j,goals: Array) -> bool:
 		return false
 	var next=route[1]
 	if w.actor_occupied(next,w.keeper.pos):
-		for goal in goals:
+		for goal in ([] if j.kind=="animal_order" and j.order=="guide" else goals):
 			var bypass=w.find_path(w.keeper.pos,goal,false,true,outdoor)
 			if bypass.size()>1 and not w.actor_occupied(bypass[1],w.keeper.pos): next=bypass[1]; break
-		if w.actor_occupied(next,w.keeper.pos): w.keeper.yield_cell=next; j.state="blocked"; j.block_reason="通行待ち"; return false
+		if w.actor_occupied(next,w.keeper.pos):
+			if j.kind=="animal_order" and j.order=="guide": w.Orders.clear_guide_path(w,j,next)
+			w.keeper.yield_cell=next; j.state="blocked"; j.block_reason="通行待ち"; return false
 	j.state="walking"
 	w.keeper.erase("yield_cell")
 	w.keeper.move_credit-=1
@@ -94,6 +96,7 @@ static func step(w):
 		if pending.get("cancel_requested",false): cancel(w,pending.id)
 	if not w.Life.able(w) or w.jobs_held or w.manual_goal!=null or w.jobs.is_empty(): return
 	var j=w.jobs[0]
+	if j.kind in w.Story.ACTIONS: w.Story.step_job(w,j); return
 	if j.has("target_id"):
 		var b=w.building_store(j.target_layer).get(j.pos,{})
 		if b.get("id")!=j.target_id or b.get("kind")!=j.target_kind or b.get("status")!="ready": complete(w,j,false); return
@@ -162,7 +165,7 @@ static func preview(w) -> Array:
 					var a=w.Orders.animal(w,t.id)
 					if not a.is_empty(): plans.append({"number":i+1,"goals":w.Orders.command_goals(w,a,j.range)})
 			if j.order=="guide": plans.append({"number":i+1,"goals":[j.leader_goal],"outdoor":j.targets.any(func(t):return not w.SPECIES[w.Orders.animal(w,t.id).get("species","hen")].can_enter_indoor)})
-		else: plans.append({"number":i+1,"goals":[j.pos] if j.kind=="move" else w.neighbors(j.pos)})
+		else: plans.append({"number":i+1,"goals":w.Story.goals(w) if j.kind in w.Story.ACTIONS and j.kind!="clear_tree" else ([j.pos] if j.kind=="move" else w.neighbors(j.pos))})
 	for plan in plans:
 		var route=path_to(w,origin,plan.goals.filter(func(p):return w.walkable(p)),plan.get("outdoor",false) and not w.is_indoor(origin))
 		legs.append({"number":plan.number,"path":route if not route.is_empty() else [origin],"blocked":route.is_empty()})

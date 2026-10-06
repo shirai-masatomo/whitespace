@@ -45,6 +45,7 @@ func run():
 	if output=="" or not "--isolated-review" in OS.get_cmdline_user_args():quit(2);return
 	root.size=Vector2i(1280,800)
 	game=load("res://game/main.tscn").instantiate();root.add_child(game)
+	if game.story_modal!="": await click("story_close")
 	await create_timer(3.0).timeout
 	await capture("morning_menu")
 	await click("open_market");await capture("market_entry")

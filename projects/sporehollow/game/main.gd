@@ -1,4 +1,9 @@
 extends Node2D
+const StoryView = preload("res://game/story_view.gd")
+var story_modal=""
+var story_page=0
+var story_panel: Control
+var selected_trees: Array=[]
 const Farm = preload("res://game/world.gd")
 const FONT = preload("res://assets/fonts/ui_font.tres")
 const TILE = Vector2(48, 42)
@@ -161,9 +166,10 @@ func _ready():
 	book_view.setup(self)
 	if world.phase == "shop": arrival_started = clock
 	refresh()
-	controls.visible = not cinematic()
+	controls.visible = not cinematic() and story_modal==""
 	if "--automated" in OS.get_cmdline_user_args(): automated = true
 	if automated: get_window().unfocusable = true
+	if not automated and not world.story.intro_seen: StoryView.open(self,"intro")
 	if "--smoke" in OS.get_cmdline_user_args(): get_tree().create_timer(2).timeout.connect(get_tree().quit)
 
 func add_button(parent: Control, id: String, text_value: String, area: Rect2, callback: Callable):
@@ -412,13 +418,15 @@ func facility_action(action: String):
 	refresh()
 
 func context_targets() -> Array:
+	if selected.get("kind")=="tree": return selected_trees
+	if selected.get("kind")=="idol": return [world.Story.at(world)]
 	if selected.get("kind") == "job": return [selected.pos]
 	if not selected_resources.is_empty(): return selected_resources
 	if selected.get("kind") in ["structure","floor"]: return selected_structures
 	return []
 
 func context_state() -> String:
-	return str(selected_resources) + str(selected) + str(selected_structures) + str(selected_structures.map(func(p): return selected_store().get(p,{}))) + str(world.jobs.map(func(j): return [j.kind, j.pos])) + str(world.materials) + str(world.wood)
+	return str(world.trees)+str(world.story.idol)+str(world.story.investigated)+str(selected_trees)+str(selected_resources) + str(selected) + str(selected_structures) + str(selected_structures.map(func(p): return selected_store().get(p,{}))) + str(world.jobs.map(func(j): return [j.kind, j.pos])) + str(world.materials) + str(world.wood)
 
 func build_context_actions():
 	context_signature = context_state()
@@ -430,6 +438,16 @@ func build_context_actions():
 	var rows = []
 	if selected.get("kind") == "job":
 		rows.append(["cancel_near", "取消", "cross", cancel_work.bind(selected.id), false, "この予定だけを取り消す"])
+	elif selected.get("kind")=="tree":
+		rows.append(["clear_tree","開拓する","hammer",story_action.bind("clear_tree"),selected_trees.all(func(p):return job_reserved("clear_tree",p)),"現地4秒・木材 +8"] )
+		if selected_trees.any(func(p):return job_reserved("clear_tree",p)): rows.append(["cancel_near","取消","cross",cancel_selected_work,false,"開拓予定を取り消す"])
+	elif selected.get("kind")=="idol":
+		for kind in ["inspect_idol","pray_wealth","repair_idol","recover_idol"]:
+			if kind=="pray_wealth" and not world.story.investigated: continue
+			if kind=="repair_idol" and world.story.idol.hp>=world.story.idol.max_hp: continue
+			if kind=="recover_idol" and world.story.idol.state!="interrupted": continue
+			var why=world.Story.reason(world,kind,world.Story.at(world))
+			rows.append([kind,StoryView.LABELS[kind],"spark",story_action.bind(kind),why!="",why if why!="" else "牧場主が現地で行います"])
 	elif not selected_resources.is_empty():
 		var pending = selected_resources.any(func(p): return not job_reserved("collect", p))
 		rows.append(["collect_selection", "回収する" if pending else "予約済み", "basket", collect_selected, not pending, "牧場主が現地で回収する"])
@@ -452,7 +470,7 @@ func build_context_actions():
 	var count = context_targets().size()
 	context_panel.size = Vector2(rows.size() * 112 + 12, 68)
 	var title = Label.new()
-	title.text = "選択 %d/8" % count if count > 1 else ("落とし物" if not selected_resources.is_empty() else ("床" if selection_layer=="floor" else "建物"))
+	title.text = "黄金像" if selected.get("kind")=="idol" else ("開拓する木" if selected.get("kind")=="tree" else ("選択 %d/8" % count if count > 1 else ("落とし物" if not selected_resources.is_empty() else ("床" if selection_layer=="floor" else "建物"))))
 	title.position = Vector2(9,3)
 	title.add_theme_color_override("font_color",UI.INK)
 	context_panel.add_child(title)
@@ -476,6 +494,9 @@ func position_context_actions():
 	context_panel.position = p
 
 func prune_selection():
+	if selected.get("kind")=="tree":
+		selected_trees=selected_trees.filter(func(p):return world.trees.has(p))
+		if selected_trees.is_empty(): selected.clear(); refresh()
 	if selected.get("kind")=="job" and not world.jobs.any(func(j):return j.id==selected.id):
 		selected.clear()
 		refresh()
@@ -491,7 +512,11 @@ func prune_selection():
 func advance():
 	if cinematic() or menu_open: return
 	if world.phase == "shop":
-		world = world.begin_day()
+		var next_day = world.begin_day()
+		if next_day == null:
+			notice(world.story.get("migration_error","今は支度を終えられません"))
+			return
+		world = next_day
 		reset_view()
 		group = -1
 		departure_started = clock
@@ -513,7 +538,7 @@ func advance():
 
 func cancel_selected_work():
 	for j in world.jobs.duplicate():
-		if j.kind=="collect" and j.pos in selected_resources: world.act("cancel_job",Vector2i.ZERO,j.id)
+		if (j.kind=="collect" and j.pos in selected_resources) or (selected.get("kind")=="tree" and j.kind=="clear_tree" and j.pos in selected_trees): world.act("cancel_job",Vector2i.ZERO,j.id)
 	refresh()
 
 func reset_view():
@@ -577,6 +602,7 @@ func toggle_pause():
 	refresh()
 
 func choose_walk():
+	selected_trees.clear()
 	selected_resources.clear()
 	selected_structures.clear()
 	group = 2
@@ -586,6 +612,7 @@ func choose_walk():
 	refresh()
 
 func neutral():
+	selected_trees.clear()
 	group = -1
 	tool = ""
 	selected.clear()
@@ -642,7 +669,7 @@ func refresh_jobs():
 		row.focus_mode = Control.FOCUS_NONE
 		UI.button(row, Color("c6d1ac") if i == 0 else UI.PAPER)
 		var names = {"wall": "壁", "door":"ドア","locked_door":"施錠ドア","wood_wall":"木壁","stone_wall":"石壁","soil_tile":"土タイル","wood_tile":"木タイル","stone_tile":"石タイル", "kennel": "犬小屋", "coop": "鶏小屋", "move": "歩く", "collect": "回収", "repair": "修理", "remove": "解体", "remove_floor":"タイル解体", "repair_floor":"床修理", "gate": "ドアを開閉", "animal_order": "仲間へ指示"}
-		row.text = "%s%s" % [ "› " if j.state != "pending" else "", ("待機 · " if j.state == "blocked" else "") + names.get(j.kind, "仕事")]
+		row.text = "%s%s" % [ "› " if j.state != "pending" else "", ("待機 · " if j.state == "blocked" else "") + names.get(j.kind, StoryView.LABELS.get(j.kind,"仕事"))]
 		row.draw.connect(draw_queue_badge.bind(row,i+1))
 		row.set_meta("job_id",j.id)
 		row.set_meta("row_index",i)
@@ -674,7 +701,7 @@ func refresh_jobs():
 
 func draw_work_plans():
 	if not world.working(): return
-	var signature = str(world.keeper.pos)+str(world.manual_goal)+str(world.jobs.map(func(j):return [j.id,j.pos,j.get("targets",[])]))+str(world.structures)+str(world.animals.map(func(a):return a.pos))+str(world.floors)
+	var signature = str(world.keeper.pos)+str(world.manual_goal)+str(world.jobs.map(func(j):return [j.id,j.pos,j.get("targets",[])]))+str(world.structures)+str(world.animals.map(func(a):return a.pos))+str(world.floors)+str(world.trees)+str(world.story.idol)
 	if signature != route_signature:
 		route_signature=signature
 		route_legs=world.Jobs.preview(world)
@@ -769,6 +796,11 @@ func job_at(cell: Vector2i) -> int:
 	return -1
 
 func _input(event):
+	if story_modal!="":
+		if event is InputEventKey and event.pressed and event.physical_keycode==KEY_ESCAPE: StoryView.close(self); get_viewport().set_input_as_handled()
+		if event is InputEventMouseButton and event.button_index==MOUSE_BUTTON_RIGHT and event.pressed: StoryView.close(self); get_viewport().set_input_as_handled()
+		# GUI buttons receive the event; every world handler is gated by the modal.
+		return
 	if event is InputEventMouse: pointer = event.position
 	if subtasks.input(self,event):
 		press_pending = false
@@ -899,6 +931,7 @@ func selection_candidates() -> Array:
 	for item in world.field_items:
 		if item.pos not in cells: cells.append(item.pos)
 	for cell in cells: result.append({"class": "resource", "id": cell, "point": center(cell)})
+	for cell in world.trees: result.append({"class":"tree","id":cell,"point":center(cell)})
 	for cell in world.structures:
 		if world.live_structure(cell) and selection_layer!="floor": result.append({"class":"structure","id":cell,"point":center(cell)})
 	for cell in world.floors:
@@ -935,6 +968,9 @@ func finish_drag():
 		selected_animals = targets.map(func(c): return c.id)
 		selected_animal = selected_animals[0] if not selected_animals.is_empty() else -1
 		if selected_animal >= 0: selected = {"kind": "animal", "id": selected_animal}
+	elif drag_class == "tree":
+		selected_trees=targets.map(func(c):return c.id)
+		if not selected_trees.is_empty(): selected={"kind":"tree","pos":selected_trees[0]}
 	elif drag_class == "resource":
 		group = -1
 		selected_resources = targets.map(func(c): return c.id)
@@ -948,6 +984,7 @@ func finish_drag():
 	refresh()
 
 func _unhandled_input(event):
+	if story_modal!="": return
 	if menu_open or cinematic() or not world.working(): return
 	if not (event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT) or pointer_over_ui(): return
 	if Farm.BUILD.has(tool):
@@ -969,6 +1006,13 @@ func board_click(event):
 	if Farm.BUILD.has(tool):
 		if not world.act(tool,cell): notice("予定は8件まで" if world.jobs.size()>=8 else world.Buildings.reason(world,tool,cell))
 		refresh(); return
+	if world.trees.has(cell) or cell in world.Story.idol_cells(world):
+		if not event.ctrl_pressed: selected_trees.clear()
+		if world.trees.has(cell): toggle_selection(selected_trees,cell)
+		selected={"kind":"tree" if world.trees.has(cell) else "idol","pos":cell}
+		selected_resources.clear(); selected_structures.clear(); selected_animals.clear(); tool=""
+		refresh(); return
+	selected_trees.clear()
 	if not event.ctrl_pressed: selected_resources.clear()
 	if world.keeper.placed and keeper_hit_rect().has_point(get_canvas_transform().affine_inverse()*event.position):
 		choose_walk()
@@ -1053,7 +1097,7 @@ func _process(delta):
 	if not menu_open and not cinematic() and world.phase != "shop": camera.position += direction.normalized() * delta * 420
 	var middle = Vector2(Farm.W, Farm.H) * TILE * 0.5
 	camera.position = camera.position.clamp(middle - Vector2(500, 360), middle + Vector2(500, 360))
-	if not world.paused and not automated and world.working():
+	if story_modal=="" and not world.paused and not automated and world.working():
 		accumulated += minf(delta, 0.1) * (24.0 if not world.rest_skip.is_empty() else speed)
 		while accumulated >= Farm.DT:
 			var was_sending = not world.rest_skip.is_empty()
@@ -1097,7 +1141,7 @@ func _process(delta):
 	if world.phase == "shop" and clock - arrival_started > 0.8 and not arrival_bell:
 		arrival_bell = true
 		audio.cue("merchant")
-	controls.visible = not cinematic()
+	controls.visible = not cinematic() and story_modal==""
 	if selected.get("kind") == "enemy" and world.enemies.any(func(e): return e.id == selected.id and (e.hp <= 0 or e.flee or e.done)):
 		selected.clear()
 		refresh()
@@ -1338,6 +1382,8 @@ func _draw():
 			draw_line(q, q + Vector2(10, 2), Color("d78d37"), 3)
 		else: draw_line(q + Vector2(-5, 6), q + Vector2(6, -8), Color("eee8cf"), 5)
 	var actors=[]
+	for p in world.trees: actors.append({"y":center(p).y,"x":p.x,"kind":"tree","data":p})
+	if not world.story.idol.is_empty(): actors.append({"y":center(world.Story.at(world)+Vector2i.DOWN).y,"x":world.Story.at(world).x,"kind":"idol"})
 	for cell in world.structures:
 		var b=world.structures[cell]
 		if b.kind in Farm.Buildings.DOORS and b.status=="ready":
@@ -1352,6 +1398,8 @@ func _draw():
 	actors.sort_custom(func(a,b): return a.y<b.y if a.y!=b.y else (a.x<b.x if a.x!=b.x else a.kind<b.kind))
 	for actor in actors:
 		match actor.kind:
+			"tree": StoryView.tree(self,actor.data)
+			"idol": StoryView.idol(self)
 			"door_part": BuildingArt.door_layer(self,center(actor.data),world.structures[actor.data],actor.part)
 			"building": draw_structure(center(actor.data),world.structures[actor.data])
 			"animal": draw_animal_actor(actor.data)
@@ -1360,9 +1408,12 @@ func _draw():
 	for f in dust:
 		Delivered.draw_clip(self,"fx/"+f.kind,f.pos,visual_time-f.at)
 	draw_work_plans()
+	for cell in selected_trees:
+		if selected.get("kind")=="tree": draw_rect(Rect2(center(cell)-Vector2(21,21),Vector2(42,42)),Color("ffe2a3"),false,2)
+	if debug_view: StoryView.debug(self)
 	for cell in selected_resources: draw_rect(Rect2(center(cell)-Vector2(20,20),Vector2(40,40)),Color("ffe2a3"),false,2)
 	if dragging:
-		label_on(self,get_canvas_transform().affine_inverse()*pointer+Vector2(10,-10),{"animal":"仲間","resource":"回収物","structure":"建物","floor":"床"}.get(drag_class,""),16,UI.PAPER)
+		label_on(self,get_canvas_transform().affine_inverse()*pointer+Vector2(10,-10),{"animal":"仲間","resource":"回収物","tree":"開拓","structure":"建物","floor":"床"}.get(drag_class,""),16,UI.PAPER)
 	if cinematic(): return
 	var cell = Vector2i(get_canvas_transform().affine_inverse() * pointer / TILE)
 	if world.working() and world.inside(cell) and not pointer_over_ui():
@@ -1410,11 +1461,6 @@ func draw_hud():
 		for i in range(world.jobs.size()):
 			if world.jobs[i].id == hover_job: hud.draw_rect(Rect2(1007,91+i*35,253,34),Color("ffe2a3"),false,2)
 	hud.draw_rect(Rect2(0, 49, 1280, 703), Color(0.04, 0.07, 0.22, night_tint))
-	if night_tint > 0.05:
-		for entry in world.entries:
-			var q = screen_cell(entry) + Vector2(0, -45)
-			hud.draw_circle(q, 28, Color(1, 0.77, 0.3, night_tint * 0.22))
-			hud.draw_rect(Rect2(q - Vector2(4, 6), Vector2(8, 12)), Color("efd99b"))
 	if cinematic(): return
 	if world.phase == "shop":
 		draw_shop()
@@ -1423,6 +1469,7 @@ func draw_hud():
 		hud.draw_style_box(UI.surface(UI.PAPER), Rect2(330, 72, 620, 106))
 		label_on(hud, Vector2(365, 118), "夜明け", 30, Color("485e48"))
 		label_on(hud, Vector2(368, 153), "よく守ったね", 18, Color("526444"))
+		if world.story.miracles.any(func(m):return m.day==world.campaign.day+1): label_on(hud,Vector2(380,325),"像のそばに金貨が残されていた。+60G",21,UI.PAPER)
 		hud.draw_texture(UI.icon("spark"), Vector2(533, 119))
 		label_on(hud, Vector2(560, 138), "+%d EXP" % world.score.xp, 27, Color("456358"))
 		draw_card_icon(hud, "gold", Vector2(786, 127), 0.9)
@@ -1467,7 +1514,8 @@ func draw_hud():
 	for a in world.animals:
 		if a.placed and a.hp <= a.max_hp * Farm.Rules.LOW_HP_FRACTION: draw_edge(a.pos, Farm.animal_name(a) + " !", Color("ff997f"))
 	if alert_kind == "invasion" and alert_visible():
-		for entry in world.entries: draw_edge(entry, "侵入 !", Color("f5d483"))
+		for enemy in world.enemies:
+			if not enemy.done and world.tick-enemy.born<16: draw_edge(enemy.pos,"人影 !",Color("f5d483"))
 	var details = ""
 	if selected.get("kind") == "resource":
 		details = "回収予定" if collectible(selected.pos) else "回収済み"
@@ -1516,11 +1564,13 @@ func draw_hud():
 		label_on(hud, p + Vector2(10, 45), "%s%s" % [resource_text({b.get("resource", "soil"): quote.cost}), ""], 16)
 	if world.phase == "result":
 		panel(Rect2(362, 225, 554, 340))
-		label_on(hud, Vector2(398, 271), "守りきった！" if world.result == "win" else "牧場主が連れ去られた", 27)
+		label_on(hud, Vector2(398, 271), "守りきった！" if world.result == "win" else {"idol_destroyed":"黄金像が壊された","idol_stolen":"黄金像が持ち去られた"}.get(world.story.defeat_reason,"牧場主が連れ去られた"), 27)
 		label_on(hud, Vector2(398, 311), "評価 %d   EXP +%d   GOLD +%d" % [world.score.rating, world.score.xp, world.score.gold], 18)
 	if world.working() and world.early_clear:
 		label_on(hud, Vector2(935, 735), "夜明けまで自由に", 16)
-	if debug_view: label_on(hud, Vector2(15, 125), "DEBUG ON: seed %d / tick %d  F3:OFF" % [world.seed_value, world.tick], 14)
+	if debug_view:
+		label_on(hud,Vector2(278,153),"世界 %s / 祈り%d / 放送%d"%[str(world.story.hidden),world.story.prayers.size(),world.story.news.size()],12)
+		label_on(hud, Vector2(15, 125), "DEBUG ON: seed %d / tick %d  F3:OFF" % [world.seed_value, world.tick], 14)
 
 func draw_edge(cell: Vector2i, title: String, color: Color):
 	var p = screen_cell(cell)
@@ -1727,6 +1777,7 @@ func turn_book(direction: int):
 func build_shop():
 	if morning_screen != "book":
 		MarketView.build(self)
+		if morning_screen=="morning": StoryView.morning_buttons(self)
 		return
 	add_button(palette, "close_market", "メニューへ", Rect2(1040, 116, 124, 44), close_morning_screen)
 	buttons.close_market.icon = UI.icon("cross")
@@ -2222,3 +2273,10 @@ func wall_links(cell: Vector2i) -> Dictionary:
 		result[d]=Farm.Buildings.enclosure(world.structures.get(cell+d,{}))
 	return result
 
+
+func story_action(kind: String):
+	var count=0
+	for p in context_targets().duplicate():
+		if world.act(kind,p): count+=1
+	notice("%d件予約"%count if count>0 else world.events.back().text)
+	refresh()

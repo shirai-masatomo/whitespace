@@ -17,6 +17,7 @@ static func rooms(w, proposed: Dictionary = {}) -> Dictionary:
 	var tiles = {}
 	for p in w.floors:
 		if w.floors[p].status == "ready": tiles[p] = true
+	for p in w.Story.idol_cells(w): tiles[p]=true # installed footprint covers the ground
 	if not proposed.is_empty():
 		if w.BUILD[proposed.kind].get("layer") == "floor": tiles[proposed.pos] = true
 		elif proposed.kind in WALLS + DOORS: barriers[proposed.pos] = true
@@ -46,7 +47,9 @@ static func rooms(w, proposed: Dictionary = {}) -> Dictionary:
 static func reason(w, kind: String, p: Vector2i, check_cost: bool = true) -> String:
 	if kind in ["kennel","coop"]: return "この建物は休止中です"
 	if not w.BUILD.has(kind) or not w.inside(p): return "ここには建てられません"
-	if p in w.entries: return "受入口と通路を空けてください"
+	if w.trees.has(p): return "先に開拓が必要"
+	if p in w.Story.idol_cells(w): return "黄金像の場所です"
+	if p==w.logistics_entry: return "受入口と通路を空けてください"
 	if w.occupied(p): return "ここに誰かいます"
 	if w.natural.has(p) or not w.items_at(p).is_empty() or w.field_items.any(func(i):return i.pos==p): return "物があるため建設できません"
 	var data = w.BUILD[kind]

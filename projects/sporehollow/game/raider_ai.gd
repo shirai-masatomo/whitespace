@@ -16,7 +16,7 @@ static func perceive(e: Dictionary, w):
 	else: e.search_state = "探索中"
 
 static func target(e: Dictionary, w) -> Vector2i:
-	if e.flee or e.carry == "keeper": return w.exit_for(e.entry)
+	if e.flee or e.carry == "keeper": return w.Story.exit_goal(w,e)
 	if e.can_see_keeper: return e.last_known_keeper_position
 	if e.last_known_keeper_position != null:
 		if e.pos != e.last_known_keeper_position: return e.last_known_keeper_position

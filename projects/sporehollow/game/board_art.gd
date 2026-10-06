@@ -33,45 +33,12 @@ static func draw_ground(c: CanvasItem, world, tile: Vector2, time: float = 0):
 		var wing = 2 + absf(sin(time * 7 + i)) * 2
 		c.draw_line(q - Vector2(wing, 2), q, Color("d5d7a1"), 2)
 		c.draw_line(q, q + Vector2(wing, -2), Color("c0c793"), 2)
-	# Worn entrance trail stops short of the meadow, never implying a mandatory route.
-	for entry in world.entries:
-		var p = (Vector2(entry) + Vector2.ONE * 0.5) * tile
-		c.draw_line((Vector2(world.exit_for(entry)) + Vector2.ONE * 0.5) * tile, p + Vector2(76, 0), Color("ad9d70"), 27)
-		c.draw_line(p, p + Vector2(96, 8), Color("ad9d70"), 13)
-	# Fence follows the actual immutable boundary; entrance cells remain visibly open.
-	for y in range(world.H):
-		for x in range(world.W):
-			var cell = Vector2i(x, y)
-			if world.inside(cell) or cell in world.entries or cell in world.entries.map(func(e): return world.exit_for(e)): continue
-			var p = (Vector2(cell) + Vector2.ONE * 0.5) * tile
-			var horizontal = y == 0 or y == world.H - 1
-			var axis = Vector2(tile.x * 0.5, 0) if horizontal else Vector2(0, tile.y * 0.5)
-			c.draw_line(p - axis + Vector2(3, 4), p + axis + Vector2(3, 4), Color("354c37"), 9)
-			for offset in [-6, 5]:
-				c.draw_line(p - axis + Vector2(0, offset), p + axis + Vector2(0, offset), Color("b6955e"), 5)
-			c.draw_rect(Rect2(p - Vector2(4, 13), Vector2(8, 31)), Color("7d5a3e"))
-			c.draw_rect(Rect2(p - Vector2(4, 13), Vector2(8, 5)), Color("d0b17a"))
-	for entry in world.entries:
-		var p = (Vector2(entry) + Vector2.ONE * 0.5) * tile
-		var warning = world.phase == "defend" and (world.next_attack_seconds() >= 0 and world.next_attack_seconds() < 3 or world.enemies.any(func(e): return not e.done and not e.flee and e.entry == entry))
-		# Heavy paired gate posts, open leaves and pennants; actual entrance remains walkable.
-		for side in [-1, 1]:
-			var post = p + Vector2(-24, side * 33)
-			c.draw_rect(Rect2(post + Vector2(-3, 4), Vector2(20, 32)), Color(0.14, 0.22, 0.12, 0.4))
-			c.draw_rect(Rect2(post - Vector2(8, 19), Vector2(16, 40)), Color("876044"))
-			c.draw_rect(Rect2(post - Vector2(10, 21), Vector2(20, 7)), Color("d2b67e"))
-			c.draw_line(post, post + Vector2(28, side * 15), Color("b49665"), 6)
-			c.draw_line(post + Vector2(0, 9), post + Vector2(28, side * 15 + 9), Color("94714d"), 5)
-			c.draw_line(post + Vector2(0, -16), post + Vector2(0, -49), Color("e0cca2"), 2)
-			var flutter = sin(time * (9 if warning else 2) + side) * (5 if warning else 2)
-			c.draw_colored_polygon(PackedVector2Array([post + Vector2(1, -48), post + Vector2(23, -42 + flutter), post + Vector2(1, -34)]), Color("e89559") if warning else Color("9ab6b0"))
-	# Quiet props outside the playable area; no invisible obstacles on the board.
-	for x in [3, 9, 19, 23]:
-		var p = Vector2(x * tile.x, -8)
-		c.draw_circle(p, 18, Color("304b39"))
-		c.draw_circle(p + Vector2(-9, -9), 15, Color("577849"))
-		c.draw_circle(p + Vector2(12, -10), 12, Color("63834b"))
-		c.draw_rect(Rect2(p + Vector2(-2, 0), Vector2(5, 16)), Color("795a40"))
+	# Deep forest is outside the immutable boundary, not an enclosure wall.
+	for y in range(-1,world.H+1):
+		for x in range(-1,world.W+1):
+			if x not in [-1,0,world.W-1,world.W] and y not in [-1,0,world.H-1,world.H]: continue
+			if y in [5,6] and x<=0: continue # merchant trail, not the sole invasion route
+			preload("res://game/story_view.gd").tree(c,Vector2i(x,y),true)
 
 static func draw_resource(c: CanvasItem, p: Vector2, kind: String):
 	if Delivered.RESOURCES.has(kind):

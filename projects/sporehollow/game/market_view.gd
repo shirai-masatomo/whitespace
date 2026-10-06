@@ -227,7 +227,7 @@ static func draw(game):
 	price(game,c,Vector2(728,143),game.world.campaign.gold,26)
 	c.draw_line(Vector2(140,195),Vector2(1140,195),Color("c5b590"),1)
 	Art.fit(c,Art.CART,Rect2(128,313,220,192))
-	text(game,c,Rect2(148,535,196,42),"いらっしゃい" if game.shop_side!="sell" else "持ち物を見せてね",16,MUTED)
+	text(game,c,Rect2(148,535,196,42),game.world.Story.merchant(game.world) if game.world.story.hidden.recognition>0 else ("いらっしゃい" if game.shop_side!="sell" else "持ち物を見せてね"),16,MUTED)
 	var crumb="商人との取引" if game.shop_side=="home" else ("買う" if game.shop_side=="buy" else "売る")+"  /  "+(("今日の品" if game.shop_side=="buy" else "持ち物") if game.shop_level=="categories" else game.MARKET_CATEGORIES[game.shop_category][0])
 	text(game,c,Rect2(LEFT,222,750,38),crumb,21)
 	if game.shop_level=="list" and game.shop_side!="home" and game.shop_rows().is_empty():

@@ -1,5 +1,5 @@
 extends SceneTree
-const Farm = preload("res://game/world.gd")
+const Farm = preload("res://tests/open_ranch_fixture.gd")
 var checks = 0
 var failures = 0
 func check(ok, why):

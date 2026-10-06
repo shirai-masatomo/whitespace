@@ -1,5 +1,9 @@
 extends RefCounted
 ## Deterministic fixed-tick rules. No scene, Input, frame clock or rendering dependencies.
+const Story = preload("res://game/world_story_system.gd")
+var story: Dictionary = {}
+var trees: Dictionary = {}
+const logistics_entry = Vector2i(1,5)
 const RaiderAI = preload("res://game/raider_ai.gd")
 const Decisions = preload("res://game/decision_ai.gd")
 const StageData = preload("res://game/stages.gd")
@@ -163,11 +167,7 @@ func _init(data: Dictionary = {}, seed_number: int = 17, stage_override: Diction
 			record.status="disabled"
 			saved.status="disabled"
 		structures[cell] = record
-	for wave in config.waves:
-		for cell in wave.entries:
-			var p = Vector2i(cell[0], cell[1])
-			if p not in entries: entries.append(p)
-	make_schedule()
+	entries = Story.entries(self)
 	# A newly bought hen must not spawn inside a facility retained from the previous day.
 	if has_nest() and (blocks(nest) or live_structure(nest)):
 		var clear_cells = []
@@ -210,6 +210,13 @@ func _init(data: Dictionary = {}, seed_number: int = 17, stage_override: Diction
 		if b.kind not in ["kennel","coop"] and b.status=="building" and not jobs.any(func(j):return j.pos==p):
 			jobs.append({"id":next_job_id,"kind":b.kind,"pos":p,"animal_id":-1,"state":"pending","resource":b.get("resource","soil"),"reserved":b.cost,"started":true,"old":{},"remaining":b.remaining})
 			next_job_id+=1
+	Story.init(self)
+	refresh_indoor()
+	make_schedule()
+	# The morning snapshot includes migrated terrain and one-time morning events.
+	if not campaign.night_ready:
+		morning_checkpoint=campaign.duplicate(true)
+		morning_checkpoint.erase("morning_checkpoint")
 	shop_stock = Shop.generate(stage, seed_value, campaign.unlocked_blueprints)
 	say("牧場を整えよう")
 
@@ -227,7 +234,7 @@ func make_schedule():
 				"entry": Vector2i(cell[0], cell[1]), "lv": wave.get("lv", 1)})
 			for key in ["move_speed", "sight_range"]:
 				if wave.has(key): spawn_schedule.back()[key] = wave[key]
-	spawn_schedule.sort_custom(func(a, b): return a.tick < b.tick)
+	Story.schedule(self)
 
 func next_attack_seconds() -> float:
 	if phase == "day": return maxf(0, day_seconds - tick * DT) + config.first_attack_seconds
@@ -241,7 +248,7 @@ func inside(p: Vector2i) -> bool:
 	return p.x >= 1 and p.x < W - 1 and p.y >= 1 and p.y < H - 1
 
 func walkable(p: Vector2i) -> bool:
-	return inside(p) and (not blocks(p) or (structures.get(p,{}).get("kind") in Buildings.DOORS))
+	return inside(p) and not Story.terrain_block(self,p) and (not blocks(p) or (structures.get(p,{}).get("kind") in Buildings.DOORS))
 
 func blocks(p: Vector2i) -> bool:
 	return structures.has(p) and structures[p].status == "ready" and structures[p].kind not in ["kennel", "coop"] and not structures[p].open
@@ -294,6 +301,7 @@ func find_path(start: Vector2i, goal: Vector2i, raider: bool = false, avoid_acto
 		for n in neighbors(p):
 			var exit_cell = raider and n == goal and entries.any(func(entry): return exit_for(entry) == n)
 			if not inside(n) and not exit_cell: continue
+			if Story.terrain_block(self,n): continue
 			if outdoor_only and is_indoor(n): continue
 			if avoid_actors and n != goal and actor_occupied(n, start): continue
 			var blocked = blocks(n)
@@ -320,7 +328,9 @@ func start_night():
 
 func act(kind: String, p: Vector2i = Vector2i.ZERO, animal_id: int = -1) -> bool:
 	var accepted = false
-	if kind in ["rest_until_night", "end_night"]:
+	if kind in Story.ACTIONS:
+		accepted = Story.enqueue(self,kind,p)
+	elif kind in ["rest_until_night", "end_night"]:
 		accepted = Life.plan_rest_until(self, "night" if kind == "rest_until_night" else "dawn")
 	elif kind == "cancel_rest_until":
 		accepted = not rest_skip.is_empty()
@@ -408,7 +418,11 @@ func issue_order(kind: String, p: Vector2i, animal_id: int = -1) -> bool:
 
 func spawn_enemy(event: Dictionary):
 	var entry: Vector2i = event.entry
-	var origin = exit_for(entry) if blocks(entry) or occupied(entry) else entry
+	var origin = exit_for(entry)
+	if enemies.any(func(e):return not e.done and e.pos==origin):
+		var alternatives=entries.filter(func(p):return not enemies.any(func(e):return not e.done and e.pos==exit_for(p)))
+		if alternatives.is_empty(): say("森の外で敵が足止めされています"); return
+		entry=alternatives[0]; origin=exit_for(entry)
 	var progress = mini(6, maxi(0, campaign.day - 1))
 	enemies.append({"move_speed": event.get("move_speed", 1.333333 + progress * 0.27), "move_credit": 0.0, "id": spawned, "pos": origin, "entry": entry, "lv": event.get("lv", 1), "hp": Rules.KIDNAPPER.max_hp + progress * 4, "max_hp": Rules.KIDNAPPER.max_hp + progress * 4,
 		"attack_power": Rules.KIDNAPPER.attack_power + progress / 2, "object_attack_power": Rules.KIDNAPPER.object_attack_power,
@@ -422,7 +436,7 @@ func spawn_enemy(event: Dictionary):
 	Life.danger(self, "invasion")
 	spawned += 1
 	milestones.append({"tick": tick, "kind": "invasion", "id": spawned - 1})
-	say("入口から誘拐役！ 牧場主を守ろう。")
+	say("森から人影が現れた！")
 
 func release_keeper(e: Dictionary):
 	if e.carry == "keeper":
@@ -643,6 +657,7 @@ func enemy_step(e: Dictionary):
 			elif tick % 3 == 0:
 				move_enemy(e, next_step(e.pos, target.pos, true))
 			return
+	if Story.idol_enemy(self,e): return
 	if not e.flee and e.carry == "" and e.can_see_keeper and distance(e.pos, keeper.pos) <= 1 and keeper.carrier < 0:
 		e.state = "主人公へ攻撃" if keeper.hp > 0 else "担ぎ上げる"
 		if keeper.hp > 0:
@@ -684,6 +699,7 @@ func enemy_step(e: Dictionary):
 	move_enemy(e, next)
 
 func move_enemy(e: Dictionary, next: Vector2i):
+	if Story.terrain_block(self,next): return
 	# Living animals occupy space; carrying the keeper is the only deliberate actor overlap.
 	var defenders = animals.filter(func(a): return a.placed and a.hp > 0 and a.pos == next)
 	if not e.flee and not defenders.is_empty():
@@ -763,6 +779,7 @@ func repair(p: Vector2i, target_layer: String="structure") -> bool:
 	return true
 
 func persist_farm():
+	Story.persist(self)
 	campaign.floors=[]
 	for p in floors:
 		var row=floors[p].duplicate(true); row.pos=[p.x,p.y]; campaign.floors.append(row)
@@ -774,7 +791,7 @@ func persist_farm():
 			owned.hp=a.hp; owned.mode=a.mode; owned.order_remaining=maxi(0,a.order_until-tick); owned.unavailable_through_day=a.unavailable_through_day
 	campaign.work_jobs=[]
 	for j in jobs:
-		if not BUILD.has(j.kind): continue
+		if not BUILD.has(j.kind) and j.kind not in Story.ACTIONS: continue
 		var row=j.duplicate(true); row.pos=[j.pos.x,j.pos.y]; campaign.work_jobs.append(row)
 	campaign.keeper_vitals = {"hp": keeper.hp, "sleepiness": keeper.sleepiness, "drinks_today": keeper.drinks_today,"facing":keeper.get("facing",1)}
 	campaign.keeper_position = [keeper.pos.x, keeper.pos.y]
@@ -795,7 +812,7 @@ func step():
 	var previous_positions={"keeper":keeper.pos}
 	for a in animals: previous_positions[a.id]=a.pos
 	for a in animals:
-		if not a.placed: admit(a,entries[0])
+		if not a.placed: admit(a,logistics_entry)
 	Life.begin_rest_until(self)
 	tick += 1
 	if phase == "day" and tick * DT >= day_seconds: start_night()
@@ -824,9 +841,10 @@ func step():
 			"materials": materials, "keeper": keeper.state, "structures": structures.size()})
 	update_facing(keeper,previous_positions.keeper)
 	for a in animals: update_facing(a,previous_positions.get(a.id,a.pos))
+	Story.tick(self)
 	Life.check_rest_until(self)
 	if phase != "defend": return
-	if remaining_night() <= 0:
+	if remaining_night() <= 0 and not Story.crisis(self):
 		if rest_skip.get("target", "") == "dawn": early_finish_bonus = rest_skip.get("bonus",0)
 		rest_skip.clear()
 		finish(true)
@@ -838,6 +856,8 @@ func step():
 
 func finish(won: bool):
 	if result != "": return
+	if won and Story.crisis(self): return
+	if not won and story.get("defeat_reason","")=="": story.defeat_reason="keeper_abducted"
 	result = "win" if won else "loss"
 	rest_skip.clear()
 	phase = "dawn" if won else "result"
@@ -856,7 +876,7 @@ func finish(won: bool):
 					if a.unavailable_through_day<campaign.day: a.unavailable_through_day=campaign.day+1
 					owned.unavailable_through_day=a.unavailable_through_day
 	for j in jobs.duplicate():
-		if BUILD.has(j.kind): continue
+		if BUILD.has(j.kind) or j.kind in Story.ACTIONS: continue
 		if j.kind=="animal_order": Orders.stop(self,j)
 		jobs.erase(j)
 	manual_goal = null
@@ -864,6 +884,7 @@ func finish(won: bool):
 		campaign.gold += int(gold) + early_finish_bonus
 		campaign.exp_pool += int(xp)
 		process_dawn()
+		Story.morning(self,campaign.day+1)
 		persist_farm()
 	say("防衛成功！ 育成と購入をして次の日へ。")
 
@@ -907,7 +928,7 @@ func observation() -> Dictionary:
 		var row = event.duplicate(true)
 		row.entry = [event.entry.x, event.entry.y]
 		schedule.append(row)
-	return {"indoor":indoor.keys().map(func(p):return [p.x,p.y]), "floors":floors.keys().map(func(p):return {"pos":[p.x,p.y],"kind":floors[p].kind,"status":floors[p].status}), "debug":debug_enabled, "seed": seed_value, "stage": stage, "day": campaign.day, "tick": tick, "phase": phase, "paused": paused, "result": result,
+	return {"world_story":story.duplicate(true),"forest":trees.keys().map(func(p):return {"id":trees[p],"pos":[p.x,p.y]}),"indoor":indoor.keys().map(func(p):return [p.x,p.y]), "floors":floors.keys().map(func(p):return {"pos":[p.x,p.y],"kind":floors[p].kind,"status":floors[p].status}), "debug":debug_enabled, "seed": seed_value, "stage": stage, "day": campaign.day, "tick": tick, "phase": phase, "paused": paused, "result": result,
 		"remaining_day": maxf(0, day_seconds - tick * DT), "night_started_tick": night_started_tick,
 		"keeper_path": keeper_path, "life_log": life_log, "jobs_held": jobs_held, "job_hold_reason": job_hold_reason, "manual_goal": [manual_goal.x, manual_goal.y] if manual_goal != null else null, "job_log": job_log, "jobs": jobs.map(func(j):
 			var row = j.duplicate(true)
@@ -1083,6 +1104,9 @@ static func animal_name(a: Dictionary) -> String:
 	return a.get("name", "") if a.get("name", "") != "" else SPECIES[a.species].title
 
 func begin_day():
+	if story.has("migration_error"):
+		Story.say(self,story.migration_error)
+		return null
 	if phase != "shop" or paused: return null
 	persist_farm()
 	var data = campaign.duplicate(true)
@@ -1161,6 +1185,7 @@ func line_of_sight(from: Vector2i, to: Vector2i) -> bool:
 	return true
 
 func blocks_sight(p: Vector2i) -> bool:
+	if Story.terrain_block(self,p): return true
 	if not structures.has(p) or structures[p].status != "ready": return false
 	var b = structures[p]
 	return b.get("blocks_sight", b.kind not in ["kennel", "coop"]) and not b.open
@@ -1223,8 +1248,8 @@ func add_resident(owned: Dictionary):
 	a.path = [a.pos]
 	animals.append(a)
 
-	var location=owned.get("position",[entries[0].x,entries[0].y])
-	var preferred=Vector2i(location[0],location[1]) if owned.has("position") else (keeper.pos+Vector2i(2,0) if a.id==1 else entries[0])
+	var location=owned.get("position",[logistics_entry.x,logistics_entry.y])
+	var preferred=Vector2i(location[0],location[1]) if owned.has("position") else (keeper.pos+Vector2i(2,0) if a.id==1 else logistics_entry)
 	admit(a,preferred)
 
 func admit(a: Dictionary,preferred: Vector2i):
@@ -1234,7 +1259,7 @@ func admit(a: Dictionary,preferred: Vector2i):
 	if retained or (a.id==1 and preferred==keeper.pos+Vector2i(2,0) and animal_walkable(a,preferred) and not occupied(preferred)):
 		sites.append(preferred)
 	else:
-		for entry in entries:
+		for entry in [logistics_entry]:
 			if blocks(entry): continue
 			for y in range(1,H-1):
 				for x in range(1,W-1):
@@ -1242,7 +1267,7 @@ func admit(a: Dictionary,preferred: Vector2i):
 					if distance(entry,cell)>4 or cell in entries or not animal_walkable(a,cell) or occupied(cell): continue
 					if not find_path(entry,cell,false,true,not SPECIES[a.species].can_enter_indoor).is_empty() and cell not in sites: sites.append(cell)
 		sites.sort_custom(func(c,d):
-			var dc=distance(c,entries[0]); var dd=distance(d,entries[0])
+			var dc=distance(c,logistics_entry); var dd=distance(d,logistics_entry)
 			return dc<dd if dc!=dd else (c.y<d.y if c.y!=d.y else c.x<d.x))
 	if sites.is_empty():
 		if a.state!="受入待ち": Orders.report(self,"入口付近の通路と場所を空けてください")
@@ -1304,6 +1329,10 @@ func debug_action(action: String, selection: Dictionary = {}) -> bool:
 	elif action in ["hurt","heal","lock"]:
 		var amount=-10 if action=="hurt" else 10
 		match selection.get("kind"):
+			"idol":
+				if action=="lock": return false
+				if amount<0: Story.damage(self,10)
+				else: story.idol.hp=mini(story.idol.max_hp,story.idol.hp+10)
 			"keeper":
 				if amount<0: Life.hurt(self,{"id":-1,"attack_power":10})
 				else: keeper.hp=mini(keeper.max_hp,keeper.hp+10)

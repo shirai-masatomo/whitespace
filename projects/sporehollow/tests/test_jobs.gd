@@ -1,5 +1,5 @@
 extends SceneTree
-const Farm = preload("res://game/world.gd")
+const Farm = preload("res://tests/open_ranch_fixture.gd")
 var checks = 0
 
 func check(ok: bool, why: String):
@@ -27,7 +27,7 @@ func run():
 	check(not w.act("place", Vector2i(20, 8)), "Old keeper teleport removed")
 	var origin: Vector2i = w.keeper.pos
 	var soil: int = w.materials
-	for p in [Vector2i(3, 3), Vector2i(8, 3), Vector2i(18, 3)]: check(w.act("wall", p), "Three plans accepted")
+	for p in [Vector2i(3, 6), Vector2i(8, 6), Vector2i(18, 6)]: check(w.act("wall", p), "Three plans accepted")
 	check(w.jobs.size() == 3 and w.structures.is_empty() and w.materials == soil - 30, "Plans reserve soil, not structures")
 	w.step()
 	check(w.keeper.pos == origin and w.structures.is_empty(), "Travel cannot teleport or instantly build")
@@ -39,14 +39,14 @@ func run():
 	check(w.act("cancel_job", Vector2i.ZERO, third), "Cancel travelling third job only")
 	check(w.act("wall", Vector2i(16, 6)), "Append replacement during work")
 	drain(w)
-	check(not w.structures.has(Vector2i(18, 3)) and w.structures[Vector2i(16, 6)].status == "ready", "Cancelled job absent; replacement built")
+	check(not w.structures.has(Vector2i(18, 6)) and w.structures[Vector2i(16, 6)].status == "ready", "Cancelled job absent; replacement built")
 	for event in w.job_log:
 		if event.event == "started": check(w.structures.has(Vector2i(event.pos[0], event.pos[1])), "Only arrived sites start")
 	for i in range(1, w.keeper_path.size()):
 		check(abs(w.keeper_path[i][0] - w.keeper_path[i-1][0]) + abs(w.keeper_path[i][1] - w.keeper_path[i-1][1]) == 1, "Every movement is one grid edge")
 	var cap = Farm.new().begin_day()
-	for i in range(8): check(cap.act("wall", Vector2i(2 + i, 3)), "Accept through eighth job")
-	check(not cap.act("wall", Vector2i(15, 3)) and cap.materials == 20, "Ninth job rejected without cost")
+	for i in range(8): check(cap.act("wall", Vector2i(2 + i, 6)), "Accept through eighth job")
+	check(not cap.act("wall", Vector2i(15, 6)) and cap.materials == 20, "Ninth job rejected without cost")
 	var preserved = cap.jobs.map(func(j): return j.id)
 	cap.act("cancel_job", Vector2i.ZERO, preserved[2])
 	preserved.remove_at(2)
@@ -54,7 +54,7 @@ func run():
 	cap.act("pause")
 	var frozen = JSON.stringify(cap.observation())
 	steps(cap, 10)
-	check(JSON.stringify(cap.observation()) == frozen and cap.act("wall", Vector2i(15, 3)), "Pause freezes work and accepts reserved plans")
+	check(JSON.stringify(cap.observation()) == frozen and cap.act("wall", Vector2i(15, 6)), "Pause freezes work and accepts reserved plans")
 	cap.act("pause")
 	# Finished wall blocks the direct path; movement must go around it.
 	var path = Farm.new().begin_day()
