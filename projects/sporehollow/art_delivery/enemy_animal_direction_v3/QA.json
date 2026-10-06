@@ -1,0 +1,12 @@
+{
+  "status": "pass",
+  "png_count": 79,
+  "native_rgba_draft_count": 67,
+  "review_sheet_count": 12,
+  "preserved_v2_png_count": 30,
+  "existing_reference_hash_count": 11,
+  "alpha": "native PNGs binary 0/255",
+  "prototype_only": true,
+  "game_launched": false,
+  "runtime_verification": false
+}
