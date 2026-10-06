@@ -2,7 +2,13 @@ extends "res://tests/visual_shop.gd"
 const Farm=preload("res://game/world.gd")
 var evidence=[]
 func capture(label: String):
-	await create_timer(0.3).timeout
+	# Controlled bulk simulation may leave sprite interpolation behind; wait for actual render to settle.
+	for i in range(100):
+		await create_timer(0.08).timeout
+		var pending=false
+		for id in game.actor_tracks:
+			if not game.actor_tracks[id].is_empty():pending=true
+		if not pending:break
 	await super.capture(label)
 	evidence.append({"frame":label,"fixture":game.get_meta("fixture","normal new campaign"),"world":game.world.observation(),"modal":game.story_modal,"intro_page":game.story_page})
 func board(cell: Vector2i):

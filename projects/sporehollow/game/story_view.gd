@@ -14,7 +14,7 @@ static func tree(g,p: Vector2i,deep: bool=false):
 static func idol(g):
 	var w=g.world
 	if w.story.idol.is_empty(): return
-	var p=(Vector2(w.Story.at(w))+Vector2.ONE)*g.TILE
+	var p=g.actor_pixel("idol",w.Story.at(w))+g.TILE*0.5
 	# Explicit code-art placeholder: abstract weathered object, no invented deity/civilization.
 	g.draw_rect(Rect2(p+Vector2(-42,18),Vector2(86,22)),Color("655b42"))
 	g.draw_rect(Rect2(p+Vector2(-39,10),Vector2(78,24)),Color("a39871"))

@@ -1137,6 +1137,7 @@ func _process(delta):
 	if not world.working() or group < 0 or pointer_over_ui() or menu_open or cinematic() or queue_drag_id >= 0: mode_cursor = ""
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE if mode_cursor == "" else Input.MOUSE_MODE_HIDDEN)
 	smooth_actor("keeper", world.keeper.pos, delta)
+	if not world.story.idol.is_empty(): smooth_actor("idol",world.Story.at(world),delta)
 	if world.phase == "dawn" and clock - transition_at > 4.8 and not menu_open: advance()
 	if world.phase == "shop" and clock - arrival_started > 0.8 and not arrival_bell:
 		arrival_bell = true
@@ -1219,6 +1220,7 @@ func _process(delta):
 
 func record_actor_tracks():
 	record_actor("keeper",world.keeper.pos)
+	if not world.story.idol.is_empty(): record_actor("idol",world.Story.at(world))
 	for a in world.animals:
 		if a.placed: record_actor("a%d" % a.id,a.pos)
 	for e in world.enemies: record_actor("e%d" % e.id,e.pos)
@@ -1239,8 +1241,9 @@ func smooth_actor(id: String, p: Vector2i, delta: float):
 		rate=a.get("move_speed",2.0)*(1.5 if a.get("rescuing",false) else 1.0)
 	elif id.begins_with("e"):
 		for e in world.enemies:
-			if e.id==int(id.substr(1)): rate=1.0 if e.carry=="keeper" else e.move_speed; break
+			if e.id==int(id.substr(1)): rate=world.Story.TOW_SPEED if world.story.idol.get("carrier",-1)==e.id and world.story.idol.state=="transporting" else (1.0 if e.carry=="keeper" else e.move_speed); break
 	elif id=="keeper" and world.keeper.carrier>=0: rate=1.0
+	elif id=="idol": rate=world.Story.TOW_SPEED
 	var budget=delta*rate*(24.0 if not world.rest_skip.is_empty() else speed)
 	var track=actor_tracks[id]
 	while not track.is_empty() and budget>0:
@@ -1383,7 +1386,7 @@ func _draw():
 		else: draw_line(q + Vector2(-5, 6), q + Vector2(6, -8), Color("eee8cf"), 5)
 	var actors=[]
 	for p in world.trees: actors.append({"y":center(p).y,"x":p.x,"kind":"tree","data":p})
-	if not world.story.idol.is_empty(): actors.append({"y":center(world.Story.at(world)+Vector2i.DOWN).y,"x":world.Story.at(world).x,"kind":"idol"})
+	if not world.story.idol.is_empty(): actors.append({"y":actor_pixel("idol",world.Story.at(world)).y+TILE.y,"x":world.Story.at(world).x,"kind":"idol"})
 	for cell in world.structures:
 		var b=world.structures[cell]
 		if b.kind in Farm.Buildings.DOORS and b.status=="ready":
