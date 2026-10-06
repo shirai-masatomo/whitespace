@@ -1,0 +1,68 @@
+[
+  {
+    "source_cell": 0,
+    "bbox": [
+      6,
+      18,
+      61,
+      44
+    ],
+    "scale": 0.12149532710280374,
+    "head_reused": false
+  },
+  {
+    "source_cell": 1,
+    "bbox": [
+      7,
+      17,
+      59,
+      44
+    ],
+    "scale": 0.12149532710280374,
+    "head_reused": false
+  },
+  {
+    "source_cell": 2,
+    "bbox": [
+      8,
+      17,
+      59,
+      44
+    ],
+    "scale": 0.12149532710280374,
+    "head_reused": false
+  },
+  {
+    "source_cell": 3,
+    "bbox": [
+      5,
+      17,
+      61,
+      44
+    ],
+    "scale": 0.12149532710280374,
+    "head_reused": false
+  },
+  {
+    "source_cell": 4,
+    "bbox": [
+      10,
+      19,
+      55,
+      44
+    ],
+    "scale": 0.12149532710280374,
+    "head_reused": false
+  },
+  {
+    "source_cell": 5,
+    "bbox": [
+      8,
+      17,
+      58,
+      44
+    ],
+    "scale": 0.12149532710280374,
+    "head_reused": false
+  }
+]
