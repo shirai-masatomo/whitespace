@@ -5,6 +5,8 @@ UI荷車・土木石金の資源アイコン・既存誘拐者の左右動作/�
 **牧場経営 × 育成 × リアルタイム構築 × 間接防衛。**  
 主人公は牧場を経営し、夜に襲う野盗から牧場・動物・自分自身を守る。
 
+設計正本： [世界観](WORLD_STORY.md) / [黄金像・森・世界システム](WORLD_SYSTEMS.md) / [動物図鑑](ANIMALS.md) / [敵図鑑](ENEMIES.md) / [アイテム図鑑](ITEMS.md) / [建築](BUILDINGS.md)。
+
 **起動は [Play.cmd](Play.cmd) をダブルクリック。** `build/WhistleRanch.exe` が通常版です。検証フォルダのEXEを探す必要はありません。
 `Play.cmd` はWindows用のCRLF改行で管理します。起動しない場合の非起動検査は `./tests/test_launcher.ps1`。ゲーム画面を開かず、起動先の有無とcmdの読み取りを検査します。
 開発時は `./dev.ps1 build` が検証成功後に通常版を更新します（起動中は更新を拒否）。`check` は検証のみ。ビルド番号はESCメニューと `build/BUILD.json` で確認できます。

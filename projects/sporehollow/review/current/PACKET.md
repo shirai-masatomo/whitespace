@@ -95,3 +95,5 @@ Tab未選択/逆順/連打/猫/鶏/療養/複数/空、D&D取消/範囲外/設�
 [石接続](buildings/stone_wall_masks_1_normal.png) / [土の損傷](buildings/wall_masks_0_damaged.png) / [木接続](buildings/wood_wall_masks_1_normal.png) / [異素材床](buildings/wood_floor_boundaries.png) / [開閉](buildings/wood_doors_open.png) / [ロック破損](buildings/wood_doors_broken_lock.png) / [ドア通過](buildings/door-walk.gif)。[隔離監査](audit/buildings/isolation.json)。敵素材はこの建材追加の対象外。
 
 後着の敵素材は納品通知のみ受領。今回の対象には追加せず、ゲーム取り込み・検証済みとは報告しない。
+
+並行設計更新：公開直前にoriginのfb4c9bdまでの8文書コミットを通常マージ。抽選/Rarity/装備/非柴犬死亡などの新設計は保持したが、この依頼の固定60G版と区別しK0〜K8へ未実装として記録。ゲームコード・素材はafb8e1bから変更なし。
