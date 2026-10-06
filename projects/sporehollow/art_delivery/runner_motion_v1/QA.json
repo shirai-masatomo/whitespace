@@ -1,0 +1,32 @@
+{
+  "status": "pass",
+  "native_png_count": 48,
+  "body_png_count": 48,
+  "action_count": 8,
+  "directions": [
+    "right",
+    "left"
+  ],
+  "native_canvas": [
+    80,
+    72
+  ],
+  "anchors": {
+    "right": [
+      40,
+      66
+    ],
+    "left": [
+      40,
+      66
+    ]
+  },
+  "adopted_idle_hash_unchanged": true,
+  "adopted_idle_sha256": "61768aabf3792cb159b5955774a767abee5c4bbc1479d28932fe69db84a517b1",
+  "distinct_locomotion_frames": 4,
+  "binary_alpha": true,
+  "exact_mirror_validated": true,
+  "gif_decoded_frames": 46,
+  "game_launched": false,
+  "in_game_verified": false
+}
