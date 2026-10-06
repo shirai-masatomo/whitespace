@@ -1,0 +1,227 @@
+[
+  {
+    "file": "motion_storyboards/03_destroyer_motion.png",
+    "sections": [
+      {
+        "name": "鉄球：6キー案",
+        "key_pose_order": [
+          "下げる",
+          "後ろへ引く",
+          "振りかぶる",
+          "叩きつける",
+          "鎖が伸びる",
+          "戻す"
+        ],
+        "frame_duration_ms": null,
+        "loop": false
+      }
+    ]
+  },
+  {
+    "file": "motion_storyboards/04_martial_artist_motion.png",
+    "sections": [
+      {
+        "name": "戦闘開始",
+        "key_pose_order": [
+          "向く",
+          "姿勢を正す",
+          "短く礼",
+          "構える"
+        ],
+        "frame_duration_ms": null,
+        "loop": false
+      },
+      {
+        "name": "戦闘終了",
+        "key_pose_order": [
+          "構え解除へ",
+          "対象を見る",
+          "礼",
+          "離れる"
+        ],
+        "frame_duration_ms": null,
+        "loop": false
+      },
+      {
+        "name": "攻撃の意味",
+        "key_pose_order": [
+          "構え",
+          "突き",
+          "蹴り",
+          "戻る"
+        ],
+        "frame_duration_ms": null,
+        "loop": false
+      }
+    ]
+  },
+  {
+    "file": "motion_storyboards/05_salaryman_phone_motion.png",
+    "sections": [
+      {
+        "name": "電話：7キー案（通話と会話を1キーに統合）",
+        "key_pose_order": [
+          "通常",
+          "ポケットへ",
+          "取り出す",
+          "画面を見る",
+          "耳へ・話す",
+          "通話を切る",
+          "しまう"
+        ],
+        "frame_duration_ms": null,
+        "loop": false
+      }
+    ]
+  },
+  {
+    "file": "motion_storyboards/06_ninja_motion.png",
+    "sections": [
+      {
+        "name": "手裏剣（本体と分離）",
+        "key_pose_order": [
+          "構え",
+          "腕を引く",
+          "投げる",
+          "振り抜く"
+        ],
+        "frame_duration_ms": null,
+        "loop": false
+      },
+      {
+        "name": "撃退後（生存して退散）",
+        "key_pose_order": [
+          "よろめく",
+          "巻物を落とす",
+          "退散"
+        ],
+        "frame_duration_ms": null,
+        "loop": false
+      }
+    ]
+  },
+  {
+    "file": "motion_storyboards/07_tamer_motion.png",
+    "sections": [
+      {
+        "name": "手懐け：6キー案",
+        "key_pose_order": [
+          "見つける",
+          "しゃがむ",
+          "手を出す",
+          "おやつ・声",
+          "近づく",
+          "連れて歩く"
+        ],
+        "frame_duration_ms": null,
+        "loop": false
+      }
+    ]
+  },
+  {
+    "file": "motion_storyboards/08_runner_motion.png",
+    "sections": [
+      {
+        "name": "走行から疲労、回復",
+        "key_pose_order": [
+          "大きな歩幅",
+          "脚を集める",
+          "フォーム崩れ",
+          "膝に手・息切れ",
+          "回復",
+          "再走"
+        ],
+        "frame_duration_ms": null,
+        "loop": false
+      },
+      {
+        "name": "ドーベルマン同行 / 足元は61px離す",
+        "key_pose_order": [
+          "待機",
+          "伸びる走り",
+          "脚を集める"
+        ],
+        "frame_duration_ms": null,
+        "loop": false
+      }
+    ]
+  },
+  {
+    "file": "motion_storyboards/09_bullfrog_motion.png",
+    "sections": [
+      {
+        "name": "舌の伸縮（長さは合成例）",
+        "key_pose_order": [
+          "敵を見る",
+          "口を開く",
+          "舌を伸ばす",
+          "付着",
+          "引く・固定",
+          "戻す"
+        ],
+        "frame_duration_ms": null,
+        "loop": false
+      },
+      {
+        "name": "襲撃を知らせる鳴き声",
+        "key_pose_order": [
+          "襲われる",
+          "喉を膨らます",
+          "鳴く・小音波",
+          "落ち着く"
+        ],
+        "frame_duration_ms": null,
+        "loop": false
+      }
+    ]
+  },
+  {
+    "file": "motion_storyboards/10_hedgehog_motion.png",
+    "sections": [
+      {
+        "name": "通常から防御、解除",
+        "key_pose_order": [
+          "通常",
+          "被弾",
+          "縮める",
+          "棘が立つ",
+          "丸く防御",
+          "戻る"
+        ],
+        "frame_duration_ms": null,
+        "loop": false
+      }
+    ]
+  },
+  {
+    "file": "motion_storyboards/12_doberman_motion.png",
+    "sections": [
+      {
+        "name": "立ち・走り・攻撃構え",
+        "key_pose_order": [
+          "右立ち",
+          "左立ち",
+          "走り・伸びる",
+          "走り・集める",
+          "攻撃構え"
+        ],
+        "frame_duration_ms": null,
+        "loop": false
+      }
+    ]
+  },
+  {
+    "file": "preview/11_equipment_icons.png",
+    "sections": [
+      {
+        "name": "UIアイコン案 32×32",
+        "key_pose_order": [
+          "犬用の首輪",
+          "回復のきのみ"
+        ],
+        "frame_duration_ms": null,
+        "loop": false
+      }
+    ]
+  }
+]

@@ -1,0 +1,1491 @@
+{
+  "characters": {
+    "salaryman": {
+      "name_ja": "サラリーマン",
+      "canvas": [
+        48,
+        56
+      ],
+      "anchor": [
+        24,
+        50
+      ],
+      "standing_body_height_px": 40,
+      "standing_body_width_px": 20,
+      "shared_source_scale": 0.10526315789473684,
+      "key_pose_count": 7
+    },
+    "destroyer": {
+      "name_ja": "デストロイヤー",
+      "canvas": [
+        80,
+        72
+      ],
+      "anchor": [
+        32,
+        64
+      ],
+      "standing_body_height_px": 46,
+      "standing_body_width_px": 39,
+      "shared_source_scale": 0.16312056737588654,
+      "key_pose_count": 6
+    },
+    "martial_artist": {
+      "name_ja": "武闘家",
+      "canvas": [
+        64,
+        56
+      ],
+      "anchor": [
+        24,
+        50
+      ],
+      "standing_body_height_px": 42,
+      "standing_body_width_px": 20,
+      "shared_source_scale": 0.10796915167095116,
+      "key_pose_count": 7
+    },
+    "ninja": {
+      "name_ja": "忍者",
+      "canvas": [
+        64,
+        56
+      ],
+      "anchor": [
+        32,
+        50
+      ],
+      "standing_body_height_px": 40,
+      "standing_body_width_px": 32,
+      "shared_source_scale": 0.12698412698412698,
+      "key_pose_count": 6
+    },
+    "tamer": {
+      "name_ja": "ムッツゴロウ（仮）",
+      "canvas": [
+        64,
+        56
+      ],
+      "anchor": [
+        24,
+        50
+      ],
+      "standing_body_height_px": 41,
+      "standing_body_width_px": 20,
+      "shared_source_scale": 0.10933333333333334,
+      "key_pose_count": 6
+    },
+    "runner": {
+      "name_ja": "ランナー",
+      "canvas": [
+        64,
+        56
+      ],
+      "anchor": [
+        32,
+        50
+      ],
+      "standing_body_height_px": 42,
+      "standing_body_width_px": 19,
+      "shared_source_scale": 0.109375,
+      "key_pose_count": 6
+    },
+    "doberman": {
+      "name_ja": "ドーベルマン",
+      "canvas": [
+        64,
+        48
+      ],
+      "anchor": [
+        32,
+        44
+      ],
+      "standing_body_height_px": 33,
+      "standing_body_width_px": 39,
+      "shared_source_scale": 0.11186440677966102,
+      "key_pose_count": 4
+    },
+    "bullfrog": {
+      "name_ja": "ウシガエル",
+      "canvas": [
+        48,
+        40
+      ],
+      "anchor": [
+        24,
+        36
+      ],
+      "standing_body_height_px": 22,
+      "standing_body_width_px": 31,
+      "shared_source_scale": 0.12154696132596685,
+      "key_pose_count": 6
+    },
+    "hedgehog": {
+      "name_ja": "ハリネズミ",
+      "canvas": [
+        32,
+        32
+      ],
+      "anchor": [
+        16,
+        28
+      ],
+      "standing_body_height_px": 18,
+      "standing_body_width_px": 22,
+      "shared_source_scale": 0.07758620689655173,
+      "key_pose_count": 6
+    }
+  },
+  "poses": [
+    {
+      "file": "pose_drafts/salaryman/key_00.png",
+      "character": "salaryman",
+      "key_pose": 0,
+      "canvas": [
+        48,
+        56
+      ],
+      "anchor": [
+        24,
+        50
+      ],
+      "body_bbox": [
+        16,
+        10,
+        36,
+        50
+      ],
+      "body_height_px": 40,
+      "source_cell": 0,
+      "frame_duration_ms": null,
+      "loop": false,
+      "status": "direction_review_only",
+      "sha256": "3ac8f5897ea17595bee4e0f94066af736c847276574a8deac84a704bde8dec43"
+    },
+    {
+      "file": "pose_drafts/salaryman/key_01.png",
+      "character": "salaryman",
+      "key_pose": 1,
+      "canvas": [
+        48,
+        56
+      ],
+      "anchor": [
+        24,
+        50
+      ],
+      "body_bbox": [
+        14,
+        13,
+        38,
+        50
+      ],
+      "body_height_px": 37,
+      "source_cell": 1,
+      "frame_duration_ms": null,
+      "loop": false,
+      "status": "direction_review_only",
+      "sha256": "35d190823a79bf36dff2d3714003e23e11ef8fc567baa490c8189366e70ad481"
+    },
+    {
+      "file": "pose_drafts/salaryman/key_02.png",
+      "character": "salaryman",
+      "key_pose": 2,
+      "canvas": [
+        48,
+        56
+      ],
+      "anchor": [
+        24,
+        50
+      ],
+      "body_bbox": [
+        16,
+        11,
+        38,
+        50
+      ],
+      "body_height_px": 39,
+      "source_cell": 2,
+      "frame_duration_ms": null,
+      "loop": false,
+      "status": "direction_review_only",
+      "sha256": "97aaef423026829489a59ceac0608adbbb5278b3748dfe4ac604c8efb053b2ae"
+    },
+    {
+      "file": "pose_drafts/salaryman/key_03.png",
+      "character": "salaryman",
+      "key_pose": 3,
+      "canvas": [
+        48,
+        56
+      ],
+      "anchor": [
+        24,
+        50
+      ],
+      "body_bbox": [
+        16,
+        11,
+        36,
+        50
+      ],
+      "body_height_px": 39,
+      "source_cell": 3,
+      "frame_duration_ms": null,
+      "loop": false,
+      "status": "direction_review_only",
+      "sha256": "af8e8bd6c5b2b3616b695f89c00c1b641a72424fa3313be774680b89ab6a8ca7"
+    },
+    {
+      "file": "pose_drafts/salaryman/key_04.png",
+      "character": "salaryman",
+      "key_pose": 4,
+      "canvas": [
+        48,
+        56
+      ],
+      "anchor": [
+        24,
+        50
+      ],
+      "body_bbox": [
+        14,
+        9,
+        32,
+        50
+      ],
+      "body_height_px": 41,
+      "source_cell": 4,
+      "frame_duration_ms": null,
+      "loop": false,
+      "status": "direction_review_only",
+      "sha256": "314a1186adf0563396a1ec9b19d41817a85c0c6fa8d2622d79c526e85d41d425"
+    },
+    {
+      "file": "pose_drafts/salaryman/key_05.png",
+      "character": "salaryman",
+      "key_pose": 5,
+      "canvas": [
+        48,
+        56
+      ],
+      "anchor": [
+        24,
+        50
+      ],
+      "body_bbox": [
+        16,
+        11,
+        38,
+        50
+      ],
+      "body_height_px": 39,
+      "source_cell": 5,
+      "frame_duration_ms": null,
+      "loop": false,
+      "status": "direction_review_only",
+      "sha256": "faf6409b50508e6b320a9194bce6406dcbc414cbb0714f13d99f2ad2312efc4f"
+    },
+    {
+      "file": "pose_drafts/salaryman/key_06.png",
+      "character": "salaryman",
+      "key_pose": 6,
+      "canvas": [
+        48,
+        56
+      ],
+      "anchor": [
+        24,
+        50
+      ],
+      "body_bbox": [
+        14,
+        14,
+        40,
+        50
+      ],
+      "body_height_px": 36,
+      "source_cell": 6,
+      "frame_duration_ms": null,
+      "loop": false,
+      "status": "direction_review_only",
+      "sha256": "2f256453c965d6c692fde11eb87b4bcfe30ab4e9f01c5bca58ed67fd2b9f0717"
+    },
+    {
+      "file": "pose_drafts/destroyer/key_00.png",
+      "character": "destroyer",
+      "key_pose": 0,
+      "canvas": [
+        80,
+        72
+      ],
+      "anchor": [
+        32,
+        64
+      ],
+      "body_bbox": [
+        14,
+        18,
+        53,
+        64
+      ],
+      "body_height_px": 46,
+      "source_cell": 0,
+      "frame_duration_ms": null,
+      "loop": false,
+      "status": "direction_review_only",
+      "sha256": "7f96f30fc030b68c51f3e49b977b532164459d44b1368786839ecb2daddc8753"
+    },
+    {
+      "file": "pose_drafts/destroyer/key_01.png",
+      "character": "destroyer",
+      "key_pose": 1,
+      "canvas": [
+        80,
+        72
+      ],
+      "anchor": [
+        32,
+        64
+      ],
+      "body_bbox": [
+        12,
+        19,
+        57,
+        64
+      ],
+      "body_height_px": 45,
+      "source_cell": 1,
+      "frame_duration_ms": null,
+      "loop": false,
+      "status": "direction_review_only",
+      "sha256": "686050b5005473efef645a38e3896d240ccd0b81c84a9ab765f26ea9e8499992"
+    },
+    {
+      "file": "pose_drafts/destroyer/key_02.png",
+      "character": "destroyer",
+      "key_pose": 2,
+      "canvas": [
+        80,
+        72
+      ],
+      "anchor": [
+        32,
+        64
+      ],
+      "body_bbox": [
+        12,
+        4,
+        52,
+        64
+      ],
+      "body_height_px": 60,
+      "source_cell": 2,
+      "frame_duration_ms": null,
+      "loop": false,
+      "status": "direction_review_only",
+      "sha256": "720e99eefe7004ccb3fde6b69d206ec6f8e3a844f4f464339596a8f22799768a"
+    },
+    {
+      "file": "pose_drafts/destroyer/key_03.png",
+      "character": "destroyer",
+      "key_pose": 3,
+      "canvas": [
+        80,
+        72
+      ],
+      "anchor": [
+        32,
+        64
+      ],
+      "body_bbox": [
+        10,
+        28,
+        56,
+        64
+      ],
+      "body_height_px": 36,
+      "source_cell": 3,
+      "frame_duration_ms": null,
+      "loop": false,
+      "status": "direction_review_only",
+      "sha256": "19a996cbd187c51b9785683ea4a3ecb809aad3b0ddce88cc3cfb954b577cd8b8"
+    },
+    {
+      "file": "pose_drafts/destroyer/key_04.png",
+      "character": "destroyer",
+      "key_pose": 4,
+      "canvas": [
+        80,
+        72
+      ],
+      "anchor": [
+        32,
+        64
+      ],
+      "body_bbox": [
+        14,
+        20,
+        74,
+        64
+      ],
+      "body_height_px": 44,
+      "source_cell": 4,
+      "frame_duration_ms": null,
+      "loop": false,
+      "status": "direction_review_only",
+      "sha256": "493edd9276805eba9fb83a147b05d8cba1bd6ec5810b4d296e91a6a15e69e77d"
+    },
+    {
+      "file": "pose_drafts/destroyer/key_05.png",
+      "character": "destroyer",
+      "key_pose": 5,
+      "canvas": [
+        80,
+        72
+      ],
+      "anchor": [
+        32,
+        64
+      ],
+      "body_bbox": [
+        13,
+        18,
+        53,
+        64
+      ],
+      "body_height_px": 46,
+      "source_cell": 5,
+      "frame_duration_ms": null,
+      "loop": false,
+      "status": "direction_review_only",
+      "sha256": "38824b0268a441d95e3eb8b2995384e269beb5fa9f2c7325e85df81a786035a6"
+    },
+    {
+      "file": "pose_drafts/martial_artist/key_00.png",
+      "character": "martial_artist",
+      "key_pose": 0,
+      "canvas": [
+        64,
+        56
+      ],
+      "anchor": [
+        24,
+        50
+      ],
+      "body_bbox": [
+        14,
+        8,
+        34,
+        50
+      ],
+      "body_height_px": 42,
+      "source_cell": 0,
+      "frame_duration_ms": null,
+      "loop": false,
+      "status": "direction_review_only",
+      "sha256": "e0eae11b860363fe7f9fbd11767aa3984c2a1fe1da02bae7102f985f1f7e8709"
+    },
+    {
+      "file": "pose_drafts/martial_artist/key_01.png",
+      "character": "martial_artist",
+      "key_pose": 1,
+      "canvas": [
+        64,
+        56
+      ],
+      "anchor": [
+        24,
+        50
+      ],
+      "body_bbox": [
+        14,
+        6,
+        34,
+        50
+      ],
+      "body_height_px": 44,
+      "source_cell": 1,
+      "frame_duration_ms": null,
+      "loop": false,
+      "status": "direction_review_only",
+      "sha256": "7ea76aa2775dd3bb0ef87aec65a1246e8bb3ef50fa98949fe6371bf975a0766f"
+    },
+    {
+      "file": "pose_drafts/martial_artist/key_02.png",
+      "character": "martial_artist",
+      "key_pose": 2,
+      "canvas": [
+        64,
+        56
+      ],
+      "anchor": [
+        24,
+        50
+      ],
+      "body_bbox": [
+        16,
+        15,
+        41,
+        50
+      ],
+      "body_height_px": 35,
+      "source_cell": 2,
+      "frame_duration_ms": null,
+      "loop": false,
+      "status": "direction_review_only",
+      "sha256": "72e8df70d27fac6cd1197c7d464a83b8f32c70de40cbc39bd2693c08da49d369"
+    },
+    {
+      "file": "pose_drafts/martial_artist/key_03.png",
+      "character": "martial_artist",
+      "key_pose": 3,
+      "canvas": [
+        64,
+        56
+      ],
+      "anchor": [
+        24,
+        50
+      ],
+      "body_bbox": [
+        12,
+        9,
+        36,
+        50
+      ],
+      "body_height_px": 41,
+      "source_cell": 3,
+      "frame_duration_ms": null,
+      "loop": false,
+      "status": "direction_review_only",
+      "sha256": "1f4539fb2260a67b149903af7aab9c5253833c92b4ed06e79697478685dbf17b"
+    },
+    {
+      "file": "pose_drafts/martial_artist/key_04.png",
+      "character": "martial_artist",
+      "key_pose": 4,
+      "canvas": [
+        64,
+        56
+      ],
+      "anchor": [
+        24,
+        50
+      ],
+      "body_bbox": [
+        12,
+        10,
+        43,
+        50
+      ],
+      "body_height_px": 40,
+      "source_cell": 4,
+      "frame_duration_ms": null,
+      "loop": false,
+      "status": "direction_review_only",
+      "sha256": "308bc97ae6488acf8fb68eed5955ae65823ab05ba5998cf2d9e8477a4114fc5a"
+    },
+    {
+      "file": "pose_drafts/martial_artist/key_05.png",
+      "character": "martial_artist",
+      "key_pose": 5,
+      "canvas": [
+        64,
+        56
+      ],
+      "anchor": [
+        24,
+        50
+      ],
+      "body_bbox": [
+        12,
+        9,
+        42,
+        50
+      ],
+      "body_height_px": 41,
+      "source_cell": 5,
+      "frame_duration_ms": null,
+      "loop": false,
+      "status": "direction_review_only",
+      "sha256": "ef6c5738fb25945d4d688232899d48e0d4238e7cae50b81404952f55b241e41c"
+    },
+    {
+      "file": "pose_drafts/martial_artist/key_06.png",
+      "character": "martial_artist",
+      "key_pose": 6,
+      "canvas": [
+        64,
+        56
+      ],
+      "anchor": [
+        24,
+        50
+      ],
+      "body_bbox": [
+        14,
+        9,
+        35,
+        50
+      ],
+      "body_height_px": 41,
+      "source_cell": 6,
+      "frame_duration_ms": null,
+      "loop": false,
+      "status": "direction_review_only",
+      "sha256": "574db63bc43315e8c2dc826c2af52f1fd6bc9945ed2e27774d54ec9fc797f569"
+    },
+    {
+      "file": "pose_drafts/ninja/key_00.png",
+      "character": "ninja",
+      "key_pose": 0,
+      "canvas": [
+        64,
+        56
+      ],
+      "anchor": [
+        32,
+        50
+      ],
+      "body_bbox": [
+        20,
+        10,
+        52,
+        50
+      ],
+      "body_height_px": 40,
+      "source_cell": 0,
+      "frame_duration_ms": null,
+      "loop": false,
+      "status": "direction_review_only",
+      "sha256": "95804058d5aa85ea7f1e40e3c01b0ca14eab9d7bed9352a814f9beae8d639817"
+    },
+    {
+      "file": "pose_drafts/ninja/key_01.png",
+      "character": "ninja",
+      "key_pose": 1,
+      "canvas": [
+        64,
+        56
+      ],
+      "anchor": [
+        32,
+        50
+      ],
+      "body_bbox": [
+        15,
+        10,
+        50,
+        50
+      ],
+      "body_height_px": 40,
+      "source_cell": 1,
+      "frame_duration_ms": null,
+      "loop": false,
+      "status": "direction_review_only",
+      "sha256": "ba5f694bc01478a9ec4b102385e37b34949c42de382c3002aadc92a0d79a0808"
+    },
+    {
+      "file": "pose_drafts/ninja/key_02.png",
+      "character": "ninja",
+      "key_pose": 2,
+      "canvas": [
+        64,
+        56
+      ],
+      "anchor": [
+        32,
+        50
+      ],
+      "body_bbox": [
+        20,
+        12,
+        61,
+        50
+      ],
+      "body_height_px": 38,
+      "source_cell": 2,
+      "frame_duration_ms": null,
+      "loop": false,
+      "status": "direction_review_only",
+      "sha256": "62343c342e6652ffa0057496a19e5a3fb2c75c1d0ac194a314b9bc28780aef2a"
+    },
+    {
+      "file": "pose_drafts/ninja/key_03.png",
+      "character": "ninja",
+      "key_pose": 3,
+      "canvas": [
+        64,
+        56
+      ],
+      "anchor": [
+        32,
+        50
+      ],
+      "body_bbox": [
+        19,
+        15,
+        52,
+        50
+      ],
+      "body_height_px": 35,
+      "source_cell": 3,
+      "frame_duration_ms": null,
+      "loop": false,
+      "status": "direction_review_only",
+      "sha256": "8a15056f8c64af21ab80f17daaba94b7a2bcc14f9ee32029e3aadfe6635794b8"
+    },
+    {
+      "file": "pose_drafts/ninja/key_04.png",
+      "character": "ninja",
+      "key_pose": 4,
+      "canvas": [
+        64,
+        56
+      ],
+      "anchor": [
+        32,
+        50
+      ],
+      "body_bbox": [
+        17,
+        22,
+        48,
+        50
+      ],
+      "body_height_px": 28,
+      "source_cell": 4,
+      "frame_duration_ms": null,
+      "loop": false,
+      "status": "direction_review_only",
+      "sha256": "ccdf702edb2bb9e5e39b8dce910d6e914c08e521920f402230efd2b6ba090e01"
+    },
+    {
+      "file": "pose_drafts/ninja/key_05.png",
+      "character": "ninja",
+      "key_pose": 5,
+      "canvas": [
+        64,
+        56
+      ],
+      "anchor": [
+        32,
+        50
+      ],
+      "body_bbox": [
+        3,
+        12,
+        37,
+        50
+      ],
+      "body_height_px": 38,
+      "source_cell": 5,
+      "frame_duration_ms": null,
+      "loop": false,
+      "status": "direction_review_only",
+      "sha256": "8a66380bc4ff533f48ac54abf0aa8ebcbd3d285a3dc0032964a5aaa541a01dc7"
+    },
+    {
+      "file": "pose_drafts/tamer/key_00.png",
+      "character": "tamer",
+      "key_pose": 0,
+      "canvas": [
+        64,
+        56
+      ],
+      "anchor": [
+        24,
+        50
+      ],
+      "body_bbox": [
+        13,
+        9,
+        33,
+        50
+      ],
+      "body_height_px": 41,
+      "source_cell": 0,
+      "frame_duration_ms": null,
+      "loop": false,
+      "status": "direction_review_only",
+      "sha256": "42b6c23b8674f9cd9b985d47c1289d0739eb3a059523bd5c316d4648e6a20662"
+    },
+    {
+      "file": "pose_drafts/tamer/key_01.png",
+      "character": "tamer",
+      "key_pose": 1,
+      "canvas": [
+        64,
+        56
+      ],
+      "anchor": [
+        24,
+        50
+      ],
+      "body_bbox": [
+        15,
+        10,
+        41,
+        50
+      ],
+      "body_height_px": 40,
+      "source_cell": 1,
+      "frame_duration_ms": null,
+      "loop": false,
+      "status": "direction_review_only",
+      "sha256": "4e6880701f3030dda77497321a737d9e4f70a5022c46d995c21b540bfafecd69"
+    },
+    {
+      "file": "pose_drafts/tamer/key_02.png",
+      "character": "tamer",
+      "key_pose": 2,
+      "canvas": [
+        64,
+        56
+      ],
+      "anchor": [
+        24,
+        50
+      ],
+      "body_bbox": [
+        14,
+        22,
+        40,
+        50
+      ],
+      "body_height_px": 28,
+      "source_cell": 2,
+      "frame_duration_ms": null,
+      "loop": false,
+      "status": "direction_review_only",
+      "sha256": "9c37517d952e841a5ca00a2b96c77f882b11997f4b12bbb21b81f06d4b04e547"
+    },
+    {
+      "file": "pose_drafts/tamer/key_03.png",
+      "character": "tamer",
+      "key_pose": 3,
+      "canvas": [
+        64,
+        56
+      ],
+      "anchor": [
+        24,
+        50
+      ],
+      "body_bbox": [
+        13,
+        21,
+        45,
+        50
+      ],
+      "body_height_px": 29,
+      "source_cell": 3,
+      "frame_duration_ms": null,
+      "loop": false,
+      "status": "direction_review_only",
+      "sha256": "49596ed355342e90f2b32379201d412f58fc9c56a779b8e5d05fe995cf81f2f6"
+    },
+    {
+      "file": "pose_drafts/tamer/key_04.png",
+      "character": "tamer",
+      "key_pose": 4,
+      "canvas": [
+        64,
+        56
+      ],
+      "anchor": [
+        24,
+        50
+      ],
+      "body_bbox": [
+        14,
+        21,
+        44,
+        50
+      ],
+      "body_height_px": 29,
+      "source_cell": 4,
+      "frame_duration_ms": null,
+      "loop": false,
+      "status": "direction_review_only",
+      "sha256": "83685555109a4997fbb528f7094406775b21de58c44dd6623c9c802f9ce1c92c"
+    },
+    {
+      "file": "pose_drafts/tamer/key_05.png",
+      "character": "tamer",
+      "key_pose": 5,
+      "canvas": [
+        64,
+        56
+      ],
+      "anchor": [
+        24,
+        50
+      ],
+      "body_bbox": [
+        9,
+        6,
+        35,
+        50
+      ],
+      "body_height_px": 44,
+      "source_cell": 5,
+      "frame_duration_ms": null,
+      "loop": false,
+      "status": "direction_review_only",
+      "sha256": "03c82e75bd6de9fe2ce1cb7f109d3e1375a2075bc6c4fde587ee7df132f1228b"
+    },
+    {
+      "file": "pose_drafts/runner/key_00.png",
+      "character": "runner",
+      "key_pose": 0,
+      "canvas": [
+        64,
+        56
+      ],
+      "anchor": [
+        32,
+        50
+      ],
+      "body_bbox": [
+        22,
+        8,
+        41,
+        50
+      ],
+      "body_height_px": 42,
+      "source_cell": 0,
+      "frame_duration_ms": null,
+      "loop": false,
+      "status": "direction_review_only",
+      "sha256": "4dfb743f904f54ab153832481fe535c53930de9953d60f6d4bb3de28ad402ea6"
+    },
+    {
+      "file": "pose_drafts/runner/key_01.png",
+      "character": "runner",
+      "key_pose": 1,
+      "canvas": [
+        64,
+        56
+      ],
+      "anchor": [
+        32,
+        50
+      ],
+      "body_bbox": [
+        16,
+        10,
+        52,
+        50
+      ],
+      "body_height_px": 40,
+      "source_cell": 1,
+      "frame_duration_ms": null,
+      "loop": false,
+      "status": "direction_review_only",
+      "sha256": "710e1c1cc7f252bbf68c2a719544bde3767187b3328c8a320cb8ed5832a0c5c6"
+    },
+    {
+      "file": "pose_drafts/runner/key_02.png",
+      "character": "runner",
+      "key_pose": 2,
+      "canvas": [
+        64,
+        56
+      ],
+      "anchor": [
+        32,
+        50
+      ],
+      "body_bbox": [
+        27,
+        8,
+        52,
+        50
+      ],
+      "body_height_px": 42,
+      "source_cell": 2,
+      "frame_duration_ms": null,
+      "loop": false,
+      "status": "direction_review_only",
+      "sha256": "d1133e2fe3c4d79dcd2add7089014b1fa348933fb37a87db07ae47ebe5cdfc29"
+    },
+    {
+      "file": "pose_drafts/runner/key_03.png",
+      "character": "runner",
+      "key_pose": 3,
+      "canvas": [
+        64,
+        56
+      ],
+      "anchor": [
+        32,
+        50
+      ],
+      "body_bbox": [
+        19,
+        12,
+        49,
+        50
+      ],
+      "body_height_px": 38,
+      "source_cell": 3,
+      "frame_duration_ms": null,
+      "loop": false,
+      "status": "direction_review_only",
+      "sha256": "f1675820f499dcd9098ae28afcb48a4deb55fb8ff9464a24bd216e8c20965af9"
+    },
+    {
+      "file": "pose_drafts/runner/key_04.png",
+      "character": "runner",
+      "key_pose": 4,
+      "canvas": [
+        64,
+        56
+      ],
+      "anchor": [
+        32,
+        50
+      ],
+      "body_bbox": [
+        22,
+        20,
+        47,
+        50
+      ],
+      "body_height_px": 30,
+      "source_cell": 4,
+      "frame_duration_ms": null,
+      "loop": false,
+      "status": "direction_review_only",
+      "sha256": "852b346998eed92d74aa7da42583d0710fc63402bd15065b95d1ae737d10346c"
+    },
+    {
+      "file": "pose_drafts/runner/key_05.png",
+      "character": "runner",
+      "key_pose": 5,
+      "canvas": [
+        64,
+        56
+      ],
+      "anchor": [
+        32,
+        50
+      ],
+      "body_bbox": [
+        21,
+        7,
+        41,
+        50
+      ],
+      "body_height_px": 43,
+      "source_cell": 5,
+      "frame_duration_ms": null,
+      "loop": false,
+      "status": "direction_review_only",
+      "sha256": "bdbea8036608160cccbbfa73514759b02b97368896d2aa31b314cb6b05b8c1a4"
+    },
+    {
+      "file": "pose_drafts/doberman/key_00.png",
+      "character": "doberman",
+      "key_pose": 0,
+      "canvas": [
+        64,
+        48
+      ],
+      "anchor": [
+        32,
+        44
+      ],
+      "body_bbox": [
+        12,
+        11,
+        51,
+        44
+      ],
+      "body_height_px": 33,
+      "source_cell": 0,
+      "frame_duration_ms": null,
+      "loop": false,
+      "status": "direction_review_only",
+      "sha256": "2b78431b64ad244019e73d90e7ba1969aba16d121b32e1acafd3234c3fd7dab7"
+    },
+    {
+      "file": "pose_drafts/doberman/key_01.png",
+      "character": "doberman",
+      "key_pose": 1,
+      "canvas": [
+        64,
+        48
+      ],
+      "anchor": [
+        32,
+        44
+      ],
+      "body_bbox": [
+        6,
+        14,
+        59,
+        44
+      ],
+      "body_height_px": 30,
+      "source_cell": 1,
+      "frame_duration_ms": null,
+      "loop": false,
+      "status": "direction_review_only",
+      "sha256": "4a849f263c29c795d4c81732861838a6ef5b991f1031d7e1f5f2649015e7e27d"
+    },
+    {
+      "file": "pose_drafts/doberman/key_02.png",
+      "character": "doberman",
+      "key_pose": 2,
+      "canvas": [
+        64,
+        48
+      ],
+      "anchor": [
+        32,
+        44
+      ],
+      "body_bbox": [
+        11,
+        13,
+        53,
+        44
+      ],
+      "body_height_px": 31,
+      "source_cell": 2,
+      "frame_duration_ms": null,
+      "loop": false,
+      "status": "direction_review_only",
+      "sha256": "ac29f6cf1f37667050b68578ccdda344bab0e8343fca0477c135b3d92ca464bb"
+    },
+    {
+      "file": "pose_drafts/doberman/key_03.png",
+      "character": "doberman",
+      "key_pose": 3,
+      "canvas": [
+        64,
+        48
+      ],
+      "anchor": [
+        32,
+        44
+      ],
+      "body_bbox": [
+        10,
+        18,
+        55,
+        44
+      ],
+      "body_height_px": 26,
+      "source_cell": 3,
+      "frame_duration_ms": null,
+      "loop": false,
+      "status": "direction_review_only",
+      "sha256": "8bc161f036332453cec3e9e0fe6811cef1db03a1ea249ac8b12aeaff5e6d8553"
+    },
+    {
+      "file": "pose_drafts/bullfrog/key_00.png",
+      "character": "bullfrog",
+      "key_pose": 0,
+      "canvas": [
+        48,
+        40
+      ],
+      "anchor": [
+        24,
+        36
+      ],
+      "body_bbox": [
+        9,
+        14,
+        40,
+        36
+      ],
+      "body_height_px": 22,
+      "source_cell": 0,
+      "frame_duration_ms": null,
+      "loop": false,
+      "status": "direction_review_only",
+      "sha256": "3aedace10fb7c3c900c2b7bdf856576e4c8bacf85981712e52d422b7e5805d9b"
+    },
+    {
+      "file": "pose_drafts/bullfrog/key_01.png",
+      "character": "bullfrog",
+      "key_pose": 1,
+      "canvas": [
+        48,
+        40
+      ],
+      "anchor": [
+        24,
+        36
+      ],
+      "body_bbox": [
+        9,
+        11,
+        41,
+        36
+      ],
+      "body_height_px": 25,
+      "source_cell": 1,
+      "frame_duration_ms": null,
+      "loop": false,
+      "status": "direction_review_only",
+      "sha256": "3450af2295ba4f8cabb818cea781959ad98f7299b6f926ba08317bb68159a271"
+    },
+    {
+      "file": "pose_drafts/bullfrog/key_02.png",
+      "character": "bullfrog",
+      "key_pose": 2,
+      "canvas": [
+        48,
+        40
+      ],
+      "anchor": [
+        24,
+        36
+      ],
+      "body_bbox": [
+        8,
+        14,
+        41,
+        36
+      ],
+      "body_height_px": 22,
+      "source_cell": 2,
+      "frame_duration_ms": null,
+      "loop": false,
+      "status": "direction_review_only",
+      "sha256": "a867bd1d398e7968563f9e64c7d8173f3d1393187063e937f77db7f2f14e4108"
+    },
+    {
+      "file": "pose_drafts/bullfrog/key_03.png",
+      "character": "bullfrog",
+      "key_pose": 3,
+      "canvas": [
+        48,
+        40
+      ],
+      "anchor": [
+        24,
+        36
+      ],
+      "body_bbox": [
+        10,
+        7,
+        40,
+        36
+      ],
+      "body_height_px": 29,
+      "source_cell": 3,
+      "frame_duration_ms": null,
+      "loop": false,
+      "status": "direction_review_only",
+      "sha256": "07b3c8a8346c290315d21487131f4c9196d4a7d9f65abe318510690fcb35a0fc"
+    },
+    {
+      "file": "pose_drafts/bullfrog/key_04.png",
+      "character": "bullfrog",
+      "key_pose": 4,
+      "canvas": [
+        48,
+        40
+      ],
+      "anchor": [
+        24,
+        36
+      ],
+      "body_bbox": [
+        8,
+        14,
+        41,
+        36
+      ],
+      "body_height_px": 22,
+      "source_cell": 4,
+      "frame_duration_ms": null,
+      "loop": false,
+      "status": "direction_review_only",
+      "sha256": "fd763176f43d1bfc1c5471a4bc7677a08d8adbf64b339823cf810a50047953db"
+    },
+    {
+      "file": "pose_drafts/bullfrog/key_05.png",
+      "character": "bullfrog",
+      "key_pose": 5,
+      "canvas": [
+        48,
+        40
+      ],
+      "anchor": [
+        24,
+        36
+      ],
+      "body_bbox": [
+        7,
+        9,
+        42,
+        36
+      ],
+      "body_height_px": 27,
+      "source_cell": 5,
+      "frame_duration_ms": null,
+      "loop": false,
+      "status": "direction_review_only",
+      "sha256": "84ae01a96a44b8b3934e8d3e8ff9d5329c764b67c7a1deb5f418f08603e8c6e7"
+    },
+    {
+      "file": "pose_drafts/hedgehog/key_00.png",
+      "character": "hedgehog",
+      "key_pose": 0,
+      "canvas": [
+        32,
+        32
+      ],
+      "anchor": [
+        16,
+        28
+      ],
+      "body_bbox": [
+        5,
+        10,
+        27,
+        28
+      ],
+      "body_height_px": 18,
+      "source_cell": 0,
+      "frame_duration_ms": null,
+      "loop": false,
+      "status": "direction_review_only",
+      "sha256": "e675bc17d2b9074c7006bac02e551d29fb5f689864b97872473e0150196aaf9f"
+    },
+    {
+      "file": "pose_drafts/hedgehog/key_01.png",
+      "character": "hedgehog",
+      "key_pose": 1,
+      "canvas": [
+        32,
+        32
+      ],
+      "anchor": [
+        16,
+        28
+      ],
+      "body_bbox": [
+        6,
+        9,
+        26,
+        28
+      ],
+      "body_height_px": 19,
+      "source_cell": 1,
+      "frame_duration_ms": null,
+      "loop": false,
+      "status": "direction_review_only",
+      "sha256": "7bf91bb444b2294c91587cf9e1b20b9043150d6f25701be5b117bd126003f48c"
+    },
+    {
+      "file": "pose_drafts/hedgehog/key_02.png",
+      "character": "hedgehog",
+      "key_pose": 2,
+      "canvas": [
+        32,
+        32
+      ],
+      "anchor": [
+        16,
+        28
+      ],
+      "body_bbox": [
+        5,
+        14,
+        27,
+        28
+      ],
+      "body_height_px": 14,
+      "source_cell": 2,
+      "frame_duration_ms": null,
+      "loop": false,
+      "status": "direction_review_only",
+      "sha256": "380fe6e0bd8d8584383fea001c359b1457d34f5b0bfcddb09b9aad4a2d1fa02f"
+    },
+    {
+      "file": "pose_drafts/hedgehog/key_03.png",
+      "character": "hedgehog",
+      "key_pose": 3,
+      "canvas": [
+        32,
+        32
+      ],
+      "anchor": [
+        16,
+        28
+      ],
+      "body_bbox": [
+        4,
+        8,
+        28,
+        28
+      ],
+      "body_height_px": 20,
+      "source_cell": 3,
+      "frame_duration_ms": null,
+      "loop": false,
+      "status": "direction_review_only",
+      "sha256": "f5f27e3afbffc9e2f417ded1e9fc5b55d7e080b0f6bf1b54995eae60e31516d2"
+    },
+    {
+      "file": "pose_drafts/hedgehog/key_04.png",
+      "character": "hedgehog",
+      "key_pose": 4,
+      "canvas": [
+        32,
+        32
+      ],
+      "anchor": [
+        16,
+        28
+      ],
+      "body_bbox": [
+        7,
+        11,
+        25,
+        28
+      ],
+      "body_height_px": 17,
+      "source_cell": 4,
+      "frame_duration_ms": null,
+      "loop": false,
+      "status": "direction_review_only",
+      "sha256": "e811f7097aaf632e0f2091522fafba06742b9515722674899d6a5849d0922c44"
+    },
+    {
+      "file": "pose_drafts/hedgehog/key_05.png",
+      "character": "hedgehog",
+      "key_pose": 5,
+      "canvas": [
+        32,
+        32
+      ],
+      "anchor": [
+        16,
+        28
+      ],
+      "body_bbox": [
+        5,
+        11,
+        27,
+        28
+      ],
+      "body_height_px": 17,
+      "source_cell": 5,
+      "frame_duration_ms": null,
+      "loop": false,
+      "status": "direction_review_only",
+      "sha256": "4d7e773a3647557bc354a3c05c6fda4a3187eb7e9a65badc3b9c69b3b1413c2c"
+    }
+  ]
+}

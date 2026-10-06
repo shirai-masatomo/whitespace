@@ -1,0 +1,26 @@
+[
+  {
+    "file": "characters_v1/keeper_idle_right_00.png",
+    "sha256": "c2ea9f9d7cdebd5a007d881fd17af4bb121c3f1afc2a373de56f49f859293c1e"
+  },
+  {
+    "file": "characters_v1/shiba_idle_right_00.png",
+    "sha256": "6b394d938fd8c8ba4f9afc94be43def55223d5097a1d9f9759965e1e2d1dede9"
+  },
+  {
+    "file": "ranch_assets_v1/hen/idle_right_00.png",
+    "sha256": "ddf873837acdd77868b2b20d9ad3615d60d672f21dc00048e85c6964722331aa"
+  },
+  {
+    "file": "ranch_assets_v1/cat/idle_right_00.png",
+    "sha256": "aa8c80b01e4c43ed4c5325dd0ea9176f436d4262be9b9c9e9623e38eecefe5f5"
+  },
+  {
+    "file": "kidnapper_basic_v1/idle/right_00.png",
+    "sha256": "8fc95841353eb858704f74d27702322638be2e40a27cc0f2fe8134c4cf25f880"
+  },
+  {
+    "file": "merchant_cart_v2/merchant/idle_right_00.png",
+    "sha256": "dae25e011076fe020ad3617fbb8b96b1feeb0152b25d90c74265966c8cb3795c"
+  }
+]
