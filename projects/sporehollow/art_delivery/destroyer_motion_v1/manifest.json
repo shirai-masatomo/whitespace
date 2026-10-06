@@ -1144,9 +1144,9 @@
         80
       ],
       "visible_bbox_exclusive_px": [
-        72,
-        64,
-        89,
+        71,
+        59,
+        88,
         80
       ],
       "action": "walk",
@@ -1155,7 +1155,7 @@
       "frame_duration_ms": 140,
       "loop": true,
       "layer": "weapon_front",
-      "sha256": "8015ff5d48ffe0d9b7c53a7a1ce11fb7e3617a7a90f5831864d9d1b73b5c59ff",
+      "sha256": "d43fc5516466e09365965abb417ac3888dfeffd0e736cbab00aa3230c739a5c4",
       "runtime_ready": true,
       "contains_cast_shadow": false
     },
@@ -1170,9 +1170,9 @@
         80
       ],
       "visible_bbox_exclusive_px": [
-        39,
-        64,
-        56,
+        40,
+        59,
+        57,
         80
       ],
       "action": "walk",
@@ -1181,7 +1181,7 @@
       "frame_duration_ms": 140,
       "loop": true,
       "layer": "weapon_front",
-      "sha256": "9a10fc9dadadcb9131808fb31d2e5a9be3ed869d57d0f66055a95afc01f5d252",
+      "sha256": "3400dfa27d8b42a4c268059a12d648b8d02a647befa8716406c7781cfa04d295",
       "runtime_ready": true,
       "contains_cast_shadow": false
     },
@@ -1196,9 +1196,9 @@
         80
       ],
       "visible_bbox_exclusive_px": [
-        72,
-        64,
-        89,
+        70,
+        61,
+        87,
         80
       ],
       "action": "walk",
@@ -1207,7 +1207,7 @@
       "frame_duration_ms": 140,
       "loop": true,
       "layer": "weapon_front",
-      "sha256": "8015ff5d48ffe0d9b7c53a7a1ce11fb7e3617a7a90f5831864d9d1b73b5c59ff",
+      "sha256": "9dbf68139b7ac48cdfddb2ac00239246325aae0dae16a3a5fe2bf5b3f3790c67",
       "runtime_ready": true,
       "contains_cast_shadow": false
     },
@@ -1222,9 +1222,9 @@
         80
       ],
       "visible_bbox_exclusive_px": [
-        39,
-        64,
-        56,
+        41,
+        61,
+        58,
         80
       ],
       "action": "walk",
@@ -1233,7 +1233,7 @@
       "frame_duration_ms": 140,
       "loop": true,
       "layer": "weapon_front",
-      "sha256": "9a10fc9dadadcb9131808fb31d2e5a9be3ed869d57d0f66055a95afc01f5d252",
+      "sha256": "4ddb9e75ebf7846198d7b35974b444a88633d3f60902354689cc10baaf84f739",
       "runtime_ready": true,
       "contains_cast_shadow": false
     },
@@ -1248,9 +1248,9 @@
         80
       ],
       "visible_bbox_exclusive_px": [
-        72,
-        64,
-        89,
+        74,
+        60,
+        91,
         80
       ],
       "action": "walk",
@@ -1259,7 +1259,7 @@
       "frame_duration_ms": 140,
       "loop": true,
       "layer": "weapon_front",
-      "sha256": "8015ff5d48ffe0d9b7c53a7a1ce11fb7e3617a7a90f5831864d9d1b73b5c59ff",
+      "sha256": "3b8b1ae023009e96892ff9d112d8daa6e58089672d6a9e28be83bd2f15396831",
       "runtime_ready": true,
       "contains_cast_shadow": false
     },
@@ -1274,9 +1274,9 @@
         80
       ],
       "visible_bbox_exclusive_px": [
-        39,
-        64,
-        56,
+        37,
+        60,
+        54,
         80
       ],
       "action": "walk",
@@ -1285,7 +1285,7 @@
       "frame_duration_ms": 140,
       "loop": true,
       "layer": "weapon_front",
-      "sha256": "9a10fc9dadadcb9131808fb31d2e5a9be3ed869d57d0f66055a95afc01f5d252",
+      "sha256": "de86bc0650e95be17b4381e0c7d78afbee2af1a08b0c1521e128321b011c6c62",
       "runtime_ready": true,
       "contains_cast_shadow": false
     },
@@ -1300,9 +1300,9 @@
         80
       ],
       "visible_bbox_exclusive_px": [
-        72,
-        64,
-        89,
+        70,
+        61,
+        87,
         80
       ],
       "action": "walk",
@@ -1311,7 +1311,7 @@
       "frame_duration_ms": 140,
       "loop": true,
       "layer": "weapon_front",
-      "sha256": "8015ff5d48ffe0d9b7c53a7a1ce11fb7e3617a7a90f5831864d9d1b73b5c59ff",
+      "sha256": "9dbf68139b7ac48cdfddb2ac00239246325aae0dae16a3a5fe2bf5b3f3790c67",
       "runtime_ready": true,
       "contains_cast_shadow": false
     },
@@ -1326,9 +1326,9 @@
         80
       ],
       "visible_bbox_exclusive_px": [
-        39,
-        64,
-        56,
+        41,
+        61,
+        58,
         80
       ],
       "action": "walk",
@@ -1337,7 +1337,7 @@
       "frame_duration_ms": 140,
       "loop": true,
       "layer": "weapon_front",
-      "sha256": "9a10fc9dadadcb9131808fb31d2e5a9be3ed869d57d0f66055a95afc01f5d252",
+      "sha256": "4ddb9e75ebf7846198d7b35974b444a88633d3f60902354689cc10baaf84f739",
       "runtime_ready": true,
       "contains_cast_shadow": false
     },
@@ -1352,9 +1352,9 @@
         80
       ],
       "visible_bbox_exclusive_px": [
-        71,
-        58,
-        88,
+        67,
+        54,
+        84,
         80
       ],
       "action": "hurt",
@@ -1363,7 +1363,7 @@
       "frame_duration_ms": 80,
       "loop": false,
       "layer": "weapon_front",
-      "sha256": "308b6e50bb8e5e62f85fa5be1dd9a3a2bffb24b7baa3a83e4d028503f57d7d8d",
+      "sha256": "e73f102e3a65e298174aa7891eeb1a10a2e60fd5e57b4e6de03015061ea31bf9",
       "runtime_ready": true,
       "contains_cast_shadow": false
     },
@@ -1378,9 +1378,9 @@
         80
       ],
       "visible_bbox_exclusive_px": [
-        40,
-        58,
-        57,
+        44,
+        54,
+        61,
         80
       ],
       "action": "hurt",
@@ -1389,7 +1389,7 @@
       "frame_duration_ms": 80,
       "loop": false,
       "layer": "weapon_front",
-      "sha256": "204a44e9de02ff60b1631b98a1d5ae73435a3c6787b1892129a6e95b338e6bd8",
+      "sha256": "eb3b5bfefeee51c16cacb3b45dbf06c1bd818804ad056748ef0a884f55592182",
       "runtime_ready": true,
       "contains_cast_shadow": false
     },
@@ -1404,9 +1404,9 @@
         80
       ],
       "visible_bbox_exclusive_px": [
-        71,
+        67,
         58,
-        88,
+        84,
         80
       ],
       "action": "hurt",
@@ -1415,7 +1415,7 @@
       "frame_duration_ms": 120,
       "loop": false,
       "layer": "weapon_front",
-      "sha256": "308b6e50bb8e5e62f85fa5be1dd9a3a2bffb24b7baa3a83e4d028503f57d7d8d",
+      "sha256": "c967c3cb9144f8b55402703135da9cfd8007605b0542a415e35c7a03fcc24743",
       "runtime_ready": true,
       "contains_cast_shadow": false
     },
@@ -1430,9 +1430,9 @@
         80
       ],
       "visible_bbox_exclusive_px": [
-        40,
+        44,
         58,
-        57,
+        61,
         80
       ],
       "action": "hurt",
@@ -1441,7 +1441,7 @@
       "frame_duration_ms": 120,
       "loop": false,
       "layer": "weapon_front",
-      "sha256": "204a44e9de02ff60b1631b98a1d5ae73435a3c6787b1892129a6e95b338e6bd8",
+      "sha256": "385e6b51ff317e792bdaf1393fc71229173aab19b2e4a137e3aaa690c420284d",
       "runtime_ready": true,
       "contains_cast_shadow": false
     },
@@ -1457,7 +1457,7 @@
       ],
       "visible_bbox_exclusive_px": [
         71,
-        58,
+        64,
         88,
         80
       ],
@@ -1467,7 +1467,7 @@
       "frame_duration_ms": 120,
       "loop": false,
       "layer": "weapon_front",
-      "sha256": "308b6e50bb8e5e62f85fa5be1dd9a3a2bffb24b7baa3a83e4d028503f57d7d8d",
+      "sha256": "7a6c96ca9a6d0f8b4b950e8c2dcbbf0623901184a3d33252c0403d799d0cb2a2",
       "runtime_ready": true,
       "contains_cast_shadow": false
     },
@@ -1483,7 +1483,7 @@
       ],
       "visible_bbox_exclusive_px": [
         40,
-        58,
+        64,
         57,
         80
       ],
@@ -1493,7 +1493,7 @@
       "frame_duration_ms": 120,
       "loop": false,
       "layer": "weapon_front",
-      "sha256": "204a44e9de02ff60b1631b98a1d5ae73435a3c6787b1892129a6e95b338e6bd8",
+      "sha256": "b80582a460e1ea3145e02c68d6c598c66e32c838aa02eac0f4d96242ffec8985",
       "runtime_ready": true,
       "contains_cast_shadow": false
     },
@@ -1508,9 +1508,9 @@
         80
       ],
       "visible_bbox_exclusive_px": [
-        71,
-        58,
-        88,
+        67,
+        54,
+        84,
         80
       ],
       "action": "retreat",
@@ -1519,7 +1519,7 @@
       "frame_duration_ms": 100,
       "loop": true,
       "layer": "weapon_front",
-      "sha256": "308b6e50bb8e5e62f85fa5be1dd9a3a2bffb24b7baa3a83e4d028503f57d7d8d",
+      "sha256": "e73f102e3a65e298174aa7891eeb1a10a2e60fd5e57b4e6de03015061ea31bf9",
       "runtime_ready": true,
       "contains_cast_shadow": false
     },
@@ -1534,9 +1534,9 @@
         80
       ],
       "visible_bbox_exclusive_px": [
-        40,
-        58,
-        57,
+        44,
+        54,
+        61,
         80
       ],
       "action": "retreat",
@@ -1545,7 +1545,7 @@
       "frame_duration_ms": 100,
       "loop": true,
       "layer": "weapon_front",
-      "sha256": "204a44e9de02ff60b1631b98a1d5ae73435a3c6787b1892129a6e95b338e6bd8",
+      "sha256": "eb3b5bfefeee51c16cacb3b45dbf06c1bd818804ad056748ef0a884f55592182",
       "runtime_ready": true,
       "contains_cast_shadow": false
     },
@@ -1560,9 +1560,9 @@
         80
       ],
       "visible_bbox_exclusive_px": [
-        71,
-        58,
-        88,
+        67,
+        54,
+        84,
         80
       ],
       "action": "retreat",
@@ -1571,7 +1571,7 @@
       "frame_duration_ms": 100,
       "loop": true,
       "layer": "weapon_front",
-      "sha256": "308b6e50bb8e5e62f85fa5be1dd9a3a2bffb24b7baa3a83e4d028503f57d7d8d",
+      "sha256": "e73f102e3a65e298174aa7891eeb1a10a2e60fd5e57b4e6de03015061ea31bf9",
       "runtime_ready": true,
       "contains_cast_shadow": false
     },
@@ -1586,9 +1586,9 @@
         80
       ],
       "visible_bbox_exclusive_px": [
-        40,
-        58,
-        57,
+        44,
+        54,
+        61,
         80
       ],
       "action": "retreat",
@@ -1597,7 +1597,7 @@
       "frame_duration_ms": 100,
       "loop": true,
       "layer": "weapon_front",
-      "sha256": "204a44e9de02ff60b1631b98a1d5ae73435a3c6787b1892129a6e95b338e6bd8",
+      "sha256": "eb3b5bfefeee51c16cacb3b45dbf06c1bd818804ad056748ef0a884f55592182",
       "runtime_ready": true,
       "contains_cast_shadow": false
     },
@@ -1612,9 +1612,9 @@
         80
       ],
       "visible_bbox_exclusive_px": [
-        71,
-        58,
-        88,
+        67,
+        54,
+        84,
         80
       ],
       "action": "retreat",
@@ -1623,7 +1623,7 @@
       "frame_duration_ms": 100,
       "loop": true,
       "layer": "weapon_front",
-      "sha256": "308b6e50bb8e5e62f85fa5be1dd9a3a2bffb24b7baa3a83e4d028503f57d7d8d",
+      "sha256": "e73f102e3a65e298174aa7891eeb1a10a2e60fd5e57b4e6de03015061ea31bf9",
       "runtime_ready": true,
       "contains_cast_shadow": false
     },
@@ -1638,9 +1638,9 @@
         80
       ],
       "visible_bbox_exclusive_px": [
-        40,
-        58,
-        57,
+        44,
+        54,
+        61,
         80
       ],
       "action": "retreat",
@@ -1649,7 +1649,7 @@
       "frame_duration_ms": 100,
       "loop": true,
       "layer": "weapon_front",
-      "sha256": "204a44e9de02ff60b1631b98a1d5ae73435a3c6787b1892129a6e95b338e6bd8",
+      "sha256": "eb3b5bfefeee51c16cacb3b45dbf06c1bd818804ad056748ef0a884f55592182",
       "runtime_ready": true,
       "contains_cast_shadow": false
     },
@@ -1664,9 +1664,9 @@
         80
       ],
       "visible_bbox_exclusive_px": [
-        71,
-        58,
-        88,
+        67,
+        54,
+        84,
         80
       ],
       "action": "retreat",
@@ -1675,7 +1675,7 @@
       "frame_duration_ms": 100,
       "loop": true,
       "layer": "weapon_front",
-      "sha256": "308b6e50bb8e5e62f85fa5be1dd9a3a2bffb24b7baa3a83e4d028503f57d7d8d",
+      "sha256": "e73f102e3a65e298174aa7891eeb1a10a2e60fd5e57b4e6de03015061ea31bf9",
       "runtime_ready": true,
       "contains_cast_shadow": false
     },
@@ -1690,9 +1690,9 @@
         80
       ],
       "visible_bbox_exclusive_px": [
-        40,
-        58,
-        57,
+        44,
+        54,
+        61,
         80
       ],
       "action": "retreat",
@@ -1701,7 +1701,7 @@
       "frame_duration_ms": 100,
       "loop": true,
       "layer": "weapon_front",
-      "sha256": "204a44e9de02ff60b1631b98a1d5ae73435a3c6787b1892129a6e95b338e6bd8",
+      "sha256": "eb3b5bfefeee51c16cacb3b45dbf06c1bd818804ad056748ef0a884f55592182",
       "runtime_ready": true,
       "contains_cast_shadow": false
     },
@@ -2416,41 +2416,41 @@
     "walk": [
       {
         "grip_body_px": [
-          49,
-          49
+          48,
+          44
         ],
         "ball_ring_body_px": [
-          59,
+          58,
           50
         ]
       },
       {
         "grip_body_px": [
-          49,
-          49
+          47,
+          46
         ],
         "ball_ring_body_px": [
-          59,
+          57,
           50
         ]
       },
       {
         "grip_body_px": [
-          49,
-          49
+          51,
+          45
         ],
         "ball_ring_body_px": [
-          59,
+          61,
           50
         ]
       },
       {
         "grip_body_px": [
-          49,
-          49
+          47,
+          46
         ],
         "ball_ring_body_px": [
-          59,
+          57,
           50
         ]
       }
@@ -2458,28 +2458,28 @@
     "hurt": [
       {
         "grip_body_px": [
-          48,
+          44,
+          38
+        ],
+        "ball_ring_body_px": [
+          54,
+          50
+        ]
+      },
+      {
+        "grip_body_px": [
+          44,
           42
         ],
         "ball_ring_body_px": [
-          58,
+          54,
           50
         ]
       },
       {
         "grip_body_px": [
           48,
-          42
-        ],
-        "ball_ring_body_px": [
-          58,
-          50
-        ]
-      },
-      {
-        "grip_body_px": [
-          48,
-          42
+          49
         ],
         "ball_ring_body_px": [
           58,
@@ -2490,41 +2490,41 @@
     "retreat": [
       {
         "grip_body_px": [
-          48,
-          42
+          44,
+          38
         ],
         "ball_ring_body_px": [
-          58,
+          54,
           50
         ]
       },
       {
         "grip_body_px": [
-          48,
-          42
+          44,
+          38
         ],
         "ball_ring_body_px": [
-          58,
+          54,
           50
         ]
       },
       {
         "grip_body_px": [
-          48,
-          42
+          44,
+          38
         ],
         "ball_ring_body_px": [
-          58,
+          54,
           50
         ]
       },
       {
         "grip_body_px": [
-          48,
-          42
+          44,
+          38
         ],
         "ball_ring_body_px": [
-          58,
+          54,
           50
         ]
       }

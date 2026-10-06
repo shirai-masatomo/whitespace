@@ -144,8 +144,9 @@ def build(n):
   for action,(frames,times,loop) in clips.items():
    socketframes=[]
    for i,im in enumerate(frames):
-    ki=bodykeys.get(action,[0]*len(frames))[i];grip=grips[ki] if action.startswith('iron_ball') or action=='idle' else ([48,42] if action in ['hurt','retreat'] else [49,49])
+    ki=bodykeys.get(action,[0]*len(frames))[i];grip=grips[ki] if action.startswith('iron_ball') or action=='idle' else ({'walk':[[48,44],[47,46],[51,45],[47,46]],'hurt':[[44,38],[44,42],[48,49]],'retreat':[[44,38]]*4}[action][i])
     balls={0:(58,50),1:(-7,29),2:(11,-5),3:(82,48),4:(89,39),5:(59,50)}
+    assert im.getpixel(tuple(grip))[3]>0,('disconnected chain grip',action,i,grip)
     bp=balls[ki] if action.startswith('iron_ball') else (grip[0]+10,50)
     w=Image.new('RGBA',WS);d=ImageDraw.Draw(w);off=(WA[0]-ax,WA[1]-ay);p0=(grip[0]+off[0],grip[1]+off[1]);p1=(bp[0]+off[0],bp[1]+off[1]);count=max(2,math.ceil(math.dist(p0,p1)/4));pts=[]
     for j in range(count+1):
@@ -176,6 +177,9 @@ def build(n):
  elif n=='bullfrog':
   for key,a,use in [('tongue_body',[0,1],'tile or extend; no cap on internal joints'),('tongue_tip',[2,2],'attachment tip'),('tongue_wrap_back',[9,5],'behind target'),('tongue_wrap_front',[9,5],'in front of target')]:part(key,a,use)
   sockets['mouth']={'idle':[53,33],'open':[53,31],'hold':[57,33],'left_formula':'canvas_width - x; y unchanged'}
+  for akey in ['tongue_extend','tongue','tongue_retract']:
+   for direction in ['right','left']:
+    pp=[{0:[53,33],1:[53,31],2:[57,33]}[k] for k in bodykeys[akey]];actions[akey+'_'+direction]['mouth_socket_px']=[p if direction=='right' else [cw-p[0],p[1]] for p in pp]
  # Layer references explicit; prevent double-drawing independent layers.
  for key,a in actions.items():
   refs=[f'weapon/{a["action_id"]}/{a["direction"]}_{i:02}.png' for i in range(len(a['frames']))]
@@ -190,6 +194,7 @@ def build(n):
  moveaction='run' if n=='runner' else ('walk' if n in HUMANS or n=='doberman' else 'move');assert len({im.tobytes() for im in clips[moveaction][0]})==4
  manifest={'schema_version':1,'delivery':out.name,'date':'2026-10-06','branch':'codex/sporehollow-art-assets','status':'ready_for_implementation','character_id':cid,'name_ja':meta['name_ja'],'adopted_design':'../enemy_animal_direction_v3/','adoption_commit':'f26498d2bafe6e274a197aef0a025d5016c8691e','canvas_size_px':[cw,ch],'foot_anchor_px':{'right':anR,'left':anL},'standing_body_height_px':meta['standing_body_height_px'],'rendering':{'format':'RGBA','filter':'nearest','alpha':[0,255],'color_key':False,'trim_transparent_margin':False,'baked_ground_shadow':False},'assets':assets,'actions':actions,'parts':partmeta,'sockets':sockets,'timing_policy':'Presentation cadence only; synchronize existing visual clock and pause. State durations, damage, range, speed, HP and probabilities remain implementation rules. Contact/release indices are visual cues, not gameplay triggers.','sources':{'original':'../../art-production/'+src.name+'/originals/motion-sheet.png','generation_record':'../../art-production/'+src.name+'/generation-record.json','processing':'../../art-production/motion-pipeline-v1/build.py','adopted_keys':'../enemy_animal_direction_v3/pose_drafts/'+n+'/'},'spec_snapshots':[{'file':'../../art-production/'+src.name+'/references/'+s,'sha256':sha(src/'references'/s)} for s in ['ART_SPEC.md','ENEMIES.md','ANIMALS.md']],'unfinished':['正面・背面の専用動作は今回の横向き契約外','ゲーム取り込みと隔離描画検証は実装担当'],'game_launched':False,'in_game_verified':False}
  if n=='bullfrog':manifest['tongue_contract']={'hold_action':'tongue','extend_action':'tongue_extend','retract_action':'tongue_retract','target_layer_order':['tongue_wrap_back','target','tongue_wrap_front'],'distance':'connect current mouth to target hold point; no fixed range baked','preview_anchor_distance_px':144,'latest_ANIMALS_range':'4 cells; not changed; preview 3 cells is a drawing example','rotation':'nearest, no filtering','stretch_body_only':True}
+ if n=='ninja':manifest['projectile_animation']={'frames':[f'projectile/shuriken_{i:02}.png' for i in range(4)],'anchor_px':[5,5],'frame_duration_ms':[80]*4,'loop':True,'movement':'existing projectile logic'}
  if n=='ninja':manifest['scroll_drop']={'source':'../ranch_assets_v1/scroll/idle_none_00.png','independent_from_actor':True,'spawn_once_on_existing_retreat_transition':'implementation rule, not a repeated animation event','smoke_included':False,'canvas_size_px':[24,24],'foot_anchor_px':[12,22]}
  if n=='tamer':manifest['taming_contract']={'character_id':'animal_tamer','source_design_id':'tamer','animal_separate_layer':True,'animal_position':'keep separate ground anchor; never baked into body','success':'existing loyalty/resistance rules only; no automatic success in animation'}
  write_json(out/'manifest.json',manifest)
