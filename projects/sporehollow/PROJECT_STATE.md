@@ -1,5 +1,10 @@
 # ホイッスル牧場 — 現在地
 
+## ショップ・朝画面レビュー対応（2026-10-06）
+
+共通market_viewへ商品カード/可視画像フィット/詳細/数量/価格/空状態/結果/ヘッダーを集約。固定左揃え、購入不足額、売却専用文言、朝の所持金、近い進行ボタンを反映。正式荷車・閉表紙・動物・資源PNGを維持。施設とホイッスルは既存UIアイコンを流用し空白を解消。取引・在庫生成・AI・日中遷移ルールは変更なし。専用のホイッスル/飲料大判素材は未納品。最終画像・比較・検証SHAはreview/current/PACKETを参照。
+
+
 追加素材：UI荷車、資源12PNG、既存誘拐者50PNG、演出40PNGを接続。本・盤面荷車は維持。素材の使用記録はART_SPEC、実画面/出力確認はreview/current/PACKET。
 
 正本：[README](README.md) / [ANIMALS](ANIMALS.md) / [ENEMIES](ENEMIES.md) / [BUILDINGS](BUILDINGS.md)

@@ -1,4 +1,4 @@
-param([ValidateSet('check', 'test', 'evaluate', 'build', 'visual', 'play', 'editor')][string]$Task = 'check', [string[]]$Suites = @('revisions','residents','world','jobs','keeper','planning','rest_until','input','controls','building_art','delivered_art'))
+param([ValidateSet('check', 'test', 'evaluate', 'build', 'visual', 'play', 'editor')][string]$Task = 'check', [string[]]$Suites = @('revisions','residents','world','jobs','keeper','planning','rest_until','input','controls','building_art','delivered_art','market_ui'))
 $ErrorActionPreference = 'Stop'
 $farmRoot = $PSScriptRoot
 $godot = Join-Path $farmRoot '.tools/Godot_v4.7.2-stable_win64_console.exe'

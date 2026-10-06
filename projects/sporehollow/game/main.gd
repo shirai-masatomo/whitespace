@@ -14,6 +14,7 @@ var enemy_art: Dictionary = {}
 var work_dust_at = -1.0
 var actor_art: Dictionary = {}
 const UI = preload("res://game/ui_style.gd")
+const MarketView = preload("res://game/market_view.gd")
 const MARKET_CATEGORIES = {"animals": ["動物", "animals", "牧場の仲間"], "materials": ["資材", "wood", "土・木・石"], "facilities": ["施設", "hammer", "牧場づくり"], "items": ["小物と恵み", "basket", "卵・羽・道具"]}
 var world = Farm.new({}, randi_range(1, 2147483646))
 var subtasks = preload("res://game/subtasks.gd").new()
@@ -325,8 +326,10 @@ func refresh():
 	buttons.speed.disabled = not world.rest_skip.is_empty()
 	buttons.advance.visible = (world.phase == "shop" and morning_screen == "morning") or world.phase=="day" or (world.phase=="defend" and world.early_clear)
 	buttons.advance.text = "支度を終える" if world.phase == "shop" else rest_button_text()
-	buttons.advance.position = Vector2(548,674) if world.phase=="shop" else Vector2(1074,754)
-	buttons.advance.tooltip_text = "商人を見送って、牧場の仕事へ" if world.phase == "shop" else ""
+	buttons.advance.position = Vector2(548,570) if world.phase=="shop" else Vector2(1074,754)
+	buttons.advance.tooltip_text = "商人を見送り、昼の牧場仕事を始めます" if world.phase == "shop" else ""
+	if world.phase=="shop": MarketView.button_style(buttons.advance,true)
+	else: UI.button(buttons.advance)
 	buttons.retry.visible = world.phase == "result"
 	buttons.group1.text = "指示"
 	for i in range(2):
@@ -1659,25 +1662,28 @@ func market_back():
 	refresh()
 
 func trade(id: String, animal_id: int = -1):
+	var before_gold = world.campaign.gold
 	var ok = world.buy(id) if shop_side == "buy" else world.sell(id, animal_id)
-	shop_notice = ("ありがとう。\n大事にしてね。" if shop_side == "buy" else "ありがとう、助かるよ。") if ok else "今は取引できないね。"
+	var change = world.campaign.gold - before_gold
+	shop_notice = ("%sを%sしました　%s%dG（%dG → %dG）" % [MarketView.product_name({"id":id}), "購入" if shop_side=="buy" else "売却", "−" if change<0 else "＋", absi(change),before_gold,world.campaign.gold]) if ok else "取引できませんでした。所持数と在庫を確認してください。"
 	if ok: play_alert("collect")
 	refresh()
-func shop_rows() -> Array:
+func shop_rows(category: String = "") -> Array:
+	if category=="": category=shop_category
 	var rows = []
 	var table = Farm.Shop.table()
 	if shop_side == "buy":
 		for row in world.shop_stock:
-			if table[row.product].Category == shop_category: rows.append({"id": row.product, "count": row.remaining, "animal_id": -1})
-	elif shop_category == "animals":
+			if table[row.product].Category == category: rows.append({"id": row.product, "count": row.remaining, "animal_id": -1})
+	elif category == "animals":
 		for a in world.campaign.animals:
 			if not table[a.species].Enabled: continue
 			rows.append({"id": a.species, "count": 1, "animal_id": a.id, "lv": a.lv})
 	else:
 		for p in table.values():
-			if p.Category != shop_category or not p.Enabled: continue
-			var count = world.resource_amount(p.ProductID) / p.Amount if shop_category == "materials" else world.item_count(p.ProductID)
-			if count > 0: rows.append({"id": p.ProductID, "count": count, "animal_id": -1})
+			if p.Category != category or not p.Enabled: continue
+			var count = world.resource_amount(p.ProductID) / p.Amount if category == "materials" else world.item_count(p.ProductID)
+			if count > 0 or (category == "materials" and world.resource_amount(p.ProductID) > 0): rows.append({"id": p.ProductID, "count": count, "animal_id": -1})
 	return rows
 
 func open_market():
@@ -1719,58 +1725,16 @@ func turn_book(direction: int):
 	refresh()
 
 func build_shop():
-	if morning_screen == "morning":
-		add_button(palette,"open_market","朝の市",Rect2(377,497,220,46),open_market)
-		buttons.open_market.icon=UI.icon("basket")
-		add_button(palette,"open_book","図鑑を開く",Rect2(725,497,220,46),open_book)
-		buttons.open_book.icon=UI.icon("book")
+	if morning_screen != "book":
+		MarketView.build(self)
 		return
 	add_button(palette, "close_market", "メニューへ", Rect2(1040, 116, 124, 44), close_morning_screen)
 	buttons.close_market.icon = UI.icon("cross")
-	if morning_screen == "book":
-		build_training()
-		add_button(palette, "book_prev", "←", Rect2(266,676,80,36), turn_book.bind(-1))
-		add_button(palette, "book_next", "→", Rect2(930,676,80,36), turn_book.bind(1))
-		buttons.book_prev.disabled = world.campaign.animals.size() < 2
-		buttons.book_next.disabled = world.campaign.animals.size() < 2
-		return
-	add_button(palette, "shop_back", "戻る", Rect2(900,116,128,44), market_back)
-	if shop_side == "home":
-		for i in range(2):
-			var id = ["buy", "sell"][i]
-			add_card("shop_" + id, ["買う\n今日の品", "売る\n牧場の恵み", "動物\n大切な仲間"][i], id, Rect2(392 + i * 345, 273, 304, 215), shop_choose.bind(id, "animals"), [Color("d8b784"), Color("dcc783"), Color("bbcca3")][i])
-		return
-	if shop_side == "animals":
-		build_training()
-		return
-	if shop_level == "categories":
-		var i = 0
-		for category in MARKET_CATEGORIES:
-			var row = MARKET_CATEGORIES[category]
-			add_card("category_" + category, row[0] + "\n" + row[2], row[1], Rect2(410 + (i % 2) * 354, 284 + (i / 2) * 180, 332, 163), choose_category.bind(category), Color("cfbd96") if i % 2 == 0 else Color("bdc69d"))
-			i += 1
-		return
-	if shop_level == "detail":
-		var p = Farm.Shop.table()[product_row.id]
-		var rows = shop_rows().filter(func(row): return row.id == product_row.id and row.animal_id == product_row.animal_id)
-		var count = rows[0].count if not rows.is_empty() else 0
-		var price = p.BuyPrice if shop_side == "buy" else p.SellPrice
-		var can_trade = count > 0 and (world.campaign.gold >= price if shop_side == "buy" else (product_row.animal_id < 0 or world.campaign.animals.size() > 1))
-		add_button(palette, "confirm_trade", ("迎える" if p.Category == "animals" else "買う") if shop_side == "buy" else "売る", Rect2(865, 492, 224, 54), trade.bind(p.ProductID, product_row.animal_id))
-		buttons.confirm_trade.icon = UI.icon("coin")
-		buttons.confirm_trade.disabled = not can_trade
-		buttons.confirm_trade.tooltip_text = "売り切れ" if count <= 0 else ("手持ちが足りない" if shop_side == "buy" and world.campaign.gold < price else ("最後の仲間は手放せません" if not can_trade else ""))
-		return
-	var rows = shop_rows()
-	for index in range(shop_page * 4, mini(rows.size(), shop_page * 4 + 4)):
-		var row = rows[index]
-		var p = Farm.Shop.table()[row.id]
-		var price = p.BuyPrice if shop_side == "buy" else p.SellPrice
-		var n = index % 4
-		var price_tag = "%d G" % price if row.count > 0 else "売り切れ"
-		add_card("trade_" + row.id + "_" + str(row.animal_id), product_title(row) + "\n" + price_tag, row.id, Rect2(410 + (728 - mini(4,rows.size()-shop_page*4)*180)*0.5 + n * 180, 306, 169, 294), inspect_product.bind(row), Color("eee3c9") if row.count > 0 else Color("b9b99e"))
-		buttons["trade_" + row.id + "_" + str(row.animal_id)].tooltip_text = product_description(row.id)
-	if rows.size() > 4: add_button(palette, "shop_page", "次の品へ →", Rect2(935, 640, 215, 38), next_shop_page.bind(ceili(rows.size() / 4.0)))
+	build_training()
+	add_button(palette, "book_prev", "←", Rect2(266,676,80,36), turn_book.bind(-1))
+	add_button(palette, "book_next", "→", Rect2(930,676,80,36), turn_book.bind(1))
+	buttons.book_prev.disabled = world.campaign.animals.size() < 2
+	buttons.book_next.disabled = world.campaign.animals.size() < 2
 
 func product_title(row: Dictionary) -> String:
 	if row.get("animal_id", -1) >= 0:
@@ -1778,10 +1742,6 @@ func product_title(row: Dictionary) -> String:
 			if a.id == row.animal_id: return Farm.animal_name(a) + " Lv%d" % a.lv
 	return Farm.Shop.table()[row.id].Name
 
-func product_description(id: String) -> String:
-	if id == "coffee": return "眠気を少し和らげる。飲み物は1日2杯まで"
-	if id == "energy_drink": return "眠気をぐっと和らげる。休息も忘れずに"
-	return {"hen": "朝に卵を産む、のんびりした仲間。", "cat": "牧場を気ままに歩く、小さな仲間。", "soil": "壁や床を築くための、よく締まる土。", "wood": "壁や床を作る、丈夫な木材。", "stone": "重くて丈夫な石。", "egg": "牧場で産まれた新鮮な卵。", "feather": "鶏が落とした、軽く柔らかな羽。", "mushroom": "夜明けの休養に。傷ついた仲間を癒す。", "whistle":"6マス先へ呼びかけ、仲間を一緒に誘導する。", "kennel_plan": "犬が落ち着いて休める、小屋の作り方。"}.get(id, "牧場で使う品物。")
 func next_shop_page(count: int):
 	shop_page = (shop_page + 1) % count
 	refresh()
@@ -1802,62 +1762,12 @@ func draw_market_card(button: Button, icon: String, title: String):
 		label_on(button, Vector2((button.size.x - width) / 2, button.size.y - 49 + i * 26), lines[i], size_value, UI.INK)
 
 func draw_shop():
-	if morning_screen == "morning":
-		hud.draw_style_box(UI.surface(Color("d6c6a1")),Rect2(330,128,656,437))
-		Art.fit(hud,Art.CART,Rect2(342,220,318,246))
-		Art.fit(hud,Art.CLOSED,Rect2(748,235,176,220))
-		label_on(hud,Vector2(716,204),"牧場の仲間",22,UI.INK)
-		label_on(hud,Vector2(379,153),"%d日目の朝" % world.campaign.day,19,UI.INK)
-		return
-	hud.draw_rect(Rect2(0, 0, 1280, 800), Color(0.13, 0.18, 0.17, 0.65))
 	if morning_screen == "book":
+		hud.draw_rect(Rect2(0, 0, 1280, 800), Color(0.13, 0.18, 0.17, 0.65))
 		draw_book()
-		return
-	hud.draw_style_box(UI.surface(Color("29392f")),Rect2(119,108,1065,608))
-	hud.draw_style_box(UI.surface(Color("a58c65")),Rect2(107,96,1065,608))
-	hud.draw_style_box(UI.surface(Color("efe4ca")),Rect2(117,106,1045,583))
-	# Quiet A-style information layout with C-style stall/merchant warmth.
-	for i in range(17):
-		var x=120+i*61
-		var color=Color("cdb584") if i%2==0 else Color("809880")
-		hud.draw_rect(Rect2(x,105,61,17),color)
-	hud.draw_line(Vector2(143,195),Vector2(1138,195),Color("c5b084"),2)
-	label_on(hud,Vector2(146,174),"朝の市",36,UI.INK)
-	draw_card_icon(hud,"gold",Vector2(730,159),0.65)
-	label_on(hud,Vector2(764,170),"%d G" % world.campaign.gold,25,UI.INK)
-	if shop_side != "home":
-		label_on(hud,Vector2(355,263),("買う" if shop_side=="buy" else "売る")+"  /  "+(MARKET_CATEGORIES[shop_category][0] if shop_level!="categories" else "今日の品"),20,UI.INK)
-	Art.fit(hud,Art.CART,Rect2(114,272,292,242))
-	var greeting=shop_notice if shop_notice!="" else "いらっしゃい"
-	label_on(hud,Vector2(160,614),greeting,16,UI.INK)
-	hud.draw_rect(Rect2(335,611,802,12),Color("a98d61"))
-	if shop_side == "home":
-		for i in range(4):draw_card_icon(hud,["hen","cat","wood","soil"][i],Vector2(470+i*166,555),1.25)
-	if shop_side in ["buy", "sell"] and shop_level == "list" and shop_rows().is_empty():
-		hud.draw_style_box(UI.surface(UI.PAPER), Rect2(485, 288, 430, 118))
-		draw_card_icon(hud, "basket", Vector2(544, 342), 1.1)
-		label_on(hud, Vector2(597, 344), "今日は空っぽだね。", 22, UI.INK)
-		label_on(hud, Vector2(597, 377), "ほかの品も見ていこう。", 16, UI.INK)
-	if shop_side in ["buy", "sell"] and shop_level == "detail": draw_product_detail()
+	else:
+		MarketView.draw(self)
 
-func draw_product_detail():
-	var p = Farm.Shop.table()[product_row.id]
-	var rows = shop_rows().filter(func(row): return row.id == product_row.id and row.animal_id == product_row.animal_id)
-	var count = rows[0].count if not rows.is_empty() else 0
-	var price = p.BuyPrice if shop_side == "buy" else p.SellPrice
-	hud.draw_style_box(UI.surface(UI.PAPER), Rect2(407, 281, 724, 320))
-	hud.draw_style_box(UI.surface(Color("c2cda4")), Rect2(421, 305, 175, 266))
-	draw_card_icon(hud, p.ProductID, Vector2(508, 398), 2.3)
-	label_on(hud, Vector2(622, 329), product_title(product_row), 30, UI.INK)
-	label_on(hud, Vector2(622, 366), product_description(p.ProductID), 17, UI.INK)
-	draw_card_icon(hud, "gold", Vector2(642, 395), 0.8)
-	label_on(hud, Vector2(677, 405), "%d G" % price, 29, UI.INK)
-	label_on(hud, Vector2(622, 452), "売り切れ" if count <= 0 else ("残り %d" % count if shop_side == "buy" else "手持ち %d" % count), 17, UI.INK)
-	var hint = ""
-	if shop_side == "buy" and count > 0 and world.campaign.gold < price: hint = "手持ちが足りないね。"
-	elif shop_side == "sell" and product_row.animal_id >= 0 and world.campaign.animals.size() <= 1: hint = "最後の仲間は手放せない。"
-	elif shop_notice != "": hint = "受け取りました" if shop_side == "buy" else "渡しました"
-	label_on(hud, Vector2(622, 527), hint, 17, UI.INK)
 func train(id: int):
 	shop_notice = "ひとつ成長した！" if world.train_animal(id) else "経験を積んでからまた来よう"
 	refresh()

@@ -22,7 +22,11 @@ func capture(label: String):
 	var file="%02d_%s.png" % [shots.size()+1,label]
 	var error=root.get_texture().get_image().save_png(output+"/"+file)
 	if error!=OK:push_error("Capture failed: "+file);quit(3);return
-	shots.append({"file":file,"label":label,"screen":game.morning_screen,"side":game.shop_side,"level":game.shop_level,"category":game.shop_category,"page":game.shop_page,"product":game.product_row.duplicate(true),"gold":game.world.campaign.gold,"tick":game.world.tick})
+	var controls={}
+	for id in game.buttons:
+		var b=game.buttons[id]
+		if b.is_visible_in_tree():controls[id]={"disabled":b.disabled,"position":[b.position.x,b.position.y],"size":[b.size.x,b.size.y]}
+	shots.append({"file":file,"label":label,"screen":game.morning_screen,"side":game.shop_side,"level":game.shop_level,"category":game.shop_category,"page":game.shop_page,"product":game.product_row.duplicate(true),"gold":game.world.campaign.gold,"tick":game.world.tick,"notice":game.shop_notice,"controls":controls,"shop_log":game.world.shop_log.duplicate(true)})
 func browse(side: String):
 	await click("shop_"+side);await capture(side+"_categories")
 	for category in game.MARKET_CATEGORIES:
@@ -55,6 +59,16 @@ func run():
 	await click("shop_sell");await click("category_materials");await click("trade_wood_-1")
 	await click("confirm_trade");await capture("sale_complete")
 	await click("close_market");await capture("final_morning")
+	# Supplemental states reached by normal trades, without modifying stock or money.
+	await click("open_market");await click("shop_buy");await click("category_animals")
+	await click("trade_cat_-1");await capture("insufficient_gold_detail")
+	await click("shop_back");await click("shop_back");await click("category_items")
+	await click("trade_whistle_-1");await click("confirm_trade");await capture("sold_out_detail")
+	await click("shop_back");await capture("sold_out_list")
+	await click("close_market");await click("open_market");await click("shop_sell");await click("category_items")
+	await click("trade_whistle_-1");await capture("sell_whistle_detail")
+	await click("confirm_trade");await capture("sell_whistle_depleted")
+	await click("close_market");await capture("supplemental_final_morning")
 	FileAccess.open(output+"/observations.json",FileAccess.WRITE).store_string(JSON.stringify({"implementation_commit":OS.get_environment("FARM_REVIEW_COMMIT"),"method":"Current main.tscn, isolated GPU viewport, game-local mouse press/release. Default new campaign; no debug money or stock changes.","shots":shots,"events":events},"  "))
 	print("SHOP_CAPTURE_OK ",shots.size()," screenshots")
 	quit()
