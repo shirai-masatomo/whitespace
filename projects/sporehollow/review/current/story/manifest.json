@@ -1,0 +1,152 @@
+{
+  "implementation_commit": "afb8e1b01206da8c99e582624478ca6d62f2ee4d",
+  "logic_regression_commit": "88df79132c1cd712ed94686be725c0210b517075",
+  "asset_delivery_commit": "5848c4f8aedde4acfa33586f82c3397d1b6d58a0",
+  "images": [
+    {
+      "file": "01_intro_0.png",
+      "description": "導入：父",
+      "sha256": "cd1d6f5653c5e959e8e3947f244eb1f5074e8280002b238521653af97f47644d"
+    },
+    {
+      "file": "02_intro_1.png",
+      "description": "導入：像と失踪",
+      "sha256": "8961d11d3ca3f827175086b94e1f5b387900450f0171d7402700b5965de522e4"
+    },
+    {
+      "file": "03_intro_2.png",
+      "description": "導入：静かな日々",
+      "sha256": "a465f1386506943c0aa1df0c70f4a59e139f6f9dadd8b2b553fcc8d0f2d9b5e8"
+    },
+    {
+      "file": "04_intro_3.png",
+      "description": "導入：父の日誌",
+      "sha256": "422e099309c3c6bb7a37576694dab34cc222985a6e80ad960bbd52885bafaea3"
+    },
+    {
+      "file": "05_morning_forest.png",
+      "description": "朝の入口",
+      "sha256": "70ef99623f9335aa009cb97fc3ad0c17ff6ebaa3b9fe136aa76b8c9a46babe9f"
+    },
+    {
+      "file": "06_ranch_idol_and_forest.png",
+      "description": "新しい牧場・黄金像・森",
+      "sha256": "59bc538dfd8191d03cadce558a49f72c507ac2af6704ade6fe6f5b6136d7b9b3"
+    },
+    {
+      "file": "07_tree_selected.png",
+      "description": "木の選択",
+      "sha256": "65d7261694932b729d66112d679fee7aaddf23e81a29d4b7457500e35d61dcd5"
+    },
+    {
+      "file": "08_clearing_reserved.png",
+      "description": "開拓予約",
+      "sha256": "09b29062393a0cec8da85c7fdcd89fd204f015b09fdc6703e3113516abae3473"
+    },
+    {
+      "file": "09_clearing_route.png",
+      "description": "現地へ向かう経路",
+      "sha256": "00e6e42055a4a4f3377a4dda8b0b588373edd3d65aac7a60ebbe526ca6fe321e"
+    },
+    {
+      "file": "10_cleared_ground.png",
+      "description": "開拓後・木材8",
+      "sha256": "3b9c5cc665cbbd87c63f3e78e5b84307b5fb6989712a78e9cccdb252a559dfd7"
+    },
+    {
+      "file": "11_first_diary.png",
+      "description": "最初の像調査",
+      "sha256": "d770ca58a4c3ca4a7f93499d8b1a3401f6f07bff03c4410de2679bd4a7087760"
+    },
+    {
+      "file": "12_invasion_1_5.png",
+      "description": "左から侵入",
+      "sha256": "1ce4d68f3a7b030a98a1b2729f8b9c0d1e3b35823188cadae3d559c70de43e2a"
+    },
+    {
+      "file": "13_invasion_23_8.png",
+      "description": "右から侵入",
+      "sha256": "95176eb717a53ed4471e1feedc55adadadd79704b8f5913da195b4708e2d4e75"
+    },
+    {
+      "file": "14_invasion_12_1.png",
+      "description": "上から侵入",
+      "sha256": "acc21361e8c34c2d5c73665f167df55418f8ff2301f7eca1b53b79feeb7dca49"
+    },
+    {
+      "file": "15_invasion_19_15.png",
+      "description": "下から侵入",
+      "sha256": "194ff33b04aa2cd8148224070f90cce2c28669c075a457067c3a92bbde021ae5"
+    },
+    {
+      "file": "16_prayer_unlocked.png",
+      "description": "祈りの解放",
+      "sha256": "ea9ad35a0bb1ee204f1b51c75b030b0798d64b60cd845d0c44bf28e13075877b"
+    },
+    {
+      "file": "17_praying.png",
+      "description": "現地で祈る",
+      "sha256": "1923dfa3d889385cb581c8e47ea7dd6f9ef0d03eca47ad2e595973b9d3adb399"
+    },
+    {
+      "file": "18_prayer_pending.png",
+      "description": "祈り成立・翌朝待ち",
+      "sha256": "0f1772051d35c01888bc442bd8d10373032778113d5bb4233ddd0fb5cbc4a6e4"
+    },
+    {
+      "file": "19_miracle_dawn.png",
+      "description": "夜明けの奇跡60G",
+      "sha256": "4f7c9fb12c5ea492a32c4cf344ad4f9428dd0d3e87588c3e11f6a137fa80c7aa"
+    },
+    {
+      "file": "20_morning_with_radio.png",
+      "description": "翌朝・放送見出し",
+      "sha256": "41a15a6807680ec29dd4c3936c71a899a533abaa92d7895118e4d7379233bf1c"
+    },
+    {
+      "file": "21_radio_history.png",
+      "description": "ラジオ再読",
+      "sha256": "aae7f7c90bf26f47a51f7ab9645eacbf9af74ce226969c50e1aaef4032f78e7b"
+    },
+    {
+      "file": "22_idol_under_attack.png",
+      "description": "像への攻撃",
+      "sha256": "456980485460c5f5bb81a50782724129254d8950063310be5edf602fbe64e435"
+    },
+    {
+      "file": "23_idol_unfastening.png",
+      "description": "固定を外す",
+      "sha256": "ab7370e720015d410bcaa297af093786f82eab109f4ecda0b7cecdbb086d1b10"
+    },
+    {
+      "file": "24_idol_towing.png",
+      "description": "牽引開始",
+      "sha256": "708beed6ae4abae61c8c0841bf09e55dda79817b2b36403ab0234fb1aefe816d"
+    },
+    {
+      "file": "25_idol_towing_moved.png",
+      "description": "像の搬出・運び手と綱",
+      "sha256": "143087a2682211bf5ee8cacb18a23f0ca825f6bd92c2df52e15371be356b56e2"
+    },
+    {
+      "file": "26_idol_extraction_interrupted.png",
+      "description": "搬出中断",
+      "sha256": "6fe982c6739a7108a1a959b23c3c1b00fc0fe12f86ded6aa4fcb2aec4fd9ccfb"
+    },
+    {
+      "file": "27_idol_recover_action.png",
+      "description": "現地で固定する操作",
+      "sha256": "d7127192353d6402e09d162da0298d7dddc73fbe8b091aae51af2ad094f5c530"
+    },
+    {
+      "file": "28_forest_keeper_carried.png",
+      "description": "森側の主人公運搬",
+      "sha256": "863242959b512c37a82dd5d31b051e2f3376d15c7437cc0967bfd51b8e5ffcb9"
+    },
+    {
+      "file": "29_forest_dog_rescue.png",
+      "description": "柴犬の救出後",
+      "sha256": "0b6c2ff03c080632ec1d308af19ddda02479cc2cc1a582193b94fd34466744a4"
+    }
+  ]
+}

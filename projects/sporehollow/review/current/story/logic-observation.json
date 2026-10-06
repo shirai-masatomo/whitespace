@@ -1,0 +1,285 @@
+{
+  "checks": [
+    {
+      "check": "Real trees and 2x2 idol exist",
+      "passed": true
+    },
+    {
+      "check": "First night unrelated to prayer",
+      "passed": true
+    },
+    {
+      "check": "Initial occupants are safe",
+      "passed": true
+    },
+    {
+      "check": "Trees block walking/sight but do not enclose rooms",
+      "passed": true
+    },
+    {
+      "check": "Construction preserves tool and explains tree obstacle",
+      "passed": true
+    },
+    {
+      "check": "Cannot dismantle or build over idol",
+      "passed": true
+    },
+    {
+      "check": "Stable TreeID prevents duplicate jobs",
+      "passed": true
+    },
+    {
+      "check": "Paused clearing plans cannot execute",
+      "passed": true
+    },
+    {
+      "check": "Unstarted clearing cancellation preserves tree",
+      "passed": true
+    },
+    {
+      "check": "Local clearing rewards exactly once",
+      "passed": true
+    },
+    {
+      "check": "Clearing opens traversal and sight",
+      "passed": true
+    },
+    {
+      "check": "Repeated stale target has no reward",
+      "passed": true
+    },
+    {
+      "check": "Cleared land persists in campaign",
+      "passed": true
+    },
+    {
+      "check": "Morning retry restores trees AND resources",
+      "passed": true
+    },
+    {
+      "check": "Prayer locked before first night",
+      "passed": true
+    },
+    {
+      "check": "Investigating day one does not unlock prayer",
+      "passed": true
+    },
+    {
+      "check": "Seeded invasion plans cover all four sides",
+      "passed": true
+    },
+    {
+      "check": "Same seed/day yields identical raid plan",
+      "passed": true
+    },
+    {
+      "check": "After first night inspection unlocks prayer and radio is owned",
+      "passed": true
+    },
+    {
+      "check": "Prayer can be planned while paused",
+      "passed": true
+    },
+    {
+      "check": "Prayer is not an immediate reward",
+      "passed": true
+    },
+    {
+      "check": "Hit interrupts prayer before commit",
+      "passed": true
+    },
+    {
+      "check": "Three-second onsite prayer creates one pending miracle",
+      "passed": true
+    },
+    {
+      "check": "Daily prayer limit revalidated",
+      "passed": true
+    },
+    {
+      "check": "Dawn settles exactly +60G",
+      "passed": true
+    },
+    {
+      "check": "Repeated dawn/radio reads cannot duplicate events or gold",
+      "passed": true
+    },
+    {
+      "check": "Delayed security event materially adds idol attackers",
+      "passed": true
+    },
+    {
+      "check": "Same seed no/one/repeated wishes change actual raids",
+      "passed": true
+    },
+    {
+      "check": "Repeated wishes unlock actual extraction, no-prayer remains independent",
+      "passed": true
+    },
+    {
+      "check": "Invader begins outside, not inside the farm",
+      "passed": true
+    },
+    {
+      "check": "Idol attacker inflicts object damage",
+      "passed": true
+    },
+    {
+      "check": "Dawn cannot erase an active idol threat",
+      "passed": true
+    },
+    {
+      "check": "Idol HP0 is a specific defeat",
+      "passed": true
+    },
+    {
+      "check": "Extractor begins separate unfastening state",
+      "passed": true
+    },
+    {
+      "check": "Eight-second preparation precedes towing",
+      "passed": true
+    },
+    {
+      "check": "Towing preserves footprint; no keeper carry sprite/state",
+      "passed": true
+    },
+    {
+      "check": "Defeated hauler leaves idol where interrupted",
+      "passed": true
+    },
+    {
+      "check": "Onsite recovery anchors idol without teleport",
+      "passed": true
+    },
+    {
+      "check": "Full footprint crossing fixed boundary loses idol",
+      "passed": true
+    },
+    {
+      "check": "Carrying inside forest is not boundary defeat",
+      "passed": true
+    },
+    {
+      "check": "Existing rescue works inside forest",
+      "passed": true
+    },
+    {
+      "check": "Keeper loss is fixed boundary crossing",
+      "passed": true
+    },
+    {
+      "check": "Morning retry restores miracle, prayer IDs, reactions and money atomically",
+      "passed": true
+    },
+    {
+      "check": "Clearing TreeID, JobID and progress survive dawn",
+      "passed": true
+    },
+    {
+      "check": "Carried clearing job pays once after completion",
+      "passed": true
+    },
+    {
+      "check": "Sealed edge still spawns outside: (1, 5)",
+      "passed": true
+    },
+    {
+      "check": "Invader damages barrier before entering: (1, 5)",
+      "passed": true
+    },
+    {
+      "check": "Sealed edge still spawns outside: (23, 8)",
+      "passed": true
+    },
+    {
+      "check": "Invader damages barrier before entering: (23, 8)",
+      "passed": true
+    },
+    {
+      "check": "Sealed edge still spawns outside: (12, 1)",
+      "passed": true
+    },
+    {
+      "check": "Invader damages barrier before entering: (12, 1)",
+      "passed": true
+    },
+    {
+      "check": "Sealed edge still spawns outside: (19, 15)",
+      "passed": true
+    },
+    {
+      "check": "Invader damages barrier before entering: (19, 15)",
+      "passed": true
+    },
+    {
+      "check": "Whole idol and hauler reject one-cell bottleneck",
+      "passed": true
+    },
+    {
+      "check": "Blocked preferred edge can choose another reachable extraction edge",
+      "passed": true
+    },
+    {
+      "check": "Unsafe legacy migration preserves land and blocks play with explicit reason",
+      "passed": true
+    },
+    {
+      "check": "Dawn cannot erase kidnapping preparation",
+      "passed": true
+    }
+  ],
+  "same_seed_comparison": [
+    {
+      "gold": 40,
+      "hidden": {
+        "anomaly": 0,
+        "disease": 0,
+        "economy": 0,
+        "karma": 0,
+        "recognition": 0,
+        "security": 0
+      },
+      "news": 1,
+      "prayers": 0,
+      "roles": [
+        "kidnapper"
+      ]
+    },
+    {
+      "gold": 100,
+      "hidden": {
+        "anomaly": 0,
+        "disease": 0,
+        "economy": 1,
+        "karma": 1,
+        "recognition": 1,
+        "security": 1
+      },
+      "news": 4,
+      "prayers": 1,
+      "roles": [
+        "kidnapper",
+        "idol_breaker"
+      ]
+    },
+    {
+      "gold": 220,
+      "hidden": {
+        "anomaly": 0,
+        "disease": 0,
+        "economy": 3,
+        "karma": 3,
+        "recognition": 3,
+        "security": 2
+      },
+      "news": 10,
+      "prayers": 3,
+      "roles": [
+        "kidnapper",
+        "idol_breaker",
+        "idol_extractor"
+      ]
+    }
+  ]
+}

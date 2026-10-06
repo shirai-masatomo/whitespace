@@ -1,0 +1,24 @@
+{
+  "executable": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\.tools\\Godot_v4.7.2-stable_win64.exe",
+  "data_root": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\artifacts\\isolated\\20261006-131147-277/user-data",
+  "start_utc": "2026-10-06T04:11:47.9461812Z",
+  "dirty": false,
+  "asset_delivery_commit": "5848c4f8aedde4acfa33586f82c3397d1b6d58a0",
+  "parent_pid": 19972,
+  "end_utc": "2026-10-06T04:12:07.6067106Z",
+  "command": "\"C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\.tools\\Godot_v4.7.2-stable_win64.exe\" --path \"C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\" --audio-driver Dummy --rendering-method gl_compatibility --max-fps 30 --resolution 1280x800 --log-file \"C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\artifacts\\isolated\\20261006-131147-277/render.log\" --script tests/visual_story.gd -- --isolated-review --output=\"C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\artifacts\\isolated\\20261006-131147-277\"",
+  "purpose": "story",
+  "result": {
+    "PID": 38672,
+    "ThreadID": 1964,
+    "ExitCode": 0,
+    "OwnedWindowCount": 2,
+    "Station": "Service-0x0-3ba69$",
+    "Desktop": "Render_37b5e678a6a74257a7f874de4882dc50",
+    "ObservedDesktop": "Render_37b5e678a6a74257a7f874de4882dc50",
+    "NonInteractive": true,
+    "DesktopMatched": true,
+    "TimedOut": false
+  },
+  "implementation_commit": "afb8e1b01206da8c99e582624478ca6d62f2ee4d"
+}

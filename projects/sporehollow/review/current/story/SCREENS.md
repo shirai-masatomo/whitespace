@@ -1,0 +1,35 @@
+# 画面一覧
+
+実装 `afb8e1b01206da8c99e582624478ca6d62f2ee4d` / 素材 `5848c4f8`。全画像1280×800、非対話GPUの実Viewport。
+
+01〜11は通常開始からの入力、12以降は初期日/位置を明示した制御例。自動tickで行動を進め、描画補間の追従を待って撮影。人間による通し試遊や動画とは別。
+
+- [導入：父](01_intro_0.png)
+- [導入：像と失踪](02_intro_1.png)
+- [導入：静かな日々](03_intro_2.png)
+- [導入：父の日誌](04_intro_3.png)
+- [朝の入口](05_morning_forest.png)
+- [新しい牧場・黄金像・森](06_ranch_idol_and_forest.png)
+- [木の選択](07_tree_selected.png)
+- [開拓予約](08_clearing_reserved.png)
+- [現地へ向かう経路](09_clearing_route.png)
+- [開拓後・木材8](10_cleared_ground.png)
+- [最初の像調査](11_first_diary.png)
+- [左から侵入](12_invasion_1_5.png)
+- [右から侵入](13_invasion_23_8.png)
+- [上から侵入](14_invasion_12_1.png)
+- [下から侵入](15_invasion_19_15.png)
+- [祈りの解放](16_prayer_unlocked.png)
+- [現地で祈る](17_praying.png)
+- [祈り成立・翌朝待ち](18_prayer_pending.png)
+- [夜明けの奇跡60G](19_miracle_dawn.png)
+- [翌朝・放送見出し](20_morning_with_radio.png)
+- [ラジオ再読](21_radio_history.png)
+- [像への攻撃](22_idol_under_attack.png)
+- [固定を外す](23_idol_unfastening.png)
+- [牽引開始](24_idol_towing.png)
+- [像の搬出・運び手と綱](25_idol_towing_moved.png)
+- [搬出中断](26_idol_extraction_interrupted.png)
+- [現地で固定する操作](27_idol_recover_action.png)
+- [森側の主人公運搬](28_forest_keeper_carried.png)
+- [柴犬の救出後](29_forest_dog_rescue.png)
