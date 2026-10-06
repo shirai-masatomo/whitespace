@@ -1,0 +1,29 @@
+{
+  "status": "pass",
+  "native_png_count": 42,
+  "action_count": 7,
+  "directions": [
+    "right",
+    "left"
+  ],
+  "all_frames_size": [
+    48,
+    56
+  ],
+  "all_foot_anchors": [
+    24,
+    50
+  ],
+  "all_ground_contact_y_exclusive": 50,
+  "binary_alpha": true,
+  "exact_adopted_idle_sha256": "776230ad89680e2cfaef4344ae5a437edc5ea58686418f0d80e33787050e7f88",
+  "walk_head_pixel_exact_frame_count": 4,
+  "walk_distinct_lower_body_frames": 4,
+  "mirror_match_count": 21,
+  "no_edge_clipping": true,
+  "preview_timeline_frames": 37,
+  "encoded_gif_frames": 36,
+  "preview_duration_ms": 5590,
+  "game_launched": false,
+  "in_game_verified": false
+}

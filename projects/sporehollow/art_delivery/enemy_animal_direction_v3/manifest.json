@@ -3315,5 +3315,16 @@
     ],
     "all_previous_acceptances_preserved": true,
     "scope": "design and special-motion direction; runtime animations delivered separately"
-  }
+  },
+  "formal_deliveries": [
+    {
+      "path": "../equipment_icons_v1/",
+      "scope": "collar and healing_berry UI32",
+      "commit": "ef12e658aa7279900adf3d9deb3e0282b78c4aaf"
+    },
+    {
+      "path": "../salaryman_motion_v1/",
+      "scope": "salaryman left/right idle, walk, hurt, phone_take/call/put, retreat"
+    }
+  ]
 }
