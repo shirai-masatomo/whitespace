@@ -36,5 +36,18 @@
     "shop_observations": "materials/shop/observations.json",
     "actor_effect_observations": "materials/enemies-effects/observations.json",
     "published_build": "materials/build.json"
+  },
+  "latest_market_ui_review": {
+    "implementation_commit": "7c5766e",
+    "asset_delivery_commit": "5848c4f8aedde4acfa33586f82c3397d1b6d58a0",
+    "before_commit": "ecdd3f2",
+    "comparison": "shop-ui/comparison.json",
+    "screens": "shop-ui/SCREENS.md",
+    "after_screens": 35,
+    "paired_screens": 29,
+    "regression_checks": 698,
+    "ai_trials": 192,
+    "trade_logic_changed": false,
+    "build": "shop-ui/build.json"
   }
 }

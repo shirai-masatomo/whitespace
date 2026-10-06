@@ -1,0 +1,24 @@
+{
+  "before_commit": "ecdd3f279d4a2316cde275a4fefffa4a33c9ad03",
+  "after_commit": "7c5766e78060b3ccd0e157ebef2533e31c456c5d",
+  "asset_delivery_commit": "5848c4f8aedde4acfa33586f82c3397d1b6d58a0",
+  "paired_screens": 29,
+  "after_screens": 35,
+  "equal_observation_fields": [
+    "label",
+    "screen",
+    "side",
+    "level",
+    "category",
+    "page",
+    "product",
+    "gold",
+    "tick"
+  ],
+  "all_morning_ticks_zero": true,
+  "initial_gold": 40,
+  "wood_purchase_gold": 28,
+  "wood_sale_gold": 32,
+  "random_seed_fixed": false,
+  "note": "Same default starting economy, guaranteed stock and UI transaction sequence. Terrain natural placement is not fixed. No debug money/stock changes in captures."
+}

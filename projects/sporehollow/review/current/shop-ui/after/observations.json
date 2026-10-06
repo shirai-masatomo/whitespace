@@ -1,0 +1,2798 @@
+{
+  "events": [
+    {
+      "button": "open_market",
+      "gold": 40,
+      "position": [
+        487.0,
+        513.0
+      ]
+    },
+    {
+      "button": "shop_buy",
+      "gold": 40,
+      "position": [
+        560.0,
+        428.0
+      ]
+    },
+    {
+      "button": "category_animals",
+      "gold": 40,
+      "position": [
+        560.0,
+        354.0
+      ]
+    },
+    {
+      "button": "trade_hen_-1",
+      "gold": 40,
+      "position": [
+        464.0,
+        446.0
+      ]
+    },
+    {
+      "button": "shop_back",
+      "gold": 40,
+      "position": [
+        932.0,
+        154.0
+      ]
+    },
+    {
+      "button": "trade_cat_-1",
+      "gold": 40,
+      "position": [
+        656.0,
+        446.0
+      ]
+    },
+    {
+      "button": "shop_back",
+      "gold": 40,
+      "position": [
+        932.0,
+        154.0
+      ]
+    },
+    {
+      "button": "shop_back",
+      "gold": 40,
+      "position": [
+        932.0,
+        154.0
+      ]
+    },
+    {
+      "button": "category_materials",
+      "gold": 40,
+      "position": [
+        944.0,
+        354.0
+      ]
+    },
+    {
+      "button": "trade_soil_-1",
+      "gold": 40,
+      "position": [
+        464.0,
+        446.0
+      ]
+    },
+    {
+      "button": "shop_back",
+      "gold": 40,
+      "position": [
+        932.0,
+        154.0
+      ]
+    },
+    {
+      "button": "trade_wood_-1",
+      "gold": 40,
+      "position": [
+        656.0,
+        446.0
+      ]
+    },
+    {
+      "button": "shop_back",
+      "gold": 40,
+      "position": [
+        932.0,
+        154.0
+      ]
+    },
+    {
+      "button": "trade_stone_-1",
+      "gold": 40,
+      "position": [
+        848.0,
+        446.0
+      ]
+    },
+    {
+      "button": "shop_back",
+      "gold": 40,
+      "position": [
+        932.0,
+        154.0
+      ]
+    },
+    {
+      "button": "shop_back",
+      "gold": 40,
+      "position": [
+        932.0,
+        154.0
+      ]
+    },
+    {
+      "button": "category_facilities",
+      "gold": 40,
+      "position": [
+        560.0,
+        528.0
+      ]
+    },
+    {
+      "button": "shop_back",
+      "gold": 40,
+      "position": [
+        932.0,
+        154.0
+      ]
+    },
+    {
+      "button": "category_items",
+      "gold": 40,
+      "position": [
+        944.0,
+        528.0
+      ]
+    },
+    {
+      "button": "trade_whistle_-1",
+      "gold": 40,
+      "position": [
+        464.0,
+        446.0
+      ]
+    },
+    {
+      "button": "shop_back",
+      "gold": 40,
+      "position": [
+        932.0,
+        154.0
+      ]
+    },
+    {
+      "button": "trade_coffee_-1",
+      "gold": 40,
+      "position": [
+        656.0,
+        446.0
+      ]
+    },
+    {
+      "button": "shop_back",
+      "gold": 40,
+      "position": [
+        932.0,
+        154.0
+      ]
+    },
+    {
+      "button": "trade_energy_drink_-1",
+      "gold": 40,
+      "position": [
+        848.0,
+        446.0
+      ]
+    },
+    {
+      "button": "shop_back",
+      "gold": 40,
+      "position": [
+        932.0,
+        154.0
+      ]
+    },
+    {
+      "button": "shop_back",
+      "gold": 40,
+      "position": [
+        932.0,
+        154.0
+      ]
+    },
+    {
+      "button": "shop_back",
+      "gold": 40,
+      "position": [
+        932.0,
+        154.0
+      ]
+    },
+    {
+      "button": "shop_buy",
+      "gold": 40,
+      "position": [
+        560.0,
+        428.0
+      ]
+    },
+    {
+      "button": "category_materials",
+      "gold": 40,
+      "position": [
+        944.0,
+        354.0
+      ]
+    },
+    {
+      "button": "trade_wood_-1",
+      "gold": 40,
+      "position": [
+        656.0,
+        446.0
+      ]
+    },
+    {
+      "button": "confirm_trade",
+      "gold": 40,
+      "position": [
+        1004.0,
+        591.0
+      ]
+    },
+    {
+      "button": "shop_back",
+      "gold": 28,
+      "position": [
+        932.0,
+        154.0
+      ]
+    },
+    {
+      "button": "shop_back",
+      "gold": 28,
+      "position": [
+        932.0,
+        154.0
+      ]
+    },
+    {
+      "button": "category_animals",
+      "gold": 28,
+      "position": [
+        560.0,
+        354.0
+      ]
+    },
+    {
+      "button": "close_market",
+      "gold": 28,
+      "position": [
+        1078.5,
+        154.0
+      ]
+    },
+    {
+      "button": "open_market",
+      "gold": 28,
+      "position": [
+        487.0,
+        513.0
+      ]
+    },
+    {
+      "button": "shop_sell",
+      "gold": 28,
+      "position": [
+        944.0,
+        428.0
+      ]
+    },
+    {
+      "button": "category_animals",
+      "gold": 28,
+      "position": [
+        560.0,
+        354.0
+      ]
+    },
+    {
+      "button": "shop_back",
+      "gold": 28,
+      "position": [
+        932.0,
+        154.0
+      ]
+    },
+    {
+      "button": "category_materials",
+      "gold": 28,
+      "position": [
+        944.0,
+        354.0
+      ]
+    },
+    {
+      "button": "trade_soil_-1",
+      "gold": 28,
+      "position": [
+        464.0,
+        446.0
+      ]
+    },
+    {
+      "button": "shop_back",
+      "gold": 28,
+      "position": [
+        932.0,
+        154.0
+      ]
+    },
+    {
+      "button": "trade_wood_-1",
+      "gold": 28,
+      "position": [
+        656.0,
+        446.0
+      ]
+    },
+    {
+      "button": "shop_back",
+      "gold": 28,
+      "position": [
+        932.0,
+        154.0
+      ]
+    },
+    {
+      "button": "shop_back",
+      "gold": 28,
+      "position": [
+        932.0,
+        154.0
+      ]
+    },
+    {
+      "button": "category_facilities",
+      "gold": 28,
+      "position": [
+        560.0,
+        528.0
+      ]
+    },
+    {
+      "button": "shop_back",
+      "gold": 28,
+      "position": [
+        932.0,
+        154.0
+      ]
+    },
+    {
+      "button": "category_items",
+      "gold": 28,
+      "position": [
+        944.0,
+        528.0
+      ]
+    },
+    {
+      "button": "shop_back",
+      "gold": 28,
+      "position": [
+        932.0,
+        154.0
+      ]
+    },
+    {
+      "button": "shop_back",
+      "gold": 28,
+      "position": [
+        932.0,
+        154.0
+      ]
+    },
+    {
+      "button": "shop_sell",
+      "gold": 28,
+      "position": [
+        944.0,
+        428.0
+      ]
+    },
+    {
+      "button": "category_materials",
+      "gold": 28,
+      "position": [
+        944.0,
+        354.0
+      ]
+    },
+    {
+      "button": "trade_wood_-1",
+      "gold": 28,
+      "position": [
+        656.0,
+        446.0
+      ]
+    },
+    {
+      "button": "confirm_trade",
+      "gold": 28,
+      "position": [
+        1004.0,
+        591.0
+      ]
+    },
+    {
+      "button": "close_market",
+      "gold": 32,
+      "position": [
+        1078.5,
+        154.0
+      ]
+    },
+    {
+      "button": "open_market",
+      "gold": 32,
+      "position": [
+        487.0,
+        513.0
+      ]
+    },
+    {
+      "button": "shop_buy",
+      "gold": 32,
+      "position": [
+        560.0,
+        428.0
+      ]
+    },
+    {
+      "button": "category_animals",
+      "gold": 32,
+      "position": [
+        560.0,
+        354.0
+      ]
+    },
+    {
+      "button": "trade_cat_-1",
+      "gold": 32,
+      "position": [
+        656.0,
+        446.0
+      ]
+    },
+    {
+      "button": "shop_back",
+      "gold": 32,
+      "position": [
+        932.0,
+        154.0
+      ]
+    },
+    {
+      "button": "shop_back",
+      "gold": 32,
+      "position": [
+        932.0,
+        154.0
+      ]
+    },
+    {
+      "button": "category_items",
+      "gold": 32,
+      "position": [
+        944.0,
+        528.0
+      ]
+    },
+    {
+      "button": "trade_whistle_-1",
+      "gold": 32,
+      "position": [
+        464.0,
+        446.0
+      ]
+    },
+    {
+      "button": "confirm_trade",
+      "gold": 32,
+      "position": [
+        1004.0,
+        591.0
+      ]
+    },
+    {
+      "button": "shop_back",
+      "gold": 14,
+      "position": [
+        932.0,
+        154.0
+      ]
+    },
+    {
+      "button": "close_market",
+      "gold": 14,
+      "position": [
+        1078.5,
+        154.0
+      ]
+    },
+    {
+      "button": "open_market",
+      "gold": 14,
+      "position": [
+        487.0,
+        513.0
+      ]
+    },
+    {
+      "button": "shop_sell",
+      "gold": 14,
+      "position": [
+        944.0,
+        428.0
+      ]
+    },
+    {
+      "button": "category_items",
+      "gold": 14,
+      "position": [
+        944.0,
+        528.0
+      ]
+    },
+    {
+      "button": "trade_whistle_-1",
+      "gold": 14,
+      "position": [
+        464.0,
+        446.0
+      ]
+    },
+    {
+      "button": "confirm_trade",
+      "gold": 14,
+      "position": [
+        1004.0,
+        591.0
+      ]
+    },
+    {
+      "button": "close_market",
+      "gold": 20,
+      "position": [
+        1078.5,
+        154.0
+      ]
+    }
+  ],
+  "implementation_commit": "7c5766e78060b3ccd0e157ebef2533e31c456c5d",
+  "method": "Current main.tscn, isolated GPU viewport, game-local mouse press/release. Default new campaign; no debug money or stock changes.",
+  "shots": [
+    {
+      "category": "animals",
+      "controls": {
+        "advance": {
+          "disabled": false,
+          "position": [
+            548.0,
+            570.0
+          ],
+          "size": [
+            190.0,
+            44.0
+          ]
+        },
+        "open_book": {
+          "disabled": false,
+          "position": [
+            725.0,
+            490.0
+          ],
+          "size": [
+            220.0,
+            46.0
+          ]
+        },
+        "open_market": {
+          "disabled": false,
+          "position": [
+            377.0,
+            490.0
+          ],
+          "size": [
+            220.0,
+            46.0
+          ]
+        }
+      },
+      "file": "01_morning_menu.png",
+      "gold": 40,
+      "label": "morning_menu",
+      "level": "categories",
+      "notice": "",
+      "page": 0,
+      "product": {},
+      "screen": "morning",
+      "shop_log": [],
+      "side": "home",
+      "tick": 0
+    },
+    {
+      "category": "animals",
+      "controls": {
+        "close_market": {
+          "disabled": false,
+          "position": [
+            1000.0,
+            132.0
+          ],
+          "size": [
+            157.0,
+            44.0
+          ]
+        },
+        "shop_back": {
+          "disabled": false,
+          "position": [
+            876.0,
+            132.0
+          ],
+          "size": [
+            112.0,
+            44.0
+          ]
+        },
+        "shop_buy": {
+          "disabled": false,
+          "position": [
+            376.0,
+            278.0
+          ],
+          "size": [
+            368.0,
+            300.0
+          ]
+        },
+        "shop_sell": {
+          "disabled": false,
+          "position": [
+            760.0,
+            278.0
+          ],
+          "size": [
+            368.0,
+            300.0
+          ]
+        }
+      },
+      "file": "02_market_entry.png",
+      "gold": 40,
+      "label": "market_entry",
+      "level": "categories",
+      "notice": "",
+      "page": 0,
+      "product": {},
+      "screen": "market",
+      "shop_log": [],
+      "side": "home",
+      "tick": 0
+    },
+    {
+      "category": "animals",
+      "controls": {
+        "category_animals": {
+          "disabled": false,
+          "position": [
+            376.0,
+            276.0
+          ],
+          "size": [
+            368.0,
+            156.0
+          ]
+        },
+        "category_facilities": {
+          "disabled": false,
+          "position": [
+            376.0,
+            450.0
+          ],
+          "size": [
+            368.0,
+            156.0
+          ]
+        },
+        "category_items": {
+          "disabled": false,
+          "position": [
+            760.0,
+            450.0
+          ],
+          "size": [
+            368.0,
+            156.0
+          ]
+        },
+        "category_materials": {
+          "disabled": false,
+          "position": [
+            760.0,
+            276.0
+          ],
+          "size": [
+            368.0,
+            156.0
+          ]
+        },
+        "close_market": {
+          "disabled": false,
+          "position": [
+            1000.0,
+            132.0
+          ],
+          "size": [
+            157.0,
+            44.0
+          ]
+        },
+        "shop_back": {
+          "disabled": false,
+          "position": [
+            876.0,
+            132.0
+          ],
+          "size": [
+            112.0,
+            44.0
+          ]
+        }
+      },
+      "file": "03_buy_categories.png",
+      "gold": 40,
+      "label": "buy_categories",
+      "level": "categories",
+      "notice": "",
+      "page": 0,
+      "product": {},
+      "screen": "market",
+      "shop_log": [],
+      "side": "buy",
+      "tick": 0
+    },
+    {
+      "category": "animals",
+      "controls": {
+        "close_market": {
+          "disabled": false,
+          "position": [
+            1000.0,
+            132.0
+          ],
+          "size": [
+            157.0,
+            44.0
+          ]
+        },
+        "shop_back": {
+          "disabled": false,
+          "position": [
+            876.0,
+            132.0
+          ],
+          "size": [
+            112.0,
+            44.0
+          ]
+        },
+        "trade_cat_-1": {
+          "disabled": false,
+          "position": [
+            568.0,
+            278.0
+          ],
+          "size": [
+            176.0,
+            336.0
+          ]
+        },
+        "trade_hen_-1": {
+          "disabled": false,
+          "position": [
+            376.0,
+            278.0
+          ],
+          "size": [
+            176.0,
+            336.0
+          ]
+        }
+      },
+      "file": "04_buy_animals_list_1.png",
+      "gold": 40,
+      "label": "buy_animals_list_1",
+      "level": "list",
+      "notice": "",
+      "page": 0,
+      "product": {},
+      "screen": "market",
+      "shop_log": [],
+      "side": "buy",
+      "tick": 0
+    },
+    {
+      "category": "animals",
+      "controls": {
+        "close_market": {
+          "disabled": false,
+          "position": [
+            1000.0,
+            132.0
+          ],
+          "size": [
+            157.0,
+            44.0
+          ]
+        },
+        "confirm_trade": {
+          "disabled": false,
+          "position": [
+            880.0,
+            566.0
+          ],
+          "size": [
+            248.0,
+            50.0
+          ]
+        },
+        "shop_back": {
+          "disabled": false,
+          "position": [
+            876.0,
+            132.0
+          ],
+          "size": [
+            112.0,
+            44.0
+          ]
+        }
+      },
+      "file": "05_buy_animals_hen_-1.png",
+      "gold": 40,
+      "label": "buy_animals_hen_-1",
+      "level": "detail",
+      "notice": "",
+      "page": 0,
+      "product": {
+        "animal_id": -1,
+        "count": 1,
+        "id": "hen"
+      },
+      "screen": "market",
+      "shop_log": [],
+      "side": "buy",
+      "tick": 0
+    },
+    {
+      "category": "animals",
+      "controls": {
+        "close_market": {
+          "disabled": false,
+          "position": [
+            1000.0,
+            132.0
+          ],
+          "size": [
+            157.0,
+            44.0
+          ]
+        },
+        "confirm_trade": {
+          "disabled": false,
+          "position": [
+            880.0,
+            566.0
+          ],
+          "size": [
+            248.0,
+            50.0
+          ]
+        },
+        "shop_back": {
+          "disabled": false,
+          "position": [
+            876.0,
+            132.0
+          ],
+          "size": [
+            112.0,
+            44.0
+          ]
+        }
+      },
+      "file": "06_buy_animals_cat_-1.png",
+      "gold": 40,
+      "label": "buy_animals_cat_-1",
+      "level": "detail",
+      "notice": "",
+      "page": 0,
+      "product": {
+        "animal_id": -1,
+        "count": 1,
+        "id": "cat"
+      },
+      "screen": "market",
+      "shop_log": [],
+      "side": "buy",
+      "tick": 0
+    },
+    {
+      "category": "materials",
+      "controls": {
+        "close_market": {
+          "disabled": false,
+          "position": [
+            1000.0,
+            132.0
+          ],
+          "size": [
+            157.0,
+            44.0
+          ]
+        },
+        "shop_back": {
+          "disabled": false,
+          "position": [
+            876.0,
+            132.0
+          ],
+          "size": [
+            112.0,
+            44.0
+          ]
+        },
+        "trade_soil_-1": {
+          "disabled": false,
+          "position": [
+            376.0,
+            278.0
+          ],
+          "size": [
+            176.0,
+            336.0
+          ]
+        },
+        "trade_stone_-1": {
+          "disabled": false,
+          "position": [
+            760.0,
+            278.0
+          ],
+          "size": [
+            176.0,
+            336.0
+          ]
+        },
+        "trade_wood_-1": {
+          "disabled": false,
+          "position": [
+            568.0,
+            278.0
+          ],
+          "size": [
+            176.0,
+            336.0
+          ]
+        }
+      },
+      "file": "07_buy_materials_list_1.png",
+      "gold": 40,
+      "label": "buy_materials_list_1",
+      "level": "list",
+      "notice": "",
+      "page": 0,
+      "product": {},
+      "screen": "market",
+      "shop_log": [],
+      "side": "buy",
+      "tick": 0
+    },
+    {
+      "category": "materials",
+      "controls": {
+        "close_market": {
+          "disabled": false,
+          "position": [
+            1000.0,
+            132.0
+          ],
+          "size": [
+            157.0,
+            44.0
+          ]
+        },
+        "confirm_trade": {
+          "disabled": false,
+          "position": [
+            880.0,
+            566.0
+          ],
+          "size": [
+            248.0,
+            50.0
+          ]
+        },
+        "shop_back": {
+          "disabled": false,
+          "position": [
+            876.0,
+            132.0
+          ],
+          "size": [
+            112.0,
+            44.0
+          ]
+        }
+      },
+      "file": "08_buy_materials_soil_-1.png",
+      "gold": 40,
+      "label": "buy_materials_soil_-1",
+      "level": "detail",
+      "notice": "",
+      "page": 0,
+      "product": {
+        "animal_id": -1,
+        "count": 4,
+        "id": "soil"
+      },
+      "screen": "market",
+      "shop_log": [],
+      "side": "buy",
+      "tick": 0
+    },
+    {
+      "category": "materials",
+      "controls": {
+        "close_market": {
+          "disabled": false,
+          "position": [
+            1000.0,
+            132.0
+          ],
+          "size": [
+            157.0,
+            44.0
+          ]
+        },
+        "confirm_trade": {
+          "disabled": false,
+          "position": [
+            880.0,
+            566.0
+          ],
+          "size": [
+            248.0,
+            50.0
+          ]
+        },
+        "shop_back": {
+          "disabled": false,
+          "position": [
+            876.0,
+            132.0
+          ],
+          "size": [
+            112.0,
+            44.0
+          ]
+        }
+      },
+      "file": "09_buy_materials_wood_-1.png",
+      "gold": 40,
+      "label": "buy_materials_wood_-1",
+      "level": "detail",
+      "notice": "",
+      "page": 0,
+      "product": {
+        "animal_id": -1,
+        "count": 3,
+        "id": "wood"
+      },
+      "screen": "market",
+      "shop_log": [],
+      "side": "buy",
+      "tick": 0
+    },
+    {
+      "category": "materials",
+      "controls": {
+        "close_market": {
+          "disabled": false,
+          "position": [
+            1000.0,
+            132.0
+          ],
+          "size": [
+            157.0,
+            44.0
+          ]
+        },
+        "confirm_trade": {
+          "disabled": false,
+          "position": [
+            880.0,
+            566.0
+          ],
+          "size": [
+            248.0,
+            50.0
+          ]
+        },
+        "shop_back": {
+          "disabled": false,
+          "position": [
+            876.0,
+            132.0
+          ],
+          "size": [
+            112.0,
+            44.0
+          ]
+        }
+      },
+      "file": "10_buy_materials_stone_-1.png",
+      "gold": 40,
+      "label": "buy_materials_stone_-1",
+      "level": "detail",
+      "notice": "",
+      "page": 0,
+      "product": {
+        "animal_id": -1,
+        "count": 3,
+        "id": "stone"
+      },
+      "screen": "market",
+      "shop_log": [],
+      "side": "buy",
+      "tick": 0
+    },
+    {
+      "category": "facilities",
+      "controls": {
+        "close_market": {
+          "disabled": false,
+          "position": [
+            1000.0,
+            132.0
+          ],
+          "size": [
+            157.0,
+            44.0
+          ]
+        },
+        "shop_back": {
+          "disabled": false,
+          "position": [
+            876.0,
+            132.0
+          ],
+          "size": [
+            112.0,
+            44.0
+          ]
+        }
+      },
+      "file": "11_buy_facilities_list_1.png",
+      "gold": 40,
+      "label": "buy_facilities_list_1",
+      "level": "list",
+      "notice": "",
+      "page": 0,
+      "product": {},
+      "screen": "market",
+      "shop_log": [],
+      "side": "buy",
+      "tick": 0
+    },
+    {
+      "category": "items",
+      "controls": {
+        "close_market": {
+          "disabled": false,
+          "position": [
+            1000.0,
+            132.0
+          ],
+          "size": [
+            157.0,
+            44.0
+          ]
+        },
+        "shop_back": {
+          "disabled": false,
+          "position": [
+            876.0,
+            132.0
+          ],
+          "size": [
+            112.0,
+            44.0
+          ]
+        },
+        "trade_coffee_-1": {
+          "disabled": false,
+          "position": [
+            568.0,
+            278.0
+          ],
+          "size": [
+            176.0,
+            336.0
+          ]
+        },
+        "trade_energy_drink_-1": {
+          "disabled": false,
+          "position": [
+            760.0,
+            278.0
+          ],
+          "size": [
+            176.0,
+            336.0
+          ]
+        },
+        "trade_whistle_-1": {
+          "disabled": false,
+          "position": [
+            376.0,
+            278.0
+          ],
+          "size": [
+            176.0,
+            336.0
+          ]
+        }
+      },
+      "file": "12_buy_items_list_1.png",
+      "gold": 40,
+      "label": "buy_items_list_1",
+      "level": "list",
+      "notice": "",
+      "page": 0,
+      "product": {},
+      "screen": "market",
+      "shop_log": [],
+      "side": "buy",
+      "tick": 0
+    },
+    {
+      "category": "items",
+      "controls": {
+        "close_market": {
+          "disabled": false,
+          "position": [
+            1000.0,
+            132.0
+          ],
+          "size": [
+            157.0,
+            44.0
+          ]
+        },
+        "confirm_trade": {
+          "disabled": false,
+          "position": [
+            880.0,
+            566.0
+          ],
+          "size": [
+            248.0,
+            50.0
+          ]
+        },
+        "shop_back": {
+          "disabled": false,
+          "position": [
+            876.0,
+            132.0
+          ],
+          "size": [
+            112.0,
+            44.0
+          ]
+        }
+      },
+      "file": "13_buy_items_whistle_-1.png",
+      "gold": 40,
+      "label": "buy_items_whistle_-1",
+      "level": "detail",
+      "notice": "",
+      "page": 0,
+      "product": {
+        "animal_id": -1,
+        "count": 1,
+        "id": "whistle"
+      },
+      "screen": "market",
+      "shop_log": [],
+      "side": "buy",
+      "tick": 0
+    },
+    {
+      "category": "items",
+      "controls": {
+        "close_market": {
+          "disabled": false,
+          "position": [
+            1000.0,
+            132.0
+          ],
+          "size": [
+            157.0,
+            44.0
+          ]
+        },
+        "confirm_trade": {
+          "disabled": false,
+          "position": [
+            880.0,
+            566.0
+          ],
+          "size": [
+            248.0,
+            50.0
+          ]
+        },
+        "shop_back": {
+          "disabled": false,
+          "position": [
+            876.0,
+            132.0
+          ],
+          "size": [
+            112.0,
+            44.0
+          ]
+        }
+      },
+      "file": "14_buy_items_coffee_-1.png",
+      "gold": 40,
+      "label": "buy_items_coffee_-1",
+      "level": "detail",
+      "notice": "",
+      "page": 0,
+      "product": {
+        "animal_id": -1,
+        "count": 1,
+        "id": "coffee"
+      },
+      "screen": "market",
+      "shop_log": [],
+      "side": "buy",
+      "tick": 0
+    },
+    {
+      "category": "items",
+      "controls": {
+        "close_market": {
+          "disabled": false,
+          "position": [
+            1000.0,
+            132.0
+          ],
+          "size": [
+            157.0,
+            44.0
+          ]
+        },
+        "confirm_trade": {
+          "disabled": false,
+          "position": [
+            880.0,
+            566.0
+          ],
+          "size": [
+            248.0,
+            50.0
+          ]
+        },
+        "shop_back": {
+          "disabled": false,
+          "position": [
+            876.0,
+            132.0
+          ],
+          "size": [
+            112.0,
+            44.0
+          ]
+        }
+      },
+      "file": "15_buy_items_energy_drink_-1.png",
+      "gold": 40,
+      "label": "buy_items_energy_drink_-1",
+      "level": "detail",
+      "notice": "",
+      "page": 0,
+      "product": {
+        "animal_id": -1,
+        "count": 1,
+        "id": "energy_drink"
+      },
+      "screen": "market",
+      "shop_log": [],
+      "side": "buy",
+      "tick": 0
+    },
+    {
+      "category": "materials",
+      "controls": {
+        "close_market": {
+          "disabled": false,
+          "position": [
+            1000.0,
+            132.0
+          ],
+          "size": [
+            157.0,
+            44.0
+          ]
+        },
+        "confirm_trade": {
+          "disabled": false,
+          "position": [
+            880.0,
+            566.0
+          ],
+          "size": [
+            248.0,
+            50.0
+          ]
+        },
+        "shop_back": {
+          "disabled": false,
+          "position": [
+            876.0,
+            132.0
+          ],
+          "size": [
+            112.0,
+            44.0
+          ]
+        }
+      },
+      "file": "16_purchase_complete.png",
+      "gold": 28,
+      "label": "purchase_complete",
+      "level": "detail",
+      "notice": "木材 ×20を購入しました　−12G（40G → 28G）",
+      "page": 0,
+      "product": {
+        "animal_id": -1,
+        "count": 3,
+        "id": "wood"
+      },
+      "screen": "market",
+      "shop_log": [
+        {
+          "amount": 20,
+          "gold": -12,
+          "product": "wood",
+          "side": "buy"
+        }
+      ],
+      "side": "buy",
+      "tick": 0
+    },
+    {
+      "category": "materials",
+      "controls": {
+        "close_market": {
+          "disabled": false,
+          "position": [
+            1000.0,
+            132.0
+          ],
+          "size": [
+            157.0,
+            44.0
+          ]
+        },
+        "shop_back": {
+          "disabled": false,
+          "position": [
+            876.0,
+            132.0
+          ],
+          "size": [
+            112.0,
+            44.0
+          ]
+        },
+        "trade_soil_-1": {
+          "disabled": false,
+          "position": [
+            376.0,
+            278.0
+          ],
+          "size": [
+            176.0,
+            336.0
+          ]
+        },
+        "trade_stone_-1": {
+          "disabled": false,
+          "position": [
+            760.0,
+            278.0
+          ],
+          "size": [
+            176.0,
+            336.0
+          ]
+        },
+        "trade_wood_-1": {
+          "disabled": false,
+          "position": [
+            568.0,
+            278.0
+          ],
+          "size": [
+            176.0,
+            336.0
+          ]
+        }
+      },
+      "file": "17_purchase_back_to_list.png",
+      "gold": 28,
+      "label": "purchase_back_to_list",
+      "level": "list",
+      "notice": "",
+      "page": 0,
+      "product": {},
+      "screen": "market",
+      "shop_log": [
+        {
+          "amount": 20,
+          "gold": -12,
+          "product": "wood",
+          "side": "buy"
+        }
+      ],
+      "side": "buy",
+      "tick": 0
+    },
+    {
+      "category": "materials",
+      "controls": {
+        "category_animals": {
+          "disabled": false,
+          "position": [
+            376.0,
+            276.0
+          ],
+          "size": [
+            368.0,
+            156.0
+          ]
+        },
+        "category_facilities": {
+          "disabled": false,
+          "position": [
+            376.0,
+            450.0
+          ],
+          "size": [
+            368.0,
+            156.0
+          ]
+        },
+        "category_items": {
+          "disabled": false,
+          "position": [
+            760.0,
+            450.0
+          ],
+          "size": [
+            368.0,
+            156.0
+          ]
+        },
+        "category_materials": {
+          "disabled": false,
+          "position": [
+            760.0,
+            276.0
+          ],
+          "size": [
+            368.0,
+            156.0
+          ]
+        },
+        "close_market": {
+          "disabled": false,
+          "position": [
+            1000.0,
+            132.0
+          ],
+          "size": [
+            157.0,
+            44.0
+          ]
+        },
+        "shop_back": {
+          "disabled": false,
+          "position": [
+            876.0,
+            132.0
+          ],
+          "size": [
+            112.0,
+            44.0
+          ]
+        }
+      },
+      "file": "18_purchase_back_to_categories.png",
+      "gold": 28,
+      "label": "purchase_back_to_categories",
+      "level": "categories",
+      "notice": "",
+      "page": 0,
+      "product": {},
+      "screen": "market",
+      "shop_log": [
+        {
+          "amount": 20,
+          "gold": -12,
+          "product": "wood",
+          "side": "buy"
+        }
+      ],
+      "side": "buy",
+      "tick": 0
+    },
+    {
+      "category": "animals",
+      "controls": {
+        "close_market": {
+          "disabled": false,
+          "position": [
+            1000.0,
+            132.0
+          ],
+          "size": [
+            157.0,
+            44.0
+          ]
+        },
+        "shop_back": {
+          "disabled": false,
+          "position": [
+            876.0,
+            132.0
+          ],
+          "size": [
+            112.0,
+            44.0
+          ]
+        },
+        "trade_cat_-1": {
+          "disabled": false,
+          "position": [
+            568.0,
+            278.0
+          ],
+          "size": [
+            176.0,
+            336.0
+          ]
+        },
+        "trade_hen_-1": {
+          "disabled": false,
+          "position": [
+            376.0,
+            278.0
+          ],
+          "size": [
+            176.0,
+            336.0
+          ]
+        }
+      },
+      "file": "19_another_category_after_purchase.png",
+      "gold": 28,
+      "label": "another_category_after_purchase",
+      "level": "list",
+      "notice": "",
+      "page": 0,
+      "product": {},
+      "screen": "market",
+      "shop_log": [
+        {
+          "amount": 20,
+          "gold": -12,
+          "product": "wood",
+          "side": "buy"
+        }
+      ],
+      "side": "buy",
+      "tick": 0
+    },
+    {
+      "category": "animals",
+      "controls": {
+        "advance": {
+          "disabled": false,
+          "position": [
+            548.0,
+            570.0
+          ],
+          "size": [
+            190.0,
+            44.0
+          ]
+        },
+        "open_book": {
+          "disabled": false,
+          "position": [
+            725.0,
+            490.0
+          ],
+          "size": [
+            220.0,
+            46.0
+          ]
+        },
+        "open_market": {
+          "disabled": false,
+          "position": [
+            377.0,
+            490.0
+          ],
+          "size": [
+            220.0,
+            46.0
+          ]
+        }
+      },
+      "file": "20_market_closed_morning.png",
+      "gold": 28,
+      "label": "market_closed_morning",
+      "level": "list",
+      "notice": "",
+      "page": 0,
+      "product": {},
+      "screen": "morning",
+      "shop_log": [
+        {
+          "amount": 20,
+          "gold": -12,
+          "product": "wood",
+          "side": "buy"
+        }
+      ],
+      "side": "home",
+      "tick": 0
+    },
+    {
+      "category": "animals",
+      "controls": {
+        "category_animals": {
+          "disabled": false,
+          "position": [
+            376.0,
+            276.0
+          ],
+          "size": [
+            368.0,
+            156.0
+          ]
+        },
+        "category_facilities": {
+          "disabled": false,
+          "position": [
+            376.0,
+            450.0
+          ],
+          "size": [
+            368.0,
+            156.0
+          ]
+        },
+        "category_items": {
+          "disabled": false,
+          "position": [
+            760.0,
+            450.0
+          ],
+          "size": [
+            368.0,
+            156.0
+          ]
+        },
+        "category_materials": {
+          "disabled": false,
+          "position": [
+            760.0,
+            276.0
+          ],
+          "size": [
+            368.0,
+            156.0
+          ]
+        },
+        "close_market": {
+          "disabled": false,
+          "position": [
+            1000.0,
+            132.0
+          ],
+          "size": [
+            157.0,
+            44.0
+          ]
+        },
+        "shop_back": {
+          "disabled": false,
+          "position": [
+            876.0,
+            132.0
+          ],
+          "size": [
+            112.0,
+            44.0
+          ]
+        }
+      },
+      "file": "21_sell_categories.png",
+      "gold": 28,
+      "label": "sell_categories",
+      "level": "categories",
+      "notice": "",
+      "page": 0,
+      "product": {},
+      "screen": "market",
+      "shop_log": [
+        {
+          "amount": 20,
+          "gold": -12,
+          "product": "wood",
+          "side": "buy"
+        }
+      ],
+      "side": "sell",
+      "tick": 0
+    },
+    {
+      "category": "animals",
+      "controls": {
+        "close_market": {
+          "disabled": false,
+          "position": [
+            1000.0,
+            132.0
+          ],
+          "size": [
+            157.0,
+            44.0
+          ]
+        },
+        "shop_back": {
+          "disabled": false,
+          "position": [
+            876.0,
+            132.0
+          ],
+          "size": [
+            112.0,
+            44.0
+          ]
+        }
+      },
+      "file": "22_sell_animals_list_1.png",
+      "gold": 28,
+      "label": "sell_animals_list_1",
+      "level": "list",
+      "notice": "",
+      "page": 0,
+      "product": {},
+      "screen": "market",
+      "shop_log": [
+        {
+          "amount": 20,
+          "gold": -12,
+          "product": "wood",
+          "side": "buy"
+        }
+      ],
+      "side": "sell",
+      "tick": 0
+    },
+    {
+      "category": "materials",
+      "controls": {
+        "close_market": {
+          "disabled": false,
+          "position": [
+            1000.0,
+            132.0
+          ],
+          "size": [
+            157.0,
+            44.0
+          ]
+        },
+        "shop_back": {
+          "disabled": false,
+          "position": [
+            876.0,
+            132.0
+          ],
+          "size": [
+            112.0,
+            44.0
+          ]
+        },
+        "trade_soil_-1": {
+          "disabled": false,
+          "position": [
+            376.0,
+            278.0
+          ],
+          "size": [
+            176.0,
+            336.0
+          ]
+        },
+        "trade_wood_-1": {
+          "disabled": false,
+          "position": [
+            568.0,
+            278.0
+          ],
+          "size": [
+            176.0,
+            336.0
+          ]
+        }
+      },
+      "file": "23_sell_materials_list_1.png",
+      "gold": 28,
+      "label": "sell_materials_list_1",
+      "level": "list",
+      "notice": "",
+      "page": 0,
+      "product": {},
+      "screen": "market",
+      "shop_log": [
+        {
+          "amount": 20,
+          "gold": -12,
+          "product": "wood",
+          "side": "buy"
+        }
+      ],
+      "side": "sell",
+      "tick": 0
+    },
+    {
+      "category": "materials",
+      "controls": {
+        "close_market": {
+          "disabled": false,
+          "position": [
+            1000.0,
+            132.0
+          ],
+          "size": [
+            157.0,
+            44.0
+          ]
+        },
+        "confirm_trade": {
+          "disabled": false,
+          "position": [
+            880.0,
+            566.0
+          ],
+          "size": [
+            248.0,
+            50.0
+          ]
+        },
+        "shop_back": {
+          "disabled": false,
+          "position": [
+            876.0,
+            132.0
+          ],
+          "size": [
+            112.0,
+            44.0
+          ]
+        }
+      },
+      "file": "24_sell_materials_soil_-1.png",
+      "gold": 28,
+      "label": "sell_materials_soil_-1",
+      "level": "detail",
+      "notice": "",
+      "page": 0,
+      "product": {
+        "animal_id": -1,
+        "count": 2,
+        "id": "soil"
+      },
+      "screen": "market",
+      "shop_log": [
+        {
+          "amount": 20,
+          "gold": -12,
+          "product": "wood",
+          "side": "buy"
+        }
+      ],
+      "side": "sell",
+      "tick": 0
+    },
+    {
+      "category": "materials",
+      "controls": {
+        "close_market": {
+          "disabled": false,
+          "position": [
+            1000.0,
+            132.0
+          ],
+          "size": [
+            157.0,
+            44.0
+          ]
+        },
+        "confirm_trade": {
+          "disabled": false,
+          "position": [
+            880.0,
+            566.0
+          ],
+          "size": [
+            248.0,
+            50.0
+          ]
+        },
+        "shop_back": {
+          "disabled": false,
+          "position": [
+            876.0,
+            132.0
+          ],
+          "size": [
+            112.0,
+            44.0
+          ]
+        }
+      },
+      "file": "25_sell_materials_wood_-1.png",
+      "gold": 28,
+      "label": "sell_materials_wood_-1",
+      "level": "detail",
+      "notice": "",
+      "page": 0,
+      "product": {
+        "animal_id": -1,
+        "count": 1,
+        "id": "wood"
+      },
+      "screen": "market",
+      "shop_log": [
+        {
+          "amount": 20,
+          "gold": -12,
+          "product": "wood",
+          "side": "buy"
+        }
+      ],
+      "side": "sell",
+      "tick": 0
+    },
+    {
+      "category": "facilities",
+      "controls": {
+        "close_market": {
+          "disabled": false,
+          "position": [
+            1000.0,
+            132.0
+          ],
+          "size": [
+            157.0,
+            44.0
+          ]
+        },
+        "shop_back": {
+          "disabled": false,
+          "position": [
+            876.0,
+            132.0
+          ],
+          "size": [
+            112.0,
+            44.0
+          ]
+        }
+      },
+      "file": "26_sell_facilities_list_1.png",
+      "gold": 28,
+      "label": "sell_facilities_list_1",
+      "level": "list",
+      "notice": "",
+      "page": 0,
+      "product": {},
+      "screen": "market",
+      "shop_log": [
+        {
+          "amount": 20,
+          "gold": -12,
+          "product": "wood",
+          "side": "buy"
+        }
+      ],
+      "side": "sell",
+      "tick": 0
+    },
+    {
+      "category": "items",
+      "controls": {
+        "close_market": {
+          "disabled": false,
+          "position": [
+            1000.0,
+            132.0
+          ],
+          "size": [
+            157.0,
+            44.0
+          ]
+        },
+        "shop_back": {
+          "disabled": false,
+          "position": [
+            876.0,
+            132.0
+          ],
+          "size": [
+            112.0,
+            44.0
+          ]
+        }
+      },
+      "file": "27_sell_items_list_1.png",
+      "gold": 28,
+      "label": "sell_items_list_1",
+      "level": "list",
+      "notice": "",
+      "page": 0,
+      "product": {},
+      "screen": "market",
+      "shop_log": [
+        {
+          "amount": 20,
+          "gold": -12,
+          "product": "wood",
+          "side": "buy"
+        }
+      ],
+      "side": "sell",
+      "tick": 0
+    },
+    {
+      "category": "materials",
+      "controls": {
+        "close_market": {
+          "disabled": false,
+          "position": [
+            1000.0,
+            132.0
+          ],
+          "size": [
+            157.0,
+            44.0
+          ]
+        },
+        "confirm_trade": {
+          "disabled": true,
+          "position": [
+            880.0,
+            566.0
+          ],
+          "size": [
+            248.0,
+            50.0
+          ]
+        },
+        "shop_back": {
+          "disabled": false,
+          "position": [
+            876.0,
+            132.0
+          ],
+          "size": [
+            112.0,
+            44.0
+          ]
+        }
+      },
+      "file": "28_sale_complete.png",
+      "gold": 32,
+      "label": "sale_complete",
+      "level": "detail",
+      "notice": "木材 ×20を売却しました　＋4G（28G → 32G）",
+      "page": 0,
+      "product": {
+        "animal_id": -1,
+        "count": 1,
+        "id": "wood"
+      },
+      "screen": "market",
+      "shop_log": [
+        {
+          "amount": 20,
+          "gold": -12,
+          "product": "wood",
+          "side": "buy"
+        },
+        {
+          "amount": 20,
+          "animal_id": -1,
+          "gold": 4,
+          "product": "wood",
+          "side": "sell"
+        }
+      ],
+      "side": "sell",
+      "tick": 0
+    },
+    {
+      "category": "materials",
+      "controls": {
+        "advance": {
+          "disabled": false,
+          "position": [
+            548.0,
+            570.0
+          ],
+          "size": [
+            190.0,
+            44.0
+          ]
+        },
+        "open_book": {
+          "disabled": false,
+          "position": [
+            725.0,
+            490.0
+          ],
+          "size": [
+            220.0,
+            46.0
+          ]
+        },
+        "open_market": {
+          "disabled": false,
+          "position": [
+            377.0,
+            490.0
+          ],
+          "size": [
+            220.0,
+            46.0
+          ]
+        }
+      },
+      "file": "29_final_morning.png",
+      "gold": 32,
+      "label": "final_morning",
+      "level": "detail",
+      "notice": "木材 ×20を売却しました　＋4G（28G → 32G）",
+      "page": 0,
+      "product": {
+        "animal_id": -1,
+        "count": 1,
+        "id": "wood"
+      },
+      "screen": "morning",
+      "shop_log": [
+        {
+          "amount": 20,
+          "gold": -12,
+          "product": "wood",
+          "side": "buy"
+        },
+        {
+          "amount": 20,
+          "animal_id": -1,
+          "gold": 4,
+          "product": "wood",
+          "side": "sell"
+        }
+      ],
+      "side": "home",
+      "tick": 0
+    },
+    {
+      "category": "animals",
+      "controls": {
+        "close_market": {
+          "disabled": false,
+          "position": [
+            1000.0,
+            132.0
+          ],
+          "size": [
+            157.0,
+            44.0
+          ]
+        },
+        "confirm_trade": {
+          "disabled": true,
+          "position": [
+            880.0,
+            566.0
+          ],
+          "size": [
+            248.0,
+            50.0
+          ]
+        },
+        "shop_back": {
+          "disabled": false,
+          "position": [
+            876.0,
+            132.0
+          ],
+          "size": [
+            112.0,
+            44.0
+          ]
+        }
+      },
+      "file": "30_insufficient_gold_detail.png",
+      "gold": 32,
+      "label": "insufficient_gold_detail",
+      "level": "detail",
+      "notice": "",
+      "page": 0,
+      "product": {
+        "animal_id": -1,
+        "count": 1,
+        "id": "cat"
+      },
+      "screen": "market",
+      "shop_log": [
+        {
+          "amount": 20,
+          "gold": -12,
+          "product": "wood",
+          "side": "buy"
+        },
+        {
+          "amount": 20,
+          "animal_id": -1,
+          "gold": 4,
+          "product": "wood",
+          "side": "sell"
+        }
+      ],
+      "side": "buy",
+      "tick": 0
+    },
+    {
+      "category": "items",
+      "controls": {
+        "close_market": {
+          "disabled": false,
+          "position": [
+            1000.0,
+            132.0
+          ],
+          "size": [
+            157.0,
+            44.0
+          ]
+        },
+        "confirm_trade": {
+          "disabled": true,
+          "position": [
+            880.0,
+            566.0
+          ],
+          "size": [
+            248.0,
+            50.0
+          ]
+        },
+        "shop_back": {
+          "disabled": false,
+          "position": [
+            876.0,
+            132.0
+          ],
+          "size": [
+            112.0,
+            44.0
+          ]
+        }
+      },
+      "file": "31_sold_out_detail.png",
+      "gold": 14,
+      "label": "sold_out_detail",
+      "level": "detail",
+      "notice": "ホイッスルを購入しました　−18G（32G → 14G）",
+      "page": 0,
+      "product": {
+        "animal_id": -1,
+        "count": 1,
+        "id": "whistle"
+      },
+      "screen": "market",
+      "shop_log": [
+        {
+          "amount": 20,
+          "gold": -12,
+          "product": "wood",
+          "side": "buy"
+        },
+        {
+          "amount": 20,
+          "animal_id": -1,
+          "gold": 4,
+          "product": "wood",
+          "side": "sell"
+        },
+        {
+          "amount": 1,
+          "gold": -18,
+          "product": "whistle",
+          "side": "buy"
+        }
+      ],
+      "side": "buy",
+      "tick": 0
+    },
+    {
+      "category": "items",
+      "controls": {
+        "close_market": {
+          "disabled": false,
+          "position": [
+            1000.0,
+            132.0
+          ],
+          "size": [
+            157.0,
+            44.0
+          ]
+        },
+        "shop_back": {
+          "disabled": false,
+          "position": [
+            876.0,
+            132.0
+          ],
+          "size": [
+            112.0,
+            44.0
+          ]
+        },
+        "trade_coffee_-1": {
+          "disabled": false,
+          "position": [
+            568.0,
+            278.0
+          ],
+          "size": [
+            176.0,
+            336.0
+          ]
+        },
+        "trade_energy_drink_-1": {
+          "disabled": false,
+          "position": [
+            760.0,
+            278.0
+          ],
+          "size": [
+            176.0,
+            336.0
+          ]
+        },
+        "trade_whistle_-1": {
+          "disabled": false,
+          "position": [
+            376.0,
+            278.0
+          ],
+          "size": [
+            176.0,
+            336.0
+          ]
+        }
+      },
+      "file": "32_sold_out_list.png",
+      "gold": 14,
+      "label": "sold_out_list",
+      "level": "list",
+      "notice": "",
+      "page": 0,
+      "product": {},
+      "screen": "market",
+      "shop_log": [
+        {
+          "amount": 20,
+          "gold": -12,
+          "product": "wood",
+          "side": "buy"
+        },
+        {
+          "amount": 20,
+          "animal_id": -1,
+          "gold": 4,
+          "product": "wood",
+          "side": "sell"
+        },
+        {
+          "amount": 1,
+          "gold": -18,
+          "product": "whistle",
+          "side": "buy"
+        }
+      ],
+      "side": "buy",
+      "tick": 0
+    },
+    {
+      "category": "items",
+      "controls": {
+        "close_market": {
+          "disabled": false,
+          "position": [
+            1000.0,
+            132.0
+          ],
+          "size": [
+            157.0,
+            44.0
+          ]
+        },
+        "confirm_trade": {
+          "disabled": false,
+          "position": [
+            880.0,
+            566.0
+          ],
+          "size": [
+            248.0,
+            50.0
+          ]
+        },
+        "shop_back": {
+          "disabled": false,
+          "position": [
+            876.0,
+            132.0
+          ],
+          "size": [
+            112.0,
+            44.0
+          ]
+        }
+      },
+      "file": "33_sell_whistle_detail.png",
+      "gold": 14,
+      "label": "sell_whistle_detail",
+      "level": "detail",
+      "notice": "",
+      "page": 0,
+      "product": {
+        "animal_id": -1,
+        "count": 1,
+        "id": "whistle"
+      },
+      "screen": "market",
+      "shop_log": [
+        {
+          "amount": 20,
+          "gold": -12,
+          "product": "wood",
+          "side": "buy"
+        },
+        {
+          "amount": 20,
+          "animal_id": -1,
+          "gold": 4,
+          "product": "wood",
+          "side": "sell"
+        },
+        {
+          "amount": 1,
+          "gold": -18,
+          "product": "whistle",
+          "side": "buy"
+        }
+      ],
+      "side": "sell",
+      "tick": 0
+    },
+    {
+      "category": "items",
+      "controls": {
+        "close_market": {
+          "disabled": false,
+          "position": [
+            1000.0,
+            132.0
+          ],
+          "size": [
+            157.0,
+            44.0
+          ]
+        },
+        "confirm_trade": {
+          "disabled": true,
+          "position": [
+            880.0,
+            566.0
+          ],
+          "size": [
+            248.0,
+            50.0
+          ]
+        },
+        "shop_back": {
+          "disabled": false,
+          "position": [
+            876.0,
+            132.0
+          ],
+          "size": [
+            112.0,
+            44.0
+          ]
+        }
+      },
+      "file": "34_sell_whistle_depleted.png",
+      "gold": 20,
+      "label": "sell_whistle_depleted",
+      "level": "detail",
+      "notice": "ホイッスルを売却しました　＋6G（14G → 20G）",
+      "page": 0,
+      "product": {
+        "animal_id": -1,
+        "count": 1,
+        "id": "whistle"
+      },
+      "screen": "market",
+      "shop_log": [
+        {
+          "amount": 20,
+          "gold": -12,
+          "product": "wood",
+          "side": "buy"
+        },
+        {
+          "amount": 20,
+          "animal_id": -1,
+          "gold": 4,
+          "product": "wood",
+          "side": "sell"
+        },
+        {
+          "amount": 1,
+          "gold": -18,
+          "product": "whistle",
+          "side": "buy"
+        },
+        {
+          "amount": 1,
+          "animal_id": -1,
+          "gold": 6,
+          "product": "whistle",
+          "side": "sell"
+        }
+      ],
+      "side": "sell",
+      "tick": 0
+    },
+    {
+      "category": "items",
+      "controls": {
+        "advance": {
+          "disabled": false,
+          "position": [
+            548.0,
+            570.0
+          ],
+          "size": [
+            190.0,
+            44.0
+          ]
+        },
+        "open_book": {
+          "disabled": false,
+          "position": [
+            725.0,
+            490.0
+          ],
+          "size": [
+            220.0,
+            46.0
+          ]
+        },
+        "open_market": {
+          "disabled": false,
+          "position": [
+            377.0,
+            490.0
+          ],
+          "size": [
+            220.0,
+            46.0
+          ]
+        }
+      },
+      "file": "35_supplemental_final_morning.png",
+      "gold": 20,
+      "label": "supplemental_final_morning",
+      "level": "detail",
+      "notice": "ホイッスルを売却しました　＋6G（14G → 20G）",
+      "page": 0,
+      "product": {
+        "animal_id": -1,
+        "count": 1,
+        "id": "whistle"
+      },
+      "screen": "morning",
+      "shop_log": [
+        {
+          "amount": 20,
+          "gold": -12,
+          "product": "wood",
+          "side": "buy"
+        },
+        {
+          "amount": 20,
+          "animal_id": -1,
+          "gold": 4,
+          "product": "wood",
+          "side": "sell"
+        },
+        {
+          "amount": 1,
+          "gold": -18,
+          "product": "whistle",
+          "side": "buy"
+        },
+        {
+          "amount": 1,
+          "animal_id": -1,
+          "gold": 6,
+          "product": "whistle",
+          "side": "sell"
+        }
+      ],
+      "side": "home",
+      "tick": 0
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "sha256": "D2378A8C57D60EE89E19DB8CFC3F366F0652E8BC3BFD74D7FB6FD67A423C0D12",
+  "data_root": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\artifacts\\isolated\\export-market-7c5766e/user-data",
+  "result": {
+    "PID": 22300,
+    "ThreadID": 17380,
+    "ExitCode": 0,
+    "OwnedWindowCount": 2,
+    "Station": "Service-0x0-3ba69$",
+    "Desktop": "Render_e45d4e79a67e4cdfb3c763fe86b792f1",
+    "ObservedDesktop": "Render_e45d4e79a67e4cdfb3c763fe86b792f1",
+    "NonInteractive": true,
+    "DesktopMatched": true,
+    "TimedOut": false
+  },
+  "implementation_commit": "7c5766e78060b3ccd0e157ebef2533e31c456c5d",
+  "command": "\"C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\artifacts\\validation\\20261006-112825-910\\WhistleRanch-test.exe\" --audio-driver Dummy --rendering-method gl_compatibility --max-fps 30 --resolution 1280x800 --quit-after 150 --log-file \"C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\artifacts\\isolated\\export-market-7c5766e/render.log\"",
+  "asset_delivery_commit": "5848c4f8aedde4acfa33586f82c3397d1b6d58a0"
+}

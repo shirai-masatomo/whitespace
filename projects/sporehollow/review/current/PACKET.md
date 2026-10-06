@@ -1,8 +1,13 @@
 # 操作・正式素材・図鑑・壁の統合レビュー
 
-## 現在の試遊版：追加素材取り込み
+## 最新：朝・市場UIレビュー対応（2026-10-06）
 
-**Play.cmdの通常版は e65f7d1 / 素材5848c4f8**。UI荷車、資源12PNG、誘拐者50PNG、小演出40PNGを実描画へ接続。[取り込み結果と残る差](materials/REVIEW.md)、[取り込み後ショップ29画面](materials/shop/index.html)、[敵・運搬・演出](materials/enemies-effects/index.html)、[ビルド情報](materials/build.json)。回帰668項目・AI192試行・隔離GPU・Windows export/出力EXE起動を確認。以下のe13e16e記録とshop/の29枚は取り込み前の比較証拠。
+**通常試遊版 7c5766e / 素材5848c4f8**。[変更・検証・残る差](shop-ui/REVIEW.md) / [before・after一覧](shop-ui/SCREENS.md) / [比較ギャラリー](shop-ui/index.html) / [ビルド](shop-ui/build.json)。商品可視領域の等比拡大、固定左揃え、数量/所持/価格、不能理由、購入売却別の空状態、具体的な結果表示、朝ヘッダーを共通部品へ整理。29画面比較＋補足6画面、698回帰、AI192、Windows出力・隔離GPU成功。取引ロジック・価格・朝→昼は変更なし。
+
+
+## 前回の試遊版：追加素材取り込み
+
+**この節の検証版は e65f7d1 / 素材5848c4f8**。UI荷車、資源12PNG、誘拐者50PNG、小演出40PNGを実描画へ接続。[取り込み結果と残る差](materials/REVIEW.md)、[取り込み後ショップ29画面](materials/shop/index.html)、[敵・運搬・演出](materials/enemies-effects/index.html)、[ビルド情報](materials/build.json)。回帰668項目・AI192試行・隔離GPU・Windows export/出力EXE起動を確認。以下のe13e16e記録とshop/の29枚は取り込み前の比較証拠。
 
 ## 図鑑UI改善に向けた現状撮影（2026-10-04）
 

@@ -1,0 +1,24 @@
+{
+  "dirty": false,
+  "result": {
+    "PID": 34636,
+    "ThreadID": 28996,
+    "ExitCode": 0,
+    "OwnedWindowCount": 2,
+    "Station": "Service-0x0-3ba69$",
+    "Desktop": "Render_699b341851ce482690cb93a9a0618941",
+    "ObservedDesktop": "Render_699b341851ce482690cb93a9a0618941",
+    "NonInteractive": true,
+    "DesktopMatched": true,
+    "TimedOut": false
+  },
+  "implementation_commit": "ecdd3f279d4a2316cde275a4fefffa4a33c9ad03",
+  "start_utc": "2026-10-06T02:19:00.0919662Z",
+  "executable": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\.tools\\Godot_v4.7.2-stable_win64.exe",
+  "end_utc": "2026-10-06T02:19:13.5041383Z",
+  "purpose": "shop",
+  "command": "\"C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\.tools\\Godot_v4.7.2-stable_win64.exe\" --path \"C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\" --audio-driver Dummy --rendering-method gl_compatibility --max-fps 30 --resolution 1280x800 --log-file \"C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\artifacts\\isolated\\20261006-111859-155/render.log\" --script tests/visual_shop.gd -- --isolated-review --output=\"C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\artifacts\\isolated\\20261006-111859-155\"",
+  "parent_pid": 13416,
+  "data_root": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\artifacts\\isolated\\20261006-111859-155/user-data",
+  "asset_delivery_commit": "5848c4f8aedde4acfa33586f82c3397d1b6d58a0"
+}
