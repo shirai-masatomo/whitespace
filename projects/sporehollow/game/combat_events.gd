@@ -34,11 +34,13 @@ static func grant(w,a: Dictionary,event: String,action: String,target: String) -
 
 static func hit(w,source: Dictionary,target: Dictionary,action: String,damage: float,skill: bool=false):
 	if damage<=0:return
+	w.PlayerEvents.damage(w,source,target,damage,action)
 	var tid=str(target.get("faction","keeper"))+str(target.get("id",-1))
 	grant(w,source,"SkillHit" if skill else "AttackHit",action,tid)
 	grant(w,target,"DamageTaken",action,str(source.get("faction","keeper"))+str(source.get("id",-1)))
 	if target.hp<=0 and not target.get("kill_gauge_awarded",false):
 		target.kill_gauge_awarded=true
+		w.PlayerEvents.add(w,w.PlayerEvents.name_of(w,target)+"：気絶")
 		grant(w,source,"Kill",action,tid)
 		grant(w,source,"Finisher",action,tid)
 
@@ -54,6 +56,7 @@ static func recover(a: Dictionary,dt: float,rest: bool=false):
 		a.stamina=minf(a.max_stamina,a.stamina+a.stamina_regen*dt*(3.0 if rest else 1.0))
 
 static func tongue(w,source: Dictionary,target: Dictionary):
+	w.PlayerEvents.add(w,w.PlayerEvents.name_of(w,source)+"：舌拘束")
 	target.move_stopped_until=maxi(target.get("move_stopped_until",0),w.tick+ceili(w.ProgressData.SPECIAL.tongue_stop/w.DT))
 	if target.get("has_stamina",false):target.stamina=maxf(0,target.stamina-20.0)
 	grant(w,source,"SkillHit","tongue",str(target.get("faction","enemy"))+str(target.get("id",-1)))
@@ -75,6 +78,7 @@ static func ai_use(w,a: Dictionary,definition: Dictionary,context: Dictionary,ex
 	definition=w.ProgressData.Levels.resolve(definition,a.get("lv",1),{},definition.get("LevelScaling",{}))
 	if not can_use(a,definition,context) or not execute.is_valid():return false
 	if not execute.call():return false
+	w.PlayerEvents.add(w,w.PlayerEvents.name_of(w,a)+"："+definition.Name)
 	a.ultimate_gauge=maxf(0,a.ultimate_gauge-definition.GaugeCost)
 	a.ultimate_state="ULTIMATE_READY" if ready(a) else "CHARGING"
 	w.skill_log.append({"tick":w.tick,"actor":a.get("id",-1),"ultimate":definition.UltimateID,"skill":definition.UltimateID,"faction":a.get("faction","owned")})

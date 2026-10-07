@@ -40,3 +40,5 @@ AIの変更確認は `./dev.ps1 evaluate -AISeeds 2` で既存6戦略×2seedへ�
 黄金像Aと任意敵出現は `-Scenario idol_debug`（2枚）。F3/文字ボタンの実入力で現在の10種を個別生成し、停止・入口閉塞・未実装種の拒否を確認。通常の襲来記録とは区別する。
 
 今回の採用画像/G〜Mは `-Scenario ranch_content`（代表3枚）。day6/500Gの制御条件から通常売買・実マウス入力で搾乳/配置/突撃の予約を確認。Portrait/スキルと戦闘キーポーズは明示した描画フィクスチャ。通常戦闘はheadless `ranch_content` と既存回帰で別途確認する。
+
+AI・情報表示品質の定点は `-Scenario quality`（5画面）。森/Human比較、図鑑8枠、敵Skill Hover、療養/イベントログ、持ち物。位置・知識・ログは明示した描画フィクスチャ、増援/戦闘/仲間化の成立はheadless qualityで別途検証。通常の中間変更ではこの撮影やreview/current更新を繰り返さない。

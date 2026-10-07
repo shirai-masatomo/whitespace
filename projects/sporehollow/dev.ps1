@@ -1,4 +1,4 @@
-param([ValidateSet('check', 'test', 'evaluate', 'build', 'visual', 'play', 'editor')][string]$Task = 'check', [string[]]$Suites = @('revisions','residents','world','jobs','keeper','planning','rest_until','input','controls','building_art','delivered_art','progression_art','idol_debug','ranch_content','ranch_content_ui','market_ui','story','story_ui','progression','progression_flow','progression_ui','combat_revision','ui_revision'), [ValidateRange(1,32)][int]$AISeeds=32)
+﻿param([ValidateSet('check', 'test', 'evaluate', 'build', 'visual', 'play', 'editor')][string]$Task = 'check', [string[]]$Suites = @('revisions','residents','world','jobs','keeper','planning','rest_until','input','controls','building_art','delivered_art','progression_art','idol_debug','ranch_content','ranch_content_ui','quality','quality_ui','market_ui','story','story_ui','progression','progression_flow','progression_ui','combat_revision','ui_revision'), [ValidateRange(1,32)][int]$AISeeds=32)
 $ErrorActionPreference = 'Stop'
 $farmRoot = $PSScriptRoot
 $godot = Join-Path $farmRoot '.tools/Godot_v4.7.2-stable_win64_console.exe'

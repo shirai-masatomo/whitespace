@@ -89,7 +89,8 @@ static func bounds(g,a: Dictionary,enemy: bool=false) -> Rect2:
 	var frame=Art.CLIPS[key].frames[Art.frame_index(key,g.visual_time-p.get("at",g.visual_time))]
 	var body=frame.body if frame is Dictionary else frame
 	var used=Rect2(body.get_image().get_used_rect())
-	return Rect2(g.actor_pixel(id,a.pos)+Vector2(0,14)-Art.CLIPS[key].anchor+used.position,used.size).grow(3)
+	var scale_value=1.15 if a.get("type_tag","")=="Human" else 1.0
+	return Rect2(g.actor_pixel(id,a.pos)+Vector2(0,14)+(used.position-Art.CLIPS[key].anchor)*scale_value,used.size*scale_value).grow(3)
 
 static func skill(g,event: Dictionary):
 	if event.get("skill","") not in ["tongue","croak"]:return

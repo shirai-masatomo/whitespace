@@ -44,7 +44,7 @@ static func init(w):
 				# Two-cell corridors connect the clearing to every edge; logistics remains separate.
 				if x>3 and x<21 and y>3 and y<13: continue
 				if x in [5,6,12,13,19,20] or y in [5,6,8,9,11,12]: continue
-				if (x*17+y*31+w.seed_value)%3==0: continue
+				if not preload("res://game/forest_pattern.gd").tree(p,w.seed_value):continue
 				if w.distance(p,w.logistics_entry)<4 or w.distance(p,w.keeper.pos)<=2 or w.animals.any(func(a):return a.placed and w.distance(p,a.pos)<=2) or p in idol_cells(w) or w.occupied(p) or w.live_structure(p) or w.floors.has(p) or not w.items_at(p).is_empty(): continue
 				records.append({"id":"tree-%d-%d"%[x,y],"position":[x,y]})
 		w.story.trees=records

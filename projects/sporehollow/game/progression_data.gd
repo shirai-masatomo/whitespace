@@ -1,5 +1,6 @@
 extends RefCounted
 ## Shared, versioned Lv1 tuning. No scene or simulation mutation.
+const EnemySkills=preload("res://game/enemy_skills.gd")
 const Levels=preload("res://game/level_stats.gd")
 const ENEMY_LEVEL_OVERRIDES={} # No unapproved Lv2 combat tuning.
 const ENEMY_GROWTH={}
@@ -16,6 +17,7 @@ const ITEMS = {
 	"collar":{"id":"collar","name":"首輪","rarity":Rarity.COMMON,"type":"equipment","equip_targets":["dog"],"durability":-1,"consumable":false,"trigger":"equipped","effects":{"loyalty":25,"defense":2},"buy":20,"sell":6},
 	"berry":{"id":"berry","name":"きのみ","rarity":Rarity.COMMON,"type":"conditional_equipment","equip_targets":["animal"],"durability":1,"consumable":true,"trigger":"alive_hp_half","effects":{"heal_fraction":0.25},"buy":8,"sell":2}}
 const ENEMY_ROWS = {
+ "maid":["メイド",45,2.0,5,3,3,1,1.2,75,[50,45,0,5],Rarity.RARE,"仲間にコーヒーを届ける"],
  "dancer":["舞姫",38,1.6,6,2,2,0,1.5,75,[50,50,0,0],Rarity.RARE,"舞で味方を支え、倒れた仲間を復活させる"],
  "thief":["盗賊",32,2.0,7,4,4,0,1.2,70,[50,50,0,0],Rarity.UNCOMMON,"毒を投げ、落とし物を盗んで逃げる"],
 	"kidnapper":["誘拐者",50,1.333333,6,5,5,2,1.4,40,[70,10,10,10],Rarity.COMMON,"主人公を連れ去る"],
@@ -41,8 +43,8 @@ static func enemy(id: String,level: int=1) -> Dictionary:
 	var base={"archetype":id,"species":id,"name":r[0],"lv":1,"rarity":r[10],"type_tag":"Human","max_hp":r[1],"defense":0,
 		"move_speed":r[2],"sight_range":r[3],"attack_range":1,"human_attack":r[4],"animal_attack":r[5],"object_attack_power":r[6],
 		"attack_interval":r[7],"ai_accuracy":r[8],"target_weights":{"keeper":r[9][0],"animal":r[9][1],"structure":r[9][2],"idol":r[9][3]},
-		"karma_min":0,"karma_max":-1,"spawn_weight":1.0,"recruitable":id in ["martial_artist","ninja"],"recruit_condition_id":"unconfigured",
-		"loot_table":"scroll" if id=="ninja" else ("small_gold" if id=="salaryman" else "none"),"skills":{"dancer":["dance","resurrection"],"thief":["poison","steal"],"kidnapper":["abduct_keeper"],"destroyer":["iron_ball"],"martial_artist":["bow","nonlethal"],"salaryman":["phone"],"ninja":["shuriken","dagger"],"animal_tamer":["tame","lead"],"runner":["run","fatigue","companion"]}.get(id,[]),"role_text":r[11],"max_stamina":100.0,"stamina_regen":2.0,"ultimates":["resurrection"] if id=="dancer" else [],"level_overrides":ENEMY_LEVEL_OVERRIDES.get(id,{})}
+		"karma_min":0,"karma_max":-1,"spawn_weight":1.0,"recruitable":id in ["martial_artist","ninja","maid"],"recruit_condition_id":"cow_encounter" if id=="maid" else "unconfigured",
+		"loot_table":"scroll" if id=="ninja" else ("small_gold" if id=="salaryman" else "none"),"skills":EnemySkills.BY_ACTOR.get(id,[]).duplicate(),"role_text":r[11],"max_stamina":100.0,"stamina_regen":2.0,"ultimates":["resurrection"] if id=="dancer" else (["rage"] if id=="maid" else []),"level_overrides":ENEMY_LEVEL_OVERRIDES.get(id,{})}
 	return Levels.resolve(base,level,ENEMY_GROWTH.get(id,{}),base.level_overrides)
 
 static func weighted(rng: RandomNumberGenerator, weights: Array) -> int:

@@ -25,7 +25,7 @@ func run():
 		check(w.enemies.size()==before+1,"One spawn per click: "+kind)
 		var e=w.enemies.back()
 		check(e.archetype==kind and e.hp==e.max_hp and e.lv==1,"Existing enemy data: "+kind)
-		check(w.walkable(e.pos) and not w.live_structure(e.pos) and not w.is_indoor(e.pos),"Valid spawn site: "+kind)
+		check(not w.inside(e.pos) and w.distance(e.pos,e.entry)>10,"Valid spawn site: "+kind)
 		check(not w.enemies.any(func(other):return other.id!=e.id and other.pos==e.pos),"Distinct spawn: "+kind)
 	check(w.tick==original_tick and w.paused and w.campaign.gold==original_gold and w.jobs.is_empty(),"Debug UI does not leak board input or advance paused world")
 	check(w.spawn_schedule==schedule and w.schedule_index==next_wave,"Debug spawn leaves normal waves intact, runner adds no surprise companion")

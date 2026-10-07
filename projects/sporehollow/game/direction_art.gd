@@ -81,4 +81,5 @@ static func bounds(g,a: Dictionary,enemy: bool=false) -> Rect2:
 	if a.get("facing",1)<0:used.position.x=row.texture.get_width()-used.end.x
 	var anchor=row.anchor
 	if a.get("facing",1)<0:anchor.x=row.texture.get_width()-anchor.x
-	return Rect2(g.actor_pixel(("e" if enemy else "a")+str(a.id),a.pos)+Vector2(0,14)-anchor+used.position,used.size).grow(3)
+	var scale_value=1.15 if a.get("type_tag","")=="Human" or a.get("category","")=="human" else 1.0
+	return Rect2(g.actor_pixel(("e" if enemy else "a")+str(a.id),a.pos)+Vector2(0,14)+(used.position-anchor)*scale_value,used.size*scale_value).grow(3)

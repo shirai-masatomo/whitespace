@@ -41,7 +41,7 @@ func input(game, event) -> bool:
 		cancel()
 		game.refresh()
 		return true
-	if game.menu_open or not game.world.working(): return false
+	if game.menu_open or game.field_book or game.story_modal!="" or not game.world.working(): return false
 	if pressed != "" and event is InputEventMouseButton and event.button_index in [MOUSE_BUTTON_WHEEL_UP,MOUSE_BUTTON_WHEEL_DOWN]: return true
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		if event.pressed:

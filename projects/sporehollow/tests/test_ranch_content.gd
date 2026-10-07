@@ -70,7 +70,7 @@ func run():
 	check(other.flee and other.loot_granted and w.metrics.coins<=coins+5,"Expiry finalizes once, repeated ticks do not duplicate loot")
 	w=open_world();dancer=enemy(w,"dancer",Vector2i(12,10));other=enemy(w,"destroyer",Vector2i(13,10));C.enemy_step(w,dancer)
 	check(is_equal_approx(C.speed(w,other),1.15),"Dance affects nearby same army")
-	w.tick+=3;check(is_equal_approx(C.speed(w,other),1.0),"Dance fades when no longer refreshed")
+	w.tick+=13;check(is_equal_approx(C.speed(w,other),1.0),"Dance fades when no longer refreshed")
 	w=open_world();e=enemy(w,"thief",Vector2i(12,10));e.poison_at=9999
 	w.field_items=[{"id":"fossil1","kind":"fossil","pos":Vector2i(13,10),"placed":true}]
 	C.enemy_step(w,e);check(w.field_items.is_empty() and e.stolen.id=="fossil1","Thief approaches and takes existing object")

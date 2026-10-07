@@ -21,7 +21,7 @@ const SKILLS = {
 	"croak":{"name":"警戒鳴き","type":"passive","unlock_level":1,"condition":"被弾","effect":"周囲6マスへ攻撃者の情報を共有"},
 	"spines":{"name":"防御モード","type":"passive","unlock_level":1,"condition":"被弾","effect":"4秒間 防御+4・接触反射4"},
 	"bark": {"name": "吠える", "type": "active", "unlock_level": 1, "cooldown": 6.0, "condition": "敵を検知", "effect": "周囲4マスの敵を1秒足止め"},
-	"rescue": {"name": "救出本能", "type": "passive", "unlock_level": 1, "condition": "主人公が連れ去られる", "effect": "運搬者を最優先 / 移動1.5倍"},
+	"rescue": {"name": "救出本能", "type": "passive", "unlock_level": 1, "condition": "牧場主の被弾・気絶・拘束・運搬", "effect": "被弾後6秒は攻撃者を優先。拘束/運搬者は最優先。移動1.5倍。休む指示では抑制"},
 	"lay": {"name": "産卵", "type": "passive", "unlock_level": 1, "condition": "夜明け", "effect": "卵を1個産む"},
 	"feather": {"name": "羽落とし", "type": "passive", "unlock_level": 2, "condition": "夜明け・低確率", "effect": "羽を落とす"},
 	"charm": {"name": "懐柔", "type": "passive", "unlock_level": 1, "condition": "敵側動物が近い", "effect": "敵側動物と仲良くなる"},

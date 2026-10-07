@@ -1,7 +1,9 @@
 extends RefCounted
 ## Perception alone may read the keeper's real position.
 static func perceive(e: Dictionary, w):
-	var visible = w.keeper.placed and w.distance(e.pos, w.keeper.pos) <= e.sight_range and w.line_of_sight(e.pos, w.keeper.pos)
+	var visible = w.Life.targetable(w,e.get("archetype","")=="kidnapper") and w.distance(e.pos, w.keeper.pos) <= e.sight_range and w.line_of_sight(e.pos, w.keeper.pos)
+	if not w.Life.targetable(w,e.get("archetype","")=="kidnapper"):
+		e.last_known_keeper_position=null;e.search_goal=null
 	if visible != e.can_see_keeper:
 		if visible: w.Life.danger(w, "spotted")
 		e.sight_reaction = "!" if visible else "?"

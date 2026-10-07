@@ -90,6 +90,10 @@ var eggs = 0
 var nest = NEST
 var score: Dictionary = {}
 var config: Dictionary
+const PlayerEvents=preload("res://game/player_events.gd")
+var player_events: Array = []
+var last_keeper_attacker_id=-1
+var rescue_until=0
 var spawn_schedule: Array = []
 var schedule_index = 0
 var schedule_cycle = 0
@@ -328,6 +332,9 @@ func working() -> bool:
 
 func start_night():
 	if phase != "day": return
+	for event in spawn_schedule:
+		if event.get("wave",0)==999:event.tick=maxi(0,event.tick-(tick-night_started_tick))
+	spawn_schedule.sort_custom(func(a,b):return a.tick<b.tick)
 	phase = "defend"
 	night_started_tick = tick
 	milestones.append({"tick": tick, "kind": "nightfall"})
@@ -435,10 +442,17 @@ func issue_order(kind: String, p: Vector2i, animal_id: int = -1) -> bool:
 func spawn_enemy(event: Dictionary):
 	var entry: Vector2i = event.entry
 	var origin = exit_for(entry) + (exit_for(entry)-entry)*24
-	if enemies.any(func(e):return not e.done and e.pos==origin):
-		var alternatives=entries.filter(func(p):return not enemies.any(func(e):return not e.done and e.pos==exit_for(p)+(exit_for(p)-p)*24))
-		if alternatives.is_empty(): say("森の外で敵が足止めされています"); return
-		entry=alternatives[0]; origin=exit_for(entry)+(exit_for(entry)-entry)*24
+	# Keep every spawn outside, including multiple paused debug requests at one entrance.
+	var gates=[entry]+entries.filter(func(p):return p!=entry)
+	var found=false
+	for gate in gates:
+		if event.get("debug_single",false) and (not walkable(gate) or live_structure(gate)):continue
+		for offset in range(24,56):
+			var candidate=exit_for(gate)+(exit_for(gate)-gate)*offset
+			if not enemies.any(func(e):return not e.done and e.pos==candidate):
+				entry=gate;origin=candidate;found=true;break
+		if found:break
+	if not found:say("森の外に出現できる場所がありません");return
 	var progress = mini(6, maxi(0, campaign.day - 1))
 	enemies.append({"move_speed": event.get("move_speed", 1.333333 + progress * 0.27), "move_credit": 0.0, "id": spawned, "pos": origin, "entry": entry, "lv": event.get("lv", 1), "hp": Rules.KIDNAPPER.max_hp + progress * 4, "max_hp": Rules.KIDNAPPER.max_hp + progress * 4,
 		"attack_power": Rules.KIDNAPPER.attack_power + progress / 2, "object_attack_power": Rules.KIDNAPPER.object_attack_power,
@@ -450,6 +464,7 @@ func spawn_enemy(event: Dictionary):
 		"search_goal": null, "search_goal_until": 0, "search_visits": {}, "sight_reaction": "", "sight_reaction_until": 0,
 		"weakened_until": 0, "born": tick, "path": [origin], "role": event.role, "state": "探索中"})
 	Progression.spawn_data(self,enemies.back(),event)
+	if event.get("wave",0)==999:PlayerEvents.add(self,enemies.back().name+"が森の外から到着")
 	Life.danger(self, "invasion")
 	spawned += 1
 	milestones.append({"tick": tick, "kind": "invasion", "id": spawned - 1})
@@ -523,7 +538,9 @@ func animal_step(a: Dictionary):
 		a.rescuing = false
 		rest_step(a, true)
 		return
-	var carrier = enemies.filter(func(e): return not e.done and not e.flee and (e.carry == "keeper" or (keeper.state in ["unconscious", "restrained"] and distance(e.pos, keeper.pos) <= 2)))
+	var carrier = enemies.filter(func(e): return not e.done and not e.flee and e.hp>0 and (e.carry == "keeper" or e.id==keeper.restrainer))
+	if carrier.is_empty():carrier=enemies.filter(func(e):return not e.done and not e.flee and e.hp>0 and ((tick<rescue_until and e.id==last_keeper_attacker_id) or (keeper.state=="unconscious" and distance(e.pos,keeper.pos)<=2)))
+	carrier.sort_custom(func(e,f):return e.id<f.id)
 	a.rescuing = AnimalData.has_skill(a, "rescue") and not carrier.is_empty()
 	var targets = animal_targets(a)
 	targets.sort_custom(func(e, f): return distance(a.pos, e.pos) < distance(a.pos, f.pos))
@@ -701,6 +718,7 @@ func enemy_step(e: Dictionary):
 				Life.hurt(self, e)
 		else:
 			e.capture_progress += 1
+			keeper.restrainer=e.id
 			if e.capture_progress >= 4:
 				e.carry = "keeper"
 				keeper.carrier = e.id
@@ -708,6 +726,7 @@ func enemy_step(e: Dictionary):
 				keeper.pos = e.pos
 				metrics.captures += 1
 				Life.danger(self, "carried")
+				PlayerEvents.add(self,"牧場主が連れ去られている")
 				milestones.append({"tick": tick, "kind": "carried", "id": e.id})
 		return
 	e.move_credit = minf(1.9, e.move_credit + (1.0 if e.carry == "keeper" else e.move_speed) * Content.speed(self,e) * DT)
@@ -877,6 +896,10 @@ func step():
 	if phase == "defend" and config.repeat_waves and schedule_index == spawn_schedule.size():
 		schedule_cycle += 1
 		make_schedule()
+	if phase=="day":
+		for event in spawn_schedule.duplicate():
+			if event.get("wave",0)==999 and tick-night_started_tick>=event.tick:
+				spawn_enemy(event);spawn_schedule.erase(event)
 	for a in animals:
 		animal_step(a)
 		if a.placed: open_for_ally(a.pos)
@@ -1448,8 +1471,8 @@ func debug_spawn_enemy(kind: String) -> bool:
 		if sites.is_empty():continue
 		var count=enemies.size()
 		spawn_enemy({"role":kind,"entry":gate,"lv":1,"debug_single":true})
-		if enemies.size()==count:return false
-		var e=enemies.back();e.pos=sites[0];e.path=[e.pos]
+		if enemies.size()==count:continue
+		var e=enemies.back()
 		job_log.append({"tick":tick,"event":"debug","action":"spawn_enemy","enemy_kind":kind,"enemy_id":e.id,"pos":e.pos})
 		say("%sを入口に出現させました"%e.name)
 		return true

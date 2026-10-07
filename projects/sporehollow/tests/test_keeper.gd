@@ -157,7 +157,8 @@ func run():
 		if rescued:
 			check(w.metrics.rescues == 1 and w.keeper.hp == 0 and w.keeper.carrier < 0, "Dog rescues unconscious keeper, no instant healing")
 			steps(w,48)
-			check(w.keeper.hp == 8 and w.keeper.resting and w.jobs_held, "Safe gradual recovery, no automatic dangerous work")
+			steps(w,192)
+			check(w.keeper.hp == 8 and w.keeper.state=="free" and w.jobs_held, "Safe gradual recovery, no automatic dangerous work")
 		else: check(w.result == "loss" and w.keeper.state == "abducted", "Only exit causes loss")
 		reports.append(w.observation())
 	# Rest doesn't freeze perception or spawn and danger serial changes for UI slow-down.

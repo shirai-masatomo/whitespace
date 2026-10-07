@@ -1,5 +1,6 @@
 extends RefCounted
 const CLIPS = {
+	"keeper/idle/right":{"frames":[preload("res://art_delivery/characters_v1/keeper_idle_right_00.png")],"anchor":Vector2(16,44),"duration":1.0,"loop":false},
 	"keeper/settle/right": {"frames":[preload("res://art_delivery/characters_motion_v1/keeper/settle_right_00.png"),preload("res://art_delivery/characters_motion_v1/keeper/settle_right_01.png")],"anchor":Vector2(16,44),"duration":0.18,"loop":false},
 	"keeper/settle/left": {"frames":[preload("res://art_delivery/characters_motion_v1/keeper/settle_left_00.png"),preload("res://art_delivery/characters_motion_v1/keeper/settle_left_01.png")],"anchor":Vector2(16,44),"duration":0.18,"loop":false},
 	"keeper/rest/right": {"frames":[preload("res://art_delivery/characters_motion_v1/keeper/rest_right_00.png"),preload("res://art_delivery/characters_motion_v1/keeper/rest_right_01.png")],"anchor":Vector2(16,44),"duration":0.65,"loop":true},
@@ -37,7 +38,7 @@ const CART = preload("res://art_delivery/cart_ui_detail_v1/cart.png")
 const CLOSED = preload("res://art_delivery/ranch_assets_v1/book/closed_00.png")
 const SCROLL = preload("res://art_delivery/ranch_assets_v1/scroll/idle_none_00.png")
 
-static func sprite(canvas: CanvasItem, who: String, action: String, facing: int, foot: Vector2, elapsed: float=0, alpha: float=1):
+static func sprite(canvas: CanvasItem, who: String, action: String, facing: int, foot: Vector2, elapsed: float=0, alpha: float=1, visual_scale: float=1.0):
 	var key = who+"/"+action+("/left" if facing<0 else "/right")
 	if not CLIPS.has(key):
 		if who=="keeper": preload("res://game/ui_style.gd").keeper(canvas,foot,facing)
@@ -48,7 +49,7 @@ static func sprite(canvas: CanvasItem, who: String, action: String, facing: int,
 	var index = maxi(0,int(elapsed/clip.duration))
 	index = index%clip.frames.size() if clip.loop else mini(index,clip.frames.size()-1)
 	canvas.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
-	canvas.draw_texture(clip.frames[index],(foot-clip.anchor).round(),Color(1,1,1,alpha))
+	canvas.draw_texture_rect(clip.frames[index],Rect2((foot-clip.anchor*visual_scale).round(),clip.frames[index].get_size()*visual_scale),false,Color(1,1,1,alpha))
 
 static func fit(canvas: CanvasItem, texture: Texture2D, rect: Rect2):
 	var scale = minf(rect.size.x/texture.get_width(),rect.size.y/texture.get_height())

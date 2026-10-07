@@ -1,18 +1,19 @@
 extends RefCounted
 const Data=preload("res://game/progression_data.gd")
 const UI=preload("res://game/ui_style.gd")
-const ENEMY_ORDER=["kidnapper","salaryman","destroyer","martial_artist","ninja","animal_tamer","runner","doberman","dancer","thief"]
+const ENEMY_ORDER=["kidnapper","salaryman","destroyer","martial_artist","ninja","animal_tamer","runner","doberman","dancer","thief","maid"]
 const NOTES={
-	"dancer":"周囲3マスの味方の移動・攻撃を助けます。\nREADY時、近くの倒れた味方1体を復活。",
-	"thief":"毒は5秒間ダメージと移動低下。\n盗品は森の外へ出る前に倒すと回収できます。",
-	"kidnapper":"牧場主を見つけると追跡。\n気絶させて森の外へ運びます。",
-	"destroyer":"建物を優先して壊します。\n鉄球は隣接した相手だけに当たります。",
-	"martial_artist":"戦闘の前後に礼をします。\n相手のHPを1より下へ減らしません。",
-	"salaryman":"被弾すると応援を呼ぶことがあります。\n増援は森の外から入ってきます。",
-	"ninja":"手裏剣は見通せる5マス以内。\n壁や閉じたドアで防げます。",
-	"animal_tamer":"一時的に動物の忠誠を下げます。\n連れ去りは境界の手前なら救出可能。",
-	"runner":"8秒走ると4秒間バテます。\n犬を連れていることがあります。",
-	"doberman":"敵側の犬。屋内には入りません。\n主人が去っても自動では仲間になりません。"}
+ "dancer":"優雅な舞で仲間を励ます。\n倒れた仲間にも、もう一度立つ力を与える。",
+ "thief":"毒瓶で相手を遠ざけ、目ぼしい物を持ち去る。\n逃げ切られる前なら、盗品を取り戻せる。",
+ "maid":"忙しく仲間を気遣うコーヒー配り。\n怒らせると怖いが、乳牛には心を許す。",
+ "kidnapper":"牧場主を探して忍び寄る。\n倒れたところを担ぎ、森の外へ連れ去る。",
+ "destroyer":"頑丈な体で、目につく建物へ向かう。\n振り回す鉄球は、壁にも脅威となる。",
+ "martial_artist":"勝負は好むが、命までは奪わない。\n戦いの前後には礼を欠かさない。",
+ "salaryman":"頼りなさそうでも、仲間とのつながりは強い。\n追い詰められると電話を取り出す。",
+ "ninja":"遠くから手裏剣で牽制し、近づけば短刀を抜く。\n見通しの良い場所には注意。",
+ "animal_tamer":"動物に優しく呼びかけ、心を揺さぶる。\n手懐けた相手を連れて帰ろうとする。",
+ "runner":"驚くほど足が速い。\nただし、走り続けるとすぐ息が上がる。",
+ "doberman":"主人とともに現れる、用心深い番犬。\n屋外を駆け回り、敵へ立ち向かう。"}
 
 static func placeholder(game,c,id: String,p: Vector2,size_value: float=1.0):
 	# Intentionally schematic tokens, not a generated final character design.
@@ -41,13 +42,20 @@ static func enemy_page(game,c,index: int):
 			game.Delivered.draw_clip(c,"enemy/idle_right",Vector2.ZERO,0)
 			c.draw_set_transform(Vector2.ZERO)
 		else: game.Assets.portrait(c,id,Rect2(186,191,240,148),"enemy_portrait")
-		game.Assets.badge(game,c,Vector2(156,346),row.rarity)
-		game.label_on(c,Vector2(156,398),row.type_tag+" / "+Data.RARITY_NAMES[row.rarity],16,UI.INK)
-		game.label_on(c,Vector2(584,170),row.role_text,20,UI.INK)
-		game.label_on(c,Vector2(584,230),NOTES[id] if known>=2 else "行動を観察すると、詳しく分かります。",16,UI.INK)
-		if known>=2 and id in ["destroyer","salaryman","dancer"]:
-			c.draw_texture_rect(game.Assets.skill_texture({"destroyer":"iron_ball","salaryman":"phone","dancer":"resurrection"}[id]),Rect2(584,280,40,40),false)
-		if known>=3: game.label_on(c,Vector2(584,342),{"salaryman":"撃退時：少量のお金","ninja":"撃退時：巻物1個"}.get(id,"撃退を確認しました"),16,UI.INK)
+		game.Assets.badge(game,c,Vector2(330,120),row.rarity)
+		game.Assets.portrait_frame(game,c,Rect2(182,186,248,159),row.rarity)
+		game.label_on(c,Vector2(156,385),"人間" if row.type_tag=="Human" else "動物",15,UI.INK)
+		game.MarketView.text(game,c,Rect2(152,403,292,84),NOTES[id],16)
+		game.label_on(c,Vector2(584,137),"スキル",22,UI.INK)
+		if known>=2:
+			for i in range(Data.EnemySkills.BY_ACTOR.get(id,[]).size()):
+				var skill=Data.EnemySkills.get_skill(Data.EnemySkills.BY_ACTOR[id][i]);var y=174+i*72
+				c.draw_texture_rect(game.Assets.skill_texture(skill.SkillID),Rect2(584,y,32,32),false)
+				game.label_on(c,Vector2(630,y+21),skill.Name,19,UI.INK)
+				game.label_on(c,Vector2(630,y+42),skill.Type,13,Color("75816c"))
+		else:game.label_on(c,Vector2(584,215),"行動を観察すると、詳しく分かります。",16,UI.INK)
+		if known>=3:game.label_on(c,Vector2(584,450),"撃退済み",16,UI.INK)
+
 	game.label_on(c,Vector2(470,510),"%d / %d"%[index+1,ENEMY_ORDER.size()],14,UI.INK)
 
 static func equipment_buttons(game):

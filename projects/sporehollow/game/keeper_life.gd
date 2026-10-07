@@ -2,6 +2,12 @@ extends RefCounted
 ## Fixed-tick keeper survival; no input/rendering dependency. Tuning is provisional.
 const MAX_HP = 30
 const ATTACK = 2
+const CAPTURE_GRACE = 12.0
+const HIDDEN_HEAL_SECONDS = 6.0
+const HIDDEN_RECOVER_HP = 8
+
+static func targetable(w, capture: bool=false) -> bool:
+	return w.keeper.placed and (w.keeper.state=="free" and w.keeper.hp>0 or capture and w.keeper.state in ["unconscious","restrained"])
 const FATIGUE_SECONDS = 270.0 # One 90s day + 180s night represents an active day.
 const DRINKS = {"coffee": 12.0, "energy_drink": 25.0}
 
@@ -58,6 +64,7 @@ static func able(w) -> bool:
 static func presentation(w) -> String:
 	var k = w.keeper
 	if k.carrier >= 0: return "carried"
+	if k.state == "hidden_rest":return "hidden_rest"
 	if k.state != "free": return "unconscious"
 	if k.resting: return "settling" if not k.get("asleep",false) else "sleeping"
 	return "exhausted" if k.sleepiness >= 90 else ("tired" if k.sleepiness > 80 else ("drowsy" if k.sleepiness > 50 else "awake"))
@@ -152,13 +159,20 @@ static func step(w):
 		if request.kind=="keeper_move":w.Jobs.hold(w,request.get("hold_reason","manual"))
 	if k.state == "unconscious":
 		k.recover_ticks += 1
-		if k.recover_ticks >= 48:
-			k.hp = 8
-			k.state = "free"
-			set_rest(w, true)
-			k.hold_before_rest = "rescue"
-			w.Jobs.hold(w, "rescue")
-			w.milestones.append({"tick": w.tick, "kind": "keeper_recovered"})
+		if k.restrainer>=0 and not w.enemies.any(func(e):return e.id==k.restrainer and e.hp>0 and not e.done and not e.flee and e.capture_progress>0 and w.distance(e.pos,k.pos)<=1): k.restrainer=-1
+		var capturing=w.enemies.any(func(e):return not e.done and not e.flee and e.hp>0 and e.get("capture_progress",0)>0 and w.distance(e.pos,k.pos)<=1)
+		if k.recover_ticks >= ceili(CAPTURE_GRACE/w.DT) and k.carrier<0 and k.restrainer<0 and not capturing:
+			k.state="hidden_rest";k.heal_credit=0.0
+			w.PlayerEvents.add(w,"牧場主：隠れて療養中")
+		return
+	if k.state=="hidden_rest":
+		k.heal_credit+=w.DT
+		if k.heal_credit>=HIDDEN_HEAL_SECONDS:
+			k.heal_credit-=HIDDEN_HEAL_SECONDS;k.hp=mini(k.max_hp,k.hp+1)
+		if k.hp>=HIDDEN_RECOVER_HP:
+			k.state="free";k.kill_gauge_awarded=false;k.hold_before_rest="rescue"
+			w.Jobs.hold(w,"rescue");w.PlayerEvents.add(w,"牧場主が復帰。作業再開を選べます")
+			w.milestones.append({"tick":w.tick,"kind":"keeper_recovered"})
 		return
 	if k.state != "free": return
 	var near = w.enemies.any(func(e): return not e.done and not e.flee and w.distance(e.pos, k.pos) <= 3)
@@ -205,18 +219,21 @@ static func step(w):
 
 static func hurt(w, e):
 	var k = w.keeper
-	if k.hp <= 0: return
+	if not targetable(w): return
 	var before=k.hp
 	k.hp = maxi(0, k.hp - e.attack_power)
 	var originals=w.enemies.filter(func(actor):return actor.id==e.id)
 	if not originals.is_empty():w.Combat.hit(w,originals[0],k,e.get("combat_action","attack"),before-k.hp,e.get("combat_skill",false))
 	k.hurt_until = w.tick + 8
+	if before>k.hp:
+		w.last_keeper_attacker_id=e.id;w.rescue_until=w.tick+ceili(6.0/w.DT)
 	danger(w, "keeper_hit")
 	w.Story.interrupt_prayer(w)
 	w.Orders.interrupt(w)
 	w.combat_log.append({"tick": w.tick, "source": "keeper_hit", "id": e.id, "target": -1, "damage": e.attack_power})
 	if k.hp == 0:
 		k.state = "unconscious"
+		w.PlayerEvents.add(w,"牧場主が気絶")
 		k.recover_ticks = 0
 		set_rest(w, false)
 		w.manual_goal = null

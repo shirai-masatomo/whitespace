@@ -2,6 +2,7 @@ extends RefCounted
 const Data = preload("res://game/progression_data.gd")
 ## Learning nights are data, not day-number branches in the simulation.
 const NIGHTS = {
+	11:{"mode":"Hybrid","fixed":["maid"],"count":1},
 	1:{"mode":"Fixed","fixed":["kidnapper"],"count":0},
 	2:{"mode":"Fixed","fixed":["salaryman","salaryman"],"count":0},
 	3:{"mode":"Fixed","fixed":["destroyer"],"count":0},
@@ -12,7 +13,7 @@ const NIGHTS = {
 	9:{"mode":"Hybrid","fixed":["dancer"],"count":1},
 	10:{"mode":"Hybrid","fixed":["thief"],"count":1},
 	8:{"mode":"Hybrid","fixed":["runner"],"count":1}}
-const FIRST_DAY = {"kidnapper":1,"salaryman":2,"destroyer":3,"martial_artist":5,"ninja":6,"animal_tamer":7,"runner":8,"dancer":9,"thief":10}
+const FIRST_DAY = {"kidnapper":1,"salaryman":2,"destroyer":3,"martial_artist":5,"ninja":6,"animal_tamer":7,"runner":8,"dancer":9,"thief":10,"maid":11}
 const TABLE_NIGHT = {"mode":"Table","fixed":[],"count":3}
 const MILESTONE = {"interval":5,"from_day":10,"mode":"Hybrid","fixed":["runner"],"count":2}
 

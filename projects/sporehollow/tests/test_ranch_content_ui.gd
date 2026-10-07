@@ -11,7 +11,9 @@ func run():
 	game.world=Farm.new(campaign,17);root.add_child(game);game.set_process(false);await process_frame
 	game.story_modal="";game.arrival_started=-10;game.refresh()
 	var w=game.world
-	for id in ["maid","cow","bull"]:check(w.buy(id),"New character purchased through existing transaction: "+id)
+	var owned={"id":w.campaign.next_animal_id,"species":"maid","category":"human","lv":1,"loyalty":85,"name":"","unavailable_through_day":0}
+	w.campaign.next_animal_id+=1;w.campaign.animals.append(owned);w.add_resident(owned)
+	for id in ["cow","bull"]:check(w.buy(id),"New character purchased through existing transaction: "+id)
 	check(w.animals.size()==4 and w.animals.all(func(a):return a.placed),"All new companions are real residents")
 	check(not w.sell("maid",w.animals[1].id),"Friendly human is not sale inventory")
 	w.add_item("kokeshi",1);w.add_item("fossil",1)

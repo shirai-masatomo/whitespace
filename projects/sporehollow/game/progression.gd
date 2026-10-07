@@ -114,7 +114,8 @@ static func enemy_hurt(w,e,raw: int,attacker: int=-1,action: String="attack",ski
 		e.flee=true; release_animal(w,e); w.release_keeper(e); loot(w,e); knowledge(w,e,3)
 		if e.get("type_tag","")=="Animal": e.visual_death_tick=w.tick; e.done=true; e.state="死亡"; e.action_id="death"; w.metrics.repelled+=1
 	elif e.get("archetype","")=="salaryman" and not e.get("phone_success",false) and not e.get("phone_started",false) and damage>0:
-		if w.rng.randf()<Data.SPECIAL.phone_chance and w.Combat.pay(e,"skill"):
+		if w.rng.randf()<e.get("debug_phone_chance",Data.SPECIAL.phone_chance) and w.Combat.pay(e,"skill"):
+			w.PlayerEvents.add(w,e.name+"：応援要請")
 			e.phone_started=true; e.phone_until=w.tick+ceili(Data.SPECIAL.phone_delay/w.DT); e.action_id="phone_take"
 
 static func loot(w,e):
@@ -176,9 +177,9 @@ static func spawn_data(w,e,event):
 
 static func target_candidates(w,e) -> Array:
 	var candidates=[]
-	if e.can_see_keeper and w.keeper.hp>0: candidates.append({"kind":"keeper","id":-1,"pos":w.keeper.pos})
+	if e.can_see_keeper and w.Life.targetable(w): candidates.append({"kind":"keeper","id":-1,"pos":w.keeper.pos})
 	for a in w.animals:
-		if a.placed and a.hp>0 and not a.get("dead",false) and w.distance(e.pos,a.pos)<=e.sight_range and w.line_of_sight(e.pos,a.pos): candidates.append({"kind":"animal","id":a.id,"pos":a.pos})
+		if a.placed and a.hp>0 and not a.get("dead",false) and not (e.archetype=="maid" and a.species=="cow") and w.distance(e.pos,a.pos)<=e.sight_range and w.line_of_sight(e.pos,a.pos): candidates.append({"kind":"animal","id":a.id,"pos":a.pos})
 	for p in w.structures:
 		if w.live_structure(p) and w.distance(e.pos,p)<=e.sight_range and w.line_of_sight(e.pos,p,true): candidates.append({"kind":"structure","id":w.structures[p].id,"pos":p})
 	for p in w.Story.idol_cells(w):
@@ -201,7 +202,7 @@ static func select_target(w,e,candidates: Array) -> Dictionary:
 static func enemy_step(w,e) -> bool:
 	if e.flee: return false
 	var kidnapper=e.get("archetype","kidnapper")=="kidnapper"
-	if kidnapper and (e.carry!="" or w.keeper.hp<=0 or e.role!="kidnapper"): return false
+	if kidnapper and (e.carry!="" or w.Life.targetable(w,true) and w.keeper.hp<=0 or e.role!="kidnapper"): return false
 	if e.hp<=0: e.flee=true; return false
 	if e.get("phone_started",false):
 		e.state="応援を呼ぶ"; e.action_id="phone_call"
@@ -225,16 +226,25 @@ static func enemy_step(w,e) -> bool:
 		target=select_target(w,e,candidates); e.chosen_target=target
 		e.choose_at=w.tick+ceili((0.5+(100-e.ai_accuracy)*0.025)/w.DT)
 	else: target=current[0]; e.chosen_target=target
-	if kidnapper and (target.is_empty() or target.kind=="keeper"): return false
+	if kidnapper and (not target.is_empty() and target.kind=="keeper" or target.is_empty() and w.Life.targetable(w,true)): return false
 	if target.is_empty():
-		e.action_id="walk"; walk(w,e,w.RaiderAI.target(e,w)); return true
+		if not w.Life.targetable(w):
+			var fallback=w.animals.filter(func(a):return a.placed and a.hp>0 and w.distance(e.pos,a.pos)<=e.sight_range and w.line_of_sight(e.pos,a.pos) and not (e.archetype=="maid" and a.species=="cow"))
+			if not fallback.is_empty():target={"kind":"animal","id":fallback[0].id,"pos":fallback[0].pos}
+			elif e.object_attack_power>0:
+				for cell in w.Story.idol_cells(w):
+					if w.distance(e.pos,cell)<=e.sight_range and w.line_of_sight(e.pos,cell,true):target={"kind":"idol","id":-1,"pos":cell};break
+		if target.is_empty():e.action_id="walk";walk(w,e,w.RaiderAI.target(e,w));return true
+		e.chosen_target=target
 	if w.tick<e.get("hesitate_until",0): e.state="様子見"; return true
-	if e.archetype=="martial_artist" and e.get("bow_target","")!=str(target.kind)+str(target.id):
+	if e.archetype=="martial_artist" and str(target.kind)+str(target.id) not in e.get("bowed_targets",[]):
+		var bowed=e.get("bowed_targets",[]);bowed.append(str(target.kind)+str(target.id));e.bowed_targets=bowed
 		e.bow_target=str(target.kind)+str(target.id); e.bow_until=w.tick+ceili(Data.SPECIAL.bow_seconds/w.DT); e.action_id="bow"; e.observed_action=true; return true
 	if e.archetype=="animal_tamer" and target.kind=="animal" and tame(w,e,w.Orders.animal(w,target.id)): return true
 	var dist=w.distance(e.pos,target.pos)
 	if e.archetype=="ninja" and target.kind in ["keeper","animal"] and dist>1 and dist<=Data.SPECIAL.shuriken_range and w.line_of_sight(e.pos,target.pos) and w.tick>=e.get("shuriken_at",0) and w.Combat.pay(e,"skill"):
-		e.shuriken_at=w.tick+ceili(Data.SPECIAL.shuriken_ct/w.DT); e.action_id="shuriken"; e.state="手裏剣"; strike(w,e,target,Data.SPECIAL.shuriken_damage); return true
+		w.PlayerEvents.add(w,e.name+"：手裏剣")
+		e.shuriken_at=w.tick+ceili(Data.EnemySkills.get_skill("shuriken").Cooldown/w.DT); e.action_id="shuriken"; e.state="手裏剣"; strike(w,e,target,Data.SPECIAL.shuriken_damage); return true
 	if dist<=1 and w.line_of_sight(e.pos,target.pos,target.kind in ["structure","idol"]):
 		e.state="攻撃"; e.action_id="dagger" if e.archetype=="ninja" else ("iron_ball_hit" if e.archetype=="destroyer" else "attack")
 		if w.tick>=e.next_attack and w.Combat.pay(e,"attack"):
@@ -268,7 +278,7 @@ static func walk(w,e,goal: Vector2i):
 
 static func strike(w,e,t,override_damage: int=-1):
 	e.observed_action=true
-	e.combat_action="shuriken" if override_damage>=0 else "attack"
+	e.combat_action=("rage" if e.archetype=="maid" else "shuriken") if override_damage>=0 else "attack"
 	e.combat_skill=override_damage>=0
 	if t.kind=="keeper":
 		var damage=e.human_attack if override_damage<0 else override_damage
@@ -298,7 +308,8 @@ static func tame(w,e,a) -> bool:
 	if a.is_empty() or a.get("type_tag")=="Human" or w.distance(e.pos,a.pos)>Data.SPECIAL.tame_range or not w.line_of_sight(e.pos,a.pos): return false
 	e.state="呼びかける"; e.action_id="tame"
 	if w.tick>=e.get("tame_at",0) and w.Combat.pay(e,"skill"):
-		e.tame_at=w.tick+ceili(Data.SPECIAL.tame_ct/w.DT)
+		w.PlayerEvents.add(w,e.name+"：手懐け")
+		e.tame_at=w.tick+ceili(Data.EnemySkills.get_skill("tame").Cooldown/w.DT)
 		a.loyalty_loss=a.get("loyalty_loss",0.0)+Data.SPECIAL.tame_loss*(Data.SPECIAL.shiba_resistance if a.species=="shiba" else 1.0); e.observed_action=true
 	if loyalty(a)<=Data.SPECIAL.tame_threshold:
 		if w.distance(e.pos,a.pos)>1: walk(w,e,a.pos)

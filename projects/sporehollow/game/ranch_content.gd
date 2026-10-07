@@ -87,28 +87,62 @@ static func animal_step(w,a) -> bool:
 		return true
 	if a.has("charge_path"):a.erase("charge_path")
 	if a.species!="maid":return false
-	w.Combat.recover(a,w.DT,a.mode=="rest")
-	if a.mode=="rest":w.rest_step(a,true);a.action_id="idle";return true
-	var enemies=w.animal_targets(a).filter(func(e):return e.hp>0)
+	return maid_step(w,a,false)
+
+static func recruit_maid(w,e) -> bool:
+	if e.get("faction")!="enemy" or e.hp<=0 or e.done:return false
+	var cows=w.animals.filter(func(a):return w.Orders.active(w,a) and a.species=="cow" and w.distance(e.pos,a.pos)<=w.ProgressData.EnemySkills.TUNING.maid_recruit_range and w.line_of_sight(e.pos,a.pos))
+	if cows.is_empty() or w.tick<e.threat_until or w.tick<e.get("rage_until",0):return false
+	var tested=e.get("recruit_cows",[])
+	for cow in cows:
+		if cow.id in tested:continue
+		tested.append(cow.id);e.recruit_cows=tested
+		if w.rng.randf()>=e.get("debug_recruit_chance",w.ProgressData.EnemySkills.TUNING.maid_recruit_chance):continue
+		e.done=true;e.recruited=true
+		var id=w.campaign.next_animal_id;w.campaign.next_animal_id+=1
+		var owned={"id":id,"species":"maid","category":"human","lv":e.lv,"hp":e.hp,"rarity":e.rarity,"xp":0,"loyalty":85,"traits":{},"name":"","affinity":null,"unavailable_through_day":0,"position":[e.pos.x,e.pos.y],"source":"recruited","source_enemy_id":e.id}
+		w.campaign.animals.append(owned);w.add_resident(owned)
+		var a=w.animals.back();a.ultimate_gauge=e.ultimate_gauge;a.stamina=e.stamina
+		w.Progression.knowledge(w,e,2);w.PlayerEvents.add(w,"乳牛に心を許し、メイドが仲間になった")
+		return true
+	return false
+
+static func maid_step(w,a,enemy: bool) -> bool:
+	if enemy and recruit_maid(w,a):return true
+	if not enemy:w.Combat.recover(a,w.DT,a.mode=="rest")
+	if not enemy and a.mode=="rest":w.rest_step(a,true);a.action_id="idle";return true
+	var enemies=w.Progression.target_candidates(w,a).filter(func(t):return t.kind in ["keeper","animal"]) if enemy else w.animal_targets(a).filter(func(e):return e.hp>0)
 	enemies.sort_custom(func(e,f):return w.distance(a.pos,e.pos)<w.distance(a.pos,f.pos))
 	w.Combat.ai_use(w,a,RAGE,{"conditions":{"enemy_near":not enemies.is_empty()},"targets":enemies.size(),"tactical_score":1.0},func():a.rage_until=w.tick+ceili(RAGE.Duration/w.DT);return true)
 	var raging=w.tick<a.get("rage_until",0)
 	a.action_id="rage" if raging else "idle"
 	if not enemies.is_empty() and (raging or w.distance(a.pos,enemies[0].pos)<=1):
-		var e=enemies[0];a.state="激ギレ" if raging else "抵抗"
-		if w.distance(a.pos,e.pos)<=1 and w.line_of_sight(a.pos,e.pos):
+		var target=enemies[0];a.state="激ギレ" if raging else "抵抗"
+		if w.distance(a.pos,target.pos)<=1 and w.line_of_sight(a.pos,target.pos):
 			if w.tick>=a.next_attack and w.Combat.pay(a,"attack"):
-				a.next_attack=w.tick+ceili(a.attack_seconds/w.DT/(2.0 if raging else 1.0));w.Progression.enemy_hurt(w,e,12 if raging else 3,a.id)
-		else:a.action_id="chase";ally_walk(w,a,e.pos,2.0)
+				a.next_attack=w.tick+ceili(1.2/w.DT/(2.0 if raging else 1.0))
+				if enemy:w.Progression.strike(w,a,target,12 if raging else 3)
+				else:w.Progression.enemy_hurt(w,target,12 if raging else 3,a.id)
+		else:
+			a.action_id="chase"
+			if enemy:
+				var original=a.move_speed;a.move_speed=original*2.0;w.Progression.walk(w,a,target.pos);a.move_speed=original
+			else:ally_walk(w,a,target.pos,2.0)
 		return true
-	if a.mode=="stay":a.state="待機";return true
-	if w.tick<a.get("coffee_rest_until",0):a.state="休む";w.rest_step(a,false);return true
+	if not enemy and a.mode=="stay":a.state="待機";return true
+	if w.tick<a.get("coffee_rest_until",0):
+		a.state="休む"
+		if not enemy:w.rest_step(a,false)
+		return true
 	if w.tick<a.get("coffee_wait",0):a.state="配り終えた";return true
 	var served=a.get("coffee_served",[])
-	var allies=[w.keeper]+w.animals.filter(func(t):return t.id!=a.id and w.Orders.active(w,t))
-	allies=allies.filter(func(t):return t.hp>0 and t.get("carrier",-1)<0 and t.get("id",-1) not in served)
+	var allies=w.enemies.filter(func(t):return t.id!=a.id and not t.done and not t.flee and t.hp>0) if enemy else [w.keeper]+w.animals.filter(func(t):return t.id!=a.id and w.Orders.active(w,t))
+	if enemy and allies.is_empty():return false
+	allies=allies.filter(func(t):return t.hp>0 and t.get("carrier",-1)<0 and t.get("state","")!="hidden_rest" and t.get("id",-1) not in served)
 	if allies.is_empty():
-		drink(a);a.coffee_served=[];a.coffee_rest_until=w.tick+ceili(10.0/w.DT);a.state="休む";return true
+		drink(a);a.coffee_served=[];a.coffee_rest_until=w.tick+ceili(10.0/w.DT);a.state="休む"
+		# A support unit without recipients continues to explore instead of camping forever.
+		return not enemy
 	allies.sort_custom(func(t,u):return w.distance(a.pos,t.pos)<w.distance(a.pos,u.pos) if w.distance(a.pos,t.pos)!=w.distance(a.pos,u.pos) else t.get("id",-1)<u.get("id",-1))
 	var target=allies[0];a.state="コーヒーを届ける"
 	if a.get("coffee_target",-999)!=target.get("id",-1):
@@ -118,8 +152,10 @@ static func animal_step(w,a) -> bool:
 		var helped=drink(target)
 		served.append(target.get("id",-1));a.coffee_served=served;a.coffee_wait=w.tick+ceili(1.0/w.DT)
 		w.skill_log.append({"tick":w.tick,"actor":a.id,"skill":"coffee_support","target":target.get("id",-1)})
-		if helped:w.Combat.grant(w,a,"SkillHit","coffee_support",str(target.get("id",-1)))
+		if helped:
+			w.Combat.grant(w,a,"SkillHit","coffee_support",str(target.get("id",-1)));w.PlayerEvents.add(w,"メイド：コーヒー配布","coffee:"+str(a.get("faction"))+str(a.id))
 	elif w.find_path(a.pos,target.pos).is_empty():served.append(target.get("id",-1));a.coffee_served=served
+	elif enemy:w.Progression.walk(w,a,target.pos)
 	else:ally_walk(w,a,target.pos)
 	return true
 
@@ -158,6 +194,7 @@ static func enemy_step(w,e) -> bool:
 		if w.tick-e.defeated_tick>=ceili(10.0/w.DT) or not w.enemies.any(func(d):return d.get("archetype")=="dancer" and d.hp>0 and not d.done and not d.flee):finalize(w,e)
 		return true
 	if e.flee or e.hp<=0:return false
+	if e.archetype=="maid":return maid_step(w,e,true)
 	if e.archetype=="dancer":
 		var downed=w.enemies.filter(func(t):return t.id!=e.id and t.get("revivable",false) and not t.get("revived",false) and w.distance(e.pos,t.pos)<=3 and w.line_of_sight(e.pos,t.pos))
 		downed.sort_custom(func(a,b):return a.archetype=="martial_artist" if (a.archetype=="martial_artist")!=(b.archetype=="martial_artist") else a.id<b.id)
@@ -166,13 +203,18 @@ static func enemy_step(w,e) -> bool:
 			w.Combat.ai_use(w,e,REVIVE,{"conditions":{"ally_downed":true},"tactical_score":1.0,"priority_target":target.archetype=="martial_artist"},func():
 				if not w.walkable(target.pos) or (w.keeper.placed and w.keeper.pos==target.pos) or w.animals.any(func(a):return a.placed and a.pos==target.pos) or w.enemies.any(func(a):return a.id!=target.id and not a.done and a.pos==target.pos):return false
 				target.hp=mini(target.max_hp,e.hp);target.downed=false;target.revivable=false;target.revived=true;target.flee=false;target.action_id="idle";target.state="復活";target.next_attack=w.tick+4
+				w.PlayerEvents.add(w,target.name+"が復活")
 				return true)
 		var friends=w.enemies.filter(func(t):return t.id!=e.id and not t.done and not t.flee and t.hp>0 and w.distance(e.pos,t.pos)<=3 and w.line_of_sight(e.pos,t.pos))
-		if not friends.is_empty():
-			for t in friends:t.dance_until=w.tick+2
-			e.action_id="fan_raise" if (w.tick/4)%2==0 else "fan_spread";e.state="舞う"
-			var close=w.animals.any(func(a):return a.placed and a.hp>0 and w.distance(a.pos,e.pos)<=1) or w.distance(w.keeper.pos,e.pos)<=1
-			if not close:return true
+		var close=w.animals.any(func(a):return a.placed and a.hp>0 and w.distance(a.pos,e.pos)<=1 and w.line_of_sight(a.pos,e.pos)) or (w.Life.targetable(w) and w.distance(w.keeper.pos,e.pos)<=1 and w.line_of_sight(e.pos,w.keeper.pos))
+		if not close and w.tick<e.get("dancing_until",0):
+			e.action_id="fan_raise" if (w.tick%4)<2 else "fan_spread";e.state="舞う";return true
+		if not close and not friends.is_empty() and w.tick>=e.get("dance_at",0) and w.Combat.pay(e,"skill"):
+			e.dancing_until=w.tick+ceili(w.ProgressData.EnemySkills.TUNING.dance_duration/w.DT)
+			e.dance_at=w.tick+ceili(w.ProgressData.EnemySkills.get_skill("dance").Cooldown/w.DT)
+			for t in friends:t.dance_until=w.tick+ceili(w.ProgressData.EnemySkills.TUNING.dance_buff/w.DT)
+			e.action_id="fan_raise";e.state="舞う";w.PlayerEvents.add(w,"舞姫：舞");return true
+
 	if e.archetype!="thief":return false
 	if not e.get("stolen",{}).is_empty():
 		e.state="盗品を持って退却";e.action_id="steal"
@@ -182,6 +224,7 @@ static func enemy_step(w,e) -> bool:
 	var targets=w.Progression.target_candidates(w,e).filter(func(t):return t.kind in ["keeper","animal"] and w.distance(e.pos,t.pos)<=5)
 	if not targets.is_empty() and w.tick>=e.get("poison_at",0) and w.Combat.pay(e,"skill"):
 		e.poison_fired=w.tick;e.poison_at=w.tick+ceili(8.0/w.DT);e.action_id="poison_windup";e.poison_visual_until=w.tick+3;e.poison_target=targets[0].pos;e.state="毒を投げる"
+		w.PlayerEvents.add(w,"盗賊：毒瓶")
 		for a in [w.keeper]+w.animals:
 			if a.hp>0 and a.get("placed",true) and w.distance(a.pos,targets[0].pos)<=1 and w.line_of_sight(targets[0].pos,a.pos):a.poison_until=w.tick+ceili(5.0/w.DT);a.poison_source=e.id
 		return true
@@ -191,7 +234,9 @@ static func enemy_step(w,e) -> bool:
 	if not items.is_empty():
 		var item=items[0]
 		e.action_id="steal";e.state="盗みに向かう"
-		if w.distance(e.pos,item.pos)<=1:e.stolen=item.duplicate(true);w.field_items.erase(item)
+		if w.distance(e.pos,item.pos)<=1:
+			e.stolen=item.duplicate(true);w.field_items.erase(item)
+			w.PlayerEvents.add(w,"盗賊が"+w.Shop.table().get(item.kind,{}).get("Name",item.kind)+"を盗んだ")
 		else:w.Progression.walk(w,e,item.pos)
 		return true
 	return false
