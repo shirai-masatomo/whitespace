@@ -1,0 +1,23 @@
+{
+  "date": "2026-10-07",
+  "user_confirmation": "OKです。",
+  "status": "direction_approved",
+  "approved_designs": [
+    "maid",
+    "dancer",
+    "thief",
+    "kokeshi"
+  ],
+  "dancer": "The displayed phoenix-inspired costume and fans are approved. Previously approved face and body remain unchanged.",
+  "constraints": [
+    "Preserve the approved black braided twin tails, raised rage braids and separate red aura.",
+    "Preserve the white-haired thief and obscured kokeshi face.",
+    "Do not regenerate other approved designs without a concrete need.",
+    "Approval does not make concept keyposes finished runtime animations."
+  ],
+  "remaining": [
+    "Formal native-resolution polish and revised special-action sequences.",
+    "Runtime integration and isolated rendering validation by implementation task.",
+    "Golden-idol A/B final selection is still unspecified; this four-design approval does not select one."
+  ]
+}

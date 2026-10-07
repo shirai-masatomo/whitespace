@@ -98,3 +98,18 @@ for f in sorted((D/'preview').glob('*.png')):manifest['review_assets'].append({'
 print('saved',D)
 
 
+
+# Approval metadata is independent of the historical generation/extraction step.
+if (D/'ADOPTION.json').exists():
+ approval=json.loads((D/'ADOPTION.json').read_text(encoding='utf-8'))
+ manifest['status']=approval['status'];manifest['provisional_dancer']=False
+ manifest['adoption_record']='ADOPTION.json';manifest['approved_at']=approval['date']
+ manifest['remaining']=approval['remaining']
+ for asset in manifest['review_assets']:
+  if asset['file'].startswith('candidates/'):
+   asset['status']='approved_design_keypose';asset['runtime_ready']=False
+ (D/'manifest.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+ qa=json.loads((D/'QA.json').read_text(encoding='utf-8'))
+ qa['design_approval']=approval['date']+': all four v2 revised directions accepted, including displayed phoenix dancer.'
+ qa['not_verified']=[x for x in qa['not_verified'] if x!='dancer interpretation confirmed']
+ (D/'QA.json').write_text(json.dumps(qa,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')

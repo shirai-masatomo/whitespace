@@ -2,7 +2,7 @@
   "schema_version": 1,
   "delivery": "ui_world_direction_v2",
   "branch": "codex/sporehollow-art-assets",
-  "status": "revision_review",
+  "status": "direction_approved",
   "assets": [],
   "review_assets": [
     {
@@ -25,7 +25,7 @@
       "frame_duration_ms": null,
       "loop": false,
       "runtime_ready": false,
-      "status": "revision_review",
+      "status": "approved_design_keypose",
       "source_bbox": [
         174,
         9,
@@ -65,7 +65,7 @@
       "frame_duration_ms": null,
       "loop": false,
       "runtime_ready": false,
-      "status": "revision_review",
+      "status": "approved_design_keypose",
       "source_bbox": [
         722,
         11,
@@ -105,7 +105,7 @@
       "frame_duration_ms": null,
       "loop": false,
       "runtime_ready": false,
-      "status": "revision_review",
+      "status": "approved_design_keypose",
       "source_bbox": [
         68,
         665,
@@ -145,7 +145,7 @@
       "frame_duration_ms": null,
       "loop": false,
       "runtime_ready": false,
-      "status": "revision_review",
+      "status": "approved_design_keypose",
       "source_bbox": [
         59,
         25,
@@ -185,7 +185,7 @@
       "frame_duration_ms": null,
       "loop": false,
       "runtime_ready": false,
-      "status": "revision_review",
+      "status": "approved_design_keypose",
       "source_bbox": [
         773,
         112,
@@ -225,7 +225,7 @@
       "frame_duration_ms": null,
       "loop": false,
       "runtime_ready": false,
-      "status": "revision_review",
+      "status": "approved_design_keypose",
       "source_bbox": [
         1491,
         16,
@@ -265,7 +265,7 @@
       "frame_duration_ms": null,
       "loop": false,
       "runtime_ready": false,
-      "status": "provisional_phoenix_interpretation",
+      "status": "approved_design_keypose",
       "source_bbox": [
         25,
         180,
@@ -305,7 +305,7 @@
       "frame_duration_ms": null,
       "loop": false,
       "runtime_ready": false,
-      "status": "provisional_phoenix_interpretation",
+      "status": "approved_design_keypose",
       "source_bbox": [
         372,
         97,
@@ -345,7 +345,7 @@
       "frame_duration_ms": null,
       "loop": false,
       "runtime_ready": false,
-      "status": "provisional_phoenix_interpretation",
+      "status": "approved_design_keypose",
       "source_bbox": [
         720,
         103,
@@ -385,7 +385,7 @@
       "frame_duration_ms": null,
       "loop": false,
       "runtime_ready": false,
-      "status": "revision_review",
+      "status": "approved_design_keypose",
       "notes": "Alpha160, separate overlay. Draw aura then body at identical anchor; no screen flash. Timing follows future game state.",
       "sha256": "b4759ecb2bfea1d8bf8eb5341c642fb675d2160f4d6bf82f37a4e04c9deeebf8",
       "visible_bbox_exclusive": [
@@ -419,7 +419,7 @@
       "frame_duration_ms": null,
       "loop": false,
       "runtime_ready": false,
-      "status": "revision_review",
+      "status": "approved_design_keypose",
       "notes": "Dirt obscures facial expression; no eyes or mouth repainted.",
       "sha256": "934058d4aca44e0bd0fe7b1b89a31d45b8560d2c2405cdfcf247fd054951297d",
       "visible_bbox_exclusive": [
@@ -484,7 +484,7 @@
     "ui_world_direction_v1/candidates/new/thief.png",
     "ui_world_direction_v1/candidates/new/kokeshi.png"
   ],
-  "provisional_dancer": true,
+  "provisional_dancer": false,
   "approved_unchanged": "All other v1 directions accepted by user. Golden-idol A/B selection not explicitly specified.",
   "rendering": {
     "RGBA": true,
@@ -494,9 +494,11 @@
     "baked_ground_shadow": false
   },
   "remaining": [
-    "Dancer intended meaning confirmation pending; phoenix is a stated working assumption.",
-    "Full revised Coffee/Dance/steal/poison/rage animations not produced; v1 sequence remains narrative-only.",
-    "No gameplay integration or rendering verification."
+    "Formal native-resolution polish and revised special-action sequences.",
+    "Runtime integration and isolated rendering validation by implementation task.",
+    "Golden-idol A/B final selection is still unspecified; this four-design approval does not select one."
   ],
-  "sources": "../../art-production/ui-world-direction-v2/generation-records.json"
+  "sources": "../../art-production/ui-world-direction-v2/generation-records.json",
+  "adoption_record": "ADOPTION.json",
+  "approved_at": "2026-10-07"
 }
