@@ -1,0 +1,212 @@
+[
+  {
+    "source": "art-production/ui-world-direction-v2/originals/maid_revision.png",
+    "bbox": [
+      722,
+      11,
+      1272,
+      631
+    ],
+    "opaque_pixels": 163396
+  },
+  {
+    "source": "art-production/ui-world-direction-v2/originals/maid_revision.png",
+    "bbox": [
+      68,
+      665,
+      720,
+      1180
+    ],
+    "opaque_pixels": 158073
+  },
+  {
+    "source": "art-production/ui-world-direction-v2/originals/maid_revision.png",
+    "bbox": [
+      174,
+      9,
+      544,
+      629
+    ],
+    "opaque_pixels": 128256
+  },
+  {
+    "source": "art-production/ui-world-direction-v2/originals/maid_revision.png",
+    "bbox": [
+      779,
+      762,
+      986,
+      1172
+    ],
+    "opaque_pixels": 21663
+  },
+  {
+    "source": "art-production/ui-world-direction-v2/originals/dancer_revision.png",
+    "bbox": [
+      720,
+      103,
+      1058,
+      812
+    ],
+    "opaque_pixels": 157314
+  },
+  {
+    "source": "art-production/ui-world-direction-v2/originals/dancer_revision.png",
+    "bbox": [
+      372,
+      97,
+      720,
+      810
+    ],
+    "opaque_pixels": 126978
+  },
+  {
+    "source": "art-production/ui-world-direction-v2/originals/dancer_revision.png",
+    "bbox": [
+      1085,
+      211,
+      1506,
+      813
+    ],
+    "opaque_pixels": 118358
+  },
+  {
+    "source": "art-production/ui-world-direction-v2/originals/dancer_revision.png",
+    "bbox": [
+      25,
+      180,
+      337,
+      809
+    ],
+    "opaque_pixels": 109721
+  },
+  {
+    "source": "art-production/ui-world-direction-v2/originals/dancer_revision.png",
+    "bbox": [
+      1467,
+      184,
+      1762,
+      808
+    ],
+    "opaque_pixels": 104765
+  },
+  {
+    "source": "art-production/ui-world-direction-v2/originals/thief_revision.png",
+    "bbox": [
+      773,
+      112,
+      1331,
+      689
+    ],
+    "opaque_pixels": 212957
+  },
+  {
+    "source": "art-production/ui-world-direction-v2/originals/thief_revision.png",
+    "bbox": [
+      59,
+      25,
+      633,
+      689
+    ],
+    "opaque_pixels": 188395
+  },
+  {
+    "source": "art-production/ui-world-direction-v2/originals/thief_revision.png",
+    "bbox": [
+      1491,
+      16,
+      2136,
+      688
+    ],
+    "opaque_pixels": 188172
+  },
+  {
+    "source": "art-production/two-direction-review-v1/originals/maid_supplement.png",
+    "bbox": [
+      596,
+      677,
+      1222,
+      1249
+    ],
+    "opaque_pixels": 170050
+  },
+  {
+    "source": "art-production/two-direction-review-v1/originals/maid_supplement.png",
+    "bbox": [
+      640,
+      8,
+      1215,
+      629
+    ],
+    "opaque_pixels": 169638
+  },
+  {
+    "source": "art-production/two-direction-review-v1/originals/maid_supplement.png",
+    "bbox": [
+      91,
+      8,
+      565,
+      629
+    ],
+    "opaque_pixels": 130284
+  },
+  {
+    "source": "art-production/two-direction-review-v1/originals/maid_supplement.png",
+    "bbox": [
+      111,
+      647,
+      455,
+      1262
+    ],
+    "opaque_pixels": 126121
+  },
+  {
+    "source": "art-production/two-direction-review-v1/originals/dancer_supplement.png",
+    "bbox": [
+      24,
+      73,
+      775,
+      966
+    ],
+    "opaque_pixels": 295427
+  },
+  {
+    "source": "art-production/two-direction-review-v1/originals/dancer_supplement.png",
+    "bbox": [
+      714,
+      198,
+      1531,
+      955
+    ],
+    "opaque_pixels": 287639
+  },
+  {
+    "source": "art-production/two-direction-review-v1/originals/thief_supplement.png",
+    "bbox": [
+      1171,
+      34,
+      2074,
+      688
+    ],
+    "opaque_pixels": 221933
+  },
+  {
+    "source": "art-production/two-direction-review-v1/originals/thief_supplement.png",
+    "bbox": [
+      105,
+      55,
+      1087,
+      684
+    ],
+    "opaque_pixels": 221310
+  },
+  {
+    "source": "art-production/two-direction-review-v1/originals/cow_supplement.png",
+    "bbox": [
+      83,
+      139,
+      1326,
+      1022
+    ],
+    "opaque_pixels": 597819
+  }
+]

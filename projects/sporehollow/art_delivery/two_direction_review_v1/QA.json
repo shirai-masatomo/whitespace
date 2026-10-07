@@ -1,0 +1,22 @@
+{
+  "date": "2026-10-08",
+  "direction_sheets": 6,
+  "representative_poses": 29,
+  "prior_pngs_unchanged": 1095,
+  "errors": [],
+  "checks": [
+    "All bodies RGBA alpha0/255",
+    "Exact adopted right PNGs unchanged",
+    "Mirrored left PNGs same size and baseline",
+    "Foot bottom equals anchor y",
+    "All direction values right or left",
+    "All PNG hashes match",
+    "Source screenshot grass comparison and native/light/dark visual inspection"
+  ],
+  "not_claimed": [
+    "Motion completeness",
+    "In-game integration",
+    "Runtime render verification",
+    "User adoption of these sheets"
+  ]
+}
