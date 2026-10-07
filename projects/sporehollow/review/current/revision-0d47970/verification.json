@@ -1,0 +1,168 @@
+{
+  "final_sha_checks": 435,
+  "windows_export": true,
+  "ai_seeds": 2,
+  "suites": [
+    {
+      "run": "20261008-020316-460",
+      "final_implementation": false,
+      "passed": true,
+      "suite": "revisions"
+    },
+    {
+      "run": "20261008-020316-460",
+      "final_implementation": false,
+      "passed": true,
+      "suite": "residents"
+    },
+    {
+      "run": "20261008-021449-061",
+      "final_implementation": true,
+      "passed": true,
+      "suite": "world"
+    },
+    {
+      "run": "20261008-020316-460",
+      "final_implementation": false,
+      "passed": true,
+      "suite": "jobs"
+    },
+    {
+      "run": "20261008-021449-061",
+      "final_implementation": true,
+      "passed": true,
+      "suite": "keeper"
+    },
+    {
+      "run": "20261008-021449-061",
+      "final_implementation": true,
+      "passed": true,
+      "suite": "planning"
+    },
+    {
+      "run": "20261008-020639-416",
+      "final_implementation": false,
+      "passed": true,
+      "suite": "rest_until"
+    },
+    {
+      "run": "20261008-020639-416",
+      "final_implementation": false,
+      "passed": true,
+      "suite": "input"
+    },
+    {
+      "run": "20261008-020639-416",
+      "final_implementation": false,
+      "passed": true,
+      "suite": "controls"
+    },
+    {
+      "run": "20261008-020639-416",
+      "final_implementation": false,
+      "passed": true,
+      "suite": "building_art"
+    },
+    {
+      "run": "20261008-020639-416",
+      "final_implementation": false,
+      "passed": true,
+      "suite": "delivered_art"
+    },
+    {
+      "run": "20261008-020639-416",
+      "final_implementation": false,
+      "passed": true,
+      "suite": "progression_art"
+    },
+    {
+      "run": "20261008-020639-416",
+      "final_implementation": false,
+      "passed": true,
+      "suite": "idol_debug"
+    },
+    {
+      "run": "20261008-021449-061",
+      "final_implementation": true,
+      "passed": true,
+      "suite": "ranch_content"
+    },
+    {
+      "run": "20261008-020639-416",
+      "final_implementation": false,
+      "passed": true,
+      "suite": "ranch_content_ui"
+    },
+    {
+      "run": "20261008-021449-061",
+      "final_implementation": true,
+      "passed": true,
+      "suite": "quality"
+    },
+    {
+      "run": "20261008-021449-061",
+      "final_implementation": true,
+      "passed": true,
+      "suite": "quality_ui"
+    },
+    {
+      "run": "20261008-020639-416",
+      "final_implementation": false,
+      "passed": true,
+      "suite": "market_ui"
+    },
+    {
+      "run": "20261008-020639-416",
+      "final_implementation": false,
+      "passed": true,
+      "suite": "story"
+    },
+    {
+      "run": "20261008-020857-209",
+      "final_implementation": false,
+      "passed": true,
+      "suite": "story_ui"
+    },
+    {
+      "run": "20261008-021449-061",
+      "final_implementation": true,
+      "passed": true,
+      "suite": "progression"
+    },
+    {
+      "run": "20261008-020857-209",
+      "final_implementation": false,
+      "passed": true,
+      "suite": "progression_flow"
+    },
+    {
+      "run": "20261008-020857-209",
+      "final_implementation": false,
+      "passed": true,
+      "suite": "progression_ui"
+    },
+    {
+      "run": "20261008-020857-209",
+      "final_implementation": false,
+      "passed": true,
+      "suite": "combat_revision"
+    },
+    {
+      "run": "20261008-020857-209",
+      "final_implementation": false,
+      "passed": true,
+      "suite": "ui_revision"
+    }
+  ],
+  "ai_is_statistical_balance_test": false,
+  "isolated_gpu_checks": 19,
+  "asset_delivery_commit": "a34390e584037cef78c9f49dcec4b18bd44f6f3d",
+  "ai_runs": 12,
+  "final_sha_suites": 7,
+  "user_desktop_launched": false,
+  "related_suites_total": 25,
+  "windows_headless_smoke": true,
+  "implementation_commit": "0d47970eb10c707d51c60ea9b961e4781f21f215",
+  "screenshots": 5,
+  "note": "Related suites passed across staged implementation runs. Final affected recovery/combat/UI suites rerun on clean implementation SHA. Prior immediate-recovery and fixed-tree-count fixture failures repaired; no AI192."
+}

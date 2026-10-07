@@ -1,0 +1,234 @@
+{
+  "asset_delivery_commit": "a34390e584037cef78c9f49dcec4b18bd44f6f3d",
+  "captures": [
+    {
+      "animal_id": -1,
+      "book": "",
+      "file": "05_inventory.png",
+      "group": 2,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": -1,
+      "book": "",
+      "file": "02_book_eight_slots.png",
+      "group": 2,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": 8,
+      "book": "",
+      "file": "03_enemy_skill_hover.png",
+      "group": 2,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": 8,
+      "book": "",
+      "file": "01_forest_humans.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": 8,
+      "book": "",
+      "file": "04_hidden_rest_event_log.png",
+      "group": 2,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    }
+  ],
+  "checks": [
+    {
+      "check": "Digit sets speed only: 49",
+      "passed": true
+    },
+    {
+      "check": "Digit sets speed only: 50",
+      "passed": true
+    },
+    {
+      "check": "Digit sets speed only: 51",
+      "passed": true
+    },
+    {
+      "check": "Digit sets speed only: 4194439",
+      "passed": true
+    },
+    {
+      "check": "Digit sets speed only: 4194440",
+      "passed": true
+    },
+    {
+      "check": "Digit sets speed only: 4194441",
+      "passed": true
+    },
+    {
+      "check": "Unavailable 4x leaves speed unchanged",
+      "passed": true
+    },
+    {
+      "check": "Rest permits keypad 4x",
+      "passed": true
+    },
+    {
+      "check": "Danger overrides high speed",
+      "passed": true
+    },
+    {
+      "check": "UI exists: inventory",
+      "passed": true
+    },
+    {
+      "check": "Inventory is paused read-only and not a job",
+      "passed": true
+    },
+    {
+      "check": "Inventory blocks world shortcuts",
+      "passed": true
+    },
+    {
+      "check": "Inventory closes through modal boundary",
+      "passed": true
+    },
+    {
+      "check": "UI exists: keeper_book",
+      "passed": true
+    },
+    {
+      "check": "Field book reuses existing UI without phase/job mutation",
+      "passed": true
+    },
+    {
+      "check": "UI exists: book_enemies",
+      "passed": true
+    },
+    {
+      "check": "Enemy skill hover comes from shared definition",
+      "passed": true
+    },
+    {
+      "check": "Book blocks world speed and time",
+      "passed": true
+    },
+    {
+      "check": "Closing field book preserves prior pause and phase",
+      "passed": true
+    }
+  ],
+  "events": [
+    {
+      "echo": false,
+      "key": 49,
+      "shift": false,
+      "tick": 0
+    },
+    {
+      "echo": false,
+      "key": 50,
+      "shift": false,
+      "tick": 0
+    },
+    {
+      "echo": false,
+      "key": 51,
+      "shift": false,
+      "tick": 0
+    },
+    {
+      "echo": false,
+      "key": 4194439,
+      "shift": false,
+      "tick": 0
+    },
+    {
+      "echo": false,
+      "key": 4194440,
+      "shift": false,
+      "tick": 0
+    },
+    {
+      "echo": false,
+      "key": 4194441,
+      "shift": false,
+      "tick": 0
+    },
+    {
+      "echo": false,
+      "key": 52,
+      "shift": false,
+      "tick": 0
+    },
+    {
+      "echo": false,
+      "key": 4194442,
+      "shift": false,
+      "tick": 0
+    },
+    {
+      "button": 1,
+      "ctrl": false,
+      "mouse": [
+        838.0,
+        726.0
+      ],
+      "tick": 0
+    },
+    {
+      "echo": false,
+      "key": 51,
+      "shift": false,
+      "tick": 0
+    },
+    {
+      "echo": false,
+      "key": 4194305,
+      "shift": false,
+      "tick": 0
+    },
+    {
+      "button": 1,
+      "ctrl": false,
+      "mouse": [
+        715.0,
+        726.0
+      ],
+      "tick": 0
+    },
+    {
+      "button": 1,
+      "ctrl": false,
+      "mouse": [
+        532.0,
+        138.0
+      ],
+      "tick": 0
+    },
+    {
+      "echo": false,
+      "key": 49,
+      "shift": false,
+      "tick": 0
+    },
+    {
+      "button": 2,
+      "ctrl": false,
+      "mouse": [
+        700.0,
+        500.0
+      ],
+      "tick": 0
+    }
+  ],
+  "implementation_commit": "0d47970eb10c707d51c60ea9b961e4781f21f215",
+  "method": "Isolated real input; controlled actor positions and knowledge, paused render fixture. Simulation covered by test_quality."
+}

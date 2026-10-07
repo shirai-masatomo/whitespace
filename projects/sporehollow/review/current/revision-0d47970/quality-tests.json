@@ -1,0 +1,340 @@
+{
+  "capture_grace": 12.0,
+  "checks": [
+    {
+      "check": "Shared enemy skill fields: abduct_keeper",
+      "passed": true
+    },
+    {
+      "check": "Shared enemy skill fields: iron_ball",
+      "passed": true
+    },
+    {
+      "check": "Shared enemy skill fields: bow",
+      "passed": true
+    },
+    {
+      "check": "Shared enemy skill fields: nonlethal",
+      "passed": true
+    },
+    {
+      "check": "Shared enemy skill fields: phone",
+      "passed": true
+    },
+    {
+      "check": "Shared enemy skill fields: shuriken",
+      "passed": true
+    },
+    {
+      "check": "Shared enemy skill fields: tame",
+      "passed": true
+    },
+    {
+      "check": "Shared enemy skill fields: lead",
+      "passed": true
+    },
+    {
+      "check": "Shared enemy skill fields: fatigue",
+      "passed": true
+    },
+    {
+      "check": "Shared enemy skill fields: companion",
+      "passed": true
+    },
+    {
+      "check": "Shared enemy skill fields: intercept",
+      "passed": true
+    },
+    {
+      "check": "Shared enemy skill fields: dance",
+      "passed": true
+    },
+    {
+      "check": "Shared enemy skill fields: resurrection",
+      "passed": true
+    },
+    {
+      "check": "Shared enemy skill fields: poison",
+      "passed": true
+    },
+    {
+      "check": "Shared enemy skill fields: steal",
+      "passed": true
+    },
+    {
+      "check": "Shared enemy skill fields: coffee_support",
+      "passed": true
+    },
+    {
+      "check": "Shared enemy skill fields: rage",
+      "passed": true
+    },
+    {
+      "check": "Dance starts a bounded action with CT",
+      "passed": true
+    },
+    {
+      "check": "After dance hold, common AI runs even with allies present",
+      "passed": true
+    },
+    {
+      "check": "Adjacent opponent takes priority over another dance",
+      "passed": true
+    },
+    {
+      "check": "Dancer actually uses fan melee",
+      "passed": true
+    },
+    {
+      "check": "100 percent fixture triggers phone on damage",
+      "passed": true
+    },
+    {
+      "check": "Phone ends and schedules reinforcement",
+      "passed": true
+    },
+    {
+      "check": "Daytime reinforcement arrives without encounter schedule",
+      "passed": true
+    },
+    {
+      "check": "Reinforcement starts beyond outer forest",
+      "passed": true
+    },
+    {
+      "check": "Reinforcement physically enters then runs normal AI",
+      "passed": true
+    },
+    {
+      "check": "Reinforcement chain cap stays four",
+      "passed": true
+    },
+    {
+      "check": "Enemy maid gives coffee only to her faction",
+      "passed": true
+    },
+    {
+      "check": "Maid removed from normal shop",
+      "passed": true
+    },
+    {
+      "check": "Maid is recruitable ordinary enemy",
+      "passed": true
+    },
+    {
+      "check": "Same cow is not rolled repeatedly",
+      "passed": true
+    },
+    {
+      "check": "Recruit transfers to roster at same place, without duplicate actor",
+      "passed": true
+    },
+    {
+      "check": "Recruited maid reuses player-side coffee",
+      "passed": true
+    },
+    {
+      "check": "Enemy rage activates but never attacks cow",
+      "passed": true
+    },
+    {
+      "check": "Knockout remains capturable but not a combat target",
+      "passed": true
+    },
+    {
+      "check": "Capture grace is not removed early",
+      "passed": true
+    },
+    {
+      "check": "Uncaptured keeper enters hidden recovery after grace",
+      "passed": true
+    },
+    {
+      "check": "Hidden recovery rejects damage",
+      "passed": true
+    },
+    {
+      "check": "Pause freezes hidden recovery",
+      "passed": true
+    },
+    {
+      "check": "Hidden recovery is one HP per six seconds",
+      "passed": true
+    },
+    {
+      "check": "Recovery restores low HP and explicit work resume",
+      "passed": true
+    },
+    {
+      "check": "Damage activates rescue over player target",
+      "passed": true
+    },
+    {
+      "check": "Explicit rest still suppresses rescue",
+      "passed": true
+    },
+    {
+      "check": "AI audit: ordinary action continues without keeper: destroyer",
+      "passed": true
+    },
+    {
+      "check": "Hidden keeper is not selected: destroyer",
+      "passed": true
+    },
+    {
+      "check": "AI audit: ordinary action continues without keeper: martial_artist",
+      "passed": true
+    },
+    {
+      "check": "Hidden keeper is not selected: martial_artist",
+      "passed": true
+    },
+    {
+      "check": "AI audit: ordinary action continues without keeper: salaryman",
+      "passed": true
+    },
+    {
+      "check": "Hidden keeper is not selected: salaryman",
+      "passed": true
+    },
+    {
+      "check": "AI audit: ordinary action continues without keeper: ninja",
+      "passed": true
+    },
+    {
+      "check": "Hidden keeper is not selected: ninja",
+      "passed": true
+    },
+    {
+      "check": "AI audit: ordinary action continues without keeper: animal_tamer",
+      "passed": true
+    },
+    {
+      "check": "Hidden keeper is not selected: animal_tamer",
+      "passed": true
+    },
+    {
+      "check": "AI audit: ordinary action continues without keeper: runner",
+      "passed": true
+    },
+    {
+      "check": "Hidden keeper is not selected: runner",
+      "passed": true
+    },
+    {
+      "check": "AI audit: ordinary action continues without keeper: dancer",
+      "passed": true
+    },
+    {
+      "check": "Hidden keeper is not selected: dancer",
+      "passed": true
+    },
+    {
+      "check": "AI audit: ordinary action continues without keeper: thief",
+      "passed": true
+    },
+    {
+      "check": "Hidden keeper is not selected: thief",
+      "passed": true
+    },
+    {
+      "check": "AI audit: ordinary action continues without keeper: maid",
+      "passed": true
+    },
+    {
+      "check": "Hidden keeper is not selected: maid",
+      "passed": true
+    },
+    {
+      "check": "Paused external debug spawn: maid",
+      "passed": true
+    },
+    {
+      "check": "Paused external debug spawn: dancer",
+      "passed": true
+    },
+    {
+      "check": "Paused external debug spawn: thief",
+      "passed": true
+    },
+    {
+      "check": "Paused external debug spawn: kidnapper",
+      "passed": true
+    },
+    {
+      "check": "Paused external debug spawn: destroyer",
+      "passed": true
+    },
+    {
+      "check": "Paused external debug spawn: martial_artist",
+      "passed": true
+    },
+    {
+      "check": "Paused external debug spawn: salaryman",
+      "passed": true
+    },
+    {
+      "check": "Paused external debug spawn: ninja",
+      "passed": true
+    },
+    {
+      "check": "Paused external debug spawn: animal_tamer",
+      "passed": true
+    },
+    {
+      "check": "Paused external debug spawn: runner",
+      "passed": true
+    },
+    {
+      "check": "Paused external debug spawn: doberman",
+      "passed": true
+    },
+    {
+      "check": "Player feed bounded, newest last",
+      "passed": true
+    },
+    {
+      "check": "Poison tick messages aggregate",
+      "passed": true
+    },
+    {
+      "check": "Forest deterministic clusters have minimum cardinal spacing",
+      "passed": true
+    },
+    {
+      "check": "Day to night preserves pending phone arrival delay",
+      "passed": true
+    },
+    {
+      "check": "Blocked debug entry uses another valid gate",
+      "passed": true
+    },
+    {
+      "check": "All blocked gates report failure",
+      "passed": true
+    },
+    {
+      "check": "Morning preserves partial hidden recovery instead of instant heal",
+      "passed": true
+    },
+    {
+      "check": "Following day continues the same recovery cadence",
+      "passed": true
+    }
+  ],
+  "hidden_heal_seconds": 6.0,
+  "hidden_recover_hp": 8,
+  "reinforcement": {
+    "entry": "(19, 1)",
+    "final": "(19, 1)",
+    "origin": "(19, -24)",
+    "path_cells": 26
+  },
+  "tuning": {
+    "dance_buff": 3.0,
+    "dance_duration": 1.0,
+    "maid_first_day": 11,
+    "maid_recruit_chance": 0.05,
+    "maid_recruit_range": 2
+  }
+}
