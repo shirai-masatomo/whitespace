@@ -1,25 +1,17 @@
-# ホイッスル牧場 — A〜F 定点レビュー（2026-10-07）
+# ホイッスル牧場 — 採用画像/G〜M 定点（2026-10-08）
 
-実装 **30207f2fa1ca73991e48473907cbd7315aaebe52**、素材 **5ac00e72c4036799de89f598c0374aa8efcf8549**。開始HEAD17bb527から更新。後続のレビュー保存コミットはゲーム内容を変えない。
+実装 **f6a60ee525cbe63d962a06280a7d7a9533d69d66**、ゲーム変更 **377090cd89971f2147ee224fb964afe2f3884303**、素材 **a34390e584037cef78c9f49dcec4b18bd44f6f3d**。f6a60eeは撮影フィクスチャの位置調整のみ。後続のレビュー保存コミットはゲーム内容を変えない。
 
-起動は **[Play.cmd](../../Play.cmd)**。ESCの版表示 `30207f2`、[配布EXEと素材の対応](revision-30207f2/build.json)。ユーザー版が起動していないことを確認して差し替えた。自動GUI起動・ユーザーのゲーム停止・通常セーブ変更なし。
+起動は **[Play.cmd](../../Play.cmd)**。ESCの版表示 `f6a60ee`。[EXE・SHA対応](revision-f6a60ee/build.json)。検証済みWindows版へ更新済み、自動起動はしていない。
 
-- [代表10画面](revision-30207f2/SCREENS.md) / [ギャラリー](revision-30207f2/index.html)
-- [今回の変更・仮決定・残る差](revision-30207f2/REVIEW.md)
-- [入力と画面観察](revision-30207f2/ui-revision.json) / [非対話GPU監査](revision-30207f2/isolation.json)
-- [検証範囲と各ログ](revision-30207f2/verification.json) / [限定AI12試行](revision-30207f2/evaluation.json)
-- [採用UI素材の参照・ハッシュ](revision-30207f2/asset-usage.json)
+- [代表3画面](revision-f6a60ee/SCREENS.md)
+- [変更・仮決定・未完了](revision-f6a60ee/REVIEW.md)
+- [実入力/画面観察](revision-f6a60ee/observations.json) / [非対話GPU監査](revision-f6a60ee/isolation.json)
+- [検証範囲](revision-f6a60ee/verification.json) / [ログ](revision-f6a60ee/logs)
+- [採用素材・SHA256](../../game/direction_receipt.json) / [正式モーション](../../game/motion_receipt.json)
 
-## 今回の操作
+鉄球/構え/蹴り/飛翔部品、森、6種Portrait、レアリティ/スキル画像を接続。メイド・舞姫・盗賊・乳牛・闘牛、こけし・化石を実装。新規5キャラクターは納品済み静止画/キーポーズを使用し、未納品の連続動作を完成扱いにしない。恐竜復活は保留。
 
-Tabで建設→指示→牧場主。Shiftはサブタスクを選ぶだけ。ホイールはカーソル付近のズーム。ニュートラルの左ドラッグはパン、各モードのドラッグは建物/動物/回収物を最大8対象選択する。牧場主の地面左クリックは最大8件のFIFO移動Job。予定上の右クリックはそのJobIDだけ取消、予定がなければ選択解除。UI・入力欄を優先する。
+23スイート、限定AI12試行、関連113検査、隔離GPU20検査/3PNG、Windows出力/headless起動を確認。AIは統計的バランス評価ではない。画像は制御フィクスチャで、人間の通しプレイ記録ではない。
 
-## 実装と未完了の区別
-
-朝/商人/図鑑、共有紹介文、Rarity、森外からの実移動、道具なし伐採禁止を更新。個体技ゲージ/READY・人間スタミナ・レベル差分・犬「狙う」・舌のスタミナ低下を既存処理へ統合した。G〜Mは正本登録だけ。
-
-**正式黄金像・高解像度Portraitは素材不足**。新敵6/動物3の正式idleはUI取り込み済み、盤面の正式モーションは取り込み待ち。現在の種の必殺技効果は未設定で、READYから新技を勝手に発動しない。これらまで完成とは扱わない。
-
-関連変更ごとに既存17＋追加2スイートを分割確認。定点のclean版で追加131検査、隔離GPU105入力検査/10PNG、Windows出力と専用データheadless smokeを確認。AI12試行は完走・救出・明示休息抑制の限定確認で、勝率評価ではない。物理キーボード/IME、数日自由試遊、配布EXEのGPU描画そのものは未確認（GPUは同一SHAのプロジェクト描画）。
-
-以前の画像・ログは比較用に保持し、今回の証拠には流用しない。[過去版の索引](HISTORY-before-30207f2.md)。今回は不要な大量移動・削除を行っていない。
+過去の通常操作/UI証拠は[前定点](HISTORY-before-f6a60ee.md)に保持。現在のTab/Shift/Wheel・朝昼夜・既存ゲーム操作は維持。以前の画像を今回の証拠には流用していない。

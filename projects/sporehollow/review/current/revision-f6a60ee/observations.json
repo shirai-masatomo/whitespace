@@ -1,0 +1,182 @@
+{
+  "asset_delivery_commit": "a34390e584037cef78c9f49dcec4b18bd44f6f3d",
+  "captures": [
+    {
+      "animal_id": -1,
+      "book": "",
+      "file": "01_residents_forest_placeables.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": 1,
+      "book": "",
+      "file": "02_portrait_rarity_skill.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": -1,
+      "book": "",
+      "file": "03_battle_keyposes_formal_motion.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    }
+  ],
+  "checks": [
+    {
+      "check": "New character purchased through existing transaction: maid",
+      "passed": true
+    },
+    {
+      "check": "New character purchased through existing transaction: cow",
+      "passed": true
+    },
+    {
+      "check": "New character purchased through existing transaction: bull",
+      "passed": true
+    },
+    {
+      "check": "All new companions are real residents",
+      "passed": true
+    },
+    {
+      "check": "Friendly human is not sale inventory",
+      "passed": true
+    },
+    {
+      "check": "Click selects cow using its visible body",
+      "passed": true
+    },
+    {
+      "check": "Choosing milk without activation does not queue",
+      "passed": true
+    },
+    {
+      "check": "Button exists: milk",
+      "passed": true
+    },
+    {
+      "check": "Explicit milk button reserves only, paused",
+      "passed": true
+    },
+    {
+      "check": "Button exists: place_kokeshi",
+      "passed": true
+    },
+    {
+      "check": "Placeable click is a reservation, not remote execution",
+      "passed": true
+    },
+    {
+      "check": "Button exists: charge",
+      "passed": true
+    },
+    {
+      "check": "Bull destination queues a local command while paused",
+      "passed": true
+    },
+    {
+      "check": "Book uses supplied Portrait, not enlarged world sprite",
+      "passed": true
+    },
+    {
+      "check": "Formal skill icon is connected",
+      "passed": true
+    },
+    {
+      "check": "Destroyer cooldown anticipates formal windup",
+      "passed": true
+    },
+    {
+      "check": "Martial holds formal stance between strikes",
+      "passed": true
+    },
+    {
+      "check": "Martial second real strike uses kick, no additional hit",
+      "passed": true
+    },
+    {
+      "check": "Ninja flight records actual target at throw",
+      "passed": true
+    },
+    {
+      "check": "UI test did not advance paused world",
+      "passed": true
+    }
+  ],
+  "dirty": "False",
+  "events": [
+    {
+      "button": 1,
+      "ctrl": false,
+      "mouse": [
+        707.200073242188,
+        458.800018310547
+      ],
+      "tick": 0
+    },
+    {
+      "button": 1,
+      "ctrl": false,
+      "mouse": [
+        327.0,
+        726.0
+      ],
+      "tick": 0
+    },
+    {
+      "button": 1,
+      "ctrl": false,
+      "mouse": [
+        422.0,
+        747.0
+      ],
+      "tick": 0
+    },
+    {
+      "button": 1,
+      "ctrl": false,
+      "mouse": [
+        572.800048828125,
+        341.200042724609
+      ],
+      "tick": 0
+    },
+    {
+      "button": 1,
+      "ctrl": false,
+      "mouse": [
+        841.60009765625,
+        458.800018310547
+      ],
+      "tick": 0
+    },
+    {
+      "button": 1,
+      "ctrl": false,
+      "mouse": [
+        831.0,
+        726.0
+      ],
+      "tick": 0
+    },
+    {
+      "button": 1,
+      "ctrl": false,
+      "mouse": [
+        1043.2001953125,
+        458.800018310547
+      ],
+      "tick": 0
+    }
+  ],
+  "implementation_commit": "f6a60ee525cbe63d962a06280a7d7a9533d69d66",
+  "method": "Current game with controlled day6/500G fixture, actual mouse inputs; battle keyposes explicitly staged. No live user data."
+}

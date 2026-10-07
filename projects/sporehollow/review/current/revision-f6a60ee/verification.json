@@ -1,0 +1,201 @@
+{
+  "implementation_commit": "f6a60ee525cbe63d962a06280a7d7a9533d69d66",
+  "game_logic_commit": "377090cd89971f2147ee224fb964afe2f3884303",
+  "asset_delivery_commit": "a34390e584037cef78c9f49dcec4b18bd44f6f3d",
+  "full_regression": [
+    {
+      "suite": "building_art",
+      "passed": true,
+      "summary": [
+        "BUILDING ART: 98 checks failures=0"
+      ]
+    },
+    {
+      "suite": "combat_revision",
+      "passed": true,
+      "summary": [
+        "Combat revision: 26 checks, 0 failures"
+      ]
+    },
+    {
+      "suite": "controls",
+      "passed": true,
+      "summary": [
+        "CONTROLS: 78 checks failures=0"
+      ]
+    },
+    {
+      "suite": "delivered_art",
+      "passed": true,
+      "summary": [
+        "DELIVERED_ART: 36 checks failures=0"
+      ]
+    },
+    {
+      "suite": "idol_debug",
+      "passed": true,
+      "summary": [
+        "IDOL_DEBUG: 63 checks, failures=0"
+      ]
+    },
+    {
+      "suite": "input",
+      "passed": true,
+      "summary": [
+        "INPUT HEADLESS: 40 checks, failures=0"
+      ]
+    },
+    {
+      "suite": "jobs",
+      "passed": true,
+      "summary": [
+        "PASS: 92 day/night and local work checks"
+      ]
+    },
+    {
+      "suite": "keeper",
+      "passed": true,
+      "summary": [
+        "KEEPER: 63 checks, failures=0"
+      ]
+    },
+    {
+      "suite": "market_ui",
+      "passed": true,
+      "summary": [
+        "MARKET_UI: 30 checks failures=0"
+      ]
+    },
+    {
+      "suite": "planning",
+      "passed": true,
+      "summary": [
+        "PLANNING: 44 checks, failures=0"
+      ]
+    },
+    {
+      "suite": "progression",
+      "passed": true,
+      "summary": [
+        "PROGRESSION: 68 checks, failures=0"
+      ]
+    },
+    {
+      "suite": "progression_art",
+      "passed": true,
+      "summary": [
+        "PROGRESSION_ART: 549 checks failures=0"
+      ]
+    },
+    {
+      "suite": "progression_flow",
+      "passed": true,
+      "summary": [
+        "PROGRESSION FLOW: 17 checks, failures=0"
+      ]
+    },
+    {
+      "suite": "progression_ui",
+      "passed": true,
+      "summary": [
+        "PROGRESSION UI: 33 checks, failures=0"
+      ]
+    },
+    {
+      "suite": "ranch_content",
+      "passed": true,
+      "summary": [
+        "RANCH_CONTENT: 93 checks, failures=0"
+      ]
+    },
+    {
+      "suite": "ranch_content_ui",
+      "passed": true,
+      "summary": [
+        "RANCH_CONTENT_UI: 20 checks, failures=0"
+      ]
+    },
+    {
+      "suite": "residents",
+      "passed": true,
+      "summary": [
+        "RESIDENTS: 76 checks, failures=0"
+      ]
+    },
+    {
+      "suite": "rest_until",
+      "passed": true,
+      "summary": [
+        "REST UNTIL: 24 checks, failures=0"
+      ]
+    },
+    {
+      "suite": "revisions",
+      "passed": true,
+      "summary": [
+        "REVISIONS: 62 checks, failures=0"
+      ]
+    },
+    {
+      "suite": "story",
+      "passed": true,
+      "summary": [
+        "STORY: 52 checks, failures=0"
+      ]
+    },
+    {
+      "suite": "story_ui",
+      "passed": true,
+      "summary": [
+        "STORY UI: 12 checks, failures=0"
+      ]
+    },
+    {
+      "suite": "ui_revision",
+      "passed": true,
+      "summary": [
+        "UI REVISION: 105 checks failures=0"
+      ]
+    },
+    {
+      "suite": "world",
+      "passed": true,
+      "summary": [
+        "WORLD: 67 checks, failures=0"
+      ]
+    }
+  ],
+  "full_regression_note": "23 suites on the exact game logic before commit. f6a60ee changes only battle screenshot fixture row. Clean f6a60ee reran 93 logic checks and 20 input checks for export; isolated GPU repeated 20 input checks.",
+  "ai": {
+    "runs": 12,
+    "strategies": 6,
+    "seeds": 2,
+    "scope": "Original AI regression completion, rescue and explicit rest suppression; not a statistical balance verdict for new characters."
+  },
+  "windows": {
+    "export": "passed",
+    "headless_smoke": "passed",
+    "published": "build/WhistleRanch.exe",
+    "automatic_desktop_launch": false
+  },
+  "visual": {
+    "scenario": "ranch_content",
+    "png_count": 3,
+    "size": [
+      1280,
+      800
+    ],
+    "noninteractive": true,
+    "method": "Current Godot game, controlled day6/500G fixture; purchases and jobs use actual mouse events; combat keyposes are staged and are not a natural battle playthrough."
+  },
+  "limits": [
+    "No human multi-day playtest",
+    "New characters have static/keypose art; full continuous motion not delivered",
+    "GPU checked source project, not exported executable GPU rendering"
+  ],
+  "screenshots": {
+    "01_residents_forest_placeables.png": "93014cb48bae5ac9cadd3ac40f36bdd5de897b00bcf2ca67af9569d72e412eae",
+    "02_portrait_rarity_skill.png": "7684f8c912b7bf9162ccc68d2baf5edb2b8a6c26c9769bc34e296e999485e0ae",
+    "03_battle_keyposes_formal_motion.png": "dc489c708f254211e29e6158853f0ce0edab991c3526510c7206f95b67198236"
+  }
+}
