@@ -193,14 +193,14 @@ static func step(w):
 	if k.sleepiness < 60: k.warned = 0
 	# Minimum self-defense, never chasing; deliberately much weaker than the dog.
 	if able(w) and w.tick >= k.next_attack:
-		var threats = w.enemies.filter(func(e): return not e.done and not e.flee and w.distance(e.pos, k.pos) <= 1)
+		var threats = w.enemies.filter(func(e): return not e.done and not e.flee and e.hp>0 and w.distance(e.pos, k.pos) <= 1)
 		if not threats.is_empty() and w.Combat.pay(k,"attack"):
 			var e = threats[0]
 			k.next_attack = w.tick + ceili(1.5 / factor(w) / w.DT)
 			w.Progression.enemy_hurt(w,e,ATTACK)
 			w.combat_log.append({"tick": w.tick, "source": "keeper", "id": -1, "target": e.id, "damage": ATTACK})
 			if e.hp == 0:
-				e.flee = true
+				if not e.get("downed",false):e.flee = true
 				if w.stage == 1 and e.id == 0: w.drop_blueprint(e.pos)
 
 static func hurt(w, e):

@@ -14,7 +14,7 @@
   "cart_ui_detail_v1": "2cb05b6679bea777a02162a35d3693489f381c3c",
   "resource_icons_v1": "5848c4f8aedde4acfa33586f82c3397d1b6d58a0",
   "adopted_ui": "assets/adopted_ui/manifest.json",
-  "adopted_ui_scope": "Official idle UI only; full world motion pending",
+  "adopted_ui_scope": "Official idle for shop/cards; adopted Portraits for book details; full original actor world motions connected",
   "destroyer_motion_v1": "a34390e584037cef78c9f49dcec4b18bd44f6f3d",
   "martial_artist_motion_v1": "a34390e584037cef78c9f49dcec4b18bd44f6f3d",
   "salaryman_motion_v1": "a34390e584037cef78c9f49dcec4b18bd44f6f3d",
@@ -24,5 +24,6 @@
   "doberman_motion_v1": "a34390e584037cef78c9f49dcec4b18bd44f6f3d",
   "bullfrog_motion_v1": "a34390e584037cef78c9f49dcec4b18bd44f6f3d",
   "hedgehog_motion_v1": "a34390e584037cef78c9f49dcec4b18bd44f6f3d",
-  "golden_idol": "game/golden_idol_receipt.json"
+  "golden_idol": "game/golden_idol_receipt.json",
+  "direction_art": "game/direction_receipt.json"
 }

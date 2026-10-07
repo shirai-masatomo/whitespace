@@ -37,7 +37,8 @@ static func hit(w,source: Dictionary,target: Dictionary,action: String,damage: f
 	var tid=str(target.get("faction","keeper"))+str(target.get("id",-1))
 	grant(w,source,"SkillHit" if skill else "AttackHit",action,tid)
 	grant(w,target,"DamageTaken",action,str(source.get("faction","keeper"))+str(source.get("id",-1)))
-	if target.hp<=0:
+	if target.hp<=0 and not target.get("kill_gauge_awarded",false):
+		target.kill_gauge_awarded=true
 		grant(w,source,"Kill",action,tid)
 		grant(w,source,"Finisher",action,tid)
 
@@ -76,5 +77,5 @@ static func ai_use(w,a: Dictionary,definition: Dictionary,context: Dictionary,ex
 	if not execute.call():return false
 	a.ultimate_gauge=maxf(0,a.ultimate_gauge-definition.GaugeCost)
 	a.ultimate_state="ULTIMATE_READY" if ready(a) else "CHARGING"
-	w.skill_log.append({"tick":w.tick,"actor":a.get("id",-1),"ultimate":definition.UltimateID})
+	w.skill_log.append({"tick":w.tick,"actor":a.get("id",-1),"ultimate":definition.UltimateID,"skill":definition.UltimateID,"faction":a.get("faction","owned")})
 	return true

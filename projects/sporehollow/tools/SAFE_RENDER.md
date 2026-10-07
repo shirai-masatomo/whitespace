@@ -37,4 +37,6 @@ AIの変更確認は `./dev.ps1 evaluate -AISeeds 2` で既存6戦略×2seedへ�
 
 既存9種の正式盤面モーションは `-Scenario progression_art`（代表3枚）。木を除いた検証配置で待機・特殊動作・左向き停止を撮影。関連headlessは `./dev.ps1 test -Suites progression_art`。描画状態フィクスチャと通常戦闘ロジックの回帰を区別し、通常EXEやセーブへ触れない。
 
-黄金像Aと任意敵出現は `-Scenario idol_debug`（2枚）。F3/文字ボタンの実入力で8種を個別生成し、停止・入口閉塞・未実装種の拒否を確認。通常の襲来記録とは区別する。
+黄金像Aと任意敵出現は `-Scenario idol_debug`（2枚）。F3/文字ボタンの実入力で現在の10種を個別生成し、停止・入口閉塞・未実装種の拒否を確認。通常の襲来記録とは区別する。
+
+今回の採用画像/G〜Mは `-Scenario ranch_content`（代表3枚）。day6/500Gの制御条件から通常売買・実マウス入力で搾乳/配置/突撃の予約を確認。Portrait/スキルと戦闘キーポーズは明示した描画フィクスチャ。通常戦闘はheadless `ranch_content` と既存回帰で別途確認する。

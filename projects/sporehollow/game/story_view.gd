@@ -4,14 +4,11 @@ const IDOL_ANCHOR=Vector2(72,152)
 const LABELS={"clear_tree":"開拓","inspect_idol":"像を調べる","pray_wealth":"富を願う","repair_idol":"像を修理","recover_idol":"像を固定"}
 
 static func tree(g,p: Vector2i,deep: bool=false):
-	var c=g.center(p)
-	g.draw_rect(Rect2(c+Vector2(-15,7),Vector2(32,10)),Color(0.12,0.22,0.14,0.3))
-	g.draw_rect(Rect2(c+Vector2(-5,-24),Vector2(10,34)),Color("674d37"))
-	g.draw_rect(Rect2(c+Vector2(-2,-23),Vector2(3,32)),Color("9a7651"))
-	for row in [[-19,-50,40,20],[-27,-40,53,19],[-22,-26,44,12]]:
-		g.draw_rect(Rect2(c+Vector2(row[0],row[1]),Vector2(row[2],row[3])),Color("304d3d") if deep else Color("456544"))
-	g.draw_rect(Rect2(c+Vector2(-13,-50),Vector2(25,8)),Color("4a6846") if deep else Color("739056"))
-	g.draw_rect(Rect2(c+Vector2(-23,-35),Vector2(15,7)),Color("5d7b4b"))
+	var id="world.tree_"+["a","b","c"][posmod(p.x*13+p.y*7,3)]
+	var foot=g.center(p)+Vector2(0,14)
+	var obscured=g.world.animals.any(func(a):return a.placed and a.pos.x==p.x and a.pos.y<p.y and a.pos.y>=p.y-2) or (g.world.keeper.pos.x==p.x and g.world.keeper.pos.y<p.y and g.world.keeper.pos.y>=p.y-2)
+	g.Assets.Direction.draw(g,id+"_trunk",foot)
+	g.Assets.Direction.draw(g,id+"_canopy",foot,0.55 if obscured else (0.85 if deep else 1.0))
 
 static func idol(g):
 	var w=g.world

@@ -37,7 +37,7 @@ static func draw(g,c,id: int):
 	g.label_on(c,Vector2(152,136),a.name if named else species.title,27,UI.INK)
 	g.label_on(c,Vector2(152,163),species.title if named else "名前なし",15,UI.INK)
 	Assets.badge(g,c,Vector2(306,147),g.Farm.ProgressData.rarity(a.get("rarity",0)))
-	Assets.portrait(c,a.species,Rect2(176,189,250,140))
+	Assets.portrait(c,a.species,Rect2(176,189,250,140),"portrait")
 	g.MarketView.text(g,c,Rect2(152,351,294,64),g.Farm.AnimalData.character_text(a.species),16)
 	var maximum=g.animal_hp(a);var hp=a.get("hp",maximum)
 	c.draw_rect(Rect2(152,432,280,7),Color("bab395"))
@@ -49,10 +49,11 @@ static func draw(g,c,id: int):
 	var skills=g.Farm.AnimalData.stats(a.species,a.lv).skills+a.get("bonus_skills",[])
 	for i in range(skills.size()):
 		var skill=g.Farm.AnimalData.skill(skills[i]);var y=174+i*64
-		c.draw_texture_rect(UI.icon(Assets.SKILL_ICONS.get(skills[i],"spark")),Rect2(576,y,28,28),false)
+		c.draw_texture_rect(Assets.skill_texture(skills[i]),Rect2(576,y,28,28),false)
 		g.label_on(c,Vector2(618,y+21),skill.name+("（未解放）" if a.lv<skill.unlock_level else ""),19,UI.INK)
 		g.label_on(c,Vector2(618,y+42),"発動" if skill.type=="active" else "パッシブ",13,Color("75816c"))
-	g.label_on(c,Vector2(576,370),"必殺技：未習得",17,UI.INK)
+	if a.species=="maid":c.draw_texture_rect(Assets.skill_texture("rage"),Rect2(576,335,28,28),false)
+	g.label_on(c,Vector2(576,370),"必殺技：激ギレ / READY時、敵へ突進" if a.species=="maid" else "必殺技：未習得",17,UI.INK)
 	g.label_on(c,Vector2(576,397),"技ゲージ %d / %d"%[a.get("ultimate_gauge",0),a.get("ultimate_gauge_max",100)],14,UI.INK)
 	g.label_on(c,Vector2(576,442),"忠誠 %d  ·  共通EXP %d"%[a.get("loyalty",0),g.world.campaign.exp_pool],16,UI.INK)
 

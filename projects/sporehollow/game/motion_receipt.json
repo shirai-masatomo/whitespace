@@ -76,10 +76,11 @@
       "source_commit": "a34390e584037cef78c9f49dcec4b18bd44f6f3d"
     }
   ],
-  "not_triggered_by_current_gameplay": [
-    "destroyer iron_ball_windup",
-    "martial_artist stance/kick",
-    "doberman death (logical removal is immediate)",
-    "ninja independent projectile flight parts"
+  "not_triggered_by_current_gameplay": [],
+  "connected_2026_10_08": [
+    "iron_ball_windup during existing cooldown",
+    "stance and alternating attack/kick, single original damage",
+    "independent shuriken flight from recorded target",
+    "doberman death visual, no live actor"
   ]
 }

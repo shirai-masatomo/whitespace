@@ -9,8 +9,10 @@ const NIGHTS = {
 	5:{"mode":"Hybrid","fixed":["martial_artist"],"count":1},
 	6:{"mode":"Hybrid","fixed":["ninja"],"count":1},
 	7:{"mode":"Hybrid","fixed":["animal_tamer"],"count":1},
+	9:{"mode":"Hybrid","fixed":["dancer"],"count":1},
+	10:{"mode":"Hybrid","fixed":["thief"],"count":1},
 	8:{"mode":"Hybrid","fixed":["runner"],"count":1}}
-const FIRST_DAY = {"kidnapper":1,"salaryman":2,"destroyer":3,"martial_artist":5,"ninja":6,"animal_tamer":7,"runner":8}
+const FIRST_DAY = {"kidnapper":1,"salaryman":2,"destroyer":3,"martial_artist":5,"ninja":6,"animal_tamer":7,"runner":8,"dancer":9,"thief":10}
 const TABLE_NIGHT = {"mode":"Table","fixed":[],"count":3}
 const MILESTONE = {"interval":5,"from_day":10,"mode":"Hybrid","fixed":["runner"],"count":2}
 

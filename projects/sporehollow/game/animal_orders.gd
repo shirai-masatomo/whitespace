@@ -10,6 +10,7 @@ static func active(w,a) -> bool:
 
 static func enqueue(w,kind: String,ids: Array,p: Vector2i) -> bool:
 	if not w.working() or w.jobs.size()>=8: w.say("予定は8件までです"); return false
+	if kind=="charge" and (not w.inside(p) or not w.walkable(p)):w.say("突撃先へ進めません");return false
 	var whistle = w.item_count("whistle")>0
 	var targets=[]
 	var rejected=[]
@@ -101,7 +102,7 @@ static func step(w,j):
 			if a.species=="shiba" and w.daily_rng.randf()>0.90+w.Progression.loyalty(a)*0.001:
 				t.done=true; report(w,"今は気が乗らないようです"); continue
 			if j.order!="guide":
-				var order_pos=a.pos
+				var order_pos=j.command_pos if j.order=="charge" else a.pos
 				if j.order=="attack_target":
 					var enemies=w.animal_targets(a).filter(func(e):return e.id==j.get("enemy_id",-1))
 					if enemies.is_empty():t.done=true;report(w,"狙う相手を見失いました");continue
@@ -146,7 +147,7 @@ static func follow(w,a) -> bool:
 	if w.keeper.get("yield_cell",Vector2i(-1,-1))==a.pos and not w.jobs_held:
 		var spaces=w.neighbors(a.pos).filter(func(c):return w.animal_walkable(a,c) and not w.actor_occupied(c,a.pos))
 		if not spaces.is_empty():
-			a.move_credit=minf(1.9,a.move_credit+a.move_speed*w.DT)
+			a.move_credit=minf(1.9,a.move_credit+a.move_speed*w.Content.speed(w,a)*w.DT)
 			if a.move_credit>=1: a.move_credit-=1; a.pos=spaces[0]; w.open_for_ally(a.pos)
 			a.state="道を空ける"; return true
 	if t.done: a.state="誘導先で待つ"; return true
@@ -164,7 +165,7 @@ static func follow(w,a) -> bool:
 		if cells.is_empty(): return true
 		goal=cells[0]
 	a.state="ついていく"
-	a.move_credit=minf(1.9,a.move_credit+a.move_speed*w.DT)
+	a.move_credit=minf(1.9,a.move_credit+a.move_speed*w.Content.speed(w,a)*w.DT)
 	if a.move_credit>=1:
 		var next=w.animal_next(a,goal)
 		if next!=a.pos:
@@ -203,7 +204,7 @@ static func clear_guide_path(w,j,start: Vector2i):
 			previous[n]=p
 			if not w.actor_occupied(n,p):
 				var a=members[p]
-				a.move_credit=minf(1.9,a.move_credit+a.move_speed*w.DT)
+				a.move_credit=minf(1.9,a.move_credit+a.move_speed*w.Content.speed(w,a)*w.DT)
 				a.guide_yield_tick=w.tick
 				if a.move_credit>=1:
 					a.move_credit-=1;a.pos=n;w.open_for_ally(n);a.guide_yield_until=w.tick+8;j.blocked_ticks=0

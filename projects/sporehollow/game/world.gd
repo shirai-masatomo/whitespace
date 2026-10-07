@@ -1,4 +1,5 @@
 extends RefCounted
+const Content=preload("res://game/ranch_content.gd")
 ## Deterministic fixed-tick rules. No scene, Input, frame clock or rendering dependencies.
 const Combat=preload("res://game/combat_events.gd")
 const Progression = preload("res://game/progression.gd")
@@ -17,7 +18,7 @@ const NEST = Vector2i(20, 12)
 const Shop = preload("res://game/shop_table.gd")
 const Rules = preload("res://game/rules.gd")
 const BUILD = Rules.BUILD
-const ORDERS = ["auto", "stay", "wander", "rest", "attack_target", "guide"]
+const ORDERS = ["auto", "stay", "wander", "rest", "attack_target", "guide", "charge"]
 const Buildings = preload("res://game/buildings.gd")
 const Orders = preload("res://game/animal_orders.gd")
 var floors: Dictionary = {}
@@ -333,7 +334,9 @@ func start_night():
 
 func act(kind: String, p: Vector2i = Vector2i.ZERO, animal_id: int = -1) -> bool:
 	var accepted = false
-	if kind in Story.ACTIONS:
+	if kind in ["milk","place_kokeshi","place_fossil"]:
+		accepted=Content.queue(self,kind,p,animal_id)
+	elif kind in Story.ACTIONS:
 		accepted = Story.enqueue(self,kind,p)
 	elif kind in ["rest_until_night", "end_night"]:
 		accepted = Life.plan_rest_until(self, "night" if kind == "rest_until_night" else "dawn")
@@ -421,7 +424,7 @@ func issue_order(kind: String, p: Vector2i, animal_id: int = -1) -> bool:
 	var accepted = false
 	for a in animals:
 		if not a.placed or a.hp <= 0 or not SPECIES[a.species].commands or a.loyalty <= 0 or (animal_id >= 0 and a.id != animal_id): continue
-		if kind == "rest" and a.category != "dog": continue
+		if kind not in SPECIES[a.species].orders:continue
 		# Paused orders change intent only. Their reaction countdown starts with resumed simulation.
 		a.pending = {"kind": kind, "pos": a.pos if kind == "wander" else p, "target_id": target_id,
 			"at": tick + 1 + ceili((100 - a.loyalty) / 25.0)}
@@ -497,12 +500,13 @@ func animal_step(a: Dictionary):
 		a.pending = {}
 		a.ai_context = "new_order"
 	if a.mode != "rest" and tick >= a.order_until: a.mode = "auto"
-	if a.species in ["hen", "cat"]:
+	if Content.animal_step(self,a):return
+	if a.species in ["hen", "cat", "cow"]:
 		try_meow(a)
 		var threat = enemies.filter(func(e): return not e.done and not e.flee and distance(a.pos, e.pos) <= a.detection_range)
 		a.fear = 28 if not threat.is_empty() else maxi(0, a.fear - 1)
 		a.state = "怖がる" if a.fear > 0 else ("ついばむ" if a.species == "hen" else "散歩")
-		a.move_credit = minf(1.0, a.move_credit + a.move_speed * DT)
+		a.move_credit = minf(1.0, a.move_credit + a.move_speed * Content.speed(self,a) * DT)
 		if not threat.is_empty() and a.move_credit >= 1:
 			a.move_credit -= 1
 			var options = neighbors(a.pos).filter(func(p): return walkable(p) and not actor_occupied(p, a.pos))
@@ -543,7 +547,7 @@ func animal_step(a: Dictionary):
 	if not SPECIES[a.species].can_enter_indoor:
 		if a.rescuing and not targets.is_empty() and is_indoor(targets[0].pos):
 			a.state="外で待つ"
-			a.move_credit=minf(1.75,a.move_credit+a.move_speed*DT*Rules.SHIBA.rescue_multiplier)
+			a.move_credit=minf(1.75,a.move_credit+a.move_speed*Content.speed(self,a)*DT*Rules.SHIBA.rescue_multiplier)
 			if a.move_credit>=1:
 				var exit_cell=animal_next(a,rescue_exit(a,targets[0].pos))
 				if exit_cell!=a.pos: a.move_credit-=1; open_for_ally(exit_cell); a.pos=exit_cell
@@ -583,13 +587,13 @@ func animal_step(a: Dictionary):
 				a.side_step_used = true
 			return
 		if distance(a.pos, goal) <= 1 and line_of_sight(a.pos,goal) and tick >= a.next_attack:
-			a.next_attack = tick + ceili(a.attack_seconds / DT)
+			a.next_attack = tick + ceili(a.attack_seconds / DT / Content.attack_speed(self,a))
 			a.stamina = maxf(0, a.stamina - 8)
 			var enemy = targets[0]
 			Progression.enemy_hurt(self,enemy,a.attack_power,a.id)
 			combat_log.append({"tick": tick, "source": "animal", "id": a.id, "target": enemy.id, "damage": a.attack_power})
 			if enemy.hp == 0:
-				enemy.flee = true
+				if not enemy.get("downed",false):enemy.flee = true
 				if stage == 1 and enemy.id == 0: drop_blueprint(enemy.pos)
 				release_keeper(enemy)
 				say("侵入者を追い返した！")
@@ -606,7 +610,7 @@ func animal_step(a: Dictionary):
 		a.ai_context = "idle"
 		a.state = "待機" if a.mode == "stay" else "見張り"
 		a.stamina = minf(100, a.stamina + (0.3))
-	a.move_credit = minf(1.75, a.move_credit + a.move_speed * DT * (Rules.SHIBA.rescue_multiplier if a.rescuing else 1.0))
+	a.move_credit = minf(1.75, a.move_credit + a.move_speed * Content.speed(self,a) * DT * (Rules.SHIBA.rescue_multiplier if a.rescuing else 1.0))
 	if a.move_credit >= 1 and distance(a.pos, goal) > (1 if chasing else 0):
 		a.move_credit -= 1
 		var move = animal_next(a, goal)
@@ -638,12 +642,13 @@ func enemy_step(e: Dictionary):
 	if e.done: return
 	if e.pos.x<0 or e.pos.y<0 or e.pos.x>=W or e.pos.y>=H:
 		e.state="森から接近"
-		e.move_credit+=e.move_speed*DT
+		e.move_credit+=e.move_speed*Content.speed(self,e)*DT
 		if e.move_credit>=1:
 			var next=e.pos+(e.entry-exit_for(e.entry))
 			if not actor_occupied(next,e.pos) and Combat.pay(e,"move"): e.pos=next; e.move_credit-=1; e.path.append(next)
 		return
 	RaiderAI.perceive(e, self)
+	if Content.enemy_step(self,e):return
 	if Progression.enemy_step(self,e): return
 	if not e.flee:
 		var threatened = tick < e.threat_until and tick >= e.counter_ready and animals.any(func(a): return a.placed and a.id == e.attacker and a.hp > 0)
@@ -705,7 +710,7 @@ func enemy_step(e: Dictionary):
 				Life.danger(self, "carried")
 				milestones.append({"tick": tick, "kind": "carried", "id": e.id})
 		return
-	e.move_credit = minf(1.9, e.move_credit + (1.0 if e.carry == "keeper" else e.move_speed) * DT)
+	e.move_credit = minf(1.9, e.move_credit + (1.0 if e.carry == "keeper" else e.move_speed) * Content.speed(self,e) * DT)
 	if e.move_credit < 1: return
 	e.move_credit -= 1
 	var goal = RaiderAI.target(e, self)
@@ -860,6 +865,7 @@ func step():
 	Combat.recover(keeper,DT,keeper.resting)
 	for enemy in enemies: Combat.recover(enemy,DT)
 	if phase == "day" and tick * DT >= day_seconds: start_night()
+	Content.tick(self)
 	Life.step(self)
 	Jobs.step(self)
 	if tick % ceili(Rules.NATURE.interval / DT) == 0: grow_nature()
@@ -901,6 +907,7 @@ func step():
 
 func finish(won: bool):
 	if result != "": return
+	if won and enemies.any(func(e):return not e.done and (e.get("downed",false) or not e.get("stolen",{}).is_empty())):return
 	if won and (Story.crisis(self) or enemies.any(func(e):return not e.done and not e.flee and e.get("led_animal",-1)>=0)): return
 	if not won and story.get("defeat_reason","")=="": story.defeat_reason="keeper_abducted"
 	result = "win" if won else "loss"
@@ -1122,6 +1129,7 @@ func buy(id: String) -> bool:
 	return true
 
 func sell(id: String, animal_id: int = -1) -> bool:
+	if id=="maid":return false
 	if phase != "shop" or paused or not Shop.table().has(id): return false
 	var p = Shop.table()[id]
 	if p.Category == "animals":
@@ -1244,7 +1252,7 @@ func animal_targets(a: Dictionary) -> Array:
 	for e in enemies:
 		if SPECIES[a.species].combat_response==ProgressData.CombatResponse.AUTO and not e.done and not e.flee and distance(a.pos, e.pos) <= a.detection_range and line_of_sight(a.pos,e.pos):
 			a.known_enemies[e.id] = tick + 8
-	return enemies.filter(func(e): return not e.done and not e.flee and a.known_enemies.get(e.id, -1) >= tick and distance(a.pos, e.pos) <= a.attack_target_range)
+	return enemies.filter(func(e): return not e.done and not e.flee and e.hp>0 and a.known_enemies.get(e.id, -1) >= tick and distance(a.pos, e.pos) <= a.attack_target_range)
 
 func share_detection(a: Dictionary, enemy_id: int, seconds: float = 2.0):
 	a.known_enemies[enemy_id] = tick + ceili(seconds / DT)
@@ -1275,7 +1283,8 @@ func add_resident(owned: Dictionary):
 	a.defense=stats.get("defense",0)
 	a.ai_accuracy=stats.get("ai_accuracy",50)
 	a.ultimates=stats.get("ultimates",[])
-	Combat.init_actor(a,false)
+	Combat.init_actor(a,stats.get("has_stamina",false))
+	a.type_tag="Human" if a.has_stamina else "Animal"
 	a.skill_ready = {}
 	a.known_enemies = {}
 	a.pos = Vector2i(-10, -10)

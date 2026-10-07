@@ -67,7 +67,7 @@ static func walk(w,j,goals: Array) -> bool:
 	goals=goals.filter(func(p):return w.walkable(p) and not w.actor_occupied(p,w.keeper.pos))
 	if w.keeper.pos in goals: return true
 	j.state="walking"
-	w.keeper.move_credit=minf(1.9,w.keeper.move_credit+SPEED*w.Life.factor(w)*w.DT)
+	w.keeper.move_credit=minf(1.9,w.keeper.move_credit+SPEED*w.Life.factor(w)*w.Content.speed(w,w.keeper)*w.DT)
 	if w.keeper.move_credit<1: return false
 	var outdoor=j.kind=="animal_order" and j.order=="guide" and j.targets.any(func(t):return t.issued and not w.SPECIES[w.Orders.animal(w,t.id).get("species","hen")].can_enter_indoor) and not w.is_indoor(w.keeper.pos)
 	var route=path_to(w,w.keeper.pos,goals,outdoor)
@@ -98,6 +98,7 @@ static func step(w):
 		if pending.get("cancel_requested",false): cancel(w,pending.id)
 	if not w.Life.able(w) or w.jobs_held or w.manual_goal!=null or w.jobs.is_empty(): return
 	var j=w.jobs[0]
+	if j.kind in ["milk","place_kokeshi","place_fossil"]:w.Content.job(w,j);return
 	if j.kind=="equip": w.Progression.equip_step(w,j); return
 	if j.kind in w.Story.ACTIONS: w.Story.step_job(w,j); return
 	if j.has("target_id"):
@@ -162,7 +163,7 @@ static func preview(w) -> Array:
 	if w.manual_goal!=null: plans.append({"number":0,"goals":[w.manual_goal]})
 	for i in range(w.jobs.size()):
 		var j=w.jobs[i]
-		if j.kind=="equip":
+		if j.kind in ["equip","milk"]:
 			var a=w.Orders.animal(w,j.animal_id)
 			if not a.is_empty(): plans.append({"number":i+1,"goals":w.neighbors(a.pos)})
 		elif j.kind=="animal_order":

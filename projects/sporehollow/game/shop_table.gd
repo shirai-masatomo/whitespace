@@ -2,11 +2,17 @@ extends RefCounted
 const Data=preload("res://game/progression_data.gd")
 const Animals=preload("res://game/animal_data.gd")
 ## Temporary Stage1 assortment. Prices, weights and stock are tuning, not final balance.
-const CATEGORIES = {"animals": "動物", "materials": "素材", "facilities": "施設", "items": "アイテム"}
+const CATEGORIES = {"animals": "仲間", "materials": "素材", "facilities": "施設", "items": "アイテム"}
 const FOOD = {"dog_food": {"category": "dog", "hp": 10}, "hen_food": {"category": "bird", "hp": 8}, "cat_food": {"category": "cat", "hp": 8}}
 
 static func table() -> Dictionary:
 	var rows = [
+ ["maid","メイド Lv1","animals",120,0,1,0.0,true,1],
+ ["cow","乳牛 Lv1","animals",80,26,1,0.0,true,1],
+ ["bull","闘牛 Lv1","animals",100,32,1,0.0,true,1],
+ ["kokeshi","こけし","items",30,10,1,0.0,true,1],
+ ["fossil","化石","items",20,6,1,0.0,true,1],
+ ["milk","ミルク","items",12,6,1,0.0,false,0],
 		["collar","首輪","items",20,6,1,0.0,true,2],
 		["berry","きのみ","items",8,2,1,0.0,true,3],
 		["doberman","ドーベルマン Lv1","animals",70,24,1,1.0,true,1],
@@ -41,7 +47,7 @@ static func generate(stage: int, seed_value: int, blueprints: Array, day: int=1)
 	var candidates = []
 	var total = 0.0
 	for product in table().values():
-		if day<({"doberman":3,"bullfrog":2,"hedgehog":2}.get(product.ProductID,1)): continue
+		if day<({"doberman":3,"bullfrog":2,"hedgehog":2,"cow":4,"maid":5,"bull":6,"kokeshi":4,"fossil":4}.get(product.ProductID,1)): continue
 		if not product.Enabled or stage < product.StageMin or (product.UnlockCondition != "" and product.UnlockCondition not in blueprints): continue
 		if product.Guaranteed: stock.append({"product": product.ProductID, "remaining": product.Stock, "individual": {"loyalty": 0}})
 		elif product.Category == "animals" and product.Weight > 0:

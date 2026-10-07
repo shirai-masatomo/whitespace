@@ -1,5 +1,6 @@
 extends RefCounted
 ## Presentation only. Reuses the delivered clip renderer and the existing actor clocks.
+const SHURIKEN=preload("res://art_delivery/ninja_motion_v1/parts/shuriken.png")
 const Art=preload("res://game/delivered_art.gd")
 const SPECIES=["destroyer","martial_artist","salaryman","ninja","animal_tamer","runner","doberman","bullfrog","hedgehog"]
 
@@ -40,10 +41,14 @@ static func update(g,a: Dictionary,enemy: bool):
 	if raw in ["bow","tame","lead"]:
 		action="bow_end" if raw=="bow" and a.get("chosen_target",{}).is_empty() else raw
 	if p.get("raw","")=="tame" and raw!="tame":p.once="tame_end";p.once_at=g.visual_time
+	if who=="martial_artist" and not walking and raw=="attack":action="stance"
+	if who=="destroyer" and not walking and raw=="iron_ball_hit" and a.next_attack>g.world.tick and (a.next_attack-g.world.tick)*g.world.DT<=duration(who,"iron_ball_windup"):
+		action="iron_ball_windup"
 	if a.next_attack>p.get("attack",a.next_attack) and who in ["doberman","martial_artist","ninja","destroyer","runner"]:
-		p.once={"ninja":"dagger","destroyer":"iron_ball_hit"}.get(who,"attack");p.once_at=g.visual_time
+		p.swings=p.get("swings",0)+1
+		p.once={"ninja":"dagger","destroyer":"iron_ball_hit"}.get(who,"kick" if who=="martial_artist" and p.swings%2==0 else "attack");p.once_at=g.visual_time
 	if a.get("shuriken_at",0)>p.get("shuriken",a.get("shuriken_at",0)):
-		p.once="shuriken";p.once_at=g.visual_time
+		p.once="shuriken";p.once_at=g.visual_time;p.shot_at=g.visual_time;p.shot_from=a.pos;p.shot_to=a.get("chosen_target",{}).get("pos",a.pos)
 	if who=="bullfrog":
 		var tongue=a.get("skill_ready",{}).get("tongue",0)
 		if tongue>p.get("tongue",tongue):p.tongue_at=g.visual_time
@@ -70,6 +75,12 @@ static func draw(g,c,a: Dictionary,foot: Vector2,enemy: bool=false):
 	var who=a.get("archetype",a.get("species","")) if enemy else a.species
 	var p=(g.enemy_art if enemy else g.actor_art).get(a.id if enemy else "a"+str(a.id),{})
 	Art.draw_clip(c,clip(who,p.get("action","idle"),p.get("facing",1)),foot,g.visual_time-p.get("at",g.visual_time))
+	if who=="ninja" and p.has("shot_at"):
+		var flight=(g.visual_time-p.shot_at-0.12)/0.32
+		if flight>=0 and flight<1:
+			var point=g.center(p.shot_from).lerp(g.center(p.shot_to),flight)+Vector2(0,-14)
+			c.draw_set_transform(point,flight*TAU*2)
+			c.draw_texture(SHURIKEN,Vector2(-3,-3));c.draw_set_transform(Vector2.ZERO)
 
 static func bounds(g,a: Dictionary,enemy: bool=false) -> Rect2:
 	var id=("e" if enemy else "a")+str(a.id)

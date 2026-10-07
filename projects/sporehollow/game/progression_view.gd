@@ -1,8 +1,10 @@
 extends RefCounted
 const Data=preload("res://game/progression_data.gd")
 const UI=preload("res://game/ui_style.gd")
-const ENEMY_ORDER=["kidnapper","salaryman","destroyer","martial_artist","ninja","animal_tamer","runner","doberman"]
+const ENEMY_ORDER=["kidnapper","salaryman","destroyer","martial_artist","ninja","animal_tamer","runner","doberman","dancer","thief"]
 const NOTES={
+	"dancer":"周囲3マスの味方の移動・攻撃を助けます。\nREADY時、近くの倒れた味方1体を復活。",
+	"thief":"毒は5秒間ダメージと移動低下。\n盗品は森の外へ出る前に倒すと回収できます。",
 	"kidnapper":"牧場主を見つけると追跡。\n気絶させて森の外へ運びます。",
 	"destroyer":"建物を優先して壊します。\n鉄球は隣接した相手だけに当たります。",
 	"martial_artist":"戦闘の前後に礼をします。\n相手のHPを1より下へ減らしません。",
@@ -38,11 +40,13 @@ static func enemy_page(game,c,index: int):
 			c.draw_set_transform(Vector2(296,315),0,Vector2(2.5,2.5))
 			game.Delivered.draw_clip(c,"enemy/idle_right",Vector2.ZERO,0)
 			c.draw_set_transform(Vector2.ZERO)
-		else: game.Assets.portrait(c,id,Rect2(186,191,240,148),"enemy")
+		else: game.Assets.portrait(c,id,Rect2(186,191,240,148),"enemy_portrait")
 		game.Assets.badge(game,c,Vector2(156,346),row.rarity)
 		game.label_on(c,Vector2(156,398),row.type_tag+" / "+Data.RARITY_NAMES[row.rarity],16,UI.INK)
 		game.label_on(c,Vector2(584,170),row.role_text,20,UI.INK)
 		game.label_on(c,Vector2(584,230),NOTES[id] if known>=2 else "行動を観察すると、詳しく分かります。",16,UI.INK)
+		if known>=2 and id in ["destroyer","salaryman","dancer"]:
+			c.draw_texture_rect(game.Assets.skill_texture({"destroyer":"iron_ball","salaryman":"phone","dancer":"resurrection"}[id]),Rect2(584,280,40,40),false)
 		if known>=3: game.label_on(c,Vector2(584,342),{"salaryman":"撃退時：少量のお金","ninja":"撃退時：巻物1個"}.get(id,"撃退を確認しました"),16,UI.INK)
 	game.label_on(c,Vector2(470,510),"%d / %d"%[index+1,ENEMY_ORDER.size()],14,UI.INK)
 

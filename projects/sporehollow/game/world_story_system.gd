@@ -252,7 +252,7 @@ static func idol_enemy(w,e) -> bool:
 			return true
 		if idol.state=="transporting":
 			e.state="黄金像を牽引"
-			e.move_credit+=TOW_SPEED*w.DT
+			e.move_credit+=TOW_SPEED*w.Content.speed(w,e)*w.DT
 			if e.move_credit<1 or w.tick<e.move_stopped_until: return true
 			e.move_credit-=1
 			var anchor=at(w)
@@ -280,7 +280,7 @@ static func idol_enemy(w,e) -> bool:
 		elif idol.carrier<0:
 			idol.carrier=e.id; idol.state="preparing"; idol.prepare=0.0; w.Life.danger(w,"idol_unfastening")
 		return true
-	e.move_credit+=e.move_speed*w.DT
+	e.move_credit+=e.move_speed*w.Content.speed(w,e)*w.DT
 	if e.move_credit<1: return true
 	e.move_credit-=1
 	var best=[]

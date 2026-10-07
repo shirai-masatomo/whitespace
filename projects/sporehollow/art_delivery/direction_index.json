@@ -1,0 +1,402 @@
+{
+  "new.bull": [
+    "ui_world_direction_v1",
+    "candidates/new/bull.png",
+    [
+      40,
+      58
+    ]
+  ],
+  "new.cow": [
+    "ui_world_direction_v1",
+    "candidates/new/cow.png",
+    [
+      40,
+      58
+    ]
+  ],
+  "new.fossil": [
+    "ui_world_direction_v1",
+    "candidates/new/fossil.png",
+    [
+      24,
+      36
+    ]
+  ],
+  "new.poison_cloud": [
+    "ui_world_direction_v1",
+    "candidates/new/poison_cloud.png",
+    [
+      32,
+      36
+    ]
+  ],
+  "new.poison_projectile": [
+    "ui_world_direction_v1",
+    "candidates/new/poison_projectile.png",
+    [
+      16,
+      12
+    ]
+  ],
+  "new.poison_splash": [
+    "ui_world_direction_v1",
+    "candidates/new/poison_splash.png",
+    [
+      24,
+      28
+    ]
+  ],
+  "portraits.cat": [
+    "ui_world_direction_v1",
+    "candidates/portraits/cat.png",
+    [
+      96,
+      96
+    ]
+  ],
+  "portraits.destroyer": [
+    "ui_world_direction_v1",
+    "candidates/portraits/destroyer.png",
+    [
+      96,
+      96
+    ]
+  ],
+  "portraits.doberman": [
+    "ui_world_direction_v1",
+    "candidates/portraits/doberman.png",
+    [
+      96,
+      96
+    ]
+  ],
+  "portraits.hen": [
+    "ui_world_direction_v1",
+    "candidates/portraits/hen.png",
+    [
+      96,
+      96
+    ]
+  ],
+  "portraits.salaryman": [
+    "ui_world_direction_v1",
+    "candidates/portraits/salaryman.png",
+    [
+      96,
+      96
+    ]
+  ],
+  "portraits.shiba": [
+    "ui_world_direction_v1",
+    "candidates/portraits/shiba.png",
+    [
+      96,
+      96
+    ]
+  ],
+  "ui.rarity_common": [
+    "ui_world_direction_v1",
+    "candidates/ui/rarity_common.png",
+    [
+      32,
+      32
+    ]
+  ],
+  "ui.rarity_epic": [
+    "ui_world_direction_v1",
+    "candidates/ui/rarity_epic.png",
+    [
+      32,
+      32
+    ]
+  ],
+  "ui.rarity_legendary": [
+    "ui_world_direction_v1",
+    "candidates/ui/rarity_legendary.png",
+    [
+      32,
+      32
+    ]
+  ],
+  "ui.rarity_rare": [
+    "ui_world_direction_v1",
+    "candidates/ui/rarity_rare.png",
+    [
+      32,
+      32
+    ]
+  ],
+  "ui.rarity_uncommon": [
+    "ui_world_direction_v1",
+    "candidates/ui/rarity_uncommon.png",
+    [
+      32,
+      32
+    ]
+  ],
+  "ui.ready_aura": [
+    "ui_world_direction_v1",
+    "candidates/ui/ready_aura.png",
+    [
+      24,
+      12
+    ]
+  ],
+  "ui.ready_corners": [
+    "ui_world_direction_v1",
+    "candidates/ui/ready_corners.png",
+    [
+      96,
+      96
+    ]
+  ],
+  "ui.ready_stars": [
+    "ui_world_direction_v1",
+    "candidates/ui/ready_stars.png",
+    [
+      12,
+      12
+    ]
+  ],
+  "ui.skill_bark": [
+    "ui_world_direction_v1",
+    "candidates/ui/skill_bark.png",
+    [
+      32,
+      32
+    ]
+  ],
+  "ui.skill_destruction": [
+    "ui_world_direction_v1",
+    "candidates/ui/skill_destruction.png",
+    [
+      32,
+      32
+    ]
+  ],
+  "ui.skill_reinforcement": [
+    "ui_world_direction_v1",
+    "candidates/ui/skill_reinforcement.png",
+    [
+      32,
+      32
+    ]
+  ],
+  "ui.stamina_lightning": [
+    "ui_world_direction_v1",
+    "candidates/ui/stamina_lightning.png",
+    [
+      12,
+      12
+    ]
+  ],
+  "ui.stamina_shoe": [
+    "ui_world_direction_v1",
+    "candidates/ui/stamina_shoe.png",
+    [
+      12,
+      12
+    ]
+  ],
+  "ui.ultimate_frame": [
+    "ui_world_direction_v1",
+    "candidates/ui/ultimate_frame.png",
+    [
+      32,
+      32
+    ]
+  ],
+  "ui.ultimate_rage": [
+    "ui_world_direction_v1",
+    "candidates/ui/ultimate_rage.png",
+    [
+      32,
+      32
+    ]
+  ],
+  "ui.ultimate_resurrection": [
+    "ui_world_direction_v1",
+    "candidates/ui/ultimate_resurrection.png",
+    [
+      32,
+      32
+    ]
+  ],
+  "world.goldA": [
+    "ui_world_direction_v1",
+    "candidates/world/goldA.png",
+    [
+      72,
+      152
+    ]
+  ],
+  "world.goldB": [
+    "ui_world_direction_v1",
+    "candidates/world/goldB.png",
+    [
+      72,
+      152
+    ]
+  ],
+  "world.tree_a": [
+    "ui_world_direction_v1",
+    "candidates/world/tree_a.png",
+    [
+      32,
+      72
+    ]
+  ],
+  "world.tree_a_canopy": [
+    "ui_world_direction_v1",
+    "candidates/world/tree_a_canopy.png",
+    [
+      32,
+      72
+    ]
+  ],
+  "world.tree_a_trunk": [
+    "ui_world_direction_v1",
+    "candidates/world/tree_a_trunk.png",
+    [
+      32,
+      72
+    ]
+  ],
+  "world.tree_b": [
+    "ui_world_direction_v1",
+    "candidates/world/tree_b.png",
+    [
+      32,
+      72
+    ]
+  ],
+  "world.tree_b_canopy": [
+    "ui_world_direction_v1",
+    "candidates/world/tree_b_canopy.png",
+    [
+      32,
+      72
+    ]
+  ],
+  "world.tree_b_trunk": [
+    "ui_world_direction_v1",
+    "candidates/world/tree_b_trunk.png",
+    [
+      32,
+      72
+    ]
+  ],
+  "world.tree_c": [
+    "ui_world_direction_v1",
+    "candidates/world/tree_c.png",
+    [
+      32,
+      72
+    ]
+  ],
+  "world.tree_c_canopy": [
+    "ui_world_direction_v1",
+    "candidates/world/tree_c_canopy.png",
+    [
+      32,
+      72
+    ]
+  ],
+  "world.tree_c_trunk": [
+    "ui_world_direction_v1",
+    "candidates/world/tree_c_trunk.png",
+    [
+      32,
+      72
+    ]
+  ],
+  "maid.idle": [
+    "ui_world_direction_v2",
+    "candidates/maid/idle.png",
+    [
+      32,
+      58
+    ]
+  ],
+  "maid.rage": [
+    "ui_world_direction_v2",
+    "candidates/maid/rage.png",
+    [
+      32,
+      58
+    ]
+  ],
+  "maid.chase": [
+    "ui_world_direction_v2",
+    "candidates/maid/chase.png",
+    [
+      32,
+      58
+    ]
+  ],
+  "thief.idle": [
+    "ui_world_direction_v2",
+    "candidates/thief/idle.png",
+    [
+      32,
+      58
+    ]
+  ],
+  "thief.steal": [
+    "ui_world_direction_v2",
+    "candidates/thief/steal.png",
+    [
+      32,
+      58
+    ]
+  ],
+  "thief.poison_windup": [
+    "ui_world_direction_v2",
+    "candidates/thief/poison_windup.png",
+    [
+      32,
+      58
+    ]
+  ],
+  "dancer.idle": [
+    "ui_world_direction_v2",
+    "candidates/dancer/idle.png",
+    [
+      32,
+      58
+    ]
+  ],
+  "dancer.fan_raise": [
+    "ui_world_direction_v2",
+    "candidates/dancer/fan_raise.png",
+    [
+      32,
+      58
+    ]
+  ],
+  "dancer.fan_spread": [
+    "ui_world_direction_v2",
+    "candidates/dancer/fan_spread.png",
+    [
+      32,
+      58
+    ]
+  ],
+  "maid.rage_aura": [
+    "ui_world_direction_v2",
+    "candidates/maid/rage_aura.png",
+    [
+      32,
+      58
+    ]
+  ],
+  "kokeshi.idle": [
+    "ui_world_direction_v2",
+    "candidates/kokeshi/idle.png",
+    [
+      16,
+      36
+    ]
+  ]
+}

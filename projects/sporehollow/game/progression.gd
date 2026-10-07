@@ -30,7 +30,7 @@ static func can_equip(a: Dictionary, id: String) -> bool:
 	if id=="unequip": return not a.get("equipment",{}).is_empty()
 	if not Data.ITEMS.has(id): return false
 	var tags=Data.ITEMS[id].equip_targets
-	return "animal" in tags or a.get("category","") in tags or a.species in tags
+	return ("animal" in tags and a.get("category")!="human") or a.get("category","") in tags or a.species in tags
 
 static func equip_job(w, animal_id: int, item_id: String) -> bool:
 	var a=w.Orders.animal(w,animal_id)
@@ -67,6 +67,7 @@ static func sync_owned(w,a):
 static func remove_animal(w,a,reason: String):
 	if a.get("dead",false) or a.get("lost",false): return
 	a["dead" if reason=="death" else "lost"]=true
+	a.visual_death_tick=w.tick
 	a.placed=false; a.state="死亡" if reason=="death" else "連れ去られた"
 	a.erase("abductor"); a.erase("guide_job"); a.pending={}; a.rescuing=false
 	var record={"id":a.id,"species":a.species,"name":a.get("name",""),"day":w.campaign.day,"reason":reason,"equipment":a.equipment.duplicate(true)}
@@ -82,6 +83,7 @@ static func animal_hurt(w,a,e,raw: int,nonlethal: bool=false):
 	var damage=maxi(0,raw-defense(a,w.tick))
 	if nonlethal: damage=mini(damage,maxi(0,a.hp-1))
 	a.hp=maxi(0,a.hp-damage)
+	if damage>0 and a.get("mode")=="charge":w.Content.end_charge(a)
 	w.Combat.hit(w,e,a,e.get("combat_action","attack"),damage,e.get("combat_skill",false))
 	w.combat_log.append({"tick":w.tick,"source":"enemy","id":e.id,"target":a.id,"damage":damage})
 	if a.hp<=a.max_hp*0.25: w.Life.danger(w,"animal_danger")
@@ -108,8 +110,9 @@ static func enemy_hurt(w,e,raw: int,attacker: int=-1,action: String="attack",ski
 	w.Combat.hit(w,source,e,action,damage,skill)
 	if attacker>=0: e.attacker=attacker; e.threat_until=w.tick+ceili(w.Rules.KIDNAPPER.counter_duration/w.DT)
 	if e.hp<=0:
+		if w.Content.down(w,e):return
 		e.flee=true; release_animal(w,e); w.release_keeper(e); loot(w,e); knowledge(w,e,3)
-		if e.get("type_tag","")=="Animal": e.done=true; e.state="死亡"; e.action_id="death"; w.metrics.repelled+=1
+		if e.get("type_tag","")=="Animal": e.visual_death_tick=w.tick; e.done=true; e.state="死亡"; e.action_id="death"; w.metrics.repelled+=1
 	elif e.get("archetype","")=="salaryman" and not e.get("phone_success",false) and not e.get("phone_started",false) and damage>0:
 		if w.rng.randf()<Data.SPECIAL.phone_chance and w.Combat.pay(e,"skill"):
 			e.phone_started=true; e.phone_until=w.tick+ceili(Data.SPECIAL.phone_delay/w.DT); e.action_id="phone_take"
@@ -149,7 +152,7 @@ static func tick(w):
 				if not e.done and not e.flee and w.distance(a.pos,e.pos)<=1 and w.line_of_sight(a.pos,e.pos) and e.get("reflected_at",-1)!=w.tick:
 					e.reflected_at=w.tick; enemy_hurt(w,e,Data.SPECIAL.spines_reflect,a.id,"spines",true)
 	for e in w.enemies:
-		if e.hp<=0 and not e.get("loot_granted",false): loot(w,e); release_animal(w,e)
+		if e.hp<=0 and not e.get("downed",false) and not e.get("loot_granted",false): loot(w,e); release_animal(w,e)
 		if not e.done and visible_to_farm(w,e):
 			knowledge(w,e,2 if e.get("observed_action",false) else 1)
 		e.observed_action=false
@@ -235,13 +238,13 @@ static func enemy_step(w,e) -> bool:
 	if dist<=1 and w.line_of_sight(e.pos,target.pos,target.kind in ["structure","idol"]):
 		e.state="攻撃"; e.action_id="dagger" if e.archetype=="ninja" else ("iron_ball_hit" if e.archetype=="destroyer" else "attack")
 		if w.tick>=e.next_attack and w.Combat.pay(e,"attack"):
-			e.next_attack=w.tick+ceili(e.attack_interval/w.DT); strike(w,e,target)
+			e.next_attack=w.tick+ceili(e.attack_interval/w.DT/w.Content.attack_speed(w,e)); strike(w,e,target)
 		return true
 	e.action_id="walk"; e.state="接近"; walk(w,e,target.pos)
 	return true
 
 static func walk(w,e,goal: Vector2i):
-	var speed=e.move_speed
+	var speed=e.move_speed*w.Content.speed(w,e)
 	if e.archetype=="runner":
 		if w.tick-e.get("last_run_tick",w.tick)>maxi(4,ceili(1.0/speed/w.DT)+2): e.run_seconds=0.0
 		if w.tick<e.get("tired_until",0): speed=Data.SPECIAL.runner_tired_speed; e.action_id="tired"; e.state="バテる"
@@ -276,7 +279,7 @@ static func strike(w,e,t,override_damage: int=-1):
 	elif t.kind=="animal":
 		var a=w.Orders.animal(w,t.id)
 		if a.is_empty(): return
-		animal_hurt(w,a,e,roundi((e.animal_attack if override_damage<0 else override_damage)*(0.85 if w.tick<e.weakened_until else 1.0)),e.archetype=="martial_artist")
+		animal_hurt(w,a,e,roundi(((e.human_attack if a.get("type_tag")=="Human" else e.animal_attack) if override_damage<0 else override_damage)*(0.85 if w.tick<e.weakened_until else 1.0)),e.archetype=="martial_artist")
 		if e.archetype=="martial_artist" and a.hp<=1: bow_end(w,e)
 	elif t.kind=="structure":
 		var b=w.structures.get(t.pos,{})
@@ -292,7 +295,7 @@ static func bow_end(w,e):
 	e.bow_until=w.tick+ceili(Data.SPECIAL.bow_seconds/w.DT); e.action_id="bow"; e.state="礼"; e.chosen_target={}
 
 static func tame(w,e,a) -> bool:
-	if a.is_empty() or w.distance(e.pos,a.pos)>Data.SPECIAL.tame_range or not w.line_of_sight(e.pos,a.pos): return false
+	if a.is_empty() or a.get("type_tag")=="Human" or w.distance(e.pos,a.pos)>Data.SPECIAL.tame_range or not w.line_of_sight(e.pos,a.pos): return false
 	e.state="呼びかける"; e.action_id="tame"
 	if w.tick>=e.get("tame_at",0) and w.Combat.pay(e,"skill"):
 		e.tame_at=w.tick+ceili(Data.SPECIAL.tame_ct/w.DT)
@@ -311,7 +314,7 @@ static func lead_out(w,e):
 	e.state="動物を連れ帰る"; e.action_id="lead"; a.state="連れていかれる"
 	var goal=w.Story.exit_goal(w,e)
 	if not w.inside(e.pos) and w.distance(a.pos,e.pos)>1:
-		a.move_credit=minf(1.9,a.move_credit+a.move_speed*w.DT)
+		a.move_credit=minf(1.9,a.move_credit+a.move_speed*w.Content.speed(w,a)*w.DT)
 		var edges=w.neighbors(e.pos).filter(func(p):return w.animal_walkable(a,p) and not w.actor_occupied(p,a.pos))
 		if a.move_credit>=1 and not edges.is_empty():
 			var next=w.animal_next(a,edges[0])
@@ -319,13 +322,13 @@ static func lead_out(w,e):
 		return
 	if not w.inside(e.pos):
 		if w.distance(a.pos,e.pos)<=1:
-			if a.move_credit<1: a.move_credit+=a.move_speed*w.DT; return
+			if a.move_credit<1: a.move_credit+=a.move_speed*w.Content.speed(w,a)*w.DT; return
 			# Both actors cross separately; they never share a live cell.
 			var outer=e.pos+(e.pos-goal if e.pos!=goal else (e.pos-e.entry))
 			e.pos=outer; a.pos=goal; remove_animal(w,a,"abducted"); e.done=true
 		return
 	if w.distance(a.pos,e.pos)>1:
-		a.move_credit=minf(1.9,a.move_credit+a.move_speed*w.DT)
+		a.move_credit=minf(1.9,a.move_credit+a.move_speed*w.Content.speed(w,a)*w.DT)
 		if a.move_credit>=1:
 			var next=w.animal_next(a,e.pos)
 			if next!=e.pos and next!=a.pos and not w.actor_occupied(next,a.pos): a.move_credit-=1; w.open_for_ally(next); a.pos=next
@@ -333,5 +336,5 @@ static func lead_out(w,e):
 	var previous=e.pos
 	walk(w,e,goal)
 	if e.pos!=previous and w.animal_walkable(a,previous) and not w.actor_occupied(previous,a.pos):
-		a.move_credit=minf(1.9,a.move_credit+a.move_speed*w.DT)
+		a.move_credit=minf(1.9,a.move_credit+a.move_speed*w.Content.speed(w,a)*w.DT)
 		if a.move_credit>=1: a.move_credit-=1; a.pos=previous

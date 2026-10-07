@@ -58,7 +58,7 @@ func run():
 		game.world.spawn_enemy({"role":id,"entry":game.world.entries[0]})
 		var actor=game.world.enemies.back();actor.pos=Vector2i(5+game.world.enemies.size()*2,9);actor.state="探索"
 	game.reset_view();game.refresh();await capture("13_new_roles_placeholder")
-	check(game.world.animals.size()==4 and game.world.enemies.size()==7,"New actors share existing farm scene")
+	check(game.world.animals.size()==4 and game.world.enemies.size()==Farm.ProgressData.ENEMY_ROWS.size(),"New actors share existing farm scene")
 	if output!="":
 		record.method="Current game, real local input. Controlled day3/180G shop, role render fixtures explicitly marked. No user save."
 		record.implementation_commit=OS.get_environment("FARM_REVIEW_COMMIT")

@@ -1,0 +1,227 @@
+{
+  "source_commit": "a34390e584037cef78c9f49dcec4b18bd44f6f3d",
+  "adoption": "2026-10-07 user explicitly requested application of direction images and implementation of characters",
+  "limitations": "v2 character key poses are not continuous animation; fossil resurrection remains deferred",
+  "files": [
+    {
+      "path": "art_delivery/ui_world_direction_v1/HANDOFF.md",
+      "sha256": "f373de4e5941b36ca3369967e8fde68e4a4c2c838f079855f212a17ce149e0e4"
+    },
+    {
+      "path": "art_delivery/ui_world_direction_v1/candidates/new/bull.png",
+      "sha256": "018f9f25e833182c7a994a1c4161d67eba08b4e6f05f1c3f1497e20c06c2be11"
+    },
+    {
+      "path": "art_delivery/ui_world_direction_v1/candidates/new/cow.png",
+      "sha256": "3271106146d1ccf7fb91a1c4b2bf980b8eb41889933b3fef269a347f0ced242d"
+    },
+    {
+      "path": "art_delivery/ui_world_direction_v1/candidates/new/fossil.png",
+      "sha256": "59fd798c75c922730075e4c3fd6b5b89af358467131acd0e4bc9e9fc00b24a93"
+    },
+    {
+      "path": "art_delivery/ui_world_direction_v1/candidates/new/poison_cloud.png",
+      "sha256": "81251759bf028877005bf35dad55ffb25526e6e06937d004ee42d6b3efee20df"
+    },
+    {
+      "path": "art_delivery/ui_world_direction_v1/candidates/new/poison_projectile.png",
+      "sha256": "68c9c3650123759f6b635bb50a75b1e57d2f34ecd82854a8e6e0d5acc06adba6"
+    },
+    {
+      "path": "art_delivery/ui_world_direction_v1/candidates/new/poison_splash.png",
+      "sha256": "35102d05b73fdb16ffb509e4fc7d1c441bc03bdce9299eda3c5f0eee91f59e54"
+    },
+    {
+      "path": "art_delivery/ui_world_direction_v1/candidates/portraits/cat.png",
+      "sha256": "349a29dec9e1bdcc37123ec1cc2b8d0c83c1602483dd62d2e6cd71cecd17c6dd"
+    },
+    {
+      "path": "art_delivery/ui_world_direction_v1/candidates/portraits/destroyer.png",
+      "sha256": "4eb9c42b4f0d59211ec1ac666274d5bc27bca54b168a5a8c56a6c9c890f12079"
+    },
+    {
+      "path": "art_delivery/ui_world_direction_v1/candidates/portraits/doberman.png",
+      "sha256": "d0f6f54cc3ebf763553d9d6aba7b28a776c4ae7ed4e75dbd2aedb0d5cdfe8622"
+    },
+    {
+      "path": "art_delivery/ui_world_direction_v1/candidates/portraits/hen.png",
+      "sha256": "776d6bd1baabba17b59c14d48d16a6c7a51789b25f3385572ac9ce2d1b7c08b6"
+    },
+    {
+      "path": "art_delivery/ui_world_direction_v1/candidates/portraits/salaryman.png",
+      "sha256": "2e286795f13d0aa6c4edf9479f9953ae3bd347119076a3d2089e32e329109b16"
+    },
+    {
+      "path": "art_delivery/ui_world_direction_v1/candidates/portraits/shiba.png",
+      "sha256": "fae31c2e1b2d1168a5cbfe513ae831068b4b66168e46d0ab013af6ab81fee601"
+    },
+    {
+      "path": "art_delivery/ui_world_direction_v1/candidates/ui/rarity_common.png",
+      "sha256": "fc5933581155344665fb6d523c1f006ac189689f73ff262f849d8a6a55cb699a"
+    },
+    {
+      "path": "art_delivery/ui_world_direction_v1/candidates/ui/rarity_epic.png",
+      "sha256": "060849244f0b392126545d742e4ab03df05adc51e03b6a0c1f6924946f157735"
+    },
+    {
+      "path": "art_delivery/ui_world_direction_v1/candidates/ui/rarity_legendary.png",
+      "sha256": "052a2a58a2bde1f0cb2d0781a4f75f90b0541e57624c24b1f2f4c145b149b93a"
+    },
+    {
+      "path": "art_delivery/ui_world_direction_v1/candidates/ui/rarity_rare.png",
+      "sha256": "52af065108d1e08442906afec21ed7a765c8b38541d5f8d66702c03b5f98ece7"
+    },
+    {
+      "path": "art_delivery/ui_world_direction_v1/candidates/ui/rarity_uncommon.png",
+      "sha256": "83002abc0deae56d13104c3a730a9c56cc87f23128aeaaabbc861d6d4c51264c"
+    },
+    {
+      "path": "art_delivery/ui_world_direction_v1/candidates/ui/ready_aura.png",
+      "sha256": "3f69795b0d9ba95e9d9d1946e5943dac47309716984fee419f5aae4e3e81e4a8"
+    },
+    {
+      "path": "art_delivery/ui_world_direction_v1/candidates/ui/ready_corners.png",
+      "sha256": "4b60860f45593bcee86e5b7d67a68bec651ac291f4300a0374b929033d363b70"
+    },
+    {
+      "path": "art_delivery/ui_world_direction_v1/candidates/ui/ready_stars.png",
+      "sha256": "4fa038aaa0e46e9dc410f3e722223b46ce4c362726b52b19c800c7c87e129d49"
+    },
+    {
+      "path": "art_delivery/ui_world_direction_v1/candidates/ui/skill_bark.png",
+      "sha256": "922bf3e69ad6b590c1fa694b09ec1285a01be1663844ca6d3f48ff9a6cc5842f"
+    },
+    {
+      "path": "art_delivery/ui_world_direction_v1/candidates/ui/skill_destruction.png",
+      "sha256": "3231c89660c47e2c83d20c6cff735be4205e387d77df1eea408c77ec7794483f"
+    },
+    {
+      "path": "art_delivery/ui_world_direction_v1/candidates/ui/skill_reinforcement.png",
+      "sha256": "bac516361d99024ee56f575bef74f46793454ccfdbd5238c886d7bdd752d7af1"
+    },
+    {
+      "path": "art_delivery/ui_world_direction_v1/candidates/ui/stamina_lightning.png",
+      "sha256": "b6b77ca0915fbe5fe064496a718f0e94e358c419cdeb4241905d46424c1e3eb3"
+    },
+    {
+      "path": "art_delivery/ui_world_direction_v1/candidates/ui/stamina_shoe.png",
+      "sha256": "9f3a2524a0924628c6e3e29025dbcf85812e1144dc666c0e3e04b53c621b0076"
+    },
+    {
+      "path": "art_delivery/ui_world_direction_v1/candidates/ui/ultimate_frame.png",
+      "sha256": "7ae9a291b2fe48919c615c0e477ae01f09ef50b3bc3c016174ac39f6bce24517"
+    },
+    {
+      "path": "art_delivery/ui_world_direction_v1/candidates/ui/ultimate_rage.png",
+      "sha256": "1c5c3efd3bc21e8264c230040e819c193a1b1764ea730653948bdf4d40ac53f5"
+    },
+    {
+      "path": "art_delivery/ui_world_direction_v1/candidates/ui/ultimate_resurrection.png",
+      "sha256": "6751efec8f7023564fdc072702c3d4ae6b181b18350c3204f262ddb0a2b6e032"
+    },
+    {
+      "path": "art_delivery/ui_world_direction_v1/candidates/world/goldA.png",
+      "sha256": "e0138b3052925a8e54b753682977cd4819c2e041ad9ddf2ababc9a2cc463d990"
+    },
+    {
+      "path": "art_delivery/ui_world_direction_v1/candidates/world/goldB.png",
+      "sha256": "c913530ff20d247da513ea0cc646f769b6f0bfb51a417fbc0af3a342784ff5c8"
+    },
+    {
+      "path": "art_delivery/ui_world_direction_v1/candidates/world/tree_a.png",
+      "sha256": "354fab7e80d81a38c32a4979259344185fd083a75bcb733b94c69daa8ef19452"
+    },
+    {
+      "path": "art_delivery/ui_world_direction_v1/candidates/world/tree_a_canopy.png",
+      "sha256": "99d77b03dc4af13def2404a439bd2c0c9a55fd5444fd6ed98d8c887e2e4f5f9b"
+    },
+    {
+      "path": "art_delivery/ui_world_direction_v1/candidates/world/tree_a_trunk.png",
+      "sha256": "14d820035bd7afaf0e74f9b128aecfab3f23edbd479e0620235ec1e11b203f5c"
+    },
+    {
+      "path": "art_delivery/ui_world_direction_v1/candidates/world/tree_b.png",
+      "sha256": "7016a7a49782f9316ec6595daab8e6f8a50f8c4e9a892dfb54b5d415383ff857"
+    },
+    {
+      "path": "art_delivery/ui_world_direction_v1/candidates/world/tree_b_canopy.png",
+      "sha256": "28efbc1abecc8780f86216ccbed47fb51328275197c78885805704c34da9abb9"
+    },
+    {
+      "path": "art_delivery/ui_world_direction_v1/candidates/world/tree_b_trunk.png",
+      "sha256": "49857f4d08099c53bc1114b8759dc3a71e6c7b30e8c6f621d2efecfd3e43367c"
+    },
+    {
+      "path": "art_delivery/ui_world_direction_v1/candidates/world/tree_c.png",
+      "sha256": "e364637d343ff305e21f6d579ce77ab038b0161453882b9689a4515b0bcf1345"
+    },
+    {
+      "path": "art_delivery/ui_world_direction_v1/candidates/world/tree_c_canopy.png",
+      "sha256": "ad84534f8a2c8e9c951a110f497aae86a5740fd26ac30c642fd08ffa8941d76f"
+    },
+    {
+      "path": "art_delivery/ui_world_direction_v1/candidates/world/tree_c_trunk.png",
+      "sha256": "6ca2455d05ed8dab6eb287e1024a2141b0ac34b3bbfd40d7262f322d43d01539"
+    },
+    {
+      "path": "art_delivery/ui_world_direction_v1/manifest.json",
+      "sha256": "5f5dfe04fb11f0fc26ba854f30aaf662620f1254a3fa73514bb080439b7bda2f"
+    },
+    {
+      "path": "art_delivery/ui_world_direction_v2/ADOPTION.json",
+      "sha256": "809c1c75edb0b924463a7d2195d41c6452970879bc27a2d3e0e47396af080486"
+    },
+    {
+      "path": "art_delivery/ui_world_direction_v2/HANDOFF.md",
+      "sha256": "cb2bd4cae4e223aef931c60e037bb308faff9a4ee9c5e8791f7f8c63aaafe072"
+    },
+    {
+      "path": "art_delivery/ui_world_direction_v2/candidates/dancer/fan_raise.png",
+      "sha256": "31e8f30fb16b309e1ccaa9e52392a71d6942b7bd00b7782ec037a2c1e39f1971"
+    },
+    {
+      "path": "art_delivery/ui_world_direction_v2/candidates/dancer/fan_spread.png",
+      "sha256": "70b3b811477b732f7ddfea5afbb264ab46149deabc0cc202237ea866f31ce2d1"
+    },
+    {
+      "path": "art_delivery/ui_world_direction_v2/candidates/dancer/idle.png",
+      "sha256": "f42523b674e8e619bb4d23f1fd90cc7cf3ade23f48a69621170274ec9e69a816"
+    },
+    {
+      "path": "art_delivery/ui_world_direction_v2/candidates/kokeshi/idle.png",
+      "sha256": "934058d4aca44e0bd0fe7b1b89a31d45b8560d2c2405cdfcf247fd054951297d"
+    },
+    {
+      "path": "art_delivery/ui_world_direction_v2/candidates/maid/chase.png",
+      "sha256": "d6d107e11205cc530143a1029fea1df9a098836e90a577495f6a3bf225bab45a"
+    },
+    {
+      "path": "art_delivery/ui_world_direction_v2/candidates/maid/idle.png",
+      "sha256": "2619530b4d93d1e34938ca84e51178079b3f691f935a2ddc70d219d4cc3354b7"
+    },
+    {
+      "path": "art_delivery/ui_world_direction_v2/candidates/maid/rage.png",
+      "sha256": "11dcbbcc225100d3751123d73cd5041e05b5284b7d684c4bfbdf0918e4ce1860"
+    },
+    {
+      "path": "art_delivery/ui_world_direction_v2/candidates/maid/rage_aura.png",
+      "sha256": "b4759ecb2bfea1d8bf8eb5341c642fb675d2160f4d6bf82f37a4e04c9deeebf8"
+    },
+    {
+      "path": "art_delivery/ui_world_direction_v2/candidates/thief/idle.png",
+      "sha256": "f380ee1077c0718ab857fc7057ccc7cad3fc924bb9a9f6fccff1bda8a6db9449"
+    },
+    {
+      "path": "art_delivery/ui_world_direction_v2/candidates/thief/poison_windup.png",
+      "sha256": "c67a9436d5e3c19eec6a16718299c8f8b951740bd815a6fbc43566566ca6d87d"
+    },
+    {
+      "path": "art_delivery/ui_world_direction_v2/candidates/thief/steal.png",
+      "sha256": "e8db04f55e8aa50b2cf5a458e680038c17658e378fed2979ef721d55e554cc34"
+    },
+    {
+      "path": "art_delivery/ui_world_direction_v2/manifest.json",
+      "sha256": "0db928cdc847b3071bfb4697544d40808d04dbd2c105548ba919a3061f7a4b0c"
+    }
+  ]
+}

@@ -2,6 +2,9 @@ extends RefCounted
 const Data = preload("res://game/progression_data.gd")
 ## Only playable species; future species stay in ANIMALS.md.
 const SPECIES = {
+	"cow":{"category":"bovine","hp":60,"attack":0,"object_attack":0,"attack_seconds":1.2,"move_speed":1.3,"detection_range":5,"attack_target_range":5,"loyalty":85,"can_enter_indoor":true,"orders":["guide"],"commands":true,"mortal":true,"affinity":false,"combat_response":2,"skills":["milk"],"title":"乳牛"},
+	"bull":{"category":"bovine","hp":80,"attack":12,"object_attack":0,"attack_seconds":1.2,"move_speed":1.8,"detection_range":5,"attack_target_range":5,"loyalty":85,"can_enter_indoor":true,"orders":["auto","stay","wander","rest","guide","charge"],"commands":true,"mortal":true,"affinity":false,"combat_response":0,"skills":["charge","grit"],"title":"闘牛"},
+	"maid":{"category":"human","hp":45,"attack":3,"object_attack":0,"attack_seconds":1.2,"move_speed":2.0,"detection_range":5,"attack_target_range":5,"loyalty":85,"can_enter_indoor":true,"orders":["auto","stay","rest","guide"],"commands":true,"mortal":true,"affinity":false,"combat_response":0,"skills":["coffee_support"],"title":"メイド","has_stamina":true,"ultimates":["rage"]},
 	"shiba": {"title": "柴犬", "category": "dog", "hp": 40, "attack": 10, "object_attack": 0, "attack_seconds": 1.2, "move_speed": 2.0, "detection_range": 4, "attack_target_range": 4, "loyalty": 75, "can_enter_indoor": false, "orders": ["auto","stay","wander","rest","attack_target","guide"], "commands": true, "mortal": false, "affinity": false, "combat_response": Data.CombatResponse.AUTO, "skills": ["bark", "rescue"]},
 	"hen": {"title": "鶏", "category": "bird", "hp": 20, "attack": 0, "object_attack": 0, "attack_seconds": 0, "move_speed": 1.3, "detection_range": 3, "attack_target_range": 0, "loyalty": 0, "can_enter_indoor": true, "orders": ["guide"], "commands": false, "mortal": true, "affinity": false, "combat_response": Data.CombatResponse.NONE, "skills": ["lay", "feather"]},
 	"cat": {"title": "猫", "category": "cat", "hp": 28, "attack": 0, "object_attack": 0, "attack_seconds": 0, "move_speed": 1.8, "detection_range": 3, "attack_target_range": 0, "loyalty": 0, "can_enter_indoor": true, "orders": [], "commands": false, "mortal": true, "affinity": true, "combat_response": Data.CombatResponse.NONE, "skills": ["charm", "meow"]},
@@ -9,6 +12,10 @@ const SPECIES = {
 	"bullfrog":{"title":"ウシガエル","category":"amphibian","hp":34,"attack":2,"object_attack":0,"attack_seconds":1.5,"move_speed":1.4,"detection_range":5,"attack_target_range":5,"loyalty":45,"can_enter_indoor":true,"orders":["auto","stay","wander","guide"],"commands":true,"mortal":true,"affinity":false,"combat_response":Data.CombatResponse.AUTO,"skills":["tongue","croak"]},
 	"hedgehog":{"title":"ハリネズミ","category":"small","hp":38,"attack":0,"object_attack":0,"attack_seconds":1.5,"move_speed":1.2,"detection_range":2,"attack_target_range":2,"loyalty":40,"can_enter_indoor":true,"orders":["stay","guide"],"commands":true,"mortal":true,"affinity":false,"combat_response":Data.CombatResponse.REACTIVE,"skills":["spines"]}}
 const SKILLS = {
+ "milk":{"name":"搾乳","type":"passive","unlock_level":1,"condition":"牧場主が隣接して搾乳・1日1回","effect":"ミルクを1個受け取る"},
+ "charge":{"name":"突撃","type":"active","unlock_level":1,"cooldown":8.0,"condition":"指示後、指定地点へ直進","effect":"最初の敵に20ダメージ。壁・仲間で停止"},
+ "grit":{"name":"根性","type":"passive","unlock_level":1,"condition":"HP50%以下","effect":"移動・攻撃速度1.5倍"},
+ "coffee_support":{"name":"コーヒー配り","type":"active","unlock_level":1,"cooldown":1.0,"condition":"味方へ近づいて配る","effect":"HP3・スタミナ12回復。一巡後は自分も飲んで休む"},
 	"intercept":{"name":"迎撃態勢","type":"passive","unlock_level":1,"condition":"検知済みの敵が攻撃対象範囲内","effect":"迷いを抑え迎撃"},
 	"tongue":{"name":"舌拘束","type":"active","unlock_level":1,"cooldown":8.0,"condition":"敵を見通せる","effect":"4マス以内の1体を2秒足止め。人間のスタミナを20低下"},
 	"croak":{"name":"警戒鳴き","type":"passive","unlock_level":1,"condition":"被弾","effect":"周囲6マスへ攻撃者の情報を共有"},
@@ -34,6 +41,9 @@ static func skill(id: String) -> Dictionary:
 	return row
 
 const CHARACTER_TEXT={
+ "cow":["穏やかなミルクの届け手。","牧場主がそばへ行くと、1日1回ミルクを受け取れる仲間。戦闘は苦手。"],
+ "bull":["まっすぐ突進する頼もしい仲間。","指定地点へ直進する。障害物を迂回しないため、通路を確かめて指示しよう。"],
+ "maid":["コーヒーで仲間を支える。","仲間へコーヒーを配り、一巡したら自分もひと休み。激ギレ中は敵へ立ち向かう。"],
  "shiba":["危険に立ち向かう、大切な相棒。","牧場主のかけがえのない相棒。高い忠誠心で危険に立ち向かい、屋外から主人を救う機会を待つ。"],
  "hen":["穏やかな卵の届け手。","毎朝卵を届ける穏やかな仲間。移動の誘導には応じるが、戦いは苦手。"],
  "cat":["気ままに歩く、自由な仲間。","気ままに牧場を歩く自由な仲間。指示には従わず、自分のペースで過ごす。"],
