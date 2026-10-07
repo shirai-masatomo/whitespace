@@ -42,7 +42,7 @@ func run():
   if p.x>=8 and p.x<=18 and p.y>=8 and p.y<=12:w.trees.erase(p)
  for i in range(4):
   w.spawn_enemy({"role":["salaryman","destroyer","dancer","maid"][i],"entry":w.entries[0],"debug_single":true});w.enemies.back().pos=Vector2i(11+i*2,10)
- game.neutral();game.reset_view();game.camera.zoom=Vector2(0.7,0.7);game.camera.position=game.center(Vector2i(12,9));game.refresh();game._process(0)
+ game.neutral();game.reset_view();game.camera.zoom=Vector2(0.5,0.5);game.camera.position=game.center(Vector2i(12,9));game.refresh();game._process(0)
  await capture("01_forest_humans")
  w.keeper.state="hidden_rest";w.keeper.hp=2
  for text in ["サラリーマン：応援要請","柴犬 → 盗賊　10ダメージ","舞姫：復活の舞","武闘家が復活","牧場主：隠れて療養中"]:w.PlayerEvents.add(w,text)

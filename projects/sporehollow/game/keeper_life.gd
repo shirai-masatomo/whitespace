@@ -233,7 +233,7 @@ static func hurt(w, e):
 	w.combat_log.append({"tick": w.tick, "source": "keeper_hit", "id": e.id, "target": -1, "damage": e.attack_power})
 	if k.hp == 0:
 		k.state = "unconscious"
-		w.PlayerEvents.add(w,"牧場主が気絶")
+		if originals.is_empty():w.PlayerEvents.add(w,"牧場主：気絶")
 		k.recover_ticks = 0
 		set_rest(w, false)
 		w.manual_goal = null

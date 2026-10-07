@@ -1570,9 +1570,16 @@ func draw_hud():
 		draw_shop()
 		return
 	if world.working() and not world.player_events.is_empty():
-		var top=715-world.player_events.size()*23
-		hud.draw_style_box(MarketView.panel(Color(0.12,0.19,0.15,0.72)),Rect2(932,top-20,332,world.player_events.size()*23+28))
-		for i in range(world.player_events.size()): label_on(hud,Vector2(944,top+i*23),world.player_events[i].text,13,UI.PAPER)
+		var paragraphs=[];var height=16.0
+		for row in world.player_events:
+			var paragraph=TextParagraph.new();paragraph.add_string(row.text,FONT,13);paragraph.width=308
+			paragraph.break_flags=TextServer.BREAK_MANDATORY|TextServer.BREAK_WORD_BOUND|TextServer.BREAK_ADAPTIVE
+			paragraphs.append(paragraph);height+=paragraph.get_size().y+6
+		var y=723-height
+		hud.draw_style_box(MarketView.panel(Color(0.12,0.19,0.15,0.72)),Rect2(932,y,332,height))
+		y+=8
+		for paragraph in paragraphs:
+			paragraph.draw(hud.get_canvas_item(),Vector2(944,y),UI.PAPER);y+=paragraph.get_size().y+6
 	if world.phase == "dawn":
 		hud.draw_style_box(UI.surface(UI.PAPER), Rect2(330, 72, 620, 106))
 		label_on(hud, Vector2(365, 118), "夜明け", 30, Color("485e48"))
@@ -2235,7 +2242,8 @@ func keeper_hit_rect() -> Rect2:
 	if world.keeper.carrier>=0:return carried_keeper_rect().grow(3)
 	var p=keeper_pixel()
 	if Farm.Life.presentation(world) in ["unconscious","carried"]: return Rect2(p+Vector2(-25,-12),Vector2(50,34))
-	var pose=actor_art.get("keeper",{})
+	var pose=actor_art.get("keeper",{}).duplicate()
+	if world.keeper.state=="hidden_rest":pose.action="rest"
 	if pose.get("action", "idle") != "idle":
 		var foot=p+Vector2(0,14)
 		var rect=Art.bounds("keeper",pose.action,int(world.keeper.get("facing",1)),foot,visual_time-pose.get("at",visual_time))

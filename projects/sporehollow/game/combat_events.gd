@@ -40,7 +40,7 @@ static func hit(w,source: Dictionary,target: Dictionary,action: String,damage: f
 	grant(w,target,"DamageTaken",action,str(source.get("faction","keeper"))+str(source.get("id",-1)))
 	if target.hp<=0 and not target.get("kill_gauge_awarded",false):
 		target.kill_gauge_awarded=true
-		w.PlayerEvents.add(w,w.PlayerEvents.name_of(w,target)+"：気絶")
+		w.PlayerEvents.add(w,w.PlayerEvents.name_of(w,target)+("：気絶" if target==w.keeper or target.get("species")=="shiba" else "：倒れた"))
 		grant(w,source,"Kill",action,tid)
 		grant(w,source,"Finisher",action,tid)
 

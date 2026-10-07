@@ -90,4 +90,5 @@ func run():
  check(w.debug_spawn_enemy("maid") and w.enemies.back().entry!=w.entries[0],"Blocked debug entry uses another valid gate")
  for entry in w.entries:w.trees[entry]="blocked"
  check(not w.debug_spawn_enemy("maid") and not w.events.is_empty(),"All blocked gates report failure")
+ FileAccess.open("res://artifacts/quality-tests.json",FileAccess.WRITE).store_string(JSON.stringify({"checks":record,"reinforcement":{"origin":str(origin),"entry":str(reinforcement.entry),"path_cells":reinforcement.path.size(),"final":str(reinforcement.pos)},"tuning":ES.TUNING,"capture_grace":w.Life.CAPTURE_GRACE,"hidden_heal_seconds":w.Life.HIDDEN_HEAL_SECONDS,"hidden_recover_hp":w.Life.HIDDEN_RECOVER_HP},"  "))
  print("QUALITY: %d checks, failures=%d"%[checks,failures]);quit(1 if failures else 0)
