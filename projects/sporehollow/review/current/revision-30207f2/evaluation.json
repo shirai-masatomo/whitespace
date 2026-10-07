@@ -1,0 +1,322 @@
+{
+  "ai_settings": {
+    "counter": {
+      "counter": 0.8,
+      "hesitate": 0.1,
+      "resume": 0.1
+    },
+    "decision_max": 1.4,
+    "decision_min": 0.6,
+    "dog": {
+      "engage": 0.76,
+      "reposition": 0.08,
+      "watch": 0.16
+    },
+    "log_limit": 96,
+    "raider": {
+      "advance": 0.76,
+      "detour": 0.14,
+      "hesitate": 0.1
+    },
+    "randomness": 1.0,
+    "rescue_randomness": 0.12
+  },
+  "scope": "bounded smoke",
+  "seed_range": [
+    1,
+    2
+  ],
+  "strategies": {
+    "front": {
+      "samples": [
+        {
+          "abducted": false,
+          "attacks": 4,
+          "captures": 0,
+          "first_attack_after_contact": 1.25,
+          "first_attack_after_spawn": 40.75,
+          "hp": 25,
+          "non_attack_decisions": 1,
+          "rescues": 0,
+          "seconds": 180.0,
+          "seed": 1,
+          "win": true
+        },
+        {
+          "abducted": false,
+          "attacks": 5,
+          "captures": 0,
+          "first_attack_after_contact": 2.25,
+          "first_attack_after_spawn": 22.0,
+          "hp": 40,
+          "non_attack_decisions": 4,
+          "rescues": 0,
+          "seconds": 180.0,
+          "seed": 2,
+          "win": true
+        }
+      ],
+      "summary": {
+        "abductions": 0,
+        "captures": 0,
+        "dog_attacks": 9,
+        "dog_survival": 2,
+        "first_attack_after_contact_max": 2.25,
+        "first_attack_after_contact_min": 1.25,
+        "first_attack_after_spawn_max": 40.75,
+        "first_attack_after_spawn_min": 22.0,
+        "hp_distribution": {
+          "25": 1,
+          "40": 1
+        },
+        "non_attack_decisions": 5,
+        "rescue_rate_when_carried": null,
+        "rescues": 0,
+        "runs": 2,
+        "wins": 2
+      }
+    },
+    "ordered": {
+      "samples": [
+        {
+          "abducted": false,
+          "attacks": 4,
+          "captures": 1,
+          "first_attack_after_contact": 1.5,
+          "first_attack_after_spawn": 32.0,
+          "hp": 25,
+          "non_attack_decisions": 0,
+          "rescues": 1,
+          "seconds": 180.0,
+          "seed": 1,
+          "win": true
+        },
+        {
+          "abducted": false,
+          "attacks": 0,
+          "captures": 0,
+          "first_attack_after_contact": -1.0,
+          "first_attack_after_spawn": -1.0,
+          "hp": 40,
+          "non_attack_decisions": 0,
+          "rescues": 0,
+          "seconds": 180.0,
+          "seed": 2,
+          "win": true
+        }
+      ],
+      "summary": {
+        "abductions": 0,
+        "captures": 1,
+        "dog_attacks": 4,
+        "dog_survival": 2,
+        "first_attack_after_contact_max": 1.5,
+        "first_attack_after_contact_min": 1.5,
+        "first_attack_after_spawn_max": 32.0,
+        "first_attack_after_spawn_min": 32.0,
+        "hp_distribution": {
+          "25": 1,
+          "40": 1
+        },
+        "non_attack_decisions": 0,
+        "rescue_rate_when_carried": 1.0,
+        "rescues": 1,
+        "runs": 2,
+        "wins": 2
+      }
+    },
+    "poor": {
+      "samples": [
+        {
+          "abducted": false,
+          "attacks": 5,
+          "captures": 0,
+          "first_attack_after_contact": 2.25,
+          "first_attack_after_spawn": 20.5,
+          "hp": 40,
+          "non_attack_decisions": 1,
+          "rescues": 0,
+          "seconds": 180.0,
+          "seed": 1,
+          "win": true
+        },
+        {
+          "abducted": false,
+          "attacks": 0,
+          "captures": 0,
+          "first_attack_after_contact": -1.0,
+          "first_attack_after_spawn": -1.0,
+          "hp": 40,
+          "non_attack_decisions": 0,
+          "rescues": 0,
+          "seconds": 180.0,
+          "seed": 2,
+          "win": true
+        }
+      ],
+      "summary": {
+        "abductions": 0,
+        "captures": 0,
+        "dog_attacks": 5,
+        "dog_survival": 2,
+        "first_attack_after_contact_max": 2.25,
+        "first_attack_after_contact_min": 2.25,
+        "first_attack_after_spawn_max": 20.5,
+        "first_attack_after_spawn_min": 20.5,
+        "hp_distribution": {
+          "40": 2
+        },
+        "non_attack_decisions": 1,
+        "rescue_rate_when_carried": null,
+        "rescues": 0,
+        "runs": 2,
+        "wins": 2
+      }
+    },
+    "rescue": {
+      "samples": [
+        {
+          "abducted": false,
+          "attacks": 4,
+          "captures": 0,
+          "first_attack_after_contact": 0.75,
+          "first_attack_after_spawn": 31.25,
+          "hp": 25,
+          "non_attack_decisions": 0,
+          "rescues": 0,
+          "seconds": 180.0,
+          "seed": 1,
+          "win": true
+        },
+        {
+          "abducted": false,
+          "attacks": 0,
+          "captures": 0,
+          "first_attack_after_contact": -1.0,
+          "first_attack_after_spawn": -1.0,
+          "hp": 40,
+          "non_attack_decisions": 0,
+          "rescues": 0,
+          "seconds": 180.0,
+          "seed": 2,
+          "win": true
+        }
+      ],
+      "summary": {
+        "abductions": 0,
+        "captures": 0,
+        "dog_attacks": 4,
+        "dog_survival": 2,
+        "first_attack_after_contact_max": 0.75,
+        "first_attack_after_contact_min": 0.75,
+        "first_attack_after_spawn_max": 31.25,
+        "first_attack_after_spawn_min": 31.25,
+        "hp_distribution": {
+          "25": 1,
+          "40": 1
+        },
+        "non_attack_decisions": 0,
+        "rescue_rate_when_carried": null,
+        "rescues": 0,
+        "runs": 2,
+        "wins": 2
+      }
+    },
+    "reserve": {
+      "samples": [
+        {
+          "abducted": true,
+          "attacks": 0,
+          "captures": 1,
+          "first_attack_after_contact": -1.0,
+          "first_attack_after_spawn": -1.0,
+          "hp": 40,
+          "non_attack_decisions": 0,
+          "rescues": 0,
+          "seconds": 67.5,
+          "seed": 1,
+          "win": false
+        },
+        {
+          "abducted": true,
+          "attacks": 0,
+          "captures": 1,
+          "first_attack_after_contact": -1.0,
+          "first_attack_after_spawn": -1.0,
+          "hp": 40,
+          "non_attack_decisions": 0,
+          "rescues": 0,
+          "seconds": 58.75,
+          "seed": 2,
+          "win": false
+        }
+      ],
+      "summary": {
+        "abductions": 2,
+        "captures": 2,
+        "dog_attacks": 0,
+        "dog_survival": 2,
+        "first_attack_after_contact_max": null,
+        "first_attack_after_contact_min": null,
+        "first_attack_after_spawn_max": null,
+        "first_attack_after_spawn_min": null,
+        "hp_distribution": {
+          "40": 2
+        },
+        "non_attack_decisions": 0,
+        "rescue_rate_when_carried": 0.0,
+        "rescues": 0,
+        "runs": 2,
+        "wins": 0
+      }
+    },
+    "uncommanded": {
+      "samples": [
+        {
+          "abducted": false,
+          "attacks": 5,
+          "captures": 0,
+          "first_attack_after_contact": 1.75,
+          "first_attack_after_spawn": 19.25,
+          "hp": 40,
+          "non_attack_decisions": 1,
+          "rescues": 0,
+          "seconds": 180.0,
+          "seed": 1,
+          "win": true
+        },
+        {
+          "abducted": false,
+          "attacks": 0,
+          "captures": 0,
+          "first_attack_after_contact": -1.0,
+          "first_attack_after_spawn": -1.0,
+          "hp": 40,
+          "non_attack_decisions": 0,
+          "rescues": 0,
+          "seconds": 180.0,
+          "seed": 2,
+          "win": true
+        }
+      ],
+      "summary": {
+        "abductions": 0,
+        "captures": 0,
+        "dog_attacks": 5,
+        "dog_survival": 2,
+        "first_attack_after_contact_max": 1.75,
+        "first_attack_after_contact_min": 1.75,
+        "first_attack_after_spawn_max": 19.25,
+        "first_attack_after_spawn_min": 19.25,
+        "hp_distribution": {
+          "40": 2
+        },
+        "non_attack_decisions": 1,
+        "rescue_rate_when_carried": null,
+        "rescues": 0,
+        "runs": 2,
+        "wins": 2
+      }
+    }
+  }
+}

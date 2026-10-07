@@ -1,0 +1,161 @@
+{
+  "implementation": "30207f2fa1ca73991e48473907cbd7315aaebe52",
+  "material": "5ac00e72c4036799de89f598c0374aa8efcf8549",
+  "note": "19 distinct suites passed across related checkpoints; not a repeated full run on final SHA. Latest edited combat/UI were rerun in the clean build. AI is 12 trials, not 192.",
+  "runs": [
+    {
+      "suite": "revisions",
+      "run": "20261007-193444-903",
+      "log": "checks/revisions.log",
+      "scope": "integration working tree before 30207f2",
+      "exit": "success"
+    },
+    {
+      "suite": "residents",
+      "run": "20261007-193444-903",
+      "log": "checks/residents.log",
+      "scope": "integration working tree before 30207f2",
+      "exit": "success"
+    },
+    {
+      "suite": "world",
+      "run": "20261007-193444-903",
+      "log": "checks/world.log",
+      "scope": "integration working tree before 30207f2",
+      "exit": "success"
+    },
+    {
+      "suite": "jobs",
+      "run": "20261007-193611-438",
+      "log": "checks/jobs.log",
+      "scope": "integration working tree before 30207f2",
+      "exit": "success"
+    },
+    {
+      "suite": "keeper",
+      "run": "20261007-193958-481",
+      "log": "checks/keeper.log",
+      "scope": "integration working tree before 30207f2",
+      "exit": "success"
+    },
+    {
+      "suite": "planning",
+      "run": "20261007-193958-481",
+      "log": "checks/planning.log",
+      "scope": "integration working tree before 30207f2",
+      "exit": "success"
+    },
+    {
+      "suite": "rest_until",
+      "run": "20261007-193958-481",
+      "log": "checks/rest_until.log",
+      "scope": "integration working tree before 30207f2",
+      "exit": "success"
+    },
+    {
+      "suite": "input",
+      "run": "20261007-193958-481",
+      "log": "checks/input.log",
+      "scope": "integration working tree before 30207f2",
+      "exit": "success"
+    },
+    {
+      "suite": "controls",
+      "run": "20261007-193958-481",
+      "log": "checks/controls.log",
+      "scope": "integration working tree before 30207f2",
+      "exit": "success"
+    },
+    {
+      "suite": "building_art",
+      "run": "20261007-193958-481",
+      "log": "checks/building_art.log",
+      "scope": "integration working tree before 30207f2",
+      "exit": "success"
+    },
+    {
+      "suite": "delivered_art",
+      "run": "20261007-193958-481",
+      "log": "checks/delivered_art.log",
+      "scope": "integration working tree before 30207f2",
+      "exit": "success"
+    },
+    {
+      "suite": "market_ui",
+      "run": "20261007-193958-481",
+      "log": "checks/market_ui.log",
+      "scope": "integration working tree before 30207f2",
+      "exit": "success"
+    },
+    {
+      "suite": "story",
+      "run": "20261007-194203-640",
+      "log": "checks/story.log",
+      "scope": "integration working tree before 30207f2",
+      "exit": "success"
+    },
+    {
+      "suite": "story_ui",
+      "run": "20261007-194203-640",
+      "log": "checks/story_ui.log",
+      "scope": "integration working tree before 30207f2",
+      "exit": "success"
+    },
+    {
+      "suite": "progression_flow",
+      "run": "20261007-194203-640",
+      "log": "checks/progression_flow.log",
+      "scope": "integration working tree before 30207f2",
+      "exit": "success"
+    },
+    {
+      "suite": "progression_ui",
+      "run": "20261007-194203-640",
+      "log": "checks/progression_ui.log",
+      "scope": "integration working tree before 30207f2",
+      "exit": "success"
+    },
+    {
+      "suite": "progression",
+      "run": "20261007-194739-212",
+      "log": "checks/progression.log",
+      "scope": "integration working tree before 30207f2",
+      "exit": "success"
+    },
+    {
+      "suite": "combat_revision",
+      "run": "20261007-195025-990",
+      "log": "checks/combat_revision.log",
+      "scope": "clean 30207f2",
+      "exit": "success"
+    },
+    {
+      "suite": "ui_revision",
+      "run": "20261007-195025-990",
+      "log": "checks/ui_revision.log",
+      "scope": "clean 30207f2",
+      "exit": "success"
+    },
+    {
+      "suite": "export",
+      "run": "20261007-195025-990",
+      "log": "checks/export.log",
+      "scope": "clean 30207f2",
+      "exit": "success"
+    },
+    {
+      "suite": "export-smoke",
+      "run": "20261007-195025-990",
+      "log": "checks/export-smoke.log",
+      "scope": "clean 30207f2",
+      "exit": "success"
+    },
+    {
+      "suite": "evaluate",
+      "run": "20261007-194818-134",
+      "log": "checks/evaluate.log",
+      "scope": "integration working tree before 30207f2",
+      "exit": "success"
+    }
+  ]
+}

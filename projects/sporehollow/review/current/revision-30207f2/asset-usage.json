@@ -1,0 +1,150 @@
+{
+  "delivery_commit": "5ac00e72c4036799de89f598c0374aa8efcf8549",
+  "scope": "Only the listed static assets imported. Full motions remain delivered / integration pending. Source manifests are evidence, not import inventories.",
+  "assets": [
+    {
+      "id": "destroyer",
+      "path": "res://assets/adopted_ui/destroyer.png",
+      "source": "art_delivery/destroyer_motion_v1/idle/right_00.png",
+      "sha256": "1909a68f0ad98c07eed6ee3bca12bf7aadff97e84bf98a8ae6d5103ef1785c08",
+      "delivery_commit": "5ac00e72c4036799de89f598c0374aa8efcf8549",
+      "usage": "UI portrait fallback from approved idle; not a high-resolution portrait",
+      "foot_anchor": [
+        32,
+        64
+      ]
+    },
+    {
+      "id": "destroyer_weapon",
+      "path": "res://assets/adopted_ui/destroyer_weapon.png",
+      "source": "art_delivery/destroyer_motion_v1/weapon/idle/right_00.png",
+      "sha256": "7a6c96ca9a6d0f8b4b950e8c2dcbbf0623901184a3d33252c0403d799d0cb2a2",
+      "delivery_commit": "5ac00e72c4036799de89f598c0374aa8efcf8549",
+      "usage": "UI portrait fallback from approved idle; not a high-resolution portrait",
+      "foot_anchor": [
+        56,
+        80
+      ]
+    },
+    {
+      "id": "martial_artist",
+      "path": "res://assets/adopted_ui/martial_artist.png",
+      "source": "art_delivery/martial_artist_motion_v1/idle/right_00.png",
+      "sha256": "62fb197738a835fcb0012ac11a536c8fe04baa41c48e00d75b8955575eb93180",
+      "delivery_commit": "5ac00e72c4036799de89f598c0374aa8efcf8549",
+      "usage": "UI portrait fallback from approved idle; not a high-resolution portrait",
+      "foot_anchor": [
+        24,
+        50
+      ]
+    },
+    {
+      "id": "salaryman",
+      "path": "res://assets/adopted_ui/salaryman.png",
+      "source": "art_delivery/salaryman_motion_v1/idle/right_00.png",
+      "sha256": "776230ad89680e2cfaef4344ae5a437edc5ea58686418f0d80e33787050e7f88",
+      "delivery_commit": "5ac00e72c4036799de89f598c0374aa8efcf8549",
+      "usage": "UI portrait fallback from approved idle; not a high-resolution portrait",
+      "foot_anchor": [
+        24,
+        50
+      ]
+    },
+    {
+      "id": "ninja",
+      "path": "res://assets/adopted_ui/ninja.png",
+      "source": "art_delivery/ninja_motion_v1/idle/right_00.png",
+      "sha256": "dd842e6f9ed59a04f54392db6f62a9380426331f6a8fc794480c50f11b0d27f2",
+      "delivery_commit": "5ac00e72c4036799de89f598c0374aa8efcf8549",
+      "usage": "UI portrait fallback from approved idle; not a high-resolution portrait",
+      "foot_anchor": [
+        32,
+        50
+      ]
+    },
+    {
+      "id": "animal_tamer",
+      "path": "res://assets/adopted_ui/animal_tamer.png",
+      "source": "art_delivery/animal_tamer_motion_v1/idle/right_00.png",
+      "sha256": "9ab7b7a7ccb56ea5b79eb5fae9280df0213c79b60a916d6738e684ebb446f7d2",
+      "delivery_commit": "5ac00e72c4036799de89f598c0374aa8efcf8549",
+      "usage": "UI portrait fallback from approved idle; not a high-resolution portrait",
+      "foot_anchor": [
+        24,
+        50
+      ]
+    },
+    {
+      "id": "runner",
+      "path": "res://assets/adopted_ui/runner.png",
+      "source": "art_delivery/runner_motion_v1/idle/right_00.png",
+      "sha256": "61768aabf3792cb159b5955774a767abee5c4bbc1479d28932fe69db84a517b1",
+      "delivery_commit": "5ac00e72c4036799de89f598c0374aa8efcf8549",
+      "usage": "UI portrait fallback from approved idle; not a high-resolution portrait",
+      "foot_anchor": [
+        40,
+        66
+      ]
+    },
+    {
+      "id": "doberman",
+      "path": "res://assets/adopted_ui/doberman.png",
+      "source": "art_delivery/doberman_motion_v1/idle/right_00.png",
+      "sha256": "8bb7ef2a296bd66be24d9d951c351ab3efcef7788878e833872b7330197e2644",
+      "delivery_commit": "5ac00e72c4036799de89f598c0374aa8efcf8549",
+      "usage": "UI portrait fallback from approved idle; not a high-resolution portrait",
+      "foot_anchor": [
+        32,
+        44
+      ]
+    },
+    {
+      "id": "bullfrog",
+      "path": "res://assets/adopted_ui/bullfrog.png",
+      "source": "art_delivery/bullfrog_motion_v1/idle/right_00.png",
+      "sha256": "aae852e25c6013654162c4575e7f36c94c48a1e5815e9f204c88acac8850675d",
+      "delivery_commit": "5ac00e72c4036799de89f598c0374aa8efcf8549",
+      "usage": "UI portrait fallback from approved idle; not a high-resolution portrait",
+      "foot_anchor": [
+        32,
+        44
+      ]
+    },
+    {
+      "id": "hedgehog",
+      "path": "res://assets/adopted_ui/hedgehog.png",
+      "source": "art_delivery/hedgehog_motion_v1/idle/right_00.png",
+      "sha256": "ed48d7be231690178899feba79a9fe6a7c4f22c12938a8b7e0163b8071dde298",
+      "delivery_commit": "5ac00e72c4036799de89f598c0374aa8efcf8549",
+      "usage": "UI portrait fallback from approved idle; not a high-resolution portrait",
+      "foot_anchor": [
+        16,
+        28
+      ]
+    },
+    {
+      "id": "collar",
+      "path": "res://assets/adopted_ui/collar.png",
+      "source": "art_delivery/equipment_icons_v1/collar.png",
+      "sha256": "301e48b963de2bbb7289d81584f85b6230cae83ca01ba4b94f77a71e5bc2e0dc",
+      "delivery_commit": "5ac00e72c4036799de89f598c0374aa8efcf8549",
+      "usage": "UI equipment icon",
+      "foot_anchor": [
+        16,
+        16
+      ]
+    },
+    {
+      "id": "healing_berry",
+      "path": "res://assets/adopted_ui/healing_berry.png",
+      "source": "art_delivery/equipment_icons_v1/healing_berry.png",
+      "sha256": "65a07cf5bef3980b49c9930f132e9f7ac453bc57756dbd7655b186b191ad539d",
+      "delivery_commit": "5ac00e72c4036799de89f598c0374aa8efcf8549",
+      "usage": "UI equipment icon",
+      "foot_anchor": [
+        16,
+        16
+      ]
+    }
+  ]
+}

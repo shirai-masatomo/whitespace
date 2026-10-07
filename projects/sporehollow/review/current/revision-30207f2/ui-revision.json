@@ -1,0 +1,735 @@
+{
+  "captures": [
+    {
+      "animal_id": -1,
+      "book": "",
+      "file": "01_morning.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": -1,
+      "book": "",
+      "file": "02_merchant.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": -1,
+      "book": "",
+      "file": "03_categories.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": -1,
+      "book": "",
+      "file": "04_animals.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": -1,
+      "book": "",
+      "file": "05_book_grid.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": 1,
+      "book": "",
+      "file": "06_shiba_detail.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": 0,
+      "book": "",
+      "file": "10_plans_tooltip.png",
+      "group": 2,
+      "jobs": [
+        {
+          "animal_id": -1,
+          "id": 1,
+          "kind": "move",
+          "pos": "(10, 11)",
+          "reserved": 0,
+          "resource": "",
+          "started": false,
+          "state": "pending"
+        },
+        {
+          "animal_id": -1,
+          "id": 2,
+          "kind": "move",
+          "pos": "(16, 11)",
+          "reserved": 0,
+          "resource": "",
+          "started": false,
+          "state": "pending"
+        }
+      ],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": 0,
+      "book": "",
+      "file": "07_forest_overview.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 21,
+      "tool": ""
+    },
+    {
+      "animal_id": 0,
+      "book": "",
+      "file": "08_forest_entry.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 21,
+      "tool": ""
+    },
+    {
+      "animal_id": 0,
+      "book": "",
+      "file": "09_combat_ready.png",
+      "group": 1,
+      "jobs": [],
+      "tick": 21,
+      "tool": ""
+    }
+  ],
+  "checks": [
+    {
+      "check": "Safe rendering only",
+      "passed": true
+    },
+    {
+      "check": "Button: open_market",
+      "passed": true
+    },
+    {
+      "check": "Button: shop_buy",
+      "passed": true
+    },
+    {
+      "check": "Button: category_animals",
+      "passed": true
+    },
+    {
+      "check": "Formal delivered UI images resolve",
+      "passed": true
+    },
+    {
+      "check": "Market right click goes one level back",
+      "passed": true
+    },
+    {
+      "check": "Button: close_market",
+      "passed": true
+    },
+    {
+      "check": "Button: open_book",
+      "passed": true
+    },
+    {
+      "check": "Book opens to grid, not detail",
+      "passed": true
+    },
+    {
+      "check": "Button: book_entry_1",
+      "passed": true
+    },
+    {
+      "check": "Detail preserves selected individual and skill tooltip",
+      "passed": true
+    },
+    {
+      "check": "Skill tooltip describes implemented effect",
+      "passed": true
+    },
+    {
+      "check": "Button: book_list",
+      "passed": true
+    },
+    {
+      "check": "Button: book_enemies",
+      "passed": true
+    },
+    {
+      "check": "Enemy section has unknown grid",
+      "passed": true
+    },
+    {
+      "check": "Button: book_entry_0",
+      "passed": true
+    },
+    {
+      "check": "Unknown enemy detail safe",
+      "passed": true
+    },
+    {
+      "check": "UI animation never advances morning world",
+      "passed": true
+    },
+    {
+      "check": "Tab neutral to construction without action",
+      "passed": true
+    },
+    {
+      "check": "Shift selects only",
+      "passed": true
+    },
+    {
+      "check": "Tab command mode only",
+      "passed": true
+    },
+    {
+      "check": "First command Shift selects nearby animal only",
+      "passed": true
+    },
+    {
+      "check": "Next Shift selects action only",
+      "passed": true
+    },
+    {
+      "check": "Tab keeper and tab highlight sync",
+      "passed": true
+    },
+    {
+      "check": "Wheel zooms without mode change",
+      "passed": true
+    },
+    {
+      "check": "Keeper clicks enqueue normal FIFO move jobs",
+      "passed": true
+    },
+    {
+      "check": "Paused move plans neither move nor hold world",
+      "passed": true
+    },
+    {
+      "check": "Hover has fixed move JobID",
+      "passed": true
+    },
+    {
+      "check": "Right click cancels only hovered plan; no selection change",
+      "passed": true
+    },
+    {
+      "check": "Remaining move executes physically",
+      "passed": true
+    },
+    {
+      "check": "Other right click clears selection",
+      "passed": true
+    },
+    {
+      "check": "Neutral drag pans without selection",
+      "passed": true
+    },
+    {
+      "check": "Mode filtered drag candidates 0",
+      "passed": true
+    },
+    {
+      "check": "Mode filtered drag candidates 1",
+      "passed": true
+    },
+    {
+      "check": "Mode filtered drag candidates 2",
+      "passed": true
+    },
+    {
+      "check": "Central clearing contains no trees",
+      "passed": true
+    },
+    {
+      "check": "Trunk blocks keeper and animal",
+      "passed": true
+    },
+    {
+      "check": "No bare-hand felling job",
+      "passed": true
+    },
+    {
+      "check": "Enemy begins beyond zoomed-out viewport",
+      "passed": true
+    },
+    {
+      "check": "Entrance has no teleport",
+      "passed": true
+    },
+    {
+      "check": "Entrance has no teleport",
+      "passed": true
+    },
+    {
+      "check": "Entrance has no teleport",
+      "passed": true
+    },
+    {
+      "check": "Entrance has no teleport",
+      "passed": true
+    },
+    {
+      "check": "Entrance has no teleport",
+      "passed": true
+    },
+    {
+      "check": "Entrance has no teleport",
+      "passed": true
+    },
+    {
+      "check": "Entrance has no teleport",
+      "passed": true
+    },
+    {
+      "check": "Entrance has no teleport",
+      "passed": true
+    },
+    {
+      "check": "Entrance has no teleport",
+      "passed": true
+    },
+    {
+      "check": "Entrance has no teleport",
+      "passed": true
+    },
+    {
+      "check": "Entrance has no teleport",
+      "passed": true
+    },
+    {
+      "check": "Entrance has no teleport",
+      "passed": true
+    },
+    {
+      "check": "Entrance has no teleport",
+      "passed": true
+    },
+    {
+      "check": "Entrance has no teleport",
+      "passed": true
+    },
+    {
+      "check": "Entrance has no teleport",
+      "passed": true
+    },
+    {
+      "check": "Entrance has no teleport",
+      "passed": true
+    },
+    {
+      "check": "Entrance has no teleport",
+      "passed": true
+    },
+    {
+      "check": "Entrance has no teleport",
+      "passed": true
+    },
+    {
+      "check": "Entrance has no teleport",
+      "passed": true
+    },
+    {
+      "check": "Entrance has no teleport",
+      "passed": true
+    },
+    {
+      "check": "Entrance has no teleport",
+      "passed": true
+    },
+    {
+      "check": "Entrance has no teleport",
+      "passed": true
+    },
+    {
+      "check": "Entrance has no teleport",
+      "passed": true
+    },
+    {
+      "check": "Entrance has no teleport",
+      "passed": true
+    },
+    {
+      "check": "Entrance has no teleport",
+      "passed": true
+    },
+    {
+      "check": "Entrance has no teleport",
+      "passed": true
+    },
+    {
+      "check": "Entrance has no teleport",
+      "passed": true
+    },
+    {
+      "check": "Entrance has no teleport",
+      "passed": true
+    },
+    {
+      "check": "Entrance has no teleport",
+      "passed": true
+    },
+    {
+      "check": "Entrance has no teleport",
+      "passed": true
+    },
+    {
+      "check": "Entrance has no teleport",
+      "passed": true
+    },
+    {
+      "check": "Entrance has no teleport",
+      "passed": true
+    },
+    {
+      "check": "Entrance has no teleport",
+      "passed": true
+    },
+    {
+      "check": "Entrance has no teleport",
+      "passed": true
+    },
+    {
+      "check": "Entrance has no teleport",
+      "passed": true
+    },
+    {
+      "check": "Entrance has no teleport",
+      "passed": true
+    },
+    {
+      "check": "Entrance has no teleport",
+      "passed": true
+    },
+    {
+      "check": "Entrance has no teleport",
+      "passed": true
+    },
+    {
+      "check": "Entrance has no teleport",
+      "passed": true
+    },
+    {
+      "check": "Entrance has no teleport",
+      "passed": true
+    },
+    {
+      "check": "Entrance has no teleport",
+      "passed": true
+    },
+    {
+      "check": "Entrance has no teleport",
+      "passed": true
+    },
+    {
+      "check": "Entrance has no teleport",
+      "passed": true
+    },
+    {
+      "check": "Entrance has no teleport",
+      "passed": true
+    },
+    {
+      "check": "Entrance has no teleport",
+      "passed": true
+    },
+    {
+      "check": "Entrance has no teleport",
+      "passed": true
+    },
+    {
+      "check": "Entrance has no teleport",
+      "passed": true
+    },
+    {
+      "check": "Entrance has no teleport",
+      "passed": true
+    },
+    {
+      "check": "Entrance has no teleport",
+      "passed": true
+    },
+    {
+      "check": "Entrance has no teleport",
+      "passed": true
+    },
+    {
+      "check": "Entrance has no teleport",
+      "passed": true
+    },
+    {
+      "check": "Entrance has no teleport",
+      "passed": true
+    },
+    {
+      "check": "Entrance has no teleport",
+      "passed": true
+    },
+    {
+      "check": "Entrance has no teleport",
+      "passed": true
+    },
+    {
+      "check": "Entrance has no teleport",
+      "passed": true
+    },
+    {
+      "check": "Entrance has no teleport",
+      "passed": true
+    },
+    {
+      "check": "Entrance has no teleport",
+      "passed": true
+    },
+    {
+      "check": "Entrance has no teleport",
+      "passed": true
+    },
+    {
+      "check": "Entrance has no teleport",
+      "passed": true
+    },
+    {
+      "check": "Entrance has no teleport",
+      "passed": true
+    },
+    {
+      "check": "Entrance has no teleport",
+      "passed": true
+    },
+    {
+      "check": "Entrance has no teleport",
+      "passed": true
+    },
+    {
+      "check": "Entrance has no teleport",
+      "passed": true
+    },
+    {
+      "check": "Entrance has no teleport",
+      "passed": true
+    },
+    {
+      "check": "Enemy walks through nonplay entrance lane",
+      "passed": true
+    },
+    {
+      "check": "Idol remains 2x2",
+      "passed": true
+    }
+  ],
+  "combat": {
+    "dog_gauge": 100.0,
+    "enemy_stamina": 35,
+    "fixture": true,
+    "keeper_stamina": 45
+  },
+  "events": [
+    {
+      "button": 1,
+      "ctrl": false,
+      "mouse": [
+        487.0,
+        513.0
+      ],
+      "tick": 0
+    },
+    {
+      "button": 1,
+      "ctrl": false,
+      "mouse": [
+        914.0,
+        365.5
+      ],
+      "tick": 0
+    },
+    {
+      "button": 1,
+      "ctrl": false,
+      "mouse": [
+        560.0,
+        354.0
+      ],
+      "tick": 0
+    },
+    {
+      "button": 2,
+      "ctrl": false,
+      "mouse": [
+        690.0,
+        400.0
+      ],
+      "tick": 0
+    },
+    {
+      "button": 1,
+      "ctrl": false,
+      "mouse": [
+        1078.5,
+        154.0
+      ],
+      "tick": 0
+    },
+    {
+      "button": 1,
+      "ctrl": false,
+      "mouse": [
+        835.0,
+        513.0
+      ],
+      "tick": 0
+    },
+    {
+      "button": 1,
+      "ctrl": false,
+      "mouse": [
+        342.0,
+        344.0
+      ],
+      "tick": 0
+    },
+    {
+      "button": 1,
+      "ctrl": false,
+      "mouse": [
+        945.0,
+        138.0
+      ],
+      "tick": 0
+    },
+    {
+      "button": 1,
+      "ctrl": false,
+      "mouse": [
+        532.0,
+        138.0
+      ],
+      "tick": 0
+    },
+    {
+      "button": 1,
+      "ctrl": false,
+      "mouse": [
+        342.0,
+        344.0
+      ],
+      "tick": 0
+    },
+    {
+      "button": 2,
+      "ctrl": false,
+      "mouse": [
+        700.0,
+        400.0
+      ],
+      "tick": 0
+    },
+    {
+      "echo": false,
+      "key": 4194306,
+      "shift": false,
+      "tick": 0
+    },
+    {
+      "echo": false,
+      "key": 4194325,
+      "shift": false,
+      "tick": 0
+    },
+    {
+      "echo": false,
+      "key": 4194306,
+      "shift": false,
+      "tick": 0
+    },
+    {
+      "echo": false,
+      "key": 4194325,
+      "shift": false,
+      "tick": 0
+    },
+    {
+      "echo": false,
+      "key": 4194325,
+      "shift": false,
+      "tick": 0
+    },
+    {
+      "echo": false,
+      "key": 4194306,
+      "shift": false,
+      "tick": 0
+    },
+    {
+      "button": 4,
+      "ctrl": false,
+      "mouse": [
+        640.0,
+        400.0
+      ],
+      "tick": 0
+    },
+    {
+      "button": 5,
+      "ctrl": false,
+      "mouse": [
+        640.0,
+        400.0
+      ],
+      "tick": 0
+    },
+    {
+      "button": 1,
+      "ctrl": false,
+      "mouse": [
+        544.0,
+        526.0
+      ],
+      "tick": 0
+    },
+    {
+      "button": 1,
+      "ctrl": false,
+      "mouse": [
+        832.0,
+        526.0
+      ],
+      "tick": 0
+    },
+    {
+      "button": 2,
+      "ctrl": false,
+      "mouse": [
+        544.0,
+        526.0
+      ],
+      "tick": 0
+    },
+    {
+      "button": 2,
+      "ctrl": false,
+      "mouse": [
+        448.0,
+        442.0
+      ],
+      "tick": 21
+    }
+  ],
+  "implementation_commit": "30207f2fa1ca73991e48473907cbd7315aaebe52"
+}
