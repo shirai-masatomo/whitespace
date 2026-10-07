@@ -1,0 +1,502 @@
+{
+  "schema_version": 1,
+  "delivery": "ui_world_direction_v2",
+  "branch": "codex/sporehollow-art-assets",
+  "status": "revision_review",
+  "assets": [],
+  "review_assets": [
+    {
+      "asset_id": "maid.idle",
+      "file": "candidates/maid/idle.png",
+      "canvas": [
+        64,
+        64
+      ],
+      "anchor": [
+        32,
+        58
+      ],
+      "action": "idle",
+      "layer": "body_with_props",
+      "frame_index": 0,
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": null,
+      "loop": false,
+      "runtime_ready": false,
+      "status": "revision_review",
+      "source_bbox": [
+        174,
+        9,
+        544,
+        629
+      ],
+      "notes": "Keypose only. Not a complete animation; formal native polish and held-prop sockets pending.",
+      "sha256": "2619530b4d93d1e34938ca84e51178079b3f691f935a2ddc70d219d4cc3354b7",
+      "visible_bbox_exclusive": [
+        20,
+        16,
+        45,
+        58
+      ],
+      "alpha_values": [
+        0,
+        255
+      ]
+    },
+    {
+      "asset_id": "maid.rage",
+      "file": "candidates/maid/rage.png",
+      "canvas": [
+        64,
+        64
+      ],
+      "anchor": [
+        32,
+        58
+      ],
+      "action": "rage",
+      "layer": "body_with_props",
+      "frame_index": 0,
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": null,
+      "loop": false,
+      "runtime_ready": false,
+      "status": "revision_review",
+      "source_bbox": [
+        722,
+        11,
+        1272,
+        631
+      ],
+      "notes": "Keypose only. Not a complete animation; formal native polish and held-prop sockets pending.",
+      "sha256": "11dcbbcc225100d3751123d73cd5041e05b5284b7d684c4bfbdf0918e4ce1860",
+      "visible_bbox_exclusive": [
+        14,
+        16,
+        51,
+        58
+      ],
+      "alpha_values": [
+        0,
+        255
+      ]
+    },
+    {
+      "asset_id": "maid.chase",
+      "file": "candidates/maid/chase.png",
+      "canvas": [
+        64,
+        64
+      ],
+      "anchor": [
+        32,
+        58
+      ],
+      "action": "chase",
+      "layer": "body_with_props",
+      "frame_index": 0,
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": null,
+      "loop": false,
+      "runtime_ready": false,
+      "status": "revision_review",
+      "source_bbox": [
+        68,
+        665,
+        720,
+        1180
+      ],
+      "notes": "Keypose only. Not a complete animation; formal native polish and held-prop sockets pending.",
+      "sha256": "d6d107e11205cc530143a1029fea1df9a098836e90a577495f6a3bf225bab45a",
+      "visible_bbox_exclusive": [
+        10,
+        23,
+        54,
+        58
+      ],
+      "alpha_values": [
+        0,
+        255
+      ]
+    },
+    {
+      "asset_id": "thief.idle",
+      "file": "candidates/thief/idle.png",
+      "canvas": [
+        64,
+        64
+      ],
+      "anchor": [
+        32,
+        58
+      ],
+      "action": "idle",
+      "layer": "body_with_props",
+      "frame_index": 0,
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": null,
+      "loop": false,
+      "runtime_ready": false,
+      "status": "revision_review",
+      "source_bbox": [
+        59,
+        25,
+        633,
+        689
+      ],
+      "notes": "Keypose only. Not a complete animation; formal native polish and held-prop sockets pending.",
+      "sha256": "f380ee1077c0718ab857fc7057ccc7cad3fc924bb9a9f6fccff1bda8a6db9449",
+      "visible_bbox_exclusive": [
+        14,
+        16,
+        50,
+        58
+      ],
+      "alpha_values": [
+        0,
+        255
+      ]
+    },
+    {
+      "asset_id": "thief.steal",
+      "file": "candidates/thief/steal.png",
+      "canvas": [
+        64,
+        64
+      ],
+      "anchor": [
+        32,
+        58
+      ],
+      "action": "steal",
+      "layer": "body_with_props",
+      "frame_index": 0,
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": null,
+      "loop": false,
+      "runtime_ready": false,
+      "status": "revision_review",
+      "source_bbox": [
+        773,
+        112,
+        1331,
+        689
+      ],
+      "notes": "Keypose only. Not a complete animation; formal native polish and held-prop sockets pending.",
+      "sha256": "e8db04f55e8aa50b2cf5a458e680038c17658e378fed2979ef721d55e554cc34",
+      "visible_bbox_exclusive": [
+        15,
+        22,
+        50,
+        58
+      ],
+      "alpha_values": [
+        0,
+        255
+      ]
+    },
+    {
+      "asset_id": "thief.poison_windup",
+      "file": "candidates/thief/poison_windup.png",
+      "canvas": [
+        64,
+        64
+      ],
+      "anchor": [
+        32,
+        58
+      ],
+      "action": "poison_windup",
+      "layer": "body_with_props",
+      "frame_index": 0,
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": null,
+      "loop": false,
+      "runtime_ready": false,
+      "status": "revision_review",
+      "source_bbox": [
+        1491,
+        16,
+        2136,
+        688
+      ],
+      "notes": "Keypose only. Not a complete animation; formal native polish and held-prop sockets pending.",
+      "sha256": "c67a9436d5e3c19eec6a16718299c8f8b951740bd815a6fbc43566566ca6d87d",
+      "visible_bbox_exclusive": [
+        12,
+        15,
+        53,
+        58
+      ],
+      "alpha_values": [
+        0,
+        255
+      ]
+    },
+    {
+      "asset_id": "dancer.idle",
+      "file": "candidates/dancer/idle.png",
+      "canvas": [
+        64,
+        64
+      ],
+      "anchor": [
+        32,
+        58
+      ],
+      "action": "idle",
+      "layer": "body_with_props",
+      "frame_index": 0,
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": null,
+      "loop": false,
+      "runtime_ready": false,
+      "status": "provisional_phoenix_interpretation",
+      "source_bbox": [
+        25,
+        180,
+        337,
+        809
+      ],
+      "notes": "Keypose only. Not a complete animation; formal native polish and held-prop sockets pending.",
+      "sha256": "f42523b674e8e619bb4d23f1fd90cc7cf3ade23f48a69621170274ec9e69a816",
+      "visible_bbox_exclusive": [
+        22,
+        16,
+        43,
+        58
+      ],
+      "alpha_values": [
+        0,
+        255
+      ]
+    },
+    {
+      "asset_id": "dancer.fan_raise",
+      "file": "candidates/dancer/fan_raise.png",
+      "canvas": [
+        64,
+        64
+      ],
+      "anchor": [
+        32,
+        58
+      ],
+      "action": "fan_raise",
+      "layer": "body_with_props",
+      "frame_index": 0,
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": null,
+      "loop": false,
+      "runtime_ready": false,
+      "status": "provisional_phoenix_interpretation",
+      "source_bbox": [
+        372,
+        97,
+        720,
+        810
+      ],
+      "notes": "Keypose only. Not a complete animation; formal native polish and held-prop sockets pending.",
+      "sha256": "31e8f30fb16b309e1ccaa9e52392a71d6942b7bd00b7782ec037a2c1e39f1971",
+      "visible_bbox_exclusive": [
+        21,
+        10,
+        44,
+        58
+      ],
+      "alpha_values": [
+        0,
+        255
+      ]
+    },
+    {
+      "asset_id": "dancer.fan_spread",
+      "file": "candidates/dancer/fan_spread.png",
+      "canvas": [
+        64,
+        64
+      ],
+      "anchor": [
+        32,
+        58
+      ],
+      "action": "fan_spread",
+      "layer": "body_with_props",
+      "frame_index": 0,
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": null,
+      "loop": false,
+      "runtime_ready": false,
+      "status": "provisional_phoenix_interpretation",
+      "source_bbox": [
+        720,
+        103,
+        1058,
+        812
+      ],
+      "notes": "Keypose only. Not a complete animation; formal native polish and held-prop sockets pending.",
+      "sha256": "70b3b811477b732f7ddfea5afbb264ab46149deabc0cc202237ea866f31ce2d1",
+      "visible_bbox_exclusive": [
+        21,
+        11,
+        44,
+        58
+      ],
+      "alpha_values": [
+        0,
+        255
+      ]
+    },
+    {
+      "asset_id": "maid.rage_aura",
+      "file": "candidates/maid/rage_aura.png",
+      "canvas": [
+        64,
+        64
+      ],
+      "anchor": [
+        32,
+        58
+      ],
+      "action": "rage_overlay",
+      "layer": "behind_body",
+      "frame_index": 0,
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": null,
+      "loop": false,
+      "runtime_ready": false,
+      "status": "revision_review",
+      "notes": "Alpha160, separate overlay. Draw aura then body at identical anchor; no screen flash. Timing follows future game state.",
+      "sha256": "b4759ecb2bfea1d8bf8eb5341c642fb675d2160f4d6bf82f37a4e04c9deeebf8",
+      "visible_bbox_exclusive": [
+        4,
+        8,
+        60,
+        58
+      ],
+      "alpha_values": [
+        0,
+        160
+      ]
+    },
+    {
+      "asset_id": "kokeshi.idle",
+      "file": "candidates/kokeshi/idle.png",
+      "canvas": [
+        32,
+        40
+      ],
+      "anchor": [
+        16,
+        36
+      ],
+      "action": "placed_concept",
+      "layer": "body",
+      "frame_index": 0,
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": null,
+      "loop": false,
+      "runtime_ready": false,
+      "status": "revision_review",
+      "notes": "Dirt obscures facial expression; no eyes or mouth repainted.",
+      "sha256": "934058d4aca44e0bd0fe7b1b89a31d45b8560d2c2405cdfcf247fd054951297d",
+      "visible_bbox_exclusive": [
+        9,
+        4,
+        23,
+        36
+      ],
+      "alpha_values": [
+        0,
+        255
+      ]
+    },
+    {
+      "asset_id": "preview.alpha",
+      "file": "preview/alpha.png",
+      "canvas": [
+        1200,
+        570
+      ],
+      "anchor": null,
+      "action": "comparison",
+      "frame_order": null,
+      "frame_duration_ms": null,
+      "loop": false,
+      "runtime_ready": false,
+      "sha256": "cad31e9cd4ef87124be05ccb2f5e74ca966c56ff0d7f12e64593dd0a90b45f09"
+    },
+    {
+      "asset_id": "preview.maid_rage_layers",
+      "file": "preview/maid_rage_layers.png",
+      "canvas": [
+        1440,
+        720
+      ],
+      "anchor": null,
+      "action": "comparison",
+      "frame_order": null,
+      "frame_duration_ms": null,
+      "loop": false,
+      "runtime_ready": false,
+      "sha256": "639d666a513361eb47ba471e831c12f6c03fc40ad230ff162fba60be7481b39a"
+    },
+    {
+      "asset_id": "preview.revisions",
+      "file": "preview/revisions.png",
+      "canvas": [
+        1600,
+        840
+      ],
+      "anchor": null,
+      "action": "comparison",
+      "frame_order": null,
+      "frame_duration_ms": null,
+      "loop": false,
+      "runtime_ready": false,
+      "sha256": "8a7e0c1cd4ce1574e773d44702de499a9b7bcdeba9b364de9b826a362ba3c7ab"
+    }
+  ],
+  "supersedes_for_design_only": [
+    "ui_world_direction_v1/candidates/new/maid.png",
+    "ui_world_direction_v1/candidates/new/thief.png",
+    "ui_world_direction_v1/candidates/new/kokeshi.png"
+  ],
+  "provisional_dancer": true,
+  "approved_unchanged": "All other v1 directions accepted by user. Golden-idol A/B selection not explicitly specified.",
+  "rendering": {
+    "RGBA": true,
+    "nearest": true,
+    "white_color_key": false,
+    "trim_padding": false,
+    "baked_ground_shadow": false
+  },
+  "remaining": [
+    "Dancer intended meaning confirmation pending; phoenix is a stated working assumption.",
+    "Full revised Coffee/Dance/steal/poison/rage animations not produced; v1 sequence remains narrative-only.",
+    "No gameplay integration or rendering verification."
+  ],
+  "sources": "../../art-production/ui-world-direction-v2/generation-records.json"
+}

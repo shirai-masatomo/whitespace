@@ -1,0 +1,16 @@
+{
+  "candidates": 14,
+  "checks": [
+    "RGBA",
+    "canvas and anchor",
+    "alpha0/255 bodies and0/160 aura",
+    "SHA256",
+    "proportional scale",
+    "v1 assets untouched"
+  ],
+  "not_verified": [
+    "animation continuity",
+    "game runtime",
+    "dancer interpretation confirmed"
+  ]
+}
