@@ -1,0 +1,2385 @@
+{
+  "schema_version": 1,
+  "delivery": "ui_world_direction_v1",
+  "date": "2026-10-07",
+  "branch": "codex/sporehollow-art-assets",
+  "status": "awaiting_direction_review",
+  "runtime_ready": false,
+  "assets": [],
+  "review_assets": [
+    {
+      "asset_id": "new.bull",
+      "file": "candidates/new/bull.png",
+      "canvas": [
+        80,
+        64
+      ],
+      "anchor": [
+        40,
+        58
+      ],
+      "anchor_kind": "foot",
+      "world_or_ui": "world",
+      "status": "direction_review",
+      "runtime_ready": false,
+      "action": "static_concept",
+      "frame_index": 0,
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": null,
+      "loop": false,
+      "layers": [
+        "body"
+      ],
+      "baked_ground_shadow": false,
+      "visible_bbox_exclusive": [
+        6,
+        18,
+        74,
+        58
+      ],
+      "sha256": "018f9f25e833182c7a994a1c4161d67eba08b4e6f05f1c3f1497e20c06c2be11",
+      "unresolved": [
+        "design adoption",
+        "body size provisional",
+        "formal motion not made"
+      ]
+    },
+    {
+      "asset_id": "new.cow",
+      "file": "candidates/new/cow.png",
+      "canvas": [
+        80,
+        64
+      ],
+      "anchor": [
+        40,
+        58
+      ],
+      "anchor_kind": "foot",
+      "world_or_ui": "world",
+      "status": "direction_review",
+      "runtime_ready": false,
+      "action": "static_concept",
+      "frame_index": 0,
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": null,
+      "loop": false,
+      "layers": [
+        "body"
+      ],
+      "baked_ground_shadow": false,
+      "visible_bbox_exclusive": [
+        7,
+        10,
+        74,
+        58
+      ],
+      "sha256": "3271106146d1ccf7fb91a1c4b2bf980b8eb41889933b3fef269a347f0ced242d",
+      "unresolved": [
+        "design adoption",
+        "body size provisional",
+        "formal motion not made"
+      ]
+    },
+    {
+      "asset_id": "new.dancer",
+      "file": "candidates/new/dancer.png",
+      "canvas": [
+        64,
+        64
+      ],
+      "anchor": [
+        32,
+        58
+      ],
+      "anchor_kind": "foot",
+      "world_or_ui": "world",
+      "status": "direction_review",
+      "runtime_ready": false,
+      "action": "static_concept",
+      "frame_index": 0,
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": null,
+      "loop": false,
+      "layers": [
+        "body_with_held_props"
+      ],
+      "baked_ground_shadow": false,
+      "visible_bbox_exclusive": [
+        25,
+        16,
+        40,
+        58
+      ],
+      "sha256": "e057fd0ffb8c56f6571a9d3c5e8000acbe5365fb180e8e1904ad8aec1a863745",
+      "unresolved": [
+        "design adoption",
+        "native face/costume pixel finish",
+        "hand sockets and separate held props",
+        "all formal motion frames and directions"
+      ]
+    },
+    {
+      "asset_id": "new.fossil",
+      "file": "candidates/new/fossil.png",
+      "canvas": [
+        48,
+        40
+      ],
+      "anchor": [
+        24,
+        36
+      ],
+      "anchor_kind": "foot",
+      "world_or_ui": "world",
+      "status": "direction_review",
+      "runtime_ready": false,
+      "action": "static_concept",
+      "frame_index": 0,
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": null,
+      "loop": false,
+      "layers": [
+        "body"
+      ],
+      "baked_ground_shadow": false,
+      "visible_bbox_exclusive": [
+        6,
+        6,
+        42,
+        36
+      ],
+      "sha256": "59fd798c75c922730075e4c3fd6b5b89af358467131acd0e4bc9e9fc00b24a93",
+      "unresolved": [
+        "pickup UI variant",
+        "activation FX deferred",
+        "no dinosaur made"
+      ]
+    },
+    {
+      "asset_id": "new.kokeshi",
+      "file": "candidates/new/kokeshi.png",
+      "canvas": [
+        32,
+        40
+      ],
+      "anchor": [
+        16,
+        36
+      ],
+      "anchor_kind": "foot",
+      "world_or_ui": "world",
+      "status": "direction_review",
+      "runtime_ready": false,
+      "action": "static_concept",
+      "frame_index": 0,
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": null,
+      "loop": false,
+      "layers": [
+        "body"
+      ],
+      "baked_ground_shadow": false,
+      "visible_bbox_exclusive": [
+        9,
+        4,
+        23,
+        36
+      ],
+      "sha256": "b8a0cfb7cffba595e9c9efdf9fd45c59f513650dca24ba9c1a2194dfa0f806d0",
+      "unresolved": [
+        "pickup UI variant",
+        "selection-only range feedback belongs to implementation"
+      ],
+      "occupancy_cells": [
+        1,
+        1
+      ]
+    },
+    {
+      "asset_id": "new.maid",
+      "file": "candidates/new/maid.png",
+      "canvas": [
+        64,
+        64
+      ],
+      "anchor": [
+        32,
+        58
+      ],
+      "anchor_kind": "foot",
+      "world_or_ui": "world",
+      "status": "direction_review",
+      "runtime_ready": false,
+      "action": "static_concept",
+      "frame_index": 0,
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": null,
+      "loop": false,
+      "layers": [
+        "body_with_held_props"
+      ],
+      "baked_ground_shadow": false,
+      "visible_bbox_exclusive": [
+        22,
+        16,
+        43,
+        58
+      ],
+      "sha256": "5bd12d068bf7d3d0a89658c46451b913aeba8ba4d02a5de79e99f9cc25822f03",
+      "unresolved": [
+        "design adoption",
+        "native face/costume pixel finish",
+        "hand sockets and separate held props",
+        "all formal motion frames and directions"
+      ]
+    },
+    {
+      "asset_id": "new.poison_cloud",
+      "file": "candidates/new/poison_cloud.png",
+      "canvas": [
+        64,
+        40
+      ],
+      "anchor": [
+        32,
+        36
+      ],
+      "anchor_kind": "UI_center_or_effect_origin",
+      "world_or_ui": "world",
+      "status": "direction_review",
+      "runtime_ready": false,
+      "action": "static_concept",
+      "frame_index": 0,
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": null,
+      "loop": false,
+      "layers": [
+        "poison_cloud"
+      ],
+      "baked_ground_shadow": false,
+      "visible_bbox_exclusive": [
+        12,
+        4,
+        52,
+        36
+      ],
+      "sha256": "81251759bf028877005bf35dad55ffb25526e6e06937d004ee42d6b3efee20df",
+      "unresolved": [
+        "direction prototype only",
+        "timing and gameplay radius not specified"
+      ]
+    },
+    {
+      "asset_id": "new.poison_projectile",
+      "file": "candidates/new/poison_projectile.png",
+      "canvas": [
+        32,
+        24
+      ],
+      "anchor": [
+        16,
+        12
+      ],
+      "anchor_kind": "UI_center_or_effect_origin",
+      "world_or_ui": "world",
+      "status": "direction_review",
+      "runtime_ready": false,
+      "action": "static_concept",
+      "frame_index": 0,
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": null,
+      "loop": false,
+      "layers": [
+        "poison_projectile"
+      ],
+      "baked_ground_shadow": false,
+      "visible_bbox_exclusive": [
+        5,
+        7,
+        30,
+        20
+      ],
+      "sha256": "68c9c3650123759f6b635bb50a75b1e57d2f34ecd82854a8e6e0d5acc06adba6",
+      "unresolved": [
+        "direction prototype only",
+        "timing and gameplay radius not specified"
+      ]
+    },
+    {
+      "asset_id": "new.poison_splash",
+      "file": "candidates/new/poison_splash.png",
+      "canvas": [
+        48,
+        32
+      ],
+      "anchor": [
+        24,
+        28
+      ],
+      "anchor_kind": "UI_center_or_effect_origin",
+      "world_or_ui": "world",
+      "status": "direction_review",
+      "runtime_ready": false,
+      "action": "static_concept",
+      "frame_index": 0,
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": null,
+      "loop": false,
+      "layers": [
+        "poison_splash"
+      ],
+      "baked_ground_shadow": false,
+      "visible_bbox_exclusive": [
+        2,
+        4,
+        46,
+        28
+      ],
+      "sha256": "35102d05b73fdb16ffb509e4fc7d1c441bc03bdce9299eda3c5f0eee91f59e54",
+      "unresolved": [
+        "direction prototype only",
+        "timing and gameplay radius not specified"
+      ]
+    },
+    {
+      "asset_id": "new.thief",
+      "file": "candidates/new/thief.png",
+      "canvas": [
+        64,
+        64
+      ],
+      "anchor": [
+        32,
+        58
+      ],
+      "anchor_kind": "foot",
+      "world_or_ui": "world",
+      "status": "direction_review",
+      "runtime_ready": false,
+      "action": "static_concept",
+      "frame_index": 0,
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": null,
+      "loop": false,
+      "layers": [
+        "body_with_held_props"
+      ],
+      "baked_ground_shadow": false,
+      "visible_bbox_exclusive": [
+        21,
+        16,
+        43,
+        58
+      ],
+      "sha256": "52bb111a65a4d312fb8485aa0691302a4b3529c2946bfff8a0a65e666335a508",
+      "unresolved": [
+        "design adoption",
+        "native face/costume pixel finish",
+        "hand sockets and separate held props",
+        "all formal motion frames and directions"
+      ]
+    },
+    {
+      "asset_id": "portraits.cat",
+      "file": "candidates/portraits/cat.png",
+      "canvas": [
+        192,
+        192
+      ],
+      "anchor": [
+        96,
+        96
+      ],
+      "anchor_kind": "UI_center_or_effect_origin",
+      "world_or_ui": "UI",
+      "status": "direction_review",
+      "runtime_ready": false,
+      "action": "static_concept",
+      "frame_index": 0,
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": null,
+      "loop": false,
+      "layers": [
+        "portrait"
+      ],
+      "baked_ground_shadow": false,
+      "visible_bbox_exclusive": [
+        34,
+        8,
+        157,
+        184
+      ],
+      "sha256": "349a29dec9e1bdcc37123ec1cc2b8d0c83c1602483dd62d2e6cd71cecd17c6dd",
+      "unresolved": [
+        "portrait direction approval; do not use on board"
+      ]
+    },
+    {
+      "asset_id": "portraits.destroyer",
+      "file": "candidates/portraits/destroyer.png",
+      "canvas": [
+        192,
+        192
+      ],
+      "anchor": [
+        96,
+        96
+      ],
+      "anchor_kind": "UI_center_or_effect_origin",
+      "world_or_ui": "UI",
+      "status": "direction_review",
+      "runtime_ready": false,
+      "action": "static_concept",
+      "frame_index": 0,
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": null,
+      "loop": false,
+      "layers": [
+        "portrait"
+      ],
+      "baked_ground_shadow": false,
+      "visible_bbox_exclusive": [
+        8,
+        12,
+        184,
+        184
+      ],
+      "sha256": "4eb9c42b4f0d59211ec1ac666274d5bc27bca54b168a5a8c56a6c9c890f12079",
+      "unresolved": [
+        "portrait direction approval; do not use on board"
+      ]
+    },
+    {
+      "asset_id": "portraits.doberman",
+      "file": "candidates/portraits/doberman.png",
+      "canvas": [
+        192,
+        192
+      ],
+      "anchor": [
+        96,
+        96
+      ],
+      "anchor_kind": "UI_center_or_effect_origin",
+      "world_or_ui": "UI",
+      "status": "direction_review",
+      "runtime_ready": false,
+      "action": "static_concept",
+      "frame_index": 0,
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": null,
+      "loop": false,
+      "layers": [
+        "portrait"
+      ],
+      "baked_ground_shadow": false,
+      "visible_bbox_exclusive": [
+        36,
+        8,
+        157,
+        184
+      ],
+      "sha256": "d0f6f54cc3ebf763553d9d6aba7b28a776c4ae7ed4e75dbd2aedb0d5cdfe8622",
+      "unresolved": [
+        "portrait direction approval; do not use on board"
+      ]
+    },
+    {
+      "asset_id": "portraits.hen",
+      "file": "candidates/portraits/hen.png",
+      "canvas": [
+        192,
+        192
+      ],
+      "anchor": [
+        96,
+        96
+      ],
+      "anchor_kind": "UI_center_or_effect_origin",
+      "world_or_ui": "UI",
+      "status": "direction_review",
+      "runtime_ready": false,
+      "action": "static_concept",
+      "frame_index": 0,
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": null,
+      "loop": false,
+      "layers": [
+        "portrait"
+      ],
+      "baked_ground_shadow": false,
+      "visible_bbox_exclusive": [
+        24,
+        8,
+        168,
+        184
+      ],
+      "sha256": "776d6bd1baabba17b59c14d48d16a6c7a51789b25f3385572ac9ce2d1b7c08b6",
+      "unresolved": [
+        "portrait direction approval; do not use on board"
+      ]
+    },
+    {
+      "asset_id": "portraits.salaryman",
+      "file": "candidates/portraits/salaryman.png",
+      "canvas": [
+        192,
+        192
+      ],
+      "anchor": [
+        96,
+        96
+      ],
+      "anchor_kind": "UI_center_or_effect_origin",
+      "world_or_ui": "UI",
+      "status": "direction_review",
+      "runtime_ready": false,
+      "action": "static_concept",
+      "frame_index": 0,
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": null,
+      "loop": false,
+      "layers": [
+        "portrait"
+      ],
+      "baked_ground_shadow": false,
+      "visible_bbox_exclusive": [
+        30,
+        8,
+        163,
+        184
+      ],
+      "sha256": "2e286795f13d0aa6c4edf9479f9953ae3bd347119076a3d2089e32e329109b16",
+      "unresolved": [
+        "portrait direction approval; do not use on board"
+      ]
+    },
+    {
+      "asset_id": "portraits.shiba",
+      "file": "candidates/portraits/shiba.png",
+      "canvas": [
+        192,
+        192
+      ],
+      "anchor": [
+        96,
+        96
+      ],
+      "anchor_kind": "UI_center_or_effect_origin",
+      "world_or_ui": "UI",
+      "status": "direction_review",
+      "runtime_ready": false,
+      "action": "static_concept",
+      "frame_index": 0,
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": null,
+      "loop": false,
+      "layers": [
+        "portrait"
+      ],
+      "baked_ground_shadow": false,
+      "visible_bbox_exclusive": [
+        26,
+        8,
+        167,
+        184
+      ],
+      "sha256": "fae31c2e1b2d1168a5cbfe513ae831068b4b66168e46d0ab013af6ab81fee601",
+      "unresolved": [
+        "portrait direction approval; do not use on board"
+      ]
+    },
+    {
+      "asset_id": "ui.rarity_common",
+      "file": "candidates/ui/rarity_common.png",
+      "canvas": [
+        64,
+        64
+      ],
+      "anchor": [
+        32,
+        32
+      ],
+      "anchor_kind": "UI_center_or_effect_origin",
+      "world_or_ui": "UI",
+      "status": "direction_review",
+      "runtime_ready": false,
+      "action": "static_concept",
+      "frame_index": 0,
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": null,
+      "loop": false,
+      "layers": [
+        "icon"
+      ],
+      "baked_ground_shadow": false,
+      "visible_bbox_exclusive": [
+        13,
+        4,
+        52,
+        60
+      ],
+      "sha256": "fc5933581155344665fb6d523c1f006ac189689f73ff262f849d8a6a55cb699a",
+      "unresolved": [
+        "direction approval",
+        "not automatically connected to skills or rarity logic"
+      ]
+    },
+    {
+      "asset_id": "ui.rarity_epic",
+      "file": "candidates/ui/rarity_epic.png",
+      "canvas": [
+        64,
+        64
+      ],
+      "anchor": [
+        32,
+        32
+      ],
+      "anchor_kind": "UI_center_or_effect_origin",
+      "world_or_ui": "UI",
+      "status": "direction_review",
+      "runtime_ready": false,
+      "action": "static_concept",
+      "frame_index": 0,
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": null,
+      "loop": false,
+      "layers": [
+        "icon"
+      ],
+      "baked_ground_shadow": false,
+      "visible_bbox_exclusive": [
+        11,
+        4,
+        54,
+        60
+      ],
+      "sha256": "060849244f0b392126545d742e4ab03df05adc51e03b6a0c1f6924946f157735",
+      "unresolved": [
+        "direction approval",
+        "not automatically connected to skills or rarity logic"
+      ]
+    },
+    {
+      "asset_id": "ui.rarity_legendary",
+      "file": "candidates/ui/rarity_legendary.png",
+      "canvas": [
+        64,
+        64
+      ],
+      "anchor": [
+        32,
+        32
+      ],
+      "anchor_kind": "UI_center_or_effect_origin",
+      "world_or_ui": "UI",
+      "status": "direction_review",
+      "runtime_ready": false,
+      "action": "static_concept",
+      "frame_index": 0,
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": null,
+      "loop": false,
+      "layers": [
+        "icon"
+      ],
+      "baked_ground_shadow": false,
+      "visible_bbox_exclusive": [
+        12,
+        4,
+        52,
+        60
+      ],
+      "sha256": "052a2a58a2bde1f0cb2d0781a4f75f90b0541e57624c24b1f2f4c145b149b93a",
+      "unresolved": [
+        "direction approval",
+        "not automatically connected to skills or rarity logic"
+      ]
+    },
+    {
+      "asset_id": "ui.rarity_rare",
+      "file": "candidates/ui/rarity_rare.png",
+      "canvas": [
+        64,
+        64
+      ],
+      "anchor": [
+        32,
+        32
+      ],
+      "anchor_kind": "UI_center_or_effect_origin",
+      "world_or_ui": "UI",
+      "status": "direction_review",
+      "runtime_ready": false,
+      "action": "static_concept",
+      "frame_index": 0,
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": null,
+      "loop": false,
+      "layers": [
+        "icon"
+      ],
+      "baked_ground_shadow": false,
+      "visible_bbox_exclusive": [
+        13,
+        4,
+        52,
+        60
+      ],
+      "sha256": "52af065108d1e08442906afec21ed7a765c8b38541d5f8d66702c03b5f98ece7",
+      "unresolved": [
+        "direction approval",
+        "not automatically connected to skills or rarity logic"
+      ]
+    },
+    {
+      "asset_id": "ui.rarity_uncommon",
+      "file": "candidates/ui/rarity_uncommon.png",
+      "canvas": [
+        64,
+        64
+      ],
+      "anchor": [
+        32,
+        32
+      ],
+      "anchor_kind": "UI_center_or_effect_origin",
+      "world_or_ui": "UI",
+      "status": "direction_review",
+      "runtime_ready": false,
+      "action": "static_concept",
+      "frame_index": 0,
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": null,
+      "loop": false,
+      "layers": [
+        "icon"
+      ],
+      "baked_ground_shadow": false,
+      "visible_bbox_exclusive": [
+        13,
+        5,
+        51,
+        59
+      ],
+      "sha256": "83002abc0deae56d13104c3a730a9c56cc87f23128aeaaabbc861d6d4c51264c",
+      "unresolved": [
+        "direction approval",
+        "not automatically connected to skills or rarity logic"
+      ]
+    },
+    {
+      "asset_id": "ui.ready_aura",
+      "file": "candidates/ui/ready_aura.png",
+      "canvas": [
+        48,
+        24
+      ],
+      "anchor": [
+        24,
+        12
+      ],
+      "anchor_kind": "effect_center",
+      "world_or_ui": "world_overlay",
+      "status": "direction_review",
+      "runtime_ready": false,
+      "action": "static_concept",
+      "frame_index": 0,
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": null,
+      "loop": false,
+      "layers": [
+        "icon"
+      ],
+      "baked_ground_shadow": false,
+      "visible_bbox_exclusive": [
+        2,
+        6,
+        44,
+        22
+      ],
+      "sha256": "3f69795b0d9ba95e9d9d1946e5943dac47309716984fee419f5aae4e3e81e4a8",
+      "unresolved": [
+        "direction approval",
+        "not automatically connected to skills or rarity logic"
+      ]
+    },
+    {
+      "asset_id": "ui.ready_corners",
+      "file": "candidates/ui/ready_corners.png",
+      "canvas": [
+        192,
+        192
+      ],
+      "anchor": [
+        96,
+        96
+      ],
+      "anchor_kind": "UI_center_or_effect_origin",
+      "world_or_ui": "UI_overlay",
+      "status": "direction_review",
+      "runtime_ready": false,
+      "action": "static_concept",
+      "frame_index": 0,
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": null,
+      "loop": false,
+      "layers": [
+        "icon"
+      ],
+      "baked_ground_shadow": false,
+      "visible_bbox_exclusive": [
+        3,
+        2,
+        189,
+        190
+      ],
+      "sha256": "4b60860f45593bcee86e5b7d67a68bec651ac291f4300a0374b929033d363b70",
+      "unresolved": [
+        "direction approval",
+        "not automatically connected to skills or rarity logic"
+      ]
+    },
+    {
+      "asset_id": "ui.ready_stars",
+      "file": "candidates/ui/ready_stars.png",
+      "canvas": [
+        24,
+        24
+      ],
+      "anchor": [
+        12,
+        12
+      ],
+      "anchor_kind": "effect_center",
+      "world_or_ui": "world_overlay",
+      "status": "direction_review",
+      "runtime_ready": false,
+      "action": "static_concept",
+      "frame_index": 0,
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": null,
+      "loop": false,
+      "layers": [
+        "icon"
+      ],
+      "baked_ground_shadow": false,
+      "visible_bbox_exclusive": [
+        4,
+        4,
+        21,
+        22
+      ],
+      "sha256": "4fa038aaa0e46e9dc410f3e722223b46ce4c362726b52b19c800c7c87e129d49",
+      "unresolved": [
+        "direction approval",
+        "not automatically connected to skills or rarity logic"
+      ]
+    },
+    {
+      "asset_id": "ui.skill_bark",
+      "file": "candidates/ui/skill_bark.png",
+      "canvas": [
+        64,
+        64
+      ],
+      "anchor": [
+        32,
+        32
+      ],
+      "anchor_kind": "UI_center_or_effect_origin",
+      "world_or_ui": "UI",
+      "status": "direction_review",
+      "runtime_ready": false,
+      "action": "static_concept",
+      "frame_index": 0,
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": null,
+      "loop": false,
+      "layers": [
+        "icon"
+      ],
+      "baked_ground_shadow": false,
+      "visible_bbox_exclusive": [
+        4,
+        6,
+        60,
+        60
+      ],
+      "sha256": "922bf3e69ad6b590c1fa694b09ec1285a01be1663844ca6d3f48ff9a6cc5842f",
+      "unresolved": [
+        "direction approval",
+        "not automatically connected to skills or rarity logic"
+      ]
+    },
+    {
+      "asset_id": "ui.skill_destruction",
+      "file": "candidates/ui/skill_destruction.png",
+      "canvas": [
+        64,
+        64
+      ],
+      "anchor": [
+        32,
+        32
+      ],
+      "anchor_kind": "UI_center_or_effect_origin",
+      "world_or_ui": "UI",
+      "status": "direction_review",
+      "runtime_ready": false,
+      "action": "static_concept",
+      "frame_index": 0,
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": null,
+      "loop": false,
+      "layers": [
+        "icon"
+      ],
+      "baked_ground_shadow": false,
+      "visible_bbox_exclusive": [
+        4,
+        6,
+        60,
+        60
+      ],
+      "sha256": "3231c89660c47e2c83d20c6cff735be4205e387d77df1eea408c77ec7794483f",
+      "unresolved": [
+        "direction approval",
+        "not automatically connected to skills or rarity logic"
+      ]
+    },
+    {
+      "asset_id": "ui.skill_reinforcement",
+      "file": "candidates/ui/skill_reinforcement.png",
+      "canvas": [
+        64,
+        64
+      ],
+      "anchor": [
+        32,
+        32
+      ],
+      "anchor_kind": "UI_center_or_effect_origin",
+      "world_or_ui": "UI",
+      "status": "direction_review",
+      "runtime_ready": false,
+      "action": "static_concept",
+      "frame_index": 0,
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": null,
+      "loop": false,
+      "layers": [
+        "icon"
+      ],
+      "baked_ground_shadow": false,
+      "visible_bbox_exclusive": [
+        4,
+        4,
+        60,
+        60
+      ],
+      "sha256": "bac516361d99024ee56f575bef74f46793454ccfdbd5238c886d7bdd752d7af1",
+      "unresolved": [
+        "direction approval",
+        "not automatically connected to skills or rarity logic"
+      ]
+    },
+    {
+      "asset_id": "ui.stamina_lightning",
+      "file": "candidates/ui/stamina_lightning.png",
+      "canvas": [
+        24,
+        24
+      ],
+      "anchor": [
+        12,
+        12
+      ],
+      "anchor_kind": "UI_center_or_effect_origin",
+      "world_or_ui": "UI",
+      "status": "direction_review",
+      "runtime_ready": false,
+      "action": "static_concept",
+      "frame_index": 0,
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": null,
+      "loop": false,
+      "layers": [
+        "icon"
+      ],
+      "baked_ground_shadow": false,
+      "visible_bbox_exclusive": [
+        5,
+        2,
+        19,
+        22
+      ],
+      "sha256": "b6b77ca0915fbe5fe064496a718f0e94e358c419cdeb4241905d46424c1e3eb3",
+      "unresolved": [
+        "direction approval",
+        "not automatically connected to skills or rarity logic"
+      ]
+    },
+    {
+      "asset_id": "ui.stamina_shoe",
+      "file": "candidates/ui/stamina_shoe.png",
+      "canvas": [
+        24,
+        24
+      ],
+      "anchor": [
+        12,
+        12
+      ],
+      "anchor_kind": "UI_center_or_effect_origin",
+      "world_or_ui": "UI",
+      "status": "direction_review",
+      "runtime_ready": false,
+      "action": "static_concept",
+      "frame_index": 0,
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": null,
+      "loop": false,
+      "layers": [
+        "icon"
+      ],
+      "baked_ground_shadow": false,
+      "visible_bbox_exclusive": [
+        2,
+        8,
+        22,
+        22
+      ],
+      "sha256": "9f3a2524a0924628c6e3e29025dbcf85812e1144dc666c0e3e04b53c621b0076",
+      "unresolved": [
+        "direction approval",
+        "not automatically connected to skills or rarity logic"
+      ]
+    },
+    {
+      "asset_id": "ui.ultimate_frame",
+      "file": "candidates/ui/ultimate_frame.png",
+      "canvas": [
+        64,
+        64
+      ],
+      "anchor": [
+        32,
+        32
+      ],
+      "anchor_kind": "UI_center_or_effect_origin",
+      "world_or_ui": "UI",
+      "status": "direction_review",
+      "runtime_ready": false,
+      "action": "static_concept",
+      "frame_index": 0,
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": null,
+      "loop": false,
+      "layers": [
+        "icon"
+      ],
+      "baked_ground_shadow": false,
+      "visible_bbox_exclusive": [
+        6,
+        4,
+        59,
+        60
+      ],
+      "sha256": "7ae9a291b2fe48919c615c0e477ae01f09ef50b3bc3c016174ac39f6bce24517",
+      "unresolved": [
+        "direction approval",
+        "not automatically connected to skills or rarity logic"
+      ]
+    },
+    {
+      "asset_id": "ui.ultimate_rage",
+      "file": "candidates/ui/ultimate_rage.png",
+      "canvas": [
+        64,
+        64
+      ],
+      "anchor": [
+        32,
+        32
+      ],
+      "anchor_kind": "UI_center_or_effect_origin",
+      "world_or_ui": "UI",
+      "status": "direction_review",
+      "runtime_ready": false,
+      "action": "static_concept",
+      "frame_index": 0,
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": null,
+      "loop": false,
+      "layers": [
+        "icon"
+      ],
+      "baked_ground_shadow": false,
+      "visible_bbox_exclusive": [
+        4,
+        5,
+        60,
+        60
+      ],
+      "sha256": "1c5c3efd3bc21e8264c230040e819c193a1b1764ea730653948bdf4d40ac53f5",
+      "unresolved": [
+        "direction approval",
+        "not automatically connected to skills or rarity logic"
+      ]
+    },
+    {
+      "asset_id": "ui.ultimate_resurrection",
+      "file": "candidates/ui/ultimate_resurrection.png",
+      "canvas": [
+        64,
+        64
+      ],
+      "anchor": [
+        32,
+        32
+      ],
+      "anchor_kind": "UI_center_or_effect_origin",
+      "world_or_ui": "UI",
+      "status": "direction_review",
+      "runtime_ready": false,
+      "action": "static_concept",
+      "frame_index": 0,
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": null,
+      "loop": false,
+      "layers": [
+        "icon"
+      ],
+      "baked_ground_shadow": false,
+      "visible_bbox_exclusive": [
+        4,
+        4,
+        60,
+        60
+      ],
+      "sha256": "6751efec8f7023564fdc072702c3d4ae6b181b18350c3204f262ddb0a2b6e032",
+      "unresolved": [
+        "direction approval",
+        "not automatically connected to skills or rarity logic"
+      ]
+    },
+    {
+      "asset_id": "world.goldA",
+      "file": "candidates/world/goldA.png",
+      "canvas": [
+        144,
+        160
+      ],
+      "anchor": [
+        72,
+        152
+      ],
+      "anchor_kind": "foot",
+      "world_or_ui": "world",
+      "status": "direction_review",
+      "runtime_ready": false,
+      "action": "static_concept",
+      "frame_index": 0,
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": null,
+      "loop": false,
+      "layers": [
+        "body_and_plinth"
+      ],
+      "baked_ground_shadow": false,
+      "visible_bbox_exclusive": [
+        17,
+        8,
+        128,
+        152
+      ],
+      "sha256": "e0138b3052925a8e54b753682977cd4819c2e041ad9ddf2ababc9a2cc463d990",
+      "unresolved": [
+        "Choose A or B",
+        "damaged/prayer/transport states not made",
+        "old ART_SPEC anchor must be reconciled by implementation"
+      ],
+      "occupancy_cells": [
+        2,
+        2
+      ],
+      "logical_footprint_rect_px": [
+        24,
+        68,
+        120,
+        152
+      ]
+    },
+    {
+      "asset_id": "world.goldB",
+      "file": "candidates/world/goldB.png",
+      "canvas": [
+        144,
+        160
+      ],
+      "anchor": [
+        72,
+        152
+      ],
+      "anchor_kind": "foot",
+      "world_or_ui": "world",
+      "status": "direction_review",
+      "runtime_ready": false,
+      "action": "static_concept",
+      "frame_index": 0,
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": null,
+      "loop": false,
+      "layers": [
+        "body_and_plinth"
+      ],
+      "baked_ground_shadow": false,
+      "visible_bbox_exclusive": [
+        9,
+        8,
+        136,
+        152
+      ],
+      "sha256": "c913530ff20d247da513ea0cc646f769b6f0bfb51a417fbc0af3a342784ff5c8",
+      "unresolved": [
+        "Choose A or B",
+        "damaged/prayer/transport states not made",
+        "old ART_SPEC anchor must be reconciled by implementation"
+      ],
+      "occupancy_cells": [
+        2,
+        2
+      ],
+      "logical_footprint_rect_px": [
+        24,
+        68,
+        120,
+        152
+      ]
+    },
+    {
+      "asset_id": "world.tree_a",
+      "file": "candidates/world/tree_a.png",
+      "canvas": [
+        64,
+        80
+      ],
+      "anchor": [
+        32,
+        72
+      ],
+      "anchor_kind": "foot",
+      "world_or_ui": "world",
+      "status": "direction_review",
+      "runtime_ready": false,
+      "action": "static_concept",
+      "frame_index": 0,
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": null,
+      "loop": false,
+      "layers": [
+        "trunk",
+        "canopy"
+      ],
+      "baked_ground_shadow": false,
+      "visible_bbox_exclusive": [
+        4,
+        4,
+        60,
+        72
+      ],
+      "sha256": "354fab7e80d81a38c32a4979259344185fd083a75bcb733b94c69daa8ef19452",
+      "unresolved": [
+        "Native canopy cleanup after adoption",
+        "collision rectangle is a suggestion, not game logic",
+        "cutting/falling states not made"
+      ],
+      "recommended_trunk_collision_rect_px": [
+        27,
+        63,
+        37,
+        73
+      ],
+      "canopy_rect_px": [
+        2,
+        4,
+        62,
+        51
+      ]
+    },
+    {
+      "asset_id": "world.tree_a_canopy",
+      "file": "candidates/world/tree_a_canopy.png",
+      "canvas": [
+        64,
+        80
+      ],
+      "anchor": [
+        32,
+        72
+      ],
+      "anchor_kind": "foot",
+      "world_or_ui": "world",
+      "status": "direction_review",
+      "runtime_ready": false,
+      "action": "layer_candidate",
+      "frame_index": 0,
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": null,
+      "loop": false,
+      "layers": [
+        "canopy"
+      ],
+      "baked_ground_shadow": false,
+      "visible_bbox_exclusive": [
+        4,
+        4,
+        60,
+        51
+      ],
+      "sha256": "99d77b03dc4af13def2404a439bd2c0c9a55fd5444fd6ed98d8c887e2e4f5f9b",
+      "unresolved": [
+        "Native canopy cleanup after adoption",
+        "collision rectangle is a suggestion, not game logic",
+        "cutting/falling states not made"
+      ],
+      "recommended_trunk_collision_rect_px": [
+        27,
+        63,
+        37,
+        73
+      ],
+      "canopy_rect_px": [
+        2,
+        4,
+        62,
+        51
+      ]
+    },
+    {
+      "asset_id": "world.tree_a_trunk",
+      "file": "candidates/world/tree_a_trunk.png",
+      "canvas": [
+        64,
+        80
+      ],
+      "anchor": [
+        32,
+        72
+      ],
+      "anchor_kind": "foot",
+      "world_or_ui": "world",
+      "status": "direction_review",
+      "runtime_ready": false,
+      "action": "layer_candidate",
+      "frame_index": 0,
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": null,
+      "loop": false,
+      "layers": [
+        "trunk"
+      ],
+      "baked_ground_shadow": false,
+      "visible_bbox_exclusive": [
+        22,
+        51,
+        56,
+        72
+      ],
+      "sha256": "14d820035bd7afaf0e74f9b128aecfab3f23edbd479e0620235ec1e11b203f5c",
+      "unresolved": [
+        "Native canopy cleanup after adoption",
+        "collision rectangle is a suggestion, not game logic",
+        "cutting/falling states not made"
+      ],
+      "recommended_trunk_collision_rect_px": [
+        27,
+        63,
+        37,
+        73
+      ],
+      "canopy_rect_px": [
+        2,
+        4,
+        62,
+        51
+      ]
+    },
+    {
+      "asset_id": "world.tree_b",
+      "file": "candidates/world/tree_b.png",
+      "canvas": [
+        64,
+        80
+      ],
+      "anchor": [
+        32,
+        72
+      ],
+      "anchor_kind": "foot",
+      "world_or_ui": "world",
+      "status": "direction_review",
+      "runtime_ready": false,
+      "action": "static_concept",
+      "frame_index": 0,
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": null,
+      "loop": false,
+      "layers": [
+        "trunk",
+        "canopy"
+      ],
+      "baked_ground_shadow": false,
+      "visible_bbox_exclusive": [
+        7,
+        6,
+        57,
+        72
+      ],
+      "sha256": "7016a7a49782f9316ec6595daab8e6f8a50f8c4e9a892dfb54b5d415383ff857",
+      "unresolved": [
+        "Native canopy cleanup after adoption",
+        "collision rectangle is a suggestion, not game logic",
+        "cutting/falling states not made"
+      ],
+      "recommended_trunk_collision_rect_px": [
+        27,
+        63,
+        37,
+        73
+      ],
+      "canopy_rect_px": [
+        5,
+        6,
+        59,
+        52
+      ]
+    },
+    {
+      "asset_id": "world.tree_b_canopy",
+      "file": "candidates/world/tree_b_canopy.png",
+      "canvas": [
+        64,
+        80
+      ],
+      "anchor": [
+        32,
+        72
+      ],
+      "anchor_kind": "foot",
+      "world_or_ui": "world",
+      "status": "direction_review",
+      "runtime_ready": false,
+      "action": "layer_candidate",
+      "frame_index": 0,
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": null,
+      "loop": false,
+      "layers": [
+        "canopy"
+      ],
+      "baked_ground_shadow": false,
+      "visible_bbox_exclusive": [
+        7,
+        6,
+        57,
+        52
+      ],
+      "sha256": "28efbc1abecc8780f86216ccbed47fb51328275197c78885805704c34da9abb9",
+      "unresolved": [
+        "Native canopy cleanup after adoption",
+        "collision rectangle is a suggestion, not game logic",
+        "cutting/falling states not made"
+      ],
+      "recommended_trunk_collision_rect_px": [
+        27,
+        63,
+        37,
+        73
+      ],
+      "canopy_rect_px": [
+        5,
+        6,
+        59,
+        52
+      ]
+    },
+    {
+      "asset_id": "world.tree_b_trunk",
+      "file": "candidates/world/tree_b_trunk.png",
+      "canvas": [
+        64,
+        80
+      ],
+      "anchor": [
+        32,
+        72
+      ],
+      "anchor_kind": "foot",
+      "world_or_ui": "world",
+      "status": "direction_review",
+      "runtime_ready": false,
+      "action": "layer_candidate",
+      "frame_index": 0,
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": null,
+      "loop": false,
+      "layers": [
+        "trunk"
+      ],
+      "baked_ground_shadow": false,
+      "visible_bbox_exclusive": [
+        19,
+        52,
+        46,
+        72
+      ],
+      "sha256": "49857f4d08099c53bc1114b8759dc3a71e6c7b30e8c6f621d2efecfd3e43367c",
+      "unresolved": [
+        "Native canopy cleanup after adoption",
+        "collision rectangle is a suggestion, not game logic",
+        "cutting/falling states not made"
+      ],
+      "recommended_trunk_collision_rect_px": [
+        27,
+        63,
+        37,
+        73
+      ],
+      "canopy_rect_px": [
+        5,
+        6,
+        59,
+        52
+      ]
+    },
+    {
+      "asset_id": "world.tree_c",
+      "file": "candidates/world/tree_c.png",
+      "canvas": [
+        64,
+        80
+      ],
+      "anchor": [
+        32,
+        72
+      ],
+      "anchor_kind": "foot",
+      "world_or_ui": "world",
+      "status": "direction_review",
+      "runtime_ready": false,
+      "action": "static_concept",
+      "frame_index": 0,
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": null,
+      "loop": false,
+      "layers": [
+        "trunk",
+        "canopy"
+      ],
+      "baked_ground_shadow": false,
+      "visible_bbox_exclusive": [
+        14,
+        19,
+        50,
+        71
+      ],
+      "sha256": "e364637d343ff305e21f6d579ce77ab038b0161453882b9689a4515b0bcf1345",
+      "unresolved": [
+        "Native canopy cleanup after adoption",
+        "collision rectangle is a suggestion, not game logic",
+        "cutting/falling states not made"
+      ],
+      "recommended_trunk_collision_rect_px": [
+        27,
+        63,
+        37,
+        73
+      ],
+      "canopy_rect_px": [
+        12,
+        19,
+        52,
+        50
+      ]
+    },
+    {
+      "asset_id": "world.tree_c_canopy",
+      "file": "candidates/world/tree_c_canopy.png",
+      "canvas": [
+        64,
+        80
+      ],
+      "anchor": [
+        32,
+        72
+      ],
+      "anchor_kind": "foot",
+      "world_or_ui": "world",
+      "status": "direction_review",
+      "runtime_ready": false,
+      "action": "layer_candidate",
+      "frame_index": 0,
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": null,
+      "loop": false,
+      "layers": [
+        "canopy"
+      ],
+      "baked_ground_shadow": false,
+      "visible_bbox_exclusive": [
+        14,
+        19,
+        50,
+        50
+      ],
+      "sha256": "ad84534f8a2c8e9c951a110f497aae86a5740fd26ac30c642fd08ffa8941d76f",
+      "unresolved": [
+        "Native canopy cleanup after adoption",
+        "collision rectangle is a suggestion, not game logic",
+        "cutting/falling states not made"
+      ],
+      "recommended_trunk_collision_rect_px": [
+        27,
+        63,
+        37,
+        73
+      ],
+      "canopy_rect_px": [
+        12,
+        19,
+        52,
+        50
+      ]
+    },
+    {
+      "asset_id": "world.tree_c_trunk",
+      "file": "candidates/world/tree_c_trunk.png",
+      "canvas": [
+        64,
+        80
+      ],
+      "anchor": [
+        32,
+        72
+      ],
+      "anchor_kind": "foot",
+      "world_or_ui": "world",
+      "status": "direction_review",
+      "runtime_ready": false,
+      "action": "layer_candidate",
+      "frame_index": 0,
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": null,
+      "loop": false,
+      "layers": [
+        "trunk"
+      ],
+      "baked_ground_shadow": false,
+      "visible_bbox_exclusive": [
+        17,
+        50,
+        45,
+        71
+      ],
+      "sha256": "6ca2455d05ed8dab6eb287e1024a2141b0ac34b3bbfd40d7262f322d43d01539",
+      "unresolved": [
+        "Native canopy cleanup after adoption",
+        "collision rectangle is a suggestion, not game logic",
+        "cutting/falling states not made"
+      ],
+      "recommended_trunk_collision_rect_px": [
+        27,
+        63,
+        37,
+        73
+      ],
+      "canopy_rect_px": [
+        12,
+        19,
+        52,
+        50
+      ]
+    },
+    {
+      "asset_id": "review.A_idols",
+      "file": "preview/A_idols.png",
+      "canvas": [
+        1200,
+        690
+      ],
+      "anchor": null,
+      "world_or_ui": "review_only",
+      "runtime_ready": false,
+      "action": "comparison",
+      "layers": [
+        "review_composite"
+      ],
+      "sha256": "db053d588645d415362b36a8573e81041172e8b6c0e078f68cc1415bbbcdc66f",
+      "frame_duration_ms": null,
+      "loop": false
+    },
+    {
+      "asset_id": "review.alpha_all",
+      "file": "preview/alpha_all.png",
+      "canvas": [
+        1200,
+        1410
+      ],
+      "anchor": null,
+      "world_or_ui": "review_only",
+      "runtime_ready": false,
+      "action": "comparison",
+      "layers": [
+        "review_composite"
+      ],
+      "sha256": "cab3925eb0892aaa7d7fe3acd713ebaf14504a6cea3af51e74f1d2f0e28073f4",
+      "frame_duration_ms": null,
+      "loop": false
+    },
+    {
+      "asset_id": "review.B_forest_composition",
+      "file": "preview/B_forest_composition.png",
+      "canvas": [
+        1280,
+        800
+      ],
+      "anchor": null,
+      "world_or_ui": "review_only",
+      "runtime_ready": false,
+      "action": "comparison",
+      "layers": [
+        "review_composite"
+      ],
+      "sha256": "8bee0f10bc7c48555b5558bd44f2e9e8c3ead9f0a318dd856b18be9e2e273d29",
+      "frame_duration_ms": null,
+      "loop": false
+    },
+    {
+      "asset_id": "review.B_forest_zoomout_50pct",
+      "file": "preview/B_forest_zoomout_50pct.png",
+      "canvas": [
+        640,
+        400
+      ],
+      "anchor": null,
+      "world_or_ui": "review_only",
+      "runtime_ready": false,
+      "action": "comparison",
+      "layers": [
+        "review_composite"
+      ],
+      "sha256": "afac70411d8590841341692e1a3198313b1d3397ccab606a90aca7aaa3c34a30",
+      "frame_duration_ms": null,
+      "loop": false
+    },
+    {
+      "asset_id": "review.B_trees",
+      "file": "preview/B_trees.png",
+      "canvas": [
+        1100,
+        440
+      ],
+      "anchor": null,
+      "world_or_ui": "review_only",
+      "runtime_ready": false,
+      "action": "comparison",
+      "layers": [
+        "review_composite"
+      ],
+      "sha256": "089ea057ffd13e3413fee3348c8e7083039ad7323d8a0733a5934aefac0604ce",
+      "frame_duration_ms": null,
+      "loop": false
+    },
+    {
+      "asset_id": "review.C_portraits",
+      "file": "preview/C_portraits.png",
+      "canvas": [
+        1240,
+        700
+      ],
+      "anchor": null,
+      "world_or_ui": "review_only",
+      "runtime_ready": false,
+      "action": "comparison",
+      "layers": [
+        "review_composite"
+      ],
+      "sha256": "6f8cf351722dbcbf578f60c33bcba7017ea7f10496776066ae2c2ca0a9f46261",
+      "frame_duration_ms": null,
+      "loop": false
+    },
+    {
+      "asset_id": "review.DE_ui",
+      "file": "preview/DE_ui.png",
+      "canvas": [
+        1160,
+        630
+      ],
+      "anchor": null,
+      "world_or_ui": "review_only",
+      "runtime_ready": false,
+      "action": "comparison",
+      "layers": [
+        "review_composite"
+      ],
+      "sha256": "9e954df3d414e2e53e5e678a80cdffa36de5a5f83a55f56a7d1cc6fad58cba09",
+      "frame_duration_ms": null,
+      "loop": false
+    },
+    {
+      "asset_id": "review.E_ready_native",
+      "file": "preview/E_ready_native.png",
+      "canvas": [
+        1000,
+        320
+      ],
+      "anchor": null,
+      "world_or_ui": "review_only",
+      "runtime_ready": false,
+      "action": "comparison",
+      "layers": [
+        "review_composite"
+      ],
+      "sha256": "4ec237a29fd8f87b9d1652e7f4331d85d0a9faa907ced2155e74b7d2d22c2df8",
+      "frame_duration_ms": null,
+      "loop": false
+    },
+    {
+      "asset_id": "review.F_concept_art",
+      "file": "preview/F_concept_art.png",
+      "canvas": [
+        1600,
+        920
+      ],
+      "anchor": null,
+      "world_or_ui": "review_only",
+      "runtime_ready": false,
+      "action": "comparison",
+      "layers": [
+        "review_composite"
+      ],
+      "sha256": "66e26875fa20b89ff49beb7a84c571341c6e2adfd487d1eae3c6f36c0d1816dd",
+      "frame_duration_ms": null,
+      "loop": false
+    },
+    {
+      "asset_id": "review.F_concepts",
+      "file": "preview/F_concepts.png",
+      "canvas": [
+        1700,
+        740
+      ],
+      "anchor": null,
+      "world_or_ui": "review_only",
+      "runtime_ready": false,
+      "action": "comparison",
+      "layers": [
+        "review_composite"
+      ],
+      "sha256": "468d92c27a5a86330e4c903dc76f22c61a4b5c29b6c15c49ae96cba02c8e990c",
+      "frame_duration_ms": null,
+      "loop": false
+    },
+    {
+      "asset_id": "review.bull_charge",
+      "file": "storyboards/bull_charge.png",
+      "canvas": [
+        1560,
+        430
+      ],
+      "anchor": null,
+      "world_or_ui": "review_only",
+      "runtime_ready": false,
+      "action": "bull_charge",
+      "layers": [
+        "review_composite"
+      ],
+      "sha256": "1f309c3050bb8bfb6623df172fccb3299a0e5ec486a3476c8a74ff580c612b58",
+      "frame_duration_ms": null,
+      "loop": false
+    },
+    {
+      "asset_id": "review.dancer_dance",
+      "file": "storyboards/dancer_dance.png",
+      "canvas": [
+        1300,
+        430
+      ],
+      "anchor": null,
+      "world_or_ui": "review_only",
+      "runtime_ready": false,
+      "action": "dancer_dance",
+      "layers": [
+        "review_composite"
+      ],
+      "sha256": "d868e5ee55482643cc8ba49dd9cabf62995bfbc1e3d27ac9d8a2a19263489362",
+      "frame_duration_ms": null,
+      "loop": false
+    },
+    {
+      "asset_id": "review.dancer_resurrection",
+      "file": "storyboards/dancer_resurrection.png",
+      "canvas": [
+        1300,
+        430
+      ],
+      "anchor": null,
+      "world_or_ui": "review_only",
+      "runtime_ready": false,
+      "action": "dancer_resurrection",
+      "layers": [
+        "review_composite"
+      ],
+      "sha256": "27d92d8b2dc30d48aafd34b5c6fd723dcd2625110cc8d1146f1e9d090fb32224",
+      "frame_duration_ms": null,
+      "loop": false
+    },
+    {
+      "asset_id": "review.maid_coffee",
+      "file": "storyboards/maid_coffee.png",
+      "canvas": [
+        1820,
+        430
+      ],
+      "anchor": null,
+      "world_or_ui": "review_only",
+      "runtime_ready": false,
+      "action": "maid_coffee",
+      "layers": [
+        "review_composite"
+      ],
+      "sha256": "bbc27ff218978c4897ad5a8c71f83b344a94cde864aacb0122b3ed9cf80c4fb0",
+      "frame_duration_ms": null,
+      "loop": false
+    },
+    {
+      "asset_id": "review.maid_rage",
+      "file": "storyboards/maid_rage.png",
+      "canvas": [
+        1820,
+        430
+      ],
+      "anchor": null,
+      "world_or_ui": "review_only",
+      "runtime_ready": false,
+      "action": "maid_rage",
+      "layers": [
+        "review_composite"
+      ],
+      "sha256": "dbd932fca5284a7b915e51f4139c24e2565835baf01a14c201c8b9947f71f315",
+      "frame_duration_ms": null,
+      "loop": false
+    },
+    {
+      "asset_id": "review.thief_poison",
+      "file": "storyboards/thief_poison.png",
+      "canvas": [
+        1560,
+        430
+      ],
+      "anchor": null,
+      "world_or_ui": "review_only",
+      "runtime_ready": false,
+      "action": "thief_poison",
+      "layers": [
+        "review_composite"
+      ],
+      "sha256": "7de0f8ab5dbf40cabbde7aab320ddcc3934646b0692459edae37609a93cefca1",
+      "frame_duration_ms": null,
+      "loop": false
+    },
+    {
+      "asset_id": "review.thief_steal",
+      "file": "storyboards/thief_steal.png",
+      "canvas": [
+        1300,
+        430
+      ],
+      "anchor": null,
+      "world_or_ui": "review_only",
+      "runtime_ready": false,
+      "action": "thief_steal",
+      "layers": [
+        "review_composite"
+      ],
+      "sha256": "20947af6c69c6d4796f1cc3a2206c961186e752dcc65238b5ee325872c7235a3",
+      "frame_duration_ms": null,
+      "loop": false
+    }
+  ],
+  "storyboards": [
+    {
+      "action": "maid_coffee",
+      "file": "storyboards/maid_coffee.png",
+      "source": "maid_sheet.png",
+      "source_grid": [
+        4,
+        4
+      ],
+      "source_cells_zero_based": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "order": [
+        "持つ",
+        "回る",
+        "配る",
+        "1秒停止の姿",
+        "次へ向く",
+        "自分で飲む",
+        "休憩"
+      ],
+      "frame_duration_ms": null,
+      "loop": false,
+      "runtime_ready": false,
+      "note": "Narrative keyposes only; not animation frames. Timing and layers must be finalized after adoption.",
+      "source_extraction": "grid cells with detached residue removed",
+      "composition_layers": [
+        "body_concept"
+      ]
+    },
+    {
+      "action": "maid_rage",
+      "file": "storyboards/maid_rage.png",
+      "source": "maid_sheet.png",
+      "source_grid": [
+        4,
+        4
+      ],
+      "source_cells_zero_based": [
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14
+      ],
+      "order": [
+        "通常",
+        "怒り",
+        "包丁を出す",
+        "前傾",
+        "高速追跡",
+        "攻撃",
+        "落ち着く"
+      ],
+      "frame_duration_ms": null,
+      "loop": false,
+      "runtime_ready": false,
+      "note": "Narrative keyposes only; not animation frames. Timing and layers must be finalized after adoption.",
+      "source_extraction": "grid cells with detached residue removed",
+      "composition_layers": [
+        "body_concept"
+      ]
+    },
+    {
+      "action": "dancer_dance",
+      "file": "storyboards/dancer_dance.png",
+      "source": "dancer_dance_clean.png",
+      "source_grid": [
+        6,
+        2
+      ],
+      "source_cells_zero_based": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "order": [
+        "構える",
+        "扇を開く",
+        "旋回",
+        "舞う",
+        "風・支援"
+      ],
+      "frame_duration_ms": null,
+      "loop": false,
+      "runtime_ready": false,
+      "note": "Narrative keyposes only; not animation frames. Timing and layers must be finalized after adoption.",
+      "source_extraction": "connected alpha components, see art-production",
+      "composition_layers": [
+        "body_concept"
+      ]
+    },
+    {
+      "action": "dancer_resurrection",
+      "file": "storyboards/dancer_resurrection.png",
+      "source": "dancer_resurrection_clean.png",
+      "source_grid": [
+        6,
+        2
+      ],
+      "source_cells_zero_based": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "order": [
+        "対象へ向く",
+        "舞を開始",
+        "扇を広げる",
+        "対象へ光",
+        "対象が起きる"
+      ],
+      "frame_duration_ms": null,
+      "loop": false,
+      "runtime_ready": false,
+      "note": "Narrative keyposes only; not animation frames. Timing and layers must be finalized after adoption.",
+      "source_extraction": "connected alpha components, see art-production",
+      "composition_layers": [
+        "body",
+        "target_existing_martial_artist",
+        "life_light"
+      ]
+    },
+    {
+      "action": "thief_steal",
+      "file": "storyboards/thief_steal.png",
+      "source": "thief_sheet.png",
+      "source_grid": [
+        4,
+        3
+      ],
+      "source_cells_zero_based": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "order": [
+        "発見",
+        "しゃがむ",
+        "拾う",
+        "袋へ入れる",
+        "逃走"
+      ],
+      "frame_duration_ms": null,
+      "loop": false,
+      "runtime_ready": false,
+      "note": "Narrative keyposes only; not animation frames. Timing and layers must be finalized after adoption.",
+      "source_extraction": "grid cells with detached residue removed",
+      "composition_layers": [
+        "body_concept"
+      ]
+    },
+    {
+      "action": "thief_poison",
+      "file": "storyboards/thief_poison.png",
+      "source": "thief_sheet.png",
+      "source_grid": [
+        4,
+        3
+      ],
+      "source_cells_zero_based": [
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "order": [
+        "取り出す",
+        "振りかぶる",
+        "投げる",
+        "瓶飛翔",
+        "破裂",
+        "薄い毒雲"
+      ],
+      "frame_duration_ms": null,
+      "loop": false,
+      "runtime_ready": false,
+      "note": "Narrative keyposes only; not animation frames. Timing and layers must be finalized after adoption.",
+      "source_extraction": "grid cells with detached residue removed",
+      "composition_layers": [
+        "body",
+        "projectile",
+        "splash",
+        "cloud"
+      ]
+    },
+    {
+      "action": "bull_charge",
+      "file": "storyboards/bull_charge.png",
+      "source": "bull_sheet.png",
+      "source_grid": [
+        4,
+        2
+      ],
+      "source_cells_zero_based": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "order": [
+        "地面を蹴る",
+        "頭を下げる",
+        "開始",
+        "全速直進",
+        "接触",
+        "減速"
+      ],
+      "frame_duration_ms": null,
+      "loop": false,
+      "runtime_ready": false,
+      "note": "Narrative keyposes only; not animation frames. Timing and layers must be finalized after adoption.",
+      "source_extraction": "grid cells with detached residue removed",
+      "composition_layers": [
+        "body_concept"
+      ]
+    }
+  ],
+  "rendering": {
+    "format": "RGBA",
+    "filter": "nearest",
+    "color_key": false,
+    "preserve_padding": true
+  },
+  "source_directory": "../../art-production/ui-world-direction-v1",
+  "reference_game_revision": "30207f2fa1ca73991e48473907cbd7315aaebe52",
+  "source_spec_sha256": {
+    "ANIMALS.md": "57d88ce3e995d57398d6af1d8e0dd75bad81c57f318c83ceee2ad0fcc86563f3",
+    "ART_SPEC.md": "aa0d2f15f9d09c5798f2c4cd236af41df973ec2cd2e6d6b4d8cbb5954c847dde",
+    "ENEMIES.md": "eec69e23ad5bc273225b0d89753127efca534cd0117d8ca75a8c14886b1d4c84",
+    "ITEMS.md": "c43e020b086edbf2dd134b4a3fe3f4637c1ce3d70d44bb5e3feb4212beb37010",
+    "WORLD_SYSTEMS.md": "0ba18f9e5e9c10877d654ac5df362a0f9d9199e36b93dfcd6fa75105c5054444"
+  },
+  "source_pngs": {
+    "bull_sheet.png": "e46833802c716a31400db6252ebabc55fbfe917f5286c4ad41ce39b916fb330b",
+    "cow.png": "e286a850732d1c8ad8350065eb33035b76594358f647bc1d5aaf521e2e68e942",
+    "dancer_dance_clean.png": "ffed17da660e641e80b0ffd4c657d19bed027fe6265eb2d563b5a43f87a68fd4",
+    "dancer_resurrection_clean.png": "af6a15ad1e2232b38af160ea74ffb7f5b95f6f0623feda11975a4ec762ba3deb",
+    "dancer_sheet.png": "736956c32127ddf4773df92dc4b1572648e2ca08545fd329c55b771aa03401e0",
+    "fossil.png": "c9757d15fb0f4d54e05970fc0f5afa28be21abe8ddabcd479fefc099dbf47af4",
+    "goldA.png": "1a161bc0e29f766d959692f04b2f64962ae0a228e5782486afd60bbccc8110b8",
+    "goldB.png": "be3b0ff9bed8a8b5b77e814f473dc0fa46f6b0a6eca0082b53e7898ee06bfc04",
+    "kokeshi.png": "0a30908350691d6b65b18721a9db290da113b196459ebdc02ebd578db4333baf",
+    "maid_sheet.png": "def4809d7c4c466e8da074fa77aff1ff66b7d03bab12dde08a51e330a4ab493c",
+    "portrait_cat.png": "103f1849b4359459cb060b94ec678246220b1d8872128b0da3e3d886310cb396",
+    "portrait_destroyer.png": "851304f87033f8ae8e738cb53955c2f5edf46b552df9bbeec67ad1c5d8f49f01",
+    "portrait_doberman.png": "6201e1432a5d38191e1ec00df803a6b8e519e6ab7c2cc18bf0a2f37d38d62428",
+    "portrait_hen.png": "24d7d2ba6cf214bff288e78e596fabe7c1c42e084e0bf8107d0cd2ec8ac36415",
+    "portrait_salaryman.png": "a71ba9d5e0009ceb8a9e70fb4120974d09f2781b12ee6c85f8d1862c8966188d",
+    "portrait_shiba.png": "53dc563eaf525b0e22cc68b2a6ee7f76282bde94903b5fb263469df288448dd9",
+    "rarity_atlas.png": "c582cb54c30a606a59842a5e44912515e82b1b1afe7a9c123b4a8c6df7ae414f",
+    "readiness_atlas.png": "a8145ec53dc55b19b70a0b5d32d88ae1febaaf8bf700fff60a868a7729be808a",
+    "skills_atlas.png": "d13d7549f8f401462d5620cbfd28deb50085b5d68fe8163803ef1dddcb49b6ed",
+    "skills_atlas_fixed.png": "c553a8c5c1747030e2c72c0abcf5a633eb68c5edaa9ac9393603a6960903936c",
+    "thief_sheet.png": "9220704dc1dc1a479712176a53d8761b9d72a2dbabeb1c735b4855edc70bf36e",
+    "thief_sheet_cutout.png": "2d9096ee0d23a4b044895b9d25b0dfe701eceaa8e9fe186705906669dd5e7bc3",
+    "tree_a.png": "9b1b497212ccdb1bf40581ae4327f49269e1b6ea0f71ecce12ec0b861a305f49",
+    "tree_b.png": "1cc8011c5b4406acae129477b67afc8c90fa701e76be401bf4015586e93f46d9",
+    "tree_c.png": "3eb7b3b284e026fcd17147e315c5d317e93c7a330314508b79e71d0f63afef16"
+  },
+  "implementation_notes": [
+    "Nothing in this review set is approved for automatic runtime ingestion. assets is intentionally empty.",
+    "New user idol canvas/anchor proposal supersedes older96x128 spec only as a candidate, not an integration contract.",
+    "No existing delivered sprites or motion files changed.",
+    "No gameplay, scenes, UID, stats, or damage rules edited.",
+    "Offline compositions are not game-rendering evidence."
+  ]
+}

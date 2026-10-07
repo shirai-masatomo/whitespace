@@ -878,7 +878,7 @@ func step():
 		if a.path.back() != a.pos: a.path.append(a.pos)
 	for e in enemies:
 		enemy_step(e)
-		if phase != "defend": break
+		if not working(): break
 
 	if tick % 8 == 0:
 		traces.append({"tick": tick, "stamina": snappedf(animals[0].stamina, 0.1), "eggs": eggs,
@@ -1378,6 +1378,7 @@ func rescue_exit(a: Dictionary, target: Vector2i=Vector2i(-1,-1)) -> Vector2i:
 
 func debug_action(action: String, selection: Dictionary = {}) -> bool:
 	if not debug_enabled: return false
+	if action=="spawn_enemy": return debug_spawn_enemy(selection.get("enemy_kind",""))
 	if action=="lock" and (selection.get("kind")!="structure" or structures.get(selection.get("pos"),{}).get("kind")!="locked_door" or structures.get(selection.get("pos"),{}).get("status")!="ready"): return false
 	if action=="infinite": debug_infinite=not debug_infinite
 	elif action=="whistle": campaign.items.whistle=1
@@ -1419,6 +1420,32 @@ func debug_action(action: String, selection: Dictionary = {}) -> bool:
 	else: return false
 	job_log.append({"tick":tick,"event":"debug","action":action})
 	return true
+
+func debug_spawn_enemy(kind: String) -> bool:
+	if not debug_enabled: return false
+	if not ProgressData.ENEMY_ROWS.has(kind) and kind!="doberman": say("未実装の敵です"); return false
+	if not working(): say("敵の出現は昼・夜に使えます"); return false
+	var gates=entries.duplicate()
+	gates.sort_custom(func(a,b):return distance(keeper.pos,a)<distance(keeper.pos,b) if distance(keeper.pos,a)!=distance(keeper.pos,b) else (a.y<b.y if a.y!=b.y else a.x<b.x))
+	for gate in gates:
+		if not walkable(gate) or live_structure(gate): continue
+		var sites=[]
+		for y in range(gate.y-3,gate.y+4):
+			for x in range(gate.x-3,gate.x+4):
+				var cell=Vector2i(x,y)
+				if distance(cell,gate)>3 or not walkable(cell) or live_structure(cell) or occupied(cell) or is_indoor(cell):continue
+				if not find_path(gate,cell,false,true,kind=="doberman").is_empty():sites.append(cell)
+		sites.sort_custom(func(a,b):return distance(gate,a)<distance(gate,b) if distance(gate,a)!=distance(gate,b) else (a.y<b.y if a.y!=b.y else a.x<b.x))
+		if sites.is_empty():continue
+		var count=enemies.size()
+		spawn_enemy({"role":kind,"entry":gate,"lv":1,"debug_single":true})
+		if enemies.size()==count:return false
+		var e=enemies.back();e.pos=sites[0];e.path=[e.pos]
+		job_log.append({"tick":tick,"event":"debug","action":"spawn_enemy","enemy_kind":kind,"enemy_id":e.id,"pos":e.pos})
+		say("%sを入口に出現させました"%e.name)
+		return true
+	say("入口付近に出現できる空きマスがありません")
+	return false
 
 func update_facing(actor: Dictionary, previous: Vector2i):
 	if actor.pos.x!=previous.x: actor.facing=signi(actor.pos.x-previous.x)

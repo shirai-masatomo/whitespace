@@ -84,6 +84,7 @@ var accumulated = 0.0
 var clock = 0.0
 var automated = false
 var debug_view = false
+var debug_enemy_kind = "kidnapper"
 var art_alpha = 1.0
 var view_positions: Dictionary = {}
 var actor_tracks: Dictionary = {}
@@ -2151,9 +2152,22 @@ func build_debug_controls():
 		add_button(palette,"debug_"+row[0],("素材∞ ON" if world.debug_infinite else "素材∞ OFF") if row[0]=="infinite" else row[1],Rect2(16+(i%2)*124,145+(i/2)*37,118,32),debug_action.bind(row[0]))
 
 	buttons.debug_lock.disabled=selected.get("kind")!="structure" or world.structures.get(selected.get("pos"),{}).get("kind")!="locked_door" or world.structures.get(selected.get("pos"),{}).get("status")!="ready"
+	var kinds=Farm.ProgressData.ENEMY_ROWS.keys()+["doberman"]
+	for i in range(kinds.size()):
+		var kind=kinds[i]
+		var title="敵ドーベルマン" if kind=="doberman" else Farm.ProgressData.enemy(kind).name
+		add_button(palette,"debug_enemy_"+kind,title,Rect2(16+(i%2)*148,305+(i/2)*37,140,32),select_debug_enemy.bind(kind))
+		UI.selected(buttons["debug_enemy_"+kind],debug_enemy_kind==kind)
+	add_button(palette,"debug_spawn_enemy","入口に出現（1体）",Rect2(16,460,288,34),debug_action.bind("spawn_enemy"))
+	buttons.debug_spawn_enemy.disabled=not world.working()
+	buttons.debug_spawn_enemy.tooltip_text="昼・夜にLv1を1体。停止中は出現だけ。入口の空きマスを使用します。"
+
+func select_debug_enemy(kind: String):
+	debug_enemy_kind=kind
+	refresh()
 
 func debug_action(action: String):
-	world.debug_action(action,selected)
+	world.debug_action(action,{"enemy_kind":debug_enemy_kind} if action=="spawn_enemy" else selected)
 	refresh()
 
 func keeper_hit_rect() -> Rect2:

@@ -1,0 +1,19 @@
+{
+  "source_commit": "a34390e584037cef78c9f49dcec4b18bd44f6f3d",
+  "user_selection": "Aを使用します。ただしBも素材は残してください。",
+  "scope": "Static candidate A explicitly adopted by user; source review manifest preserved. Damage/prayer/transport variants remain unavailable. Only the two listed PNGs imported from the source bundle.",
+  "assets": [
+    {
+      "asset_id": "world.goldA",
+      "path": "art_delivery/ui_world_direction_v1/candidates/world/goldA.png",
+      "sha256": "e0138b3052925a8e54b753682977cd4819c2e041ad9ddf2ababc9a2cc463d990",
+      "use": "adopted static world image"
+    },
+    {
+      "asset_id": "world.goldB",
+      "path": "art_delivery/ui_world_direction_v1/candidates/world/goldB.png",
+      "sha256": "c913530ff20d247da513ea0cc646f769b6f0bfb51a417fbc0af3a342784ff5c8",
+      "use": "retained alternate; not drawn"
+    }
+  ]
+}

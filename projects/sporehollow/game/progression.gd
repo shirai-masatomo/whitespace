@@ -167,7 +167,7 @@ static func spawn_data(w,e,event):
 	e.move_speed=event.get("move_speed",e.move_speed); e.sight_range=event.get("sight_range",e.sight_range)
 	e.action_id="idle"; e.led_animal=-1
 	w.campaign.encounter_counts[id]=w.campaign.encounter_counts.get(id,0)+1
-	if id=="runner" and w.rng.randf()<Data.SPECIAL.companion_chance:
+	if id=="runner" and not event.get("debug_single",false) and w.rng.randf()<Data.SPECIAL.companion_chance:
 		w.spawn_schedule.append({"tick":w.tick-w.night_started_tick+4,"wave":999,"role":"doberman","entry":event.entry,"lv":1,"companion_of":e.id})
 		w.spawn_schedule.sort_custom(func(a,b):return a.tick<b.tick)
 

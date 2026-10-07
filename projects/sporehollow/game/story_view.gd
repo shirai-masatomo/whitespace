@@ -1,4 +1,6 @@
 extends RefCounted
+const IDOL=preload("res://art_delivery/ui_world_direction_v1/candidates/world/goldA.png")
+const IDOL_ANCHOR=Vector2(72,152)
 const LABELS={"clear_tree":"開拓","inspect_idol":"像を調べる","pray_wealth":"富を願う","repair_idol":"像を修理","recover_idol":"像を固定"}
 
 static func tree(g,p: Vector2i,deep: bool=false):
@@ -15,20 +17,16 @@ static func idol(g):
 	var w=g.world
 	if w.story.idol.is_empty(): return
 	var p=g.actor_pixel("idol",w.Story.at(w))+g.TILE*0.5
-	# Explicit code-art placeholder: abstract weathered object, no invented deity/civilization.
-	g.draw_rect(Rect2(p+Vector2(-42,18),Vector2(86,22)),Color("655b42"))
-	g.draw_rect(Rect2(p+Vector2(-39,10),Vector2(78,24)),Color("a39871"))
-	g.draw_rect(Rect2(p+Vector2(-30,-51),Vector2(60,65)),Color("85672f"))
-	g.draw_rect(Rect2(p+Vector2(-26,-55),Vector2(48,64)),Color("c29a4b"))
-	g.draw_rect(Rect2(p+Vector2(-18,-61),Vector2(36,18)),Color("e1bd68"))
-	g.draw_rect(Rect2(p+Vector2(-20,-48),Vector2(8,45)),Color("ead08a"))
+	# Native RGBA, anchored to the lower middle of the existing 2x2 footprint.
+	g.texture_filter=CanvasItem.TEXTURE_FILTER_NEAREST
+	g.draw_texture(IDOL,(p+Vector2(0,g.TILE.y)-IDOL_ANCHOR).round())
 	if w.story.idol.hp<w.story.idol.max_hp/2:
 		g.draw_polyline(PackedVector2Array([p+Vector2(7,-48),p+Vector2(0,-28),p+Vector2(12,-11)]),Color("574933"),3)
 	if w.story.idol.state in ["preparing","transporting"]:
 		var enemies=w.enemies.filter(func(e):return e.id==w.story.idol.carrier and not e.done)
 		if not enemies.is_empty(): g.draw_line(p+Vector2(0,18),g.actor_pixel("e%d"%enemies[0].id,enemies[0].pos),Color("cdb580"),3)
 		for x in [-31,31]:g.draw_rect(Rect2(p+Vector2(x,29),Vector2(12,8)),Color("504539"))
-		g.label_on(g,p+Vector2(-40,-73),"固定を外されている" if w.story.idol.state=="preparing" else "搬出中",15,Color("ffe0a2"))
+		g.label_on(g,p+Vector2(-40,-117),"固定を外されている" if w.story.idol.state=="preparing" else "搬出中",15,Color("ffe0a2"))
 	if g.selected.get("kind")=="idol" or w.story.idol.hp<w.story.idol.max_hp:
 		g.label_on(g,p+Vector2(-38,59),"黄金像 %d/%d"%[w.story.idol.hp,w.story.idol.max_hp],14)
 
