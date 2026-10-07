@@ -96,8 +96,9 @@ func run():
 	w.Life.hurt(w,{"id":9,"attack_power":30})
 	check(w.Life.presentation(w)=="unconscious" and w.animals[0].placed and not w.animals[0].has("guide_job"),"Keeper unconscious stops guidance without removing the animal")
 	w.keeper.state="unconscious";steps(w,48)
-	check(w.Life.presentation(w)=="settling" and w.jobs_held,"Recovery begins a new rest period")
-	w.act("keeper_rest")
+	check(w.Life.presentation(w)=="hidden_rest" and w.jobs_held,"Recovery starts hidden rest after capture grace")
+	check(not w.act("keeper_rest"),"Hidden recovery cannot be woken early")
+	steps(w,192)
 	check(w.Life.presentation(w)=="awake","Wake clears sleep presentation")
 	# Reproduce the old empty-queue walk -> permanent held state; new orders must start.
 	w=fresh()

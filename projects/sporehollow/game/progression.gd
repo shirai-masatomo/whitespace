@@ -278,8 +278,9 @@ static func walk(w,e,goal: Vector2i):
 
 static func strike(w,e,t,override_damage: int=-1):
 	e.observed_action=true
-	e.combat_action=("rage" if e.archetype=="maid" else "shuriken") if override_damage>=0 else "attack"
-	e.combat_skill=override_damage>=0
+	var raging=e.archetype=="maid" and w.tick<e.get("rage_until",0)
+	e.combat_action=("rage" if raging else "attack") if e.archetype=="maid" else ("shuriken" if override_damage>=0 else "attack")
+	e.combat_skill=raging if e.archetype=="maid" else override_damage>=0
 	if t.kind=="keeper":
 		var damage=e.human_attack if override_damage<0 else override_damage
 		if e.archetype=="martial_artist": damage=mini(damage,maxi(0,w.keeper.hp-1))

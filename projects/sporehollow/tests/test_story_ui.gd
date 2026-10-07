@@ -25,6 +25,8 @@ func run():
 	await mouse(Vector2(700,430),MOUSE_BUTTON_RIGHT)
 	check(game.group==-1 and game.world.jobs.size()==1,"Right click deselects without cancelling story job")
 	game.world=Farm.new({},17).begin_day();game.world.paused=true;game.reset_view();game.refresh()
+	# Selection-cap fixture must not depend on sparse clustered seed producing eight trees.
+	for i in range(9):game.world.trees[Vector2i(2,3+i)]="selection-fixture-%d"%i
 	game.selected_trees.clear()
 	for cell in game.world.trees:game.toggle_selection(game.selected_trees,cell)
 	game.selected={"kind":"tree","pos":game.selected_trees[0]};game.refresh()

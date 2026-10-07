@@ -139,7 +139,11 @@ func _init(data: Dictionary = {}, seed_number: int = 17, stage_override: Diction
 	morning_checkpoint.erase("morning_checkpoint")
 	for key in ["hp", "sleepiness", "drinks_today","facing","stamina","ultimate_gauge"]:
 		keeper[key] = campaign.get("keeper_vitals", {}).get(key, keeper.get(key,1))
-	if keeper.hp <= 0: keeper.state = "unconscious"
+	keeper.state=campaign.get("keeper_vitals",{}).get("recovery_state","unconscious" if keeper.hp<=0 else "free")
+	if keeper.state in ["unconscious","hidden_rest"]:
+		keeper.heal_credit=campaign.keeper_vitals.get("heal_credit",0.0)
+		keeper.recover_ticks=campaign.keeper_vitals.get("recover_ticks",0)
+		Jobs.hold(self,"rescue")
 	if keeper.sleepiness >= 100:
 		keeper.forced_rest = true
 		keeper.resting = true
@@ -677,7 +681,7 @@ func enemy_step(e: Dictionary):
 				e.counter_target = e.attacker
 				e.counter_until = tick + ceili(Rules.KIDNAPPER.counter_duration / DT)
 			if keeper.restrainer == e.id and e.carry == "":
-				keeper.state = "free"
+				keeper.state = "unconscious" if keeper.hp<=0 else "free"
 				keeper.restrainer = -1
 				e.capture_progress = 0
 		else:
@@ -858,7 +862,7 @@ func persist_farm():
 	for j in jobs:
 		if not BUILD.has(j.kind) and j.kind not in Story.ACTIONS: continue
 		var row=j.duplicate(true); row.pos=[j.pos.x,j.pos.y]; campaign.work_jobs.append(row)
-	campaign.keeper_vitals = {"hp": keeper.hp, "sleepiness": keeper.sleepiness, "drinks_today": keeper.drinks_today,"facing":keeper.get("facing",1),"stamina":keeper.stamina,"ultimate_gauge":keeper.ultimate_gauge}
+	campaign.keeper_vitals = {"hp": keeper.hp, "sleepiness": keeper.sleepiness, "drinks_today": keeper.drinks_today,"facing":keeper.get("facing",1),"stamina":keeper.stamina,"ultimate_gauge":keeper.ultimate_gauge,"recovery_state":keeper.state if keeper.state in ["unconscious","hidden_rest"] else "free","heal_credit":keeper.heal_credit,"recover_ticks":keeper.recover_ticks}
 	campaign.keeper_position = [keeper.pos.x, keeper.pos.y]
 	campaign.resources = resource_snapshot()
 	campaign.next_structure_id = next_structure_id
@@ -969,7 +973,7 @@ func next_campaign() -> Dictionary:
 	data.day += 1
 	if data.has("keeper_vitals"):
 		data.keeper_vitals.drinks_today = 0
-		data.keeper_vitals.hp = maxi(8, data.keeper_vitals.hp)
+		if data.keeper_vitals.get("recovery_state","free") not in ["unconscious","hidden_rest"]:data.keeper_vitals.hp = maxi(8, data.keeper_vitals.hp)
 	data.night_ready = false
 	return data
 

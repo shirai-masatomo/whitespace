@@ -1652,7 +1652,7 @@ func draw_hud():
 			hud.draw_rect(Rect2(92, 646, 150, 9), Color("293d35"))
 			hud.draw_rect(Rect2(92, 646, 150.0 * e.hp / e.max_hp, 9), Color("d2aa80"))
 			draw_gauge(hud,e,Vector2(92,655))
-			var status = "撃退済み" if e.hp <= 0 or e.flee or e.done else ("牧場主を発見" if e.can_see_keeper else e.search_state)
+			var status = "撃退済み" if e.hp <= 0 or e.flee or e.done else (e.search_state if debug_view else "HP %d / %d" % [e.hp, e.max_hp])
 			label_on(hud, Vector2(92, 677), "%d/%d  視界%d" % [e.hp, e.max_hp, e.sight_range] if Rect2(16, 609, 344, 80).has_point(pointer) else status, 15)
 	elif selected.get("kind") in ["structure","floor"] and selected_store().has(selected.pos):
 		var b = selected_store()[selected.pos]
