@@ -1,6 +1,6 @@
 {
   "delivery_branch": "codex/sporehollow-art-assets",
-  "latest_delivery_commit": "5848c4f8aedde4acfa33586f82c3397d1b6d58a0",
+  "latest_delivery_commit": "5ac00e72c4036799de89f598c0374aa8efcf8549",
   "characters_v1": "f3e4ae82b68c342b928dfb5dfcebb451353f9b8d",
   "characters_motion_v1": "ae950a3df8de7a3dbbd14f40dc3ef9df05e22fd4",
   "ranch_assets_v1": "57aab97c3efc495d7553ee412c68696945d8e846",
@@ -12,5 +12,7 @@
   "kidnapper_reactions_v1": "d300d8ae905d5dcedf9d6e022807b51d9a3097d7",
   "effects_v1": "e6371377565aa71a3b7979e6ee7edd57878048bb",
   "cart_ui_detail_v1": "2cb05b6679bea777a02162a35d3693489f381c3c",
-  "resource_icons_v1": "5848c4f8aedde4acfa33586f82c3397d1b6d58a0"
+  "resource_icons_v1": "5848c4f8aedde4acfa33586f82c3397d1b6d58a0",
+  "adopted_ui": "assets/adopted_ui/manifest.json",
+  "adopted_ui_scope": "Official idle UI only; full world motion pending"
 }

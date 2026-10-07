@@ -15,6 +15,11 @@ static func enqueue(w,kind: String,ids: Array,p: Vector2i) -> bool:
 	var rejected=[]
 	var assigned=[]
 	var leader_goal=p
+	var enemy_id=-1
+	if kind=="attack_target":
+		var candidates=w.enemies.filter(func(e):return e.pos==p and not e.done and not e.flee and e.hp>0)
+		if candidates.is_empty():w.say("検知済みの敵を選んでください");return false
+		enemy_id=candidates[0].id
 	if kind=="guide":
 		var leader_sites=w.neighbors(p).filter(func(c):return w.walkable(c) and not w.actor_occupied(c,w.keeper.pos) and not w.find_path(w.keeper.pos,c).is_empty())
 		if leader_sites.is_empty(): w.say("牧場主が案内先へ近づけません"); return false
@@ -24,6 +29,8 @@ static func enqueue(w,kind: String,ids: Array,p: Vector2i) -> bool:
 		var a=animal(w,id)
 		if not active(w,a) or kind not in w.SPECIES[a.species].orders:
 			rejected.append({"id":id,"reason":"非対応、または療養中"}); continue
+		if kind=="attack_target" and not w.animal_targets(a).any(func(e):return e.id==enemy_id):
+			rejected.append({"id":id,"reason":"未検知、または狙える範囲外"});continue
 		if w.jobs.any(func(j):return id in j.get("targets",[]).map(func(t):return t.id)): rejected.append({"id":id,"reason":"予約済み"}); continue
 		var dest=a.pos
 		if kind=="guide":
@@ -50,6 +57,7 @@ static func enqueue(w,kind: String,ids: Array,p: Vector2i) -> bool:
 	w.Life.wake_auto(w)
 	w.say("指示 %d匹" % targets.size() + ("・未割当 %d匹（%s）" % [rejected.size(),rejected[0].reason] if not rejected.is_empty() else ""))
 	w.next_job_id+=1
+	if kind=="attack_target":w.jobs.back().enemy_id=enemy_id
 	w.job_log.append({"tick":w.tick,"event":"order_reserved","id":w.next_job_id-1,"unassigned":rejected,"targets":targets.map(func(t):return t.id),"order":kind})
 	return true
 
@@ -93,7 +101,12 @@ static func step(w,j):
 			if a.species=="shiba" and w.daily_rng.randf()>0.90+w.Progression.loyalty(a)*0.001:
 				t.done=true; report(w,"今は気が乗らないようです"); continue
 			if j.order!="guide":
-				w.issue_order(j.order,j.command_pos if j.order=="attack_target" else a.pos,a.id); t.done=true
+				var order_pos=a.pos
+				if j.order=="attack_target":
+					var enemies=w.animal_targets(a).filter(func(e):return e.id==j.get("enemy_id",-1))
+					if enemies.is_empty():t.done=true;report(w,"狙う相手を見失いました");continue
+					order_pos=enemies[0].pos
+				w.issue_order(j.order,order_pos,a.id); t.done=true
 			else:
 				a.guide_job=j.id
 				w.release_kennel(a)
@@ -199,3 +212,19 @@ static func clear_guide_path(w,j,start: Vector2i):
 				a.state="道を空ける"
 				return
 			if members.has(n):open.append(n)
+
+static func priority_targets(w,a,normal: Array) -> Array:
+	var found=w.enemies.filter(func(e):return e.id==a.target_id and not e.done and not e.flee and e.hp>0)
+	var valid=not found.is_empty()
+	if valid:
+		var e=found[0]
+		var visible=a.known_enemies.get(e.id,-1)>=w.tick and w.distance(a.pos,e.pos)<=a.attack_target_range and w.line_of_sight(a.pos,e.pos)
+		if visible:a.priority_seen=w.tick
+		valid=w.tick-a.get("priority_seen",w.tick)<=ceili(5.0/w.DT)
+		if visible:
+			var goals=w.neighbors(e.pos).filter(func(p):return w.animal_walkable(a,p))
+			valid=valid and goals.any(func(p):return not w.animal_path(a,a.pos,p).is_empty())
+			if valid:return [e]+normal.filter(func(other):return other.id!=e.id)
+	if not valid:
+		a.mode="auto";a.target_id=-1;a.erase("priority_seen")
+	return normal

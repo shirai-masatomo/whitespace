@@ -10,7 +10,7 @@ const SPECIES = {
 	"hedgehog":{"title":"ハリネズミ","category":"small","hp":38,"attack":0,"object_attack":0,"attack_seconds":1.5,"move_speed":1.2,"detection_range":2,"attack_target_range":2,"loyalty":40,"can_enter_indoor":true,"orders":["stay","guide"],"commands":true,"mortal":true,"affinity":false,"combat_response":Data.CombatResponse.REACTIVE,"skills":["spines"]}}
 const SKILLS = {
 	"intercept":{"name":"迎撃態勢","type":"passive","unlock_level":1,"condition":"検知済みの敵が攻撃対象範囲内","effect":"迷いを抑え迎撃"},
-	"tongue":{"name":"舌拘束","type":"active","unlock_level":1,"cooldown":8.0,"condition":"敵を見通せる","effect":"4マス以内の1体を2秒足止め"},
+	"tongue":{"name":"舌拘束","type":"active","unlock_level":1,"cooldown":8.0,"condition":"敵を見通せる","effect":"4マス以内の1体を2秒足止め。人間のスタミナを20低下"},
 	"croak":{"name":"警戒鳴き","type":"passive","unlock_level":1,"condition":"被弾","effect":"周囲6マスへ攻撃者の情報を共有"},
 	"spines":{"name":"防御モード","type":"passive","unlock_level":1,"condition":"被弾","effect":"4秒間 防御+4・接触反射4"},
 	"bark": {"name": "吠える", "type": "active", "unlock_level": 1, "cooldown": 6.0, "condition": "敵を検知", "effect": "周囲4マスの敵を1秒足止め"},
@@ -21,7 +21,7 @@ const SKILLS = {
 	"meow": {"name": "鳴く", "type": "active", "unlock_level": 2, "cooldown": 12.0, "condition": "敵が3マス以内", "effect": "攻撃力15%低下 / 4秒", "range": 3, "duration": 4.0, "reduction": 0.15}}
 
 static func has_skill(a: Dictionary, id: String) -> bool:
-	return (id in SPECIES[a.species].skills or id in a.get("bonus_skills",[])) and a.lv >= skill(id).get("unlock_level",1)
+	return (id in stats(a.species,a.lv).skills or id in a.get("bonus_skills",[])) and a.lv >= skill(id).get("unlock_level",1)
 
 static func skill(id: String) -> Dictionary:
 	var row=SKILLS.get(id,Data.BONUS_SKILLS.get(id,{})).duplicate(true)
@@ -32,3 +32,22 @@ static func skill(id: String) -> Dictionary:
 	row.eligible_tags=row.get("eligible_tags",[])
 	row.rollable=row.get("rollable",false); row.source=row.get("source","species")
 	return row
+
+const CHARACTER_TEXT={
+ "shiba":["危険に立ち向かう、大切な相棒。","牧場主のかけがえのない相棒。高い忠誠心で危険に立ち向かい、屋外から主人を救う機会を待つ。"],
+ "hen":["穏やかな卵の届け手。","毎朝卵を届ける穏やかな仲間。移動の誘導には応じるが、戦いは苦手。"],
+ "cat":["気ままに歩く、自由な仲間。","気ままに牧場を歩く自由な仲間。指示には従わず、自分のペースで過ごす。"],
+ "doberman":["鋭い目で守る、頼もしい番犬。","鋭い目で屋外を守る番犬。敵へ果敢に向かうが、柴犬の救出本能は持たない。"],
+ "bullfrog":["のんびり構え、舌で足止め。","大きな体でのんびり構える仲間。舌で敵を足止めし、危険を周囲へ知らせる。"],
+ "hedgehog":["控えめでも、棘は頼もしい。","ふだんは控えめな仲間。危険に反応して棘を立て、身を守りながら立ち向かう。"]}
+
+static func character_text(species: String,short: bool=false) -> String:
+	return CHARACTER_TEXT.get(species,["",""])[0 if short else 1]
+
+const LEVEL_OVERRIDES={}
+const GROWTH={"shiba":{"hp":4,"attack":2},"hen":{"hp":4},"cat":{"hp":4},"doberman":{"hp":4},"bullfrog":{"hp":4},"hedgehog":{"hp":4}}
+static func stats(species: String,level: int=1) -> Dictionary:
+	return Data.Levels.resolve(SPECIES[species],level,GROWTH.get(species,{}),LEVEL_OVERRIDES.get(species,{}))
+
+static func short_description(species: String) -> String:
+	return character_text(species,true)

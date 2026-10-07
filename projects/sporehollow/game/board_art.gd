@@ -2,7 +2,19 @@ extends RefCounted
 const Delivered = preload("res://game/delivered_art.gd")
 # Original code-drawn farm. Visual detail does not alter collision or simulation RNG.
 static func draw_ground(c: CanvasItem, world, tile: Vector2, time: float = 0):
-	c.draw_rect(Rect2(-1500, -1500, 4200, 3600), Color("42634b"))
+	var inv=c.get_canvas_transform().affine_inverse()
+	var top=inv*Vector2.ZERO;var bottom=inv*Vector2(1280,800)
+	c.draw_rect(Rect2(top-Vector2(100,100),bottom-top+Vector2(200,200)),Color("344c3b"))
+	for y in range(floori(top.y/tile.y)-2,ceili(bottom.y/tile.y)+3):
+		for x in range(floori(top.x/tile.x)-2,ceili(bottom.x/tile.x)+3):
+			if x>=1 and x<world.W-1 and y>=1 and y<world.H-1:continue
+			var n=posmod(x*173+y*317+world.seed_value,137)
+			var p=Vector2(x,y)*tile
+			if n%5==0:c.draw_rect(Rect2(p+Vector2(8,13),Vector2(17,8)),Color("526643"))
+			if n%11==0:c.draw_line(p+Vector2(12,20),p+Vector2(15,13),Color("71845a"),2)
+			# Decorative outer trees leave the physical entry lanes clear.
+			var lane=(x in [5,12,19]) or (y in [5,8,11])
+			if n%7==0 and not lane:preload("res://game/story_view.gd").tree(c,Vector2i(x,y),true)
 	for y in range(world.H):
 		for x in range(world.W):
 			var p = Vector2(x, y) * tile
@@ -33,12 +45,6 @@ static func draw_ground(c: CanvasItem, world, tile: Vector2, time: float = 0):
 		var wing = 2 + absf(sin(time * 7 + i)) * 2
 		c.draw_line(q - Vector2(wing, 2), q, Color("d5d7a1"), 2)
 		c.draw_line(q, q + Vector2(wing, -2), Color("c0c793"), 2)
-	# Deep forest is outside the immutable boundary, not an enclosure wall.
-	for y in range(-1,world.H+1):
-		for x in range(-1,world.W+1):
-			if x not in [-1,0,world.W-1,world.W] and y not in [-1,0,world.H-1,world.H]: continue
-			if y in [5,6] and x<=0: continue # merchant trail, not the sole invasion route
-			preload("res://game/story_view.gd").tree(c,Vector2i(x,y),true)
 
 static func draw_resource(c: CanvasItem, p: Vector2, kind: String):
 	if Delivered.RESOURCES.has(kind):

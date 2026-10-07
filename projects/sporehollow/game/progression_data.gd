@@ -1,5 +1,8 @@
 extends RefCounted
 ## Shared, versioned Lv1 tuning. No scene or simulation mutation.
+const Levels=preload("res://game/level_stats.gd")
+const ENEMY_LEVEL_OVERRIDES={} # No unapproved Lv2 combat tuning.
+const ENEMY_GROWTH={}
 enum Rarity { COMMON, UNCOMMON, RARE, EPIC, LEGENDARY }
 enum CombatResponse { AUTO, REACTIVE, NONE }
 const FAST_SPEED = 3.0
@@ -31,13 +34,14 @@ static func rarity(value) -> int:
 	if value is String: return maxi(0,RARITY_NAMES.map(func(v):return v.to_lower()).find(value.to_lower()))
 	return clampi(int(value),0,Rarity.LEGENDARY) if value!=null else Rarity.COMMON
 
-static func enemy(id: String) -> Dictionary:
+static func enemy(id: String,level: int=1) -> Dictionary:
 	var r=ENEMY_ROWS.get(id,ENEMY_ROWS.kidnapper)
-	return {"archetype":id,"species":id,"name":r[0],"lv":1,"rarity":r[10],"type_tag":"Human","max_hp":r[1],"defense":0,
+	var base={"archetype":id,"species":id,"name":r[0],"lv":1,"rarity":r[10],"type_tag":"Human","max_hp":r[1],"defense":0,
 		"move_speed":r[2],"sight_range":r[3],"attack_range":1,"human_attack":r[4],"animal_attack":r[5],"object_attack_power":r[6],
 		"attack_interval":r[7],"ai_accuracy":r[8],"target_weights":{"keeper":r[9][0],"animal":r[9][1],"structure":r[9][2],"idol":r[9][3]},
 		"karma_min":0,"karma_max":-1,"spawn_weight":1.0,"recruitable":id in ["martial_artist","ninja"],"recruit_condition_id":"unconfigured",
-		"loot_table":"scroll" if id=="ninja" else ("small_gold" if id=="salaryman" else "none"),"skills":{"kidnapper":["abduct_keeper"],"destroyer":["iron_ball"],"martial_artist":["bow","nonlethal"],"salaryman":["phone"],"ninja":["shuriken","dagger"],"animal_tamer":["tame","lead"],"runner":["run","fatigue","companion"]}.get(id,[]),"role_text":r[11],"level_overrides":{}}
+		"loot_table":"scroll" if id=="ninja" else ("small_gold" if id=="salaryman" else "none"),"skills":{"kidnapper":["abduct_keeper"],"destroyer":["iron_ball"],"martial_artist":["bow","nonlethal"],"salaryman":["phone"],"ninja":["shuriken","dagger"],"animal_tamer":["tame","lead"],"runner":["run","fatigue","companion"]}.get(id,[]),"role_text":r[11],"max_stamina":100.0,"stamina_regen":2.0,"ultimates":[],"level_overrides":ENEMY_LEVEL_OVERRIDES.get(id,{})}
+	return Levels.resolve(base,level,ENEMY_GROWTH.get(id,{}),base.level_overrides)
 
 static func weighted(rng: RandomNumberGenerator, weights: Array) -> int:
 	var total=0.0

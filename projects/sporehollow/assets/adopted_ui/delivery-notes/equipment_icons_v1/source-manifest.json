@@ -1,0 +1,81 @@
+{
+  "delivery": "equipment_icons_v1",
+  "date": "2026-10-06",
+  "branch": "codex/sporehollow-art-assets",
+  "status": "ready_for_implementation",
+  "adoption_commit": "f26498d2bafe6e274a197aef0a025d5016c8691e",
+  "rendering": {
+    "filter": "nearest",
+    "format": "RGBA",
+    "alpha": [
+      0,
+      255
+    ],
+    "color_key": false,
+    "scale": "uniform; native UI32; do not stretch to arbitrary aspect ratio"
+  },
+  "assets": [
+    {
+      "file": "collar.png",
+      "canvas_size_px": [
+        32,
+        32
+      ],
+      "anchor_px": [
+        16,
+        16
+      ],
+      "anchor_type": "UI center; no foot anchor",
+      "visible_bbox_exclusive_px": [
+        2,
+        6,
+        30,
+        25
+      ],
+      "action": "static",
+      "frame_index": 0,
+      "frame_duration_ms": null,
+      "loop": false,
+      "use": "犬の首輪。UI用。装着外見ではない。",
+      "sha256": "301e48b963de2bbb7289d81584f85b6230cae83ca01ba4b94f77a71e5bc2e0dc",
+      "adopted_source": "../enemy_animal_direction_v3/equipment/collar.png",
+      "identical_to_adopted_source": true,
+      "contains_cast_shadow": false,
+      "runtime_ready": true
+    },
+    {
+      "file": "healing_berry.png",
+      "canvas_size_px": [
+        32,
+        32
+      ],
+      "anchor_px": [
+        16,
+        16
+      ],
+      "anchor_type": "UI center; no foot anchor",
+      "visible_bbox_exclusive_px": [
+        2,
+        2,
+        30,
+        30
+      ],
+      "action": "static",
+      "frame_index": 0,
+      "frame_duration_ms": null,
+      "loop": false,
+      "use": "回復きのみ。薄黄色の大きな一粒。UI用。",
+      "sha256": "65a07cf5bef3980b49c9930f132e9f7ac453bc57756dbd7655b186b191ad539d",
+      "adopted_source": "../enemy_animal_direction_v3/equipment/healing_berry.png",
+      "identical_to_adopted_source": true,
+      "contains_cast_shadow": false,
+      "runtime_ready": true
+    }
+  ],
+  "unfinished": [
+    "キャラクターへ装着する外見差分は対象外",
+    "レアリティ差分は未制作",
+    "ゲーム取り込み・隔離描画検証は実装担当"
+  ],
+  "in_game_verified": false
+}

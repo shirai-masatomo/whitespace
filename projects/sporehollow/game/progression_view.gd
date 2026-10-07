@@ -27,7 +27,7 @@ static func enemy_page(game,c,index: int):
 	var known=game.world.campaign.enemy_knowledge.get(id,0)
 	var row=Data.enemy(id)
 	if id=="doberman": row.name="ドーベルマン"; row.type_tag="Animal"; row.role_text="敵側の迎撃犬"
-	game.label_on(c,Vector2(152,137),"敵図鑑",24,UI.INK)
+	game.label_on(c,Vector2(152,137),row.name if known>0 else "？？？",24,UI.INK)
 	if known==0:
 		c.draw_rect(Rect2(264,236,64,78),Color("8a8778"))
 		game.label_on(c,Vector2(286,284),"?",32,UI.PAPER)
@@ -38,8 +38,8 @@ static func enemy_page(game,c,index: int):
 			c.draw_set_transform(Vector2(296,315),0,Vector2(2.5,2.5))
 			game.Delivered.draw_clip(c,"enemy/idle_right",Vector2.ZERO,0)
 			c.draw_set_transform(Vector2.ZERO)
-		else: placeholder(game,c,id,Vector2(296,285),2.0)
-		game.label_on(c,Vector2(156,363),row.name,24,UI.INK)
+		else: game.Assets.portrait(c,id,Rect2(186,191,240,148),"enemy")
+		game.Assets.badge(game,c,Vector2(156,346),row.rarity)
 		game.label_on(c,Vector2(156,398),row.type_tag+" / "+Data.RARITY_NAMES[row.rarity],16,UI.INK)
 		game.label_on(c,Vector2(584,170),row.role_text,20,UI.INK)
 		game.label_on(c,Vector2(584,230),NOTES[id] if known>=2 else "行動を観察すると、詳しく分かります。",16,UI.INK)

@@ -64,15 +64,11 @@ func run():
 
 	for cell in [Vector2i(7,13), Vector2i(10,10), Vector2i(14,10)]: w.act("wall", cell)
 	w.step()
-	var ids = w.jobs.map(func(j): return j.id)
-	var remaining = w.structures[Vector2i(7,13)].remaining
-	check(w.act("keeper_move", Vector2i(10,14)), "Manual interrupt accepted")
-	steps(w, 20)
-	check(w.keeper.pos == Vector2i(10,14) and w.jobs_held and w.jobs.map(func(j): return j.id) == ids, "Direct arrival retains FIFO and stays held")
-	check(w.structures[Vector2i(7,13)].remaining == remaining, "No remote hammering while interrupted")
-	w.act("resume_jobs")
+	var ids = w.jobs.map(func(j):return j.id)
+	check(w.act("keeper_move",Vector2i(10,14)),"FIFO movement accepted")
+	check(w.jobs.size()==4 and w.jobs.slice(0,3).map(func(j):return j.id)==ids and not w.jobs_held,"Move appends without interrupting existing work")
 	clear_jobs(w)
-	check(w.jobs.is_empty() and w.metrics.built == 3, "Resume returns to actual unfinished site and completes all three")
+	check(w.jobs.is_empty() and w.metrics.built==3 and w.keeper.pos==Vector2i(10,14),"Builds finish before queued movement")
 	check(no_overlap(w), "No wall/keeper overlap on completion")
 	# An occupied corridor must not be silently crossed.
 	w = safe()
@@ -93,7 +89,7 @@ func run():
 	check(w.keeper.sleepiness >= 79.9 and w.Life.factor(w) < 1, "216 seconds reaches 80 percent fatigue")
 	steps(w, 216)
 	check(w.keeper.forced_rest and w.keeper.resting, "270 seconds reaches forced rest")
-	check(not w.act("keeper_move", Vector2i(10,13)) and not w.act("keeper_rest"), "Limit blocks walking and waking")
+	check(w.act("keeper_move", Vector2i(10,13)) and not w.act("keeper_rest"), "Forced rest allows planning but blocks waking")
 	steps(w, 61)
 	check(w.keeper.sleepiness < 80 and not w.keeper.forced_rest and not w.keeper.resting, "Below80 returns normal activity")
 	w.keeper.sleepiness = 70
@@ -109,6 +105,7 @@ func run():
 	check(w.act("keeper_rest") and not w.keeper.resting, "Voluntary wake anytime")
 	w.keeper.sleepiness = 90
 	w.act("keeper_rest")
+	w.act("resume_jobs")
 	check(w.act("keeper_move", Vector2i(9,13)) and not w.keeper.resting and w.Life.factor(w) == 0.6, "Escape wakes voluntary sleep with fatigue retained")
 	# Speed/work reduction is real, not an icon only.
 	var rested = safe()

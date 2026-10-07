@@ -63,7 +63,8 @@ static func sample(w) -> Dictionary:
 
 func _initialize(): call_deferred("run")
 func run():
-	var report = {"seed_range": [1, SEEDS], "ai_settings": Farm.Rules.AI, "strategies": {}}
+	var seeds=clampi(int(OS.get_environment("FARM_AI_SEEDS")),1,SEEDS) if OS.has_environment("FARM_AI_SEEDS") else SEEDS
+	var report = {"seed_range": [1, seeds], "scope": "bounded smoke" if seeds<SEEDS else "full statistical evaluation", "ai_settings": Farm.Rules.AI, "strategies": {}}
 	var failed = false
 	for strategy in ["front", "poor", "rescue", "uncommanded", "ordered", "reserve"]:
 		var rows = []
@@ -75,7 +76,7 @@ func run():
 		var passive = 0
 		var first_times = []
 		var reaction_times = []
-		for seed_number in range(1, SEEDS + 1):
+		for seed_number in range(1, seeds + 1):
 			var w = run_trial(strategy, seed_number)
 			failed = failed or w.result == ""
 			var row = sample(w)
@@ -88,8 +89,8 @@ func run():
 			hp_distribution[str(row.hp)] = hp_distribution.get(str(row.hp), 0) + 1
 			if row.first_attack_after_spawn >= 0: first_times.append(row.first_attack_after_spawn)
 			if row.first_attack_after_contact >= 0: reaction_times.append(row.first_attack_after_contact)
-		var summary = {"runs": SEEDS, "wins": wins, "dog_survival": rows.filter(func(row): return row.hp > 0).size(),
-			"abductions": SEEDS - wins, "captures": captures, "rescues": rescues,
+		var summary = {"runs": seeds, "wins": wins, "dog_survival": rows.filter(func(row): return row.hp > 0).size(),
+			"abductions": seeds - wins, "captures": captures, "rescues": rescues,
 			"rescue_rate_when_carried": float(rescues) / captures if captures > 0 else null,
 			"hp_distribution": hp_distribution, "dog_attacks": attacks, "non_attack_decisions": passive,
 			"first_attack_after_spawn_min": first_times.min() if not first_times.is_empty() else null,
@@ -98,7 +99,7 @@ func run():
 			"first_attack_after_contact_max": reaction_times.max() if not reaction_times.is_empty() else null}
 		report.strategies[strategy] = {"summary": summary, "samples": rows}
 		print(strategy, ": ", JSON.stringify(summary))
-		if strategy == "front": failed = failed or wins < SEEDS * 0.75 or passive == 0 or hp_distribution.size() < 2
+		if strategy == "front" and seeds==SEEDS: failed = failed or wins < SEEDS * 0.75 or passive == 0 or hp_distribution.size() < 2
 		# TargetWeights now permit diversion to resting animals/structures; survival is measured,
 		# not assumed impossible. Explicit rest must still suppress rescue AND attacks.
 		if strategy == "reserve": failed = failed or rescues > 0 or attacks > 0

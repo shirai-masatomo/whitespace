@@ -85,6 +85,8 @@ static func walk(w,j,goals: Array) -> bool:
 			w.keeper.yield_cell=next; j.state="blocked"; j.block_reason="通行待ち"; return false
 	j.state="walking"
 	w.keeper.erase("yield_cell")
+	if not w.Combat.pay(w.keeper,"move"):
+		j.state="blocked";j.block_reason="息を整えています";return false
 	w.keeper.move_credit-=1
 	w.open_for_ally(next)
 	w.keeper.pos=next

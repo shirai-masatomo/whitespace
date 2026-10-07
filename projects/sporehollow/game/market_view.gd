@@ -1,5 +1,6 @@
 extends RefCounted
 ## Shop presentation only. World.buy/sell remain the transaction authority.
+const Assets=preload("res://game/ui_assets.gd")
 const UI = preload("res://game/ui_style.gd")
 const Art = preload("res://game/adopted_art.gd")
 const Delivered = preload("res://game/delivered_art.gd")
@@ -42,9 +43,11 @@ static func product_name(row: Dictionary) -> String:
 	return p.Name
 
 static func role(id: String) -> String:
+	if Shop.Animals.SPECIES.has(id):return Shop.Animals.short_description(id)
 	return {"doberman":"屋外で強く迎撃","bullfrog":"舌拘束と警報","hedgehog":"被弾と警報で迎撃","collar":"犬の忠誠・防御を補助","berry":"ピンチで一度回復","hen":"朝に卵を産む", "cat":"気ままな仲間", "soil":"土の壁・床に", "wood":"木の壁・床に", "stone":"石の壁・床に", "whistle":"遠くの仲間へ指示", "coffee":"眠気を12軽減", "energy_drink":"眠気を25軽減", "egg":"牧場の生産物", "feather":"鶏の落とし物", "mushroom":"仲間の回復に"}.get(id,"牧場で使う品")
 
 static func description(id: String) -> String:
+	if Shop.Animals.SPECIES.has(id):return Shop.Animals.character_text(id)
 	return {"doberman":"屋外専用の自律迎撃犬。救出本能はありません。", "bullfrog":"舌で敵の移動を止め、被弾すると警報を共有。", "hedgehog":"被弾や共有情報に反応して迎撃。棘で防御します。", "collar":"犬系の忠誠+25、防御+2。非消耗。現地で装備。", "berry":"生存中HP50%以下で消費し、最大HPの1/4回復。", "hen":"朝に卵を産みます。\n移動の誘導に応じます。攻撃はしません。", "cat":"気ままに牧場を歩きます。\n指示には従いません。", "soil":"土の壁や床を作る資材。", "wood":"木の壁・床・ドアを作る資材。", "stone":"石の壁や床を作る資材。", "whistle":"6マス先まで指示できます。\n対応する仲間を最大8匹、一緒に誘導。\n非消耗。猫は指示に従いません。", "coffee":"眠気を12軽減します。\n飲み物は合計1日2本まで。", "energy_drink":"眠気を25軽減します。\n飲み物は合計1日2本まで。", "egg":"牧場で産まれた卵。", "feather":"鶏が落とした柔らかな羽。", "mushroom":"夜明けに傷ついた仲間を癒します。"}.get(id,"牧場で使う品です。")
 
 static func owned(world, row: Dictionary) -> int:
@@ -69,6 +72,7 @@ static func unit(p: Dictionary) -> String:
 	return "セット" if p.Category=="materials" else ("匹" if p.Category=="animals" else ("本" if p.ProductID in ["coffee","energy_drink"] else "個"))
 
 static func texture_for(id: String) -> Texture2D:
+	if Assets.texture(id):return Assets.texture(id)
 	if Delivered.RESOURCES.has(id):return Delivered.RESOURCES[id][96]
 	if id in ["hen","cat"]:return Art.CLIPS[id+"/idle/right"].frames[0]
 	if id=="shiba":return UI.SHIBA[1]
@@ -81,8 +85,6 @@ static func texture_for(id: String) -> Texture2D:
 	return null
 
 static func art(c: CanvasItem, id: String, area: Rect2, game):
-	if id in ["doberman","bullfrog","hedgehog","collar","berry"]:
-		game.draw_card_icon(c,id,area.get_center(),1.5); return
 	c.texture_filter=CanvasItem.TEXTURE_FILTER_NEAREST
 	var texture=texture_for(id)
 	if texture:
@@ -151,7 +153,7 @@ static func build(game):
 	if game.shop_side=="home":
 		for i in range(2):
 			var side=["buy","sell"][i]
-			game.add_button(game.palette,"shop_"+side,"",Rect2(LEFT+i*384,278,368,300),game.shop_choose.bind(side,"animals"))
+			game.add_button(game.palette,"shop_"+side,"",Rect2(724,302+i*151,380,127),game.shop_choose.bind(side,"animals"))
 			var b=game.buttons["shop_"+side];button_style(b)
 			b.draw.connect(draw_choice.bind(game,b,side))
 		return
@@ -180,27 +182,27 @@ static func build(game):
 		button_style(game.buttons.shop_page)
 
 static func draw_choice(game,b,side: String):
-	art(b,"basket" if side=="buy" else "gold",Rect2(138,32,92,92),game)
-	text(game,b,Rect2(24,150,320,42),"買う" if side=="buy" else "売る",30,UI.MOSS)
-	text(game,b,Rect2(24,201,320,54),"動物・資材・道具を揃える" if side=="buy" else "持ち物を商人に渡す",18,MUTED)
-	b.draw_style_box(panel(Color("dce5ca"),Color("b5c19e")),Rect2(24,242,320,36))
-	text(game,b,Rect2(38,247,270,28),"品を見る" if side=="buy" else "持ち物を見る",18,UI.MOSS)
-	b.draw_texture_rect(UI.icon("next"),Rect2(312,250,18,18),false)
+	art(b,"basket" if side=="buy" else "gold",Rect2(24,25,72,72),game)
+	text(game,b,Rect2(122,26,225,36),"買う" if side=="buy" else "売る",28,UI.MOSS)
+	text(game,b,Rect2(122,76,230,28),"牧場の品を探す" if side=="buy" else "持ち物を見せる",17,MUTED)
+	b.draw_texture_rect(UI.icon("next"),Rect2(341,42,20,20),false)
 
 static func draw_category(game,b,category: String):
 	var data=game.MARKET_CATEGORIES[category]
-	art(b,data[1],Rect2(22,34,72,72),game)
+	art(b,Assets.CATEGORY.get(category,data[1]),Rect2(22,34,72,72),game)
 	text(game,b,Rect2(116,24,228,36),data[0],24)
 	text(game,b,Rect2(116,65,228,28),data[2],16,MUTED)
 	text(game,b,Rect2(116,103,228,28),category_status(game,category),17,MUTED)
 
 static func draw_product(game,b,row: Dictionary):
-	art(b,row.id,Rect2(22,22,CARD_WIDTH-44,126),game)
+	art(b,row.id,Rect2(22,18,CARD_WIDTH-44,114),game)
 	var title=product_name(row)
 	if row.animal_id>=0:title=game.product_title(row).split(" Lv")[0]
-	text(game,b,Rect2(18,166,CARD_WIDTH-36,55),title,20)
-	var subtitle=rarity_label(game,row)+" · " if Shop.table()[row.id].Category=="animals" else ""
-	text(game,b,Rect2(18,224,CARD_WIDTH-36,38),subtitle+role(row.id),15,MUTED)
+	text(game,b,Rect2(18,140,CARD_WIDTH-36,34),title,20)
+	if Shop.table()[row.id].Category=="animals":
+		var a=individual(game,row)
+		Assets.badge(game,b,Vector2(18,179),Shop.Animals.Data.rarity(a.get("rarity",0)),true)
+	text(game,b,Rect2(18,211,CARD_WIDTH-36,50),role(row.id),14,MUTED)
 	var p=Shop.table()[row.id]
 	price(game,b,Vector2(18,267),p.BuyPrice if game.shop_side=="buy" else p.SellPrice,24)
 	var why=reason(game.world,game.shop_side,row)
@@ -218,8 +220,8 @@ static func draw(game):
 		c.draw_line(Vector2(368,189),Vector2(948,189),Color("c5b590"),1)
 		text(game,c,Rect2(377,206,240,38),"朝の市",23)
 		text(game,c,Rect2(725,206,240,38),"牧場の仲間",23)
-		Art.fit(c,Art.CART,Rect2(346,245,310,222))
-		Art.fit(c,Art.CLOSED,Rect2(748,235,176,220))
+		art_texture(c,Art.CART,Rect2(367,251,257,212))
+		Art.fit(c,Art.CLOSED,Rect2(762,250,150,210))
 		return
 	c.draw_rect(Rect2(0,0,1280,800),Color(0.13,0.18,0.17,0.65))
 	c.draw_style_box(panel(Color("7c6349"),Color("564736"),3),Rect2(100,98,1080,610))
@@ -228,10 +230,18 @@ static func draw(game):
 	text(game,c,Rect2(140,135,370,46),"朝の市",34)
 	price(game,c,Vector2(728,143),game.world.campaign.gold,26)
 	c.draw_line(Vector2(140,195),Vector2(1140,195),Color("c5b590"),1)
-	Art.fit(c,Art.CART,Rect2(128,313,220,192))
-	text(game,c,Rect2(148,535,196,42),game.world.Story.merchant(game.world) if game.world.story.hidden.recognition>0 else ("いらっしゃい" if game.shop_side!="sell" else "持ち物を見せてね"),16,MUTED)
-	var crumb="商人との取引" if game.shop_side=="home" else ("買う" if game.shop_side=="buy" else "売る")+"  /  "+(("今日の品" if game.shop_side=="buy" else "持ち物") if game.shop_level=="categories" else game.MARKET_CATEGORIES[game.shop_category][0])
-	text(game,c,Rect2(LEFT,222,750,38),crumb,21)
+	if game.shop_side=="home":
+		art_texture(c,Art.CART,Rect2(160,286,498,300))
+		c.draw_style_box(panel(Color("fff4d6"),Color("cabb95")),Rect2(265,215,270,62))
+		c.draw_colored_polygon(PackedVector2Array([Vector2(378,275),Vector2(394,292),Vector2(403,275)]),Color("fff4d6"))
+		text(game,c,Rect2(300,232,220,36),"何が欲しい？",23)
+	else:
+		Art.fit(c,Art.CART,Rect2(128,313,220,192))
+		c.draw_style_box(panel(Color("fff4d6"),Color("cabb95")),Rect2(138,523,204,67))
+		text(game,c,Rect2(151,539,177,45),"いらっしゃい" if game.shop_side=="buy" else "持ち物を見せてね",16,MUTED)
+		var crumb="朝の市 / "+("買う" if game.shop_side=="buy" else "売る")
+		if game.shop_level!="categories":crumb+=" / "+game.MARKET_CATEGORIES[game.shop_category][0]
+		text(game,c,Rect2(LEFT,225,750,30),crumb,17,MUTED)
 	if game.shop_level=="list" and game.shop_side!="home" and game.shop_rows().is_empty():
 		art(c,game.MARKET_CATEGORIES[game.shop_category][1],Rect2(LEFT+32,318,88,88),game)
 		text(game,c,Rect2(LEFT+148,328,550,72),empty_message(game,game.shop_category),23)
@@ -275,3 +285,8 @@ static func rarity_label(game,row) -> String:
 
 static func bonus_label(game,row) -> String:
 	return " / 丈夫：最大HP+4" if "hardy" in individual(game,row).get("bonus_skills",[]) else ""
+
+static func art_texture(c: CanvasItem,t: Texture2D,area: Rect2):
+	var rect=Rect2(t.get_image().get_used_rect())
+	var size=rect.size*minf(area.size.x/rect.size.x,area.size.y/rect.size.y)
+	c.draw_texture_rect_region(t,Rect2((area.get_center()-size/2).round(),size.round()),rect)

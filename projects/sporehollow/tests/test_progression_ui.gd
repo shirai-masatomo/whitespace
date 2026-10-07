@@ -25,7 +25,7 @@ func run():
 	await press("trade_collar_-1");await capture("05_collar_detail");await press("confirm_trade");await press("close_market")
 	check(game.world.campaign.animals.any(func(a):return a.species=="doberman") and game.world.item_count("collar")==1,"Real shop transactions buy new animal and equipment")
 	await press("open_book");await create_timer(0.7).timeout
-	await press("book_enemies");await capture("06_enemy_unknown")
+	await press("book_enemies");await press("book_entry_0");await create_timer(0.5).timeout;await capture("06_enemy_unknown")
 	var w=game.world
 	w.spawn_enemy({"role":"kidnapper","entry":w.entries[0]});var e=w.enemies.back();e.pos=w.keeper.pos+Vector2i(2,0)
 	Farm.Progression.tick(w);game.refresh();await capture("07_enemy_seen")

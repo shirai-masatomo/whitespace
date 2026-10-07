@@ -62,8 +62,8 @@ func draw(canvas):
 	if motion in ["opening","closing"]:
 		var opening=t if motion=="opening" else 1-t
 		var travel=smoothstep(0,0.23,opening)
-		scale=lerpf(0.387,1.0,travel)
-		origin=(Vector2(748,235)-Vector2(504,36)*0.387).lerp(origin,travel)
+		scale=lerpf(0.33,1.0,travel)
+		origin=(Vector2(762,250)-Vector2(504,36)*0.33).lerp(origin,travel)
 		index=mini(5,int(clampf((opening-0.18)/0.82,0,0.999)*6))
 		if motion=="closing": index=5-index
 	canvas.draw_set_transform(origin,0,Vector2.ONE*scale)

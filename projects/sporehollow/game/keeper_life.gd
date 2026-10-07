@@ -70,28 +70,14 @@ static func danger(w, kind: String):
 static func command(w, kind: String, p: Vector2i) -> bool:
 	var k = w.keeper
 	if not w.working(): return false
+	if kind == "keeper_move": return w.Jobs.enqueue(w,"move",p,-1)
 	if w.paused:
-		if kind == "keeper_move":
-			if k.state != "free" or k.forced_rest or not w.walkable(p) or w.actor_occupied(p, k.pos): return false
-			stop_rest_until(w,"manual")
-			w.manual_goal = p
-			w.Jobs.hold(w, "manual" if not w.jobs.is_empty() else "travel")
-			k.pending_command = {"kind": kind, "pos": p, "hold_reason":w.job_hold_reason}
-			return true
 		if kind in ["keeper_rest", "resume_jobs"]:
 			if k.state != "free" or k.forced_rest: return false
 			stop_rest_until(w,"manual")
 			k.pending_command = {"kind": kind, "pos": p}
 			return true
 		return false
-	if kind == "keeper_move":
-		if k.state != "free" or k.forced_rest or not w.walkable(p) or w.actor_occupied(p, k.pos): return false
-		stop_rest_until(w,"manual")
-		set_rest(w, false)
-		w.Jobs.hold(w, "manual" if not w.jobs.is_empty() else "travel")
-		w.manual_goal = p
-		w.job_log.append({"tick": w.tick, "event": "manual_move", "pos": [p.x, p.y]})
-		return true
 	if kind == "keeper_rest":
 		if k.state != "free" or k.forced_rest: return false
 		stop_rest_until(w,"manual")
@@ -208,7 +194,7 @@ static func step(w):
 	# Minimum self-defense, never chasing; deliberately much weaker than the dog.
 	if able(w) and w.tick >= k.next_attack:
 		var threats = w.enemies.filter(func(e): return not e.done and not e.flee and w.distance(e.pos, k.pos) <= 1)
-		if not threats.is_empty():
+		if not threats.is_empty() and w.Combat.pay(k,"attack"):
 			var e = threats[0]
 			k.next_attack = w.tick + ceili(1.5 / factor(w) / w.DT)
 			w.Progression.enemy_hurt(w,e,ATTACK)
@@ -216,33 +202,14 @@ static func step(w):
 			if e.hp == 0:
 				e.flee = true
 				if w.stage == 1 and e.id == 0: w.drop_blueprint(e.pos)
-	if able(w) and w.manual_goal != null:
-		if k.pos == w.manual_goal:
-			w.manual_goal = null
-			if w.job_hold_reason == "travel": w.Jobs.hold(w, "")
-			return
-		k.move_credit = minf(1.9, k.move_credit + w.Jobs.SPEED * factor(w) * w.DT)
-		if k.move_credit < 1: return
-		var next = w.next_step(k.pos, w.manual_goal, false, true)
-		if next == k.pos:
-			# Wait for moving actors; solid unreachable destinations end just this direct order.
-			if w.next_step(k.pos, w.manual_goal) == k.pos:
-				end_move(w)
-				w.say("通路がふさがっています")
-			return
-		if w.actor_occupied(next, k.pos): return
-		k.move_credit -= 1
-		w.open_for_ally(next)
-		k.pos = next
-		w.keeper_path.append([next.x, next.y])
-		if k.pos == w.manual_goal:
-			w.manual_goal = null
-			if w.job_hold_reason == "travel": w.Jobs.hold(w, "")
 
 static func hurt(w, e):
 	var k = w.keeper
 	if k.hp <= 0: return
+	var before=k.hp
 	k.hp = maxi(0, k.hp - e.attack_power)
+	var originals=w.enemies.filter(func(actor):return actor.id==e.id)
+	if not originals.is_empty():w.Combat.hit(w,originals[0],k,e.get("combat_action","attack"),before-k.hp,e.get("combat_skill",false))
 	k.hurt_until = w.tick + 8
 	danger(w, "keeper_hit")
 	w.Story.interrupt_prayer(w)

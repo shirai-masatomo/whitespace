@@ -1,0 +1,50 @@
+extends "res://tests/test_progression.gd"
+
+func run():
+	var w=fresh();var a=w.animals[0];var e=enemy(w,"ninja",Vector2i(9,8))
+	check(a.ultimate_gauge==0 and e.ultimate_gauge==0,"Individual empty gauges")
+	check(w.keeper.has_stamina and e.has_stamina and not a.has_stamina,"Human stamina separate from animal endurance")
+	w.Combat.hit(w,a,e,"bark-test",1,true)
+	check(a.ultimate_gauge==7 and e.ultimate_gauge==2,"Skill hit and damage gains")
+	for i in range(10):w.Combat.hit(w,a,e,"bark-test",1,true)
+	check(a.ultimate_gauge==7 and e.ultimate_gauge==2,"Multi-hit/DoT bounded per action/target per second")
+	w.tick+=4;w.Combat.hit(w,a,e,"bark-test",1,true)
+	check(a.ultimate_gauge==14,"Gate expires in world time")
+	e.hp=1;P.enemy_hurt(w,e,10,a.id)
+	check(a.ultimate_gauge==44 and e.ultimate_gauge==6,"Attack + Kill + Finisher only on successful finishing hit")
+	P.enemy_hurt(w,e,10,a.id);check(a.ultimate_gauge==44,"Defeated target cannot farm gauge")
+	a.ultimate_gauge=99;w.Combat.grant(w,a,"AttackHit","new","other")
+	check(w.Combat.ready(a) and a.ultimate_gauge==100,"Capped READY, no automatic cast")
+	var ult={"UltimateID":"test_only","Name":"fixture","Rarity":0,"UnlockLevel":1,"GaugeCost":100,"ConditionID":"enemy","Duration":3.0,"AIHints":{"threshold":0.8,"per_target":0.3},"LevelScaling":{}}
+	a.ai_accuracy=10
+	check(not w.Combat.can_use(a,ult,{"targets":3}),"READY also needs explicit condition")
+	check(w.Combat.can_use(a,ult,{"conditions":{"enemy":true},"targets":1}),"Low AI accepts early opportunity")
+	a.ai_accuracy=90
+	check(not w.Combat.can_use(a,ult,{"conditions":{"enemy":true},"targets":1}),"High AI waits for tactical value")
+	check(w.Combat.ai_use(w,a,ult,{"conditions":{"enemy":true},"targets":3},func():return true) and a.ultimate_gauge==0,"AI-only successful use consumes meter once")
+	w=fresh();w.keeper.stamina=0;w.keeper.stamina_regen=0
+	var start=w.keeper.pos;w.act("keeper_move",start+Vector2i.RIGHT);step(w,10)
+	check(w.keeper.pos==start and w.jobs[0].block_reason=="息を整えています","Insufficient stamina waits without losing movement job")
+	w.keeper.stamina_regen=2;step(w,12)
+	check(w.keeper.pos==start+Vector2i.RIGHT and w.jobs.is_empty(),"Regeneration resumes queued movement")
+	var value=w.keeper.stamina;w.paused=true;step(w,8);check(w.keeper.stamina==value,"Pause does not regenerate stamina")
+	w.paused=false;w.keeper.stamina=0;w.Combat.recover(w.keeper,1,true);check(w.keeper.stamina==6,"Rest accelerates short-term stamina recovery")
+	w=fresh();e=enemy(w,"kidnapper",Vector2i(9,8));a=w.animals[0]
+	w.Combat.tongue(w,a,e);check(e.stamina==80 and e.move_stopped_until>w.tick,"Tongue drains Human stamina and roots")
+	var dog=enemy(w,"doberman",Vector2i(10,8));w.Combat.tongue(w,a,dog)
+	check(not dog.has_stamina and not dog.has("stamina") and dog.move_stopped_until>w.tick,"Nonhuman tongue target only rooted")
+	var stats=Farm.ProgressData.Levels.resolve({"max_hp":30,"attack":2,"skills":["a"]},3,{"max_hp":4},{2:{"attack":5},3:{"skills":["a","b"],"ultimates":["fixture"],"max_stamina":120}})
+	check(stats.max_hp==38 and stats.attack==5 and stats.skills.size()==2 and stats.max_stamina==120,"Growth and cumulative overrides cover stats and unlock lists")
+	check(Farm.ProgressData.Levels.resolve({"attack":1},10,{}, {"10":{"attack":10},"2":{"attack":2}}).attack==10,"Serialized level keys apply in numeric order")
+	check(Farm.AnimalData.stats("shiba",3).attack==14 and Farm.AnimalData.stats("hen",3).hp==28,"Existing animal growth retained")
+	w=fresh();a=w.animals[0];a.mode="auto";a.pos=Vector2i(8,8);a.home=a.pos;w.keeper.pos=Vector2i(7,8)
+	e=enemy(w,"kidnapper",Vector2i(10,8));w.share_detection(a,e.id,5)
+	w.paused=true;check(w.queue_order("attack_target",[a.id],e.pos),"Dog priority target can be planned paused")
+	check(w.jobs.back().enemy_id==e.id and a.mode=="auto","Reservation stores EnemyID without executing")
+	e.pos=Vector2i(10,9);w.paused=false;step(w,1)
+	check(a.pending.get("target_id",-1)==e.id,"Instruction follows enemy ID after target moved")
+	a.mode="attack_target";a.target_id=e.id;a.priority_seen=w.tick;e.flee=true
+	w.Orders.priority_targets(w,a,[]);check(a.mode=="auto" and a.target_id==-1,"Retreated priority returns to normal AI")
+	e.flee=false;a.mode="attack_target";a.target_id=e.id;a.priority_seen=0;w.tick=30;a.known_enemies.clear()
+	w.Orders.priority_targets(w,a,[]);check(a.mode=="auto","Long lost target clears priority")
+	print("Combat revision: %d checks, %d failures"%[checks,failures]);quit(1 if failures else 0)

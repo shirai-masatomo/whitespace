@@ -82,6 +82,7 @@ static func animal_hurt(w,a,e,raw: int,nonlethal: bool=false):
 	var damage=maxi(0,raw-defense(a,w.tick))
 	if nonlethal: damage=mini(damage,maxi(0,a.hp-1))
 	a.hp=maxi(0,a.hp-damage)
+	w.Combat.hit(w,e,a,e.get("combat_action","attack"),damage,e.get("combat_skill",false))
 	w.combat_log.append({"tick":w.tick,"source":"enemy","id":e.id,"target":a.id,"damage":damage})
 	if a.hp<=a.max_hp*0.25: w.Life.danger(w,"animal_danger")
 	if a.hp<=0:
@@ -100,15 +101,17 @@ static func animal_hurt(w,a,e,raw: int,nonlethal: bool=false):
 		w.skill_log.append({"tick":w.tick,"actor":a.id,"skill":"berry"})
 	sync_owned(w,a)
 
-static func enemy_hurt(w,e,raw: int,attacker: int=-1):
+static func enemy_hurt(w,e,raw: int,attacker: int=-1,action: String="attack",skill: bool=false):
 	if e.done or e.flee or e.hp<=0: return
 	var damage=maxi(0,raw-e.get("defense",0)); e.hp=maxi(0,e.hp-damage)
+	var source=w.Orders.animal(w,attacker) if attacker>=0 else w.keeper
+	w.Combat.hit(w,source,e,action,damage,skill)
 	if attacker>=0: e.attacker=attacker; e.threat_until=w.tick+ceili(w.Rules.KIDNAPPER.counter_duration/w.DT)
 	if e.hp<=0:
 		e.flee=true; release_animal(w,e); w.release_keeper(e); loot(w,e); knowledge(w,e,3)
 		if e.get("type_tag","")=="Animal": e.done=true; e.state="死亡"; e.action_id="death"; w.metrics.repelled+=1
 	elif e.get("archetype","")=="salaryman" and not e.get("phone_success",false) and not e.get("phone_started",false) and damage>0:
-		if w.rng.randf()<Data.SPECIAL.phone_chance:
+		if w.rng.randf()<Data.SPECIAL.phone_chance and w.Combat.pay(e,"skill"):
 			e.phone_started=true; e.phone_until=w.tick+ceili(Data.SPECIAL.phone_delay/w.DT); e.action_id="phone_take"
 
 static func loot(w,e):
@@ -144,7 +147,7 @@ static func tick(w):
 		if a.placed and a.hp>0 and w.tick<a.get("spines_until",0):
 			for e in w.enemies:
 				if not e.done and not e.flee and w.distance(a.pos,e.pos)<=1 and w.line_of_sight(a.pos,e.pos) and e.get("reflected_at",-1)!=w.tick:
-					e.reflected_at=w.tick; enemy_hurt(w,e,Data.SPECIAL.spines_reflect,a.id)
+					e.reflected_at=w.tick; enemy_hurt(w,e,Data.SPECIAL.spines_reflect,a.id,"spines",true)
 	for e in w.enemies:
 		if e.hp<=0 and not e.get("loot_granted",false): loot(w,e); release_animal(w,e)
 		if not e.done and visible_to_farm(w,e):
@@ -154,11 +157,12 @@ static func tick(w):
 static func spawn_data(w,e,event):
 	var id=event.get("archetype",event.role)
 	if not Data.ENEMY_ROWS.has(id) and id!="doberman": id="kidnapper"
-	var row=Data.enemy(id)
+	var row=Data.enemy(id,event.get("lv",1))
 	if id=="doberman":
 		var animal=w.SPECIES.doberman
 		row.merge({"species":"doberman","type_tag":"Animal","name":"ドーベルマン","max_hp":animal.hp,"move_speed":animal.move_speed,"sight_range":animal.detection_range,"human_attack":animal.attack,"animal_attack":animal.attack,"object_attack_power":animal.object_attack,"skills":animal.skills.duplicate(),"attack_interval":animal.attack_seconds,"target_weights":{"keeper":45,"animal":55,"structure":0,"idol":0}},true)
 	e.merge(row,true)
+	w.Combat.init_actor(e,e.type_tag=="Human")
 	e.hp=e.max_hp; e.attack_power=e.human_attack; e.counter_seconds=e.attack_interval; e.faction="enemy"
 	e.move_speed=event.get("move_speed",e.move_speed); e.sight_range=event.get("sight_range",e.sight_range)
 	e.action_id="idle"; e.led_animal=-1
@@ -226,11 +230,11 @@ static func enemy_step(w,e) -> bool:
 		e.bow_target=str(target.kind)+str(target.id); e.bow_until=w.tick+ceili(Data.SPECIAL.bow_seconds/w.DT); e.action_id="bow"; e.observed_action=true; return true
 	if e.archetype=="animal_tamer" and target.kind=="animal" and tame(w,e,w.Orders.animal(w,target.id)): return true
 	var dist=w.distance(e.pos,target.pos)
-	if e.archetype=="ninja" and target.kind in ["keeper","animal"] and dist>1 and dist<=Data.SPECIAL.shuriken_range and w.line_of_sight(e.pos,target.pos) and w.tick>=e.get("shuriken_at",0):
+	if e.archetype=="ninja" and target.kind in ["keeper","animal"] and dist>1 and dist<=Data.SPECIAL.shuriken_range and w.line_of_sight(e.pos,target.pos) and w.tick>=e.get("shuriken_at",0) and w.Combat.pay(e,"skill"):
 		e.shuriken_at=w.tick+ceili(Data.SPECIAL.shuriken_ct/w.DT); e.action_id="shuriken"; e.state="手裏剣"; strike(w,e,target,Data.SPECIAL.shuriken_damage); return true
 	if dist<=1 and w.line_of_sight(e.pos,target.pos,target.kind in ["structure","idol"]):
 		e.state="攻撃"; e.action_id="dagger" if e.archetype=="ninja" else ("iron_ball_hit" if e.archetype=="destroyer" else "attack")
-		if w.tick>=e.next_attack:
+		if w.tick>=e.next_attack and w.Combat.pay(e,"attack"):
 			e.next_attack=w.tick+ceili(e.attack_interval/w.DT); strike(w,e,target)
 		return true
 	e.action_id="walk"; e.state="接近"; walk(w,e,target.pos)
@@ -261,6 +265,8 @@ static func walk(w,e,goal: Vector2i):
 
 static func strike(w,e,t,override_damage: int=-1):
 	e.observed_action=true
+	e.combat_action="shuriken" if override_damage>=0 else "attack"
+	e.combat_skill=override_damage>=0
 	if t.kind=="keeper":
 		var damage=e.human_attack if override_damage<0 else override_damage
 		if e.archetype=="martial_artist": damage=mini(damage,maxi(0,w.keeper.hp-1))
@@ -288,7 +294,7 @@ static func bow_end(w,e):
 static func tame(w,e,a) -> bool:
 	if a.is_empty() or w.distance(e.pos,a.pos)>Data.SPECIAL.tame_range or not w.line_of_sight(e.pos,a.pos): return false
 	e.state="呼びかける"; e.action_id="tame"
-	if w.tick>=e.get("tame_at",0):
+	if w.tick>=e.get("tame_at",0) and w.Combat.pay(e,"skill"):
 		e.tame_at=w.tick+ceili(Data.SPECIAL.tame_ct/w.DT)
 		a.loyalty_loss=a.get("loyalty_loss",0.0)+Data.SPECIAL.tame_loss*(Data.SPECIAL.shiba_resistance if a.species=="shiba" else 1.0); e.observed_action=true
 	if loyalty(a)<=Data.SPECIAL.tame_threshold:

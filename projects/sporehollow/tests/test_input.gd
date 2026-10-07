@@ -48,8 +48,7 @@ func run():
 	await mouse(game.buttons.remove.get_global_rect().get_center())
 	check(game.world.jobs.size()==1 and game.world.jobs[0].target_layer=="floor","Near button queues correct floor ID")
 	await mouse(game.screen_cell(p),MOUSE_BUTTON_RIGHT)
-	check(game.selected.is_empty() and game.world.jobs.size()==1,"Right click only deselects, retains floor job")
-	game.world.Jobs.cancel(game.world,game.world.jobs[0].id)
+	check(game.world.jobs.is_empty(),"Right click over a plan cancels only that floor job")
 	for y in range(7,10):
 		for x in range(9,13): site("soil_tile",Vector2i(x,y))
 	game.selection_layer="floor"
@@ -62,7 +61,7 @@ func run():
 	check(game.world.jobs.size()==8 and game.world.jobs.filter(func(j):return j.kind=="remove_floor").size()==3,"Eight selected floors share only three free queue slots")
 	check(game.message=="3件予約・5件未登録","Batch reports reserved and not reserved separately")
 	for j in game.world.jobs.duplicate():game.world.Jobs.cancel(game.world,j.id)
-	game.neutral();game.drag_start=game.center(Vector2i(9,7))-Vector2(22,18)
+	game.select_group(0);game.drag_start=game.center(Vector2i(9,7))-Vector2(22,18)
 	game.pointer=game.get_canvas_transform()*(game.center(Vector2i(12,9))+Vector2(22,18));game.drag_class="floor";game.drag_encounters.clear()
 	game.finish_drag();check(game.selected_structures.size()==8,"Rectangle capped at eight, floor layer stays distinct")
 	game.select_building(p,"floor");site("wood_tile",p);game.prune_selection()
@@ -92,10 +91,10 @@ func floor_intents(paused: bool):
 	game.reset_view();game.refresh();await process_frame
 	var p=Vector2i(10,8);site("soil_tile",p)
 	game.choose_walk();await mouse(game.screen_cell(p))
-	check(game.world.manual_goal==p and game.selected.get("kind")=="keeper","Keeper left click on empty floor moves, paused="+str(paused))
+	check(game.world.jobs.size()==1 and game.world.jobs[0].kind=="move" and game.world.jobs[0].pos==p and game.selected.get("kind")=="keeper","Keeper left click on empty floor moves, paused="+str(paused))
 	var before=game.world.keeper.pos
 	if paused: game.world.step();check(game.world.tick==0 and game.world.keeper.pos==before,"Paused floor move is only a plan")
-	game.world.manual_goal=null;game.world.keeper.erase("pending_command");game.world.Jobs.hold(game.world,"")
+	game.world.jobs.clear();game.world.manual_goal=null;game.world.keeper.erase("pending_command");game.world.Jobs.hold(game.world,"")
 	game.choose_animal(1);game.select_tool("guide",false);await mouse(game.screen_cell(p))
 	check(game.world.jobs.size()==1 and game.world.jobs[0].kind=="animal_order" and game.world.jobs[0].command_pos==p,"Guide target uses floor as ground, paused="+str(paused))
 	if paused:game.world.step();check(game.world.tick==0 and game.world.keeper.pos==before,"Paused guidance does not execute")

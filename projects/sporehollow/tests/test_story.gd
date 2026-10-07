@@ -30,18 +30,15 @@ func run():
 	check(w.Buildings.reason(w,"wall",p)=="先に開拓が必要","Construction preserves tool and explains tree obstacle")
 	check(not w.act("remove",w.Story.at(w)) and not w.act("soil_tile",w.Story.at(w)),"Cannot dismantle or build over idol")
 	w.paused=true
-	check(w.act("clear_tree",p) and not w.act("clear_tree",p),"Stable TreeID prevents duplicate jobs")
+	check(not w.act("clear_tree",p) and w.jobs.is_empty(),"Bare-hand clearing cannot be queued")
 	var tick=w.tick;var wood=w.wood
 	for i in range(20):w.step()
-	check(w.tick==tick and w.wood==wood and w.trees.has(p),"Paused clearing plans cannot execute")
-	var cancelled=w.jobs[0].id
-	check(w.act("cancel_job",Vector2i.ZERO,cancelled) and w.trees.has(p),"Unstarted clearing cancellation preserves tree")
-	w.act("clear_tree",p);w.paused=false;drain(w)
-	check(not w.trees.has(p) and w.wood==wood+w.Story.CLEAR_WOOD and id in w.story.cleared,"Local clearing rewards exactly once")
-	check(w.walkable(p) and not w.blocks_sight(p),"Clearing opens traversal and sight")
-	check(not w.act("clear_tree",p),"Repeated stale target has no reward")
+	check(w.tick==tick and w.wood==wood and w.trees.has(p),"Pause preserves tree and resources")
+	w.paused=false
+	# Migration fixture: historic cleared IDs are retained, no new clearing ability.
+	w.story.cleared.append(id);w.trees.erase(p)
 	w.persist_farm();var restored=Farm.new(w.campaign,17)
-	check(not restored.trees.has(p) and restored.wood==w.wood,"Cleared land persists in campaign")
+	check(not restored.trees.has(p) and restored.wood==wood,"Historical cleared IDs persist without rewards")
 	var rollback=Farm.new(w.morning_checkpoint,17)
 	check(rollback.trees.has(p) and rollback.wood==0,"Morning retry restores trees AND resources")
 	check(not local(w,"pray_wealth"),"Prayer locked before first night")
@@ -82,7 +79,7 @@ func run():
 	check("idol_extractor" in histories[2].roles and histories[0].hidden.karma==0,"Repeated wishes unlock actual extraction, no-prayer remains independent")
 	w=quiet(2);w.start_night();w.spawn_schedule.clear()
 	w.spawn_enemy({"entry":Vector2i(1,5),"role":"idol_breaker"});var e=w.enemies[-1]
-	check(e.pos==Vector2i(0,5),"Invader begins outside, not inside the farm")
+	check(e.pos==Vector2i(-24,5),"Invader begins outside, not inside the farm")
 	e.pos=w.Story.goals(w)[0];e.next_attack=0
 	var hp=w.story.idol.hp;w.enemy_step(e)
 	check(w.story.idol.hp<hp,"Idol attacker inflicts object damage")
@@ -122,13 +119,9 @@ func run():
 	w=next.begin_day();local(w,"pray_wealth");drain(w)
 	var retry=Farm.new(w.morning_checkpoint,17)
 	check(retry.campaign.gold==morning_gold and retry.story==morning_story,"Morning retry restores miracle, prayer IDs, reactions and money atomically")
-	# Work in progress crosses dawn without duplicate rewards.
-	w=quiet();p=w.trees.keys()[0];w.keeper.pos=w.neighbors(p).filter(func(n):return w.walkable(n))[0]
-	w.act("clear_tree",p);w.step();var progress=w.jobs[0].elapsed;var job_id=w.jobs[0].id
-	w.start_night();w.spawn_schedule.clear();w.finish(true)
-	next=Farm.new(w.next_campaign(),17).begin_day()
-	check(next.jobs.size()==1 and next.jobs[0].id==job_id and next.jobs[0].elapsed==progress,"Clearing TreeID, JobID and progress survive dawn")
-	drain(next);check(next.wood==8 and not next.trees.has(p),"Carried clearing job pays once after completion")
+	# Current clearing is disabled; old TreeIDs remain data, not a free reward.
+	w=quiet();p=w.trees.keys()[0]
+	check(not w.act("clear_tree",p) and w.trees.has(p),"No new clearing across phase boundaries")
 	# Seal every edge with constructed walls; spawn still occurs outside and attacks an obstacle.
 	w=quiet();w.start_night();w.spawn_schedule.clear()
 	for y in range(1,w.H-1):
@@ -136,7 +129,10 @@ func run():
 			if x in [1,w.W-2] or y in [1,w.H-2]:site(w,"wall",Vector2i(x,y))
 	for entry in [Vector2i(1,5),Vector2i(23,8),Vector2i(12,1),Vector2i(19,15)]:
 		w.spawn_enemy({"entry":entry,"role":"kidnapper"});e=w.enemies[-1]
-		check(not w.inside(e.pos) and e.pos==w.exit_for(entry),"Sealed edge still spawns outside: "+str(entry))
+		check(not w.inside(e.pos) and w.distance(e.pos,w.exit_for(entry))==24,"Sealed edge still spawns outside: "+str(entry))
+		for i in range(200):
+			if e.pos==w.exit_for(entry):break
+			w.enemy_step(e)
 		var wallhp=w.structures[entry].hp;w.move_enemy(e,entry)
 		check(e.pos==w.exit_for(entry) and w.structures[entry].hp<wallhp,"Invader damages barrier before entering: "+str(entry))
 	# A 2x2 idol cannot squeeze through a one-cell forest corridor.

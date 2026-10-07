@@ -83,7 +83,7 @@ static func goals(w) -> Array:
 	return result
 
 static func reason(w,kind: String,p: Vector2i) -> String:
-	if kind=="clear_tree": return "" if w.trees.has(p) else "この木はもうありません"
+	if kind=="clear_tree": return "伐採には道具が必要です"
 	if w.story.idol.is_empty(): return w.story.get("migration_error","黄金像が見つかりません")
 	if w.story.idol.state in ["preparing","transporting","lost"]: return "像が危険です。先に運び手を止めてください"
 	if kind=="pray_wealth":
@@ -111,7 +111,7 @@ static func enqueue(w,kind: String,p: Vector2i) -> bool:
 	return true
 
 static func step_job(w,j):
-	if j.kind=="clear_tree" and w.trees.get(j.pos)!=j.world_target: w.Jobs.complete(w,j,false); return
+	if j.kind=="clear_tree": w.Jobs.complete(w,j,false); return
 	var why=reason(w,j.kind,j.pos)
 	if why!="": j.state="blocked"; j.block_reason=why; return
 	var destinations=w.neighbors(j.pos) if j.kind=="clear_tree" else goals(w)
@@ -263,9 +263,11 @@ static func idol_enemy(w,e) -> bool:
 			for p in cells(next)+[next+offset]:
 				if w.actor_occupied(p,e.pos): e.state="搬出路で足止め"; return true
 				if w.structures.get(p,{}).get("status")=="ready" and w.structures[p].kind in w.Buildings.WALLS+w.Buildings.DOORS:
+					if not w.Combat.pay(e,"attack"):return true
 					var b=w.structures[p]; b.hp=maxi(0,b.hp-e.object_attack_power)
 					if b.hp==0: b.status="destroyed"; w.refresh_indoor()
 					return true
+			if not w.Combat.pay(e,"move"):e.state="息を整える";return true
 			idol.position=[next.x,next.y]; e.pos=next+offset; e.path.append(e.pos); w.refresh_indoor()
 			if cells(next).all(func(p):return not w.inside(p)): lose(w,"idol_stolen")
 			return true
@@ -273,7 +275,7 @@ static func idol_enemy(w,e) -> bool:
 	if e.pos in destinations:
 		if e.role=="idol_breaker":
 			e.state="黄金像を壊す"
-			if w.tick>=e.next_attack:
+			if w.tick>=e.next_attack and w.Combat.pay(e,"attack"):
 				e.next_attack=w.tick+ceili(e.counter_seconds/w.DT); damage(w,e.object_attack_power)
 		elif idol.carrier<0:
 			idol.carrier=e.id; idol.state="preparing"; idol.prepare=0.0; w.Life.danger(w,"idol_unfastening")

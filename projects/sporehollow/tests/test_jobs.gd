@@ -83,7 +83,9 @@ func run():
 	check(transition.enemies.is_empty(), "Night-relative ten-second schedule")
 	transition.step()
 	check(transition.enemies.size() == 1 and transition.enemies[0].born == 400, "Intruder arrives ten seconds into night")
-	check(transition.act("keeper_move", Vector2i(20, 13)) and transition.jobs_held and transition.jobs.size() == 1, "Direct travel holds queued construction")
+	check(transition.act("keeper_move", Vector2i(20, 13)) and not transition.jobs_held and transition.jobs.size() == 2, "Direct travel appends after construction")
+	check(transition.jobs[0].id==job_id,"Blocked construction stays ahead of the move")
+	transition.Jobs.cancel(transition,job_id)
 	var before = transition.keeper.pos
 	steps(transition, 4)
 	check(transition.keeper.pos != before, "Player keeps moving during invasion")

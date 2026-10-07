@@ -82,8 +82,8 @@ func run():
 	w=fresh();w.act("keeper_move",Vector2i(15,13));w.act("wall",Vector2i(7,12));w.keeper.sleepiness=100;w.step()
 	check(w.manual_goal==null and w.job_hold_reason!="travel" and w.keeper.forced_rest,"Forced sleep invalidates transient travel hold")
 	steps(w,70);drain(w);check(w.jobs.is_empty() and w.structures[Vector2i(7,12)].status=="ready","Building starts after forced recovery")
-	w=fresh();w.act("wall",Vector2i(7,12));w.act("keeper_move",Vector2i(15,13));w.keeper.sleepiness=100;steps(w,70)
-	check(w.job_hold_reason=="manual" and not w.jobs.is_empty(),"Evacuation remains held after forced recovery")
+	w=fresh();w.act("wall",Vector2i(7,12));w.act("keeper_move",Vector2i(15,13));w.Jobs.hold(w,"explicit");w.keeper.sleepiness=100;steps(w,70)
+	check(w.job_hold_reason=="explicit" and not w.jobs.is_empty(),"Explicit pause remains held after forced recovery")
 	w=fresh();w.debug_enabled=true;var hp=w.keeper.hp
 	check(not w.debug_action("lock",{"kind":"keeper"}) and w.keeper.hp==hp,"Lock action cannot heal keeper")
 	check(not w.debug_action("lock",{"kind":"animal","id":1}),"Lock action rejects animal")

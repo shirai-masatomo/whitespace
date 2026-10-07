@@ -64,20 +64,11 @@ HANDOFF/manifest/原画/ライセンスを保全する。ranch v1の商人/露�
 
 納品済み/取り込み済み/画面確認済みと混同しない。新規素材の完成までは上記を仮表示としてレビューへ記録する。
 
-## K0〜K5の差し替え待ち（2026-10-06）
 
-素材ブランチ5848c4f8を再確認。以下は納品なし。game/progression_view.gdの名前付き「仮」トークンを盤面/市場/図鑑へ接続し、正式デザインとは扱わない。新しい絵柄の無断生成はしていない。既存誘拐者・正式キャラクター・本・荷車・建材は従来参照を保持。
+## K0〜K5の納品照合（2026-10-07）
 
-| ID | 必要ActionID |
-|---|---|
-| destroyer | idle / walk / iron_ball_windup / iron_ball_hit / hurt / retreat |
-| martial_artist | idle / walk / bow / stance / attack / hurt / retreat |
-| salaryman | idle / walk / hurt / phone_take / phone_call / phone_put / retreat |
-| ninja | idle / walk / shuriken / dagger / hurt / retreat |
-| animal_tamer | idle / walk / tame / lead / hurt / retreat |
-| runner | idle / run / tired / attack / hurt / retreat |
-| bullfrog | idle / move / tongue / croak / hurt |
-| hedgehog | idle / move / defense_enter / defense / hurt |
-| doberman | idle / walk / run / attack / hurt / death |
+最新素材5ac00e72c4036799de89f598c0374aa8efcf8549を確認。新敵6/動物3の正式モーション、首輪/きのみは**納品済み**。今回はidle PNGをassets/adopted_uiへ必要分のみ取り込み、店・図鑑・選択カードがgame/ui_assets.gdを参照。全モーションの盤面接続は後続で、納品不足とは区別する。
 
-Lv1能力と状態IDは実装済み。特殊動作の正式モーションは未実装。首輪/きのみ商品は既存UIアイコンを暫定使用し、キャラクターへの装備外見は追加しない。実画面の証拠はreview/current/progressionへまとめる。
+使用箇所/元パス/採用PNG/SHA256/納品SHAは **assets/adopted_ui/manifest.json**。HANDOFFと元manifestも同ディレクトリのdelivery-notesに保管。従来素材は変更しない。Portrait用AssetIDはanimal|enemy/<id>/portrait_ui、未指定なら正式world idleをnearest拡大する。透明余白は盤面素材から削除しない。
+
+黄金像の正式PNGは未納品。AssetID world/golden_idol/main、絵96×128/足元(48,96)は依頼用仮値、論理占有2×2は独立。素材納品時は実寸と接地で見直す。高解像度Portrait/カテゴリ/スキル/Rarityの専用PNGも未納品。既存アイコンとゲーム側ラベルで代用し、新デザインを無断生成しない。

@@ -1,0 +1,1461 @@
+{
+  "schema_version": 1,
+  "delivery": "salaryman_motion_v1",
+  "date": "2026-10-06",
+  "branch": "codex/sporehollow-art-assets",
+  "status": "ready_for_implementation",
+  "character_id": "salaryman",
+  "adopted_design": "../enemy_animal_direction_v3/",
+  "adoption_commit": "f26498d2bafe6e274a197aef0a025d5016c8691e",
+  "canvas_size_px": [
+    48,
+    56
+  ],
+  "foot_anchor_px": [
+    24,
+    50
+  ],
+  "standing_body_height_px": 40,
+  "rendering": {
+    "format": "RGBA",
+    "filter": "nearest",
+    "alpha_values": [
+      0,
+      255
+    ],
+    "color_key": false,
+    "trim_transparent_margin": false,
+    "baked_ground_shadow": false,
+    "mirror_axis_x": 24
+  },
+  "assets": [
+    {
+      "file": "idle/right_00.png",
+      "canvas_size_px": [
+        48,
+        56
+      ],
+      "foot_anchor_px": [
+        24,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        13,
+        10,
+        34,
+        50
+      ],
+      "action": "idle",
+      "direction": "right",
+      "frame_index": 0,
+      "frame_duration_ms": null,
+      "loop": false,
+      "layer": "body",
+      "sha256": "776230ad89680e2cfaef4344ae5a437edc5ea58686418f0d80e33787050e7f88",
+      "runtime_ready": true,
+      "contains_cast_shadow": false,
+      "use": "サラリーマンLv1の盤面動作。32x48へ縮めず48x56の足元を合わせる。"
+    },
+    {
+      "file": "idle/left_00.png",
+      "canvas_size_px": [
+        48,
+        56
+      ],
+      "foot_anchor_px": [
+        24,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        14,
+        10,
+        35,
+        50
+      ],
+      "action": "idle",
+      "direction": "left",
+      "frame_index": 0,
+      "frame_duration_ms": null,
+      "loop": false,
+      "layer": "body",
+      "sha256": "d67f94922dabe26de44fee9f4e531b2e4fa00954071feb41dfcc8a7a5243bcd3",
+      "runtime_ready": true,
+      "contains_cast_shadow": false,
+      "use": "サラリーマンLv1の盤面動作。32x48へ縮めず48x56の足元を合わせる。"
+    },
+    {
+      "file": "walk/right_00.png",
+      "canvas_size_px": [
+        48,
+        56
+      ],
+      "foot_anchor_px": [
+        24,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        12,
+        10,
+        37,
+        50
+      ],
+      "action": "walk",
+      "direction": "right",
+      "frame_index": 0,
+      "frame_duration_ms": 120,
+      "loop": true,
+      "layer": "body",
+      "sha256": "2399628ae1af26e59c9aeb22f022f22694b5b64c2cfabe1ab7752cc2d90d9dd2",
+      "runtime_ready": true,
+      "contains_cast_shadow": false,
+      "use": "サラリーマンLv1の盤面動作。32x48へ縮めず48x56の足元を合わせる。"
+    },
+    {
+      "file": "walk/right_01.png",
+      "canvas_size_px": [
+        48,
+        56
+      ],
+      "foot_anchor_px": [
+        24,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        15,
+        10,
+        37,
+        50
+      ],
+      "action": "walk",
+      "direction": "right",
+      "frame_index": 1,
+      "frame_duration_ms": 120,
+      "loop": true,
+      "layer": "body",
+      "sha256": "1c9886cec9e59cd7673bde674e92b1de758a3a6909614ce5b9c90860ddbbd4e4",
+      "runtime_ready": true,
+      "contains_cast_shadow": false,
+      "use": "サラリーマンLv1の盤面動作。32x48へ縮めず48x56の足元を合わせる。"
+    },
+    {
+      "file": "walk/right_02.png",
+      "canvas_size_px": [
+        48,
+        56
+      ],
+      "foot_anchor_px": [
+        24,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        12,
+        10,
+        36,
+        50
+      ],
+      "action": "walk",
+      "direction": "right",
+      "frame_index": 2,
+      "frame_duration_ms": 120,
+      "loop": true,
+      "layer": "body",
+      "sha256": "de2c27a0c5331b7e90a9dde08ad2786240acc8e40f29da677463861d0b966d21",
+      "runtime_ready": true,
+      "contains_cast_shadow": false,
+      "use": "サラリーマンLv1の盤面動作。32x48へ縮めず48x56の足元を合わせる。"
+    },
+    {
+      "file": "walk/right_03.png",
+      "canvas_size_px": [
+        48,
+        56
+      ],
+      "foot_anchor_px": [
+        24,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        15,
+        10,
+        37,
+        50
+      ],
+      "action": "walk",
+      "direction": "right",
+      "frame_index": 3,
+      "frame_duration_ms": 120,
+      "loop": true,
+      "layer": "body",
+      "sha256": "ffeec6a7ccda418d7880641559627109280de500aaabd46a4404c587b0ad47c3",
+      "runtime_ready": true,
+      "contains_cast_shadow": false,
+      "use": "サラリーマンLv1の盤面動作。32x48へ縮めず48x56の足元を合わせる。"
+    },
+    {
+      "file": "walk/left_00.png",
+      "canvas_size_px": [
+        48,
+        56
+      ],
+      "foot_anchor_px": [
+        24,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        11,
+        10,
+        36,
+        50
+      ],
+      "action": "walk",
+      "direction": "left",
+      "frame_index": 0,
+      "frame_duration_ms": 120,
+      "loop": true,
+      "layer": "body",
+      "sha256": "a984e58620e63bf7688025000bb23eb4f7123a9261da85194431c456f96050c3",
+      "runtime_ready": true,
+      "contains_cast_shadow": false,
+      "use": "サラリーマンLv1の盤面動作。32x48へ縮めず48x56の足元を合わせる。"
+    },
+    {
+      "file": "walk/left_01.png",
+      "canvas_size_px": [
+        48,
+        56
+      ],
+      "foot_anchor_px": [
+        24,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        11,
+        10,
+        33,
+        50
+      ],
+      "action": "walk",
+      "direction": "left",
+      "frame_index": 1,
+      "frame_duration_ms": 120,
+      "loop": true,
+      "layer": "body",
+      "sha256": "6823b00163d8cb6c0f0d966020758817a1e777f38a120b818109d7db5f5f31b1",
+      "runtime_ready": true,
+      "contains_cast_shadow": false,
+      "use": "サラリーマンLv1の盤面動作。32x48へ縮めず48x56の足元を合わせる。"
+    },
+    {
+      "file": "walk/left_02.png",
+      "canvas_size_px": [
+        48,
+        56
+      ],
+      "foot_anchor_px": [
+        24,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        12,
+        10,
+        36,
+        50
+      ],
+      "action": "walk",
+      "direction": "left",
+      "frame_index": 2,
+      "frame_duration_ms": 120,
+      "loop": true,
+      "layer": "body",
+      "sha256": "14b6bb3529e0aa89dd64ab4037b49ee8b41b9b12848cf614420d8ef927d67118",
+      "runtime_ready": true,
+      "contains_cast_shadow": false,
+      "use": "サラリーマンLv1の盤面動作。32x48へ縮めず48x56の足元を合わせる。"
+    },
+    {
+      "file": "walk/left_03.png",
+      "canvas_size_px": [
+        48,
+        56
+      ],
+      "foot_anchor_px": [
+        24,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        11,
+        10,
+        33,
+        50
+      ],
+      "action": "walk",
+      "direction": "left",
+      "frame_index": 3,
+      "frame_duration_ms": 120,
+      "loop": true,
+      "layer": "body",
+      "sha256": "30907187be4a9bb9a43b140ce5941821d97275034f5c7047921a9c79e83d16ae",
+      "runtime_ready": true,
+      "contains_cast_shadow": false,
+      "use": "サラリーマンLv1の盤面動作。32x48へ縮めず48x56の足元を合わせる。"
+    },
+    {
+      "file": "hurt/right_00.png",
+      "canvas_size_px": [
+        48,
+        56
+      ],
+      "foot_anchor_px": [
+        24,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        12,
+        11,
+        36,
+        50
+      ],
+      "action": "hurt",
+      "direction": "right",
+      "frame_index": 0,
+      "frame_duration_ms": 80,
+      "loop": false,
+      "layer": "body",
+      "sha256": "9adee3f2f43f86f2c0dce1b4192e12ddc31d23978a8651472c5fbe61653fa84b",
+      "runtime_ready": true,
+      "contains_cast_shadow": false,
+      "use": "サラリーマンLv1の盤面動作。32x48へ縮めず48x56の足元を合わせる。",
+      "death_pose": false
+    },
+    {
+      "file": "hurt/right_01.png",
+      "canvas_size_px": [
+        48,
+        56
+      ],
+      "foot_anchor_px": [
+        24,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        13,
+        10,
+        33,
+        50
+      ],
+      "action": "hurt",
+      "direction": "right",
+      "frame_index": 1,
+      "frame_duration_ms": 120,
+      "loop": false,
+      "layer": "body",
+      "sha256": "280a4fe2aef5903b60231aa54d733cd08beabf95b615e5e9adb48a0fb5f04327",
+      "runtime_ready": true,
+      "contains_cast_shadow": false,
+      "use": "サラリーマンLv1の盤面動作。32x48へ縮めず48x56の足元を合わせる。",
+      "death_pose": false
+    },
+    {
+      "file": "hurt/right_02.png",
+      "canvas_size_px": [
+        48,
+        56
+      ],
+      "foot_anchor_px": [
+        24,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        13,
+        10,
+        34,
+        50
+      ],
+      "action": "hurt",
+      "direction": "right",
+      "frame_index": 2,
+      "frame_duration_ms": 120,
+      "loop": false,
+      "layer": "body",
+      "sha256": "776230ad89680e2cfaef4344ae5a437edc5ea58686418f0d80e33787050e7f88",
+      "runtime_ready": true,
+      "contains_cast_shadow": false,
+      "use": "サラリーマンLv1の盤面動作。32x48へ縮めず48x56の足元を合わせる。",
+      "death_pose": false
+    },
+    {
+      "file": "hurt/left_00.png",
+      "canvas_size_px": [
+        48,
+        56
+      ],
+      "foot_anchor_px": [
+        24,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        12,
+        11,
+        36,
+        50
+      ],
+      "action": "hurt",
+      "direction": "left",
+      "frame_index": 0,
+      "frame_duration_ms": 80,
+      "loop": false,
+      "layer": "body",
+      "sha256": "647164cf635a74dd98d9d5b4c1024cc657f08702a8faffb45eb3ae8840fddf48",
+      "runtime_ready": true,
+      "contains_cast_shadow": false,
+      "use": "サラリーマンLv1の盤面動作。32x48へ縮めず48x56の足元を合わせる。",
+      "death_pose": false
+    },
+    {
+      "file": "hurt/left_01.png",
+      "canvas_size_px": [
+        48,
+        56
+      ],
+      "foot_anchor_px": [
+        24,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        15,
+        10,
+        35,
+        50
+      ],
+      "action": "hurt",
+      "direction": "left",
+      "frame_index": 1,
+      "frame_duration_ms": 120,
+      "loop": false,
+      "layer": "body",
+      "sha256": "03b20ce1d529c07116fa2056eb7bcfe14826f8748df453559b252c613fd48487",
+      "runtime_ready": true,
+      "contains_cast_shadow": false,
+      "use": "サラリーマンLv1の盤面動作。32x48へ縮めず48x56の足元を合わせる。",
+      "death_pose": false
+    },
+    {
+      "file": "hurt/left_02.png",
+      "canvas_size_px": [
+        48,
+        56
+      ],
+      "foot_anchor_px": [
+        24,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        14,
+        10,
+        35,
+        50
+      ],
+      "action": "hurt",
+      "direction": "left",
+      "frame_index": 2,
+      "frame_duration_ms": 120,
+      "loop": false,
+      "layer": "body",
+      "sha256": "d67f94922dabe26de44fee9f4e531b2e4fa00954071feb41dfcc8a7a5243bcd3",
+      "runtime_ready": true,
+      "contains_cast_shadow": false,
+      "use": "サラリーマンLv1の盤面動作。32x48へ縮めず48x56の足元を合わせる。",
+      "death_pose": false
+    },
+    {
+      "file": "phone_take/right_00.png",
+      "canvas_size_px": [
+        48,
+        56
+      ],
+      "foot_anchor_px": [
+        24,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        12,
+        10,
+        35,
+        50
+      ],
+      "action": "phone_take",
+      "direction": "right",
+      "frame_index": 0,
+      "frame_duration_ms": 140,
+      "loop": false,
+      "layer": "body",
+      "sha256": "89abaa8135bc4e3e23887f21084bd55674a199e5a87347c9028b7fb094f66429",
+      "runtime_ready": true,
+      "contains_cast_shadow": false,
+      "use": "サラリーマンLv1の盤面動作。32x48へ縮めず48x56の足元を合わせる。",
+      "phone_baked_in_body": true
+    },
+    {
+      "file": "phone_take/right_01.png",
+      "canvas_size_px": [
+        48,
+        56
+      ],
+      "foot_anchor_px": [
+        24,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        13,
+        10,
+        39,
+        50
+      ],
+      "action": "phone_take",
+      "direction": "right",
+      "frame_index": 1,
+      "frame_duration_ms": 120,
+      "loop": false,
+      "layer": "body",
+      "sha256": "07911fc16500fe1555dd8c651533a680bb275e23b984a7c532ca13b1f5c935ec",
+      "runtime_ready": true,
+      "contains_cast_shadow": false,
+      "use": "サラリーマンLv1の盤面動作。32x48へ縮めず48x56の足元を合わせる。",
+      "phone_baked_in_body": true
+    },
+    {
+      "file": "phone_take/right_02.png",
+      "canvas_size_px": [
+        48,
+        56
+      ],
+      "foot_anchor_px": [
+        24,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        14,
+        10,
+        34,
+        50
+      ],
+      "action": "phone_take",
+      "direction": "right",
+      "frame_index": 2,
+      "frame_duration_ms": 170,
+      "loop": false,
+      "layer": "body",
+      "sha256": "c15303a3b84ed808652cf34297176eda629c55269e0349a8a72ee3a66a99124d",
+      "runtime_ready": true,
+      "contains_cast_shadow": false,
+      "use": "サラリーマンLv1の盤面動作。32x48へ縮めず48x56の足元を合わせる。",
+      "phone_baked_in_body": true
+    },
+    {
+      "file": "phone_take/left_00.png",
+      "canvas_size_px": [
+        48,
+        56
+      ],
+      "foot_anchor_px": [
+        24,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        13,
+        10,
+        36,
+        50
+      ],
+      "action": "phone_take",
+      "direction": "left",
+      "frame_index": 0,
+      "frame_duration_ms": 140,
+      "loop": false,
+      "layer": "body",
+      "sha256": "fa5501ecc77efd8344ef15a84faa0a8ed928994ef13e888bd2bc0ea53023a7e2",
+      "runtime_ready": true,
+      "contains_cast_shadow": false,
+      "use": "サラリーマンLv1の盤面動作。32x48へ縮めず48x56の足元を合わせる。",
+      "phone_baked_in_body": true
+    },
+    {
+      "file": "phone_take/left_01.png",
+      "canvas_size_px": [
+        48,
+        56
+      ],
+      "foot_anchor_px": [
+        24,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        9,
+        10,
+        35,
+        50
+      ],
+      "action": "phone_take",
+      "direction": "left",
+      "frame_index": 1,
+      "frame_duration_ms": 120,
+      "loop": false,
+      "layer": "body",
+      "sha256": "d82b956a183de10e2a8db25cc1266a54d7b328041d252dd2a4f0e3075d4a23fb",
+      "runtime_ready": true,
+      "contains_cast_shadow": false,
+      "use": "サラリーマンLv1の盤面動作。32x48へ縮めず48x56の足元を合わせる。",
+      "phone_baked_in_body": true
+    },
+    {
+      "file": "phone_take/left_02.png",
+      "canvas_size_px": [
+        48,
+        56
+      ],
+      "foot_anchor_px": [
+        24,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        14,
+        10,
+        34,
+        50
+      ],
+      "action": "phone_take",
+      "direction": "left",
+      "frame_index": 2,
+      "frame_duration_ms": 170,
+      "loop": false,
+      "layer": "body",
+      "sha256": "82b8f22c899ebbba8094b9df72ce309f726cca16869e62c758b705f0234d13b5",
+      "runtime_ready": true,
+      "contains_cast_shadow": false,
+      "use": "サラリーマンLv1の盤面動作。32x48へ縮めず48x56の足元を合わせる。",
+      "phone_baked_in_body": true
+    },
+    {
+      "file": "phone_call/right_00.png",
+      "canvas_size_px": [
+        48,
+        56
+      ],
+      "foot_anchor_px": [
+        24,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        10,
+        10,
+        33,
+        50
+      ],
+      "action": "phone_call",
+      "direction": "right",
+      "frame_index": 0,
+      "frame_duration_ms": 220,
+      "loop": true,
+      "layer": "body",
+      "sha256": "92f2b7269379cb8dc462b9e22dccab088d337900a3065d33d3c60bf8965e10c9",
+      "runtime_ready": true,
+      "contains_cast_shadow": false,
+      "use": "サラリーマンLv1の盤面動作。32x48へ縮めず48x56の足元を合わせる。",
+      "phone_baked_in_body": true
+    },
+    {
+      "file": "phone_call/right_01.png",
+      "canvas_size_px": [
+        48,
+        56
+      ],
+      "foot_anchor_px": [
+        24,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        10,
+        10,
+        33,
+        50
+      ],
+      "action": "phone_call",
+      "direction": "right",
+      "frame_index": 1,
+      "frame_duration_ms": 120,
+      "loop": true,
+      "layer": "body",
+      "sha256": "cebf60a30d1f2bf497086fae4089be0baecd168eff302c54f7af1fcbeee9c382",
+      "runtime_ready": true,
+      "contains_cast_shadow": false,
+      "use": "サラリーマンLv1の盤面動作。32x48へ縮めず48x56の足元を合わせる。",
+      "phone_baked_in_body": true
+    },
+    {
+      "file": "phone_call/right_02.png",
+      "canvas_size_px": [
+        48,
+        56
+      ],
+      "foot_anchor_px": [
+        24,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        10,
+        10,
+        33,
+        50
+      ],
+      "action": "phone_call",
+      "direction": "right",
+      "frame_index": 2,
+      "frame_duration_ms": 180,
+      "loop": true,
+      "layer": "body",
+      "sha256": "92f2b7269379cb8dc462b9e22dccab088d337900a3065d33d3c60bf8965e10c9",
+      "runtime_ready": true,
+      "contains_cast_shadow": false,
+      "use": "サラリーマンLv1の盤面動作。32x48へ縮めず48x56の足元を合わせる。",
+      "phone_baked_in_body": true
+    },
+    {
+      "file": "phone_call/left_00.png",
+      "canvas_size_px": [
+        48,
+        56
+      ],
+      "foot_anchor_px": [
+        24,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        15,
+        10,
+        38,
+        50
+      ],
+      "action": "phone_call",
+      "direction": "left",
+      "frame_index": 0,
+      "frame_duration_ms": 220,
+      "loop": true,
+      "layer": "body",
+      "sha256": "ec5a6d36a88b2ee33db6a42f68e8d1dd4a970773de925e07e5f3f543051fc3b3",
+      "runtime_ready": true,
+      "contains_cast_shadow": false,
+      "use": "サラリーマンLv1の盤面動作。32x48へ縮めず48x56の足元を合わせる。",
+      "phone_baked_in_body": true
+    },
+    {
+      "file": "phone_call/left_01.png",
+      "canvas_size_px": [
+        48,
+        56
+      ],
+      "foot_anchor_px": [
+        24,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        15,
+        10,
+        38,
+        50
+      ],
+      "action": "phone_call",
+      "direction": "left",
+      "frame_index": 1,
+      "frame_duration_ms": 120,
+      "loop": true,
+      "layer": "body",
+      "sha256": "a7602999b7310a3659c981c90cff22034c13ae68f60decc3df59adbb993f2675",
+      "runtime_ready": true,
+      "contains_cast_shadow": false,
+      "use": "サラリーマンLv1の盤面動作。32x48へ縮めず48x56の足元を合わせる。",
+      "phone_baked_in_body": true
+    },
+    {
+      "file": "phone_call/left_02.png",
+      "canvas_size_px": [
+        48,
+        56
+      ],
+      "foot_anchor_px": [
+        24,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        15,
+        10,
+        38,
+        50
+      ],
+      "action": "phone_call",
+      "direction": "left",
+      "frame_index": 2,
+      "frame_duration_ms": 180,
+      "loop": true,
+      "layer": "body",
+      "sha256": "ec5a6d36a88b2ee33db6a42f68e8d1dd4a970773de925e07e5f3f543051fc3b3",
+      "runtime_ready": true,
+      "contains_cast_shadow": false,
+      "use": "サラリーマンLv1の盤面動作。32x48へ縮めず48x56の足元を合わせる。",
+      "phone_baked_in_body": true
+    },
+    {
+      "file": "phone_put/right_00.png",
+      "canvas_size_px": [
+        48,
+        56
+      ],
+      "foot_anchor_px": [
+        24,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        14,
+        10,
+        39,
+        50
+      ],
+      "action": "phone_put",
+      "direction": "right",
+      "frame_index": 0,
+      "frame_duration_ms": 120,
+      "loop": false,
+      "layer": "body",
+      "sha256": "e77225a7d2ca49d3c734c1109977dc5013d81a210e798bcd3bf33b07d86630ed",
+      "runtime_ready": true,
+      "contains_cast_shadow": false,
+      "use": "サラリーマンLv1の盤面動作。32x48へ縮めず48x56の足元を合わせる。",
+      "phone_baked_in_body": true
+    },
+    {
+      "file": "phone_put/right_01.png",
+      "canvas_size_px": [
+        48,
+        56
+      ],
+      "foot_anchor_px": [
+        24,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        12,
+        11,
+        36,
+        50
+      ],
+      "action": "phone_put",
+      "direction": "right",
+      "frame_index": 1,
+      "frame_duration_ms": 140,
+      "loop": false,
+      "layer": "body",
+      "sha256": "e7096e7599a92ad69a86ad935bc8bf1b99424bb6bd51e420415a97f85dd3b652",
+      "runtime_ready": true,
+      "contains_cast_shadow": false,
+      "use": "サラリーマンLv1の盤面動作。32x48へ縮めず48x56の足元を合わせる。",
+      "phone_baked_in_body": true
+    },
+    {
+      "file": "phone_put/right_02.png",
+      "canvas_size_px": [
+        48,
+        56
+      ],
+      "foot_anchor_px": [
+        24,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        13,
+        10,
+        34,
+        50
+      ],
+      "action": "phone_put",
+      "direction": "right",
+      "frame_index": 2,
+      "frame_duration_ms": 100,
+      "loop": false,
+      "layer": "body",
+      "sha256": "776230ad89680e2cfaef4344ae5a437edc5ea58686418f0d80e33787050e7f88",
+      "runtime_ready": true,
+      "contains_cast_shadow": false,
+      "use": "サラリーマンLv1の盤面動作。32x48へ縮めず48x56の足元を合わせる。",
+      "phone_baked_in_body": true
+    },
+    {
+      "file": "phone_put/left_00.png",
+      "canvas_size_px": [
+        48,
+        56
+      ],
+      "foot_anchor_px": [
+        24,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        9,
+        10,
+        34,
+        50
+      ],
+      "action": "phone_put",
+      "direction": "left",
+      "frame_index": 0,
+      "frame_duration_ms": 120,
+      "loop": false,
+      "layer": "body",
+      "sha256": "b9df3741911e9e8cae826de38e66bf11f7e338fd4d9dc4159c43348943aac27f",
+      "runtime_ready": true,
+      "contains_cast_shadow": false,
+      "use": "サラリーマンLv1の盤面動作。32x48へ縮めず48x56の足元を合わせる。",
+      "phone_baked_in_body": true
+    },
+    {
+      "file": "phone_put/left_01.png",
+      "canvas_size_px": [
+        48,
+        56
+      ],
+      "foot_anchor_px": [
+        24,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        12,
+        11,
+        36,
+        50
+      ],
+      "action": "phone_put",
+      "direction": "left",
+      "frame_index": 1,
+      "frame_duration_ms": 140,
+      "loop": false,
+      "layer": "body",
+      "sha256": "b5ccb145dad48c01829fed5e7c2292aadd267bebe7050d2d34803a76c8614dee",
+      "runtime_ready": true,
+      "contains_cast_shadow": false,
+      "use": "サラリーマンLv1の盤面動作。32x48へ縮めず48x56の足元を合わせる。",
+      "phone_baked_in_body": true
+    },
+    {
+      "file": "phone_put/left_02.png",
+      "canvas_size_px": [
+        48,
+        56
+      ],
+      "foot_anchor_px": [
+        24,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        14,
+        10,
+        35,
+        50
+      ],
+      "action": "phone_put",
+      "direction": "left",
+      "frame_index": 2,
+      "frame_duration_ms": 100,
+      "loop": false,
+      "layer": "body",
+      "sha256": "d67f94922dabe26de44fee9f4e531b2e4fa00954071feb41dfcc8a7a5243bcd3",
+      "runtime_ready": true,
+      "contains_cast_shadow": false,
+      "use": "サラリーマンLv1の盤面動作。32x48へ縮めず48x56の足元を合わせる。",
+      "phone_baked_in_body": true
+    },
+    {
+      "file": "retreat/right_00.png",
+      "canvas_size_px": [
+        48,
+        56
+      ],
+      "foot_anchor_px": [
+        24,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        12,
+        11,
+        36,
+        50
+      ],
+      "action": "retreat",
+      "direction": "right",
+      "frame_index": 0,
+      "frame_duration_ms": 100,
+      "loop": true,
+      "layer": "body",
+      "sha256": "be8b0454f7f42e0da2be294fb5c5c3d99a3bfe2810ef9e6e80b9e711c523cee7",
+      "runtime_ready": true,
+      "contains_cast_shadow": false,
+      "use": "サラリーマンLv1の盤面動作。32x48へ縮めず48x56の足元を合わせる。"
+    },
+    {
+      "file": "retreat/right_01.png",
+      "canvas_size_px": [
+        48,
+        56
+      ],
+      "foot_anchor_px": [
+        24,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        12,
+        11,
+        35,
+        50
+      ],
+      "action": "retreat",
+      "direction": "right",
+      "frame_index": 1,
+      "frame_duration_ms": 100,
+      "loop": true,
+      "layer": "body",
+      "sha256": "4bdc8b7fa7e530a7037ac1342cdd02a7edecf323107a65cd440d3dfdb7ae11f4",
+      "runtime_ready": true,
+      "contains_cast_shadow": false,
+      "use": "サラリーマンLv1の盤面動作。32x48へ縮めず48x56の足元を合わせる。"
+    },
+    {
+      "file": "retreat/right_02.png",
+      "canvas_size_px": [
+        48,
+        56
+      ],
+      "foot_anchor_px": [
+        24,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        12,
+        11,
+        35,
+        50
+      ],
+      "action": "retreat",
+      "direction": "right",
+      "frame_index": 2,
+      "frame_duration_ms": 100,
+      "loop": true,
+      "layer": "body",
+      "sha256": "c6b8c5242ee8b6fa2d024c2f777183eb9247d612928747c1ed311a9aa46a16b9",
+      "runtime_ready": true,
+      "contains_cast_shadow": false,
+      "use": "サラリーマンLv1の盤面動作。32x48へ縮めず48x56の足元を合わせる。"
+    },
+    {
+      "file": "retreat/right_03.png",
+      "canvas_size_px": [
+        48,
+        56
+      ],
+      "foot_anchor_px": [
+        24,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        12,
+        11,
+        35,
+        50
+      ],
+      "action": "retreat",
+      "direction": "right",
+      "frame_index": 3,
+      "frame_duration_ms": 100,
+      "loop": true,
+      "layer": "body",
+      "sha256": "5de248039f0c08b4772d658041f2d0a410aa50af167b225a70c4126f3127ad28",
+      "runtime_ready": true,
+      "contains_cast_shadow": false,
+      "use": "サラリーマンLv1の盤面動作。32x48へ縮めず48x56の足元を合わせる。"
+    },
+    {
+      "file": "retreat/left_00.png",
+      "canvas_size_px": [
+        48,
+        56
+      ],
+      "foot_anchor_px": [
+        24,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        12,
+        11,
+        36,
+        50
+      ],
+      "action": "retreat",
+      "direction": "left",
+      "frame_index": 0,
+      "frame_duration_ms": 100,
+      "loop": true,
+      "layer": "body",
+      "sha256": "58b73fe2fbb71da55b25c85df16895aa4a40270c2601fec1af728faebb679902",
+      "runtime_ready": true,
+      "contains_cast_shadow": false,
+      "use": "サラリーマンLv1の盤面動作。32x48へ縮めず48x56の足元を合わせる。"
+    },
+    {
+      "file": "retreat/left_01.png",
+      "canvas_size_px": [
+        48,
+        56
+      ],
+      "foot_anchor_px": [
+        24,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        13,
+        11,
+        36,
+        50
+      ],
+      "action": "retreat",
+      "direction": "left",
+      "frame_index": 1,
+      "frame_duration_ms": 100,
+      "loop": true,
+      "layer": "body",
+      "sha256": "85f903eac73420e6d4bf697e57728d266138dd85a07d661fcb963da37e335a48",
+      "runtime_ready": true,
+      "contains_cast_shadow": false,
+      "use": "サラリーマンLv1の盤面動作。32x48へ縮めず48x56の足元を合わせる。"
+    },
+    {
+      "file": "retreat/left_02.png",
+      "canvas_size_px": [
+        48,
+        56
+      ],
+      "foot_anchor_px": [
+        24,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        13,
+        11,
+        36,
+        50
+      ],
+      "action": "retreat",
+      "direction": "left",
+      "frame_index": 2,
+      "frame_duration_ms": 100,
+      "loop": true,
+      "layer": "body",
+      "sha256": "7b64ee16766a017a37daa78f2494ccd7bee7e31c92dbc3bc96ae72d10b353eb7",
+      "runtime_ready": true,
+      "contains_cast_shadow": false,
+      "use": "サラリーマンLv1の盤面動作。32x48へ縮めず48x56の足元を合わせる。"
+    },
+    {
+      "file": "retreat/left_03.png",
+      "canvas_size_px": [
+        48,
+        56
+      ],
+      "foot_anchor_px": [
+        24,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        13,
+        11,
+        36,
+        50
+      ],
+      "action": "retreat",
+      "direction": "left",
+      "frame_index": 3,
+      "frame_duration_ms": 100,
+      "loop": true,
+      "layer": "body",
+      "sha256": "c483a843df9c7eb659ce2e479e0d15f3b7ebe4ddfd7fe1a9ce586dd4ffe3c473",
+      "runtime_ready": true,
+      "contains_cast_shadow": false,
+      "use": "サラリーマンLv1の盤面動作。32x48へ縮めず48x56の足元を合わせる。"
+    }
+  ],
+  "actions": {
+    "idle_right": {
+      "action_id": "idle",
+      "direction": "right",
+      "frames": [
+        "idle/right_00.png"
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "end_behavior": "hold until state changes"
+    },
+    "idle_left": {
+      "action_id": "idle",
+      "direction": "left",
+      "frames": [
+        "idle/left_00.png"
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "end_behavior": "hold until state changes"
+    },
+    "walk_right": {
+      "action_id": "walk",
+      "direction": "right",
+      "frames": [
+        "walk/right_00.png",
+        "walk/right_01.png",
+        "walk/right_02.png",
+        "walk/right_03.png"
+      ],
+      "frame_duration_ms": [
+        120,
+        120,
+        120,
+        120
+      ],
+      "loop": true,
+      "end_behavior": "repeat until state changes"
+    },
+    "walk_left": {
+      "action_id": "walk",
+      "direction": "left",
+      "frames": [
+        "walk/left_00.png",
+        "walk/left_01.png",
+        "walk/left_02.png",
+        "walk/left_03.png"
+      ],
+      "frame_duration_ms": [
+        120,
+        120,
+        120,
+        120
+      ],
+      "loop": true,
+      "end_behavior": "repeat until state changes"
+    },
+    "hurt_right": {
+      "action_id": "hurt",
+      "direction": "right",
+      "frames": [
+        "hurt/right_00.png",
+        "hurt/right_01.png",
+        "hurt/right_02.png"
+      ],
+      "frame_duration_ms": [
+        80,
+        120,
+        120
+      ],
+      "loop": false,
+      "end_behavior": "return to state-selected pose"
+    },
+    "hurt_left": {
+      "action_id": "hurt",
+      "direction": "left",
+      "frames": [
+        "hurt/left_00.png",
+        "hurt/left_01.png",
+        "hurt/left_02.png"
+      ],
+      "frame_duration_ms": [
+        80,
+        120,
+        120
+      ],
+      "loop": false,
+      "end_behavior": "return to state-selected pose"
+    },
+    "phone_take_right": {
+      "action_id": "phone_take",
+      "direction": "right",
+      "frames": [
+        "phone_take/right_00.png",
+        "phone_take/right_01.png",
+        "phone_take/right_02.png"
+      ],
+      "frame_duration_ms": [
+        140,
+        120,
+        170
+      ],
+      "loop": false,
+      "end_behavior": "return to state-selected pose"
+    },
+    "phone_take_left": {
+      "action_id": "phone_take",
+      "direction": "left",
+      "frames": [
+        "phone_take/left_00.png",
+        "phone_take/left_01.png",
+        "phone_take/left_02.png"
+      ],
+      "frame_duration_ms": [
+        140,
+        120,
+        170
+      ],
+      "loop": false,
+      "end_behavior": "return to state-selected pose"
+    },
+    "phone_call_right": {
+      "action_id": "phone_call",
+      "direction": "right",
+      "frames": [
+        "phone_call/right_00.png",
+        "phone_call/right_01.png",
+        "phone_call/right_02.png"
+      ],
+      "frame_duration_ms": [
+        220,
+        120,
+        180
+      ],
+      "loop": true,
+      "end_behavior": "repeat until state changes"
+    },
+    "phone_call_left": {
+      "action_id": "phone_call",
+      "direction": "left",
+      "frames": [
+        "phone_call/left_00.png",
+        "phone_call/left_01.png",
+        "phone_call/left_02.png"
+      ],
+      "frame_duration_ms": [
+        220,
+        120,
+        180
+      ],
+      "loop": true,
+      "end_behavior": "repeat until state changes"
+    },
+    "phone_put_right": {
+      "action_id": "phone_put",
+      "direction": "right",
+      "frames": [
+        "phone_put/right_00.png",
+        "phone_put/right_01.png",
+        "phone_put/right_02.png"
+      ],
+      "frame_duration_ms": [
+        120,
+        140,
+        100
+      ],
+      "loop": false,
+      "end_behavior": "return to state-selected pose"
+    },
+    "phone_put_left": {
+      "action_id": "phone_put",
+      "direction": "left",
+      "frames": [
+        "phone_put/left_00.png",
+        "phone_put/left_01.png",
+        "phone_put/left_02.png"
+      ],
+      "frame_duration_ms": [
+        120,
+        140,
+        100
+      ],
+      "loop": false,
+      "end_behavior": "return to state-selected pose"
+    },
+    "retreat_right": {
+      "action_id": "retreat",
+      "direction": "right",
+      "frames": [
+        "retreat/right_00.png",
+        "retreat/right_01.png",
+        "retreat/right_02.png",
+        "retreat/right_03.png"
+      ],
+      "frame_duration_ms": [
+        100,
+        100,
+        100,
+        100
+      ],
+      "loop": true,
+      "end_behavior": "repeat until state changes"
+    },
+    "retreat_left": {
+      "action_id": "retreat",
+      "direction": "left",
+      "frames": [
+        "retreat/left_00.png",
+        "retreat/left_01.png",
+        "retreat/left_02.png",
+        "retreat/left_03.png"
+      ],
+      "frame_duration_ms": [
+        100,
+        100,
+        100,
+        100
+      ],
+      "loop": true,
+      "end_behavior": "repeat until state changes"
+    }
+  },
+  "timing_policy": "Presentation cadence only. Use existing world visual clock and freeze on pause. Do not derive movement, hit tests, HP, reinforcements or probabilities from frames. phone_call loops only while existing state is calling.",
+  "event_notes": {
+    "phone_take_right": {
+      "phone_visible_frame": 1
+    },
+    "phone_take_left": {
+      "phone_visible_frame": 1
+    },
+    "phone_call": "Phone at ear; no reinforcement spawn event baked into animation",
+    "hurt": "Alive flinch; interruption allowed; no flash/death"
+  },
+  "sources": {
+    "original": "../../art-production/salaryman-motion-v1/originals/motion-sheet.png",
+    "prompt": "../../art-production/salaryman-motion-v1/generation-record.json",
+    "processing": "../../art-production/salaryman-motion-v1/prepare_native.py",
+    "assembly": "../../art-production/salaryman-motion-v1/build_delivery.py",
+    "existing_phone_keys": "../enemy_animal_direction_v3/pose_drafts/salaryman/",
+    "approved_head_reused_pixel_exact": true
+  },
+  "spec_snapshots": [
+    {
+      "file": "../../art-production/salaryman-motion-v1/references/ART_SPEC.md",
+      "sha256": "c399f4d5aaa06be8d2a5792f25adacf815c449ca8ddb6947e82a9b7e6d6a25e6"
+    },
+    {
+      "file": "../../art-production/salaryman-motion-v1/references/ENEMIES.md",
+      "sha256": "5d74287e74b84a705a14eee9cd53844e3392d959b42b71b6f952f90be1dd9004"
+    },
+    {
+      "file": "../../art-production/salaryman-motion-v1/references/ANIMALS.md",
+      "sha256": "c379cf5328455558712d4e856bc398336456697449a8d0efc773a8c4f3c1c935"
+    },
+    {
+      "file": "../../art-production/salaryman-motion-v1/references/ITEMS.md",
+      "sha256": "02dd447cd46aa9bdeb86c61c4add870a6f14aa9c6b11326cec2478de0e6fd612"
+    }
+  ],
+  "unfinished": [
+    "正面・背面の専用動作は未制作（今回の既存横向き契約外）",
+    "独立した通常近接攻撃は未制作（現行ART_SPECのサラリーマン必要ActionIDにはない）",
+    "ゲームへの取り込み・隔離描画検証は実装担当"
+  ],
+  "game_launched": false,
+  "in_game_verified": false
+}

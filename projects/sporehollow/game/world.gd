@@ -1,5 +1,6 @@
 extends RefCounted
 ## Deterministic fixed-tick rules. No scene, Input, frame clock or rendering dependencies.
+const Combat=preload("res://game/combat_events.gd")
 const Progression = preload("res://game/progression.gd")
 const ProgressData = preload("res://game/progression_data.gd")
 const Story = preload("res://game/world_story_system.gd")
@@ -102,6 +103,7 @@ static func new_campaign() -> Dictionary:
 		"fence": 0, "resources": {"soil": 100, "wood": 0, "stone": 0}, "items": {"dog_food": 2, "hen_food": 0}, "unlocked_blueprints": [], "facilities": [], "next_structure_id": 1, "animals": [{"id": 1, "category": "dog", "species": "shiba", "lv": 1, "xp": 0, "loyalty": 75}]}
 
 func _init(data: Dictionary = {}, seed_number: int = 17, stage_override: Dictionary = {}):
+	Combat.init_actor(keeper,true)
 	campaign = new_campaign() if data.is_empty() else data.duplicate(true)
 	for resource in Rules.RESOURCE_TYPES:
 		if not campaign.resources.has(resource): campaign.resources[resource] = 0
@@ -127,10 +129,10 @@ func _init(data: Dictionary = {}, seed_number: int = 17, stage_override: Diction
 		owned.affinity = owned.get("affinity", 0 if SPECIES[owned.species].affinity else null)
 		owned.unavailable_through_day = owned.get("unavailable_through_day", 0)
 		if owned.species=="shiba" and owned.get("hp", 1) <= 0 and campaign.day > owned.unavailable_through_day:
-			owned.hp = maxi(1, (SPECIES[owned.species].hp + (owned.lv - 1) * 4) / 2) # Provisional return after one full day off.
+			owned.hp = maxi(1, AnimalData.stats(owned.species,owned.lv).hp / 2) # Provisional return after one full day off.
 	morning_checkpoint = campaign.get("morning_checkpoint", campaign).duplicate(true)
 	morning_checkpoint.erase("morning_checkpoint")
-	for key in ["hp", "sleepiness", "drinks_today","facing"]:
+	for key in ["hp", "sleepiness", "drinks_today","facing","stamina","ultimate_gauge"]:
 		keeper[key] = campaign.get("keeper_vitals", {}).get(key, keeper.get(key,1))
 	if keeper.hp <= 0: keeper.state = "unconscious"
 	if keeper.sleepiness >= 100:
@@ -429,11 +431,11 @@ func issue_order(kind: String, p: Vector2i, animal_id: int = -1) -> bool:
 
 func spawn_enemy(event: Dictionary):
 	var entry: Vector2i = event.entry
-	var origin = exit_for(entry)
+	var origin = exit_for(entry) + (exit_for(entry)-entry)*24
 	if enemies.any(func(e):return not e.done and e.pos==origin):
-		var alternatives=entries.filter(func(p):return not enemies.any(func(e):return not e.done and e.pos==exit_for(p)))
+		var alternatives=entries.filter(func(p):return not enemies.any(func(e):return not e.done and e.pos==exit_for(p)+(exit_for(p)-p)*24))
 		if alternatives.is_empty(): say("森の外で敵が足止めされています"); return
-		entry=alternatives[0]; origin=exit_for(entry)
+		entry=alternatives[0]; origin=exit_for(entry)+(exit_for(entry)-entry)*24
 	var progress = mini(6, maxi(0, campaign.day - 1))
 	enemies.append({"move_speed": event.get("move_speed", 1.333333 + progress * 0.27), "move_credit": 0.0, "id": spawned, "pos": origin, "entry": entry, "lv": event.get("lv", 1), "hp": Rules.KIDNAPPER.max_hp + progress * 4, "max_hp": Rules.KIDNAPPER.max_hp + progress * 4,
 		"attack_power": Rules.KIDNAPPER.attack_power + progress / 2, "object_attack_power": Rules.KIDNAPPER.object_attack_power,
@@ -489,6 +491,7 @@ func animal_step(a: Dictionary):
 		a.mode = a.pending.kind
 		a.order = a.pending.pos
 		a.target_id = a.pending.target_id
+		if a.mode=="attack_target":a.priority_seen=tick
 		if a.mode in ["stay", "wander", "whistle"]: a.home = a.order
 		a.order_until = tick + 40 + a.loyalty * 2
 		a.pending = {}
@@ -533,12 +536,9 @@ func animal_step(a: Dictionary):
 		var enemy=targets[0]
 		if distance(a.pos,enemy.pos)<=ProgressData.SPECIAL.tongue_range and line_of_sight(a.pos,enemy.pos):
 			a.skill_ready.tongue=tick+ceili(ProgressData.SPECIAL.tongue_ct/DT)
-			enemy.move_stopped_until=maxi(enemy.move_stopped_until,tick+ceili(ProgressData.SPECIAL.tongue_stop/DT))
+			Combat.tongue(self,a,enemy)
 			a.action_id="tongue"; skill_log.append({"tick":tick,"actor":a.id,"skill":"tongue","target":enemy.id})
-	if a.mode == "attack_target":
-		var selected = enemies.filter(func(e): return e.id == a.target_id and not e.done and not e.flee and distance(a.pos, e.pos) <= a.attack_target_range)
-		if not selected.is_empty(): targets = selected
-		else: a.mode = "auto"
+	if a.mode == "attack_target": targets=Orders.priority_targets(self,a,targets)
 	if a.rescuing: targets = carrier
 	if not SPECIES[a.species].can_enter_indoor:
 		if a.rescuing and not targets.is_empty() and is_indoor(targets[0].pos):
@@ -636,6 +636,13 @@ func side_step(p: Vector2i, goal: Vector2i, roll: float) -> Vector2i:
 
 func enemy_step(e: Dictionary):
 	if e.done: return
+	if e.pos.x<0 or e.pos.y<0 or e.pos.x>=W or e.pos.y>=H:
+		e.state="森から接近"
+		e.move_credit+=e.move_speed*DT
+		if e.move_credit>=1:
+			var next=e.pos+(e.entry-exit_for(e.entry))
+			if not actor_occupied(next,e.pos) and Combat.pay(e,"move"): e.pos=next; e.move_credit-=1; e.path.append(next)
+		return
 	RaiderAI.perceive(e, self)
 	if Progression.enemy_step(self,e): return
 	if not e.flee:
@@ -667,7 +674,7 @@ func enemy_step(e: Dictionary):
 			var target = found[0]
 			e.state = "反撃"
 			if distance(e.pos, target.pos) <= 1:
-				if tick >= e.next_attack:
+				if tick >= e.next_attack and Combat.pay(e,"attack"):
 					e.next_attack = tick + ceili(e.counter_seconds / DT)
 					var previous_hp: int = target.hp
 					var damage = roundi(e.attack_power * (1.0 - AnimalData.SKILLS.meow.reduction if tick < e.weakened_until else 1.0))
@@ -684,7 +691,7 @@ func enemy_step(e: Dictionary):
 		e.state = "主人公へ攻撃" if keeper.hp > 0 else "担ぎ上げる"
 		e.observed_action=true
 		if keeper.hp > 0:
-			if tick >= e.next_attack:
+			if tick >= e.next_attack and Combat.pay(e,"attack"):
 				e.next_attack = tick + ceili(e.counter_seconds / DT)
 				Life.hurt(self, e)
 		else:
@@ -744,6 +751,8 @@ func move_enemy(e: Dictionary, next: Vector2i):
 			if e.object_attack_power<=0 or tick<e.next_attack: return
 			e.next_attack=tick+ceili(e.attack_interval/DT)
 			e.observed_action=true
+	if blocks(next) and (structures[next].kind not in Buildings.DOORS or structures[next].get("lock_hp",0)>0):
+		if not Combat.pay(e,"attack"): e.state="息を整える"; return
 	if blocks(next) and structures.get(next,{}).get("kind") in Buildings.DOORS:
 		var door=structures[next]
 		if door.get("lock_hp",0)>0:
@@ -769,6 +778,7 @@ func move_enemy(e: Dictionary, next: Vector2i):
 			say("施設が壊れました")
 	else:
 		if tick < e.move_stopped_until and next != e.pos: return
+		if not Combat.pay(e,"move"): e.state="息を整える"; return
 		e.pos = next
 		e.path.append(next)
 
@@ -818,13 +828,13 @@ func persist_farm():
 		if not a.is_empty():
 			if a.placed: owned.position=[a.pos.x,a.pos.y]
 			owned.facing=a.get("facing",1)
-			for key in ["equipment","rarity","bonus_skills"]: owned[key]=a.get(key)
+			for key in ["equipment","rarity","bonus_skills","ultimate_gauge","ultimate_gauge_max"]: owned[key]=a.get(key)
 			owned.hp=a.hp; owned.mode=a.mode; owned.order_remaining=maxi(0,a.order_until-tick); owned.unavailable_through_day=a.unavailable_through_day
 	campaign.work_jobs=[]
 	for j in jobs:
 		if not BUILD.has(j.kind) and j.kind not in Story.ACTIONS: continue
 		var row=j.duplicate(true); row.pos=[j.pos.x,j.pos.y]; campaign.work_jobs.append(row)
-	campaign.keeper_vitals = {"hp": keeper.hp, "sleepiness": keeper.sleepiness, "drinks_today": keeper.drinks_today,"facing":keeper.get("facing",1)}
+	campaign.keeper_vitals = {"hp": keeper.hp, "sleepiness": keeper.sleepiness, "drinks_today": keeper.drinks_today,"facing":keeper.get("facing",1),"stamina":keeper.stamina,"ultimate_gauge":keeper.ultimate_gauge}
 	campaign.keeper_position = [keeper.pos.x, keeper.pos.y]
 	campaign.resources = resource_snapshot()
 	campaign.next_structure_id = next_structure_id
@@ -846,6 +856,9 @@ func step():
 		if not a.placed: admit(a,logistics_entry)
 	Life.begin_rest_until(self)
 	tick += 1
+	if not keeper.has("has_stamina"): Combat.init_actor(keeper,true)
+	Combat.recover(keeper,DT,keeper.resting)
+	for enemy in enemies: Combat.recover(enemy,DT)
 	if phase == "day" and tick * DT >= day_seconds: start_night()
 	Life.step(self)
 	Jobs.step(self)
@@ -994,6 +1007,7 @@ func try_bark(a: Dictionary):
 	for enemy in nearby:
 		if distance(a.pos, enemy.pos) <= Rules.BARK.range:
 			enemy.move_stopped_until = maxi(enemy.move_stopped_until, tick + ceili(Rules.BARK.stop_seconds / DT))
+			Combat.grant(self,a,"SkillHit","bark","enemy"+str(enemy.id))
 			targets.append(enemy.id)
 	metrics.barks += 1
 	metrics.bark_casts += 1
@@ -1241,7 +1255,9 @@ func try_meow(a: Dictionary):
 	var nearby = enemies.filter(func(e): return not e.done and not e.flee and distance(a.pos, e.pos) <= skill.range)
 	if nearby.is_empty(): return
 	a.skill_ready.meow = tick + ceili(skill.cooldown / DT)
-	for e in nearby: e.weakened_until = tick + ceili(skill.duration / DT)
+	for e in nearby:
+		e.weakened_until = tick + ceili(skill.duration / DT)
+		Combat.grant(self,a,"SkillHit","meow","enemy"+str(e.id))
 	skill_log.append({"tick": tick, "actor": "cat_%d" % a.id, "skill": "meow", "targets": nearby.map(func(e): return e.id)})
 
 func add_resident(owned: Dictionary):
@@ -1249,12 +1265,17 @@ func add_resident(owned: Dictionary):
 	var a = owned.duplicate(true)
 	a.rarity=ProgressData.rarity(a.get("rarity",0)); a.bonus_skills=a.get("bonus_skills",[]); a.equipment=a.get("equipment",{}); a.faction=a.get("faction","owned")
 	a.loyalty = a.get("loyalty", SPECIES[a.species].loyalty)
-	a.move_speed = SPECIES[a.species].move_speed
+	var stats=AnimalData.stats(a.species,a.lv)
+	a.move_speed = stats.move_speed
 	a.detection_range = SPECIES[a.species].detection_range
 	a.attack_target_range = SPECIES[a.species].attack_target_range
-	a.attack_seconds = SPECIES[a.species].attack_seconds
+	a.attack_seconds = stats.attack_seconds
 	a.object_attack_power = SPECIES[a.species].object_attack
-	a.skills = SPECIES[a.species].skills.duplicate()
+	a.skills = stats.skills.duplicate()
+	a.defense=stats.get("defense",0)
+	a.ai_accuracy=stats.get("ai_accuracy",50)
+	a.ultimates=stats.get("ultimates",[])
+	Combat.init_actor(a,false)
 	a.skill_ready = {}
 	a.known_enemies = {}
 	a.pos = Vector2i(-10, -10)
@@ -1262,11 +1283,11 @@ func add_resident(owned: Dictionary):
 	a.deployment = "admission_pending"
 	a.home = a.pos
 	a.stamina = 100.0
-	a.max_hp = SPECIES[a.species].hp + (a.lv - 1) * 4 + (4 if "hardy" in a.bonus_skills else 0)
+	a.max_hp = stats.hp + (4 if "hardy" in a.bonus_skills else 0)
 	a.hp = clampi(a.get("hp", a.max_hp), 0, a.max_hp)
 	a.next_bark = 0
 	a.last_bark = -100
-	a.attack_power = SPECIES[a.species].attack + ((a.lv - 1) * 2 if a.species == "shiba" else 0)
+	a.attack_power = stats.attack
 	a.next_attack = 0
 	a.move_credit = 0.0
 	a.rescuing = false
