@@ -1,6 +1,7 @@
 extends Node2D
 const Assets=preload("res://game/ui_assets.gd")
 const Journal=preload("res://game/journal_view.gd")
+const ProgressArt=preload("res://game/progression_art.gd")
 const ProgressView=preload("res://game/progression_view.gd")
 var book_section="animals"
 var equipment_open=false
@@ -1084,7 +1085,8 @@ func board_click(event):
 		select_resource(cell, event.ctrl_pressed)
 		return
 	for e in world.enemies:
-		if not e.done and event.position.distance_to(get_canvas_transform() * actor_pixel("e%d" % e.id, e.pos)) < 25 * camera.zoom.x:
+		var hit=ProgressArt.bounds(self,e,true).has_point(get_canvas_transform().affine_inverse()*event.position) if e.get("archetype","") in ProgressArt.SPECIES else event.position.distance_to(get_canvas_transform() * actor_pixel("e%d" % e.id, e.pos)) < 25 * camera.zoom.x
+		if not e.done and hit:
 			tool = ""
 			group = -1
 			selected_animals.clear()
@@ -1246,6 +1248,7 @@ func _process(delta):
 			play_alert("rescue" if event.kind in ["blueprint", "keeper_recovered"] else ("restrained" if event.kind == "keeper_down" else event.kind))
 	while seen_skills < world.skill_log.size():
 		var skill=world.skill_log[seen_skills]
+		ProgressArt.skill(self,skill)
 		if skill.skill=="bark":
 			var id=int(skill.actor.trim_prefix("shiba_"))
 			for a in world.animals:
@@ -1253,6 +1256,7 @@ func _process(delta):
 		play_alert("bark" if world.skill_log[seen_skills].skill == "bark" else "collect")
 		seen_skills += 1
 	update_enemy_art()
+	for a in world.animals: ProgressArt.update(self,a,false)
 	queue_redraw()
 	hud.queue_redraw()
 	overlay.queue_redraw()
@@ -2162,6 +2166,7 @@ func keeper_hit_rect() -> Rect2:
 	return Rect2(p+Vector2(-17,-32),Vector2(34,49))
 
 func animal_hit_rect(a: Dictionary) -> Rect2:
+	if a.species in ProgressArt.SPECIES:return ProgressArt.bounds(self,a)
 	var p=actor_pixel("a%d" % a.id,a.pos)
 	var pose=actor_art.get("a%d"%a.id,{})
 	if a.species in ["hen","cat"] or pose.get("action","idle")!="idle":
@@ -2176,6 +2181,9 @@ func enemy_reaction(id: int, action: String):
 
 func update_enemy_art():
 	for e in world.enemies:
+		if e.get("archetype","kidnapper") in ProgressArt.SPECIES:
+			ProgressArt.update(self,e,true)
+			continue
 		var previous=enemy_art.get(e.id,{"action":"idle","facing":1,"at":visual_time,"cell":e.pos,"sight":0,"searching":false})
 		var dx=e.pos.x-previous.get("cell",e.pos).x
 		if dx!=0:previous.facing=1 if dx>0 else -1
@@ -2207,13 +2215,15 @@ func draw_enemy_actor(e: Dictionary):
 	draw_ready(e,p)
 	var pose=enemy_art.get(e.id,{"action":"idle","facing":1,"at":visual_time})
 	var foot=p+Vector2(0,14)
+	ProgressArt.tongue_layer(self,e,false)
 	if e.get("archetype","kidnapper")!="kidnapper":
-		ProgressView.placeholder(self,self,e.archetype,p,1.0)
+		ProgressArt.draw(self,self,e,foot,true)
 		label_on(self,p+Vector2(-20,31),e.state,12,UI.PAPER)
 	elif e.carry=="keeper":
 		Delivered.carry(self,"carry_walk" if pose.get("walking",false) else "carry_idle",pose.facing,foot,visual_time-pose.at)
 	else:
 		Delivered.draw_clip(self,"enemy/"+pose.action+("_left" if pose.facing<0 else "_right"),foot,visual_time-pose.at)
+	ProgressArt.tongue_layer(self,e,true)
 	if e.hp < e.max_hp:
 		draw_rect(Rect2(p + Vector2(-18, -48), Vector2(36, 4)), Color("3e4534"))
 		draw_rect(Rect2(p + Vector2(-18, -48), Vector2(36.0 * e.hp / e.max_hp, 4)), Color("e3aa88"))
@@ -2225,14 +2235,14 @@ func draw_enemy_actor(e: Dictionary):
 	elif "壊す" in e.state:
 		draw_line(p + Vector2(0, -24), p + Vector2(0, -38), Color("dfb981"), 3)
 		draw_line(p + Vector2(-7, -37), p + Vector2(7, -37), Color("dfb981"), 5)
-	elif not e.flee and e.carry == "":
+	elif not e.flee and e.carry == "" and e.get("archetype","kidnapper")=="kidnapper":
 		draw_circle(p + Vector2(0, -32), 4, Color("8bd2c5"))
 		draw_line(p + Vector2(-6, -24), p + Vector2(6, -24), Color("8bd2c5"), 3)
 	if debug_view: label_on(self, p + Vector2(20, 0), e.state, 12)
 	if e.hp > 0 and not e.flee and world.tick < e.sight_reaction_until: label_on(self, p + Vector2(15, -30), e.sight_reaction, 26, Color("ffe0a0"))
 	elif e.hp > 0 and not e.flee and e.state == "迷う": label_on(self, p + Vector2(15, -23), "?", 16, Color("c8cfb4"))
 	if selected.get("kind") == "enemy" and selected.id == e.id:
-		draw_rect(Rect2(p - Vector2(18, 23), Vector2(36, 49)), Color("e6c998"), false, 2)
+		draw_rect(ProgressArt.bounds(self,e,true) if e.get("archetype","") in ProgressArt.SPECIES else Rect2(p - Vector2(18, 23), Vector2(36, 49)), Color("e6c998"), false, 2)
 
 
 func draw_keeper_actor():
@@ -2293,7 +2303,7 @@ func draw_animal_actor(a: Dictionary):
 	if a.species == "shiba": draw_dog(p, a)
 	elif a.species == "cat": draw_cat(p,a)
 	elif a.species=="hen": draw_hen(p,a)
-	else: ProgressView.placeholder(self,self,a.species,p,1.0)
+	else: ProgressArt.draw(self,self,a,p+Vector2(0,14))
 	if a.get("abductor",-1)>=0: label_on(self,p+Vector2(-20,30),"連れ去り中",12,UI.DANGER)
 	if world.tick<a.get("spines_until",0): label_on(self,p+Vector2(15,-15),"棘",14,UI.GOLD)
 	var in_combat = world.enemies.any(func(e): return not e.done and not e.flee and Farm.distance(a.pos, e.pos) <= 1)

@@ -34,3 +34,5 @@ Windows、同梱Godot 4.7.2 GUIバイナリ、非対話station/desktopの作成�
 A〜F定点は `-Scenario ui_revision`（代表10枚）。中間の3画面だけなら `-Preview`。朝/商人/図鑑、予定取消、森外進入、READYは同じ入力シナリオで検査する。READY画面はゲージ・HP・初期位置を明示したフィクスチャで、通常プレイの到達記録と混同しない。
 
 AIの変更確認は `./dev.ps1 evaluate -AISeeds 2` で既存6戦略×2seedへ限定できる。完走/明示休息の抑制を確認し、勝率閾値の統計判定は既定32seedの場合のみ行う。
+
+既存9種の正式盤面モーションは `-Scenario progression_art`（代表3枚）。木を除いた検証配置で待機・特殊動作・左向き停止を撮影。関連headlessは `./dev.ps1 test -Suites progression_art`。描画状態フィクスチャと通常戦闘ロジックの回帰を区別し、通常EXEやセーブへ触れない。

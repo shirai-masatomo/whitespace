@@ -67,8 +67,32 @@ HANDOFF/manifest/原画/ライセンスを保全する。ranch v1の商人/露�
 
 ## K0〜K5の納品照合（2026-10-07）
 
-最新素材5ac00e72c4036799de89f598c0374aa8efcf8549を確認。新敵6/動物3の正式モーション、首輪/きのみは**納品済み**。今回はidle PNGをassets/adopted_uiへ必要分のみ取り込み、店・図鑑・選択カードがgame/ui_assets.gdを参照。全モーションの盤面接続は後続で、納品不足とは区別する。
+K0〜K5時点では素材5ac00e72のidleをassets/adopted_uiへ取り込み、店・図鑑・選択カードがgame/ui_assets.gdを参照。現在の盤面接続は下記。首輪/きのみも納品・UI接続済み。
 
 使用箇所/元パス/採用PNG/SHA256/納品SHAは **assets/adopted_ui/manifest.json**。HANDOFFと元manifestも同ディレクトリのdelivery-notesに保管。従来素材は変更しない。Portrait用AssetIDはanimal|enemy/<id>/portrait_ui、未指定なら正式world idleをnearest拡大する。透明余白は盤面素材から削除しない。
 
 黄金像の正式PNGは未納品。AssetID world/golden_idol/main、絵96×128/足元(48,96)は依頼用仮値、論理占有2×2は独立。素材納品時は実寸と接地で見直す。高解像度Portrait/カテゴリ/スキル/Rarityの専用PNGも未納品。既存アイコンとゲーム側ラベルで代用し、新デザインを無断生成しない。
+
+## 既存9種の盤面モーション取り込み（2026-10-07）
+
+照合元 a34390e584037cef78c9f49dcec4b18bd44f6f3d。9フォルダの本番438PNGを無改変で取り込み、全SHA256をmanifestと照合。使用元は `art_delivery/<下表のID>_motion_v1/`。`game/motion_receipt.json` が元コミット・manifestハッシュ・枚数、各manifestがPNGごとのハッシュ。`progression_art.gd` が既存状態を選び、`delivered_art.gd` が明示参照する。UIの正式idleは同じ採用像を維持。
+
+| ID | キャンバス | 足元 右 / 左 | 接続した主な特殊動作 |
+|---|---|---|---|
+| destroyer | 80×72 | (32,64) / (48,64) | 鉄球打撃、本体→武器前面 |
+| martial_artist | 64×56 | (24,50) / (40,50) | 礼・礼終了・攻撃 |
+| salaryman | 48×56 | (24,50) | 電話取出→通話→収納 |
+| ninja | 64×56 | (32,50) | 投げ動作・短刀と武器前面 |
+| animal_tamer | 64×56 | (24,50) / (40,50) | 呼びかけ・終了・連れ帰り |
+| runner | 80×72 | (40,66) | 走行・疲労開始→保持→復帰・攻撃 |
+| doberman | 64×48 | (32,44) | 攻撃・走行 |
+| bullfrog | 64×48 | (32,44) | 舌伸長→保持→収納、鳴く。舌胴のみ伸縮、対象の背面/前面巻付き |
+| hedgehog | 32×32 | (16,28) | 防御開始→保持→解除 |
+
+共通で左右の待機・移動・被弾、納品済みの退却を接続。足元は既存セル中心+(0,14)、RGBA/nearest、選択枠のみ可視範囲へ追従。既存visual_timeと停止/倍率を共有し、画像からダメージ・射程・速度を決めない。旧敵マーカーの頭上重複は除去。
+
+未接続：デストロイヤーの振りかぶり、武闘家の構え/蹴り、ドーベルマンの死亡残像（現行は即退場）、忍者の独立飛翔部品。サラリーマンの近接攻撃・新動物の睡眠専用コマ、正背面は正式納品なし。今回これらを新しい技や死亡ルールとして追加しない。
+
+`ui_world_direction_v2` のメイド/舞姫/盗賊/こけしは方向採用済み、runtime_ready=falseの案。UI/森/Portraitも方向案と本番納品を区別し、黄金像A/Bは採用未確定。本番使用可能と偽って差し替えない。
+
+関連検証と3枚の隔離GPU描画は `tools/isolated_visual.ps1 -Scenario progression_art`。制御した配置・状態を実ゲーム描画へ与える検証で、人間の通し試遊とは別。中間証拠はartifacts、review/current・Play.cmdのEXEは前回定点のまま。

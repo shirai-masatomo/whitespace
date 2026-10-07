@@ -1,0 +1,85 @@
+{
+  "source_commit": "a34390e584037cef78c9f49dcec4b18bd44f6f3d",
+  "scope": "Nine existing actors: board bodies and state motions; UI remains the previously approved identical idle. No game rules changed.",
+  "renderer": "game/progression_art.gd + generated game/delivered_art.gd",
+  "folders": [
+    {
+      "character": "destroyer",
+      "path": "art_delivery/destroyer_motion_v1",
+      "manifest_sha256": "ad3805a030b1c5e96ee973d00d1151d739bf0be6be3f8038d673bd7582090358",
+      "png_count": 78,
+      "file_hashes": "manifest.json assets[].sha256",
+      "source_commit": "a34390e584037cef78c9f49dcec4b18bd44f6f3d"
+    },
+    {
+      "character": "martial_artist",
+      "path": "art_delivery/martial_artist_motion_v1",
+      "manifest_sha256": "ed3ace7cd8e1b2fd20ea402e8ae9eaf886b8cd4338a97238e6c11c008754ee91",
+      "png_count": 54,
+      "file_hashes": "manifest.json assets[].sha256",
+      "source_commit": "a34390e584037cef78c9f49dcec4b18bd44f6f3d"
+    },
+    {
+      "character": "salaryman",
+      "path": "art_delivery/salaryman_motion_v1",
+      "manifest_sha256": "e71080d90420e5957c26e13dba5e67073bd5cb14def3f6f1cce750c1c924289f",
+      "png_count": 42,
+      "file_hashes": "manifest.json assets[].sha256",
+      "source_commit": "a34390e584037cef78c9f49dcec4b18bd44f6f3d"
+    },
+    {
+      "character": "ninja",
+      "path": "art_delivery/ninja_motion_v1",
+      "manifest_sha256": "424c808b0581ea159f2368237bde69abb0c99055e4e40b28ad8c41214c05cffc",
+      "png_count": 56,
+      "file_hashes": "manifest.json assets[].sha256",
+      "source_commit": "a34390e584037cef78c9f49dcec4b18bd44f6f3d"
+    },
+    {
+      "character": "animal_tamer",
+      "path": "art_delivery/animal_tamer_motion_v1",
+      "manifest_sha256": "d85f0ef658eebb31b73946894b6d71b0492f4aa3b224c4eab82dd8da36bdc800",
+      "png_count": 48,
+      "file_hashes": "manifest.json assets[].sha256",
+      "source_commit": "a34390e584037cef78c9f49dcec4b18bd44f6f3d"
+    },
+    {
+      "character": "runner",
+      "path": "art_delivery/runner_motion_v1",
+      "manifest_sha256": "ce647fa18e66f7d321b6bdbd27d0934456ffccd7bb0db392120531063ec38cf8",
+      "png_count": 48,
+      "file_hashes": "manifest.json assets[].sha256",
+      "source_commit": "a34390e584037cef78c9f49dcec4b18bd44f6f3d"
+    },
+    {
+      "character": "doberman",
+      "path": "art_delivery/doberman_motion_v1",
+      "manifest_sha256": "6f89c4a94605ccea85bdc9288eb41205dbb41ef7f2e8fca26b78082b506c61a2",
+      "png_count": 36,
+      "file_hashes": "manifest.json assets[].sha256",
+      "source_commit": "a34390e584037cef78c9f49dcec4b18bd44f6f3d"
+    },
+    {
+      "character": "bullfrog",
+      "path": "art_delivery/bullfrog_motion_v1",
+      "manifest_sha256": "d77236db7f9f04df5853896a6ffa7b967ec5def8057b2a3686673022e19197a0",
+      "png_count": 44,
+      "file_hashes": "manifest.json assets[].sha256",
+      "source_commit": "a34390e584037cef78c9f49dcec4b18bd44f6f3d"
+    },
+    {
+      "character": "hedgehog",
+      "path": "art_delivery/hedgehog_motion_v1",
+      "manifest_sha256": "ba2cc85e4aa1ac5e44c6058c66715f997b67ed29ca3a5f2f425873fbfcde5313",
+      "png_count": 32,
+      "file_hashes": "manifest.json assets[].sha256",
+      "source_commit": "a34390e584037cef78c9f49dcec4b18bd44f6f3d"
+    }
+  ],
+  "not_triggered_by_current_gameplay": [
+    "destroyer iron_ball_windup",
+    "martial_artist stance/kick",
+    "doberman death (logical removal is immediate)",
+    "ninja independent projectile flight parts"
+  ]
+}

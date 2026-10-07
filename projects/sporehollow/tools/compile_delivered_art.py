@@ -18,6 +18,28 @@ for folder in ['kidnapper_basic_v1', 'kidnapper_reactions_v1', 'effects_v1']:
         anchor = asset.get('anchor_px', asset.get('foot_anchor_px', [16,44]))
         times = [t/1000 if t else 1.0 for t in clip['frame_duration_ms']]
         rows.append('\t"'+prefix+name+'":{"frames":['+','.join(frames)+'],"times":'+str(times)+',"loop":'+str(clip['loop']).lower()+',"anchor":Vector2'+str(tuple(anchor))+'},')
+# Approved full motion sets; retain per-direction body and weapon anchors.
+for folder in sorted((ROOT/'art_delivery').glob('*_motion_v1')):
+    data = json.loads((folder/'manifest.json').read_text(encoding='utf-8-sig'))
+    if data.get('character_id') not in ['destroyer','martial_artist','salaryman','ninja','animal_tamer','runner','doberman','bullfrog','hedgehog']: continue
+    assets = {a['file']:a for a in data['assets']}
+    for name, clip in data['actions'].items():
+        paths=clip['frames']; first=assets[paths[0]]
+        anchor=first['foot_anchor_px']
+        load=lambda f: 'preload("res://art_delivery/'+folder.name+'/'+f+'")'
+        frames=[]
+        for i,f in enumerate(paths):
+            if clip.get('weapon_frames'):
+                weapon=clip['weapon_frames'][i]; wa=assets[weapon]['foot_anchor_px']
+                frames.append('{"body":'+load(f)+',"weapon":'+load(weapon)+',"weapon_anchor":Vector2'+str(tuple(wa))+'}')
+            else: frames.append(load(f))
+        times=[v/1000 if v else 1.0 for v in clip['frame_duration_ms']]
+        sockets=',"mouth":['+','.join('Vector2'+str(tuple(p)) for p in clip['mouth_socket_px'])+']' if clip.get('mouth_socket_px') else ''
+        rows.append('\t"'+data['character_id']+'/'+name+'":{"frames":['+','.join(frames)+'],"times":'+str(times)+',"loop":'+str(clip['loop']).lower()+',"anchor":Vector2'+str(tuple(anchor))+sockets+'},')
+rows += ['}', 'const FROG_PARTS = {']
+frog=json.loads((ROOT/'art_delivery/bullfrog_motion_v1/manifest.json').read_text(encoding='utf-8'))
+for name, part in frog['parts'].items():
+    rows.append('\t"'+name+'":{"texture":preload("res://art_delivery/bullfrog_motion_v1/'+part['file']+'"),"anchor":Vector2'+str(tuple(part['anchor_px']))+'},')
 rows += ['}', 'const RESOURCES = {']
 for kind in ['wood','soil','stone','gold']:
     rows.append('\t"'+kind+'":{'+','.join(str(n)+':preload("res://art_delivery/resource_icons_v1/'+folder+'/'+kind+'.png")' for n,folder in [(24,'hud24'),(48,'ui48'),(96,'ui96')])+'},')
@@ -41,7 +63,11 @@ static func draw_clip(c: CanvasItem, key: String, origin: Vector2, elapsed: floa
 	var index=frame_index(key,elapsed,key.begins_with("fx/"))
 	if index<0:return
 	c.texture_filter=CanvasItem.TEXTURE_FILTER_NEAREST
-	c.draw_texture(CLIPS[key].frames[index],(origin-CLIPS[key].anchor).round())
+	var frame=CLIPS[key].frames[index]
+	if frame is Dictionary:
+		c.draw_texture(frame.body,(origin-CLIPS[key].anchor).round())
+		c.draw_texture(frame.weapon,(origin-frame.weapon_anchor).round())
+	else:c.draw_texture(frame,(origin-CLIPS[key].anchor).round())
 
 static func resource(c: CanvasItem, kind: String, center: Vector2, size: float):
 	var tier=24 if size<=32 else (48 if size<=64 else 96)

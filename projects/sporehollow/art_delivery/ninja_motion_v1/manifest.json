@@ -1,0 +1,1853 @@
+{
+  "schema_version": 1,
+  "delivery": "ninja_motion_v1",
+  "date": "2026-10-06",
+  "branch": "codex/sporehollow-art-assets",
+  "status": "ready_for_implementation",
+  "character_id": "ninja",
+  "name_ja": "忍者",
+  "adopted_design": "../enemy_animal_direction_v3/",
+  "adoption_commit": "f26498d2bafe6e274a197aef0a025d5016c8691e",
+  "canvas_size_px": [
+    64,
+    56
+  ],
+  "foot_anchor_px": {
+    "right": [
+      32,
+      50
+    ],
+    "left": [
+      32,
+      50
+    ]
+  },
+  "standing_body_height_px": 34,
+  "rendering": {
+    "format": "RGBA",
+    "filter": "nearest",
+    "alpha": [
+      0,
+      255
+    ],
+    "color_key": false,
+    "trim_transparent_margin": false,
+    "baked_ground_shadow": false
+  },
+  "assets": [
+    {
+      "file": "idle/right_00.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        32,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        21,
+        16,
+        43,
+        50
+      ],
+      "action": "idle",
+      "direction": "right",
+      "frame_index": 0,
+      "frame_duration_ms": null,
+      "loop": false,
+      "layer": "body",
+      "sha256": "dd842e6f9ed59a04f54392db6f62a9380426331f6a8fc794480c50f11b0d27f2",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "idle/left_00.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        32,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        21,
+        16,
+        43,
+        50
+      ],
+      "action": "idle",
+      "direction": "left",
+      "frame_index": 0,
+      "frame_duration_ms": null,
+      "loop": false,
+      "layer": "body",
+      "sha256": "8e99855a54907e251d6b53cdf7eb14eecb5edf903ee87e67616bdf18b4b80a44",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "walk/right_00.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        32,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        24,
+        16,
+        44,
+        50
+      ],
+      "action": "walk",
+      "direction": "right",
+      "frame_index": 0,
+      "frame_duration_ms": 90,
+      "loop": true,
+      "layer": "body",
+      "sha256": "6e08dd02059cd1db35dd6787f66cdde549bb6e1b09bc8a69c12f983af11a12cd",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "walk/right_01.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        32,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        24,
+        16,
+        45,
+        50
+      ],
+      "action": "walk",
+      "direction": "right",
+      "frame_index": 1,
+      "frame_duration_ms": 90,
+      "loop": true,
+      "layer": "body",
+      "sha256": "13e04ab29ddba98be198f858f32b4c7091d646c075d8fbc3bb415600982f8d0d",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "walk/right_02.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        32,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        24,
+        16,
+        45,
+        50
+      ],
+      "action": "walk",
+      "direction": "right",
+      "frame_index": 2,
+      "frame_duration_ms": 90,
+      "loop": true,
+      "layer": "body",
+      "sha256": "6445863110061a21bb35453ceda05f522d17c1fe7e5c11226e865460d0dffe42",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "walk/right_03.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        32,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        24,
+        16,
+        44,
+        50
+      ],
+      "action": "walk",
+      "direction": "right",
+      "frame_index": 3,
+      "frame_duration_ms": 90,
+      "loop": true,
+      "layer": "body",
+      "sha256": "cd5f8a2df6eb14bc4b9b7f4fd1a903ae5672f0f130f19ce508b16c945ef3497e",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "walk/left_00.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        32,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        20,
+        16,
+        40,
+        50
+      ],
+      "action": "walk",
+      "direction": "left",
+      "frame_index": 0,
+      "frame_duration_ms": 90,
+      "loop": true,
+      "layer": "body",
+      "sha256": "d5625651fbba277fd8e2b5d2674e25df8469081ad7c865a154b0242bc82c1615",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "walk/left_01.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        32,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        19,
+        16,
+        40,
+        50
+      ],
+      "action": "walk",
+      "direction": "left",
+      "frame_index": 1,
+      "frame_duration_ms": 90,
+      "loop": true,
+      "layer": "body",
+      "sha256": "65e72c98fb06176e39b0ecbc066ccc7683ef7aeff9b9589c8603881662313aae",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "walk/left_02.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        32,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        19,
+        16,
+        40,
+        50
+      ],
+      "action": "walk",
+      "direction": "left",
+      "frame_index": 2,
+      "frame_duration_ms": 90,
+      "loop": true,
+      "layer": "body",
+      "sha256": "43972e072bdf3edaae28ee76ff0ed7b5d0e308d3bdf106df6ea2bba9e7c8df66",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "walk/left_03.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        32,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        20,
+        16,
+        40,
+        50
+      ],
+      "action": "walk",
+      "direction": "left",
+      "frame_index": 3,
+      "frame_duration_ms": 90,
+      "loop": true,
+      "layer": "body",
+      "sha256": "e5ad6edfecba2a0eb60c90bd5fa00b8f87a3aebf6c74856a741f93a32b904510",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "hurt/right_00.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        32,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        18,
+        17,
+        42,
+        50
+      ],
+      "action": "hurt",
+      "direction": "right",
+      "frame_index": 0,
+      "frame_duration_ms": 80,
+      "loop": false,
+      "layer": "body",
+      "sha256": "3ee245ac9134438d92d13facd9024ef528bfc4daebecedf466b37241f44bbef2",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "hurt/right_01.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        32,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        22,
+        16,
+        44,
+        50
+      ],
+      "action": "hurt",
+      "direction": "right",
+      "frame_index": 1,
+      "frame_duration_ms": 120,
+      "loop": false,
+      "layer": "body",
+      "sha256": "1f3ece377106c6cabe32c5e8f09ac2fef53267bbffbf11535e5795cc236531f9",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "hurt/right_02.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        32,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        21,
+        16,
+        43,
+        50
+      ],
+      "action": "hurt",
+      "direction": "right",
+      "frame_index": 2,
+      "frame_duration_ms": 120,
+      "loop": false,
+      "layer": "body",
+      "sha256": "dd842e6f9ed59a04f54392db6f62a9380426331f6a8fc794480c50f11b0d27f2",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "hurt/left_00.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        32,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        22,
+        17,
+        46,
+        50
+      ],
+      "action": "hurt",
+      "direction": "left",
+      "frame_index": 0,
+      "frame_duration_ms": 80,
+      "loop": false,
+      "layer": "body",
+      "sha256": "c688c64aa337ba03c8e539d95d5e6330d97afec336bd10d121b60c3c281ef7ff",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "hurt/left_01.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        32,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        20,
+        16,
+        42,
+        50
+      ],
+      "action": "hurt",
+      "direction": "left",
+      "frame_index": 1,
+      "frame_duration_ms": 120,
+      "loop": false,
+      "layer": "body",
+      "sha256": "45009a8100a3c00a920658ff31ad676593e8952792b18ba393d9ff5bbf776df9",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "hurt/left_02.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        32,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        21,
+        16,
+        43,
+        50
+      ],
+      "action": "hurt",
+      "direction": "left",
+      "frame_index": 2,
+      "frame_duration_ms": 120,
+      "loop": false,
+      "layer": "body",
+      "sha256": "8e99855a54907e251d6b53cdf7eb14eecb5edf903ee87e67616bdf18b4b80a44",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "retreat/right_00.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        32,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        24,
+        16,
+        44,
+        50
+      ],
+      "action": "retreat",
+      "direction": "right",
+      "frame_index": 0,
+      "frame_duration_ms": 100,
+      "loop": true,
+      "layer": "body",
+      "sha256": "6e08dd02059cd1db35dd6787f66cdde549bb6e1b09bc8a69c12f983af11a12cd",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "retreat/right_01.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        32,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        24,
+        16,
+        45,
+        50
+      ],
+      "action": "retreat",
+      "direction": "right",
+      "frame_index": 1,
+      "frame_duration_ms": 100,
+      "loop": true,
+      "layer": "body",
+      "sha256": "13e04ab29ddba98be198f858f32b4c7091d646c075d8fbc3bb415600982f8d0d",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "retreat/right_02.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        32,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        24,
+        16,
+        45,
+        50
+      ],
+      "action": "retreat",
+      "direction": "right",
+      "frame_index": 2,
+      "frame_duration_ms": 100,
+      "loop": true,
+      "layer": "body",
+      "sha256": "6445863110061a21bb35453ceda05f522d17c1fe7e5c11226e865460d0dffe42",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "retreat/right_03.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        32,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        24,
+        16,
+        44,
+        50
+      ],
+      "action": "retreat",
+      "direction": "right",
+      "frame_index": 3,
+      "frame_duration_ms": 100,
+      "loop": true,
+      "layer": "body",
+      "sha256": "cd5f8a2df6eb14bc4b9b7f4fd1a903ae5672f0f130f19ce508b16c945ef3497e",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "retreat/left_00.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        32,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        20,
+        16,
+        40,
+        50
+      ],
+      "action": "retreat",
+      "direction": "left",
+      "frame_index": 0,
+      "frame_duration_ms": 100,
+      "loop": true,
+      "layer": "body",
+      "sha256": "d5625651fbba277fd8e2b5d2674e25df8469081ad7c865a154b0242bc82c1615",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "retreat/left_01.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        32,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        19,
+        16,
+        40,
+        50
+      ],
+      "action": "retreat",
+      "direction": "left",
+      "frame_index": 1,
+      "frame_duration_ms": 100,
+      "loop": true,
+      "layer": "body",
+      "sha256": "65e72c98fb06176e39b0ecbc066ccc7683ef7aeff9b9589c8603881662313aae",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "retreat/left_02.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        32,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        19,
+        16,
+        40,
+        50
+      ],
+      "action": "retreat",
+      "direction": "left",
+      "frame_index": 2,
+      "frame_duration_ms": 100,
+      "loop": true,
+      "layer": "body",
+      "sha256": "43972e072bdf3edaae28ee76ff0ed7b5d0e308d3bdf106df6ea2bba9e7c8df66",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "retreat/left_03.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        32,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        20,
+        16,
+        40,
+        50
+      ],
+      "action": "retreat",
+      "direction": "left",
+      "frame_index": 3,
+      "frame_duration_ms": 100,
+      "loop": true,
+      "layer": "body",
+      "sha256": "e5ad6edfecba2a0eb60c90bd5fa00b8f87a3aebf6c74856a741f93a32b904510",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "shuriken/right_00.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        32,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        21,
+        16,
+        43,
+        50
+      ],
+      "action": "shuriken",
+      "direction": "right",
+      "frame_index": 0,
+      "frame_duration_ms": 70,
+      "loop": false,
+      "layer": "body",
+      "sha256": "dd842e6f9ed59a04f54392db6f62a9380426331f6a8fc794480c50f11b0d27f2",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "shuriken/right_01.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        32,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        19,
+        16,
+        45,
+        50
+      ],
+      "action": "shuriken",
+      "direction": "right",
+      "frame_index": 1,
+      "frame_duration_ms": 100,
+      "loop": false,
+      "layer": "body",
+      "sha256": "202fcec254638593a09161004153ba1a77fce3f051d4c3ca915bc094a332a594",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "shuriken/right_02.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        32,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        21,
+        20,
+        54,
+        50
+      ],
+      "action": "shuriken",
+      "direction": "right",
+      "frame_index": 2,
+      "frame_duration_ms": 60,
+      "loop": false,
+      "layer": "body",
+      "sha256": "9c298c3156260041ddbd7d2274a2e160a6b2a503b1c241dcbcf6c0e9aaeec4fc",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "shuriken/right_03.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        32,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        21,
+        21,
+        47,
+        50
+      ],
+      "action": "shuriken",
+      "direction": "right",
+      "frame_index": 3,
+      "frame_duration_ms": 90,
+      "loop": false,
+      "layer": "body",
+      "sha256": "0e29474f8b902527b44ccde61469723b56a591f3b737b2b09bbe2de480ef2fc0",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "shuriken/right_04.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        32,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        21,
+        16,
+        43,
+        50
+      ],
+      "action": "shuriken",
+      "direction": "right",
+      "frame_index": 4,
+      "frame_duration_ms": 100,
+      "loop": false,
+      "layer": "body",
+      "sha256": "dd842e6f9ed59a04f54392db6f62a9380426331f6a8fc794480c50f11b0d27f2",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "shuriken/left_00.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        32,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        21,
+        16,
+        43,
+        50
+      ],
+      "action": "shuriken",
+      "direction": "left",
+      "frame_index": 0,
+      "frame_duration_ms": 70,
+      "loop": false,
+      "layer": "body",
+      "sha256": "8e99855a54907e251d6b53cdf7eb14eecb5edf903ee87e67616bdf18b4b80a44",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "shuriken/left_01.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        32,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        19,
+        16,
+        45,
+        50
+      ],
+      "action": "shuriken",
+      "direction": "left",
+      "frame_index": 1,
+      "frame_duration_ms": 100,
+      "loop": false,
+      "layer": "body",
+      "sha256": "98cc37fc79554e5afc2079fe06a7fb825d2d7dcb7c02c5494563a028753ae636",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "shuriken/left_02.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        32,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        10,
+        20,
+        43,
+        50
+      ],
+      "action": "shuriken",
+      "direction": "left",
+      "frame_index": 2,
+      "frame_duration_ms": 60,
+      "loop": false,
+      "layer": "body",
+      "sha256": "36e37aff4ab6264b370db89024db0ccd502421c26ad9c6f5d6461df3691b67cd",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "shuriken/left_03.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        32,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        17,
+        21,
+        43,
+        50
+      ],
+      "action": "shuriken",
+      "direction": "left",
+      "frame_index": 3,
+      "frame_duration_ms": 90,
+      "loop": false,
+      "layer": "body",
+      "sha256": "5efe04d78dccad23d1601f1692d51fda112320d48012879a2ca33eb82497cbbf",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "shuriken/left_04.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        32,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        21,
+        16,
+        43,
+        50
+      ],
+      "action": "shuriken",
+      "direction": "left",
+      "frame_index": 4,
+      "frame_duration_ms": 100,
+      "loop": false,
+      "layer": "body",
+      "sha256": "8e99855a54907e251d6b53cdf7eb14eecb5edf903ee87e67616bdf18b4b80a44",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "dagger/right_00.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        32,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        20,
+        17,
+        47,
+        50
+      ],
+      "action": "dagger",
+      "direction": "right",
+      "frame_index": 0,
+      "frame_duration_ms": 100,
+      "loop": false,
+      "layer": "body",
+      "sha256": "a4e2e62739effe3338fe123340b404a32819f8381053fd9f1924a0aceeffef4a",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "dagger/right_01.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        32,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        18,
+        17,
+        48,
+        50
+      ],
+      "action": "dagger",
+      "direction": "right",
+      "frame_index": 1,
+      "frame_duration_ms": 70,
+      "loop": false,
+      "layer": "body",
+      "sha256": "ee5b7a1f9d83c149a1441ef1c972a36581efbe5d69e5ccd549db732cc666f406",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "dagger/right_02.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        32,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        20,
+        17,
+        47,
+        50
+      ],
+      "action": "dagger",
+      "direction": "right",
+      "frame_index": 2,
+      "frame_duration_ms": 90,
+      "loop": false,
+      "layer": "body",
+      "sha256": "a4e2e62739effe3338fe123340b404a32819f8381053fd9f1924a0aceeffef4a",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "dagger/right_03.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        32,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        21,
+        16,
+        43,
+        50
+      ],
+      "action": "dagger",
+      "direction": "right",
+      "frame_index": 3,
+      "frame_duration_ms": 120,
+      "loop": false,
+      "layer": "body",
+      "sha256": "dd842e6f9ed59a04f54392db6f62a9380426331f6a8fc794480c50f11b0d27f2",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "dagger/left_00.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        32,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        17,
+        17,
+        44,
+        50
+      ],
+      "action": "dagger",
+      "direction": "left",
+      "frame_index": 0,
+      "frame_duration_ms": 100,
+      "loop": false,
+      "layer": "body",
+      "sha256": "2bd86461856d9463dd3f6c2767ae0b88fb34365cdf28d711626cdcb62e78a498",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "dagger/left_01.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        32,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        16,
+        17,
+        46,
+        50
+      ],
+      "action": "dagger",
+      "direction": "left",
+      "frame_index": 1,
+      "frame_duration_ms": 70,
+      "loop": false,
+      "layer": "body",
+      "sha256": "b88f7e42c0fb06e489cef8dbc017509a96870375ead77b4f27d5932957282a3b",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "dagger/left_02.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        32,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        17,
+        17,
+        44,
+        50
+      ],
+      "action": "dagger",
+      "direction": "left",
+      "frame_index": 2,
+      "frame_duration_ms": 90,
+      "loop": false,
+      "layer": "body",
+      "sha256": "2bd86461856d9463dd3f6c2767ae0b88fb34365cdf28d711626cdcb62e78a498",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "dagger/left_03.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        32,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        21,
+        16,
+        43,
+        50
+      ],
+      "action": "dagger",
+      "direction": "left",
+      "frame_index": 3,
+      "frame_duration_ms": 120,
+      "loop": false,
+      "layer": "body",
+      "sha256": "8e99855a54907e251d6b53cdf7eb14eecb5edf903ee87e67616bdf18b4b80a44",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "parts/shuriken.png",
+      "canvas_size_px": [
+        7,
+        7
+      ],
+      "foot_anchor_px": null,
+      "visible_bbox_exclusive_px": [
+        0,
+        0,
+        7,
+        7
+      ],
+      "action": "part",
+      "direction": "none",
+      "frame_index": 0,
+      "frame_duration_ms": null,
+      "loop": false,
+      "layer": "part",
+      "sha256": "9f84717157c505f6f5e33b9362de680c1a5f5fa0616886c7eb3acae4c3412102",
+      "runtime_ready": true,
+      "contains_cast_shadow": false,
+      "anchor_px": [
+        3,
+        3
+      ],
+      "use": "independent projectile; no hit logic"
+    },
+    {
+      "file": "parts/dagger.png",
+      "canvas_size_px": [
+        14,
+        5
+      ],
+      "foot_anchor_px": null,
+      "visible_bbox_exclusive_px": [
+        0,
+        0,
+        14,
+        5
+      ],
+      "action": "part",
+      "direction": "none",
+      "frame_index": 0,
+      "frame_duration_ms": null,
+      "loop": false,
+      "layer": "part",
+      "sha256": "b1be7cfcd3ce4e3e22ab855874f6a1536c816d70427838c22341461d416726af",
+      "runtime_ready": true,
+      "contains_cast_shadow": false,
+      "anchor_px": [
+        1,
+        2
+      ],
+      "use": "grip pivot"
+    },
+    {
+      "file": "projectile/shuriken_00.png",
+      "canvas_size_px": [
+        11,
+        11
+      ],
+      "foot_anchor_px": null,
+      "visible_bbox_exclusive_px": [
+        2,
+        2,
+        9,
+        9
+      ],
+      "action": "projectile",
+      "direction": "none",
+      "frame_index": 0,
+      "frame_duration_ms": 80,
+      "loop": true,
+      "layer": "projectile",
+      "sha256": "876296b19bbd1fb41fc3dfd6e9a7045334cd5761c65c010367e05c49e0639263",
+      "runtime_ready": true,
+      "contains_cast_shadow": false,
+      "anchor_px": [
+        5,
+        5
+      ]
+    },
+    {
+      "file": "projectile/shuriken_01.png",
+      "canvas_size_px": [
+        11,
+        11
+      ],
+      "foot_anchor_px": null,
+      "visible_bbox_exclusive_px": [
+        3,
+        3,
+        8,
+        8
+      ],
+      "action": "projectile",
+      "direction": "none",
+      "frame_index": 1,
+      "frame_duration_ms": 80,
+      "loop": true,
+      "layer": "projectile",
+      "sha256": "46a1ea8729475d1fdc84711b66848fa0e3af08855fc53b23865218b8aefe0d57",
+      "runtime_ready": true,
+      "contains_cast_shadow": false,
+      "anchor_px": [
+        5,
+        5
+      ]
+    },
+    {
+      "file": "projectile/shuriken_02.png",
+      "canvas_size_px": [
+        11,
+        11
+      ],
+      "foot_anchor_px": null,
+      "visible_bbox_exclusive_px": [
+        2,
+        2,
+        9,
+        9
+      ],
+      "action": "projectile",
+      "direction": "none",
+      "frame_index": 2,
+      "frame_duration_ms": 80,
+      "loop": true,
+      "layer": "projectile",
+      "sha256": "444f834471d9f0d659b05bb9bca5d1c55a65050d31810b960911782d35ffc0da",
+      "runtime_ready": true,
+      "contains_cast_shadow": false,
+      "anchor_px": [
+        5,
+        5
+      ]
+    },
+    {
+      "file": "projectile/shuriken_03.png",
+      "canvas_size_px": [
+        11,
+        11
+      ],
+      "foot_anchor_px": null,
+      "visible_bbox_exclusive_px": [
+        3,
+        3,
+        8,
+        8
+      ],
+      "action": "projectile",
+      "direction": "none",
+      "frame_index": 3,
+      "frame_duration_ms": 80,
+      "loop": true,
+      "layer": "projectile",
+      "sha256": "ff10c6d14f92a4b80e410ab58c9f87ca4395b0447eadda28bef6fa7683ea5dec",
+      "runtime_ready": true,
+      "contains_cast_shadow": false,
+      "anchor_px": [
+        5,
+        5
+      ]
+    },
+    {
+      "file": "weapon/dagger/right_00.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        32,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        20,
+        19,
+        25,
+        33
+      ],
+      "action": "dagger",
+      "direction": "right",
+      "frame_index": 0,
+      "frame_duration_ms": 100,
+      "loop": false,
+      "layer": "weapon_front",
+      "sha256": "4b6a45c2669625eaf1cadebee3cf6e1db304d89b4bec4ea59f92ea57f8888bdf",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "weapon/dagger/left_00.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        32,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        39,
+        19,
+        44,
+        33
+      ],
+      "action": "dagger",
+      "direction": "left",
+      "frame_index": 0,
+      "frame_duration_ms": 100,
+      "loop": false,
+      "layer": "weapon_front",
+      "sha256": "b07cc5f4f6ea3ba8f3f2b8b6fec930068aca3ca58a78a5f7736c6a595e650e26",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "weapon/dagger/right_01.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        32,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        44,
+        29,
+        58,
+        34
+      ],
+      "action": "dagger",
+      "direction": "right",
+      "frame_index": 1,
+      "frame_duration_ms": 70,
+      "loop": false,
+      "layer": "weapon_front",
+      "sha256": "fa2b87c054b36bb33ede2dbf19f6ab92ac52f8356908f7a2b00c0b0a00efbf19",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "weapon/dagger/left_01.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        32,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        6,
+        29,
+        20,
+        34
+      ],
+      "action": "dagger",
+      "direction": "left",
+      "frame_index": 1,
+      "frame_duration_ms": 70,
+      "loop": false,
+      "layer": "weapon_front",
+      "sha256": "2533abba13a164e9bac16f7a581dd00416b5dc939281f5fc0aeccb40b573006e",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "weapon/dagger/right_02.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        32,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        20,
+        19,
+        25,
+        33
+      ],
+      "action": "dagger",
+      "direction": "right",
+      "frame_index": 2,
+      "frame_duration_ms": 90,
+      "loop": false,
+      "layer": "weapon_front",
+      "sha256": "4b6a45c2669625eaf1cadebee3cf6e1db304d89b4bec4ea59f92ea57f8888bdf",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "weapon/dagger/left_02.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        32,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        39,
+        19,
+        44,
+        33
+      ],
+      "action": "dagger",
+      "direction": "left",
+      "frame_index": 2,
+      "frame_duration_ms": 90,
+      "loop": false,
+      "layer": "weapon_front",
+      "sha256": "b07cc5f4f6ea3ba8f3f2b8b6fec930068aca3ca58a78a5f7736c6a595e650e26",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "weapon/dagger/right_03.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        32,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        39,
+        38,
+        47,
+        50
+      ],
+      "action": "dagger",
+      "direction": "right",
+      "frame_index": 3,
+      "frame_duration_ms": 120,
+      "loop": false,
+      "layer": "weapon_front",
+      "sha256": "578526aad686c3e12f38d444b5aa97b9c01961d62c1882c427759e755cf5b785",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "weapon/dagger/left_03.png",
+      "canvas_size_px": [
+        64,
+        56
+      ],
+      "foot_anchor_px": [
+        32,
+        50
+      ],
+      "visible_bbox_exclusive_px": [
+        17,
+        38,
+        25,
+        50
+      ],
+      "action": "dagger",
+      "direction": "left",
+      "frame_index": 3,
+      "frame_duration_ms": 120,
+      "loop": false,
+      "layer": "weapon_front",
+      "sha256": "98492e65ef7d64f81d98706fde3940a8e967109f9867368c0f56cde3d9741fe2",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    }
+  ],
+  "actions": {
+    "idle_right": {
+      "action_id": "idle",
+      "direction": "right",
+      "frames": [
+        "idle/right_00.png"
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "end_behavior": "hold"
+    },
+    "idle_left": {
+      "action_id": "idle",
+      "direction": "left",
+      "frames": [
+        "idle/left_00.png"
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "end_behavior": "hold"
+    },
+    "walk_right": {
+      "action_id": "walk",
+      "direction": "right",
+      "frames": [
+        "walk/right_00.png",
+        "walk/right_01.png",
+        "walk/right_02.png",
+        "walk/right_03.png"
+      ],
+      "frame_duration_ms": [
+        90,
+        90,
+        90,
+        90
+      ],
+      "loop": true,
+      "end_behavior": "repeat while state active"
+    },
+    "walk_left": {
+      "action_id": "walk",
+      "direction": "left",
+      "frames": [
+        "walk/left_00.png",
+        "walk/left_01.png",
+        "walk/left_02.png",
+        "walk/left_03.png"
+      ],
+      "frame_duration_ms": [
+        90,
+        90,
+        90,
+        90
+      ],
+      "loop": true,
+      "end_behavior": "repeat while state active"
+    },
+    "hurt_right": {
+      "action_id": "hurt",
+      "direction": "right",
+      "frames": [
+        "hurt/right_00.png",
+        "hurt/right_01.png",
+        "hurt/right_02.png"
+      ],
+      "frame_duration_ms": [
+        80,
+        120,
+        120
+      ],
+      "loop": false,
+      "end_behavior": "return to state-selected pose"
+    },
+    "hurt_left": {
+      "action_id": "hurt",
+      "direction": "left",
+      "frames": [
+        "hurt/left_00.png",
+        "hurt/left_01.png",
+        "hurt/left_02.png"
+      ],
+      "frame_duration_ms": [
+        80,
+        120,
+        120
+      ],
+      "loop": false,
+      "end_behavior": "return to state-selected pose"
+    },
+    "retreat_right": {
+      "action_id": "retreat",
+      "direction": "right",
+      "frames": [
+        "retreat/right_00.png",
+        "retreat/right_01.png",
+        "retreat/right_02.png",
+        "retreat/right_03.png"
+      ],
+      "frame_duration_ms": [
+        100,
+        100,
+        100,
+        100
+      ],
+      "loop": true,
+      "end_behavior": "repeat while state active",
+      "alive": true
+    },
+    "retreat_left": {
+      "action_id": "retreat",
+      "direction": "left",
+      "frames": [
+        "retreat/left_00.png",
+        "retreat/left_01.png",
+        "retreat/left_02.png",
+        "retreat/left_03.png"
+      ],
+      "frame_duration_ms": [
+        100,
+        100,
+        100,
+        100
+      ],
+      "loop": true,
+      "end_behavior": "repeat while state active",
+      "alive": true
+    },
+    "shuriken_right": {
+      "action_id": "shuriken",
+      "direction": "right",
+      "frames": [
+        "shuriken/right_00.png",
+        "shuriken/right_01.png",
+        "shuriken/right_02.png",
+        "shuriken/right_03.png",
+        "shuriken/right_04.png"
+      ],
+      "frame_duration_ms": [
+        70,
+        100,
+        60,
+        90,
+        100
+      ],
+      "loop": false,
+      "end_behavior": "return to state-selected pose",
+      "visual_release_frame": 2
+    },
+    "shuriken_left": {
+      "action_id": "shuriken",
+      "direction": "left",
+      "frames": [
+        "shuriken/left_00.png",
+        "shuriken/left_01.png",
+        "shuriken/left_02.png",
+        "shuriken/left_03.png",
+        "shuriken/left_04.png"
+      ],
+      "frame_duration_ms": [
+        70,
+        100,
+        60,
+        90,
+        100
+      ],
+      "loop": false,
+      "end_behavior": "return to state-selected pose",
+      "visual_release_frame": 2
+    },
+    "dagger_right": {
+      "action_id": "dagger",
+      "direction": "right",
+      "frames": [
+        "dagger/right_00.png",
+        "dagger/right_01.png",
+        "dagger/right_02.png",
+        "dagger/right_03.png"
+      ],
+      "frame_duration_ms": [
+        100,
+        70,
+        90,
+        120
+      ],
+      "loop": false,
+      "end_behavior": "return to state-selected pose",
+      "visual_contact_frame": 1,
+      "weapon_frames": [
+        "weapon/dagger/right_00.png",
+        "weapon/dagger/right_01.png",
+        "weapon/dagger/right_02.png",
+        "weapon/dagger/right_03.png"
+      ],
+      "layer_order": [
+        "body",
+        "weapon_front"
+      ]
+    },
+    "dagger_left": {
+      "action_id": "dagger",
+      "direction": "left",
+      "frames": [
+        "dagger/left_00.png",
+        "dagger/left_01.png",
+        "dagger/left_02.png",
+        "dagger/left_03.png"
+      ],
+      "frame_duration_ms": [
+        100,
+        70,
+        90,
+        120
+      ],
+      "loop": false,
+      "end_behavior": "return to state-selected pose",
+      "visual_contact_frame": 1,
+      "weapon_frames": [
+        "weapon/dagger/left_00.png",
+        "weapon/dagger/left_01.png",
+        "weapon/dagger/left_02.png",
+        "weapon/dagger/left_03.png"
+      ],
+      "layer_order": [
+        "body",
+        "weapon_front"
+      ]
+    }
+  },
+  "parts": {
+    "shuriken": {
+      "file": "parts/shuriken.png",
+      "anchor_px": [
+        3,
+        3
+      ],
+      "use": "independent projectile; no hit logic"
+    },
+    "dagger": {
+      "file": "parts/dagger.png",
+      "anchor_px": [
+        1,
+        2
+      ],
+      "use": "grip pivot"
+    }
+  },
+  "sockets": {
+    "dagger": [
+      {
+        "grip_body_px": [
+          22,
+          31
+        ]
+      },
+      {
+        "grip_body_px": [
+          45,
+          31
+        ]
+      },
+      {
+        "grip_body_px": [
+          22,
+          31
+        ]
+      },
+      {
+        "grip_body_px": [
+          40,
+          39
+        ]
+      }
+    ],
+    "shuriken": {
+      "release_frame": 2,
+      "right_body_px": [
+        51,
+        32
+      ],
+      "left_body_px": [
+        13,
+        32
+      ]
+    }
+  },
+  "timing_policy": "Presentation cadence only; synchronize existing visual clock and pause. State durations, damage, range, speed, HP and probabilities remain implementation rules. Contact/release indices are visual cues, not gameplay triggers.",
+  "sources": {
+    "original": "../../art-production/ninja-motion-v1/originals/motion-sheet.png",
+    "generation_record": "../../art-production/ninja-motion-v1/generation-record.json",
+    "processing": "../../art-production/motion-pipeline-v1/build.py",
+    "adopted_keys": "../enemy_animal_direction_v3/pose_drafts/ninja/"
+  },
+  "spec_snapshots": [
+    {
+      "file": "../../art-production/ninja-motion-v1/references/ART_SPEC.md",
+      "sha256": "c399f4d5aaa06be8d2a5792f25adacf815c449ca8ddb6947e82a9b7e6d6a25e6"
+    },
+    {
+      "file": "../../art-production/ninja-motion-v1/references/ENEMIES.md",
+      "sha256": "5d74287e74b84a705a14eee9cd53844e3392d959b42b71b6f952f90be1dd9004"
+    },
+    {
+      "file": "../../art-production/ninja-motion-v1/references/ANIMALS.md",
+      "sha256": "c379cf5328455558712d4e856bc398336456697449a8d0efc773a8c4f3c1c935"
+    }
+  ],
+  "unfinished": [
+    "正面・背面の専用動作は今回の横向き契約外",
+    "ゲーム取り込みと隔離描画検証は実装担当"
+  ],
+  "game_launched": false,
+  "in_game_verified": false,
+  "projectile_animation": {
+    "frames": [
+      "projectile/shuriken_00.png",
+      "projectile/shuriken_01.png",
+      "projectile/shuriken_02.png",
+      "projectile/shuriken_03.png"
+    ],
+    "anchor_px": [
+      5,
+      5
+    ],
+    "frame_duration_ms": [
+      80,
+      80,
+      80,
+      80
+    ],
+    "loop": true,
+    "movement": "existing projectile logic"
+  },
+  "scroll_drop": {
+    "source": "../ranch_assets_v1/scroll/idle_none_00.png",
+    "independent_from_actor": true,
+    "spawn_once_on_existing_retreat_transition": "implementation rule, not a repeated animation event",
+    "smoke_included": false,
+    "canvas_size_px": [
+      24,
+      24
+    ],
+    "foot_anchor_px": [
+      12,
+      22
+    ]
+  }
+}

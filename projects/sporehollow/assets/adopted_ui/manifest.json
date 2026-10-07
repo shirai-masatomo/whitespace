@@ -1,6 +1,6 @@
 {
   "delivery_commit": "5ac00e72c4036799de89f598c0374aa8efcf8549",
-  "scope": "Only the listed static assets imported. Full motions remain delivered / integration pending. Source manifests are evidence, not import inventories.",
+  "scope": "Static UI imports from this receipt. World motion integration is recorded separately in game/motion_receipt.json.",
   "assets": [
     {
       "id": "destroyer",
