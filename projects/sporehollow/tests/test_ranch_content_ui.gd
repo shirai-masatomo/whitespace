@@ -46,7 +46,7 @@ func run():
 	await capture("02_portrait_rarity_skill")
 	w.phase="day";game.morning_screen="morning";game.shop_side="buy";game.book_motion="";game.training_id=-1
 	for id in ["dancer","thief","destroyer","martial_artist","ninja"]:
-		w.spawn_enemy({"role":id,"entry":w.entries[0],"debug_single":true});var e=w.enemies.back();e.pos=Vector2i(6+w.enemies.size()*2,12);e.facing=-1
+		w.spawn_enemy({"role":id,"entry":w.entries[0],"debug_single":true});var e=w.enemies.back();e.pos=Vector2i(6+w.enemies.size()*2,11);e.facing=-1
 	var dancer=w.enemies[0];dancer.action_id="fan_spread"
 	var thief=w.enemies[1];thief.action_id="poison_windup";thief.poison_fired=w.tick;thief.poison_visual_until=w.tick+3;thief.poison_target=w.keeper.pos
 	var maid=w.animals[1];maid.action_id="rage";maid.ultimate_gauge=100
