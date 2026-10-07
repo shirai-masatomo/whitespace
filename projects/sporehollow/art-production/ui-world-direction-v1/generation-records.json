@@ -1,0 +1,218 @@
+[
+  {
+    "id": "goldA",
+    "prompt": "Use case: stylized-concept. Asset: single transparent pixel-art game golden idol concept A for Whistle Ranch. NOT a scene. Ancient ominous unknown nonhuman monster relic, heavy tarnished GOLD, squat coiled body with four strange short claw limbs, a giant hollow vertical toothless mouth in its belly, two unequal branching horns, one small dark eye on an off-center hump. Asymmetric but compact, utterly inexplicable artifact brought home by father, not Buddha, god, human, dragon or friendly mascot. No gore. Slight top-down three-quarter front view appropriate to orthographic 2D farm game. Deliberate crisp square pixel clusters with dark umber outline, muted gold ochre cream highlights upper-left, restrained patina. Broad low plinth occupying 2x2 ground cells, all parts on one base. Entire object isolated, no ground shadow, no glow, no scenery, no lettering or symbols resembling text. Will be prepared on 144x160 native game canvas, readable silhouette and sparse texture. Draw one concept only, large centered with generous transparent margin.",
+    "output_hint": "Generated images are saved to C:\\Users\\masat\\.codex\\generated_images\\01a1062f-6339-7812-baec-d517611755ca as C:\\Users\\masat\\.codex\\generated_images\\01a1062f-6339-7812-baec-d517611755ca\\exec-a1d85ff5-a25c-4b60-abbe-04fcc0b8acbb.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+    "tool": "built_in_image_gen",
+    "transparent_background_requested": true,
+    "input_references": []
+  },
+  {
+    "id": "goldB",
+    "prompt": "Use case: stylized-concept. Single transparent pixel art GAME ASSET golden idol concept B: an ominous unidentified ancient golden creature, broad low crab-like shell with an offset huge slit mouth, five irregular hooked legs curling inward, three unequal crescent horns growing from shell, no recognizable animal species. Heavy aged gold bronze ochre, cream upper-left highlights, very sparse muted teal patina. Strong dark umber silhouette, crisp intentional square pixel clusters, readable at native144x160. Orthographic farm RPG slight top view, low rectangular weathered plinth, artifact occupies2x2cells. Unsettling inexplicable relic father brought home, no gore, no human anatomy, no Buddha/religious icon, no friendly eyes. Entire one object centered with transparent margin. No text, scenery, glow or cast ground shadow. Distinct broad silhouette, not tall totem.",
+    "output_hint": "Generated images are saved to C:\\Users\\masat\\.codex\\generated_images\\01a1062f-6339-7812-baec-d517611755ca as C:\\Users\\masat\\.codex\\generated_images\\01a1062f-6339-7812-baec-d517611755ca\\exec-2f364de6-36c7-4b3d-8d8f-a15cd5dde278.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+    "tool": "built_in_image_gen",
+    "transparent_background_requested": true,
+    "input_references": []
+  },
+  {
+    "id": "tree_a",
+    "prompt": "Use case: stylized-concept. One transparent pixel-art orthographic 2D farm game tree asset, ancient mature broadleaf oak with broad irregular compact canopy, crooked substantial trunk clearly visible for lower third, roots meeting one foot point. Muted olive sage moss green and warm brown, dark brown selective outline, upper-left light. Deliberate chunky square clusters, sparse readable leaves NOT thousands of tiny noisy leaves, compatible with a 64x80 native sprite. Slight top-down three-quarter game view, no isometric diamond, no ground patch, no shadow, no props, no text. Entire tree isolated with transparent padding, canopy fitswidth and trunk centeredbottom.",
+    "output_hint": "Generated images are saved to C:\\Users\\masat\\.codex\\generated_images\\01a1062f-6339-7812-baec-d517611755ca as C:\\Users\\masat\\.codex\\generated_images\\01a1062f-6339-7812-baec-d517611755ca\\exec-9e2f0aa2-e7be-4449-b437-a3ce50307d44.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+    "tool": "built_in_image_gen",
+    "transparent_background_requested": true,
+    "input_references": []
+  },
+  {
+    "id": "tree_b",
+    "prompt": "Use case: stylized-concept. One isolated transparent pixel-art TREE asset for top-down 2D farm game. Ordinary mature broadleaf tree: compact oval somewhat asymmetric canopy, sturdy upright single brown trunk visiblelowerthird and small flaredroots. Muted forest green olive sage, dark green shadows, warmbrown trunk, upper-left light. Crisp bold square pixel clusters and simplified groupedfoliage readable at64x80, no noisyindividualleaves. Entiretreewithpadding. No scene groundpatch shadow objects text or other trees. Orthographic farmRPG slight topview, notisometric. Distinctfrom ancientcrookedoak: younger straighter roundercrown.",
+    "output_hint": "Generated images are saved to C:\\Users\\masat\\.codex\\generated_images\\01a1062f-6339-7812-baec-d517611755ca as C:\\Users\\masat\\.codex\\generated_images\\01a1062f-6339-7812-baec-d517611755ca\\exec-528eb528-f5a6-4679-95e6-461ee621aca8.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+    "tool": "built_in_image_gen",
+    "transparent_background_requested": true,
+    "input_references": []
+  },
+  {
+    "id": "tree_c",
+    "prompt": "Use case: stylized-concept. One isolated transparent pixel art young broadleaf tree for orthographic farmRPG, small slender upright warm brown trunk, sparse asymmetrical three lobed olive sage canopy, airy gaps with little branches visible, clearly visible lowertrunk and smallrootfoot. Crisp deliberate chunky squarepixel clusters, upper-leftlight, darkumberoutline, muted warmnaturalgreen not neon. Readable atnative64x80canvas but saplingbodyroughly52pxhigh comparedmature68px. No text scenery groundpatch castshadow or props. Entiretree centeredwithtransparentmargins.",
+    "output_hint": "Generated images are saved to C:\\Users\\masat\\.codex\\generated_images\\01a1062f-6339-7812-baec-d517611755ca as C:\\Users\\masat\\.codex\\generated_images\\01a1062f-6339-7812-baec-d517611755ca\\exec-e04e61d9-e297-42fc-ba70-fab758a96284.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+    "tool": "built_in_image_gen",
+    "transparent_background_requested": true,
+    "input_references": []
+  },
+  {
+    "id": "portrait_shiba",
+    "prompt": "Use case: identity-preserve. NEW UI PORTRAIT of the exact adopted orange and cream Shiba in reference (reference is an enlarged field sprite, not a target to upscale). Draw fresh detailed pixelart for192x192 transparent UI square. Head and upper chest centered, ears entirely visible, front three-quarter slight right. Preserve upright triangular ears pink interiors, orange forehead with cream eyebrows, small dark eyes, rounded darknose, smiling openmouth tiny pinktongue, thickcreamcheeks chest, friendly shortmuzzle. No collar, clothing, new markings, props or scenery. Warm ochre cream darkumber palette, upperleftlight, crisp uniform square pixels and stepped contours, no smooth painted gradients or white halo. Genuine finely detailed portrait, not enlarged sprite. Transparent padding8percent, one portrait only, no text.",
+    "output_hint": "Generated images are saved to C:\\Users\\masat\\.codex\\generated_images\\01a1062f-6339-7812-baec-d517611755ca as C:\\Users\\masat\\.codex\\generated_images\\01a1062f-6339-7812-baec-d517611755ca\\exec-52501885-421b-465a-8979-492bb8fa9d07.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+    "tool": "built_in_image_gen",
+    "transparent_background_requested": true,
+    "input_references": [
+      "references/shiba.png"
+    ]
+  },
+  {
+    "id": "portrait_hen",
+    "prompt": "Use case: identity-preserve. Create a newly drawn detailed pixel art UI portrait for192x192 square transparent PNG of EXACT reference cream-white farm HEN. Preserve tiny salmonred comb and wattle, shortochrebeak darkbeadeye creamfeathers. Calm stout hen, not rooster: no hugecomb, longtail, clothing or props. Upperbody andhead threequarterright, entirecombinsideframe. Warmivory sandshadows mutedoliveenvironmentlighting upperleft. Crisp small square pixels with wellformed featherclusters darkumberoutline, higherdetailthan field sprite, not simpleupscale. Transparent margin10%, no frame text scenery groundshadow or halo.",
+    "output_hint": "Generated images are saved to C:\\Users\\masat\\.codex\\generated_images\\01a1062f-6339-7812-baec-d517611755ca as C:\\Users\\masat\\.codex\\generated_images\\01a1062f-6339-7812-baec-d517611755ca\\exec-451eeb52-c30c-461c-bab7-cb0abeb52fb1.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+    "tool": "built_in_image_gen",
+    "transparent_background_requested": true,
+    "input_references": [
+      "references/hen.png"
+    ]
+  },
+  {
+    "id": "portrait_cat",
+    "prompt": "Use case: identity-preserve. Newly drawn high detail pixelart portrait of exactly the adopted gray farmcat reference, NOT upscale of sprite. 192x192 transparent UI square. Slate gray fur, pale creamgray muzzle chest, mutedgreen eyes, pinkinner ears nose, slender angularcat not fluffy roundkitten. Head upperchest 3/4right, earsfullyvisible. Preserve solidgraycoat, no stripes/newmarkings/collar. Calm independent slightly aloofexpression. Small precise squarepixels, steppedcontours, restrained upperleft warm highlights, darkumbercharcoaloutline, readableat48px. Transparentpadding, noframe text props orbackground.",
+    "output_hint": "Generated images are saved to C:\\Users\\masat\\.codex\\generated_images\\01a1062f-6339-7812-baec-d517611755ca as C:\\Users\\masat\\.codex\\generated_images\\01a1062f-6339-7812-baec-d517611755ca\\exec-dd9399ad-db42-46fa-bce8-03ba19c035fd.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+    "tool": "built_in_image_gen",
+    "transparent_background_requested": true,
+    "input_references": [
+      "references/cat.png"
+    ]
+  },
+  {
+    "id": "portrait_salaryman",
+    "prompt": "Use case: identity-preserve. Draw a fresh highdetail pixelart UI portrait of SAME adopted salaryman reference. Middle-aged Japanese man lateforties, square short blackflat-top hair, broad angular slightly realistic face withprominent cheekplanes chin nose ears, opaque completely fogged palegray large rectangular glasses hidingeyes andexpression. Bluegray shabby businesssuit, creamshirt, loosened burgundy tie, thin shouldersand arms with slightpotbelly visible lowerbust. NOT youthful anime prettyboy. Headand torso threequarterright centered entirelyvisible, transparent192x192 UI composition. Smallcrisp pixels, mutedearthtones, darkumberoutline, upperleftlight. No phone no text no scenery no frame. Preserveidentity, enhance detail fromsprite, no redesign.",
+    "output_hint": "Generated images are saved to C:\\Users\\masat\\.codex\\generated_images\\01a1062f-6339-7812-baec-d517611755ca as C:\\Users\\masat\\.codex\\generated_images\\01a1062f-6339-7812-baec-d517611755ca\\exec-2718305b-3fee-4af1-8115-3334fc1bdb45.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+    "tool": "built_in_image_gen",
+    "transparent_background_requested": true,
+    "input_references": [
+      "references/salaryman.png"
+    ]
+  },
+  {
+    "id": "portrait_destroyer",
+    "prompt": "Use case: identity-preserve. Newly drawn detailed pixel-art UI portrait of adopted destroyer reference, 192x192transparent bust. Huge flabby muscular pale dirty graypink man, ROUND pig-like silhouette but humanbody, constructed darkbrown leather FULLHEAD gasmask with stitched seams rivets two dark round goggle lenses and projecting brass circular snoutvent; short triangular leather corners at top. NO exposed pigface, NO eyes, NO teeth, NO realgasfilters on chest. Heavy darkiron chain permanentlywrapped diagonallyaround broadbarechest and belly, grimy mottledskin nongraphic. Head shoulders belly bustthreequarterright. Mutedumber creamiron brass palette upperleftlight, smallcrisp pixelclusters steppedoutline. Keep exactidentity fromadoptedsprite, not redesign, no text frame groundshadow orbackground.",
+    "output_hint": "Generated images are saved to C:\\Users\\masat\\.codex\\generated_images\\01a1062f-6339-7812-baec-d517611755ca as C:\\Users\\masat\\.codex\\generated_images\\01a1062f-6339-7812-baec-d517611755ca\\exec-31be373a-392c-49b5-8af9-84923f838fe9.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+    "tool": "built_in_image_gen",
+    "transparent_background_requested": true,
+    "input_references": [
+      "references/destroyer.png"
+    ]
+  },
+  {
+    "id": "portrait_doberman",
+    "prompt": "Use case: identity-preserve. New highdetail pixelart UI portrait for192x192transparent square of EXACT adopted Doberman. Lean black andtan coat, sharply erect pointedears, tallstraightproudneck, narrowlongangularmuzzle, darkeyes, rust eyebrows cheeks muzzle chest, blacknose, slatehighlights. Threequarterright bust head neckupperchest. Serious alert refined dog, not snarlingmonster orcutepuppy. No collar harnessnewmarkings. Freshsmallcrisp squarepixelclusters detailedfurplanes darkbrownoutline upperleftlight, no gradients whitehalo text frame orbackground. All earsvisiblewithintransparentpadding.",
+    "output_hint": "Generated images are saved to C:\\Users\\masat\\.codex\\generated_images\\01a1062f-6339-7812-baec-d517611755ca as C:\\Users\\masat\\.codex\\generated_images\\01a1062f-6339-7812-baec-d517611755ca\\exec-2052ae29-5524-4f66-a3c4-d831b21f0747.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+    "tool": "built_in_image_gen",
+    "transparent_background_requested": true,
+    "input_references": [
+      "references/doberman.png"
+    ]
+  },
+  {
+    "id": "rarity_atlas",
+    "prompt": "Use case: stylized-concept. One consistent pixel-art rarity BADGE SPRITE SHEET, transparent RGBA. Exactly FIVE small badge variations in FIVE evenly spaced columns ONE ROW, equalcellwidth, centered each, generousgaps. No letters numbers labels. Same compact pointed medallion silhouette evolves lefttoright: 1 plaincream parchment inset simpledarkwoodrim; 2 olivegreen carvedwood withtwotinybrassleaves; 3 oxidized bronze withbluegreenteal facetedstone andmodestmetalnotches; 4 darksilver purpleamethyst withtwosmallornamentalwings; 5 ancient GOLD relic withhornedabstractsun etchedmotif. Restrained antique farmRPG, not rainbow gacha, no sparklesbackground. Crisp pixelclusters strongsimple shapes visible32px, designednative64x64 each. Upperleftlighting, warmumberoutlines. No groundshadows, no mergedbadges, transparentemptyspacearound each. Uniformvisualweight andalignedcenters.",
+    "output_hint": "Generated images are saved to C:\\Users\\masat\\.codex\\generated_images\\01a1062f-6339-7812-baec-d517611755ca as C:\\Users\\masat\\.codex\\generated_images\\01a1062f-6339-7812-baec-d517611755ca\\exec-e12f7828-7099-41e6-b772-5f6e68b74695.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+    "tool": "built_in_image_gen",
+    "transparent_background_requested": true,
+    "input_references": []
+  },
+  {
+    "id": "skills_atlas",
+    "prompt": "Use case: stylized-concept. Transparent pixel art UI skill ICON ATLAS oneimage, precise THREE columns by TWOrows grid, sixequalcells with wide emptygutters. Each separately centered on transparent background. Native64x64designs, consistent antique darkwood/bronze rounded-square frame, creamparchmentinset, darkumberoutline, mutedearthcolors crisp pixels, no words/numbers. Row1left: orangeShibadog sidehead barking withtwo bluegreen soundarcs. Row1middle: dark steel chainball striking crackedstone (destruction). Row1right: olddark handheldtelephone withtwo callarcs (reinforcement). Row2left: Ultimate cleaver withsmall restrained redangeraccent, heaviergoldcornerframe. Row2middle: Ultimate elegantcream-and-mutedteal foldingfan withsmallgreen lifelight, heaviergoldcornerframe. Row2right: EMPTY Ultimate frame alone, tarnishedgoldcornersandwoodedge with fullyTRANSPARENTcenter. Keep exactgridandseparation, not a scene, no extraicons or background.",
+    "output_hint": "Generated images are saved to C:\\Users\\masat\\.codex\\generated_images\\01a1062f-6339-7812-baec-d517611755ca as C:\\Users\\masat\\.codex\\generated_images\\01a1062f-6339-7812-baec-d517611755ca\\exec-7a5beacc-5671-4c88-883e-e18fe2eb703e.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+    "tool": "built_in_image_gen",
+    "transparent_background_requested": true,
+    "input_references": []
+  },
+  {
+    "id": "skills_atlas_fixed",
+    "prompt": "Edit this exact six-icon atlas. Keep all six positions, designs, grid, wood/gold frames and cream paper inside firstfiveicons unchanged. Remove ALL brown background outside the sixframes to REAL TRANSPARENT alpha. The bottomright EMPTYframe musthave REALTRANSPARENT center too. Remove red staining from bottomleft cleaver blade: clean graysteel blade only, retain redtassel and tinyredangermarknearhandle. This is nongory comedic rage. Do not add pixels, labels, glows or shadows outsideicons. Genuine transparentPNG is mandatory.",
+    "output_hint": "Generated images are saved to C:\\Users\\masat\\.codex\\generated_images\\01a1062f-6339-7812-baec-d517611755ca as C:\\Users\\masat\\.codex\\generated_images\\01a1062f-6339-7812-baec-d517611755ca\\exec-a809cd73-9a5e-4a22-bb54-19478316658e.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+    "tool": "built_in_image_gen",
+    "transparent_background_requested": true,
+    "input_references": []
+  },
+  {
+    "id": "maid_sheet",
+    "prompt": "Use case: stylized-concept. Pixel-art CHARACTER DESIGN AND STORYBOARD SPRITE SHEET on transparent background. Exactly 4 columns x4 rows evenly spaced equal cells, first15 occupied, finalcell empty. SAME adult HUMAN woman cowpattern farmmaid everycell, practical blackwhite spotted calf-length dress, creamapron, brownhair tiedlowbun, simplecap, sturdyboots, composed maturefriendlyface not sexualized/moe; handswithtray/coppercoffeepot/ivorycup inserviceposes. Clear 3-head farmRPGproportions, crisp squarepixelclusters darkumberoutline mutedearthcolors upperleftlight. Fullbodyeachcell identicalscale feetaligned, widegutters, NO textnumbersframes scenery orshadows. Readingrowmajor: cell1 basicneutral holdingtraypotcup; 2 carryingcoffee; 3 twirlingwithtraylevel; 4 extendingonecup; 5 poisedstill afterserving; 6 turns towardnextcustomer; 7 drinksowncup; 8 sittingrest onlowplainstool. Cells9-15 separate RAGEstoryboard: 9 normalemptyhands;10 visiblyangryfurrowedbrows;11 drawslargecleanSTEELmeatcleaver;12 forwardleanready;13 fastchasingrunwithcleaver;14 sweepingcleaverattack;15 calmedrelaxedagain. Maintaincowuniforminallcells. Comedic contrast, NO blood gore victims orhorns/cowhead. Keyposes only, notanimationinterpolation.",
+    "output_hint": "Generated images are saved to C:\\Users\\masat\\.codex\\generated_images\\01a1062f-6339-7812-baec-d517611755ca as C:\\Users\\masat\\.codex\\generated_images\\01a1062f-6339-7812-baec-d517611755ca\\exec-629448eb-f167-4f32-afbc-8cc02964e901.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+    "tool": "built_in_image_gen",
+    "transparent_background_requested": true,
+    "input_references": []
+  },
+  {
+    "id": "dancer_sheet",
+    "prompt": "Use case: stylized-concept. Original farm fantasy RPG pixelart character concept+storyboard atlas transparent. EXACTLY4columns x3rows equalspacedcells, same scale fullbodygroundaligned; NO labels/numbers/panellines/background. Adult elegant female enemySUPPORT dancer, blackhair sweptintoasymmetricbun withwoodpin, layered mutedteal ivory and dustyterracotta light danceclothes, modestpracticalwraptop calf-length dividedskirt sash softshoes, creamtealfoldingfans. Completelyoriginalnotcopyanygame. 3headproportion chunkycrisp pixelclusters darkumberoutline upperleftlight. Cell1 neutralbasicdesign foldedfan. Cells2-6 DANCEBUFF:2ready;3openonefan;4turnbackspin;5danceopenarms;6finishdance withsmallseparatewindribbons ONLY no musicalnotes. Cells7-11 RESURRECTION storyboardbody:7turntowardoffscreenfallenally;8begindanceonefan;9spreadtwofans;10directfanoutwardtosendlight;11calmrecoveryasallyrisesOFFSCREEN. Cell12 lightfanmelee gentle sidewaysfanstrike. Do NOT draw any ally/corpse/newcreature. FX notbakedintobody; put tiny separate life-light motes in transparent margin oflastcell only. Allfacescostumes consistent. Keyposesnotfullanimation.",
+    "output_hint": "Generated images are saved to C:\\Users\\masat\\.codex\\generated_images\\01a1062f-6339-7812-baec-d517611755ca as C:\\Users\\masat\\.codex\\generated_images\\01a1062f-6339-7812-baec-d517611755ca\\exec-01a7ace5-ed1a-424f-929f-6c774339f072.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+    "tool": "built_in_image_gen",
+    "transparent_background_requested": true,
+    "input_references": []
+  },
+  {
+    "id": "thief_sheet",
+    "prompt": "Use case: stylized-concept. Transparent pixel-art enemy THIEF concept+keypose sheet. Exactly4columns x3rows,12equalcells withwideemptygutters, no text gridlines orbackground. SAME lean adult male lightfooted rogue inallcells: short messy reddishbrown hair visible, crookednose sly narrowface, olive shortjacket creamshirt rustscarf fittedbrowntrousers softboots, smalldaggersheathedathip, THREE littlepoisonvials onbelt, veryobvious large tan lootbag slungonleftback. Distinctfromninja NOhood/mask/blackninjagear. FarmRPG3headproportions crispchunkypixelart upperleftlight mutedearthpalette darkumberoutline. Allfullbody, sameheightanddesign. Rowmajor cell1 neutralbasic; 2spotgrounditem;3crouch;4pickupsmallstonefossil;5putlootinsack;6escape runningwithheavybag. 7drawgreenpotion;8windupthrow;9releasewith emptyextendedhand. 10ONLY isolated tinygreenpotionflying nocharacter;11ONLY brokenvialgreensplash;12ONLY thin translucent paleolive poisoncloud sparsewisps, unobstructing. No blood gore letters numbers or castshadows. Assets separated, nothingcrossescell.",
+    "output_hint": "Generated images are saved to C:\\Users\\masat\\.codex\\generated_images\\01a1062f-6339-7812-baec-d517611755ca as C:\\Users\\masat\\.codex\\generated_images\\01a1062f-6339-7812-baec-d517611755ca\\exec-cdb1c946-6570-4b19-85ee-03d12e6f16ce.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+    "tool": "built_in_image_gen",
+    "transparent_background_requested": true,
+    "input_references": []
+  },
+  {
+    "id": "thief_sheet_cutout",
+    "prompt": "Background extraction edit only. Cut out each of the exact nine thief poses and three effect parts from this image. Remove all brown studio backdrop and lighting halos, replace with genuinely transparent alpha=0 pixels. Keep faces, bags, costumes, everypose, exact4x3 layout, positionsandscale unchanged. Preserve creamshirt andbrownclothes. Bottomright poisoncloud mustbe thin paleolive translucentwisps withtransparentholes, not opaque squareglow. No rectangularcells, no newbackground. TRANSPARENT PNG spritesheet asset, no brown or checkerboard backdrop painted in.",
+    "output_hint": "Generated images are saved to C:\\Users\\masat\\.codex\\generated_images\\01a1062f-6339-7812-baec-d517611755ca as C:\\Users\\masat\\.codex\\generated_images\\01a1062f-6339-7812-baec-d517611755ca\\exec-7ac3b351-aac0-43ea-ba80-fba6b66b1449.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+    "tool": "built_in_image_gen",
+    "transparent_background_requested": true,
+    "input_references": []
+  },
+  {
+    "id": "cow",
+    "prompt": "Use case: stylized-concept. Single isolated PIXEL ART calm dairy cow concept fullbody facingright slight3/4topview fororthographic farmgame. Largegentle milkcow, ivorywhitecoat irregularblackpatches, smallivoryhorns, broadpinkmuzzle smallgentledarkeyes, heavybarrelbelly visiblemodestudder, fourstrongordinarylegs blackhooves longthin tailwithblacktip. No bellcollarclothesbucketprops. Nativebodytarget48pixels high on80x64canvas, existingfarmhuman42high; animalnot giantboss andnotcutechibi. Crispchunky squarepixelclusters darkumberoutline mutedcreamcharcoalwarmgray upperleftlight. TRUEtransparentbackground andno castshadow groundpatch labels orframe. Entirebodywithpadding.",
+    "output_hint": "Generated images are saved to C:\\Users\\masat\\.codex\\generated_images\\01a1062f-6339-7812-baec-d517611755ca as C:\\Users\\masat\\.codex\\generated_images\\01a1062f-6339-7812-baec-d517611755ca\\exec-901a1f74-fda0-49a2-ba4a-2a5933f6ad7b.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+    "tool": "built_in_image_gen",
+    "transparent_background_requested": true,
+    "input_references": []
+  },
+  {
+    "id": "bull_sheet",
+    "prompt": "Use case: stylized-concept. Pixel-art fighting bull concept and charge storyboard sprite sheet TRANSPARENT background. Exactly FOURcolumns TWOrows,8 equalcells separatedwidegutters. SAME fullbodybull everycell facingRIGHT, compact muscular darkrusset-brown bull withcharcoalpowerfulshoulders, thickneck, forwardcurvedivoryhorns, strongshortlegs blackhooves tufttail, narrowedeye. Notblackwhitedairycow, notgiantboss, no nose ringarmorclothes. Crisp deliberate squarepixels, darkumberoutline, mutedwarmearthpalette upperleftlight. Cell1 basicneutralstrongstance. Cells2-7charge:2scrapesgroundoneforehoof;3lowersheadhornsforward;4pushesoffstart;5fullspeedstraightstride;6contactbracedheadforwardwithoutvictim;7brakesslidingthenrises. Cell8 gutsstate leanforwardharshbreathflarednostrilintenseeye, notredglow. Entirebodyequal scaleeverycell, no textnumbers panels orscenery, no dustbaked aroundhooves. Nativebodyheightapprox40on80x64canvas, noframesoutsidecells.",
+    "output_hint": "Generated images are saved to C:\\Users\\masat\\.codex\\generated_images\\01a1062f-6339-7812-baec-d517611755ca as C:\\Users\\masat\\.codex\\generated_images\\01a1062f-6339-7812-baec-d517611755ca\\exec-5584d6d4-9970-4339-9190-4bcb41765b01.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+    "tool": "built_in_image_gen",
+    "transparent_background_requested": true,
+    "input_references": []
+  },
+  {
+    "id": "kokeshi",
+    "prompt": "Use case: stylized-concept. Single small traditional wooden Japanese KOKESHI doll isolated transparent pixelart gameplaceable concept. Cylindrical palehoneywoodbody roundedhead blackpaintedcap hair, tinyeyes calm slightlystrangesmile, simple faded brickredand mutedolive floralbrushmotif, ringsatbase. Subtlemystery weakcurse nothorrordemon, NO teeth blood glow inscriptions. Native32x40sprite body32pixelshigh withinone48x42groundcell. Slighttopview farmRPG, warmumberoutline crisp groupedpixels creamwood grain sparse, upperleftlight, entireobjectincludingflatbase. No background scenery castshadow or frame.",
+    "output_hint": "Generated images are saved to C:\\Users\\masat\\.codex\\generated_images\\01a1062f-6339-7812-baec-d517611755ca as C:\\Users\\masat\\.codex\\generated_images\\01a1062f-6339-7812-baec-d517611755ca\\exec-f7707e48-2c81-49c2-b4cc-0e5631c01a26.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+    "tool": "built_in_image_gen",
+    "transparent_background_requested": true,
+    "input_references": []
+  },
+  {
+    "id": "fossil",
+    "prompt": "Use case: stylized-concept. Single transparent pixelart gamefielditem FOSSIL concept. Palm-to-torsosized irregular flatdarkwarmgraybrown stone slab, exposedivory partialancientjaw bone andcurvedribfragments embedded instone, clearly fossil notordinaryrock. Preciousfind butno gemgoldcoins. NOT complete skeleton, no living dinosaur, no egg or ammoniteshell. Slighttopdown threequarterview farmRPG, compact readable silhouette native48x40, contrast ivorybone onstone, darkumberoutline, mutedwarmearthpalette upperleftlight, crisp simplepixelclusters. Entireobjectwithtransparentpadding, no text glow sparkles ground shadow pedestal orbackground.",
+    "output_hint": "Generated images are saved to C:\\Users\\masat\\.codex\\generated_images\\01a1062f-6339-7812-baec-d517611755ca as C:\\Users\\masat\\.codex\\generated_images\\01a1062f-6339-7812-baec-d517611755ca\\exec-91ce63d9-1a67-4b16-8490-ff7920e7a3df.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+    "tool": "built_in_image_gen",
+    "transparent_background_requested": true,
+    "input_references": []
+  },
+  {
+    "id": "readiness_atlas",
+    "prompt": "Use case: stylized-concept. Transparent pixelart tiny UI and FX componentsheet 3columns2rows equalcells widegutters, NOtext numbers orbackground. Mutedivory warmgold andteal, darkumberedges farmRPG, smallcleanpixelclusters notneonglow. Row1: left a THIN FLAT elliptical broken golden aura ring withEMPTYtransparentcenter, native48x24; middle exactlythree small fourpointivorygoldstars looselyclustered native24x24; right squarethin192x192 portraitframe cornerhighlights only fourseparateangularLshapedgoldcornerglints withtransparentcenter NOsolidborder. Row2: left simplegoldlightning staminaicon native24x24; middle smallbrownrunningshoe withtwo shorttealbreathstrokes staminaiconnative24x24; right blankemptycell. Allisolated. Flatcolor steppedpixelhighlights notsoftlighting, no hugeexplosions, no backgroundgradient. Usedasindependentoverlayparts, neverhidecharacter.",
+    "output_hint": "Generated images are saved to C:\\Users\\masat\\.codex\\generated_images\\01a1062f-6339-7812-baec-d517611755ca as C:\\Users\\masat\\.codex\\generated_images\\01a1062f-6339-7812-baec-d517611755ca\\exec-046ae4cd-1e62-4e82-91e7-35668f853af0.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+    "tool": "built_in_image_gen",
+    "transparent_background_requested": true,
+    "input_references": []
+  },
+  {
+    "id": "dancer_dance_clean",
+    "prompt": "Edit reference design into a clean five-keypose storyboard sheet. SAME adult dancer identity, blackhairbun, mutedteal ivoryterracotta practical layeredclothes, creamteal fans. Layout EXACT FIVE fullbodyposes ONEHORIZONTALROW. WIDE TRANSPARENT GAPS at leastonehandwidth between entire silhouettes INCLUDINGoutstretchedfans. Do NOT overlap orcrop anything. Use smallerfigureswithamplecanvasmargin. Allsamephysicalbodysize andfootbaseline. Lefttoright: readywithfoldedfan; opensonefan; midspinbackthreequarter; gracefuldancewithtwofansspread; finishsupportdancewithfoldedfan small separatewindribbon atfeet. Crisp pixelart farmgame, avoid excessivefiligree. True transparentbackground, no castshadows glows labels numbers orpanels. Reference only forcostumeandface, do NOT copy reference sheet arrangement.",
+    "output_hint": "Generated images are saved to C:\\Users\\masat\\.codex\\generated_images\\01a1062f-6339-7812-baec-d517611755ca as C:\\Users\\masat\\.codex\\generated_images\\01a1062f-6339-7812-baec-d517611755ca\\exec-86807d2f-010b-4d5f-b845-3131e5d71b49.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+    "tool": "built_in_image_gen",
+    "transparent_background_requested": true,
+    "input_references": [
+      "originals/dancer_sheet.png"
+    ]
+  },
+  {
+    "id": "dancer_resurrection_clean",
+    "prompt": "Same original dancer fromreference, preservefaceblackbun tealivoryterracottaclothes. Pixelart five-keypose resurrection support storyboard, transparent PNG, one horizontalrow of5 fullyseparated fullbody figures, generousgaps betweenevery extremity, no textlabels. Use narrow poses, KEEP ARMS CLOSE enough all5haveequalwidth, NOwidehorizontalarmspan. Lefttoright1 standing facingright foldedfan towardoffscreenfallenally;2 raisesonefan todance;3 opensbothfansupwardcloseaboveherhead;4 extendsONEfan diagonallydownrighttosendlifelightoffscreen;5 relaxeduprightbothfansfolded lookingright asallyrises. Noallyinimage, no FX bakedintocharacter, no glow groundshadow orbackground. Upperleftlight crisp intentionalpixels, SAMEphysicalsizeeveryfigure. Do notcliporoverlapfigures.",
+    "output_hint": "Generated images are saved to C:\\Users\\masat\\.codex\\generated_images\\01a1062f-6339-7812-baec-d517611755ca as C:\\Users\\masat\\.codex\\generated_images\\01a1062f-6339-7812-baec-d517611755ca\\exec-820b0efd-ce7d-498c-aab9-4e5f40bea9cc.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+    "tool": "built_in_image_gen",
+    "transparent_background_requested": true,
+    "input_references": [
+      "originals/dancer_sheet.png"
+    ]
+  }
+]

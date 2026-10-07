@@ -1,0 +1,236 @@
+[
+  {
+    "action": "maid_coffee",
+    "file": "storyboards/maid_coffee.png",
+    "source": "maid_sheet.png",
+    "source_grid": [
+      4,
+      4
+    ],
+    "source_cells_zero_based": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "order": [
+      "持つ",
+      "回る",
+      "配る",
+      "1秒停止の姿",
+      "次へ向く",
+      "自分で飲む",
+      "休憩"
+    ],
+    "frame_duration_ms": null,
+    "loop": false,
+    "runtime_ready": false,
+    "note": "Narrative keyposes only; not animation frames. Timing and layers must be finalized after adoption.",
+    "source_extraction": "grid cells with detached residue removed",
+    "composition_layers": [
+      "body_concept"
+    ]
+  },
+  {
+    "action": "maid_rage",
+    "file": "storyboards/maid_rage.png",
+    "source": "maid_sheet.png",
+    "source_grid": [
+      4,
+      4
+    ],
+    "source_cells_zero_based": [
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14
+    ],
+    "order": [
+      "通常",
+      "怒り",
+      "包丁を出す",
+      "前傾",
+      "高速追跡",
+      "攻撃",
+      "落ち着く"
+    ],
+    "frame_duration_ms": null,
+    "loop": false,
+    "runtime_ready": false,
+    "note": "Narrative keyposes only; not animation frames. Timing and layers must be finalized after adoption.",
+    "source_extraction": "grid cells with detached residue removed",
+    "composition_layers": [
+      "body_concept"
+    ]
+  },
+  {
+    "action": "dancer_dance",
+    "file": "storyboards/dancer_dance.png",
+    "source": "dancer_dance_clean.png",
+    "source_grid": [
+      6,
+      2
+    ],
+    "source_cells_zero_based": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "order": [
+      "構える",
+      "扇を開く",
+      "旋回",
+      "舞う",
+      "風・支援"
+    ],
+    "frame_duration_ms": null,
+    "loop": false,
+    "runtime_ready": false,
+    "note": "Narrative keyposes only; not animation frames. Timing and layers must be finalized after adoption.",
+    "source_extraction": "connected alpha components, see art-production",
+    "composition_layers": [
+      "body_concept"
+    ]
+  },
+  {
+    "action": "dancer_resurrection",
+    "file": "storyboards/dancer_resurrection.png",
+    "source": "dancer_resurrection_clean.png",
+    "source_grid": [
+      6,
+      2
+    ],
+    "source_cells_zero_based": [
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "order": [
+      "対象へ向く",
+      "舞を開始",
+      "扇を広げる",
+      "対象へ光",
+      "対象が起きる"
+    ],
+    "frame_duration_ms": null,
+    "loop": false,
+    "runtime_ready": false,
+    "note": "Narrative keyposes only; not animation frames. Timing and layers must be finalized after adoption.",
+    "source_extraction": "connected alpha components, see art-production",
+    "composition_layers": [
+      "body",
+      "target_existing_martial_artist",
+      "life_light"
+    ]
+  },
+  {
+    "action": "thief_steal",
+    "file": "storyboards/thief_steal.png",
+    "source": "thief_sheet.png",
+    "source_grid": [
+      4,
+      3
+    ],
+    "source_cells_zero_based": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "order": [
+      "発見",
+      "しゃがむ",
+      "拾う",
+      "袋へ入れる",
+      "逃走"
+    ],
+    "frame_duration_ms": null,
+    "loop": false,
+    "runtime_ready": false,
+    "note": "Narrative keyposes only; not animation frames. Timing and layers must be finalized after adoption.",
+    "source_extraction": "grid cells with detached residue removed",
+    "composition_layers": [
+      "body_concept"
+    ]
+  },
+  {
+    "action": "thief_poison",
+    "file": "storyboards/thief_poison.png",
+    "source": "thief_sheet.png",
+    "source_grid": [
+      4,
+      3
+    ],
+    "source_cells_zero_based": [
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "order": [
+      "取り出す",
+      "振りかぶる",
+      "投げる",
+      "瓶飛翔",
+      "破裂",
+      "薄い毒雲"
+    ],
+    "frame_duration_ms": null,
+    "loop": false,
+    "runtime_ready": false,
+    "note": "Narrative keyposes only; not animation frames. Timing and layers must be finalized after adoption.",
+    "source_extraction": "grid cells with detached residue removed",
+    "composition_layers": [
+      "body",
+      "projectile",
+      "splash",
+      "cloud"
+    ]
+  },
+  {
+    "action": "bull_charge",
+    "file": "storyboards/bull_charge.png",
+    "source": "bull_sheet.png",
+    "source_grid": [
+      4,
+      2
+    ],
+    "source_cells_zero_based": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "order": [
+      "地面を蹴る",
+      "頭を下げる",
+      "開始",
+      "全速直進",
+      "接触",
+      "減速"
+    ],
+    "frame_duration_ms": null,
+    "loop": false,
+    "runtime_ready": false,
+    "note": "Narrative keyposes only; not animation frames. Timing and layers must be finalized after adoption.",
+    "source_extraction": "grid cells with detached residue removed",
+    "composition_layers": [
+      "body_concept"
+    ]
+  }
+]
