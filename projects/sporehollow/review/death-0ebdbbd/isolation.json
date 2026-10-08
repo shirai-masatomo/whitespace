@@ -1,0 +1,24 @@
+{
+  "executable": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\.tools\\Godot_v4.7.2-stable_win64.exe",
+  "dirty": true,
+  "result": {
+    "PID": 21260,
+    "ThreadID": 45788,
+    "ExitCode": 0,
+    "OwnedWindowCount": 2,
+    "Station": "Service-0x0-3ba69$",
+    "Desktop": "Render_d40d060a8c254dc9a53040c6a2c110b9",
+    "ObservedDesktop": "Render_d40d060a8c254dc9a53040c6a2c110b9",
+    "NonInteractive": true,
+    "DesktopMatched": true,
+    "TimedOut": false
+  },
+  "implementation_commit": "0ebdbbdc0f37dfaec656fe4491aaccd4b56df6bb",
+  "start_utc": "2026-10-08T06:39:18.3313940Z",
+  "command": "\"C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\.tools\\Godot_v4.7.2-stable_win64.exe\" --path \"C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\" --audio-driver Dummy --rendering-method gl_compatibility --max-fps 30 --resolution 1280x800 --log-file \"C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\artifacts\\isolated\\20261008-153917-637/render.log\" --script tests/test_corpses_ui.gd -- --isolated-review --output=\"C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\artifacts\\isolated\\20261008-153917-637\"",
+  "parent_pid": 30188,
+  "end_utc": "2026-10-08T06:39:23.0444575Z",
+  "asset_delivery_commit": "b0e917a11f205190dde0136165a72c189f39e275",
+  "purpose": "corpses",
+  "data_root": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\artifacts\\isolated\\20261008-153917-637/user-data"
+}
