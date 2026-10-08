@@ -428,7 +428,7 @@ func _execute_local(kind: String, p: Vector2i = Vector2i.ZERO, animal_id: int = 
 func issue_order(kind: String, p: Vector2i, animal_id: int = -1) -> bool:
 	var target_id = -1
 	if kind == "attack_target":
-		var found = enemies.filter(func(e): return not e.done and not e.flee and e.pos == p)
+		var found = enemies.filter(func(e): return not e.done and not e.flee and e.hp>0 and e.pos == p)
 		if found.is_empty(): return false
 		target_id = found[0].id
 	elif kind in ["whistle", "stay"] and not walkable(p): return false

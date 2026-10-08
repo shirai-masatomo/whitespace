@@ -141,7 +141,7 @@ static func maid_step(w,a,enemy: bool) -> bool:
 	allies=allies.filter(func(t):return t.hp>0 and t.get("carrier",-1)<0 and t.get("state","")!="hidden_rest" and t.get("id",-1) not in served)
 	if allies.is_empty():
 		drink(a);a.coffee_served=[];a.coffee_rest_until=w.tick+ceili(10.0/w.DT);a.state="休む"
-		# A support unit without recipients continues to explore instead of camping forever.
+		# No recipients: rest without falling through to the generic combat AI.
 		return true
 	allies.sort_custom(func(t,u):return w.distance(a.pos,t.pos)<w.distance(a.pos,u.pos) if w.distance(a.pos,t.pos)!=w.distance(a.pos,u.pos) else t.get("id",-1)<u.get("id",-1))
 	var target=allies[0];a.state="コーヒーを届ける"
