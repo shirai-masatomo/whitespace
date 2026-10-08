@@ -321,8 +321,7 @@ static func strike(w,e,t,override_damage: int=-1):
 		w.combat_log.append({"tick":w.tick,"source":"object","id":e.id,"target":b.id,"damage":damage})
 		if b.hp<=0: b.status="destroyed"; w.metrics.destroyed+=1; w.refresh_indoor()
 	elif t.kind=="idol":
-		w.story.idol.hp=maxi(0,w.story.idol.hp-e.object_attack_power)
-		if w.story.idol.hp<=0: w.story.defeat_reason="idol_destroyed"; w.finish(false)
+		w.Story.damage(w,e.object_attack_power)
 
 static func bow_end(w,e):
 	e.bow_until=w.tick+ceili(Data.SPECIAL.bow_seconds/w.DT); e.action_id="bow"; e.state="礼"; e.chosen_target={}

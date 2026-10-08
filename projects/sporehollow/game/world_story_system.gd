@@ -100,11 +100,12 @@ static func apply_raid_reaction(w,event: Dictionary):
 		w.story.raid_slots=slots
 	w.story.hidden.security=mini(2,w.story.hidden.security+1)
 
-static func goals(w) -> Array:
+static func goals(w, break_objects: bool=false) -> Array:
 	var result=[]
 	for p in idol_cells(w):
 		for n in w.neighbors(p):
-			if n not in idol_cells(w) and n not in result and w.walkable(n): result.append(n)
+			if n in idol_cells(w) or n in result: continue
+			if w.walkable(n) or (break_objects and w.inside(n) and not w.trees.has(n) and w.blocks(n)): result.append(n)
 	return result
 
 static func is_prayer(kind: String) -> bool:
@@ -258,9 +259,10 @@ static func merchant(w) -> String:
 	return "街道の噂が騒がしくてね。夜は気をつけて。" if w.story.get("hidden",{}).get("recognition",0)>0 else "今日は何を用意しようか。"
 
 static func damage(w,amount: int):
-	if w.story.idol.is_empty() or w.story.idol.hp<=0: return
+	if amount<=0 or w.story.idol.is_empty() or w.story.idol.hp<=0: return
 	w.story.idol.hp=maxi(0,w.story.idol.hp-amount)
 	w.Life.danger(w,"idol_hit")
+	w.PlayerEvents.add(w,"黄金像が攻撃されています","idol_damage")
 	if w.story.idol.hp==0: lose(w,"idol_destroyed")
 
 static func lose(w,why: String):
@@ -347,6 +349,9 @@ static func idol_enemy(w,e) -> bool:
 			if cells(next).all(func(p):return not w.inside(p)): lose(w,"idol_stolen")
 			return true
 	var destinations=goals(w)
+	# A complete wall ring must delay a raid, not leave the night in an endless crisis.
+	# Keep keeper jobs on walkable contacts; only raiders may approach through breakable walls.
+	if destinations.is_empty(): destinations=goals(w,true)
 	if e.pos in destinations:
 		if e.role=="idol_breaker":
 			e.state="黄金像を壊す"
