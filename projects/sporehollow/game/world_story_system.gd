@@ -4,10 +4,12 @@ const CLEAR_SECONDS = 4.0
 const CLEAR_WOOD = 8
 const PRAYER_SECONDS = 3.0
 const MIRACLE_GOLD = 60
+const PRAYER_KARMA = 1 # Provisional: preserve the existing reaction cadence.
+const PRAYER_CATEGORIES = {"pray_animal":"animal","pray_gold":"gold","pray_item":"item"}
 const IDOL_HP = 180
 const TOW_PREP_SECONDS = 8.0
 const TOW_SPEED = 0.5
-const ACTIONS = ["clear_tree","inspect_idol","pray_wealth","repair_idol","recover_idol"]
+const ACTIONS = ["clear_tree","inspect_idol","pray_wealth","pray_animal","pray_gold","pray_item","repair_idol","recover_idol"]
 const INTRO = ["父は、遺跡と秘境を巡る探検家だった。", "最後の旅から持ち帰ったのは、大きな黄金像。\nそれからほどなく、父はいなくなった。", "私は、父の残した牧場で暮らし始めた。\n愛犬と過ごした静かな数日は、もう思い出になっている。", "父の日誌には、一言だけ残されていた。\n『像を壊してはいけない。』"]
 
 static func cell(v) -> Vector2i:
@@ -82,13 +84,16 @@ static func goals(w) -> Array:
 			if n not in idol_cells(w) and n not in result and w.walkable(n): result.append(n)
 	return result
 
+static func is_prayer(kind: String) -> bool:
+	return kind=="pray_wealth" or PRAYER_CATEGORIES.has(kind)
+
 static func reason(w,kind: String,p: Vector2i) -> String:
 	if kind=="clear_tree": return "伐採には道具が必要です"
 	if w.story.idol.is_empty(): return w.story.get("migration_error","黄金像が見つかりません")
 	if w.story.idol.state in ["preparing","transporting","lost"]: return "像が危険です。先に運び手を止めてください"
-	if kind=="pray_wealth":
-		if not w.config.get("legacy_prayer",false): return "祈りの報酬は準備中です"
-		if not w.story.investigated: return "最初の夜を越えたら、像を調べてください"
+	if is_prayer(kind):
+		if kind=="pray_wealth" and not w.config.get("legacy_prayer",false): return "動物・お金・アイテムから願いを選んでください"
+		if w.campaign.day<2 or not w.story.investigated: return "最初の夜を越えたら、像を調べてください"
 		if w.story.prayed_day==w.campaign.day: return "今日は祈りを捧げました"
 	if kind=="repair_idol":
 		if w.story.idol.hp>=w.story.idol.max_hp: return "損傷はありません"
@@ -118,7 +123,7 @@ static func step_job(w,j):
 	if w.keeper.pos not in destinations: w.Jobs.walk(w,j,destinations); return
 	j.state="working"; j.started=true
 	j.elapsed+=w.DT*w.Life.factor(w)
-	var duration=CLEAR_SECONDS if j.kind=="clear_tree" else (PRAYER_SECONDS if j.kind=="pray_wealth" else 2.0)
+	var duration=CLEAR_SECONDS if j.kind=="clear_tree" else (PRAYER_SECONDS if is_prayer(j.kind) else 2.0)
 	if j.elapsed<duration: return
 	match j.kind:
 		"clear_tree":
@@ -129,6 +134,7 @@ static func step_job(w,j):
 			if w.campaign.day>=2: w.story.investigated=true
 			say(w,"父の日誌：像を壊してはいけない。"+(" 像に願いを託せそうだ。" if w.story.investigated else " 今は静かに佇んでいる。"))
 		"pray_wealth": pray(w)
+		"pray_animal","pray_gold","pray_item": pray(w,PRAYER_CATEGORIES[j.kind])
 		"repair_idol":
 			w.add_resource("wood",-5); w.story.idol.hp=mini(w.story.idol.max_hp,w.story.idol.hp+30)
 		"recover_idol":
@@ -140,27 +146,62 @@ static func step_job(w,j):
 
 static func interrupt_prayer(w):
 	for j in w.jobs.duplicate():
-		if j.kind=="pray_wealth" and j.started:
+		if is_prayer(j.kind) and j.started:
 			w.Jobs.cancel(w,j.id,"prayer_interrupted"); say(w,"祈りが途切れた")
 
-static func pray(w):
+static func pray(w,category: String="wealth"):
 	var id="prayer-%d"%w.story.next_prayer_id
 	w.story.next_prayer_id+=1; w.story.prayed_day=w.campaign.day
-	w.story.prayers.append({"id":id,"day":w.campaign.day,"wish":"wealth","reward_day":w.campaign.day+1,"rewarded":false})
-	w.story.hidden.karma+=1
-	for spec in [[1,"gold_find"],[2,"trade_rumor"],[3,"robbery"]]:
-		w.story.events.append({"id":id+"-"+spec[1],"prayer_id":id,"day":w.campaign.day+spec[0],"kind":spec[1],"applied":false,"news_id":id+"-news-"+spec[1],"published":false})
+	w.story.hidden.karma+=PRAYER_KARMA
+	var prayer={"id":id,"day":w.campaign.day,"wish":category,"reward_day":w.campaign.day+1,"rewarded":false}
+	if category!="wealth":
+		prayer.merge({"version":2,"category":category,"seed":w.seed_value,"karma_at_prayer":w.story.hidden.karma,"reward_record":{}})
+	w.story.prayers.append(prayer)
+	for spec in [[1,"gold_find" if category in ["wealth","gold"] else "trade_find"],[2,"trade_rumor"],[3,"robbery"]]:
+		w.story.events.append({"id":id+"-"+spec[1],"prayer_id":id,"category":category,"day":w.campaign.day+spec[0],"kind":spec[1],"applied":false,"news_id":id+"-news-"+spec[1],"published":false})
 	say(w,"願いを託した。像は静かに光っている。")
+
+static func settle_prayer(w,prayer: Dictionary,day: int):
+	if prayer.rewarded or prayer.reward_day>day: return
+	# Historical fixed-gold records have no category. Never reinterpret or reroll them.
+	if not prayer.has("category"):
+		w.campaign.gold+=MIRACLE_GOLD; prayer.rewarded=true
+		w.story.miracles.append({"id":prayer.id,"day":day,"gold":MIRACLE_GOLD,"text":"金貨 +%dG"%MIRACLE_GOLD})
+		say(w,"像のそばに金貨が残されていた。+%dG"%MIRACLE_GOLD)
+		return
+	if prayer.get("reward_record",{}).is_empty():
+		prayer.reward_record=w.ProgressData.idol_reward(prayer.category,prayer.karma_at_prayer,prayer.seed,prayer.day)
+	var reward=prayer.reward_record
+	if reward.is_empty(): return
+	var message=""
+	match prayer.category:
+		"gold":
+			w.campaign.gold+=reward.gold_amount
+			message="金貨 +%dG"%reward.gold_amount
+		"item":
+			w.add_item(reward.item_id,1)
+			message=w.ProgressData.ITEMS[reward.item_id].name+" ×1"
+		"animal":
+			var species=reward.species
+			var data=w.SPECIES[species]
+			var owned=reward.duplicate(true)
+			owned.merge({"id":w.campaign.next_animal_id,"category":data.category,"xp":0,"loyalty":data.loyalty,"traits":{},"name":"","affinity":0 if data.affinity else null,"unavailable_through_day":0},true)
+			w.campaign.next_animal_id+=1
+			w.campaign.animals.append(owned)
+			w.add_resident(owned) # Uses the same safe admission / waiting path as a purchase.
+			prayer.animal_id=owned.id
+			message=data.title+"が牧場へ"+("（受入待ち）" if not w.animals[-1].placed else "やってきた")
+		_: return
+	prayer.rewarded=true
+	w.story.miracles.append({"id":prayer.id,"day":day,"category":prayer.category,"reward":reward.duplicate(true),"text":message})
+	say(w,"願いが届いた。"+message)
 
 static func morning(w,day: int):
 	if day>=2 and not w.story.radio:
 		w.story.radio=true
 		w.story.news.append({"id":"father-radio","day":day,"title":"父の古いラジオ","text":"道具箱から、小さなラジオが見つかった。遠い町の放送が聞こえる。"})
 	for prayer in w.story.prayers:
-		if prayer.reward_day<=day and not prayer.rewarded:
-			prayer.rewarded=true; w.campaign.gold+=MIRACLE_GOLD
-			w.story.miracles.append({"id":prayer.id,"day":day,"gold":MIRACLE_GOLD})
-			say(w,"像のそばに金貨が残されていた。+%dG"%MIRACLE_GOLD)
+		settle_prayer(w,prayer,day)
 	for event in w.story.events:
 		if event.day>day or event.applied: continue
 		event.applied=true
@@ -169,12 +210,16 @@ static func morning(w,day: int):
 			"gold_find":
 				w.story.hidden.economy+=1
 				title="各地で金鉱脈の発見"; body="採掘地から新たな金の便りが相次いでいます。市場には人が集まり始めました。"
+			"trade_find":
+				w.story.hidden.economy+=1
+				title="街道に増える取引"; body="珍しい動物や品を求め、街道を行き交う商人が増えています。"
 			"trade_rumor":
 				w.story.hidden.recognition+=1
 				title="街道に流れる噂"; body="珍しい宝を探す旅人が街道を行き交っています。商人たちも戸締まりを気にしています。"
 			"robbery":
 				w.story.hidden.security=mini(2,w.story.hidden.security+1)
-				title="採掘地で強盗が増加"; body="物資と宝を狙う一団が、町の外へも足を延ばしているとのことです。"
+				title="採掘地で強盗が増加" if event.get("category","wealth") in ["wealth","gold"] else "街道で盗難が増加"
+				body="物資と宝を狙う一団が、町の外へも足を延ばしているとのことです。"
 		if not event.published:
 			w.story.news.append({"id":event.news_id,"day":day,"title":title,"text":body}); event.published=true
 	persist(w)

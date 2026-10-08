@@ -1,6 +1,7 @@
 extends RefCounted
 const Data=preload("res://game/progression_data.gd")
 const Encounters=preload("res://game/encounters.gd")
+const Targets=preload("res://game/target_policy.gd")
 
 static func migrate(w):
 	w.campaign.enemy_knowledge=w.campaign.get("enemy_knowledge",{})
@@ -180,9 +181,10 @@ static func target_candidates(w,e) -> Array:
 		if a.placed and a.hp>0 and not a.get("dead",false) and not (e.archetype=="maid" and a.species=="cow") and w.distance(e.pos,a.pos)<=e.sight_range and w.line_of_sight(e.pos,a.pos): candidates.append({"kind":"animal","id":a.id,"pos":a.pos})
 	for p in w.structures:
 		if w.live_structure(p) and w.distance(e.pos,p)<=e.sight_range and w.line_of_sight(e.pos,p,true): candidates.append({"kind":"structure","id":w.structures[p].id,"pos":p})
-	for p in w.Story.idol_cells(w):
-		if w.distance(e.pos,p)<=e.sight_range and w.line_of_sight(e.pos,p,true): candidates.append({"kind":"idol","id":-1,"pos":p}); break
-	return candidates.filter(func(t):return e.target_weights.get(t.kind,0)>0 and not (e.archetype=="martial_artist" and ((t.kind=="keeper" and w.keeper.hp<=1) or (t.kind=="animal" and w.Orders.animal(w,t.id).hp<=1))))
+	var idol=Targets.observe(w,e)
+	if not idol.is_empty():candidates.append(idol)
+	var weights=Targets.weights(w,e)
+	return candidates.filter(func(t):return weights.get(t.kind,0)>0 and not (e.archetype=="martial_artist" and ((t.kind=="keeper" and w.keeper.hp<=1) or (t.kind=="animal" and w.Orders.animal(w,t.id).hp<=1))))
 
 static func select_target(w,e,candidates: Array) -> Dictionary:
 	if candidates.is_empty(): return {}
@@ -192,7 +194,8 @@ static func select_target(w,e,candidates: Array) -> Dictionary:
 		if not groups.has(t.kind): groups[t.kind]=[]
 		groups[t.kind].append(t)
 	var kinds=groups.keys()
-	var kind=kinds[Data.weighted(w.rng,kinds.map(func(k):return e.target_weights[k]))]
+	var weights=Targets.weights(w,e)
+	var kind=kinds[Data.weighted(w.rng,kinds.map(func(k):return weights.get("idol" if k=="idol_memory" else k,0)))]
 	var rows=groups[kind]
 	rows.sort_custom(func(a,b):return w.distance(e.pos,a.pos)<w.distance(e.pos,b.pos) if w.distance(e.pos,a.pos)!=w.distance(e.pos,b.pos) else a.id<b.id)
 	return rows[0] if w.rng.randf()*100<e.ai_accuracy else rows[w.rng.randi_range(0,rows.size()-1)]
@@ -214,10 +217,13 @@ static func enemy_step(w,e) -> bool:
 	if e.archetype=="animal_tamer" and e.led_animal>=0: lead_out(w,e); return true
 	if w.tick<e.get("bow_until",0): e.state="礼"; e.action_id="bow"; return true
 	var candidates=target_candidates(w,e)
+	var retaliating=false
 	if w.tick<e.threat_until:
 		var attacker=w.Orders.animal(w,e.attacker)
 		if not attacker.is_empty() and attacker.placed and attacker.hp>0 and w.distance(e.pos,attacker.pos)<=1 and w.line_of_sight(e.pos,attacker.pos):
-			if e.archetype!="martial_artist": candidates=[{"kind":"animal","id":attacker.id,"pos":attacker.pos}]
+			if e.archetype!="martial_artist":
+				candidates=[{"kind":"animal","id":attacker.id,"pos":attacker.pos}];retaliating=true
+	if not retaliating:candidates=Targets.focus(w,e,candidates)
 	var target=e.get("chosen_target",{})
 	var current=candidates.filter(func(t):return t.kind==target.get("kind") and t.id==target.get("id"))
 	if current.is_empty() or w.tick>=e.get("choose_at",0):
@@ -226,14 +232,9 @@ static func enemy_step(w,e) -> bool:
 	else: target=current[0]; e.chosen_target=target
 	if kidnapper and (not target.is_empty() and target.kind=="keeper" or target.is_empty() and w.Life.targetable(w,true)): return false
 	if target.is_empty():
-		if not w.Life.targetable(w):
-			var fallback=w.animals.filter(func(a):return a.placed and a.hp>0 and w.distance(e.pos,a.pos)<=e.sight_range and w.line_of_sight(e.pos,a.pos) and not (e.archetype=="maid" and a.species=="cow"))
-			if not fallback.is_empty():target={"kind":"animal","id":fallback[0].id,"pos":fallback[0].pos}
-			elif e.object_attack_power>0:
-				for cell in w.Story.idol_cells(w):
-					if w.distance(e.pos,cell)<=e.sight_range and w.line_of_sight(e.pos,cell,true):target={"kind":"idol","id":-1,"pos":cell};break
-		if target.is_empty():e.action_id="walk";walk(w,e,w.RaiderAI.target(e,w));return true
-		e.chosen_target=target
+		e.action_id="walk";walk(w,e,w.RaiderAI.target(e,w));return true
+	if target.kind=="idol_memory":
+		e.action_id="walk";e.state="像を見た場所へ";walk(w,e,target.pos);return true
 	if w.tick<e.get("hesitate_until",0): e.state="様子見"; return true
 	if e.archetype=="martial_artist" and str(target.kind)+str(target.id) not in e.get("bowed_targets",[]):
 		var bowed=e.get("bowed_targets",[]);bowed.append(str(target.kind)+str(target.id));e.bowed_targets=bowed

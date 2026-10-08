@@ -447,7 +447,7 @@ func context_targets() -> Array:
 	return []
 
 func context_state() -> String:
-	return str(world.trees)+str(world.story.idol)+str(world.story.investigated)+str(selected_trees)+str(selected_resources) + str(selected) + str(selected_structures) + str(selected_structures.map(func(p): return selected_store().get(p,{}))) + str(world.jobs.map(func(j): return [j.kind, j.pos])) + str(world.materials) + str(world.wood)
+	return str(world.trees)+str(world.story.idol)+str(world.story.investigated)+str(world.story.prayed_day)+str(selected_trees)+str(selected_resources) + str(selected) + str(selected_structures) + str(selected_structures.map(func(p): return selected_store().get(p,{}))) + str(world.jobs.map(func(j): return [j.kind, j.pos])) + str(world.materials) + str(world.wood)
 
 func build_context_actions():
 	context_signature = context_state()
@@ -463,12 +463,13 @@ func build_context_actions():
 		rows.append(["clear_tree","道具が必要","hammer",func():pass,true,"伐採には道具が必要です（道具は未実装）"])
 		if selected_trees.any(func(p):return job_reserved("clear_tree",p)): rows.append(["cancel_near","取消","cross",cancel_selected_work,false,"開拓予定を取り消す"])
 	elif selected.get("kind")=="idol":
-		for kind in ["inspect_idol","repair_idol","recover_idol"]:
-			if kind=="pray_wealth" and not world.story.investigated: continue
+		for kind in ["inspect_idol","pray_animal","pray_gold","pray_item","repair_idol","recover_idol"]:
+			if world.Story.is_prayer(kind) and not world.story.investigated: continue
 			if kind=="repair_idol" and world.story.idol.hp>=world.story.idol.max_hp: continue
 			if kind=="recover_idol" and world.story.idol.state!="interrupted": continue
 			var why=world.Story.reason(world,kind,world.Story.at(world))
-			rows.append([kind,StoryView.LABELS[kind],"spark",story_action.bind(kind),why!="",why if why!="" else "牧場主が現地で行います"])
+			if why=="" and world.jobs.any(func(j):return j.get("world_target")=="father-idol"): why="像の作業は予約済みです"
+			rows.append([kind,StoryView.LABELS[kind],"spark",story_action.bind(kind),why!="",why if why!="" else ("牧場主が現地で3秒祈ります。1日1回、翌朝に選んだ種類の贈り物を受け取ります" if world.Story.is_prayer(kind) else "牧場主が現地で行います")])
 	elif not selected_resources.is_empty():
 		var pending = selected_resources.any(func(p): return not job_reserved("collect", p))
 		rows.append(["collect_selection", "回収する" if pending else "予約済み", "basket", collect_selected, not pending, "牧場主が現地で回収する"])
@@ -489,7 +490,8 @@ func build_context_actions():
 		if selected_structures.size()==1 and world.live_structure(selected.pos) and world.floors.get(selected.pos,{}).get("status")=="ready":
 			rows.append(["switch_layer","床を見る" if selection_layer=="structure" else "建物を見る","next",switch_layer,false,"同じマスの別の層を選択"])
 	var count = context_targets().size()
-	context_panel.size = Vector2(rows.size() * 112 + 12, 68)
+	var row_width=140 if selected.get("kind")=="idol" else 112
+	context_panel.size = Vector2(rows.size() * row_width + 12, 68)
 	var title = Label.new()
 	title.text = "黄金像" if selected.get("kind")=="idol" else ("開拓する木" if selected.get("kind")=="tree" else ("選択 %d/8" % count if count > 1 else ("落とし物" if not selected_resources.is_empty() else ("床" if selection_layer=="floor" else "建物"))))
 	title.position = Vector2(9,3)
@@ -497,7 +499,7 @@ func build_context_actions():
 	context_panel.add_child(title)
 	for i in range(rows.size()):
 		var row = rows[i]
-		add_button(context_panel,row[0],row[1],Rect2(6+i*112,27,106,34),row[3])
+		add_button(context_panel,row[0],row[1],Rect2(6+i*row_width,27,row_width-6,34),row[3])
 		buttons[row[0]].icon = UI.icon(row[2])
 		buttons[row[0]].disabled = row[4]
 		buttons[row[0]].tooltip_text = row[5]

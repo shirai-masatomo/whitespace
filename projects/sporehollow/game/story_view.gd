@@ -1,7 +1,7 @@
 extends RefCounted
 const IDOL=preload("res://art_delivery/ui_world_direction_v1/candidates/world/goldA.png")
 const IDOL_ANCHOR=Vector2(72,152)
-const LABELS={"clear_tree":"開拓","inspect_idol":"像を調べる","pray_wealth":"富を願う","repair_idol":"像を修理","recover_idol":"像を固定"}
+const LABELS={"clear_tree":"開拓","inspect_idol":"像を調べる","pray_wealth":"富を願う","pray_animal":"動物を願う","pray_gold":"お金を願う","pray_item":"アイテムを願う","repair_idol":"像を修理","recover_idol":"像を固定"}
 
 static func tree(g,p: Vector2i,deep: bool=false):
 	var id="world.tree_"+["a","b","c"][preload("res://game/forest_pattern.gd").rank(p,g.world.seed_value)%3]
@@ -75,6 +75,12 @@ static func morning_buttons(g):
 			var headline=Label.new();headline.position=Vector2(350,683);headline.size=Vector2(600,28)
 			headline.text="放送："+g.world.story.news[-1].title;headline.add_theme_font_size_override("font_size",17)
 			headline.mouse_filter=Control.MOUSE_FILTER_IGNORE;g.palette.add_child(headline)
+	var gifts=g.world.story.miracles.filter(func(m):return m.day==g.world.campaign.day)
+	if not gifts.is_empty():
+		var gift=Label.new();gift.position=Vector2(350,718);gift.size=Vector2(600,28)
+		gift.text="願いの贈り物："+gifts[-1].get("text","金貨 +60G")
+		gift.add_theme_font_size_override("font_size",17);gift.mouse_filter=Control.MOUSE_FILTER_IGNORE
+		g.palette.add_child(gift)
 
 static func debug(g):
 	var w=g.world

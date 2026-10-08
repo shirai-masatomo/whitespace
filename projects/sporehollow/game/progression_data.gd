@@ -25,8 +25,8 @@ const ENEMY_ROWS = {
 	"martial_artist":["武闘家",60,1.8,6,8,8,0,1.1,75,[50,50,0,0],Rarity.UNCOMMON,"人と動物に礼をして挑む"],
 	"salaryman":["サラリーマン",28,1.4,5,3,3,1,1.5,35,[35,25,20,20],Rarity.COMMON,"弱いが応援を呼ぶ"],
 	"ninja":["忍者",42,2.2,7,4,4,1,1.0,80,[45,30,10,15],Rarity.RARE,"見通せる相手に手裏剣を投げる"],
-	"animal_tamer":["ムッツゴロウ",45,1.5,7,2,1,0,1.5,70,[5,85,0,10],Rarity.RARE,"動物を手懐けて連れ帰る"],
-	"runner":["ランナー",35,FAST_SPEED,6,3,2,0,1.2,50,[45,20,5,30],Rarity.UNCOMMON,"速いが走り続けると疲れる"]}
+	"animal_tamer":["ムッツゴロウ",45,1.5,7,2,1,0,1.5,70,[5,85,0,0],Rarity.RARE,"動物を手懐けて連れ帰る"],
+	"runner":["ランナー",35,FAST_SPEED,6,3,2,1,1.2,50,[45,20,5,30],Rarity.UNCOMMON,"速いが走り続けると疲れる"]}
 const SPECIAL = {"phone_chance":0.15,"phone_delay":2.0,"reinforcement_delay":3.0,"night_reinforcement_cap":4,
 	"shuriken_range":5,"shuriken_ct":4.0,"shuriken_damage":7,"bow_seconds":0.75,
 	"tame_range":3,"tame_loss":30.0,"tame_ct":3.0,"tame_recovery":2.0,"tame_threshold":25,"shiba_resistance":0.5,

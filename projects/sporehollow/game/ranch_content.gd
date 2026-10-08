@@ -222,6 +222,10 @@ static func enemy_step(w,e) -> bool:
 			e.dance_at=w.tick+ceili(w.ProgressData.EnemySkills.get_skill("dance").Cooldown/w.DT)
 			for t in friends:t.dance_until=w.tick+ceili(w.ProgressData.EnemySkills.TUNING.dance_buff/w.DT)
 			e.action_id="fan_raise";e.state="舞う";w.PlayerEvents.add(w,"舞姫：舞");return true
+		if not close and w.Progression.Targets.keeper_down(w):
+			var advance=w.Progression.Targets.support_target(w,e)
+			if not advance.is_empty() and w.distance(e.pos,advance.pos)>2:
+				e.state="仲間に続く";e.action_id="walk";w.Progression.walk(w,e,advance.pos);return true
 
 	if e.archetype!="thief":return false
 	if not e.get("stolen",{}).is_empty():

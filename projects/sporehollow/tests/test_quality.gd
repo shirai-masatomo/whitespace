@@ -66,8 +66,10 @@ func run():
  for kind in ["destroyer","martial_artist","salaryman","ninja","animal_tamer","runner","dancer","thief","maid"]:
   w=open_world();w.keeper.state="hidden_rest";w.keeper.hp=0;dog=w.animals[0];dog.pos=Vector2i(11,10);dog.mode="rest";dog.hp=999;dog.max_hp=999
   var e=enemy(w,kind,Vector2i(13,10));e.ai_accuracy=100;e.debug_recruit_chance=0;e.can_see_keeper=false
+  var idol_hp=w.story.idol.hp;var support_friend={}
+  if kind=="maid":support_friend=enemy(w,"salaryman",Vector2i(10,10));support_friend.hp=1
   for i in range(100):w.tick+=1;w.RaiderAI.perceive(e,w);w.enemy_step(e)
-  check(e.pos!=Vector2i(13,10) or dog.hp<999 or e.get("led_animal",-1)>=0,"AI audit: ordinary action continues without keeper: "+kind)
+  check(e.pos!=Vector2i(13,10) or dog.hp<999 or e.get("led_animal",-1)>=0 or w.story.idol.hp<idol_hp or support_friend.get("hp",0)>1,"AI audit: role action continues without keeper: "+kind)
   check(e.get("chosen_target",{}).get("kind","")!="keeper","Hidden keeper is not selected: "+kind)
  w=open_world();w.debug_enabled=true;w.paused=true
  for kind in D.ENEMY_ROWS.keys()+["doberman"]:
