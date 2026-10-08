@@ -1,0 +1,63 @@
+[
+  {
+    "target": "merchant",
+    "source": "art_delivery\\two_direction_review_v1\\native\\merchant\\idle_right.png",
+    "frames": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "replace_top_band_px": 17,
+    "reason": "Preserve adopted face/head silhouette, no new facial redesign during locomotion."
+  },
+  {
+    "target": "maid",
+    "source": "art_delivery\\two_direction_review_v1\\native\\maid\\idle_right.png",
+    "frames": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "replace_top_band_px": 28,
+    "reason": "Preserve adopted face/head silhouette, no new facial redesign during locomotion."
+  },
+  {
+    "target": "dancer",
+    "source": "art_delivery\\two_direction_review_v1\\native\\dancer\\idle_right.png",
+    "frames": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "replace_top_band_px": 29,
+    "reason": "Preserve adopted face/head silhouette, no new facial redesign during locomotion."
+  },
+  {
+    "target": "thief",
+    "source": "art_delivery\\two_direction_review_v1\\native\\thief\\idle_right.png",
+    "frames": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "replace_top_band_px": 31,
+    "reason": "Preserve adopted face/head silhouette, no new facial redesign during locomotion."
+  },
+  {
+    "target": "bull",
+    "canvas": [
+      96,
+      64
+    ],
+    "anchor": [
+      48,
+      58
+    ],
+    "pad_left_right_px": 8,
+    "reason": "Preserve full horns/hooves/tail at the largest attack and fall extent without shrinking."
+  }
+]

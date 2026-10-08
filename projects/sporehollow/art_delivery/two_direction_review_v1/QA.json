@@ -16,7 +16,7 @@
   "not_claimed": [
     "Motion completeness",
     "In-game integration",
-    "Runtime render verification",
-    "User adoption of these sheets"
-  ]
+    "Runtime render verification"
+  ],
+  "adopted": "2026-10-08"
 }

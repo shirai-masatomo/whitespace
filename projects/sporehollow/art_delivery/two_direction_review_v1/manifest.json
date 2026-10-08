@@ -3,7 +3,7 @@
   "delivery": "two_direction_review_v1",
   "date": "2026-10-08",
   "branch": "codex/sporehollow-art-assets",
-  "status": "awaiting_two_direction_review",
+  "status": "direction_approved",
   "assets": [],
   "review_assets": [
     {
@@ -1300,10 +1300,9 @@
     "white_key": false,
     "preserve_padding": true
   },
-  "formal_motion_gate": "Only after adoption of these direction sheets. Do not interpret representative poses as finished cycles.",
+  "formal_motion_gate": "Satisfied by user OK on 2026-10-08. Formal deliveries remain separate.",
   "implementation_reference": "f6a60ee525cbe63d962a06280a7d7a9533d69d66",
   "remaining": [
-    "Direction-sheet adoption.",
     "Per-action left/right formal animation frames, consistent pixel finish, sockets, FX separation and timings.",
     "Runtime integration and isolated-render validation."
   ],
@@ -1327,5 +1326,6 @@
     "implementation-PACKET.md": "f67409c89e4823e9a7a1e975523682c2ce07affc0a4ad89d630fd85cf45f64e8",
     "ITEMS.md": "a602a05acafed737c617261a4b964037c280b3d1a76d093aed9414451556916a",
     "WORLD_SYSTEMS.md": "fa21be83d4a591c72727c34cad1e46246f136f31828b51845380446c415ff8ea"
-  }
+  },
+  "adoption_record": "ADOPTION.json"
 }
