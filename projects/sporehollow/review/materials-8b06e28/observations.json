@@ -1,0 +1,1722 @@
+{
+  "captures": [
+    {
+      "animal_id": -1,
+      "book": "",
+      "file": "01_left_motion.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": -1,
+      "book": "",
+      "file": "02_actions.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": -1,
+      "book": "",
+      "file": "03_departing_cart.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    }
+  ],
+  "checks": [
+    {
+      "check": "Delivered frame: res://art_delivery/merchant_motion_v1/idle/right_00.png",
+      "passed": true
+    },
+    {
+      "check": "Non-loop holds final: merchant/idle/right",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/merchant_motion_v1/idle/left_00.png",
+      "passed": true
+    },
+    {
+      "check": "Non-loop holds final: merchant/idle/left",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/merchant_motion_v1/walk/right_00.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/merchant_motion_v1/walk/right_01.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/merchant_motion_v1/walk/right_02.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/merchant_motion_v1/walk/right_03.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/merchant_motion_v1/walk/left_00.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/merchant_motion_v1/walk/left_01.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/merchant_motion_v1/walk/left_02.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/merchant_motion_v1/walk/left_03.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/merchant_motion_v1/cart_idle/right_00.png",
+      "passed": true
+    },
+    {
+      "check": "Non-loop holds final: merchant/cart_idle/right",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/merchant_motion_v1/cart_idle/left_00.png",
+      "passed": true
+    },
+    {
+      "check": "Non-loop holds final: merchant/cart_idle/left",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/merchant_motion_v1/cart_move/right_00.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/merchant_motion_v1/cart_move/right_01.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/merchant_motion_v1/cart_move/right_02.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/merchant_motion_v1/cart_move/right_03.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/merchant_motion_v1/cart_move/left_00.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/merchant_motion_v1/cart_move/left_01.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/merchant_motion_v1/cart_move/left_02.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/merchant_motion_v1/cart_move/left_03.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/maid_motion_v1/idle/right_00.png",
+      "passed": true
+    },
+    {
+      "check": "Non-loop holds final: maid/idle/right",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/maid_motion_v1/idle/left_00.png",
+      "passed": true
+    },
+    {
+      "check": "Non-loop holds final: maid/idle/left",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/maid_motion_v1/walk/right_00.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/maid_motion_v1/walk/right_01.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/maid_motion_v1/walk/right_02.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/maid_motion_v1/walk/right_03.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/maid_motion_v1/walk/left_00.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/maid_motion_v1/walk/left_01.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/maid_motion_v1/walk/left_02.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/maid_motion_v1/walk/left_03.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/maid_motion_v1/attack/right_00.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/maid_motion_v1/attack/right_01.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/maid_motion_v1/attack/right_02.png",
+      "passed": true
+    },
+    {
+      "check": "Non-loop holds final: maid/attack/right",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/maid_motion_v1/attack/left_00.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/maid_motion_v1/attack/left_01.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/maid_motion_v1/attack/left_02.png",
+      "passed": true
+    },
+    {
+      "check": "Non-loop holds final: maid/attack/left",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/maid_motion_v1/coffee_serve/right_00.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/maid_motion_v1/coffee_serve/right_01.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/maid_motion_v1/coffee_serve/right_02.png",
+      "passed": true
+    },
+    {
+      "check": "Non-loop holds final: maid/coffee_serve/right",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/maid_motion_v1/coffee_serve/left_00.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/maid_motion_v1/coffee_serve/left_01.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/maid_motion_v1/coffee_serve/left_02.png",
+      "passed": true
+    },
+    {
+      "check": "Non-loop holds final: maid/coffee_serve/left",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/maid_motion_v1/twirl/right_00.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/maid_motion_v1/twirl/right_01.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/maid_motion_v1/twirl/right_02.png",
+      "passed": true
+    },
+    {
+      "check": "Non-loop holds final: maid/twirl/right",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/maid_motion_v1/twirl/left_00.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/maid_motion_v1/twirl/left_01.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/maid_motion_v1/twirl/left_02.png",
+      "passed": true
+    },
+    {
+      "check": "Non-loop holds final: maid/twirl/left",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/maid_motion_v1/drink/right_00.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/maid_motion_v1/drink/right_01.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/maid_motion_v1/drink/right_02.png",
+      "passed": true
+    },
+    {
+      "check": "Non-loop holds final: maid/drink/right",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/maid_motion_v1/drink/left_00.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/maid_motion_v1/drink/left_01.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/maid_motion_v1/drink/left_02.png",
+      "passed": true
+    },
+    {
+      "check": "Non-loop holds final: maid/drink/left",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/maid_motion_v1/rest/right_00.png",
+      "passed": true
+    },
+    {
+      "check": "Non-loop holds final: maid/rest/right",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/maid_motion_v1/rest/left_00.png",
+      "passed": true
+    },
+    {
+      "check": "Non-loop holds final: maid/rest/left",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/maid_motion_v1/rage_start/right_00.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/maid_motion_v1/rage_start/right_01.png",
+      "passed": true
+    },
+    {
+      "check": "Non-loop holds final: maid/rage_start/right",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/maid_motion_v1/rage_start/left_00.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/maid_motion_v1/rage_start/left_01.png",
+      "passed": true
+    },
+    {
+      "check": "Non-loop holds final: maid/rage_start/left",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/maid_motion_v1/rage_run/right_00.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/maid_motion_v1/rage_run/right_01.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/maid_motion_v1/rage_run/right_02.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/maid_motion_v1/rage_run/right_03.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/maid_motion_v1/rage_run/left_00.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/maid_motion_v1/rage_run/left_01.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/maid_motion_v1/rage_run/left_02.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/maid_motion_v1/rage_run/left_03.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/maid_motion_v1/rage_attack/right_00.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/maid_motion_v1/rage_attack/right_01.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/maid_motion_v1/rage_attack/right_02.png",
+      "passed": true
+    },
+    {
+      "check": "Non-loop holds final: maid/rage_attack/right",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/maid_motion_v1/rage_attack/left_00.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/maid_motion_v1/rage_attack/left_01.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/maid_motion_v1/rage_attack/left_02.png",
+      "passed": true
+    },
+    {
+      "check": "Non-loop holds final: maid/rage_attack/left",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/maid_motion_v1/rage_end/right_00.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/maid_motion_v1/rage_end/right_01.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/maid_motion_v1/rage_end/right_02.png",
+      "passed": true
+    },
+    {
+      "check": "Non-loop holds final: maid/rage_end/right",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/maid_motion_v1/rage_end/left_00.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/maid_motion_v1/rage_end/left_01.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/maid_motion_v1/rage_end/left_02.png",
+      "passed": true
+    },
+    {
+      "check": "Non-loop holds final: maid/rage_end/left",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/maid_motion_v1/hurt/right_00.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/maid_motion_v1/hurt/right_01.png",
+      "passed": true
+    },
+    {
+      "check": "Non-loop holds final: maid/hurt/right",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/maid_motion_v1/hurt/left_00.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/maid_motion_v1/hurt/left_01.png",
+      "passed": true
+    },
+    {
+      "check": "Non-loop holds final: maid/hurt/left",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/maid_motion_v1/death/right_00.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/maid_motion_v1/death/right_01.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/maid_motion_v1/death/right_02.png",
+      "passed": true
+    },
+    {
+      "check": "Non-loop holds final: maid/death/right",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/maid_motion_v1/death/left_00.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/maid_motion_v1/death/left_01.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/maid_motion_v1/death/left_02.png",
+      "passed": true
+    },
+    {
+      "check": "Non-loop holds final: maid/death/left",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/maid_motion_v1/get_up/right_00.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/maid_motion_v1/get_up/right_01.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/maid_motion_v1/get_up/right_02.png",
+      "passed": true
+    },
+    {
+      "check": "Non-loop holds final: maid/get_up/right",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/maid_motion_v1/get_up/left_00.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/maid_motion_v1/get_up/left_01.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/maid_motion_v1/get_up/left_02.png",
+      "passed": true
+    },
+    {
+      "check": "Non-loop holds final: maid/get_up/left",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/maid_motion_v1/retreat/right_00.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/maid_motion_v1/retreat/right_01.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/maid_motion_v1/retreat/right_02.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/maid_motion_v1/retreat/right_03.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/maid_motion_v1/retreat/left_00.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/maid_motion_v1/retreat/left_01.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/maid_motion_v1/retreat/left_02.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/maid_motion_v1/retreat/left_03.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/maid_motion_v1/rage_aura/right_00.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/maid_motion_v1/rage_aura/right_01.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/maid_motion_v1/rage_aura/right_02.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/maid_motion_v1/rage_aura/right_03.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/maid_motion_v1/rage_aura/left_00.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/maid_motion_v1/rage_aura/left_01.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/maid_motion_v1/rage_aura/left_02.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/maid_motion_v1/rage_aura/left_03.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/dancer_motion_v1/idle/right_00.png",
+      "passed": true
+    },
+    {
+      "check": "Non-loop holds final: dancer/idle/right",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/dancer_motion_v1/idle/left_00.png",
+      "passed": true
+    },
+    {
+      "check": "Non-loop holds final: dancer/idle/left",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/dancer_motion_v1/walk/right_00.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/dancer_motion_v1/walk/right_01.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/dancer_motion_v1/walk/right_02.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/dancer_motion_v1/walk/right_03.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/dancer_motion_v1/walk/left_00.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/dancer_motion_v1/walk/left_01.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/dancer_motion_v1/walk/left_02.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/dancer_motion_v1/walk/left_03.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/dancer_motion_v1/attack/right_00.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/dancer_motion_v1/attack/right_01.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/dancer_motion_v1/attack/right_02.png",
+      "passed": true
+    },
+    {
+      "check": "Non-loop holds final: dancer/attack/right",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/dancer_motion_v1/attack/left_00.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/dancer_motion_v1/attack/left_01.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/dancer_motion_v1/attack/left_02.png",
+      "passed": true
+    },
+    {
+      "check": "Non-loop holds final: dancer/attack/left",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/dancer_motion_v1/dance/right_00.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/dancer_motion_v1/dance/right_01.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/dancer_motion_v1/dance/right_02.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/dancer_motion_v1/dance/right_03.png",
+      "passed": true
+    },
+    {
+      "check": "Non-loop holds final: dancer/dance/right",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/dancer_motion_v1/dance/left_00.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/dancer_motion_v1/dance/left_01.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/dancer_motion_v1/dance/left_02.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/dancer_motion_v1/dance/left_03.png",
+      "passed": true
+    },
+    {
+      "check": "Non-loop holds final: dancer/dance/left",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/dancer_motion_v1/ultimate/right_00.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/dancer_motion_v1/ultimate/right_01.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/dancer_motion_v1/ultimate/right_02.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/dancer_motion_v1/ultimate/right_03.png",
+      "passed": true
+    },
+    {
+      "check": "Non-loop holds final: dancer/ultimate/right",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/dancer_motion_v1/ultimate/left_00.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/dancer_motion_v1/ultimate/left_01.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/dancer_motion_v1/ultimate/left_02.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/dancer_motion_v1/ultimate/left_03.png",
+      "passed": true
+    },
+    {
+      "check": "Non-loop holds final: dancer/ultimate/left",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/dancer_motion_v1/hurt/right_00.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/dancer_motion_v1/hurt/right_01.png",
+      "passed": true
+    },
+    {
+      "check": "Non-loop holds final: dancer/hurt/right",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/dancer_motion_v1/hurt/left_00.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/dancer_motion_v1/hurt/left_01.png",
+      "passed": true
+    },
+    {
+      "check": "Non-loop holds final: dancer/hurt/left",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/dancer_motion_v1/downed/right_00.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/dancer_motion_v1/downed/right_01.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/dancer_motion_v1/downed/right_02.png",
+      "passed": true
+    },
+    {
+      "check": "Non-loop holds final: dancer/downed/right",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/dancer_motion_v1/downed/left_00.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/dancer_motion_v1/downed/left_01.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/dancer_motion_v1/downed/left_02.png",
+      "passed": true
+    },
+    {
+      "check": "Non-loop holds final: dancer/downed/left",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/dancer_motion_v1/get_up/right_00.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/dancer_motion_v1/get_up/right_01.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/dancer_motion_v1/get_up/right_02.png",
+      "passed": true
+    },
+    {
+      "check": "Non-loop holds final: dancer/get_up/right",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/dancer_motion_v1/get_up/left_00.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/dancer_motion_v1/get_up/left_01.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/dancer_motion_v1/get_up/left_02.png",
+      "passed": true
+    },
+    {
+      "check": "Non-loop holds final: dancer/get_up/left",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/dancer_motion_v1/retreat/right_00.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/dancer_motion_v1/retreat/right_01.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/dancer_motion_v1/retreat/right_02.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/dancer_motion_v1/retreat/right_03.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/dancer_motion_v1/retreat/left_00.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/dancer_motion_v1/retreat/left_01.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/dancer_motion_v1/retreat/left_02.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/dancer_motion_v1/retreat/left_03.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/dancer_motion_v1/revival_light/right_00.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/dancer_motion_v1/revival_light/right_01.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/dancer_motion_v1/revival_light/right_02.png",
+      "passed": true
+    },
+    {
+      "check": "Non-loop holds final: dancer/revival_light/right",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/dancer_motion_v1/revival_light/left_00.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/dancer_motion_v1/revival_light/left_01.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/dancer_motion_v1/revival_light/left_02.png",
+      "passed": true
+    },
+    {
+      "check": "Non-loop holds final: dancer/revival_light/left",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/thief_motion_v1/idle/right_00.png",
+      "passed": true
+    },
+    {
+      "check": "Non-loop holds final: thief/idle/right",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/thief_motion_v1/idle/left_00.png",
+      "passed": true
+    },
+    {
+      "check": "Non-loop holds final: thief/idle/left",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/thief_motion_v1/run/right_00.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/thief_motion_v1/run/right_01.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/thief_motion_v1/run/right_02.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/thief_motion_v1/run/right_03.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/thief_motion_v1/run/left_00.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/thief_motion_v1/run/left_01.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/thief_motion_v1/run/left_02.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/thief_motion_v1/run/left_03.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/thief_motion_v1/attack/right_00.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/thief_motion_v1/attack/right_01.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/thief_motion_v1/attack/right_02.png",
+      "passed": true
+    },
+    {
+      "check": "Non-loop holds final: thief/attack/right",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/thief_motion_v1/attack/left_00.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/thief_motion_v1/attack/left_01.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/thief_motion_v1/attack/left_02.png",
+      "passed": true
+    },
+    {
+      "check": "Non-loop holds final: thief/attack/left",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/thief_motion_v1/steal/right_00.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/thief_motion_v1/steal/right_01.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/thief_motion_v1/steal/right_02.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/thief_motion_v1/steal/right_03.png",
+      "passed": true
+    },
+    {
+      "check": "Non-loop holds final: thief/steal/right",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/thief_motion_v1/steal/left_00.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/thief_motion_v1/steal/left_01.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/thief_motion_v1/steal/left_02.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/thief_motion_v1/steal/left_03.png",
+      "passed": true
+    },
+    {
+      "check": "Non-loop holds final: thief/steal/left",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/thief_motion_v1/poison_throw/right_00.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/thief_motion_v1/poison_throw/right_01.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/thief_motion_v1/poison_throw/right_02.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/thief_motion_v1/poison_throw/right_03.png",
+      "passed": true
+    },
+    {
+      "check": "Non-loop holds final: thief/poison_throw/right",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/thief_motion_v1/poison_throw/left_00.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/thief_motion_v1/poison_throw/left_01.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/thief_motion_v1/poison_throw/left_02.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/thief_motion_v1/poison_throw/left_03.png",
+      "passed": true
+    },
+    {
+      "check": "Non-loop holds final: thief/poison_throw/left",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/thief_motion_v1/hurt/right_00.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/thief_motion_v1/hurt/right_01.png",
+      "passed": true
+    },
+    {
+      "check": "Non-loop holds final: thief/hurt/right",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/thief_motion_v1/hurt/left_00.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/thief_motion_v1/hurt/left_01.png",
+      "passed": true
+    },
+    {
+      "check": "Non-loop holds final: thief/hurt/left",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/thief_motion_v1/downed/right_00.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/thief_motion_v1/downed/right_01.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/thief_motion_v1/downed/right_02.png",
+      "passed": true
+    },
+    {
+      "check": "Non-loop holds final: thief/downed/right",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/thief_motion_v1/downed/left_00.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/thief_motion_v1/downed/left_01.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/thief_motion_v1/downed/left_02.png",
+      "passed": true
+    },
+    {
+      "check": "Non-loop holds final: thief/downed/left",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/thief_motion_v1/get_up/right_00.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/thief_motion_v1/get_up/right_01.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/thief_motion_v1/get_up/right_02.png",
+      "passed": true
+    },
+    {
+      "check": "Non-loop holds final: thief/get_up/right",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/thief_motion_v1/get_up/left_00.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/thief_motion_v1/get_up/left_01.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/thief_motion_v1/get_up/left_02.png",
+      "passed": true
+    },
+    {
+      "check": "Non-loop holds final: thief/get_up/left",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/thief_motion_v1/retreat/right_00.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/thief_motion_v1/retreat/right_01.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/thief_motion_v1/retreat/right_02.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/thief_motion_v1/retreat/right_03.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/thief_motion_v1/retreat/left_00.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/thief_motion_v1/retreat/left_01.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/thief_motion_v1/retreat/left_02.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/thief_motion_v1/retreat/left_03.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/thief_motion_v1/hand_front/right_00.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/thief_motion_v1/hand_front/right_01.png",
+      "passed": true
+    },
+    {
+      "check": "Non-loop holds final: thief/hand_front/right",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/thief_motion_v1/hand_front/left_00.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/thief_motion_v1/hand_front/left_01.png",
+      "passed": true
+    },
+    {
+      "check": "Non-loop holds final: thief/hand_front/left",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/cow_motion_v1/idle/right_00.png",
+      "passed": true
+    },
+    {
+      "check": "Non-loop holds final: cow/idle/right",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/cow_motion_v1/idle/left_00.png",
+      "passed": true
+    },
+    {
+      "check": "Non-loop holds final: cow/idle/left",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/cow_motion_v1/walk/right_00.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/cow_motion_v1/walk/right_01.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/cow_motion_v1/walk/right_02.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/cow_motion_v1/walk/right_03.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/cow_motion_v1/walk/left_00.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/cow_motion_v1/walk/left_01.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/cow_motion_v1/walk/left_02.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/cow_motion_v1/walk/left_03.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/cow_motion_v1/milking_start/right_00.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/cow_motion_v1/milking_start/right_01.png",
+      "passed": true
+    },
+    {
+      "check": "Non-loop holds final: cow/milking_start/right",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/cow_motion_v1/milking_start/left_00.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/cow_motion_v1/milking_start/left_01.png",
+      "passed": true
+    },
+    {
+      "check": "Non-loop holds final: cow/milking_start/left",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/cow_motion_v1/milking_hold/right_00.png",
+      "passed": true
+    },
+    {
+      "check": "Non-loop holds final: cow/milking_hold/right",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/cow_motion_v1/milking_hold/left_00.png",
+      "passed": true
+    },
+    {
+      "check": "Non-loop holds final: cow/milking_hold/left",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/cow_motion_v1/milking_end/right_00.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/cow_motion_v1/milking_end/right_01.png",
+      "passed": true
+    },
+    {
+      "check": "Non-loop holds final: cow/milking_end/right",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/cow_motion_v1/milking_end/left_00.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/cow_motion_v1/milking_end/left_01.png",
+      "passed": true
+    },
+    {
+      "check": "Non-loop holds final: cow/milking_end/left",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/cow_motion_v1/hurt/right_00.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/cow_motion_v1/hurt/right_01.png",
+      "passed": true
+    },
+    {
+      "check": "Non-loop holds final: cow/hurt/right",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/cow_motion_v1/hurt/left_00.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/cow_motion_v1/hurt/left_01.png",
+      "passed": true
+    },
+    {
+      "check": "Non-loop holds final: cow/hurt/left",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/cow_motion_v1/death/right_00.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/cow_motion_v1/death/right_01.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/cow_motion_v1/death/right_02.png",
+      "passed": true
+    },
+    {
+      "check": "Non-loop holds final: cow/death/right",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/cow_motion_v1/death/left_00.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/cow_motion_v1/death/left_01.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/cow_motion_v1/death/left_02.png",
+      "passed": true
+    },
+    {
+      "check": "Non-loop holds final: cow/death/left",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/bull_motion_v1/idle/right_00.png",
+      "passed": true
+    },
+    {
+      "check": "Non-loop holds final: bull/idle/right",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/bull_motion_v1/idle/left_00.png",
+      "passed": true
+    },
+    {
+      "check": "Non-loop holds final: bull/idle/left",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/bull_motion_v1/run/right_00.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/bull_motion_v1/run/right_01.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/bull_motion_v1/run/right_02.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/bull_motion_v1/run/right_03.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/bull_motion_v1/run/left_00.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/bull_motion_v1/run/left_01.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/bull_motion_v1/run/left_02.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/bull_motion_v1/run/left_03.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/bull_motion_v1/attack/right_00.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/bull_motion_v1/attack/right_01.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/bull_motion_v1/attack/right_02.png",
+      "passed": true
+    },
+    {
+      "check": "Non-loop holds final: bull/attack/right",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/bull_motion_v1/attack/left_00.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/bull_motion_v1/attack/left_01.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/bull_motion_v1/attack/left_02.png",
+      "passed": true
+    },
+    {
+      "check": "Non-loop holds final: bull/attack/left",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/bull_motion_v1/charge_start/right_00.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/bull_motion_v1/charge_start/right_01.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/bull_motion_v1/charge_start/right_02.png",
+      "passed": true
+    },
+    {
+      "check": "Non-loop holds final: bull/charge_start/right",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/bull_motion_v1/charge_start/left_00.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/bull_motion_v1/charge_start/left_01.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/bull_motion_v1/charge_start/left_02.png",
+      "passed": true
+    },
+    {
+      "check": "Non-loop holds final: bull/charge_start/left",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/bull_motion_v1/charge/right_00.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/bull_motion_v1/charge/right_01.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/bull_motion_v1/charge/right_02.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/bull_motion_v1/charge/right_03.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/bull_motion_v1/charge/left_00.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/bull_motion_v1/charge/left_01.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/bull_motion_v1/charge/left_02.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/bull_motion_v1/charge/left_03.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/bull_motion_v1/charge_end/right_00.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/bull_motion_v1/charge_end/right_01.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/bull_motion_v1/charge_end/right_02.png",
+      "passed": true
+    },
+    {
+      "check": "Non-loop holds final: bull/charge_end/right",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/bull_motion_v1/charge_end/left_00.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/bull_motion_v1/charge_end/left_01.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/bull_motion_v1/charge_end/left_02.png",
+      "passed": true
+    },
+    {
+      "check": "Non-loop holds final: bull/charge_end/left",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/bull_motion_v1/guts/right_00.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/bull_motion_v1/guts/right_01.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/bull_motion_v1/guts/left_00.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/bull_motion_v1/guts/left_01.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/bull_motion_v1/guts_breath/right_00.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/bull_motion_v1/guts_breath/right_01.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/bull_motion_v1/guts_breath/right_02.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/bull_motion_v1/guts_breath/left_00.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/bull_motion_v1/guts_breath/left_01.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/bull_motion_v1/guts_breath/left_02.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/bull_motion_v1/hurt/right_00.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/bull_motion_v1/hurt/right_01.png",
+      "passed": true
+    },
+    {
+      "check": "Non-loop holds final: bull/hurt/right",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/bull_motion_v1/hurt/left_00.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/bull_motion_v1/hurt/left_01.png",
+      "passed": true
+    },
+    {
+      "check": "Non-loop holds final: bull/hurt/left",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/bull_motion_v1/death/right_00.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/bull_motion_v1/death/right_01.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/bull_motion_v1/death/right_02.png",
+      "passed": true
+    },
+    {
+      "check": "Non-loop holds final: bull/death/right",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/bull_motion_v1/death/left_00.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/bull_motion_v1/death/left_01.png",
+      "passed": true
+    },
+    {
+      "check": "Delivered frame: res://art_delivery/bull_motion_v1/death/left_02.png",
+      "passed": true
+    },
+    {
+      "check": "Non-loop holds final: bull/death/left",
+      "passed": true
+    },
+    {
+      "check": "All six deliveries connected: 320 PNG",
+      "passed": true
+    },
+    {
+      "check": "Right walking uses delivered sequence",
+      "passed": true
+    },
+    {
+      "check": "Left stop retains direction",
+      "passed": true
+    },
+    {
+      "check": "Pause freezes motion clock",
+      "passed": true
+    },
+    {
+      "check": "Coffee event selects serve, not attack",
+      "passed": true
+    },
+    {
+      "check": "Serve exits into short twirl",
+      "passed": true
+    },
+    {
+      "check": "Support visual does not loop forever",
+      "passed": true
+    },
+    {
+      "check": "Rage begins once",
+      "passed": true
+    },
+    {
+      "check": "Rage attack uses knife motion",
+      "passed": true
+    },
+    {
+      "check": "Rage ends into normal equipment",
+      "passed": true
+    },
+    {
+      "check": "Down uses delivered collapse",
+      "passed": true
+    },
+    {
+      "check": "Revived actor uses get-up",
+      "passed": true
+    },
+    {
+      "check": "Local milk job starts animation",
+      "passed": true
+    },
+    {
+      "check": "Milk holds while job works",
+      "passed": true
+    },
+    {
+      "check": "Cancel/completion exits milk pose",
+      "passed": true
+    },
+    {
+      "check": "Charge starts",
+      "passed": true
+    },
+    {
+      "check": "Charge loop follows start",
+      "passed": true
+    },
+    {
+      "check": "Blocked or completed charge ends",
+      "passed": true
+    }
+  ],
+  "events": []
+}
