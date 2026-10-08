@@ -13,7 +13,7 @@ static func route(w,a,threats: Array) -> Array:
 		if value>best_safety:best=p;best_safety=value
 		if value>safe_distance:best=p;break # Nearest reachable safety, not a random distant corner.
 		for n in w.neighbors(p):
-			if previous.has(n) or not w.walkable(n) or w.actor_occupied(n,a.pos):continue
+			if previous.has(n) or not w.animal_walkable(a,n) or w.actor_occupied(n,a.pos):continue
 			previous[n]=p;frontier.append(n)
 	var path=[]
 	while best!=a.pos:path.push_front(best);best=previous[best]
@@ -25,7 +25,7 @@ static func step(w,a,visible: Array):
 	if threats.is_empty() or a.move_credit<1:return
 	var path=a.get("escape_route",[])
 	var goal=a.get("escape_goal",a.pos)
-	if path.is_empty() or w.distance(a.pos,path[0])!=1 or not w.walkable(path[0]) or w.actor_occupied(path[0],a.pos) or safety(w,goal,threats)<=a.detection_range:
+	if path.is_empty() or w.distance(a.pos,path[0])!=1 or not w.animal_walkable(a,path[0]) or w.actor_occupied(path[0],a.pos) or safety(w,goal,threats)<=a.detection_range:
 		path=route(w,a,threats);a.escape_route=path
 		a.escape_goal=path[-1] if not path.is_empty() else a.pos
 	if path.is_empty():return # At the safest reachable place; do not step back into danger.

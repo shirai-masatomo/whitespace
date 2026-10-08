@@ -40,6 +40,7 @@ Run-Owned 'export-smoke' $preview @('--','--smoke')
 Copy-Item -LiteralPath "$farmRoot/assets/GODOT_COPYRIGHT.txt" -Destination "$runRoot/GODOT_COPYRIGHT.txt"
 Copy-Item -LiteralPath "$farmRoot/assets/fonts/OFL.txt" -Destination "$runRoot/FONT_LICENSE.txt"
 Copy-Item -LiteralPath "$farmRoot/assets/ui/SOURCES.md" -Destination "$runRoot/UI_SOURCES.txt"
+Copy-Item -LiteralPath "$farmRoot/assets/audio/SOURCES.md" -Destination "$runRoot/AUDIO_SOURCES.txt"
 $launcher=@'
 @echo off
 setlocal
@@ -55,17 +56,7 @@ start "" /D "%~dp0" "%~dp0WhistleRanch-preview.exe"
 exit /b 0
 '@
 [IO.File]::WriteAllText("$runRoot/Play-Isolated.cmd",(($launcher -replace "`r?`n","`r`n")+"`r`n"),[Text.Encoding]::ASCII)
-$note=@'
-# 分離試遊版
-
-Play-Isolated.cmd を手動でダブルクリックしてください。データ先はこのフォルダの user-data に固定されます。通常版の Play.cmd やセーブへ影響しません。EXE直接起動ではこの分離が適用されないため、必ず専用CMDを使用してください。
-
-最新の死亡/単回蘇生/メイド支援、カテゴリ祈り、ダウン中の役割別標的切替を含む中間版です。全体仮完成版ではありません。Day2に像を調査すると、動物/お金/アイテムを選んで祈り、翌朝受け取れます。未発見の像の位置は敵に知らせません。
-
-終了後のキャンペーン続行保存、後半の成長曲線、明示した到達点はまだ未実装です。難度・面白さは未評価。headlessのWindows出力起動を確認していますが、このCMDでの対話的起動や人間の通し試遊は自動実行していません。ロードマップとTASKSに次の接続を記録しています。
-
-検証情報は BUILD.json と export-smoke.log。古い review/current（0d47970）、通常試遊EXE（8b06e28）とは別物です。
-'@
+$note=[IO.File]::ReadAllText((Join-Path $farmRoot 'PLAYTEST.md'))
 [IO.File]::WriteAllText("$runRoot/README.md",$note,[Text.UTF8Encoding]::new($false))
-@{commit=$revision; dirty=$dirty; asset_delivery_commit=$art.latest_delivery_commit; executable='WhistleRanch-preview.exe'; sha256=(Get-FileHash -LiteralPath $preview -Algorithm SHA256).Hash; launcher='Play-Isolated.cmd'; data_root=$dataRoot; headless_export_smoke='passed'; interactive_launch='not run'; scope='intermediate integration preview, not full game completion'} | ConvertTo-Json -Depth 5 | Set-Content -LiteralPath "$runRoot/BUILD.json"
+@{commit=$revision; dirty=$dirty; asset_delivery_commit=$art.latest_delivery_commit; executable='WhistleRanch-preview.exe'; sha256=(Get-FileHash -LiteralPath $preview -Algorithm SHA256).Hash; launcher='Play-Isolated.cmd'; data_root=$dataRoot; headless_export_smoke='passed'; interactive_launch='not run'; scope='first full-loop local playtest; tuning and human acceptance remain'; daytime_music='Porch_Swing_Serenade.mp3'; save_boundary='morning'; campaign_milestone='night15 win -> morning16'} | ConvertTo-Json -Depth 5 | Set-Content -LiteralPath "$runRoot/BUILD.json"
 Write-Output "Isolated preview: $runRoot"

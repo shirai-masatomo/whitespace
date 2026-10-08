@@ -2,6 +2,7 @@ extends RefCounted
 ## Fixed-tick keeper survival; no input/rendering dependency. Tuning is provisional.
 const MAX_HP = 30
 const ATTACK = 2
+const OBJECT_ATTACK = 1 # Shared capability; no new building-attack command is implied.
 const CAPTURE_GRACE = 12.0
 const HIDDEN_HEAL_SECONDS = 6.0
 const HIDDEN_RECOVER_HP = 8
@@ -77,6 +78,10 @@ static func danger(w, kind: String):
 static func command(w, kind: String, p: Vector2i) -> bool:
 	var k = w.keeper
 	if not w.working(): return false
+	if kind=="wake_hidden" or (kind=="keeper_rest" and k.state=="hidden_rest"):
+		if not can_wake_hidden(w):return false
+		if w.paused:k.pending_command={"kind":"wake_hidden","pos":p};return true
+		return recover_hidden(w)
 	if kind == "keeper_move": return w.Jobs.enqueue(w,"move",p,-1)
 	if w.paused:
 		if kind in ["keeper_rest", "resume_jobs"]:
@@ -169,10 +174,7 @@ static func step(w):
 		k.heal_credit+=w.DT
 		if k.heal_credit>=HIDDEN_HEAL_SECONDS:
 			k.heal_credit-=HIDDEN_HEAL_SECONDS;k.hp=mini(k.max_hp,k.hp+1)
-		if k.hp>=HIDDEN_RECOVER_HP:
-			k.state="free";k.kill_gauge_awarded=false;k.hold_before_rest="rescue"
-			w.Jobs.hold(w,"rescue");w.PlayerEvents.add(w,"牧場主が復帰。作業再開を選べます")
-			w.milestones.append({"tick":w.tick,"kind":"keeper_recovered"})
+		if k.hp>=HIDDEN_RECOVER_HP:recover_hidden(w)
 		return
 	if k.state != "free": return
 	var near = w.enemies.any(func(e): return not e.done and not e.flee and w.distance(e.pos, k.pos) <= 3)
@@ -215,6 +217,20 @@ static func step(w):
 			w.combat_log.append({"tick": w.tick, "source": "keeper", "id": -1, "target": e.id, "damage": ATTACK})
 			if e.hp == 0:
 				if w.stage == 1 and e.id == 0: w.drop_blueprint(e.pos)
+
+static func can_wake_hidden(w) -> bool:
+	var k=w.keeper
+	return k.state=="hidden_rest" and k.hp>0 and k.placed and k.carrier<0 and k.restrainer<0
+
+static func recover_hidden(w) -> bool:
+	if not can_wake_hidden(w):return false
+	var k=w.keeper
+	k.state="free";k.kill_gauge_awarded=false;k.hold_before_rest="rescue"
+	k.resting=false;k.forced_rest=false;k.heal_credit=0.0;k.recover_ticks=0
+	k.erase("pending_command");k.erase("rest_kind");k.asleep=false
+	w.Jobs.hold(w,"rescue");w.PlayerEvents.add(w,"牧場主が復帰。作業再開を選べます")
+	w.milestones.append({"tick":w.tick,"kind":"keeper_recovered"})
+	return true
 
 static func hurt(w, e):
 	var k = w.keeper

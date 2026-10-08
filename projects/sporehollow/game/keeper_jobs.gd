@@ -2,15 +2,27 @@ extends RefCounted
 const LIMIT = 8
 const SPEED = 2.5
 
+static func build_reason(w, kind: String, p: Vector2i, extra_jobs: int=0, held_cost: int=0) -> String:
+	# Used both by the drag preview and the actual reservation; no world mutation.
+	if not w.working(): return "牧場作業中に予約してください"
+	if w.jobs.size()+extra_jobs>=LIMIT: return "予定は8件まで"
+	if not w.BUILD.has(kind) or not w.inside(p): return "ここには建てられません"
+	if w.jobs.any(func(j):return j.pos==p and j.kind==kind): return "予約済みです"
+	if w.jobs.any(func(j):return j.pos==p and ((w.BUILD.has(j.kind) and w.BUILD[j.kind].layer==w.BUILD[kind].layer) or j.get("target_layer")==w.BUILD[kind].layer)): return "同じ場所に別の予定があります"
+	var why=w.Buildings.reason(w,kind,p,false)
+	if why!="": return why
+	var data=w.BUILD[kind]
+	if not (w.debug_enabled and w.debug_infinite) and w.resource_amount(data.get("resource","soil"))-held_cost<data.cost: return "素材が足りません"
+	return ""
+
 static func enqueue(w, kind: String, p: Vector2i, animal_id: int) -> bool:
 	if not w.working() or w.jobs.size()>=LIMIT or not w.inside(p): return false
 	if w.jobs.any(func(j):return j.pos==p and j.kind==kind): return false
 	var resource=""
 	var cost=0
 	if w.BUILD.has(kind):
-		var why=w.Buildings.reason(w,kind,p)
+		var why=build_reason(w,kind,p)
 		if why!="": w.say(why); return false
-		if w.jobs.any(func(j):return j.pos==p and ((w.BUILD.has(j.kind) and w.BUILD[j.kind].layer==w.BUILD[kind].layer) or j.get("target_layer")==w.BUILD[kind].layer)): return false
 		resource=w.BUILD[kind].get("resource","soil")
 		cost=0 if w.debug_enabled and w.debug_infinite else w.BUILD[kind].cost
 	elif kind=="move":

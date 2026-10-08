@@ -1,5 +1,13 @@
 extends Node
-## Original synthesized sounds, cached once. No external recordings or simulation RNG.
+## Synthesized effects and user-supplied daytime music. No simulation RNG.
+const DAY_MUSIC=preload("res://assets/audio/Porch_Swing_Serenade.mp3")
+const DAY_VOLUME_DB=-16.0
+const MENU_VOLUME_DB=-23.0
+var music: AudioStreamPlayer
+var music_enabled=false
+var music_soft=false
+var music_level=0.0
+var music_resume=0.0
 var voices: Array = []
 var ambient: AudioStreamPlayer
 var cache: Dictionary = {}
@@ -32,12 +40,33 @@ func _ready():
 	birds.volume_db = -23
 	add_child(birds)
 	ambience_rng.seed = 371
+	music=AudioStreamPlayer.new();music.name="DayMusic"
+	music.stream=DAY_MUSIC.duplicate();music.stream.loop=true;music.stream.loop_offset=0.0
+	music.max_polyphony=1;music.volume_db=-80
+	add_child(music)
 
 func _process(delta):
 	seconds += delta
+	var target=db_to_linear(MENU_VOLUME_DB if music_soft else DAY_VOLUME_DB) if music_enabled else 0.0
+	music_level=move_toward(music_level,target,delta*db_to_linear(DAY_VOLUME_DB)/0.8)
+	if music.playing:
+		music.volume_db=linear_to_db(maxf(0.0001,music_level*seam_gain(music.get_playback_position(),music.stream.get_length())))
+		if not music_enabled and music_level<=0.0001:
+			music_resume=music.get_playback_position();music.stop()
 	if seconds >= next_bird:
 		next_bird = seconds + ambience_rng.randf_range(8, 20)
 		if not night: birds.play()
+
+static func seam_gain(position: float,length: float) -> float:
+	# Keep the original recording intact; soften its non-silent beginning at loop boundaries.
+	return minf(clampf(position/0.12,0.0,1.0),clampf((length-position)/0.5,0.0,1.0))
+
+func set_context(phase: String,soft: bool=false):
+	set_night(phase=="defend")
+	music_enabled=phase in ["shop","day","dawn"]
+	music_soft=soft
+	if music_enabled and not music.playing:
+		music.volume_db=-80;music.play(music_resume)
 
 func set_night(value: bool):
 	if night == value: return

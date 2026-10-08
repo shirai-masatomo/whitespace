@@ -33,7 +33,8 @@ func run():
 	await mouse(Vector2(700,400),MOUSE_BUTTON_RIGHT);await create_timer(0.65).timeout
 	check(game.morning_screen=="morning" and game.world.tick==0,"UI animation never advances morning world")
 	game.world=game.world.begin_day();game.world.paused=true;game.reset_view();game.refresh();await process_frame
-	game.neutral();await key(KEY_TAB);check(game.group==0 and game.tool=="","Tab neutral to construction without action")
+	game.neutral();await key(KEY_TAB);check(game.group==2 and game.tool=="","Tab neutral to keeper without action")
+	await key(KEY_TAB);check(game.group==0 and game.tool=="","Tab keeper to construction without action")
 	await key(KEY_SHIFT);check(game.tool!="" and game.world.jobs.is_empty(),"Shift selects only")
 	await key(KEY_TAB);check(game.group==1 and game.selected_animals.is_empty(),"Tab command mode only")
 	await key(KEY_SHIFT);check(game.selected_animal==1 and game.world.jobs.is_empty(),"First command Shift selects nearby animal only")

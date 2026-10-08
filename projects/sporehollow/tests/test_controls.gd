@@ -56,15 +56,15 @@ func run():
 	game.world=Farm.new({},17).begin_day();game.world.paused=true
 	root.add_child(game);await process_frame;await process_frame
 	game.subtasks.order={0:[],1:[],2:[]};game.reset_view();game.refresh()
-	await key(KEY_TAB);check(game.group==0,"Neutral Tab enters build")
+	await key(KEY_TAB);check(game.group==2,"Neutral Tab enters keeper")
 	for point in [Vector2(700,20),Vector2(700,775),Vector2(1240,440),Vector2(8,430),Vector2(700,430),Vector2(1018,200)]:
 		game.neutral();game.camera.zoom=Vector2.ONE
 		await mouse(point,MOUSE_BUTTON_WHEEL_DOWN)
 		check(game.group==-1 and game.camera.zoom.x<1,"Wheel zooms at "+str(point))
+		await key(KEY_TAB);check(game.group==2,"Tab keeper")
 		await key(KEY_TAB);check(game.group==0,"Tab build")
 		await key(KEY_TAB);check(game.group==1 and game.selected_animals.is_empty(),"Tab orders only")
-		await key(KEY_TAB);check(game.group==2,"Tab keeper")
-		await key(KEY_TAB);check(game.group==0,"Tab skips neutral")
+		await key(KEY_TAB);check(game.group==2,"Tab skips neutral")
 	game.recenter()
 	game.select_group(0);var before=game.world.jobs.size()
 	await key(KEY_SHIFT);check(game.tool=="wall","Build first Shift selects first operation")
@@ -76,8 +76,8 @@ func run():
 	game.tool="";await key(KEY_SHIFT);check(game.tool=="locked_door","Shift follows reordered display")
 	game.refresh();game.select_group(1);await key(KEY_SHIFT)
 	check(game.selected_animal==1 and game.tool=="","First command Shift selects resident only")
-	await key(KEY_SHIFT);check(game.tool=="guide","Next Shift selects guide without issuing")
-	await drag_button("rest",game.buttons.guide.get_global_rect().get_center())
+	await key(KEY_SHIFT);check(game.tool=="auto","Next Shift selects the first displayed command without issuing")
+	await drag_button("rest",game.buttons.auto.get_global_rect().get_center())
 	check(game.subtask_choices()[0]=="rest","Command button order independent of build order")
 	game.tool="";await key(KEY_SHIFT);check(game.tool=="rest","Shift uses changed order")
 	var order=game.subtask_choices().duplicate();await drag_button("rest",Vector2(700,450))
@@ -93,12 +93,12 @@ func run():
 	game.world.debug_enabled=true;game.world.debug_action("cat",{});game.world.debug_action("hen",{})
 	var cat=game.world.animals.filter(func(a):return a.species=="cat")[0]
 	var hen=game.world.animals.filter(func(a):return a.species=="hen")[0]
-	game.choose_animal(cat.id);await key(KEY_SHIFT);check(game.tool=="equip" and game.group==1 and game.world.jobs.is_empty(),"Cat Shift selects equipment only, never animal command")
-	game.choose_animal(hen.id);await key(KEY_SHIFT);check(game.tool=="guide" and game.subtask_choices()==["guide","equip"],"Hen guides or receives equipment, no dog commands")
+	game.choose_animal(cat.id);await key(KEY_SHIFT);check(game.tool in ["auto","guide","equip"] and game.group==1 and game.world.jobs.is_empty(),"Cat Shift selects a common action without issuing it")
+	game.choose_animal(hen.id);await key(KEY_SHIFT);check(game.tool in ["auto","guide","equip"] and game.subtask_choices().size()==3 and "auto" in game.subtask_choices() and "guide" in game.subtask_choices(),"Hen has common auto/guide and equipment, without dog-only commands")
 	game.choose_animal(1);game.choose_animal(hen.id,true);await key(KEY_SHIFT)
 	check(game.world.jobs.is_empty(),"Mixed species selection and Shift do not issue")
 	game.world.animals[0].unavailable_through_day=99
-	game.select_group(1);await key(KEY_SHIFT);check(game.selected_animal==hen.id,"Nearest eligible resident excludes recuperating dog")
+	game.select_group(1);await key(KEY_SHIFT);check(game.selected_animal in [cat.id,hen.id],"Nearest eligible resident includes cat and excludes recuperating dog")
 	game.world.animals.clear();game.select_group(1);await key(KEY_SHIFT)
 	check(game.group==1 and game.selected_animals.is_empty(),"No animals keeps command mode")
 	game.world=Farm.new({},17);game.world.campaign.gold=300;game.reset_view();game.arrival_started=game.clock-5;game.refresh()

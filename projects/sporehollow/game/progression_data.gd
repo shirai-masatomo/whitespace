@@ -18,15 +18,15 @@ const ITEMS = {
 	"collar":{"id":"collar","name":"首輪","rarity":Rarity.COMMON,"type":"equipment","equip_targets":["dog"],"durability":-1,"consumable":false,"trigger":"equipped","effects":{"loyalty":25,"defense":2},"buy":20,"sell":6},
 	"berry":{"id":"berry","name":"きのみ","rarity":Rarity.COMMON,"type":"conditional_equipment","equip_targets":["animal"],"durability":1,"consumable":true,"trigger":"alive_hp_half","effects":{"heal_fraction":0.25},"buy":8,"sell":2}}
 const ENEMY_ROWS = {
- "maid":["メイド",45,2.0,5,0,0,0,1.2,75,[50,45,0,5],Rarity.RARE,"仲間にコーヒーを届ける"],
- "dancer":["舞姫",38,1.6,6,2,2,0,1.5,75,[50,50,0,0],Rarity.RARE,"舞で味方を支え、倒れた仲間を復活させる"],
- "thief":["盗賊",32,2.0,7,4,4,0,1.2,70,[50,50,0,0],Rarity.UNCOMMON,"毒を投げ、落とし物を盗んで逃げる"],
+ "maid":["メイド",45,2.0,5,0,0,1,1.2,75,[50,45,0,5],Rarity.RARE,"仲間にコーヒーを届ける"],
+ "dancer":["舞姫",38,1.6,6,2,2,1,1.5,75,[50,50,0,0],Rarity.RARE,"舞で味方を支え、倒れた仲間を復活させる"],
+ "thief":["盗賊",32,2.0,7,4,4,1,1.2,70,[50,50,0,0],Rarity.UNCOMMON,"毒を投げ、落とし物を盗んで逃げる"],
 	"kidnapper":["誘拐者",50,1.333333,6,5,5,2,1.4,40,[70,10,10,10],Rarity.COMMON,"主人公を連れ去る"],
 	"destroyer":["デストロイヤー",80,1.1,5,7,7,4,1.6,20,[10,10,70,10],Rarity.UNCOMMON,"建築物を優先する"],
-	"martial_artist":["武闘家",60,1.8,6,8,8,0,1.1,75,[50,50,0,0],Rarity.UNCOMMON,"人と動物に礼をして挑む"],
+	"martial_artist":["武闘家",60,1.8,6,8,8,1,1.1,75,[50,50,0,0],Rarity.UNCOMMON,"人と動物に礼をして挑む"],
 	"salaryman":["サラリーマン",28,1.4,5,3,3,1,1.5,35,[35,25,20,20],Rarity.COMMON,"弱いが応援を呼ぶ"],
 	"ninja":["忍者",42,2.2,7,4,4,1,1.0,80,[45,30,10,15],Rarity.RARE,"見通せる相手に手裏剣を投げる"],
-	"animal_tamer":["ムッツゴロウ",45,1.5,7,2,1,0,1.5,70,[5,85,0,0],Rarity.RARE,"動物を手懐けて連れ帰る"],
+	"animal_tamer":["ムッツゴロウ",45,1.5,7,2,1,1,1.5,70,[5,85,0,0],Rarity.RARE,"動物を手懐けて連れ帰る"],
 	"runner":["ランナー",35,FAST_SPEED,6,3,2,1,1.2,50,[45,20,5,30],Rarity.UNCOMMON,"速いが走り続けると疲れる"]}
 const SPECIAL = {"phone_chance":0.15,"phone_delay":2.0,"reinforcement_delay":3.0,"night_reinforcement_cap":4,
 	"shuriken_range":5,"shuriken_ct":4.0,"shuriken_damage":7,"bow_seconds":0.75,

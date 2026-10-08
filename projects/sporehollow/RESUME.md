@@ -1,57 +1,34 @@
-# 電源断・会話再開時の記録
+# 再開記録
 
-更新：2026-10-08、描画/探索修正の検証完了時点。作業停止の指示ではない。OS自動起動や設定は変更していない。
+更新：2026-10-08。全体の仮完成版を接続し、隔離出力の節目へ。最新結果と出力場所は [CHECK](review/quality-roadmap/CHECK.md) と `artifacts/quality-roadmap/verification.json`。
 
-## 再開場所
+## 保護境界
 
-- 専用clone：`C:/Users/masat/Documents/Codex/2026-10-08/task/whitespace-quality`
-- ブランチ：`codex/sporehollow-quality-roadmap`
-- 元実装：6017608。祈り/役割変更：76d189c。最新チェックポイントはこの記録を含むローカルコミット（`git log -1`で取得）。
-- `origin`はGitHubではなく **元作業者のローカルrepo**。`git push origin`を実行しない。
-- 元作業者：`C:/Users/masat/Documents/codex_test`。通常EXE8b06e28、既存review/current0d47970。ファイル、ゲーム、通常セーブを変更・終了しない。
+- 作業clone：`C:/Users/masat/Documents/Codex/2026-10-08/task/whitespace-quality`
+- branch：`codex/sporehollow-quality-roadmap`。監査元6017608、祈り76d189c、経路ba7c86b、到達点d897d57、保存75bbaa0、成長/保存改善98df31e。その後の操作/回復/BGMは最新の `git log -1` で取得する。
+- originは **元作業者のローカルrepo**。push禁止。ゲーム変更のリモートpush/merge/公開は許可されていない。
+- 元repo：`C:/Users/masat/Documents/codex_test`。通常EXE8b06e28、review/current0d47970。使用中のゲーム、未コミット変更、セーブ、デスクトップ、音声を妨げない。
+- 元repoの新しい `projects/sporehollow/bgm/Porch_Swing_Serenade.mp3` はユーザー提供。読み取りコピーだけ行い、SHA256一致。通常保存へは接続していない。
+- 別許可の掃除clone `task/whitespace-review-cleanup` はコミット28a8220、Draft PR https://github.com/shirai-masatomo/whitespace/pull/4。重複画像50件と参照文書だけ。マージなし。ゲームbranchと無関係。
 
-## 保存済み・検証済み
+## 次の作業
 
-ロードマップ、カテゴリ祈り、主人公ダウン中の役割別ターゲットを実装。人間型敵を絶対1.3倍、森の地面による切断/前後関係を修正、外周を群れとして増密。猫の袋小路/敵の局所回避/探索目標の毎tick破棄/像接近不能を再現して根本修正。
+`git status --short` と `git log -4`、[TASKS](TASKS.md)を読む。未コミット変更を消さず引き継ぐ。再clone/元repoへのコピー/古い仕様の重複実装はしない。
 
-祈り関連482検査。描画/経路の関連13スイート1038検査、最後の限定39検査（navigation23/forest9/UI7）、隔離描画7検査/3画面は失敗0。詳しくは [CHECK](review/quality-roadmap/CHECK.md) と `artifacts/quality-roadmap/verification.json`。最終描画は `artifacts/isolated/20261008-170516-916/`、比較元は `20261008-163142-550/`。
+A/B/C/Dの基礎接続は完了。壁ドラッグ、図鑑、動物指示、回復、昼BGMを含む全体版をEとして出力する。既に新しい出力がCHECKにあれば再出力せず、それをF1の固定比較へ使う。未完ならコード・検証結果を確認して出力を終える。最初の中間版76d189cは最新ではない。
 
-既知の難度観察：固定seed31・同じ自動操作の8日生存目標は未達（修正後4日目敗北）。技術的進行停止とは分けて記録。未検証は人間試遊/物理キーボード/音声/長時間。初期完成や全体仮完成とは呼ばない。
+F1は像防衛/祈り反作用の代表1ケース比較。自然通しの勝敗、操作シナリオの技術合格、人間の面白さを別記録にする。最大限の機能追加や全数値の一括調整をしない。詳細の順序と合格条件はTASKS/ROADMAP。
 
-既存の分離試遊版は **76d189c時点**の `artifacts/playtest/20261008-162638-452/Play-Isolated.cmd`。最新の描画/探索修正はこのEXEへ未出力。通常のPlay.cmdやEXE直接起動を使わず、専用CMDでデータを分離する。
+## 実行・証拠
 
-## 次に行うこと
+通常headlessは `./dev.ps1 -Task test -Suites @('対象名')`。節目の全回帰は `./dev.ps1 -Task test`、自然通しは `-Suites @('campaign_play')`。各runは専用APPDATA/LOCALAPPDATAとBelowNormal優先度。Godotは1プロセスずつ。
 
-1. 再起動後は`git status --short`と`git log -3`を読む。未コミット変更があれば続きとして保護し、勝手にリセットしない。最初からcloneを作り直さない。
-2. B1日数進行/仮到達点へ続ける。`encounters.gd`の最後の導入11日→次の既存節目15日を導出し、勝利後16日朝に区切りと続行/新規開始を表示。新たな金銭ボーナスや物語の結末は追加しない。
-3. campaignへ一回性の達成記録。14日成功/15日敗北/15日成功/二重finish/再挑戦/朝再構成を比較。seed17/31/73と実UIの翌朝seed+1を検証。単なる固定seed通しを実UI同等と扱わない。
-4. 次はB2の粗い成長・Cのカルマ・Dの朝保存。保存境界はdayを増やしnight_ready=falseとなるnext_campaignから作った朝。決済済みdawnの生campaignを再開保存しない。
-5. 全体接続の節目で専用EXEを出力し、検証範囲と未完を明記する。通常は関連検証だけ。
+描画は `./tools/isolated_visual.ps1 -Scenario ...` のprivate非対話デスクトップだけ。wall_drag/journal_layout_ui/playthrough_ui/morning_saveが新UIの対象。Dummy audio、ユーザーのカーソル/ウィンドウ/入力は触らない。
 
-## 再実行・操作しないもの
+全出力は `./tools/export_isolated.ps1`、日時別 `artifacts/playtest/`。正常時BUILD.json/README.md/Play-Isolated.cmdとSHA256が出る。自動headless smokeだけで実人間試遊の合格とはしない。通常Play.cmd、EXE直接起動、`dev -Task build` は使わない。
 
-祈り/素材取り込み/死亡処理を重複実装しない。旧QA.jsonのruntime_verified=falseだけで素材を未統合扱いしない。既にある320PNGと搾乳動作は統合済み。
+Windows sandbox通常実行はhelper_unknown_errorのためrequire_escalatedを自動承認レビューに通した。拒否なし。PowerShellはUTF-8出力、rgなしのためgit grep/Select-Stringを利用。dev.ps1の例外とログfailures=0を正本にし、残存LASTEXITCODEだけで判定しない。
 
-push、共有ブランチmerge、force push、履歴書換え、元repoのファイル削除、ユーザープロセス停止、通常user-dataでの試験、対話デスクトップ描画を行わない。GitHub掃除は50画像の重複監査だけで、反映は親の指示待ち。監査はタスク直下 `cleanup-audit/AUDIT.txt` と `candidates.json`。
+Godot importの追跡.import差分は大量の改行変換だけが発生する。`git -c core.safecrlf=false diff --numstat -- ':(glob)projects/sporehollow/**/*.import'` が空と確認した追跡分だけ、コミット直前にrestoreする。新規MP3.importは必要な新規assetで保持。原本や他作業者の.importへ触れない。
 
-PowerShellの通常sandbox実行はhelper_unknown_errorだったため、require_escalatedを自動承認レビューに通して実行した。拒否は受けていない。UTF-8出力を設定。`rg`は無く`git grep`を使う。検証はdev.ps1（専用APPDATA）、描画はtools/isolated_visual.ps1。dev.ps1の成功後もLASTEXITCODEに古い1が残る場合があるため、PowerShellの例外と各ログのfailures=0を確認する。
-
-`artifacts/`はローカル証拠でGit管理外。電源断で消えないが、repo削除/再cloneだけでは引き継がれない。不要として削除しない。
-
-## B1：日数進行と仮到達点（2026-10-08）
-
-既存の最後の導入11日目から、専用編成のない次の5日節目15夜目を導出。15夜目防衛成功後、16日目朝に一回性の達成・続行・確認付き新規開始を表示。追加報酬や正式物語の結末は作らない。旧データの到達済み推測付与なし。
-
-関連6スイート294検査、失敗0（artifacts/validation/20261008-171303-500）。隔離GPU7検査/1画面、失敗0（artifacts/isolated/20261008-171852-875）。到達画面を実画像で確認。seed17/31/73の境界・敗北・二重決済・再挑戦・朝構成とUI翌朝seed+1を検査。通し遷移テストは勝利を注入する状態契約であり、自然生存や面白さの合格ではない。
-
-次はDの朝保存・復帰を先に接続し、B2/Cの粗い成長/情勢を合わせた全体仮完成へ進む。Windows renameが宛先を先に消し得るため、保存は検証済み一時ファイルと旧世代バックアップで復旧可能にする。厳密な原子置換とは称さない。
-
-## D：朝保存・復帰（2026-10-08）
-
-朝のcampaign/seed/店残数/購入前の再挑戦基点を保存。起動時読込、売買・育成・命名・導入完了・朝やり直し・確認付き新規開始に接続。夜明け演出中にも正規の次朝を保存し、昼夜/敗北の生状態は保存しない。新規開始の保存失敗は旧worldを保持。自動試験とsmokeは通常保存を既定無効。
-
-schema1、Objectを復元しないVariant、容量/型/ID/種/残数検査、SHA256を使う。一時ファイルを再読検証後、旧正常ファイルをbackupへ退避。Windows renameの宛先先行削除に依存しないよう宛先不在を確認。旧正常backupを壊れたmainで置き換えず、壊れたmainは別名保持。未知versionは上書きせず進行を保護。厳密な原子的置換ではなく、二世代と一時ファイルで復旧する方式。
-
-関連6スイート281検査/失敗0（artifacts/validation/20261008-173549-056）。実起動読込/未知version/新規slotの追加を含むUI3スイート30検査/失敗0（20261008-173735-541）。保存54検査にはseed17/31/73、売買/育成/日本語名/装備/床/体力/売切れ/祈り/到達点、書込中断2段階、復旧、未知version、型不正、checksum破損を含む。人間による電源断耐久試験は行っていない。
-
-次はB2/C。店の段階入荷・EXP・Lv5までの成長・既存反作用は既に接続済み。不足の味方cow/bull/maidの成長効果、導入終了後の限定Lv2、既存役割によるカテゴリ反作用を粗く接続し、全体仮完成版の節目へ進む。
+artifactsはGit管理外のローカル検証証拠。削除しない。参照画像の403に対して署名URLを再利用/手書きしない。新規ゲームbranchの公開、購入、破壊的変更、重大な方向変更だけ親へ相談する。

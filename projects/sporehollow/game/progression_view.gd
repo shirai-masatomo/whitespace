@@ -30,33 +30,24 @@ static func enemy_page(game,c,index: int):
 	var known=game.world.campaign.enemy_knowledge.get(id,0)
 	var row=Data.enemy(id)
 	if id=="doberman": row.name="ドーベルマン"; row.type_tag="Animal"; row.role_text="敵側の迎撃犬"
-	game.label_on(c,Vector2(152,137),row.name if known>0 else "？？？",24,UI.INK)
 	if known==0:
-		c.draw_rect(Rect2(264,236,64,78),Color("8a8778"))
-		game.label_on(c,Vector2(286,284),"?",32,UI.PAPER)
-		game.label_on(c,Vector2(156,365),"？？？",24,UI.INK)
-		game.label_on(c,Vector2(584,215),"まだ出会っていません",20,UI.INK)
+		game.Journal.text(game,c,game.Journal.TITLE,"？？？",26)
+		game.Journal.text(game,c,Rect2(144,157,180,28),"未発見",15,game.Journal.MUTED)
+		c.draw_rect(Rect2(248,210,112,126),Color("c9bea0"))
+		game.label_on(c,Vector2(288,286),"?",44,Color("8b876e"))
+		game.Journal.text(game,c,Rect2(556,142,328,60),"まだ出会っていません。",20)
 	else:
-		if id=="kidnapper":
-			c.draw_set_transform(Vector2(296,315),0,Vector2(2.5,2.5))
-			game.Delivered.draw_clip(c,"enemy/idle_right",Vector2.ZERO,0)
-			c.draw_set_transform(Vector2.ZERO)
-		else: game.Assets.portrait(c,id,Rect2(186,191,240,148),"enemy_portrait")
-		game.Assets.badge(game,c,Vector2(330,120),row.rarity)
-		game.Assets.portrait_frame(game,c,Rect2(182,186,248,159),row.rarity)
-		game.label_on(c,Vector2(156,385),"人間" if row.type_tag=="Human" else "動物",15,UI.INK)
-		game.MarketView.text(game,c,Rect2(152,403,292,84),NOTES[id],16)
-		game.label_on(c,Vector2(584,137),"スキル",22,UI.INK)
+		game.Journal.header(game,c,row.name,"人間" if row.type_tag=="Human" else "動物",row.rarity)
+		game.Assets.portrait_frame(game,c,Rect2(184,199,244,138),row.rarity)
+		game.Assets.portrait(c,id,Rect2(188,203,236,130),"enemy_portrait")
+		game.Journal.text(game,c,game.Journal.DESCRIPTION,NOTES[id],16)
 		if known>=2:
-			for i in range(Data.EnemySkills.BY_ACTOR.get(id,[]).size()):
-				var skill=Data.EnemySkills.get_skill(Data.EnemySkills.BY_ACTOR[id][i]);var y=174+i*72
-				c.draw_texture_rect(game.Assets.skill_texture(skill.SkillID),Rect2(584,y,32,32),false)
-				game.label_on(c,Vector2(630,y+21),skill.Name,19,UI.INK)
-				game.label_on(c,Vector2(630,y+42),skill.Type,13,Color("75816c"))
-		else:game.label_on(c,Vector2(584,215),"行動を観察すると、詳しく分かります。",16,UI.INK)
-		if known>=3:game.label_on(c,Vector2(584,450),"倒した",16,UI.INK)
-
-	game.label_on(c,Vector2(470,510),"%d / %d"%[index+1,ENEMY_ORDER.size()],14,UI.INK)
+			game.Journal.draw_skills(game,c,game.Journal.enemy_skills(game,id,known))
+		else:
+			game.Journal.text(game,c,Rect2(556,122,328,32),"スキル",22)
+			game.Journal.text(game,c,Rect2(556,184,328,70),"行動を観察すると、\n詳しく分かります。",18,game.Journal.MUTED)
+		if known>=3:game.Journal.text(game,c,Rect2(556,316,328,30),"撃退済み",18)
+	game.Journal.page_number(game,c,index+1,ENEMY_ORDER.size())
 
 static func equipment_buttons(game):
 	var selected=game.world.animals.filter(func(a):return a.id in game.selected_animals and game.world.available(a))

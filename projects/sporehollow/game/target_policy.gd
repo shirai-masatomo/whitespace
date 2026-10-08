@@ -12,10 +12,18 @@ const DOWN_WEIGHTS={
 static func keeper_down(w) -> bool:
 	return w.keeper.hp<=0 or w.keeper.state in ["unconscious","restrained","captured","hidden_rest"]
 
+static func can_damage_object(w,e,kind: String="structure") -> bool:
+	if e.object_attack_power<=0:return false
+	if e.archetype=="martial_artist" and kind=="idol":return false
+	if e.archetype=="dancer":return false
+	if e.archetype=="maid" and w.tick>=e.get("rage_until",0):return false
+	return true
+
 static func weights(w,e) -> Dictionary:
 	var row=DOWN_WEIGHTS.get(e.archetype,e.target_weights) if keeper_down(w) else e.target_weights
 	var result=row.duplicate()
-	if e.object_attack_power<=0:result.idol=0;result.structure=0
+	if not can_damage_object(w,e,"idol"):result.idol=0
+	if not can_damage_object(w,e):result.structure=0
 	return result
 
 static func observe(w,e) -> Dictionary:

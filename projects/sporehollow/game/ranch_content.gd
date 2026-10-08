@@ -214,7 +214,7 @@ static func enemy_step(w,e) -> bool:
 				w.PlayerEvents.add(w,target.name+"が復活")
 				return true)
 		var friends=w.enemies.filter(func(t):return t.id!=e.id and not t.done and not t.flee and t.hp>0 and w.distance(e.pos,t.pos)<=3 and w.line_of_sight(e.pos,t.pos))
-		var close=w.animals.any(func(a):return a.placed and a.hp>0 and w.distance(a.pos,e.pos)<=1 and w.line_of_sight(a.pos,e.pos)) or (w.Life.targetable(w) and w.distance(w.keeper.pos,e.pos)<=1 and w.line_of_sight(e.pos,w.keeper.pos))
+		var close=w.animals.any(func(a):return w.Orders.active(w,a) and w.distance(a.pos,e.pos)<=1 and w.line_of_sight(a.pos,e.pos)) or (w.Life.targetable(w) and w.distance(w.keeper.pos,e.pos)<=1 and w.line_of_sight(e.pos,w.keeper.pos))
 		if not close and w.tick<e.get("dancing_until",0):
 			e.action_id="fan_raise" if (w.tick%4)<2 else "fan_spread";e.state="舞う";return true
 		if not close and not friends.is_empty() and w.tick>=e.get("dance_at",0) and w.Combat.pay(e,"skill"):
@@ -238,7 +238,7 @@ static func enemy_step(w,e) -> bool:
 		e.poison_fired=w.tick;e.poison_at=w.tick+ceili(8.0/w.DT);e.action_id="poison_windup";e.poison_visual_until=w.tick+3;e.poison_target=targets[0].pos;e.state="毒を投げる"
 		w.PlayerEvents.add(w,"盗賊：毒瓶")
 		for a in [w.keeper]+w.animals:
-			if a.hp>0 and a.get("placed",true) and w.distance(a.pos,targets[0].pos)<=1 and w.line_of_sight(targets[0].pos,a.pos):a.poison_until=w.tick+ceili(5.0/w.DT);a.poison_source=e.id
+			if a.hp>0 and a.get("placed",true) and not preload("res://game/animal_recovery.gd").protected(w,a) and w.distance(a.pos,targets[0].pos)<=1 and w.line_of_sight(targets[0].pos,a.pos):a.poison_until=w.tick+ceili(5.0/w.DT);a.poison_source=e.id
 		return true
 	if w.tick<e.get("poison_visual_until",0):return true
 	var items=w.field_items.filter(func(i):return i.kind!="chick" and w.distance(e.pos,i.pos)<=e.sight_range and w.line_of_sight(e.pos,i.pos))

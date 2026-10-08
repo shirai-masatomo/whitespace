@@ -108,6 +108,7 @@ static func new_campaign() -> Dictionary:
 		"fence": 0, "resources": {"soil": 100, "wood": 0, "stone": 0}, "items": {"dog_food": 2, "hen_food": 0}, "unlocked_blueprints": [], "facilities": [], "next_structure_id": 1, "animals": [{"id": 1, "category": "dog", "species": "shiba", "lv": 1, "xp": 0, "loyalty": 75}]}
 
 func _init(data: Dictionary = {}, seed_number: int = 17, stage_override: Dictionary = {}):
+	keeper.object_attack_power=Life.OBJECT_ATTACK
 	Combat.init_actor(keeper,true)
 	campaign = new_campaign() if data.is_empty() else data.duplicate(true)
 	for resource in Rules.RESOURCE_TYPES:
@@ -130,7 +131,7 @@ func _init(data: Dictionary = {}, seed_number: int = 17, stage_override: Diction
 	Progression.migrate(self)
 	for owned in campaign.animals:
 		owned.name = owned.get("name", "")
-		owned.object_attack_power = owned.get("object_attack_power", 0)
+		owned.object_attack_power = maxi(1,owned.get("object_attack_power",SPECIES[owned.species].object_attack))
 		owned.affinity = owned.get("affinity", 0 if SPECIES[owned.species].affinity else null)
 		owned.unavailable_through_day = owned.get("unavailable_through_day", 0)
 		if owned.species=="shiba" and owned.get("hp", 1) <= 0 and campaign.day > owned.unavailable_through_day:
@@ -290,7 +291,7 @@ func exit_for(entry: Vector2i) -> Vector2i:
 
 func actor_occupied(p: Vector2i, origin: Vector2i) -> bool:
 	if p == origin: return false
-	return (keeper.placed and keeper.pos == p) or animals.any(func(a): return a.placed and a.pos == p) or enemies.any(func(e): return not e.done and e.hp>0 and e.pos == p)
+	return (keeper.placed and keeper.pos == p) or animals.any(func(a): return a.placed and a.pos == p and not preload("res://game/animal_recovery.gd").protected(self,a)) or enemies.any(func(e): return not e.done and e.hp>0 and e.pos == p)
 
 func next_step(start: Vector2i, goal: Vector2i, raider: bool = false, avoid_actors: bool = false) -> Vector2i:
 	var path = find_path(start,goal,raider,avoid_actors)
@@ -434,7 +435,7 @@ func issue_order(kind: String, p: Vector2i, animal_id: int = -1) -> bool:
 	elif kind in ["whistle", "stay"] and not walkable(p): return false
 	var accepted = false
 	for a in animals:
-		if not a.placed or a.hp <= 0 or not SPECIES[a.species].commands or a.loyalty <= 0 or (animal_id >= 0 and a.id != animal_id): continue
+		if not Orders.active(self,a) or not SPECIES[a.species].commands or (a.loyalty <= 0 and kind!="auto") or (animal_id >= 0 and a.id != animal_id): continue
 		if kind not in SPECIES[a.species].orders:continue
 		# Paused orders change intent only. Their reaction countdown starts with resumed simulation.
 		a.pending = {"kind": kind, "pos": a.pos if kind == "wander" else p, "target_id": target_id,
@@ -496,6 +497,7 @@ func release_keeper(e: Dictionary):
 func animal_step(a: Dictionary):
 	if not a.placed or a.get("dead",false) or a.get("lost",false): return
 	if a.get("abductor",-1)>=0: return
+	if preload("res://game/animal_recovery.gd").step(self,a):return
 	if campaign.day <= a.unavailable_through_day:
 		a.state="療養中" if campaign.day==a.unavailable_through_day else "気絶"; return
 	if a.hp <= 0:
@@ -536,15 +538,14 @@ func animal_step(a: Dictionary):
 				var options = neighbors(a.pos).filter(func(p): return walkable(p) and not occupied(p))
 				if not options.is_empty(): a.pos = options[daily_rng.randi_range(0, options.size() - 1)]
 		return
-	# Explicit rest suppresses all threat detection, barking and rescue, until another order.
+	# Cautious orders favor recovery and escape, but permit close self-defense.
 	if a.mode == "rest":
-		a.rescuing = false
-		rest_step(a, true)
+		Orders.cautious(self,a)
 		return
 	var carrier = enemies.filter(func(e): return not e.done and not e.flee and e.hp>0 and (e.carry == "keeper" or e.id==keeper.restrainer))
 	if carrier.is_empty():carrier=enemies.filter(func(e):return not e.done and not e.flee and e.hp>0 and ((tick<rescue_until and e.id==last_keeper_attacker_id) or (keeper.state=="unconscious" and distance(e.pos,keeper.pos)<=2)))
 	carrier.sort_custom(func(e,f):return e.id<f.id)
-	a.rescuing = AnimalData.has_skill(a, "rescue") and not carrier.is_empty()
+	a.rescuing = a.mode!="stay" and AnimalData.has_skill(a, "rescue") and not carrier.is_empty()
 	var targets = animal_targets(a)
 	targets.sort_custom(func(e, f): return distance(a.pos, e.pos) < distance(a.pos, f.pos))
 	if a.mode == "auto" and not a.rescuing and targets.is_empty() and a.hp < a.max_hp and (a.auto_recovering or a.hp <= a.max_hp * Rules.REST.auto_hp_fraction):
@@ -594,7 +595,7 @@ func animal_step(a: Dictionary):
 		choices.erase("engage")
 		if not AnimalData.has_skill(a,"bark"): choices.erase("bark")
 		# Rescue always pursues the carrier. Noise affects cadence, never the rescue objective.
-		if a.rescuing or a.mode == "attack_target" or a.species=="doberman": choices = {active_action: 1.0}
+		if a.rescuing or a.mode in ["attack_target","stay"] or a.species=="doberman": choices = {active_action: 1.0}
 		var intent = Decisions.choose(self, a, "shiba", ("rescue_" if a.rescuing else "enemy_") + active_action, choices, a.rescuing)
 		if intent in ["watch", "bark"]:
 			a.state = "様子見" if intent == "watch" else "吠える"
@@ -618,7 +619,10 @@ func animal_step(a: Dictionary):
 			else:
 				enemy.attacker = a.id
 				enemy.threat_until = tick + ceili(Rules.KIDNAPPER.counter_duration / DT)
-	elif a.mode in ["wander", "auto"]:
+	elif a.mode=="wander":
+		a.state="警戒巡回"
+		goal=Orders.patrol_goal(self,a)
+	elif a.mode == "auto":
 		a.state = "徘徊"
 		if tick % 12 == 0:
 			var options = neighbors(a.pos).filter(func(p): return animal_walkable(a,p) and distance(p, a.home) <= 3)
@@ -670,7 +674,7 @@ func enemy_step(e: Dictionary):
 	if Content.enemy_step(self,e):return
 	if Progression.enemy_step(self,e): return
 	if not e.flee:
-		var threatened = tick < e.threat_until and tick >= e.counter_ready and animals.any(func(a): return a.placed and a.id == e.attacker and a.hp > 0)
+		var threatened = tick < e.threat_until and tick >= e.counter_ready and animals.any(func(a): return Orders.active(self,a) and a.id == e.attacker)
 		var context = "under_attack" if threatened else ("carrying" if e.carry == "keeper" else "kidnap")
 		var choices = Rules.AI.counter if threatened else Rules.AI.raider
 		var intent = Decisions.choose(self, e, "kidnapper", context, choices)
@@ -690,7 +694,7 @@ func enemy_step(e: Dictionary):
 				e.state = "迷う"
 				return
 	if not e.flee and e.counter_target >= 0:
-		var found = animals.filter(func(a): return a.id == e.counter_target and a.hp > 0)
+		var found = animals.filter(func(a): return a.id == e.counter_target and Orders.active(self,a))
 		if found.is_empty() or tick >= e.counter_until:
 			e.counter_target = -1
 			e.counter_ready = tick + ceili(Rules.KIDNAPPER.counter_cooldown / DT)
@@ -759,7 +763,7 @@ func move_enemy(e: Dictionary, next: Vector2i,goal=null):
 	if next==e.pos:return # Waiting is not movement, stamina use or path progress.
 	if Story.terrain_block(self,next): return
 	# Living animals occupy space; carrying the keeper is the only deliberate actor overlap.
-	var defenders = animals.filter(func(a): return a.placed and a.hp > 0 and a.pos == next)
+	var defenders = animals.filter(func(a): return Orders.active(self,a) and a.pos == next)
 	if not e.flee and not defenders.is_empty():
 		e.attacker = defenders[0].id
 		e.threat_until = tick + ceili(Rules.KIDNAPPER.counter_duration / DT)
@@ -773,7 +777,7 @@ func move_enemy(e: Dictionary, next: Vector2i,goal=null):
 		var obstacle=structures[next]
 		var attack_needed=obstacle.kind not in Buildings.DOORS or obstacle.get("lock_hp",0)>0
 		if attack_needed:
-			if e.object_attack_power<=0 or tick<e.next_attack: return
+			if not Progression.Targets.can_damage_object(self,e) or tick<e.next_attack: return
 			e.next_attack=tick+ceili(e.attack_interval/DT)
 			e.observed_action=true
 	if blocks(next) and (structures[next].kind not in Buildings.DOORS or structures[next].get("lock_hp",0)>0):
@@ -855,6 +859,7 @@ func persist_farm():
 			owned.facing=a.get("facing",1)
 			for key in ["equipment","rarity","bonus_skills","ultimate_gauge","ultimate_gauge_max"]: owned[key]=a.get(key)
 			owned.hp=a.hp; owned.mode=a.mode; owned.order_remaining=maxi(0,a.order_until-tick); owned.unavailable_through_day=a.unavailable_through_day
+			if a.species=="shiba":owned.convalescent_ticks=a.get("convalescent_ticks",0)
 	campaign.work_jobs=[]
 	for j in jobs:
 		if not BUILD.has(j.kind) and j.kind not in Story.ACTIONS: continue

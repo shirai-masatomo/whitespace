@@ -73,6 +73,7 @@ static func remove_animal(w,a,reason: String):
 	if a.get("dead",false) or a.get("lost",false): return
 	a["dead" if reason=="death" else "lost"]=true
 	a.visual_death_tick=w.tick
+	if reason=="death":preload("res://game/animal_corpse.gd").mark(a,w.tick)
 	a.placed=false; a.state="死亡" if reason=="death" else "連れ去られた"
 	a.erase("abductor"); a.erase("guide_job"); a.pending={}; a.rescuing=false
 	var record={"id":a.id,"species":a.species,"name":a.get("name",""),"day":w.campaign.day,"reason":reason,"equipment":a.equipment.duplicate(true)}
@@ -85,6 +86,7 @@ static func remove_animal(w,a,reason: String):
 
 static func animal_hurt(w,a,e,raw: int,nonlethal: bool=false):
 	if a.hp<=0 or a.get("dead",false) or a.get("lost",false): return
+	if preload("res://game/animal_recovery.gd").protected(w,a):return
 	var damage=maxi(0,raw-defense(a,w.tick))
 	if nonlethal: damage=mini(damage,maxi(0,a.hp-1))
 	a.hp=maxi(0,a.hp-damage)
@@ -135,7 +137,7 @@ static func knowledge(w,e,level: int):
 
 static func visible_to_farm(w,e) -> bool:
 	if w.distance(w.keeper.pos,e.pos)<=6 and w.line_of_sight(w.keeper.pos,e.pos): return true
-	return w.animals.any(func(a):return a.placed and a.hp>0 and w.distance(a.pos,e.pos)<=a.detection_range and w.line_of_sight(a.pos,e.pos))
+	return w.animals.any(func(a):return w.Orders.active(w,a) and w.distance(a.pos,e.pos)<=a.detection_range and w.line_of_sight(a.pos,e.pos))
 
 static func release_animal(w,e):
 	var id=e.get("led_animal",-1)
@@ -182,7 +184,7 @@ static func target_candidates(w,e) -> Array:
 	var candidates=[]
 	if e.can_see_keeper and w.Life.targetable(w): candidates.append({"kind":"keeper","id":-1,"pos":w.keeper.pos})
 	for a in w.animals:
-		if a.placed and a.hp>0 and not a.get("dead",false) and not (e.archetype=="maid" and a.species=="cow") and w.distance(e.pos,a.pos)<=e.sight_range and w.line_of_sight(e.pos,a.pos): candidates.append({"kind":"animal","id":a.id,"pos":a.pos})
+		if a.placed and a.hp>0 and not a.get("dead",false) and not preload("res://game/animal_recovery.gd").protected(w,a) and not (e.archetype=="maid" and a.species=="cow") and w.distance(e.pos,a.pos)<=e.sight_range and w.line_of_sight(e.pos,a.pos): candidates.append({"kind":"animal","id":a.id,"pos":a.pos})
 	for p in w.structures:
 		if w.live_structure(p) and w.distance(e.pos,p)<=e.sight_range and w.line_of_sight(e.pos,p,true): candidates.append({"kind":"structure","id":w.structures[p].id,"pos":p})
 	var idol=Targets.observe(w,e)
@@ -224,7 +226,7 @@ static func enemy_step(w,e) -> bool:
 	var retaliating=false
 	if w.tick<e.threat_until:
 		var attacker=w.Orders.animal(w,e.attacker)
-		if not attacker.is_empty() and attacker.placed and attacker.hp>0 and w.distance(e.pos,attacker.pos)<=1 and w.line_of_sight(e.pos,attacker.pos):
+		if w.Orders.active(w,attacker) and w.distance(e.pos,attacker.pos)<=1 and w.line_of_sight(e.pos,attacker.pos):
 			if e.archetype!="martial_artist":
 				candidates=[{"kind":"animal","id":attacker.id,"pos":attacker.pos}];retaliating=true
 	if not retaliating:candidates=Targets.focus(w,e,candidates)
@@ -279,14 +281,15 @@ static func walk(w,e,goal: Vector2i):
 	e.move_credit=minf(1.9,e.move_credit+speed*w.DT)
 	if e.move_credit<1: return
 	e.move_credit-=1
-	var route=w.find_path(e.pos,goal,true,true,e.species=="doberman")
-	if route.is_empty():route=w.find_path(e.pos,goal,true,false,e.species=="doberman")
-	if e.object_attack_power==0 and w.inside(goal):
+	var break_objects=Targets.can_damage_object(w,e)
+	var route=w.find_path(e.pos,goal,break_objects,true,e.species=="doberman")
+	if route.is_empty():route=w.find_path(e.pos,goal,break_objects,false,e.species=="doberman")
+	if not break_objects and w.inside(goal):
 		var detour=w.find_path(e.pos,goal,false,true,e.species=="doberman")
 		if not detour.is_empty(): route=detour
 	var next=route[1] if route.size()>1 else e.pos
 	if e.species=="doberman" and w.is_indoor(next): e.state="外で待つ"; return
-	if w.blocks(next) and e.object_attack_power==0:
+	if w.blocks(next) and not break_objects:
 		e.search_goal=null; e.chosen_target={}; e.state="道を探す"; return
 	var before=e.pos
 	w.move_enemy(e,next,goal)
@@ -294,6 +297,7 @@ static func walk(w,e,goal: Vector2i):
 
 static func strike(w,e,t,override_damage: int=-1):
 	if e.hp<=0 or e.get("dead",false):return
+	if t.kind in ["structure","idol"] and not Targets.can_damage_object(w,e,t.kind):return
 	if e.archetype=="maid" and w.tick>=e.get("rage_until",0):return
 	e.observed_action=true
 	var raging=e.archetype=="maid" and w.tick<e.get("rage_until",0)
@@ -324,7 +328,7 @@ static func bow_end(w,e):
 	e.bow_until=w.tick+ceili(Data.SPECIAL.bow_seconds/w.DT); e.action_id="bow"; e.state="礼"; e.chosen_target={}
 
 static func tame(w,e,a) -> bool:
-	if a.is_empty() or a.get("type_tag")=="Human" or w.distance(e.pos,a.pos)>Data.SPECIAL.tame_range or not w.line_of_sight(e.pos,a.pos): return false
+	if not w.Orders.active(w,a) or a.get("type_tag")=="Human" or w.distance(e.pos,a.pos)>Data.SPECIAL.tame_range or not w.line_of_sight(e.pos,a.pos): return false
 	e.state="呼びかける"; e.action_id="tame"
 	if w.tick>=e.get("tame_at",0) and w.Combat.pay(e,"skill"):
 		w.PlayerEvents.add(w,e.name+"：手懐け")

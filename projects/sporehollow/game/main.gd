@@ -19,14 +19,17 @@ var save_load_blocked=false
 const FONT = preload("res://assets/fonts/ui_font.tres")
 const TILE = Vector2(48, 42)
 const GROUPS = ["建設", "指示"]
+const MODE_ORDER = [2,0,1] # Persisted subtask IDs stay stable; display order is keeper/build/orders.
 const Direction=preload("res://game/direction_art.gd")
 const SixMotion=preload("res://game/six_motion.gd")
 const HumanVisual=preload("res://game/human_visual.gd")
+const AnimalCorpse=preload("res://game/animal_corpse.gd")
 var six_art={}
 var six_revived={}
-const TOOLS = {"milk":"搾乳", "charge":"突撃", "place_kokeshi":"こけしを置く", "place_fossil":"化石を置く","wall": "壁  10 / 1秒", "wood_wall":"木壁 木10", "stone_wall":"石壁 石10", "soil_tile":"土タイル 土2", "wood_tile":"木タイル 木2", "stone_tile":"石タイル 石2", "door":"ドア 木10", "locked_door":"施錠ドア 木20", "guide":"連れていく", "equip":"装備", "repair": "修理", "gate": "ドア開閉", "remove": "解体",
-	"attack_target":"狙う", "auto": "おまかせ", "stay": "待機", "wander": "徘徊", "rest": "休む", "collect": "資源・卵・設計図", "dog_food": "犬用餌 HP+10", "hen_food": "鶏用餌 HP+8", "cat_food": "猫用餌 HP+8"}
-const GROUP_TOOLS = [["wall", "wood_wall", "stone_wall", "soil_tile", "wood_tile", "stone_tile", "door", "locked_door", "place_kokeshi", "place_fossil"], ["guide", "auto", "stay", "wander", "rest", "attack_target", "equip", "milk", "charge"], ["collect"]]
+const TOOLS = {"milk":"搾乳", "charge":"突撃", "place_kokeshi":"こけしを置く", "place_fossil":"化石を置く","wall": "壁  10 / 1秒", "wood_wall":"木壁 木10", "stone_wall":"石壁 石10", "soil_tile":"土タイル 土2", "wood_tile":"木タイル 木2", "stone_tile":"石タイル 石2", "door":"ドア 木10", "locked_door":"施錠ドア 木20", "guide":"連れてく", "equip":"装備", "repair": "修理", "gate": "ドア開閉", "remove": "解体",
+	"attack_target":"狙え", "auto": "おまかせ", "stay": "待て", "wander": "警戒", "rest": "無理するな", "collect": "資源・卵・設計図", "dog_food": "犬用餌 HP+10", "hen_food": "鶏用餌 HP+8", "cat_food": "猫用餌 HP+8"}
+const ORDER_HELP={"auto":"状況に合わせて行動します。戦闘・救護・その動物の仕事を任せます。","guide":"行き先を選び一緒に歩きます。1匹なら隣接し、遅い側の速さに合わせます。複数は近くにまとまり、到着でおまかせに戻ります。","stay":"その場所で待ちます。近くの敵には応戦しますが、追いかけません。","wander":"周囲を巡回し、敵を見つけたら攻撃します。","rest":"安全と回復を優先します。危険から離れ、無理に追わず近くの敵に応戦します。","attack_target":"敵を選べ。狙える距離や見通しが必要です。","equip":"持ち物から装備を選び、主人公が届けます。","milk":"乳牛に近づいて搾乳します。1日1回です。","charge":"突撃する行き先を選びます。"}
+const GROUP_TOOLS = [["wall", "wood_wall", "stone_wall", "soil_tile", "wood_tile", "stone_tile", "door", "locked_door", "place_kokeshi", "place_fossil"], ["auto", "guide", "stay", "wander", "rest", "attack_target", "equip", "milk", "charge"], ["collect"]]
 const BoardArt = preload("res://game/board_art.gd")
 const BuildingArt = preload("res://game/building_art.gd")
 const Art = preload("res://game/adopted_art.gd")
@@ -66,6 +69,7 @@ var press_position = Vector2.ZERO
 const SELECTION_LIMIT = 8
 var drag_class = ""
 var drag_encounters: Array = []
+var wall_stroke=preload("res://game/wall_stroke.gd").new()
 var context_panel: Panel
 var ui_pointer_capture = false
 var context_signature = ""
@@ -180,14 +184,14 @@ func _ready():
 	add_button(controls, "advance", "買い物を終える", Rect2(1074, 754, 190, 36), advance)
 	add_button(controls, "retry", "再挑戦", Rect2(556, 514, 168, 38), retry_stage)
 	for i in range(GROUPS.size()):
-		add_button(controls, "group%d" % i, GROUPS[i], Rect2(16 + i * 122, 754, 116, 36), select_group.bind(i))
+		add_button(controls, "group%d" % i, GROUPS[i], Rect2(16 + (i+1) * 122, 754, 116, 36), select_group.bind(i))
 	audio = preload("res://game/farm_audio.gd").new()
 	add_child(audio)
 	queue_controls = Control.new()
 	queue_controls.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	controls.add_child(queue_controls)
-	add_button(controls, "walk", "牧場主", Rect2(270, 754, 110, 36), choose_walk)
-	buttons.walk.tooltip_text = "Tab：建設 → 指示 → 牧場主。Shift：操作選択。ホイール：ズーム"
+	add_button(controls, "walk", "主人公", Rect2(16, 754, 116, 36), choose_walk)
+	buttons.walk.tooltip_text = "Tab：主人公 → 建設 → 指示。Shift：操作選択。ホイール：ズーム"
 	setup_menu()
 	overlay = Node2D.new()
 	layer.add_child(overlay)
@@ -218,6 +222,7 @@ func add_button(parent: Control, id: String, text_value: String, area: Rect2, ca
 	buttons[id] = button
 
 func recenter():
+	cancel_wall_stroke()
 	camera.position = Vector2(Farm.W, Farm.H) * TILE * 0.5
 	camera.zoom = Vector2.ONE
 
@@ -227,6 +232,7 @@ func notice(text_value: String):
 	message_until_tick = world.tick + 14
 
 func select_group(index: int):
+	cancel_wall_stroke()
 	group = index
 	selected_resources.clear()
 	selected.clear()
@@ -237,6 +243,7 @@ func select_group(index: int):
 	refresh()
 
 func select_tool(id: String, execute: bool = true):
+	cancel_wall_stroke()
 	tool = id
 	if execute and id=="milk":
 		for aid in selected_animals:world.act("milk",Vector2i.ZERO,aid)
@@ -345,6 +352,7 @@ func collect_selected():
 func refresh():
 	context_panel = null
 	if last_phase != world.phase:
+		cancel_wall_stroke()
 		transition_at = clock
 		if world.phase in ["dawn", "result"]: play_alert("win" if world.result == "win" else "lose")
 		if world.phase == "dawn":
@@ -390,9 +398,10 @@ func refresh():
 	elif not selected_resources.is_empty():
 		pass
 	elif selected.get("kind") == "keeper" and world.working():
-		add_button(palette, "keeper_rest", "起きる" if world.keeper.resting else "休息", Rect2(16, 704, 125, 36), keeper_action.bind("keeper_rest"))
+		add_button(palette, "keeper_rest", "起きる" if world.keeper.resting or world.keeper.state=="hidden_rest" else "休息", Rect2(16, 704, 125, 36), keeper_action.bind("keeper_rest"))
 		buttons.keeper_rest.icon = UI.icon("moon")
-		buttons.keeper_rest.disabled = world.keeper.forced_rest or world.keeper.state != "free"
+		buttons.keeper_rest.disabled = (world.keeper.forced_rest or world.keeper.state != "free") and not Farm.Life.can_wake_hidden(world)
+		if world.keeper.state=="hidden_rest":buttons.keeper_rest.tooltip_text="HPが1以上なら起きられます。起きると敵の攻撃対象へ戻ります。HP8で自動復帰します。"
 		add_button(palette, "resume_jobs", "作業再開", Rect2(150, 704, 145, 36), keeper_action.bind("resume_jobs"))
 		buttons.resume_jobs.icon = UI.icon("hammer")
 		buttons.resume_jobs.disabled = world.keeper.forced_rest or world.keeper.state != "free"
@@ -413,20 +422,27 @@ func refresh():
 			var id=choices[i]
 			add_button(palette,id,TOOLS[id],Rect2(16+i*126,704,118,36),select_tool.bind(id))
 			var supported=deployed_selection.filter(func(a):return id in Farm.SPECIES[a.species].orders or (id=="milk" and a.species=="cow" and a.get("milked_day",-1)!=world.campaign.day) or (id=="equip" and Farm.ProgressData.ITEMS.keys().any(func(item):return Farm.Progression.can_equip(a,item)))).size()
-			buttons[id].tooltip_text="対応 %d / 選択 %d。クリックで予約（誘導は行き先を指定）"%[supported,selected_animals.size()]
+			buttons[id].tooltip_text=ORDER_HELP.get(id,"")+"\n対応 %d / 選択 %d"%[supported,selected_animals.size()]
 		if equipment_open: ProgressView.equipment_buttons(self)
 	elif group == 0 and world.working():
 		var choices = subtask_choices()
 		for i in range(choices.size()):
 			var id = choices[i]
-			add_button(palette, id, TOOLS[id], Rect2(16 + (i%6)*164, 685+(i/6)*40, 156, 36), select_tool.bind(id))
+			add_button(palette, id, TOOLS[id], Rect2(16 + (i%6)*164, 674+(i/6)*40, 156, 36), select_tool.bind(id))
 			buttons[id].tooltip_text = {"wall": "壁：土10、建設1秒", "collect": "雑草：1 Gold / キノコ：終了時HP5回復 / 卵：回収"}.get(id, TOOLS[id])
 			if Farm.Shop.FOOD.has(id):
 				buttons[id].text += " ×%d" % world.item_count(id)
 			if id in ["wall", "wood_wall", "stone_wall", "soil_tile", "wood_tile", "stone_tile", "door", "locked_door", "kennel", "coop"]:
 				buttons[id].icon = BoardArt.icon("wood" if id in ["kennel", "coop"] else "soil")
 	for id in TOOLS:
-		if buttons.has(id): UI.selected(buttons[id], tool == id)
+		if not buttons.has(id):continue
+		UI.selected(buttons[id], tool == id)
+		# Selected styling replaces the normal stylebox, so compact existing controls after it.
+		if group == 0 and id in GROUP_TOOLS[0]:
+			for state in ["normal","hover","pressed","disabled"]:
+				buttons[id].get_theme_stylebox(state).content_margin_top=4
+				buttons[id].get_theme_stylebox(state).content_margin_bottom=4
+			buttons[id].size.y=36
 	if group == 2:
 		for id in subtask_choices(): UI.selected(buttons[id], subtasks.selected[2] == id)
 	if not field_book: build_context_actions()
@@ -620,6 +636,7 @@ func cancel_selected_work():
 	refresh()
 
 func reset_view():
+	cancel_wall_stroke()
 	field_book=false
 	actor_art.clear()
 	six_art.clear()
@@ -683,6 +700,7 @@ func toggle_pause():
 	refresh()
 
 func choose_walk():
+	cancel_wall_stroke()
 	selected_trees.clear()
 	selected_resources.clear()
 	selected_structures.clear()
@@ -693,6 +711,7 @@ func choose_walk():
 	refresh()
 
 func neutral():
+	cancel_wall_stroke()
 	selected_trees.clear()
 	group = -1
 	tool = ""
@@ -753,11 +772,13 @@ func refresh_jobs():
 		UI.button(row, Color("c6d1ac") if i == 0 else UI.PAPER)
 		var names = {"milk":"搾乳","place_kokeshi":"こけし","place_fossil":"化石","wall": "壁", "door":"ドア","locked_door":"施錠ドア","wood_wall":"木壁","stone_wall":"石壁","soil_tile":"土タイル","wood_tile":"木タイル","stone_tile":"石タイル", "kennel": "犬小屋", "coop": "鶏小屋", "move": "歩く", "collect": "回収", "repair": "修理", "remove": "解体", "remove_floor":"タイル解体", "repair_floor":"床修理", "gate": "ドアを開閉", "equip":"装備", "animal_order": "仲間へ指示"}
 		row.text = "%s%s" % [ "› " if j.state != "pending" else "", ("待機 · " if j.state == "blocked" else "") + names.get(j.kind, StoryView.LABELS.get(j.kind,"仕事"))]
+		if j.get("cancel_requested",false):row.text="取消待ち · "+names.get(j.kind,"仕事")
 		row.draw.connect(draw_queue_badge.bind(row,i+1))
 		row.set_meta("job_id",j.id)
 		row.set_meta("row_index",i)
 		row.tooltip_text = "%d番目 · %s" % [i + 1, "保留" if world.jobs_held else {"pending":"これから", "walking":"向かっている", "working":"作業中", "blocked":j.get("block_reason","通行待ち")+"・順番変更/取消可"}.get(j.state,"仕事")]
 		row.tooltip_text += " · ×で取消"
+		if j.get("cancel_requested",false):row.tooltip_text="取消を受け付けました。再開時に工事や指示を安全に終了します。"
 		row.gui_input.connect(queue_input.bind(j.id))
 		row.mouse_entered.connect(func(): hover_job = j.id)
 		row.mouse_exited.connect(func(): hover_job = -1)
@@ -768,6 +789,7 @@ func refresh_jobs():
 		cancel.focus_mode = Control.FOCUS_NONE
 		cancel.icon = UI.icon("cross")
 		cancel.tooltip_text = "この予定を取り消す"
+		cancel.disabled=j.get("cancel_requested",false)
 		UI.button(cancel)
 		cancel.pressed.connect(cancel_work.bind(j.id))
 		queue_controls.add_child(cancel)
@@ -892,12 +914,14 @@ func job_title(j: Dictionary) -> String:
 func _input(event):
 	if event is InputEventKey and not event.pressed and event.physical_keycode==KEY_SHIFT:shift_latched=false
 	if story_modal!="":
+		cancel_wall_stroke()
 		if event is InputEventKey and event.pressed and event.physical_keycode==KEY_ESCAPE: StoryView.close(self); get_viewport().set_input_as_handled()
 		if event is InputEventMouseButton and event.button_index==MOUSE_BUTTON_RIGHT and event.pressed: StoryView.close(self); get_viewport().set_input_as_handled()
 		# GUI buttons receive the event; every world handler is gated by the modal.
 		return
 	if event is InputEventMouse: pointer = event.position
 	if subtasks.input(self,event):
+		cancel_wall_stroke()
 		press_pending = false
 		dragging = false
 		get_viewport().set_input_as_handled()
@@ -916,11 +940,13 @@ func _input(event):
 	if book_motion != "" and event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and buttons.has("close_market") and buttons.close_market.get_global_rect().has_point(event.position):
 		return
 	if cinematic() or book_motion != "":
+		cancel_wall_stroke()
 		keys_down.clear()
 		get_viewport().set_input_as_handled()
 		return
 	if event is InputEventKey and event.pressed and not event.echo and event.physical_keycode == KEY_ESCAPE:
-		if (world.phase == "shop" or field_book) and morning_screen != "morning": close_morning_screen()
+		if wall_stroke.kind!="":cancel_wall_stroke();notice("壁の予約を取り消しました")
+		elif (world.phase == "shop" or field_book) and morning_screen != "morning": close_morning_screen()
 		else: toggle_menu()
 		get_viewport().set_input_as_handled()
 		return
@@ -934,13 +960,15 @@ func _input(event):
 			get_viewport().set_input_as_handled()
 		elif press_pending:
 			if pointer.distance_to(press_position) >= 7: dragging = true
-			if dragging:
+			if wall_stroke.kind!="":update_wall_stroke()
+			elif dragging:
 				if group < 0: camera.position = pan_origin - (pointer - press_position) / camera.zoom
 				else: update_drag_class()
 		elif world.working() and not pointer_over_ui(): hover_job = job_at(Vector2i(get_canvas_transform().affine_inverse() * pointer / TILE))
 	if event is InputEventMouseButton:
 		pointer = event.position
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed and pointer_over_ui():
+			cancel_wall_stroke()
 			ui_pointer_capture = true
 			press_pending = false
 			dragging = false
@@ -965,13 +993,21 @@ func _input(event):
 				return
 			if press_pending:
 				press_pending = false
-				if dragging and group >= 0 and not pointer_over_ui(): finish_drag()
+				if wall_stroke.kind!="":
+					if pointer_over_ui():cancel_wall_stroke();notice("壁の予約を取り消しました")
+					else:
+						update_wall_stroke()
+						var result=wall_stroke.commit(world)
+						notice("%d件予約・%d件未登録%s"%[result.accepted,result.skipped,"（%s）"%result.reason if result.reason!="" else ""])
+						refresh()
+				elif dragging and group >= 0 and not pointer_over_ui(): finish_drag()
 				elif dragging: pass
 				elif not pointer_over_ui(): board_click(event)
 				dragging = false
 				get_viewport().set_input_as_handled()
 				return
 		if event.pressed and event.button_index in [MOUSE_BUTTON_WHEEL_UP, MOUSE_BUTTON_WHEEL_DOWN]:
+			cancel_wall_stroke()
 			if world.phase == "shop" or wheel_scroll_ui(): return
 			var before = get_canvas_transform().affine_inverse() * pointer
 			camera.zoom = Vector2.ONE * clampf(camera.zoom.x * (1.12 if event.button_index == MOUSE_BUTTON_WHEEL_UP else 1.0 / 1.12), 0.65, 1.8)
@@ -980,6 +1016,9 @@ func _input(event):
 			clamp_camera()
 			get_viewport().set_input_as_handled()
 		elif event.pressed and event.button_index == MOUSE_BUTTON_RIGHT:
+			if wall_stroke.kind!="":
+				cancel_wall_stroke();notice("壁の予約を取り消しました")
+				get_viewport().set_input_as_handled();return
 			if queue_drag_id >= 0:
 				queue_drag_id = -1
 				queue_drop_index = -1
@@ -1017,7 +1056,7 @@ func _input(event):
 				if world.working(): toggle_pause()
 			KEY_TAB:
 				if world.working():
-					var next_mode=posmod(group+1,3)
+					var next_mode=MODE_ORDER[(MODE_ORDER.find(group)+1)%MODE_ORDER.size()]
 					if next_mode==2: choose_walk()
 					else: select_group(next_mode)
 			KEY_HOME: recenter()
@@ -1109,10 +1148,25 @@ func _unhandled_input(event):
 	drag_start = get_canvas_transform().affine_inverse() * pointer
 	drag_class = ""
 	drag_encounters.clear()
+	if group==0 and tool in Farm.Buildings.WALLS:
+		wall_stroke.begin(tool,pointer_cell())
+		return
 	for candidate in selection_candidates():
 		if drag_start.distance_to(candidate.point) < 20:
 			drag_class = candidate["class"]
 			break
+
+func pointer_cell() -> Vector2i:
+	var p=get_canvas_transform().affine_inverse()*pointer/TILE
+	return Vector2i(floori(p.x),floori(p.y))
+
+func cancel_wall_stroke():
+	if wall_stroke.kind=="":return
+	wall_stroke.clear();press_pending=false;dragging=false
+
+func update_wall_stroke():
+	if pointer_over_ui():wall_stroke.last=null;return
+	wall_stroke.add(pointer_cell())
 
 func board_click(event):
 	var cell = Vector2i(get_canvas_transform().affine_inverse() * event.position / TILE)
@@ -1191,6 +1245,7 @@ func board_click(event):
 
 func _notification(what):
 	if what == NOTIFICATION_WM_WINDOW_FOCUS_OUT:
+		cancel_wall_stroke()
 		keys_down.clear()
 		shift_latched = false
 		dragging = false
@@ -1203,6 +1258,7 @@ func clamp_camera():
 	camera.force_update_scroll()
 
 func _process(delta):
+	if wall_stroke.kind!="" and (group!=0 or tool!=wall_stroke.kind or menu_open or field_book or story_modal!="" or cinematic() or not world.working()):cancel_wall_stroke()
 	if book_motion != "":
 		var duration = 0.42 if book_motion.begins_with("turning") else 0.54
 		if clock - book_started >= duration:
@@ -1220,6 +1276,7 @@ func _process(delta):
 	if not menu_open: clock += delta
 	if not field_book and story_modal=="" and not world.paused and not menu_open and world.working(): visual_time += delta * (24.0 if not world.rest_skip.is_empty() else speed)
 	var direction = Vector2(int(keys_down.get(KEY_D, false)) - int(keys_down.get(KEY_A, false)), int(keys_down.get(KEY_S, false)) - int(keys_down.get(KEY_W, false)))
+	if direction!=Vector2.ZERO:cancel_wall_stroke()
 	if not field_book and story_modal=="" and not menu_open and not cinematic() and world.phase != "shop": camera.position += direction.normalized() * delta * 420
 	clamp_camera()
 	if not field_book and story_modal=="" and not world.paused and not automated and world.working():
@@ -1241,7 +1298,7 @@ func _process(delta):
 	if speed > 2 and not world.keeper.resting:
 		speed = 1
 		refresh()
-	var vitals_signature = str(world.rest_skip) + str(world.keeper.state) + str(world.keeper.resting) + str(world.keeper.forced_rest)
+	var vitals_signature = str(world.rest_skip) + str(world.keeper.state) + str(world.keeper.resting) + str(world.keeper.forced_rest)+str(Farm.Life.can_wake_hidden(world))
 	if selected.get("kind") == "keeper" and vitals_signature != keeper_ui_signature:
 		keeper_ui_signature = vitals_signature
 		refresh()
@@ -1276,7 +1333,7 @@ func _process(delta):
 		buttons.advance.visible = not field_book and (world.phase=="day" or world.early_clear)
 		buttons.advance.text = rest_button_text()
 	buttons.advance.disabled = cinematic()
-	audio.set_night(world.phase == "defend")
+	audio.set_context(world.phase,menu_open or field_book or story_modal!="" or world.paused)
 	var target_tint = 0.40 * clampf(world.remaining_night() / 25.0, 0, 1) if world.phase == "defend" else (0.30 * (1 - clampf((world.day_seconds - world.tick * Farm.DT) / 15.0, 0, 1)) if world.phase == "day" else 0.0)
 	night_tint = move_toward(night_tint, target_tint, delta * 0.4)
 	audio.tension(world.working() and world.enemies.any(func(e): return not e.done and not e.flee))
@@ -1528,6 +1585,7 @@ func _draw():
 	# Brief visual ending only; no corpse collision or revived simulation actor.
 	for enemy_side in [false,true]:
 		for actor in (world.enemies if enemy_side else world.animals):
+			if not enemy_side and AnimalCorpse.visible(actor):continue # Persistent owned corpses draw once with the scene.
 			var who=actor.get("archetype",actor.get("species","")) if enemy_side else actor.species
 			if who not in Direction.ACTORS or actor.hp>0 or (not actor.get("done",false) if enemy_side else actor.placed):continue
 			if enemy_side and actor.get("dead",false):continue
@@ -1550,6 +1608,7 @@ func _draw():
 			"door_part": BuildingArt.door_layer(self,center(actor.data),world.structures[actor.data],actor.part)
 			"building": draw_structure(center(actor.data),world.structures[actor.data])
 			"animal": draw_animal_actor(actor.data)
+			"animal_corpse": draw_animal_corpse(actor.data)
 			"enemy": draw_enemy_actor(actor.data)
 			"keeper": draw_keeper_actor()
 	for f in dust:
@@ -1559,7 +1618,7 @@ func _draw():
 		if selected.get("kind")=="tree": draw_rect(Rect2(center(cell)-Vector2(21,21),Vector2(42,42)),Color("ffe2a3"),false,2)
 	if debug_view: StoryView.debug(self)
 	for cell in selected_resources: draw_rect(Rect2(center(cell)-Vector2(20,20),Vector2(40,40)),Color("ffe2a3"),false,2)
-	if dragging and group>=0:
+	if dragging and group>=0 and wall_stroke.kind=="":
 		label_on(self,get_canvas_transform().affine_inverse()*pointer+Vector2(10,-10),{"animal":"仲間","resource":"回収物","tree":"開拓","structure":"建物","floor":"床"}.get(drag_class,""),16,UI.PAPER)
 	if cinematic(): return
 	draw_pointer_preview()
@@ -1583,6 +1642,7 @@ func scene_actors() -> Array:
 		else: actors.append({"y":center(cell).y+14,"x":cell.x,"kind":"building","data":cell})
 	for a in world.animals:
 		if a.placed: actors.append({"y":actor_pixel("a%d"%a.id,a.pos).y+14,"x":a.pos.x,"kind":"animal","data":a})
+		elif AnimalCorpse.visible(a):actors.append({"y":center(a.pos).y+14,"x":a.pos.x,"kind":"animal_corpse","data":a})
 	for e in world.enemies:
 		if not e.done: actors.append({"y":actor_pixel("e%d"%e.id,e.pos).y+14,"x":e.pos.x,"kind":"enemy","data":e})
 	if world.keeper.placed and world.keeper.carrier<0: actors.append({"y":keeper_pixel().y+14,"x":world.keeper.pos.x,"kind":"keeper"})
@@ -1590,6 +1650,18 @@ func scene_actors() -> Array:
 	return actors
 
 func draw_pointer_preview():
+	if wall_stroke.kind!="":
+		var preview=wall_stroke.plan(world)
+		for row in preview.rows:
+			var color=Color("a3e5ba") if row.valid else Color("ee8a77")
+			var rect=Rect2(Vector2(row.pos)*TILE+Vector2(2,2),TILE-Vector2(4,4))
+			draw_rect(rect,Color(color,0.2));draw_rect(rect,color,false,3)
+			if not row.valid:
+				draw_line(rect.position+Vector2(5,5),rect.end-Vector2(5,5),color,2)
+		var hint="離して%d件予約 / 未登録%d件"%[preview.accepted,preview.skipped]
+		if preview.reason!="":hint+="（%s）"%preview.reason
+		label_on(self,get_canvas_transform().affine_inverse()*pointer+Vector2(14,-20),hint,16,UI.PAPER)
+		return
 	var cell = Vector2i(get_canvas_transform().affine_inverse() * pointer / TILE)
 	if world.working() and world.inside(cell) and not pointer_over_ui():
 		var valid = false
@@ -1695,7 +1767,7 @@ func draw_hud():
 		if not world.dawn_summary.unconscious.is_empty(): label_on(hud, Vector2(421, 292), "明日は休養  %d匹" % world.dawn_summary.unconscious.size(), 19)
 		return
 
-	if dragging and group>=0:
+	if dragging and group>=0 and wall_stroke.kind=="":
 		var start = get_canvas_transform() * drag_start
 		var area = Rect2(start, pointer - start).abs()
 		hud.draw_rect(area, Color(0.65, 0.9, 0.76, 0.15))
@@ -1857,7 +1929,7 @@ func setup_menu():
 	stamp.add_theme_font_size_override("font_size",14)
 	menu.add_child(stamp)
 	var guide = Label.new()
-	guide.text = "ホイール：ズーム　Tab：建設 / 指示 / 牧場主\nShift：操作選択　未選択でドラッグ：マップ移動　操作ボタンをドラッグ：並べ替え\n左クリック：選択・行動　右クリック：予定取消 / 他は解除 / 市場で戻る\n1：0.5倍　2：1倍　3：2倍　4：4倍（休息中）\nSpace：停止 / 再開　−：遅く　＋ / ＝ / テンキー＋：速く\n通常 0.5 / 1 / 2倍　休息中 4倍　危険時 1倍\n夜まで / 朝まで休む：別の時間送り（中断して倍率を変更）"
+	guide.text = "ホイール：ズーム　Tab：主人公 → 建設 → 指示　Shift：操作選択\n壁を選んでドラッグ：連続予約（右クリック / Escで取消）　未選択：マップ移動\n左クリック：選択・行動　右クリック：予定取消 / 解除 / 市場で戻る\n1：0.5倍　2：1倍　3：2倍　4：4倍（休息中）　操作ボタンのドラッグ：並べ替え\nSpace：停止 / 再開　−：遅く　＋ / ＝ / テンキー＋：速く\n夜まで / 朝まで休む：別の時間送り（中断して倍率を変更）"
 	guide.position=Vector2(288,566)
 	guide.add_theme_font_size_override("font_size",14)
 	menu.add_child(guide)
@@ -1868,6 +1940,7 @@ func setup_menu():
 	menu.visible = false
 
 func toggle_menu():
+	cancel_wall_stroke()
 	if menu_open:
 		world.paused = menu_was_paused
 		menu_open = false
@@ -2021,6 +2094,7 @@ func build_shop():
 	add_button(palette, "book_next", "→", Rect2(930,676,80,36), turn_book.bind(1))
 	buttons.book_prev.disabled = book_records().size() <= (8 if training_id<0 else 1)
 	buttons.book_next.disabled = buttons.book_prev.disabled
+	Journal.layout_controls(self)
 
 func product_title(row: Dictionary) -> String:
 	if row.get("animal_id", -1) >= 0:
@@ -2297,7 +2371,7 @@ func draw_keeper_card():
 		hud.draw_rect(Rect2(100, y + 3, 170 * ratio, 8), Color("bf7661") if i == 0 else Color("8087a7"))
 		label_on(hud, Vector2(279, y + 12), "%d/%d" % [k.hp, k.max_hp] if i == 0 else "%d%%" % k.sleepiness, 13, UI.INK)
 	var activity = "連れ去り" if k.carrier >= 0 else ("気絶" if k.state == "unconscious" else ("限界休息" if k.forced_rest else (("寝入り待ち" if Farm.Life.presentation(world)=="settling" else "睡眠") if k.resting else ("散歩中" if world.manual_goal != null else ("再開待ち" if world.jobs_held else ("仕事中" if not world.jobs.is_empty() else "のんびり"))))))
-	if k.state=="hidden_rest":activity="隠れて療養中"
+	if k.state=="hidden_rest":activity="療養中：HP1で起床可 / HP8で自動復帰"
 	label_on(hud, Vector2(30, 676), activity, 15, UI.INK)
 	if not world.jobs.is_empty():
 		var names = {"milk":"搾乳","place_kokeshi":"こけし","place_fossil":"化石","wall": "壁", "door":"ドア","locked_door":"施錠ドア","wood_wall":"木壁","stone_wall":"石壁","soil_tile":"土タイル","wood_tile":"木タイル","stone_tile":"石タイル", "collect": "回収", "move": "歩く", "equip":"装備", "animal_order": "仲間へ指示", "repair": "修理", "remove": "解体", "remove_floor":"タイル解体", "repair_floor":"床修理", "gate": "ドア", "kennel": "犬小屋", "coop": "鶏小屋"}
@@ -2530,6 +2604,25 @@ func draw_keeper_actor():
 			draw_rect(Rect2(owner_pixel + Vector2(-17, -37), Vector2(34 * float(world.keeper.hp) / world.keeper.max_hp, 4)), Color("d68b74"))
 
 
+func draw_animal_corpse(a: Dictionary):
+	var foot=center(a.pos)+Vector2(0,14)
+	draw_circle(foot+Vector2(0,-2),18,Color(0.1,0.15,0.1,0.25))
+	if a.species in SixMotion.ACTORS:
+		var scale_value=HumanVisual.SCALE if a.species=="maid" else 1.0
+		draw_set_transform(foot*(1.0-scale_value),0,Vector2.ONE*scale_value)
+		SixMotion.paint(self,a.species,"death",a.get("facing",1),foot,SixMotion.duration(a.species,"death"))
+		draw_set_transform(Vector2.ZERO)
+	elif Delivered.CLIPS.has(a.species+"/death"+("_left" if a.get("facing",1)<0 else "_right")):
+		var key=a.species+"/death"+("_left" if a.get("facing",1)<0 else "_right")
+		Delivered.draw_clip(self,key,foot,Delivered.duration(key))
+	else:
+		# Interim fallen silhouette made from existing idle art; not a new delivered death sprite.
+		draw_set_transform(foot,PI*0.5,Vector2(0.85,0.85))
+		if a.species in ["hen","cat"]:Art.sprite(self,a.species,"idle",a.get("facing",1),Vector2(0,12),0,0.65)
+		else:Delivered.draw_clip(self,ProgressArt.clip(a.species,"idle",a.get("facing",1)),Vector2(0,12),0)
+		draw_set_transform(Vector2.ZERO)
+	label_on(self,foot+Vector2(-13,17),"死亡",11,Color("d9cfb2"))
+
 func draw_animal_actor(a: Dictionary):
 	if not a.placed: return
 	var p = actor_pixel("a%d" % a.id, a.pos)
@@ -2557,6 +2650,7 @@ func draw_animal_actor(a: Dictionary):
 			color.a = 0.65 + 0.25 * sin(clock * 4)
 			label_on(self, p + Vector2(-4, -29), "!", 23, color)
 	if a.hp <= 0: draw_down_stars(p)
+	if not world.available(a):label_on(self,p+Vector2(-54,-43),"療養：%d日目の朝に復帰"%(a.unavailable_through_day+1),12,UI.PAPER)
 	elif a.state in ["休む", "自主休養"]: label_on(self, p + Vector2(14, -25), "Zz", 18, Color("c1e3db"))
 	if a.rescuing: label_on(self, p + Vector2(-25, -20), "!!", 16, Color("b0f0de"))
 	if world.tick - a.last_bark < 4:
