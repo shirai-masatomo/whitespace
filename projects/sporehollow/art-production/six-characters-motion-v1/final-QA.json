@@ -1,0 +1,16 @@
+{
+  "prior_png_verified": 1163,
+  "png_counts": {
+    "merchant": 20,
+    "maid": 92,
+    "dancer": 62,
+    "thief": 60,
+    "cow": 30,
+    "bull": 56
+  },
+  "total_png": 320,
+  "errors": [],
+  "runtime_verified": false,
+  "adopted_idle_pixel_exact": true,
+  "item_qa_reference": "art_delivery\\ui_world_direction_v1\\candidates\\new\\fossil.png"
+}
