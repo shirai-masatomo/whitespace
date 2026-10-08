@@ -133,7 +133,9 @@ static func wake_auto(w):
 
 static func idle_step(w, near: bool):
 	var k=w.keeper
-	var idle=able(w) and k.sleepiness<100 and not near and w.tick>=k.hurt_until and w.manual_goal==null and w.jobs.is_empty() and not w.jobs_held
+	# Empty recovery holds have no work to resume. Keep explicit waits and every queued job.
+	var recovery_idle=k.hp<k.max_hp and w.job_hold_reason in ["rescue","danger"]
+	var idle=able(w) and k.sleepiness<100 and not near and w.tick>=k.hurt_until and w.manual_goal==null and w.jobs.is_empty() and (not w.jobs_held or recovery_idle)
 	k.idle_elapsed=k.get("idle_elapsed",0.0)+w.DT if idle else 0.0
 	if k.idle_elapsed>=AUTO_REST_IDLE_SECONDS and (k.sleepiness>0 or k.hp<k.max_hp):
 		set_rest(w,true,"auto")
@@ -183,7 +185,7 @@ static func step(w):
 		if k.hp>=HIDDEN_RECOVER_HP:recover_hidden(w)
 		return
 	if k.state != "free": return
-	var near = w.enemies.any(func(e): return not e.done and not e.flee and w.distance(e.pos, k.pos) <= 3)
+	var near = w.enemies.any(func(e): return not e.done and not e.flee and e.hp>0 and w.distance(e.pos, k.pos) <= 3)
 	if near and not k.get("danger_near", false): danger(w, "approaching")
 	k.danger_near = near
 	if near: wake_auto(w)

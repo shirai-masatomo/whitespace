@@ -49,13 +49,22 @@ static func portrait_frame(g,c,area: Rect2,tier: int):
 		c.draw_line(corner,corner+Vector2(direction.x*14,0),color,2)
 		c.draw_line(corner,corner+Vector2(0,direction.y*14),color,2)
 
+static func badge_layout(g,tier: int,small: bool=false) -> Dictionary:
+	tier=clampi(tier,0,4)
+	var title=g.Farm.ProgressData.RARITY_NAMES[tier]
+	var font_size=13 if small else 14
+	var text_size=g.FONT.get_string_size(title,HORIZONTAL_ALIGNMENT_LEFT,-1,font_size)
+	var height=24.0
+	return {"title":title,"font_size":font_size,"size":Vector2(ceilf(28+text_size.x+9),height),"baseline":Vector2(28,roundf((height-g.FONT.get_height(font_size))/2+g.FONT.get_ascent(font_size)))}
+
 static func badge(g,c,p: Vector2,tier: int,small: bool=false):
 	tier=clampi(tier,0,4)
 	var colors=[Color("8b8871"),Color("628363"),Color("607d98"),Color("8d7393"),Color("ab843e")]
-	var rect=Rect2(p,Vector2(116,23) if not small else Vector2(90,20))
+	var layout=badge_layout(g,tier,small)
+	var rect=Rect2(p,layout.size)
 	c.draw_style_box(g.MarketView.panel(Color("f0e4bf"),colors[tier],1),rect)
-	c.draw_texture_rect(Direction.ASSETS["ui.rarity_"+g.Farm.ProgressData.RARITY_NAMES[tier].to_lower()].texture,Rect2(p+Vector2(2,1),Vector2(20,20)),false)
-	g.label_on(c,p+Vector2(24,16),g.Farm.ProgressData.RARITY_NAMES[tier],12 if small else 14,colors[tier])
+	c.draw_texture_rect(Direction.ASSETS["ui.rarity_"+layout.title.to_lower()].texture,Rect2(p+Vector2(4,2),Vector2(20,20)),false)
+	g.label_on(c,p+layout.baseline,layout.title,layout.font_size,colors[tier])
 
 static func skill_texture(id: String) -> Texture2D:
 	var key={"bark":"ui.skill_bark","iron_ball":"ui.skill_destruction","phone":"ui.skill_reinforcement","rage":"ui.ultimate_rage","resurrection":"ui.ultimate_resurrection"}.get(id,"")

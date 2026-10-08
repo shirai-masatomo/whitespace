@@ -73,21 +73,35 @@ static func rebuild(g):
 	g.add_button(panel,"story_close","読み終える" if g.story_modal!="intro" else "スキップ",Rect2(230,612,180,46),close.bind(g))
 	if g.story_modal=="intro":g.add_button(panel,"story_next","次へ" if g.story_page<3 else "牧場へ",Rect2(840,612,180,46),next.bind(g))
 
-static func morning_buttons(g):
-	g.add_button(g.palette,"diary","父の記録",Rect2(350,635,140,36),open.bind(g,"diary"))
-	g.add_button(g.palette,"intro_again","回想",Rect2(498,635,100,36),open.bind(g,"intro"))
-	if g.world.story.radio:
-		g.add_button(g.palette,"radio","ラジオ",Rect2(810,635,140,36),open.bind(g,"radio"))
-		if not g.world.story.news.is_empty():
-			var headline=Label.new();headline.position=Vector2(350,683);headline.size=Vector2(600,28)
-			headline.text="放送："+g.world.story.news[-1].title;headline.add_theme_font_size_override("font_size",17)
-			headline.mouse_filter=Control.MOUSE_FILTER_IGNORE;g.palette.add_child(headline)
+static func morning_layout(g) -> Dictionary:
+	# Paper and footer share one layout; optional messages cannot escape the card.
+	var buttons=[{"id":"diary","text":"父の記録","kind":"diary","rect":Rect2(368,626,154,40)},
+		{"id":"intro_again","text":"回想","kind":"intro","rect":Rect2(536,626,118,40)}]
+	if g.world.story.radio:buttons.append({"id":"radio","text":"ラジオ","kind":"radio","rect":Rect2(794,626,154,40)})
+	var notes=[];var y=674.0
+	if g.world.story.radio and not g.world.story.news.is_empty():
+		notes.append({"name":"MorningNews","text":"放送："+g.world.story.news[-1].title,"rect":Rect2(368,y,580,24)});y+=28
 	var gifts=g.world.story.miracles.filter(func(m):return m.day==g.world.campaign.day)
 	if not gifts.is_empty():
-		var gift=Label.new();gift.position=Vector2(350,718);gift.size=Vector2(600,28)
-		gift.text="願いの贈り物："+gifts[-1].get("text","金貨 +60G")
-		gift.add_theme_font_size_override("font_size",17);gift.mouse_filter=Control.MOUSE_FILTER_IGNORE
-		g.palette.add_child(gift)
+		notes.append({"name":"MorningGift","text":"願いの贈り物："+gifts[-1].get("text","金貨 +60G"),"rect":Rect2(368,y,580,24)});y+=28
+	if g.save_status!="":
+		notes.append({"name":"MorningSaveStatus","text":g.save_status,"rect":Rect2(368,y,580,44)});y+=48
+	var bottom=686.0 if notes.is_empty() else y+10.0
+	return {"paper":Rect2(330,112,656,bottom-112),"buttons":buttons,"notes":notes}
+
+static func morning_buttons(g):
+	var layout=morning_layout(g)
+	for row in layout.buttons:
+		g.add_button(g.palette,row.id,row.text,row.rect,open.bind(g,row.kind))
+		g.MarketView.button_style(g.buttons[row.id])
+	for row in layout.notes:
+		var note=Label.new();note.name=row.name;note.position=row.rect.position;note.size=row.rect.size
+		note.text=row.text;note.tooltip_text=row.text;note.clip_text=true
+		note.text_overrun_behavior=TextServer.OVERRUN_TRIM_ELLIPSIS
+		note.add_theme_font_size_override("font_size",14 if row.name=="MorningSaveStatus" else 16)
+		note.add_theme_color_override("font_color",g.MarketView.MUTED)
+		if row.name=="MorningSaveStatus":note.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART;note.max_lines_visible=2
+		note.mouse_filter=Control.MOUSE_FILTER_STOP;g.palette.add_child(note)
 
 static func debug(g):
 	var w=g.world

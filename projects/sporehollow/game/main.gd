@@ -2081,12 +2081,6 @@ func build_shop():
 		MarketView.build(self)
 		if morning_screen=="morning":
 			StoryView.morning_buttons(self)
-			if save_status!="":
-				var status_label=Label.new();status_label.name="MorningSaveStatus"
-				status_label.position=Vector2(330,751);status_label.size=Vector2(660,44)
-				status_label.text=save_status;status_label.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART
-				status_label.add_theme_font_size_override("font_size",16);status_label.add_theme_color_override("font_color",UI.PAPER)
-				status_label.mouse_filter=Control.MOUSE_FILTER_IGNORE;palette.add_child(status_label)
 		return
 	add_button(palette, "close_market", "閉じる" if field_book else "メニューへ", Rect2(1040, 116, 124, 44), close_morning_screen)
 	buttons.close_market.icon = UI.icon("cross")

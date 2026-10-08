@@ -120,6 +120,23 @@ static func text(game,c,area: Rect2,value: String,size: int=18,color: Color=UI.I
 	paragraph.break_flags=TextServer.BREAK_MANDATORY|TextServer.BREAK_WORD_BOUND|TextServer.BREAK_ADAPTIVE
 	paragraph.draw(c.get_canvas_item(),area.position,color)
 
+static func speech_bubble(game,c,area: Rect2,value: String,font_size: int,tail_up: bool=false):
+	# A single quiet balloon style; its outline opens where the tail joins the body.
+	var fill=Color("fff8e7");var edge=Color("a69b7f")
+	var box=panel(fill,edge,2);box.set_corner_radius_all(14)
+	box.shadow_size=2;box.shadow_offset=Vector2(0,2)
+	c.draw_style_box(box,area)
+	var base_y=area.position.y+1 if tail_up else area.end.y-1
+	var center=area.get_center().x
+	var left=Vector2(center-10,base_y);var right=Vector2(center+10,base_y)
+	var tip=Vector2(center-4,base_y+(-13 if tail_up else 13))
+	c.draw_line(left,right,fill,4)
+	c.draw_colored_polygon(PackedVector2Array([left,tip,right]),fill)
+	c.draw_polyline(PackedVector2Array([left,tip,right]),edge,2,true)
+	var paragraph=TextParagraph.new();paragraph.add_string(value,game.FONT,font_size)
+	paragraph.width=area.size.x-32;paragraph.alignment=HORIZONTAL_ALIGNMENT_CENTER
+	paragraph.draw(c.get_canvas_item(),Vector2(area.position.x+16,area.get_center().y-paragraph.get_size().y/2).round(),UI.INK)
+
 static func price(game,c,p: Vector2,amount: int,size: int=25):
 	c.draw_texture_rect(UI.icon("coin"),Rect2(p+Vector2(0,2),Vector2(24,24)),false)
 	text(game,c,Rect2(p+Vector2(32,0),Vector2(160,38)),"%d G"%amount,size)
@@ -222,7 +239,7 @@ static func draw_product(game,b,row: Dictionary):
 static func draw(game):
 	var c=game.hud
 	if game.morning_screen=="morning":
-		c.draw_style_box(panel(PAPER,UI.WOOD,3),Rect2(330,112,656,510))
+		c.draw_style_box(panel(PAPER,UI.WOOD,3),game.StoryView.morning_layout(game).paper)
 		text(game,c,Rect2(368,138,400,44),"%d日目の朝"%game.world.campaign.day,26)
 		price(game,c,Vector2(818,141),game.world.campaign.gold,24)
 		c.draw_line(Vector2(368,189),Vector2(948,189),Color("c5b590"),1)
@@ -242,13 +259,10 @@ static func draw(game):
 	c.draw_line(Vector2(140,195),Vector2(1140,195),Color("c5b590"),1)
 	if game.shop_side=="home":
 		art_texture(c,Art.CART,Rect2(160,286,498,300))
-		c.draw_style_box(panel(Color("fff4d6"),Color("cabb95")),Rect2(265,215,270,62))
-		c.draw_colored_polygon(PackedVector2Array([Vector2(378,275),Vector2(394,292),Vector2(403,275)]),Color("fff4d6"))
-		text(game,c,Rect2(300,232,220,36),"何が欲しい？",23)
+		speech_bubble(game,c,Rect2(265,215,270,62),"何が欲しい？",23)
 	else:
 		Art.fit(c,Art.CART,Rect2(128,313,220,192))
-		c.draw_style_box(panel(Color("fff4d6"),Color("cabb95")),Rect2(138,523,204,67))
-		text(game,c,Rect2(151,539,177,45),"いらっしゃい" if game.shop_side=="buy" else "持ち物を見せてね",16,MUTED)
+		speech_bubble(game,c,Rect2(138,523,204,67),"いらっしゃい" if game.shop_side=="buy" else "持ち物を見せてね",18,true)
 		var crumb="朝の市 / "+("買う" if game.shop_side=="buy" else "売る")
 		if game.shop_level!="categories":crumb+=" / "+game.MARKET_CATEGORIES[game.shop_category][0]
 		text(game,c,Rect2(LEFT,225,750,30),crumb,17,MUTED)
