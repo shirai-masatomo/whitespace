@@ -527,12 +527,10 @@ func animal_step(a: Dictionary):
 		a.fear = 28 if not threat.is_empty() else maxi(0, a.fear - 1)
 		a.state = "怖がる" if a.fear > 0 else ("ついばむ" if a.species == "hen" else "散歩")
 		a.move_credit = minf(1.0, a.move_credit + a.move_speed * Content.speed(self,a) * DT)
-		if not threat.is_empty() and a.move_credit >= 1:
-			a.move_credit -= 1
-			var options = neighbors(a.pos).filter(func(p): return walkable(p) and not actor_occupied(p, a.pos))
-			options.sort_custom(func(p, q): return distance(p, threat[0].pos) > distance(q, threat[0].pos))
-			if not options.is_empty(): a.pos = options[0]
-		elif threat.is_empty():
+		if a.fear>0:
+			preload("res://game/animal_escape.gd").step(self,a,threat)
+		else:
+			preload("res://game/animal_escape.gd").clear(a)
 			if a.move_credit >= 1 and tick % 4 == 0:
 				a.move_credit -= 1
 				var options = neighbors(a.pos).filter(func(p): return walkable(p) and not occupied(p))
@@ -710,7 +708,7 @@ func enemy_step(e: Dictionary):
 						milestones.append({"tick": tick, "kind": "animal_danger", "id": target.id})
 					combat_log.append({"tick": tick, "source": "enemy", "id": e.id, "target": target.id, "damage": damage})
 			elif tick % 3 == 0:
-				move_enemy(e, next_step(e.pos, target.pos, true))
+				move_enemy(e, next_step(e.pos, target.pos, true,true),target.pos)
 			return
 	if Story.idol_enemy(self,e): return
 	if not e.flee and e.carry == "" and e.can_see_keeper and distance(e.pos, keeper.pos) <= 1 and keeper.carrier < 0:
@@ -750,13 +748,15 @@ func enemy_step(e: Dictionary):
 			return
 		return
 	e.capture_progress = 0
-	var next = next_step(e.pos, goal, true)
+	var next = next_step(e.pos, goal, true,true)
+	if next==e.pos:next=next_step(e.pos,goal,true)
 	if not e.flee and e.get("intent", "") == "detour" and not e.side_step_used:
 		next = side_step(e.pos, goal, e.intent_roll)
 		e.side_step_used = true
-	move_enemy(e, next)
+	move_enemy(e, next,goal)
 
-func move_enemy(e: Dictionary, next: Vector2i):
+func move_enemy(e: Dictionary, next: Vector2i,goal=null):
+	if next==e.pos:return # Waiting is not movement, stamina use or path progress.
 	if Story.terrain_block(self,next): return
 	# Living animals occupy space; carrying the keeper is the only deliberate actor overlap.
 	var defenders = animals.filter(func(a): return a.placed and a.hp > 0 and a.pos == next)
@@ -765,13 +765,10 @@ func move_enemy(e: Dictionary, next: Vector2i):
 		e.threat_until = tick + ceili(Rules.KIDNAPPER.counter_duration / DT)
 		return
 	if actor_occupied(next, e.pos) and not (e.carry == "keeper" and next == keeper.pos):
-		var around = neighbors(e.pos).filter(func(p): return walkable(p) and not actor_occupied(p, e.pos) and distance(p, next) <= 2)
-		if around.is_empty(): return
-		var goal = RaiderAI.target(e, self)
-		var go = around[0]
-		for p in around:
-			if distance(p, goal) < distance(go, goal): go = p
-		next = go
+		if goal==null:return
+		var route=find_path(e.pos,goal,true,true,e.get("species","")=="doberman")
+		if route.size()<2 or actor_occupied(route[1],e.pos):return
+		next=route[1]
 	if blocks(next) and e.get("archetype","kidnapper")!="kidnapper":
 		var obstacle=structures[next]
 		var attack_needed=obstacle.kind not in Buildings.DOORS or obstacle.get("lock_hp",0)>0

@@ -16,6 +16,7 @@ const TILE = Vector2(48, 42)
 const GROUPS = ["建設", "指示"]
 const Direction=preload("res://game/direction_art.gd")
 const SixMotion=preload("res://game/six_motion.gd")
+const HumanVisual=preload("res://game/human_visual.gd")
 var six_art={}
 var six_revived={}
 const TOOLS = {"milk":"搾乳", "charge":"突撃", "place_kokeshi":"こけしを置く", "place_fossil":"化石を置く","wall": "壁  10 / 1秒", "wood_wall":"木壁 木10", "stone_wall":"石壁 石10", "soil_tile":"土タイル 土2", "wood_tile":"木タイル 木2", "stone_tile":"石タイル 石2", "door":"ドア 木10", "locked_door":"施錠ドア 木20", "guide":"連れていく", "equip":"装備", "repair": "修理", "gate": "ドア開閉", "remove": "解体",
@@ -1113,7 +1114,7 @@ func board_click(event):
 		select_resource(cell, event.ctrl_pressed)
 		return
 	for e in world.enemies:
-		var hit=Direction.bounds(self,e,true).has_point(get_canvas_transform().affine_inverse()*event.position) if e.get("archetype","") in Direction.ACTORS else ProgressArt.bounds(self,e,true).has_point(get_canvas_transform().affine_inverse()*event.position) if e.get("archetype","") in ProgressArt.SPECIES else event.position.distance_to(get_canvas_transform() * actor_pixel("e%d" % e.id, e.pos)) < 25 * camera.zoom.x
+		var hit=enemy_hit_rect(e).has_point(get_canvas_transform().affine_inverse()*event.position)
 		if not e.done and hit:
 			tool = ""
 			group = -1
@@ -1478,7 +1479,7 @@ func _draw():
 			if enemy_side and actor.get("dead",false):continue
 			var pose=six_art.get(SixMotion.key(actor,enemy_side),{})
 			if not pose.has("death_at") or visual_time-pose.death_at>=SixMotion.duration(who,pose.action):continue
-			var foot=center(pose.death_pos)+Vector2(0,14);var scale_value=1.15 if who in ["maid","dancer","thief"] else 1.0
+			var foot=center(pose.death_pos)+Vector2(0,14);var scale_value=HumanVisual.SCALE if who in ["maid","dancer","thief"] else 1.0
 			draw_set_transform(foot*(1.0-scale_value),0,Vector2.ONE*scale_value)
 			SixMotion.paint(self,who,pose.action,pose.facing,foot,visual_time-pose.death_at)
 			draw_set_transform(Vector2.ZERO)
@@ -1488,24 +1489,9 @@ func _draw():
 		if thrower.get("archetype")=="thief" and world.tick<thrower.get("poison_visual_until",0):
 			var flight=clampf((world.tick-thrower.poison_fired)/2.0,0,1)
 			Direction.draw(self,"new.poison_projectile" if flight<1 else "new.poison_splash",center(thrower.pos).lerp(center(thrower.poison_target),flight))
-	var actors=[]
-	for p in world.trees: actors.append({"y":center(p).y,"x":p.x,"kind":"tree","data":p})
-	if not world.story.idol.is_empty(): actors.append({"y":actor_pixel("idol",world.Story.at(world)).y+TILE.y,"x":world.Story.at(world).x,"kind":"idol"})
-	for cell in world.structures:
-		var b=world.structures[cell]
-		if b.kind in Farm.Buildings.DOORS and b.status=="ready":
-			for part in [["frame_rear",-16],["leaf",0],["frame_front",16]]:
-				actors.append({"y":center(cell).y+part[1],"x":cell.x,"kind":"door_part","data":cell,"part":part[0]})
-		else: actors.append({"y":center(cell).y,"x":cell.x,"kind":"building","data":cell})
-	for a in world.animals:
-		if a.placed: actors.append({"y":actor_pixel("a%d"%a.id,a.pos).y,"x":a.pos.x,"kind":"animal","data":a})
-	for e in world.enemies:
-		if not e.done: actors.append({"y":actor_pixel("e%d"%e.id,e.pos).y,"x":e.pos.x,"kind":"enemy","data":e})
-	if world.keeper.placed and world.keeper.carrier<0: actors.append({"y":keeper_pixel().y,"x":world.keeper.pos.x,"kind":"keeper"})
-	actors.sort_custom(func(a,b): return a.y<b.y if a.y!=b.y else (a.x<b.x if a.x!=b.x else a.kind<b.kind))
-	for actor in actors:
+	for actor in scene_actors():
 		match actor.kind:
-			"tree": StoryView.tree(self,actor.data)
+			"tree": StoryView.tree(self,actor.data,actor.get("deep",false))
 			"idol": StoryView.idol(self)
 			"door_part": BuildingArt.door_layer(self,center(actor.data),world.structures[actor.data],actor.part)
 			"building": draw_structure(center(actor.data),world.structures[actor.data])
@@ -1522,6 +1508,34 @@ func _draw():
 	if dragging and group>=0:
 		label_on(self,get_canvas_transform().affine_inverse()*pointer+Vector2(10,-10),{"animal":"仲間","resource":"回収物","tree":"開拓","structure":"建物","floor":"床"}.get(drag_class,""),16,UI.PAPER)
 	if cinematic(): return
+	draw_pointer_preview()
+
+func scene_actors() -> Array:
+	var actors=[]
+	var inv=get_canvas_transform().affine_inverse()
+	var top=inv*Vector2.ZERO;var bottom=inv*Vector2(1280,800)
+	for y in range(floori(top.y/TILE.y)-2,ceili(bottom.y/TILE.y)+3):
+		for x in range(floori(top.x/TILE.x)-2,ceili(bottom.x/TILE.x)+3):
+			var p=Vector2i(x,y)
+			if p not in world.trees and preload("res://game/forest_pattern.gd").outer_tree(p,world.seed_value,world.W,world.H):
+				actors.append({"y":StoryView.tree_foot(self,p).y,"x":p.x,"kind":"tree","data":p,"deep":true})
+	for p in world.trees: actors.append({"y":StoryView.tree_foot(self,p).y,"x":p.x,"kind":"tree","data":p})
+	if not world.story.idol.is_empty(): actors.append({"y":actor_pixel("idol",world.Story.at(world)).y+TILE.y+14,"x":world.Story.at(world).x,"kind":"idol"})
+	for cell in world.structures:
+		var b=world.structures[cell]
+		if b.kind in Farm.Buildings.DOORS and b.status=="ready":
+			for part in [["frame_rear",-16],["leaf",0],["frame_front",16]]:
+				actors.append({"y":center(cell).y+part[1]+14,"x":cell.x,"kind":"door_part","data":cell,"part":part[0]})
+		else: actors.append({"y":center(cell).y+14,"x":cell.x,"kind":"building","data":cell})
+	for a in world.animals:
+		if a.placed: actors.append({"y":actor_pixel("a%d"%a.id,a.pos).y+14,"x":a.pos.x,"kind":"animal","data":a})
+	for e in world.enemies:
+		if not e.done: actors.append({"y":actor_pixel("e%d"%e.id,e.pos).y+14,"x":e.pos.x,"kind":"enemy","data":e})
+	if world.keeper.placed and world.keeper.carrier<0: actors.append({"y":keeper_pixel().y+14,"x":world.keeper.pos.x,"kind":"keeper"})
+	actors.sort_custom(func(a,b): return a.y<b.y if a.y!=b.y else (a.x<b.x if a.x!=b.x else a.kind<b.kind))
+	return actors
+
+func draw_pointer_preview():
 	var cell = Vector2i(get_canvas_transform().affine_inverse() * pointer / TILE)
 	if world.working() and world.inside(cell) and not pointer_over_ui():
 		var valid = false
@@ -2230,7 +2244,7 @@ func carried_keeper_rect() -> Rect2:
 	var facing=enemy_art.get(world.keeper.carrier,{}).get("facing",1)
 	var foot=center(view_positions.get("e%d"%world.keeper.carrier,Vector2(world.keeper.pos)))+Vector2(0,14)
 	var support=foot-Vector2(16,44)+Vector2(20 if facing<0 else 12,16)
-	return Rect2(support+Vector2(-22 if facing<0 else -26,-26),Vector2(48,32))
+	return HumanVisual.rect(Rect2(support+Vector2(-22 if facing<0 else -26,-26),Vector2(48,32)),foot)
 
 func rest_button_text() -> String:
 	if not world.rest_skip.is_empty(): return "時間送りを中断"
@@ -2286,6 +2300,16 @@ func animal_hit_rect(a: Dictionary) -> Rect2:
 		return Art.bounds(a.species,pose.get("action","idle"),int(a.get("facing",1)),p+Vector2(0,14),visual_time-pose.get("at",visual_time)).grow(3)
 	return Rect2(p+Vector2(-17,-18),Vector2(34,37))
 
+func enemy_hit_rect(e: Dictionary) -> Rect2:
+	if e.get("archetype","") in Direction.ACTORS:return Direction.bounds(self,e,true)
+	if e.get("archetype","") in ProgressArt.SPECIES:return ProgressArt.bounds(self,e,true)
+	var pose=enemy_art.get(e.id,{"action":"idle","facing":1,"at":visual_time})
+	var key="enemy/"+pose.action+("_left" if pose.facing<0 else "_right")
+	var clip=Delivered.CLIPS[key];var frame=clip.frames[Delivered.frame_index(key,visual_time-pose.at)]
+	var used=Rect2(frame.rear.get_image().get_used_rect()).merge(Rect2(frame.front.get_image().get_used_rect())) if frame is Dictionary else Rect2(frame.get_image().get_used_rect())
+	var foot=actor_pixel("e%d"%e.id,e.pos)+Vector2(0,14)
+	return HumanVisual.rect(Rect2(foot-clip.anchor+used.position,used.size),foot).grow(3)
+
 func enemy_reaction(id: int, action: String):
 	if not enemy_art.has(id):enemy_art[id]={"action":"idle","facing":1,"at":visual_time}
 	enemy_art[id].reaction=action
@@ -2331,7 +2355,7 @@ func draw_enemy_actor(e: Dictionary):
 		var foot=center(e.pos)+Vector2(0,14)
 		var who=e.get("archetype","kidnapper");var facing=e.get("facing",1)
 		var elapsed=(world.tick-e.corpse_started_tick)*world.DT
-		var scale_value=1.0 if who=="doberman" else 1.15
+		var scale_value=1.0 if who=="doberman" else HumanVisual.SCALE
 		if who in ["maid","dancer","thief","doberman"]:
 			draw_set_transform(foot*(1-scale_value),0,Vector2.ONE*scale_value)
 			if who=="doberman":Delivered.draw_clip(self,ProgressArt.clip(who,"death",facing),foot,elapsed)
@@ -2347,14 +2371,14 @@ func draw_enemy_actor(e: Dictionary):
 	var pose=enemy_art.get(e.id,{"action":"idle","facing":1,"at":visual_time})
 	var foot=p+Vector2(0,14)
 	ProgressArt.tongue_layer(self,e,false)
-	var human_scale=1.15 if e.get("type_tag","Human")=="Human" else 1.0
+	var human_scale=HumanVisual.SCALE if e.get("type_tag","Human")=="Human" else 1.0
 	draw_set_transform(foot*(1.0-human_scale),0,Vector2.ONE*human_scale)
 	if e.get("archetype","kidnapper")!="kidnapper":
 		if e.archetype in Direction.ACTORS:SixMotion.draw(self,self,e,foot,true)
 		else:ProgressArt.draw(self,self,e,foot,true)
 
 	elif e.carry=="keeper":
-		Delivered.carry(self,"carry_walk" if pose.get("walking",false) else "carry_idle",pose.facing,foot,visual_time-pose.at)
+		Delivered.carry(self,"carry_walk" if pose.get("walking",false) else "carry_idle",pose.facing,foot,visual_time-pose.at,human_scale)
 	else:
 		Delivered.draw_clip(self,"enemy/"+pose.action+("_left" if pose.facing<0 else "_right"),foot,visual_time-pose.at)
 	draw_set_transform(Vector2.ZERO)
@@ -2378,7 +2402,7 @@ func draw_enemy_actor(e: Dictionary):
 	if e.hp > 0 and not e.flee and world.tick < e.sight_reaction_until: label_on(self, p + Vector2(15, -30), e.sight_reaction, 26, Color("ffe0a0"))
 	elif e.hp > 0 and not e.flee and e.state == "迷う": label_on(self, p + Vector2(15, -23), "?", 16, Color("c8cfb4"))
 	if selected.get("kind") == "enemy" and selected.id == e.id:
-		draw_rect(Direction.bounds(self,e,true) if e.get("archetype","") in Direction.ACTORS else ProgressArt.bounds(self,e,true) if e.get("archetype","") in ProgressArt.SPECIES else Rect2(p - Vector2(18, 23), Vector2(36, 49)), Color("e6c998"), false, 2)
+		draw_rect(enemy_hit_rect(e), Color("e6c998"), false, 2)
 
 
 func draw_keeper_actor():
@@ -2445,7 +2469,7 @@ func draw_animal_actor(a: Dictionary):
 	elif a.species=="hen": draw_hen(p,a)
 	elif a.species in Direction.ACTORS:
 		var foot=p+Vector2(0,14)
-		var scale_value=1.15 if a.get("category")=="human" else 1.0
+		var scale_value=HumanVisual.SCALE if a.get("category")=="human" else 1.0
 		draw_set_transform(foot*(1.0-scale_value),0,Vector2.ONE*scale_value)
 		Direction.actor(self,self,a,foot)
 		draw_set_transform(Vector2.ZERO)

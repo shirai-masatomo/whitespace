@@ -114,5 +114,5 @@ static func bounds(g,a: Dictionary,enemy: bool=false) -> Rect2:
 	var who=a.get("archetype",a.get("species","")) if enemy else a.species
 	var id=key(a,enemy);var p=g.six_art.get(id,{"action":"idle","at":g.visual_time,"facing":a.get("facing",1)})
 	var f=frame(who,p.action,p.facing,g.visual_time-p.at);var used=Rect2(f.texture.get_image().get_used_rect())
-	var scale_value=1.15 if who in ["maid","dancer","thief"] else 1.0
+	var scale_value=preload("res://game/human_visual.gd").SCALE if who in ["maid","dancer","thief"] else 1.0
 	return Rect2(g.actor_pixel(id,a.pos)+Vector2(0,14)+(used.position-f.anchor)*scale_value,used.size*scale_value).grow(3)

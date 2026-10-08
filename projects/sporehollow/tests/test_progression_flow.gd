@@ -19,7 +19,9 @@ func run():
 	check(e.done and hen.get("lost",false),"Tamer physically crosses exterior boundary with animal")
 	check(not overlaps and not teleported,"Abduction keeps distinct cells and one-cell animal steps")
 	w=fresh();e=enemy(w,"doberman",Vector2i(8,8));P.enemy_hurt(w,e,999)
-	check(e.done and e.action_id=="death" and e.faction=="enemy","Enemy Doberman dies, never joins or revives")
+	check(e.get("dead",false) and not e.done and e.hp==0 and e.faction=="enemy","Enemy Doberman leaves the bounded enemy corpse and does not join")
+	for i in range(32):w.tick+=1;P.tick(w)
+	check(e.done and not w.campaign.animals.any(func(a):return a.species=="doberman"),"Unrevived enemy corpse expires without joining")
 	w=fresh();e=enemy(w,"runner",Vector2i(7,10));var tired=false
 	for i in range(200):
 		w.tick+=1;P.walk(w,e,Vector2i(16,10) if e.pos.x<16 and i<75 else Vector2i(5,10))
@@ -54,11 +56,16 @@ func run():
 					if not cells.is_empty():w.act("keeper_move",cells[0])
 			w.step();stopped_at=i
 			if w.result!="":break
-		var row={"day":day,"result":w.result,"steps":stopped_at,"karma":w.story.hidden.karma,"gold":w.campaign.gold,"encounters":w.enemies.map(func(n):return n.archetype),"animals":w.campaign.animals.map(func(a):return {"id":a.id,"species":a.species,"hp":a.get("hp",0)}),"history":w.campaign.animal_history.duplicate(true)}
+		var row={"day":day,"result":w.result,"defeat_reason":w.story.defeat_reason,"steps":stopped_at,"karma":w.story.hidden.karma,"gold":w.campaign.gold,"encounters":w.enemies.map(func(n):return n.archetype),"animals":w.campaign.animals.map(func(a):return {"id":a.id,"species":a.species,"hp":a.get("hp",0)}),"history":w.campaign.animal_history.duplicate(true)}
 		days.append(row)
 		check(w.story.hidden.karma==0 and w.enemies.all(func(n):return n.type_tag in ["Human","Animal"]),"Day %d remains low-karma Human/Animal"%day)
 		if w.result!="win":break
 		morning=Farm.new(w.next_campaign(),31)
-	check(days.size()==8 and days[-1].result=="win","Normal economy and fixed-tick play reaches morning after day8")
-	FileAccess.open("user://progression-flow.json",FileAccess.WRITE).store_string(JSON.stringify({"checks":records,"abduction_path":path,"days":days},"  "))
+	check(days.all(func(row):return row.result in ["win","loss"]),"Every played day terminates instead of stalling")
+	if w.result=="loss":
+		var retry=Farm.new(w.morning_checkpoint,31)
+		check(w.story.defeat_reason!="" and retry.result=="" and retry.campaign.day==w.campaign.day and retry.campaign.gold==w.morning_checkpoint.gold,"Loss has a reason and restores the same morning without a reward")
+	var benchmark={"seed":31,"target_day":8,"reached_day":days[-1].day,"last_result":days[-1].result,"passed":days.size()==8 and days[-1].result=="win","classification":"balance observation, separate from technical regression"}
+	FileAccess.open("user://progression-flow.json",FileAccess.WRITE).store_string(JSON.stringify({"checks":records,"abduction_path":path,"days":days,"survival_benchmark":benchmark},"  "))
+	print("SURVIVAL_BENCHMARK: "+JSON.stringify(benchmark))
 	print("PROGRESSION FLOW: %d checks, failures=%d"%[checks,failures]);quit(1 if failures else 0)

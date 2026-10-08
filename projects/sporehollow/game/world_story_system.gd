@@ -330,9 +330,9 @@ static func idol_enemy(w,e) -> bool:
 	e.move_credit-=1
 	var best=[]
 	for p in destinations:
-		var route=w.find_path(e.pos,p,true)
+		var route=w.find_path(e.pos,p,true,true)
 		if not route.is_empty() and (best.is_empty() or route.size()<best.size()): best=route
-	if best.size()>1: w.move_enemy(e,best[1])
+	if best.size()>1: w.move_enemy(e,best[1],best[-1])
 	e.state="黄金像へ向かう"
 	return true
 

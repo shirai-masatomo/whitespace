@@ -32,7 +32,7 @@ func no_overlap(w) -> bool:
 		if cells.has(a.pos) or w.blocks(a.pos): return false
 		cells[a.pos] = true
 	for e in w.enemies:
-		if e.done: continue
+		if e.done or e.hp<=0: continue # Bounded corpses are intentionally nonblocking.
 		if cells.has(e.pos) or w.blocks(e.pos): return false
 		cells[e.pos] = true
 	return true

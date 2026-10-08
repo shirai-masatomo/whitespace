@@ -249,8 +249,20 @@ static func enemy_step(w,e) -> bool:
 		if w.tick>=e.next_attack and w.Combat.pay(e,"attack"):
 			e.next_attack=w.tick+ceili(e.attack_interval/w.DT/w.Content.attack_speed(w,e)); strike(w,e,target)
 		return true
-	e.action_id="walk"; e.state="接近"; walk(w,e,target.pos)
+	e.action_id="walk"; e.state="接近"; walk(w,e,contact_goal(w,e,target) if target.kind=="idol" else target.pos)
 	return true
+
+static func contact_goal(w,e,target: Dictionary) -> Vector2i:
+	# The idol footprint is solid. Plan to a reachable attack cell, never into the sprite.
+	var options=[]
+	for surface in w.Story.idol_cells(w):
+		for p in w.neighbors(surface):
+			if w.inside(p) and not w.Story.terrain_block(w,p) and p not in options:options.append(p)
+	var best=[]
+	for p in options:
+		var route=w.find_path(e.pos,p,true,true,e.species=="doberman")
+		if not route.is_empty() and (best.is_empty() or route.size()<best.size()):best=route
+	return best[-1] if not best.is_empty() else e.pos
 
 static func walk(w,e,goal: Vector2i):
 	var speed=e.move_speed*w.Content.speed(w,e)
@@ -263,16 +275,17 @@ static func walk(w,e,goal: Vector2i):
 	e.move_credit=minf(1.9,e.move_credit+speed*w.DT)
 	if e.move_credit<1: return
 	e.move_credit-=1
-	var route=w.find_path(e.pos,goal,true,false,e.species=="doberman")
+	var route=w.find_path(e.pos,goal,true,true,e.species=="doberman")
+	if route.is_empty():route=w.find_path(e.pos,goal,true,false,e.species=="doberman")
 	if e.object_attack_power==0 and w.inside(goal):
-		var detour=w.find_path(e.pos,goal,false,false,e.species=="doberman")
+		var detour=w.find_path(e.pos,goal,false,true,e.species=="doberman")
 		if not detour.is_empty(): route=detour
 	var next=route[1] if route.size()>1 else e.pos
 	if e.species=="doberman" and w.is_indoor(next): e.state="外で待つ"; return
 	if w.blocks(next) and e.object_attack_power==0:
 		e.search_goal=null; e.chosen_target={}; e.state="道を探す"; return
 	var before=e.pos
-	w.move_enemy(e,next)
+	w.move_enemy(e,next,goal)
 	if e.archetype=="runner" and before!=e.pos: e.run_seconds=e.get("run_seconds",0.0)+1.0/speed; e.last_run_tick=w.tick
 
 static func strike(w,e,t,override_damage: int=-1):

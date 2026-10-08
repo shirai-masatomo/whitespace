@@ -199,17 +199,20 @@ static func resource(c: CanvasItem, kind: String, center: Vector2, size: float):
 	c.texture_filter=CanvasItem.TEXTURE_FILTER_NEAREST
 	c.draw_texture_rect(RESOURCES[kind][tier],Rect2((center-Vector2.ONE*size*0.5).round(),Vector2.ONE*size),false)
 
-static func carry(c: CanvasItem, action: String, facing: int, foot: Vector2, elapsed: float):
+static func carry(c: CanvasItem, action: String, facing: int, foot: Vector2, elapsed: float,scale_value: float=1.0):
 	var key="enemy/"+action+("_left" if facing<0 else "_right")
 	var frame=CLIPS[key].frames[frame_index(key,elapsed)]
 	var corner=(foot-Vector2(16,44)).round()
+	var base=preload("res://game/human_visual.gd").transform(foot,scale_value)
+	c.draw_set_transform_matrix(base)
 	c.texture_filter=CanvasItem.TEXTURE_FILTER_NEAREST
 	c.draw_texture(frame.rear,corner)
 	# Rotate the unchanged keeper -90 degrees; mirror the rotated result for left.
 	var x=Vector2(0,-1)
 	var y=Vector2(-1 if facing<0 else 1,0)
 	var support=corner+frame.shoulder
-	c.draw_set_transform_matrix(Transform2D(x,y,support-x*6-y*26))
+	c.draw_set_transform_matrix(base*Transform2D(x,y,support-x*6-y*26))
 	c.draw_texture(preload("res://art_delivery/characters_v1/keeper_idle_right_00.png"),Vector2.ZERO)
-	c.draw_set_transform(Vector2.ZERO)
+	c.draw_set_transform_matrix(base)
 	c.draw_texture(frame.front,corner)
+	c.draw_set_transform(Vector2.ZERO)

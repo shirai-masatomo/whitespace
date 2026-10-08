@@ -12,9 +12,7 @@ static func draw_ground(c: CanvasItem, world, tile: Vector2, time: float = 0):
 			var p=Vector2(x,y)*tile
 			if n%5==0:c.draw_rect(Rect2(p+Vector2(8,13),Vector2(17,8)),Color("526643"))
 			if n%11==0:c.draw_line(p+Vector2(12,20),p+Vector2(15,13),Color("71845a"),2)
-			# Decorative outer trees leave the physical entry lanes clear.
-			var lane=(x in [5,12,19]) or (y in [5,8,11])
-			if not lane and preload("res://game/forest_pattern.gd").tree(Vector2i(x,y),world.seed_value,true):preload("res://game/story_view.gd").tree(c,Vector2i(x,y),true)
+			# Trees belong to the foot-depth pass, after all ground tiles.
 	for y in range(world.H):
 		for x in range(world.W):
 			var p = Vector2(x, y) * tile

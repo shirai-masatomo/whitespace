@@ -4,7 +4,7 @@ static func perceive(e: Dictionary, w):
 	w.Progression.Targets.observe(w,e)
 	var visible = w.Life.targetable(w,e.get("archetype","")=="kidnapper") and w.distance(e.pos, w.keeper.pos) <= e.sight_range and w.line_of_sight(e.pos, w.keeper.pos)
 	if not w.Life.targetable(w,e.get("archetype","")=="kidnapper"):
-		e.last_known_keeper_position=null;e.search_goal=null
+		e.last_known_keeper_position=null
 	if visible != e.can_see_keeper:
 		if visible: w.Life.danger(w, "spotted")
 		e.sight_reaction = "!" if visible else "?"
@@ -26,16 +26,24 @@ static func target(e: Dictionary, w) -> Vector2i:
 		e.last_known_keeper_position = null
 		e.search_goal = null
 		e.search_state = "周辺を探す"
-	if e.search_goal == null or e.pos == e.search_goal or w.tick >= e.search_goal_until:
-		var options = []
-		for y in [3, 8, 13]:
-			for x in [4, 10, 16, 22]: options.append(Vector2i(x, y))
-		# Least visited coverage first; never uses the unseen keeper.
-		options.sort_custom(func(a, b):
-			var ca = e.search_visits.get(a, 0) * 100 + w.distance(e.pos, a)
-			var cb = e.search_visits.get(b, 0) * 100 + w.distance(e.pos, b)
-			return (a.y * w.W + a.x) < (b.y * w.W + b.x) if ca == cb else ca < cb)
-		e.search_goal = options[0]
-		e.search_visits[e.search_goal] = e.search_visits.get(e.search_goal, 0) + 1
-		e.search_goal_until = w.tick + 64
+	if e.search_goal!=null and e.pos==e.search_goal:
+		e.search_visits[e.search_goal]=e.search_visits.get(e.search_goal,0)+1
+		e.search_goal=null
+	if e.search_goal!=null and reachable(e,w,e.search_goal):return e.search_goal
+	var options = []
+	for y in [3, 8, 13]:
+		for x in [4, 10, 16, 22]:
+			var p=Vector2i(x,y)
+			if p!=e.pos and reachable(e,w,p):options.append(p)
+	if options.is_empty():e.search_goal=null;return e.pos
+	# Count arrivals, not selections. A reachable unfinished goal is not expired by a timer.
+	options.sort_custom(func(a, b):
+		var ca = e.search_visits.get(a, 0) * 100 + w.distance(e.pos, a)
+		var cb = e.search_visits.get(b, 0) * 100 + w.distance(e.pos, b)
+		return (a.y * w.W + a.x) < (b.y * w.W + b.x) if ca == cb else ca < cb)
+	e.search_goal = options[0]
+	e.search_goal_until = w.tick + 64 # Legacy observation field, no longer a retarget deadline.
 	return e.search_goal
+
+static func reachable(e: Dictionary,w,p: Vector2i) -> bool:
+	return not w.Story.terrain_block(w,p) and not w.find_path(e.pos,p,e.object_attack_power>0,false,e.get("species","")=="doberman").is_empty()

@@ -12,5 +12,12 @@ static func candidate(p: Vector2i,seed_value: int,deep: bool) -> bool:
 static func tree(p: Vector2i,seed_value: int,deep: bool=false) -> bool:
  if not candidate(p,seed_value,deep):return false
  for d in [Vector2i.LEFT,Vector2i.RIGHT,Vector2i.UP,Vector2i.DOWN]:
-  if candidate(p+d,seed_value,deep) and rank(p+d,seed_value)<rank(p,seed_value):return false
+  var neighbor=p+d;var other=rank(neighbor,seed_value);var own=rank(p,seed_value)
+  if candidate(neighbor,seed_value,deep) and (other<own or (other==own and (neighbor.y<p.y or neighbor.y==p.y and neighbor.x<p.x))):return false
  return true
+
+static func outer_tree(p: Vector2i,seed_value: int,width: int,height: int) -> bool:
+ if p.x>=1 and p.x<width-1 and p.y>=1 and p.y<height-1:return false
+ # Visual forest only; retain every physical entry lane and the existing inner forest.
+ if p.x in [5,12,19] or p.y in [5,8,11]:return false
+ return tree(p,seed_value,true) or (rank(p,seed_value+7919)%100<50 and tree(p+Vector2i.LEFT,seed_value,true))

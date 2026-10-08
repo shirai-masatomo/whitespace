@@ -1,15 +1,21 @@
 extends RefCounted
 const IDOL=preload("res://art_delivery/ui_world_direction_v1/candidates/world/goldA.png")
 const IDOL_ANCHOR=Vector2(72,152)
+const TREE_SCALE=1.35 # Uniform from native pixels; does not change the collision footprint.
 const LABELS={"clear_tree":"開拓","inspect_idol":"像を調べる","pray_wealth":"富を願う","pray_animal":"動物を願う","pray_gold":"お金を願う","pray_item":"アイテムを願う","repair_idol":"像を修理","recover_idol":"像を固定"}
+
+static func tree_foot(g,p: Vector2i) -> Vector2:
+	var rank=preload("res://game/forest_pattern.gd").rank(p,g.world.seed_value)
+	return g.center(p)+Vector2((rank%15)-7,14+(rank%9)-4)
 
 static func tree(g,p: Vector2i,deep: bool=false):
 	var id="world.tree_"+["a","b","c"][preload("res://game/forest_pattern.gd").rank(p,g.world.seed_value)%3]
-	var rank=preload("res://game/forest_pattern.gd").rank(p,g.world.seed_value)
-	var foot=g.center(p)+Vector2((rank%15)-7,14+(rank%9)-4)
+	var foot=tree_foot(g,p)
 	var obscured=(g.world.animals+g.world.enemies).any(func(a):return a.get("placed",not a.get("done",false)) and a.pos.x==p.x and a.pos.y<p.y and a.pos.y>=p.y-2) or (g.world.keeper.pos.x==p.x and g.world.keeper.pos.y<p.y and g.world.keeper.pos.y>=p.y-2)
+	g.draw_set_transform(foot*(1.0-TREE_SCALE),0,Vector2.ONE*TREE_SCALE)
 	g.Assets.Direction.draw(g,id+"_trunk",foot)
 	g.Assets.Direction.draw(g,id+"_canopy",foot,0.55 if obscured else (0.85 if deep else 1.0))
+	g.draw_set_transform(Vector2.ZERO)
 
 static func idol(g):
 	var w=g.world
