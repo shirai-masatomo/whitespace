@@ -4,6 +4,8 @@
 
 ## 最新：F2の入口・操作・連続進行（2026-10-08）
 
+人数内の性能確認も完了：[CROWD_PERFORMANCE](review/quality-roadmap/CROWD_PERFORMANCE.md)。通常上限11体/デバッグ22体を各一回、31検査・失敗0、全員入場。AI最大49.098/73.829msで固定更新250ms超過なし。ただし22体の入場前静止17秒や入口変更は体験評価へ残す。ゲーム・配布版を維持し、人数を無制限に増やす追加試験は行わない。今回の自動確認は一区切りとし、次は人間の試遊/聴感/実画面の引っ掛かりを確認する。
+
 追加の限定検証完了：50f66c9本体で既存13〜30夜シナリオを一回実行し、228検査・失敗0、18夜成功。新経路を使用した55体が到着処理を完了し、全夜終了時と各朝の有効な入口割当残留0。朝保存/再起動も一致。`artifacts/balance-audit/20261009-001139-298`。詳細はCONTINUITY_REVIEWの新経路節。配布14ファイル固定、ゲーム/物語変更・再出力なし。次は人間試遊・実聴感・実時間放置などの未評価項目。
 
 [CONTINUITY_REVIEW](review/quality-roadmap/CONTINUITY_REVIEW.md) と [ENEMY_AI_REVIEW](review/quality-roadmap/ENEMY_AI_REVIEW.md) を追加。f96467a配布物を固定し、次を分離ソースで完了した。
