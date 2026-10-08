@@ -1,0 +1,19 @@
+{
+  "date": "2026-10-08",
+  "confirmation": "OK",
+  "approved_targets": [
+    "merchant",
+    "maid",
+    "dancer",
+    "thief",
+    "cow",
+    "bull"
+  ],
+  "directions": [
+    "right",
+    "left"
+  ],
+  "status": "adopted",
+  "formal_motion_authorized": true,
+  "note": "Direction and representative poses approved; review files are not retroactively declared finished animation."
+}

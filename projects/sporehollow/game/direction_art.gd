@@ -1,8 +1,8 @@
 extends RefCounted
 ## User-adopted direction art; v2 actors currently use supplied key poses.
 const ASSETS={
-	"new.bull":{"texture":preload("res://art_delivery/ui_world_direction_v1/candidates/new/bull.png"),"anchor":Vector2(40, 58)},
-	"new.cow":{"texture":preload("res://art_delivery/ui_world_direction_v1/candidates/new/cow.png"),"anchor":Vector2(40, 58)},
+	"new.bull":{"texture":preload("res://art_delivery/bull_motion_v1/idle/right_00.png"),"anchor":Vector2(48, 58)},
+	"new.cow":{"texture":preload("res://art_delivery/cow_motion_v1/idle/right_00.png"),"anchor":Vector2(40, 58)},
 	"new.fossil":{"texture":preload("res://art_delivery/ui_world_direction_v1/candidates/new/fossil.png"),"anchor":Vector2(24, 36)},
 	"new.poison_cloud":{"texture":preload("res://art_delivery/ui_world_direction_v1/candidates/new/poison_cloud.png"),"anchor":Vector2(32, 36)},
 	"new.poison_projectile":{"texture":preload("res://art_delivery/ui_world_direction_v1/candidates/new/poison_projectile.png"),"anchor":Vector2(16, 12)},
@@ -40,13 +40,13 @@ const ASSETS={
 	"world.tree_c":{"texture":preload("res://art_delivery/ui_world_direction_v1/candidates/world/tree_c.png"),"anchor":Vector2(32, 72)},
 	"world.tree_c_canopy":{"texture":preload("res://art_delivery/ui_world_direction_v1/candidates/world/tree_c_canopy.png"),"anchor":Vector2(32, 72)},
 	"world.tree_c_trunk":{"texture":preload("res://art_delivery/ui_world_direction_v1/candidates/world/tree_c_trunk.png"),"anchor":Vector2(32, 72)},
-	"maid.idle":{"texture":preload("res://art_delivery/ui_world_direction_v2/candidates/maid/idle.png"),"anchor":Vector2(32, 58)},
+	"maid.idle":{"texture":preload("res://art_delivery/maid_motion_v1/idle/right_00.png"),"anchor":Vector2(32, 58)},
 	"maid.rage":{"texture":preload("res://art_delivery/ui_world_direction_v2/candidates/maid/rage.png"),"anchor":Vector2(32, 58)},
 	"maid.chase":{"texture":preload("res://art_delivery/ui_world_direction_v2/candidates/maid/chase.png"),"anchor":Vector2(32, 58)},
-	"thief.idle":{"texture":preload("res://art_delivery/ui_world_direction_v2/candidates/thief/idle.png"),"anchor":Vector2(32, 58)},
+	"thief.idle":{"texture":preload("res://art_delivery/thief_motion_v1/idle/right_00.png"),"anchor":Vector2(32, 58)},
 	"thief.steal":{"texture":preload("res://art_delivery/ui_world_direction_v2/candidates/thief/steal.png"),"anchor":Vector2(32, 58)},
 	"thief.poison_windup":{"texture":preload("res://art_delivery/ui_world_direction_v2/candidates/thief/poison_windup.png"),"anchor":Vector2(32, 58)},
-	"dancer.idle":{"texture":preload("res://art_delivery/ui_world_direction_v2/candidates/dancer/idle.png"),"anchor":Vector2(32, 58)},
+	"dancer.idle":{"texture":preload("res://art_delivery/dancer_motion_v1/idle/right_00.png"),"anchor":Vector2(32, 58)},
 	"dancer.fan_raise":{"texture":preload("res://art_delivery/ui_world_direction_v2/candidates/dancer/fan_raise.png"),"anchor":Vector2(32, 58)},
 	"dancer.fan_spread":{"texture":preload("res://art_delivery/ui_world_direction_v2/candidates/dancer/fan_spread.png"),"anchor":Vector2(32, 58)},
 	"maid.rage_aura":{"texture":preload("res://art_delivery/ui_world_direction_v2/candidates/maid/rage_aura.png"),"anchor":Vector2(32, 58)},
@@ -68,18 +68,7 @@ static func draw(c: CanvasItem,id: String,foot: Vector2,alpha: float=1.0):
 	c.draw_texture(row.texture,(foot-row.anchor).round(),Color(1,1,1,alpha))
 
 static func actor(g,c,a: Dictionary,foot: Vector2):
-	if a.get("action_id","")=="rage":draw(c,"maid.rage_aura",foot)
-	var row=ASSETS[actor_key(a)]
-	var flip=a.get("facing",1)<0
-	var origin=foot-row.anchor
-	if flip:origin.x=foot.x-(row.texture.get_width()-row.anchor.x)
-	c.draw_texture_rect(row.texture,Rect2(origin,Vector2(-row.texture.get_width() if flip else row.texture.get_width(),row.texture.get_height())),false)
+	preload("res://game/six_motion.gd").draw(g,c,a,foot)
 
 static func bounds(g,a: Dictionary,enemy: bool=false) -> Rect2:
-	var row=ASSETS[actor_key(a)]
-	var used=Rect2(row.texture.get_image().get_used_rect())
-	if a.get("facing",1)<0:used.position.x=row.texture.get_width()-used.end.x
-	var anchor=row.anchor
-	if a.get("facing",1)<0:anchor.x=row.texture.get_width()-anchor.x
-	var scale_value=1.15 if a.get("type_tag","")=="Human" or a.get("category","")=="human" else 1.0
-	return Rect2(g.actor_pixel(("e" if enemy else "a")+str(a.id),a.pos)+Vector2(0,14)+(used.position-anchor)*scale_value,used.size*scale_value).grow(3)
+	return preload("res://game/six_motion.gd").bounds(g,a,enemy)

@@ -1,6 +1,6 @@
 {
   "delivery_branch": "codex/sporehollow-art-assets",
-  "latest_delivery_commit": "a34390e584037cef78c9f49dcec4b18bd44f6f3d",
+  "latest_delivery_commit": "b0e917a11f205190dde0136165a72c189f39e275",
   "characters_v1": "f3e4ae82b68c342b928dfb5dfcebb451353f9b8d",
   "characters_motion_v1": "ae950a3df8de7a3dbbd14f40dc3ef9df05e22fd4",
   "ranch_assets_v1": "57aab97c3efc495d7553ee412c68696945d8e846",
@@ -25,5 +25,12 @@
   "bullfrog_motion_v1": "a34390e584037cef78c9f49dcec4b18bd44f6f3d",
   "hedgehog_motion_v1": "a34390e584037cef78c9f49dcec4b18bd44f6f3d",
   "golden_idol": "game/golden_idol_receipt.json",
-  "direction_art": "game/direction_receipt.json"
+  "direction_art": "game/direction_receipt.json",
+  "merchant_motion_v1": "b0e917a11f205190dde0136165a72c189f39e275",
+  "maid_motion_v1": "b0e917a11f205190dde0136165a72c189f39e275",
+  "dancer_motion_v1": "b0e917a11f205190dde0136165a72c189f39e275",
+  "thief_motion_v1": "b0e917a11f205190dde0136165a72c189f39e275",
+  "cow_motion_v1": "b0e917a11f205190dde0136165a72c189f39e275",
+  "bull_motion_v1": "b0e917a11f205190dde0136165a72c189f39e275",
+  "six_motion": "game/six_motion_receipt.json"
 }

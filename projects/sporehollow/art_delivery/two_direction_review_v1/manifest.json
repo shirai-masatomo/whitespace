@@ -1,0 +1,1331 @@
+{
+  "schema_version": 1,
+  "delivery": "two_direction_review_v1",
+  "date": "2026-10-08",
+  "branch": "codex/sporehollow-art-assets",
+  "status": "direction_approved",
+  "assets": [],
+  "review_assets": [
+    {
+      "asset_id": "maid.idle_right",
+      "target": "maid",
+      "action": "idle_right",
+      "label": "右向き 基本姿",
+      "direction": "right",
+      "pose_file": "poses/maid/idle_right.png",
+      "file": "native/maid/idle_right.png",
+      "canvas": [
+        64,
+        64
+      ],
+      "anchor": [
+        32,
+        58
+      ],
+      "world_or_ui": "world_preview",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": null,
+      "loop": false,
+      "runtime_ready": false,
+      "status": "direction_review_only",
+      "method": "exact_existing_png",
+      "source": "art_delivery/ui_world_direction_v2/candidates/maid/idle.png",
+      "layers": [
+        "body_with_props"
+      ],
+      "shadow": "no added ground shadow",
+      "visible_bbox_exclusive": [
+        20,
+        16,
+        45,
+        58
+      ],
+      "sha256": "2619530b4d93d1e34938ca84e51178079b3f691f935a2ddc70d219d4cc3354b7",
+      "pose_sha256": "7dc5bcdcce2bc6c4552f5e79a8db86ef38912c61146b04287356f9d5d7b7b664"
+    },
+    {
+      "asset_id": "maid.idle_left",
+      "target": "maid",
+      "action": "idle_left",
+      "label": "左向き 基本姿",
+      "direction": "left",
+      "pose_file": "poses/maid/idle_left.png",
+      "file": "native/maid/idle_left.png",
+      "canvas": [
+        64,
+        64
+      ],
+      "anchor": [
+        32,
+        58
+      ],
+      "world_or_ui": "world_preview",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": null,
+      "loop": false,
+      "runtime_ready": false,
+      "status": "direction_review_only",
+      "method": "horizontal_mirror_of_right",
+      "source": "native/maid/idle_right.png",
+      "layers": [
+        "body_with_props"
+      ],
+      "shadow": "no added ground shadow",
+      "visible_bbox_exclusive": [
+        19,
+        16,
+        44,
+        58
+      ],
+      "sha256": "f756cc8d35a0e64b14e6a7d6384c16b10e930723f9285af7e21e7cfaad90c97b",
+      "pose_sha256": "b3889daf38d3ee3e56c1c31024c02073f2daa72903f33b480505e7ca6a5726fd"
+    },
+    {
+      "asset_id": "dancer.idle_right",
+      "target": "dancer",
+      "action": "idle_right",
+      "label": "右向き 基本姿",
+      "direction": "right",
+      "pose_file": "poses/dancer/idle_right.png",
+      "file": "native/dancer/idle_right.png",
+      "canvas": [
+        64,
+        64
+      ],
+      "anchor": [
+        32,
+        58
+      ],
+      "world_or_ui": "world_preview",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": null,
+      "loop": false,
+      "runtime_ready": false,
+      "status": "direction_review_only",
+      "method": "exact_existing_png",
+      "source": "art_delivery/ui_world_direction_v2/candidates/dancer/idle.png",
+      "layers": [
+        "body_with_props"
+      ],
+      "shadow": "no added ground shadow",
+      "visible_bbox_exclusive": [
+        22,
+        16,
+        43,
+        58
+      ],
+      "sha256": "f42523b674e8e619bb4d23f1fd90cc7cf3ade23f48a69621170274ec9e69a816",
+      "pose_sha256": "d738eaaca3b70099b533645b6fda05eb6b7b75ec42ffd2f65d56226cfe2e0fb6"
+    },
+    {
+      "asset_id": "dancer.idle_left",
+      "target": "dancer",
+      "action": "idle_left",
+      "label": "左向き 基本姿",
+      "direction": "left",
+      "pose_file": "poses/dancer/idle_left.png",
+      "file": "native/dancer/idle_left.png",
+      "canvas": [
+        64,
+        64
+      ],
+      "anchor": [
+        32,
+        58
+      ],
+      "world_or_ui": "world_preview",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": null,
+      "loop": false,
+      "runtime_ready": false,
+      "status": "direction_review_only",
+      "method": "horizontal_mirror_of_right",
+      "source": "native/dancer/idle_right.png",
+      "layers": [
+        "body_with_props"
+      ],
+      "shadow": "no added ground shadow",
+      "visible_bbox_exclusive": [
+        21,
+        16,
+        42,
+        58
+      ],
+      "sha256": "dafa2c9f12952ffc2c846bd315c875ad7930c7670d5bb005034671e42ccb887b",
+      "pose_sha256": "fe6d85bfbabc3593096e2e49064bd24d58c840cfc3c2cacc87578dd976246879"
+    },
+    {
+      "asset_id": "thief.idle_right",
+      "target": "thief",
+      "action": "idle_right",
+      "label": "右向き 基本姿",
+      "direction": "right",
+      "pose_file": "poses/thief/idle_right.png",
+      "file": "native/thief/idle_right.png",
+      "canvas": [
+        64,
+        64
+      ],
+      "anchor": [
+        32,
+        58
+      ],
+      "world_or_ui": "world_preview",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": null,
+      "loop": false,
+      "runtime_ready": false,
+      "status": "direction_review_only",
+      "method": "exact_existing_png",
+      "source": "art_delivery/ui_world_direction_v2/candidates/thief/idle.png",
+      "layers": [
+        "body_with_props"
+      ],
+      "shadow": "no added ground shadow",
+      "visible_bbox_exclusive": [
+        14,
+        16,
+        50,
+        58
+      ],
+      "sha256": "f380ee1077c0718ab857fc7057ccc7cad3fc924bb9a9f6fccff1bda8a6db9449",
+      "pose_sha256": "5a6df6d9d52bcd112380b151e1bcbe94241fe25cd940241e2a09e1afc6eb28b9"
+    },
+    {
+      "asset_id": "thief.idle_left",
+      "target": "thief",
+      "action": "idle_left",
+      "label": "左向き 基本姿",
+      "direction": "left",
+      "pose_file": "poses/thief/idle_left.png",
+      "file": "native/thief/idle_left.png",
+      "canvas": [
+        64,
+        64
+      ],
+      "anchor": [
+        32,
+        58
+      ],
+      "world_or_ui": "world_preview",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": null,
+      "loop": false,
+      "runtime_ready": false,
+      "status": "direction_review_only",
+      "method": "horizontal_mirror_of_right",
+      "source": "native/thief/idle_right.png",
+      "layers": [
+        "body_with_props"
+      ],
+      "shadow": "no added ground shadow",
+      "visible_bbox_exclusive": [
+        14,
+        16,
+        50,
+        58
+      ],
+      "sha256": "cb1a2191676e97aa703fe00b42bc4ccff61379bc4c27e2309c3680077c51339a",
+      "pose_sha256": "18c07fc0a4015c577fa68414d04e5153b24e0819f1cfac3dcc3ed75ce2effe96"
+    },
+    {
+      "asset_id": "merchant.idle_right",
+      "target": "merchant",
+      "action": "idle_right",
+      "label": "商人 右向き",
+      "direction": "right",
+      "pose_file": "poses/merchant/idle_right.png",
+      "file": "native/merchant/idle_right.png",
+      "canvas": [
+        32,
+        48
+      ],
+      "anchor": [
+        16,
+        44
+      ],
+      "world_or_ui": "world_preview",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": null,
+      "loop": false,
+      "runtime_ready": false,
+      "status": "direction_review_only",
+      "method": "exact_existing_png",
+      "source": "art_delivery/merchant_cart_v2/merchant/idle_right_00.png",
+      "layers": [
+        "body_with_props"
+      ],
+      "shadow": "no added ground shadow",
+      "visible_bbox_exclusive": [
+        2,
+        2,
+        31,
+        44
+      ],
+      "sha256": "dae25e011076fe020ad3617fbb8b96b1feeb0152b25d90c74265966c8cb3795c",
+      "pose_sha256": "dd5b1536d20422c9672d5a9bd019c245a6e442e5a491a421f1a47c0e75a7c76e"
+    },
+    {
+      "asset_id": "merchant.idle_left",
+      "target": "merchant",
+      "action": "idle_left",
+      "label": "商人 左向き",
+      "direction": "left",
+      "pose_file": "poses/merchant/idle_left.png",
+      "file": "native/merchant/idle_left.png",
+      "canvas": [
+        32,
+        48
+      ],
+      "anchor": [
+        16,
+        44
+      ],
+      "world_or_ui": "world_preview",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": null,
+      "loop": false,
+      "runtime_ready": false,
+      "status": "direction_review_only",
+      "method": "horizontal_mirror_of_right",
+      "source": "native/merchant/idle_right.png",
+      "layers": [
+        "body_with_props"
+      ],
+      "shadow": "no added ground shadow",
+      "visible_bbox_exclusive": [
+        1,
+        2,
+        30,
+        44
+      ],
+      "sha256": "aacecc9279d90799a4000c9522fb303066b3666f3f948e3ae04871d3048cc63e",
+      "pose_sha256": "9f9fc0cc1d4a6ed8c0e064d41ef806e742efc4c8f6cf6cc569d8cde823cc6473"
+    },
+    {
+      "asset_id": "merchant.cart_move_right",
+      "target": "merchant",
+      "action": "cart_move_right",
+      "label": "荷車 右へ進む姿",
+      "direction": "right",
+      "pose_file": "poses/merchant/cart_move_right.png",
+      "file": "native/merchant/cart_move_right.png",
+      "canvas": [
+        128,
+        96
+      ],
+      "anchor": [
+        64,
+        88
+      ],
+      "world_or_ui": "world_preview",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": null,
+      "loop": false,
+      "runtime_ready": false,
+      "status": "direction_review_only",
+      "method": "exact_existing_png",
+      "source": "art_delivery/merchant_board_v1/cart_idle_00.png",
+      "layers": [
+        "body_with_props"
+      ],
+      "shadow": "no added ground shadow",
+      "visible_bbox_exclusive": [
+        4,
+        6,
+        124,
+        88
+      ],
+      "sha256": "eefcfcf6a53a18ee7f480a17d16124d42c96b6e5fa1b0e41c95c53f2e821fae0",
+      "pose_sha256": "c1ff4dd115bb03d2a8ba8f9b7810d6d4ca704b21caf21c0168b4f934ff3c2126",
+      "pose_source": "art_delivery/cart_ui_detail_v1/cart.png",
+      "contains_merchant": true,
+      "note": "Orientation only; translation and wheel animation not made."
+    },
+    {
+      "asset_id": "merchant.cart_move_left",
+      "target": "merchant",
+      "action": "cart_move_left",
+      "label": "荷車 左へ進む姿",
+      "direction": "left",
+      "pose_file": "poses/merchant/cart_move_left.png",
+      "file": "native/merchant/cart_move_left.png",
+      "canvas": [
+        128,
+        96
+      ],
+      "anchor": [
+        64,
+        88
+      ],
+      "world_or_ui": "world_preview",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": null,
+      "loop": false,
+      "runtime_ready": false,
+      "status": "direction_review_only",
+      "method": "horizontal_mirror_of_right",
+      "source": "native/merchant/cart_move_right.png",
+      "layers": [
+        "body_with_props"
+      ],
+      "shadow": "no added ground shadow",
+      "visible_bbox_exclusive": [
+        4,
+        6,
+        124,
+        88
+      ],
+      "sha256": "02b7916a85ae5fd4c7048d55479f296f4a809c522a884d2623cf9222aca45a2e",
+      "pose_sha256": "9a89ea4be5ef24175a6aa041cde79d38d48acc314b947b9c73668358a490556f",
+      "contains_merchant": true,
+      "note": "Orientation only; translation and wheel animation not made."
+    },
+    {
+      "asset_id": "maid.coffee_serve_right",
+      "target": "maid",
+      "action": "coffee_serve_right",
+      "label": "Skill：コーヒー配布",
+      "direction": "right",
+      "pose_file": "poses/maid/coffee_serve_right.png",
+      "file": "native/maid/coffee_serve_right.png",
+      "canvas": [
+        64,
+        64
+      ],
+      "anchor": [
+        32,
+        58
+      ],
+      "world_or_ui": "world_preview",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": null,
+      "loop": false,
+      "runtime_ready": false,
+      "status": "direction_review_only",
+      "method": "alpha_component_and_proportional_nearest",
+      "source": "art-production/two-direction-review-v1/originals/maid_supplement.png",
+      "layers": [
+        "body_with_props"
+      ],
+      "shadow": "no added ground shadow",
+      "visible_bbox_exclusive": [
+        16,
+        16,
+        48,
+        58
+      ],
+      "sha256": "fd5aa824db427a59a356bf00d910e7824efdaaddf89147e5cb77ac296d53ef66",
+      "pose_sha256": "79cc20af4570d772ab5d5d7e94954071c9e5d99857680f45b36b00a003ca17b8"
+    },
+    {
+      "asset_id": "maid.twirl_right",
+      "target": "maid",
+      "action": "twirl_right",
+      "label": "回転：横向きの代表姿勢",
+      "direction": "right",
+      "pose_file": "poses/maid/twirl_right.png",
+      "file": "native/maid/twirl_right.png",
+      "canvas": [
+        64,
+        64
+      ],
+      "anchor": [
+        32,
+        58
+      ],
+      "world_or_ui": "world_preview",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": null,
+      "loop": false,
+      "runtime_ready": false,
+      "status": "direction_review_only",
+      "method": "alpha_component_and_proportional_nearest",
+      "source": "art-production/two-direction-review-v1/originals/maid_supplement.png",
+      "layers": [
+        "body_with_props"
+      ],
+      "shadow": "no added ground shadow",
+      "visible_bbox_exclusive": [
+        13,
+        16,
+        52,
+        58
+      ],
+      "sha256": "4babc6555e4ca719097f165b7bca6d52bc3099afa8046c7e782bddd2edd8f9e0",
+      "pose_sha256": "5b63f854da0d3b866e1d048009fecc2d04e497820e50badd598485d625d37701"
+    },
+    {
+      "asset_id": "maid.drink_right",
+      "target": "maid",
+      "action": "drink_right",
+      "label": "自分で飲む",
+      "direction": "right",
+      "pose_file": "poses/maid/drink_right.png",
+      "file": "native/maid/drink_right.png",
+      "canvas": [
+        64,
+        64
+      ],
+      "anchor": [
+        32,
+        58
+      ],
+      "world_or_ui": "world_preview",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": null,
+      "loop": false,
+      "runtime_ready": false,
+      "status": "direction_review_only",
+      "method": "alpha_component_and_proportional_nearest",
+      "source": "art-production/two-direction-review-v1/originals/maid_supplement.png",
+      "layers": [
+        "body_with_props"
+      ],
+      "shadow": "no added ground shadow",
+      "visible_bbox_exclusive": [
+        21,
+        16,
+        44,
+        58
+      ],
+      "sha256": "4ff307fd3e3eb74478ee1bae743e4609eb9e9f55b703733c571e0a8b0846d736",
+      "pose_sha256": "42ac608b6b7d3d0f66ed6de0e4ed7c62ac31a507db4f77a935adb636256f3c6f"
+    },
+    {
+      "asset_id": "maid.cleaver_attack_right",
+      "target": "maid",
+      "action": "cleaver_attack_right",
+      "label": "包丁攻撃",
+      "direction": "right",
+      "pose_file": "poses/maid/cleaver_attack_right.png",
+      "file": "native/maid/cleaver_attack_right.png",
+      "canvas": [
+        64,
+        64
+      ],
+      "anchor": [
+        32,
+        58
+      ],
+      "world_or_ui": "world_preview",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": null,
+      "loop": false,
+      "runtime_ready": false,
+      "status": "direction_review_only",
+      "method": "alpha_component_and_proportional_nearest",
+      "source": "art-production/two-direction-review-v1/originals/maid_supplement.png",
+      "layers": [
+        "body_with_props"
+      ],
+      "shadow": "no added ground shadow",
+      "visible_bbox_exclusive": [
+        11,
+        19,
+        53,
+        58
+      ],
+      "sha256": "cb08078c81e09ba954a127d4222f71d6d7887e6cfac50fde3257ae7c5ce57cca",
+      "pose_sha256": "16b8dcd4171cb7580c184000c9f3228f6bd0d58e0b54ec56e082e7f379726d90"
+    },
+    {
+      "asset_id": "maid.rage_right",
+      "target": "maid",
+      "action": "rage_right",
+      "label": "Ultimate：激ギレ",
+      "direction": "right",
+      "pose_file": "poses/maid/rage_right.png",
+      "file": "native/maid/rage_right.png",
+      "canvas": [
+        64,
+        64
+      ],
+      "anchor": [
+        32,
+        58
+      ],
+      "world_or_ui": "world_preview",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": null,
+      "loop": false,
+      "runtime_ready": false,
+      "status": "direction_review_only",
+      "method": "exact_existing_png",
+      "source": "art_delivery/ui_world_direction_v2/candidates/maid/rage.png",
+      "layers": [
+        "body_with_props"
+      ],
+      "shadow": "no added ground shadow",
+      "visible_bbox_exclusive": [
+        14,
+        16,
+        51,
+        58
+      ],
+      "sha256": "11dcbbcc225100d3751123d73cd5041e05b5284b7d684c4bfbdf0918e4ce1860",
+      "pose_sha256": "1990fba1285f06dc4cdf9ddf4a048597eaa73532b28b9b45f44e151d0660643f"
+    },
+    {
+      "asset_id": "dancer.dance_right",
+      "target": "dancer",
+      "action": "dance_right",
+      "label": "Skill：舞",
+      "direction": "right",
+      "pose_file": "poses/dancer/dance_right.png",
+      "file": "native/dancer/dance_right.png",
+      "canvas": [
+        64,
+        64
+      ],
+      "anchor": [
+        32,
+        58
+      ],
+      "world_or_ui": "world_preview",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": null,
+      "loop": false,
+      "runtime_ready": false,
+      "status": "direction_review_only",
+      "method": "alpha_component_and_proportional_nearest",
+      "source": "art-production/two-direction-review-v1/originals/dancer_supplement.png",
+      "layers": [
+        "body_with_props"
+      ],
+      "shadow": "no added ground shadow",
+      "visible_bbox_exclusive": [
+        13,
+        12,
+        52,
+        58
+      ],
+      "sha256": "15cea69b16fa97ab4e78745ae9c46a7ec9a16f086065a13b208725ac10dbd975",
+      "pose_sha256": "c0a843045325a31bc803ad2bc10744271b7c39258fb6802f3b43aeb6685dbf0d"
+    },
+    {
+      "asset_id": "dancer.fan_attack_right",
+      "target": "dancer",
+      "action": "fan_attack_right",
+      "label": "通常攻撃：扇近接",
+      "direction": "right",
+      "pose_file": "poses/dancer/fan_attack_right.png",
+      "file": "native/dancer/fan_attack_right.png",
+      "canvas": [
+        64,
+        64
+      ],
+      "anchor": [
+        32,
+        58
+      ],
+      "world_or_ui": "world_preview",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": null,
+      "loop": false,
+      "runtime_ready": false,
+      "status": "direction_review_only",
+      "method": "alpha_component_and_proportional_nearest",
+      "source": "art-production/two-direction-review-v1/originals/dancer_supplement.png",
+      "layers": [
+        "body_with_props"
+      ],
+      "shadow": "no added ground shadow",
+      "visible_bbox_exclusive": [
+        11,
+        19,
+        53,
+        58
+      ],
+      "sha256": "c0124716d91c03d9766c1563500081ad7af6483205256d36cedb43acd7da5b48",
+      "pose_sha256": "fcf5e42d40b78ddf7e97a7b02e62cfc586fe206d8c8c20ae6e7018f4b3adf09b"
+    },
+    {
+      "asset_id": "dancer.resurrection_right",
+      "target": "dancer",
+      "action": "resurrection_right",
+      "label": "Ultimate：復活の舞",
+      "direction": "right",
+      "pose_file": "poses/dancer/resurrection_right.png",
+      "file": "native/dancer/resurrection_right.png",
+      "canvas": [
+        64,
+        64
+      ],
+      "anchor": [
+        32,
+        58
+      ],
+      "world_or_ui": "world_preview",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": null,
+      "loop": false,
+      "runtime_ready": false,
+      "status": "direction_review_only",
+      "method": "exact_existing_png",
+      "source": "art_delivery/ui_world_direction_v2/candidates/dancer/fan_spread.png",
+      "layers": [
+        "body_with_props"
+      ],
+      "shadow": "no added ground shadow",
+      "visible_bbox_exclusive": [
+        21,
+        11,
+        44,
+        58
+      ],
+      "sha256": "70b3b811477b732f7ddfea5afbb264ab46149deabc0cc202237ea866f31ce2d1",
+      "pose_sha256": "476fcac957c3411a96a5d90714c3e347b2b7497f8fa7d5164432ec744c37d43e"
+    },
+    {
+      "asset_id": "thief.dagger_attack_right",
+      "target": "thief",
+      "action": "dagger_attack_right",
+      "label": "通常攻撃：ダガー",
+      "direction": "right",
+      "pose_file": "poses/thief/dagger_attack_right.png",
+      "file": "native/thief/dagger_attack_right.png",
+      "canvas": [
+        64,
+        64
+      ],
+      "anchor": [
+        32,
+        58
+      ],
+      "world_or_ui": "world_preview",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": null,
+      "loop": false,
+      "runtime_ready": false,
+      "status": "direction_review_only",
+      "method": "alpha_component_and_proportional_nearest",
+      "source": "art-production/two-direction-review-v1/originals/thief_supplement.png",
+      "layers": [
+        "body_with_props"
+      ],
+      "shadow": "no added ground shadow",
+      "visible_bbox_exclusive": [
+        1,
+        18,
+        64,
+        58
+      ],
+      "sha256": "1665fbd45d677f81a2fb848bdf0facce7be4399dbc4a70a4513a0a54fa5f4e0a",
+      "pose_sha256": "fb822e04ea8ed6f74ac90cad0f9fdb0870d252dfc396119e47ef524a57eb0419"
+    },
+    {
+      "asset_id": "thief.steal_right",
+      "target": "thief",
+      "action": "steal_right",
+      "label": "特殊：盗み",
+      "direction": "right",
+      "pose_file": "poses/thief/steal_right.png",
+      "file": "native/thief/steal_right.png",
+      "canvas": [
+        64,
+        64
+      ],
+      "anchor": [
+        32,
+        58
+      ],
+      "world_or_ui": "world_preview",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": null,
+      "loop": false,
+      "runtime_ready": false,
+      "status": "direction_review_only",
+      "method": "exact_existing_png",
+      "source": "art_delivery/ui_world_direction_v2/candidates/thief/steal.png",
+      "layers": [
+        "body_with_props"
+      ],
+      "shadow": "no added ground shadow",
+      "visible_bbox_exclusive": [
+        15,
+        22,
+        50,
+        58
+      ],
+      "sha256": "e8db04f55e8aa50b2cf5a458e680038c17658e378fed2979ef721d55e554cc34",
+      "pose_sha256": "a34e19e49b726c01856ccc17bc5f0b6aac4bdf56d518e8fcab043fe842f57127"
+    },
+    {
+      "asset_id": "thief.poison_throw_right",
+      "target": "thief",
+      "action": "poison_throw_right",
+      "label": "Skill：毒瓶投擲",
+      "direction": "right",
+      "pose_file": "poses/thief/poison_throw_right.png",
+      "file": "native/thief/poison_throw_right.png",
+      "canvas": [
+        64,
+        64
+      ],
+      "anchor": [
+        32,
+        58
+      ],
+      "world_or_ui": "world_preview",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": null,
+      "loop": false,
+      "runtime_ready": false,
+      "status": "direction_review_only",
+      "method": "alpha_component_and_proportional_nearest",
+      "source": "art-production/two-direction-review-v1/originals/thief_supplement.png",
+      "layers": [
+        "body_with_props"
+      ],
+      "shadow": "no added ground shadow",
+      "visible_bbox_exclusive": [
+        3,
+        16,
+        61,
+        58
+      ],
+      "sha256": "6579c2db14a13f95cad2a26a6eed02de8788a50a86fb6592b9cc270a25027172",
+      "pose_sha256": "64c418e61a04538f8f913030e7fbf8b4be63aa50a9920a96ce3c951788088ea3"
+    },
+    {
+      "asset_id": "cow.idle_right",
+      "target": "cow",
+      "action": "idle_right",
+      "label": "右向き 基本姿",
+      "direction": "right",
+      "pose_file": "poses/cow/idle_right.png",
+      "file": "native/cow/idle_right.png",
+      "canvas": [
+        80,
+        64
+      ],
+      "anchor": [
+        40,
+        58
+      ],
+      "world_or_ui": "world_preview",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": null,
+      "loop": false,
+      "runtime_ready": false,
+      "status": "direction_review_only",
+      "method": "exact_existing_png",
+      "source": "art_delivery/ui_world_direction_v1/candidates/new/cow.png",
+      "layers": [
+        "body_with_props"
+      ],
+      "shadow": "no added ground shadow",
+      "visible_bbox_exclusive": [
+        7,
+        10,
+        74,
+        58
+      ],
+      "sha256": "3271106146d1ccf7fb91a1c4b2bf980b8eb41889933b3fef269a347f0ced242d",
+      "pose_sha256": "bcfe318b25feff847f6921c0c72891de736885a31ec4312ff99c7ac6daa4e193"
+    },
+    {
+      "asset_id": "cow.idle_left",
+      "target": "cow",
+      "action": "idle_left",
+      "label": "左向き 基本姿",
+      "direction": "left",
+      "pose_file": "poses/cow/idle_left.png",
+      "file": "native/cow/idle_left.png",
+      "canvas": [
+        80,
+        64
+      ],
+      "anchor": [
+        40,
+        58
+      ],
+      "world_or_ui": "world_preview",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": null,
+      "loop": false,
+      "runtime_ready": false,
+      "status": "direction_review_only",
+      "method": "horizontal_mirror_of_right",
+      "source": "native/cow/idle_right.png",
+      "layers": [
+        "body_with_props"
+      ],
+      "shadow": "no added ground shadow",
+      "visible_bbox_exclusive": [
+        6,
+        10,
+        73,
+        58
+      ],
+      "sha256": "d02465719d68b345a23474f422b67c377ffaae5492096debe68d17220ff72e68",
+      "pose_sha256": "373d425d5b077dc8cca9ede28d04b3ac0572ff2d2ecbb7692814cb6a893c3836"
+    },
+    {
+      "asset_id": "cow.milking_right",
+      "target": "cow",
+      "action": "milking_right",
+      "label": "搾乳時：後脚を引き静止",
+      "direction": "right",
+      "pose_file": "poses/cow/milking_right.png",
+      "file": "native/cow/milking_right.png",
+      "canvas": [
+        80,
+        64
+      ],
+      "anchor": [
+        40,
+        58
+      ],
+      "world_or_ui": "world_preview",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": null,
+      "loop": false,
+      "runtime_ready": false,
+      "status": "direction_review_only",
+      "method": "alpha_component_and_proportional_nearest",
+      "source": "art-production/two-direction-review-v1/originals/cow_supplement.png",
+      "layers": [
+        "body_with_props"
+      ],
+      "shadow": "no added ground shadow",
+      "visible_bbox_exclusive": [
+        6,
+        10,
+        74,
+        58
+      ],
+      "sha256": "75144a312362f0ec99d853ff0d5e65a55ab30be5ea2871b606add579d65ab822",
+      "pose_sha256": "8d7eedb3551c49029f51094488517416b5d9a85d28fd99cdbb257e1fc1fc2529"
+    },
+    {
+      "asset_id": "bull.idle_right",
+      "target": "bull",
+      "action": "idle_right",
+      "label": "右向き 基本姿",
+      "direction": "right",
+      "pose_file": "poses/bull/idle_right.png",
+      "file": "native/bull/idle_right.png",
+      "canvas": [
+        80,
+        64
+      ],
+      "anchor": [
+        40,
+        58
+      ],
+      "world_or_ui": "world_preview",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": null,
+      "loop": false,
+      "runtime_ready": false,
+      "status": "direction_review_only",
+      "method": "exact_existing_png",
+      "source": "art_delivery/ui_world_direction_v1/candidates/new/bull.png",
+      "layers": [
+        "body_with_props"
+      ],
+      "shadow": "no added ground shadow",
+      "visible_bbox_exclusive": [
+        6,
+        18,
+        74,
+        58
+      ],
+      "sha256": "018f9f25e833182c7a994a1c4161d67eba08b4e6f05f1c3f1497e20c06c2be11",
+      "pose_sha256": "5bf7e21ef4f76e4cb3670c759c7556a427c2f9a4dcb98226bbe4a9c057264b0d"
+    },
+    {
+      "asset_id": "bull.idle_left",
+      "target": "bull",
+      "action": "idle_left",
+      "label": "左向き 基本姿",
+      "direction": "left",
+      "pose_file": "poses/bull/idle_left.png",
+      "file": "native/bull/idle_left.png",
+      "canvas": [
+        80,
+        64
+      ],
+      "anchor": [
+        40,
+        58
+      ],
+      "world_or_ui": "world_preview",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": null,
+      "loop": false,
+      "runtime_ready": false,
+      "status": "direction_review_only",
+      "method": "horizontal_mirror_of_right",
+      "source": "native/bull/idle_right.png",
+      "layers": [
+        "body_with_props"
+      ],
+      "shadow": "no added ground shadow",
+      "visible_bbox_exclusive": [
+        6,
+        18,
+        74,
+        58
+      ],
+      "sha256": "f313722a3bf2e572c501a713d7ca80ac031bbde3ea9c259a0eaafd41ce61ce44",
+      "pose_sha256": "354f619cccf546802a71c081350e6db0e8cbb43a45fa3973c916005e9be1ce3c"
+    },
+    {
+      "asset_id": "bull.charge_ready_right",
+      "target": "bull",
+      "action": "charge_ready_right",
+      "label": "突撃構え",
+      "direction": "right",
+      "pose_file": "poses/bull/charge_ready_right.png",
+      "file": "native/bull/charge_ready_right.png",
+      "canvas": [
+        80,
+        64
+      ],
+      "anchor": [
+        40,
+        58
+      ],
+      "world_or_ui": "world_preview",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": null,
+      "loop": false,
+      "runtime_ready": false,
+      "status": "direction_review_only",
+      "method": "alpha_component_and_proportional_nearest",
+      "source": "art-production/ui-world-direction-v1/originals/bull_sheet.png#cell=2",
+      "layers": [
+        "body_with_props"
+      ],
+      "shadow": "no added ground shadow",
+      "visible_bbox_exclusive": [
+        4,
+        22,
+        76,
+        58
+      ],
+      "sha256": "94311e0818caab86e2a9c290cb34efa9c8a5edbc5ed13dab6a9061e2e18ff8de",
+      "pose_sha256": "dfa37e023e7d1c57c9b3bb0221cf7077014f6a005786368fc9be4fa140d98ce4"
+    },
+    {
+      "asset_id": "bull.charge_right",
+      "target": "bull",
+      "action": "charge_right",
+      "label": "Skill：突撃",
+      "direction": "right",
+      "pose_file": "poses/bull/charge_right.png",
+      "file": "native/bull/charge_right.png",
+      "canvas": [
+        80,
+        64
+      ],
+      "anchor": [
+        40,
+        58
+      ],
+      "world_or_ui": "world_preview",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": null,
+      "loop": false,
+      "runtime_ready": false,
+      "status": "direction_review_only",
+      "method": "alpha_component_and_proportional_nearest",
+      "source": "art-production/ui-world-direction-v1/originals/bull_sheet.png#cell=4",
+      "layers": [
+        "body_with_props"
+      ],
+      "shadow": "no added ground shadow",
+      "visible_bbox_exclusive": [
+        3,
+        23,
+        77,
+        58
+      ],
+      "sha256": "b671a9a8a5c74efef6fc2c3b1ddff2169288b4c7c4f571c067301a18e1e14e50",
+      "pose_sha256": "5f22a35b4e92c23147db1c2b8206064c9875b95d36386e3efa8a881991033346"
+    },
+    {
+      "asset_id": "bull.guts_right",
+      "target": "bull",
+      "action": "guts_right",
+      "label": "根性：前傾・荒い呼吸",
+      "direction": "right",
+      "pose_file": "poses/bull/guts_right.png",
+      "file": "native/bull/guts_right.png",
+      "canvas": [
+        80,
+        64
+      ],
+      "anchor": [
+        40,
+        58
+      ],
+      "world_or_ui": "world_preview",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": null,
+      "loop": false,
+      "runtime_ready": false,
+      "status": "direction_review_only",
+      "method": "alpha_component_and_proportional_nearest",
+      "source": "art-production/ui-world-direction-v1/originals/bull_sheet.png#cell=7",
+      "layers": [
+        "body_with_props"
+      ],
+      "shadow": "no added ground shadow",
+      "visible_bbox_exclusive": [
+        5,
+        17,
+        76,
+        58
+      ],
+      "sha256": "30974ac34e6a1399fc232f8fb8815d0e093e9694419b3dc7be0ac65195865dec",
+      "pose_sha256": "49085e946f480b4b6340ea2cd5da0609afa637e8a9d3333c218cdbf933972b3b"
+    }
+  ],
+  "sheets": [
+    {
+      "target": "merchant",
+      "file": "sheets/01_merchant.png",
+      "canvas": [
+        1000,
+        1205
+      ],
+      "poses": [
+        "merchant.idle_right",
+        "merchant.idle_left",
+        "merchant.cart_move_right",
+        "merchant.cart_move_left"
+      ],
+      "sha256": "00a1336d2da999086ca809a91940511f0b3783c1af1768f6cec18a2af08803be",
+      "runtime_ready": false
+    },
+    {
+      "target": "maid",
+      "file": "sheets/02_maid.png",
+      "canvas": [
+        1600,
+        1205
+      ],
+      "poses": [
+        "maid.idle_right",
+        "maid.idle_left",
+        "maid.coffee_serve_right",
+        "maid.twirl_right",
+        "maid.drink_right",
+        "maid.rage_right",
+        "maid.cleaver_attack_right"
+      ],
+      "sha256": "5dae12c28b0f0220fd9ddabca247f6c25d6b42fe4d92a925e34c4b20a0425c41",
+      "runtime_ready": false
+    },
+    {
+      "target": "dancer",
+      "file": "sheets/03_dancer.png",
+      "canvas": [
+        1500,
+        1205
+      ],
+      "poses": [
+        "dancer.idle_right",
+        "dancer.idle_left",
+        "dancer.dance_right",
+        "dancer.fan_attack_right",
+        "dancer.resurrection_right"
+      ],
+      "sha256": "8757084557c4f0bf2a4503fb5a80fed8961206f17f33f1d81db0f4658ec347f6",
+      "runtime_ready": false
+    },
+    {
+      "target": "thief",
+      "file": "sheets/04_thief.png",
+      "canvas": [
+        1500,
+        1205
+      ],
+      "poses": [
+        "thief.idle_right",
+        "thief.idle_left",
+        "thief.dagger_attack_right",
+        "thief.steal_right",
+        "thief.poison_throw_right"
+      ],
+      "sha256": "292dad4b26d0b92786c81e16d24a56f0cb2942befbc93f5e54eb62b001eb72bc",
+      "runtime_ready": false
+    },
+    {
+      "target": "cow",
+      "file": "sheets/05_cow.png",
+      "canvas": [
+        1500,
+        715
+      ],
+      "poses": [
+        "cow.idle_right",
+        "cow.idle_left",
+        "cow.milking_right"
+      ],
+      "sha256": "bfde08db2338df2e55a224b9cf83c150c4eded8d1f451f24dda3a5f6eb587570",
+      "runtime_ready": false
+    },
+    {
+      "target": "bull",
+      "file": "sheets/06_bull.png",
+      "canvas": [
+        1500,
+        1205
+      ],
+      "poses": [
+        "bull.idle_right",
+        "bull.idle_left",
+        "bull.charge_ready_right",
+        "bull.charge_right",
+        "bull.guts_right"
+      ],
+      "sha256": "b053a9850fd25e2543cd4bbd13f635af6a9fc166c246fe1466e624d425809ae2",
+      "runtime_ready": false
+    }
+  ],
+  "separate_layers": [
+    {
+      "asset_id": "maid_rage_aura",
+      "file": "layers/maid_rage_aura.png",
+      "canvas": [
+        64,
+        64
+      ],
+      "anchor": [
+        32,
+        58
+      ],
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": null,
+      "loop": false,
+      "runtime_ready": false,
+      "sha256": "b4759ecb2bfea1d8bf8eb5341c642fb675d2160f4d6bf82f37a4e04c9deeebf8"
+    },
+    {
+      "asset_id": "poison_projectile",
+      "file": "layers/poison_projectile.png",
+      "canvas": [
+        32,
+        24
+      ],
+      "anchor": [
+        16,
+        12
+      ],
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": null,
+      "loop": false,
+      "runtime_ready": false,
+      "sha256": "68c9c3650123759f6b635bb50a75b1e57d2f34ecd82854a8e6e0d5acc06adba6"
+    }
+  ],
+  "allowed_directions": [
+    "right",
+    "left"
+  ],
+  "excluded_directions": [
+    "front",
+    "back"
+  ],
+  "rendering": {
+    "filter": "nearest",
+    "alpha": "ordinary RGBA",
+    "white_key": false,
+    "preserve_padding": true
+  },
+  "formal_motion_gate": "Satisfied by user OK on 2026-10-08. Formal deliveries remain separate.",
+  "implementation_reference": "f6a60ee525cbe63d962a06280a7d7a9533d69d66",
+  "remaining": [
+    "Per-action left/right formal animation frames, consistent pixel finish, sockets, FX separation and timings.",
+    "Runtime integration and isolated-render validation."
+  ],
+  "sources": "../../art-production/two-direction-review-v1/generation-records.json",
+  "qa_previews": [
+    {
+      "file": "qa/alpha.png",
+      "sha256": "bd8d6fb88a69262e98fd4cd50ded72a78ac399ba90360d1316318102e8e4c330",
+      "runtime_ready": false
+    },
+    {
+      "file": "qa/native_ground.png",
+      "sha256": "6cdb7961abcca3ab59bd7a361e9bb972e258c133c39f925a3a109f07a198a879",
+      "runtime_ready": false
+    }
+  ],
+  "reference_specs": {
+    "ANIMALS.md": "aa46ccd3c34202313361ba0933f6fe2260dea3d38197150088da9377f887f6e9",
+    "ART_SPEC.md": "308988b2a34af1e596910fd2db7289acf4b903fa6700888b227e295be58a2236",
+    "ENEMIES.md": "eddda748f90ad5c2328c25487b090d3b3c0a312e1c1a62bde8399571e8a1cbfb",
+    "implementation-PACKET.md": "f67409c89e4823e9a7a1e975523682c2ce07affc0a4ad89d630fd85cf45f64e8",
+    "ITEMS.md": "a602a05acafed737c617261a4b964037c280b3d1a76d093aed9414451556916a",
+    "WORLD_SYSTEMS.md": "fa21be83d4a591c72727c34cad1e46246f136f31828b51845380446c415ff8ea"
+  },
+  "adoption_record": "ADOPTION.json"
+}

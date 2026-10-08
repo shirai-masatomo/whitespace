@@ -1,0 +1,15 @@
+{
+  "png_count": 30,
+  "actions": 7,
+  "errors": [],
+  "checks": [
+    "RGBA and SHA256",
+    "canvas and fixed foot anchor",
+    "pixel exact left/right mirror",
+    "body binary alpha",
+    "adopted palette and locomotion head lock",
+    "contact/release markers metadata only"
+  ],
+  "runtime_verified": false,
+  "preview_is_game_evidence": false
+}

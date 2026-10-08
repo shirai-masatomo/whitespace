@@ -151,7 +151,7 @@ static func maid_step(w,a,enemy: bool) -> bool:
 	if w.distance(a.pos,target.pos)<=1 and w.line_of_sight(a.pos,target.pos):
 		var helped=drink(target)
 		served.append(target.get("id",-1));a.coffee_served=served;a.coffee_wait=w.tick+ceili(1.0/w.DT)
-		w.skill_log.append({"tick":w.tick,"actor":a.id,"skill":"coffee_support","target":target.get("id",-1)})
+		w.skill_log.append({"tick":w.tick,"actor":a.id,"skill":"coffee_support","faction":"enemy" if enemy else "owned","target":target.get("id",-1)})
 		if helped:
 			w.Combat.grant(w,a,"SkillHit","coffee_support",str(target.get("id",-1)));w.PlayerEvents.add(w,"メイド：コーヒー配布","coffee:"+str(a.get("faction"))+str(a.id))
 	elif w.find_path(a.pos,target.pos).is_empty():served.append(target.get("id",-1));a.coffee_served=served

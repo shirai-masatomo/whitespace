@@ -15,6 +15,9 @@ const FONT = preload("res://assets/fonts/ui_font.tres")
 const TILE = Vector2(48, 42)
 const GROUPS = ["建設", "指示"]
 const Direction=preload("res://game/direction_art.gd")
+const SixMotion=preload("res://game/six_motion.gd")
+var six_art={}
+var six_revived={}
 const TOOLS = {"milk":"搾乳", "charge":"突撃", "place_kokeshi":"こけしを置く", "place_fossil":"化石を置く","wall": "壁  10 / 1秒", "wood_wall":"木壁 木10", "stone_wall":"石壁 石10", "soil_tile":"土タイル 土2", "wood_tile":"木タイル 木2", "stone_tile":"石タイル 石2", "door":"ドア 木10", "locked_door":"施錠ドア 木20", "guide":"連れていく", "equip":"装備", "repair": "修理", "gate": "ドア開閉", "remove": "解体",
 	"attack_target":"狙う", "auto": "おまかせ", "stay": "待機", "wander": "徘徊", "rest": "休む", "collect": "資源・卵・設計図", "dog_food": "犬用餌 HP+10", "hen_food": "鶏用餌 HP+8", "cat_food": "猫用餌 HP+8"}
 const GROUP_TOOLS = [["wall", "wood_wall", "stone_wall", "soil_tile", "wood_tile", "stone_tile", "door", "locked_door", "place_kokeshi", "place_fossil"], ["guide", "auto", "stay", "wander", "rest", "attack_target", "equip", "milk", "charge"], ["collect"]]
@@ -562,6 +565,8 @@ func cancel_selected_work():
 func reset_view():
 	field_book=false
 	actor_art.clear()
+	six_art.clear()
+	six_revived.clear()
 	subtasks.cancel()
 	arrival_started = -10.0
 	arrival_bell = false
@@ -1272,6 +1277,7 @@ func _process(delta):
 	while seen_skills < world.skill_log.size():
 		var skill=world.skill_log[seen_skills]
 		ProgressArt.skill(self,skill)
+		SixMotion.skill(self,skill)
 		if skill.skill=="bark":
 			var id=int(skill.actor.trim_prefix("shiba_"))
 			for a in world.animals:
@@ -1279,7 +1285,11 @@ func _process(delta):
 		play_alert("bark" if world.skill_log[seen_skills].skill == "bark" else "collect")
 		seen_skills += 1
 	update_enemy_art()
-	for a in world.animals: ProgressArt.update(self,a,false)
+	for a in world.animals:
+		ProgressArt.update(self,a,false)
+		SixMotion.update(self,a,false)
+	for e in world.enemies:
+		if e.get("revived",false) and not six_revived.has(e.id):six_revived[e.id]=visual_time
 	queue_redraw()
 	hud.queue_redraw()
 	overlay.queue_redraw()
@@ -1455,6 +1465,20 @@ func _draw():
 	for a in world.animals+world.enemies:
 		if a.get("species")=="doberman" and a.has("visual_death_tick") and (world.tick-a.visual_death_tick)*world.DT<ProgressArt.duration("doberman","death"):
 			Delivered.draw_clip(self,ProgressArt.clip("doberman","death",a.get("facing",1)),center(a.pos)+Vector2(0,14),(world.tick-a.visual_death_tick)*world.DT)
+	for e in world.enemies:
+		if six_revived.has(e.id) and visual_time-six_revived[e.id]<SixMotion.duration("dancer","revival_light"):
+			SixMotion.paint(self,"dancer","revival_light",1,actor_pixel("e"+str(e.id),e.pos)+Vector2(0,14),visual_time-six_revived[e.id])
+	# Brief visual ending only; no corpse collision or revived simulation actor.
+	for enemy_side in [false,true]:
+		for actor in (world.enemies if enemy_side else world.animals):
+			var who=actor.get("archetype",actor.get("species","")) if enemy_side else actor.species
+			if who not in Direction.ACTORS or actor.hp>0 or (not actor.get("done",false) if enemy_side else actor.placed):continue
+			var pose=six_art.get(SixMotion.key(actor,enemy_side),{})
+			if not pose.has("death_at") or visual_time-pose.death_at>=SixMotion.duration(who,pose.action):continue
+			var foot=center(pose.death_pos)+Vector2(0,14);var scale_value=1.15 if who in ["maid","dancer","thief"] else 1.0
+			draw_set_transform(foot*(1.0-scale_value),0,Vector2.ONE*scale_value)
+			SixMotion.paint(self,who,pose.action,pose.facing,foot,visual_time-pose.death_at)
+			draw_set_transform(Vector2.ZERO)
 	for victim in [world.keeper]+world.animals:
 		if victim.hp>0 and world.tick<victim.get("poison_until",0):Direction.draw(self,"new.poison_cloud",center(victim.pos)+Vector2(0,10),0.5)
 	for thrower in world.enemies:
@@ -2139,7 +2163,7 @@ func draw_market_world():
 	var rolling = world.phase == "day" or t < 1
 	q.y += sin(visual_time * 18) * (1.3 if rolling else 0.25)
 	# The adopted cart contains its merchant. No second figure or old cargo overlay.
-	draw_texture(Art.BOARD_CART,(q+Vector2(20,30)-Vector2(64,88)).round())
+	SixMotion.paint(self,"merchant","cart_move" if rolling else "cart_idle",-1 if world.phase=="day" else 1,q+Vector2(20,30),clock)
 
 func draw_companion_card():
 	for a in world.animals:
@@ -2267,6 +2291,9 @@ func enemy_reaction(id: int, action: String):
 
 func update_enemy_art():
 	for e in world.enemies:
+		if e.get("archetype","") in Direction.ACTORS:
+			SixMotion.update(self,e,true)
+			continue
 		if e.get("archetype","kidnapper") in ProgressArt.SPECIES:
 			ProgressArt.update(self,e,true)
 			continue
@@ -2305,7 +2332,7 @@ func draw_enemy_actor(e: Dictionary):
 	var human_scale=1.15 if e.get("type_tag","Human")=="Human" else 1.0
 	draw_set_transform(foot*(1.0-human_scale),0,Vector2.ONE*human_scale)
 	if e.get("archetype","kidnapper")!="kidnapper":
-		if e.archetype in Direction.ACTORS:Direction.actor(self,self,e,foot)
+		if e.archetype in Direction.ACTORS:SixMotion.draw(self,self,e,foot,true)
 		else:ProgressArt.draw(self,self,e,foot,true)
 
 	elif e.carry=="keeper":

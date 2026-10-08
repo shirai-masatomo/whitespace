@@ -1,0 +1,695 @@
+{
+  "schema_version": 1,
+  "delivery": "merchant_motion_v1",
+  "date": "2026-10-08",
+  "branch": "codex/sporehollow-art-assets",
+  "status": "ready_for_implementation_runtime_unverified",
+  "character_id": "merchant",
+  "adopted_design": "../two_direction_review_v1/ADOPTION.json",
+  "canvas_size_px": [
+    48,
+    48
+  ],
+  "foot_anchor_px": [
+    24,
+    44
+  ],
+  "standing_body_height_px": 42,
+  "rendering": {
+    "format": "RGBA",
+    "filter": "nearest",
+    "color_key": false,
+    "trim_transparent_margin": false,
+    "baked_ground_shadow": false,
+    "mirror_axis_x": 24
+  },
+  "assets": [
+    {
+      "file": "idle/right_00.png",
+      "canvas_size_px": [
+        48,
+        48
+      ],
+      "foot_anchor_px": [
+        24,
+        44
+      ],
+      "visible_bbox_exclusive_px": [
+        10,
+        2,
+        39,
+        44
+      ],
+      "action": "idle",
+      "direction": "right",
+      "frame_index": 0,
+      "frame_duration_ms": null,
+      "loop": false,
+      "layer": "body",
+      "sockets_px": {},
+      "sha256": "dd4821aec03eb6006697df7e92d3d83d4fe83594c3f9e6536af76c757c02aa1d",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "idle/left_00.png",
+      "canvas_size_px": [
+        48,
+        48
+      ],
+      "foot_anchor_px": [
+        24,
+        44
+      ],
+      "visible_bbox_exclusive_px": [
+        9,
+        2,
+        38,
+        44
+      ],
+      "action": "idle",
+      "direction": "left",
+      "frame_index": 0,
+      "frame_duration_ms": null,
+      "loop": false,
+      "layer": "body",
+      "sockets_px": {},
+      "sha256": "c4959f7b39164de4cd16c757dc8fd56e5e93b94ae251af7556bad351e65b19c2",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "walk/right_00.png",
+      "canvas_size_px": [
+        48,
+        48
+      ],
+      "foot_anchor_px": [
+        24,
+        44
+      ],
+      "visible_bbox_exclusive_px": [
+        8,
+        2,
+        41,
+        44
+      ],
+      "action": "walk",
+      "direction": "right",
+      "frame_index": 0,
+      "frame_duration_ms": 140,
+      "loop": true,
+      "layer": "body",
+      "sockets_px": {},
+      "sha256": "58ffa4332329abe5b0c065ae4fd1786f772bc36fa93ad5dffc7f4b4a95e5902a",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "walk/right_01.png",
+      "canvas_size_px": [
+        48,
+        48
+      ],
+      "foot_anchor_px": [
+        24,
+        44
+      ],
+      "visible_bbox_exclusive_px": [
+        8,
+        2,
+        40,
+        44
+      ],
+      "action": "walk",
+      "direction": "right",
+      "frame_index": 1,
+      "frame_duration_ms": 140,
+      "loop": true,
+      "layer": "body",
+      "sockets_px": {},
+      "sha256": "ef6c228c2d563d832b57f3ee84b1f3512afff3c4ad2a08786b86faa13a976a2d",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "walk/right_02.png",
+      "canvas_size_px": [
+        48,
+        48
+      ],
+      "foot_anchor_px": [
+        24,
+        44
+      ],
+      "visible_bbox_exclusive_px": [
+        7,
+        2,
+        42,
+        44
+      ],
+      "action": "walk",
+      "direction": "right",
+      "frame_index": 2,
+      "frame_duration_ms": 140,
+      "loop": true,
+      "layer": "body",
+      "sockets_px": {},
+      "sha256": "ebc2d06beb16ee19e0c586d5e7e802c45dd5df1c5df87c3a19abbcbc17165c78",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "walk/right_03.png",
+      "canvas_size_px": [
+        48,
+        48
+      ],
+      "foot_anchor_px": [
+        24,
+        44
+      ],
+      "visible_bbox_exclusive_px": [
+        8,
+        2,
+        40,
+        44
+      ],
+      "action": "walk",
+      "direction": "right",
+      "frame_index": 3,
+      "frame_duration_ms": 140,
+      "loop": true,
+      "layer": "body",
+      "sockets_px": {},
+      "sha256": "01c70c9190915e269f9ab1b47115466a325219bb8f0a353895af58c26a674b86",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "walk/left_00.png",
+      "canvas_size_px": [
+        48,
+        48
+      ],
+      "foot_anchor_px": [
+        24,
+        44
+      ],
+      "visible_bbox_exclusive_px": [
+        7,
+        2,
+        40,
+        44
+      ],
+      "action": "walk",
+      "direction": "left",
+      "frame_index": 0,
+      "frame_duration_ms": 140,
+      "loop": true,
+      "layer": "body",
+      "sockets_px": {},
+      "sha256": "f1dbc04ad823b4521face8b981944facfcf15cd61f83d5545ca915d30b9f6131",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "walk/left_01.png",
+      "canvas_size_px": [
+        48,
+        48
+      ],
+      "foot_anchor_px": [
+        24,
+        44
+      ],
+      "visible_bbox_exclusive_px": [
+        8,
+        2,
+        40,
+        44
+      ],
+      "action": "walk",
+      "direction": "left",
+      "frame_index": 1,
+      "frame_duration_ms": 140,
+      "loop": true,
+      "layer": "body",
+      "sockets_px": {},
+      "sha256": "97bf4d353acc3ff58fc8fcee1ff7530dadf02d50d79de2b8fbcf1b63cdd35c7e",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "walk/left_02.png",
+      "canvas_size_px": [
+        48,
+        48
+      ],
+      "foot_anchor_px": [
+        24,
+        44
+      ],
+      "visible_bbox_exclusive_px": [
+        6,
+        2,
+        41,
+        44
+      ],
+      "action": "walk",
+      "direction": "left",
+      "frame_index": 2,
+      "frame_duration_ms": 140,
+      "loop": true,
+      "layer": "body",
+      "sockets_px": {},
+      "sha256": "d9346eb4c41f54593e99cfdb1275a32e324750850d94935004340b5ea358dd9f",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "walk/left_03.png",
+      "canvas_size_px": [
+        48,
+        48
+      ],
+      "foot_anchor_px": [
+        24,
+        44
+      ],
+      "visible_bbox_exclusive_px": [
+        8,
+        2,
+        40,
+        44
+      ],
+      "action": "walk",
+      "direction": "left",
+      "frame_index": 3,
+      "frame_duration_ms": 140,
+      "loop": true,
+      "layer": "body",
+      "sockets_px": {},
+      "sha256": "c44c7cfab14267b2dbc6baba0f6d2e7d45d1d395fb06c3117d252b440bcbc91e",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "cart_idle/right_00.png",
+      "canvas_size_px": [
+        128,
+        96
+      ],
+      "foot_anchor_px": [
+        64,
+        88
+      ],
+      "visible_bbox_exclusive_px": [
+        4,
+        6,
+        124,
+        88
+      ],
+      "action": "cart_idle",
+      "direction": "right",
+      "frame_index": 0,
+      "frame_duration_ms": null,
+      "loop": false,
+      "layer": "body",
+      "sockets_px": {},
+      "sha256": "eefcfcf6a53a18ee7f480a17d16124d42c96b6e5fa1b0e41c95c53f2e821fae0",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "cart_idle/left_00.png",
+      "canvas_size_px": [
+        128,
+        96
+      ],
+      "foot_anchor_px": [
+        64,
+        88
+      ],
+      "visible_bbox_exclusive_px": [
+        4,
+        6,
+        124,
+        88
+      ],
+      "action": "cart_idle",
+      "direction": "left",
+      "frame_index": 0,
+      "frame_duration_ms": null,
+      "loop": false,
+      "layer": "body",
+      "sockets_px": {},
+      "sha256": "02b7916a85ae5fd4c7048d55479f296f4a809c522a884d2623cf9222aca45a2e",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "cart_move/right_00.png",
+      "canvas_size_px": [
+        128,
+        96
+      ],
+      "foot_anchor_px": [
+        64,
+        88
+      ],
+      "visible_bbox_exclusive_px": [
+        4,
+        6,
+        124,
+        88
+      ],
+      "action": "cart_move",
+      "direction": "right",
+      "frame_index": 0,
+      "frame_duration_ms": 110,
+      "loop": true,
+      "layer": "body",
+      "sockets_px": {},
+      "sha256": "eefcfcf6a53a18ee7f480a17d16124d42c96b6e5fa1b0e41c95c53f2e821fae0",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "cart_move/right_01.png",
+      "canvas_size_px": [
+        128,
+        96
+      ],
+      "foot_anchor_px": [
+        64,
+        88
+      ],
+      "visible_bbox_exclusive_px": [
+        4,
+        6,
+        124,
+        88
+      ],
+      "action": "cart_move",
+      "direction": "right",
+      "frame_index": 1,
+      "frame_duration_ms": 110,
+      "loop": true,
+      "layer": "body",
+      "sockets_px": {},
+      "sha256": "f28b194b239096cd48d8238206d57ecddcbbc25879bd7a8406de6b14d3557e24",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "cart_move/right_02.png",
+      "canvas_size_px": [
+        128,
+        96
+      ],
+      "foot_anchor_px": [
+        64,
+        88
+      ],
+      "visible_bbox_exclusive_px": [
+        4,
+        6,
+        124,
+        88
+      ],
+      "action": "cart_move",
+      "direction": "right",
+      "frame_index": 2,
+      "frame_duration_ms": 110,
+      "loop": true,
+      "layer": "body",
+      "sockets_px": {},
+      "sha256": "9528bd1ba6a5fd2866eef9b49c0c19f077d81ae6b614701210af07d3585ff21e",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "cart_move/right_03.png",
+      "canvas_size_px": [
+        128,
+        96
+      ],
+      "foot_anchor_px": [
+        64,
+        88
+      ],
+      "visible_bbox_exclusive_px": [
+        4,
+        6,
+        124,
+        88
+      ],
+      "action": "cart_move",
+      "direction": "right",
+      "frame_index": 3,
+      "frame_duration_ms": 110,
+      "loop": true,
+      "layer": "body",
+      "sockets_px": {},
+      "sha256": "fe5a3cf7dbc3221f0d51ff3acc4d7e400d6c26dec2d5a376b0c3ea4645c2d141",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "cart_move/left_00.png",
+      "canvas_size_px": [
+        128,
+        96
+      ],
+      "foot_anchor_px": [
+        64,
+        88
+      ],
+      "visible_bbox_exclusive_px": [
+        4,
+        6,
+        124,
+        88
+      ],
+      "action": "cart_move",
+      "direction": "left",
+      "frame_index": 0,
+      "frame_duration_ms": 110,
+      "loop": true,
+      "layer": "body",
+      "sockets_px": {},
+      "sha256": "02b7916a85ae5fd4c7048d55479f296f4a809c522a884d2623cf9222aca45a2e",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "cart_move/left_01.png",
+      "canvas_size_px": [
+        128,
+        96
+      ],
+      "foot_anchor_px": [
+        64,
+        88
+      ],
+      "visible_bbox_exclusive_px": [
+        4,
+        6,
+        124,
+        88
+      ],
+      "action": "cart_move",
+      "direction": "left",
+      "frame_index": 1,
+      "frame_duration_ms": 110,
+      "loop": true,
+      "layer": "body",
+      "sockets_px": {},
+      "sha256": "63bf7ac9a1562810f0d0293389014b0e609fada972ad37f213f9b76279501c60",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "cart_move/left_02.png",
+      "canvas_size_px": [
+        128,
+        96
+      ],
+      "foot_anchor_px": [
+        64,
+        88
+      ],
+      "visible_bbox_exclusive_px": [
+        4,
+        6,
+        124,
+        88
+      ],
+      "action": "cart_move",
+      "direction": "left",
+      "frame_index": 2,
+      "frame_duration_ms": 110,
+      "loop": true,
+      "layer": "body",
+      "sockets_px": {},
+      "sha256": "2b92c4ea89c0b56262d943f7c1cd26074ce91383c92ddd0a4fc13ed89a4a0107",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    },
+    {
+      "file": "cart_move/left_03.png",
+      "canvas_size_px": [
+        128,
+        96
+      ],
+      "foot_anchor_px": [
+        64,
+        88
+      ],
+      "visible_bbox_exclusive_px": [
+        4,
+        6,
+        124,
+        88
+      ],
+      "action": "cart_move",
+      "direction": "left",
+      "frame_index": 3,
+      "frame_duration_ms": 110,
+      "loop": true,
+      "layer": "body",
+      "sockets_px": {},
+      "sha256": "b4788699f21e4fadcbc8bfe493968a4d259cabaeed069b10229fa8bbf8fe3273",
+      "runtime_ready": true,
+      "contains_cast_shadow": false
+    }
+  ],
+  "actions": [
+    {
+      "action": "idle",
+      "frame_order": [
+        0
+      ],
+      "frame_durations_ms": [
+        null
+      ],
+      "loop": false,
+      "layer": "body",
+      "events": [],
+      "note": "",
+      "directions": {
+        "right": [
+          "idle/right_00.png"
+        ],
+        "left": [
+          "idle/left_00.png"
+        ]
+      }
+    },
+    {
+      "action": "walk",
+      "frame_order": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "frame_durations_ms": [
+        140,
+        140,
+        140,
+        140
+      ],
+      "loop": true,
+      "layer": "body",
+      "events": [],
+      "note": "",
+      "directions": {
+        "right": [
+          "walk/right_00.png",
+          "walk/right_01.png",
+          "walk/right_02.png",
+          "walk/right_03.png"
+        ],
+        "left": [
+          "walk/left_00.png",
+          "walk/left_01.png",
+          "walk/left_02.png",
+          "walk/left_03.png"
+        ]
+      }
+    },
+    {
+      "action": "cart_idle",
+      "frame_order": [
+        0
+      ],
+      "frame_durations_ms": [
+        null
+      ],
+      "loop": false,
+      "layer": "body",
+      "events": [],
+      "note": "",
+      "directions": {
+        "right": [
+          "cart_idle/right_00.png"
+        ],
+        "left": [
+          "cart_idle/left_00.png"
+        ]
+      }
+    },
+    {
+      "action": "cart_move",
+      "frame_order": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "frame_durations_ms": [
+        110,
+        110,
+        110,
+        110
+      ],
+      "loop": true,
+      "layer": "body",
+      "events": [],
+      "note": "Near wheel spokes rotate; chassis, goods and merchant fixed. Translation belongs to implementation. Cart contains merchant; do not duplicate actor.",
+      "directions": {
+        "right": [
+          "cart_move/right_00.png",
+          "cart_move/right_01.png",
+          "cart_move/right_02.png",
+          "cart_move/right_03.png"
+        ],
+        "left": [
+          "cart_move/left_00.png",
+          "cart_move/left_01.png",
+          "cart_move/left_02.png",
+          "cart_move/left_03.png"
+        ]
+      }
+    }
+  ],
+  "timing_contract": "Visual clip timings only. Existing simulation determines movement, damage, targets and state length. Contact/release markers are attachment guidance, never new gameplay events.",
+  "sources": "../../art-production/six-characters-motion-v1/generation-records.json",
+  "remaining": [
+    "Implementation integration and isolated render verification.",
+    "Rear wheel is held behind chassis; only exposed near-wheel spokes animate.",
+    "No opening/setup animation or merchant combat actions."
+  ],
+  "review_only": [
+    "preview/actions.png",
+    "preview/actions.gif",
+    "preview/movement.gif",
+    "preview/alpha.png"
+  ],
+  "limits": [
+    "Left is pixel-exact mirror; handed props and shading mirror together.",
+    "Cycles use the minimum explicit poses; no front/back or alternative designs."
+  ]
+}
