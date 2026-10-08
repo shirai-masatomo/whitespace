@@ -17,7 +17,7 @@ const ITEMS = {
 	"collar":{"id":"collar","name":"首輪","rarity":Rarity.COMMON,"type":"equipment","equip_targets":["dog"],"durability":-1,"consumable":false,"trigger":"equipped","effects":{"loyalty":25,"defense":2},"buy":20,"sell":6},
 	"berry":{"id":"berry","name":"きのみ","rarity":Rarity.COMMON,"type":"conditional_equipment","equip_targets":["animal"],"durability":1,"consumable":true,"trigger":"alive_hp_half","effects":{"heal_fraction":0.25},"buy":8,"sell":2}}
 const ENEMY_ROWS = {
- "maid":["メイド",45,2.0,5,3,3,1,1.2,75,[50,45,0,5],Rarity.RARE,"仲間にコーヒーを届ける"],
+ "maid":["メイド",45,2.0,5,0,0,0,1.2,75,[50,45,0,5],Rarity.RARE,"仲間にコーヒーを届ける"],
  "dancer":["舞姫",38,1.6,6,2,2,0,1.5,75,[50,50,0,0],Rarity.RARE,"舞で味方を支え、倒れた仲間を復活させる"],
  "thief":["盗賊",32,2.0,7,4,4,0,1.2,70,[50,50,0,0],Rarity.UNCOMMON,"毒を投げ、落とし物を盗んで逃げる"],
 	"kidnapper":["誘拐者",50,1.333333,6,5,5,2,1.4,40,[70,10,10,10],Rarity.COMMON,"主人公を連れ去る"],

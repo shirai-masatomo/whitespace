@@ -214,7 +214,6 @@ static func step(w):
 			w.Progression.enemy_hurt(w,e,ATTACK)
 			w.combat_log.append({"tick": w.tick, "source": "keeper", "id": -1, "target": e.id, "damage": ATTACK})
 			if e.hp == 0:
-				if not e.get("downed",false):e.flee = true
 				if w.stage == 1 and e.id == 0: w.drop_blueprint(e.pos)
 
 static func hurt(w, e):

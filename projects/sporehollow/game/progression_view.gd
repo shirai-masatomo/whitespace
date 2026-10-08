@@ -54,7 +54,7 @@ static func enemy_page(game,c,index: int):
 				game.label_on(c,Vector2(630,y+21),skill.Name,19,UI.INK)
 				game.label_on(c,Vector2(630,y+42),skill.Type,13,Color("75816c"))
 		else:game.label_on(c,Vector2(584,215),"行動を観察すると、詳しく分かります。",16,UI.INK)
-		if known>=3:game.label_on(c,Vector2(584,450),"撃退済み",16,UI.INK)
+		if known>=3:game.label_on(c,Vector2(584,450),"倒した",16,UI.INK)
 
 	game.label_on(c,Vector2(470,510),"%d / %d"%[index+1,ENEMY_ORDER.size()],14,UI.INK)
 

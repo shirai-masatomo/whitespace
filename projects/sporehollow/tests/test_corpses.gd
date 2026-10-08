@@ -1,0 +1,36 @@
+extends "res://tests/test_ranch_content.gd"
+func run():
+	var w=open_world();var e=enemy(w,"salaryman",Vector2i(10,10));var origin=e.pos
+	P.enemy_hurt(w,e,999)
+	check(e.dead and e.revivable and not e.flee and not e.done and e.corpse_until-w.tick==32,"HP0 creates eight-second corpse")
+	check(not w.actor_occupied(origin,Vector2i.ZERO),"Corpse does not block movement")
+	var hp=w.keeper.hp;var attack=e.next_attack
+	for i in range(31):w.tick+=1;w.enemy_step(e)
+	check(e.pos==origin and e.next_attack==attack and w.keeper.hp==hp and not e.done,"Corpse cannot move or attack before expiry")
+	w.tick+=1;w.enemy_step(e);check(e.dead and e.done and not e.revivable and not e.flee,"Expiry removes corpse without retreat")
+	check(w.player_events.filter(func(row):return row.text==e.name+"を倒した").size()==1,"Death log occurs once")
+	w=open_world();e=enemy(w,"kidnapper",Vector2i(10,10));w.keeper.hp=0;w.keeper.state="captured";w.keeper.carrier=e.id;e.carry="keeper";w.keeper.pos=e.pos
+	P.enemy_hurt(w,e,999);check(e.dead and not e.done and e.carry=="" and w.keeper.carrier==-1 and w.keeper.pos==Vector2i(10,10) and e.pos==w.keeper.pos,"Dead carrier frees keeper at corpse location")
+	w.enemy_step(e);check(w.keeper.carrier==-1 and e.capture_progress==0,"Dead kidnapper cannot recapture")
+	w=open_world();var dancer=enemy(w,"dancer",Vector2i(12,10));var martial=enemy(w,"martial_artist",Vector2i(11,10));var other=enemy(w,"salaryman",Vector2i(12,11))
+	P.enemy_hurt(w,martial,999);P.enemy_hurt(w,other,999);dancer.hp=17;dancer.ultimate_gauge=100;C.enemy_step(w,dancer)
+	check(not martial.dead and martial.hp==17 and martial.revived_count==1 and other.dead,"Revival prefers martial and caps HP at dancer current HP")
+	check(not martial.revivable and not martial.done and not martial.flee,"Revival restores active flags")
+	P.enemy_hurt(w,martial,999);other.done=true;dancer.ultimate_gauge=100;C.enemy_step(w,dancer)
+	check(martial.dead and not martial.revivable and dancer.ultimate_gauge==100,"Second death cannot be revived")
+	w=open_world();dancer=enemy(w,"dancer",Vector2i(12,10));other=enemy(w,"dancer",Vector2i(11,10));P.enemy_hurt(w,other,999);dancer.ultimate_gauge=100;C.enemy_step(w,dancer)
+	check(other.dead and dancer.ultimate_gauge==100,"Dancer is never a revival candidate")
+	e=enemy(w,"salaryman",Vector2i(12,11));P.enemy_hurt(w,e,999);w.tick=e.corpse_until;w.enemy_step(e);C.enemy_step(w,dancer)
+	check(e.done and e.dead and dancer.ultimate_gauge==100,"Expired corpse cannot consume ultimate or revive")
+	w=open_world();dancer=enemy(w,"dancer",Vector2i(12,10));e=enemy(w,"salaryman",Vector2i(11,10));P.enemy_hurt(w,e,999);dancer.hp=100;dancer.ultimate_gauge=100;C.enemy_step(w,dancer)
+	check(e.hp==e.max_hp,"Revival also caps at target max HP")
+	w=open_world();martial=enemy(w,"martial_artist",w.keeper.pos+Vector2i.RIGHT);w.keeper.hp=2;P.strike(w,martial,{"kind":"keeper"});check(w.keeper.hp==1,"Nonlethal keeper damage stops at one")
+	var dog=w.animals[0];dog.hp=2;P.strike(w,martial,{"kind":"animal","id":dog.id});check(dog.hp==1,"Nonlethal animal damage stops at one")
+	e=enemy(w,"thief",Vector2i(15,10));e.flee=true;check(e.hp>0 and not e.get("dead",false) and not e.get("revivable",false),"Living retreat is distinct")
+	w=open_world();var maid=enemy(w,"maid",w.keeper.pos+Vector2i.RIGHT);maid.ultimate_gauge=0;hp=w.keeper.hp
+	for i in range(24):w.tick+=1;w.enemy_step(maid)
+	P.strike(w,maid,{"kind":"keeper"},3)
+	check(w.keeper.hp==hp and maid.next_attack==0,"Normal maid never attacks even with no recipients")
+	maid.rage_until=w.tick+24;maid.next_attack=0;w.enemy_step(maid);check(w.keeper.hp<hp,"Raging maid can attack")
+	FileAccess.open("res://artifacts/corpse-tests.json",FileAccess.WRITE).store_string(JSON.stringify(records,"  "))
+	print("CORPSES: %d checks, failures=%d"%[checks,failures]);quit(1 if failures else 0)

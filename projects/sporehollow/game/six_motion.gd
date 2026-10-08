@@ -69,7 +69,7 @@ static func update(g,a: Dictionary,enemy: bool):
 		if charging and not p.get("charging",false):once(p,"charge_start",t)
 		if not charging and p.get("charging",false):once(p,"charge_end",t)
 		p.charging=charging
-	if a.get("next_attack",0)>p.get("attack",a.get("next_attack",0)) and who!="cow":once(p,"rage_attack" if who=="maid" and raging else "attack",t)
+	if a.get("next_attack",0)>p.get("attack",a.get("next_attack",0)) and who!="cow" and (who!="maid" or raging):once(p,"rage_attack" if who=="maid" else "attack",t)
 	if a.hp>0 and p.hp<=0 and who in ["maid","dancer","thief"]:once(p,"get_up",t)
 	elif a.hp>0 and a.hp<p.hp:once(p,"hurt",t)
 	if p.has("once"):

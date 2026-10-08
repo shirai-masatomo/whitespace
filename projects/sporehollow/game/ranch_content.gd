@@ -1,6 +1,7 @@
 extends RefCounted
 ## G–M content on the existing individual, fixed-tick and FIFO lifecycles.
 const PLACEABLES=["kokeshi","fossil"]
+const CORPSE_SECONDS=8.0
 const RAGE={"UltimateID":"rage","Name":"激ギレ","Rarity":2,"UnlockLevel":1,"GaugeCost":100.0,"ConditionID":"enemy_near","Duration":6.0,"AIHints":{"threshold":0.5},"LevelScaling":{}}
 const REVIVE={"UltimateID":"resurrection","Name":"復活の舞","Rarity":2,"UnlockLevel":1,"GaugeCost":100.0,"ConditionID":"ally_downed","Duration":0.0,"AIHints":{"threshold":0.5,"priority":0.5},"LevelScaling":{}}
 
@@ -116,7 +117,7 @@ static func maid_step(w,a,enemy: bool) -> bool:
 	w.Combat.ai_use(w,a,RAGE,{"conditions":{"enemy_near":not enemies.is_empty()},"targets":enemies.size(),"tactical_score":1.0},func():a.rage_until=w.tick+ceili(RAGE.Duration/w.DT);return true)
 	var raging=w.tick<a.get("rage_until",0)
 	a.action_id="rage" if raging else "idle"
-	if not enemies.is_empty() and (raging or w.distance(a.pos,enemies[0].pos)<=1):
+	if not enemies.is_empty() and raging:
 		var target=enemies[0];a.state="激ギレ" if raging else "抵抗"
 		if w.distance(a.pos,target.pos)<=1 and w.line_of_sight(a.pos,target.pos):
 			if w.tick>=a.next_attack and w.Combat.pay(a,"attack"):
@@ -137,12 +138,11 @@ static func maid_step(w,a,enemy: bool) -> bool:
 	if w.tick<a.get("coffee_wait",0):a.state="配り終えた";return true
 	var served=a.get("coffee_served",[])
 	var allies=w.enemies.filter(func(t):return t.id!=a.id and not t.done and not t.flee and t.hp>0) if enemy else [w.keeper]+w.animals.filter(func(t):return t.id!=a.id and w.Orders.active(w,t))
-	if enemy and allies.is_empty():return false
 	allies=allies.filter(func(t):return t.hp>0 and t.get("carrier",-1)<0 and t.get("state","")!="hidden_rest" and t.get("id",-1) not in served)
 	if allies.is_empty():
 		drink(a);a.coffee_served=[];a.coffee_rest_until=w.tick+ceili(10.0/w.DT);a.state="休む"
 		# A support unit without recipients continues to explore instead of camping forever.
-		return not enemy
+		return true
 	allies.sort_custom(func(t,u):return w.distance(a.pos,t.pos)<w.distance(a.pos,u.pos) if w.distance(a.pos,t.pos)!=w.distance(a.pos,u.pos) else t.get("id",-1)<u.get("id",-1))
 	var target=allies[0];a.state="コーヒーを届ける"
 	if a.get("coffee_target",-999)!=target.get("id",-1):
@@ -172,16 +172,25 @@ static func line(start: Vector2i,goal: Vector2i) -> Array:
 	return path
 
 static func down(w,e) -> bool:
+	if e.get("dead",false):return true
 	drop_stolen(w,e)
-	if e.get("type_tag","")!="Human" or e.get("revived",false):return false
-	if not w.enemies.any(func(d):return d.id!=e.id and d.get("archetype")=="dancer" and d.hp>0 and not d.done and not d.flee and w.distance(d.pos,e.pos)<=6):return false
-	e.revivable=true;e.downed=true;e.defeated_tick=w.tick;e.revive_position=e.pos;e.state="倒れている";e.flee=false
+	e.dead=true;e.revivable=not e.get("revived",false);e.corpse_started_tick=w.tick;e.corpse_until=w.tick+ceili(CORPSE_SECONDS/w.DT)
+	e.done=false;e.flee=false;e.hp=0;e.state="倒れた";e.capture_progress=0;e.counter_target=-1;e.phone_started=false;e.chosen_target={}
 	w.release_keeper(e);w.Progression.release_animal(w,e)
+	if w.keeper.restrainer==e.id:
+		w.keeper.restrainer=-1;w.keeper.state="unconscious" if w.keeper.hp<=0 else "free"
+	if not e.get("defeat_recorded",false):
+		e.defeat_recorded=true;w.metrics.repelled+=1;w.Progression.loot(w,e);w.Progression.knowledge(w,e,3)
+		w.metrics.coins+=0 if e.get("archetype")=="salaryman" else 3
+	w.PlayerEvents.add(w,e.name+"を倒した")
 	return true
 
 static func finalize(w,e):
-	e.downed=false;e.revivable=false;e.flee=true
-	w.Progression.loot(w,e);w.Progression.knowledge(w,e,3)
+	e.revivable=false;e.dead=true;e.done=true;e.flee=false
+
+static func corpse_step(w,e):
+	if not e.get("dead",false):down(w,e)
+	if w.tick>=e.corpse_until:finalize(w,e)
 
 static func drop_stolen(w,e):
 	if not e.get("stolen",{}).is_empty():
@@ -189,20 +198,19 @@ static func drop_stolen(w,e):
 		e.escape_theft=false
 
 static func enemy_step(w,e) -> bool:
-	if e.get("downed",false):
-		e.state="倒れている"
-		if w.tick-e.defeated_tick>=ceili(10.0/w.DT) or not w.enemies.any(func(d):return d.get("archetype")=="dancer" and d.hp>0 and not d.done and not d.flee):finalize(w,e)
+	if e.get("dead",false) or e.hp<=0:
+		corpse_step(w,e)
 		return true
 	if e.flee or e.hp<=0:return false
 	if e.archetype=="maid":return maid_step(w,e,true)
 	if e.archetype=="dancer":
-		var downed=w.enemies.filter(func(t):return t.id!=e.id and t.get("revivable",false) and not t.get("revived",false) and w.distance(e.pos,t.pos)<=3 and w.line_of_sight(e.pos,t.pos))
+		var downed=w.enemies.filter(func(t):return t.get("dead",false) and not t.done and t.get("revivable",false) and t.get("corpse_until",0)>w.tick and t.archetype!="dancer" and not t.get("revived",false) and w.distance(e.pos,t.pos)<=3 and w.line_of_sight(e.pos,t.pos))
 		downed.sort_custom(func(a,b):return a.archetype=="martial_artist" if (a.archetype=="martial_artist")!=(b.archetype=="martial_artist") else a.id<b.id)
 		if not downed.is_empty():
 			var target=downed[0]
 			w.Combat.ai_use(w,e,REVIVE,{"conditions":{"ally_downed":true},"tactical_score":1.0,"priority_target":target.archetype=="martial_artist"},func():
-				if not w.walkable(target.pos) or (w.keeper.placed and w.keeper.pos==target.pos) or w.animals.any(func(a):return a.placed and a.pos==target.pos) or w.enemies.any(func(a):return a.id!=target.id and not a.done and a.pos==target.pos):return false
-				target.hp=mini(target.max_hp,e.hp);target.downed=false;target.revivable=false;target.revived=true;target.flee=false;target.action_id="idle";target.state="復活";target.next_attack=w.tick+4
+				if not w.walkable(target.pos) or (w.keeper.placed and w.keeper.pos==target.pos) or w.animals.any(func(a):return a.placed and a.pos==target.pos) or w.enemies.any(func(a):return a.id!=target.id and not a.done and a.hp>0 and a.pos==target.pos):return false
+				target.hp=mini(target.max_hp,e.hp);target.dead=false;target.revivable=false;target.revived=true;target.revived_count=1;target.done=false;target.flee=false;target.action_id="idle";target.state="復活";target.next_attack=w.tick+4
 				w.PlayerEvents.add(w,target.name+"が復活")
 				return true)
 		var friends=w.enemies.filter(func(t):return t.id!=e.id and not t.done and not t.flee and t.hp>0 and w.distance(e.pos,t.pos)<=3 and w.line_of_sight(e.pos,t.pos))

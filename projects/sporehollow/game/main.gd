@@ -1473,6 +1473,7 @@ func _draw():
 		for actor in (world.enemies if enemy_side else world.animals):
 			var who=actor.get("archetype",actor.get("species","")) if enemy_side else actor.species
 			if who not in Direction.ACTORS or actor.hp>0 or (not actor.get("done",false) if enemy_side else actor.placed):continue
+			if enemy_side and actor.get("dead",false):continue
 			var pose=six_art.get(SixMotion.key(actor,enemy_side),{})
 			if not pose.has("death_at") or visual_time-pose.death_at>=SixMotion.duration(who,pose.action):continue
 			var foot=center(pose.death_pos)+Vector2(0,14);var scale_value=1.15 if who in ["maid","dancer","thief"] else 1.0
@@ -1676,7 +1677,7 @@ func draw_hud():
 			hud.draw_rect(Rect2(92, 646, 150, 9), Color("293d35"))
 			hud.draw_rect(Rect2(92, 646, 150.0 * e.hp / e.max_hp, 9), Color("d2aa80"))
 			draw_gauge(hud,e,Vector2(92,655))
-			var status = "撃退済み" if e.hp <= 0 or e.flee or e.done else (e.search_state if debug_view else "HP %d / %d" % [e.hp, e.max_hp])
+			var status = "倒した" if e.get("dead",false) else "退散" if e.flee else (e.search_state if debug_view else "HP %d / %d" % [e.hp, e.max_hp])
 			label_on(hud, Vector2(92, 677), "%d/%d  視界%d" % [e.hp, e.max_hp, e.sight_range] if Rect2(16, 609, 344, 80).has_point(pointer) else status, 15)
 	elif selected.get("kind") in ["structure","floor"] and selected_store().has(selected.pos):
 		var b = selected_store()[selected.pos]
@@ -2324,6 +2325,21 @@ func update_enemy_art():
 
 func draw_enemy_actor(e: Dictionary):
 	if e.done or not world.working(): return
+	if e.get("dead",false):
+		var foot=center(e.pos)+Vector2(0,14)
+		var who=e.get("archetype","kidnapper");var facing=e.get("facing",1)
+		var elapsed=(world.tick-e.corpse_started_tick)*world.DT
+		var scale_value=1.0 if who=="doberman" else 1.15
+		if who in ["maid","dancer","thief","doberman"]:
+			draw_set_transform(foot*(1-scale_value),0,Vector2.ONE*scale_value)
+			if who=="doberman":Delivered.draw_clip(self,ProgressArt.clip(who,"death",facing),foot,elapsed)
+			else:SixMotion.paint(self,who,"death" if who=="maid" else "downed",facing,foot,elapsed)
+		else:
+			draw_set_transform(foot,PI/2,Vector2.ONE*scale_value)
+			if who=="kidnapper":Delivered.draw_clip(self,"enemy/hit_left" if facing<0 else "enemy/hit_right",Vector2.ZERO,99)
+			else:Delivered.draw_clip(self,ProgressArt.clip(who,"hurt",facing),Vector2.ZERO,99)
+		draw_set_transform(Vector2.ZERO)
+		return
 	var p = actor_pixel("e%d" % e.id, e.pos)
 	draw_ready(e,p)
 	var pose=enemy_art.get(e.id,{"action":"idle","facing":1,"at":visual_time})

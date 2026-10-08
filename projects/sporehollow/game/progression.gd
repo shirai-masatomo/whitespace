@@ -110,9 +110,7 @@ static func enemy_hurt(w,e,raw: int,attacker: int=-1,action: String="attack",ski
 	w.Combat.hit(w,source,e,action,damage,skill)
 	if attacker>=0: e.attacker=attacker; e.threat_until=w.tick+ceili(w.Rules.KIDNAPPER.counter_duration/w.DT)
 	if e.hp<=0:
-		if w.Content.down(w,e):return
-		e.flee=true; release_animal(w,e); w.release_keeper(e); loot(w,e); knowledge(w,e,3)
-		if e.get("type_tag","")=="Animal": e.visual_death_tick=w.tick; e.done=true; e.state="死亡"; e.action_id="death"; w.metrics.repelled+=1
+		w.Content.down(w,e);return
 	elif e.get("archetype","")=="salaryman" and not e.get("phone_success",false) and not e.get("phone_started",false) and damage>0:
 		if w.rng.randf()<e.get("debug_phone_chance",Data.SPECIAL.phone_chance) and w.Combat.pay(e,"skill"):
 			w.PlayerEvents.add(w,e.name+"：応援要請")
@@ -153,7 +151,7 @@ static func tick(w):
 				if not e.done and not e.flee and w.distance(a.pos,e.pos)<=1 and w.line_of_sight(a.pos,e.pos) and e.get("reflected_at",-1)!=w.tick:
 					e.reflected_at=w.tick; enemy_hurt(w,e,Data.SPECIAL.spines_reflect,a.id,"spines",true)
 	for e in w.enemies:
-		if e.hp<=0 and not e.get("downed",false) and not e.get("loot_granted",false): loot(w,e); release_animal(w,e)
+		if e.hp<=0 and not e.done:w.Content.corpse_step(w,e)
 		if not e.done and visible_to_farm(w,e):
 			knowledge(w,e,2 if e.get("observed_action",false) else 1)
 		e.observed_action=false
@@ -203,7 +201,7 @@ static func enemy_step(w,e) -> bool:
 	if e.flee: return false
 	var kidnapper=e.get("archetype","kidnapper")=="kidnapper"
 	if kidnapper and (e.carry!="" or w.Life.targetable(w,true) and w.keeper.hp<=0 or e.role!="kidnapper"): return false
-	if e.hp<=0: e.flee=true; return false
+	if e.hp<=0 or e.get("dead",false):w.Content.corpse_step(w,e);return true
 	if e.get("phone_started",false):
 		e.state="応援を呼ぶ"; e.action_id="phone_call"
 		if w.tick>=e.phone_until:
@@ -277,6 +275,8 @@ static func walk(w,e,goal: Vector2i):
 	if e.archetype=="runner" and before!=e.pos: e.run_seconds=e.get("run_seconds",0.0)+1.0/speed; e.last_run_tick=w.tick
 
 static func strike(w,e,t,override_damage: int=-1):
+	if e.hp<=0 or e.get("dead",false):return
+	if e.archetype=="maid" and w.tick>=e.get("rage_until",0):return
 	e.observed_action=true
 	var raging=e.archetype=="maid" and w.tick<e.get("rage_until",0)
 	e.combat_action=("rage" if raging else "attack") if e.archetype=="maid" else ("shuriken" if override_damage>=0 else "attack")

@@ -271,7 +271,7 @@ func live_structure(p: Vector2i) -> bool:
 	return structures.has(p) and structures[p].status in ["ready", "building"]
 
 func occupied(p: Vector2i) -> bool:
-	return (keeper.placed and p == keeper.pos) or animals.any(func(a): return a.placed and a.pos == p) or enemies.any(func(e): return not e.done and e.pos == p) or foods.any(func(f): return f.pos == p)
+	return (keeper.placed and p == keeper.pos) or animals.any(func(a): return a.placed and a.pos == p) or enemies.any(func(e): return not e.done and e.hp>0 and e.pos == p) or foods.any(func(f): return f.pos == p)
 
 func has_nest() -> bool:
 	return campaign.animals.any(func(a): return a.species == "hen")
@@ -290,7 +290,7 @@ func exit_for(entry: Vector2i) -> Vector2i:
 
 func actor_occupied(p: Vector2i, origin: Vector2i) -> bool:
 	if p == origin: return false
-	return (keeper.placed and keeper.pos == p) or animals.any(func(a): return a.placed and a.pos == p) or enemies.any(func(e): return not e.done and e.pos == p)
+	return (keeper.placed and keeper.pos == p) or animals.any(func(a): return a.placed and a.pos == p) or enemies.any(func(e): return not e.done and e.hp>0 and e.pos == p)
 
 func next_step(start: Vector2i, goal: Vector2i, raider: bool = false, avoid_actors: bool = false) -> Vector2i:
 	var path = find_path(start,goal,raider,avoid_actors)
@@ -483,7 +483,8 @@ func release_keeper(e: Dictionary):
 		keeper.pos = e.pos
 		Jobs.hold(self, "rescue")
 		var clear = neighbors(e.pos).filter(func(p): return walkable(p) and not occupied(p))
-		if not clear.is_empty(): e.pos = clear[0]
+		if e.get("dead",false):pass
+		elif not clear.is_empty(): e.pos = clear[0]
 		else:
 			e.done = true
 			metrics.repelled += 1
@@ -522,7 +523,7 @@ func animal_step(a: Dictionary):
 	if Content.animal_step(self,a):return
 	if a.species in ["hen", "cat", "cow"]:
 		try_meow(a)
-		var threat = enemies.filter(func(e): return not e.done and not e.flee and distance(a.pos, e.pos) <= a.detection_range)
+		var threat = enemies.filter(func(e): return not e.done and not e.flee and e.hp>0 and distance(a.pos, e.pos) <= a.detection_range)
 		a.fear = 28 if not threat.is_empty() else maxi(0, a.fear - 1)
 		a.state = "怖がる" if a.fear > 0 else ("ついばむ" if a.species == "hen" else "散歩")
 		a.move_credit = minf(1.0, a.move_credit + a.move_speed * Content.speed(self,a) * DT)
@@ -614,10 +615,8 @@ func animal_step(a: Dictionary):
 			Progression.enemy_hurt(self,enemy,a.attack_power,a.id)
 			combat_log.append({"tick": tick, "source": "animal", "id": a.id, "target": enemy.id, "damage": a.attack_power})
 			if enemy.hp == 0:
-				if not enemy.get("downed",false):enemy.flee = true
 				if stage == 1 and enemy.id == 0: drop_blueprint(enemy.pos)
 				release_keeper(enemy)
-				say("侵入者を追い返した！")
 			else:
 				enemy.attacker = a.id
 				enemy.threat_until = tick + ceili(Rules.KIDNAPPER.counter_duration / DT)
@@ -661,6 +660,7 @@ func side_step(p: Vector2i, goal: Vector2i, roll: float) -> Vector2i:
 
 func enemy_step(e: Dictionary):
 	if e.done: return
+	if e.hp<=0 or e.get("dead",false):Content.corpse_step(self,e);return
 	if e.pos.x<0 or e.pos.y<0 or e.pos.x>=W or e.pos.y>=H:
 		e.state="森から接近"
 		e.move_credit+=e.move_speed*Content.speed(self,e)*DT
@@ -934,7 +934,7 @@ func step():
 
 func finish(won: bool):
 	if result != "": return
-	if won and enemies.any(func(e):return not e.done and (e.get("downed",false) or not e.get("stolen",{}).is_empty())):return
+	if won and enemies.any(func(e):return not e.done and (e.get("dead",false) or not e.get("stolen",{}).is_empty())):return
 	if won and (Story.crisis(self) or enemies.any(func(e):return not e.done and not e.flee and e.get("led_animal",-1)>=0)): return
 	if not won and story.get("defeat_reason","")=="": story.defeat_reason="keeper_abducted"
 	result = "win" if won else "loss"
@@ -1033,7 +1033,7 @@ func observation() -> Dictionary:
 func try_bark(a: Dictionary):
 	if a.mode == "rest" or not AnimalData.has_skill(a, "bark"): return
 	if tick < a.next_bark: return
-	var nearby = enemies.filter(func(e): return not e.done and not e.flee and distance(a.pos, e.pos) <= a.detection_range)
+	var nearby = enemies.filter(func(e): return not e.done and not e.flee and e.hp>0 and distance(a.pos, e.pos) <= a.detection_range)
 	if nearby.is_empty(): return
 	a.next_bark = tick + ceili(AnimalData.SKILLS.bark.cooldown / DT)
 	a.last_bark = tick
@@ -1277,7 +1277,7 @@ func blocks_sight(p: Vector2i) -> bool:
 func animal_targets(a: Dictionary) -> Array:
 	if SPECIES[a.species].combat_response==ProgressData.CombatResponse.NONE: return []
 	for e in enemies:
-		if SPECIES[a.species].combat_response==ProgressData.CombatResponse.AUTO and not e.done and not e.flee and distance(a.pos, e.pos) <= a.detection_range and line_of_sight(a.pos,e.pos):
+		if SPECIES[a.species].combat_response==ProgressData.CombatResponse.AUTO and not e.done and not e.flee and e.hp>0 and distance(a.pos, e.pos) <= a.detection_range and line_of_sight(a.pos,e.pos):
 			a.known_enemies[e.id] = tick + 8
 	return enemies.filter(func(e): return not e.done and not e.flee and e.hp>0 and a.known_enemies.get(e.id, -1) >= tick and distance(a.pos, e.pos) <= a.attack_target_range)
 
@@ -1287,7 +1287,7 @@ func share_detection(a: Dictionary, enemy_id: int, seconds: float = 2.0):
 func try_meow(a: Dictionary):
 	if not AnimalData.has_skill(a, "meow") or tick < a.skill_ready.get("meow", 0): return
 	var skill = AnimalData.SKILLS.meow
-	var nearby = enemies.filter(func(e): return not e.done and not e.flee and distance(a.pos, e.pos) <= skill.range)
+	var nearby = enemies.filter(func(e): return not e.done and not e.flee and e.hp>0 and distance(a.pos, e.pos) <= skill.range)
 	if nearby.is_empty(): return
 	a.skill_ready.meow = tick + ceili(skill.cooldown / DT)
 	for e in nearby:
