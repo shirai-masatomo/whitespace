@@ -9,6 +9,7 @@ var story: Dictionary = {}
 var trees: Dictionary = {}
 const logistics_entry = Vector2i(1,5)
 const RaiderAI = preload("res://game/raider_ai.gd")
+const Arrival = preload("res://game/enemy_arrival.gd")
 const Decisions = preload("res://game/decision_ai.gd")
 const StageData = preload("res://game/stages.gd")
 const W = 25
@@ -663,6 +664,7 @@ func side_step(p: Vector2i, goal: Vector2i, roll: float) -> Vector2i:
 func enemy_step(e: Dictionary):
 	if e.done: return
 	if e.hp<=0 or e.get("dead",false):Content.corpse_step(self,e);return
+	if Arrival.step(self,e):return
 	if e.pos.x<0 or e.pos.y<0 or e.pos.x>=W or e.pos.y>=H:
 		e.state="森から接近"
 		e.move_credit+=e.move_speed*Content.speed(self,e)*DT

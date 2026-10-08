@@ -1,5 +1,15 @@
 # 再開記録
 
+## 最新の引き継ぎ：F2
+
+2026-10-08。入口分散/メイド初回入場/像接触先、自動休息8秒、BGMフェードを実装・関連検証済み。[CONTINUITY_REVIEW](review/quality-roadmap/CONTINUITY_REVIEW.md)、[ENEMY_AI_REVIEW](review/quality-roadmap/ENEMY_AI_REVIEW.md)、CHECK末尾を読む。以下のF1記録は履歴として保持する。
+
+作業場所とbranchは下記と同じ。現在のHEADは `git log -1` で取得。新たな素材を作成・移動していない。確認済みユーザー画像1枚だけは明示指示に従いWindowsごみ箱へ移動済み。Library403の再試行/迂回は禁止されたため行っていない。
+
+最終待機セッション29956は回収済み。入口22検査とstory52検査に失敗・SCRIPT ERRORなし。二重実行しない。今回採用した関連499検査、旧f96467a本体の18夜連続191検査は区別する。通常版の保存・画面・プロセスを検査対象にしない。
+
+次の具体作業は、ローカルコミット後に `tools/export_isolated.ps1` で新しい時刻フォルダへ出力し、通常起動を別の専用APPDATAで確認すること。既存 `20261008-200838-402` は14ファイルのハッシュ一致確認済み。出力後に最新パス/コミット/ハッシュをCHECKとこの先頭へ追記する。以降は同じ停止配置の人間試遊と1夜の圧力変化を評価し、9条件全再実行や難度緩和を先にしない。
+
 更新：2026-10-08。旧3bc0644は固定し、修正版f96467aを別出力済み。F1の評価を一区切りにした。[BALANCE_AUDIT](review/quality-roadmap/BALANCE_AUDIT.md)、[DAY5_REVIEW](review/quality-roadmap/DAY5_REVIEW.md)、[CHECK](review/quality-roadmap/CHECK.md)を読む。
 
 ## 保護境界

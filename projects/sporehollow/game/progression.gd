@@ -266,6 +266,7 @@ static func contact_goal(w,e,target: Dictionary) -> Vector2i:
 			if w.inside(p) and not w.Story.terrain_block(w,p) and p not in options:options.append(p)
 	var best=[]
 	for p in options:
+		if w.actor_occupied(p,e.pos):continue # The goal cell itself is exempted by find_path's occupancy filter.
 		var route=w.find_path(e.pos,p,true,true,e.species=="doberman")
 		if not route.is_empty() and (best.is_empty() or route.size()<best.size()):best=route
 	return best[-1] if not best.is_empty() else e.pos

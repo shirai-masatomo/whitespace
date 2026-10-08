@@ -21,7 +21,7 @@ function Run-Owned([string]$Name, [string]$Executable, [string[]]$Arguments) {
     $info.UseShellExecute=$false; $info.CreateNoWindow=$true
     $info.RedirectStandardOutput=$true; $info.RedirectStandardError=$true
     $info.Environment['APPDATA']=$dataRoot; $info.Environment['LOCALAPPDATA']=$dataRoot
-    foreach ($arg in @('--headless','--log-file',$log)+$Arguments) { $info.ArgumentList.Add($arg) }
+    foreach ($arg in @('--headless','--audio-driver','Dummy','--log-file',$log)+$Arguments) { $info.ArgumentList.Add($arg) }
     $owned=[System.Diagnostics.Process]::new(); $owned.StartInfo=$info
     if (-not $owned.Start()) { throw "Cannot start $Name" }
     $owned.PriorityClass='BelowNormal'

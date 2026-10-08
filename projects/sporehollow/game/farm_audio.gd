@@ -3,11 +3,18 @@ extends Node
 const DAY_MUSIC=preload("res://assets/audio/Porch_Swing_Serenade.mp3")
 const DAY_VOLUME_DB=-16.0
 const MENU_VOLUME_DB=-23.0
+const MUSIC_FADE_IN_SECONDS=1.0
+const MUSIC_FADE_OUT_SECONDS=0.8
+const MUSIC_SOFT_FADE_SECONDS=0.35
 var music: AudioStreamPlayer
 var music_enabled=false
 var music_soft=false
 var music_level=0.0
 var music_resume=0.0
+var music_target=0.0
+var music_fade_from=0.0
+var music_fade_elapsed=0.0
+var music_fade_duration=MUSIC_FADE_IN_SECONDS
 var voices: Array = []
 var ambient: AudioStreamPlayer
 var cache: Dictionary = {}
@@ -48,7 +55,12 @@ func _ready():
 func _process(delta):
 	seconds += delta
 	var target=db_to_linear(MENU_VOLUME_DB if music_soft else DAY_VOLUME_DB) if music_enabled else 0.0
-	music_level=move_toward(music_level,target,delta*db_to_linear(DAY_VOLUME_DB)/0.8)
+	if not is_equal_approx(target,music_target):
+		music_fade_from=music_level;music_fade_elapsed=0.0
+		music_fade_duration=MUSIC_FADE_OUT_SECONDS if target==0 else (MUSIC_FADE_IN_SECONDS if music_target<=0 else MUSIC_SOFT_FADE_SECONDS)
+		music_target=target
+	music_fade_elapsed=minf(music_fade_duration,music_fade_elapsed+maxf(0,delta))
+	music_level=lerpf(music_fade_from,music_target,smoothstep(0.0,1.0,music_fade_elapsed/music_fade_duration))
 	if music.playing:
 		music.volume_db=linear_to_db(maxf(0.0001,music_level*seam_gain(music.get_playback_position(),music.stream.get_length())))
 		if not music_enabled and music_level<=0.0001:
@@ -66,6 +78,7 @@ func set_context(phase: String,soft: bool=false):
 	music_enabled=phase in ["shop","day","dawn"]
 	music_soft=soft
 	if music_enabled and not music.playing:
+		music_level=0.0;music_target=-1.0;music_fade_from=0.0;music_fade_elapsed=0.0
 		music.volume_db=-80;music.play(music_resume)
 
 func set_night(value: bool):

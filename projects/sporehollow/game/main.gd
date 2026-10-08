@@ -912,6 +912,8 @@ func job_title(j: Dictionary) -> String:
 	return {"move":"移動予定","collect":"回収予定","repair":"修理予定","remove":"解体予定","remove_floor":"床を解体","repair_floor":"床を修理","equip":"装備予定","animal_order":"仲間への指示","gate":"ドア開閉"}.get(j.kind,StoryView.LABELS.get(j.kind,"予定"))
 
 func _input(event):
+	if (event is InputEventKey and event.pressed) or (event is InputEventMouseButton and event.pressed) or (event is InputEventMouseMotion and event.relative.length_squared()>0):
+		world.Life.user_activity(world)
 	if event is InputEventKey and not event.pressed and event.physical_keycode==KEY_SHIFT:shift_latched=false
 	if story_modal!="":
 		cancel_wall_stroke()
@@ -1279,6 +1281,8 @@ func _process(delta):
 	if direction!=Vector2.ZERO:cancel_wall_stroke()
 	if not field_book and story_modal=="" and not menu_open and not cinematic() and world.phase != "shop": camera.position += direction.normalized() * delta * 420
 	clamp_camera()
+	if menu_open or field_book or story_modal!="" or queue_drag_id>=0 or dragging or ui_pointer_capture or wall_stroke.kind!="" or direction!=Vector2.ZERO:
+		world.Life.user_activity(world)
 	if not field_book and story_modal=="" and not world.paused and not automated and world.working():
 		accumulated += minf(delta, 0.1) * (24.0 if not world.rest_skip.is_empty() else speed)
 		while accumulated >= Farm.DT:

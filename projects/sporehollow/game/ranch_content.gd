@@ -110,6 +110,19 @@ static func recruit_maid(w,e) -> bool:
 
 static func maid_step(w,a,enemy: bool) -> bool:
 	if enemy and recruit_maid(w,a):return true
+	# Finish arrival and vacate the entry before starting a support/rest cycle.
+	# Otherwise outside recipients are unreachable, and repeated rests seal the queue.
+	if enemy and not a.get("arrival_cleared",false):
+		if not w.inside(a.pos) or a.pos==a.entry:
+			var goals=w.neighbors(a.entry).filter(func(p):return w.walkable(p) and not w.actor_occupied(p,a.pos))
+			var best=[]
+			for goal in goals:
+				var route=w.find_path(a.pos,goal,false,true)
+				if not route.is_empty() and (best.is_empty() or route.size()<best.size()):best=route
+			a.state="入口を空ける";a.action_id="walk"
+			if not best.is_empty():w.Progression.walk(w,a,best[-1])
+			return true
+		a.arrival_cleared=true
 	if not enemy:w.Combat.recover(a,w.DT,a.mode=="rest")
 	if not enemy and a.mode=="rest":w.rest_step(a,true);a.action_id="idle";return true
 	var enemies=w.Progression.target_candidates(w,a).filter(func(t):return t.kind in ["keeper","animal"]) if enemy else w.animal_targets(a).filter(func(e):return e.hp>0)

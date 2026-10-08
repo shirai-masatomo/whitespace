@@ -6,6 +6,7 @@ const OBJECT_ATTACK = 1 # Shared capability; no new building-attack command is i
 const CAPTURE_GRACE = 12.0
 const HIDDEN_HEAL_SECONDS = 6.0
 const HIDDEN_RECOVER_HP = 8
+const AUTO_REST_IDLE_SECONDS = 8.0 # Provisional: give the player three more seconds to plan.
 
 static func targetable(w, capture: bool=false) -> bool:
 	return w.keeper.placed and (w.keeper.state=="free" and w.keeper.hp>0 or capture and w.keeper.state in ["unconscious","restrained"])
@@ -134,9 +135,14 @@ static func idle_step(w, near: bool):
 	var k=w.keeper
 	var idle=able(w) and k.sleepiness<100 and not near and w.tick>=k.hurt_until and w.manual_goal==null and w.jobs.is_empty() and not w.jobs_held
 	k.idle_elapsed=k.get("idle_elapsed",0.0)+w.DT if idle else 0.0
-	if k.idle_elapsed>=5.0 and (k.sleepiness>0 or k.hp<k.max_hp):
+	if k.idle_elapsed>=AUTO_REST_IDLE_SECONDS and (k.sleepiness>0 or k.hp<k.max_hp):
 		set_rest(w,true,"auto")
 		w.Jobs.hold(w,"auto_rest")
+
+static func user_activity(w):
+	# UI activity postpones only automatic idle rest; it cannot escape manual/forced rest or recovery.
+	w.keeper.idle_elapsed=0.0
+	wake_auto(w)
 
 static func set_rest(w, value: bool, origin: String="manual"):
 	var k = w.keeper

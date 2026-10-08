@@ -348,10 +348,10 @@ static func idol_enemy(w,e) -> bool:
 			idol.position=[next.x,next.y]; e.pos=next+offset; e.path.append(e.pos); w.refresh_indoor()
 			if cells(next).all(func(p):return not w.inside(p)): lose(w,"idol_stolen")
 			return true
-	var destinations=goals(w)
+	var destinations=goals(w).filter(func(p):return not w.actor_occupied(p,e.pos))
 	# A complete wall ring must delay a raid, not leave the night in an endless crisis.
 	# Keep keeper jobs on walkable contacts; only raiders may approach through breakable walls.
-	if destinations.is_empty(): destinations=goals(w,true)
+	if destinations.is_empty(): destinations=goals(w,true).filter(func(p):return not w.actor_occupied(p,e.pos))
 	if e.pos in destinations:
 		if e.role=="idol_breaker":
 			e.state="黄金像を壊す"
