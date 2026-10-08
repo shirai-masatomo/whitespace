@@ -1,12 +1,13 @@
 # 再開記録
 
-更新：2026-10-08。配布済み3bc0644は固定し、F1を別領域で継続。今回の評価は [BALANCE_AUDIT](review/quality-roadmap/BALANCE_AUDIT.md)、限定検証は [CHECK](review/quality-roadmap/CHECK.md)。このcloneには未配布の修正がある。
+更新：2026-10-08。旧3bc0644は固定し、修正版f96467aを別出力済み。F1の評価を一区切りにした。[BALANCE_AUDIT](review/quality-roadmap/BALANCE_AUDIT.md)、[DAY5_REVIEW](review/quality-roadmap/DAY5_REVIEW.md)、[CHECK](review/quality-roadmap/CHECK.md)を読む。
 
 ## 保護境界
 
 - 作業clone：`C:/Users/masat/Documents/Codex/2026-10-08/task/whitespace-balance-audit`
 - branch：`codex/sporehollow-balance-audit`。開始点3bc0644、その後は `git log -1` で取得する。
 - 固定配布元：`task/whitespace-quality` / 3bc0644。`projects/sporehollow/artifacts/playtest/20261008-192531-672` を上書きしない。EXE SHA256 `E8BE70D259AF7A0DAE2D6372EF8B29BF6AFCD11CF59E3C0039865F4628D52E75`。
+- 新しい修正版：このcloneの `projects/sporehollow/artifacts/playtest/20261008-200838-402/Play-Isolated.cmd`。ゲームcommit f96467a、SHA256 `52A973082FFBCE174EA682059178226E8F49D903CF65E29C50369F3BFB4BE160`。新旧のuser-dataは別。勝手にセーブを移行しない。評価用の追加コミットはテスト/ツール/文書だけで、EXEの本体はf96467a。
 - originは **固定配布元のローカルrepo**。push禁止。ゲーム変更のリモートpush/merge/公開は許可されていない。
 - 元repo：`C:/Users/masat/Documents/codex_test`。通常EXE8b06e28、review/current0d47970。使用中のゲーム、未コミット変更、セーブ、デスクトップ、音声を妨げない。
 - 元repoの新しい `projects/sporehollow/bgm/Porch_Swing_Serenade.mp3` はユーザー提供。読み取りコピーだけ行い、SHA256一致。通常保存へは接続していない。
@@ -16,11 +17,13 @@
 
 `git status --short` と `git log -4`、[TASKS](TASKS.md)を読む。未コミット変更を消さず引き継ぐ。再clone/元repoへのコピー/古い仕様の重複実装はしない。
 
-A〜Eの全体試遊版3bc0644を配布済み。F1は既存9条件の4敗北をすべて再現し、同じ敗北朝からの誘導＋修理で4件とも当夜成功。像被弾通知と全周壁の進行停止だけを限定修正した。新EXEは出力していない。
+A〜Eの全体試遊版3bc0644を配布済み。F1は既存9条件の4敗北をすべて再現し、同じ敗北朝からの誘導＋修理で4件とも当夜成功。像被弾通知と全周壁の進行停止だけを限定修正し、f96467aの新EXEを別フォルダへ提供した。
 
-次は `artifacts/balance-fixtures/failure-31-gold_once.sav` の朝から、誘導到着・20秒中断・修理再予約の短い隔離UI確認。4条件の前日までや9全条件を再実行しない。自然な勝敗・操作の技術合格・人間の面白さを別記録にする。数値や機能を一括変更しない。
+`artifacts/balance-fixtures/failure-31-gold_once.sav` の朝からの誘導到着・20秒中断・修理再予約のUI確認は26検査/隔離5画面で完了。重大な追加問題なし。ここでF1を区切る。次はユーザーの試遊で困った日・祈り・配置・対処の余地を照合し、必要な1項目だけ改善する。フィードバックなしの細かい数値調整や全9条件の再実行はしない。長時間/IME/聴感/クリーンWindows/面白さなど完成条件は引き続き未完。
 
 ## 実行・証拠
+
+新出力スモーク：`artifacts/export-verification/20261008-201313-186`。5日目UI：headless `artifacts/balance-audit/20261008-202014-228`、GPU `artifacts/isolated/20261008-202156-040`。同じ26検査を二方式で確認し、52種類とは数えない。再現は `./tools/isolated_visual.ps1 -Scenario day5_defense_ui`、既に合格済みなので必要な変更時だけ使う。
 
 今回の軽量runnerは `task/run_balance_audit.ps1 -Script tests/test_idol_response.gd`。Godot実行ファイルだけ固定cloneから借り、--pathと保存先はこのclone専用。スクリプト省略は4敗北の前日までを再計算するため避ける。最終6スイート196検査は `artifacts/balance-audit/20261008-195938-413` から `20261008-195947-707`。修正前の朝保存4件とJSON一次証拠はBALANCE_AUDIT参照。
 

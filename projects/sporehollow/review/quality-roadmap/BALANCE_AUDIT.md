@@ -1,5 +1,7 @@
 # F1：4敗北の切り分けと黄金像への応答
 
+後続の状況：限定修正版f96467aを新規フォルダへ出力し、5日目の短いUI評価まで完了した。[DAY5_REVIEW](DAY5_REVIEW.md) を参照。以下は比較監査時点の記録であり、旧3bc0644の固定は引き続き有効。
+
 2026-10-08。基準は配布済み **3bc0644**。配布パッケージとそのソースは固定し、この記録と修正は別clone `task/whitespace-balance-audit`、branch `codex/sporehollow-balance-audit` に置く。ローカルのみ、再出力・push・mergeなし。
 
 ## 判定
