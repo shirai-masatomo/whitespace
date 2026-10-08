@@ -36,13 +36,14 @@ func run():
 		check(Save.read(path).status=="recovered" and Save.read(path).record==record,"Corrupt main recovers the previous valid morning: "+str(seed_value))
 		check(Save.write(settled,path).status=="ok" and Save.read_one(path+".bak").record==record,"Repairing a corrupt main never replaces a valid backup with corruption: "+str(seed_value))
 	var w=Farm.new({},31);var first=Save.capture(w);w.campaign.gold+=10;var second=Save.capture(w)
-	for stage in ["temporary","rotation"]:
+	for stage in ["open","temporary","rotation"]:
 		var path=base+stage+".sav";Save.write(first,path)
 		check(Save.write(second,path,stage).status=="interrupted","Interrupt after "+stage)
 		check(Save.read(path).record==first,"Interrupted "+stage+" retains the last committed morning")
 		check(Save.write(second,path).status=="ok" and Save.read(path).record==second,"A subsequent save recovers after "+stage)
 	var path=base+"initial.sav";Save.write(first,path,"temporary")
 	check(Save.read(path).status=="recovered" and Save.read(path).record==first,"First-ever interrupted save can recover its verified temporary file")
+	check(Save.write(second,path,"open").status=="interrupted" and Save.read(path).record==first and Save.read_one(path+".bak").record==first,"A recovered temporary-only morning survives failure at the next write's truncation")
 	path=base+"failed.sav";Save.write(first,path)
 	DirAccess.make_dir_absolute(ProjectSettings.globalize_path(path+".tmp"))
 	check(Save.write(second,path).status=="io_error" and Save.read(path).record==first,"Failed temporary write leaves the existing morning intact")

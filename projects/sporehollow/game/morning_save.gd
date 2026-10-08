@@ -70,6 +70,9 @@ static func campaign_valid(c) -> bool:
 		for key in ["prayers","events","news","miracles","trees"]:
 			for row in story.get(key,[]):
 				if not row is Dictionary:return false
+		if not story.get("raid_slots",[]) is Array or story.get("raid_slots",[]).size()>2:return false
+		for slot in story.get("raid_slots",[]):
+			if not slot is Dictionary or slot.get("role") not in ["legacy","idol","animal_tamer","thief"] or not slot.get("not_before_day") is int:return false
 	var progress=c.get("route_progress",{})
 	if not progress.get("milestones",{}) is Dictionary:return false
 	return true
@@ -118,15 +121,25 @@ static func read(path: String=PATH) -> Dictionary:
 static func write(record: Dictionary,path: String=PATH,interrupt_after: String="") -> Dictionary:
 	# interrupt_after is a deterministic crash fixture; normal calls always leave it empty.
 	if not valid(record):return {"status":"invalid"}
-	for suffix in ["",".bak"]:
+	for suffix in ["",".bak",".tmp"]:
 		var existing=read_one(path+suffix)
 		if existing.status in ["unsupported_version","io_error"]:return {"status":existing.status}
 	var absolute=ProjectSettings.globalize_path(path)
 	if DirAccess.make_dir_recursive_absolute(absolute.get_base_dir())!=OK:return {"status":"io_error"}
+	# A first-ever interrupted write may leave ONLY a valid tmp. Protect it before truncating tmp again.
+	if read_one(path).status!="ok" and read_one(path+".bak").status!="ok":
+		var recovered=read_one(path+".tmp")
+		if recovered.status=="ok":
+			if DirAccess.dir_exists_absolute(absolute+".bak"):return {"status":"io_error"}
+			if FileAccess.file_exists(path+".bak"):
+				var old=absolute+".bak.unreadable-"+str(Time.get_unix_time_from_system())+"-"+str(Time.get_ticks_usec())
+				if DirAccess.rename_absolute(absolute+".bak",old)!=OK:return {"status":"io_error"}
+			if DirAccess.copy_absolute(absolute+".tmp",absolute+".bak")!=OK or read_one(path+".bak").get("record",{})!=recovered.record:return {"status":"io_error"}
 	var bytes=var_to_bytes(record)
 	if bytes.size()>LIMIT-44:return {"status":"invalid"}
 	var file=FileAccess.open(path+".tmp",FileAccess.WRITE)
 	if file==null:return {"status":"io_error"}
+	if interrupt_after=="open":file.close();return {"status":"interrupted"}
 	file.store_buffer(MAGIC.to_ascii_buffer());file.store_32(VERSION);file.store_32(bytes.size());file.store_buffer(digest(bytes));file.store_buffer(bytes);file.flush()
 	var error=file.get_error();file.close()
 	if error!=OK or read_one(path+".tmp").get("record",{})!=record:return {"status":"io_error"}

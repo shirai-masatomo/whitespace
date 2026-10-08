@@ -606,6 +606,12 @@ func save_morning(morning) -> bool:
 	var saved=MorningSave.write(MorningSave.capture(morning),save_path)
 	var ok=saved.status=="ok"
 	save_status="朝の支度を保存しました。再起動すると、この朝から再開します" if ok else "朝を保存できませんでした。空き容量などを確認し、支度を終える前に再試行してください"
+	if is_instance_valid(palette):
+		var label=palette.get_node_or_null("MorningSaveStatus")
+		if label!=null:label.text=save_status
+	if is_instance_valid(menu):
+		var label=menu.get_node_or_null("MenuSaveStatus")
+		if label!=null:label.text=save_status
 	return ok
 
 func cancel_selected_work():
@@ -1852,9 +1858,13 @@ func setup_menu():
 	menu.add_child(stamp)
 	var guide = Label.new()
 	guide.text = "ホイール：ズーム　Tab：建設 / 指示 / 牧場主\nShift：操作選択　未選択でドラッグ：マップ移動　操作ボタンをドラッグ：並べ替え\n左クリック：選択・行動　右クリック：予定取消 / 他は解除 / 市場で戻る\n1：0.5倍　2：1倍　3：2倍　4：4倍（休息中）\nSpace：停止 / 再開　−：遅く　＋ / ＝ / テンキー＋：速く\n通常 0.5 / 1 / 2倍　休息中 4倍　危険時 1倍\n夜まで / 朝まで休む：別の時間送り（中断して倍率を変更）"
-	guide.position=Vector2(288,580)
-	guide.add_theme_font_size_override("font_size",16)
+	guide.position=Vector2(288,566)
+	guide.add_theme_font_size_override("font_size",14)
 	menu.add_child(guide)
+	var save_label=Label.new();save_label.name="MenuSaveStatus"
+	save_label.position=Vector2(288,728);save_label.size=Vector2(720,54);save_label.text=save_status
+	save_label.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART;save_label.add_theme_font_size_override("font_size",16)
+	menu.add_child(save_label)
 	menu.visible = false
 
 func toggle_menu():

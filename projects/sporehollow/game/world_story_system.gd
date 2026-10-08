@@ -70,12 +70,35 @@ static func schedule(w):
 	for event in w.spawn_schedule:
 		event.entry=w.entries[r.randi_range(0,w.entries.size()-1)]
 	# Delayed reaction events change real raid composition, capped independently of day scaling.
-	var count=mini(2,w.story.get("hidden",{}).get("security",0))
-	for i in range(count):
-		var role="kidnapper"
-		if w.story.hidden.recognition>=1: role="idol_breaker" if i==0 else "idol_extractor"
-		w.spawn_schedule.append({"tick":ceili((60.0+i*24)/w.DT),"wave":100+i,"role":role,"entry":w.entries[r.randi_range(0,w.entries.size()-1)],"lv":1})
+	for row in reaction_raids(w):
+		w.spawn_schedule.append({"tick":ceili((60.0+row.slot*24)/w.DT),"wave":100+row.slot,"role":row.role,"entry":w.entries[r.randi_range(0,w.entries.size()-1)],"lv":1})
 	w.spawn_schedule.sort_custom(func(a,b):return a.tick<b.tick)
+
+static func legacy_slots(w) -> Array:
+	var slots=[]
+	for i in range(mini(2,w.story.hidden.security)):slots.append({"role":"legacy","not_before_day":1})
+	return slots
+
+static func reaction_raids(w) -> Array:
+	var slots=w.story.get("raid_slots",legacy_slots(w));var result=[]
+	for i in range(mini(2,slots.size())):
+		var slot=slots[i]
+		# Waiting category slots occupy their allocation; never fill them with a legacy raid.
+		if w.campaign.day<slot.not_before_day:continue
+		var role=slot.role
+		if role in ["legacy","idol"]:
+			role=("idol_breaker" if i==0 else "idol_extractor") if w.story.hidden.recognition>=1 else "kidnapper"
+		result.append({"slot":i,"role":role})
+	return result
+
+static func apply_raid_reaction(w,event: Dictionary):
+	# Old applied/pending category records keep their original effect. Only new contracts carry this version.
+	if event.get("reaction_version",0)==1 or w.story.has("raid_slots"):
+		var slots=w.story.get("raid_slots",legacy_slots(w)).duplicate(true)
+		slots.append({"event_id":event.id,"role":event.get("reaction_role","legacy"),"not_before_day":event.get("raid_not_before_day",event.day)})
+		while slots.size()>2:slots.pop_front() # The two most recently applied reactions; no unbounded accumulation.
+		w.story.raid_slots=slots
+	w.story.hidden.security=mini(2,w.story.hidden.security+1)
 
 static func goals(w) -> Array:
 	var result=[]
@@ -159,6 +182,9 @@ static func pray(w,category: String="wealth"):
 	w.story.prayers.append(prayer)
 	for spec in [[1,"gold_find" if category in ["wealth","gold"] else "trade_find"],[2,"trade_rumor"],[3,"robbery"]]:
 		w.story.events.append({"id":id+"-"+spec[1],"prayer_id":id,"category":category,"day":w.campaign.day+spec[0],"kind":spec[1],"applied":false,"news_id":id+"-news-"+spec[1],"published":false})
+		if spec[1]=="robbery" and category!="wealth":
+			var role={"animal":"animal_tamer","item":"thief"}.get(category,"idol")
+			w.story.events[-1].merge({"reaction_version":1,"reaction_role":role,"raid_not_before_day":maxi(w.campaign.day+3,w.Progression.Encounters.FIRST_DAY.get(role,1))})
 	say(w,"願いを託した。像は静かに光っている。")
 
 static func settle_prayer(w,prayer: Dictionary,day: int):
@@ -213,13 +239,17 @@ static func morning(w,day: int):
 			"trade_find":
 				w.story.hidden.economy+=1
 				title="街道に増える取引"; body="珍しい動物や品を求め、街道を行き交う商人が増えています。"
+				if event.get("category")=="animal":title="動物の取引に集まる人々";body="珍しい動物の噂を聞きつけ、街道を訪れる商人が増えています。"
+				elif event.get("category")=="item":title="珍しい道具の商い";body="遠くの市で道具や品物の取引が増え、街道がにぎわい始めました。"
 			"trade_rumor":
 				w.story.hidden.recognition+=1
 				title="街道に流れる噂"; body="珍しい宝を探す旅人が街道を行き交っています。商人たちも戸締まりを気にしています。"
 			"robbery":
-				w.story.hidden.security=mini(2,w.story.hidden.security+1)
+				apply_raid_reaction(w,event)
 				title="採掘地で強盗が増加" if event.get("category","wealth") in ["wealth","gold"] else "街道で盗難が増加"
 				body="物資と宝を狙う一団が、町の外へも足を延ばしているとのことです。"
+				if event.get("reaction_version",0)==1 and event.get("category")=="animal":title="動物を連れ去る者の噂";body="動物を手懐けて連れ去る者が街道に現れたそうです。牧場でも目を離さないように。"
+				elif event.get("reaction_version",0)==1 and event.get("category")=="item":title="落とし物を狙う盗難";body="街道に置かれた品を盗む者の噂が広がっています。牧場の落とし物にもご注意ください。"
 		if not event.published:
 			w.story.news.append({"id":event.news_id,"day":day,"title":title,"text":body}); event.published=true
 	persist(w)

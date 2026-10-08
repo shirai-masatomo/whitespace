@@ -24,6 +24,7 @@ function Run-Owned([string]$Name, [string]$Executable, [string[]]$Arguments) {
     foreach ($arg in @('--headless','--log-file',$log)+$Arguments) { $info.ArgumentList.Add($arg) }
     $owned=[System.Diagnostics.Process]::new(); $owned.StartInfo=$info
     if (-not $owned.Start()) { throw "Cannot start $Name" }
+    $owned.PriorityClass='BelowNormal'
     $record=@{purpose=$Name; pid=$owned.Id; executable=$Executable; arguments=@($info.ArgumentList); data_root=$dataRoot; start_utc=[DateTime]::UtcNow.ToString('o')}
     $record | ConvertTo-Json -Compress | Add-Content -LiteralPath "$runRoot/launches.jsonl"
     $stdout=$owned.StandardOutput.ReadToEndAsync(); $stderr=$owned.StandardError.ReadToEndAsync()

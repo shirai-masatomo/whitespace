@@ -2,8 +2,9 @@ extends RefCounted
 ## Shared, versioned Lv1 tuning. No scene or simulation mutation.
 const EnemySkills=preload("res://game/enemy_skills.gd")
 const Levels=preload("res://game/level_stats.gd")
-const ENEMY_LEVEL_OVERRIDES={} # No unapproved Lv2 combat tuning.
-const ENEMY_GROWTH={}
+const ENEMY_LEVEL_OVERRIDES={}
+# Provisional first-cycle tiers: HP only, approximately +10%; no new attacks or speed.
+const ENEMY_GROWTH={"kidnapper":{"max_hp":5},"salaryman":{"max_hp":3},"destroyer":{"max_hp":8},"martial_artist":{"max_hp":6},"ninja":{"max_hp":4},"animal_tamer":{"max_hp":4},"runner":{"max_hp":4},"dancer":{"max_hp":4},"thief":{"max_hp":3},"maid":{"max_hp":4}}
 enum Rarity { COMMON, UNCOMMON, RARE, EPIC, LEGENDARY }
 enum CombatResponse { AUTO, REACTIVE, NONE }
 const FAST_SPEED = 3.0

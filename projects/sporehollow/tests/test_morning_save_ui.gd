@@ -23,11 +23,16 @@ func run():
 	var before=game.world;game.restart_confirm=true
 	DirAccess.make_dir_absolute(ProjectSettings.globalize_path(game.save_path+".tmp"))
 	game.new_campaign()
-	check(game.world==before and game.restart_confirm and "保存できません" in game.save_status,"New-campaign write failure preserves the existing farm and confirmation")
+	check(game.world==before and game.restart_confirm and "保存できません" in game.save_status and game.palette.get_node("MorningSaveStatus").text==game.save_status,"New-campaign write failure visibly preserves the existing farm and confirmation")
 	game.arrival_started=-10;game.advance()
 	check(game.world==before and game.world.phase=="shop","A failed final morning save keeps the player in preparation")
 	DirAccess.remove_absolute(ProjectSettings.globalize_path(game.save_path+".tmp"));game.new_campaign()
 	check(game.world.campaign.day==1 and Save.read(game.save_path).record.campaign.day==1,"A confirmed new campaign replaces the slot only after successful persistence")
+	game.arrival_started=-10;game.advance();game.toggle_menu();var daytime=game.world
+	DirAccess.make_dir_absolute(ProjectSettings.globalize_path(game.save_path+".tmp"));game.restart_morning()
+	check(game.world==daytime and game.menu_open and "保存できません" in game.menu.get_node("MenuSaveStatus").text,"A failed morning restart is visible in the daytime menu and preserves play state")
+	game._process(0);await capture("02_daytime_save_failure")
+	DirAccess.remove_absolute(ProjectSettings.globalize_path(game.save_path+".tmp"));game.toggle_menu()
 	var startup_path="user://ui-save/startup.sav";Save.write(dawn,startup_path)
 	var reloaded=load("res://game/main.tscn").instantiate();reloaded.save_path=startup_path;root.add_child(reloaded);reloaded.set_process(false);await process_frame
 	check(reloaded.persistence_enabled and reloaded.world.campaign.day==2 and reloaded.world.seed_value==32 and reloaded.world.shop_stock==dawn.stock,"Actual normal startup resumes the recorded morning and stock")

@@ -1,4 +1,4 @@
-param([ValidateSet('check', 'test', 'evaluate', 'build', 'visual', 'play', 'editor')][string]$Task = 'check', [string[]]$Suites = @('revisions','residents','world','jobs','keeper','planning','rest_until','input','controls','building_art','delivered_art','progression_art','idol_debug','ranch_content','ranch_content_ui','quality','quality_ui','target_policy','navigation','forest','forest_ui','market_ui','story','story_ui','prayer','prayer_ui','progression','progression_flow','campaign_route','campaign_route_ui','morning_save','morning_save_ui','progression_ui','combat_revision','ui_revision'), [ValidateRange(1,32)][int]$AISeeds=32)
+param([ValidateSet('check', 'test', 'evaluate', 'build', 'visual', 'play', 'editor')][string]$Task = 'check', [string[]]$Suites = @('revisions','residents','world','jobs','keeper','planning','rest_until','input','controls','building_art','delivered_art','progression_art','idol_debug','ranch_content','ranch_content_ui','quality','quality_ui','corpses','target_policy','navigation','forest','forest_ui','market_ui','story','story_ui','prayer','prayer_ui','progression','progression_flow','campaign_route','campaign_tiers','campaign_route_ui','morning_save','morning_save_ui','progression_ui','combat_revision','ui_revision'), [ValidateRange(1,32)][int]$AISeeds=32)
 $ErrorActionPreference = 'Stop'
 $farmRoot = $PSScriptRoot
 $godot = Join-Path $farmRoot '.tools/Godot_v4.7.2-stable_win64_console.exe'
@@ -37,6 +37,7 @@ function Run-Headless([string]$Name, [string[]]$Arguments, [string]$Executable=$
     $owned = [System.Diagnostics.Process]::new()
     $owned.StartInfo = $info
     if (-not $owned.Start()) { throw "Cannot start $Name" }
+    $owned.PriorityClass='BelowNormal' # Verification yields CPU priority to the user's active game.
     $record.pid=$owned.Id
     $record | ConvertTo-Json -Compress | Add-Content -LiteralPath "$runRoot/launches.jsonl"
     $stdout=$owned.StandardOutput.ReadToEndAsync()

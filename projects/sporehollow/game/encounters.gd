@@ -76,5 +76,6 @@ static func plan(day: int, seed_value: int, karma: int, stage: int=1, flags: Arr
 	if rule.mode in ["Table","Hybrid"] and not candidates.is_empty():
 		for i in range(rule.get("count",1)): chosen.append(candidates[Data.weighted(rng,candidates.map(func(c):return c.spawn_weight))].archetype)
 	var waves=[]
-	for i in range(chosen.size()): waves.append({"start_seconds":i*18.0,"interval_seconds":1.0,"jitter_seconds":0.0,"count":1,"role":chosen[i],"entries":[[1,5]],"lv":1})
+	# First-cycle provisional growth: introductions remain Lv1; only the first known role advances.
+	for i in range(chosen.size()): waves.append({"start_seconds":i*18.0,"interval_seconds":1.0,"jitter_seconds":0.0,"count":1,"role":chosen[i],"entries":[[1,5]],"lv":2 if day>route_definition().last_intro and i==0 else 1})
 	return {"encounter_mode":rule.mode,"chosen":chosen,"first_attack_seconds":10.0,"repeat_waves":false,"repeat_interval_seconds":60.0,"time_limit_seconds":180.0,"waves":waves}

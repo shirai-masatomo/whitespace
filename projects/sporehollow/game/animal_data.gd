@@ -55,7 +55,7 @@ static func character_text(species: String,short: bool=false) -> String:
 	return CHARACTER_TEXT.get(species,["",""])[0 if short else 1]
 
 const LEVEL_OVERRIDES={}
-const GROWTH={"shiba":{"hp":4,"attack":2},"hen":{"hp":4},"cat":{"hp":4},"doberman":{"hp":4},"bullfrog":{"hp":4},"hedgehog":{"hp":4}}
+const GROWTH={"shiba":{"hp":4,"attack":2},"hen":{"hp":4},"cat":{"hp":4},"doberman":{"hp":4},"bullfrog":{"hp":4},"hedgehog":{"hp":4},"cow":{"hp":4},"bull":{"hp":4},"maid":{"hp":4}}
 static func stats(species: String,level: int=1) -> Dictionary:
 	return Data.Levels.resolve(SPECIES[species],level,GROWTH.get(species,{}),LEVEL_OVERRIDES.get(species,{}))
 
