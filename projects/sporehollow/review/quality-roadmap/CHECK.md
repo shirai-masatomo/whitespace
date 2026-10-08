@@ -150,3 +150,11 @@ D最終UI：artifacts/isolated/20261008-174341-191、13検査/1画面、失敗0�
 別枠：**変更前f96467a本体**の `continuity_review` は `20261008-222059-036`、191検査・失敗0。実保存済み13朝→30夜の18夜、19,440tick＝81ゲーム内分、実処理44.65秒。新しい経路方式での30夜通過や実時間の放置評価として流用しない。
 
 固定f96467aパッケージ直下14ファイルは `task/frozen-f96467a-before-continuity.json` とSHA256一致。通常保存へ接続せず、試験は1プロセスずつ。変更はローカルコミット後に新フォルダへ分離出力し、出力記録を追記する。リモートpush/merge/公開はしない。
+
+### F2の分離試遊版
+
+`artifacts/playtest/20261008-234821-898/Play-Isolated.cmd`。ゲーム本体 **50f66c967a91fdfd26b1d0269c316ac452972841**、dirty=false、EXE SHA256 **058E1959B1FBDDFB4B84A94A3AD1885B6EC0F25A7B6361C5BC9C66A622BD09C7**。エディタimport→Windows出力→実EXEの--smoke成功。全499検査を出力のためだけに再実行していない。
+
+追加検証 `artifacts/export-verification/20261008-235034-897` では実EXEの通常起動を2回行い、専用WRM1朝保存作成と、検証済み5日目朝の読込・保存保持を確認した。45秒上限、headless/Dummy、BelowNormal、使用するAPPDATA/LOCALAPPDATAはこの検証用フォルダだけ。2回とも正常終了、SCRIPT ERRORなし。試遊用user-dataにテストセーブを混ぜず、旧セーブを移行しない。
+
+旧f96467a14ファイルと旧3bc0644の12ファイルはSHA256一致。輸出後にGodotが生んだimportの差は内容ゼロと確認して戻し、分離コピーのreview用import3件だけ除去。新しいGDのUIDと出力記録を後続コミットへ保存する。本体コードを変更しての再出力はしていない。対話デスクトップでの起動・聴感・人間試遊は未実施。
