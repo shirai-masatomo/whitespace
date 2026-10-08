@@ -14,7 +14,7 @@ func run():
 	for e in w.enemies.slice(1):w.Progression.enemy_hurt(w,e,999)
 	game._process(0);await process_frame;await RenderingServer.frame_post_draw
 	check(w.enemies[1].dead and not w.enemies[1].done,"Dead thief renders before revival")
-	w.tick+=4;w.enemies[0].hp=17;w.enemies[0].ultimate_gauge=100;w.Progression.Content.enemy_step(w,w.enemies[0])
+	w.tick+=4;w.enemies[0].hp=17;w.enemies[0].ultimate_gauge=100;w.Content.enemy_step(w,w.enemies[0])
 	game._process(0);game.visual_time+=0.25;game._process(0)
 	check(w.enemies[1].hp==17 and not w.enemies[1].dead,"Thief revived through actual skill")
 	check(w.enemies[2].dead and w.enemies[3].dead,"Dancer corpse and temporary kidnapper corpse remain")
@@ -25,3 +25,4 @@ func run():
 	record.method="Isolated GPU; controlled positions, normal lethal damage and revival skill; one representative screenshot after rendering both states."
 	FileAccess.open(output+"/observations.json",FileAccess.WRITE).store_string(JSON.stringify(record,"  "))
 	print("CORPSES_UI: %d checks, failures=%d"%[checks,failures]);quit(1 if failures else 0)
+
