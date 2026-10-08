@@ -11,6 +11,11 @@ var story_page=0
 var story_panel: Control
 var selected_trees: Array=[]
 const Farm = preload("res://game/world.gd")
+const MorningSave=preload("res://game/morning_save.gd")
+var persistence_enabled=false
+var save_path=MorningSave.PATH
+var save_status=""
+var save_load_blocked=false
 const FONT = preload("res://assets/fonts/ui_font.tres")
 const TILE = Vector2(48, 42)
 const GROUPS = ["建設", "指示"]
@@ -137,6 +142,17 @@ var reactions: Dictionary = {}
 var noticed: Dictionary = {}
 
 func _ready():
+	automated=automated or "--automated" in OS.get_cmdline_user_args() or "--smoke" in OS.get_cmdline_user_args()
+	persistence_enabled=not automated
+	if persistence_enabled:
+		var saved=MorningSave.read(save_path)
+		if saved.status in ["ok","recovered"]:
+			world=MorningSave.restore(saved.record)
+			save_status="保存した朝から再開しました" if saved.status=="ok" else "予備の記録から朝を復元しました"
+		elif saved.status=="missing":save_morning(world)
+		else:
+			save_load_blocked=true
+			save_status="保存を読めません。記録を保護しています。確認してから再起動してください"
 	subtasks.load_settings()
 	camera = Camera2D.new()
 	camera.position = Vector2(Farm.W, Farm.H) * TILE * 0.5
@@ -184,7 +200,7 @@ func _ready():
 	controls.visible = not cinematic() and story_modal==""
 	if "--automated" in OS.get_cmdline_user_args(): automated = true
 	if automated: get_window().unfocusable = true
-	if not automated and not world.story.intro_seen: StoryView.open(self,"intro")
+	if not automated and not save_load_blocked and not world.story.intro_seen: StoryView.open(self,"intro")
 	if "--smoke" in OS.get_cmdline_user_args(): get_tree().create_timer(2).timeout.connect(get_tree().quit)
 
 func add_button(parent: Control, id: String, text_value: String, area: Rect2, callback: Callable):
@@ -334,6 +350,8 @@ func refresh():
 		if world.phase == "dawn":
 			sky_kind = "dawn"
 			sky_started = clock
+			# Commit a real next-morning world even if the app closes during the dawn animation.
+			save_morning(Farm.new(world.next_campaign(),world.seed_value+1))
 	for child in palette.get_children():
 		palette.remove_child(child)
 		child.queue_free()
@@ -356,6 +374,7 @@ func refresh():
 		buttons.advance.text="牧場を続ける"
 		buttons.advance.visible=morning_screen=="morning" and not restart_confirm
 	buttons.advance.tooltip_text = "商人を見送り、昼の牧場仕事を始めます" if world.phase == "shop" else ""
+	buttons.advance.disabled=save_load_blocked
 	if world.phase=="shop": MarketView.button_style(buttons.advance,true)
 	else: UI.button(buttons.advance)
 	buttons.retry.visible = world.phase == "result"
@@ -541,6 +560,7 @@ func prune_selection():
 func advance():
 	if cinematic() or menu_open: return
 	if world.phase == "shop":
+		if not save_morning(world):return
 		var next_day = world.begin_day()
 		if next_day == null:
 			notice(world.story.get("migration_error","今は支度を終えられません"))
@@ -554,6 +574,7 @@ func advance():
 		for a in world.animals:
 			if a.species == "shiba" and a.placed: morning_dog = Vector2(a.pos)
 		world = Farm.new(world.next_campaign(), world.seed_value + 1)
+		save_morning(world)
 		reset_view()
 		arrival_started = clock
 	elif world.working():
@@ -571,11 +592,21 @@ func confirm_new_campaign(enabled: bool):
 
 func new_campaign():
 	if world.phase!="shop" or not restart_confirm:return
-	world=Farm.new({},world.seed_value+1)
+	var fresh=Farm.new({},world.seed_value+1)
+	if not save_morning(fresh):return
+	world=fresh
 	restart_confirm=false;morning_screen="morning";group=-1;speed=1;accumulated=0
 	shop_side="home";shop_level="categories";morning_keeper=Vector2(5.5,8);morning_dog=Vector2(6.5,8.5)
 	reset_view();arrival_started=clock;refresh()
 	if not automated:StoryView.open(self,"intro")
+
+func save_morning(morning) -> bool:
+	if not persistence_enabled:return true
+	if save_load_blocked:return false
+	var saved=MorningSave.write(MorningSave.capture(morning),save_path)
+	var ok=saved.status=="ok"
+	save_status="朝の支度を保存しました。再起動すると、この朝から再開します" if ok else "朝を保存できませんでした。空き容量などを確認し、支度を終える前に再試行してください"
+	return ok
 
 func cancel_selected_work():
 	for j in world.jobs.duplicate():
@@ -1642,7 +1673,8 @@ func draw_hud():
 		hud.draw_style_box(UI.surface(UI.PAPER), Rect2(330, 72, 620, 106))
 		label_on(hud, Vector2(365, 118), "夜明け", 30, Color("485e48"))
 		label_on(hud, Vector2(368, 153), "よく守ったね", 18, Color("526444"))
-		if world.story.miracles.any(func(m):return m.day==world.campaign.day+1): label_on(hud,Vector2(380,325),"像のそばに金貨が残されていた。+60G",21,UI.PAPER)
+		var gifts=world.story.miracles.filter(func(m):return m.day==world.campaign.day+1)
+		if not gifts.is_empty():label_on(hud,Vector2(380,325),"願いの贈り物："+gifts[-1].get("text","金貨 +60G"),21,UI.PAPER)
 		hud.draw_texture(UI.icon("spark"), Vector2(533, 119))
 		label_on(hud, Vector2(560, 138), "+%d EXP" % world.score.xp, 27, Color("456358"))
 		draw_card_icon(hud, "gold", Vector2(786, 127), 0.9)
@@ -1892,6 +1924,7 @@ func trade(id: String, animal_id: int = -1):
 	var change = world.campaign.gold - before_gold
 	shop_notice = ("%sを%sしました　%s%dG（%dG → %dG）" % [MarketView.product_name({"id":id}), "購入" if shop_side=="buy" else "売却", "−" if change<0 else "＋", absi(change),before_gold,world.campaign.gold]) if ok else "取引できませんでした。所持数と在庫を確認してください。"
 	if ok: play_alert("collect")
+	if ok: save_morning(world)
 	refresh()
 func shop_rows(category: String = "") -> Array:
 	if category=="": category=shop_category
@@ -1959,7 +1992,14 @@ func turn_book(direction: int):
 func build_shop():
 	if morning_screen != "book":
 		MarketView.build(self)
-		if morning_screen=="morning": StoryView.morning_buttons(self)
+		if morning_screen=="morning":
+			StoryView.morning_buttons(self)
+			if save_status!="":
+				var status_label=Label.new();status_label.name="MorningSaveStatus"
+				status_label.position=Vector2(330,751);status_label.size=Vector2(660,44)
+				status_label.text=save_status;status_label.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART
+				status_label.add_theme_font_size_override("font_size",16);status_label.add_theme_color_override("font_color",UI.PAPER)
+				status_label.mouse_filter=Control.MOUSE_FILTER_IGNORE;palette.add_child(status_label)
 		return
 	add_button(palette, "close_market", "閉じる" if field_book else "メニューへ", Rect2(1040, 116, 124, 44), close_morning_screen)
 	buttons.close_market.icon = UI.icon("cross")
@@ -2006,6 +2046,7 @@ func draw_shop():
 
 func train(id: int):
 	shop_notice = "ひとつ成長した！" if world.train_animal(id) else "経験を積んでからまた来よう"
+	save_morning(world)
 	refresh()
 
 func edit_name(id: int):
@@ -2015,6 +2056,7 @@ func edit_name(id: int):
 
 func save_name():
 	if is_instance_valid(name_edit): world.rename_animal(training_id, name_edit.text)
+	save_morning(world)
 	rename_open = false
 	refresh()
 
@@ -2069,7 +2111,9 @@ func book_detail(id: int):
 	refresh()
 
 func restart_morning():
-	world = Farm.new(world.morning_checkpoint, world.seed_value)
+	var morning=Farm.new(world.morning_checkpoint, world.seed_value)
+	if not save_morning(morning):return
+	world=morning
 	reset_view()
 	arrival_started = clock
 	training_id = -1

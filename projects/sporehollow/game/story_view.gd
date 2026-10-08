@@ -41,6 +41,7 @@ static func close(g):
 	if g.story_modal=="intro":
 		g.world.story.intro_seen=true; g.world.Story.persist(g.world)
 		g.world.morning_checkpoint.world_story=g.world.story.duplicate(true)
+		g.save_morning(g.world)
 	g.story_modal=""
 	if is_instance_valid(g.story_panel): g.story_panel.queue_free(); g.story_panel=null
 	g.arrival_started=g.clock-3
