@@ -11,7 +11,7 @@ func prepare_day(morning):
 		morning.buy(product)
 	return Save.restore(Save.capture(morning))
 
-func run_day(morning,mode: String,trace: bool=false,variant: String="baseline") -> Dictionary:
+func run_day(morning,mode: String,trace: bool=false,variant: String="baseline",observer: Callable=Callable()) -> Dictionary:
 	var start={"day":morning.campaign.day,"gold":morning.campaign.gold,"wood":morning.wood,"idol_hp":morning.story.idol.hp,"news":morning.story.news.duplicate(true),"raids":morning.Story.reaction_raids(morning),"animals":morning.animals.duplicate(true)}
 	var w=morning.begin_day();var category=wish(mode,w.campaign.day);var requested=false
 	if w.item_count("collar")>0:P.equip_job(w,1,"collar")
@@ -45,6 +45,7 @@ func run_day(morning,mode: String,trace: bool=false,variant: String="baseline") 
 		if trace:
 			for e in w.enemies:before[e.id]=e.next_attack
 		w.step()
+		if observer.is_valid():observer.call(w)
 		if w.phase=="defend" and night_start.is_empty():night_start={"tick":w.tick,"idol_hp":w.story.idol.hp,"gold":w.campaign.gold,"wood":w.wood,"keeper":w.keeper.duplicate(true),"jobs":w.jobs.duplicate(true),"held":w.job_hold_reason}
 		if w.story.idol.hp!=hp and trace:
 			var attackers=w.enemies.filter(func(e):return e.next_attack>before.get(e.id,-1) and (e.role=="idol_breaker" or e.get("chosen_target",{}).get("kind")=="idol"))
