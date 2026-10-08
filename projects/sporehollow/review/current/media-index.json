@@ -4,67 +4,67 @@
   "dirty": false,
   "media": [
     {
-      "file": "ui/book_opened.png",
+      "file": "../archive/24ddf18-before-construction-art/ui/book_opened.png",
       "source": "projects\\sporehollow\\artifacts\\isolated\\20261004-214936-509\\book_opened.png",
       "sha256": "b0648c3ca728a850d2cd664f1bda70d975cffc91ba5b001e3d9a7cefee478806",
       "kind": "viewport PNG"
     },
     {
-      "file": "ui/commands_reordered.png",
+      "file": "../archive/24ddf18-before-construction-art/ui/commands_reordered.png",
       "source": "projects\\sporehollow\\artifacts\\isolated\\20261004-214936-509\\commands_reordered.png",
       "sha256": "e82fd55e6ddacd21c8a225dbb31c3ac74db4dc54bb1e0adca88d5c8e9bfc030c",
       "kind": "viewport PNG"
     },
     {
-      "file": "ui/market_categories.png",
+      "file": "../archive/24ddf18-before-construction-art/ui/market_categories.png",
       "source": "projects\\sporehollow\\artifacts\\isolated\\20261004-214936-509\\market_categories.png",
       "sha256": "b81b4efeefd727f9e42a65893cecc1378551b5bc2b5882d5f9e397b75720c795",
       "kind": "viewport PNG"
     },
     {
-      "file": "ui/market_detail.png",
+      "file": "../archive/24ddf18-before-construction-art/ui/market_detail.png",
       "source": "projects\\sporehollow\\artifacts\\isolated\\20261004-214936-509\\market_detail.png",
       "sha256": "fe395e5d44210ffb90139873eb302dc8c882e8ee742d46864f2048a8ecd51af2",
       "kind": "viewport PNG"
     },
     {
-      "file": "ui/market_home.png",
+      "file": "../archive/24ddf18-before-construction-art/ui/market_home.png",
       "source": "projects\\sporehollow\\artifacts\\isolated\\20261004-214936-509\\market_home.png",
       "sha256": "b563ca00a90dcd54f5f66162c3a297801a1e3c1e0444b9f47319afe308464ab6",
       "kind": "viewport PNG"
     },
     {
-      "file": "ui/market_list.png",
+      "file": "../archive/24ddf18-before-construction-art/ui/market_list.png",
       "source": "projects\\sporehollow\\artifacts\\isolated\\20261004-214936-509\\market_list.png",
       "sha256": "62c137fc0ab23b266d5332d6af5a9bde0e20d0abb7a03816a5a5833edfbaffb0",
       "kind": "viewport PNG"
     },
     {
-      "file": "ui/morning.png",
+      "file": "../archive/24ddf18-before-construction-art/ui/morning.png",
       "source": "projects\\sporehollow\\artifacts\\isolated\\20261004-214936-509\\morning.png",
       "sha256": "4458e125b6cd48b90d4242e1028982968f8b56838f57293b9bffe15dcd340ea3",
       "kind": "viewport PNG"
     },
     {
-      "file": "ui/subtask_drag_locked_door_0.png",
+      "file": "../archive/24ddf18-before-construction-art/ui/subtask_drag_locked_door_0.png",
       "source": "projects\\sporehollow\\artifacts\\isolated\\20261004-214936-509\\subtask_drag_locked_door_0.png",
       "sha256": "62e5e9649a05a1f45e2c307e52885634bdbbc811fe7118498a9cfe009831ec4c",
       "kind": "viewport PNG"
     },
     {
-      "file": "ui/subtask_drag_rest_1.png",
+      "file": "../archive/24ddf18-before-construction-art/ui/subtask_drag_rest_1.png",
       "source": "projects\\sporehollow\\artifacts\\isolated\\20261004-214936-509\\subtask_drag_rest_1.png",
       "sha256": "9a8cb649de616808bf5afc1ee3fd8ccff38a0701fdc150f7776f36c23ccb8ea6",
       "kind": "viewport PNG"
     },
     {
-      "file": "ui/subtask_drag_rest_2.png",
+      "file": "../archive/24ddf18-before-construction-art/ui/subtask_drag_rest_2.png",
       "source": "projects\\sporehollow\\artifacts\\isolated\\20261004-214936-509\\subtask_drag_rest_2.png",
       "sha256": "c668bc51fbe60109bbf800cba757c7408d8ae38bcbbf0c573071ce5646dbb684",
       "kind": "viewport PNG"
     },
     {
-      "file": "ui/subtask_drag_rest_3.png",
+      "file": "../archive/24ddf18-before-construction-art/ui/subtask_drag_rest_3.png",
       "source": "projects\\sporehollow\\artifacts\\isolated\\20261004-214936-509\\subtask_drag_rest_3.png",
       "sha256": "b780db02f5d06df679ddbe729e40d26cec53fba0b25a77a872f918fa8cc88494",
       "kind": "viewport PNG"
@@ -286,43 +286,43 @@
       "kind": "viewport PNG"
     },
     {
-      "file": "ui/queue_before.png",
+      "file": "../archive/24ddf18-before-construction-art/ui/queue_before.png",
       "source": "projects\\sporehollow\\artifacts\\isolated\\20261004-construction-supplement\\queue_before.png",
       "sha256": "6f10f5509f82271c2ab252383a9e183a7d572ce5081545ee245da6f6364bf06a",
       "kind": "viewport PNG"
     },
     {
-      "file": "ui/queue_drag_06.png",
+      "file": "../archive/24ddf18-before-construction-art/ui/queue_drag_06.png",
       "source": "projects\\sporehollow\\artifacts\\isolated\\20261004-construction-supplement\\queue_drag_06.png",
       "sha256": "7c5411e7b97004aa3069e464ad07ccfb1926f80918848721eb2211bcdc28d252",
       "kind": "viewport PNG"
     },
     {
-      "file": "ui/queue_after.png",
+      "file": "../archive/24ddf18-before-construction-art/ui/queue_after.png",
       "source": "projects\\sporehollow\\artifacts\\isolated\\20261004-construction-supplement\\queue_after.png",
       "sha256": "c250a3930018499725b2502e7687c145292d483e6869ae093cf7236b346e24b6",
       "kind": "viewport PNG"
     },
     {
-      "file": "ui/operation_drag_06.png",
+      "file": "../archive/24ddf18-before-construction-art/ui/operation_drag_06.png",
       "source": "projects\\sporehollow\\artifacts\\isolated\\20261004-construction-supplement\\operation_drag_06.png",
       "sha256": "5c3cd278896bfb77badf87abf34769938470dd5d15d84b900b167b7c41502bce",
       "kind": "viewport PNG"
     },
     {
-      "file": "ui/operation_after.png",
+      "file": "../archive/24ddf18-before-construction-art/ui/operation_after.png",
       "source": "projects\\sporehollow\\artifacts\\isolated\\20261004-construction-supplement\\operation_after.png",
       "sha256": "abe41c9fda76da4a77f81bbcc42fdeaeafc32cc7f042ae0449d1da47b5f5122b",
       "kind": "viewport PNG"
     },
     {
-      "file": "ui/waiting_cart.png",
+      "file": "../archive/24ddf18-before-construction-art/ui/waiting_cart.png",
       "source": "projects\\sporehollow\\artifacts\\isolated\\20261004-construction-supplement\\waiting_cart.png",
       "sha256": "26739380789a5ea85b7b09eb09577dc739b4196a045c30640a81e440242523bd",
       "kind": "viewport PNG"
     },
     {
-      "file": "ui/book-opening.gif",
+      "file": "../archive/24ddf18-before-construction-art/ui/book-opening.gif",
       "sources": [
         "projects\\sporehollow\\artifacts\\isolated\\20261004-214936-509\\book_open_00.png",
         "projects\\sporehollow\\artifacts\\isolated\\20261004-214936-509\\book_open_01.png",
@@ -602,7 +602,7 @@
       "duration_ms": 180
     },
     {
-      "file": "ui/merchant.gif",
+      "file": "../archive/24ddf18-before-construction-art/ui/merchant.gif",
       "sources": [
         "projects\\sporehollow\\artifacts\\isolated\\20261004-construction-supplement\\arrival_000.png",
         "projects\\sporehollow\\artifacts\\isolated\\20261004-construction-supplement\\arrival_003.png",
@@ -641,7 +641,7 @@
       "duration_ms": 140
     },
     {
-      "file": "ui/queue-drag.gif",
+      "file": "../archive/24ddf18-before-construction-art/ui/queue-drag.gif",
       "sources": [
         "projects\\sporehollow\\artifacts\\isolated\\20261004-construction-supplement\\queue_before.png",
         "projects\\sporehollow\\artifacts\\isolated\\20261004-construction-supplement\\queue_drag_00.png",
@@ -661,7 +661,7 @@
       "duration_ms": 140
     },
     {
-      "file": "ui/operation-drag.gif",
+      "file": "../archive/24ddf18-before-construction-art/ui/operation-drag.gif",
       "sources": [
         "projects\\sporehollow\\artifacts\\isolated\\20261004-construction-supplement\\operation_drag_00.png",
         "projects\\sporehollow\\artifacts\\isolated\\20261004-construction-supplement\\operation_drag_01.png",

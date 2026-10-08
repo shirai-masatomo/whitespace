@@ -1,0 +1,359 @@
+{
+  "base_commit": "6017608fc23aa117216aaae50ff5698db3ecc848",
+  "audit_revision": "76d189cab41be62fb947dd1a7aa5b99112d999e7",
+  "removed_file_count": 50,
+  "removed_worktree_bytes": 10462814,
+  "method": "Retain one byte-identical tracked file and redirect display references; retain separate execution provenance.",
+  "files": [
+    {
+      "removed": "projects/sporehollow/review/current/ui/book-opening.gif",
+      "retained": "projects/sporehollow/review/archive/24ddf18-before-construction-art/ui/book-opening.gif",
+      "git_blob": "eb50558399bb73c5761daf6690233a8c686a755b",
+      "sha256": "5ceed3618e567b537fa646aec6687d927d909138e4f777e3a5b6c75af440aaa2",
+      "bytes": 276528
+    },
+    {
+      "removed": "projects/sporehollow/review/current/ui/book_opened.png",
+      "retained": "projects/sporehollow/review/archive/24ddf18-before-construction-art/ui/book_opened.png",
+      "git_blob": "7462760dcf48869e7d2daec1653db1f794fe4d10",
+      "sha256": "b0648c3ca728a850d2cd664f1bda70d975cffc91ba5b001e3d9a7cefee478806",
+      "bytes": 100927
+    },
+    {
+      "removed": "projects/sporehollow/review/current/ui/commands_reordered.png",
+      "retained": "projects/sporehollow/review/archive/24ddf18-before-construction-art/ui/commands_reordered.png",
+      "git_blob": "f60f293d79f27a6df4d54a2a969ff9e8bd172f58",
+      "sha256": "e82fd55e6ddacd21c8a225dbb31c3ac74db4dc54bb1e0adca88d5c8e9bfc030c",
+      "bytes": 159117
+    },
+    {
+      "removed": "projects/sporehollow/review/current/ui/market_categories.png",
+      "retained": "projects/sporehollow/review/archive/24ddf18-before-construction-art/ui/market_categories.png",
+      "git_blob": "b804b0cd4a407fd9675ef877673b2ff931ec438a",
+      "sha256": "b81b4efeefd727f9e42a65893cecc1378551b5bc2b5882d5f9e397b75720c795",
+      "bytes": 73615
+    },
+    {
+      "removed": "projects/sporehollow/review/current/ui/market_detail.png",
+      "retained": "projects/sporehollow/review/archive/24ddf18-before-construction-art/ui/market_detail.png",
+      "git_blob": "0ce862628ff54140efcf976c6e5084810e8d24ba",
+      "sha256": "fe395e5d44210ffb90139873eb302dc8c882e8ee742d46864f2048a8ecd51af2",
+      "bytes": 62927
+    },
+    {
+      "removed": "projects/sporehollow/review/current/ui/market_home.png",
+      "retained": "projects/sporehollow/review/archive/24ddf18-before-construction-art/ui/market_home.png",
+      "git_blob": "703ed721e3489887b0427d311c530d16170d5716",
+      "sha256": "b563ca00a90dcd54f5f66162c3a297801a1e3c1e0444b9f47319afe308464ab6",
+      "bytes": 58870
+    },
+    {
+      "removed": "projects/sporehollow/review/current/ui/market_list.png",
+      "retained": "projects/sporehollow/review/archive/24ddf18-before-construction-art/ui/market_list.png",
+      "git_blob": "769890441ae3531080525db600abf48c2d4cffbe",
+      "sha256": "62c137fc0ab23b266d5332d6af5a9bde0e20d0abb7a03816a5a5833edfbaffb0",
+      "bytes": 56907
+    },
+    {
+      "removed": "projects/sporehollow/review/current/ui/merchant.gif",
+      "retained": "projects/sporehollow/review/archive/24ddf18-before-construction-art/ui/merchant.gif",
+      "git_blob": "6612e82c0cb8654813d35d4eb01b8550a11b385d",
+      "sha256": "d1e5971887c662f11aa50ecd19fb1e2775a5a0c53fc9213037f510ec6f887b4c",
+      "bytes": 1513908
+    },
+    {
+      "removed": "projects/sporehollow/review/current/ui/morning.png",
+      "retained": "projects/sporehollow/review/archive/24ddf18-before-construction-art/ui/morning.png",
+      "git_blob": "d724fbcc0f255ec6b03461eb840d59e8fb370397",
+      "sha256": "4458e125b6cd48b90d4242e1028982968f8b56838f57293b9bffe15dcd340ea3",
+      "bytes": 122529
+    },
+    {
+      "removed": "projects/sporehollow/review/current/ui/operation-drag.gif",
+      "retained": "projects/sporehollow/review/archive/24ddf18-before-construction-art/ui/operation-drag.gif",
+      "git_blob": "78e021acc4cc08f820e56eb0508ddb50bed175bd",
+      "sha256": "8879f2358bc4a5d2507e3ca1b6889dcf0784229ee3a043ee4c0ea9ea05ebbf63",
+      "bytes": 1694438
+    },
+    {
+      "removed": "projects/sporehollow/review/current/ui/operation_after.png",
+      "retained": "projects/sporehollow/review/archive/24ddf18-before-construction-art/ui/operation_after.png",
+      "git_blob": "660753dad5f818d3aa525bf443bd4570a999a188",
+      "sha256": "abe41c9fda76da4a77f81bbcc42fdeaeafc32cc7f042ae0449d1da47b5f5122b",
+      "bytes": 150453
+    },
+    {
+      "removed": "projects/sporehollow/review/current/ui/operation_drag_06.png",
+      "retained": "projects/sporehollow/review/archive/24ddf18-before-construction-art/ui/operation_drag_06.png",
+      "git_blob": "027237d8195fd22be750adffdd687c8392c87258",
+      "sha256": "5c3cd278896bfb77badf87abf34769938470dd5d15d84b900b167b7c41502bce",
+      "bytes": 151774
+    },
+    {
+      "removed": "projects/sporehollow/review/current/ui/queue-drag.gif",
+      "retained": "projects/sporehollow/review/archive/24ddf18-before-construction-art/ui/queue-drag.gif",
+      "git_blob": "be48a7eaad2607fc77b32fbb3df852f7768aa992",
+      "sha256": "ab429bad87e054ca21cb6ce44c0a3822749c22f7c31f5987b387ff39c494ccf3",
+      "bytes": 1858786
+    },
+    {
+      "removed": "projects/sporehollow/review/current/ui/queue_after.png",
+      "retained": "projects/sporehollow/review/archive/24ddf18-before-construction-art/ui/queue_after.png",
+      "git_blob": "66e37a75109bd1a91b783378158ddcf80419cbb3",
+      "sha256": "c250a3930018499725b2502e7687c145292d483e6869ae093cf7236b346e24b6",
+      "bytes": 149967
+    },
+    {
+      "removed": "projects/sporehollow/review/current/ui/queue_before.png",
+      "retained": "projects/sporehollow/review/archive/24ddf18-before-construction-art/ui/queue_before.png",
+      "git_blob": "f374c9f84f71755deb5c0b23d32d7bfc7ef568b7",
+      "sha256": "6f10f5509f82271c2ab252383a9e183a7d572ce5081545ee245da6f6364bf06a",
+      "bytes": 150606
+    },
+    {
+      "removed": "projects/sporehollow/review/current/ui/queue_drag_06.png",
+      "retained": "projects/sporehollow/review/archive/24ddf18-before-construction-art/ui/queue_drag_06.png",
+      "git_blob": "f79ea7e788077c724b72484c3de2b491d045044a",
+      "sha256": "7c5411e7b97004aa3069e464ad07ccfb1926f80918848721eb2211bcdc28d252",
+      "bytes": 150821
+    },
+    {
+      "removed": "projects/sporehollow/review/current/ui/subtask_drag_locked_door_0.png",
+      "retained": "projects/sporehollow/review/archive/24ddf18-before-construction-art/ui/subtask_drag_locked_door_0.png",
+      "git_blob": "5a155091d481616ead2bf44fc70ae9bc6c2f1af4",
+      "sha256": "62e5e9649a05a1f45e2c307e52885634bdbbc811fe7118498a9cfe009831ec4c",
+      "bytes": 163173
+    },
+    {
+      "removed": "projects/sporehollow/review/current/ui/subtask_drag_rest_1.png",
+      "retained": "projects/sporehollow/review/archive/24ddf18-before-construction-art/ui/subtask_drag_rest_1.png",
+      "git_blob": "00a0194fb5e5acac31238886b6483fdc6064cf84",
+      "sha256": "9a8cb649de616808bf5afc1ee3fd8ccff38a0701fdc150f7776f36c23ccb8ea6",
+      "bytes": 159174
+    },
+    {
+      "removed": "projects/sporehollow/review/current/ui/subtask_drag_rest_2.png",
+      "retained": "projects/sporehollow/review/archive/24ddf18-before-construction-art/ui/subtask_drag_rest_2.png",
+      "git_blob": "877704b6f0b1ce56ffd9a2f416ea1e61116c6491",
+      "sha256": "c668bc51fbe60109bbf800cba757c7408d8ae38bcbbf0c573071ce5646dbb684",
+      "bytes": 161252
+    },
+    {
+      "removed": "projects/sporehollow/review/current/ui/subtask_drag_rest_3.png",
+      "retained": "projects/sporehollow/review/archive/24ddf18-before-construction-art/ui/subtask_drag_rest_3.png",
+      "git_blob": "b01204582c62049930bfc2d9ed1d2c15ccd43aee",
+      "sha256": "b780db02f5d06df679ddbe729e40d26cec53fba0b25a77a872f918fa8cc88494",
+      "bytes": 159204
+    },
+    {
+      "removed": "projects/sporehollow/review/current/ui/waiting_cart.png",
+      "retained": "projects/sporehollow/review/archive/24ddf18-before-construction-art/ui/waiting_cart.png",
+      "git_blob": "b4b9446eb66154c66631c494d784a136862e102b",
+      "sha256": "26739380789a5ea85b7b09eb09577dc739b4196a045c30640a81e440242523bd",
+      "bytes": 121283
+    },
+    {
+      "removed": "projects/sporehollow/review/current/shop-ui/before/01_morning_menu.png",
+      "retained": "projects/sporehollow/review/current/materials/shop/01_morning_menu.png",
+      "git_blob": "881bec4672e1845514cdbdda25186017d58a4ad1",
+      "sha256": "66e707301309545f704b7fce0b1128d9cbbbe5676aebc52910f625798151ad7d",
+      "bytes": 159020
+    },
+    {
+      "removed": "projects/sporehollow/review/current/shop-ui/before/02_market_entry.png",
+      "retained": "projects/sporehollow/review/current/materials/shop/02_market_entry.png",
+      "git_blob": "49fd8c36028d30d071f5cd4b0408787e97737cb5",
+      "sha256": "a50b34fb4630adc16685eb4c23907b3c2da144b64bbd92f598d6a1e7ce7ee60c",
+      "bytes": 90668
+    },
+    {
+      "removed": "projects/sporehollow/review/current/shop-ui/before/03_buy_categories.png",
+      "retained": "projects/sporehollow/review/current/materials/shop/03_buy_categories.png",
+      "git_blob": "a23548a355a3a5fdfcffb078ec8a29ee88294eb9",
+      "sha256": "7129636bd76dba01c0b800681b9895fb69a2ae178aeae7a21036fd5ab8ac607c",
+      "bytes": 106888
+    },
+    {
+      "removed": "projects/sporehollow/review/current/shop-ui/before/04_buy_animals_list_1.png",
+      "retained": "projects/sporehollow/review/current/materials/shop/04_buy_animals_list_1.png",
+      "git_blob": "538420e148038d0afe9f641d16b89e8d210adb9c",
+      "sha256": "d42e417e7c404580552ee1dfeeed0991fadca78dd5003228e0fea442b4bb4189",
+      "bytes": 85632
+    },
+    {
+      "removed": "projects/sporehollow/review/current/shop-ui/before/05_buy_animals_hen_-1.png",
+      "retained": "projects/sporehollow/review/current/materials/shop/05_buy_animals_hen_-1.png",
+      "git_blob": "f9f6c60d7dc755e4f7c4ff1247b8709bd5933353",
+      "sha256": "021961c27fc509ce0c292092e0be489901c93cac30edb769cf3e59eb5468c594",
+      "bytes": 95816
+    },
+    {
+      "removed": "projects/sporehollow/review/current/shop-ui/before/06_buy_animals_cat_-1.png",
+      "retained": "projects/sporehollow/review/current/materials/shop/06_buy_animals_cat_-1.png",
+      "git_blob": "961f1c8d76339835f185cc9c5ff44e5b943e0776",
+      "sha256": "f883aeb341586547c82fdfbad49667dce491a978831f428dfb0fecc4b132d377",
+      "bytes": 95595
+    },
+    {
+      "removed": "projects/sporehollow/review/current/shop-ui/before/07_buy_materials_list_1.png",
+      "retained": "projects/sporehollow/review/current/materials/shop/07_buy_materials_list_1.png",
+      "git_blob": "4bc615ef1b606d1c8784c7c7b23901df22a00548",
+      "sha256": "57526ac473d8043ae52a6192b1bac72f0ae67dd0678021bbe24ac13ae7e4a129",
+      "bytes": 94177
+    },
+    {
+      "removed": "projects/sporehollow/review/current/shop-ui/before/08_buy_materials_soil_-1.png",
+      "retained": "projects/sporehollow/review/current/materials/shop/08_buy_materials_soil_-1.png",
+      "git_blob": "9a0ad4c63aecdfcd1334d7cdcfd6ac581639c474",
+      "sha256": "46b2fd2dfeacadb4f18c892bba72dc19c9c171db54a717fde8838fb5195245fe",
+      "bytes": 95963
+    },
+    {
+      "removed": "projects/sporehollow/review/current/shop-ui/before/09_buy_materials_wood_-1.png",
+      "retained": "projects/sporehollow/review/current/materials/shop/09_buy_materials_wood_-1.png",
+      "git_blob": "e77930875ae79ac67f61eb7e801c095b700af8b9",
+      "sha256": "6f77e68ef5a988839329eb00263ef08e7b0aec1d44c61b30f84a014966242d7f",
+      "bytes": 97972
+    },
+    {
+      "removed": "projects/sporehollow/review/current/shop-ui/before/10_buy_materials_stone_-1.png",
+      "retained": "projects/sporehollow/review/current/materials/shop/10_buy_materials_stone_-1.png",
+      "git_blob": "31e2db940f691217ab6244f760081311eda74082",
+      "sha256": "a5522f27dcda6b079ef1d4941ea07b626f231d9d6beadbf75653e69cfe808586",
+      "bytes": 92835
+    },
+    {
+      "removed": "projects/sporehollow/review/current/shop-ui/before/11_buy_facilities_list_1.png",
+      "retained": "projects/sporehollow/review/current/materials/shop/11_buy_facilities_list_1.png",
+      "git_blob": "00d42f17c3b804d3e9899afd6011c4b576d59f0d",
+      "sha256": "86e0d189b41c57bef85f02f37d15e2bc5dce296a8220b18c9f8c96b8b8169f55",
+      "bytes": 89124
+    },
+    {
+      "removed": "projects/sporehollow/review/current/shop-ui/before/12_buy_items_list_1.png",
+      "retained": "projects/sporehollow/review/current/materials/shop/12_buy_items_list_1.png",
+      "git_blob": "f603892c2237e696061e3b104614d334004a2d8e",
+      "sha256": "a705284af8776f9c15256ebbe7a95008ca71bfb1680aaa069d007b44eb61be0b",
+      "bytes": 91839
+    },
+    {
+      "removed": "projects/sporehollow/review/current/shop-ui/before/13_buy_items_whistle_-1.png",
+      "retained": "projects/sporehollow/review/current/materials/shop/13_buy_items_whistle_-1.png",
+      "git_blob": "b9b2c26b3749c7296bcf00cde94ba96294f926af",
+      "sha256": "e928591e61baf4b361bbc398d5c26ae6bce3cee1473eeeb86a724e55b44c6247",
+      "bytes": 98322
+    },
+    {
+      "removed": "projects/sporehollow/review/current/shop-ui/before/14_buy_items_coffee_-1.png",
+      "retained": "projects/sporehollow/review/current/materials/shop/14_buy_items_coffee_-1.png",
+      "git_blob": "63dba3b210d4a190f2302843907747b5ae31528d",
+      "sha256": "94a606df186492f7060da2fa3096a0d0d5a679eddc68e8029c74326c21d54f15",
+      "bytes": 96295
+    },
+    {
+      "removed": "projects/sporehollow/review/current/shop-ui/before/15_buy_items_energy_drink_-1.png",
+      "retained": "projects/sporehollow/review/current/materials/shop/15_buy_items_energy_drink_-1.png",
+      "git_blob": "8d1fa8735fb861fea987cfcdad5dab285468f1cc",
+      "sha256": "cfca80c88ffff0911901e0684d04c8b935722d945631d6a8e273ba58b84d64b8",
+      "bytes": 98537
+    },
+    {
+      "removed": "projects/sporehollow/review/current/shop-ui/before/16_purchase_complete.png",
+      "retained": "projects/sporehollow/review/current/materials/shop/16_purchase_complete.png",
+      "git_blob": "88cf54db8785614a4606b102ec6b9263279bcbf2",
+      "sha256": "e02594380f396226e00d88a1f0c8a3a643cd50508bf8ae3e421d67ac3ebcc7cf",
+      "bytes": 105112
+    },
+    {
+      "removed": "projects/sporehollow/review/current/shop-ui/before/17_purchase_back_to_list.png",
+      "retained": "projects/sporehollow/review/current/materials/shop/17_purchase_back_to_list.png",
+      "git_blob": "c2b1e607fedb38c879c6c2fd69a6b5e50c486914",
+      "sha256": "b2e69b4b3e23abdc596ec8000cda1e90ace7f8a5a2a780a402457f93902c43b0",
+      "bytes": 94477
+    },
+    {
+      "removed": "projects/sporehollow/review/current/shop-ui/before/18_purchase_back_to_categories.png",
+      "retained": "projects/sporehollow/review/current/materials/shop/18_purchase_back_to_categories.png",
+      "git_blob": "e52b9e8fafe00bbef82e66305be596d75380b70e",
+      "sha256": "008593e4f4996fa2448a74824093f9e8d3db198a13ba667557152b9b45e5deef",
+      "bytes": 107156
+    },
+    {
+      "removed": "projects/sporehollow/review/current/shop-ui/before/19_another_category_after_purchase.png",
+      "retained": "projects/sporehollow/review/current/materials/shop/19_another_category_after_purchase.png",
+      "git_blob": "89abcb20b780aadb59928fed893c6d3754657128",
+      "sha256": "2a07d29720d8b252602c073c8008549aec5008380394f884d0c0fa5fe925fc03",
+      "bytes": 85893
+    },
+    {
+      "removed": "projects/sporehollow/review/current/shop-ui/before/20_market_closed_morning.png",
+      "retained": "projects/sporehollow/review/current/materials/shop/20_market_closed_morning.png",
+      "git_blob": "881bec4672e1845514cdbdda25186017d58a4ad1",
+      "sha256": "66e707301309545f704b7fce0b1128d9cbbbe5676aebc52910f625798151ad7d",
+      "bytes": 159020
+    },
+    {
+      "removed": "projects/sporehollow/review/current/shop-ui/before/21_sell_categories.png",
+      "retained": "projects/sporehollow/review/current/materials/shop/21_sell_categories.png",
+      "git_blob": "c84263242803ac3003d05f9009e20f2fe740c0b9",
+      "sha256": "6d3a9904be753007b81021c05cd9da0a951f4079cbac76bed479e444b4bce71b",
+      "bytes": 107439
+    },
+    {
+      "removed": "projects/sporehollow/review/current/shop-ui/before/22_sell_animals_list_1.png",
+      "retained": "projects/sporehollow/review/current/materials/shop/22_sell_animals_list_1.png",
+      "git_blob": "472159ce1673643213358b6743b4dc8ee9cd7746",
+      "sha256": "2dd0fbbc3f4ddd076aa3369abaf371d5fcd29542d30f7e719d8988239f7e233f",
+      "bytes": 89689
+    },
+    {
+      "removed": "projects/sporehollow/review/current/shop-ui/before/23_sell_materials_list_1.png",
+      "retained": "projects/sporehollow/review/current/materials/shop/23_sell_materials_list_1.png",
+      "git_blob": "1ce1b969e9c846492ca2774351966c2becb06b0a",
+      "sha256": "8017cdd51cb0f84b4188f5357ad26b060548eb93ada3583027fbcb8845efe0f6",
+      "bytes": 90671
+    },
+    {
+      "removed": "projects/sporehollow/review/current/shop-ui/before/24_sell_materials_soil_-1.png",
+      "retained": "projects/sporehollow/review/current/materials/shop/24_sell_materials_soil_-1.png",
+      "git_blob": "c8fff349ef86f689512aa54845e05359848c591d",
+      "sha256": "2f7fc0d0bd85da69fa1a9f553ee60690c4006774e987014b7656ce6f82baaacf",
+      "bytes": 96797
+    },
+    {
+      "removed": "projects/sporehollow/review/current/shop-ui/before/25_sell_materials_wood_-1.png",
+      "retained": "projects/sporehollow/review/current/materials/shop/25_sell_materials_wood_-1.png",
+      "git_blob": "ea60a38c19af9b9a72a04b985513c8ce4383220c",
+      "sha256": "1a174aafccfa8c33549778c46b3d19510fa2ffc1991f0c7ae16d2c0b4e38102f",
+      "bytes": 98287
+    },
+    {
+      "removed": "projects/sporehollow/review/current/shop-ui/before/26_sell_facilities_list_1.png",
+      "retained": "projects/sporehollow/review/current/materials/shop/26_sell_facilities_list_1.png",
+      "git_blob": "7dc0656e03e0b95178a37b550a501ce3fc2f0025",
+      "sha256": "3dd30ca06801fbe4aae80255f9c10c2fddd591d07e8a5721112b25debecaeb6d",
+      "bytes": 89610
+    },
+    {
+      "removed": "projects/sporehollow/review/current/shop-ui/before/27_sell_items_list_1.png",
+      "retained": "projects/sporehollow/review/current/materials/shop/27_sell_items_list_1.png",
+      "git_blob": "c79a68eb2549cf9e277a65763c191ab92ea01fd6",
+      "sha256": "219372063f24598bf04b923605a1ae3640550c67961055db7a0e6db602fce64a",
+      "bytes": 91200
+    },
+    {
+      "removed": "projects/sporehollow/review/current/shop-ui/before/28_sale_complete.png",
+      "retained": "projects/sporehollow/review/current/materials/shop/28_sale_complete.png",
+      "git_blob": "cfe99aec80184e282c9eb39d41863a01c04fe736",
+      "sha256": "14daa20c73962e3d1571e662bcb21b244fede0086bddc1d20b3eee7850a054b2",
+      "bytes": 103501
+    },
+    {
+      "removed": "projects/sporehollow/review/current/shop-ui/before/29_final_morning.png",
+      "retained": "projects/sporehollow/review/current/materials/shop/29_final_morning.png",
+      "git_blob": "881bec4672e1845514cdbdda25186017d58a4ad1",
+      "sha256": "66e707301309545f704b7fce0b1128d9cbbbe5676aebc52910f625798151ad7d",
+      "bytes": 159020
+    }
+  ]
+}
