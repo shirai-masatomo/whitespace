@@ -64,10 +64,10 @@ LF改行の旧Play.cmdをcmd.exeで解析すると、存在するEXEの起動行
 
 | 対象 | PNG | 動作記録 |
 |---|---|---|
-| 朝・正式閉表紙・荷車 | [朝](ui/morning.png) / [市場](ui/market_detail.png) | [到着・待機・退出](ui/merchant.gif) |
-| 本・本文同期 | [見開き](ui/book_opened.png) | [開く](ui/book-opening.gif) / [次・前・閉じる](ui/book-pages.gif) |
-| 操作ボタン | [浮いた操作](ui/operation_drag_06.png) | [操作順変更](ui/operation-drag.gif) |
-| 仕事札・番号・経路 | [変更前](ui/queue_before.png) / [変更後](ui/queue_after.png) | [札を掴んで並べ替え](ui/queue-drag.gif) |
+| 朝・正式閉表紙・荷車 | [朝](../archive/24ddf18-before-construction-art/ui/morning.png) / [市場](../archive/24ddf18-before-construction-art/ui/market_detail.png) | [到着・待機・退出](../archive/24ddf18-before-construction-art/ui/merchant.gif) |
+| 本・本文同期 | [見開き](../archive/24ddf18-before-construction-art/ui/book_opened.png) | [開く](../archive/24ddf18-before-construction-art/ui/book-opening.gif) / [次・前・閉じる](ui/book-pages.gif) |
+| 操作ボタン | [浮いた操作](../archive/24ddf18-before-construction-art/ui/operation_drag_06.png) | [操作順変更](../archive/24ddf18-before-construction-art/ui/operation-drag.gif) |
+| 仕事札・番号・経路 | [変更前](../archive/24ddf18-before-construction-art/ui/queue_before.png) / [変更後](../archive/24ddf18-before-construction-art/ui/queue_after.png) | [札を掴んで並べ替え](../archive/24ddf18-before-construction-art/ui/queue-drag.gif) |
 | 壁接続 | [縦横・十字](ui/wall_connections.png) / [L/T全方向](ui/wall_corners_and_tees.png) / [縦ドア・異素材](ui/wall_vertical_door_depth.png) / [開放](ui/wall_vertical_door_open.png) | 状態別PNGと回帰で確認 |
 | 正式キャラクター | [原寸](characters/native_scale.png) / [全動物](characters/all_animals.png) / [左停止](characters/left_stop.png) | [0.5/1/2倍・左右](characters/walking.gif) / [動物・休息](characters/animal-motion.gif) |
 | 睡眠から起床 | [睡眠](characters/sleeping.png) / [起床後](characters/awake_idle.png) | [起床](characters/wake.gif) |
@@ -105,3 +105,8 @@ Tab未選択/逆順/連打/猫/鶏/療養/複数/空、D&D取消/範囲外/設�
 後着の敵素材は納品通知のみ受領。今回の対象には追加せず、ゲーム取り込み・検証済みとは報告しない。
 
 並行設計更新：公開直前にoriginのfb4c9bdまでの8文書コミットを通常マージ。抽選/Rarity/装備/非柴犬死亡などの新設計は保持したが、この依頼の固定60G版と区別しK0〜K8へ未実装として記録。ゲームコード・素材はafb8e1bから変更なし。
+
+
+## 画像の保存先整理（2026-10-08）
+
+同一内容のUI画像21件はarchive内の同名画像へ保存先を集約した。上記リンクとmedia-indexの閲覧先だけを更新し、検証当時の実装コミット・素材コミット・source・SHA256は維持している。異なる実行を同じ実行として扱う変更ではない。[対象と保持先](../DEDUPLICATION-20261008.md)。
