@@ -143,11 +143,16 @@ static func category_status(game, category: String) -> String:
 
 static func build(game):
 	if game.morning_screen=="morning":
-		game.add_button(game.palette,"open_market","朝の市",Rect2(377,490,220,46),game.open_market)
+		game.add_button(game.palette,"open_market","朝の市",Rect2(377,465,220,40),game.open_market)
 		game.buttons.open_market.icon=UI.icon("basket")
-		game.add_button(game.palette,"open_book","図鑑を開く",Rect2(725,490,220,46),game.open_book)
+		game.add_button(game.palette,"open_book","図鑑を開く",Rect2(725,465,220,40),game.open_book)
 		game.buttons.open_book.icon=UI.icon("book")
 		button_style(game.buttons.open_market,true);button_style(game.buttons.open_book)
+		if game.Farm.Progression.Encounters.reached(game.world.campaign):
+			if game.restart_confirm:
+				game.add_button(game.palette,"route_restart_yes","新しい牧場を始める",Rect2(376,576,256,36),game.new_campaign)
+				game.add_button(game.palette,"route_restart_cancel","今の牧場へ戻る",Rect2(710,576,236,36),game.confirm_new_campaign.bind(false))
+			else:game.add_button(game.palette,"route_restart","新しく始める…",Rect2(710,576,236,36),game.confirm_new_campaign.bind(true))
 		return
 	game.add_button(game.palette,"close_market","メニューへ",MENU,game.close_morning_screen)
 	game.buttons.close_market.icon=UI.icon("cross");button_style(game.buttons.close_market)
@@ -217,14 +222,16 @@ static func draw_product(game,b,row: Dictionary):
 static func draw(game):
 	var c=game.hud
 	if game.morning_screen=="morning":
-		c.draw_style_box(panel(PAPER,UI.WOOD,3),Rect2(330,112,656,444))
+		c.draw_style_box(panel(PAPER,UI.WOOD,3),Rect2(330,112,656,510))
 		text(game,c,Rect2(368,138,400,44),"%d日目の朝"%game.world.campaign.day,26)
 		price(game,c,Vector2(818,141),game.world.campaign.gold,24)
 		c.draw_line(Vector2(368,189),Vector2(948,189),Color("c5b590"),1)
 		text(game,c,Rect2(377,206,240,38),"朝の市",23)
-		text(game,c,Rect2(725,206,240,38),"牧場の仲間",23)
+		text(game,c,Rect2(725,206,240,38),"図鑑",23)
 		art_texture(c,Art.CART,Rect2(367,251,257,212))
 		Art.fit(c,Art.CLOSED,Rect2(762,250,150,210))
+		text(game,c,Rect2(368,523,580,26),game.Farm.Progression.Encounters.route_text(game.world.campaign),19,UI.MOSS)
+		text(game,c,Rect2(368,549,580,22),"新しく始めると、この牧場での進行は終了します" if game.restart_confirm else "購入・育成・祈りで準備し、次の夜を迎えましょう",14,MUTED)
 		return
 	c.draw_rect(Rect2(0,0,1280,800),Color(0.13,0.18,0.17,0.65))
 	c.draw_style_box(panel(Color("7c6349"),Color("564736"),3),Rect2(100,98,1080,610))

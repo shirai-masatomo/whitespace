@@ -16,6 +16,39 @@ const NIGHTS = {
 const FIRST_DAY = {"kidnapper":1,"salaryman":2,"destroyer":3,"martial_artist":5,"ninja":6,"animal_tamer":7,"runner":8,"dancer":9,"thief":10,"maid":11}
 const TABLE_NIGHT = {"mode":"Table","fixed":[],"count":3}
 const MILESTONE = {"interval":5,"from_day":10,"mode":"Hybrid","fixed":["runner"],"count":2}
+const ROUTE_ID="first-cycle-v1"
+
+static func route_definition() -> Dictionary:
+	var last_intro=int(FIRST_DAY.values().max())
+	var night=maxi(last_intro+1,MILESTONE.from_day)
+	while night%MILESTONE.interval!=0 or NIGHTS.has(night):night+=1
+	return {"version":1,"last_intro":last_intro,"completion_night":night}
+
+static func route_phase(day: int) -> String:
+	var route=route_definition()
+	if day<=route.last_intro:return "introduction"
+	if day<route.completion_night:return "mixed"
+	if day==route.completion_night:return "milestone"
+	return "continuation"
+
+static func record_win(campaign: Dictionary,seed_value: int):
+	var progress=campaign.route_progress
+	progress.completed_through_day=maxi(progress.completed_through_day,campaign.day)
+	var route=route_definition()
+	if campaign.day>=route.completion_night and not progress.milestones.has(ROUTE_ID):
+		progress.milestones[ROUTE_ID]={"rule_version":route.version,"target_night":route.completion_night,"achieved_night":campaign.day,"morning_day":campaign.day+1,"seed":seed_value}
+
+static func reached(campaign: Dictionary) -> bool:
+	return campaign.get("route_progress",{}).get("milestones",{}).has(ROUTE_ID)
+
+static func route_text(campaign: Dictionary) -> String:
+	if reached(campaign):return "ひと区切り達成 · この先も牧場を続けられます"
+	var route=route_definition()
+	match route_phase(campaign.day):
+		"introduction":return "新しい相手との出会い · %d / %d日目"%[campaign.day,route.last_intro]
+		"mixed":return "混成の襲撃に備える · 次の節目は%d日目"%route.completion_night
+		"milestone":return "今夜は節目の防衛 · 仲間と黄金像を守ろう"
+	return "牧場の日々は続きます"
 
 static func eligible(row: Dictionary, context: Dictionary) -> bool:
 	var karma=context.get("karma",0)

@@ -31,7 +31,7 @@ var work_dust_at = -1.0
 var actor_art: Dictionary = {}
 const UI = preload("res://game/ui_style.gd")
 const MarketView = preload("res://game/market_view.gd")
-const MARKET_CATEGORIES = {"animals": ["動物", "animals", "牧場の仲間"], "materials": ["資材", "wood", "土・木・石"], "facilities": ["施設", "hammer", "牧場づくり"], "items": ["小物と恵み", "basket", "卵・羽・道具"]}
+const MARKET_CATEGORIES = {"animals": ["動物", "animals", "動物の取引"], "materials": ["資材", "wood", "土・木・石"], "facilities": ["施設", "hammer", "牧場づくり"], "items": ["小物と恵み", "basket", "卵・羽・道具"]}
 var world = Farm.new({}, randi_range(1, 2147483646))
 var subtasks = preload("res://game/subtasks.gd").new()
 var tool = ""
@@ -74,6 +74,7 @@ var queue_drag_start = Vector2.ZERO
 var queue_drop_index = -1
 var hover_job = -1
 var morning_screen = "morning"
+var restart_confirm=false
 var book_view
 var book_motion = ""
 var book_direction = 1
@@ -350,6 +351,10 @@ func refresh():
 	buttons.advance.visible = (world.phase == "shop" and morning_screen == "morning") or world.phase=="day" or (world.phase=="defend" and world.early_clear)
 	buttons.advance.text = "支度を終える" if world.phase == "shop" else rest_button_text()
 	buttons.advance.position = Vector2(548,570) if world.phase=="shop" else Vector2(1074,754)
+	if world.phase=="shop" and Farm.Progression.Encounters.reached(world.campaign):
+		buttons.advance.position=Vector2(376,576)
+		buttons.advance.text="牧場を続ける"
+		buttons.advance.visible=morning_screen=="morning" and not restart_confirm
 	buttons.advance.tooltip_text = "商人を見送り、昼の牧場仕事を始めます" if world.phase == "shop" else ""
 	if world.phase=="shop": MarketView.button_style(buttons.advance,true)
 	else: UI.button(buttons.advance)
@@ -559,6 +564,18 @@ func advance():
 		elif not world.act("rest_until_night" if world.phase=="day" else "end_night"):
 			notice(world.Life.rest_until_reason(world,"night" if world.phase=="day" else "dawn"))
 	refresh()
+
+func confirm_new_campaign(enabled: bool):
+	if world.phase!="shop":return
+	restart_confirm=enabled;refresh()
+
+func new_campaign():
+	if world.phase!="shop" or not restart_confirm:return
+	world=Farm.new({},world.seed_value+1)
+	restart_confirm=false;morning_screen="morning";group=-1;speed=1;accumulated=0
+	shop_side="home";shop_level="categories";morning_keeper=Vector2(5.5,8);morning_dog=Vector2(6.5,8.5)
+	reset_view();arrival_started=clock;refresh()
+	if not automated:StoryView.open(self,"intro")
 
 func cancel_selected_work():
 	for j in world.jobs.duplicate():
@@ -1946,7 +1963,7 @@ func build_shop():
 		return
 	add_button(palette, "close_market", "閉じる" if field_book else "メニューへ", Rect2(1040, 116, 124, 44), close_morning_screen)
 	buttons.close_market.icon = UI.icon("cross")
-	add_button(palette,"book_animals","牧場の仲間",Rect2(300,116,170,44),switch_book_section.bind("animals"))
+	add_button(palette,"book_animals","動物",Rect2(300,116,170,44),switch_book_section.bind("animals"))
 	add_button(palette,"book_enemies","敵",Rect2(482,116,100,44),switch_book_section.bind("enemies"))
 	UI.selected(buttons.book_animals,book_section=="animals"); UI.selected(buttons.book_enemies,book_section=="enemies")
 	Journal.build(self)

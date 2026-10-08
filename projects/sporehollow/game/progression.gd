@@ -4,6 +4,10 @@ const Encounters=preload("res://game/encounters.gd")
 const Targets=preload("res://game/target_policy.gd")
 
 static func migrate(w):
+	w.campaign.route_progress=w.campaign.get("route_progress",{}).duplicate(true)
+	w.campaign.route_progress.version=w.campaign.route_progress.get("version",1)
+	w.campaign.route_progress.completed_through_day=w.campaign.route_progress.get("completed_through_day",0)
+	w.campaign.route_progress.milestones=w.campaign.route_progress.get("milestones",{})
 	w.campaign.enemy_knowledge=w.campaign.get("enemy_knowledge",{})
 	w.campaign.encounter_counts=w.campaign.get("encounter_counts",{})
 	w.campaign.animal_history=w.campaign.get("animal_history",[])

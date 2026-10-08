@@ -957,6 +957,7 @@ func finish(won: bool):
 		jobs.erase(j)
 	manual_goal = null
 	if won:
+		Progression.Encounters.record_win(campaign,seed_value)
 		campaign.gold += int(gold) + early_finish_bonus
 		campaign.exp_pool += int(xp)
 		process_dawn()
