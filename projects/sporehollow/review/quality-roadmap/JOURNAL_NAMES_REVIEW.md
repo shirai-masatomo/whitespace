@@ -8,6 +8,10 @@
 
 今回のjournal_view SHA256：`fd1e56a787889afce69a2669c6c4b94284b197c54ad5dc684cfa2ba03b9cac58`。以下の72項目とハッシュは前版92d1048時点の記録。出力済み旧版92d1048も残し、新版は別の日時別パッケージとする。
 
+## 最終試遊版
+
+本体 `c5c283343190969463bb58d8993162402f56804d`、dirty=false。正式な `tools/export_isolated.ps1` を固定コミットの専用コピーで実行し、`artifacts/playtest/20261010-034957-716` へ別バージョンとして配置。EXE SHA256 `9BD1AB1D63FD447331A62EE978E635E2B8FA1864C6F673A130F543C605AAB151`。出力スモーク成功、非対話GPU通常起動はExitCode=0、DesktopMatched=true。確認入口の01最新版とc5c2833専用ショートカットを更新。詳細は配布BUILD.jsonと `artifacts/export-verification/20261010-034957-716-journal-names/verification.json`。プレイヤー用保存先は新規、検証は別の保存先。旧92d1048と90c0fdaを維持する。
+
 ## 前版92d1048の記録
 
 2026-10-10。ユーザーのローカル参照 `スクリーンショット 2026-10-10 030231.png` を実画素で確認。対象は図鑑見開きの8枠一覧であり、個体詳細ページではない。

@@ -24,9 +24,11 @@
 
 ## 検証と配布
 
-図鑑一覧の今回修正は隔離GPU74項目成功（同一個体の命名前後の画像領域がピクセル一致）、未命名・個別名・日本語／英字12文字と詳細維持を3画像で確認。[検証記録](review/quality-roadmap/JOURNAL_NAMES_REVIEW.md)。以下の既存配布EXEには今回修正をまだ再出力していない。
+図鑑一覧の今回修正は隔離GPU74項目成功（同一個体の命名前後の画像領域がピクセル一致）、未命名・個別名・日本語／英字12文字と詳細維持を描画・同一個体比較で確認。[検証記録](review/quality-roadmap/JOURNAL_NAMES_REVIEW.md)。今回修正は下記のc5c2833配布EXEへ反映済み。
 
-ローカル試遊パッケージは `artifacts/playtest/20261010-021200-239`（本体90c0fda）。別保存先でのEXE headless起動は終了0、配布ハッシュと一致。headless257項目成功、seed31・祈りなしの既存自動方針で10夜勝利。
+ローカル最新試遊は `artifacts/playtest/20261010-034957-716/Play-Isolated.cmd`（本体c5c2833、dirty=false）。固定コピーから正式出力し、スモークと非対話GPU通常起動がともに終了0。EXE SHA256 `9BD1AB1D63FD447331A62EE978E635E2B8FA1864C6F673A130F543C605AAB151`。確認入口の01最新版と今回版の専用ショートカットから起動する。今回のuser-dataは新規で、旧90c0fda・92d1048の配布物と保存は残す。
+
+基礎実装90c0fdaのheadless257項目、seed31無祈り10夜勝利は過去の確認記録。今回の図鑑変更は74項目の対象検証と出力・起動確認を実施した。
 
 実コピーの隔離GPU `merchant_day` は49項目成功、7枚取得。記録は `artifacts/isolated/20261010-025357-441`、90c0fda・dirty=false・NonInteractive=true・DesktopMatched=true。商品購入・戻る・停止は検証済みだが、商品一覧／購入確認の新規画像はこのシナリオに含まれない。手動試遊とは区別する。
 
