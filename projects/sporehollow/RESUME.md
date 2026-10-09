@@ -2,7 +2,7 @@
 
 ## 現在の正本（2026-10-10）
 
-開発正本は `whitespace-balance-audit/projects/sporehollow`、作業ブランチは `codex/sporehollow-balance-audit`。確認済み実装は35038b6。最新のローカル試遊は `artifacts/playtest/20261010-050021-975/Play-Isolated.cmd`、通常プロジェクトの確認入口01が参照する。独立朝フェーズはなく昼開始。現在仕様は [TODAY_SPEC](review/quality-roadmap/TODAY_SPEC.md)、実装済み／未反映は [PROJECT_STATE](PROJECT_STATE.md)、次に扱う候補は [TASKS](TASKS.md)。
+開発正本は `whitespace-balance-audit/projects/sporehollow`、作業ブランチは `codex/sporehollow-balance-audit`。確認済み実装は2c0182a。最新のローカル試遊は `artifacts/playtest/20261010-063305-249/Play-Isolated.cmd`、通常プロジェクトの確認入口01が参照する。独立朝フェーズはなく昼開始。現在仕様は [TODAY_SPEC](review/quality-roadmap/TODAY_SPEC.md)、実装済み／未反映は [PROJECT_STATE](PROJECT_STATE.md)、次に扱う候補は [TASKS](TASKS.md)。
 
 今回ユーザーが作業ブランチへの通常pushを承認。元のoriginはローカルコピーを向くため、GitHub `shirai-masatomo/whitespace` の同名作業ブランチへ明示的にpushする。mainへのマージは含めない。以下は当時の状態を残す過去記録で、古い「最新」・朝フェーズ・push禁止などを現在の指示として使用しない。
 
@@ -143,4 +143,6 @@ Godot importの追跡.import差分は大量の改行変換だけが発生する�
 
 artifactsはGit管理外のローカル検証証拠。削除しない。参照画像の403に対して署名URLを再利用/手書きしない。新規ゲームbranchの公開、購入、破壊的変更、重大な方向変更だけ親へ相談する。
 
-今回の配布は35038b6の会話UI口パク。採用元画像を固定、口だけの透過差分を1.66秒で停止。専用19項目＋既存商人49項目成功、口以外の画素差分0。正式EXE・専用GPU起動とも成功。確認入口 `01_今回_行商人口パク_35038b6.lnk`。旧536005cは保持。比較画像・短いGIFはreview/quality-roadmap/merchant-mouth-20261010/。Library保存は公式一括保存機能がこの実行環境で未提供のため未完了、ローカル成果は保全。商品6種atlasはtempで実見したが未採用。
+前回の配布は35038b6の会話UI口パク。採用元画像を固定、口だけの透過差分を1.66秒で停止。専用19項目＋既存商人49項目成功、口以外の画素差分0。正式EXE・専用GPU起動とも成功。確認入口 `01_今回_行商人口パク_35038b6.lnk`。旧536005cは保持。比較画像・短いGIFはreview/quality-roadmap/merchant-mouth-20261010/。Library保存は公式一括保存機能がこの実行環境で未提供のため未完了、ローカル成果は保全。商品6種atlasはtempで実見したが未採用。
+
+今回の配布は2c0182a。黄金像は赤と黄の湯気がゆっくり上昇し、祈り後に消える。主人公・動物の連れ去りは森外で成立し、森内の途中救出を維持。昼BGMは7秒で立ち上がる。夜への減音は4秒、0.35秒の間の後、夜環境音を1.5秒で上げる。ゲーム時間・襲撃時刻は変更しない。影響点4枠と配布EXE起動の計5枠を確認。正式出力スモークと非対話GPU起動は成功。実音の聴感は試遊で確認する。入口は `01_今回_像と森と音_2c0182a.lnk`。旧35038b6は保持。今回の変更は完了し、追加作業は指示を待つ。
