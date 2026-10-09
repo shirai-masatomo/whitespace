@@ -1,6 +1,6 @@
 # ホイッスル牧場：現在の試遊ガイド
 
-2026-10-10更新。確認入口の `01_最新試遊.lnk` は開発コピーの `artifacts/playtest/20261010-040326-507/Play-Isolated.cmd` を指す。本体は536005c、通常版とは別の保存先。通常のPlay.cmdは旧版のため混同しない。GitHubのソースとローカル配布EXEの版はBUILD.jsonで区別する。
+2026-10-10更新。確認入口の `01_最新試遊.lnk` は開発コピーの `artifacts/playtest/20261010-050021-975/Play-Isolated.cmd` を指す。本体は35038b6、通常版とは別の保存先。通常のPlay.cmdは旧版のため混同しない。GitHubのソースとローカル配布EXEの版はBUILD.jsonで区別する。
 
 ## 進め方
 
@@ -25,3 +25,6 @@
 90c0fdaのheadless257項目成功、seed31・無祈りの自動方針で10夜勝利。実コピーの商人隔離描画49項目成功。いずれも自動検証であり、手動試遊・実音・物理IME・長時間や全PC環境の合格ではない。敵デバッグの制御配置は通常の襲来記録と区別する。
 
 現在仕様と仮値は [TODAY_SPEC](review/quality-roadmap/TODAY_SPEC.md)、残作業は [TASKS](TASKS.md)、保存と隔離手順は [SAFE_RENDER](tools/SAFE_RENDER.md) を参照。
+
+## 今回の口パク確認
+会話で挨拶した直後と買う／売る切替時だけ短く発話し、約1.66秒で閉口して止まる。停止中も口は動き、図鑑・会話を閉じると止まる。再会話で再開。体と荷車は不動。確認入口は `01_今回_行商人口パク_35038b6.lnk`。19項目＋既存49項目、正式exportスモーク・隔離GPU通常起動成功。比較と1回再生プレビューは [口パク確認](review/quality-roadmap/MERCHANT_MOUTH_REVIEW.md)。

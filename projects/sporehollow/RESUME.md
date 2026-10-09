@@ -2,11 +2,11 @@
 
 ## 現在の正本（2026-10-10）
 
-開発正本は `whitespace-balance-audit/projects/sporehollow`、作業ブランチは `codex/sporehollow-balance-audit`。確認済み実装は536005c。最新のローカル試遊は `artifacts/playtest/20261010-040326-507/Play-Isolated.cmd`、通常プロジェクトの確認入口01が参照する。独立朝フェーズはなく昼開始。現在仕様は [TODAY_SPEC](review/quality-roadmap/TODAY_SPEC.md)、実装済み／未反映は [PROJECT_STATE](PROJECT_STATE.md)、次に扱う候補は [TASKS](TASKS.md)。
+開発正本は `whitespace-balance-audit/projects/sporehollow`、作業ブランチは `codex/sporehollow-balance-audit`。確認済み実装は35038b6。最新のローカル試遊は `artifacts/playtest/20261010-050021-975/Play-Isolated.cmd`、通常プロジェクトの確認入口01が参照する。独立朝フェーズはなく昼開始。現在仕様は [TODAY_SPEC](review/quality-roadmap/TODAY_SPEC.md)、実装済み／未反映は [PROJECT_STATE](PROJECT_STATE.md)、次に扱う候補は [TASKS](TASKS.md)。
 
 今回ユーザーが作業ブランチへの通常pushを承認。元のoriginはローカルコピーを向くため、GitHub `shirai-masatomo/whitespace` の同名作業ブランチへ明示的にpushする。mainへのマージは含めない。以下は当時の状態を残す過去記録で、古い「最新」・朝フェーズ・push禁止などを現在の指示として使用しない。
 
-今回の配布：図鑑の名前欄を48pxから24pxへ縮め、枠・背景・影を撤去。同梱Noto Sans JP 400、13px／長名12px。サムネ枠・倍率・位置は名前の有無で不変。`確認入口/01_今回_図鑑名前欄_536005c.lnk` を追加し、01最新版も同じ版を指す。77項目の描画確認、固定ソースの正式出力、隔離GPU通常起動が成功。旧c5c2833は `artifacts/playtest/20261010-034957-716`、旧92d1048は `artifacts/playtest/20261010-034237-963` に保持。ユーザーの通常ゲームを停止せず、旧セーブも移動していない。
+前回の配布：図鑑の名前欄を48pxから24pxへ縮め、枠・背景・影を撤去。同梱Noto Sans JP 400、13px／長名12px。サムネ枠・倍率・位置は名前の有無で不変。`確認入口/01_今回_図鑑名前欄_536005c.lnk` を追加し、01最新版も同じ版を指す。77項目の描画確認、固定ソースの正式出力、隔離GPU通常起動が成功。旧c5c2833は `artifacts/playtest/20261010-034957-716`、旧92d1048は `artifacts/playtest/20261010-034237-963` に保持。ユーザーの通常ゲームを停止せず、旧セーブも移動していない。
 
 ## 過去の引継ぎ記録
 
@@ -142,3 +142,5 @@ Windows sandbox通常実行はhelper_unknown_errorのためrequire_escalatedを�
 Godot importの追跡.import差分は大量の改行変換だけが発生する。`git -c core.safecrlf=false diff --numstat -- ':(glob)projects/sporehollow/**/*.import'` が空と確認した追跡分だけ、コミット直前にrestoreする。新規MP3.importは必要な新規assetで保持。原本や他作業者の.importへ触れない。
 
 artifactsはGit管理外のローカル検証証拠。削除しない。参照画像の403に対して署名URLを再利用/手書きしない。新規ゲームbranchの公開、購入、破壊的変更、重大な方向変更だけ親へ相談する。
+
+今回の配布は35038b6の会話UI口パク。採用元画像を固定、口だけの透過差分を1.66秒で停止。専用19項目＋既存商人49項目成功、口以外の画素差分0。正式EXE・専用GPU起動とも成功。確認入口 `01_今回_行商人口パク_35038b6.lnk`。旧536005cは保持。比較画像・短いGIFはreview/quality-roadmap/merchant-mouth-20261010/。Library保存は公式一括保存機能がこの実行環境で未提供のため未完了、ローカル成果は保全。商品6種atlasはtempで実見したが未採用。

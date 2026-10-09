@@ -26,7 +26,7 @@
 
 図鑑一覧の今回修正は隔離GPU77項目成功（同一個体の命名前後の画像領域がピクセル一致）、未命名・個別名・日本語／英字12文字と詳細維持を描画・同一個体比較で確認。[検証記録](review/quality-roadmap/JOURNAL_NAMES_REVIEW.md)。名前欄24px高・枠なし・Noto Sans JP 400の調整まで下記536005c配布EXEへ反映済み。
 
-ローカル最新試遊は `artifacts/playtest/20261010-040326-507/Play-Isolated.cmd`（本体536005c、dirty=false）。固定コピーから正式出力し、スモークと非対話GPU通常起動がともに終了0。EXE SHA256 `8810261DEE38A6344FEF8501DDF7EC0929B47087FD5FCC03B59EECDB13528AA7`。確認入口の01最新版と今回版の専用ショートカットから起動する。今回のuser-dataは新規で、旧90c0fda・92d1048・c5c2833の配布物と保存は残す。
+ローカル最新試遊は `artifacts/playtest/20261010-050021-975/Play-Isolated.cmd`（本体35038b6、dirty=false）。会話UIの口だけを有限再生。固定コピーの正式exportスモークと非対話GPU通常起動が終了0。EXE SHA256 `DE233DACE6561C2CE0318241C121CD734DF46DD0B5788A7DA53725162FD0B2D0`。確認入口の01最新版と口パク専用ショートカットを更新。プレイヤー用user-dataは空、検証保存は分離。旧536005cとそのセーブを含む旧配布物は保持。
 
 基礎実装90c0fdaのheadless257項目、seed31無祈り10夜勝利は過去の確認記録。今回の図鑑変更は77項目の対象検証と出力・起動確認を実施した。
 
@@ -34,4 +34,4 @@
 
 今回のGitHub最新化では既存実装と設計書を作業ブランチへ反映する。mainへマージせず、通常EXE・セーブ・巨大な生成ログを追加しない。未コミットの同時変更は上書きしない。
 
-会話UIの行商人口パクを接続。表示時間のみ最長1.66秒、口以外のPNG差分0、専用19項目・既存商人49項目成功。[検証](review/quality-roadmap/MERCHANT_MOUTH_REVIEW.md)。配布更新は検証後に記録。
+会話UIの行商人口パクを接続。表示時間のみ最長1.66秒、口以外のPNG差分0、専用19項目・既存商人49項目成功。[検証](review/quality-roadmap/MERCHANT_MOUTH_REVIEW.md)。上記35038b6配布EXEへ反映済み。
