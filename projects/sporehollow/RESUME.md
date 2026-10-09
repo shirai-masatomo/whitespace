@@ -2,11 +2,11 @@
 
 ## 現在の正本（2026-10-10）
 
-開発正本は `whitespace-balance-audit/projects/sporehollow`、作業ブランチは `codex/sporehollow-balance-audit`。確認済み実装はc5c2833。最新のローカル試遊は `artifacts/playtest/20261010-034957-716/Play-Isolated.cmd`、通常プロジェクトの確認入口01が参照する。独立朝フェーズはなく昼開始。現在仕様は [TODAY_SPEC](review/quality-roadmap/TODAY_SPEC.md)、実装済み／未反映は [PROJECT_STATE](PROJECT_STATE.md)、次に扱う候補は [TASKS](TASKS.md)。
+開発正本は `whitespace-balance-audit/projects/sporehollow`、作業ブランチは `codex/sporehollow-balance-audit`。確認済み実装は536005c。最新のローカル試遊は `artifacts/playtest/20261010-040326-507/Play-Isolated.cmd`、通常プロジェクトの確認入口01が参照する。独立朝フェーズはなく昼開始。現在仕様は [TODAY_SPEC](review/quality-roadmap/TODAY_SPEC.md)、実装済み／未反映は [PROJECT_STATE](PROJECT_STATE.md)、次に扱う候補は [TASKS](TASKS.md)。
 
 今回ユーザーが作業ブランチへの通常pushを承認。元のoriginはローカルコピーを向くため、GitHub `shirai-masatomo/whitespace` の同名作業ブランチへ明示的にpushする。mainへのマージは含めない。以下は当時の状態を残す過去記録で、古い「最新」・朝フェーズ・push禁止などを現在の指示として使用しない。
 
-今回の配布：図鑑の名前あり／なしで画像枠・倍率・位置を統一。`確認入口/01_今回_図鑑画像枠統一_c5c2833.lnk` を追加し、01最新版も同じ版を指す。74項目の描画確認、固定ソースの正式出力、隔離GPU通常起動が成功。旧92d1048は `artifacts/playtest/20261010-034237-963` に保持。ユーザーの通常ゲームを停止せず、旧セーブも移動していない。
+今回の配布：図鑑の名前欄を48pxから24pxへ縮め、枠・背景・影を撤去。同梱Noto Sans JP 400、13px／長名12px。サムネ枠・倍率・位置は名前の有無で不変。`確認入口/01_今回_図鑑名前欄_536005c.lnk` を追加し、01最新版も同じ版を指す。77項目の描画確認、固定ソースの正式出力、隔離GPU通常起動が成功。旧c5c2833は `artifacts/playtest/20261010-034957-716`、旧92d1048は `artifacts/playtest/20261010-034237-963` に保持。ユーザーの通常ゲームを停止せず、旧セーブも移動していない。
 
 ## 過去の引継ぎ記録
 

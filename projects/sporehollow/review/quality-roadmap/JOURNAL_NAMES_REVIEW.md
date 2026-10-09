@@ -10,6 +10,10 @@
 
 journal_view SHA256：`53b22a99fe7666278240a1f99d724a4f40cb85380c46e4df67725b6007d7cb04`。以下は前版の仕様・配布記録。
 
+## 最新配布536005c
+
+本体 `536005c70238f7448803b04a895377cdf89f0637`、dirty=false。固定コピーで正式出力し、スモーク成功、配布EXEの非対話GPU通常起動はExitCode=0。パッケージ `artifacts/playtest/20261010-040326-507`、SHA256 `8810261DEE38A6344FEF8501DDF7EC0929B47087FD5FCC03B59EECDB13528AA7`。名前専用FontVariationと同梱OFLライセンスを含む。確認入口の01最新版と `01_今回_図鑑名前欄_536005c.lnk` を更新。旧版・既存セーブを保持し、新版のplayer用user-dataは空、検証は別保存先。
+
 ## 前版c5c2833：名前の有無で画像枠を統一
 
 ユーザーの追加指定により、全カードの画像領域を108×76、左上から(20,12)へ固定。下の名前領域128×48は未命名でも同じ高さを確保し、空欄のままにする。元画像の縦横比を保つ既存の等比描画を維持。長名の折返し・縮字は名前だけに適用し、絵を縮めない。
@@ -18,7 +22,7 @@ journal_view SHA256：`53b22a99fe7666278240a1f99d724a4f40cb85380c46e4df67725b600
 
 今回のjournal_view SHA256：`fd1e56a787889afce69a2669c6c4b94284b197c54ad5dc684cfa2ba03b9cac58`。以下の72項目とハッシュは前版92d1048時点の記録。出力済み旧版92d1048も残し、新版は別の日時別パッケージとする。
 
-## 最終試遊版
+## 前版c5c2833の試遊版
 
 本体 `c5c283343190969463bb58d8993162402f56804d`、dirty=false。正式な `tools/export_isolated.ps1` を固定コミットの専用コピーで実行し、`artifacts/playtest/20261010-034957-716` へ別バージョンとして配置。EXE SHA256 `9BD1AB1D63FD447331A62EE978E635E2B8FA1864C6F673A130F543C605AAB151`。出力スモーク成功、非対話GPU通常起動はExitCode=0、DesktopMatched=true。確認入口の01最新版とc5c2833専用ショートカットを更新。詳細は配布BUILD.jsonと `artifacts/export-verification/20261010-034957-716-journal-names/verification.json`。プレイヤー用保存先は新規、検証は別の保存先。旧92d1048と90c0fdaを維持する。
 

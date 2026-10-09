@@ -24,11 +24,11 @@
 
 ## 検証と配布
 
-図鑑一覧の今回修正は隔離GPU77項目成功（同一個体の命名前後の画像領域がピクセル一致）、未命名・個別名・日本語／英字12文字と詳細維持を描画・同一個体比較で確認。[検証記録](review/quality-roadmap/JOURNAL_NAMES_REVIEW.md)。画像枠統一は下記c5c2833へ反映済み。さらに名前欄を24px高・枠なし・Noto Sans JP 400へ調整したソースを追加。新版の配布記録は出力後に更新する。
+図鑑一覧の今回修正は隔離GPU77項目成功（同一個体の命名前後の画像領域がピクセル一致）、未命名・個別名・日本語／英字12文字と詳細維持を描画・同一個体比較で確認。[検証記録](review/quality-roadmap/JOURNAL_NAMES_REVIEW.md)。名前欄24px高・枠なし・Noto Sans JP 400の調整まで下記536005c配布EXEへ反映済み。
 
-ローカル最新試遊は `artifacts/playtest/20261010-034957-716/Play-Isolated.cmd`（本体c5c2833、dirty=false）。固定コピーから正式出力し、スモークと非対話GPU通常起動がともに終了0。EXE SHA256 `9BD1AB1D63FD447331A62EE978E635E2B8FA1864C6F673A130F543C605AAB151`。確認入口の01最新版と今回版の専用ショートカットから起動する。今回のuser-dataは新規で、旧90c0fda・92d1048の配布物と保存は残す。
+ローカル最新試遊は `artifacts/playtest/20261010-040326-507/Play-Isolated.cmd`（本体536005c、dirty=false）。固定コピーから正式出力し、スモークと非対話GPU通常起動がともに終了0。EXE SHA256 `8810261DEE38A6344FEF8501DDF7EC0929B47087FD5FCC03B59EECDB13528AA7`。確認入口の01最新版と今回版の専用ショートカットから起動する。今回のuser-dataは新規で、旧90c0fda・92d1048・c5c2833の配布物と保存は残す。
 
-基礎実装90c0fdaのheadless257項目、seed31無祈り10夜勝利は過去の確認記録。今回の図鑑変更は74項目の対象検証と出力・起動確認を実施した。
+基礎実装90c0fdaのheadless257項目、seed31無祈り10夜勝利は過去の確認記録。今回の図鑑変更は77項目の対象検証と出力・起動確認を実施した。
 
 実コピーの隔離GPU `merchant_day` は49項目成功、7枚取得。記録は `artifacts/isolated/20261010-025357-441`、90c0fda・dirty=false・NonInteractive=true・DesktopMatched=true。商品購入・戻る・停止は検証済みだが、商品一覧／購入確認の新規画像はこのシナリオに含まれない。手動試遊とは区別する。
 
