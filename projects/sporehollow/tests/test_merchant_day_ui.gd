@@ -28,6 +28,7 @@ func run():
 	check(game.world.trees.keys().all(func(p):return not preload("res://game/forest_pattern.gd").merchant_clearing(p)),"Merchant apron has no trees or tree collision")
 	game._process(0);game.hud.queue_redraw();game.queue_redraw();await capture("01_day_merchant_arrival")
 
+	game.world.tick=136 # Begin approach at 34 seconds, just before scheduled departure.
 	game.world.paused=true;var tick=game.world.tick
 	await mouse(game.screen_cell(Farm.MERCHANT_CELL))
 	check(game.merchant_requested and not game.field_shop,"Click reserves physical approach during pause")
@@ -35,10 +36,12 @@ func run():
 	check(game.world.tick==tick,"Pause does not consume merchant visit")
 	game.world.paused=false
 	for i in range(590):
-		game.world.step();game.record_actor_tracks();game._process(Farm.DT)
+		game.world.step();game.record_actor_tracks();
+		game._process(Farm.DT)
 		if game.field_shop:break
 	check(game.field_shop and game.world.keeper.pos in game.world.merchant_talk_cells(),"Keeper approaches before shop opens")
 	check(game.world.phase=="day","Shop retains daytime phase")
+	check(game.world.tick*Farm.DT>35 and game.world.merchant_present(),"Merchant waits beyond deadline for physical approach and shopping")
 	check(game.world.keeper.pos==game.world.merchant_talk_cells()[0],"Prefer cart front over distant diagonal candidate")
 	check(game.view_positions.keeper.distance_to(Vector2(game.world.keeper.pos))<0.08,"Conversation waits for visible keeper arrival")
 	tick=game.world.tick;var before=[game.world.keeper.duplicate(true),game.world.animals.duplicate(true),game.world.natural.duplicate(true),game.world.jobs.duplicate(true)]
@@ -52,6 +55,7 @@ func run():
 	await press("close_market")
 	check(not game.field_shop and not game.world.market_open and game.world.phase=="day","Close returns directly to daytime")
 	game.queue_redraw();game.hud.queue_redraw();await capture("04_conversation_distance")
+	game.world.merchant_leave_at=Farm.MERCHANT_DELAY+Farm.MERCHANT_SECONDS
 	game.world.tick=int(34.95/Farm.DT)
 	check(game.world.merchant_present(),"Merchant present before 35 seconds")
 	game.world.step()
@@ -72,6 +76,13 @@ func run():
 	game.world.phase="dawn";game.world.next_campaign()
 	game.advance();game._process(0)
 	check(game.world.phase=="day" and not game.world.merchant_present(),"Following day also waits five seconds for merchant")
+	var wait_world=Farm.new({},31).begin_day()
+	wait_world.tick=140;wait_world.merchant_approach=wait_world.merchant_talk_cells()[0];wait_world.manual_goal=wait_world.merchant_approach
+	check(wait_world.merchant_present(),"Valid approach holds merchant at deadline")
+	wait_world.manual_goal=null
+	check(not wait_world.merchant_present(),"Cancelled or failed movement releases waiting merchant")
+	wait_world.manual_goal=wait_world.merchant_approach;wait_world.keeper.state="unconscious"
+	check(not wait_world.merchant_present(),"Incapacitation releases merchant wait")
 	var saved=Farm.new({},31);var save_record=game.MorningSave.capture(saved)
 	check(not save_record.is_empty() and game.MorningSave.restore(save_record)!=null,"Existing start-of-day save remains compatible")
 	FileAccess.open(output+"/merchant-day.json",FileAccess.WRITE).store_string(JSON.stringify(record,"  "))

@@ -36,6 +36,17 @@ var phase = "shop" # Legacy save boundary, entered directly as daytime by the sc
 var market_open=false
 const MERCHANT_DELAY=5.0
 const MERCHANT_SECONDS=30.0
+var merchant_approach=null
+var merchant_approach_job=-1
+var merchant_leave_at=MERCHANT_DELAY+MERCHANT_SECONDS
+
+func merchant_waiting() -> bool:
+	var waking=keeper.get("auto_wake_pending",false) and keeper.get("rest_kind","")=="auto"
+	if merchant_approach==null or keeper.state!="free" or (keeper.resting and not waking):return false
+	if keeper.pos==merchant_approach:return true
+	if (jobs_held and not (waking and job_hold_reason=="auto_rest")) or not walkable(merchant_approach) or find_path(keeper.pos,merchant_approach).is_empty():return false
+	return manual_goal==merchant_approach or jobs.any(func(j):return j.id==merchant_approach_job and j.kind=="move" and not j.get("cancel_requested",false))
+
 const MERCHANT_CELL=Vector2i(2,5)
 
 func merchant_talk_cells() -> Array:
@@ -43,7 +54,7 @@ func merchant_talk_cells() -> Array:
 	return [MERCHANT_CELL+Vector2i(0,2),MERCHANT_CELL+Vector2i(1,2),MERCHANT_CELL+Vector2i(2,2)]
 
 func merchant_present() -> bool:
-	return phase=="day" and tick*DT>=MERCHANT_DELAY and tick*DT<MERCHANT_DELAY+MERCHANT_SECONDS
+	return phase=="day" and tick*DT>=MERCHANT_DELAY and (tick*DT<merchant_leave_at or merchant_waiting() or market_open)
 
 const Life = preload("res://game/keeper_life.gd")
 var jobs_held = false
@@ -919,6 +930,7 @@ func step():
 	for a in animals:
 		if not a.placed: admit(a,logistics_entry)
 	Life.begin_rest_until(self)
+	if phase=="day" and merchant_waiting():merchant_leave_at=maxf(merchant_leave_at,(tick+1)*DT)
 	tick += 1
 	if not keeper.has("has_stamina"): Combat.init_actor(keeper,true)
 	Combat.recover(keeper,DT,keeper.resting)

@@ -1200,7 +1200,7 @@ func board_click(event):
 	var point=get_canvas_transform().affine_inverse()*event.position
 	if world.merchant_present() and Rect2(center(Farm.MERCHANT_CELL)-Vector2(55,65),Vector2(115,100)).has_point(point) and tool=="":
 		request_merchant();return
-	merchant_requested=false
+	merchant_requested=false;world.merchant_approach=null
 	var cell = Vector2i(get_canvas_transform().affine_inverse() * event.position / TILE)
 	if tool in ["guide","attack_target","charge"]:
 		command_selected(tool,cell);refresh();return
@@ -1292,9 +1292,9 @@ func clamp_camera():
 func _process(delta):
 	if world.phase=="shop" and not save_load_blocked:enter_daytime();refresh()
 	if merchant_requested:
-		if not world.merchant_present() or world.keeper.state!="free":merchant_requested=false
+		if not world.merchant_present() or not world.merchant_waiting():merchant_requested=false;world.merchant_approach=null
 		elif not world.paused and world.keeper.pos==merchant_talk_target and view_positions.get("keeper",Vector2(world.keeper.pos)).distance_to(Vector2(merchant_talk_target))<0.08:open_market()
-	if world.phase=="day" and world.tick*Farm.DT>=Farm.MERCHANT_DELAY+Farm.MERCHANT_SECONDS and departure_started<0:departure_started=clock
+	if world.phase=="day" and not world.merchant_present() and world.tick*Farm.DT>=world.merchant_leave_at and departure_started<0:departure_started=clock
 
 	if wall_stroke.kind!="" and (group!=0 or tool!=wall_stroke.kind or menu_open or field_book or field_shop or story_modal!="" or cinematic() or not world.working()):cancel_wall_stroke()
 	if book_motion != "":
@@ -2100,7 +2100,7 @@ func enter_daytime():
 	var next=world.begin_day()
 	if next==null:return
 	world=next;group=-1;morning_screen="morning";arrival_started=clock
-	field_shop=false;merchant_requested=false;departure_started=-100.0
+	field_shop=false;merchant_requested=false;world.merchant_approach=null;departure_started=-100.0
 
 func request_merchant():
 	if not world.merchant_present():notice("商人はまだ来ていません" if world.tick*Farm.DT<Farm.MERCHANT_DELAY else "商人は帰りました");return
@@ -2112,11 +2112,13 @@ func request_merchant():
 	if candidates.is_empty():notice("商人の近くへ行けません");return
 	if not world.act("keeper_move",candidates[0]):notice("今は話しかけに行けません");return
 	merchant_talk_target=candidates[0]
+	world.merchant_approach=merchant_talk_target
+	world.merchant_approach_job=world.jobs.back().id
 	merchant_requested=true;notice("商人に話しかけに行きます")
 
 func open_market():
 	if not world.merchant_present() or world.keeper.pos not in world.merchant_talk_cells():return
-	field_shop=true;world.market_open=true;merchant_requested=false;accumulated=0
+	field_shop=true;world.market_open=true;merchant_requested=false;world.merchant_approach=null;accumulated=0
 	morning_screen = "market"
 	shop_side = "home"
 	shop_level = "categories"
@@ -2407,7 +2409,10 @@ func react(id: int, kind: String, duration: float):
 func merchant_visual_elapsed() -> float:
 	# Interpolate within the fixed 0.25-second simulation step. The accumulator
 	# already follows speed and stops during pause/shop; gameplay timing is unchanged.
-	return world.tick*Farm.DT-Farm.MERCHANT_DELAY+clampf(accumulated,0,Farm.DT)
+	var elapsed=world.tick*Farm.DT-Farm.MERCHANT_DELAY+clampf(accumulated,0,Farm.DT)
+	if world.merchant_present():return minf(Farm.MERCHANT_SECONDS,elapsed)
+	if elapsed>=Farm.MERCHANT_SECONDS:return Farm.MERCHANT_SECONDS+maxf(0,world.tick*Farm.DT-world.merchant_leave_at)+clampf(accumulated,0,Farm.DT)
+	return elapsed
 
 func merchant_world_position() -> Vector2:
 	var elapsed=merchant_visual_elapsed()
@@ -2421,7 +2426,7 @@ func draw_market_world():
 	if elapsed<0 or elapsed>=Farm.MERCHANT_SECONDS+1:return
 	var q=merchant_world_position()
 	SixMotion.paint(self,"merchant","cart_move" if elapsed<1.8 or elapsed>Farm.MERCHANT_SECONDS else "cart_idle",-1 if elapsed>Farm.MERCHANT_SECONDS else 1,q+Vector2(20,30),visual_time)
-	if world.merchant_present():label_on(self,q+Vector2(95,0),"商人 · あと%d秒"%ceili(Farm.MERCHANT_DELAY+Farm.MERCHANT_SECONDS-world.tick*Farm.DT),14,UI.PAPER)
+	if world.merchant_present():label_on(self,q+Vector2(95,0),"商人 · 待っています" if world.merchant_waiting() and world.tick*Farm.DT>=Farm.MERCHANT_DELAY+Farm.MERCHANT_SECONDS else "商人 · あと%d秒"%maxi(0,ceili(world.merchant_leave_at-world.tick*Farm.DT)),14,UI.PAPER)
 
 func draw_merchant_bubble():
 	if not world.merchant_present() or merchant_visual_elapsed()<1.8:return
