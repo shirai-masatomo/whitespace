@@ -145,3 +145,6 @@ Human盤面は足元を固定して1.15倍（keeper/adopted_art、既存Human/pr
 ## 2026-10-09 試験使用
 
 `assets/ui/trial_buy_sell.png`：ユーザー提供かご/袋PNGを原本のまま保存しAtlasで二分、ショップ入口の買う/売るに接続。最終採用未確定。SHA256 `3664a9f66c861cf3b9a991e1a2b6e5b6d842deb1eca936f98b8e243881d2ace8`。商人の口パク連番は未納品、静止の正式荷車を維持。既存の採用素材SHAはgame/art_provenance.jsonから変更なし。
+
+### 商人吹き出しA / 2026-10-10
+採用済み。assets/ui/merchant_bubble_a.pngを朝・市場へ接続。原本を保全し、角としっぽは等比、中央のみ可変。文字は動的表示。隔離GPU bubble_aで朝・指定挨拶・上向き短文を確認。

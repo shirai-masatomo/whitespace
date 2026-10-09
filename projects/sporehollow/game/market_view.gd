@@ -18,6 +18,7 @@ const FOOTER = Rect2(LEFT,624,752,140)
 const SCROLL_STEP = 80.0
 const ROW_HEIGHT = 72.0
 const ROW_PITCH = 80.0
+const SPEECH_A=preload("res://assets/ui/merchant_bubble_a.png")
 const TRADE_CANDIDATE=preload("res://assets/ui/trial_buy_sell.png")
 static var image_regions: Dictionary = {}
 static var missing_reported: Dictionary = {}
@@ -129,18 +130,40 @@ static func text(game,c,area: Rect2,value: String,size: int=18,color: Color=UI.I
 	paragraph.break_flags=TextServer.BREAK_MANDATORY|TextServer.BREAK_WORD_BOUND|TextServer.BREAK_ADAPTIVE
 	paragraph.draw(c.get_canvas_item(),area.position,color)
 
+static func speech_layout(game,area: Rect2,value: String,font_size: int) -> Dictionary:
+	var paragraph=TextParagraph.new()
+	paragraph.add_string(value,game.FONT,font_size)
+	paragraph.width=maxf(80,area.size.x-40)
+	paragraph.break_flags=TextServer.BREAK_MANDATORY|TextServer.BREAK_WORD_BOUND|TextServer.BREAK_ADAPTIVE
+	paragraph.alignment=HORIZONTAL_ALIGNMENT_CENTER
+	var body=Vector2(minf(area.size.x,maxf(150,paragraph.get_size().x+40)),maxf(60,paragraph.get_size().y+28))
+	return {"paragraph":paragraph,"body":Rect2(Vector2(area.get_center().x-body.x/2,area.position.y),body)}
+
 static func speech_bubble(game,c,area: Rect2,value: String,font_size: int,tail_up: bool=false):
-	# Reference: angular white balloon, dark outline, and an integrated tail.
-	var w=area.size.x;var h=area.size.y
-	var points=PackedVector2Array([Vector2(0,h*0.42),Vector2(14,10),Vector2(w*0.3,2),Vector2(w*0.76,0),Vector2(w-16,12),Vector2(w,h*0.35),Vector2(w-7,h-13),Vector2(w*0.6,h),Vector2(w*0.49,h-2),Vector2(w*0.54,h+12),Vector2(w*0.42,h-2),Vector2(16,h-5)])
-	if tail_up:
-		for i in range(points.size()):points[i].y=h-points[i].y
-	for i in range(points.size()):points[i]+=area.position
-	c.draw_colored_polygon(points,Color("fffdf5"))
-	points.append(points[0]);c.draw_polyline(points,Color("302c24"),3,true)
-	var paragraph=TextParagraph.new();paragraph.add_string(value,game.FONT,font_size)
-	paragraph.width=area.size.x-32;paragraph.alignment=HORIZONTAL_ALIGNMENT_CENTER
-	paragraph.draw(c.get_canvas_item(),Vector2(area.position.x+16,area.get_center().y-paragraph.get_size().y/2).round(),UI.INK)
+	var layout=speech_layout(game,area,value,font_size)
+	var body: Rect2=layout.body
+	# Original RGBA remains intact. Corners and tail retain a uniform 0.14 scale.
+	# Extra fixed column protects the tail from the horizontal nine-slice stretch.
+	var scale_value=0.14
+	var sx=[37.0,240.0,535.0,665.0,1940.0,2140.0]
+	var sy=[96.0,240.0,390.0,632.0]
+	var left=(sx[1]-sx[0])*scale_value;var right=(sx[5]-sx[4])*scale_value
+	var tail_width=(sx[3]-sx[2])*scale_value
+	var tail_x=clampf(body.size.x*0.30,left+4,body.size.x-right-tail_width-4)
+	var dx=[0.0,left,tail_x,tail_x+tail_width,body.size.x-right,body.size.x]
+	var dy=[0.0,(sy[1]-sy[0])*scale_value,body.size.y-(550.0-sy[2])*scale_value,body.size.y+(sy[3]-550.0)*scale_value]
+	var previous=c.texture_filter
+	c.texture_filter=CanvasItem.TEXTURE_FILTER_LINEAR
+	c.draw_set_transform(body.position+Vector2(0,body.size.y) if tail_up else body.position,0,Vector2(1,-1) if tail_up else Vector2.ONE)
+	for y in range(3):
+		for x in range(5):
+			var region=Rect2(sx[x],sy[y],sx[x+1]-sx[x],sy[y+1]-sy[y])
+			var dest=Rect2(Vector2(dx[x],dy[y]),Vector2(dx[x+1]-dx[x],dy[y+1]-dy[y]))
+			c.draw_texture_rect_region(SPEECH_A,dest,region)
+	c.draw_set_transform(Vector2.ZERO)
+	c.texture_filter=previous
+	var paragraph: TextParagraph=layout.paragraph
+	paragraph.draw(c.get_canvas_item(),Vector2(body.get_center().x-paragraph.width/2,body.get_center().y-paragraph.get_size().y/2).round(),UI.INK)
 
 static func merchant(game,c,area: Rect2):
 	art_texture(c,Art.CART,area)
