@@ -8,6 +8,8 @@ func run():
 	root.add_child(game);await process_frame;await process_frame
 	game.arrival_started=game.clock-5;game.refresh();game._process(0);game.set_process(false)
 	var tick=game.world.tick;var gold=game.world.campaign.gold
+	check(game.StoryView.morning_layout(game).paper.encloses(game.buttons.advance.get_global_rect()),"Preparation button inside morning paper")
+	check(game.buttons.open_book.get_theme_stylebox("normal").bg_color==Color("dc934b"),"Book uses orange action style")
 	for value in ["いらっしゃい、何か見ていくかい？","いらっしゃい","持ち物を見せてね","長い台詞でも、文字の行数に合わせて高さと余白を確保します。"]:
 		var layout=game.MarketView.speech_layout(game,Rect2(0,0,204,67),value,18)
 		check(layout.body.size.y>=layout.paragraph.get_size().y+28,"Text padding: "+value)

@@ -278,6 +278,13 @@ static func build(game):
 		game.add_button(game.palette,"open_book","図鑑を開く",Rect2(725,465,220,40),game.open_book)
 		game.buttons.open_book.icon=UI.icon("book")
 		button_style(game.buttons.open_market,true);button_style(game.buttons.open_book)
+		var book=game.buttons.open_book
+		for state in ["normal","hover","pressed"]:
+			var color={"normal":Color("dc934b"),"hover":Color("ecac65"),"pressed":Color("c77f3c")}[state]
+			var frame=panel(color,Color("8f592e"),2)
+			frame.shadow_size=1 if state=="pressed" else 4
+			frame.shadow_offset=Vector2(0,1 if state=="pressed" else 3)
+			book.add_theme_stylebox_override(state,frame)
 		if game.Farm.Progression.Encounters.reached(game.world.campaign):
 			if game.restart_confirm:
 				game.add_button(game.palette,"route_restart_yes","新しい牧場を始める",Rect2(376,576,256,36),game.new_campaign)
@@ -345,6 +352,7 @@ static func draw(game):
 	var c=game.hud
 	if game.morning_screen=="morning":
 		c.draw_style_box(panel(PAPER,UI.WOOD,3),game.StoryView.morning_layout(game).paper)
+		text(game,c,Rect2(368,133,340,40),"朝の市",28)
 		price(game,c,Vector2(818,141),game.world.campaign.gold,24)
 		speech_bubble(game,c,Rect2(348,190,314,62),"いらっしゃい、何か見ていくかい？",16)
 		merchant(game,c,Rect2(367,263,257,190))

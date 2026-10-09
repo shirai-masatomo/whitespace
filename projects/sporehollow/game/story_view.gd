@@ -81,8 +81,7 @@ static func rebuild(g):
 static func morning_layout(g) -> Dictionary:
 	# Paper and footer share one layout; optional messages cannot escape the card.
 	var buttons=[]
-	if g.world.story.radio:buttons.append({"id":"radio","text":"ラジオ","kind":"radio","rect":Rect2(794,626,154,40)})
-	var notes=[];var y=674.0
+	var notes=[];var y=530.0
 	if g.world.story.radio and not g.world.story.news.is_empty():
 		notes.append({"name":"MorningNews","text":"放送："+g.world.story.news[-1].title,"rect":Rect2(368,y,580,24)});y+=28
 	var gifts=g.world.story.miracles.filter(func(m):return m.day==g.world.campaign.day)
@@ -90,8 +89,9 @@ static func morning_layout(g) -> Dictionary:
 		notes.append({"name":"MorningGift","text":"願いの贈り物："+gifts[-1].get("text","金貨 +60G"),"rect":Rect2(368,y,580,24)});y+=28
 	if g.save_status!="":
 		notes.append({"name":"MorningSaveStatus","text":g.save_status,"rect":Rect2(368,y,580,44)});y+=48
-	var bottom=686.0 if notes.is_empty() else y+10.0
-	return {"paper":Rect2(330,112,656,bottom-112),"buttons":buttons,"notes":notes}
+	var footer_y=maxf(626,y+12)
+	if g.world.story.radio:buttons.append({"id":"radio","text":"ラジオ","kind":"radio","rect":Rect2(368,footer_y,154,40)})
+	return {"paper":Rect2(330,112,656,footer_y+60-112),"advance":Rect2(758,footer_y,190,44),"buttons":buttons,"notes":notes}
 
 static func morning_buttons(g):
 	var layout=morning_layout(g)

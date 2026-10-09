@@ -380,9 +380,9 @@ func refresh():
 	buttons.speed.disabled = not world.rest_skip.is_empty()
 	buttons.advance.visible = (world.phase == "shop" and morning_screen == "morning") or world.phase=="day" or (world.phase=="defend" and world.early_clear)
 	buttons.advance.text = "支度を終える" if world.phase == "shop" else rest_button_text()
-	buttons.advance.position = Vector2(1018,696) if world.phase=="shop" else Vector2(1074,754)
+	buttons.advance.position = StoryView.morning_layout(self).advance.position if world.phase=="shop" else Vector2(1074,754)
 	if world.phase=="shop" and Farm.Progression.Encounters.reached(world.campaign):
-		buttons.advance.position=Vector2(1018,696)
+		buttons.advance.position=StoryView.morning_layout(self).advance.position
 		buttons.advance.text="牧場を続ける"
 		buttons.advance.visible=morning_screen=="morning" and not restart_confirm
 	buttons.advance.tooltip_text = "商人を見送り、昼の牧場仕事を始めます" if world.phase == "shop" else ""

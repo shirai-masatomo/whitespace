@@ -13,7 +13,7 @@ func extras():
 	await mouse(Vector2(800,300),MOUSE_BUTTON_RIGHT);await settle()
 	check(game.morning_screen=="morning","Book right-click closes safely")
 	check(not game.buttons.has("diary") and not game.buttons.has("intro_again"),"Morning removes buttons only")
-	check(game.buttons.advance.position.x>980 and game.buttons.advance.position.y>650,"Preparation control in lower right")
+	check(game.StoryView.morning_layout(game).paper.encloses(game.buttons.advance.get_global_rect()),"Preparation control inside paper lower right")
 	await press("advance");await settle()
 	check(game.world.phase=="day","Preparation still starts daytime")
 	game.world.paused=true;game.select_group(0);game.refresh();await process_frame
