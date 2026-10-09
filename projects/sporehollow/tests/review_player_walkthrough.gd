@@ -35,10 +35,12 @@ func snapshot(label: String):
 	state.scenario=scenario;state.idol=w.story.idol;state.life_log=w.life_log;state.job_log=w.job_log
 	state.combat_log=w.combat_log;state.skill_log=w.skill_log
 	state.player_events=w.player_events
+	state.selection={"group":game.group,"tool":game.tool,"target":game.selected,"animal_ids":game.selected_animals}
 	state.pending_spawns=w.spawn_schedule.slice(w.schedule_index);state.remaining_night=w.remaining_night();state.early_clear=w.early_clear
 	for i in range(w.animals.size()):
 		var a=w.animals[i]
 		state.animals[i].merge({"abductor":a.get("abductor",-1),"dead":a.get("dead",false),"lost":a.get("lost",false),"target_id":a.get("target_id",-1)})
+		state.animals[i].guide_job=a.get("guide_job",-1)
 	for i in range(w.enemies.size()):
 		var e=w.enemies[i]
 		state.enemies[i].merge({"state":e.state,"led_animal":e.get("led_animal",-1),"dead":e.get("dead",false),"revived":e.get("revived",false),"gauge":e.get("ultimate_gauge",0),"chosen_target":e.get("chosen_target",{})})
@@ -52,7 +54,7 @@ func snapshot(label: String):
 
 func fixture(name: String):
 	# Explicitly separate branch setup from a continuous new-game review. Private save only.
-	if name not in ["recovery","kidnapping","animal_loss","idol_breaker","idol_extraction","target_range","tamer_dancer","tamer_dancer_rescue","tamer_dancer_intercept","salary_dancer_interrupt","salary_dancer_reserved","salary_dancer_dawn","phone_book"]:return
+	if name not in ["recovery","kidnapping","animal_loss","idol_breaker","idol_extraction","target_range","tamer_dancer","tamer_dancer_rescue","tamer_dancer_intercept","salary_dancer_interrupt","salary_dancer_reserved","salary_dancer_dawn","phone_book","guide_targets"]:return
 	scenario="fixture_"+name
 	if is_instance_valid(game.story_panel):game.story_panel.queue_free();game.story_panel=null
 	var campaign=Farm.new({},31).campaign.duplicate(true)
@@ -89,6 +91,8 @@ func fixture(name: String):
 		w.spawn_enemy({"role":"kidnapper","entry":Vector2i(1,8),"lv":1,"debug_single":true})
 		w.enemies.back().pos=Vector2i(8,15);w.keeper.pos=Vector2i(7,14)
 	game.reset_view();game.story_modal="";game.arrival_started=-10;game.recenter();game.refresh()
+	if name=="guide_targets":
+		game.world=preload("res://tests/review_guide_fixture.gd").create();game.reset_view();game.recenter();game.refresh()
 	if name=="phone_book":
 		# Display-only tooltip fixture; combat and knowledge discovery are reviewed separately.
 		game.world=Farm.new({},31);game.world.campaign.enemy_knowledge.salaryman=3
@@ -110,7 +114,12 @@ func apply(request: Dictionary):
 					events.append({"rejected":"unavailable button","id":action.id});continue
 				await mouse(b.get_global_rect().get_center())
 			"cell":await mouse(game.screen_cell(Vector2i(action.x,action.y)),action.get("button",MOUSE_BUTTON_LEFT))
+			"animal":
+				var a=game.world.Orders.animal(game.world,int(action.id))
+				if not a.is_empty() and a.placed:await mouse(game.get_canvas_transform()*game.animal_hit_rect(a).get_center())
 			"mouse":await mouse(Vector2(action.x,action.y),action.get("button",MOUSE_BUTTON_LEFT))
+			"hover_cell":
+				var motion=InputEventMouseMotion.new();motion.position=game.screen_cell(Vector2i(action.x,action.y));root.push_input(motion,true);await process_frame
 			"hover":
 				var motion=InputEventMouseMotion.new();motion.position=Vector2(action.x,action.y);root.push_input(motion,true);await process_frame
 			"key":await key(OS.find_keycode_from_string(action.key))

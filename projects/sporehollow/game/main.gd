@@ -28,7 +28,7 @@ var six_art={}
 var six_revived={}
 const TOOLS = {"milk":"搾乳", "charge":"突撃", "place_kokeshi":"こけしを置く", "place_fossil":"化石を置く","wall": "壁  10 / 1秒", "wood_wall":"木壁 木10", "stone_wall":"石壁 石10", "soil_tile":"土タイル 土2", "wood_tile":"木タイル 木2", "stone_tile":"石タイル 石2", "door":"ドア 木10", "locked_door":"施錠ドア 木20", "guide":"連れてく", "equip":"装備", "repair": "修理", "gate": "ドア開閉", "remove": "解体",
 	"attack_target":"狙え", "auto": "おまかせ", "stay": "待て", "wander": "警戒", "rest": "無理するな", "collect": "資源・卵・設計図", "dog_food": "犬用餌 HP+10", "hen_food": "鶏用餌 HP+8", "cat_food": "猫用餌 HP+8"}
-const ORDER_HELP={"auto":"状況に合わせて行動します。戦闘・救護・その動物の仕事を任せます。","guide":"行き先を選び一緒に歩きます。1匹なら隣接し、遅い側の速さに合わせます。複数は近くにまとまり、到着でおまかせに戻ります。","stay":"その場所で待ちます。近くの敵には応戦しますが、追いかけません。","wander":"周囲を巡回し、敵を見つけたら攻撃します。","rest":"安全と回復を優先します。危険から離れ、無理に追わず近くの敵に応戦します。","attack_target":"敵を選べ。狙える距離や見通しが必要です。","equip":"持ち物から装備を選び、主人公が届けます。","milk":"乳牛に近づいて搾乳します。1日1回です。","charge":"突撃する行き先を選びます。"}
+const ORDER_HELP={"auto":"状況に合わせて行動します。戦闘・救護・その動物の仕事を任せます。","guide":"行き先をクリックして一緒に歩きます。\n物や動物は、押した時点の近くの空き場所へ。\n1匹なら隣接し、遅い方に合わせます。\n複数は近くにまとまり、到着でおまかせへ。\n右クリックで行き先指定を解除します。","stay":"その場所で待ちます。近くの敵には応戦しますが、追いかけません。","wander":"周囲を巡回し、敵を見つけたら攻撃します。","rest":"安全と回復を優先します。危険から離れ、無理に追わず近くの敵に応戦します。","attack_target":"敵を選べ。狙える距離や見通しが必要です。","equip":"持ち物から装備を選び、主人公が届けます。","milk":"乳牛に近づいて搾乳します。1日1回です。","charge":"突撃する行き先を選びます。"}
 const GROUP_TOOLS = [["wall", "wood_wall", "stone_wall", "soil_tile", "wood_tile", "stone_tile", "door", "locked_door", "place_kokeshi", "place_fossil"], ["auto", "guide", "stay", "wander", "rest", "attack_target", "equip", "milk", "charge"], ["collect"]]
 const BoardArt = preload("res://game/board_art.gd")
 const BuildingArt = preload("res://game/building_art.gd")
@@ -245,6 +245,7 @@ func select_group(index: int):
 func select_tool(id: String, execute: bool = true):
 	cancel_wall_stroke()
 	tool = id
+	if execute and id=="guide":notice("行き先をクリック。対象物は近くの空き場所へ。右クリックで解除")
 	if execute and id=="milk":
 		for aid in selected_animals:world.act("milk",Vector2i.ZERO,aid)
 	if execute and id=="equip": equipment_open=not equipment_open
@@ -1176,7 +1177,7 @@ func update_wall_stroke():
 
 func board_click(event):
 	var cell = Vector2i(get_canvas_transform().affine_inverse() * event.position / TILE)
-	if tool in ["attack_target","charge"]:
+	if tool in ["guide","attack_target","charge"]:
 		command_selected(tool,cell);refresh();return
 	if tool.begins_with("place_"):
 		if not world.act(tool,cell):notice("空き場所と持ち物を確認してください")
@@ -1680,9 +1681,13 @@ func draw_pointer_preview():
 		var show_preview = false
 		if tool == "guide" and selected_animal >= 0:
 			valid = world.animal_walkable(world.Orders.animal(world,selected_animal),cell)
-			show_preview = true
+			var nearby=guide_nearby_target(cell)
+			show_preview = not nearby
+			if nearby:
+				draw_rect(Rect2(Vector2(cell)*TILE+Vector2(2,2),TILE-Vector2(4,4)),UI.GOLD,false,3)
+				label_on(self,get_canvas_transform().affine_inverse()*pointer+Vector2(14,-20),"近くの空き場所へ",16,UI.PAPER)
 			# A resident at the cursor already shows the species; do not overprint a second body.
-			if guide_ghost_visible(cell):
+			if valid and not nearby and guide_ghost_visible(cell):
 				var p = center(cell)
 				draw_set_transform(p, 0, Vector2.ONE)
 				art_alpha = 0.45
@@ -1722,6 +1727,9 @@ func draw_pointer_preview():
 
 func guide_ghost_visible(cell: Vector2i) -> bool:
 	return not world.animals.any(func(a): return a.pos == cell)
+
+func guide_nearby_target(cell: Vector2i) -> bool:
+	return world.live_structure(cell) or world.trees.has(cell) or cell in world.Story.idol_cells(world) or world.actor_occupied(cell,Vector2i(-1,-1))
 
 func panel(area: Rect2): hud.draw_style_box(UI.surface(Color("485d46")), area)
 
