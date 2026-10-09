@@ -1290,7 +1290,7 @@ func _process(delta):
 	if world.phase=="shop" and not save_load_blocked:enter_daytime();refresh()
 	if merchant_requested:
 		if not world.merchant_present() or world.keeper.state!="free":merchant_requested=false
-		elif not world.paused and world.distance(world.keeper.pos,Farm.MERCHANT_CELL)<=1:open_market()
+		elif not world.paused and world.keeper.pos in world.merchant_talk_cells():open_market()
 	if world.phase=="day" and not world.merchant_present() and departure_started<0:departure_started=clock
 
 	if wall_stroke.kind!="" and (group!=0 or tool!=wall_stroke.kind or menu_open or field_book or field_shop or story_modal!="" or cinematic() or not world.working()):cancel_wall_stroke()
@@ -2103,8 +2103,7 @@ func request_merchant():
 	if not world.merchant_present():notice("商人は帰りました");return
 	if world.keeper.state!="free" or world.keeper.forced_rest:notice("今は話しかけられません");return
 	var candidates=[]
-	for d in [Vector2i.ZERO,Vector2i.LEFT,Vector2i.RIGHT,Vector2i.UP,Vector2i.DOWN]:
-		var cell=Farm.MERCHANT_CELL+d
+	for cell in world.merchant_talk_cells():
 		if world.walkable(cell) and not world.actor_occupied(cell,world.keeper.pos) and not world.find_path(world.keeper.pos,cell).is_empty():candidates.append(cell)
 	candidates.sort_custom(func(a,b):return world.distance(world.keeper.pos,a)<world.distance(world.keeper.pos,b))
 	if candidates.is_empty():notice("商人の近くへ行けません");return
@@ -2112,7 +2111,7 @@ func request_merchant():
 	merchant_requested=true;notice("商人に話しかけに行きます")
 
 func open_market():
-	if not world.merchant_present() or world.distance(world.keeper.pos,Farm.MERCHANT_CELL)>1:return
+	if not world.merchant_present() or world.keeper.pos not in world.merchant_talk_cells():return
 	field_shop=true;world.market_open=true;merchant_requested=false;accumulated=0
 	morning_screen = "market"
 	shop_side = "home"
@@ -2417,7 +2416,7 @@ func draw_market_world():
 	if elapsed>=Farm.MERCHANT_SECONDS+1:return
 	var q=merchant_world_position()
 	SixMotion.paint(self,"merchant","cart_move" if elapsed<1.8 or elapsed>Farm.MERCHANT_SECONDS else "cart_idle",-1 if elapsed>Farm.MERCHANT_SECONDS else 1,q+Vector2(20,30),visual_time)
-	if world.merchant_present():label_on(self,q+Vector2(-42,59),"商人 · あと%d秒"%ceili(Farm.MERCHANT_SECONDS-world.tick*Farm.DT),14,UI.PAPER)
+	if world.merchant_present():label_on(self,q+Vector2(-42,-62),"商人 · あと%d秒"%ceili(Farm.MERCHANT_SECONDS-world.tick*Farm.DT),14,UI.PAPER)
 
 func draw_merchant_bubble():
 	if not world.merchant_present() or merchant_visual_elapsed()<1.8:return

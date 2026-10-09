@@ -287,10 +287,10 @@ static func walk(w,e,goal: Vector2i):
 	if e.move_credit<1: return
 	e.move_credit-=1
 	var break_objects=Targets.can_damage_object(w,e)
-	var route=w.find_path(e.pos,goal,break_objects,true,e.species=="doberman")
-	if route.is_empty():route=w.find_path(e.pos,goal,break_objects,false,e.species=="doberman")
+	var route=w.RaiderAI.route(e,w,goal,break_objects,true)
+	if route.is_empty():route=w.RaiderAI.route(e,w,goal,break_objects,false)
 	if not break_objects and w.inside(goal):
-		var detour=w.find_path(e.pos,goal,false,true,e.species=="doberman")
+		var detour=w.RaiderAI.route(e,w,goal,false,true)
 		if not detour.is_empty(): route=detour
 	var next=route[1] if route.size()>1 else e.pos
 	if e.species=="doberman" and w.is_indoor(next): e.state="外で待つ"; return

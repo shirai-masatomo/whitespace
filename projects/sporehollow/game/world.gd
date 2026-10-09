@@ -37,6 +37,10 @@ var market_open=false
 const MERCHANT_SECONDS=30.0
 const MERCHANT_CELL=Vector2i(2,5)
 
+func merchant_talk_cells() -> Array:
+	# Two rows in front of the cart, clear of its wheels, merchant and drawbar.
+	return [MERCHANT_CELL+Vector2i(0,2),MERCHANT_CELL+Vector2i(1,2),MERCHANT_CELL+Vector2i(2,2)]
+
 func merchant_present() -> bool:
 	return phase=="day" and tick*DT<MERCHANT_SECONDS
 
@@ -307,7 +311,7 @@ func next_step(start: Vector2i, goal: Vector2i, raider: bool = false, avoid_acto
 	var path = find_path(start,goal,raider,avoid_actors)
 	return path[1] if path.size()>1 else start
 
-func find_path(start: Vector2i, goal: Vector2i, raider: bool = false, avoid_actors: bool = false, outdoor_only: bool = false) -> Array:
+func find_path(start: Vector2i, goal: Vector2i, raider: bool = false, avoid_actors: bool = false, outdoor_only: bool = false, route_costs: Dictionary = {}) -> Array:
 	if start == goal: return [start]
 	var frontier = [start]
 	var cost = {start: 0.0}
@@ -332,7 +336,7 @@ func find_path(start: Vector2i, goal: Vector2i, raider: bool = false, avoid_acto
 			var blocked = blocks(n)
 			if blocked and not raider and structures.get(n,{}).get("kind") not in Buildings.DOORS: continue
 			# Compare walking actions with the actual number of object attacks needed.
-			var value: float = cost[p] + 1.0 + (ceilf(float(structures[n].hp) / Rules.KIDNAPPER.object_attack_power) if blocked else 0)
+			var value: float = cost[p] + 1.0 + maxf(0.0,route_costs.get(n,0.0)) + (ceilf(float(structures[n].hp) / Rules.KIDNAPPER.object_attack_power) if blocked else 0)
 			if not cost.has(n) or value < cost[n]:
 				cost[n] = value
 				previous[n] = p
@@ -779,8 +783,9 @@ func enemy_step(e: Dictionary):
 			return
 		return
 	e.capture_progress = 0
-	var next = next_step(e.pos, goal, true,true)
-	if next==e.pos:next=next_step(e.pos,goal,true)
+	var route=RaiderAI.route(e,self,goal,true,true)
+	if route.size()<2:route=RaiderAI.route(e,self,goal,true,false)
+	var next=route[1] if route.size()>1 else e.pos
 	if not e.flee and e.get("intent", "") == "detour" and not e.side_step_used:
 		next = side_step(e.pos, goal, e.intent_roll)
 		e.side_step_used = true
@@ -797,7 +802,7 @@ func move_enemy(e: Dictionary, next: Vector2i,goal=null):
 		return
 	if actor_occupied(next, e.pos) and not (e.carry == "keeper" and next == keeper.pos):
 		if goal==null:return
-		var route=find_path(e.pos,goal,true,true,e.get("species","")=="doberman")
+		var route=RaiderAI.route(e,self,goal,true,true)
 		if route.size()<2 or actor_occupied(route[1],e.pos):return
 		next=route[1]
 	if blocks(next) and e.get("archetype","kidnapper")!="kidnapper":
@@ -835,6 +840,7 @@ func move_enemy(e: Dictionary, next: Vector2i,goal=null):
 	else:
 		if tick < e.move_stopped_until and next != e.pos: return
 		if not Combat.pay(e,"move"): e.state="息を整える"; return
+		RaiderAI.remember_step(e,self,e.pos,next)
 		e.pos = next
 		e.path.append(next)
 

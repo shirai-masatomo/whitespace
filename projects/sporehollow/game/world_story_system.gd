@@ -51,7 +51,7 @@ static func init(w):
 				records.append({"id":"tree-%d-%d"%[x,y],"position":[x,y]})
 		w.story.trees=records
 	for tree in w.story.get("trees",[]):
-		if tree.id not in w.story.cleared: w.trees[cell(tree.position)]=tree.id
+		if tree.id not in w.story.cleared and not preload("res://game/forest_pattern.gd").merchant_clearing(cell(tree.position)): w.trees[cell(tree.position)]=tree.id
 	morning(w,w.campaign.day)
 	persist(w)
 

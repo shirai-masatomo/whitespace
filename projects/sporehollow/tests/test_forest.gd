@@ -25,5 +25,14 @@ func run():
 		var w=Farm.new({},seed_value).begin_day()
 		check(w.entries.all(func(p):return not w.find_path(p,w.keeper.pos).is_empty()),"Every entry still reaches the keeper clearing: "+str(seed_value))
 		samples.append({"seed":seed_value,"before_trees":old_count,"after_trees":current_count,"sample_cells":2501,"inner_trees":w.trees.size()})
+	var live=load("res://game/world.gd").new({},31)
+	live.story.trees.append({"id":"old-merchant-tree","position":[3,3]});live.Story.persist(live)
+	var restored=load("res://game/world.gd").new(live.campaign,31)
+	check(not restored.trees.has(Vector2i(3,3)),"Old saved tree has no collision in merchant clearing")
+	check(restored.story.trees.any(func(t):return t.id=="old-merchant-tree"),"Clearing preserves saved tree record without resource drops")
+	var apron_clear=true
+	for y in range(1,10):
+		for x in range(-2,7):apron_clear=apron_clear and not Forest.outer_tree(Vector2i(x,y),31,Farm.W,Farm.H) and not Forest.tree(Vector2i(x,y),31)
+	check(apron_clear,"Inner and decorative trees both leave cart and approach clear")
 	FileAccess.open("user://forest-tests.json",FileAccess.WRITE).store_string(JSON.stringify({"checks":records,"density_samples":samples,"native_aspect_preserved":true},"  "))
 	print("FOREST: %d checks, failures=%d"%[checks,failures]);quit(1 if failures else 0)

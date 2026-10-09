@@ -9,14 +9,18 @@ static func rank(p: Vector2i,seed_value: int) -> int:
 static func candidate(p: Vector2i,seed_value: int,deep: bool) -> bool:
  var n=noise(seed_value).get_noise_2d(p.x,p.y)
  return n>(-0.32 if deep else -0.08) and rank(p,seed_value)%100<(72 if deep else 58)
+static func merchant_clearing(p: Vector2i) -> bool:
+ # Includes canopy overhang above the cart and the conversation apron below it.
+ return Rect2i(-2,1,9,9).has_point(p)
 static func tree(p: Vector2i,seed_value: int,deep: bool=false) -> bool:
- if not candidate(p,seed_value,deep):return false
+ if merchant_clearing(p) or not candidate(p,seed_value,deep):return false
  for d in [Vector2i.LEFT,Vector2i.RIGHT,Vector2i.UP,Vector2i.DOWN]:
   var neighbor=p+d;var other=rank(neighbor,seed_value);var own=rank(p,seed_value)
   if candidate(neighbor,seed_value,deep) and (other<own or (other==own and (neighbor.y<p.y or neighbor.y==p.y and neighbor.x<p.x))):return false
  return true
 
 static func outer_tree(p: Vector2i,seed_value: int,width: int,height: int) -> bool:
+ if merchant_clearing(p):return false
  if p.x>=1 and p.x<width-1 and p.y>=1 and p.y<height-1:return false
  # Visual forest only; retain every physical entry lane and the existing inner forest.
  if p.x in [5,12,19] or p.y in [5,8,11]:return false

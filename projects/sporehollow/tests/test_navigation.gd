@@ -74,6 +74,26 @@ func run():
    if w.story.idol.hp<180:break
   check(w.story.idol.hp<180,"Distant observed idol can be approached and attacked: "+role)
   check(physical,"Idol approach never enters its footprint: "+role)
+ # Deterministic soft route bias; never turns traversed cells into barriers.
+ w=fresh();e=enemy(w,Vector2i(8,8));e.search_route_active=true
+ for x in range(9,13):w.RaiderAI.remember_step(e,w,Vector2i(x-1,8),Vector2i(x,8))
+ var goal_cell=Vector2i(12,8)
+ var biased=w.RaiderAI.route(e,w,goal_cell,false,false)
+ check(biased.size()>1 and biased[1]!=Vector2i(9,8),"Search prefers a fresh parallel route over recently walked cells")
+ e.search_route_active=false
+ check(w.RaiderAI.route(e,w,goal_cell,false,false)==w.find_path(e.pos,goal_cell),"Visible pursuit ignores search history")
+ e.search_route_active=true
+ for y in range(1,w.H-1):
+  for x in range(1,w.W-1):
+   if y!=8:w.trees[Vector2i(x,y)]="corridor"
+ check(w.RaiderAI.route(e,w,goal_cell,false,false).size()==5,"Only available route remains usable even when visited")
+ w.trees.clear();w.tick+=ceili(25.0/w.DT)
+ check(w.RaiderAI.costs(e,w).is_empty(),"Search route history expires after 24 seconds")
+ for x in range(60):w.RaiderAI.remember_step(e,w,Vector2i(x,0),Vector2i(x+1,0))
+ check(e.search_route_history.size()<=48,"Per-enemy search history is bounded")
+ w=fresh();hidden(w);e=enemy(w,Vector2i(10,8),"salaryman");e.sight_range=0
+ for i in range(40):enemy_tick(w,e)
+ check(not e.get("search_route_history",{}).is_empty(),"Normal enemy AI records actual search steps")
  FileAccess.open("user://navigation-tests.json",FileAccess.WRITE).store_string(JSON.stringify({"checks":records,"seed":31},"  "))
  print("NAVIGATION: %d checks, failures=%d"%[checks,failures])
  quit(1 if failures else 0)

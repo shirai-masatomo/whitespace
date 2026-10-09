@@ -20,9 +20,9 @@ func run():
 	game.world.tick=0;game.accumulated=0
 	record.events.append({"cart_interpolation":trace})
 	for i in range(40):game.world.step()
-	game.world.trees[Farm.MERCHANT_CELL+Vector2i(1,-2)]="review_bubble_tree"
+	check(game.world.trees.keys().all(func(p):return not preload("res://game/forest_pattern.gd").merchant_clearing(p)),"Merchant apron has no trees or tree collision")
 	game._process(0);game.hud.queue_redraw();game.queue_redraw();await capture("01_day_merchant_arrival")
-	game.world.trees.erase(Farm.MERCHANT_CELL+Vector2i(1,-2))
+
 	game.world.paused=true;var tick=game.world.tick
 	await mouse(game.screen_cell(Farm.MERCHANT_CELL))
 	check(game.merchant_requested and not game.field_shop,"Click reserves physical approach during pause")
@@ -32,7 +32,7 @@ func run():
 	for i in range(590):
 		game.world.step();game._process(0)
 		if game.field_shop:break
-	check(game.field_shop and game.world.distance(game.world.keeper.pos,Farm.MERCHANT_CELL)<=1,"Keeper approaches before shop opens")
+	check(game.field_shop and game.world.keeper.pos in game.world.merchant_talk_cells(),"Keeper approaches before shop opens")
 	check(game.world.phase=="day","Shop retains daytime phase")
 	tick=game.world.tick;var before=[game.world.keeper.duplicate(true),game.world.animals.duplicate(true),game.world.natural.duplicate(true),game.world.jobs.duplicate(true)]
 	for i in range(1000):game.world.step()
@@ -44,6 +44,7 @@ func run():
 	check(game.world.campaign.gold==gold-15,"Existing confirmed purchase works during daytime conversation")
 	await press("close_market")
 	check(not game.field_shop and not game.world.market_open and game.world.phase=="day","Close returns directly to daytime")
+	game.queue_redraw();game.hud.queue_redraw();await capture("04_conversation_distance")
 	game.world.tick=int(29.95/Farm.DT)
 	check(game.world.merchant_present(),"Merchant present before 30 seconds")
 	game.world.step()
