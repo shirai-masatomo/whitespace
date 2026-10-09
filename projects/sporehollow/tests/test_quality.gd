@@ -74,8 +74,8 @@ func run():
  w=open_world();w.debug_enabled=true;w.paused=true
  for kind in D.ENEMY_ROWS.keys()+["doberman"]:
   w.enemies.clear();check(w.debug_spawn_enemy(kind) and not w.inside(w.enemies.back().pos) and w.tick==0,"Paused external debug spawn: "+kind)
- for i in range(9):w.PlayerEvents.add(w,"event%d"%i)
- check(w.player_events.size()==6 and w.player_events.back().text=="event8","Player feed bounded, newest last")
+ for i in range(129):w.PlayerEvents.add(w,"event%d"%i)
+ check(w.player_events.size()==120 and w.player_events.back().text=="event128","Player feed bounded, newest last")
  w.player_events.clear();w.PlayerEvents.damage(w,{},w.keeper,1,"poison");w.tick+=1;w.PlayerEvents.damage(w,{},w.keeper,1,"poison")
  check(w.player_events.size()==1 and w.player_events[0].text.contains("2ダメージ"),"Poison tick messages aggregate")
  var consistent=true;var spaced=true;var count=0

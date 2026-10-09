@@ -108,6 +108,26 @@ static func recruit_maid(w,e) -> bool:
 		return true
 	return false
 
+# Enemy support stays with its recipient even during the coffee cooldown.
+static func escort_ally(w,a):
+	var allies=w.enemies.filter(func(t):return t.id!=a.id and not t.done and not t.flee and t.hp>0 and not t.get("dead",false) and w.inside(t.pos))
+	var preferred=a.get("escort_target",a.get("coffee_target",-1))
+	allies.sort_custom(func(t,u):
+		if (t.id==preferred)!=(u.id==preferred):return t.id==preferred
+		return w.distance(a.pos,t.pos)<w.distance(a.pos,u.pos) if w.distance(a.pos,t.pos)!=w.distance(a.pos,u.pos) else t.id<u.id)
+	for target in allies:
+		if w.distance(a.pos,target.pos)<=2 and w.line_of_sight(a.pos,target.pos):
+			a.escort_target=target.id;a.state="仲間のそばで待機";a.action_id="idle";return
+		var best=[]
+		for cell in w.neighbors(target.pos):
+			if not w.walkable(cell) or w.actor_occupied(cell,a.pos):continue
+			var path=w.find_path(a.pos,cell,false,true)
+			if not path.is_empty() and (best.is_empty() or path.size()<best.size()):best=path
+		if best.is_empty():continue
+		a.escort_target=target.id;a.state="仲間に同行";a.action_id="walk"
+		w.Progression.walk(w,a,best[-1]);return
+	a.erase("escort_target");a.state="支援相手を待つ";a.action_id="idle"
+
 static func maid_step(w,a,enemy: bool) -> bool:
 	if enemy and recruit_maid(w,a):return true
 	# Finish arrival and vacate the entry before starting a support/rest cycle.
@@ -147,14 +167,19 @@ static func maid_step(w,a,enemy: bool) -> bool:
 	if w.tick<a.get("coffee_rest_until",0):
 		a.state="休む"
 		if not enemy:w.rest_step(a,false)
+		else:escort_ally(w,a)
 		return true
-	if w.tick<a.get("coffee_wait",0):a.state="配り終えた";return true
+	if w.tick<a.get("coffee_wait",0):
+		if enemy:escort_ally(w,a)
+		else:a.state="配り終えた"
+		return true
 	var served=a.get("coffee_served",[])
 	var allies=w.enemies.filter(func(t):return t.id!=a.id and not t.done and not t.flee and t.hp>0) if enemy else [w.keeper]+w.animals.filter(func(t):return t.id!=a.id and w.Orders.active(w,t))
 	allies=allies.filter(func(t):return t.hp>0 and t.get("carrier",-1)<0 and t.get("state","")!="hidden_rest" and t.get("id",-1) not in served)
 	if allies.is_empty():
 		drink(a);a.coffee_served=[];a.coffee_rest_until=w.tick+ceili(10.0/w.DT);a.state="休む"
-		# No recipients: rest without falling through to the generic combat AI.
+		# No recipients: follow without falling through to the generic combat AI.
+		if enemy:escort_ally(w,a)
 		return true
 	allies.sort_custom(func(t,u):
 		var t_buff=enemy and t.get("archetype","")=="dancer" and w.distance(a.pos,t.pos)<=a.sight_range
@@ -166,6 +191,7 @@ static func maid_step(w,a,enemy: bool) -> bool:
 		a.coffee_target=target.get("id",-1);a.coffee_deadline=w.tick+ceili((8.0+w.distance(a.pos,target.pos)/a.move_speed*2.0)/w.DT)
 	if w.tick>=a.coffee_deadline:served.append(target.get("id",-1));a.coffee_served=served;return true
 	if w.distance(a.pos,target.pos)<=1 and w.line_of_sight(a.pos,target.pos):
+		if enemy:a.escort_target=target.id
 		var helped=drink(target)
 		served.append(target.get("id",-1));a.coffee_served=served;a.coffee_wait=w.tick+ceili(1.0/w.DT)
 		w.skill_log.append({"tick":w.tick,"actor":a.id,"skill":"coffee_support","faction":"enemy" if enemy else "owned","target":target.get("id",-1)})

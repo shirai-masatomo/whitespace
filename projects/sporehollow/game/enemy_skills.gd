@@ -16,7 +16,7 @@ const ROWS={
  "resurrection":["復活の舞","Ultimate",0.0,"READY・3マス以内の復活可能な味方","死体が残る8秒以内、舞姫以外・個体1回。舞姫の現在HPまで回復。武闘家優先","resurrection"],
  "poison":["毒瓶","Active",8.0,"見通せる5マス以内の敵","着弾周囲1マスに毒。5秒間、毎秒1ダメージ・移動0.8倍","paw"],
  "steal":["盗む","Passive",0.0,"落とし物に隣接","盗品を持って退却。外へ出る前に倒せば取り戻せる","basket"],
- "coffee_support":["コーヒー配布","Active",1.0,"同じ陣営の仲間に隣接","HP3・スタミナ12回復。一巡後は自分も飲み10秒休息","cup"],
+ "coffee_support":["コーヒー配布","Active",1.0,"同じ陣営の仲間に隣接","HP3・スタミナ12回復。一巡後は自分も飲み10秒待機。敵メイドは支援相手に同行","cup"],
  "rage":["激ギレ","Ultimate",0.0,"READY・敵を見つける","6秒間、攻撃12・移動/攻撃速度2倍。乳牛は攻撃しない","rage"]}
 const BY_ACTOR={"kidnapper":["abduct_keeper"],"destroyer":["iron_ball"],"martial_artist":["bow","nonlethal"],"salaryman":["phone"],"ninja":["shuriken"],"animal_tamer":["tame","lead"],"runner":["fatigue","companion"],"doberman":["intercept"],"dancer":["dance","resurrection"],"thief":["poison","steal"],"maid":["coffee_support","rage"]}
 const TUNING={"dance_duration":1.0,"dance_buff":3.0,"maid_recruit_chance":0.05,"maid_recruit_range":2,"maid_first_day":11}
