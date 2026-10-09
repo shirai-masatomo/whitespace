@@ -4,12 +4,12 @@ const CLEAR_SECONDS = 4.0
 const CLEAR_WOOD = 8
 const PRAYER_SECONDS = 3.0
 const MIRACLE_GOLD = 60
-const PRAYER_KARMA = 1 # Provisional: preserve the existing reaction cadence.
+const PRAYER_KARMA = 3
 const PRAYER_CATEGORIES = {"pray_animal":"animal","pray_gold":"gold","pray_item":"item"}
 const IDOL_HP = 180
 const TOW_PREP_SECONDS = 8.0
 const TOW_SPEED = 0.5
-const ACTIONS = ["clear_tree","inspect_idol","pray_wealth","pray_animal","pray_gold","pray_item","repair_idol","recover_idol"]
+const ACTIONS = ["clear_tree","inspect_idol","pray_wealth","pray_animal","pray_gold","pray_item","repair_idol","repair_idol_soil","repair_idol_wood","repair_idol_stone","recover_idol"]
 const INTRO = ["父は、遺跡と秘境を巡る探検家だった。", "最後の旅から持ち帰ったのは、大きな黄金像。\nそれからほどなく、父はいなくなった。", "私は、父の残した牧場で暮らし始めた。\n愛犬と過ごした静かな数日は、もう思い出になっている。", "父の日誌には、一言だけ残されていた。\n『像を壊してはいけない。』"]
 
 static func cell(v) -> Vector2i:
@@ -70,9 +70,9 @@ static func schedule(w):
 	for event in w.spawn_schedule:
 		event.entry=w.entries[r.randi_range(0,w.entries.size()-1)]
 	# Delayed reaction events change real raid composition, capped independently of day scaling.
-	for row in reaction_raids(w):
+	for row in ([] if w.config.get("single_event",false) else reaction_raids(w)):
 		w.spawn_schedule.append({"tick":ceili((60.0+row.slot*24)/w.DT),"wave":100+row.slot,"role":row.role,"entry":w.entries[r.randi_range(0,w.entries.size()-1)],"lv":1})
-	w.spawn_schedule.sort_custom(func(a,b):return a.tick<b.tick)
+	w.spawn_schedule.sort_custom(func(a,b):return a.tick<b.tick if a.tick!=b.tick else a.wave<b.wave)
 
 static func legacy_slots(w) -> Array:
 	var slots=[]
@@ -111,17 +111,28 @@ static func goals(w, break_objects: bool=false) -> Array:
 static func is_prayer(kind: String) -> bool:
 	return kind=="pray_wealth" or PRAYER_CATEGORIES.has(kind)
 
+static func prayer_night(w) -> bool:
+	return w.campaign.day>=2 and w.phase=="defend"
+
+static func idol_glowing(w) -> bool:
+	# The light is a nighttime invitation even before the first investigation.
+	var idol=w.story.get("idol",{})
+	return prayer_night(w) and w.story.prayed_day!=w.campaign.day and not idol.is_empty() and idol.hp>0 and idol.state not in ["preparing","transporting","lost"]
+
 static func reason(w,kind: String,p: Vector2i) -> String:
 	if kind=="clear_tree": return "伐採には道具が必要です"
 	if w.story.idol.is_empty(): return w.story.get("migration_error","黄金像が見つかりません")
 	if w.story.idol.state in ["preparing","transporting","lost"]: return "像が危険です。先に運び手を止めてください"
 	if is_prayer(kind):
 		if kind=="pray_wealth" and not w.config.get("legacy_prayer",false): return "動物・お金・アイテムから願いを選んでください"
-		if w.campaign.day<2 or not w.story.investigated: return "最初の夜を越えたら、像を調べてください"
-		if w.story.prayed_day==w.campaign.day: return "今日は祈りを捧げました"
-	if kind=="repair_idol":
+		if w.campaign.day<2: return "祈りは2日目の夜からです"
+		if not w.story.investigated: return "先に像を調べてください"
+		if not prayer_night(w): return "祈れるのは夜だけです"
+		if w.story.prayed_day==w.campaign.day: return "今夜は祈りを捧げました"
+	if kind.begins_with("repair_idol"):
 		if w.story.idol.hp>=w.story.idol.max_hp: return "損傷はありません"
-		if w.wood<5: return "修理には木材 ×5が必要です"
+		var material=kind.trim_prefix("repair_idol_") if kind!="repair_idol" else "wood"
+		if w.resource_amount(material)<1:return "修理素材が足りません"
 	if kind=="recover_idol" and w.story.idol.state!="interrupted": return "像は設置済みです"
 	return ""
 
@@ -159,8 +170,9 @@ static func step_job(w,j):
 			say(w,"父の日誌：像を壊してはいけない。"+(" 像に願いを託せそうだ。" if w.story.investigated else " 今は静かに佇んでいる。"))
 		"pray_wealth": pray(w)
 		"pray_animal","pray_gold","pray_item": pray(w,PRAYER_CATEGORIES[j.kind])
-		"repair_idol":
-			w.add_resource("wood",-5); w.story.idol.hp=mini(w.story.idol.max_hp,w.story.idol.hp+30)
+		"repair_idol","repair_idol_soil","repair_idol_wood","repair_idol_stone":
+			var material=j.kind.trim_prefix("repair_idol_") if j.kind!="repair_idol" else "wood"
+			w.add_resource(material,-1);w.story.idol.hp=mini(w.story.idol.max_hp,w.story.idol.hp+{"soil":1,"wood":2,"stone":3}[material])
 		"recover_idol":
 			# Re-anchor where the tow was stopped; never teleport the object home.
 			w.story.idol.state="recovered"; w.story.idol.home=w.story.idol.position.duplicate()
@@ -186,7 +198,7 @@ static func pray(w,category: String="wealth"):
 		if spec[1]=="robbery" and category!="wealth":
 			var role={"animal":"animal_tamer","item":"thief"}.get(category,"idol")
 			w.story.events[-1].merge({"reaction_version":1,"reaction_role":role,"raid_not_before_day":maxi(w.campaign.day+3,w.Progression.Encounters.FIRST_DAY.get(role,1))})
-	say(w,"願いを託した。像は静かに光っている。")
+	say(w,"願いを託した。像の光が消えた。贈り物は翌朝に。")
 
 static func settle_prayer(w,prayer: Dictionary,day: int):
 	if prayer.rewarded or prayer.reward_day>day: return
@@ -224,6 +236,10 @@ static func settle_prayer(w,prayer: Dictionary,day: int):
 	say(w,"願いが届いた。"+message)
 
 static func morning(w,day: int):
+	# Unfinished nighttime wishes consume no allowance and must not block the next day's queue.
+	# Also clears old morning saves containing daytime prayer plans; completed records are untouched.
+	for j in w.jobs.duplicate():
+		if is_prayer(j.kind): w.Jobs.cancel(w,j.id,"night_ended")
 	if day>=2 and not w.story.radio:
 		w.story.radio=true
 		w.story.news.append({"id":"father-radio","day":day,"title":"父の古いラジオ","text":"道具箱から、小さなラジオが見つかった。遠い町の放送が聞こえる。"})

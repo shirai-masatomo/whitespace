@@ -240,7 +240,9 @@ static func enemy_step(w,e) -> bool:
 	else: target=current[0]; e.chosen_target=target
 	if kidnapper and (not target.is_empty() and target.kind=="keeper" or target.is_empty() and w.Life.targetable(w,true)): return false
 	if target.is_empty():
-		e.action_id="walk";walk(w,e,w.RaiderAI.target(e,w));return true
+		var search=w.RaiderAI.target(e,w)
+		e.state=e.search_state;e.action_id="idle" if search==e.pos else "walk"
+		walk(w,e,search);return true
 	if target.kind=="idol_memory":
 		e.action_id="walk";e.state="像を見た場所へ";walk(w,e,target.pos);return true
 	if w.tick<e.get("hesitate_until",0): e.state="様子見"; return true

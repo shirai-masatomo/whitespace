@@ -141,3 +141,7 @@ Human64×64/(32,58)、牛80×64/(40,58)、闘牛96×64/(48,58)、商人48×48/(2
 素材元a34390eを維持。Rarity5画像は一覧の右下emblemと詳細名横badgeへ、鉄球/電話/復活/激ギレは敵Skill Hoverへ接続。Portrait周囲は控えめな角飾り。PNGの再生成・上書きなし。
 Human盤面は足元を固定して1.15倍（keeper/adopted_art、既存Human/progression_art、新Human/direction_art）。表示・選択枠だけ変更、衝突・能力値は不変。木a/b/cはseed付き群生・小さな描画ずらし。
 正式Icon不足：連れ去り、礼、不殺、手裏剣、手懐け、疲労、同行/迎撃、舞、毒瓶、盗む、コーヒー配布。既存paw/heart/whistle/moon/basket/cupを一時使用。専用気絶・隠れ療養姿も不足し、既存姿＋星/控えめな覆いを使用。睡眠のZzとは区別。
+
+## 2026-10-09 試験使用
+
+`assets/ui/trial_buy_sell.png`：ユーザー提供かご/袋PNGを原本のまま保存しAtlasで二分、ショップ入口の買う/売るに接続。最終採用未確定。SHA256 `3664a9f66c861cf3b9a991e1a2b6e5b6d842deb1eca936f98b8e243881d2ace8`。商人の口パク連番は未納品、静止の正式荷車を維持。既存の採用素材SHAはgame/art_provenance.jsonから変更なし。

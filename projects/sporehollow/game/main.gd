@@ -59,6 +59,8 @@ var menu: Control
 var shop_side = "home"
 var shop_category = "animals"
 var shop_notice = ""
+var event_scroll=0
+var event_log_rect=Rect2()
 var shop_level = "categories"
 var product_row: Dictionary = {}
 var dragging = false
@@ -191,7 +193,7 @@ func _ready():
 	queue_controls.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	controls.add_child(queue_controls)
 	add_button(controls, "walk", "主人公", Rect2(16, 754, 116, 36), choose_walk)
-	buttons.walk.tooltip_text = "Tab：主人公 → 建設 → 指示。Shift：操作選択。ホイール：ズーム"
+	buttons.walk.tooltip_text = "Tab：主人公 → 建設 → 指示。ホイール：操作選択。Shift：指示対象。Ctrl＋ホイール：ズーム"
 	setup_menu()
 	overlay = Node2D.new()
 	layer.add_child(overlay)
@@ -270,13 +272,7 @@ func subtask_choices() -> Array:
 func cycle_subtool(reverse: bool = false):
 	if not world.working() or menu_open: return
 	if group == 1 and selected_animals.is_empty():
-		var nearby = world.animals.filter(func(a): return a.placed and world.available(a) and not Farm.SPECIES[a.species].orders.is_empty())
-		nearby.sort_custom(func(a,b):
-			var da = Farm.distance(world.keeper.pos,a.pos)
-			var db = Farm.distance(world.keeper.pos,b.pos)
-			return da < db if da != db else a.id < b.id)
-		if nearby.is_empty(): notice("指示できる動物がいません")
-		else: choose_animal(nearby[0].id)
+		notice("Shiftで指示する仲間を選択")
 		return
 	var choices = subtask_choices()
 	if choices.is_empty(): return
@@ -285,6 +281,13 @@ func cycle_subtool(reverse: bool = false):
 	subtasks.selected[group] = choices[next]
 	if group != 2: select_tool(choices[next],false)
 	else: refresh()
+
+func cycle_command_animal():
+	var candidates=world.animals.filter(func(a):return a.placed and world.available(a) and not Farm.SPECIES[a.species].orders.is_empty())
+	candidates.sort_custom(func(a,b):return a.id<b.id)
+	if candidates.is_empty():notice("指示できる動物がいません");return
+	var ids=candidates.map(func(a):return a.id)
+	choose_animal(ids[(ids.find(selected_animal)+1)%ids.size()])
 
 func wheel_scroll_ui() -> bool:
 	var hovered = get_viewport().gui_get_hovered_control()
@@ -330,7 +333,7 @@ func select_resource(cell: Vector2i, toggle: bool = false):
 		toggle_selection(selected_resources, cell)
 	else:
 		selected_resources = [cell]
-		if world.act("collect", cell): notice("回収を頼んだよ")
+		if world.act("collect", cell): pass
 		else: notice("予約済み" if job_reserved("collect", cell) else "予定は8件まで")
 	refresh()
 
@@ -377,9 +380,9 @@ func refresh():
 	buttons.speed.disabled = not world.rest_skip.is_empty()
 	buttons.advance.visible = (world.phase == "shop" and morning_screen == "morning") or world.phase=="day" or (world.phase=="defend" and world.early_clear)
 	buttons.advance.text = "支度を終える" if world.phase == "shop" else rest_button_text()
-	buttons.advance.position = Vector2(548,570) if world.phase=="shop" else Vector2(1074,754)
+	buttons.advance.position = Vector2(1018,696) if world.phase=="shop" else Vector2(1074,754)
 	if world.phase=="shop" and Farm.Progression.Encounters.reached(world.campaign):
-		buttons.advance.position=Vector2(376,576)
+		buttons.advance.position=Vector2(1018,696)
 		buttons.advance.text="牧場を続ける"
 		buttons.advance.visible=morning_screen=="morning" and not restart_confirm
 	buttons.advance.tooltip_text = "商人を見送り、昼の牧場仕事を始めます" if world.phase == "shop" else ""
@@ -509,13 +512,13 @@ func build_context_actions():
 		rows.append(["clear_tree","道具が必要","hammer",func():pass,true,"伐採には道具が必要です（道具は未実装）"])
 		if selected_trees.any(func(p):return job_reserved("clear_tree",p)): rows.append(["cancel_near","取消","cross",cancel_selected_work,false,"開拓予定を取り消す"])
 	elif selected.get("kind")=="idol":
-		for kind in ["inspect_idol","pray_animal","pray_gold","pray_item","repair_idol","recover_idol"]:
+		for kind in ["inspect_idol","pray_animal","pray_gold","pray_item","repair_idol_soil","repair_idol_wood","repair_idol_stone","recover_idol"]:
 			if world.Story.is_prayer(kind) and not world.story.investigated: continue
-			if kind=="repair_idol" and world.story.idol.hp>=world.story.idol.max_hp: continue
+			if kind.begins_with("repair_idol") and world.story.idol.hp>=world.story.idol.max_hp: continue
 			if kind=="recover_idol" and world.story.idol.state!="interrupted": continue
 			var why=world.Story.reason(world,kind,world.Story.at(world))
 			if why=="" and world.jobs.any(func(j):return j.get("world_target")=="father-idol"): why="像の作業は予約済みです"
-			rows.append([kind,StoryView.LABELS[kind],"spark",story_action.bind(kind),why!="",why if why!="" else ("牧場主が現地で3秒祈ります。1日1回、翌朝に選んだ種類の贈り物を受け取ります" if world.Story.is_prayer(kind) else "牧場主が現地で行います")])
+			rows.append([kind,StoryView.LABELS[kind],"spark",story_action.bind(kind),why!="",why if why!="" else ("牧場主が現地で3秒祈ります。1晩1回、翌朝に選んだ種類の贈り物を受け取ります" if world.Story.is_prayer(kind) else "素材1個で現地修理。最大HPを超える分は回復しません" if kind.begins_with("repair_idol") else "牧場主が現地で行います")])
 	elif not selected_resources.is_empty():
 		var pending = selected_resources.any(func(p): return not job_reserved("collect", p))
 		rows.append(["collect_selection", "回収する" if pending else "予約済み", "basket", collect_selected, not pending, "牧場主が現地で回収する"])
@@ -934,6 +937,10 @@ func _input(event):
 		get_viewport().set_input_as_handled()
 		return
 	if is_instance_valid(name_edit) and name_edit.has_focus(): return
+	if MarketView.scroll_ui(self,event):get_viewport().set_input_as_handled();return
+	if world.working() and not field_book and not menu_open and event is InputEventMouseButton and event.button_index in [MOUSE_BUTTON_WHEEL_UP,MOUSE_BUTTON_WHEEL_DOWN] and not world.player_events.is_empty() and event_log_rect.has_point(pointer):
+		if event.pressed:event_scroll=clampi(event_scroll+(1 if event.button_index==MOUSE_BUTTON_WHEEL_UP else -1),0,maxi(0,world.player_events.size()-6))
+		get_viewport().set_input_as_handled();return
 	if (world.phase == "shop" or field_book) and event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT:
 		if event.pressed:
 			if morning_screen == "book": close_morning_screen()
@@ -1015,7 +1022,10 @@ func _input(event):
 				return
 		if event.pressed and event.button_index in [MOUSE_BUTTON_WHEEL_UP, MOUSE_BUTTON_WHEEL_DOWN]:
 			cancel_wall_stroke()
-			if world.phase == "shop" or wheel_scroll_ui(): return
+			if world.phase == "shop" or field_book or wheel_scroll_ui(): return
+			if not event.ctrl_pressed:
+				if group>=0:cycle_subtool(event.button_index==MOUSE_BUTTON_WHEEL_UP)
+				get_viewport().set_input_as_handled();return
 			var before = get_canvas_transform().affine_inverse() * pointer
 			camera.zoom = Vector2.ONE * clampf(camera.zoom.x * (1.12 if event.button_index == MOUSE_BUTTON_WHEEL_UP else 1.0 / 1.12), 0.65, 1.8)
 			camera.force_update_scroll()
@@ -1048,7 +1058,7 @@ func _input(event):
 			if not event.pressed: shift_latched=false
 			elif not event.echo and not shift_latched:
 				shift_latched=true
-				cycle_subtool()
+				if group==1:cycle_command_animal()
 			get_viewport().set_input_as_handled()
 			return
 		if not event.pressed or event.echo: return
@@ -1756,13 +1766,22 @@ func draw_hud():
 	if world.phase == "shop" or field_book:
 		draw_shop()
 		return
+	if world.working():
+		for e in world.enemies:
+			if e.done or e.hp<=0 or e.hp>=e.max_hp:continue
+			var hp_pos=get_canvas_transform()*(actor_pixel("e%d"%e.id,e.pos)+Vector2(0,-66))-Vector2(22,0)
+			hud.draw_rect(Rect2(hp_pos-Vector2.ONE,Vector2(46,8)),Color("202a23"))
+			hud.draw_rect(Rect2(hp_pos,Vector2(44.0*e.hp/e.max_hp,6)),Color("e3aa88"))
 	if world.working() and not world.player_events.is_empty():
 		var paragraphs=[];var height=16.0
-		for row in world.player_events:
+		event_scroll=clampi(event_scroll,0,maxi(0,world.player_events.size()-6))
+		for row in world.player_events.slice(maxi(0,world.player_events.size()-6-event_scroll),world.player_events.size()-event_scroll):
 			var paragraph=TextParagraph.new();paragraph.add_string(row.text,FONT,13);paragraph.width=308
 			paragraph.break_flags=TextServer.BREAK_MANDATORY|TextServer.BREAK_WORD_BOUND|TextServer.BREAK_ADAPTIVE
 			paragraphs.append(paragraph);height+=paragraph.get_size().y+6
 		var y=723-height
+		event_log_rect=Rect2(932,y,332,height)
+		label_on(hud,Vector2(940,y-5),"ログ · ホイールで履歴"+(" · 過去" if event_scroll>0 else ""),11,UI.PAPER)
 		hud.draw_style_box(MarketView.panel(Color(0.12,0.19,0.15,0.72)),Rect2(932,y,332,height))
 		y+=8
 		for paragraph in paragraphs:
@@ -1806,9 +1825,9 @@ func draw_hud():
 	var idol_warning=idol_warning_text()
 	var show_idol_warning=idol_warning!="" and world.keeper.state not in ["restrained","captured"]
 	if clock < message_until and world.tick < message_until_tick and world.phase != "result":
-		var notice_y=136 if show_idol_warning else 60
-		panel(Rect2(16, notice_y, minf(800, message.length() * 16 + 28), 35))
-		label_on(hud, Vector2(28, notice_y+24), message, 16)
+		var notice_y=696
+		panel(Rect2(280, notice_y, minf(640, message.length() * 16 + 28), 35))
+		label_on(hud, Vector2(292, notice_y+24), message, 16)
 	if show_idol_warning:
 		hud.draw_style_box(UI.surface(UI.DANGER),Rect2(380,62,520,68))
 		label_on(hud,Vector2(395,90),idol_warning,20)
@@ -1956,7 +1975,7 @@ func setup_menu():
 	stamp.add_theme_font_size_override("font_size",14)
 	menu.add_child(stamp)
 	var guide = Label.new()
-	guide.text = "ホイール：ズーム　Tab：主人公 → 建設 → 指示　Shift：操作選択\n壁を選んでドラッグ：連続予約（右クリック / Escで取消）　未選択：マップ移動\n左クリック：選択・行動　右クリック：予定取消 / 解除 / 市場で戻る\n1：0.5倍　2：1倍　3：2倍　4：4倍（休息中）　操作ボタンのドラッグ：並べ替え\nSpace：停止 / 再開　−：遅く　＋ / ＝ / テンキー＋：速く\n夜まで / 朝まで休む：別の時間送り（中断して倍率を変更）"
+	guide.text = "ホイール：操作選択　Ctrl＋ホイール：ズーム　Tab：モード　Shift：指示対象\n壁を選んでドラッグ：連続予約（右クリック / Escで取消）　未選択：マップ移動\n左クリック：選択・行動　右クリック：予定取消 / 解除 / 市場で戻る\n1：0.5倍　2：1倍　3：2倍　4：4倍（休息中）　操作ボタンのドラッグ：並べ替え\nSpace：停止 / 再開　−：遅く　＋ / ＝ / テンキー＋：速く\n夜まで / 朝まで休む：別の時間送り（中断して倍率を変更）"
 	guide.position=Vector2(288,566)
 	guide.add_theme_font_size_override("font_size",14)
 	menu.add_child(guide)
@@ -2557,9 +2576,7 @@ func draw_enemy_actor(e: Dictionary):
 	draw_set_transform(Vector2.ZERO)
 	ProgressArt.tongue_layer(self,e,true)
 	if e.hp<=0: draw_down_stars(p)
-	if e.hp < e.max_hp:
-		draw_rect(Rect2(p + Vector2(-18, -48), Vector2(36, 4)), Color("3e4534"))
-		draw_rect(Rect2(p + Vector2(-18, -48), Vector2(36.0 * e.hp / e.max_hp, 4)), Color("e3aa88"))
+
 	if world.tick < e.move_stopped_until:
 		label_on(self, p + Vector2(-16, -53), "足止め", 13, Color("ffe5a0"))
 	if e.counter_target >= 0 and not e.flee:

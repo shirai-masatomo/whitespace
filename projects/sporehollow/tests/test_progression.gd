@@ -30,7 +30,7 @@ func run():
 	var plan=P.Encounters.plan(1,31,0)
 	check(plan.encounter_mode=="Fixed" and plan.chosen==["kidnapper"],"Day1 fixed kidnapper only")
 	check(P.Encounters.plan(4,31,0)==P.Encounters.plan(4,31,0),"Table deterministic")
-	check(P.Encounters.plan(5,31,0).chosen[0]=="martial_artist" and P.Encounters.plan(5,31,0).chosen.size()==2,"Hybrid contains fixed and drawn slots")
+	check(P.Encounters.plan(5,31,0).chosen[0]=="salaryman" and P.Encounters.plan(5,31,0).chosen.size()==6,"Hybrid contains fixed and drawn slots")
 	for type in ["Infected","Mutation","Cult","Military","Alien"]:
 		var row=D.enemy("kidnapper");row.type_tag=type
 		check(not P.Encounters.eligible(row,{"day":20,"karma":0}),"Low karma excludes "+type)

@@ -156,7 +156,11 @@ static func maid_step(w,a,enemy: bool) -> bool:
 		drink(a);a.coffee_served=[];a.coffee_rest_until=w.tick+ceili(10.0/w.DT);a.state="休む"
 		# No recipients: rest without falling through to the generic combat AI.
 		return true
-	allies.sort_custom(func(t,u):return w.distance(a.pos,t.pos)<w.distance(a.pos,u.pos) if w.distance(a.pos,t.pos)!=w.distance(a.pos,u.pos) else t.get("id",-1)<u.get("id",-1))
+	allies.sort_custom(func(t,u):
+		var t_buff=enemy and t.get("archetype","")=="dancer" and w.distance(a.pos,t.pos)<=a.sight_range
+		var u_buff=enemy and u.get("archetype","")=="dancer" and w.distance(a.pos,u.pos)<=a.sight_range
+		if t_buff!=u_buff:return t_buff
+		return w.distance(a.pos,t.pos)<w.distance(a.pos,u.pos) if w.distance(a.pos,t.pos)!=w.distance(a.pos,u.pos) else t.get("id",-1)<u.get("id",-1))
 	var target=allies[0];a.state="コーヒーを届ける"
 	if a.get("coffee_target",-999)!=target.get("id",-1):
 		a.coffee_target=target.get("id",-1);a.coffee_deadline=w.tick+ceili((8.0+w.distance(a.pos,target.pos)/a.move_speed*2.0)/w.DT)

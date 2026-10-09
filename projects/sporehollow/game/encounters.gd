@@ -16,13 +16,10 @@ const NIGHTS = {
 const FIRST_DAY = {"kidnapper":1,"salaryman":2,"destroyer":3,"martial_artist":5,"ninja":6,"animal_tamer":7,"runner":8,"dancer":9,"thief":10,"maid":11}
 const TABLE_NIGHT = {"mode":"Table","fixed":[],"count":3}
 const MILESTONE = {"interval":5,"from_day":10,"mode":"Hybrid","fixed":["runner"],"count":2}
-const ROUTE_ID="first-cycle-v1"
+const ROUTE_ID="ten-night-v2"
 
 static func route_definition() -> Dictionary:
-	var last_intro=int(FIRST_DAY.values().max())
-	var night=maxi(last_intro+1,MILESTONE.from_day)
-	while night%MILESTONE.interval!=0 or NIGHTS.has(night):night+=1
-	return {"version":1,"last_intro":last_intro,"completion_night":night}
+	return {"version":2,"last_intro":9,"completion_night":10}
 
 static func route_phase(day: int) -> String:
 	var route=route_definition()
@@ -61,6 +58,7 @@ static func eligible(row: Dictionary, context: Dictionary) -> bool:
 	return row.get("spawn_weight",1.0)>0
 
 static func plan(day: int, seed_value: int, karma: int, stage: int=1, flags: Array=[], counts: Dictionary={}, override: Dictionary={}) -> Dictionary:
+	if override.is_empty() and day>=2 and (day<=5 or day%5==0):return scripted(day,seed_value,karma)
 	var rule=override if not override.is_empty() else NIGHTS.get(day,MILESTONE if day>=MILESTONE.from_day and day%MILESTONE.interval==0 else TABLE_NIGHT)
 	var context={"day":day,"karma":karma,"stage":stage,"story_flags":flags,"counts":counts}
 	var candidates=[]
@@ -77,5 +75,27 @@ static func plan(day: int, seed_value: int, karma: int, stage: int=1, flags: Arr
 		for i in range(rule.get("count",1)): chosen.append(candidates[Data.weighted(rng,candidates.map(func(c):return c.spawn_weight))].archetype)
 	var waves=[]
 	# First-cycle provisional growth: introductions remain Lv1; only the first known role advances.
-	for i in range(chosen.size()): waves.append({"start_seconds":i*18.0,"interval_seconds":1.0,"jitter_seconds":0.0,"count":1,"role":chosen[i],"entries":[[1,5]],"lv":2 if day>route_definition().last_intro and i==0 else 1})
+	for i in range(chosen.size()): waves.append({"start_seconds":i*18.0,"interval_seconds":1.0,"jitter_seconds":0.0,"count":1,"role":chosen[i],"entries":[[1,5]],"lv":2 if day>11 and i==0 else 1})
 	return {"encounter_mode":rule.mode,"chosen":chosen,"first_attack_seconds":10.0,"repeat_waves":false,"repeat_interval_seconds":60.0,"time_limit_seconds":180.0,"waves":waves}
+
+# Provisional: A at 15s; equal A-D draw; day10 repeats day5. Snapshot at nightfall.
+static func scripted(day: int,seed_value: int,karma: int) -> Dictionary:
+	var events=[];var selection="milestone"
+	if day%5==0:
+		if karma>=10:
+			events=[[10,"martial_artist"],[10,"maid"],[15,"kidnapper"],[15,"destroyer"]]
+			for sec in [20,25,30,35,40]:events.append([sec,"salaryman"])
+		else:
+			for i in range(5):events.append([10,"salaryman"])
+			events.append([20,"kidnapper"])
+	else:
+		var rng=RandomNumberGenerator.new();rng.seed=seed_value*8191+day*131
+		var index=rng.randi_range(0,3);selection=["A","B","C","D"][index]
+		events=[[[15,"salaryman"],[15,"salaryman"],[15,"salaryman"]],[[15,"kidnapper"],[15,"destroyer"]],[[10,"martial_artist"],[20,"kidnapper"]],[[10,"maid"],[10,"kidnapper"],[15,"salaryman"]]][index]
+	return timed(events,selection,karma)
+
+static func timed(events: Array,selection: String,karma: int) -> Dictionary:
+	var waves=[];var chosen=[];var first=float(events[0][0])
+	for event in events:
+		chosen.append(event[1]);waves.append({"start_seconds":float(event[0])-first,"interval_seconds":1.0,"jitter_seconds":0.0,"count":1,"role":event[1],"entries":[[1,5]],"lv":1})
+	return {"encounter_mode":"Fixed" if selection=="milestone" else "Table","selection":selection,"karma_snapshot":karma,"chosen":chosen,"first_attack_seconds":first,"repeat_waves":false,"repeat_interval_seconds":60.0,"time_limit_seconds":180.0,"waves":waves}

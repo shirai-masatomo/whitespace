@@ -5,7 +5,7 @@ func run():
 	root.size=Vector2i(1280,800)
 	game=load("res://game/main.tscn").instantiate();game.automated=true
 	var c=Farm.new_campaign();c.day=2
-	game.world=Farm.new(c,31).begin_day();game.world.story.investigated=true;game.world.paused=true
+	game.world=Farm.new(c,31).begin_day();game.world.story.investigated=true;game.world.start_night();game.world.spawn_schedule.clear();game.world.paused=true
 	root.add_child(game);await process_frame;await process_frame
 	game.reset_view();game.refresh();game.choose_walk()
 	await mouse(game.screen_cell(game.world.Story.at(game.world)))
@@ -24,7 +24,7 @@ func run():
 		game.world.step()
 		if game.world.jobs.is_empty():break
 	game.world.paused=true;game.refresh();await process_frame
-	check(game.world.story.prayers.size()==1 and ["pray_animal","pray_gold","pray_item"].all(func(id):return game.buttons[id].disabled),"Committed prayer disables every category for today")
+	check(game.world.story.prayers.size()==1 and ["pray_animal","pray_gold","pray_item"].all(func(id):return game.buttons[id].disabled),"Committed prayer disables every category for this night")
 	game.world.paused=false;game.world.start_night();game.world.spawn_schedule.clear();game.world.finish(true)
 	game.world=Farm.new(game.world.next_campaign(),31);game.reset_view();game.refresh();await process_frame
 	check(game.world.story.miracles.size()==1 and game.palette.get_children().any(func(n):return n is Label and n.text.begins_with("願いの贈り物：")),"Following morning displays the actual gift")

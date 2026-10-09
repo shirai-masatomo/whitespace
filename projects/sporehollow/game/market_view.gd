@@ -13,6 +13,12 @@ const CARD_GAP = 16.0
 const BACK = Rect2(876,132,112,44)
 const MENU = Rect2(1000,132,152,44)
 const ACTION = Rect2(880,566,248,50)
+const LIST = Rect2(LEFT,252,752,336)
+const FOOTER = Rect2(LEFT,624,752,140)
+const SCROLL_STEP = 80.0
+const ROW_HEIGHT = 72.0
+const ROW_PITCH = 80.0
+const TRADE_CANDIDATE=preload("res://assets/ui/trial_buy_sell.png")
 static var image_regions: Dictionary = {}
 static var missing_reported: Dictionary = {}
 
@@ -74,6 +80,9 @@ static func unit(p: Dictionary) -> String:
 	return "セット" if p.Category=="materials" else ("匹" if p.Category=="animals" else ("本" if p.ProductID in ["coffee","energy_drink"] else "個"))
 
 static func texture_for(id: String) -> Texture2D:
+	if id in ["buy","sell"]:
+		var atlas=AtlasTexture.new();atlas.atlas=TRADE_CANDIDATE;atlas.region=Rect2(0 if id=="buy" else 1028,0,1028,764)
+		return atlas
 	if Assets.texture(id):return Assets.texture(id)
 	if Delivered.RESOURCES.has(id):return Delivered.RESOURCES[id][96]
 	if id in ["hen","cat"]:return Art.CLIPS[id+"/idle/right"].frames[0]
@@ -121,21 +130,101 @@ static func text(game,c,area: Rect2,value: String,size: int=18,color: Color=UI.I
 	paragraph.draw(c.get_canvas_item(),area.position,color)
 
 static func speech_bubble(game,c,area: Rect2,value: String,font_size: int,tail_up: bool=false):
-	# A single quiet balloon style; its outline opens where the tail joins the body.
-	var fill=Color("fff8e7");var edge=Color("a69b7f")
-	var box=panel(fill,edge,2);box.set_corner_radius_all(14)
-	box.shadow_size=2;box.shadow_offset=Vector2(0,2)
-	c.draw_style_box(box,area)
-	var base_y=area.position.y+1 if tail_up else area.end.y-1
-	var center=area.get_center().x
-	var left=Vector2(center-10,base_y);var right=Vector2(center+10,base_y)
-	var tip=Vector2(center-4,base_y+(-13 if tail_up else 13))
-	c.draw_line(left,right,fill,4)
-	c.draw_colored_polygon(PackedVector2Array([left,tip,right]),fill)
-	c.draw_polyline(PackedVector2Array([left,tip,right]),edge,2,true)
+	# Reference: angular white balloon, dark outline, and an integrated tail.
+	var w=area.size.x;var h=area.size.y
+	var points=PackedVector2Array([Vector2(0,h*0.42),Vector2(14,10),Vector2(w*0.3,2),Vector2(w*0.76,0),Vector2(w-16,12),Vector2(w,h*0.35),Vector2(w-7,h-13),Vector2(w*0.6,h),Vector2(w*0.49,h-2),Vector2(w*0.54,h+12),Vector2(w*0.42,h-2),Vector2(16,h-5)])
+	if tail_up:
+		for i in range(points.size()):points[i].y=h-points[i].y
+	for i in range(points.size()):points[i]+=area.position
+	c.draw_colored_polygon(points,Color("fffdf5"))
+	points.append(points[0]);c.draw_polyline(points,Color("302c24"),3,true)
 	var paragraph=TextParagraph.new();paragraph.add_string(value,game.FONT,font_size)
 	paragraph.width=area.size.x-32;paragraph.alignment=HORIZONTAL_ALIGNMENT_CENTER
 	paragraph.draw(c.get_canvas_item(),Vector2(area.position.x+16,area.get_center().y-paragraph.get_size().y/2).round(),UI.INK)
+
+static func merchant(game,c,area: Rect2):
+	art_texture(c,Art.CART,area)
+
+static func list_title(game) -> String:
+	return "持ち物一覧" if game.shop_side=="sell" else "商品一覧"
+
+static func hover_product(game,row: Dictionary):
+	game.set_meta("market_hover",row.duplicate())
+	game.set_meta("market_skill",-1)
+	game.hud.queue_redraw()
+
+static func hover_skill(game,index: int):
+	game.set_meta("market_skill",index)
+	game.hud.queue_redraw()
+
+static func focus_product(game,row: Dictionary,index: int):
+	hover_product(game,row)
+	if not game.palette.has_node("MarketScroll"):return
+	var bar=game.palette.get_node("MarketScroll")
+	var x=index*ROW_PITCH
+	if x<bar.value:bar.value=x
+	elif x+ROW_HEIGHT>bar.value+bar.page:bar.value=x+ROW_HEIGHT-bar.page
+
+static func skill_rows(game,row: Dictionary) -> Array:
+	if not Shop.Animals.SPECIES.has(row.get("id","")):return []
+	var a=individual(game,row).duplicate()
+	a.species=row.id;a.lv=a.get("lv",row.get("lv",1))
+	return game.Journal.animal_skills(game,a).filter(func(skill):return not skill.locked)
+
+static func hovered_row(game) -> Dictionary:
+	var rows=game.shop_rows()
+	var hovered=game.get_meta("market_hover",{})
+	for row in rows:
+		if row.id==hovered.get("id","") and row.animal_id==hovered.get("animal_id",-2):return row
+	return rows[0] if not rows.is_empty() else {}
+
+static func move_list(game,content: Control,value: float):
+	game.set_meta("market_scroll",value)
+	content.position.y=-value
+	game.hud.queue_redraw()
+
+static func scroll_ui(game,event: InputEvent) -> bool:
+	if not event is InputEventMouseButton or event.button_index not in [MOUSE_BUTTON_WHEEL_UP,MOUSE_BUTTON_WHEEL_DOWN,MOUSE_BUTTON_WHEEL_LEFT,MOUSE_BUTTON_WHEEL_RIGHT]:return false
+	if game.world.phase!="shop" or game.morning_screen!="market":return false
+	# Consume every market wheel event, including limits/empty lists. Never leak into field modes.
+	if game.story_modal!="" or game.menu_open:return true
+	if event.pressed and game.shop_level=="list" and game.shop_side!="home" and game.palette.has_node("MarketScroll"):
+		var bar=game.palette.get_node("MarketScroll")
+		var direction=-1 if event.button_index in [MOUSE_BUTTON_WHEEL_UP,MOUSE_BUTTON_WHEEL_LEFT] else 1
+		bar.value+=direction*SCROLL_STEP*maxf(1.0,event.factor)
+	return true
+
+static func build_list(game):
+	var rows=game.shop_rows();var key=game.shop_side+"/"+game.shop_category
+	if game.get_meta("market_list_key","")!=key:
+		game.set_meta("market_scroll",0.0);game.set_meta("market_hover",{});game.set_meta("market_skill",-1)
+	game.set_meta("market_list_key",key)
+	var viewport=Control.new();viewport.name="MarketList";viewport.position=LIST.position;viewport.size=LIST.size
+	viewport.clip_contents=true;viewport.mouse_filter=Control.MOUSE_FILTER_PASS;game.palette.add_child(viewport)
+	var content=Control.new();content.name="Cards";content.mouse_filter=Control.MOUSE_FILTER_IGNORE;viewport.add_child(content)
+	for index in range(rows.size()):
+		var row=rows[index];var id="trade_"+row.id+"_"+str(row.animal_id)
+		game.add_button(content,id,"",Rect2(0,index*ROW_PITCH,LIST.size.x-24,ROW_HEIGHT),game.inspect_product.bind(row))
+		var b=game.buttons[id];button_style(b);b.focus_mode=Control.FOCUS_ALL
+		b.draw.connect(draw_product.bind(game,b,row))
+		b.mouse_entered.connect(hover_product.bind(game,row));b.focus_entered.connect(focus_product.bind(game,row,index))
+	var total=maxf(LIST.size.y,rows.size()*ROW_PITCH-8)
+	var bar=VScrollBar.new();bar.name="MarketScroll";bar.position=Vector2(LIST.end.x-18,LIST.position.y);bar.size=Vector2(18,LIST.size.y)
+	bar.min_value=0;bar.max_value=total;bar.page=LIST.size.y;bar.step=1;bar.value=clampf(game.get_meta("market_scroll",0.0),0,total-LIST.size.y)
+	bar.visible=total>LIST.size.y;bar.mouse_filter=Control.MOUSE_FILTER_STOP
+	bar.add_theme_stylebox_override("scroll",panel(Color("d6c6a0"),Color("927e59")))
+	for state in ["grabber","grabber_highlight","grabber_pressed"]:bar.add_theme_stylebox_override(state,panel(UI.MOSS,UI.WOOD,1))
+	game.palette.add_child(bar)
+	bar.value_changed.connect(func(value):move_list(game,content,value))
+	move_list(game,content,bar.value)
+	for i in range(4):build_skill_hover(game,i)
+
+static func build_skill_hover(game,index: int):
+	game.add_button(game.palette,"market_skill_%d"%index,"",Rect2(LEFT+100+index*160,724,156,32),func():pass)
+	var b=game.buttons["market_skill_%d"%index]
+	for state in ["normal","hover","pressed","focus"]:b.add_theme_stylebox_override(state,StyleBoxEmpty.new())
+	b.mouse_entered.connect(hover_skill.bind(game,index));b.mouse_exited.connect(hover_skill.bind(game,-1))
+	b.focus_entered.connect(hover_skill.bind(game,index));b.focus_exited.connect(hover_skill.bind(game,-1))
 
 static func price(game,c,p: Vector2,amount: int,size: int=25):
 	c.draw_texture_rect(UI.icon("coin"),Rect2(p+Vector2(0,2),Vector2(24,24)),false)
@@ -160,7 +249,8 @@ static func category_status(game, category: String) -> String:
 
 static func build(game):
 	if game.morning_screen=="morning":
-		game.add_button(game.palette,"open_market","朝の市",Rect2(377,465,220,40),game.open_market)
+		game.set_meta("market_list_key","")
+		game.add_button(game.palette,"open_market","商品一覧",Rect2(377,465,220,40),game.open_market)
 		game.buttons.open_market.icon=UI.icon("basket")
 		game.add_button(game.palette,"open_book","図鑑を開く",Rect2(725,465,220,40),game.open_book)
 		game.buttons.open_book.icon=UI.icon("book")
@@ -176,6 +266,7 @@ static func build(game):
 	game.add_button(game.palette,"shop_back","戻る",BACK,game.market_back)
 	button_style(game.buttons.shop_back)
 	if game.shop_side=="home":
+		game.set_meta("market_list_key","")
 		for i in range(2):
 			var side=["buy","sell"][i]
 			game.add_button(game.palette,"shop_"+side,"",Rect2(724,302+i*151,380,127),game.shop_choose.bind(side,"animals"))
@@ -183,6 +274,7 @@ static func build(game):
 			b.draw.connect(draw_choice.bind(game,b,side))
 		return
 	if game.shop_level=="categories":
+		game.set_meta("market_list_key","")
 		var index=0
 		for category in game.MARKET_CATEGORIES:
 			game.add_button(game.palette,"category_"+category,"",Rect2(LEFT+(index%2)*384,276+(index/2)*174,368,156),game.choose_category.bind(category))
@@ -191,23 +283,18 @@ static func build(game):
 		return
 	if game.shop_level=="detail":
 		var row=live_row(game);var p=Shop.table()[row.id]
+		hover_product(game,row)
 		game.add_button(game.palette,"confirm_trade",("迎える" if p.Category=="animals" else "買う") if game.shop_side=="buy" else "売る",ACTION,game.trade.bind(row.id,row.animal_id))
 		var b=game.buttons.confirm_trade;b.icon=UI.icon("coin");button_style(b,true)
 		b.tooltip_text=reason(game.world,game.shop_side,row);b.disabled=b.tooltip_text!=""
+		game.add_button(game.palette,"cancel_trade","やめる",Rect2(616,566,248,50),game.market_back)
+		button_style(game.buttons.cancel_trade)
+		for i in range(4):build_skill_hover(game,i)
 		return
-	var rows=game.shop_rows()
-	for index in range(game.shop_page*4,mini(rows.size(),game.shop_page*4+4)):
-		var row=rows[index];var id="trade_"+row.id+"_"+str(row.animal_id)
-		game.add_button(game.palette,id,"",Rect2(LEFT+(index%4)*(CARD_WIDTH+CARD_GAP),278,CARD_WIDTH,336),game.inspect_product.bind(row))
-		var b=game.buttons[id];button_style(b)
-		b.tooltip_text=description(row.id)+"\n"+reason(game.world,game.shop_side,row)
-		b.draw.connect(draw_product.bind(game,b,row))
-	if rows.size()>4:
-		game.add_button(game.palette,"shop_page","次の品へ →",Rect2(938,641,190,40),game.next_shop_page.bind(ceili(rows.size()/4.0)))
-		button_style(game.buttons.shop_page)
+	build_list(game)
 
 static func draw_choice(game,b,side: String):
-	art(b,"basket" if side=="buy" else "gold",Rect2(24,25,72,72),game)
+	art(b,side,Rect2(24,25,72,72),game)
 	text(game,b,Rect2(122,26,225,36),"買う" if side=="buy" else "売る",28,UI.MOSS)
 	text(game,b,Rect2(122,76,230,28),"牧場の品を探す" if side=="buy" else "持ち物を見せる",17,MUTED)
 	b.draw_texture_rect(UI.icon("next"),Rect2(341,42,20,20),false)
@@ -220,81 +307,100 @@ static func draw_category(game,b,category: String):
 	text(game,b,Rect2(116,103,228,28),category_status(game,category),17,MUTED)
 
 static func draw_product(game,b,row: Dictionary):
-	art(b,row.id,Rect2(22,18,CARD_WIDTH-44,114),game)
-	var title=product_name(row)
-	if row.animal_id>=0:title=game.product_title(row).split(" Lv")[0]
-	text(game,b,Rect2(18,140,CARD_WIDTH-36,34),title,20)
-	if Shop.table()[row.id].Category=="animals":
-		var a=individual(game,row)
-		Assets.badge(game,b,Vector2(18,179),Shop.Animals.Data.rarity(a.get("rarity",0)),true)
-	text(game,b,Rect2(18,211,CARD_WIDTH-36,50),role(row.id),14,MUTED)
-	var p=Shop.table()[row.id]
-	price(game,b,Vector2(18,267),p.BuyPrice if game.shop_side=="buy" else p.SellPrice,24)
+	art(b,row.id,Rect2(12,7,58,58),game)
+	var p=Shop.table()[row.id];var title=product_name(row) if row.animal_id<0 else game.product_title(row).split(" Lv")[0]
+	text(game,b,Rect2(86,9,365,30),title,21)
 	var why=reason(game.world,game.shop_side,row)
-	var status=why if why!="" else ("在庫 %d%s"%[row.count,unit(p)] if game.shop_side=="buy" else "売却可能 %d%s"%[row.count,unit(p)])
-	if game.shop_side=="sell" and p.Category=="materials" and row.count==0 and owned(game.world,row)>0:
-		status="あと%s%d"%[product_name(row).split(" ×")[0],p.Amount-owned(game.world,row)]
-	text(game,b,Rect2(18,300,CARD_WIDTH-36,34),status,14,UI.DANGER if why!="" else MUTED)
+	var status=why if why!="" else ("" if p.Category=="animals" else ("在庫 %d%s" if game.shop_side=="buy" else "売却可能 %d%s")%[row.count,unit(p)])
+	text(game,b,Rect2(86,42,430,23),status,15,UI.DANGER if why!="" else MUTED)
+	price(game,b,Vector2(536,20),p.BuyPrice if game.shop_side=="buy" else p.SellPrice,24)
+	if game.shop_side=="buy" and row.count<=0:
+		b.draw_line(Vector2(14,60),Vector2(68,12),Color("987b6b"),4,true)
+		b.draw_line(Vector2(14,12),Vector2(68,60),Color("987b6b"),4,true)
 
 static func draw(game):
 	var c=game.hud
 	if game.morning_screen=="morning":
 		c.draw_style_box(panel(PAPER,UI.WOOD,3),game.StoryView.morning_layout(game).paper)
-		text(game,c,Rect2(368,138,400,44),"%d日目の朝"%game.world.campaign.day,26)
 		price(game,c,Vector2(818,141),game.world.campaign.gold,24)
-		c.draw_line(Vector2(368,189),Vector2(948,189),Color("c5b590"),1)
-		text(game,c,Rect2(377,206,240,38),"朝の市",23)
-		text(game,c,Rect2(725,206,240,38),"図鑑",23)
-		art_texture(c,Art.CART,Rect2(367,251,257,212))
+		speech_bubble(game,c,Rect2(348,190,314,62),"いらっしゃい、何か見ていくかい？",16)
+		merchant(game,c,Rect2(367,263,257,190))
 		Art.fit(c,Art.CLOSED,Rect2(762,250,150,210))
-		text(game,c,Rect2(368,523,580,26),game.Farm.Progression.Encounters.route_text(game.world.campaign),19,UI.MOSS)
-		text(game,c,Rect2(368,549,580,22),"新しく始めると、この牧場での進行は終了します" if game.restart_confirm else "購入・育成・祈りで準備し、次の夜を迎えましょう",14,MUTED)
+		if game.restart_confirm:text(game,c,Rect2(368,523,580,26),"新しく始めると、この牧場での進行は終了します",17,UI.DANGER)
 		return
 	c.draw_rect(Rect2(0,0,1280,800),Color(0.13,0.18,0.17,0.65))
-	c.draw_style_box(panel(Color("7c6349"),Color("564736"),3),Rect2(100,98,1080,610))
-	c.draw_style_box(panel(PAPER,Color("cfbd98"),1),Rect2(112,110,1056,582))
+	c.draw_style_box(panel(Color("7c6349"),Color("564736"),3),Rect2(100,98,1080,684))
+	c.draw_style_box(panel(PAPER,Color("cfbd98"),1),Rect2(112,110,1056,660))
 	for i in range(17):c.draw_rect(Rect2(114+i*62,110,62,10),Color("cdb584") if i%2==0 else Color("809880"))
-	text(game,c,Rect2(140,135,370,46),"朝の市",34)
+	text(game,c,Rect2(140,135,370,46),list_title(game),34)
 	price(game,c,Vector2(728,143),game.world.campaign.gold,26)
 	c.draw_line(Vector2(140,195),Vector2(1140,195),Color("c5b590"),1)
 	if game.shop_side=="home":
-		art_texture(c,Art.CART,Rect2(160,286,498,300))
-		speech_bubble(game,c,Rect2(265,215,270,62),"何が欲しい？",23)
+		merchant(game,c,Rect2(160,300,498,300))
+		speech_bubble(game,c,Rect2(205,215,388,66),"いらっしゃい、何か見ていくかい？",21)
 	else:
-		Art.fit(c,Art.CART,Rect2(128,313,220,192))
+		merchant(game,c,Rect2(128,313,220,192))
 		speech_bubble(game,c,Rect2(138,523,204,67),"いらっしゃい" if game.shop_side=="buy" else "持ち物を見せてね",18,true)
-		var crumb="朝の市 / "+("買う" if game.shop_side=="buy" else "売る")
+		var crumb="買う" if game.shop_side=="buy" else "売る"
 		if game.shop_level!="categories":crumb+=" / "+game.MARKET_CATEGORIES[game.shop_category][0]
-		text(game,c,Rect2(LEFT,225,750,30),crumb,17,MUTED)
+		text(game,c,Rect2(LEFT,211,450,30),crumb,17,MUTED)
 	if game.shop_level=="list" and game.shop_side!="home" and game.shop_rows().is_empty():
 		art(c,game.MARKET_CATEGORIES[game.shop_category][1],Rect2(LEFT+32,318,88,88),game)
 		text(game,c,Rect2(LEFT+148,328,550,72),empty_message(game,game.shop_category),23)
 		text(game,c,Rect2(LEFT+148,417,550,56),"ほかのカテゴリは「戻る」から確認できます。",17,MUTED)
 	if game.shop_side!="home" and game.shop_level=="detail":draw_detail(game)
+	if game.shop_side!="home" and game.shop_level=="list":draw_footer(game)
+
+static func draw_footer(game):
+	var c=game.hud;var row=live_row(game) if game.shop_level=="detail" else hovered_row(game)
+	if row.is_empty():return
+	c.draw_style_box(panel(Color("e9e7cd"),Color("b4aa87"),2),FOOTER)
+	var skills=skill_rows(game,row);var index=int(game.get_meta("market_skill",-1))
+	var title=product_name(row);var detail=description(row.id)
+	if index>=0 and index<skills.size():
+		var skill=skills[index];var lines=skill.tooltip.split("\n")
+		title=lines[0];detail=" / ".join(lines.slice(2))
+		text(game,c,Rect2(LEFT+16,636,720,26),title,21,UI.MOSS)
+		text(game,c,Rect2(LEFT+16,670,720,52),detail,16)
+	else:
+		art(c,row.id,Rect2(LEFT+16,642,54,58),game)
+		text(game,c,Rect2(LEFT+84,636,638,26),title,21,UI.MOSS)
+		text(game,c,Rect2(LEFT+84,670,638,52),detail,16)
+	if not skills.is_empty():text(game,c,Rect2(LEFT+16,730,84,24),"所持スキル",14,MUTED)
+	for i in range(mini(skills.size(),4)):
+		var x=LEFT+100+i*160
+		c.draw_texture_rect(Assets.skill_texture(skills[i].id),Rect2(x,725,30,30),false)
+		text(game,c,Rect2(x+37,729,116,27),skills[i].tooltip.split("\n")[0],14,UI.MOSS if i==index else UI.INK)
+	var rows=game.shop_rows();var count=rows.size()
+	if game.shop_level=="list" and count>4:
+		var offset=float(game.get_meta("market_scroll",0.0));var maximum=count*ROW_PITCH-8-LIST.size.y
+		var more="↑ 前の商品" if offset>=maximum else "下に続く ↓" if offset<=0 else "↑ 前の商品　下に続く ↓"
+		text(game,c,Rect2(814,211,314,28),more,15,UI.MOSS)
 
 static func draw_detail(game):
 	var c=game.hud;var row=live_row(game);var p=Shop.table()[row.id]
 	var buying=game.shop_side=="buy"
 	var cost=p.BuyPrice if buying else p.SellPrice
 	var title=product_name(row) if row.animal_id<0 else game.product_title(row)
-	text(game,c,Rect2(LEFT,268,752,44),title,28)
-	c.draw_style_box(panel(Color("e3e6cd"),Color("d1d6bb")),Rect2(LEFT,320,212,204))
-	art(c,row.id,Rect2(LEFT+36,350,140,142),game)
-	text(game,c,Rect2(616,322,510,80),description(row.id),18)
-	if p.Category=="animals": text(game,c,Rect2(616,392,510,25),rarity_label(game,row)+bonus_label(game,row),15,MUTED)
-	var quantity="店の在庫：%d%s"%[row.count,unit(p)] if buying else "売却可能：%d%s"%[row.count,unit(p)]
+	text(game,c,Rect2(LEFT,260,752,32),"この仲間を迎えますか？" if buying and p.Category=="animals" else "この商品を買いますか？" if buying else "この持ち物を売りますか？",23,UI.MOSS)
+	text(game,c,Rect2(616,314,510,44),title,28)
+	c.draw_style_box(panel(Color("e3e6cd"),Color("d1d6bb")),Rect2(LEFT,310,212,188))
+	art(c,row.id,Rect2(LEFT+36,332,140,142),game)
+	if p.Category=="animals":text(game,c,Rect2(616,360,510,25),rarity_label(game,row)+bonus_label(game,row),15,MUTED)
+	var quantity=("店の在庫：%d%s"%[row.count,unit(p)] if buying else "売却可能：%d%s"%[row.count,unit(p)]) if p.Category!="animals" else ""
 	var own="所持：%s %d%s"%[product_name({"id":row.id}).split(" ×")[0],owned(game.world,row),"匹" if p.Category=="animals" else ""]
 	var one="1回の%s：%s"%["購入" if buying else "売却",product_name(row)+(" ×1" if p.Amount==1 else "")]
-	text(game,c,Rect2(616,422,512,24),one,17)
-	text(game,c,Rect2(616,452,512,24),quantity+"　／　"+own,17,MUTED)
-	price(game,c,Vector2(616,496),cost,28)
+	text(game,c,Rect2(616,397,512,24),one,17)
+	text(game,c,Rect2(616,427,512,24),(quantity+"　／　" if quantity!="" else "")+own,17,MUTED)
+	price(game,c,Vector2(616,465),cost,28)
 	var why=reason(game.world,game.shop_side,row)
 	var after=game.world.campaign.gold+(-cost if buying else cost)
-	text(game,c,Rect2(LEFT,561,486,28),"所持金 %dG → %s %dG"%[game.world.campaign.gold,"購入後" if buying else "売却後",after] if why=="" else "所持金 %dG"%game.world.campaign.gold,20)
-	text(game,c,Rect2(LEFT,596,486,36),why,17,UI.DANGER)
+	c.draw_style_box(panel(Color("dfd4b5"),Color("c4b28b")),Rect2(LEFT,514,752,40))
+	text(game,c,Rect2(LEFT+20,520,716,28),"所持金 %dG → %s %dG"%[game.world.campaign.gold,"購入後" if buying else "売却後",after] if why=="" else "所持金 %dG　／　%s"%[game.world.campaign.gold,why],20,UI.INK if why=="" else UI.DANGER)
+	draw_footer(game)
 	if game.shop_notice!="":
-		c.draw_style_box(panel(Color("dce5ca"),Color("9dac88")),Rect2(LEFT,642,752,38))
-		text(game,c,Rect2(LEFT+14,650,724,28),game.shop_notice,17,UI.INK)
+		c.draw_style_box(panel(Color("dce5ca"),Color("9dac88")),Rect2(136,626,208,136))
+		text(game,c,Rect2(148,639,184,110),game.shop_notice,16,UI.INK)
 
 static func individual(game,row) -> Dictionary:
 	if row.get("animal_id",-1)>=0:

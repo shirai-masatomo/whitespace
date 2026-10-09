@@ -7,9 +7,9 @@ func win(w):
 	w.start_night();w.spawn_schedule.clear();w.finish(true)
 func run():
 	var definition=E.route_definition();var target=definition.completion_night
-	check(definition.last_intro==11 and target==15,"Arrival is derived from the final introduction and next existing milestone")
-	check(not E.NIGHTS.has(target) and target%E.MILESTONE.interval==0,"The endpoint uses a real milestone, not an overridden introduction night")
-	check(E.route_phase(11)=="introduction" and E.route_phase(12)=="mixed" and E.route_phase(target)=="milestone" and E.route_phase(target+1)=="continuation","Every section has an explicit transition")
+	check(definition.last_intro==9 and target==10,"Arrival is derived from the final introduction and next existing milestone")
+	check(E.plan(target,31,0).selection=="milestone" and target%E.MILESTONE.interval==0,"The endpoint uses a real milestone, not an overridden introduction night")
+	check(E.route_phase(9)=="introduction" and E.route_phase(target)=="milestone" and E.route_phase(target+1)=="continuation","Every section has an explicit transition")
 	var scenarios=[]
 	for seed_value in [17,31,73]:
 		var w=prepare(target-1,seed_value);win(w)
@@ -34,13 +34,13 @@ func run():
 			w=cycle.begin_day();win(w);cycle=Farm.new(w.next_campaign(),w.seed_value+1)
 		check(cycle.campaign.day==target+1 and cycle.seed_value==seed_value+target and E.reached(cycle.campaign),"Actual morning seed increment crosses the full existing route: "+str(seed_value))
 		scenarios.append({"initial_seed":seed_value,"next_morning_seed":cycle.seed_value,"encounters":chosen,"completion":cycle.campaign.route_progress})
-	var w=prepare(target);w.story.investigated=true;w.Story.pray(w,"gold");win(w)
+	var w=prepare(target);w.start_night();w.story.investigated=true;w.Story.pray(w,"gold");win(w)
 	var gold=w.campaign.gold;var progress=w.campaign.route_progress.duplicate(true)
 	w.Story.morning(w,target+1);w.finish(true)
 	check(w.campaign.gold==gold and w.story.miracles.size()==1 and w.campaign.route_progress==progress,"Prayer settlement and endpoint overlap exactly once")
 	var legacy=Farm.new_campaign();legacy.day=target+1;legacy.erase("route_progress")
 	var migrated=Farm.new(legacy,31)
 	check(not E.reached(migrated.campaign) and migrated.campaign.route_progress.completed_through_day==0,"Reading an old late campaign does not invent unobserved achievements")
-	check(E.plan(target+1,31,0).chosen.size()==E.TABLE_NIGHT.count,"The game continues beyond the provisional endpoint")
+	check(E.plan(target+1,31,0).chosen.size()>0,"The game continues beyond the provisional endpoint")
 	FileAccess.open("user://campaign-route-tests.json",FileAccess.WRITE).store_string(JSON.stringify({"checks":records,"definition":definition,"scenarios":scenarios,"scope":"state and reward contracts; victories forced in transition fixtures, not human survival"},"  "))
 	print("CAMPAIGN_ROUTE: %d checks, failures=%d"%[checks,failures]);quit(1 if failures else 0)

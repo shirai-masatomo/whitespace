@@ -4,7 +4,8 @@ func hidden(w):
 	w.keeper.hp=0;w.keeper.state="hidden_rest";w.keeper.carrier=-1
 func run():
 	var w=open_world();var e=enemy(w,"salaryman",Vector2i(11,8))
-	check(T.weights(w,e)==e.target_weights,"Healthy keeper preserves ordinary role weights")
+	var expected=e.target_weights.duplicate();expected.idol=0
+	check(T.weights(w,e)==expected,"Healthy keeper preserves role weights except ordinary idol targeting")
 	for role in T.PRESSURE_ROLES:
 		w=open_world();hidden(w);e=enemy(w,role,Vector2i(11,8))
 		var dog=w.animals[0];dog.pos=Vector2i(10,8);dog.mode="rest"
@@ -60,6 +61,7 @@ func run():
 	var idol_hp=w.story.idol.hp;C.enemy_step(w,e)
 	check(ally.hp==13 and w.story.idol.hp==idol_hp,"Maid supports the advancing faction without normal attacks")
 	w.keeper.state="free";w.keeper.hp=8
-	check(T.weights(w,ally)==ally.target_weights,"Recovery restores ordinary role weights")
+	expected=ally.target_weights.duplicate();expected.idol=0
+	check(T.weights(w,ally)==expected,"Recovery restores role weights with idol exclusion")
 	FileAccess.open("user://target-policy-tests.json",FileAccess.WRITE).store_string(JSON.stringify({"checks":records,"down_weights":T.DOWN_WEIGHTS,"scope":"role and perception contracts; no difficulty calibration"},"  "))
 	print("TARGET_POLICY: %d checks, failures=%d"%[checks,failures]);quit(1 if failures else 0)

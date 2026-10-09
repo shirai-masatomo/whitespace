@@ -120,7 +120,7 @@ static func draw_skills(g,c,skills: Array):
 		var skill=skills[i];var rect=skill_rect(i)
 		var edge=Color("ab843e") if skill.ultimate else Color("b8ac8a")
 		c.draw_style_box(g.MarketView.panel(Color("e8dfc2") if skill.locked else Color("f4e9c9"),edge,2 if skill.ultimate else 1),rect)
-		c.draw_texture_rect(Assets.skill_texture(skill.id),rect.grow(-12),false,Color(1,1,1,0.38) if skill.locked else Color.WHITE)
+		c.draw_texture_rect(Assets.skill_texture(skill.id),rect.grow(-7),false,Color(1,1,1,0.38) if skill.locked else Color.WHITE)
 		if skill.locked:
 			# The lock distinguishes an unavailable skill without a persistent label.
 			var p=rect.position+Vector2(66,67)

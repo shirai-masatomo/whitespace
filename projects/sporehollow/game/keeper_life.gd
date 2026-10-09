@@ -2,6 +2,7 @@ extends RefCounted
 ## Fixed-tick keeper survival; no input/rendering dependency. Tuning is provisional.
 const MAX_HP = 30
 const ATTACK = 2
+const CLOSE_ATTACK_RANGE = 1 # Eight neighboring cells, with sight; never a pursuit radius.
 const OBJECT_ATTACK = 1 # Shared capability; no new building-attack command is implied.
 const CAPTURE_GRACE = 12.0
 const HIDDEN_HEAL_SECONDS = 6.0
@@ -215,9 +216,11 @@ static func step(w):
 			set_rest(w, true,"forced")
 			end_move(w)
 	if k.sleepiness < 60: k.warned = 0
-	# Minimum self-defense, never chasing; deliberately much weaker than the dog.
+	# Close automatic defense may initiate, including against nonattacking support enemies.
+	# Only the adjacent ring is eligible; this never adds a movement job or pursuit goal.
 	if able(w) and w.tick >= k.next_attack:
-		var threats = w.enemies.filter(func(e): return not e.done and not e.flee and e.hp>0 and w.distance(e.pos, k.pos) <= 1)
+		var threats = w.enemies.filter(func(e): return close_attack_target(w,e))
+		threats.sort_custom(func(a,b):return w.distance(k.pos,a.pos)<w.distance(k.pos,b.pos) if w.distance(k.pos,a.pos)!=w.distance(k.pos,b.pos) else a.id<b.id)
 		if not threats.is_empty() and w.Combat.pay(k,"attack"):
 			var e = threats[0]
 			k.next_attack = w.tick + ceili(1.5 / factor(w) / w.DT)
@@ -225,6 +228,10 @@ static func step(w):
 			w.combat_log.append({"tick": w.tick, "source": "keeper", "id": -1, "target": e.id, "damage": ATTACK})
 			if e.hp == 0:
 				if w.stage == 1 and e.id == 0: w.drop_blueprint(e.pos)
+
+static func close_attack_target(w,e) -> bool:
+	var delta=e.pos-w.keeper.pos
+	return not e.done and not e.flee and e.hp>0 and maxi(absi(delta.x),absi(delta.y))<=CLOSE_ATTACK_RANGE and w.line_of_sight(w.keeper.pos,e.pos)
 
 static func can_wake_hidden(w) -> bool:
 	var k=w.keeper

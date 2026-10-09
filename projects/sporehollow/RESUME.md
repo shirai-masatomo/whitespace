@@ -1,5 +1,9 @@
 # 再開記録
 
+## 現在（2026-10-09引継ぎ）
+
+今日の指摘分は[TODAY_REVIEW](review/quality-roadmap/TODAY_REVIEW.md)、確定/仮案は[TODAY_SPEC](review/quality-roadmap/TODAY_SPEC.md)。最新パッケージは確認入口01から。04c99ceと559a7fcを基準に保存済みの差分を統合し、巻き戻し・push・mergeなし。配布後は停止し、新しい作業はユーザーの指示を待つ。以下は過去の配布履歴。
+
 ## 最新：連行入力の修正を完了（2026-10-09）
 
 [Play-Isolated.cmd](artifacts/playtest/20261009-202008-469/Play-Isolated.cmd)。本体 **04c99ce642e4c49099c5c206e5580e346d42db55**、dirty=false。EXE SHA256 **A37D3C6A11423FF6402CBEF3AAE69EB0B4AE2D0A80F0D61BD501E64160EF2C88**。[BUILD.json](artifacts/playtest/20261009-202008-469/BUILD.json) / [専用保存での起動・再読込検証](artifacts/export-verification/20261009-202158-409/verification.json)。

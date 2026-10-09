@@ -54,6 +54,7 @@ func run():
 	w=quiet(2);local(w,"inspect_idol");drain(w)
 	check(w.story.investigated and w.story.radio,"After first night inspection unlocks prayer and radio is owned")
 	var gold=w.campaign.gold
+	w.start_night();w.spawn_schedule.clear()
 	w.paused=true;check(local(w,"pray_wealth"),"Prayer can be planned while paused")
 	w.step();check(w.story.prayers.is_empty() and w.campaign.gold==gold,"Prayer is not an immediate reward")
 	w.paused=false;w.step();w.Life.hurt(w,{"id":99,"attack_power":1})
@@ -112,11 +113,11 @@ func run():
 	e.carry="keeper";w.keeper.carrier=e.id;e.pos=Vector2i(23,8);w.keeper.pos=e.pos
 	w.move_enemy(e,Vector2i(24,8));check(w.result=="loss" and w.story.defeat_reason=="keeper_abducted","Keeper loss is fixed boundary crossing")
 	# Reconstruct a real next morning, then retry that same checkpoint after another wish.
-	w=quiet(2);w.story.investigated=true;local(w,"pray_wealth");drain(w)
+	w=quiet(2);w.story.investigated=true;w.start_night();w.spawn_schedule.clear();local(w,"pray_wealth");drain(w)
 	w.start_night();w.spawn_schedule.clear();w.finish(true)
 	var next=Farm.new(w.next_campaign(),17)
 	var morning_gold=next.campaign.gold;var morning_story=next.story.duplicate(true)
-	w=next.begin_day();local(w,"pray_wealth");drain(w)
+	w=next.begin_day();w.start_night();w.spawn_schedule.clear();local(w,"pray_wealth");drain(w)
 	var retry=Farm.new(w.morning_checkpoint,17)
 	check(retry.campaign.gold==morning_gold and retry.story==morning_story,"Morning retry restores miracle, prayer IDs, reactions and money atomically")
 	# Current clearing is disabled; old TreeIDs remain data, not a free reward.

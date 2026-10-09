@@ -42,3 +42,5 @@ AIの変更確認は `./dev.ps1 evaluate -AISeeds 2` で既存6戦略×2seedへ�
 今回の採用画像/G〜Mは `-Scenario ranch_content`（代表3枚）。day6/500Gの制御条件から通常売買・実マウス入力で搾乳/配置/突撃の予約を確認。Portrait/スキルと戦闘キーポーズは明示した描画フィクスチャ。通常戦闘はheadless `ranch_content` と既存回帰で別途確認する。
 
 AI・情報表示品質の定点は `-Scenario quality`（5画面）。森/Human比較、図鑑8枠、敵Skill Hover、療養/イベントログ、持ち物。位置・知識・ログは明示した描画フィクスチャ、増援/戦闘/仲間化の成立はheadless qualityで別途検証。通常の中間変更ではこの撮影やreview/current更新を繰り返さない。
+
+2026-10-09指定範囲は `-Scenario today_revision`。6枚（朝/市場入口/縦一覧/確認/図鑑/敵HP）、57入力・状態検査。商品在庫5種・300G・戦闘初期配置は明示したfixture。音Dummy、通常デスクトップへフォールバックしない。

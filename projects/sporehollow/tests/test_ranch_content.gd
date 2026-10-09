@@ -83,7 +83,7 @@ func run():
 	var initial=w.keeper.hp;w.tick=4;C.tick(w)
 	check(w.keeper.hp==initial-1,"Poison uses actual damage pipeline once per second")
 	w.tick=20;C.tick(w);check(is_equal_approx(C.speed(w,w.keeper),1.0),"Poison expires without permanent attribute changes")
-	check(P.Encounters.plan(9,31,0).chosen[0]=="dancer" and P.Encounters.plan(10,31,0).chosen[0]=="thief","New enemies enter progression after original learning nights")
+	check(P.Encounters.plan(9,31,0).chosen[0]=="dancer" and P.Encounters.plan(10,31,0).selection=="milestone","New enemies enter progression after original learning nights")
 	w=open_world();maid=add(w,"maid",Vector2i(12,10));w.keeper.hp=12;w.keeper.sleepiness=0
 	for i in range(80):
 		w.step()

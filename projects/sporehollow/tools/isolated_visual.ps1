@@ -1,4 +1,4 @@
-param([ValidateSet('probe','characters','controls','buildings','shop','book','delivered','story','progression','ui_revision','progression_art','idol_debug','ranch_content','quality','six_motion','corpses','prayer','forest','campaign_route','morning_save','campaign_tiers','wall_drag','journal_layout_ui','playthrough_ui','day5_defense_ui','forest_entry_ui','morning_layout_ui','shop_readability_ui','player_walkthrough')][string]$Scenario='probe',[switch]$Preview)
+param([ValidateSet('probe','characters','controls','buildings','shop','book','delivered','story','progression','ui_revision','progression_art','idol_debug','ranch_content','quality','six_motion','corpses','prayer','forest','campaign_route','morning_save','campaign_tiers','wall_drag','journal_layout_ui','playthrough_ui','day5_defense_ui','forest_entry_ui','morning_layout_ui','shop_readability_ui','player_walkthrough','today_revision')][string]$Scenario='probe',[switch]$Preview)
 $ErrorActionPreference='Stop'
 $farmRoot=Split-Path -Parent $PSScriptRoot
 $runRoot=Join-Path $farmRoot ('artifacts/isolated/'+(Get-Date -Format 'yyyyMMdd-HHmmss-fff'))
@@ -20,6 +20,7 @@ if($Scenario -eq 'shop_readability_ui'){$script='tests/test_shop_readability_ui.
 if($Scenario -eq 'player_walkthrough'){$script='tests/review_player_walkthrough.gd'}
 if($Scenario -eq 'forest'){$script='tests/test_forest_ui.gd'}
 if($Scenario -eq 'prayer'){$script='tests/test_prayer_ui.gd'}
+if($Scenario -eq 'today_revision'){$script='tests/test_today_revision_ui.gd'}
 $cmd='"'+$exe+'" --path "'+$farmRoot+'" --audio-driver Dummy --rendering-method gl_compatibility --max-fps 30 --resolution 1280x800 --log-file "'+$runRoot+'/render.log" --script '+$script+' -- --isolated-review --output="'+$runRoot+'"'
 # No interactive desktop fallback. No SwitchDesktop, SendInput, cursor movement, or user-process discovery.
 Add-Type -Path (Join-Path $PSScriptRoot 'isolated_desktop.cs')

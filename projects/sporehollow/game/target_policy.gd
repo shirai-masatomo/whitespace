@@ -14,6 +14,8 @@ static func keeper_down(w) -> bool:
 
 static func can_damage_object(w,e,kind: String="structure") -> bool:
 	if e.object_attack_power<=0:return false
+	# Capability and purpose differ: only the explicit statue raid roles ignore an active keeper.
+	if kind=="idol" and not keeper_down(w) and e.get("role","") not in ["idol_breaker","idol_extractor"]:return false
 	if e.archetype=="martial_artist" and kind=="idol":return false
 	if e.archetype=="dancer":return false
 	if e.archetype=="maid" and w.tick>=e.get("rage_until",0):return false

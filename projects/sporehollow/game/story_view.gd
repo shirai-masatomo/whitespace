@@ -2,7 +2,7 @@ extends RefCounted
 const IDOL=preload("res://art_delivery/ui_world_direction_v1/candidates/world/goldA.png")
 const IDOL_ANCHOR=Vector2(72,152)
 const TREE_SCALE=1.35 # Uniform from native pixels; does not change the collision footprint.
-const LABELS={"clear_tree":"開拓","inspect_idol":"像を調べる","pray_wealth":"富を願う","pray_animal":"動物を願う","pray_gold":"お金を願う","pray_item":"アイテムを願う","repair_idol":"像を修理","recover_idol":"像を固定"}
+const LABELS={"clear_tree":"開拓","inspect_idol":"像を調べる","pray_wealth":"富を願う","pray_animal":"動物を願う","pray_gold":"お金を願う","pray_item":"アイテムを願う","repair_idol":"像を修理","repair_idol_soil":"土で修理 +1","repair_idol_wood":"木で修理 +2","repair_idol_stone":"石で修理 +3","recover_idol":"像を固定"}
 
 static func tree_foot(g,p: Vector2i) -> Vector2:
 	var rank=preload("res://game/forest_pattern.gd").rank(p,g.world.seed_value)
@@ -24,6 +24,11 @@ static func idol(g):
 	# Native RGBA, anchored to the lower middle of the existing 2x2 footprint.
 	g.texture_filter=CanvasItem.TEXTURE_FILTER_NEAREST
 	g.draw_texture(IDOL,(p+Vector2(0,g.TILE.y)-IDOL_ANCHOR).round())
+	if w.Story.idol_glowing(w):
+		for i in range(5):
+			var light=p+Vector2(-38+i*19,-56+sin(g.visual_time*1.5+i)*5)
+			g.draw_line(light-Vector2(3,0),light+Vector2(3,0),Color("f6db81"),2)
+			g.draw_line(light-Vector2(0,3),light+Vector2(0,3),Color("f6db81"),2)
 	if w.story.idol.hp<w.story.idol.max_hp/2:
 		g.draw_polyline(PackedVector2Array([p+Vector2(7,-48),p+Vector2(0,-28),p+Vector2(12,-11)]),Color("574933"),3)
 	if w.story.idol.state in ["preparing","transporting"]:
@@ -75,8 +80,7 @@ static func rebuild(g):
 
 static func morning_layout(g) -> Dictionary:
 	# Paper and footer share one layout; optional messages cannot escape the card.
-	var buttons=[{"id":"diary","text":"父の記録","kind":"diary","rect":Rect2(368,626,154,40)},
-		{"id":"intro_again","text":"回想","kind":"intro","rect":Rect2(536,626,118,40)}]
+	var buttons=[]
 	if g.world.story.radio:buttons.append({"id":"radio","text":"ラジオ","kind":"radio","rect":Rect2(794,626,154,40)})
 	var notes=[];var y=674.0
 	if g.world.story.radio and not g.world.story.news.is_empty():

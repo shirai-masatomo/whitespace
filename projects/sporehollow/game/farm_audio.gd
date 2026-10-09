@@ -3,9 +3,9 @@ extends Node
 const DAY_MUSIC=preload("res://assets/audio/Porch_Swing_Serenade.mp3")
 const DAY_VOLUME_DB=-16.0
 const MENU_VOLUME_DB=-23.0
-const MUSIC_FADE_IN_SECONDS=1.0
-const MUSIC_FADE_OUT_SECONDS=0.8
-const MUSIC_SOFT_FADE_SECONDS=0.35
+const MUSIC_FADE_IN_SECONDS=2.0
+const MUSIC_FADE_OUT_SECONDS=2.0
+const MUSIC_SOFT_FADE_SECONDS=1.0
 var music: AudioStreamPlayer
 var music_enabled=false
 var music_soft=false

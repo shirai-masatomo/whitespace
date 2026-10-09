@@ -96,6 +96,7 @@ var player_events: Array = []
 var last_keeper_attacker_id=-1
 var rescue_until=0
 var spawn_schedule: Array = []
+var campaign_schedule=false
 var schedule_index = 0
 var schedule_cycle = 0
 var entries: Array = []
@@ -162,6 +163,7 @@ func _init(data: Dictionary = {}, seed_number: int = 17, stage_override: Diction
 		row.pos = Vector2i(item.pos[0], item.pos[1])
 		field_items.append(row)
 	campaign.mushrooms = campaign.get("mushrooms", 0)
+	campaign_schedule=stage_override.is_empty()
 	config = (Progression.Encounters.plan(campaign.day,seed_number,campaign.get("world_story",{}).get("hidden",{}).get("karma",0),stage,[],campaign.encounter_counts) if stage_override.is_empty() else stage_override).duplicate(true)
 	materials = campaign.resources.soil
 	wood = campaign.resources.wood
@@ -338,9 +340,23 @@ func working() -> bool:
 
 func start_night():
 	if phase != "day": return
+	if campaign_schedule:
+		var legacy_prayer=config.get("legacy_prayer",false)
+		var pending_debug=spawn_schedule.filter(func(event):return event.get("wave",0)==999)
+		config=Progression.Encounters.plan(campaign.day,seed_value,story.hidden.karma,stage,[],campaign.encounter_counts)
+		# Existing conditional prayer reactions take one event slot, never stack on a milestone.
+		var reactions=Story.reaction_raids(self)
+		if campaign.day%5!=0 and campaign.day>1 and not reactions.is_empty():
+			var events=[]
+			for i in range(reactions.size()):events.append([60+i*24,reactions[i].role])
+			config=Progression.Encounters.timed(events,"prayer_reaction",story.hidden.karma)
+		config.legacy_prayer=legacy_prayer
+		config.single_event=true
+		make_schedule()
+		spawn_schedule.append_array(pending_debug)
 	for event in spawn_schedule:
 		if event.get("wave",0)==999:event.tick=maxi(0,event.tick-(tick-night_started_tick))
-	spawn_schedule.sort_custom(func(a,b):return a.tick<b.tick)
+	spawn_schedule.sort_custom(func(a,b):return a.tick<b.tick if a.tick!=b.tick else a.wave<b.wave)
 	phase = "defend"
 	night_started_tick = tick
 	milestones.append({"tick": tick, "kind": "nightfall"})
@@ -1206,7 +1222,9 @@ func begin_day():
 	var data = campaign.duplicate(true)
 	data.night_ready = true
 	data.morning_checkpoint = morning_checkpoint.duplicate(true)
-	return get_script().new(data, seed_value, config)
+	var day_world=get_script().new(data, seed_value, config)
+	day_world.campaign_schedule=campaign_schedule
+	return day_world
 
 func rename_animal(id: int, text: String) -> bool:
 	if phase != "shop" or paused: return false

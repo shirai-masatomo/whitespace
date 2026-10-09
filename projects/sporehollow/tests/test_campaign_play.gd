@@ -7,8 +7,8 @@ func wish(mode: String,day: int) -> String:
 	return ["animal","gold","item"][posmod(day-2,3)]
 func run():
 	var reports=[];var target=P.Encounters.route_definition().completion_night
-	for seed_value in [17,31,73]:
-		for mode in ["none","gold_once","mixed"]:
+	for seed_value in ([31] if OS.get_environment("FARM_BOUNDED_PLAY")=="1" else [17,31,73]):
+		for mode in (["none"] if OS.get_environment("FARM_BOUNDED_PLAY")=="1" else ["none","gold_once","mixed"]):
 			var morning=Farm.new({},seed_value);var days=[]
 			for day in range(1,target+1):
 				while morning.train_animal(1):pass
@@ -28,10 +28,10 @@ func run():
 				if category!="" and not w.story.investigated:w.act("inspect_idol",w.Story.at(w))
 				var steps=0
 				for i in range(1700):
-					if w.phase=="day" and w.jobs.is_empty():
-						if category!="" and not requested and w.story.investigated and w.Life.able(w):
-							requested=w.act("pray_"+category,w.Story.at(w))
-						elif not w.keeper.resting:w.act("keeper_rest")
+					if w.phase=="day" and w.jobs.is_empty() and not w.keeper.resting:w.act("keeper_rest")
+					if w.phase=="defend" and category!="" and not requested and w.story.investigated and w.Life.able(w):
+						if w.keeper.resting and not w.keeper.forced_rest:w.act("keeper_rest")
+						requested=w.act("pray_"+category,w.Story.at(w))
 					if w.phase=="defend" and w.tick%12==0:
 						var threats=w.enemies.filter(func(e):return not e.done and not e.flee and e.hp>0 and w.distance(e.pos,w.keeper.pos)<=6)
 						if not threats.is_empty() and w.keeper.resting and not w.keeper.forced_rest:w.act("keeper_rest")

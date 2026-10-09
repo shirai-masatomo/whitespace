@@ -1,5 +1,17 @@
 # 現在の作業：全体試遊版から補正へ
 
+## 2026-10-09 引継ぎ分（現在）
+
+- 実装済み：朝/縦一覧/下部説明/確認、候補アイコン、Wheelサブ選択/Shift個体、スクロールログ、図鑑アイコン、敵HP、像接点/探索復帰、夜祈り、素材別修理、10夜襲撃と区切り、BGMフェード。
+- 検証済み：関連テスト、seed31祈りなしの通常経済/戦闘による10夜成功。強制勝利の遷移試験と分けて[TODAY_REVIEW](review/quality-roadmap/TODAY_REVIEW.md)へ記録。
+- 仮対応：A時刻/6〜10夜/祈り回数はユーザー承認済み。AIの近接範囲・メイド支援先・修理1個単位・BGM2秒は[TODAY_SPEC](review/quality-roadmap/TODAY_SPEC.md)の仮設定。
+- 保留：買う/売る画像の最終採用、商人口パク納品、実音聴感、物理IME、人間の10夜通し試遊と高カルマ難易度。未確認を完了扱いしない。
+- 今回の成果物を渡したら停止。以下の過去の「次は」は自律的な開始指示ではない。
+
+---
+
+以下は以前の版の履歴。
+
 ## 最新：連行入力の修正を完了（2026-10-09）
 
 [Play-Isolated.cmd](artifacts/playtest/20261009-202008-469/Play-Isolated.cmd)。本体 **04c99ce642e4c49099c5c206e5580e346d42db55**、dirty=false。EXE SHA256 **A37D3C6A11423FF6402CBEF3AAE69EB0B4AE2D0A80F0D61BD501E64160EF2C88**。[BUILD.json](artifacts/playtest/20261009-202008-469/BUILD.json) / [専用保存での起動・再読込検証](artifacts/export-verification/20261009-202158-409/verification.json)。
