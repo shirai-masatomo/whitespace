@@ -53,7 +53,11 @@ func run():
 	check(not game.world.merchant_present(),"Merchant unavailable at 30 seconds")
 	game.open_market();check(not game.field_shop,"Cannot reopen after departure")
 	game.world.tick=int(32/Farm.DT);game._process(0);game.queue_redraw();game.hud.queue_redraw();await capture("03_merchant_departed")
-	game.choose_walk();game.refresh();await press("keeper_book");await settle()
+	game.choose_walk();game.refresh();await press("keeper_book")
+	game.clock=game.book_started;game._process(0);game.hud.queue_redraw();await capture("05_adopted_closed_cover")
+	check(preload("res://game/adopted_art.gd").CLOSED.resource_path=="res://assets/ui/journal_cover_green.png","User adopted green cover is connected")
+	game.clock=game.book_started+0.20;game._process(0);game.hud.queue_redraw();await capture("07_cover_opening")
+	await settle();game.hud.queue_redraw();await capture("06_book_open")
 	check(game.field_book,"Keeper can still open animal book in daytime")
 	game.world.campaign.exp_pool=100
 	var id=game.world.campaign.animals[0].id

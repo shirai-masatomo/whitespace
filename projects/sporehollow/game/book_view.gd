@@ -9,9 +9,11 @@ var pages: Array = []
 var inks: Array = []
 var game
 var state = "closed"
+var cover_bounds: Rect2
 
 func setup(owner_game):
 	game=owner_game
+	cover_bounds=Rect2(Art.CLOSED.get_image().get_used_rect())
 	var manifest=JSON.parse_string(FileAccess.get_file_as_string("res://art_delivery/ranch_assets_v1/manifest.json"))
 	quads=manifest.book.page_content_quads
 	for key in ["opening","closing","turning_next","turning_previous"]:
@@ -60,12 +62,8 @@ func draw(canvas):
 	var origin=Vector2(128,100)
 	var scale=1.0
 	if motion in ["opening","closing"]:
-		var opening=t if motion=="opening" else 1-t
-		var travel=smoothstep(0,0.23,opening)
-		scale=lerpf(0.33,1.0,travel)
-		origin=(Vector2(762,250)-Vector2(504,36)*0.33).lerp(origin,travel)
-		index=mini(5,int(clampf((opening-0.18)/0.82,0,0.999)*6))
-		if motion=="closing": index=5-index
+		draw_cover_motion(canvas,t if motion=="opening" else 1.0-t)
+		return
 	canvas.draw_set_transform(origin,0,Vector2.ONE*scale)
 	canvas.texture_filter=CanvasItem.TEXTURE_FILTER_NEAREST
 	canvas.draw_texture(OPEN if motion=="" else sequences[motion][index],Vector2.ZERO)
@@ -91,3 +89,29 @@ func draw(canvas):
 		canvas.draw_texture(current,Vector2.ZERO)
 	canvas.draw_set_transform(Vector2.ZERO)
 
+
+# Adopted single cover PNG; hinge geometry is provisional until matching motion art arrives.
+# Interior information stays live and is only exposed once the cover has opened.
+func draw_cover_motion(canvas,progress: float):
+	canvas.draw_set_transform(Vector2(128,100))
+	canvas.texture_filter=CanvasItem.TEXTURE_FILTER_LINEAR
+	var texture=Art.CLOSED
+	var used=cover_bounds
+	var ratio=minf(440.0/used.size.x,560.0/used.size.y)
+	var size=used.size*ratio
+	var hinge=Vector2(512,320-size.y*0.5)
+	var turn=smoothstep(0.18,1.0,progress)
+	if turn>0:
+		canvas.draw_texture(OPEN,Vector2.ZERO)
+		if turn>0.88:canvas.draw_texture(pages[0].get_texture(),Vector2.ZERO,Color(1,1,1,(turn-0.88)/0.12))
+	var angle=turn*PI
+	var width=size.x*cos(angle)
+	var lift=sin(angle)*42.0
+	var points=PackedVector2Array([hinge,hinge+Vector2(width,-lift),hinge+Vector2(width,size.y+lift),hinge+Vector2(0,size.y)])
+	if turn<0.5:
+		var uv=PackedVector2Array([used.position,used.position+Vector2(used.size.x,0),used.end,used.position+Vector2(0,used.size.y)])
+		for i in range(4):uv[i]/=texture.get_size()
+		canvas.draw_polygon(points,PackedColorArray([Color.WHITE]),uv,texture)
+	elif turn<0.98:
+		canvas.draw_colored_polygon(points,Color(0.20,0.28,0.14,1.0-smoothstep(0.80,0.98,turn)))
+	canvas.draw_set_transform(Vector2.ZERO)
