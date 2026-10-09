@@ -56,3 +56,7 @@ seed31、9日目の夜途中。柴犬Lv3 HP48・攻撃14、サラリーマンLv1
 再現は tools/isolated_visual.ps1 -Scenario player_walkthrough。fixtureは salary_dancer_interrupt / salary_dancer_reserved / salary_dancer_dawn、説明専用は phone_book。入力列は各events.json、終了はquit。通常試遊版にテスト用シーン切替を追加していない。
 
 次はこの検証済み試遊版で、**連行先に動物・像などの対象物を押した時の指示モード切替**を一場面だけ確認する。意図しない選択変更なのか、既存操作の説明不足なのかを実入力で分ける。今回の混成シナリオや全801検査を理由なく繰り返さない。夜明け境界の正式な扱い、増援待ちの長さ、面白さは人間の試遊評価へ残す。
+
+## 出力と引き継ぎ
+
+b266a7ad4c4650fdfadb9a9360ab047e95661620をdirty=falseで新規出力。[専用ランチャー](../../artifacts/playtest/20261009-194756-179/Play-Isolated.cmd) / [BUILD.json](../../artifacts/playtest/20261009-194756-179/BUILD.json) / [通常起動・朝保存検証](../../artifacts/export-verification/20261009-194926-513/verification.json)。SHA256 64AC8303AA3FC499294A51135182BD2666A39E29343BDC72768B50B01B8088BF。前回cb84b75を含む。確認入口を更新し、旧版75ファイルと元repo既存4ファイルのハッシュ一致。通常デスクトップでの起動や音声・IME検証はしていない。

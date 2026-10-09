@@ -1,5 +1,15 @@
 # 再開記録
 
+## 最新：混成戦の検証済み試遊版（2026-10-09）
+
+[Play-Isolated.cmd](artifacts/playtest/20261009-194756-179/Play-Isolated.cmd)。本体 **b266a7ad4c4650fdfadb9a9360ab047e95661620**、dirty=false。前回cb84b75の連れ去り表示修正と、今回の電話・増援・夜明け待ち表示を収録。EXE SHA256 **64AC8303AA3FC499294A51135182BD2666A39E29343BDC72768B50B01B8088BF**。[BUILD.json](artifacts/playtest/20261009-194756-179/BUILD.json) / [専用保存での起動・再読込検証](artifacts/export-verification/20261009-194926-513/verification.json)。
+
+[REINFORCEMENT_REVIEW](review/quality-roadmap/REINFORCEMENT_REVIEW.md) / [比較画像](review/quality-roadmap/REINFORCEMENT_GALLERY.html)。電話中の撃破・蘇生、成立済みの予約、外周からの実際の到着、夜明けまでを固定条件で確認。関連138検査・失敗0。画面は区切った1倍速、通常の画面・音声・保存は未使用。電話前の死亡は中断、蘇生しても途中再開せず、成功済み個体は再要請しない。制限時間後は外周出現で生存勝利へ進む現行仕様を維持した。遅い増援を必ず戦わせるかは未確定で、ルール変更はしていない。
+
+新EXEのheadless/Dummy起動でWRM1朝保存を作成し、別の検証済み5日目朝保存を再読込・保持した。検証専用user-dataと試遊用user-dataは分離し、試遊用へfixture保存は移していない。旧試遊版の既知ファイル75件と元プロジェクトの既存4件はSHA256一致。確認入口の01_最新試遊と02_比較画像を更新。ソース確定後は出力記録と索引だけをコミットし、再出力しない。
+
+次は **連行先に動物・黄金像などの対象物を押すと指示モードが切り替わる場面** を一つ確認する。意図しない切替と説明不足を実入力で分け、発見した一点だけ補正する。増援の約18秒の接近待ち、夜明け境界の正式な扱い、面白さ・実聴感・物理IME・長時間・クリーンWindowsは人間試遊に残す。専用cloneを継続し、通常作業と旧版を保護。push／merge／公開なし。以下は各時点の履歴。
+
 ## 最新：動物使い＋舞姫の混成確認（2026-10-09）
 
 [MIXED_REVIEW](review/quality-roadmap/MIXED_REVIEW.md) / [比較画像](review/quality-roadmap/MIXED_GALLERY.html)。9日目の固定条件で救助→一度の敵蘇生→再撃破→翌朝と、救助失敗→鶏損失→翌朝を実画面・入力で確認。戦闘は区切った1倍速観察、朝への休息は通常24倍。新たな進行不能は見つからず、健康な連れ去り中の鶏を「療養：1日目の朝に復帰」と誤表示する問題だけ修正した。敵AI・数値・素材は変更していない。
