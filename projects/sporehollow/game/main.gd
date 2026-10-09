@@ -2637,6 +2637,12 @@ func draw_animal_corpse(a: Dictionary):
 		draw_set_transform(Vector2.ZERO)
 	label_on(self,foot+Vector2(-13,17),"死亡",11,Color("d9cfb2"))
 
+func animal_status_label(a: Dictionary) -> String:
+	if not a.placed or a.get("dead",false) or a.get("lost",false):return ""
+	if a.get("abductor",-1)>=0:return "連れ去り中"
+	if world.campaign.day<=a.unavailable_through_day:return "療養：%d日目の朝に復帰"%(a.unavailable_through_day+1)
+	return ""
+
 func draw_animal_actor(a: Dictionary):
 	if not a.placed: return
 	var p = actor_pixel("a%d" % a.id, a.pos)
@@ -2652,7 +2658,6 @@ func draw_animal_actor(a: Dictionary):
 		Direction.actor(self,self,a,foot)
 		draw_set_transform(Vector2.ZERO)
 	else: ProgressArt.draw(self,self,a,p+Vector2(0,14))
-	if a.get("abductor",-1)>=0: label_on(self,p+Vector2(-20,30),"連れ去り中",12,UI.DANGER)
 	if world.tick<a.get("spines_until",0): label_on(self,p+Vector2(15,-15),"棘",14,UI.GOLD)
 	var in_combat = world.enemies.any(func(e): return not e.done and not e.flee and Farm.distance(a.pos, e.pos) <= 1)
 	if a.hp <= a.max_hp * 0.5 or in_combat:
@@ -2664,7 +2669,8 @@ func draw_animal_actor(a: Dictionary):
 			color.a = 0.65 + 0.25 * sin(clock * 4)
 			label_on(self, p + Vector2(-4, -29), "!", 23, color)
 	if a.hp <= 0: draw_down_stars(p)
-	if not world.available(a):label_on(self,p+Vector2(-54,-43),"療養：%d日目の朝に復帰"%(a.unavailable_through_day+1),12,UI.PAPER)
+	var status_label=animal_status_label(a)
+	if status_label!="":label_on(self,p+Vector2(-54,-43),status_label,14 if a.get("abductor",-1)>=0 else 12,Color("ffe0a2") if a.get("abductor",-1)>=0 else UI.PAPER)
 	elif a.state in ["休む", "自主休養"]: label_on(self, p + Vector2(14, -25), "Zz", 18, Color("c1e3db"))
 	if a.rescuing: label_on(self, p + Vector2(-25, -20), "!!", 16, Color("b0f0de"))
 	if world.tick - a.last_bark < 4:

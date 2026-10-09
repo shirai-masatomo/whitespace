@@ -33,6 +33,14 @@ func snapshot(label: String):
 	var w=game.world
 	var state={"request":last_request,"screenshot":file,"label":label,"phase":w.phase,"day":w.campaign.day,"tick":w.tick,"game_seconds":w.tick*w.DT,"clock":game.clock,"paused":w.paused,"speed":game.speed,"modal":game.story_modal,"screen":game.morning_screen,"controls":controls,"notice":game.message,"alert":game.alert_text,"keeper":{"pos":str(w.keeper.pos),"hp":w.keeper.hp,"state":w.keeper.state,"resting":w.keeper.resting},"jobs":w.jobs,"job_hold":w.job_hold_reason,"animals":w.animals.map(func(a):return {"id":a.id,"species":a.species,"pos":str(a.pos),"hp":a.hp,"state":a.state,"mode":a.mode}),"enemies":w.enemies.map(func(e):return {"id":e.id,"role":e.role,"pos":str(e.pos),"hp":e.hp,"done":e.done}),"defeat_reason":w.story.get("defeat_reason","")}
 	state.scenario=scenario;state.idol=w.story.idol;state.life_log=w.life_log;state.job_log=w.job_log
+	state.combat_log=w.combat_log;state.skill_log=w.skill_log
+	state.player_events=w.player_events
+	for i in range(w.animals.size()):
+		var a=w.animals[i]
+		state.animals[i].merge({"abductor":a.get("abductor",-1),"dead":a.get("dead",false),"lost":a.get("lost",false),"target_id":a.get("target_id",-1)})
+	for i in range(w.enemies.size()):
+		var e=w.enemies[i]
+		state.enemies[i].merge({"state":e.state,"led_animal":e.get("led_animal",-1),"dead":e.get("dead",false),"revived":e.get("revived",false),"gauge":e.get("ultimate_gauge",0),"chosen_target":e.get("chosen_target",{})})
 	FileAccess.open(output+"/state.json",FileAccess.WRITE).store_string(JSON.stringify(state,"  "))
 	FileAccess.open(output+"/"+file.trim_suffix(".png")+".json",FileAccess.WRITE).store_string(JSON.stringify(state,"  "))
 	FileAccess.open(output+"/events.json",FileAccess.WRITE).store_string(JSON.stringify(events,"  "))
@@ -42,17 +50,19 @@ func snapshot(label: String):
 
 func fixture(name: String):
 	# Explicitly separate branch setup from a continuous new-game review. Private save only.
-	if name not in ["recovery","kidnapping","animal_loss","idol_breaker","idol_extraction","target_range"]:return
+	if name not in ["recovery","kidnapping","animal_loss","idol_breaker","idol_extraction","target_range","tamer_dancer","tamer_dancer_rescue","tamer_dancer_intercept"]:return
 	scenario="fixture_"+name
 	if is_instance_valid(game.story_panel):game.story_panel.queue_free();game.story_panel=null
 	var campaign=Farm.new({},31).campaign.duplicate(true)
 	campaign.day=5 if name.begins_with("idol_") else 1
 	campaign.world_story.intro_seen=true
 	game.world=Farm.new(campaign,31).begin_day()
+	if name.begins_with("tamer_dancer"):game.world=preload("res://tests/review_mixed_fixture.gd").create(name!="tamer_dancer",name=="tamer_dancer_intercept")
 	var w=game.world
 	w.trees.clear();w.natural.clear();w.field_items.clear();w.spawn_schedule.clear();w.day_seconds=600
-	w.keeper.pos=Vector2i(7,10);w.animals[0].pos=Vector2i(8,10)
-	w.animals[0].home=w.animals[0].pos;w.animals[0].order=w.animals[0].pos
+	if not name.begins_with("tamer_dancer"):
+		w.keeper.pos=Vector2i(7,10);w.animals[0].pos=Vector2i(8,10)
+		w.animals[0].home=w.animals[0].pos;w.animals[0].order=w.animals[0].pos
 	if name=="recovery":w.Life.hurt(w,{"id":-1,"attack_power":999})
 	elif name=="animal_loss":
 		var row={"id":w.campaign.next_animal_id,"species":"hen","category":w.SPECIES.hen.category,"lv":1,"loyalty":w.SPECIES.hen.loyalty,"name":"","unavailable_through_day":0}
@@ -99,6 +109,19 @@ func apply(request: Dictionary):
 				# Normal main._process, including overlays, danger and transitions. Fast review playback.
 				for i in range(ceili(clampf(action.seconds,0,300)*10)):
 					game._process(0.1);await process_frame
+			"observe":
+				# Actual frame delta, no accelerated manual steps. Normal game speed still applies.
+				var started=Time.get_ticks_msec();var before=game.world.tick
+				var deadline=started+roundi(clampf(action.seconds,0,30)*1000)
+				game.set_process(true)
+				var next_capture=started+3000
+				while Time.get_ticks_msec()<deadline:
+					await process_frame
+					if Time.get_ticks_msec()>=next_capture:
+						await snapshot(request.get("label","observe")+"_%02ds"%roundi((Time.get_ticks_msec()-started)/1000.0))
+						next_capture+=3000
+				game.set_process(false)
+				events.append({"observation":"real_frame_delta","wall_ms":Time.get_ticks_msec()-started,"before_tick":before,"after_tick":game.world.tick,"speed":game.speed})
 			"quit":quit();return
 		game._process(0);await process_frame
 	await snapshot(request.get("label","observed"))
