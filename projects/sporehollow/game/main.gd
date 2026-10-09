@@ -2105,7 +2105,7 @@ func request_merchant():
 	var candidates=[]
 	for cell in world.merchant_talk_cells():
 		if world.walkable(cell) and not world.actor_occupied(cell,world.keeper.pos) and not world.find_path(world.keeper.pos,cell).is_empty():candidates.append(cell)
-	candidates.sort_custom(func(a,b):return world.distance(world.keeper.pos,a)<world.distance(world.keeper.pos,b))
+	# Prefer the front of the cart; side positions are obstruction fallbacks.
 	if candidates.is_empty():notice("商人の近くへ行けません");return
 	if not world.act("keeper_move",candidates[0]):notice("今は話しかけに行けません");return
 	merchant_talk_target=candidates[0]
