@@ -955,6 +955,7 @@ func _input(event):
 		if event.pressed:
 			if morning_screen == "book": close_morning_screen()
 			elif morning_screen == "market": market_back()
+			elif field_shop:close_morning_screen()
 		get_viewport().set_input_as_handled()
 		return
 	if book_motion != "" and event is InputEventKey and event.pressed and event.physical_keycode == KEY_ESCAPE:
@@ -970,7 +971,7 @@ func _input(event):
 		return
 	if event is InputEventKey and event.pressed and not event.echo and event.physical_keycode == KEY_ESCAPE:
 		if wall_stroke.kind!="":cancel_wall_stroke();notice("壁の予約を取り消しました")
-		elif (world.phase == "shop" or field_book or field_shop) and morning_screen != "morning": close_morning_screen()
+		elif (world.phase == "shop" or field_book or field_shop) and (morning_screen != "morning" or field_shop): close_morning_screen()
 		else: toggle_menu()
 		get_viewport().set_input_as_handled()
 		return
@@ -2119,10 +2120,13 @@ func request_merchant():
 func open_market():
 	if not world.merchant_present() or world.keeper.pos not in world.merchant_talk_cells():return
 	field_shop=true;world.market_open=true;merchant_requested=false;world.merchant_approach=null;accumulated=0
-	morning_screen = "market"
+	morning_screen = "morning"
 	shop_side = "home"
 	shop_level = "categories"
 	refresh()
+
+func enter_market():
+	morning_screen="market";shop_side="home";shop_level="categories";refresh()
 
 var field_book = false
 var field_shop=false
@@ -2144,6 +2148,8 @@ func close_morning_screen():
 		if book_motion == "closing": return
 		book_motion = "closing"
 		book_started = clock
+	elif field_shop and morning_screen=="market":
+		morning_screen="morning";shop_side="home"
 	else:
 		field_shop=false;world.market_open=false;accumulated=0
 		morning_screen = "morning"
@@ -2170,7 +2176,7 @@ func turn_book(direction: int):
 func build_shop():
 	if morning_screen != "book":
 		MarketView.build(self)
-		if morning_screen=="morning":
+		if morning_screen=="morning" and not field_shop:
 			StoryView.morning_buttons(self)
 		return
 	add_button(palette, "close_market", "閉じる" if field_book else "メニューへ", Rect2(1040, 116, 124, 44), close_morning_screen)

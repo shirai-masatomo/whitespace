@@ -273,7 +273,7 @@ static func category_status(game, category: String) -> String:
 static func build(game):
 	if game.morning_screen=="morning":
 		game.set_meta("market_list_key","")
-		game.add_button(game.palette,"open_market","商品一覧",Rect2(377,465,220,40),game.open_market)
+		game.add_button(game.palette,"open_market","買い物をする",Rect2(377,465,220,40),game.enter_market)
 		game.buttons.open_market.icon=UI.icon("basket")
 		game.add_button(game.palette,"open_book","図鑑を開く",Rect2(725,465,220,40),game.open_book)
 		game.buttons.open_book.icon=UI.icon("book")
@@ -285,13 +285,16 @@ static func build(game):
 			frame.shadow_size=1 if state=="pressed" else 4
 			frame.shadow_offset=Vector2(0,1 if state=="pressed" else 3)
 			book.add_theme_stylebox_override(state,frame)
-		if game.Farm.Progression.Encounters.reached(game.world.campaign):
+		if game.field_shop:
+			game.add_button(game.palette,"close_market","牧場へ戻る",Rect2(800,550,160,44),game.close_morning_screen)
+			button_style(game.buttons.close_market)
+		if not game.field_shop and game.Farm.Progression.Encounters.reached(game.world.campaign):
 			if game.restart_confirm:
 				game.add_button(game.palette,"route_restart_yes","新しい牧場を始める",Rect2(376,576,256,36),game.new_campaign)
 				game.add_button(game.palette,"route_restart_cancel","今の牧場へ戻る",Rect2(710,576,236,36),game.confirm_new_campaign.bind(false))
 			else:game.add_button(game.palette,"route_restart","新しく始める…",Rect2(710,576,236,36),game.confirm_new_campaign.bind(true))
 		return
-	game.add_button(game.palette,"close_market","牧場へ戻る",MENU,game.close_morning_screen)
+	game.add_button(game.palette,"close_market","メニューへ",MENU,game.close_morning_screen)
 	game.buttons.close_market.icon=UI.icon("cross");button_style(game.buttons.close_market)
 	game.add_button(game.palette,"shop_back","戻る",BACK,game.market_back)
 	button_style(game.buttons.shop_back)
