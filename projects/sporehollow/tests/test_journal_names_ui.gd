@@ -12,7 +12,7 @@ func run():
 	# Explicit layout fixtures, never loaded from or written to a user's save.
 	game.world.campaign.animals=[]
 	var names=["","こむぎ","あいうえおかきくけこさし","WWWWWWWWWWWW"]
-	var species=["shiba","hen","cat","doberman"]
+	var species=["shiba","shiba","shiba","shiba"]
 	for i in range(names.size()):
 		var animal=original.duplicate(true);animal.id=i+1;animal.species=species[i];animal.name=""
 		animal.hp=Farm.AnimalData.stats(animal.species,animal.lv).hp
@@ -30,9 +30,17 @@ func run():
 		var card=game.Journal.list_rect(i);var plate=game.Journal.nameplate_rect(card)
 		var ink=game.Journal.nameplate_layout(game,names[i],plate)
 		check(ink.get_size().x<=plate.size.x-8 and ink.get_size().y<=plate.size.y-8,"Name ink fits plate including Japanese maximum: "+str(i))
-		check(card.encloses(plate) and not plate.intersects(Rect2(card.position+Vector2(20,12),Vector2(108,76))),"Nameplate stays inside its card without covering portrait: "+str(i))
+		check(card.encloses(plate) and not plate.intersects(game.Journal.portrait_rect(card)),"Nameplate stays inside its card without covering portrait: "+str(i))
 		record.events.append({"name":names[i],"ink_size":[ink.get_size().x,ink.get_size().y],"plate_size":[plate.size.x,plate.size.y]})
 	await capture("01_thumbnail_names")
+	var portrait_area=Rect2i(game.Journal.screen_rect(game.Journal.portrait_rect(game.Journal.list_rect(0))))
+	var unnamed_pixels=root.get_texture().get_image().get_region(portrait_area).get_data()
+	for name in ["こむぎ","あいうえおかきくけこさし"]:
+		game.world.rename_animal(1,name);game.refresh();await settle()
+		await capture("04_same_shiba_named" if name=="こむぎ" else "05_same_shiba_long_name")
+		var named_pixels=root.get_texture().get_image().get_region(portrait_area).get_data()
+		check(unnamed_pixels==named_pixels,"Same individual's rendered portrait pixels, scale and position do not change with name: "+name)
+	game.world.rename_animal(1,"");game.refresh();await settle()
 	var tick=game.world.tick
 	await press("book_entry_3")
 	check(game.training_id==3 and game.world.campaign.animals[2].name==names[2],"Thumbnail opens same named individual's detail")
@@ -44,6 +52,6 @@ func run():
 	check(game.book_section=="enemies","Enemy thumbnail spread remains available")
 	await capture("03_enemy_thumbnails")
 	check(game.world.tick==tick,"Review navigation does not advance world time")
-	record.method="Isolated GPU; explicit unnamed, named, 12-character Japanese/Latin and known-enemy display fixtures; no normal save or OS input."
+	record.method="Isolated GPU; same-species unnamed/named/long-name fixtures plus exact same-slot rendered portrait byte comparison before and after renaming; no normal save or OS input."
 	FileAccess.open(output+"/journal-names.json",FileAccess.WRITE).store_string(JSON.stringify(record,"  "))
 	print("JOURNAL_NAMES: %d checks, failures=%d"%[checks,failures]);quit(1 if failures else 0)

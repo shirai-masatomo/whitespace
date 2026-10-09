@@ -138,6 +138,10 @@ static func grid_name(row: Dictionary,enemy: bool) -> String:
 static func nameplate_rect(card: Rect2) -> Rect2:
 	return Rect2(card.position+Vector2(10,94),Vector2(128,48))
 
+static func portrait_rect(card: Rect2) -> Rect2:
+	# Reserve the same lower name area even when it is blank.
+	return Rect2(card.position+Vector2(20,12),Vector2(108,76))
+
 static func nameplate_layout(g,value: String,plate: Rect2) -> TextParagraph:
 	var paragraph=text_layout(g,value,plate.grow(-4),15,13)
 	paragraph.alignment=HORIZONTAL_ALIGNMENT_CENTER
@@ -186,7 +190,7 @@ static func grid(g,c,page: int):
 		c.draw_style_box(g.MarketView.panel(Color("eee1ba") if known else Color("d3c8a8"),Color(g.Farm.ProgressData.RARITY_COLORS[tier]) if known else Color("b7ac8e"),1),rect)
 		if known:
 			var name=grid_name(row,enemy)
-			Assets.portrait(c,key,Rect2(p+Vector2(20,12 if name!="" else 35),Vector2(108,76)),"enemy" if enemy else "animal")
+			Assets.portrait(c,key,portrait_rect(rect),"enemy" if enemy else "animal")
 			if name!="":draw_nameplate(g,c,rect,name)
 			Assets.emblem(g,c,p+Vector2(118,8),tier,22)
 		else:g.label_on(c,p+Vector2(59,83),"?",38,Color("8b876e"))
