@@ -1784,6 +1784,7 @@ func draw_hud():
 	if world.phase == "shop" or field_book or field_shop:
 		draw_shop()
 		return
+	draw_merchant_bubble()
 	if world.working():
 		for e in world.enemies:
 			if e.done or e.hp<=0 or e.hp>=e.max_hp:continue
@@ -2399,18 +2400,32 @@ func cinematic() -> bool:
 func react(id: int, kind: String, duration: float):
 	reactions[id] = {"kind": kind, "at": clock, "until": clock + duration}
 
-func draw_market_world():
-	if world.phase!="day":return
-	var elapsed=world.tick*Farm.DT
-	if elapsed>=Farm.MERCHANT_SECONDS+1:return
+func merchant_visual_elapsed() -> float:
+	# Interpolate within the fixed 0.25-second simulation step. The accumulator
+	# already follows speed and stops during pause/shop; gameplay timing is unchanged.
+	return world.tick*Farm.DT+clampf(accumulated,0,Farm.DT)
+
+func merchant_world_position() -> Vector2:
+	var elapsed=merchant_visual_elapsed()
 	var arriving=clampf(elapsed/1.8,0,1)
 	var leaving=maxf(0,elapsed-Farm.MERCHANT_SECONDS)
-	var q=center(Farm.MERCHANT_CELL)+Vector2(-240*(1-arriving)-leaving*280,0)
-	SixMotion.paint(self,"merchant","cart_move" if arriving<1 or leaving>0 else "cart_idle",-1 if leaving>0 else 1,q+Vector2(20,30),visual_time)
-	if world.merchant_present():
-		if arriving>=1:
-			MarketView.speech_bubble(self,self,Rect2(q+Vector2(-45,-142),Vector2(236,60)),"いらっしゃい、\n何か見ていくかい？",16)
-		label_on(self,q+Vector2(-42,59),"商人 · あと%d秒"%ceili(Farm.MERCHANT_SECONDS-elapsed),14,UI.PAPER)
+	return center(Farm.MERCHANT_CELL)+Vector2(-240*(1-arriving)-leaving*280,0)
+
+func draw_market_world():
+	if world.phase!="day":return
+	var elapsed=merchant_visual_elapsed()
+	if elapsed>=Farm.MERCHANT_SECONDS+1:return
+	var q=merchant_world_position()
+	SixMotion.paint(self,"merchant","cart_move" if elapsed<1.8 or elapsed>Farm.MERCHANT_SECONDS else "cart_idle",-1 if elapsed>Farm.MERCHANT_SECONDS else 1,q+Vector2(20,30),visual_time)
+	if world.merchant_present():label_on(self,q+Vector2(-42,59),"商人 · あと%d秒"%ceili(Farm.MERCHANT_SECONDS-world.tick*Farm.DT),14,UI.PAPER)
+
+func draw_merchant_bubble():
+	if not world.merchant_present() or merchant_visual_elapsed()<1.8:return
+	var anchor=get_canvas_transform()*merchant_world_position()
+	if not Rect2(0,49,1280,699).has_point(anchor):return
+	var at=(anchor+Vector2(-42,-130)).clamp(Vector2(8,54),Vector2(1072,658))
+	# HUD pass is above all world trees/actors. Text remains dynamic and screen-sized.
+	MarketView.speech_bubble(self,hud,Rect2(at,Vector2(200,60)),"いらっしゃい、\n何か見ていくかい？",14)
 
 func draw_companion_card():
 	for a in world.animals:

@@ -8,8 +8,21 @@ func run():
 	root.add_child(game);await process_frame;await process_frame
 	game.set_process(false)
 	check(game.world.phase=="day" and not game.buttons.has("open_market"),"Start directly in field without morning entry")
+	var trace=[]
+	for rate in [0.5,1.0,2.0]:
+		game.world.tick=2;game.accumulated=0
+		var previous=game.merchant_world_position().x
+		for frame in range(1,4):
+			game.accumulated=frame*rate/60.0
+			var next=game.merchant_world_position().x
+			check(next>previous and next-previous<5,"Cart interpolates between ticks at speed "+str(rate))
+			trace.append({"speed":rate,"frame":frame,"x":next});previous=next
+	game.world.tick=0;game.accumulated=0
+	record.events.append({"cart_interpolation":trace})
 	for i in range(40):game.world.step()
+	game.world.trees[Farm.MERCHANT_CELL+Vector2i(1,-2)]="review_bubble_tree"
 	game._process(0);game.hud.queue_redraw();game.queue_redraw();await capture("01_day_merchant_arrival")
+	game.world.trees.erase(Farm.MERCHANT_CELL+Vector2i(1,-2))
 	game.world.paused=true;var tick=game.world.tick
 	await mouse(game.screen_cell(Farm.MERCHANT_CELL))
 	check(game.merchant_requested and not game.field_shop,"Click reserves physical approach during pause")
