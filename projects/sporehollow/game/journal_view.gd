@@ -1,6 +1,7 @@
 extends RefCounted
 const Assets=preload("res://game/ui_assets.gd")
 const UI=preload("res://game/ui_style.gd")
+const NAME_FONT=preload("res://assets/fonts/journal_name_font.tres")
 
 # Page ink uses local coordinates; palette controls add the book origin once.
 const BOOK_ORIGIN=Vector2(128,100)
@@ -135,23 +136,26 @@ static func page_number(g,c,page: int,total: int):
 static func grid_name(row: Dictionary,enemy: bool) -> String:
 	return "" if enemy else str(row.get("name","")).strip_edges()
 
-static func nameplate_rect(card: Rect2) -> Rect2:
-	return Rect2(card.position+Vector2(10,94),Vector2(128,48))
+static func name_rect(card: Rect2) -> Rect2:
+	return Rect2(card.position+Vector2(2,98),Vector2(144,24))
 
 static func portrait_rect(card: Rect2) -> Rect2:
 	# Reserve the same lower name area even when it is blank.
 	return Rect2(card.position+Vector2(20,12),Vector2(108,76))
 
-static func nameplate_layout(g,value: String,plate: Rect2) -> TextParagraph:
-	var paragraph=text_layout(g,value,plate.grow(-4),15,13)
+static func name_layout(value: String,area: Rect2) -> TextParagraph:
+	var font_size=13 if NAME_FONT.get_string_size(value,HORIZONTAL_ALIGNMENT_LEFT,-1,13).x<=area.size.x else 12
+	var paragraph=TextParagraph.new()
+	paragraph.add_string(value,NAME_FONT,font_size)
+	paragraph.width=area.size.x
+	paragraph.break_flags=TextServer.BREAK_MANDATORY
 	paragraph.alignment=HORIZONTAL_ALIGNMENT_CENTER
 	return paragraph
 
-static func draw_nameplate(g,c,card: Rect2,value: String):
-	var plate=nameplate_rect(card)
-	c.draw_style_box(g.MarketView.panel(Color("e8dbb8"),Color("c3ac78"),1),plate)
-	var paragraph=nameplate_layout(g,value,plate)
-	paragraph.draw(c.get_canvas_item(),plate.position+Vector2(4,(plate.size.y-paragraph.get_size().y)*0.5),UI.INK)
+static func draw_name(c,card: Rect2,value: String):
+	var area=name_rect(card)
+	var paragraph=name_layout(value,area)
+	paragraph.draw(c.get_canvas_item(),area.position+Vector2(0,(area.size.y-paragraph.get_size().y)*0.5),UI.INK)
 
 static func draw(g,c,id: int):
 	if id<0:grid(g,c,-id-1);return
@@ -191,7 +195,7 @@ static func grid(g,c,page: int):
 		if known:
 			var name=grid_name(row,enemy)
 			Assets.portrait(c,key,portrait_rect(rect),"enemy" if enemy else "animal")
-			if name!="":draw_nameplate(g,c,rect,name)
+			if name!="":draw_name(c,rect,name)
 			Assets.emblem(g,c,p+Vector2(118,8),tier,22)
 		else:g.label_on(c,p+Vector2(59,83),"?",38,Color("8b876e"))
 	page_number(g,c,page+1,maxi(1,ceili(records.size()/8.0)))
