@@ -2407,7 +2407,10 @@ func draw_market_world():
 	var leaving=maxf(0,elapsed-Farm.MERCHANT_SECONDS)
 	var q=center(Farm.MERCHANT_CELL)+Vector2(-240*(1-arriving)-leaving*280,0)
 	SixMotion.paint(self,"merchant","cart_move" if arriving<1 or leaving>0 else "cart_idle",-1 if leaving>0 else 1,q+Vector2(20,30),visual_time)
-	if world.merchant_present():label_on(self,q+Vector2(-42,-68),"商人 · あと%d秒"%ceili(Farm.MERCHANT_SECONDS-elapsed),14,UI.PAPER)
+	if world.merchant_present():
+		if arriving>=1:
+			MarketView.speech_bubble(self,self,Rect2(q+Vector2(-45,-142),Vector2(236,60)),"いらっしゃい、\n何か見ていくかい？",16)
+		label_on(self,q+Vector2(-42,59),"商人 · あと%d秒"%ceili(Farm.MERCHANT_SECONDS-elapsed),14,UI.PAPER)
 
 func draw_companion_card():
 	for a in world.animals:
