@@ -208,7 +208,7 @@ static func move_list(game,content: Control,value: float):
 
 static func scroll_ui(game,event: InputEvent) -> bool:
 	if not event is InputEventMouseButton or event.button_index not in [MOUSE_BUTTON_WHEEL_UP,MOUSE_BUTTON_WHEEL_DOWN,MOUSE_BUTTON_WHEEL_LEFT,MOUSE_BUTTON_WHEEL_RIGHT]:return false
-	if game.world.phase!="shop" or game.morning_screen!="market":return false
+	if not game.field_shop or game.morning_screen!="market":return false
 	# Consume every market wheel event, including limits/empty lists. Never leak into field modes.
 	if game.story_modal!="" or game.menu_open:return true
 	if event.pressed and game.shop_level=="list" and game.shop_side!="home" and game.palette.has_node("MarketScroll"):
@@ -291,7 +291,7 @@ static func build(game):
 				game.add_button(game.palette,"route_restart_cancel","今の牧場へ戻る",Rect2(710,576,236,36),game.confirm_new_campaign.bind(false))
 			else:game.add_button(game.palette,"route_restart","新しく始める…",Rect2(710,576,236,36),game.confirm_new_campaign.bind(true))
 		return
-	game.add_button(game.palette,"close_market","メニューへ",MENU,game.close_morning_screen)
+	game.add_button(game.palette,"close_market","牧場へ戻る",MENU,game.close_morning_screen)
 	game.buttons.close_market.icon=UI.icon("cross");button_style(game.buttons.close_market)
 	game.add_button(game.palette,"shop_back","戻る",BACK,game.market_back)
 	button_style(game.buttons.shop_back)

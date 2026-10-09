@@ -90,7 +90,7 @@ static func build(g):
 		var enemy_entries=enemy_skills(g,id,g.world.campaign.enemy_knowledge.get(id,0))
 		for i in range(enemy_entries.size()):hover(g,"enemy_skill_"+enemy_entries[i].id,screen_rect(skill_rect(i)),enemy_entries[i].tooltip)
 		return
-	if g.world.phase=="shop":g.build_training()
+	if g.world.phase in ["shop","day"]:g.build_training()
 	var rows=g.book_records().filter(func(a):return a.id==g.training_id)
 	if rows.is_empty():return
 	var skills=animal_skills(g,rows[0])

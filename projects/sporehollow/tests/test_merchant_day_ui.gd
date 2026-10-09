@@ -1,0 +1,54 @@
+extends "res://tests/test_market_reference_ui.gd"
+func run():
+	output=OS.get_environment("FARM_REVIEW_OUTPUT")
+	if DisplayServer.get_name()!="headless" and (output=="" or not "--isolated-review" in OS.get_cmdline_user_args()):quit(2);return
+	root.size=Vector2i(1280,800)
+	game=load("res://game/main.tscn").instantiate();game.automated=true;game.world=Farm.new({},31)
+	game.world.story.intro_seen=true
+	root.add_child(game);await process_frame;await process_frame
+	game.set_process(false)
+	check(game.world.phase=="day" and not game.buttons.has("open_market"),"Start directly in field without morning entry")
+	for i in range(40):game.world.step()
+	game._process(0);game.hud.queue_redraw();game.queue_redraw();await capture("01_day_merchant_arrival")
+	game.world.paused=true;var tick=game.world.tick
+	await mouse(game.screen_cell(Farm.MERCHANT_CELL))
+	check(game.merchant_requested and not game.field_shop,"Click reserves physical approach during pause")
+	for i in range(50):game.world.step();game._process(0)
+	check(game.world.tick==tick,"Pause does not consume merchant visit")
+	game.world.paused=false
+	for i in range(590):
+		game.world.step();game._process(0)
+		if game.field_shop:break
+	check(game.field_shop and game.world.distance(game.world.keeper.pos,Farm.MERCHANT_CELL)<=1,"Keeper approaches before shop opens")
+	check(game.world.phase=="day","Shop retains daytime phase")
+	tick=game.world.tick;var before=[game.world.keeper.duplicate(true),game.world.animals.duplicate(true),game.world.natural.duplicate(true),game.world.jobs.duplicate(true)]
+	for i in range(1000):game.world.step()
+	check(game.world.tick==tick and [game.world.keeper.duplicate(true),game.world.animals.duplicate(true),game.world.natural.duplicate(true),game.world.jobs.duplicate(true)]==before,"World simulation remains frozen in shop")
+	game.hud.queue_redraw();game.queue_redraw();await capture("02_shop_from_conversation")
+	await press("shop_buy");await press("category_materials");await press("trade_soil_-1")
+	var gold=game.world.campaign.gold
+	await press("confirm_trade")
+	check(game.world.campaign.gold==gold-15,"Existing confirmed purchase works during daytime conversation")
+	await press("close_market")
+	check(not game.field_shop and not game.world.market_open and game.world.phase=="day","Close returns directly to daytime")
+	game.world.tick=int(29.95/Farm.DT)
+	check(game.world.merchant_present(),"Merchant present before 30 seconds")
+	game.world.step()
+	check(not game.world.merchant_present(),"Merchant unavailable at 30 seconds")
+	game.open_market();check(not game.field_shop,"Cannot reopen after departure")
+	game.world.tick=int(32/Farm.DT);game._process(0);game.queue_redraw();game.hud.queue_redraw();await capture("03_merchant_departed")
+	game.choose_walk();game.refresh();await press("keeper_book");await settle()
+	check(game.field_book,"Keeper can still open animal book in daytime")
+	game.world.campaign.exp_pool=100
+	var id=game.world.campaign.animals[0].id
+	check(game.world.train_animal(id) and game.world.Orders.animal(game.world,id).lv==2,"Daytime training updates resident in place")
+	check(game.world.rename_animal(id,"テスト") and game.world.Orders.animal(game.world,id).name=="テスト","Daytime naming updates same resident")
+	game.close_morning_screen();await settle()
+	game.world.phase="dawn";game.world.next_campaign()
+	game.advance();game._process(0)
+	check(game.world.phase=="day" and game.world.merchant_present(),"Following day starts with a fresh merchant visit")
+	var saved=Farm.new({},31);var save_record=game.MorningSave.capture(saved)
+	check(not save_record.is_empty() and game.MorningSave.restore(save_record)!=null,"Existing start-of-day save remains compatible")
+	FileAccess.open(output+"/merchant-day.json",FileAccess.WRITE).store_string(JSON.stringify(record,"  "))
+	print("MERCHANT_DAY: %d checks, failures=%d"%[checks,failures]);quit(1 if failures else 0)
+

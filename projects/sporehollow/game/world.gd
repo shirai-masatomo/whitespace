@@ -32,7 +32,14 @@ var stage = 1
 var seed_value = 1
 var rng = RandomNumberGenerator.new()
 var tick = 0
-var phase = "shop"
+var phase = "shop" # Legacy save boundary, entered directly as daytime by the scene.
+var market_open=false
+const MERCHANT_SECONDS=30.0
+const MERCHANT_CELL=Vector2i(2,5)
+
+func merchant_present() -> bool:
+	return phase=="day" and tick*DT<MERCHANT_SECONDS
+
 const Life = preload("res://game/keeper_life.gd")
 var jobs_held = false
 var job_hold_reason = ""
@@ -899,7 +906,7 @@ func persist_farm():
 		return row)
 
 func step():
-	if not working() or paused: return
+	if not working() or paused or market_open: return
 	var previous_positions={"keeper":keeper.pos}
 	for a in animals: previous_positions[a.id]=a.pos
 	for a in animals:
@@ -1160,7 +1167,7 @@ func add_item(id: String, count: int):
 	else: campaign.items[id] = campaign.items.get(id, 0) + count
 
 func buy(id: String) -> bool:
-	if phase != "shop" or paused or not Shop.table().has(id) or not Shop.table()[id].Enabled: return false
+	if not (phase=="shop" or (market_open and merchant_present())) or not Shop.table().has(id) or not Shop.table()[id].Enabled: return false
 	var product = Shop.table()[id]
 	var available = shop_stock.filter(func(row): return row.product == id and row.remaining > 0)
 	if available.is_empty() or campaign.gold < product.BuyPrice: return false
@@ -1183,7 +1190,7 @@ func buy(id: String) -> bool:
 
 func sell(id: String, animal_id: int = -1) -> bool:
 	if id=="maid":return false
-	if phase != "shop" or paused or not Shop.table().has(id): return false
+	if not (phase=="shop" or (market_open and merchant_present())) or not Shop.table().has(id): return false
 	var p = Shop.table()[id]
 	if p.Category == "animals":
 		var found = campaign.animals.filter(func(a): return a.id == animal_id and a.species == id)
@@ -1223,14 +1230,17 @@ func begin_day():
 	data.night_ready = true
 	data.morning_checkpoint = morning_checkpoint.duplicate(true)
 	var day_world=get_script().new(data, seed_value, config)
+	day_world.shop_stock=shop_stock.duplicate(true)
 	day_world.campaign_schedule=campaign_schedule
 	return day_world
 
 func rename_animal(id: int, text: String) -> bool:
-	if phase != "shop" or paused: return false
+	if phase not in ["shop","day"]: return false
 	for a in campaign.animals:
 		if a.id == id:
 			a.name = text.strip_edges().left(12)
+			var resident=Orders.animal(self,id)
+			if not resident.is_empty():resident.name=a.name
 			return true
 	return false
 
@@ -1240,11 +1250,19 @@ func level_cost(id: int) -> int:
 	return 0
 
 func train_animal(id: int) -> bool:
-	if phase != "shop" or paused: return false
+	if phase not in ["shop","day"]: return false
 	for a in campaign.animals:
 		if a.id == id and a.lv < 5 and campaign.exp_pool >= level_cost(id):
 			campaign.exp_pool -= level_cost(id)
 			a.lv += 1
+			var resident=Orders.animal(self,id)
+			if not resident.is_empty():
+				resident.lv=a.lv
+				var stats=AnimalData.stats(a.species,a.lv)
+				resident.max_hp=stats.hp+(4 if "hardy" in resident.get("bonus_skills",[]) else 0)
+				resident.attack_power=stats.attack;resident.attack_seconds=stats.attack_seconds
+				resident.skills=stats.skills.duplicate();resident.defense=stats.get("defense",0)
+				resident.ai_accuracy=stats.get("ai_accuracy",50);resident.ultimates=stats.get("ultimates",[])
 			return true
 	return false
 

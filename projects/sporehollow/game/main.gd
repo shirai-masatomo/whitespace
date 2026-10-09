@@ -201,7 +201,7 @@ func _ready():
 	book_view = preload("res://game/book_view.gd").new()
 	add_child(book_view)
 	book_view.setup(self)
-	if world.phase == "shop": arrival_started = clock
+	if world.phase == "shop": enter_daytime()
 	refresh()
 	controls.visible = not cinematic() and story_modal==""
 	if "--automated" in OS.get_cmdline_user_args(): automated = true
@@ -369,11 +369,11 @@ func refresh():
 		child.queue_free()
 	for id in buttons.keys():
 		if id not in ["pause", "speed", "home", "advance", "retry", "group0", "group1", "group2", "menu_resume", "menu_retry", "menu_morning", "walk"]: buttons.erase(id)
-	buttons.walk.visible = world.working() and not field_book
+	buttons.walk.visible = world.working() and not field_book and not field_shop
 	UI.selected(buttons.walk, selected.get("kind")=="keeper")
-	buttons.pause.visible = world.working() and not field_book
-	buttons.speed.visible = world.working() and not field_book
-	buttons.home.visible = world.working() and not field_book
+	buttons.pause.visible = world.working() and not field_book and not field_shop
+	buttons.speed.visible = world.working() and not field_book and not field_shop
+	buttons.home.visible = world.working() and not field_book and not field_shop
 	buttons.pause.text = "再開" if world.paused else "停止"
 	buttons.pause.icon = UI.icon("next" if world.paused else "pause")
 	buttons.speed.text = "早送り" if not world.rest_skip.is_empty() else "×%s" % speed
@@ -396,12 +396,12 @@ func refresh():
 	buttons.retry.visible = world.phase == "result"
 	buttons.group1.text = "指示"
 	for i in range(2):
-		buttons["group%d" % i].visible = world.working() and not field_book
+		buttons["group%d" % i].visible = world.working() and not field_book and not field_shop
 		UI.selected(buttons["group%d" % i], i == group)
 	if world.phase == "dawn":
 		last_phase = world.phase
 		return
-	if world.phase == "shop" or field_book:
+	if world.phase == "shop" or field_book or field_shop:
 		build_shop()
 	elif not selected_resources.is_empty():
 		pass
@@ -453,8 +453,8 @@ func refresh():
 			buttons[id].size.y=36
 	if group == 2:
 		for id in subtask_choices(): UI.selected(buttons[id], subtasks.selected[2] == id)
-	if not field_book: build_context_actions()
-	if debug_view and not field_book: build_debug_controls()
+	if not field_book and not field_shop: build_context_actions()
+	if debug_view and not field_book and not field_shop: build_debug_controls()
 	last_phase = world.phase
 
 func selected_store() -> Dictionary:
@@ -625,11 +625,18 @@ func new_campaign():
 	if not automated:StoryView.open(self,"intro")
 
 func save_morning(morning) -> bool:
+	if morning.phase!="shop":
+		if morning.phase!="day" or morning.tick!=0:return true # Existing start-of-day boundary only.
+		morning.persist_farm()
+		var data=morning.campaign.duplicate(true);data.night_ready=false
+		var boundary=Farm.new(data,morning.seed_value)
+		boundary.shop_stock=morning.shop_stock.duplicate(true)
+		return save_morning(boundary)
 	if not persistence_enabled:return true
 	if save_load_blocked:return false
 	var saved=MorningSave.write(MorningSave.capture(morning),save_path)
 	var ok=saved.status=="ok"
-	save_status="朝の支度を保存しました。再起動すると、この朝から再開します" if ok else "朝を保存できませんでした。空き容量などを確認し、支度を終える前に再試行してください"
+	save_status="昼の開始状態を保存しました。再起動すると、この日の開始から再開します" if ok else "朝を保存できませんでした。空き容量などを確認し、支度を終える前に再試行してください"
 	if is_instance_valid(palette):
 		var label=palette.get_node_or_null("MorningSaveStatus")
 		if label!=null:label.text=save_status
@@ -938,10 +945,10 @@ func _input(event):
 		return
 	if is_instance_valid(name_edit) and name_edit.has_focus(): return
 	if MarketView.scroll_ui(self,event):get_viewport().set_input_as_handled();return
-	if world.working() and not field_book and not menu_open and event is InputEventMouseButton and event.button_index in [MOUSE_BUTTON_WHEEL_UP,MOUSE_BUTTON_WHEEL_DOWN] and not world.player_events.is_empty() and event_log_rect.has_point(pointer):
+	if world.working() and not field_book and not field_shop and not menu_open and event is InputEventMouseButton and event.button_index in [MOUSE_BUTTON_WHEEL_UP,MOUSE_BUTTON_WHEEL_DOWN] and not world.player_events.is_empty() and event_log_rect.has_point(pointer):
 		if event.pressed:event_scroll=clampi(event_scroll+(1 if event.button_index==MOUSE_BUTTON_WHEEL_UP else -1),0,maxi(0,world.player_events.size()-6))
 		get_viewport().set_input_as_handled();return
-	if (world.phase == "shop" or field_book) and event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT:
+	if (world.phase == "shop" or field_book or field_shop) and event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT:
 		if event.pressed:
 			if morning_screen == "book": close_morning_screen()
 			elif morning_screen == "market": market_back()
@@ -960,13 +967,13 @@ func _input(event):
 		return
 	if event is InputEventKey and event.pressed and not event.echo and event.physical_keycode == KEY_ESCAPE:
 		if wall_stroke.kind!="":cancel_wall_stroke();notice("壁の予約を取り消しました")
-		elif (world.phase == "shop" or field_book) and morning_screen != "morning": close_morning_screen()
+		elif (world.phase == "shop" or field_book or field_shop) and morning_screen != "morning": close_morning_screen()
 		else: toggle_menu()
 		get_viewport().set_input_as_handled()
 		return
 	if menu_open: return
-	if field_book: return
-	if world.phase == "shop" and event is InputEventKey: return
+	if field_book or field_shop: return
+	if (world.phase == "shop" or field_shop) and event is InputEventKey: return
 	if event is InputEventMouseMotion:
 		pointer = event.position
 		if queue_drag_id >= 0:
@@ -1022,7 +1029,7 @@ func _input(event):
 				return
 		if event.pressed and event.button_index in [MOUSE_BUTTON_WHEEL_UP, MOUSE_BUTTON_WHEEL_DOWN]:
 			cancel_wall_stroke()
-			if world.phase == "shop" or field_book or wheel_scroll_ui(): return
+			if world.phase == "shop" or field_book or field_shop or wheel_scroll_ui(): return
 			if not event.ctrl_pressed and group>=0:
 				cycle_subtool(event.button_index==MOUSE_BUTTON_WHEEL_UP)
 				get_viewport().set_input_as_handled();return
@@ -1043,7 +1050,7 @@ func _input(event):
 				ui_pointer_capture = false
 				get_viewport().set_input_as_handled()
 				return
-			if pointer_over_ui() or world.phase == "shop": return
+			if pointer_over_ui() or world.phase == "shop" or field_shop: return
 			if dragging or press_pending:
 				if group < 0: camera.position = pan_origin
 				dragging=false; press_pending=false
@@ -1156,7 +1163,7 @@ func finish_drag():
 	refresh()
 
 func _unhandled_input(event):
-	if story_modal!="" or field_book: return
+	if story_modal!="" or field_book or field_shop: return
 	if menu_open or cinematic() or not world.working(): return
 	if not (event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT) or pointer_over_ui(): return
 	press_pending = true
@@ -1186,6 +1193,11 @@ func update_wall_stroke():
 	wall_stroke.add(pointer_cell())
 
 func board_click(event):
+	if field_shop:return
+	var point=get_canvas_transform().affine_inverse()*event.position
+	if world.merchant_present() and Rect2(center(Farm.MERCHANT_CELL)-Vector2(55,65),Vector2(115,100)).has_point(point) and tool=="":
+		request_merchant();return
+	merchant_requested=false
 	var cell = Vector2i(get_canvas_transform().affine_inverse() * event.position / TILE)
 	if tool in ["guide","attack_target","charge"]:
 		command_selected(tool,cell);refresh();return
@@ -1275,7 +1287,13 @@ func clamp_camera():
 	camera.force_update_scroll()
 
 func _process(delta):
-	if wall_stroke.kind!="" and (group!=0 or tool!=wall_stroke.kind or menu_open or field_book or story_modal!="" or cinematic() or not world.working()):cancel_wall_stroke()
+	if world.phase=="shop" and not save_load_blocked:enter_daytime();refresh()
+	if merchant_requested:
+		if not world.merchant_present() or world.keeper.state!="free":merchant_requested=false
+		elif not world.paused and world.distance(world.keeper.pos,Farm.MERCHANT_CELL)<=1:open_market()
+	if world.phase=="day" and not world.merchant_present() and departure_started<0:departure_started=clock
+
+	if wall_stroke.kind!="" and (group!=0 or tool!=wall_stroke.kind or menu_open or field_book or field_shop or story_modal!="" or cinematic() or not world.working()):cancel_wall_stroke()
 	if book_motion != "":
 		var duration = 0.42 if book_motion.begins_with("turning") else 0.54
 		if clock - book_started >= duration:
@@ -1291,14 +1309,14 @@ func _process(delta):
 		child.visible = book_motion == "" or child == buttons.get("close_market")
 
 	if not menu_open: clock += delta
-	if not field_book and story_modal=="" and not world.paused and not menu_open and world.working(): visual_time += delta * (24.0 if not world.rest_skip.is_empty() else speed)
+	if not field_book and not field_shop and story_modal=="" and not world.paused and not menu_open and world.working(): visual_time += delta * (24.0 if not world.rest_skip.is_empty() else speed)
 	var direction = Vector2(int(keys_down.get(KEY_D, false)) - int(keys_down.get(KEY_A, false)), int(keys_down.get(KEY_S, false)) - int(keys_down.get(KEY_W, false)))
 	if direction!=Vector2.ZERO:cancel_wall_stroke()
-	if not field_book and story_modal=="" and not menu_open and not cinematic() and world.phase != "shop": camera.position += direction.normalized() * delta * 420
+	if not field_book and not field_shop and story_modal=="" and not menu_open and not cinematic() and world.phase != "shop": camera.position += direction.normalized() * delta * 420
 	clamp_camera()
-	if menu_open or field_book or story_modal!="" or queue_drag_id>=0 or dragging or ui_pointer_capture or wall_stroke.kind!="" or direction!=Vector2.ZERO:
+	if menu_open or field_book or field_shop or story_modal!="" or queue_drag_id>=0 or dragging or ui_pointer_capture or wall_stroke.kind!="" or direction!=Vector2.ZERO:
 		world.Life.user_activity(world)
-	if not field_book and story_modal=="" and not world.paused and not automated and world.working():
+	if not field_book and not field_shop and story_modal=="" and not world.paused and not automated and world.working():
 		accumulated += minf(delta, 0.1) * (24.0 if not world.rest_skip.is_empty() else speed)
 		while accumulated >= Farm.DT:
 			var was_sending = not world.rest_skip.is_empty()
@@ -1325,7 +1343,7 @@ func _process(delta):
 	if not ui_pointer_capture and not context_targets().is_empty() and context_signature != context_state(): refresh()
 	position_context_actions()
 	refresh_jobs()
-	queue_controls.visible=not field_book and story_modal==""
+	queue_controls.visible=not field_book and not field_shop and story_modal==""
 	for row in queue_controls.get_children():
 		var id=int(row.get_meta("job_id",-2))
 		var lifting=queue_drag_id>=0 and pointer.distance_to(queue_drag_start)>=7
@@ -1336,12 +1354,12 @@ func _process(delta):
 			if lifting and id!=queue_drag_id and index>=queue_drop_index:target_y+=8
 			row.position.y=move_toward(row.position.y,target_y,delta*1100)
 	mode_cursor = "hammer" if group == 0 else ("whistle" if group == 1 else "move")
-	if not world.working() or group < 0 or pointer_over_ui() or menu_open or field_book or story_modal!="" or cinematic() or queue_drag_id >= 0: mode_cursor = ""
+	if not world.working() or group < 0 or pointer_over_ui() or menu_open or field_book or field_shop or story_modal!="" or cinematic() or queue_drag_id >= 0: mode_cursor = ""
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE if mode_cursor == "" else Input.MOUSE_MODE_HIDDEN)
 	smooth_actor("keeper", world.keeper.pos, delta)
 	if not world.story.idol.is_empty(): smooth_actor("idol",world.Story.at(world),delta)
 	if world.phase == "dawn" and clock - transition_at > 4.8 and not menu_open: advance()
-	if world.phase == "shop" and clock - arrival_started > 0.8 and not arrival_bell:
+	if world.merchant_present() and world.tick*Farm.DT>=0.8 and not arrival_bell:
 		arrival_bell = true
 		audio.cue("merchant")
 	controls.visible = not cinematic() and story_modal==""
@@ -1349,10 +1367,10 @@ func _process(delta):
 		selected.clear()
 		refresh()
 	if world.working():
-		buttons.advance.visible = not field_book and (world.phase=="day" or world.early_clear)
+		buttons.advance.visible = not field_book and not field_shop and (world.phase=="day" or world.early_clear)
 		buttons.advance.text = rest_button_text()
 	buttons.advance.disabled = cinematic()
-	audio.set_context(world.phase,menu_open or field_book or story_modal!="" or world.paused)
+	audio.set_context(world.phase,menu_open or field_book or field_shop or story_modal!="" or world.paused)
 	var target_tint = 0.40 * clampf(world.remaining_night() / 25.0, 0, 1) if world.phase == "defend" else (0.30 * (1 - clampf((world.day_seconds - world.tick * Farm.DT) / 15.0, 0, 1)) if world.phase == "day" else 0.0)
 	night_tint = move_toward(night_tint, target_tint, delta * 0.4)
 	audio.tension(world.working() and world.enemies.any(func(e): return not e.done and not e.flee))
@@ -1763,7 +1781,7 @@ func draw_hud():
 			if world.jobs[i].id == hover_job: hud.draw_rect(Rect2(1007,91+i*35,253,34),Color("ffe2a3"),false,2)
 	hud.draw_rect(Rect2(0, 49, 1280, 703), Color(0.04, 0.07, 0.22, night_tint))
 	if cinematic(): return
-	if world.phase == "shop" or field_book:
+	if world.phase == "shop" or field_book or field_shop:
 		draw_shop()
 		return
 	if world.working():
@@ -2073,13 +2091,36 @@ func shop_rows(category: String = "") -> Array:
 			if count > 0 or (category == "materials" and world.resource_amount(p.ProductID) > 0): rows.append({"id": p.ProductID, "count": count, "animal_id": -1})
 	return rows
 
+func enter_daytime():
+	if world.phase!="shop" or save_load_blocked:return
+	var next=world.begin_day()
+	if next==null:return
+	world=next;group=-1;morning_screen="morning";arrival_started=clock
+	field_shop=false;merchant_requested=false;departure_started=-100.0
+
+func request_merchant():
+	if not world.merchant_present():notice("商人は帰りました");return
+	if world.keeper.state!="free" or world.keeper.forced_rest:notice("今は話しかけられません");return
+	var candidates=[]
+	for d in [Vector2i.ZERO,Vector2i.LEFT,Vector2i.RIGHT,Vector2i.UP,Vector2i.DOWN]:
+		var cell=Farm.MERCHANT_CELL+d
+		if world.walkable(cell) and not world.actor_occupied(cell,world.keeper.pos) and not world.find_path(world.keeper.pos,cell).is_empty():candidates.append(cell)
+	candidates.sort_custom(func(a,b):return world.distance(world.keeper.pos,a)<world.distance(world.keeper.pos,b))
+	if candidates.is_empty():notice("商人の近くへ行けません");return
+	if not world.act("keeper_move",candidates[0]):notice("今は話しかけに行けません");return
+	merchant_requested=true;notice("商人に話しかけに行きます")
+
 func open_market():
+	if not world.merchant_present() or world.distance(world.keeper.pos,Farm.MERCHANT_CELL)>1:return
+	field_shop=true;world.market_open=true;merchant_requested=false;accumulated=0
 	morning_screen = "market"
 	shop_side = "home"
 	shop_level = "categories"
 	refresh()
 
 var field_book = false
+var field_shop=false
+var merchant_requested=false
 
 func open_book():
 	field_book = world.working()
@@ -2097,6 +2138,7 @@ func close_morning_screen():
 		book_motion = "closing"
 		book_started = clock
 	else:
+		field_shop=false;world.market_open=false;accumulated=0
 		morning_screen = "morning"
 		shop_side = "home"
 	refresh()
@@ -2358,14 +2400,14 @@ func react(id: int, kind: String, duration: float):
 	reactions[id] = {"kind": kind, "at": clock, "until": clock + duration}
 
 func draw_market_world():
-	if world.phase != "shop" and not (world.phase == "day" and clock - departure_started < 1.0): return
-	var t = clampf((clock - arrival_started - 0.5) / 1.8, 0, 1)
-	var q = center(Vector2(1.8, 5)) + Vector2(-240 * (1 - smoothstep(0, 1, t)), 0)
-	if world.phase == "day": q = center(Vector2(1.8, 5)) - Vector2((clock - departure_started) * 280, 0)
-	var rolling = world.phase == "day" or t < 1
-	q.y += sin(visual_time * 18) * (1.3 if rolling else 0.25)
-	# The adopted cart contains its merchant. No second figure or old cargo overlay.
-	SixMotion.paint(self,"merchant","cart_move" if rolling else "cart_idle",-1 if world.phase=="day" else 1,q+Vector2(20,30),clock)
+	if world.phase!="day":return
+	var elapsed=world.tick*Farm.DT
+	if elapsed>=Farm.MERCHANT_SECONDS+1:return
+	var arriving=clampf(elapsed/1.8,0,1)
+	var leaving=maxf(0,elapsed-Farm.MERCHANT_SECONDS)
+	var q=center(Farm.MERCHANT_CELL)+Vector2(-240*(1-arriving)-leaving*280,0)
+	SixMotion.paint(self,"merchant","cart_move" if arriving<1 or leaving>0 else "cart_idle",-1 if leaving>0 else 1,q+Vector2(20,30),visual_time)
+	if world.merchant_present():label_on(self,q+Vector2(-42,-68),"商人 · あと%d秒"%ceili(Farm.MERCHANT_SECONDS-elapsed),14,UI.PAPER)
 
 func draw_companion_card():
 	for a in world.animals:
@@ -2735,7 +2777,7 @@ func story_action(kind: String):
 
 func book_records() -> Array:
 	if book_section=="enemies":return ProgressView.ENEMY_ORDER.map(func(id):return {"id":ProgressView.ENEMY_ORDER.find(id)})
-	if not field_book:return world.campaign.animals
+	if not field_book and not field_shop:return world.campaign.animals
 	return world.campaign.animals.map(func(owned):
 		var row=owned.duplicate(true)
 		var live=world.Orders.animal(world,owned.id)
