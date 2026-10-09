@@ -1023,8 +1023,8 @@ func _input(event):
 		if event.pressed and event.button_index in [MOUSE_BUTTON_WHEEL_UP, MOUSE_BUTTON_WHEEL_DOWN]:
 			cancel_wall_stroke()
 			if world.phase == "shop" or field_book or wheel_scroll_ui(): return
-			if not event.ctrl_pressed:
-				if group>=0:cycle_subtool(event.button_index==MOUSE_BUTTON_WHEEL_UP)
+			if not event.ctrl_pressed and group>=0:
+				cycle_subtool(event.button_index==MOUSE_BUTTON_WHEEL_UP)
 				get_viewport().set_input_as_handled();return
 			var before = get_canvas_transform().affine_inverse() * pointer
 			camera.zoom = Vector2.ONE * clampf(camera.zoom.x * (1.12 if event.button_index == MOUSE_BUTTON_WHEEL_UP else 1.0 / 1.12), 0.65, 1.8)

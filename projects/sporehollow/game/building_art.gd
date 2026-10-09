@@ -192,12 +192,65 @@ static func floor_path(kind: String) -> String:
 	var mat=material(kind)
 	return "floor/" if mat=="wood" else mat+"/floor/"
 
+static var floor_signature=0
+static var floor_regions: Array[Rect2]=[]
+static var wall_offsets: Dictionary={}
+static var door_points: Array[Vector2]=[]
+
+static func refresh_wall_regions(game):
+	var signature=hash([game.world.get_instance_id(),game.world.floors,game.world.structures])
+	if signature==floor_signature:return
+	floor_signature=signature;floor_regions.clear();wall_offsets.clear();door_points.clear()
+	for cell in game.world.structures:
+		var b=game.world.structures[cell]
+		if b.get("status")=="ready" and b.kind in ["door","locked_door"]:door_points.append(game.center(cell))
+	var pending={}
+	for cell in game.world.floors:
+		if game.world.floors[cell].get("status")=="ready":pending[cell]=true
+	while not pending.is_empty():
+		var seed=pending.keys()[0];var queue=[seed];pending.erase(seed)
+		var region=Rect2(Vector2(seed)*game.TILE,game.TILE)
+		while not queue.is_empty():
+			var cell=queue.pop_back()
+			region=region.merge(Rect2(Vector2(cell)*game.TILE,game.TILE))
+			for d in [Vector2i.UP,Vector2i.RIGHT,Vector2i.DOWN,Vector2i.LEFT]:
+				if pending.has(cell+d):pending.erase(cell+d);queue.append(cell+d)
+		floor_regions.append(region)
+
+static func wall_outer_offset(game,point: Vector2) -> Vector2:
+	# Draw-only: retain straight edges along each connected floor region.
+	if wall_offsets.has(point):return wall_offsets[point]
+	var nearest=72.0;var offset=Vector2.ZERO
+	for region in floor_regions:
+		var delta=point-point.clamp(region.position,region.end)
+		var distance=delta.length()
+		if distance>0 and distance<nearest:
+			nearest=distance;offset=delta.normalized()*minf(9.0,distance*0.5)*clampf((72.0-distance)/24.0,0,1)
+	for door in door_points:offset*=clampf((point.distance_to(door)-36.0)/48.0,0,1)
+	wall_offsets[point]=offset
+	return offset
+
+static func draw_outer_wall(game,texture: Texture2D,at: Vector2,color: Color):
+	# Shared pixel coordinates on tile edges; fixed 48x42 board proportions.
+	refresh_wall_regions(game)
+	var size=texture.get_size()
+	for y in range(0,int(size.y),7):
+		for x in range(0,int(size.x),8):
+			var a=Vector2(x,y);var b=Vector2(minf(x+8,size.x),minf(y+7,size.y))
+			var uv=PackedVector2Array([a,Vector2(b.x,a.y),b,Vector2(a.x,b.y)])
+			var points=PackedVector2Array()
+			for i in range(4):
+				var point=at+uv[i]
+				points.append((point+wall_outer_offset(game,point)).round())
+				uv[i]/=size
+			game.draw_polygon(points,PackedColorArray([color]),uv,texture)
+
 static func wall(game,p: Vector2,b: Dictionary,preview: bool):
 	var mask=0 if preview else wall_mask(game,Vector2i(p/game.TILE))
 	var state="damaged" if b.hp<=b.max_hp*0.5 else "normal"
 	var mat=material(b.kind)
 	var path="wall/%s/wood_mask_%02d.png"%[state,mask] if mat=="wood" else "%s/wall/%s/mask_%02d.png"%[mat,state,mask]
-	game.draw_texture(TEXTURES[path],(p-Vector2(24,34)).round(),Color(1,1,1,0.45 if preview else 1.0))
+	draw_outer_wall(game,TEXTURES[path],(p-Vector2(24,34)).round(),Color(1,1,1,0.45 if preview else 1.0))
 
 static func floor_tile(game,cell: Vector2i):
 	var p=Vector2(cell)*game.TILE
@@ -228,3 +281,5 @@ static func door_layer(game,p: Vector2,b: Dictionary,layer: String):
 	game.draw_texture(TEXTURES[root+"leaf_"+state+("_damaged.png" if b.hp<=b.max_hp*0.5 else "_normal.png")],at)
 	if b.kind=="locked_door":game.draw_texture(TEXTURES[root+"lock_"+state+("_broken.png" if b.get("lock_hp",0)<=0 else "_normal.png")],at)
 	if b.hp<b.max_hp:game.draw_rect(Rect2(p+Vector2(-18,19),Vector2(36.0*b.hp/b.max_hp,3)),Color("ebc171"))
+
+

@@ -352,7 +352,12 @@ static func draw(game):
 	var c=game.hud
 	if game.morning_screen=="morning":
 		c.draw_style_box(panel(PAPER,UI.WOOD,3),game.StoryView.morning_layout(game).paper)
-		text(game,c,Rect2(368,133,340,40),"朝の市",28)
+		text(game,c,Rect2(368,133,160,40),"朝の市",28)
+		for i in range(3):
+			var kind=["soil","wood","stone"][i]
+			var at=Vector2(544+i*86,153)
+			game.BoardArt.draw_resource(c,at,kind)
+			game.label_on(c,at+Vector2(17,8),str(game.world.resource_amount(kind)),18,UI.INK)
 		price(game,c,Vector2(818,141),game.world.campaign.gold,24)
 		speech_bubble(game,c,Rect2(348,190,314,62),"いらっしゃい、何か見ていくかい？",16)
 		merchant(game,c,Rect2(367,263,257,190))
