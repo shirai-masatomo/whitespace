@@ -2,6 +2,8 @@
 
 50f66c9の試遊版に対するユーザー報告から、分離cloneで実施した。最新ゲームcommit・起動先・EXEハッシュは [RESUME](../../RESUME.md) 先頭。旧50f66c9配布物は固定する。
 
+出力済みゲームは **002f3cb6ca788ee9c85539570c929b56fc84adc8**、[Play-Isolated.cmd](../../artifacts/playtest/20261009-020437-216/Play-Isolated.cmd)。EXE SHA256 `FBB8A7AAD1D04700586B8A525E388EF3ADFE6D508B26B3120F4900D366698B4B`。[起動・保存検証](../../artifacts/export-verification/20261009-020601-469/verification.json) は専用WRM1保存の作成、5日目朝の再読込・保持、旧版40ファイル一致を記録。検証完了直後の接続切断で未記載だった情報を2026-10-09 UTCに追記した。再接続後にゲーム検証や出力は繰り返していない。
+
 ## 参照画像と原因
 
 新しいLibrary添付 `libfile_fed23a92e5d48191be360887ea77cacd` は正式な準備APIが成功したが、公式転送helperのGETはHTTP403。再試行・迂回なし。132140 bytesのLibrary原本は未取得で、拒否の詳細原因は不明。署名URLは文書へ残さない。

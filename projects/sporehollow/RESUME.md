@@ -1,5 +1,15 @@
 # 再開記録
 
+## 再接続後の引き継ぎ完了（2026-10-09 UTC）
+
+最新試遊版：[Play-Isolated.cmd](artifacts/playtest/20261009-020437-216/Play-Isolated.cmd)。ゲーム本体 **002f3cb6ca788ee9c85539570c929b56fc84adc8**、出力時dirty=false。EXE SHA256 **FBB8A7AAD1D04700586B8A525E388EF3ADFE6D508B26B3120F4900D366698B4B**。識別情報は同梱 [BUILD.json](artifacts/playtest/20261009-020437-216/BUILD.json)。この後の引き継ぎコミットは文書とテストUIDだけで、EXEを再出力していない。
+
+出力・smokeと専用保存先での実EXE起動は前回成功済み。[保存検証記録](artifacts/export-verification/20261009-020601-469/verification.json) はWRM1朝保存作成、検証済み5日目朝の再読込・保持、旧3版の12＋14＋14＝40ファイル一致を記録している。起動はheadless/Dummy・独立user-dataで、通常セーブや対話画面は使っていない。試遊用user-dataへ5日目fixtureを移していない。
+
+今回の再接続では、残差分が `test_crowd_budget.gd.uid` / `test_morning_layout_ui.gd.uid` / `test_shop_readability_ui.gd.uid` / `test_wounded_idle.gd.uid` の4件だけであることを確認。全て追跡済みスクリプトのGodot生成識別子で、既存のUID追跡方針に合わせて保存した。コード変更、801検査の再実行、GPU描画、再出力はしていない。Uncommonなど英語表記を維持。接続切断で残っていた資料更新を完了した。
+
+次はROADMAPのF：この版の朝→店→図鑑、負傷復帰後の8秒、入口と代表1夜を人間が試遊し、読みやすさ・敗因の理解・次の行動を確認する。一つの問題へ絞って修正し、必要な固定条件だけ比較する。実聴感、物理IME、実時間長期、クリーンWindowsは未完。以下のF2以前の版と記録は履歴であり、最新起動先は上記。
+
 ## 最新：朝画面・読みやすさ・負傷休息（2026-10-08 UTC）
 
 [LAYOUT_REVIEW](review/quality-roadmap/LAYOUT_REVIEW.md) に画像照合・修正範囲・証拠を記録。朝の紙面と下段ボタンを共通配置へ、ショップの吹き出しを統一、英語レア度を実測幅で表示。名称の翻訳はしていない。負傷した主人公は、仕事0件の復帰保留でも安全な8秒の無操作後に休む。予約仕事と明示停止は保持。通常の休息は5秒でHP+1。

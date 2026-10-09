@@ -2,7 +2,9 @@
 
 ## 朝画面・表示・負傷休息
 
-[LAYOUT_REVIEW](LAYOUT_REVIEW.md)：関連801検査・失敗0。朝474、店129、負傷28、keeper63、rest_until24、revisions62、morning_save_ui14、campaign_route_ui7。重複GPU検査は加算しない。3解像度の紙面・英語5レア度・吹き出し・ホバーを確認。旧配布物を保持して新規出力する。
+[LAYOUT_REVIEW](LAYOUT_REVIEW.md)：関連801検査・失敗0。朝474、店129、負傷28、keeper63、rest_until24、revisions62、morning_save_ui14、campaign_route_ui7。重複GPU検査は加算しない。3解像度の紙面・英語5レア度・吹き出し・ホバーを確認。旧配布物を保持し、002f3cbを `artifacts/playtest/20261009-020437-216` へ出力済み。
+
+2026-10-09 UTCの再接続時に保存済み [BUILD.json](../../artifacts/playtest/20261009-020437-216/BUILD.json) と [verification.json](../../artifacts/export-verification/20261009-020601-469/verification.json) を照合。出力/smoke成功、専用保存先のWRM1作成と5日目朝の再読込、旧3版40ファイル一致が記録されている。EXE SHA256 `FBB8A7AAD1D04700586B8A525E388EF3ADFE6D508B26B3120F4900D366698B4B`。今回は文書と生成UIDの整理のみで、前回の検査・起動・描画・出力は繰り返していない。
 
 ## 追加：現行人数内の入口・AI性能
 
