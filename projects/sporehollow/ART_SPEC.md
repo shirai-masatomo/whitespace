@@ -1,4 +1,4 @@
-図鑑表紙：2026-10-10ユーザー採用の緑＋金の黄金像表紙。assets/ui/journal_cover_green.png（1254×1254 RGBA、無加工）。SHA256 d2e22d36fd1ac728c7961108e13fccf1acc7045fdf232322c47ddc510c73e687。参照：adopted_art.CLOSED / book_view開閉 / 旧入口互換。既存の紙面と動的情報・ページ送りを維持。対応する分離表裏・専用開閉素材は未納品、現在の開閉は画像＋仮の支点描画。
+図鑑表紙：2026-10-10ユーザー採用の緑＋金の黄金像表紙。assets/ui/journal_cover_green.png（1254×1254 RGBA、無加工）。SHA256 d2e22d36fd1ac728c7961108e13fccf1acc7045fdf232322c47ddc510c73e687。参照：adopted_art.CLOSED / book_view開閉 / 昼の商人会話。オレンジの「図鑑を開く」ボタンも採用済み。既存の紙面と動的情報・ページ送りを維持。対応する分離表裏・専用開閉素材は未納品、現在の開閉は画像＋仮の支点描画。
 
 # 採用アートと取り込み契約
 
@@ -15,8 +15,9 @@
 | 盤面・個体情報・図鑑・予告の主人公/柴犬 | characters_v1/*idle*.png | f3e4ae82 | 維持 |
 | 主人公/柴犬の左右歩行・寝入り・休息・睡眠・起床 | characters_motion_v1/keeper/、shiba/ の動作別連番 | a5b6f55f、左静止 ae950a3d | 44動作＋左静止を接続 |
 | 盤面・市場・図鑑・個体情報・予告の鶏/猫 | ranch_assets_v1/hen/、cat/ のidle/walk/peck/stretch | 57aab97c | 接続 |
-| 朝入口の閉表紙・図鑑 | ranch_assets_v1/book/closed_00、open_00、opening/closing/page_next/page_previous | 57aab97c | 接続、本文は動的描画 |
-| 朝メニュー・市場内の荷車 | cart_ui_detail_v1/cart.png | 2cb05b66 | 精細版へ置換。商人込み。盤面荷車・本は維持 |
+| 図鑑の閉表紙 | assets/ui/journal_cover_green.png（この行のみプロジェクト起点） | 7c77293で採用 | 黄金像モンスターの緑＋金の表紙。旧closed_00へ戻さない |
+| 図鑑の紙面・ページ送り | ranch_assets_v1/book/open_00、page_next/page_previous | 57aab97c | 維持、本文は動的描画。専用の新表紙開閉コマは未納品 |
+| 商人会話・市場内の荷車 | cart_ui_detail_v1/cart.png | 2cb05b66 | 精細版へ置換。商人込み。盤面荷車・本は維持 |
 | 盤面到着・待機・退出の荷車 | merchant_board_v1/cart_idle_00.png | 7e408375 | 接続。旧図形荷車一式を置換 |
 | 地面の巻物 | ranch_assets_v1/scroll/idle_none_00.png | 57aab97c | 接続 |
 | 木壁・木床・縦横ドア | wood_buildings_v1/wall、floor、door | e648cf75 | 73PNG、16接続/損傷、床境界、扉と独立ロック/柱前後を接続 |
@@ -33,7 +34,7 @@
 
 歩行・休息コマはmanifestの100/120/180/260/650msを使用し、世界時間倍率に同期。停止中は時計を進めない。顔・足元・透明余白を保持する。主人公自身の脱力/気絶専用コマは未納品。地面の気絶は仮姿勢、運搬は原版と正式な敵前後レイヤーの合成で表現（睡眠とは区別）。
 
-本は256×320の閉表紙、1024×640の共通演出面。綴じ目(512,36)。本文は透明SubViewportへ動的描画し、page_content_quadsへ転写する。表裏を反転文字にせず、次個体IDは送り終了で確定。開閉0.54秒・送り0.42秒を仮採用（納品0.66/0.60秒を操作感に合わせ短縮）。朝の世界時計とは独立。未設定スキルを追加しない。
+閉表紙は1254×1254 RGBAの採用画像。紙面・ページ送りは1024×640の既存共通演出面。綴じ目(512,36)。本文は透明SubViewportへ動的描画し、page_content_quadsへ転写する。表裏を反転文字にせず、次個体IDは送り終了で確定。開閉0.54秒・送り0.42秒を仮採用（納品0.66/0.60秒を操作感に合わせ短縮）。停止中の世界時計とは独立。未設定スキルを追加しない。
 
 ## 素材不足・後続用の接続情報
 
@@ -136,7 +137,7 @@ K0〜K5時点の記録：黄金像の正式PNGは未納品。現在は下記のA
 
 Human64×64/(32,58)、牛80×64/(40,58)、闘牛96×64/(48,58)、商人48×48/(24,44)、荷車128×96/(64,88)。増えた透明余白を拡大率と混同しない。Human世界描画1.15は維持。UI個体画像も正式idleへ接続。正背面は未納品。
 
-動作時間はmanifest、世界の停止/倍率は既存visual_time、朝の荷車はUI時計に従う。ダメージ/回復/移動/当たり判定を画像から変更しない。検証はsix_motion関連試験と隔離GPU代表3枚、review/currentは前定点を維持する。
+動作時間はmanifest、世界の停止/倍率は既存visual_time、昼の盤面荷車は世界tick間を補間し、会話中は世界時間を停止する。ダメージ/回復/移動/当たり判定を画像から変更しない。検証はsix_motion関連試験と隔離GPU代表3枚、review/currentは前定点を維持する。
 
 ### 品質調整の表示用途（2026-10-08）
 
@@ -149,4 +150,4 @@ Human盤面は足元を固定して1.15倍（keeper/adopted_art、既存Human/pr
 `assets/ui/trial_buy_sell.png`：ユーザー提供かご/袋PNGを原本のまま保存しAtlasで二分、ショップ入口の買う/売るに接続。最終採用未確定。SHA256 `3664a9f66c861cf3b9a991e1a2b6e5b6d842deb1eca936f98b8e243881d2ace8`。商人の口パク連番は未納品、静止の正式荷車を維持。既存の採用素材SHAはgame/art_provenance.jsonから変更なし。
 
 ### 商人吹き出しA / 2026-10-10
-採用済み。assets/ui/merchant_bubble_a.pngを朝・市場へ接続。原本を保全し、角としっぽは等比、中央のみ可変。文字は動的表示。隔離GPU bubble_aで朝・指定挨拶・上向き短文を確認。
+採用済み。assets/ui/merchant_bubble_a.pngを昼の盤面商人・会話・市場へ接続。原本を保全し、角としっぽは等比、中央のみ可変。文字は動的表示。旧bubble_aの確認は過去記録。現行の昼導線はmerchant_dayで確認する。

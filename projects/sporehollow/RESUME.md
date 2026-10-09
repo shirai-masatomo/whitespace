@@ -1,12 +1,20 @@
 # 再開記録
 
+## 現在の正本（2026-10-10）
+
+開発正本は `whitespace-balance-audit/projects/sporehollow`、作業ブランチは `codex/sporehollow-balance-audit`。確認済み実装は90c0fda。最新のローカル試遊は `artifacts/playtest/20261010-021200-239/Play-Isolated.cmd`、通常プロジェクトの確認入口01が参照する。独立朝フェーズはなく昼開始。現在仕様は [TODAY_SPEC](review/quality-roadmap/TODAY_SPEC.md)、実装済み／未反映は [PROJECT_STATE](PROJECT_STATE.md)、次に扱う候補は [TASKS](TASKS.md)。
+
+今回ユーザーが作業ブランチへの通常pushを承認。元のoriginはローカルコピーを向くため、GitHub `shirai-masatomo/whitespace` の同名作業ブランチへ明示的にpushする。mainへのマージは含めない。以下は当時の状態を残す過去記録で、古い「最新」・朝フェーズ・push禁止などを現在の指示として使用しない。
+
+## 過去の引継ぎ記録
+
 最新試遊：[20261010-000204-106](artifacts/playtest/20261010-000204-106/Play-Isolated.cmd)、実装 `912b987`。画像は[TODAY_GALLERY](review/quality-roadmap/TODAY_GALLERY.html)。
 
 ## 現在（2026-10-09引継ぎ）
 
 今日の指摘分は[TODAY_REVIEW](review/quality-roadmap/TODAY_REVIEW.md)、確定/仮案は[TODAY_SPEC](review/quality-roadmap/TODAY_SPEC.md)。最新パッケージは確認入口01から。04c99ceと559a7fcを基準に保存済みの差分を統合し、巻き戻し・push・mergeなし。配布後は停止し、新しい作業はユーザーの指示を待つ。以下は過去の配布履歴。
 
-## 最新：連行入力の修正を完了（2026-10-09）
+## 過去の記録：連行入力の修正を完了（2026-10-09）
 
 [Play-Isolated.cmd](artifacts/playtest/20261009-202008-469/Play-Isolated.cmd)。本体 **04c99ce642e4c49099c5c206e5580e346d42db55**、dirty=false。EXE SHA256 **A37D3C6A11423FF6402CBEF3AAE69EB0B4AE2D0A80F0D61BD501E64160EF2C88**。[BUILD.json](artifacts/playtest/20261009-202008-469/BUILD.json) / [専用保存での起動・再読込検証](artifacts/export-verification/20261009-202158-409/verification.json)。
 
@@ -18,7 +26,7 @@
 
 最終保護確認：別途20:00に起動された旧試遊版20261009-194756-179（PID45912）が稼働中だったため、停止・入力・保存変更はしていない。今回の隔離描画・検証プロセスは終了済み。元repoのtemp/に追加された画像2件も未変更で保持した。最新ショートカットへの更新は起動中EXEを差し替えない。
 
-## 最新：混成戦の検証済み試遊版（2026-10-09）
+## 過去の記録：混成戦の検証済み試遊版（2026-10-09）
 
 [Play-Isolated.cmd](artifacts/playtest/20261009-194756-179/Play-Isolated.cmd)。本体 **b266a7ad4c4650fdfadb9a9360ab047e95661620**、dirty=false。前回cb84b75の連れ去り表示修正と、今回の電話・増援・夜明け待ち表示を収録。EXE SHA256 **64AC8303AA3FC499294A51135182BD2666A39E29343BDC72768B50B01B8088BF**。[BUILD.json](artifacts/playtest/20261009-194756-179/BUILD.json) / [専用保存での起動・再読込検証](artifacts/export-verification/20261009-194926-513/verification.json)。
 
@@ -28,7 +36,7 @@
 
 次は **連行先に動物・黄金像などの対象物を押すと指示モードが切り替わる場面** を一つ確認する。意図しない切替と説明不足を実入力で分け、発見した一点だけ補正する。増援の約18秒の接近待ち、夜明け境界の正式な扱い、面白さ・実聴感・物理IME・長時間・クリーンWindowsは人間試遊に残す。専用cloneを継続し、通常作業と旧版を保護。push／merge／公開なし。以下は各時点の履歴。
 
-## 最新：動物使い＋舞姫の混成確認（2026-10-09）
+## 過去の記録：動物使い＋舞姫の混成確認（2026-10-09）
 
 [MIXED_REVIEW](review/quality-roadmap/MIXED_REVIEW.md) / [比較画像](review/quality-roadmap/MIXED_GALLERY.html)。9日目の固定条件で救助→一度の敵蘇生→再撃破→翌朝と、救助失敗→鶏損失→翌朝を実画面・入力で確認。戦闘は区切った1倍速観察、朝への休息は通常24倍。新たな進行不能は見つからず、健康な連れ去り中の鶏を「療養：1日目の朝に復帰」と誤表示する問題だけ修正した。敵AI・数値・素材は変更していない。
 
@@ -38,7 +46,7 @@
 
 次はサラリーマン＋舞姫を一組だけ選び、電話中の撃破／蘇生、予約済み増援と夜明けの関係、到着待ちの理解を確認する。先に実装条件を読み、必要な相互作用だけ固定再現する。追跡範囲4と救出本能の優先は説明改善候補。以下は過去の節目の記録。
 
-## 最新試遊版と確認入口（2026-10-09）
+## 過去の試遊版と確認入口（2026-10-09）
 
 [Play-Isolated.cmd](artifacts/playtest/20261009-184446-538/Play-Isolated.cmd)。ゲーム本体 **6746c76379cc0a842cefc3f8fbc660ac5b59da1a**、dirty=false。EXE SHA256 **92098006EE5AE24D7886C2941C561FC9D942B5A267CDD6AD717EFE3DCD489C4A**。[BUILD.json](artifacts/playtest/20261009-184446-538/BUILD.json) と [通常起動・保存検証](artifacts/export-verification/20261009-184611-785/verification.json) を正本とする。
 
@@ -68,7 +76,7 @@ Godotが書き換えた1251件のimportはGit上の内容差分ゼロを確認�
 
 次はROADMAPのF：この版の朝→店→図鑑、負傷復帰後の8秒、入口と代表1夜を人間が試遊し、読みやすさ・敗因の理解・次の行動を確認する。一つの問題へ絞って修正し、必要な固定条件だけ比較する。実聴感、物理IME、実時間長期、クリーンWindowsは未完。以下のF2以前の版と記録は履歴であり、最新起動先は上記。
 
-## 最新：朝画面・読みやすさ・負傷休息（2026-10-08 UTC）
+## 過去の記録：朝画面・読みやすさ・負傷休息（2026-10-08 UTC）
 
 [LAYOUT_REVIEW](review/quality-roadmap/LAYOUT_REVIEW.md) に画像照合・修正範囲・証拠を記録。朝の紙面と下段ボタンを共通配置へ、ショップの吹き出しを統一、英語レア度を実測幅で表示。名称の翻訳はしていない。負傷した主人公は、仕事0件の復帰保留でも安全な8秒の無操作後に休む。予約仕事と明示停止は保持。通常の休息は5秒でHP+1。
 
