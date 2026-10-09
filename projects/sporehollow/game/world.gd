@@ -10,6 +10,8 @@ var trees: Dictionary = {}
 const logistics_entry = Vector2i(1,5)
 const RaiderAI = preload("res://game/raider_ai.gd")
 const Arrival = preload("res://game/enemy_arrival.gd")
+const Forest=preload("res://game/forest_pattern.gd")
+const Departure=preload("res://game/forest_departure.gd")
 const Decisions = preload("res://game/decision_ai.gd")
 const StageData = preload("res://game/stages.gd")
 const W = 25
@@ -289,7 +291,7 @@ func inside(p: Vector2i) -> bool:
 	return p.x >= 1 and p.x < W - 1 and p.y >= 1 and p.y < H - 1
 
 func walkable(p: Vector2i) -> bool:
-	return inside(p) and not Story.terrain_block(self,p) and (not blocks(p) or (structures.get(p,{}).get("kind") in Buildings.DOORS))
+	return (inside(p) or Forest.rescue_lane(p,W,H)) and not Story.terrain_block(self,p) and (not blocks(p) or (structures.get(p,{}).get("kind") in Buildings.DOORS))
 
 func blocks(p: Vector2i) -> bool:
 	return structures.has(p) and structures[p].status == "ready" and structures[p].kind not in ["kennel", "coop"] and not structures[p].open
@@ -325,6 +327,7 @@ func next_step(start: Vector2i, goal: Vector2i, raider: bool = false, avoid_acto
 
 func find_path(start: Vector2i, goal: Vector2i, raider: bool = false, avoid_actors: bool = false, outdoor_only: bool = false, route_costs: Dictionary = {}) -> Array:
 	if start == goal: return [start]
+	var forest_route=not inside(start) or not inside(goal)
 	var frontier = [start]
 	var cost = {start: 0.0}
 	var previous = {start: start}
@@ -341,7 +344,7 @@ func find_path(start: Vector2i, goal: Vector2i, raider: bool = false, avoid_acto
 			return path
 		for n in neighbors(p):
 			var exit_cell = raider and n == goal and entries.any(func(entry): return exit_for(entry) == n)
-			if not inside(n) and not exit_cell: continue
+			if not inside(n) and not exit_cell and not (forest_route and Forest.rescue_lane(n,W,H)): continue
 			if Story.terrain_block(self,n): continue
 			if outdoor_only and is_indoor(n): continue
 			if avoid_actors and n != goal and actor_occupied(n, start): continue
@@ -486,7 +489,7 @@ func issue_order(kind: String, p: Vector2i, animal_id: int = -1) -> bool:
 
 func spawn_enemy(event: Dictionary):
 	var entry: Vector2i = event.entry
-	var origin = exit_for(entry) + (exit_for(entry)-entry)*24
+	var origin = exit_for(entry) + (exit_for(entry)-entry)*Forest.OUTER_DEPTH
 	# Keep every spawn outside, including multiple paused debug requests at one entrance.
 	var gates=[entry]+entries.filter(func(p):return p!=entry)
 	var found=false
@@ -705,6 +708,8 @@ func side_step(p: Vector2i, goal: Vector2i, roll: float) -> Vector2i:
 func enemy_step(e: Dictionary):
 	if e.done: return
 	if e.hp<=0 or e.get("dead",false):Content.corpse_step(self,e);return
+	if not inside(e.pos) and e.carry=="keeper":Departure.keeper(self,e);return
+	if not inside(e.pos) and e.get("led_animal",-1)>=0:Progression.lead_out(self,e);return
 	if Arrival.step(self,e):return
 	if e.pos.x<0 or e.pos.y<0 or e.pos.x>=W or e.pos.y>=H:
 		e.state="森から接近"
@@ -788,7 +793,7 @@ func enemy_step(e: Dictionary):
 			metrics.repelled += 1
 			metrics.coins += 0 if e.get("archetype")=="salaryman" else 3
 			return
-		if e.carry == "keeper":
+		if e.carry == "keeper" and not Forest.contains(e.pos,W,H):
 			e.done = true
 			keeper.state = "abducted"
 			finish(false)
@@ -859,7 +864,7 @@ func move_enemy(e: Dictionary, next: Vector2i,goal=null):
 		e.state = "退散" if e.flee else ("反撃" if e.counter_target >= 0 else ("連れ去り" if e.carry == "keeper" else e.search_state))
 		if e.carry == "keeper":
 			keeper.pos = e.pos
-			if not inside(e.pos):
+			if not Forest.contains(e.pos,W,H):
 				e.done = true
 				keeper.state = "abducted"
 				finish(false)

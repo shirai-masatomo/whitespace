@@ -1,4 +1,9 @@
 extends RefCounted
+const OUTER_DEPTH=24 # Existing enemy approach/spawn distance defines the forest edge.
+static func contains(p: Vector2i,width: int,height: int) -> bool:
+ return Rect2i(-OUTER_DEPTH,-OUTER_DEPTH,width+2*OUTER_DEPTH,height+2*OUTER_DEPTH).has_point(p)
+static func rescue_lane(p: Vector2i,width: int,height: int) -> bool:
+ return contains(p,width,height) and ((p.x<=0 or p.x>=width-1) and p.y in [5,8,11] or (p.y<=0 or p.y>=height-1) and p.x in [5,12,19])
 static var cache={}
 static func noise(seed_value: int) -> FastNoiseLite:
  if not cache.has(seed_value):
@@ -20,7 +25,7 @@ static func tree(p: Vector2i,seed_value: int,deep: bool=false) -> bool:
  return true
 
 static func outer_tree(p: Vector2i,seed_value: int,width: int,height: int) -> bool:
- if merchant_clearing(p):return false
+ if not contains(p,width,height) or merchant_clearing(p):return false
  if p.x>=1 and p.x<width-1 and p.y>=1 and p.y<height-1:return false
  # Visual forest only; retain every physical entry lane and the existing inner forest.
  if p.x in [5,12,19] or p.y in [5,8,11]:return false

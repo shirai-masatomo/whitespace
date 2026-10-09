@@ -35,3 +35,5 @@
 今回のGitHub最新化では既存実装と設計書を作業ブランチへ反映する。mainへマージせず、通常EXE・セーブ・巨大な生成ログを追加しない。未コミットの同時変更は上書きしない。
 
 会話UIの行商人口パクを接続。表示時間のみ最長1.66秒、口以外のPNG差分0、専用19項目・既存商人49項目成功。[検証](review/quality-roadmap/MERCHANT_MOUTH_REVIEW.md)。上記35038b6配布EXEへ反映済み。
+
+黄金像・森外搬出・音の余韻を更新。[変更と最小確認](review/quality-roadmap/THREE_CHANGES_REVIEW.md)。口パク等の前回変更は維持。

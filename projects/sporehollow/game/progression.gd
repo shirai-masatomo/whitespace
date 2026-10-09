@@ -351,20 +351,7 @@ static func lead_out(w,e):
 	if a.is_empty() or a.hp<=0 or a.get("dead",false): release_animal(w,e); return
 	e.state="動物を連れ帰る"; e.action_id="lead"; a.state="連れていかれる"
 	var goal=w.Story.exit_goal(w,e)
-	if not w.inside(e.pos) and w.distance(a.pos,e.pos)>1:
-		a.move_credit=minf(1.9,a.move_credit+a.move_speed*w.Content.speed(w,a)*w.DT)
-		var edges=w.neighbors(e.pos).filter(func(p):return w.animal_walkable(a,p) and not w.actor_occupied(p,a.pos))
-		if a.move_credit>=1 and not edges.is_empty():
-			var next=w.animal_next(a,edges[0])
-			if next!=a.pos and not w.actor_occupied(next,a.pos): a.move_credit-=1; w.open_for_ally(next); a.pos=next
-		return
-	if not w.inside(e.pos):
-		if w.distance(a.pos,e.pos)<=1:
-			if a.move_credit<1: a.move_credit+=a.move_speed*w.Content.speed(w,a)*w.DT; return
-			# Both actors cross separately; they never share a live cell.
-			var outer=e.pos+(e.pos-goal if e.pos!=goal else (e.pos-e.entry))
-			e.pos=outer; a.pos=goal; remove_animal(w,a,"abducted"); e.done=true
-		return
+	if not w.inside(e.pos):w.Departure.animal(w,e,a);return
 	if w.distance(a.pos,e.pos)>1:
 		a.move_credit=minf(1.9,a.move_credit+a.move_speed*w.Content.speed(w,a)*w.DT)
 		if a.move_credit>=1:

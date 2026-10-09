@@ -1,14 +1,14 @@
 extends RefCounted
 ## Enemy/friendly Human skill catalogue. Presentation and tunable execution share these rows.
 const ROWS={
- "abduct_keeper":["連れ去り","Passive",0.0,"牧場主が気絶し、隣接して拘束できる","拘束を経て牧場の外へ運ぶ","paw"],
+ "abduct_keeper":["連れ去り","Passive",0.0,"牧場主が気絶し、隣接して拘束できる","拘束を経て森の外へ運ぶ","paw"],
  "iron_ball":["鉄球破壊","Active",1.6,"建物や相手に隣接","鉄球で攻撃。対物攻撃力4（Lv1）","iron_ball"],
  "bow":["礼","Passive",0.0,"新たな相手と勝負する前と勝負後","0.75秒の礼をする","paw"],
  "nonlethal":["不殺","Passive",0.0,"人・動物へ攻撃","相手のHPを1未満にしない","heart"],
  "phone":["応援要請","Active",0.0,"生存する被弾時15%、成立は個体1回","電話2秒で成立。成立前の撃破で中断。\n成立3秒後に森の外から接近し、歩いて到着。\n1夜4人まで","phone"],
  "shuriken":["手裏剣","Active",4.0,"見通せる2〜5マスの敵","7ダメージ","paw"],
  "tame":["手懐け","Active",3.0,"3マス以内の動物を見通せる","忠誠を一時30低下。柴犬への効果は半分","whistle"],
- "lead":["連れ去り","Passive",0.0,"忠誠25以下の動物に隣接","動物を連れて退却。外へ出る前なら救出できる","paw"],
+ "lead":["連れ去り","Passive",0.0,"忠誠25以下の動物に隣接","動物を連れて森の外へ退却。森を出る前なら救出できる","paw"],
  "fatigue":["疲労","Passive",0.0,"8秒走り続ける","4秒間移動速度1.0。休んだ後は再び走る","moon"],
  "companion":["ドーベルマン同行","Passive",0.0,"襲来時20%","ドーベルマンが同じ外周入口から続く","paw"],
  "intercept":["迎撃特性","Passive",0.0,"敵を見つける","屋外の敵を追う。通常攻撃は噛みつき","paw"],

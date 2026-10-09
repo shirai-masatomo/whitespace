@@ -3,7 +3,13 @@ extends Node
 const DAY_MUSIC=preload("res://assets/audio/Porch_Swing_Serenade.mp3")
 const DAY_VOLUME_DB=-16.0
 const MENU_VOLUME_DB=-23.0
-const MUSIC_FADE_IN_SECONDS=2.0
+const MUSIC_FADE_IN_SECONDS=7.0
+const NIGHT_FADE_OUT_SECONDS=4.0
+const NIGHT_GAP_SECONDS=0.35
+const NIGHT_AMBIENT_FADE_SECONDS=1.5
+var night_transition=-1.0
+var night_ambient_started=false
+var ambient_target_db=-19.0
 const MUSIC_FADE_OUT_SECONDS=2.0
 const MUSIC_SOFT_FADE_SECONDS=1.0
 var music: AudioStreamPlayer
@@ -57,7 +63,7 @@ func _process(delta):
 	var target=db_to_linear(MENU_VOLUME_DB if music_soft else DAY_VOLUME_DB) if music_enabled else 0.0
 	if not is_equal_approx(target,music_target):
 		music_fade_from=music_level;music_fade_elapsed=0.0
-		music_fade_duration=MUSIC_FADE_OUT_SECONDS if target==0 else (MUSIC_FADE_IN_SECONDS if music_target<=0 else MUSIC_SOFT_FADE_SECONDS)
+		music_fade_duration=(NIGHT_FADE_OUT_SECONDS if night else MUSIC_FADE_OUT_SECONDS) if target==0 else (MUSIC_FADE_IN_SECONDS if music_target<=0 else MUSIC_SOFT_FADE_SECONDS)
 		music_target=target
 	music_fade_elapsed=minf(music_fade_duration,music_fade_elapsed+maxf(0,delta))
 	music_level=lerpf(music_fade_from,music_target,smoothstep(0.0,1.0,music_fade_elapsed/music_fade_duration))
@@ -65,6 +71,7 @@ func _process(delta):
 		music.volume_db=linear_to_db(maxf(0.0001,music_level*seam_gain(music.get_playback_position(),music.stream.get_length())))
 		if not music_enabled and music_level<=0.0001:
 			music_resume=music.get_playback_position();music.stop()
+	update_ambience(delta)
 	if seconds >= next_bird:
 		next_bird = seconds + ambience_rng.randf_range(8, 20)
 		if not night: birds.play()
@@ -86,11 +93,23 @@ func set_night(value: bool):
 	night = value
 	birds.stop()
 	next_bird = seconds + ambience_rng.randf_range(8, 20)
-	ambient.stream = cache.night if night else cache.ambient
-	ambient.play()
+	night_transition=0.0 if night else -1.0
+	night_ambient_started=false
+	if not night:
+		ambient.stream=cache.ambient;ambient.volume_db=ambient_target_db;ambient.play()
 
 func tension(active: bool):
-	ambient.volume_db = -25 if active else -19
+	ambient_target_db=-25 if active else -19
+
+func update_ambience(delta: float):
+	if night_transition<0:ambient.volume_db=ambient_target_db;return
+	night_transition+=maxf(0,delta)
+	var gain=1.0-smoothstep(0.0,NIGHT_FADE_OUT_SECONDS,night_transition)
+	if night_transition>=NIGHT_FADE_OUT_SECONDS+NIGHT_GAP_SECONDS:
+		if not night_ambient_started:
+			ambient.stream=cache.night;ambient.play();night_ambient_started=true
+		gain=smoothstep(0.0,NIGHT_AMBIENT_FADE_SECONDS,night_transition-NIGHT_FADE_OUT_SECONDS-NIGHT_GAP_SECONDS)
+	ambient.volume_db=linear_to_db(maxf(0.0001,db_to_linear(ambient_target_db)*gain))
 
 func cue(kind: String):
 	if not cache.has(kind): return

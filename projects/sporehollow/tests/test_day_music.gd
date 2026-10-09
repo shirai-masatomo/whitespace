@@ -16,7 +16,7 @@ func run():
 	check(audio.music_enabled and audio.music.playing,"Morning starts daytime music")
 	check(audio.music_level==0 and audio.music.volume_db==-80,"Starting music begins at silence")
 	audio._process(0.25);var quarter=audio.music_level
-	check(quarter>0 and quarter<db_to_linear(-16.0)*0.25,"Smooth two-second fade starts gently")
+	check(quarter>0 and quarter<db_to_linear(-16.0)*0.25,"Smooth seven-second fade starts gently")
 	audio._process(0.25);check(audio.music_level>quarter and audio.music_level<db_to_linear(-16.0),"Intermediate gain rises without jumping to its target")
 	var player=audio.music;var prior=player.get_playback_position()
 	for i in range(10):audio.set_context("day");audio._process(0.1)
@@ -32,7 +32,7 @@ func run():
 	audio.set_context("day");audio._process(1)
 	var before_out=audio.music_level;audio.set_context("defend");audio._process(0.4)
 	check(player.playing and audio.music_level>0 and audio.music_level<before_out,"Night fades halfway before stopping")
-	audio.set_context("defend");audio._process(2)
+	audio.set_context("defend");audio._process(Audio.NIGHT_FADE_OUT_SECONDS)
 	check(audio.night and not audio.music_enabled and not player.playing and audio.music_resume>0,"Night fades the music out and remembers its position")
 	var resume=audio.music_resume;audio.set_context("dawn");await create_timer(0.05).timeout
 	check(player.playing and player.get_playback_position()>=resume-0.03 and not audio.night,"Dawn resumes the same track")

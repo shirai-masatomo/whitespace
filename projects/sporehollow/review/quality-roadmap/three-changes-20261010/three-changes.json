@@ -1,0 +1,41 @@
+{
+  "captures": [
+    {
+      "animal_id": -1,
+      "book": "",
+      "file": "01_idol_steam.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": -1,
+      "book": "",
+      "file": "02_after_prayer.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    }
+  ],
+  "checks": [
+    {
+      "check": "1 Idol steam active on night two and extinguished by prayer",
+      "passed": true
+    },
+    {
+      "check": "2 Keeper remains in forest, exits beyond forest on all four sides",
+      "passed": true
+    },
+    {
+      "check": "3 Animal follows beyond forest; both rescue paths remain usable",
+      "passed": true
+    },
+    {
+      "check": "4 BGM fade in 7s, night tail 4s, gap 0.35s, ambience rise 1.5s",
+      "passed": true
+    }
+  ],
+  "events": []
+}

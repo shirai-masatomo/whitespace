@@ -25,10 +25,15 @@ static func idol(g):
 	g.texture_filter=CanvasItem.TEXTURE_FILTER_NEAREST
 	g.draw_texture(IDOL,(p+Vector2(0,g.TILE.y)-IDOL_ANCHOR).round())
 	if w.Story.idol_glowing(w):
-		for i in range(5):
-			var light=p+Vector2(-38+i*19,-56+sin(g.visual_time*1.5+i)*5)
-			g.draw_line(light-Vector2(3,0),light+Vector2(3,0),Color("f6db81"),2)
-			g.draw_line(light-Vector2(0,3),light+Vector2(0,3),Color("f6db81"),2)
+		# Slow red/yellow steam; smooth opacity, no blinking or opaque veil.
+		for i in range(7):
+			var age=fposmod(g.visual_time*0.22+i/7.0,1.0)
+			var alpha=sin(age*PI)*0.38
+			var light=p+Vector2(-40+i*13+sin(age*TAU+i)*9,-30-age*100)
+			var points=PackedVector2Array()
+			for j in range(6):points.append(light+Vector2(sin(age*5+j*0.8+i)*5,-j*4))
+			g.draw_polyline(points,Color(0.75,0.12,0.04,alpha),9,true)
+			g.draw_polyline(points,Color(1.0,0.65,0.10,alpha*0.85),3,true)
 	if w.story.idol.hp<w.story.idol.max_hp/2:
 		g.draw_polyline(PackedVector2Array([p+Vector2(7,-48),p+Vector2(0,-28),p+Vector2(12,-11)]),Color("574933"),3)
 	if w.story.idol.state in ["preparing","transporting"]:
