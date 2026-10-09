@@ -1,0 +1,240 @@
+{
+  "checks": [
+    {
+      "check": "Each right/bottom idol contact attacks instead of waiting: (14, 8)",
+      "passed": true
+    },
+    {
+      "check": "Enemy never enters the solid idol: (14, 8)",
+      "passed": true
+    },
+    {
+      "check": "Each right/bottom idol contact attacks instead of waiting: (14, 9)",
+      "passed": true
+    },
+    {
+      "check": "Enemy never enters the solid idol: (14, 9)",
+      "passed": true
+    },
+    {
+      "check": "Each right/bottom idol contact attacks instead of waiting: (13, 10)",
+      "passed": true
+    },
+    {
+      "check": "Enemy never enters the solid idol: (13, 10)",
+      "passed": true
+    },
+    {
+      "check": "Every archetype can select the visible active keeper: maid",
+      "passed": true
+    },
+    {
+      "check": "Active keeper excludes ordinary idol targeting: maid",
+      "passed": true
+    },
+    {
+      "check": "Stale ordinary idol strike is rejected after recovery: maid",
+      "passed": true
+    },
+    {
+      "check": "Every archetype can select the visible active keeper: dancer",
+      "passed": true
+    },
+    {
+      "check": "Active keeper excludes ordinary idol targeting: dancer",
+      "passed": true
+    },
+    {
+      "check": "Stale ordinary idol strike is rejected after recovery: dancer",
+      "passed": true
+    },
+    {
+      "check": "Every archetype can select the visible active keeper: thief",
+      "passed": true
+    },
+    {
+      "check": "Active keeper excludes ordinary idol targeting: thief",
+      "passed": true
+    },
+    {
+      "check": "Stale ordinary idol strike is rejected after recovery: thief",
+      "passed": true
+    },
+    {
+      "check": "Every archetype can select the visible active keeper: kidnapper",
+      "passed": true
+    },
+    {
+      "check": "Active keeper excludes ordinary idol targeting: kidnapper",
+      "passed": true
+    },
+    {
+      "check": "Stale ordinary idol strike is rejected after recovery: kidnapper",
+      "passed": true
+    },
+    {
+      "check": "Every archetype can select the visible active keeper: destroyer",
+      "passed": true
+    },
+    {
+      "check": "Active keeper excludes ordinary idol targeting: destroyer",
+      "passed": true
+    },
+    {
+      "check": "Stale ordinary idol strike is rejected after recovery: destroyer",
+      "passed": true
+    },
+    {
+      "check": "Every archetype can select the visible active keeper: martial_artist",
+      "passed": true
+    },
+    {
+      "check": "Active keeper excludes ordinary idol targeting: martial_artist",
+      "passed": true
+    },
+    {
+      "check": "Stale ordinary idol strike is rejected after recovery: martial_artist",
+      "passed": true
+    },
+    {
+      "check": "Every archetype can select the visible active keeper: salaryman",
+      "passed": true
+    },
+    {
+      "check": "Active keeper excludes ordinary idol targeting: salaryman",
+      "passed": true
+    },
+    {
+      "check": "Stale ordinary idol strike is rejected after recovery: salaryman",
+      "passed": true
+    },
+    {
+      "check": "Every archetype can select the visible active keeper: ninja",
+      "passed": true
+    },
+    {
+      "check": "Active keeper excludes ordinary idol targeting: ninja",
+      "passed": true
+    },
+    {
+      "check": "Stale ordinary idol strike is rejected after recovery: ninja",
+      "passed": true
+    },
+    {
+      "check": "Every archetype can select the visible active keeper: animal_tamer",
+      "passed": true
+    },
+    {
+      "check": "Active keeper excludes ordinary idol targeting: animal_tamer",
+      "passed": true
+    },
+    {
+      "check": "Stale ordinary idol strike is rejected after recovery: animal_tamer",
+      "passed": true
+    },
+    {
+      "check": "Every archetype can select the visible active keeper: runner",
+      "passed": true
+    },
+    {
+      "check": "Active keeper excludes ordinary idol targeting: runner",
+      "passed": true
+    },
+    {
+      "check": "Stale ordinary idol strike is rejected after recovery: runner",
+      "passed": true
+    },
+    {
+      "check": "Every archetype can select the visible active keeper: doberman",
+      "passed": true
+    },
+    {
+      "check": "Active keeper excludes ordinary idol targeting: doberman",
+      "passed": true
+    },
+    {
+      "check": "Stale ordinary idol strike is rejected after recovery: doberman",
+      "passed": true
+    },
+    {
+      "check": "Keeper initiates against nearby nonattacking maid without moving: (1, 0)",
+      "passed": true
+    },
+    {
+      "check": "Keeper initiates against nearby nonattacking maid without moving: (1, 1)",
+      "passed": true
+    },
+    {
+      "check": "Keeper does not chase or strike an enemy two cells away",
+      "passed": true
+    },
+    {
+      "check": "Diagonal close attack cannot pass an occluding corner",
+      "passed": true
+    },
+    {
+      "check": "Lost sight follows the last observed cell, not the keeper's current position",
+      "passed": true
+    },
+    {
+      "check": "Unreachable remembered cell is discarded for reachable exploration",
+      "passed": true
+    },
+    {
+      "check": "No physical progress for eight seconds ends stale memory pursuit",
+      "passed": true
+    },
+    {
+      "check": "Arriving at an empty remembered cell starts surrounding exploration",
+      "passed": true
+    },
+    {
+      "check": "No reachable exploration cell waits without teleporting",
+      "passed": true
+    },
+    {
+      "check": "Opening a route resumes exploration on the next decision",
+      "passed": true
+    },
+    {
+      "check": "Explicit statue role retains its purpose: idol_breaker",
+      "passed": true
+    },
+    {
+      "check": "Explicit statue role retains its purpose: idol_extractor",
+      "passed": true
+    },
+    {
+      "check": "Maid prefers nearby support-skill holder before nearer ordinary ally",
+      "passed": true
+    },
+    {
+      "check": "Maid proceeds to other recipient after supporting dancer",
+      "passed": true
+    }
+  ],
+  "evidence": [
+    {
+      "damage": 3,
+      "end": "(14, 8)",
+      "scenario": "idol_contact",
+      "start": "(14, 8)",
+      "state": "攻撃"
+    },
+    {
+      "damage": 3,
+      "end": "(14, 9)",
+      "scenario": "idol_contact",
+      "start": "(14, 9)",
+      "state": "攻撃"
+    },
+    {
+      "damage": 3,
+      "end": "(13, 10)",
+      "scenario": "idol_contact",
+      "start": "(13, 10)",
+      "state": "攻撃"
+    }
+  ],
+  "seed": 31
+}

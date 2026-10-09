@@ -1,5 +1,7 @@
 # 現在の作業：全体試遊版から補正へ
 
+最新試遊：[20261010-000204-106](artifacts/playtest/20261010-000204-106/Play-Isolated.cmd)、実装 `912b987`。画像は[TODAY_GALLERY](review/quality-roadmap/TODAY_GALLERY.html)。
+
 ## 2026-10-09 引継ぎ分（現在）
 
 - 実装済み：朝/縦一覧/下部説明/確認、候補アイコン、Wheelサブ選択/Shift個体、スクロールログ、図鑑アイコン、敵HP、像接点/探索復帰、夜祈り、素材別修理、10夜襲撃と区切り、BGMフェード。

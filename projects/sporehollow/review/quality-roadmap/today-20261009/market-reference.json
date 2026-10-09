@@ -1,0 +1,302 @@
+{
+  "captures": [
+    {
+      "animal_id": -1,
+      "book": "",
+      "file": "01_morning_reference.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": -1,
+      "book": "",
+      "file": "02_market_bubble_closed.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": -1,
+      "book": "",
+      "file": "04_product_list_and_skills.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": -1,
+      "book": "",
+      "file": "07_purchase_confirmation.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": 1,
+      "book": "",
+      "file": "05_book_skill_icons.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    },
+    {
+      "animal_id": 1,
+      "book": "",
+      "file": "06_enemy_hp_and_statue.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 0,
+      "tool": ""
+    }
+  ],
+  "checks": [
+    {
+      "check": "Control exists: open_market",
+      "passed": true
+    },
+    {
+      "check": "Control exists: shop_buy",
+      "passed": true
+    },
+    {
+      "check": "Control exists: category_animals",
+      "passed": true
+    },
+    {
+      "check": "Buy heading is product list",
+      "passed": true
+    },
+    {
+      "check": "Product pagination replaced by scrolling",
+      "passed": true
+    },
+    {
+      "check": "Overflow has visible draggable scrollbar",
+      "passed": true
+    },
+    {
+      "check": "Compact vertical product rows",
+      "passed": true
+    },
+    {
+      "check": "Skill controls fit inside the fixed explanation panel",
+      "passed": true
+    },
+    {
+      "check": "Pointer changes fixed footer product",
+      "passed": true
+    },
+    {
+      "check": "Product description does not use a floating tooltip",
+      "passed": true
+    },
+    {
+      "check": "Only possessed/unlocked and bonus skills are shown",
+      "passed": true
+    },
+    {
+      "check": "Skill hover selects fixed footer explanation",
+      "passed": true
+    },
+    {
+      "check": "Wheel moves continuous list by bounded vertical distance",
+      "passed": true
+    },
+    {
+      "check": "Market wheel does not leak into field mode or zoom",
+      "passed": true
+    },
+    {
+      "check": "Scrolling clamps at end",
+      "passed": true
+    },
+    {
+      "check": "Wheel at end remains consumed",
+      "passed": true
+    },
+    {
+      "check": "Control exists: trade_hedgehog_-1",
+      "passed": true
+    },
+    {
+      "check": "Scrolled offer opens explicit confirmation with cancel",
+      "passed": true
+    },
+    {
+      "check": "Control exists: cancel_trade",
+      "passed": true
+    },
+    {
+      "check": "Cancel returns to same scroll position without trading",
+      "passed": true
+    },
+    {
+      "check": "Keyboard focus reveals an offscreen offer",
+      "passed": true
+    },
+    {
+      "check": "Keyboard focus can reach last offer without a page button",
+      "passed": true
+    },
+    {
+      "check": "Hover, scrolling and cancel do not mutate simulation or money",
+      "passed": true
+    },
+    {
+      "check": "Control exists: trade_doberman_-1",
+      "passed": true
+    },
+    {
+      "check": "Sold-out offer remains inspectable but cannot trade",
+      "passed": true
+    },
+    {
+      "check": "Control exists: close_market",
+      "passed": true
+    },
+    {
+      "check": "Control exists: open_market",
+      "passed": true
+    },
+    {
+      "check": "Control exists: shop_sell",
+      "passed": true
+    },
+    {
+      "check": "Control exists: category_animals",
+      "passed": true
+    },
+    {
+      "check": "Sell heading is belongings list",
+      "passed": true
+    },
+    {
+      "check": "No scrollbar is shown without overflow",
+      "passed": true
+    },
+    {
+      "check": "Short-list wheel also stays inside market",
+      "passed": true
+    },
+    {
+      "check": "UI inspection never issues jobs or trades",
+      "passed": true
+    },
+    {
+      "check": "Control exists: close_market",
+      "passed": true
+    },
+    {
+      "check": "Control exists: open_market",
+      "passed": true
+    },
+    {
+      "check": "Control exists: shop_buy",
+      "passed": true
+    },
+    {
+      "check": "Control exists: category_animals",
+      "passed": true
+    },
+    {
+      "check": "Control exists: trade_hen_-1",
+      "passed": true
+    },
+    {
+      "check": "Control exists: confirm_trade",
+      "passed": true
+    },
+    {
+      "check": "Confirm performs existing price and transaction once",
+      "passed": true
+    },
+    {
+      "check": "Control exists: close_market",
+      "passed": true
+    },
+    {
+      "check": "Control exists: open_book",
+      "passed": true
+    },
+    {
+      "check": "Control exists: book_entry_1",
+      "passed": true
+    },
+    {
+      "check": "Readable icon without overlaid text: skill_bark",
+      "passed": true
+    },
+    {
+      "check": "Readable icon without overlaid text: skill_rescue",
+      "passed": true
+    },
+    {
+      "check": "Book right-click closes safely",
+      "passed": true
+    },
+    {
+      "check": "Morning removes buttons only",
+      "passed": true
+    },
+    {
+      "check": "Preparation control in lower right",
+      "passed": true
+    },
+    {
+      "check": "Control exists: advance",
+      "passed": true
+    },
+    {
+      "check": "Preparation still starts daytime",
+      "passed": true
+    },
+    {
+      "check": "Wheel selects construction subtask without issuing job",
+      "passed": true
+    },
+    {
+      "check": "Shift never cycles construction subtasks",
+      "passed": true
+    },
+    {
+      "check": "Shift selects an active animal in command mode",
+      "passed": true
+    },
+    {
+      "check": "Command wheel selects only, never issues order",
+      "passed": true
+    },
+    {
+      "check": "Log wheel consumes input and reveals history",
+      "passed": true
+    },
+    {
+      "check": "Ctrl-wheel changes only zoom",
+      "passed": true
+    },
+    {
+      "check": "Paused UI actions advance no world time",
+      "passed": true
+    }
+  ],
+  "events": [
+    {
+      "echo": false,
+      "key": 4194325,
+      "shift": false,
+      "tick": 0
+    },
+    {
+      "echo": false,
+      "key": 4194325,
+      "shift": false,
+      "tick": 0
+    }
+  ]
+}

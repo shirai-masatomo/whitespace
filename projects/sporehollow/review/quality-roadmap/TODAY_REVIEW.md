@@ -26,3 +26,12 @@
 商人の正式口パクが未納品のため静止画。買う/売る候補PNGの最終採用は未確定。BGMフェード計算/MP3ループの試験は成功したが実スピーカーの聴感は未確認。2〜4A/6〜10夜は承認された仮編成、AI調整値と高カルマ実戦難度は人間レビュー対象。物理IME/クリーンWindows/長時間試遊は未確認。
 
 この範囲の成果物提供後は停止する。旧TASKSの次工程を自動開始しない。
+
+## 最終成果物（2026-10-10 00時台）
+
+- 実装 `912b98739618c4fb1e02527473746278b383afdb`、素材 `b0e917a11f205190dde0136165a72c189f39e275`。旧採用絵は維持、候補PNGだけ別の試験素材として追加。
+- [試遊フォルダー](../../artifacts/playtest/20261010-000204-106) の **Play-Isolated.cmd**。EXE SHA256 `59E213D9339F662CAA31498BEEEABA9206F79FFFC6BE69C864C0A635498816F1`、dirty=false。
+- [代表画像と提供画像の照合](TODAY_GALLERY.html)。最終隔離GPU [isolation.json](today-20261009/isolation.json)、非対話desktop一致・終了0、57検査成功。参考画像のSHAは不明なので厳密な同条件before/afterとは扱わない。
+- [EXE検証](today-20261009/export-verification.json)：export-smoke成功、headless通常起動と再読込でWRM1保存のハッシュ不変。試験保存は試遊user-dataと別。旧04c99ce EXEは既存BUILD.jsonのハッシュと一致。
+- [通常10夜の観察](today-20261009/campaign-play.json)、[時刻/修理/落物](today-20261009/today-revision.json)、[敵接点/探索](today-20261009/enemy-target-revision.json)、[祈り](today-20261009/prayer-tests.json)。通常プレイ以外の初期条件は各fixtureに明記。
+- 通常プロジェクトの確認入口00/01/02のみ最新資料へ更新。ゲーム・通常保存・旧ビルドの移動/削除なし。生成された既存レビューPNGのimportメタデータ3件は保持して記録し、不要物削除は行っていない。

@@ -1,0 +1,585 @@
+{
+  "checks": [
+    {
+      "check": "Natural day terminates: 31/none/1",
+      "passed": true
+    },
+    {
+      "check": "Natural day terminates: 31/none/2",
+      "passed": true
+    },
+    {
+      "check": "Natural day terminates: 31/none/3",
+      "passed": true
+    },
+    {
+      "check": "Natural day terminates: 31/none/4",
+      "passed": true
+    },
+    {
+      "check": "Natural day terminates: 31/none/5",
+      "passed": true
+    },
+    {
+      "check": "Natural day terminates: 31/none/6",
+      "passed": true
+    },
+    {
+      "check": "Natural day terminates: 31/none/7",
+      "passed": true
+    },
+    {
+      "check": "Natural day terminates: 31/none/8",
+      "passed": true
+    },
+    {
+      "check": "Natural day terminates: 31/none/9",
+      "passed": true
+    },
+    {
+      "check": "Natural day terminates: 31/none/10",
+      "passed": true
+    }
+  ],
+  "reports": [
+    {
+      "days": [
+        {
+          "animals": [
+            {
+              "hp": 28,
+              "lv": 1,
+              "species": "shiba"
+            }
+          ],
+          "day": 1,
+          "defeat_reason": "",
+          "enemies": [
+            {
+              "lv": 1,
+              "role": "kidnapper"
+            }
+          ],
+          "exp_pool": 25,
+          "gold": 65,
+          "idol_hp": 180,
+          "karma": 0,
+          "lost": [],
+          "prayer_completed": false,
+          "prayer_requested": "",
+          "result": "win",
+          "seed": 31,
+          "steps": 1080
+        },
+        {
+          "animals": [
+            {
+              "hp": 20,
+              "lv": 2,
+              "species": "shiba"
+            }
+          ],
+          "day": 2,
+          "defeat_reason": "",
+          "enemies": [
+            {
+              "lv": 1,
+              "role": "kidnapper"
+            },
+            {
+              "lv": 1,
+              "role": "destroyer"
+            }
+          ],
+          "exp_pool": 29,
+          "gold": 73,
+          "idol_hp": 180,
+          "karma": 0,
+          "lost": [
+            {
+              "day": 2,
+              "equipment": {},
+              "id": 2,
+              "name": "",
+              "reason": "death",
+              "species": "bullfrog"
+            }
+          ],
+          "prayer_completed": false,
+          "prayer_requested": "",
+          "result": "win",
+          "seed": 32,
+          "steps": 1080
+        },
+        {
+          "animals": [
+            {
+              "hp": 22,
+              "lv": 2,
+              "species": "shiba"
+            },
+            {
+              "hp": 27,
+              "lv": 1,
+              "species": "doberman"
+            }
+          ],
+          "day": 3,
+          "defeat_reason": "",
+          "enemies": [
+            {
+              "lv": 1,
+              "role": "kidnapper"
+            },
+            {
+              "lv": 1,
+              "role": "destroyer"
+            }
+          ],
+          "exp_pool": 54,
+          "gold": 59,
+          "idol_hp": 180,
+          "karma": 0,
+          "lost": [
+            {
+              "day": 2,
+              "equipment": {},
+              "id": 2,
+              "name": "",
+              "reason": "death",
+              "species": "bullfrog"
+            }
+          ],
+          "prayer_completed": false,
+          "prayer_requested": "",
+          "result": "win",
+          "seed": 33,
+          "steps": 1080
+        },
+        {
+          "animals": [
+            {
+              "hp": 43,
+              "lv": 3,
+              "species": "shiba"
+            },
+            {
+              "hp": 42,
+              "lv": 1,
+              "species": "doberman"
+            },
+            {
+              "hp": 34,
+              "lv": 1,
+              "species": "bullfrog"
+            }
+          ],
+          "day": 4,
+          "defeat_reason": "",
+          "enemies": [
+            {
+              "lv": 1,
+              "role": "martial_artist"
+            },
+            {
+              "lv": 1,
+              "role": "kidnapper"
+            }
+          ],
+          "exp_pool": 39,
+          "gold": 72,
+          "idol_hp": 180,
+          "karma": 0,
+          "lost": [
+            {
+              "day": 2,
+              "equipment": {},
+              "id": 2,
+              "name": "",
+              "reason": "death",
+              "species": "bullfrog"
+            }
+          ],
+          "prayer_completed": false,
+          "prayer_requested": "",
+          "result": "win",
+          "seed": 34,
+          "steps": 1080
+        },
+        {
+          "animals": [
+            {
+              "hp": 24,
+              "lv": 3,
+              "species": "shiba"
+            },
+            {
+              "hp": 39,
+              "lv": 1,
+              "species": "doberman"
+            },
+            {
+              "hp": 22,
+              "lv": 1,
+              "species": "bullfrog"
+            },
+            {
+              "hp": 38,
+              "lv": 1,
+              "species": "hedgehog"
+            }
+          ],
+          "day": 5,
+          "defeat_reason": "",
+          "enemies": [
+            {
+              "lv": 1,
+              "role": "salaryman"
+            },
+            {
+              "lv": 1,
+              "role": "salaryman"
+            },
+            {
+              "lv": 1,
+              "role": "salaryman"
+            },
+            {
+              "lv": 1,
+              "role": "salaryman"
+            },
+            {
+              "lv": 1,
+              "role": "salaryman"
+            },
+            {
+              "lv": 1,
+              "role": "kidnapper"
+            },
+            {
+              "lv": 1,
+              "role": "salaryman"
+            }
+          ],
+          "exp_pool": 64,
+          "gold": 108,
+          "idol_hp": 180,
+          "karma": 0,
+          "lost": [
+            {
+              "day": 2,
+              "equipment": {},
+              "id": 2,
+              "name": "",
+              "reason": "death",
+              "species": "bullfrog"
+            }
+          ],
+          "prayer_completed": false,
+          "prayer_requested": "",
+          "result": "win",
+          "seed": 35,
+          "steps": 1080
+        },
+        {
+          "animals": [
+            {
+              "hp": 35,
+              "lv": 4,
+              "species": "shiba"
+            },
+            {
+              "hp": 36,
+              "lv": 1,
+              "species": "doberman"
+            },
+            {
+              "hp": 22,
+              "lv": 1,
+              "species": "bullfrog"
+            },
+            {
+              "hp": 38,
+              "lv": 1,
+              "species": "hedgehog"
+            }
+          ],
+          "day": 6,
+          "defeat_reason": "",
+          "enemies": [
+            {
+              "lv": 1,
+              "role": "ninja"
+            },
+            {
+              "lv": 1,
+              "role": "martial_artist"
+            }
+          ],
+          "exp_pool": 29,
+          "gold": 156,
+          "idol_hp": 180,
+          "karma": 0,
+          "lost": [
+            {
+              "day": 2,
+              "equipment": {},
+              "id": 2,
+              "name": "",
+              "reason": "death",
+              "species": "bullfrog"
+            }
+          ],
+          "prayer_completed": false,
+          "prayer_requested": "",
+          "result": "win",
+          "seed": 36,
+          "steps": 1080
+        },
+        {
+          "animals": [
+            {
+              "hp": 36,
+              "lv": 4,
+              "species": "shiba"
+            },
+            {
+              "hp": 36,
+              "lv": 1,
+              "species": "doberman"
+            },
+            {
+              "hp": 22,
+              "lv": 1,
+              "species": "bullfrog"
+            },
+            {
+              "hp": 38,
+              "lv": 1,
+              "species": "hedgehog"
+            }
+          ],
+          "day": 7,
+          "defeat_reason": "",
+          "enemies": [
+            {
+              "lv": 1,
+              "role": "animal_tamer"
+            },
+            {
+              "lv": 1,
+              "role": "destroyer"
+            }
+          ],
+          "exp_pool": 54,
+          "gold": 204,
+          "idol_hp": 180,
+          "karma": 0,
+          "lost": [
+            {
+              "day": 2,
+              "equipment": {},
+              "id": 2,
+              "name": "",
+              "reason": "death",
+              "species": "bullfrog"
+            }
+          ],
+          "prayer_completed": false,
+          "prayer_requested": "",
+          "result": "win",
+          "seed": 37,
+          "steps": 1080
+        },
+        {
+          "animals": [
+            {
+              "hp": 35,
+              "lv": 4,
+              "species": "shiba"
+            },
+            {
+              "hp": 36,
+              "lv": 1,
+              "species": "doberman"
+            },
+            {
+              "hp": 22,
+              "lv": 1,
+              "species": "bullfrog"
+            },
+            {
+              "hp": 38,
+              "lv": 1,
+              "species": "hedgehog"
+            }
+          ],
+          "day": 8,
+          "defeat_reason": "",
+          "enemies": [
+            {
+              "lv": 1,
+              "role": "runner"
+            },
+            {
+              "lv": 1,
+              "role": "martial_artist"
+            }
+          ],
+          "exp_pool": 79,
+          "gold": 252,
+          "idol_hp": 180,
+          "karma": 0,
+          "lost": [
+            {
+              "day": 2,
+              "equipment": {},
+              "id": 2,
+              "name": "",
+              "reason": "death",
+              "species": "bullfrog"
+            }
+          ],
+          "prayer_completed": false,
+          "prayer_requested": "",
+          "result": "win",
+          "seed": 38,
+          "steps": 1080
+        },
+        {
+          "animals": [
+            {
+              "hp": 48,
+              "lv": 4,
+              "species": "shiba"
+            },
+            {
+              "hp": 36,
+              "lv": 1,
+              "species": "doberman"
+            },
+            {
+              "hp": 22,
+              "lv": 1,
+              "species": "bullfrog"
+            },
+            {
+              "hp": 38,
+              "lv": 1,
+              "species": "hedgehog"
+            }
+          ],
+          "day": 9,
+          "defeat_reason": "",
+          "enemies": [
+            {
+              "lv": 1,
+              "role": "dancer"
+            },
+            {
+              "lv": 1,
+              "role": "kidnapper"
+            }
+          ],
+          "exp_pool": 104,
+          "gold": 301,
+          "idol_hp": 180,
+          "karma": 0,
+          "lost": [
+            {
+              "day": 2,
+              "equipment": {},
+              "id": 2,
+              "name": "",
+              "reason": "death",
+              "species": "bullfrog"
+            }
+          ],
+          "prayer_completed": false,
+          "prayer_requested": "",
+          "result": "win",
+          "seed": 39,
+          "steps": 1080
+        },
+        {
+          "animals": [
+            {
+              "hp": 43,
+              "lv": 5,
+              "species": "shiba"
+            },
+            {
+              "hp": 30,
+              "lv": 1,
+              "species": "doberman"
+            },
+            {
+              "hp": 34,
+              "lv": 1,
+              "species": "bullfrog"
+            },
+            {
+              "hp": 38,
+              "lv": 1,
+              "species": "hedgehog"
+            }
+          ],
+          "day": 10,
+          "defeat_reason": "",
+          "enemies": [
+            {
+              "lv": 1,
+              "role": "salaryman"
+            },
+            {
+              "lv": 1,
+              "role": "salaryman"
+            },
+            {
+              "lv": 1,
+              "role": "salaryman"
+            },
+            {
+              "lv": 1,
+              "role": "salaryman"
+            },
+            {
+              "lv": 1,
+              "role": "salaryman"
+            },
+            {
+              "lv": 1,
+              "role": "kidnapper"
+            }
+          ],
+          "exp_pool": 49,
+          "gold": 362,
+          "idol_hp": 180,
+          "karma": 0,
+          "lost": [
+            {
+              "day": 2,
+              "equipment": {},
+              "id": 2,
+              "name": "",
+              "reason": "death",
+              "species": "bullfrog"
+            }
+          ],
+          "prayer_completed": false,
+          "prayer_requested": "",
+          "result": "win",
+          "seed": 40,
+          "steps": 1080
+        }
+      ],
+      "initial_seed": 31,
+      "last_result": "win",
+      "policy": "none",
+      "reached_night": 10,
+      "survival_target_met": true,
+      "target_night": 10
+    }
+  ],
+  "scope": "real fixed ticks and normal economy; seed increments like UI; technical termination is separate from survival and fun"
+}

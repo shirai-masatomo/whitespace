@@ -1,0 +1,431 @@
+{
+  "checks": [
+    {
+      "check": "Exact simultaneous groups and five-second salarymen: day5 karma9",
+      "passed": true
+    },
+    {
+      "check": "Pause and prayer cannot change frozen night's plan",
+      "passed": true
+    },
+    {
+      "check": "Every scheduled actor spawns exactly once",
+      "passed": true
+    },
+    {
+      "check": "Exact simultaneous groups and five-second salarymen: day5 karma10",
+      "passed": true
+    },
+    {
+      "check": "Pause and prayer cannot change frozen night's plan",
+      "passed": true
+    },
+    {
+      "check": "Every scheduled actor spawns exactly once",
+      "passed": true
+    },
+    {
+      "check": "Exact simultaneous groups and five-second salarymen: day10 karma9",
+      "passed": true
+    },
+    {
+      "check": "Pause and prayer cannot change frozen night's plan",
+      "passed": true
+    },
+    {
+      "check": "Every scheduled actor spawns exactly once",
+      "passed": true
+    },
+    {
+      "check": "Exact simultaneous groups and five-second salarymen: day10 karma10",
+      "passed": true
+    },
+    {
+      "check": "Pause and prayer cannot change frozen night's plan",
+      "passed": true
+    },
+    {
+      "check": "Every scheduled actor spawns exactly once",
+      "passed": true
+    },
+    {
+      "check": "Seeded equal A-D selection covers all four patterns",
+      "passed": true
+    },
+    {
+      "check": "A provisional fifteen seconds",
+      "passed": true
+    },
+    {
+      "check": "B applies fifteen seconds to both enemies",
+      "passed": true
+    },
+    {
+      "check": "C and D grouped times",
+      "passed": true
+    },
+    {
+      "check": "Existing introduction preserved day6",
+      "passed": true
+    },
+    {
+      "check": "Existing introduction preserved day7",
+      "passed": true
+    },
+    {
+      "check": "Existing introduction preserved day8",
+      "passed": true
+    },
+    {
+      "check": "Existing introduction preserved day9",
+      "passed": true
+    },
+    {
+      "check": "Material repair accepted: soil",
+      "passed": true
+    },
+    {
+      "check": "One selected resource consumed for exact HP: soil",
+      "passed": true
+    },
+    {
+      "check": "Repair clamps at maximum: soil",
+      "passed": true
+    },
+    {
+      "check": "Full statue consumes nothing",
+      "passed": true
+    },
+    {
+      "check": "Missing material rejected",
+      "passed": true
+    },
+    {
+      "check": "Material repair accepted: wood",
+      "passed": true
+    },
+    {
+      "check": "One selected resource consumed for exact HP: wood",
+      "passed": true
+    },
+    {
+      "check": "Repair clamps at maximum: wood",
+      "passed": true
+    },
+    {
+      "check": "Full statue consumes nothing",
+      "passed": true
+    },
+    {
+      "check": "Missing material rejected",
+      "passed": true
+    },
+    {
+      "check": "Material repair accepted: stone",
+      "passed": true
+    },
+    {
+      "check": "One selected resource consumed for exact HP: stone",
+      "passed": true
+    },
+    {
+      "check": "Repair clamps at maximum: stone",
+      "passed": true
+    },
+    {
+      "check": "Full statue consumes nothing",
+      "passed": true
+    },
+    {
+      "check": "Missing material rejected",
+      "passed": true
+    },
+    {
+      "check": "Loose item blocks new construction without disappearing",
+      "passed": true
+    },
+    {
+      "check": "Drop after reservation blocks start, preserving item and paid materials",
+      "passed": true
+    },
+    {
+      "check": "Removing obstruction allows construction to start",
+      "passed": true
+    },
+    {
+      "check": "Drop during construction preserves progress and item",
+      "passed": true
+    },
+    {
+      "check": "Clearing obstruction completes original paid job once",
+      "passed": true
+    },
+    {
+      "check": "Day/night/dawn and all waves complete: 1",
+      "passed": true
+    },
+    {
+      "check": "Day/night/dawn and all waves complete: 2",
+      "passed": true
+    },
+    {
+      "check": "Day/night/dawn and all waves complete: 3",
+      "passed": true
+    },
+    {
+      "check": "Day/night/dawn and all waves complete: 4",
+      "passed": true
+    },
+    {
+      "check": "Day/night/dawn and all waves complete: 5",
+      "passed": true
+    },
+    {
+      "check": "Day/night/dawn and all waves complete: 6",
+      "passed": true
+    },
+    {
+      "check": "Day/night/dawn and all waves complete: 7",
+      "passed": true
+    },
+    {
+      "check": "Day/night/dawn and all waves complete: 8",
+      "passed": true
+    },
+    {
+      "check": "Day/night/dawn and all waves complete: 9",
+      "passed": true
+    },
+    {
+      "check": "Day/night/dawn and all waves complete: 10",
+      "passed": true
+    },
+    {
+      "check": "Night10 milestone retained on morning11",
+      "passed": true
+    }
+  ],
+  "combat_fixture": "mark spawned enemies done each tick",
+  "nights": [
+    {
+      "day": 1,
+      "result": "win",
+      "schedule": [
+        [
+          10.0,
+          "kidnapper",
+          1
+        ]
+      ],
+      "ticks": 728
+    },
+    {
+      "day": 2,
+      "result": "win",
+      "schedule": [
+        [
+          15.0,
+          "salaryman",
+          1
+        ],
+        [
+          15.0,
+          "salaryman",
+          1
+        ],
+        [
+          15.0,
+          "salaryman",
+          1
+        ]
+      ],
+      "ticks": 728
+    },
+    {
+      "day": 3,
+      "result": "win",
+      "schedule": [
+        [
+          15.0,
+          "salaryman",
+          1
+        ],
+        [
+          15.0,
+          "salaryman",
+          1
+        ],
+        [
+          15.0,
+          "salaryman",
+          1
+        ]
+      ],
+      "ticks": 728
+    },
+    {
+      "day": 4,
+      "result": "win",
+      "schedule": [
+        [
+          15.0,
+          "salaryman",
+          1
+        ],
+        [
+          15.0,
+          "salaryman",
+          1
+        ],
+        [
+          15.0,
+          "salaryman",
+          1
+        ]
+      ],
+      "ticks": 728
+    },
+    {
+      "day": 5,
+      "result": "win",
+      "schedule": [
+        [
+          10.0,
+          "salaryman",
+          1
+        ],
+        [
+          10.0,
+          "salaryman",
+          1
+        ],
+        [
+          10.0,
+          "salaryman",
+          1
+        ],
+        [
+          10.0,
+          "salaryman",
+          1
+        ],
+        [
+          10.0,
+          "salaryman",
+          1
+        ],
+        [
+          20.0,
+          "kidnapper",
+          1
+        ]
+      ],
+      "ticks": 728
+    },
+    {
+      "day": 6,
+      "result": "win",
+      "schedule": [
+        [
+          10.0,
+          "ninja",
+          1
+        ],
+        [
+          28.0,
+          "martial_artist",
+          1
+        ]
+      ],
+      "ticks": 728
+    },
+    {
+      "day": 7,
+      "result": "win",
+      "schedule": [
+        [
+          10.0,
+          "animal_tamer",
+          1
+        ],
+        [
+          28.0,
+          "martial_artist",
+          1
+        ]
+      ],
+      "ticks": 728
+    },
+    {
+      "day": 8,
+      "result": "win",
+      "schedule": [
+        [
+          10.0,
+          "runner",
+          1
+        ],
+        [
+          28.0,
+          "kidnapper",
+          1
+        ]
+      ],
+      "ticks": 728
+    },
+    {
+      "day": 9,
+      "result": "win",
+      "schedule": [
+        [
+          10.0,
+          "dancer",
+          1
+        ],
+        [
+          28.0,
+          "salaryman",
+          1
+        ]
+      ],
+      "ticks": 728
+    },
+    {
+      "day": 10,
+      "result": "win",
+      "schedule": [
+        [
+          10.0,
+          "salaryman",
+          1
+        ],
+        [
+          10.0,
+          "salaryman",
+          1
+        ],
+        [
+          10.0,
+          "salaryman",
+          1
+        ],
+        [
+          10.0,
+          "salaryman",
+          1
+        ],
+        [
+          10.0,
+          "salaryman",
+          1
+        ],
+        [
+          20.0,
+          "kidnapper",
+          1
+        ]
+      ],
+      "ticks": 728
+    }
+  ]
+}

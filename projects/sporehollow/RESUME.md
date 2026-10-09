@@ -1,5 +1,7 @@
 # 再開記録
 
+最新試遊：[20261010-000204-106](artifacts/playtest/20261010-000204-106/Play-Isolated.cmd)、実装 `912b987`。画像は[TODAY_GALLERY](review/quality-roadmap/TODAY_GALLERY.html)。
+
 ## 現在（2026-10-09引継ぎ）
 
 今日の指摘分は[TODAY_REVIEW](review/quality-roadmap/TODAY_REVIEW.md)、確定/仮案は[TODAY_SPEC](review/quality-roadmap/TODAY_SPEC.md)。最新パッケージは確認入口01から。04c99ceと559a7fcを基準に保存済みの差分を統合し、巻き戻し・push・mergeなし。配布後は停止し、新しい作業はユーザーの指示を待つ。以下は過去の配布履歴。

@@ -1,0 +1,60 @@
+{
+  "build": {
+    "interactive_launch": "not run",
+    "commit": "912b98739618c4fb1e02527473746278b383afdb",
+    "scope": "first full-loop local playtest; tuning and human acceptance remain",
+    "executable": "WhistleRanch-preview.exe",
+    "daytime_music": "Porch_Swing_Serenade.mp3",
+    "asset_delivery_commit": "b0e917a11f205190dde0136165a72c189f39e275",
+    "data_root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\playtest\\20261010-000204-106\\user-data",
+    "launcher": "Play-Isolated.cmd",
+    "sha256": "59E213D9339F662CAA31498BEEEABA9206F79FFFC6BE69C864C0A635498816F1",
+    "headless_export_smoke": "passed",
+    "dirty": false,
+    "campaign_milestone": "night10 win -> morning11",
+    "save_boundary": "morning"
+  },
+  "normal_headless_startup": [
+    {
+      "run": 1,
+      "exit": 0,
+      "save_sha256": "14d31df5009f7d4b7e4ce031cbac5fa40822e41a30198876a35d91398325a98a",
+      "log": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\export-verification\\20261010-today\\normal-startup-1.log",
+      "args": [
+        "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\playtest\\20261010-000204-106\\WhistleRanch-preview.exe",
+        "--headless",
+        "--audio-driver",
+        "Dummy",
+        "--max-fps",
+        "60",
+        "--quit-after",
+        "120",
+        "--log-file",
+        "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\export-verification\\20261010-today\\normal-startup-1.log"
+      ]
+    },
+    {
+      "run": 2,
+      "exit": 0,
+      "save_sha256": "14d31df5009f7d4b7e4ce031cbac5fa40822e41a30198876a35d91398325a98a",
+      "log": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\export-verification\\20261010-today\\normal-startup-2.log",
+      "args": [
+        "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\playtest\\20261010-000204-106\\WhistleRanch-preview.exe",
+        "--headless",
+        "--audio-driver",
+        "Dummy",
+        "--max-fps",
+        "60",
+        "--quit-after",
+        "120",
+        "--log-file",
+        "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\export-verification\\20261010-today\\normal-startup-2.log"
+      ]
+    }
+  ],
+  "same_morning_save_after_reload": true,
+  "old_04c99ce_executable_hash_unchanged": true,
+  "verification_data": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\export-verification\\20261010-today\\user-data",
+  "normal_user_save": "not read or written",
+  "interactive_launch": false
+}

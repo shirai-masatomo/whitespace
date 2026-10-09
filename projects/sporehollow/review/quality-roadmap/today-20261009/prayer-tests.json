@@ -1,0 +1,631 @@
+{
+  "checks": [
+    {
+      "check": "First night neither lights nor accepts a prayer",
+      "passed": true
+    },
+    {
+      "check": "Second daytime is unlit",
+      "passed": true
+    },
+    {
+      "check": "Day rejects category before reserving resources: pray_animal",
+      "passed": true
+    },
+    {
+      "check": "Day rejects category before reserving resources: pray_gold",
+      "passed": true
+    },
+    {
+      "check": "Day rejects category before reserving resources: pray_item",
+      "passed": true
+    },
+    {
+      "check": "Second night gives a light cue but still requires investigation",
+      "passed": true
+    },
+    {
+      "check": "Onsite inspection unlocks prayer without consuming the light",
+      "passed": true
+    },
+    {
+      "check": "Queued prayer keeps the light and consumes nothing",
+      "passed": true
+    },
+    {
+      "check": "Completion adds exactly three karma and turns off the light",
+      "passed": true
+    },
+    {
+      "check": "Completed night has no glow",
+      "passed": true
+    },
+    {
+      "check": "Morning preserves last prayer day without lighting",
+      "passed": true
+    },
+    {
+      "check": "Next day is still unavailable",
+      "passed": true
+    },
+    {
+      "check": "Next night restores the single shared opportunity",
+      "passed": true
+    },
+    {
+      "check": "Two completed nights accumulate six karma only",
+      "passed": true
+    },
+    {
+      "check": "Partial work has no committed reward",
+      "passed": true
+    },
+    {
+      "check": "Independent construction queues behind the prayer",
+      "passed": true
+    },
+    {
+      "check": "Dawn cancels only unfinished prayer with no cost",
+      "passed": true
+    },
+    {
+      "check": "Morning reconstruction retains construction and no expired wish",
+      "passed": true
+    },
+    {
+      "check": "Old morning prayer plan expires without consuming the next opportunity",
+      "passed": true
+    },
+    {
+      "check": "Old plus-one category contract is not upgraded or rerolled",
+      "passed": true
+    },
+    {
+      "check": "Existing WRM1 format accepts the unchanged story schema",
+      "passed": true
+    },
+    {
+      "check": "WRM1 round trip preserves old karma, one gift and prayer history",
+      "passed": true
+    },
+    {
+      "check": "First-night gate: pray_animal",
+      "passed": true
+    },
+    {
+      "check": "First-night gate: pray_gold",
+      "passed": true
+    },
+    {
+      "check": "First-night gate: pray_item",
+      "passed": true
+    },
+    {
+      "check": "Investigation remains required",
+      "passed": true
+    },
+    {
+      "check": "Obsolete fixed-gold action stays disabled in production",
+      "passed": true
+    },
+    {
+      "check": "Paused category prayer can be queued",
+      "passed": true
+    },
+    {
+      "check": "Paused plan commits no time, reward or karma",
+      "passed": true
+    },
+    {
+      "check": "A second category cannot reserve the same idol",
+      "passed": true
+    },
+    {
+      "check": "Cancel keeps the daily allowance",
+      "passed": true
+    },
+    {
+      "check": "Hit interrupts a new category before commitment",
+      "passed": true
+    },
+    {
+      "check": "Accepted onsite prayer animal/17",
+      "passed": true
+    },
+    {
+      "check": "No immediate gift: animal",
+      "passed": true
+    },
+    {
+      "check": "Committed record retains category, seed and three karma",
+      "passed": true
+    },
+    {
+      "check": "Daily limit applies across categories",
+      "passed": true
+    },
+    {
+      "check": "No reward before next dawn",
+      "passed": true
+    },
+    {
+      "check": "Dawn settles selected category: animal",
+      "passed": true
+    },
+    {
+      "check": "Animal gift keeps individual data and excludes Shiba",
+      "passed": true
+    },
+    {
+      "check": "Animal uses an unoccupied admission cell",
+      "passed": true
+    },
+    {
+      "check": "Animal gift does not add cash/items",
+      "passed": true
+    },
+    {
+      "check": "Repeated dawn does not duplicate gift or news",
+      "passed": true
+    },
+    {
+      "check": "Same seed, day and category reproduce reward",
+      "passed": true
+    },
+    {
+      "check": "Accepted onsite prayer gold/17",
+      "passed": true
+    },
+    {
+      "check": "No immediate gift: gold",
+      "passed": true
+    },
+    {
+      "check": "Committed record retains category, seed and three karma",
+      "passed": true
+    },
+    {
+      "check": "Daily limit applies across categories",
+      "passed": true
+    },
+    {
+      "check": "No reward before next dawn",
+      "passed": true
+    },
+    {
+      "check": "Dawn settles selected category: gold",
+      "passed": true
+    },
+    {
+      "check": "Gold gift does not add animals/items",
+      "passed": true
+    },
+    {
+      "check": "Repeated dawn does not duplicate gift or news",
+      "passed": true
+    },
+    {
+      "check": "Same seed, day and category reproduce reward",
+      "passed": true
+    },
+    {
+      "check": "Accepted onsite prayer item/17",
+      "passed": true
+    },
+    {
+      "check": "No immediate gift: item",
+      "passed": true
+    },
+    {
+      "check": "Committed record retains category, seed and three karma",
+      "passed": true
+    },
+    {
+      "check": "Daily limit applies across categories",
+      "passed": true
+    },
+    {
+      "check": "No reward before next dawn",
+      "passed": true
+    },
+    {
+      "check": "Dawn settles selected category: item",
+      "passed": true
+    },
+    {
+      "check": "Item gift is one implemented item only",
+      "passed": true
+    },
+    {
+      "check": "Repeated dawn does not duplicate gift or news",
+      "passed": true
+    },
+    {
+      "check": "Same seed, day and category reproduce reward",
+      "passed": true
+    },
+    {
+      "check": "Accepted onsite prayer animal/31",
+      "passed": true
+    },
+    {
+      "check": "No immediate gift: animal",
+      "passed": true
+    },
+    {
+      "check": "Committed record retains category, seed and three karma",
+      "passed": true
+    },
+    {
+      "check": "Daily limit applies across categories",
+      "passed": true
+    },
+    {
+      "check": "No reward before next dawn",
+      "passed": true
+    },
+    {
+      "check": "Dawn settles selected category: animal",
+      "passed": true
+    },
+    {
+      "check": "Animal gift keeps individual data and excludes Shiba",
+      "passed": true
+    },
+    {
+      "check": "Animal uses an unoccupied admission cell",
+      "passed": true
+    },
+    {
+      "check": "Animal gift does not add cash/items",
+      "passed": true
+    },
+    {
+      "check": "Repeated dawn does not duplicate gift or news",
+      "passed": true
+    },
+    {
+      "check": "Same seed, day and category reproduce reward",
+      "passed": true
+    },
+    {
+      "check": "Accepted onsite prayer gold/31",
+      "passed": true
+    },
+    {
+      "check": "No immediate gift: gold",
+      "passed": true
+    },
+    {
+      "check": "Committed record retains category, seed and three karma",
+      "passed": true
+    },
+    {
+      "check": "Daily limit applies across categories",
+      "passed": true
+    },
+    {
+      "check": "No reward before next dawn",
+      "passed": true
+    },
+    {
+      "check": "Dawn settles selected category: gold",
+      "passed": true
+    },
+    {
+      "check": "Gold gift does not add animals/items",
+      "passed": true
+    },
+    {
+      "check": "Repeated dawn does not duplicate gift or news",
+      "passed": true
+    },
+    {
+      "check": "Same seed, day and category reproduce reward",
+      "passed": true
+    },
+    {
+      "check": "Accepted onsite prayer item/31",
+      "passed": true
+    },
+    {
+      "check": "No immediate gift: item",
+      "passed": true
+    },
+    {
+      "check": "Committed record retains category, seed and three karma",
+      "passed": true
+    },
+    {
+      "check": "Daily limit applies across categories",
+      "passed": true
+    },
+    {
+      "check": "No reward before next dawn",
+      "passed": true
+    },
+    {
+      "check": "Dawn settles selected category: item",
+      "passed": true
+    },
+    {
+      "check": "Item gift is one implemented item only",
+      "passed": true
+    },
+    {
+      "check": "Repeated dawn does not duplicate gift or news",
+      "passed": true
+    },
+    {
+      "check": "Same seed, day and category reproduce reward",
+      "passed": true
+    },
+    {
+      "check": "Accepted onsite prayer animal/73",
+      "passed": true
+    },
+    {
+      "check": "No immediate gift: animal",
+      "passed": true
+    },
+    {
+      "check": "Committed record retains category, seed and three karma",
+      "passed": true
+    },
+    {
+      "check": "Daily limit applies across categories",
+      "passed": true
+    },
+    {
+      "check": "No reward before next dawn",
+      "passed": true
+    },
+    {
+      "check": "Dawn settles selected category: animal",
+      "passed": true
+    },
+    {
+      "check": "Animal gift keeps individual data and excludes Shiba",
+      "passed": true
+    },
+    {
+      "check": "Animal uses an unoccupied admission cell",
+      "passed": true
+    },
+    {
+      "check": "Animal gift does not add cash/items",
+      "passed": true
+    },
+    {
+      "check": "Repeated dawn does not duplicate gift or news",
+      "passed": true
+    },
+    {
+      "check": "Same seed, day and category reproduce reward",
+      "passed": true
+    },
+    {
+      "check": "Accepted onsite prayer gold/73",
+      "passed": true
+    },
+    {
+      "check": "No immediate gift: gold",
+      "passed": true
+    },
+    {
+      "check": "Committed record retains category, seed and three karma",
+      "passed": true
+    },
+    {
+      "check": "Daily limit applies across categories",
+      "passed": true
+    },
+    {
+      "check": "No reward before next dawn",
+      "passed": true
+    },
+    {
+      "check": "Dawn settles selected category: gold",
+      "passed": true
+    },
+    {
+      "check": "Gold gift does not add animals/items",
+      "passed": true
+    },
+    {
+      "check": "Repeated dawn does not duplicate gift or news",
+      "passed": true
+    },
+    {
+      "check": "Same seed, day and category reproduce reward",
+      "passed": true
+    },
+    {
+      "check": "Accepted onsite prayer item/73",
+      "passed": true
+    },
+    {
+      "check": "No immediate gift: item",
+      "passed": true
+    },
+    {
+      "check": "Committed record retains category, seed and three karma",
+      "passed": true
+    },
+    {
+      "check": "Daily limit applies across categories",
+      "passed": true
+    },
+    {
+      "check": "No reward before next dawn",
+      "passed": true
+    },
+    {
+      "check": "Dawn settles selected category: item",
+      "passed": true
+    },
+    {
+      "check": "Item gift is one implemented item only",
+      "passed": true
+    },
+    {
+      "check": "Repeated dawn does not duplicate gift or news",
+      "passed": true
+    },
+    {
+      "check": "Same seed, day and category reproduce reward",
+      "passed": true
+    },
+    {
+      "check": "Blocked gift waits without rerolling or occupying another actor",
+      "passed": true
+    },
+    {
+      "check": "Reconstruction preserves one waiting gift",
+      "passed": true
+    },
+    {
+      "check": "Clearing admission allows the same individual to enter",
+      "passed": true
+    },
+    {
+      "check": "Normal dawn includes defense reward and one prayer reward",
+      "passed": true
+    },
+    {
+      "check": "Morning retry restores money, animals, PrayerIDs and reactions together",
+      "passed": true
+    },
+    {
+      "check": "Pending prayer survives campaign reconstruction without reroll",
+      "passed": true
+    },
+    {
+      "check": "Legacy reward is honored exactly once",
+      "passed": true
+    },
+    {
+      "check": "Non-milestone night selects bounded item reaction after introduction",
+      "passed": true
+    },
+    {
+      "check": "Item prayer does not publish an unrelated gold discovery",
+      "passed": true
+    },
+    {
+      "check": "No-prayer route remains independent",
+      "passed": true
+    }
+  ],
+  "samples": [
+    {
+      "category": "animal",
+      "reward": {
+        "bonus_skills": [],
+        "category": "animal",
+        "day": 2,
+        "equipment": {},
+        "lv": 1,
+        "rarity": 0,
+        "seed": 17,
+        "source": "idol",
+        "species": "cat"
+      },
+      "seed": 17
+    },
+    {
+      "category": "gold",
+      "reward": {
+        "category": "gold",
+        "day": 2,
+        "gold_amount": 90,
+        "seed": 17
+      },
+      "seed": 17
+    },
+    {
+      "category": "item",
+      "reward": {
+        "category": "item",
+        "day": 2,
+        "item_id": "collar",
+        "rarity": 0,
+        "seed": 17
+      },
+      "seed": 17
+    },
+    {
+      "category": "animal",
+      "reward": {
+        "bonus_skills": [],
+        "category": "animal",
+        "day": 2,
+        "equipment": {},
+        "lv": 1,
+        "rarity": 2,
+        "seed": 31,
+        "source": "idol",
+        "species": "hen"
+      },
+      "seed": 31
+    },
+    {
+      "category": "gold",
+      "reward": {
+        "category": "gold",
+        "day": 2,
+        "gold_amount": 60,
+        "seed": 31
+      },
+      "seed": 31
+    },
+    {
+      "category": "item",
+      "reward": {
+        "category": "item",
+        "day": 2,
+        "item_id": "berry",
+        "rarity": 0,
+        "seed": 31
+      },
+      "seed": 31
+    },
+    {
+      "category": "animal",
+      "reward": {
+        "bonus_skills": [],
+        "category": "animal",
+        "day": 2,
+        "equipment": {},
+        "lv": 1,
+        "rarity": 0,
+        "seed": 73,
+        "source": "idol",
+        "species": "doberman"
+      },
+      "seed": 73
+    },
+    {
+      "category": "gold",
+      "reward": {
+        "category": "gold",
+        "day": 2,
+        "gold_amount": 90,
+        "seed": 73
+      },
+      "seed": 73
+    },
+    {
+      "category": "item",
+      "reward": {
+        "category": "item",
+        "day": 2,
+        "item_id": "berry",
+        "rarity": 0,
+        "seed": 73
+      },
+      "seed": 73
+    }
+  ],
+  "scope": "deterministic transactions, not balance or human play"
+}

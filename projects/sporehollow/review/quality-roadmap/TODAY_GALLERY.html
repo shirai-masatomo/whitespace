@@ -1,0 +1,11 @@
+<!doctype html><html lang="ja"><meta charset="utf-8"><title>10/9指摘分の実画面確認</title><style>body{margin:auto;max-width:1100px;background:#edf0e3;color:#263d32;font:17px/1.7 sans-serif;padding:24px}section{background:#fff9e9;padding:20px;margin:20px 0}img{max-width:100%;height:auto}code{overflow-wrap:anywhere}.pair{display:grid;grid-template-columns:1fr 1fr;gap:12px}figure{margin:0}a{color:#276952}</style><h1>10/9指摘分：実画面と試遊版</h1>
+<p>実装 <code>912b98739618c4fb1e02527473746278b383afdb</code><br>素材 <code>b0e917a11f205190dde0136165a72c189f39e275</code>。最終隔離GPU：dirty=false、非対話desktop確認、57入力/状態検査。人物・所持金・在庫・敵配置のfixtureを含み、人間の試遊とは区別します。</p>
+<p><a href="../../artifacts/playtest/20261010-000204-106/Play-Isolated.cmd">最新のPlay-Isolated.cmd</a>（実行できなければ確認入口01から） / <a href="TODAY_REVIEW.md">結果と保留</a> / <a href="TODAY_SPEC.md">指定事項と仮案</a></p>
+<section><h2>提供画像との照合</h2><p>左はユーザー提供の参考/症状画像でSHA不明、右は今回実装。共通条件の性能比較・同一セーブ再現としては扱いません。</p><div class="pair"><figure><img src="today-20261009/reference_list.png"><figcaption>参考：小さい縦一覧</figcaption></figure><figure><img src="today-20261009/04_product_list_and_skills.png"><figcaption>今回：縦スクロールと固定説明</figcaption></figure><figure><img src="today-20261009/reference_enemy_stop.png"><figcaption>報告：像付近で停止</figcaption></figure><figure><img src="today-20261009/06_enemy_hp_and_statue.png"><figcaption>今回：対応接点の再現fixture。関連試験で3接点の実ダメージ確認。</figcaption></figure></div></section>
+<section><h2>朝：余分な案内を除去・右下へ支度完了</h2><img src="today-20261009/01_morning_reference.png"></section>
+<section><h2>市場入口：参考吹き出し・かご/袋は試験採用</h2><img src="today-20261009/02_market_bubble_closed.png"></section>
+<section><h2>小さい縦一覧・売切れ・下部の所持スキル</h2><img src="today-20261009/04_product_list_and_skills.png"></section>
+<section><h2>購入確認・資金の前後・やめる</h2><img src="today-20261009/07_purchase_confirmation.png"></section>
+<section><h2>図鑑：紙面内の説明と拡大アイコン</h2><img src="today-20261009/05_book_skill_icons.png"></section>
+<section><h2>敵HP前面・夜の未祈願の像の光</h2><img src="today-20261009/06_enemy_hp_and_statue.png"></section>
+<section><h2>未確定・未確認</h2><p>候補アイコンの最終採用、商人口パク素材、BGM実スピーカー聴感、物理IME、高カルマの人間通し試遊。BGM計算とMP3ループはテスト済み。seed31祈りなしでは通常経済/戦闘を使う自動プレイで10夜成功。</p><p>旧版と通常保存は保持。新しい試遊版は専用user-data、試験保存は別フォルダー。GitHubへのpush/mergeなし。ここで停止。</p></section></html>
