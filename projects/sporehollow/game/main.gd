@@ -455,6 +455,9 @@ func refresh():
 		for id in subtask_choices(): UI.selected(buttons[id], subtasks.selected[2] == id)
 	if not field_book and not field_shop: build_context_actions()
 	if debug_view and not field_book and not field_shop: build_debug_controls()
+	if field_book or field_shop:buttons.advance.visible=false
+	if book_motion!="":
+		for child in palette.get_children():child.visible=child==buttons.get("close_market")
 	last_phase = world.phase
 
 func selected_store() -> Dictionary:
