@@ -30,10 +30,11 @@ func run():
 	check(game.world.tick==tick,"Pause does not consume merchant visit")
 	game.world.paused=false
 	for i in range(590):
-		game.world.step();game._process(0)
+		game.world.step();game.record_actor_tracks();game._process(Farm.DT)
 		if game.field_shop:break
 	check(game.field_shop and game.world.keeper.pos in game.world.merchant_talk_cells(),"Keeper approaches before shop opens")
 	check(game.world.phase=="day","Shop retains daytime phase")
+	check(game.view_positions.keeper.distance_to(Vector2(game.world.keeper.pos))<0.08,"Conversation waits for visible keeper arrival")
 	tick=game.world.tick;var before=[game.world.keeper.duplicate(true),game.world.animals.duplicate(true),game.world.natural.duplicate(true),game.world.jobs.duplicate(true)]
 	for i in range(1000):game.world.step()
 	check(game.world.tick==tick and [game.world.keeper.duplicate(true),game.world.animals.duplicate(true),game.world.natural.duplicate(true),game.world.jobs.duplicate(true)]==before,"World simulation remains frozen in shop")

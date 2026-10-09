@@ -1290,7 +1290,7 @@ func _process(delta):
 	if world.phase=="shop" and not save_load_blocked:enter_daytime();refresh()
 	if merchant_requested:
 		if not world.merchant_present() or world.keeper.state!="free":merchant_requested=false
-		elif not world.paused and world.keeper.pos in world.merchant_talk_cells():open_market()
+		elif not world.paused and world.keeper.pos==merchant_talk_target and view_positions.get("keeper",Vector2(world.keeper.pos)).distance_to(Vector2(merchant_talk_target))<0.08:open_market()
 	if world.phase=="day" and not world.merchant_present() and departure_started<0:departure_started=clock
 
 	if wall_stroke.kind!="" and (group!=0 or tool!=wall_stroke.kind or menu_open or field_book or field_shop or story_modal!="" or cinematic() or not world.working()):cancel_wall_stroke()
@@ -2108,6 +2108,7 @@ func request_merchant():
 	candidates.sort_custom(func(a,b):return world.distance(world.keeper.pos,a)<world.distance(world.keeper.pos,b))
 	if candidates.is_empty():notice("商人の近くへ行けません");return
 	if not world.act("keeper_move",candidates[0]):notice("今は話しかけに行けません");return
+	merchant_talk_target=candidates[0]
 	merchant_requested=true;notice("商人に話しかけに行きます")
 
 func open_market():
@@ -2121,6 +2122,7 @@ func open_market():
 var field_book = false
 var field_shop=false
 var merchant_requested=false
+var merchant_talk_target=Vector2i(-1,-1)
 
 func open_book():
 	field_book = world.working()
@@ -2416,7 +2418,7 @@ func draw_market_world():
 	if elapsed>=Farm.MERCHANT_SECONDS+1:return
 	var q=merchant_world_position()
 	SixMotion.paint(self,"merchant","cart_move" if elapsed<1.8 or elapsed>Farm.MERCHANT_SECONDS else "cart_idle",-1 if elapsed>Farm.MERCHANT_SECONDS else 1,q+Vector2(20,30),visual_time)
-	if world.merchant_present():label_on(self,q+Vector2(-42,-62),"商人 · あと%d秒"%ceili(Farm.MERCHANT_SECONDS-world.tick*Farm.DT),14,UI.PAPER)
+	if world.merchant_present():label_on(self,q+Vector2(95,0),"商人 · あと%d秒"%ceili(Farm.MERCHANT_SECONDS-world.tick*Farm.DT),14,UI.PAPER)
 
 func draw_merchant_bubble():
 	if not world.merchant_present() or merchant_visual_elapsed()<1.8:return
