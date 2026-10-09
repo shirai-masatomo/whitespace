@@ -8,9 +8,14 @@ func run():
 	root.add_child(game);await process_frame;await process_frame
 	game.set_process(false)
 	check(game.world.phase=="day" and not game.buttons.has("open_market"),"Start directly in field without morning entry")
+	check(not game.world.merchant_present() and game.merchant_visual_elapsed()<0,"No merchant before five-second entry delay")
+	game.world.tick=19
+	check(not game.world.merchant_present(),"No interaction just before five seconds")
+	game.world.tick=20
+	check(game.world.merchant_present() and game.merchant_visual_elapsed()==0,"Entry begins at five seconds")
 	var trace=[]
 	for rate in [0.5,1.0,2.0]:
-		game.world.tick=2;game.accumulated=0
+		game.world.tick=22;game.accumulated=0
 		var previous=game.merchant_world_position().x
 		for frame in range(1,4):
 			game.accumulated=frame*rate/60.0
@@ -47,12 +52,12 @@ func run():
 	await press("close_market")
 	check(not game.field_shop and not game.world.market_open and game.world.phase=="day","Close returns directly to daytime")
 	game.queue_redraw();game.hud.queue_redraw();await capture("04_conversation_distance")
-	game.world.tick=int(29.95/Farm.DT)
-	check(game.world.merchant_present(),"Merchant present before 30 seconds")
+	game.world.tick=int(34.95/Farm.DT)
+	check(game.world.merchant_present(),"Merchant present before 35 seconds")
 	game.world.step()
-	check(not game.world.merchant_present(),"Merchant unavailable at 30 seconds")
+	check(not game.world.merchant_present(),"Merchant unavailable at 35 seconds")
 	game.open_market();check(not game.field_shop,"Cannot reopen after departure")
-	game.world.tick=int(32/Farm.DT);game._process(0);game.queue_redraw();game.hud.queue_redraw();await capture("03_merchant_departed")
+	game.world.tick=int(37/Farm.DT);game._process(0);game.queue_redraw();game.hud.queue_redraw();await capture("03_merchant_departed")
 	game.choose_walk();game.refresh();await press("keeper_book")
 	game.clock=game.book_started;game._process(0);game.hud.queue_redraw();await capture("05_adopted_closed_cover")
 	check(preload("res://game/adopted_art.gd").CLOSED.resource_path=="res://assets/ui/journal_cover_green.png","User adopted green cover is connected")
@@ -66,7 +71,7 @@ func run():
 	game.close_morning_screen();await settle()
 	game.world.phase="dawn";game.world.next_campaign()
 	game.advance();game._process(0)
-	check(game.world.phase=="day" and game.world.merchant_present(),"Following day starts with a fresh merchant visit")
+	check(game.world.phase=="day" and not game.world.merchant_present(),"Following day also waits five seconds for merchant")
 	var saved=Farm.new({},31);var save_record=game.MorningSave.capture(saved)
 	check(not save_record.is_empty() and game.MorningSave.restore(save_record)!=null,"Existing start-of-day save remains compatible")
 	FileAccess.open(output+"/merchant-day.json",FileAccess.WRITE).store_string(JSON.stringify(record,"  "))

@@ -34,6 +34,7 @@ var rng = RandomNumberGenerator.new()
 var tick = 0
 var phase = "shop" # Legacy save boundary, entered directly as daytime by the scene.
 var market_open=false
+const MERCHANT_DELAY=5.0
 const MERCHANT_SECONDS=30.0
 const MERCHANT_CELL=Vector2i(2,5)
 
@@ -42,7 +43,7 @@ func merchant_talk_cells() -> Array:
 	return [MERCHANT_CELL+Vector2i(0,2),MERCHANT_CELL+Vector2i(1,2),MERCHANT_CELL+Vector2i(2,2)]
 
 func merchant_present() -> bool:
-	return phase=="day" and tick*DT<MERCHANT_SECONDS
+	return phase=="day" and tick*DT>=MERCHANT_DELAY and tick*DT<MERCHANT_DELAY+MERCHANT_SECONDS
 
 const Life = preload("res://game/keeper_life.gd")
 var jobs_held = false
