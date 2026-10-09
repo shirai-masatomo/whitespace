@@ -1,0 +1,316 @@
+{
+  "captures": [
+    {
+      "animal_id": -1,
+      "book": "",
+      "file": "01_day_merchant_arrival.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 40,
+      "tool": ""
+    },
+    {
+      "animal_id": -1,
+      "book": "",
+      "file": "02_shop_from_conversation.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 155,
+      "tool": ""
+    },
+    {
+      "animal_id": -1,
+      "book": "",
+      "file": "04_conversation_distance.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 155,
+      "tool": ""
+    },
+    {
+      "animal_id": -1,
+      "book": "",
+      "file": "03_merchant_departed.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 148,
+      "tool": ""
+    },
+    {
+      "animal_id": -1,
+      "book": "opening",
+      "file": "05_adopted_closed_cover.png",
+      "group": 2,
+      "jobs": [],
+      "tick": 148,
+      "tool": ""
+    },
+    {
+      "animal_id": -1,
+      "book": "opening",
+      "file": "07_cover_opening.png",
+      "group": 2,
+      "jobs": [],
+      "tick": 148,
+      "tool": ""
+    },
+    {
+      "animal_id": -1,
+      "book": "",
+      "file": "06_book_open.png",
+      "group": 2,
+      "jobs": [],
+      "tick": 148,
+      "tool": ""
+    }
+  ],
+  "checks": [
+    {
+      "check": "Start directly in field without morning entry",
+      "passed": true
+    },
+    {
+      "check": "No merchant before five-second entry delay",
+      "passed": true
+    },
+    {
+      "check": "No interaction just before five seconds",
+      "passed": true
+    },
+    {
+      "check": "Entry begins at five seconds",
+      "passed": true
+    },
+    {
+      "check": "Cart interpolates between ticks at speed 0.5",
+      "passed": true
+    },
+    {
+      "check": "Cart interpolates between ticks at speed 0.5",
+      "passed": true
+    },
+    {
+      "check": "Cart interpolates between ticks at speed 0.5",
+      "passed": true
+    },
+    {
+      "check": "Cart interpolates between ticks at speed 1.0",
+      "passed": true
+    },
+    {
+      "check": "Cart interpolates between ticks at speed 1.0",
+      "passed": true
+    },
+    {
+      "check": "Cart interpolates between ticks at speed 1.0",
+      "passed": true
+    },
+    {
+      "check": "Cart interpolates between ticks at speed 2.0",
+      "passed": true
+    },
+    {
+      "check": "Cart interpolates between ticks at speed 2.0",
+      "passed": true
+    },
+    {
+      "check": "Cart interpolates between ticks at speed 2.0",
+      "passed": true
+    },
+    {
+      "check": "Merchant apron has no trees or tree collision",
+      "passed": true
+    },
+    {
+      "check": "Click reserves physical approach during pause",
+      "passed": true
+    },
+    {
+      "check": "Pause does not consume merchant visit",
+      "passed": true
+    },
+    {
+      "check": "Keeper approaches before shop opens",
+      "passed": true
+    },
+    {
+      "check": "Shop retains daytime phase",
+      "passed": true
+    },
+    {
+      "check": "Merchant waits beyond deadline for physical approach and shopping",
+      "passed": true
+    },
+    {
+      "check": "Prefer cart front over distant diagonal candidate",
+      "passed": true
+    },
+    {
+      "check": "Conversation waits for visible keeper arrival",
+      "passed": true
+    },
+    {
+      "check": "World simulation remains frozen in shop",
+      "passed": true
+    },
+    {
+      "check": "Conversation offers shopping and journal",
+      "passed": true
+    },
+    {
+      "check": "Control exists: open_book",
+      "passed": true
+    },
+    {
+      "check": "Conversation journal retains time stop",
+      "passed": true
+    },
+    {
+      "check": "Book closes back to conversation choice",
+      "passed": true
+    },
+    {
+      "check": "Control exists: open_market",
+      "passed": true
+    },
+    {
+      "check": "Control exists: shop_buy",
+      "passed": true
+    },
+    {
+      "check": "Control exists: category_materials",
+      "passed": true
+    },
+    {
+      "check": "Control exists: trade_soil_-1",
+      "passed": true
+    },
+    {
+      "check": "Control exists: confirm_trade",
+      "passed": true
+    },
+    {
+      "check": "Existing confirmed purchase works during daytime conversation",
+      "passed": true
+    },
+    {
+      "check": "Control exists: close_market",
+      "passed": true
+    },
+    {
+      "check": "Shop returns to conversation choice",
+      "passed": true
+    },
+    {
+      "check": "Control exists: close_market",
+      "passed": true
+    },
+    {
+      "check": "Close returns directly to daytime",
+      "passed": true
+    },
+    {
+      "check": "Merchant present before 35 seconds",
+      "passed": true
+    },
+    {
+      "check": "Merchant unavailable at 35 seconds",
+      "passed": true
+    },
+    {
+      "check": "Cannot reopen after departure",
+      "passed": true
+    },
+    {
+      "check": "Control exists: keeper_book",
+      "passed": true
+    },
+    {
+      "check": "User adopted green cover is connected",
+      "passed": true
+    },
+    {
+      "check": "Keeper can still open animal book in daytime",
+      "passed": true
+    },
+    {
+      "check": "Daytime training updates resident in place",
+      "passed": true
+    },
+    {
+      "check": "Daytime naming updates same resident",
+      "passed": true
+    },
+    {
+      "check": "Following day also waits five seconds for merchant",
+      "passed": true
+    },
+    {
+      "check": "Valid approach holds merchant at deadline",
+      "passed": true
+    },
+    {
+      "check": "Cancelled or failed movement releases waiting merchant",
+      "passed": true
+    },
+    {
+      "check": "Incapacitation releases merchant wait",
+      "passed": true
+    },
+    {
+      "check": "Existing start-of-day save remains compatible",
+      "passed": true
+    }
+  ],
+  "events": [
+    {
+      "cart_interpolation": [
+        {
+          "frame": 1,
+          "speed": 0.5,
+          "x": -52.2222290039063
+        },
+        {
+          "frame": 2,
+          "speed": 0.5,
+          "x": -51.1111145019531
+        },
+        {
+          "frame": 3,
+          "speed": 0.5,
+          "x": -50.0
+        },
+        {
+          "frame": 1,
+          "speed": 1.0,
+          "x": -51.1111145019531
+        },
+        {
+          "frame": 2,
+          "speed": 1.0,
+          "x": -48.8888854980469
+        },
+        {
+          "frame": 3,
+          "speed": 1.0,
+          "x": -46.6666717529297
+        },
+        {
+          "frame": 1,
+          "speed": 2.0,
+          "x": -48.8888854980469
+        },
+        {
+          "frame": 2,
+          "speed": 2.0,
+          "x": -44.4444427490234
+        },
+        {
+          "frame": 3,
+          "speed": 2.0,
+          "x": -40.0
+        }
+      ]
+    }
+  ]
+}

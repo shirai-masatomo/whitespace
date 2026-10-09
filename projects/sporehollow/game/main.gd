@@ -354,6 +354,7 @@ func collect_selected():
 	refresh()
 
 func refresh():
+	merchant_speech.update(self,0.0)
 	context_panel = null
 	if last_phase != world.phase:
 		cancel_wall_stroke()
@@ -1313,6 +1314,7 @@ func _process(delta):
 		child.visible = book_motion == "" or child == buttons.get("close_market")
 
 	if not menu_open: clock += delta
+	merchant_speech.update(self,delta)
 	if not field_book and not field_shop and story_modal=="" and not world.paused and not menu_open and world.working(): visual_time += delta * (24.0 if not world.rest_skip.is_empty() else speed)
 	var direction = Vector2(int(keys_down.get(KEY_D, false)) - int(keys_down.get(KEY_A, false)), int(keys_down.get(KEY_S, false)) - int(keys_down.get(KEY_W, false)))
 	if direction!=Vector2.ZERO:cancel_wall_stroke()
@@ -2130,6 +2132,7 @@ func enter_market():
 
 var field_book = false
 var field_shop=false
+var merchant_speech=preload("res://game/merchant_speech.gd").new()
 var merchant_requested=false
 var merchant_talk_target=Vector2i(-1,-1)
 

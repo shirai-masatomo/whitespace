@@ -1,0 +1,301 @@
+{
+  "captures": [
+    {
+      "animal_id": -1,
+      "book": "",
+      "file": "01_conversation_half.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 60,
+      "tool": ""
+    },
+    {
+      "animal_id": -1,
+      "book": "",
+      "file": "02_shop_closed.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 60,
+      "tool": ""
+    },
+    {
+      "animal_id": -1,
+      "book": "",
+      "file": "03_shop_half.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 60,
+      "tool": ""
+    },
+    {
+      "animal_id": -1,
+      "book": "",
+      "file": "04_shop_open.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 60,
+      "tool": ""
+    },
+    {
+      "animal_id": -1,
+      "book": "",
+      "file": "preview_00.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 60,
+      "tool": ""
+    },
+    {
+      "animal_id": -1,
+      "book": "",
+      "file": "preview_01.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 60,
+      "tool": ""
+    },
+    {
+      "animal_id": -1,
+      "book": "",
+      "file": "preview_02.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 60,
+      "tool": ""
+    },
+    {
+      "animal_id": -1,
+      "book": "",
+      "file": "preview_03.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 60,
+      "tool": ""
+    },
+    {
+      "animal_id": -1,
+      "book": "",
+      "file": "preview_04.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 60,
+      "tool": ""
+    },
+    {
+      "animal_id": -1,
+      "book": "",
+      "file": "preview_05.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 60,
+      "tool": ""
+    },
+    {
+      "animal_id": -1,
+      "book": "",
+      "file": "preview_06.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 60,
+      "tool": ""
+    },
+    {
+      "animal_id": -1,
+      "book": "",
+      "file": "preview_07.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 60,
+      "tool": ""
+    },
+    {
+      "animal_id": -1,
+      "book": "",
+      "file": "preview_08.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 60,
+      "tool": ""
+    },
+    {
+      "animal_id": -1,
+      "book": "",
+      "file": "preview_09.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 60,
+      "tool": ""
+    },
+    {
+      "animal_id": -1,
+      "book": "",
+      "file": "preview_10.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 60,
+      "tool": ""
+    },
+    {
+      "animal_id": -1,
+      "book": "",
+      "file": "preview_11.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 60,
+      "tool": ""
+    },
+    {
+      "animal_id": -1,
+      "book": "",
+      "file": "preview_12.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 60,
+      "tool": ""
+    },
+    {
+      "animal_id": -1,
+      "book": "",
+      "file": "preview_13.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 60,
+      "tool": ""
+    },
+    {
+      "animal_id": -1,
+      "book": "",
+      "file": "preview_14.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 60,
+      "tool": ""
+    },
+    {
+      "animal_id": -1,
+      "book": "",
+      "file": "preview_15.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 60,
+      "tool": ""
+    },
+    {
+      "animal_id": -1,
+      "book": "",
+      "file": "preview_16.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 60,
+      "tool": ""
+    },
+    {
+      "animal_id": -1,
+      "book": "",
+      "file": "preview_17.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 60,
+      "tool": ""
+    },
+    {
+      "animal_id": -1,
+      "book": "",
+      "file": "preview_18.png",
+      "group": -1,
+      "jobs": [],
+      "tick": 60,
+      "tool": ""
+    }
+  ],
+  "checks": [
+    {
+      "check": "Conversation starts on original closed mouth",
+      "passed": true
+    },
+    {
+      "check": "Mouth advances while game time is paused",
+      "passed": true
+    },
+    {
+      "check": "Visible mouth state 1",
+      "passed": true
+    },
+    {
+      "check": "All pixels outside mouth are identical: 03_shop_half",
+      "passed": true
+    },
+    {
+      "check": "Visible mouth state 2",
+      "passed": true
+    },
+    {
+      "check": "All pixels outside mouth are identical: 04_shop_open",
+      "passed": true
+    },
+    {
+      "check": "Closed half open half closed order",
+      "passed": true
+    },
+    {
+      "check": "Utterance stops after bounded duration",
+      "passed": true
+    },
+    {
+      "check": "Idle shop and refresh never restart speech",
+      "passed": true
+    },
+    {
+      "check": "Control exists: shop_buy",
+      "passed": true
+    },
+    {
+      "check": "New buy phrase starts",
+      "passed": true
+    },
+    {
+      "check": "Control exists: category_animals",
+      "passed": true
+    },
+    {
+      "check": "Category navigation does not repeat identical phrase",
+      "passed": true
+    },
+    {
+      "check": "Returning greeting starts once",
+      "passed": true
+    },
+    {
+      "check": "Book hides and cancels speech",
+      "passed": true
+    },
+    {
+      "check": "Book close resumes visible greeting",
+      "passed": true
+    },
+    {
+      "check": "Conversation close cancels speech",
+      "passed": true
+    },
+    {
+      "check": "Reconversation starts a fresh utterance",
+      "passed": true
+    },
+    {
+      "check": "Departure cancels mouth immediately",
+      "passed": true
+    }
+  ],
+  "events": [
+    {
+      "changed_pixels": 117,
+      "frame": "03_shop_half",
+      "outside_mouth": 0
+    },
+    {
+      "changed_pixels": 136,
+      "frame": "04_shop_open",
+      "outside_mouth": 0
+    }
+  ]
+}

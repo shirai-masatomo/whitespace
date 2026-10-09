@@ -1,4 +1,4 @@
-param([ValidateSet('probe','characters','controls','buildings','shop','book','delivered','story','progression','ui_revision','progression_art','idol_debug','ranch_content','quality','six_motion','corpses','prayer','forest','campaign_route','morning_save','campaign_tiers','wall_drag','journal_layout_ui','playthrough_ui','day5_defense_ui','forest_entry_ui','morning_layout_ui','shop_readability_ui','player_walkthrough','today_revision','bubble_a','merchant_day','journal_names')][string]$Scenario='probe',[switch]$Preview)
+param([ValidateSet('probe','characters','controls','buildings','shop','book','delivered','story','progression','ui_revision','progression_art','idol_debug','ranch_content','quality','six_motion','corpses','prayer','forest','campaign_route','morning_save','campaign_tiers','wall_drag','journal_layout_ui','playthrough_ui','day5_defense_ui','forest_entry_ui','morning_layout_ui','shop_readability_ui','player_walkthrough','today_revision','bubble_a','merchant_day','journal_names','merchant_mouth')][string]$Scenario='probe',[switch]$Preview)
 $ErrorActionPreference='Stop'
 $farmRoot=Split-Path -Parent $PSScriptRoot
 $runRoot=Join-Path $farmRoot ('artifacts/isolated/'+(Get-Date -Format 'yyyyMMdd-HHmmss-fff'))
@@ -22,6 +22,7 @@ if($Scenario -eq 'forest'){$script='tests/test_forest_ui.gd'}
 if($Scenario -eq 'prayer'){$script='tests/test_prayer_ui.gd'}
 if($Scenario -eq 'today_revision'){$script='tests/test_today_revision_ui.gd'}
 if($Scenario -eq 'journal_names'){$script='tests/test_journal_names_ui.gd'}
+if($Scenario -eq 'merchant_mouth'){$script='tests/test_merchant_mouth_ui.gd'}
 if($Scenario -eq 'merchant_day'){$script='tests/test_merchant_day_ui.gd'}
 if($Scenario -eq 'bubble_a'){$script='tests/test_bubble_a_ui.gd'}
 $cmd='"'+$exe+'" --path "'+$farmRoot+'" --audio-driver Dummy --rendering-method gl_compatibility --max-fps 30 --resolution 1280x800 --log-file "'+$runRoot+'/render.log" --script '+$script+' -- --isolated-review --output="'+$runRoot+'"'

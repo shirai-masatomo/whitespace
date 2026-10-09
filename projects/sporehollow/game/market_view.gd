@@ -167,6 +167,7 @@ static func speech_bubble(game,c,area: Rect2,value: String,font_size: int,tail_u
 
 static func merchant(game,c,area: Rect2):
 	art_texture(c,Art.CART,area)
+	game.merchant_speech.draw(game,c,Art.CART,area)
 
 static func list_title(game) -> String:
 	return "持ち物一覧" if game.shop_side=="sell" else "商品一覧"

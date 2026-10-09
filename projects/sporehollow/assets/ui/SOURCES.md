@@ -20,3 +20,6 @@
 
 ## 商人の吹き出しA（2026-10-10）
 ユーザー添付・採用指定のRGBA原本を無改変で使用。merchant_bubble_a.png / 2172×724 / SHA256 17758df2ffda2f862d793a297d21ce8f0d6ecdbda08a17c27b4faddf466b5991。文字はゲーム内TextParagraph。角・しっぽを等比保持する分割描画で中央を可変化。外部素材ライセンスの追加取得はなし。
+
+## 行商人口差分（2026-10-10）
+`merchant_mouth_v1/`：既作成imagegen PNG2枚をユーザーのtempから無改変で採用。Library ID・原ファイル名・SHA256はreceipt.json。ゲームの領域描画で位置合わせし、画像の手描き修正は行わない。

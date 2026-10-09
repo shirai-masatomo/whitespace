@@ -1,0 +1,40 @@
+{
+  "source": "User saved cloud imagegen output into local temp; bytes preserved",
+  "base_sha256": "7541dd6310d0ca7b6b09b420f3759251b11da5c72de8cb477796b7487cae7cb7",
+  "source_region": [
+    390,
+    288,
+    730,
+    496
+  ],
+  "destination_on_base": [
+    307,
+    182,
+    27,
+    18.35
+  ],
+  "files": [
+    {
+      "state": "half",
+      "source_name": "ChatGPT 画像 2026年10月10日 04_49_36.png",
+      "file": "half.png",
+      "library_file_id": "libfile_b4ce198d75688191988c801dddd9b027",
+      "sha256": "f5af8ddd4f8ef5f1031ae7bd4d94c6c41d1515c2fc26e4ffcbe68e354121dfc2",
+      "size": [
+        1508,
+        1043
+      ]
+    },
+    {
+      "state": "open",
+      "source_name": "ChatGPT 画像 2026年10月10日 04_49_33.png",
+      "file": "open.png",
+      "library_file_id": "libfile_a4cebce49c108191856823f6d57b1b99",
+      "sha256": "4fda3b61808842147104c186016522891e5f0f7c4f6dcce81c2de16e778269df",
+      "size": [
+        1508,
+        1043
+      ]
+    }
+  ]
+}
