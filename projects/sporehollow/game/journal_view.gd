@@ -130,6 +130,25 @@ static func draw_skills(g,c,skills: Array):
 static func page_number(g,c,page: int,total: int):
 	text(g,c,Rect2(382,476,82,24),"%d / %d"%[page,total],14,MUTED)
 
+# Only an owned individual's explicit name belongs on a thumbnail.
+# animal_name() falls back to a species title, and enemy records use catalog names.
+static func grid_name(row: Dictionary,enemy: bool) -> String:
+	return "" if enemy else str(row.get("name","")).strip_edges()
+
+static func nameplate_rect(card: Rect2) -> Rect2:
+	return Rect2(card.position+Vector2(10,94),Vector2(128,48))
+
+static func nameplate_layout(g,value: String,plate: Rect2) -> TextParagraph:
+	var paragraph=text_layout(g,value,plate.grow(-4),15,13)
+	paragraph.alignment=HORIZONTAL_ALIGNMENT_CENTER
+	return paragraph
+
+static func draw_nameplate(g,c,card: Rect2,value: String):
+	var plate=nameplate_rect(card)
+	c.draw_style_box(g.MarketView.panel(Color("e8dbb8"),Color("c3ac78"),1),plate)
+	var paragraph=nameplate_layout(g,value,plate)
+	paragraph.draw(c.get_canvas_item(),plate.position+Vector2(4,(plate.size.y-paragraph.get_size().y)*0.5),UI.INK)
+
 static func draw(g,c,id: int):
 	if id<0:grid(g,c,-id-1);return
 	if g.book_section=="enemies":g.ProgressView.enemy_page(g,c,id);return
@@ -166,9 +185,9 @@ static func grid(g,c,page: int):
 		var tier=g.Farm.ProgressData.rarity(g.Farm.ProgressData.enemy(key).rarity if enemy and known else row.get("rarity",0))
 		c.draw_style_box(g.MarketView.panel(Color("eee1ba") if known else Color("d3c8a8"),Color(g.Farm.ProgressData.RARITY_COLORS[tier]) if known else Color("b7ac8e"),1),rect)
 		if known:
-			var title=(g.Farm.ProgressData.enemy(key).name if key!="doberman" else "ドーベルマン") if enemy else g.Farm.animal_name(row)
-			Assets.portrait(c,key,Rect2(p+Vector2(20,18),Vector2(108,76)),"enemy" if enemy else "animal")
-			text(g,c,Rect2(p+Vector2(10,103),Vector2(128,38)),title,16)
+			var name=grid_name(row,enemy)
+			Assets.portrait(c,key,Rect2(p+Vector2(20,12 if name!="" else 35),Vector2(108,76)),"enemy" if enemy else "animal")
+			if name!="":draw_nameplate(g,c,rect,name)
 			Assets.emblem(g,c,p+Vector2(118,8),tier,22)
 		else:g.label_on(c,p+Vector2(59,83),"?",38,Color("8b876e"))
 	page_number(g,c,page+1,maxi(1,ceili(records.size()/8.0)))
