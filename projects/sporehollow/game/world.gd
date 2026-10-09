@@ -470,7 +470,9 @@ func spawn_enemy(event: Dictionary):
 		"search_goal": null, "search_goal_until": 0, "search_visits": {}, "sight_reaction": "", "sight_reaction_until": 0,
 		"weakened_until": 0, "born": tick, "path": [origin], "role": event.role, "state": "探索中"})
 	Progression.spawn_data(self,enemies.back(),event)
-	if event.get("wave",0)==999:PlayerEvents.add(self,enemies.back().name+"が森の外から到着")
+	if event.get("wave",0)==999:
+		enemies.back().reinforcement=true
+		PlayerEvents.add(self,enemies.back().name+"の増援が森から接近")
 	Life.danger(self, "invasion")
 	spawned += 1
 	milestones.append({"tick": tick, "kind": "invasion", "id": spawned - 1})
@@ -915,6 +917,9 @@ func step():
 		if a.path.back() != a.pos: a.path.append(a.pos)
 	for e in enemies:
 		enemy_step(e)
+		if e.get("reinforcement",false) and not e.get("reinforcement_arrived",false) and not e.done and e.hp>0 and inside(e.pos):
+			e.reinforcement_arrived=true
+			PlayerEvents.add(self,e.name+"の増援が牧場に到着")
 		if not working(): break
 
 	if tick % 8 == 0:

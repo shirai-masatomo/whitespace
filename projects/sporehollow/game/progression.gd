@@ -120,7 +120,7 @@ static func enemy_hurt(w,e,raw: int,attacker: int=-1,action: String="attack",ski
 		w.Content.down(w,e);return
 	elif e.get("archetype","")=="salaryman" and not e.get("phone_success",false) and not e.get("phone_started",false) and damage>0:
 		if w.rng.randf()<e.get("debug_phone_chance",Data.SPECIAL.phone_chance) and w.Combat.pay(e,"skill"):
-			w.PlayerEvents.add(w,e.name+"：応援要請")
+			w.PlayerEvents.add(w,e.name+"：電話中（撃破で中断）")
 			e.phone_started=true; e.phone_until=w.tick+ceili(Data.SPECIAL.phone_delay/w.DT); e.action_id="phone_take"
 
 static func loot(w,e):
@@ -219,6 +219,8 @@ static func enemy_step(w,e) -> bool:
 			if calls<=Data.SPECIAL.night_reinforcement_cap:
 				w.spawn_schedule.append({"tick":w.tick-w.night_started_tick+ceili(Data.SPECIAL.reinforcement_delay/w.DT),"wave":999,"role":"salaryman","entry":w.entries[w.rng.randi_range(0,w.entries.size()-1)],"lv":1})
 				w.spawn_schedule.sort_custom(func(a,b):return a.tick<b.tick)
+				w.PlayerEvents.add(w,e.name+"：応援要請が成立")
+			else:w.PlayerEvents.add(w,e.name+"：応援は来ない")
 		return true
 	if e.archetype=="animal_tamer" and e.led_animal>=0: lead_out(w,e); return true
 	if w.tick<e.get("bow_until",0): e.state="礼"; e.action_id="bow"; return true

@@ -186,6 +186,7 @@ static func line(start: Vector2i,goal: Vector2i) -> Array:
 
 static func down(w,e) -> bool:
 	if e.get("dead",false):return true
+	if e.get("phone_started",false):w.PlayerEvents.add(w,e.name+"：電話を中断")
 	drop_stolen(w,e)
 	e.dead=true;e.revivable=not e.get("revived",false);e.corpse_started_tick=w.tick;e.corpse_until=w.tick+ceili(CORPSE_SECONDS/w.DT)
 	e.done=false;e.flee=false;e.hp=0;e.state="倒れた";e.capture_progress=0;e.counter_target=-1;e.phone_started=false;e.chosen_target={}

@@ -1793,8 +1793,7 @@ func draw_hud():
 	if Rect2(142, 0, 480, 49).has_point(pointer):
 		panel(Rect2(145, 50, 390, 30))
 		label_on(hud, Vector2(154, 71), "土 / 木材 / 石 / Gold  ·  キノコ %d" % world.campaign.mushrooms, 14)
-	var remaining = maxf(0, world.day_seconds - world.tick * Farm.DT) if world.phase == "day" else world.remaining_night()
-	label_on(hud, Vector2(720, 31), "%s %02d:%02d" % ["日暮れまで" if world.phase == "day" else "夜明けまで", int(remaining) / 60, int(remaining) % 60], 18)
+	label_on(hud, Vector2(720, 31), clock_label_text(), 18)
 	panel(Rect2(0, 748, 505, 52))
 	var idol_warning=idol_warning_text()
 	var show_idol_warning=idol_warning!="" and world.keeper.state not in ["restrained","captured"]
@@ -2404,6 +2403,13 @@ func carried_keeper_rect() -> Rect2:
 	var foot=center(view_positions.get("e%d"%world.keeper.carrier,Vector2(world.keeper.pos)))+Vector2(0,14)
 	var support=foot-Vector2(16,44)+Vector2(20 if facing<0 else 12,16)
 	return HumanVisual.rect(Rect2(support+Vector2(-22 if facing<0 else -26,-26),Vector2(48,32)),foot)
+
+func clock_label_text() -> String:
+	var remaining=maxf(0,world.day_seconds-world.tick*Farm.DT) if world.phase=="day" else world.remaining_night()
+	if world.phase=="defend" and remaining<=0:
+		if world.enemies.any(func(e):return not e.done and not e.flee and e.get("phone_started",false)):return "夜明け待ち：電話中"
+		if world.spawn_schedule.slice(world.schedule_index).any(func(e):return e.get("wave",0)==999):return "夜明け待ち：増援の準備中"
+	return "%s %02d:%02d"%["日暮れまで" if world.phase=="day" else "夜明けまで",int(remaining)/60,int(remaining)%60]
 
 func rest_button_text() -> String:
 	if not world.rest_skip.is_empty(): return "時間送りを中断"

@@ -35,12 +35,14 @@ func snapshot(label: String):
 	state.scenario=scenario;state.idol=w.story.idol;state.life_log=w.life_log;state.job_log=w.job_log
 	state.combat_log=w.combat_log;state.skill_log=w.skill_log
 	state.player_events=w.player_events
+	state.pending_spawns=w.spawn_schedule.slice(w.schedule_index);state.remaining_night=w.remaining_night();state.early_clear=w.early_clear
 	for i in range(w.animals.size()):
 		var a=w.animals[i]
 		state.animals[i].merge({"abductor":a.get("abductor",-1),"dead":a.get("dead",false),"lost":a.get("lost",false),"target_id":a.get("target_id",-1)})
 	for i in range(w.enemies.size()):
 		var e=w.enemies[i]
 		state.enemies[i].merge({"state":e.state,"led_animal":e.get("led_animal",-1),"dead":e.get("dead",false),"revived":e.get("revived",false),"gauge":e.get("ultimate_gauge",0),"chosen_target":e.get("chosen_target",{})})
+		state.enemies[i].merge({"phone_started":e.get("phone_started",false),"phone_success":e.get("phone_success",false),"phone_until":e.get("phone_until",-1),"inside":w.inside(e.pos),"entry":str(e.entry)})
 	FileAccess.open(output+"/state.json",FileAccess.WRITE).store_string(JSON.stringify(state,"  "))
 	FileAccess.open(output+"/"+file.trim_suffix(".png")+".json",FileAccess.WRITE).store_string(JSON.stringify(state,"  "))
 	FileAccess.open(output+"/events.json",FileAccess.WRITE).store_string(JSON.stringify(events,"  "))
@@ -50,7 +52,7 @@ func snapshot(label: String):
 
 func fixture(name: String):
 	# Explicitly separate branch setup from a continuous new-game review. Private save only.
-	if name not in ["recovery","kidnapping","animal_loss","idol_breaker","idol_extraction","target_range","tamer_dancer","tamer_dancer_rescue","tamer_dancer_intercept"]:return
+	if name not in ["recovery","kidnapping","animal_loss","idol_breaker","idol_extraction","target_range","tamer_dancer","tamer_dancer_rescue","tamer_dancer_intercept","salary_dancer_interrupt","salary_dancer_reserved","salary_dancer_dawn","phone_book"]:return
 	scenario="fixture_"+name
 	if is_instance_valid(game.story_panel):game.story_panel.queue_free();game.story_panel=null
 	var campaign=Farm.new({},31).campaign.duplicate(true)
@@ -58,9 +60,10 @@ func fixture(name: String):
 	campaign.world_story.intro_seen=true
 	game.world=Farm.new(campaign,31).begin_day()
 	if name.begins_with("tamer_dancer"):game.world=preload("res://tests/review_mixed_fixture.gd").create(name!="tamer_dancer",name=="tamer_dancer_intercept")
+	if name.begins_with("salary_dancer"):game.world=preload("res://tests/review_mixed_fixture.gd").create_salary(name.trim_prefix("salary_dancer_"))
 	var w=game.world
 	w.trees.clear();w.natural.clear();w.field_items.clear();w.spawn_schedule.clear();w.day_seconds=600
-	if not name.begins_with("tamer_dancer"):
+	if not name.begins_with("tamer_dancer") and not name.begins_with("salary_dancer"):
 		w.keeper.pos=Vector2i(7,10);w.animals[0].pos=Vector2i(8,10)
 		w.animals[0].home=w.animals[0].pos;w.animals[0].order=w.animals[0].pos
 	if name=="recovery":w.Life.hurt(w,{"id":-1,"attack_power":999})
@@ -86,6 +89,10 @@ func fixture(name: String):
 		w.spawn_enemy({"role":"kidnapper","entry":Vector2i(1,8),"lv":1,"debug_single":true})
 		w.enemies.back().pos=Vector2i(8,15);w.keeper.pos=Vector2i(7,14)
 	game.reset_view();game.story_modal="";game.arrival_started=-10;game.recenter();game.refresh()
+	if name=="phone_book":
+		# Display-only tooltip fixture; combat and knowledge discovery are reviewed separately.
+		game.world=Farm.new({},31);game.world.campaign.enemy_knowledge.salaryman=3
+		game.open_book();game.book_section="enemies";game.training_id=1;game.book_next_id=1;game.refresh()
 	game._process(0);await process_frame
 
 func apply(request: Dictionary):
@@ -104,6 +111,8 @@ func apply(request: Dictionary):
 				await mouse(b.get_global_rect().get_center())
 			"cell":await mouse(game.screen_cell(Vector2i(action.x,action.y)),action.get("button",MOUSE_BUTTON_LEFT))
 			"mouse":await mouse(Vector2(action.x,action.y),action.get("button",MOUSE_BUTTON_LEFT))
+			"hover":
+				var motion=InputEventMouseMotion.new();motion.position=Vector2(action.x,action.y);root.push_input(motion,true);await process_frame
 			"key":await key(OS.find_keycode_from_string(action.key))
 			"advance":
 				# Normal main._process, including overlays, danger and transitions. Fast review playback.
