@@ -186,3 +186,8 @@ D最終UI：artifacts/isolated/20261008-174341-191、13検査/1画面、失敗0�
 | animal_commands |39|20261009-183208-459|
 
 48件、失敗0。修正後の描画は artifacts/isolated/20261009-183233-965。既存801件や長期試験の再実行はしていない。通常のゲーム・保存は使用しない。
+
+
+### 分離出力と元ファイル保護
+
+本体6746c76379cc0a842cefc3f8fbc660ac5b59da1a、dirty=false。artifacts/playtest/20261009-184446-538。EXE SHA256 92098006EE5AE24D7886C2941C561FC9D942B5A267CDD6AD717EFE3DCD489C4A。import/export/smoke成功。artifacts/export-verification/20261009-184611-785で、実EXEの通常起動によるWRM1作成と5日目朝の再読込・保持を確認した。音声Dummy・headless・専用保存。旧パッケージ63ファイルと元repoの既存4ファイルは不変。元repoへは確認入口HTMLとショートカット6件だけ追加した。新UID2件と版情報を後続コミットで保存し、本体を再出力しない。

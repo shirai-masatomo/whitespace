@@ -1,5 +1,15 @@
 # 現在の作業：全体試遊版から補正へ
 
+## 最新試遊版と確認入口（2026-10-09）
+
+[Play-Isolated.cmd](artifacts/playtest/20261009-184446-538/Play-Isolated.cmd)。ゲーム本体 **6746c76379cc0a842cefc3f8fbc660ac5b59da1a**、dirty=false。EXE SHA256 **92098006EE5AE24D7886C2941C561FC9D942B5A267CDD6AD717EFE3DCD489C4A**。[BUILD.json](artifacts/playtest/20261009-184446-538/BUILD.json) と [通常起動・保存検証](artifacts/export-verification/20261009-184611-785/verification.json) を正本とする。
+
+今回の3点修正を1回だけ新規出力。headless/Dummyの専用保存先で通常起動→WRM1朝保存作成→検証済み5日目朝の再読込・保持に成功。試遊用user-dataへfixtureは入れていない。旧試遊版63ファイル、元プロジェクトのBGMと既存import計4ファイルはSHA256一致。最後のコミットは資料と新テストの生成UID2件だけで、ゲームを再出力しない。
+
+ユーザー向け入口は C:/Users/masat/Documents/codex_test/projects/sporehollow/確認入口/00_確認ガイド.html。隣の01_最新試遊.lnkから起動でき、比較画像・採用素材索引・納品と候補・試遊履歴・ロードマップへ6リンクを置いた。リンク先の存在と保存先の分離を検証。元repoの既存変更を保持し、新規の確認入口だけ追加。素材実体の移動／削除なし。
+
+Godotが書き換えた1251件のimportはGit上の内容差分ゼロを確認して改行差だけ戻した。このcloneの生成レビューimport3件は task/generated-imports-20261009-184446 に復元用manifestと共に保管。元repoの同名3件は保持。新UIDは既存と重複なし。通常デスクトップでのEXE起動・音・IME・人間試遊は未実施。
+
 ## 実画面・入力レビューと3点の補正（2026-10-09）
 
 [WALKTHROUGH_REVIEW](review/quality-roadmap/WALKTHROUGH_REVIEW.md) と [比較画像](review/quality-roadmap/WALKTHROUGH_GALLERY.html) を追加。seed31の同じ新規牧場で導入→購入→壁→連行→初夜→2日目の朝・図鑑まで確認。別fixtureで療養からの操作復帰、誘拐・像破壊・像搬出の敗北と再挑戦、鶏損失後の翌朝と継続を実画面・入力で確認した。レビュー時計は停止・加速付きで、人間の1倍速試遊・聴感とは別。
@@ -8,7 +18,7 @@
 
 次は動物使いの連れ去り／舞姫の蘇生／サラリーマン増援から一組の混成だけを選び、対象喪失・救助・夜明けを短い実画面シナリオで確認する。朝の損失理解、連行先での選択切替、1倍速の待ち時間は未評価。通常ゲーム・セーブ・デスクトップに干渉せず、push/merge/公開なし。
 
-指定元プロジェクトの 確認入口/00_確認ガイド.html に試遊版・比較画像・採用記録・候補・履歴の入口を追加する。素材実体は移動しない。[素材と整理規則](review/quality-roadmap/ASSET_INDEX.md) に現在の分類と今後の置き方を記録。以下の最新表記は各時点の履歴として読む。
+指定元プロジェクトの 確認入口/00_確認ガイド.html に試遊版・比較画像・採用記録・候補・履歴の入口を追加した。素材実体は移動しない。[素材と整理規則](review/quality-roadmap/ASSET_INDEX.md) に現在の分類と今後の置き方を記録。以下の最新表記は各時点の履歴として読む。
 
 2026-10-09 UTC：接続切断後の残作業を完了。最新試遊版は [002f3cb / Play-Isolated.cmd](artifacts/playtest/20261009-020437-216/Play-Isolated.cmd)。本体・既存801検査・出力は再実行せず、保存済み起動検証を引き継ぎ資料へ接続し、対応テストの生成UID4件を追跡対象にした。SHA256・検証先は [RESUME](RESUME.md) 先頭。次はROADMAP Fの人間試遊（朝→店→図鑑、負傷復帰、代表1夜）から一つの補正点を選ぶ。
 
