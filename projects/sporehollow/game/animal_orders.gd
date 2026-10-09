@@ -205,7 +205,7 @@ static func target_reason(w,a,enemy_id: int) -> String:
 	w.animal_targets(a)
 	var detected=a.known_enemies.get(e.id,-1)>=w.tick and w.line_of_sight(a.pos,e.pos)
 	if not detected and not w.Progression.visible_to_farm(w,e):return "敵を選んでください"
-	if w.distance(a.pos,e.pos)>a.attack_target_range:return "遠すぎます"
+	if w.distance(a.pos,e.pos)>a.attack_target_range:return "%sから敵が遠すぎます。仲間を近づけてください"%w.animal_name(a)
 	if not detected:return "敵が見えません"
 	if not w.SPECIES[a.species].can_enter_indoor and w.is_indoor(e.pos):return "屋内の敵には近づけません"
 	if not w.neighbors(e.pos).any(func(p):return w.animal_walkable(a,p) and not w.animal_path(a,a.pos,p).is_empty()):return "敵へ近づく道がありません"

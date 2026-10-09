@@ -384,7 +384,11 @@ func refresh():
 	buttons.advance.tooltip_text = "商人を見送り、昼の牧場仕事を始めます" if world.phase == "shop" else ""
 	buttons.advance.disabled=save_load_blocked
 	if world.phase=="shop": MarketView.button_style(buttons.advance,true)
-	else: UI.button(buttons.advance)
+	else:
+		UI.button(buttons.advance)
+		# The reused morning button has a larger font; restore the field toolbar size.
+		buttons.advance.remove_theme_font_size_override("font_size")
+		buttons.advance.size=Vector2(190,44)
 	buttons.retry.visible = world.phase == "result"
 	buttons.group1.text = "指示"
 	for i in range(2):
@@ -1514,6 +1518,10 @@ func export_record():
 	FileAccess.open("user://observations/latest.json", FileAccess.WRITE).store_string(JSON.stringify(world.observation(), "  "))
 	notice("開発用観察JSONを保存しました")
 
+func idol_warning_text() -> String:
+	if not world.working():return ""
+	return {"preparing":"黄金像の固定を外されている！","transporting":"黄金像が持ち去られそう！"}.get(world.story.idol.get("state",""),"")
+
 func label_on(target: CanvasItem, p: Vector2, text_value: String, size: int = 17, color: Color = Color("f3ead1")):
 	for i in range(text_value.split("\n").size()):
 		target.draw_string(FONT, p+Vector2(0,i*22), text_value.split("\n")[i], HORIZONTAL_ALIGNMENT_LEFT, -1, size, color)
@@ -1788,16 +1796,24 @@ func draw_hud():
 	var remaining = maxf(0, world.day_seconds - world.tick * Farm.DT) if world.phase == "day" else world.remaining_night()
 	label_on(hud, Vector2(720, 31), "%s %02d:%02d" % ["日暮れまで" if world.phase == "day" else "夜明けまで", int(remaining) / 60, int(remaining) % 60], 18)
 	panel(Rect2(0, 748, 505, 52))
+	var idol_warning=idol_warning_text()
+	var show_idol_warning=idol_warning!="" and world.keeper.state not in ["restrained","captured"]
 	if clock < message_until and world.tick < message_until_tick and world.phase != "result":
-		panel(Rect2(16, 60, minf(800, message.length() * 16 + 28), 35))
-		label_on(hud, Vector2(28, 84), message, 16)
-	if alert_visible() and alert_kind != "early_clear":
+		var notice_y=136 if show_idol_warning else 60
+		panel(Rect2(16, notice_y, minf(800, message.length() * 16 + 28), 35))
+		label_on(hud, Vector2(28, notice_y+24), message, 16)
+	if show_idol_warning:
+		hud.draw_style_box(UI.surface(UI.DANGER),Rect2(380,62,520,68))
+		label_on(hud,Vector2(395,90),idol_warning,20)
+		label_on(hud,Vector2(395,116),"搬出役を倒して止めよう",16)
+	elif alert_visible() and alert_kind != "early_clear":
 		var urgent = alert_kind in ["restrained", "carried", "animal_danger"]
 		var top = 330 if alert_kind == "auto_start" else 62
 		hud.draw_style_box(UI.surface(UI.DANGER if urgent else UI.MOSS), Rect2(380, top, 520, 42+22*(alert_text.count("\n"))))
 		label_on(hud, Vector2(395, top + 29), alert_text, 20)
 	if world.keeper.state in ["restrained", "captured"]:
 		draw_edge(world.keeper.pos, "牧場主 !", Color("ffa58a"))
+	if idol_warning!="":draw_edge(world.Story.at(world),"黄金像 !",Color("ffa58a"))
 	for a in world.animals:
 		if a.placed and a.hp <= a.max_hp * Farm.Rules.LOW_HP_FRACTION: draw_edge(a.pos, Farm.animal_name(a) + " !", Color("ff997f"))
 	if alert_kind == "invasion" and alert_visible():

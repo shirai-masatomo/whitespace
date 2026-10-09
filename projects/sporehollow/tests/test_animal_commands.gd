@@ -77,7 +77,7 @@ func run():
 	w=command_world();dog=w.animals[0]
 	check(not w.queue_order("attack_target",[dog.id],Vector2i(9,9)) and w.events[-1].text=="敵を選んでください","Empty attack selection gives the requested prompt")
 	e=enemy(w,"kidnapper",Vector2i(11,8));w.keeper.pos=Vector2i(10,8)
-	check(w.Orders.target_reason(w,dog,e.id)=="遠すぎます","A visibly selected enemy outside the animal range reports distance")
+	check(w.Orders.target_reason(w,dog,e.id)=="柴犬から敵が遠すぎます。仲間を近づけてください","A visible out-of-range enemy identifies the animal that must approach")
 	e.pos=Vector2i(20,12);w.keeper.pos=Vector2i(5,8);dog.known_enemies.clear()
 	check(w.Orders.target_reason(w,dog,e.id)=="敵を選んでください","Hidden enemies do not disclose their distance")
 	e.pos=dog.pos+Vector2i.RIGHT
