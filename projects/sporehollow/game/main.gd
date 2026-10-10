@@ -11,6 +11,7 @@ var story_page=0
 var story_panel: Control
 var selected_trees: Array=[]
 const Farm = preload("res://game/world.gd")
+const Clarity=preload("res://game/onsite_clarity.gd")
 const MorningSave=preload("res://game/morning_save.gd")
 var persistence_enabled=false
 var save_path=MorningSave.PATH
@@ -154,7 +155,7 @@ func _ready():
 		var saved=MorningSave.read(save_path)
 		if saved.status in ["ok","recovered"]:
 			world=MorningSave.restore(saved.record)
-			save_status="保存した朝から再開しました" if saved.status=="ok" else "予備の記録から朝を復元しました"
+			save_status="保存した日開始から再開しました（日中・夜の変更は戻ります）" if saved.status=="ok" else "予備の記録から日開始を復元しました（日中・夜の変更は戻ります）"
 		elif saved.status=="missing":save_morning(world)
 		else:
 			save_load_blocked=true
@@ -525,7 +526,7 @@ func build_context_actions():
 			rows.append([kind,StoryView.LABELS[kind],"spark",story_action.bind(kind),why!="",why if why!="" else ("牧場主が現地で3秒祈ります。1晩1回、翌朝に選んだ種類の贈り物を受け取ります" if world.Story.is_prayer(kind) else "素材1個で現地修理。最大HPを超える分は回復しません" if kind.begins_with("repair_idol") else "牧場主が現地で行います")])
 	elif not selected_resources.is_empty():
 		var pending = selected_resources.any(func(p): return not job_reserved("collect", p))
-		rows.append(["collect_selection", "回収する" if pending else "予約済み", "basket", collect_selected, not pending, "牧場主が現地で回収する"])
+		rows.append(["collect_selection", "回収する" if pending else "予約済み", "basket", collect_selected, not pending, "牧場主が現地で回収する。卵は拾うと孵化できません。残した卵から育つ鶏の初産は、生存・入場・活動できる場合の最短日です。"])
 		if selected_resources.any(func(p):return job_reserved("collect",p)):
 			rows.append(["cancel_near","取消","cross",cancel_selected_work,false,"選んだ回収予定を取り消す"])
 	else:
@@ -1871,7 +1872,11 @@ func draw_hud():
 		for enemy in world.enemies:
 			if not enemy.done and world.tick-enemy.born<16: draw_edge(enemy.pos,"人影 !",Color("f5d483"))
 	var details = ""
-	if selected.get("kind") == "resource":
+	var egg_lines=selected_egg_lines()
+	if not egg_lines.is_empty():
+		panel(Rect2(16, 550, 446, 139))
+		for i in range(egg_lines.size()): label_on(hud, Vector2(30, 574+i*24), egg_lines[i], 14)
+	elif selected.get("kind") == "resource":
 		details = "回収予定" if collectible(selected.pos) else "回収済み"
 		for item in world.items_at(selected.pos):
 			if item.kind.ends_with("_plan"): details = Farm.Buildings.NAMES.get(item.kind.trim_suffix("_plan"),"建築")+"の設計図\n回収して習得を記録"
@@ -2003,7 +2008,13 @@ func setup_menu():
 	guide.text = "ホイール：操作選択　Ctrl＋ホイール：ズーム　Tab：モード　Shift：指示対象\n壁を選んでドラッグ：連続予約（右クリック / Escで取消）　未選択：マップ移動\n左クリック：選択・行動　右クリック：予定取消 / 解除 / 市場で戻る\n1：0.5倍　2：1倍　3：2倍　4：4倍（休息中）　操作ボタンのドラッグ：並べ替え\nSpace：停止 / 再開　−：遅く　＋ / ＝ / テンキー＋：速く\n夜まで / 朝まで休む：別の時間送り（中断して倍率を変更）"
 	guide.position=Vector2(288,566)
 	guide.add_theme_font_size_override("font_size",14)
+	guide.add_theme_constant_override("line_spacing",-4)
+	guide.name="ControlGuide"
 	menu.add_child(guide)
+	var boundary_note=Label.new();boundary_note.name="SaveBoundaryNote"
+	boundary_note.position=Vector2(288,700);boundary_note.add_theme_font_size_override("font_size",16)
+	boundary_note.text=Clarity.SAVE_BOUNDARY
+	menu.add_child(boundary_note)
 	var save_label=Label.new();save_label.name="MenuSaveStatus"
 	save_label.position=Vector2(288,728);save_label.size=Vector2(720,54);save_label.text=save_status
 	save_label.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART;save_label.add_theme_font_size_override("font_size",16)
@@ -2445,9 +2456,19 @@ func draw_merchant_bubble():
 	# HUD pass is above all world trees/actors. Text remains dynamic and screen-sized.
 	MarketView.speech_bubble(self,hud,Rect2(at,Vector2(200,60)),"いらっしゃい、\n何か見ていくかい？",14)
 
+func selected_egg_lines() -> Array:
+	var cells=selected_resources.duplicate()
+	if selected.get("kind")=="resource" and selected.pos not in cells: cells.append(selected.pos)
+	var eggs=world.field_items.filter(func(item):return item.kind=="egg" and item.pos in cells)
+	return Clarity.eggs(world,eggs,cells.any(func(p):return job_reserved("collect",p)))
+
 func draw_companion_card():
 	for a in world.animals:
 		if a.id != selected.id: continue
+		if a.species=="shiba":
+			var explanation=Clarity.dog(world,a)
+			hud.draw_style_box(companion_box(),Rect2(16,549,344,58))
+			for i in range(explanation.size()): label_on(hud,Vector2(28,571+i*23),explanation[i],14,UI.PAPER)
 		hud.draw_style_box(companion_box(), Rect2(16, 609, 344, 80))
 		draw_card_icon(hud, a.species, Vector2(54, 650), 0.85)
 		label_on(hud, Vector2(90, 634), Farm.animal_name(a), 20)

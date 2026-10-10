@@ -11,6 +11,7 @@ static func open(g):
 	var list=VBoxContainer.new();list.custom_minimum_size.x=775;list.add_theme_constant_override("separation",12);scroll.add_child(list)
 	var counts=g.world.campaign.items.duplicate()
 	counts.merge(g.world.resource_snapshot(),true)
+	counts["egg"]=g.world.item_count("egg")
 	var ids=counts.keys();ids.sort()
 	for id in ids:
 		if counts[id]<=0:continue
