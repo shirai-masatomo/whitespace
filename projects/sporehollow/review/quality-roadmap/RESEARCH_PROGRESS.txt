@@ -19,3 +19,10 @@ critic指摘の「待ては旧持ち場へ戻らない」「入口加入は空�
 入口: 同フォルダ Play-Onsite-Clarity.cmd（専用user-data）。実装・出力・画面証拠: review/quality-roadmap/onsite-clarity-20261011/。
 通常版HEAD/通常EXE/旧研究23ea6a4 EXEを照合一致。通常版・旧入口・旧資料へ書込みなし。公開pushなし、remoteなし。
 楽しさ/15〜20分/自発的再挑戦/現地生活Aの成功は未確認。人間試遊の自動依頼なし。
+
+[ゲーム構造変更指令01 / builder先行報告]
+前回2112417から保護コピー colony-structure-01-work。branch research/colony-structure-01、復元タグ before-colony-structure-01。
+表示1.25倍/カメラ1.5倍のみ実装 f74293f。3群7チェック成功、隔離GPU2画像。人間試遊ではない。
+現マップ25×17=425。縦横2倍50×34=1700、面積2倍34×25=850（近似比率35×24=840）。拡張は判断待ち、未実装。
+指定参考6画像を実閲覧。RimWorld未起動。連続時計/多人数仕事/徴兵/調教は影響と候補だけ整理、未実装。
+詳細と証拠: review/quality-roadmap/colony-structure-01/BUILDER_REPORT.txt。通常版/セーブ/入口を保護、公開pushなし。

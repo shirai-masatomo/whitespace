@@ -1,0 +1,14 @@
+{
+  "tested_code_commit": "f74293f1949e23fc6611f2da489915d4f9bed7d0",
+  "render_base_commit": "2112417f7323dd48a063f5dfdb2deb50c4781631",
+  "render_used_uncommitted_changes": true,
+  "sha256": {
+    "game/main.gd": "d07460275c502a18d94cecfc807e8935de3db987ff5f5807e82ed541710c9d99",
+    "game/human_visual.gd": "2386f4b5f9ec943f62c17429758f836a0766b2b2770c5b2d475100a326acfa56",
+    "game/progression_art.gd": "35860b9f9208ca932f60961acaa950cd4cb6c85fb7d08735bd8613f302ed0e54",
+    "tests/test_colony_view.gd": "7c353fa3b21295eb3c801ec5d23995ccbf7139f854fdbb0518815fa63699d39a",
+    "tools/isolated_visual.ps1": "fb3c5e07bbb58a85acb1cc1efb850685d531c2edb8869d5266a8017c1d50248b"
+  },
+  "normal_head": "13c113fa542daa9c6c51d7c09cbb7d220cac3176",
+  "restore_tag": "before-colony-structure-01"
+}

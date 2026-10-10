@@ -1,0 +1,83 @@
+{
+	"camera": {
+		"expected_distance": 315,
+		"half_second_120fps": "(315.0, 0.0)",
+		"half_second_60fps": "(315.0, 0.0)",
+		"half_second_diagonal": "(222.7386, 222.7386)"
+	},
+	"fixture": {
+		"animal_scale": 1.25,
+		"animals": [
+			{
+				"pos": "(4, 10)",
+				"species": "shiba"
+			},
+			{
+				"pos": "(7, 10)",
+				"species": "hen"
+			},
+			{
+				"pos": "(10, 10)",
+				"species": "cat"
+			},
+			{
+				"pos": "(13, 10)",
+				"species": "cow"
+			},
+			{
+				"pos": "(16, 10)",
+				"species": "bullfrog"
+			},
+			{
+				"pos": "(19, 10)",
+				"species": "maid"
+			}
+		],
+		"enemy": "(9, 5)",
+		"human_scale": 1.625,
+		"keeper": "(5, 5)",
+		"keeper_scale": 1.4375
+	},
+	"groups": {
+		"1_camera": [
+			{
+				"check": "630 pixels/second at both 60 and 120 FPS",
+				"passed": true
+			},
+			{
+				"check": "Diagonal key motion has the same speed",
+				"passed": true
+			},
+			{
+				"check": "Camera keys do not move the keeper or step the paused world",
+				"passed": true
+			}
+		],
+		"2_path": [
+			{
+				"check": "Existing human interpolation follows queued cardinal corners and reaches its destination",
+				"passed": true
+			}
+		],
+		"3_display": [
+			{
+				"check": "Human scaling keeps the foot anchor and enlarges selection coverage",
+				"passed": true
+			},
+			{
+				"check": "Animal and delivered-human displays are 1.25 times the prior scale",
+				"passed": true
+			},
+			{
+				"check": "Logical map and movement speed stay at the existing values",
+				"passed": true
+			}
+		]
+	},
+	"method": "Paused rendering fixtures and injected Godot key events; controlled frame deltas; no human play or strategy simulation",
+	"path": {
+		"after_turn": "(5.0, 5.25)",
+		"arrival": "(5.0, 6.0)",
+		"before_turn": "(4.75, 5.0)"
+	}
+}
