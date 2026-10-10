@@ -84,7 +84,14 @@ static func command(w, kind: String, p: Vector2i) -> bool:
 		if not can_wake_hidden(w):return false
 		if w.paused:k.pending_command={"kind":"wake_hidden","pos":p};return true
 		return recover_hidden(w)
-	if kind == "keeper_move": return w.Jobs.enqueue(w,"move",p,-1)
+	if kind == "keeper_move":
+		if not k.get("drafted",false) or not w.walkable(p):return false
+		# A drafted destination replaces the previous direct order; it is not a manual work queue.
+		for previous in w.jobs.duplicate():
+			if previous.get("direct_control",false):w.Jobs.cancel(w,previous.id)
+		if not w.Jobs.enqueue(w,"move",p,-1):return false
+		w.jobs.back().direct_control=true
+		return true
 	if w.paused:
 		if kind in ["keeper_rest", "resume_jobs"]:
 			if k.state != "free" or k.forced_rest: return false

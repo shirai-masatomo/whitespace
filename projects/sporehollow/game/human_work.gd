@@ -54,6 +54,9 @@ static func set_priority(w,key: String,kind: String,value: int):
 static func set_drafted(w,key: String,value: bool):
 	if not w.workers.has(key):return
 	w.workers[key].drafted=value
+	if not value and key=="keeper":
+		for j in w.jobs.duplicate():
+			if j.get("direct_control",false):w.Jobs.cancel(w,j.id)
 	interrupt(w,key,"徴兵中" if value else "仕事に復帰")
 
 static func reason(w,key: String,a) -> String:
@@ -61,11 +64,11 @@ static func reason(w,key: String,a) -> String:
 	if a.get("carrier",-1)>=0 or a.get("state","") in ["captured","restrained"]:return "連れ去り・拘束中"
 	if a.get("hp",0)<=0 or a.get("state","")!="free":return "負傷・療養中"
 	if not a.get("placed",false):return "到着待ち"
+	if a.get("resting",false):return "休息中"
 	if a.get("drafted",false):return "徴兵中"
 	if w.tick<a.get("hurt_until",0):return "被弾から回復中"
 	if a.get("danger_near",false):return "近くの敵に対応中"
 	if a.get("life_need","")=="food":return "空腹・食事を優先"
-	if a.get("resting",false):return "休息中"
 	if key=="keeper":
 		if w.manual_goal!=null:return "移動指示中"
 		if w.jobs_held:

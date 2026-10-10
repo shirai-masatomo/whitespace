@@ -1,0 +1,44 @@
+13c113f:projects/sporehollow/game/keeper_life.gd
+81: 	var k = w.keeper
+82: 	if not w.working(): return false
+83: 	if kind=="wake_hidden" or (kind=="keeper_rest" and k.state=="hidden_rest"):
+84: 		if not can_wake_hidden(w):return false
+85: 		if w.paused:k.pending_command={"kind":"wake_hidden","pos":p};return true
+86: 		return recover_hidden(w)
+87: 	if kind == "keeper_move": return w.Jobs.enqueue(w,"move",p,-1)
+88: 	if w.paused:
+89: 		if kind in ["keeper_rest", "resume_jobs"]:
+ce4a909:projects/sporehollow/tests/visual_characters.gd
+58: 	await capture("native_scale")
+59: 	game.camera.zoom=Vector2.ONE*1.5
+60: 	await capture("characters")
+61: 	await mouse(game.get_canvas_transform()*(game.keeper_pixel()+Vector2(0,-10)))
+62: 	check(game.selected.get("kind")=="keeper","Keeper sprite click selects keeper")
+63: 	await capture("keeper_selected")
+64: 	await mouse(game.screen_cell(Vector2i(11,8)))
+65: 	check(game.world.manual_goal==Vector2i(11,8) and game.world.tick==0,"Paused floor movement plans without execution")
+66: 	await capture("floor_move")
+67: 	await mouse(game.screen_cell(Vector2i(8,7)),MOUSE_BUTTON_RIGHT)
+68: 	check(game.selected.is_empty() and game.world.manual_goal!=null,"Deselect preserves movement")
+69: 	await mouse(game.screen_cell(Vector2i(8,7)))
+70: 	check(game.selected.get("kind")=="floor","Neutral floor click selects floor")
+71: 	await capture("floor_selected")
+72: 	for rate in [0.5,1.0,2.0]:
+73: 		await reset_case();game.world.paused=false;game.speed=rate
+74: 		game.choose_walk();await mouse(game.screen_cell(Vector2i(11,8)))
+75: 		await segment("move_%s_right"%str(rate).replace(".","p"),66)
+76: 		check(game.world.manual_goal==null and game.world.keeper.get("facing")==1,"Right arrival at speed "+str(rate))
+77: 		await mouse(game.screen_cell(Vector2i(10,8)))
+78: 		await segment("move_%s_left"%str(rate).replace(".","p"),66)
+79: 		check(game.world.manual_goal==null and game.world.keeper.get("facing")==-1,"Left stop keeps facing at speed "+str(rate))
+80: 		if rate==1:await capture("left_stop")
+81: 	await reset_case()
+82: 	game.choose_animal(1);game.select_tool("guide",false)
+83: 	await mouse(game.screen_cell(Vector2i(13,9)))
+84: 	check(game.world.jobs.size()==1 and game.world.jobs[0].command_pos==Vector2i(13,9),"Paused floor guidance accepted")
+85: 	await capture("floor_guide")
+86: 	game.world.paused=false;game.speed=2
+87: 	await segment("guide",120)
+88: 	check(game.world.jobs.is_empty() and game.world.animals[0].pos==Vector2i(13,9),"Dog physically arrives on target floor")
+89: 	game.choose_animal(1);game.select_tool("guide",false)
+90: 	await mouse(game.screen_cell(Vector2i(11,9)))

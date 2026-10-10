@@ -20,8 +20,8 @@ func floor_at(p: Vector2i):
 func reset_case():
 	game.world=Farm.new({},17).begin_day();game.world.natural.clear()
 	game.world.keeper.pos=Vector2i(10,8);game.world.keeper.sleepiness=35
-	game.world.animals[0].pos=Vector2i(12,8);game.world.animals[0].mode="stay";game.world.animals[0].order_until=9999
-	game.world.animals[0].order=Vector2i(12,8);game.world.animals[0].home=Vector2i(12,8)
+	game.world.animals[0].pos=Vector2i(12,10);game.world.animals[0].mode="stay";game.world.animals[0].order_until=9999
+	game.world.animals[0].order=Vector2i(12,10);game.world.animals[0].home=Vector2i(12,10)
 	for y in range(7,11):
 		for x in range(8,15):floor_at(Vector2i(x,y))
 	game.reset_view();game.refresh();game.world.paused=true;game.speed=1
@@ -58,19 +58,20 @@ func run():
 	await capture("native_scale")
 	game.camera.zoom=Vector2.ONE*1.5
 	await capture("characters")
+	game.world.Work.set_drafted(game.world,"keeper",true)
 	await mouse(game.get_canvas_transform()*(game.keeper_pixel()+Vector2(0,-10)))
 	check(game.selected.get("kind")=="keeper","Keeper sprite click selects keeper")
 	await capture("keeper_selected")
 	await mouse(game.screen_cell(Vector2i(11,8)))
-	check(game.world.manual_goal==Vector2i(11,8) and game.world.tick==0,"Paused floor movement plans without execution")
+	check(game.world.jobs.any(func(j):return j.get("direct_control",false) and j.pos==Vector2i(11,8)) and game.world.tick==0,"Paused floor movement plans without execution")
 	await capture("floor_move")
 	await mouse(game.screen_cell(Vector2i(8,7)),MOUSE_BUTTON_RIGHT)
-	check(game.selected.is_empty() and game.world.manual_goal!=null,"Deselect preserves movement")
+	check(game.selected.is_empty() and game.world.jobs.any(func(j):return j.get("direct_control",false)),"Deselect preserves movement")
 	await mouse(game.screen_cell(Vector2i(8,7)))
 	check(game.selected.get("kind")=="floor","Neutral floor click selects floor")
 	await capture("floor_selected")
 	for rate in [0.5,1.0,2.0]:
-		await reset_case();game.world.paused=false;game.speed=rate
+		await reset_case();game.world.paused=false;game.speed=rate;game.world.Work.set_drafted(game.world,"keeper",true)
 		game.choose_walk();await mouse(game.screen_cell(Vector2i(11,8)))
 		await segment("move_%s_right"%str(rate).replace(".","p"),66)
 		check(game.world.manual_goal==null and game.world.keeper.get("facing")==1,"Right arrival at speed "+str(rate))
@@ -80,12 +81,12 @@ func run():
 		if rate==1:await capture("left_stop")
 	await reset_case()
 	game.choose_animal(1);game.select_tool("guide",false)
-	await mouse(game.screen_cell(Vector2i(13,9)))
-	check(game.world.jobs.size()==1 and game.world.jobs[0].command_pos==Vector2i(13,9),"Paused floor guidance accepted")
+	await mouse(game.screen_cell(Vector2i(13,10)))
+	check(game.world.jobs.size()==1 and game.world.jobs[0].command_pos==Vector2i(13,10),"Paused floor guidance accepted")
 	await capture("floor_guide")
 	game.world.paused=false;game.speed=2
 	await segment("guide",120)
-	check(game.world.jobs.is_empty() and game.world.animals[0].pos==Vector2i(13,9),"Dog physically arrives on target floor")
+	check(game.world.jobs.is_empty() and game.world.animals[0].pos==Vector2i(13,10),"Dog physically arrives on target floor")
 	game.choose_animal(1);game.select_tool("guide",false)
 	await mouse(game.screen_cell(Vector2i(11,9)))
 	await segment("guide_left",120)

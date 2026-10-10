@@ -1,0 +1,207 @@
+{
+	"failures": 0,
+	"groups": [
+		{
+			"checks": [
+				{
+					"check": "Legacy guide command accepted",
+					"passed": true
+				},
+				{
+					"check": "Animal physically arrived at the allocated reachable destination",
+					"passed": true
+				},
+				{
+					"check": "Old exact-coordinate expectation targets the installed idol footprint",
+					"passed": true
+				}
+			],
+			"final": {
+				"animal": "(13, 10)",
+				"jobs": [],
+				"keeper": "(12, 10)",
+				"log": [
+					{
+						"animal_id": 1,
+						"event": "admitted",
+						"pos": [
+							8,
+							13
+						],
+						"tick": 0
+					},
+					{
+						"event": "order_reserved",
+						"id": 1,
+						"order": "guide",
+						"targets": [
+							1
+						],
+						"tick": 0,
+						"unassigned": []
+					},
+					{
+						"category": "other",
+						"event": "assigned",
+						"id": 1,
+						"tick": 1,
+						"worker": "keeper"
+					},
+					{
+						"animal_id": 1,
+						"destination": [
+							13,
+							10
+						],
+						"distance": 1,
+						"event": "order_issued",
+						"tick": 3
+					},
+					{
+						"animal_id": 1,
+						"destination": [
+							13,
+							10
+						],
+						"event": "guide_arrived",
+						"id": 1,
+						"tick": 14
+					},
+					{
+						"animal_id": 1,
+						"event": "completed",
+						"id": 1,
+						"kind": "animal_order",
+						"pos": [
+							13,
+							9
+						],
+						"tick": 14
+					}
+				]
+			},
+			"initial": {
+				"allocated": "(13, 10)",
+				"animal": "(12, 8)",
+				"idol_cells": [
+					"(12, 8)",
+					"(13, 8)",
+					"(12, 9)",
+					"(13, 9)"
+				],
+				"keeper": "(10, 8)",
+				"requested": "(13, 9)",
+				"requested_walkable": false
+			},
+			"name": "Exact legacy guide reproduction"
+		},
+		{
+			"checks": [
+				{
+					"check": "Undrafted ground move is rejected; autonomous work remains in charge",
+					"passed": true
+				},
+				{
+					"check": "Paused draft move records a destination without executing it",
+					"passed": true
+				},
+				{
+					"check": "New destination replaces the previous direct command",
+					"passed": true
+				},
+				{
+					"check": "Hungry drafted person moves; satiety falls but eating is suspended",
+					"passed": true
+				},
+				{
+					"check": "Undrafting another worker preserves the keeper direct order",
+					"passed": true
+				},
+				{
+					"check": "Undrafting clears stale direct movement instead of executing it as autonomous work",
+					"passed": true
+				},
+				{
+					"check": "Draft command cannot move a forced sleeper",
+					"passed": true
+				}
+			],
+			"name": "Drafted movement, hunger and suspension"
+		},
+		{
+			"checks": [
+				{
+					"check": "Valid animal guidance is still accepted",
+					"passed": true
+				},
+				{
+					"check": "Valid guidance physically reaches the requested cell",
+					"passed": true
+				},
+				{
+					"check": "Existing equipment order accepted",
+					"passed": true
+				},
+				{
+					"check": "Equipment is fetched, carried and equipped exactly once",
+					"passed": true
+				},
+				{
+					"check": "Existing eligible prayer accepted",
+					"passed": true
+				},
+				{
+					"check": "Prayer completes once with its existing karma and aftermath records",
+					"passed": true
+				},
+				{
+					"check": "Damage still interrupts a started prayer without a reward or stale ownership",
+					"passed": true
+				}
+			],
+			"name": "Retained legal guidance, equipment and prayer"
+		},
+		{
+			"checks": [
+				{
+					"check": "Undrafted actor's ground click does not create an old manual movement queue",
+					"passed": true
+				},
+				{
+					"check": "Drafted ground click records movement through the actual scene input path",
+					"passed": true
+				},
+				{
+					"check": "Deselecting preserves the drafted destination",
+					"passed": true
+				},
+				{
+					"check": "Actual scene frame loop executes the drafted destination",
+					"passed": true
+				},
+				{
+					"check": "Merchant approach remains available without drafting",
+					"passed": true
+				},
+				{
+					"check": "Existing merchant approach reaches and opens the shop",
+					"passed": true
+				}
+			],
+			"merchant": {
+				"destination": "(2, 7)",
+				"market_open": true,
+				"position": "(2, 7)",
+				"tick": 24
+			},
+			"movement": {
+				"jobs": [],
+				"position": "(6, 6)",
+				"tick": 11
+			},
+			"name": "Actual scene input and merchant route"
+		}
+	],
+	"method": "Controlled production World.step checks plus injected scene InputEvents and manually advanced main._process frames; no human play",
+	"passed": true
+}

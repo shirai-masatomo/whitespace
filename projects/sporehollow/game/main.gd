@@ -1295,7 +1295,7 @@ func board_click(event):
 		choose_walk()
 		if not keeper_hint_shown:
 			keeper_hint_shown = true
-			notice("地面を左クリックで移動を予約")
+			notice("徴兵中は地面クリックで移動先を指示できます")
 		return
 	var planned = job_at(cell)
 	if planned >= 0:
@@ -1337,7 +1337,7 @@ func board_click(event):
 			refresh()
 			return
 	if selected.get("kind") == "keeper":
-		if not world.act("keeper_move",cell): notice("移動できません")
+		if not world.act("keeper_move",cell): notice("移動指示は役割画面で徴兵してから" if not world.keeper.get("drafted",false) else "移動できません")
 	elif tool in Farm.ORDERS:
 		command_selected(tool, cell)
 	elif tool != "":
@@ -2210,7 +2210,8 @@ func request_merchant():
 		if world.walkable(cell) and not world.actor_occupied(cell,world.keeper.pos) and not world.find_path(world.keeper.pos,cell).is_empty():candidates.append(cell)
 	# Prefer the front of the cart; side positions are obstruction fallbacks.
 	if candidates.is_empty():notice("商人の近くへ行けません");return
-	if not world.act("keeper_move",candidates[0]):notice("今は話しかけに行けません");return
+	if not world.Jobs.enqueue(world,"move",candidates[0],-1):notice("今は話しかけに行けません");return
+	world.jobs.back().purpose="merchant"
 	merchant_talk_target=candidates[0]
 	world.merchant_approach=merchant_talk_target
 	world.merchant_approach_job=world.jobs.back().id
