@@ -1,0 +1,45 @@
+{
+	"checks": [
+		{
+			"group": "1_geometry",
+			"idol_anchor": "(24, 16)",
+			"idol_center": "(25.0, 17.0)",
+			"passed": true
+		},
+		{
+			"events": [
+				{
+					"calendar_day": 1,
+					"elapsed_ticks": 360,
+					"id": "calendar:1:day",
+					"minute": 600,
+					"period": "day"
+				},
+				{
+					"calendar_day": 1,
+					"elapsed_ticks": 1008,
+					"id": "calendar:1:night",
+					"minute": 1140,
+					"period": "night"
+				},
+				{
+					"calendar_day": 2,
+					"elapsed_ticks": 1728,
+					"id": "calendar:2:morning",
+					"minute": 300,
+					"period": "morning"
+				}
+			],
+			"group": "2_day_length",
+			"passed": true
+		},
+		{
+			"calendar_day": 2,
+			"group": "3_boundary_delivery",
+			"note": "Chunking crosses 10:00, 19:00 and next-day 05:00 exactly once, without a dawn stop",
+			"passed": true
+		}
+	],
+	"integrated_world": false,
+	"method": "Headless pure geometry/clock checks; no world, actor or save mutation"
+}

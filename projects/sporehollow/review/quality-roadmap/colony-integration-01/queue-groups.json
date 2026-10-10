@@ -1,0 +1,23 @@
+{
+	"check": "Default all-jobs view groups four wall jobs and one collection under headings; appended wall appears exactly once; original job records and execution order remain unchanged",
+	"displayed_ids": [
+		1,
+		3,
+		4,
+		5,
+		2
+	],
+	"execution_ids": [
+		1,
+		2,
+		3,
+		4,
+		5
+	],
+	"headers": [
+		"建築 · 4件",
+		"回収 · 1件"
+	],
+	"method": "Real enqueue calls on a paused fixture, isolated GPU; no human play",
+	"passed": true
+}
