@@ -228,6 +228,9 @@ func _ready():
 	if automated: get_window().unfocusable = true
 	if not automated and not save_load_blocked and not world.story.intro_seen: StoryView.open(self,"intro")
 	if "--smoke" in OS.get_cmdline_user_args(): get_tree().create_timer(2).timeout.connect(get_tree().quit)
+	if "--review-autonomy" in OS.get_cmdline_user_args() and "--isolated-review" in OS.get_cmdline_user_args() and OS.get_environment("FARM_REVIEW_OUTPUT")!="":
+		var review=load("res://game/autonomy_entry_review.gd").new()
+		add_child(review);review.call_deferred("run")
 
 func add_button(parent: Control, id: String, text_value: String, area: Rect2, callback: Callable):
 	var button = Button.new()
@@ -804,7 +807,7 @@ func change_job_page(offset: int):
 
 func refresh_jobs():
 	queue_controls.visible = world.working()
-	var signature = str(job_page)+job_category + str(world.natural) + str(world.jobs) + str(world.keeper.state) + str(world.paused) + world.job_hold_reason + str(world.manual_goal) + str(world.keeper.resting)
+	var signature = str(job_page)+job_category + str(world.natural) + str(world.jobs) + str(world.keeper.state) + str(world.paused) + world.job_hold_reason + str(world.manual_goal) + str(world.keeper.resting) + world.Jobs.status(world)
 	if signature == queue_signature or queue_drag_id >= 0: return
 	queue_signature = signature
 	for child in queue_controls.get_children():
@@ -815,7 +818,6 @@ func refresh_jobs():
 	var title = Label.new()
 	title.position = Vector2(1010, 64)
 	title.text = "予定 %d" % world.jobs.size()
-	if world.Jobs.status(world)!="": title.text += " · " + world.Jobs.status(world)
 	title.size.x = 104
 	title.clip_text = true
 	title.tooltip_text = title.text
@@ -833,8 +835,12 @@ func refresh_jobs():
 	var visible_jobs=all_jobs.slice(job_page*page_size,(job_page+1)*page_size)
 	var previous_category=""
 	var row_y=94.0
+	if world.Jobs.status(world)!="":
+		var status=Label.new();status.name="JobStatus";status.text=world.Jobs.status(world);status.position=Vector2(1010,94);status.size.x=248
+		status.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART;status.add_theme_font_size_override("font_size",14);queue_controls.add_child(status)
+		row_y+=maxf(24,status.get_minimum_size().y)+6
 	if visible_jobs.is_empty():
-		var empty=Label.new();empty.text="このカテゴリの予定はありません";empty.position=Vector2(1010,98);empty.add_theme_font_size_override("font_size",13);queue_controls.add_child(empty)
+		var empty=Label.new();empty.text="このカテゴリの予定はありません";empty.position=Vector2(1010,row_y);empty.add_theme_font_size_override("font_size",13);queue_controls.add_child(empty)
 	for i in range(visible_jobs.size()):
 		if job_category!="登録順" and visible_jobs[i].category!=previous_category:
 			previous_category=visible_jobs[i].category
@@ -2536,6 +2542,8 @@ func draw_market_world():
 	if world.merchant_present():label_on(self,q+Vector2(95,0),"商人 · 待っています" if world.merchant_waiting() and world.tick*Farm.DT>=Farm.MERCHANT_DELAY+Farm.MERCHANT_SECONDS else "商人 · あと%d秒"%maxi(0,ceili(world.merchant_leave_at-world.tick*Farm.DT)),14,UI.PAPER)
 
 func draw_merchant_bubble():
+	# Keep the ambient greeting away from active work/selection panels. The cart label remains visible.
+	if group>=0 or colony_page!="" or not selected.is_empty() or tool!="":return
 	if not world.merchant_present() or merchant_visual_elapsed()<1.8:return
 	var anchor=get_canvas_transform()*merchant_world_position()
 	if not Rect2(0,49,1280,699).has_point(anchor):return

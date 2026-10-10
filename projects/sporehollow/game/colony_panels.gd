@@ -36,12 +36,15 @@ static func build(g):
 			g.UI.selected(g.buttons[id],g.architect_category==category);index+=1
 		if g.subtask_choices().is_empty():label(g.colony_panel,"今は使えるものがありません",Vector2(16,62),15)
 	elif g.colony_page=="roles":
-		var p=panel(g,Rect2(16,430,900,312))
+		var people=Model.people(g.world)
+		var list_height=mini(186,maxi(96,people.size()*96))
+		var panel_height=127+list_height
+		var p=panel(g,Rect2(16,742-panel_height,900,panel_height))
 		label(p,"役割と現在の仕事",Vector2(18,12),21)
 		label(p,"各人が優先度と状態で仕事を選びます。数字は登録IDです。",Vector2(18,43),14)
-		var scroll=ScrollContainer.new();scroll.position=Vector2(16,79);scroll.size=Vector2(864,186);p.add_child(scroll)
+		var scroll=ScrollContainer.new();scroll.position=Vector2(16,79);scroll.size=Vector2(864,list_height);p.add_child(scroll)
 		var list=VBoxContainer.new();list.size_flags_horizontal=Control.SIZE_EXPAND_FILL;scroll.add_child(list)
-		for row in Model.people(g.world):
+		for row in people:
 			var button=Button.new();button.name="Person_"+row.key;button.custom_minimum_size=Vector2(840,38);button.alignment=HORIZONTAL_ALIGNMENT_LEFT;button.focus_mode=Control.FOCUS_NONE
 			button.text="%s ｜ %s ｜ HP %d/%d"%[row.name,row.state if row.state!="" else row.role,row.hp,row.max_hp]
 			g.UI.button(button);button.pressed.connect(person_selected.bind(g,row));list.add_child(button)
@@ -57,7 +60,7 @@ static func build(g):
 			g.UI.button(draft);draft.add_theme_font_size_override("font_size",14);g.UI.selected(draft,a.drafted);draft.pressed.connect(draft_changed.bind(g,row.key));priorities.add_child(draft)
 		g.add_button(g.palette,"storage_zone","保管域を指定",Rect2(34,696,180,34),select_storage.bind(g))
 		g.UI.selected(g.buttons.storage_zone,g.tool=="storage")
-		label(p,"地面をクリック。40個/マス（仮）",Vector2(212,278),13)
+		label(p,"地面をクリック。40個/マス（仮）",Vector2(212,panel_height-34),13)
 		g.add_button(g.palette,"research_save","研究保存",Rect2(636,696,122,34),research_save.bind(g))
 		g.add_button(g.palette,"research_load","研究読込",Rect2(770,696,122,34),research_load.bind(g))
 	elif g.group==1 and g.selected_animals.is_empty():

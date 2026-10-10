@@ -1,7 +1,7 @@
 config_version=5
 
 [application]
-config/name="ホイッスル牧場・自律作業研究"
+config/name="ホイッスル牧場・自律作業研究（部分試作）"
 config/use_custom_user_dir=true
 config/custom_user_dir_name="WhistleResearchAutonomy"
 run/main_scene="res://game/main.tscn"
@@ -15,6 +15,8 @@ window/size/window_height_override=800
 window/stretch/mode="canvas_items"
 
 [rendering]
+; Keep research relaunches independent of the OpenGL disk shader cache.
+shader_compiler/shader_cache/enabled=false
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
 environment/defaults/default_clear_color=Color(0.10, 0.16, 0.15, 1)
