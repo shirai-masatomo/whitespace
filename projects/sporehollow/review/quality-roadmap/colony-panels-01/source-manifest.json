@@ -1,0 +1,12 @@
+{
+  "code_commit": "278617720602e215bd299e2c35c2e4063a4f80c9",
+  "category_commit": "4f84eac",
+  "render_used_worktree_changes": true,
+  "sha256": {
+    "game/main.gd": "c81732705f55c033d126913f2d0cd59a15fe53f89341cb3196f0d6865cec3355",
+    "game/colony_view_model.gd": "156134ba69454302dc5da00fe0234fdbd2219f7c0b5df54bf2aca28d9c206490",
+    "game/colony_panels.gd": "a33f61e324e37bde9b9b82d08a799cc94c46dfce07048de84bc141b4b811994d",
+    "tests/test_colony_panels.gd": "0f753d3b28f6d921f74e42e38b81caa6ce1aefd1984c7453f3caff4276228c23",
+    "tools/isolated_visual.ps1": "f543c94b3406e4ef92828db16f33a3ebb8d492b56eeee44a637be6805adbe9b9"
+  }
+}

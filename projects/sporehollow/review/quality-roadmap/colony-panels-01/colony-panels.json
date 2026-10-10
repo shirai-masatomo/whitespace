@@ -1,0 +1,85 @@
+{
+	"checks": [
+		{
+			"check": "Fixture reserves real construction, gathering and item jobs",
+			"passed": true
+		},
+		{
+			"check": "Category adapters retain global order and job identity",
+			"passed": true
+		},
+		{
+			"check": "Filtered queue shows the original execution number",
+			"passed": true
+		},
+		{
+			"check": "Filtered rows cannot accidentally reorder hidden jobs",
+			"passed": true
+		},
+		{
+			"check": "Roles replaces the public keeper tab and displays the existing human",
+			"passed": true
+		},
+		{
+			"check": "Role selection retains rest, resume, book and inventory routes",
+			"passed": true
+		},
+		{
+			"check": "Animal selection reaches existing commands without an active taming action",
+			"passed": true
+		},
+		{
+			"check": "Architect categories connect to existing floor tools",
+			"passed": true
+		},
+		{
+			"check": "Tab cycles Architect, Animals and Roles",
+			"passed": true
+		},
+		{
+			"check": "UI navigation preserves job IDs, reservations, progress, execution order and simulation time",
+			"passed": true
+		}
+	],
+	"jobs": [
+		{
+			"animal_id": -1,
+			"id": 1,
+			"kind": "wall",
+			"pos": "(5, 6)",
+			"reserved": 10,
+			"resource": "soil",
+			"started": false,
+			"state": "pending",
+			"work_credit": 0.5
+		},
+		{
+			"animal_id": -1,
+			"id": 2,
+			"kind": "collect",
+			"pos": "(6, 6)",
+			"reserved": 0,
+			"resource": "",
+			"started": false,
+			"state": "pending"
+		},
+		{
+			"animal_id": -1,
+			"id": 3,
+			"kind": "collect",
+			"pos": "(7, 6)",
+			"reserved": 0,
+			"resource": "",
+			"started": false,
+			"state": "pending"
+		}
+	],
+	"method": "Paused controlled jobs and injected Godot mouse/key events; one isolated GPU image; no human play",
+	"new_priority_rules": false,
+	"resources": {
+		"soil": 90,
+		"stone": 0,
+		"wood": 0
+	},
+	"taming_enabled": false
+}
