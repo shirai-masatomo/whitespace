@@ -1,0 +1,139 @@
+{
+	"automated": false,
+	"checks": [
+		{
+			"check": "UI wall designation created the real construction job",
+			"passed": true
+		},
+		{
+			"check": "UI designated storage",
+			"passed": true
+		},
+		{
+			"check": "Normal engine frames reached material carrying",
+			"passed": true
+		},
+		{
+			"check": "UI saved paused carrying state with assigned job",
+			"passed": true
+		},
+		{
+			"check": "Normal scene process stayed enabled without manual stepping",
+			"passed": true
+		}
+	],
+	"failures": [],
+	"fixture": "Before designation only: seed31 daytime, cleared trees/natural/loose stock, no natural spawns, keeper(4,6) satiety31.6, wood18@(8,6), mushroom2@(6,5), dog(20,13) staying. Existing day length/speed kept. No API work actions after this point.",
+	"method": "Exported normal main scene; engine-owned _process; injected UI input only after initial fixture; no World.step or manual main._process calls",
+	"passed": true,
+	"persistence_enabled": true,
+	"phase": "save",
+	"pid": 20252,
+	"saved": {
+		"built": 0,
+		"claims": {
+			"structure:4:8": 1
+		},
+		"jobs": [
+			{
+				"animal_id": -1,
+				"assigned_to": "keeper",
+				"block_reason": "",
+				"id": 1,
+				"kind": "wood_wall",
+				"material_claims": [],
+				"phase": "fetch",
+				"physical": true,
+				"pos": "(4, 8)",
+				"required": 10,
+				"reserved": 0,
+				"resource": "wood",
+				"started": false,
+				"state": "working",
+				"work_category": "build"
+			},
+			{
+				"animal_id": -1,
+				"id": 2,
+				"kind": "haul",
+				"pos": "(8, 6)",
+				"reserved": 0,
+				"resource": "",
+				"started": false,
+				"state": "pending",
+				"stock_id": 4,
+				"work_category": "haul"
+			},
+			{
+				"animal_id": -1,
+				"id": 3,
+				"kind": "haul",
+				"pos": "(6, 5)",
+				"reserved": 0,
+				"resource": "",
+				"started": false,
+				"state": "pending",
+				"stock_id": 5,
+				"work_category": "haul"
+			}
+		],
+		"paused": true,
+		"pos": "(7, 6)",
+		"satiety": 31.3,
+		"stock": [
+			{
+				"amount": 10,
+				"born_day": 1,
+				"claims": {},
+				"incubating": false,
+				"job_id": -1,
+				"kind": "wood",
+				"location": "ground",
+				"owner": "",
+				"pos": "(8, 6)",
+				"stock_id": 4
+			},
+			{
+				"amount": 2,
+				"born_day": 1,
+				"claims": {},
+				"incubating": false,
+				"job_id": -1,
+				"kind": "mushroom",
+				"location": "ground",
+				"owner": "",
+				"pos": "(6, 5)",
+				"stock_id": 5
+			},
+			{
+				"amount": 8,
+				"born_day": 1,
+				"claims": {},
+				"incubating": false,
+				"job_id": 1,
+				"kind": "wood",
+				"location": "carry",
+				"owner": "keeper",
+				"pos": "(7, 6)",
+				"stock_id": 6
+			}
+		],
+		"tick": 6
+	},
+	"snapshot_path": "C:/Users/masat/Documents/Codex/2026-10-10/task/colony-structure-01-work/projects/sporehollow/artifacts/autonomy-entry-01/bundle/user-data/WhistleResearchAutonomy/autonomy.snapshot",
+	"states": [
+		{
+			"cargo": [],
+			"satiety": 31.6,
+			"state": "仕事を探しています",
+			"tick": 0
+		},
+		{
+			"cargo": [],
+			"satiety": 31.55,
+			"state": "建築 #1 · 物資を取りに移動",
+			"tick": 1
+		}
+	],
+	"user_data": "C:/Users/masat/Documents/Codex/2026-10-10/task/colony-structure-01-work/projects/sporehollow/artifacts/autonomy-entry-01/bundle/user-data/WhistleResearchAutonomy"
+}

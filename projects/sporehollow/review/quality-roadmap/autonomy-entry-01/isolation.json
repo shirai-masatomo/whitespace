@@ -1,0 +1,44 @@
+﻿[
+    {
+        "start_utc":  "2026-10-10T20:05:22.8148833Z",
+        "data_root":  "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\autonomy-entry-01\\bundle\\user-data",
+        "result":  {
+                       "PID":  20252,
+                       "ThreadID":  16168,
+                       "ExitCode":  0,
+                       "OwnedWindowCount":  2,
+                       "Station":  "Service-0x0-bf6d9650$",
+                       "Desktop":  "Render_ceeff5214f604c2284e529f6e27a9539",
+                       "ObservedDesktop":  "Render_ceeff5214f604c2284e529f6e27a9539",
+                       "NonInteractive":  true,
+                       "DesktopMatched":  true,
+                       "TimedOut":  false
+                   },
+        "end_utc":  "2026-10-10T20:05:27.7359130Z",
+        "command":  "\"C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\autonomy-entry-01\\bundle\\WhistleRanch-Autonomy-Partial.exe\" --audio-driver Dummy --rendering-method gl_compatibility --max-fps 30 --resolution 1280x800 --log-file \"C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\autonomy-entry-01\\bundle\\verification/save.log\" -- --isolated-review --review-autonomy",
+        "executable":  "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\autonomy-entry-01\\bundle\\WhistleRanch-Autonomy-Partial.exe",
+        "phase":  "save",
+        "sha256":  "CF22339EC5048FFBA29E029539A1DD2A842016F77041F86F269914D909D44E06"
+    },
+    {
+        "start_utc":  "2026-10-10T20:05:27.9182263Z",
+        "data_root":  "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\autonomy-entry-01\\bundle\\user-data",
+        "result":  {
+                       "PID":  39724,
+                       "ThreadID":  33352,
+                       "ExitCode":  0,
+                       "OwnedWindowCount":  2,
+                       "Station":  "Service-0x0-bf6d9650$",
+                       "Desktop":  "Render_87c35817a3b14346a7728ae00b493cf7",
+                       "ObservedDesktop":  "Render_87c35817a3b14346a7728ae00b493cf7",
+                       "NonInteractive":  true,
+                       "DesktopMatched":  true,
+                       "TimedOut":  false
+                   },
+        "end_utc":  "2026-10-10T20:05:43.3803658Z",
+        "command":  "\"C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\autonomy-entry-01\\bundle\\WhistleRanch-Autonomy-Partial.exe\" --audio-driver Dummy --rendering-method gl_compatibility --max-fps 30 --resolution 1280x800 --log-file \"C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\autonomy-entry-01\\bundle\\verification/resume.log\" -- --isolated-review --review-autonomy --resume-entry",
+        "executable":  "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\autonomy-entry-01\\bundle\\WhistleRanch-Autonomy-Partial.exe",
+        "phase":  "resume",
+        "sha256":  "CF22339EC5048FFBA29E029539A1DD2A842016F77041F86F269914D909D44E06"
+    }
+]

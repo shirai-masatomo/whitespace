@@ -1,0 +1,42 @@
+ホイッスル牧場：部分試作の通常シーン一貫動作・専用入口再起動
+
+結果
+研究コード 2366024456290949e44dd5364d674375cc920ab3、前段 e94a476。UI壁指定→材料運搬→食事→復帰→壁完成を、専用EXEの通常main.tscn・エンジン所有の_processで通した。途中にUI保存→プロセス終了→同じlauncher/EXE/データ領域から新プロセス起動→UI研究読込を挟み、携行/担当/工程/数量/tickを復元した。最初の技術的な縦の流れを確認した結果であり、面白さ/全機能/長期プレイの合格ではない。
+
+実行と制御範囲
+Launch-Autonomy.ps1の通常起動先と検証起動先は同一EXE・同一user-data。検証だけは-Verifyで非対話desktop、Dummy音声、上限30fps、入力注入用引数を付加する。EXEの通常main.tscnを起動し、automated=false、persistence_enabled=true、process有効を維持。別シーンの代役、World.stepの手動呼出し、main._processの手動反復は使わない。game/autonomy_entry_review.gdは親mainの観測とGodot InputEvent注入だけを行う。
+壁指定前に許可された初期fixtureを設定：seed31の昼、木/自然物/初期地面物資を除去、自然発生停止、牧場主(4,6)・満腹31.6、木材18を(8,6)、キノコ2を(6,5)、犬(20,13)で待機。初回説明を閉じる。既存の日長と速度1倍を維持。壁指定以降はゲーム工程・経路・仕事・消費をAPIで実行/完了しない。
+注入したUI操作：アーキテクト→木壁→(4,8)指定、役割→保管域→(10,7)、再開、携行を観測後に停止→研究保存。最初のプロセスをget_tree().quitで正常終了。二つ目は通常起動状態を確認して役割→研究読込→再開。食事と完成を観測し、最後だけUI停止。物理マウスでの人間試遊ではない。
+
+途中保存と完成の実測
+保存PID=20252、再起動PID=39724。双方終了0、NonInteractive=true、DesktopMatched=true、両ログにERROR/SCRIPT ERRORなし。
+保存はtick6、位置(7,6)、満腹31.3、木材8個携行、地面木材10/キノコ2、建築job1の担当keeper、対象予約structure:4:8=1、started=false。二つ目のUI読込直後に、tick/位置/満腹/paused/全jobs（担当・工程を含む）/対象予約/現物台帳/builtがバイナリ保存した比較値と一致。
+以後は通常フレームでtick7木材8運搬、tick15再取得、tick22木材2運搬、tick29現場作業、tick32食事へ移動、tick38食事、tick45食事終了、tick46復帰、tick51現場作業、tick55壁完成。物資は木材18=残8+建築10、食料2=残1+食事1、満腹73.85。対象予約は0。未完運搬予定2件は残る。
+55tick=ゲーム内13.75秒。今回初めて通常生産用フレーム進行で再現した。保存・起動・停止時間を含む実壁時計13.75秒という主張ではない。研究snapshotは明示読込であり、通常日開始セーブとは別のまま。通常版の保存先にはアクセスしていない。
+
+UI最小修正と画像
+main.gd refresh_jobs：予定件数/カテゴリの下へ幅248の折返し状態行を分離し、状態変化も再描画キーへ含めた。完成時の「仕事を完了・次を探す」が欠けず表示される。
+colony_panels.gd build：役割リスト人数に合わせ、1人時の高さを312から223へ縮めた。優先/徴兵ボタン、保管域、研究保存/読込に必要な領域を残す。初稿84pxではボタン下端が窮屈だったためリスト96pxへ修正。
+main.gd draw_merchant_bubble：作業/選択パネル利用時に環境的な挨拶吹き出しを抑え、商人名と残り時間は維持。食事画面の作業情報との重なりを解消。
+最終meal-live.png、wall-live.pngの2枚を目視。右上状態が全文表示、役割のボタン下端に欠けなし、吹き出し重なりなし。物資の矩形と数字、食事の立ち姿は未完成表示として維持し、新素材は制作していない。
+
+初回検証で判明した起動問題
+初回もゲーム経路の全判定は通ったが、二つ目のプロセスでGLES3 shader初期化エラーが出たため最終合格にしなかった。研究コピーのproject.godotだけで shader_compiler/shader_cache/enabled=false とし、同じデータを保ったまま最終EXEを再出力・同じ2プロセス経路を確認。最終はエラーなし。キャッシュファイル削除やACL変更はしていない。キャッシュ無効化による起動コストは未計測。
+設定の根拠：Godot公式ProjectSettingsのshader cache説明 https://docs.godotengine.org/en/stable/classes/class_projectsettings.html#class-projectsettings-property-rendering-shader-compiler-shader-cache-enabled と GLES3起動ソース https://raw.githubusercontent.com/godotengine/godot/4.7.2-stable/drivers/gles3/rasterizer_gles3.cpp 。エラー根因をドライバ不具合と断定してはいない。
+最初の出力はsandbox一時ファイル権限で失敗し、正規require_escalatedで再出力した。通常版/運用/ACLの変更なし。
+
+異常中断の既存証拠（再試験を追加しない）
+retained-commands-01/chain-regression.json 第2群およびtests/test_work_food_chain.gd：携行中に徴兵→携行品が地面へ戻り、物資総量一致・全物資予約空→解除して再取得。その後、既存carrier状態で作業不能化→携行/担当/予約解放・総量一致→解除して壁完成を実測済み。
+同群で食事中手動休息の未消費食料保持、材料消失時の阻害と対象予約解放、新材料で着工後取消時の返却+消費数量保存を確認済み。着工前全額/着工後50%返却の既存区別は変更していない。別人への引継ぎそのものをこの例で確認したとは主張しない。親指示の代表的な徴兵→解除の証拠として既存実測を使用し、捕獲新システムやケース追加はしていない。
+
+ユーザー用入口・保護
+確認入口：C:\Users\masat\Documents\codex_test\projects\sporehollow\確認入口\研究_自律作業と食事_部分試作_2366024.lnk
+launcher：C:\Users\masat\Documents\Codex\2026-10-10\task\colony-structure-01-work\projects\sporehollow\artifacts\autonomy-entry-01\bundle\Launch-Autonomy.ps1
+EXE：C:\Users\masat\Documents\Codex\2026-10-10\task\colony-structure-01-work\projects\sporehollow\artifacts\autonomy-entry-01\bundle\WhistleRanch-Autonomy-Partial.exe
+EXE SHA256：cf22339ec5048ffba29e029539a1dd2a842016f77041f86f269914d909d44e06
+専用データ：C:/Users/masat/Documents/Codex/2026-10-10/task/colony-structure-01-work/projects/sporehollow/artifacts/autonomy-entry-01/bundle/user-data/WhistleResearchAutonomy
+入口は新規ファイルのみ。既存ショートカットを上書きしていない。アプリ名/入口/同梱説明に部分試作と明示。研究読込には検証のtick6携行中snapshotを残したので、役割→研究読込→再開で続きを観察できる。通常起動は既存の日開始状態からで、勝手にfixtureへ置き換えない。
+公開pushなし。通常版・通常セーブは未変更。確認入口フォルダだけ、許可された新規ショートカットを追加した。コード履歴と前段e94a476で復元可能。
+
+証拠と限界
+本フォルダのsave.json/resume.json、isolation.json、save.log/resume.log、expected-carry.bin、mid-carry.snapshot、代表PNG2枚、BUILD.json、source-sha256.json。最終配布EXEと検証EXEのSHAは一致。外部criticは親が実施中。人間試遊、面白さ、自発的再挑戦、全機能互換、全保存状況、長期食料収支は未確認。これ以上の新機能へ進んでいない。

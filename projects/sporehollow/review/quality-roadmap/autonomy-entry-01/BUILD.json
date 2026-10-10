@@ -1,0 +1,17 @@
+{
+  "code_commit": "2366024456290949e44dd5364d674375cc920ab3",
+  "predecessor": "e94a4766121059c900bbbee46344779b0b61afe4",
+  "exe": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\autonomy-entry-01\\bundle\\WhistleRanch-Autonomy-Partial.exe",
+  "sha256": "cf22339ec5048ffba29e029539a1dd2a842016f77041f86f269914d909d44e06",
+  "size": 127441920,
+  "entry": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\autonomy-entry-01\\bundle\\Launch-Autonomy.ps1",
+  "shortcut": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\確認入口\\研究_自律作業と食事_部分試作_2366024.lnk",
+  "data_root": "C:/Users/masat/Documents/Codex/2026-10-10/task/colony-structure-01-work/projects/sporehollow/artifacts/autonomy-entry-01/bundle/user-data/WhistleResearchAutonomy",
+  "processes": [
+    20252,
+    39724
+  ],
+  "verification_passed": true,
+  "human_play": false,
+  "partial_prototype": true
+}

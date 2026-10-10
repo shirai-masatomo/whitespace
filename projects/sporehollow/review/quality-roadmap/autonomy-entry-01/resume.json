@@ -1,0 +1,344 @@
+{
+	"automated": false,
+	"before_load": {
+		"built": 0,
+		"claims": {},
+		"jobs": [],
+		"paused": true,
+		"pos": "(6, 13)",
+		"satiety": 100.0,
+		"stock": [
+			{
+				"amount": 100,
+				"born_day": 1,
+				"claims": {},
+				"incubating": false,
+				"job_id": -1,
+				"kind": "soil",
+				"location": "ground",
+				"owner": "",
+				"pos": "(1, 5)",
+				"stock_id": 1
+			},
+			{
+				"amount": 2,
+				"born_day": 1,
+				"claims": {},
+				"incubating": false,
+				"job_id": -1,
+				"kind": "dog_food",
+				"location": "ground",
+				"owner": "",
+				"pos": "(1, 5)",
+				"stock_id": 2
+			},
+			{
+				"amount": 4,
+				"born_day": 1,
+				"claims": {},
+				"incubating": false,
+				"job_id": -1,
+				"kind": "mushroom",
+				"location": "ground",
+				"owner": "",
+				"pos": "(1, 5)",
+				"stock_id": 3
+			}
+		],
+		"tick": 0
+	},
+	"checks": [
+		{
+			"check": "Fresh process entered ordinary startup before explicit research load",
+			"passed": true
+		},
+		{
+			"check": "UI research load restored carrying, assignment, progress, quantities and tick exactly",
+			"passed": true
+		},
+		{
+			"check": "Normal engine frames reached eating after delivery",
+			"passed": true
+		},
+		{
+			"check": "Normal engine frames resumed work and completed the wall",
+			"passed": true
+		},
+		{
+			"check": "Completed chain conserved wood18 and food2 with one meal",
+			"passed": true
+		},
+		{
+			"check": "No target reservation remains after construction",
+			"passed": true
+		},
+		{
+			"check": "Status uses its own wrapping line",
+			"passed": true
+		},
+		{
+			"check": "Single-person roles panel fits its content",
+			"passed": true
+		},
+		{
+			"check": "Normal scene process stayed enabled without manual stepping",
+			"passed": true
+		}
+	],
+	"completed": {
+		"built": 1,
+		"claims": {},
+		"jobs": [
+			{
+				"animal_id": -1,
+				"id": 2,
+				"kind": "haul",
+				"pos": "(8, 6)",
+				"reserved": 0,
+				"resource": "",
+				"started": false,
+				"state": "pending",
+				"stock_id": 4,
+				"work_category": "haul"
+			},
+			{
+				"animal_id": -1,
+				"id": 3,
+				"kind": "haul",
+				"pos": "(6, 5)",
+				"reserved": 0,
+				"resource": "",
+				"started": false,
+				"state": "pending",
+				"stock_id": 5,
+				"work_category": "haul"
+			}
+		],
+		"paused": true,
+		"pos": "(4, 7)",
+		"satiety": 73.85,
+		"stock": [
+			{
+				"amount": 8,
+				"born_day": 1,
+				"claims": {},
+				"incubating": false,
+				"job_id": -1,
+				"kind": "wood",
+				"location": "ground",
+				"owner": "",
+				"pos": "(8, 6)",
+				"stock_id": 4
+			},
+			{
+				"amount": 1,
+				"born_day": 1,
+				"claims": {},
+				"incubating": false,
+				"job_id": -1,
+				"kind": "mushroom",
+				"location": "ground",
+				"owner": "",
+				"pos": "(6, 5)",
+				"stock_id": 5
+			}
+		],
+		"tick": 55
+	},
+	"failures": [],
+	"loaded": {
+		"built": 0,
+		"claims": {
+			"structure:4:8": 1
+		},
+		"jobs": [
+			{
+				"animal_id": -1,
+				"assigned_to": "keeper",
+				"block_reason": "",
+				"id": 1,
+				"kind": "wood_wall",
+				"material_claims": [],
+				"phase": "fetch",
+				"physical": true,
+				"pos": "(4, 8)",
+				"required": 10,
+				"reserved": 0,
+				"resource": "wood",
+				"started": false,
+				"state": "working",
+				"work_category": "build"
+			},
+			{
+				"animal_id": -1,
+				"id": 2,
+				"kind": "haul",
+				"pos": "(8, 6)",
+				"reserved": 0,
+				"resource": "",
+				"started": false,
+				"state": "pending",
+				"stock_id": 4,
+				"work_category": "haul"
+			},
+			{
+				"animal_id": -1,
+				"id": 3,
+				"kind": "haul",
+				"pos": "(6, 5)",
+				"reserved": 0,
+				"resource": "",
+				"started": false,
+				"state": "pending",
+				"stock_id": 5,
+				"work_category": "haul"
+			}
+		],
+		"paused": true,
+		"pos": "(7, 6)",
+		"satiety": 31.3,
+		"stock": [
+			{
+				"amount": 10,
+				"born_day": 1,
+				"claims": {},
+				"incubating": false,
+				"job_id": -1,
+				"kind": "wood",
+				"location": "ground",
+				"owner": "",
+				"pos": "(8, 6)",
+				"stock_id": 4
+			},
+			{
+				"amount": 2,
+				"born_day": 1,
+				"claims": {},
+				"incubating": false,
+				"job_id": -1,
+				"kind": "mushroom",
+				"location": "ground",
+				"owner": "",
+				"pos": "(6, 5)",
+				"stock_id": 5
+			},
+			{
+				"amount": 8,
+				"born_day": 1,
+				"claims": {},
+				"incubating": false,
+				"job_id": 1,
+				"kind": "wood",
+				"location": "carry",
+				"owner": "keeper",
+				"pos": "(7, 6)",
+				"stock_id": 6
+			}
+		],
+		"tick": 6
+	},
+	"method": "Exported normal main scene; engine-owned _process; injected UI input only after initial fixture; no World.step or manual main._process calls",
+	"passed": true,
+	"persistence_enabled": true,
+	"phase": "resume",
+	"pid": 39724,
+	"states": [
+		{
+			"cargo": [],
+			"satiety": 100.0,
+			"state": "仕事を探しています",
+			"tick": 0
+		},
+		{
+			"cargo": [
+				[
+					"wood",
+					8
+				]
+			],
+			"satiety": 31.3,
+			"state": "建築 #1 · 物資を取りに移動",
+			"tick": 6
+		},
+		{
+			"cargo": [
+				[
+					"wood",
+					8
+				]
+			],
+			"satiety": 31.25,
+			"state": "建築 #1 · 物資を運搬中",
+			"tick": 7
+		},
+		{
+			"cargo": [],
+			"satiety": 30.85,
+			"state": "建築 #1 · 物資を取りに移動",
+			"tick": 15
+		},
+		{
+			"cargo": [
+				[
+					"wood",
+					2
+				]
+			],
+			"satiety": 30.5,
+			"state": "建築 #1 · 物資を運搬中",
+			"tick": 22
+		},
+		{
+			"cargo": [],
+			"satiety": 30.15,
+			"state": "建築 #1 · 現場で作業中",
+			"tick": 29
+		},
+		{
+			"cargo": [],
+			"satiety": 30.0,
+			"state": "空腹 · 食べ物へ移動中",
+			"tick": 32
+		},
+		{
+			"cargo": [
+				[
+					"mushroom",
+					1
+				]
+			],
+			"satiety": 29.7,
+			"state": "食事中",
+			"tick": 38
+		},
+		{
+			"cargo": [],
+			"satiety": 74.35,
+			"state": "食事を終え、仕事を選び直す",
+			"tick": 45
+		},
+		{
+			"cargo": [],
+			"satiety": 74.3,
+			"state": "建築 #1 · 対象へ移動中",
+			"tick": 46
+		},
+		{
+			"cargo": [],
+			"satiety": 74.05,
+			"state": "建築 #1 · 現場で作業中",
+			"tick": 51
+		},
+		{
+			"cargo": [],
+			"satiety": 73.85,
+			"state": "仕事を完了・次を探す",
+			"tick": 55
+		}
+	],
+	"used": {
+		"mushroom": 1,
+		"wood": 10
+	},
+	"user_data": "C:/Users/masat/Documents/Codex/2026-10-10/task/colony-structure-01-work/projects/sporehollow/artifacts/autonomy-entry-01/bundle/user-data/WhistleResearchAutonomy"
+}
