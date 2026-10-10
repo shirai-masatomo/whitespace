@@ -1,6 +1,6 @@
 extends RefCounted
 # Read-only adapters. View categories never become scheduling priorities or job fields.
-const CATEGORIES=["すべて","建築","採取","回収","動物","生活"]
+const CATEGORIES=["すべて","建築","採取","回収","動物","生活","実行順"]
 const ARCHITECT={"すべて":[],"壁と扉":["wall","wood_wall","stone_wall","door","locked_door"],"床":["soil_tile","wood_tile","stone_tile"],"飼育":["kennel","coop"],"設置":["place_kokeshi","place_fossil"]}
 
 static func job_category(w,j: Dictionary) -> String:
@@ -14,8 +14,15 @@ static func jobs(w,category: String="すべて") -> Array:
 	var rows=[]
 	for i in range(w.jobs.size()):
 		var j=w.jobs[i];var kind=job_category(w,j)
-		if category!="すべて" and category!=kind:continue
+		if category not in ["すべて","実行順"] and category!=kind:continue
 		rows.append({"id":j.id,"execution_index":i,"category":kind,"state":j.state})
+	return rows
+
+static func display_jobs(w,category: String="すべて") -> Array:
+	if category!="すべて":return jobs(w,category)
+	var rows=[]
+	for kind in CATEGORIES:
+		if kind not in ["すべて","実行順"]:rows.append_array(jobs(w,kind))
 	return rows
 
 static func people(w) -> Array:

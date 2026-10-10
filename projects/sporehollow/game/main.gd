@@ -23,6 +23,8 @@ const CAMERA_SPEED=420.0*1.5
 const ACTOR_SCALE=1.25
 const ColonyModel=preload("res://game/colony_view_model.gd")
 var job_category="すべて"
+var queue_row_y={}
+var queue_bottom=94.0
 const ColonyPanels=preload("res://game/colony_panels.gd")
 var colony_page=""
 var architect_category="すべて"
@@ -590,7 +592,7 @@ func position_context_actions():
 	var p = anchor + Vector2(28,-size_value.y-15)
 	if p.x + size_value.x > 1268: p.x = anchor.x-size_value.x-28
 	p = p.clamp(Vector2(12,55),Vector2(1268-size_value.x,690-size_value.y))
-	var queue_area = Rect2(1006,60,256,34+world.jobs.size()*35)
+	var queue_area = Rect2(1006,60,256,maxf(34,queue_bottom-60+40))
 	if not world.jobs.is_empty() and Rect2(p,size_value).intersects(queue_area): p.x = minf(p.x,queue_area.position.x-size_value.x-8)
 	context_panel.position = p
 
@@ -803,6 +805,7 @@ func refresh_jobs():
 	for child in queue_controls.get_children():
 		queue_controls.remove_child(child)
 		child.queue_free()
+	queue_row_y.clear();queue_bottom=94.0
 	if world.jobs.is_empty(): return
 	var title = Label.new()
 	title.position = Vector2(1010, 64)
@@ -818,18 +821,29 @@ func refresh_jobs():
 		filter.get_theme_stylebox(state).content_margin_top=3;filter.get_theme_stylebox(state).content_margin_bottom=3
 	for category in ColonyModel.CATEGORIES:filter.add_item("%s · %d"%[category,ColonyModel.jobs(world,category).size()])
 	filter.select(ColonyModel.CATEGORIES.find(job_category));filter.item_selected.connect(set_job_category)
-	filter.tooltip_text="カテゴリで表示を絞ります。番号は全予定の実行順です。";queue_controls.add_child(filter)
-	var visible_jobs=ColonyModel.jobs(world,job_category)
+	filter.tooltip_text="全件はカテゴリごとに表示。番号は実行順です。順番変更は「実行順」で。";queue_controls.add_child(filter)
+	var visible_jobs=ColonyModel.display_jobs(world,job_category)
+	var previous_category=""
+	var row_y=94.0
 	if visible_jobs.is_empty():
 		var empty=Label.new();empty.text="このカテゴリの予定はありません";empty.position=Vector2(1010,98);empty.add_theme_font_size_override("font_size",13);queue_controls.add_child(empty)
 	for i in range(visible_jobs.size()):
+		if job_category!="実行順" and visible_jobs[i].category!=previous_category:
+			previous_category=visible_jobs[i].category
+			var heading=Label.new();heading.text="%s · %d件"%[previous_category,ColonyModel.jobs(world,previous_category).size()]
+			heading.position=Vector2(1014,row_y);heading.add_theme_font_size_override("font_size",14);heading.add_theme_color_override("font_color",UI.PAPER)
+			heading.set_meta("job_category",previous_category);heading.mouse_filter=Control.MOUSE_FILTER_IGNORE;queue_controls.add_child(heading)
+			row_y+=24
 		var execution_index=visible_jobs[i].execution_index
 		var j = world.jobs[execution_index]
 		var row = Button.new()
-		row.position = Vector2(1010, queue_settle.get(j.id,94 + i * 35))
+		row.position = Vector2(1010, queue_settle.get(j.id,row_y))
+		queue_row_y[j.id]=row_y
 		row.size = Vector2(214, 31)
 		row.focus_mode = Control.FOCUS_NONE
 		UI.button(row, Color("c6d1ac") if execution_index == 0 else UI.PAPER)
+		for state in ["normal","hover","pressed","disabled"]:
+			row.get_theme_stylebox(state).content_margin_top=3;row.get_theme_stylebox(state).content_margin_bottom=3
 		var names = {"milk":"搾乳","place_kokeshi":"こけし","place_fossil":"化石","wall": "壁", "door":"ドア","locked_door":"施錠ドア","wood_wall":"木壁","stone_wall":"石壁","soil_tile":"土タイル","wood_tile":"木タイル","stone_tile":"石タイル", "kennel": "犬小屋", "coop": "鶏小屋", "move": "歩く", "collect": "回収", "repair": "修理", "remove": "解体", "remove_floor":"タイル解体", "repair_floor":"床修理", "gate": "ドアを開閉", "equip":"装備", "animal_order": "仲間へ指示"}
 		row.text = "%s%s" % [ "› " if j.state != "pending" else "", ("待機 · " if j.state == "blocked" else "") + names.get(j.kind, StoryView.LABELS.get(j.kind,"仕事"))]
 		if j.get("cancel_requested",false):row.text="取消待ち · "+names.get(j.kind,"仕事")
@@ -837,14 +851,14 @@ func refresh_jobs():
 		row.set_meta("job_id",j.id)
 		row.set_meta("row_index",i)
 		row.tooltip_text = "%s · 全体%d番目 · ID%d · %s" % [visible_jobs[i].category, execution_index + 1, j.id, "保留" if world.jobs_held else {"pending":"これから", "walking":"向かっている", "working":"作業中", "blocked":j.get("block_reason","通行待ち")+"・順番変更/取消可"}.get(j.state,"仕事")]
-		row.tooltip_text += " · ×で取消" + (" · 順序変更は「すべて」で" if job_category!="すべて" else "")
+		row.tooltip_text += " · ×で取消" + (" · 順序変更は「実行順」で" if job_category!="実行順" else "")
 		if j.get("cancel_requested",false):row.tooltip_text="取消を受け付けました。再開時に工事や指示を安全に終了します。"
 		row.gui_input.connect(queue_input.bind(j.id))
 		row.mouse_entered.connect(func(): hover_job = j.id)
 		row.mouse_exited.connect(func(): hover_job = -1)
 		queue_controls.add_child(row)
 		var cancel = Button.new()
-		cancel.position = Vector2(1228, 94 + i * 35)
+		cancel.position = Vector2(1228,row_y)
 		cancel.size = Vector2(30, 31)
 		cancel.focus_mode = Control.FOCUS_NONE
 		cancel.icon = UI.icon("cross")
@@ -853,10 +867,12 @@ func refresh_jobs():
 		UI.button(cancel)
 		cancel.pressed.connect(cancel_work.bind(j.id))
 		queue_controls.add_child(cancel)
+		row_y+=35
+	queue_bottom=maxf(129,row_y)
 	queue_settle.clear()
 	if world.jobs_held and not world.keeper.resting and world.keeper.state=="free":
 		var resume=Button.new()
-		resume.position=Vector2(1010,98+maxi(1,visible_jobs.size())*35)
+		resume.position=Vector2(1010,queue_bottom+4)
 		resume.size=Vector2(248,28)
 		resume.text="▶ 作業再開"
 		resume.focus_mode=Control.FOCUS_NONE
@@ -953,8 +969,8 @@ func screen_cell(p: Vector2) -> Vector2:
 func queue_input(event, id: int):
 	if not event is InputEventMouseButton: return
 	if event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-		if job_category!="すべて":
-			notice("順番を変えるには予定を「すべて」に戻してください")
+		if job_category!="実行順":
+			notice("順番を変えるには表示を「実行順」にしてください")
 			get_viewport().set_input_as_handled();return
 		if not world.jobs.is_empty() and world.jobs[0].id == id and world.jobs[0].state not in ["pending","blocked"]:
 			notice("今の仕事は先頭。中断するなら×")
@@ -1145,7 +1161,7 @@ func pointer_over_ui() -> bool:
 	if is_instance_valid(colony_panel) and colony_panel.is_visible_in_tree() and colony_panel.get_global_rect().has_point(pointer):return true
 	if is_instance_valid(context_panel) and context_panel.is_visible_in_tree() and context_panel.get_global_rect().has_point(pointer): return true
 	if pointer.y < 49 or pointer.y > 748: return true
-	if world.working() and Rect2(1010, 64, 248, 66 + world.jobs.size() * 35).has_point(pointer): return true
+	if world.working() and Rect2(1010,60,248,maxf(34,queue_bottom-60+40)).has_point(pointer): return true
 	if not selected.is_empty() and (keeper_card_rect() if selected.get("kind")=="keeper" else Rect2(16,595,422,91)).has_point(pointer): return true
 	for button in buttons.values():
 		if is_instance_valid(button) and button.is_visible_in_tree() and button.get_global_rect().has_point(pointer): return true
@@ -1402,7 +1418,7 @@ func _process(delta):
 		row.modulate.a=0.15 if id==queue_drag_id and lifting else 1.0
 		if row.has_meta("row_index"):
 			var index=int(row.get_meta("row_index"))
-			var target_y=94+index*35
+			var target_y=queue_row_y.get(id,94+index*35)
 			if lifting and id!=queue_drag_id and index>=queue_drop_index:target_y+=8
 			row.position.y=move_toward(row.position.y,target_y,delta*1100)
 	mode_cursor = "hammer" if group == 0 else ("whistle" if group == 1 else "move")
@@ -1834,8 +1850,7 @@ func draw_hud():
 	if hover_job >= 0:
 		for i in range(world.jobs.size()):
 			if world.jobs[i].id == hover_job:
-				var displayed=ColonyModel.jobs(world,job_category).map(func(row):return row.id).find(hover_job)
-				if displayed>=0:hud.draw_rect(Rect2(1007,91+displayed*35,253,34),Color("ffe2a3"),false,2)
+				if queue_row_y.has(hover_job):hud.draw_rect(Rect2(1007,queue_row_y[hover_job]-3,253,34),Color("ffe2a3"),false,2)
 	hud.draw_rect(Rect2(0, 49, 1280, 703), Color(0.04, 0.07, 0.22, night_tint))
 	if cinematic(): return
 	if world.phase == "shop" or field_book or field_shop:
