@@ -6,7 +6,7 @@ New-Item -ItemType Directory -Path $runRoot,(Join-Path $runRoot 'user-data') | O
 $exe=if($Executable){(Resolve-Path -LiteralPath $Executable).Path}else{Join-Path $project '.tools/Godot_v4.7.2-stable_win64.exe'}
 $cmd='"'+$exe+'"'
 if(-not $Executable){$cmd+=' --path "'+$project+'"'}
-$cmd+=' --audio-driver Dummy --rendering-method gl_compatibility --max-fps 30 --resolution 1280x800 --log-file "'+$runRoot+'/render.log" --script "'+(Join-Path $project 'tests/test_onsite_clarity.gd')+'" -- --isolated-review'
+$cmd+=' --audio-driver Dummy --rendering-method gl_compatibility --max-fps 30 --resolution 1280x800 --log-file "'+$runRoot+'/render.log" -- --isolated-review --review-onsite'
 Add-Type -Path (Join-Path $project 'tools/isolated_desktop.cs')
 $environment=[System.Collections.Generic.SortedDictionary[string,string]]::new([StringComparer]::OrdinalIgnoreCase)
 [Environment]::GetEnvironmentVariables().GetEnumerator() | ForEach-Object {$environment[$_.Key]=[string]$_.Value}

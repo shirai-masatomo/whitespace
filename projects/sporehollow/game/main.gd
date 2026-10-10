@@ -149,6 +149,12 @@ var reactions: Dictionary = {}
 var noticed: Dictionary = {}
 
 func _ready():
+	if not automated and "--review-onsite" in OS.get_cmdline_user_args() and "--isolated-review" in OS.get_cmdline_user_args() and OS.get_environment("FARM_REVIEW_OUTPUT")!="":
+		automated=true
+		var review=load("res://game/onsite_clarity_review.gd").new()
+		add_child(review);review.call_deferred("run")
+		set_process(false);set_process_input(false);set_process_unhandled_input(false);hide()
+		return
 	automated=automated or "--automated" in OS.get_cmdline_user_args() or "--smoke" in OS.get_cmdline_user_args()
 	persistence_enabled=not automated
 	if persistence_enabled:
