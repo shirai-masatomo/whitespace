@@ -1,6 +1,7 @@
 extends RefCounted
 # Absolute multiplier from delivered pixels, shared by bodies, bounds and carried layers.
-const SCALE=1.3
+const WORLD_ENLARGEMENT=1.25
+const SCALE=1.3*WORLD_ENLARGEMENT
 static func transform(foot: Vector2,scale_value: float=SCALE) -> Transform2D:
 	return Transform2D(Vector2(scale_value,0),Vector2(0,scale_value),foot*(1.0-scale_value))
 static func rect(native: Rect2,foot: Vector2,scale_value: float=SCALE) -> Rect2:

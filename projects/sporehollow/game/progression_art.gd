@@ -110,7 +110,7 @@ static func tongue_layer(g,e: Dictionary,front: bool):
 		var elapsed=g.visual_time-p.tongue_at
 		var hold=g.world.ProgressData.SPECIAL.tongue_stop
 		var reach=clampf(elapsed/0.3,0,1) if elapsed<hold else clampf(1-(elapsed-hold)/duration("bullfrog","tongue_retract"),0,1)
-		var mouth=g.actor_pixel("a"+str(a.id),a.pos)+Vector2(0,14)-Art.CLIPS[key].anchor+Art.CLIPS[key].mouth[Art.frame_index(key,g.visual_time-p.at)]
+		var mouth=g.actor_pixel("a"+str(a.id),a.pos)+Vector2(0,14)+(-Art.CLIPS[key].anchor+Art.CLIPS[key].mouth[Art.frame_index(key,g.visual_time-p.at)])*g.ACTOR_SCALE
 		var target=g.actor_pixel("e"+str(e.id),e.pos)+Vector2(0,-8)
 		var tip=mouth.lerp(target,reach)
 		if not front:

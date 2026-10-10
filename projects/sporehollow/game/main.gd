@@ -19,6 +19,8 @@ var save_status=""
 var save_load_blocked=false
 const FONT = preload("res://assets/fonts/ui_font.tres")
 const TILE = Vector2(48, 42)
+const CAMERA_SPEED=420.0*1.5
+const ACTOR_SCALE=1.25
 const GROUPS = ["建設", "指示"]
 const MODE_ORDER = [2,0,1] # Persisted subtask IDs stay stable; display order is keeper/build/orders.
 const Direction=preload("res://game/direction_art.gd")
@@ -1325,7 +1327,7 @@ func _process(delta):
 	if not field_book and not field_shop and story_modal=="" and not world.paused and not menu_open and world.working(): visual_time += delta * (24.0 if not world.rest_skip.is_empty() else speed)
 	var direction = Vector2(int(keys_down.get(KEY_D, false)) - int(keys_down.get(KEY_A, false)), int(keys_down.get(KEY_S, false)) - int(keys_down.get(KEY_W, false)))
 	if direction!=Vector2.ZERO:cancel_wall_stroke()
-	if not field_book and not field_shop and story_modal=="" and not menu_open and not cinematic() and world.phase != "shop": camera.position += direction.normalized() * delta * 420
+	if not field_book and not field_shop and story_modal=="" and not menu_open and not cinematic() and world.phase != "shop": camera.position += direction.normalized() * delta * CAMERA_SPEED
 	clamp_camera()
 	if menu_open or field_book or field_shop or story_modal!="" or queue_drag_id>=0 or dragging or ui_pointer_capture or wall_stroke.kind!="" or direction!=Vector2.ZERO:
 		world.Life.user_activity(world)
@@ -1645,7 +1647,7 @@ func _draw():
 			if enemy_side and actor.get("dead",false):continue
 			var pose=six_art.get(SixMotion.key(actor,enemy_side),{})
 			if not pose.has("death_at") or visual_time-pose.death_at>=SixMotion.duration(who,pose.action):continue
-			var foot=center(pose.death_pos)+Vector2(0,14);var scale_value=HumanVisual.SCALE if who in ["maid","dancer","thief"] else 1.0
+			var foot=center(pose.death_pos)+Vector2(0,14);var scale_value=HumanVisual.SCALE if who in ["maid","dancer","thief"] else ACTOR_SCALE
 			draw_set_transform(foot*(1.0-scale_value),0,Vector2.ONE*scale_value)
 			SixMotion.paint(self,who,pose.action,pose.facing,foot,visual_time-pose.death_at)
 			draw_set_transform(Vector2.ZERO)
@@ -1736,8 +1738,11 @@ func draw_pointer_preview():
 				if animal.species == "shiba": draw_dog(Vector2.ZERO)
 				elif animal.species == "cat": draw_cat(Vector2.ZERO)
 				elif animal.species=="hen":draw_hen(Vector2.ZERO)
-				elif animal.species in Direction.ACTORS:Direction.draw(self,Direction.actor_key(animal),Vector2(0,14),0.45)
-				else:Delivered.draw_clip(self,ProgressArt.clip(animal.species,"idle",animal.get("facing",1)),Vector2(0,14),0)
+				else:
+					var scale_value=HumanVisual.SCALE if animal.get("category")=="human" else ACTOR_SCALE
+					draw_set_transform(p+Vector2(0,14)*(1.0-scale_value),0,Vector2.ONE*scale_value)
+					if animal.species in Direction.ACTORS:Direction.draw(self,Direction.actor_key(animal),Vector2(0,14),0.45)
+					else:Delivered.draw_clip(self,ProgressArt.clip(animal.species,"idle",animal.get("facing",1)),Vector2(0,14),0)
 				art_alpha = 1.0
 				draw_set_transform(Vector2.ZERO)
 		elif tool.begins_with("place_"):
@@ -1972,7 +1977,7 @@ func draw_animal_sprite(p: Vector2, animal: Dictionary, who: String):
 	var walking = not animal.is_empty() and Vector2(animal.pos).distance_to(view_positions.get(id,Vector2(animal.pos)))>0.025
 	var resting = animal.get("state","") in ["休む","自主休養"] or animal.get("hp",1)<=0
 	var pose = actor_pose(id,resting,resting,walking,who) if not animal.is_empty() else {"action":"idle","elapsed":0.0}
-	Art.sprite(self,who,pose.action,int(animal.get("facing",1)),p+Vector2(0,14),pose.elapsed,art_alpha)
+	Art.sprite(self,who,pose.action,int(animal.get("facing",1)),p+Vector2(0,14),pose.elapsed,art_alpha,ACTOR_SCALE)
 
 func draw_dog(p: Vector2, animal: Dictionary = {}):
 	draw_animal_sprite(p,animal,"shiba")
@@ -2578,6 +2583,10 @@ func debug_action(action: String):
 
 func keeper_hit_rect() -> Rect2:
 	if world.keeper.carrier>=0:return carried_keeper_rect().grow(3)
+	return HumanVisual.rect(keeper_hit_rect_base(),keeper_pixel()+Vector2(0,14),ACTOR_SCALE)
+
+func keeper_hit_rect_base() -> Rect2:
+	if world.keeper.carrier>=0:return carried_keeper_rect().grow(3)
 	var p=keeper_pixel()
 	if Farm.Life.presentation(world) in ["unconscious","carried"]: return Rect2(p+Vector2(-25,-12),Vector2(50,34))
 	var pose=actor_art.get("keeper",{}).duplicate()
@@ -2589,6 +2598,10 @@ func keeper_hit_rect() -> Rect2:
 	return Rect2(p+Vector2(-19,-39),Vector2(38,56))
 
 func animal_hit_rect(a: Dictionary) -> Rect2:
+	var body=animal_hit_rect_base(a)
+	return body if a.get("category")=="human" else HumanVisual.rect(body,actor_pixel("a%d"%a.id,a.pos)+Vector2(0,14),ACTOR_SCALE)
+
+func animal_hit_rect_base(a: Dictionary) -> Rect2:
 	if a.species in Direction.ACTORS:return Direction.bounds(self,a)
 	if a.species in ProgressArt.SPECIES:return ProgressArt.bounds(self,a)
 	var p=actor_pixel("a%d" % a.id,a.pos)
@@ -2598,6 +2611,10 @@ func animal_hit_rect(a: Dictionary) -> Rect2:
 	return Rect2(p+Vector2(-17,-18),Vector2(34,37))
 
 func enemy_hit_rect(e: Dictionary) -> Rect2:
+	var body=enemy_hit_rect_base(e)
+	return body if e.get("type_tag","Human")=="Human" else HumanVisual.rect(body,actor_pixel("e%d"%e.id,e.pos)+Vector2(0,14),ACTOR_SCALE)
+
+func enemy_hit_rect_base(e: Dictionary) -> Rect2:
 	if e.get("archetype","") in Direction.ACTORS:return Direction.bounds(self,e,true)
 	if e.get("archetype","") in ProgressArt.SPECIES:return ProgressArt.bounds(self,e,true)
 	var pose=enemy_art.get(e.id,{"action":"idle","facing":1,"at":visual_time})
@@ -2652,7 +2669,7 @@ func draw_enemy_actor(e: Dictionary):
 		var foot=center(e.pos)+Vector2(0,14)
 		var who=e.get("archetype","kidnapper");var facing=e.get("facing",1)
 		var elapsed=(world.tick-e.corpse_started_tick)*world.DT
-		var scale_value=1.0 if who=="doberman" else HumanVisual.SCALE
+		var scale_value=ACTOR_SCALE if who=="doberman" else HumanVisual.SCALE
 		if who in ["maid","dancer","thief","doberman"]:
 			draw_set_transform(foot*(1-scale_value),0,Vector2.ONE*scale_value)
 			if who=="doberman":Delivered.draw_clip(self,ProgressArt.clip(who,"death",facing),foot,elapsed)
@@ -2668,7 +2685,7 @@ func draw_enemy_actor(e: Dictionary):
 	var pose=enemy_art.get(e.id,{"action":"idle","facing":1,"at":visual_time})
 	var foot=p+Vector2(0,14)
 	ProgressArt.tongue_layer(self,e,false)
-	var human_scale=HumanVisual.SCALE if e.get("type_tag","Human")=="Human" else 1.0
+	var human_scale=HumanVisual.SCALE if e.get("type_tag","Human")=="Human" else ACTOR_SCALE
 	draw_set_transform(foot*(1.0-human_scale),0,Vector2.ONE*human_scale)
 	if e.get("archetype","kidnapper")!="kidnapper":
 		if e.archetype in Direction.ACTORS:SixMotion.draw(self,self,e,foot,true)
@@ -2712,10 +2729,10 @@ func draw_keeper_actor():
 		p = Vector2.ZERO
 	var pose = actor_pose("keeper",world.keeper.resting,Farm.Life.presentation(world)=="sleeping",walking,"keeper")
 	if world.keeper.state=="hidden_rest": pose.action="rest"
-	Art.sprite(self,"keeper",pose.action,int(world.keeper.get("facing",1)),p+Vector2(0,14),pose.elapsed,1.0,1.15)
+	Art.sprite(self,"keeper",pose.action,int(world.keeper.get("facing",1)),p+Vector2(0,14),pose.elapsed,1.0,1.15*ACTOR_SCALE)
 
 	if not world.jobs_held and Farm.Life.able(world) and not world.jobs.is_empty() and world.jobs[0].state == "working":
-		var hand = p + Vector2(12, 5)
+		var hand = p + Vector2(0,14) + Vector2(12,-9)*ACTOR_SCALE
 		var hammer = hand + Vector2(8, -8 + sin(visual_time * 18) * 6)
 		draw_line(hand, hammer, Color("a58051"), 3)
 		draw_rect(Rect2(hammer - Vector2(5, 3), Vector2(10, 6)), Color("c9c5a5"))
@@ -2758,16 +2775,18 @@ func draw_animal_corpse(a: Dictionary):
 	var foot=center(a.pos)+Vector2(0,14)
 	draw_circle(foot+Vector2(0,-2),18,Color(0.1,0.15,0.1,0.25))
 	if a.species in SixMotion.ACTORS:
-		var scale_value=HumanVisual.SCALE if a.species=="maid" else 1.0
+		var scale_value=HumanVisual.SCALE if a.species=="maid" else ACTOR_SCALE
 		draw_set_transform(foot*(1.0-scale_value),0,Vector2.ONE*scale_value)
 		SixMotion.paint(self,a.species,"death",a.get("facing",1),foot,SixMotion.duration(a.species,"death"))
 		draw_set_transform(Vector2.ZERO)
 	elif Delivered.CLIPS.has(a.species+"/death"+("_left" if a.get("facing",1)<0 else "_right")):
 		var key=a.species+"/death"+("_left" if a.get("facing",1)<0 else "_right")
+		draw_set_transform(foot*(1.0-ACTOR_SCALE),0,Vector2.ONE*ACTOR_SCALE)
 		Delivered.draw_clip(self,key,foot,Delivered.duration(key))
+		draw_set_transform(Vector2.ZERO)
 	else:
 		# Interim fallen silhouette made from existing idle art; not a new delivered death sprite.
-		draw_set_transform(foot,PI*0.5,Vector2(0.85,0.85))
+		draw_set_transform(foot,PI*0.5,Vector2.ONE*0.85*ACTOR_SCALE)
 		if a.species in ["hen","cat"]:Art.sprite(self,a.species,"idle",a.get("facing",1),Vector2(0,12),0,0.65)
 		else:Delivered.draw_clip(self,ProgressArt.clip(a.species,"idle",a.get("facing",1)),Vector2(0,12),0)
 		draw_set_transform(Vector2.ZERO)
@@ -2789,11 +2808,15 @@ func draw_animal_actor(a: Dictionary):
 	elif a.species=="hen": draw_hen(p,a)
 	elif a.species in Direction.ACTORS:
 		var foot=p+Vector2(0,14)
-		var scale_value=HumanVisual.SCALE if a.get("category")=="human" else 1.0
+		var scale_value=HumanVisual.SCALE if a.get("category")=="human" else ACTOR_SCALE
 		draw_set_transform(foot*(1.0-scale_value),0,Vector2.ONE*scale_value)
 		Direction.actor(self,self,a,foot)
 		draw_set_transform(Vector2.ZERO)
-	else: ProgressArt.draw(self,self,a,p+Vector2(0,14))
+	else:
+		var foot=p+Vector2(0,14)
+		draw_set_transform(foot*(1.0-ACTOR_SCALE),0,Vector2.ONE*ACTOR_SCALE)
+		ProgressArt.draw(self,self,a,foot)
+		draw_set_transform(Vector2.ZERO)
 	if world.tick<a.get("spines_until",0): label_on(self,p+Vector2(15,-15),"棘",14,UI.GOLD)
 	var in_combat = world.enemies.any(func(e): return not e.done and not e.flee and Farm.distance(a.pos, e.pos) <= 1)
 	if a.hp <= a.max_hp * 0.5 or in_combat:
