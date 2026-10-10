@@ -22,6 +22,7 @@ const TILE = Vector2(48, 42)
 const CAMERA_SPEED=420.0*1.5
 const ACTOR_SCALE=1.25
 const ColonyModel=preload("res://game/colony_view_model.gd")
+var job_page=0
 var job_category="すべて"
 var queue_row_y={}
 var queue_bottom=94.0
@@ -793,13 +794,17 @@ func cancel_work(id: int):
 	refresh()
 
 func set_job_category(index: int):
+	job_page=0
 	job_category=ColonyModel.CATEGORIES[index]
 	queue_settle.clear();queue_signature="";hover_job=-1
 	refresh_jobs()
 
+func change_job_page(offset: int):
+	job_page=maxi(0,job_page+offset);queue_signature="";refresh_jobs()
+
 func refresh_jobs():
 	queue_controls.visible = world.working()
-	var signature = job_category + str(world.natural) + str(world.jobs) + str(world.keeper.state) + str(world.paused) + world.job_hold_reason + str(world.manual_goal) + str(world.keeper.resting)
+	var signature = str(job_page)+job_category + str(world.natural) + str(world.jobs) + str(world.keeper.state) + str(world.paused) + world.job_hold_reason + str(world.manual_goal) + str(world.keeper.resting)
 	if signature == queue_signature or queue_drag_id >= 0: return
 	queue_signature = signature
 	for child in queue_controls.get_children():
@@ -821,14 +826,17 @@ func refresh_jobs():
 		filter.get_theme_stylebox(state).content_margin_top=3;filter.get_theme_stylebox(state).content_margin_bottom=3
 	for category in ColonyModel.CATEGORIES:filter.add_item("%s · %d"%[category,ColonyModel.jobs(world,category).size()])
 	filter.select(ColonyModel.CATEGORIES.find(job_category));filter.item_selected.connect(set_job_category)
-	filter.tooltip_text="全件はカテゴリごとに表示。番号は実行順です。順番変更は「実行順」で。";queue_controls.add_child(filter)
-	var visible_jobs=ColonyModel.display_jobs(world,job_category)
+	filter.tooltip_text="カテゴリごとの指定一覧。番号は登録IDで、実行順は各人が選びます。";queue_controls.add_child(filter)
+	var all_jobs=ColonyModel.display_jobs(world,job_category)
+	var page_size=world.Work.Policy.PAGE_SIZE
+	job_page=clampi(job_page,0,maxi(0,ceili(float(all_jobs.size())/page_size)-1))
+	var visible_jobs=all_jobs.slice(job_page*page_size,(job_page+1)*page_size)
 	var previous_category=""
 	var row_y=94.0
 	if visible_jobs.is_empty():
 		var empty=Label.new();empty.text="このカテゴリの予定はありません";empty.position=Vector2(1010,98);empty.add_theme_font_size_override("font_size",13);queue_controls.add_child(empty)
 	for i in range(visible_jobs.size()):
-		if job_category!="実行順" and visible_jobs[i].category!=previous_category:
+		if job_category!="登録順" and visible_jobs[i].category!=previous_category:
 			previous_category=visible_jobs[i].category
 			var heading=Label.new();heading.text="%s · %d件"%[previous_category,ColonyModel.jobs(world,previous_category).size()]
 			heading.position=Vector2(1014,row_y);heading.add_theme_font_size_override("font_size",14);heading.add_theme_color_override("font_color",UI.PAPER)
@@ -841,17 +849,17 @@ func refresh_jobs():
 		queue_row_y[j.id]=row_y
 		row.size = Vector2(214, 31)
 		row.focus_mode = Control.FOCUS_NONE
-		UI.button(row, Color("c6d1ac") if execution_index == 0 else UI.PAPER)
+		UI.button(row, Color("c6d1ac") if j.get("assigned_to","")!="" else UI.PAPER)
 		for state in ["normal","hover","pressed","disabled"]:
 			row.get_theme_stylebox(state).content_margin_top=3;row.get_theme_stylebox(state).content_margin_bottom=3
 		var names = {"milk":"搾乳","place_kokeshi":"こけし","place_fossil":"化石","wall": "壁", "door":"ドア","locked_door":"施錠ドア","wood_wall":"木壁","stone_wall":"石壁","soil_tile":"土タイル","wood_tile":"木タイル","stone_tile":"石タイル", "kennel": "犬小屋", "coop": "鶏小屋", "move": "歩く", "collect": "回収", "repair": "修理", "remove": "解体", "remove_floor":"タイル解体", "repair_floor":"床修理", "gate": "ドアを開閉", "equip":"装備", "animal_order": "仲間へ指示"}
 		row.text = "%s%s" % [ "› " if j.state != "pending" else "", ("待機 · " if j.state == "blocked" else "") + names.get(j.kind, StoryView.LABELS.get(j.kind,"仕事"))]
 		if j.get("cancel_requested",false):row.text="取消待ち · "+names.get(j.kind,"仕事")
-		row.draw.connect(draw_queue_badge.bind(row,execution_index+1))
+		row.draw.connect(draw_queue_badge.bind(row,j.id))
 		row.set_meta("job_id",j.id)
 		row.set_meta("row_index",i)
-		row.tooltip_text = "%s · 全体%d番目 · ID%d · %s" % [visible_jobs[i].category, execution_index + 1, j.id, "保留" if world.jobs_held else {"pending":"これから", "walking":"向かっている", "working":"作業中", "blocked":j.get("block_reason","通行待ち")+"・順番変更/取消可"}.get(j.state,"仕事")]
-		row.tooltip_text += " · ×で取消" + (" · 順序変更は「実行順」で" if job_category!="実行順" else "")
+		row.tooltip_text = "%s · ID%d · %s · %s" % [visible_jobs[i].category,j.id,"担当："+j.get("assigned_to","") if j.get("assigned_to","")!="" else "担当待ち",j.get("block_reason","") if j.state in ["blocked","suspended"] else {"pending":"選択待ち","walking":"対象へ移動中","working":"現場で作業中"}.get(j.state,j.state)]
+		row.tooltip_text += " · ×で取消。実行優先は役割で設定"
 		if j.get("cancel_requested",false):row.tooltip_text="取消を受け付けました。再開時に工事や指示を安全に終了します。"
 		row.gui_input.connect(queue_input.bind(j.id))
 		row.mouse_entered.connect(func(): hover_job = j.id)
@@ -870,6 +878,12 @@ func refresh_jobs():
 		row_y+=35
 	queue_bottom=maxf(129,row_y)
 	queue_settle.clear()
+	if all_jobs.size()>page_size:
+		for offset in [-1,1]:
+			var page_button=Button.new();page_button.position=Vector2(1010 if offset<0 else 1140,queue_bottom+4);page_button.size=Vector2(120,28);page_button.text="前の指定" if offset<0 else "次の指定";UI.button(page_button)
+			page_button.disabled=job_page==0 if offset<0 else (job_page+1)*page_size>=all_jobs.size()
+			page_button.pressed.connect(change_job_page.bind(offset));queue_controls.add_child(page_button)
+		queue_bottom+=34
 	if world.jobs_held and not world.keeper.resting and world.keeper.state=="free":
 		var resume=Button.new()
 		resume.position=Vector2(1010,queue_bottom+4)
@@ -966,18 +980,10 @@ func center(p: Vector2) -> Vector2:
 func screen_cell(p: Vector2) -> Vector2:
 	return get_canvas_transform() * center(p)
 
-func queue_input(event, id: int):
-	if not event is InputEventMouseButton: return
-	if event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-		if job_category!="実行順":
-			notice("順番を変えるには表示を「実行順」にしてください")
-			get_viewport().set_input_as_handled();return
-		if not world.jobs.is_empty() and world.jobs[0].id == id and world.jobs[0].state not in ["pending","blocked"]:
-			notice("今の仕事は先頭。中断するなら×")
-			return
-		queue_drag_id = id
-		queue_drag_start = pointer
-	get_viewport().set_input_as_handled()
+func queue_input(event, _id: int):
+	if event is InputEventMouseButton and event.pressed and event.button_index==MOUSE_BUTTON_LEFT:
+		notice("実行優先は「役割」で個人ごとに設定できます")
+		get_viewport().set_input_as_handled()
 
 func job_at(cell: Vector2i) -> int:
 	for j in world.jobs:
@@ -1271,7 +1277,7 @@ func board_click(event):
 		if not world.act(tool,cell):notice("空き場所と持ち物を確認してください")
 		refresh();return
 	if Farm.BUILD.has(tool):
-		if not world.act(tool,cell): notice("予定は8件まで" if world.jobs.size()>=8 else world.Buildings.reason(world,tool,cell))
+		if not world.act(tool,cell): notice("指定は%d件まで"%world.Jobs.LIMIT if world.jobs.size()>=world.Jobs.LIMIT else world.Buildings.reason(world,tool,cell))
 		refresh(); return
 	if world.trees.has(cell) or cell in world.Story.idol_cells(world):
 		if not event.ctrl_pressed: selected_trees.clear()
@@ -1332,7 +1338,7 @@ func board_click(event):
 		command_selected(tool, cell)
 	elif tool != "":
 		if not world.act(tool, cell, -1):
-			notice("予定は8件まで" if world.jobs.size() >= 8 else "ここは使えないか、資材が足りません")
+			notice("指定は%d件まで"%world.Jobs.LIMIT if world.jobs.size() >= world.Jobs.LIMIT else "ここは使えないか、資材が足りません")
 
 	else:
 		selected.clear()
@@ -1603,8 +1609,8 @@ func update_facility_effects(delta: float):
 		structure_views[b.id] = b.status
 		if b.kind in Farm.Buildings.DOORS:
 			gate_views[b.id] = move_toward(gate_views.get(b.id, 1.0 if b.open else 0.0), 1.0 if b.open else 0.0, delta * 5) if not world.paused else gate_views.get(b.id, 0.0)
-	if not world.paused and not world.jobs_held and not world.jobs.is_empty() and world.jobs[0].state=="working" and visual_time-work_dust_at>=0.5:
-		var job=world.jobs[0]
+	if not world.paused and not world.Work.active(world).is_empty() and world.Work.active(world).state=="working" and visual_time-work_dust_at>=0.5:
+		var job=world.Work.active(world)
 		if job.kind in Farm.BUILD or job.kind in ["repair","repair_floor","remove","remove_floor"]:
 			puff(center(job.pos),{"wood":"wood_chips","stone":"stone_powder"}.get(job.get("resource","soil"),"soil_dust"))
 			work_dust_at=visual_time
@@ -1845,7 +1851,7 @@ func draw_hud():
 			if j.id!=hover_job:continue
 			var p=(pointer+Vector2(18,20)).clamp(Vector2(12,54),Vector2(985,668))
 			hud.draw_style_box(MarketView.panel(UI.PAPER,UI.WOOD),Rect2(p,Vector2(274,68)))
-			label_on(hud,p+Vector2(12,25),"%d · %s"%[i+1,job_title(j)],17,UI.INK)
+			label_on(hud,p+Vector2(12,25),"ID%d · %s"%[j.id,job_title(j)],17,UI.INK)
 			label_on(hud,p+Vector2(12,51),"右クリック：取消"+("（着工分は一部返却）" if j.started else ""),13,UI.INK)
 	if hover_job >= 0:
 		for i in range(world.jobs.size()):
@@ -2579,7 +2585,7 @@ func draw_keeper_card():
 	label_on(hud, Vector2(30, 676), activity, 15, UI.INK)
 	if not world.jobs.is_empty():
 		var names = {"milk":"搾乳","place_kokeshi":"こけし","place_fossil":"化石","wall": "壁", "door":"ドア","locked_door":"施錠ドア","wood_wall":"木壁","stone_wall":"石壁","soil_tile":"土タイル","wood_tile":"木タイル","stone_tile":"石タイル", "collect": "回収", "move": "歩く", "equip":"装備", "animal_order": "仲間へ指示", "repair": "修理", "remove": "解体", "remove_floor":"タイル解体", "repair_floor":"床修理", "gate": "ドア", "kennel": "犬小屋", "coop": "鶏小屋"}
-		var next = names.get(world.jobs[0].kind, "仕事")
+		var next = names.get(world.Work.active(world).get("kind",""), "仕事を選択中")
 		if world.jobs.size() > 1: next += " → " + names.get(world.jobs[1].kind, "仕事")
 		label_on(hud, Vector2(166, 676), next, 14, UI.INK)
 	hud.draw_set_transform(Vector2.ZERO)
@@ -2785,7 +2791,7 @@ func draw_keeper_actor():
 	if world.keeper.state=="hidden_rest": pose.action="rest"
 	Art.sprite(self,"keeper",pose.action,int(world.keeper.get("facing",1)),p+Vector2(0,14),pose.elapsed,1.0,1.15*ACTOR_SCALE)
 
-	if not world.jobs_held and Farm.Life.able(world) and not world.jobs.is_empty() and world.jobs[0].state == "working":
+	if Farm.Life.able(world) and not world.Work.active(world).is_empty() and world.Work.active(world).state == "working":
 		var hand = p + Vector2(0,14) + Vector2(12,-9)*ACTOR_SCALE
 		var hammer = hand + Vector2(8, -8 + sin(visual_time * 18) * 6)
 		draw_line(hand, hammer, Color("a58051"), 3)

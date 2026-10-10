@@ -65,6 +65,9 @@ var manual_goal = null
 var life_log: Array = []
 var danger_serial = 0
 const Jobs = preload("res://game/keeper_jobs.gd")
+const Work=preload("res://game/human_work.gd")
+var workers: Dictionary = {}
+var work_claims: Dictionary = {}
 var jobs: Array = []
 var next_job_id = 1
 var job_log: Array = []
@@ -253,6 +256,9 @@ func _init(data: Dictionary = {}, seed_number: int = 17, stage_override: Diction
 		if b.kind not in ["kennel","coop"] and b.status=="building" and not jobs.any(func(j):return j.pos==p):
 			jobs.append({"id":next_job_id,"kind":b.kind,"pos":p,"animal_id":-1,"state":"pending","resource":b.get("resource","soil"),"reserved":b.cost,"started":true,"old":{},"remaining":b.remaining})
 			next_job_id+=1
+	eggs=int(campaign.get("work_nest_eggs",0))
+	for target in campaign.get("work_natural",[]):natural[Vector2i(target.pos[0],target.pos[1])]=target.kind
+	Work.restore(self)
 	Story.init(self)
 	refresh_indoor()
 	make_schedule()
@@ -300,13 +306,13 @@ func live_structure(p: Vector2i) -> bool:
 	return structures.has(p) and structures[p].status in ["ready", "building"]
 
 func occupied(p: Vector2i) -> bool:
-	return (keeper.placed and p == keeper.pos) or animals.any(func(a): return a.placed and a.pos == p) or enemies.any(func(e): return not e.done and e.hp>0 and e.pos == p) or foods.any(func(f): return f.pos == p)
+	return workers.values().any(func(a):return a.get("placed",false) and a.pos==p and not a.get("dead",false)) or (keeper.placed and p == keeper.pos) or animals.any(func(a): return a.placed and a.pos == p) or enemies.any(func(e): return not e.done and e.hp>0 and e.pos == p) or foods.any(func(f): return f.pos == p)
 
 func has_nest() -> bool:
 	return campaign.animals.any(func(a): return a.species == "hen")
 
 func can_build(kind: String, p: Vector2i) -> bool:
-	return working() and Buildings.reason(self,kind,p)==""
+	return working() and Jobs.build_reason(self,kind,p)==""
 
 func neighbors(p: Vector2i) -> Array:
 	return [p + Vector2i.RIGHT, p + Vector2i.LEFT, p + Vector2i.UP, p + Vector2i.DOWN]
@@ -319,7 +325,7 @@ func exit_for(entry: Vector2i) -> Vector2i:
 
 func actor_occupied(p: Vector2i, origin: Vector2i) -> bool:
 	if p == origin: return false
-	return (keeper.placed and keeper.pos == p) or animals.any(func(a): return a.placed and a.pos == p and not preload("res://game/animal_recovery.gd").protected(self,a)) or enemies.any(func(e): return not e.done and e.hp>0 and e.pos == p)
+	return workers.values().any(func(a):return a.get("placed",false) and a.pos==p and not a.get("dead",false)) or (keeper.placed and keeper.pos == p) or animals.any(func(a): return a.placed and a.pos == p and not preload("res://game/animal_recovery.gd").protected(self,a)) or enemies.any(func(e): return not e.done and e.hp>0 and e.pos == p)
 
 func next_step(start: Vector2i, goal: Vector2i, raider: bool = false, avoid_actors: bool = false) -> Vector2i:
 	var path = find_path(start,goal,raider,avoid_actors)
@@ -898,6 +904,7 @@ func repair(p: Vector2i, target_layer: String="structure") -> bool:
 	return true
 
 func persist_farm():
+	Work.save(self)
 	Story.persist(self)
 	campaign.floors=[]
 	for p in floors:
@@ -910,10 +917,14 @@ func persist_farm():
 			for key in ["equipment","rarity","bonus_skills","ultimate_gauge","ultimate_gauge_max"]: owned[key]=a.get(key)
 			owned.hp=a.hp; owned.mode=a.mode; owned.order_remaining=maxi(0,a.order_until-tick); owned.unavailable_through_day=a.unavailable_through_day
 			if a.species=="shiba":owned.convalescent_ticks=a.get("convalescent_ticks",0)
+	campaign.work_nest_eggs=eggs if jobs.any(func(j):return j.kind=="collect" and j.pos==nest) else 0
+	campaign.work_natural=[]
+	for job in jobs:
+		if job.kind=="collect" and natural.has(job.pos):campaign.work_natural.append({"pos":[job.pos.x,job.pos.y],"kind":natural[job.pos]})
 	campaign.work_jobs=[]
 	for j in jobs:
-		if not BUILD.has(j.kind) and j.kind not in Story.ACTIONS: continue
-		var row=j.duplicate(true); row.pos=[j.pos.x,j.pos.y]; campaign.work_jobs.append(row)
+		if not BUILD.has(j.kind) and j.kind not in Story.ACTIONS and j.kind!="collect": continue
+		var row=j.duplicate(true); row.pos=[j.pos.x,j.pos.y]; row.assigned_to="";row.retry_at=0;campaign.work_jobs.append(row)
 	campaign.keeper_vitals = {"hp": keeper.hp, "sleepiness": keeper.sleepiness, "drinks_today": keeper.drinks_today,"facing":keeper.get("facing",1),"stamina":keeper.stamina,"ultimate_gauge":keeper.ultimate_gauge,"recovery_state":keeper.state if keeper.state in ["unconscious","hidden_rest"] else "free","heal_credit":keeper.heal_credit,"recover_ticks":keeper.recover_ticks}
 	campaign.keeper_position = [keeper.pos.x, keeper.pos.y]
 	campaign.resources = resource_snapshot()
@@ -939,6 +950,8 @@ func step():
 	tick += 1
 	if not keeper.has("has_stamina"): Combat.init_actor(keeper,true)
 	Combat.recover(keeper,DT,keeper.resting)
+	for key in workers:
+		if key!="keeper":Combat.recover(workers[key],DT,workers[key].get("resting",false))
 	for enemy in enemies: Combat.recover(enemy,DT)
 	if phase == "day" and tick * DT >= day_seconds: start_night()
 	Content.tick(self)
@@ -1011,8 +1024,9 @@ func finish(won: bool):
 					if a.unavailable_through_day<campaign.day: a.unavailable_through_day=campaign.day+1
 					owned.unavailable_through_day=a.unavailable_through_day
 	for j in jobs.duplicate():
-		if BUILD.has(j.kind) or j.kind in Story.ACTIONS: continue
+		if BUILD.has(j.kind) or j.kind in Story.ACTIONS or j.kind=="collect": continue
 		if j.kind=="animal_order": Orders.stop(self,j)
+		Work.release(self,j)
 		jobs.erase(j)
 	manual_goal = null
 	if won:

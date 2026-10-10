@@ -39,7 +39,7 @@ static func can_equip(a: Dictionary, id: String) -> bool:
 
 static func equip_job(w, animal_id: int, item_id: String) -> bool:
 	var a=w.Orders.animal(w,animal_id)
-	if not w.working() or w.jobs.size()>=8 or not can_equip(a,item_id): return false
+	if not w.working() or w.jobs.size()>=w.Jobs.LIMIT or not can_equip(a,item_id): return false
 	if w.jobs.any(func(j):return j.kind=="equip" and j.animal_id==animal_id): w.say("装備は予約済みです"); return false
 	var reserved=w.jobs.filter(func(j):return j.kind=="equip" and j.get("item_id")==item_id).size()
 	if item_id!="unequip" and w.item_count(item_id)<=reserved: w.say("使える装備がありません"); return false

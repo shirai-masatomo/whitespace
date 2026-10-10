@@ -138,7 +138,7 @@ static func reason(w,kind: String,p: Vector2i) -> String:
 
 static func enqueue(w,kind: String,p: Vector2i) -> bool:
 	if not w.working(): return false
-	if w.jobs.size()>=8: say(w,"予定は8件までです"); return false
+	if w.jobs.size()>=w.Jobs.LIMIT: say(w,"指定は%d件までです"%w.Jobs.LIMIT); return false
 	var why=reason(w,kind,p)
 	if why!="": say(w,why); return false
 	var target=w.trees.get(p,"") if kind=="clear_tree" else "father-idol"

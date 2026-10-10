@@ -16,7 +16,7 @@ static func attack_speed(w,a: Dictionary) -> float:
 	return (1.15 if w.tick<a.get("dance_until",0) else 1.0)*(1.5 if a.get("species","")=="bull" and a.hp<=a.max_hp*0.5 else 1.0)
 
 static func queue(w,kind: String,p: Vector2i,id: int) -> bool:
-	if not w.working() or w.jobs.size()>=8:return false
+	if not w.working() or w.jobs.size()>=w.Jobs.LIMIT:return false
 	if kind=="milk":
 		var a=w.Orders.animal(w,id)
 		if not w.Orders.active(w,a) or a.species!="cow" or a.get("milked_day",-1)==w.campaign.day:return false

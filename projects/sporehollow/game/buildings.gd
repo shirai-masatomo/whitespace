@@ -75,8 +75,9 @@ static func begin(w,j):
 	if j.old.get("status") != "ready":
 		store[j.pos] = {"id":w.next_structure_id,"kind":j.kind,"status":"building","hp":0,"max_hp":d.hp,"cost":j.reserved,"resource":j.resource,"open":false,"armor":0,"remaining":j.remaining,"total_ticks":j.remaining}
 		w.next_structure_id += 1
+	j.site_id=store.get(j.pos,{}).get("id",-1)
 
-static func advance(w,j):
+static func advance(w,j,work_factor: float=1.0):
 	# Own new site is ignored for validation; upgrades retain the old functioning object.
 	var store = layer(w,j.kind)
 	var site = store.get(j.pos,{})
@@ -87,7 +88,7 @@ static func advance(w,j):
 		j.state = "blocked"; j.block_reason = why
 		return
 	j.state = "working"
-	j.remaining -= w.Life.factor(w)
+	j.remaining -= work_factor
 	if site.get("status") == "building": site.remaining = j.remaining
 	if j.remaining > 0: return
 	var d = w.BUILD[j.kind]

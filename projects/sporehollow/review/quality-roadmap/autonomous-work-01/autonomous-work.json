@@ -1,0 +1,620 @@
+{
+	"failed": 0,
+	"groups": [
+		{
+			"checks": [
+				{
+					"check": "Three designations registered, including construction with no wood",
+					"passed": true
+				},
+				{
+					"check": "Registration does not debit a budget or assign a person",
+					"passed": true
+				},
+				{
+					"check": "Unavailable higher-priority construction yields to gathering",
+					"passed": true
+				},
+				{
+					"check": "Production World completes gathering, item recovery and construction autonomously",
+					"passed": true
+				},
+				{
+					"check": "One building charge and no leaked target claims",
+					"passed": true
+				}
+			],
+			"log": [
+				{
+					"animal_id": 1,
+					"event": "admitted",
+					"pos": [
+						8,
+						13
+					],
+					"tick": 0
+				},
+				{
+					"event": "queued",
+					"id": 1,
+					"kind": "wood_wall",
+					"pos": [
+						4,
+						7
+					],
+					"tick": 0
+				},
+				{
+					"event": "queued",
+					"id": 2,
+					"kind": "collect",
+					"pos": [
+						5,
+						6
+					],
+					"tick": 0
+				},
+				{
+					"event": "queued",
+					"id": 3,
+					"kind": "collect",
+					"pos": [
+						6,
+						6
+					],
+					"tick": 0
+				},
+				{
+					"category": "gather",
+					"event": "assigned",
+					"id": 2,
+					"tick": 1,
+					"worker": "keeper"
+				},
+				{
+					"animal_id": -1,
+					"event": "completed",
+					"id": 2,
+					"kind": "collect",
+					"pos": [
+						5,
+						6
+					],
+					"tick": 1
+				},
+				{
+					"category": "collect",
+					"event": "assigned",
+					"id": 3,
+					"tick": 2,
+					"worker": "keeper"
+				},
+				{
+					"animal_id": -1,
+					"event": "completed",
+					"id": 3,
+					"kind": "collect",
+					"pos": [
+						6,
+						6
+					],
+					"tick": 4
+				},
+				{
+					"category": "build",
+					"event": "assigned",
+					"id": 1,
+					"tick": 9,
+					"worker": "keeper"
+				},
+				{
+					"animal_id": -1,
+					"event": "completed",
+					"id": 1,
+					"kind": "wood_wall",
+					"pos": [
+						4,
+						7
+					],
+					"tick": 18
+				}
+			],
+			"name": "1 Live selection, registration and resource shortage",
+			"resources": {
+				"soil": 100,
+				"stone": 0,
+				"wood": 10
+			}
+		},
+		{
+			"checks": [
+				{
+					"check": "Second human cannot claim the same job",
+					"passed": true
+				},
+				{
+					"check": "Distinct job ID cannot claim an already reserved target",
+					"passed": true
+				},
+				{
+					"check": "Released target can be claimed by the other human through World.step",
+					"passed": true
+				},
+				{
+					"check": "Two-human contention collects exactly once",
+					"passed": true
+				},
+				{
+					"check": "Two actors execute distinct construction jobs in the production loop",
+					"passed": true
+				},
+				{
+					"check": "Parallel construction consumes two budgets exactly once",
+					"passed": true
+				}
+			],
+			"log": [
+				{
+					"animal_id": 1,
+					"event": "admitted",
+					"pos": [
+						8,
+						13
+					],
+					"tick": 0
+				},
+				{
+					"event": "queued",
+					"id": 1,
+					"kind": "collect",
+					"pos": [
+						8,
+						6
+					],
+					"tick": 0
+				},
+				{
+					"event": "suspended",
+					"id": 1,
+					"reason": "検証の担当解除",
+					"tick": 0,
+					"worker": "keeper"
+				},
+				{
+					"category": "gather",
+					"event": "assigned",
+					"id": 1,
+					"tick": 1,
+					"worker": "helper"
+				},
+				{
+					"animal_id": -1,
+					"event": "completed",
+					"id": 1,
+					"kind": "collect",
+					"pos": [
+						8,
+						6
+					],
+					"tick": 3
+				},
+				{
+					"event": "queued",
+					"id": 2,
+					"kind": "wall",
+					"pos": [
+						4,
+						7
+					],
+					"tick": 3
+				},
+				{
+					"event": "queued",
+					"id": 3,
+					"kind": "wall",
+					"pos": [
+						9,
+						7
+					],
+					"tick": 3
+				},
+				{
+					"category": "build",
+					"event": "assigned",
+					"id": 2,
+					"tick": 4,
+					"worker": "keeper"
+				},
+				{
+					"category": "build",
+					"event": "assigned",
+					"id": 3,
+					"tick": 4,
+					"worker": "helper"
+				},
+				{
+					"animal_id": -1,
+					"event": "completed",
+					"id": 2,
+					"kind": "wall",
+					"pos": [
+						4,
+						7
+					],
+					"tick": 7
+				},
+				{
+					"animal_id": -1,
+					"event": "completed",
+					"id": 3,
+					"kind": "wall",
+					"pos": [
+						9,
+						7
+					],
+					"tick": 7
+				}
+			],
+			"name": "2 Ownership and two-human contention"
+		},
+		{
+			"checks": [
+				{
+					"check": "Drafting releases claim and retains partial progress",
+					"passed": true
+				},
+				{
+					"check": "Injury postpones work without losing its phase",
+					"passed": true
+				},
+				{
+					"check": "Future life-need hook interrupts work; this is not an implemented hunger simulation",
+					"passed": true
+				},
+				{
+					"check": "Combat alert retains progress without a permanent owner",
+					"passed": true
+				},
+				{
+					"check": "After danger clears, partial construction resumes without a second charge",
+					"passed": true
+				},
+				{
+					"check": "Closed route yields to other work instead of holding the worker",
+					"passed": true
+				},
+				{
+					"check": "Blocked route retries are bounded, not every tick",
+					"passed": true
+				},
+				{
+					"check": "Opening a route allows autonomous reselection",
+					"passed": true
+				},
+				{
+					"check": "Disappeared target releases ownership and removes stale work",
+					"passed": true
+				},
+				{
+					"check": "Capture releases work ownership",
+					"passed": true
+				},
+				{
+					"check": "Death state retains no target claim",
+					"passed": true
+				},
+				{
+					"check": "Cancellation releases reservations",
+					"passed": true
+				}
+			],
+			"log": [
+				{
+					"animal_id": 1,
+					"event": "admitted",
+					"pos": [
+						8,
+						13
+					],
+					"tick": 0
+				},
+				{
+					"event": "queued",
+					"id": 1,
+					"kind": "wall",
+					"pos": [
+						4,
+						7
+					],
+					"tick": 0
+				},
+				{
+					"category": "build",
+					"event": "assigned",
+					"id": 1,
+					"tick": 1,
+					"worker": "keeper"
+				},
+				{
+					"event": "suspended",
+					"id": 1,
+					"reason": "徴兵中",
+					"tick": 1,
+					"worker": "keeper"
+				},
+				{
+					"category": "build",
+					"event": "assigned",
+					"id": 1,
+					"tick": 9,
+					"worker": "keeper"
+				},
+				{
+					"animal_id": -1,
+					"event": "completed",
+					"id": 1,
+					"kind": "wall",
+					"pos": [
+						4,
+						7
+					],
+					"tick": 11
+				},
+				{
+					"event": "queued",
+					"id": 2,
+					"kind": "collect",
+					"pos": [
+						10,
+						6
+					],
+					"tick": 11
+				},
+				{
+					"event": "queued",
+					"id": 3,
+					"kind": "wall",
+					"pos": [
+						5,
+						7
+					],
+					"tick": 11
+				},
+				{
+					"category": "gather",
+					"event": "assigned",
+					"id": 2,
+					"tick": 12,
+					"worker": "keeper"
+				},
+				{
+					"category": "build",
+					"event": "assigned",
+					"id": 3,
+					"tick": 14,
+					"worker": "keeper"
+				},
+				{
+					"animal_id": -1,
+					"event": "completed",
+					"id": 3,
+					"kind": "wall",
+					"pos": [
+						5,
+						7
+					],
+					"tick": 18
+				},
+				{
+					"category": "gather",
+					"event": "assigned",
+					"id": 2,
+					"tick": 21,
+					"worker": "keeper"
+				},
+				{
+					"category": "gather",
+					"event": "assigned",
+					"id": 2,
+					"tick": 29,
+					"worker": "keeper"
+				},
+				{
+					"category": "gather",
+					"event": "assigned",
+					"id": 2,
+					"tick": 37,
+					"worker": "keeper"
+				},
+				{
+					"animal_id": -1,
+					"event": "completed",
+					"id": 2,
+					"kind": "collect",
+					"pos": [
+						10,
+						6
+					],
+					"tick": 42
+				},
+				{
+					"event": "queued",
+					"id": 4,
+					"kind": "collect",
+					"pos": [
+						14,
+						6
+					],
+					"tick": 42
+				},
+				{
+					"category": "gather",
+					"event": "assigned",
+					"id": 4,
+					"tick": 43,
+					"worker": "keeper"
+				},
+				{
+					"event": "target_missing",
+					"id": 4,
+					"tick": 44
+				},
+				{
+					"event": "queued",
+					"id": 5,
+					"kind": "wall",
+					"pos": [
+						5,
+						8
+					],
+					"tick": 44
+				},
+				{
+					"category": "build",
+					"event": "assigned",
+					"id": 5,
+					"tick": 45,
+					"worker": "keeper"
+				},
+				{
+					"event": "suspended",
+					"id": 5,
+					"reason": "連れ去り・拘束中",
+					"tick": 46,
+					"worker": "keeper"
+				},
+				{
+					"event": "cancelled",
+					"id": 5,
+					"tick": 47
+				}
+			],
+			"name": "3 Interrupt, blocked route, vanished target and recovery"
+		},
+		{
+			"checks": [
+				{
+					"check": "Save reload retains ID, budget, progress; no stale actor lock",
+					"passed": true
+				},
+				{
+					"check": "Personal priority and designated harvest target survive reload",
+					"passed": true
+				},
+				{
+					"check": "Reload finishes work without loss or duplicate resource charge",
+					"passed": true
+				},
+				{
+					"check": "Pre-foundation paid construction migrates without charging again",
+					"passed": true
+				}
+			],
+			"name": "4 Save/load and paid legacy construction"
+		},
+		{
+			"checks": [
+				{
+					"check": "Injected mouse changes the actual worker priority",
+					"passed": true
+				},
+				{
+					"check": "Injected mouse drafts the worker and updates stop reason",
+					"passed": true
+				},
+				{
+					"check": "Actual scene World.step chooses gathering, not registration order",
+					"passed": true
+				},
+				{
+					"check": "Category display preserves designations and provides no global execution reorder",
+					"passed": true
+				}
+			],
+			"jobs": [
+				{
+					"animal_id": -1,
+					"id": 1,
+					"kind": "wall",
+					"pos": "(6, 8)",
+					"required": 10,
+					"reserved": 0,
+					"resource": "soil",
+					"started": false,
+					"state": "pending",
+					"work_category": "build"
+				},
+				{
+					"animal_id": -1,
+					"assigned_to": "keeper",
+					"block_reason": "",
+					"id": 2,
+					"kind": "collect",
+					"phase": "move",
+					"pos": "(9, 6)",
+					"required": 0,
+					"reserved": 0,
+					"resource": "",
+					"started": false,
+					"state": "walking",
+					"work_category": "gather"
+				},
+				{
+					"animal_id": -1,
+					"id": 3,
+					"kind": "collect",
+					"pos": "(8, 8)",
+					"required": 0,
+					"reserved": 0,
+					"resource": "",
+					"started": false,
+					"state": "pending",
+					"work_category": "collect"
+				}
+			],
+			"name": "5 Real scene / priority and draft input / representative UI",
+			"worker": {
+				"carrier": -1,
+				"danger_near": false,
+				"drafted": false,
+				"drinks_today": 0,
+				"facing": 1,
+				"forced_rest": false,
+				"has_stamina": true,
+				"heal_credit": 0.0,
+				"hp": 30,
+				"hurt_until": 0,
+				"idle_elapsed": 0.0,
+				"max_hp": 30,
+				"max_stamina": 100.0,
+				"move_credit": 0.625,
+				"next_attack": 0,
+				"object_attack_power": 1,
+				"placed": true,
+				"pos": "(4, 6)",
+				"recover_ticks": 0,
+				"resting": false,
+				"restrainer": -1,
+				"sleepiness": 0.0925925925925926,
+				"stamina": 100.0,
+				"stamina_regen": 2.0,
+				"state": "free",
+				"ultimate_gauge": 0.0,
+				"ultimate_gauge_max": 100.0,
+				"ultimate_state": "CHARGING",
+				"warned": 0,
+				"work_job": 2,
+				"work_key": "keeper",
+				"work_priorities": {
+					"build": 3,
+					"collect": 2,
+					"gather": 1,
+					"other": 3
+				},
+				"work_status": "採集 #2 · 対象へ移動中"
+			}
+		}
+	],
+	"method": "Production World.step on controlled terrain; synthetic second human only for contention; injected Godot UI input; no human play",
+	"passed": true
+}

@@ -10,7 +10,7 @@ static func active(w,a) -> bool:
 	return not a.is_empty() and not a.get("dead",false) and not a.get("lost",false) and a.get("abductor",-1)<0 and a.get("faction","owned")=="owned" and a.placed and a.hp>0 and w.campaign.day>a.unavailable_through_day
 
 static func enqueue(w,kind: String,ids: Array,p: Vector2i) -> bool:
-	if not w.working() or w.jobs.size()>=8: w.say("予定は8件までです"); return false
+	if not w.working() or w.jobs.size()>=w.Jobs.LIMIT: w.say("指定は%d件までです"%w.Jobs.LIMIT); return false
 	if kind=="charge" and (not w.inside(p) or not w.walkable(p)):w.say("突撃先へ進めません");return false
 	var whistle = w.item_count("whistle")>0
 	var targets=[]
@@ -151,7 +151,7 @@ static func follow(w,a) -> bool:
 	if found.is_empty(): a.erase("guide_job"); return false
 	var j=found[0]
 	if j.targets.size()==1:return true # The paired route moves both actors in Orders.step.
-	if w.jobs[0].id!=j.id: a.state="誘導待ち"; return true
+	if j.get("assigned_to","")!="keeper": a.state="誘導待ち"; return true
 	var t=j.targets.filter(func(t):return t.id==a.id)[0]
 	if w.keeper.get("yield_cell",Vector2i(-1,-1))==a.pos and not w.jobs_held:
 		var spaces=w.neighbors(a.pos).filter(func(c):return w.animal_walkable(a,c) and not w.actor_occupied(c,a.pos))
