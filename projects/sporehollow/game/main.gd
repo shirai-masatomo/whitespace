@@ -23,18 +23,23 @@ const CAMERA_SPEED=420.0*1.5
 const ACTOR_SCALE=1.25
 const ColonyModel=preload("res://game/colony_view_model.gd")
 var job_category="すべて"
-const GROUPS = ["建設", "指示"]
-const MODE_ORDER = [2,0,1] # Persisted subtask IDs stay stable; display order is keeper/build/orders.
+const ColonyPanels=preload("res://game/colony_panels.gd")
+var colony_page=""
+var architect_category="すべて"
+var colony_panel: Control
+var colony_signature=""
+const GROUPS = ["アーキテクト", "動物"]
+const MODE_ORDER = [0,1,3] # Public tabs; internal keeper/subtask ID 2 is preserved.
 const Direction=preload("res://game/direction_art.gd")
 const SixMotion=preload("res://game/six_motion.gd")
 const HumanVisual=preload("res://game/human_visual.gd")
 const AnimalCorpse=preload("res://game/animal_corpse.gd")
 var six_art={}
 var six_revived={}
-const TOOLS = {"milk":"搾乳", "charge":"突撃", "place_kokeshi":"こけしを置く", "place_fossil":"化石を置く","wall": "壁  10 / 1秒", "wood_wall":"木壁 木10", "stone_wall":"石壁 石10", "soil_tile":"土タイル 土2", "wood_tile":"木タイル 木2", "stone_tile":"石タイル 石2", "door":"ドア 木10", "locked_door":"施錠ドア 木20", "guide":"連れてく", "equip":"装備", "repair": "修理", "gate": "ドア開閉", "remove": "解体",
+const TOOLS = {"kennel":"犬小屋 木20","coop":"鶏小屋 木30","milk":"搾乳", "charge":"突撃", "place_kokeshi":"こけしを置く", "place_fossil":"化石を置く","wall": "壁  10 / 1秒", "wood_wall":"木壁 木10", "stone_wall":"石壁 石10", "soil_tile":"土タイル 土2", "wood_tile":"木タイル 木2", "stone_tile":"石タイル 石2", "door":"ドア 木10", "locked_door":"施錠ドア 木20", "guide":"連れてく", "equip":"装備", "repair": "修理", "gate": "ドア開閉", "remove": "解体",
 	"attack_target":"狙え", "auto": "おまかせ", "stay": "待て", "wander": "警戒", "rest": "無理するな", "collect": "資源・卵・設計図", "dog_food": "犬用餌 HP+10", "hen_food": "鶏用餌 HP+8", "cat_food": "猫用餌 HP+8"}
 const ORDER_HELP={"auto":"状況に合わせて行動します。戦闘・救護・その動物の仕事を任せます。","guide":"行き先をクリックして一緒に歩きます。\n物や動物は、押した時点の近くの空き場所へ。\n1匹なら隣接し、遅い方に合わせます。\n複数は近くにまとまり、到着でおまかせへ。\n右クリックで行き先指定を解除します。","stay":"その場所で待ちます。近くの敵には応戦しますが、追いかけません。","wander":"周囲を巡回し、敵を見つけたら攻撃します。","rest":"安全と回復を優先します。危険から離れ、無理に追わず近くの敵に応戦します。","attack_target":"敵を選べ。狙える距離や見通しが必要です。","equip":"持ち物から装備を選び、主人公が届けます。","milk":"乳牛に近づいて搾乳します。1日1回です。","charge":"突撃する行き先を選びます。"}
-const GROUP_TOOLS = [["wall", "wood_wall", "stone_wall", "soil_tile", "wood_tile", "stone_tile", "door", "locked_door", "place_kokeshi", "place_fossil"], ["auto", "guide", "stay", "wander", "rest", "attack_target", "equip", "milk", "charge"], ["collect"]]
+const GROUP_TOOLS = [["wall", "wood_wall", "stone_wall", "soil_tile", "wood_tile", "stone_tile", "door", "locked_door", "kennel", "coop", "place_kokeshi", "place_fossil"], ["auto", "guide", "stay", "wander", "rest", "attack_target", "equip", "milk", "charge"], ["collect"]]
 const BoardArt = preload("res://game/board_art.gd")
 const BuildingArt = preload("res://game/building_art.gd")
 const Art = preload("res://game/adopted_art.gd")
@@ -197,14 +202,15 @@ func _ready():
 	add_button(controls, "advance", "買い物を終える", Rect2(1074, 754, 190, 36), advance)
 	add_button(controls, "retry", "再挑戦", Rect2(556, 514, 168, 38), retry_stage)
 	for i in range(GROUPS.size()):
-		add_button(controls, "group%d" % i, GROUPS[i], Rect2(16 + (i+1) * 122, 754, 116, 36), select_group.bind(i))
+		add_button(controls, "group%d" % i, GROUPS[i], Rect2(16 if i==0 else 208,754,184 if i==0 else 116,36), select_group.bind(i))
+	add_button(controls,"roles","役割",Rect2(332,754,116,36),select_group.bind(3))
 	audio = preload("res://game/farm_audio.gd").new()
 	add_child(audio)
 	queue_controls = Control.new()
 	queue_controls.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	controls.add_child(queue_controls)
 	add_button(controls, "walk", "主人公", Rect2(16, 754, 116, 36), choose_walk)
-	buttons.walk.tooltip_text = "Tab：主人公 → 建設 → 指示。ホイール：操作選択。Shift：指示対象。Ctrl＋ホイール：ズーム"
+	buttons.walk.visible=false # Keeper actions are reached from the actor or the Roles list.
 	setup_menu()
 	overlay = Node2D.new()
 	layer.add_child(overlay)
@@ -246,7 +252,8 @@ func notice(text_value: String):
 
 func select_group(index: int):
 	cancel_wall_stroke()
-	group = index
+	colony_page="roles" if index==3 else ""
+	group = -1 if index==3 else index
 	selected_resources.clear()
 	selected.clear()
 	selected_structures.clear()
@@ -273,6 +280,7 @@ func subtask_choices() -> Array:
 	var available: Array = []
 	if group == 0:
 		available = GROUP_TOOLS[0].filter(func(id): return (world.item_count(id.trim_prefix("place_"))>0 if id.begins_with("place_") else Farm.BUILD[id].get("blueprint", "") in ([""] + world.campaign.unlocked_blueprints)))
+		if architect_category!="すべて":available=available.filter(func(id):return id in ColonyModel.ARCHITECT[architect_category])
 	elif group == 1:
 		var animals = world.animals.filter(func(a): return a.id in selected_animals and a.placed and world.available(a))
 		available = GROUP_TOOLS[1].filter(func(id): return animals.any(func(a): return id in Farm.SPECIES[a.species].orders or (id=="milk" and a.species=="cow" and a.get("milked_day",-1)!=world.campaign.day) or (id=="equip" and selected_animals.size()==1 and Farm.ProgressData.ITEMS.keys().any(func(item):return Farm.Progression.can_equip(a,item)))))
@@ -365,6 +373,8 @@ func collect_selected():
 	refresh()
 
 func refresh():
+	colony_panel=null
+	if not selected.is_empty():colony_page=""
 	merchant_speech.update(self,0.0)
 	context_panel = null
 	if last_phase != world.phase:
@@ -380,8 +390,10 @@ func refresh():
 		palette.remove_child(child)
 		child.queue_free()
 	for id in buttons.keys():
-		if id not in ["pause", "speed", "home", "advance", "retry", "group0", "group1", "group2", "menu_resume", "menu_retry", "menu_morning", "walk"]: buttons.erase(id)
-	buttons.walk.visible = world.working() and not field_book and not field_shop
+		if id not in ["pause", "speed", "home", "advance", "retry", "group0", "group1", "group2", "menu_resume", "menu_retry", "menu_morning", "walk", "roles"]: buttons.erase(id)
+	buttons.walk.visible = false
+	buttons.roles.visible=world.working() and not field_book and not field_shop
+	UI.selected(buttons.roles,colony_page=="roles")
 	UI.selected(buttons.walk, selected.get("kind")=="keeper")
 	buttons.pause.visible = world.working() and not field_book and not field_shop
 	buttons.speed.visible = world.working() and not field_book and not field_shop
@@ -406,7 +418,7 @@ func refresh():
 		buttons.advance.remove_theme_font_size_override("font_size")
 		buttons.advance.size=Vector2(190,44)
 	buttons.retry.visible = world.phase == "result"
-	buttons.group1.text = "指示"
+	buttons.group1.text = "動物"
 	for i in range(2):
 		buttons["group%d" % i].visible = world.working() and not field_book and not field_shop
 		UI.selected(buttons["group%d" % i], i == group)
@@ -465,6 +477,8 @@ func refresh():
 			buttons[id].size.y=36
 	if group == 2:
 		for id in subtask_choices(): UI.selected(buttons[id], subtasks.selected[2] == id)
+	ColonyPanels.build(self)
+	colony_signature=ColonyPanels.signature(self)
 	if not field_book and not field_shop: build_context_actions()
 	if debug_view and not field_book and not field_shop: build_debug_controls()
 	if field_book or field_shop:buttons.advance.visible=false
@@ -741,6 +755,7 @@ func choose_walk():
 	refresh()
 
 func neutral():
+	colony_page=""
 	cancel_wall_stroke()
 	selected_trees.clear()
 	group = -1
@@ -799,6 +814,8 @@ func refresh_jobs():
 	title.add_theme_font_size_override("font_size",14)
 	queue_controls.add_child(title)
 	var filter=OptionButton.new();filter.name="JobCategory";filter.position=Vector2(1118,60);filter.size=Vector2(144,31);filter.focus_mode=Control.FOCUS_NONE;UI.button(filter)
+	for state in ["normal","hover","pressed","disabled"]:
+		filter.get_theme_stylebox(state).content_margin_top=3;filter.get_theme_stylebox(state).content_margin_bottom=3
 	for category in ColonyModel.CATEGORIES:filter.add_item("%s · %d"%[category,ColonyModel.jobs(world,category).size()])
 	filter.select(ColonyModel.CATEGORIES.find(job_category));filter.item_selected.connect(set_job_category)
 	filter.tooltip_text="カテゴリで表示を絞ります。番号は全予定の実行順です。";queue_controls.add_child(filter)
@@ -839,7 +856,7 @@ func refresh_jobs():
 	queue_settle.clear()
 	if world.jobs_held and not world.keeper.resting and world.keeper.state=="free":
 		var resume=Button.new()
-		resume.position=Vector2(1010,98+visible_jobs.size()*35)
+		resume.position=Vector2(1010,98+maxi(1,visible_jobs.size())*35)
 		resume.size=Vector2(248,28)
 		resume.text="▶ 作業再開"
 		resume.focus_mode=Control.FOCUS_NONE
@@ -1112,7 +1129,7 @@ func _input(event):
 				if world.working(): toggle_pause()
 			KEY_TAB:
 				if world.working():
-					var next_mode=MODE_ORDER[(MODE_ORDER.find(group)+1)%MODE_ORDER.size()]
+					var next_mode=MODE_ORDER[(MODE_ORDER.find(3 if colony_page=="roles" else group)+1)%MODE_ORDER.size()]
 					if next_mode==2: choose_walk()
 					else: select_group(next_mode)
 			KEY_HOME: recenter()
@@ -1125,6 +1142,7 @@ func _input(event):
 			get_viewport().set_input_as_handled()
 
 func pointer_over_ui() -> bool:
+	if is_instance_valid(colony_panel) and colony_panel.is_visible_in_tree() and colony_panel.get_global_rect().has_point(pointer):return true
 	if is_instance_valid(context_panel) and context_panel.is_visible_in_tree() and context_panel.get_global_rect().has_point(pointer): return true
 	if pointer.y < 49 or pointer.y > 748: return true
 	if world.working() and Rect2(1010, 64, 248, 66 + world.jobs.size() * 35).has_point(pointer): return true
@@ -1375,6 +1393,7 @@ func _process(delta):
 	prune_selection()
 	if not ui_pointer_capture and not context_targets().is_empty() and context_signature != context_state(): refresh()
 	position_context_actions()
+	if ColonyPanels.signature(self)!=colony_signature:refresh()
 	refresh_jobs()
 	queue_controls.visible=not field_book and not field_shop and story_modal==""
 	for row in queue_controls.get_children():
