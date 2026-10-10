@@ -7,6 +7,17 @@ static func label(parent: Control,text: String,at: Vector2,size: int=16):
 static func panel(g,area: Rect2) -> Panel:
 	var p=Panel.new();p.position=area.position;p.size=area.size;p.add_theme_stylebox_override("panel",g.UI.surface(g.UI.PAPER));g.palette.add_child(p);g.palette.move_child(p,0);g.colony_panel=p;return p
 
+static func research_save(g):
+	g.notice("研究状態を保存しました" if g.world.Snapshot.save(g.world,"user://autonomy.snapshot") else "保存できませんでした")
+
+static func research_load(g):
+	var restored=g.world.Snapshot.restore("user://autonomy.snapshot")
+	if restored==null:g.notice("研究保存がありません");return
+	g.world=restored;g.reset_view();g.colony_page="roles";g.group=2;g.refresh();g.notice("研究状態を読み込みました")
+
+static func select_storage(g):
+	g.tool="storage";g.refresh()
+
 static func architecture_category(g,category: String):
 	g.architect_category=category;g.tool="";g.cancel_wall_stroke();g.refresh()
 
@@ -38,13 +49,17 @@ static func build(g):
 			var priorities=HBoxContainer.new();list.add_child(priorities)
 			var a=g.world.workers[row.key]
 			for kind in g.world.Work.Policy.PRIORITIES:
-				var choice=Button.new();choice.name="Priority_"+row.key+"_"+kind;choice.custom_minimum_size=Vector2(155,36);choice.focus_mode=Control.FOCUS_NONE
+				var choice=Button.new();choice.name="Priority_"+row.key+"_"+kind;choice.custom_minimum_size=Vector2(132,36);choice.focus_mode=Control.FOCUS_NONE
 				choice.text=g.world.Work.Policy.LABELS[kind]+"："+["停止","高","中","低"][a.work_priorities[kind]]
 				choice.tooltip_text="クリックで 高→中→低→停止。中断した進捗は保持します。"
-				g.UI.button(choice);g.UI.selected(choice,a.work_priorities[kind]==1);choice.pressed.connect(priority_changed.bind(g,row.key,kind));priorities.add_child(choice)
-			var draft=Button.new();draft.name="Draft_"+row.key;draft.custom_minimum_size=Vector2(155,36);draft.focus_mode=Control.FOCUS_NONE;draft.text="徴兵解除" if a.drafted else "徴兵する"
-			g.UI.button(draft);g.UI.selected(draft,a.drafted);draft.pressed.connect(draft_changed.bind(g,row.key));priorities.add_child(draft)
-		label(p,"徴兵中は自律作業を中断。解除後は現場と進捗を確認して復帰します。",Vector2(18,278),13)
+				g.UI.button(choice);choice.add_theme_font_size_override("font_size",14);g.UI.selected(choice,a.work_priorities[kind]==1);choice.pressed.connect(priority_changed.bind(g,row.key,kind));priorities.add_child(choice)
+			var draft=Button.new();draft.name="Draft_"+row.key;draft.custom_minimum_size=Vector2(132,36);draft.focus_mode=Control.FOCUS_NONE;draft.text="徴兵解除" if a.drafted else "徴兵する"
+			g.UI.button(draft);draft.add_theme_font_size_override("font_size",14);g.UI.selected(draft,a.drafted);draft.pressed.connect(draft_changed.bind(g,row.key));priorities.add_child(draft)
+		g.add_button(g.palette,"storage_zone","保管域を指定",Rect2(34,696,180,34),select_storage.bind(g))
+		g.UI.selected(g.buttons.storage_zone,g.tool=="storage")
+		label(p,"地面をクリック。40個/マス（仮）",Vector2(212,278),13)
+		g.add_button(g.palette,"research_save","研究保存",Rect2(636,696,122,34),research_save.bind(g))
+		g.add_button(g.palette,"research_load","研究読込",Rect2(770,696,122,34),research_load.bind(g))
 	elif g.group==1 and g.selected_animals.is_empty():
 		var animals=g.world.animals.filter(func(a):return a.get("category","")!="human")
 		var p=panel(g,Rect2(16,430,864,312))

@@ -41,7 +41,7 @@ static func equip_job(w, animal_id: int, item_id: String) -> bool:
 	var a=w.Orders.animal(w,animal_id)
 	if not w.working() or w.jobs.size()>=w.Jobs.LIMIT or not can_equip(a,item_id): return false
 	if w.jobs.any(func(j):return j.kind=="equip" and j.animal_id==animal_id): w.say("装備は予約済みです"); return false
-	var reserved=w.jobs.filter(func(j):return j.kind=="equip" and j.get("item_id")==item_id).size()
+	var reserved=w.jobs.filter(func(j):return j.kind=="equip" and j.get("item_id")==item_id and j.get("material_claims",[]).is_empty() and w.Stock.cargo(w,j.get("assigned_to","keeper"),j.id).is_empty()).size()
 	if item_id!="unequip" and w.item_count(item_id)<=reserved: w.say("使える装備がありません"); return false
 	if w.jobs.is_empty() and w.manual_goal==null and w.Life.able(w) and w.job_hold_reason in ["travel","manual","rescue","danger","rest_end"]: w.Jobs.hold(w,"")
 	w.jobs.append({"id":w.next_job_id,"kind":"equip","animal_id":animal_id,"item_id":item_id,"expected_equipment":a.equipment.duplicate(true),"pos":a.pos,"state":"pending","started":false,"reserved":0,"resource":""})
@@ -51,16 +51,27 @@ static func equip_job(w, animal_id: int, item_id: String) -> bool:
 
 static func equip_step(w,j):
 	var a=w.Orders.animal(w,j.animal_id)
-	if not can_equip(a,j.item_id) or a.get("equipment",{})!=j.expected_equipment or (j.item_id!="unequip" and w.item_count(j.item_id)<1): w.Jobs.complete(w,j,false); return
-	if not w.Orders.active(w,a): j.state="blocked"; j.block_reason="療養中です"; return
-	j.pos=a.pos
-	if not w.Jobs.walk(w,j,w.neighbors(a.pos)): return
-	if not a.equipment.is_empty(): w.add_item(a.equipment.item_id,1)
+	if not can_equip(a,j.item_id) or a.get("equipment",{})!=j.expected_equipment:w.Jobs.complete(w,j,false);return
+	if not w.Orders.active(w,a):j.state="blocked";j.block_reason="療養中です";return
+	var cargo=w.Stock.cargo(w,"keeper",j.id)
+	if j.item_id!="unequip" and cargo.is_empty():
+		var token="job:%d"%j.id
+		if j.get("material_claims",[]).is_empty():j.material_claims=w.Stock.reserve(w,j.item_id,1,token,w.keeper)
+		if j.material_claims.is_empty():j.state="blocked";j.block_reason="届く場所に装備がありません";return
+		var row=w.Stock.find(w,j.material_claims[0].stock_id)
+		if row.is_empty():j.erase("material_claims");return
+		j.phase="fetch"
+		if w.Jobs.walk(w,j,w.neighbors(row.pos)):w.Stock.pickup(w,row,token,w.keeper,j.id);j.erase("material_claims")
+		return
+	j.pos=a.pos;j.phase="deliver"
+	if not w.Jobs.walk(w,j,w.neighbors(a.pos)):return
+	if not a.equipment.is_empty():w.Stock.add(w,a.equipment.item_id,1,a.pos)
 	a.equipment={}
 	if j.item_id!="unequip":
-		w.add_item(j.item_id,-1)
+		var row=cargo[0];row.amount-=1
+		if row.amount==0:w.field_items.erase(row)
 		a.equipment={"item_id":j.item_id,"durability":Data.ITEMS[j.item_id].durability}
-	sync_owned(w,a)
+	w.Stock.sync(w);sync_owned(w,a)
 	w.job_log.append({"tick":w.tick,"event":"equipped","animal_id":a.id,"item":j.item_id,"distance":w.distance(w.keeper.pos,a.pos)})
 	w.Jobs.complete(w,j,true)
 
@@ -80,6 +91,7 @@ static func remove_animal(w,a,reason: String):
 	w.campaign.animal_history.append(record)
 	w.campaign.animals=w.campaign.animals.filter(func(row):return row.id!=a.id)
 	# Lost/dead equipment stays in the history; it is not duplicated into inventory.
+	if not a.equipment.is_empty():w.stock_used[a.equipment.item_id]=w.stock_used.get(a.equipment.item_id,0)+1
 	a.equipment={}
 	w.say(w.animal_name(a)+("を失いました" if reason=="death" else "が連れ去られました"))
 	w.milestones.append({"tick":w.tick,"kind":reason,"animal_id":a.id})
@@ -106,7 +118,7 @@ static func animal_hurt(w,a,e,raw: int,nonlethal: bool=false):
 			if ally.placed and ally.hp>0 and w.distance(ally.pos,a.pos)<=Data.SPECIAL.croak_range: w.share_detection(ally,e.id,5.0)
 		w.skill_log.append({"tick":w.tick,"actor":a.id,"skill":"croak","enemy":e.id})
 	if a.equipment.get("item_id")=="berry" and a.hp<=a.max_hp*0.5:
-		a.equipment={}; a.hp=mini(a.max_hp,a.hp+maxi(1,floori(a.max_hp*0.25)))
+		w.stock_used[a.equipment.item_id]=w.stock_used.get(a.equipment.item_id,0)+1;a.equipment={}; a.hp=mini(a.max_hp,a.hp+maxi(1,floori(a.max_hp*0.25)))
 		w.skill_log.append({"tick":w.tick,"actor":a.id,"skill":"berry"})
 	sync_owned(w,a)
 

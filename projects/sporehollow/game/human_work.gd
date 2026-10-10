@@ -13,13 +13,15 @@ static func register(w,key: String,actor: Dictionary):
 static func category(w,j) -> String:
 	if j.has("work_category"):return j.work_category
 	if w.BUILD.has(j.kind) or j.kind in ["repair","repair_floor","remove","remove_floor","gate"]:return "build"
+	if j.kind=="haul":return "haul"
 	if j.kind=="collect":return "gather" if w.natural.has(j.pos) else "collect"
 	return "other"
 
 static func shared(w,j) -> bool:
-	return w.BUILD.has(j.kind) or j.kind=="collect"
+	return w.BUILD.has(j.kind) or j.kind in ["collect","haul"]
 
 static func target_key(w,j) -> String:
+	if j.kind=="haul":return "stock:%d"%j.stock_id
 	var layer=w.BUILD[j.kind].get("layer","structure") if w.BUILD.has(j.kind) else j.get("target_layer","collect" if j.kind=="collect" else j.kind)
 	return "%s:%d:%d"%[layer,j.pos.x,j.pos.y]
 
@@ -29,6 +31,7 @@ static func active(w,key: String="keeper") -> Dictionary:
 	return {}
 
 static func release(w,j):
+	w.Stock.release_job(w,j)
 	var owner=j.get("assigned_to","")
 	for token in w.work_claims.keys():
 		if w.work_claims[token]==j.id:w.work_claims.erase(token)
@@ -71,6 +74,7 @@ static func reason(w,key: String,a) -> String:
 	return ""
 
 static func missing(w,j) -> bool:
+	if j.kind=="haul":return w.Stock.find(w,j.get("stock_id",-1)).is_empty() and not w.field_items.any(func(r):return r.get("location")=="carry" and r.get("job_id",-1)==j.id)
 	if j.kind=="collect":
 		return w.items_at(j.pos).is_empty() and not w.natural.has(j.pos) and not(j.pos==w.nest and w.eggs>0)
 	if w.BUILD.has(j.kind) and j.started:
@@ -79,6 +83,8 @@ static func missing(w,j) -> bool:
 	return false
 
 static func block(w,j,why: String):
+	if j.get("notified_block","")!=why:
+		w.PlayerEvents.add(w,"仕事 #%d：%s"%[j.id,why],"work_block:%d"%j.id);j.notified_block=why
 	release(w,j)
 	j.state="blocked";j.block_reason=why
 	j.retry_at=w.tick+ceili(Policy.RETRY_SECONDS/w.DT)
@@ -109,19 +115,15 @@ static func choose(w,key: String) -> Dictionary:
 		if w.BUILD.has(j.kind) and not j.started:
 			var why=w.Buildings.reason(w,j.kind,j.pos,false)
 			if why!="":block(w,j,why);continue
-			var required=j.get("required",j.reserved)
-			if j.reserved<required and w.resource_amount(j.resource)<required-j.reserved:block(w,j,"資材不足・採集や入手を待つ");continue
+
 		if not claim(w,key,j):continue
-		# Unit 1 retains the existing scalar budget escrow, acquired once, not on registration.
-		if w.BUILD.has(j.kind):
-			var due=maxi(0,j.get("required",j.reserved)-j.reserved)
-			if due>0:w.add_resource(j.resource,-due);j.reserved+=due
 		j.state="walking";j.block_reason="";j.phase="move"
 		w.job_log.append({"tick":w.tick,"event":"assigned","id":j.id,"worker":key,"category":category(w,j)})
 		return j
 	return {}
 
 static func step(w):
+	w.Stock.step(w)
 	var live_ids=w.jobs.map(func(j):return j.id)
 	for token in w.work_claims.keys():
 		if w.work_claims[token] not in live_ids:w.work_claims.erase(token)
@@ -134,7 +136,9 @@ static func step(w):
 		if j.get("cancel_requested",false):w.Jobs.cancel(w,j.id)
 		elif missing(w,j):w.Jobs.cancel(w,j.id,"target_missing")
 	for key in w.workers:
-		var a=w.workers[key];var why=reason(w,key,a)
+		var a=w.workers[key]
+		if w.Food.step(w,a):continue
+		var why=reason(w,key,a)
 		if why!="":
 			var current=active(w,key)
 			if not current.is_empty() and not allowed(w,key,current):interrupt(w,key,why)
@@ -150,19 +154,20 @@ static func step(w):
 		if j.state=="blocked":
 			a.work_status=j.get("block_reason","作業待ち");block(w,j,a.work_status)
 		else:
-			j.phase="work" if j.state=="working" else "move"
-			a.work_status="%s #%d · %s"%[Policy.LABELS[category(w,j)],j.id,"現場で作業中" if j.phase=="work" else "対象へ移動中"]
+			if j.get("phase","") not in ["fetch","deliver"]:j.phase="work" if j.state=="working" else "move"
+			a.work_status="%s #%d · %s"%[Policy.LABELS[category(w,j)],j.id,{"work":"現場で作業中","fetch":"物資を取りに移動","deliver":"物資を運搬中"}.get(j.phase,"対象へ移動中")]
 
 static func save(w):
 	w.campaign.work_profiles={}
 	for key in w.workers:
 		var a=w.workers[key]
-		w.campaign.work_profiles[key]={"priorities":a.work_priorities.duplicate(),"drafted":a.drafted}
+		w.campaign.work_profiles[key]={"priorities":a.work_priorities.duplicate(),"drafted":a.drafted,"satiety":a.get("satiety",Policy.SATIETY_MAX)}
 
 static func restore(w):
 	register(w,"keeper",w.keeper)
 	var profile=w.campaign.get("work_profiles",{}).get("keeper",{})
 	for kind in Policy.PRIORITIES:w.keeper.work_priorities[kind]=clampi(int(profile.get("priorities",{}).get(kind,Policy.PRIORITIES[kind])),0,3)
 	w.keeper.drafted=profile.get("drafted",false)
+	w.keeper.satiety=profile.get("satiety",Policy.SATIETY_MAX)
 	for j in w.jobs:
-		j.assigned_to="";j.retry_at=0;j.state="pending"
+		j.assigned_to="";j.retry_at=0;j.state="pending";j.erase("material_claims")

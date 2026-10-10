@@ -285,13 +285,13 @@ static func enemy_step(w,e) -> bool:
 			if a.hp>0 and a.get("placed",true) and not preload("res://game/animal_recovery.gd").protected(w,a) and w.distance(a.pos,targets[0].pos)<=1 and w.line_of_sight(targets[0].pos,a.pos):a.poison_until=w.tick+ceili(5.0/w.DT);a.poison_source=e.id
 		return true
 	if w.tick<e.get("poison_visual_until",0):return true
-	var items=w.field_items.filter(func(i):return i.kind!="chick" and w.distance(e.pos,i.pos)<=e.sight_range and w.line_of_sight(e.pos,i.pos))
+	var items=w.field_items.filter(func(i):return i.get("location","ground")=="ground" and i.kind!="chick" and w.distance(e.pos,i.pos)<=e.sight_range and w.line_of_sight(e.pos,i.pos))
 	items.sort_custom(func(a,b):return w.distance(e.pos,a.pos)<w.distance(e.pos,b.pos) if w.distance(e.pos,a.pos)!=w.distance(e.pos,b.pos) else str(a.pos)<str(b.pos))
 	if not items.is_empty():
 		var item=items[0]
 		e.action_id="steal";e.state="盗みに向かう"
 		if w.distance(e.pos,item.pos)<=1:
-			e.stolen=item.duplicate(true);w.field_items.erase(item)
+			e.stolen=item.duplicate(true);e.stolen.claims={};w.field_items.erase(item)
 			w.PlayerEvents.add(w,"盗賊が"+w.Shop.table().get(item.kind,{}).get("Name",item.kind)+"を盗んだ")
 		else:w.Progression.walk(w,e,item.pos)
 		return true

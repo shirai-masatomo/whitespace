@@ -114,7 +114,7 @@ static func command(w, kind: String, p: Vector2i) -> bool:
 		return true
 	if DRINKS.has(kind):
 		if k.state != "free" or w.campaign.items.get(kind, 0) <= 0 or k.drinks_today >= 2 or k.sleepiness <= 0: return false
-		w.campaign.items[kind] -= 1
+		if not w.Stock.consume(w,kind,1):return false
 		k.drinks_today += 1
 		k.sleepiness = maxf(0, k.sleepiness - DRINKS[kind])
 		w.life_log.append({"tick": w.tick, "event": kind})

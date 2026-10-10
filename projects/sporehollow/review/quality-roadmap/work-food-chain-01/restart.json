@@ -1,0 +1,130 @@
+{
+	"failures": 0,
+	"groups": [
+		{
+			"checks": [
+				{
+					"check": "Dedicated snapshot loads in a new engine process",
+					"passed": true
+				},
+				{
+					"check": "Carried goods and the assigned job survive restart",
+					"passed": true
+				},
+				{
+					"check": "Resumed completion matches uninterrupted tick, goods, satiety, assignment and resource outflow",
+					"passed": true
+				}
+			],
+			"name": "Separate process restoration",
+			"result": {
+				"built": 1,
+				"claims": {},
+				"jobs": [
+					[
+						2,
+						"haul",
+						"",
+						""
+					],
+					[
+						3,
+						"haul",
+						"",
+						""
+					]
+				],
+				"pos": "(4, 7)",
+				"satiety": 73.85,
+				"tick": 55,
+				"totals": {
+					"mushroom": 1,
+					"wood": 8
+				},
+				"used": {
+					"mushroom": 1,
+					"wood": 10
+				}
+			},
+			"states": [
+				{
+					"cargo": [
+						[
+							"wood",
+							8
+						]
+					],
+					"satiety": 31.25,
+					"state": "建築 #1 · 物資を運搬中",
+					"tick": 7
+				},
+				{
+					"cargo": [],
+					"satiety": 30.85,
+					"state": "建築 #1 · 物資を取りに移動",
+					"tick": 15
+				},
+				{
+					"cargo": [
+						[
+							"wood",
+							2
+						]
+					],
+					"satiety": 30.5,
+					"state": "建築 #1 · 物資を運搬中",
+					"tick": 22
+				},
+				{
+					"cargo": [],
+					"satiety": 30.15,
+					"state": "建築 #1 · 現場で作業中",
+					"tick": 29
+				},
+				{
+					"cargo": [],
+					"satiety": 30.0,
+					"state": "空腹 · 食べ物へ移動中",
+					"tick": 32
+				},
+				{
+					"cargo": [
+						[
+							"mushroom",
+							1
+						]
+					],
+					"satiety": 29.7,
+					"state": "食事中",
+					"tick": 38
+				},
+				{
+					"cargo": [],
+					"satiety": 74.35,
+					"state": "食事を終え、仕事を選び直す",
+					"tick": 45
+				},
+				{
+					"cargo": [],
+					"satiety": 74.3,
+					"state": "建築 #1 · 対象へ移動中",
+					"tick": 46
+				},
+				{
+					"cargo": [],
+					"satiety": 74.05,
+					"state": "建築 #1 · 現場で作業中",
+					"tick": 51
+				},
+				{
+					"cargo": [],
+					"satiety": 73.85,
+					"state": "仕事を完了・次を探す",
+					"tick": 55
+				}
+			]
+		}
+	],
+	"method": "Production World.step; controlled starting positions and satiety; separate-process snapshot reload; injected Godot input for UI. No human play.",
+	"passed": true
+}

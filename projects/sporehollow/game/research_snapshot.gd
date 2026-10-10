@@ -1,0 +1,43 @@
+extends RefCounted
+## Explicit research-only snapshots, never the normal campaign save or an automatic clock trigger.
+const VERSION=1
+
+static func pack(value):
+	if value is RandomNumberGenerator:return {"_research_rng":true,"seed":value.seed,"state":value.state}
+	if value is Dictionary:
+		var result={}
+		for key in value:result[key]=pack(value[key])
+		return result
+	if value is Array:return value.map(func(v):return pack(v))
+	return value
+
+static func unpack(value):
+	if value is Dictionary:
+		if value.get("_research_rng",false):
+			var rng=RandomNumberGenerator.new();rng.seed=value.seed;rng.state=value.state;return rng
+		var result={}
+		for key in value:result[key]=unpack(value[key])
+		return result
+	if value is Array:return value.map(func(v):return unpack(v))
+	return value
+
+static func save(w,path: String) -> bool:
+	var state={}
+	for property in w.get_property_list():
+		if property.name=="script" or not(property.usage&PROPERTY_USAGE_SCRIPT_VARIABLE):continue
+		state[property.name]=pack(w.get(property.name))
+	var file=FileAccess.open(path,FileAccess.WRITE)
+	if file==null:return false
+	file.store_var({"version":VERSION,"state":state},false);file.close();return true
+
+static func restore(path: String):
+	var file=FileAccess.open(path,FileAccess.READ)
+	if file==null:return null
+	var payload=file.get_var(false);file.close()
+	if not payload is Dictionary or payload.get("version",-1)!=VERSION:return null
+	var state=unpack(payload.state)
+	var w=load("res://game/world.gd").new(state.campaign,int(state.seed_value))
+	for key in state:w.set(key,state[key])
+	# The worker registry must reference the actual keeper object after deserialization.
+	w.workers.keeper=w.keeper
+	return w

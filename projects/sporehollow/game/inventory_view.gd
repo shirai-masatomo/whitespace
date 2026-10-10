@@ -6,12 +6,10 @@ static func open(g):
 	panel.size=Vector2(1280,800);panel.mouse_filter=Control.MOUSE_FILTER_STOP
 	panel.add_theme_stylebox_override("panel",g.MarketView.panel(Color(0.13,0.20,0.16,0.94)))
 	g.controls.get_parent().add_child(panel);panel.theme=g.controls.theme
-	var title=Label.new();title.text="持ち物";title.position=Vector2(240,125);title.add_theme_font_size_override("font_size",30);panel.add_child(title)
+	var title=Label.new();title.text="物資の所在";title.position=Vector2(240,125);title.add_theme_font_size_override("font_size",30);panel.add_child(title)
 	var scroll=ScrollContainer.new();scroll.position=Vector2(240,185);scroll.size=Vector2(800,430);panel.add_child(scroll)
 	var list=VBoxContainer.new();list.custom_minimum_size.x=775;list.add_theme_constant_override("separation",12);scroll.add_child(list)
-	var counts=g.world.campaign.items.duplicate()
-	counts.merge(g.world.resource_snapshot(),true)
-	counts["egg"]=g.world.item_count("egg")
+	var counts=g.world.Stock.totals(g.world)
 	var ids=counts.keys();ids.sort()
 	for id in ids:
 		if counts[id]<=0:continue
@@ -23,7 +21,11 @@ static func open(g):
 		var purpose=g.MarketView.description(id)
 		if g.world.Shop.FOOD.has(id):purpose="旧支給品。食料機能は現在保留中"
 		if id in ["soil","wood","stone"]:purpose="建設・改築に使う素材"
-		body.text=name+" ×%d"%counts[id]+"\n"+purpose.replace("\n"," ")
+		if id in g.world.Work.Policy.HUMAN_FOOD:purpose="空腹時に食べます。保管域を経由せず、地面からも利用できます"
+		var places={"ground":0,"carry":0,"site":0}
+		for item in g.world.field_items:
+			if item.kind==id:places[item.get("location","ground")]+=item.get("amount",1)
+		body.text=name+" ×%d"%counts[id]+"  地面%d / 運搬%d / 現場%d"%[places.ground,places.carry,places.site]+"\n"+purpose.replace("\n"," ")
 		body.add_theme_font_size_override("font_size",17);body.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART
 		row.add_child(body)
 		var tier=g.world.ProgressData.rarity(product.Rarity)

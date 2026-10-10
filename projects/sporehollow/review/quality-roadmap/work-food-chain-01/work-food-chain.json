@@ -1,0 +1,290 @@
+{
+	"failures": 0,
+	"groups": [
+		{
+			"checks": [
+				{
+					"check": "Human physically picked up building materials",
+					"passed": true
+				},
+				{
+					"check": "Mid-carry snapshot saved without touching campaign save",
+					"passed": true
+				},
+				{
+					"check": "Wall completes after autonomous materials and meal",
+					"passed": true
+				},
+				{
+					"check": "Exactly one food unit consumed and satiety restored",
+					"passed": true
+				},
+				{
+					"check": "Ground, carried and site material plus installed consumption conserve wood",
+					"passed": true
+				},
+				{
+					"check": "Trace shows meal and resumed physical work",
+					"passed": true
+				}
+			],
+			"name": "1 Wall designation through hauling, eating and resuming",
+			"result": {
+				"built": 1,
+				"claims": {},
+				"jobs": [
+					[
+						2,
+						"haul",
+						"",
+						""
+					],
+					[
+						3,
+						"haul",
+						"",
+						""
+					]
+				],
+				"pos": "(4, 7)",
+				"satiety": 73.85,
+				"tick": 55,
+				"totals": {
+					"mushroom": 1,
+					"wood": 8
+				},
+				"used": {
+					"mushroom": 1,
+					"wood": 10
+				}
+			},
+			"states": [
+				{
+					"cargo": [
+						[
+							"wood",
+							8
+						]
+					],
+					"satiety": 31.25,
+					"state": "建築 #1 · 物資を運搬中",
+					"tick": 7
+				},
+				{
+					"cargo": [],
+					"satiety": 30.85,
+					"state": "建築 #1 · 物資を取りに移動",
+					"tick": 15
+				},
+				{
+					"cargo": [
+						[
+							"wood",
+							2
+						]
+					],
+					"satiety": 30.5,
+					"state": "建築 #1 · 物資を運搬中",
+					"tick": 22
+				},
+				{
+					"cargo": [],
+					"satiety": 30.15,
+					"state": "建築 #1 · 現場で作業中",
+					"tick": 29
+				},
+				{
+					"cargo": [],
+					"satiety": 30.0,
+					"state": "空腹 · 食べ物へ移動中",
+					"tick": 32
+				},
+				{
+					"cargo": [
+						[
+							"mushroom",
+							1
+						]
+					],
+					"satiety": 29.7,
+					"state": "食事中",
+					"tick": 38
+				},
+				{
+					"cargo": [],
+					"satiety": 74.35,
+					"state": "食事を終え、仕事を選び直す",
+					"tick": 45
+				},
+				{
+					"cargo": [],
+					"satiety": 74.3,
+					"state": "建築 #1 · 対象へ移動中",
+					"tick": 46
+				},
+				{
+					"cargo": [],
+					"satiety": 74.05,
+					"state": "建築 #1 · 現場で作業中",
+					"tick": 51
+				},
+				{
+					"cargo": [],
+					"satiety": 73.85,
+					"state": "仕事を完了・次を探す",
+					"tick": 55
+				}
+			]
+		},
+		{
+			"checks": [
+				{
+					"check": "Two people build with shared physical stock without duplication",
+					"passed": true
+				},
+				{
+					"check": "Food reservations allocate two meals exactly once",
+					"passed": true
+				},
+				{
+					"check": "Drafting drops carried material and releases claims without losing quantity",
+					"passed": true
+				},
+				{
+					"check": "Capture releases carried material and job owner without a quantity loss",
+					"passed": true
+				},
+				{
+					"check": "Released material is found again and wall finishes",
+					"passed": true
+				},
+				{
+					"check": "Manual rest interrupts eating, releases food reservation and retains the uneaten portion",
+					"passed": true
+				},
+				{
+					"check": "Disappearing reserved material releases ownership with a reason",
+					"passed": true
+				},
+				{
+					"check": "Cancelling a started physical site preserves refund plus consumed quantity",
+					"passed": true
+				}
+			],
+			"name": "2 Two humans, material/food contention and interrupted cargo"
+		},
+		{
+			"checks": [
+				{
+					"check": "Autonomous hauling places goods inside designated storage",
+					"passed": true
+				},
+				{
+					"check": "Full storage retains goods with an explicit blocked reason",
+					"passed": true
+				},
+				{
+					"check": "Existing natural mushroom can supply a meal when stock runs out",
+					"passed": true
+				},
+				{
+					"check": "Old resource consumers cannot consume reserved stock",
+					"passed": true
+				},
+				{
+					"check": "Compatibility resource deduction updates the physical ledger once",
+					"passed": true
+				},
+				{
+					"check": "Existing equipment order accepts a physical item",
+					"passed": true
+				},
+				{
+					"check": "Equipment is carried to its animal, leaving exactly one equipped object",
+					"passed": true
+				},
+				{
+					"check": "Controlled shop has a material transaction to exercise",
+					"passed": true
+				},
+				{
+					"check": "Buying spawns the purchased material quantity on the map once",
+					"passed": true
+				},
+				{
+					"check": "Selling removes the physical quantity once",
+					"passed": true
+				},
+				{
+					"check": "Unreachable food does not freeze other work or flood the event history",
+					"passed": true
+				},
+				{
+					"check": "Opening the food route leads to a meal without manual reset",
+					"passed": true
+				}
+			],
+			"name": "3 Storage capacity, food shortage and existing transactions"
+		},
+		{
+			"checks": [
+				{
+					"check": "Unmodified starting ranch accepts a nearby wall designation",
+					"passed": true
+				},
+				{
+					"check": "Starting ranch can reach its initial physical supplies and construct without terrain changes",
+					"passed": true
+				},
+				{
+					"check": "Scalar legacy campaign migrates once and does not duplicate on reload",
+					"passed": true
+				},
+				{
+					"check": "Legacy paid budget becomes site material once, separate from the remaining ground stock",
+					"passed": true
+				},
+				{
+					"check": "Legacy paid site completes without charging remaining stock",
+					"passed": true
+				},
+				{
+					"check": "Dedicated snapshot preserves ledger independently from ordinary save",
+					"passed": true
+				}
+			],
+			"name": "4 Campaign migration and dedicated snapshot authority"
+		},
+		{
+			"checks": [
+				{
+					"check": "Roles exposes haul priority and storage designation",
+					"passed": true
+				},
+				{
+					"check": "Injected mouse selects storage designation tool",
+					"passed": true
+				},
+				{
+					"check": "Injected board click designates a real storage cell",
+					"passed": true
+				},
+				{
+					"check": "Dedicated UI save/load restores the research world",
+					"passed": true
+				},
+				{
+					"check": "Representative scene captured during the actual eating phase",
+					"passed": true
+				},
+				{
+					"check": "Same rendered world resumes and completes its wall",
+					"passed": true
+				}
+			],
+			"name": "5 Representative live UI"
+		}
+	],
+	"method": "Production World.step; controlled starting positions and satiety; separate-process snapshot reload; injected Godot input for UI. No human play.",
+	"passed": true
+}

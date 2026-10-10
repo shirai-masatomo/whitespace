@@ -15,6 +15,7 @@ static func build_reason(w, kind: String, p: Vector2i, extra_jobs: int=0, held_c
 	return ""
 
 static func enqueue(w, kind: String, p: Vector2i, animal_id: int) -> bool:
+	w.Stock.normalize(w)
 	if not w.working() or w.jobs.size()>=LIMIT or not w.inside(p): return false
 	if w.jobs.any(func(j):return j.pos==p and j.kind==kind): return false
 	var resource=""
@@ -41,6 +42,12 @@ static func enqueue(w, kind: String, p: Vector2i, animal_id: int) -> bool:
 		var b=w.building_store(j.target_layer).get(p,{})
 		j.target_id=b.id; j.target_kind=b.kind
 		if w.jobs.any(func(other):return other.pos==p and ((w.BUILD.has(other.kind) and w.BUILD[other.kind].layer==j.target_layer) or other.get("target_layer")==j.target_layer)): return false
+	if kind=="collect" and not w.items_at(p).is_empty():
+		var row=w.items_at(p)[0]
+		if row.kind!="skill_scroll" and not row.kind.ends_with("_plan"):
+			if w.jobs.any(func(other):return other.get("stock_id",-1)==row.stock_id):return false
+			j.kind="haul";j.stock_id=row.stock_id
+	j.physical=w.BUILD.has(kind)
 	j.work_category=w.Work.category(w,j)
 	w.next_job_id+=1
 	if w.jobs.is_empty() and w.manual_goal==null and w.Life.able(w) and w.job_hold_reason in ["travel","manual","rescue","danger","rest_end"]: hold(w,"")
@@ -56,7 +63,9 @@ static func cancel(w,id: int,reason: String="cancelled") -> bool:
 			j.cancel_requested=true; return true
 		w.Work.release(w,j)
 		if j.kind=="animal_order": w.Orders.stop(w,j)
-		if w.BUILD.has(j.kind): w.Buildings.cancel(w,j)
+		if w.BUILD.has(j.kind):
+			if j.get("physical",false):w.Stock.finish_build(w,j,false)
+			w.Buildings.cancel(w,j)
 		if j.reserved>0: w.add_resource(j.resource,j.reserved)
 		w.jobs.erase(j)
 		w.job_log.append({"tick":w.tick,"event":reason,"id":id})
@@ -104,6 +113,8 @@ static func step(w):
 	w.Work.step(w)
 
 static func execute(w,j,actor: Dictionary):
+	if j.kind=="haul":w.Stock.haul_step(w,j,actor);return
+	if w.BUILD.has(j.kind) and not w.Stock.prepare_build(w,j,actor):return
 	if j.kind in ["milk","place_kokeshi","place_fossil"]:w.Content.job(w,j);return
 	if j.kind=="equip": w.Progression.equip_step(w,j); return
 	if j.kind in w.Story.ACTIONS: w.Story.step_job(w,j); return
@@ -125,6 +136,7 @@ static func execute(w,j,actor: Dictionary):
 			var why=w.Buildings.reason(w,j.kind,j.pos,false)
 			if why!="": j.state="blocked"; j.block_reason=why; return
 			w.Buildings.begin(w,j)
+		j.phase="work"
 		w.Buildings.advance(w,j,factor(actor))
 		return
 	if j.kind in ["remove","remove_floor"] and w.occupied(j.pos): j.state="blocked"; j.block_reason="誰かがいます"; return
@@ -134,6 +146,9 @@ static func execute(w,j,actor: Dictionary):
 	complete(w,j,w._execute_local(j.kind,j.pos,j.animal_id))
 
 static func complete(w,j: Dictionary,ok: bool):
+	if w.BUILD.has(j.kind) and j.get("physical",false):
+		w.Stock.finish_build(w,j,ok)
+		if ok:w.PlayerEvents.add(w,w.Buildings.NAMES.get(j.kind,"建物")+"が完成しました","build_done:%d"%j.id)
 	w.Work.release(w,j)
 	w.jobs.erase(j)
 	w.job_log.append({"tick":w.tick,"event":"completed" if ok else "invalid","id":j.id,"kind":j.kind,"pos":[j.pos.x,j.pos.y],"animal_id":j.animal_id})

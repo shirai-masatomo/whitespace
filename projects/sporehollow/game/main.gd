@@ -852,7 +852,7 @@ func refresh_jobs():
 		UI.button(row, Color("c6d1ac") if j.get("assigned_to","")!="" else UI.PAPER)
 		for state in ["normal","hover","pressed","disabled"]:
 			row.get_theme_stylebox(state).content_margin_top=3;row.get_theme_stylebox(state).content_margin_bottom=3
-		var names = {"milk":"搾乳","place_kokeshi":"こけし","place_fossil":"化石","wall": "壁", "door":"ドア","locked_door":"施錠ドア","wood_wall":"木壁","stone_wall":"石壁","soil_tile":"土タイル","wood_tile":"木タイル","stone_tile":"石タイル", "kennel": "犬小屋", "coop": "鶏小屋", "move": "歩く", "collect": "回収", "repair": "修理", "remove": "解体", "remove_floor":"タイル解体", "repair_floor":"床修理", "gate": "ドアを開閉", "equip":"装備", "animal_order": "仲間へ指示"}
+		var names = {"milk":"搾乳","place_kokeshi":"こけし","place_fossil":"化石","wall": "壁", "door":"ドア","locked_door":"施錠ドア","wood_wall":"木壁","stone_wall":"石壁","soil_tile":"土タイル","wood_tile":"木タイル","stone_tile":"石タイル", "kennel": "犬小屋", "coop": "鶏小屋", "move": "歩く", "collect": "採集", "haul":"運搬", "repair": "修理", "remove": "解体", "remove_floor":"タイル解体", "repair_floor":"床修理", "gate": "ドアを開閉", "equip":"装備", "animal_order": "仲間へ指示"}
 		row.text = "%s%s" % [ "› " if j.state != "pending" else "", ("待機 · " if j.state == "blocked" else "") + names.get(j.kind, StoryView.LABELS.get(j.kind,"仕事"))]
 		if j.get("cancel_requested",false):row.text="取消待ち · "+names.get(j.kind,"仕事")
 		row.draw.connect(draw_queue_badge.bind(row,j.id))
@@ -1179,6 +1179,7 @@ func selection_candidates() -> Array:
 		if a.placed: result.append({"class": "animal", "id": a.id, "point": actor_pixel("a%d" % a.id, a.pos)})
 	var cells = world.natural.keys()
 	for item in world.field_items:
+		if item.get("location","ground")!="ground":continue
 		if item.pos not in cells: cells.append(item.pos)
 	for cell in cells: result.append({"class": "resource", "id": cell, "point": center(cell)})
 	for cell in world.trees: result.append({"class":"tree","id":cell,"point":center(cell)})
@@ -1271,6 +1272,9 @@ func board_click(event):
 		request_merchant();return
 	merchant_requested=false;world.merchant_approach=null
 	var cell = Vector2i(get_canvas_transform().affine_inverse() * event.position / TILE)
+	if tool=="storage":
+		if not world.act("storage",cell):notice("歩ける地面を指定してください")
+		refresh();return
 	if tool in ["guide","attack_target","charge"]:
 		command_selected(tool,cell);refresh();return
 	if tool.begins_with("place_"):
@@ -1672,6 +1676,8 @@ func _draw():
 	BuildingArt.boundaries(self)
 	for cell in world.indoor:
 		draw_rect(Rect2(Vector2(cell)*TILE,TILE),Color(0.22,0.35,0.45,0.22 if debug_view else 0.08))
+	for p in world.storage_cells:
+		draw_rect(Rect2(Vector2(p)*TILE+Vector2(2,2),TILE-Vector2(4,4)),Color(0.58,0.76,0.82,0.3));draw_rect(Rect2(Vector2(p)*TILE+Vector2(2,2),TILE-Vector2(4,4)),Color("a6d7de"),false,2)
 	for p in world.natural:
 		BoardArt.draw_resource(self, center(p) + Vector2(sin(visual_time * 1.3 + p.x) * (1.5 if world.natural[p] == "weed" else 0.3), 0), world.natural[p])
 	for f in world.foods:
@@ -1679,6 +1685,7 @@ func _draw():
 		draw_circle(center(f.pos), 6, Color("70513b"))
 	draw_market_world()
 	for item in world.field_items:
+		if item.get("location","ground")!="ground":continue
 		var q = center(item.pos) + (Vector2(7, 8) if item.kind.ends_with("_plan") else Vector2.ZERO)
 		if item.kind.ends_with("_plan") and world.keeper.placed and item.pos == world.keeper.pos: q = center(item.pos) + Vector2(-25,-22)
 		if item.kind.ends_with("_plan") or item.kind=="skill_scroll":
@@ -1690,7 +1697,15 @@ func _draw():
 		elif item.kind == "chick":
 			draw_circle(q, 8, Color("efd160"))
 			draw_line(q, q + Vector2(10, 2), Color("d78d37"), 3)
+		elif item.kind in ["soil","wood","stone","mushroom"]:
+			var colors={"soil":Color("ab7954"),"wood":Color("bd8d51"),"stone":Color("a6ad9d"),"mushroom":Color("dcad9a")}
+			draw_rect(Rect2(q-Vector2(9,6),Vector2(18,12)),colors[item.kind]);draw_rect(Rect2(q-Vector2(9,6),Vector2(18,12)),Color("584c32"),false,2)
 		else: draw_line(q + Vector2(-5, 6), q + Vector2(6, -8), Color("eee8cf"), 5)
+		if item.get("amount",1)>1:label_on(self,q+Vector2(8,-5),str(item.amount),12,UI.PAPER)
+	for a in world.workers.values():
+		var carried=world.Stock.cargo(world,a.work_key)
+		if not carried.is_empty():
+			var q=center(a.pos)+Vector2(13,-24);draw_rect(Rect2(q,Vector2(14,12)),Color("c69b65"));label_on(self,q+Vector2(15,9),str(carried[0].amount),12,UI.PAPER)
 	for a in world.animals+world.enemies:
 		if a.get("species")=="doberman" and a.has("visual_death_tick") and (world.tick-a.visual_death_tick)*world.DT<ProgressArt.duration("doberman","death"):
 			Delivered.draw_clip(self,ProgressArt.clip("doberman","death",a.get("facing",1)),center(a.pos)+Vector2(0,14),(world.tick-a.visual_death_tick)*world.DT)

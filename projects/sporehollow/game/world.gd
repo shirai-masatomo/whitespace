@@ -68,6 +68,12 @@ const Jobs = preload("res://game/keeper_jobs.gd")
 const Work=preload("res://game/human_work.gd")
 var workers: Dictionary = {}
 var work_claims: Dictionary = {}
+const Stock=preload("res://game/physical_stock.gd")
+const Food=preload("res://game/human_food.gd")
+const Snapshot=preload("res://game/research_snapshot.gd")
+var next_stock_id=1
+var storage_cells: Array = []
+var stock_used: Dictionary = {}
 var jobs: Array = []
 var next_job_id = 1
 var job_log: Array = []
@@ -134,7 +140,7 @@ var metrics = {"repelled": 0, "stolen": 0, "structure_damage": 0, "commands": 0.
 	"bark_casts": 0, "bark_targets": 0, "weed_spawned": 0, "mushroom_spawned": 0, "weed_collected": 0, "mushroom_collected": 0, "stump_spawned": 0, "stump_collected": 0, "nature_rolls": 0, "mushrooms_used": 0, "mushroom_healing": 0}
 
 static func new_campaign() -> Dictionary:
-	return {"stage": 1, "day": 1, "exp_pool": 0, "night_ready": false, "gold": 40, "field_items": [], "eggs": 0, "mushrooms": 0, "shelter": false,
+	return {"stage": 1, "day": 1, "exp_pool": 0, "night_ready": false, "gold": 40, "field_items": [], "eggs": 0, "mushrooms": preload("res://game/work_policy.gd").STARTING_FOOD, "shelter": false,
 		"fence": 0, "resources": {"soil": 100, "wood": 0, "stone": 0}, "items": {"dog_food": 2, "hen_food": 0}, "unlocked_blueprints": [], "facilities": [], "next_structure_id": 1, "animals": [{"id": 1, "category": "dog", "species": "shiba", "lv": 1, "xp": 0, "loyalty": 75}]}
 
 func _init(data: Dictionary = {}, seed_number: int = 17, stage_override: Dictionary = {}):
@@ -258,6 +264,8 @@ func _init(data: Dictionary = {}, seed_number: int = 17, stage_override: Diction
 			next_job_id+=1
 	eggs=int(campaign.get("work_nest_eggs",0))
 	for target in campaign.get("work_natural",[]):natural[Vector2i(target.pos[0],target.pos[1])]=target.kind
+	Stock.init(self)
+	stock_used=campaign.get("stock_used",{}).duplicate()
 	Work.restore(self)
 	Story.init(self)
 	refresh_indoor()
@@ -395,7 +403,12 @@ func start_night():
 
 func act(kind: String, p: Vector2i = Vector2i.ZERO, animal_id: int = -1) -> bool:
 	var accepted = false
-	if kind in ["milk","place_kokeshi","place_fossil"]:
+	if kind=="storage":
+		if working() and inside(p) and walkable(p) and p not in Story.idol_cells(self):
+			if p in storage_cells:storage_cells.erase(p)
+			else:storage_cells.append(p)
+			accepted=true
+	elif kind in ["milk","place_kokeshi","place_fossil"]:
 		accepted=Content.queue(self,kind,p,animal_id)
 	elif kind in Story.ACTIONS:
 		accepted = Story.enqueue(self,kind,p)
@@ -436,7 +449,7 @@ func _execute_local(kind: String, p: Vector2i = Vector2i.ZERO, animal_id: int = 
 				var target_layer="floor" if kind=="remove_floor" else "structure"
 				var store=building_store(target_layer)
 				if store.get(p,{}).get("status")!="ready" or (target_layer=="floor" and live_structure(p)): return false
-				add_resource(store[p].get("resource","soil"),dismantle_quote(p,target_layer))
+				Stock.add(self,store[p].get("resource","soil"),dismantle_quote(p,target_layer),p)
 				if target_layer=="floor": store.erase(p)
 				else: store[p].status="removed"; store[p].hp=0
 				refresh_indoor()
@@ -456,7 +469,7 @@ func _execute_local(kind: String, p: Vector2i = Vector2i.ZERO, animal_id: int = 
 				elif item.kind.ends_with("_plan"):
 					if not Buildings.NAMES.has(item.kind.trim_suffix("_plan")): return false
 					grant_blueprint(item.kind.trim_suffix("_plan"), p)
-				else: add_item(item.kind, 1)
+				else: return false # Physical goods use the haul job, never teleport into inventory.
 				field_items.erase(item)
 				milestones.append({"tick": tick, "kind": "item_collected", "item": item.kind})
 				accepted = true
@@ -465,11 +478,11 @@ func _execute_local(kind: String, p: Vector2i = Vector2i.ZERO, animal_id: int = 
 				natural.erase(p)
 				metrics[harvest + "_collected"] += 1
 				if harvest == "weed": campaign.gold += Rules.NATURE.weed_gold
-				elif harvest == "mushroom": campaign.mushrooms += 1
-				elif harvest == "stump": add_resource("wood", Rules.NATURE.stump_wood)
+				elif harvest == "mushroom": Stock.add(self,"mushroom",1,p)
+				elif harvest == "stump": Stock.add(self,"wood",Rules.NATURE.stump_wood,p)
 				accepted = true
 			elif kind == "collect" and p == nest and eggs > 0:
-				campaign.eggs += eggs
+				Stock.add(self,"egg",eggs,p)
 				metrics.eggs_collected += eggs
 				eggs = 0
 				accepted = true
@@ -904,6 +917,7 @@ func repair(p: Vector2i, target_layer: String="structure") -> bool:
 	return true
 
 func persist_farm():
+	Stock.save(self)
 	Work.save(self)
 	Story.persist(self)
 	campaign.floors=[]
@@ -923,7 +937,7 @@ func persist_farm():
 		if job.kind=="collect" and natural.has(job.pos):campaign.work_natural.append({"pos":[job.pos.x,job.pos.y],"kind":natural[job.pos]})
 	campaign.work_jobs=[]
 	for j in jobs:
-		if not BUILD.has(j.kind) and j.kind not in Story.ACTIONS and j.kind!="collect": continue
+		if not BUILD.has(j.kind) and j.kind not in Story.ACTIONS and j.kind not in ["collect","haul"]: continue
 		var row=j.duplicate(true); row.pos=[j.pos.x,j.pos.y]; row.assigned_to="";row.retry_at=0;campaign.work_jobs.append(row)
 	campaign.keeper_vitals = {"hp": keeper.hp, "sleepiness": keeper.sleepiness, "drinks_today": keeper.drinks_today,"facing":keeper.get("facing",1),"stamina":keeper.stamina,"ultimate_gauge":keeper.ultimate_gauge,"recovery_state":keeper.state if keeper.state in ["unconscious","hidden_rest"] else "free","heal_credit":keeper.heal_credit,"recover_ticks":keeper.recover_ticks}
 	campaign.keeper_position = [keeper.pos.x, keeper.pos.y]
@@ -1024,7 +1038,7 @@ func finish(won: bool):
 					if a.unavailable_through_day<campaign.day: a.unavailable_through_day=campaign.day+1
 					owned.unavailable_through_day=a.unavailable_through_day
 	for j in jobs.duplicate():
-		if BUILD.has(j.kind) or j.kind in Story.ACTIONS or j.kind=="collect": continue
+		if BUILD.has(j.kind) or j.kind in Story.ACTIONS or j.kind in ["collect","haul"]: continue
 		if j.kind=="animal_order": Orders.stop(self,j)
 		Work.release(self,j)
 		jobs.erase(j)
@@ -1124,14 +1138,18 @@ func resource_snapshot() -> Dictionary:
 	return {"soil": materials, "wood": wood, "stone": stone}
 
 func resource_amount(kind: String) -> int:
-	return resource_snapshot().get(kind, 0)
+	return Stock.available(self,kind) if campaign.get("physical_stock",false) else resource_snapshot().get(kind, 0)
 
 func add_resource(kind: String, amount: int):
+	if campaign.get("physical_stock",false):
+		if amount>0:Stock.add(self,kind,amount,logistics_entry)
+		elif amount<0:Stock.consume(self,kind,-amount)
+		return
 	match kind:
 		"soil": materials += amount
 		"wood": wood += amount
 		"stone": stone += amount
-	campaign.resources = resource_snapshot()
+	campaign.resources=resource_snapshot()
 
 func grant_blueprint(id: String, p: Vector2i):
 	if not Buildings.NAMES.has(id): return
@@ -1149,7 +1167,7 @@ func use_food(kind: String, animal_id: int, p: Vector2i) -> bool:
 	for a in animals:
 		if (a.id == animal_id or (animal_id < 0 and a.pos == p)) and a.placed and a.category == food.category and a.hp > 0 and a.hp < a.max_hp:
 			a.hp = mini(a.max_hp, a.hp + food.hp)
-			campaign.items[kind] -= 1
+			Stock.consume(self,kind,1)
 			metrics.fed += 1
 			return true
 	return false
@@ -1190,19 +1208,16 @@ func heal_with_mushrooms():
 		var a = candidates[0]
 		var restored = mini(Rules.NATURE.mushroom_hp, a.max_hp - a.hp)
 		a.hp += restored
-		campaign.mushrooms -= 1
+		Stock.consume(self,"mushroom",1)
 		metrics.mushrooms_used += 1
 		metrics.mushroom_healing += restored
 
 func item_count(id: String) -> int:
-	if id == "egg": return campaign.eggs
-	if id == "mushroom": return campaign.mushrooms
-	return campaign.items.get(id, 0)
+	return Stock.available(self,id)
 
 func add_item(id: String, count: int):
-	if id == "egg": campaign.eggs += count
-	elif id == "mushroom": campaign.mushrooms += count
-	else: campaign.items[id] = campaign.items.get(id, 0) + count
+	if count>0:Stock.add(self,id,count,logistics_entry)
+	elif count<0:Stock.consume(self,id,-count)
 
 func buy(id: String) -> bool:
 	if not (phase=="shop" or (market_open and merchant_present())) or not Shop.table().has(id) or not Shop.table()[id].Enabled: return false
@@ -1222,7 +1237,7 @@ func buy(id: String) -> bool:
 	else:
 		add_item(id, product.Amount)
 		if id.ends_with("_plan"):
-			grant_blueprint(id.trim_suffix("_plan"),keeper.pos); campaign.items.erase(id)
+			grant_blueprint(id.trim_suffix("_plan"),keeper.pos); Stock.consume(self,id,product.Amount)
 	shop_log.append({"side": "buy", "product": id, "amount": product.Amount, "gold": -product.BuyPrice})
 	return true
 
@@ -1305,7 +1320,7 @@ func train_animal(id: int) -> bool:
 	return false
 
 func items_at(p: Vector2i) -> Array:
-	return field_items.filter(func(item): return item.pos == p and item.kind != "chick")
+	return field_items.filter(func(item): return item.pos == p and item.kind != "chick" and item.get("location","ground")=="ground" and not item.get("placed",false))
 
 func drop_blueprint(_p: Vector2i):
 	# All active recipes are already available; disabled hut plans no longer drop.
@@ -1315,6 +1330,7 @@ func process_dawn():
 	dawn_summary = {"eggs": 0, "chicks": 0, "hens": 0, "feathers": 0, "unconscious": [], "pending_blueprints": 0}
 	# Age existing field items before laying new eggs; one transition per dawn.
 	for item in field_items.duplicate():
+		if not item.get("incubating",true) or item.get("location","ground")!="ground":continue
 		if item.kind == "kennel_plan": dawn_summary.pending_blueprints += 1
 		if item.get("born_day", campaign.day) >= campaign.day: continue
 		if item.kind == "egg":

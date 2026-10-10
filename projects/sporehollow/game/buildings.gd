@@ -51,7 +51,7 @@ static func reason(w, kind: String, p: Vector2i, check_cost: bool = true) -> Str
 	if p in w.Story.idol_cells(w): return "黄金像の場所です"
 	if p==w.logistics_entry: return "受入口と通路を空けてください"
 	if w.occupied(p): return "ここに誰かいます"
-	if w.natural.has(p) or not w.items_at(p).is_empty() or w.field_items.any(func(i):return i.pos==p): return "物があるため建設できません"
+	if w.natural.has(p) or not w.items_at(p).is_empty() or w.field_items.any(func(i):return i.pos==p and i.get("location","ground")=="ground"): return "物があるため建設できません"
 	var data = w.BUILD[kind]
 	if data.get("blueprint", "") not in [""] + w.campaign.unlocked_blueprints: return "作り方をまだ知りません"
 	var old = layer(w,kind).get(p,{})
@@ -73,7 +73,7 @@ static func begin(w,j):
 	j.started = true
 	j.state = "working"
 	if j.old.get("status") != "ready":
-		store[j.pos] = {"id":w.next_structure_id,"kind":j.kind,"status":"building","hp":0,"max_hp":d.hp,"cost":j.reserved,"resource":j.resource,"open":false,"armor":0,"remaining":j.remaining,"total_ticks":j.remaining}
+		store[j.pos] = {"id":w.next_structure_id,"kind":j.kind,"status":"building","hp":0,"max_hp":d.hp,"cost":j.get("required",j.reserved),"resource":j.resource,"open":false,"armor":0,"remaining":j.remaining,"total_ticks":j.remaining}
 		w.next_structure_id += 1
 	j.site_id=store.get(j.pos,{}).get("id",-1)
 
@@ -93,7 +93,7 @@ static func advance(w,j,work_factor: float=1.0):
 	if j.remaining > 0: return
 	var d = w.BUILD[j.kind]
 	var ratio = float(site.hp)/site.max_hp if site.get("status") == "ready" else 1.0
-	store[j.pos] = {"id":site.get("id",w.next_structure_id),"kind":j.kind,"status":"ready","hp":maxi(1,floori(d.hp*ratio)),"max_hp":d.hp,"cost":j.reserved,"resource":j.resource,"open":false,"armor":0,"lock_hp":d.get("lock_hp",0),"max_lock_hp":d.get("lock_hp",0)}
+	store[j.pos] = {"id":site.get("id",w.next_structure_id),"kind":j.kind,"status":"ready","hp":maxi(1,floori(d.hp*ratio)),"max_hp":d.hp,"cost":j.get("required",j.reserved),"resource":j.resource,"open":false,"armor":0,"lock_hp":d.get("lock_hp",0),"max_lock_hp":d.get("lock_hp",0)}
 	j.reserved = 0
 	w.metrics.built += 1
 	w.refresh_indoor()
