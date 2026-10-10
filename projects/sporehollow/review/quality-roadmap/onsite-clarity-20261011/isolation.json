@@ -1,0 +1,19 @@
+{
+  "exe": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\onsite-clarity\\projects\\sporehollow\\artifacts\\onsite-clarity\\20261011-001433-192\\WhistleRanch-onsite-clarity.exe",
+  "purpose": "Controlled UI, lifecycle and state fixtures; no strategic simulation",
+  "result": {
+    "PID": 34468,
+    "ThreadID": 31076,
+    "ExitCode": 0,
+    "OwnedWindowCount": 2,
+    "Station": "Service-0x0-bf6d9650$",
+    "Desktop": "Render_d95c6dfe4d4e4f43a7f92aed4a898585",
+    "ObservedDesktop": "Render_d95c6dfe4d4e4f43a7f92aed4a898585",
+    "NonInteractive": true,
+    "DesktopMatched": true,
+    "TimedOut": false
+  },
+  "sha256": "EF3431C7C4200E94E9107494D951596D65FF77ECD5E946A0686E7CCDF6977025",
+  "start_utc": "2026-10-10T15:15:19.4020005Z",
+  "command": "\"C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\onsite-clarity\\projects\\sporehollow\\artifacts\\onsite-clarity\\20261011-001433-192\\WhistleRanch-onsite-clarity.exe\" --audio-driver Dummy --rendering-method gl_compatibility --max-fps 30 --resolution 1280x800 --log-file \"C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\onsite-clarity\\projects\\sporehollow\\artifacts\\onsite-screen\\20261011-001518-562/render.log\" -- --isolated-review --review-onsite"
+}

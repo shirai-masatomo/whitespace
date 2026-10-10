@@ -1,0 +1,40 @@
+{
+  "base": "13c113fa542daa9c6c51d7c09cbb7d220cac3176",
+  "branch": "research/onsite-clarity-20261011",
+  "code_commit": "9656b26a464d7f1348482684f92ee2383450f602",
+  "restore_tag": "research-before-onsite-clarity",
+  "changes": [
+    "projects/sporehollow/game/inventory_view.gd",
+    "projects/sporehollow/game/main.gd",
+    "projects/sporehollow/game/market_view.gd",
+    "projects/sporehollow/game/onsite_clarity.gd",
+    "projects/sporehollow/game/onsite_clarity.gd.uid",
+    "projects/sporehollow/game/onsite_clarity_review.gd",
+    "projects/sporehollow/game/onsite_clarity_review.gd.uid",
+    "projects/sporehollow/tests/test_onsite_clarity.gd",
+    "projects/sporehollow/tests/test_onsite_clarity.gd.uid",
+    "projects/sporehollow/tools/export_onsite_clarity.ps1",
+    "projects/sporehollow/tools/review_onsite_clarity.ps1"
+  ],
+  "exe": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\onsite-clarity\\projects\\sporehollow\\artifacts\\onsite-clarity\\20261011-001433-192\\WhistleRanch-onsite-clarity.exe",
+  "sha256": "EF3431C7C4200E94E9107494D951596D65FF77ECD5E946A0686E7CCDF6977025",
+  "launcher": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\onsite-clarity\\projects\\sporehollow\\artifacts\\onsite-clarity\\20261011-001433-192\\Play-Onsite-Clarity.cmd",
+  "public_push": false,
+  "remotes": "",
+  "normal_head_verified": "13c113fa542daa9c6c51d7c09cbb7d220cac3176",
+  "normal_exe_sha256_verified": "F22B991FA1447F84D73AE88E6FA20FCF23363846924AB7722DDCE962958DA55C",
+  "old_research_head_verified": "4c11a022f6d68c4a8eda46ea3f98347f50c05639",
+  "research_23ea6a4_exe_sha256_verified": "0F5C55F1E04AB7BE15CFDFB4C6692F624BE1B9DC534DA2FBFD7F6AFF99C4D3CA",
+  "old_entry_count_verified": 24,
+  "normal_paths_written": false,
+  "generated_import_metadata_uncommitted": 1265,
+  "dirty_flag_scope": "BUILD dirty excludes generated .import and .uid files; gameplay source committed",
+  "critic": "Two issues fixed: stay is current-position waiting, and entry date is earliest with space required. No AI mutation or unsupported rescue-denial found.",
+  "limitations": [
+    "No human play or strategy simulation",
+    "No fun, 15-20 minute run, or A-structure success claim",
+    "Prayer comparison suppresses only active reaction selection; same seed/day/karma/recognition/history/reward. Not total effect of prayer.",
+    "Prayer advantage also depends on reward use, future karma/milestones, enemy abilities/reinforcements, entry/travel, damage and intervention costs."
+  ],
+  "attempts": "Initial fixture assumptions (shop/day, exact entry cell, Auto queues work) corrected. Source render exposed save-guide overlap; fixed. Packaged release ignored external --script; added dormant explicit isolated-review entry. Restricted export temp save and noninteractive desktop creation used approved escalation; no protection changes."
+}

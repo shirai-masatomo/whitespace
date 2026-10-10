@@ -1,0 +1,639 @@
+{
+  "captures": [
+    "01_egg_reserved.png",
+    "02_dog_stay.png",
+    "03_merchant_egg.png",
+    "03b_merchant_heading.png",
+    "04_save_boundary.png"
+  ],
+  "failures": 0,
+  "groups": {
+    "1_eggs": [
+      {
+        "check": "Selected egg uses existing collection reservation; cancellation and day2-to-day5 forecast fit",
+        "passed": true
+      },
+      {
+        "check": "Existing Cancel leaves the egg and updates explanation",
+        "passed": true
+      },
+      {
+        "check": "Existing successful dawns produce chick day3, entry hen day4, first egg day5",
+        "passed": true
+      },
+      {
+        "timeline": [
+          {
+            "day": 3,
+            "hens": [],
+            "items": [
+              {
+                "born_day": 2,
+                "kind": "chick",
+                "pos": "(10, 9)"
+              }
+            ]
+          },
+          {
+            "day": 4,
+            "hens": [
+              {
+                "placed": true,
+                "pos": "(1, 4)"
+              }
+            ],
+            "items": []
+          },
+          {
+            "day": 5,
+            "hens": [
+              {
+                "placed": true,
+                "pos": "(1, 4)"
+              }
+            ],
+            "items": [
+              {
+                "born_day": 4,
+                "kind": "egg",
+                "pos": "(1, 4)",
+                "protected_by": -1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "check": "Same-day egg does not mature at its first dawn",
+        "passed": true
+      },
+      {
+        "check": "Collected egg remains inventory, with no hatching or return path",
+        "passed": true
+      },
+      {
+        "check": "Inventory includes owned egg and collected-state description",
+        "passed": true
+      }
+    ],
+    "2_dog": [
+      {
+        "check": "Real stay state is explained without AI mutation and links to existing Auto",
+        "passed": true
+      },
+      {
+        "auto_button_tool": "auto",
+        "jobs": [
+          {
+            "animal_id": 1,
+            "command_pos": "(0, 0)",
+            "id": 1,
+            "kind": "animal_order",
+            "leader_goal": "(0, 0)",
+            "order": "auto",
+            "pos": "(8, 13)",
+            "range": 1,
+            "reserved": 0,
+            "resource": "",
+            "started": false,
+            "state": "pending",
+            "targets": [
+              {
+                "dest": "(8, 13)",
+                "done": false,
+                "id": 1,
+                "issued": false,
+                "previous": "stay",
+                "previous_duration": 1000
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "check": "Existing Auto button queues delivery through existing animal-order work",
+        "passed": true
+      },
+      {
+        "check": "Actual rest, autonomous recovery, rescue, convalescence states and command hints fit",
+        "passed": true
+      },
+      {
+        "states": [
+          {
+            "fixture": "rest",
+            "rescuing": false,
+            "state": "休む",
+            "text": [
+              "休息中 · 無理しない指示",
+              "「無理するな」中 · 解除は「おまかせ」"
+            ]
+          },
+          {
+            "fixture": "auto",
+            "rescuing": false,
+            "state": "自主休養",
+            "text": [
+              "傷を休める · 自主休養",
+              "「連れてく」で休む場所を変えられます"
+            ]
+          },
+          {
+            "fixture": "rescue",
+            "rescuing": true,
+            "state": "救出本能",
+            "text": [
+              "牧場主の救出を優先中",
+              "「待て」でその場の待機を優先"
+            ]
+          },
+          {
+            "fixture": "convalescent",
+            "rescuing": false,
+            "state": "療養中",
+            "text": [
+              "気絶・療養中：今は指示できません",
+              "復帰は3日目から"
+            ]
+          }
+        ]
+      }
+    ],
+    "3_merchant_save": [
+      {
+        "check": "Midday changes do not overwrite day-start save; reload loses midday name",
+        "passed": true
+      },
+      {
+        "check": "Existing merchant egg sale detail retains transaction route and ownership explanation",
+        "passed": true
+      },
+      {
+        "check": "Pause/exit route explicitly explains day-start restoration",
+        "passed": true
+      },
+      {
+        "check": "Menu control guide, save warning and status do not overlap",
+        "passed": true
+      }
+    ],
+    "prayer_schedule": [
+      {
+        "check": "Matched schedule replacement, day 7",
+        "passed": true
+      },
+      {
+        "check": "Matched schedule replacement, day 10",
+        "passed": true
+      }
+    ]
+  },
+  "method": "Controlled fixtures, existing InputEvent/UI calls and lifecycle/AI steps; no strategy simulation or human play",
+  "prayer_schedule": [
+    [
+      {
+        "active_reaction": false,
+        "day": 7,
+        "history": {
+          "cleared": [],
+          "defeat_reason": "",
+          "events": [],
+          "hidden": {
+            "anomaly": 0,
+            "disease": 0,
+            "economy": 0,
+            "karma": 12,
+            "recognition": 2,
+            "security": 2
+          },
+          "idol": {
+            "carrier": -1,
+            "home": [
+              12,
+              8
+            ],
+            "hp": 180,
+            "id": "father-idol",
+            "max_hp": 180,
+            "position": [
+              12,
+              8
+            ],
+            "prepare": 0.0,
+            "state": "installed"
+          },
+          "intro_seen": true,
+          "investigated": false,
+          "miracles": [],
+          "news": [
+            {
+              "day": 7,
+              "id": "father-radio",
+              "text": "道具箱から、小さなラジオが見つかった。遠い町の放送が聞こえる。",
+              "title": "父の古いラジオ"
+            }
+          ],
+          "next_prayer_id": 1,
+          "prayed_day": 0,
+          "prayers": [],
+          "radio": true,
+          "raid_slots": [
+            {
+              "event_id": "controlled-reaction",
+              "not_before_day": 7,
+              "role": "animal_tamer"
+            }
+          ],
+          "trees": [
+            {
+              "id": "tree-21-3",
+              "position": [
+                21,
+                3
+              ]
+            },
+            {
+              "id": "tree-2-13",
+              "position": [
+                2,
+                13
+              ]
+            },
+            {
+              "id": "tree-4-14",
+              "position": [
+                4,
+                14
+              ]
+            }
+          ],
+          "version": 1
+        },
+        "karma": 12,
+        "recognition": 2,
+        "schedule": [
+          {
+            "lv": 1,
+            "role": "animal_tamer",
+            "seconds": 10.0
+          },
+          {
+            "lv": 1,
+            "role": "martial_artist",
+            "seconds": 28.0
+          }
+        ],
+        "seed": 31
+      },
+      {
+        "active_reaction": true,
+        "day": 7,
+        "history": {
+          "cleared": [],
+          "defeat_reason": "",
+          "events": [],
+          "hidden": {
+            "anomaly": 0,
+            "disease": 0,
+            "economy": 0,
+            "karma": 12,
+            "recognition": 2,
+            "security": 2
+          },
+          "idol": {
+            "carrier": -1,
+            "home": [
+              12,
+              8
+            ],
+            "hp": 180,
+            "id": "father-idol",
+            "max_hp": 180,
+            "position": [
+              12,
+              8
+            ],
+            "prepare": 0.0,
+            "state": "installed"
+          },
+          "intro_seen": true,
+          "investigated": false,
+          "miracles": [],
+          "news": [
+            {
+              "day": 7,
+              "id": "father-radio",
+              "text": "道具箱から、小さなラジオが見つかった。遠い町の放送が聞こえる。",
+              "title": "父の古いラジオ"
+            }
+          ],
+          "next_prayer_id": 1,
+          "prayed_day": 0,
+          "prayers": [],
+          "radio": true,
+          "raid_slots": [
+            {
+              "event_id": "controlled-reaction",
+              "not_before_day": 7,
+              "role": "animal_tamer"
+            }
+          ],
+          "trees": [
+            {
+              "id": "tree-21-3",
+              "position": [
+                21,
+                3
+              ]
+            },
+            {
+              "id": "tree-2-13",
+              "position": [
+                2,
+                13
+              ]
+            },
+            {
+              "id": "tree-4-14",
+              "position": [
+                4,
+                14
+              ]
+            }
+          ],
+          "version": 1
+        },
+        "karma": 12,
+        "recognition": 2,
+        "schedule": [
+          {
+            "lv": 1,
+            "role": "animal_tamer",
+            "seconds": 60.0
+          }
+        ],
+        "seed": 31
+      }
+    ],
+    [
+      {
+        "active_reaction": false,
+        "day": 10,
+        "history": {
+          "cleared": [],
+          "defeat_reason": "",
+          "events": [],
+          "hidden": {
+            "anomaly": 0,
+            "disease": 0,
+            "economy": 0,
+            "karma": 12,
+            "recognition": 2,
+            "security": 2
+          },
+          "idol": {
+            "carrier": -1,
+            "home": [
+              12,
+              8
+            ],
+            "hp": 180,
+            "id": "father-idol",
+            "max_hp": 180,
+            "position": [
+              12,
+              8
+            ],
+            "prepare": 0.0,
+            "state": "installed"
+          },
+          "intro_seen": true,
+          "investigated": false,
+          "miracles": [],
+          "news": [
+            {
+              "day": 10,
+              "id": "father-radio",
+              "text": "道具箱から、小さなラジオが見つかった。遠い町の放送が聞こえる。",
+              "title": "父の古いラジオ"
+            }
+          ],
+          "next_prayer_id": 1,
+          "prayed_day": 0,
+          "prayers": [],
+          "radio": true,
+          "raid_slots": [
+            {
+              "event_id": "controlled-reaction",
+              "not_before_day": 7,
+              "role": "animal_tamer"
+            }
+          ],
+          "trees": [
+            {
+              "id": "tree-21-3",
+              "position": [
+                21,
+                3
+              ]
+            },
+            {
+              "id": "tree-2-13",
+              "position": [
+                2,
+                13
+              ]
+            },
+            {
+              "id": "tree-4-14",
+              "position": [
+                4,
+                14
+              ]
+            }
+          ],
+          "version": 1
+        },
+        "karma": 12,
+        "recognition": 2,
+        "schedule": [
+          {
+            "lv": 1,
+            "role": "martial_artist",
+            "seconds": 10.0
+          },
+          {
+            "lv": 1,
+            "role": "maid",
+            "seconds": 10.0
+          },
+          {
+            "lv": 1,
+            "role": "kidnapper",
+            "seconds": 15.0
+          },
+          {
+            "lv": 1,
+            "role": "destroyer",
+            "seconds": 15.0
+          },
+          {
+            "lv": 1,
+            "role": "salaryman",
+            "seconds": 20.0
+          },
+          {
+            "lv": 1,
+            "role": "salaryman",
+            "seconds": 25.0
+          },
+          {
+            "lv": 1,
+            "role": "salaryman",
+            "seconds": 30.0
+          },
+          {
+            "lv": 1,
+            "role": "salaryman",
+            "seconds": 35.0
+          },
+          {
+            "lv": 1,
+            "role": "salaryman",
+            "seconds": 40.0
+          }
+        ],
+        "seed": 31
+      },
+      {
+        "active_reaction": true,
+        "day": 10,
+        "history": {
+          "cleared": [],
+          "defeat_reason": "",
+          "events": [],
+          "hidden": {
+            "anomaly": 0,
+            "disease": 0,
+            "economy": 0,
+            "karma": 12,
+            "recognition": 2,
+            "security": 2
+          },
+          "idol": {
+            "carrier": -1,
+            "home": [
+              12,
+              8
+            ],
+            "hp": 180,
+            "id": "father-idol",
+            "max_hp": 180,
+            "position": [
+              12,
+              8
+            ],
+            "prepare": 0.0,
+            "state": "installed"
+          },
+          "intro_seen": true,
+          "investigated": false,
+          "miracles": [],
+          "news": [
+            {
+              "day": 10,
+              "id": "father-radio",
+              "text": "道具箱から、小さなラジオが見つかった。遠い町の放送が聞こえる。",
+              "title": "父の古いラジオ"
+            }
+          ],
+          "next_prayer_id": 1,
+          "prayed_day": 0,
+          "prayers": [],
+          "radio": true,
+          "raid_slots": [
+            {
+              "event_id": "controlled-reaction",
+              "not_before_day": 7,
+              "role": "animal_tamer"
+            }
+          ],
+          "trees": [
+            {
+              "id": "tree-21-3",
+              "position": [
+                21,
+                3
+              ]
+            },
+            {
+              "id": "tree-2-13",
+              "position": [
+                2,
+                13
+              ]
+            },
+            {
+              "id": "tree-4-14",
+              "position": [
+                4,
+                14
+              ]
+            }
+          ],
+          "version": 1
+        },
+        "karma": 12,
+        "recognition": 2,
+        "schedule": [
+          {
+            "lv": 1,
+            "role": "martial_artist",
+            "seconds": 10.0
+          },
+          {
+            "lv": 1,
+            "role": "maid",
+            "seconds": 10.0
+          },
+          {
+            "lv": 1,
+            "role": "kidnapper",
+            "seconds": 15.0
+          },
+          {
+            "lv": 1,
+            "role": "destroyer",
+            "seconds": 15.0
+          },
+          {
+            "lv": 1,
+            "role": "salaryman",
+            "seconds": 20.0
+          },
+          {
+            "lv": 1,
+            "role": "salaryman",
+            "seconds": 25.0
+          },
+          {
+            "lv": 1,
+            "role": "salaryman",
+            "seconds": 30.0
+          },
+          {
+            "lv": 1,
+            "role": "salaryman",
+            "seconds": 35.0
+          },
+          {
+            "lv": 1,
+            "role": "salaryman",
+            "seconds": 40.0
+          }
+        ],
+        "seed": 31
+      }
+    ]
+  ]
+}

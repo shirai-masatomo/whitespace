@@ -1,0 +1,15 @@
+{
+  "commit": "9656b26a464d7f1348482684f92ee2383450f602",
+  "asset_delivery_commit": "b0e917a11f205190dde0136165a72c189f39e275",
+  "dirty": false,
+  "headless_export_smoke": "passed",
+  "data_root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\onsite-clarity\\projects\\sporehollow\\artifacts\\onsite-clarity\\20261011-001433-192\\user-data",
+  "scope": "Presentation-only clarity on normal 13c113f; gameplay and human acceptance unverified",
+  "sha256": "EF3431C7C4200E94E9107494D951596D65FF77ECD5E946A0686E7CCDF6977025",
+  "interactive_launch": "not run",
+  "save_boundary": "morning",
+  "launcher": "Play-Onsite-Clarity.cmd",
+  "daytime_music": "Porch_Swing_Serenade.mp3",
+  "executable": "WhistleRanch-onsite-clarity.exe",
+  "campaign_milestone": "night10 win -> morning11"
+}
