@@ -1,8 +1,12 @@
 ﻿param([ValidateSet('probe','characters','controls','buildings','shop','book','delivered','story','progression','ui_revision','progression_art','idol_debug','ranch_content','quality','six_motion','corpses','prayer','forest','campaign_route','morning_save','campaign_tiers','wall_drag','journal_layout_ui','playthrough_ui','day5_defense_ui','forest_entry_ui','morning_layout_ui','shop_readability_ui','player_walkthrough','today_revision','bubble_a','merchant_day','journal_names','merchant_mouth','three_changes','colony_view','colony_panels','colony_queue_groups','autonomous_work','work_food_chain','retained_commands','directive09_unit1','cycle09','survival09','completion09','pan_center','visible_boundary','negotiation_ui')][string]$Scenario='probe',[switch]$Preview)
 $ErrorActionPreference='Stop'
 $farmRoot=Split-Path -Parent $PSScriptRoot
-$runRoot=Join-Path $farmRoot ('artifacts/isolated/'+(Get-Date -Format 'yyyyMMdd-HHmmss-fff'))
+. (Join-Path $PSScriptRoot 'workspace_lifecycle.ps1')
+$runRoot=Start-FarmScratch $farmRoot (Join-Path $farmRoot 'artifacts/isolated/current')
 New-Item -ItemType Directory -Force $runRoot,"$runRoot/user-data" | Out-Null
+$succeeded=$false
+try {
+Initialize-FarmImports $farmRoot $runRoot
 $revision=(git -C $farmRoot rev-parse HEAD).Trim()
 $dirty=[bool](git -C $farmRoot status --porcelain)
 $exe=Join-Path $farmRoot '.tools/Godot_v4.7.2-stable_win64.exe'
@@ -61,3 +65,6 @@ finally { $record.end_utc=[DateTime]::UtcNow.ToString('o'); $record | ConvertTo-
 if($result.ExitCode -ne 0 -or -not $result.NonInteractive -or -not $result.DesktopMatched) { throw 'Isolated rendering failed; no interactive fallback is permitted.' }
 if(Select-String -LiteralPath "$runRoot/render.log" -Pattern 'SCRIPT ERROR:|ERROR:' -Quiet) { throw 'Renderer reported an error. Inspect the isolated log.' }
 Write-Output "Isolated render output: $runRoot"
+
+$succeeded=$true
+} finally {Complete-FarmScratch $farmRoot $runRoot $Scenario $succeeded -Visual}

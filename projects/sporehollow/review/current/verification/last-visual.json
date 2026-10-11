@@ -1,0 +1,20 @@
+{
+  "format": "farm-generated-verification-v1",
+  "purpose": "probe",
+  "utc": "2026-10-11T19:05:59.1318341Z",
+  "succeeded": true,
+  "records": [
+    {
+      "text": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n[ DONE ] first_scan_filesystem\n[ DONE ] update_scripts_classes\n[ DONE ] _update_scan_actions\n[ DONE ] reimport\n[ DONE ] reimport\n[ DONE ] loading_editor_layout",
+      "path": "import.log"
+    },
+    {
+      "text": "{\r\n  \"result\": {\r\n    \"PID\": 10780,\r\n    \"ThreadID\": 42540,\r\n    \"ExitCode\": 0,\r\n    \"OwnedWindowCount\": 2,\r\n    \"Station\": \"Service-0x0-bf6d9650$\",\r\n    \"Desktop\": \"Render_c8707b0786a04a6bb90998748e3ef259\",\r\n    \"ObservedDesktop\": \"Render_c8707b0786a04a6bb90998748e3ef259\",\r\n    \"NonInteractive\": true,\r\n    \"DesktopMatched\": true,\r\n    \"TimedOut\": false\r\n  },\r\n  \"executable\": \"C:\\\\Users\\\\masat\\\\Documents\\\\Codex\\\\2026-10-10\\\\task\\\\colony-structure-01-work\\\\projects\\\\sporehollow\\\\.tools\\\\Godot_v4.7.2-stable_win64.exe\",\r\n  \"data_root\": \"C:\\\\Users\\\\masat\\\\Documents\\\\Codex\\\\2026-10-10\\\\task\\\\colony-structure-01-work\\\\projects\\\\sporehollow\\\\artifacts\\\\isolated\\\\current/user-data\",\r\n  \"implementation_commit\": \"7f19444cbe2962e40237008045ccc74230e25034\",\r\n  \"asset_delivery_commit\": \"b0e917a11f205190dde0136165a72c189f39e275\",\r\n  \"purpose\": \"probe\",\r\n  \"command\": \"\\\"C:\\\\Users\\\\masat\\\\Documents\\\\Codex\\\\2026-10-10\\\\task\\\\colony-structure-01-work\\\\projects\\\\sporehollow\\\\.tools\\\\Godot_v4.7.2-stable_win64.exe\\\" --path \\\"C:\\\\Users\\\\masat\\\\Documents\\\\Codex\\\\2026-10-10\\\\task\\\\colony-structure-01-work\\\\projects\\\\sporehollow\\\" --audio-driver Dummy --rendering-method gl_compatibility --max-fps 30 --resolution 1280x800 --log-file \\\"C:\\\\Users\\\\masat\\\\Documents\\\\Codex\\\\2026-10-10\\\\task\\\\colony-structure-01-work\\\\projects\\\\sporehollow\\\\artifacts\\\\isolated\\\\current/render.log\\\" --script tests/render_probe.gd -- --isolated-review --output=\\\"C:\\\\Users\\\\masat\\\\Documents\\\\Codex\\\\2026-10-10\\\\task\\\\colony-structure-01-work\\\\projects\\\\sporehollow\\\\artifacts\\\\isolated\\\\current\\\"\",\r\n  \"end_utc\": \"2026-10-11T19:05:59.0652784Z\",\r\n  \"dirty\": true,\r\n  \"parent_pid\": 4108,\r\n  \"start_utc\": \"2026-10-11T19:05:53.3533523Z\"\r\n}\r\n",
+      "path": "isolation.json"
+    },
+    {
+      "text": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\nOpenGL API 3.3.0 NVIDIA 591.86 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce RTX 4070 SUPER\n\nISOLATED GPU PROBE Windows (1280, 800) saved=0\n",
+      "path": "render.log"
+    }
+  ]
+}

@@ -29,3 +29,5 @@
 通常セーブ・素材・復元履歴、既存の未コミットimportメタデータは保持。新旧入口を増やさず、配布結果はレビュー報告のdeployment.jsonを参照。
 
 GitHubのレビュー入口：review/current/PACKET.md（codex/sporehollow-review02）。
+
+開発共通ルールは[AGENTS.md](AGENTS.md)と[DEVELOPMENT.md](DEVELOPMENT.md)。固定作業領域の再利用、配布前の隔離終了再開確認、結果保存後の自動整理を工程へ接続。旧EXE23本・重複ツール36ファイルを個別削除。作業フォルダ全体と古い確認入口の削除は自動承認審査で保留。未保存ソース3か所は保持。

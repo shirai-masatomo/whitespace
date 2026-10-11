@@ -32,3 +32,5 @@ if (-not (Test-Path "$toolRoot/templates/windows_release_x86_64.exe") -or -not (
 $version = & "$toolRoot/Godot_v4.7.2-stable_win64_console.exe" --headless --version
 if ($LASTEXITCODE -ne 0 -or $version -notmatch '^4\.7\.2\.stable') { throw 'Godot version mismatch' }
 Write-Output 'Whistle Ranch tools ready. Run ./dev.ps1 check.'
+
+foreach($archive in @('Godot_v4.7.2-stable_win64.exe.zip','Godot_v4.7.2-stable_export_templates.tpz')) { $path=Join-Path $toolRoot $archive;if(Test-Path -LiteralPath $path){Remove-Item -LiteralPath $path} }

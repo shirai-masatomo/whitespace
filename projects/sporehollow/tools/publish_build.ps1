@@ -1,32 +1,22 @@
-param(
-    [Parameter(Mandatory)][string]$Executable,
-    [Parameter(Mandatory)][string]$Revision,
-    [bool]$Dirty=$false
-)
+param([Parameter(Mandatory)][string]$Executable,[Parameter(Mandatory)][string]$Revision,[bool]$Dirty=$false)
 $ErrorActionPreference='Stop'
-$farmRoot=Split-Path -Parent $PSScriptRoot
-$buildRoot=Join-Path $farmRoot 'build'
+$project=Split-Path -Parent $PSScriptRoot
 $source=(Resolve-Path -LiteralPath $Executable).Path
-$validationRoot=[IO.Path]::GetFullPath((Join-Path $farmRoot 'artifacts/validation'))+[IO.Path]::DirectorySeparatorChar
-if(-not $source.StartsWith($validationRoot,[StringComparison]::OrdinalIgnoreCase)) { throw 'Only a validated output from artifacts/validation can be published.' }
-# Do not close or replace a player's running game. The validated output remains available.
-if(Get-Process -Name WhistleRanch -ErrorAction SilentlyContinue) {
-    throw "Game is running. Close it yourself, then publish $source. The current game was not changed."
-}
-New-Item -ItemType Directory -Force $buildRoot | Out-Null
-$target=Join-Path $buildRoot 'WhistleRanch.exe'
-$staging=Join-Path $buildRoot ('WhistleRanch-'+[Guid]::NewGuid().ToString('N')+'.tmp')
+$work=[IO.Path]::GetFullPath((Join-Path $project 'artifacts/validation/current'))+[IO.Path]::DirectorySeparatorChar
+if(-not $source.StartsWith($work,[StringComparison]::OrdinalIgnoreCase)){throw 'Only the current validated scratch build can be published'}
+$bundle=Join-Path $project 'artifacts/autonomy-entry-01/bundle'
+$target=Join-Path $bundle 'WhistleRanch-Autonomy-Partial.exe'
+if(Get-CimInstance Win32_Process | Where-Object {$_.ExecutablePath -eq $target}){throw 'Player game is running; no replacement or restart'}
+$fixture=Join-Path $project 'review/current/biome01/tests/legacy-fixture/legacy.snapshot'
+& (Join-Path $PSScriptRoot 'verify_cycle_entry09.ps1') -Executable $source -Fixture $fixture -OutputDirectory (Join-Path (Split-Path -Parent $source) 'lifecycle')
+if(Get-CimInstance Win32_Process | Where-Object {$_.ExecutablePath -eq $target}){throw 'Player started; replacement stopped'}
+New-Item -ItemType Directory -Force -Path $bundle | Out-Null
+$staging=Join-Path $bundle 'WhistleRanch.tmp'
 try {
     Copy-Item -LiteralPath $source -Destination $staging
-    # Atomic replacement also fails safely if the game opens after the process check.
-    if(Test-Path -LiteralPath $target) { [IO.File]::Replace($staging,$target,[NullString]::Value) }
-    else { [IO.File]::Move($staging,$target) }
-} finally {
-    if(Test-Path -LiteralPath $staging) { Remove-Item -LiteralPath $staging }
-}
-Copy-Item -LiteralPath "$farmRoot/assets/fonts/OFL.txt" -Destination "$buildRoot/FONT_LICENSE.txt"
-Copy-Item -LiteralPath "$farmRoot/assets/GODOT_COPYRIGHT.txt" -Destination "$buildRoot/GODOT_COPYRIGHT.txt"
-Copy-Item -LiteralPath "$farmRoot/assets/ui/SOURCES.md" -Destination "$buildRoot/UI_SOURCES.txt"
-$artProvenance=Get-Content -LiteralPath "$farmRoot/game/art_provenance.json" -Raw | ConvertFrom-Json
-@{commit=$Revision;dirty=$Dirty;asset_delivery_commit=$artProvenance.latest_delivery_commit;sha256=(Get-FileHash -LiteralPath $target -Algorithm SHA256).Hash;source=$source;published_utc=[DateTime]::UtcNow.ToString('o')} | ConvertTo-Json | Set-Content -LiteralPath "$buildRoot/BUILD.json"
-Write-Output "Ready: $farmRoot/Play.cmd (build $Revision)"
+    if((Get-FileHash -LiteralPath $source).Hash -ne (Get-FileHash -LiteralPath $staging).Hash){throw 'Staging hash mismatch'}
+    if(Test-Path -LiteralPath $target){[IO.File]::Replace($staging,$target,[NullString]::Value)}else{[IO.File]::Move($staging,$target)}
+}finally{if(Test-Path -LiteralPath $staging){Remove-Item -LiteralPath $staging}}
+$art=Get-Content -LiteralPath (Join-Path $project 'game/art_provenance.json') -Raw | ConvertFrom-Json
+@{implementation_commit=$Revision;commit=$Revision;dirty=$Dirty;asset_delivery_commit=$art.latest_delivery_commit;sha256=(Get-FileHash -LiteralPath $target).Hash;utc=[DateTime]::UtcNow.ToString('o');native_lifecycle_checks=5;automatically_launched=$false;normal_data_unchanged=$true} | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $bundle 'BUILD.json') -Encoding utf8
+Write-Output "Published $Revision to the existing latest entry. No backup EXE retained; scratch output is cleaned by dev.ps1."

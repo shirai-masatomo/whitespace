@@ -1,19 +1,24 @@
-param([ValidateSet('check', 'test', 'evaluate', 'build', 'visual', 'play', 'editor')][string]$Task = 'check', [string[]]$Suites = @('wall_drag','day_music','animal_commands','animal_corpse','journal_layout_ui','playthrough_ui','debug_lifecycle','revisions','residents','world','jobs','keeper','planning','rest_until','input','controls','building_art','delivered_art','progression_art','idol_debug','ranch_content','ranch_content_ui','quality','quality_ui','corpses','target_policy','navigation','forest','forest_ui','market_ui','story','story_ui','prayer','prayer_ui','progression','progression_flow','campaign_route','campaign_tiers','campaign_route_ui','morning_save','morning_save_ui','progression_ui','combat_revision','ui_revision'), [ValidateRange(1,32)][int]$AISeeds=32)
+param([ValidateSet('check', 'test', 'evaluate', 'build', 'visual', 'play', 'editor', 'clean')][string]$Task = 'check', [string[]]$Suites = @('wall_drag','day_music','animal_commands','animal_corpse','journal_layout_ui','playthrough_ui','debug_lifecycle','revisions','residents','world','jobs','keeper','planning','rest_until','input','controls','building_art','delivered_art','progression_art','idol_debug','ranch_content','ranch_content_ui','quality','quality_ui','corpses','target_policy','navigation','forest','forest_ui','market_ui','story','story_ui','prayer','prayer_ui','progression','progression_flow','campaign_route','campaign_tiers','campaign_route_ui','morning_save','morning_save_ui','progression_ui','combat_revision','ui_revision'), [ValidateRange(1,32)][int]$AISeeds=32)
 $ErrorActionPreference = 'Stop'
 $farmRoot = $PSScriptRoot
+. (Join-Path $farmRoot 'tools/workspace_lifecycle.ps1')
+if($Task -eq 'clean'){& (Join-Path $farmRoot 'tools/maintenance.ps1') -Clean;exit 0}
 $godot = Join-Path $farmRoot '.tools/Godot_v4.7.2-stable_win64_console.exe'
 if (-not (Test-Path -LiteralPath $godot)) { throw 'Run ./tools/setup.ps1 first.' }
 if ($Task -eq 'visual') { & "$farmRoot/tools/isolated_visual.ps1" -Scenario characters; exit $LASTEXITCODE }
 # Only explicit user launch paths may create windows. Verification never calls these.
-if ($Task -in @('play', 'editor')) {
+if($Task -eq 'play'){& (Join-Path $farmRoot 'tools/launch_current.ps1');exit 0}
+if ($Task -eq 'editor') {
     $launchArgs = @('--path', $farmRoot)
     if ($Task -eq 'editor') { $launchArgs += '--editor' }
     & $godot @launchArgs
     exit $LASTEXITCODE
 }
-$runRoot = Join-Path $farmRoot ('artifacts/validation/' + (Get-Date -Format 'yyyyMMdd-HHmmss-fff'))
+$runRoot = Start-FarmScratch $farmRoot (Join-Path $farmRoot 'artifacts/validation/current')
 New-Item -ItemType Directory -Force $runRoot, "$runRoot/user-data" | Out-Null
 Set-Content -LiteralPath "$farmRoot/artifacts/.gdignore" -Value ''
+$succeeded=$false
+try {
 $revision = (git -C $farmRoot rev-parse --short HEAD).Trim()
 $dirty = [bool](git -C $farmRoot status --porcelain)
 $artProvenance=Get-Content -LiteralPath "$farmRoot/game/art_provenance.json" -Raw | ConvertFrom-Json
@@ -28,6 +33,8 @@ function Run-Headless([string]$Name, [string[]]$Arguments, [string]$Executable=$
     $info.RedirectStandardError = $true
     $info.Environment['APPDATA'] = "$runRoot/user-data"
     $info.Environment['LOCALAPPDATA'] = "$runRoot/user-data"
+    $info.Environment['FARM_REVIEW_OUTPUT']=$runRoot
+    $info.Environment['FARM_LEGACY_FIXTURE']=Join-Path $farmRoot 'review/current/biome01/tests/legacy-fixture'
     if ($Name -eq 'evaluate') { $info.Environment['FARM_AI_SEEDS'] = [string]$AISeeds }
     $baseArgs = @('--headless','--log-file',$log)
     if ($Executable -eq $godot) { $baseArgs += @('--path',$farmRoot) }
@@ -47,13 +54,13 @@ function Run-Headless([string]$Name, [string[]]$Arguments, [string]$Executable=$
     $record.end_utc=[DateTime]::UtcNow.ToString('o')
     $record | ConvertTo-Json -Compress | Add-Content -LiteralPath "$runRoot/launches.jsonl"
     $out=$stdout.GetAwaiter().GetResult(); $err=$stderr.GetAwaiter().GetResult()
-    Write-Output $out
+    Write-Output "$Name completed (full log retained until review capture)"
     if ($owned.ExitCode -ne 0 -or $record.result -is [string] -or "$out $err" -match 'SCRIPT ERROR:|ERROR:' -or ((Test-Path $log) -and (Select-String -LiteralPath $log -Pattern 'SCRIPT ERROR:|ERROR:' -Quiet))) { throw "$Name failed: $err" }
 }
 if ($Task -in @('check','test','build')) {
-    & "$farmRoot/tests/test_launcher.ps1"
+    & "$farmRoot/tests/test_launcher.ps1" -WorkRoot $runRoot
     Run-Headless 'import' @('--editor','--import','--quit')
-    foreach ($suite in $Suites) { Run-Headless $suite @('--script',"tests/test_$suite.gd") }
+    foreach ($suite in $Suites) { Run-Headless $suite @('--script',"tests/test_$suite.gd",'--','--isolated-review') }
 }
 if ($Task -in @('check','evaluate')) { Run-Headless 'evaluate' @('--script','tests/evaluate.gd') }
 if ($Task -in @('check','build')) {
@@ -62,4 +69,5 @@ if ($Task -in @('check','build')) {
     Run-Headless 'export-smoke' @('--','--smoke') $testExe
     if ($Task -eq 'build') { & "$farmRoot/tools/publish_build.ps1" -Executable $testExe -Revision $revision -Dirty $dirty }
 }
-Write-Output "Verification artifacts: $runRoot"
+$succeeded=$true
+} finally {Complete-FarmScratch $farmRoot $runRoot $Task $succeeded}
