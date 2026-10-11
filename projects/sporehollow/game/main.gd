@@ -1078,11 +1078,6 @@ func _route_input(event):
 			neutral();get_viewport().set_input_as_handled();return
 		if merchant_context:
 			merchant_context=false;refresh();get_viewport().set_input_as_handled();return
-		if not pointer_over_ui() and merchant_hit(pointer):
-			var why=world.merchant_reason(selected_merchant_worker())
-			if why!="":notice(why)
-			if selected_merchant_worker()!="":merchant_context=true;refresh()
-			get_viewport().set_input_as_handled();return
 		if not selected.is_empty():neutral();get_viewport().set_input_as_handled();return
 	if zone_controls.input(self,event):get_viewport().set_input_as_handled();return
 	if item_commands.input(self,event):get_viewport().set_input_as_handled();return
@@ -1355,7 +1350,10 @@ func board_click(event):
 				if not world.HumanCombat.designate(world,e.id):notice("攻撃を指示できません")
 				refresh();return
 	if merchant_hit(event.position) and group<0 and tool=="":
-		notice("住人を選択して商人を右クリックすると交渉できます");refresh();return
+		var why=world.merchant_reason(selected_merchant_worker())
+		if why!="":notice(why)
+		if selected_merchant_worker()!="":merchant_context=true
+		refresh();return
 	var cell = Vector2i(get_canvas_transform().affine_inverse() * event.position / TILE)
 	if tool=="storage":
 		if not world.act("storage",cell):notice("歩ける地面を指定してください")
