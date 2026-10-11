@@ -29,6 +29,7 @@ var job_category="すべて"
 var queue_row_y={}
 var queue_bottom=94.0
 const ColonyPanels=preload("res://game/colony_panels.gd")
+const TaskControls=preload("res://game/colony_task_controls.gd")
 const LivestockControls=preload("res://game/livestock_controls.gd")
 var item_commands=preload("res://game/item_commands.gd").new()
 var zone_controls=preload("res://game/zone_controls.gd").new()
@@ -500,6 +501,7 @@ func refresh():
 		for id in subtask_choices(): UI.selected(buttons[id], subtasks.selected[2] == id)
 	ColonyPanels.build(self)
 	LivestockControls.build(self)
+	TaskControls.build(self)
 	item_commands.build(self)
 	zone_controls.build(self)
 	colony_signature=ColonyPanels.signature(self)
@@ -549,7 +551,7 @@ func context_targets() -> Array:
 	return []
 
 func context_state() -> String:
-	return str(world.trees)+str(world.story.idol)+str(world.story.investigated)+str(world.story.prayed_day)+str(selected_trees)+str(selected_resources) + str(selected) + str(selected_structures) + str(selected_structures.map(func(p): return selected_store().get(p,{}))) + str(world.jobs.map(func(j): return [j.kind, j.pos])) + str(world.materials) + str(world.wood)
+	return TaskControls.signature(self)+str(world.trees)+str(world.story.idol)+str(world.story.investigated)+str(world.story.prayed_day)+str(selected_trees)+str(selected_resources) + str(selected) + str(selected_structures) + str(selected_structures.map(func(p): return selected_store().get(p,{}))) + str(world.jobs.map(func(j): return [j.kind, j.pos])) + str(world.materials) + str(world.wood)
 
 func build_context_actions():
 	context_signature = context_state()
@@ -862,7 +864,7 @@ func refresh_jobs():
 		UI.button(row, Color("c6d1ac") if j.get("assigned_to","")!="" else UI.PAPER)
 		for state in ["normal","hover","pressed","disabled"]:
 			row.get_theme_stylebox(state).content_margin_top=3;row.get_theme_stylebox(state).content_margin_bottom=3
-		var names = {"slaughter":"と殺","milk":"搾乳","place_kokeshi":"こけし","place_fossil":"化石","wall": "壁", "door":"ドア","locked_door":"施錠ドア","wood_wall":"木壁","stone_wall":"石壁","soil_tile":"土タイル","wood_tile":"木タイル","stone_tile":"石タイル", "kennel": "犬小屋", "coop": "鶏小屋", "move": "歩く", "collect": "採集", "haul":"運搬", "repair": "修理", "remove": "解体", "remove_floor":"タイル解体", "repair_floor":"床修理", "gate": "ドアを開閉", "equip":"装備", "animal_order": "仲間へ指示"}
+		var names = {"mine":"採掘","train":"調教","direct_attack":"指定攻撃","keeper_equipment":"装備","slaughter":"と殺","milk":"搾乳","place_kokeshi":"こけし","place_fossil":"化石","wall": "壁", "door":"ドア","locked_door":"施錠ドア","wood_wall":"木壁","stone_wall":"石壁","soil_tile":"土タイル","wood_tile":"木タイル","stone_tile":"石タイル", "kennel": "犬小屋", "coop": "鶏小屋", "move": "歩く", "collect": "採集", "haul":"運搬", "repair": "修理", "remove": "解体", "remove_floor":"タイル解体", "repair_floor":"床修理", "gate": "ドアを開閉", "equip":"装備", "animal_order": "仲間へ指示"}
 		row.text = "%s%s" % [ "› " if j.state != "pending" else "", ("待機 · " if j.state == "blocked" else "") + names.get(j.kind, StoryView.LABELS.get(j.kind,"仕事"))]
 		if j.get("cancel_requested",false):row.text="取消待ち · "+names.get(j.kind,"仕事")
 		row.draw.connect(draw_queue_badge.bind(row,j.id))
@@ -1280,6 +1282,11 @@ func update_wall_stroke():
 func board_click(event):
 	if field_shop:return
 	var point=get_canvas_transform().affine_inverse()*event.position
+	if selected.get("kind")=="keeper" and world.keeper.get("drafted",false):
+		for e in world.enemies:
+			if world.HumanCombat.valid(e) and enemy_hit_rect(e).has_point(point):
+				if not world.HumanCombat.designate(world,e.id):notice("攻撃を指示できません")
+				refresh();return
 	if world.merchant_present() and Rect2(center(Farm.MERCHANT_CELL)-Vector2(55,65),Vector2(115,100)).has_point(point) and tool=="":
 		request_merchant();return
 	merchant_requested=false;world.merchant_approach=null
@@ -1295,6 +1302,8 @@ func board_click(event):
 	if Farm.BUILD.has(tool):
 		if not world.act(tool,cell): notice("指定は%d件まで"%world.Jobs.LIMIT if world.jobs.size()>=world.Jobs.LIMIT else world.Buildings.reason(world,tool,cell))
 		refresh(); return
+	if world.rocks.has(cell):
+		selected={"kind":"rock","pos":cell};selected_trees.clear();selected_resources.clear();selected_structures.clear();selected_animals.clear();tool="";refresh();return
 	if world.trees.has(cell) or cell in world.Story.idol_cells(world):
 		if not event.ctrl_pressed: selected_trees.clear()
 		if world.trees.has(cell): toggle_selection(selected_trees,cell)
@@ -1760,6 +1769,7 @@ func _draw():
 			"keeper": draw_keeper_actor()
 	for f in dust:
 		Delivered.draw_clip(self,"fx/"+f.kind,f.pos,visual_time-f.at)
+	TaskControls.draw(self)
 	draw_work_plans()
 	item_commands.draw(self)
 	zone_controls.draw(self)
@@ -1950,6 +1960,7 @@ func draw_hud():
 	if Rect2(142, 0, 480, 49).has_point(pointer):
 		panel(Rect2(145, 50, 390, 30))
 		label_on(hud, Vector2(154, 71), "土 / 木材 / 石 / Gold  ·  キノコ %d" % world.campaign.mushrooms, 14)
+	hud.draw_texture_rect(UI.icon({"morning":"sunrise","day":"sun","night":"moon"}[world.Cycle.period(world)]),Rect2(688,12,24,24),false)
 	label_on(hud, Vector2(720, 31), clock_label_text(), 18)
 	panel(Rect2(0, 748, 505, 52))
 	var idol_warning=idol_warning_text()
@@ -2622,7 +2633,7 @@ func draw_keeper_card():
 	if k.state=="hidden_rest":activity="療養中：HP1で起床可 / HP8で自動復帰"
 	label_on(hud, Vector2(30, 676), activity, 15, UI.INK)
 	if not world.jobs.is_empty() and k.get("malnutrition",0)<=0:
-		var names = {"slaughter":"と殺","milk":"搾乳","place_kokeshi":"こけし","place_fossil":"化石","wall": "壁", "door":"ドア","locked_door":"施錠ドア","wood_wall":"木壁","stone_wall":"石壁","soil_tile":"土タイル","wood_tile":"木タイル","stone_tile":"石タイル", "collect": "回収", "move": "歩く", "equip":"装備", "animal_order": "仲間へ指示", "repair": "修理", "remove": "解体", "remove_floor":"タイル解体", "repair_floor":"床修理", "gate": "ドア", "kennel": "犬小屋", "coop": "鶏小屋"}
+		var names = {"mine":"採掘","train":"調教","direct_attack":"指定攻撃","keeper_equipment":"装備","slaughter":"と殺","milk":"搾乳","place_kokeshi":"こけし","place_fossil":"化石","wall": "壁", "door":"ドア","locked_door":"施錠ドア","wood_wall":"木壁","stone_wall":"石壁","soil_tile":"土タイル","wood_tile":"木タイル","stone_tile":"石タイル", "collect": "回収", "move": "歩く", "equip":"装備", "animal_order": "仲間へ指示", "repair": "修理", "remove": "解体", "remove_floor":"タイル解体", "repair_floor":"床修理", "gate": "ドア", "kennel": "犬小屋", "coop": "鶏小屋"}
 		var next = names.get(world.Work.active(world).get("kind",""), "仕事を選択中")
 		if world.jobs.size() > 1: next += " → " + names.get(world.jobs[1].kind, "仕事")
 		label_on(hud, Vector2(166, 676), next, 14, UI.INK)

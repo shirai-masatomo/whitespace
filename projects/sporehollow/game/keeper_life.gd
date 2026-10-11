@@ -227,22 +227,14 @@ static func step(w):
 			set_rest(w, true,"forced")
 			end_move(w)
 	if k.sleepiness < 60: k.warned = 0
-	# Close automatic defense may initiate, including against nonattacking support enemies.
-	# Only the adjacent ring is eligible; this never adds a movement job or pursuit goal.
-	if able(w) and w.tick >= k.next_attack:
-		var threats = w.enemies.filter(func(e): return close_attack_target(w,e))
+	# Explicit target jobs own attack timing; otherwise defend within equipped reach.
+	if able(w) and w.tick>=k.next_attack and not w.jobs.any(func(j):return j.kind=="direct_attack" and not j.get("cancel_requested",false)):
+		var threats=w.enemies.filter(func(e):return close_attack_target(w,e))
 		threats.sort_custom(func(a,b):return w.distance(k.pos,a.pos)<w.distance(k.pos,b.pos) if w.distance(k.pos,a.pos)!=w.distance(k.pos,b.pos) else a.id<b.id)
-		if not threats.is_empty() and w.Combat.pay(k,"attack"):
-			var e = threats[0]
-			k.next_attack = w.tick + ceili(1.5 / factor(w) / w.DT)
-			w.Progression.enemy_hurt(w,e,ATTACK)
-			w.combat_log.append({"tick": w.tick, "source": "keeper", "id": -1, "target": e.id, "damage": ATTACK})
-			if e.hp == 0:
-				if w.stage == 1 and e.id == 0: w.drop_blueprint(e.pos)
+		if not threats.is_empty():w.HumanCombat.attack(w,k,threats[0])
 
 static func close_attack_target(w,e) -> bool:
-	var delta=e.pos-w.keeper.pos
-	return not e.done and not e.flee and e.hp>0 and maxi(absi(delta.x),absi(delta.y))<=CLOSE_ATTACK_RANGE and w.line_of_sight(w.keeper.pos,e.pos)
+	return w.HumanCombat.in_range(w,w.keeper,e)
 
 static func can_wake_hidden(w) -> bool:
 	var k=w.keeper

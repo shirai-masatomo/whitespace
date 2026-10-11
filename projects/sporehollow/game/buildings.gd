@@ -48,6 +48,7 @@ static func reason(w, kind: String, p: Vector2i, check_cost: bool = true) -> Str
 	if kind in ["kennel","coop"]: return "この建物は休止中です"
 	if not w.BUILD.has(kind) or not w.inside(p): return "ここには建てられません"
 	if w.trees.has(p): return "先に開拓が必要"
+	if w.rocks.has(p):return "先に岩を採掘してください"
 	if p in w.Story.idol_cells(w): return "黄金像の場所です"
 	if p==w.logistics_entry: return "受入口と通路を空けてください"
 	if w.occupied(p): return "ここに誰かいます"

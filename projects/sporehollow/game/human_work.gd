@@ -21,15 +21,17 @@ static func migrate_priorities(actor: Dictionary):
 static func category(w,j) -> String:
 	if j.has("work_category"):return j.work_category
 	if w.BUILD.has(j.kind) or j.kind in ["repair","repair_floor","remove","remove_floor","gate"]:return "build"
+	if j.kind=="mine":return "gather"
 	if j.kind=="haul":return "haul"
 	if j.kind=="collect":return "gather" if w.natural.has(j.pos) else "collect"
 	return "other"
 
 static func shared(w,j) -> bool:
-	return w.BUILD.has(j.kind) or j.kind in ["collect","haul","slaughter"]
+	return w.BUILD.has(j.kind) or j.kind in ["collect","haul","slaughter","mine","train"]
 
 static func target_key(w,j) -> String:
-	if j.kind=="slaughter":return "animal:%d"%j.animal_id
+	if j.kind in ["slaughter","train"]:return "animal:%d"%j.animal_id
+	if j.kind=="mine":return "rock:%d:%d"%[j.pos.x,j.pos.y]
 	if j.kind=="haul":return "stock:%d"%j.stock_id
 	var layer=w.BUILD[j.kind].get("layer","structure") if w.BUILD.has(j.kind) else j.get("target_layer","collect" if j.kind=="collect" else j.kind)
 	return "%s:%d:%d"%[layer,j.pos.x,j.pos.y]
@@ -87,6 +89,7 @@ static func reason(w,key: String,a) -> String:
 	return ""
 
 static func missing(w,j) -> bool:
+	if j.kind in w.Tasks.KINDS:return w.Tasks.missing(w,j)
 	if j.kind=="slaughter":return w.Livestock.missing(w,j)
 	if j.kind=="haul":return w.Stock.find(w,j.get("stock_id",-1)).is_empty() and not w.field_items.any(func(r):return r.get("location")=="carry" and r.get("job_id",-1)==j.id)
 	if j.kind=="collect":
@@ -105,7 +108,7 @@ static func block(w,j,why: String):
 
 static func allowed(w,key: String,j) -> bool:
 	var why=reason(w,key,w.workers[key])
-	return why=="" or (j.kind=="move" and why in ["徴兵中","近くの敵に対応中"])
+	return why=="" or (j.kind in ["move","direct_attack"] and why in ["徴兵中","近くの敵に対応中"])
 
 static func claim(w,key: String,j) -> bool:
 	if not w.workers.has(key) or j.get("assigned_to","")!="" or not allowed(w,key,j):return false
@@ -116,10 +119,10 @@ static func claim(w,key: String,j) -> bool:
 
 static func choose(w,key: String) -> Dictionary:
 	var a=w.workers[key]
-	var candidates=w.jobs.filter(func(j):return j.get("assigned_to","")=="" and not j.get("cancel_requested",false) and w.tick>=j.get("retry_at",0) and (key=="keeper" or shared(w,j)) and (j.kind=="move" or a.work_priorities.get(category(w,j),3)>0))
+	var candidates=w.jobs.filter(func(j):return j.get("assigned_to","")=="" and not j.get("cancel_requested",false) and w.tick>=j.get("retry_at",0) and (key=="keeper" or shared(w,j)) and (j.kind in ["move","direct_attack"] or a.work_priorities.get(category(w,j),3)>0))
 	candidates.sort_custom(func(x,y):
-		var px=0 if x.kind=="move" else a.work_priorities.get(category(w,x),4)
-		var py=0 if y.kind=="move" else a.work_priorities.get(category(w,y),4)
+		var px=0 if x.kind in ["move","direct_attack"] else a.work_priorities.get(category(w,x),4)
+		var py=0 if y.kind in ["move","direct_attack"] else a.work_priorities.get(category(w,y),4)
 		if px!=py:return px<py
 		var cx=Policy.ORDER.find(category(w,x));var cy=Policy.ORDER.find(category(w,y))
 		if cx!=cy:return cx<cy
@@ -158,7 +161,7 @@ static func step(w):
 		if why!="":
 			var current=active(w,key)
 			if not current.is_empty() and not allowed(w,key,current):interrupt(w,key,why)
-			if not w.jobs.any(func(row):return row.kind=="move" and allowed(w,key,row)):interrupt(w,key,why);continue
+			if not w.jobs.any(func(row):return row.kind in ["move","direct_attack"] and allowed(w,key,row)):interrupt(w,key,why);continue
 		var j=active(w,key)
 		if j.is_empty():j=choose(w,key)
 		if j.is_empty():

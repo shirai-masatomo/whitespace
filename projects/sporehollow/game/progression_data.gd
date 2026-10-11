@@ -15,6 +15,7 @@ const BONUS_CHANCE = {"shop":0.05,"idol":0.25}
 const BONUS_SKILLS = {
 	"hardy":{"id":"hardy","name":"丈夫","rarity":Rarity.UNCOMMON,"type":"passive","unlock_level":1,"cooldown":0.0,"eligible_species":[],"eligible_tags":["animal"],"rollable":true,"source":"individual","condition":"常時","effect":"最大HP +4","max_hp":4}}
 const ITEMS = {
+	"wood_staff":{"id":"wood_staff","name":"木の長柄","rarity":Rarity.COMMON,"type":"equipment","equip_targets":["keeper"],"durability":-1,"consumable":false,"trigger":"equipped","effects":{},"buy":12,"sell":4},
 	"collar":{"id":"collar","name":"首輪","rarity":Rarity.COMMON,"type":"equipment","equip_targets":["dog"],"durability":-1,"consumable":false,"trigger":"equipped","effects":{"loyalty":25,"defense":2},"buy":20,"sell":6},
 	"berry":{"id":"berry","name":"きのみ","rarity":Rarity.COMMON,"type":"conditional_equipment","equip_targets":["animal"],"durability":1,"consumable":true,"trigger":"alive_hp_half","effects":{"heal_fraction":0.25},"buy":8,"sell":2}}
 const ENEMY_ROWS = {

@@ -51,11 +51,11 @@ static func product_name(row: Dictionary) -> String:
 
 static func role(id: String) -> String:
 	if Shop.Animals.SPECIES.has(id):return Shop.Animals.short_description(id)
-	return {"kokeshi":"周囲3マスの敵味方の移動を0.8倍。現地設置・回収。","fossil":"飾って回収できる化石。盗賊に注意。復活機能は未実装。","milk":"現地で搾乳したミルク。1個6Gで売却できます。","doberman":"屋外で強く迎撃","bullfrog":"舌拘束と警報","hedgehog":"被弾と警報で迎撃","collar":"犬の忠誠・防御を補助","berry":"ピンチで一度回復","hen":"朝に卵を産む", "cat":"気ままな仲間", "soil":"土の壁・床に", "wood":"木の壁・床に", "stone":"石の壁・床に", "whistle":"遠くの仲間へ指示", "coffee":"眠気を12軽減", "energy_drink":"眠気を25軽減", "egg":"牧場の生産物", "feather":"鶏の落とし物", "mushroom":"仲間の回復に"}.get(id,"牧場で使う品")
+	return {"wood_staff":"牧場主用。突き：射程2・威力3・間隔1.8秒（仮）。選択して現物を装備。","kokeshi":"周囲3マスの敵味方の移動を0.8倍。現地設置・回収。","fossil":"飾って回収できる化石。盗賊に注意。復活機能は未実装。","milk":"現地で搾乳したミルク。1個6Gで売却できます。","doberman":"屋外で強く迎撃","bullfrog":"舌拘束と警報","hedgehog":"被弾と警報で迎撃","collar":"犬の忠誠・防御を補助","berry":"ピンチで一度回復","hen":"朝に卵を産む", "cat":"気ままな仲間", "soil":"土の壁・床に", "wood":"木の壁・床に", "stone":"石の壁・床に", "whistle":"遠くの仲間へ指示", "coffee":"眠気を12軽減", "energy_drink":"眠気を25軽減", "egg":"牧場の生産物", "feather":"鶏の落とし物", "mushroom":"仲間の回復に"}.get(id,"牧場で使う品")
 
 static func description(id: String) -> String:
 	if Shop.Animals.SPECIES.has(id):return Shop.Animals.character_text(id)
-	return {"kokeshi":"周囲3マスの敵味方の移動を0.8倍。現地設置・回収。","fossil":"飾って回収できる化石。盗賊に注意。復活機能は未実装。","milk":"現地で搾乳したミルク。1個6Gで売却できます。","doberman":"屋外専用の自律迎撃犬。救出本能はありません。", "bullfrog":"舌で敵の移動を止め、被弾すると警報を共有。", "hedgehog":"被弾や共有情報に反応して迎撃。棘で防御します。", "collar":"犬系の忠誠+25、防御+2。非消耗。現地で装備。", "berry":"生存中HP50%以下で消費し、最大HPの1/4回復。", "hen":"朝に卵を産みます。\n移動の誘導に応じます。攻撃はしません。", "cat":"気ままに牧場を歩きます。\n指示には従いません。", "soil":"土の壁や床を作る資材。", "wood":"木の壁・床・ドアを作る資材。", "stone":"石の壁や床を作る資材。", "whistle":"6マス先まで指示できます。\n対応する仲間を最大8匹、一緒に誘導。\n非消耗。猫は指示に従いません。", "coffee":"眠気を12軽減します。\n飲み物は合計1日2本まで。", "energy_drink":"眠気を25軽減します。\n飲み物は合計1日2本まで。", "egg":preload("res://game/onsite_clarity.gd").CARRIED_EGG, "feather":"鶏が落とした柔らかな羽。", "mushroom":"夜明けに傷ついた仲間を癒します。"}.get(id,"牧場で使う品です。")
+	return {"wood_staff":"牧場主用。突き：射程2・威力3・間隔1.8秒（仮）。選択して現物を装備。","kokeshi":"周囲3マスの敵味方の移動を0.8倍。現地設置・回収。","fossil":"飾って回収できる化石。盗賊に注意。復活機能は未実装。","milk":"現地で搾乳したミルク。1個6Gで売却できます。","doberman":"屋外専用の自律迎撃犬。救出本能はありません。", "bullfrog":"舌で敵の移動を止め、被弾すると警報を共有。", "hedgehog":"被弾や共有情報に反応して迎撃。棘で防御します。", "collar":"犬系の忠誠+25、防御+2。非消耗。現地で装備。", "berry":"生存中HP50%以下で消費し、最大HPの1/4回復。", "hen":"朝に卵を産みます。\n移動の誘導に応じます。攻撃はしません。", "cat":"気ままに牧場を歩きます。\n指示には従いません。", "soil":"土の壁や床を作る資材。", "wood":"木の壁・床・ドアを作る資材。", "stone":"石の壁や床を作る資材。", "whistle":"6マス先まで指示できます。\n対応する仲間を最大8匹、一緒に誘導。\n非消耗。猫は指示に従いません。", "coffee":"眠気を12軽減します。\n飲み物は合計1日2本まで。", "energy_drink":"眠気を25軽減します。\n飲み物は合計1日2本まで。", "egg":preload("res://game/onsite_clarity.gd").CARRIED_EGG, "feather":"鶏が落とした柔らかな羽。", "mushroom":"夜明けに傷ついた仲間を癒します。"}.get(id,"牧場で使う品です。")
 
 static func owned(world, row: Dictionary) -> int:
 	var p=Shop.table()[row.id]
@@ -93,6 +93,7 @@ static func texture_for(id: String) -> Texture2D:
 		var atlas=AtlasTexture.new();atlas.atlas=UI.cursor("whistle");atlas.region=Rect2(11,11,20,16)
 		return atlas
 	if id=="milk":return UI.icon("basket")
+	if id=="wood_staff":return UI.icon("staff")
 	if id in ["hammer","basket","animals","buy","sell"]:
 		return UI.icon({"animals":"paw","buy":"basket","sell":"coin"}.get(id,id))
 	return null

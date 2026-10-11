@@ -62,6 +62,7 @@ static func step(w):
 			w.phase="day";daily(w,boundary.calendar_day)
 			if w.rest_skip.get("target","")=="dawn":w.Life.stop_rest_until(w,"morning");w.Life.set_rest(w,false)
 		elif boundary.period=="night":w.start_night()
+		elif boundary.period=="day":supplies(w,boundary.calendar_day)
 	if w.working():w.phase="defend" if c.period()=="night" else "day"
 	w.campaign.calendar_ticks=w.calendar_ticks
 
@@ -79,3 +80,11 @@ static func settle_incidents(w):
 			w.campaign.route_progress=result_campaign.route_progress
 			w.campaign.gold+=32;w.campaign.exp_pool+=16
 			w.PlayerEvents.add(w,"%d日目の襲撃が終了。+32G / 経験16（仮）"%incident.day,"raid_done:"+incident.id)
+
+static func supplies(w,day: int):
+	if day<=int(w.campaign.get("last_supply_day",0)):return
+	w.campaign.last_supply_day=day
+	for kind in ["wood","mushroom"]:
+		var row=w.Stock.add(w,kind,8 if kind=="wood" else 3,w.logistics_entry)
+		row.supply_day=day
+	w.PlayerEvents.add(w,"物資が届きました：入口に木材8・キノコ3。運搬・食事に利用できます（昼1回・仮）","supplies:%d"%day)

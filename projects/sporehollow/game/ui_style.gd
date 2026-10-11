@@ -50,6 +50,9 @@ static func icon(kind: String) -> Texture2D:
 	if kind=="coin":return preload("res://game/delivered_art.gd").RESOURCES.gold[24]
 	if textures.has(kind): return textures[kind]
 	var patterns = {
+		"staff": ["0000001", "0000010", "0000100", "0001000", "0010000", "0100000", "1000000"],
+		"sun": ["1001001", "0011100", "0111110", "1111111", "0111110", "0011100", "1001001"],
+		"sunrise": ["0001000", "1001001", "0011100", "0111110", "1111111", "0000000", "1111111"],
 		"book_closed": ["0111110", "1100011", "1101011", "1101011", "1100011", "1111111", "0111110"],
 		"book": ["1110111", "1011101", "1011101", "1011101", "1011101", "1111111", "0001000"],
 		"moon": ["0001110", "0011000", "0110000", "0110000", "0110001", "0011111", "0001110"],
@@ -70,7 +73,7 @@ static func icon(kind: String) -> Texture2D:
 	picture.fill(Color.TRANSPARENT)
 	for y in range(7):
 		for x in range(7):
-			if pixels[y][x] == "1": picture.fill_rect(Rect2i(x * 2, y * 2, 2, 2), INK)
+			if pixels[y][x] == "1": picture.fill_rect(Rect2i(x * 2, y * 2, 2, 2), GOLD if kind in ["sunrise","sun"] else INK)
 	textures[kind] = ImageTexture.create_from_image(picture)
 	return textures[kind]
 

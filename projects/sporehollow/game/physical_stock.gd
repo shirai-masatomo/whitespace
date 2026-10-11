@@ -211,6 +211,7 @@ static func save(w):
 
 static func totals(w) -> Dictionary:
 	var result={}
+	if not w.keeper.get("equipment",{}).is_empty():result[w.keeper.equipment.item_id]=1
 	for row in w.field_items:result[row.kind]=result.get(row.kind,0)+row.get("amount",1)
 	for a in w.animals:
 		if not a.get("equipment",{}).is_empty():result[a.equipment.item_id]=result.get(a.equipment.item_id,0)+1

@@ -113,6 +113,8 @@ static func step(w):
 	w.Work.step(w)
 
 static func execute(w,j,actor: Dictionary):
+	if j.kind in ["direct_attack","keeper_equipment"]:w.HumanCombat.execute(w,j,actor);return
+	if j.kind in w.Tasks.KINDS:w.Tasks.execute(w,j,actor);return
 	if j.kind=="slaughter":w.Livestock.execute(w,j,actor);return
 	if j.kind=="haul":w.Stock.haul_step(w,j,actor);return
 	if w.BUILD.has(j.kind) and not w.Stock.prepare_build(w,j,actor):return
@@ -182,7 +184,7 @@ static func preview(w) -> Array:
 	for i in range(w.jobs.size()):
 		var j=w.jobs[i]
 		if j.get("assigned_to","")!="keeper":continue
-		if j.kind in ["equip","milk","slaughter"]:
+		if j.kind in ["equip","milk","slaughter","train"]:
 			var a=w.Orders.animal(w,j.animal_id)
 			if not a.is_empty(): plans.append({"number":j.id,"goals":w.neighbors(a.pos)})
 		elif j.kind=="animal_order":

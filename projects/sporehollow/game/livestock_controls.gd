@@ -25,6 +25,15 @@ static func build(g):
 	if a.is_empty() or not g.world.working() or g.field_book or g.field_shop or g.story_modal!="" or g.equipment_open:return
 	var farm=g.world.Livestock;var kind=farm.classification(a)
 	if kind=="person":return
+	if a.species in g.world.Tasks.TRAIN_SPECIES:
+		var dogpanel=g.ColonyPanels.panel(g,Rect2(376,569,608,120));var tj=g.world.Tasks.job(g.world,"train",Vector2i.ZERO,a.id)
+		var reason=g.world.Tasks.training_reason(g.world,a,tj.get("id",-1))
+		g.ColonyPanels.label(dogpanel,"調教：基礎忠誠 +5・4秒・朝ごと1回（仮）",Vector2(12,8),16)
+		g.add_button(g.palette,"train","調教を取り消す" if not tj.is_empty() else "調教を予約",Rect2(388,604,224,34),g.TaskControls.task.bind(g,"train",Vector2i.ZERO,a.id))
+		g.buttons.train.disabled=tj.is_empty() and reason!=""
+		g.add_button(g.palette,"train_forbid","作業禁止を解除" if a.get("forbidden",false) else "動物作業を禁止",Rect2(626,604,224,34),forbid.bind(g,a.id))
+		g.ColonyPanels.label(dogpanel,reason if reason!="" else "その他の優先順位で実行。忠誠は既存の指示応答に反映。",Vector2(12,80),14)
+		return
 	var p=g.ColonyPanels.panel(g,Rect2(376,569,608,120))
 	g.ColonyPanels.label(p,"管理区分："+("家畜" if kind=="livestock" else "ペット")+"  · 忠誠・戦闘AIはそのまま",Vector2(12,8),16)
 	var j=farm.job(g.world,a.id);var why=farm.reason(g.world,a,j.get("id",-1))
@@ -45,4 +54,4 @@ static func build(g):
 static func signature(g) -> String:
 	var a=selected(g)
 	if a.is_empty():return ""
-	return str([a.id,a.hp,a.get("forbidden",false),a.get("husbandry_class",""),a.get("abductor",-1),g.world.Livestock.job(g.world,a.id)])
+	return str([a.id,a.hp,a.get("forbidden",false),a.get("husbandry_class",""),a.get("abductor",-1),a.loyalty,a.get("last_training_day",-1),g.world.Tasks.job(g.world,"train",Vector2i.ZERO,a.id),g.world.Livestock.job(g.world,a.id)])

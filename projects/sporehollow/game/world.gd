@@ -58,6 +58,7 @@ func merchant_talk_cells() -> Array:
 func merchant_present() -> bool:
 	return working() and tick>=merchant_arrive_tick and (tick*DT<merchant_leave_at or merchant_waiting() or market_open)
 
+const HumanCombat=preload("res://game/human_combat.gd")
 const Life = preload("res://game/keeper_life.gd")
 var jobs_held = false
 var job_hold_reason = ""
@@ -72,6 +73,8 @@ const Stock=preload("res://game/physical_stock.gd")
 const Food=preload("res://game/human_food.gd")
 const Nutrition=preload("res://game/human_nutrition.gd")
 const Livestock=preload("res://game/livestock.gd")
+const Tasks=preload("res://game/colony_tasks.gd")
+var rocks: Dictionary = {}
 const Zones=preload("res://game/colony_zones.gd")
 var zones: Array = []
 var next_zone_id=1
@@ -187,6 +190,7 @@ func _init(data: Dictionary = {}, seed_number: int = 17, stage_override: Diction
 	morning_checkpoint.erase("morning_checkpoint")
 	for key in ["hp", "sleepiness", "drinks_today","facing","stamina","ultimate_gauge"]:
 		keeper[key] = campaign.get("keeper_vitals", {}).get(key, keeper.get(key,1))
+	keeper.equipment=campaign.get("keeper_vitals",{}).get("equipment",{}).duplicate(true)
 	keeper.state=campaign.get("keeper_vitals",{}).get("recovery_state","unconscious" if keeper.hp<=0 else "free")
 	if keeper.state in ["unconscious","hidden_rest"]:
 		keeper.heal_credit=campaign.keeper_vitals.get("heal_credit",0.0)
@@ -287,6 +291,7 @@ func _init(data: Dictionary = {}, seed_number: int = 17, stage_override: Diction
 		morning_checkpoint.erase("morning_checkpoint")
 	shop_stock = Shop.generate(stage, seed_value, campaign.unlocked_blueprints, campaign.day)
 	Cycle.init(self)
+	Tasks.init(self)
 	say("牧場を整えよう")
 
 func make_schedule():
@@ -589,6 +594,7 @@ func animal_step(a: Dictionary):
 		release_kennel(a)
 		return
 	if Livestock.held(self,a):a.state="と殺作業中";return
+	if Tasks.held(self,a):a.state="調教中";return
 	if Orders.follow(self,a): return
 	if not a.pending.is_empty() and tick >= a.pending.at:
 		release_kennel(a)
@@ -935,6 +941,7 @@ func repair(p: Vector2i, target_layer: String="structure") -> bool:
 	return true
 
 func persist_farm():
+	Tasks.save(self)
 	Stock.save(self)
 	campaign.calendar_ticks=calendar_ticks;campaign.last_daily_day=last_daily_day
 	Work.save(self)
@@ -948,6 +955,7 @@ func persist_farm():
 			if a.placed: owned.position=[a.pos.x,a.pos.y]
 			owned.facing=a.get("facing",1)
 			owned.husbandry_class=Livestock.classification(a);owned.forbidden=a.get("forbidden",false)==true
+			owned.loyalty=a.loyalty;owned.last_training_day=a.get("last_training_day",-1)
 			for key in ["equipment","rarity","bonus_skills","ultimate_gauge","ultimate_gauge_max"]: owned[key]=a.get(key)
 			owned.hp=a.hp; owned.mode=a.mode; owned.order_remaining=maxi(0,a.order_until-tick); owned.unavailable_through_day=a.unavailable_through_day
 			if a.species=="shiba":owned.convalescent_ticks=a.get("convalescent_ticks",0)
@@ -957,9 +965,9 @@ func persist_farm():
 		if job.kind=="collect" and natural.has(job.pos):campaign.work_natural.append({"pos":[job.pos.x,job.pos.y],"kind":natural[job.pos]})
 	campaign.work_jobs=[]
 	for j in jobs:
-		if not BUILD.has(j.kind) and j.kind not in Story.ACTIONS and j.kind not in ["collect","haul","slaughter"]: continue
+		if not BUILD.has(j.kind) and j.kind not in Story.ACTIONS and j.kind not in ["collect","haul","slaughter","mine","train","keeper_equipment","direct_attack"]: continue
 		var row=j.duplicate(true); row.pos=[j.pos.x,j.pos.y]; row.assigned_to="";row.retry_at=0;campaign.work_jobs.append(row)
-	campaign.keeper_vitals = {"hp": keeper.hp, "sleepiness": keeper.sleepiness, "drinks_today": keeper.drinks_today,"facing":keeper.get("facing",1),"stamina":keeper.stamina,"ultimate_gauge":keeper.ultimate_gauge,"recovery_state":keeper.state if keeper.state in ["unconscious","hidden_rest"] else "free","heal_credit":keeper.heal_credit,"recover_ticks":keeper.recover_ticks}
+	campaign.keeper_vitals = {"equipment":keeper.get("equipment",{}).duplicate(true),"hp": keeper.hp, "sleepiness": keeper.sleepiness, "drinks_today": keeper.drinks_today,"facing":keeper.get("facing",1),"stamina":keeper.stamina,"ultimate_gauge":keeper.ultimate_gauge,"recovery_state":keeper.state if keeper.state in ["unconscious","hidden_rest"] else "free","heal_credit":keeper.heal_credit,"recover_ticks":keeper.recover_ticks}
 	campaign.keeper_position = [keeper.pos.x, keeper.pos.y]
 	campaign.resources = resource_snapshot()
 	campaign.next_structure_id = next_structure_id
@@ -1203,7 +1211,7 @@ func grow_nature():
 	for y in range(1, H - 1):
 		for x in range(1, W - 1):
 			var p = Vector2i(x, y)
-			if walkable(p) and not occupied(p) and not live_structure(p) and not natural.has(p) and floors.get(p,{}).get("status") not in ["ready","building"] and p not in entries and not field_items.any(func(item): return item.pos == p): sites.append(p)
+			if walkable(p) and not occupied(p) and not live_structure(p) and not natural.has(p) and not rocks.has(p) and floors.get(p,{}).get("status") not in ["ready","building"] and p not in entries and not field_items.any(func(item): return item.pos == p): sites.append(p)
 	if sites.is_empty(): return
 	var p = sites[nature_rng.randi_range(0, sites.size() - 1)]
 	natural[p] = kind
