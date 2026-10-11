@@ -13,3 +13,7 @@ AI制御fixtureとGodot InputEventで検証。人間試遊ではなく、楽し�
 固定入口: C:\Users\masat\Documents\codex_test\projects\sporehollow\確認入口\最新開発版.lnk
 入口整理: cleanup-manifest.json の49ファイルをOSごみ箱へ移動。途中13件後にWindows APIエラー、未処理36件のみ再試行して全49件完了。全コード/保存/履歴/通常build/資料画像は保持。
 追加の約3GB容量整理は残実装後。対象プロジェクトの実容量・依存を調べてから、再生成可能物/不要重複だけ復元可能に整理しサイズ前後を記録する。
+
+公開せずローカル確定: コード7292676。独立EXEの通常mainシーンを専用データ/隔離GPUで起動(PID11836, exit0, ERRORなし)。操作5群はソースの隔離GPU入力、EXEは起動スモークのみであり区別する。
+EXE SHA256: b78da7d4ce8310a6cea62cf4f7d7e9fd933956ef47bebf103a128cc220f574ff
+前版EXEはTemp退避済み、BUILD.json参照。固定入口の実体を更新済み。00_研究進捗も現行正本の報告へ接続。

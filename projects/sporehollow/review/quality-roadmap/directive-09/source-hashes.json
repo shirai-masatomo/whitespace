@@ -1,0 +1,15 @@
+{
+  "game/item_commands.gd": "ae26a0ec9f9df3e5396290fb857e02590f2c3b12072fef23f1bb9f605ddd9315",
+  "game/physical_stock.gd": "ac63254b0c05e98fbb64c1eb523de5099a7bb56944f882872e3ab15ac3322dcb",
+  "game/human_work.gd": "d12c3d4f3921730e948386f2910bfa09d3fa65f75a7789ff7334fbe841ffa08b",
+  "game/human_food.gd": "88de4689a287aad1135b15917ed66657bc0a14f5bdb1a306744f13b43db86e96",
+  "game/work_policy.gd": "f4202072d4f5543da6626c64bfcddc85c8ee783b82b6d5ba8f83355d75664fe6",
+  "game/progression.gd": "59186b40dc57ade51ac93a0072d635f539afd45d531578ee947cd05aa2acfc29",
+  "game/world.gd": "b7db97cbda25eef4e9edacefdaefd43bbe84a9e3deb388e7d0479493e55ac02d",
+  "game/main.gd": "14b9a9685c142457e07d6996c3c146ff3f3de141631c472909126a93a3500583",
+  "game/colony_panels.gd": "f7f6f27fdef65e7ba93fc24a8f8db38efd1a989a18b9a462acda155dc653827c",
+  "game/onsite_clarity.gd": "95b193391af8be446622c80d5853482c5631208cc732ea32c06bcdbeb9e9974b",
+  "game/research_snapshot.gd": "69f85d9a621b9fbc88a6f638c91a3f75ac83185961b2b15657b70007362722bf",
+  "tests/test_directive09_unit1.gd": "14039ef95259595c682a97d08b931f51fc776290781c5904fa0f5528fb47130c",
+  "project.godot": "d0c493bcb18f24433cce498feaba39a72e0ca9de1956b5f03bcb3229a7be0b6a"
+}

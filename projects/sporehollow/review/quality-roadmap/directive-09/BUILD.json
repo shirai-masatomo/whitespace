@@ -1,0 +1,20 @@
+{
+  "code_commit": "7292676",
+  "scope": "Directive 09 unit 1 only; partial development",
+  "exe": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\autonomy-entry-01\\bundle\\WhistleRanch-Autonomy-Partial.exe",
+  "sha256": "b78da7d4ce8310a6cea62cf4f7d7e9fd933956ef47bebf103a128cc220f574ff",
+  "size": 127448104,
+  "fixed_entry": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\確認入口\\最新開発版.lnk",
+  "launcher": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\autonomy-entry-01\\bundle\\Launch-Autonomy.ps1",
+  "data_root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\autonomy-entry-01\\bundle\\user-data\\WhistleResearchAutonomy",
+  "normal_scene_smoke": {
+    "passed": true,
+    "pid": 11836,
+    "method": "isolated noninteractive desktop, own data, normal scene --smoke"
+  },
+  "logic_groups": 4,
+  "ui_groups": 5,
+  "human_play": false,
+  "previous_exe_backup": "C:\\Users\\masat\\AppData\\Local\\Packages\\sandbox.{705bbf1c-519d-4e13-8819-f3c8d61a5434}\\AC\\Temp\\whistle-directive09-rollback\\WhistleRanch-cf22339ec504.exe",
+  "previous_sha256": "cf22339ec5048ffba29e029539a1dd2a842016f77041f86f269914d909d44e06"
+}

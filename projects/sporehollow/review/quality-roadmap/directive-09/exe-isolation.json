@@ -1,0 +1,12 @@
+{
+  "PID": 11836,
+  "ThreadID": 36036,
+  "ExitCode": 0,
+  "OwnedWindowCount": 3,
+  "Station": "Service-0x0-bf6d9650$",
+  "Desktop": "Render_39df6655e4fa47b2958e2f339ba35df6",
+  "ObservedDesktop": "Render_39df6655e4fa47b2958e2f339ba35df6",
+  "NonInteractive": true,
+  "DesktopMatched": true,
+  "TimedOut": false
+}
