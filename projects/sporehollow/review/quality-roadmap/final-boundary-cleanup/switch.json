@@ -1,0 +1,13 @@
+{
+  "utc": "2026-10-11T10:44:37.1866145Z",
+  "human_play": "not performed",
+  "scope": "Visible 50x34 boundary, explicit hauling, priorities, ongoing colony and save migration",
+  "previous_sha256": "9BF6B8CFE1E46DDF60BB06F7E0E2B47D1E85770287EA82EEEEC6A320E4B012CD",
+  "sha256": "979C8C626D1D921D40A32A420BC39A8E0F59B01851D896F5E146E9C58B81EC4E",
+  "normal_build_and_saves": "hashes unchanged",
+  "implementation_commit": "e08670c",
+  "native_restart": "passed",
+  "fixed_entry": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\確認入口\\最新開発版.lnk",
+  "executable": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\autonomy-entry-01\\bundle\\WhistleRanch-Autonomy-Partial.exe",
+  "previous_backup": "C:\\Users\\masat\\AppData\\Local\\Temp\\whistle-boundary-rollback\\WhistleRanch-9BF6B8CFE1E4.exe"
+}

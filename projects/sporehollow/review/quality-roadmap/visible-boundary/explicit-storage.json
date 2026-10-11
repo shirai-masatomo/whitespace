@@ -1,0 +1,50 @@
+{
+	"checks": [
+		{
+			"check": "New initial materials are reachable physical ground objects beside the central keeper",
+			"passed": true
+		},
+		{
+			"check": "Creating and configuring storage does not move, claim, duplicate or automatically haul goods",
+			"passed": true
+		},
+		{
+			"check": "Load and zone resize preserve existing positions and ownership without creating work",
+			"passed": true
+		},
+		{
+			"check": "Explicit single collection reserves one real job and duplicate request creates none",
+			"passed": true
+		},
+		{
+			"check": "Worker physically picks up the specified wood before delivery",
+			"passed": true
+		},
+		{
+			"check": "Saved carrying resumes and drops exactly the original quantity at storage",
+			"passed": true
+		},
+		{
+			"check": "Unselected goods remain at their original position",
+			"passed": true
+		},
+		{
+			"check": "Explicit rectangle collection uses the same real haul path",
+			"passed": true
+		},
+		{
+			"check": "Eating still fetches required ground food without a hauling designation",
+			"passed": true
+		},
+		{
+			"check": "Construction can still be explicitly designated",
+			"passed": true
+		},
+		{
+			"check": "Construction directly fetches needed physical materials without automatic storage hauling",
+			"passed": true
+		}
+	],
+	"failures": 0,
+	"method": "One production World.step group; controlled food/build fixtures and carried-state snapshot"
+}

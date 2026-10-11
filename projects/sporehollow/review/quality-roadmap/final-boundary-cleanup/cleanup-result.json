@@ -1,0 +1,51 @@
+{
+  "entry_after": [
+    "最新開発版.lnk"
+  ],
+  "entry_items_recycled": 23,
+  "entry_original_files_preserved": 96,
+  "old_exe_recycled": 34,
+  "old_exe_bytes_removed_from_project": 4176276368,
+  "permanent_deletion": false,
+  "recycle_bin_note": "Project folders shrink; disk free space is not reclaimed until the user empties the Recycle Bin.",
+  "protected_hashes_verified": [
+    {
+      "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\build\\WhistleRanch.exe",
+      "bytes": 119276160,
+      "sha256": "774a09279bc1059583248aeb758131e984a9980916a493ce11c3cfbb9f9165e7"
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\autonomy-entry-01\\bundle\\user-data\\WhistleResearchAutonomy\\autonomy.snapshot",
+      "sha256": "7c0906c740ff90ce55892b6852df18e6546b3fb37057d03744ef73d75452b841",
+      "bytes": 29452
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\autonomy-entry-01\\bundle\\user-data\\WhistleResearchAutonomy\\colony.snapshot",
+      "sha256": "4b97293c5e657a9eba962f2be0ae55b31fb95196788c565d957238a886bc057d",
+      "bytes": 38268
+    }
+  ],
+  "before_after": [
+    {
+      "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\artifacts",
+      "before_bytes": 1834541907,
+      "after_bytes": 540606555,
+      "before_files": 2616,
+      "after_files": 2605
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\確認入口",
+      "before_bytes": 13349691,
+      "after_bytes": 3090,
+      "before_files": 97,
+      "after_files": 1
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts",
+      "before_bytes": 3117938011,
+      "after_bytes": 235596995,
+      "before_files": 1674,
+      "after_files": 1651
+    }
+  ]
+}

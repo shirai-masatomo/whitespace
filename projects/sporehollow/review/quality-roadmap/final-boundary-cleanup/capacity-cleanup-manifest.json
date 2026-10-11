@@ -1,0 +1,268 @@
+{
+  "allowed_roots": [
+    "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\playtest",
+    "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\artifacts\\validation"
+  ],
+  "actions": [
+    {
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\playtest\\20261008-200838-402\\WhistleRanch-preview.exe",
+      "bytes": 123610536,
+      "sha256": "52a973082ffbce174ea682059178226e8f49d903cf65e29c50369f3bfb4be160",
+      "action": "recycle_file",
+      "status": "recycled"
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\playtest\\20261008-234821-898\\WhistleRanch-preview.exe",
+      "bytes": 123617824,
+      "sha256": "058e1959b1fbddfb4b84a94a3ad1885b6ec0f25a7b6361c5bc9c66a622bd09c7",
+      "action": "recycle_file",
+      "status": "recycled"
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\playtest\\20261009-020437-216\\WhistleRanch-preview.exe",
+      "bytes": 123619488,
+      "sha256": "fbb8a7aad1d04700586b8a525e388ef3adfe6d508b26b3120f4900d366698b4b",
+      "action": "recycle_file",
+      "status": "recycled"
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\playtest\\20261009-184446-538\\WhistleRanch-preview.exe",
+      "bytes": 123619968,
+      "sha256": "92098006ee5ae24d7886c2941c561fc9d942b5a267cdd6ad717efe3dcd489c4a",
+      "action": "recycle_file",
+      "status": "recycled"
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\playtest\\20261009-194756-179\\WhistleRanch-preview.exe",
+      "bytes": 123621168,
+      "sha256": "64ac8303aa3fc499294a51135182bd2666a39e29343bdc72768b50b01b8088bf",
+      "action": "recycle_file",
+      "status": "recycled"
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\playtest\\20261009-202008-469\\WhistleRanch-preview.exe",
+      "bytes": 123621712,
+      "sha256": "a37d3c6a11423ff6402cbef3aae69eb0b4ae2d0a80f0d61bd501e64160ef2c88",
+      "action": "recycle_file",
+      "status": "recycled"
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\playtest\\20261010-000204-106\\WhistleRanch-preview.exe",
+      "bytes": 124474824,
+      "sha256": "59e213d9339f662caa31498beeeaba9206f79fffc6be69c864c0a635498816f1",
+      "action": "recycle_file",
+      "status": "recycled"
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\playtest\\20261010-003258-814\\WhistleRanch-preview.exe",
+      "bytes": 125200256,
+      "sha256": "b162179c84b4cfa13937e53cdd71ff12c17f569c94f1ecb0952f5b83dd00e0c1",
+      "action": "recycle_file",
+      "status": "recycled"
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\playtest\\20261010-005647-206\\WhistleRanch-preview.exe",
+      "bytes": 125200576,
+      "sha256": "b279e4fb74b213875fd29e95f4c9b10cb852ad492108403ff2728659b9094dc7",
+      "action": "recycle_file",
+      "status": "recycled"
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\playtest\\20261010-010633-234\\WhistleRanch-preview.exe",
+      "bytes": 125202768,
+      "sha256": "f707840912b9f09e9556b0fbca16a368e45d4e74faa39bec8e761abb3ecea8a6",
+      "action": "recycle_file",
+      "status": "recycled"
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\playtest\\20261010-011934-619\\WhistleRanch-preview.exe",
+      "bytes": 125204992,
+      "sha256": "910a71724453f5ea3d37e3cc2a255f8530e89b2294c3f7ae4661c9cca4ade6be",
+      "action": "recycle_file",
+      "status": "recycled"
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\playtest\\20261010-012013-245\\WhistleRanch-preview.exe",
+      "bytes": 125204992,
+      "sha256": "74173290bc50a9c3f196b50ed964798495110182799cb5a02d684e28ce74e952",
+      "action": "recycle_file",
+      "status": "recycled"
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\playtest\\20261010-012320-390\\WhistleRanch-preview.exe",
+      "bytes": 125205120,
+      "sha256": "0d9aff4dd0892deb4d98466d213e6338652f94fb18f0fe336d9ae6f8ce1daef8",
+      "action": "recycle_file",
+      "status": "recycled"
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\playtest\\20261010-013636-427\\WhistleRanch-preview.exe",
+      "bytes": 125205600,
+      "sha256": "82f5594c433e26fc2cc1473c5a086c52d5d800240982f7a444fa40445a019319",
+      "action": "recycle_file",
+      "status": "recycled"
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\playtest\\20261010-015104-332\\WhistleRanch-preview.exe",
+      "bytes": 125206704,
+      "sha256": "451ef80080c143e981a97d499f1bac6d443292597904e2a67ee4b05b0764f12b",
+      "action": "recycle_file",
+      "status": "recycled"
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\playtest\\20261010-015302-530\\WhistleRanch-preview.exe",
+      "bytes": 125206624,
+      "sha256": "b286aec83204c09d3d5a513474ebc16e20eb17a9ab73f87e463c0fe9a6404b16",
+      "action": "recycle_file",
+      "status": "recycled"
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\playtest\\20261010-015712-801\\WhistleRanch-preview.exe",
+      "bytes": 127043752,
+      "sha256": "2d016d87c7249a14879e2e380fd2f8374e1021a23353cde43742f20d3ca5626e",
+      "action": "recycle_file",
+      "status": "recycled"
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\playtest\\20261010-015839-285\\WhistleRanch-preview.exe",
+      "bytes": 127044008,
+      "sha256": "f693fba9065ac3d7fbc412540e19361a3f0d07c12b124b20c5561decd61deaa7",
+      "action": "recycle_file",
+      "status": "recycled"
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\playtest\\20261010-020208-646\\WhistleRanch-preview.exe",
+      "bytes": 127045048,
+      "sha256": "103fc35df126206c1c08224e055e78cdb6357a3f8e46bb821b1131a8e6a3e229",
+      "action": "recycle_file",
+      "status": "recycled"
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\playtest\\20261010-020357-809\\WhistleRanch-preview.exe",
+      "bytes": 127045336,
+      "sha256": "82c8f3dad078ea5325a762a128e1b1fb1aa8315cba7daf39b6e8eb51dafdafe5",
+      "action": "recycle_file",
+      "status": "recycled"
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\playtest\\20261010-020943-199\\WhistleRanch-preview.exe",
+      "bytes": 127046008,
+      "sha256": "b6d3de77806a0314ffe5e3dd67d98587c90ee217e5a9d99c6f1a24180823903d",
+      "action": "recycle_file",
+      "status": "recycled"
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\playtest\\20261010-021200-239\\WhistleRanch-preview.exe",
+      "bytes": 127046568,
+      "sha256": "b97c9ce01fcac6f2c07b7415fa25e66425de63ec277f08fd94621d038de585b0",
+      "action": "recycle_file",
+      "status": "recycled"
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\playtest\\20261010-034237-963\\WhistleRanch-preview.exe",
+      "bytes": 127047144,
+      "sha256": "80d724ed1154694813a58a521db5fe61fb45796d6843f7dbad670414eeb4777e",
+      "action": "recycle_file",
+      "status": "recycled"
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\artifacts\\validation\\20261004-214839-056\\WhistleRanch-test.exe",
+      "bytes": 116986664,
+      "sha256": "b44a2fb8c7b526fe9e457824ce7662d5c25ab718d653de5e3f5916a17e31c7d0",
+      "action": "recycle_file",
+      "status": "recycled"
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\artifacts\\validation\\20261004-230403-250\\WhistleRanch-test.exe",
+      "bytes": 117220312,
+      "sha256": "53927735e88d97f8263bc061a249ed01ae542353a913b0cd9ff4a2f04f87f35e",
+      "action": "recycle_file",
+      "status": "recycled"
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\artifacts\\validation\\20261006-112825-910\\WhistleRanch-test.exe",
+      "bytes": 117229176,
+      "sha256": "d2378a8c57d60ee89e19db8cfc3f366f0652e8bc3bfd74d7fb6fd67a423c0d12",
+      "action": "recycle_file",
+      "status": "recycled"
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\artifacts\\validation\\20261006-130825-074\\WhistleRanch-test.exe",
+      "bytes": 117253504,
+      "sha256": "2f32b8ea1166ffee84148a1d1e1a68fc5668a8b7f4e735b7d347c42a52ed402d",
+      "action": "recycle_file",
+      "status": "recycled"
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\artifacts\\validation\\20261006-131221-756\\WhistleRanch-test.exe",
+      "bytes": 117253408,
+      "sha256": "95bec9fee8cca4bc5eaeb5d920afce18e9df810fbeb9474f6e45d3ef580761c4",
+      "action": "recycle_file",
+      "status": "recycled"
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\artifacts\\validation\\20261006-174650-597\\WhistleRanch-test.exe",
+      "bytes": 117292608,
+      "sha256": "2e406142ef59ab7523c28d2a89687f9b0fc981051094f7eb8121d42232523331",
+      "action": "recycle_file",
+      "status": "recycled"
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\artifacts\\validation\\20261006-175031-840\\WhistleRanch-test.exe",
+      "bytes": 117292608,
+      "sha256": "83d58dcd591cf065bd64f651ddcb32e5efc83025eff7297044ebdcb35824f60d",
+      "action": "recycle_file",
+      "status": "recycled"
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\artifacts\\validation\\20261007-195025-990\\WhistleRanch-test.exe",
+      "bytes": 117329328,
+      "sha256": "f6b22d5aeea3fc1e87cdc5e543db7ad72f4f3a4095f7cf272eb4af7a4690fd05",
+      "action": "recycle_file",
+      "status": "recycled"
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\artifacts\\validation\\20261008-004303-855\\WhistleRanch-test.exe",
+      "bytes": 118390608,
+      "sha256": "2c0fa615af94764a9732ace170783f960c5fd542a8def20a94b8402dabc917ec",
+      "action": "recycle_file",
+      "status": "recycled"
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\artifacts\\validation\\20261008-021449-061\\WhistleRanch-test.exe",
+      "bytes": 118410976,
+      "sha256": "fb552c8f09a47831aa9b13fbd3b59fd46311783fd266dc5cbbf595ad96136ec1",
+      "action": "recycle_file",
+      "status": "recycled"
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\artifacts\\validation\\20261008-152027-621\\WhistleRanch-test.exe",
+      "bytes": 119276160,
+      "sha256": "774a09279bc1059583248aeb758131e984a9980916a493ce11c3cfbb9f9165e7",
+      "action": "recycle_file",
+      "status": "recycled"
+    }
+  ],
+  "protected": [
+    {
+      "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\build\\WhistleRanch.exe",
+      "bytes": 119276160,
+      "sha256": "774a09279bc1059583248aeb758131e984a9980916a493ce11c3cfbb9f9165e7"
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\autonomy-entry-01\\bundle\\WhistleRanch-Autonomy-Partial.exe",
+      "bytes": 127502712,
+      "sha256": "9bf6b8cfe1e46ddf60bb06f7e0e2b47d1e85770287ea82eeeec6a320e4b012cd"
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\autonomy-entry-01\\bundle\\user-data\\WhistleResearchAutonomy\\autonomy.snapshot",
+      "sha256": "7c0906c740ff90ce55892b6852df18e6546b3fb37057d03744ef73d75452b841",
+      "bytes": 29452
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\autonomy-entry-01\\bundle\\user-data\\WhistleResearchAutonomy\\colony.snapshot",
+      "sha256": "4b97293c5e657a9eba962f2be0ae55b31fb95196788c565d957238a886bc057d",
+      "bytes": 38268
+    }
+  ]
+}

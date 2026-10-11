@@ -1,0 +1,39 @@
+現行ゲームの参照先をgame/*.gdから確認。旧コピー元ではなく最新開発版のビルド元。
+
+素材基点
+C:\Users\masat\Documents\Codex\2026-10-10\task\colony-structure-01-work\projects\sporehollow
+
+人物/柴犬 静止
+C:\Users\masat\Documents\Codex\2026-10-10\task\colony-structure-01-work\projects\sporehollow\art_delivery\characters_v1
+
+人物/柴犬 動作
+C:\Users\masat\Documents\Codex\2026-10-10\task\colony-structure-01-work\projects\sporehollow\art_delivery\characters_motion_v1
+
+猫/鶏
+C:\Users\masat\Documents\Codex\2026-10-10\task\colony-structure-01-work\projects\sporehollow\art_delivery\ranch_assets_v1
+
+ドーベルマン
+C:\Users\masat\Documents\Codex\2026-10-10\task\colony-structure-01-work\projects\sporehollow\art_delivery\doberman_motion_v1
+
+黄金像
+C:\Users\masat\Documents\Codex\2026-10-10\task\colony-structure-01-work\projects\sporehollow\art_delivery\ui_world_direction_v1\candidates\world\goldA.png
+
+UI
+C:\Users\masat\Documents\Codex\2026-10-10\task\colony-structure-01-work\projects\sporehollow\assets\ui
+
+追加UI
+C:\Users\masat\Documents\Codex\2026-10-10\task\colony-structure-01-work\projects\sporehollow\assets\adopted_ui
+
+昼BGM
+C:\Users\masat\Documents\Codex\2026-10-10\task\colony-structure-01-work\projects\sporehollow\assets\audio\Porch_Swing_Serenade.mp3
+
+木造建築
+C:\Users\masat\Documents\Codex\2026-10-10\task\colony-structure-01-work\projects\sporehollow\art_delivery\wood_buildings_v1
+
+石造建築
+C:\Users\masat\Documents\Codex\2026-10-10\task\colony-structure-01-work\projects\sporehollow\art_delivery\earth_stone_buildings_v1
+
+フォント
+C:\Users\masat\Documents\Codex\2026-10-10\task\colony-structure-01-work\projects\sporehollow\assets\fonts
+
+夜環境音・効果音・握った手カーソルはコード生成（game/farm_audio.gd, ui_style.gd）。

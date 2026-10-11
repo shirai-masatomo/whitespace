@@ -1,0 +1,13 @@
+{
+  "findings": [],
+  "excluded": [
+    "research history",
+    "review logs",
+    "RimWorld reference",
+    "personal saves",
+    "executables",
+    "user-provided MP3",
+    "unused reference assets"
+  ],
+  "runtime_file_count": 1289
+}

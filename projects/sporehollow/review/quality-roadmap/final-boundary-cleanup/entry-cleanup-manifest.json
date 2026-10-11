@@ -1,0 +1,693 @@
+{
+  "entry": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\確認入口",
+  "archive": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\review\\private-entry-archive-20261011",
+  "actions": [
+    {
+      "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\確認入口\\00_研究進捗.lnk",
+      "archive": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\review\\private-entry-archive-20261011\\00_研究進捗.lnk",
+      "kind": "file",
+      "action": "recycle",
+      "status": "recycled",
+      "files": [
+        {
+          "relative": "00_研究進捗.lnk",
+          "bytes": 1850,
+          "sha256": "f00eedd6790ed052e4b755a2cd161e109f3a2d937eabf0f831225638bd84a275"
+        }
+      ]
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\確認入口\\00_確認ガイド.html",
+      "archive": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\review\\private-entry-archive-20261011\\00_確認ガイド.html",
+      "kind": "file",
+      "action": "recycle",
+      "status": "recycled",
+      "files": [
+        {
+          "relative": "00_確認ガイド.html",
+          "bytes": 11238,
+          "sha256": "818e035827363d1dd2eb673fc4861f54afd0ecade61c77e47617c625ad9be1c5"
+        }
+      ]
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\確認入口\\02_比較画像.lnk",
+      "archive": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\review\\private-entry-archive-20261011\\02_比較画像.lnk",
+      "kind": "file",
+      "action": "recycle",
+      "status": "recycled",
+      "files": [
+        {
+          "relative": "02_比較画像.lnk",
+          "bytes": 2215,
+          "sha256": "cdd89dc41f9d6d4b3e829c20e475b8d9803d544407e43238eb9fb65e2c024e5c"
+        }
+      ]
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\確認入口\\03_採用素材索引.lnk",
+      "archive": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\review\\private-entry-archive-20261011\\03_採用素材索引.lnk",
+      "kind": "file",
+      "action": "recycle",
+      "status": "recycled",
+      "files": [
+        {
+          "relative": "03_採用素材索引.lnk",
+          "bytes": 1871,
+          "sha256": "5edde799b8bb67fbf0b9584218d10bae219504d25302f96aeb5afc8c552b1f6c"
+        }
+      ]
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\確認入口\\04_納品と候補.lnk",
+      "archive": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\review\\private-entry-archive-20261011\\04_納品と候補.lnk",
+      "kind": "file",
+      "action": "recycle",
+      "status": "recycled",
+      "files": [
+        {
+          "relative": "04_納品と候補.lnk",
+          "bytes": 1556,
+          "sha256": "00c9bd8944a7700a8fb045b27ffc82378a828468bd89042624d079d407690e26"
+        }
+      ]
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\確認入口\\05_試遊版の履歴.lnk",
+      "archive": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\review\\private-entry-archive-20261011\\05_試遊版の履歴.lnk",
+      "kind": "file",
+      "action": "recycle",
+      "status": "recycled",
+      "files": [
+        {
+          "relative": "05_試遊版の履歴.lnk",
+          "bytes": 1678,
+          "sha256": "1fc682880d5bb15d82469d31a9f75e868a7e833db3f46be7e12cd711940221f7"
+        }
+      ]
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\確認入口\\06_ロードマップ.lnk",
+      "archive": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\review\\private-entry-archive-20261011\\06_ロードマップ.lnk",
+      "kind": "file",
+      "action": "recycle",
+      "status": "recycled",
+      "files": [
+        {
+          "relative": "06_ロードマップ.lnk",
+          "bytes": 1548,
+          "sha256": "ed270df23e8d9a46741b3c488bee53cf6c8c3a45eee42dcfe0629c513073e1c1"
+        }
+      ]
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\確認入口\\07_更新後スクショ_912b987",
+      "archive": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\review\\private-entry-archive-20261011\\07_更新後スクショ_912b987",
+      "kind": "directory",
+      "action": "recycle",
+      "status": "recycled",
+      "files": [
+        {
+          "relative": "07_更新後スクショ_912b987\\index.html",
+          "bytes": 4321,
+          "sha256": "b6bfafa107233b1d23efb01aa37852eaff00b838a8a74a196648f71979536ec1"
+        },
+        {
+          "relative": "07_更新後スクショ_912b987\\manifest.json",
+          "bytes": 2894,
+          "sha256": "a728a8ad7907c15af02e041b360e5c0dbdae7fba5d30cde4239d9494d2a0c5a2"
+        },
+        {
+          "relative": "07_更新後スクショ_912b987\\README.txt",
+          "bytes": 447,
+          "sha256": "d98768a1f5025fbe79ccd214eae74e491f7b52764e38362edecbaab67e8f7cfe"
+        },
+        {
+          "relative": "07_更新後スクショ_912b987\\images\\01_朝画面.png",
+          "bytes": 191730,
+          "sha256": "83437d263db866e31309cf8ed5566365071d5bffc6a69ca1b21fae5898b66555"
+        },
+        {
+          "relative": "07_更新後スクショ_912b987\\images\\02_ショップ入口.png",
+          "bytes": 180355,
+          "sha256": "b889e7b053895f5899757e3233e69e97bef5e2c83229514a1984200463d9874d"
+        },
+        {
+          "relative": "07_更新後スクショ_912b987\\images\\03_商品一覧.png",
+          "bytes": 141119,
+          "sha256": "7b699ccabeffc4fab82bc7a34311b409ec21b8a76a5a6db9bbb353ffd0a7ea5f"
+        },
+        {
+          "relative": "07_更新後スクショ_912b987\\images\\04_購入確認.png",
+          "bytes": 152515,
+          "sha256": "d8b784c73a0800f3ad6b80c0cd0a1d9522dfba906b09e4c901b3781fe2ce887a"
+        },
+        {
+          "relative": "07_更新後スクショ_912b987\\images\\05_図鑑.png",
+          "bytes": 156850,
+          "sha256": "b01fd1051a3d7f149279350cc2599845d4fb251b78a22a515531633a68c2f0ff"
+        },
+        {
+          "relative": "07_更新後スクショ_912b987\\images\\06_敵HPと黄金像.png",
+          "bytes": 194378,
+          "sha256": "6a754ffbed83bbfdf07ffaa16d2dcedda652624d06ad8663d77d9bced3f7c954"
+        }
+      ]
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\確認入口\\07_更新後スクショ_912b987.zip",
+      "archive": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\review\\private-entry-archive-20261011\\07_更新後スクショ_912b987.zip",
+      "kind": "file",
+      "action": "recycle",
+      "status": "recycled",
+      "files": [
+        {
+          "relative": "07_更新後スクショ_912b987.zip",
+          "bytes": 1005658,
+          "sha256": "e7a8fb8c416d0c447a351a67172d948c2e9b79f8ce8685d68b80e9e621f2175b"
+        }
+      ]
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\確認入口\\08_吹き出しA_0a6272e",
+      "archive": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\review\\private-entry-archive-20261011\\08_吹き出しA_0a6272e",
+      "kind": "directory",
+      "action": "recycle",
+      "status": "recycled",
+      "files": [
+        {
+          "relative": "08_吹き出しA_0a6272e\\01_morning_bubble_a.png",
+          "bytes": 211501,
+          "sha256": "bbcde72d3b2c4e9dd11bb2391c6eec715e824beef39ed52af19c82db8d19a30d"
+        },
+        {
+          "relative": "08_吹き出しA_0a6272e\\02_merchant_greeting_a.png",
+          "bytes": 204664,
+          "sha256": "58b3d5e8d7370c46da7e9b7164f788a79488748cbab048a239657b7ba8024bb5"
+        },
+        {
+          "relative": "08_吹き出しA_0a6272e\\03_short_greeting_a.png",
+          "bytes": 130504,
+          "sha256": "0b61f4fce63c5b5862b6fe76efda62d4b7fbbc21a22fc70c5081fd9b5b4b0ae7"
+        },
+        {
+          "relative": "08_吹き出しA_0a6272e\\bubble-a.json",
+          "bytes": 1329,
+          "sha256": "13762b027e668df5601c153a0ed58736840f1d4c519aa3dcc083b22bfca03c74"
+        },
+        {
+          "relative": "08_吹き出しA_0a6272e\\index.html",
+          "bytes": 791,
+          "sha256": "3f6c69a82287cdf497007363c0ffbc612e886382494ae4c0539b182a92d98b4a"
+        },
+        {
+          "relative": "08_吹き出しA_0a6272e\\isolation.json",
+          "bytes": 1755,
+          "sha256": "269fbed0281d3dbeee2144f83ff5e5b322382952febb4a9c1ba36219dc5682c5"
+        }
+      ]
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\確認入口\\09_朝画面_7a0f4d6",
+      "archive": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\review\\private-entry-archive-20261011\\09_朝画面_7a0f4d6",
+      "kind": "directory",
+      "action": "recycle",
+      "status": "recycled",
+      "files": [
+        {
+          "relative": "09_朝画面_7a0f4d6\\index.html",
+          "bytes": 423,
+          "sha256": "89412168ab71a70ecbb4ad1f8a5675dc150c3d9d898d68e99878e88b9a9b203b"
+        },
+        {
+          "relative": "09_朝画面_7a0f4d6\\朝画面.png",
+          "bytes": 216638,
+          "sha256": "ca6005cb3a2127ba7b126b9cb68170852d02eef1b4d8d88cb5dc93026aab5b54"
+        }
+      ]
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\確認入口\\10_素材ズーム壁_191e594",
+      "archive": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\review\\private-entry-archive-20261011\\10_素材ズーム壁_191e594",
+      "kind": "directory",
+      "action": "recycle",
+      "status": "recycled",
+      "files": [
+        {
+          "relative": "10_素材ズーム壁_191e594\\01_morning_bubble_a.png",
+          "bytes": 218833,
+          "sha256": "ba3e754c4c2e86c97ef10eb6e3a1fe1079ae1795702d8757bfe95f6acb38c158"
+        },
+        {
+          "relative": "10_素材ズーム壁_191e594\\04_wall_outer.png",
+          "bytes": 188780,
+          "sha256": "328a28702996382683fe13e81075a81ddd8f3106511325c4de8bba6fef55dc10"
+        },
+        {
+          "relative": "10_素材ズーム壁_191e594\\bubble-a.json",
+          "bytes": 2351,
+          "sha256": "47fc12a14ea8486a670a7f75d649e741cc986190df2dc0a4f9779f5d4e926790"
+        },
+        {
+          "relative": "10_素材ズーム壁_191e594\\index.html",
+          "bytes": 793,
+          "sha256": "acc6454061e95e59ea856b937b8735259ad90514bebd6bf32222ee2583b973aa"
+        },
+        {
+          "relative": "10_素材ズーム壁_191e594\\isolation.json",
+          "bytes": 1755,
+          "sha256": "7a350d0b03288e026a804d7f9744f90d4196f117c8dc593dcb845115d9d134d9"
+        }
+      ]
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\確認入口\\11_昼の商人_dacd1e9",
+      "archive": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\review\\private-entry-archive-20261011\\11_昼の商人_dacd1e9",
+      "kind": "directory",
+      "action": "recycle",
+      "status": "recycled",
+      "files": [
+        {
+          "relative": "11_昼の商人_dacd1e9\\01_day_merchant_arrival.png",
+          "bytes": 220400,
+          "sha256": "fe64d024477dff222e0696ccadb0c11fd230400c7cd1e6753e11705be3c4d5c0"
+        },
+        {
+          "relative": "11_昼の商人_dacd1e9\\02_shop_from_conversation.png",
+          "bytes": 205431,
+          "sha256": "1fb9756c77e92c6b24fca5ee80a95db49f6085ae0affa5dc88a631d4565b0b46"
+        },
+        {
+          "relative": "11_昼の商人_dacd1e9\\03_merchant_departed.png",
+          "bytes": 210716,
+          "sha256": "6193336819ab05de9d6c9110518f083648ebe39dd37c4ef75d44f8f60fbdae29"
+        },
+        {
+          "relative": "11_昼の商人_dacd1e9\\index.html",
+          "bytes": 838,
+          "sha256": "fbbed067af8020f82625f40978a8464275497c63700439c014b640723b598395"
+        },
+        {
+          "relative": "11_昼の商人_dacd1e9\\isolation.json",
+          "bytes": 1763,
+          "sha256": "5142ed34717e6a0120a6487a5b9443ff3c6d6b098f7f41be20c2fe90e8d1da65"
+        },
+        {
+          "relative": "11_昼の商人_dacd1e9\\merchant-day.json",
+          "bytes": 2773,
+          "sha256": "eff97998a2ec29dd7c70ddffa559214067f80a3ea0a5e274caab6a34e96f8cb9"
+        }
+      ]
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\確認入口\\12_盤面吹き出し_6995412",
+      "archive": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\review\\private-entry-archive-20261011\\12_盤面吹き出し_6995412",
+      "kind": "directory",
+      "action": "recycle",
+      "status": "recycled",
+      "files": [
+        {
+          "relative": "12_盤面吹き出し_6995412\\index.html",
+          "bytes": 424,
+          "sha256": "d24974950534cd771cf05d86ce1e119b6f61ae7906ceca46aaf12010ec4a597f"
+        },
+        {
+          "relative": "12_盤面吹き出し_6995412\\商人.png",
+          "bytes": 243528,
+          "sha256": "65e11192dd4765630fbdb4176365e5fb2f3ba8079322e3515c24234ed06cdc5b"
+        }
+      ]
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\確認入口\\13_吹き出し前面と補間_90f9d24",
+      "archive": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\review\\private-entry-archive-20261011\\13_吹き出し前面と補間_90f9d24",
+      "kind": "directory",
+      "action": "recycle",
+      "status": "recycled",
+      "files": [
+        {
+          "relative": "13_吹き出し前面と補間_90f9d24\\01_day_merchant_arrival.png",
+          "bytes": 241133,
+          "sha256": "63283c4795de24463bd6a1fd10108e384d0908110a9b59096ac6e513ebc13753"
+        },
+        {
+          "relative": "13_吹き出し前面と補間_90f9d24\\index.html",
+          "bytes": 555,
+          "sha256": "af988c6c6aa16a366f59e903cfdd783daf3c4f492698a5ffd1e9854f780784cc"
+        },
+        {
+          "relative": "13_吹き出し前面と補間_90f9d24\\isolation.json",
+          "bytes": 1763,
+          "sha256": "2edb02c0566636f364d774b4376b3a46ea1c3ddcaa15676b3e1fd89056eb03f5"
+        },
+        {
+          "relative": "13_吹き出し前面と補間_90f9d24\\merchant-day.json",
+          "bytes": 4574,
+          "sha256": "7f57f128b98e4c4c85b903201cc2ad1bce4dd665609fcc3933cf02e0ce4cda8d"
+        }
+      ]
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\確認入口\\14_商人距離と探索_a534a37",
+      "archive": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\review\\private-entry-archive-20261011\\14_商人距離と探索_a534a37",
+      "kind": "directory",
+      "action": "recycle",
+      "status": "recycled",
+      "files": [
+        {
+          "relative": "14_商人距離と探索_a534a37\\01_day_merchant_arrival.png",
+          "bytes": 240983,
+          "sha256": "0ed7762e712a6819293f7661b5e5286fa71d51f8c356bc59111bab92fc837e30"
+        },
+        {
+          "relative": "14_商人距離と探索_a534a37\\04_conversation_distance.png",
+          "bytes": 240724,
+          "sha256": "0c78022d763e4a5750ecaadde319b9373a428be03868631d61b3538bfc98e46c"
+        },
+        {
+          "relative": "14_商人距離と探索_a534a37\\BUILD.json",
+          "bytes": 777,
+          "sha256": "e35c17a8c4e1cffdbf1a815d932b35cc234030aabf9ff4c42cc90eba956dd7a5"
+        },
+        {
+          "relative": "14_商人距離と探索_a534a37\\index.html",
+          "bytes": 1865,
+          "sha256": "d7bd904935eeb8c13119356a914a38432e3e5b8dbfd2503048fc432688bd7bea"
+        },
+        {
+          "relative": "14_商人距離と探索_a534a37\\isolation.json",
+          "bytes": 1764,
+          "sha256": "1d2888edee24d46a956fd997066259d0b410305e12b916dbe0ca5528c8c0e867"
+        },
+        {
+          "relative": "14_商人距離と探索_a534a37\\merchant-day.json",
+          "bytes": 4810,
+          "sha256": "fa5560d53c7253227ce3cfb17485791368ba8a1ceed5b2338695d33b48d9df80"
+        }
+      ]
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\確認入口\\15_緑の図鑑表紙_14d24d9",
+      "archive": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\review\\private-entry-archive-20261011\\15_緑の図鑑表紙_14d24d9",
+      "kind": "directory",
+      "action": "recycle",
+      "status": "recycled",
+      "files": [
+        {
+          "relative": "15_緑の図鑑表紙_14d24d9\\05_adopted_closed_cover.png",
+          "bytes": 540557,
+          "sha256": "6853895315c227c920c4368a9937708b3d514e13db152247dd0dd15c78b1d174"
+        },
+        {
+          "relative": "15_緑の図鑑表紙_14d24d9\\06_book_open.png",
+          "bytes": 92311,
+          "sha256": "37525408c0ed90b7db3a7ff02dc6a70133616ca21d8a5d12375dfff8b69b3d11"
+        },
+        {
+          "relative": "15_緑の図鑑表紙_14d24d9\\07_cover_opening.png",
+          "bytes": 476127,
+          "sha256": "2995263595b26ef4fe13b3da26c9202e4ce28d8b98ea95591fc8b1bb04afff7f"
+        },
+        {
+          "relative": "15_緑の図鑑表紙_14d24d9\\BUILD.json",
+          "bytes": 777,
+          "sha256": "2318ffc53eb24ead037cb7f9c7014da9ea41fd9dda00c96924419791c126744d"
+        },
+        {
+          "relative": "15_緑の図鑑表紙_14d24d9\\index.html",
+          "bytes": 1078,
+          "sha256": "e1ad84bc3cd79d494f1e14578babb4edf295800db9d13164d5158341fa89c021"
+        },
+        {
+          "relative": "15_緑の図鑑表紙_14d24d9\\isolation.json",
+          "bytes": 1764,
+          "sha256": "4a6b3420e4664bdfdf21412edd4f45780616c8ef7e413e3266c4b16edea70d47"
+        },
+        {
+          "relative": "15_緑の図鑑表紙_14d24d9\\merchant-day.json",
+          "bytes": 5409,
+          "sha256": "e052915097df11c1af865831f9fa19861d95c02c219985ef1fb6fd283c48951d"
+        }
+      ]
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\確認入口\\16_商人の選択画面.png",
+      "archive": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\review\\private-entry-archive-20261011\\16_商人の選択画面.png",
+      "kind": "file",
+      "action": "recycle",
+      "status": "recycled",
+      "files": [
+        {
+          "relative": "16_商人の選択画面.png",
+          "bytes": 269251,
+          "sha256": "dd78f38f590af604a6b4af93818221bae32fb73439219cc959e7bec450283f67"
+        }
+      ]
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\確認入口\\17_RimWorld設計比較",
+      "archive": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\review\\private-entry-archive-20261011\\17_RimWorld設計比較",
+      "kind": "directory",
+      "action": "recycle",
+      "status": "recycled",
+      "files": [
+        {
+          "relative": "17_RimWorld設計比較\\ADOPTION_DECISIONS.md",
+          "bytes": 2337,
+          "sha256": "bdaa908d2daea7282b377f2077ff57820b59787e75fbf1c6049e635fb8508a83"
+        },
+        {
+          "relative": "17_RimWorld設計比較\\adoption_matrix.csv",
+          "bytes": 11420,
+          "sha256": "6b4f8796dc1c7e6460f972289576afdd116fd5a4de0631bd81c3a607301b2930"
+        },
+        {
+          "relative": "17_RimWorld設計比較\\adoption_matrix.json",
+          "bytes": 18281,
+          "sha256": "6890bdae205da2118601b59f336bef167494d706045103e0ecfcc435223c0924"
+        },
+        {
+          "relative": "17_RimWorld設計比較\\build_report.py",
+          "bytes": 37102,
+          "sha256": "01931fab45b3ac4641dd1e45dacdabcfaa155fe1d9a3084486d3221b78a34dd5"
+        },
+        {
+          "relative": "17_RimWorld設計比較\\incident_definitions.json",
+          "bytes": 32347,
+          "sha256": "bd7ed504afedf6471b107df49aab5244769857d741615c10f7de19c6a3249f26"
+        },
+        {
+          "relative": "17_RimWorld設計比較\\index.html",
+          "bytes": 105186,
+          "sha256": "fdba68663b36ce96bdad580035530792ed6354a000278faee65128d9735fe67e"
+        },
+        {
+          "relative": "17_RimWorld設計比較\\RIMWORLD_DESIGN_REFERENCE.md",
+          "bytes": 57613,
+          "sha256": "2a417d883ca4b8340affe8807be4302f4b57809bb0dea8193d29314650b7926f"
+        },
+        {
+          "relative": "17_RimWorld設計比較\\RIMWORLD_UI_AI_ANALYSIS.md",
+          "bytes": 12735,
+          "sha256": "91dcdad6dc29fb14c5f7b88aa1faea83711754683734220a5993fe476fb89a5a"
+        },
+        {
+          "relative": "17_RimWorld設計比較\\scan_counts.json",
+          "bytes": 10062,
+          "sha256": "2969589b77432f7f210191b6a5ec16f6b89a061847c2433d4222fc27f8da6d89"
+        },
+        {
+          "relative": "17_RimWorld設計比較\\source_manifest.json",
+          "bytes": 1702,
+          "sha256": "c99d3ca0599211458390507417e49ebd56efa2cfc1eeef312b582a0858bdb006"
+        },
+        {
+          "relative": "17_RimWorld設計比較\\ui_ai_source_manifest.json",
+          "bytes": 1750,
+          "sha256": "a95be236fee8123406c8b60b7738662cb513964f654c701d0463e4bb997e09c5"
+        },
+        {
+          "relative": "17_RimWorld設計比較\\validate.cjs",
+          "bytes": 2734,
+          "sha256": "97a14c914c23bb4536f5b18cfe8617593c5532f2329f73f1d6da5fecc06aca0b"
+        },
+        {
+          "relative": "17_RimWorld設計比較\\validation.json",
+          "bytes": 416,
+          "sha256": "7840110580eba1c67ab8399c99ad267faecad3f2c424100623a8153f6a30b5e5"
+        }
+      ]
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\確認入口\\17_図鑑画像枠統一_c5c2833",
+      "archive": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\review\\private-entry-archive-20261011\\17_図鑑画像枠統一_c5c2833",
+      "kind": "directory",
+      "action": "recycle",
+      "status": "recycled",
+      "files": [
+        {
+          "relative": "17_図鑑画像枠統一_c5c2833\\BUILD.json",
+          "bytes": 1065,
+          "sha256": "887f6085912e476b77e7b8dd94ddb36c3d4eca9b6d615625d7878b57939afa19"
+        },
+        {
+          "relative": "17_図鑑画像枠統一_c5c2833\\index.html",
+          "bytes": 1570,
+          "sha256": "1d3f978f983f998dc0ff23abe626afca9341c1025488f2247cdaabd8709e9484"
+        },
+        {
+          "relative": "17_図鑑画像枠統一_c5c2833\\previous-guide-backup.html",
+          "bytes": 8098,
+          "sha256": "37dcfd1f5e1b58f885fa87799c0341b5e19ef307af3274f2129393add6948139"
+        },
+        {
+          "relative": "17_図鑑画像枠統一_c5c2833\\same-shiba-comparison.png",
+          "bytes": 99273,
+          "sha256": "adf8e36581195c7ef640dfcb4c54e242d14c0a844b393b6c13c18f7c18def9ac"
+        },
+        {
+          "relative": "17_図鑑画像枠統一_c5c2833\\今回版を起動_c5c2833.lnk",
+          "bytes": 3216,
+          "sha256": "39fd1ec3807f10fd7f19695385aac6c22cc09e0c5cf57ece6c8281e8ca84121e"
+        },
+        {
+          "relative": "17_図鑑画像枠統一_c5c2833\\前回の入口_90c0fda.lnk",
+          "bytes": 3509,
+          "sha256": "dab3f096f7c9d8a054000469b66ab19567941bf5ddd2e26d3696692ea6ee8624"
+        }
+      ]
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\確認入口\\18_図鑑名前欄_536005c",
+      "archive": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\review\\private-entry-archive-20261011\\18_図鑑名前欄_536005c",
+      "kind": "directory",
+      "action": "recycle",
+      "status": "recycled",
+      "files": [
+        {
+          "relative": "18_図鑑名前欄_536005c\\after-536005c.png",
+          "bytes": 97021,
+          "sha256": "f51ec63b91b77b966dc14d36907709b4b70d75aba250dcf1dd99cbde5316fac3"
+        },
+        {
+          "relative": "18_図鑑名前欄_536005c\\before-c5c2833.png",
+          "bytes": 99273,
+          "sha256": "adf8e36581195c7ef640dfcb4c54e242d14c0a844b393b6c13c18f7c18def9ac"
+        },
+        {
+          "relative": "18_図鑑名前欄_536005c\\BUILD.json",
+          "bytes": 1064,
+          "sha256": "e15073e56913bc4ea9ae83810e030110cb48c7eb32cd701b1dddb7ece879580c"
+        },
+        {
+          "relative": "18_図鑑名前欄_536005c\\index.html",
+          "bytes": 1713,
+          "sha256": "70a7603f2b6af18e7a66afdf3b613c98d333cef1b87607f5ff52795eda8abbde"
+        },
+        {
+          "relative": "18_図鑑名前欄_536005c\\previous-guide-backup.html",
+          "bytes": 8692,
+          "sha256": "42473ebf0a5ffba5fe78492c8454109d3d8bb1d9a38ed5cb46996f7e34f82eed"
+        },
+        {
+          "relative": "18_図鑑名前欄_536005c\\今回版を起動_536005c.lnk",
+          "bytes": 3232,
+          "sha256": "ee38f4645385efae31b56d873962885503b59fc898626bef85c1aa718aa76aa2"
+        },
+        {
+          "relative": "18_図鑑名前欄_536005c\\前回の入口_c5c2833.lnk",
+          "bytes": 3210,
+          "sha256": "ca8da82d3c6c76b67451f6a90d27975a944606b662cfef710c9ccf3264f2f36b"
+        }
+      ]
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\確認入口\\19_行商人口パク_35038b6",
+      "archive": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\review\\private-entry-archive-20261011\\19_行商人口パク_35038b6",
+      "kind": "directory",
+      "action": "recycle",
+      "status": "recycled",
+      "files": [
+        {
+          "relative": "19_行商人口パク_35038b6\\BUILD.json",
+          "bytes": 1059,
+          "sha256": "0915418c6e2aec353ef8e0614b75822daedc21a7436f2ce10658ca08ca4e2a0f"
+        },
+        {
+          "relative": "19_行商人口パク_35038b6\\index.html",
+          "bytes": 1279,
+          "sha256": "75f9ee1228f4a09753e46327f6ed359a1ffcc284f570f16b470e970fd891ce10"
+        },
+        {
+          "relative": "19_行商人口パク_35038b6\\merchant-mouth-preview.gif",
+          "bytes": 5911629,
+          "sha256": "84236660fdc87f48069de03bd48f52bd39d40c29d041d9233fea9b8f766198c5"
+        },
+        {
+          "relative": "19_行商人口パク_35038b6\\mouth-comparison.png",
+          "bytes": 121359,
+          "sha256": "5041b3212ec001cd74d9775bc2df8d4d3d08fdeffb0544c58f40eda5b1e0d35e"
+        },
+        {
+          "relative": "19_行商人口パク_35038b6\\previous-guide-backup.html",
+          "bytes": 9220,
+          "sha256": "2ab354b121f7adb721fc8dfa87d8e8fa335f973e75309370edd25f49751da281"
+        },
+        {
+          "relative": "19_行商人口パク_35038b6\\今回版を起動_35038b6.lnk",
+          "bytes": 3190,
+          "sha256": "99e942cda3d7b1d87580d4ac7b1828a1ef88fbe822967394c38a5a48ad83d86a"
+        },
+        {
+          "relative": "19_行商人口パク_35038b6\\前回の入口_536005c.lnk",
+          "bytes": 3226,
+          "sha256": "c2adba6a5e86d7ca402d8fb31f84f6ff172f97740e20fb077e084c242eee7a10"
+        }
+      ]
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\確認入口\\20_像と森と音_2c0182a",
+      "archive": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\review\\private-entry-archive-20261011\\20_像と森と音_2c0182a",
+      "kind": "directory",
+      "action": "recycle",
+      "status": "recycled",
+      "files": [
+        {
+          "relative": "20_像と森と音_2c0182a\\01_idol_steam.png",
+          "bytes": 205614,
+          "sha256": "03efb1e3220c54220ce482e6af7b22df0903ec39b8d67340b3c35a6e3ec434b1"
+        },
+        {
+          "relative": "20_像と森と音_2c0182a\\02_after_prayer.png",
+          "bytes": 202210,
+          "sha256": "83347bfcec0fba51374a06a085fd1c9030044642bc19051bddb78c42c4b01ca2"
+        },
+        {
+          "relative": "20_像と森と音_2c0182a\\BUILD.json",
+          "bytes": 1092,
+          "sha256": "3c960902a73046fa28ce331e46aed130fc28300e9892833737de93f740598866"
+        },
+        {
+          "relative": "20_像と森と音_2c0182a\\index.html",
+          "bytes": 1302,
+          "sha256": "f5a76928ede898b92e3f78ddd05c0bb6105f14b3c3001bcbeb27f3b5275f09ee"
+        },
+        {
+          "relative": "20_像と森と音_2c0182a\\previous-guide-backup.html",
+          "bytes": 9973,
+          "sha256": "272dbe1526071e4ab94c4b688bba683fde5d259fba7e4301a40f8dbe8e19ba6e"
+        },
+        {
+          "relative": "20_像と森と音_2c0182a\\今回版を起動_2c0182a.lnk",
+          "bytes": 3186,
+          "sha256": "5f9929284724af4e3724334bdcff77122801d3f1543c2b149d39265e14d5fdcd"
+        },
+        {
+          "relative": "20_像と森と音_2c0182a\\前回の入口_35038b6.lnk",
+          "bytes": 3184,
+          "sha256": "8817d978fb92f4d8868dda6bdadddea1bbc9a1955ffdaf37eb0bc6e172c1c56f"
+        }
+      ]
+    }
+  ]
+}
