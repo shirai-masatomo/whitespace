@@ -1,0 +1,20 @@
+{
+	"failures": 0,
+	"groups": [
+		{
+			"checks": [
+				{
+					"check": "Nutrition, meal progress and physical food restore exactly",
+					"passed": true
+				},
+				{
+					"check": "Meal consumes once and continuation matches uninterrupted run",
+					"passed": true
+				}
+			],
+			"name": "Separate process in-flight meal continuation"
+		}
+	],
+	"method": "Controlled fixture at starvation thresholds; production World.step, physical food and full snapshot. Not a natural multi-day playthrough.",
+	"passed": true
+}

@@ -1,0 +1,40 @@
+{
+	"failures": 0,
+	"groups": [
+		{
+			"checks": [
+				{
+					"check": "Selecting one hen opens its husbandry controls",
+					"passed": true
+				},
+				{
+					"check": "Pet classification visibly disables slaughter",
+					"passed": true
+				},
+				{
+					"check": "Explicit prohibition disables designation",
+					"passed": true
+				},
+				{
+					"check": "Only the selected hen receives a slaughter job",
+					"passed": true
+				},
+				{
+					"check": "UI cancellation preserves the living animal",
+					"passed": true
+				},
+				{
+					"check": "Inability visibly disables rest and work-resume controls",
+					"passed": true
+				},
+				{
+					"check": "Combined fixture contains gradual nutrition recovery and the explicit animal job",
+					"passed": true
+				}
+			],
+			"name": "5 Existing UI input and combined save fixture"
+		}
+	],
+	"method": "Injected Godot mouse events on isolated GPU; paused visible fixture and production steps for the combined native restart fixture. Not human play.",
+	"passed": true
+}

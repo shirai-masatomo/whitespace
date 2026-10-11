@@ -1,0 +1,21 @@
+{
+  "projects/sporehollow/game/colony_cycle.gd": "509126e3820bf6006e3ce34db4e1a9c2cd70b456603a7526e78efbb2f16be388",
+  "projects/sporehollow/game/colony_panels.gd": "7da6c59e0ed22092dd11a01d020b69528924c5f4e55117fa60d921b395849754",
+  "projects/sporehollow/game/colony_view_model.gd": "2fef3e0a82b6c9d534b8667dcb00ec8bc1c635c3bb0a5602536b86ffc7d8a0ad",
+  "projects/sporehollow/game/cycle_entry_review.gd": "6afa83cdb2922aa0246b3f810a68393dc760c346ece67f56035bcfd727ff1d04",
+  "projects/sporehollow/game/human_food.gd": "4671e849eb15bcb4d150b5108ed9569f4743ccfd8a0cf1c8aa51205d59b3f04d",
+  "projects/sporehollow/game/human_nutrition.gd": "a7ad9d9123dd077d8603eaa831b2ce3cbabd17510cde4a2922674673b4a202ee",
+  "projects/sporehollow/game/human_work.gd": "6b3d71abb7104792ad1ce6fb6dd854321ecc45cdbff58fde2b4b1aec9793813f",
+  "projects/sporehollow/game/keeper_jobs.gd": "8b77df4f0575ee74f373ad1d4d5a53327df5c411ef8677adb54ac3553910bc2f",
+  "projects/sporehollow/game/keeper_life.gd": "98b377da57e764cd0464b16e68a2714e718baa4ef41eecf4083b9b890ac403bd",
+  "projects/sporehollow/game/livestock.gd": "669de07dd557a4487e1adc3309113bde3284e193918fb90bd350f46472c0d754",
+  "projects/sporehollow/game/livestock_controls.gd": "9a850ca8f9aa47717a5bc3d1a62acb8a09f1349db80c1d513195072407124339",
+  "projects/sporehollow/game/main.gd": "9177b54d3f692d800afbdafd35d4f1b1cfe3a48ac44ec288f8666390a6b5c80d",
+  "projects/sporehollow/game/research_snapshot.gd": "348ac699876c27f399cd8e3a99335193b249b25707eb3886255312c27d007db7",
+  "projects/sporehollow/game/work_policy.gd": "81e612d35afb0d904e138e7ef9598ddb35201882ad628d8aa8d8b8c43f4b6cee",
+  "projects/sporehollow/game/world.gd": "ccf525874339c82499e5118931821ddbad31e7cc81b6d85075fb962831b8eb6b",
+  "projects/sporehollow/tests/test_livestock09.gd": "8e8c06d1813215fcf0fd0b4ce61906ce207a7d64f257bbdfc87fbb86ee55ae01",
+  "projects/sporehollow/tests/test_nutrition09.gd": "6940bf9e9789f2d7d2663c92d5e7486b86d6c0d9f5af9bca183ba13f0cebaac6",
+  "projects/sporehollow/tests/test_survival09_ui.gd": "54b512b8df627d4fdd9105e028bdd2988197a091a9cfb6803f6002fc00fe6bed",
+  "projects/sporehollow/tools/isolated_visual.ps1": "481e7c03dd6fa6649c48f1d21defefd4fc7e337597f22db3c467e8b7348f6957"
+}
