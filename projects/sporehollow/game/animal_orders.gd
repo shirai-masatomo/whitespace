@@ -1,0 +1,286 @@
+extends RefCounted
+const Guide=preload("res://game/animal_guide.gd")
+## Existing living individuals, addressed by ID; never inventory or cargo.
+static func animal(w,id: int) -> Dictionary:
+	for a in w.animals:
+		if a.id==id: return a
+	return {}
+
+static func active(w,a) -> bool:
+	return not a.is_empty() and not a.get("dead",false) and not a.get("lost",false) and a.get("abductor",-1)<0 and a.get("faction","owned")=="owned" and a.placed and a.hp>0 and w.campaign.day>a.unavailable_through_day
+
+static func enqueue(w,kind: String,ids: Array,p: Vector2i) -> bool:
+	if not w.working() or w.jobs.size()>=w.Jobs.LIMIT: w.say("指定は%d件までです"%w.Jobs.LIMIT); return false
+	if kind=="charge" and (not w.inside(p) or not w.walkable(p)):w.say("突撃先へ進めません");return false
+	var whistle = w.item_count("whistle")>0
+	var targets=[]
+	var rejected=[]
+	var assigned=[]
+	var leader_goal=p
+	var enemy_id=-1
+	if kind=="attack_target":
+		var candidates=w.enemies.filter(func(e):return e.pos==p and not e.done and not e.flee and e.hp>0)
+		if candidates.is_empty():w.say("敵を選んでください");return false
+		enemy_id=candidates[0].id
+	if kind=="guide":
+		var leader_sites=w.neighbors(p).filter(func(c):return w.walkable(c) and not w.actor_occupied(c,w.keeper.pos) and not w.find_path(w.keeper.pos,c).is_empty())
+		if leader_sites.is_empty(): w.say("牧場主が案内先へ近づけません"); return false
+		leader_goal=leader_sites[0]
+	for id in ids.slice(0,8):
+		if targets.size()>=(8 if whistle else 1): rejected.append({"id":id,"reason":"ホイッスルなしでは1匹ずつ"}); continue
+		var a=animal(w,id)
+		if not active(w,a) or kind not in w.SPECIES[a.species].orders:
+			rejected.append({"id":id,"reason":"非対応、または療養中"}); continue
+		if kind=="attack_target":
+			var why=target_reason(w,a,enemy_id)
+			if why!="":rejected.append({"id":id,"reason":why});continue
+		if w.jobs.any(func(j):return id in j.get("targets",[]).map(func(t):return t.id)): rejected.append({"id":id,"reason":"予約済み"}); continue
+		var dest=a.pos
+		if kind=="guide":
+			var sites=[]
+			for y in range(maxi(0,p.y-3),mini(w.H,p.y+4)):
+				for x in range(maxi(0,p.x-3),mini(w.W,p.x+4)):
+					var cell=Vector2i(x,y)
+					if cell!=leader_goal and cell not in assigned and w.animal_walkable(a,cell) and not w.actor_occupied(cell,a.pos): sites.append(cell)
+			sites.sort_custom(func(a1,b1):
+				var da=w.distance(a1,p)+(20 if targets.size()>0 and assigned.any(func(c):return w.distance(a1,c)<=1) else 0)
+				var db=w.distance(b1,p)+(20 if targets.size()>0 and assigned.any(func(c):return w.distance(b1,c)<=1) else 0)
+				return da<db if da!=db else (a1.y<b1.y if a1.y!=b1.y else a1.x<b1.x))
+			var found=false
+			for cell in sites:
+				if not w.find_path(a.pos,cell,false,false,not w.SPECIES[a.species].can_enter_indoor).is_empty(): dest=cell; found=true; break
+			if not w.SPECIES[a.species].can_enter_indoor and w.is_indoor(p): found=false
+			if not found: rejected.append({"id":id,"reason":"届く空き場所がない、または屋内不可"}); continue
+		assigned.append(dest)
+		targets.append({"id":id,"dest":dest,"issued":false,"done":false,"previous":a.mode,"previous_duration":maxi(0,a.order_until-w.tick)})
+	if targets.is_empty():
+		w.say(rejected[0].reason if not rejected.is_empty() else "仲間を選んでください"); return false
+	if w.jobs.is_empty() and w.manual_goal==null and w.Life.able(w) and w.job_hold_reason in ["travel","manual","rescue","danger","rest_end"]: w.Jobs.hold(w,"")
+	w.jobs.append({"id":w.next_job_id,"kind":"animal_order","order":kind,"leader_goal":leader_goal,"command_pos":p,"targets":targets,"pos":p if kind=="guide" else animal(w,targets[0].id).pos,"animal_id":targets[0].id,"state":"pending","started":false,"reserved":0,"resource":"","range":w.Rules.WHISTLE.range if whistle else 1})
+	w.Life.wake_auto(w)
+	w.say("指示 %d匹" % targets.size() + ("・未割当 %d匹（%s）" % [rejected.size(),rejected[0].reason] if not rejected.is_empty() else ""))
+	w.next_job_id+=1
+	if kind=="attack_target":w.jobs.back().enemy_id=enemy_id
+	w.job_log.append({"tick":w.tick,"event":"order_reserved","id":w.next_job_id-1,"unassigned":rejected,"targets":targets.map(func(t):return t.id),"order":kind})
+	return true
+
+static func stop(w,j,arrived: bool=false):
+	for t in j.targets:
+		var a=animal(w,t.id)
+		if a.is_empty() or a.get("guide_job",-1)!=j.id: continue
+		a.erase("guide_job")
+		a.mode="auto" if arrived and t.done else t.previous
+		a.order_until=w.tick if arrived and t.done else w.tick+t.previous_duration
+		a.pending={}
+		a.order=a.pos; a.home=a.pos
+		a.state="見張り" if a.species=="shiba" else "散歩"
+
+static func interrupt(w):
+	for j in w.jobs.duplicate():
+		if j.kind=="animal_order" and j.order=="guide" and j.targets.any(func(t):return t.issued):
+			stop(w,j); w.Jobs.complete(w,j,false)
+
+static func step(w,j):
+	if j.state=="blocked":
+		j.blocked_ticks=j.get("blocked_ticks",0)+1
+		if j.blocked_ticks>=80:
+			report(w,"道が開かないため誘導を終了しました"); stop(w,j); w.Jobs.complete(w,j,false); return
+	else: j.blocked_ticks=0
+	for t in j.targets:
+		if t.done: continue
+		var a=animal(w,t.id)
+		if not active(w,a): t.done=true; a.erase("guide_job"); continue
+		if not t.issued:
+			j.state="walking"
+			var reach=1 if j.order=="guide" and j.targets.size()==1 else j.range
+			if w.distance(w.keeper.pos,a.pos)>reach or (not w.Rules.WHISTLE.through_walls and not w.line_of_sight(w.keeper.pos,a.pos)):
+				var goals=command_goals(w,a,reach)
+				w.Jobs.walk(w,j,goals)
+				return
+			t.issued=true
+			if j.range>1:
+				w.keeper.whistle_until=w.tick+4
+				w.milestones.append({"tick":w.tick,"kind":"whistle"})
+			w.job_log.append({"tick":w.tick,"event":"order_issued","animal_id":a.id,"distance":w.distance(w.keeper.pos,a.pos),"destination":[t.dest.x,t.dest.y]})
+			# One bounded response, with loyalty influencing refusal; hens accept guidance provisionally.
+			if a.species=="shiba" and w.daily_rng.randf()>0.90+w.Progression.loyalty(a)*0.001:
+				t.done=true; report(w,"今は気が乗らないようです"); continue
+			if j.order!="guide":
+				var order_pos=j.command_pos if j.order=="charge" else a.pos
+				if j.order=="attack_target":
+					var why=target_reason(w,a,j.get("enemy_id",-1))
+					if why!="":t.done=true;report(w,why);continue
+					var enemies=w.enemies.filter(func(e):return e.id==j.enemy_id)
+					order_pos=enemies[0].pos
+				w.issue_order(j.order,order_pos,a.id); t.done=true
+			else:
+				a.guide_job=j.id
+				w.release_kennel(a)
+				a.pending={}
+			return
+	if j.order!="guide": w.Jobs.complete(w,j,true); return
+	var pending=j.targets.filter(func(t):return not t.done)
+	if pending.is_empty(): stop(w,j,true); w.Jobs.complete(w,j,true); return
+	if j.targets.size()==1:
+		Guide.step(w,j,animal(w,pending[0].id),pending[0])
+		return
+	var goals=[j.leader_goal].filter(func(c):return w.walkable(c) and not w.actor_occupied(c,w.keeper.pos))
+	var at_end=w.keeper.pos in goals
+	j.leading=not at_end
+	if not at_end:
+		if not w.is_indoor(w.keeper.pos) and pending.any(func(t):return w.distance(animal(w,t.id).pos,w.keeper.pos)>(4 if pending.size()>4 else 3)):
+			j.state="guiding"; return
+		Guide.walk_leader(w,j,goals)
+	else:
+		j.state="guiding"
+		if not pending.any(func(t):return t.id==j.get("arrival_target",-1)):
+			pending.sort_custom(func(a,b):return w.distance(a.dest,w.keeper.pos)>w.distance(b.dest,w.keeper.pos))
+			j.arrival_target=pending[0].id
+	for t in pending:
+		var a=animal(w,t.id)
+		if a.pos==t.dest and at_end:
+			t.done=true
+			if not t.get("arrival_logged",false):
+				w.job_log.append({"tick":w.tick,"event":"guide_arrived","id":j.id,"animal_id":a.id,"destination":[a.pos.x,a.pos.y]})
+				t.arrival_logged=true
+
+static func follow(w,a) -> bool:
+	if a.get("guide_yield_tick",-1)==w.tick or w.tick<a.get("guide_yield_until",-1): return true
+	if not a.has("guide_job"): return false
+	var found=w.jobs.filter(func(j):return j.id==a.guide_job)
+	if found.is_empty(): a.erase("guide_job"); return false
+	var j=found[0]
+	if j.targets.size()==1:return true # The paired route moves both actors in Orders.step.
+	if j.get("assigned_to","")!="keeper": a.state="誘導待ち"; return true
+	var t=j.targets.filter(func(t):return t.id==a.id)[0]
+	if w.keeper.get("yield_cell",Vector2i(-1,-1))==a.pos and not w.jobs_held:
+		var spaces=w.neighbors(a.pos).filter(func(c):return w.animal_walkable(a,c) and not w.actor_occupied(c,a.pos))
+		if not spaces.is_empty():
+			a.move_credit=minf(1.9,a.move_credit+Guide.speed(w,j)*w.DT)
+			if a.move_credit>=1: a.move_credit-=1; a.pos=spaces[0]; w.open_for_ally(a.pos)
+			a.state="道を空ける"; return true
+	if t.done: a.state="誘導先で待つ"; return true
+	if not j.get("leading",true) and j.get("arrival_target",a.id)!=a.id: a.state="到着順を待つ"; return true
+	var goal=t.dest
+	if j.get("leading",true) or not j.targets.all(func(t):return t.issued or t.done):
+		var radius=3 if j.targets.size()>4 else 2
+		if w.distance(a.pos,w.keeper.pos)<=radius: a.state="ついていく"; return true
+		var cells=[]
+		for y in range(w.keeper.pos.y-radius,w.keeper.pos.y+radius+1):
+			for x in range(w.keeper.pos.x-radius,w.keeper.pos.x+radius+1):
+				var c=Vector2i(x,y)
+				if w.distance(c,w.keeper.pos)<=radius and w.animal_walkable(a,c) and not w.actor_occupied(c,a.pos) and not w.animal_path(a,a.pos,c).is_empty(): cells.append(c)
+		cells.sort_custom(func(c,d):return w.distance(a.pos,c)<w.distance(a.pos,d))
+		if cells.is_empty(): return true
+		goal=cells[0]
+	a.state="ついていく"
+	a.move_credit=minf(1.9,a.move_credit+Guide.speed(w,j)*w.DT)
+	if a.move_credit>=1:
+		var next=w.animal_next(a,goal)
+		if next!=a.pos:
+			a.move_credit-=1; w.open_for_ally(next); a.pos=next; j.blocked_ticks=0
+		elif a.pos!=goal:
+			var route=w.find_path(a.pos,goal,false,false,not w.SPECIES[a.species].can_enter_indoor)
+			if route.size()>1: clear_guide_path(w,j,route[1])
+			j.state="blocked"; j.block_reason="誘導先への通路を空けてください"
+	return true
+
+static func command_goals(w,a,reach: int) -> Array:
+	var goals=[]
+	for y in range(w.H):
+		for x in range(w.W):
+			var cell=Vector2i(x,y)
+			if w.distance(cell,a.pos)<=reach and (w.Rules.WHISTLE.through_walls or w.line_of_sight(cell,a.pos)) and w.walkable(cell) and not w.actor_occupied(cell,w.keeper.pos): goals.append(cell)
+	return goals
+
+static func report(w,text: String):
+	w.say(text)
+	w.milestones.append({"tick":w.tick,"kind":"order_notice","text":text})
+
+static func target_reason(w,a,enemy_id: int) -> String:
+	var found=w.enemies.filter(func(e):return e.id==enemy_id and not e.done and not e.flee and e.hp>0)
+	if found.is_empty():return "敵を選んでください"
+	var e=found[0]
+	# Only a currently seen/shared detection can disclose distance to the chosen actor.
+	w.animal_targets(a)
+	var detected=a.known_enemies.get(e.id,-1)>=w.tick and w.line_of_sight(a.pos,e.pos)
+	if not detected and not w.Progression.visible_to_farm(w,e):return "敵を選んでください"
+	if w.distance(a.pos,e.pos)>a.attack_target_range:return "%sから敵が遠すぎます。仲間を近づけてください"%w.animal_name(a)
+	if not detected:return "敵が見えません"
+	if not w.SPECIES[a.species].can_enter_indoor and w.is_indoor(e.pos):return "屋内の敵には近づけません"
+	if not w.neighbors(e.pos).any(func(p):return w.animal_walkable(a,p) and not w.animal_path(a,a.pos,p).is_empty()):return "敵へ近づく道がありません"
+	return ""
+
+static func patrol_goal(w,a) -> Vector2i:
+	# A stable circuit differs from automatic wandering near home; combat still interrupts it.
+	var goal=a.get("patrol_goal",a.pos)
+	if goal==a.pos or not w.animal_walkable(a,goal) or w.animal_path(a,a.pos,goal).is_empty():
+		var corners=[Vector2i(0,-4),Vector2i(4,0),Vector2i(0,4),Vector2i(-4,0)]
+		var index=a.get("patrol_index",0)
+		for offset in range(corners.size()):
+			var candidate=a.home+corners[(index+offset)%corners.size()]
+			if w.animal_walkable(a,candidate) and not w.actor_occupied(candidate,a.pos) and not w.animal_path(a,a.pos,candidate).is_empty():
+				a.patrol_index=(index+offset+1)%corners.size();a.patrol_goal=candidate;return candidate
+		return a.pos
+	return goal
+
+static func cautious(w,a):
+	a.rescuing=false
+	var threats=w.animal_targets(a).filter(func(e):return w.distance(a.pos,e.pos)<=a.detection_range and w.line_of_sight(a.pos,e.pos))
+	if threats.is_empty():
+		preload("res://game/animal_escape.gd").clear(a)
+		w.rest_step(a,true);return
+	a.rest_settled=false;a.rest_ticks=0
+	threats.sort_custom(func(e,f):return w.distance(a.pos,e.pos)<w.distance(a.pos,f.pos))
+	var enemy=threats[0]
+	if w.distance(a.pos,enemy.pos)<=1 and a.attack_power>0 and w.tick>=a.next_attack and a.stamina>=8:
+		a.next_attack=w.tick+ceili(a.attack_seconds/w.DT/w.Content.attack_speed(w,a))
+		a.stamina-=8
+		w.Progression.enemy_hurt(w,enemy,a.attack_power,a.id)
+		w.combat_log.append({"tick":w.tick,"source":"animal","id":a.id,"target":enemy.id,"damage":a.attack_power})
+		if enemy.hp<=0:w.release_keeper(enemy)
+	a.state="無理せず距離を取る"
+	a.move_credit=minf(1.0,a.move_credit+a.move_speed*w.Content.speed(w,a)*w.DT)
+	preload("res://game/animal_escape.gd").step(w,a,threats.filter(func(e):return e.hp>0))
+
+static func clear_guide_path(w,j,start: Vector2i):
+	# Move the last member of a short occupied chain into a real free cell.
+	# One grid step with normal move credit, never teleport the group or overlap the keeper.
+	var members={}
+	for t in j.targets:
+		var a=animal(w,t.id)
+		if active(w,a): members[a.pos]=a
+	if not members.has(start): return
+	var open=[start]; var previous={start:start}
+	while not open.is_empty():
+		var p=open.pop_front()
+		for n in w.neighbors(p):
+			if previous.has(n) or n==w.keeper.pos or not w.animal_walkable(members[p],n):continue
+			previous[n]=p
+			if not w.actor_occupied(n,p):
+				var a=members[p]
+				a.move_credit=minf(1.9,a.move_credit+Guide.speed(w,j)*w.DT)
+				a.guide_yield_tick=w.tick
+				if a.move_credit>=1:
+					a.move_credit-=1;a.pos=n;w.open_for_ally(n);a.guide_yield_until=w.tick+8;j.blocked_ticks=0
+					for t in j.targets:
+						if t.id==a.id and t.done: t.done=false
+				a.state="道を空ける"
+				return
+			if members.has(n):open.append(n)
+
+static func priority_targets(w,a,normal: Array) -> Array:
+	var found=w.enemies.filter(func(e):return e.id==a.target_id and not e.done and not e.flee and e.hp>0)
+	var valid=not found.is_empty()
+	if valid:
+		var e=found[0]
+		var visible=a.known_enemies.get(e.id,-1)>=w.tick and w.distance(a.pos,e.pos)<=a.attack_target_range and w.line_of_sight(a.pos,e.pos)
+		if visible:a.priority_seen=w.tick
+		valid=w.tick-a.get("priority_seen",w.tick)<=ceili(5.0/w.DT)
+		if visible:
+			var goals=w.neighbors(e.pos).filter(func(p):return w.animal_walkable(a,p))
+			valid=valid and goals.any(func(p):return not w.animal_path(a,a.pos,p).is_empty())
+			if valid:return [e]+normal.filter(func(other):return other.id!=e.id)
+	if not valid:
+		a.mode="auto";a.target_id=-1;a.erase("priority_seen")
+	return normal

@@ -1,0 +1,10 @@
+.godot/
+.tools/
+artifacts/
+build/
+*.import
+*.uid
+*.snapshot
+*.save
+game/build_stamp.json
+assets/audio/*.mp3

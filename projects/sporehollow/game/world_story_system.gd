@@ -1,0 +1,393 @@
+extends RefCounted
+## Campaign-owned deterministic world history; no UI clock, rendering or hidden queues.
+const CLEAR_SECONDS = 4.0
+const CLEAR_WOOD = 8
+const PRAYER_SECONDS = 3.0
+const MIRACLE_GOLD = 60
+const PRAYER_KARMA = 3
+const PRAYER_CATEGORIES = {"pray_animal":"animal","pray_gold":"gold","pray_item":"item"}
+const IDOL_HP = 180
+const TOW_PREP_SECONDS = 8.0
+const TOW_SPEED = 0.5
+const ACTIONS = ["clear_tree","inspect_idol","pray_wealth","pray_animal","pray_gold","pray_item","repair_idol","repair_idol_soil","repair_idol_wood","repair_idol_stone","recover_idol"]
+const INTRO = ["父は、遺跡と秘境を巡る探検家だった。", "最後の旅から持ち帰ったのは、大きな黄金像。\nそれからほどなく、父はいなくなった。", "私は、父の残した牧場で暮らし始めた。\n愛犬と過ごした静かな数日は、もう思い出になっている。", "父の日誌には、一言だけ残されていた。\n『像を壊してはいけない。』"]
+
+static func cell(v) -> Vector2i:
+	return v if v is Vector2i else Vector2i(v[0],v[1])
+
+static func cells(at: Vector2i) -> Array:
+	return [at,at+Vector2i.RIGHT,at+Vector2i.DOWN,at+Vector2i.ONE]
+
+static func at(w) -> Vector2i:
+	return cell(w.story.get("idol",{}).get("position",[12,8]))
+
+static func idol_cells(w) -> Array:
+	return [] if w.story.get("idol",{}).is_empty() else cells(at(w))
+
+static func terrain_block(w,p: Vector2i) -> bool:
+	return w.trees.has(p) or p in idol_cells(w)
+
+static func init(w):
+	w.story=w.campaign.get("world_story",{}).duplicate(true)
+	if w.story.is_empty():
+		w.story={"version":1,"intro_seen":false,"investigated":false,"radio":false,"prayed_day":0,"next_prayer_id":1,"prayers":[],"events":[],"news":[],"miracles":[],"cleared":[],"hidden":{"security":0,"economy":0,"disease":0,"anomaly":0,"recognition":0,"karma":0},"idol":{},"defeat_reason":""}
+		var origin=Vector2i(w.W/2-1,w.H/2-1)
+		var options=[origin,origin+Vector2i(-2,0),origin+Vector2i(2,0),origin+Vector2i(0,-2)]
+		for candidate in options:
+			if cells(candidate).any(func(p):return w.live_structure(p) or w.floors.has(p) or w.occupied(p) or not w.items_at(p).is_empty()): continue
+			w.story.idol={"id":"father-idol","position":[candidate.x,candidate.y],"home":[candidate.x,candidate.y],"hp":IDOL_HP,"max_hp":IDOL_HP,"state":"installed","carrier":-1,"prepare":0.0}
+			break
+		if w.story.idol.is_empty():
+			w.story.migration_error="黄金像を安全に置けません。建物を残して移行するには中央を空けるか、新しい牧場を始めてください。"
+			say(w,w.story.migration_error)
+		var records=[]
+		for y in range(2,w.H-2):
+			for x in range(2,w.W-2):
+				var p=Vector2i(x,y)
+				# Two-cell corridors connect the clearing to every edge; logistics remains separate.
+				if x>3 and x<w.W-4 and y>3 and y<w.H-4: continue
+				if x in [5,6,12,13,19,20] or y in [5,6,8,9,11,12]: continue
+				if not preload("res://game/forest_pattern.gd").tree(p,w.seed_value):continue
+				if w.distance(p,w.logistics_entry)<4 or w.distance(p,w.keeper.pos)<=2 or w.animals.any(func(a):return a.placed and w.distance(p,a.pos)<=2) or p in idol_cells(w) or w.occupied(p) or w.live_structure(p) or w.floors.has(p) or not w.items_at(p).is_empty(): continue
+				records.append({"id":"tree-%d-%d"%[x,y],"position":[x,y]})
+		w.story.trees=records
+	for tree in w.story.get("trees",[]):
+		if tree.id not in w.story.cleared and not preload("res://game/forest_pattern.gd").merchant_clearing(cell(tree.position)): w.trees[cell(tree.position)]=tree.id
+	morning(w,w.campaign.day)
+	persist(w)
+
+static func persist(w):
+	w.campaign.world_story=w.story.duplicate(true)
+
+static func entries(w) -> Array:
+	var result=[]
+	for y in [5,8,11]: result.append(Vector2i(1,y)); result.append(Vector2i(w.W-2,y))
+	for x in [5,12,19]: result.append(Vector2i(x,1)); result.append(Vector2i(x,w.H-2))
+	return result
+
+static func schedule(w):
+	var r=RandomNumberGenerator.new()
+	r.seed=w.seed_value*4729+w.campaign.day*65537+w.schedule_cycle*97
+	for event in w.spawn_schedule:
+		event.entry=w.entries[r.randi_range(0,w.entries.size()-1)]
+	# Delayed reaction events change real raid composition, capped independently of day scaling.
+	for row in ([] if w.config.get("single_event",false) else reaction_raids(w)):
+		w.spawn_schedule.append({"tick":ceili((60.0+row.slot*24)/w.DT),"wave":100+row.slot,"role":row.role,"entry":w.entries[r.randi_range(0,w.entries.size()-1)],"lv":1})
+	w.spawn_schedule.sort_custom(func(a,b):return a.tick<b.tick if a.tick!=b.tick else a.wave<b.wave)
+
+static func legacy_slots(w) -> Array:
+	var slots=[]
+	for i in range(mini(2,w.story.hidden.security)):slots.append({"role":"legacy","not_before_day":1})
+	return slots
+
+static func reaction_raids(w) -> Array:
+	var slots=w.story.get("raid_slots",legacy_slots(w));var result=[]
+	for i in range(mini(2,slots.size())):
+		var slot=slots[i]
+		# Waiting category slots occupy their allocation; never fill them with a legacy raid.
+		if w.campaign.day<slot.not_before_day:continue
+		var role=slot.role
+		if role in ["legacy","idol"]:
+			role=("idol_breaker" if i==0 else "idol_extractor") if w.story.hidden.recognition>=1 else "kidnapper"
+		result.append({"slot":i,"role":role})
+	return result
+
+static func apply_raid_reaction(w,event: Dictionary):
+	# Old applied/pending category records keep their original effect. Only new contracts carry this version.
+	if event.get("reaction_version",0)==1 or w.story.has("raid_slots"):
+		var slots=w.story.get("raid_slots",legacy_slots(w)).duplicate(true)
+		slots.append({"event_id":event.id,"role":event.get("reaction_role","legacy"),"not_before_day":event.get("raid_not_before_day",event.day)})
+		while slots.size()>2:slots.pop_front() # The two most recently applied reactions; no unbounded accumulation.
+		w.story.raid_slots=slots
+	w.story.hidden.security=mini(2,w.story.hidden.security+1)
+
+static func goals(w, break_objects: bool=false) -> Array:
+	var result=[]
+	for p in idol_cells(w):
+		for n in w.neighbors(p):
+			if n in idol_cells(w) or n in result: continue
+			if w.walkable(n) or (break_objects and w.inside(n) and not w.trees.has(n) and w.blocks(n)): result.append(n)
+	return result
+
+static func is_prayer(kind: String) -> bool:
+	return kind=="pray_wealth" or PRAYER_CATEGORIES.has(kind)
+
+static func prayer_night(w) -> bool:
+	return w.campaign.day>=2 and w.phase=="defend"
+
+static func idol_glowing(w) -> bool:
+	# The light is a nighttime invitation even before the first investigation.
+	var idol=w.story.get("idol",{})
+	return prayer_night(w) and w.story.prayed_day!=w.campaign.day and not idol.is_empty() and idol.hp>0 and idol.state not in ["preparing","transporting","lost"]
+
+static func reason(w,kind: String,p: Vector2i) -> String:
+	if kind=="clear_tree": return "伐採には道具が必要です"
+	if w.story.idol.is_empty(): return w.story.get("migration_error","黄金像が見つかりません")
+	if w.story.idol.state in ["preparing","transporting","lost"]: return "像が危険です。先に運び手を止めてください"
+	if is_prayer(kind):
+		if kind=="pray_wealth" and not w.config.get("legacy_prayer",false): return "動物・お金・アイテムから願いを選んでください"
+		if w.campaign.day<2: return "祈りは2日目の夜からです"
+		if not w.story.investigated: return "先に像を調べてください"
+		if not prayer_night(w): return "祈れるのは夜だけです"
+		if w.story.prayed_day==w.campaign.day: return "今夜は祈りを捧げました"
+	if kind.begins_with("repair_idol"):
+		if w.story.idol.hp>=w.story.idol.max_hp: return "損傷はありません"
+		var material=kind.trim_prefix("repair_idol_") if kind!="repair_idol" else "wood"
+		if w.resource_amount(material)<1:return "修理素材が足りません"
+	if kind=="recover_idol" and w.story.idol.state!="interrupted": return "像は設置済みです"
+	return ""
+
+static func enqueue(w,kind: String,p: Vector2i) -> bool:
+	if not w.working(): return false
+	if w.jobs.size()>=w.Jobs.LIMIT: say(w,"指定は%d件までです"%w.Jobs.LIMIT); return false
+	var why=reason(w,kind,p)
+	if why!="": say(w,why); return false
+	var target=w.trees.get(p,"") if kind=="clear_tree" else "father-idol"
+	if w.jobs.any(func(j):return j.get("world_target")==target): say(w,"予約済みです"); return false
+	var j={"id":w.next_job_id,"kind":kind,"pos":p if kind=="clear_tree" else at(w),"world_target":target,"animal_id":-1,"state":"pending","started":false,"resource":"","reserved":0,"elapsed":0.0}
+	w.next_job_id+=1
+	if w.jobs.is_empty() and w.manual_goal==null and w.Life.able(w) and w.job_hold_reason in ["travel","manual","rescue","danger","rest_end"]: w.Jobs.hold(w,"")
+	w.jobs.append(j); w.Life.wake_auto(w)
+	w.job_log.append({"tick":w.tick,"event":"queued","id":j.id,"kind":kind,"target":target})
+	return true
+
+static func step_job(w,j):
+	if j.kind=="clear_tree": w.Jobs.complete(w,j,false); return
+	var why=reason(w,j.kind,j.pos)
+	if why!="": j.state="blocked"; j.block_reason=why; return
+	var destinations=w.neighbors(j.pos) if j.kind=="clear_tree" else goals(w)
+	if w.keeper.pos not in destinations: w.Jobs.walk(w,j,destinations); return
+	j.state="working"; j.started=true
+	j.elapsed+=w.DT*w.Life.factor(w)
+	var duration=CLEAR_SECONDS if j.kind=="clear_tree" else (PRAYER_SECONDS if is_prayer(j.kind) else 2.0)
+	if j.elapsed<duration: return
+	match j.kind:
+		"clear_tree":
+			if w.occupied(j.pos): j.state="blocked"; j.block_reason="誰かがいます"; return
+			w.story.cleared.append(j.world_target); w.trees.erase(j.pos); w.add_resource("wood",CLEAR_WOOD)
+			say(w,"木を片付けた。木材 +%d"%CLEAR_WOOD)
+		"inspect_idol":
+			if w.campaign.day>=2: w.story.investigated=true
+			say(w,"父の日誌：像を壊してはいけない。"+(" 像に願いを託せそうだ。" if w.story.investigated else " 今は静かに佇んでいる。"))
+		"pray_wealth": pray(w)
+		"pray_animal","pray_gold","pray_item": pray(w,PRAYER_CATEGORIES[j.kind])
+		"repair_idol","repair_idol_soil","repair_idol_wood","repair_idol_stone":
+			var material=j.kind.trim_prefix("repair_idol_") if j.kind!="repair_idol" else "wood"
+			w.add_resource(material,-1);w.story.idol.hp=mini(w.story.idol.max_hp,w.story.idol.hp+{"soil":1,"wood":2,"stone":3}[material])
+		"recover_idol":
+			# Re-anchor where the tow was stopped; never teleport the object home.
+			w.story.idol.state="recovered"; w.story.idol.home=w.story.idol.position.duplicate()
+			say(w,"黄金像をこの場所に固定し直した")
+	persist(w)
+	w.Jobs.complete(w,j,true)
+
+static func interrupt_prayer(w):
+	for j in w.jobs.duplicate():
+		if is_prayer(j.kind) and j.started:
+			w.Jobs.cancel(w,j.id,"prayer_interrupted"); say(w,"祈りが途切れた")
+
+static func pray(w,category: String="wealth"):
+	var id="prayer-%d"%w.story.next_prayer_id
+	w.story.next_prayer_id+=1; w.story.prayed_day=w.campaign.day
+	w.story.hidden.karma+=PRAYER_KARMA
+	var prayer={"id":id,"day":w.campaign.day,"wish":category,"reward_day":w.campaign.day+1,"rewarded":false}
+	if category!="wealth":
+		prayer.merge({"version":2,"category":category,"seed":w.seed_value,"karma_at_prayer":w.story.hidden.karma,"reward_record":{}})
+	w.story.prayers.append(prayer)
+	for spec in [[1,"gold_find" if category in ["wealth","gold"] else "trade_find"],[2,"trade_rumor"],[3,"robbery"]]:
+		w.story.events.append({"id":id+"-"+spec[1],"prayer_id":id,"category":category,"day":w.campaign.day+spec[0],"kind":spec[1],"applied":false,"news_id":id+"-news-"+spec[1],"published":false})
+		if spec[1]=="robbery" and category!="wealth":
+			var role={"animal":"animal_tamer","item":"thief"}.get(category,"idol")
+			w.story.events[-1].merge({"reaction_version":1,"reaction_role":role,"raid_not_before_day":maxi(w.campaign.day+3,w.Progression.Encounters.FIRST_DAY.get(role,1))})
+	say(w,"願いを託した。像の光が消えた。贈り物は翌朝に。")
+
+static func settle_prayer(w,prayer: Dictionary,day: int):
+	if prayer.rewarded or prayer.reward_day>day: return
+	# Historical fixed-gold records have no category. Never reinterpret or reroll them.
+	if not prayer.has("category"):
+		w.campaign.gold+=MIRACLE_GOLD; prayer.rewarded=true
+		w.story.miracles.append({"id":prayer.id,"day":day,"gold":MIRACLE_GOLD,"text":"金貨 +%dG"%MIRACLE_GOLD})
+		say(w,"像のそばに金貨が残されていた。+%dG"%MIRACLE_GOLD)
+		return
+	if prayer.get("reward_record",{}).is_empty():
+		prayer.reward_record=w.ProgressData.idol_reward(prayer.category,prayer.karma_at_prayer,prayer.seed,prayer.day)
+	var reward=prayer.reward_record
+	if reward.is_empty(): return
+	var message=""
+	match prayer.category:
+		"gold":
+			w.campaign.gold+=reward.gold_amount
+			message="金貨 +%dG"%reward.gold_amount
+		"item":
+			w.add_item(reward.item_id,1)
+			message=w.ProgressData.ITEMS[reward.item_id].name+" ×1"
+		"animal":
+			var species=reward.species
+			var data=w.SPECIES[species]
+			var owned=reward.duplicate(true)
+			owned.merge({"id":w.campaign.next_animal_id,"category":data.category,"xp":0,"loyalty":data.loyalty,"traits":{},"name":"","affinity":0 if data.affinity else null,"unavailable_through_day":0},true)
+			w.campaign.next_animal_id+=1
+			w.campaign.animals.append(owned)
+			w.add_resident(owned) # Uses the same safe admission / waiting path as a purchase.
+			prayer.animal_id=owned.id
+			message=data.title+"が牧場へ"+("（受入待ち）" if not w.animals[-1].placed else "やってきた")
+		_: return
+	prayer.rewarded=true
+	w.story.miracles.append({"id":prayer.id,"day":day,"category":prayer.category,"reward":reward.duplicate(true),"text":message})
+	say(w,"願いが届いた。"+message)
+
+static func morning(w,day: int):
+	# Unfinished nighttime wishes consume no allowance and must not block the next day's queue.
+	# Also clears old morning saves containing daytime prayer plans; completed records are untouched.
+	for j in w.jobs.duplicate():
+		if is_prayer(j.kind): w.Jobs.cancel(w,j.id,"night_ended")
+	if day>=2 and not w.story.radio:
+		w.story.radio=true
+		w.story.news.append({"id":"father-radio","day":day,"title":"父の古いラジオ","text":"道具箱から、小さなラジオが見つかった。遠い町の放送が聞こえる。"})
+	for prayer in w.story.prayers:
+		settle_prayer(w,prayer,day)
+	for event in w.story.events:
+		if event.day>day or event.applied: continue
+		event.applied=true
+		var title=""; var body=""
+		match event.kind:
+			"gold_find":
+				w.story.hidden.economy+=1
+				title="各地で金鉱脈の発見"; body="採掘地から新たな金の便りが相次いでいます。市場には人が集まり始めました。"
+			"trade_find":
+				w.story.hidden.economy+=1
+				title="街道に増える取引"; body="珍しい動物や品を求め、街道を行き交う商人が増えています。"
+				if event.get("category")=="animal":title="動物の取引に集まる人々";body="珍しい動物の噂を聞きつけ、街道を訪れる商人が増えています。"
+				elif event.get("category")=="item":title="珍しい道具の商い";body="遠くの市で道具や品物の取引が増え、街道がにぎわい始めました。"
+			"trade_rumor":
+				w.story.hidden.recognition+=1
+				title="街道に流れる噂"; body="珍しい宝を探す旅人が街道を行き交っています。商人たちも戸締まりを気にしています。"
+			"robbery":
+				apply_raid_reaction(w,event)
+				title="採掘地で強盗が増加" if event.get("category","wealth") in ["wealth","gold"] else "街道で盗難が増加"
+				body="物資と宝を狙う一団が、町の外へも足を延ばしているとのことです。"
+				if event.get("reaction_version",0)==1 and event.get("category")=="animal":title="動物を連れ去る者の噂";body="動物を手懐けて連れ去る者が街道に現れたそうです。牧場でも目を離さないように。"
+				elif event.get("reaction_version",0)==1 and event.get("category")=="item":title="落とし物を狙う盗難";body="街道に置かれた品を盗む者の噂が広がっています。牧場の落とし物にもご注意ください。"
+		if not event.published:
+			w.story.news.append({"id":event.news_id,"day":day,"title":title,"text":body}); event.published=true
+	persist(w)
+
+static func merchant(w) -> String:
+	return "街道の噂が騒がしくてね。夜は気をつけて。" if w.story.get("hidden",{}).get("recognition",0)>0 else "今日は何を用意しようか。"
+
+static func damage(w,amount: int):
+	if amount<=0 or w.story.idol.is_empty() or w.story.idol.hp<=0: return
+	w.story.idol.hp=maxi(0,w.story.idol.hp-amount)
+	w.Life.danger(w,"idol_hit")
+	w.PlayerEvents.add(w,"黄金像が攻撃されています","idol_damage")
+	if w.story.idol.hp==0: lose(w,"idol_destroyed")
+
+static func lose(w,why: String):
+	w.story.defeat_reason=why
+	if why=="idol_stolen": w.story.idol.state="lost"
+	w.finish(false)
+
+static func crisis(w) -> bool:
+	return w.keeper.carrier>=0 or w.enemies.any(func(e):return not e.done and not e.flee and e.capture_progress>0) or w.story.get("idol",{}).get("state") in ["preparing","transporting"] or w.enemies.any(func(e):return not e.done and not e.flee and e.role in ["idol_breaker","idol_extractor"])
+
+static func tick(w):
+	if w.story.idol.is_empty(): return
+	if w.keeper.resting or w.keeper.state!="free": interrupt_prayer(w)
+	var idol=w.story.idol
+	if idol.carrier>=0 and not w.enemies.any(func(e):return e.id==idol.carrier and not e.done and not e.flee and e.hp>0):
+		idol.carrier=-1; idol.state="interrupted"; idol.prepare=0.0
+		say(w,"像の搬出を止めた。現地で固定し直せます。")
+
+static func exit_goal(w,e) -> Vector2i:
+	var candidates=w.entries.duplicate()
+	candidates.sort_custom(func(a,b):return w.distance(a,e.entry)<w.distance(b,e.entry))
+	for entry in candidates:
+		var goal=w.exit_for(entry)
+		if not w.find_path(e.pos,goal,true).is_empty(): return goal
+	return w.exit_for(e.entry)
+
+static func tow_path(w,start: Vector2i,goal: Vector2i,offset: Vector2i) -> Array:
+	# Search the whole 2x2 footprint AND the hauler cell; no squeezing through single doors.
+	var open=[start]; var prev={start:start}
+	while not open.is_empty():
+		var p=open.pop_front()
+		if p==goal:
+			var route=[p]
+			while p!=start: p=prev[p]; route.push_front(p)
+			return route
+		for n in w.neighbors(p):
+			if prev.has(n) or n.x < -2 or n.y < -2 or n.x>w.W or n.y>w.H: continue
+			var footprint=cells(n)+[n+offset]
+			if footprint.any(func(c):return w.trees.has(c)): continue
+			# Going outside is permitted only in the chosen exit's two-cell lane.
+			if footprint.any(func(c):return not w.inside(c)) and w.distance(n,goal)>3: continue
+			prev[n]=p; open.append(n)
+	return []
+
+static func tow_route(w,e,anchor: Vector2i,offset: Vector2i) -> Array:
+	var candidates=w.entries.duplicate()
+	candidates.sort_custom(func(a,b):
+		var da=w.distance(a,e.entry);var db=w.distance(b,e.entry)
+		return da<db if da!=db else (a.y<b.y if a.y!=b.y else a.x<b.x))
+	for entry in candidates:
+		var exit=w.exit_for(entry)
+		var goal=Vector2i(-2,clampi(exit.y,0,w.H-2)) if exit.x==-1 else (Vector2i(w.W,clampi(exit.y,0,w.H-2)) if exit.x==w.W else (Vector2i(clampi(exit.x,0,w.W-2),-2) if exit.y==-1 else Vector2i(clampi(exit.x,0,w.W-2),w.H)))
+		var route=tow_path(w,anchor,goal,offset)
+		if route.size()>1:return route
+	return []
+
+static func idol_enemy(w,e) -> bool:
+	if e.role not in ["idol_breaker","idol_extractor"] or e.flee or w.story.idol.is_empty(): return false
+	var idol=w.story.idol
+	if e.role=="idol_extractor" and idol.carrier==e.id:
+		if idol.state=="preparing":
+			e.state="像の固定を外す"; idol.prepare+=w.DT
+			if idol.prepare>=TOW_PREP_SECONDS: idol.state="transporting"; w.Life.danger(w,"idol_towing")
+			return true
+		if idol.state=="transporting":
+			e.state="黄金像を牽引"
+			e.move_credit+=TOW_SPEED*w.Content.speed(w,e)*w.DT
+			if e.move_credit<1 or w.tick<e.move_stopped_until: return true
+			e.move_credit-=1
+			var anchor=at(w)
+			var offset=e.pos-anchor
+			var route=tow_route(w,e,anchor,offset)
+			if route.size()<2: e.state="搬出路がふさがっている"; return true
+			var next=route[1]
+			for p in cells(next)+[next+offset]:
+				if w.actor_occupied(p,e.pos): e.state="搬出路で足止め"; return true
+				if w.structures.get(p,{}).get("status")=="ready" and w.structures[p].kind in w.Buildings.WALLS+w.Buildings.DOORS:
+					if not w.Combat.pay(e,"attack"):return true
+					var b=w.structures[p]; b.hp=maxi(0,b.hp-e.object_attack_power)
+					if b.hp==0: b.status="destroyed"; w.refresh_indoor()
+					return true
+			if not w.Combat.pay(e,"move"):e.state="息を整える";return true
+			idol.position=[next.x,next.y]; e.pos=next+offset; e.path.append(e.pos); w.refresh_indoor()
+			if cells(next).all(func(p):return not w.inside(p)): lose(w,"idol_stolen")
+			return true
+	var destinations=goals(w).filter(func(p):return not w.actor_occupied(p,e.pos))
+	# A complete wall ring must delay a raid, not leave the night in an endless crisis.
+	# Keep keeper jobs on walkable contacts; only raiders may approach through breakable walls.
+	if destinations.is_empty(): destinations=goals(w,true).filter(func(p):return not w.actor_occupied(p,e.pos))
+	if e.pos in destinations:
+		if e.role=="idol_breaker":
+			e.state="黄金像を壊す"
+			if w.tick>=e.next_attack and w.Combat.pay(e,"attack"):
+				e.next_attack=w.tick+ceili(e.counter_seconds/w.DT); damage(w,e.object_attack_power)
+		elif idol.carrier<0:
+			idol.carrier=e.id; idol.state="preparing"; idol.prepare=0.0; w.Life.danger(w,"idol_unfastening")
+		return true
+	e.move_credit+=e.move_speed*w.Content.speed(w,e)*w.DT
+	if e.move_credit<1: return true
+	e.move_credit-=1
+	var best=[]
+	for p in destinations:
+		var route=w.find_path(e.pos,p,true,true)
+		if not route.is_empty() and (best.is_empty() or route.size()<best.size()): best=route
+	if best.size()>1: w.move_enemy(e,best[1],best[-1])
+	e.state="黄金像へ向かう"
+	return true
+
+static func say(w,text: String):
+	w.say(text)
+	w.milestones.append({"tick":w.tick,"kind":"order_notice","text":text})
