@@ -1,0 +1,69 @@
+{
+  "root": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow",
+  "total_bytes": 1305086366,
+  "total_files": 9323,
+  "by_top_level": {
+    "artifacts": {
+      "bytes": 581114435,
+      "files": 2805
+    },
+    ".tools": {
+      "bytes": 393502226,
+      "files": 5
+    },
+    "review": {
+      "bytes": 129227736,
+      "files": 808
+    },
+    "build": {
+      "bytes": 119386188,
+      "files": 6
+    },
+    "art_delivery": {
+      "bytes": 36097007,
+      "files": 2770
+    },
+    ".godot": {
+      "bytes": 20452933,
+      "files": 2676
+    },
+    "assets": {
+      "bytes": 13682809,
+      "files": 58
+    },
+    "temp": {
+      "bytes": 6309050,
+      "files": 6
+    },
+    "bgm": {
+      "bytes": 4271054,
+      "files": 1
+    },
+    "game": {
+      "bytes": 620211,
+      "files": 87
+    },
+    "tests": {
+      "bytes": 227543,
+      "files": 71
+    },
+    "[root files]": {
+      "bytes": 154738,
+      "files": 16
+    },
+    "tools": {
+      "bytes": 33361,
+      "files": 8
+    },
+    "art-production": {
+      "bytes": 3969,
+      "files": 5
+    },
+    "確認入口": {
+      "bytes": 3106,
+      "files": 1
+    }
+  },
+  "errors": [],
+  "measurement": "Read-only full current size with Windows long paths; whole-root before size was not measured"
+}

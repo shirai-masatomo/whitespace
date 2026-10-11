@@ -1,9 +1,17 @@
 {
   "prepared_commit": "75717f55373e1fb5ca2e7e1daaa294be23e65034",
-  "branch": "feature/whistle-ranch-colony-20261011",
+  "branch": "codex/sporehollow-colony-09",
   "base": "f361de128cefcb055828076ae52b4dd6ef04fcd8",
   "verification": "import, visible_boundary, explicit_storage, negotiation: passed",
   "verification_path": "projects/sporehollow/artifacts/verification/20261011-200513-002",
-  "pushed": false,
-  "blocker": "Automatic approval review rejected publication; awaiting direct human confirmation of release to public shirai-masatomo/whitespace branch. No bypass or main merge."
+  "pushed": true,
+  "blocker": null,
+  "remote_sha": "75717f55373e1fb5ca2e7e1daaa294be23e65034",
+  "main_sha": "f361de128cefcb055828076ae52b4dd6ef04fcd8",
+  "main_changed": false,
+  "branch_url": "https://github.com/shirai-masatomo/whitespace/tree/codex/sporehollow-colony-09",
+  "workflow_runs": 0,
+  "check_runs": 0,
+  "ci_note": "Existing DIVE DIVE workflow excludes this branch and project; no Sporehollow CI configured.",
+  "push_command": "git push origin HEAD:refs/heads/codex/sporehollow-colony-09"
 }

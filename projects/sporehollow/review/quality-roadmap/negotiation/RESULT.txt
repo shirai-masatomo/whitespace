@@ -19,3 +19,9 @@ EXE通常終了PID3748→別プロセスPID36764で保存自動復元と時間�
 公開候補75717f5、branch feature/whistle-ranch-colony-20261011。public mainを基点に実使用素材/コードのみ、約19MB。import/境界/回収/交渉検証成功。
 公開pushは自動承認レビューが直接の人間による公開承認を確認できず拒否したため実行していない。初期のpush禁止解除の直接確認待ち。main mergeなし。
 証拠は本フォルダのJSON/最小PNG。実使用素材一覧は隣接final-boundary-cleanup/ACTIVE_ASSET_PATHS.txt。
+
+[公開完了 2026-10-11]
+具体的な公開先/内容へのユーザー明示承認により通常push成功。codex/sporehollow-colony-09 remote SHA 75717f55373e1fb5ca2e7e1daaa294be23e65034、候補と完全一致。main f361de1のまま。Actions 0/check-runs 0、本作対象CIなし。前記の公開ブロッカーは解消。
+https://github.com/shirai-masatomo/whitespace/tree/codex/sporehollow-colony-09
+容量補足：codex_test全体の整理前は未測定。現在全体1,305,086,366 bytes（Windows長パスを含みエラー0）。残存artifacts 581,114,435、.tools 393,502,226、review 129,227,736、build 119,386,188 bytes、他は素材/ソース/キャッシュ等。
+当時manifestのcodex_test artifacts 1,834,541,907→540,606,555 bytesは長いshader-cacheパス約40.5MBを含まない同条件測定。削減差1,293,935,352 bytes。入口13,349,691→3,090 bytes。4,176,276,368 bytesはcodex_testと旧正本の旧EXE34本合計であり、codex_test単独ではない。ごみ箱未消去、追加削除/追加テストなし。
