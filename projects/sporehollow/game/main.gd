@@ -1200,9 +1200,7 @@ func _route_input(event):
 				if group < 0: camera.position = pan_origin
 				dragging=false; press_pending=false
 			else:
-				var id=job_at(Vector2i(get_canvas_transform().affine_inverse()*pointer/TILE))
-				if id>=0: world.act("cancel_job",Vector2i.ZERO,id); refresh()
-				else: neutral()
+				neutral()
 			get_viewport().set_input_as_handled()
 	if event is InputEventKey:
 		if event.physical_keycode in [KEY_W, KEY_A, KEY_S, KEY_D]: keys_down[event.physical_keycode] = event.pressed
@@ -1959,7 +1957,7 @@ func draw_hud():
 			var p=(pointer+Vector2(18,20)).clamp(Vector2(12,54),Vector2(985,668))
 			hud.draw_style_box(MarketView.panel(UI.PAPER,UI.WOOD),Rect2(p,Vector2(274,68)))
 			label_on(hud,p+Vector2(12,25),"ID%d · %s"%[j.id,job_title(j)],17,UI.INK)
-			label_on(hud,p+Vector2(12,51),"右クリック：取消"+("（着工分は一部返却）" if j.started else ""),13,UI.INK)
+			label_on(hud,p+Vector2(12,51),"取消は一覧の×か対象付近のボタン"+("（着工分は一部返却）" if j.started else ""),13,UI.INK)
 	if hover_job >= 0:
 		for i in range(world.jobs.size()):
 			if world.jobs[i].id == hover_job:
@@ -1978,18 +1976,20 @@ func draw_hud():
 			hud.draw_rect(Rect2(hp_pos,Vector2(44.0*e.hp/e.max_hp,6)),Color("e3aa88"))
 	if world.working() and not world.player_events.is_empty():
 		var paragraphs=[];var height=16.0
+		var log_width=268 if selected.get("kind","") in ["keeper","rock"] else 332
+		var log_left=1264-log_width
 		event_scroll=clampi(event_scroll,0,maxi(0,world.player_events.size()-6))
 		for row in world.player_events.slice(maxi(0,world.player_events.size()-6-event_scroll),world.player_events.size()-event_scroll):
-			var paragraph=TextParagraph.new();paragraph.add_string(row.text,FONT,13);paragraph.width=308
+			var paragraph=TextParagraph.new();paragraph.add_string(row.text,FONT,13);paragraph.width=log_width-24
 			paragraph.break_flags=TextServer.BREAK_MANDATORY|TextServer.BREAK_WORD_BOUND|TextServer.BREAK_ADAPTIVE
 			paragraphs.append(paragraph);height+=paragraph.get_size().y+6
 		var y=723-height
-		event_log_rect=Rect2(932,y,332,height)
-		label_on(hud,Vector2(940,y-5),"ログ · ホイールで履歴"+(" · 過去" if event_scroll>0 else ""),11,UI.PAPER)
-		hud.draw_style_box(MarketView.panel(Color(0.12,0.19,0.15,0.72)),Rect2(932,y,332,height))
+		event_log_rect=Rect2(log_left,y,log_width,height)
+		label_on(hud,Vector2(log_left+8,y-5),"ログ · ホイールで履歴"+(" · 過去" if event_scroll>0 else ""),11,UI.PAPER)
+		hud.draw_style_box(MarketView.panel(Color(0.12,0.19,0.15,0.72)),event_log_rect)
 		y+=8
 		for paragraph in paragraphs:
-			paragraph.draw(hud.get_canvas_item(),Vector2(944,y),UI.PAPER);y+=paragraph.get_size().y+6
+			paragraph.draw(hud.get_canvas_item(),Vector2(log_left+12,y),UI.PAPER);y+=paragraph.get_size().y+6
 	if world.phase == "dawn":
 		hud.draw_style_box(UI.surface(UI.PAPER), Rect2(330, 72, 620, 106))
 		label_on(hud, Vector2(365, 118), "夜明け", 30, Color("485e48"))

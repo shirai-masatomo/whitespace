@@ -185,7 +185,7 @@ static func draw(g,c,id: int):
 static func grid(g,c,page: int):
 	var records=g.book_records()
 	var discovered=records.filter(func(row):return g.world.campaign.enemy_knowledge.get(g.ProgressView.ENEMY_ORDER[row.id],0)>0 if g.book_section=="enemies" else true).size()
-	text(g,c,Rect2(144,110,320,20),"発見 %d / %d"%[discovered,records.size()] if g.book_section=="enemies" else "登録 %d匹"%discovered,13,MUTED)
+	text(g,c,Rect2(144,110,320,20),"発見 %d / %d"%[discovered,records.size()] if g.book_section=="enemies" else "登録 %d匹"%discovered,13,MUTED,13)
 	for slot in range(8):
 		var index=page*8+slot;var rect=list_rect(slot);var p=rect.position
 		var row=records[index] if index<records.size() else {}
