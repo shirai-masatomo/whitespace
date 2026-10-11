@@ -21,4 +21,6 @@
 - [ ] 通常の追加作業者募集と全員共通の直接命令。今回拡張しない。
 - [ ] フィクスチャ終了時の少数ObjectDB解放警告、保存破損時の回復UX。
 
-対応表・前後画像・観察・監査は確認入口/23_UI_AIレビュー02/REPORT.md。実装91f76a2。最新版入口の反映状態は同フォルダdeployment.jsonで確認。通常セーブ・素材・履歴を保持し、GitHubpush/mergeなし。
+対応表・前後画像・観察・監査は確認入口/23_UI_AIレビュー02/REPORT.md。実装91f76a2。最新版入口の反映状態は同フォルダdeployment.jsonで確認。通常セーブ・素材・履歴を保持し、修正とレビュー資料をcodex/sporehollow-review02へpush。mergeなし。
+
+GitHubのレビュー入口：review/current/PACKET.md（codex/sporehollow-review02）。

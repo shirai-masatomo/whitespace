@@ -1,0 +1,162 @@
+[
+  {
+    "case": "犬の調教",
+    "path": "before/01-training.png",
+    "sha256": "8bc69808c77e36b62c5d398f27381a255fb7b659c2712167fa3cb6cf87630dba",
+    "implementation_commit": "0ea36feeb3d3f68862577ce2a8303355a22bc7fa",
+    "material_commit": "b0e917a11f205190dde0136165a72c189f39e275",
+    "executable_sha256": "B939AB0CF8E29CEB35DDA9216BCED4A3A79834E527EF3BF7D991F7F573194C32"
+  },
+  {
+    "case": "犬の調教",
+    "path": "after/01-training.png",
+    "sha256": "44d1485fd048bb90f33c704ee169fa6bb2f115f72fe970dffdeafcc36c79d9f8",
+    "implementation_commit": "91f76a298a5bb3775fb2aafedca74a9e8c9ad19b",
+    "material_commit": "b0e917a11f205190dde0136165a72c189f39e275",
+    "executable_sha256": "A10287B62CE93C985891982C3A8B4B2B2CB67BD58722349A8113A8FA22110C1C"
+  },
+  {
+    "case": "家畜のと殺予約",
+    "path": "before/02-slaughter.png",
+    "sha256": "3fba51dff1ade716227b745ff41ae400b65418d31c8d4294176a5b2c326c043c",
+    "implementation_commit": "0ea36feeb3d3f68862577ce2a8303355a22bc7fa",
+    "material_commit": "b0e917a11f205190dde0136165a72c189f39e275",
+    "executable_sha256": "B939AB0CF8E29CEB35DDA9216BCED4A3A79834E527EF3BF7D991F7F573194C32"
+  },
+  {
+    "case": "家畜のと殺予約",
+    "path": "after/02-slaughter.png",
+    "sha256": "c58cb474063579ed46c13e50109a06398e9774ec4af7fa1040576e9c6acb252a",
+    "implementation_commit": "91f76a298a5bb3775fb2aafedca74a9e8c9ad19b",
+    "material_commit": "b0e917a11f205190dde0136165a72c189f39e275",
+    "executable_sha256": "A10287B62CE93C985891982C3A8B4B2B2CB67BD58722349A8113A8FA22110C1C"
+  },
+  {
+    "case": "建築予定",
+    "path": "before/03-plans.png",
+    "sha256": "413a1137572bd1074455d21dd820b21c45605c32b8c486b18b969ea20f9252af",
+    "implementation_commit": "0ea36feeb3d3f68862577ce2a8303355a22bc7fa",
+    "material_commit": "b0e917a11f205190dde0136165a72c189f39e275",
+    "executable_sha256": "B939AB0CF8E29CEB35DDA9216BCED4A3A79834E527EF3BF7D991F7F573194C32"
+  },
+  {
+    "case": "建築予定",
+    "path": "after/03-plans.png",
+    "sha256": "3e32b5f6c880b01732eb543498f951eec238415037ac0639b8d2f49d50165cf4",
+    "implementation_commit": "91f76a298a5bb3775fb2aafedca74a9e8c9ad19b",
+    "material_commit": "b0e917a11f205190dde0136165a72c189f39e275",
+    "executable_sha256": "A10287B62CE93C985891982C3A8B4B2B2CB67BD58722349A8113A8FA22110C1C"
+  },
+  {
+    "case": "40個のうち8個を携行",
+    "path": "before/04-stock-carry.png",
+    "sha256": "534ae30aca237ee5b400c0309f4cb9d5e2d5803858c05fd800884f32000b71f1",
+    "implementation_commit": "0ea36feeb3d3f68862577ce2a8303355a22bc7fa",
+    "material_commit": "b0e917a11f205190dde0136165a72c189f39e275",
+    "executable_sha256": "B939AB0CF8E29CEB35DDA9216BCED4A3A79834E527EF3BF7D991F7F573194C32"
+  },
+  {
+    "case": "40個のうち8個を携行",
+    "path": "after/04-stock-carry.png",
+    "sha256": "34023fd8ed80e7fa65073988928739519f3acbd6014bb718d47567932ad045d1",
+    "implementation_commit": "91f76a298a5bb3775fb2aafedca74a9e8c9ad19b",
+    "material_commit": "b0e917a11f205190dde0136165a72c189f39e275",
+    "executable_sha256": "A10287B62CE93C985891982C3A8B4B2B2CB67BD58722349A8113A8FA22110C1C"
+  },
+  {
+    "case": "20:16・夜・徴兵中",
+    "path": "before/05-night-drafted.png",
+    "sha256": "ec7606312a17f95e48ae314efb0396fae94ff93ce1c267ce4c1a72748c9a9353",
+    "implementation_commit": "0ea36feeb3d3f68862577ce2a8303355a22bc7fa",
+    "material_commit": "b0e917a11f205190dde0136165a72c189f39e275",
+    "executable_sha256": "B939AB0CF8E29CEB35DDA9216BCED4A3A79834E527EF3BF7D991F7F573194C32"
+  },
+  {
+    "case": "20:16・夜・徴兵中",
+    "path": "after/05-night-drafted.png",
+    "sha256": "ffdde15808f8befd927c1dd39f9a6a23ae3037932456f015decd2f1304a481c8",
+    "implementation_commit": "91f76a298a5bb3775fb2aafedca74a9e8c9ad19b",
+    "material_commit": "b0e917a11f205190dde0136165a72c189f39e275",
+    "executable_sha256": "A10287B62CE93C985891982C3A8B4B2B2CB67BD58722349A8113A8FA22110C1C"
+  },
+  {
+    "case": "夜明け後の残敵",
+    "path": "before/06-morning-threat.png",
+    "sha256": "f46e8ff2850146c82e9eb046b534cba5565c5ac9021743e705d74517744b0352",
+    "implementation_commit": "0ea36feeb3d3f68862577ce2a8303355a22bc7fa",
+    "material_commit": "b0e917a11f205190dde0136165a72c189f39e275",
+    "executable_sha256": "B939AB0CF8E29CEB35DDA9216BCED4A3A79834E527EF3BF7D991F7F573194C32"
+  },
+  {
+    "case": "夜明け後の残敵",
+    "path": "after/06-morning-threat.png",
+    "sha256": "2f49cb7fb8f2a42e34e0eceaf4e67e3e794fa5250fd4bc4e5d59e60ff0697cad",
+    "implementation_commit": "91f76a298a5bb3775fb2aafedca74a9e8c9ad19b",
+    "material_commit": "b0e917a11f205190dde0136165a72c189f39e275",
+    "executable_sha256": "A10287B62CE93C985891982C3A8B4B2B2CB67BD58722349A8113A8FA22110C1C"
+  },
+  {
+    "case": "通常メニュー",
+    "path": "before/07-menu.png",
+    "sha256": "a2d79898ffaffaf55cac1d8c167f89217f487983c4d66aa1b4eeb088b9f87cb6",
+    "implementation_commit": "0ea36feeb3d3f68862577ce2a8303355a22bc7fa",
+    "material_commit": "b0e917a11f205190dde0136165a72c189f39e275",
+    "executable_sha256": "B939AB0CF8E29CEB35DDA9216BCED4A3A79834E527EF3BF7D991F7F573194C32"
+  },
+  {
+    "case": "通常メニュー",
+    "path": "after/07-menu.png",
+    "sha256": "994c2d890925d2de60b252489332a19897aa7c544eaccb917023338a5101521e",
+    "implementation_commit": "91f76a298a5bb3775fb2aafedca74a9e8c9ad19b",
+    "material_commit": "b0e917a11f205190dde0136165a72c189f39e275",
+    "executable_sha256": "A10287B62CE93C985891982C3A8B4B2B2CB67BD58722349A8113A8FA22110C1C"
+  },
+  {
+    "case": "導入末尾",
+    "path": "before/08-introduction.png",
+    "sha256": "4c3215b3906b23219a8be4ce5939f888447e447315382d938f83dc51b8c4743c",
+    "implementation_commit": "0ea36feeb3d3f68862577ce2a8303355a22bc7fa",
+    "material_commit": "b0e917a11f205190dde0136165a72c189f39e275",
+    "executable_sha256": "B939AB0CF8E29CEB35DDA9216BCED4A3A79834E527EF3BF7D991F7F573194C32"
+  },
+  {
+    "case": "導入末尾",
+    "path": "after/08-introduction.png",
+    "sha256": "0467dd747763af49ee08ff23e8ca20ca78e782044d8b18b83684e91b3b429585",
+    "implementation_commit": "91f76a298a5bb3775fb2aafedca74a9e8c9ad19b",
+    "material_commit": "b0e917a11f205190dde0136165a72c189f39e275",
+    "executable_sha256": "A10287B62CE93C985891982C3A8B4B2B2CB67BD58722349A8113A8FA22110C1C"
+  },
+  {
+    "case": "備蓄／休息ゾーン",
+    "path": "before/09-zones.png",
+    "sha256": "10acd8884864e6d0251ed6aebaa4b6854212fd37a6f71766cf27f52dc4c789d9",
+    "implementation_commit": "0ea36feeb3d3f68862577ce2a8303355a22bc7fa",
+    "material_commit": "b0e917a11f205190dde0136165a72c189f39e275",
+    "executable_sha256": "B939AB0CF8E29CEB35DDA9216BCED4A3A79834E527EF3BF7D991F7F573194C32"
+  },
+  {
+    "case": "備蓄／休息ゾーン",
+    "path": "after/09-zones.png",
+    "sha256": "51dca15cc9694d3e8dfd93fe9861b552c3d7453a67d86d6262f7b9ea028c4889",
+    "implementation_commit": "91f76a298a5bb3775fb2aafedca74a9e8c9ad19b",
+    "material_commit": "b0e917a11f205190dde0136165a72c189f39e275",
+    "executable_sha256": "A10287B62CE93C985891982C3A8B4B2B2CB67BD58722349A8113A8FA22110C1C"
+  },
+  {
+    "case": "食事中",
+    "path": "before/10-eating.png",
+    "sha256": "0db4ba025f2093627a5ee72ed14de10961c92b19ab4cd29d177fb999e599a83e",
+    "implementation_commit": "0ea36feeb3d3f68862577ce2a8303355a22bc7fa",
+    "material_commit": "b0e917a11f205190dde0136165a72c189f39e275",
+    "executable_sha256": "B939AB0CF8E29CEB35DDA9216BCED4A3A79834E527EF3BF7D991F7F573194C32"
+  },
+  {
+    "case": "食事中",
+    "path": "after/10-eating.png",
+    "sha256": "6c8cbab31fd1c5ca850672c919a308cd3e9fbe2e33248782582bdcf4a1f51b45",
+    "implementation_commit": "91f76a298a5bb3775fb2aafedca74a9e8c9ad19b",
+    "material_commit": "b0e917a11f205190dde0136165a72c189f39e275",
+    "executable_sha256": "A10287B62CE93C985891982C3A8B4B2B2CB67BD58722349A8113A8FA22110C1C"
+  }
+]

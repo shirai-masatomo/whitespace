@@ -1,19 +1,32 @@
-# ホイッスル牧場 — AI・戦闘・情報表示の品質定点（2026-10-08）
+# ホイッスル牧場：外部独立レビュー02
 
-実装 **0d47970eb10c707d51c60ea9b961e4781f21f215**、素材 **a34390e584037cef78c9f49dcec4b18bd44f6f3d**。開始HEAD209d370から更新。後続レビュー保存コミットはゲーム内容を変えない。
+GitHub上の入口はこのページです。ブランチ **codex/sporehollow-review02** に修正コード、前後画像、報告、テスト結果をまとめています。既存のprototype／colony-09ブランチを巻き戻したり、mergeしたりしていません。
 
-起動は **[Play.cmd](../../Play.cmd)**。ESCの版表示 `0d47970`。[EXE・SHA対応](revision-0d47970/build.json)。検証済みWindows版へ更新済み、自動起動なし。
+- [修正結果・原因・未検証事項](review02/REPORT.md)
+- [同条件の修正前後10組／20枚](review02/SCREENS.md)
+- [テスト結果](review02/test-summary.json)
+- [画像・実装・素材・EXEの対応](review02/IMAGE_MANIFEST.json)
+- [隔離入力の監査](review02/tests/isolated-ui/isolation.json)
+- [最新版の操作・保存](../../README.md)
 
-- [代表5画面と見る点](revision-0d47970/SCREENS.md)
-- [変更・仮決定・未確認事項](revision-0d47970/REVIEW.md)
-- [実入力/画面観察](revision-0d47970/observations.json) / [非対話GPU監査](revision-0d47970/isolation.json)
-- [戦闘・増援・療養80検査](revision-0d47970/quality-tests.json)
-- [検証範囲](revision-0d47970/verification.json) / [関連ログ](revision-0d47970/logs) / [限定AI12](revision-0d47970/evaluation.json)
+実装91f76a298a5bb3775fb2aafedca74a9e8c9ad19b、素材b0e917a11f205190dde0136165a72c189f39e275。配布EXEのSHA256はA10287B62CE93C985891982C3A8B4B2B2CB67BD58722349A8113A8FA22110C1C。資料を置くコミットはゲーム内容を変更しません。
 
-敵Skillを共通データ化し、図鑑8枠/Rarity/Hoverを整理。舞姫の有限支援、敵メイド/陣営対応/特殊仲間化、被弾救出、誘拐猶予後の緩やかな療養、戦闘不能時の標的切替を統合。群生森、Human描画1.15、数字速度、牧場主の図鑑/持ち物、最新6件イベントも反映。
+動物仕事の分類・文言、夜間休息、徴兵中の通常命令、予定の種類・状態、物資の所有と携行、翌朝の残敵、メニューを修正。交渉の左クリック・サブタスク上の右クリック解除・新規開始時の中央の像と主人公を維持しています。
 
-関連25スイートを段階確認、最終SHAで影響する7スイート435検査、限定AI12試行、隔離GPU19検査/5PNG、Windows出力/headless起動を確認。静止画は制御fixtureで、戦闘の時間経過は決定的シミュレーションと区別。大量撮影/AI192は行っていない。
+関連headless166項目、GPU入力50項目、以前の試遊版確認7項目、終了再開5項目成功。最終EXEの33入力項目・after10枚・終了再開は非対話デスクトップで検証。人間の操作感・面白さ・長時間AI・実音・IMEは未評価です。
 
-人間レビュー：森の群れ方、Humanサイズ、舞と近接の循環、増援の到着、敵メイド、Down後の標的、療養の安全性、図鑑とログの読みやすさ。数日試遊/物理配列/IMEは未確認。不足する正式Skill Icon/気絶SpriteはART_SPECへ記録。
+## 代表画面
 
-過去証拠は[前定点](HISTORY-before-0d47970.md)に保持し、今回の証拠へ流用しない。
+調教：仕事カテゴリは動物。番号の代わりに種類・状態を表示。
+
+![調教の修正後](review02/after/01-training.png)
+
+夜・徴兵中：朝まで休む、休息・作業再開・装備は無効。
+
+![夜と徴兵中の修正後](review02/after/05-night-drafted.png)
+
+共有在庫：8個を携行しても所有40。利用可と内訳を区別。
+
+![携行中の所有表示](review02/after/04-stock-carry.png)
+
+通常セーブ・履歴・ショートカットは保持。セーブ原本、実行EXE、GPUキャッシュ、作業途中や失敗した証拠はこの公開資料へ含めていません。[前の定点入口](HISTORY-before-review02.md)は履歴として保管しています。

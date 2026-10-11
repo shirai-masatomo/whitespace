@@ -1,0 +1,34 @@
+{
+	"checks": [
+		{
+			"check": "New game idol is near map center",
+			"passed": true
+		},
+		{
+			"check": "New game keeper is beside the central idol",
+			"passed": true
+		},
+		{
+			"check": "Initial camera centers the keeper and idol together",
+			"passed": true
+		},
+		{
+			"check": "Right click on a displayed subtask clears selection in mode 0",
+			"passed": true
+		},
+		{
+			"check": "Right click preserves registered jobs, keeper and pause in mode 0",
+			"passed": true
+		},
+		{
+			"check": "Right click on a displayed subtask clears selection in mode 4",
+			"passed": true
+		},
+		{
+			"check": "Right click preserves registered jobs, keeper and pause in mode 4",
+			"passed": true
+		}
+	],
+	"failures": 0,
+	"method": "Production Godot InputEvent dispatch; no physical OS input"
+}

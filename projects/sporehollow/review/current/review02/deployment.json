@@ -1,0 +1,15 @@
+{
+  "automatically_launched": false,
+  "previous_sha256": "B939AB0CF8E29CEB35DDA9216BCED4A3A79834E527EF3BF7D991F7F573194C32",
+  "documentation_commit": "ce2d941",
+  "utc": "2026-10-11T16:00:33.0357014Z",
+  "asset_delivery_commit": "b0e917a11f205190dde0136165a72c189f39e275",
+  "implementation_commit": "91f76a298a5bb3775fb2aafedca74a9e8c9ad19b",
+  "sha256": "A10287B62CE93C985891982C3A8B4B2B2CB67BD58722349A8113A8FA22110C1C",
+  "human_play": "not performed",
+  "normal_saves_and_launcher_unchanged": true,
+  "isolation": "Noninteractive desktop; 30fps; Dummy audio; sequential",
+  "native_restart": "passed through production close handler and separate process automatic restore",
+  "local_entry": "確認入口/最新開発版.lnk",
+  "save_data": "Excluded from this GitHub review packet; hashes matched before/after local deployment"
+}

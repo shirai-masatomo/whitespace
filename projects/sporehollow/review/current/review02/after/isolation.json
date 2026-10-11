@@ -1,0 +1,22 @@
+{
+  "asset_delivery_commit": "b0e917a11f205190dde0136165a72c189f39e275",
+  "user_data": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\確認入口\\23_UI_AIレビュー02\\after/isolated-user-data",
+  "result": {
+    "PID": 40092,
+    "ThreadID": 39272,
+    "ExitCode": 0,
+    "OwnedWindowCount": 2,
+    "Station": "Service-0x0-bf6d9650$",
+    "Desktop": "Render_fa70ec6925304da091ca35ce297b6581",
+    "ObservedDesktop": "Render_fa70ec6925304da091ca35ce297b6581",
+    "NonInteractive": true,
+    "DesktopMatched": true,
+    "TimedOut": false
+  },
+  "implementation_commit": "91f76a298a5bb3775fb2aafedca74a9e8c9ad19b",
+  "end_utc": "2026-10-11T15:57:09.1450483Z",
+  "command": "\"C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\.tools\\Godot_v4.7.2-stable_win64.exe\" --main-pack \"C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\確認入口\\23_UI_AIレビュー02\\candidate\\WhistleRanch-Autonomy-Partial.exe\" --audio-driver Dummy --rendering-method gl_compatibility --max-fps 30 --resolution 1280x800 --log-file \"C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\確認入口\\23_UI_AIレビュー02\\after/isolated.log\" --script \"C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\確認入口\\23_UI_AIレビュー02\\capture_frames.gd\" -- --isolated-review",
+  "start_utc": "2026-10-11T15:56:58.2251412Z",
+  "sha256": "A10287B62CE93C985891982C3A8B4B2B2CB67BD58722349A8113A8FA22110C1C",
+  "phase": "after"
+}

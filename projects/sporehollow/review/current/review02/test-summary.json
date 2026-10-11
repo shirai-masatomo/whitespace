@@ -1,0 +1,62 @@
+[
+  {
+    "path": "tests/core/review02.json",
+    "checks": 39,
+    "failures": 0
+  },
+  {
+    "path": "tests/questions-deployed/questions.json",
+    "checks": 7,
+    "failures": 0
+  },
+  {
+    "path": "tests/livestock09/livestock09.json",
+    "checks": 23,
+    "failures": 0
+  },
+  {
+    "path": "tests/colony_tasks09/colony-tasks09.json",
+    "checks": 26,
+    "failures": 0
+  },
+  {
+    "path": "tests/work_food_chain/work-food-chain.json",
+    "checks": 33,
+    "failures": 0
+  },
+  {
+    "path": "tests/explicit_storage/explicit-storage.json",
+    "checks": 11,
+    "failures": 0
+  },
+  {
+    "path": "tests/nutrition09/nutrition.json",
+    "checks": 17,
+    "failures": 0
+  },
+  {
+    "path": "tests/zones09/zones09.json",
+    "checks": 17,
+    "failures": 0
+  },
+  {
+    "path": "tests/isolated-ui/review02-ui.json",
+    "checks": 33,
+    "failures": 0
+  },
+  {
+    "path": "tests/ui-final/negotiation/negotiation-ui.json",
+    "checks": 17,
+    "failures": 0
+  },
+  {
+    "path": "tests/isolated-lifecycle/close-entry.json",
+    "checks": 2,
+    "failures": 0
+  },
+  {
+    "path": "tests/isolated-lifecycle/resume-entry.json",
+    "checks": 3,
+    "failures": 0
+  }
+]

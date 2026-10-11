@@ -1,6 +1,6 @@
 # ホイッスル牧場：現在地
 
-開発元colony-structure-01-work、ブランチresearch/colony-structure-01。公開用コピー1eab797との履歴は別。GitHubへのpush/mergeなし。通常入口は確認入口/最新開発版.lnkの一本。
+開発元colony-structure-01-work、ブランチresearch/colony-structure-01。公開用コピー1eab797との履歴は別。修正とレビュー資料をcodex/sporehollow-review02へpush。mergeなし。通常入口は確認入口/最新開発版.lnkの一本。
 
 ## レビュー02の実装
 
@@ -24,3 +24,5 @@
 - GPU入力フィクスチャ終了時の少数ObjectDB解放警告を保留。通常EXEの終了／再開は別に成功。
 
 通常セーブ・素材・復元履歴、既存の未コミットimportメタデータは保持。新旧入口を増やさず、配布結果はレビュー報告のdeployment.jsonを参照。
+
+GitHubのレビュー入口：review/current/PACKET.md（codex/sporehollow-review02）。

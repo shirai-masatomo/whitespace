@@ -1,0 +1,138 @@
+{
+	"checks": [
+		{
+			"check": "Subtask right click clears mode without deleting work at (1280, 800)",
+			"passed": true
+		},
+		{
+			"check": "Subtask right click clears mode without deleting work at (1920, 1080)",
+			"passed": true
+		},
+		{
+			"check": "Subtask drag starts above the movement threshold",
+			"passed": true
+		},
+		{
+			"check": "Right click during subtask drag cancels only the uncommitted drag",
+			"passed": true
+		},
+		{
+			"check": "Drafted normal work actions remain disabled after process refresh",
+			"passed": true
+		},
+		{
+			"check": "Displayed action: keeper_rest",
+			"passed": true
+		},
+		{
+			"check": "Displayed action: resume_jobs",
+			"passed": true
+		},
+		{
+			"check": "Clicks on disabled drafted actions do not issue work",
+			"passed": true
+		},
+		{
+			"check": "Read-only book and inventory remain available while drafted",
+			"passed": true
+		},
+		{
+			"check": "20:16 uses the clock and exposes drafted rest refusal",
+			"passed": true
+		},
+		{
+			"check": "Pending night raid cannot be skipped by UI",
+			"passed": true
+		},
+		{
+			"check": "Living enemy blocks skipping and is exposed at night",
+			"passed": true
+		},
+		{
+			"check": "The same enemy remains visibly dangerous next morning",
+			"passed": true
+		},
+		{
+			"check": "Displayed action: threats",
+			"passed": true
+		},
+		{
+			"check": "Threat button focuses only; no movement, job or time side effect",
+			"passed": true
+		},
+		{
+			"check": "Opening the menu suspends an otherwise running world",
+			"passed": true
+		},
+		{
+			"check": "Main menu has no ambiguous phase reset or full key guide",
+			"passed": true
+		},
+		{
+			"check": "Displayed action: menu_help",
+			"passed": true
+		},
+		{
+			"check": "Help is a separate page",
+			"passed": true
+		},
+		{
+			"check": "Escape from help returns to menu without resuming time",
+			"passed": true
+		},
+		{
+			"check": "Displayed action: menu_new",
+			"passed": true
+		},
+		{
+			"check": "Displayed action: menu_back",
+			"passed": true
+		},
+		{
+			"check": "Cancelling the new-game confirmation preserves the current colony",
+			"passed": true
+		},
+		{
+			"check": "Displayed action: menu_save",
+			"passed": true
+		},
+		{
+			"check": "Save captures the pre-menu pause setting, positions and job IDs",
+			"passed": true
+		},
+		{
+			"check": "Displayed action: menu_load",
+			"passed": true
+		},
+		{
+			"check": "Load restores state while keeping the modal pause until resume",
+			"passed": true
+		},
+		{
+			"check": "Displayed action: menu_resume",
+			"passed": true
+		},
+		{
+			"check": "Menu resume restores saved running state",
+			"passed": true
+		},
+		{
+			"check": "Displayed action: menu_new",
+			"passed": true
+		},
+		{
+			"check": "Displayed action: menu_confirm_new",
+			"passed": true
+		},
+		{
+			"check": "Confirmed new colony writes a full restoration history before starting day1 at05:00",
+			"passed": true
+		},
+		{
+			"check": "Confirmed new game uses central keeper and idol",
+			"passed": true
+		}
+	],
+	"failures": 0,
+	"method": "Godot InputEvent dispatch at1280x800 and1920x1080 with private user data. Not physical OS input or human play."
+}
