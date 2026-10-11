@@ -1,20 +1,13 @@
 extends RefCounted
 ## Read-only explanations. Never sample AI, advance time, or change orders.
 const SAVE_BOUNDARY="終了・再起動は日開始から。日中・夜の買い物や作業は元に戻ります。"
-const CARRIED_EGG="回収済みの卵。1個5Gで売却できます。\n所持中は孵化せず、地面には戻せません。"
+const CARRIED_EGG="卵は食料・売却用の現物です。1個5G。\n禁止中の卵は食事・運搬・売却に使いません。"
 
-static func span(low: int, high: int) -> String:
-	return str(low) if low==high else "%d〜%d"%[low,high]
-
-static func eggs(w,items: Array,reserved: bool) -> Array:
+static func eggs(_w,items: Array,reserved: bool) -> Array:
 	if items.is_empty():return []
-	var waits=items.map(func(item):return maxi(1,int(item.get("born_day",w.campaign.day))+2-int(w.campaign.day)))
-	var soon=int(waits.min());var late=int(waits.max());var day=int(w.campaign.day)
-	return ["卵 %d個 · 回収して売却：1個5G"%items.size(),
-		"回収予約あり →「取消」で残す" if reserved else "鶏の入場は空き・初産は生存と活動が条件",
-		"拾うと孵化できず、地面にも戻せません",
-		"成功夜明けあと%s回でひよこ／%s回で鶏"%[span(soon,late),span(soon+1,late+1)],
-		"入口加入最短%s日目／初産最短%s日目"%[span(day+soon+1,day+late+1),span(day+soon+2,day+late+2)]]
+	var count=0
+	for item in items:count+=item.get("amount",1)
+	return ["卵 %d個 · 食料 / 売却：1個5G"%count,"回収指定あり → 保管域へ運搬" if reserved else "命令タブから回収・禁止・禁止解除", "禁止中の卵は食事・運搬・売却に使いません"]
 
 static func dog(w,a: Dictionary) -> Array:
 	if a.get("dead",false):return ["亡くなっています","この仲間には指示できません"]

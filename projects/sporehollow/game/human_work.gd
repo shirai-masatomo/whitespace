@@ -5,10 +5,18 @@ const Policy=preload("res://game/work_policy.gd")
 static func register(w,key: String,actor: Dictionary):
 	w.workers[key]=actor
 	actor.work_key=key
-	actor.work_priorities=actor.get("work_priorities",Policy.PRIORITIES.duplicate())
+	migrate_priorities(actor)
 	actor.work_job=-1
 	actor.work_status="仕事を探しています"
 	actor.drafted=actor.get("drafted",false)
+
+static func migrate_priorities(actor: Dictionary):
+	if not actor.has("work_priorities"):actor.work_priorities=Policy.PRIORITIES.duplicate();actor.work_priority_version=Policy.PRIORITY_VERSION;return
+	var legacy=int(actor.get("work_priority_version",1))<Policy.PRIORITY_VERSION
+	for kind in Policy.ORDER:
+		var value=int(actor.work_priorities.get(kind,Policy.PRIORITIES[kind] if not legacy else 3))
+		actor.work_priorities[kind]=clampi(value+1 if legacy and value>0 else value,0,4)
+	actor.work_priority_version=Policy.PRIORITY_VERSION
 
 static func category(w,j) -> String:
 	if j.has("work_category"):return j.work_category
@@ -48,7 +56,7 @@ static func interrupt(w,key: String,reason: String):
 
 static func set_priority(w,key: String,kind: String,value: int):
 	if not w.workers.has(key) or not Policy.PRIORITIES.has(kind):return
-	w.workers[key].work_priorities[kind]=clampi(value,0,3)
+	w.workers[key].work_priorities[kind]=clampi(value,0,4)
 	interrupt(w,key,"優先設定を再評価")
 
 static func set_drafted(w,key: String,value: bool):
@@ -107,9 +115,11 @@ static func choose(w,key: String) -> Dictionary:
 	var a=w.workers[key]
 	var candidates=w.jobs.filter(func(j):return j.get("assigned_to","")=="" and not j.get("cancel_requested",false) and w.tick>=j.get("retry_at",0) and (key=="keeper" or shared(w,j)) and (j.kind=="move" or a.work_priorities.get(category(w,j),3)>0))
 	candidates.sort_custom(func(x,y):
-		var px=0 if x.kind=="move" else a.work_priorities.get(category(w,x),3)
-		var py=0 if y.kind=="move" else a.work_priorities.get(category(w,y),3)
+		var px=0 if x.kind=="move" else a.work_priorities.get(category(w,x),4)
+		var py=0 if y.kind=="move" else a.work_priorities.get(category(w,y),4)
 		if px!=py:return px<py
+		var cx=Policy.ORDER.find(category(w,x));var cy=Policy.ORDER.find(category(w,y))
+		if cx!=cy:return cx<cy
 		var dx=w.distance(a.pos,x.pos);var dy=w.distance(a.pos,y.pos)
 		return dx<dy if dx!=dy else x.id<y.id)
 	for j in candidates:
@@ -164,12 +174,13 @@ static func save(w):
 	w.campaign.work_profiles={}
 	for key in w.workers:
 		var a=w.workers[key]
-		w.campaign.work_profiles[key]={"priorities":a.work_priorities.duplicate(),"drafted":a.drafted,"satiety":a.get("satiety",Policy.SATIETY_MAX)}
+		w.campaign.work_profiles[key]={"priorities":a.work_priorities.duplicate(),"version":Policy.PRIORITY_VERSION,"drafted":a.drafted,"satiety":a.get("satiety",Policy.SATIETY_MAX)}
 
 static func restore(w):
 	register(w,"keeper",w.keeper)
 	var profile=w.campaign.get("work_profiles",{}).get("keeper",{})
-	for kind in Policy.PRIORITIES:w.keeper.work_priorities[kind]=clampi(int(profile.get("priorities",{}).get(kind,Policy.PRIORITIES[kind])),0,3)
+	if profile.has("priorities"):
+		w.keeper.work_priorities=profile.priorities.duplicate();w.keeper.work_priority_version=profile.get("version",1);migrate_priorities(w.keeper)
 	w.keeper.drafted=profile.get("drafted",false)
 	w.keeper.satiety=profile.get("satiety",Policy.SATIETY_MAX)
 	for j in w.jobs:

@@ -1,0 +1,180 @@
+{
+	"failures": 0,
+	"groups": [
+		{
+			"checks": [
+				{
+					"check": "Old eggs/chicks never transform at dawn",
+					"passed": true
+				},
+				{
+					"check": "Each available existing hen still lays one egg",
+					"passed": true
+				},
+				{
+					"check": "Egg remains usable human food",
+					"passed": true
+				},
+				{
+					"check": "Egg remains sellable",
+					"passed": true
+				},
+				{
+					"check": "Egg UI contains no hatch promise",
+					"passed": true
+				}
+			],
+			"name": "1 Eggs stay goods; hen laying and food/trade retained"
+		},
+		{
+			"checks": [
+				{
+					"check": "reserved fixture reached through production movement",
+					"passed": true
+				},
+				{
+					"check": "reserved forbid releases ownership at its actual location",
+					"passed": true
+				},
+				{
+					"check": "reserved forbidden material cannot finish construction",
+					"passed": true
+				},
+				{
+					"check": "reserved allow resumes the same job and consumes exactly its cost",
+					"passed": true
+				},
+				{
+					"check": "carry fixture reached through production movement",
+					"passed": true
+				},
+				{
+					"check": "carry forbid releases ownership at its actual location",
+					"passed": true
+				},
+				{
+					"check": "carry forbidden material cannot finish construction",
+					"passed": true
+				},
+				{
+					"check": "carry allow resumes the same job and consumes exactly its cost",
+					"passed": true
+				},
+				{
+					"check": "site fixture reached through production movement",
+					"passed": true
+				},
+				{
+					"check": "site forbid releases ownership at its actual location",
+					"passed": true
+				},
+				{
+					"check": "site forbidden material cannot finish construction",
+					"passed": true
+				},
+				{
+					"check": "site allow resumes the same job and consumes exactly its cost",
+					"passed": true
+				}
+			],
+			"name": "2 Forbid interrupts reserved, carried and delivered building stock without loss"
+		},
+		{
+			"checks": [
+				{
+					"check": "Meal is one tick from consumption",
+					"passed": true
+				},
+				{
+					"check": "Last-tick forbidden meal stays intact on the ground",
+					"passed": true
+				},
+				{
+					"check": "Forbidden food cannot be sold",
+					"passed": true
+				},
+				{
+					"check": "Equipment reached the carried stage",
+					"passed": true
+				},
+				{
+					"check": "Forbidden carried equipment is dropped and never equipped",
+					"passed": true
+				},
+				{
+					"check": "Rectangle excludes forbidden/outside stock, deduplicates and never teleports",
+					"passed": true
+				},
+				{
+					"check": "Physical hauling reaches storage; forbidden stock stays put",
+					"passed": true
+				},
+				{
+					"check": "Snapshot written",
+					"passed": true
+				},
+				{
+					"check": "Snapshot preserves forbidden flags and all quantities",
+					"passed": true
+				},
+				{
+					"check": "Campaign serialization also preserves forbid/quantity",
+					"passed": true
+				}
+			],
+			"name": "3 Forbid at meal/equip use and rectangle haul; persistence"
+		},
+		{
+			"checks": [
+				{
+					"check": "Same priority selects leftmost build category before closer gathering, then nearer wall",
+					"passed": true
+				},
+				{
+					"check": "Blank/off build excludes its jobs while other work remains",
+					"passed": true
+				},
+				{
+					"check": "Legacy off/high/medium/low maps once to off/2/3/4 without repeated migration",
+					"passed": true
+				},
+				{
+					"check": "New highest priority survives save/reload unchanged",
+					"passed": true
+				}
+			],
+			"name": "4 Priorities: left category, then distance; blank off and legacy migration"
+		},
+		{
+			"checks": [
+				{
+					"check": "Mouse drag shows preview before applying",
+					"passed": true
+				},
+				{
+					"check": "Mouse rectangle forbids both goods",
+					"passed": true
+				},
+				{
+					"check": "Single click allows only the selected cell",
+					"passed": true
+				},
+				{
+					"check": "UI collect creates one real pending haul",
+					"passed": true
+				},
+				{
+					"check": "Escape cancels command mode",
+					"passed": true
+				},
+				{
+					"check": "Roles exposes the new numbered priority",
+					"passed": true
+				}
+			],
+			"name": "5 Isolated UI input: drag preview, marks, allow/cancel and role display"
+		}
+	],
+	"method": "Controlled fixtures through production World.step; Godot mouse events on isolated GPU desktop. Simulation, not human play.",
+	"passed": true
+}

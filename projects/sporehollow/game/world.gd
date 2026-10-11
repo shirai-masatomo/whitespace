@@ -1320,7 +1320,7 @@ func train_animal(id: int) -> bool:
 	return false
 
 func items_at(p: Vector2i) -> Array:
-	return field_items.filter(func(item): return item.pos == p and item.kind != "chick" and item.get("location","ground")=="ground" and not item.get("placed",false))
+	return field_items.filter(func(item): return item.pos == p and item.kind != "chick" and item.get("location","ground")=="ground" and not item.get("placed",false) and not item.get("forbidden",false))
 
 func drop_blueprint(_p: Vector2i):
 	# All active recipes are already available; disabled hut plans no longer drop.
@@ -1328,21 +1328,9 @@ func drop_blueprint(_p: Vector2i):
 
 func process_dawn():
 	dawn_summary = {"eggs": 0, "chicks": 0, "hens": 0, "feathers": 0, "unconscious": [], "pending_blueprints": 0}
-	# Age existing field items before laying new eggs; one transition per dawn.
-	for item in field_items.duplicate():
-		if not item.get("incubating",true) or item.get("location","ground")!="ground":continue
-		if item.kind == "kennel_plan": dawn_summary.pending_blueprints += 1
-		if item.get("born_day", campaign.day) >= campaign.day: continue
-		if item.kind == "egg":
-			item.kind = "chick"
-			item.born_day = campaign.day
-			dawn_summary.chicks += 1
-		elif item.kind == "chick":
-			var id = campaign.next_animal_id
-			campaign.next_animal_id+=1
-			campaign.animals.append({"id": id, "species": "hen", "category": "bird", "lv": 1, "xp": 0, "loyalty": 0, "name": "", "affinity": null, "unavailable_through_day": 0})
-			field_items.erase(item)
-			dawn_summary.hens += 1
+	# Directive 09: eggs remain food/trade goods; legacy chicks never mature.
+	for item in field_items:
+		if item.kind=="kennel_plan":dawn_summary.pending_blueprints+=1
 	for a in animals:
 		if a.hp <= 0 and a.placed: dawn_summary.unconscious.append(a.id)
 		if a.species != "hen" or not available(a): continue

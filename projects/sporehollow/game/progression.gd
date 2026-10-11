@@ -54,12 +54,13 @@ static func equip_step(w,j):
 	if not can_equip(a,j.item_id) or a.get("equipment",{})!=j.expected_equipment:w.Jobs.complete(w,j,false);return
 	if not w.Orders.active(w,a):j.state="blocked";j.block_reason="療養中です";return
 	var cargo=w.Stock.cargo(w,"keeper",j.id)
+	if cargo.any(func(row):return row.get("forbidden",false)):w.Work.block(w,j,"装備は禁止中です。代替を探します");return
 	if j.item_id!="unequip" and cargo.is_empty():
 		var token="job:%d"%j.id
 		if j.get("material_claims",[]).is_empty():j.material_claims=w.Stock.reserve(w,j.item_id,1,token,w.keeper)
 		if j.material_claims.is_empty():j.state="blocked";j.block_reason="届く場所に装備がありません";return
 		var row=w.Stock.find(w,j.material_claims[0].stock_id)
-		if row.is_empty():j.erase("material_claims");return
+		if row.is_empty() or row.get("forbidden",false) or row.claims.get(token,0)<1:w.Stock.release_token(w,token);j.erase("material_claims");j.state="blocked";j.block_reason="予約した装備が使えません";return
 		j.phase="fetch"
 		if w.Jobs.walk(w,j,w.neighbors(row.pos)):w.Stock.pickup(w,row,token,w.keeper,j.id);j.erase("material_claims")
 		return

@@ -20,6 +20,8 @@ static func step(w,a) -> bool:
 		w.Work.interrupt(w,a.work_key,"空腹・食事を優先")
 		a.life_need="food"
 	var carried=w.Stock.cargo(w,a.work_key,-2)
+	if carried.any(func(row):return row.get("forbidden",false)):
+		interrupt(w,a);carried=[]
 	if not carried.is_empty():
 		if not a.has("meal_remaining"):
 			a.meal_remaining=ceili(Policy.EAT_SECONDS/w.DT)
@@ -36,7 +38,7 @@ static func step(w,a) -> bool:
 		return true
 	var token="food:"+a.work_key
 	var target=w.Stock.find(w,a.get("food_target",-1))
-	if target.is_empty() or target.get("kind","") not in Policy.HUMAN_FOOD or target.get("claims",{}).get(token,0)<1:
+	if target.is_empty() or target.get("forbidden",false) or target.get("kind","") not in Policy.HUMAN_FOOD or target.get("claims",{}).get(token,0)<1:
 		w.Stock.release_token(w,token);a.erase("food_target");target={}
 		for kind in Policy.HUMAN_FOOD:
 			var claim=w.Stock.reserve(w,kind,1,token,a)

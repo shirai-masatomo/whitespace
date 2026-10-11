@@ -1,7 +1,7 @@
 config_version=5
 
 [application]
-config/name="ホイッスル牧場・自律作業研究（部分試作）"
+config/name="ホイッスル牧場・最新開発版（部分実装）"
 config/use_custom_user_dir=true
 config/custom_user_dir_name="WhistleResearchAutonomy"
 run/main_scene="res://game/main.tscn"

@@ -41,7 +41,7 @@ static func build(g):
 		var panel_height=127+list_height
 		var p=panel(g,Rect2(16,742-panel_height,900,panel_height))
 		label(p,"役割と現在の仕事",Vector2(18,12),21)
-		label(p,"各人が優先度と状態で仕事を選びます。数字は登録IDです。",Vector2(18,43),14)
+		label(p,"優先：1 最優先 / 2 高 / 3 低 / 4 最低 / 空欄 停止。同じ優先は左から。",Vector2(18,43),14)
 		var scroll=ScrollContainer.new();scroll.position=Vector2(16,79);scroll.size=Vector2(864,list_height);p.add_child(scroll)
 		var list=VBoxContainer.new();list.size_flags_horizontal=Control.SIZE_EXPAND_FILL;scroll.add_child(list)
 		for row in people:
@@ -51,10 +51,10 @@ static func build(g):
 			if not g.world.workers.has(row.key):continue
 			var priorities=HBoxContainer.new();list.add_child(priorities)
 			var a=g.world.workers[row.key]
-			for kind in g.world.Work.Policy.PRIORITIES:
+			for kind in g.world.Work.Policy.ORDER:
 				var choice=Button.new();choice.name="Priority_"+row.key+"_"+kind;choice.custom_minimum_size=Vector2(132,36);choice.focus_mode=Control.FOCUS_NONE
-				choice.text=g.world.Work.Policy.LABELS[kind]+"："+["停止","高","中","低"][a.work_priorities[kind]]
-				choice.tooltip_text="クリックで 高→中→低→停止。中断した進捗は保持します。"
+				choice.text=g.world.Work.Policy.LABELS[kind]+"　"+(str(a.work_priorities[kind]) if a.work_priorities[kind]>0 else "")
+				choice.tooltip_text="クリックで1→2→3→4→空欄。同優先は左のカテゴリから選択。"
 				g.UI.button(choice);choice.add_theme_font_size_override("font_size",14);g.UI.selected(choice,a.work_priorities[kind]==1);choice.pressed.connect(priority_changed.bind(g,row.key,kind));priorities.add_child(choice)
 			var draft=Button.new();draft.name="Draft_"+row.key;draft.custom_minimum_size=Vector2(132,36);draft.focus_mode=Control.FOCUS_NONE;draft.text="徴兵解除" if a.drafted else "徴兵する"
 			g.UI.button(draft);draft.add_theme_font_size_override("font_size",14);g.UI.selected(draft,a.drafted);draft.pressed.connect(draft_changed.bind(g,row.key));priorities.add_child(draft)
@@ -78,7 +78,7 @@ static func build(g):
 
 static func priority_changed(g,key: String,kind: String):
 	var a=g.world.workers[key]
-	g.world.Work.set_priority(g.world,key,kind,(a.work_priorities[kind]+1)%4)
+	g.world.Work.set_priority(g.world,key,kind,(a.work_priorities[kind]+1)%5)
 	g.refresh()
 
 static func draft_changed(g,key: String):

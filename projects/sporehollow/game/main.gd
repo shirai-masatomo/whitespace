@@ -27,12 +27,13 @@ var job_category="すべて"
 var queue_row_y={}
 var queue_bottom=94.0
 const ColonyPanels=preload("res://game/colony_panels.gd")
+var item_commands=preload("res://game/item_commands.gd").new()
 var colony_page=""
 var architect_category="すべて"
 var colony_panel: Control
 var colony_signature=""
 const GROUPS = ["アーキテクト", "動物"]
-const MODE_ORDER = [0,1,3] # Public tabs; internal keeper/subtask ID 2 is preserved.
+const MODE_ORDER = [0,1,3,4] # Public tabs; internal keeper/subtask ID 2 is preserved.
 const Direction=preload("res://game/direction_art.gd")
 const SixMotion=preload("res://game/six_motion.gd")
 const HumanVisual=preload("res://game/human_visual.gd")
@@ -207,6 +208,7 @@ func _ready():
 	for i in range(GROUPS.size()):
 		add_button(controls, "group%d" % i, GROUPS[i], Rect2(16 if i==0 else 208,754,184 if i==0 else 116,36), select_group.bind(i))
 	add_button(controls,"roles","役割",Rect2(332,754,116,36),select_group.bind(3))
+	add_button(controls,"commands","命令",Rect2(456,754,116,36),select_group.bind(4))
 	audio = preload("res://game/farm_audio.gd").new()
 	add_child(audio)
 	queue_controls = Control.new()
@@ -257,6 +259,7 @@ func notice(text_value: String):
 	message_until_tick = world.tick + 14
 
 func select_group(index: int):
+	item_commands.pressed=false
 	cancel_wall_stroke()
 	colony_page="roles" if index==3 else ""
 	group = -1 if index==3 else index
@@ -283,6 +286,7 @@ func command_selected(id: String, cell: Vector2i):
 	notice(world.events.back().text)
 
 func subtask_choices() -> Array:
+	if group==4:return []
 	var available: Array = []
 	if group == 0:
 		available = GROUP_TOOLS[0].filter(func(id): return (world.item_count(id.trim_prefix("place_"))>0 if id.begins_with("place_") else Farm.BUILD[id].get("blueprint", "") in ([""] + world.campaign.unlocked_blueprints)))
@@ -295,6 +299,7 @@ func subtask_choices() -> Array:
 	return subtasks.choices(group, available) if group >= 0 else []
 
 func cycle_subtool(reverse: bool = false):
+	if group==4:return
 	if not world.working() or menu_open: return
 	if group == 1 and selected_animals.is_empty():
 		notice("Shiftで指示する仲間を選択")
@@ -396,8 +401,10 @@ func refresh():
 		palette.remove_child(child)
 		child.queue_free()
 	for id in buttons.keys():
-		if id not in ["pause", "speed", "home", "advance", "retry", "group0", "group1", "group2", "menu_resume", "menu_retry", "menu_morning", "walk", "roles"]: buttons.erase(id)
+		if id not in ["pause", "speed", "home", "advance", "retry", "group0", "group1", "group2", "menu_resume", "menu_retry", "menu_morning", "walk", "roles", "commands"]: buttons.erase(id)
 	buttons.walk.visible = false
+	buttons.commands.visible=world.working() and not field_book and not field_shop
+	UI.selected(buttons.commands,group==4)
 	buttons.roles.visible=world.working() and not field_book and not field_shop
 	UI.selected(buttons.roles,colony_page=="roles")
 	UI.selected(buttons.walk, selected.get("kind")=="keeper")
@@ -484,6 +491,7 @@ func refresh():
 	if group == 2:
 		for id in subtask_choices(): UI.selected(buttons[id], subtasks.selected[2] == id)
 	ColonyPanels.build(self)
+	item_commands.build(self)
 	colony_signature=ColonyPanels.signature(self)
 	if not field_book and not field_shop: build_context_actions()
 	if debug_view and not field_book and not field_shop: build_debug_controls()
@@ -556,7 +564,7 @@ func build_context_actions():
 			rows.append([kind,StoryView.LABELS[kind],"spark",story_action.bind(kind),why!="",why if why!="" else ("牧場主が現地で3秒祈ります。1晩1回、翌朝に選んだ種類の贈り物を受け取ります" if world.Story.is_prayer(kind) else "素材1個で現地修理。最大HPを超える分は回復しません" if kind.begins_with("repair_idol") else "牧場主が現地で行います")])
 	elif not selected_resources.is_empty():
 		var pending = selected_resources.any(func(p): return not job_reserved("collect", p))
-		rows.append(["collect_selection", "回収する" if pending else "予約済み", "basket", collect_selected, not pending, "牧場主が現地で回収する。卵は拾うと孵化できません。残した卵から育つ鶏の初産は、生存・入場・活動できる場合の最短日です。"])
+		rows.append(["collect_selection", "回収する" if pending else "予約済み", "basket", collect_selected, not pending, "利用可能な現物を保管域へ運びます。卵は食料・売却に使えます。"])
 		if selected_resources.any(func(p):return job_reserved("collect",p)):
 			rows.append(["cancel_near","取消","cross",cancel_selected_work,false,"選んだ回収予定を取り消す"])
 	else:
@@ -1013,6 +1021,7 @@ func _input(event):
 		# GUI buttons receive the event; every world handler is gated by the modal.
 		return
 	if event is InputEventMouse: pointer = event.position
+	if item_commands.input(self,event):get_viewport().set_input_as_handled();return
 	if subtasks.input(self,event):
 		cancel_wall_stroke()
 		press_pending = false
@@ -1750,6 +1759,7 @@ func _draw():
 	for f in dust:
 		Delivered.draw_clip(self,"fx/"+f.kind,f.pos,visual_time-f.at)
 	draw_work_plans()
+	item_commands.draw(self)
 	for cell in selected_trees:
 		if selected.get("kind")=="tree": draw_rect(Rect2(center(cell)-Vector2(21,21),Vector2(42,42)),Color("ffe2a3"),false,2)
 	if debug_view: StoryView.debug(self)
@@ -1915,12 +1925,11 @@ func draw_hud():
 		draw_card_icon(hud, "gold", Vector2(786, 127), 0.9)
 		label_on(hud, Vector2(819, 138), "+%d" % (world.score.gold + world.early_finish_bonus), 27, Color("85652f"))
 		var x = 460
-		for row in [["egg", world.dawn_summary.eggs], ["hen", world.dawn_summary.chicks], ["feather", world.dawn_summary.feathers]]:
+		for row in [["egg", world.dawn_summary.eggs], ["feather", world.dawn_summary.feathers]]:
 			if row[1] <= 0: continue
 			draw_card_icon(hud, row[0], Vector2(x, 211), 0.8)
 			label_on(hud, Vector2(x + 28, 221), "+%d" % row[1], 24)
 			x += 135
-		if world.dawn_summary.hens > 0: label_on(hud, Vector2(421, 266), "鶏へ成長  %d" % world.dawn_summary.hens, 19)
 		if not world.dawn_summary.unconscious.is_empty(): label_on(hud, Vector2(421, 292), "明日は休養  %d匹" % world.dawn_summary.unconscious.size(), 19)
 		return
 

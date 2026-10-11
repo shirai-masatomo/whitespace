@@ -40,4 +40,6 @@ static func restore(path: String):
 	for key in state:w.set(key,state[key])
 	# The worker registry must reference the actual keeper object after deserialization.
 	w.workers.keeper=w.keeper
+	for actor in w.workers.values():w.Work.migrate_priorities(actor)
+	w.Stock.reconcile_forbidden(w)
 	return w

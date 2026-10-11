@@ -7,7 +7,7 @@ static func normalize(w):
 		if row.has("stock_id"):continue
 		row.stock_id=w.next_stock_id;w.next_stock_id+=1
 		row.amount=1;row.location="ground";row.owner="";row.job_id=-1;row.claims={}
-		row.incubating=row.kind in ["egg","chick"]
+		row.incubating=false
 
 static func add(w,kind: String,amount: int,pos: Vector2i,location: String="ground",job_id: int=-1) -> Dictionary:
 	if amount<=0:return {}
@@ -35,6 +35,7 @@ static func init(w):
 	w.campaign.physical_stock=true;sync(w)
 
 static func free_count(row) -> int:
+	if row.get("forbidden",false):return 0
 	var reserved=0
 	for n in row.get("claims",{}).values():reserved+=n
 	return maxi(0,row.get("amount",1)-reserved)
@@ -90,7 +91,7 @@ static func reserve(w,kind: String,amount: int,token: String,actor: Dictionary,s
 
 static func pickup(w,row,token: String,actor: Dictionary,job_id: int) -> Dictionary:
 	var n=int(row.get("claims",{}).get(token,0))
-	if n<=0 or n>row.amount or row.location!="ground":return {}
+	if n<=0 or n>row.amount or row.location!="ground" or row.get("forbidden",false):return {}
 	row.claims.erase(token);row.amount-=n
 	var carried=row.duplicate(true);carried.stock_id=w.next_stock_id;w.next_stock_id+=1;carried.amount=n;carried.claims={}
 	carried.location="carry";carried.owner=actor.work_key;carried.job_id=job_id;carried.pos=actor.pos;carried.incubating=false
@@ -111,7 +112,7 @@ static func release_job(w,j):
 static func delivered(w,j) -> int:
 	var n=0
 	for row in w.field_items:
-		if row.get("location")=="site" and row.job_id==j.id and row.kind==j.resource:n+=row.amount
+		if row.get("location")=="site" and row.job_id==j.id and row.kind==j.resource and not row.get("forbidden",false):n+=row.amount
 	return n
 
 static func prepare_build(w,j,a) -> bool:
@@ -128,7 +129,7 @@ static func prepare_build(w,j,a) -> bool:
 	if j.get("material_claims",[]).is_empty():j.material_claims=reserve(w,j.resource,mini(Policy.CARRY_CAPACITY,required-delivered(w,j)),token,a)
 	if j.material_claims.is_empty():j.state="blocked";j.block_reason="資材不足・届く場所の資材を待つ";return false
 	var row=find(w,j.material_claims[0].stock_id)
-	if row.is_empty() or row.claims.get(token,0)<=0:j.erase("material_claims");j.state="blocked";j.block_reason="予約した資材がなくなりました";return false
+	if row.is_empty() or row.get("forbidden",false) or row.claims.get(token,0)<=0:j.erase("material_claims");j.state="blocked";j.block_reason="予約した資材がなくなりました";return false
 	j.phase="fetch"
 	if not w.Jobs.walk(w,j,w.neighbors(row.pos),a):return false
 	pickup(w,row,token,a,j.id);j.material_claims.pop_front();j.state="working";return false
@@ -136,7 +137,8 @@ static func prepare_build(w,j,a) -> bool:
 static func finish_build(w,j,success: bool):
 	for row in w.field_items.duplicate():
 		if row.get("location")!="site" or row.job_id!=j.id:continue
-		if success:w.stock_used[row.kind]=w.stock_used.get(row.kind,0)+row.amount;w.field_items.erase(row)
+		if row.get("forbidden",false):row.location="ground";row.owner="";row.job_id=-1;row.erase("forbidden_reconciled")
+		elif success:w.stock_used[row.kind]=w.stock_used.get(row.kind,0)+row.amount;w.field_items.erase(row)
 		else:
 			var refund=floori(row.amount*w.Rules.INTERRUPT_REFUND) if j.started else row.amount
 			w.stock_used[row.kind]=w.stock_used.get(row.kind,0)+row.amount-refund
@@ -172,6 +174,7 @@ static func haul_step(w,j,a):
 		sync(w);w.Jobs.complete(w,j,true);return
 	var row=find(w,j.get("stock_id",-1))
 	if row.is_empty() or row.kind=="chick":w.Jobs.complete(w,j,false);return
+	if row.get("forbidden",false):j.state="blocked";j.block_reason="対象の物資は禁止中です";return
 	var token="job:%d"%j.id
 	if row.claims.get(token,0)<=0:
 		if destination(w,a,mini(Policy.CARRY_CAPACITY,free_count(row)))==null:j.state="blocked";j.block_reason="使える保管域を指定してください";return
@@ -182,6 +185,7 @@ static func haul_step(w,j,a):
 
 static func step(w):
 	normalize(w)
+	reconcile_forbidden(w)
 	for row in w.field_items:
 		if row.location=="carry":
 			if w.workers.has(row.owner):row.pos=w.workers[row.owner].pos
@@ -210,3 +214,51 @@ static func totals(w) -> Dictionary:
 	for e in w.enemies:
 		if not e.get("stolen",{}).is_empty():result[e.stolen.kind]=result.get(e.stolen.kind,0)+e.stolen.get("amount",1)
 	return result
+
+static func command_pos(w,row) -> Vector2i:
+	return w.workers[row.owner].pos if row.get("location")=="carry" and w.workers.has(row.get("owner","")) else row.pos
+
+static func command_targets(w,first: Vector2i,last: Vector2i,kind: String) -> Array:
+	normalize(w)
+	var result=[]
+	for row in w.field_items:
+		var p=command_pos(w,row)
+		if not w.inside(p) or row.kind=="chick" or row.get("placed",false):continue
+		if p.x<mini(first.x,last.x) or p.x>maxi(first.x,last.x) or p.y<mini(first.y,last.y) or p.y>maxi(first.y,last.y):continue
+		if kind=="haul" and (row.location!="ground" or row.get("forbidden",false)):continue
+		if kind=="forbid" and row.get("forbidden",false):continue
+		if kind=="allow" and not row.get("forbidden",false):continue
+		result.append(row)
+	return result
+
+static func enqueue_haul(w,row) -> bool:
+	if not w.working() or row.get("forbidden",false) or row.location!="ground" or row.get("placed",false) or row.kind=="chick" or w.jobs.size()>=w.Jobs.LIMIT:return false
+	if w.jobs.any(func(j):return j.get("stock_id",-1)==row.stock_id):return false
+	w.jobs.append({"id":w.next_job_id,"kind":"haul","pos":row.pos,"stock_id":row.stock_id,"animal_id":-1,"state":"pending","resource":"","reserved":0,"started":false,"work_category":"haul"});w.next_job_id+=1;w.Life.wake_auto(w);return true
+
+static func designate(w,kind: String,first: Vector2i,last: Vector2i) -> Dictionary:
+	if kind not in ["haul","forbid","allow"] or not w.working():return {"accepted":0,"skipped":0}
+	var rows=command_targets(w,first,last,kind);var accepted=0
+	for row in rows:
+		if kind=="haul":
+			if enqueue_haul(w,row):accepted+=1
+		else:
+			row.forbidden=kind=="forbid";row.erase("forbidden_reconciled");accepted+=1
+	reconcile_forbidden(w);sync(w)
+	return {"accepted":accepted,"skipped":rows.size()-accepted}
+
+static func reconcile_forbidden(w):
+	var affected=[];var food_owners=[]
+	for row in w.field_items:
+		if not row.get("forbidden",false):continue
+		for token in row.get("claims",{}):
+			if token.begins_with("job:"):affected.append(int(token.trim_prefix("job:")))
+			elif token.begins_with("food:"):food_owners.append(token.trim_prefix("food:"))
+		row.claims={}
+		if row.get("job_id",-1)>=0 and (row.get("location")!="site" or not row.get("forbidden_reconciled",false)):affected.append(row.job_id)
+		if row.get("job_id",-1)==-2:food_owners.append(row.owner)
+		if row.get("location")=="site":row.forbidden_reconciled=true
+	for j in w.jobs.duplicate():
+		if j.id in affected:w.Work.block(w,j,"予約した物資は禁止中です。代替を探します")
+	for owner in food_owners:
+		if w.workers.has(owner):w.Food.interrupt(w,w.workers[owner]);w.workers[owner].work_status="食料は禁止中です。別の食料を探します"

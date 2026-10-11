@@ -55,7 +55,7 @@ func run():
 	verify("1_eggs",w.item_count("egg")==1 and w.field_items.is_empty() and w.animals.size()==1,"Collected egg remains inventory, with no hatching or return path")
 	show(w);preload("res://game/inventory_view.gd").open(game)
 	var labels=game.story_panel.find_children("*","Label",true,false)
-	verify("1_eggs",labels.any(func(l):return l.text.contains("卵 ×1") and l.text.contains("孵化せず")),"Inventory includes owned egg and collected-state description")
+	verify("1_eggs",labels.any(func(l):return l.text.contains("卵 ×1") and l.text.contains("食料・売却用")),"Inventory includes owned egg and collected-state description")
 	game.StoryView.close(game)
 	w=fixture();var a=w.animals[0];a.mode="stay";a.home=a.pos;a.order=a.pos;a.order_until=1000;w.animal_step(a);show(w);game.choose_animal(a.id)
 	var state_before=a.duplicate(true);var desc=Clarity.dog(w,a)

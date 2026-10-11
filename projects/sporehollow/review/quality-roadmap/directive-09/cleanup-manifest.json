@@ -1,0 +1,308 @@
+{
+  "fixed_entry": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\確認入口\\最新開発版.lnk",
+  "exe": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\autonomy-entry-01\\bundle\\WhistleRanch-Autonomy-Partial.exe",
+  "launcher": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\autonomy-entry-01\\bundle\\Launch-Autonomy.ps1",
+  "actions": [
+    {
+      "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\確認入口\\01_今回_像と森と音_2c0182a.lnk",
+      "sha256": "DDFE86F631020BBE985AE62C26BB4F4A74BF6319D7D6177F778D84C66B9DE8E8",
+      "status": "recycled",
+      "action": "recycle_file"
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\playtest\\20261010-063305-249\\Play-Isolated.cmd",
+      "sha256": "D7BD47995D6978102BA89CF1470DAAA95C98EC0C85704F6154A96EE3213EDFFB",
+      "status": "recycled",
+      "action": "recycle_file"
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\playtest\\20261010-063305-249\\WhistleRanch-preview.exe",
+      "sha256": "F22B991FA1447F84D73AE88E6FA20FCF23363846924AB7722DDCE962958DA55C",
+      "status": "recycled",
+      "action": "recycle_file"
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\確認入口\\01_今回_図鑑名前欄_536005c.lnk",
+      "sha256": "6383E5E303AFFD8352887A64F0946CD95FB77217827471CF9096B45E9F4DBBE3",
+      "status": "recycled",
+      "action": "recycle_file"
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\playtest\\20261010-040326-507\\Play-Isolated.cmd",
+      "sha256": "D7BD47995D6978102BA89CF1470DAAA95C98EC0C85704F6154A96EE3213EDFFB",
+      "status": "recycled",
+      "action": "recycle_file"
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\playtest\\20261010-040326-507\\WhistleRanch-preview.exe",
+      "sha256": "8810261DEE38A6344FEF8501DDF7EC0929B47087FD5FCC03B59EECDB13528AA7",
+      "status": "recycled",
+      "action": "recycle_file"
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\確認入口\\01_今回_図鑑画像枠統一_c5c2833.lnk",
+      "sha256": "CA8DA82D3C6C76B67451F6A90D27975A944606B662CFEF710C9CCF3264F2F36B",
+      "status": "recycled",
+      "action": "recycle_file"
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\playtest\\20261010-034957-716\\Play-Isolated.cmd",
+      "sha256": "D7BD47995D6978102BA89CF1470DAAA95C98EC0C85704F6154A96EE3213EDFFB",
+      "status": "recycled",
+      "action": "recycle_file"
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\playtest\\20261010-034957-716\\WhistleRanch-preview.exe",
+      "sha256": "9BD1AB1D63FD447331A62EE978E635E2B8FA1864C6F673A130F543C605AAB151",
+      "status": "recycled",
+      "action": "recycle_file"
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\確認入口\\01_今回_行商人口パク_35038b6.lnk",
+      "sha256": "936E68ADCAAB9A4CE6DC5FC95A856442143A374C0E44C50880CC1E699BBF7335",
+      "status": "recycled",
+      "action": "recycle_file"
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\playtest\\20261010-050021-975\\Play-Isolated.cmd",
+      "sha256": "D7BD47995D6978102BA89CF1470DAAA95C98EC0C85704F6154A96EE3213EDFFB",
+      "status": "recycled",
+      "action": "recycle_file"
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\playtest\\20261010-050021-975\\WhistleRanch-preview.exe",
+      "sha256": "DE233DACE6561C2CE0318241C121CD734DF46DD0B5788A7DA53725162FD0B2D0",
+      "status": "recycled",
+      "action": "recycle_file"
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\確認入口\\01_最新試遊.lnk",
+      "sha256": "AD0762A4B3F19C57692CFF750C22D0386AB0EC33781582201F883AF4BDCB0C1B",
+      "status": "recycled",
+      "action": "recycle_file"
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\確認入口\\01_本体試遊_卵と柴犬_9656b26.lnk",
+      "sha256": "D575409EB3A61E82EFBD988C6E84691AD9F6AA6E86824288FE534E3512237637",
+      "error": "\"4\" 個の引数を指定して \"DeleteFile\" を呼び出し中に例外が発生しました: \"システム コール レベルが間違っています。\"",
+      "status": "recycled",
+      "action": "recycle_file"
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\onsite-clarity\\projects\\sporehollow\\artifacts\\onsite-clarity\\20261011-001433-192\\Play-Onsite-Clarity.cmd",
+      "sha256": "7FF44D2D3F4A80CBA76A12A9D1EAEB5CB963899DEFA2090D1D1FF5EAB67E5122",
+      "status": "recycled",
+      "action": "recycle_file"
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\onsite-clarity\\projects\\sporehollow\\artifacts\\onsite-clarity\\20261011-001433-192\\WhistleRanch-onsite-clarity.exe",
+      "sha256": "EF3431C7C4200E94E9107494D951596D65FF77ECD5E946A0686E7CCDF6977025",
+      "status": "recycled",
+      "action": "recycle_file"
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\確認入口\\01_研究試遊_2条件_5d154d4.lnk",
+      "sha256": "6B70A8418A37F190F0E96806CA329EC63B000E29AFFA5B629F67DC22EF22CE74",
+      "status": "recycled",
+      "action": "recycle_file"
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\research-pair\\projects\\sporehollow\\artifacts\\research\\20261010-183016-383\\Play-Research.cmd",
+      "sha256": "91C46F17E2BBFDD445FF275713E8333347E213B9D27EF2B49DE01A70F1C51129",
+      "status": "recycled",
+      "action": "recycle_file"
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\research-pair\\projects\\sporehollow\\artifacts\\research\\20261010-183016-383\\WhistleRanch-research.exe",
+      "sha256": "7263C7A59632F6C357B03315A427574E8A1BB318E716C8DB560D33DC8A6376EE",
+      "status": "recycled",
+      "action": "recycle_file"
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\確認入口\\01_研究試遊_3遭遇_19c588b.lnk",
+      "sha256": "2879CD81C2E777CDA63705194D041B4897F43843F94178BFDC04252B475D010C",
+      "status": "recycled",
+      "action": "recycle_file"
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-09\\task\\research-three-encounters\\projects\\sporehollow\\artifacts\\research\\20261010-180201-027\\Play-Research.cmd",
+      "sha256": "91C46F17E2BBFDD445FF275713E8333347E213B9D27EF2B49DE01A70F1C51129",
+      "status": "recycled",
+      "action": "recycle_file"
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-09\\task\\research-three-encounters\\projects\\sporehollow\\artifacts\\research\\20261010-180201-027\\WhistleRanch-research.exe",
+      "sha256": "68194FECA94F72988EA35F8EF99DC1B35A6A45C0796EF0C4D4CC37F53264031A",
+      "status": "recycled",
+      "action": "recycle_file"
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\確認入口\\01_研究試遊_4日連動_66f66ab.lnk",
+      "sha256": "26735FE5618623041ED102CA846203D472FF27380847A4EC04A2FFD1BB03F69F",
+      "status": "recycled",
+      "action": "recycle_file"
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\research-pair\\projects\\sporehollow\\artifacts\\research\\20261010-201521-430\\Play-Research.cmd",
+      "sha256": "91C46F17E2BBFDD445FF275713E8333347E213B9D27EF2B49DE01A70F1C51129",
+      "status": "recycled",
+      "action": "recycle_file"
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\research-pair\\projects\\sporehollow\\artifacts\\research\\20261010-201521-430\\WhistleRanch-research.exe",
+      "sha256": "7B36251A3DF59B69512CD25D210E6FE64F632719BD7CF1C0E8880EE33DF09CDA",
+      "status": "recycled",
+      "action": "recycle_file"
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\確認入口\\01_研究試遊_夜明け撤退_6dc6f73.lnk",
+      "sha256": "AD1BE46B0AF91D5C73D482DD3224DE8A0102AB49BC47F3477870E31A78C66679",
+      "status": "recycled",
+      "action": "recycle_file"
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\research-pair\\projects\\sporehollow\\artifacts\\research\\20261010-211529-331\\Play-Research.cmd",
+      "sha256": "91C46F17E2BBFDD445FF275713E8333347E213B9D27EF2B49DE01A70F1C51129",
+      "status": "recycled",
+      "action": "recycle_file"
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\research-pair\\projects\\sporehollow\\artifacts\\research\\20261010-211529-331\\WhistleRanch-research.exe",
+      "sha256": "5F9E41724FEAE0F1DF57239560258C727888FAC902834100C1B4814BBD277060",
+      "status": "recycled",
+      "action": "recycle_file"
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\確認入口\\01_研究試遊_導入説明_72ffae4.lnk",
+      "sha256": "C739920A1CFDE0FDEC940A80B6F54F45A1D3CF050C5A2FEEEF290B25F3861E9F",
+      "status": "recycled",
+      "action": "recycle_file"
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\research-pair\\projects\\sporehollow\\artifacts\\research\\20261010-191911-286\\Play-Research.cmd",
+      "sha256": "91C46F17E2BBFDD445FF275713E8333347E213B9D27EF2B49DE01A70F1C51129",
+      "status": "recycled",
+      "action": "recycle_file"
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\research-pair\\projects\\sporehollow\\artifacts\\research\\20261010-191911-286\\WhistleRanch-research.exe",
+      "sha256": "F0884E8788DB9A57A1CA27F8E70CB4872A18B236059E26B9406E813984230426",
+      "status": "recycled",
+      "action": "recycle_file"
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\確認入口\\01_研究試遊_持越し表示_1dcb995.lnk",
+      "sha256": "0E7B25796B83CA6E1D6A6E24D6AB2CD20DA11FF491817F3DDC469B8C246DF185",
+      "status": "recycled",
+      "action": "recycle_file"
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\research-pair\\projects\\sporehollow\\artifacts\\research\\20261010-205154-186\\Play-Research.cmd",
+      "sha256": "91C46F17E2BBFDD445FF275713E8333347E213B9D27EF2B49DE01A70F1C51129",
+      "status": "recycled",
+      "action": "recycle_file"
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\research-pair\\projects\\sporehollow\\artifacts\\research\\20261010-205154-186\\WhistleRanch-research.exe",
+      "sha256": "8D63A4F013A4F9D56DAE507498DAA3B8F8960A850D6CA1A62ACDC5C06A44EE85",
+      "status": "recycled",
+      "action": "recycle_file"
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\確認入口\\01_研究試遊_指示整合_10a50ee.lnk",
+      "sha256": "7C2C57BC533D16D2FDE4BBAE560B035930E8C5E776DE2C50C2643CDC53BF4DB2",
+      "status": "recycled",
+      "action": "recycle_file"
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\research-pair\\projects\\sporehollow\\artifacts\\research\\20261010-220021-473\\Play-Research.cmd",
+      "sha256": "91C46F17E2BBFDD445FF275713E8333347E213B9D27EF2B49DE01A70F1C51129",
+      "status": "recycled",
+      "action": "recycle_file"
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\research-pair\\projects\\sporehollow\\artifacts\\research\\20261010-220021-473\\WhistleRanch-research.exe",
+      "sha256": "32E965F2AB99A24966C72181EF7DE4777941CBCA467682607E358DECDA0F113A",
+      "status": "recycled",
+      "action": "recycle_file"
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\確認入口\\01_研究試遊_朝スタミナ_23ea6a4.lnk",
+      "sha256": "83A98A8A76A77F24BADB41A063488487C8E48BF0DC69B6E4C0B9623A3167E42E",
+      "status": "recycled",
+      "action": "recycle_file"
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\research-pair\\projects\\sporehollow\\artifacts\\research\\20261010-224805-508\\Play-Research.cmd",
+      "sha256": "2759AFB125F57F34DE9A0A64D3CAA49C6F88FF8FEBD4E0EBA3714E20493889F6",
+      "status": "recycled",
+      "action": "recycle_file"
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\research-pair\\projects\\sporehollow\\artifacts\\research\\20261010-224805-508\\WhistleRanch-research-morning-23ea6a4.exe",
+      "sha256": "0F5C55F1E04AB7BE15CFDFB4C6692F624BE1B9DC534DA2FBFD7F6AFF99C4D3CA",
+      "status": "recycled",
+      "action": "recycle_file"
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\確認入口\\01_研究試遊_牧場UI_a7230e0.lnk",
+      "sha256": "9AB50F7308B9E0DEA815B18ABA5435A15BF0FC999058D9B2902E60881ECA3194",
+      "status": "recycled",
+      "action": "recycle_file"
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\research-pair\\projects\\sporehollow\\artifacts\\research\\20261010-231333-606\\Play-Research.cmd",
+      "sha256": "3A872B22E0247079BA64CFD8AE1492CA1952484A997620044573A4DD08387B66",
+      "status": "recycled",
+      "action": "recycle_file"
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\research-pair\\projects\\sporehollow\\artifacts\\research\\20261010-231333-606\\WhistleRanch-research-ui-a7230e0.exe",
+      "sha256": "0DE43C2F9B00DE254384993A6FDF6589B6BECC88236EF5C57CA6CD5334E44F0C",
+      "status": "recycled",
+      "action": "recycle_file"
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\research-pair\\projects\\sporehollow\\artifacts\\research\\20261010-231333-606\\WhistleRanch-research.exe",
+      "sha256": "0DE43C2F9B00DE254384993A6FDF6589B6BECC88236EF5C57CA6CD5334E44F0C",
+      "status": "recycled",
+      "action": "recycle_file"
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\確認入口\\01_研究試遊_黄金像防衛_2e3d551.lnk",
+      "sha256": "1070666D5E9F8A1C36BC916AAAB3D499308609DACD39A08BD566B7EA702AEF60",
+      "status": "recycled",
+      "action": "recycle_file"
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\research-pair\\projects\\sporehollow\\artifacts\\research\\20261010-214608-614\\Play-Research.cmd",
+      "sha256": "91C46F17E2BBFDD445FF275713E8333347E213B9D27EF2B49DE01A70F1C51129",
+      "status": "recycled",
+      "action": "recycle_file"
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\research-pair\\projects\\sporehollow\\artifacts\\research\\20261010-214608-614\\WhistleRanch-research.exe",
+      "sha256": "23E494F9BD3FD7DFC4FCD09CD1C37622703A10FC5BF8EAD14865456BC6EB6AAB",
+      "status": "recycled",
+      "action": "recycle_file"
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\確認入口\\研究_自律作業と食事_部分試作_2366024.lnk",
+      "sha256": "5C201D42548AF95A5448C2F4AD5471D542C1B59B95239ED0E9E383835F58DBA7",
+      "status": "recycled",
+      "action": "recycle_file"
+    },
+    {
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\autonomy-entry-01\\bundle\\自律作業と食事_部分試作.lnk",
+      "sha256": "5C201D42548AF95A5448C2F4AD5471D542C1B59B95239ED0E9E383835F58DBA7",
+      "status": "recycled",
+      "action": "recycle_file"
+    }
+  ],
+  "retained": [
+    "All repositories and Git histories",
+    "All user-data folders and normal build files",
+    "Current verified development bundle",
+    "Reference documents and image evidence"
+  ]
+}
