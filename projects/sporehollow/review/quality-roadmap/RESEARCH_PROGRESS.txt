@@ -79,3 +79,6 @@ critic指摘の「待ては旧持ち場へ戻らない」「入口加入は空�
 8deea2f。人物選択→商人左クリック→交渉→本人移動→既存店→閉じて仕事再評価。右クリックは解除/閉じ、建築/命令/ゾーン操作優先。4群15項目+隔離GPU17項目失敗0、通常EXE終了/再開PID3748→36764成功。固定最新入口更新、旧EXE退避、実セーブ2件/通常EXE SHA一致。公開候補75717f5検証済み・pushは自動承認拒否につき直接公開確認待ち。人間試遊や楽しさの証拠ではない。詳細negotiation/RESULT.txt。
 
 公開完了：ユーザー明示承認後、codex/sporehollow-colony-09へ75717f5通常push、remote一致/main不変。CI対象なし。codex_test現容量1.305GB、全体整理前未測定。詳細negotiation/RESULT.txt。
+
+[素材入口整理]
+図鑑は牧場主選択→画面下「図鑑」。現行EXE内パックで動物/敵頁と既存本表示を確認。codex_test配下「素材」に分類入口と実体参照画像一覧1201件を設置、素材コピーなし。旧preview等141件35,096,287bytesをごみ箱へ、before-asset-organize-20261011から復元可。使用EXE/通常版/実セーブ/BGM SHA不変。local/public importと参照欠落0。今後も同一覧/最新記録を更新し入口や中間成果を積み上げない。詳細asset-organize/STATE.json。

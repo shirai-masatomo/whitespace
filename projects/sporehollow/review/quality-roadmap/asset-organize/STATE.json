@@ -1,0 +1,2045 @@
+{
+  "summary": "Current assets referenced through one shallow user entry; old previews recycled; normal build, current EXE, saves and BGM unchanged.",
+  "book_entry": "牧場主を左クリック→画面下「図鑑」→上部「動物／敵」",
+  "book_verification": "Three InputEvent checks passed. Godot loads the unchanged exported EXE embedded pack with an external capture script on a private desktop; controlled fixture, not physical OS input.",
+  "asset_index": {
+    "local_files": 1201,
+    "public_files": 1200,
+    "reason_for_difference": "Local provided BGM omitted from public distribution as before",
+    "missing_references": 0,
+    "visual_review": "Gallery and book screenshots inspected",
+    "godot_import": "Local and public copies passed"
+  },
+  "cleanup": {
+    "recycled_bytes": 35096287.0,
+    "recycled_count": 141,
+    "shortcuts": [
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\素材\\index.html",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\00_使用素材を画像で見る.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\animal_tamer_motion_v1\\hurt",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\調教師\\調教師・被弾.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\animal_tamer_motion_v1\\idle",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\調教師\\調教師・待機.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\animal_tamer_motion_v1\\lead",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\調教師\\調教師・lead.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\animal_tamer_motion_v1\\retreat",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\調教師\\調教師・退却.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\animal_tamer_motion_v1\\tame",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\調教師\\調教師・tame.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\animal_tamer_motion_v1\\tame_end",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\調教師\\調教師・tame_end.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\animal_tamer_motion_v1\\walk",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\調教師\\調教師・歩行.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\characters_motion_v1\\keeper\\idle_left_00.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\牧場主\\牧場主・基本動作・idle_left_00.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\characters_motion_v1\\keeper\\rest_left_00.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\牧場主\\牧場主・基本動作・rest_left_00.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\characters_motion_v1\\keeper\\rest_left_01.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\牧場主\\牧場主・基本動作・rest_left_01.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\characters_motion_v1\\keeper\\rest_right_00.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\牧場主\\牧場主・基本動作・rest_right_00.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\characters_motion_v1\\keeper\\rest_right_01.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\牧場主\\牧場主・基本動作・rest_right_01.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\characters_motion_v1\\keeper\\settle_left_00.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\牧場主\\牧場主・基本動作・settle_left_00.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\characters_motion_v1\\keeper\\settle_left_01.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\牧場主\\牧場主・基本動作・settle_left_01.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\characters_motion_v1\\keeper\\settle_right_00.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\牧場主\\牧場主・基本動作・settle_right_00.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\characters_motion_v1\\keeper\\settle_right_01.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\牧場主\\牧場主・基本動作・settle_right_01.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\characters_motion_v1\\keeper\\sleep_left_00.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\牧場主\\牧場主・基本動作・sleep_left_00.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\characters_motion_v1\\keeper\\sleep_left_01.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\牧場主\\牧場主・基本動作・sleep_left_01.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\characters_motion_v1\\keeper\\sleep_right_00.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\牧場主\\牧場主・基本動作・sleep_right_00.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\characters_motion_v1\\keeper\\sleep_right_01.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\牧場主\\牧場主・基本動作・sleep_right_01.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\characters_motion_v1\\keeper\\wake_left_00.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\牧場主\\牧場主・基本動作・wake_left_00.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\characters_motion_v1\\keeper\\wake_left_01.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\牧場主\\牧場主・基本動作・wake_left_01.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\characters_motion_v1\\keeper\\wake_right_00.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\牧場主\\牧場主・基本動作・wake_right_00.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\characters_motion_v1\\keeper\\wake_right_01.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\牧場主\\牧場主・基本動作・wake_right_01.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\characters_motion_v1\\keeper\\walk_left_00.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\牧場主\\牧場主・基本動作・walk_left_00.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\characters_motion_v1\\keeper\\walk_left_01.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\牧場主\\牧場主・基本動作・walk_left_01.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\characters_motion_v1\\keeper\\walk_left_02.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\牧場主\\牧場主・基本動作・walk_left_02.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\characters_motion_v1\\keeper\\walk_left_03.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\牧場主\\牧場主・基本動作・walk_left_03.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\characters_motion_v1\\keeper\\walk_right_00.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\牧場主\\牧場主・基本動作・walk_right_00.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\characters_motion_v1\\keeper\\walk_right_01.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\牧場主\\牧場主・基本動作・walk_right_01.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\characters_motion_v1\\keeper\\walk_right_02.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\牧場主\\牧場主・基本動作・walk_right_02.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\characters_motion_v1\\keeper\\walk_right_03.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\牧場主\\牧場主・基本動作・walk_right_03.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\characters_v1\\keeper_idle_right_00.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\牧場主\\牧場主・基本姿勢・keeper_idle_right_00.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\dancer_motion_v1\\attack",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\踊り子\\踊り子・攻撃.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\dancer_motion_v1\\dance",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\踊り子\\踊り子・dance.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\dancer_motion_v1\\downed",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\踊り子\\踊り子・倒れる.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\dancer_motion_v1\\get_up",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\踊り子\\踊り子・起き上がる.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\dancer_motion_v1\\hurt",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\踊り子\\踊り子・被弾.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\dancer_motion_v1\\idle",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\踊り子\\踊り子・待機.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\dancer_motion_v1\\retreat",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\踊り子\\踊り子・退却.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\dancer_motion_v1\\revival_light",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\踊り子\\踊り子・revival_light.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\dancer_motion_v1\\ultimate",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\踊り子\\踊り子・ultimate.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\dancer_motion_v1\\walk",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\踊り子\\踊り子・歩行.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\destroyer_motion_v1\\hurt",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\破壊者\\破壊者・被弾.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\destroyer_motion_v1\\idle",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\破壊者\\破壊者・待機.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\destroyer_motion_v1\\iron_ball_hit",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\破壊者\\破壊者・iron_ball_hit.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\destroyer_motion_v1\\iron_ball_windup",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\破壊者\\破壊者・iron_ball_windup.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\destroyer_motion_v1\\retreat",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\破壊者\\破壊者・退却.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\destroyer_motion_v1\\walk",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\破壊者\\破壊者・歩行.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\destroyer_motion_v1\\weapon\\hurt",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\破壊者\\破壊者・武器・被弾.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\destroyer_motion_v1\\weapon\\idle",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\破壊者\\破壊者・武器・待機.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\destroyer_motion_v1\\weapon\\iron_ball_hit",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\破壊者\\破壊者・武器・iron_ball_hit.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\destroyer_motion_v1\\weapon\\iron_ball_windup",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\破壊者\\破壊者・武器・iron_ball_windup.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\destroyer_motion_v1\\weapon\\retreat",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\破壊者\\破壊者・武器・退却.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\destroyer_motion_v1\\weapon\\walk",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\破壊者\\破壊者・武器・歩行.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\kidnapper_basic_v1\\attack",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\誘拐者\\誘拐者・基本動作.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\kidnapper_basic_v1\\carry",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\誘拐者\\誘拐者・基本動作 (2).lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\kidnapper_basic_v1\\idle",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\誘拐者\\誘拐者・基本動作 (3).lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\kidnapper_basic_v1\\walk",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\誘拐者\\誘拐者・基本動作 (4).lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\kidnapper_reactions_v1\\discovery",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\誘拐者\\誘拐者・反応.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\kidnapper_reactions_v1\\hit",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\誘拐者\\誘拐者・反応 (2).lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\kidnapper_reactions_v1\\retreat",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\誘拐者\\誘拐者・反応 (3).lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\kidnapper_reactions_v1\\search",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\誘拐者\\誘拐者・反応 (4).lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\maid_motion_v1\\attack",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\メイド\\メイド・攻撃.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\maid_motion_v1\\coffee_serve",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\メイド\\メイド・coffee_serve.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\maid_motion_v1\\death",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\メイド\\メイド・死亡.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\maid_motion_v1\\drink",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\メイド\\メイド・drink.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\maid_motion_v1\\get_up",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\メイド\\メイド・起き上がる.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\maid_motion_v1\\hurt",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\メイド\\メイド・被弾.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\maid_motion_v1\\idle",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\メイド\\メイド・待機.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\maid_motion_v1\\rage_attack",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\メイド\\メイド・rage_attack.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\maid_motion_v1\\rage_aura",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\メイド\\メイド・rage_aura.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\maid_motion_v1\\rage_end",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\メイド\\メイド・rage_end.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\maid_motion_v1\\rage_run",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\メイド\\メイド・rage_run.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\maid_motion_v1\\rage_start",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\メイド\\メイド・rage_start.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\maid_motion_v1\\rest",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\メイド\\メイド・rest.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\maid_motion_v1\\retreat",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\メイド\\メイド・退却.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\maid_motion_v1\\twirl",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\メイド\\メイド・twirl.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\maid_motion_v1\\walk",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\メイド\\メイド・歩行.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\martial_artist_motion_v1\\attack",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\格闘家\\格闘家・攻撃.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\martial_artist_motion_v1\\bow",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\格闘家\\格闘家・bow.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\martial_artist_motion_v1\\bow_end",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\格闘家\\格闘家・bow_end.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\martial_artist_motion_v1\\hurt",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\格闘家\\格闘家・被弾.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\martial_artist_motion_v1\\idle",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\格闘家\\格闘家・待機.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\martial_artist_motion_v1\\kick",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\格闘家\\格闘家・kick.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\martial_artist_motion_v1\\retreat",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\格闘家\\格闘家・退却.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\martial_artist_motion_v1\\stance",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\格闘家\\格闘家・stance.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\martial_artist_motion_v1\\walk",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\格闘家\\格闘家・歩行.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\merchant_motion_v1\\cart_idle",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\商人\\商人・cart_idle.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\merchant_motion_v1\\cart_move",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\商人\\商人・cart_move.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\merchant_motion_v1\\idle",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\商人\\商人・待機.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\merchant_motion_v1\\walk",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\商人\\商人・歩行.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\ninja_motion_v1\\dagger",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\忍者\\忍者・dagger.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\ninja_motion_v1\\hurt",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\忍者\\忍者・被弾.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\ninja_motion_v1\\idle",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\忍者\\忍者・待機.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\ninja_motion_v1\\parts\\shuriken.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\忍者\\忍者・部品・shuriken.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\ninja_motion_v1\\retreat",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\忍者\\忍者・退却.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\ninja_motion_v1\\shuriken",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\忍者\\忍者・shuriken.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\ninja_motion_v1\\walk",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\忍者\\忍者・歩行.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\ninja_motion_v1\\weapon\\dagger",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\忍者\\忍者・武器・dagger.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\runner_motion_v1\\attack",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\走者\\走者・攻撃.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\runner_motion_v1\\hurt",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\走者\\走者・被弾.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\runner_motion_v1\\idle",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\走者\\走者・待機.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\runner_motion_v1\\retreat",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\走者\\走者・退却.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\runner_motion_v1\\run",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\走者\\走者・走行.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\runner_motion_v1\\tired",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\走者\\走者・tired.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\runner_motion_v1\\tired_enter",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\走者\\走者・tired_enter.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\runner_motion_v1\\tired_exit",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\走者\\走者・tired_exit.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\salaryman_motion_v1\\hurt",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\会社員\\会社員・被弾.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\salaryman_motion_v1\\idle",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\会社員\\会社員・待機.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\salaryman_motion_v1\\phone_call",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\会社員\\会社員・phone_call.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\salaryman_motion_v1\\phone_put",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\会社員\\会社員・phone_put.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\salaryman_motion_v1\\phone_take",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\会社員\\会社員・phone_take.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\salaryman_motion_v1\\retreat",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\会社員\\会社員・退却.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\salaryman_motion_v1\\walk",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\会社員\\会社員・歩行.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\thief_motion_v1\\attack",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\盗賊\\盗賊・攻撃.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\thief_motion_v1\\downed",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\盗賊\\盗賊・倒れる.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\thief_motion_v1\\get_up",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\盗賊\\盗賊・起き上がる.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\thief_motion_v1\\hand_front",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\盗賊\\盗賊・hand_front.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\thief_motion_v1\\hurt",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\盗賊\\盗賊・被弾.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\thief_motion_v1\\idle",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\盗賊\\盗賊・待機.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\thief_motion_v1\\poison_throw",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\盗賊\\盗賊・poison_throw.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\thief_motion_v1\\retreat",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\盗賊\\盗賊・退却.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\thief_motion_v1\\run",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\盗賊\\盗賊・走行.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\thief_motion_v1\\steal",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\盗賊\\盗賊・steal.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\ui_world_direction_v2\\candidates\\dancer\\fan_raise.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\踊り子\\踊り子・追加姿勢・fan_raise.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\ui_world_direction_v2\\candidates\\dancer\\fan_spread.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\踊り子\\踊り子・追加姿勢・fan_spread.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\ui_world_direction_v2\\candidates\\kokeshi\\idle.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\kokeshi\\kokeshi・追加姿勢・idle.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\ui_world_direction_v2\\candidates\\maid\\chase.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\メイド\\メイド・追加姿勢・chase.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\ui_world_direction_v2\\candidates\\maid\\rage.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\メイド\\メイド・追加姿勢・rage.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\ui_world_direction_v2\\candidates\\thief\\poison_windup.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\盗賊\\盗賊・追加姿勢・poison_windup.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\ui_world_direction_v2\\candidates\\thief\\steal.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\人物\\盗賊\\盗賊・追加姿勢・steal.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\bull_motion_v1\\attack",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\動物\\雄牛\\雄牛・攻撃.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\bull_motion_v1\\charge",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\動物\\雄牛\\雄牛・charge.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\bull_motion_v1\\charge_end",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\動物\\雄牛\\雄牛・charge_end.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\bull_motion_v1\\charge_start",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\動物\\雄牛\\雄牛・charge_start.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\bull_motion_v1\\death",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\動物\\雄牛\\雄牛・死亡.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\bull_motion_v1\\guts",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\動物\\雄牛\\雄牛・guts.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\bull_motion_v1\\guts_breath",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\動物\\雄牛\\雄牛・guts_breath.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\bull_motion_v1\\hurt",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\動物\\雄牛\\雄牛・被弾.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\bull_motion_v1\\idle",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\動物\\雄牛\\雄牛・待機.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\bull_motion_v1\\run",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\動物\\雄牛\\雄牛・走行.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\bullfrog_motion_v1\\croak",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\動物\\ウシガエル\\ウシガエル・croak.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\bullfrog_motion_v1\\hurt",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\動物\\ウシガエル\\ウシガエル・被弾.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\bullfrog_motion_v1\\idle",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\動物\\ウシガエル\\ウシガエル・待機.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\bullfrog_motion_v1\\move",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\動物\\ウシガエル\\ウシガエル・move.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\bullfrog_motion_v1\\parts",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\動物\\ウシガエル\\ウシガエル・部品.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\bullfrog_motion_v1\\tongue",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\動物\\ウシガエル\\ウシガエル・tongue.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\bullfrog_motion_v1\\tongue_extend",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\動物\\ウシガエル\\ウシガエル・tongue_extend.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\bullfrog_motion_v1\\tongue_retract",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\動物\\ウシガエル\\ウシガエル・tongue_retract.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\characters_motion_v1\\shiba\\rest_left_00.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\動物\\柴犬\\柴犬・基本動作・rest_left_00.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\characters_motion_v1\\shiba\\rest_left_01.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\動物\\柴犬\\柴犬・基本動作・rest_left_01.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\characters_motion_v1\\shiba\\rest_right_00.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\動物\\柴犬\\柴犬・基本動作・rest_right_00.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\characters_motion_v1\\shiba\\rest_right_01.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\動物\\柴犬\\柴犬・基本動作・rest_right_01.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\characters_motion_v1\\shiba\\settle_left_00.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\動物\\柴犬\\柴犬・基本動作・settle_left_00.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\characters_motion_v1\\shiba\\settle_left_01.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\動物\\柴犬\\柴犬・基本動作・settle_left_01.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\characters_motion_v1\\shiba\\settle_right_00.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\動物\\柴犬\\柴犬・基本動作・settle_right_00.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\characters_motion_v1\\shiba\\settle_right_01.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\動物\\柴犬\\柴犬・基本動作・settle_right_01.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\characters_motion_v1\\shiba\\wake_left_00.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\動物\\柴犬\\柴犬・基本動作・wake_left_00.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\characters_motion_v1\\shiba\\wake_left_01.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\動物\\柴犬\\柴犬・基本動作・wake_left_01.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\characters_motion_v1\\shiba\\wake_right_00.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\動物\\柴犬\\柴犬・基本動作・wake_right_00.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\characters_motion_v1\\shiba\\wake_right_01.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\動物\\柴犬\\柴犬・基本動作・wake_right_01.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\characters_motion_v1\\shiba\\walk_left_00.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\動物\\柴犬\\柴犬・基本動作・walk_left_00.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\characters_motion_v1\\shiba\\walk_left_01.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\動物\\柴犬\\柴犬・基本動作・walk_left_01.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\characters_motion_v1\\shiba\\walk_left_02.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\動物\\柴犬\\柴犬・基本動作・walk_left_02.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\characters_motion_v1\\shiba\\walk_left_03.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\動物\\柴犬\\柴犬・基本動作・walk_left_03.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\characters_motion_v1\\shiba\\walk_right_00.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\動物\\柴犬\\柴犬・基本動作・walk_right_00.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\characters_motion_v1\\shiba\\walk_right_01.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\動物\\柴犬\\柴犬・基本動作・walk_right_01.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\characters_motion_v1\\shiba\\walk_right_02.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\動物\\柴犬\\柴犬・基本動作・walk_right_02.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\characters_motion_v1\\shiba\\walk_right_03.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\動物\\柴犬\\柴犬・基本動作・walk_right_03.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\characters_v1\\shiba_idle_front_00.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\動物\\柴犬\\柴犬・基本姿勢・shiba_idle_front_00.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\characters_v1\\shiba_idle_left_00.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\動物\\柴犬\\柴犬・基本姿勢・shiba_idle_left_00.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\characters_v1\\shiba_idle_right_00.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\動物\\柴犬\\柴犬・基本姿勢・shiba_idle_right_00.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\cow_motion_v1\\death",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\動物\\牛\\牛・死亡.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\cow_motion_v1\\hurt",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\動物\\牛\\牛・被弾.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\cow_motion_v1\\idle",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\動物\\牛\\牛・待機.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\cow_motion_v1\\milking_end",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\動物\\牛\\牛・milking_end.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\cow_motion_v1\\milking_hold",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\動物\\牛\\牛・milking_hold.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\cow_motion_v1\\milking_start",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\動物\\牛\\牛・milking_start.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\cow_motion_v1\\walk",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\動物\\牛\\牛・歩行.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\doberman_motion_v1\\attack",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\動物\\ドーベルマン\\ドーベルマン・攻撃.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\doberman_motion_v1\\death",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\動物\\ドーベルマン\\ドーベルマン・死亡.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\doberman_motion_v1\\hurt",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\動物\\ドーベルマン\\ドーベルマン・被弾.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\doberman_motion_v1\\idle",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\動物\\ドーベルマン\\ドーベルマン・待機.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\doberman_motion_v1\\run",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\動物\\ドーベルマン\\ドーベルマン・走行.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\doberman_motion_v1\\walk",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\動物\\ドーベルマン\\ドーベルマン・歩行.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\hedgehog_motion_v1\\defense",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\動物\\ハリネズミ\\ハリネズミ・defense.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\hedgehog_motion_v1\\defense_enter",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\動物\\ハリネズミ\\ハリネズミ・defense_enter.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\hedgehog_motion_v1\\defense_exit",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\動物\\ハリネズミ\\ハリネズミ・defense_exit.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\hedgehog_motion_v1\\hurt",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\動物\\ハリネズミ\\ハリネズミ・被弾.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\hedgehog_motion_v1\\idle",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\動物\\ハリネズミ\\ハリネズミ・待機.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\hedgehog_motion_v1\\move",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\動物\\ハリネズミ\\ハリネズミ・move.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\ranch_assets_v1\\cat\\idle_left_00.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\動物\\猫\\猫・idle_left_00.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\ranch_assets_v1\\cat\\idle_right_00.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\動物\\猫\\猫・idle_right_00.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\ranch_assets_v1\\cat\\stretch_left_00.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\動物\\猫\\猫・stretch_left_00.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\ranch_assets_v1\\cat\\stretch_left_01.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\動物\\猫\\猫・stretch_left_01.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\ranch_assets_v1\\cat\\stretch_right_00.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\動物\\猫\\猫・stretch_right_00.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\ranch_assets_v1\\cat\\stretch_right_01.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\動物\\猫\\猫・stretch_right_01.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\ranch_assets_v1\\cat\\walk_left_00.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\動物\\猫\\猫・walk_left_00.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\ranch_assets_v1\\cat\\walk_left_01.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\動物\\猫\\猫・walk_left_01.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\ranch_assets_v1\\cat\\walk_left_02.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\動物\\猫\\猫・walk_left_02.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\ranch_assets_v1\\cat\\walk_left_03.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\動物\\猫\\猫・walk_left_03.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\ranch_assets_v1\\cat\\walk_right_00.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\動物\\猫\\猫・walk_right_00.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\ranch_assets_v1\\cat\\walk_right_01.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\動物\\猫\\猫・walk_right_01.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\ranch_assets_v1\\cat\\walk_right_02.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\動物\\猫\\猫・walk_right_02.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\ranch_assets_v1\\cat\\walk_right_03.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\動物\\猫\\猫・walk_right_03.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\ranch_assets_v1\\hen\\idle_left_00.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\動物\\鶏\\鶏・idle_left_00.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\ranch_assets_v1\\hen\\idle_right_00.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\動物\\鶏\\鶏・idle_right_00.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\ranch_assets_v1\\hen\\peck_left_00.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\動物\\鶏\\鶏・peck_left_00.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\ranch_assets_v1\\hen\\peck_left_01.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\動物\\鶏\\鶏・peck_left_01.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\ranch_assets_v1\\hen\\peck_right_00.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\動物\\鶏\\鶏・peck_right_00.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\ranch_assets_v1\\hen\\peck_right_01.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\動物\\鶏\\鶏・peck_right_01.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\ranch_assets_v1\\hen\\walk_left_00.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\動物\\鶏\\鶏・walk_left_00.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\ranch_assets_v1\\hen\\walk_left_01.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\動物\\鶏\\鶏・walk_left_01.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\ranch_assets_v1\\hen\\walk_left_02.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\動物\\鶏\\鶏・walk_left_02.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\ranch_assets_v1\\hen\\walk_left_03.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\動物\\鶏\\鶏・walk_left_03.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\ranch_assets_v1\\hen\\walk_right_00.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\動物\\鶏\\鶏・walk_right_00.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\ranch_assets_v1\\hen\\walk_right_01.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\動物\\鶏\\鶏・walk_right_01.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\ranch_assets_v1\\hen\\walk_right_02.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\動物\\鶏\\鶏・walk_right_02.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\ranch_assets_v1\\hen\\walk_right_03.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\動物\\鶏\\鶏・walk_right_03.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\earth_stone_buildings_v1\\soil\\floor\\base.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\建物・世界\\土・石造・土・床・base.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\earth_stone_buildings_v1\\soil\\floor\\boundary",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\建物・世界\\土・石造・土・床・boundary.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\earth_stone_buildings_v1\\soil\\floor\\perimeter",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\建物・世界\\土・石造・土・床・外周.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\earth_stone_buildings_v1\\soil\\wall\\damaged",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\建物・世界\\土・石造・土・壁・損傷.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\earth_stone_buildings_v1\\soil\\wall\\normal",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\建物・世界\\土・石造・土・壁・通常.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\earth_stone_buildings_v1\\stone\\floor\\base.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\建物・世界\\土・石造・石・床・base.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\earth_stone_buildings_v1\\stone\\floor\\boundary",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\建物・世界\\土・石造・石・床・boundary.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\earth_stone_buildings_v1\\stone\\floor\\perimeter",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\建物・世界\\土・石造・石・床・外周.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\earth_stone_buildings_v1\\stone\\wall\\damaged",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\建物・世界\\土・石造・石・壁・損傷.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\earth_stone_buildings_v1\\stone\\wall\\normal",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\建物・世界\\土・石造・石・壁・通常.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\merchant_board_v1\\cart_idle_00.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\建物・世界\\商人の荷車・cart_idle_00.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\ui_world_direction_v1\\candidates\\new\\fossil.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\建物・世界\\化石・fossil.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\ui_world_direction_v1\\candidates\\world",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\建物・世界\\樹木・黄金像.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\wood_buildings_v1\\door",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\建物・世界\\木造・door.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\wood_buildings_v1\\floor\\boundary",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\建物・世界\\木造・床・boundary.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\wood_buildings_v1\\floor\\perimeter",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\建物・世界\\木造・床・外周.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\wood_buildings_v1\\floor\\wood_00.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\建物・世界\\木造・床・wood_00.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\wood_buildings_v1\\wall\\damaged",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\建物・世界\\木造・壁・損傷.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\wood_buildings_v1\\wall\\normal",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\建物・世界\\木造・壁・通常.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\cart_ui_detail_v1\\cart.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\UI・図鑑\\商店・cart.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\ranch_assets_v1\\book\\closing_00.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\UI・図鑑\\図鑑・closing_00.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\ranch_assets_v1\\book\\closing_01.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\UI・図鑑\\図鑑・closing_01.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\ranch_assets_v1\\book\\closing_02.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\UI・図鑑\\図鑑・closing_02.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\ranch_assets_v1\\book\\closing_03.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\UI・図鑑\\図鑑・closing_03.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\ranch_assets_v1\\book\\closing_04.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\UI・図鑑\\図鑑・closing_04.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\ranch_assets_v1\\book\\closing_05.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\UI・図鑑\\図鑑・closing_05.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\ranch_assets_v1\\book\\open_00.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\UI・図鑑\\図鑑・open_00.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\ranch_assets_v1\\book\\opening_00.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\UI・図鑑\\図鑑・opening_00.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\ranch_assets_v1\\book\\opening_01.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\UI・図鑑\\図鑑・opening_01.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\ranch_assets_v1\\book\\opening_02.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\UI・図鑑\\図鑑・opening_02.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\ranch_assets_v1\\book\\opening_03.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\UI・図鑑\\図鑑・opening_03.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\ranch_assets_v1\\book\\opening_04.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\UI・図鑑\\図鑑・opening_04.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\ranch_assets_v1\\book\\opening_05.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\UI・図鑑\\図鑑・opening_05.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\ranch_assets_v1\\book\\page_next_00.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\UI・図鑑\\図鑑・page_next_00.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\ranch_assets_v1\\book\\page_next_01.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\UI・図鑑\\図鑑・page_next_01.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\ranch_assets_v1\\book\\page_next_02.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\UI・図鑑\\図鑑・page_next_02.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\ranch_assets_v1\\book\\page_next_03.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\UI・図鑑\\図鑑・page_next_03.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\ranch_assets_v1\\book\\page_next_04.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\UI・図鑑\\図鑑・page_next_04.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\ranch_assets_v1\\book\\page_next_05.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\UI・図鑑\\図鑑・page_next_05.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\ranch_assets_v1\\book\\page_previous_00.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\UI・図鑑\\図鑑・page_previous_00.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\ranch_assets_v1\\book\\page_previous_01.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\UI・図鑑\\図鑑・page_previous_01.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\ranch_assets_v1\\book\\page_previous_02.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\UI・図鑑\\図鑑・page_previous_02.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\ranch_assets_v1\\book\\page_previous_03.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\UI・図鑑\\図鑑・page_previous_03.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\ranch_assets_v1\\book\\page_previous_04.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\UI・図鑑\\図鑑・page_previous_04.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\ranch_assets_v1\\book\\page_previous_05.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\UI・図鑑\\図鑑・page_previous_05.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\ranch_assets_v1\\scroll\\idle_none_00.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\UI・図鑑\\巻物・idle_none_00.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\resource_icons_v1\\hud24",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\UI・図鑑\\資源アイコン・hud24.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\resource_icons_v1\\ui48",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\UI・図鑑\\資源アイコン・ui48.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\resource_icons_v1\\ui96",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\UI・図鑑\\資源アイコン・ui96.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\ui_world_direction_v1\\candidates\\portraits",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\UI・図鑑\\肖像.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\ui_world_direction_v1\\candidates\\ui",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\UI・図鑑\\状態・スキル.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\assets\\adopted_ui\\animal_tamer.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\UI・図鑑\\人物・動物アイコン・animal_tamer.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\assets\\adopted_ui\\bullfrog.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\UI・図鑑\\人物・動物アイコン・bullfrog.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\assets\\adopted_ui\\collar.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\UI・図鑑\\人物・動物アイコン・collar.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\assets\\adopted_ui\\destroyer.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\UI・図鑑\\人物・動物アイコン・destroyer.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\assets\\adopted_ui\\doberman.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\UI・図鑑\\人物・動物アイコン・doberman.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\assets\\adopted_ui\\healing_berry.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\UI・図鑑\\人物・動物アイコン・healing_berry.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\assets\\adopted_ui\\hedgehog.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\UI・図鑑\\人物・動物アイコン・hedgehog.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\assets\\adopted_ui\\martial_artist.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\UI・図鑑\\人物・動物アイコン・martial_artist.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\assets\\adopted_ui\\ninja.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\UI・図鑑\\人物・動物アイコン・ninja.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\assets\\adopted_ui\\runner.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\UI・図鑑\\人物・動物アイコン・runner.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\assets\\adopted_ui\\salaryman.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\UI・図鑑\\人物・動物アイコン・salaryman.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\assets\\ui\\journal_cover_green.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\UI・図鑑\\共通UI・journal_cover_green.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\assets\\ui\\merchant_bubble_a.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\UI・図鑑\\共通UI・merchant_bubble_a.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\assets\\ui\\paper-frame.svg",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\UI・図鑑\\共通UI・paper-frame.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\assets\\ui\\trial_buy_sell.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\UI・図鑑\\共通UI・trial_buy_sell.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\assets\\ui\\merchant_mouth_v1",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\UI・図鑑\\共通UI.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\effects_v1\\attack_hit",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\効果\\戦闘効果・attack_hit.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\effects_v1\\build_complete",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\効果\\戦闘効果・build_complete.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\effects_v1\\hurt",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\効果\\戦闘効果・被弾.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\effects_v1\\item_collect",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\効果\\戦闘効果・item_collect.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\effects_v1\\lock_break",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\効果\\戦闘効果・lock_break.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\effects_v1\\soil_dust",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\効果\\戦闘効果・soil_dust.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\effects_v1\\sound_wave",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\効果\\戦闘効果・sound_wave.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\effects_v1\\sound_wave_left",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\効果\\戦闘効果・sound_wave_left.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\effects_v1\\stone_powder",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\効果\\戦闘効果・stone_powder.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\effects_v1\\wood_chips",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\効果\\戦闘効果・wood_chips.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\ui_world_direction_v1\\candidates\\new\\poison_cloud.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\効果\\毒・poison_cloud.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\ui_world_direction_v1\\candidates\\new\\poison_projectile.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\効果\\毒・poison_projectile.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\ui_world_direction_v1\\candidates\\new\\poison_splash.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\効果\\毒・poison_splash.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\art_delivery\\ui_world_direction_v2\\candidates\\maid\\rage_aura.png",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\効果\\メイド・追加姿勢・rage_aura.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\assets\\audio\\Porch_Swing_Serenade.mp3",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\音\\昼BGM・Porch_Swing_Serenade.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\assets\\fonts\\NotoSansJP.ttf",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\フォント・出典\\フォント・NotoSansJP.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\assets\\fonts\\OFL.txt",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\フォント・出典\\フォント利用条件.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\assets\\GODOT_COPYRIGHT.txt",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\フォント・出典\\Godot利用条件.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\assets\\audio\\SOURCES.md",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\フォント・出典\\音の出典.lnk"
+      },
+      {
+        "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\assets\\ui\\SOURCES.md",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材\\フォント・出典\\UIの出典.lnk"
+      }
+    ],
+    "user_root": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\素材",
+    "protected": [
+      {
+        "sha256": "EE5ED75ABD1AF47AE528461CE8F7ACF6FCA7C6F499C9A56FD1FEFE0257A9A2D7",
+        "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\autonomy-entry-01\\bundle\\WhistleRanch-Autonomy-Partial.exe"
+      },
+      {
+        "sha256": "FD222B19E8AE97988DC64F5F6BFB59FB042CA55D6E7A661BC1433F65B9DE678C",
+        "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\assets\\audio\\Porch_Swing_Serenade.mp3"
+      },
+      {
+        "sha256": "7C0906C740FF90CE55892B6852DF18E6546B3FB37057D03744EF73D75452B841",
+        "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\autonomy-entry-01\\bundle\\user-data\\WhistleResearchAutonomy\\autonomy.snapshot"
+      },
+      {
+        "sha256": "4B97293C5E657A9EBA962F2BE0AE55B31FB95196788C565D957238A886BC057D",
+        "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\autonomy-entry-01\\bundle\\user-data\\WhistleResearchAutonomy\\colony.snapshot"
+      },
+      {
+        "sha256": "774A09279BC1059583248AEB758131E984A9980916A493CE11C3CFBB9F9165E7",
+        "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\build\\WhistleRanch.exe"
+      }
+    ],
+    "restore_tag": "before-asset-organize-20261011",
+    "recycled_files": [
+      {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "path": "art_delivery/bull_motion_v1/preview/.gdignore"
+      },
+      {
+        "bytes": 2121528,
+        "sha256": "00e35d99e426cad050761258f59b64599deae82d313ed4cdcce824e24c10783b",
+        "path": "art_delivery/bull_motion_v1/preview/actions.gif"
+      },
+      {
+        "bytes": 184643,
+        "sha256": "66ebc7839aaddecc5a2b31dea971775788f42ec0842ce0d50d65fa08db05191a",
+        "path": "art_delivery/bull_motion_v1/preview/actions.png"
+      },
+      {
+        "bytes": 75539,
+        "sha256": "7481adf7aefa894ecd1708b44ee403d432a332193fda477fd49a646e2bcb1c0f",
+        "path": "art_delivery/bull_motion_v1/preview/alpha.png"
+      },
+      {
+        "bytes": 278378,
+        "sha256": "683fa428e8974a558046f6bfa55613a1cb856708fa40aed5184052f7dc0913e4",
+        "path": "art_delivery/bull_motion_v1/preview/movement.gif"
+      },
+      {
+        "bytes": 20122,
+        "sha256": "925373a64813d79c2db42b5d6ae355074242ca8d7bb2d60356fc23ac5fd4f679",
+        "path": "art_delivery/bull_motion_v1/preview/movement_samples.png"
+      },
+      {
+        "bytes": 115065,
+        "sha256": "9d7cb3badb210f49468ffa69e51cd610ac0a4937db64c6a36f06e59d8ecd52da",
+        "path": "art_delivery/cart_ui_detail_v1/review/alpha-and-zoom.png"
+      },
+      {
+        "bytes": 94826,
+        "sha256": "52ef57ae1c42552d880b2bb754f2ad3e2c48b31a23e095472b9d453bacf147d7",
+        "path": "art_delivery/cart_ui_detail_v1/review/before-after.png"
+      },
+      {
+        "bytes": 56293,
+        "sha256": "e085811b28fd4a9dac3cc941020face60fa3d25492dde65e2683695771e24569",
+        "path": "art_delivery/cart_ui_detail_v1/review/morning-size.png"
+      },
+      {
+        "bytes": 783962,
+        "sha256": "f4a080125a9cb9a4e6e9e4f6127fd70e160f3829be01b2351281e1694eb77a20",
+        "path": "art_delivery/characters_motion_v1/review/motion-rest.gif"
+      },
+      {
+        "bytes": 28994,
+        "sha256": "7feb2225f5ee70b0ae838e1f8be742d67d0ad35128eb1549df8f1335319e0d7d",
+        "path": "art_delivery/characters_motion_v1/review/rest-proof.png"
+      },
+      {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "path": "art_delivery/characters_v1/review/.gdignore"
+      },
+      {
+        "bytes": 116429,
+        "sha256": "83ce1bcc76b3656f272ae057f9be6d0229190799ed7d204ed2c7e0fcf6ccfe53",
+        "path": "art_delivery/characters_v1/review/comparison-v2.png"
+      },
+      {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "path": "art_delivery/cow_motion_v1/preview/.gdignore"
+      },
+      {
+        "bytes": 2035556,
+        "sha256": "ddc42a9140ebcce8761d2fb6bd249d1bbbc90d70dc67c407210b26794c422958",
+        "path": "art_delivery/cow_motion_v1/preview/actions.gif"
+      },
+      {
+        "bytes": 155783,
+        "sha256": "e3c3703a99330bc24b0eda7f8d1e2f190a62cbe61ea974d9e283e82336bdf7dc",
+        "path": "art_delivery/cow_motion_v1/preview/actions.png"
+      },
+      {
+        "bytes": 54432,
+        "sha256": "806aa1e2df054ce11d0ccb804ae9172bb036d0f383a916a1da453fa3c867150c",
+        "path": "art_delivery/cow_motion_v1/preview/alpha.png"
+      },
+      {
+        "bytes": 316730,
+        "sha256": "d8cb33152ace10fcb78f0da2353b85f95c8bce5a02e840c9ff7676d08cb2be9e",
+        "path": "art_delivery/cow_motion_v1/preview/movement.gif"
+      },
+      {
+        "bytes": 23731,
+        "sha256": "d191cfe98cfd013d2679e765a2d6b32b053a0902c7c598468e724cd14bf7f580",
+        "path": "art_delivery/cow_motion_v1/preview/movement_samples.png"
+      },
+      {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "path": "art_delivery/dancer_motion_v1/preview/.gdignore"
+      },
+      {
+        "bytes": 1586687,
+        "sha256": "2c648bccf7e858986d183d076b0123efc10a6ddb3bfd709fb875e1c21e128ba5",
+        "path": "art_delivery/dancer_motion_v1/preview/actions.gif"
+      },
+      {
+        "bytes": 127154,
+        "sha256": "7fdaae70ab94db926a69ec3ec0b18503a2412697f203f7e0b5ce84fb7c46fdc3",
+        "path": "art_delivery/dancer_motion_v1/preview/actions.png"
+      },
+      {
+        "bytes": 59450,
+        "sha256": "7ae2392af858887b320fff944640167c29cf0629fbeb73dde5b461a4f14f7657",
+        "path": "art_delivery/dancer_motion_v1/preview/alpha.png"
+      },
+      {
+        "bytes": 177611,
+        "sha256": "c3a0cf585eaf151a284e4f99f4508a71d904d9e279b20b30cf80a7a93dd61b24",
+        "path": "art_delivery/dancer_motion_v1/preview/movement.gif"
+      },
+      {
+        "bytes": 12117,
+        "sha256": "6b9126023e9d22130338714e041cb2da6b896bc835d61eb2806ea4d3efa519ac",
+        "path": "art_delivery/dancer_motion_v1/preview/movement_samples.png"
+      },
+      {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "path": "art_delivery/earth_stone_buildings_v1/review/.gdignore"
+      },
+      {
+        "bytes": 78520,
+        "sha256": "bc72ad70d5ac02315a5e6586c3a01d630cd87c5cbfca7c6000f25c7336f7d28c",
+        "path": "art_delivery/earth_stone_buildings_v1/review/materials-and-seams.png"
+      },
+      {
+        "bytes": 18793,
+        "sha256": "9d782fe9799c6ca9051d5ad48d2ab272846680ceba6e2d2cc629a255196802c0",
+        "path": "art_delivery/earth_stone_buildings_v1/review/mixed-room-native.png"
+      },
+      {
+        "bytes": 40205,
+        "sha256": "00209182e0b99fbadcd97421336cca936e963335e911da6dc6dbbdc427e5eb04",
+        "path": "art_delivery/effects_v1/review/effect-frames.png"
+      },
+      {
+        "bytes": 71130,
+        "sha256": "a6a6e75df03878989eb6c3ce8e1475061696f31fcc13b3ce9bbb187e5dac3717",
+        "path": "art_delivery/effects_v1/review/effects.gif"
+      },
+      {
+        "bytes": 53852,
+        "sha256": "947c8929591faecf2d5b549ce764f0d1f5e33c848ea58bab7f89ebb9c081318c",
+        "path": "art_delivery/effects_v1/review/farm-native.png"
+      },
+      {
+        "bytes": 28175,
+        "sha256": "60ae7da293a920806611d07cdfe250d6ff6953e7c03a65d23c1dba3bb579aff0",
+        "path": "art_delivery/kidnapper_basic_v1/review/basic-poses.png"
+      },
+      {
+        "bytes": 15143,
+        "sha256": "24661bf46829fa7bcf914dad24ac025f29c9e22fe8166d8ed51b56579df200f4",
+        "path": "art_delivery/kidnapper_basic_v1/review/carry-left-right.png"
+      },
+      {
+        "bytes": 5554,
+        "sha256": "9a1f5b711c70d5f7d7fb6fbd731ed5e62ef4e382cb000cf39fe9668e044bca73",
+        "path": "art_delivery/kidnapper_basic_v1/review/carry.gif"
+      },
+      {
+        "bytes": 139949,
+        "sha256": "c0c296f14961f1c5ae199131abb0bea61dc3e05e5e6edf1f13dc731598fadee4",
+        "path": "art_delivery/kidnapper_basic_v1/review/walk-stop.gif"
+      },
+      {
+        "bytes": 58175,
+        "sha256": "c39edf91e3d12dde93fb72ce95b154e89de71d74780acbadce10d2d5f084d6b2",
+        "path": "art_delivery/kidnapper_reactions_v1/review/reactions.gif"
+      },
+      {
+        "bytes": 38471,
+        "sha256": "39db1dd28557700f241136b296aa33f72d34061e7f68a42bbf785697ee0fd26a",
+        "path": "art_delivery/kidnapper_reactions_v1/review/reactions.png"
+      },
+      {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "path": "art_delivery/maid_motion_v1/preview/.gdignore"
+      },
+      {
+        "bytes": 3183854,
+        "sha256": "dfeb282b69aece3ebdbb8d7ce190ba99c7e07cc1ff572230317ab48dab1f400e",
+        "path": "art_delivery/maid_motion_v1/preview/actions.gif"
+      },
+      {
+        "bytes": 207845,
+        "sha256": "f3bf8d1d026d5c966bae5344526de6db7a2d8344321b3f740af8a7be4819d155",
+        "path": "art_delivery/maid_motion_v1/preview/actions.png"
+      },
+      {
+        "bytes": 120364,
+        "sha256": "d540709f8a6842b6662f472a3e553a121e63c11f06981ad2476adba33cfd1ca4",
+        "path": "art_delivery/maid_motion_v1/preview/alpha.png"
+      },
+      {
+        "bytes": 189710,
+        "sha256": "67862b477e11affec7084606f6e9c2c1096a10bbe7c12b4a3b3b036e3c7c244a",
+        "path": "art_delivery/maid_motion_v1/preview/movement.gif"
+      },
+      {
+        "bytes": 12685,
+        "sha256": "cbb9c2edafa37f48afeb520a3d1cb105e1e622db0c19875bd5f0f91f3b3fe3f4",
+        "path": "art_delivery/maid_motion_v1/preview/movement_samples.png"
+      },
+      {
+        "bytes": 73066,
+        "sha256": "e47197dce08547a482ce2c6cb2203a2241bb3de65ef73594d64a1e841fa614be",
+        "path": "art_delivery/merchant_board_v1/review/board-comparison.png"
+      },
+      {
+        "bytes": 22939,
+        "sha256": "577904ddead66e5511ea0a7682142607de81143264b972eb9133c1b39f1a2c38",
+        "path": "art_delivery/merchant_cart_v2/review/alpha-check.png"
+      },
+      {
+        "bytes": 88273,
+        "sha256": "a8531b415d74eaceb4ce096c123f69212ccd41690fda19fdfb87c2b5e797c376",
+        "path": "art_delivery/merchant_cart_v2/review/comparison.png"
+      },
+      {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "path": "art_delivery/merchant_motion_v1/preview/.gdignore"
+      },
+      {
+        "bytes": 1307451,
+        "sha256": "336ce50aa16eb73436780ca7c60e2a1f3645bd44b2d49696fbba2b892c31bfb1",
+        "path": "art_delivery/merchant_motion_v1/preview/actions.gif"
+      },
+      {
+        "bytes": 54297,
+        "sha256": "49a5b3f4de7cbf8163fd66a0f2914b976d25069a765da7b8e7e741de8b1f859c",
+        "path": "art_delivery/merchant_motion_v1/preview/actions.png"
+      },
+      {
+        "bytes": 24492,
+        "sha256": "e0f67e3fdea38482a01439fb769ece2811391e89174a7441779ab39f5afad9ef",
+        "path": "art_delivery/merchant_motion_v1/preview/alpha.png"
+      },
+      {
+        "bytes": 161246,
+        "sha256": "c01d2d01fe3e63c104281c62d76db3865515a41352201a3bcb032b4d43be950c",
+        "path": "art_delivery/merchant_motion_v1/preview/movement.gif"
+      },
+      {
+        "bytes": 9059,
+        "sha256": "ffec75e76f0093a7d5274e8e73aaaca7da733378e2fd7f0ff368d3254ff7f171",
+        "path": "art_delivery/merchant_motion_v1/preview/movement_samples.png"
+      },
+      {
+        "bytes": 9443,
+        "sha256": "220b7898e0c26f1c960e47295df9da9ea9d44829319bb3694919c456e065bd79",
+        "path": "art_delivery/ranch_assets_v1/review/animal-actions.png"
+      },
+      {
+        "bytes": 7943,
+        "sha256": "c47f10328b802aa6609db16d9577a1f78f146de46ab0e848b5489975f2db5585",
+        "path": "art_delivery/ranch_assets_v1/review/animals-walk-frames.png"
+      },
+      {
+        "bytes": 56868,
+        "sha256": "0caa0599fa545260d3ed410bef7f8e915917b91e43205bcd9439a87634ad5fd4",
+        "path": "art_delivery/ranch_assets_v1/review/animals-walk.gif"
+      },
+      {
+        "bytes": 16946,
+        "sha256": "8fd03aaea814cda16dad56b1095c078ce975ba663934d212892b5bfc84f28da3",
+        "path": "art_delivery/ranch_assets_v1/review/book-opening.png"
+      },
+      {
+        "bytes": 211730,
+        "sha256": "8b58d6adac84340b7cecd0355260738b93cfacae3079aadc9620dc10b0c74284",
+        "path": "art_delivery/ranch_assets_v1/review/book-sequence.gif"
+      },
+      {
+        "bytes": 74484,
+        "sha256": "20c6175ae575546e3a94866528c85d28a17a6ccef96114bd49fdf8ae62eab776",
+        "path": "art_delivery/ranch_assets_v1/review/overview.png"
+      },
+      {
+        "bytes": 51224,
+        "sha256": "6c2afa40cb3a86e9a5793f21d9f022b8c5a80e02f0cd8d18d095723a5a3bde49",
+        "path": "art_delivery/resource_icons_v1/review/sizes-and-alpha.png"
+      },
+      {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "path": "art_delivery/thief_motion_v1/preview/.gdignore"
+      },
+      {
+        "bytes": 2019142,
+        "sha256": "37e76eac2dd844c7e5d90d2d67405f8ca0a25f310123e4043ceeaf5712d45c9e",
+        "path": "art_delivery/thief_motion_v1/preview/actions.gif"
+      },
+      {
+        "bytes": 147642,
+        "sha256": "7896ce5e7e3f6d3bd4dadea9de606a60857f4ab948e55959096a285a23a64970",
+        "path": "art_delivery/thief_motion_v1/preview/actions.png"
+      },
+      {
+        "bytes": 70043,
+        "sha256": "2907cda03ff9183fcd87d7ba4984fd9d193f29084a0f7b68352b99359eb0b165",
+        "path": "art_delivery/thief_motion_v1/preview/alpha.png"
+      },
+      {
+        "bytes": 184105,
+        "sha256": "e6dfa7b8c2bb977b41134f41b23f7d7c2dfef6f1fa7e9594d95e8df86ef0723d",
+        "path": "art_delivery/thief_motion_v1/preview/movement.gif"
+      },
+      {
+        "bytes": 12854,
+        "sha256": "cfaa235d46627976666d07d459e63fa5bf559b408881922b1f38242dda1b81e1",
+        "path": "art_delivery/thief_motion_v1/preview/movement_samples.png"
+      },
+      {
+        "bytes": 5620,
+        "sha256": "a91cf7d31035c262edef50472ea4b5eaca6b8e6903e30eac4923d669a47e2924",
+        "path": "art_delivery/two_direction_review_v1/formal.html"
+      },
+      {
+        "bytes": 1058,
+        "sha256": "101b8e7e93b6a34bf6dade5eb589051c66170a0e61b2f7c5d4929aa0bdda5325",
+        "path": "art_delivery/two_direction_review_v1/index.html"
+      },
+      {
+        "bytes": 2080,
+        "sha256": "b4759ecb2bfea1d8bf8eb5341c642fb675d2160f4d6bf82f37a4e04c9deeebf8",
+        "path": "art_delivery/two_direction_review_v1/layers/maid_rage_aura.png"
+      },
+      {
+        "bytes": 472,
+        "sha256": "68c9c3650123759f6b635bb50a75b1e57d2f34ecd82854a8e6e0d5acc06adba6",
+        "path": "art_delivery/two_direction_review_v1/layers/poison_projectile.png"
+      },
+      {
+        "bytes": 3137,
+        "sha256": "94311e0818caab86e2a9c290cb34efa9c8a5edbc5ed13dab6a9061e2e18ff8de",
+        "path": "art_delivery/two_direction_review_v1/native/bull/charge_ready_right.png"
+      },
+      {
+        "bytes": 2947,
+        "sha256": "b671a9a8a5c74efef6fc2c3b1ddff2169288b4c7c4f571c067301a18e1e14e50",
+        "path": "art_delivery/two_direction_review_v1/native/bull/charge_right.png"
+      },
+      {
+        "bytes": 3222,
+        "sha256": "30974ac34e6a1399fc232f8fb8815d0e093e9694419b3dc7be0ac65195865dec",
+        "path": "art_delivery/two_direction_review_v1/native/bull/guts_right.png"
+      },
+      {
+        "bytes": 3148,
+        "sha256": "f313722a3bf2e572c501a713d7ca80ac031bbde3ea9c259a0eaafd41ce61ce44",
+        "path": "art_delivery/two_direction_review_v1/native/bull/idle_left.png"
+      },
+      {
+        "bytes": 3156,
+        "sha256": "018f9f25e833182c7a994a1c4161d67eba08b4e6f05f1c3f1497e20c06c2be11",
+        "path": "art_delivery/two_direction_review_v1/native/bull/idle_right.png"
+      },
+      {
+        "bytes": 3900,
+        "sha256": "d02465719d68b345a23474f422b67c377ffaae5492096debe68d17220ff72e68",
+        "path": "art_delivery/two_direction_review_v1/native/cow/idle_left.png"
+      },
+      {
+        "bytes": 3914,
+        "sha256": "3271106146d1ccf7fb91a1c4b2bf980b8eb41889933b3fef269a347f0ced242d",
+        "path": "art_delivery/two_direction_review_v1/native/cow/idle_right.png"
+      },
+      {
+        "bytes": 3966,
+        "sha256": "75144a312362f0ec99d853ff0d5e65a55ab30be5ea2871b606add579d65ab822",
+        "path": "art_delivery/two_direction_review_v1/native/cow/milking_right.png"
+      },
+      {
+        "bytes": 2457,
+        "sha256": "15cea69b16fa97ab4e78745ae9c46a7ec9a16f086065a13b208725ac10dbd975",
+        "path": "art_delivery/two_direction_review_v1/native/dancer/dance_right.png"
+      },
+      {
+        "bytes": 2356,
+        "sha256": "c0124716d91c03d9766c1563500081ad7af6483205256d36cedb43acd7da5b48",
+        "path": "art_delivery/two_direction_review_v1/native/dancer/fan_attack_right.png"
+      },
+      {
+        "bytes": 1763,
+        "sha256": "dafa2c9f12952ffc2c846bd315c875ad7930c7670d5bb005034671e42ccb887b",
+        "path": "art_delivery/two_direction_review_v1/native/dancer/idle_left.png"
+      },
+      {
+        "bytes": 1748,
+        "sha256": "f42523b674e8e619bb4d23f1fd90cc7cf3ade23f48a69621170274ec9e69a816",
+        "path": "art_delivery/two_direction_review_v1/native/dancer/idle_right.png"
+      },
+      {
+        "bytes": 2312,
+        "sha256": "70b3b811477b732f7ddfea5afbb264ab46149deabc0cc202237ea866f31ce2d1",
+        "path": "art_delivery/two_direction_review_v1/native/dancer/resurrection_right.png"
+      },
+      {
+        "bytes": 2488,
+        "sha256": "cb08078c81e09ba954a127d4222f71d6d7887e6cfac50fde3257ae7c5ce57cca",
+        "path": "art_delivery/two_direction_review_v1/native/maid/cleaver_attack_right.png"
+      },
+      {
+        "bytes": 1990,
+        "sha256": "fd5aa824db427a59a356bf00d910e7824efdaaddf89147e5cb77ac296d53ef66",
+        "path": "art_delivery/two_direction_review_v1/native/maid/coffee_serve_right.png"
+      },
+      {
+        "bytes": 1880,
+        "sha256": "4ff307fd3e3eb74478ee1bae743e4609eb9e9f55b703733c571e0a8b0846d736",
+        "path": "art_delivery/two_direction_review_v1/native/maid/drink_right.png"
+      },
+      {
+        "bytes": 1878,
+        "sha256": "f756cc8d35a0e64b14e6a7d6384c16b10e930723f9285af7e21e7cfaad90c97b",
+        "path": "art_delivery/two_direction_review_v1/native/maid/idle_left.png"
+      },
+      {
+        "bytes": 1886,
+        "sha256": "2619530b4d93d1e34938ca84e51178079b3f691f935a2ddc70d219d4cc3354b7",
+        "path": "art_delivery/two_direction_review_v1/native/maid/idle_right.png"
+      },
+      {
+        "bytes": 2292,
+        "sha256": "11dcbbcc225100d3751123d73cd5041e05b5284b7d684c4bfbdf0918e4ce1860",
+        "path": "art_delivery/two_direction_review_v1/native/maid/rage_right.png"
+      },
+      {
+        "bytes": 2503,
+        "sha256": "4babc6555e4ca719097f165b7bca6d52bc3099afa8046c7e782bddd2edd8f9e0",
+        "path": "art_delivery/two_direction_review_v1/native/maid/twirl_right.png"
+      },
+      {
+        "bytes": 6138,
+        "sha256": "02b7916a85ae5fd4c7048d55479f296f4a809c522a884d2623cf9222aca45a2e",
+        "path": "art_delivery/two_direction_review_v1/native/merchant/cart_move_left.png"
+      },
+      {
+        "bytes": 6168,
+        "sha256": "eefcfcf6a53a18ee7f480a17d16124d42c96b6e5fa1b0e41c95c53f2e821fae0",
+        "path": "art_delivery/two_direction_review_v1/native/merchant/cart_move_right.png"
+      },
+      {
+        "bytes": 1328,
+        "sha256": "aacecc9279d90799a4000c9522fb303066b3666f3f948e3ae04871d3048cc63e",
+        "path": "art_delivery/two_direction_review_v1/native/merchant/idle_left.png"
+      },
+      {
+        "bytes": 1296,
+        "sha256": "dae25e011076fe020ad3617fbb8b96b1feeb0152b25d90c74265966c8cb3795c",
+        "path": "art_delivery/two_direction_review_v1/native/merchant/idle_right.png"
+      },
+      {
+        "bytes": 2658,
+        "sha256": "1665fbd45d677f81a2fb848bdf0facce7be4399dbc4a70a4513a0a54fa5f4e0a",
+        "path": "art_delivery/two_direction_review_v1/native/thief/dagger_attack_right.png"
+      },
+      {
+        "bytes": 2350,
+        "sha256": "cb1a2191676e97aa703fe00b42bc4ccff61379bc4c27e2309c3680077c51339a",
+        "path": "art_delivery/two_direction_review_v1/native/thief/idle_left.png"
+      },
+      {
+        "bytes": 2364,
+        "sha256": "f380ee1077c0718ab857fc7057ccc7cad3fc924bb9a9f6fccff1bda8a6db9449",
+        "path": "art_delivery/two_direction_review_v1/native/thief/idle_right.png"
+      },
+      {
+        "bytes": 2689,
+        "sha256": "6579c2db14a13f95cad2a26a6eed02de8788a50a86fb6592b9cc270a25027172",
+        "path": "art_delivery/two_direction_review_v1/native/thief/poison_throw_right.png"
+      },
+      {
+        "bytes": 2478,
+        "sha256": "e8db04f55e8aa50b2cf5a458e680038c17658e378fed2979ef721d55e554cc34",
+        "path": "art_delivery/two_direction_review_v1/native/thief/steal_right.png"
+      },
+      {
+        "bytes": 112627,
+        "sha256": "dfa37e023e7d1c57c9b3bb0221cf7077014f6a005786368fc9be4fa140d98ce4",
+        "path": "art_delivery/two_direction_review_v1/poses/bull/charge_ready_right.png"
+      },
+      {
+        "bytes": 109185,
+        "sha256": "5f22a35b4e92c23147db1c2b8206064c9875b95d36386e3efa8a881991033346",
+        "path": "art_delivery/two_direction_review_v1/poses/bull/charge_right.png"
+      },
+      {
+        "bytes": 124989,
+        "sha256": "49085e946f480b4b6340ea2cd5da0609afa637e8a9d3333c218cdbf933972b3b",
+        "path": "art_delivery/two_direction_review_v1/poses/bull/guts_right.png"
+      },
+      {
+        "bytes": 114849,
+        "sha256": "354f619cccf546802a71c081350e6db0e8cbb43a45fa3973c916005e9be1ce3c",
+        "path": "art_delivery/two_direction_review_v1/poses/bull/idle_left.png"
+      },
+      {
+        "bytes": 114069,
+        "sha256": "5bf7e21ef4f76e4cb3670c759c7556a427c2f9a4dcb98226bbe4a9c057264b0d",
+        "path": "art_delivery/two_direction_review_v1/poses/bull/idle_right.png"
+      },
+      {
+        "bytes": 786751,
+        "sha256": "373d425d5b077dc8cca9ede28d04b3ac0572ff2d2ecbb7692814cb6a893c3836",
+        "path": "art_delivery/two_direction_review_v1/poses/cow/idle_left.png"
+      },
+      {
+        "bytes": 785857,
+        "sha256": "bcfe318b25feff847f6921c0c72891de736885a31ec4312ff99c7ac6daa4e193",
+        "path": "art_delivery/two_direction_review_v1/poses/cow/idle_right.png"
+      },
+      {
+        "bytes": 793528,
+        "sha256": "8d7eedb3551c49029f51094488517416b5d9a85d28fd99cdbb257e1fc1fc2529",
+        "path": "art_delivery/two_direction_review_v1/poses/cow/milking_right.png"
+      },
+      {
+        "bytes": 1086624,
+        "sha256": "c0a843045325a31bc803ad2bc10744271b7c39258fb6802f3b43aeb6685dbf0d",
+        "path": "art_delivery/two_direction_review_v1/poses/dancer/dance_right.png"
+      },
+      {
+        "bytes": 1025974,
+        "sha256": "fcf5e42d40b78ddf7e97a7b02e62cfc586fe206d8c8c20ae6e7018f4b3adf09b",
+        "path": "art_delivery/two_direction_review_v1/poses/dancer/fan_attack_right.png"
+      },
+      {
+        "bytes": 305629,
+        "sha256": "fe6d85bfbabc3593096e2e49064bd24d58c840cfc3c2cacc87578dd976246879",
+        "path": "art_delivery/two_direction_review_v1/poses/dancer/idle_left.png"
+      },
+      {
+        "bytes": 305112,
+        "sha256": "d738eaaca3b70099b533645b6fda05eb6b7b75ec42ffd2f65d56226cfe2e0fb6",
+        "path": "art_delivery/two_direction_review_v1/poses/dancer/idle_right.png"
+      },
+      {
+        "bytes": 447608,
+        "sha256": "476fcac957c3411a96a5d90714c3e347b2b7497f8fa7d5164432ec744c37d43e",
+        "path": "art_delivery/two_direction_review_v1/poses/dancer/resurrection_right.png"
+      },
+      {
+        "bytes": 373273,
+        "sha256": "16b8dcd4171cb7580c184000c9f3228f6bd0d58e0b54ec56e082e7f379726d90",
+        "path": "art_delivery/two_direction_review_v1/poses/maid/cleaver_attack_right.png"
+      },
+      {
+        "bytes": 282417,
+        "sha256": "79cc20af4570d772ab5d5d7e94954071c9e5d99857680f45b36b00a003ca17b8",
+        "path": "art_delivery/two_direction_review_v1/poses/maid/coffee_serve_right.png"
+      },
+      {
+        "bytes": 266942,
+        "sha256": "42ac608b6b7d3d0f66ed6de0e4ed7c62ac31a507db4f77a935adb636256f3c6f",
+        "path": "art_delivery/two_direction_review_v1/poses/maid/drink_right.png"
+      },
+      {
+        "bytes": 257288,
+        "sha256": "b3889daf38d3ee3e56c1c31024c02073f2daa72903f33b480505e7ca6a5726fd",
+        "path": "art_delivery/two_direction_review_v1/poses/maid/idle_left.png"
+      },
+      {
+        "bytes": 256344,
+        "sha256": "7dc5bcdcce2bc6c4552f5e79a8db86ef38912c61146b04287356f9d5d7b7b664",
+        "path": "art_delivery/two_direction_review_v1/poses/maid/idle_right.png"
+      },
+      {
+        "bytes": 347563,
+        "sha256": "1990fba1285f06dc4cdf9ddf4a048597eaa73532b28b9b45f44e151d0660643f",
+        "path": "art_delivery/two_direction_review_v1/poses/maid/rage_right.png"
+      },
+      {
+        "bytes": 364797,
+        "sha256": "5b63f854da0d3b866e1d048009fecc2d04e497820e50badd598485d625d37701",
+        "path": "art_delivery/two_direction_review_v1/poses/maid/twirl_right.png"
+      },
+      {
+        "bytes": 158857,
+        "sha256": "9a89ea4be5ef24175a6aa041cde79d38d48acc314b947b9c73668358a490556f",
+        "path": "art_delivery/two_direction_review_v1/poses/merchant/cart_move_left.png"
+      },
+      {
+        "bytes": 158847,
+        "sha256": "c1ff4dd115bb03d2a8ba8f9b7810d6d4ca704b21caf21c0168b4f934ff3c2126",
+        "path": "art_delivery/two_direction_review_v1/poses/merchant/cart_move_right.png"
+      },
+      {
+        "bytes": 1311,
+        "sha256": "9f9fc0cc1d4a6ed8c0e064d41ef806e742efc4c8f6cf6cc569d8cde823cc6473",
+        "path": "art_delivery/two_direction_review_v1/poses/merchant/idle_left.png"
+      },
+      {
+        "bytes": 1262,
+        "sha256": "dd5b1536d20422c9672d5a9bd019c245a6e442e5a491a421f1a47c0e75a7c76e",
+        "path": "art_delivery/two_direction_review_v1/poses/merchant/idle_right.png"
+      },
+      {
+        "bytes": 447488,
+        "sha256": "fb822e04ea8ed6f74ac90cad0f9fdb0870d252dfc396119e47ef524a57eb0419",
+        "path": "art_delivery/two_direction_review_v1/poses/thief/dagger_attack_right.png"
+      },
+      {
+        "bytes": 399646,
+        "sha256": "18c07fc0a4015c577fa68414d04e5153b24e0819f1cfac3dcc3ed75ce2effe96",
+        "path": "art_delivery/two_direction_review_v1/poses/thief/idle_left.png"
+      },
+      {
+        "bytes": 398909,
+        "sha256": "5a6df6d9d52bcd112380b151e1bcbe94241fe25cd940241e2a09e1afc6eb28b9",
+        "path": "art_delivery/two_direction_review_v1/poses/thief/idle_right.png"
+      },
+      {
+        "bytes": 447287,
+        "sha256": "64c418e61a04538f8f913030e7fbf8b4be63aa50a9920a96ce3c951788088ea3",
+        "path": "art_delivery/two_direction_review_v1/poses/thief/poison_throw_right.png"
+      },
+      {
+        "bytes": 427493,
+        "sha256": "a34e19e49b726c01856ccc17bc5f0b6aac4bdf56d518e8fcab043fe842f57127",
+        "path": "art_delivery/two_direction_review_v1/poses/thief/steal_right.png"
+      },
+      {
+        "bytes": 122241,
+        "sha256": "bd8d6fb88a69262e98fd4cd50ded72a78ac399ba90360d1316318102e8e4c330",
+        "path": "art_delivery/two_direction_review_v1/qa/alpha.png"
+      },
+      {
+        "bytes": 142282,
+        "sha256": "6cdb7961abcca3ab59bd7a361e9bb972e258c133c39f925a3a109f07a198a879",
+        "path": "art_delivery/two_direction_review_v1/qa/native_ground.png"
+      },
+      {
+        "bytes": 229875,
+        "sha256": "00a1336d2da999086ca809a91940511f0b3783c1af1768f6cec18a2af08803be",
+        "path": "art_delivery/two_direction_review_v1/sheets/01_merchant.png"
+      },
+      {
+        "bytes": 657372,
+        "sha256": "5dae12c28b0f0220fd9ddabca247f6c25d6b42fe4d92a925e34c4b20a0425c41",
+        "path": "art_delivery/two_direction_review_v1/sheets/02_maid.png"
+      },
+      {
+        "bytes": 522372,
+        "sha256": "8757084557c4f0bf2a4503fb5a80fed8961206f17f33f1d81db0f4658ec347f6",
+        "path": "art_delivery/two_direction_review_v1/sheets/03_dancer.png"
+      },
+      {
+        "bytes": 614855,
+        "sha256": "292dad4b26d0b92786c81e16d24a56f0cb2942befbc93f5e54eb62b001eb72bc",
+        "path": "art_delivery/two_direction_review_v1/sheets/04_thief.png"
+      },
+      {
+        "bytes": 413480,
+        "sha256": "bfde08db2338df2e55a224b9cf83c150c4eded8d1f451f24dda3a5f6eb587570",
+        "path": "art_delivery/two_direction_review_v1/sheets/05_cow.png"
+      },
+      {
+        "bytes": 613173,
+        "sha256": "b053a9850fd25e2543cd4bbd13f635af6a9fc166c246fe1466e624d425809ae2",
+        "path": "art_delivery/two_direction_review_v1/sheets/06_bull.png"
+      },
+      {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "path": "art_delivery/wood_buildings_v1/review/.gdignore"
+      },
+      {
+        "bytes": 60439,
+        "sha256": "55a8cf30b56c47a1a9e15e2e4a5e328efd72300b752ca3d33d05ea7e2e8a7345",
+        "path": "art_delivery/wood_buildings_v1/review/approved-room-preview.png"
+      },
+      {
+        "bytes": 43620,
+        "sha256": "badb696fd861e1fdac135679ebec4410311f9b77e5508e74f8bbdffe68115ae4",
+        "path": "art_delivery/wood_buildings_v1/review/connections.png"
+      },
+      {
+        "bytes": 979259,
+        "sha256": "bdaec8ad9d41b33c2b39141e6bb10a8081fef7829b95470fcf4599fd9b2eaf4b",
+        "path": "assets/reference/legacy-ui/book-open.png"
+      },
+      {
+        "bytes": 1125931,
+        "sha256": "88548cf6f773cd9708153681972062bc7e5f7a300d4f4b9c7cc1e272ea7d7354",
+        "path": "assets/reference/legacy-ui/market-stall.png"
+      },
+      {
+        "bytes": 1488518,
+        "sha256": "a6dc2d6fc47f87ef9f48376c5e298250fb90c9b56cbd98740a7ccef7c00c3930",
+        "path": "assets/reference/legacy-ui/shiba-source.png"
+      }
+    ],
+    "permanent_deletion": false
+  },
+  "kept_worktree_differences": [
+    "art_delivery/cart_ui_detail_v1/review/.gdignore",
+    "art_delivery/characters_motion_v1/review/.gdignore",
+    "art_delivery/effects_v1/review/.gdignore",
+    "art_delivery/kidnapper_basic_v1/review/.gdignore",
+    "art_delivery/kidnapper_reactions_v1/review/.gdignore",
+    "art_delivery/merchant_board_v1/review/.gdignore",
+    "art_delivery/merchant_cart_v2/review/.gdignore",
+    "art_delivery/ranch_assets_v1/review/.gdignore",
+    "art_delivery/resource_icons_v1/review/.gdignore",
+    "art_delivery/two_direction_review_v1/.gdignore",
+    "art_delivery/two_direction_review_v1/ADOPTION.json",
+    "art_delivery/two_direction_review_v1/FORMAL_DELIVERIES.md",
+    "art_delivery/two_direction_review_v1/HANDOFF.md",
+    "art_delivery/two_direction_review_v1/QA.json",
+    "art_delivery/two_direction_review_v1/manifest.json",
+    "assets/reference/.gdignore"
+  ],
+  "protected_production_metadata": [
+    "art_delivery/animal_tamer_motion_v1/manifest.json",
+    "art_delivery/bull_motion_v1/manifest.json",
+    "art_delivery/bullfrog_motion_v1/manifest.json",
+    "art_delivery/cart_ui_detail_v1/manifest.json",
+    "art_delivery/characters_motion_v1/manifest.json",
+    "art_delivery/characters_v1/manifest.json",
+    "art_delivery/cow_motion_v1/manifest.json",
+    "art_delivery/dancer_motion_v1/manifest.json",
+    "art_delivery/destroyer_motion_v1/manifest.json",
+    "art_delivery/doberman_motion_v1/manifest.json",
+    "art_delivery/earth_stone_buildings_v1/manifest.json",
+    "art_delivery/effects_v1/manifest.json",
+    "art_delivery/hedgehog_motion_v1/manifest.json",
+    "art_delivery/kidnapper_basic_v1/manifest.json",
+    "art_delivery/kidnapper_reactions_v1/manifest.json",
+    "art_delivery/maid_motion_v1/manifest.json",
+    "art_delivery/martial_artist_motion_v1/manifest.json",
+    "art_delivery/merchant_board_v1/manifest.json",
+    "art_delivery/merchant_cart_v2/manifest.json",
+    "art_delivery/merchant_motion_v1/manifest.json",
+    "art_delivery/ninja_motion_v1/manifest.json",
+    "art_delivery/ranch_assets_v1/SOURCES.md",
+    "art_delivery/resource_icons_v1/manifest.json",
+    "art_delivery/runner_motion_v1/manifest.json",
+    "art_delivery/salaryman_motion_v1/manifest.json",
+    "art_delivery/thief_motion_v1/manifest.json",
+    "art_delivery/ui_world_direction_v1/manifest.json",
+    "art_delivery/ui_world_direction_v2/manifest.json",
+    "art_delivery/wood_buildings_v1/manifest.json",
+    "assets/adopted_ui/manifest.json",
+    "assets/ui/SOURCES.md",
+    "assets/ui/journal_cover_green.receipt.json",
+    "assets/ui/merchant_mouth_v1/receipt.json"
+  ],
+  "unused_book_source_layers_kept_local": [
+    "art_delivery/ranch_assets_v1/book/binding_shadow_layer.png",
+    "art_delivery/ranch_assets_v1/book/closed_00.png",
+    "art_delivery/ranch_assets_v1/book/cover_layer.png",
+    "art_delivery/ranch_assets_v1/book/front_cover_hinge_layer.png",
+    "art_delivery/ranch_assets_v1/book/paper_layer.png"
+  ],
+  "future_practice": "Update this state and the same material index; keep minimal evidence, do not accumulate trial shortcuts, image copies or review galleries.",
+  "book_pack_sha256": "EE5ED75ABD1AF47AE528461CE8F7ACF6FCA7C6F499C9A56FD1FEFE0257A9A2D7"
+}
