@@ -46,5 +46,19 @@ func run():
 	check(w.Work.choose(w,"keeper").get("kind")=="train","Animal priority enables the real training job")
 	w.Snapshot.save(w,out+"/review01.snapshot");var restored=w.Snapshot.restore(out+"/review01.snapshot")
 	check(restored.keeper.work_priorities==w.keeper.work_priorities and restored.Work.category(restored,restored.jobs[0])=="animal","Snapshot retains independent animal priorities and existing job identity")
+	w=farm();w.Stock.add(w,"soil",40,Vector2i(9,8))
+	for i in range(20):
+		var cell=Vector2i(28+i%10,4+i/10);w.natural[cell]="weed";w.act("collect",cell)
+	check(w.jobs.size()==20 and w.act("wall",Vector2i(10,8)),"Twenty collection designations coexist with a new valid building")
+	w.Work.set_priority(w,"keeper","build",1);w.Work.set_priority(w,"keeper","gather",2)
+	for i in range(160):
+		w.step()
+		if w.metrics.built==1:break
+	check(w.metrics.built==1 and w.natural.size()==20,"Higher build priority physically completes construction before the large collection batch")
+	w=farm();w.Stock.add(w,"soil",20,Vector2i(8,9));w.act("wood_wall",Vector2i(10,8));w.act("wall",Vector2i(12,8))
+	for i in range(160):
+		w.step()
+		if w.metrics.built==1:break
+	check(w.metrics.built==1 and w.jobs.any(func(j):return j.kind=="wood_wall" and j.state=="blocked" and "資材" in j.get("block_reason","")) and not w.jobs_held,"Missing wood blocks only its job; the feasible soil wall still finishes")
 	FileAccess.open(out+"/review01.json",FileAccess.WRITE).store_string(JSON.stringify({"method":"Controlled World/Work/Stock fixtures; no human play","checks":checks,"failures":failed},"\t"))
 	print("Review01: ",checks.size()," checks, ",failed," failures");quit(1 if failed else 0)
