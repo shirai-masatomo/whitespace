@@ -185,6 +185,7 @@ func _ready():
 			var saved=MorningSave.read(save_path)
 			if saved.status in ["ok","recovered"]:world=MorningSave.restore(saved.record);save_status="以前の日開始を読み込みました。次回は途中から再開します"
 			elif saved.status!="missing":save_load_blocked=true;save_status="以前の保存を読めません。保存を保護しています"
+	Input.set_custom_mouse_cursor(UI.grab_cursor(),Input.CURSOR_DRAG,Vector2(15,15))
 	subtasks.load_settings()
 	camera = Camera2D.new()
 	camera.position = Vector2(world.keeper.pos) * TILE
@@ -230,6 +231,7 @@ func _ready():
 	add_child(book_view)
 	book_view.setup(self)
 	if world.phase == "shop": enter_daytime()
+	recenter()
 	refresh()
 	controls.visible = not cinematic() and story_modal==""
 	if "--automated" in OS.get_cmdline_user_args(): automated = true
@@ -258,8 +260,17 @@ func add_button(parent: Control, id: String, text_value: String, area: Rect2, ca
 
 func recenter():
 	cancel_wall_stroke()
-	camera.position = Vector2(world.keeper.pos) * TILE
-	camera.zoom = Vector2.ONE
+	var owner=center(world.keeper.pos)
+	var target=owner
+	var zoom=1.0
+	if not world.story.idol.is_empty():
+		var idol=(Vector2(world.Story.at(world))+Vector2.ONE)*TILE
+		var span=(idol-owner).abs()+Vector2(160,180)
+		zoom=clampf(minf(1.0,minf(1000.0/span.x,570.0/span.y)),0.65,1.0)
+		target=(owner+idol)*0.5
+	camera.zoom=Vector2.ONE*zoom
+	camera.position=target
+	clamp_camera()
 
 func notice(text_value: String):
 	message = text_value
@@ -482,7 +493,7 @@ func refresh():
 		var choices = subtask_choices()
 		for i in range(choices.size()):
 			var id = choices[i]
-			add_button(palette, id, TOOLS[id], Rect2(16 + (i%6)*164, 674+(i/6)*40, 156, 36), select_tool.bind(id))
+			add_button(palette, id, TOOLS[id], ColonyPanels.architect_tool_rect(self,i), select_tool.bind(id))
 			buttons[id].tooltip_text = {"wall": "壁：土10、建設1秒", "collect": "雑草：1 Gold / キノコ：終了時HP5回復 / 卵：回収"}.get(id, TOOLS[id])
 			if Farm.Shop.FOOD.has(id):
 				buttons[id].text += " ×%d" % world.item_count(id)
@@ -493,10 +504,13 @@ func refresh():
 		UI.selected(buttons[id], tool == id)
 		# Selected styling replaces the normal stylebox, so compact existing controls after it.
 		if group == 0 and id in GROUP_TOOLS[0]:
+			buttons[id].add_theme_font_size_override("font_size",14)
 			for state in ["normal","hover","pressed","disabled"]:
+				buttons[id].get_theme_stylebox(state).content_margin_left=5
+				buttons[id].get_theme_stylebox(state).content_margin_right=5
 				buttons[id].get_theme_stylebox(state).content_margin_top=4
 				buttons[id].get_theme_stylebox(state).content_margin_bottom=4
-			buttons[id].size.y=36
+			buttons[id].size.y=32
 	if group == 2:
 		for id in subtask_choices(): UI.selected(buttons[id], subtasks.selected[2] == id)
 	ColonyPanels.build(self)
@@ -767,6 +781,11 @@ func choose_walk():
 	refresh()
 
 func neutral():
+	subtasks.cancel()
+	ui_pointer_capture=false
+	queue_drag_id=-1
+	zone_controls.pressed=false
+	item_commands.pressed=false
 	colony_page=""
 	cancel_wall_stroke()
 	selected_trees.clear()
@@ -779,6 +798,7 @@ func neutral():
 	selected_animal = -1
 	press_pending = false
 	dragging = false
+	update_pointer_cursor()
 	refresh()
 
 func keeper_action(kind: String):
@@ -1008,7 +1028,25 @@ func job_title(j: Dictionary) -> String:
 	if Farm.BUILD.has(j.kind):return Farm.Buildings.NAMES.get(j.kind,"建設")+"を建設"
 	return {"move":"移動予定","collect":"回収予定","repair":"修理予定","remove":"解体予定","remove_floor":"床を解体","repair_floor":"床を修理","equip":"装備予定","animal_order":"仲間への指示","gate":"ドア開閉"}.get(j.kind,StoryView.LABELS.get(j.kind,"予定"))
 
+func map_panning() -> bool:
+	return press_pending and dragging and group<0 and wall_stroke.kind=="" and not ui_pointer_capture and queue_drag_id<0 and not menu_open and not field_book and not field_shop and story_modal=="" and not cinematic()
+
+func update_pointer_cursor():
+	mode_cursor = "hammer" if group == 0 else ("whistle" if group == 1 else "move")
+	if not world.working() or group < 0 or pointer_over_ui() or menu_open or field_book or field_shop or story_modal!="" or cinematic() or queue_drag_id >= 0: mode_cursor = ""
+	Input.set_default_cursor_shape(Input.CURSOR_DRAG if map_panning() else Input.CURSOR_ARROW)
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE if mode_cursor == "" else Input.MOUSE_MODE_HIDDEN)
+
+func _exit_tree():
+	Input.set_custom_mouse_cursor(null,Input.CURSOR_DRAG)
+	Input.set_default_cursor_shape(Input.CURSOR_ARROW)
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+
 func _input(event):
+	_route_input(event)
+	update_pointer_cursor()
+
+func _route_input(event):
 	if (event is InputEventKey and event.pressed) or (event is InputEventMouseButton and event.pressed) or (event is InputEventMouseMotion and event.relative.length_squared()>0):
 		world.Life.user_activity(world)
 	if event is InputEventKey and not event.pressed and event.physical_keycode==KEY_SHIFT:shift_latched=false
@@ -1019,6 +1057,8 @@ func _input(event):
 		# GUI buttons receive the event; every world handler is gated by the modal.
 		return
 	if event is InputEventMouse: pointer = event.position
+	if (group>=0 or colony_page!="" or not selected.is_empty()) and world.working() and not menu_open and not field_book and not field_shop and event is InputEventMouseButton and event.pressed and event.button_index==MOUSE_BUTTON_RIGHT:
+		neutral();get_viewport().set_input_as_handled();return
 	if zone_controls.input(self,event):get_viewport().set_input_as_handled();return
 	if item_commands.input(self,event):get_viewport().set_input_as_handled();return
 	if subtasks.input(self,event):
@@ -1380,6 +1420,7 @@ func _notification(what):
 		dragging = false
 		press_pending = false
 		queue_drag_id = -1
+		update_pointer_cursor()
 
 func clamp_camera():
 	var half=Vector2(640,400)/camera.zoom
@@ -1457,9 +1498,7 @@ func _process(delta):
 			var target_y=queue_row_y.get(id,94+index*35)
 			if lifting and id!=queue_drag_id and index>=queue_drop_index:target_y+=8
 			row.position.y=move_toward(row.position.y,target_y,delta*1100)
-	mode_cursor = "hammer" if group == 0 else ("whistle" if group == 1 else "move")
-	if not world.working() or group < 0 or pointer_over_ui() or menu_open or field_book or field_shop or story_modal!="" or cinematic() or queue_drag_id >= 0: mode_cursor = ""
-	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE if mode_cursor == "" else Input.MOUSE_MODE_HIDDEN)
+	update_pointer_cursor()
 	smooth_actor("keeper", world.keeper.pos, delta)
 	if not world.story.idol.is_empty(): smooth_actor("idol",world.Story.at(world),delta)
 	if world.phase == "dawn" and clock - transition_at > 4.8 and not menu_open: advance()

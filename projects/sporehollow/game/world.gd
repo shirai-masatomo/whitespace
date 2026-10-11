@@ -154,8 +154,8 @@ var metrics = {"repelled": 0, "stolen": 0, "structure_damage": 0, "commands": 0.
 	"bark_casts": 0, "bark_targets": 0, "weed_spawned": 0, "mushroom_spawned": 0, "weed_collected": 0, "mushroom_collected": 0, "stump_spawned": 0, "stump_collected": 0, "nature_rolls": 0, "mushrooms_used": 0, "mushroom_healing": 0}
 
 static func new_campaign() -> Dictionary:
-	return {"stage": 1, "day": 1, "exp_pool": 0, "night_ready": false, "gold": 40, "field_items": [], "eggs": 0, "mushrooms": preload("res://game/work_policy.gd").STARTING_FOOD, "shelter": false,
-		"fence": 0, "resources": {"soil": 100, "wood": 0, "stone": 0}, "items": {"dog_food": 2, "hen_food": 0}, "unlocked_blueprints": [], "facilities": [], "next_structure_id": 1, "animals": [{"id": 1, "category": "dog", "species": "shiba", "lv": 1, "xp": 0, "loyalty": 75}]}
+	return {"start_near_idol":true,"keeper_position":[W/2-2,H/2],"stage": 1, "day": 1, "exp_pool": 0, "night_ready": false, "gold": 40, "field_items": [], "eggs": 0, "mushrooms": preload("res://game/work_policy.gd").STARTING_FOOD, "shelter": false,
+		"fence": 0, "resources": {"soil": 100, "wood": 0, "stone": 0}, "items": {"dog_food": 2, "hen_food": 0}, "unlocked_blueprints": [], "facilities": [], "next_structure_id": 1, "animals": [{"id": 1,"position":[W/2-3,H/2], "category": "dog", "species": "shiba", "lv": 1, "xp": 0, "loyalty": 75}]}
 
 func _init(data: Dictionary = {}, seed_number: int = 17, stage_override: Dictionary = {}):
 	keeper.object_attack_power=Life.OBJECT_ATTACK
@@ -283,6 +283,17 @@ func _init(data: Dictionary = {}, seed_number: int = 17, stage_override: Diction
 	stock_used=campaign.get("stock_used",{}).duplicate()
 	Work.restore(self)
 	Story.init(self)
+	if campaign.get("start_near_idol",false):
+		# Consumed only for a new campaign; saved actors never move on load.
+		var goals=Story.goals(self)
+		var preferred=Story.at(self)+Vector2i(-1,1)
+		goals.sort_custom(func(a,b):return distance(a,preferred)<distance(b,preferred))
+		for p in goals:
+			if (p!=keeper.pos and occupied(p)) or not items_at(p).is_empty() or natural.has(p):continue
+			keeper.pos=p;break
+		campaign.erase("start_near_idol")
+		campaign.keeper_position=[keeper.pos.x,keeper.pos.y]
+		initial_positions.keeper=campaign.keeper_position.duplicate();keeper_path=[campaign.keeper_position.duplicate()]
 	refresh_indoor()
 	make_schedule()
 	# The morning snapshot includes migrated terrain and one-time morning events.

@@ -46,7 +46,7 @@ static func enqueue(w, kind: String, p: Vector2i, animal_id: int) -> bool:
 		var row=w.items_at(p)[0]
 		if row.kind!="skill_scroll" and not row.kind.ends_with("_plan"):
 			if w.jobs.any(func(other):return other.get("stock_id",-1)==row.stock_id):return false
-			j.kind="haul";j.stock_id=row.stock_id
+			j.kind="haul";j.stock_id=row.stock_id;j.explicit_designation=true
 	j.physical=w.BUILD.has(kind)
 	j.work_category=w.Work.category(w,j)
 	w.next_job_id+=1

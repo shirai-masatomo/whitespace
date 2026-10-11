@@ -19,10 +19,14 @@ static func init(w):
 	w.storage_cells=w.campaign.get("storage_cells",[]).map(func(p):return Vector2i(p[0],p[1]))
 	normalize(w)
 	if not w.campaign.get("physical_stock",false):
-		for kind in MATERIALS:add(w,kind,w.campaign.resources.get(kind,0),w.logistics_entry)
-		for kind in w.campaign.items:add(w,kind,w.campaign.items[kind],w.logistics_entry)
-		add(w,"egg",w.campaign.get("eggs",0),w.logistics_entry)
-		add(w,"mushroom",w.campaign.get("mushrooms",0),w.logistics_entry)
+		var origin=w.logistics_entry
+		if w.campaign.get("start_near_idol",false):
+			for p in [w.keeper.pos+Vector2i.DOWN]+w.neighbors(w.keeper.pos):
+				if w.walkable(p) and not w.occupied(p) and not w.natural.has(p):origin=p;break
+		for kind in MATERIALS:add(w,kind,w.campaign.resources.get(kind,0),origin)
+		for kind in w.campaign.items:add(w,kind,w.campaign.items[kind],origin)
+		add(w,"egg",w.campaign.get("eggs",0),origin)
+		add(w,"mushroom",w.campaign.get("mushrooms",0),origin)
 		for j in w.jobs:
 			if not w.BUILD.has(j.kind):continue
 			j.required=j.get("required",j.reserved)
@@ -193,14 +197,7 @@ static func step(w):
 			else:row.location="ground";row.owner="";row.job_id=-1
 		for token in row.claims.keys():
 			if token.begins_with("food:") and not w.workers.has(token.trim_prefix("food:")):row.claims.erase(token)
-	if not w.storage_cells.is_empty():
-		for row in w.field_items.duplicate():
-			if w.jobs.size()>=w.Jobs.LIMIT:break
-			if row.location!="ground" or (w.Zones.accepts(w,row.pos,row.kind) if not w.zones.is_empty() else row.pos in w.storage_cells) or row.get("placed",false) or row.kind in ["chick","skill_scroll"] or row.kind.ends_with("_plan") or free_count(row)==0:continue
-			if not w.zones.is_empty() and w.Zones.storage_for(w,row.kind).is_empty():continue
-			if w.jobs.any(func(j):return j.get("stock_id",-1)==row.stock_id):continue
-			w.jobs.append({"id":w.next_job_id,"kind":"haul","pos":row.pos,"stock_id":row.stock_id,"animal_id":-1,"state":"pending","resource":"","reserved":0,"started":false,"work_category":"haul"});w.next_job_id+=1
-			w.Life.wake_auto(w)
+	# Storage zones choose destinations; only an explicit collection designation starts hauling.
 	sync(w)
 
 static func save(w):
@@ -238,7 +235,7 @@ static func command_targets(w,first: Vector2i,last: Vector2i,kind: String) -> Ar
 static func enqueue_haul(w,row) -> bool:
 	if not w.working() or row.get("forbidden",false) or row.location!="ground" or row.get("placed",false) or row.kind=="chick" or w.jobs.size()>=w.Jobs.LIMIT:return false
 	if w.jobs.any(func(j):return j.get("stock_id",-1)==row.stock_id):return false
-	w.jobs.append({"id":w.next_job_id,"kind":"haul","pos":row.pos,"stock_id":row.stock_id,"animal_id":-1,"state":"pending","resource":"","reserved":0,"started":false,"work_category":"haul"});w.next_job_id+=1;w.Life.wake_auto(w);return true
+	w.jobs.append({"id":w.next_job_id,"kind":"haul","pos":row.pos,"stock_id":row.stock_id,"animal_id":-1,"state":"pending","resource":"","reserved":0,"started":false,"work_category":"haul","explicit_designation":true});w.next_job_id+=1;w.Life.wake_auto(w);return true
 
 static func designate(w,kind: String,first: Vector2i,last: Vector2i) -> Dictionary:
 	if kind not in ["haul","forbid","allow"] or not w.working():return {"accepted":0,"skipped":0}

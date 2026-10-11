@@ -102,3 +102,11 @@ static func cursor(kind: String) -> Texture2D:
 		picture.fill_rect(Rect2i(11,23,4,4),PAPER)
 	textures[key]=ImageTexture.create_from_image(picture)
 	return textures[key]
+
+static func grab_cursor() -> Texture2D:
+	if textures.has("grab_hand"):return textures.grab_hand
+	# Windows maps the built-in drag shape to arrows; use a compact closed hand.
+	var picture=Image.new()
+	picture.load_svg_from_string('<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><path d="M10 27V23L4 16Q2 13 4 12Q6 11 9 14L8 10Q7 6 10 6Q12 6 12 9V7Q12 4 15 5Q17 5 17 8Q17 5 20 6Q22 6 22 9Q22 7 24 8Q26 8 25 12L24 18Q23 21 21 23V27Z" fill="#fff7df" stroke="#384738" stroke-width="1.7" stroke-linejoin="round"/><path d="M12 9V13M17 8V13M22 9L21 14M9 14Q12 13 16 17M10 24H21" fill="none" stroke="#384738" stroke-width="1.4" stroke-linecap="round"/></svg>')
+	textures.grab_hand=ImageTexture.create_from_image(picture)
+	return textures.grab_hand

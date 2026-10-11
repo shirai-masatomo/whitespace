@@ -38,7 +38,7 @@ func run():
 	check(j.work_elapsed==elapsed and j.state=="blocked" and w.rocks[p].amount==8,"Forbidding a reserved rock stops progress and preserves its quantity")
 	Tasks.set_forbidden(w,"mine",p,-1,false);w.Snapshot.save(w,out+"/mining.snapshot");w=w.Snapshot.restore(out+"/mining.snapshot");progress(w,"mine")
 	check(not w.rocks.has(p) and w.field_items.any(func(row):return row.kind=="stone" and row.amount==8 and row.pos==p and row.location=="ground"),"Saved mining resumes and produces exactly eight physical stone at the rock")
-	var zone=w.Zones.create(w,"stockpile",Vector2i(12,10),Vector2i(12,10));w.Zones.set_allowed(w,zone,["stone"])
+	var zone=w.Zones.create(w,"stockpile",Vector2i(12,10),Vector2i(12,10));w.Zones.set_allowed(w,zone,["stone"]);w.Stock.designate(w,"haul",p,p)
 	for i in range(100):w.step()
 	check(w.Stock.totals(w).stone==8 and w.field_items.any(func(row):return row.kind=="stone" and row.pos==Vector2i(12,10)),"Existing haul jobs move mined stone into permitted storage")
 	w.persist_farm();var restored=Farm.new(w.campaign,31)

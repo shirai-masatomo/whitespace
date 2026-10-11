@@ -56,7 +56,7 @@ func run():
 	check(w.Stock.totals(w).get("wood",0)==8 and w.Stock.totals(w).get("mushroom",0)==3 and not old.done,"Supplies arrive as physical goods even with an unresolved enemy")
 	w.Cycle.supplies(w,1);w.Snapshot.save(w,out+"/supplies.snapshot");w=w.Snapshot.restore(out+"/supplies.snapshot");w.Cycle.supplies(w,1)
 	check(w.Stock.totals(w).wood==8 and w.Stock.totals(w).mushroom==3,"Repeated boundary and restore do not duplicate daily goods")
-	var z=w.Zones.create(w,"stockpile",Vector2i(7,8),Vector2i(7,8));w.Zones.set_allowed(w,z,["wood"])
+	var z=w.Zones.create(w,"stockpile",Vector2i(7,8),Vector2i(7,8));w.Zones.set_allowed(w,z,["wood"]);w.Stock.designate(w,"haul",w.logistics_entry,w.logistics_entry)
 	w.keeper.pos=Vector2i(2,5);w.keeper.satiety=20
 	for i in range(110):w.step()
 	check(w.stock_used.get("mushroom",0)==1 and w.keeper.satiety>30,"Arrived mushrooms enter existing physical eating behavior")

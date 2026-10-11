@@ -26,55 +26,100 @@ static func person_selected(g,row: Dictionary):
 	if row.key=="keeper":g.choose_walk()
 	else:g.choose_animal(row.animal_id)
 
+# Keep tab and tool geometry together; main uses architect_tool_rect for its buttons.
+static func architect_area(g) -> Rect2:
+	var rows=ceili(g.subtask_choices().size()/6.0)
+	var height=44 if g.architect_category=="ゾーン" else 50+maxi(1,rows)*36
+	return Rect2(8,742-height,688,height)
+
+static func architect_tool_rect(g,index: int) -> Rect2:
+	return Rect2(16+(index%6)*112,architect_area(g).position.y+42+floori(index/6.0)*36,104,32)
+
+static func compact_button(g,button: Button,size: int=14):
+	g.UI.button(button);button.add_theme_font_size_override("font_size",size)
+	button.focus_mode=Control.FOCUS_NONE
+	for state in ["normal","hover","pressed","disabled"]:
+		var style=button.get_theme_stylebox(state).duplicate()
+		for side in [SIDE_LEFT,SIDE_RIGHT]:style.set_content_margin(side,5)
+		for side in [SIDE_TOP,SIDE_BOTTOM]:style.set_content_margin(side,3)
+		button.add_theme_stylebox_override(state,style)
+
+static func priority_style(button: Button,value: int):
+	var colors=[Color("f5efdf"),Color("d2e5ba"),Color("e5e9c7"),Color("f1e8cf"),Color("eee9df")]
+	for state in ["normal","hover","pressed","disabled"]:
+		var box=StyleBoxFlat.new();box.bg_color=colors[value]
+		if state=="hover":box.bg_color=Color("fff9e9")
+		elif state=="pressed":box.bg_color=Color("bacd9f")
+		elif state=="disabled":box.bg_color=Color("e5e2d8")
+		box.border_color=Color("aab598") if state=="normal" else Color("6d8662")
+		box.set_border_width_all(1);box.set_corner_radius_all(3)
+		box.content_margin_top=3;box.content_margin_bottom=3
+		button.add_theme_stylebox_override(state,box)
+
+static func build_roles(g):
+	var people=Model.people(g.world)
+	var list_height=mini(174,maxi(34,people.size()*34))
+	var panel_height=126+list_height
+	var p=panel(g,Rect2(16,742-panel_height,640,panel_height))
+	label(p,"仕事の優先度",Vector2(14,9),19)
+	label(p,"1 最優先 → 4 最低 · 空欄は停止 · 同じ数字は左から",Vector2(14,35),13)
+	label(p,"人 / 状態",Vector2(18,59),13)
+	var order=g.world.Work.Policy.ORDER
+	for i in range(order.size()):label(p,g.world.Work.Policy.LABELS[order[i]],Vector2(224+i*60,59),13)
+	label(p,"徴兵",Vector2(545,59),13)
+	var scroll=ScrollContainer.new();scroll.position=Vector2(12,80);scroll.size=Vector2(616,list_height)
+	scroll.horizontal_scroll_mode=ScrollContainer.SCROLL_MODE_DISABLED;p.add_child(scroll)
+	var list=VBoxContainer.new();list.add_theme_constant_override("separation",2);list.size_flags_horizontal=Control.SIZE_EXPAND_FILL;scroll.add_child(list)
+	for row in people:
+		var line=HBoxContainer.new();line.add_theme_constant_override("separation",4);list.add_child(line)
+		var person=Button.new();person.name="Person_"+row.key;person.custom_minimum_size=Vector2(200,32)
+		person.alignment=HORIZONTAL_ALIGNMENT_LEFT;person.clip_text=true
+		person.text=row.name
+		person.tooltip_text="%s · HP %d/%d\n%s\nクリックで個体を確認"%[row.name,row.hp,row.max_hp,row.state if row.state!="" else row.role]
+		compact_button(g,person);person.pressed.connect(person_selected.bind(g,row));line.add_child(person)
+		var a=g.world.workers.get(row.key,{})
+		for kind in order:
+			var value=int(a.get("work_priorities",{}).get(kind,0))
+			var choice=Button.new();choice.name="Priority_"+row.key+"_"+kind;choice.custom_minimum_size=Vector2(56,32)
+			choice.text=str(value) if value>0 else "";choice.disabled=a.is_empty()
+			choice.tooltip_text="%s / %s：%s\nクリックで 1 → 2 → 3 → 4 → 空欄 → 1。\n同じ数字は左の仕事から。"%[row.name,g.world.Work.Policy.LABELS[kind],str(value) if value>0 else "停止"] if not a.is_empty() else "%sは固有の支援行動を行います"%row.name
+			compact_button(g,choice,17);priority_style(choice,value);choice.pressed.connect(priority_changed.bind(g,row.key,kind));line.add_child(choice)
+		var draft=Button.new();draft.name="Draft_"+row.key;draft.custom_minimum_size=Vector2(88,32)
+		draft.text="解除" if a.get("drafted",false) else "徴兵";draft.disabled=a.is_empty()
+		draft.tooltip_text="%s：%s"%[row.name,"通常の仕事へ戻す" if a.get("drafted",false) else "通常の仕事を中断して直接指示する"] if not a.is_empty() else "固有行動の人物は徴兵できません"
+		compact_button(g,draft);priority_style(draft,1 if a.get("drafted",false) else 0);draft.pressed.connect(draft_changed.bind(g,row.key));line.add_child(draft)
+	var y=p.position.y+panel_height-36
+	g.add_button(g.palette,"storage_zone","ゾーン",Rect2(30,y,98,28),select_storage.bind(g))
+	g.buttons.storage_zone.tooltip_text="備蓄と休息場所を指定"
+	g.add_button(g.palette,"research_save","保存",Rect2(470,y,78,28),research_save.bind(g))
+	g.add_button(g.palette,"research_load","読込",Rect2(556,y,78,28),research_load.bind(g))
+	for id in ["storage_zone","research_save","research_load"]:compact_button(g,g.buttons[id])
+
 static func build(g):
 	if not g.world.working() or g.field_book or g.field_shop or g.story_modal!="":return
 	if g.group==0:
-		panel(g,Rect2(8,623,996,122))
+		var area=architect_area(g);panel(g,area)
 		var index=0
 		for category in Model.ARCHITECT:
 			var id="architect_category_%d"%index
-			g.add_button(g.palette,id,category,Rect2(16+index*154,631,146,32),architecture_category.bind(g,category))
-			g.UI.selected(g.buttons[id],g.architect_category==category);index+=1
-		if g.architect_category!="ゾーン" and g.subtask_choices().is_empty():label(g.colony_panel,"今は使えるものがありません",Vector2(16,62),15)
-	elif g.colony_page=="roles":
-		var people=Model.people(g.world)
-		var list_height=mini(186,maxi(96,people.size()*96))
-		var panel_height=127+list_height
-		var p=panel(g,Rect2(16,742-panel_height,900,panel_height))
-		label(p,"役割と現在の仕事",Vector2(18,12),21)
-		label(p,"優先：1 最優先 / 2 高 / 3 低 / 4 最低 / 空欄 停止。同じ優先は左から。",Vector2(18,43),14)
-		var scroll=ScrollContainer.new();scroll.position=Vector2(16,79);scroll.size=Vector2(864,list_height);p.add_child(scroll)
-		var list=VBoxContainer.new();list.size_flags_horizontal=Control.SIZE_EXPAND_FILL;scroll.add_child(list)
-		for row in people:
-			var button=Button.new();button.name="Person_"+row.key;button.custom_minimum_size=Vector2(840,38);button.alignment=HORIZONTAL_ALIGNMENT_LEFT;button.focus_mode=Control.FOCUS_NONE
-			button.text="%s ｜ %s ｜ HP %d/%d"%[row.name,row.state if row.state!="" else row.role,row.hp,row.max_hp]
-			g.UI.button(button);button.pressed.connect(person_selected.bind(g,row));list.add_child(button)
-			if not g.world.workers.has(row.key):continue
-			var priorities=HBoxContainer.new();list.add_child(priorities)
-			var a=g.world.workers[row.key]
-			for kind in g.world.Work.Policy.ORDER:
-				var choice=Button.new();choice.name="Priority_"+row.key+"_"+kind;choice.custom_minimum_size=Vector2(132,36);choice.focus_mode=Control.FOCUS_NONE
-				choice.text=g.world.Work.Policy.LABELS[kind]+"　"+(str(a.work_priorities[kind]) if a.work_priorities[kind]>0 else "")
-				choice.tooltip_text="クリックで1→2→3→4→空欄。同優先は左のカテゴリから選択。"
-				g.UI.button(choice);choice.add_theme_font_size_override("font_size",14);g.UI.selected(choice,a.work_priorities[kind]==1);choice.pressed.connect(priority_changed.bind(g,row.key,kind));priorities.add_child(choice)
-			var draft=Button.new();draft.name="Draft_"+row.key;draft.custom_minimum_size=Vector2(132,36);draft.focus_mode=Control.FOCUS_NONE;draft.text="徴兵解除" if a.drafted else "徴兵する"
-			g.UI.button(draft);draft.add_theme_font_size_override("font_size",14);g.UI.selected(draft,a.drafted);draft.pressed.connect(draft_changed.bind(g,row.key));priorities.add_child(draft)
-		g.add_button(g.palette,"storage_zone","ゾーンを開く",Rect2(34,696,180,34),select_storage.bind(g))
-		g.UI.selected(g.buttons.storage_zone,g.tool=="storage")
-		label(p,"地面をクリック。40個/マス（仮）",Vector2(212,panel_height-34),13)
-		g.add_button(g.palette,"research_save","保存",Rect2(636,696,122,34),research_save.bind(g))
-		g.add_button(g.palette,"research_load","読込",Rect2(770,696,122,34),research_load.bind(g))
+			g.add_button(g.palette,id,category,Rect2(16+index*112,area.position.y+8,104,28),architecture_category.bind(g,category))
+			compact_button(g,g.buttons[id]);priority_style(g.buttons[id],1 if g.architect_category==category else 0);index+=1
+		if g.architect_category!="ゾーン" and g.subtask_choices().is_empty():label(g.colony_panel,"今は使えるものがありません",Vector2(12,47),14)
+	elif g.colony_page=="roles":build_roles(g)
 	elif g.group==1 and g.selected_animals.is_empty():
 		var animals=g.world.animals.filter(func(a):return a.get("category","")!="human")
-		var p=panel(g,Rect2(16,430,864,312))
-		label(p,"動物　%d匹"%animals.size(),Vector2(18,12),21)
-		label(p,"個体を選んで、指示や装備を確認します。",Vector2(18,43),14)
-		var scroll=ScrollContainer.new();scroll.position=Vector2(16,79);scroll.size=Vector2(828,205);p.add_child(scroll)
-		var list=VBoxContainer.new();list.size_flags_horizontal=Control.SIZE_EXPAND_FILL;scroll.add_child(list)
+		var list_height=mini(190,maxi(34,animals.size()*36))
+		var panel_height=70+list_height
+		var p=panel(g,Rect2(16,742-panel_height,640,panel_height))
+		label(p,"動物　%d匹"%animals.size(),Vector2(14,9),19)
+		label(p,"個体を選んで、指示や装備を確認",Vector2(14,35),13)
+		var scroll=ScrollContainer.new();scroll.position=Vector2(12,58);scroll.size=Vector2(616,list_height)
+		scroll.horizontal_scroll_mode=ScrollContainer.SCROLL_MODE_DISABLED;p.add_child(scroll)
+		var list=VBoxContainer.new();list.add_theme_constant_override("separation",2);list.size_flags_horizontal=Control.SIZE_EXPAND_FILL;scroll.add_child(list)
 		for a in animals:
-			var button=Button.new();button.name="Animal_%d"%a.id;button.custom_minimum_size=Vector2(804,42);button.alignment=HORIZONTAL_ALIGNMENT_LEFT;button.focus_mode=Control.FOCUS_NONE
+			var button=Button.new();button.name="Animal_%d"%a.id;button.custom_minimum_size=Vector2(594,34);button.alignment=HORIZONTAL_ALIGNMENT_LEFT;button.clip_text=true
 			button.text="%s (%s) ｜ 忠誠 %d ｜ HP %d/%d ｜ %s"%[g.world.animal_name(a),"家畜" if g.world.Livestock.classification(a)=="livestock" else "ペット",g.world.Progression.loyalty(a),a.hp,a.max_hp,a.state if a.placed else "到着待ち"]
-			g.UI.button(button);button.pressed.connect(g.choose_animal.bind(a.id));list.add_child(button)
+			button.tooltip_text=button.text;compact_button(g,button);button.pressed.connect(g.choose_animal.bind(a.id));list.add_child(button)
 		if animals.is_empty():label(list,"仲間の動物はいません",Vector2.ZERO)
 
 static func priority_changed(g,key: String,kind: String):
@@ -88,6 +133,10 @@ static func draft_changed(g,key: String):
 
 static func signature(g) -> String:
 	if g.group==1 and not g.selected_animals.is_empty():return g.LivestockControls.signature(g)
-	if g.colony_page=="roles":return str(Model.people(g.world))+str(g.world.keeper.get("work_priorities",{}))+str(g.world.keeper.get("drafted",false))
+	if g.colony_page=="roles":
+		var states=[]
+		for key in g.world.workers:
+			var a=g.world.workers[key];states.append([key,a.get("work_priorities",{}),a.get("drafted",false)])
+		return str(Model.people(g.world))+str(states)
 	if g.group==1 and g.selected_animals.is_empty():return str(g.world.animals.map(func(a):return [a.id,a.get("name",""),a.state,a.hp,a.placed,g.world.Progression.loyalty(a)]))
 	return ""
