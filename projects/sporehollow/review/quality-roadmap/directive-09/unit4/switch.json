@@ -1,0 +1,15 @@
+{
+  "code_commit": "91237e8",
+  "new_sha256": "b3ba600d8f9810af3aedab646b26968d8c77f52c62eab761ed1690741cb814a1",
+  "old_sha256": "b1d5d923548cc431774bb347d1ed451243c2bb01d24bb8d762428ae581077470",
+  "backup": "C:\\Users\\masat\\AppData\\Local\\Packages\\sandbox.{ab3603a5-08a3-4d6d-b658-1d37885a8367}\\AC\\Temp\\whistle-directive09-rollback\\WhistleRanch-b1d5d923548c.exe",
+  "size": 127497976,
+  "save_hashes_before": {
+    "user-data\\WhistleResearchAutonomy\\autonomy.snapshot": "7c0906c740ff90ce55892b6852df18e6546b3fb37057d03744ef73d75452b841"
+  },
+  "save_hashes_after": {
+    "user-data\\WhistleResearchAutonomy\\autonomy.snapshot": "7c0906c740ff90ce55892b6852df18e6546b3fb37057d03744ef73d75452b841"
+  },
+  "running_process_absent": true,
+  "exclusive_open_passed": true
+}

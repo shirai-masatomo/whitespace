@@ -1,0 +1,17 @@
+{
+  "code_commit": "91237e8",
+  "scope": "Directive 09 units 1 through 4; map boundary decision, cleanup and publication remain",
+  "exe": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\autonomy-entry-01\\bundle\\WhistleRanch-Autonomy-Partial.exe",
+  "sha256": "b3ba600d8f9810af3aedab646b26968d8c77f52c62eab761ed1690741cb814a1",
+  "size": 127497976,
+  "fixed_entry": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\確認入口\\最新開発版.lnk",
+  "launcher": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\autonomy-entry-01\\bundle\\Launch-Autonomy.ps1",
+  "data_root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\autonomy-entry-01\\bundle\\user-data\\WhistleResearchAutonomy",
+  "validation_groups": 5,
+  "native_close_pid": 45940,
+  "native_resume_pid": 33308,
+  "human_play": false,
+  "previous_exe_backup": "C:\\Users\\masat\\AppData\\Local\\Packages\\sandbox.{ab3603a5-08a3-4d6d-b658-1d37885a8367}\\AC\\Temp\\whistle-directive09-rollback\\WhistleRanch-b1d5d923548c.exe",
+  "previous_sha256": "b1d5d923548cc431774bb347d1ed451243c2bb01d24bb8d762428ae581077470",
+  "save_hashes_unchanged": true
+}

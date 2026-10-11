@@ -1,0 +1,96 @@
+{
+	"failures": 0,
+	"groups": [
+		{
+			"checks": [
+				{
+					"check": "One physical staff can be reserved for keeper equipment",
+					"passed": true
+				},
+				{
+					"check": "Worker walks to the actual staff before equipping; carried item exists",
+					"passed": true
+				},
+				{
+					"check": "Save during pickup resumes to one equipped item without duplication",
+					"passed": true
+				},
+				{
+					"check": "Campaign persistence retains keeper equipment and total quantity",
+					"passed": true
+				},
+				{
+					"check": "Unequip returns one physical staff at current position",
+					"passed": true
+				},
+				{
+					"check": "Cancellation releases reserved/carried equipment without consuming it",
+					"passed": true
+				},
+				{
+					"check": "Forbidden staff cannot be designated for equipping",
+					"passed": true
+				},
+				{
+					"check": "Drafted keeper accepts the explicitly selected enemy",
+					"passed": true
+				},
+				{
+					"check": "Staff strikes selected enemy at two cells; closer enemy is not substituted",
+					"passed": true
+				},
+				{
+					"check": "Automatic defense does not add a second attack or reset target timing",
+					"passed": true
+				},
+				{
+					"check": "Bare hands cannot strike from staff reach",
+					"passed": true
+				},
+				{
+					"check": "Bare hands follow a real walk route into adjacent attack range",
+					"passed": true
+				},
+				{
+					"check": "Undrafting cancels the direct target job",
+					"passed": true
+				},
+				{
+					"check": "Nutrition incapacity blocks drafted pursuit and attacks",
+					"passed": true
+				}
+			],
+			"name": "3 Physical keeper equipment and drafted target combat"
+		},
+		{
+			"checks": [
+				{
+					"check": "Crossing 10:00 creates the day's noncombat arrival",
+					"passed": true
+				},
+				{
+					"check": "Supplies arrive as physical goods even with an unresolved enemy",
+					"passed": true
+				},
+				{
+					"check": "Repeated boundary and restore do not duplicate daily goods",
+					"passed": true
+				},
+				{
+					"check": "Arrived mushrooms enter existing physical eating behavior",
+					"passed": true
+				},
+				{
+					"check": "Existing hauling moves arriving wood into storage without loss",
+					"passed": true
+				},
+				{
+					"check": "A different day's one arrival remains eligible",
+					"passed": true
+				}
+			],
+			"name": "4 Daily supply event, old enemies, physical haul/food and save guards"
+		}
+	],
+	"method": "Controlled production World.step and snapshot/campaign tests; simulation, not human play"
+}

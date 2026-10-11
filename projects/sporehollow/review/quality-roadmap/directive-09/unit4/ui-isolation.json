@@ -1,0 +1,24 @@
+{
+  "parent_pid": 428,
+  "executable": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\.tools\\Godot_v4.7.2-stable_win64.exe",
+  "dirty": true,
+  "data_root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\isolated\\20261011-113337-097/user-data",
+  "result": {
+    "PID": 26468,
+    "ThreadID": 17924,
+    "ExitCode": 0,
+    "OwnedWindowCount": 2,
+    "Station": "Service-0x0-bf6d9650$",
+    "Desktop": "Render_a4510ee288ba41e1b7a7da43555ce5b8",
+    "ObservedDesktop": "Render_a4510ee288ba41e1b7a7da43555ce5b8",
+    "NonInteractive": true,
+    "DesktopMatched": true,
+    "TimedOut": false
+  },
+  "asset_delivery_commit": "b0e917a11f205190dde0136165a72c189f39e275",
+  "implementation_commit": "26a973ad10465ee4fb3b86f4dd76e7a5ffa57df2",
+  "end_utc": "2026-10-11T02:33:43.5285098Z",
+  "command": "\"C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\.tools\\Godot_v4.7.2-stable_win64.exe\" --path \"C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\" --audio-driver Dummy --rendering-method gl_compatibility --max-fps 30 --resolution 1280x800 --log-file \"C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\isolated\\20261011-113337-097/render.log\" --script tests/test_completion09_ui.gd -- --isolated-review --output=\"C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\isolated\\20261011-113337-097\"",
+  "start_utc": "2026-10-11T02:33:37.4638300Z",
+  "purpose": "completion09"
+}

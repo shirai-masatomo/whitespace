@@ -1,0 +1,42 @@
+{
+	"checks": [
+		{
+			"check": "A visible rock can be selected by actual scene input",
+			"passed": true
+		},
+		{
+			"check": "UI mining designation creates the real job",
+			"passed": true
+		},
+		{
+			"check": "Mining UI cancel removes the job",
+			"passed": true
+		},
+		{
+			"check": "Selecting an eligible dog shows training rather than invalid slaughter controls",
+			"passed": true
+		},
+		{
+			"check": "Training button designates only selected dog",
+			"passed": true
+		},
+		{
+			"check": "Keeper selection shows physical staff equipment action",
+			"passed": true
+		},
+		{
+			"check": "Equipment button queues actual item pickup",
+			"passed": true
+		},
+		{
+			"check": "Drafted keeper enemy click produces direct target attack instead of inspection",
+			"passed": true
+		},
+		{
+			"check": "Drafted target click wins when an enemy overlaps the merchant interaction area",
+			"passed": true
+		}
+	],
+	"failures": 0,
+	"method": "Godot InputEvent clicks in private GPU desktop; controlled paused scene, not human play"
+}
