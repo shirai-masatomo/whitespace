@@ -1424,7 +1424,11 @@ func _notification(what):
 
 func clamp_camera():
 	var half=Vector2(640,400)/camera.zoom
-	camera.position=camera.position.clamp(half-Vector2(100,100),Vector2(Farm.W,Farm.H)*TILE-half+Vector2(100,100))
+	# Margins keep all four edge cells above the HUD and reachable while tools are open.
+	var extent=Vector2(Farm.W,Farm.H)*TILE
+	var low=half-Vector2(180,180)/camera.zoom
+	var high=extent-half+Vector2(360,330)/camera.zoom
+	camera.position=camera.position.clamp(low.min(high),low.max(high))
 	camera.force_update_scroll()
 
 func _process(delta):
@@ -1823,13 +1827,6 @@ func _draw():
 
 func scene_actors() -> Array:
 	var actors=[]
-	var inv=get_canvas_transform().affine_inverse()
-	var top=inv*Vector2.ZERO;var bottom=inv*Vector2(1280,800)
-	for y in range(floori(top.y/TILE.y)-2,ceili(bottom.y/TILE.y)+3):
-		for x in range(floori(top.x/TILE.x)-2,ceili(bottom.x/TILE.x)+3):
-			var p=Vector2i(x,y)
-			if p not in world.trees and preload("res://game/forest_pattern.gd").outer_tree(p,world.seed_value,world.W,world.H):
-				actors.append({"y":StoryView.tree_foot(self,p).y,"x":p.x,"kind":"tree","data":p,"deep":true})
 	for p in world.trees: actors.append({"y":StoryView.tree_foot(self,p).y,"x":p.x,"kind":"tree","data":p})
 	if not world.story.idol.is_empty(): actors.append({"y":actor_pixel("idol",world.Story.at(world)).y+TILE.y+14,"x":world.Story.at(world).x,"kind":"idol"})
 	for cell in world.structures:

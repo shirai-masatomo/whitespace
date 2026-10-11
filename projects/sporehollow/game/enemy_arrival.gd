@@ -5,7 +5,7 @@ const ASSIGNED_COST=3.0
 const BLOCKED_REPLAN_SECONDS=0.75
 
 static func side(w,e) -> Vector2i:
-	return e.entry-w.exit_for(e.entry)
+	return (e.entry-w.exit_for(e.entry)).sign()
 
 static func depth(w,p: Vector2i,inward: Vector2i) -> int:
 	if inward.x==1:return p.x
@@ -18,7 +18,7 @@ static func known(w,e,p: Vector2i) -> bool:
 
 static func choose(w,e) -> Dictionary:
 	var inward=side(w,e);var open=[e.pos];var cost={e.pos:0.0};var previous={};var goals=[];var scouting={}
-	var fronts=w.entries.filter(func(gate):return gate-w.exit_for(gate)==inward).map(func(gate):return w.exit_for(gate))
+	var fronts=w.entries.filter(func(gate):return (gate-w.exit_for(gate)).sign()==inward).map(func(gate):return w.exit_for(gate))
 	var closed=e.get("arrival_closed",{})
 	for front in fronts:
 		if known(w,e,front+inward):closed[front]=w.Story.terrain_block(w,front+inward)
@@ -34,9 +34,9 @@ static func choose(w,e) -> Dictionary:
 		if p in fronts and p!=e.pos and not closed.get(p,false):
 			goals.append(p);scouting[p]=true
 		for n in w.neighbors(p):
-			if depth(w,n,inward)>2 or not known(w,e,n) or w.Story.terrain_block(w,n):continue
-			if inward.x!=0 and (n.y<1 or n.y>=w.H-1):continue
-			if inward.y!=0 and (n.x<1 or n.x>=w.W-1):continue
+			if not w.inside(n) or depth(w,n,inward)>2 or not known(w,e,n) or w.Story.terrain_block(w,n):continue
+			if inward.x!=0 and (n.y<0 or n.y>=w.H):continue
+			if inward.y!=0 and (n.x<0 or n.x>=w.W):continue
 			var obstacle=w.structures.get(n,{})
 			if w.blocks(n) and not can_break and (obstacle.kind not in w.Buildings.DOORS or obstacle.get("lock_hp",0)>0):continue
 			var effort=1.0
@@ -72,7 +72,7 @@ static func step(w,e) -> bool:
 		e.arrival_complete=true;e.erase("arrival_route");return false
 	# Far from the border, its alternatives are not visible yet. Keep the existing approach.
 	if 2-depth(w,e.pos,inward)>e.sight_range:
-		e.state="森から接近";e.move_credit=minf(1.9,e.move_credit+e.move_speed*w.Content.speed(w,e)*w.DT)
+		e.state="地図の端から接近";e.move_credit=minf(1.9,e.move_credit+e.move_speed*w.Content.speed(w,e)*w.DT)
 		if e.move_credit>=1:
 			var next=e.pos+inward
 			if not w.actor_occupied(next,e.pos):
@@ -109,7 +109,7 @@ static func step(w,e) -> bool:
 				e.move_credit=minf(1.9,e.move_credit+e.move_speed*w.Content.speed(w,e)*w.DT)
 				if e.move_credit>=1:w.move_enemy(e,next);e.move_credit-=1
 			return true
-	e.state="入口を空ける" if w.inside(e.pos) else ("別の入口へ" if e.arrival_gate!=e.entry else "森から接近")
+	e.state="入口を空ける" if w.inside(e.pos) else ("別の入口へ" if e.arrival_gate!=e.entry else "地図の端から接近")
 	e.move_credit=minf(1.9,e.move_credit+e.move_speed*w.Content.speed(w,e)*w.DT)
 	if e.move_credit<1 or route.size()<2:return true
 	var next=route[1]

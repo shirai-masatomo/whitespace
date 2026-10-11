@@ -5,14 +5,6 @@ static func draw_ground(c: CanvasItem, world, tile: Vector2, time: float = 0):
 	var inv=c.get_canvas_transform().affine_inverse()
 	var top=inv*Vector2.ZERO;var bottom=inv*Vector2(1280,800)
 	c.draw_rect(Rect2(top-Vector2(100,100),bottom-top+Vector2(200,200)),Color("344c3b"))
-	for y in range(floori(top.y/tile.y)-2,ceili(bottom.y/tile.y)+3):
-		for x in range(floori(top.x/tile.x)-2,ceili(bottom.x/tile.x)+3):
-			if x>=1 and x<world.W-1 and y>=1 and y<world.H-1:continue
-			var n=posmod(x*173+y*317+world.seed_value,137)
-			var p=Vector2(x,y)*tile
-			if n%5==0:c.draw_rect(Rect2(p+Vector2(8,13),Vector2(17,8)),Color("526643"))
-			if n%11==0:c.draw_line(p+Vector2(12,20),p+Vector2(15,13),Color("71845a"),2)
-			# Trees belong to the foot-depth pass, after all ground tiles.
 	for y in range(world.H):
 		for x in range(world.W):
 			var p = Vector2(x, y) * tile
@@ -37,6 +29,7 @@ static func draw_ground(c: CanvasItem, world, tile: Vector2, time: float = 0):
 				c.draw_rect(Rect2(p + Vector2(17, 20), Vector2(11, 3)), Color("96955f"))
 			if n > 124:
 				c.draw_rect(Rect2(p + Vector2(31, 20), Vector2(3, 3)), Color("ded3a2"))
+	c.draw_rect(Rect2(Vector2.ZERO,Vector2(world.W,world.H)*tile),Color("d4c89d"),false,3)
 	# Sparse drifting moths; never cover actors with a particle carpet.
 	for i in range(3):
 		var q = Vector2(230 + i * 370 + sin(time * 0.26 + i) * 34, 165 + i * 96 + cos(time * 0.38 + i) * 18)

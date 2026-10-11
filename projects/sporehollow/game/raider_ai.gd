@@ -75,7 +75,7 @@ static func costs(e,w) -> Dictionary:
 	return result
 
 static func route(e,w,goal: Vector2i,break_objects: bool,avoid_actors: bool) -> Array:
-	return w.find_path(e.pos,goal,break_objects,avoid_actors,e.get("species","")=="doberman",costs(e,w))
+	return w.find_path(e.pos,goal,break_objects,avoid_actors,e.get("species","")=="doberman",costs(e,w),true)
 
 static func remember_step(e,w,origin: Vector2i,destination: Vector2i):
 	if not e.get("search_route_active",false) or e.flee or e.carry=="keeper":return

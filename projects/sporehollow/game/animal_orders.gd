@@ -38,8 +38,8 @@ static func enqueue(w,kind: String,ids: Array,p: Vector2i) -> bool:
 		var dest=a.pos
 		if kind=="guide":
 			var sites=[]
-			for y in range(maxi(1,p.y-3),mini(w.H-1,p.y+4)):
-				for x in range(maxi(1,p.x-3),mini(w.W-1,p.x+4)):
+			for y in range(maxi(0,p.y-3),mini(w.H,p.y+4)):
+				for x in range(maxi(0,p.x-3),mini(w.W,p.x+4)):
 					var cell=Vector2i(x,y)
 					if cell!=leader_goal and cell not in assigned and w.animal_walkable(a,cell) and not w.actor_occupied(cell,a.pos): sites.append(cell)
 			sites.sort_custom(func(a1,b1):
@@ -187,8 +187,8 @@ static func follow(w,a) -> bool:
 
 static func command_goals(w,a,reach: int) -> Array:
 	var goals=[]
-	for y in range(1,w.H-1):
-		for x in range(1,w.W-1):
+	for y in range(w.H):
+		for x in range(w.W):
 			var cell=Vector2i(x,y)
 			if w.distance(cell,a.pos)<=reach and (w.Rules.WHISTLE.through_walls or w.line_of_sight(cell,a.pos)) and w.walkable(cell) and not w.actor_occupied(cell,w.keeper.pos): goals.append(cell)
 	return goals

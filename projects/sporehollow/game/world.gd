@@ -10,7 +10,8 @@ var trees: Dictionary = {}
 const logistics_entry = Vector2i(1,5)
 const RaiderAI = preload("res://game/raider_ai.gd")
 const Arrival = preload("res://game/enemy_arrival.gd")
-const Forest=preload("res://game/forest_pattern.gd")
+const Land=preload("res://game/colony_land.gd")
+var boundary_version=1
 const Departure=preload("res://game/forest_departure.gd")
 const Decisions = preload("res://game/decision_ai.gd")
 const StageData = preload("res://game/stages.gd")
@@ -303,6 +304,8 @@ func _init(data: Dictionary = {}, seed_number: int = 17, stage_override: Diction
 	shop_stock = Shop.generate(stage, seed_value, campaign.unlocked_blueprints, campaign.day)
 	Cycle.init(self)
 	Tasks.init(self)
+	boundary_version=int(campaign.get("boundary_version",0))
+	Land.migrate(self)
 	say("牧場を整えよう")
 
 func make_schedule():
@@ -330,10 +333,10 @@ func say(message: String):
 	if events.size() > 5: events.pop_front()
 
 func inside(p: Vector2i) -> bool:
-	return p.x >= 1 and p.x < W - 1 and p.y >= 1 and p.y < H - 1
+	return Land.BOUNDS.has_point(p)
 
 func walkable(p: Vector2i) -> bool:
-	return (inside(p) or Forest.rescue_lane(p,W,H)) and not Story.terrain_block(self,p) and (not blocks(p) or (structures.get(p,{}).get("kind") in Buildings.DOORS))
+	return inside(p) and not Story.terrain_block(self,p) and (not blocks(p) or (structures.get(p,{}).get("kind") in Buildings.DOORS))
 
 func blocks(p: Vector2i) -> bool:
 	return structures.has(p) and structures[p].status == "ready" and structures[p].kind not in ["kennel", "coop"] and not structures[p].open
@@ -355,7 +358,7 @@ func neighbors(p: Vector2i) -> Array:
 
 func exit_for(entry: Vector2i) -> Vector2i:
 	# Configured entrance determines the return edge, not a fixed left-hand exit.
-	var exits = [Vector2i(0, entry.y), Vector2i(W - 1, entry.y), Vector2i(entry.x, 0), Vector2i(entry.x, H - 1)]
+	var exits = [Vector2i(-1, clampi(entry.y,0,H-1)), Vector2i(W, clampi(entry.y,0,H-1)), Vector2i(clampi(entry.x,0,W-1), -1), Vector2i(clampi(entry.x,0,W-1), H)]
 	exits.sort_custom(func(a, b): return distance(entry, a) < distance(entry, b))
 	return exits[0]
 
@@ -367,9 +370,8 @@ func next_step(start: Vector2i, goal: Vector2i, raider: bool = false, avoid_acto
 	var path = find_path(start,goal,raider,avoid_actors)
 	return path[1] if path.size()>1 else start
 
-func find_path(start: Vector2i, goal: Vector2i, raider: bool = false, avoid_actors: bool = false, outdoor_only: bool = false, route_costs: Dictionary = {}) -> Array:
+func find_path(start: Vector2i, goal: Vector2i, raider: bool = false, avoid_actors: bool = false, outdoor_only: bool = false, route_costs: Dictionary = {}, allow_exit: bool = false) -> Array:
 	if start == goal: return [start]
-	var forest_route=not inside(start) or not inside(goal)
 	var frontier = [start]
 	var cost = {start: 0.0}
 	var previous = {start: start}
@@ -385,8 +387,8 @@ func find_path(start: Vector2i, goal: Vector2i, raider: bool = false, avoid_acto
 				path.push_front(p)
 			return path
 		for n in neighbors(p):
-			var exit_cell = raider and n == goal and entries.any(func(entry): return exit_for(entry) == n)
-			if not inside(n) and not exit_cell and not (forest_route and Forest.rescue_lane(n,W,H)): continue
+			var exit_cell = (raider or allow_exit) and n == goal and Land.is_exit(n)
+			if not inside(n) and not exit_cell: continue
 			if Story.terrain_block(self,n): continue
 			if outdoor_only and is_indoor(n): continue
 			if avoid_actors and n != goal and actor_occupied(n, start): continue
@@ -541,18 +543,23 @@ func issue_order(kind: String, p: Vector2i, animal_id: int = -1) -> bool:
 
 func spawn_enemy(event: Dictionary):
 	var entry: Vector2i = event.entry
-	var origin = exit_for(entry) + (exit_for(entry)-entry)*Forest.OUTER_DEPTH
-	# Keep every spawn outside, including multiple paused debug requests at one entrance.
-	var gates=[entry]+entries.filter(func(p):return p!=entry)
+	# Spawn on a visible border cell; no off-map approach or hidden rescue corridor.
+	var origin=exit_for(entry).clamp(Vector2i.ZERO,Vector2i(W-1,H-1))
+	var border=Land.border_cells()
+	border.sort_custom(func(a,b):return distance(a,origin)<distance(b,origin) if distance(a,origin)!=distance(b,origin) else a.y*W+a.x<b.y*W+b.x)
 	var found=false
-	for gate in gates:
-		if event.get("debug_single",false) and (not walkable(gate) or live_structure(gate)):continue
-		for offset in range(24,56):
-			var candidate=exit_for(gate)+(exit_for(gate)-gate)*offset
-			if not enemies.any(func(e):return not e.done and e.pos==candidate):
-				entry=gate;origin=candidate;found=true;break
-		if found:break
-	if not found:say("森の外に出現できる場所がありません");return
+	for candidate in border:
+		if not walkable(candidate) or actor_occupied(candidate,candidate+Vector2i(999,999)) or live_structure(candidate):continue
+		origin=candidate;found=true;break
+	if not found:
+		# A fully walled perimeter must not silently delete a raid. The adjacent
+		# visible outside cell is only an arrival position, never a walkable forest.
+		for candidate in border:
+			var outside=exit_for(candidate)
+			if not actor_occupied(outside,outside+Vector2i(999,999)):
+				origin=outside;found=true;break
+	if not found:say("地図の端に出現できる空きマスがありません");return
+	entry=origin.clamp(Vector2i.ONE,Vector2i(W-2,H-2))
 	var progress = mini(6, maxi(0, campaign.day - 1))
 	enemies.append({"move_speed": event.get("move_speed", 1.333333 + progress * 0.27), "move_credit": 0.0, "id": spawned, "pos": origin, "entry": entry, "lv": event.get("lv", 1), "hp": Rules.KIDNAPPER.max_hp + progress * 4, "max_hp": Rules.KIDNAPPER.max_hp + progress * 4,
 		"attack_power": Rules.KIDNAPPER.attack_power + progress / 2, "object_attack_power": Rules.KIDNAPPER.object_attack_power,
@@ -566,11 +573,11 @@ func spawn_enemy(event: Dictionary):
 	Progression.spawn_data(self,enemies.back(),event)
 	if event.get("wave",0)==999:
 		enemies.back().reinforcement=true
-		PlayerEvents.add(self,enemies.back().name+"の増援が森から接近")
+		PlayerEvents.add(self,enemies.back().name+"の増援が地図の端から接近")
 	Life.danger(self, "invasion")
 	spawned += 1
 	milestones.append({"tick": tick, "kind": "invasion", "id": spawned - 1})
-	say("森から人影が現れた！")
+	say("地図の端に人影が現れた！")
 
 func release_keeper(e: Dictionary):
 	if e.carry == "keeper":
@@ -765,13 +772,10 @@ func enemy_step(e: Dictionary):
 	if not inside(e.pos) and e.carry=="keeper":Departure.keeper(self,e);return
 	if not inside(e.pos) and e.get("led_animal",-1)>=0:Progression.lead_out(self,e);return
 	if Arrival.step(self,e):return
-	if e.pos.x<0 or e.pos.y<0 or e.pos.x>=W or e.pos.y>=H:
-		e.state="森から接近"
-		e.move_credit+=e.move_speed*Content.speed(self,e)*DT
-		if e.move_credit>=1:
-			var next=e.pos+(e.entry-exit_for(e.entry))
-			if not actor_occupied(next,e.pos) and Combat.pay(e,"move"): e.pos=next; e.move_credit-=1; e.path.append(next)
-		return
+	if not inside(e.pos):
+		# Retreat has crossed the same visible boundary used by capture/theft.
+		if e.flee:e.done=true;metrics.repelled+=1;metrics.coins+=0 if e.get("archetype")=="salaryman" else 3;return
+		if not e.get("stolen",{}).is_empty():Content.enemy_step(self,e);return
 	RaiderAI.perceive(e, self)
 	if Content.enemy_step(self,e):return
 	if Progression.enemy_step(self,e): return
@@ -847,7 +851,7 @@ func enemy_step(e: Dictionary):
 			metrics.repelled += 1
 			metrics.coins += 0 if e.get("archetype")=="salaryman" else 3
 			return
-		if e.carry == "keeper" and not Forest.contains(e.pos,W,H):
+		if e.carry == "keeper" and not inside(e.pos):
 			e.done = true
 			keeper.state = "abducted"
 			finish(false)
@@ -918,7 +922,7 @@ func move_enemy(e: Dictionary, next: Vector2i,goal=null):
 		e.state = "退散" if e.flee else ("反撃" if e.counter_target >= 0 else ("連れ去り" if e.carry == "keeper" else e.search_state))
 		if e.carry == "keeper":
 			keeper.pos = e.pos
-			if not Forest.contains(e.pos,W,H):
+			if not inside(e.pos):
 				e.done = true
 				keeper.state = "abducted"
 				finish(false)

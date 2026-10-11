@@ -316,11 +316,11 @@ static func tow_path(w,start: Vector2i,goal: Vector2i,offset: Vector2i) -> Array
 			while p!=start: p=prev[p]; route.push_front(p)
 			return route
 		for n in w.neighbors(p):
-			if prev.has(n) or n.x < -1 or n.y < -1 or n.x>w.W-1 or n.y>w.H-1: continue
+			if prev.has(n) or n.x < -2 or n.y < -2 or n.x>w.W or n.y>w.H: continue
 			var footprint=cells(n)+[n+offset]
 			if footprint.any(func(c):return w.trees.has(c)): continue
 			# Going outside is permitted only in the chosen exit's two-cell lane.
-			if footprint.any(func(c):return not w.inside(c)) and w.distance(n,goal)>2: continue
+			if footprint.any(func(c):return not w.inside(c)) and w.distance(n,goal)>3: continue
 			prev[n]=p; open.append(n)
 	return []
 
@@ -331,7 +331,7 @@ static func tow_route(w,e,anchor: Vector2i,offset: Vector2i) -> Array:
 		return da<db if da!=db else (a.y<b.y if a.y!=b.y else a.x<b.x))
 	for entry in candidates:
 		var exit=w.exit_for(entry)
-		var goal=Vector2i(-1,clampi(exit.y,1,w.H-3)) if exit.x==0 else (Vector2i(w.W-1,clampi(exit.y,1,w.H-3)) if exit.x==w.W-1 else (Vector2i(clampi(exit.x,1,w.W-3),-1) if exit.y==0 else Vector2i(clampi(exit.x,1,w.W-3),w.H-1)))
+		var goal=Vector2i(-2,clampi(exit.y,0,w.H-2)) if exit.x==-1 else (Vector2i(w.W,clampi(exit.y,0,w.H-2)) if exit.x==w.W else (Vector2i(clampi(exit.x,0,w.W-2),-2) if exit.y==-1 else Vector2i(clampi(exit.x,0,w.W-2),w.H)))
 		var route=tow_path(w,anchor,goal,offset)
 		if route.size()>1:return route
 	return []

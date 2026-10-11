@@ -1,6 +1,8 @@
 extends Node
 ## Synthesized effects and user-supplied daytime music. No simulation RNG.
-const DAY_MUSIC=preload("res://assets/audio/Porch_Swing_Serenade.mp3")
+const DAY_MUSIC_PATH="res://assets/audio/Porch_Swing_Serenade.mp3"
+# Optional user-provided recording; source distribution uses synthesized ambience when absent.
+static var DAY_MUSIC=load(DAY_MUSIC_PATH) if ResourceLoader.exists(DAY_MUSIC_PATH) else null
 const DAY_VOLUME_DB=-16.0
 const MENU_VOLUME_DB=-23.0
 const MUSIC_FADE_IN_SECONDS=7.0
@@ -54,7 +56,8 @@ func _ready():
 	add_child(birds)
 	ambience_rng.seed = 371
 	music=AudioStreamPlayer.new();music.name="DayMusic"
-	music.stream=DAY_MUSIC.duplicate();music.stream.loop=true;music.stream.loop_offset=0.0
+	if DAY_MUSIC!=null:
+		music.stream=DAY_MUSIC.duplicate();music.stream.loop=true;music.stream.loop_offset=0.0
 	music.max_polyphony=1;music.volume_db=-80
 	add_child(music)
 
@@ -82,7 +85,7 @@ static func seam_gain(position: float,length: float) -> float:
 
 func set_context(phase: String,soft: bool=false):
 	set_night(phase=="defend")
-	music_enabled=phase in ["shop","day","dawn"]
+	music_enabled=music.stream!=null and phase in ["shop","day","dawn"]
 	music_soft=soft
 	if music_enabled and not music.playing:
 		music_level=0.0;music_target=-1.0;music_fade_from=0.0;music_fade_elapsed=0.0
