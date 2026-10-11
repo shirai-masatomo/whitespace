@@ -30,7 +30,8 @@ func run():
 
 	game.world.tick=136 # Begin approach at 34 seconds, just before scheduled departure.
 	game.world.paused=true;var tick=game.world.tick
-	await mouse(game.screen_cell(Farm.MERCHANT_CELL))
+	game.choose_walk();await mouse(game.screen_cell(Farm.MERCHANT_CELL),MOUSE_BUTTON_RIGHT)
+	await press("negotiate")
 	check(game.merchant_requested and not game.field_shop,"Click reserves physical approach during pause")
 	for i in range(50):game.world.step();game._process(0)
 	check(game.world.tick==tick,"Pause does not consume merchant visit")

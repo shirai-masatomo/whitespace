@@ -11,7 +11,7 @@ func run():
 	game=load("res://game/main.tscn").instantiate();game.automated=true;game.world=Farm.new({},31)
 	game.world.story.intro_seen=true;root.add_child(game);await process_frame;await process_frame;game.set_process(false)
 	game.world.tick=60;game.world.keeper.pos=game.world.merchant_talk_cells()[0]
-	game.world.paused=true;game.open_market();game._process(0)
+	game.world.paused=true;game.choose_walk();game.request_merchant();game.open_market();game._process(0)
 	check(game.field_shop and game.merchant_speech.frame(game)==0,"Conversation starts on original closed mouth")
 	var tick=game.world.tick
 	game._process(0.20)
@@ -44,11 +44,11 @@ func run():
 	game.open_book();game._process(0);check(game.merchant_speech.frame(game)==0 and game.merchant_speech.key=="","Book hides and cancels speech")
 	game.close_morning_screen();await settle();game._process(0.2);check(game.merchant_speech.key=="greeting","Book close resumes visible greeting")
 	game.close_morning_screen();game._process(0);check(game.merchant_speech.key=="","Conversation close cancels speech")
-	game.open_market();game._process(0.2);check(game.merchant_speech.frame(game)==1,"Reconversation starts a fresh utterance")
+	game.choose_walk();game.request_merchant();game.open_market();game._process(0.2);check(game.merchant_speech.frame(game)==1,"Reconversation starts a fresh utterance")
 	game.world.market_open=false;game.world.merchant_leave_at=35;game.world.tick=200;game._process(0)
 	check(game.merchant_speech.key=="" and game.merchant_speech.frame(game)==0,"Departure cancels mouth immediately")
 	# Controlled still-world frames for a short reviewer preview; no OS input.
-	game.world.tick=60;game.world.merchant_leave_at=35;game.open_market();game.enter_market();game._process(0)
+	game.world.tick=60;game.world.merchant_leave_at=35;game.choose_walk();game.request_merchant();game.open_market();game.enter_market();game._process(0)
 	for i in range(19):await frozen_capture("preview_%02d"%i,i*0.1)
 	FileAccess.open(output+"/merchant-mouth.json",FileAccess.WRITE).store_string(JSON.stringify(record,"  "))
 	print("MERCHANT_MOUTH: %d checks, failures=%d"%[checks,failures]);quit(1 if failures else 0)

@@ -43,12 +43,83 @@ var merchant_approach=null
 var merchant_approach_job=-1
 var merchant_leave_at=MERCHANT_DELAY+MERCHANT_SECONDS
 
+# Negotiation is an explicit order owned by the selected resident, never a shared job.
+var merchant_worker=""
+var merchant_start_hp=0
+
+func merchant_actor(key: String) -> Dictionary:
+	if workers.has(key):return workers[key]
+	for a in animals:
+		if key=="a%d"%a.id and a.get("category","")=="human":return a
+	return {}
+
+func merchant_actor_reason(key: String) -> String:
+	var a=merchant_actor(key)
+	if a.is_empty():return "交渉する住人を選択してください"
+	if a.get("drafted",false):return "徴兵を解除してから交渉してください"
+	if a.get("forced_rest",false):return "休息・療養中です"
+	if key==merchant_worker and a.hp<merchant_start_hp:return "被弾しました"
+	if workers.has(key):return Work.reason(self,key,a)
+	if not available(a):return "この住人は今は行動できません"
+	if a.get("nutrition_down",false) or a.get("forced_rest",false) or a.get("mode","")=="rest":return "休息・療養中です"
+	if tick<a.get("hurt_until",0):return "被弾から回復中です"
+	if not a.get("pending",{}).is_empty() or a.get("guide_job",-1)>=0:return "別の個人指示を実行中です"
+	if animal_targets(a).any(func(e):return e.hp>0):return "近くの敵に対応中です"
+	return ""
+
+func merchant_candidates(key: String) -> Array:
+	var a=merchant_actor(key)
+	if a.is_empty():return []
+	return merchant_talk_cells().filter(func(cell):return walkable(cell) and not actor_occupied(cell,a.pos) and not find_path(a.pos,cell).is_empty())
+
+func merchant_reason(key: String) -> String:
+	if not merchant_present():return "商人はまだ来ていません" if tick<merchant_arrive_tick else "商人は帰りました"
+	var why=merchant_actor_reason(key)
+	if why!="":return why
+	if merchant_approach!=null or market_open:return "交渉はすでに指示されています"
+	if merchant_candidates(key).is_empty():return "商人への通路がふさがっています"
+	return ""
+
+func request_merchant(key: String) -> bool:
+	var why=merchant_reason(key)
+	if why!="":say(why);return false
+	var cell=merchant_candidates(key)[0]
+	if not Jobs.enqueue(self,"move",cell,-1):say("交渉の移動を予約できません");return false
+	var j=jobs.back();j.purpose="merchant";j.explicit_actor=key
+	Work.interrupt(self,key,"交渉へ向かうため中断")
+	merchant_worker=key;merchant_start_hp=merchant_actor(key).hp;merchant_approach=cell;merchant_approach_job=j.id
+	if not Work.claim(self,key,j):cancel_merchant("交渉の通路を予約できません");return false
+	j.state="walking"
+	return true
+
+func cancel_merchant(why: String=""):
+	for j in jobs.duplicate():
+		if j.get("purpose","")=="merchant":
+			# This move has no materials or partially committed operation to defer.
+			Work.release(self,j);jobs.erase(j);job_log.append({"tick":tick,"event":"negotiation_end","id":j.id,"reason":why})
+	merchant_approach=null;merchant_approach_job=-1;merchant_worker="";merchant_start_hp=0
+	if why!="":PlayerEvents.add(self,"交渉を中断："+why,"merchant_interrupt")
+
 func merchant_waiting() -> bool:
-	var waking=keeper.get("auto_wake_pending",false) and keeper.get("rest_kind","")=="auto"
-	if merchant_approach==null or keeper.state!="free" or (keeper.resting and not waking):return false
-	if keeper.pos==merchant_approach:return true
-	if (jobs_held and not (waking and job_hold_reason=="auto_rest")) or not walkable(merchant_approach) or find_path(keeper.pos,merchant_approach).is_empty():return false
-	return manual_goal==merchant_approach or jobs.any(func(j):return j.id==merchant_approach_job and j.kind=="move" and not j.get("cancel_requested",false))
+	if merchant_approach==null or merchant_actor_reason(merchant_worker)!="":return false
+	var a=merchant_actor(merchant_worker)
+	if not walkable(merchant_approach) or find_path(a.pos,merchant_approach).is_empty():return false
+	return jobs.any(func(j):return j.id==merchant_approach_job and j.kind=="move" and j.get("assigned_to","")==merchant_worker and not j.get("cancel_requested",false))
+
+func update_merchant_order():
+	if merchant_approach==null:return
+	if not merchant_present() or not merchant_waiting():
+		var why=merchant_actor_reason(merchant_worker)
+		cancel_merchant(why if why!="" else "相手・通路・移動指示を確認できません");return
+	# Support residents keep their own AI and never join the general worker registry.
+	if not workers.has(merchant_worker):
+		var j=Work.active(self,merchant_worker)
+		if not j.is_empty():
+			var actor=merchant_actor(merchant_worker)
+			Combat.recover(actor,DT,false)
+			Jobs.execute(self,j,actor)
+			actor.action_id="idle" if actor.pos==merchant_approach else "walk"
+			actor.state="交渉の到着待ち" if actor.pos==merchant_approach else "交渉へ移動中"
 
 const MERCHANT_CELL=Vector2i(2,5)
 
@@ -613,6 +684,7 @@ func animal_step(a: Dictionary):
 		return
 	if Livestock.held(self,a):a.state="と殺作業中";return
 	if Tasks.held(self,a):a.state="調教中";return
+	if merchant_worker=="a%d"%a.id and merchant_approach!=null:return
 	if Orders.follow(self,a): return
 	if not a.pending.is_empty() and tick >= a.pending.at:
 		release_kennel(a)
@@ -1015,6 +1087,7 @@ func step():
 	for worker in workers.values():Nutrition.step(self,worker)
 	if not working():return
 	Life.step(self)
+	update_merchant_order()
 	Jobs.step(self)
 	if tick % ceili(Rules.NATURE.interval / DT) == 0: grow_nature()
 	command_power = minf(10, command_power + 0.07)

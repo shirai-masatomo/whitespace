@@ -89,7 +89,7 @@ func ui_checks():
 	for i in range(90):g._process(1.0/30.0)
 	group.movement={"tick":g.world.tick,"position":g.world.keeper.pos,"jobs":g.world.jobs.duplicate(true)}
 	check(g.world.keeper.pos==Vector2i(6,6) and g.world.jobs.is_empty(),"Actual scene frame loop executes the drafted destination")
-	g.world.Work.set_drafted(g.world,"keeper",false);g.world.tick=20;g.world.keeper.pos=Vector2i(3,8);g.world.keeper.satiety=100;g.request_merchant()
+	g.world.Work.set_drafted(g.world,"keeper",false);g.world.tick=20;g.world.keeper.pos=Vector2i(3,8);g.world.keeper.satiety=100;g.choose_walk();g.request_merchant()
 	check(g.merchant_requested and g.world.jobs.any(func(j):return j.get("purpose","")=="merchant" and not j.get("direct_control",false)),"Merchant approach remains available without drafting")
 	for i in range(180):
 		g._process(1.0/30.0)

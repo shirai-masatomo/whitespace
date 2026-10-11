@@ -278,6 +278,7 @@ func notice(text_value: String):
 	message_until_tick = world.tick + 14
 
 func select_group(index: int):
+	merchant_context=false
 	zone_controls.pressed=false
 	item_commands.pressed=false
 	cancel_wall_stroke()
@@ -347,6 +348,8 @@ func wheel_scroll_ui() -> bool:
 	return false
 
 func choose_animal(id: int, toggle: bool = false):
+	merchant_context=false
+	colony_page=""
 	selected_resources.clear()
 	if world.animals.any(func(a): return a.id == id and not a.placed and not world.available(a)): return
 	var reserve = world.animals.any(func(a): return a.id == id and not a.placed)
@@ -359,6 +362,7 @@ func choose_animal(id: int, toggle: bool = false):
 	selected_animal = selected_animals[0] if not selected_animals.is_empty() else -1
 	selected = {"kind": "animal", "id": selected_animal} if selected_animal >= 0 else {}
 	tool = ""
+	if not world.merchant_actor("a%d"%selected_animal).is_empty():group=-1
 	if not reserve: react(id, "hello", 1.0)
 	refresh()
 
@@ -557,6 +561,7 @@ func facility_action(action: String):
 	refresh()
 
 func context_targets() -> Array:
+	if merchant_context:return [Farm.MERCHANT_CELL]
 	if selected.get("kind")=="tree": return selected_trees
 	if selected.get("kind")=="idol": return [world.Story.at(world)]
 	if selected.get("kind") == "job": return [selected.pos]
@@ -565,7 +570,7 @@ func context_targets() -> Array:
 	return []
 
 func context_state() -> String:
-	return TaskControls.signature(self)+str(world.trees)+str(world.story.idol)+str(world.story.investigated)+str(world.story.prayed_day)+str(selected_trees)+str(selected_resources) + str(selected) + str(selected_structures) + str(selected_structures.map(func(p): return selected_store().get(p,{}))) + str(world.jobs.map(func(j): return [j.kind, j.pos])) + str(world.materials) + str(world.wood)
+	return str(merchant_context)+(world.merchant_reason(selected_merchant_worker()) if merchant_context else "")+TaskControls.signature(self)+str(world.trees)+str(world.story.idol)+str(world.story.investigated)+str(world.story.prayed_day)+str(selected_trees)+str(selected_resources) + str(selected) + str(selected_structures) + str(selected_structures.map(func(p): return selected_store().get(p,{}))) + str(world.jobs.map(func(j): return [j.kind, j.pos])) + str(world.materials) + str(world.wood)
 
 func build_context_actions():
 	context_signature = context_state()
@@ -575,7 +580,10 @@ func build_context_actions():
 	context_panel.add_theme_stylebox_override("panel", UI.surface(UI.PAPER))
 	palette.add_child(context_panel)
 	var rows = []
-	if selected.get("kind") == "job":
+	if merchant_context:
+		var why=world.merchant_reason(selected_merchant_worker())
+		rows.append(["negotiate","交渉","next",request_merchant,why!="",why if why!="" else "選択した住人が商人へ歩き、到着後に交渉します"] )
+	elif selected.get("kind") == "job":
 		rows.append(["cancel_near", "取消", "cross", cancel_work.bind(selected.id), false, "この予定だけを取り消す"])
 	elif selected.get("kind")=="tree":
 		rows.append(["clear_tree","道具が必要","hammer",func():pass,true,"伐採には道具が必要です（道具は未実装）"])
@@ -611,7 +619,7 @@ func build_context_actions():
 	var row_width=140 if selected.get("kind")=="idol" else 112
 	context_panel.size = Vector2(rows.size() * row_width + 12, 68)
 	var title = Label.new()
-	title.text = "黄金像" if selected.get("kind")=="idol" else ("開拓する木" if selected.get("kind")=="tree" else ("選択 %d/8" % count if count > 1 else ("落とし物" if not selected_resources.is_empty() else ("床" if selection_layer=="floor" else "建物"))))
+	title.text = "商人 · 交渉" if merchant_context else ("黄金像" if selected.get("kind")=="idol" else ("開拓する木" if selected.get("kind")=="tree" else ("選択 %d/8" % count if count > 1 else ("落とし物" if not selected_resources.is_empty() else ("床" if selection_layer=="floor" else "建物")))))
 	title.position = Vector2(9,3)
 	title.add_theme_color_override("font_color",UI.INK)
 	context_panel.add_child(title)
@@ -706,6 +714,9 @@ func cancel_selected_work():
 	refresh()
 
 func reset_view():
+	merchant_context=false
+	merchant_requested=false
+	field_shop=false
 	cancel_wall_stroke()
 	field_book=false
 	actor_art.clear()
@@ -770,17 +781,20 @@ func toggle_pause():
 	refresh()
 
 func choose_walk():
+	merchant_context=false
+	colony_page=""
 	cancel_wall_stroke()
 	selected_trees.clear()
 	selected_resources.clear()
 	selected_structures.clear()
-	group = 2
+	group = -1
 	tool = ""
 	selected = {"kind": "keeper"}
 	selected_animals.clear()
 	refresh()
 
 func neutral():
+	merchant_context=false
 	subtasks.cancel()
 	ui_pointer_capture=false
 	queue_drag_id=-1
@@ -886,6 +900,7 @@ func refresh_jobs():
 			row.get_theme_stylebox(state).content_margin_top=3;row.get_theme_stylebox(state).content_margin_bottom=3
 		var names = {"mine":"採掘","train":"調教","direct_attack":"指定攻撃","keeper_equipment":"装備","slaughter":"と殺","milk":"搾乳","place_kokeshi":"こけし","place_fossil":"化石","wall": "壁", "door":"ドア","locked_door":"施錠ドア","wood_wall":"木壁","stone_wall":"石壁","soil_tile":"土タイル","wood_tile":"木タイル","stone_tile":"石タイル", "kennel": "犬小屋", "coop": "鶏小屋", "move": "歩く", "collect": "採集", "haul":"運搬", "repair": "修理", "remove": "解体", "remove_floor":"タイル解体", "repair_floor":"床修理", "gate": "ドアを開閉", "equip":"装備", "animal_order": "仲間へ指示"}
 		row.text = "%s%s" % [ "› " if j.state != "pending" else "", ("待機 · " if j.state == "blocked" else "") + names.get(j.kind, StoryView.LABELS.get(j.kind,"仕事"))]
+		if j.get("purpose","")=="merchant":row.text="交渉へ向かう"
 		if j.get("cancel_requested",false):row.text="取消待ち · "+names.get(j.kind,"仕事")
 		row.draw.connect(draw_queue_badge.bind(row,j.id))
 		row.set_meta("job_id",j.id)
@@ -1025,6 +1040,7 @@ func job_at(cell: Vector2i) -> int:
 	return -1
 
 func job_title(j: Dictionary) -> String:
+	if j.get("purpose","")=="merchant":return "交渉へ向かう"
 	if Farm.BUILD.has(j.kind):return Farm.Buildings.NAMES.get(j.kind,"建設")+"を建設"
 	return {"move":"移動予定","collect":"回収予定","repair":"修理予定","remove":"解体予定","remove_floor":"床を解体","repair_floor":"床を修理","equip":"装備予定","animal_order":"仲間への指示","gate":"ドア開閉"}.get(j.kind,StoryView.LABELS.get(j.kind,"予定"))
 
@@ -1057,8 +1073,17 @@ func _route_input(event):
 		# GUI buttons receive the event; every world handler is gated by the modal.
 		return
 	if event is InputEventMouse: pointer = event.position
-	if (group>=0 or colony_page!="" or not selected.is_empty()) and world.working() and not menu_open and not field_book and not field_shop and event is InputEventMouseButton and event.pressed and event.button_index==MOUSE_BUTTON_RIGHT:
-		neutral();get_viewport().set_input_as_handled();return
+	if world.working() and not menu_open and not field_book and not field_shop and event is InputEventMouseButton and event.pressed and event.button_index==MOUSE_BUTTON_RIGHT:
+		if group>=0 or colony_page!="" or tool!="" or dragging or press_pending:
+			neutral();get_viewport().set_input_as_handled();return
+		if merchant_context:
+			merchant_context=false;refresh();get_viewport().set_input_as_handled();return
+		if not pointer_over_ui() and merchant_hit(pointer):
+			var why=world.merchant_reason(selected_merchant_worker())
+			if why!="":notice(why)
+			if selected_merchant_worker()!="":merchant_context=true;refresh()
+			get_viewport().set_input_as_handled();return
+		if not selected.is_empty():neutral();get_viewport().set_input_as_handled();return
 	if zone_controls.input(self,event):get_viewport().set_input_as_handled();return
 	if item_commands.input(self,event):get_viewport().set_input_as_handled();return
 	if subtasks.input(self,event):
@@ -1205,7 +1230,8 @@ func _route_input(event):
 				if world.working(): toggle_pause()
 			KEY_TAB:
 				if world.working():
-					var next_mode=MODE_ORDER[(MODE_ORDER.find(3 if colony_page=="roles" else group)+1)%MODE_ORDER.size()]
+					var current_mode=3 if colony_page=="roles" else (2 if group<0 and selected.get("kind")=="keeper" else group)
+					var next_mode=MODE_ORDER[(MODE_ORDER.find(current_mode)+1)%MODE_ORDER.size()]
 					if next_mode==2: choose_walk()
 					else: select_group(next_mode)
 			KEY_HOME: recenter()
@@ -1321,15 +1347,15 @@ func update_wall_stroke():
 
 func board_click(event):
 	if field_shop:return
+	merchant_context=false
 	var point=get_canvas_transform().affine_inverse()*event.position
 	if selected.get("kind")=="keeper" and world.keeper.get("drafted",false):
 		for e in world.enemies:
 			if world.HumanCombat.valid(e) and enemy_hit_rect(e).has_point(point):
 				if not world.HumanCombat.designate(world,e.id):notice("攻撃を指示できません")
 				refresh();return
-	if world.merchant_present() and Rect2(center(Farm.MERCHANT_CELL)-Vector2(55,65),Vector2(115,100)).has_point(point) and tool=="":
-		request_merchant();return
-	merchant_requested=false;world.merchant_approach=null
+	if merchant_hit(event.position) and group<0 and tool=="":
+		notice("住人を選択して商人を右クリックすると交渉できます");refresh();return
 	var cell = Vector2i(get_canvas_transform().affine_inverse() * event.position / TILE)
 	if tool=="storage":
 		if not world.act("storage",cell):notice("歩ける地面を指定してください")
@@ -1436,8 +1462,11 @@ func _process(delta):
 	if seen_calendar_day!=world.last_daily_day:
 		seen_calendar_day=world.last_daily_day;arrival_bell=false;departure_started=-1;refresh()
 	if merchant_requested:
-		if not world.merchant_present() or not world.merchant_waiting():merchant_requested=false;world.merchant_approach=null
-		elif not world.paused and world.keeper.pos==merchant_talk_target and view_positions.get("keeper",Vector2(world.keeper.pos)).distance_to(Vector2(merchant_talk_target))<0.08:open_market()
+		if not world.merchant_present() or not world.merchant_waiting():
+			merchant_requested=false;world.cancel_merchant("交渉を続けられません")
+		else:
+			var actor=world.merchant_actor(world.merchant_worker)
+			if not world.paused and actor.pos==merchant_talk_target and view_positions.get(world.merchant_worker,Vector2(actor.pos)).distance_to(Vector2(merchant_talk_target))<0.08:open_market()
 	if world.phase=="day" and not world.merchant_present() and world.tick*Farm.DT>=world.merchant_leave_at and departure_started<0:departure_started=clock
 
 	if wall_stroke.kind!="" and (group!=0 or tool!=wall_stroke.kind or menu_open or field_book or field_shop or story_modal!="" or cinematic() or not world.working()):cancel_wall_stroke()
@@ -2267,24 +2296,28 @@ func enter_daytime():
 	world=next;group=-1;morning_screen="morning";arrival_started=clock
 	field_shop=false;merchant_requested=false;world.merchant_approach=null;departure_started=-100.0
 
+func selected_merchant_worker() -> String:
+	if selected.get("kind")=="keeper":return "keeper"
+	if selected.get("kind")=="animal" and not world.merchant_actor("a%d"%selected.get("id",-1)).is_empty():return "a%d"%selected.id
+	return ""
+
+func merchant_hit(screen: Vector2) -> bool:
+	return Rect2(center(Farm.MERCHANT_CELL)-Vector2(55,65),Vector2(115,100)).has_point(get_canvas_transform().affine_inverse()*screen)
+
 func request_merchant():
-	if not world.merchant_present():notice("商人はまだ来ていません" if world.tick*Farm.DT<Farm.MERCHANT_DELAY else "商人は帰りました");return
-	if world.keeper.state!="free" or world.keeper.forced_rest or world.keeper.get("nutrition_down",false):notice("今は話しかけられません");return
-	var candidates=[]
-	for cell in world.merchant_talk_cells():
-		if world.walkable(cell) and not world.actor_occupied(cell,world.keeper.pos) and not world.find_path(world.keeper.pos,cell).is_empty():candidates.append(cell)
-	# Prefer the front of the cart; side positions are obstruction fallbacks.
-	if candidates.is_empty():notice("商人の近くへ行けません");return
-	if not world.Jobs.enqueue(world,"move",candidates[0],-1):notice("今は話しかけに行けません");return
-	world.jobs.back().purpose="merchant"
-	merchant_talk_target=candidates[0]
-	world.merchant_approach=merchant_talk_target
-	world.merchant_approach_job=world.jobs.back().id
-	merchant_requested=true;notice("商人に話しかけに行きます")
+	var key=selected_merchant_worker()
+	var why=world.merchant_reason(key)
+	merchant_context=false
+	if why!="":notice(why);refresh();return
+	if not world.request_merchant(key):notice("交渉の移動を予約できません");refresh();return
+	merchant_talk_target=world.merchant_approach
+	merchant_requested=true;notice("選択した住人が交渉に向かいます");refresh()
 
 func open_market():
-	if not world.merchant_present() or world.keeper.pos not in world.merchant_talk_cells():return
-	field_shop=true;world.market_open=true;merchant_requested=false;world.merchant_approach=null;accumulated=0
+	var actor=world.merchant_actor(world.merchant_worker)
+	if not world.merchant_waiting() or actor.is_empty() or actor.pos!=world.merchant_approach:return
+	field_shop=true;world.market_open=true;merchant_requested=false;merchant_context=false;accumulated=0
+	world.cancel_merchant()
 	morning_screen = "morning"
 	shop_side = "home"
 	shop_level = "categories"
@@ -2296,6 +2329,7 @@ func enter_market():
 var field_book = false
 var field_shop=false
 var merchant_speech=preload("res://game/merchant_speech.gd").new()
+var merchant_context=false
 var merchant_requested=false
 var merchant_talk_target=Vector2i(-1,-1)
 
