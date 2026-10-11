@@ -1,0 +1,15 @@
+{
+  "utc": "2026-10-11T01:59:26.188526+00:00",
+  "previous_sha256": "b78da7d4ce8310a6cea62cf4f7d7e9fd933956ef47bebf103a128cc220f574ff",
+  "sha256": "f937631dd208dcd9a720aea2de12c86c48f869a68ab044b8ac9406e21bc184b3",
+  "backup": "C:\\Users\\masat\\AppData\\Local\\Packages\\sandbox.{54276e2f-b6e9-4100-bdbe-5f3e794233f1}\\AC\\Temp\\whistle-directive09-rollback\\WhistleRanch-b78da7d4ce83.exe",
+  "executable": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\autonomy-entry-01\\bundle\\WhistleRanch-Autonomy-Partial.exe",
+  "size": 127465440,
+  "save_files_preserved": {
+    "user-data\\WhistleResearchAutonomy\\autonomy.snapshot": "7c0906c740ff90ce55892b6852df18e6546b3fb37057d03744ef73d75452b841"
+  },
+  "save_hashes_unchanged": true,
+  "current_process_absent": true,
+  "exclusive_file_handle_check": true,
+  "replacement": "os.replace; no process stop; no forced overwrite"
+}

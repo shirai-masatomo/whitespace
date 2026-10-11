@@ -1,0 +1,20 @@
+{
+	"failures": 0,
+	"groups": [
+		{
+			"checks": [
+				{
+					"check": "New process restores clock, zones, goods, work, enemy, incidents and prayer state exactly",
+					"passed": true
+				},
+				{
+					"check": "Eight production ticks match uninterrupted continuation",
+					"passed": true
+				}
+			],
+			"name": "Separate process exact continuation"
+		}
+	],
+	"method": "Production World.step at explicitly positioned calendar boundaries; no elapsed-time or human-play claim. Separate-process snapshot resume. UI uses injected Godot mouse events on an isolated desktop.",
+	"passed": true
+}

@@ -1,0 +1,130 @@
+{
+	"failures": 0,
+	"groups": [
+		{
+			"checks": [
+				{
+					"check": "Live world uses approved 50x34 geometry",
+					"passed": true
+				},
+				{
+					"check": "New idol has approved central anchor and expanded ground is reachable",
+					"passed": true
+				},
+				{
+					"check": "1728 quarter-second ticks equal one 432-second day at 05:00",
+					"passed": true
+				},
+				{
+					"check": "World transitions morning to day at 10:00",
+					"passed": true
+				},
+				{
+					"check": "05:00 keeps the same living enemy instead of forcing retreat or ending the world",
+					"passed": true
+				},
+				{
+					"check": "Morning lays one egg, settles prayer and releases convalescence without waiting for enemies",
+					"passed": true
+				},
+				{
+					"check": "Daily guard prevents duplicate production or prayer payment",
+					"passed": true
+				},
+				{
+					"check": "Morning reschedules the existing merchant independently",
+					"passed": true
+				},
+				{
+					"check": "Rescheduled merchant actually becomes available",
+					"passed": true
+				},
+				{
+					"check": "19:00 schedules another raid while previous enemy remains",
+					"passed": true
+				},
+				{
+					"check": "The next scheduled attacker actually spawns alongside the old attacker",
+					"passed": true
+				}
+			],
+			"name": "1 Expanded live land; independent clock, daily results and overlapping raids",
+			"state": {
+				"calendar": "19:50  夜",
+				"day": 2,
+				"eggs": 1,
+				"enemy_ids": [
+					0,
+					1,
+					2,
+					3
+				],
+				"last_daily_day": 2
+			}
+		},
+		{
+			"checks": [
+				{
+					"check": "Snapshot fixture includes active physical cargo and work",
+					"passed": true
+				},
+				{
+					"check": "Combined state saved",
+					"passed": true
+				},
+				{
+					"check": "Snapshot preserves all selected state including day guards and in-flight goods",
+					"passed": true
+				},
+				{
+					"check": "Restored continuation matches uninterrupted production steps",
+					"passed": true
+				},
+				{
+					"check": "Expired corpse has a terminal state instead of movement",
+					"passed": true
+				},
+				{
+					"check": "Retreat reaches its exit and terminates",
+					"passed": true
+				},
+				{
+					"check": "A thief's completed delivery terminates without a boundary loop",
+					"passed": true
+				}
+			],
+			"name": "2 Complete state save/restart; death, retreat and goal completion terminate"
+		},
+		{
+			"checks": [
+				{
+					"check": "Architect drag creates a six-cell stockpile",
+					"passed": true
+				},
+				{
+					"check": "UI toggles the selected stockpile's food permission",
+					"passed": true
+				},
+				{
+					"check": "UI creates a separate residential area",
+					"passed": true
+				},
+				{
+					"check": "UI changes residential bounds without touching objects",
+					"passed": true
+				},
+				{
+					"check": "HUD shows the actual colony clock",
+					"passed": true
+				},
+				{
+					"check": "UI save/load restores zones and exact clock together",
+					"passed": true
+				}
+			],
+			"name": "5 Integrated UI: zones, clock and saved world"
+		}
+	],
+	"method": "Production World.step at explicitly positioned calendar boundaries; no elapsed-time or human-play claim. Separate-process snapshot resume. UI uses injected Godot mouse events on an isolated desktop.",
+	"passed": true
+}

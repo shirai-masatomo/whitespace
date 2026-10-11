@@ -1,0 +1,23 @@
+{
+  "projects/sporehollow/game/animal_recovery.gd": "c5b093fc7844cc7571fad519aa299866531bc0f7364a8e51085d27a7ba722734",
+  "projects/sporehollow/game/colony_clock.gd": "01bd0cfe1722f9a6671bb5a2574ae5455db61b0b02c723845bbb881f7b7f0ec5",
+  "projects/sporehollow/game/colony_cycle.gd": "f389e44c8373dc9282fc1218d8de7cad1ac9910bd036ea3832cb92ce37ef6521",
+  "projects/sporehollow/game/colony_land.gd": "82cf23d9df5c1574a17e1a6b2520dcb3afec33b140db23f20e4a564646992f10",
+  "projects/sporehollow/game/colony_panels.gd": "fcf975a99baadeabe4595241154efad20554605930759f0f3f0af219f438d00f",
+  "projects/sporehollow/game/colony_view_model.gd": "2f1a2ba92b8fad28537e06d74aaf86c5cb243d5f1a78b58ad7b3955d923d8ccb",
+  "projects/sporehollow/game/colony_zones.gd": "2e5f755ed1520bd3830de5bd7020118ac5df9c9c08d6d64319546908e693193c",
+  "projects/sporehollow/game/cycle_entry_review.gd": "c04baf5caf632553e6f41e9877909ea56dfb1a07c085d6c231fd518a95f2bb7f",
+  "projects/sporehollow/game/keeper_life.gd": "c31f29f97c1e1367e0fc224b9eda7cfb886bae34a8caf2dd54c653e0e312f66a",
+  "projects/sporehollow/game/main.gd": "a6c89601c041c34969f521055e4baecfa46688a5b7d42a4f05ba49e1ab683c12",
+  "projects/sporehollow/game/onsite_clarity.gd": "3f573975e11e4b1c03fc8c5b4a32e11be5aa123186ded439146d234c2566cf66",
+  "projects/sporehollow/game/physical_stock.gd": "eed8fd1809fef7a26f9f6c1212a88e7502efe849953039d37db42048ab445439",
+  "projects/sporehollow/game/raider_ai.gd": "10e900c652a3bccef0e97b19984773b16f633c749de769a7f91bd714b82f9352",
+  "projects/sporehollow/game/research_snapshot.gd": "1ced1a906b19f82d71de5f446dc5fdcaffa3d2560f4beb6a6ce74639712ba300",
+  "projects/sporehollow/game/world.gd": "5fedf1a67da2d96c30b52ba51025c1be26590797c10f1ad536076dfd852d1482",
+  "projects/sporehollow/game/world_story_system.gd": "f13843e67e824acd048cb695768ea3b64e9ba20c7999de44f212986bdf1c9c2c",
+  "projects/sporehollow/game/zone_controls.gd": "7c329e5dc7afe7df5b236ed60ef91718e3c94f985075b96bec92215fdc1b9e82",
+  "projects/sporehollow/tests/test_cycle09.gd": "29cdf2626ace14d19b427084d19b6487280d2b38d8011209a3aed73512bda4c4",
+  "projects/sporehollow/tests/test_zones09.gd": "a80ee73dfcb0b77dc05086be3a1f2078e23da7c146bc295e02abbdcf631c6a1f",
+  "projects/sporehollow/tools/isolated_visual.ps1": "05fc1ce9cd84b3eb888c80e68d2f8777ab253da033c6997cf08e94831fd75caf",
+  "projects/sporehollow/tools/verify_cycle_entry09.ps1": "8b569d238594ddb22bd3ff29edcb0d28efc885fb724c8a3017cf0772ddd38ea6"
+}
