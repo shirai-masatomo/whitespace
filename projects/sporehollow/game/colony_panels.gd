@@ -73,7 +73,7 @@ static func build(g):
 		var list=VBoxContainer.new();list.size_flags_horizontal=Control.SIZE_EXPAND_FILL;scroll.add_child(list)
 		for a in animals:
 			var button=Button.new();button.name="Animal_%d"%a.id;button.custom_minimum_size=Vector2(804,42);button.alignment=HORIZONTAL_ALIGNMENT_LEFT;button.focus_mode=Control.FOCUS_NONE
-			button.text="%s　｜ 忠誠 %d　｜ HP %d/%d　｜ %s"%[g.world.animal_name(a),g.world.Progression.loyalty(a),a.hp,a.max_hp,a.state if a.placed else "到着待ち"]
+			button.text="%s (%s) ｜ 忠誠 %d ｜ HP %d/%d ｜ %s"%[g.world.animal_name(a),"家畜" if g.world.Livestock.classification(a)=="livestock" else "ペット",g.world.Progression.loyalty(a),a.hp,a.max_hp,a.state if a.placed else "到着待ち"]
 			g.UI.button(button);button.pressed.connect(g.choose_animal.bind(a.id));list.add_child(button)
 		if animals.is_empty():label(list,"仲間の動物はいません",Vector2.ZERO)
 
@@ -87,6 +87,7 @@ static func draft_changed(g,key: String):
 	g.refresh()
 
 static func signature(g) -> String:
+	if g.group==1 and not g.selected_animals.is_empty():return g.LivestockControls.signature(g)
 	if g.colony_page=="roles":return str(Model.people(g.world))+str(g.world.keeper.get("work_priorities",{}))+str(g.world.keeper.get("drafted",false))
 	if g.group==1 and g.selected_animals.is_empty():return str(g.world.animals.map(func(a):return [a.id,a.get("name",""),a.state,a.hp,a.placed,g.world.Progression.loyalty(a)]))
 	return ""

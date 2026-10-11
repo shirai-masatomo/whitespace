@@ -29,6 +29,7 @@ var job_category="すべて"
 var queue_row_y={}
 var queue_bottom=94.0
 const ColonyPanels=preload("res://game/colony_panels.gd")
+const LivestockControls=preload("res://game/livestock_controls.gd")
 var item_commands=preload("res://game/item_commands.gd").new()
 var zone_controls=preload("res://game/zone_controls.gd").new()
 var colony_page=""
@@ -452,11 +453,11 @@ func refresh():
 	elif selected.get("kind") == "keeper" and world.working():
 		add_button(palette, "keeper_rest", "起きる" if world.keeper.resting or world.keeper.state=="hidden_rest" else "休息", Rect2(16, 704, 125, 36), keeper_action.bind("keeper_rest"))
 		buttons.keeper_rest.icon = UI.icon("moon")
-		buttons.keeper_rest.disabled = (world.keeper.forced_rest or world.keeper.state != "free") and not Farm.Life.can_wake_hidden(world)
+		buttons.keeper_rest.disabled = (world.keeper.forced_rest or world.keeper.state != "free" or world.keeper.get("nutrition_down",false)) and not Farm.Life.can_wake_hidden(world)
 		if world.keeper.state=="hidden_rest":buttons.keeper_rest.tooltip_text="HPが1以上なら起きられます。起きると敵の攻撃対象へ戻ります。HP8で自動復帰します。"
 		add_button(palette, "resume_jobs", "作業再開", Rect2(150, 704, 145, 36), keeper_action.bind("resume_jobs"))
 		buttons.resume_jobs.icon = UI.icon("hammer")
-		buttons.resume_jobs.disabled = world.keeper.forced_rest or world.keeper.state != "free"
+		buttons.resume_jobs.disabled = world.keeper.forced_rest or world.keeper.state != "free" or world.keeper.get("nutrition_down",false)
 		add_button(palette,"keeper_book","図鑑",Rect2(660,704,110,36),open_book)
 		buttons.keeper_book.icon=UI.icon("book_closed")
 		add_button(palette,"inventory","持ち物",Rect2(778,704,120,36),preload("res://game/inventory_view.gd").open.bind(self))
@@ -498,6 +499,7 @@ func refresh():
 	if group == 2:
 		for id in subtask_choices(): UI.selected(buttons[id], subtasks.selected[2] == id)
 	ColonyPanels.build(self)
+	LivestockControls.build(self)
 	item_commands.build(self)
 	zone_controls.build(self)
 	colony_signature=ColonyPanels.signature(self)
@@ -860,7 +862,7 @@ func refresh_jobs():
 		UI.button(row, Color("c6d1ac") if j.get("assigned_to","")!="" else UI.PAPER)
 		for state in ["normal","hover","pressed","disabled"]:
 			row.get_theme_stylebox(state).content_margin_top=3;row.get_theme_stylebox(state).content_margin_bottom=3
-		var names = {"milk":"搾乳","place_kokeshi":"こけし","place_fossil":"化石","wall": "壁", "door":"ドア","locked_door":"施錠ドア","wood_wall":"木壁","stone_wall":"石壁","soil_tile":"土タイル","wood_tile":"木タイル","stone_tile":"石タイル", "kennel": "犬小屋", "coop": "鶏小屋", "move": "歩く", "collect": "採集", "haul":"運搬", "repair": "修理", "remove": "解体", "remove_floor":"タイル解体", "repair_floor":"床修理", "gate": "ドアを開閉", "equip":"装備", "animal_order": "仲間へ指示"}
+		var names = {"slaughter":"と殺","milk":"搾乳","place_kokeshi":"こけし","place_fossil":"化石","wall": "壁", "door":"ドア","locked_door":"施錠ドア","wood_wall":"木壁","stone_wall":"石壁","soil_tile":"土タイル","wood_tile":"木タイル","stone_tile":"石タイル", "kennel": "犬小屋", "coop": "鶏小屋", "move": "歩く", "collect": "採集", "haul":"運搬", "repair": "修理", "remove": "解体", "remove_floor":"タイル解体", "repair_floor":"床修理", "gate": "ドアを開閉", "equip":"装備", "animal_order": "仲間へ指示"}
 		row.text = "%s%s" % [ "› " if j.state != "pending" else "", ("待機 · " if j.state == "blocked" else "") + names.get(j.kind, StoryView.LABELS.get(j.kind,"仕事"))]
 		if j.get("cancel_requested",false):row.text="取消待ち · "+names.get(j.kind,"仕事")
 		row.draw.connect(draw_queue_badge.bind(row,j.id))
@@ -1427,7 +1429,7 @@ func _process(delta):
 	if speed > 2 and not world.keeper.resting:
 		speed = 1
 		refresh()
-	var vitals_signature = str(world.rest_skip) + str(world.keeper.state) + str(world.keeper.resting) + str(world.keeper.forced_rest)+str(Farm.Life.can_wake_hidden(world))
+	var vitals_signature = str(world.rest_skip) + str(world.keeper.state) + str(world.keeper.resting) + str(world.keeper.forced_rest)+str(Farm.Life.can_wake_hidden(world))+str(world.keeper.get("nutrition_down",false))
 	if selected.get("kind") == "keeper" and vitals_signature != keeper_ui_signature:
 		keeper_ui_signature = vitals_signature
 		refresh()
@@ -2026,7 +2028,7 @@ func draw_hud():
 		label_on(hud, p + Vector2(10, 45), "%s%s" % [resource_text({b.get("resource", "soil"): quote.cost}), ""], 16)
 	if world.phase == "result":
 		panel(Rect2(362, 225, 554, 340))
-		label_on(hud, Vector2(398, 271), "守りきった！" if world.result == "win" else {"idol_destroyed":"黄金像が壊された","idol_stolen":"黄金像が持ち去られた"}.get(world.story.defeat_reason,"牧場主が連れ去られた"), 27)
+		label_on(hud, Vector2(398, 271), "守りきった！" if world.result == "win" else {"idol_destroyed":"黄金像が壊された","idol_stolen":"黄金像が持ち去られた","malnutrition":"栄養失調で死亡した"}.get(world.story.defeat_reason,"牧場主が連れ去られた"), 27)
 		label_on(hud, Vector2(398, 311), "評価 %d   EXP +%d   GOLD +%d" % [world.score.rating, world.score.xp, world.score.gold], 18)
 	if world.working() and world.early_clear:
 		label_on(hud, Vector2(935, 735), "夜明けまで自由に", 16)
@@ -2220,7 +2222,7 @@ func enter_daytime():
 
 func request_merchant():
 	if not world.merchant_present():notice("商人はまだ来ていません" if world.tick*Farm.DT<Farm.MERCHANT_DELAY else "商人は帰りました");return
-	if world.keeper.state!="free" or world.keeper.forced_rest:notice("今は話しかけられません");return
+	if world.keeper.state!="free" or world.keeper.forced_rest or world.keeper.get("nutrition_down",false):notice("今は話しかけられません");return
 	var candidates=[]
 	for cell in world.merchant_talk_cells():
 		if world.walkable(cell) and not world.actor_occupied(cell,world.keeper.pos) and not world.find_path(world.keeper.pos,cell).is_empty():candidates.append(cell)
@@ -2607,6 +2609,7 @@ func draw_keeper_card():
 	label_on(hud, Vector2(78, 615), "牧場主", 17, UI.INK)
 	hud.draw_texture(Direction.ASSETS["ui.stamina_lightning"].texture,Vector2(151,596))
 	label_on(hud,Vector2(180,615),"スタミナ %d/%d"%[k.stamina,k.max_stamina],13,UI.INK)
+	label_on(hud,Vector2(328,615),"満腹%d"%k.get("satiety",100),13,UI.INK)
 	for i in range(2):
 		var y = 626 + i * 18
 		hud.draw_texture_rect(UI.icon("heart" if i == 0 else "moon"), Rect2(78, y, 14, 14), false)
@@ -2615,10 +2618,11 @@ func draw_keeper_card():
 		hud.draw_rect(Rect2(100, y + 3, 170 * ratio, 8), Color("bf7661") if i == 0 else Color("8087a7"))
 		label_on(hud, Vector2(279, y + 12), "%d/%d" % [k.hp, k.max_hp] if i == 0 else "%d%%" % k.sleepiness, 13, UI.INK)
 	var activity = "連れ去り" if k.carrier >= 0 else ("気絶" if k.state == "unconscious" else ("限界休息" if k.forced_rest else (("寝入り待ち" if Farm.Life.presentation(world)=="settling" else "睡眠") if k.resting else ("散歩中" if world.manual_goal != null else ("再開待ち" if world.jobs_held else ("仕事中" if not world.jobs.is_empty() else "のんびり"))))))
+	if k.get("malnutrition",0)>0:activity=world.Nutrition.status(k)+" %d%%"%k.malnutrition
 	if k.state=="hidden_rest":activity="療養中：HP1で起床可 / HP8で自動復帰"
 	label_on(hud, Vector2(30, 676), activity, 15, UI.INK)
-	if not world.jobs.is_empty():
-		var names = {"milk":"搾乳","place_kokeshi":"こけし","place_fossil":"化石","wall": "壁", "door":"ドア","locked_door":"施錠ドア","wood_wall":"木壁","stone_wall":"石壁","soil_tile":"土タイル","wood_tile":"木タイル","stone_tile":"石タイル", "collect": "回収", "move": "歩く", "equip":"装備", "animal_order": "仲間へ指示", "repair": "修理", "remove": "解体", "remove_floor":"タイル解体", "repair_floor":"床修理", "gate": "ドア", "kennel": "犬小屋", "coop": "鶏小屋"}
+	if not world.jobs.is_empty() and k.get("malnutrition",0)<=0:
+		var names = {"slaughter":"と殺","milk":"搾乳","place_kokeshi":"こけし","place_fossil":"化石","wall": "壁", "door":"ドア","locked_door":"施錠ドア","wood_wall":"木壁","stone_wall":"石壁","soil_tile":"土タイル","wood_tile":"木タイル","stone_tile":"石タイル", "collect": "回収", "move": "歩く", "equip":"装備", "animal_order": "仲間へ指示", "repair": "修理", "remove": "解体", "remove_floor":"タイル解体", "repair_floor":"床修理", "gate": "ドア", "kennel": "犬小屋", "coop": "鶏小屋"}
 		var next = names.get(world.Work.active(world).get("kind",""), "仕事を選択中")
 		if world.jobs.size() > 1: next += " → " + names.get(world.jobs[1].kind, "仕事")
 		label_on(hud, Vector2(166, 676), next, 14, UI.INK)
@@ -2680,7 +2684,7 @@ func keeper_hit_rect_base() -> Rect2:
 	var p=keeper_pixel()
 	if Farm.Life.presentation(world) in ["unconscious","carried"]: return Rect2(p+Vector2(-25,-12),Vector2(50,34))
 	var pose=actor_art.get("keeper",{}).duplicate()
-	if world.keeper.state=="hidden_rest":pose.action="rest"
+	if world.keeper.state=="hidden_rest" or world.keeper.get("nutrition_down",false):pose.action="rest"
 	if pose.get("action", "idle") != "idle":
 		var foot=p+Vector2(0,14)
 		var rect=Art.bounds("keeper",pose.action,int(world.keeper.get("facing",1)),foot,visual_time-pose.get("at",visual_time))
@@ -2818,7 +2822,7 @@ func draw_keeper_actor():
 		draw_set_transform(p+Vector2(0,4),0.16)
 		p = Vector2.ZERO
 	var pose = actor_pose("keeper",world.keeper.resting,Farm.Life.presentation(world)=="sleeping",walking,"keeper")
-	if world.keeper.state=="hidden_rest": pose.action="rest"
+	if world.keeper.state=="hidden_rest" or world.keeper.get("nutrition_down",false): pose.action="rest"
 	Art.sprite(self,"keeper",pose.action,int(world.keeper.get("facing",1)),p+Vector2(0,14),pose.elapsed,1.0,1.15*ACTOR_SCALE)
 
 	if Farm.Life.able(world) and not world.Work.active(world).is_empty() and world.Work.active(world).state == "working":

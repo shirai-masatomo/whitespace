@@ -1,5 +1,5 @@
 extends RefCounted
-## Explicit research-only snapshots, never the normal campaign save or an automatic clock trigger.
+## Full development-world snapshots for manual save and normal close/startup; separate from the original game saves.
 const VERSION=1
 
 static func pack(value):

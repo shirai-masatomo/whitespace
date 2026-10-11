@@ -70,6 +70,8 @@ var workers: Dictionary = {}
 var work_claims: Dictionary = {}
 const Stock=preload("res://game/physical_stock.gd")
 const Food=preload("res://game/human_food.gd")
+const Nutrition=preload("res://game/human_nutrition.gd")
+const Livestock=preload("res://game/livestock.gd")
 const Zones=preload("res://game/colony_zones.gd")
 var zones: Array = []
 var next_zone_id=1
@@ -586,6 +588,7 @@ func animal_step(a: Dictionary):
 		a.rescuing = false
 		release_kennel(a)
 		return
+	if Livestock.held(self,a):a.state="と殺作業中";return
 	if Orders.follow(self,a): return
 	if not a.pending.is_empty() and tick >= a.pending.at:
 		release_kennel(a)
@@ -944,6 +947,7 @@ func persist_farm():
 		if not a.is_empty():
 			if a.placed: owned.position=[a.pos.x,a.pos.y]
 			owned.facing=a.get("facing",1)
+			owned.husbandry_class=Livestock.classification(a);owned.forbidden=a.get("forbidden",false)==true
 			for key in ["equipment","rarity","bonus_skills","ultimate_gauge","ultimate_gauge_max"]: owned[key]=a.get(key)
 			owned.hp=a.hp; owned.mode=a.mode; owned.order_remaining=maxi(0,a.order_until-tick); owned.unavailable_through_day=a.unavailable_through_day
 			if a.species=="shiba":owned.convalescent_ticks=a.get("convalescent_ticks",0)
@@ -953,7 +957,7 @@ func persist_farm():
 		if job.kind=="collect" and natural.has(job.pos):campaign.work_natural.append({"pos":[job.pos.x,job.pos.y],"kind":natural[job.pos]})
 	campaign.work_jobs=[]
 	for j in jobs:
-		if not BUILD.has(j.kind) and j.kind not in Story.ACTIONS and j.kind not in ["collect","haul"]: continue
+		if not BUILD.has(j.kind) and j.kind not in Story.ACTIONS and j.kind not in ["collect","haul","slaughter"]: continue
 		var row=j.duplicate(true); row.pos=[j.pos.x,j.pos.y]; row.assigned_to="";row.retry_at=0;campaign.work_jobs.append(row)
 	campaign.keeper_vitals = {"hp": keeper.hp, "sleepiness": keeper.sleepiness, "drinks_today": keeper.drinks_today,"facing":keeper.get("facing",1),"stamina":keeper.stamina,"ultimate_gauge":keeper.ultimate_gauge,"recovery_state":keeper.state if keeper.state in ["unconscious","hidden_rest"] else "free","heal_credit":keeper.heal_credit,"recover_ticks":keeper.recover_ticks}
 	campaign.keeper_position = [keeper.pos.x, keeper.pos.y]
@@ -985,6 +989,8 @@ func step():
 	for enemy in enemies: Combat.recover(enemy,DT)
 	Cycle.step(self)
 	Content.tick(self)
+	for worker in workers.values():Nutrition.step(self,worker)
+	if not working():return
 	Life.step(self)
 	Jobs.step(self)
 	if tick % ceili(Rules.NATURE.interval / DT) == 0: grow_nature()
@@ -1053,7 +1059,7 @@ func finish(won: bool):
 		process_dawn()
 		Story.morning(self,campaign.day+1)
 		persist_farm()
-	say("防衛成功！ 育成と購入をして次の日へ。")
+	say("防衛成功！ 育成と購入をして次の日へ。" if won else ("栄養失調で牧場主が死亡しました" if story.defeat_reason=="malnutrition" else "牧場の防衛に失敗しました"))
 
 func next_campaign() -> Dictionary:
 	var data = campaign.duplicate(true)
@@ -1388,6 +1394,7 @@ func try_meow(a: Dictionary):
 func add_resident(owned: Dictionary):
 	if owned.get("dead",false): return
 	var a = owned.duplicate(true)
+	a.forbidden=a.get("forbidden",false)==true
 	a.rarity=ProgressData.rarity(a.get("rarity",0)); a.bonus_skills=a.get("bonus_skills",[]); a.equipment=a.get("equipment",{}); a.faction=a.get("faction","owned")
 	a.loyalty = a.get("loyalty", SPECIES[a.species].loyalty)
 	var stats=AnimalData.stats(a.species,a.lv)

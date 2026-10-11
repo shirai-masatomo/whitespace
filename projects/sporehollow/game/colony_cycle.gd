@@ -66,6 +66,7 @@ static func step(w):
 	w.campaign.calendar_ticks=w.calendar_ticks
 
 static func settle_incidents(w):
+	if w.result!="":return # A completed defeat is never a successful raid payout.
 	w.early_clear=w.schedule_index>=w.spawn_schedule.size() and not w.enemies.any(func(e):return not e.done and not e.flee)
 	for incident in w.incidents:
 		if incident.settled or w.spawn_schedule.slice(w.schedule_index).any(func(event):return event.get("incident","")==incident.id):continue

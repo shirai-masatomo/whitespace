@@ -26,9 +26,10 @@ static func category(w,j) -> String:
 	return "other"
 
 static func shared(w,j) -> bool:
-	return w.BUILD.has(j.kind) or j.kind in ["collect","haul"]
+	return w.BUILD.has(j.kind) or j.kind in ["collect","haul","slaughter"]
 
 static func target_key(w,j) -> String:
+	if j.kind=="slaughter":return "animal:%d"%j.animal_id
 	if j.kind=="haul":return "stock:%d"%j.stock_id
 	var layer=w.BUILD[j.kind].get("layer","structure") if w.BUILD.has(j.kind) else j.get("target_layer","collect" if j.kind=="collect" else j.kind)
 	return "%s:%d:%d"%[layer,j.pos.x,j.pos.y]
@@ -69,6 +70,7 @@ static func set_drafted(w,key: String,value: bool):
 
 static func reason(w,key: String,a) -> String:
 	if a.get("dead",false) or a.get("lost",false):return "離脱"
+	if a.get("nutrition_down",false):return "栄養失調・行動不能"
 	if a.get("carrier",-1)>=0 or a.get("state","") in ["captured","restrained"]:return "連れ去り・拘束中"
 	if a.get("hp",0)<=0 or a.get("state","")!="free":return "負傷・療養中"
 	if not a.get("placed",false):return "到着待ち"
@@ -85,6 +87,7 @@ static func reason(w,key: String,a) -> String:
 	return ""
 
 static func missing(w,j) -> bool:
+	if j.kind=="slaughter":return w.Livestock.missing(w,j)
 	if j.kind=="haul":return w.Stock.find(w,j.get("stock_id",-1)).is_empty() and not w.field_items.any(func(r):return r.get("location")=="carry" and r.get("job_id",-1)==j.id)
 	if j.kind=="collect":
 		return w.items_at(j.pos).is_empty() and not w.natural.has(j.pos) and not(j.pos==w.nest and w.eggs>0)
@@ -174,7 +177,7 @@ static func save(w):
 	w.campaign.work_profiles={}
 	for key in w.workers:
 		var a=w.workers[key]
-		w.campaign.work_profiles[key]={"priorities":a.work_priorities.duplicate(),"version":Policy.PRIORITY_VERSION,"drafted":a.drafted,"satiety":a.get("satiety",Policy.SATIETY_MAX)}
+		w.campaign.work_profiles[key]={"priorities":a.work_priorities.duplicate(),"version":Policy.PRIORITY_VERSION,"drafted":a.drafted,"satiety":a.get("satiety",Policy.SATIETY_MAX),"malnutrition":a.get("malnutrition",0.0),"nutrition_down":a.get("nutrition_down",false),"dead":a.get("dead",false),"death_cause":a.get("death_cause","")}
 
 static func restore(w):
 	register(w,"keeper",w.keeper)
@@ -183,5 +186,8 @@ static func restore(w):
 		w.keeper.work_priorities=profile.priorities.duplicate();w.keeper.work_priority_version=profile.get("version",1);migrate_priorities(w.keeper)
 	w.keeper.drafted=profile.get("drafted",false)
 	w.keeper.satiety=profile.get("satiety",Policy.SATIETY_MAX)
+	w.keeper.malnutrition=profile.get("malnutrition",0.0);w.keeper.nutrition_down=profile.get("nutrition_down",false)
+	w.keeper.dead=profile.get("dead",false);w.keeper.death_cause=profile.get("death_cause","")
+	if w.keeper.dead:w.keeper.state="dead";w.keeper.hp=0
 	for j in w.jobs:
 		j.assigned_to="";j.retry_at=0;j.state="pending";j.erase("material_claims")

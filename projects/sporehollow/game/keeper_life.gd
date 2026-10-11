@@ -16,6 +16,7 @@ const DRINKS = {"coffee": 12.0, "energy_drink": 25.0}
 
 static func rest_until_reason(w, target: String) -> String:
 	if not w.working(): return "今は休息できません"
+	if w.keeper.get("nutrition_down",false):return "栄養失調で行動不能です。手元の食料を待っています"
 	if w.keeper.state != "free" or w.keeper.carrier >= 0: return "牧場主が行動できません"
 	if w.jobs.any(func(j): return j.kind=="animal_order" and j.order=="guide"): return "仲間の誘導を先に終えてください"
 	if target == "night" and w.phase != "day": return "昼のみ使えます"
@@ -59,10 +60,10 @@ static func check_rest_until(w):
 	elif w.rest_skip.target=="night" and w.phase!="day": stop_rest_until(w,"nightfall")
 
 static func factor(w) -> float:
-	return 0.6 if w.keeper.sleepiness >= 80 else 1.0
+	return (0.6 if w.keeper.sleepiness >= 80 else 1.0)*w.Nutrition.factor(w.keeper)
 
 static func able(w) -> bool:
-	return w.keeper.state == "free" and not w.keeper.resting
+	return w.keeper.state == "free" and not w.keeper.resting and not w.keeper.get("nutrition_down",false) and not w.keeper.get("dead",false)
 
 static func presentation(w) -> String:
 	var k = w.keeper
@@ -79,7 +80,7 @@ static func danger(w, kind: String):
 
 static func command(w, kind: String, p: Vector2i) -> bool:
 	var k = w.keeper
-	if not w.working(): return false
+	if not w.working() or k.get("nutrition_down",false): return false
 	if kind=="wake_hidden" or (kind=="keeper_rest" and k.state=="hidden_rest"):
 		if not can_wake_hidden(w):return false
 		if w.paused:k.pending_command={"kind":"wake_hidden","pos":p};return true
@@ -193,11 +194,12 @@ static func step(w):
 			k.heal_credit-=HIDDEN_HEAL_SECONDS;k.hp=mini(k.max_hp,k.hp+1)
 		if k.hp>=HIDDEN_RECOVER_HP:recover_hidden(w)
 		return
-	if k.state != "free": return
+	if k.state != "free" or k.get("nutrition_down",false): return
 	var near = w.enemies.any(func(e): return not e.done and not e.flee and e.hp>0 and w.distance(e.pos, k.pos) <= 3)
 	if near and not k.get("danger_near", false): danger(w, "approaching")
 	k.danger_near = near
 	if near: wake_auto(w)
+	if k.get("life_need","")=="food":return # Food owns movement until this meal ends.
 	idle_step(w,near)
 	if k.resting:
 		if not w.Zones.rest_step(w,k):return
