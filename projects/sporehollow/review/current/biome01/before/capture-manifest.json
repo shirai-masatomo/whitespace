@@ -1,0 +1,201 @@
+{
+	"files": [
+		{
+			"cell": [
+				25.0,
+				17.0
+			],
+			"file": "01-overview.png",
+			"ticks": 504,
+			"zoom": 0.43
+		},
+		{
+			"cell": [
+				24.0,
+				17.0
+			],
+			"file": "02-idol.png",
+			"ticks": 504,
+			"zoom": 1.0
+		},
+		{
+			"cell": [
+				29.0,
+				17.0
+			],
+			"file": "03-open-grass.png",
+			"ticks": 504,
+			"zoom": 1.0
+		},
+		{
+			"cell": [
+				49.0,
+				13.0
+			],
+			"file": "04-woodland.png",
+			"ticks": 504,
+			"zoom": 0.9
+		},
+		{
+			"cell": [
+				11.0,
+				25.0
+			],
+			"file": "05-rocky.png",
+			"ticks": 504,
+			"zoom": 0.9
+		},
+		{
+			"cell": [
+				49.0,
+				11.0
+			],
+			"file": "06-lush.png",
+			"ticks": 504,
+			"zoom": 0.9
+		},
+		{
+			"cell": [
+				14.0,
+				9.0
+			],
+			"file": "07-dry.png",
+			"ticks": 504,
+			"zoom": 0.9
+		},
+		{
+			"cell": [
+				25.0,
+				3.0
+			],
+			"file": "08-top.png",
+			"ticks": 504,
+			"zoom": 0.7
+		},
+		{
+			"cell": [
+				25.0,
+				30.0
+			],
+			"file": "09-bottom.png",
+			"ticks": 504,
+			"zoom": 0.7
+		},
+		{
+			"cell": [
+				3.0,
+				17.0
+			],
+			"file": "10-left.png",
+			"ticks": 504,
+			"zoom": 0.7
+		},
+		{
+			"cell": [
+				46.0,
+				17.0
+			],
+			"file": "11-right.png",
+			"ticks": 504,
+			"zoom": 0.7
+		},
+		{
+			"cell": [
+				3.0,
+				3.0
+			],
+			"file": "12-top-left.png",
+			"ticks": 504,
+			"zoom": 0.7
+		},
+		{
+			"cell": [
+				46.0,
+				3.0
+			],
+			"file": "13-top-right.png",
+			"ticks": 504,
+			"zoom": 0.7
+		},
+		{
+			"cell": [
+				3.0,
+				30.0
+			],
+			"file": "14-bottom-left.png",
+			"ticks": 504,
+			"zoom": 0.7
+		},
+		{
+			"cell": [
+				46.0,
+				30.0
+			],
+			"file": "15-bottom-right.png",
+			"ticks": 504,
+			"zoom": 0.7
+		},
+		{
+			"cell": [
+				45.0,
+				14.0
+			],
+			"file": "16-harvest-target.png",
+			"ticks": 504,
+			"zoom": 1.0
+		},
+		{
+			"cell": [
+				16.0,
+				25.0
+			],
+			"file": "17-mine-target.png",
+			"ticks": 504,
+			"zoom": 1.0
+		},
+		{
+			"cell": [
+				25.0,
+				17.0
+			],
+			"file": "01-overview-morning.png",
+			"ticks": 0,
+			"zoom": 0.43
+		},
+		{
+			"cell": [
+				24.0,
+				17.0
+			],
+			"file": "02-idol-morning.png",
+			"ticks": 0,
+			"zoom": 1.0
+		},
+		{
+			"cell": [
+				25.0,
+				17.0
+			],
+			"file": "01-overview-night.png",
+			"ticks": 1224,
+			"zoom": 0.43
+		},
+		{
+			"cell": [
+				24.0,
+				17.0
+			],
+			"file": "02-idol-night.png",
+			"ticks": 1224,
+			"zoom": 1.0
+		}
+	],
+	"note": "Controlled real-game render; not human play or FPS certification",
+	"persistence_disabled": true,
+	"renderer": "Windows",
+	"resolution": [
+		1280,
+		800
+	],
+	"seed": 31.0
+}

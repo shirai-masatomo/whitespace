@@ -1,0 +1,44 @@
+[
+  {
+    "end_utc": "2026-10-11T18:33:51.7766674Z",
+    "start_utc": "2026-10-11T18:33:48.6834100Z",
+    "sha256": "12F276EE0D84FA5F65BCE90CF51BBFE2FDA8D9CF8596DEE3503E8119C92161B5",
+    "data_root": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\確認入口\\24_バイオーム実装_撮影引継ぎ\\delivery\\lifecycle/user-data",
+    "result": {
+      "PID": 20632,
+      "ThreadID": 10484,
+      "ExitCode": 0,
+      "OwnedWindowCount": 2,
+      "Station": "Service-0x0-bf6d9650$",
+      "Desktop": "Render_ebed9afd3c614c3eaf54bdbc838abaaa",
+      "ObservedDesktop": "Render_ebed9afd3c614c3eaf54bdbc838abaaa",
+      "NonInteractive": true,
+      "DesktopMatched": true,
+      "TimedOut": false
+    },
+    "command": "\"C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\確認入口\\24_バイオーム実装_撮影引継ぎ\\delivery\\candidate\\WhistleRanch-Autonomy-Partial.exe\" --audio-driver Dummy --rendering-method gl_compatibility --max-fps 30 --resolution 1280x800 --log-file \"C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\確認入口\\24_バイオーム実装_撮影引継ぎ\\delivery\\lifecycle/close.log\" -- --isolated-review --review-cycle-entry",
+    "phase": "close",
+    "executable": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\確認入口\\24_バイオーム実装_撮影引継ぎ\\delivery\\candidate\\WhistleRanch-Autonomy-Partial.exe"
+  },
+  {
+    "end_utc": "2026-10-11T18:33:55.0642348Z",
+    "start_utc": "2026-10-11T18:33:51.9412959Z",
+    "sha256": "12F276EE0D84FA5F65BCE90CF51BBFE2FDA8D9CF8596DEE3503E8119C92161B5",
+    "data_root": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\確認入口\\24_バイオーム実装_撮影引継ぎ\\delivery\\lifecycle/user-data",
+    "result": {
+      "PID": 15656,
+      "ThreadID": 21196,
+      "ExitCode": 0,
+      "OwnedWindowCount": 2,
+      "Station": "Service-0x0-bf6d9650$",
+      "Desktop": "Render_16a829ad187a489e9a877a095c2e1575",
+      "ObservedDesktop": "Render_16a829ad187a489e9a877a095c2e1575",
+      "NonInteractive": true,
+      "DesktopMatched": true,
+      "TimedOut": false
+    },
+    "command": "\"C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\確認入口\\24_バイオーム実装_撮影引継ぎ\\delivery\\candidate\\WhistleRanch-Autonomy-Partial.exe\" --audio-driver Dummy --rendering-method gl_compatibility --max-fps 30 --resolution 1280x800 --log-file \"C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\確認入口\\24_バイオーム実装_撮影引継ぎ\\delivery\\lifecycle/resume.log\" -- --isolated-review --review-cycle-entry --resume-cycle-entry",
+    "phase": "resume",
+    "executable": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\確認入口\\24_バイオーム実装_撮影引継ぎ\\delivery\\candidate\\WhistleRanch-Autonomy-Partial.exe"
+  }
+]

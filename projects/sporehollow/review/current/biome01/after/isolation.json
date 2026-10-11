@@ -1,0 +1,23 @@
+{
+  "implementation_commit": "428e568cad8669aa9e89a910026c3b8bf22e8b27",
+  "asset_delivery_commit": "b0e917a11f205190dde0136165a72c189f39e275",
+  "result": {
+    "PID": 43168,
+    "ThreadID": 37936,
+    "ExitCode": 0,
+    "OwnedWindowCount": 2,
+    "Station": "Service-0x0-bf6d9650$",
+    "Desktop": "Render_de6d3b9c9455489a9ca998ddd966b6bf",
+    "ObservedDesktop": "Render_de6d3b9c9455489a9ca998ddd966b6bf",
+    "NonInteractive": true,
+    "DesktopMatched": true,
+    "TimedOut": false
+  },
+  "start_utc": "2026-10-11T18:32:40.1641406Z",
+  "phase": "after",
+  "user_data": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\確認入口\\24_バイオーム実装_撮影引継ぎ\\delivery\\after/user-data",
+  "exe_sha256": "12F276EE0D84FA5F65BCE90CF51BBFE2FDA8D9CF8596DEE3503E8119C92161B5",
+  "end_utc": "2026-10-11T18:32:45.7029933Z",
+  "command": "\"C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\.tools\\Godot_v4.7.2-stable_win64.exe\" --main-pack \"C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\確認入口\\24_バイオーム実装_撮影引継ぎ\\delivery\\candidate\\WhistleRanch-Autonomy-Partial.exe\" --audio-driver Dummy --rendering-method gl_compatibility --max-fps 30 --resolution 1280x800 --log-file \"C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\確認入口\\24_バイオーム実装_撮影引継ぎ\\delivery\\after/render.log\" --script \"C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\tests\\capture_biome01.gd\" -- --isolated-review",
+  "source_head": "e0d327692e33d88501d8e30ed1e5f9fe65aac6c3"
+}

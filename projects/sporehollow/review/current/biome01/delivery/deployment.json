@@ -1,0 +1,20 @@
+{
+  "normal_data_unchanged": true,
+  "native_lifecycle_checks": 5,
+  "sha256": "12F276EE0D84FA5F65BCE90CF51BBFE2FDA8D9CF8596DEE3503E8119C92161B5",
+  "branch": "codex/sporehollow-biome01",
+  "human_play": "not performed",
+  "automatically_launched": false,
+  "previous_sha256": "A10287B62CE93C985891982C3A8B4B2B2CB67BD58722349A8113A8FA22110C1C",
+  "utc": "2026-10-11T18:34:49.5090099Z",
+  "headless_compatibility_checks": 21,
+  "source_head": "e0d327692e33d88501d8e30ed1e5f9fe65aac6c3",
+  "captured_before": 21,
+  "isolation": "Noninteractive desktop;30fps;Dummy audio;private user data;sequential",
+  "implementation_commit": "428e568cad8669aa9e89a910026c3b8bf22e8b27",
+  "captured_after": 21,
+  "gpu_fps": "not measured",
+  "asset_delivery_commit": "b0e917a11f205190dde0136165a72c189f39e275",
+  "local_entry": "確認入口/最新開発版.lnk",
+  "normal_saves": "Kept locally; all files matched before/after replacement"
+}

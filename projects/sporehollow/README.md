@@ -41,3 +41,5 @@ HUDの土・木材・石は総所有数。利用可と異なる場合は「使�
 関連headless、GPUのGodot入力イベント、通常起動／終了／別プロセス再開は区別して記録します。人間の通し試遊・実音・IME・各敵AIの長時間評価は別です。今回の外部レビュー資料は[review/current/PACKET.md](review/current/PACKET.md)にあります。ローカルでは `確認入口/23_UI_AIレビュー02`。非対話デスクトップでのGPU描画・入力・終了再開が成功しています。GPUを共有するため30fpsで直列実行し、音と通常セーブを分離します。
 
 個体仕様：ANIMALS.md／ENEMIES.md。建築：BUILDINGS.md。世界：WORLD_SYSTEMS.md。採用素材：ART_SPEC.md。BGM・正式素材は既存参照を維持し、新しい画像は生成していません。
+
+バイオーム01は通常の最新版入口へ反映済み。ESCのバージョンで428e568を確認できます。[配布確認と前後画像](review/current/biome01/DELIVERY.md)。既存の続きは物資・住人を再配置せず景観を追加します。

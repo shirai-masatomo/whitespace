@@ -1,0 +1,464 @@
+[
+  {
+    "path": "before/01-overview-morning.png",
+    "sha256": "554cf7daee6d0e753f0ccafb77e270150ad616a899a861b7e34f138cef6ace35",
+    "implementation_commit": "91f76a298a5bb3775fb2aafedca74a9e8c9ad19b",
+    "exe_sha256": "A10287B62CE93C985891982C3A8B4B2B2CB67BD58722349A8113A8FA22110C1C",
+    "seed": 31,
+    "resolution": [
+      1280,
+      800
+    ]
+  },
+  {
+    "path": "after/01-overview-morning.png",
+    "sha256": "c2597bb77837fdcd94e780d35fa65f5a73e48292ccf21472b384536f11635f46",
+    "implementation_commit": "428e568cad8669aa9e89a910026c3b8bf22e8b27",
+    "exe_sha256": "12F276EE0D84FA5F65BCE90CF51BBFE2FDA8D9CF8596DEE3503E8119C92161B5",
+    "seed": 31,
+    "resolution": [
+      1280,
+      800
+    ]
+  },
+  {
+    "path": "before/01-overview-night.png",
+    "sha256": "491dcd644dc0fb412a4ea0b88a60d6255f5611eb40da33888b037be3300dd02b",
+    "implementation_commit": "91f76a298a5bb3775fb2aafedca74a9e8c9ad19b",
+    "exe_sha256": "A10287B62CE93C985891982C3A8B4B2B2CB67BD58722349A8113A8FA22110C1C",
+    "seed": 31,
+    "resolution": [
+      1280,
+      800
+    ]
+  },
+  {
+    "path": "after/01-overview-night.png",
+    "sha256": "5002348fc920cd86a6eeb1eecb0a5f4acca72af726bffb5fbbaaf6aaf24137a5",
+    "implementation_commit": "428e568cad8669aa9e89a910026c3b8bf22e8b27",
+    "exe_sha256": "12F276EE0D84FA5F65BCE90CF51BBFE2FDA8D9CF8596DEE3503E8119C92161B5",
+    "seed": 31,
+    "resolution": [
+      1280,
+      800
+    ]
+  },
+  {
+    "path": "before/01-overview.png",
+    "sha256": "358d0426c208d7eb401f617d1e2cb83aeac20a3c7d52c7f132b7ab3c7757aa94",
+    "implementation_commit": "91f76a298a5bb3775fb2aafedca74a9e8c9ad19b",
+    "exe_sha256": "A10287B62CE93C985891982C3A8B4B2B2CB67BD58722349A8113A8FA22110C1C",
+    "seed": 31,
+    "resolution": [
+      1280,
+      800
+    ]
+  },
+  {
+    "path": "after/01-overview.png",
+    "sha256": "470183ed884755b790588445f1d308ada61c2b880601e45233303541916c2bbb",
+    "implementation_commit": "428e568cad8669aa9e89a910026c3b8bf22e8b27",
+    "exe_sha256": "12F276EE0D84FA5F65BCE90CF51BBFE2FDA8D9CF8596DEE3503E8119C92161B5",
+    "seed": 31,
+    "resolution": [
+      1280,
+      800
+    ]
+  },
+  {
+    "path": "before/02-idol-morning.png",
+    "sha256": "31ab082066890e64fd43216c77805af5aea1faf1f49363db860f47cb34326d1b",
+    "implementation_commit": "91f76a298a5bb3775fb2aafedca74a9e8c9ad19b",
+    "exe_sha256": "A10287B62CE93C985891982C3A8B4B2B2CB67BD58722349A8113A8FA22110C1C",
+    "seed": 31,
+    "resolution": [
+      1280,
+      800
+    ]
+  },
+  {
+    "path": "after/02-idol-morning.png",
+    "sha256": "7c63fa115763556f03c2b9d586237ef610fc94b5b0310f7506b16812177ac767",
+    "implementation_commit": "428e568cad8669aa9e89a910026c3b8bf22e8b27",
+    "exe_sha256": "12F276EE0D84FA5F65BCE90CF51BBFE2FDA8D9CF8596DEE3503E8119C92161B5",
+    "seed": 31,
+    "resolution": [
+      1280,
+      800
+    ]
+  },
+  {
+    "path": "before/02-idol-night.png",
+    "sha256": "810190039f9f742680f111faba1d9b574c8a0b7530e1ff7f19b77ae8f12907f0",
+    "implementation_commit": "91f76a298a5bb3775fb2aafedca74a9e8c9ad19b",
+    "exe_sha256": "A10287B62CE93C985891982C3A8B4B2B2CB67BD58722349A8113A8FA22110C1C",
+    "seed": 31,
+    "resolution": [
+      1280,
+      800
+    ]
+  },
+  {
+    "path": "after/02-idol-night.png",
+    "sha256": "834bd67201802d7681eda4c04f167bc326772a1ea5ec47dc77de84262aa859a4",
+    "implementation_commit": "428e568cad8669aa9e89a910026c3b8bf22e8b27",
+    "exe_sha256": "12F276EE0D84FA5F65BCE90CF51BBFE2FDA8D9CF8596DEE3503E8119C92161B5",
+    "seed": 31,
+    "resolution": [
+      1280,
+      800
+    ]
+  },
+  {
+    "path": "before/02-idol.png",
+    "sha256": "6c14516fac2d54281fd12dd6399025e9beb29afd7a21ee04629bcf166b3545f0",
+    "implementation_commit": "91f76a298a5bb3775fb2aafedca74a9e8c9ad19b",
+    "exe_sha256": "A10287B62CE93C985891982C3A8B4B2B2CB67BD58722349A8113A8FA22110C1C",
+    "seed": 31,
+    "resolution": [
+      1280,
+      800
+    ]
+  },
+  {
+    "path": "after/02-idol.png",
+    "sha256": "29d66018225c03b4ba94e666eb06ccce29303952e4d584df3db1cf310ed10298",
+    "implementation_commit": "428e568cad8669aa9e89a910026c3b8bf22e8b27",
+    "exe_sha256": "12F276EE0D84FA5F65BCE90CF51BBFE2FDA8D9CF8596DEE3503E8119C92161B5",
+    "seed": 31,
+    "resolution": [
+      1280,
+      800
+    ]
+  },
+  {
+    "path": "before/03-open-grass.png",
+    "sha256": "3b050fc05f5ec7f914575f336c69cc84657cdf112eb0f17ef35d2db100475f9b",
+    "implementation_commit": "91f76a298a5bb3775fb2aafedca74a9e8c9ad19b",
+    "exe_sha256": "A10287B62CE93C985891982C3A8B4B2B2CB67BD58722349A8113A8FA22110C1C",
+    "seed": 31,
+    "resolution": [
+      1280,
+      800
+    ]
+  },
+  {
+    "path": "after/03-open-grass.png",
+    "sha256": "6dcf6451c1a091ee7f0a70dc275aad9b99b46dc84f9f043dd8939867055c2771",
+    "implementation_commit": "428e568cad8669aa9e89a910026c3b8bf22e8b27",
+    "exe_sha256": "12F276EE0D84FA5F65BCE90CF51BBFE2FDA8D9CF8596DEE3503E8119C92161B5",
+    "seed": 31,
+    "resolution": [
+      1280,
+      800
+    ]
+  },
+  {
+    "path": "before/04-woodland.png",
+    "sha256": "3e5330c14c514944caabc3bfc9a3a4136832752e6f9458fd11764d580a22c1c7",
+    "implementation_commit": "91f76a298a5bb3775fb2aafedca74a9e8c9ad19b",
+    "exe_sha256": "A10287B62CE93C985891982C3A8B4B2B2CB67BD58722349A8113A8FA22110C1C",
+    "seed": 31,
+    "resolution": [
+      1280,
+      800
+    ]
+  },
+  {
+    "path": "after/04-woodland.png",
+    "sha256": "d2a1deb8dd9ceac9817c845dece42bc4ff55f3e8af583fea3e72515ad220e109",
+    "implementation_commit": "428e568cad8669aa9e89a910026c3b8bf22e8b27",
+    "exe_sha256": "12F276EE0D84FA5F65BCE90CF51BBFE2FDA8D9CF8596DEE3503E8119C92161B5",
+    "seed": 31,
+    "resolution": [
+      1280,
+      800
+    ]
+  },
+  {
+    "path": "before/05-rocky.png",
+    "sha256": "4d54359701ce146cc989846eaf583eeed3934baa104ef19afa673494e36971cc",
+    "implementation_commit": "91f76a298a5bb3775fb2aafedca74a9e8c9ad19b",
+    "exe_sha256": "A10287B62CE93C985891982C3A8B4B2B2CB67BD58722349A8113A8FA22110C1C",
+    "seed": 31,
+    "resolution": [
+      1280,
+      800
+    ]
+  },
+  {
+    "path": "after/05-rocky.png",
+    "sha256": "98302abb54e1984983164c4e3dba0be301fed7a846003651ee6b76757cd9b99a",
+    "implementation_commit": "428e568cad8669aa9e89a910026c3b8bf22e8b27",
+    "exe_sha256": "12F276EE0D84FA5F65BCE90CF51BBFE2FDA8D9CF8596DEE3503E8119C92161B5",
+    "seed": 31,
+    "resolution": [
+      1280,
+      800
+    ]
+  },
+  {
+    "path": "before/06-lush.png",
+    "sha256": "97f4e3bb5c4ca826922b2d20734d924020c3331fd789b197a037f4a95e680f16",
+    "implementation_commit": "91f76a298a5bb3775fb2aafedca74a9e8c9ad19b",
+    "exe_sha256": "A10287B62CE93C985891982C3A8B4B2B2CB67BD58722349A8113A8FA22110C1C",
+    "seed": 31,
+    "resolution": [
+      1280,
+      800
+    ]
+  },
+  {
+    "path": "after/06-lush.png",
+    "sha256": "5c72c663b70a3fb12ee383fcaa959d9a058973930d56bd80519e1ac95913e63c",
+    "implementation_commit": "428e568cad8669aa9e89a910026c3b8bf22e8b27",
+    "exe_sha256": "12F276EE0D84FA5F65BCE90CF51BBFE2FDA8D9CF8596DEE3503E8119C92161B5",
+    "seed": 31,
+    "resolution": [
+      1280,
+      800
+    ]
+  },
+  {
+    "path": "before/07-dry.png",
+    "sha256": "42f67aff597ff2442778aa9342411c76182bb99c8733c39cde4b18b6788810bc",
+    "implementation_commit": "91f76a298a5bb3775fb2aafedca74a9e8c9ad19b",
+    "exe_sha256": "A10287B62CE93C985891982C3A8B4B2B2CB67BD58722349A8113A8FA22110C1C",
+    "seed": 31,
+    "resolution": [
+      1280,
+      800
+    ]
+  },
+  {
+    "path": "after/07-dry.png",
+    "sha256": "306d193b2ffe6ae65d2ddce861e6f37c61e1a09e03b14944861d7525f024916a",
+    "implementation_commit": "428e568cad8669aa9e89a910026c3b8bf22e8b27",
+    "exe_sha256": "12F276EE0D84FA5F65BCE90CF51BBFE2FDA8D9CF8596DEE3503E8119C92161B5",
+    "seed": 31,
+    "resolution": [
+      1280,
+      800
+    ]
+  },
+  {
+    "path": "before/08-top.png",
+    "sha256": "a8fbc52f9ac812292eb79d9fd54f18edcc77b63d6c1c5f57f08eff2af58b075e",
+    "implementation_commit": "91f76a298a5bb3775fb2aafedca74a9e8c9ad19b",
+    "exe_sha256": "A10287B62CE93C985891982C3A8B4B2B2CB67BD58722349A8113A8FA22110C1C",
+    "seed": 31,
+    "resolution": [
+      1280,
+      800
+    ]
+  },
+  {
+    "path": "after/08-top.png",
+    "sha256": "54408f1f2b22d5d2b8a427fef2fa2795ab4a19223ae2506170b585ff8f18b3ec",
+    "implementation_commit": "428e568cad8669aa9e89a910026c3b8bf22e8b27",
+    "exe_sha256": "12F276EE0D84FA5F65BCE90CF51BBFE2FDA8D9CF8596DEE3503E8119C92161B5",
+    "seed": 31,
+    "resolution": [
+      1280,
+      800
+    ]
+  },
+  {
+    "path": "before/09-bottom.png",
+    "sha256": "90f2e807a75682c127591281934e1a4e7f281d378e638f283d7d0be67cd0ce75",
+    "implementation_commit": "91f76a298a5bb3775fb2aafedca74a9e8c9ad19b",
+    "exe_sha256": "A10287B62CE93C985891982C3A8B4B2B2CB67BD58722349A8113A8FA22110C1C",
+    "seed": 31,
+    "resolution": [
+      1280,
+      800
+    ]
+  },
+  {
+    "path": "after/09-bottom.png",
+    "sha256": "0d4f77e3758c94859b55bb9c25b295acf30cf5060569b929babedcfc43784924",
+    "implementation_commit": "428e568cad8669aa9e89a910026c3b8bf22e8b27",
+    "exe_sha256": "12F276EE0D84FA5F65BCE90CF51BBFE2FDA8D9CF8596DEE3503E8119C92161B5",
+    "seed": 31,
+    "resolution": [
+      1280,
+      800
+    ]
+  },
+  {
+    "path": "before/10-left.png",
+    "sha256": "3eb7ffa09488fee22c43307815b8fa5cfb548f9c99b32b570120512cc9432468",
+    "implementation_commit": "91f76a298a5bb3775fb2aafedca74a9e8c9ad19b",
+    "exe_sha256": "A10287B62CE93C985891982C3A8B4B2B2CB67BD58722349A8113A8FA22110C1C",
+    "seed": 31,
+    "resolution": [
+      1280,
+      800
+    ]
+  },
+  {
+    "path": "after/10-left.png",
+    "sha256": "7da56f6cdc6184d03ac7fa37f0d705a5a96ae325050edbf04aa10bca9e5aa6b5",
+    "implementation_commit": "428e568cad8669aa9e89a910026c3b8bf22e8b27",
+    "exe_sha256": "12F276EE0D84FA5F65BCE90CF51BBFE2FDA8D9CF8596DEE3503E8119C92161B5",
+    "seed": 31,
+    "resolution": [
+      1280,
+      800
+    ]
+  },
+  {
+    "path": "before/11-right.png",
+    "sha256": "e6c317255c69294ac9a6571128c33402d67922e7ddc623a95fabf5f3a98d512b",
+    "implementation_commit": "91f76a298a5bb3775fb2aafedca74a9e8c9ad19b",
+    "exe_sha256": "A10287B62CE93C985891982C3A8B4B2B2CB67BD58722349A8113A8FA22110C1C",
+    "seed": 31,
+    "resolution": [
+      1280,
+      800
+    ]
+  },
+  {
+    "path": "after/11-right.png",
+    "sha256": "b8fa2a028fa23ed48224cdfbde1a60d60d272fdd22f5455cb30aeaffa9fbe512",
+    "implementation_commit": "428e568cad8669aa9e89a910026c3b8bf22e8b27",
+    "exe_sha256": "12F276EE0D84FA5F65BCE90CF51BBFE2FDA8D9CF8596DEE3503E8119C92161B5",
+    "seed": 31,
+    "resolution": [
+      1280,
+      800
+    ]
+  },
+  {
+    "path": "before/12-top-left.png",
+    "sha256": "0c923976242cd645cfe2e641ee0c981b6f9a25499b8e648bc4965b960646fc3b",
+    "implementation_commit": "91f76a298a5bb3775fb2aafedca74a9e8c9ad19b",
+    "exe_sha256": "A10287B62CE93C985891982C3A8B4B2B2CB67BD58722349A8113A8FA22110C1C",
+    "seed": 31,
+    "resolution": [
+      1280,
+      800
+    ]
+  },
+  {
+    "path": "after/12-top-left.png",
+    "sha256": "4e8ce5065e61f10e68db78a225e851d50a407465038a96bef08572a187775a25",
+    "implementation_commit": "428e568cad8669aa9e89a910026c3b8bf22e8b27",
+    "exe_sha256": "12F276EE0D84FA5F65BCE90CF51BBFE2FDA8D9CF8596DEE3503E8119C92161B5",
+    "seed": 31,
+    "resolution": [
+      1280,
+      800
+    ]
+  },
+  {
+    "path": "before/13-top-right.png",
+    "sha256": "a9a02a2f1cc5095e2657df6be5fbbc34c7673950979c75b331f6ba5f2b565028",
+    "implementation_commit": "91f76a298a5bb3775fb2aafedca74a9e8c9ad19b",
+    "exe_sha256": "A10287B62CE93C985891982C3A8B4B2B2CB67BD58722349A8113A8FA22110C1C",
+    "seed": 31,
+    "resolution": [
+      1280,
+      800
+    ]
+  },
+  {
+    "path": "after/13-top-right.png",
+    "sha256": "203129524dd3e0e360644f5d503d558c9486d70d4aacf32d366dc46b8fac5052",
+    "implementation_commit": "428e568cad8669aa9e89a910026c3b8bf22e8b27",
+    "exe_sha256": "12F276EE0D84FA5F65BCE90CF51BBFE2FDA8D9CF8596DEE3503E8119C92161B5",
+    "seed": 31,
+    "resolution": [
+      1280,
+      800
+    ]
+  },
+  {
+    "path": "before/14-bottom-left.png",
+    "sha256": "785f5603f459877e74eb8dc37d21a25e4e4023ba57edbb9aee16ec53be6cd188",
+    "implementation_commit": "91f76a298a5bb3775fb2aafedca74a9e8c9ad19b",
+    "exe_sha256": "A10287B62CE93C985891982C3A8B4B2B2CB67BD58722349A8113A8FA22110C1C",
+    "seed": 31,
+    "resolution": [
+      1280,
+      800
+    ]
+  },
+  {
+    "path": "after/14-bottom-left.png",
+    "sha256": "dda72fbdee5aca4ecd06a6b7b2d1ae3521e4fa777b1910b8d2ba927823a6d333",
+    "implementation_commit": "428e568cad8669aa9e89a910026c3b8bf22e8b27",
+    "exe_sha256": "12F276EE0D84FA5F65BCE90CF51BBFE2FDA8D9CF8596DEE3503E8119C92161B5",
+    "seed": 31,
+    "resolution": [
+      1280,
+      800
+    ]
+  },
+  {
+    "path": "before/15-bottom-right.png",
+    "sha256": "f4f03d0c50dd192002ef1aaae028f278d27ba901975eb6a50c4bea3902da26a4",
+    "implementation_commit": "91f76a298a5bb3775fb2aafedca74a9e8c9ad19b",
+    "exe_sha256": "A10287B62CE93C985891982C3A8B4B2B2CB67BD58722349A8113A8FA22110C1C",
+    "seed": 31,
+    "resolution": [
+      1280,
+      800
+    ]
+  },
+  {
+    "path": "after/15-bottom-right.png",
+    "sha256": "2aa9087006d0b068c578677fd36c47b37ced9553af3d8b4ced55521473a6f3d2",
+    "implementation_commit": "428e568cad8669aa9e89a910026c3b8bf22e8b27",
+    "exe_sha256": "12F276EE0D84FA5F65BCE90CF51BBFE2FDA8D9CF8596DEE3503E8119C92161B5",
+    "seed": 31,
+    "resolution": [
+      1280,
+      800
+    ]
+  },
+  {
+    "path": "before/16-harvest-target.png",
+    "sha256": "a087c9957afc73aa0f93609c960ff5ca171cb97d9f10f78a35b342e0d6faa8b1",
+    "implementation_commit": "91f76a298a5bb3775fb2aafedca74a9e8c9ad19b",
+    "exe_sha256": "A10287B62CE93C985891982C3A8B4B2B2CB67BD58722349A8113A8FA22110C1C",
+    "seed": 31,
+    "resolution": [
+      1280,
+      800
+    ]
+  },
+  {
+    "path": "after/16-harvest-target.png",
+    "sha256": "bb0b4889ef67073694bf69a22c3c05a4bc15691028329aa1ebccb7d994bb0ca6",
+    "implementation_commit": "428e568cad8669aa9e89a910026c3b8bf22e8b27",
+    "exe_sha256": "12F276EE0D84FA5F65BCE90CF51BBFE2FDA8D9CF8596DEE3503E8119C92161B5",
+    "seed": 31,
+    "resolution": [
+      1280,
+      800
+    ]
+  },
+  {
+    "path": "before/17-mine-target.png",
+    "sha256": "95e685bbbae4b9d59536846ababdf2cd08c4cd13bc3c97eafe9b93513d91d4af",
+    "implementation_commit": "91f76a298a5bb3775fb2aafedca74a9e8c9ad19b",
+    "exe_sha256": "A10287B62CE93C985891982C3A8B4B2B2CB67BD58722349A8113A8FA22110C1C",
+    "seed": 31,
+    "resolution": [
+      1280,
+      800
+    ]
+  },
+  {
+    "path": "after/17-mine-target.png",
+    "sha256": "a247ef52d9e693d4267886fcd04305f92fdd0d88bff54513d501930059e84658",
+    "implementation_commit": "428e568cad8669aa9e89a910026c3b8bf22e8b27",
+    "exe_sha256": "12F276EE0D84FA5F65BCE90CF51BBFE2FDA8D9CF8596DEE3503E8119C92161B5",
+    "seed": 31,
+    "resolution": [
+      1280,
+      800
+    ]
+  }
+]

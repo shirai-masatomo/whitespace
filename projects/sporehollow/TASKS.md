@@ -24,3 +24,9 @@
 対応表・前後画像・観察・監査は確認入口/23_UI_AIレビュー02/REPORT.md。実装91f76a2。最新版入口の反映状態は同フォルダdeployment.jsonで確認。通常セーブ・素材・履歴を保持し、修正とレビュー資料をcodex/sporehollow-review02へpush。mergeなし。
 
 GitHubのレビュー入口：review/current/PACKET.md（codex/sporehollow-review02）。
+
+## バイオーム01の通常EXE反映
+
+- [x] 既存の最新版入口へ反映。旧EXE退避、通常データと入口のハッシュ一致。自動起動なし。
+- [x] 候補EXEの隔離GPU前後21組、旧セーブ互換21項目、終了再開5項目。
+- [ ] 全構図の人間による最終見た目評価、追加実操作、実GPU FPS。静止画像取得と区別。
