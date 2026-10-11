@@ -1,0 +1,194 @@
+{
+	"seed": 31,
+	"views": [
+		{
+			"cell": [
+				25,
+				17
+			],
+			"name": "01-overview",
+			"ticks": 504,
+			"zoom": 0.43
+		},
+		{
+			"cell": [
+				24,
+				17
+			],
+			"name": "02-idol",
+			"ticks": 504,
+			"zoom": 1.0
+		},
+		{
+			"cell": [
+				29,
+				17
+			],
+			"name": "03-open-grass",
+			"ticks": 504,
+			"zoom": 1.0
+		},
+		{
+			"cell": [
+				49,
+				13
+			],
+			"name": "04-woodland",
+			"ticks": 504,
+			"zoom": 0.9
+		},
+		{
+			"cell": [
+				11,
+				25
+			],
+			"name": "05-rocky",
+			"ticks": 504,
+			"zoom": 0.9
+		},
+		{
+			"cell": [
+				49,
+				11
+			],
+			"name": "06-lush",
+			"ticks": 504,
+			"zoom": 0.9
+		},
+		{
+			"cell": [
+				14,
+				9
+			],
+			"name": "07-dry",
+			"ticks": 504,
+			"zoom": 0.9
+		},
+		{
+			"cell": [
+				25,
+				3
+			],
+			"name": "08-top",
+			"ticks": 504,
+			"zoom": 0.7
+		},
+		{
+			"cell": [
+				25,
+				30
+			],
+			"name": "09-bottom",
+			"ticks": 504,
+			"zoom": 0.7
+		},
+		{
+			"cell": [
+				3,
+				17
+			],
+			"name": "10-left",
+			"ticks": 504,
+			"zoom": 0.7
+		},
+		{
+			"cell": [
+				46,
+				17
+			],
+			"name": "11-right",
+			"ticks": 504,
+			"zoom": 0.7
+		},
+		{
+			"cell": [
+				3,
+				3
+			],
+			"name": "12-top-left",
+			"ticks": 504,
+			"zoom": 0.7
+		},
+		{
+			"cell": [
+				46,
+				3
+			],
+			"name": "13-top-right",
+			"ticks": 504,
+			"zoom": 0.7
+		},
+		{
+			"cell": [
+				3,
+				30
+			],
+			"name": "14-bottom-left",
+			"ticks": 504,
+			"zoom": 0.7
+		},
+		{
+			"cell": [
+				46,
+				30
+			],
+			"name": "15-bottom-right",
+			"ticks": 504,
+			"zoom": 0.7
+		},
+		{
+			"cell": [
+				45,
+				14
+			],
+			"name": "16-harvest-target",
+			"ticks": 504,
+			"zoom": 1.0
+		},
+		{
+			"cell": [
+				16,
+				25
+			],
+			"name": "17-mine-target",
+			"ticks": 504,
+			"zoom": 1.0
+		},
+		{
+			"cell": [
+				25,
+				17
+			],
+			"name": "01-overview-morning",
+			"ticks": 0,
+			"zoom": 0.43
+		},
+		{
+			"cell": [
+				24,
+				17
+			],
+			"name": "02-idol-morning",
+			"ticks": 0,
+			"zoom": 1.0
+		},
+		{
+			"cell": [
+				25,
+				17
+			],
+			"name": "01-overview-night",
+			"ticks": 1224,
+			"zoom": 0.43
+		},
+		{
+			"cell": [
+				24,
+				17
+			],
+			"name": "02-idol-night",
+			"ticks": 1224,
+			"zoom": 1.0
+		}
+	]
+}

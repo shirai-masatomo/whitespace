@@ -1,0 +1,200 @@
+{
+	"checks": [
+		{
+			"check": "train uses one canonical animal category",
+			"passed": true
+		},
+		{
+			"check": "train runs only for animal1/other0; not animal0/other1",
+			"passed": true
+		},
+		{
+			"check": "train remains queued with the disclosed disabled category",
+			"passed": true
+		},
+		{
+			"check": "train resumes when the correct category is enabled",
+			"passed": true
+		},
+		{
+			"check": "train uses one canonical animal category",
+			"passed": true
+		},
+		{
+			"check": "train runs only for animal1/other0; not animal0/other1",
+			"passed": true
+		},
+		{
+			"check": "slaughter uses one canonical animal category",
+			"passed": true
+		},
+		{
+			"check": "slaughter runs only for animal1/other0; not animal0/other1",
+			"passed": true
+		},
+		{
+			"check": "slaughter remains queued with the disclosed disabled category",
+			"passed": true
+		},
+		{
+			"check": "slaughter resumes when the correct category is enabled",
+			"passed": true
+		},
+		{
+			"check": "slaughter uses one canonical animal category",
+			"passed": true
+		},
+		{
+			"check": "slaughter runs only for animal1/other0; not animal0/other1",
+			"passed": true
+		},
+		{
+			"check": "Healthy keeper can be drafted",
+			"passed": true
+		},
+		{
+			"check": "Drafted keeper rejects rest/resume without changing jobs: paused=false",
+			"passed": true
+		},
+		{
+			"check": "Drafted keeper rejects equipment and bulk rest",
+			"passed": true
+		},
+		{
+			"check": "Drafted keeper rejects rest/resume without changing jobs: paused=true",
+			"passed": true
+		},
+		{
+			"check": "Drafted keeper rejects equipment and bulk rest",
+			"passed": true
+		},
+		{
+			"check": "Normal work does not execute while drafted",
+			"passed": true
+		},
+		{
+			"check": "Drafted direct movement remains available",
+			"passed": true
+		},
+		{
+			"check": "Drafted direct movement executes physically",
+			"passed": true
+		},
+		{
+			"check": "Undrafting permits the existing wall designation to finish",
+			"passed": true
+		},
+		{
+			"check": "Drafting ends voluntary sleep and removes old queued rest",
+			"passed": true
+		},
+		{
+			"check": "Forced sleeper cannot be drafted",
+			"passed": true
+		},
+		{
+			"check": "20:16 selects dawn and rejects daytime skip even if legacy phase says day",
+			"passed": true
+		},
+		{
+			"check": "Pending raids block overnight rest",
+			"passed": true
+		},
+		{
+			"check": "Living threat blocks overnight rest",
+			"passed": true
+		},
+		{
+			"check": "Only a corpse remains: normal fixed-tick dawn rest can be planned",
+			"passed": true
+		},
+		{
+			"check": "Pause permits a rest plan",
+			"passed": true
+		},
+		{
+			"check": "Paused rest plan does not advance or begin sleep",
+			"passed": true
+		},
+		{
+			"check": "Rest plan enters the existing delayed sleep calculation",
+			"passed": true
+		},
+		{
+			"check": "Danger stops time forwarding",
+			"passed": true
+		},
+		{
+			"check": "Dawn does not wake a forced sleeper before its recovery condition",
+			"passed": true
+		},
+		{
+			"check": "40 owned with 8 carried is still 40 owned, 32 usable, 8 carried",
+			"passed": true
+		},
+		{
+			"check": "Stockpile is part of shared ownership and availability, not a separate balance",
+			"passed": true
+		},
+		{
+			"check": "Two workers use the same shared stock without duplicating the total",
+			"passed": true
+		},
+		{
+			"check": "Consumption reduces total, while moving material does not",
+			"passed": true
+		},
+		{
+			"check": "Harmless retreat is not a residual combat threat",
+			"passed": true
+		},
+		{
+			"check": "An abducting retreat remains a threat",
+			"passed": true
+		},
+		{
+			"check": "Dead enemy is not reported as a living residual threat",
+			"passed": true
+		}
+	],
+	"failures": 0,
+	"method": "Controlled production World.step, Work, Life and physical shared stock; no human play",
+	"stock_observations": [
+		{
+			"stage": "carry8",
+			"summary": {
+				"available": 32,
+				"carried": 8,
+				"forbidden": 0,
+				"owned": 40,
+				"reserved": 0,
+				"site": 0,
+				"stored": 0
+			}
+		},
+		{
+			"stage": "remaining_ground_in_stockpile",
+			"summary": {
+				"available": 32,
+				"carried": 8,
+				"forbidden": 0,
+				"owned": 40,
+				"reserved": 0,
+				"site": 0,
+				"stored": 32
+			}
+		},
+		{
+			"stage": "consumed10",
+			"summary": {
+				"available": 18,
+				"carried": 12,
+				"forbidden": 0,
+				"owned": 30,
+				"reserved": 0,
+				"site": 0,
+				"stored": 18
+			}
+		}
+	]
+}

@@ -1,0 +1,234 @@
+[
+  {
+    "check": "A new profile is distinguished from a corrupt profile",
+    "passed": true
+  },
+  {
+    "check": "Prepare purchase, training and Japanese name: 17",
+    "passed": true
+  },
+  {
+    "check": "Prepare a sale: 17",
+    "passed": true
+  },
+  {
+    "check": "Morning record writes and verifies: 17",
+    "passed": true
+  },
+  {
+    "check": "Reload starts the saved morning with its seed: 17",
+    "passed": true
+  },
+  {
+    "check": "All persisted farm state round trips without normalization drift: 17",
+    "passed": true
+  },
+  {
+    "check": "Sold-out stock and the pre-purchase retry boundary both survive: 17",
+    "passed": true
+  },
+  {
+    "check": "Day entry and daytime retry preserve morning choices: 17",
+    "passed": true
+  },
+  {
+    "check": "Midday state cannot enter the morning store: 17",
+    "passed": true
+  },
+  {
+    "check": "The next morning rotates a complete prior generation: 17",
+    "passed": true
+  },
+  {
+    "check": "Prayer, reward and route settlement survive repeated reload exactly once: 17",
+    "passed": false
+  },
+  {
+    "check": "Corrupt main recovers the previous valid morning: 17",
+    "passed": true
+  },
+  {
+    "check": "Repairing a corrupt main never replaces a valid backup with corruption: 17",
+    "passed": true
+  },
+  {
+    "check": "Prepare purchase, training and Japanese name: 31",
+    "passed": true
+  },
+  {
+    "check": "Prepare a sale: 31",
+    "passed": true
+  },
+  {
+    "check": "Morning record writes and verifies: 31",
+    "passed": true
+  },
+  {
+    "check": "Reload starts the saved morning with its seed: 31",
+    "passed": true
+  },
+  {
+    "check": "All persisted farm state round trips without normalization drift: 31",
+    "passed": true
+  },
+  {
+    "check": "Sold-out stock and the pre-purchase retry boundary both survive: 31",
+    "passed": true
+  },
+  {
+    "check": "Day entry and daytime retry preserve morning choices: 31",
+    "passed": true
+  },
+  {
+    "check": "Midday state cannot enter the morning store: 31",
+    "passed": true
+  },
+  {
+    "check": "The next morning rotates a complete prior generation: 31",
+    "passed": true
+  },
+  {
+    "check": "Prayer, reward and route settlement survive repeated reload exactly once: 31",
+    "passed": false
+  },
+  {
+    "check": "Corrupt main recovers the previous valid morning: 31",
+    "passed": true
+  },
+  {
+    "check": "Repairing a corrupt main never replaces a valid backup with corruption: 31",
+    "passed": true
+  },
+  {
+    "check": "Prepare purchase, training and Japanese name: 73",
+    "passed": true
+  },
+  {
+    "check": "Prepare a sale: 73",
+    "passed": true
+  },
+  {
+    "check": "Morning record writes and verifies: 73",
+    "passed": true
+  },
+  {
+    "check": "Reload starts the saved morning with its seed: 73",
+    "passed": true
+  },
+  {
+    "check": "All persisted farm state round trips without normalization drift: 73",
+    "passed": true
+  },
+  {
+    "check": "Sold-out stock and the pre-purchase retry boundary both survive: 73",
+    "passed": true
+  },
+  {
+    "check": "Day entry and daytime retry preserve morning choices: 73",
+    "passed": true
+  },
+  {
+    "check": "Midday state cannot enter the morning store: 73",
+    "passed": true
+  },
+  {
+    "check": "The next morning rotates a complete prior generation: 73",
+    "passed": true
+  },
+  {
+    "check": "Prayer, reward and route settlement survive repeated reload exactly once: 73",
+    "passed": false
+  },
+  {
+    "check": "Corrupt main recovers the previous valid morning: 73",
+    "passed": true
+  },
+  {
+    "check": "Repairing a corrupt main never replaces a valid backup with corruption: 73",
+    "passed": true
+  },
+  {
+    "check": "Interrupt after open",
+    "passed": true
+  },
+  {
+    "check": "Interrupted open retains the last committed morning",
+    "passed": true
+  },
+  {
+    "check": "A subsequent save recovers after open",
+    "passed": true
+  },
+  {
+    "check": "Interrupt after temporary",
+    "passed": true
+  },
+  {
+    "check": "Interrupted temporary retains the last committed morning",
+    "passed": true
+  },
+  {
+    "check": "A subsequent save recovers after temporary",
+    "passed": true
+  },
+  {
+    "check": "Interrupt after rotation",
+    "passed": true
+  },
+  {
+    "check": "Interrupted rotation retains the last committed morning",
+    "passed": true
+  },
+  {
+    "check": "A subsequent save recovers after rotation",
+    "passed": true
+  },
+  {
+    "check": "First-ever interrupted save can recover its verified temporary file",
+    "passed": true
+  },
+  {
+    "check": "A recovered temporary-only morning survives failure at the next write's truncation",
+    "passed": true
+  },
+  {
+    "check": "Failed temporary write leaves the existing morning intact",
+    "passed": true
+  },
+  {
+    "check": "Blocked backup destination cannot destroy the main save",
+    "passed": true
+  },
+  {
+    "check": "A future format is never silently downgraded or overwritten",
+    "passed": true
+  },
+  {
+    "check": "Invalid species is rejected before world construction",
+    "passed": true
+  },
+  {
+    "check": "Negative stock rejected",
+    "passed": true
+  },
+  {
+    "check": "Mismatched retry day rejected",
+    "passed": true
+  },
+  {
+    "check": "Duplicate individual IDs rejected",
+    "passed": true
+  },
+  {
+    "check": "Malformed prayer container rejected",
+    "passed": true
+  },
+  {
+    "check": "Executable values and objects are excluded",
+    "passed": true
+  },
+  {
+    "check": "An altered payload is rejected before Variant decoding",
+    "passed": true
+  }
+]

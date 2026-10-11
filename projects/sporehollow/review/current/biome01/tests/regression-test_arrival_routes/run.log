@@ -1,0 +1,51 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+ERROR: Group clears available openings without overlap: [5, 8]
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/test_navigation.gd:11)
+       [1] run (res://tests/test_arrival_routes.gd:33)
+ERROR: Comparable openings share nearby assignments
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/test_navigation.gd:11)
+       [1] run (res://tests/test_arrival_routes.gd:35)
+ERROR: Group clears available openings without overlap: [5]
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/test_navigation.gd:11)
+       [1] run (res://tests/test_arrival_routes.gd:33)
+ERROR: Old fixed entry remains blocked for sixty seconds despite another opening
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/test_navigation.gd:11)
+       [1] run (res://tests/test_arrival_routes.gd:43)
+ERROR: Visible alternate entrance bypasses the resting front actor
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/test_navigation.gd:11)
+       [1] run (res://tests/test_arrival_routes.gd:45)
+ERROR: New obstacle causes a bounded alternate-route choice: tree
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/test_navigation.gd:11)
+       [1] run (res://tests/test_arrival_routes.gd:59)
+ERROR: New obstacle causes a bounded alternate-route choice: wall
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/test_navigation.gd:11)
+       [1] run (res://tests/test_arrival_routes.gd:59)
+ERROR: Dead assignee releases its local soft cost immediately
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/test_navigation.gd:11)
+       [1] run (res://tests/test_arrival_routes.gd:70)
+ERROR: Expensive obstacle favors the reachable alternate: destroyer
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/test_navigation.gd:11)
+       [1] run (res://tests/test_arrival_routes.gd:80)
+SCRIPT ERROR: Invalid access to property or key 'goal' on a base object of type 'Dictionary'.
+   at: run (res://tests/test_arrival_routes.gd:78)
+   GDScript backtrace (most recent call first):
+       [0] run (res://tests/test_arrival_routes.gd:78)

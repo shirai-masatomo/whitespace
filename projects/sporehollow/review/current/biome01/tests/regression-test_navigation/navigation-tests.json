@@ -1,0 +1,121 @@
+{
+  "checks": [
+    {
+      "check": "Hidden keeper preserves an unfinished reachable exploration goal",
+      "passed": true
+    },
+    {
+      "check": "Unopposed exploration reaches new ground instead of a three-cell cycle",
+      "passed": true
+    },
+    {
+      "check": "Exploration does not select a terrain-blocked waypoint",
+      "passed": true
+    },
+    {
+      "check": "Unfinished reachable goal survives the old deadline and is not counted as visited",
+      "passed": true
+    },
+    {
+      "check": "No movement cannot consume stamina or masquerade as path progress",
+      "passed": true
+    },
+    {
+      "check": "Pursuit routes around a stationary living ally",
+      "passed": true
+    },
+    {
+      "check": "Routing around an ally never overlaps actors",
+      "passed": true
+    },
+    {
+      "check": "Frightened cat follows a route out of a local distance maximum",
+      "passed": true
+    },
+    {
+      "check": "Cat escape consists of legal single-cell steps",
+      "passed": true
+    },
+    {
+      "check": "Changed position invalidates stale escape steps rather than teleporting",
+      "passed": true
+    },
+    {
+      "check": "Without an escape route the cat holds the safest reachable cell instead of oscillating",
+      "passed": true
+    },
+    {
+      "check": "Distant observed idol can be approached and attacked: kidnapper",
+      "passed": true
+    },
+    {
+      "check": "Idol approach never enters its footprint: kidnapper",
+      "passed": true
+    },
+    {
+      "check": "Distant observed idol can be approached and attacked: salaryman",
+      "passed": true
+    },
+    {
+      "check": "Idol approach never enters its footprint: salaryman",
+      "passed": true
+    },
+    {
+      "check": "Distant observed idol can be approached and attacked: ninja",
+      "passed": true
+    },
+    {
+      "check": "Idol approach never enters its footprint: ninja",
+      "passed": true
+    },
+    {
+      "check": "Distant observed idol can be approached and attacked: runner",
+      "passed": true
+    },
+    {
+      "check": "Idol approach never enters its footprint: runner",
+      "passed": true
+    },
+    {
+      "check": "Distant observed idol can be approached and attacked: doberman",
+      "passed": true
+    },
+    {
+      "check": "Idol approach never enters its footprint: doberman",
+      "passed": true
+    },
+    {
+      "check": "Distant observed idol can be approached and attacked: destroyer",
+      "passed": true
+    },
+    {
+      "check": "Idol approach never enters its footprint: destroyer",
+      "passed": true
+    },
+    {
+      "check": "Search prefers a fresh parallel route over recently walked cells",
+      "passed": true
+    },
+    {
+      "check": "Visible pursuit ignores search history",
+      "passed": true
+    },
+    {
+      "check": "Only available route remains usable even when visited",
+      "passed": true
+    },
+    {
+      "check": "Search route history expires after 24 seconds",
+      "passed": true
+    },
+    {
+      "check": "Per-enemy search history is bounded",
+      "passed": true
+    },
+    {
+      "check": "Normal enemy AI records actual search steps",
+      "passed": true
+    }
+  ],
+  "seed": 31
+}

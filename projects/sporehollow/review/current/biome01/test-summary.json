@@ -1,0 +1,176 @@
+{
+  "runs": [
+    {
+      "errors": [
+        "ERROR: Group clears available openings without overlap: [5, 8]",
+        "ERROR: Comparable openings share nearby assignments",
+        "ERROR: Group clears available openings without overlap: [5]",
+        "ERROR: Old fixed entry remains blocked for sixty seconds despite another opening",
+        "ERROR: Visible alternate entrance bypasses the resting front actor",
+        "ERROR: New obstacle causes a bounded alternate-route choice: tree",
+        "ERROR: New obstacle causes a bounded alternate-route choice: wall",
+        "ERROR: Dead assignee releases its local soft cost immediately",
+        "ERROR: Expensive obstacle favors the reachable alternate: destroyer",
+        "SCRIPT ERROR: Invalid access to property or key 'goal' on a base object of type 'Dictionary'."
+      ],
+      "suite": "baseline-arrival-routes",
+      "passed": false,
+      "log": "tests/baseline-arrival-routes/run.log",
+      "checks": 0
+    },
+    {
+      "errors": [
+        "ERROR: Prayer, reward and route settlement survive repeated reload exactly once: 17",
+        "ERROR: Prayer, reward and route settlement survive repeated reload exactly once: 31",
+        "ERROR: Prayer, reward and route settlement survive repeated reload exactly once: 73"
+      ],
+      "suite": "baseline-morning-save",
+      "passed": false,
+      "log": "tests/baseline-morning-save/run.log",
+      "checks": 58
+    },
+    {
+      "errors": [],
+      "suite": "compatibility",
+      "passed": true,
+      "log": "tests/compatibility/run.log",
+      "checks": 21
+    },
+    {
+      "errors": [],
+      "suite": "distribution",
+      "passed": true,
+      "log": "tests/distribution/run.log",
+      "checks": 126
+    },
+    {
+      "errors": [],
+      "suite": "initial",
+      "passed": true,
+      "log": "tests/initial/run.log",
+      "checks": 60
+    },
+    {
+      "errors": [],
+      "suite": "regression-test_animal_commands",
+      "passed": true,
+      "log": "tests/regression-test_animal_commands/run.log",
+      "checks": 39
+    },
+    {
+      "errors": [
+        "ERROR: Group clears available openings without overlap: [5, 8]",
+        "ERROR: Comparable openings share nearby assignments",
+        "ERROR: Group clears available openings without overlap: [5]",
+        "ERROR: Old fixed entry remains blocked for sixty seconds despite another opening",
+        "ERROR: Visible alternate entrance bypasses the resting front actor",
+        "ERROR: New obstacle causes a bounded alternate-route choice: tree",
+        "ERROR: New obstacle causes a bounded alternate-route choice: wall",
+        "ERROR: Dead assignee releases its local soft cost immediately",
+        "ERROR: Expensive obstacle favors the reachable alternate: destroyer",
+        "SCRIPT ERROR: Invalid access to property or key 'goal' on a base object of type 'Dictionary'."
+      ],
+      "suite": "regression-test_arrival_routes",
+      "passed": false,
+      "log": "tests/regression-test_arrival_routes/run.log",
+      "checks": 0
+    },
+    {
+      "errors": [],
+      "suite": "regression-test_colony_tasks09",
+      "passed": true,
+      "log": "tests/regression-test_colony_tasks09/run.log",
+      "checks": 26
+    },
+    {
+      "errors": [],
+      "suite": "regression-test_cycle09",
+      "passed": true,
+      "log": "tests/regression-test_cycle09/run.log",
+      "checks": 23
+    },
+    {
+      "errors": [],
+      "suite": "regression-test_explicit_storage",
+      "passed": true,
+      "log": "tests/regression-test_explicit_storage/run.log",
+      "checks": 11
+    },
+    {
+      "errors": [],
+      "suite": "regression-test_livestock09",
+      "passed": true,
+      "log": "tests/regression-test_livestock09/run.log",
+      "checks": 23
+    },
+    {
+      "errors": [
+        "ERROR: Prayer, reward and route settlement survive repeated reload exactly once: 17",
+        "ERROR: Prayer, reward and route settlement survive repeated reload exactly once: 31",
+        "ERROR: Prayer, reward and route settlement survive repeated reload exactly once: 73"
+      ],
+      "suite": "regression-test_morning_save",
+      "passed": false,
+      "log": "tests/regression-test_morning_save/run.log",
+      "checks": 58
+    },
+    {
+      "errors": [],
+      "suite": "regression-test_navigation",
+      "passed": true,
+      "log": "tests/regression-test_navigation/run.log",
+      "checks": 29
+    },
+    {
+      "errors": [],
+      "suite": "regression-test_negotiation",
+      "passed": true,
+      "log": "tests/regression-test_negotiation/run.log",
+      "checks": 15
+    },
+    {
+      "errors": [],
+      "suite": "regression-test_nutrition09",
+      "passed": true,
+      "log": "tests/regression-test_nutrition09/run.log",
+      "checks": 17
+    },
+    {
+      "errors": [],
+      "suite": "regression-test_review02",
+      "passed": true,
+      "log": "tests/regression-test_review02/run.log",
+      "checks": 39
+    },
+    {
+      "errors": [],
+      "suite": "regression-test_visible_boundary",
+      "passed": true,
+      "log": "tests/regression-test_visible_boundary/run.log",
+      "checks": 51
+    },
+    {
+      "errors": [],
+      "suite": "regression-test_work_food_chain",
+      "passed": true,
+      "log": "tests/regression-test_work_food_chain/run.log",
+      "checks": 33
+    },
+    {
+      "errors": [],
+      "suite": "regression-test_zones09",
+      "passed": true,
+      "log": "tests/regression-test_zones09/run.log",
+      "checks": 17
+    }
+  ],
+  "passing_regression_checks": 323,
+  "known_baseline_failures": [
+    "morning_save: 3/58 checks fail on both versions",
+    "arrival_routes: same 9 assertions and missing goal error on both versions; timeout"
+  ],
+  "gpu_visual_review": "Not performed; delegated to separate reviewer",
+  "passing_regression_suites": 12,
+  "new_failures": 0,
+  "new_checks": 207
+}

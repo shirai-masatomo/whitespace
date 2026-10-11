@@ -1,0 +1,109 @@
+{
+	"failures": 0,
+	"groups": [
+		{
+			"checks": [
+				{
+					"check": "Existing hen is livestock; cat and dog are protected pets",
+					"passed": true
+				},
+				{
+					"check": "Pet status blocks slaughter and non-livestock species cannot be reclassified into eligible livestock",
+					"passed": true
+				},
+				{
+					"check": "Classification changes no loyalty, AI mode or combat values",
+					"passed": true
+				},
+				{
+					"check": "Livestock never self-designates slaughter",
+					"passed": true
+				},
+				{
+					"check": "One explicit individual designation creates only one job",
+					"passed": true
+				},
+				{
+					"check": "Worker reaches the living animal and starts onsite work without early meat",
+					"passed": true
+				},
+				{
+					"check": "Cancelling a started job while paused leaves the animal alive and creates no meat",
+					"passed": true
+				},
+				{
+					"check": "Forbid interrupts work, keeps progress and produces no meat",
+					"passed": true
+				},
+				{
+					"check": "Campaign retains classification, forbid and explicit unfinished work",
+					"passed": true
+				},
+				{
+					"check": "Started work snapshot saved",
+					"passed": true
+				},
+				{
+					"check": "Allowed saved work finishes exactly once and removes the owned animal",
+					"passed": true
+				},
+				{
+					"check": "Meat is a single real ground stack at the actual slaughter location",
+					"passed": true
+				},
+				{
+					"check": "Completed slaughter cannot be designated again after restore",
+					"passed": true
+				},
+				{
+					"check": "Existing hauling transports meat to food-enabled stockpile without duplication",
+					"passed": true
+				},
+				{
+					"check": "Existing human eating consumes physical meat while total output remains four",
+					"passed": true
+				}
+			],
+			"name": "1 Explicit eligibility, cancellable work and one physical meat output"
+		},
+		{
+			"checks": [
+				{
+					"check": "Target dead cancels remaining work without meat",
+					"passed": true
+				},
+				{
+					"check": "Target lost cancels remaining work without meat",
+					"passed": true
+				},
+				{
+					"check": "Target missing cancels remaining work without meat",
+					"passed": true
+				},
+				{
+					"check": "Captured animal cannot be designated",
+					"passed": true
+				},
+				{
+					"check": "Foreign animal cannot be designated",
+					"passed": true
+				},
+				{
+					"check": "A conflicting animal reservation blocks a new slaughter job",
+					"passed": true
+				},
+				{
+					"check": "Capture during onsite work blocks before the final irreversible effect",
+					"passed": true
+				},
+				{
+					"check": "Changing an active target to pet protects it immediately",
+					"passed": true
+				}
+			],
+			"name": "2 Target loss, captivity, foreign ownership and conflicting reservation"
+		}
+	],
+	"method": "Controlled fixtures using production World.step and snapshot/campaign serialization. Simulation, not human play.",
+	"passed": true
+}
