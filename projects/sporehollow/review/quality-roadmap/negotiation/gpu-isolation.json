@@ -1,0 +1,24 @@
+{
+  "executable": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\.tools\\Godot_v4.7.2-stable_win64.exe",
+  "asset_delivery_commit": "b0e917a11f205190dde0136165a72c189f39e275",
+  "start_utc": "2026-10-11T11:04:25.0763800Z",
+  "implementation_commit": "cfcdad23717c12977284d2a99f869f89482e974c",
+  "end_utc": "2026-10-11T11:04:32.7825485Z",
+  "command": "\"C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\.tools\\Godot_v4.7.2-stable_win64.exe\" --path \"C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\" --audio-driver Dummy --rendering-method gl_compatibility --max-fps 30 --resolution 1280x800 --log-file \"C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\isolated\\20261011-200424-609/render.log\" --script tests/test_negotiation_ui.gd -- --isolated-review --output=\"C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\isolated\\20261011-200424-609\"",
+  "parent_pid": 37016,
+  "dirty": true,
+  "data_root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\isolated\\20261011-200424-609/user-data",
+  "result": {
+    "PID": 29760,
+    "ThreadID": 2640,
+    "ExitCode": 0,
+    "OwnedWindowCount": 2,
+    "Station": "Service-0x0-bf6d9650$",
+    "Desktop": "Render_9e22e0cea1e440ff86f786a078fcbf07",
+    "ObservedDesktop": "Render_9e22e0cea1e440ff86f786a078fcbf07",
+    "NonInteractive": true,
+    "DesktopMatched": true,
+    "TimedOut": false
+  },
+  "purpose": "negotiation_ui"
+}

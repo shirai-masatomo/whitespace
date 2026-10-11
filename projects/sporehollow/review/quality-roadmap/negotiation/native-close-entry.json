@@ -1,0 +1,15 @@
+{
+	"checks": [
+		{
+			"check": "Normal window-close handler saved all fixture state and cleared the transient market pause on restore",
+			"passed": true
+		},
+		{
+			"check": "Uses ordinary persistent main scene, not automated test startup",
+			"passed": true
+		}
+	],
+	"method": "Exported normal main scene, controlled fixture only in first process; close notification and automatic startup restore; second process engine-owned ticks",
+	"passed": true,
+	"pid": 3748
+}

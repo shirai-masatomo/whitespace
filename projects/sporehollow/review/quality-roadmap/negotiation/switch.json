@@ -1,0 +1,26 @@
+{
+  "previous_sha256": "979C8C626D1D921D40A32A420BC39A8E0F59B01851D896F5E146E9C58B81EC4E",
+  "fixed_entry": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\確認入口\\最新開発版.lnk",
+  "implementation_commit": "8deea2f",
+  "previous_backup": "C:\\Users\\masat\\AppData\\Local\\Temp\\whistle-build-rollback\\WhistleRanch-979C8C626D1D.exe",
+  "utc": "2026-10-11T11:06:35.2556845Z",
+  "protected": [
+    {
+      "sha256": "7C0906C740FF90CE55892B6852DF18E6546B3FB37057D03744EF73D75452B841",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\autonomy-entry-01\\bundle\\user-data\\WhistleResearchAutonomy\\autonomy.snapshot"
+    },
+    {
+      "sha256": "4B97293C5E657A9EBA962F2BE0AE55B31FB95196788C565D957238A886BC057D",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\autonomy-entry-01\\bundle\\user-data\\WhistleResearchAutonomy\\colony.snapshot"
+    },
+    {
+      "sha256": "774A09279BC1059583248AEB758131E984A9980916A493CE11C3CFBB9F9165E7",
+      "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\build\\WhistleRanch.exe"
+    }
+  ],
+  "sha256": "EE5ED75ABD1AF47AE528461CE8F7ACF6FCA7C6F499C9A56FD1FEFE0257A9A2D7",
+  "executable": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\autonomy-entry-01\\bundle\\WhistleRanch-Autonomy-Partial.exe",
+  "human_play": "not performed",
+  "scope": "Explicit selected-person negotiation; visible 50x34 map; continuing colony",
+  "native_restart": "passed"
+}

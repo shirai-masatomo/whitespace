@@ -1,0 +1,44 @@
+[
+  {
+    "end_utc": "2026-10-11T11:05:46.4341499Z",
+    "executable": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\playtest\\20261011-200503-642\\WhistleRanch-preview.exe",
+    "start_utc": "2026-10-11T11:05:43.4054671Z",
+    "phase": "close",
+    "sha256": "EE5ED75ABD1AF47AE528461CE8F7ACF6FCA7C6F499C9A56FD1FEFE0257A9A2D7",
+    "data_root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\negotiation\\native/user-data",
+    "command": "\"C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\playtest\\20261011-200503-642\\WhistleRanch-preview.exe\" --audio-driver Dummy --rendering-method gl_compatibility --max-fps 30 --resolution 1280x800 --log-file \"C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\negotiation\\native/close.log\" -- --isolated-review --review-cycle-entry",
+    "result": {
+      "PID": 3748,
+      "ThreadID": 33164,
+      "ExitCode": 0,
+      "OwnedWindowCount": 2,
+      "Station": "Service-0x0-bf6d9650$",
+      "Desktop": "Render_9b9c58c4181e4f78aca523e6a940e306",
+      "ObservedDesktop": "Render_9b9c58c4181e4f78aca523e6a940e306",
+      "NonInteractive": true,
+      "DesktopMatched": true,
+      "TimedOut": false
+    }
+  },
+  {
+    "end_utc": "2026-10-11T11:05:49.6937486Z",
+    "executable": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\playtest\\20261011-200503-642\\WhistleRanch-preview.exe",
+    "start_utc": "2026-10-11T11:05:46.6057535Z",
+    "phase": "resume",
+    "sha256": "EE5ED75ABD1AF47AE528461CE8F7ACF6FCA7C6F499C9A56FD1FEFE0257A9A2D7",
+    "data_root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\negotiation\\native/user-data",
+    "command": "\"C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\playtest\\20261011-200503-642\\WhistleRanch-preview.exe\" --audio-driver Dummy --rendering-method gl_compatibility --max-fps 30 --resolution 1280x800 --log-file \"C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\negotiation\\native/resume.log\" -- --isolated-review --review-cycle-entry --resume-cycle-entry",
+    "result": {
+      "PID": 36764,
+      "ThreadID": 24936,
+      "ExitCode": 0,
+      "OwnedWindowCount": 2,
+      "Station": "Service-0x0-bf6d9650$",
+      "Desktop": "Render_cab4b68902c2412d8ea1e4025bd76027",
+      "ObservedDesktop": "Render_cab4b68902c2412d8ea1e4025bd76027",
+      "NonInteractive": true,
+      "DesktopMatched": true,
+      "TimedOut": false
+    }
+  }
+]
