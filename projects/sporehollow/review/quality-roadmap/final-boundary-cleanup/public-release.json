@@ -1,0 +1,13 @@
+{
+  "public_base": "f361de128cefcb055828076ae52b4dd6ef04fcd8",
+  "prepared_commit": "bf7e33c69a72a25aededb8c04f5205bc17659f25",
+  "branch": "feature/whistle-ranch-colony-20261011",
+  "destination": "https://github.com/shirai-masatomo/whitespace",
+  "file_count": 1294,
+  "bytes": 19056612,
+  "private_history_included": false,
+  "commits_above_public_main": 1,
+  "push_status": "blocked_by_auto_review_pending_direct_user_approval",
+  "reason": "Auto review could not confirm direct user authorization overriding initial no-push instruction. No alternate push attempted.",
+  "ci": "No applicable sporehollow workflow on public base; no CI execution claimed."
+}

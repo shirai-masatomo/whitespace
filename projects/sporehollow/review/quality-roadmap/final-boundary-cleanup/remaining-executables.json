@@ -1,0 +1,62 @@
+[
+  {
+    "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\build\\WhistleRanch.exe",
+    "bytes": 119276160,
+    "reason": "Normal build, current verified development build, or required Godot tools; retained"
+  },
+  {
+    "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\.tools\\Godot_v4.7.2-stable_win64.exe",
+    "bytes": 180858888,
+    "reason": "Normal build, current verified development build, or required Godot tools; retained"
+  },
+  {
+    "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\.tools\\Godot_v4.7.2-stable_win64_console.exe",
+    "bytes": 198152,
+    "reason": "Normal build, current verified development build, or required Godot tools; retained"
+  },
+  {
+    "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\.tools\\templates\\windows_debug_x86_64.exe",
+    "bytes": 103176704,
+    "reason": "Normal build, current verified development build, or required Godot tools; retained"
+  },
+  {
+    "path": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\.tools\\templates\\windows_release_x86_64.exe",
+    "bytes": 109268480,
+    "reason": "Normal build, current verified development build, or required Godot tools; retained"
+  },
+  {
+    "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\.tools\\Godot_v4.7.2-stable_win64.exe",
+    "bytes": 180858888,
+    "reason": "Normal build, current verified development build, or required Godot tools; retained"
+  },
+  {
+    "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\.tools\\Godot_v4.7.2-stable_win64_console.exe",
+    "bytes": 198152,
+    "reason": "Normal build, current verified development build, or required Godot tools; retained"
+  },
+  {
+    "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\.tools\\templates\\windows_release_x86_64.exe",
+    "bytes": 109268480,
+    "reason": "Normal build, current verified development build, or required Godot tools; retained"
+  },
+  {
+    "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\autonomy-entry-01\\bundle\\WhistleRanch-Autonomy-Partial.exe",
+    "bytes": 127503768,
+    "reason": "Normal build, current verified development build, or required Godot tools; retained"
+  },
+  {
+    "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\.tools\\Godot_v4.7.2-stable_win64.exe",
+    "bytes": 180858888,
+    "reason": "Normal build, current verified development build, or required Godot tools; retained"
+  },
+  {
+    "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\.tools\\Godot_v4.7.2-stable_win64_console.exe",
+    "bytes": 198152,
+    "reason": "Normal build, current verified development build, or required Godot tools; retained"
+  },
+  {
+    "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\.tools\\templates\\windows_release_x86_64.exe",
+    "bytes": 109268480,
+    "reason": "Normal build, current verified development build, or required Godot tools; retained"
+  }
+]

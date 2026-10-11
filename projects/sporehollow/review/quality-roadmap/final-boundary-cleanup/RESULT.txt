@@ -1,0 +1,33 @@
+最終境界・入口・容量整理 / 2026-10-11
+
+実装 e08670c、固定の最新開発版.lnkへ反映済み。
+・50×34=1700マス全域を表示/操作可能。外森24マスと旧48×32操作制限を撤去。
+・人/動物は本人が最初の外側マス(-1/50、-1/34)へ出た時点。黄金像は2×2全体が外へ出た時点で搬出確定。
+・通常襲撃は可視縁。全周壁の場合だけ直外1マスで壁へ接近・攻撃し、襲撃が消える抜け道を防止。
+・四隅まで自由pan。中央開始を保持。旧外側actor/物資/目的地のみ移行、内側の保存位置/HP/時間/物資を保持。
+・criticが端の動物指示範囲と旧セーブの外側目的地残存を指摘。修正後のコード再読で解消確認。
+
+検証
+・境界4群+camera 51観測、失敗0。明示回収・食事・建築テスト成功。
+・隔離GPUでも境界確認成功。visible-boundary.pngで導入overlayなし/外森なし/右下の境界線と操作余白を目視。
+・独立Windows EXEの通常終了・再開成功。別データ/別processで継続状態を確認。
+・EXE SHA256 979c8c626d1d921d40a32a420bc39a8e0f59b01851d896f5e146e9c58b81ec4e。
+・制御simulation/Godot合成場面と隔離GPU/native起動。人間の物理入力や楽しさの検証ではない。
+・旧EXEはTemp/whistle-boundary-rollbackへhash照合して退避。通常版EXEと開発版実セーブ2件は前後hash一致。
+
+入口・容量
+・確認入口は最新開発版.lnkのみ。旧23項目/96ファイルはreview/private-entry-archive-20261011へ原本copy/全hash照合後、ごみ箱へ。RimWorld設計比較も唯一資料として保管、公開対象外。
+・古い検証EXE34本、4,176,276,368 bytesをごみ箱へ。永久削除なし。ごみ箱を空にしていないためディスク空き容量増加とは区別。
+・旧正本artifacts 3,117,938,011→235,596,995 bytes。
+・codex_test artifacts 1,834,541,907→540,606,555 bytes。
+・通常版/現行版/素材/セーブ/Git/開発ツールを維持。
+・移動一覧entry-cleanup-manifest.json, capacity-cleanup-manifest.json。残存remaining-executables.json、前後cleanup-result.json。
+・現行素材実パスはACTIVE_ASSET_PATHS.txt。
+
+公開準備・ブロッカー
+・公開main f361de1のみから独立branch feature/whistle-ranch-colony-20261011を作成。公開用commit bf7e33c、1 commit、1294ファイル/19,056,612 bytes。
+・実参照素材と現行コード・最小テスト・説明書のみ。研究履歴/個人save/第三者比較資料/個人path/秘密情報/EXEは含めない。
+・提供MP3はローカル試遊用と記録され配布条件未確認のため除外。ローカルBGMは保持し、公開ソースは音源なしでも合成音で動く。
+・公開用copyでimport/境界/明示回収の再確認に成功。個人path/secretパターン該当0。building_art.gd末尾空行のみ公開copyで除去（挙動差なし）。
+・pushは自動承認レビューが拒否。初期「pushしない」を覆すユーザー本人の対象/公開先の明示承認を確認できないとの理由。親thread読取はturns空で裏付けを取得できず、迂回なし。具体的な公開内容についてユーザーへ確認を提示済み。
+・main変更なし、公開/CI成功を主張しない。公開mainにsporehollow対象CIはない。
