@@ -2041,5 +2041,320 @@
     "art_delivery/ranch_assets_v1/book/paper_layer.png"
   ],
   "future_practice": "Update this state and the same material index; keep minimal evidence, do not accumulate trial shortcuts, image copies or review galleries.",
-  "book_pack_sha256": "EE5ED75ABD1AF47AE528461CE8F7ACF6FCA7C6F499C9A56FD1FEFE0257A9A2D7"
+  "book_pack_sha256": "EE5ED75ABD1AF47AE528461CE8F7ACF6FCA7C6F499C9A56FD1FEFE0257A9A2D7",
+  "generated_orphan_imports_recycled": [
+    {
+      "bytes": 1015,
+      "path": "art_delivery\\characters_motion_v1\\review\\rest-proof.png.import"
+    },
+    {
+      "bytes": 1029,
+      "path": "art_delivery\\merchant_board_v1\\review\\board-comparison.png.import"
+    },
+    {
+      "bytes": 1014,
+      "path": "art_delivery\\merchant_cart_v2\\review\\alpha-check.png.import"
+    },
+    {
+      "bytes": 1010,
+      "path": "art_delivery\\merchant_cart_v2\\review\\comparison.png.import"
+    },
+    {
+      "bytes": 1022,
+      "path": "art_delivery\\ranch_assets_v1\\review\\animal-actions.png.import"
+    },
+    {
+      "bytes": 1036,
+      "path": "art_delivery\\ranch_assets_v1\\review\\animals-walk-frames.png.import"
+    },
+    {
+      "bytes": 1015,
+      "path": "art_delivery\\ranch_assets_v1\\review\\book-opening.png.import"
+    },
+    {
+      "bytes": 1004,
+      "path": "art_delivery\\ranch_assets_v1\\review\\overview.png.import"
+    },
+    {
+      "bytes": 1030,
+      "path": "art_delivery\\two_direction_review_v1\\layers\\maid_rage_aura.png.import"
+    },
+    {
+      "bytes": 1039,
+      "path": "art_delivery\\two_direction_review_v1\\layers\\poison_projectile.png.import"
+    },
+    {
+      "bytes": 1047,
+      "path": "art_delivery\\two_direction_review_v1\\native\\bull\\charge_ready_right.png.import"
+    },
+    {
+      "bytes": 1029,
+      "path": "art_delivery\\two_direction_review_v1\\native\\bull\\charge_right.png.import"
+    },
+    {
+      "bytes": 1023,
+      "path": "art_delivery\\two_direction_review_v1\\native\\bull\\guts_right.png.import"
+    },
+    {
+      "bytes": 1020,
+      "path": "art_delivery\\two_direction_review_v1\\native\\bull\\idle_left.png.import"
+    },
+    {
+      "bytes": 1023,
+      "path": "art_delivery\\two_direction_review_v1\\native\\bull\\idle_right.png.import"
+    },
+    {
+      "bytes": 1019,
+      "path": "art_delivery\\two_direction_review_v1\\native\\cow\\idle_left.png.import"
+    },
+    {
+      "bytes": 1022,
+      "path": "art_delivery\\two_direction_review_v1\\native\\cow\\idle_right.png.import"
+    },
+    {
+      "bytes": 1031,
+      "path": "art_delivery\\two_direction_review_v1\\native\\cow\\milking_right.png.import"
+    },
+    {
+      "bytes": 1028,
+      "path": "art_delivery\\two_direction_review_v1\\native\\dancer\\dance_right.png.import"
+    },
+    {
+      "bytes": 1043,
+      "path": "art_delivery\\two_direction_review_v1\\native\\dancer\\fan_attack_right.png.import"
+    },
+    {
+      "bytes": 1022,
+      "path": "art_delivery\\two_direction_review_v1\\native\\dancer\\idle_left.png.import"
+    },
+    {
+      "bytes": 1025,
+      "path": "art_delivery\\two_direction_review_v1\\native\\dancer\\idle_right.png.import"
+    },
+    {
+      "bytes": 1049,
+      "path": "art_delivery\\two_direction_review_v1\\native\\dancer\\resurrection_right.png.import"
+    },
+    {
+      "bytes": 1053,
+      "path": "art_delivery\\two_direction_review_v1\\native\\maid\\cleaver_attack_right.png.import"
+    },
+    {
+      "bytes": 1047,
+      "path": "art_delivery\\two_direction_review_v1\\native\\maid\\coffee_serve_right.png.import"
+    },
+    {
+      "bytes": 1026,
+      "path": "art_delivery\\two_direction_review_v1\\native\\maid\\drink_right.png.import"
+    },
+    {
+      "bytes": 1019,
+      "path": "art_delivery\\two_direction_review_v1\\native\\maid\\idle_left.png.import"
+    },
+    {
+      "bytes": 1023,
+      "path": "art_delivery\\two_direction_review_v1\\native\\maid\\idle_right.png.import"
+    },
+    {
+      "bytes": 1022,
+      "path": "art_delivery\\two_direction_review_v1\\native\\maid\\rage_right.png.import"
+    },
+    {
+      "bytes": 1026,
+      "path": "art_delivery\\two_direction_review_v1\\native\\maid\\twirl_right.png.import"
+    },
+    {
+      "bytes": 1039,
+      "path": "art_delivery\\two_direction_review_v1\\native\\merchant\\cart_move_left.png.import"
+    },
+    {
+      "bytes": 1042,
+      "path": "art_delivery\\two_direction_review_v1\\native\\merchant\\cart_move_right.png.import"
+    },
+    {
+      "bytes": 1024,
+      "path": "art_delivery\\two_direction_review_v1\\native\\merchant\\idle_left.png.import"
+    },
+    {
+      "bytes": 1026,
+      "path": "art_delivery\\two_direction_review_v1\\native\\merchant\\idle_right.png.import"
+    },
+    {
+      "bytes": 1050,
+      "path": "art_delivery\\two_direction_review_v1\\native\\thief\\dagger_attack_right.png.import"
+    },
+    {
+      "bytes": 1021,
+      "path": "art_delivery\\two_direction_review_v1\\native\\thief\\idle_left.png.import"
+    },
+    {
+      "bytes": 1024,
+      "path": "art_delivery\\two_direction_review_v1\\native\\thief\\idle_right.png.import"
+    },
+    {
+      "bytes": 1047,
+      "path": "art_delivery\\two_direction_review_v1\\native\\thief\\poison_throw_right.png.import"
+    },
+    {
+      "bytes": 1026,
+      "path": "art_delivery\\two_direction_review_v1\\native\\thief\\steal_right.png.import"
+    },
+    {
+      "bytes": 1046,
+      "path": "art_delivery\\two_direction_review_v1\\poses\\bull\\charge_ready_right.png.import"
+    },
+    {
+      "bytes": 1028,
+      "path": "art_delivery\\two_direction_review_v1\\poses\\bull\\charge_right.png.import"
+    },
+    {
+      "bytes": 1022,
+      "path": "art_delivery\\two_direction_review_v1\\poses\\bull\\guts_right.png.import"
+    },
+    {
+      "bytes": 1019,
+      "path": "art_delivery\\two_direction_review_v1\\poses\\bull\\idle_left.png.import"
+    },
+    {
+      "bytes": 1022,
+      "path": "art_delivery\\two_direction_review_v1\\poses\\bull\\idle_right.png.import"
+    },
+    {
+      "bytes": 1018,
+      "path": "art_delivery\\two_direction_review_v1\\poses\\cow\\idle_left.png.import"
+    },
+    {
+      "bytes": 1021,
+      "path": "art_delivery\\two_direction_review_v1\\poses\\cow\\idle_right.png.import"
+    },
+    {
+      "bytes": 1029,
+      "path": "art_delivery\\two_direction_review_v1\\poses\\cow\\milking_right.png.import"
+    },
+    {
+      "bytes": 1027,
+      "path": "art_delivery\\two_direction_review_v1\\poses\\dancer\\dance_right.png.import"
+    },
+    {
+      "bytes": 1042,
+      "path": "art_delivery\\two_direction_review_v1\\poses\\dancer\\fan_attack_right.png.import"
+    },
+    {
+      "bytes": 1021,
+      "path": "art_delivery\\two_direction_review_v1\\poses\\dancer\\idle_left.png.import"
+    },
+    {
+      "bytes": 1024,
+      "path": "art_delivery\\two_direction_review_v1\\poses\\dancer\\idle_right.png.import"
+    },
+    {
+      "bytes": 1047,
+      "path": "art_delivery\\two_direction_review_v1\\poses\\dancer\\resurrection_right.png.import"
+    },
+    {
+      "bytes": 1052,
+      "path": "art_delivery\\two_direction_review_v1\\poses\\maid\\cleaver_attack_right.png.import"
+    },
+    {
+      "bytes": 1046,
+      "path": "art_delivery\\two_direction_review_v1\\poses\\maid\\coffee_serve_right.png.import"
+    },
+    {
+      "bytes": 1025,
+      "path": "art_delivery\\two_direction_review_v1\\poses\\maid\\drink_right.png.import"
+    },
+    {
+      "bytes": 1019,
+      "path": "art_delivery\\two_direction_review_v1\\poses\\maid\\idle_left.png.import"
+    },
+    {
+      "bytes": 1022,
+      "path": "art_delivery\\two_direction_review_v1\\poses\\maid\\idle_right.png.import"
+    },
+    {
+      "bytes": 1022,
+      "path": "art_delivery\\two_direction_review_v1\\poses\\maid\\rage_right.png.import"
+    },
+    {
+      "bytes": 1025,
+      "path": "art_delivery\\two_direction_review_v1\\poses\\maid\\twirl_right.png.import"
+    },
+    {
+      "bytes": 1037,
+      "path": "art_delivery\\two_direction_review_v1\\poses\\merchant\\cart_move_left.png.import"
+    },
+    {
+      "bytes": 1041,
+      "path": "art_delivery\\two_direction_review_v1\\poses\\merchant\\cart_move_right.png.import"
+    },
+    {
+      "bytes": 1023,
+      "path": "art_delivery\\two_direction_review_v1\\poses\\merchant\\idle_left.png.import"
+    },
+    {
+      "bytes": 1026,
+      "path": "art_delivery\\two_direction_review_v1\\poses\\merchant\\idle_right.png.import"
+    },
+    {
+      "bytes": 1050,
+      "path": "art_delivery\\two_direction_review_v1\\poses\\thief\\dagger_attack_right.png.import"
+    },
+    {
+      "bytes": 1020,
+      "path": "art_delivery\\two_direction_review_v1\\poses\\thief\\idle_left.png.import"
+    },
+    {
+      "bytes": 1023,
+      "path": "art_delivery\\two_direction_review_v1\\poses\\thief\\idle_right.png.import"
+    },
+    {
+      "bytes": 1046,
+      "path": "art_delivery\\two_direction_review_v1\\poses\\thief\\poison_throw_right.png.import"
+    },
+    {
+      "bytes": 1025,
+      "path": "art_delivery\\two_direction_review_v1\\poses\\thief\\steal_right.png.import"
+    },
+    {
+      "bytes": 999,
+      "path": "art_delivery\\two_direction_review_v1\\qa\\alpha.png.import"
+    },
+    {
+      "bytes": 1023,
+      "path": "art_delivery\\two_direction_review_v1\\qa\\native_ground.png.import"
+    },
+    {
+      "bytes": 1021,
+      "path": "art_delivery\\two_direction_review_v1\\sheets\\01_merchant.png.import"
+    },
+    {
+      "bytes": 1009,
+      "path": "art_delivery\\two_direction_review_v1\\sheets\\02_maid.png.import"
+    },
+    {
+      "bytes": 1014,
+      "path": "art_delivery\\two_direction_review_v1\\sheets\\03_dancer.png.import"
+    },
+    {
+      "bytes": 1012,
+      "path": "art_delivery\\two_direction_review_v1\\sheets\\04_thief.png.import"
+    },
+    {
+      "bytes": 1006,
+      "path": "art_delivery\\two_direction_review_v1\\sheets\\05_cow.png.import"
+    },
+    {
+      "bytes": 1008,
+      "path": "art_delivery\\two_direction_review_v1\\sheets\\06_bull.png.import"
+    }
+  ],
+  "empty_asset_directories_removed": 27,
+  "publication": {
+    "sha": "1eab797b65ef44198fc317fb7a132b4438475200",
+    "remote_exact_match": true,
+    "branch": "codex/sporehollow-colony-09",
+    "main_sha": "f361de128cefcb055828076ae52b4dd6ef04fcd8",
+    "url": "https://github.com/shirai-masatomo/whitespace/tree/codex/sporehollow-colony-09",
+    "ci": "No workflow configured for this project; existing DIVE DIVE filters unchanged"
+  }
 }
