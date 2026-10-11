@@ -22,6 +22,7 @@ func run():
 	var z1=w.Zones.create(w,"stockpile",Vector2i(10,8),Vector2i(11,8));w.Zones.set_allowed(w,z1,["wood"])
 	var z2=w.Zones.create(w,"stockpile",Vector2i(12,9),Vector2i(12,9));w.Zones.set_allowed(w,z2,["stone"])
 	check(w.zones.size()==2 and w.storage_cells.size()==3 and wood.pos==Vector2i(6,6),"Two zones are separate and designation does not teleport goods")
+	w.Stock.designate(w,"haul",Vector2i(6,6),Vector2i(7,6))
 	for i in range(80):
 		work_ticks(w,1)
 		if not w.Stock.cargo(w,"keeper").is_empty():break
@@ -30,7 +31,7 @@ func run():
 	check(w.field_items.any(func(r):return r.kind=="wood" and r.location=="ground" and r.pos==Vector2i(14,8)),"Carried wood reselects the resized permitted destination")
 	check(w.field_items.any(func(r):return r.kind=="stone" and r.location=="ground" and r.pos==Vector2i(12,9)),"Stone reaches only the stone-enabled stockpile")
 	check(w.Stock.totals(w)==before,"Resize and actual hauling preserve all quantities")
-	var held=w.Stock.add(w,"wood",2,Vector2i(6,7))
+	var held=w.Stock.add(w,"wood",2,Vector2i(6,7));w.Stock.designate(w,"haul",Vector2i(6,7),Vector2i(6,7))
 	for i in range(120):
 		work_ticks(w,1)
 		if not w.Stock.cargo(w,"keeper").is_empty():break
@@ -38,7 +39,7 @@ func run():
 	check(w.Stock.cargo(w,"keeper").is_empty() and w.field_items.any(func(r):return r.kind=="wood" and r.location=="ground" and r.pos==actual),"Deleting the only allowed destination releases carried goods at the actual worker location")
 	check(w.Stock.totals(w)==before and w.jobs.any(func(j):return j.state=="blocked" and "備蓄" in j.get("block_reason","")),"No destination blocks with a visible reason and no quantity loss")
 	w.Zones.set_allowed(w,z2,["wood","stone"]);work_ticks(w,170)
-	check(w.field_items.filter(func(r):return r.kind=="wood").all(func(r):return r.location=="ground" and r.pos==Vector2i(12,9)),"Changing allowed types resumes blocked hauling")
+	check(w.field_items.any(func(r):return r.kind=="wood" and r.amount==2 and r.location=="ground" and r.pos==Vector2i(12,9)) and w.field_items.any(func(r):return r.kind=="wood" and r.amount==6 and r.pos==Vector2i(14,8)),"Changing allowed types resumes the explicit blocked haul; undesignated stored wood stays put")
 	w.Zones.remove(w,z2);check(w.Stock.available(w,"wood")==8,"Goods remain available for use outside deleted zones")
 	var saved_zone=w.Zones.create(w,"stockpile",Vector2i(15,9),Vector2i(16,9));w.Zones.set_allowed(w,saved_zone,["food"])
 	w.Zones.create(w,"residential",Vector2i(7,10),Vector2i(8,10));w.persist_farm();var restored=Farm.new(w.campaign,31)

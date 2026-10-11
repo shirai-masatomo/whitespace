@@ -30,7 +30,7 @@ func run():
 		write("restart.json");return
 	begin("1 Expanded live land; independent clock, daily results and overlapping raids")
 	var w=farm()
-	check(w.W==50 and w.H==34 and w.inside(Vector2i(48,32)) and not w.inside(Vector2i(49,33)),"Live world uses approved 50x34 geometry")
+	check(w.W==50 and w.H==34 and w.inside(Vector2i(48,32)) and w.inside(Vector2i(49,33)) and not w.inside(Vector2i(50,34)),"Live world uses approved 50x34 geometry")
 	check(w.Story.at(w)==Vector2i(24,16) and not w.find_path(w.keeper.pos,Vector2i(43,28)).is_empty(),"New idol has approved central anchor and expanded ground is reachable")
 	var c=w.Cycle.clock(w);c.advance_ticks(1728)
 	check(c.calendar_day()==2 and c.minute_of_day()==300 and c.period()=="morning" and w.Cycle.Clock.DAY_SECONDS==432,"1728 quarter-second ticks equal one 432-second day at 05:00")
@@ -73,7 +73,7 @@ func run():
 	var market=Snap.restore(out+"/coexist.snapshot");market.market_open=true;market.paused=false;Snap.save(market,out+"/market.snapshot");market=Snap.restore(out+"/market.snapshot");var market_tick=market.tick;market.step()
 	check(not market.market_open and market.tick==market_tick+1,"Restoring a market-open save clears the missing UI pause and time advances")
 	var legacy=farm();legacy.phase="defend";legacy.tick=1200;legacy.night_started_tick=300;legacy.story.prayers.append({"id":901,"rewarded":false,"reward_day":2});Snap.save(legacy,out+"/legacy.snapshot")
-	var payload=FileAccess.open(out+"/legacy.snapshot",FileAccess.READ).get_var(false);payload.state.erase("colony_version");FileAccess.open(out+"/legacy.snapshot",FileAccess.WRITE).store_var(payload,false)
+	var legacy_file=FileAccess.open(out+"/legacy.snapshot",FileAccess.READ);var payload=legacy_file.get_var(false);legacy_file.close();payload.state.erase("colony_version");legacy_file=FileAccess.open(out+"/legacy.snapshot",FileAccess.WRITE);legacy_file.store_var(payload,false);legacy_file.close()
 	legacy=Snap.restore(out+"/legacy.snapshot");check(legacy.calendar_ticks==1727 and legacy.tick==1200,"Long-running old night migrates just before morning without changing simulation tick")
 	legacy.step();var legacy_gold=legacy.campaign.gold;legacy.step()
 	check(legacy.last_daily_day==2 and legacy.story.prayers[0].rewarded and legacy.campaign.gold==legacy_gold,"Migrated old night applies the next morning's result exactly once")

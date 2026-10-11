@@ -68,7 +68,7 @@ static func reason(w,kind: String,p: Vector2i=Vector2i.ZERO,id: int=-1,own_job: 
 static func designate(w,kind: String,p: Vector2i=Vector2i.ZERO,id: int=-1) -> bool:
 	if not w.working() or w.jobs.size()>=w.Jobs.LIMIT or reason(w,kind,p,id)!="":return false
 	if kind=="train":p=w.Orders.animal(w,id).pos
-	var j={"id":w.next_job_id,"kind":kind,"pos":p,"animal_id":id,"state":"pending","resource":"","reserved":0,"started":false,"work_category":"gather" if kind=="mine" else "other","work_elapsed":0.0,"explicit_designation":true}
+	var j={"id":w.next_job_id,"kind":kind,"pos":p,"animal_id":id,"state":"pending","resource":"","reserved":0,"started":false,"work_category":"gather" if kind=="mine" else "animal","work_elapsed":0.0,"explicit_designation":true}
 	w.next_job_id+=1;w.jobs.append(j);w.Life.wake_auto(w)
 	w.job_log.append({"tick":w.tick,"event":"queued","id":j.id,"kind":kind,"pos":[p.x,p.y],"animal_id":id})
 	return true

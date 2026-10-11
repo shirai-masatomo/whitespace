@@ -12,19 +12,16 @@ static func register(w,key: String,actor: Dictionary):
 
 static func migrate_priorities(actor: Dictionary):
 	if not actor.has("work_priorities"):actor.work_priorities=Policy.PRIORITIES.duplicate();actor.work_priority_version=Policy.PRIORITY_VERSION;return
-	var legacy=int(actor.get("work_priority_version",1))<Policy.PRIORITY_VERSION
+	var legacy=int(actor.get("work_priority_version",1))<2
+	# v3 adds animal work; v2 priorities must not be shifted a second time.
+	if not actor.work_priorities.has("animal"):actor.work_priorities.animal=actor.work_priorities.get("other",3 if legacy else 4)
 	for kind in Policy.ORDER:
 		var value=int(actor.work_priorities.get(kind,Policy.PRIORITIES[kind] if not legacy else 3))
 		actor.work_priorities[kind]=clampi(value+1 if legacy and value>0 else value,0,4)
 	actor.work_priority_version=Policy.PRIORITY_VERSION
 
 static func category(w,j) -> String:
-	if j.has("work_category"):return j.work_category
-	if w.BUILD.has(j.kind) or j.kind in ["repair","repair_floor","remove","remove_floor","gate"]:return "build"
-	if j.kind=="mine":return "gather"
-	if j.kind=="haul":return "haul"
-	if j.kind=="collect":return "gather" if w.natural.has(j.pos) else "collect"
-	return "other"
+	return Policy.category(w,j)
 
 static func shared(w,j) -> bool:
 	return w.BUILD.has(j.kind) or j.kind in ["collect","haul","slaughter","mine","train"]
@@ -91,7 +88,7 @@ static func reason(w,key: String,a) -> String:
 static func missing(w,j) -> bool:
 	if j.kind in w.Tasks.KINDS:return w.Tasks.missing(w,j)
 	if j.kind=="slaughter":return w.Livestock.missing(w,j)
-	if j.kind=="haul":return w.Stock.find(w,j.get("stock_id",-1)).is_empty() and not w.field_items.any(func(r):return r.get("location")=="carry" and r.get("job_id",-1)==j.id)
+	if j.kind=="haul":return j.get("haul_sources",[j.get("stock_id",-1)]).all(func(id):return w.Stock.find(w,id).is_empty()) and not w.field_items.any(func(r):return r.get("location")=="carry" and r.get("job_id",-1)==j.id)
 	if j.kind=="collect":
 		return w.items_at(j.pos).is_empty() and not w.natural.has(j.pos) and not(j.pos==w.nest and w.eggs>0)
 	if w.BUILD.has(j.kind) and j.started:
@@ -154,6 +151,7 @@ static func step(w):
 		if a.get("work_job",-1) not in live_ids:a.work_job=-1
 	# Recover orphan claims when an actor disappears without a normal completion callback.
 	for j in w.jobs.duplicate():
+		j.work_category=category(w,j)
 		var owner=j.get("assigned_to","")
 		if owner!="" and not w.workers.has(owner) and not(j.get("purpose","")=="merchant" and owner==w.merchant_worker):release(w,j);j.state="pending"
 		if j.get("cancel_requested",false):w.Jobs.cancel(w,j.id)

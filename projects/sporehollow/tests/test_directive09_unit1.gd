@@ -80,7 +80,7 @@ func run():
 	check(result.accepted==1 and one.pos==Vector2i(6,6) and w.Stock.designate(w,"haul",Vector2i(7,7),Vector2i(5,5)).accepted==0,"Rectangle excludes forbidden/outside stock, deduplicates and never teleports")
 	w.storage_cells=[Vector2i(10,8)]
 	for i in range(130):w.step()
-	check(w.Stock.storage_used(w,Vector2i(10,8))==5 and two.pos==Vector2i(7,7) and two.amount==3,"Physical hauling reaches storage; forbidden stock stays put")
+	check(w.Stock.storage_used(w,Vector2i(10,8))==4 and two.pos==Vector2i(7,7) and two.amount==3,"Physical hauling reaches storage; forbidden stock stays put")
 	check(Snap.save(w,out+"/forbid.snapshot"),"Snapshot written")
 	var restored=Snap.restore(out+"/forbid.snapshot")
 	check(restored.Stock.find(restored,two.stock_id).forbidden and restored.Stock.totals(restored)==w.Stock.totals(w),"Snapshot preserves forbidden flags and all quantities")
@@ -95,9 +95,9 @@ func run():
 	check(selected.kind=="collect","Blank/off build excludes its jobs while other work remains")
 	var legacy={"work_priorities":{"build":0,"gather":1,"collect":2,"other":3,"haul":3}}
 	w.Work.migrate_priorities(legacy);var once=legacy.duplicate(true);w.Work.migrate_priorities(legacy)
-	check(legacy==once and legacy.work_priorities=={"build":0,"gather":2,"collect":3,"other":4,"haul":4},"Legacy off/high/medium/low maps once to off/2/3/4 without repeated migration")
+	check(legacy==once and legacy.work_priorities=={"build":0,"gather":2,"collect":3,"animal":4,"other":4,"haul":4},"Legacy off/high/medium/low maps once to off/2/3/4 without repeated migration")
 	w.keeper.work_priorities.build=1;w.persist_farm();restored=Farm.new(w.campaign,31)
-	check(restored.keeper.work_priorities.build==1 and restored.keeper.work_priority_version==2,"New highest priority survives save/reload unchanged")
+	check(restored.keeper.work_priorities.build==1 and restored.keeper.work_priority_version==restored.Work.Policy.PRIORITY_VERSION,"New highest priority survives save/reload unchanged")
 	if DisplayServer.get_name()!="headless":await visual()
 	report.passed=failed==0;report.failures=failed
 	FileAccess.open(out+"/directive09-unit1.json",FileAccess.WRITE).store_string(JSON.stringify(report,"\t"))

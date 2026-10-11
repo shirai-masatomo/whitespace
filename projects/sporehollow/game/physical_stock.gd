@@ -111,6 +111,9 @@ static func release_job(w,j):
 		if row.get("job_id",-1)!=j.id or row.get("location")!="carry":continue
 		if w.workers.has(row.owner):row.pos=w.workers[row.owner].pos
 		row.location="ground";row.owner="";row.job_id=-1
+		if j.kind=="haul":
+			j.haul_sources=j.get("haul_sources",[j.stock_id])
+			if row.stock_id not in j.haul_sources:j.haul_sources.append(row.stock_id)
 	j.erase("material_claims");sync(w)
 
 static func delivered(w,j) -> int:
@@ -176,8 +179,15 @@ static func haul_step(w,j,a):
 		# Sequential execution rechecks capacity here; a second worker never overfills it.
 		if storage_used(w,dest)+n>Policy.STORAGE_CAPACITY:j.state="blocked";j.block_reason="保管域が満杯です";return
 		for row in carried:row.location="ground";row.pos=dest;row.owner="";row.job_id=-1
-		sync(w);w.Jobs.complete(w,j,true);return
-	var row=find(w,j.get("stock_id",-1))
+		sync(w)
+		if j.get("haul_sources",[j.stock_id]).any(func(id):return not find(w,id).is_empty()):
+			j.state="walking";j.phase="fetch"
+		else:w.Jobs.complete(w,j,true)
+		return
+	var sources=j.get("haul_sources",[j.stock_id]).map(func(id):return find(w,id)).filter(func(row):return not row.is_empty())
+	var eligible=sources.filter(func(row):return not row.get("forbidden",false) and row.get("location")=="ground" and free_count(row)>0)
+	var row=eligible[0] if not eligible.is_empty() else (sources[0] if not sources.is_empty() else {})
+	if not row.is_empty():j.stock_id=row.stock_id;j.pos=row.pos
 	if row.is_empty() or row.kind=="chick":w.Jobs.complete(w,j,false);return
 	if row.get("forbidden",false):j.state="blocked";j.block_reason="対象の物資は禁止中です";return
 	var token="job:%d"%j.id
@@ -234,7 +244,7 @@ static func command_targets(w,first: Vector2i,last: Vector2i,kind: String) -> Ar
 
 static func enqueue_haul(w,row) -> bool:
 	if not w.working() or row.get("forbidden",false) or row.location!="ground" or row.get("placed",false) or row.kind=="chick" or w.jobs.size()>=w.Jobs.LIMIT:return false
-	if w.jobs.any(func(j):return j.get("stock_id",-1)==row.stock_id):return false
+	if w.jobs.any(func(j):return j.get("stock_id",-1)==row.stock_id or row.stock_id in j.get("haul_sources",[])):return false
 	w.jobs.append({"id":w.next_job_id,"kind":"haul","pos":row.pos,"stock_id":row.stock_id,"animal_id":-1,"state":"pending","resource":"","reserved":0,"started":false,"work_category":"haul","explicit_designation":true});w.next_job_id+=1;w.Life.wake_auto(w);return true
 
 static func designate(w,kind: String,first: Vector2i,last: Vector2i) -> Dictionary:
@@ -263,3 +273,17 @@ static func reconcile_forbidden(w):
 		if j.id in affected:w.Work.block(w,j,"予約した物資は禁止中です。代替を探します")
 	for owner in food_owners:
 		if w.workers.has(owner):w.Food.interrupt(w,w.workers[owner]);w.workers[owner].work_status="食料は禁止中です。別の食料を探します"
+
+# Physical ownership is independent of availability, stockpile location and reservations.
+static func summary(w,kind: String) -> Dictionary:
+	var result={"owned":0,"available":available(w,kind),"stored":0,"carried":0,"site":0,"forbidden":0,"reserved":0}
+	for row in w.field_items:
+		if row.kind!=kind:continue
+		var n=int(row.get("amount",1));var location=row.get("location","ground")
+		result.owned+=n
+		if location=="ground" and row.pos in w.storage_cells:result.stored+=n
+		if location=="carry":result.carried+=n
+		if location=="site":result.site+=n
+		if row.get("forbidden",false):result.forbidden+=n
+		for count in row.get("claims",{}).values():result.reserved+=int(count)
+	return result

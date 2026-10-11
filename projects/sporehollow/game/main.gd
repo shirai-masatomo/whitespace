@@ -388,7 +388,7 @@ func select_resource(cell: Vector2i, toggle: bool = false):
 	else:
 		selected_resources = [cell]
 		if world.act("collect", cell): pass
-		else: notice("予約済み" if job_reserved("collect", cell) else "予定は8件まで")
+		else: notice("予約済み" if job_reserved("collect", cell) else "指定は%d件まで"%world.Jobs.LIMIT)
 	refresh()
 
 func collect_selected():
@@ -425,7 +425,7 @@ func refresh():
 		palette.remove_child(child)
 		child.queue_free()
 	for id in buttons.keys():
-		if id not in ["pause", "speed", "home", "advance", "retry", "group0", "group1", "group2", "menu_resume", "menu_retry", "menu_morning", "walk", "roles", "commands"]: buttons.erase(id)
+		if id not in ["pause", "speed", "home", "advance", "retry", "group0", "group1", "group2", "menu_resume", "menu_retry", "menu_morning", "menu_save", "menu_load", "walk", "roles", "commands"]: buttons.erase(id)
 	buttons.walk.visible = false
 	buttons.commands.visible=world.working() and not field_book and not field_shop
 	UI.selected(buttons.commands,group==4)
@@ -882,7 +882,7 @@ func refresh_jobs():
 	if visible_jobs.is_empty():
 		var empty=Label.new();empty.text="このカテゴリの予定はありません";empty.position=Vector2(1010,row_y);empty.add_theme_font_size_override("font_size",13);queue_controls.add_child(empty)
 	for i in range(visible_jobs.size()):
-		if job_category!="登録順" and visible_jobs[i].category!=previous_category:
+		if visible_jobs[i].category!=previous_category:
 			previous_category=visible_jobs[i].category
 			var heading=Label.new();heading.text="%s · %d件"%[previous_category,ColonyModel.jobs(world,previous_category).size()]
 			heading.position=Vector2(1014,row_y);heading.add_theme_font_size_override("font_size",14);heading.add_theme_color_override("font_color",UI.PAPER)
@@ -985,7 +985,7 @@ func draw_work_plans():
 				if not t.done:
 					var marker=center(t.dest)
 					draw_line(marker-Vector2(12,0),marker+Vector2(12,0),Color("dcd5a5"),2)
-					label_on(self,marker+Vector2(-5,-8),str(i+1),14,UI.PAPER)
+					label_on(self,marker+Vector2(-5,-8),str(j.id),14,UI.PAPER)
 		if Farm.BUILD.has(j.kind) and not j.started:
 			draw_rect(Rect2(q - Vector2(19, 14), Vector2(38, 28)), Color(0.79, 0.76, 0.55, 0.35))
 			for x in [-18, 18]:
@@ -993,7 +993,7 @@ func draw_work_plans():
 		else: draw_line(q + Vector2(-9, 10), q + Vector2(9, 10), Color("cfdfaa"), 3)
 		draw_line(q + Vector2(-10, -12), q + Vector2(-10, -27), Color("9b774e"), 3)
 		draw_rect(Rect2(q + Vector2(-18, -33), Vector2(22, 18)), Color("d8c692"))
-		label_on(self, q + Vector2(-13, -19), str(i + 1), 15, UI.INK)
+		label_on(self, q + Vector2(-13, -19), str(j.id), 15, UI.INK)
 
 func draw_animal_silhouette(p: Vector2, species: String, alpha: float, size_value: float = 1.0):
 	draw_set_transform(p, 0, Vector2.ONE * size_value)
@@ -1422,7 +1422,7 @@ func board_click(event):
 			refresh()
 			return
 	if selected.get("kind") == "keeper":
-		if not world.act("keeper_move",cell): notice("移動指示は役割画面で徴兵してから" if not world.keeper.get("drafted",false) else "移動できません")
+		if not world.act("keeper_move",cell): notice("人物の「徴兵する」を押してから移動" if not world.keeper.get("drafted",false) else "移動できません")
 	elif tool in Farm.ORDERS:
 		command_selected(tool, cell)
 	elif tool != "":
@@ -2015,14 +2015,21 @@ func draw_hud():
 		hud.draw_rect(area, Color(0.65, 0.9, 0.76, 0.15))
 		hud.draw_rect(area, Color("b6ebc5"), false, 2)
 	panel(Rect2(0, 0, 1280, 49))
-	label_on(hud, Vector2(18, 31), "%d日目 %s" % [world.campaign.day, {"morning":"朝","day":"昼","night":"夜"}[world.Cycle.period(world)]], 20)
+	label_on(hud, Vector2(18, 31), "%d日目" % world.campaign.day, 20)
 	for i in range(4):
 		var kind = ["soil", "wood", "stone", "gold"][i]
 		BoardArt.draw_resource(hud, Vector2(162 + i * 115, 24), kind)
-		label_on(hud, Vector2(181 + i * 115, 31), ("∞" if kind!="gold" and world.debug_enabled and world.debug_infinite else str(world.campaign.gold if kind == "gold" else world.resource_amount(kind))), 20)
+		label_on(hud, Vector2(181 + i * 115, 31), ("∞" if kind!="gold" and world.debug_enabled and world.debug_infinite else ("%dG"%world.campaign.gold if kind=="gold" else "%s %d"%[Farm.Work.Policy.LABELS.get(kind,{"soil":"土","wood":"木材","stone":"石"}[kind]),world.resource_amount(kind)])), 17)
 	if Rect2(142, 0, 480, 49).has_point(pointer):
-		panel(Rect2(145, 50, 390, 30))
-		label_on(hud, Vector2(154, 71), "土 / 木材 / 石 / Gold  ·  キノコ %d" % world.campaign.mushrooms, 14)
+		var index=clampi(int((pointer.x-142)/115),0,3)
+		var kind=["soil","wood","stone","gold"][index]
+		panel(Rect2(145,50,520,80))
+		if kind=="gold":label_on(hud,Vector2(154,73),"所持金 %dG · 商人との取引に使います"%world.campaign.gold,14)
+		else:
+			var summary=world.Stock.summary(world,kind)
+			label_on(hud,Vector2(154,72),"%s · 所有%d / 利用可%d / 備蓄%d"%[{"soil":"土","wood":"木材","stone":"石"}[kind],summary.owned,summary.available,summary.stored],14)
+			label_on(hud,Vector2(154,96),"運搬中%d / 工事現場%d / 禁止%d / 予約%d"%[summary.carried,summary.site,summary.forbidden,summary.reserved],14)
+			label_on(hud,Vector2(154,120),"利用可＝禁止・予約外の地上物資（経路は別判定）。",12)
 	hud.draw_texture_rect(UI.icon({"morning":"sunrise","day":"sun","night":"moon"}[world.Cycle.period(world)]),Rect2(688,12,24,24),false)
 	label_on(hud, Vector2(720, 31), clock_label_text(), 18)
 	panel(Rect2(0, 748, 505, 52))
@@ -2104,7 +2111,7 @@ func draw_hud():
 		panel(Rect2(362, 225, 554, 340))
 		label_on(hud, Vector2(398, 271), "守りきった！" if world.result == "win" else {"idol_destroyed":"黄金像が壊された","idol_stolen":"黄金像が持ち去られた","malnutrition":"栄養失調で死亡した"}.get(world.story.defeat_reason,"牧場主が連れ去られた"), 27)
 		label_on(hud, Vector2(398, 311), "評価 %d   EXP +%d   GOLD +%d" % [world.score.rating, world.score.xp, world.score.gold], 18)
-	if world.working() and world.early_clear:
+	if world.working() and world.Cycle.period(world)=="night" and world.early_clear:
 		label_on(hud, Vector2(935, 735), "夜明けまで自由に", 16)
 	if debug_view:
 		label_on(hud,Vector2(278,153),"世界 %s / 祈り%d / 放送%d"%[str(world.story.hidden),world.story.prayers.size(),world.story.news.size()],12)
@@ -2168,7 +2175,7 @@ func setup_menu():
 	shade.color = Color(0.03, 0.08, 0.06, 0.88)
 	menu.add_child(shade)
 	var title = Label.new()
-	title.text = "休息"
+	title.text = "メニュー"
 	title.position = Vector2(570, 250)
 	title.add_theme_font_size_override("font_size", 28)
 	menu.add_child(title)
@@ -2179,23 +2186,25 @@ func setup_menu():
 	var metadata=JSON.parse_string(FileAccess.get_file_as_string("res://game/build_stamp.json")) if FileAccess.file_exists("res://game/build_stamp.json") else {}
 	stamp.text="ビルド "+str(metadata.get("commit","未記録"))+(" + 未コミット変更" if metadata.get("dirty",true) else "")
 	stamp.text+="  素材 "+str(metadata.get("asset_delivery_commit","未記録")).left(8)
-	stamp.position=Vector2(480,532)
+	add_button(menu,"menu_save","保存",Rect2(480,520,154,36),ColonyPanels.research_save.bind(self))
+	add_button(menu,"menu_load","読込",Rect2(646,520,154,36),ColonyPanels.research_load.bind(self))
+	stamp.position=Vector2(480,574)
 	stamp.add_theme_font_size_override("font_size",14)
 	menu.add_child(stamp)
 	var guide = Label.new()
-	guide.text = "ホイール：操作選択　Ctrl＋ホイール：ズーム　Tab：モード　Shift：指示対象\n壁を選んでドラッグ：連続予約（右クリック / Escで取消）　未選択：マップ移動\n左クリック：選択・行動　右クリック：予定取消 / 解除 / 市場で戻る\n1：0.5倍　2：1倍　3：2倍　4：4倍（休息中）　操作ボタンのドラッグ：並べ替え\nSpace：停止 / 再開　−：遅く　＋ / ＝ / テンキー＋：速く\n夜まで / 朝まで休む：別の時間送り（中断して倍率を変更）"
-	guide.position=Vector2(288,566)
-	guide.add_theme_font_size_override("font_size",14)
-	guide.add_theme_constant_override("line_spacing",-4)
+	guide.text = "ホイール：操作選択　Ctrl＋ホイール：ズーム　Tab：モード　Shift：指示対象\n壁を選んでドラッグ：連続予約（右クリック / Escで取消）　未選択：マップ移動\n左クリック：選択・行動　右クリック：選択解除 / 市場で戻る　予定取消は×\n1：0.5倍　2：1倍　3：2倍　4：4倍（休息中）　操作ボタンのドラッグ：並べ替え\nSpace：停止 / 再開　−：遅く　＋ / ＝ / テンキー＋：速く\n夜まで / 朝まで休む：別の時間送り（中断して倍率を変更）"
+	guide.position=Vector2(288,590)
+	guide.add_theme_font_size_override("font_size",13)
+	guide.add_theme_constant_override("line_spacing",-6)
 	guide.name="ControlGuide"
 	menu.add_child(guide)
 	var boundary_note=Label.new();boundary_note.name="SaveBoundaryNote"
-	boundary_note.position=Vector2(288,700);boundary_note.add_theme_font_size_override("font_size",16)
+	boundary_note.position=Vector2(288,720);boundary_note.add_theme_font_size_override("font_size",16)
 	boundary_note.text=Clarity.SAVE_BOUNDARY
 	menu.add_child(boundary_note)
 	var save_label=Label.new();save_label.name="MenuSaveStatus"
-	save_label.position=Vector2(288,728);save_label.size=Vector2(720,54);save_label.text=save_status
-	save_label.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART;save_label.add_theme_font_size_override("font_size",16)
+	save_label.position=Vector2(288,752);save_label.size=Vector2(720,40);save_label.text=save_status
+	save_label.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART;save_label.add_theme_font_size_override("font_size",14)
 	menu.add_child(save_label)
 	menu.visible = false
 
@@ -2691,19 +2700,21 @@ func draw_keeper_card():
 	label_on(hud,Vector2(328,615),"満腹%d"%k.get("satiety",100),13,UI.INK)
 	for i in range(2):
 		var y = 626 + i * 18
+		label_on(hud,Vector2(99,y+12),"HP" if i==0 else "眠気",12,UI.INK)
 		hud.draw_texture_rect(UI.icon("heart" if i == 0 else "moon"), Rect2(78, y, 14, 14), false)
-		hud.draw_rect(Rect2(100, y + 3, 170, 8), Color("b9b69c"))
+		hud.draw_rect(Rect2(134, y + 3, 136, 8), Color("b9b69c"))
 		var ratio = float(k.hp) / k.max_hp if i == 0 else k.sleepiness / 100.0
-		hud.draw_rect(Rect2(100, y + 3, 170 * ratio, 8), Color("bf7661") if i == 0 else Color("8087a7"))
+		hud.draw_rect(Rect2(134, y + 3, 136 * ratio, 8), Color("bf7661") if i == 0 else Color("8087a7"))
 		label_on(hud, Vector2(279, y + 12), "%d/%d" % [k.hp, k.max_hp] if i == 0 else "%d%%" % k.sleepiness, 13, UI.INK)
-	var activity = "連れ去り" if k.carrier >= 0 else ("気絶" if k.state == "unconscious" else ("限界休息" if k.forced_rest else (("寝入り待ち" if Farm.Life.presentation(world)=="settling" else "睡眠") if k.resting else ("散歩中" if world.manual_goal != null else ("再開待ち" if world.jobs_held else ("仕事中" if not world.jobs.is_empty() else "のんびり"))))))
+	var activity = "連れ去り" if k.carrier >= 0 else ("気絶" if k.state == "unconscious" else ("限界休息" if k.forced_rest else (("寝入り待ち" if Farm.Life.presentation(world)=="settling" else "睡眠") if k.resting else ("散歩中" if world.manual_goal != null else ("再開待ち" if world.jobs_held else ("仕事中" if not world.Work.active(world).is_empty() else "待機"))))))
+	if k.has("meal_remaining"):activity="食事中"
+	elif k.get("life_need","")=="food":activity="食料を取りに移動"
 	if k.get("malnutrition",0)>0:activity=world.Nutrition.status(k)+" %d%%"%k.malnutrition
 	if k.state=="hidden_rest":activity="療養中：HP1で起床可 / HP8で自動復帰"
 	label_on(hud, Vector2(30, 676), activity, 15, UI.INK)
-	if not world.jobs.is_empty() and k.get("malnutrition",0)<=0:
+	if not world.Work.active(world).is_empty() and k.get("life_need","")!="food" and k.get("malnutrition",0)<=0:
 		var names = {"mine":"採掘","train":"調教","direct_attack":"指定攻撃","keeper_equipment":"装備","slaughter":"と殺","milk":"搾乳","place_kokeshi":"こけし","place_fossil":"化石","wall": "壁", "door":"ドア","locked_door":"施錠ドア","wood_wall":"木壁","stone_wall":"石壁","soil_tile":"土タイル","wood_tile":"木タイル","stone_tile":"石タイル", "collect": "回収", "move": "歩く", "equip":"装備", "animal_order": "仲間へ指示", "repair": "修理", "remove": "解体", "remove_floor":"タイル解体", "repair_floor":"床修理", "gate": "ドア", "kennel": "犬小屋", "coop": "鶏小屋"}
 		var next = names.get(world.Work.active(world).get("kind",""), "仕事を選択中")
-		if world.jobs.size() > 1: next += " → " + names.get(world.jobs[1].kind, "仕事")
 		label_on(hud, Vector2(166, 676), next, 14, UI.INK)
 	hud.draw_set_transform(Vector2.ZERO)
 

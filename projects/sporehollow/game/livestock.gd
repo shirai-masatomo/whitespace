@@ -59,7 +59,7 @@ static func reason(w,a: Dictionary,own_job: int=-1) -> String:
 static func designate(w,id: int) -> bool:
 	var a=w.Orders.animal(w,id)
 	if not w.working() or w.jobs.size()>=w.Jobs.LIMIT or reason(w,a)!="":return false
-	var j={"id":w.next_job_id,"kind":"slaughter","pos":a.pos,"animal_id":id,"state":"pending","resource":"","reserved":0,"started":false,"work_category":"other","work_elapsed":0.0,"explicit_designation":true}
+	var j={"id":w.next_job_id,"kind":"slaughter","pos":a.pos,"animal_id":id,"state":"pending","resource":"","reserved":0,"started":false,"work_category":"animal","work_elapsed":0.0,"explicit_designation":true}
 	w.next_job_id+=1;w.jobs.append(j);w.Life.wake_auto(w)
 	w.job_log.append({"tick":w.tick,"event":"queued","id":j.id,"kind":"slaughter","animal_id":id})
 	w.PlayerEvents.add(w,w.animal_name(a)+"のと殺を予約。現地作業後に肉%d個（仮）"%MEAT[a.species],"slaughter_plan:%d"%j.id)

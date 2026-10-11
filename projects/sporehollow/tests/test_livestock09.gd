@@ -51,7 +51,7 @@ func run():
 	check(output.size()==1 and output[0].location=="ground" and output[0].pos==hen.pos and output[0].slaughter_animal_id==2,"Meat is a single real ground stack at the actual slaughter location")
 	w.Snapshot.save(w,out+"/slaughter-done.snapshot");w=w.Snapshot.restore(out+"/slaughter-done.snapshot")
 	check(not Live.designate(w,2),"Completed slaughter cannot be designated again after restore")
-	var zone=w.Zones.create(w,"stockpile",Vector2i(12,10),Vector2i(12,10));w.Zones.set_allowed(w,zone,["food"])
+	var zone=w.Zones.create(w,"stockpile",Vector2i(12,10),Vector2i(12,10));w.Zones.set_allowed(w,zone,["food"]);w.Stock.designate(w,"haul",hen.pos,hen.pos)
 	for i in range(140):w.step()
 	check(meat(w)==4 and w.field_items.any(func(row):return row.kind=="meat" and row.pos==Vector2i(12,10)),"Existing hauling transports meat to food-enabled stockpile without duplication")
 	w.keeper.satiety=20

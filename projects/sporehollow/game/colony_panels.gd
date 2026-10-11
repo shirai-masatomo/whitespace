@@ -8,13 +8,20 @@ static func panel(g,area: Rect2) -> Panel:
 	var p=Panel.new();p.position=area.position;p.size=area.size;p.add_theme_stylebox_override("panel",g.UI.surface(g.UI.PAPER));g.palette.add_child(p);g.palette.move_child(p,0);g.colony_panel=p;return p
 
 static func research_save(g):
-	g.notice("状態を保存しました" if g.world.Snapshot.save(g.world,g.development_save_path) else "保存できませんでした")
+	var paused=g.world.paused
+	if g.menu_open:g.world.paused=g.menu_was_paused
+	var saved=g.world.Snapshot.save(g.world,g.development_save_path)
+	g.world.paused=paused
+	g.notice("状態を保存しました" if saved else "保存できませんでした")
 
 static func research_load(g):
 	var path=g.development_save_path if FileAccess.file_exists(g.development_save_path) else "user://autonomy.snapshot"
 	var restored=g.world.Snapshot.restore(path)
 	if restored==null:g.notice("保存がありません");return
-	g.world=restored;g.reset_view();g.colony_page="roles";g.group=2;g.refresh();g.notice("状態を読み込みました")
+	var in_menu=g.menu_open
+	g.world=restored;g.reset_view();g.menu_open=in_menu;g.menu.visible=in_menu;g.menu_was_paused=restored.paused
+	if g.menu_open:g.world.paused=true
+	g.refresh();g.notice("状態を読み込みました")
 
 static func select_storage(g):
 	g.group=0;g.colony_page="";g.architect_category="ゾーン";g.tool="zone_stockpile";g.refresh()
@@ -24,7 +31,7 @@ static func architecture_category(g,category: String):
 
 static func person_selected(g,row: Dictionary):
 	if row.key=="keeper":g.choose_walk()
-	else:g.choose_animal(row.animal_id)
+	elif row.has("animal_id"):g.choose_animal(row.animal_id)
 
 # Keep tab and tool geometry together; main uses architect_tool_rect for its buttons.
 static func architect_area(g) -> Rect2:
@@ -59,14 +66,13 @@ static func priority_style(button: Button,value: int):
 static func build_roles(g):
 	var people=Model.people(g.world)
 	var list_height=mini(174,maxi(34,people.size()*34))
-	var panel_height=126+list_height
+	var panel_height=94+list_height
 	var p=panel(g,Rect2(16,742-panel_height,640,panel_height))
 	label(p,"仕事の優先度",Vector2(14,9),19)
 	label(p,"1 最優先 → 4 最低 · 空欄は停止 · 同じ数字は左から",Vector2(14,35),13)
 	label(p,"人 / 状態",Vector2(18,59),13)
 	var order=g.world.Work.Policy.ORDER
 	for i in range(order.size()):label(p,g.world.Work.Policy.LABELS[order[i]],Vector2(224+i*60,59),13)
-	label(p,"徴兵",Vector2(545,59),13)
 	var scroll=ScrollContainer.new();scroll.position=Vector2(12,80);scroll.size=Vector2(616,list_height)
 	scroll.horizontal_scroll_mode=ScrollContainer.SCROLL_MODE_DISABLED;p.add_child(scroll)
 	var list=VBoxContainer.new();list.add_theme_constant_override("separation",2);list.size_flags_horizontal=Control.SIZE_EXPAND_FILL;scroll.add_child(list)
@@ -74,7 +80,7 @@ static func build_roles(g):
 		var line=HBoxContainer.new();line.add_theme_constant_override("separation",4);list.add_child(line)
 		var person=Button.new();person.name="Person_"+row.key;person.custom_minimum_size=Vector2(200,32)
 		person.alignment=HORIZONTAL_ALIGNMENT_LEFT;person.clip_text=true
-		person.text=row.name
+		person.text=row.name;person.disabled=row.key!="keeper" and not row.has("animal_id")
 		person.tooltip_text="%s · HP %d/%d\n%s\nクリックで個体を確認"%[row.name,row.hp,row.max_hp,row.state if row.state!="" else row.role]
 		compact_button(g,person);person.pressed.connect(person_selected.bind(g,row));line.add_child(person)
 		var a=g.world.workers.get(row.key,{})
@@ -84,16 +90,6 @@ static func build_roles(g):
 			choice.text=str(value) if value>0 else "";choice.disabled=a.is_empty()
 			choice.tooltip_text="%s / %s：%s\nクリックで 1 → 2 → 3 → 4 → 空欄 → 1。\n同じ数字は左の仕事から。"%[row.name,g.world.Work.Policy.LABELS[kind],str(value) if value>0 else "停止"] if not a.is_empty() else "%sは固有の支援行動を行います"%row.name
 			compact_button(g,choice,17);priority_style(choice,value);choice.pressed.connect(priority_changed.bind(g,row.key,kind));line.add_child(choice)
-		var draft=Button.new();draft.name="Draft_"+row.key;draft.custom_minimum_size=Vector2(88,32)
-		draft.text="解除" if a.get("drafted",false) else "徴兵";draft.disabled=a.is_empty()
-		draft.tooltip_text="%s：%s"%[row.name,"通常の仕事へ戻す" if a.get("drafted",false) else "通常の仕事を中断して直接指示する"] if not a.is_empty() else "固有行動の人物は徴兵できません"
-		compact_button(g,draft);priority_style(draft,1 if a.get("drafted",false) else 0);draft.pressed.connect(draft_changed.bind(g,row.key));line.add_child(draft)
-	var y=p.position.y+panel_height-36
-	g.add_button(g.palette,"storage_zone","ゾーン",Rect2(30,y,98,28),select_storage.bind(g))
-	g.buttons.storage_zone.tooltip_text="備蓄と休息場所を指定"
-	g.add_button(g.palette,"research_save","保存",Rect2(470,y,78,28),research_save.bind(g))
-	g.add_button(g.palette,"research_load","読込",Rect2(556,y,78,28),research_load.bind(g))
-	for id in ["storage_zone","research_save","research_load"]:compact_button(g,g.buttons[id])
 
 static func build(g):
 	if not g.world.working() or g.field_book or g.field_shop or g.story_modal!="":return

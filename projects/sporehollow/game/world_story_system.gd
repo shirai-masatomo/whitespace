@@ -10,7 +10,7 @@ const IDOL_HP = 180
 const TOW_PREP_SECONDS = 8.0
 const TOW_SPEED = 0.5
 const ACTIONS = ["clear_tree","inspect_idol","pray_wealth","pray_animal","pray_gold","pray_item","repair_idol","repair_idol_soil","repair_idol_wood","repair_idol_stone","recover_idol"]
-const INTRO = ["父は、遺跡と秘境を巡る探検家だった。", "最後の旅から持ち帰ったのは、大きな黄金像。\nそれからほどなく、父はいなくなった。", "私は、父の残した牧場で暮らし始めた。\n愛犬と過ごした静かな数日は、もう思い出になっている。", "父の日誌には、一言だけ残されていた。\n『像を壊してはいけない。』"]
+const INTRO = ["父は、遺跡と秘境を巡る探検家だった。", "最後の旅から持ち帰ったのは、大きな黄金像。\nそれからほどなく、父はいなくなった。", "私は、父の残した牧場で暮らし始めた。\n愛犬と過ごした静かな数日は、もう思い出になっている。", "父の日誌には、一言だけ残されていた。\n『像を壊してはいけない。』\n\n夜の襲撃から、像と牧場を守ろう。\nまずは「アーキテクト」で土壁を指定。牧場主が現物の土を運び、建ててくれる。\n物資を備蓄に片づけるときは「命令 → 回収」。場所を指定するだけでは運ばない。"]
 
 static func cell(v) -> Vector2i:
 	return v if v is Vector2i else Vector2i(v[0],v[1])

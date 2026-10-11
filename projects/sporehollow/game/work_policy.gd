@@ -2,10 +2,10 @@ extends RefCounted
 ## Research values, not final balance. Physical material handling follows in unit 2.
 const DESIGNATION_LIMIT = 32
 const RETRY_SECONDS = 2.0
-const PRIORITY_VERSION = 2
-const ORDER = ["build","gather","collect","other","haul"]
-const PRIORITIES = {"build":3,"gather":2,"collect":3,"other":4,"haul":4}
-const LABELS = {"build":"建築","gather":"採集","collect":"回収","other":"その他","haul":"運搬"}
+const PRIORITY_VERSION = 3
+const ORDER = ["build","gather","collect","animal","other","haul"]
+const PRIORITIES = {"build":3,"gather":2,"collect":3,"animal":4,"other":4,"haul":4}
+const LABELS = {"build":"建築","gather":"採集","collect":"回収","animal":"動物","other":"その他","haul":"運搬"}
 const PAGE_SIZE = 10
 
 const CARRY_CAPACITY = 8
@@ -17,3 +17,12 @@ const MEAL_GAIN = 45.0
 const EAT_SECONDS = 2.0
 const HUMAN_FOOD = ["mushroom","egg","meat","milk"]
 const STARTING_FOOD = 4
+
+# One classification for scheduling, saved jobs and the designation list.
+static func category(w,j) -> String:
+	if w.BUILD.has(j.kind) or j.kind in ["repair","repair_floor","remove","remove_floor","gate"] or j.kind.begins_with("place_"):return "build"
+	if j.kind=="mine":return "gather"
+	if j.kind=="haul":return "haul"
+	if j.kind=="collect":return "gather" if w.natural.has(j.pos) else "collect"
+	if j.kind in ["animal_order","milk","equip","slaughter","train"]:return "animal"
+	return "other"

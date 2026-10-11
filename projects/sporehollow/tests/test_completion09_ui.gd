@@ -40,7 +40,7 @@ func run():
 	await click(g.get_canvas_transform()*g.enemy_hit_rect(e).get_center())
 	check(w.jobs.any(func(j):return j.kind=="direct_attack" and j.enemy_id==e.id),"Drafted keeper enemy click produces direct target attack instead of inspection")
 	var previous_job=w.jobs.filter(func(j):return j.kind=="direct_attack")[0].id
-	e.pos=Farm.MERCHANT_CELL;w.tick=20;g.reset_view();g.choose_walk();g.refresh();await process_frame
+	e.pos=Farm.MERCHANT_CELL;w.tick=20;g.reset_view();g.choose_walk();g.camera.position=g.center(Farm.MERCHANT_CELL+Vector2i(6,3));g.camera.force_update_scroll();g.refresh();await process_frame
 	await click(g.get_canvas_transform()*g.enemy_hit_rect(e).get_center())
 	check(not g.merchant_requested and w.jobs.any(func(j):return j.kind=="direct_attack" and j.enemy_id==e.id and j.id>previous_job),"Drafted target click wins when an enemy overlaps the merchant interaction area")
 	e.pos=Vector2i(14,10);g.reset_view();g.choose_walk();g.refresh();await process_frame
