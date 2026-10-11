@@ -41,7 +41,7 @@ static func init(w):
 			w.story.migration_error="黄金像を安全に置けません。建物を残して移行するには中央を空けるか、新しい牧場を始めてください。"
 			say(w,w.story.migration_error)
 		var records=[]
-		for y in range(2,w.H-2):
+		for y in ([] if w.campaign.get("biome_new_map",false) else range(2,w.H-2)):
 			for x in range(2,w.W-2):
 				var p=Vector2i(x,y)
 				# Two-cell corridors connect the clearing to every edge; logistics remains separate.

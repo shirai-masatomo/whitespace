@@ -24,7 +24,7 @@ func run():
 	if out=="" or not "--isolated-review" in OS.get_cmdline_user_args():quit(2);return
 	begin("1 Deterministic rocks, physical mining, interruption and persistence")
 	var original=Farm.new({},31).begin_day();var another=Farm.new({},31).begin_day()
-	check(original.rocks==another.rocks and original.rocks.size()==Tasks.ROCK_COUNT,"New farms place four deterministic rocks without changing existing terrain")
+	check(original.rocks==another.rocks and not original.rocks.is_empty() and original.rocks.keys().all(func(p):return original.Biome.kind(original,p)=="rocky"),"New farms place deterministic deposits on rocky terrain")
 	check(original.rocks.keys().all(func(p):return not original.trees.has(p) and not original.natural.has(p) and not original.live_structure(p) and p not in original.entries),"Generated rocks avoid trees, natural resources, buildings and entrances")
 	var w=farm();var p=Vector2i(8,8)
 	check(Tasks.designate(w,"mine",p) and not Tasks.designate(w,"mine",p),"Explicit mining creates one real job and rejects duplicate designation")

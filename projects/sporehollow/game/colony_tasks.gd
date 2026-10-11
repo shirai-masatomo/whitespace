@@ -15,6 +15,7 @@ static func init(w):
 			var row=saved.duplicate(true);var p=Vector2i(row.pos[0],row.pos[1]);row.erase("pos")
 			if w.inside(p) and row.get("amount",0)>0:w.rocks[p]=row
 		return
+	if w.campaign.get("biome_new_map",false):return
 	var sites=[]
 	for y in range(2,w.H-2):
 		for x in range(2,w.W-2):

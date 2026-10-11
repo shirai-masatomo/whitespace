@@ -15,6 +15,8 @@ var boundary_version=1
 const Departure=preload("res://game/forest_departure.gd")
 const Decisions = preload("res://game/decision_ai.gd")
 const StageData = preload("res://game/stages.gd")
+const Biome=preload("res://game/biome_map.gd")
+var terrain: Dictionary = {}
 const W = 50
 const H = 34
 const DT = 0.25
@@ -226,7 +228,7 @@ var metrics = {"repelled": 0, "stolen": 0, "structure_damage": 0, "commands": 0.
 	"bark_casts": 0, "bark_targets": 0, "weed_spawned": 0, "mushroom_spawned": 0, "weed_collected": 0, "mushroom_collected": 0, "stump_spawned": 0, "stump_collected": 0, "nature_rolls": 0, "mushrooms_used": 0, "mushroom_healing": 0}
 
 static func new_campaign() -> Dictionary:
-	return {"start_near_idol":true,"keeper_position":[W/2-2,H/2],"stage": 1, "day": 1, "exp_pool": 0, "night_ready": false, "gold": 40, "field_items": [], "eggs": 0, "mushrooms": preload("res://game/work_policy.gd").STARTING_FOOD, "shelter": false,
+	return {"biome_new_map":true,"start_near_idol":true,"keeper_position":[W/2-2,H/2],"stage": 1, "day": 1, "exp_pool": 0, "night_ready": false, "gold": 40, "field_items": [], "eggs": 0, "mushrooms": preload("res://game/work_policy.gd").STARTING_FOOD, "shelter": false,
 		"fence": 0, "resources": {"soil": 100, "wood": 0, "stone": 0}, "items": {"dog_food": 2, "hen_food": 0}, "unlocked_blueprints": [], "facilities": [], "next_structure_id": 1, "animals": [{"id": 1,"position":[W/2-3,H/2], "category": "dog", "species": "shiba", "lv": 1, "xp": 0, "loyalty": 75}]}
 
 func _init(data: Dictionary = {}, seed_number: int = 17, stage_override: Dictionary = {}):
@@ -354,6 +356,7 @@ func _init(data: Dictionary = {}, seed_number: int = 17, stage_override: Diction
 	Stock.init(self)
 	stock_used=campaign.get("stock_used",{}).duplicate()
 	Work.restore(self)
+	Biome.prepare(self)
 	Story.init(self)
 	if campaign.get("start_near_idol",false):
 		# Consumed only for a new campaign; saved actors never move on load.
@@ -368,15 +371,16 @@ func _init(data: Dictionary = {}, seed_number: int = 17, stage_override: Diction
 		initial_positions.keeper=campaign.keeper_position.duplicate();keeper_path=[campaign.keeper_position.duplicate()]
 	refresh_indoor()
 	make_schedule()
+	shop_stock = Shop.generate(stage, seed_value, campaign.unlocked_blueprints, campaign.day)
+	Cycle.init(self)
+	Tasks.init(self)
+	Biome.populate(self)
+	boundary_version=int(campaign.get("boundary_version",0))
+	Land.migrate(self)
 	# The morning snapshot includes migrated terrain and one-time morning events.
 	if not campaign.night_ready:
 		morning_checkpoint=campaign.duplicate(true)
 		morning_checkpoint.erase("morning_checkpoint")
-	shop_stock = Shop.generate(stage, seed_value, campaign.unlocked_blueprints, campaign.day)
-	Cycle.init(self)
-	Tasks.init(self)
-	boundary_version=int(campaign.get("boundary_version",0))
-	Land.migrate(self)
 	say("牧場を整えよう")
 
 func make_schedule():
@@ -1028,6 +1032,7 @@ func repair(p: Vector2i, target_layer: String="structure") -> bool:
 	return true
 
 func persist_farm():
+	Biome.persist(self)
 	Tasks.save(self)
 	Stock.save(self)
 	campaign.calendar_ticks=calendar_ticks;campaign.last_daily_day=last_daily_day
@@ -1301,7 +1306,7 @@ func grow_nature():
 			var p = Vector2i(x, y)
 			if walkable(p) and not occupied(p) and not live_structure(p) and not natural.has(p) and not rocks.has(p) and floors.get(p,{}).get("status") not in ["ready","building"] and p not in entries and not field_items.any(func(item): return item.pos == p): sites.append(p)
 	if sites.is_empty(): return
-	var p = sites[nature_rng.randi_range(0, sites.size() - 1)]
+	var p = Biome.choose_site(self,sites,kind)
 	natural[p] = kind
 	metrics[kind + "_spawned"] += 1
 
