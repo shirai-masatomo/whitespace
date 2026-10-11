@@ -12,16 +12,23 @@ static func research_save(g):
 	if g.menu_open:g.world.paused=g.menu_was_paused
 	var saved=g.world.Snapshot.save(g.world,g.development_save_path)
 	g.world.paused=paused
-	g.notice("状態を保存しました" if saved else "保存できませんでした")
+	g.save_status="保存しました" if saved else "保存できませんでした"
+	g.notice(g.save_status)
+	if g.menu_open:g.ColonyMenu.build(g)
 
 static func research_load(g):
 	var path=g.development_save_path if FileAccess.file_exists(g.development_save_path) else "user://autonomy.snapshot"
 	var restored=g.world.Snapshot.restore(path)
-	if restored==null:g.notice("保存がありません");return
+	if restored==null:
+		g.save_status="保存を読み込めません。今の牧場は変更していません"
+		if g.menu_open:g.ColonyMenu.build(g)
+		return
+	g.save_load_blocked=false
 	var in_menu=g.menu_open
 	g.world=restored;g.reset_view();g.menu_open=in_menu;g.menu.visible=in_menu;g.menu_was_paused=restored.paused
 	if g.menu_open:g.world.paused=true
-	g.refresh();g.notice("状態を読み込みました")
+	g.save_status="保存した牧場を読み込みました";g.refresh();g.notice(g.save_status)
+	if g.menu_open:g.ColonyMenu.build(g)
 
 static func select_storage(g):
 	g.group=0;g.colony_page="";g.architect_category="ゾーン";g.tool="zone_stockpile";g.refresh()

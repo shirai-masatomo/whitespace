@@ -39,7 +39,7 @@ func build(g):
 		var index=0
 		for kind in g.world.Zones.TYPES:
 			var id="zone_type_"+kind;g.add_button(g.palette,id,g.world.Zones.TYPES[kind],Rect2(20+index*110,624,104,32),toggle.bind(g,kind));g.UI.selected(g.buttons[id],kind in z.allowed);index+=1
-		g.ColonyPanels.label(p,"40個/マス。置き先の設定だけです。物資は「命令 → 回収」で指定して運びます。",Vector2(12,144),12)
+		g.ColonyPanels.label(p,"40個/マス。置き先の設定だけです。物資は「命令 → 回収」で指定して運びます。",Vector2(12,152),12)
 	else:
 		g.ColonyPanels.label(p,"居住は休息場所の指定です。到達できない場合は理由を表示して現在地で休息します。",Vector2(12,90),15)
 		g.ColonyPanels.label(p,"生活や行動の制限区域ではありません。物資・建物・仕事は削除しません。",Vector2(12,121),14)
@@ -66,9 +66,17 @@ func input(g,event) -> bool:
 	return false
 func draw(g):
 	for z in g.world.zones:
-		var color=Color("8dc5c9") if z.kind=="stockpile" else Color("c4b09a")
+		var color=Color("8dc5c9") if z.kind=="stockpile" else Color("d7ba86")
+		var cells={}
+		for p in z.cells:cells[p]=true
 		for p in z.cells:
-			g.draw_rect(Rect2(Vector2(p)*g.TILE+Vector2(3,3),g.TILE-Vector2(6,6)),Color(color,0.08));g.draw_rect(Rect2(Vector2(p)*g.TILE+Vector2(3,3),g.TILE-Vector2(6,6)),color,false,2 if active(g) and z.id==selected_id else 1)
+			var corner=Vector2(p)*g.TILE;var selected=active(g) and z.id==selected_id
+			g.draw_rect(Rect2(corner,g.TILE),Color(color,0.16 if selected else 0.09))
+			for edge in [[Vector2i.UP,Vector2.ZERO,Vector2(g.TILE.x,0)],[Vector2i.RIGHT,Vector2(g.TILE.x,0),g.TILE],[Vector2i.DOWN,Vector2(0,g.TILE.y),g.TILE],[Vector2i.LEFT,Vector2.ZERO,Vector2(0,g.TILE.y)]]:
+				if not cells.has(p+edge[0]):g.draw_line(corner+edge[1],corner+edge[2],color,2)
+		if active(g) and not z.cells.is_empty():
+			var at=g.center(z.cells[0])+Vector2(-17,-8)
+			g.label_on(g,at,"備蓄" if z.kind=="stockpile" else "休息",14,g.UI.INK)
 	if not active(g) or not g.tool.begins_with("zone_") or g.pointer_over_ui():return
 	var from=first if pressed else cell(g,g.pointer);var to=last if pressed else from
 	var low=Vector2i(mini(from.x,to.x),mini(from.y,to.y));var high=Vector2i(maxi(from.x,to.x),maxi(from.y,to.y))

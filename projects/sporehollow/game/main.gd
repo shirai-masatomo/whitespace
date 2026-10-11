@@ -24,6 +24,9 @@ const TILE = Vector2(48, 42)
 const CAMERA_SPEED=420.0*1.5
 const ACTOR_SCALE=1.25
 const ColonyModel=preload("res://game/colony_view_model.gd")
+const Presentation=preload("res://game/colony_ui_state.gd")
+const ColonyMenu=preload("res://game/colony_menu.gd")
+var menu_page="main"
 var job_page=0
 var job_category="すべて"
 var queue_row_y={}
@@ -45,7 +48,7 @@ const HumanVisual=preload("res://game/human_visual.gd")
 const AnimalCorpse=preload("res://game/animal_corpse.gd")
 var six_art={}
 var six_revived={}
-const TOOLS = {"kennel":"犬小屋 木20","coop":"鶏小屋 木30","milk":"搾乳", "charge":"突撃", "place_kokeshi":"こけしを置く", "place_fossil":"化石を置く","wall": "壁  10 / 1秒", "wood_wall":"木壁 木10", "stone_wall":"石壁 石10", "soil_tile":"土タイル 土2", "wood_tile":"木タイル 木2", "stone_tile":"石タイル 石2", "door":"ドア 木10", "locked_door":"施錠ドア 木20", "guide":"連れてく", "equip":"装備", "repair": "修理", "gate": "ドア開閉", "remove": "解体",
+const TOOLS = {"kennel":"犬小屋 木20","coop":"鶏小屋 木30","milk":"搾乳", "charge":"突撃", "place_kokeshi":"こけしを置く", "place_fossil":"化石を置く","wall": "土壁 土10", "wood_wall":"木壁 木10", "stone_wall":"石壁 石10", "soil_tile":"土床 土2", "wood_tile":"木床 木2", "stone_tile":"石床 石2", "door":"ドア 木10", "locked_door":"施錠 木20", "guide":"連れてく", "equip":"装備", "repair": "修理", "gate": "ドア開閉", "remove": "解体",
 	"attack_target":"狙え", "auto": "おまかせ", "stay": "待て", "wander": "警戒", "rest": "無理するな", "collect": "資源・卵・設計図", "dog_food": "犬用餌 HP+10", "hen_food": "鶏用餌 HP+8", "cat_food": "猫用餌 HP+8"}
 const ORDER_HELP={"auto":"状況に合わせて行動します。戦闘・救護・その動物の仕事を任せます。","guide":"行き先をクリックして一緒に歩きます。\n物や動物は、押した時点の近くの空き場所へ。\n1匹なら隣接し、遅い方に合わせます。\n複数は近くにまとまり、到着でおまかせへ。\n右クリックで行き先指定を解除します。","stay":"その場所で待ちます。近くの敵には応戦しますが、追いかけません。","wander":"周囲を巡回し、敵を見つけたら攻撃します。","rest":"安全と回復を優先します。危険から離れ、無理に追わず近くの敵に応戦します。","attack_target":"敵を選べ。狙える距離や見通しが必要です。","equip":"持ち物から装備を選び、主人公が届けます。","milk":"乳牛に近づいて搾乳します。1日1回です。","charge":"突撃する行き先を選びます。"}
 const GROUP_TOOLS = [["wall", "wood_wall", "stone_wall", "soil_tile", "wood_tile", "stone_tile", "door", "locked_door", "kennel", "coop", "place_kokeshi", "place_fossil"], ["auto", "guide", "stay", "wander", "rest", "attack_target", "equip", "milk", "charge"], ["collect"]]
@@ -223,6 +226,8 @@ func _ready():
 	controls.add_child(queue_controls)
 	add_button(controls, "walk", "主人公", Rect2(16, 754, 116, 36), choose_walk)
 	buttons.walk.visible=false # Keeper actions are reached from the actor or the Roles list.
+	add_button(controls,"threats","",Rect2(862,8,166,32),focus_threat)
+	UI.button(buttons.threats,Color("d6ae83"))
 	setup_menu()
 	overlay = Node2D.new()
 	layer.add_child(overlay)
@@ -425,13 +430,14 @@ func refresh():
 		palette.remove_child(child)
 		child.queue_free()
 	for id in buttons.keys():
-		if id not in ["pause", "speed", "home", "advance", "retry", "group0", "group1", "group2", "menu_resume", "menu_retry", "menu_morning", "menu_save", "menu_load", "walk", "roles", "commands"]: buttons.erase(id)
+		if not id.begins_with("menu_") and id not in ["pause", "speed", "home", "advance", "retry", "group0", "group1", "group2", "walk", "roles", "commands", "threats"]: buttons.erase(id)
 	buttons.walk.visible = false
 	buttons.commands.visible=world.working() and not field_book and not field_shop
 	UI.selected(buttons.commands,group==4)
 	buttons.roles.visible=world.working() and not field_book and not field_shop
 	UI.selected(buttons.roles,colony_page=="roles")
 	UI.selected(buttons.walk, selected.get("kind")=="keeper")
+	refresh_threat_button()
 	buttons.pause.visible = world.working() and not field_book and not field_shop
 	buttons.speed.visible = world.working() and not field_book and not field_shop
 	buttons.home.visible = world.working() and not field_book and not field_shop
@@ -447,7 +453,7 @@ func refresh():
 		buttons.advance.text="牧場を続ける"
 		buttons.advance.visible=morning_screen=="morning" and not restart_confirm
 	buttons.advance.tooltip_text = "商人を見送り、昼の牧場仕事を始めます" if world.phase == "shop" else ""
-	buttons.advance.disabled=save_load_blocked
+	refresh_rest_button()
 	if world.phase=="shop": MarketView.button_style(buttons.advance,true)
 	else:
 		UI.button(buttons.advance)
@@ -469,11 +475,13 @@ func refresh():
 	elif selected.get("kind") == "keeper" and world.working():
 		add_button(palette, "keeper_rest", "起きる" if world.keeper.resting or world.keeper.state=="hidden_rest" else "休息", Rect2(16, 704, 125, 36), keeper_action.bind("keeper_rest"))
 		buttons.keeper_rest.icon = UI.icon("moon")
-		buttons.keeper_rest.disabled = (world.keeper.forced_rest or world.keeper.state != "free" or world.keeper.get("nutrition_down",false)) and not Farm.Life.can_wake_hidden(world)
+		buttons.keeper_rest.disabled = (world.keeper.get("drafted",false) or world.keeper.forced_rest or world.keeper.state != "free" or world.keeper.get("nutrition_down",false)) and not Farm.Life.can_wake_hidden(world)
+		buttons.keeper_rest.tooltip_text="徴兵を解除してください" if world.keeper.get("drafted",false) else "居住へ移動して休息。未指定なら現在地で休みます"
 		if world.keeper.state=="hidden_rest":buttons.keeper_rest.tooltip_text="HPが1以上なら起きられます。起きると敵の攻撃対象へ戻ります。HP8で自動復帰します。"
 		add_button(palette, "resume_jobs", "作業再開", Rect2(150, 704, 145, 36), keeper_action.bind("resume_jobs"))
 		buttons.resume_jobs.icon = UI.icon("hammer")
-		buttons.resume_jobs.disabled = world.keeper.forced_rest or world.keeper.state != "free" or world.keeper.get("nutrition_down",false)
+		buttons.resume_jobs.disabled = world.keeper.get("drafted",false) or world.keeper.forced_rest or world.keeper.state != "free" or world.keeper.get("nutrition_down",false)
+		buttons.resume_jobs.tooltip_text="徴兵を解除してください" if world.keeper.get("drafted",false) else "通常の仕事を再評価します"
 		add_button(palette,"keeper_book","図鑑",Rect2(660,704,110,36),open_book)
 		buttons.keeper_book.icon=UI.icon("book_closed")
 		add_button(palette,"inventory","持ち物",Rect2(778,704,120,36),preload("res://game/inventory_view.gd").open.bind(self))
@@ -498,7 +506,7 @@ func refresh():
 		for i in range(choices.size()):
 			var id = choices[i]
 			add_button(palette, id, TOOLS[id], ColonyPanels.architect_tool_rect(self,i), select_tool.bind(id))
-			buttons[id].tooltip_text = {"wall": "壁：土10、建設1秒", "collect": "雑草：1 Gold / キノコ：終了時HP5回復 / 卵：回収"}.get(id, TOOLS[id])
+			buttons[id].tooltip_text = {"wall": "壁：土10、建設1秒", "soil_tile":"土タイル：土2", "wood_tile":"木タイル：木2", "stone_tile":"石タイル：石2", "locked_door":"ロック付きドア：木20", "collect": "雑草：1 Gold / キノコ：終了時HP5回復 / 卵：回収"}.get(id, TOOLS[id])
 			if Farm.Shop.FOOD.has(id):
 				buttons[id].text += " ×%d" % world.item_count(id)
 			if id in ["wall", "wood_wall", "stone_wall", "soil_tile", "wood_tile", "stone_tile", "door", "locked_door", "kennel", "coop"]:
@@ -683,8 +691,8 @@ func advance():
 			world.act("cancel_rest_until")
 			speed=1
 			accumulated=0
-		elif not world.act("rest_until_night" if world.phase=="day" else "end_night"):
-			notice(world.Life.rest_until_reason(world,"night" if world.phase=="day" else "dawn"))
+		elif not world.act("end_night" if Presentation.rest_target(world)=="dawn" else "rest_until_night"):
+			notice(world.Life.rest_until_reason(world,Presentation.rest_target(world)))
 	refresh()
 
 func confirm_new_campaign(enabled: bool):
@@ -868,15 +876,15 @@ func refresh_jobs():
 		filter.get_theme_stylebox(state).content_margin_top=3;filter.get_theme_stylebox(state).content_margin_bottom=3
 	for category in ColonyModel.CATEGORIES:filter.add_item("%s · %d"%[category,ColonyModel.jobs(world,category).size()])
 	filter.select(ColonyModel.CATEGORIES.find(job_category));filter.item_selected.connect(set_job_category)
-	filter.tooltip_text="カテゴリごとの指定一覧。番号は登録IDで、実行順は各人が選びます。";queue_controls.add_child(filter)
+	filter.tooltip_text="種類ごとの仕事。住人が優先度・条件・距離を見て選びます。";queue_controls.add_child(filter)
 	var all_jobs=ColonyModel.display_jobs(world,job_category)
 	var page_size=world.Work.Policy.PAGE_SIZE
 	job_page=clampi(job_page,0,maxi(0,ceili(float(all_jobs.size())/page_size)-1))
 	var visible_jobs=all_jobs.slice(job_page*page_size,(job_page+1)*page_size)
 	var previous_category=""
 	var row_y=94.0
-	if world.Jobs.status(world)!="":
-		var status=Label.new();status.name="JobStatus";status.text=world.Jobs.status(world);status.position=Vector2(1010,94);status.size.x=248
+	if Presentation.work_summary(world)!="":
+		var status=Label.new();status.name="JobStatus";status.text=Presentation.work_summary(world);status.position=Vector2(1010,94);status.size.x=248
 		status.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART;status.add_theme_font_size_override("font_size",14);queue_controls.add_child(status)
 		row_y+=maxf(24,status.get_minimum_size().y)+6
 	if visible_jobs.is_empty():
@@ -902,11 +910,14 @@ func refresh_jobs():
 		row.text = "%s%s" % [ "› " if j.state != "pending" else "", ("待機 · " if j.state == "blocked" else "") + names.get(j.kind, StoryView.LABELS.get(j.kind,"仕事"))]
 		if j.get("purpose","")=="merchant":row.text="交渉へ向かう"
 		if j.get("cancel_requested",false):row.text="取消待ち · "+names.get(j.kind,"仕事")
-		row.draw.connect(draw_queue_badge.bind(row,j.id))
+		row.clip_text=true;row.alignment=HORIZONTAL_ALIGNMENT_LEFT;row.add_theme_font_size_override("font_size",14)
+		row.icon=UI.icon("hammer" if j.state=="working" else "pause")
+		row.text=Presentation.work_name(world,j)+" · "+Presentation.work_state(j)
 		row.set_meta("job_id",j.id)
 		row.set_meta("row_index",i)
-		row.tooltip_text = "%s · ID%d · %s · %s" % [visible_jobs[i].category,j.id,"担当："+j.get("assigned_to","") if j.get("assigned_to","")!="" else "担当待ち",j.get("block_reason","") if j.state in ["blocked","suspended"] else {"pending":"選択待ち","walking":"対象へ移動中","working":"現場で作業中"}.get(j.state,j.state)]
+		row.tooltip_text = "%s · %s · %s" % [visible_jobs[i].category,"担当："+j.get("assigned_to","") if j.get("assigned_to","")!="" else "担当待ち",j.get("block_reason","") if j.state in ["blocked","suspended"] else {"pending":"選択待ち","walking":"対象へ移動中","working":"現場で作業中"}.get(j.state,j.state)]
 		row.tooltip_text += " · ×で取消。実行優先は役割で設定"
+		if debug_view:row.tooltip_text+=" · JobID%d"%j.id
 		if j.get("cancel_requested",false):row.tooltip_text="取消を受け付けました。再開時に工事や指示を安全に終了します。"
 		row.gui_input.connect(queue_input.bind(j.id))
 		row.mouse_entered.connect(func(): hover_job = j.id)
@@ -931,7 +942,7 @@ func refresh_jobs():
 			page_button.disabled=job_page==0 if offset<0 else (job_page+1)*page_size>=all_jobs.size()
 			page_button.pressed.connect(change_job_page.bind(offset));queue_controls.add_child(page_button)
 		queue_bottom+=34
-	if world.jobs_held and not world.keeper.resting and world.keeper.state=="free":
+	if world.jobs_held and not world.keeper.get("drafted",false) and not world.keeper.resting and world.keeper.state=="free":
 		var resume=Button.new()
 		resume.position=Vector2(1010,queue_bottom+4)
 		resume.size=Vector2(248,28)
@@ -985,7 +996,7 @@ func draw_work_plans():
 				if not t.done:
 					var marker=center(t.dest)
 					draw_line(marker-Vector2(12,0),marker+Vector2(12,0),Color("dcd5a5"),2)
-					label_on(self,marker+Vector2(-5,-8),str(j.id),14,UI.PAPER)
+					draw_circle(marker,3,UI.GOLD)
 		if Farm.BUILD.has(j.kind) and not j.started:
 			draw_rect(Rect2(q - Vector2(19, 14), Vector2(38, 28)), Color(0.79, 0.76, 0.55, 0.35))
 			for x in [-18, 18]:
@@ -993,7 +1004,8 @@ func draw_work_plans():
 		else: draw_line(q + Vector2(-9, 10), q + Vector2(9, 10), Color("cfdfaa"), 3)
 		draw_line(q + Vector2(-10, -12), q + Vector2(-10, -27), Color("9b774e"), 3)
 		draw_rect(Rect2(q + Vector2(-18, -33), Vector2(22, 18)), Color("d8c692"))
-		label_on(self, q + Vector2(-13, -19), str(j.id), 15, UI.INK)
+		draw_texture_rect(UI.icon("hammer" if Farm.BUILD.has(j.kind) else "basket"),Rect2(q+Vector2(-16,-31),Vector2(18,16)),false)
+		if debug_view:label_on(self,q+Vector2(10,-19),str(j.id),12,UI.PAPER)
 
 func draw_animal_silhouette(p: Vector2, species: String, alpha: float, size_value: float = 1.0):
 	draw_set_transform(p, 0, Vector2.ONE * size_value)
@@ -1074,6 +1086,8 @@ func _route_input(event):
 		return
 	if event is InputEventMouse: pointer = event.position
 	if world.working() and not menu_open and not field_book and not field_shop and event is InputEventMouseButton and event.pressed and event.button_index==MOUSE_BUTTON_RIGHT:
+		if subtasks.pressed!="":
+			subtasks.cancel();refresh();get_viewport().set_input_as_handled();return
 		if group>=0 or colony_page!="" or tool!="" or dragging or press_pending:
 			neutral();get_viewport().set_input_as_handled();return
 		if merchant_context:
@@ -1113,6 +1127,7 @@ func _route_input(event):
 	if event is InputEventKey and event.pressed and not event.echo and event.physical_keycode == KEY_ESCAPE:
 		if wall_stroke.kind!="":cancel_wall_stroke();notice("壁の予約を取り消しました")
 		elif (world.phase == "shop" or field_book or field_shop) and (morning_screen != "morning" or field_shop): close_morning_screen()
+		elif menu_open and menu_page!="main":ColonyMenu.page(self,"main")
 		else: toggle_menu()
 		get_viewport().set_input_as_handled()
 		return
@@ -1241,7 +1256,7 @@ func pointer_over_ui() -> bool:
 	if is_instance_valid(context_panel) and context_panel.is_visible_in_tree() and context_panel.get_global_rect().has_point(pointer): return true
 	if pointer.y < 49 or pointer.y > 748: return true
 	if world.working() and Rect2(1010,60,248,maxf(34,queue_bottom-60+40)).has_point(pointer): return true
-	if not selected.is_empty() and (keeper_card_rect() if selected.get("kind")=="keeper" else Rect2(16,595,422,91)).has_point(pointer): return true
+	if not selected.is_empty() and (keeper_card_rect() if selected.get("kind")=="keeper" else Rect2(16,549,344,154) if selected.get("kind")=="animal" else Rect2(16,595,422,91)).has_point(pointer): return true
 	for button in buttons.values():
 		if is_instance_valid(button) and button.is_visible_in_tree() and button.get_global_rect().has_point(pointer): return true
 	return false
@@ -1433,8 +1448,12 @@ func board_click(event):
 
 func _notification(what):
 	if what==NOTIFICATION_WM_CLOSE_REQUEST and persistence_enabled:
+		var previous_pause=world.paused
+		if menu_open:world.paused=menu_was_paused
 		if save_load_blocked or save_morning(world):get_tree().quit()
-		else:notice("保存できないため終了を止めました。保存を確認してください")
+		else:
+			world.paused=previous_pause
+			notice("保存できないため終了を止めました。保存を確認してください")
 	if what == NOTIFICATION_WM_WINDOW_FOCUS_OUT:
 		cancel_wall_stroke()
 		keys_down.clear()
@@ -1538,12 +1557,10 @@ func _process(delta):
 	if selected.get("kind") == "enemy" and world.enemies.any(func(e): return e.id == selected.id and (e.hp <= 0 or e.flee or e.done)):
 		selected.clear()
 		refresh()
-	if world.working():
-		buttons.advance.visible = not field_book and not field_shop and (world.phase=="day" or world.early_clear)
-		buttons.advance.text = rest_button_text()
-	buttons.advance.disabled = cinematic()
-	audio.set_context(world.phase,menu_open or field_book or field_shop or story_modal!="" or world.paused)
-	var target_tint = 0.4 if world.Cycle.period(world)=="night" else 0.0
+	if world.working():refresh_rest_button()
+	refresh_threat_button()
+	audio.set_context(("defend" if world.Cycle.period(world)=="night" else "day") if world.working() else world.phase,menu_open or field_book or field_shop or story_modal!="" or world.paused)
+	var target_tint = night_tint_target()
 	night_tint = move_toward(night_tint, target_tint, delta * 0.4)
 	audio.tension(world.working() and world.enemies.any(func(e): return not e.done and not e.flee))
 	update_facility_effects(delta)
@@ -1792,14 +1809,13 @@ func _draw():
 			draw_circle(q, 8, Color("efd160"))
 			draw_line(q, q + Vector2(10, 2), Color("d78d37"), 3)
 		elif item.kind in ["soil","wood","stone","mushroom"]:
-			var colors={"soil":Color("ab7954"),"wood":Color("bd8d51"),"stone":Color("a6ad9d"),"mushroom":Color("dcad9a")}
-			draw_rect(Rect2(q-Vector2(9,6),Vector2(18,12)),colors[item.kind]);draw_rect(Rect2(q-Vector2(9,6),Vector2(18,12)),Color("584c32"),false,2)
+			BoardArt.draw_resource(self,q,item.kind)
 		else: draw_line(q + Vector2(-5, 6), q + Vector2(6, -8), Color("eee8cf"), 5)
 		if item.get("amount",1)>1:label_on(self,q+Vector2(8,-5),str(item.amount),12,UI.PAPER)
 	for a in world.workers.values():
 		var carried=world.Stock.cargo(world,a.work_key)
 		if not carried.is_empty():
-			var q=center(a.pos)+Vector2(13,-24);draw_rect(Rect2(q,Vector2(14,12)),Color("c69b65"));label_on(self,q+Vector2(15,9),str(carried[0].amount),12,UI.PAPER)
+			var q=center(a.pos)+Vector2(15,-24);BoardArt.draw_resource(self,q,carried[0].kind);label_on(self,q+Vector2(12,9),str(carried[0].amount),12,UI.PAPER)
 	for a in world.animals+world.enemies:
 		if a.get("species")=="doberman" and a.has("visual_death_tick") and (world.tick-a.visual_death_tick)*world.DT<ProgressArt.duration("doberman","death"):
 			Delivered.draw_clip(self,ProgressArt.clip("doberman","death",a.get("facing",1)),center(a.pos)+Vector2(0,14),(world.tick-a.visual_death_tick)*world.DT)
@@ -1956,13 +1972,13 @@ func draw_hud():
 			if j.id!=hover_job:continue
 			var p=(pointer+Vector2(18,20)).clamp(Vector2(12,54),Vector2(985,668))
 			hud.draw_style_box(MarketView.panel(UI.PAPER,UI.WOOD),Rect2(p,Vector2(274,68)))
-			label_on(hud,p+Vector2(12,25),"ID%d · %s"%[j.id,job_title(j)],17,UI.INK)
+			label_on(hud,p+Vector2(12,25),job_title(j)+" · "+Presentation.work_state(j),15,UI.INK)
 			label_on(hud,p+Vector2(12,51),"取消は一覧の×か対象付近のボタン"+("（着工分は一部返却）" if j.started else ""),13,UI.INK)
 	if hover_job >= 0:
 		for i in range(world.jobs.size()):
 			if world.jobs[i].id == hover_job:
 				if queue_row_y.has(hover_job):hud.draw_rect(Rect2(1007,queue_row_y[hover_job]-3,253,34),Color("ffe2a3"),false,2)
-	hud.draw_rect(Rect2(0, 49, 1280, 703), Color(0.04, 0.07, 0.22, night_tint))
+	hud.draw_rect(Rect2(0, 49, 1280, 703), Color(0.03, 0.06, 0.20, night_tint_target()))
 	if cinematic(): return
 	if world.phase == "shop" or field_book or field_shop:
 		draw_shop()
@@ -2019,17 +2035,20 @@ func draw_hud():
 	for i in range(4):
 		var kind = ["soil", "wood", "stone", "gold"][i]
 		BoardArt.draw_resource(hud, Vector2(162 + i * 115, 24), kind)
-		label_on(hud, Vector2(181 + i * 115, 31), ("∞" if kind!="gold" and world.debug_enabled and world.debug_infinite else ("%dG"%world.campaign.gold if kind=="gold" else "%s %d"%[Farm.Work.Policy.LABELS.get(kind,{"soil":"土","wood":"木材","stone":"石"}[kind]),world.resource_amount(kind)])), 17)
+		label_on(hud, Vector2(181 + i * 115, 31), ("∞" if kind!="gold" and world.debug_enabled and world.debug_infinite else ("%dG"%world.campaign.gold if kind=="gold" else "%s %d"%[Farm.Work.Policy.LABELS.get(kind,{"soil":"土","wood":"木材","stone":"石"}[kind]),world.Stock.summary(world,kind).owned])), 17)
+		if kind!="gold" and not (world.debug_enabled and world.debug_infinite) and world.Stock.summary(world,kind).available!=world.Stock.summary(world,kind).owned:
+			label_on(hud,Vector2(181+i*115,44),"使える %d"%world.Stock.summary(world,kind).available,10,UI.INK)
 	if Rect2(142, 0, 480, 49).has_point(pointer):
 		var index=clampi(int((pointer.x-142)/115),0,3)
 		var kind=["soil","wood","stone","gold"][index]
-		panel(Rect2(145,50,520,80))
+		panel(Rect2(145,50,520,108))
 		if kind=="gold":label_on(hud,Vector2(154,73),"所持金 %dG · 商人との取引に使います"%world.campaign.gold,14)
 		else:
 			var summary=world.Stock.summary(world,kind)
 			label_on(hud,Vector2(154,72),"%s · 所有%d / 利用可%d / 備蓄%d"%[{"soil":"土","wood":"木材","stone":"石"}[kind],summary.owned,summary.available,summary.stored],14)
 			label_on(hud,Vector2(154,96),"運搬中%d / 工事現場%d / 禁止%d / 予約%d"%[summary.carried,summary.site,summary.forbidden,summary.reserved],14)
-			label_on(hud,Vector2(154,120),"利用可＝禁止・予約外の地上物資（経路は別判定）。",12)
+			label_on(hud,Vector2(154,120),"上は総所有数。備蓄・携行・現場はその内訳です。",12)
+			label_on(hud,Vector2(154,146),"使える数は未禁止・未予約の地上在庫。全員で共有します。",12)
 	hud.draw_texture_rect(UI.icon({"morning":"sunrise","day":"sun","night":"moon"}[world.Cycle.period(world)]),Rect2(688,12,24,24),false)
 	label_on(hud, Vector2(720, 31), clock_label_text(), 18)
 	panel(Rect2(0, 748, 505, 52))
@@ -2166,47 +2185,8 @@ func resource_text(values: Dictionary) -> String:
 	return "0" if parts.is_empty() else " / ".join(parts)
 
 func setup_menu():
-	menu = Control.new()
-	menu.size = Vector2(1280, 800)
-	menu.mouse_filter = Control.MOUSE_FILTER_STOP
-	controls.add_child(menu)
-	var shade = ColorRect.new()
-	shade.size = Vector2(1280, 800)
-	shade.color = Color(0.03, 0.08, 0.06, 0.88)
-	menu.add_child(shade)
-	var title = Label.new()
-	title.text = "メニュー"
-	title.position = Vector2(570, 250)
-	title.add_theme_font_size_override("font_size", 28)
-	menu.add_child(title)
-	add_button(menu, "menu_resume", "続ける", Rect2(480, 320, 320, 50), toggle_menu)
-	add_button(menu, "menu_retry", "昼からやり直す", Rect2(480, 390, 320, 50), restart_menu)
-	add_button(menu, "menu_morning", "今朝からやり直す", Rect2(480, 460, 320, 50), restart_morning)
-	var stamp=Label.new()
-	var metadata=JSON.parse_string(FileAccess.get_file_as_string("res://game/build_stamp.json")) if FileAccess.file_exists("res://game/build_stamp.json") else {}
-	stamp.text="ビルド "+str(metadata.get("commit","未記録"))+(" + 未コミット変更" if metadata.get("dirty",true) else "")
-	stamp.text+="  素材 "+str(metadata.get("asset_delivery_commit","未記録")).left(8)
-	add_button(menu,"menu_save","保存",Rect2(480,520,154,36),ColonyPanels.research_save.bind(self))
-	add_button(menu,"menu_load","読込",Rect2(646,520,154,36),ColonyPanels.research_load.bind(self))
-	stamp.position=Vector2(480,574)
-	stamp.add_theme_font_size_override("font_size",14)
-	menu.add_child(stamp)
-	var guide = Label.new()
-	guide.text = "ホイール：操作選択　Ctrl＋ホイール：ズーム　Tab：モード　Shift：指示対象\n壁を選んでドラッグ：連続予約（右クリック / Escで取消）　未選択：マップ移動\n左クリック：選択・行動　右クリック：選択解除 / 市場で戻る　予定取消は×\n1：0.5倍　2：1倍　3：2倍　4：4倍（休息中）　操作ボタンのドラッグ：並べ替え\nSpace：停止 / 再開　−：遅く　＋ / ＝ / テンキー＋：速く\n夜まで / 朝まで休む：別の時間送り（中断して倍率を変更）"
-	guide.position=Vector2(288,590)
-	guide.add_theme_font_size_override("font_size",13)
-	guide.add_theme_constant_override("line_spacing",-6)
-	guide.name="ControlGuide"
-	menu.add_child(guide)
-	var boundary_note=Label.new();boundary_note.name="SaveBoundaryNote"
-	boundary_note.position=Vector2(288,720);boundary_note.add_theme_font_size_override("font_size",16)
-	boundary_note.text=Clarity.SAVE_BOUNDARY
-	menu.add_child(boundary_note)
-	var save_label=Label.new();save_label.name="MenuSaveStatus"
-	save_label.position=Vector2(288,752);save_label.size=Vector2(720,40);save_label.text=save_status
-	save_label.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART;save_label.add_theme_font_size_override("font_size",14)
-	menu.add_child(save_label)
-	menu.visible = false
+	menu=Control.new();menu.size=Vector2(1280,800);menu.mouse_filter=Control.MOUSE_FILTER_STOP;controls.add_child(menu)
+	ColonyMenu.build(self);menu.visible=false
 
 func toggle_menu():
 	cancel_wall_stroke()
@@ -2215,6 +2195,7 @@ func toggle_menu():
 		menu_open = false
 	else:
 		menu_was_paused = world.paused
+		menu_page="main";ColonyMenu.build(self)
 		world.paused = true
 		menu_open = true
 		keys_down.clear()
@@ -2563,7 +2544,7 @@ func draw_cat(p: Vector2, animal: Dictionary = {}):
 
 func draw_queue_badge(row: Button, number: int):
 	row.draw_style_box(UI.surface(UI.PAPER),Rect2(5,3,27,25))
-	label_on(row,Vector2(12,22),str(number),17,UI.INK)
+	label_on(row,Vector2(12,22),"•",17,UI.INK)
 
 func draw_queue_drag():
 	if queue_drag_id < 0 or pointer.distance_to(queue_drag_start)<7: return
@@ -2664,20 +2645,20 @@ func draw_companion_card():
 			var explanation=Clarity.dog(world,a)
 			hud.draw_style_box(companion_box(),Rect2(16,549,344,58))
 			for i in range(explanation.size()): label_on(hud,Vector2(28,571+i*23),explanation[i],14,UI.PAPER)
-		hud.draw_style_box(companion_box(), Rect2(16, 609, 344, 80))
+		hud.draw_style_box(companion_box(), Rect2(16, 609, 344, 94))
 		draw_card_icon(hud, a.species, Vector2(54, 650), 0.85)
 		label_on(hud, Vector2(90, 634), Farm.animal_name(a), 20)
 		label_on(hud, Vector2(287, 633), "Lv%d" % a.lv, 15, Color("a8b9a3"))
 		hud.draw_rect(Rect2(91, 646, 150, 9), Color("293d35"))
 		hud.draw_rect(Rect2(91, 646, 150.0 * a.hp / a.max_hp, 9), Color("90c19b") if a.hp > a.max_hp * 0.3 else Color("df947a"))
 		var resting = a.mode == "rest" or a.state == "自主休養"
-		var state = "Zz" if resting or a.hp <= 0 else ("!" if a.rescuing else ("…" if a.mode == "stay" else "♪"))
+		var state = "✦" if a.hp<=0 else "Zz" if resting else ("!" if a.rescuing else ("…" if a.mode == "stay" else "♪"))
 		label_on(hud, Vector2(260, 660), state, 25, Color("edd49f"))
 		var caption = "気絶" if a.hp <= 0 else ("助けに行く！" if a.rescuing else ("休息" if resting else ("そばにいるよ" if a.mode == "stay" else "気ままに")))
 		caption += " · " + Farm.ProgressData.ITEMS.get(a.get("equipment",{}).get("item_id",""),{}).get("name","装備なし")
-		label_on(hud, Vector2(92, 678), "%d / %d" % [a.hp, a.max_hp] if Rect2(16, 609, 344, 80).has_point(pointer) else caption, 14, Color("b9c9b5"))
+		label_on(hud, Vector2(92, 696), "%d / %d" % [a.hp, a.max_hp] if Rect2(16, 609, 344, 94).has_point(pointer) else caption, 14, Color("b9c9b5"))
 		draw_gauge(hud,a,Vector2(92,655))
-		if selected_animals.size() > 1: label_on(hud, Vector2(301, 677), "×%d" % selected_animals.size(), 16)
+		if selected_animals.size() > 1: label_on(hud, Vector2(301, 696), "×%d" % selected_animals.size(), 16)
 
 func companion_box() -> StyleBox:
 	return UI.surface(UI.MOSS)
@@ -2732,9 +2713,37 @@ func carried_keeper_rect() -> Rect2:
 func clock_label_text() -> String:
 	return world.Cycle.label(world)
 
+func refresh_rest_button():
+	if not world.working():return
+	buttons.advance.visible=not field_book and not field_shop and story_modal==""
+	buttons.advance.text=rest_button_text()
+	var why=world.Life.rest_until_reason(world,Presentation.rest_target(world)) if world.rest_skip.is_empty() else ""
+	buttons.advance.disabled=cinematic() or save_load_blocked or why!=""
+	buttons.advance.tooltip_text=why if why!="" else ("途中で止められます。世界も通常の休息と同じように進みます" if world.rest_skip.is_empty() else "時間送りを止めます")
+
+func refresh_threat_button():
+	if not buttons.has("threats"):return
+	var enemies=Presentation.threats(world)
+	buttons.threats.visible=world.working() and not field_book and not field_shop and story_modal=="" and not enemies.is_empty()
+	buttons.threats.text=("残る敵 " if world.Cycle.period(world)!="night" else "敵 ")+"%d体"%enemies.size()
+	buttons.threats.tooltip_text="敵が残っています。押すと近い敵の位置を確認します"
+
+func focus_threat():
+	var enemies=Presentation.threats(world)
+	if enemies.is_empty():return
+	enemies.sort_custom(func(a,b):return world.distance(world.keeper.pos,a.pos)<world.distance(world.keeper.pos,b.pos))
+	neutral();selected={"kind":"enemy","id":enemies[0].id};camera.position=center(enemies[0].pos);clamp_camera();camera.force_update_scroll();refresh()
+
+func night_tint_target() -> float:
+	var minute=world.Cycle.clock(world).minute_of_day()
+	if minute>=1200 or minute<300:return 0.38
+	if minute>=1080:return lerpf(0.0,0.38,float(minute-1080)/120.0)
+	if minute<360:return lerpf(0.22,0.0,float(minute-300)/60.0)
+	return 0.0
+
 func rest_button_text() -> String:
 	if not world.rest_skip.is_empty(): return "時間送りを中断"
-	if world.phase=="day": return "夜まで休む"
+	if Presentation.rest_target(world)=="night": return "夜まで休む"
 	return "朝まで休む"
 
 func build_debug_controls():
@@ -2928,7 +2937,7 @@ func draw_keeper_actor():
 	if world.keeper.carrier < 0:
 		if selected.get("kind") == "keeper": draw_rect(keeper_hit_rect(), Color("ffe2a3"), false, 2)
 		if Farm.Life.presentation(world) in ["settling", "sleeping"]:
-			label_on(self, owner_pixel + Vector2(15, -20), "…" if Farm.Life.presentation(world)=="settling" else "Zzz", 18, Color("dce8c2"))
+			label_on(self, owner_pixel + Vector2(15, -20), "…" if Farm.Life.presentation(world)=="settling" else "Zz", 12, Color("dce8c2"))
 		elif Farm.Life.presentation(world) in ["drowsy", "tired", "exhausted"]:
 			var severe = world.keeper.sleepiness > 80
 			var tired = Color("edba89") if severe else Color("e3d3a8")
@@ -2945,6 +2954,10 @@ func draw_keeper_actor():
 					draw_rect(Rect2(owner_pixel+Vector2(-17-i*4,drift-4),Vector2(3,4)),Color(0.24,0.25,0.29,0.38*(1-drift/20)))
 			elif fmod(visual_time,9) < 1.2:
 				draw_arc(owner_pixel+Vector2(1,-3),3,0,TAU,8,tired,1.5)
+		if world.keeper.has("meal_remaining"):
+			draw_line(owner_pixel+Vector2(10,8),owner_pixel+Vector2(23,8),UI.PAPER,2)
+			draw_circle(owner_pixel+Vector2(17,4),3,Color("c3935b"))
+			draw_line(owner_pixel+Vector2(13,-9),owner_pixel+Vector2(8,-17+sin(visual_time*7)*2),UI.PAPER,2)
 		if world.tick < world.keeper.get("whistle_until",-1): label_on(self,owner_pixel+Vector2(16,-22),"♪",20,Color("f1d99d"))
 		if world.keeper.state == "unconscious": draw_down_stars(owner_pixel)
 		elif world.keeper.state=="hidden_rest":

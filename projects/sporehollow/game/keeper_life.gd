@@ -16,13 +16,17 @@ const DRINKS = {"coffee": 12.0, "energy_drink": 25.0}
 
 static func rest_until_reason(w, target: String) -> String:
 	if not w.working(): return "今は休息できません"
+	if target not in ["night","dawn"]:return "休息の行き先を確認してください"
+	if w.keeper.get("drafted",false):return "徴兵を解除してください"
 	if w.keeper.get("nutrition_down",false):return "栄養失調で行動不能です。手元の食料を待っています"
 	if w.keeper.state != "free" or w.keeper.carrier >= 0: return "牧場主が行動できません"
 	if w.jobs.any(func(j): return j.kind=="animal_order" and j.order=="guide"): return "仲間の誘導を先に終えてください"
-	if target == "night" and w.phase != "day": return "昼のみ使えます"
-	if target == "dawn" and (w.phase != "defend" or w.config.repeat_waves or w.schedule_index < w.spawn_schedule.size() or not w.enemies.all(func(e):return e.done or e.flee)):
-		return "襲来がまだ終わっていません"
-	if w.enemies.any(func(e):return not e.done and not e.flee): return "敵が近くにいます"
+	var period=w.Cycle.period(w)
+	if target=="night" and period=="night":return "夜は朝までの休息を選んでください"
+	if target=="dawn" and period!="night":return "朝までの休息は夜に使えます"
+	if w.story.idol.get("state","") in ["preparing","transporting"]:return "黄金像の搬出を止めてください"
+	if not preload("res://game/colony_ui_state.gd").threats(w).is_empty():return "敵が残っています"
+	if target=="dawn" and (w.config.repeat_waves or w.schedule_index<w.spawn_schedule.size()):return "襲来の予定が残っています"
 	return ""
 
 static func plan_rest_until(w, target: String) -> bool:
@@ -57,7 +61,7 @@ static func check_rest_until(w):
 	if w.rest_skip.is_empty(): return
 	if w.danger_serial != w.rest_skip.danger or w.keeper.state!="free":
 		stop_rest_until(w,"danger")
-	elif w.rest_skip.target=="night" and w.phase!="day": stop_rest_until(w,"nightfall")
+	elif w.rest_skip.target=="night" and w.Cycle.period(w)=="night": stop_rest_until(w,"nightfall")
 
 static func factor(w) -> float:
 	return (0.6 if w.keeper.sleepiness >= 80 else 1.0)*w.Nutrition.factor(w.keeper)
@@ -81,6 +85,7 @@ static func danger(w, kind: String):
 static func command(w, kind: String, p: Vector2i) -> bool:
 	var k = w.keeper
 	if not w.working() or k.get("nutrition_down",false): return false
+	if k.get("drafted",false) and kind in ["keeper_rest","resume_jobs","wake_hidden"]:return false
 	if kind=="wake_hidden" or (kind=="keeper_rest" and k.state=="hidden_rest"):
 		if not can_wake_hidden(w):return false
 		if w.paused:k.pending_command={"kind":"wake_hidden","pos":p};return true

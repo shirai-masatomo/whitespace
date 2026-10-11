@@ -60,12 +60,19 @@ static func set_priority(w,key: String,kind: String,value: int):
 	interrupt(w,key,"優先設定を再評価")
 
 static func set_drafted(w,key: String,value: bool):
-	if not w.workers.has(key):return
-	w.workers[key].drafted=value
+	if not w.workers.has(key):return false
+	var actor=w.workers[key]
+	if value and (not actor.get("placed",false) or actor.get("hp",0)<=0 or actor.get("state","")!="free" or actor.get("forced_rest",false) or actor.get("nutrition_down",false) or actor.get("carrier",-1)>=0):return false
+	if value:
+		w.Food.interrupt(w,actor)
+		if key=="keeper":w.Life.stop_rest_until(w,"drafted");w.Life.set_rest(w,false);actor.erase("pending_command")
+		else:actor.resting=false
+	actor.drafted=value
 	if not value and key=="keeper":
 		for j in w.jobs.duplicate():
 			if j.get("direct_control",false):w.Jobs.cancel(w,j.id)
 	interrupt(w,key,"徴兵中" if value else "仕事に復帰")
+	return true
 
 static func reason(w,key: String,a) -> String:
 	if a.get("dead",false) or a.get("lost",false):return "離脱"
@@ -98,7 +105,7 @@ static func missing(w,j) -> bool:
 
 static func block(w,j,why: String):
 	if j.get("notified_block","")!=why:
-		w.PlayerEvents.add(w,"仕事 #%d：%s"%[j.id,why],"work_block:%d"%j.id);j.notified_block=why
+		w.PlayerEvents.add(w,preload("res://game/colony_ui_state.gd").work_name(w,j)+"："+why,"work_block:%d"%j.id);j.notified_block=why
 	release(w,j)
 	j.state="blocked";j.block_reason=why
 	j.retry_at=w.tick+ceili(Policy.RETRY_SECONDS/w.DT)

@@ -112,11 +112,11 @@ static func execute(w,j,actor):
 	if j.kind=="mine":
 		var amount=w.rocks[j.pos].amount;w.rocks.erase(j.pos);save(w)
 		var output=w.Stock.add(w,"stone",amount,j.pos);output.mining_job_id=j.id
-		w.PlayerEvents.add(w,"採掘完了：現地に石%d個（仮）"%amount,"mine_done:%d"%j.id)
+		w.PlayerEvents.add(w,"採掘完了：現地に石%d個"%amount,"mine_done:%d"%j.id)
 	else:
 		var a=w.Orders.animal(w,j.animal_id);var before=a.loyalty
 		a.loyalty=mini(100,a.loyalty+TRAIN_GAIN);a.last_training_day=w.last_daily_day
 		for owned in w.campaign.animals:
 			if owned.id==a.id:owned.loyalty=a.loyalty;owned.last_training_day=a.last_training_day
-		w.PlayerEvents.add(w,w.animal_name(a)+"の調教完了：基礎忠誠 %d → %d（仮）"%[before,a.loyalty],"train_done:%d"%j.id)
+		w.PlayerEvents.add(w,w.animal_name(a)+"の調教完了：基礎忠誠 %d → %d"%[before,a.loyalty],"train_done:%d"%j.id)
 	w.Jobs.complete(w,j,true)

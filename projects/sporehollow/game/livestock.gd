@@ -62,7 +62,7 @@ static func designate(w,id: int) -> bool:
 	var j={"id":w.next_job_id,"kind":"slaughter","pos":a.pos,"animal_id":id,"state":"pending","resource":"","reserved":0,"started":false,"work_category":"animal","work_elapsed":0.0,"explicit_designation":true}
 	w.next_job_id+=1;w.jobs.append(j);w.Life.wake_auto(w)
 	w.job_log.append({"tick":w.tick,"event":"queued","id":j.id,"kind":"slaughter","animal_id":id})
-	w.PlayerEvents.add(w,w.animal_name(a)+"のと殺を予約。現地作業後に肉%d個（仮）"%MEAT[a.species],"slaughter_plan:%d"%j.id)
+	w.PlayerEvents.add(w,w.animal_name(a)+"のと殺を予約。現地作業後に肉%d個"%MEAT[a.species],"slaughter_plan:%d"%j.id)
 	return true
 
 static func held(w,a) -> bool:
@@ -91,5 +91,5 @@ static func execute(w,j,actor):
 	w.campaign.animal_history.append({"id":a.id,"species":a.species,"name":a.get("name",""),"day":w.campaign.day,"reason":"slaughter","job_id":j.id,"meat":amount})
 	w.campaign.animals=w.campaign.animals.filter(func(row):return row.id!=a.id)
 	var output=w.Stock.add(w,"meat",amount,at);output.slaughter_animal_id=a.id;output.slaughter_job_id=j.id
-	w.PlayerEvents.add(w,w.animal_name(a)+"のと殺が完了。現地に肉%d個（仮）"%amount,"slaughter_done:%d"%j.id)
+	w.PlayerEvents.add(w,w.animal_name(a)+"のと殺が完了。現地に肉%d個"%amount,"slaughter_done:%d"%j.id)
 	w.Jobs.complete(w,j,true)

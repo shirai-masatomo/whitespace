@@ -52,7 +52,8 @@ static func daily(w,day: int):
 	w.merchant_arrive_tick=w.tick+ceili(w.MERCHANT_DELAY/w.DT)
 	w.merchant_leave_at=w.tick*w.DT+w.MERCHANT_DELAY+w.MERCHANT_SECONDS
 	w.shop_stock=w.Shop.generate(w.stage,w.seed_value+day,w.campaign.unlocked_blueprints,day)
-	w.PlayerEvents.add(w,"%d日目の朝。作業と残っている敵は続きます"%day,"calendar_morning:%d"%day)
+	var remaining=preload("res://game/colony_ui_state.gd").threats(w).size()
+	w.PlayerEvents.add(w,("%d日目の朝。敵%d体がまだ残っています"%[day,remaining]) if remaining>0 else "%d日目の朝になりました"%day,"calendar_morning:%d"%day)
 	w.campaign.last_daily_day=day;w.campaign.calendar_ticks=w.calendar_ticks
 
 static func step(w):
@@ -60,7 +61,7 @@ static func step(w):
 	for boundary in boundaries:
 		if boundary.period=="morning":
 			w.phase="day";daily(w,boundary.calendar_day)
-			if w.rest_skip.get("target","")=="dawn":w.Life.stop_rest_until(w,"morning");w.Life.set_rest(w,false)
+			if w.rest_skip.get("target","")=="dawn":w.Life.stop_rest_until(w,"morning")
 		elif boundary.period=="night":w.start_night()
 		elif boundary.period=="day":supplies(w,boundary.calendar_day)
 	if w.working():w.phase="defend" if c.period()=="night" else "day"
@@ -79,7 +80,7 @@ static func settle_incidents(w):
 			w.Progression.Encounters.record_win(result_campaign,w.seed_value+incident.day)
 			w.campaign.route_progress=result_campaign.route_progress
 			w.campaign.gold+=32;w.campaign.exp_pool+=16
-			w.PlayerEvents.add(w,"%d日目の襲撃が終了。+32G / 経験16（仮）"%incident.day,"raid_done:"+incident.id)
+			w.PlayerEvents.add(w,"%d日目の襲撃が終了。+32G / 経験16"%incident.day,"raid_done:"+incident.id)
 
 static func supplies(w,day: int):
 	if day<=int(w.campaign.get("last_supply_day",0)):return
@@ -87,4 +88,4 @@ static func supplies(w,day: int):
 	for kind in ["wood","mushroom"]:
 		var row=w.Stock.add(w,kind,8 if kind=="wood" else 3,w.logistics_entry)
 		row.supply_day=day
-	w.PlayerEvents.add(w,"物資が届きました：入口に木材8・キノコ3。運搬・食事に利用できます（昼1回・仮）","supplies:%d"%day)
+	w.PlayerEvents.add(w,"木材8・キノコ3が届きました。入口で受け取れます","supplies:%d"%day)

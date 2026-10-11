@@ -29,7 +29,7 @@ static func designate(w,id: int) -> bool:
 	w.next_job_id+=1;w.manual_goal=null;return true
 static func equip(w,item: String) -> bool:
 	var a=w.keeper
-	if not w.working() or not w.Life.able(w) or item not in [STAFF,"unequip"] or w.jobs.size()>=w.Jobs.LIMIT:return false
+	if not w.working() or a.get("drafted",false) or not w.Life.able(w) or item not in [STAFF,"unequip"] or w.jobs.size()>=w.Jobs.LIMIT:return false
 	if w.jobs.any(func(j):return j.kind=="keeper_equipment"):return false
 	if item=="unequip" and a.get("equipment",{}).is_empty():return false
 	if item!= "unequip" and w.Stock.available(w,item)<1:return false

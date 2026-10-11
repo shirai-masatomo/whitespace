@@ -5,8 +5,8 @@ static func draw_ground(c: CanvasItem, world, tile: Vector2, time: float = 0):
 	var inv=c.get_canvas_transform().affine_inverse()
 	var top=inv*Vector2.ZERO;var bottom=inv*Vector2(1280,800)
 	c.draw_rect(Rect2(top-Vector2(100,100),bottom-top+Vector2(200,200)),Color("344c3b"))
-	for y in range(world.H):
-		for x in range(world.W):
+	for y in range(maxi(0,floori(top.y/tile.y)-1),mini(world.H,ceili(bottom.y/tile.y)+1)):
+		for x in range(maxi(0,floori(top.x/tile.x)-1),mini(world.W,ceili(bottom.x/tile.x)+1)):
 			var p = Vector2(x, y) * tile
 			var patch = (sin(x * 0.37 + y * 0.29) + sin(x * 0.19 - y * 0.48) + 2) * 0.25
 			var color = Color("637c48").lerp(Color("90a562"), patch * 0.75)
@@ -25,8 +25,9 @@ static func draw_ground(c: CanvasItem, world, tile: Vector2, time: float = 0):
 				c.draw_line(q, q + Vector2(2 + sway, -4), Color("91a961"), 2)
 				c.draw_line(q + Vector2(3, 0), q + Vector2(5, -5), Color("617c45"), 2)
 			if n < 19:
-				c.draw_rect(Rect2(p + Vector2(12, 23), Vector2(23, 7)), Color("a0a06a"))
-				c.draw_rect(Rect2(p + Vector2(17, 20), Vector2(11, 3)), Color("96955f"))
+				for dot in range(5):
+					var at=p+Vector2(6+(n*7+dot*11)%35,12+(n*3+dot*5)%20)
+					c.draw_rect(Rect2(at,Vector2(3+dot%3,2)),Color("8c975f"))
 			if n > 124:
 				c.draw_rect(Rect2(p + Vector2(31, 20), Vector2(3, 3)), Color("ded3a2"))
 	c.draw_rect(Rect2(Vector2.ZERO,Vector2(world.W,world.H)*tile),Color("d4c89d"),false,3)
