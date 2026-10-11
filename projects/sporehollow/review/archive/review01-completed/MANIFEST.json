@@ -1,0 +1,294 @@
+{
+  "implementation_commit": "0ea36feeb3d3f68862577ce2a8303355a22bc7fa",
+  "implementation_changes_commit": "47bb905c638950cfcb2c0b96946e6fb944eeb83f",
+  "base_local_head": "48685b697c80fd2b79f128b8fe64aa3ca9f9087c",
+  "asset_delivery_commit_from_existing_stamp": "b0e917a11f205190dde0136165a72c189f39e275",
+  "asset_change": "none",
+  "exe_sha256": "B939AB0CF8E29CEB35DDA9216BCED4A3A79834E527EF3BF7D991F7F573194C32",
+  "headless": [
+    {
+      "file": "tests/colony_tasks09/colony-tasks09.json",
+      "checks": 26,
+      "failures": 0
+    },
+    {
+      "file": "tests/completion09/completion09.json",
+      "checks": 20,
+      "failures": 0
+    },
+    {
+      "file": "tests/cycle09/cycle09.json",
+      "checks": 23,
+      "failures": 0
+    },
+    {
+      "file": "tests/cycle09/restart.json",
+      "checks": 2,
+      "failures": 0
+    },
+    {
+      "file": "tests/directive09_unit1/directive09-unit1.json",
+      "checks": 36,
+      "failures": 0
+    },
+    {
+      "file": "tests/explicit_storage/explicit-storage.json",
+      "checks": 11,
+      "failures": 0
+    },
+    {
+      "file": "tests/livestock09/livestock09.json",
+      "checks": 23,
+      "failures": 0
+    },
+    {
+      "file": "tests/negotiation/negotiation.json",
+      "checks": 15,
+      "failures": 0
+    },
+    {
+      "file": "tests/nutrition09/nutrition.json",
+      "checks": 17,
+      "failures": 0
+    },
+    {
+      "file": "tests/review01/review01.json",
+      "checks": 19,
+      "failures": 0
+    },
+    {
+      "file": "tests/work_food_chain/restart.json",
+      "checks": 3,
+      "failures": 0
+    },
+    {
+      "file": "tests/work_food_chain/work-food-chain.json",
+      "checks": 33,
+      "failures": 0
+    },
+    {
+      "file": "tests/zones09/zones09.json",
+      "checks": 17,
+      "failures": 0
+    }
+  ],
+  "gpu": [
+    {
+      "file": "gpu/verified/review01-ui.json",
+      "checks": 19,
+      "failures": 0
+    },
+    {
+      "file": "gpu/completion/completion-ui.json",
+      "checks": 9,
+      "failures": 0
+    },
+    {
+      "file": "gpu/survival/survival-ui.json",
+      "checks": 7,
+      "failures": 0
+    },
+    {
+      "file": "gpu/negotiation/negotiation-ui.json",
+      "checks": 17,
+      "failures": 0
+    }
+  ],
+  "native": [
+    {
+      "file": "native/close-entry.json",
+      "checks": 2,
+      "passed": true
+    },
+    {
+      "file": "native/resume-entry.json",
+      "checks": 3,
+      "passed": true
+    }
+  ],
+  "screenshots": [
+    {
+      "file": "screenshots/01_導入と最初の行動.png",
+      "source_capture": "gpu/verified/01-introduction-goal.png",
+      "note": "導入をスキップせず最後のページまで操作",
+      "dimensions": [
+        1280,
+        800
+      ],
+      "implementation_commit": "0ea36feeb3d3f68862577ce2a8303355a22bc7fa",
+      "sha256": "326337f36e9ffa4c0f06d71b3e13912d7912716464b3fbf2a11b007eb966be7c"
+    },
+    {
+      "file": "screenshots/02_建築の連続指定.png",
+      "source_capture": "gpu/verified/02-architect-plans.png",
+      "note": "停止中の土壁ドラッグ・予定ID",
+      "dimensions": [
+        1280,
+        800
+      ],
+      "implementation_commit": "0ea36feeb3d3f68862577ce2a8303355a22bc7fa",
+      "sha256": "d3ed87c64e51d3ba82593a1c3de713746b61944d8fd209b179caeaf21acf0426"
+    },
+    {
+      "file": "screenshots/03_備蓄と居住ゾーン.png",
+      "source_capture": "gpu/verified/03-stockpile-residential.png",
+      "note": "アーキテクトでゾーン指定。ゾーンだけでは運搬しない",
+      "dimensions": [
+        1280,
+        800
+      ],
+      "implementation_commit": "0ea36feeb3d3f68862577ce2a8303355a22bc7fa",
+      "sha256": "ac118c7493a1fdcd1b6ca09759c634df6a888e2afa893cfcba0da611dfc67360"
+    },
+    {
+      "file": "screenshots/04_禁止の範囲指定.png",
+      "source_capture": "gpu/verified/04-forbid-drag.png",
+      "note": "物資への禁止ドラッグ、解除・回収へ続く操作",
+      "dimensions": [
+        1280,
+        800
+      ],
+      "implementation_commit": "0ea36feeb3d3f68862577ce2a8303355a22bc7fa",
+      "sha256": "944d6b60129ef6b4fa9b4ac3e822d2bca432b3a1da7aa3d610f5f55b9ba4bd98"
+    },
+    {
+      "file": "screenshots/05_現物を運搬.png",
+      "source_capture": "gpu/verified/05-physical-carry.png",
+      "note": "建築に必要な資材の現物受取。到着前に完成しない",
+      "dimensions": [
+        1280,
+        800
+      ],
+      "implementation_commit": "0ea36feeb3d3f68862577ce2a8303355a22bc7fa",
+      "sha256": "1c84eddb737008ac486e757c9f8d4c311da80841c4425fec8bc6bd0f4f682dda"
+    },
+    {
+      "file": "screenshots/06_二人の優先度.png",
+      "source_capture": "gpu/verified/06-two-worker-priorities.png",
+      "note": "検証登録した二人に異なる優先度。通常の募集実装を意味しない",
+      "dimensions": [
+        1280,
+        800
+      ],
+      "implementation_commit": "0ea36feeb3d3f68862577ce2a8303355a22bc7fa",
+      "sha256": "508cdd9f659c542c4d128e0b68b7d8ddce1e5c2a9d14ac3b64c6fbdf09801c7d"
+    },
+    {
+      "file": "screenshots/07_食事中の人物表示.png",
+      "source_capture": "gpu/verified/07-eating.png",
+      "note": "空腹→食料取得→食事。HP・眠気と現在行動",
+      "dimensions": [
+        1280,
+        800
+      ],
+      "implementation_commit": "0ea36feeb3d3f68862577ce2a8303355a22bc7fa",
+      "sha256": "a89dbee595d96200d231f1a654c32aeb4bea16b97c25b88b957eb3f2d7b1d81b"
+    },
+    {
+      "file": "screenshots/08_居住で休息_1920x1080.png",
+      "source_capture": "gpu/verified/08-rest-1920x1080.png",
+      "note": "居住ゾーンへ物理移動して休息",
+      "dimensions": [
+        1728,
+        1080
+      ],
+      "implementation_commit": "0ea36feeb3d3f68862577ce2a8303355a22bc7fa",
+      "sha256": "46b0f6c52241c5a698c909841d86fbfd118fd3a9986f97656f55865e736758b9"
+    },
+    {
+      "file": "screenshots/09_保存読込_1920x1080.png",
+      "source_capture": "gpu/verified/09-save-load-1920x1080.png",
+      "note": "ESC保存・読込。最終コード版表示とメニュー状態",
+      "dimensions": [
+        1728,
+        1080
+      ],
+      "implementation_commit": "0ea36feeb3d3f68862577ce2a8303355a22bc7fa",
+      "sha256": "89289142843338317f84a61b7232f21366b6568b85770b4b6f54b154418a5be1"
+    },
+    {
+      "file": "screenshots/10_図鑑_1920x1080.png",
+      "source_capture": "gpu/verified/10-journal-current-1920x1080.png",
+      "note": "正式な本・8枠・登録数。開く演出完了後",
+      "dimensions": [
+        1728,
+        1080
+      ],
+      "implementation_commit": "0ea36feeb3d3f68862577ce2a8303355a22bc7fa",
+      "sha256": "dd7300a2562b0fdb4d8463852f5c2304b91426c3916ff95c742572d6c4d117f5"
+    },
+    {
+      "file": "screenshots/11_犬の調教.png",
+      "source_capture": "gpu/completion/training-day.png",
+      "note": "実際の調教ボタンで選択個体に予約",
+      "dimensions": [
+        1280,
+        800
+      ],
+      "implementation_commit": "0ea36feeb3d3f68862577ce2a8303355a22bc7fa",
+      "sha256": "45c5ea63f679bbbbd1ab9a93a9ae4bd76c6477281a73516a8ef7e1da2abf00bf"
+    },
+    {
+      "file": "screenshots/12_装備と徴兵攻撃.png",
+      "source_capture": "gpu/completion/equipment-night.png",
+      "note": "夜の制御状態。指定攻撃入力を検証。通常襲来の通し試遊ではない",
+      "dimensions": [
+        1280,
+        800
+      ],
+      "implementation_commit": "0ea36feeb3d3f68862577ce2a8303355a22bc7fa",
+      "sha256": "5e855cd7eb2f70fe8ccad4153a00292bd538448bac3d5df85beacaa141a1c35a"
+    },
+    {
+      "file": "screenshots/13_家畜のと殺予約.png",
+      "source_capture": "gpu/survival/livestock-designation.png",
+      "note": "家畜／ペット・禁止・取消・個体予約",
+      "dimensions": [
+        1280,
+        800
+      ],
+      "implementation_commit": "0ea36feeb3d3f68862577ce2a8303355a22bc7fa",
+      "sha256": "b22e38e2c097814bcfd6fdd36e951fc8205742ecbb3d95b698b0ed4f55ecf0c7"
+    },
+    {
+      "file": "screenshots/14_翌朝に残る敵.png",
+      "source_capture": "gpu/morning/morning-enemy.png",
+      "note": "夜明け直前の設定から実tickで翌朝へ。生存敵が残る",
+      "dimensions": [
+        1280,
+        800
+      ],
+      "implementation_commit": "0ea36feeb3d3f68862577ce2a8303355a22bc7fa",
+      "sha256": "a6cbf0f1af8525b842c0704a95b401794e825bd31401e1a068919b8eeaf1dc49"
+    },
+    {
+      "file": "screenshots/15_商人との会話入口.png",
+      "source_capture": "gpu/negotiation/shop-entry.png",
+      "note": "本人の交渉接近後に買い物／図鑑を選ぶ",
+      "dimensions": [
+        1280,
+        800
+      ],
+      "implementation_commit": "0ea36feeb3d3f68862577ce2a8303355a22bc7fa",
+      "sha256": "ac7f94eb05ce8a7c8d530f66b6e0a7b80add034fa8efa34146f72730b94bcb0c"
+    }
+  ],
+  "human_play": false,
+  "desktop": "Normal GPU desktop permitted by user; dedicated user data",
+  "code_unchanged_between_core_tests_and_final": [
+    "work_policy.gd",
+    "human_work.gd",
+    "physical_stock.gd",
+    "colony_tasks.gd",
+    "livestock.gd"
+  ],
+  "notes": [
+    "Headless core cases verified during 47bb905; final 0ea36fe changes main/journal input and rendering, covered by final GPU and EXE tests.",
+    "No old 13c113f evidence counted.",
+    "Some inherited GPU method strings say private/isolation; these runs use normal visible GPU windows.",
+    "Failed trial captures are not in the 15-image gallery."
+  ],
+  "local_repository_head": "771200edbe58e345b7bea12b8dc7f8ac1e4af6be",
+  "deployment": "deployment.json",
+  "final_audit": "final-audit.json"
+}

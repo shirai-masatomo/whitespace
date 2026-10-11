@@ -1,0 +1,8 @@
+{
+  "public_commit": "1eab797b65ef44198fc317fb7a132b4438475200",
+  "development_commit": "48685b697c80fd2b79f128b8fe64aa3ca9f9087c",
+  "public_game_files": 75,
+  "differences": [
+    "game\\building_art.gd"
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "script": "direct/test_negotiation_capture.gd",
+  "scene": "existing negotiation UI fixture",
+  "screenshots": [
+    "negotiation-menu.png",
+    "shop-entry.png"
+  ],
+  "script_sha256": "B2EBDDE2BF199CE2A8B6769D878EDCAB072D7487ADD6C0D3646CA0DA9B7F3551",
+  "checks": 17,
+  "engine": "Godot 4.7.2",
+  "desktop": "normal visible desktop",
+  "test_data": "direct/source-user-data",
+  "failures": 0,
+  "source_commit": "1eab797b65ef44198fc317fb7a132b4438475200",
+  "world_code_changed": false,
+  "renderer": "gl_compatibility NVIDIA RTX 4070 SUPER"
+}

@@ -1,0 +1,134 @@
+{
+  "date_jst": "2026-10-11",
+  "implementation_commit": "13c113fa542daa9c6c51d7c09cbb7d220cac3176",
+  "latest_asset_delivery": "b0e917a11f205190dde0136165a72c189f39e275",
+  "source_dirty": true,
+  "dirty_reason": "Existing unrelated untracked review documents/directories; status unchanged after verification",
+  "verification": "Source project using Godot 4.7.2, not packaged EXE verification",
+  "normal_save_touched": false,
+  "headless_final_checks": 248,
+  "gpu_checks": 68,
+  "initial_input_attempt": "39/40; data-directory naming assertion failed; corrected harness path and reran only input: 40/40",
+  "screenshots": [
+    {
+      "file": "screenshots/merchant_day/01_day_merchant_arrival.png",
+      "source": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\isolated\\20261011-211223-762\\01_day_merchant_arrival.png",
+      "sha256": "ade5d089f8e34f22efa9cbac346950d2775d89f2ea69b52507db4962f7e186e3",
+      "dimensions": [
+        1280,
+        800
+      ],
+      "scenario": "merchant_day"
+    },
+    {
+      "file": "screenshots/merchant_day/02_shop_from_conversation.png",
+      "source": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\isolated\\20261011-211223-762\\02_shop_from_conversation.png",
+      "sha256": "276e127e8b82a27fe27b1c11a425913bdd650368e238191d2ce43781d7ff6e3d",
+      "dimensions": [
+        1280,
+        800
+      ],
+      "scenario": "merchant_day"
+    },
+    {
+      "file": "screenshots/merchant_day/03_merchant_departed.png",
+      "source": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\isolated\\20261011-211223-762\\03_merchant_departed.png",
+      "sha256": "2d6e56a91df5ee34d3957a9e88a66c815425d2153dd016656fabcd2df280953d",
+      "dimensions": [
+        1280,
+        800
+      ],
+      "scenario": "merchant_day"
+    },
+    {
+      "file": "screenshots/merchant_day/04_conversation_distance.png",
+      "source": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\isolated\\20261011-211223-762\\04_conversation_distance.png",
+      "sha256": "c5d3bdabc8150e8a80a8cf582c644e9f9deba3d748d6ba11192901de6d1959d8",
+      "dimensions": [
+        1280,
+        800
+      ],
+      "scenario": "merchant_day"
+    },
+    {
+      "file": "screenshots/merchant_day/05_adopted_closed_cover.png",
+      "source": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\isolated\\20261011-211223-762\\05_adopted_closed_cover.png",
+      "sha256": "31713c87e6b9b09a6e28ed1a532fdbc1b5a394338e4d129aa8110d4cbdcec3d7",
+      "dimensions": [
+        1280,
+        800
+      ],
+      "scenario": "merchant_day"
+    },
+    {
+      "file": "screenshots/merchant_day/06_book_open.png",
+      "source": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\isolated\\20261011-211223-762\\06_book_open.png",
+      "sha256": "6681efa625c90940dc7a8decc0fac704e961232afc702ce3d8ffeae4d51b2b62",
+      "dimensions": [
+        1280,
+        800
+      ],
+      "scenario": "merchant_day"
+    },
+    {
+      "file": "screenshots/merchant_day/07_cover_opening.png",
+      "source": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\isolated\\20261011-211223-762\\07_cover_opening.png",
+      "sha256": "2995263595b26ef4fe13b3da26c9202e4ce28d8b98ea95591fc8b1bb04afff7f",
+      "dimensions": [
+        1280,
+        800
+      ],
+      "scenario": "merchant_day"
+    },
+    {
+      "file": "screenshots/quality/01_forest_humans.png",
+      "source": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\isolated\\20261011-211240-231\\01_forest_humans.png",
+      "sha256": "f7fd6270fb057f30140f18295f44324f8f82059824e19315138a9ef9ae7ed4ea",
+      "dimensions": [
+        1280,
+        800
+      ],
+      "scenario": "quality"
+    },
+    {
+      "file": "screenshots/quality/02_book_eight_slots.png",
+      "source": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\isolated\\20261011-211240-231\\02_book_eight_slots.png",
+      "sha256": "7e7391a9b0356ea143543d929c480690d29115d59e5d1457184731d675a6d707",
+      "dimensions": [
+        1280,
+        800
+      ],
+      "scenario": "quality"
+    },
+    {
+      "file": "screenshots/quality/03_enemy_skill_hover.png",
+      "source": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\isolated\\20261011-211240-231\\03_enemy_skill_hover.png",
+      "sha256": "10904c471f345234f7c4fe7ad67124ab266757f88708090b072c646c251e812a",
+      "dimensions": [
+        1280,
+        800
+      ],
+      "scenario": "quality"
+    },
+    {
+      "file": "screenshots/quality/04_hidden_rest_event_log.png",
+      "source": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\isolated\\20261011-211240-231\\04_hidden_rest_event_log.png",
+      "sha256": "a4b9e06545fc8782fa6a963cb6f737378a5e459023bda870cccba91f8546019e",
+      "dimensions": [
+        1280,
+        800
+      ],
+      "scenario": "quality"
+    },
+    {
+      "file": "screenshots/quality/05_inventory.png",
+      "source": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\isolated\\20261011-211240-231\\05_inventory.png",
+      "sha256": "98c2ed09a45c34af5cff8d1ba0f7f416d88bd53122676ad81d8f3bf525a867c6",
+      "dimensions": [
+        1280,
+        800
+      ],
+      "scenario": "quality"
+    }
+  ]
+}

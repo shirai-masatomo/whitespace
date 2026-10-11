@@ -1,0 +1,20 @@
+{
+  "scenario": "test_negotiation_ui",
+  "exe": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\autonomy-entry-01\\bundle\\WhistleRanch-Autonomy-Partial.exe",
+  "result": {
+    "PID": 24272,
+    "ThreadID": 34180,
+    "ExitCode": 124,
+    "OwnedWindowCount": 2,
+    "Station": "Service-0x0-bf6d9650$",
+    "Desktop": "Render_3836072613bc4794b1ffc88e72fde3a1",
+    "ObservedDesktop": "Render_3836072613bc4794b1ffc88e72fde3a1",
+    "NonInteractive": true,
+    "DesktopMatched": true,
+    "TimedOut": true
+  },
+  "sha256": "EE5ED75ABD1AF47AE528461CE8F7ACF6FCA7C6F499C9A56FD1FEFE0257A9A2D7",
+  "command": "\"C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\autonomy-entry-01\\bundle\\WhistleRanch-Autonomy-Partial.exe\" --audio-driver Dummy --rendering-method gl_compatibility --max-fps 30 --resolution 1280x800 --log-file \"C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\review\\colony-09-20261011\\screenshots\\test_negotiation_ui/render.log\" --script \"C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\review\\colony-09-20261011\\scripts\\test_negotiation_ui.gd\" -- --isolated-review",
+  "started_utc": "2026-10-11T12:21:24.1089276Z",
+  "script_sha256": "4C76007BBEC352DAC4E3C9C49DCCFA4B17024FFBF9DB6984A6CA4A6C3F8D0702"
+}

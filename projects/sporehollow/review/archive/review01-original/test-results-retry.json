@@ -1,0 +1,31 @@
+{
+  "source_project": "C:/Users/masat/Documents/Codex/2026-10-08/task/whitespace-balance-audit/projects/sporehollow",
+  "head_after": "13c113fa542daa9c6c51d7c09cbb7d220cac3176",
+  "suites": [
+    {
+      "suite": "input",
+      "pid": 29284,
+      "exit_code": 0,
+      "log": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\確認入口\\21_UI_AIレビュー_20261011\\tests\\retry\\input/godot.log",
+      "start_utc": "2026-10-11T12:12:07.3496939Z",
+      "end_utc": "2026-10-11T12:12:13.0375803Z",
+      "failed": false,
+      "timeout": false
+    }
+  ],
+  "status_after": [
+    "?? projects/sporehollow/review/quality-roadmap/EXTERNAL_REVIEW.md",
+    "?? projects/sporehollow/review/quality-roadmap/PHASE1_2_DESIGN_INTENT.txt",
+    "?? projects/sporehollow/review/quality-roadmap/RESEARCH_PROGRESS.txt",
+    "?? projects/sporehollow/review/quality-roadmap/research-cycle-20261010/",
+    "?? projects/sporehollow/review/quality-roadmap/research-cycle-followup-20261010/"
+  ],
+  "status_before": [
+    "?? projects/sporehollow/review/quality-roadmap/EXTERNAL_REVIEW.md",
+    "?? projects/sporehollow/review/quality-roadmap/PHASE1_2_DESIGN_INTENT.txt",
+    "?? projects/sporehollow/review/quality-roadmap/RESEARCH_PROGRESS.txt",
+    "?? projects/sporehollow/review/quality-roadmap/research-cycle-20261010/",
+    "?? projects/sporehollow/review/quality-roadmap/research-cycle-followup-20261010/"
+  ],
+  "head": "13c113fa542daa9c6c51d7c09cbb7d220cac3176"
+}

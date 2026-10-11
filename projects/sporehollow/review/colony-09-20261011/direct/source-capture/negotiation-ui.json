@@ -1,0 +1,74 @@
+{
+	"checks": [
+		{
+			"check": "Merchant left click alone neither opens shop nor selects a default negotiator",
+			"passed": true
+		},
+		{
+			"check": "Right click never opens a merchant instruction",
+			"passed": true
+		},
+		{
+			"check": "Actual keeper click selects person while remaining neutral",
+			"passed": true
+		},
+		{
+			"check": "Left click opens enabled contextual negotiation action for the selected resident",
+			"passed": true
+		},
+		{
+			"check": "Right click closes the action menu without issuing negotiation",
+			"passed": true
+		},
+		{
+			"check": "Choosing negotiation creates an owned move order while shop remains closed",
+			"passed": true
+		},
+		{
+			"check": "The same person reaches merchant before the existing shop opens",
+			"passed": true
+		},
+		{
+			"check": "Conversation stops world time",
+			"passed": true
+		},
+		{
+			"check": "Right click closes conversation and releases the pause",
+			"passed": true
+		},
+		{
+			"check": "Architect left click keeps the building tool instead of opening negotiation",
+			"passed": true
+		},
+		{
+			"check": "Architect mode right click is cancellation, not negotiation",
+			"passed": true
+		},
+		{
+			"check": "Command left click keeps the command instead of opening negotiation",
+			"passed": true
+		},
+		{
+			"check": "Command mode right click is cancellation, not negotiation",
+			"passed": true
+		},
+		{
+			"check": "Zone left click keeps the zone tool instead of opening negotiation",
+			"passed": true
+		},
+		{
+			"check": "Zone mode right click is cancellation, not negotiation",
+			"passed": true
+		},
+		{
+			"check": "Actual support-human click also retains a neutral individual selection",
+			"passed": true
+		},
+		{
+			"check": "Support-human menu instructs that person without registering general autonomous work",
+			"passed": true
+		}
+	],
+	"failures": 0,
+	"method": "Private GPU Godot InputEvent actual board selection, merchant left click, contextual button and right-click close; controlled movement steps; no physical OS input"
+}

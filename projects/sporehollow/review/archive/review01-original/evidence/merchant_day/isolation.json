@@ -1,0 +1,24 @@
+{
+  "executable": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\.tools\\Godot_v4.7.2-stable_win64.exe",
+  "purpose": "merchant_day",
+  "result": {
+    "PID": 31488,
+    "ThreadID": 22712,
+    "ExitCode": 0,
+    "OwnedWindowCount": 2,
+    "Station": "Service-0x0-bf6d9650$",
+    "Desktop": "Render_1871b46f37d848a8bdbb44d8a6bf7dec",
+    "ObservedDesktop": "Render_1871b46f37d848a8bdbb44d8a6bf7dec",
+    "NonInteractive": true,
+    "DesktopMatched": true,
+    "TimedOut": false
+  },
+  "start_utc": "2026-10-11T12:12:24.4761733Z",
+  "parent_pid": 45144,
+  "data_root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\isolated\\20261011-211223-762/user-data",
+  "command": "\"C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\.tools\\Godot_v4.7.2-stable_win64.exe\" --path \"C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\" --audio-driver Dummy --rendering-method gl_compatibility --max-fps 30 --resolution 1280x800 --log-file \"C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\isolated\\20261011-211223-762/render.log\" --script tests/test_merchant_day_ui.gd -- --isolated-review --output=\"C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\isolated\\20261011-211223-762\"",
+  "implementation_commit": "13c113fa542daa9c6c51d7c09cbb7d220cac3176",
+  "dirty": true,
+  "asset_delivery_commit": "b0e917a11f205190dde0136165a72c189f39e275",
+  "end_utc": "2026-10-11T12:12:31.1797757Z"
+}
