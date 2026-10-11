@@ -1,0 +1,102 @@
+{
+	"checks": [
+		{
+			"check": "New start keeps the idol at map center and places keeper on a safe adjacent cell",
+			"passed": true
+		},
+		{
+			"check": "New-start relocation is consumed before any save or daily reload",
+			"passed": true
+		},
+		{
+			"check": "Campaign reload preserves an existing distant keeper position",
+			"passed": true
+		},
+		{
+			"check": "Snapshot reload preserves existing actor position without teleporting",
+			"passed": true
+		},
+		{
+			"check": "Initial camera places both keeper and idol near screen center",
+			"passed": true
+		},
+		{
+			"check": "Mouse press alone does not show grabbing state",
+			"passed": true
+		},
+		{
+			"check": "Neutral map drag moves the camera and selects the closed-hand drag cursor",
+			"passed": true
+		},
+		{
+			"check": "Release restores the normal cursor",
+			"passed": true
+		},
+		{
+			"check": "Camera does not continually follow/recenter after free scrolling",
+			"passed": true
+		},
+		{
+			"check": "Right-click cancellation restores normal cursor",
+			"passed": true
+		},
+		{
+			"check": "Focus loss clears drag and restores normal cursor immediately",
+			"passed": true
+		},
+		{
+			"check": "UI press/motion never activates map grabbing",
+			"passed": true
+		},
+		{
+			"check": "Animal command/selection range drag never activates map grabbing",
+			"passed": true
+		},
+		{
+			"check": "Architect right click returns to neutral without committing: ",
+			"passed": true
+		},
+		{
+			"check": "Architect right click returns to neutral without committing: wood_wall",
+			"passed": true
+		},
+		{
+			"check": "Architect right click returns to neutral without committing: zone_stockpile",
+			"passed": true
+		},
+		{
+			"check": "Right-click cancellation creates no zone or construction even across UI panel",
+			"passed": true
+		},
+		{
+			"check": "Right-click on pressed subtask button clears selection without executing or cancelling jobs",
+			"passed": true
+		},
+		{
+			"check": "Right-click on command UI cancels area preview without issuing collection",
+			"passed": true
+		},
+		{
+			"check": "Load adjusts camera framing to both subjects while preserving saved location",
+			"passed": true
+		},
+		{
+			"check": "Compact role matrix keeps the scheduler's left-to-right column order",
+			"passed": true
+		},
+		{
+			"check": "Table cell clicks apply 1-4/blank cycling to the actual person's priority",
+			"passed": true
+		},
+		{
+			"check": "Priority cells have distinct hover/pressed feedback and explanations",
+			"passed": true
+		}
+	],
+	"failures": 0,
+	"keeper_start": [
+		23,
+		17
+	],
+	"method": "3 scoped groups: placement/save; actual scene pan cursor transitions; framing/no-follow. Private GPU Godot InputEvent, not physical OS input."
+}

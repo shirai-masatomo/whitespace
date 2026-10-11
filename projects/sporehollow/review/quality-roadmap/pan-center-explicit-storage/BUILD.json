@@ -1,0 +1,17 @@
+{
+  "code_commit": "1d2a4af",
+  "scope": "Pan cursor, centered new start, explicit storage hauling, right-click neutral, compact role matrix; global boundary/cleanup/publication still pending",
+  "exe": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\autonomy-entry-01\\bundle\\WhistleRanch-Autonomy-Partial.exe",
+  "sha256": "9bf6b8cfe1e46ddf60bb06f7e0e2b47d1e85770287ea82eeeec6a320e4b012cd",
+  "size": 127502712,
+  "fixed_entry": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\確認入口\\最新開発版.lnk",
+  "launcher": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\autonomy-entry-01\\bundle\\Launch-Autonomy.ps1",
+  "data_root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\autonomy-entry-01\\bundle\\user-data\\WhistleResearchAutonomy",
+  "validation_groups": 4,
+  "native_close_pid": 14384,
+  "native_resume_pid": 27832,
+  "human_play": false,
+  "previous_exe_backup": "C:\\Users\\masat\\AppData\\Local\\Packages\\sandbox.{c3e3f2e8-8527-4105-8cc7-83ed74404381}\\AC\\Temp\\whistle-smallui-rollback\\WhistleRanch-b3ba600d8f98.exe",
+  "previous_sha256": "b3ba600d8f9810af3aedab646b26968d8c77f52c62eab761ed1690741cb814a1",
+  "save_hashes_unchanged": true
+}

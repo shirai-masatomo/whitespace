@@ -1,0 +1,20 @@
+小修正セット / 2026-10-11 / 実装1d2a4af
+開始時点HEAD1de3099/固定EXE91237e8を確認、生成import/uid以外の競合差分なし。
+
+・マップpanの7pxドラッグ開始後だけ握った手、release/right cancel/フォーカス喪失で復帰。UI押下・範囲指定は対象外。Windows標準DRAGが移動矢印へ割り当てられるため32px手形を既存UIコード内SVGから作り、GodotのCURSOR_DRAGに登録。画像生成/外部素材追加なし。
+  根拠: https://raw.githubusercontent.com/godotengine/godot/master/platform/windows/display_server_windows.cpp cursor_set_shape のwin_cursors。手形の見た目はコード内定義。OS入力や対話画面は操作していない。
+・新規開始だけ黄金像anchor(24,16)、牧場主(23,17)、柴犬(22,17)、初期物資(23,18)。安全な隣接候補を確認し、新規markerは保存前に消費。保存済み人物・物資は移送しない。初期/読込カメラは像と人の中点、必要時のみ範囲に応じ縮小。常時追従なし。
+・ゾーンの原因は瞬間移送でなくphysical_stock.stepによる自動haul生成。これを撤去。ゾーン作成/許可種別/サイズ変更/読込では位置・所有・数量を変えず、回収単一/矩形指定が現物jobを作る。建設の材料取得・空腹の食事取得は維持。既存保存に既に記録された仕事/携行は保持し、推測で取り消さない。
+・右click共通解除を_input内のzone/subtasks/UI判定より前へ。Architectカテゴリ/道具/zone/途中drag、サブタスク押下中、命令範囲previewとパネル上からneutralへ。subtask/zone/item previewもclear。設置/回収jobの追加や既存job取消を発火しない。
+・サブタブ縮小：Architect幅996→688、内容行数で高さ調整（1行86）。命令632×88、ゾーン688×182、動物一覧640幅/頭数依存。
+・役割は人=行、既存Policy.ORDERの5仕事=列、1～4/空欄=優先値。640幅/1人時160高、名前を表示しHP/状態をtooltipへ。hover/pressedの区別、個人priority/徴兵/保存読込接続を維持。既読RIMWORLD_UI_AI_ANALYSISを再利用、RimWorldアプリ起動や参考画像公開なし。
+
+関係する4群のみ確認：配置/保存位置、panと解除入力、実物運搬/食事/建築、表のpriority入力。失敗0、最終engineログERRORなし。代表画像centered-roles.pngを目視。
+実Godot InputEventと制御World.step、隔離GPU。物理マウス入力や人間試遊ではない。
+初回UI検証のfixture定数/カテゴリ名を修正。新規犬が像をずらす配置競合を修正。最終成功証拠のみここに保存。
+EXE通常終了/別プロセス自動復元も成功、PID14384→27832。物資を動かさずゾーンだけ登録した専用fixtureを使用。
+
+固定入口「最新開発版.lnk」は同一のまま更新。起動中プロセスなし/排他open確認、旧EXEはTempへSHA照合退避。
+現EXE SHA256 9bf6b8cfe1e46ddf60bb06f7e0e2b47d1e85770287ea82eeeec6a320e4b012cd。
+colony.snapshotとautonomy.snapshotのSHA前後一致（switch.json）。通常版は変更なし。
+外森境界判断待ち、全体cleanupとGitHub公開は未再開。全体完了/楽しさ確認済みとは扱わない。

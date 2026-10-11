@@ -1,0 +1,15 @@
+{
+  "new_sha256": "9bf6b8cfe1e46ddf60bb06f7e0e2b47d1e85770287ea82eeeec6a320e4b012cd",
+  "old_sha256": "b3ba600d8f9810af3aedab646b26968d8c77f52c62eab761ed1690741cb814a1",
+  "backup": "C:\\Users\\masat\\AppData\\Local\\Packages\\sandbox.{c3e3f2e8-8527-4105-8cc7-83ed74404381}\\AC\\Temp\\whistle-smallui-rollback\\WhistleRanch-b3ba600d8f98.exe",
+  "save_before": {
+    "autonomy.snapshot": "7c0906c740ff90ce55892b6852df18e6546b3fb37057d03744ef73d75452b841",
+    "colony.snapshot": "ac8315363f287b9910c11f373e78d06a3dcaea8f56d27add901e4d7dbd272221"
+  },
+  "save_after": {
+    "autonomy.snapshot": "7c0906c740ff90ce55892b6852df18e6546b3fb37057d03744ef73d75452b841",
+    "colony.snapshot": "ac8315363f287b9910c11f373e78d06a3dcaea8f56d27add901e4d7dbd272221"
+  },
+  "exclusive_open_passed": true,
+  "current_process_absent": true
+}

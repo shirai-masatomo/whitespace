@@ -1,0 +1,44 @@
+[
+  {
+    "end_utc": "2026-10-11T10:27:31.5747723Z",
+    "result": {
+      "PID": 14384,
+      "ThreadID": 38428,
+      "ExitCode": 0,
+      "OwnedWindowCount": 3,
+      "Station": "Service-0x0-bf6d9650$",
+      "Desktop": "Render_ba6ab4d61b694b0886048271dc13428b",
+      "ObservedDesktop": "Render_ba6ab4d61b694b0886048271dc13428b",
+      "NonInteractive": true,
+      "DesktopMatched": true,
+      "TimedOut": false
+    },
+    "start_utc": "2026-10-11T10:27:27.9292641Z",
+    "sha256": "9BF6B8CFE1E46DDF60BB06F7E0E2B47D1E85770287EA82EEEEC6A320E4B012CD",
+    "executable": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\autonomy-entry-01\\bundle\\WhistleRanch-SmallUI-pending.exe",
+    "data_root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\pan-center\\native/user-data",
+    "command": "\"C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\autonomy-entry-01\\bundle\\WhistleRanch-SmallUI-pending.exe\" --audio-driver Dummy --rendering-method gl_compatibility --max-fps 30 --resolution 1280x800 --log-file \"C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\pan-center\\native/close.log\" -- --isolated-review --review-cycle-entry",
+    "phase": "close"
+  },
+  {
+    "end_utc": "2026-10-11T10:27:34.4581420Z",
+    "result": {
+      "PID": 27832,
+      "ThreadID": 22596,
+      "ExitCode": 0,
+      "OwnedWindowCount": 2,
+      "Station": "Service-0x0-bf6d9650$",
+      "Desktop": "Render_b68e9f76a02c484495d798fca8dcdb31",
+      "ObservedDesktop": "Render_b68e9f76a02c484495d798fca8dcdb31",
+      "NonInteractive": true,
+      "DesktopMatched": true,
+      "TimedOut": false
+    },
+    "start_utc": "2026-10-11T10:27:31.7311388Z",
+    "sha256": "9BF6B8CFE1E46DDF60BB06F7E0E2B47D1E85770287EA82EEEEC6A320E4B012CD",
+    "executable": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\autonomy-entry-01\\bundle\\WhistleRanch-SmallUI-pending.exe",
+    "data_root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\pan-center\\native/user-data",
+    "command": "\"C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\autonomy-entry-01\\bundle\\WhistleRanch-SmallUI-pending.exe\" --audio-driver Dummy --rendering-method gl_compatibility --max-fps 30 --resolution 1280x800 --log-file \"C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\pan-center\\native/resume.log\" -- --isolated-review --review-cycle-entry --resume-cycle-entry",
+    "phase": "resume"
+  }
+]
