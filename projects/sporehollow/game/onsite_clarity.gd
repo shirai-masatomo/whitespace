@@ -1,6 +1,6 @@
 extends RefCounted
 ## Read-only explanations. Never sample AI, advance time, or change orders.
-const SAVE_BOUNDARY="終了・再起動は日開始から。日中・夜の買い物や作業は元に戻ります。"
+const SAVE_BOUNDARY="終了時に途中保存。時計・物資・仕事・敵を保ったまま再開します。"
 const CARRIED_EGG="卵は食料・売却用の現物です。1個5G。\n禁止中の卵は食事・運搬・売却に使いません。"
 
 static func eggs(_w,items: Array,reserved: bool) -> Array:
@@ -14,7 +14,7 @@ static func dog(w,a: Dictionary) -> Array:
 	if a.get("lost",false):return ["牧場から連れ去られました","この仲間には指示できません"]
 	if a.get("abductor",-1)>=0:return ["連れ去られているところ","運搬している敵を止めて救出"]
 	if not a.get("placed",false):return ["入口からの入場待ち","入口の通路を空けてください"]
-	if w.campaign.day<=a.get("unavailable_through_day",0):return ["気絶・療養中：今は指示できません","復帰は%d日目から"%(int(a.unavailable_through_day)+1)]
+	if w.last_daily_day<=a.get("unavailable_through_day",0):return ["気絶・療養中：今は指示できません","復帰は%d日目から"%(int(a.unavailable_through_day)+1)]
 	if a.hp<=0:return ["気絶しています","今は指示できません"]
 	var state=str(a.get("state",""))
 	var hint="「連れてく」で居場所を変えられます"

@@ -42,8 +42,8 @@ static func target(e: Dictionary, w) -> Vector2i:
 		e.search_goal=null
 	if e.search_goal!=null and reachable(e,w,e.search_goal):return e.search_goal
 	var options = []
-	for y in [3, 8, 13]:
-		for x in [4, 10, 16, 22]:
+	for y in [3, w.H/2, w.H-4]:
+		for x in [4, w.W/3, w.W*2/3, w.W-4]:
 			var p=Vector2i(x,y)
 			if p!=e.pos and reachable(e,w,p):options.append(p)
 	if options.is_empty():e.search_goal=null;e.search_state="行ける道を探す";return e.pos

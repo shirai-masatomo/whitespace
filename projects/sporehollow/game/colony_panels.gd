@@ -8,15 +8,16 @@ static func panel(g,area: Rect2) -> Panel:
 	var p=Panel.new();p.position=area.position;p.size=area.size;p.add_theme_stylebox_override("panel",g.UI.surface(g.UI.PAPER));g.palette.add_child(p);g.palette.move_child(p,0);g.colony_panel=p;return p
 
 static func research_save(g):
-	g.notice("研究状態を保存しました" if g.world.Snapshot.save(g.world,"user://autonomy.snapshot") else "保存できませんでした")
+	g.notice("状態を保存しました" if g.world.Snapshot.save(g.world,g.development_save_path) else "保存できませんでした")
 
 static func research_load(g):
-	var restored=g.world.Snapshot.restore("user://autonomy.snapshot")
-	if restored==null:g.notice("研究保存がありません");return
-	g.world=restored;g.reset_view();g.colony_page="roles";g.group=2;g.refresh();g.notice("研究状態を読み込みました")
+	var path=g.development_save_path if FileAccess.file_exists(g.development_save_path) else "user://autonomy.snapshot"
+	var restored=g.world.Snapshot.restore(path)
+	if restored==null:g.notice("保存がありません");return
+	g.world=restored;g.reset_view();g.colony_page="roles";g.group=2;g.refresh();g.notice("状態を読み込みました")
 
 static func select_storage(g):
-	g.tool="storage";g.refresh()
+	g.group=0;g.colony_page="";g.architect_category="ゾーン";g.tool="zone_stockpile";g.refresh()
 
 static func architecture_category(g,category: String):
 	g.architect_category=category;g.tool="";g.cancel_wall_stroke();g.refresh()
@@ -34,7 +35,7 @@ static func build(g):
 			var id="architect_category_%d"%index
 			g.add_button(g.palette,id,category,Rect2(16+index*154,631,146,32),architecture_category.bind(g,category))
 			g.UI.selected(g.buttons[id],g.architect_category==category);index+=1
-		if g.subtask_choices().is_empty():label(g.colony_panel,"今は使えるものがありません",Vector2(16,62),15)
+		if g.architect_category!="ゾーン" and g.subtask_choices().is_empty():label(g.colony_panel,"今は使えるものがありません",Vector2(16,62),15)
 	elif g.colony_page=="roles":
 		var people=Model.people(g.world)
 		var list_height=mini(186,maxi(96,people.size()*96))
@@ -58,11 +59,11 @@ static func build(g):
 				g.UI.button(choice);choice.add_theme_font_size_override("font_size",14);g.UI.selected(choice,a.work_priorities[kind]==1);choice.pressed.connect(priority_changed.bind(g,row.key,kind));priorities.add_child(choice)
 			var draft=Button.new();draft.name="Draft_"+row.key;draft.custom_minimum_size=Vector2(132,36);draft.focus_mode=Control.FOCUS_NONE;draft.text="徴兵解除" if a.drafted else "徴兵する"
 			g.UI.button(draft);draft.add_theme_font_size_override("font_size",14);g.UI.selected(draft,a.drafted);draft.pressed.connect(draft_changed.bind(g,row.key));priorities.add_child(draft)
-		g.add_button(g.palette,"storage_zone","保管域を指定",Rect2(34,696,180,34),select_storage.bind(g))
+		g.add_button(g.palette,"storage_zone","ゾーンを開く",Rect2(34,696,180,34),select_storage.bind(g))
 		g.UI.selected(g.buttons.storage_zone,g.tool=="storage")
 		label(p,"地面をクリック。40個/マス（仮）",Vector2(212,panel_height-34),13)
-		g.add_button(g.palette,"research_save","研究保存",Rect2(636,696,122,34),research_save.bind(g))
-		g.add_button(g.palette,"research_load","研究読込",Rect2(770,696,122,34),research_load.bind(g))
+		g.add_button(g.palette,"research_save","保存",Rect2(636,696,122,34),research_save.bind(g))
+		g.add_button(g.palette,"research_load","読込",Rect2(770,696,122,34),research_load.bind(g))
 	elif g.group==1 and g.selected_animals.is_empty():
 		var animals=g.world.animals.filter(func(a):return a.get("category","")!="human")
 		var p=panel(g,Rect2(16,430,864,312))

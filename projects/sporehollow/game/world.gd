@@ -14,8 +14,8 @@ const Forest=preload("res://game/forest_pattern.gd")
 const Departure=preload("res://game/forest_departure.gd")
 const Decisions = preload("res://game/decision_ai.gd")
 const StageData = preload("res://game/stages.gd")
-const W = 25
-const H = 17
+const W = 50
+const H = 34
 const DT = 0.25
 const NEST = Vector2i(20, 12)
 const Shop = preload("res://game/shop_table.gd")
@@ -56,7 +56,7 @@ func merchant_talk_cells() -> Array:
 	return [MERCHANT_CELL+Vector2i(0,2),MERCHANT_CELL+Vector2i(1,2),MERCHANT_CELL+Vector2i(2,2)]
 
 func merchant_present() -> bool:
-	return phase=="day" and tick*DT>=MERCHANT_DELAY and (tick*DT<merchant_leave_at or merchant_waiting() or market_open)
+	return working() and tick>=merchant_arrive_tick and (tick*DT<merchant_leave_at or merchant_waiting() or market_open)
 
 const Life = preload("res://game/keeper_life.gd")
 var jobs_held = false
@@ -70,6 +70,15 @@ var workers: Dictionary = {}
 var work_claims: Dictionary = {}
 const Stock=preload("res://game/physical_stock.gd")
 const Food=preload("res://game/human_food.gd")
+const Zones=preload("res://game/colony_zones.gd")
+var zones: Array = []
+var next_zone_id=1
+const Cycle=preload("res://game/colony_cycle.gd")
+var colony_version=2
+var calendar_ticks=0
+var last_daily_day=1
+var merchant_arrive_tick=20
+var incidents: Array = []
 const Snapshot=preload("res://game/research_snapshot.gd")
 var next_stock_id=1
 var storage_cells: Array = []
@@ -170,7 +179,7 @@ func _init(data: Dictionary = {}, seed_number: int = 17, stage_override: Diction
 		owned.object_attack_power = maxi(1,owned.get("object_attack_power",SPECIES[owned.species].object_attack))
 		owned.affinity = owned.get("affinity", 0 if SPECIES[owned.species].affinity else null)
 		owned.unavailable_through_day = owned.get("unavailable_through_day", 0)
-		if owned.species=="shiba" and owned.get("hp", 1) <= 0 and campaign.day > owned.unavailable_through_day:
+		if owned.species=="shiba" and owned.get("hp", 1) <= 0 and campaign.get("last_daily_day",campaign.day) > owned.unavailable_through_day:
 			owned.hp = maxi(1, AnimalData.stats(owned.species,owned.lv).hp / 2) # Provisional return after one full day off.
 	morning_checkpoint = campaign.get("morning_checkpoint", campaign).duplicate(true)
 	morning_checkpoint.erase("morning_checkpoint")
@@ -275,6 +284,7 @@ func _init(data: Dictionary = {}, seed_number: int = 17, stage_override: Diction
 		morning_checkpoint=campaign.duplicate(true)
 		morning_checkpoint.erase("morning_checkpoint")
 	shop_stock = Shop.generate(stage, seed_value, campaign.unlocked_blueprints, campaign.day)
+	Cycle.init(self)
 	say("牧場を整えよう")
 
 func make_schedule():
@@ -294,7 +304,7 @@ func make_schedule():
 	Story.schedule(self)
 
 func next_attack_seconds() -> float:
-	if phase == "day": return maxf(0, day_seconds - tick * DT) + config.first_attack_seconds
+	if spawn_schedule.size()<=schedule_index:return Cycle.until(self,1140)+config.first_attack_seconds
 	return maxf(0, (spawn_schedule[schedule_index].tick - (tick - night_started_tick)) * DT) if schedule_index < spawn_schedule.size() else -1.0
 
 func say(message: String):
@@ -380,6 +390,10 @@ func working() -> bool:
 
 func start_night():
 	if phase != "day": return
+	var pending=spawn_schedule.slice(schedule_index)
+	spawn_schedule=[];schedule_index=0
+	var incident_id="raid:%d"%campaign.day
+	if incidents.any(func(row):return row.id==incident_id):return
 	if campaign_schedule:
 		var legacy_prayer=config.get("legacy_prayer",false)
 		var pending_debug=spawn_schedule.filter(func(event):return event.get("wave",0)==999)
@@ -394,20 +408,21 @@ func start_night():
 		config.single_event=true
 		make_schedule()
 		spawn_schedule.append_array(pending_debug)
+	if not campaign_schedule:make_schedule()
 	for event in spawn_schedule:
-		if event.get("wave",0)==999:event.tick=maxi(0,event.tick-(tick-night_started_tick))
+		event.tick+=tick;event.incident=incident_id
+	spawn_schedule.append_array(pending)
+	incidents.append({"id":incident_id,"day":campaign.day,"started_tick":tick,"settled":false})
 	spawn_schedule.sort_custom(func(a,b):return a.tick<b.tick if a.tick!=b.tick else a.wave<b.wave)
 	phase = "defend"
-	night_started_tick = tick
+	night_started_tick = 0
 	milestones.append({"tick": tick, "kind": "nightfall"})
 
 func act(kind: String, p: Vector2i = Vector2i.ZERO, animal_id: int = -1) -> bool:
 	var accepted = false
 	if kind=="storage":
 		if working() and inside(p) and walkable(p) and p not in Story.idol_cells(self):
-			if p in storage_cells:storage_cells.erase(p)
-			else:storage_cells.append(p)
-			accepted=true
+			accepted=Zones.create(self,"stockpile",p,p)>=0
 	elif kind in ["milk","place_kokeshi","place_fossil"]:
 		accepted=Content.queue(self,kind,p,animal_id)
 	elif kind in Story.ACTIONS:
@@ -562,7 +577,7 @@ func animal_step(a: Dictionary):
 	if not a.placed or a.get("dead",false) or a.get("lost",false): return
 	if a.get("abductor",-1)>=0: return
 	if preload("res://game/animal_recovery.gd").step(self,a):return
-	if campaign.day <= a.unavailable_through_day:
+	if last_daily_day <= a.unavailable_through_day:
 		a.state="療養中" if campaign.day==a.unavailable_through_day else "気絶"; return
 	if a.hp <= 0:
 		if SPECIES[a.species].mortal: Progression.remove_animal(self,a,"death"); return
@@ -918,6 +933,7 @@ func repair(p: Vector2i, target_layer: String="structure") -> bool:
 
 func persist_farm():
 	Stock.save(self)
+	campaign.calendar_ticks=calendar_ticks;campaign.last_daily_day=last_daily_day
 	Work.save(self)
 	Story.persist(self)
 	campaign.floors=[]
@@ -967,23 +983,18 @@ func step():
 	for key in workers:
 		if key!="keeper":Combat.recover(workers[key],DT,workers[key].get("resting",false))
 	for enemy in enemies: Combat.recover(enemy,DT)
-	if phase == "day" and tick * DT >= day_seconds: start_night()
+	Cycle.step(self)
 	Content.tick(self)
 	Life.step(self)
 	Jobs.step(self)
 	if tick % ceili(Rules.NATURE.interval / DT) == 0: grow_nature()
 	command_power = minf(10, command_power + 0.07)
 	foods = foods.filter(func(f): return f.until > tick)
-	while phase == "defend" and schedule_index < spawn_schedule.size() and tick - night_started_tick >= spawn_schedule[schedule_index].tick:
-		spawn_enemy(spawn_schedule[schedule_index])
-		schedule_index += 1
-	if phase == "defend" and config.repeat_waves and schedule_index == spawn_schedule.size():
-		schedule_cycle += 1
-		make_schedule()
-	if phase=="day":
-		for event in spawn_schedule.duplicate():
-			if event.get("wave",0)==999 and tick-night_started_tick>=event.tick:
-				spawn_enemy(event);spawn_schedule.erase(event)
+	while schedule_index<spawn_schedule.size() and tick>=spawn_schedule[schedule_index].tick:
+		var event=spawn_schedule[schedule_index]
+		spawn_enemy(event)
+		if not enemies.is_empty():enemies[-1].incident=event.get("incident","")
+		schedule_index+=1
 	for a in animals:
 		animal_step(a)
 		if a.placed: open_for_ally(a.pos)
@@ -1004,18 +1015,10 @@ func step():
 	Progression.tick(self)
 	Story.tick(self)
 	Life.check_rest_until(self)
-	if phase != "defend": return
-	if remaining_night() <= 0 and not Story.crisis(self) and not spawn_schedule.slice(schedule_index).any(func(event):return event.get("wave",0)==999) and not enemies.any(func(e):return not e.done and not e.flee and e.get("phone_started",false)):
-		if rest_skip.get("target", "") == "dawn": early_finish_bonus = rest_skip.get("bonus",0)
-		rest_skip.clear()
-		finish(true)
-	elif not early_clear and not enemies.any(func(e):return e.get("phone_started",false) and not e.done and not e.flee) and not config.repeat_waves and schedule_index == spawn_schedule.size() and enemies.all(func(e): return e.done or e.flee):
-		early_clear = true
-		early_clear_tick = tick
-		milestones.append({"tick": tick, "kind": "early_clear"})
-		say("襲撃を退けた")
+	Cycle.settle_incidents(self)
 
 func finish(won: bool):
+	if won:Cycle.settle_incidents(self);return
 	if result != "": return
 	if won and enemies.any(func(e):return not e.done and (e.get("dead",false) or not e.get("stolen",{}).is_empty())):return
 	if won and (Story.crisis(self) or enemies.any(func(e):return not e.done and not e.flee and e.get("led_animal",-1)>=0)): return
@@ -1264,11 +1267,10 @@ func sell(id: String, animal_id: int = -1) -> bool:
 	return true
 
 func remaining_night() -> float:
-	if phase in ["shop", "day"]: return config.time_limit_seconds
-	return maxf(0, config.time_limit_seconds - (tick - night_started_tick) * DT)
+	return Cycle.until(self,300)
 
 func available(a: Dictionary) -> bool:
-	return a.placed and a.hp > 0 and not a.get("dead",false) and not a.get("lost",false) and a.get("abductor",-1)<0 and campaign.day > a.unavailable_through_day
+	return a.placed and a.hp > 0 and not a.get("dead",false) and not a.get("lost",false) and a.get("abductor",-1)<0 and last_daily_day > a.unavailable_through_day
 
 static func animal_name(a: Dictionary) -> String:
 	return a.get("name", "") if a.get("name", "") != "" else SPECIES[a.species].title

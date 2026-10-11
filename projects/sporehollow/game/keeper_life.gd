@@ -11,7 +11,7 @@ const AUTO_REST_IDLE_SECONDS = 8.0 # Provisional: give the player three more sec
 
 static func targetable(w, capture: bool=false) -> bool:
 	return w.keeper.placed and (w.keeper.state=="free" and w.keeper.hp>0 or capture and w.keeper.state in ["unconscious","restrained"])
-const FATIGUE_SECONDS = 270.0 # One 90s day + 180s night represents an active day.
+const FATIGUE_SECONDS = 432.0 # Provisional: one full colony calendar day.
 const DRINKS = {"coffee": 12.0, "energy_drink": 25.0}
 
 static func rest_until_reason(w, target: String) -> String:
@@ -48,7 +48,7 @@ static func stop_rest_until(w, reason: String):
 	w.rest_skip.clear()
 	w.life_log.append({"tick":w.tick,"event":"rest_until_stopped","reason":reason})
 	# Stopping the clock advance does not secretly wake forced sleepers or resume work.
-	if reason=="nightfall":
+	if reason in ["nightfall","morning"]:
 		if not w.keeper.forced_rest: set_rest(w,false)
 		w.Jobs.hold(w,"rest_end")
 
@@ -161,7 +161,8 @@ static func set_rest(w, value: bool, origin: String="manual"):
 		return
 	k.resting = value
 	k.rest_kind = origin if value else ""
-	if value: k.rest_started_tick=w.tick
+	if value: k.rest_started_tick=w.tick;w.Zones.begin_rest(w,k)
+	else:k.erase("rest_target");k.erase("rest_reason")
 	if origin=="auto" and value: k.hold_before_rest=""
 	k.idle_elapsed=0.0
 	k.rest_elapsed = 0.0
@@ -199,6 +200,7 @@ static func step(w):
 	if near: wake_auto(w)
 	idle_step(w,near)
 	if k.resting:
+		if not w.Zones.rest_step(w,k):return
 		k.rest_elapsed = k.get("rest_elapsed", 0.0) + (0.0 if k.get("rest_started_tick",-1)==w.tick else w.DT)
 		var onset=3.0 if w.is_indoor(k.pos) else 5.0
 		if k.get("asleep",false): k.sleepiness=maxf(0,k.sleepiness-(4.0 if w.is_indoor(k.pos) else 2.0)*w.DT)

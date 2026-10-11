@@ -1,5 +1,5 @@
 extends RefCounted
-# Approved geometry. Live-world migration waits for extraction/save decisions.
+# Approved live geometry. Old saved object positions are retained.
 const WIDTH=50
 const HEIGHT=34
 const BOUNDS=Rect2i(0,0,WIDTH,HEIGHT)

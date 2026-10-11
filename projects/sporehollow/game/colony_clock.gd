@@ -1,6 +1,6 @@
 extends RefCounted
 # Simulation clock and boundary events only. No job, actor, raid, reward or save resets.
-# The existing world is not switched over until event/settlement policy is decided.
+# World uses this clock through colony_cycle; incidents settle independently.
 const DAY_SECONDS=432
 const TICK_SECONDS=0.25
 const TICKS_PER_DAY=1728

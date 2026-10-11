@@ -15,6 +15,8 @@ const Clarity=preload("res://game/onsite_clarity.gd")
 const MorningSave=preload("res://game/morning_save.gd")
 var persistence_enabled=false
 var save_path=MorningSave.PATH
+var development_save_path="user://colony.snapshot"
+var seen_calendar_day=-1
 var save_status=""
 var save_load_blocked=false
 const FONT = preload("res://assets/fonts/ui_font.tres")
@@ -28,6 +30,7 @@ var queue_row_y={}
 var queue_bottom=94.0
 const ColonyPanels=preload("res://game/colony_panels.gd")
 var item_commands=preload("res://game/item_commands.gd").new()
+var zone_controls=preload("res://game/zone_controls.gd").new()
 var colony_page=""
 var architect_category="すべて"
 var colony_panel: Control
@@ -171,17 +174,18 @@ func _ready():
 	automated=automated or "--automated" in OS.get_cmdline_user_args() or "--smoke" in OS.get_cmdline_user_args()
 	persistence_enabled=not automated
 	if persistence_enabled:
-		var saved=MorningSave.read(save_path)
-		if saved.status in ["ok","recovered"]:
-			world=MorningSave.restore(saved.record)
-			save_status="保存した日開始から再開しました（日中・夜の変更は戻ります）" if saved.status=="ok" else "予備の記録から日開始を復元しました（日中・夜の変更は戻ります）"
-		elif saved.status=="missing":save_morning(world)
+		get_tree().auto_accept_quit=false
+		if FileAccess.file_exists(development_save_path):
+			var restored=Farm.Snapshot.restore(development_save_path)
+			if restored!=null:world=restored;save_status="保存した途中状態から再開しました"
+			else:save_load_blocked=true;save_status="途中保存を読めません。保存を保護しています"
 		else:
-			save_load_blocked=true
-			save_status="保存を読めません。記録を保護しています。確認してから再起動してください"
+			var saved=MorningSave.read(save_path)
+			if saved.status in ["ok","recovered"]:world=MorningSave.restore(saved.record);save_status="以前の日開始を読み込みました。次回は途中から再開します"
+			elif saved.status!="missing":save_load_blocked=true;save_status="以前の保存を読めません。保存を保護しています"
 	subtasks.load_settings()
 	camera = Camera2D.new()
-	camera.position = Vector2(Farm.W, Farm.H) * TILE * 0.5
+	camera.position = Vector2(world.keeper.pos) * TILE
 	add_child(camera)
 	var layer = CanvasLayer.new()
 	add_child(layer)
@@ -230,6 +234,8 @@ func _ready():
 	if automated: get_window().unfocusable = true
 	if not automated and not save_load_blocked and not world.story.intro_seen: StoryView.open(self,"intro")
 	if "--smoke" in OS.get_cmdline_user_args(): get_tree().create_timer(2).timeout.connect(get_tree().quit)
+	if "--review-cycle-entry" in OS.get_cmdline_user_args() and "--isolated-review" in OS.get_cmdline_user_args() and OS.get_environment("FARM_REVIEW_OUTPUT")!="":
+		var cycle_review=load("res://game/cycle_entry_review.gd").new();add_child(cycle_review);cycle_review.call_deferred("run")
 	if "--review-autonomy" in OS.get_cmdline_user_args() and "--isolated-review" in OS.get_cmdline_user_args() and OS.get_environment("FARM_REVIEW_OUTPUT")!="":
 		var review=load("res://game/autonomy_entry_review.gd").new()
 		add_child(review);review.call_deferred("run")
@@ -250,7 +256,7 @@ func add_button(parent: Control, id: String, text_value: String, area: Rect2, ca
 
 func recenter():
 	cancel_wall_stroke()
-	camera.position = Vector2(Farm.W, Farm.H) * TILE * 0.5
+	camera.position = Vector2(world.keeper.pos) * TILE
 	camera.zoom = Vector2.ONE
 
 func notice(text_value: String):
@@ -259,6 +265,7 @@ func notice(text_value: String):
 	message_until_tick = world.tick + 14
 
 func select_group(index: int):
+	zone_controls.pressed=false
 	item_commands.pressed=false
 	cancel_wall_stroke()
 	colony_page="roles" if index==3 else ""
@@ -492,6 +499,7 @@ func refresh():
 		for id in subtask_choices(): UI.selected(buttons[id], subtasks.selected[2] == id)
 	ColonyPanels.build(self)
 	item_commands.build(self)
+	zone_controls.build(self)
 	colony_signature=ColonyPanels.signature(self)
 	if not field_book and not field_shop: build_context_actions()
 	if debug_view and not field_book and not field_shop: build_debug_controls()
@@ -668,24 +676,10 @@ func new_campaign():
 	if not automated:StoryView.open(self,"intro")
 
 func save_morning(morning) -> bool:
-	if morning.phase!="shop":
-		if morning.phase!="day" or morning.tick!=0:return true # Existing start-of-day boundary only.
-		morning.persist_farm()
-		var data=morning.campaign.duplicate(true);data.night_ready=false
-		var boundary=Farm.new(data,morning.seed_value)
-		boundary.shop_stock=morning.shop_stock.duplicate(true)
-		return save_morning(boundary)
 	if not persistence_enabled:return true
 	if save_load_blocked:return false
-	var saved=MorningSave.write(MorningSave.capture(morning),save_path)
-	var ok=saved.status=="ok"
-	save_status="昼の開始状態を保存しました。再起動すると、この日の開始から再開します" if ok else "朝を保存できませんでした。空き容量などを確認し、支度を終える前に再試行してください"
-	if is_instance_valid(palette):
-		var label=palette.get_node_or_null("MorningSaveStatus")
-		if label!=null:label.text=save_status
-	if is_instance_valid(menu):
-		var label=menu.get_node_or_null("MenuSaveStatus")
-		if label!=null:label.text=save_status
+	var ok=Farm.Snapshot.save(morning,development_save_path)
+	save_status="時計・物資・仕事・敵を途中保存しました" if ok else "途中保存できませんでした。空き容量などを確認してください"
 	return ok
 
 func cancel_selected_work():
@@ -1021,6 +1015,7 @@ func _input(event):
 		# GUI buttons receive the event; every world handler is gated by the modal.
 		return
 	if event is InputEventMouse: pointer = event.position
+	if zone_controls.input(self,event):get_viewport().set_input_as_handled();return
 	if item_commands.input(self,event):get_viewport().set_input_as_handled();return
 	if subtasks.input(self,event):
 		cancel_wall_stroke()
@@ -1364,6 +1359,9 @@ func board_click(event):
 	refresh()
 
 func _notification(what):
+	if what==NOTIFICATION_WM_CLOSE_REQUEST and persistence_enabled:
+		if save_load_blocked or save_morning(world):get_tree().quit()
+		else:notice("保存できないため終了を止めました。保存を確認してください")
 	if what == NOTIFICATION_WM_WINDOW_FOCUS_OUT:
 		cancel_wall_stroke()
 		keys_down.clear()
@@ -1373,12 +1371,14 @@ func _notification(what):
 		queue_drag_id = -1
 
 func clamp_camera():
-	var middle=Vector2(Farm.W,Farm.H)*TILE*0.5
-	camera.position=camera.position.clamp(middle-Vector2(500,360),middle+Vector2(500,360))
+	var half=Vector2(640,400)/camera.zoom
+	camera.position=camera.position.clamp(half-Vector2(100,100),Vector2(Farm.W,Farm.H)*TILE-half+Vector2(100,100))
 	camera.force_update_scroll()
 
 func _process(delta):
 	if world.phase=="shop" and not save_load_blocked:enter_daytime();refresh()
+	if seen_calendar_day!=world.last_daily_day:
+		seen_calendar_day=world.last_daily_day;arrival_bell=false;departure_started=-1;refresh()
 	if merchant_requested:
 		if not world.merchant_present() or not world.merchant_waiting():merchant_requested=false;world.merchant_approach=null
 		elif not world.paused and world.keeper.pos==merchant_talk_target and view_positions.get("keeper",Vector2(world.keeper.pos)).distance_to(Vector2(merchant_talk_target))<0.08:open_market()
@@ -1452,7 +1452,7 @@ func _process(delta):
 	smooth_actor("keeper", world.keeper.pos, delta)
 	if not world.story.idol.is_empty(): smooth_actor("idol",world.Story.at(world),delta)
 	if world.phase == "dawn" and clock - transition_at > 4.8 and not menu_open: advance()
-	if world.merchant_present() and world.tick*Farm.DT>=Farm.MERCHANT_DELAY+0.8 and not arrival_bell:
+	if world.merchant_present() and world.tick>=world.merchant_arrive_tick+4 and not arrival_bell:
 		arrival_bell = true
 		audio.cue("merchant")
 	controls.visible = not cinematic() and story_modal==""
@@ -1464,7 +1464,7 @@ func _process(delta):
 		buttons.advance.text = rest_button_text()
 	buttons.advance.disabled = cinematic()
 	audio.set_context(world.phase,menu_open or field_book or field_shop or story_modal!="" or world.paused)
-	var target_tint = 0.40 * clampf(world.remaining_night() / 25.0, 0, 1) if world.phase == "defend" else (0.30 * (1 - clampf((world.day_seconds - world.tick * Farm.DT) / 15.0, 0, 1)) if world.phase == "day" else 0.0)
+	var target_tint = 0.4 if world.Cycle.period(world)=="night" else 0.0
 	night_tint = move_toward(night_tint, target_tint, delta * 0.4)
 	audio.tension(world.working() and world.enemies.any(func(e): return not e.done and not e.flee))
 	update_facility_effects(delta)
@@ -1760,6 +1760,7 @@ func _draw():
 		Delivered.draw_clip(self,"fx/"+f.kind,f.pos,visual_time-f.at)
 	draw_work_plans()
 	item_commands.draw(self)
+	zone_controls.draw(self)
 	for cell in selected_trees:
 		if selected.get("kind")=="tree": draw_rect(Rect2(center(cell)-Vector2(21,21),Vector2(42,42)),Color("ffe2a3"),false,2)
 	if debug_view: StoryView.debug(self)
@@ -1939,7 +1940,7 @@ func draw_hud():
 		hud.draw_rect(area, Color(0.65, 0.9, 0.76, 0.15))
 		hud.draw_rect(area, Color("b6ebc5"), false, 2)
 	panel(Rect2(0, 0, 1280, 49))
-	label_on(hud, Vector2(18, 31), "%d日目 %s" % [world.campaign.day, "昼" if world.phase == "day" else "夜"], 20)
+	label_on(hud, Vector2(18, 31), "%d日目 %s" % [world.campaign.day, {"morning":"朝","day":"昼","night":"夜"}[world.Cycle.period(world)]], 20)
 	for i in range(4):
 		var kind = ["soil", "wood", "stone", "gold"][i]
 		BoardArt.draw_resource(hud, Vector2(162 + i * 115, 24), kind)
@@ -2635,16 +2636,12 @@ func carried_keeper_rect() -> Rect2:
 	return HumanVisual.rect(Rect2(support+Vector2(-22 if facing<0 else -26,-26),Vector2(48,32)),foot)
 
 func clock_label_text() -> String:
-	var remaining=maxf(0,world.day_seconds-world.tick*Farm.DT) if world.phase=="day" else world.remaining_night()
-	if world.phase=="defend" and remaining<=0:
-		if world.enemies.any(func(e):return not e.done and not e.flee and e.get("phone_started",false)):return "夜明け待ち：電話中"
-		if world.spawn_schedule.slice(world.schedule_index).any(func(e):return e.get("wave",0)==999):return "夜明け待ち：増援の準備中"
-	return "%s %02d:%02d"%["日暮れまで" if world.phase=="day" else "夜明けまで",int(remaining)/60,int(remaining)%60]
+	return world.Cycle.label(world)
 
 func rest_button_text() -> String:
 	if not world.rest_skip.is_empty(): return "時間送りを中断"
 	if world.phase=="day": return "夜まで休む"
-	return "朝まで休む +%dG" % floori(world.remaining_night()/10.0)
+	return "朝まで休む"
 
 func build_debug_controls():
 	var entries=[["infinite","素材∞"],["whistle","ホイッスル"],["shiba","柴犬＋"],["hen","鶏＋"],["cat","猫＋"],["hurt","HP−10"],["heal","HP＋10"],["lock","ロック−4"]]

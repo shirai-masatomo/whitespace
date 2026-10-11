@@ -31,7 +31,8 @@ static func init(w):
 	w.story=w.campaign.get("world_story",{}).duplicate(true)
 	if w.story.is_empty():
 		w.story={"version":1,"intro_seen":false,"investigated":false,"radio":false,"prayed_day":0,"next_prayer_id":1,"prayers":[],"events":[],"news":[],"miracles":[],"cleared":[],"hidden":{"security":0,"economy":0,"disease":0,"anomaly":0,"recognition":0,"karma":0},"idol":{},"defeat_reason":""}
-		var options=[Vector2i(12,8),Vector2i(10,8),Vector2i(14,8),Vector2i(12,6)]
+		var origin=Vector2i(w.W/2-1,w.H/2-1)
+		var options=[origin,origin+Vector2i(-2,0),origin+Vector2i(2,0),origin+Vector2i(0,-2)]
 		for candidate in options:
 			if cells(candidate).any(func(p):return w.live_structure(p) or w.floors.has(p) or w.occupied(p) or not w.items_at(p).is_empty()): continue
 			w.story.idol={"id":"father-idol","position":[candidate.x,candidate.y],"home":[candidate.x,candidate.y],"hp":IDOL_HP,"max_hp":IDOL_HP,"state":"installed","carrier":-1,"prepare":0.0}
@@ -44,7 +45,7 @@ static func init(w):
 			for x in range(2,w.W-2):
 				var p=Vector2i(x,y)
 				# Two-cell corridors connect the clearing to every edge; logistics remains separate.
-				if x>3 and x<21 and y>3 and y<13: continue
+				if x>3 and x<w.W-4 and y>3 and y<w.H-4: continue
 				if x in [5,6,12,13,19,20] or y in [5,6,8,9,11,12]: continue
 				if not preload("res://game/forest_pattern.gd").tree(p,w.seed_value):continue
 				if w.distance(p,w.logistics_entry)<4 or w.distance(p,w.keeper.pos)<=2 or w.animals.any(func(a):return a.placed and w.distance(p,a.pos)<=2) or p in idol_cells(w) or w.occupied(p) or w.live_structure(p) or w.floors.has(p) or not w.items_at(p).is_empty(): continue

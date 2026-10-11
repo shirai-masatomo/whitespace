@@ -32,7 +32,7 @@ static func init(w):
 	for row in w.field_items:
 		row.claims={}
 		if row.location=="carry":row.location="ground";row.owner="";row.job_id=-1
-	w.campaign.physical_stock=true;sync(w)
+	w.campaign.physical_stock=true;w.Zones.init(w);sync(w)
 
 static func free_count(row) -> int:
 	if row.get("forbidden",false):return 0
@@ -152,8 +152,9 @@ static func storage_used(w,pos: Vector2i) -> int:
 		if row.get("location","ground")=="ground" and row.pos==pos:n+=row.get("amount",1)
 	return n
 
-static func destination(w,a,amount: int) -> Variant:
-	var cells=w.storage_cells.filter(func(p):return w.walkable(p) and storage_used(w,p)+amount<=Policy.STORAGE_CAPACITY)
+static func destination(w,a,amount: int,kind: String="") -> Variant:
+	var eligible=w.Zones.storage_for(w,kind) if kind!="" and not w.zones.is_empty() else w.storage_cells
+	var cells=eligible.filter(func(p):return w.walkable(p) and storage_used(w,p)+amount<=Policy.STORAGE_CAPACITY)
 	cells.sort_custom(func(x,y):return w.distance(a.pos,x)<w.distance(a.pos,y))
 	for p in cells:
 		if not w.Jobs.path_to(w,a.pos,w.neighbors(p).filter(func(c):return w.walkable(c))).is_empty():return p
@@ -164,8 +165,8 @@ static func haul_step(w,j,a):
 	if not carried.is_empty():
 		var n=0
 		for row in carried:n+=row.amount
-		var dest=destination(w,a,n)
-		if dest==null:j.state="blocked";j.block_reason="保管域が満杯か届きません";return
+		var dest=destination(w,a,n,carried[0].kind)
+		if dest==null:j.state="blocked";j.block_reason="許可された備蓄が満杯か到達できません";return
 		j.phase="deliver"
 		if not w.Jobs.walk(w,j,w.neighbors(dest),a):return
 		# Sequential execution rechecks capacity here; a second worker never overfills it.
@@ -177,7 +178,7 @@ static func haul_step(w,j,a):
 	if row.get("forbidden",false):j.state="blocked";j.block_reason="対象の物資は禁止中です";return
 	var token="job:%d"%j.id
 	if row.claims.get(token,0)<=0:
-		if destination(w,a,mini(Policy.CARRY_CAPACITY,free_count(row)))==null:j.state="blocked";j.block_reason="使える保管域を指定してください";return
+		if destination(w,a,mini(Policy.CARRY_CAPACITY,free_count(row)),row.kind)==null:j.state="blocked";j.block_reason="この種類を許可する備蓄を指定してください";return
 		if reserve(w,row.kind,Policy.CARRY_CAPACITY,token,a,row.stock_id).is_empty():j.state="blocked";j.block_reason="物資は別の人が使用中です";return
 	j.phase="fetch"
 	if not w.Jobs.walk(w,j,w.neighbors(row.pos),a):return
@@ -195,13 +196,15 @@ static func step(w):
 	if not w.storage_cells.is_empty():
 		for row in w.field_items.duplicate():
 			if w.jobs.size()>=w.Jobs.LIMIT:break
-			if row.location!="ground" or row.pos in w.storage_cells or row.get("placed",false) or row.kind in ["chick","skill_scroll"] or row.kind.ends_with("_plan") or free_count(row)==0:continue
+			if row.location!="ground" or (w.Zones.accepts(w,row.pos,row.kind) if not w.zones.is_empty() else row.pos in w.storage_cells) or row.get("placed",false) or row.kind in ["chick","skill_scroll"] or row.kind.ends_with("_plan") or free_count(row)==0:continue
+			if not w.zones.is_empty() and w.Zones.storage_for(w,row.kind).is_empty():continue
 			if w.jobs.any(func(j):return j.get("stock_id",-1)==row.stock_id):continue
 			w.jobs.append({"id":w.next_job_id,"kind":"haul","pos":row.pos,"stock_id":row.stock_id,"animal_id":-1,"state":"pending","resource":"","reserved":0,"started":false,"work_category":"haul"});w.next_job_id+=1
 			w.Life.wake_auto(w)
 	sync(w)
 
 static func save(w):
+	w.Zones.save(w)
 	w.campaign.physical_stock=true;w.campaign.next_stock_id=w.next_stock_id
 	w.campaign.storage_cells=w.storage_cells.map(func(p):return [p.x,p.y])
 	w.campaign.stock_used=w.stock_used.duplicate()
