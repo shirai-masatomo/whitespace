@@ -41,7 +41,7 @@ static func restore(path: String):
 	# The worker registry must reference the actual keeper object after deserialization.
 	w.workers.keeper=w.keeper
 	# Market panels are scene state, not a world pause that may survive without its UI.
-	w.market_open=false;w.merchant_approach=null;w.merchant_approach_job=-1
+	w.market_open=false;w.cancel_merchant()
 	for actor in w.workers.values():w.Work.migrate_priorities(actor)
 	if not state.has("colony_version"):w.Cycle.migrate_snapshot(w)
 	if not state.has("zones"):

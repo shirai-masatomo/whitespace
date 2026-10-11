@@ -107,19 +107,23 @@ static func block(w,j,why: String):
 	j.retry_at=w.tick+ceili(Policy.RETRY_SECONDS/w.DT)
 
 static func allowed(w,key: String,j) -> bool:
+	if j.get("explicit_actor",key)!=key:return false
+	if j.get("purpose","")=="merchant":return w.merchant_actor_reason(key)==""
 	var why=reason(w,key,w.workers[key])
 	return why=="" or (j.kind in ["move","direct_attack"] and why in ["徴兵中","近くの敵に対応中"])
 
 static func claim(w,key: String,j) -> bool:
-	if not w.workers.has(key) or j.get("assigned_to","")!="" or not allowed(w,key,j):return false
+	var actor=w.workers.get(key,w.merchant_actor(key) if j.get("purpose","")=="merchant" else {})
+	if actor.is_empty() or j.get("assigned_to","")!="" or not allowed(w,key,j):return false
 	var token=target_key(w,j)
 	if w.work_claims.has(token):return false
-	w.work_claims[token]=j.id;j.assigned_to=key;w.workers[key].work_job=j.id
+	w.work_claims[token]=j.id;j.assigned_to=key
+	if w.workers.has(key):w.workers[key].work_job=j.id
 	return true
 
 static func choose(w,key: String) -> Dictionary:
 	var a=w.workers[key]
-	var candidates=w.jobs.filter(func(j):return j.get("assigned_to","")=="" and not j.get("cancel_requested",false) and w.tick>=j.get("retry_at",0) and (key=="keeper" or shared(w,j)) and (j.kind in ["move","direct_attack"] or a.work_priorities.get(category(w,j),3)>0))
+	var candidates=w.jobs.filter(func(j):return j.get("assigned_to","")=="" and not j.get("cancel_requested",false) and w.tick>=j.get("retry_at",0) and j.get("explicit_actor",key)==key and (key=="keeper" or shared(w,j) or j.get("explicit_actor","")==key) and (j.kind in ["move","direct_attack"] or a.work_priorities.get(category(w,j),3)>0))
 	candidates.sort_custom(func(x,y):
 		var px=0 if x.kind in ["move","direct_attack"] else a.work_priorities.get(category(w,x),4)
 		var py=0 if y.kind in ["move","direct_attack"] else a.work_priorities.get(category(w,y),4)
@@ -151,7 +155,7 @@ static func step(w):
 	# Recover orphan claims when an actor disappears without a normal completion callback.
 	for j in w.jobs.duplicate():
 		var owner=j.get("assigned_to","")
-		if owner!="" and not w.workers.has(owner):release(w,j);j.state="pending"
+		if owner!="" and not w.workers.has(owner) and not(j.get("purpose","")=="merchant" and owner==w.merchant_worker):release(w,j);j.state="pending"
 		if j.get("cancel_requested",false):w.Jobs.cancel(w,j.id)
 		elif missing(w,j):w.Jobs.cancel(w,j.id,"target_missing")
 	for key in w.workers:

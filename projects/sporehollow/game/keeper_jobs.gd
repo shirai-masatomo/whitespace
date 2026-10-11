@@ -133,7 +133,9 @@ static func execute(w,j,actor: Dictionary):
 	var goals=[j.pos] if j.kind=="move" else w.neighbors(j.pos)
 	if actor.pos not in goals:
 		walk(w,j,goals,actor); return
-	if j.kind=="move": complete(w,j,true); return
+	if j.kind=="move":
+		if j.get("purpose","")=="merchant":j.state="working";return
+		complete(w,j,true); return
 	if w.BUILD.has(j.kind):
 		if not j.started:
 			var why=w.Buildings.reason(w,j.kind,j.pos,false)

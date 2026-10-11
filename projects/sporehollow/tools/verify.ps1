@@ -5,7 +5,7 @@ $exe=if($GodotBinary){(Resolve-Path -LiteralPath $GodotBinary).Path}else{Join-Pa
 if(-not(Test-Path -LiteralPath $exe)){throw 'Run ./tools/setup.ps1 first (PowerShell 7).'}
 $out=Join-Path $project ('artifacts/verification/'+(Get-Date -Format 'yyyyMMdd-HHmmss-fff'))
 New-Item -ItemType Directory -Force -Path $out,"$out/user-data" | Out-Null
-foreach($suite in @('import','visible_boundary','explicit_storage')){
+foreach($suite in @('import','visible_boundary','explicit_storage','negotiation')){
  $info=[Diagnostics.ProcessStartInfo]::new();$info.FileName=$exe;$info.WorkingDirectory=$project
  $info.UseShellExecute=$false;$info.CreateNoWindow=$true;$info.RedirectStandardOutput=$true;$info.RedirectStandardError=$true
  $info.Environment['APPDATA']="$out/user-data";$info.Environment['LOCALAPPDATA']="$out/user-data";$info.Environment['FARM_REVIEW_OUTPUT']=$out
