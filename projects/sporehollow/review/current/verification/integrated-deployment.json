@@ -1,0 +1,29 @@
+{
+  "implementation_commit": "667ca0664442c10165b3f3bb611f32dbff9b4f8b",
+  "asset_delivery_commit": "b0e917a11f205190dde0136165a72c189f39e275",
+  "normal_exe_updated": false,
+  "normal_exe_sha256": "25141146DED2A167AE07652113342FFFAF7318A08BCC30814130C29FDDA75F6C",
+  "normal_exe_implementation": "a16def5",
+  "save_files_checked": 10,
+  "normal_saves_unchanged": true,
+  "new_screenshots": 0,
+  "gpu": {
+    "attempts": 1,
+    "NonInteractive": true,
+    "DesktopMatched": true,
+    "OwnedWindowCount": 2,
+    "TimedOut": true,
+    "ExitCode": 124
+  },
+  "headless_windows_export": {
+    "headless_smoke": true,
+    "published": false,
+    "gpu_verified": false,
+    "headless_export": true,
+    "candidate_sha256": "5997B6BACFC370CAA692E72B4F919784EC84D1888BA061AAA15493C0FFB28C35",
+    "reason": "GPU private desktop timed out; publication gate preserved",
+    "asset_delivery_commit": "b0e917a11f205190dde0136165a72c189f39e275",
+    "implementation_commit": "667ca06"
+  },
+  "temporary_candidate_removed": true
+}
