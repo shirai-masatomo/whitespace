@@ -132,4 +132,3 @@ for a in range(16):
 (D/'QA.json').write_text(json.dumps({'checks':checks,'count':len(checks),'prior_png_preserved':len(prior),'actual_game_test':False},indent=2)+'\n')
 (S/'prior-hashes.json').write_text(json.dumps(prior,indent=2)+'\n')
 print(json.dumps({'assets':len(assets),'reuse':len(reuse),'checks':len(checks),'prior':len(prior)}))
-
