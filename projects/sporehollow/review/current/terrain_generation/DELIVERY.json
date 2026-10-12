@@ -1,0 +1,55 @@
+{
+  "format": "terrain-generation-delivery-v1",
+  "implementation_commit": "231b71fbbce0460b1ab05623faf4a936bbcdd0c8",
+  "baseline_commit": "3504a1006fde32e727baf43e79fa925374a0a3bf",
+  "branch": "codex/sporehollow-biome01",
+  "source_file_count": 83,
+  "source_hashes_match_capture": true,
+  "normal_exe": {
+    "path": "artifacts/autonomy-entry-01/bundle/WhistleRanch-Autonomy-Partial.exe",
+    "sha256": "6481555C54EF4135F09D19E702E3E6B892873317A3B327E052EF36CBDCDFB9FD",
+    "bytes": 128032960,
+    "count_under_artifacts": 1,
+    "build_utc": "2026-10-12T13:09:24.1785674Z",
+    "lifecycle_checks": [
+      {
+        "check": "Normal window-close handler saved all fixture state and cleared the transient market pause on restore",
+        "passed": true
+      },
+      {
+        "check": "Uses ordinary persistent main scene, not automated test startup",
+        "passed": true
+      },
+      {
+        "check": "Normal startup automatically resumed clock/zones/goods/work/enemies from previous process",
+        "passed": true
+      },
+      {
+        "check": "Native main process actually advances after market-open restore",
+        "passed": true
+      },
+      {
+        "check": "Uses ordinary persistent main scene, not automated test startup",
+        "passed": true
+      }
+    ],
+    "verification": "build-verification.json"
+  },
+  "scratch_removed": true,
+  "project_mib_before": 869.2,
+  "project_mib_after": 889.2,
+  "source_test_passes": 770,
+  "baseline_reproduced_failures": 9,
+  "gpu_seeds": [
+    31,
+    97,
+    2026
+  ],
+  "screenshot_count": 90,
+  "sequence_count": 12,
+  "art": "Existing formal assets reused; no new production PNG",
+  "user_desktop_game_started": false,
+  "user_save_modified": false,
+  "preexisting_import_changes_preserved": true,
+  "notes": "Build revision is implementation_commit; later delivery-only commit does not change game source. Full source hashes: terrain-isolation.json."
+}
