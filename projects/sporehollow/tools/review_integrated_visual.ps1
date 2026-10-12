@@ -4,8 +4,8 @@ $farmRoot=Split-Path -Parent $PSScriptRoot
 # A standard release EXE silently ignores --script. Use the editor-capable Godot.
 $exe=Join-Path $farmRoot '.tools/Godot_v4.7.2-stable_win64.exe'
 $console=Join-Path $farmRoot '.tools/Godot_v4.7.2-stable_win64_console.exe'
-$capabilities=& $console --headless --help
-if($LASTEXITCODE -ne 0 -or -not($capabilities -match '\-\-script <script>')){throw 'Capture requires a Godot executable supporting --script; do not launch a release EXE.'}
+$capabilities=((& $console --headless --help) -join "`n") -replace '\x1B\[[0-9;]*m',''
+if($LASTEXITCODE -ne 0 -or -not($capabilities -match '--script\s+<script>')){throw 'Capture requires a Godot executable supporting --script; do not launch a release EXE.'}
 . (Join-Path $PSScriptRoot 'workspace_lifecycle.ps1')
 $runRoot=Start-FarmScratch $farmRoot (Join-Path $farmRoot 'artifacts/isolated/current')
 New-Item -ItemType Directory -Force (Join-Path $runRoot 'user-data')|Out-Null
@@ -30,3 +30,4 @@ try{
     if($images.Count -ne 8){throw 'Capture ended without all eight expected PNGs.'}
     $succeeded=$true
 }finally{Complete-FarmScratch $farmRoot $runRoot 'integrated_ui' $succeeded -Visual}
+
