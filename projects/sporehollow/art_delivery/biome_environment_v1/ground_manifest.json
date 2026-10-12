@@ -1,0 +1,337 @@
+{
+  "stage": "ground",
+  "assets": [
+    {
+      "file": "ground/dry/soil_spot.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "usage": "Subtle144alpha dry soil spot over unchanged biome vertex color",
+      "layer": "ground",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "ground_shadow": false,
+      "sha256": "30568b9bb8c4ba43533de4595c0a824ef23d4ad994091576eae974df392f6a31"
+    },
+    {
+      "file": "ground/dry/cracks_00.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "usage": "Sparse fine dry cracks; no terrain type change",
+      "layer": "ground",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "ground_shadow": false,
+      "sha256": "b6b0dd045fbbf80dfbc2613b26974e23fdcc292881aea7ca0cdadc062e2f9fb2"
+    },
+    {
+      "file": "ground/dry/cracks_01.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "usage": "Sparse fine dry cracks; no terrain type change",
+      "layer": "ground",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "ground_shadow": false,
+      "sha256": "917603eb7aec490ec0247f97db049a811d07d4bc399368edf5279577acd0b3fe"
+    },
+    {
+      "file": "ground/dry/short_grass.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "usage": "Small dry grassland decoration, optional and nonblocking",
+      "layer": "ground",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "ground_shadow": false,
+      "sha256": "18b4576d15a4602997ed4dd98c42867986ffdf75cc9b0d34565ac51eaf1de507"
+    },
+    {
+      "file": "ground/dry/grass_tuft.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "usage": "Small dry grassland decoration, optional and nonblocking",
+      "layer": "ground",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "ground_shadow": false,
+      "sha256": "f7e6937dfe877acbdc68758e7aeaeaccc0f51e4fd861c2f247aee65463e53c44"
+    },
+    {
+      "file": "ground/dry/gravel.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "usage": "Small dry grassland decoration, optional and nonblocking",
+      "layer": "ground",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "ground_shadow": false,
+      "sha256": "dcdb51f65fc60845cb6c1d6db4bd02287eff09ed36240c888bbc78d4748fe69a"
+    },
+    {
+      "file": "ground/lush/low_sparse.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "usage": "Low irregular meadow plant; omit beneath jobs, drops or occupied cells",
+      "layer": "ground",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "ground_shadow": false,
+      "sha256": "0384cca129a4e22414a4ca33f3a2fe164f32e89e9488109cbf7837ba80cd9486"
+    },
+    {
+      "file": "ground/lush/low_dense.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "usage": "Low irregular meadow plant; omit beneath jobs, drops or occupied cells",
+      "layer": "ground",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "ground_shadow": false,
+      "sha256": "f0ca68f953196bbbdc3795a2f87831160d67f1a875d874c7198bc3e63c14dfe7"
+    },
+    {
+      "file": "ground/lush/tall_tuft.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "usage": "Low irregular meadow plant; omit beneath jobs, drops or occupied cells",
+      "layer": "ground",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "ground_shadow": false,
+      "sha256": "3ac5791007a954c3939f86ac70637b0bbf83b406c38af87cdc29330ee37ffe46"
+    },
+    {
+      "file": "ground/lush/flowers.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "usage": "Low irregular meadow plant; omit beneath jobs, drops or occupied cells",
+      "layer": "ground",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "ground_shadow": false,
+      "sha256": "66e71481d2c716c067894b076184e2a9337632ce19cfb7504cba6d14bb3fec85"
+    },
+    {
+      "file": "ground/lush/cover_sparse.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "usage": "Three separated grass clumps with readable empty ground between",
+      "layer": "ground",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "ground_shadow": false,
+      "sha256": "b4042965c6a7bf6d780574d2789bc7c4eeeb8ea1f520a59a5a11a94cf0729a4a"
+    },
+    {
+      "file": "ground/boundary/n.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "usage": "Optional grass/soil transition strip; assign to one side only; no perimeter outline",
+      "layer": "ground",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "ground_shadow": false,
+      "sha256": "2d6924cda423349f70a538385f578bd9a81fa28bbaaad8e3c610fab3c0305fb7"
+    },
+    {
+      "file": "ground/boundary/e.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "usage": "Optional grass/soil transition strip; assign to one side only; no perimeter outline",
+      "layer": "ground",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "ground_shadow": false,
+      "sha256": "2d92c5a837a0b6d4eab0a0745c43e9b156f9b117bcf7dd5c922993a6eb510b41"
+    },
+    {
+      "file": "ground/boundary/s.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "usage": "Optional grass/soil transition strip; assign to one side only; no perimeter outline",
+      "layer": "ground",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "ground_shadow": false,
+      "sha256": "58c06ae1fa0a7539cfe1987aef93d3b64472e806a767026536ae5ff29ef0c2ff"
+    },
+    {
+      "file": "ground/boundary/w.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "usage": "Optional grass/soil transition strip; assign to one side only; no perimeter outline",
+      "layer": "ground",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "ground_shadow": false,
+      "sha256": "aedfdeffcb647deba05f41469878e88fae114d1b8922735eaa50bec6aeedfd0c"
+    }
+  ],
+  "reuse": [],
+  "runtime_verified": false
+}
