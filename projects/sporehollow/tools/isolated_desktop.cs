@@ -19,6 +19,14 @@ public static class FarmIsolatedDesktop {
     [DllImport("user32.dll", CharSet=CharSet.Unicode,SetLastError=true)] static extern IntPtr CreateDesktop(string n,IntPtr d,IntPtr m,uint f,uint a,IntPtr s);
     [DllImport("user32.dll", CharSet=CharSet.Unicode,SetLastError=true)] static extern bool GetUserObjectInformation(IntPtr h,int index,IntPtr data,uint bytes,out uint needed);
     delegate bool EnumWindow(IntPtr window,IntPtr data);
+    [DllImport("user32.dll", CharSet=CharSet.Unicode)] static extern int GetWindowText(IntPtr window,StringBuilder text,int size);
+    [DllImport("user32.dll", CharSet=CharSet.Unicode)] static extern int GetClassName(IntPtr window,StringBuilder text,int size);
+    [DllImport("user32.dll")] static extern bool EnumChildWindows(IntPtr window,EnumWindow callback,IntPtr data);
+    static string Describe(IntPtr window) {
+        var title=new StringBuilder(256);var type=new StringBuilder(128);
+        GetWindowText(window,title,title.Capacity);GetClassName(window,type,type.Capacity);
+        return type.ToString()+": "+title.ToString();
+    }
     [DllImport("user32.dll",SetLastError=true)] static extern bool EnumDesktopWindows(IntPtr desktop,EnumWindow callback,IntPtr data);
     [DllImport("user32.dll")] static extern uint GetWindowThreadProcessId(IntPtr window,out uint process);
     [DllImport("user32.dll")] static extern bool CloseDesktop(IntPtr h);
@@ -41,7 +49,7 @@ public static class FarmIsolatedDesktop {
         try { uint needed; Need(GetUserObjectInformation(h,1,p,12,out needed),"Station visibility");return (Marshal.ReadInt32(p,8)&1)!=0; }
         finally {Marshal.FreeHGlobal(p);}
     }
-    public class Result { public uint PID,ThreadID,ExitCode; public int OwnedWindowCount; public string Station,Desktop,ObservedDesktop; public bool NonInteractive,DesktopMatched,TimedOut; }
+    public class Result { public uint PID,ThreadID,ExitCode; public int OwnedWindowCount; public string Station,Desktop,ObservedDesktop; public bool NonInteractive,DesktopMatched,TimedOut; public List<string> OwnedWindows=new List<string>(); }
     public static Result Run(string exe,string command,string cwd,SortedDictionary<string,string> environment,int timeout) {
         IntPtr original=GetProcessWindowStation(), station=IntPtr.Zero,desktop=IntPtr.Zero,env=IntPtr.Zero;
         PI pi=new PI(); Result result=new Result();
@@ -69,7 +77,11 @@ public static class FarmIsolatedDesktop {
             while(WaitForSingleObject(pi.process,100)==258) {
                 // Enumerate only the private desktop, not the user's windows. A renderer can create its GUI on a non-primary thread.
                 int count=0;
-                EnumWindow callback=(window,data)=>{uint owner;GetWindowThreadProcessId(window,out owner);if(owner==result.PID)count++;return true;};
+                EnumWindow callback=(window,data)=>{uint owner;GetWindowThreadProcessId(window,out owner);if(owner==result.PID){
+                    count++;var note=Describe(window);if(!result.OwnedWindows.Contains(note))result.OwnedWindows.Add(note);
+                    EnumWindow child=(item,unused)=>{uint childOwner;GetWindowThreadProcessId(item,out childOwner);if(childOwner==result.PID){var detail="child "+Describe(item);if(!result.OwnedWindows.Contains(detail)&&result.OwnedWindows.Count<32)result.OwnedWindows.Add(detail);}return true;};
+                    EnumChildWindows(window,child,IntPtr.Zero);
+                }return true;};
                 SetLastError(0);
                 bool enumerated=EnumDesktopWindows(desktop,callback,IntPtr.Zero);
                 int error=Marshal.GetLastWin32Error();
