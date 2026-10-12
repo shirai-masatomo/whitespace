@@ -1,3 +1,17 @@
+# 統合修正：通常EXEへ反映済み
+
+2026-10-12 18:55（日本時間）。**既存の最新開発版EXEをbf6eeeaへ更新しました。** 正式素材はb0e917a11f205190dde0136165a72c189f39e275。
+
+通常の入口は `確認入口/最新開発版.lnk`、Play.cmdも同じEXEを起動。ESCの版情報でbf6eeeaを確認できます。新しい起動リンクや旧版EXEは追加していません。
+
+関連12スイート成功済みのソースをWindows出力し、headless smoke、非対話GPUでEXE本体の通常起動・正常終了・別プロセス再開5項目に成功した後、既存EXEを置換。[配布記録](review/current/verification/integrated-deployment.json)・[起動/終了/再開の証拠](review/current/verification/integrated-publication.json)。
+
+修正前後の撮影は未完了。先の外部撮影スクリプトは120秒timeoutでログが空、原因未特定。EXE本体の隔離起動は今回成功したため「隔離GPU環境全体が使えない」とは扱わない。画面の品質・人間の操作感の合格はまだ出していません。
+
+以下は反映前の調査/過去レビュー記録です。
+
+---
+
 # 統合修正 2026-10-12：実装667ca06・関連検証済み、GPU失敗／未配布
 
 既存の `codex/sporehollow-biome01` 上で作業。通常EXEは現時点でa16def5のまま、今回の修正はまだ反映していません。

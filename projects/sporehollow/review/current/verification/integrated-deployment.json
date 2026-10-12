@@ -1,9 +1,9 @@
 {
   "implementation_commit": "667ca0664442c10165b3f3bb611f32dbff9b4f8b",
   "asset_delivery_commit": "b0e917a11f205190dde0136165a72c189f39e275",
-  "normal_exe_updated": false,
-  "normal_exe_sha256": "25141146DED2A167AE07652113342FFFAF7318A08BCC30814130C29FDDA75F6C",
-  "normal_exe_implementation": "a16def5",
+  "normal_exe_updated": true,
+  "normal_exe_sha256": "0CA482AEB8D18928B0A0C0DBFA562AF8FFBA8CC6F5BA99E18C72B5E00307DFB0",
+  "normal_exe_implementation": "bf6eeea",
   "save_files_checked": 10,
   "normal_saves_unchanged": true,
   "new_screenshots": 0,
@@ -25,5 +25,11 @@
     "asset_delivery_commit": "b0e917a11f205190dde0136165a72c189f39e275",
     "implementation_commit": "667ca06"
   },
-  "temporary_candidate_removed": true
+  "temporary_candidate_removed": true,
+  "published_commit": "bf6eeea",
+  "publication_utc": "2026-10-12T09:55:04.2349644Z",
+  "native_lifecycle_checks": 5,
+  "native_gpu_launch_close_resume_passed": true,
+  "publication_proof": "integrated-publication.json",
+  "current_screenshot_status": "not obtained; the earlier external before-capture script timed out, unrelated to the later successful EXE lifecycle verification"
 }
