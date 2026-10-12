@@ -7,7 +7,7 @@ static func threats(w) -> Array:
 static func work_name(w,j: Dictionary) -> String:
 	if j.get("purpose","")=="merchant":return "交渉"
 	if w.BUILD.has(j.kind):return w.Buildings.NAMES.get(j.kind,"建設")
-	return {"mine":"採掘","train":"調教","direct_attack":"指定攻撃","keeper_equipment":"装備","slaughter":"と殺","milk":"搾乳","place_kokeshi":"こけし設置","place_fossil":"化石設置","move":"移動","collect":"採集","haul":"運搬","repair":"修理","remove":"解体","remove_floor":"床の解体","repair_floor":"床の修理","gate":"ドア開閉","equip":"動物の装備","animal_order":"動物への指示"}.get(j.kind,"作業")
+	return {"mine":"採掘","clear_tree":"伐採","train":"調教","direct_attack":"指定攻撃","keeper_equipment":"装備","slaughter":"と殺","milk":"搾乳","place_kokeshi":"こけし設置","place_fossil":"化石設置","move":"移動","collect":"採集","haul":"運搬","repair":"修理","remove":"解体","remove_floor":"床の解体","repair_floor":"床の修理","gate":"ドア開閉","equip":"動物の装備","animal_order":"動物への指示"}.get(j.kind,"作業")
 static func work_state(j: Dictionary) -> String:
 	if j.get("cancel_requested",false):return "取消待ち"
 	if j.get("delivery_owner","")!="":return "材料搬入中"

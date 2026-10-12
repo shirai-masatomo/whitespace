@@ -25,7 +25,7 @@ static func idol_cells(w) -> Array:
 	return [] if w.story.get("idol",{}).is_empty() else cells(at(w))
 
 static func terrain_block(w,p: Vector2i) -> bool:
-	return w.trees.has(p) or p in idol_cells(w)
+	return w.trees.has(p) or w.rocks.has(p) or p in idol_cells(w)
 
 static func init(w):
 	w.story=w.campaign.get("world_story",{}).duplicate(true)
@@ -121,7 +121,7 @@ static func idol_glowing(w) -> bool:
 	return prayer_night(w) and w.story.prayed_day!=w.campaign.day and not idol.is_empty() and idol.hp>0 and idol.state not in ["preparing","transporting","lost"]
 
 static func reason(w,kind: String,p: Vector2i) -> String:
-	if kind=="clear_tree": return "伐採には道具が必要です"
+	if kind=="clear_tree": return w.Harvest.tree_reason(w,p)
 	if w.story.idol.is_empty(): return w.story.get("migration_error","黄金像が見つかりません")
 	if w.story.idol.state in ["preparing","transporting","lost"]: return "像が危険です。先に運び手を止めてください"
 	if is_prayer(kind):
@@ -152,7 +152,7 @@ static func enqueue(w,kind: String,p: Vector2i) -> bool:
 	return true
 
 static func step_job(w,j):
-	if j.kind=="clear_tree": w.Jobs.complete(w,j,false); return
+	if j.kind=="clear_tree": w.Harvest.execute(w,j,w.workers.get(j.get("assigned_to","keeper"),w.keeper)); return
 	var why=reason(w,j.kind,j.pos)
 	if why!="": j.state="blocked"; j.block_reason=why; return
 	var destinations=w.neighbors(j.pos) if j.kind=="clear_tree" else goals(w)
@@ -162,10 +162,6 @@ static func step_job(w,j):
 	var duration=CLEAR_SECONDS if j.kind=="clear_tree" else (PRAYER_SECONDS if is_prayer(j.kind) else 2.0)
 	if j.elapsed<duration: return
 	match j.kind:
-		"clear_tree":
-			if w.occupied(j.pos): j.state="blocked"; j.block_reason="誰かがいます"; return
-			w.story.cleared.append(j.world_target); w.trees.erase(j.pos); w.add_resource("wood",CLEAR_WOOD)
-			say(w,"木を片付けた。木材 +%d"%CLEAR_WOOD)
 		"inspect_idol":
 			if w.campaign.day>=2: w.story.investigated=true
 			say(w,"父の日誌：像を壊してはいけない。"+(" 像に願いを託せそうだ。" if w.story.investigated else " 今は静かに佇んでいる。"))

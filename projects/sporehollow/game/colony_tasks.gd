@@ -6,7 +6,7 @@ const MINE_SECONDS=4.0
 const TRAIN_SECONDS=4.0
 const TRAIN_GAIN=5
 const TRAIN_SPECIES=["shiba","doberman"]
-const KINDS=["mine","train"]
+const KINDS=["mine","train","clear_tree"]
 
 static func init(w):
 	w.rocks={}
@@ -60,6 +60,7 @@ static func training_reason(w,a: Dictionary,own_job: int=-1) -> String:
 	return ""
 
 static func reason(w,kind: String,p: Vector2i=Vector2i.ZERO,id: int=-1,own_job: int=-1) -> String:
+	if kind=="clear_tree":return w.Harvest.tree_reason(w,p,own_job)
 	if kind=="train":return training_reason(w,w.Orders.animal(w,id),own_job)
 	if kind!="mine":return "対応する作業ではありません"
 	if not w.inside(p) or not w.rocks.has(p) or w.rocks[p].get("amount",0)<=0:return "採掘する岩がありません"
@@ -71,13 +72,18 @@ static func reason(w,kind: String,p: Vector2i=Vector2i.ZERO,id: int=-1,own_job: 
 static func designate(w,kind: String,p: Vector2i=Vector2i.ZERO,id: int=-1) -> bool:
 	if not w.working() or w.jobs.size()>=w.Jobs.LIMIT or reason(w,kind,p,id)!="":return false
 	if kind=="train":p=w.Orders.animal(w,id).pos
-	var j={"id":w.next_job_id,"kind":kind,"pos":p,"animal_id":id,"state":"pending","resource":"","reserved":0,"started":false,"work_category":"gather" if kind=="mine" else "animal","work_elapsed":0.0,"explicit_designation":true}
+	var j={"id":w.next_job_id,"kind":kind,"pos":p,"animal_id":id,"state":"pending","resource":"","reserved":0,"started":false,"work_category":"gather" if kind in ["mine","clear_tree"] else "animal","work_elapsed":0.0,"explicit_designation":true}
+	if kind=="clear_tree":j.world_target=w.trees[p]
+	j.queued_tick=w.tick
 	w.next_job_id+=1;w.jobs.append(j);w.Life.wake_auto(w)
 	w.job_log.append({"tick":w.tick,"event":"queued","id":j.id,"kind":kind,"pos":[p.x,p.y],"animal_id":id})
 	return true
 
 static func set_forbidden(w,kind: String,p: Vector2i,id: int,value: bool) -> bool:
-	if kind=="mine":
+	if kind=="clear_tree":
+		if not w.trees.has(p):return false
+		w.Harvest.target(w,kind,p).forbidden=value;w.Harvest.save(w)
+	elif kind=="mine":
 		if not w.rocks.has(p):return false
 		w.rocks[p].forbidden=value;save(w)
 	elif kind=="train":
@@ -92,6 +98,7 @@ static func set_forbidden(w,kind: String,p: Vector2i,id: int,value: bool) -> boo
 	return true
 
 static func missing(w,j) -> bool:
+	if j.kind=="clear_tree":return not w.trees.has(j.pos) or w.trees[j.pos]!=j.get("world_target",w.trees[j.pos])
 	if j.kind=="mine":return not w.rocks.has(j.pos) or w.rocks[j.pos].get("amount",0)<=0
 	var a=w.Orders.animal(w,j.animal_id)
 	return not w.Livestock.owned(w,a) or a.get("dead",false) or a.get("lost",false) or a.get("hp",0)<=0
@@ -103,6 +110,9 @@ static func held(w,a) -> bool:
 	return not actor.is_empty() and actor.get("hp",0)>0 and actor.get("state","")=="free" and not actor.get("resting",false) and w.distance(actor.pos,a.pos)<=1 and training_reason(w,a,j.id)==""
 
 static func execute(w,j,actor):
+	if j.kind in w.Harvest.KINDS:
+		if j.get("cancel_requested",false):w.Jobs.cancel(w,j.id);return
+		w.Harvest.execute(w,j,actor);return
 	if j.kind not in KINDS or not j.get("explicit_designation",false) or j.get("cancel_requested",false):w.Jobs.cancel(w,j.id);return
 	if missing(w,j):w.Jobs.complete(w,j,false);return
 	var why=reason(w,j.kind,j.pos,j.animal_id,j.id)
@@ -110,18 +120,11 @@ static func execute(w,j,actor):
 	if j.kind=="train":j.pos=w.Orders.animal(w,j.animal_id).pos
 	if not w.Jobs.walk(w,j,w.neighbors(j.pos),actor):return
 	j.started=true;j.state="working";j.phase="work";j.work_elapsed+=w.DT*w.Jobs.factor(actor)
-	if j.work_elapsed<(MINE_SECONDS if j.kind=="mine" else TRAIN_SECONDS):return
+	if j.work_elapsed<TRAIN_SECONDS:return
 	if reason(w,j.kind,j.pos,j.animal_id,j.id)!="":j.state="blocked";j.block_reason=reason(w,j.kind,j.pos,j.animal_id,j.id);return
-	if j.kind=="mine":
-		var amount=w.rocks[j.pos].amount;w.rocks.erase(j.pos)
-		if j.pos not in w.mined_rock_cells:w.mined_rock_cells.append(j.pos)
-		save(w)
-		var output=w.Stock.add(w,"stone",amount,j.pos);output.mining_job_id=j.id
-		w.PlayerEvents.add(w,"採掘完了：現地に石%d個"%amount,"mine_done:%d"%j.id)
-	else:
-		var a=w.Orders.animal(w,j.animal_id);var before=a.loyalty
-		a.loyalty=mini(100,a.loyalty+TRAIN_GAIN);a.last_training_day=w.last_daily_day
-		for owned in w.campaign.animals:
-			if owned.id==a.id:owned.loyalty=a.loyalty;owned.last_training_day=a.last_training_day
-		w.PlayerEvents.add(w,w.animal_name(a)+"の調教完了：基礎忠誠 %d → %d"%[before,a.loyalty],"train_done:%d"%j.id)
+	var a=w.Orders.animal(w,j.animal_id);var before=a.loyalty
+	a.loyalty=mini(100,a.loyalty+TRAIN_GAIN);a.last_training_day=w.last_daily_day
+	for owned in w.campaign.animals:
+		if owned.id==a.id:owned.loyalty=a.loyalty;owned.last_training_day=a.last_training_day
+	w.PlayerEvents.add(w,w.animal_name(a)+"の調教完了：基礎忠誠 %d → %d"%[before,a.loyalty],"train_done:%d"%j.id)
 	w.Jobs.complete(w,j,true)

@@ -34,6 +34,7 @@ var birds: AudioStreamPlayer
 var ambience_rng = RandomNumberGenerator.new()
 var next_bird = 12.0
 var danger_until = 0.0
+var work_sound_until=0.0
 
 func _ready():
 	for i in range(3):
@@ -43,6 +44,7 @@ func _ready():
 		voices.append(player)
 	for kind in ["whistle", "build", "repair", "remove", "collect", "gate", "attack", "object", "bark", "invasion", "restrained", "carried", "rescue", "win", "lose", "animal_danger", "auto_start", "early_clear", "merchant"]:
 		cache[kind] = synth(kind, 0.85 if kind in ["win", "rescue", "invasion", "carried", "early_clear", "merchant"] else 0.22)
+	for kind in ["mine_hit","chop_hit","rock_crumble","tree_fall"]:cache[kind]=synth(kind,0.22 if kind.ends_with("hit") else 0.4)
 	ambient = AudioStreamPlayer.new()
 	ambient.stream = synth("ambient", 8.0)
 	cache.ambient = ambient.stream
@@ -127,6 +129,14 @@ func cue(kind: String):
 	voices[channel].stream = cache[kind]
 	voices[channel].play()
 
+func harvest_cue(kind: String,distance: float=0.0) -> bool:
+	if not cache.has(kind) or seconds<work_sound_until or distance>14:return false
+	if seconds-last_play.get("collect",-100.0)<0.25:return false
+	work_sound_until=seconds+0.18
+	played[kind]=played.get(kind,0)+1
+	voices[1].volume_db=-16.0-minf(10.0,distance*0.7)
+	voices[1].stream=cache[kind];voices[1].play();return true
+
 func synth(kind: String, length: float) -> AudioStreamWAV:
 	var stream = AudioStreamWAV.new()
 	stream.format = AudioStreamWAV.FORMAT_16_BITS
@@ -169,6 +179,10 @@ func synth(kind: String, length: float) -> AudioStreamWAV:
 				if t >= 0.15: value += wooden_bell(t - 0.15, 494) * 0.45
 				if t >= 0.30: value += wooden_bell(t - 0.30, 587) * 0.45
 			"bark": value = (sin(TAU * (185 * t - 140 * t * t)) + noise * 0.5) * sin(fmod(t, 0.11) / 0.11 * PI) * envelope * 0.55
+			"mine_hit":value=(noise*0.48+sin(t*TAU*940)*exp(-t*28)*0.35)*envelope
+			"chop_hit":value=(noise*0.25+sin(t*TAU*125)*0.7)*envelope
+			"rock_crumble":value=(noise*0.65+wind*2.0)*envelope
+			"tree_fall":value=(noise*0.35+sin(t*TAU*80)*0.45)*envelope
 			"build", "remove", "object": value = (noise * 0.45 + sin(t * TAU * 95) * 0.55) * envelope
 			"repair", "gate": value = (sin(t * TAU * (370 if kind == "repair" else 210)) * 0.6 + noise * 0.1) * envelope
 			"collect": value = sin(TAU * (720 * t + 600 * t * t)) * envelope * 0.5

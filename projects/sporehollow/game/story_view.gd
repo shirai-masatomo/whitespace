@@ -2,7 +2,7 @@ extends RefCounted
 const IDOL=preload("res://art_delivery/ui_world_direction_v1/candidates/world/goldA.png")
 const IDOL_ANCHOR=Vector2(72,152)
 const TREE_SCALE=1.35 # Uniform from native pixels; does not change the collision footprint.
-const LABELS={"clear_tree":"開拓","inspect_idol":"像を調べる","pray_wealth":"富を願う","pray_animal":"動物を願う","pray_gold":"お金を願う","pray_item":"アイテムを願う","repair_idol":"像を修理","repair_idol_soil":"土で修理 +1","repair_idol_wood":"木で修理 +2","repair_idol_stone":"石で修理 +3","recover_idol":"像を固定"}
+const LABELS={"clear_tree":"伐採","inspect_idol":"像を調べる","pray_wealth":"富を願う","pray_animal":"動物を願う","pray_gold":"お金を願う","pray_item":"アイテムを願う","repair_idol":"像を修理","repair_idol_soil":"土で修理 +1","repair_idol_wood":"木で修理 +2","repair_idol_stone":"石で修理 +3","recover_idol":"像を固定"}
 
 static func tree_foot(g,p: Vector2i) -> Vector2:
 	var rank=preload("res://game/forest_pattern.gd").rank(p,g.world.seed_value)

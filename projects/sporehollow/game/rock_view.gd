@@ -68,6 +68,11 @@ static func rock(g,p: Vector2i):
 		var x=x0+6+floori(unit(w,p,500+i*2)*maxf(2,x1-x0-14)/2)*2
 		var y=y0+6+floori(unit(w,p,501+i*2)*maxf(2,y1-y0-12)/2)*2
 		g.draw_rect(Rect2(c+Vector2(x,y),Vector2(4,2)),RIM if i%2 else Color("aaa48c"))
+	var damage=w.Harvest.progress(w,"mine",p)
+	if damage>0.2:
+		for i in range(1+floori(damage*4)):
+			var start=c+Vector2(x0+8+i*7,y0+6)
+			g.draw_polyline(PackedVector2Array([start,start+Vector2(-3,4),start+Vector2(2,7),start+Vector2(-2,11)]),DARK,1)
 	# Moss and small cracks stay subordinate to the stone silhouette.
 	if shape.front:
 		for i in range(3):g.draw_rect(Rect2(c+Vector2(x0+6+i*8,y1-2),Vector2(4,2)),MOSS if unit(w,p,600+i)>0.35 else TOP)

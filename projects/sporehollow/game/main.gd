@@ -57,6 +57,8 @@ const TOOLS = {"kennel":"犬小屋 木20","coop":"鶏小屋 木30","milk":"搾�
 const ORDER_HELP={"auto":"状況に合わせて行動します。戦闘・救護・その動物の仕事を任せます。","guide":"行き先をクリックして一緒に歩きます。\n物や動物は、押した時点の近くの空き場所へ。\n1匹なら隣接し、遅い方に合わせます。\n複数は近くにまとまり、到着でおまかせへ。\n右クリックで行き先指定を解除します。","stay":"その場所で待ちます。近くの敵には応戦しますが、追いかけません。","wander":"周囲を巡回し、敵を見つけたら攻撃します。","rest":"安全と回復を優先します。危険から離れ、無理に追わず近くの敵に応戦します。","attack_target":"敵を選べ。狙える距離や見通しが必要です。","equip":"持ち物から装備を選び、主人公が届けます。","milk":"乳牛に近づいて搾乳します。1日1回です。","charge":"突撃する行き先を選びます。"}
 const GROUP_TOOLS = [["wall", "wood_wall", "stone_wall", "soil_tile", "wood_tile", "stone_tile", "door", "locked_door", "kennel", "coop", "place_kokeshi", "place_fossil"], ["auto", "guide", "stay", "wander", "rest", "attack_target", "equip", "milk", "charge"], ["collect"]]
 const RockView=preload("res://game/rock_view.gd")
+const HarvestView=preload("res://game/harvest_view.gd")
+var harvest_view=HarvestView.new()
 const StockView=preload("res://game/stock_view.gd")
 const BoardArt = preload("res://game/board_art.gd")
 const BuildingArt = preload("res://game/building_art.gd")
@@ -600,7 +602,9 @@ func build_context_actions():
 	elif selected.get("kind") == "job":
 		rows.append(["cancel_near", "取消", "cross", cancel_work.bind(selected.id), false, "この予定だけを取り消す"])
 	elif selected.get("kind")=="tree":
-		rows.append(["clear_tree","道具が必要","hammer",func():pass,true,"伐採には道具が必要です（道具は未実装）"])
+		rows.append(["clear_tree","伐採","hammer",harvest_selected_trees,false,"採集担当が現地で伐採。木材は現地に残ります"])
+		rows.append(["tree_forbid","禁止","cross",harvest_tree_forbid.bind(true),false,"選択した木の伐採を保留"])
+		rows.append(["tree_allow","許可","check",harvest_tree_forbid.bind(false),false,"伐採禁止を解除。新しい予定は登録しません"])
 		if selected_trees.any(func(p):return job_reserved("clear_tree",p)): rows.append(["cancel_near","取消","cross",cancel_selected_work,false,"開拓予定を取り消す"])
 	elif selected.get("kind")=="idol":
 		for kind in ["inspect_idol","pray_animal","pray_gold","pray_item","repair_idol_soil","repair_idol_wood","repair_idol_stone","recover_idol"]:
@@ -722,12 +726,23 @@ func save_morning(morning) -> bool:
 	save_status="時計・物資・仕事・敵を途中保存しました" if ok else "途中保存できませんでした。空き容量などを確認してください"
 	return ok
 
+func harvest_selected_trees():
+	var accepted=0
+	for p in selected_trees:
+		if world.Tasks.designate(world,"clear_tree",p):accepted+=1
+	notice("伐採：%d件指定 / 未登録%d件"%[accepted,selected_trees.size()-accepted]);refresh()
+
+func harvest_tree_forbid(value: bool):
+	for p in selected_trees:world.Tasks.set_forbidden(world,"clear_tree",p,-1,value)
+	refresh()
+
 func cancel_selected_work():
 	for j in world.jobs.duplicate():
 		if (j.kind=="collect" and j.pos in selected_resources) or (selected.get("kind")=="tree" and j.kind=="clear_tree" and j.pos in selected_trees): world.act("cancel_job",Vector2i.ZERO,j.id)
 	refresh()
 
 func reset_view():
+	harvest_view.setup(world)
 	merchant_context=false
 	merchant_requested=false
 	field_shop=false
@@ -912,7 +927,7 @@ func refresh_jobs():
 		UI.button(row, Color("c6d1ac") if j.get("assigned_to","")!="" else UI.PAPER)
 		for state in ["normal","hover","pressed","disabled"]:
 			row.get_theme_stylebox(state).content_margin_top=3;row.get_theme_stylebox(state).content_margin_bottom=3
-		var names = {"mine":"採掘","train":"調教","direct_attack":"指定攻撃","keeper_equipment":"装備","slaughter":"と殺","milk":"搾乳","place_kokeshi":"こけし","place_fossil":"化石","wall": "壁", "door":"ドア","locked_door":"施錠ドア","wood_wall":"木壁","stone_wall":"石壁","soil_tile":"土タイル","wood_tile":"木タイル","stone_tile":"石タイル", "kennel": "犬小屋", "coop": "鶏小屋", "move": "歩く", "collect": "採集", "haul":"運搬", "repair": "修理", "remove": "解体", "remove_floor":"タイル解体", "repair_floor":"床修理", "gate": "ドアを開閉", "equip":"装備", "animal_order": "仲間へ指示"}
+		var names = {"mine":"採掘","clear_tree":"伐採","train":"調教","direct_attack":"指定攻撃","keeper_equipment":"装備","slaughter":"と殺","milk":"搾乳","place_kokeshi":"こけし","place_fossil":"化石","wall": "壁", "door":"ドア","locked_door":"施錠ドア","wood_wall":"木壁","stone_wall":"石壁","soil_tile":"土タイル","wood_tile":"木タイル","stone_tile":"石タイル", "kennel": "犬小屋", "coop": "鶏小屋", "move": "歩く", "collect": "採集", "haul":"運搬", "repair": "修理", "remove": "解体", "remove_floor":"タイル解体", "repair_floor":"床修理", "gate": "ドアを開閉", "equip":"装備", "animal_order": "仲間へ指示"}
 		row.text = "%s%s" % [ "› " if j.state != "pending" else "", ("待機 · " if j.state == "blocked" else "") + names.get(j.kind, StoryView.LABELS.get(j.kind,"仕事"))]
 		if j.get("purpose","")=="merchant":row.text="交渉へ向かう"
 		if j.get("cancel_requested",false):row.text="取消待ち · "+names.get(j.kind,"仕事")
@@ -1553,6 +1568,8 @@ func _process(delta):
 			row.position.y=move_toward(row.position.y,target_y,delta*1100)
 	update_pointer_cursor()
 	smooth_actor("keeper", world.keeper.pos, delta)
+	for key in world.workers:
+		if key!="keeper":smooth_actor(key,world.workers[key].pos,delta)
 	if not world.story.idol.is_empty(): smooth_actor("idol",world.Story.at(world),delta)
 	if world.phase == "dawn" and clock - transition_at > 4.8 and not menu_open: advance()
 	if world.merchant_present() and world.tick>=world.merchant_arrive_tick+4 and not arrival_bell:
@@ -1707,6 +1724,7 @@ func sound_wave(p: Vector2, facing: int):
 	puff(p+Vector2(facing*10,-8),"sound_wave_left" if facing<0 else "sound_wave")
 
 func update_facility_effects(delta: float):
+	harvest_view.sync(self)
 	while seen_jobs < world.job_log.size():
 		var event = world.job_log[seen_jobs]
 		seen_jobs += 1
@@ -1857,7 +1875,9 @@ func _draw():
 	for actor in scene_actors():
 		match actor.kind:
 			"rock": RockView.rock(self,actor.data)
-			"tree": StoryView.tree(self,actor.data,actor.get("deep",false))
+			"tree": HarvestView.tree(self,actor.data,actor.get("deep",false))
+			"harvest_remnant": HarvestView.remnant(self,actor.data)
+			"worker": draw_registered_worker(actor.data)
 			"idol": StoryView.idol(self)
 			"door_part": BuildingArt.door_layer(self,center(actor.data),world.structures[actor.data],actor.part)
 			"building": draw_structure(center(actor.data),world.structures[actor.data])
@@ -1867,6 +1887,7 @@ func _draw():
 			"keeper": draw_keeper_actor()
 	for f in dust:
 		Delivered.draw_clip(self,"fx/"+f.kind,f.pos,visual_time-f.at)
+	HarvestView.particles(self)
 	TaskControls.draw(self)
 	draw_work_plans()
 	item_commands.draw(self)
@@ -1882,6 +1903,9 @@ func _draw():
 
 func scene_actors() -> Array:
 	var actors=[]
+	for e in HarvestView.remnants(self):actors.append({"y":center(e.pos).y+14,"x":e.pos.x,"kind":"harvest_remnant","data":e})
+	for key in world.workers:
+		if key!="keeper" and world.workers[key].get("placed",false) and world.workers[key].get("carrier",-1)<0:actors.append({"y":actor_pixel(key,world.workers[key].pos).y+14,"x":world.workers[key].pos.x,"kind":"worker","data":key})
 	for p in world.rocks:actors.append({"y":center(p).y+14,"x":p.x,"kind":"rock","data":p})
 	for p in world.trees: actors.append({"y":StoryView.tree_foot(self,p).y,"x":p.x,"kind":"tree","data":p})
 	if not world.story.idol.is_empty(): actors.append({"y":actor_pixel("idol",world.Story.at(world)).y+TILE.y+14,"x":world.Story.at(world).x,"kind":"idol"})
@@ -2709,7 +2733,7 @@ func draw_keeper_card():
 	if k.state=="hidden_rest":activity="療養中：HP1で起床可 / HP8で自動復帰"
 	label_on(hud, Vector2(30, 676), activity, 15, UI.INK)
 	if not world.Work.active(world).is_empty() and k.get("life_need","")!="food" and k.get("malnutrition",0)<=0:
-		var names = {"mine":"採掘","train":"調教","direct_attack":"指定攻撃","keeper_equipment":"装備","slaughter":"と殺","milk":"搾乳","place_kokeshi":"こけし","place_fossil":"化石","wall": "壁", "door":"ドア","locked_door":"施錠ドア","wood_wall":"木壁","stone_wall":"石壁","soil_tile":"土タイル","wood_tile":"木タイル","stone_tile":"石タイル", "collect": "回収", "move": "歩く", "equip":"装備", "animal_order": "仲間へ指示", "repair": "修理", "remove": "解体", "remove_floor":"タイル解体", "repair_floor":"床修理", "gate": "ドア", "kennel": "犬小屋", "coop": "鶏小屋"}
+		var names = {"mine":"採掘","clear_tree":"伐採","train":"調教","direct_attack":"指定攻撃","keeper_equipment":"装備","slaughter":"と殺","milk":"搾乳","place_kokeshi":"こけし","place_fossil":"化石","wall": "壁", "door":"ドア","locked_door":"施錠ドア","wood_wall":"木壁","stone_wall":"石壁","soil_tile":"土タイル","wood_tile":"木タイル","stone_tile":"石タイル", "collect": "回収", "move": "歩く", "equip":"装備", "animal_order": "仲間へ指示", "repair": "修理", "remove": "解体", "remove_floor":"タイル解体", "repair_floor":"床修理", "gate": "ドア", "kennel": "犬小屋", "coop": "鶏小屋"}
 		var next = names.get(world.Work.active(world).get("kind",""), "仕事を選択中")
 		label_on(hud, Vector2(166, 676), next, 14, UI.INK)
 	hud.draw_set_transform(Vector2.ZERO)
@@ -2925,6 +2949,12 @@ func draw_enemy_actor(e: Dictionary):
 		draw_rect(enemy_hit_rect(e), Color("e6c998"), false, 2)
 
 
+func draw_registered_worker(key: String):
+	var a=world.workers[key];var foot=actor_pixel(key,a.pos)+Vector2(0,14)
+	var walking=Vector2(a.pos).distance_to(view_positions.get(key,Vector2(a.pos)))>0.025
+	Art.sprite(self,"keeper","walk" if walking else "idle",int(a.get("facing",1)),foot,visual_time,1.0,1.15*ACTOR_SCALE)
+	HarvestView.tool(self,key)
+
 func draw_keeper_actor():
 	var p = actor_pixel("keeper", world.keeper.pos)
 	var walking = Farm.Life.able(world) and Vector2(world.keeper.pos).distance_to(view_positions.get("keeper",Vector2(world.keeper.pos)))>0.025
@@ -2939,7 +2969,7 @@ func draw_keeper_actor():
 	if world.keeper.state=="hidden_rest" or world.keeper.get("nutrition_down",false): pose.action="rest"
 	Art.sprite(self,"keeper",pose.action,int(world.keeper.get("facing",1)),p+Vector2(0,14),pose.elapsed,1.0,1.15*ACTOR_SCALE)
 
-	if Farm.Life.able(world) and not world.Work.active(world).is_empty() and world.Work.active(world).state == "working":
+	if Farm.Life.able(world) and not world.Work.active(world).is_empty() and world.Work.active(world).state == "working" and HarvestView.active(self).is_empty():
 		var hand = p + Vector2(0,14) + Vector2(12,-9)*ACTOR_SCALE
 		var hammer = hand + Vector2(8, -8 + sin(visual_time * 18) * 6)
 		draw_line(hand, hammer, Color("a58051"), 3)
@@ -2948,6 +2978,7 @@ func draw_keeper_actor():
 		label_on(self, p + Vector2(14, -18), "!", 18, Color("f69773"))
 		draw_line(p + Vector2(-10, 8), p + Vector2(10, 8), Color("513f39"), 3)
 	draw_set_transform(Vector2.ZERO)
+	HarvestView.tool(self)
 	var owner_pixel = center(view_positions.get("keeper", Vector2(world.keeper.pos)))
 	if world.keeper.carrier < 0:
 		if selected.get("kind") == "keeper": draw_rect(keeper_hit_rect(), Color("ffe2a3"), false, 2)

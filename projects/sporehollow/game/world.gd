@@ -150,6 +150,10 @@ const Livestock=preload("res://game/livestock.gd")
 const Tasks=preload("res://game/colony_tasks.gd")
 var rocks: Dictionary = {}
 var mined_rock_cells: Array = []
+const Harvest=preload("res://game/harvest_work.gd")
+var tree_work: Dictionary = {}
+var harvest_events: Array = []
+var next_harvest_event=1
 const Zones=preload("res://game/colony_zones.gd")
 var zones: Array = []
 var next_zone_id=1
@@ -378,6 +382,7 @@ func _init(data: Dictionary = {}, seed_number: int = 17, stage_override: Diction
 	Cycle.init(self)
 	Tasks.init(self)
 	Biome.populate(self)
+	Harvest.init(self)
 	boundary_version=int(campaign.get("boundary_version",0))
 	Land.migrate(self)
 	# The morning snapshot includes migrated terrain and one-time morning events.
@@ -1037,6 +1042,7 @@ func repair(p: Vector2i, target_layer: String="structure") -> bool:
 func persist_farm():
 	Biome.persist(self)
 	Tasks.save(self)
+	Harvest.save(self)
 	Stock.save(self)
 	campaign.calendar_ticks=calendar_ticks;campaign.last_daily_day=last_daily_day
 	Work.save(self)

@@ -1,5 +1,5 @@
 extends RefCounted
-const LABELS={"haul":"回収","forbid":"禁止","allow":"許可","clear":"解除"}
+const LABELS={"haul":"回収","forbid":"禁止","allow":"許可","clear":"解除","mine":"採掘","clear_tree":"伐採"}
 var pressed=false
 var first=Vector2i.ZERO
 var last=Vector2i.ZERO
@@ -7,13 +7,14 @@ func select(g,kind: String):
 	pressed=false;g.tool=kind;g.refresh()
 func build(g):
 	if g.group!=4 or not g.world.working() or g.field_shop or g.field_book:return
-	var p=g.ColonyPanels.panel(g,Rect2(8,655,464,88))
+	var p=g.ColonyPanels.panel(g,Rect2(8,611,464,132))
 	g.ColonyPanels.label(p,"クリック / 範囲指定 · 右クリックで選択解除",Vector2(12,8),14)
 	var i=0
 	for kind in LABELS:
-		g.add_button(g.palette,"command_"+kind,LABELS[kind],Rect2(20+i*112,691,104,36),select.bind(g,kind))
+		g.add_button(g.palette,"command_"+kind,LABELS[kind],Rect2(20+(i%4)*112,647+floori(i/4.0)*42,104,36),select.bind(g,kind))
 		g.UI.selected(g.buttons["command_"+kind],g.tool==kind)
 		g.buttons["command_"+kind].tooltip_text="地面の物資を保管域へ運ぶ仕事を登録。重複は登録しません。" if kind=="haul" else ("範囲内の取消可能な仕事を解除。建物や物資は削除しません。" if kind=="clear" else "物資の禁止/許可を変更。許可しても回収は登録しません。")
+		if kind in g.world.Harvest.KINDS:g.buttons["command_"+kind].tooltip_text="採集担当が対象ごとに現地作業。成果は回収命令で備蓄へ運びます。"
 		i+=1
 func cell(g,point: Vector2) -> Vector2i:return Vector2i((g.get_canvas_transform().affine_inverse()*point/g.TILE).floor())
 func input(g,event) -> bool:
@@ -40,6 +41,7 @@ func draw(g):
 	var low=Vector2i(mini(from.x,to.x),mini(from.y,to.y));var high=Vector2i(maxi(from.x,to.x),maxi(from.y,to.y))
 	var area=Rect2(Vector2(low)*g.TILE,Vector2(high-low+Vector2i.ONE)*g.TILE)
 	g.draw_rect(area,Color(0.8,0.85,0.65,0.15));g.draw_rect(area,Color("f3df9e"),false,2)
-	var targets=g.world.Stock.cancel_targets(g.world,from,to) if g.tool=="clear" else g.world.Stock.command_targets(g.world,from,to,g.tool)
-	for row in targets:g.draw_rect(Rect2(g.center(row.pos if g.tool=="clear" else g.world.Stock.command_pos(g.world,row))-Vector2(15,15),Vector2(30,30)),Color("ffeab4"),false,3)
+	var targets=g.world.Harvest.cells(g.world,from,to,g.tool).map(func(p):return {"pos":p}) if g.tool in g.world.Harvest.KINDS else (g.world.Stock.cancel_targets(g.world,from,to) if g.tool=="clear" else g.world.Stock.command_targets(g.world,from,to,g.tool))
+	if g.tool in ["forbid","allow"]:targets.append_array(g.world.Harvest.cells(g.world,from,to).map(func(p):return {"pos":p}))
+	for row in targets:g.draw_rect(Rect2(g.center(row.pos if g.tool=="clear" else (row.pos if row.get("stock_id",-1)<0 else g.world.Stock.command_pos(g.world,row)))-Vector2(15,15),Vector2(30,30)),Color("ffeab4"),false,3)
 	g.label_on(g,g.get_canvas_transform().affine_inverse()*g.pointer+Vector2(12,-12),"%s %d件"%[LABELS[g.tool],targets.size()],15,g.UI.PAPER)

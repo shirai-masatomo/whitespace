@@ -277,6 +277,7 @@ static func cancel_targets(w,first: Vector2i,last: Vector2i) -> Array:
 	return rows
 
 static func designate(w,kind: String,first: Vector2i,last: Vector2i) -> Dictionary:
+	if kind in w.Harvest.KINDS:return w.Harvest.designate(w,kind,first,last) if w.working() else {"accepted":0,"skipped":0}
 	if kind=="clear":
 		if not w.working():return {"accepted":0,"skipped":0}
 		var accepted=0;var targets=cancel_targets(w,first,last)
@@ -284,14 +285,15 @@ static func designate(w,kind: String,first: Vector2i,last: Vector2i) -> Dictiona
 			if w.Jobs.cancel(w,j.id):accepted+=1
 		return {"accepted":accepted,"skipped":targets.size()-accepted}
 	if kind not in ["haul","forbid","allow"] or not w.working():return {"accepted":0,"skipped":0}
-	var rows=command_targets(w,first,last,kind);var accepted=0
+	var rows=command_targets(w,first,last,kind);var accepted=w.Harvest.forbid(w,first,last,kind=="forbid") if kind in ["forbid","allow"] else 0
+	var object_accepted=accepted
 	for row in rows:
 		if kind=="haul":
 			if enqueue_haul(w,row):accepted+=1
 		else:
 			row.forbidden=kind=="forbid";row.erase("forbidden_reconciled");accepted+=1
 	reconcile_forbidden(w);sync(w)
-	return {"accepted":accepted,"skipped":rows.size()-accepted}
+	return {"accepted":accepted,"skipped":rows.size()-(accepted-object_accepted)}
 
 static func reconcile_forbidden(w):
 	var affected=[];var food_owners=[]

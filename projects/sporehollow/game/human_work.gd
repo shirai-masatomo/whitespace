@@ -24,11 +24,11 @@ static func category(w,j) -> String:
 	return Policy.category(w,j)
 
 static func shared(w,j) -> bool:
-	return w.BUILD.has(j.kind) or j.kind in ["collect","haul","slaughter","mine","train"]
+	return w.BUILD.has(j.kind) or j.kind in ["collect","haul","slaughter","mine","train","clear_tree"]
 
 static func target_key(w,j) -> String:
 	if j.kind in ["slaughter","train"]:return "animal:%d"%j.animal_id
-	if j.kind=="mine":return "rock:%d:%d"%[j.pos.x,j.pos.y]
+	if j.kind in ["mine","clear_tree"]:return "%s:%d:%d"%[j.kind,j.pos.x,j.pos.y]
 	if j.kind=="haul":return "stock:%d"%j.stock_id
 	var layer=w.BUILD[j.kind].get("layer","structure") if w.BUILD.has(j.kind) else j.get("target_layer","collect" if j.kind=="collect" else j.kind)
 	return "%s:%d:%d"%[layer,j.pos.x,j.pos.y]

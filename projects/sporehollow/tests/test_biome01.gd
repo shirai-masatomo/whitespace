@@ -31,7 +31,7 @@ func run():
 		check(kinds.size()==5,"Five terrain characters present: "+str(seed_number)+" "+str(kinds))
 		check(center_trees==0 and w.keeper.pos.distance_to(Vector2i(25,17))<5,"Organic central opening and initial resident near idol: "+str(seed_number))
 		check(seen.size()==free_count,"Every walkable cell connects to center: "+str(seed_number))
-		check(w.Land.border_cells().all(func(p):return seen.has(p)),"All four edges and corners reachable: "+str(seed_number))
+		check(w.Land.border_cells().all(func(p):return seen.has(p) or (w.rocks.has(p) and w.neighbors(p).any(func(n):return seen.has(n)))),"All four edges reachable or occupied by an adjacent-mineable rock: "+str(seed_number))
 		check(w.entries.all(func(p):return seen.has(p)) and seen.has(w.logistics_entry) and w.Story.goals(w).any(func(p):return seen.has(p)),"Merchant, raid entries and idol approaches stay connected: "+str(seed_number))
 		check(not w.trees.is_empty() and w.trees.keys().all(func(p):return w.Biome.field(w,p)[1]>0.4),"Trees belong to woodland: "+str(seed_number))
 		check(not w.rocks.is_empty() and w.rocks.keys().all(func(p):return w.Biome.field(w,p)[2]>0.43),"Existing mine targets belong to rocky ground: "+str(seed_number))
