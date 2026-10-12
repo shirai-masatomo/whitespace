@@ -1,0 +1,362 @@
+{
+  "cases": [
+    {
+      "case": "center",
+      "method": "All removal through ordinary World.step; centre first opens a real edge corridor",
+      "restore_identical": true,
+      "rock_count": 7,
+      "stone_owned": 16
+    },
+    {
+      "case": "edge",
+      "method": "All removal through ordinary World.step; centre first opens a real edge corridor",
+      "restore_identical": true,
+      "rock_count": 8,
+      "stone_owned": 8
+    },
+    {
+      "case": "corner",
+      "method": "All removal through ordinary World.step; centre first opens a real edge corridor",
+      "restore_identical": true,
+      "rock_count": 8,
+      "stone_owned": 8
+    }
+  ],
+  "fixture_base": [
+    18,
+    26
+  ],
+  "material_commit": "7b6e81320009710b861fca04d6b86470de3835d7",
+  "method": "Seed31 actual rocky biome distribution, controlled 3x3 cells; ordinary fixed-tick tasks and pathfinding, no completion calls or teleport into the centre; 104 frames per case at 8 fps",
+  "screens": [
+    {
+      "file": "center_before.png",
+      "masks": {
+        "18,26": 6,
+        "18,27": 7,
+        "18,28": 3,
+        "19,26": 14,
+        "19,27": 15,
+        "19,28": 11,
+        "20,26": 12,
+        "20,27": 13,
+        "20,28": 9
+      },
+      "progress": 0.0,
+      "rock_count": 9,
+      "seconds": 0,
+      "stone_owned": 0,
+      "stone_usable": 0,
+      "target": [
+        19,
+        27
+      ],
+      "target_exists": true,
+      "tick": 0,
+      "walkable": false
+    },
+    {
+      "file": "center_corridor.png",
+      "masks": {
+        "18,26": 6,
+        "18,27": 7,
+        "18,28": 1,
+        "19,26": 14,
+        "19,27": 11,
+        "20,26": 12,
+        "20,27": 13,
+        "20,28": 1
+      },
+      "progress": 0.0,
+      "rock_count": 8,
+      "seconds": 4.0,
+      "stone_owned": 8,
+      "stone_usable": 0,
+      "target": [
+        19,
+        27
+      ],
+      "target_exists": true,
+      "tick": 16,
+      "walkable": false
+    },
+    {
+      "file": "center_damage.png",
+      "masks": {
+        "18,26": 6,
+        "18,27": 7,
+        "18,28": 1,
+        "19,26": 14,
+        "19,27": 11,
+        "20,26": 12,
+        "20,27": 13,
+        "20,28": 1
+      },
+      "progress": 0.5625,
+      "rock_count": 8,
+      "seconds": 6.75,
+      "stone_owned": 8,
+      "stone_usable": 0,
+      "target": [
+        19,
+        27
+      ],
+      "target_exists": true,
+      "tick": 27,
+      "walkable": false
+    },
+    {
+      "file": "center_after.png",
+      "masks": {
+        "18,26": 6,
+        "18,27": 5,
+        "18,28": 1,
+        "19,26": 10,
+        "20,26": 12,
+        "20,27": 5,
+        "20,28": 1
+      },
+      "progress": 0.0,
+      "rock_count": 7,
+      "seconds": 9.25,
+      "stone_owned": 16,
+      "stone_usable": 0,
+      "target": [
+        19,
+        27
+      ],
+      "target_exists": false,
+      "tick": 37,
+      "walkable": true
+    },
+    {
+      "file": "center_drops_clear.png",
+      "masks": {
+        "18,26": 6,
+        "18,27": 5,
+        "18,28": 1,
+        "19,26": 10,
+        "20,26": 12,
+        "20,27": 5,
+        "20,28": 1
+      },
+      "progress": 0.0,
+      "rock_count": 7,
+      "seconds": 14.0,
+      "stone_owned": 16,
+      "stone_usable": 0,
+      "target": [
+        19,
+        27
+      ],
+      "target_exists": false,
+      "tick": 56,
+      "walkable": true
+    },
+    {
+      "file": "edge_before.png",
+      "masks": {
+        "18,26": 6,
+        "18,27": 7,
+        "18,28": 3,
+        "19,26": 14,
+        "19,27": 15,
+        "19,28": 11,
+        "20,26": 12,
+        "20,27": 13,
+        "20,28": 9
+      },
+      "progress": 0.0,
+      "rock_count": 9,
+      "seconds": 0,
+      "stone_owned": 0,
+      "stone_usable": 0,
+      "target": [
+        19,
+        28
+      ],
+      "target_exists": true,
+      "tick": 0,
+      "walkable": false
+    },
+    {
+      "file": "edge_damage.png",
+      "masks": {
+        "18,26": 6,
+        "18,27": 7,
+        "18,28": 3,
+        "19,26": 14,
+        "19,27": 15,
+        "19,28": 11,
+        "20,26": 12,
+        "20,27": 13,
+        "20,28": 9
+      },
+      "progress": 0.5625,
+      "rock_count": 9,
+      "seconds": 2.25,
+      "stone_owned": 0,
+      "stone_usable": 0,
+      "target": [
+        19,
+        28
+      ],
+      "target_exists": true,
+      "tick": 9,
+      "walkable": false
+    },
+    {
+      "file": "edge_after.png",
+      "masks": {
+        "18,26": 6,
+        "18,27": 7,
+        "18,28": 1,
+        "19,26": 14,
+        "19,27": 11,
+        "20,26": 12,
+        "20,27": 13,
+        "20,28": 1
+      },
+      "progress": 0.0,
+      "rock_count": 8,
+      "seconds": 4.75,
+      "stone_owned": 8,
+      "stone_usable": 0,
+      "target": [
+        19,
+        28
+      ],
+      "target_exists": false,
+      "tick": 19,
+      "walkable": true
+    },
+    {
+      "file": "edge_drops_clear.png",
+      "masks": {
+        "18,26": 6,
+        "18,27": 7,
+        "18,28": 1,
+        "19,26": 14,
+        "19,27": 11,
+        "20,26": 12,
+        "20,27": 13,
+        "20,28": 1
+      },
+      "progress": 0.0,
+      "rock_count": 8,
+      "seconds": 13.75,
+      "stone_owned": 8,
+      "stone_usable": 0,
+      "target": [
+        19,
+        28
+      ],
+      "target_exists": false,
+      "tick": 55,
+      "walkable": true
+    },
+    {
+      "file": "corner_before.png",
+      "masks": {
+        "18,26": 6,
+        "18,27": 7,
+        "18,28": 3,
+        "19,26": 14,
+        "19,27": 15,
+        "19,28": 11,
+        "20,26": 12,
+        "20,27": 13,
+        "20,28": 9
+      },
+      "progress": 0.0,
+      "rock_count": 9,
+      "seconds": 0,
+      "stone_owned": 0,
+      "stone_usable": 0,
+      "target": [
+        18,
+        28
+      ],
+      "target_exists": true,
+      "tick": 0,
+      "walkable": false
+    },
+    {
+      "file": "corner_damage.png",
+      "masks": {
+        "18,26": 6,
+        "18,27": 7,
+        "18,28": 3,
+        "19,26": 14,
+        "19,27": 15,
+        "19,28": 11,
+        "20,26": 12,
+        "20,27": 13,
+        "20,28": 9
+      },
+      "progress": 0.5625,
+      "rock_count": 9,
+      "seconds": 2.25,
+      "stone_owned": 0,
+      "stone_usable": 0,
+      "target": [
+        18,
+        28
+      ],
+      "target_exists": true,
+      "tick": 9,
+      "walkable": false
+    },
+    {
+      "file": "corner_after.png",
+      "masks": {
+        "18,26": 6,
+        "18,27": 3,
+        "19,26": 14,
+        "19,27": 15,
+        "19,28": 3,
+        "20,26": 12,
+        "20,27": 13,
+        "20,28": 9
+      },
+      "progress": 0.0,
+      "rock_count": 8,
+      "seconds": 4.75,
+      "stone_owned": 8,
+      "stone_usable": 0,
+      "target": [
+        18,
+        28
+      ],
+      "target_exists": false,
+      "tick": 19,
+      "walkable": true
+    },
+    {
+      "file": "corner_drops_clear.png",
+      "masks": {
+        "18,26": 6,
+        "18,27": 3,
+        "19,26": 14,
+        "19,27": 15,
+        "19,28": 3,
+        "20,26": 12,
+        "20,27": 13,
+        "20,28": 9
+      },
+      "progress": 0.0,
+      "rock_count": 8,
+      "seconds": 13.25,
+      "stone_owned": 8,
+      "stone_usable": 0,
+      "target": [
+        18,
+        28
+      ],
+      "target_exists": false,
+      "tick": 53,
+      "walkable": true
+    }
+  ],
+  "source_commit": "8147c1ccd045e1edb8534d09c3eb6a4e0ef7ee77"
+}

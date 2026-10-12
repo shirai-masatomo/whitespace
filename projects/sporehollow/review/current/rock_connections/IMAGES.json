@@ -1,0 +1,108 @@
+{
+  "images": [
+    {
+      "file": "boundary_before_fix.png",
+      "sha256": "ceac90e736f3b447c2a27090a0775175a50141d7e46bdbc32b77d3586f08150e",
+      "bytes": 121101,
+      "kind": "before_boundary_fix"
+    },
+    {
+      "file": "center.webp",
+      "sha256": "3409bff35b7c0e8059cfaae951c03b5898d499cba934706976222a9e1298df62",
+      "bytes": 2124958,
+      "kind": "actual_game_gpu_capture"
+    },
+    {
+      "file": "center_after.png",
+      "sha256": "d349dc7501965ed6c9d542c3e2ae8e298a576fb44ac24c41e275772a2bf1bf36",
+      "bytes": 127160,
+      "kind": "actual_game_gpu_capture"
+    },
+    {
+      "file": "center_before.png",
+      "sha256": "e7cad9b5e332a250aaecd20ad6cbf82d735e4311267177572ec0ab37997aa7fb",
+      "bytes": 110760,
+      "kind": "actual_game_gpu_capture"
+    },
+    {
+      "file": "center_corridor.png",
+      "sha256": "cfce377ff3373dfaa25d5399a238d1b9f9b489e534bd96cee955537a865fa4ee",
+      "bytes": 135319,
+      "kind": "actual_game_gpu_capture"
+    },
+    {
+      "file": "center_damage.png",
+      "sha256": "00ccd790ea30e86b4ec0755ad287d57a975a5c51e3b9908aab6d722a580938c9",
+      "bytes": 133189,
+      "kind": "actual_game_gpu_capture"
+    },
+    {
+      "file": "center_drops_clear.png",
+      "sha256": "853b22b341102e7709a304da13408e88d4224b73cbe8ac738e04bc18fe810d05",
+      "bytes": 142699,
+      "kind": "actual_game_gpu_capture"
+    },
+    {
+      "file": "corner.webp",
+      "sha256": "46ed674b1392e3875811aca7e67980d9d21329de89ae03b320a5c457d7a64e6e",
+      "bytes": 2038588,
+      "kind": "actual_game_gpu_capture"
+    },
+    {
+      "file": "corner_after.png",
+      "sha256": "a7949e8dfaa1c185943fa1c7a042abf85a3bfce32c61a8ec80c0dd25d93ecb39",
+      "bytes": 122134,
+      "kind": "actual_game_gpu_capture"
+    },
+    {
+      "file": "corner_before.png",
+      "sha256": "2dff86e39e2d7482403ff40dd7b9e2f6f9a7416ee690eeb1a9e521b7a691e758",
+      "bytes": 110698,
+      "kind": "actual_game_gpu_capture"
+    },
+    {
+      "file": "corner_damage.png",
+      "sha256": "0a30545e7b823a4b3a1df1b265d33d6bc89113f386b278dd48dd30713c2973a3",
+      "bytes": 120942,
+      "kind": "actual_game_gpu_capture"
+    },
+    {
+      "file": "corner_drops_clear.png",
+      "sha256": "c0ec194ae15dc113c7c2ecc20d3003c638847f9d20b913cafa37b6c317657b4f",
+      "bytes": 132613,
+      "kind": "actual_game_gpu_capture"
+    },
+    {
+      "file": "edge.webp",
+      "sha256": "d7b677d52fc635de37d580e2139dbf476fddcc8f41fc75af87c325e236cf8f51",
+      "bytes": 2030026,
+      "kind": "actual_game_gpu_capture"
+    },
+    {
+      "file": "edge_after.png",
+      "sha256": "41e07633a15eced08383d4c6a6ee7acfef92c3479ff0c224ec9c0ad1eb56ea8a",
+      "bytes": 121561,
+      "kind": "actual_game_gpu_capture"
+    },
+    {
+      "file": "edge_before.png",
+      "sha256": "e7cad9b5e332a250aaecd20ad6cbf82d735e4311267177572ec0ab37997aa7fb",
+      "bytes": 110760,
+      "kind": "actual_game_gpu_capture"
+    },
+    {
+      "file": "edge_damage.png",
+      "sha256": "2fa562ea0ea49d36feb0d30ba70ad2d49acf4372b35f0a9459d226c4e454cc35",
+      "bytes": 121000,
+      "kind": "actual_game_gpu_capture"
+    },
+    {
+      "file": "edge_drops_clear.png",
+      "sha256": "79f821006e54f31e90493eb13673e13e8b3260d661155a2de2076608490aeece",
+      "bytes": 137203,
+      "kind": "actual_game_gpu_capture"
+    }
+  ],
+  "composited": false,
+  "os_input": false
+}

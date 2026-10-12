@@ -67,14 +67,12 @@ static func remnant(g,e):
 		var id="world.tree_"+["a","b","c"][preload("res://game/forest_pattern.gd").rank(e.pos,g.world.seed_value)%3]
 		var foot=g.StoryView.tree_foot(g,e.pos);g.draw_set_transform(foot,1.3*smoothstep(0,0.8,t),Vector2.ONE*g.StoryView.TREE_SCALE)
 		g.Direction.draw(g,id+"_trunk",Vector2.ZERO,1-t);g.Direction.draw(g,id+"_canopy",Vector2.ZERO,1-t);g.draw_set_transform(Vector2.ZERO)
-	else:
-		for i in range(5):
-			var p=q+Vector2((i-2)*(6+12*t),-9+12*t+sin(i*2.1)*5)
-			g.draw_colored_polygon(PackedVector2Array([p+Vector2(-7,-6),p+Vector2(5,-7),p+Vector2(8,2),p+Vector2(-4,6)]),Color(g.RockView.TOP,1-t))
+	else:g.RockView.rubble(g,e.pos,1-t)
 static func particles(g):
 	for e in recent(g):
 		if e.event not in ["strike","complete"]:continue
 		var age=(g.world.tick-e.tick)*g.world.DT+g.accumulated;var t=clampf(age/EFFECT_SECONDS,0,1);var origin=g.center(e.pos)+Vector2(0,-8)
+		if e.kind=="mine":g.RockView.chips(g,e.pos,age);continue
 		for i in range(5):
 			var q=origin+Vector2((i-2)*8*t,-sin(t*PI)*(10+i*2)+t*12)
 			var shade=Color("c6bba0") if e.kind=="mine" else (Color("899950") if i%2 else Color("b58b57"))

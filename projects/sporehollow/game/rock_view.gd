@@ -1,78 +1,95 @@
 extends RefCounted
-## Adopted concept translated to native pixel drawing; collision/placement never read this renderer.
-const TOP=Color("bcb59c")
-const RIM=Color("d0c7ab")
-const FACE=Color("777461")
-const DARK=Color("5c5c50")
-const MOSS=Color("89984c")
-const HEIGHT=12.0
+## Read-only material selection. No collision, drop, generation or work mutation.
+const Art=preload("res://game/rock_art.gd")
+const TOP=Color("bcb59c") # Shared chip tint for legacy FX.
+const WALL="biome_connections_v1/"
+const NODE="biome_environment_v2/rock_node/"
+const DAMAGE_KEYS=["biome_environment_v1/rock/damage/light.png","biome_environment_v1/rock/damage/heavy.png","biome_environment_v2/rock_node/wall_near_depleted_overlay.png"]
+static var clipped={}
+static var ground_source=null
+static var ground_kinds={}
+const DIRS=[Vector2i.UP,Vector2i.RIGHT,Vector2i.DOWN,Vector2i.LEFT]
+const CORNERS={"nw":[0,3],"ne":[0,1],"sw":[2,3],"se":[2,1]}
 
 static func mask(w,p: Vector2i) -> int:
 	var value=0
 	for i in range(4):
-		if w.rocks.has(p+[Vector2i.UP,Vector2i.RIGHT,Vector2i.DOWN,Vector2i.LEFT][i]):value|=1<<i
+		if w.rocks.has(p+DIRS[i]):value|=1<<i
 	return value
-
-static func geometry(tile: Vector2,m: int) -> Dictionary:
-	var left=-tile.x/2+(0 if m&8 else 3)
-	var right=tile.x/2-(0 if m&2 else 3)
-	var top=-tile.y/2+(0 if m&1 else 4)
-	var bottom=tile.y/2-(0 if m&4 else HEIGHT+3)
-	return {"left":left,"right":right,"top":top,"bottom":bottom,"front":not bool(m&4),"north":not bool(m&1),"east":not bool(m&2),"west":not bool(m&8)}
-
-static func unit(w,p: Vector2i,salt: int) -> float:return w.Biome.unit(w.seed_value,p.x,p.y,salt)
-
-static func ground(g):
-	var w=g.world;var cells={}
-	for p in w.rocks.keys()+w.mined_rock_cells:
-		for dy in range(-1,2):
-			for dx in range(-1,2):
-				var q=p+Vector2i(dx,dy)
-				if w.inside(q):cells[q]=true
-	for p in cells:
-		if w.floors.has(p) or w.live_structure(p):continue
-		var corner=Vector2(p)*g.TILE
-		for i in range(12):
-			var x=2+floori(unit(w,p,200+i*3)*(g.TILE.x-6)/2)*2
-			var y=2+floori(unit(w,p,201+i*3)*(g.TILE.y-6)/2)*2
-			var r=Rect2(corner+Vector2(x,y),Vector2(2+2*(i%2),2))
-			g.draw_rect(r,Color("ab9d77") if i%3 else Color("8f9275"))
-		if not w.rocks.has(p) and unit(w,p,253)>0.55:
-			var q=g.center(p)+Vector2(6,-5)
-			g.draw_rect(Rect2(q+Vector2(-4,2),Vector2(10,4)),Color(0.22,0.26,0.18,0.22))
-			g.draw_rect(Rect2(q-Vector2(3,1),Vector2(8,4)),TOP);g.draw_rect(Rect2(q+Vector2(-3,3),Vector2(8,2)),FACE)
-	for p in w.mined_rock_cells:
-		if w.floors.has(p) or w.live_structure(p) or w.rocks.has(p):continue
-		var q=g.center(p)
-		g.draw_colored_polygon(PackedVector2Array([q+Vector2(-16,-8),q+Vector2(-8,-13),q+Vector2(14,-10),q+Vector2(18,7),q+Vector2(6,13),q+Vector2(-17,8)]),Color("90876b"))
-		g.draw_line(q+Vector2(-14,-7),q+Vector2(12,-9),DARK,2);g.draw_line(q+Vector2(-14,9),q+Vector2(8,11),RIM,2)
-
+static func inner(w,p: Vector2i) -> Array:
+	var result=[]
+	for name in CORNERS:
+		var a=DIRS[CORNERS[name][0]];var b=DIRS[CORNERS[name][1]]
+		if w.rocks.has(p+a) and w.rocks.has(p+b) and not w.rocks.has(p+a+b):result.append(name)
+	return result
+static func wall(w,p: Vector2i) -> bool:
+	# Surviving wall pieces keep their wall anchor even after the final neighbour is mined.
+	return mask(w,p)!=0 or DIRS.any(func(d):return p+d in w.mined_rock_cells)
+static func node_size(w,p: Vector2i) -> String:
+	var preferred=w.rocks.get(p,{}).get("visual_size","")
+	return preferred if preferred in ["small","medium","large"] else ["small","medium","large"][floori(w.Biome.unit(w.seed_value,p.x,p.y,931)*3)]
+static func stage(progress: float) -> int:return 3 if progress>=0.85 else 2 if progress>=0.5 else 1 if progress>=0.25 else 0
+static func normal_key(w,p: Vector2i) -> String:
+	return WALL+"normal/mask_%02d.png"%mask(w,p) if wall(w,p) else NODE+node_size(w,p)+"/"+["intact","damaged_1","damaged_2","near_depleted"][stage(w.Harvest.progress(w,"mine",p))]+".png"
+static func clipped_damage(m: int,level: int) -> Texture2D:
+	var key="%d:%d"%[m,level]
+	if not clipped.has(key):
+		var image=Art.texture(DAMAGE_KEYS[level-1]).get_image().duplicate();image.convert(Image.FORMAT_RGBA8)
+		var base=Art.texture(WALL+"normal/mask_%02d.png"%m).get_image()
+		for y in range(image.get_height()):
+			for x in range(image.get_width()):
+				var color=image.get_pixel(x,y);color.a*=base.get_pixel(x,y).a;image.set_pixel(x,y,color)
+		clipped[key]=ImageTexture.create_from_image(image)
+	return clipped[key]
 static func rock(g,p: Vector2i):
-	var w=g.world;var m=mask(w,p);var shape=geometry(g.TILE,m);var c=g.center(p)
-	var x0=shape.left;var x1=shape.right;var y0=shape.top;var y1=shape.bottom
-	var tl=4 if shape.north and shape.west else 0;var tr=4 if shape.north and shape.east else 0
-	var bl=4 if shape.front and shape.west else 0;var br=4 if shape.front and shape.east else 0
-	if shape.front:
-		g.draw_colored_polygon(PackedVector2Array([c+Vector2(x0+bl,y1),c+Vector2(x1-br,y1),c+Vector2(x1-br,y1+HEIGHT),c+Vector2(x0+bl,y1+HEIGHT)]),FACE)
-		g.draw_rect(Rect2(c+Vector2(x0+4,y1+HEIGHT-1),Vector2(x1-x0-8,3)),Color(0.16,0.21,0.13,0.28))
+	var w=g.world;var c=g.center(p);var key=normal_key(w,p);var level=stage(w.Harvest.progress(w,"mine",p))
+	if wall(w,p):
+		if not(mask(w,p)&4):Art.paint(g,NODE+"shadow_large.png",c+Vector2(0,14))
+		Art.paint(g,key,c)
+		for corner in inner(w,p):Art.paint(g,WALL+"inner/concave_"+corner+".png",c)
+		if level>0:g.draw_texture(clipped_damage(mask(w,p),level),(c-Vector2(24,33)).round())
+	else:
+		Art.paint(g,NODE+"shadow_"+node_size(w,p)+".png",c+Vector2(0,14))
+		Art.paint(g,key,c+Vector2(0,14))
+
+static func geology(w,p: Vector2i) -> bool:
+	return w.inside(p) and w.Biome.field(w,p)[2]>0.43
+static func transition(w,p: Vector2i) -> String:
+	var high=DIRS.map(func(d):return geology(w,p+d));var here=geology(w,p)
+	if here:
+		for corner in CORNERS:
+			var pair=CORNERS[corner]
+			if not high[pair[0]] and not high[pair[1]]:return "outer_"+corner
 		for i in range(4):
-			var x=x0+6+floori(unit(w,p,300+i)*(x1-x0-14)/2)*2
-			g.draw_rect(Rect2(c+Vector2(x,y1+2),Vector2(2,6+2*(i%2))),DARK if i%2 else Color("938d76"))
-	var roof=PackedVector2Array([c+Vector2(x0+tl,y0),c+Vector2(x1-tr,y0),c+Vector2(x1,y0+tr),c+Vector2(x1,y1-br),c+Vector2(x1-br,y1),c+Vector2(x0+bl,y1),c+Vector2(x0,y1-bl),c+Vector2(x0,y0+tl)])
-	g.draw_colored_polygon(roof,TOP.lightened((unit(w,p,400)-0.5)*0.07))
-	if shape.north:g.draw_line(c+Vector2(x0+tl,y0),c+Vector2(x1-tr,y0),RIM,2)
-	if shape.west:g.draw_line(c+Vector2(x0,y0+tl),c+Vector2(x0,y1-bl),RIM,2)
-	if shape.east:g.draw_line(c+Vector2(x1,y0+tr),c+Vector2(x1,y1-br),DARK,2)
-	if shape.front:g.draw_line(c+Vector2(x0+bl,y1),c+Vector2(x1-br,y1),RIM,2)
-	for i in range(7):
-		var x=x0+6+floori(unit(w,p,500+i*2)*maxf(2,x1-x0-14)/2)*2
-		var y=y0+6+floori(unit(w,p,501+i*2)*maxf(2,y1-y0-12)/2)*2
-		g.draw_rect(Rect2(c+Vector2(x,y),Vector2(4,2)),RIM if i%2 else Color("aaa48c"))
-	var damage=w.Harvest.progress(w,"mine",p)
-	if damage>0.2:
-		for i in range(1+floori(damage*4)):
-			var start=c+Vector2(x0+8+i*7,y0+6)
-			g.draw_polyline(PackedVector2Array([start,start+Vector2(-3,4),start+Vector2(2,7),start+Vector2(-2,11)]),DARK,1)
-	# Moss and small cracks stay subordinate to the stone silhouette.
-	if shape.front:
-		for i in range(3):g.draw_rect(Rect2(c+Vector2(x0+6+i*8,y1-2),Vector2(4,2)),MOSS if unit(w,p,600+i)>0.35 else TOP)
+			if not high[i]:return "edge_"+["s","w","n","e"][i]
+		for corner in CORNERS:
+			var pair=CORNERS[corner]
+			if not geology(w,p+DIRS[pair[0]]+DIRS[pair[1]]):return "inner_"+corner
+		return "full"
+	# Each PNG finishes its entire grass-to-rock transition in this inside cell.
+	# Repeating it in the outside neighbour restarts rock after grass, creating stripes.
+	return ""
+static func ground(g):
+	var w=g.world
+	if ground_source!=w:
+		ground_source=w;ground_kinds={}
+		for y in range(w.H):
+			for x in range(w.W):
+				var p=Vector2i(x,y);var key=transition(w,p)
+				if key!="":ground_kinds[p]=key
+	var visible=Rect2(Vector2.ZERO,Vector2(w.W,w.H)*g.TILE)
+	if g.has_method("get_canvas_transform"):visible=g.get_canvas_transform().affine_inverse()*g.get_viewport_rect()
+	for p in ground_kinds:
+		if w.floors.has(p) or w.live_structure(p) or not visible.grow(54).has_point(g.center(p)):continue
+		Art.paint(g,WALL+"transition/"+ground_kinds[p]+".png",g.center(p))
+	for p in w.mined_rock_cells:
+		if w.floors.has(p) or w.live_structure(p) or not visible.grow(54).has_point(g.center(p)):continue
+		Art.paint(g,"biome_environment_v2/rock_mined/exposed_bedrock.png",g.center(p))
+		Art.paint(g,"biome_environment_v2/rock_mined/shallow_scoop.png",g.center(p))
+static func rubble(g,p: Vector2i,alpha: float=1.0):
+	Art.paint(g,"biome_environment_v1/rock/ground/rubble.png",g.center(p),alpha)
+static func chips(g,p: Vector2i,age: float):
+	var durations=[0.065,0.075,0.085,0.1]
+	for i in range(4):
+		if age<durations[i]:Art.paint(g,"biome_environment_v1/rock/fx/chips_%02d.png"%i,g.center(p));return
+		age-=durations[i]

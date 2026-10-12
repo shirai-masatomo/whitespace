@@ -6,6 +6,7 @@ class Recorder extends RefCounted:
 	const TILE=Vector2(48,42)
 	var calls=[]
 	func center(p):return (Vector2(p)+Vector2.ONE*0.5)*TILE
+	func draw_texture(t,p,c=Color.WHITE):calls.append(["texture",t,p,c])
 	func draw_rect(r,c,filled=true,width=-1):calls.append(["rect",r,c])
 	func draw_line(a,b,c,width=1):calls.append(["line",a,b,c])
 	func draw_colored_polygon(p,c):calls.append(["polygon",p,c])
@@ -27,7 +28,7 @@ func run():
 		var before=w.rocks.duplicate(true);var walkable=w.walkable(p);r.calls.clear();View.rock(r,p)
 		check(View.mask(w,p)==mask and not r.calls.is_empty(),"Actual renderer handles four-direction mask "+str(mask))
 		check(w.rocks==before and w.walkable(p)==walkable,"Drawing does not alter rock quantity or collision: "+str(mask))
-		var shape=View.geometry(r.TILE,mask);check(shape.right-shape.left<=48 and shape.bottom-shape.top<=42 and shape.front==(not bool(mask&4)),"48x42 surface has no duplicated internal front face: "+str(mask))
+		var texture=View.Art.texture(View.normal_key(w,p));check(texture.get_width()==48 and texture.get_height()==54,"Delivered 48x54 canvas is used without stretching: "+str(mask))
 	w.rocks={p:{"amount":8,"forbidden":false}};w.Tasks.designate(w,"mine",p)
 	for i in range(80):
 		w.step()

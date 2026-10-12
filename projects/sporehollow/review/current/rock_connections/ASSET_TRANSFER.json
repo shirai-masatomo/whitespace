@@ -1,0 +1,883 @@
+{
+  "png_count": 219,
+  "assets": [
+    {
+      "file": "art_delivery/biome_environment_v1/forest/leaves_00.png",
+      "sha256": "e946f3d3cb14a48d884ad62e3e49728f3bf4aa36d7c4169ee20bc3218989fad3"
+    },
+    {
+      "file": "art_delivery/biome_environment_v1/forest/leaves_01.png",
+      "sha256": "3e3cfcbdfa92ec869d2198bd0b0f7e97b3c4957fda7d3e0ad21e1bc167df9d42"
+    },
+    {
+      "file": "art_delivery/biome_environment_v1/forest/leaves_02.png",
+      "sha256": "3b468ce3468ac87eb6e1448f444f209460a0dad5471bf860b2ec9403b07ddc7c"
+    },
+    {
+      "file": "art_delivery/biome_environment_v1/forest/notch_a_deep.png",
+      "sha256": "657728dee838cba8fdd90e6d5fe6819ec4440fdea759c6c9611a72b974dd3e0b"
+    },
+    {
+      "file": "art_delivery/biome_environment_v1/forest/notch_a_light.png",
+      "sha256": "10a941265b84809f3b71c7526b75b9a364f154a9975c00e0e80990774b9bd2eb"
+    },
+    {
+      "file": "art_delivery/biome_environment_v1/forest/notch_b_deep.png",
+      "sha256": "688bcae7d65cd821e16a7028711cd7de630fcdd36bb56898eccd5a793373f0b0"
+    },
+    {
+      "file": "art_delivery/biome_environment_v1/forest/notch_b_light.png",
+      "sha256": "b7d90bae8f8087c9bda0ae4aebf8d6d6f6c0ae88c829c1ace43efb25493e14cc"
+    },
+    {
+      "file": "art_delivery/biome_environment_v1/forest/notch_c_deep.png",
+      "sha256": "3e34973cdcabf45d934ef2585e51e677956fe019248a98baaedda209a3ebc3f1"
+    },
+    {
+      "file": "art_delivery/biome_environment_v1/forest/notch_c_light.png",
+      "sha256": "fd38647b56f57261fb7b8646920b1238801da1e1e5bef7d2e07ef578bba87adb"
+    },
+    {
+      "file": "art_delivery/biome_environment_v1/forest/stump_a.png",
+      "sha256": "a38ac211e9cf91a401e2ad5aca18b17b4a33ffa2f345ca175b757bcf88ff1c9d"
+    },
+    {
+      "file": "art_delivery/biome_environment_v1/forest/stump_b.png",
+      "sha256": "87fbac9ecad4c88bdcdc7418141d2d606cc6b5e4cebfcdf3035fa4cd6b4049fd"
+    },
+    {
+      "file": "art_delivery/biome_environment_v1/forest/stump_c.png",
+      "sha256": "bc1bd57968a2ffa4a72258722eee9f34abb9448b28e3e4705dc74540025b0d96"
+    },
+    {
+      "file": "art_delivery/biome_environment_v1/ground/boundary/e.png",
+      "sha256": "2e6d353fa7e7c3fe9feddca74680d7a681b903bbf3743d671d6b2186b38db2dd"
+    },
+    {
+      "file": "art_delivery/biome_environment_v1/ground/boundary/n.png",
+      "sha256": "11ffc916b141fab08876743e969eb6e5f516ed4501699b88e78de81c393f48f3"
+    },
+    {
+      "file": "art_delivery/biome_environment_v1/ground/boundary/s.png",
+      "sha256": "7c4640baf8056b2cecb28bece62794d12b33520f6b2b4bad973ac5599750303e"
+    },
+    {
+      "file": "art_delivery/biome_environment_v1/ground/boundary/w.png",
+      "sha256": "1788ac07e4837a924fcd8846a30403cbf658eaddf005faaf35b208e6fb8fbe04"
+    },
+    {
+      "file": "art_delivery/biome_environment_v1/ground/dry/cracks_00.png",
+      "sha256": "b6b0dd045fbbf80dfbc2613b26974e23fdcc292881aea7ca0cdadc062e2f9fb2"
+    },
+    {
+      "file": "art_delivery/biome_environment_v1/ground/dry/cracks_01.png",
+      "sha256": "917603eb7aec490ec0247f97db049a811d07d4bc399368edf5279577acd0b3fe"
+    },
+    {
+      "file": "art_delivery/biome_environment_v1/ground/dry/grass_tuft.png",
+      "sha256": "5dbd7d3d620974039b5bf531b46bdf03bc7e31a4c5cc3f27e1f6b79ae5cf6747"
+    },
+    {
+      "file": "art_delivery/biome_environment_v1/ground/dry/gravel.png",
+      "sha256": "dcdb51f65fc60845cb6c1d6db4bd02287eff09ed36240c888bbc78d4748fe69a"
+    },
+    {
+      "file": "art_delivery/biome_environment_v1/ground/dry/short_grass.png",
+      "sha256": "243a91aa31b77c6257f0e6cda7f8af84536f7f37e052a23fc89f0fdece56e4ad"
+    },
+    {
+      "file": "art_delivery/biome_environment_v1/ground/dry/soil_spot.png",
+      "sha256": "55aac0de537a6654404c91f6242d7b3260ade8571fcec97647c353fa22bb5373"
+    },
+    {
+      "file": "art_delivery/biome_environment_v1/ground/lush/cover_sparse.png",
+      "sha256": "b4042965c6a7bf6d780574d2789bc7c4eeeb8ea1f520a59a5a11a94cf0729a4a"
+    },
+    {
+      "file": "art_delivery/biome_environment_v1/ground/lush/flowers.png",
+      "sha256": "66e71481d2c716c067894b076184e2a9337632ce19cfb7504cba6d14bb3fec85"
+    },
+    {
+      "file": "art_delivery/biome_environment_v1/ground/lush/low_dense.png",
+      "sha256": "f0ca68f953196bbbdc3795a2f87831160d67f1a875d874c7198bc3e63c14dfe7"
+    },
+    {
+      "file": "art_delivery/biome_environment_v1/ground/lush/low_sparse.png",
+      "sha256": "0384cca129a4e22414a4ca33f3a2fe164f32e89e9488109cbf7837ba80cd9486"
+    },
+    {
+      "file": "art_delivery/biome_environment_v1/ground/lush/tall_tuft.png",
+      "sha256": "3ac5791007a954c3939f86ac70637b0bbf83b406c38af87cdc29330ee37ffe46"
+    },
+    {
+      "file": "art_delivery/biome_environment_v1/rock/damage/heavy.png",
+      "sha256": "91ea8ee1e27a012961d47919a37a89f9a4a061070b31029be6478a8cf0380027"
+    },
+    {
+      "file": "art_delivery/biome_environment_v1/rock/damage/light.png",
+      "sha256": "f89eb5ff811c6fc510b57387d3f6fea743bcd0fe6850aac878d7bd6a3c969506"
+    },
+    {
+      "file": "art_delivery/biome_environment_v1/rock/fx/chips_00.png",
+      "sha256": "8669fc2fe9b3fcd4c7e9be8b0ef31293e4bc19428f7b5093461b37428535a35c"
+    },
+    {
+      "file": "art_delivery/biome_environment_v1/rock/fx/chips_01.png",
+      "sha256": "e1aaf096965ae36818ea3a22cb6006d17a2c64e0e3f32b9dcd0613e44a961ea8"
+    },
+    {
+      "file": "art_delivery/biome_environment_v1/rock/fx/chips_02.png",
+      "sha256": "864034dc89f0c20b7eb10397e55bd80cbcadcd44eb68ce57a1628758a126f752"
+    },
+    {
+      "file": "art_delivery/biome_environment_v1/rock/fx/chips_03.png",
+      "sha256": "ec7e180334bbfbd852379a338498cd3b66fa136c6b656fcc4f8fd027e51eaadb"
+    },
+    {
+      "file": "art_delivery/biome_environment_v1/rock/ground/exposed.png",
+      "sha256": "fcf9ce8d8f96eff4a9a2f81ab84ffa1065728e7dfcd31eb22d68e6f650ac6bcb"
+    },
+    {
+      "file": "art_delivery/biome_environment_v1/rock/ground/gravel.png",
+      "sha256": "21d6009ead2ae1a0aa0c7ca3b8866df1174f5f336769243e012c40fe3fdaeddd"
+    },
+    {
+      "file": "art_delivery/biome_environment_v1/rock/ground/rubble.png",
+      "sha256": "f9013df49fa164c4ca2e6ba2252e1988006c0ffceb6de61383d5fc9e6e25f2b8"
+    },
+    {
+      "file": "art_delivery/biome_environment_v1/rock/normal/mask_00.png",
+      "sha256": "0b8e0d128bc2713e932d8e5fbf56b6b42a53e5733907b40064fb1b3e5df06860"
+    },
+    {
+      "file": "art_delivery/biome_environment_v1/rock/normal/mask_01.png",
+      "sha256": "75204d5c0b816915acf2d224bf3e48fda98981433cd9a80aa1975779fc248f05"
+    },
+    {
+      "file": "art_delivery/biome_environment_v1/rock/normal/mask_02.png",
+      "sha256": "e246e6b36b48129b9ad717c2c5d86e2a985b9a00a1be3302a971bffacc78dcda"
+    },
+    {
+      "file": "art_delivery/biome_environment_v1/rock/normal/mask_03.png",
+      "sha256": "db201e7fc5e1adcd2783ed84b49b187373ccb18cd2222c7a2d99c64046de2cf2"
+    },
+    {
+      "file": "art_delivery/biome_environment_v1/rock/normal/mask_04.png",
+      "sha256": "9fd3fb96f7f85e8adc3860346b935b0883d04c2f88d95726cc1e8b73bb5a159a"
+    },
+    {
+      "file": "art_delivery/biome_environment_v1/rock/normal/mask_05.png",
+      "sha256": "168f4dc97d6d1b727aec665f0fb1fb8f85bf6570baa55a1b79a4e52136ea1129"
+    },
+    {
+      "file": "art_delivery/biome_environment_v1/rock/normal/mask_06.png",
+      "sha256": "4858a16382556714ea3f8029985890048373e329fbc57d0800118ece0c63ed99"
+    },
+    {
+      "file": "art_delivery/biome_environment_v1/rock/normal/mask_07.png",
+      "sha256": "6327c6e87cea782cc6c962f28a82a93c31089f9d5e72b3fc198ab54342cdcaf8"
+    },
+    {
+      "file": "art_delivery/biome_environment_v1/rock/normal/mask_08.png",
+      "sha256": "2d9c9ab9b5f209e2f16a5782ade20826fdd8efef6cc3c8ec21673cd3387efa28"
+    },
+    {
+      "file": "art_delivery/biome_environment_v1/rock/normal/mask_09.png",
+      "sha256": "0df1b13021d494fd3f9b7c7a0d15552572daeb59bf88cdf389d4a6c1bf40091f"
+    },
+    {
+      "file": "art_delivery/biome_environment_v1/rock/normal/mask_10.png",
+      "sha256": "bdd0f47e40f628ccc946c6e39953a567c1ff2c13fd7667461412fc4b73f41cf7"
+    },
+    {
+      "file": "art_delivery/biome_environment_v1/rock/normal/mask_11.png",
+      "sha256": "68b79e7db3c4553dae7fe7abbb66e716c2c4065f13267431311269d52cf84703"
+    },
+    {
+      "file": "art_delivery/biome_environment_v1/rock/normal/mask_12.png",
+      "sha256": "cccbe70d46eb607163b3a568bcf201e44c735198f40d708220def449ee79098c"
+    },
+    {
+      "file": "art_delivery/biome_environment_v1/rock/normal/mask_13.png",
+      "sha256": "8da949e5de74e802992cf60a6021ceaa169a9752b2ec90efedec20f8d9270069"
+    },
+    {
+      "file": "art_delivery/biome_environment_v1/rock/normal/mask_14.png",
+      "sha256": "a8565fc2094a8576b6fb01ca1399985d411d94a07f66da2b4ccd5f5d4305f9d2"
+    },
+    {
+      "file": "art_delivery/biome_environment_v1/rock/normal/mask_15.png",
+      "sha256": "0a0aa07fdffbc30c3c4a31fd26eb0c7708b0df5aedaf39be38989f179c6fb8a4"
+    },
+    {
+      "file": "art_delivery/biome_environment_v1/rock/parts/front_edges_00.png",
+      "sha256": "b604857565b0142990db42fb050eea527bee152a2a79a08e7733a8673c9a5454"
+    },
+    {
+      "file": "art_delivery/biome_environment_v1/rock/parts/front_edges_01.png",
+      "sha256": "0497ca80808b5111f9b818ed7551851ee870d06b823d9425aa415f92c5163195"
+    },
+    {
+      "file": "art_delivery/biome_environment_v1/rock/parts/front_edges_02.png",
+      "sha256": "5ad6401982821759b441860f6aa380ffb642d66714017326581782797fb92ae2"
+    },
+    {
+      "file": "art_delivery/biome_environment_v1/rock/parts/front_edges_03.png",
+      "sha256": "572e9d13d21f6db797866b74e8103161decb4502df322bcdbea32a8a351d40ea"
+    },
+    {
+      "file": "art_delivery/biome_environment_v1/rock/parts/inner_ne.png",
+      "sha256": "225cea4581388edf266c8615bf50b312920b2c134837dff8b45bdaca5fbd854c"
+    },
+    {
+      "file": "art_delivery/biome_environment_v1/rock/parts/inner_nw.png",
+      "sha256": "b0c9b8bee022d071589cce248f746085390003dc90e166eea1a9a49ab3db9b3c"
+    },
+    {
+      "file": "art_delivery/biome_environment_v1/rock/parts/inner_se.png",
+      "sha256": "c54f0ea4043edf5c8b58c0d5192f9ae04b86791f62b6f702364b466ea4b7fe8a"
+    },
+    {
+      "file": "art_delivery/biome_environment_v1/rock/parts/inner_sw.png",
+      "sha256": "90447164026be01f4c21a2075ebf7c1d4d99558323ce6b03a6daff07341fab51"
+    },
+    {
+      "file": "art_delivery/biome_environment_v1/rock/parts/tall_front_edges_00.png",
+      "sha256": "9abba9e8d94e3b916f0472b4313140a0a5a1e8ac430190e3bb10aa8a7d4b7396"
+    },
+    {
+      "file": "art_delivery/biome_environment_v1/rock/parts/tall_front_edges_01.png",
+      "sha256": "998e0fe04b2591d2891e5843beef871e9c6ec1c6e133a4ff9c34e7f3b83ef9e9"
+    },
+    {
+      "file": "art_delivery/biome_environment_v1/rock/parts/tall_front_edges_02.png",
+      "sha256": "9a653bcdb4480c799bd734eaf0dee34a464269d1a112715fa71f5a5c41ccabe6"
+    },
+    {
+      "file": "art_delivery/biome_environment_v1/rock/parts/tall_front_edges_03.png",
+      "sha256": "648b210f9df357f8fb96fea4a664f81dcf4a4356ecc07590125f648998cbdd1c"
+    },
+    {
+      "file": "art_delivery/biome_environment_v1/rock/parts/top_00.png",
+      "sha256": "26e8381a031bfa229e05752c2507b2cc82cab5079739299a498592352bbdc7d2"
+    },
+    {
+      "file": "art_delivery/biome_environment_v1/rock/parts/top_01.png",
+      "sha256": "9b386f09cd6187b5987eec10409c5c2ec5bcffd2b1194509df5fe8f03e0c451f"
+    },
+    {
+      "file": "art_delivery/biome_environment_v1/rock/parts/top_02.png",
+      "sha256": "7f31324109db61d1dac3ab5c1dd425be778e460e953e95e1fc96598a9eead39e"
+    },
+    {
+      "file": "art_delivery/biome_environment_v1/rock/parts/top_03.png",
+      "sha256": "c5f406a6112091d8077ae32d53de1c5de07019548e5d840e839c72f94cda7938"
+    },
+    {
+      "file": "art_delivery/biome_environment_v1/rock/parts/top_04.png",
+      "sha256": "9fd3fb96f7f85e8adc3860346b935b0883d04c2f88d95726cc1e8b73bb5a159a"
+    },
+    {
+      "file": "art_delivery/biome_environment_v1/rock/parts/top_05.png",
+      "sha256": "168f4dc97d6d1b727aec665f0fb1fb8f85bf6570baa55a1b79a4e52136ea1129"
+    },
+    {
+      "file": "art_delivery/biome_environment_v1/rock/parts/top_06.png",
+      "sha256": "4858a16382556714ea3f8029985890048373e329fbc57d0800118ece0c63ed99"
+    },
+    {
+      "file": "art_delivery/biome_environment_v1/rock/parts/top_07.png",
+      "sha256": "6327c6e87cea782cc6c962f28a82a93c31089f9d5e72b3fc198ab54342cdcaf8"
+    },
+    {
+      "file": "art_delivery/biome_environment_v1/rock/parts/top_08.png",
+      "sha256": "38cfa010454ad353a4767ffb5a85e1c667e5e967cffccbd2462eaff18be64579"
+    },
+    {
+      "file": "art_delivery/biome_environment_v1/rock/parts/top_09.png",
+      "sha256": "7f8b9e684e5be395b59841417d5e1066a0d77c060c9e5b8e817270b1ea3b8409"
+    },
+    {
+      "file": "art_delivery/biome_environment_v1/rock/parts/top_10.png",
+      "sha256": "1407c5fb6793024f2506db6d2348e8e39842083e07c393f4ef378568043a4b08"
+    },
+    {
+      "file": "art_delivery/biome_environment_v1/rock/parts/top_11.png",
+      "sha256": "1e71ee9bb0e8dcdb6bd9457b4d7cf6f2c0af269fd91722e2ceae849c44750bf9"
+    },
+    {
+      "file": "art_delivery/biome_environment_v1/rock/parts/top_12.png",
+      "sha256": "cccbe70d46eb607163b3a568bcf201e44c735198f40d708220def449ee79098c"
+    },
+    {
+      "file": "art_delivery/biome_environment_v1/rock/parts/top_13.png",
+      "sha256": "8da949e5de74e802992cf60a6021ceaa169a9752b2ec90efedec20f8d9270069"
+    },
+    {
+      "file": "art_delivery/biome_environment_v1/rock/parts/top_14.png",
+      "sha256": "a8565fc2094a8576b6fb01ca1399985d411d94a07f66da2b4ccd5f5d4305f9d2"
+    },
+    {
+      "file": "art_delivery/biome_environment_v1/rock/parts/top_15.png",
+      "sha256": "0a0aa07fdffbc30c3c4a31fd26eb0c7708b0df5aedaf39be38989f179c6fb8a4"
+    },
+    {
+      "file": "art_delivery/biome_environment_v2/rock_ground/bedrock.png",
+      "sha256": "dc0e67903923b459c2da4b9131c07a1ea9a06993572e951ec81bf12863cf64eb"
+    },
+    {
+      "file": "art_delivery/biome_environment_v2/rock_ground/grass_stone.png",
+      "sha256": "e1e76e4377bf6406d77c31f0432602a87d45e24afdd456e21749e89bf63dd17e"
+    },
+    {
+      "file": "art_delivery/biome_environment_v2/rock_ground/gravel.png",
+      "sha256": "b22fe0590fda082f6a7a047d5722fc69f315a8dde1e415f5b22faa2b832e63a1"
+    },
+    {
+      "file": "art_delivery/biome_environment_v2/rock_ground/pebbly_soil.png",
+      "sha256": "a5b9c230a51da2642c629c3c76a9565525d7e67adefb6d61ad37a62d84246913"
+    },
+    {
+      "file": "art_delivery/biome_environment_v2/rock_mined/exposed_bedrock.png",
+      "sha256": "3a1dc7fa7dcdc0b0581d5af51cf2154644cf03e0eb055cc8e6da66de2d99d8bf"
+    },
+    {
+      "file": "art_delivery/biome_environment_v2/rock_mined/shallow_scoop.png",
+      "sha256": "fe91b8236ca076844ac0435ea8c087a9642ec0478f4b849ecd0873a19067d809"
+    },
+    {
+      "file": "art_delivery/biome_environment_v2/rock_node/shadow_large.png",
+      "sha256": "c65d211f8b9eacc36d352bd8f1fce99003219caba7e690fc2af91b1f5520ff57"
+    },
+    {
+      "file": "art_delivery/biome_environment_v2/rock_node/shadow_medium.png",
+      "sha256": "999416d50c67f3954ee7aea6f494d2c6e69371f7679c715228250bfa7c46553c"
+    },
+    {
+      "file": "art_delivery/biome_environment_v2/rock_node/shadow_small.png",
+      "sha256": "08d58e3795b75dd3024b891831eb94c8523f2e6f098b8df3477e8608d94f3b7c"
+    },
+    {
+      "file": "art_delivery/biome_environment_v2/rock_node/wall_near_depleted_overlay.png",
+      "sha256": "b5944ca2a84bba1b6d4792a52f01366c044d82891510900c9bcd3ae06ded7e45"
+    },
+    {
+      "file": "art_delivery/biome_environment_v2/rock_transition/patch_round.png",
+      "sha256": "90b82c68952504f990206c7c348ad7f4aa4ba4b26b1ef2f7f9bfa54dad2d5454"
+    },
+    {
+      "file": "art_delivery/biome_environment_v2/rock_transition/patch_worn.png",
+      "sha256": "12f6d690965f5e772981a586dbdf596e4803f4d85fedcf930b8c4d9d552fa34f"
+    },
+    {
+      "file": "art_delivery/biome_environment_v2/rock_transition/thin_horizontal.png",
+      "sha256": "47156e76813062db3a3973e507d84490b009bc0028c8d80a0670388e0d094c2d"
+    },
+    {
+      "file": "art_delivery/biome_environment_v2/rock_transition/thin_vertical.png",
+      "sha256": "036304cef771c147096173f1b5a71432b27c5eb45089b8e7f0725f7fccf3e2c2"
+    },
+    {
+      "file": "art_delivery/biome_environment_v2/tree_cut/branch_debris.png",
+      "sha256": "11459a41f1bc2e1096e8d705e8224ebce25db019c62434286836315ff26a1110"
+    },
+    {
+      "file": "art_delivery/biome_environment_v2/tree_cut/large_near_fall.png",
+      "sha256": "df22bc77d5b8d2133086eedecb73445eea5d03ec48e7d524cef5554c3ca4621d"
+    },
+    {
+      "file": "art_delivery/biome_environment_v2/tree_cut/large_near_fall_body.png",
+      "sha256": "7e68fb69e72f8f6c1e0c50aa16e028fa2818e24c81c2e4ca38fdcf85a431c0cc"
+    },
+    {
+      "file": "art_delivery/biome_environment_v2/tree_cut/log.png",
+      "sha256": "5388239f9cbbfb51b991f604b2d5abd613ea9776bd4a9c59b1a72bfe5781e18d"
+    },
+    {
+      "file": "art_delivery/biome_environment_v2/tree_cut/medium_near_fall.png",
+      "sha256": "527e63b035657e1f5660872e83ae933b624ba0ff5cb78dd5706f9148044a7b60"
+    },
+    {
+      "file": "art_delivery/biome_environment_v2/tree_cut/medium_near_fall_body.png",
+      "sha256": "d9bc59f0c715ebf0248906fce41c2a586cca46780fc9d8dfcc9d63fb8d499425"
+    },
+    {
+      "file": "art_delivery/biome_environment_v2/tree_cut/small_near_fall.png",
+      "sha256": "c4da744e15a3665bbc2052f22ad1e45783946a36010dda0f5bf2f4c89f64bc5e"
+    },
+    {
+      "file": "art_delivery/biome_environment_v2/tree_cut/small_near_fall_body.png",
+      "sha256": "72afc9304161cf8f6840c4f1302592082ab49a29c1a71647e2fa8dd5f8201216"
+    },
+    {
+      "file": "art_delivery/biome_environment_v2/rock_node/large/damaged_1.png",
+      "sha256": "7b873410b7a4af0a47fb07c0e2d047b0cd27001e48bcf426428189f7be9d3e78"
+    },
+    {
+      "file": "art_delivery/biome_environment_v2/rock_node/large/damaged_2.png",
+      "sha256": "c72bcf976f0beca16182faf4febd7376f2f12d3fe0dd128c0edc22b42ae8ea2a"
+    },
+    {
+      "file": "art_delivery/biome_environment_v2/rock_node/large/intact.png",
+      "sha256": "cfcf92727fd17ffdb083c44b6b4b050a2711b664a3b2dae3ba6b69f7cc49db70"
+    },
+    {
+      "file": "art_delivery/biome_environment_v2/rock_node/large/near_depleted.png",
+      "sha256": "186ee429d5c45753f6860ac1b5d4a686882e7d33e241a4db942243ce48f85add"
+    },
+    {
+      "file": "art_delivery/biome_environment_v2/rock_node/medium/damaged_1.png",
+      "sha256": "f544f4f3323321bee9865aab5757ea35cf5fc4429a1a51b268daff6d566c61f8"
+    },
+    {
+      "file": "art_delivery/biome_environment_v2/rock_node/medium/damaged_2.png",
+      "sha256": "758280dd5872157c74a7ec4b9eb3693e5948dd3e9b9fdd754b7f0bbb9c2e3093"
+    },
+    {
+      "file": "art_delivery/biome_environment_v2/rock_node/medium/intact.png",
+      "sha256": "dfc417e0ba961f60b211e008f9e29a7968db8d039ee80111516abb0ab642c363"
+    },
+    {
+      "file": "art_delivery/biome_environment_v2/rock_node/medium/near_depleted.png",
+      "sha256": "2ce6e7ba7b34192c69fe459aa83b9155069cd76773fa1b9c407bbfbe9832f4cb"
+    },
+    {
+      "file": "art_delivery/biome_environment_v2/rock_node/small/damaged_1.png",
+      "sha256": "844bdba4cbb8c1ea7c5df666f1d1f76e1ef3875884084ff20ba8e9e7fecafa71"
+    },
+    {
+      "file": "art_delivery/biome_environment_v2/rock_node/small/damaged_2.png",
+      "sha256": "5cfea3db2507d4f2b396e02334ae877a136a07517c69000c97304cef366461d9"
+    },
+    {
+      "file": "art_delivery/biome_environment_v2/rock_node/small/intact.png",
+      "sha256": "4f07f6ea8ba9d070530c5dc85ae7f7495c7d94b4f9e0dac9e69cbc37284d383c"
+    },
+    {
+      "file": "art_delivery/biome_environment_v2/rock_node/small/near_depleted.png",
+      "sha256": "77d9b037e923c9b8c4a09086448c11b5bec768032600b3450de53443ddf05129"
+    },
+    {
+      "file": "art_delivery/biome_environment_v2/rock_transition/bedrock/edge_e.png",
+      "sha256": "0172fc705d274e6c2342c87b24e6309479f8f2373a150b0bd7c2f1eb8ee4b680"
+    },
+    {
+      "file": "art_delivery/biome_environment_v2/rock_transition/bedrock/edge_n.png",
+      "sha256": "dc8516e0e19914f7fb1ec01b9d1429f9d53f62b5815669f73185751d5849cb12"
+    },
+    {
+      "file": "art_delivery/biome_environment_v2/rock_transition/bedrock/edge_s.png",
+      "sha256": "57602c9d5ec92c30f2d538af8dde4dfa879761b8e00717fc187f12222504da80"
+    },
+    {
+      "file": "art_delivery/biome_environment_v2/rock_transition/bedrock/edge_w.png",
+      "sha256": "49b0d8ba5a08bbb81116a5d9ee9e8f50651554f574c8f5bb20308af9c558ec28"
+    },
+    {
+      "file": "art_delivery/biome_environment_v2/rock_transition/bedrock/inner_ne.png",
+      "sha256": "591cf5218b810835271f1d305b6f1abea40d3ddd5f79ca7aa1e9ef6c9ba9944f"
+    },
+    {
+      "file": "art_delivery/biome_environment_v2/rock_transition/bedrock/inner_nw.png",
+      "sha256": "32255ee6fcfb2794a4f4d2cca1886dfc85ee21cf2eb2499551643a7e464eaf10"
+    },
+    {
+      "file": "art_delivery/biome_environment_v2/rock_transition/bedrock/inner_se.png",
+      "sha256": "2081128c7c530dbec96b8cfc8b0ee0cf845888a905cf768f1664423e14c1d1b3"
+    },
+    {
+      "file": "art_delivery/biome_environment_v2/rock_transition/bedrock/inner_sw.png",
+      "sha256": "fb4ec4c8325581a151503cfebe4fc42b4613f5521f9ea7ac4fe53a1287a55158"
+    },
+    {
+      "file": "art_delivery/biome_environment_v2/rock_transition/bedrock/outer_ne.png",
+      "sha256": "4978c920e1db3c12e72e8820acd07efda3451a093684a5f6e524d8647bea795a"
+    },
+    {
+      "file": "art_delivery/biome_environment_v2/rock_transition/bedrock/outer_nw.png",
+      "sha256": "869a2515384843134287f98d7be2356c7db256d0e5dad79d910bf151a233eb80"
+    },
+    {
+      "file": "art_delivery/biome_environment_v2/rock_transition/bedrock/outer_se.png",
+      "sha256": "b834523277752ca8fba1556cd020e71b9b245ad743e26b60e3746aa194d1d2f6"
+    },
+    {
+      "file": "art_delivery/biome_environment_v2/rock_transition/bedrock/outer_sw.png",
+      "sha256": "2371e3db3f2e76aec58cb3332a3b1ced111a43fb2d15d57139a693513719bb06"
+    },
+    {
+      "file": "art_delivery/biome_environment_v2/rock_transition/gravel/edge_e.png",
+      "sha256": "e9fcea9b87e1ee45224b46b4ac4f6800fa2b1459d29fe3531be18d3a8b09cca9"
+    },
+    {
+      "file": "art_delivery/biome_environment_v2/rock_transition/gravel/edge_n.png",
+      "sha256": "211e6688470c9be814bedab24602ecad553daf86778b9498b280f49a0ffd78cf"
+    },
+    {
+      "file": "art_delivery/biome_environment_v2/rock_transition/gravel/edge_s.png",
+      "sha256": "83d79b0de20027e7a6e9b9ddb432beb9710915e89de9618edb59d72f365e5dcf"
+    },
+    {
+      "file": "art_delivery/biome_environment_v2/rock_transition/gravel/edge_w.png",
+      "sha256": "55d3347b5ca5e689d111e85c24bf8d991a0979161f98f5fbfe5778890c8789db"
+    },
+    {
+      "file": "art_delivery/biome_environment_v2/rock_transition/gravel/inner_ne.png",
+      "sha256": "a4b14bd7549c1c55a34535810e19efb55416663103dda95ac3156a7d8e5d4669"
+    },
+    {
+      "file": "art_delivery/biome_environment_v2/rock_transition/gravel/inner_nw.png",
+      "sha256": "d19c5764725b33050562157ef81917ea223529b4fac42352253fb68e1b678477"
+    },
+    {
+      "file": "art_delivery/biome_environment_v2/rock_transition/gravel/inner_se.png",
+      "sha256": "4df3b7c1c7f244759cd1e9b9ecd475c2a94a5248274fc24afbb216641a3d4721"
+    },
+    {
+      "file": "art_delivery/biome_environment_v2/rock_transition/gravel/inner_sw.png",
+      "sha256": "4317b0d47fce0e853e5818f2a2106ad4e9e96f550c71254c21576d313ae662aa"
+    },
+    {
+      "file": "art_delivery/biome_environment_v2/rock_transition/gravel/outer_ne.png",
+      "sha256": "2c61c4c3fcbd4409a7eae8794fb9f45a435a7aedb5b3ee452f9985e24deffdf7"
+    },
+    {
+      "file": "art_delivery/biome_environment_v2/rock_transition/gravel/outer_nw.png",
+      "sha256": "7e9873c33c3b58618eeeee89f4256bd38526ba95911a10767a4e356c56bdbb04"
+    },
+    {
+      "file": "art_delivery/biome_environment_v2/rock_transition/gravel/outer_se.png",
+      "sha256": "d1f51bb0b90a9cf04904bb08eff3ac93a3449ea76efcba64c89417eaea87b0b2"
+    },
+    {
+      "file": "art_delivery/biome_environment_v2/rock_transition/gravel/outer_sw.png",
+      "sha256": "0cfbaa19eea1908d842f234646a2b4385b1301b76efb8b3e8af0196d53d898db"
+    },
+    {
+      "file": "art_delivery/biome_connections_v1/exposed/e_mask_00.png",
+      "sha256": "b2759e1e6a45d4dd7cddd42ca222a0fe3675bc813bd1ed7fd8cad078d5eeb719"
+    },
+    {
+      "file": "art_delivery/biome_connections_v1/exposed/e_mask_01.png",
+      "sha256": "2bea41389182ea219fd04870e93fcfea1831041c71dfb2b88137e8505f4cb583"
+    },
+    {
+      "file": "art_delivery/biome_connections_v1/exposed/e_mask_04.png",
+      "sha256": "75bbf2c919f8efc3f793c0328e1a95be6f480171d6945eb369fbb6b8cc3d6319"
+    },
+    {
+      "file": "art_delivery/biome_connections_v1/exposed/e_mask_05.png",
+      "sha256": "c8473493db9d190dcdde4a5c71bf5698d56e513221a8fe20c136b3587a753c14"
+    },
+    {
+      "file": "art_delivery/biome_connections_v1/exposed/e_mask_08.png",
+      "sha256": "b2759e1e6a45d4dd7cddd42ca222a0fe3675bc813bd1ed7fd8cad078d5eeb719"
+    },
+    {
+      "file": "art_delivery/biome_connections_v1/exposed/e_mask_09.png",
+      "sha256": "2bea41389182ea219fd04870e93fcfea1831041c71dfb2b88137e8505f4cb583"
+    },
+    {
+      "file": "art_delivery/biome_connections_v1/exposed/e_mask_12.png",
+      "sha256": "75bbf2c919f8efc3f793c0328e1a95be6f480171d6945eb369fbb6b8cc3d6319"
+    },
+    {
+      "file": "art_delivery/biome_connections_v1/exposed/e_mask_13.png",
+      "sha256": "c8473493db9d190dcdde4a5c71bf5698d56e513221a8fe20c136b3587a753c14"
+    },
+    {
+      "file": "art_delivery/biome_connections_v1/exposed/n_mask_00.png",
+      "sha256": "b49d98152d0da492f208ea303fb70c56a5935fb322ce9a81a2ef7b8439c8688e"
+    },
+    {
+      "file": "art_delivery/biome_connections_v1/exposed/n_mask_02.png",
+      "sha256": "f2644a12b96515836b835a06d3ae20124803b05c330d7cae613b40ac7ff9c1f2"
+    },
+    {
+      "file": "art_delivery/biome_connections_v1/exposed/n_mask_04.png",
+      "sha256": "b49d98152d0da492f208ea303fb70c56a5935fb322ce9a81a2ef7b8439c8688e"
+    },
+    {
+      "file": "art_delivery/biome_connections_v1/exposed/n_mask_06.png",
+      "sha256": "f2644a12b96515836b835a06d3ae20124803b05c330d7cae613b40ac7ff9c1f2"
+    },
+    {
+      "file": "art_delivery/biome_connections_v1/exposed/n_mask_08.png",
+      "sha256": "f50a88bff98cbdaa42ac9f9b9e9ab2e8cf16ef6da68ec5bbeb22549300a174d9"
+    },
+    {
+      "file": "art_delivery/biome_connections_v1/exposed/n_mask_10.png",
+      "sha256": "6dd9a3df67691bbe0e055a230b7bc352883d6d3549a9de6f7fe89357c394ce79"
+    },
+    {
+      "file": "art_delivery/biome_connections_v1/exposed/n_mask_12.png",
+      "sha256": "f50a88bff98cbdaa42ac9f9b9e9ab2e8cf16ef6da68ec5bbeb22549300a174d9"
+    },
+    {
+      "file": "art_delivery/biome_connections_v1/exposed/n_mask_14.png",
+      "sha256": "6dd9a3df67691bbe0e055a230b7bc352883d6d3549a9de6f7fe89357c394ce79"
+    },
+    {
+      "file": "art_delivery/biome_connections_v1/exposed/s_mask_00.png",
+      "sha256": "ff2b72f5160eac114172389a40a8d75711a5e7e1020fe98cd617f79105575895"
+    },
+    {
+      "file": "art_delivery/biome_connections_v1/exposed/s_mask_01.png",
+      "sha256": "ff2b72f5160eac114172389a40a8d75711a5e7e1020fe98cd617f79105575895"
+    },
+    {
+      "file": "art_delivery/biome_connections_v1/exposed/s_mask_02.png",
+      "sha256": "19ffea003eaa4722988fb421e3eb51ae8e0be29bf5c2a09a420c579f4bcc79d7"
+    },
+    {
+      "file": "art_delivery/biome_connections_v1/exposed/s_mask_03.png",
+      "sha256": "19ffea003eaa4722988fb421e3eb51ae8e0be29bf5c2a09a420c579f4bcc79d7"
+    },
+    {
+      "file": "art_delivery/biome_connections_v1/exposed/s_mask_08.png",
+      "sha256": "a5a92f9cee5f036dd4cf548c5683a118a5c625e346be2d79b3083879ea4acd9b"
+    },
+    {
+      "file": "art_delivery/biome_connections_v1/exposed/s_mask_09.png",
+      "sha256": "a5a92f9cee5f036dd4cf548c5683a118a5c625e346be2d79b3083879ea4acd9b"
+    },
+    {
+      "file": "art_delivery/biome_connections_v1/exposed/s_mask_10.png",
+      "sha256": "5b5830674705b4ae81b99c9b2a44ecde3e2583ba590f9647b818d5d19e00acfe"
+    },
+    {
+      "file": "art_delivery/biome_connections_v1/exposed/s_mask_11.png",
+      "sha256": "5b5830674705b4ae81b99c9b2a44ecde3e2583ba590f9647b818d5d19e00acfe"
+    },
+    {
+      "file": "art_delivery/biome_connections_v1/exposed/w_mask_00.png",
+      "sha256": "af101fe6689749f16ad098b9ff1265253ecc53d0e96232c1ee9f2e68e289cc22"
+    },
+    {
+      "file": "art_delivery/biome_connections_v1/exposed/w_mask_01.png",
+      "sha256": "9dcdd66dde862eee3ab5f8772b22c13a8deeacf64aba74d8a019929f616f01d4"
+    },
+    {
+      "file": "art_delivery/biome_connections_v1/exposed/w_mask_02.png",
+      "sha256": "af101fe6689749f16ad098b9ff1265253ecc53d0e96232c1ee9f2e68e289cc22"
+    },
+    {
+      "file": "art_delivery/biome_connections_v1/exposed/w_mask_03.png",
+      "sha256": "9dcdd66dde862eee3ab5f8772b22c13a8deeacf64aba74d8a019929f616f01d4"
+    },
+    {
+      "file": "art_delivery/biome_connections_v1/exposed/w_mask_04.png",
+      "sha256": "ce0ef84ccbccf871069c14a7ad2be8da17932d197c3962ff96e4ff086da58e84"
+    },
+    {
+      "file": "art_delivery/biome_connections_v1/exposed/w_mask_05.png",
+      "sha256": "bc0509e5e06b18b5eaaef6daa7935bd279c7a6973223e14079b72ebcfd2b3238"
+    },
+    {
+      "file": "art_delivery/biome_connections_v1/exposed/w_mask_06.png",
+      "sha256": "ce0ef84ccbccf871069c14a7ad2be8da17932d197c3962ff96e4ff086da58e84"
+    },
+    {
+      "file": "art_delivery/biome_connections_v1/exposed/w_mask_07.png",
+      "sha256": "bc0509e5e06b18b5eaaef6daa7935bd279c7a6973223e14079b72ebcfd2b3238"
+    },
+    {
+      "file": "art_delivery/biome_connections_v1/inner/concave_ne.png",
+      "sha256": "c4f25981a9cec81b52c54382e3003898bb8544ca6f3e48a545b49ccdee8c37b7"
+    },
+    {
+      "file": "art_delivery/biome_connections_v1/inner/concave_nw.png",
+      "sha256": "a09b934b649be686a1dd900f1868feec6036ddce21840fc778f001683b499432"
+    },
+    {
+      "file": "art_delivery/biome_connections_v1/inner/concave_se.png",
+      "sha256": "a2ff4593fabc2de5906b5c77e78eb1d230ba93f1743eb34ff83f7f3649ab384e"
+    },
+    {
+      "file": "art_delivery/biome_connections_v1/inner/concave_sw.png",
+      "sha256": "aa014a91a25320046810b749b1f32207e20d69ad2312ce8c729c47edba757afe"
+    },
+    {
+      "file": "art_delivery/biome_connections_v1/normal/mask_00.png",
+      "sha256": "161258d11e55264099b2995c3fcc614439ad0d841bd3bf8730203da9fc36179c"
+    },
+    {
+      "file": "art_delivery/biome_connections_v1/normal/mask_01.png",
+      "sha256": "94cee7c6caf1aac5761c82bc3fd10f1bf03d63f63298036d0188ddc7d119aecc"
+    },
+    {
+      "file": "art_delivery/biome_connections_v1/normal/mask_02.png",
+      "sha256": "a6d3e9f37d629fc686e57815e42ebbfa5d0adeb89c720da4fa9a30cddc56f258"
+    },
+    {
+      "file": "art_delivery/biome_connections_v1/normal/mask_03.png",
+      "sha256": "78ff38cf304acd8fa83dfcce3e69d29451306743d83612d1745ba8dfd8f9215e"
+    },
+    {
+      "file": "art_delivery/biome_connections_v1/normal/mask_04.png",
+      "sha256": "66717b3df8a0f03fb9bafc22819881ebfdaf04023dbe49a3c1dc980faba2d4db"
+    },
+    {
+      "file": "art_delivery/biome_connections_v1/normal/mask_05.png",
+      "sha256": "b88c232d0c514be85ddff8afb8749b8d10d71cd80f7a1f97ce90531ab4ba9e7b"
+    },
+    {
+      "file": "art_delivery/biome_connections_v1/normal/mask_06.png",
+      "sha256": "c8fc0731501e7aab5fcd28ca47c2b7fba2278b21519f8f3f30fcb91618c3f79d"
+    },
+    {
+      "file": "art_delivery/biome_connections_v1/normal/mask_07.png",
+      "sha256": "c52ae3b78ee4bf5f4b3756ad8e7983bbf232c7c24b5f5c31f2056e6e90ca5f4a"
+    },
+    {
+      "file": "art_delivery/biome_connections_v1/normal/mask_08.png",
+      "sha256": "83273bf326fd348c9e069482ef6844045672b5bb2d527ac9c77f23c1408a6851"
+    },
+    {
+      "file": "art_delivery/biome_connections_v1/normal/mask_09.png",
+      "sha256": "ae89bd887afde0653f54265edbad199b50a8328648039c72f2d337cadc93b2eb"
+    },
+    {
+      "file": "art_delivery/biome_connections_v1/normal/mask_10.png",
+      "sha256": "27612d1233ee8d2a4d697d5b79ee9fdd0f86f23062eaeaa7a59c518cfed3216a"
+    },
+    {
+      "file": "art_delivery/biome_connections_v1/normal/mask_11.png",
+      "sha256": "38470e8df193dbf31433413f5eef2ec5d28df3a2b21272223d40283af49d1be6"
+    },
+    {
+      "file": "art_delivery/biome_connections_v1/normal/mask_12.png",
+      "sha256": "dc317197f70771fa6bc963c1fc8c9677eafb23675c709de21af9205ea52abd47"
+    },
+    {
+      "file": "art_delivery/biome_connections_v1/normal/mask_13.png",
+      "sha256": "fe451b2333b730c4292eb26a502a699d5ede192cacf3d696eeff210f8b968afe"
+    },
+    {
+      "file": "art_delivery/biome_connections_v1/normal/mask_14.png",
+      "sha256": "d392b43bacd27909e736605a16d466be83d847636afbc5187905d75196129fd4"
+    },
+    {
+      "file": "art_delivery/biome_connections_v1/normal/mask_15.png",
+      "sha256": "a6c4982829522a29522e7783e5238180d1b2e268f8aa6d7c63c049075e8ad4a1"
+    },
+    {
+      "file": "art_delivery/biome_connections_v1/roof/mask_00.png",
+      "sha256": "8872e67cffbaadd7076da94bd084e29e5bf4bfa4bae6cefc676f8bf49dc1fa00"
+    },
+    {
+      "file": "art_delivery/biome_connections_v1/roof/mask_01.png",
+      "sha256": "4ccfc932cfb396ee26d7c4de871659b2787b5405d22507a91b91e1d82b0a939b"
+    },
+    {
+      "file": "art_delivery/biome_connections_v1/roof/mask_02.png",
+      "sha256": "b259f05adecff0d3d802ba863c96767569664eb14993dfe9cd4c7eaddb54516a"
+    },
+    {
+      "file": "art_delivery/biome_connections_v1/roof/mask_03.png",
+      "sha256": "b3b34184a08643a0a8a99d5a74e39f03506a01346adc14c1258611132e38f45f"
+    },
+    {
+      "file": "art_delivery/biome_connections_v1/roof/mask_04.png",
+      "sha256": "e407ad3185ba9c20050d2bf2831646ea064853715fc932edbc4b93f856761040"
+    },
+    {
+      "file": "art_delivery/biome_connections_v1/roof/mask_05.png",
+      "sha256": "db81117287c464f14b38217d2fff6516101ffbc4690aa2a146c76086c6f2dc45"
+    },
+    {
+      "file": "art_delivery/biome_connections_v1/roof/mask_06.png",
+      "sha256": "631e7d6e4e1da99680af150e690fd26b7da024fccfa82e0d6e2558ee35ac9bd3"
+    },
+    {
+      "file": "art_delivery/biome_connections_v1/roof/mask_07.png",
+      "sha256": "780d5e1195f23083ae2d2b205c81716ebf3b3ce08a69c7f5b61494eb4aa1003d"
+    },
+    {
+      "file": "art_delivery/biome_connections_v1/roof/mask_08.png",
+      "sha256": "91c5c5a005e780bedf065e6cf78f4491a2c9da9c7194d0039aeed6029c02e2c6"
+    },
+    {
+      "file": "art_delivery/biome_connections_v1/roof/mask_09.png",
+      "sha256": "43d2892acf1e3ba97e6ec2b5d4f94eb187b989ce4ddd64d8e4dc182d6fbbc99d"
+    },
+    {
+      "file": "art_delivery/biome_connections_v1/roof/mask_10.png",
+      "sha256": "8bbcb84d147cd9989c103493ec10aa971e1603172036f44f86f5dc867fb5c64b"
+    },
+    {
+      "file": "art_delivery/biome_connections_v1/roof/mask_11.png",
+      "sha256": "7f73b2d495c6dcd2355fe67550baf67e1329d895ed9638c071f81fc840989ee2"
+    },
+    {
+      "file": "art_delivery/biome_connections_v1/roof/mask_12.png",
+      "sha256": "61e073c9cc0d563e47be893dbfdee1bde7debcbfb6c9e7b9f4c6bcc3a829b096"
+    },
+    {
+      "file": "art_delivery/biome_connections_v1/roof/mask_13.png",
+      "sha256": "9d19125ad016281c1391b32ac773929000622476a814a4537de79585aee9ac3a"
+    },
+    {
+      "file": "art_delivery/biome_connections_v1/roof/mask_14.png",
+      "sha256": "6d8d90ff3e7c588ab92db8154ad7fddf5ad6ae0416c5a93fd1b2e5006dc1e9c2"
+    },
+    {
+      "file": "art_delivery/biome_connections_v1/roof/mask_15.png",
+      "sha256": "a6c4982829522a29522e7783e5238180d1b2e268f8aa6d7c63c049075e8ad4a1"
+    },
+    {
+      "file": "art_delivery/biome_connections_v1/transition/edge_e.png",
+      "sha256": "a8828912d4701e141f5ee44699f15747b51bb29430967e22012a423da57cfe6f"
+    },
+    {
+      "file": "art_delivery/biome_connections_v1/transition/edge_n.png",
+      "sha256": "aab8d3ca825c3cc72ed7dcecc12034a70ffc2b63b452dd37358de6876cdad43e"
+    },
+    {
+      "file": "art_delivery/biome_connections_v1/transition/edge_s.png",
+      "sha256": "1f992f30d558079fc9d673680b943bf2a351c8d69abbc025353b67bac7d0d3b1"
+    },
+    {
+      "file": "art_delivery/biome_connections_v1/transition/edge_w.png",
+      "sha256": "378b2dd39ef1287f527c5e02a951dabf69233a08e485af7b0b71bf29cab37ed5"
+    },
+    {
+      "file": "art_delivery/biome_connections_v1/transition/full.png",
+      "sha256": "fab16e30a7484a5f657d98d42f21c96b792c112703c5c9316bad0b8a0dc3d29b"
+    },
+    {
+      "file": "art_delivery/biome_connections_v1/transition/inner_ne.png",
+      "sha256": "e58132362d50253fc8cb961305d6d4043b34e2f768b90a938bd70aea9ea579a3"
+    },
+    {
+      "file": "art_delivery/biome_connections_v1/transition/inner_nw.png",
+      "sha256": "6f27873582d6059f2405d7c24ea3cf140e868820c4aea7f634fc86fd7d52096b"
+    },
+    {
+      "file": "art_delivery/biome_connections_v1/transition/inner_se.png",
+      "sha256": "27af9d72f2ced255d64108f7e1e02da4e3595e06051b67bb6a049200e2e54f6f"
+    },
+    {
+      "file": "art_delivery/biome_connections_v1/transition/inner_sw.png",
+      "sha256": "956e49768f13c4db58db5a428b66209f09d3756ea0e8e33ac384c297e26f3015"
+    },
+    {
+      "file": "art_delivery/biome_connections_v1/transition/outer_ne.png",
+      "sha256": "29f3b6b95210a8a669bf9f302547179c82dd31279df5bd3bd1bbf7735fd02d8c"
+    },
+    {
+      "file": "art_delivery/biome_connections_v1/transition/outer_nw.png",
+      "sha256": "63b5061e32f2cc3dfa3cfe3c597b19830b1688797eb62c4f1d9a7c15da3e0972"
+    },
+    {
+      "file": "art_delivery/biome_connections_v1/transition/outer_se.png",
+      "sha256": "64c5c51220efd07feda812e85e36f9af2beb206d75ec578dd228247aa18bcb2b"
+    },
+    {
+      "file": "art_delivery/biome_connections_v1/transition/outer_sw.png",
+      "sha256": "f32a42e3b623110a8026ac011afeb71e1a6da46f0eb640a257c5c07e78bef4d7"
+    }
+  ],
+  "unchanged_nodes": 12,
+  "delivery_commit": "7b6e81320009710b861fca04d6b86470de3835d7"
+}
