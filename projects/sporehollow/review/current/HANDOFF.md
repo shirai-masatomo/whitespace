@@ -2,25 +2,13 @@
 
 2026-10-12。作業場所は `colony-structure-01-work/projects/sporehollow`、既存ブランチ `codex/sporehollow-biome01`。他の未保存import/uid変更は保持。
 
-## GPU確認と通常EXE：未完了
-
-実装コミット `667ca0664442c10165b3f3bb611f32dbff9b4f8b`、正式素材 `b0e917a11f205190dde0136165a72c189f39e275`。関連12スイート成功、Windows headless export/smokeも成功。
-
-承認された隔離手順を1回実行。非対話station/専用desktop所属は確認でき、所有ウィンドウ2個が作られたが、旧EXEによるbefore撮影が120秒でタイムアウト（exit124）。ゲームログは空で停止原因は特定できず。現在版afterは未起動。自分の検証プロセスだけを終了し、通常desktopへのfallback/再試行/権限変更なし。
-
-**今回の新規スクリーンショット0枚、通常EXEは更新していません。** headless成功を描画合格の代用にせず、配布ゲートを維持。`verification/visual/` と last-visual.json は以前の証拠であり今回の画面ではありません。[失敗監査](verification/last-visual-error.json)・[配布未実施とセーブ保持](verification/integrated-deployment.json)・[Windows出力](verification/integrated-export.json)。
-
-通常EXEはa16def5、SHA256 `25141146DED2A167AE07652113342FFFAF7318A08BCC30814130C29FDDA75F6C`。既存入口 `確認入口/最新開発版.lnk` はこの1本のまま。通常セーブ10ファイルは検証前後ハッシュ一致。候補EXE/合成セーブ/固定一時領域と再生成キャッシュは片づけ、追加ショートカット/旧EXEは作らない。
-
-残工程：GPU描画可能な環境でbefore/afterと入力の実画面を確認し、既存publish_build手順の正常終了/再開を通して同じEXEへ反映。利用者のゲームが起動中なら停止/置換しない。OS入力・人間の快適さ・面白さは未確認のまま別記録。main mergeは行わない。
-
 ## 最新の訂正：EXE反映完了
 
 2026-10-12 18:55 JST、既存EXEを **bf6eeea** へ更新。起動は従来の `確認入口/最新開発版.lnk` またはPlay.cmd。ESCの版情報で確認可能。正式素材b0e917a11f205190dde0136165a72c189f39e275、EXE SHA256 `0CA482AEB8D18928B0A0C0DBFA562AF8FFBA8CC6F5BA99E18C72B5E00307DFB0`。
 
 撮影失敗とEXE本体の確認を切り分け、既存dev.ps1 buildのWindows出力→smoke→非対話GPU起動/正常終了/別プロセス再開5項目→同じEXE置換まで成功。旧版/candidateを常備せず一時領域を整理。[配布記録](verification/integrated-deployment.json)・[検証原本](verification/integrated-publication.json)。
 
-**撮影は未完了のまま。** 前回は外部before撮影スクリプトが120秒timeout、ゲームログが空で原因未特定。その失敗をEXE更新全体の阻害とした判断は訂正する。今回の通常EXE本体のGPU起動は成功。下の「未反映/配布待ち」は前回時点の記録で現況ではない。人間の画面評価は未実施。
+**撮影は未完了のまま。** 前回は外部before撮影スクリプトが120秒timeout、ゲームログが空で原因未特定。その失敗をEXE更新全体の阻害とした判断は訂正する。今回の通常EXE本体のGPU起動は成功。前回の未反映記録はGit履歴と失敗監査に保持。人間の画面評価は未実施。
 
 ## 解消した原因
 
@@ -36,6 +24,6 @@
 
 動物死亡回復の以前の2失敗は、日次処理が使うlast_daily_dayをfixtureが更新していなかったため。ゲーム回復条件を緩めずfixtureを正し24項目成功。自然資源の旧テストは初日木材供給を備蓄へ置いた新仕様に期待値を合わせ、自然鉱床が追加在庫にならないことを60項目で確認。
 
-GPU前後画像・通常EXE反映は未完了。承認済みの1回の隔離再確認はタイムアウトした。通常desktop/OS入力/通常セーブを使うfallbackは行わない。描画に失敗したら原因と未確認範囲を記録する。人間の操作感/面白さ、一般の追加作業者募集は別課題。
+GPU前後画像は未完了。外部撮影1回はタイムアウトしたが、後続のEXE本体のGPU起動/終了/再開を確認して通常EXEへ反映済み。通常desktop/OS入力/通常セーブを使うfallbackは行わない。撮影の停止原因と未確認範囲を分けて記録する。人間の操作感/面白さ、一般の追加作業者募集は別課題。
 
-仮値：同順位待ち時間重み0.08、まとめ配送半径6。通常EXEはまだa16def5、既存ショートカット1本とuser-dataを保持。
+仮値：同順位待ち時間重み0.08、まとめ配送半径6。通常EXEはbf6eeea、既存ショートカット1本とuser-dataを保持。
