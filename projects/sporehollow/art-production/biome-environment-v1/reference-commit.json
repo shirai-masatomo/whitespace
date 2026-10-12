@@ -1,0 +1,15 @@
+{
+  "branch": "origin/codex/sporehollow-biome01",
+  "commit": "79e0c174d8dcc4cdc0b4f0b0899909eba84c1602",
+  "paths": [
+    "ART_SPEC.md",
+    "AGENTS.md",
+    "game/biome_map.gd",
+    "game/rock_view.gd",
+    "game/board_art.gd",
+    "game/story_view.gd",
+    "review/current/biome01/after/05-rocky.png",
+    "review/current/biome01/after/04-woodland.png",
+    "review/current/biome01/after/07-dry.png"
+  ]
+}

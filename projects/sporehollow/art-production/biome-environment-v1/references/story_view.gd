@@ -1,0 +1,118 @@
+extends RefCounted
+const IDOL=preload("res://art_delivery/ui_world_direction_v1/candidates/world/goldA.png")
+const IDOL_ANCHOR=Vector2(72,152)
+const TREE_SCALE=1.35 # Uniform from native pixels; does not change the collision footprint.
+const LABELS={"clear_tree":"開拓","inspect_idol":"像を調べる","pray_wealth":"富を願う","pray_animal":"動物を願う","pray_gold":"お金を願う","pray_item":"アイテムを願う","repair_idol":"像を修理","repair_idol_soil":"土で修理 +1","repair_idol_wood":"木で修理 +2","repair_idol_stone":"石で修理 +3","recover_idol":"像を固定"}
+
+static func tree_foot(g,p: Vector2i) -> Vector2:
+	var rank=preload("res://game/forest_pattern.gd").rank(p,g.world.seed_value)
+	return g.center(p)+Vector2((rank%15)-7,14+(rank%9)-4)
+
+static func tree(g,p: Vector2i,deep: bool=false):
+	var id="world.tree_"+["a","b","c"][preload("res://game/forest_pattern.gd").rank(p,g.world.seed_value)%3]
+	var foot=tree_foot(g,p)
+	var obscured=(g.world.animals+g.world.enemies).any(func(a):return a.get("placed",not a.get("done",false)) and a.pos.x==p.x and a.pos.y<p.y and a.pos.y>=p.y-2) or (g.world.keeper.pos.x==p.x and g.world.keeper.pos.y<p.y and g.world.keeper.pos.y>=p.y-2)
+	g.draw_set_transform(foot*(1.0-TREE_SCALE),0,Vector2.ONE*TREE_SCALE)
+	g.Assets.Direction.draw(g,id+"_trunk",foot)
+	g.Assets.Direction.draw(g,id+"_canopy",foot,0.55 if obscured else (0.85 if deep else 1.0))
+	g.draw_set_transform(Vector2.ZERO)
+
+static func idol(g):
+	var w=g.world
+	if w.story.idol.is_empty(): return
+	var p=g.actor_pixel("idol",w.Story.at(w))+g.TILE*0.5
+	# Native RGBA, anchored to the lower middle of the existing 2x2 footprint.
+	g.texture_filter=CanvasItem.TEXTURE_FILTER_NEAREST
+	g.draw_texture(IDOL,(p+Vector2(0,g.TILE.y)-IDOL_ANCHOR).round())
+	if w.Story.idol_glowing(w):
+		# Slow red/yellow steam; smooth opacity, no blinking or opaque veil.
+		for i in range(7):
+			var age=fposmod(g.visual_time*0.22+i/7.0,1.0)
+			var alpha=sin(age*PI)*0.38
+			var light=p+Vector2(-40+i*13+sin(age*TAU+i)*9,-30-age*100)
+			var points=PackedVector2Array()
+			for j in range(6):points.append(light+Vector2(sin(age*5+j*0.8+i)*5,-j*4))
+			g.draw_polyline(points,Color(0.75,0.12,0.04,alpha),9,true)
+			g.draw_polyline(points,Color(1.0,0.65,0.10,alpha*0.85),3,true)
+	if w.story.idol.hp<w.story.idol.max_hp/2:
+		g.draw_polyline(PackedVector2Array([p+Vector2(7,-48),p+Vector2(0,-28),p+Vector2(12,-11)]),Color("574933"),3)
+	if w.story.idol.state in ["preparing","transporting"]:
+		var enemies=w.enemies.filter(func(e):return e.id==w.story.idol.carrier and not e.done)
+		if not enemies.is_empty(): g.draw_line(p+Vector2(0,18),g.actor_pixel("e%d"%enemies[0].id,enemies[0].pos),Color("cdb580"),3)
+		for x in [-31,31]:g.draw_rect(Rect2(p+Vector2(x,29),Vector2(12,8)),Color("504539"))
+		g.label_on(g,p+Vector2(-40,-117),"固定を外されている" if w.story.idol.state=="preparing" else "搬出中",15,Color("ffe0a2"))
+	if g.selected.get("kind")=="idol" or w.story.idol.hp<w.story.idol.max_hp:
+		g.label_on(g,p+Vector2(-38,59),"黄金像 %d/%d"%[w.story.idol.hp,w.story.idol.max_hp],14)
+
+static func open(g,kind: String):
+	g.story_modal=kind; g.story_page=0; rebuild(g)
+
+static func close(g):
+	if g.story_modal=="intro":
+		g.world.story.intro_seen=true; g.world.Story.persist(g.world)
+		g.world.morning_checkpoint.world_story=g.world.story.duplicate(true)
+		g.save_morning(g.world)
+	g.story_modal=""
+	if is_instance_valid(g.story_panel): g.story_panel.queue_free(); g.story_panel=null
+	g.arrival_started=g.clock-3
+	g.refresh()
+
+static func next(g):
+	g.story_page+=1
+	if g.story_page>=g.world.Story.INTRO.size(): close(g)
+	else: rebuild(g)
+
+static func rebuild(g):
+	if is_instance_valid(g.story_panel):g.story_panel.queue_free()
+	var panel=Panel.new(); g.story_panel=panel
+	panel.size=Vector2(1280,800); panel.mouse_filter=Control.MOUSE_FILTER_STOP
+	panel.add_theme_stylebox_override("panel",g.MarketView.panel(Color(0.13,0.20,0.16,0.9)))
+	g.controls.get_parent().add_child(panel);panel.theme=g.controls.theme
+	var title=Label.new();title.position=Vector2(230,154);title.add_theme_font_size_override("font_size",30)
+	title.text={"intro":"父の残した牧場","diary":"父の記録","radio":"古いラジオ"}.get(g.story_modal,"")
+	panel.add_child(title)
+	var scroll=ScrollContainer.new();scroll.position=Vector2(230,222);scroll.size=Vector2(820,350);panel.add_child(scroll)
+	var body=Label.new();body.custom_minimum_size=Vector2(780,0);body.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART;body.add_theme_font_size_override("font_size",23)
+	if g.story_modal=="intro":body.text=g.world.Story.INTRO[g.story_page]
+	elif g.story_modal=="diary":body.text="『像を壊してはいけない。』\n\n父の消息も、この像の由来も、まだ分からない。"
+	else:
+		body.text=""
+		for news in g.world.story.news:body.text+="%d日目　%s\n%s\n\n"%[news.day,news.title,news.text]
+		if body.text=="":body.text="今は、遠い雑音だけが聞こえる。"
+	scroll.add_child(body)
+	g.add_button(panel,"story_close","読み終える" if g.story_modal!="intro" else "スキップ",Rect2(230,612,180,46),close.bind(g))
+	if g.story_modal=="intro":g.add_button(panel,"story_next","次へ" if g.story_page<3 else "牧場へ",Rect2(840,612,180,46),next.bind(g))
+
+static func morning_layout(g) -> Dictionary:
+	# Paper and footer share one layout; optional messages cannot escape the card.
+	var buttons=[]
+	var notes=[];var y=530.0
+	if g.world.story.radio and not g.world.story.news.is_empty():
+		notes.append({"name":"MorningNews","text":"放送："+g.world.story.news[-1].title,"rect":Rect2(368,y,580,24)});y+=28
+	var gifts=g.world.story.miracles.filter(func(m):return m.day==g.world.campaign.day)
+	if not gifts.is_empty():
+		notes.append({"name":"MorningGift","text":"願いの贈り物："+gifts[-1].get("text","金貨 +60G"),"rect":Rect2(368,y,580,24)});y+=28
+	if g.save_status!="":
+		notes.append({"name":"MorningSaveStatus","text":g.save_status,"rect":Rect2(368,y,580,44)});y+=48
+	var footer_y=maxf(626,y+12)
+	if g.world.story.radio:buttons.append({"id":"radio","text":"ラジオ","kind":"radio","rect":Rect2(368,footer_y,154,40)})
+	return {"paper":Rect2(330,112,656,footer_y+60-112),"advance":Rect2(758,footer_y,190,44),"buttons":buttons,"notes":notes}
+
+static func morning_buttons(g):
+	var layout=morning_layout(g)
+	for row in layout.buttons:
+		g.add_button(g.palette,row.id,row.text,row.rect,open.bind(g,row.kind))
+		g.MarketView.button_style(g.buttons[row.id])
+	for row in layout.notes:
+		var note=Label.new();note.name=row.name;note.position=row.rect.position;note.size=row.rect.size
+		note.text=row.text;note.tooltip_text=row.text;note.clip_text=true
+		note.text_overrun_behavior=TextServer.OVERRUN_TRIM_ELLIPSIS
+		note.add_theme_font_size_override("font_size",14 if row.name=="MorningSaveStatus" else 16)
+		note.add_theme_color_override("font_color",g.MarketView.MUTED)
+		if row.name=="MorningSaveStatus":note.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART;note.max_lines_visible=2
+		note.mouse_filter=Control.MOUSE_FILTER_STOP;g.palette.add_child(note)
+
+static func debug(g):
+	var w=g.world
+	for entry in w.entries:g.draw_rect(Rect2(Vector2(entry)*g.TILE,g.TILE),Color(0.9,0.4,0.3,0.4))
+	for p in w.trees:g.label_on(g,g.center(p),w.trees[p],10)
