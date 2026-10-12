@@ -1,9 +1,10 @@
 {
-  "png_assets": 68,
+  "png_assets": 80,
   "sheet_count": 1,
-  "external_references": 9,
+  "external_references": 23,
   "prior_png_unchanged": 1501,
   "connected_EW_port_cases": 64,
+  "connected_NS_port_cases": 64,
   "interior_solid": true,
   "sheet_matches_frames": true,
   "errors": [],

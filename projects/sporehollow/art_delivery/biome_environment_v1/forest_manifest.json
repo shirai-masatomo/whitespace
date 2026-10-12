@@ -1,0 +1,587 @@
+{
+  "stage": "forest",
+  "assets": [
+    {
+      "file": "forest/stump_a.png",
+      "size_px": [
+        64,
+        80
+      ],
+      "anchor_px": [
+        32,
+        72
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "usage": "Cut stump aligned to existing tree foot. No new permanent obstacle or resource.",
+      "layer": "tree_difference",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "ground_shadow": false,
+      "sha256": "a38ac211e9cf91a401e2ad5aca18b17b4a33ffa2f345ca175b757bcf88ff1c9d",
+      "visual_state": "after_felling"
+    },
+    {
+      "file": "forest/notch_a_light.png",
+      "size_px": [
+        64,
+        80
+      ],
+      "anchor_px": [
+        32,
+        72
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "usage": "Alpha clipped to adopted trunk; state choice comes from existing chop progress. Composite over trunk.",
+      "layer": "trunk_overlay",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "ground_shadow": false,
+      "sha256": "10a941265b84809f3b71c7526b75b9a364f154a9975c00e0e80990774b9bd2eb"
+    },
+    {
+      "file": "forest/notch_a_deep.png",
+      "size_px": [
+        64,
+        80
+      ],
+      "anchor_px": [
+        32,
+        72
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "usage": "Alpha clipped to adopted trunk; state choice comes from existing chop progress. Composite over trunk.",
+      "layer": "trunk_overlay",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "ground_shadow": false,
+      "sha256": "657728dee838cba8fdd90e6d5fe6819ec4440fdea759c6c9611a72b974dd3e0b"
+    },
+    {
+      "file": "forest/stump_b.png",
+      "size_px": [
+        64,
+        80
+      ],
+      "anchor_px": [
+        32,
+        72
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "usage": "Cut stump aligned to existing tree foot. No new permanent obstacle or resource.",
+      "layer": "tree_difference",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "ground_shadow": false,
+      "sha256": "87fbac9ecad4c88bdcdc7418141d2d606cc6b5e4cebfcdf3035fa4cd6b4049fd",
+      "visual_state": "after_felling"
+    },
+    {
+      "file": "forest/notch_b_light.png",
+      "size_px": [
+        64,
+        80
+      ],
+      "anchor_px": [
+        32,
+        72
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "usage": "Alpha clipped to adopted trunk; state choice comes from existing chop progress. Composite over trunk.",
+      "layer": "trunk_overlay",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "ground_shadow": false,
+      "sha256": "b7d90bae8f8087c9bda0ae4aebf8d6d6f6c0ae88c829c1ace43efb25493e14cc"
+    },
+    {
+      "file": "forest/notch_b_deep.png",
+      "size_px": [
+        64,
+        80
+      ],
+      "anchor_px": [
+        32,
+        72
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "usage": "Alpha clipped to adopted trunk; state choice comes from existing chop progress. Composite over trunk.",
+      "layer": "trunk_overlay",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "ground_shadow": false,
+      "sha256": "688bcae7d65cd821e16a7028711cd7de630fcdd36bb56898eccd5a793373f0b0"
+    },
+    {
+      "file": "forest/stump_c.png",
+      "size_px": [
+        64,
+        80
+      ],
+      "anchor_px": [
+        32,
+        72
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "usage": "Cut stump aligned to existing tree foot. No new permanent obstacle or resource.",
+      "layer": "tree_difference",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "ground_shadow": false,
+      "sha256": "bc1bd57968a2ffa4a72258722eee9f34abb9448b28e3e4705dc74540025b0d96",
+      "visual_state": "after_felling"
+    },
+    {
+      "file": "forest/notch_c_light.png",
+      "size_px": [
+        64,
+        80
+      ],
+      "anchor_px": [
+        32,
+        72
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "usage": "Alpha clipped to adopted trunk; state choice comes from existing chop progress. Composite over trunk.",
+      "layer": "trunk_overlay",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "ground_shadow": false,
+      "sha256": "fd38647b56f57261fb7b8646920b1238801da1e1e5bef7d2e07ef578bba87adb"
+    },
+    {
+      "file": "forest/notch_c_deep.png",
+      "size_px": [
+        64,
+        80
+      ],
+      "anchor_px": [
+        32,
+        72
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "usage": "Alpha clipped to adopted trunk; state choice comes from existing chop progress. Composite over trunk.",
+      "layer": "trunk_overlay",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "ground_shadow": false,
+      "sha256": "3e34973cdcabf45d934ef2585e51e677956fe019248a98baaedda209a3ebc3f1"
+    },
+    {
+      "file": "forest/leaves_00.png",
+      "size_px": [
+        32,
+        32
+      ],
+      "anchor_px": [
+        16,
+        26
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "usage": "Small leaf fragments driven by felling event; not a new resource.",
+      "layer": "fx",
+      "frame_index": 0,
+      "duration_ms": 100,
+      "loop": false,
+      "ground_shadow": false,
+      "sha256": "e946f3d3cb14a48d884ad62e3e49728f3bf4aa36d7c4169ee20bc3218989fad3",
+      "animation": "falling_leaves"
+    },
+    {
+      "file": "forest/leaves_01.png",
+      "size_px": [
+        32,
+        32
+      ],
+      "anchor_px": [
+        16,
+        26
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "usage": "Small leaf fragments driven by felling event; not a new resource.",
+      "layer": "fx",
+      "frame_index": 1,
+      "duration_ms": 120,
+      "loop": false,
+      "ground_shadow": false,
+      "sha256": "3e3cfcbdfa92ec869d2198bd0b0f7e97b3c4957fda7d3e0ad21e1bc167df9d42",
+      "animation": "falling_leaves"
+    },
+    {
+      "file": "forest/leaves_02.png",
+      "size_px": [
+        32,
+        32
+      ],
+      "anchor_px": [
+        16,
+        26
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "usage": "Small leaf fragments driven by felling event; not a new resource.",
+      "layer": "fx",
+      "frame_index": 2,
+      "duration_ms": 160,
+      "loop": false,
+      "ground_shadow": false,
+      "sha256": "3b468ce3468ac87eb6e1448f444f209460a0dad5471bf860b2ec9403b07ddc7c",
+      "animation": "falling_leaves"
+    }
+  ],
+  "reuse": [
+    {
+      "role": "tree_a",
+      "file": "../ui_world_direction_v1/candidates/world/tree_a.png",
+      "size_px": [
+        64,
+        80
+      ],
+      "anchor_px": [
+        32,
+        72
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "sha256": "354fab7e80d81a38c32a4979259344185fd083a75bcb733b94c69daa8ef19452",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "usage": "Reuse unchanged adopted tree; shared foot for trunk/canopy. Runtime TREE_SCALE=1.35 in reference branch."
+    },
+    {
+      "role": "tree_a_trunk",
+      "file": "../ui_world_direction_v1/candidates/world/tree_a_trunk.png",
+      "size_px": [
+        64,
+        80
+      ],
+      "anchor_px": [
+        32,
+        72
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "sha256": "14d820035bd7afaf0e74f9b128aecfab3f23edbd479e0620235ec1e11b203f5c",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "usage": "Reuse unchanged adopted tree; shared foot for trunk/canopy. Runtime TREE_SCALE=1.35 in reference branch."
+    },
+    {
+      "role": "tree_a_canopy",
+      "file": "../ui_world_direction_v1/candidates/world/tree_a_canopy.png",
+      "size_px": [
+        64,
+        80
+      ],
+      "anchor_px": [
+        32,
+        72
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "sha256": "99d77b03dc4af13def2404a439bd2c0c9a55fd5444fd6ed98d8c887e2e4f5f9b",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "usage": "Reuse unchanged adopted tree; shared foot for trunk/canopy. Runtime TREE_SCALE=1.35 in reference branch."
+    },
+    {
+      "role": "tree_b",
+      "file": "../ui_world_direction_v1/candidates/world/tree_b.png",
+      "size_px": [
+        64,
+        80
+      ],
+      "anchor_px": [
+        32,
+        72
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "sha256": "7016a7a49782f9316ec6595daab8e6f8a50f8c4e9a892dfb54b5d415383ff857",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "usage": "Reuse unchanged adopted tree; shared foot for trunk/canopy. Runtime TREE_SCALE=1.35 in reference branch."
+    },
+    {
+      "role": "tree_b_trunk",
+      "file": "../ui_world_direction_v1/candidates/world/tree_b_trunk.png",
+      "size_px": [
+        64,
+        80
+      ],
+      "anchor_px": [
+        32,
+        72
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "sha256": "49857f4d08099c53bc1114b8759dc3a71e6c7b30e8c6f621d2efecfd3e43367c",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "usage": "Reuse unchanged adopted tree; shared foot for trunk/canopy. Runtime TREE_SCALE=1.35 in reference branch."
+    },
+    {
+      "role": "tree_b_canopy",
+      "file": "../ui_world_direction_v1/candidates/world/tree_b_canopy.png",
+      "size_px": [
+        64,
+        80
+      ],
+      "anchor_px": [
+        32,
+        72
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "sha256": "28efbc1abecc8780f86216ccbed47fb51328275197c78885805704c34da9abb9",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "usage": "Reuse unchanged adopted tree; shared foot for trunk/canopy. Runtime TREE_SCALE=1.35 in reference branch."
+    },
+    {
+      "role": "tree_c",
+      "file": "../ui_world_direction_v1/candidates/world/tree_c.png",
+      "size_px": [
+        64,
+        80
+      ],
+      "anchor_px": [
+        32,
+        72
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "sha256": "e364637d343ff305e21f6d579ce77ab038b0161453882b9689a4515b0bcf1345",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "usage": "Reuse unchanged adopted tree; shared foot for trunk/canopy. Runtime TREE_SCALE=1.35 in reference branch."
+    },
+    {
+      "role": "tree_c_trunk",
+      "file": "../ui_world_direction_v1/candidates/world/tree_c_trunk.png",
+      "size_px": [
+        64,
+        80
+      ],
+      "anchor_px": [
+        32,
+        72
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "sha256": "6ca2455d05ed8dab6eb287e1024a2141b0ac34b3bbfd40d7262f322d43d01539",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "usage": "Reuse unchanged adopted tree; shared foot for trunk/canopy. Runtime TREE_SCALE=1.35 in reference branch."
+    },
+    {
+      "role": "tree_c_canopy",
+      "file": "../ui_world_direction_v1/candidates/world/tree_c_canopy.png",
+      "size_px": [
+        64,
+        80
+      ],
+      "anchor_px": [
+        32,
+        72
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "sha256": "ad84534f8a2c8e9c951a110f497aae86a5740fd26ac30c642fd08ffa8941d76f",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "usage": "Reuse unchanged adopted tree; shared foot for trunk/canopy. Runtime TREE_SCALE=1.35 in reference branch."
+    },
+    {
+      "role": "wood_drop",
+      "file": "../resource_icons_v1/hud24/wood.png",
+      "size_px": [
+        24,
+        24
+      ],
+      "anchor_px": [
+        12,
+        12
+      ],
+      "sha256": "6fb678b9c82dad4066cbbb46fad0ed434477a1b89b7061911f69e9ece3056966",
+      "frame_index": 0,
+      "loop": false,
+      "timing_source": null,
+      "usage": "Reuse original wood bundle or wood chips unchanged."
+    },
+    {
+      "role": "wood_chips",
+      "file": "../effects_v1/wood_chips/00.png",
+      "size_px": [
+        32,
+        32
+      ],
+      "anchor_px": [
+        16,
+        26
+      ],
+      "sha256": "27fa126bed889facf119571796ce0df6144fdf8fbe7c2141a6eda68439f15f1e",
+      "frame_index": 0,
+      "loop": false,
+      "timing_source": "../effects_v1/manifest.json",
+      "usage": "Reuse original wood bundle or wood chips unchanged."
+    },
+    {
+      "role": "wood_chips",
+      "file": "../effects_v1/wood_chips/01.png",
+      "size_px": [
+        32,
+        32
+      ],
+      "anchor_px": [
+        16,
+        26
+      ],
+      "sha256": "b830d7ad8cee31a59422f93111bea3a25c4079bfb9d3145275e9a6cf6a968ac9",
+      "frame_index": 1,
+      "loop": false,
+      "timing_source": "../effects_v1/manifest.json",
+      "usage": "Reuse original wood bundle or wood chips unchanged."
+    },
+    {
+      "role": "wood_chips",
+      "file": "../effects_v1/wood_chips/02.png",
+      "size_px": [
+        32,
+        32
+      ],
+      "anchor_px": [
+        16,
+        26
+      ],
+      "sha256": "8ab8ff27264a5459f879f516f2a40f40a00916c71f6675a6810249683d064a01",
+      "frame_index": 2,
+      "loop": false,
+      "timing_source": "../effects_v1/manifest.json",
+      "usage": "Reuse original wood bundle or wood chips unchanged."
+    },
+    {
+      "role": "wood_chips",
+      "file": "../effects_v1/wood_chips/03.png",
+      "size_px": [
+        32,
+        32
+      ],
+      "anchor_px": [
+        16,
+        26
+      ],
+      "sha256": "651e9116aa361c8d99e40fdb95f49c237595c0ffac9f94eceb196a5db7e38907",
+      "frame_index": 3,
+      "loop": false,
+      "timing_source": "../effects_v1/manifest.json",
+      "usage": "Reuse original wood bundle or wood chips unchanged."
+    }
+  ],
+  "trees": {
+    "a": {
+      "split_matches_original": true,
+      "foot_anchor_px": [
+        32,
+        72
+      ],
+      "suggested_cut_pivot_px": [
+        32,
+        65
+      ]
+    },
+    "b": {
+      "split_matches_original": true,
+      "foot_anchor_px": [
+        32,
+        72
+      ],
+      "suggested_cut_pivot_px": [
+        32,
+        65
+      ]
+    },
+    "c": {
+      "split_matches_original": true,
+      "foot_anchor_px": [
+        32,
+        72
+      ],
+      "suggested_cut_pivot_px": [
+        32,
+        65
+      ]
+    }
+  },
+  "runtime_verified": false
+}

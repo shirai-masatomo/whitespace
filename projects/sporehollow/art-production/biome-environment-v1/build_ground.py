@@ -5,7 +5,8 @@ S=Path(__file__).resolve().parent;P=S.parents[1];D=P/'art_delivery/biome_environ
 COLORS=['#4d653d','#607844','#71864d','#829654','#98a565','#b1b77a','#837651','#968760','#a7996f','#b7aa7e','#cec29c','#6c6c59','#92917a','#b4af95','#e4dcc0','#f2e5c5']
 pal=np.array([tuple(bytes.fromhex(c[1:])) for c in COLORS],dtype=np.int32)
 def master(i,wh):
- x=i%3;y=i//3;a=src.crop((x*W//3,y*H//3,(x+1)*W//3,(y+1)*H//3));a.putalpha(a.getchannel('A').point(lambda v:255 if v>=180 else 0));a=a.crop(a.getbbox());a.thumbnail(wh,Image.Resampling.LANCZOS);ar=np.array(a);v=ar[:,:,:3].astype(np.int32);ix=((v[:,:,None,:]-pal)**2).sum(3).argmin(2);ar[:,:,:3]=pal[ix];ar[:,:,3]=np.where(ar[:,:,3]>=150,255,0);ar[ar[:,:,3]==0]=0;return Image.fromarray(ar)
+ boxes=[(95,110,470,360),(550,165,770,350),(930,170,1210,350),(110,565,405,765),(520,510,810,760),(920,550,1230,760)]
+ a=src.crop(boxes[i]);a.putalpha(a.getchannel('A').point(lambda v:255 if v>=180 else 0));a=a.crop(a.getbbox());a.thumbnail(wh,Image.Resampling.LANCZOS);ar=np.array(a);v=ar[:,:,:3].astype(np.int32);ix=((v[:,:,None,:]-pal)**2).sum(3).argmin(2);ar[:,:,:3]=pal[ix];ar[:,:,3]=np.where(ar[:,:,3]>=150,255,0);ar[ar[:,:,3]==0]=0;return Image.fromarray(ar)
 rec=[]
 def save(a,path,anchor,usage,layer='ground',**kw):
  f=D/path;f.parent.mkdir(parents=True,exist_ok=True);a.save(f);rec.append({'file':path,'size_px':list(a.size),'anchor_px':anchor,'occupied_cells':[0,0],'usage':usage,'layer':layer,'frame_index':0,'duration_ms':None,'loop':False,'ground_shadow':False,'sha256':hashlib.sha256(f.read_bytes()).hexdigest(),**kw});return a

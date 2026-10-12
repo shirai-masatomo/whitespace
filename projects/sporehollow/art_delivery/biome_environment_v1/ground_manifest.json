@@ -21,7 +21,7 @@
       "duration_ms": null,
       "loop": false,
       "ground_shadow": false,
-      "sha256": "30568b9bb8c4ba43533de4595c0a824ef23d4ad994091576eae974df392f6a31"
+      "sha256": "55aac0de537a6654404c91f6242d7b3260ade8571fcec97647c353fa22bb5373"
     },
     {
       "file": "ground/dry/cracks_00.png",
@@ -87,7 +87,7 @@
       "duration_ms": null,
       "loop": false,
       "ground_shadow": false,
-      "sha256": "18b4576d15a4602997ed4dd98c42867986ffdf75cc9b0d34565ac51eaf1de507"
+      "sha256": "243a91aa31b77c6257f0e6cda7f8af84536f7f37e052a23fc89f0fdece56e4ad"
     },
     {
       "file": "ground/dry/grass_tuft.png",
@@ -109,7 +109,7 @@
       "duration_ms": null,
       "loop": false,
       "ground_shadow": false,
-      "sha256": "f7e6937dfe877acbdc68758e7aeaeaccc0f51e4fd861c2f247aee65463e53c44"
+      "sha256": "5dbd7d3d620974039b5bf531b46bdf03bc7e31a4c5cc3f27e1f6b79ae5cf6747"
     },
     {
       "file": "ground/dry/gravel.png",
@@ -263,7 +263,7 @@
       "duration_ms": null,
       "loop": false,
       "ground_shadow": false,
-      "sha256": "2d6924cda423349f70a538385f578bd9a81fa28bbaaad8e3c610fab3c0305fb7"
+      "sha256": "11ffc916b141fab08876743e969eb6e5f516ed4501699b88e78de81c393f48f3"
     },
     {
       "file": "ground/boundary/e.png",
@@ -285,7 +285,7 @@
       "duration_ms": null,
       "loop": false,
       "ground_shadow": false,
-      "sha256": "2d92c5a837a0b6d4eab0a0745c43e9b156f9b117bcf7dd5c922993a6eb510b41"
+      "sha256": "2e6d353fa7e7c3fe9feddca74680d7a681b903bbf3743d671d6b2186b38db2dd"
     },
     {
       "file": "ground/boundary/s.png",
@@ -307,7 +307,7 @@
       "duration_ms": null,
       "loop": false,
       "ground_shadow": false,
-      "sha256": "58c06ae1fa0a7539cfe1987aef93d3b64472e806a767026536ae5ff29ef0c2ff"
+      "sha256": "7c4640baf8056b2cecb28bece62794d12b33520f6b2b4bad973ac5599750303e"
     },
     {
       "file": "ground/boundary/w.png",
@@ -329,7 +329,7 @@
       "duration_ms": null,
       "loop": false,
       "ground_shadow": false,
-      "sha256": "aedfdeffcb647deba05f41469878e88fae114d1b8922735eaa50bec6aeedfd0c"
+      "sha256": "1788ac07e4837a924fcd8846a30403cbf658eaddf005faaf35b208e6fb8fbe04"
     }
   ],
   "reuse": [],
