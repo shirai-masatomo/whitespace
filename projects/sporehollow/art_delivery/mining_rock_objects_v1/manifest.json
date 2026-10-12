@@ -1,0 +1,447 @@
+{
+  "schema_version": 1,
+  "delivery": "mining_rock_objects_v1",
+  "branch": "codex/sporehollow-art-assets",
+  "tile_size_px": [
+    48,
+    42
+  ],
+  "assets": [
+    {
+      "file": "rock_large_4x4_stage1.png",
+      "group": "large",
+      "stage": 1,
+      "size_px": [
+        224,
+        240
+      ],
+      "anchor_px": [
+        112,
+        224
+      ],
+      "footprint_cells": [
+        4,
+        4
+      ],
+      "frame_order": [
+        0
+      ],
+      "duration_ms": null,
+      "loop": false,
+      "rgba": "straight alpha",
+      "sampling": "nearest",
+      "ground_shadow_baked": false,
+      "visible_bbox_exclusive_px": [
+        18,
+        47,
+        206,
+        224
+      ],
+      "visible_size_px": [
+        188,
+        177
+      ],
+      "opaque_pixel_count": 22244,
+      "sha256": "a3ae25f8f73fd85d2611df84a2b49d33a151c95ef8f89bd53bec5b37e3c6b802",
+      "ground_footprint_rect_px": [
+        16,
+        64,
+        192,
+        168
+      ],
+      "usage": "Mining resource object; replace whole image at progress state, not a ground tile.",
+      "stage_progress": "Existing implementation chooses transition thresholds; no HP or timing inferred."
+    },
+    {
+      "file": "rock_large_4x4_stage2.png",
+      "group": "large",
+      "stage": 2,
+      "size_px": [
+        224,
+        240
+      ],
+      "anchor_px": [
+        112,
+        224
+      ],
+      "footprint_cells": [
+        4,
+        4
+      ],
+      "frame_order": [
+        1
+      ],
+      "duration_ms": null,
+      "loop": false,
+      "rgba": "straight alpha",
+      "sampling": "nearest",
+      "ground_shadow_baked": false,
+      "visible_bbox_exclusive_px": [
+        18,
+        79,
+        206,
+        224
+      ],
+      "visible_size_px": [
+        188,
+        145
+      ],
+      "opaque_pixel_count": 19110,
+      "sha256": "8bf22b5442dd8846f283a1c922f61bf223ff3a99bb6a2f1be60891060fcbf625",
+      "ground_footprint_rect_px": [
+        16,
+        64,
+        192,
+        168
+      ],
+      "usage": "Mining resource object; replace whole image at progress state, not a ground tile.",
+      "stage_progress": "Existing implementation chooses transition thresholds; no HP or timing inferred."
+    },
+    {
+      "file": "rock_large_4x4_stage3.png",
+      "group": "large",
+      "stage": 3,
+      "size_px": [
+        224,
+        240
+      ],
+      "anchor_px": [
+        112,
+        224
+      ],
+      "footprint_cells": [
+        4,
+        4
+      ],
+      "frame_order": [
+        2
+      ],
+      "duration_ms": null,
+      "loop": false,
+      "rgba": "straight alpha",
+      "sampling": "nearest",
+      "ground_shadow_baked": false,
+      "visible_bbox_exclusive_px": [
+        24,
+        146,
+        172,
+        224
+      ],
+      "visible_size_px": [
+        148,
+        78
+      ],
+      "opaque_pixel_count": 6838,
+      "sha256": "f5c2ac127ab1ee661446050d7c2b1f6f0e3aa7cd702a26bddc520af01eec5d8c",
+      "ground_footprint_rect_px": [
+        16,
+        64,
+        192,
+        168
+      ],
+      "usage": "Mining resource object; replace whole image at progress state, not a ground tile.",
+      "stage_progress": "Existing implementation chooses transition thresholds; no HP or timing inferred."
+    },
+    {
+      "file": "rock_large_4x4_stage4.png",
+      "group": "large",
+      "stage": 4,
+      "size_px": [
+        224,
+        240
+      ],
+      "anchor_px": [
+        112,
+        224
+      ],
+      "footprint_cells": [
+        4,
+        4
+      ],
+      "frame_order": [
+        3
+      ],
+      "duration_ms": null,
+      "loop": false,
+      "rgba": "straight alpha",
+      "sampling": "nearest",
+      "ground_shadow_baked": false,
+      "visible_bbox_exclusive_px": [
+        78,
+        189,
+        141,
+        224
+      ],
+      "visible_size_px": [
+        63,
+        35
+      ],
+      "opaque_pixel_count": 1452,
+      "sha256": "7b7ecee7402a9fbdb3ad8bd99677b2545eb042287e8573de3a512eb0cf5cc854",
+      "ground_footprint_rect_px": [
+        16,
+        64,
+        192,
+        168
+      ],
+      "usage": "Mining resource object; replace whole image at progress state, not a ground tile.",
+      "stage_progress": "Existing implementation chooses transition thresholds; no HP or timing inferred."
+    },
+    {
+      "file": "rock_small_1x1_stage1.png",
+      "group": "small",
+      "stage": 1,
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        46
+      ],
+      "footprint_cells": [
+        1,
+        1
+      ],
+      "frame_order": [
+        0
+      ],
+      "duration_ms": null,
+      "loop": false,
+      "rgba": "straight alpha",
+      "sampling": "nearest",
+      "ground_shadow_baked": false,
+      "visible_bbox_exclusive_px": [
+        5,
+        2,
+        43,
+        46
+      ],
+      "visible_size_px": [
+        38,
+        44
+      ],
+      "opaque_pixel_count": 1114,
+      "sha256": "7f426207cafae3a31465a408b0222d82bdd5d456abe3ed4a406f19adf75e17b4",
+      "ground_footprint_rect_px": [
+        0,
+        11,
+        48,
+        42
+      ],
+      "usage": "Mining resource object; replace whole image at progress state, not a ground tile.",
+      "stage_progress": "Existing implementation chooses transition thresholds; no HP or timing inferred."
+    },
+    {
+      "file": "rock_small_1x1_stage2.png",
+      "group": "small",
+      "stage": 2,
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        46
+      ],
+      "footprint_cells": [
+        1,
+        1
+      ],
+      "frame_order": [
+        1
+      ],
+      "duration_ms": null,
+      "loop": false,
+      "rgba": "straight alpha",
+      "sampling": "nearest",
+      "ground_shadow_baked": false,
+      "visible_bbox_exclusive_px": [
+        5,
+        20,
+        43,
+        46
+      ],
+      "visible_size_px": [
+        38,
+        26
+      ],
+      "opaque_pixel_count": 758,
+      "sha256": "b07337825d775fe2438929066b684ca372dd305529578095b93778f9144ed861",
+      "ground_footprint_rect_px": [
+        0,
+        11,
+        48,
+        42
+      ],
+      "usage": "Mining resource object; replace whole image at progress state, not a ground tile.",
+      "stage_progress": "Existing implementation chooses transition thresholds; no HP or timing inferred."
+    },
+    {
+      "file": "rock_small_1x1_stage3.png",
+      "group": "small",
+      "stage": 3,
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        46
+      ],
+      "footprint_cells": [
+        1,
+        1
+      ],
+      "frame_order": [
+        2
+      ],
+      "duration_ms": null,
+      "loop": false,
+      "rgba": "straight alpha",
+      "sampling": "nearest",
+      "ground_shadow_baked": false,
+      "visible_bbox_exclusive_px": [
+        13,
+        32,
+        35,
+        46
+      ],
+      "visible_size_px": [
+        22,
+        14
+      ],
+      "opaque_pixel_count": 221,
+      "sha256": "2e8458be011414313ba62a8a3670e058072c4b624a646f94276806119710190f",
+      "ground_footprint_rect_px": [
+        0,
+        11,
+        48,
+        42
+      ],
+      "usage": "Mining resource object; replace whole image at progress state, not a ground tile.",
+      "stage_progress": "Existing implementation chooses transition thresholds; no HP or timing inferred."
+    },
+    {
+      "file": "rock_mined_remains.png",
+      "group": "large_remains",
+      "stage": "depleted",
+      "size_px": [
+        224,
+        240
+      ],
+      "anchor_px": [
+        112,
+        224
+      ],
+      "footprint_cells": [
+        4,
+        4
+      ],
+      "frame_order": [
+        0
+      ],
+      "duration_ms": null,
+      "loop": false,
+      "rgba": "straight alpha",
+      "sampling": "nearest",
+      "ground_shadow_baked": false,
+      "visible_bbox_exclusive_px": [
+        24,
+        173,
+        198,
+        224
+      ],
+      "visible_size_px": [
+        174,
+        51
+      ],
+      "opaque_pixel_count": 4071,
+      "sha256": "50f7790ad3f89f2717d2d6b955b450d65f1b2b7abefabf73c9a6cf0bf20aab96",
+      "ground_footprint_rect_px": [
+        16,
+        64,
+        192,
+        168
+      ],
+      "usage": "Temporary visual aftermath; no resource/collision/quantity encoded.",
+      "occupancy_policy": "0 occupied cells after depletion; 4x4 is art alignment only."
+    },
+    {
+      "file": "rock_small_1x1_mined_remains.png",
+      "group": "small_remains",
+      "stage": "depleted",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        46
+      ],
+      "footprint_cells": [
+        1,
+        1
+      ],
+      "frame_order": [
+        0
+      ],
+      "duration_ms": null,
+      "loop": false,
+      "rgba": "straight alpha",
+      "sampling": "nearest",
+      "ground_shadow_baked": false,
+      "visible_bbox_exclusive_px": [
+        6,
+        33,
+        42,
+        46
+      ],
+      "visible_size_px": [
+        36,
+        13
+      ],
+      "opaque_pixel_count": 200,
+      "sha256": "7411f1f457eda89b2f05c9ae16b658a393500922acbea2b3b12390c0a5567950",
+      "usage": "Small deposit aftermath, separate ground visual.",
+      "occupancy_policy": "0 occupied cells after depletion; 1x1 is art alignment only."
+    }
+  ],
+  "animations": {},
+  "runtime_verified": false,
+  "source": "../../art-production/mining-rock-objects-v1/originals",
+  "pixel_palette": [
+    "#505247",
+    "#626252",
+    "#74705c",
+    "#85806b",
+    "#95907b",
+    "#a8a18a",
+    "#b9b198",
+    "#c9bfa5",
+    "#d8ceb4",
+    "#e1d6bc",
+    "#9c875f",
+    "#b6a17b"
+  ],
+  "shadow": "No ground cast shadow baked. Rock-face shading remains.",
+  "large_placement": "Region top-left in world pixels + (96,160) - anchor(112,224). Art footprint = 4x4 cells. Do not infer blocker layout from alpha.",
+  "small_placement": "Cell center + (0,14) - anchor(24,46).",
+  "state_order": {
+    "large": [
+      1,
+      2,
+      3,
+      4,
+      "depleted"
+    ],
+    "small": [
+      1,
+      2,
+      3,
+      "depleted"
+    ]
+  },
+  "splitting": "These are whole-object progress sprites, NOT 16 auto-connect tiles. Spatial partial mining needs implementation masks/ownership; blind rectangular slicing is unsupported.",
+  "rules": "No resource quantities, progress thresholds, removal delay, collision, save format or game rules are changed."
+}
