@@ -12,7 +12,7 @@
   "archived_unreachable_commits": 110,
   "maintenance_checks": 12,
   "related_biome_checks": 60,
-  "folder_removal": "blocked by automatic approval review; no review/workspace folders removed",
+  "folder_removal": "User-approved release-2c0182a/release-35038b6/release-536005c deleted; other broad folder removals remain blocked/retained",
   "unfinished_source_copies": [
     "release-92d1048",
     "release-c5c2833",
