@@ -1,0 +1,1654 @@
+{
+  "biome-compat.json": {
+    "baseline_exe_sha256": "A10287B62CE93C985891982C3A8B4B2B2CB67BD58722349A8113A8FA22110C1C",
+    "checks": [
+      {
+        "check": "Fixture is an actual pre-biome campaign",
+        "passed": true
+      },
+      {
+        "check": "Actual pre-biome EXE snapshot loads",
+        "passed": true
+      },
+      {
+        "check": "Legacy snapshot preserves trees",
+        "passed": true
+      },
+      {
+        "check": "Legacy snapshot preserves rocks",
+        "passed": true
+      },
+      {
+        "check": "Legacy snapshot preserves natural",
+        "passed": true
+      },
+      {
+        "check": "Legacy snapshot preserves field_items",
+        "passed": true
+      },
+      {
+        "check": "Legacy snapshot preserves jobs",
+        "passed": true
+      },
+      {
+        "check": "Legacy snapshot preserves structures",
+        "passed": true
+      },
+      {
+        "check": "Legacy snapshot preserves keeper",
+        "passed": true
+      },
+      {
+        "check": "Legacy snapshot preserves animals",
+        "passed": true
+      },
+      {
+        "check": "Legacy snapshot preserves tick",
+        "passed": true
+      },
+      {
+        "check": "Legacy snapshot preserves calendar_ticks",
+        "passed": true
+      },
+      {
+        "check": "Legacy snapshot adds only visual terrain",
+        "passed": true
+      },
+      {
+        "check": "Repeated campaign reload retains depletion and physical totals: 0",
+        "passed": true
+      },
+      {
+        "check": "Pending job identity and location survives reload: 0",
+        "passed": true
+      },
+      {
+        "check": "Repeated campaign reload retains depletion and physical totals: 1",
+        "passed": true
+      },
+      {
+        "check": "Pending job identity and location survives reload: 1",
+        "passed": true
+      },
+      {
+        "check": "Repeated campaign reload retains depletion and physical totals: 2",
+        "passed": true
+      },
+      {
+        "check": "Pending job identity and location survives reload: 2",
+        "passed": true
+      },
+      {
+        "check": "Actual legacy campaign keeps trees, mined rocks, structures and supplies",
+        "passed": true
+      },
+      {
+        "check": "Previously cleared tree and mined rock do not regenerate",
+        "passed": true
+      }
+    ],
+    "failures": 0
+  },
+  "harvest.json": {
+    "checks": [
+      {
+        "check": "Single-cell mining uses the existing designation",
+        "passed": true
+      },
+      {
+        "check": "Progress changes while the active rock still blocks movement",
+        "passed": true
+      },
+      {
+        "check": "Strike events are emitted on actual work cadence",
+        "passed": true
+      },
+      {
+        "check": "PAUSE does not advance work or emit sound/particle events",
+        "passed": true
+      },
+      {
+        "check": "Interruption preserves rock damage",
+        "passed": true
+      },
+      {
+        "check": "Snapshot retains mining progress and work identity",
+        "passed": true
+      },
+      {
+        "check": "Only the mined cell disappears, neighbouring rock remains",
+        "passed": true
+      },
+      {
+        "check": "Collision/path/terrain re-evaluate the removed cell",
+        "passed": true
+      },
+      {
+        "check": "Mining creates eight real stones on site without supplying shared building stock",
+        "passed": true
+      },
+      {
+        "check": "Explicit collection transports stone to a stockpile",
+        "passed": true
+      },
+      {
+        "check": "Rectangle felling designates each tree once",
+        "passed": true
+      },
+      {
+        "check": "Felling uses the existing plant/gather work category",
+        "passed": true
+      },
+      {
+        "check": "Other priority cannot run a disabled plant/gather job",
+        "passed": true
+      },
+      {
+        "check": "Plant/gather priority makes the resident approach and chop",
+        "passed": true
+      },
+      {
+        "check": "Range forbid suspends felling, retains progress",
+        "passed": true
+      },
+      {
+        "check": "Allow does not duplicate orders",
+        "passed": true
+      },
+      {
+        "check": "Allow resumes the same work without creating an extra designation",
+        "passed": true
+      },
+      {
+        "check": "Cancel removes the order and keeps the tree and damage",
+        "passed": true
+      },
+      {
+        "check": "Campaign save preserves the same damaged tree without regeneration",
+        "passed": true
+      },
+      {
+        "check": "Both trees finish individually and leave exactly sixteen physical wood",
+        "passed": true
+      },
+      {
+        "check": "Felled cell loses tree collision; dropped wood remains a normal building obstacle",
+        "passed": true
+      },
+      {
+        "check": "Presentation events are bounded and completion is emitted once per tree",
+        "passed": true
+      },
+      {
+        "check": "Twelve simultaneous workers finish distinct cells with exact resource totals",
+        "passed": true
+      },
+      {
+        "check": "Simultaneous workers retain bounded event history without hidden work queues",
+        "passed": true
+      },
+      {
+        "check": "Mining and chopping use distinct non-silent PCM sounds",
+        "passed": true
+      },
+      {
+        "check": "Simultaneous workers share a bounded sound rate",
+        "passed": true
+      },
+      {
+        "check": "Offscreen/distant work is quiet while nearby work remains audible",
+        "passed": true
+      },
+      {
+        "check": "One hundred burst cues cannot create an audio pile-up",
+        "passed": true
+      }
+    ],
+    "failures": 0,
+    "method": "Production World.step, real IDs and stock, interruption/forbid/cancel, campaign and full snapshot; PCM synthesis under Dummy audio"
+  },
+  "mountains.json": {
+    "checks": [
+      {
+        "check": "4x4 mountain is one object, distinct from cell rocks",
+        "passed": true
+      },
+      {
+        "check": "All sixteen footprint cells select the same ID and block paths",
+        "passed": true
+      },
+      {
+        "check": "Construction rejects every occupied mountain cell",
+        "passed": true
+      },
+      {
+        "check": "Any occupied cell designates one job without duplicate",
+        "passed": true
+      },
+      {
+        "check": "Multiple workers claim this mountain only once",
+        "passed": true
+      },
+      {
+        "check": "PAUSE does not mine",
+        "passed": true
+      },
+      {
+        "check": "Draft interruption retains resource progress",
+        "passed": true
+      },
+      {
+        "check": "Forbid retains progress",
+        "passed": true
+      },
+      {
+        "check": "Cancellation leaves damaged resource and drops intact",
+        "passed": true
+      },
+      {
+        "check": "Save/restart preserves partial progress and ID",
+        "passed": true
+      },
+      {
+        "check": "One physical batch per transition 1",
+        "passed": true
+      },
+      {
+        "check": "Drops stay outside occupied mountain 1",
+        "passed": true
+      },
+      {
+        "check": "Transition snapshot identity 1",
+        "passed": true
+      },
+      {
+        "check": "One physical batch per transition 2",
+        "passed": true
+      },
+      {
+        "check": "Drops stay outside occupied mountain 2",
+        "passed": true
+      },
+      {
+        "check": "Transition snapshot identity 2",
+        "passed": true
+      },
+      {
+        "check": "One physical batch per transition 3",
+        "passed": true
+      },
+      {
+        "check": "Drops stay outside occupied mountain 3",
+        "passed": true
+      },
+      {
+        "check": "Transition snapshot identity 3",
+        "passed": true
+      },
+      {
+        "check": "One physical batch per transition 4",
+        "passed": true
+      },
+      {
+        "check": "Drops stay outside occupied mountain 4",
+        "passed": true
+      },
+      {
+        "check": "Transition snapshot identity 4",
+        "passed": true
+      },
+      {
+        "check": "Single designation reaches all stages and shrinking footprint",
+        "passed": true
+      },
+      {
+        "check": "Exactly 64 physical stones, no instant shared inventory",
+        "passed": true
+      },
+      {
+        "check": "Released ground permits building and navigation",
+        "passed": true
+      },
+      {
+        "check": "Depleted object never respawns or duplicates resources on restart",
+        "passed": true
+      },
+      {
+        "check": "Campaign persistence retains depleted mountain",
+        "passed": true
+      },
+      {
+        "check": "Explicit hauling supplies stockpile with all four batches",
+        "passed": true
+      },
+      {
+        "check": "Small object has three batches and releases its single cell",
+        "passed": true
+      },
+      {
+        "check": "Rectangle designation intersects object without including its origin",
+        "passed": true
+      },
+      {
+        "check": "Rectangle cancellation matches footprint, not only origin",
+        "passed": true
+      },
+      {
+        "check": "Range forbid works from far corner",
+        "passed": true
+      },
+      {
+        "check": "Range allow preserves same object",
+        "passed": true
+      },
+      {
+        "check": "Manual sleep suspends without losing progress",
+        "passed": true
+      },
+      {
+        "check": "Wake resumes the same mining designation",
+        "passed": true
+      },
+      {
+        "check": "Hunger interrupts mining to obtain real stored food",
+        "passed": true
+      },
+      {
+        "check": "After eating the existing designation resumes",
+        "passed": true
+      },
+      {
+        "check": "Saving immediately before stage transition does not duplicate a batch",
+        "passed": true
+      },
+      {
+        "check": "Deterministic generation seed 1",
+        "passed": true
+      },
+      {
+        "check": "Both object kinds generated seed 1",
+        "passed": true
+      },
+      {
+        "check": "No protected/object overlap and reachable work face seed 1",
+        "passed": true
+      },
+      {
+        "check": "Old save does not gain new mountains seed 1",
+        "passed": true
+      },
+      {
+        "check": "Deterministic generation seed 17",
+        "passed": true
+      },
+      {
+        "check": "Both object kinds generated seed 17",
+        "passed": true
+      },
+      {
+        "check": "No protected/object overlap and reachable work face seed 17",
+        "passed": true
+      },
+      {
+        "check": "Old save does not gain new mountains seed 17",
+        "passed": true
+      },
+      {
+        "check": "Deterministic generation seed 31",
+        "passed": true
+      },
+      {
+        "check": "Both object kinds generated seed 31",
+        "passed": true
+      },
+      {
+        "check": "No protected/object overlap and reachable work face seed 31",
+        "passed": true
+      },
+      {
+        "check": "Old save does not gain new mountains seed 31",
+        "passed": true
+      },
+      {
+        "check": "Deterministic generation seed 97",
+        "passed": true
+      },
+      {
+        "check": "Both object kinds generated seed 97",
+        "passed": true
+      },
+      {
+        "check": "No protected/object overlap and reachable work face seed 97",
+        "passed": true
+      },
+      {
+        "check": "Old save does not gain new mountains seed 97",
+        "passed": true
+      },
+      {
+        "check": "Deterministic generation seed 2026",
+        "passed": true
+      },
+      {
+        "check": "Both object kinds generated seed 2026",
+        "passed": true
+      },
+      {
+        "check": "No protected/object overlap and reachable work face seed 2026",
+        "passed": true
+      },
+      {
+        "check": "Old save does not gain new mountains seed 2026",
+        "passed": true
+      }
+    ],
+    "failures": 0
+  },
+  "rock-connections.json": {
+    "checks": [
+      {
+        "check": "3x3 cluster starts with nine real cells and full centre mask: center",
+        "passed": true
+      },
+      {
+        "check": "An enclosed centre cannot be worked by teleporting through stone",
+        "passed": true
+      },
+      {
+        "check": "Real edge mining opens the corridor to the centre",
+        "passed": true
+      },
+      {
+        "check": "Damage appears before removal: center",
+        "passed": true
+      },
+      {
+        "check": "Save preserves cell progress and connection masks: center",
+        "passed": true
+      },
+      {
+        "check": "Only the requested cells are removed: center",
+        "passed": true
+      },
+      {
+        "check": "Actual collision/path updates after extraction: center",
+        "passed": true
+      },
+      {
+        "check": "Exact physical stone stays on site, not free construction stock: center",
+        "passed": true
+      },
+      {
+        "check": "No neighbour disappears or new deposit appears: center",
+        "passed": true
+      },
+      {
+        "check": "Biome boundary selection does not change with mining masks: center",
+        "passed": true
+      },
+      {
+        "check": "New diagonal concave seams appear when the centre is missing",
+        "passed": true
+      },
+      {
+        "check": "Post-mining restart does not respawn cells or duplicate drops: center",
+        "passed": true
+      },
+      {
+        "check": "3x3 cluster starts with nine real cells and full centre mask: edge",
+        "passed": true
+      },
+      {
+        "check": "Damage appears before removal: edge",
+        "passed": true
+      },
+      {
+        "check": "Save preserves cell progress and connection masks: edge",
+        "passed": true
+      },
+      {
+        "check": "Only the requested cells are removed: edge",
+        "passed": true
+      },
+      {
+        "check": "Actual collision/path updates after extraction: edge",
+        "passed": true
+      },
+      {
+        "check": "Exact physical stone stays on site, not free construction stock: edge",
+        "passed": true
+      },
+      {
+        "check": "No neighbour disappears or new deposit appears: edge",
+        "passed": true
+      },
+      {
+        "check": "Biome boundary selection does not change with mining masks: edge",
+        "passed": true
+      },
+      {
+        "check": "Post-mining restart does not respawn cells or duplicate drops: edge",
+        "passed": true
+      },
+      {
+        "check": "3x3 cluster starts with nine real cells and full centre mask: corner",
+        "passed": true
+      },
+      {
+        "check": "Damage appears before removal: corner",
+        "passed": true
+      },
+      {
+        "check": "Save preserves cell progress and connection masks: corner",
+        "passed": true
+      },
+      {
+        "check": "Only the requested cells are removed: corner",
+        "passed": true
+      },
+      {
+        "check": "Actual collision/path updates after extraction: corner",
+        "passed": true
+      },
+      {
+        "check": "Exact physical stone stays on site, not free construction stock: corner",
+        "passed": true
+      },
+      {
+        "check": "No neighbour disappears or new deposit appears: corner",
+        "passed": true
+      },
+      {
+        "check": "Biome boundary selection does not change with mining masks: corner",
+        "passed": true
+      },
+      {
+        "check": "Post-mining restart does not respawn cells or duplicate drops: corner",
+        "passed": true
+      },
+      {
+        "check": "Biome transition finishes inside rock biome without restarting on grass neighbour",
+        "passed": true
+      },
+      {
+        "check": "Single-node state preserves its size and foot anchor: 0.0",
+        "passed": true
+      },
+      {
+        "check": "Single-node state preserves its size and foot anchor: 1.1",
+        "passed": true
+      },
+      {
+        "check": "Single-node state preserves its size and foot anchor: 2.4",
+        "passed": true
+      },
+      {
+        "check": "Single-node state preserves its size and foot anchor: 3.6",
+        "passed": true
+      },
+      {
+        "check": "Damage never leaves mask alpha: 0/1",
+        "passed": true
+      },
+      {
+        "check": "Damage never leaves mask alpha: 0/2",
+        "passed": true
+      },
+      {
+        "check": "Damage never leaves mask alpha: 0/3",
+        "passed": true
+      },
+      {
+        "check": "Damage never leaves mask alpha: 1/1",
+        "passed": true
+      },
+      {
+        "check": "Damage never leaves mask alpha: 1/2",
+        "passed": true
+      },
+      {
+        "check": "Damage never leaves mask alpha: 1/3",
+        "passed": true
+      },
+      {
+        "check": "Damage never leaves mask alpha: 2/1",
+        "passed": true
+      },
+      {
+        "check": "Damage never leaves mask alpha: 2/2",
+        "passed": true
+      },
+      {
+        "check": "Damage never leaves mask alpha: 2/3",
+        "passed": true
+      },
+      {
+        "check": "Damage never leaves mask alpha: 3/1",
+        "passed": true
+      },
+      {
+        "check": "Damage never leaves mask alpha: 3/2",
+        "passed": true
+      },
+      {
+        "check": "Damage never leaves mask alpha: 3/3",
+        "passed": true
+      },
+      {
+        "check": "Damage never leaves mask alpha: 4/1",
+        "passed": true
+      },
+      {
+        "check": "Damage never leaves mask alpha: 4/2",
+        "passed": true
+      },
+      {
+        "check": "Damage never leaves mask alpha: 4/3",
+        "passed": true
+      },
+      {
+        "check": "Damage never leaves mask alpha: 5/1",
+        "passed": true
+      },
+      {
+        "check": "Damage never leaves mask alpha: 5/2",
+        "passed": true
+      },
+      {
+        "check": "Damage never leaves mask alpha: 5/3",
+        "passed": true
+      },
+      {
+        "check": "Damage never leaves mask alpha: 6/1",
+        "passed": true
+      },
+      {
+        "check": "Damage never leaves mask alpha: 6/2",
+        "passed": true
+      },
+      {
+        "check": "Damage never leaves mask alpha: 6/3",
+        "passed": true
+      },
+      {
+        "check": "Damage never leaves mask alpha: 7/1",
+        "passed": true
+      },
+      {
+        "check": "Damage never leaves mask alpha: 7/2",
+        "passed": true
+      },
+      {
+        "check": "Damage never leaves mask alpha: 7/3",
+        "passed": true
+      },
+      {
+        "check": "Damage never leaves mask alpha: 8/1",
+        "passed": true
+      },
+      {
+        "check": "Damage never leaves mask alpha: 8/2",
+        "passed": true
+      },
+      {
+        "check": "Damage never leaves mask alpha: 8/3",
+        "passed": true
+      },
+      {
+        "check": "Damage never leaves mask alpha: 9/1",
+        "passed": true
+      },
+      {
+        "check": "Damage never leaves mask alpha: 9/2",
+        "passed": true
+      },
+      {
+        "check": "Damage never leaves mask alpha: 9/3",
+        "passed": true
+      },
+      {
+        "check": "Damage never leaves mask alpha: 10/1",
+        "passed": true
+      },
+      {
+        "check": "Damage never leaves mask alpha: 10/2",
+        "passed": true
+      },
+      {
+        "check": "Damage never leaves mask alpha: 10/3",
+        "passed": true
+      },
+      {
+        "check": "Damage never leaves mask alpha: 11/1",
+        "passed": true
+      },
+      {
+        "check": "Damage never leaves mask alpha: 11/2",
+        "passed": true
+      },
+      {
+        "check": "Damage never leaves mask alpha: 11/3",
+        "passed": true
+      },
+      {
+        "check": "Damage never leaves mask alpha: 12/1",
+        "passed": true
+      },
+      {
+        "check": "Damage never leaves mask alpha: 12/2",
+        "passed": true
+      },
+      {
+        "check": "Damage never leaves mask alpha: 12/3",
+        "passed": true
+      },
+      {
+        "check": "Damage never leaves mask alpha: 13/1",
+        "passed": true
+      },
+      {
+        "check": "Damage never leaves mask alpha: 13/2",
+        "passed": true
+      },
+      {
+        "check": "Damage never leaves mask alpha: 13/3",
+        "passed": true
+      },
+      {
+        "check": "Damage never leaves mask alpha: 14/1",
+        "passed": true
+      },
+      {
+        "check": "Damage never leaves mask alpha: 14/2",
+        "passed": true
+      },
+      {
+        "check": "Damage never leaves mask alpha: 14/3",
+        "passed": true
+      },
+      {
+        "check": "Damage never leaves mask alpha: 15/1",
+        "passed": true
+      },
+      {
+        "check": "Damage never leaves mask alpha: 15/2",
+        "passed": true
+      },
+      {
+        "check": "Damage never leaves mask alpha: 15/3",
+        "passed": true
+      }
+    ],
+    "failures": 0,
+    "method": "Production World.step, enclosed-centre access, snapshot restore, exact drops and dynamic masks; all 48 damage mask clips"
+  },
+  "integrated-work.json": {
+    "checks": [
+      {
+        "check": "New initial goods occupy distinct physical cells",
+        "passed": true
+      },
+      {
+        "check": "Initial goods are valid stockpile stacks",
+        "passed": true
+      },
+      {
+        "check": "Initial stock is immediately usable",
+        "passed": true
+      },
+      {
+        "check": "Restore does not rearrange initial goods or IDs",
+        "passed": true
+      },
+      {
+        "check": "Rendering combines same-kind stack labels without changing any physical ID or quantity",
+        "passed": true
+      },
+      {
+        "check": "A plan can be placed before materials arrive",
+        "passed": true
+      },
+      {
+        "check": "Uncollected off-stock materials and food are not used",
+        "passed": true
+      },
+      {
+        "check": "Zone creation does not move goods or create hidden hauling",
+        "passed": true
+      },
+      {
+        "check": "Explicit collection creates the two transport designations",
+        "passed": true
+      },
+      {
+        "check": "Collected materials build and stored food feeds the sole worker",
+        "passed": true
+      },
+      {
+        "check": "Nearby sites share one internal delivery with no added designation",
+        "passed": true
+      },
+      {
+        "check": "Batched delivery respects total carrying capacity",
+        "passed": true
+      },
+      {
+        "check": "One person completes batched supply and assembly without duplication",
+        "passed": true
+      },
+      {
+        "check": "Separate hauling-only and building-only people cooperate",
+        "passed": true
+      },
+      {
+        "check": "Hauler delivers; builder assembles",
+        "passed": true
+      },
+      {
+        "check": "Active multi-site transport saves",
+        "passed": true
+      },
+      {
+        "check": "Transport assignments, cargo and reservation IDs restore",
+        "passed": true
+      },
+      {
+        "check": "Drafting releases the internal task without losing withdrawn goods",
+        "passed": true
+      },
+      {
+        "check": "Interrupted transfer resumes from its actual dropped location",
+        "passed": true
+      },
+      {
+        "check": "Cancelling one allocation keeps the other and conserves all goods",
+        "passed": true
+      },
+      {
+        "check": "Equal priorities choose a nearer later UI column over the earlier column",
+        "passed": true
+      },
+      {
+        "check": "A long-waiting feasible job gains priority within equal categories",
+        "passed": true
+      },
+      {
+        "check": "A zone over an uncollected pile is not a material receipt",
+        "passed": true
+      },
+      {
+        "check": "Explicit pickup/delivery inside the new zone records a real receipt",
+        "passed": true
+      },
+      {
+        "check": "Forbidden stock is not reserved or delivered",
+        "passed": true
+      },
+      {
+        "check": "Current construction hauling uses the existing real red-route planner",
+        "passed": true
+      },
+      {
+        "check": "Separate-process restart fixture saves live batch delivery",
+        "passed": true
+      },
+      {
+        "check": "Cancellation during pickup leaves the remaining site and exact physical goods",
+        "passed": true
+      },
+      {
+        "check": "Deleting a stockpile preserves its goods but prevents a not-yet-picked transport",
+        "passed": true
+      },
+      {
+        "check": "Restoring an allowed stockpile resumes the valid plan",
+        "passed": true
+      }
+    ],
+    "failures": 0,
+    "method": "Production World.step, controlled workers, real material IDs and snapshot restore"
+  },
+  "terrain-generation.json": {
+    "checks": [
+      {
+        "check": "Only new campaigns use generator v2: 1",
+        "passed": true
+      },
+      {
+        "check": "Same seed reproduces all layers and objects: 1",
+        "passed": true
+      },
+      {
+        "check": "Separate saved region/material/vertex grids: 1",
+        "passed": true
+      },
+      {
+        "check": "Only nonblocking ground material labels: 1",
+        "passed": true
+      },
+      {
+        "check": "Five cohesive regions with mixed ground materials: 1",
+        "passed": true
+      },
+      {
+        "check": "At least one generated solid 3x3 rock shelf: 1",
+        "passed": true
+      },
+      {
+        "check": "Rock biome also has walkable gravel/bedrock: 1",
+        "passed": true
+      },
+      {
+        "check": "Every initially open cell connects to the keeper: 1",
+        "passed": true
+      },
+      {
+        "check": "All edges and corners remain open and reachable: 1",
+        "passed": true
+      },
+      {
+        "check": "Central building room, actors, merchant and ingress protected: 1",
+        "passed": true
+      },
+      {
+        "check": "Merchant and enemy approaches stay reachable: 1",
+        "passed": true
+      },
+      {
+        "check": "Sparse woodland never makes adjacent trunk walls: 1",
+        "passed": true
+      },
+      {
+        "check": "Unchanged per-cell stone yield: 1",
+        "passed": true
+      },
+      {
+        "check": "Existing harvest cap retained: weed seed 1",
+        "passed": true
+      },
+      {
+        "check": "Existing harvest cap retained: mushroom seed 1",
+        "passed": true
+      },
+      {
+        "check": "Existing harvest cap retained: stump seed 1",
+        "passed": true
+      },
+      {
+        "check": "Regional area is made of broad patches, not tiny fragments: rocky seed 1",
+        "passed": true
+      },
+      {
+        "check": "Dominant connected regional patch: rocky seed 1",
+        "passed": true
+      },
+      {
+        "check": "Regional area is made of broad patches, not tiny fragments: woodland seed 1",
+        "passed": true
+      },
+      {
+        "check": "Dominant connected regional patch: woodland seed 1",
+        "passed": true
+      },
+      {
+        "check": "Regional area is made of broad patches, not tiny fragments: dry seed 1",
+        "passed": true
+      },
+      {
+        "check": "Dominant connected regional patch: dry seed 1",
+        "passed": true
+      },
+      {
+        "check": "Regional area is made of broad patches, not tiny fragments: lush seed 1",
+        "passed": true
+      },
+      {
+        "check": "Only new campaigns use generator v2: 17",
+        "passed": true
+      },
+      {
+        "check": "Same seed reproduces all layers and objects: 17",
+        "passed": true
+      },
+      {
+        "check": "Different seeds alter region fields: 17",
+        "passed": true
+      },
+      {
+        "check": "Separate saved region/material/vertex grids: 17",
+        "passed": true
+      },
+      {
+        "check": "Only nonblocking ground material labels: 17",
+        "passed": true
+      },
+      {
+        "check": "Five cohesive regions with mixed ground materials: 17",
+        "passed": true
+      },
+      {
+        "check": "At least one generated solid 3x3 rock shelf: 17",
+        "passed": true
+      },
+      {
+        "check": "Rock biome also has walkable gravel/bedrock: 17",
+        "passed": true
+      },
+      {
+        "check": "Every initially open cell connects to the keeper: 17",
+        "passed": true
+      },
+      {
+        "check": "All edges and corners remain open and reachable: 17",
+        "passed": true
+      },
+      {
+        "check": "Central building room, actors, merchant and ingress protected: 17",
+        "passed": true
+      },
+      {
+        "check": "Merchant and enemy approaches stay reachable: 17",
+        "passed": true
+      },
+      {
+        "check": "Sparse woodland never makes adjacent trunk walls: 17",
+        "passed": true
+      },
+      {
+        "check": "Unchanged per-cell stone yield: 17",
+        "passed": true
+      },
+      {
+        "check": "Existing harvest cap retained: weed seed 17",
+        "passed": true
+      },
+      {
+        "check": "Existing harvest cap retained: mushroom seed 17",
+        "passed": true
+      },
+      {
+        "check": "Existing harvest cap retained: stump seed 17",
+        "passed": true
+      },
+      {
+        "check": "Regional area is made of broad patches, not tiny fragments: rocky seed 17",
+        "passed": true
+      },
+      {
+        "check": "Dominant connected regional patch: rocky seed 17",
+        "passed": true
+      },
+      {
+        "check": "Regional area is made of broad patches, not tiny fragments: woodland seed 17",
+        "passed": true
+      },
+      {
+        "check": "Dominant connected regional patch: woodland seed 17",
+        "passed": true
+      },
+      {
+        "check": "Regional area is made of broad patches, not tiny fragments: dry seed 17",
+        "passed": true
+      },
+      {
+        "check": "Dominant connected regional patch: dry seed 17",
+        "passed": true
+      },
+      {
+        "check": "Regional area is made of broad patches, not tiny fragments: lush seed 17",
+        "passed": true
+      },
+      {
+        "check": "Only new campaigns use generator v2: 31",
+        "passed": true
+      },
+      {
+        "check": "Same seed reproduces all layers and objects: 31",
+        "passed": true
+      },
+      {
+        "check": "Different seeds alter region fields: 31",
+        "passed": true
+      },
+      {
+        "check": "Separate saved region/material/vertex grids: 31",
+        "passed": true
+      },
+      {
+        "check": "Only nonblocking ground material labels: 31",
+        "passed": true
+      },
+      {
+        "check": "Five cohesive regions with mixed ground materials: 31",
+        "passed": true
+      },
+      {
+        "check": "At least one generated solid 3x3 rock shelf: 31",
+        "passed": true
+      },
+      {
+        "check": "Rock biome also has walkable gravel/bedrock: 31",
+        "passed": true
+      },
+      {
+        "check": "Every initially open cell connects to the keeper: 31",
+        "passed": true
+      },
+      {
+        "check": "All edges and corners remain open and reachable: 31",
+        "passed": true
+      },
+      {
+        "check": "Central building room, actors, merchant and ingress protected: 31",
+        "passed": true
+      },
+      {
+        "check": "Merchant and enemy approaches stay reachable: 31",
+        "passed": true
+      },
+      {
+        "check": "Sparse woodland never makes adjacent trunk walls: 31",
+        "passed": true
+      },
+      {
+        "check": "Unchanged per-cell stone yield: 31",
+        "passed": true
+      },
+      {
+        "check": "Existing harvest cap retained: weed seed 31",
+        "passed": true
+      },
+      {
+        "check": "Existing harvest cap retained: mushroom seed 31",
+        "passed": true
+      },
+      {
+        "check": "Existing harvest cap retained: stump seed 31",
+        "passed": true
+      },
+      {
+        "check": "Regional area is made of broad patches, not tiny fragments: rocky seed 31",
+        "passed": true
+      },
+      {
+        "check": "Dominant connected regional patch: rocky seed 31",
+        "passed": true
+      },
+      {
+        "check": "Regional area is made of broad patches, not tiny fragments: woodland seed 31",
+        "passed": true
+      },
+      {
+        "check": "Dominant connected regional patch: woodland seed 31",
+        "passed": true
+      },
+      {
+        "check": "Regional area is made of broad patches, not tiny fragments: dry seed 31",
+        "passed": true
+      },
+      {
+        "check": "Dominant connected regional patch: dry seed 31",
+        "passed": true
+      },
+      {
+        "check": "Regional area is made of broad patches, not tiny fragments: lush seed 31",
+        "passed": true
+      },
+      {
+        "check": "Only new campaigns use generator v2: 97",
+        "passed": true
+      },
+      {
+        "check": "Same seed reproduces all layers and objects: 97",
+        "passed": true
+      },
+      {
+        "check": "Different seeds alter region fields: 97",
+        "passed": true
+      },
+      {
+        "check": "Separate saved region/material/vertex grids: 97",
+        "passed": true
+      },
+      {
+        "check": "Only nonblocking ground material labels: 97",
+        "passed": true
+      },
+      {
+        "check": "Five cohesive regions with mixed ground materials: 97",
+        "passed": true
+      },
+      {
+        "check": "At least one generated solid 3x3 rock shelf: 97",
+        "passed": true
+      },
+      {
+        "check": "Rock biome also has walkable gravel/bedrock: 97",
+        "passed": true
+      },
+      {
+        "check": "Every initially open cell connects to the keeper: 97",
+        "passed": true
+      },
+      {
+        "check": "All edges and corners remain open and reachable: 97",
+        "passed": true
+      },
+      {
+        "check": "Central building room, actors, merchant and ingress protected: 97",
+        "passed": true
+      },
+      {
+        "check": "Merchant and enemy approaches stay reachable: 97",
+        "passed": true
+      },
+      {
+        "check": "Sparse woodland never makes adjacent trunk walls: 97",
+        "passed": true
+      },
+      {
+        "check": "Unchanged per-cell stone yield: 97",
+        "passed": true
+      },
+      {
+        "check": "Existing harvest cap retained: weed seed 97",
+        "passed": true
+      },
+      {
+        "check": "Existing harvest cap retained: mushroom seed 97",
+        "passed": true
+      },
+      {
+        "check": "Existing harvest cap retained: stump seed 97",
+        "passed": true
+      },
+      {
+        "check": "Regional area is made of broad patches, not tiny fragments: rocky seed 97",
+        "passed": true
+      },
+      {
+        "check": "Dominant connected regional patch: rocky seed 97",
+        "passed": true
+      },
+      {
+        "check": "Regional area is made of broad patches, not tiny fragments: woodland seed 97",
+        "passed": true
+      },
+      {
+        "check": "Dominant connected regional patch: woodland seed 97",
+        "passed": true
+      },
+      {
+        "check": "Regional area is made of broad patches, not tiny fragments: dry seed 97",
+        "passed": true
+      },
+      {
+        "check": "Dominant connected regional patch: dry seed 97",
+        "passed": true
+      },
+      {
+        "check": "Regional area is made of broad patches, not tiny fragments: lush seed 97",
+        "passed": true
+      },
+      {
+        "check": "Only new campaigns use generator v2: 2026",
+        "passed": true
+      },
+      {
+        "check": "Same seed reproduces all layers and objects: 2026",
+        "passed": true
+      },
+      {
+        "check": "Different seeds alter region fields: 2026",
+        "passed": true
+      },
+      {
+        "check": "Separate saved region/material/vertex grids: 2026",
+        "passed": true
+      },
+      {
+        "check": "Only nonblocking ground material labels: 2026",
+        "passed": true
+      },
+      {
+        "check": "Five cohesive regions with mixed ground materials: 2026",
+        "passed": true
+      },
+      {
+        "check": "At least one generated solid 3x3 rock shelf: 2026",
+        "passed": true
+      },
+      {
+        "check": "Rock biome also has walkable gravel/bedrock: 2026",
+        "passed": true
+      },
+      {
+        "check": "Every initially open cell connects to the keeper: 2026",
+        "passed": true
+      },
+      {
+        "check": "All edges and corners remain open and reachable: 2026",
+        "passed": true
+      },
+      {
+        "check": "Central building room, actors, merchant and ingress protected: 2026",
+        "passed": true
+      },
+      {
+        "check": "Merchant and enemy approaches stay reachable: 2026",
+        "passed": true
+      },
+      {
+        "check": "Sparse woodland never makes adjacent trunk walls: 2026",
+        "passed": true
+      },
+      {
+        "check": "Unchanged per-cell stone yield: 2026",
+        "passed": true
+      },
+      {
+        "check": "Existing harvest cap retained: weed seed 2026",
+        "passed": true
+      },
+      {
+        "check": "Existing harvest cap retained: mushroom seed 2026",
+        "passed": true
+      },
+      {
+        "check": "Existing harvest cap retained: stump seed 2026",
+        "passed": true
+      },
+      {
+        "check": "Regional area is made of broad patches, not tiny fragments: rocky seed 2026",
+        "passed": true
+      },
+      {
+        "check": "Dominant connected regional patch: rocky seed 2026",
+        "passed": true
+      },
+      {
+        "check": "Regional area is made of broad patches, not tiny fragments: woodland seed 2026",
+        "passed": true
+      },
+      {
+        "check": "Dominant connected regional patch: woodland seed 2026",
+        "passed": true
+      },
+      {
+        "check": "Regional area is made of broad patches, not tiny fragments: dry seed 2026",
+        "passed": true
+      },
+      {
+        "check": "Dominant connected regional patch: dry seed 2026",
+        "passed": true
+      },
+      {
+        "check": "Regional area is made of broad patches, not tiny fragments: lush seed 2026",
+        "passed": true
+      },
+      {
+        "check": "Safety fixture starts with an enclosed free pocket",
+        "passed": true
+      },
+      {
+        "check": "Safety repair removes one local rock barrier, without imposing a road",
+        "passed": true
+      },
+      {
+        "check": "Safety repair leaves idol and structures unchanged",
+        "passed": true
+      },
+      {
+        "check": "Saved v1 generation version is retained",
+        "passed": true
+      },
+      {
+        "check": "Saved v1 geometry and blended colors are not regenerated",
+        "passed": true
+      },
+      {
+        "check": "Saved world objects and actors survive visual metadata migration",
+        "passed": true
+      },
+      {
+        "check": "Depleted cells remain depleted on legacy load",
+        "passed": true
+      },
+      {
+        "check": "Legacy-shaped full snapshot writes",
+        "passed": true
+      },
+      {
+        "check": "Full v1 snapshot derives classification without upgrading generation",
+        "passed": true
+      },
+      {
+        "check": "Full v1 snapshot preserves removed objects and runtime items",
+        "passed": true
+      },
+      {
+        "check": "Render-facing classification and decoration never consume simulation RNG or regenerate layers",
+        "passed": true
+      }
+    ],
+    "failures": 0,
+    "observations": [
+      {
+        "core": [
+          22,
+          27
+        ],
+        "materials": {
+          "bedrock": 8,
+          "grass": 1397,
+          "gravel": 79,
+          "soil": 216
+        },
+        "reachable_cells": 1630,
+        "region_components": {
+          "dry": [
+            93
+          ],
+          "lush": [
+            465,
+            17
+          ],
+          "rocky": [
+            87
+          ],
+          "woodland": [
+            143
+          ]
+        },
+        "regions": {
+          "dry": 93,
+          "lush": 482,
+          "open": 895,
+          "rocky": 87,
+          "woodland": 143
+        },
+        "repairs": [
+          [
+            21,
+            27
+          ]
+        ],
+        "rocks": 27,
+        "seed": 1,
+        "trees": 20,
+        "world_creation_ms": 692.998
+      },
+      {
+        "core": [
+          38,
+          23
+        ],
+        "materials": {
+          "bedrock": 41,
+          "grass": 1396,
+          "gravel": 60,
+          "soil": 203
+        },
+        "reachable_cells": 1650,
+        "region_components": {
+          "dry": [
+            117
+          ],
+          "lush": [
+            457,
+            239,
+            51
+          ],
+          "rocky": [
+            101
+          ],
+          "woodland": [
+            151
+          ]
+        },
+        "regions": {
+          "dry": 117,
+          "lush": 747,
+          "open": 584,
+          "rocky": 101,
+          "woodland": 151
+        },
+        "repairs": [
+          [
+            37,
+            23
+          ]
+        ],
+        "rocks": 11,
+        "seed": 17,
+        "trees": 16,
+        "world_creation_ms": 687.591
+      },
+      {
+        "core": [
+          14,
+          30
+        ],
+        "materials": {
+          "bedrock": 79,
+          "grass": 1442,
+          "gravel": 55,
+          "soil": 124
+        },
+        "reachable_cells": 1646,
+        "region_components": {
+          "dry": [
+            78
+          ],
+          "lush": [
+            155,
+            240,
+            234
+          ],
+          "rocky": [
+            134
+          ],
+          "woodland": [
+            121
+          ]
+        },
+        "regions": {
+          "dry": 78,
+          "lush": 629,
+          "open": 738,
+          "rocky": 134,
+          "woodland": 121
+        },
+        "repairs": [],
+        "rocks": 18,
+        "seed": 31,
+        "trees": 13,
+        "world_creation_ms": 725.665
+      },
+      {
+        "core": [
+          16,
+          6
+        ],
+        "materials": {
+          "bedrock": 58,
+          "grass": 1282,
+          "gravel": 80,
+          "soil": 280
+        },
+        "reachable_cells": 1635,
+        "region_components": {
+          "dry": [
+            175
+          ],
+          "lush": [
+            12,
+            416,
+            1
+          ],
+          "rocky": [
+            138
+          ],
+          "woodland": [
+            161
+          ]
+        },
+        "regions": {
+          "dry": 175,
+          "lush": 429,
+          "open": 797,
+          "rocky": 138,
+          "woodland": 161
+        },
+        "repairs": [],
+        "rocks": 18,
+        "seed": 97,
+        "trees": 24,
+        "world_creation_ms": 718.623
+      },
+      {
+        "core": [
+          6,
+          19
+        ],
+        "materials": {
+          "bedrock": 77,
+          "grass": 1358,
+          "gravel": 64,
+          "soil": 201
+        },
+        "reachable_cells": 1616,
+        "region_components": {
+          "dry": [
+            93
+          ],
+          "lush": [
+            141,
+            70,
+            131,
+            111
+          ],
+          "rocky": [
+            141
+          ],
+          "woodland": [
+            159
+          ]
+        },
+        "regions": {
+          "dry": 93,
+          "lush": 453,
+          "open": 854,
+          "rocky": 141,
+          "woodland": 159
+        },
+        "repairs": [],
+        "rocks": 38,
+        "seed": 2026,
+        "trees": 23,
+        "world_creation_ms": 738.377
+      }
+    ],
+    "timing_scope": "Full CPU world creation, not GPU frame performance"
+  }
+}

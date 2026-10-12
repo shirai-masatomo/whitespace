@@ -1,0 +1,565 @@
+{
+  "checks": [
+    {
+      "check": "Paused ordinary click selects same object without issuing work",
+      "passed": true
+    },
+    {
+      "check": "Save 01_large_stage1",
+      "passed": true
+    },
+    {
+      "check": "Explicit mine button queues one job while paused",
+      "passed": true
+    },
+    {
+      "check": "Paused input does not advance work",
+      "passed": true
+    },
+    {
+      "check": "Save frame",
+      "passed": true
+    },
+    {
+      "check": "Save 02_mining_hit",
+      "passed": true
+    },
+    {
+      "check": "Save frame",
+      "passed": true
+    },
+    {
+      "check": "Save frame",
+      "passed": true
+    },
+    {
+      "check": "Save frame",
+      "passed": true
+    },
+    {
+      "check": "Save frame",
+      "passed": true
+    },
+    {
+      "check": "Save frame",
+      "passed": true
+    },
+    {
+      "check": "Save frame",
+      "passed": true
+    },
+    {
+      "check": "Save frame",
+      "passed": true
+    },
+    {
+      "check": "Save frame",
+      "passed": true
+    },
+    {
+      "check": "Save frame",
+      "passed": true
+    },
+    {
+      "check": "Save frame",
+      "passed": true
+    },
+    {
+      "check": "Save frame",
+      "passed": true
+    },
+    {
+      "check": "Save frame",
+      "passed": true
+    },
+    {
+      "check": "Save frame",
+      "passed": true
+    },
+    {
+      "check": "Save frame",
+      "passed": true
+    },
+    {
+      "check": "Selected information follows stage 1",
+      "passed": true
+    },
+    {
+      "check": "Save large_stage2",
+      "passed": true
+    },
+    {
+      "check": "Save frame",
+      "passed": true
+    },
+    {
+      "check": "Save frame",
+      "passed": true
+    },
+    {
+      "check": "Save frame",
+      "passed": true
+    },
+    {
+      "check": "Save frame",
+      "passed": true
+    },
+    {
+      "check": "Save frame",
+      "passed": true
+    },
+    {
+      "check": "Save frame",
+      "passed": true
+    },
+    {
+      "check": "Save frame",
+      "passed": true
+    },
+    {
+      "check": "Save frame",
+      "passed": true
+    },
+    {
+      "check": "Save frame",
+      "passed": true
+    },
+    {
+      "check": "Save frame",
+      "passed": true
+    },
+    {
+      "check": "Save frame",
+      "passed": true
+    },
+    {
+      "check": "Save frame",
+      "passed": true
+    },
+    {
+      "check": "Save frame",
+      "passed": true
+    },
+    {
+      "check": "Save frame",
+      "passed": true
+    },
+    {
+      "check": "Save frame",
+      "passed": true
+    },
+    {
+      "check": "Save frame",
+      "passed": true
+    },
+    {
+      "check": "Selected information follows stage 2",
+      "passed": true
+    },
+    {
+      "check": "Save large_stage3",
+      "passed": true
+    },
+    {
+      "check": "Save frame",
+      "passed": true
+    },
+    {
+      "check": "Save frame",
+      "passed": true
+    },
+    {
+      "check": "Save frame",
+      "passed": true
+    },
+    {
+      "check": "Save frame",
+      "passed": true
+    },
+    {
+      "check": "Save frame",
+      "passed": true
+    },
+    {
+      "check": "Save frame",
+      "passed": true
+    },
+    {
+      "check": "Save frame",
+      "passed": true
+    },
+    {
+      "check": "Save frame",
+      "passed": true
+    },
+    {
+      "check": "Save frame",
+      "passed": true
+    },
+    {
+      "check": "Save frame",
+      "passed": true
+    },
+    {
+      "check": "Save frame",
+      "passed": true
+    },
+    {
+      "check": "Save frame",
+      "passed": true
+    },
+    {
+      "check": "Save frame",
+      "passed": true
+    },
+    {
+      "check": "Save frame",
+      "passed": true
+    },
+    {
+      "check": "Save frame",
+      "passed": true
+    },
+    {
+      "check": "Save frame",
+      "passed": true
+    },
+    {
+      "check": "Selected information follows stage 3",
+      "passed": true
+    },
+    {
+      "check": "Save large_stage4",
+      "passed": true
+    },
+    {
+      "check": "Save frame",
+      "passed": true
+    },
+    {
+      "check": "Save frame",
+      "passed": true
+    },
+    {
+      "check": "Save frame",
+      "passed": true
+    },
+    {
+      "check": "Save frame",
+      "passed": true
+    },
+    {
+      "check": "Save frame",
+      "passed": true
+    },
+    {
+      "check": "Save frame",
+      "passed": true
+    },
+    {
+      "check": "Save frame",
+      "passed": true
+    },
+    {
+      "check": "Save frame",
+      "passed": true
+    },
+    {
+      "check": "Save frame",
+      "passed": true
+    },
+    {
+      "check": "Save frame",
+      "passed": true
+    },
+    {
+      "check": "Save frame",
+      "passed": true
+    },
+    {
+      "check": "Save frame",
+      "passed": true
+    },
+    {
+      "check": "Save frame",
+      "passed": true
+    },
+    {
+      "check": "Save frame",
+      "passed": true
+    },
+    {
+      "check": "Save frame",
+      "passed": true
+    },
+    {
+      "check": "Save frame",
+      "passed": true
+    },
+    {
+      "check": "Save frame",
+      "passed": true
+    },
+    {
+      "check": "Selected information follows stage 4",
+      "passed": true
+    },
+    {
+      "check": "Save 06_large_depleted",
+      "passed": true
+    },
+    {
+      "check": "Save frame",
+      "passed": true
+    },
+    {
+      "check": "Four normal batches complete large mountain",
+      "passed": true
+    },
+    {
+      "check": "Small object selects normally",
+      "passed": true
+    },
+    {
+      "check": "Save 07_small_before",
+      "passed": true
+    },
+    {
+      "check": "Small mountain completes through ordinary work",
+      "passed": true
+    },
+    {
+      "check": "Save 08_small_after",
+      "passed": true
+    },
+    {
+      "check": "Save 09_generated_map",
+      "passed": true
+    },
+    {
+      "check": "Save 10_generated_rocky",
+      "passed": true
+    }
+  ],
+  "failures": 0,
+  "frames": 65,
+  "material_commit": "3229d2655e35e82d178577cdd8acbbe66e9be4f8",
+  "method": "Controlled initial objects; actual board click and UI button; ordinary World.step through complete mining; seed31 natural new map. Private GPU, no OS input.",
+  "screens": [
+    {
+      "file": "01_large_stage1.png",
+      "note": "4x4 and 1x1 with keeper and shiba; paused real selection",
+      "objects": [
+        {
+          "cells": 16,
+          "id": "mountain:large:10:10",
+          "remaining": 64,
+          "stage": 0
+        },
+        {
+          "cells": 1,
+          "id": "mountain:small:16:13",
+          "remaining": 12,
+          "stage": 0
+        }
+      ],
+      "tick": 0
+    },
+    {
+      "file": "02_mining_hit.png",
+      "note": "Normal strike event, actual worker/contact, shared sound cue",
+      "objects": [
+        {
+          "cells": 16,
+          "id": "mountain:large:10:10",
+          "remaining": 64,
+          "stage": 0
+        },
+        {
+          "cells": 1,
+          "id": "mountain:small:16:13",
+          "remaining": 12,
+          "stage": 0
+        }
+      ],
+      "tick": 3
+    },
+    {
+      "file": "large_stage2.png",
+      "note": "Ordinary mining transition; updated physical drops and collision",
+      "objects": [
+        {
+          "cells": 12,
+          "id": "mountain:large:10:10",
+          "remaining": 48,
+          "stage": 1
+        },
+        {
+          "cells": 1,
+          "id": "mountain:small:16:13",
+          "remaining": 12,
+          "stage": 0
+        }
+      ],
+      "tick": 32
+    },
+    {
+      "file": "large_stage3.png",
+      "note": "Ordinary mining transition; updated physical drops and collision",
+      "objects": [
+        {
+          "cells": 6,
+          "id": "mountain:large:10:10",
+          "remaining": 32,
+          "stage": 2
+        },
+        {
+          "cells": 1,
+          "id": "mountain:small:16:13",
+          "remaining": 12,
+          "stage": 0
+        }
+      ],
+      "tick": 64
+    },
+    {
+      "file": "large_stage4.png",
+      "note": "Ordinary mining transition; updated physical drops and collision",
+      "objects": [
+        {
+          "cells": 2,
+          "id": "mountain:large:10:10",
+          "remaining": 16,
+          "stage": 3
+        },
+        {
+          "cells": 1,
+          "id": "mountain:small:16:13",
+          "remaining": 12,
+          "stage": 0
+        }
+      ],
+      "tick": 96
+    },
+    {
+      "file": "06_large_depleted.png",
+      "note": "Ordinary mining transition; updated physical drops and collision",
+      "objects": [
+        {
+          "cells": 0,
+          "id": "mountain:large:10:10",
+          "remaining": 0,
+          "stage": 4
+        },
+        {
+          "cells": 1,
+          "id": "mountain:small:16:13",
+          "remaining": 12,
+          "stage": 0
+        }
+      ],
+      "tick": 130
+    },
+    {
+      "file": "07_small_before.png",
+      "note": "",
+      "objects": [
+        {
+          "cells": 0,
+          "id": "mountain:large:10:10",
+          "remaining": 0,
+          "stage": 4
+        },
+        {
+          "cells": 1,
+          "id": "mountain:small:16:13",
+          "remaining": 12,
+          "stage": 0
+        }
+      ],
+      "tick": 130
+    },
+    {
+      "file": "08_small_after.png",
+      "note": "",
+      "objects": [
+        {
+          "cells": 0,
+          "id": "mountain:large:10:10",
+          "remaining": 0,
+          "stage": 4
+        },
+        {
+          "cells": 0,
+          "id": "mountain:small:16:13",
+          "remaining": 0,
+          "stage": 3
+        }
+      ],
+      "tick": 162
+    },
+    {
+      "file": "09_generated_map.png",
+      "note": "Seed31 actual new map, overview scale, HUD hidden",
+      "objects": [
+        {
+          "cells": 16,
+          "id": "mountain:large:11:25",
+          "remaining": 64,
+          "stage": 0
+        },
+        {
+          "cells": 1,
+          "id": "mountain:small:18:27",
+          "remaining": 12,
+          "stage": 0
+        },
+        {
+          "cells": 1,
+          "id": "mountain:small:8:28",
+          "remaining": 12,
+          "stage": 0
+        },
+        {
+          "cells": 1,
+          "id": "mountain:small:7:25",
+          "remaining": 12,
+          "stage": 0
+        }
+      ],
+      "tick": 0
+    },
+    {
+      "file": "10_generated_rocky.png",
+      "note": "Naturally generated large mountain and connected walls",
+      "objects": [
+        {
+          "cells": 16,
+          "id": "mountain:large:11:25",
+          "remaining": 64,
+          "stage": 0
+        },
+        {
+          "cells": 1,
+          "id": "mountain:small:18:27",
+          "remaining": 12,
+          "stage": 0
+        },
+        {
+          "cells": 1,
+          "id": "mountain:small:8:28",
+          "remaining": 12,
+          "stage": 0
+        },
+        {
+          "cells": 1,
+          "id": "mountain:small:7:25",
+          "remaining": 12,
+          "stage": 0
+        }
+      ],
+      "tick": 0
+    }
+  ],
+  "source_commit": "9624a291a35fd73046c1df51dd6e5fb11f73cd45"
+}

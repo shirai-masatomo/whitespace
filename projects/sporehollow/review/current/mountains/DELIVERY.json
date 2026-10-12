@@ -1,0 +1,119 @@
+{
+  "automatically_launched": false,
+  "utc": "2026-10-12T15:11:37.2203719Z",
+  "asset_delivery_commit": "3229d2655e35e82d178577cdd8acbbe66e9be4f8",
+  "commit": "9624a29",
+  "sha256": "AB076089990EC5F821C7A4E1C137BF9A53D0C6DDA6AC1941F938E0C5A62F9973",
+  "normal_data_unchanged": true,
+  "implementation_commit": "9624a29",
+  "dirty": true,
+  "native_lifecycle_checks": 5,
+  "implementation_full": "9624a291a35fd73046c1df51dd6e5fb11f73cd45",
+  "gpu_source_match": true,
+  "runtime_source_files": 85,
+  "runtime_png_hashes_match_manifest": 9,
+  "recorded_related_tests": {
+    "biome-compat.json": 21,
+    "harvest.json": 28,
+    "mountains.json": 58,
+    "rock-connections.json": 83,
+    "integrated-work.json": 30,
+    "terrain-generation.json": 130
+  },
+  "recorded_related_checks": 350,
+  "gpu_screens": 10,
+  "sequence_frames": 65,
+  "lifecycle": {
+    "lifecycle\\close-entry.json": {
+      "checks": [
+        {
+          "check": "Normal window-close handler saved all fixture state and cleared the transient market pause on restore",
+          "passed": true
+        },
+        {
+          "check": "Uses ordinary persistent main scene, not automated test startup",
+          "passed": true
+        }
+      ],
+      "method": "Exported normal main scene, controlled fixture only in first process; close notification and automatic startup restore; second process engine-owned ticks",
+      "passed": true,
+      "pid": 13060
+    },
+    "lifecycle\\isolation.json": [
+      {
+        "executable": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\validation\\current\\WhistleRanch-test.exe",
+        "command": "\"C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\validation\\current\\WhistleRanch-test.exe\" --audio-driver Dummy --rendering-method gl_compatibility --max-fps 30 --resolution 1280x800 --log-file \"C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\validation\\current\\lifecycle/close.log\" -- --isolated-review --review-cycle-entry",
+        "sha256": "AB076089990EC5F821C7A4E1C137BF9A53D0C6DDA6AC1941F938E0C5A62F9973",
+        "data_root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\validation\\current\\lifecycle/user-data",
+        "start_utc": "2026-10-12T15:11:29.5292742Z",
+        "phase": "close",
+        "result": {
+          "PID": 13060,
+          "ThreadID": 28508,
+          "ExitCode": 0,
+          "OwnedWindowCount": 2,
+          "Station": "Service-0x0-bf6d9650$",
+          "Desktop": "Render_dd5bd8578f0848d2a00a653ae73686bb",
+          "ObservedDesktop": "Render_dd5bd8578f0848d2a00a653ae73686bb",
+          "NonInteractive": true,
+          "DesktopMatched": true,
+          "TimedOut": false,
+          "OwnedWindows": [
+            "EngineWGLDetect: ",
+            "NVOpenGLPbuffer: __wglDummyWindowFodder",
+            "Engine: ",
+            "Engine: ホイッスル牧場・最新開発版（部分実装）"
+          ]
+        },
+        "end_utc": "2026-10-12T15:11:32.9991408Z"
+      },
+      {
+        "executable": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\validation\\current\\WhistleRanch-test.exe",
+        "command": "\"C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\validation\\current\\WhistleRanch-test.exe\" --audio-driver Dummy --rendering-method gl_compatibility --max-fps 30 --resolution 1280x800 --log-file \"C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\validation\\current\\lifecycle/resume.log\" -- --isolated-review --review-cycle-entry --resume-cycle-entry",
+        "sha256": "AB076089990EC5F821C7A4E1C137BF9A53D0C6DDA6AC1941F938E0C5A62F9973",
+        "data_root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\validation\\current\\lifecycle/user-data",
+        "start_utc": "2026-10-12T15:11:33.1364583Z",
+        "phase": "resume",
+        "result": {
+          "PID": 8772,
+          "ThreadID": 6480,
+          "ExitCode": 0,
+          "OwnedWindowCount": 2,
+          "Station": "Service-0x0-bf6d9650$",
+          "Desktop": "Render_27dc26dc965046c9a8c959a61642d95e",
+          "ObservedDesktop": "Render_27dc26dc965046c9a8c959a61642d95e",
+          "NonInteractive": true,
+          "DesktopMatched": true,
+          "TimedOut": false,
+          "OwnedWindows": [
+            "EngineWGLDetect: ",
+            "NVOpenGLPbuffer: __wglDummyWindowFodder",
+            "Engine: ",
+            "Engine: ホイッスル牧場・最新開発版（部分実装）"
+          ]
+        },
+        "end_utc": "2026-10-12T15:11:36.5868771Z"
+      }
+    ],
+    "lifecycle\\resume-entry.json": {
+      "checks": [
+        {
+          "check": "Normal startup automatically resumed clock/zones/goods/work/enemies from previous process",
+          "passed": true
+        },
+        {
+          "check": "Native main process actually advances after market-open restore",
+          "passed": true
+        },
+        {
+          "check": "Uses ordinary persistent main scene, not automated test startup",
+          "passed": true
+        }
+      ],
+      "method": "Exported normal main scene, controlled fixture only in first process; close notification and automatic startup restore; second process engine-owned ticks",
+      "passed": true,
+      "pid": 8772
+    }
+  },
+  "dirty_explanation": "Other existing import/uid/review metadata are not committed with this feature; game/*.gd matches committed implementation and captured source hashes."
+}
