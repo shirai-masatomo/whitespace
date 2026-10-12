@@ -1,7 +1,7 @@
 {
   "before_bytes": 11086801938,
-  "after_bytes": 4649871836,
-  "reduction_bytes": 6436930102,
+  "after_bytes": 3996598128,
+  "reduction_bytes": 7090203810,
   "game_executables": [
     "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\autonomy-entry-01\\bundle\\WhistleRanch-Autonomy-Partial.exe"
   ],
@@ -41,15 +41,15 @@
     },
     {
       "root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-09\\task\\release-2c0182a\\projects\\sporehollow",
-      "bytes": 220555228
+      "bytes": 0
     },
     {
       "root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-09\\task\\release-35038b6\\projects\\sporehollow",
-      "bytes": 219859324
+      "bytes": 0
     },
     {
       "root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-09\\task\\release-536005c\\projects\\sporehollow",
-      "bytes": 212864007
+      "bytes": 0
     },
     {
       "root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-09\\task\\release-92d1048\\projects\\sporehollow",
@@ -69,7 +69,7 @@
     },
     {
       "root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow",
-      "bytes": 934992131
+      "bytes": 934996982
     },
     {
       "root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\onsite-clarity\\projects\\sporehollow",
