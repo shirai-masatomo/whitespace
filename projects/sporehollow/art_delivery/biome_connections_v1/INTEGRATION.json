@@ -1,0 +1,17 @@
+{
+  "implementation_branch": "codex/sporehollow-biome01",
+  "implementation_commit": "b90204294aea1790fd1ea01a074eb88129398deb",
+  "published_evidence_commit": "3504a1006fde32e727baf43e79fa925374a0a3bf",
+  "screens": "https://github.com/shirai-masatomo/whitespace/blob/codex/sporehollow-biome01/projects/sporehollow/review/current/rock_connections/SCREENS.md",
+  "report": "https://github.com/shirai-masatomo/whitespace/blob/codex/sporehollow-biome01/projects/sporehollow/review/current/rock_connections/REPORT.md",
+  "delivery": "https://github.com/shirai-masatomo/whitespace/blob/codex/sporehollow-biome01/projects/sporehollow/review/current/rock_connections/DELIVERY.json",
+  "mode": "Actual main.tscn GPU rendering on noninteractive desktop with ordinary World.step mining, not offline composition",
+  "related_checks_passed": 222,
+  "native_exe_lifecycle_checks_passed": 5,
+  "cases": [
+    "edge one cell:8 stone",
+    "corner one cell:8 stone",
+    "open edge then mine centre:16 stone"
+  ],
+  "user_desktop_game_launched": false
+}

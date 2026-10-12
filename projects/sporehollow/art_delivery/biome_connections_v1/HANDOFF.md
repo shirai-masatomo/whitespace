@@ -38,7 +38,7 @@
 
 227検査：RGBA/ハッシュ、既存1652PNG保全、12単独岩維持、EW/NS各64接続ポート、分離/結合16一致。確認画像は `review/`。**オフライン構成見本であり、実ゲーム撮影ではありません。**
 
-実ゲームの3×3岩場を中央・端・角の独立3ケースで採掘し、量・通行・保存・石材現物と前後画像を確認する作業は実装担当へ依頼済み。統合結果は実装側review/currentへ集約。本書だけでゲーム動作の完成を宣言しません。
+実ゲームの3×3岩場を端・角、および端を掘って中央へ進む3ケースで通常採掘し、量・通行・保存・石材現物と前後画面を確認済み。実装b902042を通常EXEへ反映し、関連222項目・EXE終了再開5項目を確認。[実画面](https://github.com/shirai-masatomo/whitespace/blob/codex/sporehollow-biome01/projects/sporehollow/review/current/rock_connections/SCREENS.md) / [実装・配布記録](https://github.com/shirai-masatomo/whitespace/blob/codex/sporehollow-biome01/projects/sporehollow/review/current/rock_connections/DELIVERY.json)。素材フォルダ内のreview画像は引き続きオフライン見本で、実GPU画像は上記の実装側レビューへ分離しています。
 
 ## 出典
 
