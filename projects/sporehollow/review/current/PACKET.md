@@ -1,6 +1,6 @@
 # 最新：採掘・伐採の作業演出
 
-[実装・検証・仮素材](harvest/REPORT.md)・[PNG8枚/連続画像2本/音](harvest/SCREENS.md)。実装ca21a14、正式素材b0e917a。通常EXE反映は進行中。
+[実装・検証・仮素材](harvest/REPORT.md)・[PNG8枚/連続画像2本/音](harvest/SCREENS.md)。実装ca21a14、正式素材b0e917a。通常EXE ecc8543へ反映済み、終了/再開5項目成功。[配布記録](harvest/DEPLOYMENT.json)。
 
 ---
 
