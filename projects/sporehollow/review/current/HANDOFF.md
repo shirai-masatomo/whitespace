@@ -2,6 +2,14 @@
 
 2026-10-12。作業場所は `colony-structure-01-work/projects/sporehollow`、既存ブランチ `codex/sporehollow-biome01`。他の未保存import/uid変更は保持。
 
+## 撮影原因を特定・更新後8枚を取得
+
+2026-10-12。release EXEに非対応の `--script` を渡した私のランナーの誤り。引数が無視され、撮影スクリプトではなく通常ゲームが続いたためtimeout。隔離GPU/描画待機の障害ではなかった。開発用Godotへ切替え、CLI確認・段階記録・PNG/枚数確認を追加し、正式手順で8枚取得/実画素確認。
+
+[原因・決定的な比較](RENDER_DIAGNOSIS.md)・[更新後8枚](SCREENS_INTEGRATED.md)・[撮影版/EXE版/素材と画像ハッシュ](verification/integrated-images.json)。撮影ゲームcodeは配布bf6eeeaと同一。通常EXEは更新済みのまま、撮影修正はtools/testsだけ。beforeは未取得、動物表/岩の別課題は同ページへ記録。
+
+下のtimeout/原因未特定は調査前の記録。現在の原因/撮影結果は本節を優先。
+
 ## 最新の訂正：EXE反映完了
 
 2026-10-12 18:55 JST、既存EXEを **bf6eeea** へ更新。起動は従来の `確認入口/最新開発版.lnk` またはPlay.cmd。ESCの版情報で確認可能。正式素材b0e917a11f205190dde0136165a72c189f39e275、EXE SHA256 `0CA482AEB8D18928B0A0C0DBFA562AF8FFBA8CC6F5BA99E18C72B5E00307DFB0`。

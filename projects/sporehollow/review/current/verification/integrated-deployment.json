@@ -6,7 +6,7 @@
   "normal_exe_implementation": "bf6eeea",
   "save_files_checked": 10,
   "normal_saves_unchanged": true,
-  "new_screenshots": 0,
+  "new_screenshots": 8,
   "gpu": {
     "attempts": 1,
     "NonInteractive": true,
@@ -31,5 +31,6 @@
   "native_lifecycle_checks": 5,
   "native_gpu_launch_close_resume_passed": true,
   "publication_proof": "integrated-publication.json",
-  "current_screenshot_status": "not obtained; the earlier external before-capture script timed out, unrelated to the later successful EXE lifecycle verification"
+  "current_screenshot_status": "Eight after PNGs obtained using script-capable Godot; production game code matches published bf6eeea; same-condition before pending",
+  "capture_root_cause": "Release template does not support --script; argument silently ignored and normal game kept running until harness timeout"
 }

@@ -1,0 +1,97 @@
+{
+  "capture": {
+    "command": "\"C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\.tools\\Godot_v4.7.2-stable_win64.exe\" --path \"C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\" --audio-driver Dummy --rendering-method gl_compatibility --max-fps 30 --resolution 1280x800 --log-file \"C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\isolated\\current/capture.log\" --script \"C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\tests\\review_integrated_visual.gd\" -- --isolated-review",
+    "result": {
+      "PID": 25136,
+      "ThreadID": 20492,
+      "ExitCode": 0,
+      "OwnedWindowCount": 2,
+      "Station": "Service-0x0-bf6d9650$",
+      "Desktop": "Render_e416893867d64411ab7ca8f38638c999",
+      "ObservedDesktop": "Render_e416893867d64411ab7ca8f38638c999",
+      "NonInteractive": true,
+      "DesktopMatched": true,
+      "TimedOut": false,
+      "OwnedWindows": [
+        "EngineWGLDetect: ",
+        "NVOpenGLPbuffer: __wglDummyWindowFodder",
+        "Engine: ",
+        "Engine: ホイッスル牧場・最新開発版（部分実装） (DEBUG)"
+      ]
+    },
+    "implementation_commit": "008c67c9c045d76a4084100dfd6236a405d87711",
+    "end_utc": "2026-10-12T10:12:05.6093111Z",
+    "executable_sha256": "AB1824F85BFD8E0E4128182C000C4003A3E042245B2967848D089B2A04B22424",
+    "published_exe_sha256": "0CA482AEB8D18928B0A0C0DBFA562AF8FFBA8CC6F5BA99E18C72B5E00307DFB0",
+    "start_utc": "2026-10-12T10:11:57.4011603Z",
+    "executable": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\.tools\\Godot_v4.7.2-stable_win64.exe",
+    "published_exe_commit": "bf6eeea",
+    "game_code_matches_published_exe": true,
+    "game_code_changes": [],
+    "asset_delivery_commit": "b0e917a11f205190dde0136165a72c189f39e275"
+  },
+  "images": [
+    {
+      "file": "after_01_initial_stock.png",
+      "title": "初期物資/中央の牧場主・柴犬・像",
+      "width": 1280,
+      "height": 800,
+      "sha256": "3277913328c24381e55b861c093e60a37cf6020f9436ebbd4b675371af524702"
+    },
+    {
+      "file": "after_02_roles.png",
+      "title": "役割表（追加作業者は検証fixture）",
+      "width": 1280,
+      "height": 800,
+      "sha256": "d612f9091377cd7fb59fccb99404329fd92e25157837236c95f79f85c873ae1e"
+    },
+    {
+      "file": "after_03_architect.png",
+      "title": "左下アーキテクト",
+      "width": 1280,
+      "height": 800,
+      "sha256": "c38c0ce0f7358229e4f0597e4c42daa8630f6937df43d3c8b79b07c5bf48dc95"
+    },
+    {
+      "file": "after_04_commands.png",
+      "title": "命令4種",
+      "width": 1280,
+      "height": 800,
+      "sha256": "f1b0a464b7c16ed83cc4ad4a3ba86f11e926d0829be3b9e2960612b8476379cd"
+    },
+    {
+      "file": "after_05_animals.png",
+      "title": "動物表（鶏・猫は検証fixture）",
+      "width": 1280,
+      "height": 800,
+      "sha256": "2a7ba20e94aeec29e7c520bdf8e9bf4a8404e19bab5a1f1fadfcd9c0abd42697"
+    },
+    {
+      "file": "after_06_natural_rocks.png",
+      "title": "seed31の既存自然岩場",
+      "width": 1280,
+      "height": 800,
+      "sha256": "951e676b26ac1723b9e3aebd5cc809ac26939e313dcc024aad47b18223412375"
+    },
+    {
+      "file": "after_07_connected_rock_fixture.png",
+      "title": "連結岩/採掘跡（制御した配置fixture）",
+      "width": 1280,
+      "height": 800,
+      "sha256": "ee0ce18602440844894b0c89cd0b9bc6fa5ff0ef417f1fdcdeef8c13a915c4c3"
+    },
+    {
+      "file": "after_08_architect_1080.png",
+      "title": "1920×1080のアーキテクト",
+      "width": 1728,
+      "height": 1080,
+      "sha256": "7f33fb3c0eb50747d00087dcbd53d1885fa2fb8b0770377efd3461d6a8308a39"
+    }
+  ],
+  "before_captured": false,
+  "pixel_reviewed": true,
+  "ui_issues": [
+    "Animal table third row partially clipped and heading alignment",
+    "Rock silhouette/detail still coarser than adopted concept"
+  ]
+}

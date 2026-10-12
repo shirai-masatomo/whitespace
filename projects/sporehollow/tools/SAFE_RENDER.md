@@ -46,3 +46,9 @@ AI・情報表示品質の定点は `-Scenario quality`（5画面）。森/Human
 2026-10-09指定範囲は `-Scenario today_revision`。6枚（朝/市場入口/縦一覧/確認/図鑑/敵HP）、57入力・状態検査。商品在庫5種・300G・戦闘初期配置は明示したfixture。音Dummy、通常デスクトップへフォールバックしない。
 
 会話UI口パクは `-Scenario merchant_mouth`。専用の停止中fixtureで画素差分と有限発話・退出・閉じる・再会話を確認。比較動画用19フレームは同じシミュレーション時刻の描画で、通常desktop入力は行わない。
+
+## 外部撮影スクリプトの対応確認（2026-10-12）
+
+標準release EXEは --script 非対応で、この引数を警告なしに無視する。外部fixtureの撮影はscript対応の開発用Godotと明示 --path を使用し、起動前に実バイナリの --help を確認する。EXE本体の検証は既存の組込み --review-cycle-entry を使用し、外部スクリプトへ置き換えない。
+
+今回の撮影は ./tools/review_integrated_visual.ps1。8枚保存・途中checkpoint・PNG保存エラー・GPU終了を検査。原因比較は ./tools/diagnose_render.ps1（通常は既知の非対応EXE試行を省略）。明示 -ReproduceUnsupportedExport のみ20秒以内で失敗を再現。1280/1920のゲームcodeは配布版と比較し、afterだけをbefore画像と偽らない。

@@ -1,3 +1,7 @@
+## 2026-10-12 撮影の原因特定と回復
+
+release EXEに --script を渡した撮影ランナーの誤り。非対応引数が無視され通常ゲームが継続しtimeout。開発用Godotへ修正して更新後8枚を取得/画素確認。通常EXE bf6eeeaと同じゲームcode。before比較は未取得、動物表の列/3行目と岩の描込みを別課題として記録。[原因](review/current/RENDER_DIAGNOSIS.md)・[画面](review/current/SCREENS_INTEGRATED.md)。以下の「原因未特定/撮影未完了」は調査前の記録。
+
 # 統合修正：通常EXEへ反映済み
 
 2026-10-12 18:55（日本時間）。**既存の最新開発版EXEをbf6eeeaへ更新しました。** 正式素材はb0e917a11f205190dde0136165a72c189f39e275。
