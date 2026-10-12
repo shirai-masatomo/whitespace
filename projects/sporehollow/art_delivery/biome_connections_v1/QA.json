@@ -1,0 +1,915 @@
+{
+  "checks": [
+    {
+      "check": "prior PNG hashes unchanged",
+      "pass": true
+    },
+    {
+      "check": "12 standalone rock states retained",
+      "pass": true
+    },
+    {
+      "check": "exposed/n_mask_00.png RGBA + hash",
+      "pass": true
+    },
+    {
+      "check": "exposed/w_mask_00.png RGBA + hash",
+      "pass": true
+    },
+    {
+      "check": "exposed/e_mask_00.png RGBA + hash",
+      "pass": true
+    },
+    {
+      "check": "exposed/s_mask_00.png RGBA + hash",
+      "pass": true
+    },
+    {
+      "check": "roof/mask_00.png RGBA + hash",
+      "pass": true
+    },
+    {
+      "check": "normal/mask_00.png RGBA + hash",
+      "pass": true
+    },
+    {
+      "check": "exposed/w_mask_01.png RGBA + hash",
+      "pass": true
+    },
+    {
+      "check": "exposed/e_mask_01.png RGBA + hash",
+      "pass": true
+    },
+    {
+      "check": "exposed/s_mask_01.png RGBA + hash",
+      "pass": true
+    },
+    {
+      "check": "roof/mask_01.png RGBA + hash",
+      "pass": true
+    },
+    {
+      "check": "normal/mask_01.png RGBA + hash",
+      "pass": true
+    },
+    {
+      "check": "exposed/n_mask_02.png RGBA + hash",
+      "pass": true
+    },
+    {
+      "check": "exposed/w_mask_02.png RGBA + hash",
+      "pass": true
+    },
+    {
+      "check": "exposed/s_mask_02.png RGBA + hash",
+      "pass": true
+    },
+    {
+      "check": "roof/mask_02.png RGBA + hash",
+      "pass": true
+    },
+    {
+      "check": "normal/mask_02.png RGBA + hash",
+      "pass": true
+    },
+    {
+      "check": "exposed/w_mask_03.png RGBA + hash",
+      "pass": true
+    },
+    {
+      "check": "exposed/s_mask_03.png RGBA + hash",
+      "pass": true
+    },
+    {
+      "check": "roof/mask_03.png RGBA + hash",
+      "pass": true
+    },
+    {
+      "check": "normal/mask_03.png RGBA + hash",
+      "pass": true
+    },
+    {
+      "check": "exposed/n_mask_04.png RGBA + hash",
+      "pass": true
+    },
+    {
+      "check": "exposed/w_mask_04.png RGBA + hash",
+      "pass": true
+    },
+    {
+      "check": "exposed/e_mask_04.png RGBA + hash",
+      "pass": true
+    },
+    {
+      "check": "roof/mask_04.png RGBA + hash",
+      "pass": true
+    },
+    {
+      "check": "normal/mask_04.png RGBA + hash",
+      "pass": true
+    },
+    {
+      "check": "exposed/w_mask_05.png RGBA + hash",
+      "pass": true
+    },
+    {
+      "check": "exposed/e_mask_05.png RGBA + hash",
+      "pass": true
+    },
+    {
+      "check": "roof/mask_05.png RGBA + hash",
+      "pass": true
+    },
+    {
+      "check": "normal/mask_05.png RGBA + hash",
+      "pass": true
+    },
+    {
+      "check": "exposed/n_mask_06.png RGBA + hash",
+      "pass": true
+    },
+    {
+      "check": "exposed/w_mask_06.png RGBA + hash",
+      "pass": true
+    },
+    {
+      "check": "roof/mask_06.png RGBA + hash",
+      "pass": true
+    },
+    {
+      "check": "normal/mask_06.png RGBA + hash",
+      "pass": true
+    },
+    {
+      "check": "exposed/w_mask_07.png RGBA + hash",
+      "pass": true
+    },
+    {
+      "check": "roof/mask_07.png RGBA + hash",
+      "pass": true
+    },
+    {
+      "check": "normal/mask_07.png RGBA + hash",
+      "pass": true
+    },
+    {
+      "check": "exposed/n_mask_08.png RGBA + hash",
+      "pass": true
+    },
+    {
+      "check": "exposed/e_mask_08.png RGBA + hash",
+      "pass": true
+    },
+    {
+      "check": "exposed/s_mask_08.png RGBA + hash",
+      "pass": true
+    },
+    {
+      "check": "roof/mask_08.png RGBA + hash",
+      "pass": true
+    },
+    {
+      "check": "normal/mask_08.png RGBA + hash",
+      "pass": true
+    },
+    {
+      "check": "exposed/e_mask_09.png RGBA + hash",
+      "pass": true
+    },
+    {
+      "check": "exposed/s_mask_09.png RGBA + hash",
+      "pass": true
+    },
+    {
+      "check": "roof/mask_09.png RGBA + hash",
+      "pass": true
+    },
+    {
+      "check": "normal/mask_09.png RGBA + hash",
+      "pass": true
+    },
+    {
+      "check": "exposed/n_mask_10.png RGBA + hash",
+      "pass": true
+    },
+    {
+      "check": "exposed/s_mask_10.png RGBA + hash",
+      "pass": true
+    },
+    {
+      "check": "roof/mask_10.png RGBA + hash",
+      "pass": true
+    },
+    {
+      "check": "normal/mask_10.png RGBA + hash",
+      "pass": true
+    },
+    {
+      "check": "exposed/s_mask_11.png RGBA + hash",
+      "pass": true
+    },
+    {
+      "check": "roof/mask_11.png RGBA + hash",
+      "pass": true
+    },
+    {
+      "check": "normal/mask_11.png RGBA + hash",
+      "pass": true
+    },
+    {
+      "check": "exposed/n_mask_12.png RGBA + hash",
+      "pass": true
+    },
+    {
+      "check": "exposed/e_mask_12.png RGBA + hash",
+      "pass": true
+    },
+    {
+      "check": "roof/mask_12.png RGBA + hash",
+      "pass": true
+    },
+    {
+      "check": "normal/mask_12.png RGBA + hash",
+      "pass": true
+    },
+    {
+      "check": "exposed/e_mask_13.png RGBA + hash",
+      "pass": true
+    },
+    {
+      "check": "roof/mask_13.png RGBA + hash",
+      "pass": true
+    },
+    {
+      "check": "normal/mask_13.png RGBA + hash",
+      "pass": true
+    },
+    {
+      "check": "exposed/n_mask_14.png RGBA + hash",
+      "pass": true
+    },
+    {
+      "check": "roof/mask_14.png RGBA + hash",
+      "pass": true
+    },
+    {
+      "check": "normal/mask_14.png RGBA + hash",
+      "pass": true
+    },
+    {
+      "check": "roof/mask_15.png RGBA + hash",
+      "pass": true
+    },
+    {
+      "check": "normal/mask_15.png RGBA + hash",
+      "pass": true
+    },
+    {
+      "check": "inner/concave_nw.png RGBA + hash",
+      "pass": true
+    },
+    {
+      "check": "inner/concave_ne.png RGBA + hash",
+      "pass": true
+    },
+    {
+      "check": "inner/concave_sw.png RGBA + hash",
+      "pass": true
+    },
+    {
+      "check": "inner/concave_se.png RGBA + hash",
+      "pass": true
+    },
+    {
+      "check": "transition/edge_n.png RGBA + hash",
+      "pass": true
+    },
+    {
+      "check": "transition/edge_e.png RGBA + hash",
+      "pass": true
+    },
+    {
+      "check": "transition/edge_s.png RGBA + hash",
+      "pass": true
+    },
+    {
+      "check": "transition/edge_w.png RGBA + hash",
+      "pass": true
+    },
+    {
+      "check": "transition/outer_nw.png RGBA + hash",
+      "pass": true
+    },
+    {
+      "check": "transition/outer_ne.png RGBA + hash",
+      "pass": true
+    },
+    {
+      "check": "transition/outer_sw.png RGBA + hash",
+      "pass": true
+    },
+    {
+      "check": "transition/outer_se.png RGBA + hash",
+      "pass": true
+    },
+    {
+      "check": "transition/inner_nw.png RGBA + hash",
+      "pass": true
+    },
+    {
+      "check": "transition/inner_ne.png RGBA + hash",
+      "pass": true
+    },
+    {
+      "check": "transition/inner_sw.png RGBA + hash",
+      "pass": true
+    },
+    {
+      "check": "transition/inner_se.png RGBA + hash",
+      "pass": true
+    },
+    {
+      "check": "transition/full.png RGBA + hash",
+      "pass": true
+    },
+    {
+      "check": "parts equal combined 0",
+      "pass": true
+    },
+    {
+      "check": "parts equal combined 1",
+      "pass": true
+    },
+    {
+      "check": "parts equal combined 2",
+      "pass": true
+    },
+    {
+      "check": "parts equal combined 3",
+      "pass": true
+    },
+    {
+      "check": "parts equal combined 4",
+      "pass": true
+    },
+    {
+      "check": "parts equal combined 5",
+      "pass": true
+    },
+    {
+      "check": "parts equal combined 6",
+      "pass": true
+    },
+    {
+      "check": "parts equal combined 7",
+      "pass": true
+    },
+    {
+      "check": "parts equal combined 8",
+      "pass": true
+    },
+    {
+      "check": "parts equal combined 9",
+      "pass": true
+    },
+    {
+      "check": "parts equal combined 10",
+      "pass": true
+    },
+    {
+      "check": "parts equal combined 11",
+      "pass": true
+    },
+    {
+      "check": "parts equal combined 12",
+      "pass": true
+    },
+    {
+      "check": "parts equal combined 13",
+      "pass": true
+    },
+    {
+      "check": "parts equal combined 14",
+      "pass": true
+    },
+    {
+      "check": "parts equal combined 15",
+      "pass": true
+    },
+    {
+      "check": "EW interior port 2-8",
+      "pass": true
+    },
+    {
+      "check": "EW interior port 2-9",
+      "pass": true
+    },
+    {
+      "check": "EW interior port 2-10",
+      "pass": true
+    },
+    {
+      "check": "EW interior port 2-11",
+      "pass": true
+    },
+    {
+      "check": "EW interior port 2-12",
+      "pass": true
+    },
+    {
+      "check": "EW interior port 2-13",
+      "pass": true
+    },
+    {
+      "check": "EW interior port 2-14",
+      "pass": true
+    },
+    {
+      "check": "EW interior port 2-15",
+      "pass": true
+    },
+    {
+      "check": "EW interior port 3-8",
+      "pass": true
+    },
+    {
+      "check": "EW interior port 3-9",
+      "pass": true
+    },
+    {
+      "check": "EW interior port 3-10",
+      "pass": true
+    },
+    {
+      "check": "EW interior port 3-11",
+      "pass": true
+    },
+    {
+      "check": "EW interior port 3-12",
+      "pass": true
+    },
+    {
+      "check": "EW interior port 3-13",
+      "pass": true
+    },
+    {
+      "check": "EW interior port 3-14",
+      "pass": true
+    },
+    {
+      "check": "EW interior port 3-15",
+      "pass": true
+    },
+    {
+      "check": "NS interior port 4-1",
+      "pass": true
+    },
+    {
+      "check": "NS interior port 4-3",
+      "pass": true
+    },
+    {
+      "check": "NS interior port 4-5",
+      "pass": true
+    },
+    {
+      "check": "NS interior port 4-7",
+      "pass": true
+    },
+    {
+      "check": "NS interior port 4-9",
+      "pass": true
+    },
+    {
+      "check": "NS interior port 4-11",
+      "pass": true
+    },
+    {
+      "check": "NS interior port 4-13",
+      "pass": true
+    },
+    {
+      "check": "NS interior port 4-15",
+      "pass": true
+    },
+    {
+      "check": "NS interior port 5-1",
+      "pass": true
+    },
+    {
+      "check": "NS interior port 5-3",
+      "pass": true
+    },
+    {
+      "check": "NS interior port 5-5",
+      "pass": true
+    },
+    {
+      "check": "NS interior port 5-7",
+      "pass": true
+    },
+    {
+      "check": "NS interior port 5-9",
+      "pass": true
+    },
+    {
+      "check": "NS interior port 5-11",
+      "pass": true
+    },
+    {
+      "check": "NS interior port 5-13",
+      "pass": true
+    },
+    {
+      "check": "NS interior port 5-15",
+      "pass": true
+    },
+    {
+      "check": "NS interior port 6-1",
+      "pass": true
+    },
+    {
+      "check": "NS interior port 6-3",
+      "pass": true
+    },
+    {
+      "check": "NS interior port 6-5",
+      "pass": true
+    },
+    {
+      "check": "NS interior port 6-7",
+      "pass": true
+    },
+    {
+      "check": "EW interior port 6-8",
+      "pass": true
+    },
+    {
+      "check": "EW interior port 6-9",
+      "pass": true
+    },
+    {
+      "check": "NS interior port 6-9",
+      "pass": true
+    },
+    {
+      "check": "EW interior port 6-10",
+      "pass": true
+    },
+    {
+      "check": "EW interior port 6-11",
+      "pass": true
+    },
+    {
+      "check": "NS interior port 6-11",
+      "pass": true
+    },
+    {
+      "check": "EW interior port 6-12",
+      "pass": true
+    },
+    {
+      "check": "EW interior port 6-13",
+      "pass": true
+    },
+    {
+      "check": "NS interior port 6-13",
+      "pass": true
+    },
+    {
+      "check": "EW interior port 6-14",
+      "pass": true
+    },
+    {
+      "check": "EW interior port 6-15",
+      "pass": true
+    },
+    {
+      "check": "NS interior port 6-15",
+      "pass": true
+    },
+    {
+      "check": "NS interior port 7-1",
+      "pass": true
+    },
+    {
+      "check": "NS interior port 7-3",
+      "pass": true
+    },
+    {
+      "check": "NS interior port 7-5",
+      "pass": true
+    },
+    {
+      "check": "NS interior port 7-7",
+      "pass": true
+    },
+    {
+      "check": "EW interior port 7-8",
+      "pass": true
+    },
+    {
+      "check": "EW interior port 7-9",
+      "pass": true
+    },
+    {
+      "check": "NS interior port 7-9",
+      "pass": true
+    },
+    {
+      "check": "EW interior port 7-10",
+      "pass": true
+    },
+    {
+      "check": "EW interior port 7-11",
+      "pass": true
+    },
+    {
+      "check": "NS interior port 7-11",
+      "pass": true
+    },
+    {
+      "check": "EW interior port 7-12",
+      "pass": true
+    },
+    {
+      "check": "EW interior port 7-13",
+      "pass": true
+    },
+    {
+      "check": "NS interior port 7-13",
+      "pass": true
+    },
+    {
+      "check": "EW interior port 7-14",
+      "pass": true
+    },
+    {
+      "check": "EW interior port 7-15",
+      "pass": true
+    },
+    {
+      "check": "NS interior port 7-15",
+      "pass": true
+    },
+    {
+      "check": "EW interior port 10-8",
+      "pass": true
+    },
+    {
+      "check": "EW interior port 10-9",
+      "pass": true
+    },
+    {
+      "check": "EW interior port 10-10",
+      "pass": true
+    },
+    {
+      "check": "EW interior port 10-11",
+      "pass": true
+    },
+    {
+      "check": "EW interior port 10-12",
+      "pass": true
+    },
+    {
+      "check": "EW interior port 10-13",
+      "pass": true
+    },
+    {
+      "check": "EW interior port 10-14",
+      "pass": true
+    },
+    {
+      "check": "EW interior port 10-15",
+      "pass": true
+    },
+    {
+      "check": "EW interior port 11-8",
+      "pass": true
+    },
+    {
+      "check": "EW interior port 11-9",
+      "pass": true
+    },
+    {
+      "check": "EW interior port 11-10",
+      "pass": true
+    },
+    {
+      "check": "EW interior port 11-11",
+      "pass": true
+    },
+    {
+      "check": "EW interior port 11-12",
+      "pass": true
+    },
+    {
+      "check": "EW interior port 11-13",
+      "pass": true
+    },
+    {
+      "check": "EW interior port 11-14",
+      "pass": true
+    },
+    {
+      "check": "EW interior port 11-15",
+      "pass": true
+    },
+    {
+      "check": "NS interior port 12-1",
+      "pass": true
+    },
+    {
+      "check": "NS interior port 12-3",
+      "pass": true
+    },
+    {
+      "check": "NS interior port 12-5",
+      "pass": true
+    },
+    {
+      "check": "NS interior port 12-7",
+      "pass": true
+    },
+    {
+      "check": "NS interior port 12-9",
+      "pass": true
+    },
+    {
+      "check": "NS interior port 12-11",
+      "pass": true
+    },
+    {
+      "check": "NS interior port 12-13",
+      "pass": true
+    },
+    {
+      "check": "NS interior port 12-15",
+      "pass": true
+    },
+    {
+      "check": "NS interior port 13-1",
+      "pass": true
+    },
+    {
+      "check": "NS interior port 13-3",
+      "pass": true
+    },
+    {
+      "check": "NS interior port 13-5",
+      "pass": true
+    },
+    {
+      "check": "NS interior port 13-7",
+      "pass": true
+    },
+    {
+      "check": "NS interior port 13-9",
+      "pass": true
+    },
+    {
+      "check": "NS interior port 13-11",
+      "pass": true
+    },
+    {
+      "check": "NS interior port 13-13",
+      "pass": true
+    },
+    {
+      "check": "NS interior port 13-15",
+      "pass": true
+    },
+    {
+      "check": "NS interior port 14-1",
+      "pass": true
+    },
+    {
+      "check": "NS interior port 14-3",
+      "pass": true
+    },
+    {
+      "check": "NS interior port 14-5",
+      "pass": true
+    },
+    {
+      "check": "NS interior port 14-7",
+      "pass": true
+    },
+    {
+      "check": "EW interior port 14-8",
+      "pass": true
+    },
+    {
+      "check": "EW interior port 14-9",
+      "pass": true
+    },
+    {
+      "check": "NS interior port 14-9",
+      "pass": true
+    },
+    {
+      "check": "EW interior port 14-10",
+      "pass": true
+    },
+    {
+      "check": "EW interior port 14-11",
+      "pass": true
+    },
+    {
+      "check": "NS interior port 14-11",
+      "pass": true
+    },
+    {
+      "check": "EW interior port 14-12",
+      "pass": true
+    },
+    {
+      "check": "EW interior port 14-13",
+      "pass": true
+    },
+    {
+      "check": "NS interior port 14-13",
+      "pass": true
+    },
+    {
+      "check": "EW interior port 14-14",
+      "pass": true
+    },
+    {
+      "check": "EW interior port 14-15",
+      "pass": true
+    },
+    {
+      "check": "NS interior port 14-15",
+      "pass": true
+    },
+    {
+      "check": "NS interior port 15-1",
+      "pass": true
+    },
+    {
+      "check": "NS interior port 15-3",
+      "pass": true
+    },
+    {
+      "check": "NS interior port 15-5",
+      "pass": true
+    },
+    {
+      "check": "NS interior port 15-7",
+      "pass": true
+    },
+    {
+      "check": "EW interior port 15-8",
+      "pass": true
+    },
+    {
+      "check": "EW interior port 15-9",
+      "pass": true
+    },
+    {
+      "check": "NS interior port 15-9",
+      "pass": true
+    },
+    {
+      "check": "EW interior port 15-10",
+      "pass": true
+    },
+    {
+      "check": "EW interior port 15-11",
+      "pass": true
+    },
+    {
+      "check": "NS interior port 15-11",
+      "pass": true
+    },
+    {
+      "check": "EW interior port 15-12",
+      "pass": true
+    },
+    {
+      "check": "EW interior port 15-13",
+      "pass": true
+    },
+    {
+      "check": "NS interior port 15-13",
+      "pass": true
+    },
+    {
+      "check": "EW interior port 15-14",
+      "pass": true
+    },
+    {
+      "check": "EW interior port 15-15",
+      "pass": true
+    },
+    {
+      "check": "NS interior port 15-15",
+      "pass": true
+    }
+  ],
+  "count": 227,
+  "prior_png_preserved": 1652,
+  "actual_game_test": false
+}

@@ -1,0 +1,2239 @@
+{
+  "schema_version": 1,
+  "tile_size_px": [
+    48,
+    42
+  ],
+  "mask_bits": {
+    "N": 1,
+    "E": 2,
+    "S": 4,
+    "W": 8
+  },
+  "sampling": "nearest",
+  "format": "RGBA",
+  "assets": [
+    {
+      "file": "exposed/n_mask_00.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "layer": "exposed_face",
+      "usage": "Exposed n face only when neighboring rock absent. Draw before roof.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "b49d98152d0da492f208ea303fb70c56a5935fb322ce9a81a2ef7b8439c8688e",
+      "connection_mask": 0,
+      "direction": "n"
+    },
+    {
+      "file": "exposed/w_mask_00.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "layer": "exposed_face",
+      "usage": "Exposed w face only when neighboring rock absent. Draw before roof.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "af101fe6689749f16ad098b9ff1265253ecc53d0e96232c1ee9f2e68e289cc22",
+      "connection_mask": 0,
+      "direction": "w"
+    },
+    {
+      "file": "exposed/e_mask_00.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "layer": "exposed_face",
+      "usage": "Exposed e face only when neighboring rock absent. Draw before roof.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "b2759e1e6a45d4dd7cddd42ca222a0fe3675bc813bd1ed7fd8cad078d5eeb719",
+      "connection_mask": 0,
+      "direction": "e"
+    },
+    {
+      "file": "exposed/s_mask_00.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "layer": "exposed_face",
+      "usage": "Exposed s face only when neighboring rock absent. Draw before roof.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "ff2b72f5160eac114172389a40a8d75711a5e7e1020fe98cd617f79105575895",
+      "connection_mask": 0,
+      "direction": "s"
+    },
+    {
+      "file": "roof/mask_00.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "layer": "roof",
+      "usage": "Separate roof; use parts OR combined, never both.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "8872e67cffbaadd7076da94bd084e29e5bf4bfa4bae6cefc676f8bf49dc1fa00",
+      "connection_mask": 0
+    },
+    {
+      "file": "normal/mask_00.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "layer": "rock",
+      "usage": "Combined connected rock. Select current cardinal occupancy mask every render.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "161258d11e55264099b2995c3fcc614439ad0d841bd3bf8730203da9fc36179c",
+      "connection_mask": 0,
+      "visual_front_height_px": 12
+    },
+    {
+      "file": "exposed/w_mask_01.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "layer": "exposed_face",
+      "usage": "Exposed w face only when neighboring rock absent. Draw before roof.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "9dcdd66dde862eee3ab5f8772b22c13a8deeacf64aba74d8a019929f616f01d4",
+      "connection_mask": 1,
+      "direction": "w"
+    },
+    {
+      "file": "exposed/e_mask_01.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "layer": "exposed_face",
+      "usage": "Exposed e face only when neighboring rock absent. Draw before roof.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "2bea41389182ea219fd04870e93fcfea1831041c71dfb2b88137e8505f4cb583",
+      "connection_mask": 1,
+      "direction": "e"
+    },
+    {
+      "file": "exposed/s_mask_01.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "layer": "exposed_face",
+      "usage": "Exposed s face only when neighboring rock absent. Draw before roof.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "ff2b72f5160eac114172389a40a8d75711a5e7e1020fe98cd617f79105575895",
+      "connection_mask": 1,
+      "direction": "s"
+    },
+    {
+      "file": "roof/mask_01.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "layer": "roof",
+      "usage": "Separate roof; use parts OR combined, never both.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "4ccfc932cfb396ee26d7c4de871659b2787b5405d22507a91b91e1d82b0a939b",
+      "connection_mask": 1
+    },
+    {
+      "file": "normal/mask_01.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "layer": "rock",
+      "usage": "Combined connected rock. Select current cardinal occupancy mask every render.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "94cee7c6caf1aac5761c82bc3fd10f1bf03d63f63298036d0188ddc7d119aecc",
+      "connection_mask": 1,
+      "visual_front_height_px": 12
+    },
+    {
+      "file": "exposed/n_mask_02.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "layer": "exposed_face",
+      "usage": "Exposed n face only when neighboring rock absent. Draw before roof.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "f2644a12b96515836b835a06d3ae20124803b05c330d7cae613b40ac7ff9c1f2",
+      "connection_mask": 2,
+      "direction": "n"
+    },
+    {
+      "file": "exposed/w_mask_02.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "layer": "exposed_face",
+      "usage": "Exposed w face only when neighboring rock absent. Draw before roof.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "af101fe6689749f16ad098b9ff1265253ecc53d0e96232c1ee9f2e68e289cc22",
+      "connection_mask": 2,
+      "direction": "w"
+    },
+    {
+      "file": "exposed/s_mask_02.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "layer": "exposed_face",
+      "usage": "Exposed s face only when neighboring rock absent. Draw before roof.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "19ffea003eaa4722988fb421e3eb51ae8e0be29bf5c2a09a420c579f4bcc79d7",
+      "connection_mask": 2,
+      "direction": "s"
+    },
+    {
+      "file": "roof/mask_02.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "layer": "roof",
+      "usage": "Separate roof; use parts OR combined, never both.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "b259f05adecff0d3d802ba863c96767569664eb14993dfe9cd4c7eaddb54516a",
+      "connection_mask": 2
+    },
+    {
+      "file": "normal/mask_02.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "layer": "rock",
+      "usage": "Combined connected rock. Select current cardinal occupancy mask every render.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "a6d3e9f37d629fc686e57815e42ebbfa5d0adeb89c720da4fa9a30cddc56f258",
+      "connection_mask": 2,
+      "visual_front_height_px": 12
+    },
+    {
+      "file": "exposed/w_mask_03.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "layer": "exposed_face",
+      "usage": "Exposed w face only when neighboring rock absent. Draw before roof.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "9dcdd66dde862eee3ab5f8772b22c13a8deeacf64aba74d8a019929f616f01d4",
+      "connection_mask": 3,
+      "direction": "w"
+    },
+    {
+      "file": "exposed/s_mask_03.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "layer": "exposed_face",
+      "usage": "Exposed s face only when neighboring rock absent. Draw before roof.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "19ffea003eaa4722988fb421e3eb51ae8e0be29bf5c2a09a420c579f4bcc79d7",
+      "connection_mask": 3,
+      "direction": "s"
+    },
+    {
+      "file": "roof/mask_03.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "layer": "roof",
+      "usage": "Separate roof; use parts OR combined, never both.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "b3b34184a08643a0a8a99d5a74e39f03506a01346adc14c1258611132e38f45f",
+      "connection_mask": 3
+    },
+    {
+      "file": "normal/mask_03.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "layer": "rock",
+      "usage": "Combined connected rock. Select current cardinal occupancy mask every render.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "78ff38cf304acd8fa83dfcce3e69d29451306743d83612d1745ba8dfd8f9215e",
+      "connection_mask": 3,
+      "visual_front_height_px": 12
+    },
+    {
+      "file": "exposed/n_mask_04.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "layer": "exposed_face",
+      "usage": "Exposed n face only when neighboring rock absent. Draw before roof.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "b49d98152d0da492f208ea303fb70c56a5935fb322ce9a81a2ef7b8439c8688e",
+      "connection_mask": 4,
+      "direction": "n"
+    },
+    {
+      "file": "exposed/w_mask_04.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "layer": "exposed_face",
+      "usage": "Exposed w face only when neighboring rock absent. Draw before roof.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "ce0ef84ccbccf871069c14a7ad2be8da17932d197c3962ff96e4ff086da58e84",
+      "connection_mask": 4,
+      "direction": "w"
+    },
+    {
+      "file": "exposed/e_mask_04.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "layer": "exposed_face",
+      "usage": "Exposed e face only when neighboring rock absent. Draw before roof.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "75bbf2c919f8efc3f793c0328e1a95be6f480171d6945eb369fbb6b8cc3d6319",
+      "connection_mask": 4,
+      "direction": "e"
+    },
+    {
+      "file": "roof/mask_04.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "layer": "roof",
+      "usage": "Separate roof; use parts OR combined, never both.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "e407ad3185ba9c20050d2bf2831646ea064853715fc932edbc4b93f856761040",
+      "connection_mask": 4
+    },
+    {
+      "file": "normal/mask_04.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "layer": "rock",
+      "usage": "Combined connected rock. Select current cardinal occupancy mask every render.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "66717b3df8a0f03fb9bafc22819881ebfdaf04023dbe49a3c1dc980faba2d4db",
+      "connection_mask": 4,
+      "visual_front_height_px": 12
+    },
+    {
+      "file": "exposed/w_mask_05.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "layer": "exposed_face",
+      "usage": "Exposed w face only when neighboring rock absent. Draw before roof.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "bc0509e5e06b18b5eaaef6daa7935bd279c7a6973223e14079b72ebcfd2b3238",
+      "connection_mask": 5,
+      "direction": "w"
+    },
+    {
+      "file": "exposed/e_mask_05.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "layer": "exposed_face",
+      "usage": "Exposed e face only when neighboring rock absent. Draw before roof.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "c8473493db9d190dcdde4a5c71bf5698d56e513221a8fe20c136b3587a753c14",
+      "connection_mask": 5,
+      "direction": "e"
+    },
+    {
+      "file": "roof/mask_05.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "layer": "roof",
+      "usage": "Separate roof; use parts OR combined, never both.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "db81117287c464f14b38217d2fff6516101ffbc4690aa2a146c76086c6f2dc45",
+      "connection_mask": 5
+    },
+    {
+      "file": "normal/mask_05.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "layer": "rock",
+      "usage": "Combined connected rock. Select current cardinal occupancy mask every render.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "b88c232d0c514be85ddff8afb8749b8d10d71cd80f7a1f97ce90531ab4ba9e7b",
+      "connection_mask": 5,
+      "visual_front_height_px": 12
+    },
+    {
+      "file": "exposed/n_mask_06.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "layer": "exposed_face",
+      "usage": "Exposed n face only when neighboring rock absent. Draw before roof.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "f2644a12b96515836b835a06d3ae20124803b05c330d7cae613b40ac7ff9c1f2",
+      "connection_mask": 6,
+      "direction": "n"
+    },
+    {
+      "file": "exposed/w_mask_06.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "layer": "exposed_face",
+      "usage": "Exposed w face only when neighboring rock absent. Draw before roof.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "ce0ef84ccbccf871069c14a7ad2be8da17932d197c3962ff96e4ff086da58e84",
+      "connection_mask": 6,
+      "direction": "w"
+    },
+    {
+      "file": "roof/mask_06.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "layer": "roof",
+      "usage": "Separate roof; use parts OR combined, never both.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "631e7d6e4e1da99680af150e690fd26b7da024fccfa82e0d6e2558ee35ac9bd3",
+      "connection_mask": 6
+    },
+    {
+      "file": "normal/mask_06.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "layer": "rock",
+      "usage": "Combined connected rock. Select current cardinal occupancy mask every render.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "c8fc0731501e7aab5fcd28ca47c2b7fba2278b21519f8f3f30fcb91618c3f79d",
+      "connection_mask": 6,
+      "visual_front_height_px": 12
+    },
+    {
+      "file": "exposed/w_mask_07.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "layer": "exposed_face",
+      "usage": "Exposed w face only when neighboring rock absent. Draw before roof.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "bc0509e5e06b18b5eaaef6daa7935bd279c7a6973223e14079b72ebcfd2b3238",
+      "connection_mask": 7,
+      "direction": "w"
+    },
+    {
+      "file": "roof/mask_07.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "layer": "roof",
+      "usage": "Separate roof; use parts OR combined, never both.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "780d5e1195f23083ae2d2b205c81716ebf3b3ce08a69c7f5b61494eb4aa1003d",
+      "connection_mask": 7
+    },
+    {
+      "file": "normal/mask_07.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "layer": "rock",
+      "usage": "Combined connected rock. Select current cardinal occupancy mask every render.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "c52ae3b78ee4bf5f4b3756ad8e7983bbf232c7c24b5f5c31f2056e6e90ca5f4a",
+      "connection_mask": 7,
+      "visual_front_height_px": 12
+    },
+    {
+      "file": "exposed/n_mask_08.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "layer": "exposed_face",
+      "usage": "Exposed n face only when neighboring rock absent. Draw before roof.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "f50a88bff98cbdaa42ac9f9b9e9ab2e8cf16ef6da68ec5bbeb22549300a174d9",
+      "connection_mask": 8,
+      "direction": "n"
+    },
+    {
+      "file": "exposed/e_mask_08.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "layer": "exposed_face",
+      "usage": "Exposed e face only when neighboring rock absent. Draw before roof.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "b2759e1e6a45d4dd7cddd42ca222a0fe3675bc813bd1ed7fd8cad078d5eeb719",
+      "connection_mask": 8,
+      "direction": "e"
+    },
+    {
+      "file": "exposed/s_mask_08.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "layer": "exposed_face",
+      "usage": "Exposed s face only when neighboring rock absent. Draw before roof.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "a5a92f9cee5f036dd4cf548c5683a118a5c625e346be2d79b3083879ea4acd9b",
+      "connection_mask": 8,
+      "direction": "s"
+    },
+    {
+      "file": "roof/mask_08.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "layer": "roof",
+      "usage": "Separate roof; use parts OR combined, never both.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "91c5c5a005e780bedf065e6cf78f4491a2c9da9c7194d0039aeed6029c02e2c6",
+      "connection_mask": 8
+    },
+    {
+      "file": "normal/mask_08.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "layer": "rock",
+      "usage": "Combined connected rock. Select current cardinal occupancy mask every render.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "83273bf326fd348c9e069482ef6844045672b5bb2d527ac9c77f23c1408a6851",
+      "connection_mask": 8,
+      "visual_front_height_px": 12
+    },
+    {
+      "file": "exposed/e_mask_09.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "layer": "exposed_face",
+      "usage": "Exposed e face only when neighboring rock absent. Draw before roof.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "2bea41389182ea219fd04870e93fcfea1831041c71dfb2b88137e8505f4cb583",
+      "connection_mask": 9,
+      "direction": "e"
+    },
+    {
+      "file": "exposed/s_mask_09.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "layer": "exposed_face",
+      "usage": "Exposed s face only when neighboring rock absent. Draw before roof.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "a5a92f9cee5f036dd4cf548c5683a118a5c625e346be2d79b3083879ea4acd9b",
+      "connection_mask": 9,
+      "direction": "s"
+    },
+    {
+      "file": "roof/mask_09.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "layer": "roof",
+      "usage": "Separate roof; use parts OR combined, never both.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "43d2892acf1e3ba97e6ec2b5d4f94eb187b989ce4ddd64d8e4dc182d6fbbc99d",
+      "connection_mask": 9
+    },
+    {
+      "file": "normal/mask_09.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "layer": "rock",
+      "usage": "Combined connected rock. Select current cardinal occupancy mask every render.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "ae89bd887afde0653f54265edbad199b50a8328648039c72f2d337cadc93b2eb",
+      "connection_mask": 9,
+      "visual_front_height_px": 12
+    },
+    {
+      "file": "exposed/n_mask_10.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "layer": "exposed_face",
+      "usage": "Exposed n face only when neighboring rock absent. Draw before roof.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "6dd9a3df67691bbe0e055a230b7bc352883d6d3549a9de6f7fe89357c394ce79",
+      "connection_mask": 10,
+      "direction": "n"
+    },
+    {
+      "file": "exposed/s_mask_10.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "layer": "exposed_face",
+      "usage": "Exposed s face only when neighboring rock absent. Draw before roof.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "5b5830674705b4ae81b99c9b2a44ecde3e2583ba590f9647b818d5d19e00acfe",
+      "connection_mask": 10,
+      "direction": "s"
+    },
+    {
+      "file": "roof/mask_10.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "layer": "roof",
+      "usage": "Separate roof; use parts OR combined, never both.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "8bbcb84d147cd9989c103493ec10aa971e1603172036f44f86f5dc867fb5c64b",
+      "connection_mask": 10
+    },
+    {
+      "file": "normal/mask_10.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "layer": "rock",
+      "usage": "Combined connected rock. Select current cardinal occupancy mask every render.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "27612d1233ee8d2a4d697d5b79ee9fdd0f86f23062eaeaa7a59c518cfed3216a",
+      "connection_mask": 10,
+      "visual_front_height_px": 12
+    },
+    {
+      "file": "exposed/s_mask_11.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "layer": "exposed_face",
+      "usage": "Exposed s face only when neighboring rock absent. Draw before roof.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "5b5830674705b4ae81b99c9b2a44ecde3e2583ba590f9647b818d5d19e00acfe",
+      "connection_mask": 11,
+      "direction": "s"
+    },
+    {
+      "file": "roof/mask_11.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "layer": "roof",
+      "usage": "Separate roof; use parts OR combined, never both.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "7f73b2d495c6dcd2355fe67550baf67e1329d895ed9638c071f81fc840989ee2",
+      "connection_mask": 11
+    },
+    {
+      "file": "normal/mask_11.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "layer": "rock",
+      "usage": "Combined connected rock. Select current cardinal occupancy mask every render.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "38470e8df193dbf31433413f5eef2ec5d28df3a2b21272223d40283af49d1be6",
+      "connection_mask": 11,
+      "visual_front_height_px": 12
+    },
+    {
+      "file": "exposed/n_mask_12.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "layer": "exposed_face",
+      "usage": "Exposed n face only when neighboring rock absent. Draw before roof.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "f50a88bff98cbdaa42ac9f9b9e9ab2e8cf16ef6da68ec5bbeb22549300a174d9",
+      "connection_mask": 12,
+      "direction": "n"
+    },
+    {
+      "file": "exposed/e_mask_12.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "layer": "exposed_face",
+      "usage": "Exposed e face only when neighboring rock absent. Draw before roof.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "75bbf2c919f8efc3f793c0328e1a95be6f480171d6945eb369fbb6b8cc3d6319",
+      "connection_mask": 12,
+      "direction": "e"
+    },
+    {
+      "file": "roof/mask_12.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "layer": "roof",
+      "usage": "Separate roof; use parts OR combined, never both.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "61e073c9cc0d563e47be893dbfdee1bde7debcbfb6c9e7b9f4c6bcc3a829b096",
+      "connection_mask": 12
+    },
+    {
+      "file": "normal/mask_12.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "layer": "rock",
+      "usage": "Combined connected rock. Select current cardinal occupancy mask every render.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "dc317197f70771fa6bc963c1fc8c9677eafb23675c709de21af9205ea52abd47",
+      "connection_mask": 12,
+      "visual_front_height_px": 12
+    },
+    {
+      "file": "exposed/e_mask_13.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "layer": "exposed_face",
+      "usage": "Exposed e face only when neighboring rock absent. Draw before roof.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "c8473493db9d190dcdde4a5c71bf5698d56e513221a8fe20c136b3587a753c14",
+      "connection_mask": 13,
+      "direction": "e"
+    },
+    {
+      "file": "roof/mask_13.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "layer": "roof",
+      "usage": "Separate roof; use parts OR combined, never both.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "9d19125ad016281c1391b32ac773929000622476a814a4537de79585aee9ac3a",
+      "connection_mask": 13
+    },
+    {
+      "file": "normal/mask_13.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "layer": "rock",
+      "usage": "Combined connected rock. Select current cardinal occupancy mask every render.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "fe451b2333b730c4292eb26a502a699d5ede192cacf3d696eeff210f8b968afe",
+      "connection_mask": 13,
+      "visual_front_height_px": 12
+    },
+    {
+      "file": "exposed/n_mask_14.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "layer": "exposed_face",
+      "usage": "Exposed n face only when neighboring rock absent. Draw before roof.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "6dd9a3df67691bbe0e055a230b7bc352883d6d3549a9de6f7fe89357c394ce79",
+      "connection_mask": 14,
+      "direction": "n"
+    },
+    {
+      "file": "roof/mask_14.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "layer": "roof",
+      "usage": "Separate roof; use parts OR combined, never both.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "6d8d90ff3e7c588ab92db8154ad7fddf5ad6ae0416c5a93fd1b2e5006dc1e9c2",
+      "connection_mask": 14
+    },
+    {
+      "file": "normal/mask_14.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "layer": "rock",
+      "usage": "Combined connected rock. Select current cardinal occupancy mask every render.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "d392b43bacd27909e736605a16d466be83d847636afbc5187905d75196129fd4",
+      "connection_mask": 14,
+      "visual_front_height_px": 12
+    },
+    {
+      "file": "roof/mask_15.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "layer": "roof",
+      "usage": "Separate roof; use parts OR combined, never both.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "a6c4982829522a29522e7783e5238180d1b2e268f8aa6d7c63c049075e8ad4a1",
+      "connection_mask": 15
+    },
+    {
+      "file": "normal/mask_15.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "layer": "rock",
+      "usage": "Combined connected rock. Select current cardinal occupancy mask every render.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "a6c4982829522a29522e7783e5238180d1b2e268f8aa6d7c63c049075e8ad4a1",
+      "connection_mask": 15,
+      "visual_front_height_px": 12
+    },
+    {
+      "file": "inner/concave_nw.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "layer": "roof_overlay",
+      "usage": "Small concave exposed seam: BOTH cardinals present and diagonal absent.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "a09b934b649be686a1dd900f1868feec6036ddce21840fc778f001683b499432",
+      "requires_diagonal_query": true,
+      "corner": "nw"
+    },
+    {
+      "file": "inner/concave_ne.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "layer": "roof_overlay",
+      "usage": "Small concave exposed seam: BOTH cardinals present and diagonal absent.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "c4f25981a9cec81b52c54382e3003898bb8544ca6f3e48a545b49ccdee8c37b7",
+      "requires_diagonal_query": true,
+      "corner": "ne"
+    },
+    {
+      "file": "inner/concave_sw.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "layer": "roof_overlay",
+      "usage": "Small concave exposed seam: BOTH cardinals present and diagonal absent.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "aa014a91a25320046810b749b1f32207e20d69ad2312ce8c729c47edba757afe",
+      "requires_diagonal_query": true,
+      "corner": "sw"
+    },
+    {
+      "file": "inner/concave_se.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "layer": "roof_overlay",
+      "usage": "Small concave exposed seam: BOTH cardinals present and diagonal absent.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "a2ff4593fabc2de5906b5c77e78eb1d230ba93f1743eb34ff83f7f3649ab384e",
+      "requires_diagonal_query": true,
+      "corner": "se"
+    },
+    {
+      "file": "transition/edge_n.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "layer": "ground",
+      "usage": "Single composite grass→soil→gravel→bedrock ground overlay; biome side named for edges, grass side for corners.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "aab8d3ca825c3cc72ed7dcecc12034a70ffc2b63b452dd37358de6876cdad43e",
+      "boundary_kind": "edge_n"
+    },
+    {
+      "file": "transition/edge_e.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "layer": "ground",
+      "usage": "Single composite grass→soil→gravel→bedrock ground overlay; biome side named for edges, grass side for corners.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "a8828912d4701e141f5ee44699f15747b51bb29430967e22012a423da57cfe6f",
+      "boundary_kind": "edge_e"
+    },
+    {
+      "file": "transition/edge_s.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "layer": "ground",
+      "usage": "Single composite grass→soil→gravel→bedrock ground overlay; biome side named for edges, grass side for corners.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "1f992f30d558079fc9d673680b943bf2a351c8d69abbc025353b67bac7d0d3b1",
+      "boundary_kind": "edge_s"
+    },
+    {
+      "file": "transition/edge_w.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "layer": "ground",
+      "usage": "Single composite grass→soil→gravel→bedrock ground overlay; biome side named for edges, grass side for corners.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "378b2dd39ef1287f527c5e02a951dabf69233a08e485af7b0b71bf29cab37ed5",
+      "boundary_kind": "edge_w"
+    },
+    {
+      "file": "transition/outer_nw.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "layer": "ground",
+      "usage": "Single composite grass→soil→gravel→bedrock ground overlay; biome side named for edges, grass side for corners.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "63b5061e32f2cc3dfa3cfe3c597b19830b1688797eb62c4f1d9a7c15da3e0972",
+      "boundary_kind": "outer_nw"
+    },
+    {
+      "file": "transition/outer_ne.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "layer": "ground",
+      "usage": "Single composite grass→soil→gravel→bedrock ground overlay; biome side named for edges, grass side for corners.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "29f3b6b95210a8a669bf9f302547179c82dd31279df5bd3bd1bbf7735fd02d8c",
+      "boundary_kind": "outer_ne"
+    },
+    {
+      "file": "transition/outer_sw.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "layer": "ground",
+      "usage": "Single composite grass→soil→gravel→bedrock ground overlay; biome side named for edges, grass side for corners.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "f32a42e3b623110a8026ac011afeb71e1a6da46f0eb640a257c5c07e78bef4d7",
+      "boundary_kind": "outer_sw"
+    },
+    {
+      "file": "transition/outer_se.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "layer": "ground",
+      "usage": "Single composite grass→soil→gravel→bedrock ground overlay; biome side named for edges, grass side for corners.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "64c5c51220efd07feda812e85e36f9af2beb206d75ec578dd228247aa18bcb2b",
+      "boundary_kind": "outer_se"
+    },
+    {
+      "file": "transition/inner_nw.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "layer": "ground",
+      "usage": "Single composite grass→soil→gravel→bedrock ground overlay; biome side named for edges, grass side for corners.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "6f27873582d6059f2405d7c24ea3cf140e868820c4aea7f634fc86fd7d52096b",
+      "boundary_kind": "inner_nw"
+    },
+    {
+      "file": "transition/inner_ne.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "layer": "ground",
+      "usage": "Single composite grass→soil→gravel→bedrock ground overlay; biome side named for edges, grass side for corners.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "e58132362d50253fc8cb961305d6d4043b34e2f768b90a938bd70aea9ea579a3",
+      "boundary_kind": "inner_ne"
+    },
+    {
+      "file": "transition/inner_sw.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "layer": "ground",
+      "usage": "Single composite grass→soil→gravel→bedrock ground overlay; biome side named for edges, grass side for corners.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "956e49768f13c4db58db5a428b66209f09d3756ea0e8e33ac384c297e26f3015",
+      "boundary_kind": "inner_sw"
+    },
+    {
+      "file": "transition/inner_se.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "layer": "ground",
+      "usage": "Single composite grass→soil→gravel→bedrock ground overlay; biome side named for edges, grass side for corners.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "27af9d72f2ced255d64108f7e1e02da4e3595e06051b67bb6a049200e2e54f6f",
+      "boundary_kind": "inner_se"
+    },
+    {
+      "file": "transition/full.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "layer": "ground",
+      "usage": "Single composite grass→soil→gravel→bedrock ground overlay; biome side named for edges, grass side for corners.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "fab16e30a7484a5f657d98d42f21c96b792c112703c5c9316bad0b8a0dc3d29b",
+      "boundary_kind": "full"
+    }
+  ],
+  "reuse": [
+    {
+      "file": "../biome_environment_v1/rock/damage/heavy.png",
+      "role": "damage",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "sha256": "91ea8ee1e27a012961d47919a37a89f9a4a061070b31029be6478a8cf0380027",
+      "duration_ms": null,
+      "loop": false
+    },
+    {
+      "file": "../biome_environment_v1/rock/damage/light.png",
+      "role": "damage",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "sha256": "f89eb5ff811c6fc510b57387d3f6fea743bcd0fe6850aac878d7bd6a3c969506",
+      "duration_ms": null,
+      "loop": false
+    },
+    {
+      "file": "../biome_environment_v1/rock/ground/exposed.png",
+      "role": "mined_ground",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "sha256": "fcf9ce8d8f96eff4a9a2f81ab84ffa1065728e7dfcd31eb22d68e6f650ac6bcb",
+      "duration_ms": null,
+      "loop": false
+    },
+    {
+      "file": "../biome_environment_v1/rock/ground/gravel.png",
+      "role": "mined_ground",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "sha256": "21d6009ead2ae1a0aa0c7ca3b8866df1174f5f336769243e012c40fe3fdaeddd",
+      "duration_ms": null,
+      "loop": false
+    },
+    {
+      "file": "../biome_environment_v1/rock/ground/rubble.png",
+      "role": "mined_ground",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "sha256": "f9013df49fa164c4ca2e6ba2252e1988006c0ffceb6de61383d5fc9e6e25f2b8",
+      "duration_ms": null,
+      "loop": false
+    },
+    {
+      "file": "../biome_environment_v2/rock_mined/exposed_bedrock.png",
+      "role": "mined_ground",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "sha256": "3a1dc7fa7dcdc0b0581d5af51cf2154644cf03e0eb055cc8e6da66de2d99d8bf",
+      "duration_ms": null,
+      "loop": false
+    },
+    {
+      "file": "../biome_environment_v2/rock_mined/shallow_scoop.png",
+      "role": "mined_ground",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "sha256": "fe91b8236ca076844ac0435ea8c087a9642ec0478f4b849ecd0873a19067d809",
+      "duration_ms": null,
+      "loop": false
+    },
+    {
+      "file": "../biome_environment_v2/rock_node/wall_near_depleted_overlay.png",
+      "role": "damage",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "sha256": "b5944ca2a84bba1b6d4792a52f01366c044d82891510900c9bcd3ae06ded7e45",
+      "duration_ms": null,
+      "loop": false
+    },
+    {
+      "file": "../biome_environment_v2/rock_node/large/intact.png",
+      "role": "isolated_node",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        46
+      ],
+      "sha256": "cfcf92727fd17ffdb083c44b6b4b050a2711b664a3b2dae3ba6b69f7cc49db70",
+      "duration_ms": null,
+      "loop": false
+    },
+    {
+      "file": "../biome_environment_v2/rock_node/medium/intact.png",
+      "role": "isolated_node",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        46
+      ],
+      "sha256": "dfc417e0ba961f60b211e008f9e29a7968db8d039ee80111516abb0ab642c363",
+      "duration_ms": null,
+      "loop": false
+    },
+    {
+      "file": "../biome_environment_v2/rock_node/small/intact.png",
+      "role": "isolated_node",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        46
+      ],
+      "sha256": "4f07f6ea8ba9d070530c5dc85ae7f7495c7d94b4f9e0dac9e69cbc37284d383c",
+      "duration_ms": null,
+      "loop": false
+    },
+    {
+      "file": "../biome_environment_v2/rock_node/large/damaged_1.png",
+      "role": "isolated_node",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        46
+      ],
+      "sha256": "7b873410b7a4af0a47fb07c0e2d047b0cd27001e48bcf426428189f7be9d3e78",
+      "duration_ms": null,
+      "loop": false
+    },
+    {
+      "file": "../biome_environment_v2/rock_node/large/damaged_2.png",
+      "role": "isolated_node",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        46
+      ],
+      "sha256": "c72bcf976f0beca16182faf4febd7376f2f12d3fe0dd128c0edc22b42ae8ea2a",
+      "duration_ms": null,
+      "loop": false
+    },
+    {
+      "file": "../biome_environment_v2/rock_node/medium/damaged_1.png",
+      "role": "isolated_node",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        46
+      ],
+      "sha256": "f544f4f3323321bee9865aab5757ea35cf5fc4429a1a51b268daff6d566c61f8",
+      "duration_ms": null,
+      "loop": false
+    },
+    {
+      "file": "../biome_environment_v2/rock_node/medium/damaged_2.png",
+      "role": "isolated_node",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        46
+      ],
+      "sha256": "758280dd5872157c74a7ec4b9eb3693e5948dd3e9b9fdd754b7f0bbb9c2e3093",
+      "duration_ms": null,
+      "loop": false
+    },
+    {
+      "file": "../biome_environment_v2/rock_node/small/damaged_1.png",
+      "role": "isolated_node",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        46
+      ],
+      "sha256": "844bdba4cbb8c1ea7c5df666f1d1f76e1ef3875884084ff20ba8e9e7fecafa71",
+      "duration_ms": null,
+      "loop": false
+    },
+    {
+      "file": "../biome_environment_v2/rock_node/small/damaged_2.png",
+      "role": "isolated_node",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        46
+      ],
+      "sha256": "5cfea3db2507d4f2b396e02334ae877a136a07517c69000c97304cef366461d9",
+      "duration_ms": null,
+      "loop": false
+    },
+    {
+      "file": "../biome_environment_v2/rock_node/large/near_depleted.png",
+      "role": "isolated_node",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        46
+      ],
+      "sha256": "186ee429d5c45753f6860ac1b5d4a686882e7d33e241a4db942243ce48f85add",
+      "duration_ms": null,
+      "loop": false
+    },
+    {
+      "file": "../biome_environment_v2/rock_node/medium/near_depleted.png",
+      "role": "isolated_node",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        46
+      ],
+      "sha256": "2ce6e7ba7b34192c69fe459aa83b9155069cd76773fa1b9c407bbfbe9832f4cb",
+      "duration_ms": null,
+      "loop": false
+    },
+    {
+      "file": "../biome_environment_v2/rock_node/small/near_depleted.png",
+      "role": "isolated_node",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        46
+      ],
+      "sha256": "77d9b037e923c9b8c4a09086448c11b5bec768032600b3450de53443ddf05129",
+      "duration_ms": null,
+      "loop": false
+    }
+  ],
+  "placement": "cell_center - anchor; same as v1 connected walls",
+  "ground_shadow": "No cast ground shadow; face shading is intrinsic.",
+  "runtime_verified": false,
+  "connection_rule": "cardinal occupancy; optional concave diagonal overlay; re-evaluate 3x3 around mined cell",
+  "boundary_rule": "Biome field classification separate from rock occupancy. Select ONE full/edge/inner/outer transition per cell. Keep original ground underneath."
+}

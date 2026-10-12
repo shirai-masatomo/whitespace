@@ -1,0 +1,1418 @@
+{
+  "schema_version": 1,
+  "stage": "rock",
+  "branch": "codex/sporehollow-art-assets",
+  "reference_commit": "79e0c174d8dcc4cdc0b4f0b0899909eba84c1602",
+  "tile_size_px": [
+    48,
+    42
+  ],
+  "mask_bits": {
+    "N": 1,
+    "E": 2,
+    "S": 4,
+    "W": 8
+  },
+  "assets": [
+    {
+      "file": "rock/normal/mask_00.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "usage": "48x42 cell rock; N1 E2 S4 W8",
+      "layer": "object",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "0b8e0d128bc2713e932d8e5fbf56b6b42a53e5733907b40064fb1b3e5df06860",
+      "ground_shadow": false,
+      "connection_mask": 0,
+      "placement": "cell_center - anchor",
+      "visual_front_height_px": 12
+    },
+    {
+      "file": "rock/parts/top_00.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "usage": "Optional independent roof; do not overlay onto combined normal",
+      "layer": "roof",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "26e8381a031bfa229e05752c2507b2cc82cab5079739299a498592352bbdc7d2",
+      "ground_shadow": false,
+      "connection_mask": 0
+    },
+    {
+      "file": "rock/parts/front_edges_00.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "usage": "Optional normal12px front; select W/E bits; use instead of combined",
+      "layer": "front",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "b604857565b0142990db42fb050eea527bee152a2a79a08e7733a8673c9a5454",
+      "ground_shadow": false
+    },
+    {
+      "file": "rock/normal/mask_01.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "usage": "48x42 cell rock; N1 E2 S4 W8",
+      "layer": "object",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "75204d5c0b816915acf2d224bf3e48fda98981433cd9a80aa1975779fc248f05",
+      "ground_shadow": false,
+      "connection_mask": 1,
+      "placement": "cell_center - anchor",
+      "visual_front_height_px": 12
+    },
+    {
+      "file": "rock/parts/top_01.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "usage": "Optional independent roof; do not overlay onto combined normal",
+      "layer": "roof",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "9b386f09cd6187b5987eec10409c5c2ec5bcffd2b1194509df5fe8f03e0c451f",
+      "ground_shadow": false,
+      "connection_mask": 1
+    },
+    {
+      "file": "rock/normal/mask_02.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "usage": "48x42 cell rock; N1 E2 S4 W8",
+      "layer": "object",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "e246e6b36b48129b9ad717c2c5d86e2a985b9a00a1be3302a971bffacc78dcda",
+      "ground_shadow": false,
+      "connection_mask": 2,
+      "placement": "cell_center - anchor",
+      "visual_front_height_px": 12
+    },
+    {
+      "file": "rock/parts/top_02.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "usage": "Optional independent roof; do not overlay onto combined normal",
+      "layer": "roof",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "7f31324109db61d1dac3ab5c1dd425be778e460e953e95e1fc96598a9eead39e",
+      "ground_shadow": false,
+      "connection_mask": 2
+    },
+    {
+      "file": "rock/parts/front_edges_01.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "usage": "Optional normal12px front; select W/E bits; use instead of combined",
+      "layer": "front",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "0497ca80808b5111f9b818ed7551851ee870d06b823d9425aa415f92c5163195",
+      "ground_shadow": false
+    },
+    {
+      "file": "rock/normal/mask_03.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "usage": "48x42 cell rock; N1 E2 S4 W8",
+      "layer": "object",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "db201e7fc5e1adcd2783ed84b49b187373ccb18cd2222c7a2d99c64046de2cf2",
+      "ground_shadow": false,
+      "connection_mask": 3,
+      "placement": "cell_center - anchor",
+      "visual_front_height_px": 12
+    },
+    {
+      "file": "rock/parts/top_03.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "usage": "Optional independent roof; do not overlay onto combined normal",
+      "layer": "roof",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "c5f406a6112091d8077ae32d53de1c5de07019548e5d840e839c72f94cda7938",
+      "ground_shadow": false,
+      "connection_mask": 3
+    },
+    {
+      "file": "rock/normal/mask_04.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "usage": "48x42 cell rock; N1 E2 S4 W8",
+      "layer": "object",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "9fd3fb96f7f85e8adc3860346b935b0883d04c2f88d95726cc1e8b73bb5a159a",
+      "ground_shadow": false,
+      "connection_mask": 4,
+      "placement": "cell_center - anchor",
+      "visual_front_height_px": 12
+    },
+    {
+      "file": "rock/parts/top_04.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "usage": "Optional independent roof; do not overlay onto combined normal",
+      "layer": "roof",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "9fd3fb96f7f85e8adc3860346b935b0883d04c2f88d95726cc1e8b73bb5a159a",
+      "ground_shadow": false,
+      "connection_mask": 4
+    },
+    {
+      "file": "rock/normal/mask_05.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "usage": "48x42 cell rock; N1 E2 S4 W8",
+      "layer": "object",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "168f4dc97d6d1b727aec665f0fb1fb8f85bf6570baa55a1b79a4e52136ea1129",
+      "ground_shadow": false,
+      "connection_mask": 5,
+      "placement": "cell_center - anchor",
+      "visual_front_height_px": 12
+    },
+    {
+      "file": "rock/parts/top_05.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "usage": "Optional independent roof; do not overlay onto combined normal",
+      "layer": "roof",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "168f4dc97d6d1b727aec665f0fb1fb8f85bf6570baa55a1b79a4e52136ea1129",
+      "ground_shadow": false,
+      "connection_mask": 5
+    },
+    {
+      "file": "rock/normal/mask_06.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "usage": "48x42 cell rock; N1 E2 S4 W8",
+      "layer": "object",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "4858a16382556714ea3f8029985890048373e329fbc57d0800118ece0c63ed99",
+      "ground_shadow": false,
+      "connection_mask": 6,
+      "placement": "cell_center - anchor",
+      "visual_front_height_px": 12
+    },
+    {
+      "file": "rock/parts/top_06.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "usage": "Optional independent roof; do not overlay onto combined normal",
+      "layer": "roof",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "4858a16382556714ea3f8029985890048373e329fbc57d0800118ece0c63ed99",
+      "ground_shadow": false,
+      "connection_mask": 6
+    },
+    {
+      "file": "rock/normal/mask_07.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "usage": "48x42 cell rock; N1 E2 S4 W8",
+      "layer": "object",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "6327c6e87cea782cc6c962f28a82a93c31089f9d5e72b3fc198ab54342cdcaf8",
+      "ground_shadow": false,
+      "connection_mask": 7,
+      "placement": "cell_center - anchor",
+      "visual_front_height_px": 12
+    },
+    {
+      "file": "rock/parts/top_07.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "usage": "Optional independent roof; do not overlay onto combined normal",
+      "layer": "roof",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "6327c6e87cea782cc6c962f28a82a93c31089f9d5e72b3fc198ab54342cdcaf8",
+      "ground_shadow": false,
+      "connection_mask": 7
+    },
+    {
+      "file": "rock/normal/mask_08.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "usage": "48x42 cell rock; N1 E2 S4 W8",
+      "layer": "object",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "2d9c9ab9b5f209e2f16a5782ade20826fdd8efef6cc3c8ec21673cd3387efa28",
+      "ground_shadow": false,
+      "connection_mask": 8,
+      "placement": "cell_center - anchor",
+      "visual_front_height_px": 12
+    },
+    {
+      "file": "rock/parts/top_08.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "usage": "Optional independent roof; do not overlay onto combined normal",
+      "layer": "roof",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "38cfa010454ad353a4767ffb5a85e1c667e5e967cffccbd2462eaff18be64579",
+      "ground_shadow": false,
+      "connection_mask": 8
+    },
+    {
+      "file": "rock/parts/front_edges_02.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "usage": "Optional normal12px front; select W/E bits; use instead of combined",
+      "layer": "front",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "5ad6401982821759b441860f6aa380ffb642d66714017326581782797fb92ae2",
+      "ground_shadow": false
+    },
+    {
+      "file": "rock/normal/mask_09.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "usage": "48x42 cell rock; N1 E2 S4 W8",
+      "layer": "object",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "0df1b13021d494fd3f9b7c7a0d15552572daeb59bf88cdf389d4a6c1bf40091f",
+      "ground_shadow": false,
+      "connection_mask": 9,
+      "placement": "cell_center - anchor",
+      "visual_front_height_px": 12
+    },
+    {
+      "file": "rock/parts/top_09.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "usage": "Optional independent roof; do not overlay onto combined normal",
+      "layer": "roof",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "7f8b9e684e5be395b59841417d5e1066a0d77c060c9e5b8e817270b1ea3b8409",
+      "ground_shadow": false,
+      "connection_mask": 9
+    },
+    {
+      "file": "rock/normal/mask_10.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "usage": "48x42 cell rock; N1 E2 S4 W8",
+      "layer": "object",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "bdd0f47e40f628ccc946c6e39953a567c1ff2c13fd7667461412fc4b73f41cf7",
+      "ground_shadow": false,
+      "connection_mask": 10,
+      "placement": "cell_center - anchor",
+      "visual_front_height_px": 12
+    },
+    {
+      "file": "rock/parts/top_10.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "usage": "Optional independent roof; do not overlay onto combined normal",
+      "layer": "roof",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "1407c5fb6793024f2506db6d2348e8e39842083e07c393f4ef378568043a4b08",
+      "ground_shadow": false,
+      "connection_mask": 10
+    },
+    {
+      "file": "rock/parts/front_edges_03.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "usage": "Optional normal12px front; select W/E bits; use instead of combined",
+      "layer": "front",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "572e9d13d21f6db797866b74e8103161decb4502df322bcdbea32a8a351d40ea",
+      "ground_shadow": false
+    },
+    {
+      "file": "rock/normal/mask_11.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "usage": "48x42 cell rock; N1 E2 S4 W8",
+      "layer": "object",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "68b79e7db3c4553dae7fe7abbb66e716c2c4065f13267431311269d52cf84703",
+      "ground_shadow": false,
+      "connection_mask": 11,
+      "placement": "cell_center - anchor",
+      "visual_front_height_px": 12
+    },
+    {
+      "file": "rock/parts/top_11.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "usage": "Optional independent roof; do not overlay onto combined normal",
+      "layer": "roof",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "1e71ee9bb0e8dcdb6bd9457b4d7cf6f2c0af269fd91722e2ceae849c44750bf9",
+      "ground_shadow": false,
+      "connection_mask": 11
+    },
+    {
+      "file": "rock/normal/mask_12.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "usage": "48x42 cell rock; N1 E2 S4 W8",
+      "layer": "object",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "cccbe70d46eb607163b3a568bcf201e44c735198f40d708220def449ee79098c",
+      "ground_shadow": false,
+      "connection_mask": 12,
+      "placement": "cell_center - anchor",
+      "visual_front_height_px": 12
+    },
+    {
+      "file": "rock/parts/top_12.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "usage": "Optional independent roof; do not overlay onto combined normal",
+      "layer": "roof",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "cccbe70d46eb607163b3a568bcf201e44c735198f40d708220def449ee79098c",
+      "ground_shadow": false,
+      "connection_mask": 12
+    },
+    {
+      "file": "rock/normal/mask_13.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "usage": "48x42 cell rock; N1 E2 S4 W8",
+      "layer": "object",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "8da949e5de74e802992cf60a6021ceaa169a9752b2ec90efedec20f8d9270069",
+      "ground_shadow": false,
+      "connection_mask": 13,
+      "placement": "cell_center - anchor",
+      "visual_front_height_px": 12
+    },
+    {
+      "file": "rock/parts/top_13.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "usage": "Optional independent roof; do not overlay onto combined normal",
+      "layer": "roof",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "8da949e5de74e802992cf60a6021ceaa169a9752b2ec90efedec20f8d9270069",
+      "ground_shadow": false,
+      "connection_mask": 13
+    },
+    {
+      "file": "rock/normal/mask_14.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "usage": "48x42 cell rock; N1 E2 S4 W8",
+      "layer": "object",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "a8565fc2094a8576b6fb01ca1399985d411d94a07f66da2b4ccd5f5d4305f9d2",
+      "ground_shadow": false,
+      "connection_mask": 14,
+      "placement": "cell_center - anchor",
+      "visual_front_height_px": 12
+    },
+    {
+      "file": "rock/parts/top_14.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "usage": "Optional independent roof; do not overlay onto combined normal",
+      "layer": "roof",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "a8565fc2094a8576b6fb01ca1399985d411d94a07f66da2b4ccd5f5d4305f9d2",
+      "ground_shadow": false,
+      "connection_mask": 14
+    },
+    {
+      "file": "rock/normal/mask_15.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "usage": "48x42 cell rock; N1 E2 S4 W8",
+      "layer": "object",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "0a0aa07fdffbc30c3c4a31fd26eb0c7708b0df5aedaf39be38989f179c6fb8a4",
+      "ground_shadow": false,
+      "connection_mask": 15,
+      "placement": "cell_center - anchor",
+      "visual_front_height_px": 12
+    },
+    {
+      "file": "rock/parts/top_15.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "usage": "Optional independent roof; do not overlay onto combined normal",
+      "layer": "roof",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "0a0aa07fdffbc30c3c4a31fd26eb0c7708b0df5aedaf39be38989f179c6fb8a4",
+      "ground_shadow": false,
+      "connection_mask": 15
+    },
+    {
+      "file": "rock/parts/tall_front_edges_00.png",
+      "size_px": [
+        48,
+        24
+      ],
+      "anchor_px": [
+        24,
+        24
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "usage": "Optional24px cliff front. Renderer must provide its top and depth; not used by current rock_view.",
+      "layer": "optional_front",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "9abba9e8d94e3b916f0472b4313140a0a5a1e8ac430190e3bb10aa8a7d4b7396",
+      "ground_shadow": false,
+      "runtime_connection": "unconnected_optional"
+    },
+    {
+      "file": "rock/parts/tall_front_edges_01.png",
+      "size_px": [
+        48,
+        24
+      ],
+      "anchor_px": [
+        24,
+        24
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "usage": "Optional24px cliff front. Renderer must provide its top and depth; not used by current rock_view.",
+      "layer": "optional_front",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "998e0fe04b2591d2891e5843beef871e9c6ec1c6e133a4ff9c34e7f3b83ef9e9",
+      "ground_shadow": false,
+      "runtime_connection": "unconnected_optional"
+    },
+    {
+      "file": "rock/parts/tall_front_edges_02.png",
+      "size_px": [
+        48,
+        24
+      ],
+      "anchor_px": [
+        24,
+        24
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "usage": "Optional24px cliff front. Renderer must provide its top and depth; not used by current rock_view.",
+      "layer": "optional_front",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "9a653bcdb4480c799bd734eaf0dee34a464269d1a112715fa71f5a5c41ccabe6",
+      "ground_shadow": false,
+      "runtime_connection": "unconnected_optional"
+    },
+    {
+      "file": "rock/parts/tall_front_edges_03.png",
+      "size_px": [
+        48,
+        24
+      ],
+      "anchor_px": [
+        24,
+        24
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "usage": "Optional24px cliff front. Renderer must provide its top and depth; not used by current rock_view.",
+      "layer": "optional_front",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "648b210f9df357f8fb96fea4a664f81dcf4a4356ecc07590125f648998cbdd1c",
+      "ground_shadow": false,
+      "runtime_connection": "unconnected_optional"
+    },
+    {
+      "file": "rock/parts/inner_nw.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "usage": "Optional concave notch: BOTH adjacent cardinal rocks present AND diagonal absent; one per eligible corner.",
+      "layer": "roof_overlay",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "b0c9b8bee022d071589cce248f746085390003dc90e166eea1a9a49ab3db9b3c",
+      "ground_shadow": false,
+      "requires_diagonal_query": true
+    },
+    {
+      "file": "rock/parts/inner_ne.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "usage": "Optional concave notch: BOTH adjacent cardinal rocks present AND diagonal absent; one per eligible corner.",
+      "layer": "roof_overlay",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "225cea4581388edf266c8615bf50b312920b2c134837dff8b45bdaca5fbd854c",
+      "ground_shadow": false,
+      "requires_diagonal_query": true
+    },
+    {
+      "file": "rock/parts/inner_sw.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "usage": "Optional concave notch: BOTH adjacent cardinal rocks present AND diagonal absent; one per eligible corner.",
+      "layer": "roof_overlay",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "90447164026be01f4c21a2075ebf7c1d4d99558323ce6b03a6daff07341fab51",
+      "ground_shadow": false,
+      "requires_diagonal_query": true
+    },
+    {
+      "file": "rock/parts/inner_se.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "usage": "Optional concave notch: BOTH adjacent cardinal rocks present AND diagonal absent; one per eligible corner.",
+      "layer": "roof_overlay",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "c54f0ea4043edf5c8b58c0d5192f9ae04b86791f62b6f702364b466ea4b7fe8a",
+      "ground_shadow": false,
+      "requires_diagonal_query": true
+    },
+    {
+      "file": "rock/damage/light.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "usage": "Clip alpha by current rock; state threshold comes from existing implementation",
+      "layer": "damage_overlay",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "f89eb5ff811c6fc510b57387d3f6fea743bcd0fe6850aac878d7bd6a3c969506",
+      "ground_shadow": false
+    },
+    {
+      "file": "rock/damage/heavy.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "usage": "Clip alpha by current rock; state threshold comes from existing implementation",
+      "layer": "damage_overlay",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "91ea8ee1e27a012961d47919a37a89f9a4a061070b31029be6478a8cf0380027",
+      "ground_shadow": false
+    },
+    {
+      "file": "rock/ground/rubble.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "usage": "rubble on existing continuous biome base",
+      "layer": "ground",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "f9013df49fa164c4ca2e6ba2252e1988006c0ffceb6de61383d5fc9e6e25f2b8",
+      "ground_shadow": false
+    },
+    {
+      "file": "rock/ground/gravel.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "usage": "gravel on existing continuous biome base",
+      "layer": "ground",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "21d6009ead2ae1a0aa0c7ca3b8866df1174f5f336769243e012c40fe3fdaeddd",
+      "ground_shadow": false
+    },
+    {
+      "file": "rock/ground/exposed.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "usage": "exposed on existing continuous biome base",
+      "layer": "ground",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "fcf9ce8d8f96eff4a9a2f81ab84ffa1065728e7dfcd31eb22d68e6f650ac6bcb",
+      "ground_shadow": false
+    },
+    {
+      "file": "rock/fx/chips_00.png",
+      "size_px": [
+        32,
+        32
+      ],
+      "anchor_px": [
+        16,
+        26
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "usage": "Local mining impact fragments; visual only",
+      "layer": "fx",
+      "frame_index": 0,
+      "duration_ms": 65,
+      "loop": false,
+      "sha256": "8669fc2fe9b3fcd4c7e9be8b0ef31293e4bc19428f7b5093461b37428535a35c",
+      "ground_shadow": false,
+      "animation": "mining_chips"
+    },
+    {
+      "file": "rock/fx/chips_01.png",
+      "size_px": [
+        32,
+        32
+      ],
+      "anchor_px": [
+        16,
+        26
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "usage": "Local mining impact fragments; visual only",
+      "layer": "fx",
+      "frame_index": 1,
+      "duration_ms": 75,
+      "loop": false,
+      "sha256": "e1aaf096965ae36818ea3a22cb6006d17a2c64e0e3f32b9dcd0613e44a961ea8",
+      "ground_shadow": false,
+      "animation": "mining_chips"
+    },
+    {
+      "file": "rock/fx/chips_02.png",
+      "size_px": [
+        32,
+        32
+      ],
+      "anchor_px": [
+        16,
+        26
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "usage": "Local mining impact fragments; visual only",
+      "layer": "fx",
+      "frame_index": 2,
+      "duration_ms": 85,
+      "loop": false,
+      "sha256": "864034dc89f0c20b7eb10397e55bd80cbcadcd44eb68ce57a1628758a126f752",
+      "ground_shadow": false,
+      "animation": "mining_chips"
+    },
+    {
+      "file": "rock/fx/chips_03.png",
+      "size_px": [
+        32,
+        32
+      ],
+      "anchor_px": [
+        16,
+        26
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "usage": "Local mining impact fragments; visual only",
+      "layer": "fx",
+      "frame_index": 3,
+      "duration_ms": 100,
+      "loop": false,
+      "sha256": "ec7e180334bbfbd852379a338498cd3b66fa136c6b656fcc4f8fd027e51eaadb",
+      "ground_shadow": false,
+      "animation": "mining_chips"
+    }
+  ],
+  "reuse": [
+    {
+      "role": "stone_drop",
+      "file": "../resource_icons_v1/hud24/stone.png",
+      "size_px": [
+        24,
+        24
+      ],
+      "anchor_px": [
+        12,
+        12
+      ],
+      "sha256": "70f3e655371499a3370612135e6edfb5992a2b3250a67460589f05ba12e24da7",
+      "frame_index": 0,
+      "timing_source": null,
+      "loop": false,
+      "usage": "Reuse unchanged; item center for stone, local ground contact for dust."
+    },
+    {
+      "role": "mining_dust",
+      "file": "../effects_v1/soil_dust/00.png",
+      "size_px": [
+        32,
+        32
+      ],
+      "anchor_px": [
+        16,
+        26
+      ],
+      "sha256": "3d4ad8a852b1e21b4b495d0fde07811b67bf68ea39c624984fa721604bcb9ba5",
+      "frame_index": 0,
+      "timing_source": "../effects_v1/manifest.json",
+      "loop": false,
+      "usage": "Reuse unchanged; item center for stone, local ground contact for dust."
+    },
+    {
+      "role": "mining_dust",
+      "file": "../effects_v1/soil_dust/01.png",
+      "size_px": [
+        32,
+        32
+      ],
+      "anchor_px": [
+        16,
+        26
+      ],
+      "sha256": "bdd1c36b1e5e2af040b94928542364af80c3e83273b944bef9e11db349c31b6d",
+      "frame_index": 1,
+      "timing_source": "../effects_v1/manifest.json",
+      "loop": false,
+      "usage": "Reuse unchanged; item center for stone, local ground contact for dust."
+    },
+    {
+      "role": "mining_dust",
+      "file": "../effects_v1/soil_dust/02.png",
+      "size_px": [
+        32,
+        32
+      ],
+      "anchor_px": [
+        16,
+        26
+      ],
+      "sha256": "e671c691ee5e3d4c789289ea1c73728e9b6c3c11a2cb7b544af681b2d3b092cb",
+      "frame_index": 2,
+      "timing_source": "../effects_v1/manifest.json",
+      "loop": false,
+      "usage": "Reuse unchanged; item center for stone, local ground contact for dust."
+    },
+    {
+      "role": "mining_dust",
+      "file": "../effects_v1/soil_dust/03.png",
+      "size_px": [
+        32,
+        32
+      ],
+      "anchor_px": [
+        16,
+        26
+      ],
+      "sha256": "76212b5e7cf87c5774383eb0c9fec8a89ac6de8ce7183ee1c77c1f0f280344ed",
+      "frame_index": 3,
+      "timing_source": "../effects_v1/manifest.json",
+      "loop": false,
+      "usage": "Reuse unchanged; item center for stone, local ground contact for dust."
+    },
+    {
+      "role": "collapse_powder",
+      "file": "../effects_v1/stone_powder/00.png",
+      "size_px": [
+        32,
+        32
+      ],
+      "anchor_px": [
+        16,
+        26
+      ],
+      "sha256": "67601bd12976fbee416f74b43723664e9a31cc70f63160348a9c2557cc95a344",
+      "frame_index": 0,
+      "timing_source": "../effects_v1/manifest.json",
+      "loop": false,
+      "usage": "Reuse unchanged; item center for stone, local ground contact for dust."
+    },
+    {
+      "role": "collapse_powder",
+      "file": "../effects_v1/stone_powder/01.png",
+      "size_px": [
+        32,
+        32
+      ],
+      "anchor_px": [
+        16,
+        26
+      ],
+      "sha256": "f28dbcc35c6df5c2f81d11d39265f711dab8740d4adf928321247803d1810a45",
+      "frame_index": 1,
+      "timing_source": "../effects_v1/manifest.json",
+      "loop": false,
+      "usage": "Reuse unchanged; item center for stone, local ground contact for dust."
+    },
+    {
+      "role": "collapse_powder",
+      "file": "../effects_v1/stone_powder/02.png",
+      "size_px": [
+        32,
+        32
+      ],
+      "anchor_px": [
+        16,
+        26
+      ],
+      "sha256": "88e8e7b32cbb737ce86264f47d73b934425f6296976508d78e371ef939d250b1",
+      "frame_index": 2,
+      "timing_source": "../effects_v1/manifest.json",
+      "loop": false,
+      "usage": "Reuse unchanged; item center for stone, local ground contact for dust."
+    },
+    {
+      "role": "collapse_powder",
+      "file": "../effects_v1/stone_powder/03.png",
+      "size_px": [
+        32,
+        32
+      ],
+      "anchor_px": [
+        16,
+        26
+      ],
+      "sha256": "b95edebe8f3bfb300649e552b630ed0eed607e85d433e993b3da4c19c0da7f90",
+      "frame_index": 3,
+      "timing_source": "../effects_v1/manifest.json",
+      "loop": false,
+      "usage": "Reuse unchanged; item center for stone, local ground contact for dust."
+    }
+  ],
+  "runtime_verified": false,
+  "sampling": "nearest",
+  "format": "RGBA"
+}

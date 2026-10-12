@@ -1,0 +1,28 @@
+{
+  "new_png_count": 58,
+  "reuse_entries": 69,
+  "prior_png_unchanged": 1589,
+  "node_visible_areas": {
+    "small": [
+      281,
+      247,
+      207,
+      128
+    ],
+    "medium": [
+      622,
+      570,
+      439,
+      272
+    ],
+    "large": [
+      1147,
+      1070,
+      886,
+      504
+    ]
+  },
+  "fixed_node_foot_y": 46,
+  "errors": [],
+  "runtime_verified": false
+}

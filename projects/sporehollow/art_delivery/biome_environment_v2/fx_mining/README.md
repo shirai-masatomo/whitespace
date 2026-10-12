@@ -1,0 +1,1 @@
+既存正式PNGを再利用します。references.jsonのfileはこのフォルダではなくbiome_environment_v2/起点です。PNGの重複コピーはありません。

@@ -1,0 +1,62 @@
+{
+  "path_base": "../manifest.json directory",
+  "assets": [
+    {
+      "file": "../ui_world_direction_v1/candidates/world/tree_c.png",
+      "role": "tree.small",
+      "size_px": [
+        64,
+        80
+      ],
+      "anchor_px": [
+        32,
+        72
+      ],
+      "sha256": "e364637d343ff305e21f6d579ce77ab038b0161453882b9689a4515b0bcf1345",
+      "duration_ms": null,
+      "loop": false,
+      "occupied_cells": [
+        1,
+        1
+      ]
+    },
+    {
+      "file": "../ui_world_direction_v1/candidates/world/tree_b.png",
+      "role": "tree.medium",
+      "size_px": [
+        64,
+        80
+      ],
+      "anchor_px": [
+        32,
+        72
+      ],
+      "sha256": "7016a7a49782f9316ec6595daab8e6f8a50f8c4e9a892dfb54b5d415383ff857",
+      "duration_ms": null,
+      "loop": false,
+      "occupied_cells": [
+        1,
+        1
+      ]
+    },
+    {
+      "file": "../ui_world_direction_v1/candidates/world/tree_a.png",
+      "role": "tree.large",
+      "size_px": [
+        64,
+        80
+      ],
+      "anchor_px": [
+        32,
+        72
+      ],
+      "sha256": "354fab7e80d81a38c32a4979259344185fd083a75bcb733b94c69daa8ef19452",
+      "duration_ms": null,
+      "loop": false,
+      "occupied_cells": [
+        1,
+        1
+      ]
+    }
+  ]
+}
