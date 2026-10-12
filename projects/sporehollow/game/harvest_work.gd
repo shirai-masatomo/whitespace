@@ -11,7 +11,7 @@ static func init(w):
 		var p=Vector2i(row.pos[0],row.pos[1])
 		if w.trees.get(p,"")==row.id:w.tree_work[p]={"id":row.id,"elapsed":row.get("elapsed",0.0),"forbidden":row.get("forbidden",false)}
 	for j in w.jobs:
-		if j.kind in KINDS and exists(w,j.kind,j.pos):
+		if j.kind in KINDS and not j.has("mountain_id") and exists(w,j.kind,j.pos):
 			var row=target(w,j.kind,j.pos);row.elapsed=maxf(row.get("elapsed",0.0),j.get("work_elapsed",j.get("elapsed",0.0)))
 
 static func save(w):
@@ -34,10 +34,11 @@ static func tree_reason(w,p: Vector2i,own: int=-1) -> String:
 static func progress(w,kind: String,p: Vector2i) -> float:
 	return clampf((w.rocks.get(p,{}) if kind=="mine" else w.tree_work.get(p,{})).get("elapsed",0.0)/SECONDS,0,1)
 static func emit(w,j,actor,event: String):
-	w.harvest_events.append({"id":w.next_harvest_event,"tick":w.tick,"kind":j.kind,"event":event,"pos":j.pos,"worker":actor.get("work_key","keeper"),"progress":progress(w,j.kind,j.pos)})
+	w.harvest_events.append({"id":w.next_harvest_event,"tick":w.tick,"kind":j.kind,"event":event,"pos":j.get("contact",j.pos),"worker":actor.get("work_key","keeper"),"progress":progress(w,j.kind,j.pos)})
 	w.next_harvest_event+=1
 	while w.harvest_events.size()>EVENT_LIMIT:w.harvest_events.pop_front()
 static func execute(w,j,actor):
+	if j.has("mountain_id"):w.Mountains.execute(w,j,actor);return
 	if not exists(w,j.kind,j.pos):w.Jobs.complete(w,j,false);return
 	if j.kind=="clear_tree" and j.get("world_target",w.trees[j.pos])!=w.trees[j.pos]:w.Jobs.complete(w,j,false);return
 	var why=w.Tasks.reason(w,j.kind,j.pos,-1,j.id)
@@ -73,6 +74,9 @@ static func cells(w,first: Vector2i,last: Vector2i,kind: String="") -> Array:
 	var result=[]
 	for p in (w.rocks.keys() if kind=="mine" else w.trees.keys() if kind=="clear_tree" else w.rocks.keys()+w.trees.keys()):
 		if p.x>=mini(first.x,last.x) and p.x<=maxi(first.x,last.x) and p.y>=mini(first.y,last.y) and p.y<=maxi(first.y,last.y):result.append(p)
+	if kind in ["","mine"]:
+		for r in w.mountains.values():
+			if w.Mountains.overlapping(r,first,last) and r.pos not in result:result.append(r.pos)
 	result.sort_custom(func(a,b):return a.y*w.W+a.x<b.y*w.W+b.x);return result
 static func designate(w,kind: String,first: Vector2i,last: Vector2i) -> Dictionary:
 	var accepted=0;var positions=cells(w,first,last,kind)
@@ -82,7 +86,8 @@ static func designate(w,kind: String,first: Vector2i,last: Vector2i) -> Dictiona
 static func forbid(w,first: Vector2i,last: Vector2i,value: bool) -> int:
 	var count=0
 	for p in cells(w,first,last):
-		var kind="mine" if w.rocks.has(p) else "clear_tree"
-		if target(w,kind,p).get("forbidden",false)==value:continue
+		var kind="mine" if w.rocks.has(p) or not w.Mountains.resource(w,p).is_empty() else "clear_tree"
+		var r=w.Mountains.resource(w,p)
+		if (target(w,kind,p) if r.is_empty() else r).get("forbidden",false)==value:continue
 		if w.Tasks.set_forbidden(w,kind,p,-1,value):count+=1
 	return count

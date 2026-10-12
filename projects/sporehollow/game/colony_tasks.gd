@@ -34,12 +34,14 @@ static func init(w):
 	save(w)
 
 static func save(w):
+	w.Mountains.save(w)
 	w.campaign.mined_rock_cells=w.mined_rock_cells.map(func(p):return [p.x,p.y])
 	w.campaign.mining_rocks=[]
 	for p in w.rocks:
 		var row=w.rocks[p].duplicate(true);row.pos=[p.x,p.y];w.campaign.mining_rocks.append(row)
 
 static func job(w,kind: String,p: Vector2i=Vector2i.ZERO,id: int=-1) -> Dictionary:
+	if kind=="mine":p=w.Mountains.canonical(w,p)
 	for j in w.jobs:
 		if j.kind==kind and (j.animal_id==id if kind=="train" else j.pos==p):return j
 	return {}
@@ -63,6 +65,12 @@ static func reason(w,kind: String,p: Vector2i=Vector2i.ZERO,id: int=-1,own_job: 
 	if kind=="clear_tree":return w.Harvest.tree_reason(w,p,own_job)
 	if kind=="train":return training_reason(w,w.Orders.animal(w,id),own_job)
 	if kind!="mine":return "対応する作業ではありません"
+	var mountain=w.Mountains.resource(w,p)
+	if not mountain.is_empty():
+		if mountain.remaining<=0:return "採掘済みです"
+		if mountain.forbidden:return "この岩山の採掘は禁止中です"
+		if w.jobs.any(func(j):return j.id!=own_job and j.get("mountain_id","")==mountain.id):return "採掘は予約済みです"
+		return ""
 	if not w.inside(p) or not w.rocks.has(p) or w.rocks[p].get("amount",0)<=0:return "採掘する岩がありません"
 	if w.rocks[p].get("forbidden",false):return "この岩の採掘は禁止中です"
 	if w.live_structure(p):return "先に岩の上の建物を片づけてください"
@@ -71,8 +79,10 @@ static func reason(w,kind: String,p: Vector2i=Vector2i.ZERO,id: int=-1,own_job: 
 
 static func designate(w,kind: String,p: Vector2i=Vector2i.ZERO,id: int=-1) -> bool:
 	if not w.working() or w.jobs.size()>=w.Jobs.LIMIT or reason(w,kind,p,id)!="":return false
+	if kind=="mine":p=w.Mountains.canonical(w,p)
 	if kind=="train":p=w.Orders.animal(w,id).pos
 	var j={"id":w.next_job_id,"kind":kind,"pos":p,"animal_id":id,"state":"pending","resource":"","reserved":0,"started":false,"work_category":"gather" if kind in ["mine","clear_tree"] else "animal","work_elapsed":0.0,"explicit_designation":true}
+	if kind=="mine" and not w.Mountains.resource(w,p).is_empty():j.mountain_id=w.Mountains.resource(w,p).id
 	if kind=="clear_tree":j.world_target=w.trees[p]
 	j.queued_tick=w.tick
 	w.next_job_id+=1;w.jobs.append(j);w.Life.wake_auto(w)
@@ -84,8 +94,11 @@ static func set_forbidden(w,kind: String,p: Vector2i,id: int,value: bool) -> boo
 		if not w.trees.has(p):return false
 		w.Harvest.target(w,kind,p).forbidden=value;w.Harvest.save(w)
 	elif kind=="mine":
-		if not w.rocks.has(p):return false
-		w.rocks[p].forbidden=value;save(w)
+		var r=w.Mountains.resource(w,p)
+		if not r.is_empty():r.forbidden=value;p=r.pos
+		elif w.rocks.has(p):w.rocks[p].forbidden=value
+		else:return false
+		save(w)
 	elif kind=="train":
 		var a=w.Orders.animal(w,id)
 		if not w.Livestock.owned(w,a):return false
@@ -98,6 +111,7 @@ static func set_forbidden(w,kind: String,p: Vector2i,id: int,value: bool) -> boo
 	return true
 
 static func missing(w,j) -> bool:
+	if j.has("mountain_id"):return w.mountains.get(j.mountain_id,{}).get("remaining",0)<=0
 	if j.kind=="clear_tree":return not w.trees.has(j.pos) or w.trees[j.pos]!=j.get("world_target",w.trees[j.pos])
 	if j.kind=="mine":return not w.rocks.has(j.pos) or w.rocks[j.pos].get("amount",0)<=0
 	var a=w.Orders.animal(w,j.animal_id)

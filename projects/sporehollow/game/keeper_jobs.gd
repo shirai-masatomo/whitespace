@@ -85,7 +85,9 @@ static func walk(w,j,goals: Array,actor: Dictionary={}) -> bool:
 	actor.move_credit=minf(1.9,actor.move_credit+SPEED*factor(actor)*(w.Content.speed(w,actor) if actor.get("work_key","")=="keeper" else 1.0)*w.DT)
 	if actor.move_credit<1: return false
 	var outdoor=j.kind=="animal_order" and j.order=="guide" and j.targets.any(func(t):return t.issued and not w.SPECIES[w.Orders.animal(w,t.id).get("species","hen")].can_enter_indoor) and not w.is_indoor(actor.pos)
-	var route=path_to(w,actor.pos,goals,outdoor)
+	# Keep actor avoidance for the whole route, not just one bypass step; otherwise
+	# the next tick returns into the same blocked corridor and oscillates.
+	var route=path_to(w,actor.pos,goals,outdoor,not(j.kind=="animal_order" and j.order=="guide"))
 	if route.size()<2:
 		j.state="blocked"; j.block_reason="通路がふさがっています"
 		return false
@@ -169,13 +171,13 @@ static func hold(w, reason: String):
 static func status(w) -> String:
 	return w.keeper.get("work_status","")
 
-static func path_to(w,start: Vector2i,goals: Array,outdoor: bool=false) -> Array:
+static func path_to(w,start: Vector2i,goals: Array,outdoor: bool=false,avoid_actors: bool=false) -> Array:
 	goals=goals.filter(func(p):return not outdoor or not w.is_indoor(p))
 	goals.sort_custom(func(a,b):
 		var da=w.distance(start,a); var db=w.distance(start,b)
 		return da<db if da!=db else (a.y<b.y if a.y!=b.y else a.x<b.x))
 	for goal in goals:
-		var route=w.find_path(start,goal,false,false,outdoor)
+		var route=w.find_path(start,goal,false,avoid_actors,outdoor)
 		if not route.is_empty(): return route
 	return []
 
@@ -207,7 +209,7 @@ static func preview(w) -> Array:
 					var a=w.Orders.animal(w,t.id)
 					if not a.is_empty(): plans.append({"number":j.id,"goals":w.Orders.command_goals(w,a,j.range)})
 			if j.order=="guide": plans.append({"number":j.id,"goals":[j.leader_goal],"outdoor":j.targets.any(func(t):return not w.SPECIES[w.Orders.animal(w,t.id).get("species","hen")].can_enter_indoor)})
-		else: plans.append({"number":j.id,"goals":w.Story.goals(w) if j.kind in w.Story.ACTIONS and j.kind!="clear_tree" else ([j.pos] if j.kind=="move" else w.neighbors(j.pos))})
+		else: plans.append({"number":j.id,"goals":w.Story.goals(w) if j.kind in w.Story.ACTIONS and j.kind!="clear_tree" else (w.Mountains.job_goals(w,j) if j.has("mountain_id") else ([j.pos] if j.kind=="move" else w.neighbors(j.pos)))})
 	for plan in plans:
 		var route=path_to(w,origin,plan.goals.filter(func(p):return w.walkable(p)),plan.get("outdoor",false) and not w.is_indoor(origin))
 		legs.append({"number":plan.number,"path":route if not route.is_empty() else [origin],"blocked":route.is_empty()})

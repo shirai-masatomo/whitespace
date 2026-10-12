@@ -57,6 +57,7 @@ const TOOLS = {"kennel":"犬小屋 木20","coop":"鶏小屋 木30","milk":"搾�
 const ORDER_HELP={"auto":"状況に合わせて行動します。戦闘・救護・その動物の仕事を任せます。","guide":"行き先をクリックして一緒に歩きます。\n物や動物は、押した時点の近くの空き場所へ。\n1匹なら隣接し、遅い方に合わせます。\n複数は近くにまとまり、到着でおまかせへ。\n右クリックで行き先指定を解除します。","stay":"その場所で待ちます。近くの敵には応戦しますが、追いかけません。","wander":"周囲を巡回し、敵を見つけたら攻撃します。","rest":"安全と回復を優先します。危険から離れ、無理に追わず近くの敵に応戦します。","attack_target":"敵を選べ。狙える距離や見通しが必要です。","equip":"持ち物から装備を選び、主人公が届けます。","milk":"乳牛に近づいて搾乳します。1日1回です。","charge":"突撃する行き先を選びます。"}
 const GROUP_TOOLS = [["wall", "wood_wall", "stone_wall", "soil_tile", "wood_tile", "stone_tile", "door", "locked_door", "kennel", "coop", "place_kokeshi", "place_fossil"], ["auto", "guide", "stay", "wander", "rest", "attack_target", "equip", "milk", "charge"], ["collect"]]
 const RockView=preload("res://game/rock_view.gd")
+const MountainView=preload("res://game/mountain_view.gd")
 const HarvestView=preload("res://game/harvest_view.gd")
 var harvest_view=HarvestView.new()
 const StockView=preload("res://game/stock_view.gd")
@@ -975,7 +976,7 @@ func refresh_jobs():
 
 func draw_work_plans():
 	if not world.working(): return
-	var signature = str(world.keeper.pos)+str(world.manual_goal)+str(world.jobs.map(func(j):return [j.id,j.pos,j.get("targets",[])]))+str(world.structures)+str(world.animals.map(func(a):return a.pos))+str(world.floors)+str(world.trees)+str(world.story.idol)
+	var signature = str(world.keeper.pos)+str(world.manual_goal)+str(world.jobs.map(func(j):return [j.id,j.pos,j.get("targets",[])]))+str(world.structures)+str(world.animals.map(func(a):return a.pos))+str(world.floors)+str(world.trees)+str(world.mountain_cells)+str(world.story.idol)
 	if signature != route_signature:
 		route_signature=signature
 		route_legs=world.Jobs.preview(world)
@@ -1007,7 +1008,11 @@ func draw_work_plans():
 				draw_line(q+Vector2(-5,5),q+Vector2(5,-5),UI.DANGER,3)
 	for i in range(world.jobs.size()):
 		var j = world.jobs[i]
-		var q = center(j.pos)
+		var mark_cell=j.pos
+		if j.has("mountain_id"):
+			var occupied_cells=world.Mountains.footprint(world.mountains[j.mountain_id])
+			if not occupied_cells.is_empty():mark_cell=occupied_cells[0]
+		var q = center(mark_cell)
 		if j.kind=="move":
 			draw_line(q+Vector2(0,10),q+Vector2(0,-27),Color("e4cd9b"),3)
 			draw_colored_polygon(PackedVector2Array([q+Vector2(1,-27),q+Vector2(23,-20),q+Vector2(1,-13)]),Color("91dabd"))
@@ -1399,6 +1404,9 @@ func board_click(event):
 	if Farm.BUILD.has(tool):
 		if not world.act(tool,cell): notice("指定は%d件まで"%world.Jobs.LIMIT if world.jobs.size()>=world.Jobs.LIMIT else world.Buildings.reason(world,tool,cell))
 		refresh(); return
+	var mountain=world.Mountains.at(world,cell)
+	if not mountain.is_empty():
+		selected={"kind":"mountain","id":mountain.id,"pos":mountain.pos};selected_trees.clear();selected_resources.clear();selected_structures.clear();selected_animals.clear();tool="";refresh();return
 	if world.rocks.has(cell):
 		selected={"kind":"rock","pos":cell};selected_trees.clear();selected_resources.clear();selected_structures.clear();selected_animals.clear();tool="";refresh();return
 	if world.trees.has(cell) or cell in world.Story.idol_cells(world):
@@ -1552,7 +1560,7 @@ func _process(delta):
 		keeper_ui_signature = vitals_signature
 		refresh()
 	prune_selection()
-	if not ui_pointer_capture and not context_targets().is_empty() and context_signature != context_state(): refresh()
+	if not ui_pointer_capture and (not context_targets().is_empty() or selected.get("kind") in ["rock","mountain"]) and context_signature != context_state(): refresh()
 	position_context_actions()
 	if ColonyPanels.signature(self)!=colony_signature:refresh()
 	refresh_jobs()
@@ -1876,6 +1884,7 @@ func _draw():
 	for actor in scene_actors():
 		match actor.kind:
 			"rock": RockView.rock(self,actor.data)
+			"mountain": MountainView.draw(self,actor.data)
 			"tree": HarvestView.tree(self,actor.data,actor.get("deep",false))
 			"harvest_remnant": HarvestView.remnant(self,actor.data)
 			"worker": draw_registered_worker(actor.data)
@@ -1907,6 +1916,8 @@ func scene_actors() -> Array:
 	for e in HarvestView.remnants(self):actors.append({"y":center(e.pos).y+14,"x":e.pos.x,"kind":"harvest_remnant","data":e})
 	for key in world.workers:
 		if key!="keeper" and world.workers[key].get("placed",false) and world.workers[key].get("carrier",-1)<0:actors.append({"y":actor_pixel(key,world.workers[key].pos).y+14,"x":world.workers[key].pos.x,"kind":"worker","data":key})
+	for r in world.mountains.values():
+		if r.remaining>0 or (world.tick-r.depleted_tick)*world.DT<world.Mountains.REMAINS_SECONDS:actors.append({"y":MountainView.foot(self,r).y,"x":r.pos.x,"kind":"mountain","data":r})
 	for p in world.rocks:actors.append({"y":center(p).y+14,"x":p.x,"kind":"rock","data":p})
 	for p in world.trees: actors.append({"y":StoryView.tree_foot(self,p).y,"x":p.x,"kind":"tree","data":p})
 	if not world.story.idol.is_empty(): actors.append({"y":actor_pixel("idol",world.Story.at(world)).y+TILE.y+14,"x":world.Story.at(world).x,"kind":"idol"})

@@ -25,7 +25,7 @@ static func idol_cells(w) -> Array:
 	return [] if w.story.get("idol",{}).is_empty() else cells(at(w))
 
 static func terrain_block(w,p: Vector2i) -> bool:
-	return w.trees.has(p) or w.rocks.has(p) or p in idol_cells(w)
+	return w.trees.has(p) or w.rocks.has(p) or not w.Mountains.at(w,p).is_empty() or p in idol_cells(w)
 
 static func init(w):
 	w.story=w.campaign.get("world_story",{}).duplicate(true)

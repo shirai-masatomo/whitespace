@@ -54,6 +54,7 @@ static func restore(path: String):
 	w.Stock.migrate_storage(w);w.Stock.sync(w)
 	if not state.has("rocks"):w.Tasks.init(w)
 	if not state.has("tree_work"):w.Harvest.init(w)
+	w.Mountains.reindex(w)
 	w.boundary_version=int(state.get("boundary_version",0))
 	w.Land.migrate(w)
 	w.Stock.reconcile_forbidden(w)

@@ -32,9 +32,10 @@ static func tool(g,key: String="keeper"):
 	var j=active(g,key)
 	if j.is_empty():return
 	var a=g.world.workers[key];var foot=g.actor_pixel(key,a.pos)+Vector2(0,14)
-	var direction=Vector2(j.pos-a.pos).normalized();var sweep=sin(phase(g,j)*PI)
+	var contact_cell=j.get("contact",j.pos)
+	var direction=Vector2(contact_cell-a.pos).normalized();var sweep=sin(phase(g,j)*PI)
 	var hand=foot+direction*8+Vector2(0,-21)
-	var contact=g.center(j.pos)-direction*16 if j.kind=="mine" else g.StoryView.tree_foot(g,j.pos)-direction*6+Vector2(0,-14)
+	var contact=g.center(contact_cell)-direction*16 if j.kind=="mine" else g.StoryView.tree_foot(g,j.pos)-direction*6+Vector2(0,-14)
 	var tip=hand+(contact-hand).rotated(-1.05*sweep)
 	g.draw_line(foot+Vector2(0,-24),hand,Color("d3ad82"),4)
 	g.draw_line(hand-direction*6,tip,Color("8c6444"),3)

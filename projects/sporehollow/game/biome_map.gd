@@ -111,10 +111,11 @@ static func resource_weight(w,p: Vector2i,resource: String) -> float:
 		_:return 0.01+pow(f[0],3)*3.0
 
 static func available(w,p: Vector2i) -> bool:
-	return w.walkable(p) and not w.occupied(p) and not w.live_structure(p) and not w.floors.has(p) and not w.natural.has(p) and not w.rocks.has(p) and w.items_at(p).is_empty() and not w.jobs.any(func(j):return j.pos==p) and p not in w.storage_cells and p not in w.entries and w.distance(p,w.logistics_entry)>3 and p not in w.Story.idol_cells(w)
+	return w.walkable(p) and not w.occupied(p) and not w.live_structure(p) and not w.floors.has(p) and not w.natural.has(p) and not w.rocks.has(p) and not w.neighbors(p).any(func(q):return not w.Mountains.at(w,q).is_empty()) and w.items_at(p).is_empty() and not w.jobs.any(func(j):return j.pos==p) and p not in w.storage_cells and p not in w.entries and w.distance(p,w.logistics_entry)>3 and p not in w.Story.idol_cells(w)
 
 static func populate(w):
 	if not w.campaign.get("biome_new_map",false):return
+	w.Mountains.populate(w)
 	# Sparse trees follow a broad woodland patch field, with gaps between trunks.
 	for y in range(1,w.H-1):
 		for x in range(1,w.W-1):

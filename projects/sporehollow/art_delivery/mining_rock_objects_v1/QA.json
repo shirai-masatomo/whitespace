@@ -1,0 +1,419 @@
+{
+  "checks": [
+    {
+      "check": "large1 source aspect preserved",
+      "passed": true
+    },
+    {
+      "check": "large1 same contact line",
+      "passed": true
+    },
+    {
+      "check": "large2 source aspect preserved",
+      "passed": true
+    },
+    {
+      "check": "large2 native contact correction <=3px",
+      "passed": true
+    },
+    {
+      "check": "large2 same contact line",
+      "passed": true
+    },
+    {
+      "check": "large2 material area decreases",
+      "passed": true
+    },
+    {
+      "check": "large2 shrinking silhouette bounds",
+      "passed": true
+    },
+    {
+      "check": "large2 height decreases",
+      "passed": true
+    },
+    {
+      "check": "large3 source aspect preserved",
+      "passed": true
+    },
+    {
+      "check": "large3 native contact correction <=3px",
+      "passed": true
+    },
+    {
+      "check": "large3 same contact line",
+      "passed": true
+    },
+    {
+      "check": "large3 material area decreases",
+      "passed": true
+    },
+    {
+      "check": "large3 shrinking silhouette bounds",
+      "passed": true
+    },
+    {
+      "check": "large3 height decreases",
+      "passed": true
+    },
+    {
+      "check": "large4 source aspect preserved",
+      "passed": true
+    },
+    {
+      "check": "large4 native contact correction <=3px",
+      "passed": true
+    },
+    {
+      "check": "large4 same contact line",
+      "passed": true
+    },
+    {
+      "check": "large4 material area decreases",
+      "passed": true
+    },
+    {
+      "check": "large4 shrinking silhouette bounds",
+      "passed": true
+    },
+    {
+      "check": "large4 height decreases",
+      "passed": true
+    },
+    {
+      "check": "large final area below 25% of intact",
+      "passed": true
+    },
+    {
+      "check": "small1 source aspect preserved",
+      "passed": true
+    },
+    {
+      "check": "small1 same contact line",
+      "passed": true
+    },
+    {
+      "check": "small2 source aspect preserved",
+      "passed": true
+    },
+    {
+      "check": "small2 native contact correction <=3px",
+      "passed": true
+    },
+    {
+      "check": "small2 same contact line",
+      "passed": true
+    },
+    {
+      "check": "small2 material area decreases",
+      "passed": true
+    },
+    {
+      "check": "small2 shrinking silhouette bounds",
+      "passed": true
+    },
+    {
+      "check": "small2 height decreases",
+      "passed": true
+    },
+    {
+      "check": "small3 source aspect preserved",
+      "passed": true
+    },
+    {
+      "check": "small3 native contact correction <=3px",
+      "passed": true
+    },
+    {
+      "check": "small3 same contact line",
+      "passed": true
+    },
+    {
+      "check": "small3 material area decreases",
+      "passed": true
+    },
+    {
+      "check": "small3 shrinking silhouette bounds",
+      "passed": true
+    },
+    {
+      "check": "small3 height decreases",
+      "passed": true
+    },
+    {
+      "check": "small final area below 25% of intact",
+      "passed": true
+    },
+    {
+      "check": "rock_large_4x4_stage1.png RGBA/size/hash",
+      "passed": true
+    },
+    {
+      "check": "rock_large_4x4_stage1.png alpha clean",
+      "passed": true
+    },
+    {
+      "check": "rock_large_4x4_stage1.png transparent frame margin",
+      "passed": true
+    },
+    {
+      "check": "rock_large_4x4_stage2.png RGBA/size/hash",
+      "passed": true
+    },
+    {
+      "check": "rock_large_4x4_stage2.png alpha clean",
+      "passed": true
+    },
+    {
+      "check": "rock_large_4x4_stage2.png transparent frame margin",
+      "passed": true
+    },
+    {
+      "check": "rock_large_4x4_stage3.png RGBA/size/hash",
+      "passed": true
+    },
+    {
+      "check": "rock_large_4x4_stage3.png alpha clean",
+      "passed": true
+    },
+    {
+      "check": "rock_large_4x4_stage3.png transparent frame margin",
+      "passed": true
+    },
+    {
+      "check": "rock_large_4x4_stage4.png RGBA/size/hash",
+      "passed": true
+    },
+    {
+      "check": "rock_large_4x4_stage4.png alpha clean",
+      "passed": true
+    },
+    {
+      "check": "rock_large_4x4_stage4.png transparent frame margin",
+      "passed": true
+    },
+    {
+      "check": "rock_small_1x1_stage1.png RGBA/size/hash",
+      "passed": true
+    },
+    {
+      "check": "rock_small_1x1_stage1.png alpha clean",
+      "passed": true
+    },
+    {
+      "check": "rock_small_1x1_stage1.png transparent frame margin",
+      "passed": true
+    },
+    {
+      "check": "rock_small_1x1_stage2.png RGBA/size/hash",
+      "passed": true
+    },
+    {
+      "check": "rock_small_1x1_stage2.png alpha clean",
+      "passed": true
+    },
+    {
+      "check": "rock_small_1x1_stage2.png transparent frame margin",
+      "passed": true
+    },
+    {
+      "check": "rock_small_1x1_stage3.png RGBA/size/hash",
+      "passed": true
+    },
+    {
+      "check": "rock_small_1x1_stage3.png alpha clean",
+      "passed": true
+    },
+    {
+      "check": "rock_small_1x1_stage3.png transparent frame margin",
+      "passed": true
+    },
+    {
+      "check": "rock_mined_remains.png RGBA/size/hash",
+      "passed": true
+    },
+    {
+      "check": "rock_mined_remains.png alpha clean",
+      "passed": true
+    },
+    {
+      "check": "rock_mined_remains.png transparent frame margin",
+      "passed": true
+    },
+    {
+      "check": "rock_small_1x1_mined_remains.png RGBA/size/hash",
+      "passed": true
+    },
+    {
+      "check": "rock_small_1x1_mined_remains.png alpha clean",
+      "passed": true
+    },
+    {
+      "check": "rock_small_1x1_mined_remains.png transparent frame margin",
+      "passed": true
+    },
+    {
+      "check": "old artwork preserved",
+      "passed": true
+    }
+  ],
+  "count": 64,
+  "prior_png_preserved": 2043,
+  "normalization": [
+    {
+      "source": "large_stage1.png",
+      "source_size": [
+        1212,
+        1298
+      ],
+      "native_scale": 0.1668145519077196,
+      "common_stage1_factor": 0.1668145519077196,
+      "source_width_normalization": 1.0,
+      "offset_px": [
+        10,
+        26
+      ],
+      "alpha_area_before_registration_clip": 22244,
+      "alpha_area_after": 22244,
+      "final_bbox": [
+        18,
+        47,
+        206,
+        224
+      ]
+    },
+    {
+      "source": "large_stage2.png",
+      "source_size": [
+        1212,
+        1298
+      ],
+      "native_scale": 0.1668145519077196,
+      "common_stage1_factor": 0.1668145519077196,
+      "source_width_normalization": 1.0,
+      "offset_px": [
+        10,
+        26
+      ],
+      "alpha_area_before_registration_clip": 19265,
+      "alpha_area_after": 19110,
+      "final_bbox": [
+        18,
+        79,
+        206,
+        224
+      ]
+    },
+    {
+      "source": "large_stage3.png",
+      "source_size": [
+        1212,
+        1298
+      ],
+      "native_scale": 0.1668145519077196,
+      "common_stage1_factor": 0.1668145519077196,
+      "source_width_normalization": 1.0,
+      "offset_px": [
+        10,
+        30
+      ],
+      "alpha_area_before_registration_clip": 7190,
+      "alpha_area_after": 6838,
+      "final_bbox": [
+        24,
+        146,
+        172,
+        224
+      ]
+    },
+    {
+      "source": "large_stage4.png",
+      "source_size": [
+        1212,
+        1298
+      ],
+      "native_scale": 0.1668145519077196,
+      "common_stage1_factor": 0.1668145519077196,
+      "source_width_normalization": 1.0,
+      "offset_px": [
+        10,
+        30
+      ],
+      "alpha_area_before_registration_clip": 1595,
+      "alpha_area_after": 1452,
+      "final_bbox": [
+        78,
+        189,
+        141,
+        224
+      ]
+    },
+    {
+      "source": "small_stage1.png",
+      "source_size": [
+        1254,
+        1254
+      ],
+      "native_scale": 0.054388133498145856,
+      "common_stage1_factor": 0.054388133498145856,
+      "source_width_normalization": 1.0,
+      "offset_px": [
+        -10,
+        -12
+      ],
+      "alpha_area_before_registration_clip": 1114,
+      "alpha_area_after": 1114,
+      "final_bbox": [
+        5,
+        2,
+        43,
+        46
+      ]
+    },
+    {
+      "source": "small_stage2.png",
+      "source_size": [
+        1254,
+        1254
+      ],
+      "native_scale": 0.054388133498145856,
+      "common_stage1_factor": 0.054388133498145856,
+      "source_width_normalization": 1.0,
+      "offset_px": [
+        -10,
+        -12
+      ],
+      "alpha_area_before_registration_clip": 763,
+      "alpha_area_after": 758,
+      "final_bbox": [
+        5,
+        20,
+        43,
+        46
+      ]
+    },
+    {
+      "source": "small_stage3.png",
+      "source_size": [
+        1254,
+        1254
+      ],
+      "native_scale": 0.054388133498145856,
+      "common_stage1_factor": 0.054388133498145856,
+      "source_width_normalization": 1.0,
+      "offset_px": [
+        -10,
+        -12
+      ],
+      "alpha_area_before_registration_clip": 222,
+      "alpha_area_after": 221,
+      "final_bbox": [
+        13,
+        32,
+        35,
+        46
+      ]
+    }
+  ],
+  "actual_game_verified": false
+}

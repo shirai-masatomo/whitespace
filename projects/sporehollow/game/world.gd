@@ -149,6 +149,9 @@ const Nutrition=preload("res://game/human_nutrition.gd")
 const Livestock=preload("res://game/livestock.gd")
 const Tasks=preload("res://game/colony_tasks.gd")
 var rocks: Dictionary = {}
+var mountains: Dictionary = {}
+var mountain_cells: Dictionary = {}
+const Mountains=preload("res://game/mining_mountains.gd")
 var mined_rock_cells: Array = []
 const Harvest=preload("res://game/harvest_work.gd")
 var tree_work: Dictionary = {}
@@ -381,6 +384,7 @@ func _init(data: Dictionary = {}, seed_number: int = 17, stage_override: Diction
 	shop_stock = Shop.generate(stage, seed_value, campaign.unlocked_blueprints, campaign.day)
 	Cycle.init(self)
 	Tasks.init(self)
+	Mountains.init(self)
 	Biome.populate(self)
 	Harvest.init(self)
 	boundary_version=int(campaign.get("boundary_version",0))

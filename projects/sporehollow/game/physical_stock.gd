@@ -270,6 +270,9 @@ static func cancel_targets(w,first: Vector2i,last: Vector2i) -> Array:
 	for j in w.jobs:
 		if j.get("cancel_requested",false):continue
 		var p=j.pos
+		if j.has("mountain_id"):
+			if w.Mountains.overlapping(w.mountains[j.mountain_id],first,last):rows.append(j)
+			continue
 		if j.kind in ["train","slaughter"]:
 			var a=w.Orders.animal(w,j.animal_id)
 			if not a.is_empty():p=a.pos
