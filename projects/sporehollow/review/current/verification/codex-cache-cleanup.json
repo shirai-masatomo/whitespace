@@ -1,0 +1,1508 @@
+{
+  "date": "2026-10-12",
+  "removed_bytes": 519919352.0,
+  "protected_player_files_checked": 6,
+  "scope": "Only regenerable .godot import/shader/editor-doc caches. No source, asset, user save, Git or review deletion.",
+  "removed": [
+    {
+      "kind": ".godot",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\.godot",
+      "bytes": 16718340
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\export-verification\\20261010-034237-963-journal-names\\gpu-user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\export-verification\\20261010-034957-716-journal-names\\gpu-user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\export-verification\\20261010-040326-507-journal-names\\gpu-user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\export-verification\\20261010-050021-975-merchant-mouth\\gpu-user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\export-verification\\20261010-063305-249-idol-forest-audio\\gpu-user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\isolated\\20261008-202156-040\\user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\isolated\\20261008-230211-791\\user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\isolated\\20261008-233033-519\\user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\isolated\\20261008-233233-536\\user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\isolated\\20261009-013140-875\\user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\isolated\\20261009-015544-402\\user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\isolated\\20261009-015849-932\\user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\isolated\\20261009-180016-684\\user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\isolated\\20261009-182045-788\\user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\isolated\\20261009-183233-965\\user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\isolated\\20261009-184239-871\\user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\isolated\\20261009-185425-020\\user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\isolated\\20261009-185932-034\\user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\isolated\\20261009-190556-094\\user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\isolated\\20261009-190923-248\\user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\isolated\\20261009-192836-055\\user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\isolated\\20261009-193525-143\\user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\isolated\\20261009-194240-519\\user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\isolated\\20261009-195746-478\\user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\isolated\\20261009-200811-893\\user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\isolated\\20261009-201524-261\\user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\isolated\\20261009-235252-288\\user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\isolated\\20261009-235442-400\\user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\isolated\\20261010-000130-782\\user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\isolated\\20261010-003055-802\\user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\isolated\\20261010-003132-435\\user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\isolated\\20261010-003206-389\\user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\isolated\\20261010-005622-103\\user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\isolated\\20261010-010312-808\\user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\isolated\\20261010-010422-408\\user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\isolated\\20261010-010459-121\\user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\isolated\\20261010-010542-331\\user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\isolated\\20261010-010625-998\\user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\isolated\\20261010-011651-797\\user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\isolated\\20261010-011756-047\\user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\isolated\\20261010-011908-648\\user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\isolated\\20261010-012236-509\\user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\isolated\\20261010-012313-168\\user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\isolated\\20261010-013545-011\\user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\isolated\\20261010-015045-132\\user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\isolated\\20261010-015214-673\\user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\isolated\\20261010-015254-829\\user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\isolated\\20261010-015532-338\\user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\isolated\\20261010-015601-463\\user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\isolated\\20261010-015704-665\\user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\isolated\\20261010-015831-208\\user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\isolated\\20261010-020350-296\\user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\isolated\\20261010-020615-758\\user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\isolated\\20261010-020723-056\\user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\isolated\\20261010-020814-352\\user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\isolated\\20261010-020917-868\\user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\isolated\\20261010-021133-891\\user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\isolated\\20261010-025357-441\\user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\isolated\\20261010-045552-553\\user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\isolated\\20261010-045633-889\\user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\isolated\\20261010-062746-114\\user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\isolated\\20261011-211223-762\\user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\isolated\\20261011-211240-231\\user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\playtest\\20261008-200838-402\\user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\playtest\\20261008-234821-898\\user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\playtest\\20261009-194756-179\\user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\playtest\\20261010-003258-814\\user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\playtest\\20261010-012320-390\\user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\playtest\\20261010-013636-427\\user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\playtest\\20261010-050021-975\\user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": ".godot",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-quality\\projects\\sporehollow\\.godot",
+      "bytes": 12986343
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-quality\\projects\\sporehollow\\artifacts\\isolated\\20261008-155440-466\\user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-quality\\projects\\sporehollow\\artifacts\\isolated\\20261008-163142-550\\user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-quality\\projects\\sporehollow\\artifacts\\isolated\\20261008-164221-797\\user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-quality\\projects\\sporehollow\\artifacts\\isolated\\20261008-170516-916\\user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-quality\\projects\\sporehollow\\artifacts\\isolated\\20261008-171852-875\\user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-quality\\projects\\sporehollow\\artifacts\\isolated\\20261008-173903-288\\user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-quality\\projects\\sporehollow\\artifacts\\isolated\\20261008-174341-191\\user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-quality\\projects\\sporehollow\\artifacts\\isolated\\20261008-180237-842\\user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-quality\\projects\\sporehollow\\artifacts\\isolated\\20261008-180245-825\\user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-quality\\projects\\sporehollow\\artifacts\\isolated\\20261008-181333-841\\user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-quality\\projects\\sporehollow\\artifacts\\isolated\\20261008-191427-590\\user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-quality\\projects\\sporehollow\\artifacts\\isolated\\20261008-191436-585\\user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-quality\\projects\\sporehollow\\artifacts\\isolated\\20261008-191447-423\\user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-quality\\projects\\sporehollow\\artifacts\\isolated\\20261008-191457-060\\user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-quality\\projects\\sporehollow\\artifacts\\isolated\\20261008-192233-334\\user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-quality\\projects\\sporehollow\\artifacts\\isolated\\20261008-192414-797\\user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-quality\\projects\\sporehollow\\artifacts\\playtest\\20261008-162638-452\\user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-quality\\projects\\sporehollow\\artifacts\\playtest\\20261008-192531-672\\user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": ".godot",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-09\\task\\release-92d1048\\projects\\sporehollow\\.godot",
+      "bytes": 16394679
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-09\\task\\release-92d1048\\projects\\sporehollow\\artifacts\\isolated\\20261010-034757-686\\user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 1014338
+    },
+    {
+      "kind": ".godot",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-09\\task\\release-c5c2833\\projects\\sporehollow\\.godot",
+      "bytes": 16394679
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-09\\task\\release-c5c2833\\projects\\sporehollow\\artifacts\\isolated\\20261010-040017-374\\user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 1014338
+    },
+    {
+      "kind": ".godot",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-09\\task\\research-three-encounters\\projects\\sporehollow\\.godot",
+      "bytes": 17048644
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-09\\task\\research-three-encounters\\projects\\sporehollow\\artifacts\\export-verification\\20261010-180201-027-research\\gpu-user-data\\Godot\\app_userdata\\ホイッスル牧場 研究試作\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-09\\task\\research-three-encounters\\projects\\sporehollow\\artifacts\\isolated\\20261010-175339-583\\user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-09\\task\\research-three-encounters\\projects\\sporehollow\\artifacts\\isolated\\20261010-175707-114\\user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-09\\task\\ui-name-review\\snapshot\\projects\\sporehollow\\artifacts\\isolated\\20261010-033247-217\\user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-09\\task\\ui-name-review\\snapshot\\projects\\sporehollow\\artifacts\\isolated\\20261010-033407-801\\user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-09\\task\\ui-name-review\\snapshot\\projects\\sporehollow\\artifacts\\isolated\\20261010-033457-838\\user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\asset-organize\\book-native\\user-data\\WhistleResearchAutonomy\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\autonomy-entry-01\\bundle\\user-data\\WhistleResearchAutonomy\\shader_cache",
+      "bytes": 139972
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\directive09-completion\\native\\user-data\\WhistleResearchAutonomy\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\directive09-unit1\\exe-smoke\\WhistleResearchAutonomy\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\directive09-unit2\\native\\user-data\\WhistleResearchAutonomy\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\directive09-unit3\\native\\user-data\\WhistleResearchAutonomy\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\final-boundary\\native\\user-data\\WhistleResearchAutonomy\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\isolated\\20261011-023340-050\\user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\isolated\\20261011-024454-285\\user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\isolated\\20261011-024554-221\\user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\isolated\\20261011-025017-370\\user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\isolated\\20261011-042041-694\\user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\isolated\\20261011-043324-348\\user-data\\WhistleResearchAutonomy\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\isolated\\20261011-043454-532\\user-data\\WhistleResearchAutonomy\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\isolated\\20261011-043825-306\\user-data\\WhistleResearchAutonomy\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\isolated\\20261011-044201-437\\user-data\\WhistleResearchAutonomy\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\isolated\\20261011-045007-203\\user-data\\WhistleResearchAutonomy\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\isolated\\20261011-045252-503\\user-data\\WhistleResearchAutonomy\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\isolated\\20261011-045335-006\\user-data\\WhistleResearchAutonomy\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\isolated\\20261011-103143-972\\user-data\\WhistleResearchAutonomy\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\isolated\\20261011-104935-806\\user-data\\WhistleResearchAutonomy\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\isolated\\20261011-111036-518\\user-data\\WhistleResearchAutonomy\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\isolated\\20261011-111213-072\\user-data\\WhistleResearchAutonomy\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\isolated\\20261011-111334-122\\user-data\\WhistleResearchAutonomy\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\isolated\\20261011-113101-641\\user-data\\WhistleResearchAutonomy\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\isolated\\20261011-113255-545\\user-data\\WhistleResearchAutonomy\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\isolated\\20261011-113337-097\\user-data\\WhistleResearchAutonomy\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\isolated\\20261011-191743-588\\user-data\\WhistleResearchAutonomy\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\isolated\\20261011-191953-812\\user-data\\WhistleResearchAutonomy\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\isolated\\20261011-192423-926\\user-data\\WhistleResearchAutonomy\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\isolated\\20261011-192603-691\\user-data\\WhistleResearchAutonomy\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\isolated\\20261011-194119-588\\user-data\\WhistleResearchAutonomy\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\isolated\\20261011-194219-128\\user-data\\WhistleResearchAutonomy\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\isolated\\20261011-195817-755\\user-data\\WhistleResearchAutonomy\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\isolated\\20261011-200003-237\\user-data\\WhistleResearchAutonomy\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\isolated\\20261011-200424-609\\user-data\\WhistleResearchAutonomy\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\isolated\\20261012-005532-351\\user-data\\WhistleResearchAutonomy\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\negotiation\\native\\user-data\\WhistleResearchAutonomy\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\pan-center\\native\\user-data\\WhistleResearchAutonomy\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": ".godot",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\onsite-clarity\\projects\\sporehollow\\.godot",
+      "bytes": 17047245
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\onsite-clarity\\projects\\sporehollow\\artifacts\\onsite-clarity\\20261011-001433-192\\user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\onsite-clarity\\projects\\sporehollow\\artifacts\\onsite-screen\\20261011-000712-960\\user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\onsite-clarity\\projects\\sporehollow\\artifacts\\onsite-screen\\20261011-001113-944\\user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\onsite-clarity\\projects\\sporehollow\\artifacts\\onsite-screen\\20261011-001518-562\\user-data\\Godot\\app_userdata\\ホイッスル牧場\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": ".godot",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\research-pair\\projects\\sporehollow\\.godot",
+      "bytes": 18270357
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\research-pair\\projects\\sporehollow\\artifacts\\full-10a\\20261010-220932-776\\user-data\\Godot\\app_userdata\\ホイッスル牧場 研究試作\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\research-pair\\projects\\sporehollow\\artifacts\\isolated\\20261010-182608-274\\user-data\\Godot\\app_userdata\\ホイッスル牧場 研究試作\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\research-pair\\projects\\sporehollow\\artifacts\\isolated\\20261010-182727-440\\user-data\\Godot\\app_userdata\\ホイッスル牧場 研究試作\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\research-pair\\projects\\sporehollow\\artifacts\\isolated\\20261010-182849-892\\user-data\\Godot\\app_userdata\\ホイッスル牧場 研究試作\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\research-pair\\projects\\sporehollow\\artifacts\\isolated\\20261010-191745-473\\user-data\\Godot\\app_userdata\\ホイッスル牧場 研究試作\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\research-pair\\projects\\sporehollow\\artifacts\\isolated\\20261010-200648-518\\user-data\\Godot\\app_userdata\\ホイッスル牧場 研究試作\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\research-pair\\projects\\sporehollow\\artifacts\\isolated\\20261010-200739-297\\user-data\\Godot\\app_userdata\\ホイッスル牧場 研究試作\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\research-pair\\projects\\sporehollow\\artifacts\\isolated\\20261010-200839-846\\user-data\\Godot\\app_userdata\\ホイッスル牧場 研究試作\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\research-pair\\projects\\sporehollow\\artifacts\\isolated\\20261010-201349-684\\user-data\\Godot\\app_userdata\\ホイッスル牧場 研究試作\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\research-pair\\projects\\sporehollow\\artifacts\\isolated\\20261010-204759-464\\user-data\\Godot\\app_userdata\\ホイッスル牧場 研究試作\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\research-pair\\projects\\sporehollow\\artifacts\\isolated\\20261010-204906-378\\user-data\\Godot\\app_userdata\\ホイッスル牧場 研究試作\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\research-pair\\projects\\sporehollow\\artifacts\\isolated\\20261010-205344-286\\user-data\\Godot\\app_userdata\\ホイッスル牧場 研究試作\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\research-pair\\projects\\sporehollow\\artifacts\\morning-b-20261010\\campaign\\user-data\\Godot\\app_userdata\\ホイッスル牧場 研究試作\\shader_cache",
+      "bytes": 139972
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\research-pair\\projects\\sporehollow\\artifacts\\morning-b-20261010\\campaign-A\\user-data\\Godot\\app_userdata\\ホイッスル牧場 研究試作\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\research-pair\\projects\\sporehollow\\artifacts\\morning-b-20261010\\campaign-C\\user-data\\Godot\\app_userdata\\ホイッスル牧場 研究試作\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\research-pair\\projects\\sporehollow\\artifacts\\morning-b-20261010\\unit\\user-data\\Godot\\app_userdata\\ホイッスル牧場 研究試作\\shader_cache",
+      "bytes": 992458
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\research-pair\\projects\\sporehollow\\artifacts\\research\\20261010-183016-383\\user-data\\Godot\\app_userdata\\ホイッスル牧場 研究試作\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\research-pair\\projects\\sporehollow\\artifacts\\research\\20261010-191911-286\\user-data\\Godot\\app_userdata\\ホイッスル牧場 研究試作\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\research-pair\\projects\\sporehollow\\artifacts\\research\\20261010-205154-186\\rendered-launch\\user-data\\Godot\\app_userdata\\ホイッスル牧場 研究試作\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\research-pair\\projects\\sporehollow\\artifacts\\research\\20261010-205154-186\\user-data\\Godot\\app_userdata\\ホイッスル牧場 研究試作\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\research-pair\\projects\\sporehollow\\artifacts\\research\\20261010-211058-168\\rendered-review\\user-data\\Godot\\app_userdata\\ホイッスル牧場 研究試作\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\research-pair\\projects\\sporehollow\\artifacts\\research\\20261010-211340-514\\rendered-review\\user-data\\Godot\\app_userdata\\ホイッスル牧場 研究試作\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\research-pair\\projects\\sporehollow\\artifacts\\research\\20261010-211529-331\\rendered-review\\user-data\\Godot\\app_userdata\\ホイッスル牧場 研究試作\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\research-pair\\projects\\sporehollow\\artifacts\\research\\20261010-214608-614\\rendered-review-20261010-214713-979\\user-data\\Godot\\app_userdata\\ホイッスル牧場 研究試作\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\research-pair\\projects\\sporehollow\\artifacts\\research\\20261010-215738-566\\rendered-review-20261010-215833-541\\user-data\\Godot\\app_userdata\\ホイッスル牧場 研究試作\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\research-pair\\projects\\sporehollow\\artifacts\\research\\20261010-220021-473\\rendered-review-20261010-220104-902\\user-data\\Godot\\app_userdata\\ホイッスル牧場 研究試作\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\research-pair\\projects\\sporehollow\\artifacts\\research\\20261010-231333-606\\user-data\\Godot\\app_userdata\\ホイッスル牧場 研究試作\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\research-pair\\projects\\sporehollow\\artifacts\\three-10a-fixed-20261010\\A\\user-data\\Godot\\app_userdata\\ホイッスル牧場 研究試作\\shader_cache",
+      "bytes": 940881
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\research-pair\\projects\\sporehollow\\artifacts\\three-10a-fixed-20261010\\B\\user-data\\Godot\\app_userdata\\ホイッスル牧場 研究試作\\shader_cache",
+      "bytes": 940881
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\research-pair\\projects\\sporehollow\\artifacts\\three-10a-fixed-20261010\\C\\user-data\\Godot\\app_userdata\\ホイッスル牧場 研究試作\\shader_cache",
+      "bytes": 940881
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\research-pair\\projects\\sporehollow\\artifacts\\ui-minimal\\20261010-231015-672\\user-data\\Godot\\app_userdata\\ホイッスル牧場 研究試作\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "shader_cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\research-pair\\projects\\sporehollow\\artifacts\\ui-minimal\\20261010-231435-336\\user-data\\Godot\\app_userdata\\ホイッスル牧場 研究試作\\shader_cache",
+      "bytes": 0
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\balance-audit\\20261008-194038-168\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269962
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\playtest\\20261008-200838-402\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269961
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\playtest\\20261008-234821-898\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269960
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\playtest\\20261009-020437-216\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269961
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\playtest\\20261009-184446-538\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269962
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\playtest\\20261009-194756-179\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269965
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\playtest\\20261009-202008-469\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269959
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\playtest\\20261010-000204-106\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269961
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\playtest\\20261010-003258-814\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269961
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\playtest\\20261010-005647-206\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269962
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\playtest\\20261010-010633-234\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269960
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\playtest\\20261010-011934-619\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269962
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\playtest\\20261010-012013-245\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269959
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\playtest\\20261010-012320-390\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269961
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\playtest\\20261010-013636-427\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269961
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\playtest\\20261010-015104-332\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269962
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\playtest\\20261010-015302-530\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269964
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\playtest\\20261010-015712-801\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269964
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\playtest\\20261010-015839-285\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269962
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\playtest\\20261010-020208-646\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269961
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\playtest\\20261010-020357-809\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269960
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\playtest\\20261010-020943-199\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269962
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\playtest\\20261010-021200-239\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269959
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\validation\\20261009-234335-338\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269962
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\validation\\20261009-234843-441\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269963
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\validation\\20261009-234934-446\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269963
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\validation\\20261009-234955-315\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269962
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\validation\\20261009-235019-164\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269961
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\validation\\20261009-235101-394\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269961
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\validation\\20261009-235213-351\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269961
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\validation\\20261009-235359-137\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269961
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\validation\\20261009-235432-440\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269961
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\validation\\20261009-235536-287\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269960
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\validation\\20261009-235902-664\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269962
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\validation\\20261010-015002-619\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269960
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\validation\\20261010-015552-130\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269960
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\validation\\20261010-020054-422\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269962
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\validation\\20261010-020155-466\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269963
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow\\artifacts\\validation\\20261010-045524-471\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269961
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-quality\\projects\\sporehollow\\artifacts\\playtest\\20261008-162638-452\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269963
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-quality\\projects\\sporehollow\\artifacts\\playtest\\20261008-192531-672\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269961
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-quality\\projects\\sporehollow\\artifacts\\validation\\20261008-155310-931\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269960
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-quality\\projects\\sporehollow\\artifacts\\validation\\20261008-160952-255\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269962
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-quality\\projects\\sporehollow\\artifacts\\validation\\20261008-161626-379\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269962
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-quality\\projects\\sporehollow\\artifacts\\validation\\20261008-161739-330\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269964
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-quality\\projects\\sporehollow\\artifacts\\validation\\20261008-162041-558\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269963
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-quality\\projects\\sporehollow\\artifacts\\validation\\20261008-163447-334\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269962
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-quality\\projects\\sporehollow\\artifacts\\validation\\20261008-164000-112\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269964
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-quality\\projects\\sporehollow\\artifacts\\validation\\20261008-164520-132\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269963
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-quality\\projects\\sporehollow\\artifacts\\validation\\20261008-165221-261\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269960
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-quality\\projects\\sporehollow\\artifacts\\validation\\20261008-165513-410\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269960
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-quality\\projects\\sporehollow\\artifacts\\validation\\20261008-165714-033\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269961
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-quality\\projects\\sporehollow\\artifacts\\validation\\20261008-170146-375\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269960
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-quality\\projects\\sporehollow\\artifacts\\validation\\20261008-171303-500\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269963
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-quality\\projects\\sporehollow\\artifacts\\validation\\20261008-172927-422\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269963
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-quality\\projects\\sporehollow\\artifacts\\validation\\20261008-173130-906\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269963
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-quality\\projects\\sporehollow\\artifacts\\validation\\20261008-173236-568\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269963
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-quality\\projects\\sporehollow\\artifacts\\validation\\20261008-173327-138\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269961
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-quality\\projects\\sporehollow\\artifacts\\validation\\20261008-173549-056\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269962
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-quality\\projects\\sporehollow\\artifacts\\validation\\20261008-173735-541\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269962
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-quality\\projects\\sporehollow\\artifacts\\validation\\20261008-175038-536\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269963
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-quality\\projects\\sporehollow\\artifacts\\validation\\20261008-175332-389\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269960
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-quality\\projects\\sporehollow\\artifacts\\validation\\20261008-175552-549\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269963
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-quality\\projects\\sporehollow\\artifacts\\validation\\20261008-180107-483\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269958
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-quality\\projects\\sporehollow\\artifacts\\validation\\20261008-182000-106\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269962
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-quality\\projects\\sporehollow\\artifacts\\validation\\20261008-184238-059\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269961
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-quality\\projects\\sporehollow\\artifacts\\validation\\20261008-184558-303\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269961
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-quality\\projects\\sporehollow\\artifacts\\validation\\20261008-185110-422\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269963
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-quality\\projects\\sporehollow\\artifacts\\validation\\20261008-190116-705\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269963
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-quality\\projects\\sporehollow\\artifacts\\validation\\20261008-190259-595\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269963
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-quality\\projects\\sporehollow\\artifacts\\validation\\20261008-190429-242\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269960
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-quality\\projects\\sporehollow\\artifacts\\validation\\20261008-190948-849\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269963
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-quality\\projects\\sporehollow\\artifacts\\validation\\20261008-191324-089\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269960
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-quality\\projects\\sporehollow\\artifacts\\validation\\20261008-191643-684\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269963
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-quality\\projects\\sporehollow\\artifacts\\validation\\20261008-191831-083\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269960
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-quality\\projects\\sporehollow\\artifacts\\validation\\20261008-192158-468\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269959
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-quality\\projects\\sporehollow\\artifacts\\validation\\20261008-192339-691\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269962
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-09\\task\\release-92d1048\\projects\\sporehollow\\artifacts\\playtest\\20261010-034237-963\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269960
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-09\\task\\release-c5c2833\\projects\\sporehollow\\artifacts\\playtest\\20261010-034957-716\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269964
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-09\\task\\research-three-encounters\\projects\\sporehollow\\artifacts\\research\\20261010-175950-941\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269962
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-09\\task\\research-three-encounters\\projects\\sporehollow\\artifacts\\research\\20261010-180201-027\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269961
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-09\\task\\research-three-encounters\\projects\\sporehollow\\artifacts\\research-import\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269962
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\asset-organize\\import-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269963
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\autonomy-entry-01\\export-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269963
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\directive09-completion\\export\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269963
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\directive09-unit1\\export-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269964
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\directive09-unit1\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269960
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\directive09-unit2\\export-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269961
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\directive09-unit2\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269963
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\directive09-unit3\\export-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269962
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\pan-center\\export\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269961
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\playtest\\20261011-194256-709\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269960
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\playtest\\20261011-200010-076\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269963
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\playtest\\20261011-200503-642\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269961
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\validation\\20261011-023243-384\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269962
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\onsite-clarity\\projects\\sporehollow\\artifacts\\onsite-clarity\\20261011-000434-279\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269963
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\onsite-clarity\\projects\\sporehollow\\artifacts\\onsite-clarity\\20261011-000602-571\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269962
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\onsite-clarity\\projects\\sporehollow\\artifacts\\onsite-clarity\\20261011-000843-934\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269962
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\onsite-clarity\\projects\\sporehollow\\artifacts\\onsite-clarity\\20261011-001033-198\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269964
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\onsite-clarity\\projects\\sporehollow\\artifacts\\onsite-clarity\\20261011-001343-510\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269963
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\onsite-clarity\\projects\\sporehollow\\artifacts\\onsite-clarity\\20261011-001433-192\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269965
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\research-pair\\projects\\sporehollow\\artifacts\\pair-user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269964
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\research-pair\\projects\\sporehollow\\artifacts\\research\\20261010-182852-009\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269960
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\research-pair\\projects\\sporehollow\\artifacts\\research\\20261010-183016-383\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269961
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\research-pair\\projects\\sporehollow\\artifacts\\research\\20261010-191911-286\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269962
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\research-pair\\projects\\sporehollow\\artifacts\\research\\20261010-201521-430\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269960
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\research-pair\\projects\\sporehollow\\artifacts\\research\\20261010-205154-186\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269963
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\research-pair\\projects\\sporehollow\\artifacts\\research\\20261010-211058-168\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269959
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\research-pair\\projects\\sporehollow\\artifacts\\research\\20261010-211340-514\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269962
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\research-pair\\projects\\sporehollow\\artifacts\\research\\20261010-211529-331\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269962
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\research-pair\\projects\\sporehollow\\artifacts\\research\\20261010-214453-508\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269963
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\research-pair\\projects\\sporehollow\\artifacts\\research\\20261010-214608-614\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269964
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\research-pair\\projects\\sporehollow\\artifacts\\research\\20261010-215738-566\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269959
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\research-pair\\projects\\sporehollow\\artifacts\\research\\20261010-220021-473\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269965
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\research-pair\\projects\\sporehollow\\artifacts\\research\\20261010-224805-508\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269964
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\research-pair\\projects\\sporehollow\\artifacts\\research\\20261010-231139-938\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269964
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\research-pair\\projects\\sporehollow\\artifacts\\research\\20261010-231333-606\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269963
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\whitespace-public-release\\projects\\sporehollow\\artifacts\\asset-index-import\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269964
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\whitespace-public-release\\projects\\sporehollow\\artifacts\\verification\\20261011-194139-553\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269963
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\whitespace-public-release\\projects\\sporehollow\\artifacts\\verification\\20261011-200030-859\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269962
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\whitespace-public-release\\projects\\sporehollow\\artifacts\\verification\\20261011-200513-002\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269963
+    },
+    {
+      "kind": "editor documentation cache",
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\whitespace-public-release\\projects\\sporehollow\\artifacts\\verification\\20261011-211828-085\\user-data\\Godot\\cache\\editor_doc_cache-4.7.res",
+      "bytes": 3269963
+    }
+  ]
+}

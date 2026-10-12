@@ -1,0 +1,290 @@
+{
+  "date": "2026-10-12",
+  "before_bytes_without_git": 3812824351,
+  "after_bytes_without_git": 3132095688,
+  "removed_bytes": 680728663,
+  "roots": [
+    {
+      "root": "C:\\Users\\masat\\Documents\\Codex\\2026-09-10\\realtime-voice-chat",
+      "bytes_without_git": 0
+    },
+    {
+      "root": "C:\\Users\\masat\\Documents\\Codex\\2026-09-10\\realtime-voice-chat-2",
+      "bytes_without_git": 0
+    },
+    {
+      "root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\bgm-import",
+      "bytes_without_git": 0
+    },
+    {
+      "root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\book-reference",
+      "bytes_without_git": 0
+    },
+    {
+      "root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\cleanup-audit",
+      "bytes_without_git": 259253
+    },
+    {
+      "root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\feedback-followup-20261010",
+      "bytes_without_git": 3101435
+    },
+    {
+      "root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\flow-baseline",
+      "bytes_without_git": 1406605
+    },
+    {
+      "root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\forest-reference",
+      "bytes_without_git": 0
+    },
+    {
+      "root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\generated-imports-20261009-184446",
+      "bytes_without_git": 4128
+    },
+    {
+      "root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\generated-imports-20261009-194756",
+      "bytes_without_git": 4116
+    },
+    {
+      "root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\generated-imports-guide-20261009-202008-469",
+      "bytes_without_git": 4147
+    },
+    {
+      "root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\layout-reference-20261009",
+      "bytes_without_git": 12565
+    },
+    {
+      "root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\library-bgm-helper-1805",
+      "bytes_without_git": 15279
+    },
+    {
+      "root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\library-enemy-stall",
+      "bytes_without_git": 11913
+    },
+    {
+      "root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\path-diagnosis",
+      "bytes_without_git": 126874
+    },
+    {
+      "root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-audit-20261008",
+      "bytes_without_git": 552
+    },
+    {
+      "root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit",
+      "bytes_without_git": 331944806
+    },
+    {
+      "root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-quality",
+      "bytes_without_git": 217537623
+    },
+    {
+      "root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-review-cleanup",
+      "bytes_without_git": 189674912
+    },
+    {
+      "root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-09\\task\\caption-release-finalize",
+      "bytes_without_git": 89672
+    },
+    {
+      "root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-09\\task\\caption-review",
+      "bytes_without_git": 194945
+    },
+    {
+      "root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-09\\task\\github-refresh-docs",
+      "bytes_without_git": 459810
+    },
+    {
+      "root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-09\\task\\library-upload-merchant-025357",
+      "bytes_without_git": 991270
+    },
+    {
+      "root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-09\\task\\merchant-mouth-input",
+      "bytes_without_git": 172325
+    },
+    {
+      "root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-09\\task\\merchant-mouth-work",
+      "bytes_without_git": 16624090
+    },
+    {
+      "root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-09\\task\\qa-latest-90c0fda",
+      "bytes_without_git": 3535957
+    },
+    {
+      "root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-09\\task\\release-92d1048",
+      "bytes_without_git": 193770068
+    },
+    {
+      "root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-09\\task\\release-c5c2833",
+      "bytes_without_git": 193765965
+    },
+    {
+      "root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-09\\task\\release-finalize",
+      "bytes_without_git": 158953
+    },
+    {
+      "root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-09\\task\\research-three-encounters",
+      "bytes_without_git": 201946489
+    },
+    {
+      "root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-09\\task\\three-changes",
+      "bytes_without_git": 114782
+    },
+    {
+      "root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-09\\task\\ui-name-review",
+      "bytes_without_git": 194344002
+    },
+    {
+      "root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-09\\task\\ui-reference",
+      "bytes_without_git": 11914
+    },
+    {
+      "root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-09\\task\\uniform-journal-review",
+      "bytes_without_git": 164961
+    },
+    {
+      "root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01",
+      "bytes_without_git": 2
+    },
+    {
+      "root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work",
+      "bytes_without_git": 912441594
+    },
+    {
+      "root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\library-design-20261010",
+      "bytes_without_git": 11904
+    },
+    {
+      "root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\library-external-review-20261010",
+      "bytes_without_git": 89830
+    },
+    {
+      "root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\library-handoff-20261010",
+      "bytes_without_git": 180627
+    },
+    {
+      "root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\library-intro-72ffae4",
+      "bytes_without_git": 225405
+    },
+    {
+      "root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\onsite-clarity",
+      "bytes_without_git": 223964125
+    },
+    {
+      "root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\research-pair",
+      "bytes_without_git": 341568775
+    },
+    {
+      "root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\whitespace-public-release",
+      "bytes_without_git": 97568664
+    },
+    {
+      "root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-11\\task-3\\review-01",
+      "bytes_without_git": 1177082
+    },
+    {
+      "root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-12\\task\\headless-baseline",
+      "bytes_without_git": 4487
+    },
+    {
+      "root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-12\\task\\headless-baseline-test_arrival_routes",
+      "bytes_without_git": 0
+    },
+    {
+      "root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-12\\task\\headless-baseline-test_morning_save",
+      "bytes_without_git": 0
+    },
+    {
+      "root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-12\\task\\headless-biome-compat",
+      "bytes_without_git": 2071
+    },
+    {
+      "root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-12\\task\\headless-biome-distribution",
+      "bytes_without_git": 1089356
+    },
+    {
+      "root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-12\\task\\headless-biome-distribution-diagnostic",
+      "bytes_without_git": 1091900
+    },
+    {
+      "root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-12\\task\\headless-biome-distribution-final",
+      "bytes_without_git": 1091283
+    },
+    {
+      "root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-12\\task\\headless-biome-views",
+      "bytes_without_git": 2300
+    },
+    {
+      "root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-12\\task\\headless-biome01-first",
+      "bytes_without_git": 303
+    },
+    {
+      "root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-12\\task\\headless-biome01-fixed",
+      "bytes_without_git": 1082039
+    },
+    {
+      "root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-12\\task\\headless-legacy-fixture",
+      "bytes_without_git": 54530
+    },
+    {
+      "root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-12\\task\\headless-regression-test_animal_commands",
+      "bytes_without_git": 0
+    },
+    {
+      "root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-12\\task\\headless-regression-test_arrival_routes",
+      "bytes_without_git": 0
+    },
+    {
+      "root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-12\\task\\headless-regression-test_colony_tasks09",
+      "bytes_without_git": 0
+    },
+    {
+      "root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-12\\task\\headless-regression-test_cycle09",
+      "bytes_without_git": 0
+    },
+    {
+      "root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-12\\task\\headless-regression-test_explicit_storage",
+      "bytes_without_git": 0
+    },
+    {
+      "root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-12\\task\\headless-regression-test_livestock09",
+      "bytes_without_git": 0
+    },
+    {
+      "root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-12\\task\\headless-regression-test_morning_save",
+      "bytes_without_git": 0
+    },
+    {
+      "root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-12\\task\\headless-regression-test_navigation",
+      "bytes_without_git": 0
+    },
+    {
+      "root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-12\\task\\headless-regression-test_negotiation",
+      "bytes_without_git": 0
+    },
+    {
+      "root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-12\\task\\headless-regression-test_nutrition09",
+      "bytes_without_git": 0
+    },
+    {
+      "root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-12\\task\\headless-regression-test_review02",
+      "bytes_without_git": 0
+    },
+    {
+      "root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-12\\task\\headless-regression-test_visible_boundary",
+      "bytes_without_git": 0
+    },
+    {
+      "root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-12\\task\\headless-regression-test_work_food_chain",
+      "bytes_without_git": 0
+    },
+    {
+      "root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-12\\task\\headless-regression-test_zones09",
+      "bytes_without_git": 0
+    }
+  ],
+  "remaining_requires_review": [
+    "ui-name-review: edited sources and review originals",
+    "release-92d1048/release-c5c2833/research-three-encounters: uncommitted changes",
+    "old repositories: other projects, review originals and Git history",
+    "merchant-mouth-work: original production inputs and delivery records"
+  ]
+}

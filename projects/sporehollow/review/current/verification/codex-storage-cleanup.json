@@ -1,0 +1,122 @@
+{
+  "current_exe_sha256": "25141146DED2A167AE07652113342FFFAF7318A08BCC30814130C29FDDA75F6C",
+  "date": "2026-10-12",
+  "protected": "All source snapshots, edited review sources, formal assets, current player saves, Git history and review originals retained",
+  "removed_bytes": 167984901.0,
+  "removed": [
+    {
+      "reason": "Obsolete 90c0fda QA EXE; current published EXE already verified",
+      "bytes": 127046568,
+      "recursive": false,
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-09\\task\\qa-latest-90c0fda\\WhistleRanch-preview.exe"
+    },
+    {
+      "reason": "Regenerable import cache in retired QA snapshot; source metadata retained",
+      "bytes": 16394461.0,
+      "recursive": true,
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-09\\task\\ui-name-review\\snapshot\\projects\\sporehollow\\.godot"
+    },
+    {
+      "reason": "Regenerable import cache in retired QA snapshot; source metadata retained",
+      "bytes": 512328.0,
+      "recursive": true,
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-09\\task\\qa-latest-90c0fda\\source-snapshot\\.godot"
+    },
+    {
+      "reason": "Completed automated-test outputs; identical JSON/log evidence retained in canonical review; only reproducible fixture saves removed",
+      "bytes": 3789.0,
+      "recursive": true,
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-12\\task\\headless-baseline-test_arrival_routes"
+    },
+    {
+      "reason": "Completed automated-test outputs; identical JSON/log evidence retained in canonical review; only reproducible fixture saves removed",
+      "bytes": 244315.0,
+      "recursive": true,
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-12\\task\\headless-baseline-test_morning_save"
+    },
+    {
+      "reason": "Completed automated-test outputs; identical JSON/log evidence retained in canonical review; only reproducible fixture saves removed",
+      "bytes": 112.0,
+      "recursive": true,
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-12\\task\\headless-regression-test_animal_commands"
+    },
+    {
+      "reason": "Completed automated-test outputs; identical JSON/log evidence retained in canonical review; only reproducible fixture saves removed",
+      "bytes": 2832.0,
+      "recursive": true,
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-12\\task\\headless-regression-test_arrival_routes"
+    },
+    {
+      "reason": "Completed automated-test outputs; identical JSON/log evidence retained in canonical review; only reproducible fixture saves removed",
+      "bytes": 2147622.0,
+      "recursive": true,
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-12\\task\\headless-regression-test_colony_tasks09"
+    },
+    {
+      "reason": "Completed automated-test outputs; identical JSON/log evidence retained in canonical review; only reproducible fixture saves removed",
+      "bytes": 3301769.0,
+      "recursive": true,
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-12\\task\\headless-regression-test_cycle09"
+    },
+    {
+      "reason": "Completed automated-test outputs; identical JSON/log evidence retained in canonical review; only reproducible fixture saves removed",
+      "bytes": 2150422.0,
+      "recursive": true,
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-12\\task\\headless-regression-test_explicit_storage"
+    },
+    {
+      "reason": "Completed automated-test outputs; identical JSON/log evidence retained in canonical review; only reproducible fixture saves removed",
+      "bytes": 2161656.0,
+      "recursive": true,
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-12\\task\\headless-regression-test_livestock09"
+    },
+    {
+      "reason": "Completed automated-test outputs; identical JSON/log evidence retained in canonical review; only reproducible fixture saves removed",
+      "bytes": 6818766.0,
+      "recursive": true,
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-12\\task\\headless-regression-test_morning_save"
+    },
+    {
+      "reason": "Completed automated-test outputs; identical JSON/log evidence retained in canonical review; only reproducible fixture saves removed",
+      "bytes": 3313.0,
+      "recursive": true,
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-12\\task\\headless-regression-test_navigation"
+    },
+    {
+      "reason": "Completed automated-test outputs; identical JSON/log evidence retained in canonical review; only reproducible fixture saves removed",
+      "bytes": 1076654.0,
+      "recursive": true,
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-12\\task\\headless-regression-test_negotiation"
+    },
+    {
+      "reason": "Completed automated-test outputs; identical JSON/log evidence retained in canonical review; only reproducible fixture saves removed",
+      "bytes": 1079754.0,
+      "recursive": true,
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-12\\task\\headless-regression-test_nutrition09"
+    },
+    {
+      "reason": "Completed automated-test outputs; identical JSON/log evidence retained in canonical review; only reproducible fixture saves removed",
+      "bytes": 4487.0,
+      "recursive": true,
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-12\\task\\headless-regression-test_review02"
+    },
+    {
+      "reason": "Completed automated-test outputs; identical JSON/log evidence retained in canonical review; only reproducible fixture saves removed",
+      "bytes": 2154741.0,
+      "recursive": true,
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-12\\task\\headless-regression-test_visible_boundary"
+    },
+    {
+      "reason": "Completed automated-test outputs; identical JSON/log evidence retained in canonical review; only reproducible fixture saves removed",
+      "bytes": 1804369.0,
+      "recursive": true,
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-12\\task\\headless-regression-test_work_food_chain"
+    },
+    {
+      "reason": "Completed automated-test outputs; identical JSON/log evidence retained in canonical review; only reproducible fixture saves removed",
+      "bytes": 1076943.0,
+      "recursive": true,
+      "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-12\\task\\headless-regression-test_zones09"
+    }
+  ]
+}
