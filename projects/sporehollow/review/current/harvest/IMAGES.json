@@ -1,0 +1,100 @@
+{
+  "source_commit": "ca21a144c79b14eb8ce465ef806afeee4bd82527",
+  "asset_delivery_commit": "b0e917a11f205190dde0136165a72c189f39e275",
+  "media": [
+    {
+      "file": "chop_hit.wav",
+      "sha256": "ce2c7a37fa053cdb7f3d537f36dca6eb1529838feb782d8a3e3f336127e99c1a",
+      "bytes": 9746
+    },
+    {
+      "file": "clear_tree.webp",
+      "sha256": "4242bb99a3ff9aefbf25746f90e94c2ec49d6906cff2b75882d74810c28963c7",
+      "bytes": 936334,
+      "encoded_frames": 51,
+      "captured_frames": 64,
+      "duration_ms": 8000,
+      "lossless": true
+    },
+    {
+      "file": "clear_tree_after.png",
+      "sha256": "b76ab9a2bb2ad6516f253fb0e3c9b64a0787b1f25823e3a0675817dedac3448c",
+      "bytes": 94779,
+      "width": 1280,
+      "height": 800
+    },
+    {
+      "file": "clear_tree_near_complete.png",
+      "sha256": "870cfd946aa980646db83d4c799d926e7dceca98ffeab1af64a684cb651f4d92",
+      "bytes": 101725,
+      "width": 1280,
+      "height": 800
+    },
+    {
+      "file": "clear_tree_start.png",
+      "sha256": "c0c315530a935d79a718c4c0d2886fc5b47b964b54a8d572bb2e4a375e0b57b9",
+      "bytes": 99620,
+      "width": 1280,
+      "height": 800
+    },
+    {
+      "file": "clear_tree_strike.png",
+      "sha256": "52e3f9ccb7efd5b95e9e47c36e6d13acb382bcf4a29d3590c4cdf9268aab5bab",
+      "bytes": 100604,
+      "width": 1280,
+      "height": 800
+    },
+    {
+      "file": "mine.webp",
+      "sha256": "012d23c371cc15a8fe9bffec1c81fb53641d52006bf46ca1844c2276868bd72c",
+      "bytes": 807686,
+      "encoded_frames": 51,
+      "captured_frames": 64,
+      "duration_ms": 8000,
+      "lossless": true
+    },
+    {
+      "file": "mine_after.png",
+      "sha256": "23bfd8992bd728f848dc0a36c550251a18f41e54cd23bdf649a26889c842fed2",
+      "bytes": 92716,
+      "width": 1280,
+      "height": 800
+    },
+    {
+      "file": "mine_hit.wav",
+      "sha256": "966428205745da06dc96bc7227749f03b94e6e287b92830c4ca1642b96ea8581",
+      "bytes": 9746
+    },
+    {
+      "file": "mine_near_complete.png",
+      "sha256": "41dcc4014e4c3c4cc4efb6568d4db2ee79a81ab350185d1a8d00facbb76c1a00",
+      "bytes": 92095,
+      "width": 1280,
+      "height": 800
+    },
+    {
+      "file": "mine_start.png",
+      "sha256": "149f751f42a1ed7223222c85f146da4ad5adeb3c78f75b6564dc24ba3b50e68f",
+      "bytes": 90058,
+      "width": 1280,
+      "height": 800
+    },
+    {
+      "file": "mine_strike.png",
+      "sha256": "ea8132764fbc33b12b05eae246f09c96a2bb026f646766fb392cc7417014b49c",
+      "bytes": 90665,
+      "width": 1280,
+      "height": 800
+    },
+    {
+      "file": "rock_crumble.wav",
+      "sha256": "5a3d52644981c5e05b53158dd0fca3caf3fa1eca3c67877c1e2df5f02c5c9cac",
+      "bytes": 17684
+    },
+    {
+      "file": "tree_fall.wav",
+      "sha256": "431013c8f1f8a707dedf55c550ff9f4a6f2381fe556b41e7cd81a9d9ef14e244",
+      "bytes": 17684
+    }
+  ]
+}

@@ -49,10 +49,23 @@ func run():
 	check(not restored.trees.has(p) and not restored.trees.has(p+Vector2i.RIGHT) and restored.Stock.totals(restored).get("wood",0)==16 and restored.Stock.available(restored,"wood")==0,"Both trees finish individually and leave exactly sixteen physical wood")
 	check(restored.walkable(p) and restored.Buildings.reason(restored,"wall",p,false) =="物があるため建設できません","Felled cell loses tree collision; dropped wood remains a normal building obstacle")
 	check(restored.harvest_events.size()<=64 and restored.harvest_events.filter(func(e):return e.event=="complete").size()==2,"Presentation events are bounded and completion is emitted once per tree")
+	w=farm();w.keeper.pos=Vector2i(4,4);w.keeper.work_priorities.gather=0
+	for i in range(12):
+		var cell=Vector2i(10+i*2,10);w.rocks[cell]={"amount":8,"forbidden":false}
+		var person=w.keeper.duplicate(true);person.pos=cell+Vector2i.LEFT;w.Work.register(w,"miner_%d"%i,person);person.work_priorities.gather=1
+		w.Tasks.designate(w,"mine",cell)
+	ticks(w,20)
+	check(w.rocks.is_empty() and w.Stock.totals(w).get("stone",0)==96,"Twelve simultaneous workers finish distinct cells with exact resource totals")
+	check(w.harvest_events.size()==64 and w.next_harvest_event>64,"Simultaneous workers retain bounded event history without hidden work queues")
 	var a=Audio.new();root.add_child(a);a.set_process(false)
 	check(a.cache.mine_hit.data!=a.cache.chop_hit.data and a.cache.mine_hit.data.count(0)<a.cache.mine_hit.data.size(),"Mining and chopping use distinct non-silent PCM sounds")
 	check(a.harvest_cue("mine_hit",0) and not a.harvest_cue("chop_hit",0),"Simultaneous workers share a bounded sound rate")
 	a.seconds+=0.2;check(not a.harvest_cue("mine_hit",15) and a.harvest_cue("chop_hit",3),"Offscreen/distant work is quiet while nearby work remains audible")
+	a.seconds+=1.0;var heard=0
+	for i in range(100):
+		a.seconds+=0.002
+		if a.harvest_cue("mine_hit",0):heard+=1
+	check(heard<=2,"One hundred burst cues cannot create an audio pile-up")
 	a.cache.mine_hit.save_to_wav(out+"/mine_hit.wav");a.cache.chop_hit.save_to_wav(out+"/chop_hit.wav");a.queue_free()
 	FileAccess.open(out+"/harvest.json",FileAccess.WRITE).store_string(JSON.stringify({"checks":checks,"failures":failures,"method":"Production World.step, real IDs and stock, interruption/forbid/cancel, campaign and full snapshot; PCM synthesis under Dummy audio"},"\t"))
 	print("HARVEST: ",checks.size()," checks, failures=",failures);quit(1 if failures else 0)

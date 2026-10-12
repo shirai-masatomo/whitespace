@@ -1,3 +1,7 @@
+## 採掘・伐採：実装・関連検証・GPU確認済み
+
+現地作業、打撃に同期した仮の道具/音/石片/木屑/葉/粉塵、亀裂/切口、1セル崩壊/TreeID倒木を接続。成果は現地の未回収物資、進捗は中断/禁止/取消再指定/保存で保持。関連7スイート、新規28項目、PNG8枚/8秒連続画像2本を確認。EXE反映は次工程。[報告](review/current/harvest/REPORT.md)。
+
 ## 2026-10-12 撮影の原因特定と回復
 
 release EXEに --script を渡した撮影ランナーの誤り。非対応引数が無視され通常ゲームが継続しtimeout。開発用Godotへ修正して更新後8枚を取得/画素確認。通常EXE bf6eeeaと同じゲームcode。before比較は未取得、動物表の列/3行目と岩の描込みを別課題として記録。[原因](review/current/RENDER_DIAGNOSIS.md)・[画面](review/current/SCREENS_INTEGRATED.md)。以下の「原因未特定/撮影未完了」は調査前の記録。

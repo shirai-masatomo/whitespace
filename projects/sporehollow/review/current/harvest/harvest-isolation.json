@@ -1,0 +1,25 @@
+{
+  "result": {
+    "PID": 15340,
+    "ThreadID": 35156,
+    "ExitCode": 0,
+    "OwnedWindowCount": 2,
+    "Station": "Service-0x0-bf6d9650$",
+    "Desktop": "Render_e3ce4ab93e15414db04ab3864cd479cd",
+    "ObservedDesktop": "Render_e3ce4ab93e15414db04ab3864cd479cd",
+    "NonInteractive": true,
+    "DesktopMatched": true,
+    "TimedOut": false,
+    "OwnedWindows": [
+      "EngineWGLDetect: ",
+      "NVOpenGLPbuffer: __wglDummyWindowFodder",
+      "Engine: ",
+      "Engine: ホイッスル牧場・最新開発版（部分実装） (DEBUG)"
+    ]
+  },
+  "command": "\"C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\.tools\\Godot_v4.7.2-stable_win64.exe\" --path \"C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\" --audio-driver Dummy --rendering-method gl_compatibility --max-fps 30 --resolution 1280x800 --log-file \"C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\isolated\\current/harvest-render.log\" --script tests/review_harvest_visual.gd -- --isolated-review",
+  "source_commit": "ca21a144c79b14eb8ce465ef806afeee4bd82527",
+  "start_utc": "2026-10-12T11:28:09.3332925Z",
+  "asset_delivery_commit": "b0e917a11f205190dde0136165a72c189f39e275",
+  "end_utc": "2026-10-12T11:28:24.2386811Z"
+}

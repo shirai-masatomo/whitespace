@@ -1,0 +1,251 @@
+{
+	"audio": "Dummy driver; emitted work cues and generated PCM exported, hardware listening not claimed",
+	"implementation": "ca21a144c79b14eb8ce465ef806afeee4bd82527",
+	"method": "Actual GPU viewport frames of normal World.step at fixed simulation sampling, 64 frames per job at 8 fps; seed31 with explicitly controlled approach/adjacent deposits/trees, no real user save",
+	"samples": [
+		{
+			"audio_played": {
+				"mine_hit": 5,
+				"rock_crumble": 1
+			},
+			"events": [
+				{
+					"event": "start",
+					"id": 1,
+					"kind": "mine",
+					"pos": "(19, 12)",
+					"progress": 0.0,
+					"tick": 5,
+					"worker": "keeper"
+				},
+				{
+					"event": "strike",
+					"id": 2,
+					"kind": "mine",
+					"pos": "(19, 12)",
+					"progress": 0.1875,
+					"tick": 7,
+					"worker": "keeper"
+				},
+				{
+					"event": "strike",
+					"id": 3,
+					"kind": "mine",
+					"pos": "(19, 12)",
+					"progress": 0.375,
+					"tick": 10,
+					"worker": "keeper"
+				},
+				{
+					"event": "strike",
+					"id": 4,
+					"kind": "mine",
+					"pos": "(19, 12)",
+					"progress": 0.5625,
+					"tick": 13,
+					"worker": "keeper"
+				},
+				{
+					"event": "strike",
+					"id": 5,
+					"kind": "mine",
+					"pos": "(19, 12)",
+					"progress": 0.75,
+					"tick": 16,
+					"worker": "keeper"
+				},
+				{
+					"event": "strike",
+					"id": 6,
+					"kind": "mine",
+					"pos": "(19, 12)",
+					"progress": 0.9375,
+					"tick": 19,
+					"worker": "keeper"
+				},
+				{
+					"event": "complete",
+					"id": 7,
+					"kind": "mine",
+					"pos": "(19, 12)",
+					"progress": 1.0,
+					"tick": 20,
+					"worker": "keeper"
+				}
+			],
+			"kind": "mine",
+			"remaining_rocks": 4,
+			"remaining_trees": 0
+		},
+		{
+			"audio_played": {
+				"chop_hit": 5,
+				"mine_hit": 5,
+				"rock_crumble": 1,
+				"tree_fall": 1
+			},
+			"events": [
+				{
+					"event": "start",
+					"id": 1,
+					"kind": "clear_tree",
+					"pos": "(19, 12)",
+					"progress": 0.0,
+					"tick": 5,
+					"worker": "keeper"
+				},
+				{
+					"event": "strike",
+					"id": 2,
+					"kind": "clear_tree",
+					"pos": "(19, 12)",
+					"progress": 0.1875,
+					"tick": 7,
+					"worker": "keeper"
+				},
+				{
+					"event": "strike",
+					"id": 3,
+					"kind": "clear_tree",
+					"pos": "(19, 12)",
+					"progress": 0.375,
+					"tick": 10,
+					"worker": "keeper"
+				},
+				{
+					"event": "strike",
+					"id": 4,
+					"kind": "clear_tree",
+					"pos": "(19, 12)",
+					"progress": 0.5625,
+					"tick": 13,
+					"worker": "keeper"
+				},
+				{
+					"event": "strike",
+					"id": 5,
+					"kind": "clear_tree",
+					"pos": "(19, 12)",
+					"progress": 0.75,
+					"tick": 16,
+					"worker": "keeper"
+				},
+				{
+					"event": "strike",
+					"id": 6,
+					"kind": "clear_tree",
+					"pos": "(19, 12)",
+					"progress": 0.9375,
+					"tick": 19,
+					"worker": "keeper"
+				},
+				{
+					"event": "complete",
+					"id": 7,
+					"kind": "clear_tree",
+					"pos": "(19, 12)",
+					"progress": 1.0,
+					"tick": 20,
+					"worker": "keeper"
+				}
+			],
+			"kind": "clear_tree",
+			"remaining_rocks": 0,
+			"remaining_trees": 1
+		}
+	],
+	"screens": [
+		{
+			"file": "mine_start.png",
+			"frame": 10,
+			"phase": "start",
+			"physical_stock": {},
+			"progress": 0.25,
+			"seconds": 1.25,
+			"target_exists": true,
+			"tick": 5,
+			"usable_stock": 0
+		},
+		{
+			"file": "mine_strike.png",
+			"frame": 14,
+			"phase": "strike",
+			"physical_stock": {},
+			"progress": 0.75,
+			"seconds": 1.75,
+			"target_exists": true,
+			"tick": 7,
+			"usable_stock": 0
+		},
+		{
+			"file": "mine_near_complete.png",
+			"frame": 38,
+			"phase": "near_complete",
+			"physical_stock": {},
+			"progress": 3.75,
+			"seconds": 4.75,
+			"target_exists": true,
+			"tick": 19,
+			"usable_stock": 0
+		},
+		{
+			"file": "mine_after.png",
+			"frame": 46,
+			"phase": "after",
+			"physical_stock": {
+				"stone": 8
+			},
+			"progress": 0.0,
+			"seconds": 5.75,
+			"target_exists": false,
+			"tick": 23,
+			"usable_stock": 0
+		},
+		{
+			"file": "clear_tree_start.png",
+			"frame": 10,
+			"phase": "start",
+			"physical_stock": {},
+			"progress": 0.25,
+			"seconds": 1.25,
+			"target_exists": true,
+			"tick": 5,
+			"usable_stock": 0
+		},
+		{
+			"file": "clear_tree_strike.png",
+			"frame": 14,
+			"phase": "strike",
+			"physical_stock": {},
+			"progress": 0.75,
+			"seconds": 1.75,
+			"target_exists": true,
+			"tick": 7,
+			"usable_stock": 0
+		},
+		{
+			"file": "clear_tree_near_complete.png",
+			"frame": 38,
+			"phase": "near_complete",
+			"physical_stock": {},
+			"progress": 3.75,
+			"seconds": 4.75,
+			"target_exists": true,
+			"tick": 19,
+			"usable_stock": 0
+		},
+		{
+			"file": "clear_tree_after.png",
+			"frame": 46,
+			"phase": "after",
+			"physical_stock": {
+				"wood": 8
+			},
+			"progress": 0.0,
+			"seconds": 5.75,
+			"target_exists": false,
+			"tick": 23,
+			"usable_stock": 0
+		}
+	]
+}

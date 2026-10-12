@@ -1,3 +1,9 @@
+# 最新：採掘・伐採の作業演出
+
+[実装・検証・仮素材](harvest/REPORT.md)・[PNG8枚/連続画像2本/音](harvest/SCREENS.md)。実装ca21a14、正式素材b0e917a。通常EXE反映は進行中。
+
+---
+
 # 今回：仕事・物流・操作・岩場の統合修正
 
 [現在の状況・原因・関連テスト・配布](HANDOFF.md)。動物1.25倍を維持し採用岩場の実物を反映。実装667ca06、配布版bf6eeea。関連テスト/Windows export成功。EXE本体の隔離GPU起動/終了/再開5項目を確認し、通常EXEへ反映済み。撮影失敗はrelease EXEの非対応 --script を使ったランナーの誤りと特定。修正後の実GPU画面8枚を取得/画素確認。[原因報告](RENDER_DIAGNOSIS.md)・[画面8枚](SCREENS_INTEGRATED.md)。同条件beforeは未取得。過去の画像を今回の完成証拠として扱いません。
