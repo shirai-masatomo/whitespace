@@ -1,36 +1,49 @@
 extends RefCounted
 const Delivered = preload("res://game/delivered_art.gd")
 const Biome=preload("res://game/biome_map.gd")
-# Shared vertex colors make contiguous soil/grass/rock transitions at every zoom.
-# Cached map fields and coordinate hashes never consume simulation RNG.
+const Ground=preload("res://game/rock_art.gd")
+static var ground_source=null
+static var ground_version=""
+static var ground_cells=[]
+# Geometry, vertex colours and decorative choices are built once per terrain version.
+# Only viewport cells are submitted; changing rocks/trees never rebuilds this base.
+static func cache_ground(world,tile: Vector2):
+	var token="%s:%s:%s"%[world.terrain.get("version",0),world.terrain.seed,tile]
+	if ground_source==world and ground_version==token:return
+	ground_source=world;ground_version=token;ground_cells=[]
+	for y in range(world.H):
+		for x in range(world.W):
+			var p=Vector2(x,y)*tile;var cell=Vector2i(x,y)
+			var colors=PackedColorArray()
+			for q in [cell,cell+Vector2i.RIGHT,cell+Vector2i.ONE,cell+Vector2i.DOWN]:
+				var rgb=world.terrain.vertices[q.y*(world.W+1)+q.x];colors.append(Color(rgb[0],rgb[1],rgb[2]))
+			ground_cells.append({"points":PackedVector2Array([p,p+Vector2(tile.x,0),p+tile,p+Vector2(0,tile.y)]),"colors":colors,"decor":decor_key(world,cell),"offset":Vector2(floori(Biome.unit(world.terrain.seed,x,y,173)*15)-7,floori(Biome.unit(world.terrain.seed,x,y,179)*11)-5)})
+static func decor_key(world,p: Vector2i) -> String:
+	var zone=Biome.kind(world,p);var roll=Biome.unit(world.terrain.seed,p.x,p.y,103)
+	var which=int(Biome.unit(world.terrain.seed,p.x,p.y,111)*5)
+	var prefix="biome_environment_v1/ground/"
+	match zone:
+		"dry":
+			if roll<0.44:return prefix+"dry/"+["short_grass","soil_spot","cracks_00","grass_tuft","cracks_01"][which]+".png"
+		"lush":
+			if roll<0.52:return prefix+"lush/"+["low_sparse","low_dense","tall_tuft","cover_sparse","flowers"][which]+".png"
+		"woodland":
+			if roll<0.25:return prefix+"lush/"+["low_sparse","cover_sparse","low_sparse","low_dense","flowers"][which]+".png"
+		"open":
+			if roll<0.09:return prefix+"lush/low_sparse.png"
+	return ""
 static func draw_ground(c: CanvasItem, world, tile: Vector2, _time: float = 0):
+	cache_ground(world,tile)
 	var inv=c.get_canvas_transform().affine_inverse()
 	var top=inv*Vector2.ZERO;var bottom=inv*c.get_viewport_rect().size
 	c.draw_rect(Rect2(top-Vector2(100,100),bottom-top+Vector2(200,200)),Color("344c3b"))
 	for y in range(maxi(0,floori(top.y/tile.y)-1),mini(world.H,ceili(bottom.y/tile.y)+1)):
 		for x in range(maxi(0,floori(top.x/tile.x)-1),mini(world.W,ceili(bottom.x/tile.x)+1)):
-			var p=Vector2(x,y)*tile;var f=Biome.field(world,Vector2i(x,y))
-			var corners=PackedVector2Array([p,p+Vector2(tile.x,0),p+tile,p+Vector2(0,tile.y)])
-			var colors=PackedColorArray()
-			for q in [Vector2i(x,y),Vector2i(x+1,y),Vector2i(x+1,y+1),Vector2i(x,y+1)]:
-				var rgb=world.terrain.vertices[q.y*(world.W+1)+q.x];colors.append(Color(rgb[0],rgb[1],rgb[2]))
-			c.draw_polygon(corners,colors)
-			var density=f[0]*(1.0-f[2])*(1.0-f[3]*0.65)
-			for i in range(4):
-				if Biome.unit(world.terrain.seed,x,y,103+i)>density*0.8:continue
-				var at=p+Vector2(3+floorf(Biome.unit(world.terrain.seed,x,y,111+i)*(tile.x-8)),7+floorf(Biome.unit(world.terrain.seed,x,y,127+i)*(tile.y-12)))
-				c.draw_rect(Rect2(at,Vector2(2,4)),Color("6b874b"))
-				c.draw_rect(Rect2(at+Vector2(3,-2),Vector2(2,5)),Color("9bad67"))
-				if f[1]>0.45:c.draw_rect(Rect2(at+Vector2(-3,1),Vector2(3,2)),Color("557747"))
-			# Low pebbles continue around deposits; bounded in-tile footprints avoid clipped edge objects.
-			for i in range(3):
-				if Biome.unit(world.terrain.seed,x,y,149+i)>f[2]*0.65:continue
-				var at=p+Vector2(4+floorf(Biome.unit(world.terrain.seed,x,y,157+i)*(tile.x-12)),7+floorf(Biome.unit(world.terrain.seed,x,y,163+i)*(tile.y-16)))
-				c.draw_rect(Rect2(at+Vector2(-1,2),Vector2(7,3)),Color("77795e"))
-				c.draw_rect(Rect2(at,Vector2(5,3)),Color("b3af8d"))
-				c.draw_rect(Rect2(at+Vector2(1,0),Vector2(3,1)),Color("c8c2a1"))
+			var row=ground_cells[y*world.W+x];var cell=Vector2i(x,y)
+			c.draw_polygon(row.points,row.colors)
+			if row.decor!="" and not world.floors.has(cell) and not world.live_structure(cell) and not world.rocks.has(cell) and not world.natural.has(cell):
+				Ground.paint(c,row.decor,(Vector2(cell)+Vector2(0.5,0.5))*tile+row.offset,0.8)
 	c.draw_rect(Rect2(Vector2.ZERO,Vector2(world.W,world.H)*tile),Color("d4c89d"),false,3)
-
 
 static func draw_resource(c: CanvasItem, p: Vector2, kind: String):
 	if Delivered.RESOURCES.has(kind):

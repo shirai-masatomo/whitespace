@@ -1,0 +1,318 @@
+{
+	"checks": [
+		{
+			"check": "Ground drawing compiles without a renderer",
+			"passed": true
+		},
+		{
+			"check": "Same seed reproduces terrain and all natural targets: 1",
+			"passed": true
+		},
+		{
+			"check": "Five terrain characters present: 1 { \"open\": 895, \"lush\": 482, \"dry\": 93, \"woodland\": 143, \"rocky\": 87 }",
+			"passed": true
+		},
+		{
+			"check": "Organic central opening and initial resident near idol: 1",
+			"passed": true
+		},
+		{
+			"check": "Every walkable cell connects to center: 1",
+			"passed": true
+		},
+		{
+			"check": "All four edges reachable or occupied by an adjacent-mineable rock: 1",
+			"passed": true
+		},
+		{
+			"check": "Merchant, raid entries and idol approaches stay connected: 1",
+			"passed": true
+		},
+		{
+			"check": "Trees belong to woodland: 1",
+			"passed": true
+		},
+		{
+			"check": "Existing mine targets belong to rocky ground: 1",
+			"passed": true
+		},
+		{
+			"check": "Only existing capped harvest kinds: 1",
+			"passed": true
+		},
+		{
+			"check": "Only the existing first-day supplies enter shared stock; natural deposits do not: 1",
+			"passed": true
+		},
+		{
+			"check": "Same seed reproduces terrain and all natural targets: 17",
+			"passed": true
+		},
+		{
+			"check": "Five terrain characters present: 17 { \"open\": 584, \"lush\": 747, \"woodland\": 151, \"dry\": 117, \"rocky\": 101 }",
+			"passed": true
+		},
+		{
+			"check": "Organic central opening and initial resident near idol: 17",
+			"passed": true
+		},
+		{
+			"check": "Every walkable cell connects to center: 17",
+			"passed": true
+		},
+		{
+			"check": "All four edges reachable or occupied by an adjacent-mineable rock: 17",
+			"passed": true
+		},
+		{
+			"check": "Merchant, raid entries and idol approaches stay connected: 17",
+			"passed": true
+		},
+		{
+			"check": "Trees belong to woodland: 17",
+			"passed": true
+		},
+		{
+			"check": "Existing mine targets belong to rocky ground: 17",
+			"passed": true
+		},
+		{
+			"check": "Only existing capped harvest kinds: 17",
+			"passed": true
+		},
+		{
+			"check": "Only the existing first-day supplies enter shared stock; natural deposits do not: 17",
+			"passed": true
+		},
+		{
+			"check": "Same seed reproduces terrain and all natural targets: 31",
+			"passed": true
+		},
+		{
+			"check": "Five terrain characters present: 31 { \"lush\": 629, \"open\": 738, \"dry\": 78, \"woodland\": 121, \"rocky\": 134 }",
+			"passed": true
+		},
+		{
+			"check": "Organic central opening and initial resident near idol: 31",
+			"passed": true
+		},
+		{
+			"check": "Every walkable cell connects to center: 31",
+			"passed": true
+		},
+		{
+			"check": "All four edges reachable or occupied by an adjacent-mineable rock: 31",
+			"passed": true
+		},
+		{
+			"check": "Merchant, raid entries and idol approaches stay connected: 31",
+			"passed": true
+		},
+		{
+			"check": "Trees belong to woodland: 31",
+			"passed": true
+		},
+		{
+			"check": "Existing mine targets belong to rocky ground: 31",
+			"passed": true
+		},
+		{
+			"check": "Only existing capped harvest kinds: 31",
+			"passed": true
+		},
+		{
+			"check": "Only the existing first-day supplies enter shared stock; natural deposits do not: 31",
+			"passed": true
+		},
+		{
+			"check": "Same seed reproduces terrain and all natural targets: 97",
+			"passed": true
+		},
+		{
+			"check": "Five terrain characters present: 97 { \"open\": 797, \"rocky\": 138, \"dry\": 175, \"lush\": 429, \"woodland\": 161 }",
+			"passed": true
+		},
+		{
+			"check": "Organic central opening and initial resident near idol: 97",
+			"passed": true
+		},
+		{
+			"check": "Every walkable cell connects to center: 97",
+			"passed": true
+		},
+		{
+			"check": "All four edges reachable or occupied by an adjacent-mineable rock: 97",
+			"passed": true
+		},
+		{
+			"check": "Merchant, raid entries and idol approaches stay connected: 97",
+			"passed": true
+		},
+		{
+			"check": "Trees belong to woodland: 97",
+			"passed": true
+		},
+		{
+			"check": "Existing mine targets belong to rocky ground: 97",
+			"passed": true
+		},
+		{
+			"check": "Only existing capped harvest kinds: 97",
+			"passed": true
+		},
+		{
+			"check": "Only the existing first-day supplies enter shared stock; natural deposits do not: 97",
+			"passed": true
+		},
+		{
+			"check": "Same seed reproduces terrain and all natural targets: 2026",
+			"passed": true
+		},
+		{
+			"check": "Five terrain characters present: 2026 { \"lush\": 453, \"open\": 854, \"dry\": 93, \"rocky\": 141, \"woodland\": 159 }",
+			"passed": true
+		},
+		{
+			"check": "Organic central opening and initial resident near idol: 2026",
+			"passed": true
+		},
+		{
+			"check": "Every walkable cell connects to center: 2026",
+			"passed": true
+		},
+		{
+			"check": "All four edges reachable or occupied by an adjacent-mineable rock: 2026",
+			"passed": true
+		},
+		{
+			"check": "Merchant, raid entries and idol approaches stay connected: 2026",
+			"passed": true
+		},
+		{
+			"check": "Trees belong to woodland: 2026",
+			"passed": true
+		},
+		{
+			"check": "Existing mine targets belong to rocky ground: 2026",
+			"passed": true
+		},
+		{
+			"check": "Only existing capped harvest kinds: 2026",
+			"passed": true
+		},
+		{
+			"check": "Only the existing first-day supplies enter shared stock; natural deposits do not: 2026",
+			"passed": true
+		},
+		{
+			"check": "New deposit accepts existing mining designation",
+			"passed": true
+		},
+		{
+			"check": "Production mining creates physical stone at deposit",
+			"passed": true
+		},
+		{
+			"check": "Mining conserves the existing per-rock yield",
+			"passed": true
+		},
+		{
+			"check": "Campaign reload retains terrain, depleted mine and removed harvest",
+			"passed": true
+		},
+		{
+			"check": "Full snapshot writes",
+			"passed": true
+		},
+		{
+			"check": "Full snapshot preserves scenery and physical mine output",
+			"passed": true
+		},
+		{
+			"check": "Legacy campaign receives scenery without regenerating saved objects or stock",
+			"passed": true
+		},
+		{
+			"check": "Legacy load never becomes a fresh-map population request",
+			"passed": true
+		},
+		{
+			"check": "Different seeds vary the landscape",
+			"passed": true
+		}
+	],
+	"failures": 0,
+	"observations": [
+		{
+			"natural": 14,
+			"rocks": 37,
+			"seed": 1,
+			"terrain": {
+				"dry": 93,
+				"lush": 482,
+				"open": 895,
+				"rocky": 87,
+				"woodland": 143
+			},
+			"trees": 20,
+			"two_worlds_and_checks_ms": 1019.378
+		},
+		{
+			"natural": 14,
+			"rocks": 42,
+			"seed": 17,
+			"terrain": {
+				"dry": 117,
+				"lush": 747,
+				"open": 584,
+				"rocky": 101,
+				"woodland": 151
+			},
+			"trees": 16,
+			"two_worlds_and_checks_ms": 1151.704
+		},
+		{
+			"natural": 14,
+			"rocks": 41,
+			"seed": 31,
+			"terrain": {
+				"dry": 78,
+				"lush": 629,
+				"open": 738,
+				"rocky": 134,
+				"woodland": 121
+			},
+			"trees": 13,
+			"two_worlds_and_checks_ms": 1111.011
+		},
+		{
+			"natural": 14,
+			"rocks": 54,
+			"seed": 97,
+			"terrain": {
+				"dry": 175,
+				"lush": 429,
+				"open": 797,
+				"rocky": 138,
+				"woodland": 161
+			},
+			"trees": 24,
+			"two_worlds_and_checks_ms": 1125.889
+		},
+		{
+			"natural": 14,
+			"rocks": 42,
+			"seed": 2026,
+			"terrain": {
+				"dry": 93,
+				"lush": 453,
+				"open": 854,
+				"rocky": 141,
+				"woodland": 159
+			},
+			"trees": 23,
+			"two_worlds_and_checks_ms": 1077.278
+		}
+	],
+	"visual_review": "not performed; delegated"
+}

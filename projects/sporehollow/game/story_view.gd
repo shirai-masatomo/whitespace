@@ -8,14 +8,46 @@ static func tree_foot(g,p: Vector2i) -> Vector2:
 	var rank=preload("res://game/forest_pattern.gd").rank(p,g.world.seed_value)
 	return g.center(p)+Vector2((rank%15)-7,14+(rank%9)-4)
 
-static func tree(g,p: Vector2i,deep: bool=false):
-	var id="world.tree_"+["a","b","c"][preload("res://game/forest_pattern.gd").rank(p,g.world.seed_value)%3]
+const GroundArt=preload("res://game/rock_art.gd")
+static var stump_source=null
+static var stump_revision=""
+static var stump_cells=[]
+static func tree_variant(w,p: Vector2i) -> String:
+	return ["a","b","c"][preload("res://game/forest_pattern.gd").rank(p,w.seed_value)%3]
+static func notch_key(variant: String,progress: float) -> String:
+	if progress>=0.85:return "biome_environment_v2/tree_cut/"+{"a":"large","b":"medium","c":"small"}[variant]+"_near_fall.png"
+	if progress>=0.25:return "biome_environment_v1/forest/notch_"+variant+("_deep.png" if progress>=0.5 else "_light.png")
+	return ""
+static func tree(g,p: Vector2i,deep: bool=false,kick: float=0.0):
+	var variant=tree_variant(g.world,p);var id="world.tree_"+variant
 	var foot=tree_foot(g,p)
 	var obscured=(g.world.animals+g.world.enemies).any(func(a):return a.get("placed",not a.get("done",false)) and a.pos.x==p.x and a.pos.y<p.y and a.pos.y>=p.y-2) or (g.world.keeper.pos.x==p.x and g.world.keeper.pos.y<p.y and g.world.keeper.pos.y>=p.y-2)
-	g.draw_set_transform(foot*(1.0-TREE_SCALE),0,Vector2.ONE*TREE_SCALE)
-	g.Assets.Direction.draw(g,id+"_trunk",foot)
-	g.Assets.Direction.draw(g,id+"_canopy",foot,0.55 if obscured else (0.85 if deep else 1.0))
+	g.draw_set_transform(foot,kick,Vector2.ONE*TREE_SCALE)
+	g.Assets.Direction.draw(g,id+"_trunk",Vector2.ZERO)
+	var notch=notch_key(variant,g.world.Harvest.progress(g.world,"clear_tree",p))
+	if notch!="":GroundArt.paint(g,notch,Vector2.ZERO)
+	g.Assets.Direction.draw(g,id+"_canopy",Vector2.ZERO,0.55 if obscured else (0.85 if deep else 1.0))
 	g.draw_set_transform(Vector2.ZERO)
+static func cut_cells(w) -> Array:
+	# The saved original tree records keep exact IDs/positions after logging.
+	# Rebuild this small lookup only when history grows (or a different save opens).
+	var token="%s:%s:%s"%[w.seed_value,w.story.get("trees",[]).size(),w.story.get("cleared",[]).size()]
+	if stump_source!=w or stump_revision!=token:
+		stump_source=w;stump_revision=token;stump_cells=[]
+		var cleared={}
+		for id in w.story.get("cleared",[]):cleared[id]=true
+		for row in w.story.get("trees",[]):
+			if cleared.has(row.id):stump_cells.append(w.Story.cell(row.position))
+	return stump_cells
+static func stumps(g,visible: Rect2):
+	var w=g.world
+	for p in cut_cells(w):
+		# Residual scenery has no hitbox or harvest item. New floor/building wins.
+		if not w.inside(p) or w.trees.has(p) or w.rocks.has(p) or w.floors.has(p) or w.live_structure(p) or w.natural.has(p) or not visible.grow(80).has_point(g.center(p)):continue
+		var foot=tree_foot(g,p)
+		g.draw_set_transform(foot,0,Vector2.ONE*TREE_SCALE)
+		GroundArt.paint(g,"biome_environment_v1/forest/stump_"+tree_variant(w,p)+".png",Vector2.ZERO)
+		g.draw_set_transform(Vector2.ZERO)
 
 static func idol(g):
 	var w=g.world

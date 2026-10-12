@@ -14,6 +14,14 @@ func reachable(w) -> Dictionary:
 		for n in w.neighbors(p):
 			if w.walkable(n) and not seen.has(n):seen[n]=true;queue.append(n)
 	return seen
+func excavatable(w,reached: Dictionary) -> bool:
+	# Flood through rock only after reaching its edge: enclosed centres require excavation.
+	var accessible=reached.duplicate();var queue=reached.keys();var index=0
+	while index<queue.size():
+		var p=queue[index];index+=1
+		for n in w.neighbors(p):
+			if not accessible.has(n) and w.rocks.has(n):accessible[n]=true;queue.append(n)
+	return w.rocks.keys().all(func(p):return accessible.has(p))
 func run():
 	var out=OS.get_environment("FARM_REVIEW_OUTPUT")
 	if out=="" or "--isolated-review" not in OS.get_cmdline_user_args():quit(2);return
@@ -29,7 +37,7 @@ func run():
 			var resource=w.natural[p];chosen[resource]+=w.Biome.resource_weight(w,p,resource);baseline[resource]+=total_weight[resource]/1700.0;counts[resource]+=1
 		check(kinds.size()==5,"All five landscape characters: seed "+str(seed_number))
 		check(reached.size()==walkable and w.Land.border_cells().all(func(p):return reached.has(p)),"Generated natural cover leaves all walkable cells and perimeter connected: seed "+str(seed_number))
-		check(w.rocks.keys().all(func(p):return w.neighbors(p).any(func(q):return reached.has(q))),"Every generated deposit has a reachable mining approach: seed "+str(seed_number))
+		check(excavatable(w,reached),"Every rock component can be excavated from a reachable edge: seed "+str(seed_number))
 		for corner in [Vector2i.ZERO,Vector2i(49,0),Vector2i(0,33),Vector2i(49,33)]:
 			if w.natural.has(corner):
 				check(w.Jobs.build_reason(w,"wall",corner)!="","Existing harvest blocks corner construction until collected")
@@ -40,7 +48,7 @@ func run():
 					w.step()
 					if not w.natural.has(corner):break
 				check(not w.natural.has(corner),"Existing gather job completes on the corner")
-			check(w.Jobs.build_reason(w,"wall",corner)=="","Unchanged building eligibility at corner "+str(corner)+" seed "+str(seed_number)+" reason="+w.Jobs.build_reason(w,"wall",corner)+" natural="+str(w.natural.get(corner))+" rock="+str(w.rocks.has(corner)))
+			check(w.Jobs.build_reason(w,"wall",corner)==("" if w.items_at(corner).is_empty() else "物があるため建設できません"),"Unchanged physical-item building eligibility at corner "+str(corner)+" seed "+str(seed_number)+" reason="+w.Jobs.build_reason(w,"wall",corner)+" natural="+str(w.natural.get(corner))+" rock="+str(w.rocks.has(corner)))
 		observations.append({"seed":seed_number,"kinds":kinds,"trees":w.trees.size(),"rocks":w.rocks.size()})
 	for resource in chosen:check(chosen[resource]>baseline[resource]*1.35,"Harvest locations favor their habitat over uniform placement: "+resource)
 	# Retain generated terrain and targets while exercising actual visitors/raids.
@@ -58,7 +66,7 @@ func run():
 	check(w.enemies.all(func(e):return w.inside(e.pos) and e.get("arrival_complete",false)),"Enemies from four sides enter the generated landscape")
 	# Actual gathering uses the existing job and physical-stock path.
 	w=Farm.new({},31).begin_day();w.story.intro_seen=true;w.nature_config.spawn_chance_per_second=0;w.enemies.clear();w.spawn_schedule.clear()
-	var stump=w.natural.keys().filter(func(p):return w.natural[p]=="stump")[0]
+	var stump=w.natural.keys().filter(func(p):return w.natural[p]=="stump")[0];var wood_before=w.Stock.totals(w).get("wood",0)
 	w.keeper.pos=w.neighbors(stump).filter(func(p):return w.walkable(p) and not w.occupied(p))[0]
 	w.keeper.satiety=100;w.keeper.sleepiness=0
 	check(w.act("collect",stump),"Generated stump accepts existing gathering designation")
@@ -68,7 +76,7 @@ func run():
 	check(not w.natural.has(stump) and w.field_items.any(func(item):return item.kind=="wood" and item.pos==stump),"Gathered stump produces physical wood at its location")
 	for i in range(3):
 		w.persist_farm();w=Farm.new(w.campaign,31)
-		check(not w.natural.has(stump) and w.Stock.totals(w).get("wood",0)==w.Rules.NATURE.stump_wood,"Repeated reload does not respawn collected stump or duplicate wood: "+str(i))
+		check(not w.natural.has(stump) and w.Stock.totals(w).get("wood",0)==wood_before+w.Rules.NATURE.stump_wood,"Repeated reload does not respawn collected stump or duplicate wood: "+str(i))
 	# Snapshot resume also preserves the next terrain-weighted growth decision.
 	w=Farm.new({},31).begin_day();w.natural.clear();w.metrics.weed_spawned=0;w.metrics.mushroom_spawned=0;w.metrics.stump_spawned=0;w.nature_config.spawn_chance_per_second=1.0
 	w.Snapshot.save(w,out+"/growth.snapshot");var restored=w.Snapshot.restore(out+"/growth.snapshot")

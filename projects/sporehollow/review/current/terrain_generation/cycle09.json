@@ -1,0 +1,121 @@
+{
+	"failures": 3,
+	"groups": [
+		{
+			"checks": [
+				{
+					"check": "Live world uses approved 50x34 geometry",
+					"passed": true
+				},
+				{
+					"check": "New idol has approved central anchor and expanded ground is reachable",
+					"passed": true
+				},
+				{
+					"check": "1728 quarter-second ticks equal one 432-second day at 05:00",
+					"passed": true
+				},
+				{
+					"check": "World transitions morning to day at 10:00",
+					"passed": true
+				},
+				{
+					"check": "05:00 keeps the same living enemy instead of forcing retreat or ending the world",
+					"passed": true
+				},
+				{
+					"check": "Morning lays one egg, settles prayer and releases convalescence without waiting for enemies",
+					"passed": true
+				},
+				{
+					"check": "Daily guard prevents duplicate production or prayer payment",
+					"passed": true
+				},
+				{
+					"check": "Morning reschedules the existing merchant independently",
+					"passed": true
+				},
+				{
+					"check": "Rescheduled merchant actually becomes available",
+					"passed": true
+				},
+				{
+					"check": "19:00 schedules another raid while previous enemy remains",
+					"passed": true
+				},
+				{
+					"check": "The next scheduled attacker actually spawns alongside the old attacker",
+					"passed": true
+				},
+				{
+					"check": "Midnight never extends an existing convalescence deadline or releases it before morning",
+					"passed": true
+				},
+				{
+					"check": "The following 05:00 releases the same recovering dog",
+					"passed": true
+				}
+			],
+			"name": "1 Expanded live land; independent clock, daily results and overlapping raids",
+			"state": {
+				"calendar": "19:50  夜",
+				"day": 2,
+				"eggs": 1,
+				"enemy_ids": [
+					0,
+					1,
+					2,
+					3
+				],
+				"last_daily_day": 2
+			}
+		},
+		{
+			"checks": [
+				{
+					"check": "Snapshot fixture includes active physical cargo and work",
+					"passed": false
+				},
+				{
+					"check": "Combined state saved",
+					"passed": true
+				},
+				{
+					"check": "Snapshot preserves all selected state including day guards and in-flight goods",
+					"passed": false
+				},
+				{
+					"check": "Restored continuation matches uninterrupted production steps",
+					"passed": false
+				},
+				{
+					"check": "Restoring a market-open save clears the missing UI pause and time advances",
+					"passed": true
+				},
+				{
+					"check": "Long-running old night migrates just before morning without changing simulation tick",
+					"passed": true
+				},
+				{
+					"check": "Migrated old night applies the next morning's result exactly once",
+					"passed": true
+				},
+				{
+					"check": "Expired corpse has a terminal state instead of movement",
+					"passed": true
+				},
+				{
+					"check": "Retreat reaches its exit and terminates",
+					"passed": true
+				},
+				{
+					"check": "A thief's completed delivery terminates without a boundary loop",
+					"passed": true
+				}
+			],
+			"name": "2 Complete state save/restart; death, retreat and goal completion terminate"
+		}
+	],
+	"method": "Production World.step at explicitly positioned calendar boundaries; no elapsed-time or human-play claim. Separate-process snapshot resume. UI uses injected Godot mouse events on an isolated desktop.",
+	"passed": false
+}

@@ -1,0 +1,66 @@
+{
+	"checks": [
+		{
+			"check": "Keeper negotiation releases the real construction/material claim without deleting the old designation",
+			"passed": true
+		},
+		{
+			"check": "Keeper walks through the existing movement job and reaches merchant without teleporting",
+			"passed": true
+		},
+		{
+			"check": "Open shop freezes world time",
+			"passed": true
+		},
+		{
+			"check": "Closing conversation permits the suspended job to be reevaluated and reclaimed",
+			"passed": false
+		},
+		{
+			"check": "Selected support resident owns negotiation without joining the general worker registry",
+			"passed": true
+		},
+		{
+			"check": "Selected support resident walks, keeper stays put, and merchant waits beyond normal departure",
+			"passed": true
+		},
+		{
+			"check": "Support AI resumes after negotiation and is never assigned general work",
+			"passed": true
+		},
+		{
+			"check": "Missing selected person cannot create an order",
+			"passed": true
+		},
+		{
+			"check": "Drafted resident is rejected with a reason",
+			"passed": true
+		},
+		{
+			"check": "Incapacitated resident cannot negotiate",
+			"passed": true
+		},
+		{
+			"check": "Unreachable merchant is rejected before creating a move job",
+			"passed": true
+		},
+		{
+			"check": "Damage cancels negotiation and releases its movement reservation",
+			"passed": true
+		},
+		{
+			"check": "Merchant disappearance cancels negotiation without a stale job",
+			"passed": true
+		},
+		{
+			"check": "Save/load clears transient negotiation and preserves unrelated job: shop=false",
+			"passed": true
+		},
+		{
+			"check": "Save/load clears transient negotiation and preserves unrelated job: shop=true",
+			"passed": true
+		}
+	],
+	"failures": 1,
+	"method": "Four controlled production World.step groups; no physical OS input or human play"
+}

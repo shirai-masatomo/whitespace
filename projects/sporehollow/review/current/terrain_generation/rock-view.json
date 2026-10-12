@@ -1,0 +1,210 @@
+{
+	"checks": [
+		{
+			"check": "Actual renderer handles four-direction mask 0",
+			"passed": true
+		},
+		{
+			"check": "Drawing does not alter rock quantity or collision: 0",
+			"passed": true
+		},
+		{
+			"check": "Delivered 48x54 canvas is used without stretching: 0",
+			"passed": true
+		},
+		{
+			"check": "Actual renderer handles four-direction mask 1",
+			"passed": true
+		},
+		{
+			"check": "Drawing does not alter rock quantity or collision: 1",
+			"passed": true
+		},
+		{
+			"check": "Delivered 48x54 canvas is used without stretching: 1",
+			"passed": true
+		},
+		{
+			"check": "Actual renderer handles four-direction mask 2",
+			"passed": true
+		},
+		{
+			"check": "Drawing does not alter rock quantity or collision: 2",
+			"passed": true
+		},
+		{
+			"check": "Delivered 48x54 canvas is used without stretching: 2",
+			"passed": true
+		},
+		{
+			"check": "Actual renderer handles four-direction mask 3",
+			"passed": true
+		},
+		{
+			"check": "Drawing does not alter rock quantity or collision: 3",
+			"passed": true
+		},
+		{
+			"check": "Delivered 48x54 canvas is used without stretching: 3",
+			"passed": true
+		},
+		{
+			"check": "Actual renderer handles four-direction mask 4",
+			"passed": true
+		},
+		{
+			"check": "Drawing does not alter rock quantity or collision: 4",
+			"passed": true
+		},
+		{
+			"check": "Delivered 48x54 canvas is used without stretching: 4",
+			"passed": true
+		},
+		{
+			"check": "Actual renderer handles four-direction mask 5",
+			"passed": true
+		},
+		{
+			"check": "Drawing does not alter rock quantity or collision: 5",
+			"passed": true
+		},
+		{
+			"check": "Delivered 48x54 canvas is used without stretching: 5",
+			"passed": true
+		},
+		{
+			"check": "Actual renderer handles four-direction mask 6",
+			"passed": true
+		},
+		{
+			"check": "Drawing does not alter rock quantity or collision: 6",
+			"passed": true
+		},
+		{
+			"check": "Delivered 48x54 canvas is used without stretching: 6",
+			"passed": true
+		},
+		{
+			"check": "Actual renderer handles four-direction mask 7",
+			"passed": true
+		},
+		{
+			"check": "Drawing does not alter rock quantity or collision: 7",
+			"passed": true
+		},
+		{
+			"check": "Delivered 48x54 canvas is used without stretching: 7",
+			"passed": true
+		},
+		{
+			"check": "Actual renderer handles four-direction mask 8",
+			"passed": true
+		},
+		{
+			"check": "Drawing does not alter rock quantity or collision: 8",
+			"passed": true
+		},
+		{
+			"check": "Delivered 48x54 canvas is used without stretching: 8",
+			"passed": true
+		},
+		{
+			"check": "Actual renderer handles four-direction mask 9",
+			"passed": true
+		},
+		{
+			"check": "Drawing does not alter rock quantity or collision: 9",
+			"passed": true
+		},
+		{
+			"check": "Delivered 48x54 canvas is used without stretching: 9",
+			"passed": true
+		},
+		{
+			"check": "Actual renderer handles four-direction mask 10",
+			"passed": true
+		},
+		{
+			"check": "Drawing does not alter rock quantity or collision: 10",
+			"passed": true
+		},
+		{
+			"check": "Delivered 48x54 canvas is used without stretching: 10",
+			"passed": true
+		},
+		{
+			"check": "Actual renderer handles four-direction mask 11",
+			"passed": true
+		},
+		{
+			"check": "Drawing does not alter rock quantity or collision: 11",
+			"passed": true
+		},
+		{
+			"check": "Delivered 48x54 canvas is used without stretching: 11",
+			"passed": true
+		},
+		{
+			"check": "Actual renderer handles four-direction mask 12",
+			"passed": true
+		},
+		{
+			"check": "Drawing does not alter rock quantity or collision: 12",
+			"passed": true
+		},
+		{
+			"check": "Delivered 48x54 canvas is used without stretching: 12",
+			"passed": true
+		},
+		{
+			"check": "Actual renderer handles four-direction mask 13",
+			"passed": true
+		},
+		{
+			"check": "Drawing does not alter rock quantity or collision: 13",
+			"passed": true
+		},
+		{
+			"check": "Delivered 48x54 canvas is used without stretching: 13",
+			"passed": true
+		},
+		{
+			"check": "Actual renderer handles four-direction mask 14",
+			"passed": true
+		},
+		{
+			"check": "Drawing does not alter rock quantity or collision: 14",
+			"passed": true
+		},
+		{
+			"check": "Delivered 48x54 canvas is used without stretching: 14",
+			"passed": true
+		},
+		{
+			"check": "Actual renderer handles four-direction mask 15",
+			"passed": true
+		},
+		{
+			"check": "Drawing does not alter rock quantity or collision: 15",
+			"passed": true
+		},
+		{
+			"check": "Delivered 48x54 canvas is used without stretching: 15",
+			"passed": true
+		},
+		{
+			"check": "Mining uses the existing work and drop quantity and leaves a visual scar",
+			"passed": true
+		},
+		{
+			"check": "Mined pit renders while preserving the newly walkable cell",
+			"passed": true
+		},
+		{
+			"check": "Scars and remaining rock coordinates persist without respawn",
+			"passed": true
+		}
+	],
+	"failures": 0,
+	"method": "Actual draw functions through a recording Canvas API plus production mining and snapshot roundtrip; GPU appearance checked separately"
+}

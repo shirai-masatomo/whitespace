@@ -1,0 +1,210 @@
+{
+	"checks": [
+		{
+			"check": "Exactly 50 x 34 cells are inside",
+			"passed": true
+		},
+		{
+			"check": "Corner is reachable and accepts construction: (0, 0)",
+			"passed": true
+		},
+		{
+			"check": "Corner is reachable and accepts construction: (49, 0)",
+			"passed": true
+		},
+		{
+			"check": "Corner is reachable and accepts construction: (0, 33)",
+			"passed": true
+		},
+		{
+			"check": "Corner is reachable and accepts construction: (49, 33)",
+			"passed": true
+		},
+		{
+			"check": "Animal guide preserves the exact corner destination and command contacts include edge cells",
+			"passed": true
+		},
+		{
+			"check": "No ally walkable forest or off-map rescue path",
+			"passed": true
+		},
+		{
+			"check": "All four raid directions spawn on visible border cells",
+			"passed": true
+		},
+		{
+			"check": "Visible-border enemies enter the field normally",
+			"passed": true
+		},
+		{
+			"check": "Fully walled perimeter retains a raid at its adjacent visible boundary",
+			"passed": true
+		},
+		{
+			"check": "Adjacent arriving enemy physically attacks the perimeter rather than disappearing",
+			"passed": true
+		},
+		{
+			"check": "Keeper on visible edge is not lost: (0, 8)",
+			"passed": true
+		},
+		{
+			"check": "Keeper crossing commits on same movement: (-1, 8)",
+			"passed": true
+		},
+		{
+			"check": "Animal on last visible cell retains rescue window: (0, 8)",
+			"passed": true
+		},
+		{
+			"check": "Animal's own crossing commits: (-1, 8)",
+			"passed": true
+		},
+		{
+			"check": "Keeper on visible edge is not lost: (49, 8)",
+			"passed": true
+		},
+		{
+			"check": "Keeper crossing commits on same movement: (50, 8)",
+			"passed": true
+		},
+		{
+			"check": "Animal on last visible cell retains rescue window: (49, 8)",
+			"passed": true
+		},
+		{
+			"check": "Animal's own crossing commits: (50, 8)",
+			"passed": true
+		},
+		{
+			"check": "Keeper on visible edge is not lost: (12, 0)",
+			"passed": true
+		},
+		{
+			"check": "Keeper crossing commits on same movement: (12, -1)",
+			"passed": true
+		},
+		{
+			"check": "Animal on last visible cell retains rescue window: (12, 0)",
+			"passed": true
+		},
+		{
+			"check": "Animal's own crossing commits: (12, -1)",
+			"passed": true
+		},
+		{
+			"check": "Keeper on visible edge is not lost: (12, 33)",
+			"passed": true
+		},
+		{
+			"check": "Keeper crossing commits on same movement: (12, 34)",
+			"passed": true
+		},
+		{
+			"check": "Animal on last visible cell retains rescue window: (12, 33)",
+			"passed": true
+		},
+		{
+			"check": "Animal's own crossing commits: (12, 34)",
+			"passed": true
+		},
+		{
+			"check": "Partly visible idol is still present: (-1, 8)",
+			"passed": true
+		},
+		{
+			"check": "Full idol crossing commits at new edge: (-2, 8)",
+			"passed": true
+		},
+		{
+			"check": "Partly visible idol is still present: (49, 8)",
+			"passed": true
+		},
+		{
+			"check": "Full idol crossing commits at new edge: (50, 8)",
+			"passed": true
+		},
+		{
+			"check": "Partly visible idol is still present: (12, -1)",
+			"passed": true
+		},
+		{
+			"check": "Full idol crossing commits at new edge: (12, -2)",
+			"passed": true
+		},
+		{
+			"check": "Partly visible idol is still present: (12, 33)",
+			"passed": true
+		},
+		{
+			"check": "Full idol crossing commits at new edge: (12, 34)",
+			"passed": true
+		},
+		{
+			"check": "Legacy off-map enemy migrated; interior position, time and stock retained",
+			"passed": true
+		},
+		{
+			"check": "Legacy off-map animal home, order and pending destination are remapped without losing the order",
+			"passed": true
+		},
+		{
+			"check": "Migrated snapshot reload is idempotent",
+			"passed": true
+		},
+		{
+			"check": "Panned corner remains in operable viewport at zoom 0.65: (0, 0)",
+			"passed": true
+		},
+		{
+			"check": "Panned corner remains in operable viewport at zoom 0.65: (49, 0)",
+			"passed": true
+		},
+		{
+			"check": "Panned corner remains in operable viewport at zoom 0.65: (0, 33)",
+			"passed": true
+		},
+		{
+			"check": "Panned corner remains in operable viewport at zoom 0.65: (49, 33)",
+			"passed": true
+		},
+		{
+			"check": "Panned corner remains in operable viewport at zoom 1.0: (0, 0)",
+			"passed": true
+		},
+		{
+			"check": "Panned corner remains in operable viewport at zoom 1.0: (49, 0)",
+			"passed": true
+		},
+		{
+			"check": "Panned corner remains in operable viewport at zoom 1.0: (0, 33)",
+			"passed": true
+		},
+		{
+			"check": "Panned corner remains in operable viewport at zoom 1.0: (49, 33)",
+			"passed": true
+		},
+		{
+			"check": "Panned corner remains in operable viewport at zoom 1.6: (0, 0)",
+			"passed": true
+		},
+		{
+			"check": "Panned corner remains in operable viewport at zoom 1.6: (49, 0)",
+			"passed": true
+		},
+		{
+			"check": "Panned corner remains in operable viewport at zoom 1.6: (0, 33)",
+			"passed": true
+		},
+		{
+			"check": "Panned corner remains in operable viewport at zoom 1.6: (49, 33)",
+			"passed": true
+		},
+		{
+			"check": "No outer forest draw actors remain",
+			"passed": true
+		}
+	],
+	"failures": 0,
+	"method": "Four controlled production-rule groups plus headless camera transforms; no human play"
+}

@@ -2,6 +2,7 @@ extends RefCounted
 ## Presentation reads the fixed-tick work state. It never finishes jobs or removes terrain.
 const EVENT_DRAW_LIMIT=24
 const EFFECT_SECONDS=0.65
+const GroundArt=preload("res://game/rock_art.gd")
 var source=null
 var seen=0
 func setup(w):source=w;seen=w.next_harvest_event-1
@@ -43,37 +44,40 @@ static func tool(g,key: String="keeper"):
 		g.draw_colored_polygon(PackedVector2Array([tip+Vector2(-4,-7),tip+Vector2(5,-6),tip+Vector2(8,0),tip+Vector2(5,7),tip+Vector2(-4,5)]),Color("b9c2b5"))
 		g.draw_line(tip+Vector2(6,-4),tip+Vector2(7,4),Color("ede6cd"),2)
 static func tree(g,p: Vector2i,deep: bool=false):
-	var progress=g.world.Harvest.progress(g.world,"clear_tree",p);var kick=0.0
+	var kick=0.0
 	for e in g.world.harvest_events.slice(-EVENT_DRAW_LIMIT):
 		var age=(g.world.tick-e.tick)*g.world.DT+g.accumulated
 		if e.kind=="clear_tree" and e.event=="strike" and e.pos==p and age<EFFECT_SECONDS:kick=sin(age*30)*0.035*(1-age/EFFECT_SECONDS)
-	if kick!=0:
-		var foot=g.StoryView.tree_foot(g,p);
-		# Rotation around the foot: translate local pixels explicitly.
-		g.draw_set_transform(foot,kick,Vector2.ONE*g.StoryView.TREE_SCALE)
-		var id="world.tree_"+["a","b","c"][preload("res://game/forest_pattern.gd").rank(p,g.world.seed_value)%3]
-		g.Direction.draw(g,id+"_trunk",Vector2.ZERO);g.Direction.draw(g,id+"_canopy",Vector2.ZERO,0.85 if deep else 1.0);g.draw_set_transform(Vector2.ZERO)
-	else:g.StoryView.tree(g,p,deep)
-	if progress>0.2:
-		var foot=g.StoryView.tree_foot(g,p)
-		g.draw_line(foot+Vector2(-5,-13),foot+Vector2(5,-11),Color("624732"),2)
-		g.draw_line(foot+Vector2(-3,-11),foot+Vector2(3,-10),Color("d7ba7c"),2)
+	# Trunk, notch and canopy share exactly the same foot transform.
+	g.StoryView.tree(g,p,deep,kick)
 static func recent(g) -> Array:
 	return g.world.harvest_events.slice(-EVENT_DRAW_LIMIT).filter(func(e):return (g.world.tick-e.tick)*g.world.DT+g.accumulated<EFFECT_SECONDS)
 static func remnants(g) -> Array:return recent(g).filter(func(e):return e.event=="complete")
 static func remnant(g,e):
 	var age=(g.world.tick-e.tick)*g.world.DT+g.accumulated;var t=clampf(age/EFFECT_SECONDS,0,1);var q=g.center(e.pos)
 	if e.kind=="clear_tree":
-		var id="world.tree_"+["a","b","c"][preload("res://game/forest_pattern.gd").rank(e.pos,g.world.seed_value)%3]
-		var foot=g.StoryView.tree_foot(g,e.pos);g.draw_set_transform(foot,1.3*smoothstep(0,0.8,t),Vector2.ONE*g.StoryView.TREE_SCALE)
-		g.Direction.draw(g,id+"_trunk",Vector2.ZERO,1-t);g.Direction.draw(g,id+"_canopy",Vector2.ZERO,1-t);g.draw_set_transform(Vector2.ZERO)
+		var id="world.tree_"+g.StoryView.tree_variant(g.world,e.pos)
+		var foot=g.StoryView.tree_foot(g,e.pos)
+		# Rotate only pixels above the cut (native y=65). The persistent stump
+		# stays on the ground; the standing root is never drawn a second time.
+		var pivot=foot+Vector2(0,-7)*g.StoryView.TREE_SCALE
+		g.draw_set_transform(pivot,1.3*smoothstep(0,0.8,t),Vector2.ONE*g.StoryView.TREE_SCALE)
+		for part in ["_trunk","_canopy"]:
+			var texture=g.Direction.ASSETS[id+part].texture
+			g.draw_texture_rect_region(texture,Rect2(-32,-65,64,65),Rect2(0,0,64,65),Color(1,1,1,1-t))
+		g.draw_set_transform(Vector2.ZERO)
+		GroundArt.paint(g,"biome_environment_v2/tree_cut/branch_debris.png",q,0.7*(1-t))
 	else:g.RockView.rubble(g,e.pos,1-t)
 static func particles(g):
 	for e in recent(g):
 		if e.event not in ["strike","complete"]:continue
-		var age=(g.world.tick-e.tick)*g.world.DT+g.accumulated;var t=clampf(age/EFFECT_SECONDS,0,1);var origin=g.center(e.pos)+Vector2(0,-8)
+		var age=(g.world.tick-e.tick)*g.world.DT+g.accumulated;var origin=g.center(e.pos)+Vector2(0,-8)
 		if e.kind=="mine":g.RockView.chips(g,e.pos,age);continue
-		for i in range(5):
-			var q=origin+Vector2((i-2)*8*t,-sin(t*PI)*(10+i*2)+t*12)
-			var shade=Color("c6bba0") if e.kind=="mine" else (Color("899950") if i%2 else Color("b58b57"))
-			g.draw_rect(Rect2(q,Vector2(3,2)),Color(shade,1-t))
+		# Native three-frame leaves complement the existing wood_chips puff.
+		var cursor=age
+		for i in range(3):
+			var duration=[0.1,0.12,0.16][i]
+			if cursor<duration:
+				GroundArt.paint(g,"biome_environment_v1/forest/leaves_%02d.png"%i,origin)
+				break
+			cursor-=duration

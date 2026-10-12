@@ -1,0 +1,90 @@
+{
+	"baseline_exe_sha256": "A10287B62CE93C985891982C3A8B4B2B2CB67BD58722349A8113A8FA22110C1C",
+	"checks": [
+		{
+			"check": "Fixture is an actual pre-biome campaign",
+			"passed": true
+		},
+		{
+			"check": "Actual pre-biome EXE snapshot loads",
+			"passed": true
+		},
+		{
+			"check": "Legacy snapshot preserves trees",
+			"passed": true
+		},
+		{
+			"check": "Legacy snapshot preserves rocks",
+			"passed": true
+		},
+		{
+			"check": "Legacy snapshot preserves natural",
+			"passed": true
+		},
+		{
+			"check": "Legacy snapshot preserves field_items",
+			"passed": true
+		},
+		{
+			"check": "Legacy snapshot preserves jobs",
+			"passed": true
+		},
+		{
+			"check": "Legacy snapshot preserves structures",
+			"passed": true
+		},
+		{
+			"check": "Legacy snapshot preserves keeper",
+			"passed": true
+		},
+		{
+			"check": "Legacy snapshot preserves animals",
+			"passed": true
+		},
+		{
+			"check": "Legacy snapshot preserves tick",
+			"passed": true
+		},
+		{
+			"check": "Legacy snapshot preserves calendar_ticks",
+			"passed": true
+		},
+		{
+			"check": "Legacy snapshot adds only visual terrain",
+			"passed": true
+		},
+		{
+			"check": "Repeated campaign reload retains depletion and physical totals: 0",
+			"passed": true
+		},
+		{
+			"check": "Pending job identity and location survives reload: 0",
+			"passed": true
+		},
+		{
+			"check": "Repeated campaign reload retains depletion and physical totals: 1",
+			"passed": true
+		},
+		{
+			"check": "Pending job identity and location survives reload: 1",
+			"passed": true
+		},
+		{
+			"check": "Repeated campaign reload retains depletion and physical totals: 2",
+			"passed": true
+		},
+		{
+			"check": "Pending job identity and location survives reload: 2",
+			"passed": true
+		},
+		{
+			"check": "Actual legacy campaign keeps trees, mined rocks, structures and supplies",
+			"passed": true
+		},
+		{
+			"check": "Previously cleared tree and mined rock do not regenerate",
+			"passed": true
+		}
+	],
+	"failures": 0
+}

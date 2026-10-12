@@ -1,0 +1,720 @@
+{
+	"checks": [
+		{
+			"check": "All five landscape characters: seed 0",
+			"passed": true
+		},
+		{
+			"check": "Generated natural cover leaves all walkable cells and perimeter connected: seed 0",
+			"passed": true
+		},
+		{
+			"check": "Every rock component can be excavated from a reachable edge: seed 0",
+			"passed": true
+		},
+		{
+			"check": "Unchanged physical-item building eligibility at corner (0, 0) seed 0 reason= natural=<null> rock=false",
+			"passed": true
+		},
+		{
+			"check": "Unchanged physical-item building eligibility at corner (49, 0) seed 0 reason= natural=<null> rock=false",
+			"passed": true
+		},
+		{
+			"check": "Unchanged physical-item building eligibility at corner (0, 33) seed 0 reason= natural=<null> rock=false",
+			"passed": true
+		},
+		{
+			"check": "Unchanged physical-item building eligibility at corner (49, 33) seed 0 reason= natural=<null> rock=false",
+			"passed": true
+		},
+		{
+			"check": "All five landscape characters: seed 1",
+			"passed": true
+		},
+		{
+			"check": "Generated natural cover leaves all walkable cells and perimeter connected: seed 1",
+			"passed": true
+		},
+		{
+			"check": "Every rock component can be excavated from a reachable edge: seed 1",
+			"passed": true
+		},
+		{
+			"check": "Unchanged physical-item building eligibility at corner (0, 0) seed 1 reason= natural=<null> rock=false",
+			"passed": true
+		},
+		{
+			"check": "Unchanged physical-item building eligibility at corner (49, 0) seed 1 reason= natural=<null> rock=false",
+			"passed": true
+		},
+		{
+			"check": "Existing harvest blocks corner construction until collected",
+			"passed": true
+		},
+		{
+			"check": "Existing gather job completes on the corner",
+			"passed": true
+		},
+		{
+			"check": "Unchanged physical-item building eligibility at corner (0, 33) seed 1 reason=物があるため建設できません natural=<null> rock=false",
+			"passed": true
+		},
+		{
+			"check": "Unchanged physical-item building eligibility at corner (49, 33) seed 1 reason= natural=<null> rock=false",
+			"passed": true
+		},
+		{
+			"check": "All five landscape characters: seed 2",
+			"passed": true
+		},
+		{
+			"check": "Generated natural cover leaves all walkable cells and perimeter connected: seed 2",
+			"passed": true
+		},
+		{
+			"check": "Every rock component can be excavated from a reachable edge: seed 2",
+			"passed": true
+		},
+		{
+			"check": "Unchanged physical-item building eligibility at corner (0, 0) seed 2 reason= natural=<null> rock=false",
+			"passed": true
+		},
+		{
+			"check": "Unchanged physical-item building eligibility at corner (49, 0) seed 2 reason= natural=<null> rock=false",
+			"passed": true
+		},
+		{
+			"check": "Unchanged physical-item building eligibility at corner (0, 33) seed 2 reason= natural=<null> rock=false",
+			"passed": true
+		},
+		{
+			"check": "Unchanged physical-item building eligibility at corner (49, 33) seed 2 reason= natural=<null> rock=false",
+			"passed": true
+		},
+		{
+			"check": "All five landscape characters: seed 3",
+			"passed": true
+		},
+		{
+			"check": "Generated natural cover leaves all walkable cells and perimeter connected: seed 3",
+			"passed": true
+		},
+		{
+			"check": "Every rock component can be excavated from a reachable edge: seed 3",
+			"passed": true
+		},
+		{
+			"check": "Unchanged physical-item building eligibility at corner (0, 0) seed 3 reason= natural=<null> rock=false",
+			"passed": true
+		},
+		{
+			"check": "Unchanged physical-item building eligibility at corner (49, 0) seed 3 reason= natural=<null> rock=false",
+			"passed": true
+		},
+		{
+			"check": "Unchanged physical-item building eligibility at corner (0, 33) seed 3 reason= natural=<null> rock=false",
+			"passed": true
+		},
+		{
+			"check": "Unchanged physical-item building eligibility at corner (49, 33) seed 3 reason= natural=<null> rock=false",
+			"passed": true
+		},
+		{
+			"check": "All five landscape characters: seed 4",
+			"passed": true
+		},
+		{
+			"check": "Generated natural cover leaves all walkable cells and perimeter connected: seed 4",
+			"passed": true
+		},
+		{
+			"check": "Every rock component can be excavated from a reachable edge: seed 4",
+			"passed": true
+		},
+		{
+			"check": "Unchanged physical-item building eligibility at corner (0, 0) seed 4 reason= natural=<null> rock=false",
+			"passed": true
+		},
+		{
+			"check": "Unchanged physical-item building eligibility at corner (49, 0) seed 4 reason= natural=<null> rock=false",
+			"passed": true
+		},
+		{
+			"check": "Unchanged physical-item building eligibility at corner (0, 33) seed 4 reason= natural=<null> rock=false",
+			"passed": true
+		},
+		{
+			"check": "Unchanged physical-item building eligibility at corner (49, 33) seed 4 reason= natural=<null> rock=false",
+			"passed": true
+		},
+		{
+			"check": "All five landscape characters: seed 5",
+			"passed": true
+		},
+		{
+			"check": "Generated natural cover leaves all walkable cells and perimeter connected: seed 5",
+			"passed": true
+		},
+		{
+			"check": "Every rock component can be excavated from a reachable edge: seed 5",
+			"passed": true
+		},
+		{
+			"check": "Unchanged physical-item building eligibility at corner (0, 0) seed 5 reason= natural=<null> rock=false",
+			"passed": true
+		},
+		{
+			"check": "Unchanged physical-item building eligibility at corner (49, 0) seed 5 reason= natural=<null> rock=false",
+			"passed": true
+		},
+		{
+			"check": "Unchanged physical-item building eligibility at corner (0, 33) seed 5 reason= natural=<null> rock=false",
+			"passed": true
+		},
+		{
+			"check": "Unchanged physical-item building eligibility at corner (49, 33) seed 5 reason= natural=<null> rock=false",
+			"passed": true
+		},
+		{
+			"check": "All five landscape characters: seed 6",
+			"passed": true
+		},
+		{
+			"check": "Generated natural cover leaves all walkable cells and perimeter connected: seed 6",
+			"passed": true
+		},
+		{
+			"check": "Every rock component can be excavated from a reachable edge: seed 6",
+			"passed": true
+		},
+		{
+			"check": "Unchanged physical-item building eligibility at corner (0, 0) seed 6 reason= natural=<null> rock=false",
+			"passed": true
+		},
+		{
+			"check": "Unchanged physical-item building eligibility at corner (49, 0) seed 6 reason= natural=<null> rock=false",
+			"passed": true
+		},
+		{
+			"check": "Unchanged physical-item building eligibility at corner (0, 33) seed 6 reason= natural=<null> rock=false",
+			"passed": true
+		},
+		{
+			"check": "Unchanged physical-item building eligibility at corner (49, 33) seed 6 reason= natural=<null> rock=false",
+			"passed": true
+		},
+		{
+			"check": "All five landscape characters: seed 7",
+			"passed": true
+		},
+		{
+			"check": "Generated natural cover leaves all walkable cells and perimeter connected: seed 7",
+			"passed": true
+		},
+		{
+			"check": "Every rock component can be excavated from a reachable edge: seed 7",
+			"passed": true
+		},
+		{
+			"check": "Unchanged physical-item building eligibility at corner (0, 0) seed 7 reason= natural=<null> rock=false",
+			"passed": true
+		},
+		{
+			"check": "Unchanged physical-item building eligibility at corner (49, 0) seed 7 reason= natural=<null> rock=false",
+			"passed": true
+		},
+		{
+			"check": "Unchanged physical-item building eligibility at corner (0, 33) seed 7 reason= natural=<null> rock=false",
+			"passed": true
+		},
+		{
+			"check": "Unchanged physical-item building eligibility at corner (49, 33) seed 7 reason= natural=<null> rock=false",
+			"passed": true
+		},
+		{
+			"check": "All five landscape characters: seed 8",
+			"passed": true
+		},
+		{
+			"check": "Generated natural cover leaves all walkable cells and perimeter connected: seed 8",
+			"passed": true
+		},
+		{
+			"check": "Every rock component can be excavated from a reachable edge: seed 8",
+			"passed": true
+		},
+		{
+			"check": "Unchanged physical-item building eligibility at corner (0, 0) seed 8 reason= natural=<null> rock=false",
+			"passed": true
+		},
+		{
+			"check": "Unchanged physical-item building eligibility at corner (49, 0) seed 8 reason= natural=<null> rock=false",
+			"passed": true
+		},
+		{
+			"check": "Unchanged physical-item building eligibility at corner (0, 33) seed 8 reason= natural=<null> rock=false",
+			"passed": true
+		},
+		{
+			"check": "Unchanged physical-item building eligibility at corner (49, 33) seed 8 reason= natural=<null> rock=false",
+			"passed": true
+		},
+		{
+			"check": "All five landscape characters: seed 9",
+			"passed": true
+		},
+		{
+			"check": "Generated natural cover leaves all walkable cells and perimeter connected: seed 9",
+			"passed": true
+		},
+		{
+			"check": "Every rock component can be excavated from a reachable edge: seed 9",
+			"passed": true
+		},
+		{
+			"check": "Unchanged physical-item building eligibility at corner (0, 0) seed 9 reason= natural=<null> rock=false",
+			"passed": true
+		},
+		{
+			"check": "Unchanged physical-item building eligibility at corner (49, 0) seed 9 reason= natural=<null> rock=false",
+			"passed": true
+		},
+		{
+			"check": "Unchanged physical-item building eligibility at corner (0, 33) seed 9 reason= natural=<null> rock=false",
+			"passed": true
+		},
+		{
+			"check": "Unchanged physical-item building eligibility at corner (49, 33) seed 9 reason= natural=<null> rock=false",
+			"passed": true
+		},
+		{
+			"check": "All five landscape characters: seed 10",
+			"passed": true
+		},
+		{
+			"check": "Generated natural cover leaves all walkable cells and perimeter connected: seed 10",
+			"passed": true
+		},
+		{
+			"check": "Every rock component can be excavated from a reachable edge: seed 10",
+			"passed": true
+		},
+		{
+			"check": "Unchanged physical-item building eligibility at corner (0, 0) seed 10 reason= natural=<null> rock=false",
+			"passed": true
+		},
+		{
+			"check": "Unchanged physical-item building eligibility at corner (49, 0) seed 10 reason= natural=<null> rock=false",
+			"passed": true
+		},
+		{
+			"check": "Unchanged physical-item building eligibility at corner (0, 33) seed 10 reason= natural=<null> rock=false",
+			"passed": true
+		},
+		{
+			"check": "Unchanged physical-item building eligibility at corner (49, 33) seed 10 reason= natural=<null> rock=false",
+			"passed": true
+		},
+		{
+			"check": "All five landscape characters: seed 11",
+			"passed": true
+		},
+		{
+			"check": "Generated natural cover leaves all walkable cells and perimeter connected: seed 11",
+			"passed": true
+		},
+		{
+			"check": "Every rock component can be excavated from a reachable edge: seed 11",
+			"passed": true
+		},
+		{
+			"check": "Unchanged physical-item building eligibility at corner (0, 0) seed 11 reason= natural=<null> rock=false",
+			"passed": true
+		},
+		{
+			"check": "Unchanged physical-item building eligibility at corner (49, 0) seed 11 reason= natural=<null> rock=false",
+			"passed": true
+		},
+		{
+			"check": "Unchanged physical-item building eligibility at corner (0, 33) seed 11 reason= natural=<null> rock=false",
+			"passed": true
+		},
+		{
+			"check": "Unchanged physical-item building eligibility at corner (49, 33) seed 11 reason= natural=<null> rock=false",
+			"passed": true
+		},
+		{
+			"check": "All five landscape characters: seed 12",
+			"passed": true
+		},
+		{
+			"check": "Generated natural cover leaves all walkable cells and perimeter connected: seed 12",
+			"passed": true
+		},
+		{
+			"check": "Every rock component can be excavated from a reachable edge: seed 12",
+			"passed": true
+		},
+		{
+			"check": "Unchanged physical-item building eligibility at corner (0, 0) seed 12 reason= natural=<null> rock=false",
+			"passed": true
+		},
+		{
+			"check": "Unchanged physical-item building eligibility at corner (49, 0) seed 12 reason= natural=<null> rock=false",
+			"passed": true
+		},
+		{
+			"check": "Unchanged physical-item building eligibility at corner (0, 33) seed 12 reason= natural=<null> rock=false",
+			"passed": true
+		},
+		{
+			"check": "Unchanged physical-item building eligibility at corner (49, 33) seed 12 reason= natural=<null> rock=false",
+			"passed": true
+		},
+		{
+			"check": "All five landscape characters: seed 13",
+			"passed": true
+		},
+		{
+			"check": "Generated natural cover leaves all walkable cells and perimeter connected: seed 13",
+			"passed": true
+		},
+		{
+			"check": "Every rock component can be excavated from a reachable edge: seed 13",
+			"passed": true
+		},
+		{
+			"check": "Unchanged physical-item building eligibility at corner (0, 0) seed 13 reason= natural=<null> rock=false",
+			"passed": true
+		},
+		{
+			"check": "Unchanged physical-item building eligibility at corner (49, 0) seed 13 reason= natural=<null> rock=false",
+			"passed": true
+		},
+		{
+			"check": "Unchanged physical-item building eligibility at corner (0, 33) seed 13 reason= natural=<null> rock=false",
+			"passed": true
+		},
+		{
+			"check": "Unchanged physical-item building eligibility at corner (49, 33) seed 13 reason= natural=<null> rock=false",
+			"passed": true
+		},
+		{
+			"check": "All five landscape characters: seed 14",
+			"passed": true
+		},
+		{
+			"check": "Generated natural cover leaves all walkable cells and perimeter connected: seed 14",
+			"passed": true
+		},
+		{
+			"check": "Every rock component can be excavated from a reachable edge: seed 14",
+			"passed": true
+		},
+		{
+			"check": "Unchanged physical-item building eligibility at corner (0, 0) seed 14 reason= natural=<null> rock=false",
+			"passed": true
+		},
+		{
+			"check": "Unchanged physical-item building eligibility at corner (49, 0) seed 14 reason= natural=<null> rock=false",
+			"passed": true
+		},
+		{
+			"check": "Unchanged physical-item building eligibility at corner (0, 33) seed 14 reason= natural=<null> rock=false",
+			"passed": true
+		},
+		{
+			"check": "Unchanged physical-item building eligibility at corner (49, 33) seed 14 reason= natural=<null> rock=false",
+			"passed": true
+		},
+		{
+			"check": "All five landscape characters: seed 15",
+			"passed": true
+		},
+		{
+			"check": "Generated natural cover leaves all walkable cells and perimeter connected: seed 15",
+			"passed": true
+		},
+		{
+			"check": "Every rock component can be excavated from a reachable edge: seed 15",
+			"passed": true
+		},
+		{
+			"check": "Unchanged physical-item building eligibility at corner (0, 0) seed 15 reason= natural=<null> rock=false",
+			"passed": true
+		},
+		{
+			"check": "Unchanged physical-item building eligibility at corner (49, 0) seed 15 reason= natural=<null> rock=false",
+			"passed": true
+		},
+		{
+			"check": "Unchanged physical-item building eligibility at corner (0, 33) seed 15 reason= natural=<null> rock=false",
+			"passed": true
+		},
+		{
+			"check": "Unchanged physical-item building eligibility at corner (49, 33) seed 15 reason= natural=<null> rock=false",
+			"passed": true
+		},
+		{
+			"check": "Harvest locations favor their habitat over uniform placement: weed",
+			"passed": true
+		},
+		{
+			"check": "Harvest locations favor their habitat over uniform placement: mushroom",
+			"passed": true
+		},
+		{
+			"check": "Harvest locations favor their habitat over uniform placement: stump",
+			"passed": true
+		},
+		{
+			"check": "Generated map accepts a real merchant approach",
+			"passed": true
+		},
+		{
+			"check": "Resident physically reaches merchant on generated map: { \"pos\": (2, 7), \"market\": false, \"state\": \"free\", \"reason\": \"\", \"tick\": 72, \"worker\": \"keeper\", \"approach\": (2, 7) }",
+			"passed": true
+		},
+		{
+			"check": "Enemies from four sides enter the generated landscape",
+			"passed": true
+		},
+		{
+			"check": "Generated stump accepts existing gathering designation",
+			"passed": true
+		},
+		{
+			"check": "Gathered stump produces physical wood at its location",
+			"passed": true
+		},
+		{
+			"check": "Repeated reload does not respawn collected stump or duplicate wood: 0",
+			"passed": true
+		},
+		{
+			"check": "Repeated reload does not respawn collected stump or duplicate wood: 1",
+			"passed": true
+		},
+		{
+			"check": "Repeated reload does not respawn collected stump or duplicate wood: 2",
+			"passed": true
+		},
+		{
+			"check": "Snapshot resumes identical weighted growth and RNG state",
+			"passed": true
+		}
+	],
+	"failures": 0,
+	"harvest_weight_observations": {
+		"chosen": {
+			"mushroom": 24.0987523098163,
+			"stump": 40.4874852412618,
+			"weed": 147.248438066673
+		},
+		"count": {
+			"mushroom": 48,
+			"stump": 16,
+			"weed": 160
+		},
+		"uniform": {
+			"mushroom": 5.51728384917019,
+			"stump": 2.50431705874825,
+			"weed": 57.5990045674936
+		}
+	},
+	"seeds": [
+		{
+			"kinds": {
+				"dry": 148,
+				"lush": 308,
+				"open": 984,
+				"rocky": 153,
+				"woodland": 107
+			},
+			"rocks": 35,
+			"seed": 0,
+			"trees": 10
+		},
+		{
+			"kinds": {
+				"dry": 93,
+				"lush": 482,
+				"open": 895,
+				"rocky": 87,
+				"woodland": 143
+			},
+			"rocks": 37,
+			"seed": 1,
+			"trees": 20
+		},
+		{
+			"kinds": {
+				"dry": 126,
+				"lush": 294,
+				"open": 1034,
+				"rocky": 147,
+				"woodland": 99
+			},
+			"rocks": 46,
+			"seed": 2,
+			"trees": 9
+		},
+		{
+			"kinds": {
+				"dry": 86,
+				"lush": 713,
+				"open": 651,
+				"rocky": 127,
+				"woodland": 123
+			},
+			"rocks": 48,
+			"seed": 3,
+			"trees": 14
+		},
+		{
+			"kinds": {
+				"dry": 121,
+				"lush": 422,
+				"open": 922,
+				"rocky": 54,
+				"woodland": 181
+			},
+			"rocks": 21,
+			"seed": 4,
+			"trees": 20
+		},
+		{
+			"kinds": {
+				"dry": 100,
+				"lush": 537,
+				"open": 746,
+				"rocky": 148,
+				"woodland": 169
+			},
+			"rocks": 59,
+			"seed": 5,
+			"trees": 9
+		},
+		{
+			"kinds": {
+				"dry": 134,
+				"lush": 466,
+				"open": 820,
+				"rocky": 175,
+				"woodland": 105
+			},
+			"rocks": 38,
+			"seed": 6,
+			"trees": 8
+		},
+		{
+			"kinds": {
+				"dry": 79,
+				"lush": 469,
+				"open": 880,
+				"rocky": 131,
+				"woodland": 141
+			},
+			"rocks": 69,
+			"seed": 7,
+			"trees": 9
+		},
+		{
+			"kinds": {
+				"dry": 105,
+				"lush": 656,
+				"open": 644,
+				"rocky": 134,
+				"woodland": 161
+			},
+			"rocks": 30,
+			"seed": 8,
+			"trees": 25
+		},
+		{
+			"kinds": {
+				"dry": 119,
+				"lush": 480,
+				"open": 860,
+				"rocky": 108,
+				"woodland": 133
+			},
+			"rocks": 39,
+			"seed": 9,
+			"trees": 21
+		},
+		{
+			"kinds": {
+				"dry": 111,
+				"lush": 492,
+				"open": 868,
+				"rocky": 120,
+				"woodland": 109
+			},
+			"rocks": 36,
+			"seed": 10,
+			"trees": 12
+		},
+		{
+			"kinds": {
+				"dry": 138,
+				"lush": 303,
+				"open": 996,
+				"rocky": 96,
+				"woodland": 167
+			},
+			"rocks": 54,
+			"seed": 11,
+			"trees": 12
+		},
+		{
+			"kinds": {
+				"dry": 156,
+				"lush": 479,
+				"open": 781,
+				"rocky": 126,
+				"woodland": 158
+			},
+			"rocks": 46,
+			"seed": 12,
+			"trees": 14
+		},
+		{
+			"kinds": {
+				"dry": 112,
+				"lush": 522,
+				"open": 817,
+				"rocky": 104,
+				"woodland": 145
+			},
+			"rocks": 41,
+			"seed": 13,
+			"trees": 15
+		},
+		{
+			"kinds": {
+				"dry": 99,
+				"lush": 528,
+				"open": 902,
+				"rocky": 57,
+				"woodland": 114
+			},
+			"rocks": 25,
+			"seed": 14,
+			"trees": 8
+		},
+		{
+			"kinds": {
+				"dry": 78,
+				"lush": 524,
+				"open": 853,
+				"rocky": 103,
+				"woodland": 142
+			},
+			"rocks": 44,
+			"seed": 15,
+			"trees": 17
+		}
+	]
+}

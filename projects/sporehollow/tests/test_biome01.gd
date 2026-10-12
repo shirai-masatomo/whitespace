@@ -39,7 +39,7 @@ func run():
 		check(w.resource_amount("wood")==8 and w.resource_amount("stone")==0 and w.resource_amount("mushroom")==7 and w.campaign.last_supply_day==1,"Only the existing first-day supplies enter shared stock; natural deposits do not: "+str(seed_number))
 		observations.append({"seed":seed_number,"terrain":kinds,"trees":w.trees.size(),"rocks":w.rocks.size(),"natural":w.natural.size(),"two_worlds_and_checks_ms":(Time.get_ticks_usec()-start)/1000.0})
 	var w=Farm.new({},31).begin_day();w.story.intro_seen=true;w.enemies.clear();w.spawn_schedule.clear();w.nature_config.spawn_chance_per_second=0
-	var rock=w.rocks.keys()[0];var amount=w.rocks[rock].amount
+	var rock=w.rocks.keys().filter(func(p):return w.neighbors(p).any(func(n):return w.walkable(n) and not w.occupied(n)))[0];var amount=w.rocks[rock].amount
 	var approach=w.neighbors(rock).filter(func(p):return w.walkable(p) and not w.occupied(p))
 	w.keeper.pos=approach[0];w.keeper.satiety=100;w.keeper.sleepiness=0
 	check(w.Tasks.designate(w,"mine",rock),"New deposit accepts existing mining designation")

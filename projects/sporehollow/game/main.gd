@@ -1804,6 +1804,7 @@ func draw_structure(p: Vector2, b: Dictionary, preview: bool = false):
 func _draw():
 	BoardArt.draw_ground(self, world, TILE, visual_time)
 	RockView.ground(self)
+	StoryView.stumps(self,get_canvas_transform().affine_inverse()*get_viewport_rect())
 	for cell in world.floors:
 		var floor_data=world.floors[cell]
 		if floor_data.status!="ready": continue

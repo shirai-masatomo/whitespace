@@ -1,0 +1,85 @@
+{
+	"failures": 0,
+	"groups": [
+		{
+			"checks": [
+				{
+					"check": "Two zones are separate and designation does not teleport goods",
+					"passed": true
+				},
+				{
+					"check": "Worker physically picks up goods before zone edit",
+					"passed": true
+				},
+				{
+					"check": "Carried wood reselects the resized permitted destination",
+					"passed": true
+				},
+				{
+					"check": "Stone reaches only the stone-enabled stockpile",
+					"passed": true
+				},
+				{
+					"check": "Resize and actual hauling preserve all quantities",
+					"passed": true
+				},
+				{
+					"check": "Deleting the only allowed destination releases carried goods at the actual worker location",
+					"passed": true
+				},
+				{
+					"check": "No destination blocks with a visible reason and no quantity loss",
+					"passed": true
+				},
+				{
+					"check": "Changing allowed types resumes the explicit blocked haul; undesignated stored wood stays put",
+					"passed": true
+				},
+				{
+					"check": "Goods remain owned but are not usable outside deleted zones: { \"owned\": 8, \"available\": 0, \"stored\": 0, \"carried\": 0, \"site\": 0, \"forbidden\": 0, \"reserved\": 0 } zones=[]",
+					"passed": true
+				},
+				{
+					"check": "Campaign save restores zones, filters and unchanged physical goods",
+					"passed": true
+				},
+				{
+					"check": "Snapshot writes zones with current work state",
+					"passed": true
+				},
+				{
+					"check": "Snapshot restores zone cells and job state consistently",
+					"passed": true
+				},
+				{
+					"check": "Legacy single storage cells migrate into one permissive zone",
+					"passed": true
+				}
+			],
+			"name": "1 Multiple filtered stockpiles: physical hauling, edits in transit and save"
+		},
+		{
+			"checks": [
+				{
+					"check": "Keeper walks into residential zone before sleeping",
+					"passed": true
+				},
+				{
+					"check": "Resting keeper follows the changed residential destination",
+					"passed": true
+				},
+				{
+					"check": "Deleting residential area preserves the sleeper and states the current-location fallback",
+					"passed": true
+				},
+				{
+					"check": "An unreachable residential area falls back with an explicit reason",
+					"passed": true
+				}
+			],
+			"name": "2 Residential rest: travel, changed/deleted area and unreachable fallback"
+		}
+	],
+	"method": "Controlled component simulation using production Work/Life movement and save/restore; not human play.",
+	"passed": true
+}

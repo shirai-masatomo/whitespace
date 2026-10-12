@@ -1,0 +1,117 @@
+{
+  "runs": [
+    {
+      "report": "biome-compat.json",
+      "checks": 21,
+      "failures": []
+    },
+    {
+      "report": "biome-distribution.json",
+      "checks": 126,
+      "failures": []
+    },
+    {
+      "report": "biome01.json",
+      "checks": 60,
+      "failures": []
+    },
+    {
+      "report": "colony-tasks09.json",
+      "checks": 26,
+      "failures": []
+    },
+    {
+      "report": "cycle09.json",
+      "checks": 23,
+      "failures": [
+        "Snapshot fixture includes active physical cargo and work",
+        "Snapshot preserves all selected state including day guards and in-flight goods",
+        "Restored continuation matches uninterrupted production steps"
+      ]
+    },
+    {
+      "report": "explicit-storage.json",
+      "checks": 12,
+      "failures": []
+    },
+    {
+      "report": "harvest.json",
+      "checks": 28,
+      "failures": []
+    },
+    {
+      "report": "livestock09.json",
+      "checks": 23,
+      "failures": []
+    },
+    {
+      "report": "negotiation.json",
+      "checks": 15,
+      "failures": [
+        "Closing conversation permits the suspended job to be reevaluated and reclaimed"
+      ]
+    },
+    {
+      "report": "nutrition.json",
+      "checks": 17,
+      "failures": [
+        "Incapacitated drafted worker eats food at own feet even with every exit blocked",
+        "One meal consumes exactly one physical meat and does not instantly remove inability",
+        "Fed worker gradually recovers for more than 100 seconds before becoming able",
+        "Malnourished forced sleeper pauses residential travel while food owns movement",
+        "After the meal the original forced rest resumes without competing movement"
+      ]
+    },
+    {
+      "report": "review02.json",
+      "checks": 40,
+      "failures": []
+    },
+    {
+      "report": "rock-connections.json",
+      "checks": 83,
+      "failures": []
+    },
+    {
+      "report": "rock-view.json",
+      "checks": 51,
+      "failures": []
+    },
+    {
+      "report": "terrain-generation.json",
+      "checks": 130,
+      "failures": []
+    },
+    {
+      "report": "visible-boundary.json",
+      "checks": 51,
+      "failures": []
+    },
+    {
+      "report": "work-food-chain.json",
+      "checks": 34,
+      "failures": []
+    },
+    {
+      "report": "zones09.json",
+      "checks": 17,
+      "failures": []
+    },
+    {
+      "report": "final-regression-run.json",
+      "suite": "animal_commands",
+      "checks": 39,
+      "failures": []
+    },
+    {
+      "report": "final-regression-run.json",
+      "suite": "navigation",
+      "checks": 29,
+      "failures": []
+    }
+  ],
+  "passing_suite_checks": 770,
+  "existing_failures": 9,
+  "baseline_commit": "3504a1006fde32e727baf43e79fa925374a0a3bf",
+  "legacy_expectation_adjustment": "Old fixture lacks stocked flag, which is an established physical-stock migration. Validate added value and preserve every original field. Baseline proof retained."
+}

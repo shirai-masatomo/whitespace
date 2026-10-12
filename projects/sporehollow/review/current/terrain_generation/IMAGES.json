@@ -1,0 +1,1788 @@
+{
+  "images": [
+    {
+      "file": "seed_31_full_map.png",
+      "focus": [
+        25,
+        17
+      ],
+      "mined_cells": 0,
+      "note": "Actual game draw, diagnostic overview zoom; HUD temporarily hidden",
+      "overview_hud_hidden": true,
+      "rocks": 41,
+      "seed": 31,
+      "tick": 0,
+      "trees": 13,
+      "zoom": 0.479999989271164,
+      "sha256": "4ededf05505be89fa3cfcc4bd782eadddf0ca42d824a96647a271f4f1abe713f",
+      "width": 1280,
+      "height": 800,
+      "source": "actual_game_gpu"
+    },
+    {
+      "file": "seed_31_idol_center.png",
+      "focus": [
+        24,
+        16
+      ],
+      "mined_cells": 0,
+      "note": "Actual game renderer at ordinary play zoom",
+      "overview_hud_hidden": false,
+      "rocks": 41,
+      "seed": 31,
+      "tick": 0,
+      "trees": 13,
+      "zoom": 1.5,
+      "sha256": "c2c0480e9eb246129e00aa0ffe37bce1ad595fb0ab5378876ebfcc49fe8497f3",
+      "width": 1280,
+      "height": 800,
+      "source": "actual_game_gpu"
+    },
+    {
+      "file": "seed_31_grass_rock_boundary.png",
+      "focus": [
+        20,
+        26
+      ],
+      "mined_cells": 0,
+      "note": "Actual game renderer at ordinary play zoom",
+      "overview_hud_hidden": false,
+      "rocks": 41,
+      "seed": 31,
+      "tick": 0,
+      "trees": 13,
+      "zoom": 1.5,
+      "sha256": "101a8bfea3a80da19aebe9578f2cbb0b290b104d4a459866490643ce4cc9dc9b",
+      "width": 1280,
+      "height": 800,
+      "source": "actual_game_gpu"
+    },
+    {
+      "file": "seed_31_rocky_interior.png",
+      "focus": [
+        13,
+        28
+      ],
+      "mined_cells": 0,
+      "note": "Actual game renderer at ordinary play zoom",
+      "overview_hud_hidden": false,
+      "rocks": 41,
+      "seed": 31,
+      "tick": 0,
+      "trees": 13,
+      "zoom": 1.5,
+      "sha256": "99e6e73b21bc7179eda965602949acaf245b6fd4917c3fbf08b19a4797333f7b",
+      "width": 1280,
+      "height": 800,
+      "source": "actual_game_gpu"
+    },
+    {
+      "file": "seed_31_woodland.png",
+      "focus": [
+        43,
+        14
+      ],
+      "mined_cells": 0,
+      "note": "Actual game renderer at ordinary play zoom",
+      "overview_hud_hidden": false,
+      "rocks": 41,
+      "seed": 31,
+      "tick": 0,
+      "trees": 13,
+      "zoom": 1.5,
+      "sha256": "582c678ae6744e9b75b8a28c273e4efbc576ab1a24f71830096eff76e9075e60",
+      "width": 1280,
+      "height": 800,
+      "source": "actual_game_gpu"
+    },
+    {
+      "file": "seed_31_dry.png",
+      "focus": [
+        14,
+        9
+      ],
+      "mined_cells": 0,
+      "note": "Actual game renderer at ordinary play zoom",
+      "overview_hud_hidden": false,
+      "rocks": 41,
+      "seed": 31,
+      "tick": 0,
+      "trees": 13,
+      "zoom": 1.5,
+      "sha256": "a70c96d1a0bb33674274241d3b86edcd83ffa5608b3bd635cd0a95898f3f5c0f",
+      "width": 1280,
+      "height": 800,
+      "source": "actual_game_gpu"
+    },
+    {
+      "file": "seed_31_lush.png",
+      "focus": [
+        34,
+        13
+      ],
+      "mined_cells": 0,
+      "note": "Actual game renderer at ordinary play zoom",
+      "overview_hud_hidden": false,
+      "rocks": 41,
+      "seed": 31,
+      "tick": 0,
+      "trees": 13,
+      "zoom": 1.5,
+      "sha256": "9f3d999b8bdf6a58f24762149dcc60d6a064f5d3d81ae463801955186a85242b",
+      "width": 1280,
+      "height": 800,
+      "source": "actual_game_gpu"
+    },
+    {
+      "file": "seed_31_corner_nw.png",
+      "focus": [
+        0,
+        0
+      ],
+      "mined_cells": 0,
+      "note": "Actual game renderer at ordinary play zoom",
+      "overview_hud_hidden": false,
+      "rocks": 41,
+      "seed": 31,
+      "tick": 0,
+      "trees": 13,
+      "zoom": 1.5,
+      "sha256": "334560a5ddfa02286e0c620fa0451268b7754ab6aab1dc81acd1945dff7471ca",
+      "width": 1280,
+      "height": 800,
+      "source": "actual_game_gpu"
+    },
+    {
+      "file": "seed_31_corner_ne.png",
+      "focus": [
+        49,
+        0
+      ],
+      "mined_cells": 0,
+      "note": "Actual game renderer at ordinary play zoom",
+      "overview_hud_hidden": false,
+      "rocks": 41,
+      "seed": 31,
+      "tick": 0,
+      "trees": 13,
+      "zoom": 1.5,
+      "sha256": "8df78cf2ca9aedc59d139f68f78e3958f9d5ed569ee3d4d55eb3052d3f7080fa",
+      "width": 1280,
+      "height": 800,
+      "source": "actual_game_gpu"
+    },
+    {
+      "file": "seed_31_corner_sw.png",
+      "focus": [
+        0,
+        33
+      ],
+      "mined_cells": 0,
+      "note": "Actual game renderer at ordinary play zoom",
+      "overview_hud_hidden": false,
+      "rocks": 41,
+      "seed": 31,
+      "tick": 0,
+      "trees": 13,
+      "zoom": 1.5,
+      "sha256": "dc9c36b7367e2e4892503f3cb18030fe2eba4308ed4d097f4316a04179c59052",
+      "width": 1280,
+      "height": 800,
+      "source": "actual_game_gpu"
+    },
+    {
+      "file": "seed_31_corner_se.png",
+      "focus": [
+        49,
+        33
+      ],
+      "mined_cells": 0,
+      "note": "Actual game renderer at ordinary play zoom",
+      "overview_hud_hidden": false,
+      "rocks": 41,
+      "seed": 31,
+      "tick": 0,
+      "trees": 13,
+      "zoom": 1.5,
+      "sha256": "770f9e11bc9cd71f3c5b291dc0be65ff23a639ab519936087f29324a8d99bb15",
+      "width": 1280,
+      "height": 800,
+      "source": "actual_game_gpu"
+    },
+    {
+      "file": "seed_31_edge_n.png",
+      "focus": [
+        25,
+        0
+      ],
+      "mined_cells": 0,
+      "note": "Actual game renderer at ordinary play zoom",
+      "overview_hud_hidden": false,
+      "rocks": 41,
+      "seed": 31,
+      "tick": 0,
+      "trees": 13,
+      "zoom": 1.5,
+      "sha256": "00c08f6cb9b07b3f011205bb513b871eb9cadab6c25d8f2c8d1dd8d365ab40d4",
+      "width": 1280,
+      "height": 800,
+      "source": "actual_game_gpu"
+    },
+    {
+      "file": "seed_31_edge_s.png",
+      "focus": [
+        25,
+        33
+      ],
+      "mined_cells": 0,
+      "note": "Actual game renderer at ordinary play zoom",
+      "overview_hud_hidden": false,
+      "rocks": 41,
+      "seed": 31,
+      "tick": 0,
+      "trees": 13,
+      "zoom": 1.5,
+      "sha256": "2d516f8cc5c2b38e7e5d9ccf7915bbde9109eba42a9cde497dbb8e6061f29978",
+      "width": 1280,
+      "height": 800,
+      "source": "actual_game_gpu"
+    },
+    {
+      "file": "seed_31_edge_w.png",
+      "focus": [
+        0,
+        17
+      ],
+      "mined_cells": 0,
+      "note": "Actual game renderer at ordinary play zoom",
+      "overview_hud_hidden": false,
+      "rocks": 41,
+      "seed": 31,
+      "tick": 0,
+      "trees": 13,
+      "zoom": 1.5,
+      "sha256": "97ef7a5b1b86b86119e20a2ee1b07fe809da5a5c58ca46fbbee43b28ee5171b1",
+      "width": 1280,
+      "height": 800,
+      "source": "actual_game_gpu"
+    },
+    {
+      "file": "seed_31_edge_e.png",
+      "focus": [
+        49,
+        17
+      ],
+      "mined_cells": 0,
+      "note": "Actual game renderer at ordinary play zoom",
+      "overview_hud_hidden": false,
+      "rocks": 41,
+      "seed": 31,
+      "tick": 0,
+      "trees": 13,
+      "zoom": 1.5,
+      "sha256": "384012a441685e8bc513bbdbcf6982aff2bbf58abe0a9ca54059010b2d05deb0",
+      "width": 1280,
+      "height": 800,
+      "source": "actual_game_gpu"
+    },
+    {
+      "file": "seed_31_isolated_rock.png",
+      "focus": [
+        7,
+        29
+      ],
+      "mined_cells": 0,
+      "note": "Actual game renderer at ordinary play zoom",
+      "overview_hud_hidden": false,
+      "rocks": 41,
+      "seed": 31,
+      "tick": 0,
+      "trees": 13,
+      "zoom": 1.5,
+      "sha256": "4129579b88a4b9591b4a21e0674216193957f961c1f4c86f069461185fd6fe43",
+      "width": 1280,
+      "height": 800,
+      "source": "actual_game_gpu"
+    },
+    {
+      "file": "seed_31_connected_before.png",
+      "focus": [
+        11,
+        24
+      ],
+      "mined_cells": 0,
+      "note": "Naturally generated 3x3 patch; no obstacle fixture added",
+      "overview_hud_hidden": false,
+      "rocks": 41,
+      "seed": 31,
+      "tick": 0,
+      "trees": 13,
+      "zoom": 1.79999995231628,
+      "sha256": "6e1b8b57e607c080b40c59f932643ea91db8ef583a5f5c01f472e95c2b244f7e",
+      "width": 1280,
+      "height": 800,
+      "source": "actual_game_gpu"
+    },
+    {
+      "file": "seed_31_mine_edge_damage.png",
+      "focus": [
+        11,
+        23
+      ],
+      "mined_cells": 0,
+      "note": "Normal work progress, no manually assigned damage",
+      "overview_hud_hidden": false,
+      "rocks": 41,
+      "seed": 31,
+      "tick": 36,
+      "trees": 13,
+      "zoom": 1.79999995231628,
+      "sha256": "d3b8654dc55ba3c8e1b1cf6b816b3e271fda9669e1f8609220b5ac95d3a54843",
+      "width": 1280,
+      "height": 800,
+      "source": "actual_game_gpu"
+    },
+    {
+      "file": "seed_31_mine_edge_after.png",
+      "focus": [
+        11,
+        23
+      ],
+      "mined_cells": 1,
+      "note": "Normal work completion and real physical drop",
+      "overview_hud_hidden": false,
+      "rocks": 40,
+      "seed": 31,
+      "tick": 48,
+      "trees": 13,
+      "zoom": 1.79999995231628,
+      "sha256": "8eb0ba1661801794525f1dae18e57ccff4a55bfb8e20e0e0cbe2b6d78a47526a",
+      "width": 1280,
+      "height": 800,
+      "source": "actual_game_gpu"
+    },
+    {
+      "file": "seed_31_center_entrance.png",
+      "focus": [
+        11,
+        24
+      ],
+      "mined_cells": 1,
+      "note": "A genuine edge mined first to reach the previously inaccessible centre",
+      "overview_hud_hidden": false,
+      "rocks": 40,
+      "seed": 31,
+      "tick": 48,
+      "trees": 13,
+      "zoom": 1.79999995231628,
+      "sha256": "8eb0ba1661801794525f1dae18e57ccff4a55bfb8e20e0e0cbe2b6d78a47526a",
+      "width": 1280,
+      "height": 800,
+      "source": "actual_game_gpu"
+    },
+    {
+      "file": "seed_31_mine_center_damage.png",
+      "focus": [
+        11,
+        24
+      ],
+      "mined_cells": 1,
+      "note": "Normal work progress, no manually assigned damage",
+      "overview_hud_hidden": false,
+      "rocks": 40,
+      "seed": 31,
+      "tick": 57,
+      "trees": 13,
+      "zoom": 1.79999995231628,
+      "sha256": "ae50122ab8f2749d3e8a8ee185f07f4973b6b998897e4ace5e48773cea75b3b8",
+      "width": 1280,
+      "height": 800,
+      "source": "actual_game_gpu"
+    },
+    {
+      "file": "seed_31_mine_center_after.png",
+      "focus": [
+        11,
+        24
+      ],
+      "mined_cells": 2,
+      "note": "Normal work completion and real physical drop",
+      "overview_hud_hidden": false,
+      "rocks": 39,
+      "seed": 31,
+      "tick": 69,
+      "trees": 13,
+      "zoom": 1.79999995231628,
+      "sha256": "2408405d036c33766df87c31d6ff2024c1cf16c43b6c98280686453396fc34fa",
+      "width": 1280,
+      "height": 800,
+      "source": "actual_game_gpu"
+    },
+    {
+      "file": "seed_31_mine_corner_damage.png",
+      "focus": [
+        10,
+        23
+      ],
+      "mined_cells": 2,
+      "note": "Normal work progress, no manually assigned damage",
+      "overview_hud_hidden": false,
+      "rocks": 39,
+      "seed": 31,
+      "tick": 77,
+      "trees": 13,
+      "zoom": 1.79999995231628,
+      "sha256": "ab0a56f83909b5f329b3b4004f6e46e49ed1304e460e1644b924f6b58ae475a9",
+      "width": 1280,
+      "height": 800,
+      "source": "actual_game_gpu"
+    },
+    {
+      "file": "seed_31_mine_corner_after.png",
+      "focus": [
+        10,
+        23
+      ],
+      "mined_cells": 3,
+      "note": "Normal work completion and real physical drop",
+      "overview_hud_hidden": false,
+      "rocks": 38,
+      "seed": 31,
+      "tick": 89,
+      "trees": 13,
+      "zoom": 1.79999995231628,
+      "sha256": "aac9f175f18c072ac1a62e665129af81ae0dce075ea13d07ccb4804ccdde40d0",
+      "width": 1280,
+      "height": 800,
+      "source": "actual_game_gpu"
+    },
+    {
+      "file": "seed_31_patch_all_mined.png",
+      "focus": [
+        11,
+        24
+      ],
+      "mined_cells": 9,
+      "note": "All 9 cells in marked 3x3 review patch mined; outside natural rocks retained",
+      "overview_hud_hidden": false,
+      "rocks": 32,
+      "seed": 31,
+      "tick": 196,
+      "trees": 13,
+      "zoom": 1.79999995231628,
+      "sha256": "d61e58595e76cdd843955fb8f615201523735071cea638759e9d11ecaed070d1",
+      "width": 1280,
+      "height": 800,
+      "source": "actual_game_gpu"
+    },
+    {
+      "file": "seed_31_logging_before.png",
+      "focus": [
+        36,
+        15
+      ],
+      "mined_cells": 9,
+      "note": "Original generated tree",
+      "overview_hud_hidden": false,
+      "rocks": 32,
+      "seed": 31,
+      "tick": 196,
+      "trees": 13,
+      "zoom": 1.79999995231628,
+      "sha256": "0873fb0dba8fb217728a4007f7c42a7f4b19d6f636a79b4f07488ecd6fd5beb7",
+      "width": 1280,
+      "height": 800,
+      "source": "actual_game_gpu"
+    },
+    {
+      "file": "seed_31_logging_damage.png",
+      "focus": [
+        36,
+        15
+      ],
+      "mined_cells": 9,
+      "note": "Normal work progress, no manually assigned damage",
+      "overview_hud_hidden": false,
+      "rocks": 32,
+      "seed": 31,
+      "tick": 258,
+      "trees": 13,
+      "zoom": 1.79999995231628,
+      "sha256": "1184828bfe7c93b360b495cfe2e599d5f9a912d8c3db3c7297a58a778cd0c6c5",
+      "width": 1280,
+      "height": 800,
+      "source": "actual_game_gpu"
+    },
+    {
+      "file": "seed_31_logging_after.png",
+      "focus": [
+        36,
+        15
+      ],
+      "mined_cells": 9,
+      "note": "Normal work completion and real physical drop",
+      "overview_hud_hidden": false,
+      "rocks": 32,
+      "seed": 31,
+      "tick": 270,
+      "trees": 12,
+      "zoom": 1.79999995231628,
+      "sha256": "9ec2ad50e2e5ce0801d8692dfbc18c6141b7bd5facef6ddbbf09eb0228e183f8",
+      "width": 1280,
+      "height": 800,
+      "source": "actual_game_gpu"
+    },
+    {
+      "file": "seed_31_logging_drops_clear.png",
+      "focus": [
+        36,
+        15
+      ],
+      "mined_cells": 9,
+      "note": "Normal logging drop and opened footprint",
+      "overview_hud_hidden": false,
+      "rocks": 32,
+      "seed": 31,
+      "tick": 274,
+      "trees": 12,
+      "zoom": 1.79999995231628,
+      "sha256": "657f3c368c0e4435e43128200cbf9ad7db5b0933e28ecd12bb021c39bbc80e16",
+      "width": 1280,
+      "height": 800,
+      "source": "actual_game_gpu"
+    },
+    {
+      "file": "seed_31_stone_forbidden.png",
+      "focus": [
+        11,
+        24
+      ],
+      "mined_cells": 9,
+      "note": "Mined stone remains a real object; construction blocked until collected",
+      "overview_hud_hidden": false,
+      "rocks": 32,
+      "seed": 31,
+      "tick": 274,
+      "trees": 12,
+      "zoom": 1.79999995231628,
+      "sha256": "44a62365f677039dd4127efbcd5e9b4bfa4e89ac564e1e60e8ed546586eacc0b",
+      "width": 1280,
+      "height": 800,
+      "source": "actual_game_gpu"
+    },
+    {
+      "file": "seed_31_after_collection.png",
+      "focus": [
+        11,
+        24
+      ],
+      "mined_cells": 9,
+      "note": "Normal hauling cleared the cell and delivered stone to original storage",
+      "overview_hud_hidden": false,
+      "rocks": 32,
+      "seed": 31,
+      "tick": 377,
+      "trees": 12,
+      "zoom": 1.79999995231628,
+      "sha256": "7720e1c39d4919dc06a943d1168853f2ad32d7b34e9e46d35031304274ec9c88",
+      "width": 1280,
+      "height": 800,
+      "source": "actual_game_gpu"
+    },
+    {
+      "file": "seed_31_built_on_mined_cell.png",
+      "focus": [
+        11,
+        24
+      ],
+      "mined_cells": 9,
+      "note": "Existing construction delivery/work completed a wood floor on the mined cell",
+      "overview_hud_hidden": false,
+      "rocks": 32,
+      "seed": 31,
+      "tick": 431,
+      "trees": 12,
+      "zoom": 1.79999995231628,
+      "sha256": "5ae644c13a1484c417a40b1ad8b751223309cf171f3da24072f108ee21639778",
+      "width": 1280,
+      "height": 800,
+      "source": "actual_game_gpu"
+    },
+    {
+      "file": "seed_31_mine_edge.webp",
+      "sha256": "6052bb5693f73342f1376de7c3f3260ba63c4b527609da2660b68cee81197ce8",
+      "source": "actual_game_gpu_sequence",
+      "timing": "variable sampling, 250ms comparison playback"
+    },
+    {
+      "file": "seed_31_mine_center.webp",
+      "sha256": "c22ce4d0f7738ee1cdf8af45d7d9db6e1a795231018cd8b62f287d3176733726",
+      "source": "actual_game_gpu_sequence",
+      "timing": "variable sampling, 250ms comparison playback"
+    },
+    {
+      "file": "seed_31_mine_corner.webp",
+      "sha256": "0646d207c884be94e764b2953cf1dd690d3aa1a167cb5cfad61855977217e004",
+      "source": "actual_game_gpu_sequence",
+      "timing": "variable sampling, 250ms comparison playback"
+    },
+    {
+      "file": "seed_31_logging.webp",
+      "sha256": "6f2f3923767dc5dd285369c437f1f4655a2ac07530ee2088caf0af6b8af5b346",
+      "source": "actual_game_gpu_sequence",
+      "timing": "variable sampling, 250ms comparison playback"
+    },
+    {
+      "file": "seed_97_full_map.png",
+      "focus": [
+        25,
+        17
+      ],
+      "mined_cells": 0,
+      "note": "Actual game draw, diagnostic overview zoom; HUD temporarily hidden",
+      "overview_hud_hidden": true,
+      "rocks": 54,
+      "seed": 97,
+      "tick": 0,
+      "trees": 24,
+      "zoom": 0.479999989271164,
+      "sha256": "bb6e47322925fe13c9e14b3991c236c7a080465af09c1eded2b77ad05d8de9a6",
+      "width": 1280,
+      "height": 800,
+      "source": "actual_game_gpu"
+    },
+    {
+      "file": "seed_97_idol_center.png",
+      "focus": [
+        24,
+        16
+      ],
+      "mined_cells": 0,
+      "note": "Actual game renderer at ordinary play zoom",
+      "overview_hud_hidden": false,
+      "rocks": 54,
+      "seed": 97,
+      "tick": 0,
+      "trees": 24,
+      "zoom": 1.5,
+      "sha256": "b7d22ca2ab965a0ab23b38e3e1adbbbbc6de94a8944e9f911be1228324060455",
+      "width": 1280,
+      "height": 800,
+      "source": "actual_game_gpu"
+    },
+    {
+      "file": "seed_97_grass_rock_boundary.png",
+      "focus": [
+        20,
+        9
+      ],
+      "mined_cells": 0,
+      "note": "Actual game renderer at ordinary play zoom",
+      "overview_hud_hidden": false,
+      "rocks": 54,
+      "seed": 97,
+      "tick": 0,
+      "trees": 24,
+      "zoom": 1.5,
+      "sha256": "bcda6fc47897057437e06aa75a8af4b4a722842782b34c60c2341633cdd319ab",
+      "width": 1280,
+      "height": 800,
+      "source": "actual_game_gpu"
+    },
+    {
+      "file": "seed_97_rocky_interior.png",
+      "focus": [
+        15,
+        7
+      ],
+      "mined_cells": 0,
+      "note": "Actual game renderer at ordinary play zoom",
+      "overview_hud_hidden": false,
+      "rocks": 54,
+      "seed": 97,
+      "tick": 0,
+      "trees": 24,
+      "zoom": 1.5,
+      "sha256": "d04c106c4ce7f1d717e5be234621072bb108d41c814c56c05944fc7d89f294ec",
+      "width": 1280,
+      "height": 800,
+      "source": "actual_game_gpu"
+    },
+    {
+      "file": "seed_97_woodland.png",
+      "focus": [
+        12,
+        25
+      ],
+      "mined_cells": 0,
+      "note": "Actual game renderer at ordinary play zoom",
+      "overview_hud_hidden": false,
+      "rocks": 54,
+      "seed": 97,
+      "tick": 0,
+      "trees": 24,
+      "zoom": 1.5,
+      "sha256": "36f3cfeceea91f3b9690d395cad86c1145365343886821692df80dbfec71db01",
+      "width": 1280,
+      "height": 800,
+      "source": "actual_game_gpu"
+    },
+    {
+      "file": "seed_97_dry.png",
+      "focus": [
+        41,
+        13
+      ],
+      "mined_cells": 0,
+      "note": "Actual game renderer at ordinary play zoom",
+      "overview_hud_hidden": false,
+      "rocks": 54,
+      "seed": 97,
+      "tick": 0,
+      "trees": 24,
+      "zoom": 1.5,
+      "sha256": "841c5adbfb6008ee5b229d5ec26e0abd10b4938ff73bf744c80fcde975ce2e2d",
+      "width": 1280,
+      "height": 800,
+      "source": "actual_game_gpu"
+    },
+    {
+      "file": "seed_97_lush.png",
+      "focus": [
+        24,
+        28
+      ],
+      "mined_cells": 0,
+      "note": "Actual game renderer at ordinary play zoom",
+      "overview_hud_hidden": false,
+      "rocks": 54,
+      "seed": 97,
+      "tick": 0,
+      "trees": 24,
+      "zoom": 1.5,
+      "sha256": "f3939893e5dbc726cb0a4f6cc90a8d31e7789bdcbbd122ad17559765e050bb13",
+      "width": 1280,
+      "height": 800,
+      "source": "actual_game_gpu"
+    },
+    {
+      "file": "seed_97_corner_nw.png",
+      "focus": [
+        0,
+        0
+      ],
+      "mined_cells": 0,
+      "note": "Actual game renderer at ordinary play zoom",
+      "overview_hud_hidden": false,
+      "rocks": 54,
+      "seed": 97,
+      "tick": 0,
+      "trees": 24,
+      "zoom": 1.5,
+      "sha256": "4c200246c902cf0de41267e25cfa56fd953eb759ad78870fcd925eb2536ed99c",
+      "width": 1280,
+      "height": 800,
+      "source": "actual_game_gpu"
+    },
+    {
+      "file": "seed_97_corner_ne.png",
+      "focus": [
+        49,
+        0
+      ],
+      "mined_cells": 0,
+      "note": "Actual game renderer at ordinary play zoom",
+      "overview_hud_hidden": false,
+      "rocks": 54,
+      "seed": 97,
+      "tick": 0,
+      "trees": 24,
+      "zoom": 1.5,
+      "sha256": "800699efcbd563adf790803fd26825765978930c3c0df7ccc6139dca781cb8cc",
+      "width": 1280,
+      "height": 800,
+      "source": "actual_game_gpu"
+    },
+    {
+      "file": "seed_97_corner_sw.png",
+      "focus": [
+        0,
+        33
+      ],
+      "mined_cells": 0,
+      "note": "Actual game renderer at ordinary play zoom",
+      "overview_hud_hidden": false,
+      "rocks": 54,
+      "seed": 97,
+      "tick": 0,
+      "trees": 24,
+      "zoom": 1.5,
+      "sha256": "d1e9fce8d9cefdc202b3457ea32618d1b5bd86315d26abcc4a109149450a100b",
+      "width": 1280,
+      "height": 800,
+      "source": "actual_game_gpu"
+    },
+    {
+      "file": "seed_97_corner_se.png",
+      "focus": [
+        49,
+        33
+      ],
+      "mined_cells": 0,
+      "note": "Actual game renderer at ordinary play zoom",
+      "overview_hud_hidden": false,
+      "rocks": 54,
+      "seed": 97,
+      "tick": 0,
+      "trees": 24,
+      "zoom": 1.5,
+      "sha256": "32bbaa653163ddf4f8ea023136e7568d6fc17a748152aadfbb622aab5a0db739",
+      "width": 1280,
+      "height": 800,
+      "source": "actual_game_gpu"
+    },
+    {
+      "file": "seed_97_edge_n.png",
+      "focus": [
+        25,
+        0
+      ],
+      "mined_cells": 0,
+      "note": "Actual game renderer at ordinary play zoom",
+      "overview_hud_hidden": false,
+      "rocks": 54,
+      "seed": 97,
+      "tick": 0,
+      "trees": 24,
+      "zoom": 1.5,
+      "sha256": "9736b19a7bb5c48cffdd80f1b6243734cfc3cc5914dc60c0574a8b99afcc3ce8",
+      "width": 1280,
+      "height": 800,
+      "source": "actual_game_gpu"
+    },
+    {
+      "file": "seed_97_edge_s.png",
+      "focus": [
+        25,
+        33
+      ],
+      "mined_cells": 0,
+      "note": "Actual game renderer at ordinary play zoom",
+      "overview_hud_hidden": false,
+      "rocks": 54,
+      "seed": 97,
+      "tick": 0,
+      "trees": 24,
+      "zoom": 1.5,
+      "sha256": "2aa2e660a8078a14a420ffdd36b2c965ab53e9ed5eef97840e68de13b8ba8c5d",
+      "width": 1280,
+      "height": 800,
+      "source": "actual_game_gpu"
+    },
+    {
+      "file": "seed_97_edge_w.png",
+      "focus": [
+        0,
+        17
+      ],
+      "mined_cells": 0,
+      "note": "Actual game renderer at ordinary play zoom",
+      "overview_hud_hidden": false,
+      "rocks": 54,
+      "seed": 97,
+      "tick": 0,
+      "trees": 24,
+      "zoom": 1.5,
+      "sha256": "a14265e485ea625ac044fb5750f2802ea1abd1cea86e7590498b9accd4f7ecb2",
+      "width": 1280,
+      "height": 800,
+      "source": "actual_game_gpu"
+    },
+    {
+      "file": "seed_97_edge_e.png",
+      "focus": [
+        49,
+        17
+      ],
+      "mined_cells": 0,
+      "note": "Actual game renderer at ordinary play zoom",
+      "overview_hud_hidden": false,
+      "rocks": 54,
+      "seed": 97,
+      "tick": 0,
+      "trees": 24,
+      "zoom": 1.5,
+      "sha256": "b145d000e222e1c0d37f80f295bba65fab10c4cfd99d699be64bf5b0c96177e0",
+      "width": 1280,
+      "height": 800,
+      "source": "actual_game_gpu"
+    },
+    {
+      "file": "seed_97_isolated_rock.png",
+      "focus": [
+        20,
+        5
+      ],
+      "mined_cells": 0,
+      "note": "Actual game renderer at ordinary play zoom",
+      "overview_hud_hidden": false,
+      "rocks": 54,
+      "seed": 97,
+      "tick": 0,
+      "trees": 24,
+      "zoom": 1.5,
+      "sha256": "e05bddf4240574989c1a5ea5bb56e5b97ddca397669ec5adcdf43161b9b36639",
+      "width": 1280,
+      "height": 800,
+      "source": "actual_game_gpu"
+    },
+    {
+      "file": "seed_97_connected_before.png",
+      "focus": [
+        16,
+        9
+      ],
+      "mined_cells": 0,
+      "note": "Naturally generated 3x3 patch; no obstacle fixture added",
+      "overview_hud_hidden": false,
+      "rocks": 54,
+      "seed": 97,
+      "tick": 0,
+      "trees": 24,
+      "zoom": 1.79999995231628,
+      "sha256": "c664455aba643b2b5d04403546caf40e928f97e5777b8bc2b128856f3dd89d40",
+      "width": 1280,
+      "height": 800,
+      "source": "actual_game_gpu"
+    },
+    {
+      "file": "seed_97_mine_edge_damage.png",
+      "focus": [
+        16,
+        10
+      ],
+      "mined_cells": 0,
+      "note": "Normal work progress, no manually assigned damage",
+      "overview_hud_hidden": false,
+      "rocks": 54,
+      "seed": 97,
+      "tick": 29,
+      "trees": 24,
+      "zoom": 1.79999995231628,
+      "sha256": "20cbc970d91f8aac3e5ad7980dfbb22d803b63bcbe4d5202ca2087f0c2c72503",
+      "width": 1280,
+      "height": 800,
+      "source": "actual_game_gpu"
+    },
+    {
+      "file": "seed_97_mine_edge_after.png",
+      "focus": [
+        16,
+        10
+      ],
+      "mined_cells": 1,
+      "note": "Normal work completion and real physical drop",
+      "overview_hud_hidden": false,
+      "rocks": 53,
+      "seed": 97,
+      "tick": 41,
+      "trees": 24,
+      "zoom": 1.79999995231628,
+      "sha256": "57263ee325f5f1c1ee954173666f23a6c9061be3781e0b10cc3fd7521f182e19",
+      "width": 1280,
+      "height": 800,
+      "source": "actual_game_gpu"
+    },
+    {
+      "file": "seed_97_center_entrance.png",
+      "focus": [
+        16,
+        9
+      ],
+      "mined_cells": 1,
+      "note": "A genuine edge mined first to reach the previously inaccessible centre",
+      "overview_hud_hidden": false,
+      "rocks": 53,
+      "seed": 97,
+      "tick": 41,
+      "trees": 24,
+      "zoom": 1.79999995231628,
+      "sha256": "57263ee325f5f1c1ee954173666f23a6c9061be3781e0b10cc3fd7521f182e19",
+      "width": 1280,
+      "height": 800,
+      "source": "actual_game_gpu"
+    },
+    {
+      "file": "seed_97_mine_center_damage.png",
+      "focus": [
+        16,
+        9
+      ],
+      "mined_cells": 1,
+      "note": "Normal work progress, no manually assigned damage",
+      "overview_hud_hidden": false,
+      "rocks": 53,
+      "seed": 97,
+      "tick": 51,
+      "trees": 24,
+      "zoom": 1.79999995231628,
+      "sha256": "61ba6a2859055ea3cacc261ec7fe91fded796bfe23171d4cf1ef76e613893052",
+      "width": 1280,
+      "height": 800,
+      "source": "actual_game_gpu"
+    },
+    {
+      "file": "seed_97_mine_center_after.png",
+      "focus": [
+        16,
+        9
+      ],
+      "mined_cells": 2,
+      "note": "Normal work completion and real physical drop",
+      "overview_hud_hidden": false,
+      "rocks": 52,
+      "seed": 97,
+      "tick": 63,
+      "trees": 24,
+      "zoom": 1.79999995231628,
+      "sha256": "858847d0c6f494838e6554d143992c29c0bf5b83e691408c0788aace85d1da53",
+      "width": 1280,
+      "height": 800,
+      "source": "actual_game_gpu"
+    },
+    {
+      "file": "seed_97_mine_corner_damage.png",
+      "focus": [
+        15,
+        10
+      ],
+      "mined_cells": 2,
+      "note": "Normal work progress, no manually assigned damage",
+      "overview_hud_hidden": false,
+      "rocks": 52,
+      "seed": 97,
+      "tick": 71,
+      "trees": 24,
+      "zoom": 1.79999995231628,
+      "sha256": "d41512042e528e55c861f1be0990db1791ea66a355ada64a3a0dcdcfdde0a7a3",
+      "width": 1280,
+      "height": 800,
+      "source": "actual_game_gpu"
+    },
+    {
+      "file": "seed_97_mine_corner_after.png",
+      "focus": [
+        15,
+        10
+      ],
+      "mined_cells": 3,
+      "note": "Normal work completion and real physical drop",
+      "overview_hud_hidden": false,
+      "rocks": 51,
+      "seed": 97,
+      "tick": 83,
+      "trees": 24,
+      "zoom": 1.79999995231628,
+      "sha256": "de0e7d084676feda44708e0ef5eb134d0f21e4fdaf42d9a495ee641194c7e647",
+      "width": 1280,
+      "height": 800,
+      "source": "actual_game_gpu"
+    },
+    {
+      "file": "seed_97_patch_all_mined.png",
+      "focus": [
+        16,
+        9
+      ],
+      "mined_cells": 9,
+      "note": "All 9 cells in marked 3x3 review patch mined; outside natural rocks retained",
+      "overview_hud_hidden": false,
+      "rocks": 45,
+      "seed": 97,
+      "tick": 189,
+      "trees": 24,
+      "zoom": 1.79999995231628,
+      "sha256": "4847fb8bfecf1aeef72a4a52a2a675c25eb2c25e6559842214c96b0cfc7c51a9",
+      "width": 1280,
+      "height": 800,
+      "source": "actual_game_gpu"
+    },
+    {
+      "file": "seed_97_logging_before.png",
+      "focus": [
+        16,
+        23
+      ],
+      "mined_cells": 9,
+      "note": "Original generated tree",
+      "overview_hud_hidden": false,
+      "rocks": 45,
+      "seed": 97,
+      "tick": 189,
+      "trees": 24,
+      "zoom": 1.79999995231628,
+      "sha256": "48f5a2e269bd5b33b27290345718df291a5e1ac9b56568c90e0618b44c193a0d",
+      "width": 1280,
+      "height": 800,
+      "source": "actual_game_gpu"
+    },
+    {
+      "file": "seed_97_logging_damage.png",
+      "focus": [
+        16,
+        23
+      ],
+      "mined_cells": 9,
+      "note": "Normal work progress, no manually assigned damage",
+      "overview_hud_hidden": false,
+      "rocks": 45,
+      "seed": 97,
+      "tick": 217,
+      "trees": 24,
+      "zoom": 1.79999995231628,
+      "sha256": "05f2e20b891038980229368d487c66f6eeeb98eae4859a053adefe04ca7dd21f",
+      "width": 1280,
+      "height": 800,
+      "source": "actual_game_gpu"
+    },
+    {
+      "file": "seed_97_logging_after.png",
+      "focus": [
+        16,
+        23
+      ],
+      "mined_cells": 9,
+      "note": "Normal work completion and real physical drop",
+      "overview_hud_hidden": false,
+      "rocks": 45,
+      "seed": 97,
+      "tick": 229,
+      "trees": 23,
+      "zoom": 1.79999995231628,
+      "sha256": "c64cc1addc173f715655912a0e4d8fce36ff4bb0b91453611a5389e18b58b8ae",
+      "width": 1280,
+      "height": 800,
+      "source": "actual_game_gpu"
+    },
+    {
+      "file": "seed_97_logging_drops_clear.png",
+      "focus": [
+        16,
+        23
+      ],
+      "mined_cells": 9,
+      "note": "Normal logging drop and opened footprint",
+      "overview_hud_hidden": false,
+      "rocks": 45,
+      "seed": 97,
+      "tick": 233,
+      "trees": 23,
+      "zoom": 1.79999995231628,
+      "sha256": "0735a83a81d26202955cbeaa13879f912da59351bfdc2ef6cd33343de5e2969b",
+      "width": 1280,
+      "height": 800,
+      "source": "actual_game_gpu"
+    },
+    {
+      "file": "seed_97_mine_edge.webp",
+      "sha256": "e7a09257edfa0cd9b1de35276f44fc0f3867b54413d4f18052a33e72b6f2ca02",
+      "source": "actual_game_gpu_sequence",
+      "timing": "variable sampling, 250ms comparison playback"
+    },
+    {
+      "file": "seed_97_mine_center.webp",
+      "sha256": "c6d87158929e6d662f4644c948a7c5bba2a82a758660c002fd24f3e7ac5b2563",
+      "source": "actual_game_gpu_sequence",
+      "timing": "variable sampling, 250ms comparison playback"
+    },
+    {
+      "file": "seed_97_mine_corner.webp",
+      "sha256": "b10c8f04129442307c56499170e447797ed2ff75fda7fd09d4f1a4f53f4428dd",
+      "source": "actual_game_gpu_sequence",
+      "timing": "variable sampling, 250ms comparison playback"
+    },
+    {
+      "file": "seed_97_logging.webp",
+      "sha256": "55c4acb7e8e281af4d887d04938f283f8301592cc76d963b1b9a54d543f8a264",
+      "source": "actual_game_gpu_sequence",
+      "timing": "variable sampling, 250ms comparison playback"
+    },
+    {
+      "file": "seed_2026_full_map.png",
+      "focus": [
+        25,
+        17
+      ],
+      "mined_cells": 0,
+      "note": "Actual game draw, diagnostic overview zoom; HUD temporarily hidden",
+      "overview_hud_hidden": true,
+      "rocks": 42,
+      "seed": 2026,
+      "tick": 0,
+      "trees": 23,
+      "zoom": 0.479999989271164,
+      "sha256": "77b3677a1da5fcf836ad41809a7ef00b259e2387c455a4530b86c477dc5083e9",
+      "width": 1280,
+      "height": 800,
+      "source": "actual_game_gpu"
+    },
+    {
+      "file": "seed_2026_idol_center.png",
+      "focus": [
+        24,
+        16
+      ],
+      "mined_cells": 0,
+      "note": "Actual game renderer at ordinary play zoom",
+      "overview_hud_hidden": false,
+      "rocks": 42,
+      "seed": 2026,
+      "tick": 0,
+      "trees": 23,
+      "zoom": 1.5,
+      "sha256": "b545abb3f8aab75117ba249e5f7fcf43f7dc9b5008c80f945f1a4d9429bd69b0",
+      "width": 1280,
+      "height": 800,
+      "source": "actual_game_gpu"
+    },
+    {
+      "file": "seed_2026_grass_rock_boundary.png",
+      "focus": [
+        13,
+        17
+      ],
+      "mined_cells": 0,
+      "note": "Actual game renderer at ordinary play zoom",
+      "overview_hud_hidden": false,
+      "rocks": 42,
+      "seed": 2026,
+      "tick": 0,
+      "trees": 23,
+      "zoom": 1.5,
+      "sha256": "c4042fef1c9bb276d7631aee61f91d83fecf0de01b764becdc731e59969062d6",
+      "width": 1280,
+      "height": 800,
+      "source": "actual_game_gpu"
+    },
+    {
+      "file": "seed_2026_rocky_interior.png",
+      "focus": [
+        7,
+        18
+      ],
+      "mined_cells": 0,
+      "note": "Actual game renderer at ordinary play zoom",
+      "overview_hud_hidden": false,
+      "rocks": 42,
+      "seed": 2026,
+      "tick": 0,
+      "trees": 23,
+      "zoom": 1.5,
+      "sha256": "dc4bb596e6a5843ad0c270c57fe51afb4db7ad0164c1612b49ae1048af09764e",
+      "width": 1280,
+      "height": 800,
+      "source": "actual_game_gpu"
+    },
+    {
+      "file": "seed_2026_woodland.png",
+      "focus": [
+        31,
+        29
+      ],
+      "mined_cells": 0,
+      "note": "Actual game renderer at ordinary play zoom",
+      "overview_hud_hidden": false,
+      "rocks": 42,
+      "seed": 2026,
+      "tick": 0,
+      "trees": 23,
+      "zoom": 1.5,
+      "sha256": "eba9ea6bba688b11f82eb42d9f1b3fc51108bbcd772dce66fe0dad77b38648ea",
+      "width": 1280,
+      "height": 800,
+      "source": "actual_game_gpu"
+    },
+    {
+      "file": "seed_2026_dry.png",
+      "focus": [
+        34,
+        5
+      ],
+      "mined_cells": 0,
+      "note": "Actual game renderer at ordinary play zoom",
+      "overview_hud_hidden": false,
+      "rocks": 42,
+      "seed": 2026,
+      "tick": 0,
+      "trees": 23,
+      "zoom": 1.5,
+      "sha256": "e0480c2650d972d9279f5cc91c20ae853581bef06071c3f183701600d27b51f4",
+      "width": 1280,
+      "height": 800,
+      "source": "actual_game_gpu"
+    },
+    {
+      "file": "seed_2026_lush.png",
+      "focus": [
+        20,
+        23
+      ],
+      "mined_cells": 0,
+      "note": "Actual game renderer at ordinary play zoom",
+      "overview_hud_hidden": false,
+      "rocks": 42,
+      "seed": 2026,
+      "tick": 0,
+      "trees": 23,
+      "zoom": 1.5,
+      "sha256": "7ead24e08f7246a215c2462c48d737324213b2f0b52cc5f21973782fd96265ec",
+      "width": 1280,
+      "height": 800,
+      "source": "actual_game_gpu"
+    },
+    {
+      "file": "seed_2026_corner_nw.png",
+      "focus": [
+        0,
+        0
+      ],
+      "mined_cells": 0,
+      "note": "Actual game renderer at ordinary play zoom",
+      "overview_hud_hidden": false,
+      "rocks": 42,
+      "seed": 2026,
+      "tick": 0,
+      "trees": 23,
+      "zoom": 1.5,
+      "sha256": "2ee1e4341a8fd5dd473b9a620ecad3ab27dd12c67b7710932fc971c1333c8e55",
+      "width": 1280,
+      "height": 800,
+      "source": "actual_game_gpu"
+    },
+    {
+      "file": "seed_2026_corner_ne.png",
+      "focus": [
+        49,
+        0
+      ],
+      "mined_cells": 0,
+      "note": "Actual game renderer at ordinary play zoom",
+      "overview_hud_hidden": false,
+      "rocks": 42,
+      "seed": 2026,
+      "tick": 0,
+      "trees": 23,
+      "zoom": 1.5,
+      "sha256": "af22b6cbcf143c07ae365fce542b8bf87a13e0019dfa256b37cfb2f25b5737f0",
+      "width": 1280,
+      "height": 800,
+      "source": "actual_game_gpu"
+    },
+    {
+      "file": "seed_2026_corner_sw.png",
+      "focus": [
+        0,
+        33
+      ],
+      "mined_cells": 0,
+      "note": "Actual game renderer at ordinary play zoom",
+      "overview_hud_hidden": false,
+      "rocks": 42,
+      "seed": 2026,
+      "tick": 0,
+      "trees": 23,
+      "zoom": 1.5,
+      "sha256": "93c8c0d19a88634d26df9dcdb39ddf9f7811fde0bf47ff4c97917d81b1958076",
+      "width": 1280,
+      "height": 800,
+      "source": "actual_game_gpu"
+    },
+    {
+      "file": "seed_2026_corner_se.png",
+      "focus": [
+        49,
+        33
+      ],
+      "mined_cells": 0,
+      "note": "Actual game renderer at ordinary play zoom",
+      "overview_hud_hidden": false,
+      "rocks": 42,
+      "seed": 2026,
+      "tick": 0,
+      "trees": 23,
+      "zoom": 1.5,
+      "sha256": "15fc3aa39953259926349eb1035fdc718ffb23f39a2686ca93dcae185c2ffdc7",
+      "width": 1280,
+      "height": 800,
+      "source": "actual_game_gpu"
+    },
+    {
+      "file": "seed_2026_edge_n.png",
+      "focus": [
+        25,
+        0
+      ],
+      "mined_cells": 0,
+      "note": "Actual game renderer at ordinary play zoom",
+      "overview_hud_hidden": false,
+      "rocks": 42,
+      "seed": 2026,
+      "tick": 0,
+      "trees": 23,
+      "zoom": 1.5,
+      "sha256": "e6f2719d665f78de8327cc04a07aef046e2aab380a6314ef1a4615d90ee85094",
+      "width": 1280,
+      "height": 800,
+      "source": "actual_game_gpu"
+    },
+    {
+      "file": "seed_2026_edge_s.png",
+      "focus": [
+        25,
+        33
+      ],
+      "mined_cells": 0,
+      "note": "Actual game renderer at ordinary play zoom",
+      "overview_hud_hidden": false,
+      "rocks": 42,
+      "seed": 2026,
+      "tick": 0,
+      "trees": 23,
+      "zoom": 1.5,
+      "sha256": "bf2a7340407c2f0e999e4339664c11c319c49c841337e56603c1c1aad8d71000",
+      "width": 1280,
+      "height": 800,
+      "source": "actual_game_gpu"
+    },
+    {
+      "file": "seed_2026_edge_w.png",
+      "focus": [
+        0,
+        17
+      ],
+      "mined_cells": 0,
+      "note": "Actual game renderer at ordinary play zoom",
+      "overview_hud_hidden": false,
+      "rocks": 42,
+      "seed": 2026,
+      "tick": 0,
+      "trees": 23,
+      "zoom": 1.5,
+      "sha256": "5de4f261fe288d1f301b53d2b74117a03ff5ddfd1a772980f3c95c2079173dbe",
+      "width": 1280,
+      "height": 800,
+      "source": "actual_game_gpu"
+    },
+    {
+      "file": "seed_2026_edge_e.png",
+      "focus": [
+        49,
+        17
+      ],
+      "mined_cells": 0,
+      "note": "Actual game renderer at ordinary play zoom",
+      "overview_hud_hidden": false,
+      "rocks": 42,
+      "seed": 2026,
+      "tick": 0,
+      "trees": 23,
+      "zoom": 1.5,
+      "sha256": "8eeb334f75090e595e651d5ace7304f9253a954f191c9e32d0c86149b7ba5843",
+      "width": 1280,
+      "height": 800,
+      "source": "actual_game_gpu"
+    },
+    {
+      "file": "seed_2026_isolated_rock.png",
+      "focus": [
+        5,
+        22
+      ],
+      "mined_cells": 0,
+      "note": "Actual game renderer at ordinary play zoom",
+      "overview_hud_hidden": false,
+      "rocks": 42,
+      "seed": 2026,
+      "tick": 0,
+      "trees": 23,
+      "zoom": 1.5,
+      "sha256": "5e220f7d21ed2182bf3f5a085e71112f1405a96074b3cb48fe4fbede8783797c",
+      "width": 1280,
+      "height": 800,
+      "source": "actual_game_gpu"
+    },
+    {
+      "file": "seed_2026_connected_before.png",
+      "focus": [
+        11,
+        17
+      ],
+      "mined_cells": 0,
+      "note": "Naturally generated 3x3 patch; no obstacle fixture added",
+      "overview_hud_hidden": false,
+      "rocks": 42,
+      "seed": 2026,
+      "tick": 0,
+      "trees": 23,
+      "zoom": 1.79999995231628,
+      "sha256": "801ed089a9680302ae83998a24b8e2ca92078f46271fe8e2a15e81dced9d65ac",
+      "width": 1280,
+      "height": 800,
+      "source": "actual_game_gpu"
+    },
+    {
+      "file": "seed_2026_mine_edge_damage.png",
+      "focus": [
+        12,
+        17
+      ],
+      "mined_cells": 0,
+      "note": "Normal work progress, no manually assigned damage",
+      "overview_hud_hidden": false,
+      "rocks": 42,
+      "seed": 2026,
+      "tick": 28,
+      "trees": 23,
+      "zoom": 1.79999995231628,
+      "sha256": "5e20097b9c00776cda7505a4c1ba429398b67ec02aeb70c9fc7d02813eee4302",
+      "width": 1280,
+      "height": 800,
+      "source": "actual_game_gpu"
+    },
+    {
+      "file": "seed_2026_mine_edge_after.png",
+      "focus": [
+        12,
+        17
+      ],
+      "mined_cells": 1,
+      "note": "Normal work completion and real physical drop",
+      "overview_hud_hidden": false,
+      "rocks": 41,
+      "seed": 2026,
+      "tick": 40,
+      "trees": 23,
+      "zoom": 1.79999995231628,
+      "sha256": "3bd530368f4d9c012f7acbd0cfd500afb301c9044e928a566b7fb525936c3c81",
+      "width": 1280,
+      "height": 800,
+      "source": "actual_game_gpu"
+    },
+    {
+      "file": "seed_2026_center_entrance.png",
+      "focus": [
+        11,
+        17
+      ],
+      "mined_cells": 1,
+      "note": "A genuine edge mined first to reach the previously inaccessible centre",
+      "overview_hud_hidden": false,
+      "rocks": 41,
+      "seed": 2026,
+      "tick": 40,
+      "trees": 23,
+      "zoom": 1.79999995231628,
+      "sha256": "3bd530368f4d9c012f7acbd0cfd500afb301c9044e928a566b7fb525936c3c81",
+      "width": 1280,
+      "height": 800,
+      "source": "actual_game_gpu"
+    },
+    {
+      "file": "seed_2026_mine_center_damage.png",
+      "focus": [
+        11,
+        17
+      ],
+      "mined_cells": 1,
+      "note": "Normal work progress, no manually assigned damage",
+      "overview_hud_hidden": false,
+      "rocks": 41,
+      "seed": 2026,
+      "tick": 49,
+      "trees": 23,
+      "zoom": 1.79999995231628,
+      "sha256": "7c9480ac2d41bf89b26bfd3e37153300a47a4ab24b992b186780dcedded2b7bd",
+      "width": 1280,
+      "height": 800,
+      "source": "actual_game_gpu"
+    },
+    {
+      "file": "seed_2026_mine_center_after.png",
+      "focus": [
+        11,
+        17
+      ],
+      "mined_cells": 2,
+      "note": "Normal work completion and real physical drop",
+      "overview_hud_hidden": false,
+      "rocks": 40,
+      "seed": 2026,
+      "tick": 61,
+      "trees": 23,
+      "zoom": 1.79999995231628,
+      "sha256": "be60b8a9d880514916b0b3d4dc39c1a2866ffe2ed4d251727b67c24322cfdfaa",
+      "width": 1280,
+      "height": 800,
+      "source": "actual_game_gpu"
+    },
+    {
+      "file": "seed_2026_mine_corner_damage.png",
+      "focus": [
+        12,
+        16
+      ],
+      "mined_cells": 2,
+      "note": "Normal work progress, no manually assigned damage",
+      "overview_hud_hidden": false,
+      "rocks": 40,
+      "seed": 2026,
+      "tick": 69,
+      "trees": 23,
+      "zoom": 1.79999995231628,
+      "sha256": "4e7f13e97418598502937ff70c7d0f52ad7353d086e8096c6cb78438a6f84d82",
+      "width": 1280,
+      "height": 800,
+      "source": "actual_game_gpu"
+    },
+    {
+      "file": "seed_2026_mine_corner_after.png",
+      "focus": [
+        12,
+        16
+      ],
+      "mined_cells": 3,
+      "note": "Normal work completion and real physical drop",
+      "overview_hud_hidden": false,
+      "rocks": 39,
+      "seed": 2026,
+      "tick": 81,
+      "trees": 23,
+      "zoom": 1.79999995231628,
+      "sha256": "daff570aba07da82307fb5cdd0baa9b277fead609704f52357850c7ae845a22c",
+      "width": 1280,
+      "height": 800,
+      "source": "actual_game_gpu"
+    },
+    {
+      "file": "seed_2026_patch_all_mined.png",
+      "focus": [
+        11,
+        17
+      ],
+      "mined_cells": 9,
+      "note": "All 9 cells in marked 3x3 review patch mined; outside natural rocks retained",
+      "overview_hud_hidden": false,
+      "rocks": 33,
+      "seed": 2026,
+      "tick": 188,
+      "trees": 23,
+      "zoom": 1.79999995231628,
+      "sha256": "469e43da6ffe781a53ebcdaa874b1de32c3d042252807c07bbe346ffbdbb96e2",
+      "width": 1280,
+      "height": 800,
+      "source": "actual_game_gpu"
+    },
+    {
+      "file": "seed_2026_logging_before.png",
+      "focus": [
+        23,
+        26
+      ],
+      "mined_cells": 9,
+      "note": "Original generated tree",
+      "overview_hud_hidden": false,
+      "rocks": 33,
+      "seed": 2026,
+      "tick": 188,
+      "trees": 23,
+      "zoom": 1.79999995231628,
+      "sha256": "518cea41652a44c4ef0c03d7e9b055225eb58f4a0ed839c27d1f6c255810762f",
+      "width": 1280,
+      "height": 800,
+      "source": "actual_game_gpu"
+    },
+    {
+      "file": "seed_2026_logging_damage.png",
+      "focus": [
+        23,
+        26
+      ],
+      "mined_cells": 9,
+      "note": "Normal work progress, no manually assigned damage",
+      "overview_hud_hidden": false,
+      "rocks": 33,
+      "seed": 2026,
+      "tick": 226,
+      "trees": 23,
+      "zoom": 1.79999995231628,
+      "sha256": "37645a425ef0c6bf827abad5f035d93145bba404a2f09bdf063b0f848049c394",
+      "width": 1280,
+      "height": 800,
+      "source": "actual_game_gpu"
+    },
+    {
+      "file": "seed_2026_logging_after.png",
+      "focus": [
+        23,
+        26
+      ],
+      "mined_cells": 9,
+      "note": "Normal work completion and real physical drop",
+      "overview_hud_hidden": false,
+      "rocks": 33,
+      "seed": 2026,
+      "tick": 238,
+      "trees": 22,
+      "zoom": 1.79999995231628,
+      "sha256": "d2920d1fb5d9fa0b6d81a6227eec435a83d55ac6e6859a077042d7e2e8692f5c",
+      "width": 1280,
+      "height": 800,
+      "source": "actual_game_gpu"
+    },
+    {
+      "file": "seed_2026_logging_drops_clear.png",
+      "focus": [
+        23,
+        26
+      ],
+      "mined_cells": 9,
+      "note": "Normal logging drop and opened footprint",
+      "overview_hud_hidden": false,
+      "rocks": 33,
+      "seed": 2026,
+      "tick": 242,
+      "trees": 22,
+      "zoom": 1.79999995231628,
+      "sha256": "47c9b66c5fa3e97fc31926ca74f3f5d146ced81f6d481d6e69e46df3e36d2158",
+      "width": 1280,
+      "height": 800,
+      "source": "actual_game_gpu"
+    },
+    {
+      "file": "seed_2026_mine_edge.webp",
+      "sha256": "3e8647709f1da574cddef792069cd30292aa3ce124b671d1ee79219ebbd388d9",
+      "source": "actual_game_gpu_sequence",
+      "timing": "variable sampling, 250ms comparison playback"
+    },
+    {
+      "file": "seed_2026_mine_center.webp",
+      "sha256": "3705439ba8f2fd2e0d2e4e7954fe10eae2877ab35a59033b1c4ced13f0e4a29d",
+      "source": "actual_game_gpu_sequence",
+      "timing": "variable sampling, 250ms comparison playback"
+    },
+    {
+      "file": "seed_2026_mine_corner.webp",
+      "sha256": "95fdd54db9d8e60045804a0d7137e8fea956b8a53af43b98bf82cb4111292df2",
+      "source": "actual_game_gpu_sequence",
+      "timing": "variable sampling, 250ms comparison playback"
+    },
+    {
+      "file": "seed_2026_logging.webp",
+      "sha256": "f7a64f0a3be7f4c107d4b1645c7d56d5376ad0987c2c545daa087d4d14e11d6f",
+      "source": "actual_game_gpu_sequence",
+      "timing": "variable sampling, 250ms comparison playback"
+    }
+  ],
+  "count_png": 90,
+  "count_sequences": 12
+}

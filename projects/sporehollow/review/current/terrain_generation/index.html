@@ -1,0 +1,284 @@
+<!doctype html><html lang="ja"><meta charset="utf-8"><title>ホイッスル牧場・地形生成 v2</title><style>body{background:#24392d;color:#efe5cb;font:16px system-ui;margin:30px auto;max-width:1220px;padding:0 20px}a{color:#d8cd91}nav{position:sticky;top:0;background:#24392df2;padding:15px;z-index:1}button{margin:3px;padding:9px 16px;background:#d7c594;color:#27392c;border:0;cursor:pointer}img{max-width:100%;image-rendering:pixelated}figure{margin:18px 0;padding:14px;background:#324b38}figcaption{padding:10px 0}details{margin:15px 0}summary{cursor:pointer;font-size:20px}small{color:#c1c9ae}</style><h1>ホイッスル牧場・地形生成 v2</h1><p>自然生成された岩場と森を、住人が掘り、伐り、開拓する実ゲームの確認画面です。</p><p>全景は診断用縮小、個別画面は通常のプレイ倍率。連続画像は比較用の間引き表示です。</p><nav><button onclick="pick(0)">すべて</button><button onclick="pick(31)">シード31</button><button onclick="pick(97)">シード97</button><button onclick="pick(2026)">シード2026</button>　<a href="REPORT.md">検証結果・残る課題</a></nav>
+<section data-seed="31"><h2>シード 31</h2>
+<figure><img loading="lazy" src="seed_31_full_map.png" alt="新規マップ全景"><figcaption>新規マップ全景 <small>／倍率 0.479999989271164・時刻tick 0</small></figcaption></figure>
+<details><summary>黄金像と初期拠点</summary>
+<figure><img loading="lazy" src="seed_31_idol_center.png" alt="黄金像と初期拠点"><figcaption>黄金像と初期拠点 <small>／倍率 1.5・時刻tick 0</small></figcaption></figure>
+</details>
+<details><summary>草地と岩場の境界</summary>
+<figure><img loading="lazy" src="seed_31_grass_rock_boundary.png" alt="草地と岩場の境界"><figcaption>草地と岩場の境界 <small>／倍率 1.5・時刻tick 0</small></figcaption></figure>
+</details>
+<details><summary>岩場の内部</summary>
+<figure><img loading="lazy" src="seed_31_rocky_interior.png" alt="岩場の内部"><figcaption>岩場の内部 <small>／倍率 1.5・時刻tick 0</small></figcaption></figure>
+</details>
+<details><summary>疎林</summary>
+<figure><img loading="lazy" src="seed_31_woodland.png" alt="疎林"><figcaption>疎林 <small>／倍率 1.5・時刻tick 0</small></figcaption></figure>
+</details>
+<details><summary>乾いた土地</summary>
+<figure><img loading="lazy" src="seed_31_dry.png" alt="乾いた土地"><figcaption>乾いた土地 <small>／倍率 1.5・時刻tick 0</small></figcaption></figure>
+</details>
+<details><summary>草の多い土地</summary>
+<figure><img loading="lazy" src="seed_31_lush.png" alt="草の多い土地"><figcaption>草の多い土地 <small>／倍率 1.5・時刻tick 0</small></figcaption></figure>
+</details>
+<details><summary>北西の角</summary>
+<figure><img loading="lazy" src="seed_31_corner_nw.png" alt="北西の角"><figcaption>北西の角 <small>／倍率 1.5・時刻tick 0</small></figcaption></figure>
+</details>
+<details><summary>北東の角</summary>
+<figure><img loading="lazy" src="seed_31_corner_ne.png" alt="北東の角"><figcaption>北東の角 <small>／倍率 1.5・時刻tick 0</small></figcaption></figure>
+</details>
+<details><summary>南西の角</summary>
+<figure><img loading="lazy" src="seed_31_corner_sw.png" alt="南西の角"><figcaption>南西の角 <small>／倍率 1.5・時刻tick 0</small></figcaption></figure>
+</details>
+<details><summary>南東の角</summary>
+<figure><img loading="lazy" src="seed_31_corner_se.png" alt="南東の角"><figcaption>南東の角 <small>／倍率 1.5・時刻tick 0</small></figcaption></figure>
+</details>
+<details><summary>北辺</summary>
+<figure><img loading="lazy" src="seed_31_edge_n.png" alt="北辺"><figcaption>北辺 <small>／倍率 1.5・時刻tick 0</small></figcaption></figure>
+</details>
+<details><summary>南辺</summary>
+<figure><img loading="lazy" src="seed_31_edge_s.png" alt="南辺"><figcaption>南辺 <small>／倍率 1.5・時刻tick 0</small></figcaption></figure>
+</details>
+<details><summary>西辺</summary>
+<figure><img loading="lazy" src="seed_31_edge_w.png" alt="西辺"><figcaption>西辺 <small>／倍率 1.5・時刻tick 0</small></figcaption></figure>
+</details>
+<details><summary>東辺</summary>
+<figure><img loading="lazy" src="seed_31_edge_e.png" alt="東辺"><figcaption>東辺 <small>／倍率 1.5・時刻tick 0</small></figcaption></figure>
+</details>
+<details><summary>単独岩</summary>
+<figure><img loading="lazy" src="seed_31_isolated_rock.png" alt="単独岩"><figcaption>単独岩 <small>／倍率 1.5・時刻tick 0</small></figcaption></figure>
+</details>
+<details><summary>自然生成の連続岩場・採掘前</summary>
+<figure><img loading="lazy" src="seed_31_connected_before.png" alt="自然生成の連続岩場・採掘前"><figcaption>自然生成の連続岩場・採掘前 <small>／倍率 1.79999995231628・時刻tick 0</small></figcaption></figure>
+</details>
+<details><summary>端の岩・作業途中</summary>
+<figure><img loading="lazy" src="seed_31_mine_edge_damage.png" alt="端の岩・作業途中"><figcaption>端の岩・作業途中 <small>／倍率 1.79999995231628・時刻tick 36</small></figcaption></figure>
+</details>
+<details><summary>端を採掘した後</summary>
+<figure><img loading="lazy" src="seed_31_mine_edge_after.png" alt="端を採掘した後"><figcaption>端を採掘した後 <small>／倍率 1.79999995231628・時刻tick 48</small></figcaption></figure>
+</details>
+<details><summary>外縁を掘って中央への通路を開通</summary>
+<figure><img loading="lazy" src="seed_31_center_entrance.png" alt="外縁を掘って中央への通路を開通"><figcaption>外縁を掘って中央への通路を開通 <small>／倍率 1.79999995231628・時刻tick 48</small></figcaption></figure>
+</details>
+<details><summary>中央・作業途中</summary>
+<figure><img loading="lazy" src="seed_31_mine_center_damage.png" alt="中央・作業途中"><figcaption>中央・作業途中 <small>／倍率 1.79999995231628・時刻tick 57</small></figcaption></figure>
+</details>
+<details><summary>中央を採掘した後</summary>
+<figure><img loading="lazy" src="seed_31_mine_center_after.png" alt="中央を採掘した後"><figcaption>中央を採掘した後 <small>／倍率 1.79999995231628・時刻tick 69</small></figcaption></figure>
+</details>
+<details><summary>角・作業途中</summary>
+<figure><img loading="lazy" src="seed_31_mine_corner_damage.png" alt="角・作業途中"><figcaption>角・作業途中 <small>／倍率 1.79999995231628・時刻tick 77</small></figcaption></figure>
+</details>
+<details><summary>角を採掘した後</summary>
+<figure><img loading="lazy" src="seed_31_mine_corner_after.png" alt="角を採掘した後"><figcaption>角を採掘した後 <small>／倍率 1.79999995231628・時刻tick 89</small></figcaption></figure>
+</details>
+<details><summary>対象3×3の全9マス採掘後</summary>
+<figure><img loading="lazy" src="seed_31_patch_all_mined.png" alt="対象3×3の全9マス採掘後"><figcaption>対象3×3の全9マス採掘後 <small>／倍率 1.79999995231628・時刻tick 196</small></figcaption></figure>
+</details>
+<details><summary>伐採前</summary>
+<figure><img loading="lazy" src="seed_31_logging_before.png" alt="伐採前"><figcaption>伐採前 <small>／倍率 1.79999995231628・時刻tick 196</small></figcaption></figure>
+</details>
+<details><summary>伐採途中</summary>
+<figure><img loading="lazy" src="seed_31_logging_damage.png" alt="伐採途中"><figcaption>伐採途中 <small>／倍率 1.79999995231628・時刻tick 258</small></figcaption></figure>
+</details>
+<details><summary>伐採完了直後</summary>
+<figure><img loading="lazy" src="seed_31_logging_after.png" alt="伐採完了直後"><figcaption>伐採完了直後 <small>／倍率 1.79999995231628・時刻tick 270</small></figcaption></figure>
+</details>
+<details><summary>伐採後の木材と切株</summary>
+<figure><img loading="lazy" src="seed_31_logging_drops_clear.png" alt="伐採後の木材と切株"><figcaption>伐採後の木材と切株 <small>／倍率 1.79999995231628・時刻tick 274</small></figcaption></figure>
+</details>
+<details><summary>採掘物の回収禁止</summary>
+<figure><img loading="lazy" src="seed_31_stone_forbidden.png" alt="採掘物の回収禁止"><figcaption>採掘物の回収禁止 <small>／倍率 1.79999995231628・時刻tick 274</small></figcaption></figure>
+</details>
+<details><summary>物資を回収した後</summary>
+<figure><img loading="lazy" src="seed_31_after_collection.png" alt="物資を回収した後"><figcaption>物資を回収した後 <small>／倍率 1.79999995231628・時刻tick 377</small></figcaption></figure>
+</details>
+<details><summary>採掘跡への床施工完了</summary>
+<figure><img loading="lazy" src="seed_31_built_on_mined_cell.png" alt="採掘跡への床施工完了"><figcaption>採掘跡への床施工完了 <small>／倍率 1.79999995231628・時刻tick 431</small></figcaption></figure>
+</details>
+<details><summary>端の採掘・動き</summary><img loading="lazy" src="seed_31_mine_edge.webp" alt="端の採掘"></details>
+<details><summary>中央の採掘・動き</summary><img loading="lazy" src="seed_31_mine_center.webp" alt="中央の採掘"></details>
+<details><summary>角の採掘・動き</summary><img loading="lazy" src="seed_31_mine_corner.webp" alt="角の採掘"></details>
+<details><summary>伐採・動き</summary><img loading="lazy" src="seed_31_logging.webp" alt="伐採"></details>
+</section>
+<section data-seed="97"><h2>シード 97</h2>
+<figure><img loading="lazy" src="seed_97_full_map.png" alt="新規マップ全景"><figcaption>新規マップ全景 <small>／倍率 0.479999989271164・時刻tick 0</small></figcaption></figure>
+<details><summary>黄金像と初期拠点</summary>
+<figure><img loading="lazy" src="seed_97_idol_center.png" alt="黄金像と初期拠点"><figcaption>黄金像と初期拠点 <small>／倍率 1.5・時刻tick 0</small></figcaption></figure>
+</details>
+<details><summary>草地と岩場の境界</summary>
+<figure><img loading="lazy" src="seed_97_grass_rock_boundary.png" alt="草地と岩場の境界"><figcaption>草地と岩場の境界 <small>／倍率 1.5・時刻tick 0</small></figcaption></figure>
+</details>
+<details><summary>岩場の内部</summary>
+<figure><img loading="lazy" src="seed_97_rocky_interior.png" alt="岩場の内部"><figcaption>岩場の内部 <small>／倍率 1.5・時刻tick 0</small></figcaption></figure>
+</details>
+<details><summary>疎林</summary>
+<figure><img loading="lazy" src="seed_97_woodland.png" alt="疎林"><figcaption>疎林 <small>／倍率 1.5・時刻tick 0</small></figcaption></figure>
+</details>
+<details><summary>乾いた土地</summary>
+<figure><img loading="lazy" src="seed_97_dry.png" alt="乾いた土地"><figcaption>乾いた土地 <small>／倍率 1.5・時刻tick 0</small></figcaption></figure>
+</details>
+<details><summary>草の多い土地</summary>
+<figure><img loading="lazy" src="seed_97_lush.png" alt="草の多い土地"><figcaption>草の多い土地 <small>／倍率 1.5・時刻tick 0</small></figcaption></figure>
+</details>
+<details><summary>北西の角</summary>
+<figure><img loading="lazy" src="seed_97_corner_nw.png" alt="北西の角"><figcaption>北西の角 <small>／倍率 1.5・時刻tick 0</small></figcaption></figure>
+</details>
+<details><summary>北東の角</summary>
+<figure><img loading="lazy" src="seed_97_corner_ne.png" alt="北東の角"><figcaption>北東の角 <small>／倍率 1.5・時刻tick 0</small></figcaption></figure>
+</details>
+<details><summary>南西の角</summary>
+<figure><img loading="lazy" src="seed_97_corner_sw.png" alt="南西の角"><figcaption>南西の角 <small>／倍率 1.5・時刻tick 0</small></figcaption></figure>
+</details>
+<details><summary>南東の角</summary>
+<figure><img loading="lazy" src="seed_97_corner_se.png" alt="南東の角"><figcaption>南東の角 <small>／倍率 1.5・時刻tick 0</small></figcaption></figure>
+</details>
+<details><summary>北辺</summary>
+<figure><img loading="lazy" src="seed_97_edge_n.png" alt="北辺"><figcaption>北辺 <small>／倍率 1.5・時刻tick 0</small></figcaption></figure>
+</details>
+<details><summary>南辺</summary>
+<figure><img loading="lazy" src="seed_97_edge_s.png" alt="南辺"><figcaption>南辺 <small>／倍率 1.5・時刻tick 0</small></figcaption></figure>
+</details>
+<details><summary>西辺</summary>
+<figure><img loading="lazy" src="seed_97_edge_w.png" alt="西辺"><figcaption>西辺 <small>／倍率 1.5・時刻tick 0</small></figcaption></figure>
+</details>
+<details><summary>東辺</summary>
+<figure><img loading="lazy" src="seed_97_edge_e.png" alt="東辺"><figcaption>東辺 <small>／倍率 1.5・時刻tick 0</small></figcaption></figure>
+</details>
+<details><summary>単独岩</summary>
+<figure><img loading="lazy" src="seed_97_isolated_rock.png" alt="単独岩"><figcaption>単独岩 <small>／倍率 1.5・時刻tick 0</small></figcaption></figure>
+</details>
+<details><summary>自然生成の連続岩場・採掘前</summary>
+<figure><img loading="lazy" src="seed_97_connected_before.png" alt="自然生成の連続岩場・採掘前"><figcaption>自然生成の連続岩場・採掘前 <small>／倍率 1.79999995231628・時刻tick 0</small></figcaption></figure>
+</details>
+<details><summary>端の岩・作業途中</summary>
+<figure><img loading="lazy" src="seed_97_mine_edge_damage.png" alt="端の岩・作業途中"><figcaption>端の岩・作業途中 <small>／倍率 1.79999995231628・時刻tick 29</small></figcaption></figure>
+</details>
+<details><summary>端を採掘した後</summary>
+<figure><img loading="lazy" src="seed_97_mine_edge_after.png" alt="端を採掘した後"><figcaption>端を採掘した後 <small>／倍率 1.79999995231628・時刻tick 41</small></figcaption></figure>
+</details>
+<details><summary>外縁を掘って中央への通路を開通</summary>
+<figure><img loading="lazy" src="seed_97_center_entrance.png" alt="外縁を掘って中央への通路を開通"><figcaption>外縁を掘って中央への通路を開通 <small>／倍率 1.79999995231628・時刻tick 41</small></figcaption></figure>
+</details>
+<details><summary>中央・作業途中</summary>
+<figure><img loading="lazy" src="seed_97_mine_center_damage.png" alt="中央・作業途中"><figcaption>中央・作業途中 <small>／倍率 1.79999995231628・時刻tick 51</small></figcaption></figure>
+</details>
+<details><summary>中央を採掘した後</summary>
+<figure><img loading="lazy" src="seed_97_mine_center_after.png" alt="中央を採掘した後"><figcaption>中央を採掘した後 <small>／倍率 1.79999995231628・時刻tick 63</small></figcaption></figure>
+</details>
+<details><summary>角・作業途中</summary>
+<figure><img loading="lazy" src="seed_97_mine_corner_damage.png" alt="角・作業途中"><figcaption>角・作業途中 <small>／倍率 1.79999995231628・時刻tick 71</small></figcaption></figure>
+</details>
+<details><summary>角を採掘した後</summary>
+<figure><img loading="lazy" src="seed_97_mine_corner_after.png" alt="角を採掘した後"><figcaption>角を採掘した後 <small>／倍率 1.79999995231628・時刻tick 83</small></figcaption></figure>
+</details>
+<details><summary>対象3×3の全9マス採掘後</summary>
+<figure><img loading="lazy" src="seed_97_patch_all_mined.png" alt="対象3×3の全9マス採掘後"><figcaption>対象3×3の全9マス採掘後 <small>／倍率 1.79999995231628・時刻tick 189</small></figcaption></figure>
+</details>
+<details><summary>伐採前</summary>
+<figure><img loading="lazy" src="seed_97_logging_before.png" alt="伐採前"><figcaption>伐採前 <small>／倍率 1.79999995231628・時刻tick 189</small></figcaption></figure>
+</details>
+<details><summary>伐採途中</summary>
+<figure><img loading="lazy" src="seed_97_logging_damage.png" alt="伐採途中"><figcaption>伐採途中 <small>／倍率 1.79999995231628・時刻tick 217</small></figcaption></figure>
+</details>
+<details><summary>伐採完了直後</summary>
+<figure><img loading="lazy" src="seed_97_logging_after.png" alt="伐採完了直後"><figcaption>伐採完了直後 <small>／倍率 1.79999995231628・時刻tick 229</small></figcaption></figure>
+</details>
+<details><summary>伐採後の木材と切株</summary>
+<figure><img loading="lazy" src="seed_97_logging_drops_clear.png" alt="伐採後の木材と切株"><figcaption>伐採後の木材と切株 <small>／倍率 1.79999995231628・時刻tick 233</small></figcaption></figure>
+</details>
+<details><summary>端の採掘・動き</summary><img loading="lazy" src="seed_97_mine_edge.webp" alt="端の採掘"></details>
+<details><summary>中央の採掘・動き</summary><img loading="lazy" src="seed_97_mine_center.webp" alt="中央の採掘"></details>
+<details><summary>角の採掘・動き</summary><img loading="lazy" src="seed_97_mine_corner.webp" alt="角の採掘"></details>
+<details><summary>伐採・動き</summary><img loading="lazy" src="seed_97_logging.webp" alt="伐採"></details>
+</section>
+<section data-seed="2026"><h2>シード 2026</h2>
+<figure><img loading="lazy" src="seed_2026_full_map.png" alt="新規マップ全景"><figcaption>新規マップ全景 <small>／倍率 0.479999989271164・時刻tick 0</small></figcaption></figure>
+<details><summary>黄金像と初期拠点</summary>
+<figure><img loading="lazy" src="seed_2026_idol_center.png" alt="黄金像と初期拠点"><figcaption>黄金像と初期拠点 <small>／倍率 1.5・時刻tick 0</small></figcaption></figure>
+</details>
+<details><summary>草地と岩場の境界</summary>
+<figure><img loading="lazy" src="seed_2026_grass_rock_boundary.png" alt="草地と岩場の境界"><figcaption>草地と岩場の境界 <small>／倍率 1.5・時刻tick 0</small></figcaption></figure>
+</details>
+<details><summary>岩場の内部</summary>
+<figure><img loading="lazy" src="seed_2026_rocky_interior.png" alt="岩場の内部"><figcaption>岩場の内部 <small>／倍率 1.5・時刻tick 0</small></figcaption></figure>
+</details>
+<details><summary>疎林</summary>
+<figure><img loading="lazy" src="seed_2026_woodland.png" alt="疎林"><figcaption>疎林 <small>／倍率 1.5・時刻tick 0</small></figcaption></figure>
+</details>
+<details><summary>乾いた土地</summary>
+<figure><img loading="lazy" src="seed_2026_dry.png" alt="乾いた土地"><figcaption>乾いた土地 <small>／倍率 1.5・時刻tick 0</small></figcaption></figure>
+</details>
+<details><summary>草の多い土地</summary>
+<figure><img loading="lazy" src="seed_2026_lush.png" alt="草の多い土地"><figcaption>草の多い土地 <small>／倍率 1.5・時刻tick 0</small></figcaption></figure>
+</details>
+<details><summary>北西の角</summary>
+<figure><img loading="lazy" src="seed_2026_corner_nw.png" alt="北西の角"><figcaption>北西の角 <small>／倍率 1.5・時刻tick 0</small></figcaption></figure>
+</details>
+<details><summary>北東の角</summary>
+<figure><img loading="lazy" src="seed_2026_corner_ne.png" alt="北東の角"><figcaption>北東の角 <small>／倍率 1.5・時刻tick 0</small></figcaption></figure>
+</details>
+<details><summary>南西の角</summary>
+<figure><img loading="lazy" src="seed_2026_corner_sw.png" alt="南西の角"><figcaption>南西の角 <small>／倍率 1.5・時刻tick 0</small></figcaption></figure>
+</details>
+<details><summary>南東の角</summary>
+<figure><img loading="lazy" src="seed_2026_corner_se.png" alt="南東の角"><figcaption>南東の角 <small>／倍率 1.5・時刻tick 0</small></figcaption></figure>
+</details>
+<details><summary>北辺</summary>
+<figure><img loading="lazy" src="seed_2026_edge_n.png" alt="北辺"><figcaption>北辺 <small>／倍率 1.5・時刻tick 0</small></figcaption></figure>
+</details>
+<details><summary>南辺</summary>
+<figure><img loading="lazy" src="seed_2026_edge_s.png" alt="南辺"><figcaption>南辺 <small>／倍率 1.5・時刻tick 0</small></figcaption></figure>
+</details>
+<details><summary>西辺</summary>
+<figure><img loading="lazy" src="seed_2026_edge_w.png" alt="西辺"><figcaption>西辺 <small>／倍率 1.5・時刻tick 0</small></figcaption></figure>
+</details>
+<details><summary>東辺</summary>
+<figure><img loading="lazy" src="seed_2026_edge_e.png" alt="東辺"><figcaption>東辺 <small>／倍率 1.5・時刻tick 0</small></figcaption></figure>
+</details>
+<details><summary>単独岩</summary>
+<figure><img loading="lazy" src="seed_2026_isolated_rock.png" alt="単独岩"><figcaption>単独岩 <small>／倍率 1.5・時刻tick 0</small></figcaption></figure>
+</details>
+<details><summary>自然生成の連続岩場・採掘前</summary>
+<figure><img loading="lazy" src="seed_2026_connected_before.png" alt="自然生成の連続岩場・採掘前"><figcaption>自然生成の連続岩場・採掘前 <small>／倍率 1.79999995231628・時刻tick 0</small></figcaption></figure>
+</details>
+<details><summary>端の岩・作業途中</summary>
+<figure><img loading="lazy" src="seed_2026_mine_edge_damage.png" alt="端の岩・作業途中"><figcaption>端の岩・作業途中 <small>／倍率 1.79999995231628・時刻tick 28</small></figcaption></figure>
+</details>
+<details><summary>端を採掘した後</summary>
+<figure><img loading="lazy" src="seed_2026_mine_edge_after.png" alt="端を採掘した後"><figcaption>端を採掘した後 <small>／倍率 1.79999995231628・時刻tick 40</small></figcaption></figure>
+</details>
+<details><summary>外縁を掘って中央への通路を開通</summary>
+<figure><img loading="lazy" src="seed_2026_center_entrance.png" alt="外縁を掘って中央への通路を開通"><figcaption>外縁を掘って中央への通路を開通 <small>／倍率 1.79999995231628・時刻tick 40</small></figcaption></figure>
+</details>
+<details><summary>中央・作業途中</summary>
+<figure><img loading="lazy" src="seed_2026_mine_center_damage.png" alt="中央・作業途中"><figcaption>中央・作業途中 <small>／倍率 1.79999995231628・時刻tick 49</small></figcaption></figure>
+</details>
+<details><summary>中央を採掘した後</summary>
+<figure><img loading="lazy" src="seed_2026_mine_center_after.png" alt="中央を採掘した後"><figcaption>中央を採掘した後 <small>／倍率 1.79999995231628・時刻tick 61</small></figcaption></figure>
+</details>
+<details><summary>角・作業途中</summary>
+<figure><img loading="lazy" src="seed_2026_mine_corner_damage.png" alt="角・作業途中"><figcaption>角・作業途中 <small>／倍率 1.79999995231628・時刻tick 69</small></figcaption></figure>
+</details>
+<details><summary>角を採掘した後</summary>
+<figure><img loading="lazy" src="seed_2026_mine_corner_after.png" alt="角を採掘した後"><figcaption>角を採掘した後 <small>／倍率 1.79999995231628・時刻tick 81</small></figcaption></figure>
+</details>
+<details><summary>対象3×3の全9マス採掘後</summary>
+<figure><img loading="lazy" src="seed_2026_patch_all_mined.png" alt="対象3×3の全9マス採掘後"><figcaption>対象3×3の全9マス採掘後 <small>／倍率 1.79999995231628・時刻tick 188</small></figcaption></figure>
+</details>
+<details><summary>伐採前</summary>
+<figure><img loading="lazy" src="seed_2026_logging_before.png" alt="伐採前"><figcaption>伐採前 <small>／倍率 1.79999995231628・時刻tick 188</small></figcaption></figure>
+</details>
+<details><summary>伐採途中</summary>
+<figure><img loading="lazy" src="seed_2026_logging_damage.png" alt="伐採途中"><figcaption>伐採途中 <small>／倍率 1.79999995231628・時刻tick 226</small></figcaption></figure>
+</details>
+<details><summary>伐採完了直後</summary>
+<figure><img loading="lazy" src="seed_2026_logging_after.png" alt="伐採完了直後"><figcaption>伐採完了直後 <small>／倍率 1.79999995231628・時刻tick 238</small></figcaption></figure>
+</details>
+<details><summary>伐採後の木材と切株</summary>
+<figure><img loading="lazy" src="seed_2026_logging_drops_clear.png" alt="伐採後の木材と切株"><figcaption>伐採後の木材と切株 <small>／倍率 1.79999995231628・時刻tick 242</small></figcaption></figure>
+</details>
+<details><summary>端の採掘・動き</summary><img loading="lazy" src="seed_2026_mine_edge.webp" alt="端の採掘"></details>
+<details><summary>中央の採掘・動き</summary><img loading="lazy" src="seed_2026_mine_center.webp" alt="中央の採掘"></details>
+<details><summary>角の採掘・動き</summary><img loading="lazy" src="seed_2026_mine_corner.webp" alt="角の採掘"></details>
+<details><summary>伐採・動き</summary><img loading="lazy" src="seed_2026_logging.webp" alt="伐採"></details>
+</section>
+<script>function pick(s){document.querySelectorAll("section").forEach(e=>e.hidden=s&&Number(e.dataset.seed)!==s)}</script></html>

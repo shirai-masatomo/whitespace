@@ -19,6 +19,11 @@ func run():
 	var w=Farm.Snapshot.restore(fixture+"/legacy.snapshot")
 	check(w!=null,"Actual pre-biome EXE snapshot loads")
 	if w==null:quit(1);return
+	# The current physical-stock migration adds a receipt flag to old rows.
+	# Preserve exact old content and validate the added value, rather than
+	# treating that established schema extension as a terrain regression.
+	for row in facts.field_items:
+		if not row.has("stocked"):row.stocked=row.get("location","ground")=="ground" and w.Zones.accepts(w,row.pos,row.kind)
 	for key in ["trees","rocks","natural","field_items","jobs","structures","keeper","animals","tick","calendar_ticks"]:
 		check(w.get(key)==facts[key],"Legacy snapshot preserves "+key)
 	check(w.terrain.version==1 and not w.campaign.has("biome_new_map"),"Legacy snapshot adds only visual terrain")

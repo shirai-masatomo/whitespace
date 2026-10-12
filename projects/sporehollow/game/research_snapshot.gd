@@ -38,6 +38,10 @@ static func restore(path: String):
 	var state=unpack(payload.state)
 	var w=load("res://game/world.gd").new(state.campaign,int(state.seed_value))
 	for key in state:w.set(key,state[key])
+	# Full snapshots overwrite constructor defaults. Upgrade scenery metadata
+	# afterwards without re-running population or replacing runtime resources.
+	if not w.terrain.has("regions") or not w.terrain.has("materials"):w.Biome.classify(w.terrain)
+	if not w.terrain.has("generation_version"):w.terrain.generation_version=int(w.terrain.get("version",1))
 	# The worker registry must reference the actual keeper object after deserialization.
 	w.workers.keeper=w.keeper
 	# Market panels are scene state, not a world pause that may survive without its UI.

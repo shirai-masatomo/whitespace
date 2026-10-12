@@ -8,6 +8,8 @@ const DAMAGE_KEYS=["biome_environment_v1/rock/damage/light.png","biome_environme
 static var clipped={}
 static var ground_source=null
 static var ground_kinds={}
+static var ground_offsets={}
+static var ground_version=""
 const DIRS=[Vector2i.UP,Vector2i.RIGHT,Vector2i.DOWN,Vector2i.LEFT]
 const CORNERS={"nw":[0,3],"ne":[0,1],"sw":[2,3],"se":[2,1]}
 
@@ -53,7 +55,7 @@ static func rock(g,p: Vector2i):
 		Art.paint(g,key,c+Vector2(0,14))
 
 static func geology(w,p: Vector2i) -> bool:
-	return w.inside(p) and w.Biome.field(w,p)[2]>0.43
+	return w.inside(p) and (w.Biome.material(w,p) in ["gravel","bedrock"] if w.terrain.get("version",1)>=2 else w.Biome.field(w,p)[2]>0.43)
 static func transition(w,p: Vector2i) -> String:
 	var high=DIRS.map(func(d):return geology(w,p+d));var here=geology(w,p)
 	if here:
@@ -69,23 +71,61 @@ static func transition(w,p: Vector2i) -> String:
 	# Each PNG finishes its entire grass-to-rock transition in this inside cell.
 	# Repeating it in the outside neighbour restarts rock after grass, creating stripes.
 	return ""
+static func material_edge(w,p: Vector2i,material: String) -> String:
+	# A higher-ranked surface is also inside the lower band's boundary. This keeps
+	# soil/gravel/bedrock nested, without restarting grass on every material change.
+	var ranks={"grass":0,"soil":1,"gravel":2,"bedrock":3};var rank=ranks[material]
+	var high=[]
+	for d in DIRS:high.append(w.inside(p+d) and ranks[w.Biome.material(w,p+d)]>=rank)
+	for corner in CORNERS:
+		var pair=CORNERS[corner]
+		if not high[pair[0]] and not high[pair[1]]:return "outer_"+corner
+	for i in range(4):
+		if not high[i]:return "edge_"+["s","w","n","e"][i]
+	for corner in CORNERS:
+		var pair=CORNERS[corner];var q=p+DIRS[pair[0]]+DIRS[pair[1]]
+		if not w.inside(q) or ranks[w.Biome.material(w,q)]<rank:return "inner_"+corner
+	return "full"
+static func ground_layers(w,p: Vector2i) -> Array:
+	if w.terrain.get("version",1)<2:
+		var legacy=transition(w,p)
+		return [WALL+"transition/"+legacy+".png"] if legacy!="" else []
+	var material=w.Biome.material(w,p);var prefix="biome_environment_v2/"
+	if material in ["gravel","bedrock"]:
+		var edge=material_edge(w,p,material)
+		return [prefix+"rock_ground/"+material+".png"] if edge=="full" else [prefix+"rock_transition/"+material+"/"+edge+".png"]
+	if material=="soil":
+		# Sparse transparent patches leave the continuous vertex colour visible.
+		var roll=w.Biome.unit(w.terrain.seed,p.x,p.y,149)
+		return [prefix+"rock_ground/pebbly_soil.png"] if roll<0.15 else []
+	return []
+static func cache_ground(w):
+	var token="%s:%s"%[w.terrain.get("version",0),w.terrain.seed]
+	if ground_source==w and ground_version==token:return
+	ground_source=w;ground_version=token;ground_kinds={};ground_offsets={}
+	for y in range(w.H):
+		for x in range(w.W):
+			var p=Vector2i(x,y);var layers=ground_layers(w,p)
+			if not layers.is_empty():
+				ground_kinds[p]=layers
+				# Scatter only: connected rock/gravel edges retain exact tile anchors.
+				if layers[0]=="biome_environment_v2/rock_ground/pebbly_soil.png":
+					ground_offsets[p]=Vector2(floori(w.Biome.unit(w.terrain.seed,x,y,181)*17)-8,floori(w.Biome.unit(w.terrain.seed,x,y,191)*13)-6)
 static func ground(g):
-	var w=g.world
-	if ground_source!=w:
-		ground_source=w;ground_kinds={}
-		for y in range(w.H):
-			for x in range(w.W):
-				var p=Vector2i(x,y);var key=transition(w,p)
-				if key!="":ground_kinds[p]=key
+	var w=g.world;cache_ground(w)
 	var visible=Rect2(Vector2.ZERO,Vector2(w.W,w.H)*g.TILE)
 	if g.has_method("get_canvas_transform"):visible=g.get_canvas_transform().affine_inverse()*g.get_viewport_rect()
-	for p in ground_kinds:
-		if w.floors.has(p) or w.live_structure(p) or not visible.grow(54).has_point(g.center(p)):continue
-		Art.paint(g,WALL+"transition/"+ground_kinds[p]+".png",g.center(p))
+	for y in range(maxi(0,floori(visible.position.y/g.TILE.y)-1),mini(w.H,ceili(visible.end.y/g.TILE.y)+1)):
+		for x in range(maxi(0,floori(visible.position.x/g.TILE.x)-1),mini(w.W,ceili(visible.end.x/g.TILE.x)+1)):
+			var p=Vector2i(x,y)
+			if w.floors.has(p) or w.live_structure(p):continue
+			for key in ground_kinds.get(p,[]):Art.paint(g,key,g.center(p)+ground_offsets.get(p,Vector2.ZERO))
 	for p in w.mined_rock_cells:
 		if w.floors.has(p) or w.live_structure(p) or not visible.grow(54).has_point(g.center(p)):continue
 		Art.paint(g,"biome_environment_v2/rock_mined/exposed_bedrock.png",g.center(p))
 		Art.paint(g,"biome_environment_v2/rock_mined/shallow_scoop.png",g.center(p))
+		# Low, non-resource scatter persists after the short collapse animation.
+		Art.paint(g,"biome_environment_v1/rock/ground/gravel.png",g.center(p),0.48)
 static func rubble(g,p: Vector2i,alpha: float=1.0):
 	Art.paint(g,"biome_environment_v1/rock/ground/rubble.png",g.center(p),alpha)
 static func chips(g,p: Vector2i,age: float):

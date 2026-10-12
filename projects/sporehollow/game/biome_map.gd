@@ -1,6 +1,7 @@
 extends RefCounted
 ## Versioned scenery and placement only. Never used by movement or building rules.
-const VERSION=1
+const VERSION=2
+const DIRECTIONS=[Vector2i.UP,Vector2i.RIGHT,Vector2i.DOWN,Vector2i.LEFT]
 const FOREST=preload("res://game/forest_pattern.gd")
 
 static func unit(seed_number: int,x: int,y: int,salt: int=0) -> float:
@@ -49,7 +50,7 @@ static func color_for(f: Array) -> Color:
 	color=color.lerp(Color("96917a"),f[2]*0.73)
 	return color.lightened((f[4]-0.5)*0.045)
 
-static func generate(seed_number: int,width: int,height: int) -> Dictionary:
+static func generate(seed_number: int,width: int,height: int,version: int=VERSION) -> Dictionary:
 	var blobs=lobes(seed_number);var fields=[];var vertices=[]
 	for y in range(height):
 		for x in range(width):fields.append(sample(seed_number,Vector2(x+0.5,y+0.5),blobs))
@@ -57,12 +58,17 @@ static func generate(seed_number: int,width: int,height: int) -> Dictionary:
 		for x in range(width+1):
 			var color=color_for(sample(seed_number,Vector2(x,y),blobs))
 			vertices.append([color.r,color.g,color.b])
-	return {"version":VERSION,"seed":seed_number,"width":width,"height":height,"fields":fields,"vertices":vertices}
+	var result={"version":version,"generation_version":version,"seed":seed_number,"width":width,"height":height,"fields":fields,"vertices":vertices}
+	classify(result)
+	return result
 
 static func prepare(w):
 	# Missing terrain in a legacy save changes scenery only, never its objects.
 	w.terrain=w.campaign.get("biome_map",{})
-	if w.terrain.is_empty():w.terrain=generate(w.seed_value,w.W,w.H)
+	if w.terrain.is_empty():w.terrain=generate(w.seed_value,w.W,w.H,VERSION if w.campaign.get("biome_new_map",false) else 1)
+	# Add only derived scenery metadata to old maps. Keep their fields, vertices and version.
+	if not w.terrain.has("regions") or not w.terrain.has("materials"):classify(w.terrain)
+	if not w.terrain.has("generation_version"):w.terrain.generation_version=int(w.terrain.get("version",1))
 	w.campaign.biome_map=w.terrain.duplicate(true)
 	if w.campaign.has("biome_natural"):
 		w.natural.clear()
@@ -71,13 +77,31 @@ static func prepare(w):
 static func field(w,p: Vector2i) -> Array:
 	return w.terrain.fields[p.y*w.W+p.x]
 
-static func kind(w,p: Vector2i) -> String:
-	var f=field(w,p)
+static func region_for(f: Array) -> String:
 	if f[2]>0.43:return "rocky"
 	if f[1]>0.40:return "woodland"
 	if f[3]>0.42:return "dry"
 	if f[0]>0.48:return "lush"
 	return "open"
+
+static func classify(data: Dictionary):
+	var regions=[];var materials=[]
+	for f in data.fields:
+		regions.append(region_for(f))
+		# Continuous thresholds produce grass/soil/gravel/bedrock bands; obstacles
+		# are deliberately absent from this immutable ground-material layer.
+		var material_name="grass"
+		if f[2]>0.72:material_name="bedrock"
+		elif f[2]>0.43:material_name="gravel"
+		elif f[2]>0.29 or f[3]>0.42 or (f[1]>0.50 and f[4]<0.43):material_name="soil"
+		materials.append(material_name)
+	data.regions=regions;data.materials=materials;data.surface_schema=1
+
+static func kind(w,p: Vector2i) -> String:
+	return w.terrain.regions[p.y*w.W+p.x]
+
+static func material(w,p: Vector2i) -> String:
+	return w.terrain.materials[p.y*w.W+p.x]
 
 static func resource_weight(w,p: Vector2i,resource: String) -> float:
 	var f=field(w,p)
@@ -91,21 +115,19 @@ static func available(w,p: Vector2i) -> bool:
 
 static func populate(w):
 	if not w.campaign.get("biome_new_map",false):return
-	# Trees retain the existing physical blocker and existing wood work target.
-	# One free cell between canopies in all directions prevents natural tree walls.
-	var records=[]
+	# Sparse trees follow a broad woodland patch field, with gaps between trunks.
 	for y in range(1,w.H-1):
 		for x in range(1,w.W-1):
 			var p=Vector2i(x,y);var f=field(w,p)
-			if f[1]<0.40 or unit(w.seed_value,x,y,71)>f[1]*0.38 or clearing(Vector2(p),w.seed_value)<0.8 or FOREST.merchant_clearing(p) or not available(w,p):continue
+			var patch=noise(w.seed_value,Vector2(p)*0.21,113)
+			if f[1]<0.40 or patch<0.32 or unit(w.seed_value,x,y,71)>f[1]*(0.22+patch*0.48) or protected(w,p) or not available(w,p):continue
 			if w.trees.keys().any(func(q):return maxi(absi(q.x-p.x),absi(q.y-p.y))<=1):continue
-			var id="biome-tree-%d-%d"%[x,y]
-			w.trees[p]=id;records.append({"id":id,"position":[x,y]})
-	w.story.trees=records
-	for y in range(w.H):
-		for x in range(w.W):
-			var p=Vector2i(x,y);var f=field(w,p)
-			if f[2]>0.43 and unit(w.seed_value,x,y,97)<f[2]*0.16 and clearing(Vector2(p),w.seed_value)>0.8 and available(w,p):w.rocks[p]={"amount":w.Tasks.STONE_PER_ROCK,"forbidden":false}
+			w.trees[p]="biome-tree-%d-%d"%[x,y]
+	place_rocks(w)
+	var repairs=repair_connections(w)
+	w.terrain.placement={"version":VERSION,"repair_removed_cells":repairs,"rock_cells":w.rocks.size(),"tree_cells":w.trees.size()}
+	w.story.trees=[]
+	for p in w.trees:w.story.trees.append({"id":w.trees[p],"position":[p.x,p.y]})
 	# Initial harvestables use existing kinds and caps, with weighted sampling.
 	var r=RandomNumberGenerator.new();r.seed=w.seed_value*2371+419
 	for resource in ["weed","mushroom","stump"]:
@@ -123,6 +145,83 @@ static func populate(w):
 				if roll<=row[1]:w.natural[row[0]]=resource;w.metrics[resource+"_spawned"]+=1;break
 	w.campaign.erase("biome_new_map")
 	w.Tasks.save(w);w.Story.persist(w);persist(w)
+
+static func protected(w,p: Vector2i) -> bool:
+	return p.x<=0 or p.y<=0 or p.x>=w.W-1 or p.y>=w.H-1 or clearing(Vector2(p),w.seed_value)<0.8 or FOREST.merchant_clearing(p) or w.entries.any(func(e):return w.distance(p,e)<=1) or w.distance(p,w.keeper.pos)<=2 or w.animals.any(func(a):return a.get("placed",false) and w.distance(p,a.pos)<=2)
+
+static func rock_site(w,p: Vector2i) -> bool:
+	return w.inside(p) and not protected(w,p) and field(w,p)[2]>0.43 and available(w,p)
+
+static func place_rocks(w):
+	# Rank broad-field 3x3 cores, then grow a few irregular elliptical shelves.
+	# The core is deliberately solid: its center is reached by mining an edge.
+	var cores=[]
+	for y in range(2,w.H-2):
+		for x in range(2,w.W-2):
+			var p=Vector2i(x,y);var valid=true
+			for dy in range(-1,2):
+				for dx in range(-1,2):
+					if not rock_site(w,p+Vector2i(dx,dy)):valid=false
+			if valid:cores.append({"pos":p,"score":field(w,p)[2]+noise(w.seed_value,Vector2(p)*0.17,127)*0.18})
+	cores.sort_custom(func(a,b):return a.score>b.score if a.score!=b.score else (a.pos.y<b.pos.y if a.pos.y!=b.pos.y else a.pos.x<b.pos.x))
+	var selected=[]
+	for row in cores:
+		var p=row.pos
+		if selected.any(func(q):return Vector2(p-q).length()<7.0):continue
+		selected.append(p)
+		if selected.size()>=3:break
+	for center in selected:
+		var radius=Vector2(2.4+unit(w.seed_value,center.x,center.y,139)*1.2,2.0+unit(w.seed_value,center.x,center.y,149))
+		for y in range(maxi(1,center.y-4),mini(w.H-1,center.y+5)):
+			for x in range(maxi(1,center.x-5),mini(w.W-1,center.x+6)):
+				var p=Vector2i(x,y);var core=absi(x-center.x)<=1 and absi(y-center.y)<=1
+				var d=Vector2(p-center)/radius
+				if (core or d.length()<0.93+(noise(w.seed_value,Vector2(p)*0.36,157)-0.5)*0.45) and rock_site(w,p):w.rocks[p]={"amount":w.Tasks.STONE_PER_ROCK,"forbidden":false}
+	# A few isolated outcrops keep the adopted single-rock art useful without
+	# substituting independently random cells for connected regional shelves.
+	var isolated=0
+	for y in range(1,w.H-1):
+		for x in range(1,w.W-1):
+			var p=Vector2i(x,y)
+			if isolated>=5 or not rock_site(w,p) or unit(w.seed_value,x,y,97)>0.035:continue
+			if w.rocks.keys().any(func(q):return maxi(absi(q.x-p.x),absi(q.y-p.y))<=2):continue
+			w.rocks[p]={"amount":w.Tasks.STONE_PER_ROCK,"forbidden":false};isolated+=1
+
+static func reachable(w) -> Dictionary:
+	var seen={};var queue=[];var index=0
+	if not w.walkable(w.keeper.pos):return seen
+	seen[w.keeper.pos]=true;queue.append(w.keeper.pos)
+	while index<queue.size():
+		var p=queue[index];index+=1
+		for d in DIRECTIONS:
+			var q=p+d
+			if w.walkable(q) and not seen.has(q):seen[q]=true;queue.append(q)
+	return seen
+
+static func repair_connections(w) -> Array:
+	# New maps only: connect enclosed free pockets by removing the shortest
+	# local barrier. Existing structures/idol are never repair candidates.
+	var removed=[];var seen=reachable(w)
+	for y in range(w.H):
+		for x in range(w.W):
+			var start=Vector2i(x,y)
+			if not w.walkable(start) or seen.has(start):continue
+			var queue=[start];var previous={start:start};var index=0;var exit_cell=start;var found=false
+			while index<queue.size() and not found:
+				var p=queue[index];index+=1
+				for d in DIRECTIONS:
+					var q=p+d
+					if previous.has(q) or not w.inside(q) or (not w.walkable(q) and not w.rocks.has(q) and not w.trees.has(q)):continue
+					previous[q]=p
+					if seen.has(q):exit_cell=q;found=true;break
+					queue.append(q)
+			if not found:continue
+			while exit_cell!=start:
+				if w.rocks.has(exit_cell) or w.trees.has(exit_cell):
+					w.rocks.erase(exit_cell);w.trees.erase(exit_cell);removed.append([exit_cell.x,exit_cell.y])
+				exit_cell=previous[exit_cell]
+			seen=reachable(w)
+	return removed
 
 static func persist(w):
 	w.campaign.biome_map=w.terrain.duplicate(true)
