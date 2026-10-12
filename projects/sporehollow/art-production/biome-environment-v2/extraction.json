@@ -1,0 +1,32 @@
+[
+  {
+    "row": 0,
+    "scale_fixed_for_all_stages": 0.12857142857142856,
+    "native_alpha_area": [
+      281,
+      247,
+      207,
+      128
+    ]
+  },
+  {
+    "row": 1,
+    "scale_fixed_for_all_stages": 0.136,
+    "native_alpha_area": [
+      622,
+      570,
+      439,
+      272
+    ]
+  },
+  {
+    "row": 2,
+    "scale_fixed_for_all_stages": 0.15492957746478872,
+    "native_alpha_area": [
+      1147,
+      1070,
+      886,
+      504
+    ]
+  }
+]

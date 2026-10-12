@@ -1,0 +1,2518 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-12",
+  "branch": "codex/sporehollow-art-assets",
+  "tile_size_px": [
+    48,
+    42
+  ],
+  "assets": [
+    {
+      "file": "rock_node/small/intact.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        46
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "layer": "resource_node",
+      "usage": "Mineable one-cell stone deposit. Visual state only; existing resource data determines availability.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "4f07f6ea8ba9d070530c5dc85ae7f7495c7d94b4f9e0dac9e69cbc37284d383c",
+      "shadow_baked": false,
+      "visual_state": "intact",
+      "size_variant": "small",
+      "placement": "cell_center + (0,14) - anchor"
+    },
+    {
+      "file": "rock_node/small/damaged_1.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        46
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "layer": "resource_node",
+      "usage": "Mineable one-cell stone deposit. Visual state only; existing resource data determines availability.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "844bdba4cbb8c1ea7c5df666f1d1f76e1ef3875884084ff20ba8e9e7fecafa71",
+      "shadow_baked": false,
+      "visual_state": "damaged_1",
+      "size_variant": "small",
+      "placement": "cell_center + (0,14) - anchor"
+    },
+    {
+      "file": "rock_node/small/damaged_2.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        46
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "layer": "resource_node",
+      "usage": "Mineable one-cell stone deposit. Visual state only; existing resource data determines availability.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "5cfea3db2507d4f2b396e02334ae877a136a07517c69000c97304cef366461d9",
+      "shadow_baked": false,
+      "visual_state": "damaged_2",
+      "size_variant": "small",
+      "placement": "cell_center + (0,14) - anchor"
+    },
+    {
+      "file": "rock_node/small/near_depleted.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        46
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "layer": "resource_node",
+      "usage": "Mineable one-cell stone deposit. Visual state only; existing resource data determines availability.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "77d9b037e923c9b8c4a09086448c11b5bec768032600b3450de53443ddf05129",
+      "shadow_baked": false,
+      "visual_state": "near_depleted",
+      "size_variant": "small",
+      "placement": "cell_center + (0,14) - anchor"
+    },
+    {
+      "file": "rock_node/shadow_small.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        46
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "layer": "shadow",
+      "usage": "Optional ground contact shadow; suppress if renderer already draws one.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "08d58e3795b75dd3024b891831eb94c8523f2e6f098b8df3477e8608d94f3b7c",
+      "shadow_baked": false
+    },
+    {
+      "file": "rock_node/medium/intact.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        46
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "layer": "resource_node",
+      "usage": "Mineable one-cell stone deposit. Visual state only; existing resource data determines availability.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "dfc417e0ba961f60b211e008f9e29a7968db8d039ee80111516abb0ab642c363",
+      "shadow_baked": false,
+      "visual_state": "intact",
+      "size_variant": "medium",
+      "placement": "cell_center + (0,14) - anchor"
+    },
+    {
+      "file": "rock_node/medium/damaged_1.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        46
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "layer": "resource_node",
+      "usage": "Mineable one-cell stone deposit. Visual state only; existing resource data determines availability.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "f544f4f3323321bee9865aab5757ea35cf5fc4429a1a51b268daff6d566c61f8",
+      "shadow_baked": false,
+      "visual_state": "damaged_1",
+      "size_variant": "medium",
+      "placement": "cell_center + (0,14) - anchor"
+    },
+    {
+      "file": "rock_node/medium/damaged_2.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        46
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "layer": "resource_node",
+      "usage": "Mineable one-cell stone deposit. Visual state only; existing resource data determines availability.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "758280dd5872157c74a7ec4b9eb3693e5948dd3e9b9fdd754b7f0bbb9c2e3093",
+      "shadow_baked": false,
+      "visual_state": "damaged_2",
+      "size_variant": "medium",
+      "placement": "cell_center + (0,14) - anchor"
+    },
+    {
+      "file": "rock_node/medium/near_depleted.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        46
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "layer": "resource_node",
+      "usage": "Mineable one-cell stone deposit. Visual state only; existing resource data determines availability.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "2ce6e7ba7b34192c69fe459aa83b9155069cd76773fa1b9c407bbfbe9832f4cb",
+      "shadow_baked": false,
+      "visual_state": "near_depleted",
+      "size_variant": "medium",
+      "placement": "cell_center + (0,14) - anchor"
+    },
+    {
+      "file": "rock_node/shadow_medium.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        46
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "layer": "shadow",
+      "usage": "Optional ground contact shadow; suppress if renderer already draws one.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "999416d50c67f3954ee7aea6f494d2c6e69371f7679c715228250bfa7c46553c",
+      "shadow_baked": false
+    },
+    {
+      "file": "rock_node/large/intact.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        46
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "layer": "resource_node",
+      "usage": "Mineable one-cell stone deposit. Visual state only; existing resource data determines availability.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "cfcf92727fd17ffdb083c44b6b4b050a2711b664a3b2dae3ba6b69f7cc49db70",
+      "shadow_baked": false,
+      "visual_state": "intact",
+      "size_variant": "large",
+      "placement": "cell_center + (0,14) - anchor"
+    },
+    {
+      "file": "rock_node/large/damaged_1.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        46
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "layer": "resource_node",
+      "usage": "Mineable one-cell stone deposit. Visual state only; existing resource data determines availability.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "7b873410b7a4af0a47fb07c0e2d047b0cd27001e48bcf426428189f7be9d3e78",
+      "shadow_baked": false,
+      "visual_state": "damaged_1",
+      "size_variant": "large",
+      "placement": "cell_center + (0,14) - anchor"
+    },
+    {
+      "file": "rock_node/large/damaged_2.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        46
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "layer": "resource_node",
+      "usage": "Mineable one-cell stone deposit. Visual state only; existing resource data determines availability.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "c72bcf976f0beca16182faf4febd7376f2f12d3fe0dd128c0edc22b42ae8ea2a",
+      "shadow_baked": false,
+      "visual_state": "damaged_2",
+      "size_variant": "large",
+      "placement": "cell_center + (0,14) - anchor"
+    },
+    {
+      "file": "rock_node/large/near_depleted.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        46
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "layer": "resource_node",
+      "usage": "Mineable one-cell stone deposit. Visual state only; existing resource data determines availability.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "186ee429d5c45753f6860ac1b5d4a686882e7d33e241a4db942243ce48f85add",
+      "shadow_baked": false,
+      "visual_state": "near_depleted",
+      "size_variant": "large",
+      "placement": "cell_center + (0,14) - anchor"
+    },
+    {
+      "file": "rock_node/shadow_large.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        46
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "layer": "shadow",
+      "usage": "Optional ground contact shadow; suppress if renderer already draws one.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "c65d211f8b9eacc36d352bd8f1fce99003219caba7e690fc2af91b1f5520ff57",
+      "shadow_baked": false
+    },
+    {
+      "file": "rock_ground/bedrock.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "layer": "ground",
+      "usage": "Low-contrast continuous bedrock overlay; existing base remains visible",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "dc0e67903923b459c2da4b9131c07a1ea9a06993572e951ec81bf12863cf64eb",
+      "shadow_baked": false
+    },
+    {
+      "file": "rock_ground/gravel.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "layer": "ground",
+      "usage": "Scattered fine gravel overlay; zero collision",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "b22fe0590fda082f6a7a047d5722fc69f315a8dde1e415f5b22faa2b832e63a1",
+      "shadow_baked": false
+    },
+    {
+      "file": "rock_ground/pebbly_soil.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "layer": "ground",
+      "usage": "Small stones with some worn soil, not a harvestable deposit",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "a5b9c230a51da2642c629c3c76a9565525d7e67adefb6d61ad37a62d84246913",
+      "shadow_baked": false
+    },
+    {
+      "file": "rock_ground/grass_stone.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "layer": "ground",
+      "usage": "Sparse surviving meadow grass among small stones",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "e1e76e4377bf6406d77c31f0432602a87d45e24afdd456e21749e89bf63dd17e",
+      "shadow_baked": false
+    },
+    {
+      "file": "rock_transition/bedrock/edge_n.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "layer": "ground",
+      "usage": "Pixel-dithered biome boundary; select one transition per cell, do not stack edge and corner.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "dc8516e0e19914f7fb1ec01b9d1429f9d53f62b5815669f73185751d5849cb12",
+      "shadow_baked": false,
+      "boundary_family": "bedrock",
+      "boundary_kind": "edge_n"
+    },
+    {
+      "file": "rock_transition/bedrock/edge_s.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "layer": "ground",
+      "usage": "Pixel-dithered biome boundary; select one transition per cell, do not stack edge and corner.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "57602c9d5ec92c30f2d538af8dde4dfa879761b8e00717fc187f12222504da80",
+      "shadow_baked": false,
+      "boundary_family": "bedrock",
+      "boundary_kind": "edge_s"
+    },
+    {
+      "file": "rock_transition/bedrock/edge_w.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "layer": "ground",
+      "usage": "Pixel-dithered biome boundary; select one transition per cell, do not stack edge and corner.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "49b0d8ba5a08bbb81116a5d9ee9e8f50651554f574c8f5bb20308af9c558ec28",
+      "shadow_baked": false,
+      "boundary_family": "bedrock",
+      "boundary_kind": "edge_w"
+    },
+    {
+      "file": "rock_transition/bedrock/edge_e.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "layer": "ground",
+      "usage": "Pixel-dithered biome boundary; select one transition per cell, do not stack edge and corner.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "0172fc705d274e6c2342c87b24e6309479f8f2373a150b0bd7c2f1eb8ee4b680",
+      "shadow_baked": false,
+      "boundary_family": "bedrock",
+      "boundary_kind": "edge_e"
+    },
+    {
+      "file": "rock_transition/bedrock/outer_nw.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "layer": "ground",
+      "usage": "Pixel-dithered biome boundary; select one transition per cell, do not stack edge and corner.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "869a2515384843134287f98d7be2356c7db256d0e5dad79d910bf151a233eb80",
+      "shadow_baked": false,
+      "boundary_family": "bedrock",
+      "boundary_kind": "outer_nw"
+    },
+    {
+      "file": "rock_transition/bedrock/outer_ne.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "layer": "ground",
+      "usage": "Pixel-dithered biome boundary; select one transition per cell, do not stack edge and corner.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "4978c920e1db3c12e72e8820acd07efda3451a093684a5f6e524d8647bea795a",
+      "shadow_baked": false,
+      "boundary_family": "bedrock",
+      "boundary_kind": "outer_ne"
+    },
+    {
+      "file": "rock_transition/bedrock/outer_sw.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "layer": "ground",
+      "usage": "Pixel-dithered biome boundary; select one transition per cell, do not stack edge and corner.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "2371e3db3f2e76aec58cb3332a3b1ced111a43fb2d15d57139a693513719bb06",
+      "shadow_baked": false,
+      "boundary_family": "bedrock",
+      "boundary_kind": "outer_sw"
+    },
+    {
+      "file": "rock_transition/bedrock/outer_se.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "layer": "ground",
+      "usage": "Pixel-dithered biome boundary; select one transition per cell, do not stack edge and corner.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "b834523277752ca8fba1556cd020e71b9b245ad743e26b60e3746aa194d1d2f6",
+      "shadow_baked": false,
+      "boundary_family": "bedrock",
+      "boundary_kind": "outer_se"
+    },
+    {
+      "file": "rock_transition/bedrock/inner_nw.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "layer": "ground",
+      "usage": "Pixel-dithered biome boundary; select one transition per cell, do not stack edge and corner.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "32255ee6fcfb2794a4f4d2cca1886dfc85ee21cf2eb2499551643a7e464eaf10",
+      "shadow_baked": false,
+      "boundary_family": "bedrock",
+      "boundary_kind": "inner_nw"
+    },
+    {
+      "file": "rock_transition/bedrock/inner_ne.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "layer": "ground",
+      "usage": "Pixel-dithered biome boundary; select one transition per cell, do not stack edge and corner.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "591cf5218b810835271f1d305b6f1abea40d3ddd5f79ca7aa1e9ef6c9ba9944f",
+      "shadow_baked": false,
+      "boundary_family": "bedrock",
+      "boundary_kind": "inner_ne"
+    },
+    {
+      "file": "rock_transition/bedrock/inner_sw.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "layer": "ground",
+      "usage": "Pixel-dithered biome boundary; select one transition per cell, do not stack edge and corner.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "fb4ec4c8325581a151503cfebe4fc42b4613f5521f9ea7ac4fe53a1287a55158",
+      "shadow_baked": false,
+      "boundary_family": "bedrock",
+      "boundary_kind": "inner_sw"
+    },
+    {
+      "file": "rock_transition/bedrock/inner_se.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "layer": "ground",
+      "usage": "Pixel-dithered biome boundary; select one transition per cell, do not stack edge and corner.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "2081128c7c530dbec96b8cfc8b0ee0cf845888a905cf768f1664423e14c1d1b3",
+      "shadow_baked": false,
+      "boundary_family": "bedrock",
+      "boundary_kind": "inner_se"
+    },
+    {
+      "file": "rock_transition/gravel/edge_n.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "layer": "ground",
+      "usage": "Pixel-dithered biome boundary; select one transition per cell, do not stack edge and corner.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "211e6688470c9be814bedab24602ecad553daf86778b9498b280f49a0ffd78cf",
+      "shadow_baked": false,
+      "boundary_family": "gravel",
+      "boundary_kind": "edge_n"
+    },
+    {
+      "file": "rock_transition/gravel/edge_s.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "layer": "ground",
+      "usage": "Pixel-dithered biome boundary; select one transition per cell, do not stack edge and corner.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "83d79b0de20027e7a6e9b9ddb432beb9710915e89de9618edb59d72f365e5dcf",
+      "shadow_baked": false,
+      "boundary_family": "gravel",
+      "boundary_kind": "edge_s"
+    },
+    {
+      "file": "rock_transition/gravel/edge_w.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "layer": "ground",
+      "usage": "Pixel-dithered biome boundary; select one transition per cell, do not stack edge and corner.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "55d3347b5ca5e689d111e85c24bf8d991a0979161f98f5fbfe5778890c8789db",
+      "shadow_baked": false,
+      "boundary_family": "gravel",
+      "boundary_kind": "edge_w"
+    },
+    {
+      "file": "rock_transition/gravel/edge_e.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "layer": "ground",
+      "usage": "Pixel-dithered biome boundary; select one transition per cell, do not stack edge and corner.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "e9fcea9b87e1ee45224b46b4ac4f6800fa2b1459d29fe3531be18d3a8b09cca9",
+      "shadow_baked": false,
+      "boundary_family": "gravel",
+      "boundary_kind": "edge_e"
+    },
+    {
+      "file": "rock_transition/gravel/outer_nw.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "layer": "ground",
+      "usage": "Pixel-dithered biome boundary; select one transition per cell, do not stack edge and corner.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "7e9873c33c3b58618eeeee89f4256bd38526ba95911a10767a4e356c56bdbb04",
+      "shadow_baked": false,
+      "boundary_family": "gravel",
+      "boundary_kind": "outer_nw"
+    },
+    {
+      "file": "rock_transition/gravel/outer_ne.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "layer": "ground",
+      "usage": "Pixel-dithered biome boundary; select one transition per cell, do not stack edge and corner.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "2c61c4c3fcbd4409a7eae8794fb9f45a435a7aedb5b3ee452f9985e24deffdf7",
+      "shadow_baked": false,
+      "boundary_family": "gravel",
+      "boundary_kind": "outer_ne"
+    },
+    {
+      "file": "rock_transition/gravel/outer_sw.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "layer": "ground",
+      "usage": "Pixel-dithered biome boundary; select one transition per cell, do not stack edge and corner.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "0cfbaa19eea1908d842f234646a2b4385b1301b76efb8b3e8af0196d53d898db",
+      "shadow_baked": false,
+      "boundary_family": "gravel",
+      "boundary_kind": "outer_sw"
+    },
+    {
+      "file": "rock_transition/gravel/outer_se.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "layer": "ground",
+      "usage": "Pixel-dithered biome boundary; select one transition per cell, do not stack edge and corner.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "d1f51bb0b90a9cf04904bb08eff3ac93a3449ea76efcba64c89417eaea87b0b2",
+      "shadow_baked": false,
+      "boundary_family": "gravel",
+      "boundary_kind": "outer_se"
+    },
+    {
+      "file": "rock_transition/gravel/inner_nw.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "layer": "ground",
+      "usage": "Pixel-dithered biome boundary; select one transition per cell, do not stack edge and corner.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "d19c5764725b33050562157ef81917ea223529b4fac42352253fb68e1b678477",
+      "shadow_baked": false,
+      "boundary_family": "gravel",
+      "boundary_kind": "inner_nw"
+    },
+    {
+      "file": "rock_transition/gravel/inner_ne.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "layer": "ground",
+      "usage": "Pixel-dithered biome boundary; select one transition per cell, do not stack edge and corner.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "a4b14bd7549c1c55a34535810e19efb55416663103dda95ac3156a7d8e5d4669",
+      "shadow_baked": false,
+      "boundary_family": "gravel",
+      "boundary_kind": "inner_ne"
+    },
+    {
+      "file": "rock_transition/gravel/inner_sw.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "layer": "ground",
+      "usage": "Pixel-dithered biome boundary; select one transition per cell, do not stack edge and corner.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "4317b0d47fce0e853e5818f2a2106ad4e9e96f550c71254c21576d313ae662aa",
+      "shadow_baked": false,
+      "boundary_family": "gravel",
+      "boundary_kind": "inner_sw"
+    },
+    {
+      "file": "rock_transition/gravel/inner_se.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "layer": "ground",
+      "usage": "Pixel-dithered biome boundary; select one transition per cell, do not stack edge and corner.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "4df3b7c1c7f244759cd1e9b9ecd475c2a94a5248274fc24afbb216641a3d4721",
+      "shadow_baked": false,
+      "boundary_family": "gravel",
+      "boundary_kind": "inner_se"
+    },
+    {
+      "file": "rock_transition/thin_horizontal.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "layer": "ground",
+      "usage": "Optional sparse boundary/wear patch, no passability effect",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "47156e76813062db3a3973e507d84490b009bc0028c8d80a0670388e0d094c2d",
+      "shadow_baked": false
+    },
+    {
+      "file": "rock_transition/thin_vertical.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "layer": "ground",
+      "usage": "Optional sparse boundary/wear patch, no passability effect",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "036304cef771c147096173f1b5a71432b27c5eb45089b8e7f0725f7fccf3e2c2",
+      "shadow_baked": false
+    },
+    {
+      "file": "rock_transition/patch_round.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "layer": "ground",
+      "usage": "Optional sparse boundary/wear patch, no passability effect",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "90b82c68952504f990206c7c348ad7f4aa4ba4b26b1ef2f7f9bfa54dad2d5454",
+      "shadow_baked": false
+    },
+    {
+      "file": "rock_transition/patch_worn.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "layer": "ground",
+      "usage": "Optional sparse boundary/wear patch, no passability effect",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "12f6d690965f5e772981a586dbdf596e4803f4d85fedcf930b8c4d9d552fa34f",
+      "shadow_baked": false
+    },
+    {
+      "file": "rock_mined/shallow_scoop.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "layer": "ground",
+      "usage": "Shallow mined ground, not a void or new pit collision",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "fe91b8236ca076844ac0435ea8c087a9642ec0478f4b849ecd0873a19067d809",
+      "shadow_baked": false
+    },
+    {
+      "file": "rock_mined/exposed_bedrock.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "layer": "ground",
+      "usage": "Fresh exposed rock surface after node depletion",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "3a1dc7fa7dcdc0b0581d5af51cf2154644cf03e0eb055cc8e6da66de2d99d8bf",
+      "shadow_baked": false
+    },
+    {
+      "file": "rock_node/wall_near_depleted_overlay.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "layer": "damage_overlay",
+      "usage": "Clip by selected wall alpha. Maintains connection ports until mining completes.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "b5944ca2a84bba1b6d4792a52f01366c044d82891510900c9bcd3ae06ded7e45",
+      "shadow_baked": false
+    },
+    {
+      "file": "tree_cut/log.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "layer": "ground",
+      "usage": "Felling aftermath prop; drops/counts/removal are controlled by existing implementation",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "5388239f9cbbfb51b991f604b2d5abd613ea9776bd4a9c59b1a72bfe5781e18d",
+      "shadow_baked": false
+    },
+    {
+      "file": "tree_cut/branch_debris.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "layer": "ground",
+      "usage": "Felling aftermath prop; drops/counts/removal are controlled by existing implementation",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "11459a41f1bc2e1096e8d705e8224ebce25db019c62434286836315ff26a1110",
+      "shadow_baked": false
+    },
+    {
+      "file": "tree_cut/small_near_fall.png",
+      "size_px": [
+        64,
+        80
+      ],
+      "anchor_px": [
+        32,
+        72
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "layer": "trunk_overlay",
+      "usage": "Final split overlay on adopted tree; renderer may tilt around cut point (32,65). No new progress threshold.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "c4da744e15a3665bbc2052f22ad1e45783946a36010dda0f5bf2f4c89f64bc5e",
+      "shadow_baked": false
+    },
+    {
+      "file": "tree_cut/medium_near_fall.png",
+      "size_px": [
+        64,
+        80
+      ],
+      "anchor_px": [
+        32,
+        72
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "layer": "trunk_overlay",
+      "usage": "Final split overlay on adopted tree; renderer may tilt around cut point (32,65). No new progress threshold.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "527e63b035657e1f5660872e83ae933b624ba0ff5cb78dd5706f9148044a7b60",
+      "shadow_baked": false
+    },
+    {
+      "file": "tree_cut/large_near_fall.png",
+      "size_px": [
+        64,
+        80
+      ],
+      "anchor_px": [
+        32,
+        72
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "layer": "trunk_overlay",
+      "usage": "Final split overlay on adopted tree; renderer may tilt around cut point (32,65). No new progress threshold.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "df22bc77d5b8d2133086eedecb73445eea5d03ec48e7d524cef5554c3ca4621d",
+      "shadow_baked": false
+    },
+    {
+      "file": "tree_cut/small_near_fall_body.png",
+      "size_px": [
+        112,
+        96
+      ],
+      "anchor_px": [
+        56,
+        88
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "layer": "resource_node",
+      "usage": "Optional full-body pre-fall pose derived from adopted pixels. REPLACES standing tree; do not overlay both. Root stays fixed.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "72afc9304161cf8f6840c4f1302592082ab49a29c1a71647e2fa8dd5f8201216",
+      "shadow_baked": false,
+      "visual_state": "near_fall",
+      "cut_pivot_px": [
+        56,
+        81
+      ],
+      "rotation_degrees": -14
+    },
+    {
+      "file": "tree_cut/medium_near_fall_body.png",
+      "size_px": [
+        112,
+        96
+      ],
+      "anchor_px": [
+        56,
+        88
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "layer": "resource_node",
+      "usage": "Optional full-body pre-fall pose derived from adopted pixels. REPLACES standing tree; do not overlay both. Root stays fixed.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "d9bc59f0c715ebf0248906fce41c2a586cca46780fc9d8dfcc9d63fb8d499425",
+      "shadow_baked": false,
+      "visual_state": "near_fall",
+      "cut_pivot_px": [
+        56,
+        81
+      ],
+      "rotation_degrees": -14
+    },
+    {
+      "file": "tree_cut/large_near_fall_body.png",
+      "size_px": [
+        112,
+        96
+      ],
+      "anchor_px": [
+        56,
+        88
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "layer": "resource_node",
+      "usage": "Optional full-body pre-fall pose derived from adopted pixels. REPLACES standing tree; do not overlay both. Root stays fixed.",
+      "frame_index": 0,
+      "duration_ms": null,
+      "loop": false,
+      "sha256": "7e68fb69e72f8f6c1e0c50aa16e028fa2818e24c81c2e4ca38fdcf85a431c0cc",
+      "shadow_baked": false,
+      "visual_state": "near_fall",
+      "cut_pivot_px": [
+        56,
+        81
+      ],
+      "rotation_degrees": -14
+    }
+  ],
+  "reuse": [
+    {
+      "file": "../biome_environment_v1/rock/ground/rubble.png",
+      "role": "rock_mined.rubble",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "sha256": "f9013df49fa164c4ca2e6ba2252e1988006c0ffceb6de61383d5fc9e6e25f2b8",
+      "duration_ms": null,
+      "loop": false
+    },
+    {
+      "file": "../biome_environment_v1/rock/ground/gravel.png",
+      "role": "rock_mined.scattered_chips",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "sha256": "21d6009ead2ae1a0aa0c7ca3b8866df1174f5f336769243e012c40fe3fdaeddd",
+      "duration_ms": null,
+      "loop": false
+    },
+    {
+      "file": "../biome_environment_v1/rock/ground/gravel.png",
+      "role": "scatter.pebbles",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "sha256": "21d6009ead2ae1a0aa0c7ca3b8866df1174f5f336769243e012c40fe3fdaeddd",
+      "duration_ms": null,
+      "loop": false
+    },
+    {
+      "file": "../biome_environment_v1/ground/lush/low_sparse.png",
+      "role": "scatter.rock_grass",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "sha256": "0384cca129a4e22414a4ca33f3a2fe164f32e89e9488109cbf7837ba80cd9486",
+      "duration_ms": null,
+      "loop": false
+    },
+    {
+      "file": "../biome_environment_v1/ground/lush/flowers.png",
+      "role": "scatter.small_flowers",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "sha256": "66e71481d2c716c067894b076184e2a9337632ce19cfb7504cba6d14bb3fec85",
+      "duration_ms": null,
+      "loop": false
+    },
+    {
+      "file": "../biome_environment_v1/ground/dry/soil_spot.png",
+      "role": "scatter.soil_scuff",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "sha256": "55aac0de537a6654404c91f6242d7b3260ade8571fcec97647c353fa22bb5373",
+      "duration_ms": null,
+      "loop": false
+    },
+    {
+      "file": "../biome_environment_v1/rock/normal/mask_00.png",
+      "role": "connected_wall.mask_00",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "sha256": "0b8e0d128bc2713e932d8e5fbf56b6b42a53e5733907b40064fb1b3e5df06860",
+      "duration_ms": null,
+      "loop": false
+    },
+    {
+      "file": "../biome_environment_v1/rock/normal/mask_01.png",
+      "role": "connected_wall.mask_01",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "sha256": "75204d5c0b816915acf2d224bf3e48fda98981433cd9a80aa1975779fc248f05",
+      "duration_ms": null,
+      "loop": false
+    },
+    {
+      "file": "../biome_environment_v1/rock/normal/mask_02.png",
+      "role": "connected_wall.mask_02",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "sha256": "e246e6b36b48129b9ad717c2c5d86e2a985b9a00a1be3302a971bffacc78dcda",
+      "duration_ms": null,
+      "loop": false
+    },
+    {
+      "file": "../biome_environment_v1/rock/normal/mask_03.png",
+      "role": "connected_wall.mask_03",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "sha256": "db201e7fc5e1adcd2783ed84b49b187373ccb18cd2222c7a2d99c64046de2cf2",
+      "duration_ms": null,
+      "loop": false
+    },
+    {
+      "file": "../biome_environment_v1/rock/normal/mask_04.png",
+      "role": "connected_wall.mask_04",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "sha256": "9fd3fb96f7f85e8adc3860346b935b0883d04c2f88d95726cc1e8b73bb5a159a",
+      "duration_ms": null,
+      "loop": false
+    },
+    {
+      "file": "../biome_environment_v1/rock/normal/mask_05.png",
+      "role": "connected_wall.mask_05",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "sha256": "168f4dc97d6d1b727aec665f0fb1fb8f85bf6570baa55a1b79a4e52136ea1129",
+      "duration_ms": null,
+      "loop": false
+    },
+    {
+      "file": "../biome_environment_v1/rock/normal/mask_06.png",
+      "role": "connected_wall.mask_06",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "sha256": "4858a16382556714ea3f8029985890048373e329fbc57d0800118ece0c63ed99",
+      "duration_ms": null,
+      "loop": false
+    },
+    {
+      "file": "../biome_environment_v1/rock/normal/mask_07.png",
+      "role": "connected_wall.mask_07",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "sha256": "6327c6e87cea782cc6c962f28a82a93c31089f9d5e72b3fc198ab54342cdcaf8",
+      "duration_ms": null,
+      "loop": false
+    },
+    {
+      "file": "../biome_environment_v1/rock/normal/mask_08.png",
+      "role": "connected_wall.mask_08",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "sha256": "2d9c9ab9b5f209e2f16a5782ade20826fdd8efef6cc3c8ec21673cd3387efa28",
+      "duration_ms": null,
+      "loop": false
+    },
+    {
+      "file": "../biome_environment_v1/rock/normal/mask_09.png",
+      "role": "connected_wall.mask_09",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "sha256": "0df1b13021d494fd3f9b7c7a0d15552572daeb59bf88cdf389d4a6c1bf40091f",
+      "duration_ms": null,
+      "loop": false
+    },
+    {
+      "file": "../biome_environment_v1/rock/normal/mask_10.png",
+      "role": "connected_wall.mask_10",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "sha256": "bdd0f47e40f628ccc946c6e39953a567c1ff2c13fd7667461412fc4b73f41cf7",
+      "duration_ms": null,
+      "loop": false
+    },
+    {
+      "file": "../biome_environment_v1/rock/normal/mask_11.png",
+      "role": "connected_wall.mask_11",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "sha256": "68b79e7db3c4553dae7fe7abbb66e716c2c4065f13267431311269d52cf84703",
+      "duration_ms": null,
+      "loop": false
+    },
+    {
+      "file": "../biome_environment_v1/rock/normal/mask_12.png",
+      "role": "connected_wall.mask_12",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "sha256": "cccbe70d46eb607163b3a568bcf201e44c735198f40d708220def449ee79098c",
+      "duration_ms": null,
+      "loop": false
+    },
+    {
+      "file": "../biome_environment_v1/rock/normal/mask_13.png",
+      "role": "connected_wall.mask_13",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "sha256": "8da949e5de74e802992cf60a6021ceaa169a9752b2ec90efedec20f8d9270069",
+      "duration_ms": null,
+      "loop": false
+    },
+    {
+      "file": "../biome_environment_v1/rock/normal/mask_14.png",
+      "role": "connected_wall.mask_14",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "sha256": "a8565fc2094a8576b6fb01ca1399985d411d94a07f66da2b4ccd5f5d4305f9d2",
+      "duration_ms": null,
+      "loop": false
+    },
+    {
+      "file": "../biome_environment_v1/rock/normal/mask_15.png",
+      "role": "connected_wall.mask_15",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "sha256": "0a0aa07fdffbc30c3c4a31fd26eb0c7708b0df5aedaf39be38989f179c6fb8a4",
+      "duration_ms": null,
+      "loop": false
+    },
+    {
+      "file": "../biome_environment_v1/rock/parts/inner_ne.png",
+      "role": "connected_inner.inner_ne",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "sha256": "225cea4581388edf266c8615bf50b312920b2c134837dff8b45bdaca5fbd854c",
+      "duration_ms": null,
+      "loop": false
+    },
+    {
+      "file": "../biome_environment_v1/rock/parts/inner_nw.png",
+      "role": "connected_inner.inner_nw",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "sha256": "b0c9b8bee022d071589cce248f746085390003dc90e166eea1a9a49ab3db9b3c",
+      "duration_ms": null,
+      "loop": false
+    },
+    {
+      "file": "../biome_environment_v1/rock/parts/inner_se.png",
+      "role": "connected_inner.inner_se",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "sha256": "c54f0ea4043edf5c8b58c0d5192f9ae04b86791f62b6f702364b466ea4b7fe8a",
+      "duration_ms": null,
+      "loop": false
+    },
+    {
+      "file": "../biome_environment_v1/rock/parts/inner_sw.png",
+      "role": "connected_inner.inner_sw",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "sha256": "90447164026be01f4c21a2075ebf7c1d4d99558323ce6b03a6daff07341fab51",
+      "duration_ms": null,
+      "loop": false
+    },
+    {
+      "file": "../biome_environment_v1/rock/parts/tall_front_edges_00.png",
+      "role": "ledge.tall_front_edges_00",
+      "size_px": [
+        48,
+        24
+      ],
+      "anchor_px": [
+        24,
+        24
+      ],
+      "sha256": "9abba9e8d94e3b916f0472b4313140a0a5a1e8ac430190e3bb10aa8a7d4b7396",
+      "duration_ms": null,
+      "loop": false
+    },
+    {
+      "file": "../biome_environment_v1/rock/parts/tall_front_edges_01.png",
+      "role": "ledge.tall_front_edges_01",
+      "size_px": [
+        48,
+        24
+      ],
+      "anchor_px": [
+        24,
+        24
+      ],
+      "sha256": "998e0fe04b2591d2891e5843beef871e9c6ec1c6e133a4ff9c34e7f3b83ef9e9",
+      "duration_ms": null,
+      "loop": false
+    },
+    {
+      "file": "../biome_environment_v1/rock/parts/tall_front_edges_02.png",
+      "role": "ledge.tall_front_edges_02",
+      "size_px": [
+        48,
+        24
+      ],
+      "anchor_px": [
+        24,
+        24
+      ],
+      "sha256": "9a653bcdb4480c799bd734eaf0dee34a464269d1a112715fa71f5a5c41ccabe6",
+      "duration_ms": null,
+      "loop": false
+    },
+    {
+      "file": "../biome_environment_v1/rock/parts/tall_front_edges_03.png",
+      "role": "ledge.tall_front_edges_03",
+      "size_px": [
+        48,
+        24
+      ],
+      "anchor_px": [
+        24,
+        24
+      ],
+      "sha256": "648b210f9df357f8fb96fea4a664f81dcf4a4356ecc07590125f648998cbdd1c",
+      "duration_ms": null,
+      "loop": false
+    },
+    {
+      "file": "../biome_environment_v1/rock/damage/heavy.png",
+      "role": "wall_damage.heavy",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "sha256": "91ea8ee1e27a012961d47919a37a89f9a4a061070b31029be6478a8cf0380027",
+      "duration_ms": null,
+      "loop": false
+    },
+    {
+      "file": "../biome_environment_v1/rock/damage/light.png",
+      "role": "wall_damage.light",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "sha256": "f89eb5ff811c6fc510b57387d3f6fea743bcd0fe6850aac878d7bd6a3c969506",
+      "duration_ms": null,
+      "loop": false
+    },
+    {
+      "file": "../ui_world_direction_v1/candidates/world/tree_c.png",
+      "role": "tree.small",
+      "size_px": [
+        64,
+        80
+      ],
+      "anchor_px": [
+        32,
+        72
+      ],
+      "sha256": "e364637d343ff305e21f6d579ce77ab038b0161453882b9689a4515b0bcf1345",
+      "duration_ms": null,
+      "loop": false,
+      "occupied_cells": [
+        1,
+        1
+      ]
+    },
+    {
+      "file": "../biome_environment_v1/forest/stump_c.png",
+      "role": "tree_cut.stump_small",
+      "size_px": [
+        64,
+        80
+      ],
+      "anchor_px": [
+        32,
+        72
+      ],
+      "sha256": "bc1bd57968a2ffa4a72258722eee9f34abb9448b28e3e4705dc74540025b0d96",
+      "duration_ms": null,
+      "loop": false
+    },
+    {
+      "file": "../biome_environment_v1/forest/notch_c_light.png",
+      "role": "tree_cut.small_light",
+      "size_px": [
+        64,
+        80
+      ],
+      "anchor_px": [
+        32,
+        72
+      ],
+      "sha256": "fd38647b56f57261fb7b8646920b1238801da1e1e5bef7d2e07ef578bba87adb",
+      "duration_ms": null,
+      "loop": false
+    },
+    {
+      "file": "../biome_environment_v1/forest/notch_c_deep.png",
+      "role": "tree_cut.small_deep",
+      "size_px": [
+        64,
+        80
+      ],
+      "anchor_px": [
+        32,
+        72
+      ],
+      "sha256": "3e34973cdcabf45d934ef2585e51e677956fe019248a98baaedda209a3ebc3f1",
+      "duration_ms": null,
+      "loop": false
+    },
+    {
+      "file": "../ui_world_direction_v1/candidates/world/tree_b.png",
+      "role": "tree.medium",
+      "size_px": [
+        64,
+        80
+      ],
+      "anchor_px": [
+        32,
+        72
+      ],
+      "sha256": "7016a7a49782f9316ec6595daab8e6f8a50f8c4e9a892dfb54b5d415383ff857",
+      "duration_ms": null,
+      "loop": false,
+      "occupied_cells": [
+        1,
+        1
+      ]
+    },
+    {
+      "file": "../biome_environment_v1/forest/stump_b.png",
+      "role": "tree_cut.stump_medium",
+      "size_px": [
+        64,
+        80
+      ],
+      "anchor_px": [
+        32,
+        72
+      ],
+      "sha256": "87fbac9ecad4c88bdcdc7418141d2d606cc6b5e4cebfcdf3035fa4cd6b4049fd",
+      "duration_ms": null,
+      "loop": false
+    },
+    {
+      "file": "../biome_environment_v1/forest/notch_b_light.png",
+      "role": "tree_cut.medium_light",
+      "size_px": [
+        64,
+        80
+      ],
+      "anchor_px": [
+        32,
+        72
+      ],
+      "sha256": "b7d90bae8f8087c9bda0ae4aebf8d6d6f6c0ae88c829c1ace43efb25493e14cc",
+      "duration_ms": null,
+      "loop": false
+    },
+    {
+      "file": "../biome_environment_v1/forest/notch_b_deep.png",
+      "role": "tree_cut.medium_deep",
+      "size_px": [
+        64,
+        80
+      ],
+      "anchor_px": [
+        32,
+        72
+      ],
+      "sha256": "688bcae7d65cd821e16a7028711cd7de630fcdd36bb56898eccd5a793373f0b0",
+      "duration_ms": null,
+      "loop": false
+    },
+    {
+      "file": "../ui_world_direction_v1/candidates/world/tree_a.png",
+      "role": "tree.large",
+      "size_px": [
+        64,
+        80
+      ],
+      "anchor_px": [
+        32,
+        72
+      ],
+      "sha256": "354fab7e80d81a38c32a4979259344185fd083a75bcb733b94c69daa8ef19452",
+      "duration_ms": null,
+      "loop": false,
+      "occupied_cells": [
+        1,
+        1
+      ]
+    },
+    {
+      "file": "../biome_environment_v1/forest/stump_a.png",
+      "role": "tree_cut.stump_large",
+      "size_px": [
+        64,
+        80
+      ],
+      "anchor_px": [
+        32,
+        72
+      ],
+      "sha256": "a38ac211e9cf91a401e2ad5aca18b17b4a33ffa2f345ca175b757bcf88ff1c9d",
+      "duration_ms": null,
+      "loop": false
+    },
+    {
+      "file": "../biome_environment_v1/forest/notch_a_light.png",
+      "role": "tree_cut.large_light",
+      "size_px": [
+        64,
+        80
+      ],
+      "anchor_px": [
+        32,
+        72
+      ],
+      "sha256": "10a941265b84809f3b71c7526b75b9a364f154a9975c00e0e80990774b9bd2eb",
+      "duration_ms": null,
+      "loop": false
+    },
+    {
+      "file": "../biome_environment_v1/forest/notch_a_deep.png",
+      "role": "tree_cut.large_deep",
+      "size_px": [
+        64,
+        80
+      ],
+      "anchor_px": [
+        32,
+        72
+      ],
+      "sha256": "657728dee838cba8fdd90e6d5fe6819ec4440fdea759c6c9611a72b974dd3e0b",
+      "duration_ms": null,
+      "loop": false
+    },
+    {
+      "file": "../effects_v1/stone_powder/00.png",
+      "role": "fx_mining.powder",
+      "size_px": [
+        32,
+        32
+      ],
+      "anchor_px": [
+        16,
+        26
+      ],
+      "sha256": "67601bd12976fbee416f74b43723664e9a31cc70f63160348a9c2557cc95a344",
+      "duration_ms": 70,
+      "loop": false,
+      "frame_index": 0,
+      "animation": "fx_mining.powder"
+    },
+    {
+      "file": "../effects_v1/stone_powder/01.png",
+      "role": "fx_mining.powder",
+      "size_px": [
+        32,
+        32
+      ],
+      "anchor_px": [
+        16,
+        26
+      ],
+      "sha256": "f28dbcc35c6df5c2f81d11d39265f711dab8740d4adf928321247803d1810a45",
+      "duration_ms": 80,
+      "loop": false,
+      "frame_index": 1,
+      "animation": "fx_mining.powder"
+    },
+    {
+      "file": "../effects_v1/stone_powder/02.png",
+      "role": "fx_mining.powder",
+      "size_px": [
+        32,
+        32
+      ],
+      "anchor_px": [
+        16,
+        26
+      ],
+      "sha256": "88e8e7b32cbb737ce86264f47d73b934425f6296976508d78e371ef939d250b1",
+      "duration_ms": 90,
+      "loop": false,
+      "frame_index": 2,
+      "animation": "fx_mining.powder"
+    },
+    {
+      "file": "../effects_v1/stone_powder/03.png",
+      "role": "fx_mining.powder",
+      "size_px": [
+        32,
+        32
+      ],
+      "anchor_px": [
+        16,
+        26
+      ],
+      "sha256": "b95edebe8f3bfb300649e552b630ed0eed607e85d433e993b3da4c19c0da7f90",
+      "duration_ms": 100,
+      "loop": false,
+      "frame_index": 3,
+      "animation": "fx_mining.powder"
+    },
+    {
+      "file": "../effects_v1/soil_dust/00.png",
+      "role": "fx_mining.dust",
+      "size_px": [
+        32,
+        32
+      ],
+      "anchor_px": [
+        16,
+        26
+      ],
+      "sha256": "3d4ad8a852b1e21b4b495d0fde07811b67bf68ea39c624984fa721604bcb9ba5",
+      "duration_ms": 70,
+      "loop": false,
+      "frame_index": 0,
+      "animation": "fx_mining.dust"
+    },
+    {
+      "file": "../effects_v1/soil_dust/01.png",
+      "role": "fx_mining.dust",
+      "size_px": [
+        32,
+        32
+      ],
+      "anchor_px": [
+        16,
+        26
+      ],
+      "sha256": "bdd1c36b1e5e2af040b94928542364af80c3e83273b944bef9e11db349c31b6d",
+      "duration_ms": 80,
+      "loop": false,
+      "frame_index": 1,
+      "animation": "fx_mining.dust"
+    },
+    {
+      "file": "../effects_v1/soil_dust/02.png",
+      "role": "fx_mining.dust",
+      "size_px": [
+        32,
+        32
+      ],
+      "anchor_px": [
+        16,
+        26
+      ],
+      "sha256": "e671c691ee5e3d4c789289ea1c73728e9b6c3c11a2cb7b544af681b2d3b092cb",
+      "duration_ms": 90,
+      "loop": false,
+      "frame_index": 2,
+      "animation": "fx_mining.dust"
+    },
+    {
+      "file": "../effects_v1/soil_dust/03.png",
+      "role": "fx_mining.dust",
+      "size_px": [
+        32,
+        32
+      ],
+      "anchor_px": [
+        16,
+        26
+      ],
+      "sha256": "76212b5e7cf87c5774383eb0c9fec8a89ac6de8ce7183ee1c77c1f0f280344ed",
+      "duration_ms": 100,
+      "loop": false,
+      "frame_index": 3,
+      "animation": "fx_mining.dust"
+    },
+    {
+      "file": "../effects_v1/wood_chips/00.png",
+      "role": "fx_logging.chips",
+      "size_px": [
+        32,
+        32
+      ],
+      "anchor_px": [
+        16,
+        26
+      ],
+      "sha256": "27fa126bed889facf119571796ce0df6144fdf8fbe7c2141a6eda68439f15f1e",
+      "duration_ms": 60,
+      "loop": false,
+      "frame_index": 0,
+      "animation": "fx_logging.chips"
+    },
+    {
+      "file": "../effects_v1/wood_chips/01.png",
+      "role": "fx_logging.chips",
+      "size_px": [
+        32,
+        32
+      ],
+      "anchor_px": [
+        16,
+        26
+      ],
+      "sha256": "b830d7ad8cee31a59422f93111bea3a25c4079bfb9d3145275e9a6cf6a968ac9",
+      "duration_ms": 70,
+      "loop": false,
+      "frame_index": 1,
+      "animation": "fx_logging.chips"
+    },
+    {
+      "file": "../effects_v1/wood_chips/02.png",
+      "role": "fx_logging.chips",
+      "size_px": [
+        32,
+        32
+      ],
+      "anchor_px": [
+        16,
+        26
+      ],
+      "sha256": "8ab8ff27264a5459f879f516f2a40f40a00916c71f6675a6810249683d064a01",
+      "duration_ms": 90,
+      "loop": false,
+      "frame_index": 2,
+      "animation": "fx_logging.chips"
+    },
+    {
+      "file": "../effects_v1/wood_chips/03.png",
+      "role": "fx_logging.chips",
+      "size_px": [
+        32,
+        32
+      ],
+      "anchor_px": [
+        16,
+        26
+      ],
+      "sha256": "651e9116aa361c8d99e40fdb95f49c237595c0ffac9f94eceb196a5db7e38907",
+      "duration_ms": 100,
+      "loop": false,
+      "frame_index": 3,
+      "animation": "fx_logging.chips"
+    },
+    {
+      "file": "../effects_v1/attack_hit/00.png",
+      "role": "fx_mining.small_hit",
+      "size_px": [
+        32,
+        32
+      ],
+      "anchor_px": [
+        16,
+        16
+      ],
+      "sha256": "1476ddf2fcdb417e708b781300a0c3bbc6cbd449a8a57e590499dc26974072f7",
+      "duration_ms": 50,
+      "loop": false,
+      "frame_index": 0,
+      "animation": "fx_mining.small_hit"
+    },
+    {
+      "file": "../effects_v1/attack_hit/01.png",
+      "role": "fx_mining.small_hit",
+      "size_px": [
+        32,
+        32
+      ],
+      "anchor_px": [
+        16,
+        16
+      ],
+      "sha256": "8f221bbbe6f80ea17da8fb0ffcf8dc4bf4c8f54e2949fd29ef53b5083f237fd8",
+      "duration_ms": 60,
+      "loop": false,
+      "frame_index": 1,
+      "animation": "fx_mining.small_hit"
+    },
+    {
+      "file": "../effects_v1/attack_hit/02.png",
+      "role": "fx_mining.small_hit",
+      "size_px": [
+        32,
+        32
+      ],
+      "anchor_px": [
+        16,
+        16
+      ],
+      "sha256": "bcfc567af29615fa849e5d47743077ff4ceb15c4bf3314aea5bec8c1f4a6b6d0",
+      "duration_ms": 70,
+      "loop": false,
+      "frame_index": 2,
+      "animation": "fx_mining.small_hit"
+    },
+    {
+      "file": "../effects_v1/attack_hit/03.png",
+      "role": "fx_mining.small_hit",
+      "size_px": [
+        32,
+        32
+      ],
+      "anchor_px": [
+        16,
+        16
+      ],
+      "sha256": "23be33493ab2944d91094f9040c3fe07b6e6c13443752f61f4285139e2955331",
+      "duration_ms": 80,
+      "loop": false,
+      "frame_index": 3,
+      "animation": "fx_mining.small_hit"
+    },
+    {
+      "file": "../biome_environment_v1/forest/leaves_00.png",
+      "role": "fx_falling_leaves",
+      "size_px": [
+        32,
+        32
+      ],
+      "anchor_px": [
+        16,
+        26
+      ],
+      "sha256": "e946f3d3cb14a48d884ad62e3e49728f3bf4aa36d7c4169ee20bc3218989fad3",
+      "duration_ms": 100,
+      "loop": false,
+      "frame_index": 0,
+      "animation": "falling_leaves"
+    },
+    {
+      "file": "../biome_environment_v1/forest/leaves_01.png",
+      "role": "fx_falling_leaves",
+      "size_px": [
+        32,
+        32
+      ],
+      "anchor_px": [
+        16,
+        26
+      ],
+      "sha256": "3e3cfcbdfa92ec869d2198bd0b0f7e97b3c4957fda7d3e0ad21e1bc167df9d42",
+      "duration_ms": 120,
+      "loop": false,
+      "frame_index": 1,
+      "animation": "falling_leaves"
+    },
+    {
+      "file": "../biome_environment_v1/forest/leaves_02.png",
+      "role": "fx_falling_leaves",
+      "size_px": [
+        32,
+        32
+      ],
+      "anchor_px": [
+        16,
+        26
+      ],
+      "sha256": "3b468ce3468ac87eb6e1448f444f209460a0dad5471bf860b2ec9403b07ddc7c",
+      "duration_ms": 160,
+      "loop": false,
+      "frame_index": 2,
+      "animation": "falling_leaves"
+    },
+    {
+      "file": "../biome_environment_v1/rock/fx/chips_00.png",
+      "role": "fx_mining_chips",
+      "size_px": [
+        32,
+        32
+      ],
+      "anchor_px": [
+        16,
+        26
+      ],
+      "sha256": "8669fc2fe9b3fcd4c7e9be8b0ef31293e4bc19428f7b5093461b37428535a35c",
+      "duration_ms": 65,
+      "loop": false,
+      "frame_index": 0,
+      "animation": "mining_chips"
+    },
+    {
+      "file": "../biome_environment_v1/rock/fx/chips_01.png",
+      "role": "fx_mining_chips",
+      "size_px": [
+        32,
+        32
+      ],
+      "anchor_px": [
+        16,
+        26
+      ],
+      "sha256": "e1aaf096965ae36818ea3a22cb6006d17a2c64e0e3f32b9dcd0613e44a961ea8",
+      "duration_ms": 75,
+      "loop": false,
+      "frame_index": 1,
+      "animation": "mining_chips"
+    },
+    {
+      "file": "../biome_environment_v1/rock/fx/chips_02.png",
+      "role": "fx_mining_chips",
+      "size_px": [
+        32,
+        32
+      ],
+      "anchor_px": [
+        16,
+        26
+      ],
+      "sha256": "864034dc89f0c20b7eb10397e55bd80cbcadcd44eb68ce57a1628758a126f752",
+      "duration_ms": 85,
+      "loop": false,
+      "frame_index": 2,
+      "animation": "mining_chips"
+    },
+    {
+      "file": "../biome_environment_v1/rock/fx/chips_03.png",
+      "role": "fx_mining_chips",
+      "size_px": [
+        32,
+        32
+      ],
+      "anchor_px": [
+        16,
+        26
+      ],
+      "sha256": "ec7e180334bbfbd852379a338498cd3b66fa136c6b656fcc4f8fd027e51eaadb",
+      "duration_ms": 100,
+      "loop": false,
+      "frame_index": 3,
+      "animation": "mining_chips"
+    },
+    {
+      "file": "../resource_icons_v1/hud24/stone.png",
+      "role": "resource_drop.stone",
+      "size_px": [
+        24,
+        24
+      ],
+      "anchor_px": [
+        12,
+        12
+      ],
+      "sha256": "70f3e655371499a3370612135e6edfb5992a2b3250a67460589f05ba12e24da7",
+      "duration_ms": null,
+      "loop": false
+    },
+    {
+      "file": "../resource_icons_v1/hud24/wood.png",
+      "role": "resource_drop.wood",
+      "size_px": [
+        24,
+        24
+      ],
+      "anchor_px": [
+        12,
+        12
+      ],
+      "sha256": "6fb678b9c82dad4066cbbb46fad0ed434477a1b89b7061911f69e9ece3056966",
+      "duration_ms": null,
+      "loop": false
+    }
+  ],
+  "node_states": {
+    "small": [
+      "rock_node/small/intact.png",
+      "rock_node/small/damaged_1.png",
+      "rock_node/small/damaged_2.png",
+      "rock_node/small/near_depleted.png"
+    ],
+    "medium": [
+      "rock_node/medium/intact.png",
+      "rock_node/medium/damaged_1.png",
+      "rock_node/medium/damaged_2.png",
+      "rock_node/medium/near_depleted.png"
+    ],
+    "large": [
+      "rock_node/large/intact.png",
+      "rock_node/large/damaged_1.png",
+      "rock_node/large/damaged_2.png",
+      "rock_node/large/near_depleted.png"
+    ]
+  },
+  "state_order": [
+    "intact",
+    "damaged_1",
+    "damaged_2",
+    "near_depleted",
+    "rubble"
+  ],
+  "runtime_verified": false,
+  "rendering": {
+    "format": "RGBA",
+    "filter": "nearest",
+    "color_key": false
+  },
+  "state_contract": "Visual names only, never new progress/HP/damage/yield/respawn/movement rules."
+}
