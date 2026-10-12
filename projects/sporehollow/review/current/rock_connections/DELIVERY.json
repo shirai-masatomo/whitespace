@@ -1,0 +1,30 @@
+{
+  "implementation_branch": "codex/sporehollow-biome01",
+  "implementation_commit": "b90204294aea1790fd1ea01a074eb88129398deb",
+  "asset_import_commit": "f5dad781e3219208833da6dc5464bf1030ce275a",
+  "asset_delivery_branch": "codex/sporehollow-art-assets",
+  "asset_delivery_commit": "7b6e81320009710b861fca04d6b86470de3835d7",
+  "art_contract_update": "1bd24e0",
+  "exe_commit": "b902042",
+  "exe_sha256": "556efd288e2dfa3ff474ee393c9e4deadc32ce861d3b71d2a8b0b14221ad854d",
+  "native_lifecycle_checks": 5,
+  "related_checks": 222,
+  "gpu_verified": true,
+  "capture_note": "Screens were captured from the working tree immediately before b902042; the source_head in raw capture JSON is the pre-commit base, not the implementation revision. These exact source files were then committed and built.",
+  "source_sha256": {
+    "game/rock_view.gd": "2a87f19dc7880c8a70bf0ce0ac11a90046fe7b8aedaf110212685286d0695fef",
+    "game/rock_art.gd": "93cd4f68fd02d558def0363bb174ade82c1ab3263e1f498e12b01b7c7470f651",
+    "game/harvest_view.gd": "065e952939faae3c363ed00fe25083a5610c5f12e44fb7cc6f99db586c4611f1",
+    "game/art_provenance.json": "bc0cd40a6d4d06d3633bba56172fa80bf4b40c29c1d8a777dd51e959a6c63645",
+    "tests/review_rock_connections.gd": "264c1652c60c61f8c051a12d64c5a6b9d2ae0cb0fedc3a611d27b91424a55627",
+    "tests/test_rock_connections.gd": "3d970615036ef352cfb73f903771fd620e8e1f6841377089a333fe0294aedea6",
+    "tests/test_rock_view.gd": "10c0f4ebbe76d3a41c9879c18b47003acfd364273585edd8924b6b5b21434c84"
+  },
+  "cleanup": {
+    "normal_exe_count": 1,
+    "scratch_isolated_exists": false,
+    "scratch_validation_exists": false,
+    "user_save_touched": false,
+    "desktop_game_launched": false
+  }
+}

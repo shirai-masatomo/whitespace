@@ -1,3 +1,11 @@
+# 最新：連続岩場・部分採掘の正式素材
+
+実装 **b902042** を通常EXEへ反映済み。素材 **7b6e813**。関連222項目・実ゲームGPU撮影・EXE終了/再開5項目成功。3×3岩場の端・角、端から通路を開けて中央を採掘し、露出面・石材現物・保存を確認しました。
+
+[実画面と動き](rock_connections/SCREENS.md) / [報告](rock_connections/REPORT.md) / [版・ハッシュ・配布](rock_connections/DELIVERY.json)。境界の二重帯は実画面で検出して修正済み。ユーザーデスクトップでの起動なし。
+
+---
+
 # 統合修正：実装と検証の状況
 
 2026-10-12。作業場所は `colony-structure-01-work/projects/sporehollow`、既存ブランチ `codex/sporehollow-biome01`。他の未保存import/uid変更は保持。

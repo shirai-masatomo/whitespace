@@ -1,3 +1,11 @@
+# 最新：連続岩場・部分採掘の正式素材
+
+実装 **b902042** を通常EXEへ反映済み。素材 **7b6e813**。関連222項目・実ゲームGPU撮影・EXE終了/再開5項目成功。3×3岩場の端・角、端から通路を開けて中央を採掘し、露出面・石材現物・保存を確認しました。
+
+[実画面と動き](rock_connections/SCREENS.md) / [報告](rock_connections/REPORT.md) / [版・ハッシュ・配布](rock_connections/DELIVERY.json)。境界の二重帯は実画面で検出して修正済み。ユーザーデスクトップでの起動なし。
+
+---
+
 # 最新：採掘・伐採の作業演出
 
 [実装・検証・仮素材](harvest/REPORT.md)・[PNG8枚/連続画像2本/音](harvest/SCREENS.md)。実装ca21a14、正式素材b0e917a。通常EXE ecc8543へ反映済み、終了/再開5項目成功。[配布記録](harvest/DEPLOYMENT.json)。
