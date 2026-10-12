@@ -44,3 +44,6 @@ GitHub上の入口はこのページです。ブランチ **codex/sporehollow-re
 ![携行中の所有表示](review02/after/04-stock-carry.png)
 
 通常セーブ・履歴・ショートカットは保持。セーブ原本、実行EXE、GPUキャッシュ、作業途中や失敗した証拠はこの公開資料へ含めていません。[前の定点入口](HISTORY-before-review02.md)は履歴として保管しています。
+
+環境整理・容量・保留対象：[MAINTENANCE.md](MAINTENANCE.md)。
+

@@ -1,0 +1,87 @@
+{
+  "before_bytes": 11086801938,
+  "after_bytes": 4649871836,
+  "reduction_bytes": 6436930102,
+  "game_executables": [
+    "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\autonomy-entry-01\\bundle\\WhistleRanch-Autonomy-Partial.exe"
+  ],
+  "current_data_and_shortcut_unchanged": true,
+  "formal_source_assets_unchanged": true,
+  "removed_old_game_exes": 23,
+  "removed_duplicate_tools": 36,
+  "archived_unreachable_commits": 110,
+  "maintenance_checks": 12,
+  "related_biome_checks": 60,
+  "folder_removal": "blocked by automatic approval review; no review/workspace folders removed",
+  "unfinished_source_copies": [
+    "release-92d1048",
+    "release-c5c2833",
+    "research-three-encounters"
+  ],
+  "roots": [
+    {
+      "root": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow",
+      "bytes": 773155610
+    },
+    {
+      "root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\flow-baseline\\projects\\sporehollow",
+      "bytes": 647319
+    },
+    {
+      "root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-balance-audit\\projects\\sporehollow",
+      "bytes": 456331719
+    },
+    {
+      "root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-quality\\projects\\sporehollow",
+      "bytes": 334922591
+    },
+    {
+      "root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-08\\task\\whitespace-review-cleanup\\projects\\sporehollow",
+      "bytes": 169814991
+    },
+    {
+      "root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-09\\task\\release-2c0182a\\projects\\sporehollow",
+      "bytes": 220555228
+    },
+    {
+      "root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-09\\task\\release-35038b6\\projects\\sporehollow",
+      "bytes": 219859324
+    },
+    {
+      "root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-09\\task\\release-536005c\\projects\\sporehollow",
+      "bytes": 212864007
+    },
+    {
+      "root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-09\\task\\release-92d1048\\projects\\sporehollow",
+      "bytes": 213427683
+    },
+    {
+      "root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-09\\task\\release-c5c2833\\projects\\sporehollow",
+      "bytes": 213423584
+    },
+    {
+      "root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-09\\task\\research-three-encounters\\projects\\sporehollow",
+      "bytes": 228797994
+    },
+    {
+      "root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01\\projects\\sporehollow",
+      "bytes": 2
+    },
+    {
+      "root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow",
+      "bytes": 934992131
+    },
+    {
+      "root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\onsite-clarity\\projects\\sporehollow",
+      "bytes": 240771228
+    },
+    {
+      "root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\research-pair\\projects\\sporehollow",
+      "bytes": 392298606
+    },
+    {
+      "root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\whitespace-public-release\\projects\\sporehollow",
+      "bytes": 38009819
+    }
+  ]
+}
