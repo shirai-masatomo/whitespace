@@ -1,0 +1,21 @@
+{
+  "generator": "built-in image_gen",
+  "originals": [
+    {
+      "file": "fallen_trunk.png",
+      "bytes": 754306,
+      "sha256": "cfb2314cec95ccb35552abdaaa95fca867a02eb55130b30902c983f243e7d456"
+    },
+    {
+      "file": "rock_material_atlas.png",
+      "bytes": 1545616,
+      "sha256": "e5e64e758e33a632c9ef136a5f8c83245eb1d4222a1b76024c2a47eefc168b21"
+    }
+  ],
+  "production_png_count": 294,
+  "reused_png_count": 32,
+  "checks": 2567,
+  "old_png_unchanged": 1736,
+  "game_integration": "not performed in this asset-only delivery",
+  "implementation_reference": "235230dfa0ac823e7a1c02789b17f84f355295bc"
+}
