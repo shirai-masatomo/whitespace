@@ -47,6 +47,7 @@ static func release(w,j):
 	j.assigned_to=""
 
 static func interrupt(w,key: String,reason: String):
+	w.Delivery.release(w,key)
 	var j=active(w,key)
 	if not j.is_empty():
 		release(w,j)
@@ -125,24 +126,53 @@ static func claim(w,key: String,j) -> bool:
 	if w.workers.has(key):w.workers[key].work_job=j.id
 	return true
 
+static func effort(w,a,j) -> float:
+	if w.work_claims.has(target_key(w,j)):return INF
+	if w.BUILD.has(j.kind) and w.Delivery.needed(w,j)>0:return INF
+	var position=j.pos
+	if j.kind in ["train","slaughter"]:
+		var animal=w.Orders.animal(w,j.animal_id)
+		if animal.is_empty():return INF
+		position=animal.pos
+	if j.kind=="haul":
+		var row=w.Stock.find(w,j.stock_id)
+		if row.is_empty():
+			var remaining=j.get("haul_sources",[]).map(func(id):return w.Stock.find(w,id)).filter(func(r):return not r.is_empty() and r.location=="ground" and not r.get("forbidden",false))
+			if not remaining.is_empty():row=remaining[0];j.stock_id=row.stock_id;j.pos=row.pos
+		if row.is_empty() or row.get("forbidden",false):return INF
+		if w.Stock.destination(w,a,mini(Policy.CARRY_CAPACITY,w.Stock.free_count(row)),row.kind)==null:
+			block(w,j,"許可された備蓄が満杯か到達できません");return INF
+		position=row.pos
+	var goals=[position] if j.kind=="move" else w.neighbors(position)
+	var route=w.Jobs.path_to(w,a.pos,goals)
+	if route.is_empty():return INF
+	return float(route.size()-1)+minf(20,j.get("remaining",0)*w.DT)
+
+static func score(w,j,efficiency: float) -> float:
+	# Waiting grows without a category-position bias, so feasible work cannot starve.
+	return efficiency-maxi(0,w.tick-j.get("queued_tick",w.tick))*w.DT*0.08
+
 static func choose(w,key: String) -> Dictionary:
-	var a=w.workers[key]
-	var candidates=w.jobs.filter(func(j):return j.get("assigned_to","")=="" and not j.get("cancel_requested",false) and w.tick>=j.get("retry_at",0) and j.get("explicit_actor",key)==key and (key=="keeper" or shared(w,j) or j.get("explicit_actor","")==key) and (j.kind in ["move","direct_attack"] or a.work_priorities.get(category(w,j),3)>0))
-	candidates.sort_custom(func(x,y):
-		var px=0 if x.kind in ["move","direct_attack"] else a.work_priorities.get(category(w,x),4)
-		var py=0 if y.kind in ["move","direct_attack"] else a.work_priorities.get(category(w,y),4)
-		if px!=py:return px<py
-		var cx=Policy.ORDER.find(category(w,x));var cy=Policy.ORDER.find(category(w,y))
-		if cx!=cy:return cx<cy
-		var dx=w.distance(a.pos,x.pos);var dy=w.distance(a.pos,y.pos)
-		return dx<dy if dx!=dy else x.id<y.id)
-	for j in candidates:
+	var a=w.workers[key];var candidates=[]
+	for j in w.jobs.duplicate():
+		if j.get("assigned_to","")!="" or j.get("cancel_requested",false) or w.tick<j.get("retry_at",0) or j.get("explicit_actor",key)!=key:continue
+		if key!="keeper" and not shared(w,j) and j.get("explicit_actor","")!=key:continue
+		var priority=0 if j.kind in ["move","direct_attack"] else a.work_priorities.get(category(w,j),0)
+		if priority<=0 and j.kind not in ["move","direct_attack"]:continue
 		if not allowed(w,key,j):continue
 		if missing(w,j):w.Jobs.cancel(w,j.id,"target_missing");continue
 		if w.BUILD.has(j.kind) and not j.started:
 			var why=w.Buildings.reason(w,j.kind,j.pos,false)
-			if why!="":block(w,j,why);continue
-
+			if why!="" and not (why=="ここに誰かいます" and a.pos==j.pos):block(w,j,why);continue
+		var distance=effort(w,a,j)
+		if is_inf(distance):continue
+		candidates.append({"job":j,"priority":priority,"score":score(w,j,distance)})
+	var delivery=w.Delivery.proposal(w,key)
+	if not delivery.is_empty() and allowed(w,key,delivery):candidates.append({"job":delivery,"priority":delivery.priority,"score":score(w,delivery,delivery.effort)})
+	candidates.sort_custom(func(x,y):return x.priority<y.priority if x.priority!=y.priority else (x.score<y.score if x.score!=y.score else x.job.id<y.job.id))
+	for candidate in candidates:
+		var j=candidate.job
+		if j.kind=="build_delivery":return w.Delivery.start(w,key,j)
 		if not claim(w,key,j):continue
 		j.state="walking";j.block_reason="";j.phase="move"
 		w.job_log.append({"tick":w.tick,"event":"assigned","id":j.id,"worker":key,"category":category(w,j)})
@@ -151,6 +181,7 @@ static func choose(w,key: String) -> Dictionary:
 
 static func step(w):
 	w.Stock.step(w)
+	w.Delivery.reconcile(w)
 	var live_ids=w.jobs.map(func(j):return j.id)
 	for token in w.work_claims.keys():
 		if w.work_claims[token] not in live_ids:w.work_claims.erase(token)
@@ -158,6 +189,7 @@ static func step(w):
 		if a.get("work_job",-1) not in live_ids:a.work_job=-1
 	# Recover orphan claims when an actor disappears without a normal completion callback.
 	for j in w.jobs.duplicate():
+		if not j.has("queued_tick"):j.queued_tick=w.tick
 		j.work_category=category(w,j)
 		var owner=j.get("assigned_to","")
 		if owner!="" and not w.workers.has(owner) and not(j.get("purpose","")=="merchant" and owner==w.merchant_worker):release(w,j);j.state="pending"
@@ -171,8 +203,10 @@ static func step(w):
 			var current=active(w,key)
 			if not current.is_empty() and not allowed(w,key,current):interrupt(w,key,why)
 			if not w.jobs.any(func(row):return row.kind in ["move","direct_attack"] and allowed(w,key,row)):interrupt(w,key,why);continue
+		if w.build_deliveries.has(key):w.Delivery.step(w,key);continue
 		var j=active(w,key)
 		if j.is_empty():j=choose(w,key)
+		if j.get("kind","")=="build_delivery":w.Delivery.step(w,key);continue
 		if j.is_empty():
 			var blocked=w.jobs.filter(func(row):return row.state=="blocked")
 			a.work_status="仕事の指定待ち" if w.jobs.is_empty() else (blocked[0].get("block_reason","実行できる仕事を待つ") if not blocked.is_empty() else "担当可能な仕事を待つ")
@@ -183,7 +217,7 @@ static func step(w):
 			a.work_status=j.get("block_reason","作業待ち");block(w,j,a.work_status)
 		else:
 			if j.get("phase","") not in ["fetch","deliver"]:j.phase="work" if j.state=="working" else "move"
-			a.work_status="%s #%d · %s"%[Policy.LABELS[category(w,j)],j.id,{"work":"現場で作業中","fetch":"物資を取りに移動","deliver":"物資を運搬中"}.get(j.phase,"対象へ移動中")]
+			a.work_status="%s · %s"%[Policy.LABELS[category(w,j)],{"work":"現場で作業中","fetch":"物資を取りに移動","deliver":"物資を運搬中"}.get(j.phase,"対象へ移動中")]
 
 static func save(w):
 	w.campaign.work_profiles={}
@@ -202,4 +236,4 @@ static func restore(w):
 	w.keeper.dead=profile.get("dead",false);w.keeper.death_cause=profile.get("death_cause","")
 	if w.keeper.dead:w.keeper.state="dead";w.keeper.hp=0
 	for j in w.jobs:
-		j.assigned_to="";j.retry_at=0;j.state="pending";j.erase("material_claims")
+		j.assigned_to="";j.delivery_owner="";j.retry_at=0;j.state="pending";j.erase("material_claims")

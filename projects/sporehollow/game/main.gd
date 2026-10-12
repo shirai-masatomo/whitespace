@@ -23,6 +23,9 @@ const FONT = preload("res://assets/fonts/ui_font.tres")
 const TILE = Vector2(48, 42)
 const CAMERA_SPEED=420.0*1.5
 const ACTOR_SCALE=1.25
+# Map animal art only; retain the existing hit boxes, UI and human scale.
+const ANIMAL_DISPLAY_MULTIPLIER=1.25
+const ANIMAL_DRAW_SCALE=ACTOR_SCALE*ANIMAL_DISPLAY_MULTIPLIER
 const ColonyModel=preload("res://game/colony_view_model.gd")
 const Presentation=preload("res://game/colony_ui_state.gd")
 const ColonyMenu=preload("res://game/colony_menu.gd")
@@ -34,6 +37,7 @@ var queue_bottom=94.0
 const ColonyPanels=preload("res://game/colony_panels.gd")
 const TaskControls=preload("res://game/colony_task_controls.gd")
 const LivestockControls=preload("res://game/livestock_controls.gd")
+var right_release_pending=false
 var item_commands=preload("res://game/item_commands.gd").new()
 var zone_controls=preload("res://game/zone_controls.gd").new()
 var colony_page=""
@@ -52,6 +56,8 @@ const TOOLS = {"kennel":"犬小屋 木20","coop":"鶏小屋 木30","milk":"搾�
 	"attack_target":"狙え", "auto": "おまかせ", "stay": "待て", "wander": "警戒", "rest": "無理するな", "collect": "資源・卵・設計図", "dog_food": "犬用餌 HP+10", "hen_food": "鶏用餌 HP+8", "cat_food": "猫用餌 HP+8"}
 const ORDER_HELP={"auto":"状況に合わせて行動します。戦闘・救護・その動物の仕事を任せます。","guide":"行き先をクリックして一緒に歩きます。\n物や動物は、押した時点の近くの空き場所へ。\n1匹なら隣接し、遅い方に合わせます。\n複数は近くにまとまり、到着でおまかせへ。\n右クリックで行き先指定を解除します。","stay":"その場所で待ちます。近くの敵には応戦しますが、追いかけません。","wander":"周囲を巡回し、敵を見つけたら攻撃します。","rest":"安全と回復を優先します。危険から離れ、無理に追わず近くの敵に応戦します。","attack_target":"敵を選べ。狙える距離や見通しが必要です。","equip":"持ち物から装備を選び、主人公が届けます。","milk":"乳牛に近づいて搾乳します。1日1回です。","charge":"突撃する行き先を選びます。"}
 const GROUP_TOOLS = [["wall", "wood_wall", "stone_wall", "soil_tile", "wood_tile", "stone_tile", "door", "locked_door", "kennel", "coop", "place_kokeshi", "place_fossil"], ["auto", "guide", "stay", "wander", "rest", "attack_target", "equip", "milk", "charge"], ["collect"]]
+const RockView=preload("res://game/rock_view.gd")
+const StockView=preload("res://game/stock_view.gd")
 const BoardArt = preload("res://game/board_art.gd")
 const BuildingArt = preload("res://game/building_art.gd")
 const Art = preload("res://game/adopted_art.gd")
@@ -372,7 +378,7 @@ func choose_animal(id: int, toggle: bool = false):
 	refresh()
 
 func collectible(cell: Vector2i) -> bool:
-	return world.natural.has(cell) or not world.items_at(cell).is_empty()
+	return world.natural.has(cell) or not world.items_at(cell,true).is_empty()
 
 func toggle_selection(targets: Array, id):
 	if id in targets: targets.erase(id)
@@ -392,8 +398,6 @@ func select_resource(cell: Vector2i, toggle: bool = false):
 		toggle_selection(selected_resources, cell)
 	else:
 		selected_resources = [cell]
-		if world.act("collect", cell): pass
-		else: notice("予約済み" if job_reserved("collect", cell) else "指定は%d件まで"%world.Jobs.LIMIT)
 	refresh()
 
 func collect_selected():
@@ -497,7 +501,7 @@ func refresh():
 		var choices = subtask_choices()
 		for i in range(choices.size()):
 			var id=choices[i]
-			add_button(palette,id,TOOLS[id],Rect2(16+i*126,704,118,36),select_tool.bind(id))
+			add_button(palette,id,TOOLS[id],ColonyPanels.animal_tool_rect(i),select_tool.bind(id))
 			var supported=deployed_selection.filter(func(a):return id in Farm.SPECIES[a.species].orders or (id=="milk" and a.species=="cow" and a.get("milked_day",-1)!=world.campaign.day) or (id=="equip" and Farm.ProgressData.ITEMS.keys().any(func(item):return Farm.Progression.can_equip(a,item)))).size()
 			buttons[id].tooltip_text=ORDER_HELP.get(id,"")+"\n対応 %d / 選択 %d"%[supported,selected_animals.size()]
 		if equipment_open: ProgressView.equipment_buttons(self)
@@ -506,11 +510,12 @@ func refresh():
 		for i in range(choices.size()):
 			var id = choices[i]
 			add_button(palette, id, TOOLS[id], ColonyPanels.architect_tool_rect(self,i), select_tool.bind(id))
-			buttons[id].tooltip_text = {"wall": "壁：土10、建設1秒", "soil_tile":"土タイル：土2", "wood_tile":"木タイル：木2", "stone_tile":"石タイル：石2", "locked_door":"ロック付きドア：木20", "collect": "雑草：1 Gold / キノコ：終了時HP5回復 / 卵：回収"}.get(id, TOOLS[id])
+			var definition=Farm.BUILD.get(id,{})
+			buttons[id].tooltip_text = "%s\n%s ×%d · 施工 %s秒\n%s"%[TOOLS[id],Farm.Work.Policy.LABELS.get(definition.get("resource",""),{"soil":"土","wood":"木材","stone":"石"}.get(definition.get("resource",""),"材料")),definition.get("cost",0),str(definition.get("seconds",1)),"備蓄から搬入後に施工" if not definition.is_empty() else "必要な現物と空き場所を指定"]
 			if Farm.Shop.FOOD.has(id):
 				buttons[id].text += " ×%d" % world.item_count(id)
 			if id in ["wall", "wood_wall", "stone_wall", "soil_tile", "wood_tile", "stone_tile", "door", "locked_door", "kennel", "coop"]:
-				buttons[id].icon = BoardArt.icon("wood" if id in ["kennel", "coop"] else "soil")
+				buttons[id].icon = BoardArt.icon(Farm.BUILD[id].get("resource","soil"))
 	for id in TOOLS:
 		if not buttons.has(id):continue
 		UI.selected(buttons[id], tool == id)
@@ -585,6 +590,7 @@ func build_context_actions():
 	if not world.working() or context_targets().is_empty(): return
 	context_panel = Panel.new()
 	context_panel.mouse_filter = Control.MOUSE_FILTER_STOP
+	if selected_resources.size()==1:context_panel.tooltip_text=StockView.details(world,selected_resources[0])
 	context_panel.add_theme_stylebox_override("panel", UI.surface(UI.PAPER))
 	palette.add_child(context_panel)
 	var rows = []
@@ -605,8 +611,8 @@ func build_context_actions():
 			if why=="" and world.jobs.any(func(j):return j.get("world_target")=="father-idol"): why="像の作業は予約済みです"
 			rows.append([kind,StoryView.LABELS[kind],"spark",story_action.bind(kind),why!="",why if why!="" else ("牧場主が現地で3秒祈ります。1晩1回、翌朝に選んだ種類の贈り物を受け取ります" if world.Story.is_prayer(kind) else "素材1個で現地修理。最大HPを超える分は回復しません" if kind.begins_with("repair_idol") else "牧場主が現地で行います")])
 	elif not selected_resources.is_empty():
-		var pending = selected_resources.any(func(p): return not job_reserved("collect", p))
-		rows.append(["collect_selection", "回収する" if pending else "予約済み", "basket", collect_selected, not pending, "利用可能な現物を保管域へ運びます。卵は食料・売却に使えます。"])
+		var pending=selected_resources.any(func(p):return (world.natural.has(p) or world.items_at(p).any(func(r):return not r.get("construction_transfer",false) and not world.Stock.stored(world,r))) and not world.jobs.any(func(j):return (j.kind=="collect" and j.pos==p) or (j.kind=="haul" and world.items_at(p,true).any(func(r):return r.stock_id==j.get("stock_id",-1) or r.stock_id in j.get("haul_sources",[])))))
+		rows.append(["collect_selection", "回収する" if pending else ("備蓄済み" if selected_resources.all(func(p):return world.items_at(p,true).all(func(r):return world.Stock.stored(world,r))) else "回収できません"), "basket", collect_selected, not pending, "利用可能な現物を保管域へ運びます。卵は食料・売却に使えます。"])
 		if selected_resources.any(func(p):return job_reserved("collect",p)):
 			rows.append(["cancel_near","取消","cross",cancel_selected_work,false,"選んだ回収予定を取り消す"])
 	else:
@@ -1085,14 +1091,13 @@ func _route_input(event):
 		# GUI buttons receive the event; every world handler is gated by the modal.
 		return
 	if event is InputEventMouse: pointer = event.position
+	if event is InputEventMouseButton and event.button_index==MOUSE_BUTTON_RIGHT and not event.pressed and right_release_pending:
+		right_release_pending=false;get_viewport().set_input_as_handled();return
 	if world.working() and not menu_open and not field_book and not field_shop and event is InputEventMouseButton and event.pressed and event.button_index==MOUSE_BUTTON_RIGHT:
-		if subtasks.pressed!="":
-			subtasks.cancel();refresh();get_viewport().set_input_as_handled();return
-		if group>=0 or colony_page!="" or tool!="" or dragging or press_pending:
-			neutral();get_viewport().set_input_as_handled();return
-		if merchant_context:
-			merchant_context=false;refresh();get_viewport().set_input_as_handled();return
-		if not selected.is_empty():neutral();get_viewport().set_input_as_handled();return
+		right_release_pending=true
+		if subtasks.dragging:subtasks.cancel();refresh()
+		else:neutral()
+		get_viewport().set_input_as_handled();return
 	if zone_controls.input(self,event):get_viewport().set_input_as_handled();return
 	if item_commands.input(self,event):get_viewport().set_input_as_handled();return
 	if subtasks.input(self,event):
@@ -1404,7 +1409,7 @@ func board_click(event):
 		refresh()
 		return
 	# Context selection takes precedence over the previously armed tool, even while paused.
-	if not world.items_at(cell).is_empty():
+	if not world.items_at(cell,true).is_empty():
 		select_resource(cell, event.ctrl_pressed)
 		return
 	for a in world.animals:
@@ -1780,6 +1785,7 @@ func draw_structure(p: Vector2, b: Dictionary, preview: bool = false):
 
 func _draw():
 	BoardArt.draw_ground(self, world, TILE, visual_time)
+	RockView.ground(self)
 	for cell in world.floors:
 		var floor_data=world.floors[cell]
 		if floor_data.status!="ready": continue
@@ -1795,30 +1801,37 @@ func _draw():
 		draw_circle(center(f.pos), 10, Color("d3a762"))
 		draw_circle(center(f.pos), 6, Color("70513b"))
 	draw_market_world()
-	for item in world.field_items:
-		if item.get("location","ground")!="ground":continue
-		var q = center(item.pos) + (Vector2(7, 8) if item.kind.ends_with("_plan") else Vector2.ZERO)
-		if item.kind.ends_with("_plan") and world.keeper.placed and item.pos == world.keeper.pos: q = center(item.pos) + Vector2(-25,-22)
-		if item.kind.ends_with("_plan") or item.kind=="skill_scroll":
-			draw_texture(Art.SCROLL,(q-Vector2(12,10)).round())
-		elif item.kind in ["kokeshi","fossil"]:
-			Direction.draw(self,"kokeshi.idle" if item.kind=="kokeshi" else "new.fossil",q+Vector2(0,14))
-		elif item.kind == "egg":
-			draw_circle(q, 7, Color("fff0c7"))
-		elif item.kind == "chick":
-			draw_circle(q, 8, Color("efd160"))
-			draw_line(q, q + Vector2(10, 2), Color("d78d37"), 3)
+	var visible=StockView.rows(world)
+	var shown={}
+	for item in visible:
+		shown[item.pos]=shown.get(item.pos,0)+1
+		if shown[item.pos]>4:continue
+		var q=center(item.pos)+item.offset
+		if item.kind.ends_with("_plan") or item.kind=="skill_scroll":draw_texture(Art.SCROLL,(q-Vector2(12,10)).round())
+		elif item.kind in ["kokeshi","fossil"]:Direction.draw(self,"kokeshi.idle" if item.kind=="kokeshi" else "new.fossil",q+Vector2(0,14))
+		elif item.kind=="egg":draw_circle(q,5 if item.compact else 7,Color("fff0c7"))
+		elif item.kind=="chick":draw_circle(q,6 if item.compact else 8,Color("efd160"))
 		elif item.kind in ["soil","wood","stone","mushroom"]:
-			BoardArt.draw_resource(self,q,item.kind)
-		else: draw_line(q + Vector2(-5, 6), q + Vector2(6, -8), Color("eee8cf"), 5)
-		if item.get("amount",1)>1:label_on(self,q+Vector2(8,-5),str(item.amount),12,UI.PAPER)
+			if item.compact:draw_set_transform(q,0,Vector2.ONE*0.67);BoardArt.draw_resource(self,Vector2.ZERO,item.kind);draw_set_transform(Vector2.ZERO)
+			else:BoardArt.draw_resource(self,q,item.kind)
+		else:draw_line(q+Vector2(-5,6),q+Vector2(6,-8),Color("eee8cf"),3)
+		if item.amount>1:label_on(self,q+Vector2(-8,9 if item.compact else 18),str(item.amount),10 if item.compact else 12,UI.PAPER)
+		if item.forbidden>0:draw_line(q-Vector2(6,6),q+Vector2(6,6),UI.DANGER,2)
+	for cell in shown:
+		if shown[cell]>4:label_on(self,center(cell)+Vector2(5,18),"+%d"%(shown[cell]-4),10,UI.PAPER)
 	for a in world.workers.values():
-		var carried=world.Stock.cargo(world,a.work_key)
-		if not carried.is_empty():
-			var q=center(a.pos)+Vector2(15,-24);BoardArt.draw_resource(self,q,carried[0].kind);label_on(self,q+Vector2(12,9),str(carried[0].amount),12,UI.PAPER)
+		var carried=StockView.rows(world,"carry",a.work_key)
+		for i in range(mini(3,carried.size())):
+			var q=center(a.pos)+Vector2(15+i*18,-24);var row=carried[i]
+			if row.kind in ["soil","wood","stone"]:Delivered.resource(self,row.kind,q,16)
+			else:BoardArt.draw_resource(self,q,row.kind)
+			label_on(self,q+Vector2(-4,12),str(row.amount),10,UI.PAPER)
 	for a in world.animals+world.enemies:
 		if a.get("species")=="doberman" and a.has("visual_death_tick") and (world.tick-a.visual_death_tick)*world.DT<ProgressArt.duration("doberman","death"):
-			Delivered.draw_clip(self,ProgressArt.clip("doberman","death",a.get("facing",1)),center(a.pos)+Vector2(0,14),(world.tick-a.visual_death_tick)*world.DT)
+			var foot=center(a.pos)+Vector2(0,14)
+			draw_set_transform(foot*(1.0-ANIMAL_DISPLAY_MULTIPLIER),0,Vector2.ONE*ANIMAL_DISPLAY_MULTIPLIER)
+			Delivered.draw_clip(self,ProgressArt.clip("doberman","death",a.get("facing",1)),foot,(world.tick-a.visual_death_tick)*world.DT)
+			draw_set_transform(Vector2.ZERO)
 	for e in world.enemies:
 		if six_revived.has(e.id) and visual_time-six_revived[e.id]<SixMotion.duration("dancer","revival_light"):
 			SixMotion.paint(self,"dancer","revival_light",1,actor_pixel("e"+str(e.id),e.pos)+Vector2(0,14),visual_time-six_revived[e.id])
@@ -1831,7 +1844,7 @@ func _draw():
 			if enemy_side and actor.get("dead",false):continue
 			var pose=six_art.get(SixMotion.key(actor,enemy_side),{})
 			if not pose.has("death_at") or visual_time-pose.death_at>=SixMotion.duration(who,pose.action):continue
-			var foot=center(pose.death_pos)+Vector2(0,14);var scale_value=HumanVisual.SCALE if who in ["maid","dancer","thief"] else ACTOR_SCALE
+			var foot=center(pose.death_pos)+Vector2(0,14);var scale_value=HumanVisual.SCALE if who in ["maid","dancer","thief"] else ANIMAL_DRAW_SCALE
 			draw_set_transform(foot*(1.0-scale_value),0,Vector2.ONE*scale_value)
 			SixMotion.paint(self,who,pose.action,pose.facing,foot,visual_time-pose.death_at)
 			draw_set_transform(Vector2.ZERO)
@@ -1843,6 +1856,7 @@ func _draw():
 			Direction.draw(self,"new.poison_projectile" if flight<1 else "new.poison_splash",center(thrower.pos).lerp(center(thrower.poison_target),flight))
 	for actor in scene_actors():
 		match actor.kind:
+			"rock": RockView.rock(self,actor.data)
 			"tree": StoryView.tree(self,actor.data,actor.get("deep",false))
 			"idol": StoryView.idol(self)
 			"door_part": BuildingArt.door_layer(self,center(actor.data),world.structures[actor.data],actor.part)
@@ -1868,6 +1882,7 @@ func _draw():
 
 func scene_actors() -> Array:
 	var actors=[]
+	for p in world.rocks:actors.append({"y":center(p).y+14,"x":p.x,"kind":"rock","data":p})
 	for p in world.trees: actors.append({"y":StoryView.tree_foot(self,p).y,"x":p.x,"kind":"tree","data":p})
 	if not world.story.idol.is_empty(): actors.append({"y":actor_pixel("idol",world.Story.at(world)).y+TILE.y+14,"x":world.Story.at(world).x,"kind":"idol"})
 	for cell in world.structures:
@@ -1912,14 +1927,14 @@ func draw_pointer_preview():
 			# A resident at the cursor already shows the species; do not overprint a second body.
 			if valid and not nearby and guide_ghost_visible(cell):
 				var p = center(cell)
-				draw_set_transform(p, 0, Vector2.ONE)
+				draw_set_transform(p+Vector2(0,14)*(1.0-ANIMAL_DISPLAY_MULTIPLIER),0,Vector2.ONE*ANIMAL_DISPLAY_MULTIPLIER)
 				art_alpha = 0.45
 				var animal = world.animals.filter(func(a): return a.id == selected_animal)[0]
 				if animal.species == "shiba": draw_dog(Vector2.ZERO)
 				elif animal.species == "cat": draw_cat(Vector2.ZERO)
 				elif animal.species=="hen":draw_hen(Vector2.ZERO)
 				else:
-					var scale_value=HumanVisual.SCALE if animal.get("category")=="human" else ACTOR_SCALE
+					var scale_value=HumanVisual.SCALE if animal.get("category")=="human" else ANIMAL_DRAW_SCALE
 					draw_set_transform(p+Vector2(0,14)*(1.0-scale_value),0,Vector2.ONE*scale_value)
 					if animal.species in Direction.ACTORS:Direction.draw(self,Direction.actor_key(animal),Vector2(0,14),0.45)
 					else:Delivered.draw_clip(self,ProgressArt.clip(animal.species,"idle",animal.get("facing",1)),Vector2(0,14),0)
@@ -2862,7 +2877,7 @@ func draw_enemy_actor(e: Dictionary):
 		var foot=center(e.pos)+Vector2(0,14)
 		var who=e.get("archetype","kidnapper");var facing=e.get("facing",1)
 		var elapsed=(world.tick-e.corpse_started_tick)*world.DT
-		var scale_value=ACTOR_SCALE if who=="doberman" else HumanVisual.SCALE
+		var scale_value=ANIMAL_DRAW_SCALE if who=="doberman" else HumanVisual.SCALE
 		if who in ["maid","dancer","thief","doberman"]:
 			draw_set_transform(foot*(1-scale_value),0,Vector2.ONE*scale_value)
 			if who=="doberman":Delivered.draw_clip(self,ProgressArt.clip(who,"death",facing),foot,elapsed)
@@ -2878,7 +2893,7 @@ func draw_enemy_actor(e: Dictionary):
 	var pose=enemy_art.get(e.id,{"action":"idle","facing":1,"at":visual_time})
 	var foot=p+Vector2(0,14)
 	ProgressArt.tongue_layer(self,e,false)
-	var human_scale=HumanVisual.SCALE if e.get("type_tag","Human")=="Human" else ACTOR_SCALE
+	var human_scale=HumanVisual.SCALE if e.get("type_tag","Human")=="Human" else ANIMAL_DRAW_SCALE
 	draw_set_transform(foot*(1.0-human_scale),0,Vector2.ONE*human_scale)
 	if e.get("archetype","kidnapper")!="kidnapper":
 		if e.archetype in Direction.ACTORS:SixMotion.draw(self,self,e,foot,true)
@@ -2972,18 +2987,18 @@ func draw_animal_corpse(a: Dictionary):
 	var foot=center(a.pos)+Vector2(0,14)
 	draw_circle(foot+Vector2(0,-2),18,Color(0.1,0.15,0.1,0.25))
 	if a.species in SixMotion.ACTORS:
-		var scale_value=HumanVisual.SCALE if a.species=="maid" else ACTOR_SCALE
+		var scale_value=HumanVisual.SCALE if a.species=="maid" else ANIMAL_DRAW_SCALE
 		draw_set_transform(foot*(1.0-scale_value),0,Vector2.ONE*scale_value)
 		SixMotion.paint(self,a.species,"death",a.get("facing",1),foot,SixMotion.duration(a.species,"death"))
 		draw_set_transform(Vector2.ZERO)
 	elif Delivered.CLIPS.has(a.species+"/death"+("_left" if a.get("facing",1)<0 else "_right")):
 		var key=a.species+"/death"+("_left" if a.get("facing",1)<0 else "_right")
-		draw_set_transform(foot*(1.0-ACTOR_SCALE),0,Vector2.ONE*ACTOR_SCALE)
+		draw_set_transform(foot*(1.0-ANIMAL_DRAW_SCALE),0,Vector2.ONE*ANIMAL_DRAW_SCALE)
 		Delivered.draw_clip(self,key,foot,Delivered.duration(key))
 		draw_set_transform(Vector2.ZERO)
 	else:
 		# Interim fallen silhouette made from existing idle art; not a new delivered death sprite.
-		draw_set_transform(foot,PI*0.5,Vector2.ONE*0.85*ACTOR_SCALE)
+		draw_set_transform(foot,PI*0.5,Vector2.ONE*0.85*ANIMAL_DRAW_SCALE)
 		if a.species in ["hen","cat"]:Art.sprite(self,a.species,"idle",a.get("facing",1),Vector2(0,12),0,0.65)
 		else:Delivered.draw_clip(self,ProgressArt.clip(a.species,"idle",a.get("facing",1)),Vector2(0,12),0)
 		draw_set_transform(Vector2.ZERO)
@@ -3000,18 +3015,21 @@ func draw_animal_actor(a: Dictionary):
 	var p = actor_pixel("a%d" % a.id, a.pos)
 	draw_ready(a,p)
 	draw_circle(p + Vector2(0, 13), 18, Color(0.1, 0.2, 0.13, 0.25))
-	if a.species == "shiba": draw_dog(p, a)
-	elif a.species == "cat": draw_cat(p,a)
-	elif a.species=="hen": draw_hen(p,a)
+	if a.species in ["shiba","cat","hen"]:
+		var foot=p+Vector2(0,14)
+		# Scale the existing renderer too: Shiba idle uses its unscaled fallback.
+		draw_set_transform(foot*(1.0-ANIMAL_DISPLAY_MULTIPLIER),0,Vector2.ONE*ANIMAL_DISPLAY_MULTIPLIER)
+		draw_animal_sprite(p,a,a.species)
+		draw_set_transform(Vector2.ZERO)
 	elif a.species in Direction.ACTORS:
 		var foot=p+Vector2(0,14)
-		var scale_value=HumanVisual.SCALE if a.get("category")=="human" else ACTOR_SCALE
+		var scale_value=HumanVisual.SCALE if a.get("category")=="human" else ANIMAL_DRAW_SCALE
 		draw_set_transform(foot*(1.0-scale_value),0,Vector2.ONE*scale_value)
 		Direction.actor(self,self,a,foot)
 		draw_set_transform(Vector2.ZERO)
 	else:
 		var foot=p+Vector2(0,14)
-		draw_set_transform(foot*(1.0-ACTOR_SCALE),0,Vector2.ONE*ACTOR_SCALE)
+		draw_set_transform(foot*(1.0-ANIMAL_DRAW_SCALE),0,Vector2.ONE*ANIMAL_DRAW_SCALE)
 		ProgressArt.draw(self,self,a,foot)
 		draw_set_transform(Vector2.ZERO)
 	if world.tick<a.get("spines_until",0): label_on(self,p+Vector2(15,-15),"棘",14,UI.GOLD)

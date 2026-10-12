@@ -11,7 +11,7 @@ func check(ok: bool,note: String):
 	group.checks.append({"passed":ok,"check":note})
 	if not ok:failed+=1;push_error(note)
 func farm():
-	var w=Farm.new({},31).begin_day();w.trees.clear();w.natural.clear();w.field_items.clear();w.day_seconds=9999;w.nature_config.spawn_chance_per_second=0;w.storage_cells=[];w.stock_used={}
+	var w=Farm.new({},31).begin_day();w.trees.clear();w.natural.clear();w.field_items.clear();w.day_seconds=9999;w.nature_config.spawn_chance_per_second=0;w.storage_cells=[];w.zones=[];w.stock_used={};w.campaign.last_supply_day=9999;w.Zones.create(w,"stockpile",Vector2i(3,4),Vector2i(12,9))
 	w.keeper.pos=Vector2i(4,6);w.keeper_path=[[4,6]];w.keeper.satiety=31.6;w.story.intro_seen=true
 	w.animals[0].pos=Vector2i(20,13);w.animals[0].mode="stay";w.Stock.sync(w)
 	return w
@@ -52,7 +52,7 @@ func run():
 	check(w.metrics.built==1 and w.structures.get(Vector2i(4,8),{}).get("status")=="ready","Wall completes after autonomous materials and meal")
 	check(w.stock_used.get("mushroom",0)==1 and w.keeper.satiety>w.Work.Policy.EAT_THRESHOLD,"Exactly one food unit consumed and satiety restored")
 	check(w.Stock.totals(w).get("wood",0)+w.stock_used.get("wood",0)==initial.wood,"Ground, carried and site material plus installed consumption conserve wood")
-	check(group.states.any(func(s):return "食事中" in s.state) and group.states.any(func(s):return "物資を" in s.state),"Trace shows meal and resumed physical work")
+	check(group.states.any(func(s):return "食事中" in s.state) and group.states.any(func(s):return not s.cargo.is_empty()),"Trace shows meal and resumed physical work")
 	group.result=result(w);FileAccess.open(out+"/expected.bin",FileAccess.WRITE).store_var(result(w),false)
 	begin("2 Two humans, material/food contention and interrupted cargo")
 	w=farm();w.keeper.satiety=100;var helper=w.keeper.duplicate(true);helper.pos=Vector2i(8,8);helper.name="検証用の人";w.Work.register(w,"helper",helper)
@@ -92,7 +92,7 @@ func run():
 	check(not w.keeper.has("meal_remaining") and w.Stock.totals(w)==before and w.field_items.all(func(r):return r.claims.is_empty()),"Manual rest interrupts eating, releases food reservation and retains the uneaten portion")
 	w=farm();w.keeper.satiety=100;w.Stock.add(w,"wood",10,Vector2i(8,6));w.act("wood_wall",Vector2i(4,8));w.step()
 	var vanished=w.field_items.filter(func(r):return r.kind=="wood")[0];w.field_items.erase(vanished);w.step()
-	check(w.jobs[0].state=="blocked" and w.work_claims.is_empty(),"Disappearing reserved material releases ownership with a reason")
+	w.step();check(w.jobs[0].get("material_wait",false) and w.work_claims.is_empty() and w.build_deliveries.is_empty(),"Disappearing reserved material releases transport ownership with a materials-wait reason")
 	w.Stock.add(w,"wood",10,Vector2i(7,6))
 	for i in range(180):
 		w.step()
@@ -100,7 +100,7 @@ func run():
 	var original=10;w.Jobs.cancel(w,w.jobs[0].id)
 	check(w.Stock.totals(w).get("wood",0)+w.stock_used.get("wood",0)==original and w.work_claims.is_empty(),"Cancelling a started physical site preserves refund plus consumed quantity")
 	begin("3 Storage capacity, food shortage and existing transactions")
-	w=farm();w.keeper.satiety=100;w.Stock.add(w,"wood",12,Vector2i(8,6));w.act("storage",Vector2i(5,8))
+	w=farm();w.zones=[];w.Zones.sync_storage(w);w.keeper.satiety=100;w.Stock.add(w,"wood",12,Vector2i(8,6));w.act("storage",Vector2i(5,8))
 	for i in range(12):w.step()
 	check(w.jobs.is_empty() and w.Stock.storage_used(w,Vector2i(5,8))==0,"Storage alone does not create an implicit hauling order")
 	w.Stock.designate(w,"haul",Vector2i(8,6),Vector2i(8,6))
@@ -113,7 +113,17 @@ func run():
 	for i in range(100):
 		w.step()
 		if w.stock_used.get("mushroom",0)>0:break
-	check(w.stock_used.get("mushroom",0)==1 and not w.natural.has(Vector2i(6,6)),"Existing natural mushroom can supply a meal when stock runs out")
+	check(w.stock_used.get("mushroom",0)==0 and w.natural.has(Vector2i(6,6)),"Autonomous eating does not gather and eat uncollected food")
+	w.Zones.create(w,"stockpile",Vector2i(8,8),Vector2i(8,8));w.act("collect",Vector2i(6,6))
+	for i in range(100):
+		w.step()
+		if not w.natural.has(Vector2i(6,6)):break
+	for row in w.field_items.duplicate():
+		if row.kind=="mushroom":w.Stock.designate(w,"haul",row.pos,row.pos)
+	for i in range(150):
+		w.step()
+		if w.stock_used.get("mushroom",0)>0:break
+	check(w.stock_used.get("mushroom",0)==1,"Explicit gathering and collection supply a stored physical meal")
 	w=farm();w.keeper.satiety=100;w.Stock.add(w,"wood",20,Vector2i(8,6))
 	var claims=w.Stock.reserve(w,"wood",8,"test",w.keeper)
 	check(w.resource_amount("wood")==12 and not w.Stock.consume(w,"wood",13),"Old resource consumers cannot consume reserved stock")
@@ -131,6 +141,8 @@ func run():
 	if not goods.is_empty():
 		var product=goods[0].product;var amount=w.Shop.table()[product].Amount;var before_buy=w.Stock.totals(w).get(product,0)
 		check(w.buy(product) and w.Stock.totals(w).get(product,0)==before_buy+amount,"Buying spawns the purchased material quantity on the map once")
+		for row in w.field_items:
+			if row.kind==product:w.Zones.create(w,"stockpile",row.pos,row.pos);row.stocked=true # Explicit commerce fixture: already delivered stock.
 		check(w.sell(product) and w.Stock.totals(w).get(product,0)==before_buy,"Selling removes the physical quantity once")
 	w=farm();w.keeper.satiety=20;w.Stock.add(w,"mushroom",1,Vector2i(10,6));w.Stock.add(w,"soil",10,Vector2i(5,6));w.act("wall",Vector2i(4,8))
 	for cell in w.neighbors(Vector2i(10,6)):w.structures[cell]={"id":700+cell.x+cell.y*25,"kind":"wall","status":"ready","hp":8,"max_hp":8,"open":false}
@@ -150,7 +162,7 @@ func run():
 		if live.metrics.built>0:break
 	check(live.metrics.built==1,"Starting ranch can reach its initial physical supplies and construct without terrain changes")
 	var old=Farm.new_campaign();old.resources.wood=30;old.items={"dog_food":2};old.mushrooms=3
-	w=Farm.new(old,31);var totals=w.Stock.totals(w);w.persist_farm();var reload=Farm.new(w.campaign,31)
+	old.erase("initial_stockpile");old.erase("start_near_idol");w=Farm.new(old,31);var totals=w.Stock.totals(w);w.persist_farm();var reload=Farm.new(w.campaign,31)
 	check(reload.Stock.totals(reload)==totals and totals.wood==30 and totals.mushroom==3,"Scalar legacy campaign migrates once and does not duplicate on reload")
 	var paid=Farm.new_campaign();paid.resources.soil=90;paid.work_jobs=[{"id":91,"kind":"wall","pos":[4,8],"animal_id":-1,"state":"pending","resource":"soil","reserved":10,"started":false}]
 	var migrated=Farm.new(paid,31).begin_day();migrated.trees.clear();migrated.day_seconds=9999;migrated.keeper.pos=Vector2i(4,7)

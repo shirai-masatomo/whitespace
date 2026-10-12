@@ -36,7 +36,7 @@ static func enqueue(w, kind: String, p: Vector2i, animal_id: int) -> bool:
 		if store.get(p,{}).get("status")!="ready" or (kind=="gate" and store[p].kind not in w.Buildings.DOORS): return false
 		if kind=="remove_floor" and w.live_structure(p): w.say("先に上の建物を解体してください"); return false
 	else: return false
-	var j={"id":w.next_job_id,"kind":kind,"pos":p,"animal_id":animal_id,"state":"pending","resource":resource,"reserved":0,"required":cost,"started":false}
+	var j={"id":w.next_job_id,"kind":kind,"pos":p,"animal_id":animal_id,"state":"pending","resource":resource,"reserved":0,"required":cost,"started":false,"queued_tick":w.tick}
 	if kind in ["remove","remove_floor","repair","repair_floor","gate"]:
 		j.target_layer="floor" if kind.ends_with("_floor") else "structure"
 		var b=w.building_store(j.target_layer).get(p,{})
@@ -61,6 +61,7 @@ static func cancel(w,id: int,reason: String="cancelled") -> bool:
 		if j.id!=id: continue
 		if w.paused and (j.started or j.get("targets",[]).any(func(t):return t.issued)):
 			j.cancel_requested=true; return true
+		w.Delivery.cancel_job(w,j)
 		w.Work.release(w,j)
 		if j.kind=="animal_order": w.Orders.stop(w,j)
 		if w.BUILD.has(j.kind):
@@ -183,6 +184,17 @@ static func preview(w) -> Array:
 	var origin=w.keeper.pos
 	var plans=[]
 	if w.manual_goal!=null: plans.append({"number":0,"goals":[w.manual_goal]})
+	var delivery=w.build_deliveries.get("keeper",{})
+	if not delivery.is_empty():
+		var targets=[]
+		for allocation in delivery.allocations:
+			for claim in allocation.claims:
+				var row=w.Stock.find(w,claim.stock_id)
+				if not row.is_empty():plans.append({"number":allocation.job_id,"goals":w.neighbors(row.pos)})
+			var target=w.Delivery.job(w,allocation.job_id)
+			if not target.is_empty() and (not allocation.claims.is_empty() or not w.Stock.cargo(w,"keeper",target.id).is_empty()):targets.append(target)
+		targets.sort_custom(func(a,b):return w.distance(w.keeper.pos,a.pos)<w.distance(w.keeper.pos,b.pos))
+		for target in targets:plans.append({"number":target.id,"goals":w.neighbors(target.pos)})
 	for i in range(w.jobs.size()):
 		var j=w.jobs[i]
 		if j.get("assigned_to","")!="keeper":continue

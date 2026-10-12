@@ -40,7 +40,7 @@ func run():
 	check(w.Stock.totals(w)==before and w.jobs.any(func(j):return j.state=="blocked" and "備蓄" in j.get("block_reason","")),"No destination blocks with a visible reason and no quantity loss")
 	w.Zones.set_allowed(w,z2,["wood","stone"]);work_ticks(w,170)
 	check(w.field_items.any(func(r):return r.kind=="wood" and r.amount==2 and r.location=="ground" and r.pos==Vector2i(12,9)) and w.field_items.any(func(r):return r.kind=="wood" and r.amount==6 and r.pos==Vector2i(14,8)),"Changing allowed types resumes the explicit blocked haul; undesignated stored wood stays put")
-	w.Zones.remove(w,z2);check(w.Stock.available(w,"wood")==8,"Goods remain available for use outside deleted zones")
+	w.Zones.remove(w,z2);check(w.Stock.available(w,"wood")==0 and w.Stock.totals(w).wood==8,"Goods remain owned but are not usable outside deleted zones: "+str(w.Stock.summary(w,"wood"))+" zones="+str(w.zones))
 	var saved_zone=w.Zones.create(w,"stockpile",Vector2i(15,9),Vector2i(16,9));w.Zones.set_allowed(w,saved_zone,["food"])
 	w.Zones.create(w,"residential",Vector2i(7,10),Vector2i(8,10));w.persist_farm();var restored=Farm.new(w.campaign,31)
 	check(restored.zones==w.zones and restored.Stock.totals(restored)==w.Stock.totals(w),"Campaign save restores zones, filters and unchanged physical goods")

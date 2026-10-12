@@ -149,6 +149,7 @@ const Nutrition=preload("res://game/human_nutrition.gd")
 const Livestock=preload("res://game/livestock.gd")
 const Tasks=preload("res://game/colony_tasks.gd")
 var rocks: Dictionary = {}
+var mined_rock_cells: Array = []
 const Zones=preload("res://game/colony_zones.gd")
 var zones: Array = []
 var next_zone_id=1
@@ -198,6 +199,8 @@ var nature_rng = RandomNumberGenerator.new()
 var natural: Dictionary = {}
 var skill_log: Array = []
 var milestones: Array = []
+const Delivery = preload("res://game/construction_delivery.gd")
+var build_deliveries: Dictionary = {}
 var initial_positions: Dictionary = {}
 var structures: Dictionary = {}
 const HOLDING_SHED = Vector2i(21, 14) # Legacy coordinate only; no building or reserved cells.
@@ -228,7 +231,7 @@ var metrics = {"repelled": 0, "stolen": 0, "structure_damage": 0, "commands": 0.
 	"bark_casts": 0, "bark_targets": 0, "weed_spawned": 0, "mushroom_spawned": 0, "weed_collected": 0, "mushroom_collected": 0, "stump_spawned": 0, "stump_collected": 0, "nature_rolls": 0, "mushrooms_used": 0, "mushroom_healing": 0}
 
 static func new_campaign() -> Dictionary:
-	return {"biome_new_map":true,"start_near_idol":true,"keeper_position":[W/2-2,H/2],"stage": 1, "day": 1, "exp_pool": 0, "night_ready": false, "gold": 40, "field_items": [], "eggs": 0, "mushrooms": preload("res://game/work_policy.gd").STARTING_FOOD, "shelter": false,
+	return {"biome_new_map":true,"initial_stockpile":true,"start_near_idol":true,"keeper_position":[W/2-2,H/2],"stage": 1, "day": 1, "exp_pool": 0, "night_ready": false, "gold": 40, "field_items": [], "eggs": 0, "mushrooms": preload("res://game/work_policy.gd").STARTING_FOOD, "shelter": false,
 		"fence": 0, "resources": {"soil": 100, "wood": 0, "stone": 0}, "items": {"dog_food": 2, "hen_food": 0}, "unlocked_blueprints": [], "facilities": [], "next_structure_id": 1, "animals": [{"id": 1,"position":[W/2-3,H/2], "category": "dog", "species": "shiba", "lv": 1, "xp": 0, "loyalty": 75}]}
 
 func _init(data: Dictionary = {}, seed_number: int = 17, stage_override: Dictionary = {}):
@@ -1428,8 +1431,8 @@ func train_animal(id: int) -> bool:
 			return true
 	return false
 
-func items_at(p: Vector2i) -> Array:
-	return field_items.filter(func(item): return item.pos == p and item.kind != "chick" and item.get("location","ground")=="ground" and not item.get("placed",false) and not item.get("forbidden",false))
+func items_at(p: Vector2i,include_forbidden: bool=false) -> Array:
+	return field_items.filter(func(item): return item.pos == p and item.kind != "chick" and item.get("location","ground")=="ground" and not item.get("placed",false) and (include_forbidden or not item.get("forbidden",false)))
 
 func drop_blueprint(_p: Vector2i):
 	# All active recipes are already available; disabled hut plans no longer drop.

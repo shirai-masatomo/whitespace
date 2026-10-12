@@ -36,7 +36,11 @@ function Run-Headless([string]$Name, [string[]]$Arguments, [string]$Executable=$
     $info.Environment['FARM_REVIEW_OUTPUT']=$runRoot
     $info.Environment['FARM_LEGACY_FIXTURE']=Join-Path $farmRoot 'review/current/biome01/tests/legacy-fixture'
     if ($Name -eq 'evaluate') { $info.Environment['FARM_AI_SEEDS'] = [string]$AISeeds }
-    $baseArgs = @('--headless','--log-file',$log)
+    if($Name -eq 'animal_size') {
+        git -C $farmRoot show eba972e:projects/sporehollow/game/main.gd | Set-Content -LiteralPath (Join-Path $runRoot 'baseline_main.gd') -Encoding utf8
+        $info.Environment['ANIMAL_SIZE_PROBE_ROOT']=$runRoot
+    }
+    $baseArgs = @('--headless','--audio-driver','Dummy','--max-fps','30','--log-file',$log)
     if ($Executable -eq $godot) { $baseArgs += @('--path',$farmRoot) }
     $info.WorkingDirectory = Split-Path -Parent $Executable
     foreach ($arg in ($baseArgs + $Arguments)) { $info.ArgumentList.Add($arg) }

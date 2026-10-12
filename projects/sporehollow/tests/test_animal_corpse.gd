@@ -58,7 +58,7 @@ func run():
 	resumed.keeper.state="free";resumed.keeper.hp=30
 	for i in range(600):resumed.tick+=1;resumed.animal_step(dog)
 	check(dog.hp==Farm.AnimalData.stats("shiba",dog.lv).hp/2 and not resumed.available(dog),"Gradual recovery respects the existing half-health/full-day boundary")
-	resumed.campaign.day=through+1;resumed.tick+=1;resumed.animal_step(dog)
+	resumed.campaign.day=through+1;resumed.last_daily_day=through+1;resumed.tick+=1;resumed.animal_step(dog) # Match the seamless calendar used by convalescence.
 	check(resumed.available(dog),"After the existing recovery day the Shiba can act again")
 	check(P.target_candidates(resumed,attacker).any(func(t):return t.kind=="animal" and t.id==dog.id),"After the recovery boundary normal targeting resumes")
 	w=recovery_lane();dog=w.animals[0];pos=dog.pos;through=dog.unavailable_through_day

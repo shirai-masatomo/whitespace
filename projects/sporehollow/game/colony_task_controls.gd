@@ -36,8 +36,7 @@ static func build(g):
 		g.ColonyPanels.label(p,"徴兵中：敵クリックで指定攻撃 / 地面で移動" if a.get("drafted",false) else ("装備作業を予約中" if pending else "長柄は商人から購入。現物まで移動して装備。"),Vector2(12,80),14)
 static func draw(g):
 	for p in g.world.rocks:
-		var c=g.center(p);var points=PackedVector2Array([c+Vector2(-16,9),c+Vector2(-13,-6),c+Vector2(0,-14),c+Vector2(13,-6),c+Vector2(17,9)])
-		g.draw_colored_polygon(points,Color("a6aa99"));g.draw_polyline(points,Color("667469"),2)
+		var c=g.center(p)
 		if g.world.rocks[p].get("forbidden",false):g.draw_line(c-Vector2(11,11),c+Vector2(11,11),g.UI.DANGER,3)
 		if g.selected.get("kind")=="rock" and g.selected.pos==p:g.draw_rect(Rect2(c-Vector2(22,20),Vector2(44,40)),g.UI.GOLD,false,2)
 static func signature(g) -> String:

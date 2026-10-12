@@ -42,15 +42,29 @@ static func person_selected(g,row: Dictionary):
 
 # Keep tab and tool geometry together; main uses architect_tool_rect for its buttons.
 static func architect_area(g) -> Rect2:
-	var rows=ceili(g.subtask_choices().size()/6.0)
-	var height=44 if g.architect_category=="ゾーン" else 50+maxi(1,rows)*36
-	return Rect2(8,742-height,688,height)
+	var rows=ceili(g.subtask_choices().size()/3.0)
+	var height=82 if g.architect_category=="ゾーン" else 82+maxi(1,rows)*36
+	return Rect2(8,742-height,402,height)
 
 static func architect_tool_rect(g,index: int) -> Rect2:
-	return Rect2(16+(index%6)*112,architect_area(g).position.y+42+floori(index/6.0)*36,104,32)
+	return Rect2(16+(index%3)*128,architect_area(g).position.y+78+floori(index/3.0)*36,120,32)
+
+static func animal_tool_rect(index: int) -> Rect2:
+	return Rect2(16+(index%6)*104,665+floori(index/6.0)*36,98,32)
+
+static func portrait(g,species: String) -> Texture2D:
+	var key=species+"/idle/right"
+	if g.Art.CLIPS.has(key):return g.Art.CLIPS[key].frames[0]
+	if species=="shiba":return preload("res://art_delivery/characters_v1/shiba_idle_right_00.png")
+	if species in g.Direction.ACTORS:
+		var art=g.Direction.ASSETS.get(("new."+species) if species in ["cow","bull"] else species+".idle",{})
+		return art.get("texture",null)
+	if species in g.ProgressArt.SPECIES:
+		return g.Delivered.CLIPS[g.ProgressArt.clip(species,"idle",1)].frames[0]
+	return g.Art.CLIPS["keeper/idle/right"].frames[0]
 
 static func compact_button(g,button: Button,size: int=14):
-	g.UI.button(button);button.add_theme_font_size_override("font_size",size)
+	g.UI.button(button);button.texture_filter=CanvasItem.TEXTURE_FILTER_NEAREST;button.add_theme_font_size_override("font_size",size)
 	button.focus_mode=Control.FOCUS_NONE
 	for state in ["normal","hover","pressed","disabled"]:
 		var style=button.get_theme_stylebox(state).duplicate()
@@ -76,8 +90,8 @@ static func build_roles(g):
 	var panel_height=94+list_height
 	var p=panel(g,Rect2(16,742-panel_height,640,panel_height))
 	label(p,"仕事の優先度",Vector2(14,9),19)
-	label(p,"1 最優先 → 4 最低 · 空欄は停止 · 同じ数字は左から",Vector2(14,35),13)
-	label(p,"人 / 状態",Vector2(18,59),13)
+	label(p,"1 最優先 → 4 最低 · 空欄は停止 · 同順位は距離と条件で選択",Vector2(14,35),13)
+	label(p,"人物",Vector2(18,59),13)
 	var order=g.world.Work.Policy.ORDER
 	for i in range(order.size()):label(p,g.world.Work.Policy.LABELS[order[i]],Vector2(224+i*60,59),13)
 	var scroll=ScrollContainer.new();scroll.position=Vector2(12,80);scroll.size=Vector2(616,list_height)
@@ -87,15 +101,15 @@ static func build_roles(g):
 		var line=HBoxContainer.new();line.add_theme_constant_override("separation",4);list.add_child(line)
 		var person=Button.new();person.name="Person_"+row.key;person.custom_minimum_size=Vector2(200,32)
 		person.alignment=HORIZONTAL_ALIGNMENT_LEFT;person.clip_text=true
-		person.text=row.name;person.disabled=row.key!="keeper" and not row.has("animal_id")
-		person.tooltip_text="%s · HP %d/%d\n%s\nクリックで個体を確認"%[row.name,row.hp,row.max_hp,row.state if row.state!="" else row.role]
+		person.text=row.name;person.icon=portrait(g,"keeper" if row.key=="keeper" or not row.has("animal_id") else g.world.Orders.animal(g.world,row.animal_id).species);person.expand_icon=true;person.add_theme_constant_override("icon_max_width",28);person.disabled=row.key!="keeper" and not row.has("animal_id")
+		person.tooltip_text=row.name+" · クリックで個体を確認"
 		compact_button(g,person);person.pressed.connect(person_selected.bind(g,row));line.add_child(person)
 		var a=g.world.workers.get(row.key,{})
 		for kind in order:
 			var value=int(a.get("work_priorities",{}).get(kind,0))
 			var choice=Button.new();choice.name="Priority_"+row.key+"_"+kind;choice.custom_minimum_size=Vector2(56,32)
 			choice.text=str(value) if value>0 else "";choice.disabled=a.is_empty()
-			choice.tooltip_text="%s / %s：%s\nクリックで 1 → 2 → 3 → 4 → 空欄 → 1。\n同じ数字は左の仕事から。"%[row.name,g.world.Work.Policy.LABELS[kind],str(value) if value>0 else "停止"] if not a.is_empty() else "%sは固有の支援行動を行います"%row.name
+			choice.tooltip_text="%s / %s：%s\nクリックで 1 → 2 → 3 → 4 → 空欄 → 1。\n同順位は実行条件・経路・工程・待ち時間で選択。"%[row.name,g.world.Work.Policy.LABELS[kind],str(value) if value>0 else "停止"] if not a.is_empty() else "%sは固有の支援行動を行います"%row.name
 			compact_button(g,choice,17);priority_style(choice,value);choice.pressed.connect(priority_changed.bind(g,row.key,kind));line.add_child(choice)
 
 static func build(g):
@@ -105,25 +119,50 @@ static func build(g):
 		var index=0
 		for category in Model.ARCHITECT:
 			var id="architect_category_%d"%index
-			g.add_button(g.palette,id,category,Rect2(16+index*112,area.position.y+8,104,28),architecture_category.bind(g,category))
+			g.add_button(g.palette,id,category,Rect2(16+(index%3)*128,area.position.y+8+floori(index/3.0)*32,120,28),architecture_category.bind(g,category))
 			compact_button(g,g.buttons[id]);priority_style(g.buttons[id],1 if g.architect_category==category else 0);index+=1
-		if g.architect_category!="ゾーン" and g.subtask_choices().is_empty():label(g.colony_panel,"今は使えるものがありません",Vector2(12,47),14)
+		if g.architect_category!="ゾーン" and g.subtask_choices().is_empty():label(g.colony_panel,"今は使えるものがありません",Vector2(12,81),14)
 	elif g.colony_page=="roles":build_roles(g)
-	elif g.group==1 and g.selected_animals.is_empty():
-		var animals=g.world.animals.filter(func(a):return a.get("category","")!="human")
-		var list_height=mini(190,maxi(34,animals.size()*36))
-		var panel_height=70+list_height
-		var p=panel(g,Rect2(16,742-panel_height,640,panel_height))
-		label(p,"動物　%d匹"%animals.size(),Vector2(14,9),19)
-		label(p,"個体を選んで、指示や装備を確認",Vector2(14,35),13)
-		var scroll=ScrollContainer.new();scroll.position=Vector2(12,58);scroll.size=Vector2(616,list_height)
-		scroll.horizontal_scroll_mode=ScrollContainer.SCROLL_MODE_DISABLED;p.add_child(scroll)
-		var list=VBoxContainer.new();list.add_theme_constant_override("separation",2);list.size_flags_horizontal=Control.SIZE_EXPAND_FILL;scroll.add_child(list)
-		for a in animals:
-			var button=Button.new();button.name="Animal_%d"%a.id;button.custom_minimum_size=Vector2(594,34);button.alignment=HORIZONTAL_ALIGNMENT_LEFT;button.clip_text=true
-			button.text="%s (%s) ｜ 忠誠 %d ｜ HP %d/%d ｜ %s"%[g.world.animal_name(a),"家畜" if g.world.Livestock.classification(a)=="livestock" else "ペット",g.world.Progression.loyalty(a),a.hp,a.max_hp,a.state if a.placed else "到着待ち"]
-			button.tooltip_text=button.text;compact_button(g,button);button.pressed.connect(g.choose_animal.bind(a.id));list.add_child(button)
-		if animals.is_empty():label(list,"仲間の動物はいません",Vector2.ZERO)
+	elif g.group==1:build_animals(g)
+
+static func build_animals(g):
+	var animals=g.world.animals.filter(func(a):return a.get("category","")!="human")
+	var list_height=mini(190,maxi(38,animals.size()*38));var p=panel(g,Rect2(8,651-52-list_height,636,52+list_height))
+	label(p,"動物　%d匹"%animals.size(),Vector2(12,8),18)
+	label(p,"個体・種類　　　　　区分　　　HP　　　　　管理",Vector2(16,31),12)
+	var scroll=ScrollContainer.new();scroll.name="AnimalScroll";scroll.position=Vector2(8,50);scroll.size=Vector2(620,list_height);scroll.horizontal_scroll_mode=ScrollContainer.SCROLL_MODE_DISABLED;p.add_child(scroll)
+	var list=VBoxContainer.new();list.add_theme_constant_override("separation",2);list.size_flags_horizontal=Control.SIZE_EXPAND_FILL;scroll.add_child(list)
+	for a in animals:
+		var line=HBoxContainer.new();line.add_theme_constant_override("separation",4);list.add_child(line)
+		var person=Button.new();person.name="Animal_%d"%a.id;person.text=g.world.animal_name(a);person.icon=portrait(g,a.species);person.expand_icon=true;person.add_theme_constant_override("icon_max_width",28);person.custom_minimum_size=Vector2(150,36);person.alignment=HORIZONTAL_ALIGNMENT_LEFT;person.clip_text=true;compact_button(g,person);person.pressed.connect(g.choose_animal.bind(a.id));line.add_child(person);g.UI.selected(person,a.id in g.selected_animals)
+		var species=Label.new();species.text=g.world.SPECIES[a.species].title;species.custom_minimum_size=Vector2(60,36);species.add_theme_font_size_override("font_size",12);line.add_child(species)
+		var kind=Button.new();kind.name="AnimalClass_%d"%a.id;kind.text="家畜" if g.world.Livestock.classification(a)=="livestock" else "ペット";kind.custom_minimum_size=Vector2(54,36);kind.disabled=not g.world.Livestock.MEAT.has(a.species);compact_button(g,kind,12);kind.tooltip_text="家畜/ペットを切り替え。ペットはと殺しません。";kind.pressed.connect(g.LivestockControls.change_class.bind(g,a.id));line.add_child(kind)
+		var hp=ProgressBar.new();hp.name="AnimalHP_%d"%a.id;hp.custom_minimum_size=Vector2(76,36);hp.max_value=maxi(1,a.max_hp);hp.value=maxi(0,a.hp);hp.show_percentage=false;hp.tooltip_text="HP %d / %d"%[a.hp,a.max_hp]
+		var fill=StyleBoxFlat.new();fill.bg_color=Color("bc7652") if a.hp<a.max_hp else Color("7c9b65");fill.set_corner_radius_all(3);hp.add_theme_stylebox_override("fill",fill);var back=StyleBoxFlat.new();back.bg_color=Color("d9d0b8");back.set_corner_radius_all(3);hp.add_theme_stylebox_override("background",back);line.add_child(hp)
+		for command in ["auto","stay","attack_target","train","slaughter","forbid"]:
+			var control=Button.new();control.name="AnimalCommand_%d_%s"%[a.id,command];control.custom_minimum_size=Vector2(36,36);control.icon=g.UI.icon({"auto":"paw","stay":"pause","attack_target":"staff","train":"heart","slaughter":"cross","forbid":"cross"}[command]);control.expand_icon=true;control.add_theme_constant_override("icon_max_width",18);compact_button(g,control)
+			var why=animal_reason(g,a,command);control.disabled=why!="";control.tooltip_text={"auto":"おまかせ：通常AIへ戻す","stay":"待機：その場に留まる","attack_target":"狙え：動物を選び、敵を指定","train":"調教：忠誠を高める現地仕事","slaughter":"と殺：対象1匹の現地仕事。もう一度で取消","forbid":"使用禁止/許可：動物の管理仕事を切り替え"}[command]+("\n"+why if why!="" else "")
+			control.pressed.connect(animal_action.bind(g,a.id,command));line.add_child(control)
+		if a.get("forbidden",false):line.modulate=Color("d2b4a0")
+	if animals.is_empty():label(list,"仲間の動物はいません",Vector2.ZERO)
+
+static func animal_reason(g,a,command: String) -> String:
+	if command=="forbid":return "" if g.world.Livestock.owned(g.world,a) else "所有している動物だけ変更できます"
+	if command=="train":return g.world.Tasks.training_reason(g.world,a,g.world.Tasks.job(g.world,"train",Vector2i.ZERO,a.id).get("id",-1))
+	if command=="slaughter":return g.world.Livestock.reason(g.world,a,g.world.Livestock.job(g.world,a.id).get("id",-1))
+	if command not in g.world.SPECIES[a.species].orders:return "この種類はこの指示に対応していません"
+	if not a.placed or not g.world.available(a) or a.hp<=0:return "活動できる状態を待っています"
+	if a.get("forbidden",false):return "動物の作業が禁止されています"
+	return ""
+
+static func animal_action(g,id: int,command: String):
+	if command=="forbid":g.LivestockControls.forbid(g,id)
+	elif command=="slaughter":g.LivestockControls.designate(g,id)
+	elif command=="train":g.TaskControls.task(g,"train",Vector2i.ZERO,id)
+	else:
+		g.choose_animal(id)
+		g.select_tool(command)
+
 
 static func priority_changed(g,key: String,kind: String):
 	var a=g.world.workers[key]
@@ -135,11 +174,11 @@ static func draft_changed(g,key: String):
 	g.refresh()
 
 static func signature(g) -> String:
-	if g.group==1 and not g.selected_animals.is_empty():return g.LivestockControls.signature(g)
+	if g.group==1:return str(g.world.animals.map(func(a):return [a.id,a.get("name",""),a.hp,a.placed,a.get("dead",false),a.get("husbandry_class",""),a.get("forbidden",false),a.get("last_training_day",-1),g.world.Progression.loyalty(a)]))+str(g.world.jobs.filter(func(j):return j.kind in ["train","slaughter"]).map(func(j):return [j.id,j.get("cancel_requested",false)]))
 	if g.colony_page=="roles":
 		var states=[]
 		for key in g.world.workers:
 			var a=g.world.workers[key];states.append([key,a.get("work_priorities",{}),a.get("drafted",false)])
-		return str(Model.people(g.world))+str(states)
+		return str(Model.people(g.world).map(func(row):return [row.key,row.name,row.role]))+str(states)
 	if g.group==1 and g.selected_animals.is_empty():return str(g.world.animals.map(func(a):return [a.id,a.get("name",""),a.state,a.hp,a.placed,g.world.Progression.loyalty(a)]))
 	return ""

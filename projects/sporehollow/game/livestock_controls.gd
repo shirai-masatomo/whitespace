@@ -22,7 +22,7 @@ static func designate(g,id: int):
 
 static func build(g):
 	var a=selected(g)
-	if a.is_empty() or not g.world.working() or g.field_book or g.field_shop or g.story_modal!="" or g.equipment_open:return
+	if g.group==1 or a.is_empty() or not g.world.working() or g.field_book or g.field_shop or g.story_modal!="" or g.equipment_open:return
 	var farm=g.world.Livestock;var kind=farm.classification(a)
 	if kind=="person":return
 	if a.species in g.world.Tasks.TRAIN_SPECIES:

@@ -19,30 +19,27 @@ func toggle(g,kind: String):
 	g.world.Zones.set_allowed(g.world,z.id,allowed);g.refresh()
 func build(g):
 	if not active(g) or not g.world.working() or g.field_shop or g.field_book or g.story_modal!="":return
-	var p=g.ColonyPanels.panel(g,Rect2(8,516,688,182))
-	g.ColonyPanels.label(p,"ゾーン：地面をクリック / 矩形ドラッグ。右クリックでニュートラル / Escで指定取消。",Vector2(12,8),13)
-	for entry in [["stockpile","備蓄追加",20],["residential","居住追加",130],["resize","範囲変更",240],["","指定取消",350]]:
-		g.add_button(g.palette,"zone_"+(entry[0] if entry[0]!="" else "cancel"),entry[1],Rect2(entry[2],548,104,32),select.bind(g,"zone_"+entry[0] if entry[0]!="" else ""))
-		g.UI.selected(g.buttons["zone_"+(entry[0] if entry[0]!="" else "cancel")],g.tool=="zone_"+entry[0])
-	var ids=[];var dropdown=OptionButton.new();dropdown.name="ZoneList";dropdown.position=Vector2(462,548);dropdown.size=Vector2(142,32);dropdown.focus_mode=Control.FOCUS_NONE;dropdown.add_theme_font_size_override("font_size",13);g.UI.button(dropdown);g.palette.add_child(dropdown)
+	var top=g.ColonyPanels.architect_area(g).position.y-208
+	var p=g.ColonyPanels.panel(g,Rect2(8,top,402,204))
+	g.ColonyPanels.label(p,"ゾーン · クリック / 範囲指定",Vector2(12,8),15)
+	for entry in [["stockpile","備蓄追加",0],["residential","居住追加",1],["resize","範囲変更",2],["","指定取消",3]]:
+		var id="zone_"+(entry[0] if entry[0]!="" else "cancel")
+		g.add_button(g.palette,id,entry[1],Rect2(20+int(entry[2])*96,top+36,90,32),select.bind(g,"zone_"+entry[0] if entry[0]!="" else ""));g.ColonyPanels.compact_button(g,g.buttons[id],12);g.UI.selected(g.buttons[id],g.tool=="zone_"+entry[0])
+	var ids=[];var dropdown=OptionButton.new();dropdown.name="ZoneList";dropdown.position=Vector2(20,top+76);dropdown.size=Vector2(280,30);dropdown.focus_mode=Control.FOCUS_NONE;dropdown.add_theme_font_size_override("font_size",13);g.UI.button(dropdown);g.palette.add_child(dropdown)
 	for z in g.world.zones:
-		ids.append(z.id);dropdown.add_item("%s #%d · %dマス"%["備蓄" if z.kind=="stockpile" else "居住",z.id,z.cells.size()])
+		ids.append(z.id);dropdown.add_item("%s · %dマス"%["備蓄" if z.kind=="stockpile" else "居住",z.cells.size()])
 	if selected_id not in ids:selected_id=ids[0] if not ids.is_empty() else -1
 	if not ids.is_empty():dropdown.select(ids.find(selected_id))
 	else:dropdown.add_item("ゾーン未指定");dropdown.disabled=true
 	dropdown.item_selected.connect(func(index):choose(g,index,ids))
-	g.add_button(g.palette,"zone_delete","削除",Rect2(612,548,72,32),remove.bind(g))
-	g.buttons.zone_delete.disabled=selected_id<0;g.buttons.zone_resize.disabled=selected_id<0
+	g.add_button(g.palette,"zone_delete","削除",Rect2(310,top+76,88,30),remove.bind(g));g.buttons.zone_delete.disabled=selected_id<0;g.buttons.zone_resize.disabled=selected_id<0
 	var z=g.world.Zones.find(g.world,selected_id)
 	if not z.is_empty() and z.kind=="stockpile":
-		g.ColonyPanels.label(p,"選択中の備蓄に許可する種類（色付き＝許可）",Vector2(12,76),14)
 		var index=0
 		for kind in g.world.Zones.TYPES:
-			var id="zone_type_"+kind;g.add_button(g.palette,id,g.world.Zones.TYPES[kind],Rect2(20+index*110,624,104,32),toggle.bind(g,kind));g.UI.selected(g.buttons[id],kind in z.allowed);index+=1
-		g.ColonyPanels.label(p,"40個/マス。置き先の設定だけです。物資は「命令 → 回収」で指定して運びます。",Vector2(12,152),12)
-	else:
-		g.ColonyPanels.label(p,"居住は休息場所の指定です。到達できない場合は理由を表示して現在地で休息します。",Vector2(12,90),15)
-		g.ColonyPanels.label(p,"生活や行動の制限区域ではありません。物資・建物・仕事は削除しません。",Vector2(12,121),14)
+			var id="zone_type_"+kind;g.add_button(g.palette,id,g.world.Zones.TYPES[kind],Rect2(20+(index%3)*128,top+116+floori(index/3.0)*32,120,28),toggle.bind(g,kind));g.ColonyPanels.compact_button(g,g.buttons[id],12);g.UI.selected(g.buttons[id],kind in z.allowed);index+=1
+		g.ColonyPanels.label(p,"40個/マス · 搬入は命令の「回収」で指定",Vector2(12,182),12)
+	else: g.ColonyPanels.label(p,"到達可能な居住ゾーンで休息します。\n物資や建物を移動・削除しません。",Vector2(12,120),14)
 func cell(g,point: Vector2) -> Vector2i:return Vector2i((g.get_canvas_transform().affine_inverse()*point/g.TILE).floor())
 func input(g,event) -> bool:
 	if not active(g) or not g.world.working() or g.menu_open or g.field_shop or g.field_book or g.story_modal!="" or g.cinematic():pressed=false;return false

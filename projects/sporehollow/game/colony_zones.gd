@@ -74,6 +74,7 @@ static func storage_for(w,kind: String) -> Array:
 
 static func changed(w):
 	sync_storage(w)
+	w.Stock.sync(w)
 	# Existing ownership/cargo is retained. Each haul step reselects its destination;
 	# if none remains, normal blocking releases the unused goods at the actor.
 	for j in w.jobs:

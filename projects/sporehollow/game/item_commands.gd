@@ -1,5 +1,5 @@
 extends RefCounted
-const LABELS={"haul":"回収","forbid":"禁止","allow":"禁止解除"}
+const LABELS={"haul":"回収","forbid":"禁止","allow":"許可","clear":"解除"}
 var pressed=false
 var first=Vector2i.ZERO
 var last=Vector2i.ZERO
@@ -7,15 +7,14 @@ func select(g,kind: String):
 	pressed=false;g.tool=kind;g.refresh()
 func build(g):
 	if g.group!=4 or not g.world.working() or g.field_shop or g.field_book:return
-	var p=g.ColonyPanels.panel(g,Rect2(8,655,632,88))
-	g.ColonyPanels.label(p,"現物をクリック / 矩形ドラッグで指定。右クリック・Escで解除。",Vector2(12,8),14)
+	var p=g.ColonyPanels.panel(g,Rect2(8,655,464,88))
+	g.ColonyPanels.label(p,"クリック / 範囲指定 · 右クリックで選択解除",Vector2(12,8),14)
 	var i=0
 	for kind in LABELS:
-		g.add_button(g.palette,"command_"+kind,LABELS[kind],Rect2(20+i*152,691,144,36),select.bind(g,kind))
+		g.add_button(g.palette,"command_"+kind,LABELS[kind],Rect2(20+i*112,691,104,36),select.bind(g,kind))
 		g.UI.selected(g.buttons["command_"+kind],g.tool==kind)
-		g.buttons["command_"+kind].tooltip_text="地面の物資を保管域へ運ぶ仕事を登録。重複は登録しません。" if kind=="haul" else "未消費の現物に適用。建築・食事・装備・運搬・売却の利用可否を切り替えます。"
+		g.buttons["command_"+kind].tooltip_text="地面の物資を保管域へ運ぶ仕事を登録。重複は登録しません。" if kind=="haul" else ("範囲内の取消可能な仕事を解除。建物や物資は削除しません。" if kind=="clear" else "物資の禁止/許可を変更。許可しても回収は登録しません。")
 		i+=1
-	g.add_button(g.palette,"command_clear","解除",Rect2(476,691,150,36),select.bind(g,""))
 func cell(g,point: Vector2) -> Vector2i:return Vector2i((g.get_canvas_transform().affine_inverse()*point/g.TILE).floor())
 func input(g,event) -> bool:
 	if g.group!=4 or not g.world.working() or g.menu_open or g.field_shop or g.field_book or g.story_modal!="" or g.cinematic():pressed=false;return false
@@ -36,15 +35,11 @@ func input(g,event) -> bool:
 			g.notice("%s：%d件指定 / %d件登録済み・対象外"%[LABELS[g.tool],result.accepted,result.skipped]);g.refresh();return true
 	return false
 func draw(g):
-	for row in g.world.field_items:
-		if not row.get("forbidden",false):continue
-		var q=g.center(g.world.Stock.command_pos(g.world,row))
-		g.draw_line(q+Vector2(-9,-9),q+Vector2(9,9),Color("be5044"),3);g.draw_line(q+Vector2(-9,9),q+Vector2(9,-9),Color("be5044"),3)
 	if g.group!=4 or not LABELS.has(g.tool) or g.pointer_over_ui():return
 	var from=first if pressed else cell(g,g.pointer);var to=last if pressed else from
 	var low=Vector2i(mini(from.x,to.x),mini(from.y,to.y));var high=Vector2i(maxi(from.x,to.x),maxi(from.y,to.y))
 	var area=Rect2(Vector2(low)*g.TILE,Vector2(high-low+Vector2i.ONE)*g.TILE)
 	g.draw_rect(area,Color(0.8,0.85,0.65,0.15));g.draw_rect(area,Color("f3df9e"),false,2)
-	var targets=g.world.Stock.command_targets(g.world,from,to,g.tool)
-	for row in targets:g.draw_rect(Rect2(g.center(g.world.Stock.command_pos(g.world,row))-Vector2(15,15),Vector2(30,30)),Color("ffeab4"),false,3)
+	var targets=g.world.Stock.cancel_targets(g.world,from,to) if g.tool=="clear" else g.world.Stock.command_targets(g.world,from,to,g.tool)
+	for row in targets:g.draw_rect(Rect2(g.center(row.pos if g.tool=="clear" else g.world.Stock.command_pos(g.world,row))-Vector2(15,15),Vector2(30,30)),Color("ffeab4"),false,3)
 	g.label_on(g,g.get_canvas_transform().affine_inverse()*g.pointer+Vector2(12,-12),"%s %d件"%[LABELS[g.tool],targets.size()],15,g.UI.PAPER)

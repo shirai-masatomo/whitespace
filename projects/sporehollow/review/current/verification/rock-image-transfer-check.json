@@ -1,0 +1,16 @@
+{
+  "utc": "2026-10-12T06:48:38.5930965Z",
+  "library_file_id": "libfile_4adebbc4609c8191b510b7e7b8bed118",
+  "file_id": "file_000000009814820c904c5134df2a5c48",
+  "destination": "C:\\Users\\masat\\Documents\\Codex\\2026-10-12\\task-2\\.tools\\rock-reference\\rocky-biome-concept.png",
+  "destination_exists": false,
+  "prior_transfer_reached": "apply_xattrs after download",
+  "failure": "AttributeError: module os has no attribute setxattr",
+  "scoped_directory_inspection": "No image or temporary image found in requested destination; only original helper and transfer manifest in sibling helper directory",
+  "prepare_retry_count": 1,
+  "prepare_retry_workspace_path": null,
+  "prepare_retry_result": "Signed transfer returned; no local bytes placed. Helper not rerun because Windows xattr failure is unchanged.",
+  "official_image_read_result": "image_asset_pointer and descriptive text only; no image pixels surfaced",
+  "image_visually_inspected": false,
+  "renderer_modified": false
+}

@@ -11,7 +11,7 @@ static func normalize(w):
 
 static func add(w,kind: String,amount: int,pos: Vector2i,location: String="ground",job_id: int=-1) -> Dictionary:
 	if amount<=0:return {}
-	var row={"stock_id":w.next_stock_id,"kind":kind,"amount":amount,"pos":pos,"location":location,"owner":"","job_id":job_id,"claims":{},"born_day":w.campaign.day,"incubating":false}
+	var row={"stock_id":w.next_stock_id,"kind":kind,"amount":amount,"pos":pos,"location":location,"owner":"","job_id":job_id,"claims":{},"born_day":w.campaign.day,"incubating":false,"stocked":location=="ground" and w.Zones.accepts(w,pos,kind)}
 	w.next_stock_id+=1;w.field_items.append(row);sync(w);return row
 
 static func init(w):
@@ -20,13 +20,31 @@ static func init(w):
 	normalize(w)
 	if not w.campaign.get("physical_stock",false):
 		var origin=w.logistics_entry
-		if w.campaign.get("start_near_idol",false):
-			for p in [w.keeper.pos+Vector2i.DOWN]+w.neighbors(w.keeper.pos):
-				if w.walkable(p) and not w.occupied(p) and not w.natural.has(p):origin=p;break
-		for kind in MATERIALS:add(w,kind,w.campaign.resources.get(kind,0),origin)
-		for kind in w.campaign.items:add(w,kind,w.campaign.items[kind],origin)
-		add(w,"egg",w.campaign.get("eggs",0),origin)
-		add(w,"mushroom",w.campaign.get("mushrooms",0),origin)
+		var initial=[]
+		for kind in MATERIALS:initial.append([kind,int(w.campaign.resources.get(kind,0))])
+		for kind in w.campaign.items:initial.append([kind,int(w.campaign.items[kind])])
+		initial.append(["egg",int(w.campaign.get("eggs",0))]);initial.append(["mushroom",int(w.campaign.get("mushrooms",0))])
+		if w.campaign.get("initial_stockpile",false):
+			# Put the existing first-day supply into the initial stockpile, not another pile at the entrance.
+			if int(w.campaign.get("last_supply_day",0))<w.campaign.day:
+				initial.append(["wood",8]);initial.append(["mushroom",3]);w.campaign.last_supply_day=w.campaign.day
+			var sites=[];var center=Vector2i(w.W/2-2,w.H/2+2)
+			for y in range(1,w.H-1):
+				for x in range(1,w.W-1):
+					var p=Vector2i(x,y)
+					if not w.walkable(p) or w.occupied(p) or w.natural.has(p) or w.live_structure(p) or not w.items_at(p).is_empty():continue
+					if x in [w.W/2-1,w.W/2] and y in [w.H/2-1,w.H/2]:continue
+					sites.append(p)
+			sites.sort_custom(func(a,b):return w.distance(a,center)<w.distance(b,center) if w.distance(a,center)!=w.distance(b,center) else (a.y*w.W+a.x)<(b.y*w.W+b.x))
+			for entry in initial:
+				var left=entry[1]
+				while left>0 and not sites.is_empty():
+					var p=sites.pop_front();var n=mini(left,Policy.STORAGE_CAPACITY)
+					var row=add(w,entry[0],n,p);row.stocked=true;w.storage_cells.append(p);left-=n
+				if left>0:add(w,entry[0],left,origin);w.say("初期備蓄の空きが足りません")
+			w.campaign.storage_cells=w.storage_cells.map(func(p):return [p.x,p.y]);w.campaign.erase("initial_stockpile")
+		else:
+			for entry in initial:add(w,entry[0],entry[1],origin)
 		for j in w.jobs:
 			if not w.BUILD.has(j.kind):continue
 			j.required=j.get("required",j.reserved)
@@ -35,8 +53,10 @@ static func init(w):
 	# Campaign saves release transient ownership; dedicated snapshots restore the full runtime.
 	for row in w.field_items:
 		row.claims={}
-		if row.location=="carry":row.location="ground";row.owner="";row.job_id=-1
-	w.campaign.physical_stock=true;w.Zones.init(w);sync(w)
+		if row.location=="carry":
+			row.location="ground";row.owner=""
+			if not row.get("construction_transfer",false) or not w.jobs.any(func(j):return j.id==row.job_id):row.job_id=-1;row.erase("construction_transfer")
+	w.campaign.physical_stock=true;w.Zones.init(w);migrate_storage(w);sync(w)
 
 static func free_count(row) -> int:
 	if row.get("forbidden",false):return 0
@@ -44,10 +64,22 @@ static func free_count(row) -> int:
 	for n in row.get("claims",{}).values():reserved+=n
 	return maxi(0,row.get("amount",1)-reserved)
 
+static func migrate_storage(w):
+	# Existing saves retain every position/quantity; only old rows already in storage acquire the receipt flag.
+	for row in w.field_items:
+		if not row.has("stocked"):row.stocked=row.get("location","ground")=="ground" and w.Zones.accepts(w,row.pos,row.kind)
+
+static func stored(w,row) -> bool:
+	return row.get("location","ground")=="ground" and row.get("stocked",false) and w.Zones.accepts(w,row.pos,row.kind)
+
+static func eligible(w,row,storage_only: bool=true) -> bool:
+	if row.get("location","ground")!="ground" or row.get("placed",false) or row.get("construction_transfer",false) or free_count(row)<=0:return false
+	return not storage_only or row.kind not in MATERIALS+Policy.HUMAN_FOOD or stored(w,row)
+
 static func available(w,kind: String) -> int:
 	var n=0
 	for row in w.field_items:
-		if row.kind==kind and row.get("location","ground")=="ground" and not row.get("placed",false):n+=free_count(row)
+		if row.kind==kind and eligible(w,row):n+=free_count(row)
 	return n
 
 static func sync(w):
@@ -65,7 +97,7 @@ static func consume(w,kind: String,amount: int) -> bool:
 	if available(w,kind)<amount:return false
 	var remaining=amount
 	for row in w.field_items.duplicate():
-		if row.kind!=kind or row.location!="ground" or row.get("placed",false):continue
+		if row.kind!=kind or not eligible(w,row):continue
 		var used=mini(remaining,free_count(row));row.amount-=used;remaining-=used
 		if row.amount==0:w.field_items.erase(row)
 		if remaining==0:break
@@ -81,9 +113,9 @@ static func release_token(w,token: String):
 	for row in w.field_items:row.get("claims",{}).erase(token)
 	sync(w)
 
-static func reserve(w,kind: String,amount: int,token: String,actor: Dictionary,specific: int=-1) -> Array:
+static func reserve(w,kind: String,amount: int,token: String,actor: Dictionary,specific: int=-1,storage_only: bool=true) -> Array:
 	normalize(w)
-	var rows=w.field_items.filter(func(r):return r.kind==kind and r.location=="ground" and not r.get("placed",false) and free_count(r)>0 and (specific<0 or r.stock_id==specific))
+	var rows=w.field_items.filter(func(r):return r.kind==kind and eligible(w,r,storage_only) and (specific<0 or r.stock_id==specific))
 	rows.sort_custom(func(a,b):return w.distance(actor.pos,a.pos)<w.distance(actor.pos,b.pos) if w.distance(actor.pos,a.pos)!=w.distance(actor.pos,b.pos) else a.stock_id<b.stock_id)
 	var result=[];var remaining=amount
 	for row in rows:
@@ -110,7 +142,7 @@ static func release_job(w,j):
 	for row in w.field_items:
 		if row.get("job_id",-1)!=j.id or row.get("location")!="carry":continue
 		if w.workers.has(row.owner):row.pos=w.workers[row.owner].pos
-		row.location="ground";row.owner="";row.job_id=-1
+		row.location="ground";row.owner="";row.job_id=-1;row.erase("construction_transfer")
 		if j.kind=="haul":
 			j.haul_sources=j.get("haul_sources",[j.stock_id])
 			if row.stock_id not in j.haul_sources:j.haul_sources.append(row.stock_id)
@@ -122,24 +154,10 @@ static func delivered(w,j) -> int:
 		if row.get("location")=="site" and row.job_id==j.id and row.kind==j.resource and not row.get("forbidden",false):n+=row.amount
 	return n
 
-static func prepare_build(w,j,a) -> bool:
+static func prepare_build(w,j,_a) -> bool:
 	j.physical=true
-	var required=j.get("required",w.BUILD[j.kind].cost)
-	if delivered(w,j)>=required:return true
-	var carried=cargo(w,a.work_key,j.id)
-	if not carried.is_empty():
-		j.phase="deliver"
-		if not w.Jobs.walk(w,j,w.neighbors(j.pos),a):return false
-		for row in carried:row.location="site";row.owner="";row.pos=j.pos
-		j.state="working";sync(w);return false
-	var token="job:%d"%j.id
-	if j.get("material_claims",[]).is_empty():j.material_claims=reserve(w,j.resource,mini(Policy.CARRY_CAPACITY,required-delivered(w,j)),token,a)
-	if j.material_claims.is_empty():j.state="blocked";j.block_reason="資材不足・届く場所の資材を待つ";return false
-	var row=find(w,j.material_claims[0].stock_id)
-	if row.is_empty() or row.get("forbidden",false) or row.claims.get(token,0)<=0:j.erase("material_claims");j.state="blocked";j.block_reason="予約した資材がなくなりました";return false
-	j.phase="fetch"
-	if not w.Jobs.walk(w,j,w.neighbors(row.pos),a):return false
-	pickup(w,row,token,a,j.id);j.material_claims.pop_front();j.state="working";return false
+	if delivered(w,j)>=j.get("required",w.BUILD[j.kind].cost):return true
+	j.state="pending";j.block_reason="備蓄から材料の搬入を待っています";return false
 
 static func finish_build(w,j,success: bool):
 	for row in w.field_items.duplicate():
@@ -178,7 +196,7 @@ static func haul_step(w,j,a):
 		if not w.Jobs.walk(w,j,w.neighbors(dest),a):return
 		# Sequential execution rechecks capacity here; a second worker never overfills it.
 		if storage_used(w,dest)+n>Policy.STORAGE_CAPACITY:j.state="blocked";j.block_reason="保管域が満杯です";return
-		for row in carried:row.location="ground";row.pos=dest;row.owner="";row.job_id=-1
+		for row in carried:row.location="ground";row.pos=dest;row.owner="";row.job_id=-1;row.stocked=true
 		sync(w)
 		if j.get("haul_sources",[j.stock_id]).any(func(id):return not find(w,id).is_empty()):
 			j.state="walking";j.phase="fetch"
@@ -193,7 +211,7 @@ static func haul_step(w,j,a):
 	var token="job:%d"%j.id
 	if row.claims.get(token,0)<=0:
 		if destination(w,a,mini(Policy.CARRY_CAPACITY,free_count(row)),row.kind)==null:j.state="blocked";j.block_reason="この種類を許可する備蓄を指定してください";return
-		if reserve(w,row.kind,Policy.CARRY_CAPACITY,token,a,row.stock_id).is_empty():j.state="blocked";j.block_reason="物資は別の人が使用中です";return
+		if reserve(w,row.kind,Policy.CARRY_CAPACITY,token,a,row.stock_id,false).is_empty():j.state="blocked";j.block_reason="物資は別の人が使用中です";return
 	j.phase="fetch"
 	if not w.Jobs.walk(w,j,w.neighbors(row.pos),a):return
 	pickup(w,row,token,a,j.id);j.state="working"
@@ -236,18 +254,35 @@ static func command_targets(w,first: Vector2i,last: Vector2i,kind: String) -> Ar
 		var p=command_pos(w,row)
 		if not w.inside(p) or row.kind=="chick" or row.get("placed",false):continue
 		if p.x<mini(first.x,last.x) or p.x>maxi(first.x,last.x) or p.y<mini(first.y,last.y) or p.y>maxi(first.y,last.y):continue
-		if kind=="haul" and (row.location!="ground" or row.get("forbidden",false)):continue
+		if kind=="haul" and (row.location!="ground" or row.get("forbidden",false) or row.get("construction_transfer",false) or stored(w,row)):continue
 		if kind=="forbid" and row.get("forbidden",false):continue
 		if kind=="allow" and not row.get("forbidden",false):continue
 		result.append(row)
 	return result
 
 static func enqueue_haul(w,row) -> bool:
-	if not w.working() or row.get("forbidden",false) or row.location!="ground" or row.get("placed",false) or row.kind=="chick" or w.jobs.size()>=w.Jobs.LIMIT:return false
+	if not w.working() or row.get("forbidden",false) or row.location!="ground" or row.get("placed",false) or row.get("construction_transfer",false) or stored(w,row) or row.kind=="chick" or w.jobs.size()>=w.Jobs.LIMIT:return false
 	if w.jobs.any(func(j):return j.get("stock_id",-1)==row.stock_id or row.stock_id in j.get("haul_sources",[])):return false
 	w.jobs.append({"id":w.next_job_id,"kind":"haul","pos":row.pos,"stock_id":row.stock_id,"animal_id":-1,"state":"pending","resource":"","reserved":0,"started":false,"work_category":"haul","explicit_designation":true});w.next_job_id+=1;w.Life.wake_auto(w);return true
 
+static func cancel_targets(w,first: Vector2i,last: Vector2i) -> Array:
+	var rows=[]
+	for j in w.jobs:
+		if j.get("cancel_requested",false):continue
+		var p=j.pos
+		if j.kind in ["train","slaughter"]:
+			var a=w.Orders.animal(w,j.animal_id)
+			if not a.is_empty():p=a.pos
+		if p.x>=mini(first.x,last.x) and p.x<=maxi(first.x,last.x) and p.y>=mini(first.y,last.y) and p.y<=maxi(first.y,last.y):rows.append(j)
+	return rows
+
 static func designate(w,kind: String,first: Vector2i,last: Vector2i) -> Dictionary:
+	if kind=="clear":
+		if not w.working():return {"accepted":0,"skipped":0}
+		var accepted=0;var targets=cancel_targets(w,first,last)
+		for j in targets.duplicate():
+			if w.Jobs.cancel(w,j.id):accepted+=1
+		return {"accepted":accepted,"skipped":targets.size()-accepted}
 	if kind not in ["haul","forbid","allow"] or not w.working():return {"accepted":0,"skipped":0}
 	var rows=command_targets(w,first,last,kind);var accepted=0
 	for row in rows:
@@ -281,7 +316,7 @@ static func summary(w,kind: String) -> Dictionary:
 		if row.kind!=kind:continue
 		var n=int(row.get("amount",1));var location=row.get("location","ground")
 		result.owned+=n
-		if location=="ground" and row.pos in w.storage_cells:result.stored+=n
+		if stored(w,row):result.stored+=n
 		if location=="carry":result.carried+=n
 		if location=="site":result.site+=n
 		if row.get("forbidden",false):result.forbidden+=n

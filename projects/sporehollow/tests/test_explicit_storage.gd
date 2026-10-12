@@ -10,13 +10,13 @@ func run():
 	var out=OS.get_environment("FARM_REVIEW_OUTPUT")
 	if out=="" or "--isolated-review" not in OS.get_cmdline_user_args():quit(2);return
 	var w=Farm.new({},31).begin_day();w.story.intro_seen=true;w.nature_config.spawn_chance_per_second=0
-	check(w.field_items.all(func(row):return row.location=="ground" and w.distance(row.pos,w.keeper.pos)<=1 and w.walkable(row.pos)),"New initial materials are reachable physical ground objects beside the central keeper")
+	check(w.field_items.all(func(row):return row.location=="ground" and w.Zones.accepts(w,row.pos,row.kind) and w.walkable(row.pos)),"New initial materials are physically separated in the central stockpile")
 	var before=w.field_items.duplicate(true);var total=w.Stock.totals(w);var zone=w.Zones.create(w,"stockpile",Vector2i(28,20),Vector2i(30,20));w.Zones.set_allowed(w,zone,["soil","wood","food"])
 	for i in range(8):w.step()
 	check(w.field_items==before and w.Stock.totals(w)==total and not w.jobs.any(func(j):return j.kind=="haul"),"Creating and configuring storage does not move, claim, duplicate or automatically haul goods")
 	w.Snapshot.save(w,out+"/zone.snapshot");w=w.Snapshot.restore(out+"/zone.snapshot");w.Zones.resize(w,zone,Vector2i(27,20),Vector2i(30,20));w.step()
 	check(w.field_items==before and w.Stock.totals(w)==total and w.jobs.is_empty(),"Load and zone resize preserve existing positions and ownership without creating work")
-	w.field_items.clear();w.Stock.sync(w);var source=w.keeper.pos+Vector2i.DOWN;w.Stock.add(w,"wood",8,source);w.Stock.add(w,"mushroom",2,source+Vector2i.LEFT)
+	w.field_items.clear();w.zones=w.zones.filter(func(z):return z.id==zone);w.Zones.sync_storage(w);w.Stock.sync(w);var source=w.keeper.pos+Vector2i.DOWN;w.Stock.add(w,"wood",8,source);w.Stock.add(w,"mushroom",2,source+Vector2i.LEFT)
 	var result=w.Stock.designate(w,"haul",source,source)
 	check(result.accepted==1 and w.Stock.designate(w,"haul",source,source).accepted==0,"Explicit single collection reserves one real job and duplicate request creates none")
 	for i in range(20):
@@ -33,12 +33,19 @@ func run():
 	for j in w.jobs.duplicate():w.Jobs.cancel(w,j.id)
 	w.keeper.pos=source;w.keeper.satiety=20
 	for i in range(20):w.step()
-	check(w.stock_used.get("mushroom",0)==1 and w.keeper.satiety>30,"Eating still fetches required ground food without a hauling designation")
+	check(w.stock_used.get("mushroom",0)==0,"Uncollected off-stock food is not eaten")
 	w.Stock.add(w,"wood",10,w.keeper.pos+Vector2i.RIGHT)
 	check(w.act("wood_wall",Vector2i(25,21)),"Construction can still be explicitly designated")
 	for i in range(200):
 		w.step()
 		if w.structures.get(Vector2i(25,21),{}).get("status")=="ready":break
-	check(w.structures.get(Vector2i(25,21),{}).get("status")=="ready","Construction directly fetches needed physical materials without automatic storage hauling")
+	check(w.structures.get(Vector2i(25,21),{}).get("status")!="ready","Off-stock materials cannot complete a building before collection")
+	for row in w.field_items.duplicate():
+		if row.location=="ground" and not w.Stock.stored(w,row):w.Stock.designate(w,"haul",row.pos,row.pos)
+	for i in range(300):
+		w.step()
+		if w.structures.get(Vector2i(25,21),{}).get("status")=="ready":break
+	for i in range(100):w.step()
+	check(w.structures.get(Vector2i(25,21),{}).get("status")=="ready" and w.stock_used.get("mushroom",0)>0,"After explicit collection stored materials and food are used normally")
 	FileAccess.open(out+"/explicit-storage.json",FileAccess.WRITE).store_string(JSON.stringify({"method":"One production World.step group; controlled food/build fixtures and carried-state snapshot","checks":checks,"failures":failed},"	"))
 	print("ExplicitStorage: ",failed," failures");quit(1 if failed else 0)

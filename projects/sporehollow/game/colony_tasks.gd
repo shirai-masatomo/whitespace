@@ -10,6 +10,7 @@ const KINDS=["mine","train"]
 
 static func init(w):
 	w.rocks={}
+	w.mined_rock_cells=w.campaign.get("mined_rock_cells",[]).map(func(p):return Vector2i(p[0],p[1]))
 	if w.campaign.has("mining_rocks"):
 		for saved in w.campaign.mining_rocks:
 			var row=saved.duplicate(true);var p=Vector2i(row.pos[0],row.pos[1]);row.erase("pos")
@@ -33,6 +34,7 @@ static func init(w):
 	save(w)
 
 static func save(w):
+	w.campaign.mined_rock_cells=w.mined_rock_cells.map(func(p):return [p.x,p.y])
 	w.campaign.mining_rocks=[]
 	for p in w.rocks:
 		var row=w.rocks[p].duplicate(true);row.pos=[p.x,p.y];w.campaign.mining_rocks.append(row)
@@ -111,7 +113,9 @@ static func execute(w,j,actor):
 	if j.work_elapsed<(MINE_SECONDS if j.kind=="mine" else TRAIN_SECONDS):return
 	if reason(w,j.kind,j.pos,j.animal_id,j.id)!="":j.state="blocked";j.block_reason=reason(w,j.kind,j.pos,j.animal_id,j.id);return
 	if j.kind=="mine":
-		var amount=w.rocks[j.pos].amount;w.rocks.erase(j.pos);save(w)
+		var amount=w.rocks[j.pos].amount;w.rocks.erase(j.pos)
+		if j.pos not in w.mined_rock_cells:w.mined_rock_cells.append(j.pos)
+		save(w)
 		var output=w.Stock.add(w,"stone",amount,j.pos);output.mining_job_id=j.id
 		w.PlayerEvents.add(w,"採掘完了：現地に石%d個"%amount,"mine_done:%d"%j.id)
 	else:

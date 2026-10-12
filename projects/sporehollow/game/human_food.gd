@@ -19,6 +19,11 @@ static func step(w,a) -> bool:
 	if (a.get("drafted",false) and not down) or a.get("carrier",-1)>=0 or a.hp<=0 or a.state!="free" or (a.get("danger_near",false) and not down) or w.tick<a.get("hurt_until",0) or a.get("dead",false) or a.get("lost",false) or not a.get("placed",false):interrupt(w,a);return false
 	if a.satiety>Policy.EAT_THRESHOLD and not a.has("meal_remaining") and not a.has("food_target"):return false
 	if w.tick<a.get("food_retry_at",0):return false
+	# No food available: do not repeatedly interrupt the very haul that will supply it.
+	if not down and not a.has("food_target") and w.Stock.cargo(w,a.work_key,-2).is_empty() and not w.field_items.any(func(row):return row.kind in Policy.HUMAN_FOOD and w.Stock.eligible(w,row) and not w.Jobs.path_to(w,a.pos,w.neighbors(row.pos)).is_empty()):
+		a.erase("life_need");a.food_retry_at=w.tick+ceili(Policy.RETRY_SECONDS/w.DT)
+		if not a.get("food_shortage",false):w.PlayerEvents.add(w,"備蓄へ食料を回収してください","food_shortage:"+a.work_key)
+		a.food_shortage=true;return false
 	if a.get("resting",false) and not down:
 		if a.get("rest_kind","")!="auto" and a.get("malnutrition",0.0)<=0:interrupt(w,a);return false
 		if a.get("rest_kind","")!="auto":
@@ -49,7 +54,7 @@ static func step(w,a) -> bool:
 		return true
 	var token="food:"+a.work_key
 	var target=w.Stock.find(w,a.get("food_target",-1))
-	if target.is_empty() or target.get("forbidden",false) or target.get("kind","") not in Policy.HUMAN_FOOD or target.get("claims",{}).get(token,0)<1:
+	if target.is_empty() or not w.Stock.stored(w,target) or target.get("forbidden",false) or target.get("kind","") not in Policy.HUMAN_FOOD or target.get("claims",{}).get(token,0)<1:
 		w.Stock.release_token(w,token);a.erase("food_target");target={}
 		for kind in Policy.HUMAN_FOOD:
 			var claim=w.Stock.reserve(w,kind,1,token,a)
@@ -59,26 +64,13 @@ static func step(w,a) -> bool:
 		if not target.is_empty() and w.distance(a.pos,target.pos)>1:w.Stock.release_token(w,token);a.erase("food_target");target={}
 		if target.is_empty():
 			for row in w.field_items:
-				if row.kind in Policy.HUMAN_FOOD and row.location=="ground" and not row.get("placed",false) and w.Stock.free_count(row)>0 and w.distance(a.pos,row.pos)<=1 and w.line_of_sight(a.pos,row.pos):
+				if row.kind in Policy.HUMAN_FOOD and w.Stock.eligible(w,row) and w.distance(a.pos,row.pos)<=1 and w.line_of_sight(a.pos,row.pos):
 					row.claims[token]=1;a.food_target=row.stock_id;target=row;break
 		if not target.is_empty():w.Stock.pickup(w,target,token,a,-2);return true
 		a.work_status="栄養失調・行動不能 · 手元/隣の食料を待つ";return true
 	if target.is_empty():
-		# Existing mushroom gathering supplies the first food loop; no new production system.
-		var mushrooms=w.natural.keys().filter(func(p):return w.natural[p]=="mushroom")
-		mushrooms.sort_custom(func(x,y):return w.distance(a.pos,x)<w.distance(a.pos,y))
-		for p in mushrooms:
-			var key="food_gather:%d:%d"%[p.x,p.y]
-			if w.work_claims.has(key) and w.work_claims[key]!=a.work_key:continue
-			if w.Jobs.path_to(w,a.pos,w.neighbors(p).filter(func(c):return w.walkable(c))).is_empty():continue
-			w.work_claims[key]=a.work_key
-			var task={"kind":"collect","pos":p,"state":"walking"}
-			a.work_status="空腹 · 食べられるキノコを採集"
-			if w.Jobs.walk(w,task,w.neighbors(p),a):
-				w.natural.erase(p);w.Stock.add(w,"mushroom",1,p);w.work_claims.erase(key)
-			return true
 		a.food_retry_at=w.tick+ceili(Policy.RETRY_SECONDS/w.DT);a.erase("life_need");resume_rest(w,a)
-		if not a.get("food_shortage",false):w.PlayerEvents.add(w,"届く場所に食べ物がありません。キノコの採集や入手が必要です","food_shortage:"+a.work_key)
+		if not a.get("food_shortage",false):w.PlayerEvents.add(w,"備蓄に使える食料がありません。採集後に回収して備蓄へ運んでください","food_shortage:"+a.work_key)
 		a.food_shortage=true;a.work_status="食料不足 · 仕事を続けながら再確認";return false
 	a.food_shortage=false;a.work_status="空腹 · 食べ物へ移動中"
 	var task={"kind":"collect","pos":target.pos,"state":"walking"}

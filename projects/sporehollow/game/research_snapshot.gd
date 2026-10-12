@@ -47,6 +47,7 @@ static func restore(path: String):
 	if not state.has("zones"):
 		w.campaign.storage_cells=w.storage_cells.map(func(p):return [p.x,p.y]);w.campaign.erase("zones");w.Zones.init(w)
 	w.Zones.sync_storage(w)
+	w.Stock.migrate_storage(w);w.Stock.sync(w)
 	if not state.has("rocks"):w.Tasks.init(w)
 	w.boundary_version=int(state.get("boundary_version",0))
 	w.Land.migrate(w)
