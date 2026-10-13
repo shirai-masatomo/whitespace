@@ -1836,7 +1836,9 @@ func draw_structure(p: Vector2, b: Dictionary, preview: bool = false):
 		draw_polyline(crack, Color("313d31"), 3)
 		draw_rect(Rect2(p + Vector2(-18, 19), Vector2(36.0 * b.hp / b.max_hp, 3)), Color("ebc171"))
 
+var draw_profile={}
 func _draw():
+	var profile_started=Time.get_ticks_usec()
 	StoryView.stumps(self,get_canvas_transform().affine_inverse()*get_viewport_rect())
 	for cell in world.floors:
 		var floor_data=world.floors[cell]
@@ -1904,6 +1906,8 @@ func _draw():
 		if thrower.get("archetype")=="thief" and world.tick<thrower.get("poison_visual_until",0):
 			var flight=clampf((world.tick-thrower.poison_fired)/2.0,0,1)
 			Direction.draw(self,"new.poison_projectile" if flight<1 else "new.poison_splash",center(thrower.pos).lerp(center(thrower.poison_target),flight))
+	draw_profile.before_actors=(Time.get_ticks_usec()-profile_started)/1000.0
+	var profile_actors=Time.get_ticks_usec()
 	for actor in scene_actors():
 		match actor.kind:
 			"rock": RockView.rock(self,actor.data)
@@ -1918,6 +1922,7 @@ func _draw():
 			"animal_corpse": draw_animal_corpse(actor.data)
 			"enemy": draw_enemy_actor(actor.data)
 			"keeper": draw_keeper_actor()
+	draw_profile.actors=(Time.get_ticks_usec()-profile_actors)/1000.0
 	for f in dust:
 		Delivered.draw_clip(self,"fx/"+f.kind,f.pos,visual_time-f.at)
 	HarvestView.particles(self)
@@ -1933,6 +1938,7 @@ func _draw():
 		label_on(self,get_canvas_transform().affine_inverse()*pointer+Vector2(10,-10),{"animal":"仲間","resource":"回収物","tree":"開拓","structure":"建物","floor":"床"}.get(drag_class,""),16,UI.PAPER)
 	if cinematic(): return
 	draw_pointer_preview()
+	draw_profile.total=(Time.get_ticks_usec()-profile_started)/1000.0
 
 func scene_actors() -> Array:
 	var actors=[]

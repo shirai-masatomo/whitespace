@@ -11,7 +11,7 @@ func key(code,down):
 func measure(label_name,keys:Array,zoom=1.0,drag=false):
 	g.neutral();await view(Vector2i(45,30),zoom);g.world.paused=false;g.automated=false;g.set_process(true)
 	for i in range(12):await process_frame
-	var times=[];var processing=[];var positions=[];var t=Time.get_ticks_usec();var initial=g.camera.position
+	var samples=[];var times=[];var processing=[];var positions=[];var t=Time.get_ticks_usec();var initial=g.camera.position
 	for code in keys:key(code,true)
 	if drag:
 		var e=InputEventMouseButton.new();e.position=Vector2(980,450);e.button_index=MOUSE_BUTTON_LEFT;e.pressed=true;root.push_input(e)
@@ -19,6 +19,7 @@ func measure(label_name,keys:Array,zoom=1.0,drag=false):
 		if drag:
 			var motion=InputEventMouseMotion.new();motion.position=Vector2(980-i*6,450);motion.relative=Vector2(-6,0);motion.button_mask=MOUSE_BUTTON_MASK_LEFT;root.push_input(motion)
 		await process_frame
+		samples.append(g.draw_profile.duplicate())
 		var now=Time.get_ticks_usec();times.append((now-t)/1000.0);t=now;processing.append(Performance.get_monitor(Performance.TIME_PROCESS)*1000);positions.append([g.camera.position.x,g.camera.position.y])
 	for code in keys:key(code,false)
 	if drag:
@@ -26,7 +27,7 @@ func measure(label_name,keys:Array,zoom=1.0,drag=false):
 	g.automated=true;g.set_process(false);g.world.paused=true
 	var sorted=times.duplicate();sorted.sort();var sum=0.0
 	for value in times:sum+=value
-	perf.append({"mode":label_name,"zoom":zoom,"frames":times,"positions":positions,"mean_ms":sum/times.size(),"p95_ms":sorted[int(sorted.size()*0.95)],"max_ms":sorted[-1],"engine_process_ms":processing,"distance":g.camera.position.distance_to(initial),"method":"Unpaused production _process + world ticks; real Godot input events; 30 FPS GPU cap, no OS input. Screenshot writes excluded."})
+	perf.append({"mode":label_name,"zoom":zoom,"frames":times,"positions":positions,"mean_ms":sum/times.size(),"p95_ms":sorted[int(sorted.size()*0.95)],"max_ms":sorted[-1],"draw_profile":samples,"engine_process_ms":processing,"distance":g.camera.position.distance_to(initial),"method":"Unpaused production _process + world ticks; real Godot input events; 30 FPS GPU cap, no OS input. Screenshot writes excluded."})
 	check(g.camera.position.distance_to(initial)>20,"Camera actually moved: "+label_name)
 func motion_frames():
 	g.neutral();await view(Vector2i(45,30));g.set_process(true);g.automated=false;g.world.paused=false;key(KEY_D,true)
@@ -37,6 +38,10 @@ func run():
 	out=OS.get_environment("FARM_REVIEW_OUTPUT")
 	if out=="" or "--isolated-review" not in OS.get_cmdline_user_args():quit(2);return
 	root.size=Vector2i(1280,800);root.content_scale_size=Vector2i(1280,800)
+	if OS.get_environment("FARM_MAP_PERF_ONLY")=="1":
+		var sample=Farm.new({},31).begin_day();sample.story.intro_seen=true;sample.paused=true;await scene(sample)
+		await measure("overview pan",[KEY_D],0.224)
+		FileAccess.open(out+"/camera-performance.json",FileAccess.WRITE).store_string(JSON.stringify({"series":perf},"  "));quit(0);return
 	var campaign={}
 	for seed_number in [31,73,109]:
 		var w=Farm.new({},seed_number).begin_day();w.story.intro_seen=true;w.paused=true
@@ -59,7 +64,9 @@ func run():
 		await view(edges[i]);var point=g.get_canvas_transform()*g.center(edges[i]);check(Rect2(0,49,1280,703).has_point(point),"Boundary cell remains visible: "+str(edges[i]));await shot("edge_%d"%i,"外周・四隅 "+str(edges[i]))
 	await measure("WASD horizontal",[KEY_D]);await measure("WASD diagonal",[KEY_D,KEY_S]);await measure("mouse drag",[],1.0,true);await measure("overview pan",[KEY_D],0.224);await motion_frames()
 	FileAccess.open(out+"/camera-performance.json",FileAccess.WRITE).store_string(JSON.stringify({"series":perf},"  "))
-	g.neutral();await view(Vector2i(50,34));g.select_group(4);var count=w.jobs.size()
+	g.neutral();await view(Vector2i(50,34));var origin=g.camera.position
+	g.keys_down={KEY_D:true};g._process(0.1);var straight=g.camera.position.distance_to(origin);g.camera.position=origin;g.keys_down={KEY_D:true,KEY_S:true};g._process(0.1);check(absf(g.camera.position.distance_to(origin)-straight)<0.01,"Diagonal and straight camera speed are equal");g.keys_down.clear()
+	g.select_group(4);var count=w.jobs.size()
 	for expected in ["haul","forbid","allow","clear","mine","clear_tree"]:
 		await mouse(Vector2(760,470),MOUSE_BUTTON_WHEEL_DOWN);check(g.tool==expected and w.jobs.size()==count,"Wheel selects without jobs: "+expected)
 	await mouse(Vector2(760,470),MOUSE_BUTTON_WHEEL_UP);check(g.tool=="mine","Reverse wheel")
@@ -92,14 +99,15 @@ func run():
 		for pair in [[1,Vector2i.UP],[2,Vector2i.RIGHT],[4,Vector2i.DOWN],[8,Vector2i.LEFT]]:
 			if mask&pair[0]:cells.append(p+pair[1])
 		for c in cells:
-			var kind=["wall","wood_wall","stone_wall"][mask%3]
+			var kind=["wall","wood_wall","stone_wall"][(mask+absi(c.x-p.x)+2*absi(c.y-p.y))%3]
 			if c==p+Vector2i.RIGHT and mask%2==1:kind="door"
-			var spec=w.BUILD[kind];w.structures[c]={"id":c.x+c.y*100,"kind":kind,"status":"ready","hp":spec.hp,"max_hp":spec.hp,"open":false}
+			var spec=w.BUILD[kind];w.structures[c]={"id":c.x+c.y*100,"kind":kind,"status":"ready","hp":spec.hp,"max_hp":spec.hp,"open":false,"armor":spec.get("armor",0)}
 		check(g.BuildingArt.wall_mask(g,p)==mask,"Rendered connection mask "+str(mask))
 	await view(Vector2i(49,34),0.86);await shot("walls_closed","土・木・石の16接続と閉ドア","16種類の完成壁を設置した描画fixture")
 	for b in w.structures.values():
 		if b.kind=="door":b.open=true
 	await shot("walls_open","開ドアと接続")
-	w.structures.erase(Vector2i(47,27));await shot("walls_removed","1マス撤去後の再接続")
+	w.spawn_enemy({"role":"destroyer","entry":w.entries[0],"debug_single":true});var attacker=w.enemies.back();attacker.pos=Vector2i(46,27);attacker.object_attack_power=999
+	w.move_enemy(attacker,Vector2i(47,27));check(w.structures[Vector2i(47,27)].status=="destroyed" and g.BuildingArt.wall_mask(g,Vector2i(47,26))==0,"Enemy destroys wall and adjoining rendered connection updates");await shot("walls_removed","1マス破壊後の再接続")
 	FileAccess.open(out+"/ui-survey.json",FileAccess.WRITE).store_string(JSON.stringify({"source_commit":OS.get_environment("FARM_REVIEW_COMMIT"),"shots":shots,"checks":checks},"  "))
 	var ok=checks.all(func(c):return c.passed);g.queue_free();await process_frame;quit(0 if ok else 1)

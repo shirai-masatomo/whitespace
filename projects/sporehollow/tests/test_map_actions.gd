@@ -17,8 +17,9 @@ func run():
 		if w.metrics.built==3:break
 	check(w.metrics.built==3 and w.Stock.totals(w).get("wood",0)==0 and w.stock_used.get("wood",0)==30,"Real hauling and assembly complete three structures at far corner")
 	check(not w.walkable(Vector2i(98,64)) and w.find_path(w.keeper.pos,Vector2i(99,67)).size()>0,"New outer corner routes around completed walls")
-	var b=w.structures[Vector2i(98,64)];b.hp=0
-	w.structures.erase(Vector2i(98,64));check(w.walkable(Vector2i(98,64)),"Removing a wall frees its logical cell")
+	w.spawn_enemy({"role":"destroyer","entry":w.entries[0],"debug_single":true});var e=w.enemies.back();e.pos=Vector2i(99,64);e.object_attack_power=999
+	w.move_enemy(e,Vector2i(98,64))
+	check(w.structures[Vector2i(98,64)].status=="destroyed" and w.walkable(Vector2i(98,64)),"Actual enemy attack destroys wall and frees its logical cell")
 	check(w.Zones.resize(w,z,Vector2i(93,64),Vector2i(94,65)) and w.storage_cells.size()==4,"Storage resize changes actual destination cells")
 	check(w.Zones.remove(w,z) and w.storage_cells.is_empty(),"Zone removal removes destinations only")
 	var exit=w.exit_for(Vector2i(99,34));check(exit==Vector2i(100,34) and not w.find_path(Vector2i(99,34),exit,false,false,false,{},true).is_empty(),"Retreat path permits exactly the adjacent new outer exit")

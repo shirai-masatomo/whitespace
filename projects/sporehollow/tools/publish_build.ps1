@@ -9,6 +9,12 @@ $target=Join-Path $bundle 'WhistleRanch-Autonomy-Partial.exe'
 if(Get-CimInstance Win32_Process | Where-Object {$_.ExecutablePath -eq $target}){throw 'Player game is running; no replacement or restart'}
 $fixture=Join-Path $project 'review/current/biome01/tests/legacy-fixture/legacy.snapshot'
 & (Join-Path $PSScriptRoot 'verify_cycle_entry09.ps1') -Executable $source -Fixture $fixture -OutputDirectory (Join-Path (Split-Path -Parent $source) 'lifecycle')
+$lifecycleChecks=5
+$largeFixture=Join-Path (Split-Path -Parent $source) 'large.snapshot'
+if(Test-Path -LiteralPath $largeFixture){
+    & (Join-Path $PSScriptRoot 'verify_cycle_entry09.ps1') -Executable $source -Fixture $largeFixture -OutputDirectory (Join-Path (Split-Path -Parent $source) 'lifecycle-large')
+    $lifecycleChecks+=5
+}
 if(Get-CimInstance Win32_Process | Where-Object {$_.ExecutablePath -eq $target}){throw 'Player started; replacement stopped'}
 New-Item -ItemType Directory -Force -Path $bundle | Out-Null
 $staging=Join-Path $bundle 'WhistleRanch.tmp'
@@ -18,5 +24,5 @@ try {
     if(Test-Path -LiteralPath $target){[IO.File]::Replace($staging,$target,[NullString]::Value)}else{[IO.File]::Move($staging,$target)}
 }finally{if(Test-Path -LiteralPath $staging){Remove-Item -LiteralPath $staging}}
 $art=Get-Content -LiteralPath (Join-Path $project 'game/art_provenance.json') -Raw | ConvertFrom-Json
-@{implementation_commit=$Revision;commit=$Revision;dirty=$Dirty;asset_delivery_commit=$art.latest_delivery_commit;sha256=(Get-FileHash -LiteralPath $target).Hash;utc=[DateTime]::UtcNow.ToString('o');native_lifecycle_checks=5;automatically_launched=$false;normal_data_unchanged=$true} | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $bundle 'BUILD.json') -Encoding utf8
+@{implementation_commit=$Revision;commit=$Revision;dirty=$Dirty;asset_delivery_commit=$art.latest_delivery_commit;sha256=(Get-FileHash -LiteralPath $target).Hash;utc=[DateTime]::UtcNow.ToString('o');native_lifecycle_checks=$lifecycleChecks;automatically_launched=$false;normal_data_unchanged=$true} | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $bundle 'BUILD.json') -Encoding utf8
 Write-Output "Published $Revision to the existing latest entry. No backup EXE retained; scratch output is cleaned by dev.ps1."

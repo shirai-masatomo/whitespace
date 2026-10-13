@@ -1,7 +1,7 @@
 extends Node
 ## Opt-in native entry/save proof. Only the provided isolated fixture is used.
 func summary(w):
-	return {"rocks":w.rocks,"tick":w.tick,"clock":w.calendar_ticks,"daily":w.last_daily_day,"zones":w.zones,"stock":w.field_items,"jobs":w.jobs,"claims":w.work_claims,"keeper":w.keeper,"enemies":w.enemies,"schedule":w.spawn_schedule,"incidents":w.incidents,"animals":w.animals,"campaign":w.campaign,"used":w.stock_used}
+	return {"map_size":[w.W,w.H],"terrain":w.terrain,"mountains":w.mountains,"structures":w.structures,"floors":w.floors,"rocks":w.rocks,"tick":w.tick,"clock":w.calendar_ticks,"daily":w.last_daily_day,"zones":w.zones,"stock":w.field_items,"jobs":w.jobs,"claims":w.work_claims,"keeper":w.keeper,"enemies":w.enemies,"schedule":w.spawn_schedule,"incidents":w.incidents,"animals":w.animals,"campaign":w.campaign,"used":w.stock_used}
 func run():
 	var g=get_parent();var out=OS.get_environment("FARM_REVIEW_OUTPUT");var resume="--resume-cycle-entry" in OS.get_cmdline_user_args();var checks=[]
 	if g.story_modal!="":g.StoryView.close(g)
