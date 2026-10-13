@@ -1,0 +1,26 @@
+{
+  "delivery": {
+    "implementation_commit": "64eae4d",
+    "asset_delivery_commit": "3229d2655e35e82d178577cdd8acbbe66e9be4f8",
+    "native_lifecycle_checks": 10,
+    "utc": "2026-10-13T13:38:17.0354994Z",
+    "automatically_launched": false,
+    "normal_data_unchanged": true,
+    "commit": "64eae4d",
+    "dirty": true,
+    "sha256": "16162BAFAAC57EFD2C14892AAFAE5128D36B96273BA440150819DD8C40C4AF0D"
+  },
+  "tests": [
+    {
+      "name": "merchant-first-day.json",
+      "checks": 16,
+      "failures": 0
+    },
+    {
+      "name": "negotiation.json",
+      "checks": 15,
+      "failures": 0
+    }
+  ],
+  "startup_hitch": "Unresolved in user environment; first-day merchant removal is an experiment, not a confirmed performance fix."
+}
