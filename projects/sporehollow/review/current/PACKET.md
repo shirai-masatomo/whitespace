@@ -1,14 +1,15 @@
-# 最新レビュー：マップ・操作・物流の統合修正
+# 最新レビュー：ニュートラル範囲選択・対象アクション
 
-実装 `260923924abe952f4ff2befe61831c80f8ab6e77`、ブランチ `codex/sporehollow-biome01`。
+実装・GPU・通常EXE `361075893f008c2598ce33341475f820d55582cd`。ブランチ `codex/sporehollow-biome01`。
 
-- [変更結果・仮設定・残る差](map_expansion/REPORT.md)
-- [今回の実ゲーム36画面・連続12フレーム](map_expansion/SCREENS.md)
-- [関連テスト・新旧EXE保存復帰](map_expansion/TESTS.md)
-- [試遊EXE・素材・コード対応](map_expansion/DELIVERY.json)
+- [変更結果と未対応範囲](selection_controls/REPORT.md)
+- [実ゲーム3画面](selection_controls/SCREENS.md)
+- [入力59検査](selection_controls/headless.json)
+- [GPU33検査](selection_controls/ui-survey.json)
+- [配布EXEと素材](selection_controls/DELIVERY.json)
 
-新規100×68、旧セーブ50×34維持。通常入口は確認入口/最新開発版.lnkの1本。既存セーブを読み込むと旧サイズのままです。
+ニュートラル左ドラッグは分類固定・最大8対象。徴兵中の牧場主は対象を選んで「攻撃」で確定。右クリック選択解除は確定済み命令を維持。地図移動はWASD。旧セーブ互換の追加開発なし。
 
-人間の長時間の快適さ・面白さ、多数人FPSは自動技術検証と区別。拡充ロードマップ0〜11には未着手。
+既存「最新開発版.lnk」の同じEXEへ反映済み。人間の快適さと自動入力検証を区別。拡充ロードマップ0〜11へは未着手。
 
-以前の証拠：[総合品質改善](quality/README.md)、[修正前64画面](ui_survey/README.md)、[岩山](mountains/REPORT.md)、[仕事物流引継ぎ](HANDOFF.md)。
+前回：[100×68マップ統合・36画面・連続フレーム](map_expansion/README.md)。それ以前：[総合品質](quality/README.md)、[64画面](ui_survey/README.md)、[岩山](mountains/REPORT.md)。
