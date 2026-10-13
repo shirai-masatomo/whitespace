@@ -70,7 +70,7 @@ func run():
   g.neutral();g.selected={"kind":"mountain","id":big[0].id};g.camera.position=g.center(big[0].pos+Vector2i(2,2));g.camera.zoom=Vector2.ONE*1.2;g.camera.force_update_scroll();g.refresh();await shot("18_mountain","大岩山の選択・採掘")
  await scene(fresh());w=g.world;g.neutral();g.selected={"kind":"idol","pos":w.Story.at(w)};g.refresh();await shot("19_idol","黄金像・調査")
  w.campaign.day=2;w.calendar_ticks=1728+1100;w.phase="defend";w.story.investigated=true;w.story.idol.hp-=20;g.refresh();await shot("20_prayer","夜の祈り・像の修理","2日目夜、調査済み、像HPを20減らしたfixture")
- await scene(fresh());w=g.world;w.tick=24;w.calendar_ticks=24;g.clock=8;g.arrival_started=0;g.camera.position=g.center(Farm.MERCHANT_CELL+Vector2i(2,3));g.camera.zoom=Vector2.ONE*1.3;g.camera.force_update_scroll();g.choose_walk();g.merchant_context=true;g.refresh();await shot("21_merchant","商人・吹き出し・交渉","商人来訪中の6ゲーム秒へ設定")
+ await scene(fresh());w=g.world;w.tick=24;w.calendar_ticks=24;g.clock=8;g.arrival_started=0;g.camera.position=g.center(w.MERCHANT_CELL+Vector2i(2,3));g.camera.zoom=Vector2.ONE*1.3;g.camera.force_update_scroll();g.choose_walk();g.merchant_context=true;g.refresh();await shot("21_merchant","商人・吹き出し・交渉","商人来訪中の6ゲーム秒へ設定")
  check(w.request_merchant("keeper"),"Merchant negotiation reserved")
  w.paused=false
  for i in range(400):

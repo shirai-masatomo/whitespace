@@ -141,12 +141,9 @@ static func effort(w,a,j) -> float:
 			var remaining=j.get("haul_sources",[]).map(func(id):return w.Stock.find(w,id)).filter(func(r):return not r.is_empty() and r.location=="ground" and not r.get("forbidden",false))
 			if not remaining.is_empty():row=remaining[0];j.stock_id=row.stock_id;j.pos=row.pos
 		if row.is_empty() or row.get("forbidden",false):return INF
-		var destination=w.Stock.destination(w,a,mini(Policy.CARRY_CAPACITY,w.Stock.free_count(row)),row.kind)
-		if destination==null:
-			block(w,j,"許可された備蓄が満杯か到達できません");return INF
-		# Do not repeatedly pick up dropped cargo while another resident blocks delivery.
-		if w.Jobs.path_to(w,a.pos,w.neighbors(destination),false,true).is_empty():
-			block(w,j,"備蓄への通路がふさがっています");return INF
+		var plan=w.Stock.storage_plan(w,a,mini(Policy.CARRY_CAPACITY,w.Stock.free_count(row)),row.kind,j.id)
+		if not plan.has("pos"):
+			block(w,j,plan.reason);return INF
 		position=row.pos
 	var goals=w.Mountains.job_goals(w,j) if j.has("mountain_id") else ([position] if j.kind=="move" else w.neighbors(position))
 	var route=w.Jobs.path_to(w,a.pos,goals)
@@ -243,4 +240,4 @@ static func restore(w):
 	w.keeper.dead=profile.get("dead",false);w.keeper.death_cause=profile.get("death_cause","")
 	if w.keeper.dead:w.keeper.state="dead";w.keeper.hp=0
 	for j in w.jobs:
-		j.assigned_to="";j.delivery_owner="";j.retry_at=0;j.state="pending";j.erase("material_claims")
+		j.assigned_to="";j.delivery_owner="";j.retry_at=0;j.state="pending";j.erase("material_claims");j.erase("storage_target");j.erase("storage_amount")

@@ -7,7 +7,7 @@ const ProgressData = preload("res://game/progression_data.gd")
 const Story = preload("res://game/world_story_system.gd")
 var story: Dictionary = {}
 var trees: Dictionary = {}
-const logistics_entry = Vector2i(1,5)
+var logistics_entry = Vector2i(1,5)
 const RaiderAI = preload("res://game/raider_ai.gd")
 const Arrival = preload("res://game/enemy_arrival.gd")
 const Land=preload("res://game/colony_land.gd")
@@ -17,8 +17,10 @@ const Decisions = preload("res://game/decision_ai.gd")
 const StageData = preload("res://game/stages.gd")
 const Biome=preload("res://game/biome_map.gd")
 var terrain: Dictionary = {}
-const W = 50
-const H = 34
+const NEW_WIDTH = 100
+const NEW_HEIGHT = 68
+var W = 50
+var H = 34
 const DT = 0.25
 const NEST = Vector2i(20, 12)
 const Shop = preload("res://game/shop_table.gd")
@@ -123,7 +125,7 @@ func update_merchant_order():
 			actor.action_id="idle" if actor.pos==merchant_approach else "walk"
 			actor.state="交渉の到着待ち" if actor.pos==merchant_approach else "交渉へ移動中"
 
-const MERCHANT_CELL=Vector2i(2,5)
+var MERCHANT_CELL=Vector2i(2,5)
 
 func merchant_talk_cells() -> Array:
 	# Two rows in front of the cart, clear of its wheels, merchant and drawbar.
@@ -238,13 +240,18 @@ var metrics = {"repelled": 0, "stolen": 0, "structure_damage": 0, "commands": 0.
 	"bark_casts": 0, "bark_targets": 0, "weed_spawned": 0, "mushroom_spawned": 0, "weed_collected": 0, "mushroom_collected": 0, "stump_spawned": 0, "stump_collected": 0, "nature_rolls": 0, "mushrooms_used": 0, "mushroom_healing": 0}
 
 static func new_campaign() -> Dictionary:
-	return {"biome_new_map":true,"initial_stockpile":true,"start_near_idol":true,"keeper_position":[W/2-2,H/2],"stage": 1, "day": 1, "exp_pool": 0, "night_ready": false, "gold": 40, "field_items": [], "eggs": 0, "mushrooms": preload("res://game/work_policy.gd").STARTING_FOOD, "shelter": false,
-		"fence": 0, "resources": {"soil": 100, "wood": 0, "stone": 0}, "items": {"dog_food": 2, "hen_food": 0}, "unlocked_blueprints": [], "facilities": [], "next_structure_id": 1, "animals": [{"id": 1,"position":[W/2-3,H/2], "category": "dog", "species": "shiba", "lv": 1, "xp": 0, "loyalty": 75}]}
+	return {"map_size":[NEW_WIDTH,NEW_HEIGHT],"biome_new_map":true,"initial_stockpile":true,"start_near_idol":true,"keeper_position":[NEW_WIDTH/2-2,NEW_HEIGHT/2],"stage": 1, "day": 1, "exp_pool": 0, "night_ready": false, "gold": 40, "field_items": [], "eggs": 0, "mushrooms": preload("res://game/work_policy.gd").STARTING_FOOD, "shelter": false,
+		"fence": 0, "resources": {"soil": 100, "wood": 0, "stone": 0}, "items": {"dog_food": 2, "hen_food": 0}, "unlocked_blueprints": [], "facilities": [], "next_structure_id": 1, "animals": [{"id": 1,"position":[NEW_WIDTH/2-3,NEW_HEIGHT/2], "category": "dog", "species": "shiba", "lv": 1, "xp": 0, "loyalty": 75}]}
 
 func _init(data: Dictionary = {}, seed_number: int = 17, stage_override: Dictionary = {}):
 	keeper.object_attack_power=Life.OBJECT_ATTACK
 	Combat.init_actor(keeper,true)
 	campaign = new_campaign() if data.is_empty() else data.duplicate(true)
+	# Missing dimensions identify legacy worlds; preserve their terrain and every object.
+	var size=campaign.get("map_size",[campaign.get("biome_map",{}).get("width",50),campaign.get("biome_map",{}).get("height",34)])
+	W=int(size[0]);H=int(size[1]);campaign.map_size=[W,H]
+	if W==NEW_WIDTH and H==NEW_HEIGHT:
+		logistics_entry=Vector2i(1,H/2);MERCHANT_CELL=Vector2i(2,H/2)
 	for resource in Rules.RESOURCE_TYPES:
 		if not campaign.resources.has(resource): campaign.resources[resource] = 0
 	campaign.items = campaign.get("items", {"dog_food": 2, "hen_food": 0})
@@ -420,7 +427,7 @@ func say(message: String):
 	if events.size() > 5: events.pop_front()
 
 func inside(p: Vector2i) -> bool:
-	return Land.BOUNDS.has_point(p)
+	return Rect2i(0,0,W,H).has_point(p)
 
 func walkable(p: Vector2i) -> bool:
 	return inside(p) and not Story.terrain_block(self,p) and (not blocks(p) or (structures.get(p,{}).get("kind") in Buildings.DOORS))
@@ -474,7 +481,7 @@ func find_path(start: Vector2i, goal: Vector2i, raider: bool = false, avoid_acto
 				path.push_front(p)
 			return path
 		for n in neighbors(p):
-			var exit_cell = (raider or allow_exit) and n == goal and Land.is_exit(n)
+			var exit_cell = (raider or allow_exit) and n == goal and Land.is_exit(n,W,H)
 			if not inside(n) and not exit_cell: continue
 			if Story.terrain_block(self,n): continue
 			if outdoor_only and is_indoor(n): continue
@@ -632,7 +639,7 @@ func spawn_enemy(event: Dictionary):
 	var entry: Vector2i = event.entry
 	# Spawn on a visible border cell; no off-map approach or hidden rescue corridor.
 	var origin=exit_for(entry).clamp(Vector2i.ZERO,Vector2i(W-1,H-1))
-	var border=Land.border_cells()
+	var border=Land.border_cells(W,H)
 	border.sort_custom(func(a,b):return distance(a,origin)<distance(b,origin) if distance(a,origin)!=distance(b,origin) else a.y*W+a.x<b.y*W+b.x)
 	var found=false
 	for candidate in border:
@@ -1128,7 +1135,7 @@ func step():
 		if not working(): break
 
 	if tick % 8 == 0:
-		traces.append({"tick": tick, "stamina": snappedf(animals[0].stamina, 0.1), "eggs": eggs,
+		traces.append({"tick": tick, "stamina": snappedf(animals[0].stamina, 0.1) if not animals.is_empty() else 0.0, "eggs": eggs,
 			"materials": materials, "keeper": keeper.state, "structures": structures.size()})
 	update_facing(keeper,previous_positions.keeper)
 	for a in animals: update_facing(a,previous_positions.get(a.id,a.pos))

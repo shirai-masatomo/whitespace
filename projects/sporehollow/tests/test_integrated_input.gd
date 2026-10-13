@@ -29,9 +29,9 @@ func run():
 	root.size=Vector2i(1280,800);root.content_scale_size=Vector2i(1280,800)
 	game=load("res://game/main.tscn").instantiate();game.automated=true;root.add_child(game);await process_frame;game.set_process(false)
 	game.world=Farm.new({},31).begin_day();game.world.paused=true;game.world.story.intro_seen=true;game.world.trees.clear();game.world.natural.clear();game.world.rocks.clear();game.world.jobs.clear();game.reset_view();game.neutral();await process_frame
-	var w=game.world;await mouse(at(w.field_items[0].pos))
-	check(w.jobs.is_empty() and game.buttons.collect_selection.disabled,"Initial stocked material is information-only and cannot create a pointless hauling loop")
-	game.neutral()
+	var w=game.world;var initial=w.field_items.filter(func(row):return w.Stock.stored(w,row))[0];game.camera.position=game.center(initial.pos);game.camera.force_update_scroll();await process_frame;await mouse(at(initial.pos))
+	check(w.jobs.is_empty() and game.buttons.has("collect_selection") and game.buttons.collect_selection.disabled,"Initial stocked material is information-only and cannot create a pointless hauling loop")
+	game.neutral();game.camera.position=game.center(Vector2i(22,19));game.camera.force_update_scroll();await process_frame
 	var cell=Vector2i(20,20);var first_id=w.Stock.add(w,"wood",4,cell).stock_id;await mouse(at(cell))
 	check(game.selected_resources.has(cell) and w.jobs.is_empty(),"Actual ordinary click selects material without scheduling collection")
 	check(game.buttons.has("collect_selection"),"Selected material exposes an explicit collection button")
@@ -48,7 +48,7 @@ func run():
 	await drag(at(cell),at(b));check(w.jobs.is_empty() and w.Stock.totals(w)==before,"Rectangle clear cancels pending work and keeps goods")
 	w.act("wood_tile",Vector2i(18,20));var registered=w.jobs.duplicate(true)
 	for mode in [0,1,4]:
-		game.group=mode;game.colony_page="";game.selected.clear();game.selected_resources.clear();game.selected_animals.clear();game.tool="";game.refresh();await process_frame
+		game.select_group(mode);game.colony_page="";game.selected.clear();game.selected_resources.clear();game.selected_animals.clear();game.tool="";game.refresh();await process_frame
 		var buttons=controls(game.palette);check(not buttons.is_empty(),"Panel has real input controls: "+str(mode))
 		if not buttons.is_empty():await mouse(buttons[0].get_global_rect().get_center(),MOUSE_BUTTON_RIGHT)
 		check(game.group==-1 and game.tool=="" and w.jobs==registered,"Right click over panel consumes press/release and preserves confirmed work: "+str(mode))
@@ -67,9 +67,9 @@ func run():
 		for i in range(buttons.size()):
 			for j in range(i+1,buttons.size()):overlap=overlap or buttons[i].get_global_rect().intersects(buttons[j].get_global_rect())
 		check(not overlap and buttons.all(func(button):return button.get_global_rect().end.y<=742),"Architect category/tool controls do not overlap or exceed footer: "+str(resolution))
-		game.group=1;game.selected_animals.clear();game.refresh();await process_frame
+		game.select_group(1);game.selected_animals.clear();game.refresh();await process_frame
 		var hp=game.colony_panel.find_child("AnimalHP_1",true,false);var icon=game.colony_panel.find_child("Animal_1",true,false)
 		check(hp is ProgressBar and hp.max_value==w.animals[0].max_hp and icon.icon!=null,"Animal table has real HP bar and adopted icon: "+str(resolution))
-		var kill=game.colony_panel.find_child("AnimalCommand_1_slaughter",true,false);check(kill!=null and kill.disabled and kill.tooltip_text!="","Pet slaughter is disabled with a disclosed reason")
+		var instructions=game.colony_panel.find_child("AnimalInstructions_1",true,false);check(instructions!=null,"Animal list shares the instruction entry, not duplicated orders")
 	FileAccess.open(out+"/integrated-input.json",FileAccess.WRITE).store_string(JSON.stringify({"method":"Real Godot InputEvent routes and Control layout on headless viewport; no GPU images or OS input claim","checks":checks,"failures":failed},"\t"))
 	game.queue_free();await process_frame;print("IntegratedInput: ",checks.size()," checks, ",failed," failures");quit(1 if failed else 0)

@@ -111,17 +111,18 @@ static func cache_ground(w):
 				# Scatter only: connected rock/gravel edges retain exact tile anchors.
 				if layers[0]=="biome_environment_v2/rock_ground/pebbly_soil.png":
 					ground_offsets[p]=Vector2(floori(w.Biome.unit(w.terrain.seed,x,y,181)*17)-8,floori(w.Biome.unit(w.terrain.seed,x,y,191)*13)-6)
-static func ground(g):
+static func ground(g,region: Rect2=Rect2()):
 	var w=g.world;cache_ground(w)
 	var visible=Rect2(Vector2.ZERO,Vector2(w.W,w.H)*g.TILE)
-	if g.has_method("get_canvas_transform"):visible=g.get_canvas_transform().affine_inverse()*g.get_viewport_rect()
-	for y in range(maxi(0,floori(visible.position.y/g.TILE.y)-1),mini(w.H,ceili(visible.end.y/g.TILE.y)+1)):
-		for x in range(maxi(0,floori(visible.position.x/g.TILE.x)-1),mini(w.W,ceili(visible.end.x/g.TILE.x)+1)):
+	if region.has_area():visible=region
+	elif g.has_method("get_canvas_transform"):visible=g.get_canvas_transform().affine_inverse()*g.get_viewport_rect()
+	for y in range(maxi(0,floori(visible.position.y/g.TILE.y)-(0 if region.has_area() else 1)),mini(w.H,ceili(visible.end.y/g.TILE.y)+(0 if region.has_area() else 1))):
+		for x in range(maxi(0,floori(visible.position.x/g.TILE.x)-(0 if region.has_area() else 1)),mini(w.W,ceili(visible.end.x/g.TILE.x)+(0 if region.has_area() else 1))):
 			var p=Vector2i(x,y)
 			if w.floors.has(p) or w.live_structure(p):continue
 			for key in ground_kinds.get(p,[]):Art.paint(g,key,g.center(p)+ground_offsets.get(p,Vector2.ZERO))
 	for p in w.mined_rock_cells:
-		if w.floors.has(p) or w.live_structure(p) or not visible.grow(54).has_point(g.center(p)):continue
+		if w.floors.has(p) or w.live_structure(p) or not visible.grow(0 if region.has_area() else 54).has_point(g.center(p)):continue
 		Art.paint(g,"biome_environment_v2/rock_mined/exposed_bedrock.png",g.center(p))
 		Art.paint(g,"biome_environment_v2/rock_mined/shallow_scoop.png",g.center(p))
 		# Low, non-resource scatter persists after the short collapse animation.

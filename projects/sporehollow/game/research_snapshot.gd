@@ -36,6 +36,8 @@ static func restore(path: String):
 	var payload=file.get_var(false);file.close()
 	if not payload is Dictionary or payload.get("version",-1)!=VERSION:return null
 	var state=unpack(payload.state)
+	var size=state.campaign.get("map_size",[state.get("terrain",{}).get("width",50),state.get("terrain",{}).get("height",34)])
+	state.campaign.map_size=size
 	var w=load("res://game/world.gd").new(state.campaign,int(state.seed_value))
 	for key in state:w.set(key,state[key])
 	# Full snapshots overwrite constructor defaults. Upgrade scenery metadata

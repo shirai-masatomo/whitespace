@@ -19,7 +19,7 @@ static func build(g):
 		var r=g.world.mountains.get(g.selected.id,{})
 		if r.is_empty():return
 		var panel=g.ColonyPanels.panel(g,Rect2(376,569,608,120));var j=g.world.Tasks.job(g.world,"mine",r.pos)
-		g.ColonyPanels.label(panel,("大岩山" if r.kind=="large" else "小岩山")+"  残り石材 %d / %d  %s"%[r.remaining,g.world.Mountains.CONFIG[r.kind].amount,"採掘済み" if r.remaining<=0 else "段階 %d"%(r.stage+1)],Vector2(12,8),16)
+		g.ColonyPanels.label(panel,("大岩山" if r.kind=="large" else "小岩山")+"  残り石材 %d / %d  %s"%[r.remaining,g.world.Mountains.CONFIG[r.kind].amount,"採掘済み" if r.remaining<=0 else "採掘 %.0f%%"%(100.0*r.elapsed/g.world.Mountains.CONFIG[r.kind].seconds)],Vector2(12,8),16)
 		g.add_button(g.palette,"mine","採掘を取り消す" if not j.is_empty() else "採掘を予約",Rect2(388,604,224,34),task.bind(g,"mine",r.pos))
 		g.buttons.mine.disabled=j.is_empty() and (r.remaining<=0 or r.forbidden)
 		g.add_button(g.palette,"mine_forbid","禁止を解除" if r.forbidden else "採掘を禁止",Rect2(626,604,224,34),forbid.bind(g,r.pos))
@@ -53,12 +53,18 @@ static func build(g):
 		g.buttons.keeper_equip.tooltip_text="装備作業を予約中" if pending else "現物まで移動して装備します。徴兵中は変更できません。"
 static func draw(g):
 	for r in g.world.mountains.values():
-		for p in g.world.Mountains.footprint(r):
-			if g.selected.get("kind")=="mountain" and typeof(g.selected.get("id"))==TYPE_STRING and g.selected.id==r.id:g.draw_rect(Rect2(g.center(p)-Vector2(24,21),Vector2(48,42)),g.UI.GOLD,false,1)
+		var selected=g.selected.get("kind")=="mountain" and typeof(g.selected.get("id"))==TYPE_STRING and g.selected.id==r.id
+		var planned=g.world.jobs.any(func(j):return j.get("mountain_id","")==r.id)
+		if selected or planned:
+			var cells=g.world.Mountains.footprint(r)
+			if not cells.is_empty():
+				var bounds=Rect2(Vector2(cells[0])*g.TILE,g.TILE)
+				for p in cells:bounds=bounds.merge(Rect2(Vector2(p)*g.TILE,g.TILE))
+				g.draw_rect(bounds,g.UI.GOLD if selected else Color("dcb18e"),false,3 if selected else 1)
 		if r.forbidden:g.label_on(g,g.center(r.pos),"×",18,g.UI.DANGER)
 	for p in g.world.rocks:
 		var c=g.center(p)
 		if g.world.rocks[p].get("forbidden",false):g.draw_line(c-Vector2(11,11),c+Vector2(11,11),g.UI.DANGER,3)
 		if g.selected.get("kind")=="rock" and g.selected.pos==p:g.draw_rect(Rect2(c-Vector2(22,20),Vector2(44,40)),g.UI.GOLD,false,2)
 static func signature(g) -> String:
-	return str([g.selected,g.world.keeper.get("equipment",{}),g.world.keeper.get("drafted",false),g.world.Stock.available(g.world,"wood_staff"),g.world.rocks,g.world.mountains.values().map(func(r):return [r.id,r.stage,r.remaining,r.forbidden]),g.world.jobs.map(func(j):return [j.id,j.kind,j.state])])
+	return str([g.selected,g.world.keeper.get("equipment",{}),g.world.keeper.get("drafted",false),g.world.Stock.available(g.world,"wood_staff"),g.world.rocks,g.world.mountains.values().map(func(r):return [r.id,r.stage,r.remaining,r.forbidden,int(r.elapsed)]),g.world.jobs.map(func(j):return [j.id,j.kind,j.state])])

@@ -103,7 +103,7 @@ static func build_roles(g):
 		var line=HBoxContainer.new();line.add_theme_constant_override("separation",4);list.add_child(line)
 		var person=Button.new();person.name="Person_"+row.key;person.custom_minimum_size=Vector2(200,32)
 		person.alignment=HORIZONTAL_ALIGNMENT_LEFT;person.clip_text=true
-		person.text=row.name;person.icon=portrait(g,"keeper" if row.key=="keeper" or not row.has("animal_id") else g.world.Orders.animal(g.world,row.animal_id).species);person.expand_icon=true;person.add_theme_constant_override("icon_max_width",28);person.disabled=not g.world.workers.has(row.key) and not row.has("animal_id")
+		person.text=row.name;person.icon=portrait(g,"keeper" if row.key=="keeper" or not row.has("animal_id") else g.world.Orders.animal(g.world,row.animal_id).species);person.expand_icon=true;person.add_theme_constant_override("icon_max_width",22);person.disabled=not g.world.workers.has(row.key) and not row.has("animal_id")
 		person.tooltip_text=row.name+" · クリックで個体を確認"
 		compact_button(g,person);person.pressed.connect(person_selected.bind(g,row));line.add_child(person)
 		var a=g.world.workers.get(row.key,{})
@@ -125,26 +125,23 @@ static func build(g):
 			compact_button(g,g.buttons[id]);priority_style(g.buttons[id],1 if g.architect_category==category else 0);index+=1
 		if g.architect_category!="ゾーン" and g.subtask_choices().is_empty():label(g.colony_panel,"今は使えるものがありません",Vector2(12,81),14)
 	elif g.colony_page=="roles":build_roles(g)
-	elif g.group==1:build_animals(g)
+	elif g.group==1 and g.animal_list_open:build_animals(g)
 
 static func build_animals(g):
 	var animals=g.world.animals.filter(func(a):return a.get("category","")!="human")
-	var list_height=mini(196,maxi(48,animals.size()*48));var p=panel(g,Rect2(8,556-56-list_height,536,56+list_height))
+	var list_height=mini(160,maxi(34,animals.size()*34));var p=panel(g,Rect2(8,556-56-list_height,410,56+list_height))
 	label(p,"動物　%d匹"%animals.size(),Vector2(12,8),18)
-	for header in [["名前",16],["種類",148],["区分",194],["HP",246],["管理",304]]:label(p,header[0],Vector2(header[1],31),12)
-	var scroll=ScrollContainer.new();scroll.name="AnimalScroll";scroll.position=Vector2(8,50);scroll.size=Vector2(520,list_height);scroll.horizontal_scroll_mode=ScrollContainer.SCROLL_MODE_DISABLED;p.add_child(scroll)
+	for header in [["名前",16],["種類",126],["区分",172],["HP",224],["指示",286]]:label(p,header[0],Vector2(header[1],31),12)
+	var scroll=ScrollContainer.new();scroll.name="AnimalScroll";scroll.position=Vector2(8,50);scroll.size=Vector2(394,list_height);scroll.horizontal_scroll_mode=ScrollContainer.SCROLL_MODE_DISABLED;p.add_child(scroll)
 	var list=VBoxContainer.new();list.add_theme_constant_override("separation",4);list.size_flags_horizontal=Control.SIZE_EXPAND_FILL;scroll.add_child(list)
 	for a in animals:
-		var line=HBoxContainer.new();line.custom_minimum_size.y=44;line.add_theme_constant_override("separation",4);list.add_child(line)
-		var person=Button.new();person.name="Animal_%d"%a.id;person.text=g.world.animal_name(a);person.icon=portrait(g,a.species);person.expand_icon=true;person.add_theme_constant_override("icon_max_width",28);person.custom_minimum_size=Vector2(128,36);person.alignment=HORIZONTAL_ALIGNMENT_LEFT;person.clip_text=true;person.tooltip_text=g.world.animal_name(a);compact_button(g,person);person.pressed.connect(g.choose_animal.bind(a.id));line.add_child(person);g.UI.selected(person,a.id in g.selected_animals)
-		var species=Label.new();species.text=g.world.SPECIES[a.species].title;species.clip_text=true;species.tooltip_text=species.text;species.custom_minimum_size=Vector2(42,36);species.add_theme_font_size_override("font_size",12);species.add_theme_color_override("font_color",g.UI.INK);line.add_child(species)
-		var kind=Button.new();kind.name="AnimalClass_%d"%a.id;kind.text="家畜" if g.world.Livestock.classification(a)=="livestock" else "ペット";kind.custom_minimum_size=Vector2(48,36);kind.disabled=not g.world.Livestock.MEAT.has(a.species);compact_button(g,kind,12);kind.tooltip_text="家畜/ペットを切り替え。ペットはと殺しません。";kind.pressed.connect(g.LivestockControls.change_class.bind(g,a.id));line.add_child(kind)
+		var line=HBoxContainer.new();line.custom_minimum_size.y=30;line.add_theme_constant_override("separation",4);list.add_child(line)
+		var person=Button.new();person.name="Animal_%d"%a.id;person.text=g.world.animal_name(a);person.icon=portrait(g,a.species);person.expand_icon=true;person.add_theme_constant_override("icon_max_width",22);person.custom_minimum_size=Vector2(112,28);person.alignment=HORIZONTAL_ALIGNMENT_LEFT;person.clip_text=true;person.tooltip_text=g.world.animal_name(a);compact_button(g,person);person.pressed.connect(g.choose_animal.bind(a.id));line.add_child(person);g.UI.selected(person,a.id in g.selected_animals)
+		var species=Label.new();species.text=g.world.SPECIES[a.species].title;species.clip_text=true;species.tooltip_text=species.text;species.custom_minimum_size=Vector2(42,28);species.add_theme_font_size_override("font_size",12);species.add_theme_color_override("font_color",g.UI.INK);line.add_child(species)
+		var kind=Button.new();kind.name="AnimalClass_%d"%a.id;kind.text="家畜" if g.world.Livestock.classification(a)=="livestock" else "ペット";kind.custom_minimum_size=Vector2(48,28);kind.disabled=not g.world.Livestock.MEAT.has(a.species);compact_button(g,kind,12);kind.tooltip_text="家畜/ペットを切り替え。ペットはと殺しません。";kind.pressed.connect(g.LivestockControls.change_class.bind(g,a.id));line.add_child(kind)
 		var hp=ProgressBar.new();hp.name="AnimalHP_%d"%a.id;hp.custom_minimum_size=Vector2(54,10);hp.size_flags_vertical=Control.SIZE_SHRINK_CENTER;hp.max_value=maxi(1,a.max_hp);hp.value=maxi(0,a.hp);hp.show_percentage=false;hp.tooltip_text="HP %d / %d"%[a.hp,a.max_hp]
 		var fill=StyleBoxFlat.new();fill.bg_color=Color("bc7652") if a.hp<a.max_hp else Color("7c9b65");fill.set_corner_radius_all(3);hp.add_theme_stylebox_override("fill",fill);var back=StyleBoxFlat.new();back.bg_color=Color("d9d0b8");back.set_corner_radius_all(3);hp.add_theme_stylebox_override("background",back);line.add_child(hp)
-		for command in ["auto","stay","attack_target","train","slaughter","forbid"]:
-			var control=Button.new();control.name="AnimalCommand_%d_%s"%[a.id,command];control.custom_minimum_size=Vector2(32,36);control.icon=g.UI.icon({"auto":"paw","stay":"pause","attack_target":"staff","train":"heart","slaughter":"cross","forbid":"cross"}[command]);control.expand_icon=true;control.add_theme_constant_override("icon_max_width",18);control.add_theme_font_size_override("font_size",12);compact_button(g,control,12)
-			var why=animal_reason(g,a,command);control.disabled=why!="";control.tooltip_text={"auto":"おまかせ：通常AIへ戻す","stay":"待機：その場に留まる","attack_target":"狙え：動物を選び、敵を指定","train":"調教：忠誠を高める現地仕事","slaughter":"と殺：対象1匹の現地仕事。もう一度で取消","forbid":"使用禁止/許可：動物の管理仕事を切り替え"}[command]+("\n"+why if why!="" else "")
-			control.pressed.connect(animal_action.bind(g,a.id,command));line.add_child(control)
+		var control=Button.new();control.name="AnimalInstructions_%d"%a.id;control.text="指示";control.custom_minimum_size=Vector2(68,28);compact_button(g,control,13);control.pressed.connect(g.open_animal_commands.bind(a.id));line.add_child(control)
 		if a.get("forbidden",false):line.modulate=Color("d2b4a0")
 	if animals.is_empty():label(list,"仲間の動物はいません",Vector2.ZERO)
 
@@ -184,3 +181,23 @@ static func signature(g) -> String:
 		return str(Model.people(g.world).map(func(row):return [row.key,row.name,row.role]))+str(states)
 	if g.group==1 and g.selected_animals.is_empty():return str(g.world.animals.map(func(a):return [a.id,a.get("name",""),a.state,a.hp,a.placed,g.world.Progression.loyalty(a)]))
 	return ""
+
+static func build_animal_commands(g):
+	if not g.animal_commands_open or g.selected.get("kind")!="animal":return
+	var a=g.world.Orders.animal(g.world,g.selected.id)
+	if a.is_empty():return
+	var choices=g.subtask_choices()
+	for command in ["train","slaughter","forbid"]:
+		if command=="train" and a.species not in g.world.Tasks.TRAIN_SPECIES:continue
+		if command=="slaughter" and not g.world.Livestock.MEAT.has(a.species):continue
+		choices.append(command)
+	for i in range(choices.size()):
+		var id=choices[i];var text=g.TOOLS.get(id,{"train":"調教","slaughter":"と殺","forbid":"許可" if a.get("forbidden",false) else "禁止"}.get(id,id))
+		var callback=animal_action.bind(g,a.id,id) if id in ["train","slaughter","forbid"] else g.select_tool.bind(id)
+		g.add_button(g.palette,id,text,Rect2(16+(i%5)*90,660+floori(i/5.0)*38,84,34),callback)
+		compact_button(g,g.buttons[id],13)
+		var why=animal_reason(g,a,id) if id not in ["equip","milk"] else ""
+		if id=="equip" and a.get("forbidden",false):why="動物の作業が禁止されています"
+		g.buttons[id].disabled=why!="";g.buttons[id].tooltip_text=why if why!="" else g.ORDER_HELP.get(id,text+"：選択した個体に適用")
+		g.UI.selected(g.buttons[id],g.tool==id)
+	if g.equipment_open:g.ProgressView.equipment_buttons(g)

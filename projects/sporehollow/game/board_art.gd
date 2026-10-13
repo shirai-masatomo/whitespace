@@ -73,3 +73,12 @@ static func icon(kind: String) -> Texture2D:
 		for x in range(2, 18):
 			img.set_pixel(x, y, (Color("98ac6d") if y < 8 else Color("a47b4e")) if kind == "soil" else Color("c6a277"))
 	return ImageTexture.create_from_image(img)
+
+# Static eight-cell chunks retain these draw commands until occupancy changes.
+static func draw_region(c: CanvasItem,world,tile: Vector2,box: Rect2i):
+	cache_ground(world,tile)
+	for y in range(box.position.y,box.end.y):
+		for x in range(box.position.x,box.end.x):
+			var row=ground_cells[y*world.W+x];var cell=Vector2i(x,y)
+			c.draw_polygon(row.points,row.colors)
+			if row.decor!="" and not world.floors.has(cell) and not world.live_structure(cell) and not world.rocks.has(cell) and not world.natural.has(cell):Ground.paint(c,row.decor,(Vector2(cell)+Vector2(0.5,0.5))*tile+row.offset,0.8)

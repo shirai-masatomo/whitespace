@@ -138,6 +138,7 @@ static func cargo(w,key: String,job_id: int=-999) -> Array:
 	return w.field_items.filter(func(r):return r.get("location")=="carry" and r.owner==key and (job_id==-999 or r.job_id==job_id))
 
 static func release_job(w,j):
+	j.erase("storage_target");j.erase("storage_amount")
 	release_token(w,"job:%d"%j.id)
 	for row in w.field_items:
 		if row.get("job_id",-1)!=j.id or row.get("location")!="carry":continue
@@ -177,41 +178,68 @@ static func storage_used(w,pos: Vector2i) -> int:
 		if row.get("location","ground")=="ground" and row.pos==pos:n+=row.get("amount",1)
 	return n
 
-static func destination(w,a,amount: int,kind: String="") -> Variant:
-	var eligible=w.Zones.storage_for(w,kind) if kind!="" and not w.zones.is_empty() else w.storage_cells
-	var cells=eligible.filter(func(p):return w.walkable(p) and storage_used(w,p)+amount<=Policy.STORAGE_CAPACITY)
-	cells.sort_custom(func(x,y):return w.distance(a.pos,x)<w.distance(a.pos,y))
+static func storage_free(w,pos: Vector2i,except_job: int=-1) -> int:
+	var reserved=0
+	for j in w.jobs:
+		if j.id!=except_job and j.get("storage_target")==pos:reserved+=int(j.get("storage_amount",0))
+	return maxi(0,Policy.STORAGE_CAPACITY-storage_used(w,pos)-reserved)
+
+static func storage_plan(w,a,amount: int,kind: String,job_id: int=-1) -> Dictionary:
+	var eligible=w.Zones.storage_for(w,kind) if not w.zones.is_empty() else w.storage_cells
+	if eligible.is_empty():return {"reason":"この物資を受け入れる備蓄がありません"}
+	var cells=eligible.filter(func(p):return w.walkable(p) and storage_free(w,p,job_id)>0)
+	if cells.is_empty():return {"reason":"備蓄が満杯です"}
+	var same={}
+	for row in w.field_items:
+		if row.kind==kind and stored(w,row):same[row.pos]=true
+	var old=null
+	for j in w.jobs:
+		if j.id==job_id:old=j.get("storage_target")
+	cells.sort_custom(func(x,y):return x==old if x==old or y==old else (same.has(x) if same.has(x)!=same.has(y) else (w.distance(a.pos,x)<w.distance(a.pos,y) if w.distance(a.pos,x)!=w.distance(a.pos,y) else x.y*w.W+x.x<y.y*w.W+y.x)))
 	for p in cells:
-		if not w.Jobs.path_to(w,a.pos,w.neighbors(p).filter(func(c):return w.walkable(c))).is_empty():return p
-	return null
+		var goals=w.neighbors(p)+([p] if a.pos==p else [])
+		if not w.Jobs.path_to(w,a.pos,goals,false,true).is_empty():return {"pos":p,"amount":mini(amount,storage_free(w,p,job_id)),"reason":""}
+	return {"reason":"備蓄への通路がふさがっています"}
+
+static func destination(w,a,amount: int,kind: String="") -> Variant:
+	return storage_plan(w,a,amount,kind).get("pos")
 
 static func haul_step(w,j,a):
 	var carried=cargo(w,a.work_key,j.id)
 	if not carried.is_empty():
 		var n=0
 		for row in carried:n+=row.amount
-		var dest=destination(w,a,n,carried[0].kind)
-		if dest==null:j.state="blocked";j.block_reason="許可された備蓄が満杯か到達できません";return
-		j.phase="deliver"
-		if not w.Jobs.walk(w,j,w.neighbors(dest),a):return
-		# Sequential execution rechecks capacity here; a second worker never overfills it.
-		if storage_used(w,dest)+n>Policy.STORAGE_CAPACITY:j.state="blocked";j.block_reason="保管域が満杯です";return
-		for row in carried:row.location="ground";row.pos=dest;row.owner="";row.job_id=-1;row.stocked=true
-		sync(w)
-		if j.get("haul_sources",[j.stock_id]).any(func(id):return not find(w,id).is_empty()):
-			j.state="walking";j.phase="fetch"
+		var plan=storage_plan(w,a,n,carried[0].kind,j.id)
+		if not plan.has("pos"):j.state="blocked";j.block_reason=plan.reason;return
+		var dest=plan.pos;j.storage_target=dest;j.storage_amount=plan.amount;j.phase="deliver"
+		if not w.Jobs.walk(w,j,w.neighbors(dest)+([dest] if a.pos==dest else []),a):return
+		var left=mini(n,storage_free(w,dest,j.id))
+		if left<=0:j.state="blocked";j.block_reason="備蓄が満杯です";return
+		for row in carried:
+			var count=mini(left,row.amount)
+			if count<=0:break
+			if count==row.amount:row.location="ground";row.pos=dest;row.owner="";row.job_id=-1;row.stocked=true
+			else:row.amount-=count;add(w,row.kind,count,dest).stocked=true
+			left-=count
+		j.erase("storage_target");j.erase("storage_amount");sync(w)
+		if not cargo(w,a.work_key,j.id).is_empty():return
+		if j.get("haul_sources",[j.stock_id]).any(func(id):return not find(w,id).is_empty() and not stored(w,find(w,id))):j.state="walking";j.phase="fetch"
 		else:w.Jobs.complete(w,j,true)
 		return
-	var sources=j.get("haul_sources",[j.stock_id]).map(func(id):return find(w,id)).filter(func(row):return not row.is_empty())
+	var sources=j.get("haul_sources",[j.stock_id]).map(func(id):return find(w,id)).filter(func(row):return not row.is_empty() and not stored(w,row))
 	var eligible=sources.filter(func(row):return not row.get("forbidden",false) and row.get("location")=="ground" and free_count(row)>0)
 	var row=eligible[0] if not eligible.is_empty() else (sources[0] if not sources.is_empty() else {})
-	if not row.is_empty():j.stock_id=row.stock_id;j.pos=row.pos
 	if row.is_empty() or row.kind=="chick":w.Jobs.complete(w,j,false);return
+	j.stock_id=row.stock_id;j.pos=row.pos
 	if row.get("forbidden",false):j.state="blocked";j.block_reason="対象の物資は禁止中です";return
 	var token="job:%d"%j.id
-	if row.claims.get(token,0)<=0:
-		if destination(w,a,mini(Policy.CARRY_CAPACITY,free_count(row)),row.kind)==null:j.state="blocked";j.block_reason="この種類を許可する備蓄を指定してください";return
-		if reserve(w,row.kind,Policy.CARRY_CAPACITY,token,a,row.stock_id,false).is_empty():j.state="blocked";j.block_reason="物資は別の人が使用中です";return
+	var requested=mini(Policy.CARRY_CAPACITY,free_count(row)+int(row.claims.get(token,0)))
+	var plan=storage_plan(w,a,requested,row.kind,j.id)
+	if not plan.has("pos") or plan.amount<=0:j.state="blocked";j.block_reason=plan.get("reason","物資は別の人が使用中です");return
+	j.storage_target=plan.pos;j.storage_amount=plan.amount
+	if row.claims.get(token,0)!=plan.amount:
+		release_token(w,token)
+		if reserve(w,row.kind,plan.amount,token,a,row.stock_id,false).is_empty():j.erase("storage_target");j.erase("storage_amount");j.state="blocked";j.block_reason="物資は別の人が使用中です";return
 	j.phase="fetch"
 	if not w.Jobs.walk(w,j,w.neighbors(row.pos)+([row.pos] if a.pos==row.pos else []),a):return
 	pickup(w,row,token,a,j.id);j.state="working"

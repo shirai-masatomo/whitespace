@@ -52,7 +52,7 @@ static func init(w):
 				records.append({"id":"tree-%d-%d"%[x,y],"position":[x,y]})
 		w.story.trees=records
 	for tree in w.story.get("trees",[]):
-		if tree.id not in w.story.cleared and not preload("res://game/forest_pattern.gd").merchant_clearing(cell(tree.position)): w.trees[cell(tree.position)]=tree.id
+		if tree.id not in w.story.cleared and w.distance(cell(tree.position),w.MERCHANT_CELL)>4: w.trees[cell(tree.position)]=tree.id
 	morning(w,w.campaign.day)
 	persist(w)
 
@@ -61,8 +61,8 @@ static func persist(w):
 
 static func entries(w) -> Array:
 	var result=[]
-	for y in [5,8,11]: result.append(Vector2i(1,y)); result.append(Vector2i(w.W-2,y))
-	for x in [5,12,19]: result.append(Vector2i(x,1)); result.append(Vector2i(x,w.H-2))
+	for y in [w.H/4,w.H/2,w.H*3/4]: result.append(Vector2i(1,y)); result.append(Vector2i(w.W-2,y))
+	for x in [w.W/4,w.W/2,w.W*3/4]: result.append(Vector2i(x,1)); result.append(Vector2i(x,w.H-2))
 	return result
 
 static func schedule(w):

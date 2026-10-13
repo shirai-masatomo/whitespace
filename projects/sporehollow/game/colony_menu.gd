@@ -28,7 +28,7 @@ static func build(g):
 		var boundary=label(g.menu,"終了時に自動保存します。\n仕事・物資・敵・時計を保って再開します。",Vector2(400,582),17,480);boundary.name="SaveBoundaryNote"
 		var status=label(g.menu,g.save_status,Vector2(400,660),17,480);status.name="MenuSaveStatus"
 	elif g.menu_page=="help":
-		var guide=label(g.menu,"左クリック：選択・指定\n右クリック：選択解除。予約の取消は予定一覧の×\n空白を左ドラッグ：地図移動\n未選択のホイール / Ctrl＋ホイール：ズーム\nTab：モード　Shift：指示する動物\n建築・回収・禁止・ゾーン：クリックまたは範囲指定\n徴兵：地面で移動、敵で指定攻撃。通常仕事は保留\nSpace：停止／再開\n1 / 2 / 3：0.5 / 1 / 2倍　4：休息中のみ4倍\n＋ / ＝ / テンキー＋：速く　− / テンキー−：遅く",Vector2(330,230),19,640);guide.name="ControlGuide";guide.size.y=380
+		var guide=label(g.menu,"左クリック：選択・指定\n右クリック：選択解除。取消は命令のキャンセル\n空白を左ドラッグ：地図移動\n未選択のホイール / Ctrl＋ホイール：ズーム\nTab：モード　Shift：指示する動物\n命令のホイール：6種類を巡回（Ctrlはズーム）\n建築・命令・ゾーン：クリックまたは範囲指定\n徴兵：地面で移動、敵で指定攻撃。通常仕事は保留\nSpace：停止／再開\n1 / 2 / 3：0.5 / 1 / 2倍　4：休息中のみ4倍\n＋ / ＝ / テンキー＋：速く　− / テンキー−：遅く",Vector2(330,230),19,640);guide.name="ControlGuide";guide.size.y=380
 	elif g.menu_page=="version":
 		var m=JSON.parse_string(FileAccess.get_file_as_string("res://game/build_stamp.json")) if FileAccess.file_exists("res://game/build_stamp.json") else {}
 		label(g.menu,"ホイッスル牧場・開発版\n\n本体 "+str(m.get("commit","未記録")).left(8)+"\n素材 "+str(m.get("asset_delivery_commit","未記録")).left(8)+"\n\n調整中の仕様と未確認範囲は試遊の報告書へ記録しています。",Vector2(330,240),20,640)

@@ -59,7 +59,9 @@ static func populate(w):
 			var p=Vector2i(x,y)
 			if w.Biome.kind(w,p)=="rocky":sites.append(p)
 	sites.sort_custom(func(a,b):return w.Biome.unit(w.seed_value,a.x,a.y,421)<w.Biome.unit(w.seed_value,b.x,b.y,421))
-	for kind in ["large","small","small","small"]:
+	var kinds=[]
+	for group in range(ceili(w.W*w.H/1700.0*w.Biome.SETTINGS.mountain_groups_per_1700)):kinds.append_array(["large","small","small","small"])
+	for kind in kinds:
 		for p in sites:
 			var box=Rect2i(p,Vector2i(4,4) if kind=="large" else Vector2i.ONE);var valid=true
 			for y in range(box.position.y-1,box.end.y+1):

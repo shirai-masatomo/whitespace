@@ -1,6 +1,10 @@
 extends RefCounted
 ## Versioned scenery and placement only. Never used by movement or building rules.
-const VERSION=2
+const VERSION=3
+# Normalized regional scale, transition width and obstacle density; saved in new terrain.
+const SETTINGS={"region_scale":1.0,"region_thresholds":{"rocky":0.43,"woodland":0.40,"dry":0.42,"lush":0.48},"boundary_width":1.0,"tree_density":1.0,"rock_clusters_per_1700":3,"mountain_groups_per_1700":1}
+static func normalized(w,p: Vector2) -> Vector2:
+	return p*Vector2(50.0/w.W,34.0/w.H)
 const DIRECTIONS=[Vector2i.UP,Vector2i.RIGHT,Vector2i.DOWN,Vector2i.LEFT]
 const FOREST=preload("res://game/forest_pattern.gd")
 
@@ -16,7 +20,7 @@ static func noise(seed_number: int,p: Vector2,salt: int) -> float:
 
 static func clearing(p: Vector2,seed_number: int) -> float:
 	var d=(p-Vector2(25,17))/Vector2(9,7)
-	return smoothstep(0.72,1.5,d.length()+0.16*(noise(seed_number,p*0.18,17)-0.5))
+	return smoothstep(0.72,0.72+0.78*SETTINGS.boundary_width,d.length()+0.16*(noise(seed_number,p*0.18,17)-0.5))
 
 static func lobes(seed_number: int) -> Array:
 	var r=RandomNumberGenerator.new();r.seed=seed_number*1013+733
@@ -52,13 +56,14 @@ static func color_for(f: Array) -> Color:
 
 static func generate(seed_number: int,width: int,height: int,version: int=VERSION) -> Dictionary:
 	var blobs=lobes(seed_number);var fields=[];var vertices=[]
+	var scale=Vector2(50.0/width,34.0/height)/SETTINGS.region_scale
 	for y in range(height):
-		for x in range(width):fields.append(sample(seed_number,Vector2(x+0.5,y+0.5),blobs))
+		for x in range(width):fields.append(sample(seed_number,Vector2(x+0.5,y+0.5)*scale,blobs))
 	for y in range(height+1):
 		for x in range(width+1):
-			var color=color_for(sample(seed_number,Vector2(x,y),blobs))
+			var color=color_for(sample(seed_number,Vector2(x,y)*scale,blobs))
 			vertices.append([color.r,color.g,color.b])
-	var result={"version":version,"generation_version":version,"seed":seed_number,"width":width,"height":height,"fields":fields,"vertices":vertices}
+	var result={"version":version,"generation_version":version,"settings":SETTINGS.duplicate(),"seed":seed_number,"width":width,"height":height,"fields":fields,"vertices":vertices}
 	classify(result)
 	return result
 
@@ -78,10 +83,10 @@ static func field(w,p: Vector2i) -> Array:
 	return w.terrain.fields[p.y*w.W+p.x]
 
 static func region_for(f: Array) -> String:
-	if f[2]>0.43:return "rocky"
-	if f[1]>0.40:return "woodland"
-	if f[3]>0.42:return "dry"
-	if f[0]>0.48:return "lush"
+	if f[2]>SETTINGS.region_thresholds.rocky:return "rocky"
+	if f[1]>SETTINGS.region_thresholds.woodland:return "woodland"
+	if f[3]>SETTINGS.region_thresholds.dry:return "dry"
+	if f[0]>SETTINGS.region_thresholds.lush:return "lush"
 	return "open"
 
 static func classify(data: Dictionary):
@@ -121,7 +126,7 @@ static func populate(w):
 		for x in range(1,w.W-1):
 			var p=Vector2i(x,y);var f=field(w,p)
 			var patch=noise(w.seed_value,Vector2(p)*0.21,113)
-			if f[1]<0.40 or patch<0.32 or unit(w.seed_value,x,y,71)>f[1]*(0.22+patch*0.48) or protected(w,p) or not available(w,p):continue
+			if f[1]<0.40 or patch<0.32 or unit(w.seed_value,x,y,71)>f[1]*(0.22+patch*0.48)*SETTINGS.tree_density or protected(w,p) or not available(w,p):continue
 			if w.trees.keys().any(func(q):return maxi(absi(q.x-p.x),absi(q.y-p.y))<=1):continue
 			w.trees[p]="biome-tree-%d-%d"%[x,y]
 	place_rocks(w)
@@ -138,7 +143,7 @@ static func populate(w):
 			for y in range(w.H):
 				for x in range(w.W):
 					var p=Vector2i(x,y)
-					if not available(w,p) or clearing(Vector2(p),w.seed_value)<0.3:continue
+					if not available(w,p) or clearing(normalized(w,Vector2(p)),w.seed_value)<0.3:continue
 					var weight=resource_weight(w,p,resource);total+=weight;sites.append([p,total])
 			if sites.is_empty():break
 			var roll=r.randf()*total
@@ -148,7 +153,7 @@ static func populate(w):
 	w.Tasks.save(w);w.Story.persist(w);persist(w)
 
 static func protected(w,p: Vector2i) -> bool:
-	return p.x<=0 or p.y<=0 or p.x>=w.W-1 or p.y>=w.H-1 or clearing(Vector2(p),w.seed_value)<0.8 or FOREST.merchant_clearing(p) or w.entries.any(func(e):return w.distance(p,e)<=1) or w.distance(p,w.keeper.pos)<=2 or w.animals.any(func(a):return a.get("placed",false) and w.distance(p,a.pos)<=2)
+	return p.x<=0 or p.y<=0 or p.x>=w.W-1 or p.y>=w.H-1 or clearing(normalized(w,Vector2(p)),w.seed_value)<0.8 or w.distance(p,w.MERCHANT_CELL)<=4 or w.entries.any(func(e):return w.distance(p,e)<=1) or w.distance(p,w.keeper.pos)<=2 or w.animals.any(func(a):return a.get("placed",false) and w.distance(p,a.pos)<=2)
 
 static func rock_site(w,p: Vector2i) -> bool:
 	return w.inside(p) and not protected(w,p) and field(w,p)[2]>0.43 and available(w,p)
@@ -170,7 +175,7 @@ static func place_rocks(w):
 		var p=row.pos
 		if selected.any(func(q):return Vector2(p-q).length()<7.0):continue
 		selected.append(p)
-		if selected.size()>=3:break
+		if selected.size()>=ceili(w.W*w.H/1700.0*SETTINGS.rock_clusters_per_1700):break
 	for center in selected:
 		var radius=Vector2(2.4+unit(w.seed_value,center.x,center.y,139)*1.2,2.0+unit(w.seed_value,center.x,center.y,149))
 		for y in range(maxi(1,center.y-4),mini(w.H-1,center.y+5)):
