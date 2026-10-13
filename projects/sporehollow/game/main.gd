@@ -181,7 +181,20 @@ var morning_dog = Vector2(6.5, 8.5)
 var reactions: Dictionary = {}
 var noticed: Dictionary = {}
 
+var startup_loading=false
+var loading_initialized=false
+
 func _ready():
+	if startup_loading:
+		set_process(false);set_process_input(false);set_process_unhandled_input(false)
+		call_deferred("_initialize_for_loading")
+	else:_initialize_game()
+
+func _initialize_for_loading():
+	_initialize_game()
+	loading_initialized=true
+
+func _initialize_game():
 	if not automated and "--review-onsite" in OS.get_cmdline_user_args() and "--isolated-review" in OS.get_cmdline_user_args() and OS.get_environment("FARM_REVIEW_OUTPUT")!="":
 		automated=true
 		var review=load("res://game/onsite_clarity_review.gd").new()
@@ -200,7 +213,9 @@ func _ready():
 			var saved=MorningSave.read(save_path)
 			if saved.status in ["ok","recovered"]:world=MorningSave.restore(saved.record);save_status="以前の日開始を読み込みました。次回は途中から再開します"
 			elif saved.status!="missing":save_load_blocked=true;save_status="以前の保存を読めません。保存を保護しています"
+	var world_started=Metrics.start()
 	if world==null:world=Farm.new({},randi_range(1,2147483646))
+	Metrics.finish("startup_world",world_started)
 	Input.set_custom_mouse_cursor(UI.grab_cursor(),Input.CURSOR_DRAG,Vector2(15,15))
 	subtasks.load_settings()
 	camera = Camera2D.new()
@@ -234,7 +249,9 @@ func _ready():
 	add_button(controls,"roles","役割",Rect2(332,754,116,36),select_group.bind(3))
 	add_button(controls,"commands","命令",Rect2(456,754,116,36),select_group.bind(4))
 	audio = preload("res://game/farm_audio.gd").new()
+	var audio_started=Metrics.start()
 	add_child(audio)
+	Metrics.finish("startup_audio",audio_started)
 	queue_controls = Control.new()
 	queue_controls.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	controls.add_child(queue_controls)
@@ -250,7 +267,9 @@ func _ready():
 	add_child(book_view)
 	book_view.setup(self)
 	if world.phase == "shop": enter_daytime()
+	var ground_started=Metrics.start()
 	add_child(preload("res://game/retained_ground.gd").new())
+	Metrics.finish("startup_ground",ground_started)
 	recenter()
 	refresh()
 	controls.visible = not cinematic() and story_modal==""
@@ -258,6 +277,9 @@ func _ready():
 	if automated: get_window().unfocusable = true
 	if not automated and not save_load_blocked and not world.story.intro_seen: StoryView.open(self,"intro")
 	if "--smoke" in OS.get_cmdline_user_args(): get_tree().create_timer(2).timeout.connect(get_tree().quit)
+	if not startup_loading:start_entry_reviews()
+
+func start_entry_reviews():
 	if "--review-cycle-entry" in OS.get_cmdline_user_args() and "--isolated-review" in OS.get_cmdline_user_args() and OS.get_environment("FARM_REVIEW_OUTPUT")!="":
 		var cycle_review=load("res://game/cycle_entry_review.gd").new();add_child(cycle_review);cycle_review.call_deferred("run")
 	if "--review-autonomy" in OS.get_cmdline_user_args() and "--isolated-review" in OS.get_cmdline_user_args() and OS.get_environment("FARM_REVIEW_OUTPUT")!="":
@@ -1158,6 +1180,7 @@ func _exit_tree():
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 func _input(event):
+	if startup_loading:return
 	_route_input(event)
 	update_pointer_cursor()
 
@@ -1419,6 +1442,7 @@ func finish_drag():
 	refresh()
 
 func _unhandled_input(event):
+	if startup_loading:return
 	if story_modal!="" or field_book or field_shop: return
 	if menu_open or cinematic() or not world.working(): return
 	if not (event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT) or pointer_over_ui(): return
@@ -1536,6 +1560,7 @@ func board_click(event):
 	refresh()
 
 func _notification(what):
+	if startup_loading:return # Bootstrap owns close requests until initialization is complete.
 	if what==NOTIFICATION_WM_CLOSE_REQUEST and persistence_enabled:
 		var previous_pause=world.paused
 		if menu_open:world.paused=menu_was_paused
@@ -1878,6 +1903,7 @@ func draw_structure(p: Vector2, b: Dictionary, preview: bool = false):
 
 var draw_profile={}
 func _draw():
+	if world==null:return
 	var started=Metrics.start()
 	_draw_measured()
 	Metrics.finish("scene_draw",started)

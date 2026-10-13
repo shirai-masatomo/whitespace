@@ -380,7 +380,9 @@ func _init(data: Dictionary = {}, seed_number: int = 17, stage_override: Diction
 	Stock.init(self)
 	stock_used=campaign.get("stock_used",{}).duplicate()
 	Work.restore(self)
+	var terrain_started=Metrics.start()
 	Biome.prepare(self)
+	Metrics.finish("startup_terrain",terrain_started)
 	Story.init(self)
 	if campaign.get("start_near_idol",false):
 		# Consumed only for a new campaign; saved actors never move on load.
@@ -399,7 +401,9 @@ func _init(data: Dictionary = {}, seed_number: int = 17, stage_override: Diction
 	Cycle.init(self)
 	Tasks.init(self)
 	Mountains.init(self)
+	var populate_started=Metrics.start()
 	Biome.populate(self)
+	Metrics.finish("startup_population",populate_started)
 	Harvest.init(self)
 	boundary_version=int(campaign.get("boundary_version",0))
 	Land.migrate(self)
