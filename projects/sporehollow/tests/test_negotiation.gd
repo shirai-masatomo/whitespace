@@ -7,7 +7,7 @@ func check(ok,note):
 	checks.append({"passed":bool(ok),"check":note})
 	if not ok:failed+=1;push_error(note)
 func fixture():
-	var w=Farm.new({},31).begin_day();w.story.intro_seen=true;w.tick=24;w.paused=false
+	var w=Farm.new({},31).begin_day();w.campaign.day=2;w.calendar_ticks=w.Cycle.Clock.TICKS_PER_DAY;w.last_daily_day=2;w.story.intro_seen=true;w.tick=24;w.paused=false
 	w.enemies.clear();w.spawn_schedule.clear();w.trees.clear();w.rocks.clear();w.natural.clear();w.structures.clear();w.floors.clear();w.nature_config.spawn_chance_per_second=0
 	w.keeper.pos=Vector2i(10,7);w.keeper.sleepiness=0;w.keeper.satiety=100
 	for a in w.animals:a.pos=Vector2i(22,22);a.home=a.pos;a.order=a.pos;a.mode="stay"
@@ -19,7 +19,7 @@ func run():
 	var out=OS.get_environment("FARM_REVIEW_OUTPUT")
 	if out=="" or "--isolated-review" not in OS.get_cmdline_user_args():quit(2);return
 	# 1. Explicit keeper instruction interrupts one real claim; UI close releases it for reevaluation.
-	var w=fixture();w.Stock.add(w,"wood",12,w.keeper.pos);w.Jobs.enqueue(w,"wood_wall",Vector2i(15,7),-1);var original=w.jobs.back();w.Work.claim(w,"keeper",original);w.Jobs.execute(w,original,w.keeper)
+	var w=fixture();w.Zones.create(w,"stockpile",w.keeper.pos,w.keeper.pos);w.Stock.add(w,"wood",12,w.keeper.pos).stocked=true;w.Jobs.enqueue(w,"wood_wall",Vector2i(15,7),-1);var original=w.jobs.back();w.Work.claim(w,"keeper",original);w.Jobs.execute(w,original,w.keeper)
 	check(w.request_merchant("keeper") and original.state=="suspended" and original.assigned_to=="" and w.Stock.cargo(w,"keeper",original.id).is_empty(),"Keeper negotiation releases the real construction/material claim without deleting the old designation")
 	var target=w.merchant_approach;var start=w.keeper.pos;var route=[]
 	for i in range(80):
@@ -27,8 +27,12 @@ func run():
 		if w.keeper.pos==target:break
 	check(w.keeper.pos==target and route[0]!=target and w.jobs.has(original),"Keeper walks through the existing movement job and reaches merchant without teleporting")
 	w.market_open=true;var tick=w.tick;w.step();check(w.tick==tick,"Open shop freezes world time")
-	w.cancel_merchant();w.market_open=false;w.step()
-	check(w.Work.active(w).get("id",-1)==original.id and not w.jobs.any(func(j):return j.get("purpose")=="merchant"),"Closing conversation permits the suspended job to be reevaluated and reclaimed")
+	w.cancel_merchant();w.market_open=false
+	# Construction resumes through physical material delivery before assembly.
+	for i in range(240):
+		w.step()
+		if w.Work.active(w).get("id",-1)==original.id:break
+	check(w.Work.active(w).get("id",-1)==original.id and not w.jobs.any(func(j):return j.get("purpose")=="merchant"),"Closing conversation permits delivery then the suspended construction job to be reclaimed")
 	# 2. Supporting resident ownership must not silently enlist it as an ordinary worker.
 	w=fixture();var a=support(w);var keeper_start=w.keeper.pos
 	check(w.request_merchant("a91") and not w.workers.has("a91"),"Selected support resident owns negotiation without joining the general worker registry")

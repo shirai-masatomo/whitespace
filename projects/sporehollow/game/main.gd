@@ -1577,7 +1577,7 @@ func _process_measured(delta):
 		else:
 			var actor=world.merchant_actor(world.merchant_worker)
 			if not world.paused and actor.pos==merchant_talk_target and view_positions.get(world.merchant_worker,Vector2(actor.pos)).distance_to(Vector2(merchant_talk_target))<0.08:open_market()
-	if world.phase=="day" and not world.merchant_present() and world.tick*Farm.DT>=world.merchant_leave_at and departure_started<0:departure_started=clock
+	if world.phase=="day" and world.merchant_visit_enabled() and not world.merchant_present() and world.tick*Farm.DT>=world.merchant_leave_at and departure_started<0:departure_started=clock
 
 	if wall_stroke.kind!="" and (group!=0 or tool!=wall_stroke.kind or menu_open or field_book or field_shop or story_modal!="" or cinematic() or not world.working()):cancel_wall_stroke()
 	if book_motion != "":
@@ -2737,9 +2737,10 @@ func react(id: int, kind: String, duration: float):
 	reactions[id] = {"kind": kind, "at": clock, "until": clock + duration}
 
 func merchant_visual_elapsed() -> float:
+	if not world.merchant_visit_enabled():return -1.0
 	# Interpolate within the fixed 0.25-second simulation step. The accumulator
 	# already follows speed and stops during pause/shop; gameplay timing is unchanged.
-	var elapsed=world.tick*Farm.DT-Farm.MERCHANT_DELAY+clampf(accumulated,0,Farm.DT)
+	var elapsed=(world.tick-world.merchant_arrive_tick)*Farm.DT+clampf(accumulated,0,Farm.DT)
 	if world.merchant_present():return minf(Farm.MERCHANT_SECONDS,elapsed)
 	if elapsed>=Farm.MERCHANT_SECONDS:return Farm.MERCHANT_SECONDS+maxf(0,world.tick*Farm.DT-world.merchant_leave_at)+clampf(accumulated,0,Farm.DT)
 	return elapsed

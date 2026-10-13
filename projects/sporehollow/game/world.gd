@@ -79,6 +79,7 @@ func merchant_candidates(key: String) -> Array:
 	return merchant_talk_cells().filter(func(cell):return walkable(cell) and not actor_occupied(cell,a.pos) and not find_path(a.pos,cell).is_empty())
 
 func merchant_reason(key: String) -> String:
+	if not merchant_visit_enabled():return "商人は2日目から来訪します"
 	if not merchant_present():return "商人はまだ来ていません" if tick<merchant_arrive_tick else "商人は帰りました"
 	var why=merchant_actor_reason(key)
 	if why!="":return why
@@ -133,8 +134,12 @@ func merchant_talk_cells() -> Array:
 	# Two rows in front of the cart, clear of its wheels, merchant and drawbar.
 	return [MERCHANT_CELL+Vector2i(0,2),MERCHANT_CELL+Vector2i(1,2),MERCHANT_CELL+Vector2i(2,2)]
 
+func merchant_visit_enabled() -> bool:
+	# Initial-day visit disabled for the startup performance investigation.
+	return int(campaign.day)>=2
+
 func merchant_present() -> bool:
-	return working() and tick>=merchant_arrive_tick and (tick*DT<merchant_leave_at or merchant_waiting() or market_open)
+	return merchant_visit_enabled() and working() and tick>=merchant_arrive_tick and (tick*DT<merchant_leave_at or merchant_waiting() or market_open)
 
 const HumanCombat=preload("res://game/human_combat.gd")
 const Life = preload("res://game/keeper_life.gd")
