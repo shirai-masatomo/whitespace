@@ -1,4 +1,6 @@
 extends Node2D
+const Probe=preload("res://game/play_diagnostics.gd")
+const SIMPLE=preload("res://game/diagnostic_ground.gdshader")
 const Metrics=preload("res://game/terrain_metrics.gd")
 ## Retain native CanvasItem commands. Camera movement never rebuilds ground.
 const SIZE=8
@@ -23,6 +25,7 @@ class Chunk extends Node2D:
 	func center(p):return (Vector2(p)+Vector2(0.5,0.5))*TILE
 	func _draw():
 		var started=Metrics.start()
+		if Probe.experiment=="no_decor":return
 		Board.draw_decor(self,world,TILE,box)
 		Rock.ground(self,Rect2(Vector2(box.position)*TILE,Vector2(box.size)*TILE))
 		Metrics.finish("chunk_draw",started)
@@ -48,10 +51,12 @@ func sync_measured():
 			for x in range(ceili(w.W/float(SIZE))):
 				var cell=Vector2i(x,y);var node=Chunk.new();node.world=w;node.box=Rect2i(cell*SIZE,Vector2i(mini(SIZE,w.W-x*SIZE),mini(SIZE,w.H-y*SIZE)));node.texture_repeat=CanvasItem.TEXTURE_REPEAT_ENABLED;Board.prepare_region(w,TILE,node.box);add_child(node);chunks[cell]=node
 				var base=Base.new();base.world=w;base.box=node.box;base.show_behind_parent=true;base.texture_repeat=CanvasItem.TEXTURE_REPEAT_ENABLED
-				if Board.textured(w):base.material=Board.soil_material()
+				if Board.textured(w) and Probe.experiment!="legacy_color":base.material=Board.soil_material()
+				if Probe.experiment=="simple_ground":
+					base.material=ShaderMaterial.new();base.material.shader=SIMPLE
 				node.add_child(base)
 		queue_redraw()
-	var occupancy=hash([w.floors,w.structures,w.rocks,w.natural,w.mined_rock_cells])
+	var occupancy=occupancy_signature if Probe.experiment=="no_occupancy" and occupancy_signature!=0 else hash([w.floors,w.structures,w.rocks,w.natural,w.mined_rock_cells])
 	if occupancy!=occupancy_signature:
 		occupancy_signature=occupancy
 		var next={}
@@ -64,9 +69,11 @@ func sync_measured():
 		for key in chunks:
 			var signature=hash(next[key])
 			if stamps.get(key)!=signature:chunks[key].queue_redraw();stamps[key]=signature
+	# Keep cached commands alive. Renderer culls off-screen CanvasItems.
+	# hide/show invalidates CanvasItem commands and rebuilt newly exposed chunks.
 	var visible=get_canvas_transform().affine_inverse()*get_viewport_rect()
 	for key in chunks:
 		var node=chunks[key]
-		node.visible=visible.grow(64).intersects(Rect2(Vector2(node.box.position)*TILE,Vector2(node.box.size)*TILE))
+		node.visible=Probe.experiment!="manual_chunks" or visible.grow(64).intersects(Rect2(Vector2(node.box.position)*TILE,Vector2(node.box.size)*TILE))
 func _draw():
 	if world!=null:draw_rect(Rect2(Vector2.ZERO,Vector2(world.W,world.H)*TILE),Color("d4c89d"),false,3)

@@ -1,0 +1,874 @@
+{
+  "vsync": 0,
+  "gpu": "NVIDIA GeForce RTX 4070 SUPER",
+  "name": "no_decor-1",
+  "source_commit": "a519450e89216f6c534110164c154c97ba393aac",
+  "segments": {
+    "30_120": {
+      "fps": 218.227174288442,
+      "frames": 12003,
+      "max_ms": 12.844,
+      "mean_ms": 4.58238073814882,
+      "over_33_50_100": [
+        0,
+        0,
+        0
+      ],
+      "p95_ms": 7.177,
+      "p99_ms": 8.93
+    },
+    "all": {
+      "fps": 218.642874010727,
+      "frames": 20394,
+      "max_ms": 3262.054,
+      "mean_ms": 4.5736683828577,
+      "over_33_50_100": [
+        1,
+        1,
+        1
+      ],
+      "p95_ms": 6.6,
+      "p99_ms": 8.484
+    },
+    "first_30": {
+      "fps": 239.61630189574,
+      "frames": 7188,
+      "max_ms": 17.184,
+      "mean_ms": 4.17333875904283,
+      "over_33_50_100": [
+        0,
+        0,
+        0
+      ],
+      "p95_ms": 6.123,
+      "p99_ms": 6.77
+    },
+    "first_view": {
+      "fps": 203.757528541036,
+      "frames": 34,
+      "max_ms": 17.184,
+      "mean_ms": 4.90779411764706,
+      "over_33_50_100": [
+        0,
+        0,
+        0
+      ],
+      "p95_ms": 8.215,
+      "p99_ms": 17.184
+    },
+    "loading": {
+      "fps": 145.375570475249,
+      "frames": 1203,
+      "max_ms": 3262.054,
+      "mean_ms": 6.87873482959268,
+      "over_33_50_100": [
+        1,
+        1,
+        1
+      ],
+      "p95_ms": 5.363,
+      "p99_ms": 6.296
+    },
+    "moving": {
+      "fps": 233.331056462729,
+      "frames": 2825,
+      "max_ms": 17.184,
+      "mean_ms": 4.28575610619469,
+      "over_33_50_100": [
+        0,
+        0,
+        0
+      ],
+      "p95_ms": 6.405,
+      "p99_ms": 7.489
+    },
+    "revisit": {
+      "fps": 233.744341477452,
+      "frames": 2791,
+      "max_ms": 12.844,
+      "mean_ms": 4.27817843067001,
+      "over_33_50_100": [
+        0,
+        0,
+        0
+      ],
+      "p95_ms": 6.39,
+      "p99_ms": 7.472
+    },
+    "scroll_diagonal": {
+      "fps": 234.95554641062,
+      "frames": 2350,
+      "max_ms": 8.094,
+      "mean_ms": 4.25612425531914,
+      "over_33_50_100": [
+        0,
+        0,
+        0
+      ],
+      "p95_ms": 6.549,
+      "p99_ms": 7.203
+    },
+    "scroll_new": {
+      "fps": 239.004254275726,
+      "frames": 2390,
+      "max_ms": 7.849,
+      "mean_ms": 4.1840259414226,
+      "over_33_50_100": [
+        0,
+        0,
+        0
+      ],
+      "p95_ms": 5.987,
+      "p99_ms": 6.934
+    },
+    "scroll_return": {
+      "fps": 239.697051726264,
+      "frames": 2397,
+      "max_ms": 7.648,
+      "mean_ms": 4.17193283270755,
+      "over_33_50_100": [
+        0,
+        0,
+        0
+      ],
+      "p95_ms": 6.087,
+      "p99_ms": 6.726
+    },
+    "stationary": {
+      "fps": 224.520829938519,
+      "frames": 16366,
+      "max_ms": 11.996,
+      "mean_ms": 4.45392973237197,
+      "over_33_50_100": [
+        0,
+        0,
+        0
+      ],
+      "p95_ms": 6.713,
+      "p99_ms": 8.615
+    },
+    "wide": {
+      "fps": 214.209146730565,
+      "frames": 2142,
+      "max_ms": 11.099,
+      "mean_ms": 4.66833473389356,
+      "over_33_50_100": [
+        0,
+        0,
+        0
+      ],
+      "p95_ms": 7.608,
+      "p99_ms": 8.464
+    },
+    "wide_scroll": {
+      "fps": 179.030990264415,
+      "frames": 1790,
+      "max_ms": 12.844,
+      "mean_ms": 5.5856251396648,
+      "over_33_50_100": [
+        0,
+        0,
+        0
+      ],
+      "p95_ms": 8.808,
+      "p99_ms": 10.489
+    }
+  },
+  "cpu_scopes": {
+    "hud_draw": {
+      "max": 1.602,
+      "total": 6112.0079999999925,
+      "frames": 19191
+    },
+    "ground_sync": {
+      "max": 0.57,
+      "total": 2505.579000000042,
+      "frames": 19191
+    },
+    "world_step": {
+      "max": 1.187,
+      "total": 126.94299999999984,
+      "frames": 339
+    },
+    "Cycle_step": {
+      "max": 0.074,
+      "total": 6.204999999999994,
+      "frames": 339
+    },
+    "Progression_tick": {
+      "max": 0.022,
+      "total": 2.1329999999999876,
+      "frames": 339
+    },
+    "Life_step": {
+      "max": 0.074,
+      "total": 7.425999999999997,
+      "frames": 339
+    },
+    "scene_draw": {
+      "max": 6.516,
+      "total": 33015.75899999991,
+      "frames": 19191
+    },
+    "Story_tick": {
+      "max": 0.019,
+      "total": 1.439999999999993,
+      "frames": 339
+    },
+    "update_merchant_order": {
+      "max": 0.005,
+      "total": 0.6530000000000005,
+      "frames": 339
+    },
+    "audio_cpu": {
+      "max": 0.409,
+      "total": 221.1859999999939,
+      "frames": 19191
+    },
+    "nature": {
+      "max": 0.08,
+      "total": 0.6690000000000004,
+      "frames": 84
+    },
+    "main": {
+      "max": 2.057,
+      "total": 3421.183999999977,
+      "frames": 19191
+    },
+    "refresh": {
+      "max": 5.454,
+      "total": 5.454,
+      "frames": 1
+    },
+    "animal_step": {
+      "max": 0.615,
+      "total": 48.39499999999991,
+      "frames": 339
+    },
+    "Jobs_step": {
+      "max": 0.489,
+      "total": 39.49600000000004,
+      "frames": 339
+    },
+    "Content_tick": {
+      "max": 0.02,
+      "total": 1.3299999999999943,
+      "frames": 339
+    },
+    "scene_actors": {
+      "max": 1.888,
+      "total": 9862.628999999952,
+      "frames": 19191
+    },
+    "chunk_draw": {
+      "max": 0.167,
+      "total": 1.3840000000000003,
+      "frames": 29
+    }
+  },
+  "renderer": "gl_compatibility",
+  "source_sha256": {
+    "board_art.gd": "15CC25B2CA27ED21349498D5B39D073ECD358C8E3D8F0D06C11AB063929C9DAB",
+    "retained_ground.gd": "30FBCCFBE428E0E3AB5FECCF4EFEB4445FF961928740205C4F7F15AB7553EB04",
+    "loading.gd": "821C57C9A03B89809D24B4F045FC7134D3CC6CBFFBF39DC94504DB783CC8D558",
+    "play_diagnostics.gd": "2B9D091468B58F6077E7E67065F3A823CF812FE29F50B9A387AF91897625E0C8",
+    "main.gd": "2CC64C27F5BA378AC14EC125377416EE742C1F4C6E6F1C4E504B554DCB8B9920",
+    "soil_surface.gdshader": "BC4D1EC2EBEC6C82B7A41F2244AD011F275816893EA263853AC390D405C2A287"
+  },
+  "fps_cap": 240,
+  "slowest": [
+    {
+      "camera": [
+        2364.0,
+        1438.5
+      ],
+      "cpu": {
+        "audio_cpu": 0.024,
+        "audio_cpu_count": 1,
+        "ground_sync": 0.259,
+        "ground_sync_count": 1,
+        "hud_draw": 1.042,
+        "hud_draw_count": 1,
+        "main": 2.057,
+        "main_count": 1,
+        "refresh": 5.454,
+        "refresh_count": 2,
+        "scene_actors": 0.647,
+        "scene_actors_count": 1,
+        "scene_draw": 2.166,
+        "scene_draw_count": 1
+      },
+      "draw_calls": 114.0,
+      "engine_process_ms": 3258.296,
+      "first_view_chunks": 12,
+      "focused": true,
+      "frame_ms": 17.184,
+      "memory_bytes": 138511620.0,
+      "moving": true,
+      "objects": 359.0,
+      "ready_ms": 16.853,
+      "segment": "idle_0_30",
+      "t_ms": 8292.302,
+      "tick": 0,
+      "zoom": 1.0
+    },
+    {
+      "camera": [
+        4000.0,
+        1396.75244140625
+      ],
+      "cpu": {
+        "audio_cpu": 0.014,
+        "audio_cpu_count": 1,
+        "ground_sync": 0.174,
+        "ground_sync_count": 1,
+        "hud_draw": 0.388,
+        "hud_draw_count": 1,
+        "main": 0.199,
+        "main_count": 1,
+        "scene_actors": 1.551,
+        "scene_actors_count": 1,
+        "scene_draw": 6.325,
+        "scene_draw_count": 1
+      },
+      "draw_calls": 466.0,
+      "engine_process_ms": 8.95,
+      "first_view_chunks": 0,
+      "focused": true,
+      "frame_ms": 12.844,
+      "memory_bytes": 194741038.0,
+      "moving": true,
+      "objects": 1715.0,
+      "ready_ms": 70270.203,
+      "segment": "wide_scroll",
+      "t_ms": 78545.652,
+      "tick": 280,
+      "zoom": 0.349999994039536
+    },
+    {
+      "camera": [
+        4000.0,
+        2656.0
+      ],
+      "cpu": {
+        "audio_cpu": 0.023,
+        "audio_cpu_count": 1,
+        "ground_sync": 0.214,
+        "ground_sync_count": 1,
+        "hud_draw": 0.467,
+        "hud_draw_count": 1,
+        "main": 0.32,
+        "main_count": 1,
+        "scene_actors": 1.671,
+        "scene_actors_count": 1,
+        "scene_draw": 5.766,
+        "scene_draw_count": 1
+      },
+      "draw_calls": 336.0,
+      "engine_process_ms": 10.784,
+      "first_view_chunks": 0,
+      "focused": true,
+      "frame_ms": 11.996,
+      "memory_bytes": 200922106.0,
+      "moving": false,
+      "objects": 1687.0,
+      "ready_ms": 80139.427,
+      "segment": "idle_80_120",
+      "t_ms": 88414.876,
+      "tick": 320,
+      "zoom": 0.349999994039536
+    },
+    {
+      "camera": [
+        4000.0,
+        2656.0
+      ],
+      "cpu": {
+        "audio_cpu": 0.037,
+        "audio_cpu_count": 1,
+        "ground_sync": 0.318,
+        "ground_sync_count": 1,
+        "hud_draw": 0.44,
+        "hud_draw_count": 1,
+        "main": 0.575,
+        "main_count": 1,
+        "scene_actors": 1.0,
+        "scene_actors_count": 1,
+        "scene_draw": 4.838,
+        "scene_draw_count": 1
+      },
+      "draw_calls": 336.0,
+      "engine_process_ms": 10.215,
+      "first_view_chunks": 0,
+      "focused": true,
+      "frame_ms": 11.776,
+      "memory_bytes": 202855434.0,
+      "moving": false,
+      "objects": 1687.0,
+      "ready_ms": 83077.561,
+      "segment": "idle_80_120",
+      "t_ms": 91353.01,
+      "tick": 332,
+      "zoom": 0.349999994039536
+    },
+    {
+      "camera": [
+        4000.0,
+        2656.0
+      ],
+      "cpu": {
+        "audio_cpu": 0.025,
+        "audio_cpu_count": 1,
+        "ground_sync": 0.274,
+        "ground_sync_count": 1,
+        "hud_draw": 0.454,
+        "hud_draw_count": 1,
+        "main": 0.374,
+        "main_count": 1,
+        "scene_actors": 1.477,
+        "scene_actors_count": 1,
+        "scene_draw": 5.398,
+        "scene_draw_count": 1
+      },
+      "draw_calls": 336.0,
+      "engine_process_ms": 10.504,
+      "first_view_chunks": 0,
+      "focused": true,
+      "frame_ms": 11.713,
+      "memory_bytes": 197524158.0,
+      "moving": false,
+      "objects": 1687.0,
+      "ready_ms": 74560.694,
+      "segment": "wide_scroll",
+      "t_ms": 82836.143,
+      "tick": 298,
+      "zoom": 0.349999994039536
+    },
+    {
+      "camera": [
+        4000.0,
+        2656.0
+      ],
+      "cpu": {
+        "audio_cpu": 0.029,
+        "audio_cpu_count": 1,
+        "ground_sync": 0.375,
+        "ground_sync_count": 1,
+        "hud_draw": 0.507,
+        "hud_draw_count": 1,
+        "main": 0.379,
+        "main_count": 1,
+        "scene_actors": 1.161,
+        "scene_actors_count": 1,
+        "scene_draw": 5.313,
+        "scene_draw_count": 1
+      },
+      "draw_calls": 336.0,
+      "engine_process_ms": 10.581,
+      "first_view_chunks": 0,
+      "focused": true,
+      "frame_ms": 11.63,
+      "memory_bytes": 195996638.0,
+      "moving": false,
+      "objects": 1687.0,
+      "ready_ms": 72470.144,
+      "segment": "wide_scroll",
+      "t_ms": 80745.593,
+      "tick": 289,
+      "zoom": 0.349999994039536
+    },
+    {
+      "camera": [
+        4000.0,
+        2656.0
+      ],
+      "cpu": {
+        "audio_cpu": 0.016,
+        "audio_cpu_count": 1,
+        "ground_sync": 0.174,
+        "ground_sync_count": 1,
+        "hud_draw": 0.456,
+        "hud_draw_count": 1,
+        "main": 0.213,
+        "main_count": 1,
+        "scene_actors": 1.51,
+        "scene_actors_count": 1,
+        "scene_draw": 5.318,
+        "scene_draw_count": 1
+      },
+      "draw_calls": 336.0,
+      "engine_process_ms": 11.754,
+      "first_view_chunks": 0,
+      "focused": true,
+      "frame_ms": 11.469,
+      "memory_bytes": 203951118.0,
+      "moving": false,
+      "objects": 1687.0,
+      "ready_ms": 84908.575,
+      "segment": "idle_80_120",
+      "t_ms": 93184.024,
+      "tick": 339,
+      "zoom": 0.349999994039536
+    },
+    {
+      "camera": [
+        4000.0,
+        2656.0
+      ],
+      "cpu": {
+        "audio_cpu": 0.036,
+        "audio_cpu_count": 1,
+        "ground_sync": 0.372,
+        "ground_sync_count": 1,
+        "hud_draw": 0.472,
+        "hud_draw_count": 1,
+        "main": 0.283,
+        "main_count": 1,
+        "scene_actors": 1.149,
+        "scene_actors_count": 1,
+        "scene_draw": 4.824,
+        "scene_draw_count": 1
+      },
+      "draw_calls": 336.0,
+      "engine_process_ms": 10.215,
+      "first_view_chunks": 0,
+      "focused": true,
+      "frame_ms": 11.4,
+      "memory_bytes": 202895178.0,
+      "moving": false,
+      "objects": 1687.0,
+      "ready_ms": 83152.744,
+      "segment": "idle_80_120",
+      "t_ms": 91428.193,
+      "tick": 332,
+      "zoom": 0.349999994039536
+    },
+    {
+      "camera": [
+        4000.0,
+        1604.22863769531
+      ],
+      "cpu": {
+        "audio_cpu": 0.023,
+        "audio_cpu_count": 1,
+        "ground_sync": 0.233,
+        "ground_sync_count": 1,
+        "hud_draw": 0.412,
+        "hud_draw_count": 1,
+        "main": 0.322,
+        "main_count": 1,
+        "scene_actors": 1.28,
+        "scene_actors_count": 1,
+        "scene_draw": 6.516,
+        "scene_draw_count": 1
+      },
+      "draw_calls": 484.0,
+      "engine_process_ms": 8.95,
+      "first_view_chunks": 0,
+      "focused": true,
+      "frame_ms": 11.273,
+      "memory_bytes": 194793770.0,
+      "moving": true,
+      "objects": 1835.0,
+      "ready_ms": 70338.749,
+      "segment": "wide_scroll",
+      "t_ms": 78614.198,
+      "tick": 281,
+      "zoom": 0.349999994039536
+    },
+    {
+      "camera": [
+        4000.0,
+        2656.0
+      ],
+      "cpu": {
+        "audio_cpu": 0.046,
+        "audio_cpu_count": 1,
+        "ground_sync": 0.397,
+        "ground_sync_count": 1,
+        "hud_draw": 0.4,
+        "hud_draw_count": 1,
+        "main": 0.416,
+        "main_count": 1,
+        "scene_actors": 1.123,
+        "scene_actors_count": 1,
+        "scene_draw": 5.128,
+        "scene_draw_count": 1
+      },
+      "draw_calls": 336.0,
+      "engine_process_ms": 9.789,
+      "first_view_chunks": 0,
+      "focused": true,
+      "frame_ms": 11.125,
+      "memory_bytes": 199107622.0,
+      "moving": false,
+      "objects": 1687.0,
+      "ready_ms": 77158.69,
+      "segment": "wide_scroll",
+      "t_ms": 85434.139,
+      "tick": 308,
+      "zoom": 0.349999994039536
+    },
+    {
+      "camera": [
+        4000.0,
+        628.571472167969
+      ],
+      "cpu": {
+        "audio_cpu": 0.036,
+        "audio_cpu_count": 1,
+        "ground_sync": 0.335,
+        "ground_sync_count": 1,
+        "hud_draw": 0.45,
+        "hud_draw_count": 1,
+        "main": 0.558,
+        "main_count": 1,
+        "scene_actors": 0.7,
+        "scene_actors_count": 1,
+        "scene_draw": 3.779,
+        "scene_draw_count": 1
+      },
+      "draw_calls": 280.0,
+      "engine_process_ms": 9.578,
+      "first_view_chunks": 0,
+      "focused": true,
+      "frame_ms": 11.099,
+      "memory_bytes": 188986300.0,
+      "moving": false,
+      "objects": 542.0,
+      "ready_ms": 62401.091,
+      "segment": "wide",
+      "t_ms": 70676.54,
+      "tick": 249,
+      "zoom": 0.349999994039536
+    },
+    {
+      "camera": [
+        4000.0,
+        2656.0
+      ],
+      "cpu": {
+        "audio_cpu": 0.051,
+        "audio_cpu_count": 1,
+        "ground_sync": 0.424,
+        "ground_sync_count": 1,
+        "hud_draw": 0.433,
+        "hud_draw_count": 1,
+        "main": 0.697,
+        "main_count": 1,
+        "scene_actors": 0.881,
+        "scene_actors_count": 1,
+        "scene_draw": 3.86,
+        "scene_draw_count": 1
+      },
+      "draw_calls": 336.0,
+      "engine_process_ms": 10.504,
+      "first_view_chunks": 0,
+      "focused": true,
+      "frame_ms": 11.091,
+      "memory_bytes": 197495122.0,
+      "moving": false,
+      "objects": 1687.0,
+      "ready_ms": 74507.042,
+      "segment": "wide_scroll",
+      "t_ms": 82782.491,
+      "tick": 297,
+      "zoom": 0.349999994039536
+    }
+  ],
+  "startup": {
+    "engine_to_loader_ms": 758.017,
+    "first_loading_frame_ms": 47.032,
+    "initial_camera": [
+      2364.0,
+      1438.5
+    ],
+    "initial_draw_ms": 17.37,
+    "initial_tick": 0,
+    "initial_zoom": 1.0,
+    "map_seed": 731,
+    "map_size": [
+      100,
+      68
+    ],
+    "resource_load_ms": 4961.827,
+    "resumed": false,
+    "terrain_hash": 1492048986,
+    "until_control_ms": 8300.255,
+    "world_and_scene_ms": 3262.598
+  },
+  "summary": {
+    "30_120": {
+      "fps": 218.227174288442,
+      "frames": 12003,
+      "max_ms": 12.844,
+      "mean_ms": 4.58238073814882,
+      "over_33_50_100": [
+        0,
+        0,
+        0
+      ],
+      "p95_ms": 7.177,
+      "p99_ms": 8.93
+    },
+    "all": {
+      "fps": 218.642874010727,
+      "frames": 20394,
+      "max_ms": 3262.054,
+      "mean_ms": 4.5736683828577,
+      "over_33_50_100": [
+        1,
+        1,
+        1
+      ],
+      "p95_ms": 6.6,
+      "p99_ms": 8.484
+    },
+    "first_30": {
+      "fps": 239.61630189574,
+      "frames": 7188,
+      "max_ms": 17.184,
+      "mean_ms": 4.17333875904283,
+      "over_33_50_100": [
+        0,
+        0,
+        0
+      ],
+      "p95_ms": 6.123,
+      "p99_ms": 6.77
+    },
+    "first_view": {
+      "fps": 203.757528541036,
+      "frames": 34,
+      "max_ms": 17.184,
+      "mean_ms": 4.90779411764706,
+      "over_33_50_100": [
+        0,
+        0,
+        0
+      ],
+      "p95_ms": 8.215,
+      "p99_ms": 17.184
+    },
+    "loading": {
+      "fps": 145.375570475249,
+      "frames": 1203,
+      "max_ms": 3262.054,
+      "mean_ms": 6.87873482959268,
+      "over_33_50_100": [
+        1,
+        1,
+        1
+      ],
+      "p95_ms": 5.363,
+      "p99_ms": 6.296
+    },
+    "moving": {
+      "fps": 233.331056462729,
+      "frames": 2825,
+      "max_ms": 17.184,
+      "mean_ms": 4.28575610619469,
+      "over_33_50_100": [
+        0,
+        0,
+        0
+      ],
+      "p95_ms": 6.405,
+      "p99_ms": 7.489
+    },
+    "revisit": {
+      "fps": 233.744341477452,
+      "frames": 2791,
+      "max_ms": 12.844,
+      "mean_ms": 4.27817843067001,
+      "over_33_50_100": [
+        0,
+        0,
+        0
+      ],
+      "p95_ms": 6.39,
+      "p99_ms": 7.472
+    },
+    "scroll_diagonal": {
+      "fps": 234.95554641062,
+      "frames": 2350,
+      "max_ms": 8.094,
+      "mean_ms": 4.25612425531914,
+      "over_33_50_100": [
+        0,
+        0,
+        0
+      ],
+      "p95_ms": 6.549,
+      "p99_ms": 7.203
+    },
+    "scroll_new": {
+      "fps": 239.004254275726,
+      "frames": 2390,
+      "max_ms": 7.849,
+      "mean_ms": 4.1840259414226,
+      "over_33_50_100": [
+        0,
+        0,
+        0
+      ],
+      "p95_ms": 5.987,
+      "p99_ms": 6.934
+    },
+    "scroll_return": {
+      "fps": 239.697051726264,
+      "frames": 2397,
+      "max_ms": 7.648,
+      "mean_ms": 4.17193283270755,
+      "over_33_50_100": [
+        0,
+        0,
+        0
+      ],
+      "p95_ms": 6.087,
+      "p99_ms": 6.726
+    },
+    "stationary": {
+      "fps": 224.520829938519,
+      "frames": 16366,
+      "max_ms": 11.996,
+      "mean_ms": 4.45392973237197,
+      "over_33_50_100": [
+        0,
+        0,
+        0
+      ],
+      "p95_ms": 6.713,
+      "p99_ms": 8.615
+    },
+    "wide": {
+      "fps": 214.209146730565,
+      "frames": 2142,
+      "max_ms": 11.099,
+      "mean_ms": 4.66833473389356,
+      "over_33_50_100": [
+        0,
+        0,
+        0
+      ],
+      "p95_ms": 7.608,
+      "p99_ms": 8.464
+    },
+    "wide_scroll": {
+      "fps": 179.030990264415,
+      "frames": 1790,
+      "max_ms": 12.844,
+      "mean_ms": 5.5856251396648,
+      "over_33_50_100": [
+        0,
+        0,
+        0
+      ],
+      "p95_ms": 8.808,
+      "p99_ms": 10.489
+    }
+  },
+  "audio_driver": "Dummy",
+  "source_dirty": true,
+  "non_interactive": true
+}

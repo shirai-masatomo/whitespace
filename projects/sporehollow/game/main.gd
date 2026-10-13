@@ -1,4 +1,5 @@
 extends Node2D
+const Probe=preload("res://game/play_diagnostics.gd")
 const Metrics=preload("res://game/terrain_metrics.gd")
 const Assets=preload("res://game/ui_assets.gd")
 const Journal=preload("res://game/journal_view.gd")
@@ -214,7 +215,7 @@ func _initialize_game():
 			if saved.status in ["ok","recovered"]:world=MorningSave.restore(saved.record);save_status="以前の日開始を読み込みました。次回は途中から再開します"
 			elif saved.status!="missing":save_load_blocked=true;save_status="以前の保存を読めません。保存を保護しています"
 	var world_started=Metrics.start()
-	if world==null:world=Farm.new({},randi_range(1,2147483646))
+	if world==null:world=Farm.new({},(731 if Probe.scripted else randi_range(1,2147483646)))
 	Metrics.finish("startup_world",world_started)
 	Input.set_custom_mouse_cursor(UI.grab_cursor(),Input.CURSOR_DRAG,Vector2(15,15))
 	subtasks.load_settings()
@@ -275,7 +276,7 @@ func _initialize_game():
 	controls.visible = not cinematic() and story_modal==""
 	if "--automated" in OS.get_cmdline_user_args(): automated = true
 	if automated: get_window().unfocusable = true
-	if not automated and not save_load_blocked and not world.story.intro_seen: StoryView.open(self,"intro")
+	if not automated and not Probe.scripted and not save_load_blocked and not world.story.intro_seen: StoryView.open(self,"intro")
 	if "--smoke" in OS.get_cmdline_user_args(): get_tree().create_timer(2).timeout.connect(get_tree().quit)
 	if not startup_loading:start_entry_reviews()
 
@@ -1180,6 +1181,10 @@ func _exit_tree():
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 func _input(event):
+	Probe.observe_input(event)
+	# The explicit benchmark route owns world input; F9 and window close still stop it.
+	# Manual diagnostics (no --diag-route) use the normal input path.
+	if Probe.scripted:return
 	if startup_loading:return
 	_route_input(event)
 	update_pointer_cursor()
@@ -1628,11 +1633,13 @@ func _process_measured(delta):
 	clamp_camera()
 	if menu_open or field_book or field_shop or story_modal!="" or queue_drag_id>=0 or dragging or ui_pointer_capture or wall_stroke.kind!="" or direction!=Vector2.ZERO:
 		world.Life.user_activity(world)
-	if not field_book and not field_shop and story_modal=="" and not world.paused and not automated and world.working():
+	if not field_book and not field_shop and story_modal=="" and not world.paused and not automated and Probe.experiment!="no_world" and world.working():
 		accumulated += minf(delta, 0.1) * (24.0 if not world.rest_skip.is_empty() else speed)
 		while accumulated >= Farm.DT:
 			var was_sending = not world.rest_skip.is_empty()
+			var step_started=Metrics.start()
 			world.step()
+			Metrics.finish("world_step",step_started)
 			record_actor_tracks()
 			accumulated -= Farm.DT
 			sync_danger()
@@ -1905,7 +1912,7 @@ var draw_profile={}
 func _draw():
 	if world==null:return
 	var started=Metrics.start()
-	_draw_measured()
+	if Probe.experiment!="no_scene":_draw_measured()
 	Metrics.finish("scene_draw",started)
 func _draw_measured():
 	var profile_started=Time.get_ticks_usec()
@@ -2011,6 +2018,12 @@ func _draw_measured():
 	draw_profile.total=(Time.get_ticks_usec()-profile_started)/1000.0
 
 func scene_actors() -> Array:
+	var started=Metrics.start()
+	var result=scene_actors_measured()
+	Metrics.finish("scene_actors",started)
+	return result
+
+func scene_actors_measured() -> Array:
 	var actors=[]
 	for e in HarvestView.remnants(self):actors.append({"y":center(e.pos).y+14,"x":e.pos.x,"kind":"harvest_remnant","data":e})
 	for key in world.workers:
@@ -2118,6 +2131,12 @@ func draw_down_stars(p: Vector2):
 		draw_line(v-Vector2(0,3),v+Vector2(0,3),Color("eed49b"),2)
 
 func draw_hud():
+	if Probe.experiment=="no_hud":return
+	var started=Metrics.start()
+	draw_hud_measured()
+	Metrics.finish("hud_draw",started)
+
+func draw_hud_measured():
 	if world.working() and hover_job>=0 and not pointer_over_ui():
 		for i in range(world.jobs.size()):
 			var j=world.jobs[i]
@@ -2959,7 +2978,9 @@ func enemy_hit_rect_base(e: Dictionary) -> Rect2:
 	var pose=enemy_art.get(e.id,{"action":"idle","facing":1,"at":visual_time})
 	var key="enemy/"+pose.action+("_left" if pose.facing<0 else "_right")
 	var clip=Delivered.CLIPS[key];var frame=clip.frames[Delivered.frame_index(key,visual_time-pose.at)]
+	var hit_started=Metrics.start()
 	var used=Rect2(frame.rear.get_image().get_used_rect()).merge(Rect2(frame.front.get_image().get_used_rect())) if frame is Dictionary else Rect2(frame.get_image().get_used_rect())
+	Metrics.finish("enemy_image_bounds",hit_started)
 	var foot=actor_pixel("e%d"%e.id,e.pos)+Vector2(0,14)
 	return HumanVisual.rect(Rect2(foot-clip.anchor+used.position,used.size),foot).grow(3)
 

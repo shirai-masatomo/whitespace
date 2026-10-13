@@ -1,5 +1,7 @@
 extends Node
 ## Lightweight entry: no preload dependency on game, map or audio resources.
+const Probe=preload("res://game/play_diagnostics.gd")
+var probe
 const SCENE="res://game/main.tscn"
 var review_mode=false
 var game
@@ -15,6 +17,7 @@ var started=0
 func _ready():
 	get_tree().auto_accept_quit=false
 	started=Time.get_ticks_usec()
+	Probe.configure();probe=Probe.new();probe.boot=self;add_child(probe)
 	overlay=CanvasLayer.new();overlay.layer=100;add_child(overlay)
 	var background=ColorRect.new();background.color=Color("344c3b");background.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT);overlay.add_child(background)
 	var center=CenterContainer.new();center.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT);background.add_child(center)
@@ -78,6 +81,7 @@ func prepare():
 	game.set_process(true);game.set_process_input(true);game.set_process_unhandled_input(true)
 	overlay.queue_free();finished=true
 	timings.until_control_ms=(Time.get_ticks_usec()-started)/1000.0
+	probe.mark_ready(timings)
 	game.start_entry_reviews()
 	set_process(false)
 

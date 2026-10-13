@@ -1,0 +1,794 @@
+{
+  "start_utc": "2026-10-13T14:43:00.0761242Z",
+  "process_samples": [
+    {
+      "seconds": 1.0218692,
+      "cpu_one_core_percent": 100.0,
+      "cpu_ms": 1000.0,
+      "working_set_bytes": 236822528
+    },
+    {
+      "seconds": 2.0582037,
+      "cpu_one_core_percent": 156.25,
+      "cpu_ms": 2562.5,
+      "working_set_bytes": 255582208
+    },
+    {
+      "seconds": 3.0683246,
+      "cpu_one_core_percent": 154.6875,
+      "cpu_ms": 4109.375,
+      "working_set_bytes": 263462912
+    },
+    {
+      "seconds": 4.0860278,
+      "cpu_one_core_percent": 148.4375,
+      "cpu_ms": 5593.75,
+      "working_set_bytes": 270184448
+    },
+    {
+      "seconds": 5.0975222,
+      "cpu_one_core_percent": 148.4375,
+      "cpu_ms": 7078.125,
+      "working_set_bytes": 290803712
+    },
+    {
+      "seconds": 6.106998,
+      "cpu_one_core_percent": 112.5,
+      "cpu_ms": 8203.125,
+      "working_set_bytes": 276545536
+    },
+    {
+      "seconds": 7.1183667,
+      "cpu_one_core_percent": 101.5625,
+      "cpu_ms": 9218.75,
+      "working_set_bytes": 283295744
+    },
+    {
+      "seconds": 8.1309741,
+      "cpu_one_core_percent": 98.4375,
+      "cpu_ms": 10203.125,
+      "working_set_bytes": 346112000
+    },
+    {
+      "seconds": 9.1379828,
+      "cpu_one_core_percent": 64.0625,
+      "cpu_ms": 10843.75,
+      "working_set_bytes": 346640384
+    },
+    {
+      "seconds": 10.1551399,
+      "cpu_one_core_percent": 100.0,
+      "cpu_ms": 11843.75,
+      "working_set_bytes": 347127808
+    },
+    {
+      "seconds": 11.173282,
+      "cpu_one_core_percent": 101.5625,
+      "cpu_ms": 12859.375,
+      "working_set_bytes": 346984448
+    },
+    {
+      "seconds": 12.1813008,
+      "cpu_one_core_percent": 98.4375,
+      "cpu_ms": 13843.75,
+      "working_set_bytes": 348012544
+    },
+    {
+      "seconds": 13.2035181,
+      "cpu_one_core_percent": 98.4375,
+      "cpu_ms": 14828.125,
+      "working_set_bytes": 348712960
+    },
+    {
+      "seconds": 14.213151,
+      "cpu_one_core_percent": 100.0,
+      "cpu_ms": 15828.125,
+      "working_set_bytes": 350281728
+    },
+    {
+      "seconds": 15.2211607,
+      "cpu_one_core_percent": 100.0,
+      "cpu_ms": 16828.125,
+      "working_set_bytes": 351371264
+    },
+    {
+      "seconds": 16.2347682,
+      "cpu_one_core_percent": 98.4375,
+      "cpu_ms": 17812.5,
+      "working_set_bytes": 351928320
+    },
+    {
+      "seconds": 17.242151,
+      "cpu_one_core_percent": 93.75,
+      "cpu_ms": 18750.0,
+      "working_set_bytes": 353579008
+    },
+    {
+      "seconds": 18.2671432,
+      "cpu_one_core_percent": 98.4375,
+      "cpu_ms": 19734.375,
+      "working_set_bytes": 354541568
+    },
+    {
+      "seconds": 19.2754167,
+      "cpu_one_core_percent": 96.875,
+      "cpu_ms": 20703.125,
+      "working_set_bytes": 355618816
+    },
+    {
+      "seconds": 20.2925486,
+      "cpu_one_core_percent": 100.0,
+      "cpu_ms": 21703.125,
+      "working_set_bytes": 357392384
+    },
+    {
+      "seconds": 21.3033654,
+      "cpu_one_core_percent": 100.0,
+      "cpu_ms": 22703.125,
+      "working_set_bytes": 359067648
+    },
+    {
+      "seconds": 22.3211082,
+      "cpu_one_core_percent": 100.0,
+      "cpu_ms": 23703.125,
+      "working_set_bytes": 359997440
+    },
+    {
+      "seconds": 23.3341424,
+      "cpu_one_core_percent": 98.4375,
+      "cpu_ms": 24687.5,
+      "working_set_bytes": 364843008
+    },
+    {
+      "seconds": 24.3416316,
+      "cpu_one_core_percent": 101.5625,
+      "cpu_ms": 25703.125,
+      "working_set_bytes": 365502464
+    },
+    {
+      "seconds": 25.3510105,
+      "cpu_one_core_percent": 101.5625,
+      "cpu_ms": 26718.75,
+      "working_set_bytes": 366641152
+    },
+    {
+      "seconds": 26.3626842,
+      "cpu_one_core_percent": 98.4375,
+      "cpu_ms": 27703.125,
+      "working_set_bytes": 368611328
+    },
+    {
+      "seconds": 27.3716209,
+      "cpu_one_core_percent": 100.0,
+      "cpu_ms": 28703.125,
+      "working_set_bytes": 369303552
+    },
+    {
+      "seconds": 28.3828396,
+      "cpu_one_core_percent": 95.3125,
+      "cpu_ms": 29656.25,
+      "working_set_bytes": 370532352
+    },
+    {
+      "seconds": 29.3940285,
+      "cpu_one_core_percent": 100.0,
+      "cpu_ms": 30656.25,
+      "working_set_bytes": 371892224
+    },
+    {
+      "seconds": 30.401342,
+      "cpu_one_core_percent": 92.1875,
+      "cpu_ms": 31578.125,
+      "working_set_bytes": 373514240
+    },
+    {
+      "seconds": 31.4081924,
+      "cpu_one_core_percent": 101.5625,
+      "cpu_ms": 32593.75,
+      "working_set_bytes": 373915648
+    },
+    {
+      "seconds": 32.4254655,
+      "cpu_one_core_percent": 98.4375,
+      "cpu_ms": 33578.125,
+      "working_set_bytes": 374980608
+    },
+    {
+      "seconds": 33.4352247,
+      "cpu_one_core_percent": 96.875,
+      "cpu_ms": 34546.875,
+      "working_set_bytes": 376213504
+    },
+    {
+      "seconds": 34.4467079,
+      "cpu_one_core_percent": 101.5625,
+      "cpu_ms": 35562.5,
+      "working_set_bytes": 377577472
+    },
+    {
+      "seconds": 35.4594824,
+      "cpu_one_core_percent": 100.0,
+      "cpu_ms": 36562.5,
+      "working_set_bytes": 379072512
+    },
+    {
+      "seconds": 36.4777461,
+      "cpu_one_core_percent": 93.75,
+      "cpu_ms": 37500.0,
+      "working_set_bytes": 380305408
+    },
+    {
+      "seconds": 37.4889863,
+      "cpu_one_core_percent": 96.875,
+      "cpu_ms": 38468.75,
+      "working_set_bytes": 381394944
+    },
+    {
+      "seconds": 38.5000486,
+      "cpu_one_core_percent": 96.875,
+      "cpu_ms": 39437.5,
+      "working_set_bytes": 382476288
+    },
+    {
+      "seconds": 39.5257067,
+      "cpu_one_core_percent": 98.4375,
+      "cpu_ms": 40421.875,
+      "working_set_bytes": 383868928
+    },
+    {
+      "seconds": 40.5338238,
+      "cpu_one_core_percent": 101.5625,
+      "cpu_ms": 41437.5,
+      "working_set_bytes": 385196032
+    },
+    {
+      "seconds": 41.5414209,
+      "cpu_one_core_percent": 103.125,
+      "cpu_ms": 42468.75,
+      "working_set_bytes": 386539520
+    },
+    {
+      "seconds": 42.553723,
+      "cpu_one_core_percent": 101.5625,
+      "cpu_ms": 43484.375,
+      "working_set_bytes": 387751936
+    },
+    {
+      "seconds": 43.5701817,
+      "cpu_one_core_percent": 103.125,
+      "cpu_ms": 44515.625,
+      "working_set_bytes": 390045696
+    },
+    {
+      "seconds": 44.5881343,
+      "cpu_one_core_percent": 100.0,
+      "cpu_ms": 45515.625,
+      "working_set_bytes": 391843840
+    },
+    {
+      "seconds": 45.6064697,
+      "cpu_one_core_percent": 100.0,
+      "cpu_ms": 46515.625,
+      "working_set_bytes": 392654848
+    },
+    {
+      "seconds": 46.6148348,
+      "cpu_one_core_percent": 101.5625,
+      "cpu_ms": 47531.25,
+      "working_set_bytes": 394543104
+    },
+    {
+      "seconds": 47.6269828,
+      "cpu_one_core_percent": 101.5625,
+      "cpu_ms": 48546.875,
+      "working_set_bytes": 396025856
+    },
+    {
+      "seconds": 48.637413,
+      "cpu_one_core_percent": 100.0,
+      "cpu_ms": 49546.875,
+      "working_set_bytes": 397238272
+    },
+    {
+      "seconds": 49.6628094,
+      "cpu_one_core_percent": 100.0,
+      "cpu_ms": 50546.875,
+      "working_set_bytes": 398458880
+    },
+    {
+      "seconds": 50.6736142,
+      "cpu_one_core_percent": 101.5625,
+      "cpu_ms": 51562.5,
+      "working_set_bytes": 399822848
+    },
+    {
+      "seconds": 51.6812538,
+      "cpu_one_core_percent": 100.0,
+      "cpu_ms": 52562.5,
+      "working_set_bytes": 401428480
+    },
+    {
+      "seconds": 52.6900286,
+      "cpu_one_core_percent": 101.5625,
+      "cpu_ms": 53578.125,
+      "working_set_bytes": 402509824
+    },
+    {
+      "seconds": 53.7025683,
+      "cpu_one_core_percent": 100.0,
+      "cpu_ms": 54578.125,
+      "working_set_bytes": 404148224
+    },
+    {
+      "seconds": 54.7105197,
+      "cpu_one_core_percent": 101.5625,
+      "cpu_ms": 55593.75,
+      "working_set_bytes": 405676032
+    },
+    {
+      "seconds": 55.7201606,
+      "cpu_one_core_percent": 98.4375,
+      "cpu_ms": 56578.125,
+      "working_set_bytes": 406487040
+    },
+    {
+      "seconds": 56.7310598,
+      "cpu_one_core_percent": 100.0,
+      "cpu_ms": 57578.125,
+      "working_set_bytes": 407961600
+    },
+    {
+      "seconds": 57.7496257,
+      "cpu_one_core_percent": 104.6875,
+      "cpu_ms": 58625.0,
+      "working_set_bytes": 409714688
+    },
+    {
+      "seconds": 58.7554875,
+      "cpu_one_core_percent": 96.875,
+      "cpu_ms": 59593.75,
+      "working_set_bytes": 410857472
+    },
+    {
+      "seconds": 59.7632679,
+      "cpu_one_core_percent": 98.4375,
+      "cpu_ms": 60578.125,
+      "working_set_bytes": 412602368
+    },
+    {
+      "seconds": 60.785167,
+      "cpu_one_core_percent": 103.125,
+      "cpu_ms": 61609.375,
+      "working_set_bytes": 413544448
+    },
+    {
+      "seconds": 61.7989967,
+      "cpu_one_core_percent": 103.125,
+      "cpu_ms": 62640.625,
+      "working_set_bytes": 414752768
+    },
+    {
+      "seconds": 62.809285,
+      "cpu_one_core_percent": 98.4375,
+      "cpu_ms": 63625.0,
+      "working_set_bytes": 416694272
+    },
+    {
+      "seconds": 63.8164333,
+      "cpu_one_core_percent": 100.0,
+      "cpu_ms": 64625.0,
+      "working_set_bytes": 417771520
+    },
+    {
+      "seconds": 64.8230349,
+      "cpu_one_core_percent": 98.4375,
+      "cpu_ms": 65609.375,
+      "working_set_bytes": 419115008
+    },
+    {
+      "seconds": 65.8303881,
+      "cpu_one_core_percent": 101.5625,
+      "cpu_ms": 66625.0,
+      "working_set_bytes": 420192256
+    },
+    {
+      "seconds": 66.8389139,
+      "cpu_one_core_percent": 100.0,
+      "cpu_ms": 67625.0,
+      "working_set_bytes": 421670912
+    },
+    {
+      "seconds": 67.8453238,
+      "cpu_one_core_percent": 98.4375,
+      "cpu_ms": 68609.375,
+      "working_set_bytes": 423813120
+    },
+    {
+      "seconds": 68.8524794,
+      "cpu_one_core_percent": 98.4375,
+      "cpu_ms": 69593.75,
+      "working_set_bytes": 426745856
+    },
+    {
+      "seconds": 69.8660741,
+      "cpu_one_core_percent": 101.5625,
+      "cpu_ms": 70609.375,
+      "working_set_bytes": 428097536
+    },
+    {
+      "seconds": 70.8783378,
+      "cpu_one_core_percent": 103.125,
+      "cpu_ms": 71640.625,
+      "working_set_bytes": 428773376
+    },
+    {
+      "seconds": 71.8855044,
+      "cpu_one_core_percent": 100.0,
+      "cpu_ms": 72640.625,
+      "working_set_bytes": 429846528
+    },
+    {
+      "seconds": 72.9090983,
+      "cpu_one_core_percent": 106.25,
+      "cpu_ms": 73703.125,
+      "working_set_bytes": 430923776
+    },
+    {
+      "seconds": 73.9321575,
+      "cpu_one_core_percent": 100.0,
+      "cpu_ms": 74703.125,
+      "working_set_bytes": 432136192
+    },
+    {
+      "seconds": 74.9569561,
+      "cpu_one_core_percent": 103.125,
+      "cpu_ms": 75734.375,
+      "working_set_bytes": 433618944
+    },
+    {
+      "seconds": 75.9640237,
+      "cpu_one_core_percent": 100.0,
+      "cpu_ms": 76734.375,
+      "working_set_bytes": 434565120
+    },
+    {
+      "seconds": 76.9780183,
+      "cpu_one_core_percent": 101.5625,
+      "cpu_ms": 77750.0,
+      "working_set_bytes": 435777536
+    },
+    {
+      "seconds": 77.9876219,
+      "cpu_one_core_percent": 101.5625,
+      "cpu_ms": 78765.625,
+      "working_set_bytes": 436723712
+    },
+    {
+      "seconds": 79.0082267,
+      "cpu_one_core_percent": 101.5625,
+      "cpu_ms": 79781.25,
+      "working_set_bytes": 438198272
+    },
+    {
+      "seconds": 80.0276398,
+      "cpu_one_core_percent": 101.5625,
+      "cpu_ms": 80796.875,
+      "working_set_bytes": 439160832
+    },
+    {
+      "seconds": 81.0372406,
+      "cpu_one_core_percent": 101.5625,
+      "cpu_ms": 81812.5,
+      "working_set_bytes": 440238080
+    },
+    {
+      "seconds": 82.0563309,
+      "cpu_one_core_percent": 101.5625,
+      "cpu_ms": 82828.125,
+      "working_set_bytes": 441581568
+    },
+    {
+      "seconds": 83.0676692,
+      "cpu_one_core_percent": 101.5625,
+      "cpu_ms": 83843.75,
+      "working_set_bytes": 442122240
+    },
+    {
+      "seconds": 84.0882343,
+      "cpu_one_core_percent": 101.5625,
+      "cpu_ms": 84859.375,
+      "working_set_bytes": 443129856
+    },
+    {
+      "seconds": 85.0958529,
+      "cpu_one_core_percent": 103.125,
+      "cpu_ms": 85890.625,
+      "working_set_bytes": 443531264
+    },
+    {
+      "seconds": 86.1072928,
+      "cpu_one_core_percent": 101.5625,
+      "cpu_ms": 86906.25,
+      "working_set_bytes": 444878848
+    },
+    {
+      "seconds": 87.1283246,
+      "cpu_one_core_percent": 103.125,
+      "cpu_ms": 87937.5,
+      "working_set_bytes": 445952000
+    },
+    {
+      "seconds": 88.1410325,
+      "cpu_one_core_percent": 100.0,
+      "cpu_ms": 88937.5,
+      "working_set_bytes": 446492672
+    },
+    {
+      "seconds": 89.1560729,
+      "cpu_one_core_percent": 100.0,
+      "cpu_ms": 89937.5,
+      "working_set_bytes": 447299584
+    },
+    {
+      "seconds": 90.1623197,
+      "cpu_one_core_percent": 100.0,
+      "cpu_ms": 90937.5,
+      "working_set_bytes": 448376832
+    },
+    {
+      "seconds": 91.1717395,
+      "cpu_one_core_percent": 103.125,
+      "cpu_ms": 91968.75,
+      "working_set_bytes": 449581056
+    },
+    {
+      "seconds": 92.1863408,
+      "cpu_one_core_percent": 101.5625,
+      "cpu_ms": 92984.375,
+      "working_set_bytes": 450387968
+    },
+    {
+      "seconds": 93.1969372,
+      "cpu_one_core_percent": 98.4375,
+      "cpu_ms": 93968.75,
+      "working_set_bytes": 450793472
+    },
+    {
+      "seconds": 94.2104024,
+      "cpu_one_core_percent": 103.125,
+      "cpu_ms": 95000.0,
+      "working_set_bytes": 451735552
+    },
+    {
+      "seconds": 95.2333524,
+      "cpu_one_core_percent": 103.125,
+      "cpu_ms": 96031.25,
+      "working_set_bytes": 452501504
+    },
+    {
+      "seconds": 96.2529061,
+      "cpu_one_core_percent": 101.5625,
+      "cpu_ms": 97046.875,
+      "working_set_bytes": 453840896
+    },
+    {
+      "seconds": 97.2634589,
+      "cpu_one_core_percent": 98.4375,
+      "cpu_ms": 98031.25,
+      "working_set_bytes": 454647808
+    },
+    {
+      "seconds": 98.2756849,
+      "cpu_one_core_percent": 103.125,
+      "cpu_ms": 99062.5,
+      "working_set_bytes": 455323648
+    },
+    {
+      "seconds": 99.2872609,
+      "cpu_one_core_percent": 100.0,
+      "cpu_ms": 100062.5,
+      "working_set_bytes": 456396800
+    },
+    {
+      "seconds": 100.3097668,
+      "cpu_one_core_percent": 101.5625,
+      "cpu_ms": 101078.125,
+      "working_set_bytes": 457469952
+    },
+    {
+      "seconds": 101.3233619,
+      "cpu_one_core_percent": 101.5625,
+      "cpu_ms": 102093.75,
+      "working_set_bytes": 458711040
+    },
+    {
+      "seconds": 102.3292163,
+      "cpu_one_core_percent": 101.5625,
+      "cpu_ms": 103109.375,
+      "working_set_bytes": 459517952
+    },
+    {
+      "seconds": 103.3362358,
+      "cpu_one_core_percent": 100.0,
+      "cpu_ms": 104109.375,
+      "working_set_bytes": 460058624
+    },
+    {
+      "seconds": 104.3446601,
+      "cpu_one_core_percent": 103.125,
+      "cpu_ms": 105140.625,
+      "working_set_bytes": 461139968
+    },
+    {
+      "seconds": 105.3579643,
+      "cpu_one_core_percent": 100.0,
+      "cpu_ms": 106140.625,
+      "working_set_bytes": 462082048
+    },
+    {
+      "seconds": 106.3700727,
+      "cpu_one_core_percent": 100.0,
+      "cpu_ms": 107140.625,
+      "working_set_bytes": 463421440
+    },
+    {
+      "seconds": 107.3792174,
+      "cpu_one_core_percent": 101.5625,
+      "cpu_ms": 108156.25,
+      "working_set_bytes": 463962112
+    },
+    {
+      "seconds": 108.3930713,
+      "cpu_one_core_percent": 101.5625,
+      "cpu_ms": 109171.875,
+      "working_set_bytes": 465035264
+    },
+    {
+      "seconds": 109.4034292,
+      "cpu_one_core_percent": 100.0,
+      "cpu_ms": 110171.875,
+      "working_set_bytes": 466243584
+    },
+    {
+      "seconds": 110.4151179,
+      "cpu_one_core_percent": 103.125,
+      "cpu_ms": 111203.125,
+      "working_set_bytes": 466808832
+    },
+    {
+      "seconds": 111.4243516,
+      "cpu_one_core_percent": 101.5625,
+      "cpu_ms": 112218.75,
+      "working_set_bytes": 467464192
+    },
+    {
+      "seconds": 112.4441354,
+      "cpu_one_core_percent": 101.5625,
+      "cpu_ms": 113234.375,
+      "working_set_bytes": 468738048
+    },
+    {
+      "seconds": 113.4536756,
+      "cpu_one_core_percent": 101.5625,
+      "cpu_ms": 114250.0,
+      "working_set_bytes": 469278720
+    },
+    {
+      "seconds": 114.4610959,
+      "cpu_one_core_percent": 100.0,
+      "cpu_ms": 115250.0,
+      "working_set_bytes": 470216704
+    },
+    {
+      "seconds": 115.4712018,
+      "cpu_one_core_percent": 98.4375,
+      "cpu_ms": 116234.375,
+      "working_set_bytes": 471289856
+    },
+    {
+      "seconds": 116.4927727,
+      "cpu_one_core_percent": 87.5,
+      "cpu_ms": 117109.375,
+      "working_set_bytes": 471826432
+    },
+    {
+      "seconds": 117.5034874,
+      "cpu_one_core_percent": 96.875,
+      "cpu_ms": 118078.125,
+      "working_set_bytes": 473382912
+    },
+    {
+      "seconds": 118.5109648,
+      "cpu_one_core_percent": 98.4375,
+      "cpu_ms": 119062.5,
+      "working_set_bytes": 473923584
+    },
+    {
+      "seconds": 119.5185995,
+      "cpu_one_core_percent": 101.5625,
+      "cpu_ms": 120078.125,
+      "working_set_bytes": 475013120
+    },
+    {
+      "seconds": 120.5314555,
+      "cpu_one_core_percent": 96.875,
+      "cpu_ms": 121046.875,
+      "working_set_bytes": 475688960
+    },
+    {
+      "seconds": 121.5436898,
+      "cpu_one_core_percent": 100.0,
+      "cpu_ms": 122046.875,
+      "working_set_bytes": 476504064
+    },
+    {
+      "seconds": 122.5643977,
+      "cpu_one_core_percent": 103.125,
+      "cpu_ms": 123078.125,
+      "working_set_bytes": 477843456
+    },
+    {
+      "seconds": 123.5759165,
+      "cpu_one_core_percent": 100.0,
+      "cpu_ms": 124078.125,
+      "working_set_bytes": 478900224
+    },
+    {
+      "seconds": 124.5862541,
+      "cpu_one_core_percent": 100.0,
+      "cpu_ms": 125078.125,
+      "working_set_bytes": 480108544
+    },
+    {
+      "seconds": 125.5966818,
+      "cpu_one_core_percent": 100.0,
+      "cpu_ms": 126078.125,
+      "working_set_bytes": 480784384
+    },
+    {
+      "seconds": 126.6049801,
+      "cpu_one_core_percent": 98.4375,
+      "cpu_ms": 127062.5,
+      "working_set_bytes": 481591296
+    },
+    {
+      "seconds": 127.6196839,
+      "cpu_one_core_percent": 100.0,
+      "cpu_ms": 128062.5,
+      "working_set_bytes": 482799616
+    },
+    {
+      "seconds": 128.6427704,
+      "cpu_one_core_percent": 103.125,
+      "cpu_ms": 129093.75,
+      "working_set_bytes": 506998784
+    }
+  ],
+  "source": true,
+  "args": [
+    "--resolution",
+    "1280x800",
+    "--max-fps",
+    "240",
+    "--log-file",
+    "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\diagnostics\\desktop.log",
+    "--path",
+    "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow",
+    "--disable-vsync",
+    "--windowed",
+    "--",
+    "--diagnostics",
+    "--diag-shot",
+    "--diag-case=baseline",
+    "--diag-seconds=120",
+    "--diag-route",
+    "--diag-gpu"
+  ],
+  "normal_save_unchanged": true,
+  "tag": "desktop-baseline",
+  "pid": 42808,
+  "exit_code": 0,
+  "end_utc": "2026-10-13T14:45:09.9874188Z",
+  "exe_sha256": "AB1824F85BFD8E0E4128182C000C4003A3E042245B2967848D089B2A04B22424",
+  "case": "baseline"
+}

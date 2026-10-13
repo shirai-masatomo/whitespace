@@ -1,11 +1,10 @@
-# 最新レビュー：起動準備とローディング
+# 最新レビュー：実プレイ性能診断
 
-実装・通常EXE `739de0e`。作業ブランチ `codex/sporehollow-biome01`。
+体感の重さは未解決。比較実験はここで区切り、診断機能と地面の限定修正を納品する。
 
-- [起動負荷の内訳・変更・検証・残課題](startup/REPORT.md)
-- [ローディングの実画面](startup/loading.png) / [準備後](startup/after-ready.png)
-- [配布EXE・テスト結果](startup/DELIVERY.json)
+- [結果・比較表・未検証](performance-diagnosis/REPORT.md)
+- [F9と条件別の起動手順](performance-diagnosis/README.md)
+- [通常画面](performance-diagnosis/desktop-baseline.png)
+- 配布版：performance-diagnosis/DELIVERY.json
 
-素材・マップ・音・初期描画の準備完了まで入力と世界時間を止める。初日の商人停止は維持。通常の起動入口は同じ。起動後の重さを全環境で解消したとは扱わない。
-
-前回：[初日商人停止・地表とスクロール](ground_scroll/REPORT.md)、[分類別選択](selection_controls/REPORT.md)。
+前回：[ローディング](startup/REPORT.md)。作業ブランチ codex/sporehollow-biome01。
