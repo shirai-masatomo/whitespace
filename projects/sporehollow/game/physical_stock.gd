@@ -213,7 +213,7 @@ static func haul_step(w,j,a):
 		if destination(w,a,mini(Policy.CARRY_CAPACITY,free_count(row)),row.kind)==null:j.state="blocked";j.block_reason="この種類を許可する備蓄を指定してください";return
 		if reserve(w,row.kind,Policy.CARRY_CAPACITY,token,a,row.stock_id,false).is_empty():j.state="blocked";j.block_reason="物資は別の人が使用中です";return
 	j.phase="fetch"
-	if not w.Jobs.walk(w,j,w.neighbors(row.pos),a):return
+	if not w.Jobs.walk(w,j,w.neighbors(row.pos)+([row.pos] if a.pos==row.pos else []),a):return
 	pickup(w,row,token,a,j.id);j.state="working"
 
 static func step(w):
@@ -316,14 +316,22 @@ static func reconcile_forbidden(w):
 
 # Physical ownership is independent of availability, stockpile location and reservations.
 static func summary(w,kind: String) -> Dictionary:
-	var result={"owned":0,"available":available(w,kind),"stored":0,"carried":0,"site":0,"forbidden":0,"reserved":0}
+	var q={"owned":0,"stored":0,"available":available(w,kind),"carried":0,"site":0,"reserved":0,"outside":0,"equipped":0,"stolen":0,"forbidden":0}
 	for row in w.field_items:
 		if row.kind!=kind:continue
-		var n=int(row.get("amount",1));var location=row.get("location","ground")
-		result.owned+=n
-		if stored(w,row):result.stored+=n
-		if location=="carry":result.carried+=n
-		if location=="site":result.site+=n
-		if row.get("forbidden",false):result.forbidden+=n
-		for count in row.get("claims",{}).values():result.reserved+=int(count)
-	return result
+		var n=int(row.get("amount",1));q.owned+=n
+		if row.get("forbidden",false):q.forbidden+=n
+		match row.get("location","ground"):
+			"carry":q.carried+=n
+			"site":q.site+=n
+			_:
+				if stored(w,row):q.stored+=n
+				else:q.outside+=n
+		var claimed=0
+		for amount in row.get("claims",{}).values():claimed+=int(amount)
+		q.reserved+=mini(n,claimed)
+	for a in [w.keeper]+w.animals:
+		if a.get("equipment",{}).get("item_id","")==kind:q.equipped+=1;q.owned+=1
+	for e in w.enemies:
+		if e.get("stolen",{}).get("kind","")==kind:q.stolen+=int(e.stolen.get("amount",1))
+	return q

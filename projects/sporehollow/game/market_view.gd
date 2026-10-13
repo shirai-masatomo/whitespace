@@ -51,17 +51,17 @@ static func product_name(row: Dictionary) -> String:
 
 static func role(id: String) -> String:
 	if Shop.Animals.SPECIES.has(id):return Shop.Animals.short_description(id)
-	return {"wood_staff":"牧場主用。突き：射程2・威力3・間隔1.8秒（仮）。選択して現物を装備。","kokeshi":"周囲3マスの敵味方の移動を0.8倍。現地設置・回収。","fossil":"飾って回収できる化石。盗賊に注意。復活機能は未実装。","milk":"現地で搾乳したミルク。1個6Gで売却できます。","doberman":"屋外で強く迎撃","bullfrog":"舌拘束と警報","hedgehog":"被弾と警報で迎撃","collar":"犬の忠誠・防御を補助","berry":"ピンチで一度回復","hen":"朝に卵を産む", "cat":"気ままな仲間", "soil":"土の壁・床に", "wood":"木の壁・床に", "stone":"石の壁・床に", "whistle":"遠くの仲間へ指示", "coffee":"眠気を12軽減", "energy_drink":"眠気を25軽減", "egg":"牧場の生産物", "feather":"鶏の落とし物", "mushroom":"仲間の回復に"}.get(id,"牧場で使う品")
+	return {"wood_staff":"牧場主用。突き：射程2・威力3・間隔1.8秒。選択して現物を装備。","kokeshi":"周囲3マスの敵味方の移動を0.8倍。現地設置・回収。","fossil":"飾って回収できる化石。盗賊に注意。復活機能は未実装。","milk":"現地で搾乳したミルク。1個6Gで売却できます。","doberman":"屋外で強く迎撃","bullfrog":"舌拘束と警報","hedgehog":"被弾と警報で迎撃","collar":"犬の忠誠・防御を補助","berry":"ピンチで一度回復","hen":"朝に卵を産む", "cat":"気ままな仲間", "soil":"土の壁・床に", "wood":"木の壁・床に", "stone":"石の壁・床に", "whistle":"遠くの仲間へ指示", "coffee":"眠気を12軽減", "energy_drink":"眠気を25軽減", "egg":"牧場の生産物", "feather":"鶏の落とし物", "mushroom":"仲間の回復に"}.get(id,"牧場で使う品")
 
 static func description(id: String) -> String:
 	if Shop.Animals.SPECIES.has(id):return Shop.Animals.character_text(id)
-	return {"wood_staff":"牧場主用。突き：射程2・威力3・間隔1.8秒（仮）。選択して現物を装備。","kokeshi":"周囲3マスの敵味方の移動を0.8倍。現地設置・回収。","fossil":"飾って回収できる化石。盗賊に注意。復活機能は未実装。","milk":"現地で搾乳したミルク。1個6Gで売却できます。","doberman":"屋外専用の自律迎撃犬。救出本能はありません。", "bullfrog":"舌で敵の移動を止め、被弾すると警報を共有。", "hedgehog":"被弾や共有情報に反応して迎撃。棘で防御します。", "collar":"犬系の忠誠+25、防御+2。非消耗。現地で装備。", "berry":"生存中HP50%以下で消費し、最大HPの1/4回復。", "hen":"朝に卵を産みます。\n移動の誘導に応じます。攻撃はしません。", "cat":"気ままに牧場を歩きます。\n指示には従いません。", "soil":"土の壁や床を作る資材。", "wood":"木の壁・床・ドアを作る資材。", "stone":"石の壁や床を作る資材。", "whistle":"6マス先まで指示できます。\n対応する仲間を最大8匹、一緒に誘導。\n非消耗。猫は指示に従いません。", "coffee":"眠気を12軽減します。\n飲み物は合計1日2本まで。", "energy_drink":"眠気を25軽減します。\n飲み物は合計1日2本まで。", "egg":preload("res://game/onsite_clarity.gd").CARRIED_EGG, "feather":"鶏が落とした柔らかな羽。", "mushroom":"夜明けに傷ついた仲間を癒します。"}.get(id,"牧場で使う品です。")
+	return {"wood_staff":"牧場主用。突き：射程2・威力3・間隔1.8秒。選択して現物を装備。","kokeshi":"周囲3マスの敵味方の移動を0.8倍。現地設置・回収。","fossil":"飾って回収できる化石。盗賊に注意。復活機能は未実装。","milk":"現地で搾乳したミルク。1個6Gで売却できます。","doberman":"屋外専用の自律迎撃犬。救出本能はありません。", "bullfrog":"舌で敵の移動を止め、被弾すると警報を共有。", "hedgehog":"被弾や共有情報に反応して迎撃。棘で防御します。", "collar":"犬系の忠誠+25、防御+2。非消耗。現地で装備。", "berry":"生存中HP50%以下で消費し、最大HPの1/4回復。", "hen":"朝に卵を産みます。\n移動の誘導に応じます。攻撃はしません。", "cat":"気ままに牧場を歩きます。\n移動の誘導に応じます。", "soil":"土の壁や床を作る資材。", "wood":"木の壁・床・ドアを作る資材。", "stone":"石の壁や床を作る資材。", "whistle":"6マス先まで指示できます。\n対応する仲間を最大8匹、一緒に誘導。\n非消耗。対応する指示は種類によって異なります。", "coffee":"眠気を12軽減します。\n飲み物は合計1日2本まで。", "energy_drink":"眠気を25軽減します。\n飲み物は合計1日2本まで。", "egg":preload("res://game/onsite_clarity.gd").CARRIED_EGG, "feather":"鶏が落とした柔らかな羽。", "mushroom":"夜明けに傷ついた仲間を癒します。"}.get(id,"牧場で使う品です。")
 
 static func owned(world, row: Dictionary) -> int:
 	var p=Shop.table()[row.id]
-	if p.Category=="materials":return world.resource_amount(row.id)
+	if p.Category=="materials":return world.Stock.summary(world,row.id).owned
 	if p.Category=="animals":return world.campaign.animals.filter(func(a):return a.species==row.id).size()
-	return world.item_count(row.id)
+	return world.Stock.summary(world,row.id).owned
 
 static func reason(world, side: String, row: Dictionary) -> String:
 	var p=Shop.table()[row.id]
@@ -108,6 +108,7 @@ static func art(c: CanvasItem, id: String, area: Rect2, game):
 		var region: Rect2=image_regions[id]
 		if region.has_area():
 			var ratio=minf(area.size.x/region.size.x,area.size.y/region.size.y)
+			if id in ["wood_staff","milk","hammer","basket","animals","buy","sell"]:ratio=minf(ratio,3.0)
 			var size=region.size*ratio
 			c.draw_texture_rect_region(texture,Rect2((area.get_center()-size*0.5).round(),size.round()),region)
 			return
@@ -433,15 +434,18 @@ static func draw_detail(game):
 	var one="1回の%s：%s"%["購入" if buying else "売却",product_name(row)+(" ×1" if p.Amount==1 else "")]
 	text(game,c,Rect2(616,397,512,24),one,17)
 	text(game,c,Rect2(616,427,512,24),(quantity+"　／　" if quantity!="" else "")+own,17,MUTED)
-	price(game,c,Vector2(616,465),cost,28)
+	if p.Category!="animals":
+		var q=game.world.Stock.summary(game.world,row.id)
+		text(game,c,Rect2(616,457,512,22),"備蓄 %d / 利用可能 %d / 携行 %d / 現場 %d"%[q.stored,q.available,q.carried,q.site],14,MUTED)
+	price(game,c,Vector2(616,482),cost,22)
 	var why=reason(game.world,game.shop_side,row)
 	var after=game.world.campaign.gold+(-cost if buying else cost)
 	c.draw_style_box(panel(Color("dfd4b5"),Color("c4b28b")),Rect2(LEFT,514,752,40))
 	text(game,c,Rect2(LEFT+20,520,716,28),"所持金 %dG → %s %dG"%[game.world.campaign.gold,"購入後" if buying else "売却後",after] if why=="" else "所持金 %dG　／　%s"%[game.world.campaign.gold,why],20,UI.INK if why=="" else UI.DANGER)
-	draw_footer(game)
+	if game.shop_notice=="":draw_footer(game)
 	if game.shop_notice!="":
-		c.draw_style_box(panel(Color("dce5ca"),Color("9dac88")),Rect2(136,626,208,136))
-		text(game,c,Rect2(148,639,184,110),game.shop_notice,16,UI.INK)
+		c.draw_style_box(panel(Color("dce5ca"),Color("9dac88")),Rect2(LEFT,620,752,60))
+		text(game,c,Rect2(LEFT+14,625,722,48),game.shop_notice+("\n資材は入口に到着。回収して備蓄へ運ぶと使えます。" if buying and p.Category=="materials" else ""),15,UI.INK)
 
 static func individual(game,row) -> Dictionary:
 	if row.get("animal_id",-1)>=0:

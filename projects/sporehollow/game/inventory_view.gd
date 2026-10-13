@@ -12,21 +12,19 @@ static func open(g):
 	var counts=g.world.Stock.totals(g.world)
 	var ids=counts.keys();ids.sort()
 	for id in ids:
-		if counts[id]<=0:continue
+		if counts[id]<=0 or g.world.Shop.FOOD.has(id):continue
 		var product=g.world.Shop.table().get(id,{"Name":id,"Rarity":0})
-		var row=HBoxContainer.new();row.custom_minimum_size.y=62;row.add_theme_constant_override("separation",18);list.add_child(row)
+		var row=HBoxContainer.new();row.custom_minimum_size.y=112;row.add_theme_constant_override("separation",18);list.add_child(row)
 		var pic=TextureRect.new();pic.texture=g.MarketView.texture_for(id) if g.MarketView.texture_for(id)!=null else g.UI.icon("basket");pic.custom_minimum_size=Vector2(54,54);pic.expand_mode=TextureRect.EXPAND_IGNORE_SIZE;pic.stretch_mode=TextureRect.STRETCH_KEEP_ASPECT_CENTERED;row.add_child(pic)
-		var body=Label.new();body.custom_minimum_size.x=560
+		var body=Label.new();body.custom_minimum_size.x=610
 		var name={"soil":"土","wood":"木材","stone":"石"}.get(id,product.Name)
 		var purpose=g.MarketView.description(id)
-		if g.world.Shop.FOOD.has(id):purpose="旧支給品。食料機能は現在保留中"
+
 		if id in ["soil","wood","stone"]:purpose="建設・改築に使う素材"
-		if id in g.world.Work.Policy.HUMAN_FOOD:purpose="空腹時に食べます。保管域を経由せず、地面からも利用できます"
-		var places={"ground":0,"carry":0,"site":0}
-		for item in g.world.field_items:
-			if item.kind==id:places[item.get("location","ground")]+=item.get("amount",1)
-		body.text=name+" ×%d"%counts[id]+"  地面%d / 運搬%d / 現場%d"%[places.ground,places.carry,places.site]+"\n"+purpose.replace("\n"," ")
-		body.add_theme_font_size_override("font_size",17);body.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART
+		if id in g.world.Work.Policy.HUMAN_FOOD:purpose="備蓄に回収した食料を、空腹時に取りに行って食べます。"
+		var q=g.world.Stock.summary(g.world,id)
+		body.text=name+"  所持 %d"%q.owned+"  利用可能 %d"%q.available+"\n備蓄 %d / 携行 %d / 現場 %d / 備蓄外 %d\n予約 %d（内数） / 装備 %d"%[q.stored,q.carried,q.site,q.outside,q.reserved,q.equipped]+(" / 盗難 %d"%q.stolen if q.stolen>0 else "")+"\n"+purpose.replace("\n"," ")
+		body.add_theme_font_size_override("font_size",15);body.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART
 		row.add_child(body)
 		var tier=g.world.ProgressData.rarity(product.Rarity)
 		var emblem=TextureRect.new();emblem.texture=g.Direction.ASSETS["ui.rarity_"+g.world.ProgressData.RARITY_NAMES[tier].to_lower()].texture;emblem.custom_minimum_size=Vector2(40,40);emblem.expand_mode=TextureRect.EXPAND_IGNORE_SIZE;emblem.stretch_mode=TextureRect.STRETCH_KEEP_ASPECT_CENTERED;emblem.tooltip_text=g.world.ProgressData.RARITY_NAMES[tier];row.add_child(emblem)

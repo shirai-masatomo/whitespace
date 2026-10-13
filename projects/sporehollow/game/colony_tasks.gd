@@ -55,7 +55,7 @@ static func training_reason(w,a: Dictionary,own_job: int=-1) -> String:
 	if a.get("abductor",-1)>=0 or a.get("carrier",-1)>=0 or a.get("restrainer",-1)>=0 or a.get("state","") in ["captured","restrained","unconscious"]:return "拘束・運搬・気絶中は調教できません"
 	if not w.available(a):return "動物の回復を待っています"
 	if a.get("loyalty",0)>=100:return "基礎忠誠は上限の100です"
-	if a.get("last_training_day",-1)>=w.last_daily_day:return "今日は調教済みです（1日1回・仮）"
+	if a.get("last_training_day",-1)>=w.last_daily_day:return "今日は調教済みです（1日1回）"
 	for other in w.jobs:
 		if other.id==own_job or other.get("cancel_requested",false):continue
 		if other.get("animal_id",-1)==a.id or other.get("targets",[]).any(func(t):return t.get("id",-1)==a.id and not t.get("done",false)):return "対象には別の動物作業が予約されています"

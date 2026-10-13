@@ -26,7 +26,12 @@ static func work_summary(w) -> String:
 	var j=w.Work.active(w)
 	if not j.is_empty():return work_name(w,j)+" · "+work_state(j)
 	if w.keeper.resting:return "休息中：通常の仕事は保留"
-	return "担当・条件を確認しています" if not w.jobs.is_empty() else ""
+	if w.jobs.is_empty():return ""
+	if w.jobs_held:return w.Jobs.status(w)
+	for pending in w.jobs:
+		if pending.get("block_reason","")!="":return work_name(w,pending)+"："+pending.block_reason
+	var enabled=w.jobs.any(func(job):return w.workers.values().any(func(a):return int(a.get("work_priorities",{}).get(w.Work.category(w,job),0))>0))
+	return "担当者が休息・食事・別の作業中です" if enabled else "役割でこの仕事の担当を設定してください"
 static func category_hint(w,kind: String) -> String:
 	var category=w.Work.category(w,{"kind":kind,"pos":Vector2i.ZERO})
 	var label=w.Work.Policy.LABELS[category]

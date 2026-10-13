@@ -141,13 +141,17 @@ static func effort(w,a,j) -> float:
 			var remaining=j.get("haul_sources",[]).map(func(id):return w.Stock.find(w,id)).filter(func(r):return not r.is_empty() and r.location=="ground" and not r.get("forbidden",false))
 			if not remaining.is_empty():row=remaining[0];j.stock_id=row.stock_id;j.pos=row.pos
 		if row.is_empty() or row.get("forbidden",false):return INF
-		if w.Stock.destination(w,a,mini(Policy.CARRY_CAPACITY,w.Stock.free_count(row)),row.kind)==null:
+		var destination=w.Stock.destination(w,a,mini(Policy.CARRY_CAPACITY,w.Stock.free_count(row)),row.kind)
+		if destination==null:
 			block(w,j,"許可された備蓄が満杯か到達できません");return INF
+		# Do not repeatedly pick up dropped cargo while another resident blocks delivery.
+		if w.Jobs.path_to(w,a.pos,w.neighbors(destination),false,true).is_empty():
+			block(w,j,"備蓄への通路がふさがっています");return INF
 		position=row.pos
 	var goals=w.Mountains.job_goals(w,j) if j.has("mountain_id") else ([position] if j.kind=="move" else w.neighbors(position))
 	var route=w.Jobs.path_to(w,a.pos,goals)
 	if route.is_empty():
-		if j.has("mountain_id"):block(w,j,"岩山へ通じる作業場所がありません")
+		block(w,j,"岩山へ通じる作業場所がありません" if j.has("mountain_id") else "対象へ通じる通路がありません")
 		return INF
 	return float(route.size()-1)+minf(20,j.get("remaining",0)*w.DT)
 

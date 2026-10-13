@@ -1,4 +1,5 @@
 extends RefCounted
+const Animals=preload("res://game/animal_data.gd")
 const Assets=preload("res://game/ui_assets.gd")
 const UI=preload("res://game/ui_style.gd")
 const NAME_FONT=preload("res://assets/fonts/journal_name_font.tres")
@@ -121,7 +122,7 @@ static func draw_skills(g,c,skills: Array):
 		var skill=skills[i];var rect=skill_rect(i)
 		var edge=Color("ab843e") if skill.ultimate else Color("b8ac8a")
 		c.draw_style_box(g.MarketView.panel(Color("e8dfc2") if skill.locked else Color("f4e9c9"),edge,2 if skill.ultimate else 1),rect)
-		c.draw_texture_rect(Assets.skill_texture(skill.id),rect.grow(-7),false,Color(1,1,1,0.38) if skill.locked else Color.WHITE)
+		c.draw_texture_rect(Assets.skill_texture(skill.id),Rect2(rect.get_center()-Vector2(24,24),Vector2(48,48)),false,Color(1,1,1,0.38) if skill.locked else Color.WHITE)
 		if skill.locked:
 			# The lock distinguishes an unavailable skill without a persistent label.
 			var p=rect.position+Vector2(66,67)
@@ -134,7 +135,7 @@ static func page_number(g,c,page: int,total: int):
 # Only an owned individual's explicit name belongs on a thumbnail.
 # animal_name() falls back to a species title, and enemy records use catalog names.
 static func grid_name(row: Dictionary,enemy: bool) -> String:
-	return "" if enemy else str(row.get("name","")).strip_edges()
+	return "" if enemy else (str(row.get("name","")).strip_edges() if str(row.get("name","")).strip_edges()!="" else Animals.SPECIES.get(row.get("species",""),{}).get("title","名前をつける"))
 
 static func name_rect(card: Rect2) -> Rect2:
 	return Rect2(card.position+Vector2(2,98),Vector2(144,24))

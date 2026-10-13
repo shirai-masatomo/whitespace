@@ -23,7 +23,7 @@ static func placeholder(game,c,id: String,p: Vector2,size_value: float=1.0):
 	c.draw_rect(Rect2(p-Vector2(15,26)*size_value,Vector2(30,36)*size_value),UI.WOOD,false,2)
 	var title=game.Farm.SPECIES[id].title if animal else Data.enemy(id).name
 	game.label_on(c,p+Vector2(-22,-32)*size_value,title,12,UI.INK)
-	game.label_on(c,p+Vector2(-12,4)*size_value,"仮",12,UI.PAPER)
+	if game.world.debug_enabled:game.label_on(c,p+Vector2(-12,4)*size_value,"仮",12,UI.PAPER)
 
 static func enemy_page(game,c,index: int):
 	var id=ENEMY_ORDER[clampi(index,0,ENEMY_ORDER.size()-1)]

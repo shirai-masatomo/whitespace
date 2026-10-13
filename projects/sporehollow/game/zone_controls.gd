@@ -21,7 +21,7 @@ func build(g):
 	if not active(g) or not g.world.working() or g.field_shop or g.field_book or g.story_modal!="":return
 	var top=g.ColonyPanels.architect_area(g).position.y-208
 	var p=g.ColonyPanels.panel(g,Rect2(8,top,402,204))
-	g.ColonyPanels.label(p,"ゾーン · クリック / 範囲指定",Vector2(12,8),15)
+	g.ColonyPanels.label(p,"ゾーン · 備蓄＝物資保管 / 居住＝休息",Vector2(12,8),15)
 	for entry in [["stockpile","備蓄追加",0],["residential","居住追加",1],["resize","範囲変更",2],["","指定取消",3]]:
 		var id="zone_"+(entry[0] if entry[0]!="" else "cancel")
 		g.add_button(g.palette,id,entry[1],Rect2(20+int(entry[2])*96,top+36,90,32),select.bind(g,"zone_"+entry[0] if entry[0]!="" else ""));g.ColonyPanels.compact_button(g,g.buttons[id],12);g.UI.selected(g.buttons[id],g.tool=="zone_"+entry[0])
@@ -68,12 +68,12 @@ func draw(g):
 		for p in z.cells:cells[p]=true
 		for p in z.cells:
 			var corner=Vector2(p)*g.TILE;var selected=active(g) and z.id==selected_id
-			g.draw_rect(Rect2(corner,g.TILE),Color(color,0.16 if selected else 0.09))
+			g.draw_rect(Rect2(corner,g.TILE),Color(color,0.16 if selected else 0.04))
 			for edge in [[Vector2i.UP,Vector2.ZERO,Vector2(g.TILE.x,0)],[Vector2i.RIGHT,Vector2(g.TILE.x,0),g.TILE],[Vector2i.DOWN,Vector2(0,g.TILE.y),g.TILE],[Vector2i.LEFT,Vector2.ZERO,Vector2(0,g.TILE.y)]]:
-				if not cells.has(p+edge[0]):g.draw_line(corner+edge[1],corner+edge[2],color,2)
+				if not cells.has(p+edge[0]):g.draw_line(corner+edge[1],corner+edge[2],color,3 if selected else 1)
 		if active(g) and not z.cells.is_empty():
 			var at=g.center(z.cells[0])+Vector2(-17,-8)
-			g.label_on(g,at,"備蓄" if z.kind=="stockpile" else "休息",14,g.UI.INK)
+			g.label_on(g,at,"備蓄" if z.kind=="stockpile" else "居住",14,g.UI.INK)
 	if not active(g) or not g.tool.begins_with("zone_") or g.pointer_over_ui():return
 	var from=first if pressed else cell(g,g.pointer);var to=last if pressed else from
 	var low=Vector2i(mini(from.x,to.x),mini(from.y,to.y));var high=Vector2i(maxi(from.x,to.x),maxi(from.y,to.y))

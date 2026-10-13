@@ -32,6 +32,7 @@ func shot(id,title,fixture="通常のseed31。時間停止、画面だけ操作"
  FileAccess.open(out+"/ui-survey.json",FileAccess.WRITE).store_string(JSON.stringify({"source_commit":OS.get_environment("FARM_REVIEW_COMMIT"),"shots":shots,"checks":checks},"  "))
 func settle_book():
  g.clock=g.book_started+1.0;g._process(0.0);await process_frame
+func extra_checks():pass
 func run():
  out=OS.get_environment("FARM_REVIEW_OUTPUT")
  if out=="" or "--isolated-review" not in OS.get_cmdline_user_args():quit(2);return
@@ -114,6 +115,7 @@ func run():
  await scene(fresh());w=g.world;w.calendar_ticks=1100;w.phase="defend";w.spawn_schedule.clear();w.early_clear=true;g.refresh();await shot("47_night_safe","夜間・朝まで休む","20時台へ設定。襲撃予定と残敵なし")
  w.spawn_enemy({"entry":Vector2i(0,10),"archetype":"salaryman","role":"fighter"});w.enemies.back().pos=w.keeper.pos+Vector2i(4,0);w.enemies.back().arrival_complete=true;w.early_clear=false;g.refresh();await shot("48_night_threat","夜間の敵・休息制限","サラリーマン1体を近傍へ配置。停止中")
  w.calendar_ticks=1727;w.last_daily_day=1;w.paused=false;w.step();w.paused=true;g.refresh();await shot("49_morning_threat","翌朝に敵が残った状態","通常tickで夜明けを越す")
+ await extra_checks()
  check(shots.size()>=50,"Broad screen coverage")
  FileAccess.open(out+"/ui-survey.json",FileAccess.WRITE).store_string(JSON.stringify({"source_commit":OS.get_environment("FARM_REVIEW_COMMIT"),"shots":shots,"checks":checks,"failures":checks.filter(func(c):return not c.passed).size()},"  "))
  g.queue_free();await process_frame;quit(0 if checks.all(func(c):return c.passed) else 4)
