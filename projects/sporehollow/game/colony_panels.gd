@@ -7,29 +7,6 @@ static func label(parent: Control,text: String,at: Vector2,size: int=16):
 static func panel(g,area: Rect2) -> Panel:
 	var p=Panel.new();p.position=area.position;p.size=area.size;p.add_theme_stylebox_override("panel",g.UI.surface(g.UI.PAPER));g.palette.add_child(p);g.palette.move_child(p,0);g.colony_panel=p;return p
 
-static func research_save(g):
-	var paused=g.world.paused
-	if g.menu_open:g.world.paused=g.menu_was_paused
-	var saved=g.world.Snapshot.save(g.world,g.development_save_path)
-	g.world.paused=paused
-	g.save_status="保存しました" if saved else "保存できませんでした"
-	g.notice(g.save_status)
-	if g.menu_open:g.ColonyMenu.build(g)
-
-static func research_load(g):
-	var path=g.development_save_path if FileAccess.file_exists(g.development_save_path) else "user://autonomy.snapshot"
-	var restored=g.world.Snapshot.restore(path)
-	if restored==null:
-		g.save_status="保存を読み込めません。今の牧場は変更していません"
-		if g.menu_open:g.ColonyMenu.build(g)
-		return
-	g.save_load_blocked=false
-	var in_menu=g.menu_open
-	g.world=restored;g.reset_view();g.menu_open=in_menu;g.menu.visible=in_menu;g.menu_was_paused=restored.paused
-	if g.menu_open:g.world.paused=true
-	g.save_status="保存した牧場を読み込みました";g.refresh();g.notice(g.save_status)
-	if g.menu_open:g.ColonyMenu.build(g)
-
 static func select_storage(g):
 	g.group=0;g.colony_page="";g.architect_category="ゾーン";g.tool="zone_stockpile";g.refresh()
 

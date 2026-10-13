@@ -27,17 +27,20 @@ func run():
 	check(g.world.W==100 and g.world.H==68 and g.is_processing() and not g.startup_loading,"New map is complete and controls enabled")
 	check(not g.world.merchant_present(),"First-day merchant remains disabled")
 	g.world.story.intro_seen=true;g.world.Story.persist(g.world)
+	g.world.campaign.gold=987654
 	var snapshot="user://colony.snapshot"
 	check(g.world.Snapshot.save(g.world,snapshot),"Save fixture in isolated user-data")
-	check(g.world.Snapshot.save(g.world,out+"/large.snapshot"),"Current map fixture available to native lifecycle test")
-	var before={"tick":g.world.tick,"terrain":g.world.terrain.duplicate(true),"stock":g.world.field_items.duplicate(true),"keeper":g.world.keeper.pos}
 	var saved_hash=FileAccess.get_sha256(snapshot)
 	boot.queue_free();await process_frame
 	boot=load("res://game/loading.tscn").instantiate();root.add_child(boot)
 	await wait_ready(boot)
 	if not boot.finished:quit(1);return
 	g=boot.game;g.set_process(false)
-	check(g.persistence_enabled and g.world.tick==before.tick and g.world.terrain==before.terrain and g.world.field_items==before.stock and g.world.keeper.pos==before.keeper,"Normal startup restores existing map, stock, position and clock without advancing during loading")
+	check(g.world.campaign.gold!=987654 and g.world.W==100 and g.world.H==68,"Normal startup ignores existing snapshot and creates a new map")
+	g.menu_page="main";g.ColonyMenu.build(g)
+	check(not g.buttons.has("menu_save") and not g.buttons.has("menu_load") and g.buttons.menu_exit.text=="終了","Menu exposes no save/load or save-on-exit")
+	g.ColonyMenu.start_new(g)
+	check(not DirAccess.dir_exists_absolute("user://history"),"New game creates no save history")
 	check(FileAccess.get_sha256(snapshot)==saved_hash,"Loading does not overwrite the existing save")
 	g.world.paused=false;var tick=g.world.tick;g.world.step()
 	check(g.world.tick==tick+1,"Simulation can advance after preparation")

@@ -1,10 +1,8 @@
 extends Node
 ## Synthesized effects and user-supplied daytime music. No simulation RNG.
-const Probe=preload("res://game/play_diagnostics.gd")
-const Metrics=preload("res://game/terrain_metrics.gd")
 const DAY_MUSIC_PATH="res://assets/audio/Porch_Swing_Serenade.mp3"
 # Optional user-provided recording; source distribution uses synthesized ambience when absent.
-static var DAY_MUSIC=load(DAY_MUSIC_PATH) if Probe.experiment!="no_audio" and ResourceLoader.exists(DAY_MUSIC_PATH) else null
+static var DAY_MUSIC=load(DAY_MUSIC_PATH) if ResourceLoader.exists(DAY_MUSIC_PATH) else null
 const DAY_VOLUME_DB=-16.0
 const MENU_VOLUME_DB=-23.0
 const MUSIC_FADE_IN_SECONDS=7.0
@@ -39,7 +37,6 @@ var danger_until = 0.0
 var work_sound_until=0.0
 
 func _ready():
-	if Probe.experiment=="no_audio":return
 	for i in range(3):
 		var player = AudioStreamPlayer.new()
 		player.volume_db = -6 if i == 2 else (-12 if i == 1 else -2)
@@ -67,12 +64,6 @@ func _ready():
 	add_child(music)
 
 func _process(delta):
-	if Probe.experiment=="no_audio":return
-	var started=Metrics.start()
-	process_audio(delta)
-	Metrics.finish("audio_cpu",started)
-
-func process_audio(delta):
 	seconds += delta
 	var target=db_to_linear(MENU_VOLUME_DB if music_soft else DAY_VOLUME_DB) if music_enabled else 0.0
 	if not is_equal_approx(target,music_target):
@@ -95,7 +86,6 @@ static func seam_gain(position: float,length: float) -> float:
 	return minf(clampf(position/0.12,0.0,1.0),clampf((length-position)/0.5,0.0,1.0))
 
 func set_context(phase: String,soft: bool=false):
-	if Probe.experiment=="no_audio":return
 	set_night(phase=="defend")
 	music_enabled=music.stream!=null and phase in ["shop","day","dawn"]
 	music_soft=soft
@@ -104,7 +94,6 @@ func set_context(phase: String,soft: bool=false):
 		music.volume_db=-80;music.play(music_resume)
 
 func set_night(value: bool):
-	if Probe.experiment=="no_audio":return
 	if night == value: return
 	night = value
 	birds.stop()
@@ -115,7 +104,6 @@ func set_night(value: bool):
 		ambient.stream=cache.ambient;ambient.volume_db=ambient_target_db;ambient.play()
 
 func tension(active: bool):
-	if Probe.experiment=="no_audio":return
 	ambient_target_db=-25 if active else -19
 
 func update_ambience(delta: float):
@@ -129,7 +117,6 @@ func update_ambience(delta: float):
 	ambient.volume_db=linear_to_db(maxf(0.0001,db_to_linear(ambient_target_db)*gain))
 
 func cue(kind: String):
-	if Probe.experiment=="no_audio":return
 	if not cache.has(kind): return
 	var urgent = kind in ["carried", "restrained", "lose", "animal_danger"]
 	if kind in ["invasion", "auto_start"] and seconds < danger_until: return

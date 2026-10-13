@@ -1,4 +1,4 @@
-param([ValidateSet('check', 'test', 'evaluate', 'build', 'visual', 'play', 'editor', 'clean')][string]$Task = 'check', [string[]]$Suites = @('wall_drag','day_music','animal_commands','animal_corpse','journal_layout_ui','playthrough_ui','debug_lifecycle','revisions','residents','world','jobs','keeper','planning','rest_until','input','controls','building_art','delivered_art','progression_art','idol_debug','ranch_content','ranch_content_ui','quality','quality_ui','corpses','target_policy','navigation','forest','forest_ui','market_ui','story','story_ui','prayer','prayer_ui','progression','progression_flow','campaign_route','campaign_tiers','campaign_route_ui','morning_save','morning_save_ui','progression_ui','combat_revision','ui_revision'), [ValidateRange(1,32)][int]$AISeeds=32)
+param([ValidateSet('check', 'test', 'evaluate', 'build', 'visual', 'play', 'editor', 'clean')][string]$Task = 'check', [string[]]$Suites = @('wall_drag','day_music','animal_commands','animal_corpse','journal_layout_ui','playthrough_ui','debug_lifecycle','revisions','residents','world','jobs','keeper','planning','rest_until','input','controls','building_art','delivered_art','progression_art','idol_debug','ranch_content','ranch_content_ui','quality','quality_ui','corpses','target_policy','navigation','forest','forest_ui','market_ui','story','story_ui','prayer','prayer_ui','progression','progression_flow','campaign_route','campaign_tiers','campaign_route_ui','progression_ui','combat_revision','ui_revision'), [ValidateRange(1,32)][int]$AISeeds=32)
 $ErrorActionPreference = 'Stop'
 $farmRoot = $PSScriptRoot
 . (Join-Path $farmRoot 'tools/workspace_lifecycle.ps1')
@@ -64,6 +64,7 @@ function Run-Headless([string]$Name, [string[]]$Arguments, [string]$Executable=$
 if ($Task -in @('check','test','build')) {
     & "$farmRoot/tests/test_launcher.ps1" -WorkRoot $runRoot
     Run-Headless 'import' @('--editor','--import','--quit')
+    if($Task -eq 'build' -and 'loading' -notin $Suites){$Suites+=@('loading')}
     foreach ($suite in $Suites) { Run-Headless $suite @('--script',"tests/test_$suite.gd",'--','--isolated-review') }
 }
 if ($Task -in @('check','evaluate')) { Run-Headless 'evaluate' @('--script','tests/evaluate.gd') }

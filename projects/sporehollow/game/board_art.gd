@@ -11,10 +11,6 @@ static var material_cache:ShaderMaterial
 static func soil_material():
 	if material_cache==null:
 		material_cache=ShaderMaterial.new();material_cache.shader=SOIL
-		var level={"grain":1,"noise":2,"gravel":3}.get(preload("res://game/play_diagnostics.gd").experiment,4)
-		if level<4:
-			material_cache.shader=preload("res://game/diagnostic_surface.gdshader")
-			material_cache.set_shader_parameter("diagnostic_stage",level)
 		material_cache.set_shader_parameter("gravel",Ground.texture("biome_environment_v2/rock_ground/gravel.png"))
 		material_cache.set_shader_parameter("bedrock",Ground.texture("biome_environment_v2/rock_ground/bedrock.png"))
 	return material_cache
@@ -32,7 +28,7 @@ static func ground_cell(world,tile: Vector2,cell: Vector2i) -> Dictionary:
 	var p=Vector2(cell)*tile;var colors=PackedColorArray()
 	for q in [cell,cell+Vector2i.RIGHT,cell+Vector2i.ONE,cell+Vector2i.DOWN]:
 		var at=q.y*(world.W+1)+q.x
-		if textured(world) and preload("res://game/play_diagnostics.gd").experiment!="legacy_color":
+		if textured(world):
 			var f=world.terrain.ground_weights[at];colors.append(Color(f[0],f[1],f[2],f[3]))
 		else:
 			var rgb=world.terrain.vertices[at];colors.append(Color(rgb[0],rgb[1],rgb[2]))

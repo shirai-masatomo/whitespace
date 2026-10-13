@@ -1,5 +1,4 @@
 extends Node2D
-const Probe=preload("res://game/play_diagnostics.gd")
 const Metrics=preload("res://game/terrain_metrics.gd")
 const Assets=preload("res://game/ui_assets.gd")
 const Journal=preload("res://game/journal_view.gd")
@@ -14,13 +13,8 @@ var story_panel: Control
 var selected_trees: Array=[]
 const Farm = preload("res://game/world.gd")
 const Clarity=preload("res://game/onsite_clarity.gd")
-const MorningSave=preload("res://game/morning_save.gd")
-var persistence_enabled=false
-var save_path=MorningSave.PATH
-var development_save_path="user://colony.snapshot"
 var seen_calendar_day=-1
 var save_status=""
-var save_load_blocked=false
 const FONT = preload("res://assets/fonts/ui_font.tres")
 const TILE = Vector2(48, 42)
 const CAMERA_SPEED=1050.0
@@ -203,19 +197,10 @@ func _initialize_game():
 		set_process(false);set_process_input(false);set_process_unhandled_input(false);hide()
 		return
 	automated=automated or "--automated" in OS.get_cmdline_user_args() or "--smoke" in OS.get_cmdline_user_args()
-	persistence_enabled=not automated
-	if persistence_enabled:
-		get_tree().auto_accept_quit=false
-		if FileAccess.file_exists(development_save_path):
-			var restored=Farm.Snapshot.restore(development_save_path)
-			if restored!=null:world=restored;save_status="保存した途中状態から再開しました"
-			else:save_load_blocked=true;save_status="途中保存を読めません。保存を保護しています"
-		else:
-			var saved=MorningSave.read(save_path)
-			if saved.status in ["ok","recovered"]:world=MorningSave.restore(saved.record);save_status="以前の日開始を読み込みました。次回は途中から再開します"
-			elif saved.status!="missing":save_load_blocked=true;save_status="以前の保存を読めません。保存を保護しています"
+	# Session-only play: never read or write campaign files.
+	get_tree().auto_accept_quit=false
 	var world_started=Metrics.start()
-	if world==null:world=Farm.new({},(731 if Probe.scripted else randi_range(1,2147483646)))
+	if world==null:world=Farm.new({},randi_range(1,2147483646))
 	Metrics.finish("startup_world",world_started)
 	Input.set_custom_mouse_cursor(UI.grab_cursor(),Input.CURSOR_DRAG,Vector2(15,15))
 	subtasks.load_settings()
@@ -276,7 +261,7 @@ func _initialize_game():
 	controls.visible = not cinematic() and story_modal==""
 	if "--automated" in OS.get_cmdline_user_args(): automated = true
 	if automated: get_window().unfocusable = true
-	if not automated and not Probe.scripted and not save_load_blocked and not world.story.intro_seen: StoryView.open(self,"intro")
+	if not automated and not world.story.intro_seen: StoryView.open(self,"intro")
 	if "--smoke" in OS.get_cmdline_user_args(): get_tree().create_timer(2).timeout.connect(get_tree().quit)
 	if not startup_loading:start_entry_reviews()
 
@@ -475,8 +460,6 @@ func refresh_measured():
 		if world.phase == "dawn":
 			sky_kind = "dawn"
 			sky_started = clock
-			# Commit a real next-morning world even if the app closes during the dawn animation.
-			save_morning(Farm.new(world.next_campaign(),world.seed_value+1))
 	for child in palette.get_children():
 		palette.remove_child(child)
 		child.queue_free()
@@ -762,7 +745,6 @@ func prune_selection():
 func advance():
 	if cinematic() or menu_open: return
 	if world.phase == "shop":
-		if not save_morning(world):return
 		var next_day = world.begin_day()
 		if next_day == null:
 			notice(world.story.get("migration_error","今は支度を終えられません"))
@@ -776,7 +758,6 @@ func advance():
 		for a in world.animals:
 			if a.species == "shiba" and a.placed: morning_dog = Vector2(a.pos)
 		world = Farm.new(world.next_campaign(), world.seed_value + 1)
-		save_morning(world)
 		reset_view()
 		arrival_started = clock
 	elif world.working():
@@ -795,19 +776,11 @@ func confirm_new_campaign(enabled: bool):
 func new_campaign():
 	if world.phase!="shop" or not restart_confirm:return
 	var fresh=Farm.new({},world.seed_value+1)
-	if not save_morning(fresh):return
 	world=fresh
 	restart_confirm=false;morning_screen="morning";group=-1;speed=1;accumulated=0
 	shop_side="home";shop_level="categories";morning_keeper=Vector2(5.5,8);morning_dog=Vector2(6.5,8.5)
 	reset_view();arrival_started=clock;refresh()
 	if not automated:StoryView.open(self,"intro")
-
-func save_morning(morning) -> bool:
-	if not persistence_enabled:return true
-	if save_load_blocked:return false
-	var ok=Farm.Snapshot.save(morning,development_save_path)
-	save_status="時計・物資・仕事・敵を途中保存しました" if ok else "途中保存できませんでした。空き容量などを確認してください"
-	return ok
 
 func harvest_selected_trees():
 	var accepted=0
@@ -1181,10 +1154,6 @@ func _exit_tree():
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 func _input(event):
-	Probe.observe_input(event)
-	# The explicit benchmark route owns world input; F9 and window close still stop it.
-	# Manual diagnostics (no --diag-route) use the normal input path.
-	if Probe.scripted:return
 	if startup_loading:return
 	_route_input(event)
 	update_pointer_cursor()
@@ -1566,13 +1535,9 @@ func board_click(event):
 
 func _notification(what):
 	if startup_loading:return # Bootstrap owns close requests until initialization is complete.
-	if what==NOTIFICATION_WM_CLOSE_REQUEST and persistence_enabled:
-		var previous_pause=world.paused
-		if menu_open:world.paused=menu_was_paused
-		if save_load_blocked or save_morning(world):get_tree().quit()
-		else:
-			world.paused=previous_pause
-			notice("保存できないため終了を止めました。保存を確認してください")
+	if what==NOTIFICATION_WM_CLOSE_REQUEST:
+		get_tree().quit()
+		return
 	if what == NOTIFICATION_WM_MOUSE_EXIT and press_pending:
 		cancel_wall_stroke();dragging=false;press_pending=false;drag_class="";drag_encounters.clear()
 	if what == NOTIFICATION_WM_WINDOW_FOCUS_OUT:
@@ -1598,7 +1563,7 @@ func _process(delta):
 	_process_measured(delta)
 	Metrics.finish("main",started)
 func _process_measured(delta):
-	if world.phase=="shop" and not save_load_blocked:enter_daytime();refresh()
+	if world.phase=="shop":enter_daytime();refresh()
 	if seen_calendar_day!=world.last_daily_day:
 		seen_calendar_day=world.last_daily_day;arrival_bell=false;departure_started=-1;refresh()
 	if merchant_requested:
@@ -1633,13 +1598,11 @@ func _process_measured(delta):
 	clamp_camera()
 	if menu_open or field_book or field_shop or story_modal!="" or queue_drag_id>=0 or dragging or ui_pointer_capture or wall_stroke.kind!="" or direction!=Vector2.ZERO:
 		world.Life.user_activity(world)
-	if not field_book and not field_shop and story_modal=="" and not world.paused and not automated and Probe.experiment!="no_world" and world.working():
+	if not field_book and not field_shop and story_modal=="" and not world.paused and not automated and world.working():
 		accumulated += minf(delta, 0.1) * (24.0 if not world.rest_skip.is_empty() else speed)
 		while accumulated >= Farm.DT:
 			var was_sending = not world.rest_skip.is_empty()
-			var step_started=Metrics.start()
 			world.step()
-			Metrics.finish("world_step",step_started)
 			record_actor_tracks()
 			accumulated -= Farm.DT
 			sync_danger()
@@ -1912,7 +1875,7 @@ var draw_profile={}
 func _draw():
 	if world==null:return
 	var started=Metrics.start()
-	if Probe.experiment!="no_scene":_draw_measured()
+	_draw_measured()
 	Metrics.finish("scene_draw",started)
 func _draw_measured():
 	var profile_started=Time.get_ticks_usec()
@@ -2018,12 +1981,6 @@ func _draw_measured():
 	draw_profile.total=(Time.get_ticks_usec()-profile_started)/1000.0
 
 func scene_actors() -> Array:
-	var started=Metrics.start()
-	var result=scene_actors_measured()
-	Metrics.finish("scene_actors",started)
-	return result
-
-func scene_actors_measured() -> Array:
 	var actors=[]
 	for e in HarvestView.remnants(self):actors.append({"y":center(e.pos).y+14,"x":e.pos.x,"kind":"harvest_remnant","data":e})
 	for key in world.workers:
@@ -2131,12 +2088,6 @@ func draw_down_stars(p: Vector2):
 		draw_line(v-Vector2(0,3),v+Vector2(0,3),Color("eed49b"),2)
 
 func draw_hud():
-	if Probe.experiment=="no_hud":return
-	var started=Metrics.start()
-	draw_hud_measured()
-	Metrics.finish("hud_draw",started)
-
-func draw_hud_measured():
 	if world.working() and hover_job>=0 and not pointer_over_ui():
 		for i in range(world.jobs.size()):
 			var j=world.jobs[i]
@@ -2438,7 +2389,6 @@ func trade(id: String, animal_id: int = -1):
 	var change = world.campaign.gold - before_gold
 	shop_notice = ("%sを%sしました　%s%dG（%dG → %dG）" % [MarketView.product_name({"id":id}), "購入" if shop_side=="buy" else "売却", "−" if change<0 else "＋", absi(change),before_gold,world.campaign.gold]) if ok else "取引できませんでした。所持数と在庫を確認してください。"
 	if ok: play_alert("collect")
-	if ok: save_morning(world)
 	refresh()
 func shop_rows(category: String = "") -> Array:
 	if category=="": category=shop_category
@@ -2459,7 +2409,7 @@ func shop_rows(category: String = "") -> Array:
 	return rows
 
 func enter_daytime():
-	if world.phase!="shop" or save_load_blocked:return
+	if world.phase!="shop":return
 	var next=world.begin_day()
 	if next==null:return
 	world=next;group=-1;morning_screen="morning";arrival_started=clock
@@ -2594,7 +2544,6 @@ func draw_shop():
 
 func train(id: int):
 	shop_notice = "ひとつ成長した！" if world.train_animal(id) else "経験を積んでからまた来よう"
-	save_morning(world)
 	refresh()
 
 func edit_name(id: int):
@@ -2604,7 +2553,6 @@ func edit_name(id: int):
 
 func save_name():
 	if is_instance_valid(name_edit): world.rename_animal(training_id, name_edit.text)
-	save_morning(world)
 	rename_open = false
 	refresh()
 
@@ -2660,7 +2608,6 @@ func book_detail(id: int):
 
 func restart_morning():
 	var morning=Farm.new(world.morning_checkpoint, world.seed_value)
-	if not save_morning(morning):return
 	world=morning
 	reset_view()
 	arrival_started = clock
@@ -2883,7 +2830,7 @@ func refresh_rest_button():
 	buttons.advance.visible=not field_book and not field_shop and story_modal==""
 	buttons.advance.text=rest_button_text()
 	var why=world.Life.rest_until_reason(world,Presentation.rest_target(world)) if world.rest_skip.is_empty() else ""
-	buttons.advance.disabled=cinematic() or save_load_blocked or why!=""
+	buttons.advance.disabled=cinematic() or why!=""
 	buttons.advance.tooltip_text=why if why!="" else ("途中で止められます。世界も通常の休息と同じように進みます" if world.rest_skip.is_empty() else "時間送りを止めます")
 
 func refresh_threat_button():
@@ -2978,9 +2925,7 @@ func enemy_hit_rect_base(e: Dictionary) -> Rect2:
 	var pose=enemy_art.get(e.id,{"action":"idle","facing":1,"at":visual_time})
 	var key="enemy/"+pose.action+("_left" if pose.facing<0 else "_right")
 	var clip=Delivered.CLIPS[key];var frame=clip.frames[Delivered.frame_index(key,visual_time-pose.at)]
-	var hit_started=Metrics.start()
 	var used=Rect2(frame.rear.get_image().get_used_rect()).merge(Rect2(frame.front.get_image().get_used_rect())) if frame is Dictionary else Rect2(frame.get_image().get_used_rect())
-	Metrics.finish("enemy_image_bounds",hit_started)
 	var foot=actor_pixel("e%d"%e.id,e.pos)+Vector2(0,14)
 	return HumanVisual.rect(Rect2(foot-clip.anchor+used.position,used.size),foot).grow(3)
 
