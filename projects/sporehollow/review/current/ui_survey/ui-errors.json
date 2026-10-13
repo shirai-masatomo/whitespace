@@ -1,0 +1,9 @@
+{
+  "game_errors": [
+    "SCRIPT ERROR: Invalid operands 'int' and 'String' in operator '=='.",
+    "   at: draw (res://game/colony_task_controls.gd:50)",
+    "       [0] draw (res://game/colony_task_controls.gd:50)"
+  ],
+  "visual_test_passed": false,
+  "note": "Survey captures current defects; errors are findings, not a passing runtime test."
+}
