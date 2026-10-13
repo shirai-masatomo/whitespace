@@ -98,7 +98,6 @@ var event_log_rect=Rect2()
 var shop_level = "categories"
 var product_row: Dictionary = {}
 var dragging = false
-var pan_origin = Vector2.ZERO
 var shift_latched = false
 var press_pending = false
 var press_position = Vector2.ZERO
@@ -371,7 +370,8 @@ func wheel_scroll_ui() -> bool:
 	return false
 
 func open_animal_commands(id: int):
-	choose_animal(id)
+	if id not in selected_animals:choose_animal(id)
+	else:group=1;animal_list_open=false
 	animal_commands_open=true
 	refresh()
 
@@ -591,7 +591,33 @@ func facility_action(action: String):
 	notice("%d件予約・%d件未登録" % [count,targets.size()-count])
 	refresh()
 
+func select_target(kind: String, id: int):
+	# Selection and action dispatch remain separate; new target actions can join this menu.
+	neutral()
+	selected={"kind":kind,"id":id}
+	refresh()
+
+func target_action_reason(action: String, target: Dictionary) -> String:
+	if action!="attack" or target.get("kind")!="enemy":return "この操作には対応していません"
+	if not world.HumanCombat.valid(world.HumanCombat.enemy(world,target.get("id",-1))):return "対象がいません"
+	if not world.keeper.get("drafted",false):return "牧場主を徴兵してください"
+	if not world.working() or not world.Life.able(world):return "牧場主は今行動できません"
+	if world.jobs.filter(func(j):return not j.get("direct_control",false)).size()>=world.Jobs.LIMIT:return "仕事が上限です"
+	return ""
+
+func target_action(action: String, target: Dictionary):
+	if selected!=target:return
+	var why=target_action_reason(action,target)
+	if why!="":notice(why)
+	elif action=="attack":
+		if world.HumanCombat.designate(world,target.id):notice("牧場主に攻撃を指示しました")
+		else:notice("攻撃を指示できません")
+	refresh()
+
 func context_targets() -> Array:
+	if selected.get("kind")=="enemy":
+		var target=world.HumanCombat.enemy(world,selected.id)
+		return [target.pos] if world.HumanCombat.valid(target) else []
 	if merchant_context:return [world.MERCHANT_CELL]
 	if selected.get("kind")=="tree": return selected_trees
 	if selected.get("kind")=="idol": return [world.Story.at(world)]
@@ -601,7 +627,7 @@ func context_targets() -> Array:
 	return []
 
 func context_state() -> String:
-	return str(merchant_context)+(world.merchant_reason(selected_merchant_worker()) if merchant_context else "")+TaskControls.signature(self)+str(world.trees)+str(world.story.idol)+str(world.story.investigated)+str(world.story.prayed_day)+str(selected_trees)+str(selected_resources) + str(selected) + str(selected_structures) + str(selected_structures.map(func(p): return selected_store().get(p,{}))) + str(world.jobs.map(func(j): return [j.kind, j.pos])) + str(world.materials) + str(world.wood)
+	return str([world.keeper.state,world.keeper.hp,world.keeper.get("forced_rest",false)])+str(merchant_context)+(world.merchant_reason(selected_merchant_worker()) if merchant_context else "")+TaskControls.signature(self)+str(world.trees)+str(world.story.idol)+str(world.story.investigated)+str(world.story.prayed_day)+str(selected_trees)+str(selected_resources) + str(selected) + str(selected_structures) + str(selected_structures.map(func(p): return selected_store().get(p,{}))) + str(world.jobs.map(func(j): return [j.kind, j.pos])) + str(world.materials) + str(world.wood)
 
 func build_context_actions():
 	context_signature = context_state()
@@ -612,7 +638,10 @@ func build_context_actions():
 	context_panel.add_theme_stylebox_override("panel", UI.surface(UI.PAPER))
 	palette.add_child(context_panel)
 	var rows = []
-	if merchant_context:
+	if selected.get("kind")=="enemy":
+		var why=target_action_reason("attack",selected)
+		rows.append(["target_attack","攻撃","staff",target_action.bind("attack",selected.duplicate()),why!="",why if why!="" else "牧場主が選んだ敵へ向かって攻撃します。選択だけでは実行しません"] )
+	elif merchant_context:
 		var why=world.merchant_reason(selected_merchant_worker())
 		rows.append(["negotiate","交渉","next",request_merchant,why!="",why if why!="" else "選択した住人が商人へ歩き、到着後に交渉します"] )
 	elif selected.get("kind") == "job":
@@ -654,6 +683,7 @@ func build_context_actions():
 	context_panel.size = Vector2(432,218) if selected.get("kind")=="idol" else Vector2(rows.size()*row_width+12,68)
 	var title = Label.new()
 	title.text = "商人 · 交渉" if merchant_context else ("黄金像" if selected.get("kind")=="idol" else ("開拓する木" if selected.get("kind")=="tree" else ("選択 %d/8" % count if count > 1 else (StockView.details(world,selected_resources[0]).split("\n")[0].split(" · ")[0] if not selected_resources.is_empty() else ("床" if selection_layer=="floor" else "建物")))))
+	if selected.get("kind")=="enemy":title.text="対象への操作"
 	title.position = Vector2(9,3)
 	if not selected_resources.is_empty():
 		title.tooltip_text=StockView.details(world,selected_resources[0]);title.clip_text=true;title.size.x=context_panel.size.x-18
@@ -1110,13 +1140,10 @@ func job_title(j: Dictionary) -> String:
 	if Farm.BUILD.has(j.kind):return Farm.Buildings.NAMES.get(j.kind,"建設")+"を建設"
 	return {"move":"移動予定","collect":"回収予定","repair":"修理予定","remove":"解体予定","remove_floor":"床を解体","repair_floor":"床を修理","equip":"装備予定","animal_order":"仲間への指示","gate":"ドア開閉"}.get(j.kind,StoryView.LABELS.get(j.kind,"予定"))
 
-func map_panning() -> bool:
-	return press_pending and dragging and group<0 and wall_stroke.kind=="" and not ui_pointer_capture and queue_drag_id<0 and not menu_open and not field_book and not field_shop and story_modal=="" and not cinematic()
-
 func update_pointer_cursor():
 	mode_cursor = "hammer" if group == 0 else ("whistle" if group == 1 else "move")
 	if not world.working() or group < 0 or pointer_over_ui() or menu_open or field_book or field_shop or story_modal!="" or cinematic() or queue_drag_id >= 0: mode_cursor = ""
-	Input.set_default_cursor_shape(Input.CURSOR_DRAG if map_panning() else Input.CURSOR_ARROW)
+	Input.set_default_cursor_shape(Input.CURSOR_ARROW)
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE if mode_cursor == "" else Input.MOUSE_MODE_HIDDEN)
 
 func _exit_tree():
@@ -1144,6 +1171,8 @@ func _route_input(event):
 	if world.working() and not menu_open and not field_book and not field_shop and event is InputEventMouseButton and event.pressed and event.button_index==MOUSE_BUTTON_RIGHT:
 		right_release_pending=true
 		if subtasks.dragging:subtasks.cancel();refresh()
+		elif dragging or press_pending:
+			cancel_wall_stroke();dragging=false;press_pending=false;drag_class="";drag_encounters.clear()
 		else:neutral()
 		get_viewport().set_input_as_handled();return
 	if zone_controls.input(self,event):get_viewport().set_input_as_handled();return
@@ -1196,8 +1225,7 @@ func _route_input(event):
 			if pointer.distance_to(press_position) >= 7: dragging = true
 			if wall_stroke.kind!="":update_wall_stroke()
 			elif dragging:
-				if group < 0: camera.position = pan_origin - (pointer - press_position) / camera.zoom
-				else: update_drag_class()
+				update_drag_class()
 		elif world.working() and not pointer_over_ui(): hover_job = job_at(Vector2i(get_canvas_transform().affine_inverse() * pointer / TILE))
 	if event is InputEventMouseButton:
 		pointer = event.position
@@ -1234,7 +1262,7 @@ func _route_input(event):
 						var result=wall_stroke.commit(world)
 						notice("%d件予約・%d件未登録%s"%[result.accepted,result.skipped,"（%s）"%result.reason if result.reason!="" else ""])
 						refresh()
-				elif dragging and group >= 0 and not pointer_over_ui(): finish_drag()
+				elif dragging and not pointer_over_ui(): finish_drag()
 				elif dragging: pass
 				elif not pointer_over_ui(): board_click(event)
 				dragging = false
@@ -1265,7 +1293,6 @@ func _route_input(event):
 				return
 			if pointer_over_ui() or world.phase == "shop" or field_shop: return
 			if dragging or press_pending:
-				if group < 0: camera.position = pan_origin
 				dragging=false; press_pending=false
 			else:
 				neutral()
@@ -1328,7 +1355,7 @@ func selection_candidates() -> Array:
 		if world.live_structure(cell) and selection_layer!="floor": result.append({"class":"structure","id":cell,"point":center(cell)})
 	for cell in world.floors:
 		if world.floors[cell].status=="ready" and (selection_layer=="floor" or not world.live_structure(cell)): result.append({"class":"floor","id":cell,"point":center(cell)})
-	result = result.filter(func(c): return (group==0 and c["class"] in ["structure","floor"]) or (group==1 and c["class"]=="animal") or (group==2 and c["class"]=="resource"))
+	result = result.filter(func(c): return group<0 or (group==0 and c["class"] in ["structure","floor"]) or (group==1 and c["class"]=="animal") or (group==2 and c["class"]=="resource"))
 	result.sort_custom(func(a,b):
 		var da = drag_start.distance_squared_to(a.point)
 		var db = drag_start.distance_squared_to(b.point)
@@ -1351,6 +1378,9 @@ func finish_drag():
 	var targets = selection_candidates().filter(func(c): return c["class"] == drag_class and area.has_point(c.point))
 	targets.sort_custom(func(a,b):return drag_encounters.find([a["class"],a.id]) < drag_encounters.find([b["class"],b.id]))
 	targets = targets.slice(0,SELECTION_LIMIT)
+	var neutral_selection=group<0
+	animal_list_open=false;animal_commands_open=false;merchant_context=false
+	selected_trees.clear()
 	selected.clear()
 	selected_animals.clear()
 	selected_resources.clear()
@@ -1374,6 +1404,7 @@ func finish_drag():
 		selection_ids.clear()
 		for p in selected_structures: selection_ids[p]=[selected_store()[p].id,selected_store()[p].kind]
 		if not selected_structures.is_empty(): selected = {"kind":selection_layer,"pos":selected_structures[0],"target_id":selection_ids[selected_structures[0]][0]}
+	if neutral_selection:group=-1
 	refresh()
 
 func _unhandled_input(event):
@@ -1382,7 +1413,6 @@ func _unhandled_input(event):
 	if not (event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT) or pointer_over_ui(): return
 	press_pending = true
 	press_position = event.position
-	pan_origin = camera.position
 	drag_start = get_canvas_transform().affine_inverse() * pointer
 	drag_class = ""
 	drag_encounters.clear()
@@ -1413,8 +1443,7 @@ func board_click(event):
 	if selected.get("kind")=="keeper" and world.keeper.get("drafted",false):
 		for e in world.enemies:
 			if world.HumanCombat.valid(e) and enemy_hit_rect(e).has_point(point):
-				if not world.HumanCombat.designate(world,e.id):notice("攻撃を指示できません")
-				refresh();return
+				select_target("enemy",e.id);return
 	if merchant_hit(event.position) and group<0 and tool=="":
 		var why=world.merchant_reason(selected_merchant_worker())
 		if why!="":notice(why)
@@ -1482,13 +1511,7 @@ func board_click(event):
 	for e in world.enemies:
 		var hit=enemy_hit_rect(e).has_point(get_canvas_transform().affine_inverse()*event.position)
 		if not e.done and hit:
-			tool = ""
-			group = -1
-			selected_animals.clear()
-			selected_structures.clear()
-			selected = {"kind": "enemy", "id": e.id}
-			refresh()
-			return
+			select_target("enemy",e.id);return
 	if selected.get("kind") == "keeper":
 		if not world.act("keeper_move",cell): notice("人物の「徴兵する」を押してから移動" if not world.keeper.get("drafted",false) else "移動できません")
 	elif tool in Farm.ORDERS:
@@ -1611,7 +1634,7 @@ func _process(delta):
 		arrival_bell = true
 		audio.cue("merchant")
 	controls.visible = not cinematic() and story_modal==""
-	if selected.get("kind") == "enemy" and world.enemies.any(func(e): return e.id == selected.id and (e.hp <= 0 or e.flee or e.done)):
+	if selected.get("kind") == "enemy" and not world.HumanCombat.valid(world.HumanCombat.enemy(world,selected.id)):
 		selected.clear()
 		refresh()
 	if world.working():refresh_rest_button()
@@ -1934,7 +1957,7 @@ func _draw():
 		if selected.get("kind")=="tree": draw_rect(Rect2(center(cell)-Vector2(21,21),Vector2(42,42)),Color("ffe2a3"),false,2)
 	if debug_view: StoryView.debug(self)
 	for cell in selected_resources: draw_rect(Rect2(center(cell)-Vector2(20,20),Vector2(40,40)),Color("ffe2a3"),false,2)
-	if dragging and group>=0 and wall_stroke.kind=="":
+	if dragging and wall_stroke.kind=="":
 		label_on(self,get_canvas_transform().affine_inverse()*pointer+Vector2(10,-10),{"animal":"仲間","resource":"回収物","tree":"開拓","structure":"建物","floor":"床"}.get(drag_class,""),16,UI.PAPER)
 	if cinematic(): return
 	draw_pointer_preview()
@@ -2107,7 +2130,7 @@ func draw_hud():
 		if not world.dawn_summary.unconscious.is_empty(): label_on(hud, Vector2(421, 292), "明日は休養  %d匹" % world.dawn_summary.unconscious.size(), 19)
 		return
 
-	if dragging and group>=0 and wall_stroke.kind=="":
+	if dragging and wall_stroke.kind=="":
 		var start = get_canvas_transform() * drag_start
 		var area = Rect2(start, pointer - start).abs()
 		hud.draw_rect(area, Color(0.65, 0.9, 0.76, 0.15))

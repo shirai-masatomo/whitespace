@@ -1,5 +1,7 @@
 # 現在の実装状態（2026-10-13）
 
+今回の操作変更：ニュートラルの左ドラッグは最初に囲んだ分類だけを最大8対象まで選択。徴兵中は敵の選択と対象付近の「攻撃」での確定を分離。動物の共通指示画面は複数選択を保持。地図移動はWASD、未選択時のホイールはズームを維持。旧セーブ互換の追加開発は対象外。関連入力59検査合格、GPU・配布結果は [操作修正報告](review/current/selection_controls/REPORT.md) に記録。
+
 作業ブランチ：`codex/sporehollow-biome01`。現在の品質修正・テスト・配布の対応は [review/current/map_expansion/README.md](review/current/map_expansion/README.md)。過去のSHAを最新と混同しないこと。配布結果は同フォルダのDELIVERY.jsonが正本。
 
 ## 実装済み

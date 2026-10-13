@@ -62,7 +62,7 @@ func run():
 	var edges=[Vector2i(0,0),Vector2i(99,0),Vector2i(0,67),Vector2i(99,67),Vector2i(50,0),Vector2i(50,67),Vector2i(0,34),Vector2i(99,34)]
 	for i in range(edges.size()):
 		await view(edges[i]);var point=g.get_canvas_transform()*g.center(edges[i]);check(Rect2(0,49,1280,703).has_point(point),"Boundary cell remains visible: "+str(edges[i]));await shot("edge_%d"%i,"外周・四隅 "+str(edges[i]))
-	await measure("WASD horizontal",[KEY_D]);await measure("WASD diagonal",[KEY_D,KEY_S]);await measure("mouse drag",[],1.0,true);await measure("overview pan",[KEY_D],0.224);await motion_frames()
+	await measure("WASD horizontal",[KEY_D]);await measure("WASD diagonal",[KEY_D,KEY_S]);await measure("overview pan",[KEY_D],0.224);await motion_frames()
 	FileAccess.open(out+"/camera-performance.json",FileAccess.WRITE).store_string(JSON.stringify({"series":perf},"  "))
 	g.neutral();await view(Vector2i(50,34));var origin=g.camera.position
 	g.keys_down={KEY_D:true};g._process(0.1);var straight=g.camera.position.distance_to(origin);g.camera.position=origin;g.keys_down={KEY_D:true,KEY_S:true};g._process(0.1);check(absf(g.camera.position.distance_to(origin)-straight)<0.01,"Diagonal and straight camera speed are equal");g.keys_down.clear()
