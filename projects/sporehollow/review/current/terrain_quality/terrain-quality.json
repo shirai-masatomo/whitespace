@@ -1,0 +1,229 @@
+{
+  "checks": [
+    {
+      "check": "All surface types exist: 31",
+      "passed": true
+    },
+    {
+      "check": "Large mountain count reduced without removal of system: 31",
+      "passed": true
+    },
+    {
+      "check": "Central building space and access to five regions: 31",
+      "passed": true
+    },
+    {
+      "check": "At least three approaches from starting keeper",
+      "passed": true
+    },
+    {
+      "check": "A blocked start approach still reaches every biome",
+      "passed": true
+    },
+    {
+      "check": "Mirror retains staged occupancy count and bounds",
+      "passed": true
+    },
+    {
+      "check": "Mirror retains staged occupancy count and bounds",
+      "passed": true
+    },
+    {
+      "check": "Mirror retains staged occupancy count and bounds",
+      "passed": true
+    },
+    {
+      "check": "Mirror retains staged occupancy count and bounds",
+      "passed": true
+    },
+    {
+      "check": "Mirror retains staged occupancy count and bounds",
+      "passed": true
+    },
+    {
+      "check": "Mirror retains staged occupancy count and bounds",
+      "passed": true
+    },
+    {
+      "check": "Mirror retains staged occupancy count and bounds",
+      "passed": true
+    },
+    {
+      "check": "Mirror retains staged occupancy count and bounds",
+      "passed": true
+    },
+    {
+      "check": "New surfaces/mirrored mountain save",
+      "passed": true
+    },
+    {
+      "check": "Snapshot restores surface types, mirrors, work and quantities exactly",
+      "passed": true
+    },
+    {
+      "check": "All surface types exist: 73",
+      "passed": true
+    },
+    {
+      "check": "Large mountain count reduced without removal of system: 73",
+      "passed": true
+    },
+    {
+      "check": "Central building space and access to five regions: 73",
+      "passed": true
+    },
+    {
+      "check": "At least three approaches from starting keeper",
+      "passed": true
+    },
+    {
+      "check": "A blocked start approach still reaches every biome",
+      "passed": true
+    },
+    {
+      "check": "Mirror retains staged occupancy count and bounds",
+      "passed": true
+    },
+    {
+      "check": "Mirror retains staged occupancy count and bounds",
+      "passed": true
+    },
+    {
+      "check": "Mirror retains staged occupancy count and bounds",
+      "passed": true
+    },
+    {
+      "check": "Mirror retains staged occupancy count and bounds",
+      "passed": true
+    },
+    {
+      "check": "Mirror retains staged occupancy count and bounds",
+      "passed": true
+    },
+    {
+      "check": "Mirror retains staged occupancy count and bounds",
+      "passed": true
+    },
+    {
+      "check": "Mirror retains staged occupancy count and bounds",
+      "passed": true
+    },
+    {
+      "check": "Mirror retains staged occupancy count and bounds",
+      "passed": true
+    },
+    {
+      "check": "New surfaces/mirrored mountain save",
+      "passed": true
+    },
+    {
+      "check": "Snapshot restores surface types, mirrors, work and quantities exactly",
+      "passed": true
+    },
+    {
+      "check": "All surface types exist: 109",
+      "passed": true
+    },
+    {
+      "check": "Large mountain count reduced without removal of system: 109",
+      "passed": true
+    },
+    {
+      "check": "Central building space and access to five regions: 109",
+      "passed": true
+    },
+    {
+      "check": "At least three approaches from starting keeper",
+      "passed": true
+    },
+    {
+      "check": "A blocked start approach still reaches every biome",
+      "passed": true
+    },
+    {
+      "check": "Mirror retains staged occupancy count and bounds",
+      "passed": true
+    },
+    {
+      "check": "Mirror retains staged occupancy count and bounds",
+      "passed": true
+    },
+    {
+      "check": "Mirror retains staged occupancy count and bounds",
+      "passed": true
+    },
+    {
+      "check": "Mirror retains staged occupancy count and bounds",
+      "passed": true
+    },
+    {
+      "check": "Mirror retains staged occupancy count and bounds",
+      "passed": true
+    },
+    {
+      "check": "Mirror retains staged occupancy count and bounds",
+      "passed": true
+    },
+    {
+      "check": "Mirror retains staged occupancy count and bounds",
+      "passed": true
+    },
+    {
+      "check": "Mirror retains staged occupancy count and bounds",
+      "passed": true
+    },
+    {
+      "check": "New surfaces/mirrored mountain save",
+      "passed": true
+    },
+    {
+      "check": "Snapshot restores surface types, mirrors, work and quantities exactly",
+      "passed": true
+    },
+    {
+      "check": "Legacy map round trip retains exact stored geography/jobs, no regeneration",
+      "passed": true
+    }
+  ],
+  "statistics": [
+    {
+      "generation_ms": 1993.886,
+      "large": 2,
+      "materials": {
+        "bedrock": 228,
+        "clay": 1870,
+        "grass": 3524,
+        "gravel": 191,
+        "sand": 80,
+        "soil": 907
+      },
+      "seed": 31
+    },
+    {
+      "generation_ms": 2547.74,
+      "large": 2,
+      "materials": {
+        "bedrock": 366,
+        "clay": 1898,
+        "grass": 2936,
+        "gravel": 303,
+        "sand": 381,
+        "soil": 916
+      },
+      "seed": 73
+    },
+    {
+      "generation_ms": 2485.227,
+      "large": 2,
+      "materials": {
+        "bedrock": 175,
+        "clay": 2148,
+        "grass": 2963,
+        "gravel": 108,
+        "sand": 91,
+        "soil": 1315
+      },
+      "seed": 109
+    }
+  ]
+}

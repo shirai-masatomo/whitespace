@@ -1,0 +1,683 @@
+{
+  "checks": [
+    {
+      "check": "capture seed_31_overview",
+      "passed": true
+    },
+    {
+      "check": "capture seed_31_rocks",
+      "passed": true
+    },
+    {
+      "check": "capture center",
+      "passed": true
+    },
+    {
+      "check": "Surface exists: soil",
+      "passed": true
+    },
+    {
+      "check": "capture surface_soil",
+      "passed": true
+    },
+    {
+      "check": "Surface exists: sand",
+      "passed": true
+    },
+    {
+      "check": "capture surface_sand",
+      "passed": true
+    },
+    {
+      "check": "Surface exists: clay",
+      "passed": true
+    },
+    {
+      "check": "capture surface_clay",
+      "passed": true
+    },
+    {
+      "check": "Normal simulation runs during GPU camera measurement",
+      "passed": true
+    },
+    {
+      "check": "capture seed_73_overview",
+      "passed": true
+    },
+    {
+      "check": "capture seed_73_rocks",
+      "passed": true
+    },
+    {
+      "check": "capture seed_109_overview",
+      "passed": true
+    },
+    {
+      "check": "capture seed_109_rocks",
+      "passed": true
+    }
+  ],
+  "shots": [
+    {
+      "calendar": 0,
+      "file": "seed_31_overview.png",
+      "fixture": "通常のseed31。時間停止、画面だけ操作",
+      "group": -1,
+      "phase": "day",
+      "selected": "{  }",
+      "tick": 0,
+      "title": "全景 seed31",
+      "tool": "",
+      "visible_controls": [
+        {
+          "disabled": false,
+          "name": "@Button@401",
+          "rect": "[P: (1040.0, 7.0), S: (88.0, 44.0)]",
+          "text": "再開",
+          "tooltip": ""
+        },
+        {
+          "disabled": false,
+          "name": "@Button@402",
+          "rect": "[P: (1136.0, 7.0), S: (64.0, 44.0)]",
+          "text": "×1.0",
+          "tooltip": "1：0.5倍 / 2：1倍 / 3：2倍 / 4：4倍（休息中）。Space：停止。− / ＋：段階変更"
+        },
+        {
+          "disabled": false,
+          "name": "@Button@404",
+          "rect": "[P: (1074.0, 754.0), S: (190.0, 44.0)]",
+          "text": "夜まで休む",
+          "tooltip": "途中で止められます。世界も通常の休息と同じように進みます"
+        },
+        {
+          "disabled": false,
+          "name": "@Button@406",
+          "rect": "[P: (16.0, 754.0), S: (184.0, 44.0)]",
+          "text": "アーキテクト",
+          "tooltip": ""
+        },
+        {
+          "disabled": false,
+          "name": "@Button@407",
+          "rect": "[P: (208.0, 754.0), S: (116.0, 44.0)]",
+          "text": "動物",
+          "tooltip": ""
+        },
+        {
+          "disabled": false,
+          "name": "@Button@408",
+          "rect": "[P: (332.0, 754.0), S: (116.0, 44.0)]",
+          "text": "役割",
+          "tooltip": ""
+        },
+        {
+          "disabled": false,
+          "name": "@Button@409",
+          "rect": "[P: (456.0, 754.0), S: (116.0, 44.0)]",
+          "text": "命令",
+          "tooltip": ""
+        }
+      ]
+    },
+    {
+      "calendar": 0,
+      "file": "seed_31_rocks.png",
+      "fixture": "通常のseed31。時間停止、画面だけ操作",
+      "group": -1,
+      "phase": "day",
+      "selected": "{  }",
+      "tick": 0,
+      "title": "岩場・通常倍率 seed31",
+      "tool": "",
+      "visible_controls": [
+        {
+          "disabled": false,
+          "name": "@Button@401",
+          "rect": "[P: (1040.0, 7.0), S: (88.0, 44.0)]",
+          "text": "再開",
+          "tooltip": ""
+        },
+        {
+          "disabled": false,
+          "name": "@Button@402",
+          "rect": "[P: (1136.0, 7.0), S: (64.0, 44.0)]",
+          "text": "×1.0",
+          "tooltip": "1：0.5倍 / 2：1倍 / 3：2倍 / 4：4倍（休息中）。Space：停止。− / ＋：段階変更"
+        },
+        {
+          "disabled": false,
+          "name": "@Button@404",
+          "rect": "[P: (1074.0, 754.0), S: (190.0, 44.0)]",
+          "text": "夜まで休む",
+          "tooltip": "途中で止められます。世界も通常の休息と同じように進みます"
+        },
+        {
+          "disabled": false,
+          "name": "@Button@406",
+          "rect": "[P: (16.0, 754.0), S: (184.0, 44.0)]",
+          "text": "アーキテクト",
+          "tooltip": ""
+        },
+        {
+          "disabled": false,
+          "name": "@Button@407",
+          "rect": "[P: (208.0, 754.0), S: (116.0, 44.0)]",
+          "text": "動物",
+          "tooltip": ""
+        },
+        {
+          "disabled": false,
+          "name": "@Button@408",
+          "rect": "[P: (332.0, 754.0), S: (116.0, 44.0)]",
+          "text": "役割",
+          "tooltip": ""
+        },
+        {
+          "disabled": false,
+          "name": "@Button@409",
+          "rect": "[P: (456.0, 754.0), S: (116.0, 44.0)]",
+          "text": "命令",
+          "tooltip": ""
+        }
+      ]
+    },
+    {
+      "calendar": 0,
+      "file": "center.png",
+      "fixture": "通常のseed31。時間停止、画面だけ操作",
+      "group": -1,
+      "phase": "day",
+      "selected": "{  }",
+      "tick": 0,
+      "title": "建築余地・拠点の地表",
+      "tool": "",
+      "visible_controls": [
+        {
+          "disabled": false,
+          "name": "@Button@401",
+          "rect": "[P: (1040.0, 7.0), S: (88.0, 44.0)]",
+          "text": "再開",
+          "tooltip": ""
+        },
+        {
+          "disabled": false,
+          "name": "@Button@402",
+          "rect": "[P: (1136.0, 7.0), S: (64.0, 44.0)]",
+          "text": "×1.0",
+          "tooltip": "1：0.5倍 / 2：1倍 / 3：2倍 / 4：4倍（休息中）。Space：停止。− / ＋：段階変更"
+        },
+        {
+          "disabled": false,
+          "name": "@Button@404",
+          "rect": "[P: (1074.0, 754.0), S: (190.0, 44.0)]",
+          "text": "夜まで休む",
+          "tooltip": "途中で止められます。世界も通常の休息と同じように進みます"
+        },
+        {
+          "disabled": false,
+          "name": "@Button@406",
+          "rect": "[P: (16.0, 754.0), S: (184.0, 44.0)]",
+          "text": "アーキテクト",
+          "tooltip": ""
+        },
+        {
+          "disabled": false,
+          "name": "@Button@407",
+          "rect": "[P: (208.0, 754.0), S: (116.0, 44.0)]",
+          "text": "動物",
+          "tooltip": ""
+        },
+        {
+          "disabled": false,
+          "name": "@Button@408",
+          "rect": "[P: (332.0, 754.0), S: (116.0, 44.0)]",
+          "text": "役割",
+          "tooltip": ""
+        },
+        {
+          "disabled": false,
+          "name": "@Button@409",
+          "rect": "[P: (456.0, 754.0), S: (116.0, 44.0)]",
+          "text": "命令",
+          "tooltip": ""
+        }
+      ]
+    },
+    {
+      "calendar": 0,
+      "file": "surface_soil.png",
+      "fixture": "新規seed31・分布の濃い地点・仮配色。資源や移動効果は追加しない",
+      "group": -1,
+      "phase": "day",
+      "selected": "{  }",
+      "tick": 0,
+      "title": "地表 soil",
+      "tool": "",
+      "visible_controls": [
+        {
+          "disabled": false,
+          "name": "@Button@401",
+          "rect": "[P: (1040.0, 7.0), S: (88.0, 44.0)]",
+          "text": "再開",
+          "tooltip": ""
+        },
+        {
+          "disabled": false,
+          "name": "@Button@402",
+          "rect": "[P: (1136.0, 7.0), S: (64.0, 44.0)]",
+          "text": "×1.0",
+          "tooltip": "1：0.5倍 / 2：1倍 / 3：2倍 / 4：4倍（休息中）。Space：停止。− / ＋：段階変更"
+        },
+        {
+          "disabled": false,
+          "name": "@Button@404",
+          "rect": "[P: (1074.0, 754.0), S: (190.0, 44.0)]",
+          "text": "夜まで休む",
+          "tooltip": "途中で止められます。世界も通常の休息と同じように進みます"
+        },
+        {
+          "disabled": false,
+          "name": "@Button@406",
+          "rect": "[P: (16.0, 754.0), S: (184.0, 44.0)]",
+          "text": "アーキテクト",
+          "tooltip": ""
+        },
+        {
+          "disabled": false,
+          "name": "@Button@407",
+          "rect": "[P: (208.0, 754.0), S: (116.0, 44.0)]",
+          "text": "動物",
+          "tooltip": ""
+        },
+        {
+          "disabled": false,
+          "name": "@Button@408",
+          "rect": "[P: (332.0, 754.0), S: (116.0, 44.0)]",
+          "text": "役割",
+          "tooltip": ""
+        },
+        {
+          "disabled": false,
+          "name": "@Button@409",
+          "rect": "[P: (456.0, 754.0), S: (116.0, 44.0)]",
+          "text": "命令",
+          "tooltip": ""
+        }
+      ]
+    },
+    {
+      "calendar": 0,
+      "file": "surface_sand.png",
+      "fixture": "新規seed31・分布の濃い地点・仮配色。資源や移動効果は追加しない",
+      "group": -1,
+      "phase": "day",
+      "selected": "{  }",
+      "tick": 0,
+      "title": "地表 sand",
+      "tool": "",
+      "visible_controls": [
+        {
+          "disabled": false,
+          "name": "@Button@401",
+          "rect": "[P: (1040.0, 7.0), S: (88.0, 44.0)]",
+          "text": "再開",
+          "tooltip": ""
+        },
+        {
+          "disabled": false,
+          "name": "@Button@402",
+          "rect": "[P: (1136.0, 7.0), S: (64.0, 44.0)]",
+          "text": "×1.0",
+          "tooltip": "1：0.5倍 / 2：1倍 / 3：2倍 / 4：4倍（休息中）。Space：停止。− / ＋：段階変更"
+        },
+        {
+          "disabled": false,
+          "name": "@Button@404",
+          "rect": "[P: (1074.0, 754.0), S: (190.0, 44.0)]",
+          "text": "夜まで休む",
+          "tooltip": "途中で止められます。世界も通常の休息と同じように進みます"
+        },
+        {
+          "disabled": false,
+          "name": "@Button@406",
+          "rect": "[P: (16.0, 754.0), S: (184.0, 44.0)]",
+          "text": "アーキテクト",
+          "tooltip": ""
+        },
+        {
+          "disabled": false,
+          "name": "@Button@407",
+          "rect": "[P: (208.0, 754.0), S: (116.0, 44.0)]",
+          "text": "動物",
+          "tooltip": ""
+        },
+        {
+          "disabled": false,
+          "name": "@Button@408",
+          "rect": "[P: (332.0, 754.0), S: (116.0, 44.0)]",
+          "text": "役割",
+          "tooltip": ""
+        },
+        {
+          "disabled": false,
+          "name": "@Button@409",
+          "rect": "[P: (456.0, 754.0), S: (116.0, 44.0)]",
+          "text": "命令",
+          "tooltip": ""
+        }
+      ]
+    },
+    {
+      "calendar": 0,
+      "file": "surface_clay.png",
+      "fixture": "新規seed31・分布の濃い地点・仮配色。資源や移動効果は追加しない",
+      "group": -1,
+      "phase": "day",
+      "selected": "{  }",
+      "tick": 0,
+      "title": "地表 clay",
+      "tool": "",
+      "visible_controls": [
+        {
+          "disabled": false,
+          "name": "@Button@401",
+          "rect": "[P: (1040.0, 7.0), S: (88.0, 44.0)]",
+          "text": "再開",
+          "tooltip": ""
+        },
+        {
+          "disabled": false,
+          "name": "@Button@402",
+          "rect": "[P: (1136.0, 7.0), S: (64.0, 44.0)]",
+          "text": "×1.0",
+          "tooltip": "1：0.5倍 / 2：1倍 / 3：2倍 / 4：4倍（休息中）。Space：停止。− / ＋：段階変更"
+        },
+        {
+          "disabled": false,
+          "name": "@Button@404",
+          "rect": "[P: (1074.0, 754.0), S: (190.0, 44.0)]",
+          "text": "夜まで休む",
+          "tooltip": "途中で止められます。世界も通常の休息と同じように進みます"
+        },
+        {
+          "disabled": false,
+          "name": "@Button@406",
+          "rect": "[P: (16.0, 754.0), S: (184.0, 44.0)]",
+          "text": "アーキテクト",
+          "tooltip": ""
+        },
+        {
+          "disabled": false,
+          "name": "@Button@407",
+          "rect": "[P: (208.0, 754.0), S: (116.0, 44.0)]",
+          "text": "動物",
+          "tooltip": ""
+        },
+        {
+          "disabled": false,
+          "name": "@Button@408",
+          "rect": "[P: (332.0, 754.0), S: (116.0, 44.0)]",
+          "text": "役割",
+          "tooltip": ""
+        },
+        {
+          "disabled": false,
+          "name": "@Button@409",
+          "rect": "[P: (456.0, 754.0), S: (116.0, 44.0)]",
+          "text": "命令",
+          "tooltip": ""
+        }
+      ]
+    },
+    {
+      "calendar": 0,
+      "file": "seed_73_overview.png",
+      "fixture": "通常のseed31。時間停止、画面だけ操作",
+      "group": -1,
+      "phase": "day",
+      "selected": "{  }",
+      "tick": 0,
+      "title": "全景 seed73",
+      "tool": "",
+      "visible_controls": [
+        {
+          "disabled": false,
+          "name": "@Button@560",
+          "rect": "[P: (1040.0, 7.0), S: (88.0, 44.0)]",
+          "text": "再開",
+          "tooltip": ""
+        },
+        {
+          "disabled": false,
+          "name": "@Button@561",
+          "rect": "[P: (1136.0, 7.0), S: (64.0, 44.0)]",
+          "text": "×1.0",
+          "tooltip": "1：0.5倍 / 2：1倍 / 3：2倍 / 4：4倍（休息中）。Space：停止。− / ＋：段階変更"
+        },
+        {
+          "disabled": false,
+          "name": "@Button@563",
+          "rect": "[P: (1074.0, 754.0), S: (190.0, 44.0)]",
+          "text": "夜まで休む",
+          "tooltip": "途中で止められます。世界も通常の休息と同じように進みます"
+        },
+        {
+          "disabled": false,
+          "name": "@Button@565",
+          "rect": "[P: (16.0, 754.0), S: (184.0, 44.0)]",
+          "text": "アーキテクト",
+          "tooltip": ""
+        },
+        {
+          "disabled": false,
+          "name": "@Button@566",
+          "rect": "[P: (208.0, 754.0), S: (116.0, 44.0)]",
+          "text": "動物",
+          "tooltip": ""
+        },
+        {
+          "disabled": false,
+          "name": "@Button@567",
+          "rect": "[P: (332.0, 754.0), S: (116.0, 44.0)]",
+          "text": "役割",
+          "tooltip": ""
+        },
+        {
+          "disabled": false,
+          "name": "@Button@568",
+          "rect": "[P: (456.0, 754.0), S: (116.0, 44.0)]",
+          "text": "命令",
+          "tooltip": ""
+        }
+      ]
+    },
+    {
+      "calendar": 0,
+      "file": "seed_73_rocks.png",
+      "fixture": "通常のseed31。時間停止、画面だけ操作",
+      "group": -1,
+      "phase": "day",
+      "selected": "{  }",
+      "tick": 0,
+      "title": "岩場・通常倍率 seed73",
+      "tool": "",
+      "visible_controls": [
+        {
+          "disabled": false,
+          "name": "@Button@560",
+          "rect": "[P: (1040.0, 7.0), S: (88.0, 44.0)]",
+          "text": "再開",
+          "tooltip": ""
+        },
+        {
+          "disabled": false,
+          "name": "@Button@561",
+          "rect": "[P: (1136.0, 7.0), S: (64.0, 44.0)]",
+          "text": "×1.0",
+          "tooltip": "1：0.5倍 / 2：1倍 / 3：2倍 / 4：4倍（休息中）。Space：停止。− / ＋：段階変更"
+        },
+        {
+          "disabled": false,
+          "name": "@Button@563",
+          "rect": "[P: (1074.0, 754.0), S: (190.0, 44.0)]",
+          "text": "夜まで休む",
+          "tooltip": "途中で止められます。世界も通常の休息と同じように進みます"
+        },
+        {
+          "disabled": false,
+          "name": "@Button@565",
+          "rect": "[P: (16.0, 754.0), S: (184.0, 44.0)]",
+          "text": "アーキテクト",
+          "tooltip": ""
+        },
+        {
+          "disabled": false,
+          "name": "@Button@566",
+          "rect": "[P: (208.0, 754.0), S: (116.0, 44.0)]",
+          "text": "動物",
+          "tooltip": ""
+        },
+        {
+          "disabled": false,
+          "name": "@Button@567",
+          "rect": "[P: (332.0, 754.0), S: (116.0, 44.0)]",
+          "text": "役割",
+          "tooltip": ""
+        },
+        {
+          "disabled": false,
+          "name": "@Button@568",
+          "rect": "[P: (456.0, 754.0), S: (116.0, 44.0)]",
+          "text": "命令",
+          "tooltip": ""
+        }
+      ]
+    },
+    {
+      "calendar": 0,
+      "file": "seed_109_overview.png",
+      "fixture": "通常のseed31。時間停止、画面だけ操作",
+      "group": -1,
+      "phase": "day",
+      "selected": "{  }",
+      "tick": 0,
+      "title": "全景 seed109",
+      "tool": "",
+      "visible_controls": [
+        {
+          "disabled": false,
+          "name": "@Button@719",
+          "rect": "[P: (1040.0, 7.0), S: (88.0, 44.0)]",
+          "text": "再開",
+          "tooltip": ""
+        },
+        {
+          "disabled": false,
+          "name": "@Button@720",
+          "rect": "[P: (1136.0, 7.0), S: (64.0, 44.0)]",
+          "text": "×1.0",
+          "tooltip": "1：0.5倍 / 2：1倍 / 3：2倍 / 4：4倍（休息中）。Space：停止。− / ＋：段階変更"
+        },
+        {
+          "disabled": false,
+          "name": "@Button@722",
+          "rect": "[P: (1074.0, 754.0), S: (190.0, 44.0)]",
+          "text": "夜まで休む",
+          "tooltip": "途中で止められます。世界も通常の休息と同じように進みます"
+        },
+        {
+          "disabled": false,
+          "name": "@Button@724",
+          "rect": "[P: (16.0, 754.0), S: (184.0, 44.0)]",
+          "text": "アーキテクト",
+          "tooltip": ""
+        },
+        {
+          "disabled": false,
+          "name": "@Button@725",
+          "rect": "[P: (208.0, 754.0), S: (116.0, 44.0)]",
+          "text": "動物",
+          "tooltip": ""
+        },
+        {
+          "disabled": false,
+          "name": "@Button@726",
+          "rect": "[P: (332.0, 754.0), S: (116.0, 44.0)]",
+          "text": "役割",
+          "tooltip": ""
+        },
+        {
+          "disabled": false,
+          "name": "@Button@727",
+          "rect": "[P: (456.0, 754.0), S: (116.0, 44.0)]",
+          "text": "命令",
+          "tooltip": ""
+        }
+      ]
+    },
+    {
+      "calendar": 0,
+      "file": "seed_109_rocks.png",
+      "fixture": "通常のseed31。時間停止、画面だけ操作",
+      "group": -1,
+      "phase": "day",
+      "selected": "{  }",
+      "tick": 0,
+      "title": "岩場・通常倍率 seed109",
+      "tool": "",
+      "visible_controls": [
+        {
+          "disabled": false,
+          "name": "@Button@719",
+          "rect": "[P: (1040.0, 7.0), S: (88.0, 44.0)]",
+          "text": "再開",
+          "tooltip": ""
+        },
+        {
+          "disabled": false,
+          "name": "@Button@720",
+          "rect": "[P: (1136.0, 7.0), S: (64.0, 44.0)]",
+          "text": "×1.0",
+          "tooltip": "1：0.5倍 / 2：1倍 / 3：2倍 / 4：4倍（休息中）。Space：停止。− / ＋：段階変更"
+        },
+        {
+          "disabled": false,
+          "name": "@Button@722",
+          "rect": "[P: (1074.0, 754.0), S: (190.0, 44.0)]",
+          "text": "夜まで休む",
+          "tooltip": "途中で止められます。世界も通常の休息と同じように進みます"
+        },
+        {
+          "disabled": false,
+          "name": "@Button@724",
+          "rect": "[P: (16.0, 754.0), S: (184.0, 44.0)]",
+          "text": "アーキテクト",
+          "tooltip": ""
+        },
+        {
+          "disabled": false,
+          "name": "@Button@725",
+          "rect": "[P: (208.0, 754.0), S: (116.0, 44.0)]",
+          "text": "動物",
+          "tooltip": ""
+        },
+        {
+          "disabled": false,
+          "name": "@Button@726",
+          "rect": "[P: (332.0, 754.0), S: (116.0, 44.0)]",
+          "text": "役割",
+          "tooltip": ""
+        },
+        {
+          "disabled": false,
+          "name": "@Button@727",
+          "rect": "[P: (456.0, 754.0), S: (116.0, 44.0)]",
+          "text": "命令",
+          "tooltip": ""
+        }
+      ]
+    }
+  ],
+  "source_commit": "942e9a51dfefe4de5bf23feb9976770fec17f64d"
+}

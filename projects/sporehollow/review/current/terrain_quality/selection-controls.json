@@ -1,0 +1,128 @@
+{
+	"captures": [],
+	"checks": [
+		{
+			"check": "First enclosed classification chooses animals; paused=false",
+			"passed": true
+		},
+		{
+			"check": "Neutral drag selects only animals and keeps neutral; paused=false",
+			"passed": true
+		},
+		{
+			"check": "Selection does not open management or issue jobs",
+			"passed": true
+		},
+		{
+			"check": "Neutral selection does not pan camera",
+			"passed": true
+		},
+		{
+			"check": "First enclosed classification chooses animals; paused=true",
+			"passed": true
+		},
+		{
+			"check": "Neutral drag selects only animals and keeps neutral; paused=true",
+			"passed": true
+		},
+		{
+			"check": "Selection does not open management or issue jobs",
+			"passed": true
+		},
+		{
+			"check": "Neutral selection does not pan camera",
+			"passed": true
+		},
+		{
+			"check": "Opening instructions preserves the multiselection without issuing commands",
+			"passed": true
+		},
+		{
+			"check": "Resources category and selection limit eight",
+			"passed": true
+		},
+		{
+			"check": "Reversed drag stays in first resource category despite animals",
+			"passed": true
+		},
+		{
+			"check": "Right click cancels only unconfirmed rectangle; original selection/work survive",
+			"passed": true
+		},
+		{
+			"check": "Empty rectangle does not move or order",
+			"passed": true
+		},
+		{
+			"check": "Neutral floor selection keeps target-layer dismantle menu",
+			"passed": true
+		},
+		{
+			"check": "Neutral trees use existing forestry actions",
+			"passed": true
+		},
+		{
+			"check": "Enemy click selects without attack; paused=false",
+			"passed": true
+		},
+		{
+			"check": "Target menu offers explicit attack",
+			"passed": true
+		},
+		{
+			"check": "Enemy click selects without attack; paused=true",
+			"passed": true
+		},
+		{
+			"check": "Target menu offers explicit attack",
+			"passed": true
+		},
+		{
+			"check": "Explicit Attack click designates selected enemy exactly once",
+			"passed": true
+		},
+		{
+			"check": "Paused confirmation never moves or advances time",
+			"passed": true
+		},
+		{
+			"check": "Right click clears target only, retains confirmed attack",
+			"passed": true
+		},
+		{
+			"check": "Selecting another target does not replace the confirmed order",
+			"passed": true
+		},
+		{
+			"check": "Explicit new attack replaces only existing direct command",
+			"passed": true
+		},
+		{
+			"check": "Dead target rejects confirmation without creating another order",
+			"passed": true
+		},
+		{
+			"check": "Attack unavailable while not drafted",
+			"passed": true
+		},
+		{
+			"check": "Disabled action consumes click without ordering or selecting the ground",
+			"passed": true
+		},
+		{
+			"check": "Confirmed attack executes existing combat after resuming",
+			"passed": true
+		},
+		{
+			"check": "Neutral wheel remains zoom",
+			"passed": true
+		},
+		{
+			"check": "WASD remains available for map movement",
+			"passed": true
+		}
+	],
+	"failures": 0,
+	"method": "Godot InputEvent through real controls; isolated fixture seed31, explicit positions, headless or isolated GPU; no OS input",
+	"source_commit": ""
+}

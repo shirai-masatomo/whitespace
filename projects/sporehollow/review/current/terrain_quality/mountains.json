@@ -1,0 +1,237 @@
+{
+  "checks": [
+    {
+      "check": "4x4 mountain is one object, distinct from cell rocks",
+      "passed": true
+    },
+    {
+      "check": "All sixteen footprint cells select the same ID and block paths",
+      "passed": true
+    },
+    {
+      "check": "Construction rejects every occupied mountain cell",
+      "passed": true
+    },
+    {
+      "check": "Any occupied cell designates one job without duplicate",
+      "passed": true
+    },
+    {
+      "check": "Multiple workers claim this mountain only once",
+      "passed": true
+    },
+    {
+      "check": "PAUSE does not mine",
+      "passed": true
+    },
+    {
+      "check": "Draft interruption retains resource progress",
+      "passed": true
+    },
+    {
+      "check": "Forbid retains progress",
+      "passed": true
+    },
+    {
+      "check": "Cancellation leaves damaged resource and drops intact",
+      "passed": true
+    },
+    {
+      "check": "Save/restart preserves partial progress and ID",
+      "passed": true
+    },
+    {
+      "check": "One physical batch per transition 1",
+      "passed": true
+    },
+    {
+      "check": "Drops stay outside occupied mountain 1",
+      "passed": true
+    },
+    {
+      "check": "Transition snapshot identity 1",
+      "passed": true
+    },
+    {
+      "check": "One physical batch per transition 2",
+      "passed": true
+    },
+    {
+      "check": "Drops stay outside occupied mountain 2",
+      "passed": true
+    },
+    {
+      "check": "Transition snapshot identity 2",
+      "passed": true
+    },
+    {
+      "check": "One physical batch per transition 3",
+      "passed": true
+    },
+    {
+      "check": "Drops stay outside occupied mountain 3",
+      "passed": true
+    },
+    {
+      "check": "Transition snapshot identity 3",
+      "passed": true
+    },
+    {
+      "check": "One physical batch per transition 4",
+      "passed": true
+    },
+    {
+      "check": "Drops stay outside occupied mountain 4",
+      "passed": true
+    },
+    {
+      "check": "Transition snapshot identity 4",
+      "passed": true
+    },
+    {
+      "check": "Single designation reaches all stages and shrinking footprint",
+      "passed": true
+    },
+    {
+      "check": "Exactly 64 physical stones, no instant shared inventory",
+      "passed": true
+    },
+    {
+      "check": "Released ground permits building and navigation",
+      "passed": true
+    },
+    {
+      "check": "Depleted object never respawns or duplicates resources on restart",
+      "passed": true
+    },
+    {
+      "check": "Campaign persistence retains depleted mountain",
+      "passed": true
+    },
+    {
+      "check": "Explicit hauling supplies stockpile with all four batches",
+      "passed": true
+    },
+    {
+      "check": "Small object has three batches and releases its single cell",
+      "passed": true
+    },
+    {
+      "check": "Rectangle designation intersects object without including its origin",
+      "passed": true
+    },
+    {
+      "check": "Rectangle cancellation matches footprint, not only origin",
+      "passed": true
+    },
+    {
+      "check": "Range forbid works from far corner",
+      "passed": true
+    },
+    {
+      "check": "Range allow preserves same object",
+      "passed": true
+    },
+    {
+      "check": "Manual sleep suspends without losing progress",
+      "passed": true
+    },
+    {
+      "check": "Wake resumes the same mining designation",
+      "passed": true
+    },
+    {
+      "check": "Hunger interrupts mining to obtain real stored food",
+      "passed": true
+    },
+    {
+      "check": "After eating the existing designation resumes",
+      "passed": true
+    },
+    {
+      "check": "Saving immediately before stage transition does not duplicate a batch",
+      "passed": true
+    },
+    {
+      "check": "Deterministic generation seed 1",
+      "passed": true
+    },
+    {
+      "check": "Both object kinds generated seed 1",
+      "passed": true
+    },
+    {
+      "check": "No protected/object overlap and reachable work face seed 1",
+      "passed": true
+    },
+    {
+      "check": "Old save does not gain new mountains seed 1",
+      "passed": true
+    },
+    {
+      "check": "Deterministic generation seed 17",
+      "passed": true
+    },
+    {
+      "check": "Both object kinds generated seed 17",
+      "passed": true
+    },
+    {
+      "check": "No protected/object overlap and reachable work face seed 17",
+      "passed": true
+    },
+    {
+      "check": "Old save does not gain new mountains seed 17",
+      "passed": true
+    },
+    {
+      "check": "Deterministic generation seed 31",
+      "passed": true
+    },
+    {
+      "check": "Both object kinds generated seed 31",
+      "passed": true
+    },
+    {
+      "check": "No protected/object overlap and reachable work face seed 31",
+      "passed": true
+    },
+    {
+      "check": "Old save does not gain new mountains seed 31",
+      "passed": true
+    },
+    {
+      "check": "Deterministic generation seed 97",
+      "passed": true
+    },
+    {
+      "check": "Both object kinds generated seed 97",
+      "passed": true
+    },
+    {
+      "check": "No protected/object overlap and reachable work face seed 97",
+      "passed": true
+    },
+    {
+      "check": "Old save does not gain new mountains seed 97",
+      "passed": true
+    },
+    {
+      "check": "Deterministic generation seed 2026",
+      "passed": true
+    },
+    {
+      "check": "Both object kinds generated seed 2026",
+      "passed": true
+    },
+    {
+      "check": "No protected/object overlap and reachable work face seed 2026",
+      "passed": true
+    },
+    {
+      "check": "Old save does not gain new mountains seed 2026",
+      "passed": true
+    }
+  ],
+  "failures": 0
+}

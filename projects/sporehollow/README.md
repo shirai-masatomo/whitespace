@@ -38,7 +38,7 @@ HUDの土・木材・石は総所有数。利用可と異なる場合は「使�
 
 二人以上の作業エンジンと役割設定は制御した登録作業者で検証しています。役割表の登録住人は共通状態カードからHP・満腹・眠気・スタミナ・装備・仕事状態と徴兵を確認できます。通常プレイの追加作業者募集・全員共通の直接移動／攻撃／装備操作は未完成です。メイド等の固有支援人物を一般作業者へ自動変更しません。
 
-関連headless、GPUのGodot入力イベント、通常起動／終了／別プロセス再開は区別して記録します。人間の通し試遊・実音・IME・各敵AIの長時間評価は別です。今回の外部レビュー資料は[review/current/PACKET.md](review/current/PACKET.md)にあります。現行のレビュー入口は `review/current/quality/README.md`。非対話デスクトップでのGPU描画・入力・終了再開が成功しています。GPUを共有するため30fpsで直列実行し、音と通常セーブを分離します。
+関連headless、GPUのGodot入力イベント、通常起動／終了／別プロセス再開は区別して記録します。人間の通し試遊・実音・IME・各敵AIの長時間評価は別です。今回の外部レビュー資料は[review/current/PACKET.md](review/current/PACKET.md)にあります。現行のレビュー入口は `review/current/terrain_quality/REPORT.md`。非対話デスクトップでのGPU描画・入力・終了再開が成功しています。GPUを共有するため30fpsで直列実行し、音と通常セーブを分離します。
 
 個体仕様：ANIMALS.md／ENEMIES.md。建築：BUILDINGS.md。仕事・物流：WORK_SYSTEMS.md。世界：WORLD_SYSTEMS.md。採用素材：ART_SPEC.md。BGM・正式素材は既存参照を維持し、新しい画像は生成していません。
 

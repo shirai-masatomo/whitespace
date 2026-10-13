@@ -1,15 +1,14 @@
-# 最新レビュー：ニュートラル範囲選択・対象アクション
+# 最新レビュー：地形品質・起動・範囲選択
 
-実装・GPU・通常EXE `361075893f008c2598ce33341475f820d55582cd`。ブランチ `codex/sporehollow-biome01`。
+実装・描画・通常EXE：`942e9a51dfefe4de5bf23feb9976770fec17f64d`。ブランチ `codex/sporehollow-biome01`。
 
-- [変更結果と未対応範囲](selection_controls/REPORT.md)
-- [実ゲーム3画面](selection_controls/SCREENS.md)
-- [入力59検査](selection_controls/headless.json)
-- [GPU33検査](selection_controls/ui-survey.json)
-- [配布EXEと素材](selection_controls/DELIVERY.json)
+- [変更結果・性能・残課題](terrain_quality/REPORT.md)
+- [3seed・地表・修正前後・連続描画](terrain_quality/SCREENS.md)
+- [配布EXEと素材](terrain_quality/DELIVERY.json)
+- [関連274検査](terrain_quality/build-verification.json)／[最終色調整・旧新セーブEXE再開](terrain_quality/final-build-verification.json)
 
-ニュートラル左ドラッグは分類固定・最大8対象。徴兵中の牧場主は対象を選んで「攻撃」で確定。右クリック選択解除は確定済み命令を維持。地図移動はWASD。旧セーブ互換の追加開発なし。
+連続岩盤、仮の土・砂・粘土、大岩山減数、指定100件、UIをまたぐ範囲選択。通常セーブは維持し、新景観は新規開始から適用。
 
-既存「最新開発版.lnk」の同じEXEへ反映済み。人間の快適さと自動入力検証を区別。拡充ロードマップ0〜11へは未着手。
+地表の正式素材、起動の初回読込、人間の長時間試遊、Windowsタスクバーでの物理マウス解放は残課題。通常desktopは操作していない。
 
-前回：[100×68マップ統合・36画面・連続フレーム](map_expansion/README.md)。それ以前：[総合品質](quality/README.md)、[64画面](ui_survey/README.md)、[岩山](mountains/REPORT.md)。
+前回：[分類別選択・対象アクション](selection_controls/REPORT.md)、[マップ統合](map_expansion/REPORT.md)。

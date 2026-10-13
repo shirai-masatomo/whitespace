@@ -1,0 +1,61 @@
+{
+  "checks": [
+    {
+      "check": "Exactly100 accepted;101st denied",
+      "passed": true
+    },
+    {
+      "check": "100 jobs save",
+      "passed": true
+    },
+    {
+      "check": "100 jobs IDs/progress/priorities restored",
+      "passed": true
+    },
+    {
+      "check": "Cancel frees exactly one slot",
+      "passed": true
+    },
+    {
+      "check": "Scheduler selects gathering and physically completes mining with100 jobs",
+      "passed": true
+    },
+    {
+      "check": "Existing job identities preserved",
+      "passed": true
+    }
+  ],
+  "max_ms": 64.601,
+  "mean_ms": 5.44228571428571,
+  "registration_ms": 2.447,
+  "step_ms": [
+    21.239,
+    0.994,
+    1.29,
+    1.88,
+    1.539,
+    0.777,
+    0.767,
+    0.788,
+    0.769,
+    0.746,
+    0.731,
+    0.872,
+    0.666,
+    0.501,
+    0.484,
+    23.83,
+    18.747,
+    0.867,
+    0.782,
+    0.821,
+    0.564,
+    0.513,
+    0.888,
+    64.601,
+    1.153,
+    2.314,
+    2.426,
+    0.835
+  ]
+}

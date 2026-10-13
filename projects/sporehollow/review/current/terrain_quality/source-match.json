@@ -1,0 +1,350 @@
+{
+  "implementation_commit": "942e9a51dfefe4de5bf23feb9976770fec17f64d",
+  "capture_commit": "942e9a51dfefe4de5bf23feb9976770fec17f64d",
+  "files": {
+    "adopted_art.gd": {
+      "captured_matches_current": true,
+      "committed_content_matches": true
+    },
+    "animal_corpse.gd": {
+      "captured_matches_current": true,
+      "committed_content_matches": true
+    },
+    "animal_data.gd": {
+      "captured_matches_current": true,
+      "committed_content_matches": true
+    },
+    "animal_escape.gd": {
+      "captured_matches_current": true,
+      "committed_content_matches": true
+    },
+    "animal_guide.gd": {
+      "captured_matches_current": true,
+      "committed_content_matches": true
+    },
+    "animal_orders.gd": {
+      "captured_matches_current": true,
+      "committed_content_matches": true
+    },
+    "animal_recovery.gd": {
+      "captured_matches_current": true,
+      "committed_content_matches": true
+    },
+    "autonomy_entry_review.gd": {
+      "captured_matches_current": true,
+      "committed_content_matches": true
+    },
+    "biome_map.gd": {
+      "captured_matches_current": true,
+      "committed_content_matches": true
+    },
+    "board_art.gd": {
+      "captured_matches_current": true,
+      "committed_content_matches": true
+    },
+    "book_view.gd": {
+      "captured_matches_current": true,
+      "committed_content_matches": true
+    },
+    "building_art.gd": {
+      "captured_matches_current": true,
+      "committed_content_matches": true
+    },
+    "buildings.gd": {
+      "captured_matches_current": true,
+      "committed_content_matches": true
+    },
+    "colony_clock.gd": {
+      "captured_matches_current": true,
+      "committed_content_matches": true
+    },
+    "colony_cycle.gd": {
+      "captured_matches_current": true,
+      "committed_content_matches": true
+    },
+    "colony_land.gd": {
+      "captured_matches_current": true,
+      "committed_content_matches": true
+    },
+    "colony_menu.gd": {
+      "captured_matches_current": true,
+      "committed_content_matches": true
+    },
+    "colony_panels.gd": {
+      "captured_matches_current": true,
+      "committed_content_matches": true
+    },
+    "colony_task_controls.gd": {
+      "captured_matches_current": true,
+      "committed_content_matches": true
+    },
+    "colony_tasks.gd": {
+      "captured_matches_current": true,
+      "committed_content_matches": true
+    },
+    "colony_ui_state.gd": {
+      "captured_matches_current": true,
+      "committed_content_matches": true
+    },
+    "colony_view_model.gd": {
+      "captured_matches_current": true,
+      "committed_content_matches": true
+    },
+    "colony_zones.gd": {
+      "captured_matches_current": true,
+      "committed_content_matches": true
+    },
+    "combat_events.gd": {
+      "captured_matches_current": true,
+      "committed_content_matches": true
+    },
+    "construction_delivery.gd": {
+      "captured_matches_current": true,
+      "committed_content_matches": true
+    },
+    "cycle_entry_review.gd": {
+      "captured_matches_current": true,
+      "committed_content_matches": true
+    },
+    "decision_ai.gd": {
+      "captured_matches_current": true,
+      "committed_content_matches": true
+    },
+    "delivered_art.gd": {
+      "captured_matches_current": true,
+      "committed_content_matches": true
+    },
+    "direction_art.gd": {
+      "captured_matches_current": true,
+      "committed_content_matches": true
+    },
+    "encounters.gd": {
+      "captured_matches_current": true,
+      "committed_content_matches": true
+    },
+    "enemy_arrival.gd": {
+      "captured_matches_current": true,
+      "committed_content_matches": true
+    },
+    "enemy_skills.gd": {
+      "captured_matches_current": true,
+      "committed_content_matches": true
+    },
+    "farm_audio.gd": {
+      "captured_matches_current": true,
+      "committed_content_matches": true
+    },
+    "forest_departure.gd": {
+      "captured_matches_current": true,
+      "committed_content_matches": true
+    },
+    "forest_pattern.gd": {
+      "captured_matches_current": true,
+      "committed_content_matches": true
+    },
+    "harvest_view.gd": {
+      "captured_matches_current": true,
+      "committed_content_matches": true
+    },
+    "harvest_work.gd": {
+      "captured_matches_current": true,
+      "committed_content_matches": true
+    },
+    "human_combat.gd": {
+      "captured_matches_current": true,
+      "committed_content_matches": true
+    },
+    "human_food.gd": {
+      "captured_matches_current": true,
+      "committed_content_matches": true
+    },
+    "human_nutrition.gd": {
+      "captured_matches_current": true,
+      "committed_content_matches": true
+    },
+    "human_visual.gd": {
+      "captured_matches_current": true,
+      "committed_content_matches": true
+    },
+    "human_work.gd": {
+      "captured_matches_current": true,
+      "committed_content_matches": true
+    },
+    "inventory_view.gd": {
+      "captured_matches_current": true,
+      "committed_content_matches": true
+    },
+    "item_commands.gd": {
+      "captured_matches_current": true,
+      "committed_content_matches": true
+    },
+    "journal_view.gd": {
+      "captured_matches_current": true,
+      "committed_content_matches": true
+    },
+    "keeper_jobs.gd": {
+      "captured_matches_current": true,
+      "committed_content_matches": true
+    },
+    "keeper_life.gd": {
+      "captured_matches_current": true,
+      "committed_content_matches": true
+    },
+    "level_stats.gd": {
+      "captured_matches_current": true,
+      "committed_content_matches": true
+    },
+    "livestock.gd": {
+      "captured_matches_current": true,
+      "committed_content_matches": true
+    },
+    "livestock_controls.gd": {
+      "captured_matches_current": true,
+      "committed_content_matches": true
+    },
+    "main.gd": {
+      "captured_matches_current": true,
+      "committed_content_matches": true
+    },
+    "market_view.gd": {
+      "captured_matches_current": true,
+      "committed_content_matches": true
+    },
+    "merchant_speech.gd": {
+      "captured_matches_current": true,
+      "committed_content_matches": true
+    },
+    "mining_mountains.gd": {
+      "captured_matches_current": true,
+      "committed_content_matches": true
+    },
+    "morning_save.gd": {
+      "captured_matches_current": true,
+      "committed_content_matches": true
+    },
+    "mountain_view.gd": {
+      "captured_matches_current": true,
+      "committed_content_matches": true
+    },
+    "onsite_clarity.gd": {
+      "captured_matches_current": true,
+      "committed_content_matches": true
+    },
+    "onsite_clarity_review.gd": {
+      "captured_matches_current": true,
+      "committed_content_matches": true
+    },
+    "physical_stock.gd": {
+      "captured_matches_current": true,
+      "committed_content_matches": true
+    },
+    "player_events.gd": {
+      "captured_matches_current": true,
+      "committed_content_matches": true
+    },
+    "progression.gd": {
+      "captured_matches_current": true,
+      "committed_content_matches": true
+    },
+    "progression_art.gd": {
+      "captured_matches_current": true,
+      "committed_content_matches": true
+    },
+    "progression_data.gd": {
+      "captured_matches_current": true,
+      "committed_content_matches": true
+    },
+    "progression_view.gd": {
+      "captured_matches_current": true,
+      "committed_content_matches": true
+    },
+    "raider_ai.gd": {
+      "captured_matches_current": true,
+      "committed_content_matches": true
+    },
+    "ranch_content.gd": {
+      "captured_matches_current": true,
+      "committed_content_matches": true
+    },
+    "research_snapshot.gd": {
+      "captured_matches_current": true,
+      "committed_content_matches": true
+    },
+    "retained_ground.gd": {
+      "captured_matches_current": true,
+      "committed_content_matches": true
+    },
+    "rock_art.gd": {
+      "captured_matches_current": true,
+      "committed_content_matches": true
+    },
+    "rock_view.gd": {
+      "captured_matches_current": true,
+      "committed_content_matches": true
+    },
+    "rules.gd": {
+      "captured_matches_current": true,
+      "committed_content_matches": true
+    },
+    "shop_table.gd": {
+      "captured_matches_current": true,
+      "committed_content_matches": true
+    },
+    "six_motion.gd": {
+      "captured_matches_current": true,
+      "committed_content_matches": true
+    },
+    "six_motion_clips.gd": {
+      "captured_matches_current": true,
+      "committed_content_matches": true
+    },
+    "stages.gd": {
+      "captured_matches_current": true,
+      "committed_content_matches": true
+    },
+    "stock_view.gd": {
+      "captured_matches_current": true,
+      "committed_content_matches": true
+    },
+    "story_view.gd": {
+      "captured_matches_current": true,
+      "committed_content_matches": true
+    },
+    "subtasks.gd": {
+      "captured_matches_current": true,
+      "committed_content_matches": true
+    },
+    "target_policy.gd": {
+      "captured_matches_current": true,
+      "committed_content_matches": true
+    },
+    "ui_assets.gd": {
+      "captured_matches_current": true,
+      "committed_content_matches": true
+    },
+    "ui_style.gd": {
+      "captured_matches_current": true,
+      "committed_content_matches": true
+    },
+    "wall_stroke.gd": {
+      "captured_matches_current": true,
+      "committed_content_matches": true
+    },
+    "work_policy.gd": {
+      "captured_matches_current": true,
+      "committed_content_matches": true
+    },
+    "world.gd": {
+      "captured_matches_current": true,
+      "committed_content_matches": true
+    },
+    "world_story_system.gd": {
+      "captured_matches_current": true,
+      "committed_content_matches": true
+    },
+    "zone_controls.gd": {
+      "captured_matches_current": true,
+      "committed_content_matches": true
+    }
+  }
+}
