@@ -75,6 +75,8 @@ frame_msは描画後コールバック間隔。CPU区間は入れ子で加算不
 
 ## 検証と配布
 
-関連テスト・最終EXE反映・F9実操作の最終結果は DELIVERY.json に記録する。通常EXEの入口は一本。検証用EXE・キャッシュは工程終了時に整理。既存のObjectDB終了時解放警告は残り、性能問題との関係は未確定。
+実装2e92497を既存EXEへ反映済み。診断・ローディング・地面・音声の関連テスト合格。別データの50×34／100×68で、EXE起動・正常終了・再開10検査合格。最終結果は [DELIVERY.json](DELIVERY.json)。通常EXEの入口は一本。検証用EXE・キャッシュは工程終了時に整理。既存のObjectDB終了時解放警告は残り、性能問題との関係は未確定。
 
 計測API：[Godot RenderingServer](https://docs.godotengine.org/en/stable/classes/class_renderingserver.html)。CPU/GPUの意味と計測遅延を区別している。
+
+通常Windows起動でも最終EXEから診断JSONが保存された。ただし画面取得がFrameArrived timeout、再選択後のactivate_windowもtimeout。実キーのF9押下は未検証。試験PID22592は記録後に終了処理したため、この起動を正常終了の証拠とはしない。最終EXEの導入画面中の計測は、通常盤面の性能比較には使用しない。

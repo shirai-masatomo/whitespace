@@ -1,0 +1,28 @@
+{
+  "dirty": true,
+  "utc": "2026-10-13T15:05:47.8622148Z",
+  "normal_data_unchanged": true,
+  "automatically_launched": false,
+  "commit": "2e92497",
+  "asset_delivery_commit": "3229d2655e35e82d178577cdd8acbbe66e9be4f8",
+  "sha256": "F27B0574603484B436CA39770D2461B4F9DB4AD7BD0B3E7B5C9F8ABB977BB8A9",
+  "implementation_commit": "2e92497",
+  "native_lifecycle_checks": 10,
+  "related_tests": [
+    "play_diagnostics",
+    "loading",
+    "ground_scroll",
+    "day_music"
+  ],
+  "related_tests_passed": true,
+  "normal_save_copied": false,
+  "normal_save_unchanged": true,
+  "real_windows_capture": "final-exe.json",
+  "diagnostic_json_saved": true,
+  "physical_f9_verified": false,
+  "ui_limit": "FrameArrived timeout followed by activate_window timeout; further UI attempts stopped.",
+  "diagnostic_process_exit": "Owned PID 22592 terminated after capture because UI automation was unavailable; not counted as normal exit.",
+  "native_normal_exit_and_resume_checks": 10,
+  "root_cause_resolved": false,
+  "preexisting_import_metadata_excluded": true
+}
