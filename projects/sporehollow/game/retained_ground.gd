@@ -27,7 +27,7 @@ func sync():
 		chunks.clear();stamps.clear()
 		for y in range(ceili(w.H/float(SIZE))):
 			for x in range(ceili(w.W/float(SIZE))):
-				var cell=Vector2i(x,y);var node=Chunk.new();node.world=w;node.box=Rect2i(cell*SIZE,Vector2i(mini(SIZE,w.W-x*SIZE),mini(SIZE,w.H-y*SIZE)));add_child(node);chunks[cell]=node
+				var cell=Vector2i(x,y);var node=Chunk.new();node.world=w;node.box=Rect2i(cell*SIZE,Vector2i(mini(SIZE,w.W-x*SIZE),mini(SIZE,w.H-y*SIZE)));node.texture_repeat=CanvasItem.TEXTURE_REPEAT_ENABLED;add_child(node);chunks[cell]=node
 		queue_redraw()
 	var next={}
 	for key in chunks:next[key]=[]

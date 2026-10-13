@@ -87,6 +87,12 @@ static func material_edge(w,p: Vector2i,material: String) -> String:
 		if not w.inside(q) or ranks[w.Biome.material(w,q)]<rank:return "inner_"+corner
 	return "full"
 static func ground_layers(w,p: Vector2i) -> Array:
+	if w.terrain.get("version",1)>=4:
+		# Continuous rock skins live in the shared vertex mesh; only sparse transparent debris here.
+		var rock=w.Biome.field(w,p)[2];var roll=w.Biome.unit(w.seed_value,p.x,p.y,149)
+		if rock>0.3 and roll<0.10:return ["biome_environment_v1/rock/ground/gravel.png"]
+		if rock>0.2 and roll<0.16:return ["biome_environment_v2/rock_ground/pebbly_soil.png"]
+		return []
 	if w.terrain.get("version",1)<2:
 		var legacy=transition(w,p)
 		return [WALL+"transition/"+legacy+".png"] if legacy!="" else []
@@ -103,14 +109,6 @@ static func cache_ground(w):
 	var token="%s:%s"%[w.terrain.get("version",0),w.terrain.seed]
 	if ground_source==w and ground_version==token:return
 	ground_source=w;ground_version=token;ground_kinds={};ground_offsets={}
-	for y in range(w.H):
-		for x in range(w.W):
-			var p=Vector2i(x,y);var layers=ground_layers(w,p)
-			if not layers.is_empty():
-				ground_kinds[p]=layers
-				# Scatter only: connected rock/gravel edges retain exact tile anchors.
-				if layers[0]=="biome_environment_v2/rock_ground/pebbly_soil.png":
-					ground_offsets[p]=Vector2(floori(w.Biome.unit(w.terrain.seed,x,y,181)*17)-8,floori(w.Biome.unit(w.terrain.seed,x,y,191)*13)-6)
 static func ground(g,region: Rect2=Rect2()):
 	var w=g.world;cache_ground(w)
 	var visible=Rect2(Vector2.ZERO,Vector2(w.W,w.H)*g.TILE)
@@ -120,6 +118,10 @@ static func ground(g,region: Rect2=Rect2()):
 		for x in range(maxi(0,floori(visible.position.x/g.TILE.x)-(0 if region.has_area() else 1)),mini(w.W,ceili(visible.end.x/g.TILE.x)+(0 if region.has_area() else 1))):
 			var p=Vector2i(x,y)
 			if w.floors.has(p) or w.live_structure(p):continue
+			if not ground_kinds.has(p):
+				ground_kinds[p]=ground_layers(w,p)
+				if w.terrain.get("version",1)>=4 or ground_kinds[p]==["biome_environment_v2/rock_ground/pebbly_soil.png"]:
+					ground_offsets[p]=Vector2(floori(w.Biome.unit(w.terrain.seed,x,y,181)*17)-8,floori(w.Biome.unit(w.terrain.seed,x,y,191)*13)-6)
 			for key in ground_kinds.get(p,[]):Art.paint(g,key,g.center(p)+ground_offsets.get(p,Vector2.ZERO))
 	for p in w.mined_rock_cells:
 		if w.floors.has(p) or w.live_structure(p) or not visible.grow(0 if region.has_area() else 54).has_point(g.center(p)):continue

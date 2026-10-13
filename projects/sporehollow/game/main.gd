@@ -74,7 +74,7 @@ var actor_art: Dictionary = {}
 const UI = preload("res://game/ui_style.gd")
 const MarketView = preload("res://game/market_view.gd")
 const MARKET_CATEGORIES = {"animals": ["動物", "animals", "動物の取引"], "materials": ["資材", "wood", "土・木・石"], "facilities": ["施設", "hammer", "牧場づくり"], "items": ["小物と恵み", "basket", "卵・羽・道具"]}
-var world = Farm.new({}, randi_range(1, 2147483646))
+var world = null
 var subtasks = preload("res://game/subtasks.gd").new()
 var tool = ""
 var queue_controls: Control
@@ -199,6 +199,7 @@ func _ready():
 			var saved=MorningSave.read(save_path)
 			if saved.status in ["ok","recovered"]:world=MorningSave.restore(saved.record);save_status="以前の日開始を読み込みました。次回は途中から再開します"
 			elif saved.status!="missing":save_load_blocked=true;save_status="以前の保存を読めません。保存を保護しています"
+	if world==null:world=Farm.new({},randi_range(1,2147483646))
 	Input.set_custom_mouse_cursor(UI.grab_cursor(),Input.CURSOR_DRAG,Vector2(15,15))
 	subtasks.load_settings()
 	camera = Camera2D.new()
@@ -1175,6 +1176,11 @@ func _route_input(event):
 			cancel_wall_stroke();dragging=false;press_pending=false;drag_class="";drag_encounters.clear()
 		else:neutral()
 		get_viewport().set_input_as_handled();return
+	if event is InputEventMouseButton and event.button_index==MOUSE_BUTTON_LEFT and not event.pressed and press_pending and dragging and wall_stroke.kind=="":
+		press_pending=false
+		pointer=event.position.clamp(Vector2.ZERO,get_viewport_rect().size)
+		finish_drag();dragging=false;ui_pointer_capture=false
+		get_viewport().set_input_as_handled();return
 	if zone_controls.input(self,event):get_viewport().set_input_as_handled();return
 	if item_commands.input(self,event):get_viewport().set_input_as_handled();return
 	if subtasks.input(self,event):
@@ -1532,6 +1538,8 @@ func _notification(what):
 		else:
 			world.paused=previous_pause
 			notice("保存できないため終了を止めました。保存を確認してください")
+	if what == NOTIFICATION_WM_MOUSE_EXIT and press_pending:
+		cancel_wall_stroke();dragging=false;press_pending=false;drag_class="";drag_encounters.clear()
 	if what == NOTIFICATION_WM_WINDOW_FOCUS_OUT:
 		cancel_wall_stroke()
 		keys_down.clear()

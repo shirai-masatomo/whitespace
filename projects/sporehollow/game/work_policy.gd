@@ -1,6 +1,6 @@
 extends RefCounted
 ## Research values, not final balance. Physical material handling follows in unit 2.
-const DESIGNATION_LIMIT = 32
+const DESIGNATION_LIMIT = 100
 const RETRY_SECONDS = 2.0
 const PRIORITY_VERSION = 3
 const ORDER = ["build","gather","collect","animal","other","haul"]

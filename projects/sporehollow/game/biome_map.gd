@@ -1,8 +1,8 @@
 extends RefCounted
 ## Versioned scenery and placement only. Never used by movement or building rules.
-const VERSION=3
+const VERSION=4
 # Normalized regional scale, transition width and obstacle density; saved in new terrain.
-const SETTINGS={"region_scale":1.0,"region_thresholds":{"rocky":0.43,"woodland":0.40,"dry":0.42,"lush":0.48},"boundary_width":1.0,"tree_density":1.0,"rock_clusters_per_1700":3,"mountain_groups_per_1700":1}
+const SETTINGS={"region_scale":1.0,"region_thresholds":{"rocky":0.43,"woodland":0.40,"dry":0.42,"lush":0.48},"boundary_width":1.0,"tree_density":1.0,"rock_clusters_per_1700":1,"mountain_groups_per_1700":0.5}
 static func normalized(w,p: Vector2) -> Vector2:
 	return p*Vector2(50.0/w.W,34.0/w.H)
 const DIRECTIONS=[Vector2i.UP,Vector2i.RIGHT,Vector2i.DOWN,Vector2i.LEFT]
@@ -34,36 +34,52 @@ static func lobes(seed_number: int) -> Array:
 
 static func sample(seed_number: int,p: Vector2,blobs: Array) -> Array:
 	var fields=[0.0,0.0,0.0]
+	var original=p
+	p+=Vector2(noise(seed_number,p*0.16,301)-0.5,noise(seed_number,p*0.16,307)-0.5)*7.0
 	for blob in blobs:
 		var d=(p-blob.center)/blob.radius
 		fields[blob.kind]+=exp(-d.length_squared()*1.5)*blob.strength
 	var broad=noise(seed_number,p*0.10,29)
 	var fine=noise(seed_number,p*0.29,53)
-	var margin=clearing(p,seed_number)
+	var margin=clearing(original,seed_number)
 	var rock=clampf(fields[1]*(0.65+0.55*fine),0,1)*margin
 	var dry=clampf(fields[2]*0.8+rock*0.6,0,1)*margin
 	var wood=clampf(fields[0]*(0.7+0.45*broad),0,1)*margin*(1.0-rock*0.85)
 	var lush=clampf(0.15+0.7*broad+wood*0.24-dry*0.65-rock*0.55,0,1)
 	lush=lerpf(0.22,lush,0.3+0.7*margin)
-	return [lush,wood,rock,dry,fine]
+	# Small satellite patches are scenery; the central protected area stays walkable.
+	var patch=noise(seed_number,original*0.38,311)
+	wood=maxf(wood,smoothstep(0.68,0.92,patch)*0.5*margin)
+	var sand=smoothstep(0.48,0.78,noise(seed_number,p*0.17,317))*smoothstep(0.12,0.55,dry)*(1.0-rock)
+	var clay=smoothstep(0.56,0.78,noise(seed_number,p*0.19,331))*(0.3+0.7*margin)*(1.0-rock)
+	var soil=clampf(dry*0.45+smoothstep(0.6,0.88,patch)*0.48,0,0.8)*(1.0-rock)
+	return [lush,wood,rock,dry,fine,sand,clay,soil]
 
 static func color_for(f: Array) -> Color:
 	var color=Color("839955").lerp(Color("69874b"),f[0]*0.7)
 	color=color.lerp(Color("617d48"),f[1]*0.65)
 	color=color.lerp(Color("a99a68"),f[3]*0.78)
 	color=color.lerp(Color("96917a"),f[2]*0.73)
+	if f.size()>5:
+		color=color.lerp(Color("987855"),f[7]*0.6).lerp(Color("b49062"),f[5]*0.85).lerp(Color("36576c"),f[6]*0.88)
 	return color.lightened((f[4]-0.5)*0.045)
 
 static func generate(seed_number: int,width: int,height: int,version: int=VERSION) -> Dictionary:
-	var blobs=lobes(seed_number);var fields=[];var vertices=[]
+	var blobs=lobes(seed_number);var fields=[];var vertices=[];var surface_vertices=[]
 	var scale=Vector2(50.0/width,34.0/height)/SETTINGS.region_scale
 	for y in range(height):
 		for x in range(width):fields.append(sample(seed_number,Vector2(x+0.5,y+0.5)*scale,blobs))
 	for y in range(height+1):
 		for x in range(width+1):
-			var color=color_for(sample(seed_number,Vector2(x,y)*scale,blobs))
-			vertices.append([color.r,color.g,color.b])
-	var result={"version":version,"generation_version":version,"settings":SETTINGS.duplicate(),"seed":seed_number,"width":width,"height":height,"fields":fields,"vertices":vertices}
+			# Average neighboring samples: shared vertices, no per-cell patch seams.
+			var f=[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]
+			for dy in [-1,0]:
+				for dx in [-1,0]:
+					var row=fields[clampi(y+dy,0,height-1)*width+clampi(x+dx,0,width-1)]
+					for i in range(f.size()):f[i]+=row[i]*0.25
+			var color=color_for(f);vertices.append([color.r,color.g,color.b])
+			surface_vertices.append([smoothstep(0.25,0.58,f[2])*0.92,smoothstep(0.49,0.80,f[2])])
+	var result={"version":version,"generation_version":version,"settings":SETTINGS.duplicate(),"seed":seed_number,"width":width,"height":height,"fields":fields,"vertices":vertices,"surface_vertices":surface_vertices}
 	classify(result)
 	return result
 
@@ -99,6 +115,10 @@ static func classify(data: Dictionary):
 		if f[2]>0.72:material_name="bedrock"
 		elif f[2]>0.43:material_name="gravel"
 		elif f[2]>0.29 or f[3]>0.42 or (f[1]>0.50 and f[4]<0.43):material_name="soil"
+		if data.get("version",1)>=4 and f.size()>5 and material_name not in ["bedrock","gravel"]:
+			if f[6]>0.22:material_name="clay"
+			elif f[5]>0.20:material_name="sand"
+			elif f[7]>0.24:material_name="soil"
 		materials.append(material_name)
 	data.regions=regions;data.materials=materials;data.surface_schema=1
 
@@ -126,8 +146,8 @@ static func populate(w):
 		for x in range(1,w.W-1):
 			var p=Vector2i(x,y);var f=field(w,p)
 			var patch=noise(w.seed_value,Vector2(p)*0.21,113)
-			if f[1]<0.40 or patch<0.32 or unit(w.seed_value,x,y,71)>f[1]*(0.22+patch*0.48)*SETTINGS.tree_density or protected(w,p) or not available(w,p):continue
-			if w.trees.keys().any(func(q):return maxi(absi(q.x-p.x),absi(q.y-p.y))<=1):continue
+			if f[1]<0.28 or patch<0.32 or unit(w.seed_value,x,y,71)>f[1]*(0.22+patch*0.48)*SETTINGS.tree_density or protected(w,p) or not available(w,p):continue
+			if [-1,0,1].any(func(dy):return [-1,0,1].any(func(dx):return w.trees.has(p+Vector2i(dx,dy)))):continue
 			w.trees[p]="biome-tree-%d-%d"%[x,y]
 	place_rocks(w)
 	var repairs=repair_connections(w)
@@ -136,15 +156,18 @@ static func populate(w):
 	for p in w.trees:w.story.trees.append({"id":w.trees[p],"position":[p.x,p.y]})
 	# Initial harvestables use existing kinds and caps, with weighted sampling.
 	var r=RandomNumberGenerator.new();r.seed=w.seed_value*2371+419
+	var harvest_sites=[]
+	for y in range(w.H):
+		for x in range(w.W):
+			var p=Vector2i(x,y)
+			if available(w,p) and clearing(normalized(w,Vector2(p)),w.seed_value)>=0.3:harvest_sites.append(p)
 	for resource in ["weed","mushroom","stump"]:
 		for i in range(int(w.nature_config.caps.get(resource,0))):
 			if w.natural.size()>=w.nature_config.limit:break
 			var sites=[];var total=0.0
-			for y in range(w.H):
-				for x in range(w.W):
-					var p=Vector2i(x,y)
-					if not available(w,p) or clearing(normalized(w,Vector2(p)),w.seed_value)<0.3:continue
-					var weight=resource_weight(w,p,resource);total+=weight;sites.append([p,total])
+			for p in harvest_sites:
+				if w.natural.has(p):continue
+				var weight=resource_weight(w,p,resource);total+=weight;sites.append([p,total])
 			if sites.is_empty():break
 			var roll=r.randf()*total
 			for row in sites:
@@ -161,13 +184,17 @@ static func rock_site(w,p: Vector2i) -> bool:
 static func place_rocks(w):
 	# Rank broad-field 3x3 cores, then grow a few irregular elliptical shelves.
 	# The core is deliberately solid: its center is reached by mining an edge.
-	var cores=[]
+	var cores=[];var eligible={}
+	for y in range(w.H):
+		for x in range(w.W):
+			var p=Vector2i(x,y)
+			if rock_site(w,p):eligible[p]=true
 	for y in range(2,w.H-2):
 		for x in range(2,w.W-2):
 			var p=Vector2i(x,y);var valid=true
 			for dy in range(-1,2):
 				for dx in range(-1,2):
-					if not rock_site(w,p+Vector2i(dx,dy)):valid=false
+					if not eligible.has(p+Vector2i(dx,dy)):valid=false
 			if valid:cores.append({"pos":p,"score":field(w,p)[2]+noise(w.seed_value,Vector2(p)*0.17,127)*0.18})
 	cores.sort_custom(func(a,b):return a.score>b.score if a.score!=b.score else (a.pos.y<b.pos.y if a.pos.y!=b.pos.y else a.pos.x<b.pos.x))
 	var selected=[]
@@ -182,14 +209,14 @@ static func place_rocks(w):
 			for x in range(maxi(1,center.x-5),mini(w.W-1,center.x+6)):
 				var p=Vector2i(x,y);var core=absi(x-center.x)<=1 and absi(y-center.y)<=1
 				var d=Vector2(p-center)/radius
-				if (core or d.length()<0.93+(noise(w.seed_value,Vector2(p)*0.36,157)-0.5)*0.45) and rock_site(w,p):w.rocks[p]={"amount":w.Tasks.STONE_PER_ROCK,"forbidden":false}
+				if (core or d.length()<0.93+(noise(w.seed_value,Vector2(p)*0.36,157)-0.5)*0.45) and eligible.has(p):w.rocks[p]={"amount":w.Tasks.STONE_PER_ROCK,"forbidden":false}
 	# A few isolated outcrops keep the adopted single-rock art useful without
 	# substituting independently random cells for connected regional shelves.
 	var isolated=0
 	for y in range(1,w.H-1):
 		for x in range(1,w.W-1):
 			var p=Vector2i(x,y)
-			if isolated>=5 or not rock_site(w,p) or unit(w.seed_value,x,y,97)>0.035:continue
+			if isolated>=12 or not eligible.has(p) or unit(w.seed_value,x,y,97)>0.035:continue
 			if w.rocks.keys().any(func(q):return maxi(absi(q.x-p.x),absi(q.y-p.y))<=2):continue
 			w.rocks[p]={"amount":w.Tasks.STONE_PER_ROCK,"forbidden":false};isolated+=1
 

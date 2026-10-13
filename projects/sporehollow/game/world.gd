@@ -466,6 +466,11 @@ func next_step(start: Vector2i, goal: Vector2i, raider: bool = false, avoid_acto
 
 func find_path(start: Vector2i, goal: Vector2i, raider: bool = false, avoid_actors: bool = false, outdoor_only: bool = false, route_costs: Dictionary = {}, allow_exit: bool = false) -> Array:
 	if start == goal: return [start]
+	# Reject impossible endpoints before scanning the whole 100x68 map.
+	if Story.terrain_block(self,goal) or (outdoor_only and is_indoor(goal)):return []
+	if inside(goal):
+		if not raider and not walkable(goal):return []
+	elif not ((raider or allow_exit) and Land.is_exit(goal,W,H)):return []
 	var frontier = [start]
 	var cost = {start: 0.0}
 	var previous = {start: start}

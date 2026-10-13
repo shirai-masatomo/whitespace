@@ -7,4 +7,6 @@ static func foot(g,r) -> Vector2:
 static func draw(g,r):
 	var frames=LARGE if r.kind=="large" else SMALL
 	var alpha=1.0 if r.remaining>0 else clampf(1.0-(g.world.tick-r.depleted_tick)*g.world.DT/g.world.Mountains.REMAINS_SECONDS,0,1)
-	g.draw_texture(frames[mini(r.stage,frames.size()-1)],(foot(g,r)-(Vector2(112,224) if r.kind=="large" else Vector2(24,46))).round(),Color(1,1,1,alpha))
+	var texture=frames[mini(r.stage,frames.size()-1)]
+	var origin=(foot(g,r)-(Vector2(112,224) if r.kind=="large" else Vector2(24,46))).round()
+	g.draw_texture_rect(texture,Rect2(origin,Vector2(-texture.get_width() if r.get("visual_flip",false) else texture.get_width(),texture.get_height())),false,Color(1,1,1,alpha))

@@ -21,7 +21,7 @@ static func footprint(r) -> Array:
 	var box=FOOTPRINTS[mini(r.stage,3)] if r.kind=="large" else Rect2i(0,0,1,1)
 	var cells=[]
 	for y in range(box.position.y,box.end.y):
-		for x in range(box.position.x,box.end.x):cells.append(r.pos+Vector2i(x,y))
+		for x in range(box.position.x,box.end.x):cells.append(r.pos+Vector2i(3-x if r.kind=="large" and r.get("visual_flip",false) else x,y))
 	return cells
 static func at(w,p: Vector2i) -> Dictionary:
 	return w.mountains.get(w.mountain_cells.get(p,""),{})
@@ -71,6 +71,7 @@ static func populate(w):
 			if not valid:continue
 			var r=add(w,kind,p)
 			if r.is_empty():continue
+			r.visual_flip=kind=="large" and w.Biome.unit(w.seed_value,p.x,p.y,431)<0.5
 			var reached=w.Biome.reachable(w);var connected=true
 			for y in range(w.H):
 				for x in range(w.W):
