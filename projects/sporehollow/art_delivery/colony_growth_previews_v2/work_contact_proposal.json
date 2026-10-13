@@ -1,0 +1,66 @@
+{
+  "preview_only": true,
+  "damage_timing_changed": false,
+  "contacts": [
+    {
+      "pose": "keeper_mining_1_right",
+      "tool_point_local": [
+        51,
+        46
+      ],
+      "foot_screen": [
+        151.9375,
+        443.375
+      ],
+      "contact_screen": [
+        185,
+        429
+      ]
+    },
+    {
+      "pose": "keeper_mining_1_left",
+      "tool_point_local": [
+        28,
+        46
+      ],
+      "foot_screen": [
+        459.5,
+        627.375
+      ],
+      "contact_screen": [
+        425,
+        613
+      ]
+    },
+    {
+      "pose": "keeper_logging_1_right",
+      "tool_point_local": [
+        59,
+        42
+      ],
+      "foot_screen": [
+        945.4375,
+        457.125
+      ],
+      "contact_screen": [
+        990,
+        437
+      ]
+    },
+    {
+      "pose": "keeper_logging_1_left",
+      "tool_point_local": [
+        20,
+        42
+      ],
+      "foot_screen": [
+        1057.0,
+        586.125
+      ],
+      "contact_screen": [
+        1011,
+        566
+      ]
+    }
+  ]
+}

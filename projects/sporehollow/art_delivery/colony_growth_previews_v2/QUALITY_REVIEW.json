@@ -1,0 +1,609 @@
+{
+  "status": "preview checks only; not game integration tests",
+  "checks": [
+    {
+      "passed": true,
+      "check": "review canvas preview_A1_radio.png"
+    },
+    {
+      "passed": true,
+      "check": "original top HUD preserved preview_A1_radio.png"
+    },
+    {
+      "passed": true,
+      "check": "original footer preserved preview_A1_radio.png"
+    },
+    {
+      "passed": true,
+      "check": "preview hash preview_A1_radio.png"
+    },
+    {
+      "passed": true,
+      "check": "review canvas preview_A2_idol_states.png"
+    },
+    {
+      "passed": true,
+      "check": "original top HUD preserved preview_A2_idol_states.png"
+    },
+    {
+      "passed": true,
+      "check": "original footer preserved preview_A2_idol_states.png"
+    },
+    {
+      "passed": true,
+      "check": "preview hash preview_A2_idol_states.png"
+    },
+    {
+      "passed": true,
+      "check": "review canvas preview_A3_work_pose.png"
+    },
+    {
+      "passed": true,
+      "check": "original top HUD preserved preview_A3_work_pose.png"
+    },
+    {
+      "passed": true,
+      "check": "original footer preserved preview_A3_work_pose.png"
+    },
+    {
+      "passed": true,
+      "check": "preview hash preview_A3_work_pose.png"
+    },
+    {
+      "passed": true,
+      "check": "review canvas preview_A4_father_notes.png"
+    },
+    {
+      "passed": true,
+      "check": "original top HUD preserved preview_A4_father_notes.png"
+    },
+    {
+      "passed": true,
+      "check": "original footer preserved preview_A4_father_notes.png"
+    },
+    {
+      "passed": true,
+      "check": "preview hash preview_A4_father_notes.png"
+    },
+    {
+      "passed": true,
+      "check": "review canvas preview_B1_resident.png"
+    },
+    {
+      "passed": true,
+      "check": "original top HUD preserved preview_B1_resident.png"
+    },
+    {
+      "passed": true,
+      "check": "original footer preserved preview_B1_resident.png"
+    },
+    {
+      "passed": true,
+      "check": "preview hash preview_B1_resident.png"
+    },
+    {
+      "passed": true,
+      "check": "review canvas preview_B2_farm.png"
+    },
+    {
+      "passed": true,
+      "check": "original top HUD preserved preview_B2_farm.png"
+    },
+    {
+      "passed": true,
+      "check": "original footer preserved preview_B2_farm.png"
+    },
+    {
+      "passed": true,
+      "check": "preview hash preview_B2_farm.png"
+    },
+    {
+      "passed": true,
+      "check": "review canvas preview_B3_bed.png"
+    },
+    {
+      "passed": true,
+      "check": "original top HUD preserved preview_B3_bed.png"
+    },
+    {
+      "passed": true,
+      "check": "original footer preserved preview_B3_bed.png"
+    },
+    {
+      "passed": true,
+      "check": "preview hash preview_B3_bed.png"
+    },
+    {
+      "passed": true,
+      "check": "review canvas preview_B4_watch.png"
+    },
+    {
+      "passed": true,
+      "check": "original top HUD preserved preview_B4_watch.png"
+    },
+    {
+      "passed": true,
+      "check": "original footer preserved preview_B4_watch.png"
+    },
+    {
+      "passed": true,
+      "check": "preview hash preview_B4_watch.png"
+    },
+    {
+      "passed": true,
+      "check": "review canvas preview_B5_event.png"
+    },
+    {
+      "passed": true,
+      "check": "original top HUD preserved preview_B5_event.png"
+    },
+    {
+      "passed": true,
+      "check": "original footer preserved preview_B5_event.png"
+    },
+    {
+      "passed": true,
+      "check": "preview hash preview_B5_event.png"
+    },
+    {
+      "passed": true,
+      "check": "review canvas preview_scale_sheet.png"
+    },
+    {
+      "passed": true,
+      "check": "original top HUD preserved preview_scale_sheet.png"
+    },
+    {
+      "passed": true,
+      "check": "original footer preserved preview_scale_sheet.png"
+    },
+    {
+      "passed": true,
+      "check": "preview hash preview_scale_sheet.png"
+    },
+    {
+      "passed": true,
+      "check": "RGBA radio_a"
+    },
+    {
+      "passed": true,
+      "check": "binary alpha radio_a"
+    },
+    {
+      "passed": true,
+      "check": "not empty radio_a"
+    },
+    {
+      "passed": true,
+      "check": "candidate hash radio_a"
+    },
+    {
+      "passed": true,
+      "check": "RGBA radio_b"
+    },
+    {
+      "passed": true,
+      "check": "binary alpha radio_b"
+    },
+    {
+      "passed": true,
+      "check": "not empty radio_b"
+    },
+    {
+      "passed": true,
+      "check": "candidate hash radio_b"
+    },
+    {
+      "passed": true,
+      "check": "RGBA father_journal"
+    },
+    {
+      "passed": true,
+      "check": "binary alpha father_journal"
+    },
+    {
+      "passed": true,
+      "check": "not empty father_journal"
+    },
+    {
+      "passed": true,
+      "check": "candidate hash father_journal"
+    },
+    {
+      "passed": true,
+      "check": "RGBA father_letter"
+    },
+    {
+      "passed": true,
+      "check": "binary alpha father_letter"
+    },
+    {
+      "passed": true,
+      "check": "not empty father_letter"
+    },
+    {
+      "passed": true,
+      "check": "candidate hash father_letter"
+    },
+    {
+      "passed": true,
+      "check": "RGBA bed_a"
+    },
+    {
+      "passed": true,
+      "check": "binary alpha bed_a"
+    },
+    {
+      "passed": true,
+      "check": "not empty bed_a"
+    },
+    {
+      "passed": true,
+      "check": "candidate hash bed_a"
+    },
+    {
+      "passed": true,
+      "check": "RGBA bed_b"
+    },
+    {
+      "passed": true,
+      "check": "binary alpha bed_b"
+    },
+    {
+      "passed": true,
+      "check": "not empty bed_b"
+    },
+    {
+      "passed": true,
+      "check": "candidate hash bed_b"
+    },
+    {
+      "passed": true,
+      "check": "RGBA event_crate"
+    },
+    {
+      "passed": true,
+      "check": "binary alpha event_crate"
+    },
+    {
+      "passed": true,
+      "check": "not empty event_crate"
+    },
+    {
+      "passed": true,
+      "check": "candidate hash event_crate"
+    },
+    {
+      "passed": true,
+      "check": "RGBA watch_a"
+    },
+    {
+      "passed": true,
+      "check": "binary alpha watch_a"
+    },
+    {
+      "passed": true,
+      "check": "not empty watch_a"
+    },
+    {
+      "passed": true,
+      "check": "candidate hash watch_a"
+    },
+    {
+      "passed": true,
+      "check": "RGBA watch_b"
+    },
+    {
+      "passed": true,
+      "check": "binary alpha watch_b"
+    },
+    {
+      "passed": true,
+      "check": "not empty watch_b"
+    },
+    {
+      "passed": true,
+      "check": "candidate hash watch_b"
+    },
+    {
+      "passed": true,
+      "check": "RGBA resident_a_front"
+    },
+    {
+      "passed": true,
+      "check": "binary alpha resident_a_front"
+    },
+    {
+      "passed": true,
+      "check": "not empty resident_a_front"
+    },
+    {
+      "passed": true,
+      "check": "candidate hash resident_a_front"
+    },
+    {
+      "passed": true,
+      "check": "RGBA resident_a_right"
+    },
+    {
+      "passed": true,
+      "check": "binary alpha resident_a_right"
+    },
+    {
+      "passed": true,
+      "check": "not empty resident_a_right"
+    },
+    {
+      "passed": true,
+      "check": "candidate hash resident_a_right"
+    },
+    {
+      "passed": true,
+      "check": "RGBA resident_b_front"
+    },
+    {
+      "passed": true,
+      "check": "binary alpha resident_b_front"
+    },
+    {
+      "passed": true,
+      "check": "not empty resident_b_front"
+    },
+    {
+      "passed": true,
+      "check": "candidate hash resident_b_front"
+    },
+    {
+      "passed": true,
+      "check": "RGBA resident_b_right"
+    },
+    {
+      "passed": true,
+      "check": "binary alpha resident_b_right"
+    },
+    {
+      "passed": true,
+      "check": "not empty resident_b_right"
+    },
+    {
+      "passed": true,
+      "check": "candidate hash resident_b_right"
+    },
+    {
+      "passed": true,
+      "check": "RGBA crop_0"
+    },
+    {
+      "passed": true,
+      "check": "binary alpha crop_0"
+    },
+    {
+      "passed": true,
+      "check": "not empty crop_0"
+    },
+    {
+      "passed": true,
+      "check": "candidate hash crop_0"
+    },
+    {
+      "passed": true,
+      "check": "RGBA crop_1"
+    },
+    {
+      "passed": true,
+      "check": "binary alpha crop_1"
+    },
+    {
+      "passed": true,
+      "check": "not empty crop_1"
+    },
+    {
+      "passed": true,
+      "check": "candidate hash crop_1"
+    },
+    {
+      "passed": true,
+      "check": "RGBA crop_2"
+    },
+    {
+      "passed": true,
+      "check": "binary alpha crop_2"
+    },
+    {
+      "passed": true,
+      "check": "not empty crop_2"
+    },
+    {
+      "passed": true,
+      "check": "candidate hash crop_2"
+    },
+    {
+      "passed": true,
+      "check": "RGBA crop_3"
+    },
+    {
+      "passed": true,
+      "check": "binary alpha crop_3"
+    },
+    {
+      "passed": true,
+      "check": "not empty crop_3"
+    },
+    {
+      "passed": true,
+      "check": "candidate hash crop_3"
+    },
+    {
+      "passed": true,
+      "check": "RGBA crop_4"
+    },
+    {
+      "passed": true,
+      "check": "binary alpha crop_4"
+    },
+    {
+      "passed": true,
+      "check": "not empty crop_4"
+    },
+    {
+      "passed": true,
+      "check": "candidate hash crop_4"
+    },
+    {
+      "passed": true,
+      "check": "RGBA keeper_mining_1_right"
+    },
+    {
+      "passed": true,
+      "check": "binary alpha keeper_mining_1_right"
+    },
+    {
+      "passed": true,
+      "check": "not empty keeper_mining_1_right"
+    },
+    {
+      "passed": true,
+      "check": "candidate hash keeper_mining_1_right"
+    },
+    {
+      "passed": true,
+      "check": "RGBA keeper_mining_1_left"
+    },
+    {
+      "passed": true,
+      "check": "binary alpha keeper_mining_1_left"
+    },
+    {
+      "passed": true,
+      "check": "not empty keeper_mining_1_left"
+    },
+    {
+      "passed": true,
+      "check": "candidate hash keeper_mining_1_left"
+    },
+    {
+      "passed": true,
+      "check": "RGBA keeper_logging_1_right"
+    },
+    {
+      "passed": true,
+      "check": "binary alpha keeper_logging_1_right"
+    },
+    {
+      "passed": true,
+      "check": "not empty keeper_logging_1_right"
+    },
+    {
+      "passed": true,
+      "check": "candidate hash keeper_logging_1_right"
+    },
+    {
+      "passed": true,
+      "check": "RGBA keeper_logging_1_left"
+    },
+    {
+      "passed": true,
+      "check": "binary alpha keeper_logging_1_left"
+    },
+    {
+      "passed": true,
+      "check": "not empty keeper_logging_1_left"
+    },
+    {
+      "passed": true,
+      "check": "candidate hash keeper_logging_1_left"
+    },
+    {
+      "passed": true,
+      "check": "adopted head exact mining"
+    },
+    {
+      "passed": true,
+      "check": "adopted head exact logging"
+    },
+    {
+      "passed": true,
+      "check": "local link index.html"
+    },
+    {
+      "passed": true,
+      "check": "local link preview_scale_sheet.png"
+    },
+    {
+      "passed": true,
+      "check": "local link EXISTING_ASSET_AUDIT.md"
+    },
+    {
+      "passed": true,
+      "check": "local link source_receipt.json"
+    },
+    {
+      "passed": true,
+      "check": "local link preview_manifest.json"
+    },
+    {
+      "passed": true,
+      "check": "local link preview_A1_radio.png"
+    },
+    {
+      "passed": true,
+      "check": "local link preview_A2_idol_states.png"
+    },
+    {
+      "passed": true,
+      "check": "local link preview_A3_work_pose.png"
+    },
+    {
+      "passed": true,
+      "check": "local link preview_A4_father_notes.png"
+    },
+    {
+      "passed": true,
+      "check": "local link preview_B1_resident.png"
+    },
+    {
+      "passed": true,
+      "check": "local link preview_B2_farm.png"
+    },
+    {
+      "passed": true,
+      "check": "local link preview_B3_bed.png"
+    },
+    {
+      "passed": true,
+      "check": "local link preview_B4_watch.png"
+    },
+    {
+      "passed": true,
+      "check": "local link preview_B5_event.png"
+    },
+    {
+      "passed": true,
+      "check": "local link work_contact_proposal.json"
+    },
+    {
+      "passed": true,
+      "check": "local link source_receipt.json"
+    },
+    {
+      "passed": true,
+      "check": "existing bytes retained art_delivery/characters_v1/keeper_idle_right_00.png"
+    },
+    {
+      "passed": true,
+      "check": "existing bytes retained art_delivery/characters_v1/shiba_idle_right_00.png"
+    },
+    {
+      "passed": true,
+      "check": "existing bytes retained art_delivery/ui_world_direction_v1/candidates/world/goldA.png"
+    },
+    {
+      "passed": true,
+      "check": "nine themes plus scale sheet"
+    }
+  ],
+  "passed": 150,
+  "total": 150,
+  "game_started": false,
+  "formal_assets_ready": false
+}

@@ -1,0 +1,164 @@
+[
+  {
+    "branch": "codex/sporehollow-biome01",
+    "commit": "cf004ab82f5e09e4141507bcd791aba76735d998",
+    "path": "projects/sporehollow/review/current/ui_survey/01_field.png",
+    "sha256": "5636b4b0b2d7d304640565841cb709a7149fc277a2bec314eb8045eb956fdf69"
+  },
+  {
+    "branch": "codex/sporehollow-biome01",
+    "commit": "cf004ab82f5e09e4141507bcd791aba76735d998",
+    "path": "projects/sporehollow/review/current/ui_survey/02_map.png",
+    "sha256": "dfe517c5e91df771a5fe69b764c9db8e155938c08100549c0f675439021bfec5"
+  },
+  {
+    "branch": "codex/sporehollow-biome01",
+    "commit": "cf004ab82f5e09e4141507bcd791aba76735d998",
+    "path": "projects/sporehollow/review/current/ui_survey/03_keeper.png",
+    "sha256": "a0c0f6f3931510382ba3f7a67c059afe55b7e34a02c595fb70249d93048de064"
+  },
+  {
+    "branch": "codex/sporehollow-biome01",
+    "commit": "cf004ab82f5e09e4141507bcd791aba76735d998",
+    "path": "projects/sporehollow/review/current/ui_survey/05_roles.png",
+    "sha256": "2f3ad8c429e07d0347314300a3792305af95e6f944d028d374772eb4444cf45d"
+  },
+  {
+    "branch": "codex/sporehollow-biome01",
+    "commit": "cf004ab82f5e09e4141507bcd791aba76735d998",
+    "path": "projects/sporehollow/review/current/ui_survey/06_architect_0.png",
+    "sha256": "abed2df6b289b992312cf9567cccb7d18025775076d610b45b7aea6086b195e1"
+  },
+  {
+    "branch": "codex/sporehollow-biome01",
+    "commit": "cf004ab82f5e09e4141507bcd791aba76735d998",
+    "path": "projects/sporehollow/review/current/ui_survey/08_zones.png",
+    "sha256": "8eacf450bbb595a78f6bbdc2bed54acb447a7551a44bd5ef57372b63f50b0963"
+  },
+  {
+    "branch": "codex/sporehollow-biome01",
+    "commit": "cf004ab82f5e09e4141507bcd791aba76735d998",
+    "path": "projects/sporehollow/review/current/ui_survey/10_animals.png",
+    "sha256": "9b9536663fe236c44fa367c5cbe504df28556979c2adcc54c098ff10d6af8e42"
+  },
+  {
+    "branch": "codex/sporehollow-biome01",
+    "commit": "cf004ab82f5e09e4141507bcd791aba76735d998",
+    "path": "projects/sporehollow/review/current/ui_survey/19_idol.png",
+    "sha256": "01e35c5299fd1338118832a2b076e5459dd4787110de7618b891ac49959ba9b5"
+  },
+  {
+    "branch": "codex/sporehollow-biome01",
+    "commit": "cf004ab82f5e09e4141507bcd791aba76735d998",
+    "path": "projects/sporehollow/review/current/ui_survey/20_prayer.png",
+    "sha256": "f7d54b22a99408c43c9f2a9503c5d259eb11c7ea8813d4e59d986d98462c3132"
+  },
+  {
+    "branch": "codex/sporehollow-biome01",
+    "commit": "cf004ab82f5e09e4141507bcd791aba76735d998",
+    "path": "projects/sporehollow/review/current/story/20_morning_with_radio.png",
+    "sha256": "41a15a6807680ec29dd4c3936c71a899a533abaa92d7895118e4d7379233bf1c"
+  },
+  {
+    "branch": "codex/sporehollow-biome01",
+    "commit": "cf004ab82f5e09e4141507bcd791aba76735d998",
+    "path": "projects/sporehollow/review/current/story/21_radio_history.png",
+    "sha256": "aae7f7c90bf26f47a51f7ab9645eacbf9af74ce226969c50e1aaef4032f78e7b"
+  },
+  {
+    "branch": "codex/sporehollow-biome01",
+    "commit": "cf004ab82f5e09e4141507bcd791aba76735d998",
+    "path": "projects/sporehollow/ART_SPEC.md",
+    "sha256": "266ad170b47a963ed20bc3f7f6230a1df0353d31a036688774ba4bb4f831ea99"
+  },
+  {
+    "branch": "codex/sporehollow-biome01",
+    "commit": "cf004ab82f5e09e4141507bcd791aba76735d998",
+    "path": "projects/sporehollow/assets/ui/SOURCES.md",
+    "sha256": "7cda753a054160216502ae563ca023976d5d718e8e46192036a9e8b1dac0fe45"
+  },
+  {
+    "branch": "codex/sporehollow-biome01",
+    "commit": "cf004ab82f5e09e4141507bcd791aba76735d998",
+    "path": "projects/sporehollow/game/story_view.gd",
+    "sha256": "b8887f71c63174cc96eec7a3082acb5b57b97ec0f23dd4be33b7c3e23da6446d"
+  },
+  {
+    "branch": "codex/sporehollow-biome01",
+    "commit": "cf004ab82f5e09e4141507bcd791aba76735d998",
+    "path": "projects/sporehollow/game/harvest_view.gd",
+    "sha256": "8b68225f8aba5717366485a15e307303363196b32394ae5ad5661a4eab55efae"
+  },
+  {
+    "branch": "codex/sporehollow-art-assets",
+    "commit": "3229d2655e35e82d178577cdd8acbbe66e9be4f8",
+    "path": "projects/sporehollow/art_delivery/characters_v1/keeper_idle_right_00.png",
+    "sha256": "c2ea9f9d7cdebd5a007d881fd17af4bb121c3f1afc2a373de56f49f859293c1e",
+    "reused_without_overwrite": true
+  },
+  {
+    "branch": "codex/sporehollow-art-assets",
+    "commit": "3229d2655e35e82d178577cdd8acbbe66e9be4f8",
+    "path": "projects/sporehollow/art_delivery/characters_v1/shiba_idle_right_00.png",
+    "sha256": "6b394d938fd8c8ba4f9afc94be43def55223d5097a1d9f9759965e1e2d1dede9",
+    "reused_without_overwrite": true
+  },
+  {
+    "branch": "codex/sporehollow-art-assets",
+    "commit": "3229d2655e35e82d178577cdd8acbbe66e9be4f8",
+    "path": "projects/sporehollow/art_delivery/ui_world_direction_v1/candidates/world/goldA.png",
+    "sha256": "e0138b3052925a8e54b753682977cd4819c2e041ad9ddf2ababc9a2cc463d990",
+    "reused_without_overwrite": true
+  },
+  {
+    "branch": "codex/sporehollow-art-assets",
+    "commit": "3229d2655e35e82d178577cdd8acbbe66e9be4f8",
+    "path": "projects/sporehollow/art_delivery/ui_world_direction_v1/candidates/world/tree_a.png",
+    "sha256": "354fab7e80d81a38c32a4979259344185fd083a75bcb733b94c69daa8ef19452",
+    "reused_without_overwrite": true
+  },
+  {
+    "branch": "codex/sporehollow-art-assets",
+    "commit": "3229d2655e35e82d178577cdd8acbbe66e9be4f8",
+    "path": "projects/sporehollow/art_delivery/mining_rock_objects_v1/rock_large_4x4_stage1.png",
+    "sha256": "a3ae25f8f73fd85d2611df84a2b49d33a151c95ef8f89bd53bec5b37e3c6b802",
+    "reused_without_overwrite": true
+  },
+  {
+    "branch": "codex/sporehollow-art-assets",
+    "commit": "3229d2655e35e82d178577cdd8acbbe66e9be4f8",
+    "path": "projects/sporehollow/art_delivery/mining_rock_objects_v1/rock_small_1x1_stage1.png",
+    "sha256": "7f426207cafae3a31465a408b0222d82bdd5d456abe3ed4a406f19adf75e17b4",
+    "reused_without_overwrite": true
+  },
+  {
+    "branch": "codex/sporehollow-art-assets",
+    "commit": "3229d2655e35e82d178577cdd8acbbe66e9be4f8",
+    "path": "projects/sporehollow/art_delivery/wood_buildings_v1/floor/wood_00.png",
+    "sha256": "c945f5ad4363a0afdcd659524d706f810de8083f2120d1ed3349c7bc0193e817",
+    "reused_without_overwrite": true
+  },
+  {
+    "branch": "codex/sporehollow-art-assets",
+    "commit": "3229d2655e35e82d178577cdd8acbbe66e9be4f8",
+    "path": "projects/sporehollow/art_delivery/cart_ui_detail_v1/cart.png",
+    "sha256": "7541dd6310d0ca7b6b09b420f3759251b11da5c72de8cb477796b7487cae7cb7",
+    "reused_without_overwrite": true
+  },
+  {
+    "branch": "codex/sporehollow-art-assets",
+    "commit": "3229d2655e35e82d178577cdd8acbbe66e9be4f8",
+    "path": "projects/sporehollow/art_delivery/equipment_icons_v1/collar.png",
+    "sha256": "301e48b963de2bbb7289d81584f85b6230cae83ca01ba4b94f77a71e5bc2e0dc",
+    "reused_without_overwrite": true
+  },
+  {
+    "source": "user supplied roadmap v1.1",
+    "path": "references/roadmap_v1.1_2026-10-13.md",
+    "sha256": "363e8089efc20cb55d0142c19e85f92839aa761330cb161b3fd40049460a80d3",
+    "priority_sections": [
+      14,
+      17
+    ]
+  }
+]

@@ -1,0 +1,122 @@
+{
+  "generator": "built-in image_gen",
+  "preview_only": true,
+  "prompts": [
+    {
+      "id": "radio_a",
+      "prompt": "Use case: stylized-concept. Create ONE old portable radio concept A for a warm rustic pixel-art farming game, strictly transparent background. Object only, no scene/text/labels. Small 1950s wooden box radio found in father's toolbox, worn walnut casing, cream cloth speaker on left, a simple horizontal tuning window and two brass knobs on right, short leather handle; no lettering, no brand, no magic. Slight top-down 3/4 view with front clearly readable, light from upper left. Design at logical 32x28 pixels displayed nearest-neighbor enlarged, disciplined chunky pixel clusters and 1 logical pixel dark brown outline, 12 restrained warm colors, absolutely no tiny texture, antialias or photographic detail. Entire object centered with generous transparent margin. Target in-game body 32x26px, must read at that size. No cast shadow, keep white/cream opaque."
+    },
+    {
+      "id": "radio_b",
+      "prompt": "Use case stylized-concept. ONE tiny old portable radio concept B, no other objects. Warm bright rustic pixel art farm, transparent background, no letters. Sage green painted metal rounded rectangular casing with small cream circular speaker, cream tuning window, two dark knobs, short folded carry strap, slightly scuffed corners. Compact humble hand-me-down tool, no modern screens, antennas not taller than object. Light upper-left, shallow top-down three-quarter game view. Designed for logical 28x24 pixel body, chunky readable shapes, brown 1px contour, maximum 12 colors, no stipple or fine texture, no blur, no ground shadow. Centered isolated object."
+    },
+    {
+      "id": "father_journal",
+      "prompt": "Use case stylized-concept. ONE father's old pocket diary, closed. Pixel-art farming-game prop, transparent background. Plain weathered reddish tan cloth cover, offwhite page edges, one cream repair stitch on corner, simple elastic cord, NO emblem NO words NO symbols NO gold ornament. Distinct from grand green and gold encyclopedia. Slight overhead three-quarter view, warm upper-left light. Simple low-resolution sprite at logical 28x32 pixels shown enlarged with nearest sharp pixel blocks; restricted 10 color earthy palette. Complete isolated object centered, no scene, no pen or extra items, no cast shadow."
+    },
+    {
+      "id": "father_letter",
+      "prompt": "Use case stylized-concept. ONE father's short old folded letter, transparent background, pixel-art farming-game UI prop. One offwhite paper sheet half-unfolded with a crease, very slight worn corner and a plain brown tie slipped around its bottom, blank paper without writing, no seal, symbols, map, mysteries or objects. Clearly a personal memo not magic scroll. Shallow overhead three-quarter view, upper-left warm light. Logical 28x24px chunky readable silhouette and limited cream/brown colors, crisp nearest pixels shown enlarged. No shadow outside object."
+    },
+    {
+      "id": "crop",
+      "prompt": "Use case stylized-concept. A single development strip for ONE tentative pale turnip root vegetable in warm rustic farm pixel art. Exactly FIVE evenly spaced cells in one horizontal row on transparent background: (1) low oval mound of tilled brown earth with short furrows and irregular edge, (2) same mound planted with small seed dibble holes no plant, (3) same mound with tiny 2 leaf green sprout, (4) same mound with modest 5 leaf growing greens, (5) same mound with broad green leaves and the round cream shoulder of a harvestable turnip peeking above soil. Same mound size in all 5, simple top-down three-quarter view, no sky, pots, frames, text, labels, extra plants. Ground swatch logical 40x28px each within 48x42 cell, final leaves maximum 22px tall. Chunky crisp pixel clusters, few warm greens/browns, upper left light, no fine dithering. NOT final asset, a crop growth comparison only. Generous space between cells."
+    },
+    {
+      "id": "resident_a",
+      "prompt": "Create a single character appearance review strip, two poses ONLY: front standing and right-facing standing, separated widely on transparent background. An adult rustic farm worker candidate A: short dark chestnut hair with rolled cream headband (NO hat), faded indigo short work jacket, cream undershirt, dark brown trousers, brown ankle boots, small plain belt pouch. Slim practical unarmed silhouette, no uniform badges. Same proportions, dot density and warm upper-left light as the supplied adopted farmer reference, logical body 25px wide and 42px tall, simple face just a few pixels. Top-down three-quarter farm camera, crisp 1px brown outline, restrained 12 colors. No text, labels, ground, extra objects or cast shadow. No animation, two standing views of the SAME proposed second resident. Keep clothing and hairstyle consistent."
+    },
+    {
+      "id": "resident_b",
+      "prompt": "Create a single character appearance review strip, two poses ONLY: front standing and right-facing standing, separated widely on transparent background. An adult rustic farm worker candidate B: auburn hair tied back into a small low bun, muted ochre neckerchief, cream rolled-sleeve shirt, moss-green short work apron, dark brown trousers and boots. Stockier torso than reference but same 42 logical pixel body height, natural practical proportions. No hat or weapon, no magic, no badges. Match supplied adopted farmer reference for tiny dot density, simple few-pixel face, warm upper-left light, top-down three-quarter view, 1px brown contour, limited earthy palette. No text, labels, ground, cast shadow or extra characters. Two consistent standing views of ONE proposed second resident, not final animations."
+    },
+    {
+      "id": "watch_a",
+      "prompt": "ONE rough concept pixel-art prop for small lookout point A on bright rustic ranch. A short simple wooden post, knee-to-chest height relative to person, with a modest bronze handbell hanging from short crosspiece, a small folded sage cloth tab, only two low wooden planks at base. Occupies ONE48x42px cell; object logical30x40px. Sketch level simple broad pixel clusters and brown outline, upper-left daylight, slight top-down view. No tower, weapon, character, radar, directional arrow, letters, glow or scenery. Isolated transparent background."
+    },
+    {
+      "id": "watch_b",
+      "prompt": "ONE rough concept pixel-art prop for small lookout point B on bright rustic ranch. A low square two-plank standing marker with a single short stake at rear and small cream pennant tied near top. Stake below person shoulder, no elevated tower. Occupies ONE48x42px cell; logical40x34px. Clear simple sketch pixel clusters, dark brown outline, muted sage/wood/cream palette, upperleft daylight, slight topdown view. No weapons, lantern magic, person, arrows, lettering, groundshadow or scene. Transparent background."
+    },
+    {
+      "id": "keeper_mining",
+      "prompt": "Identity-preserving two right-facing mining key poses: windup and contact. Reference keeper_nearest6.png. Same adopted farmer, hat, face, sage shirt, dark trousers, 42px body, both hands on wooden pickaxe; upper-left light; transparent; no labels or rock. Generated head is not used in composed review; original head restored.",
+      "prompt_record": "normalized prompt summary; exact raw instruction in conversation"
+    },
+    {
+      "id": "keeper_logging",
+      "prompt": "Identity-preserving two right-facing logging key poses: windup and contact at waist-height. Reference keeper_nearest6.png. Same adopted farmer, hat, face, sage shirt, dark trousers, 42px body, both hands on wooden axe; upper-left light; transparent; no labels or tree. Generated head is not used in composed review; original head restored.",
+      "prompt_record": "normalized prompt summary; exact raw instruction in conversation"
+    },
+    {
+      "id": "bed_a",
+      "prompt": "ONE simple farm sleeping bedroll, isolated transparent pixel art prop. Modest straw mat under plain folded sage green blanket, cream rectangular pillow at rear, short brown fabric tie to side, no legs/headboard/roof. Top-down three-quarter view, long axis vertical with pillow at top and foot at bottom, footprint one cell wide by two deep (48x84), actual visible 36x64 logical pixels. Warm rustic daylight upper-left, 1px dark brown edge, chunky shapes, max12colors, no noisy texture or scenery, no person, no text, no ground shadow. Preview design A for a bright farming game, not medieval luxury."
+    },
+    {
+      "id": "bed_b",
+      "prompt": "ONE low simple wooden camp cot, isolated transparent pixel art prop. Four squat wooden legs and modest plain timber frame, cream straw-filled mattress, rust-brown folded blanket, small cream pillow, no tall headboard or canopy. Top-down three-quarter view, long axis vertical pillow at top and feet at bottom, footprint one cell wide by two deep (48x84), visible approx40x70 logical pixels. Warm rustic upper-left daylight, 1 logicalpixel brown outline, chunky clean pixel blocks, limited12colors, no tiny texture, no background or person or writing or cast groundshadow. Bright farm game preview B."
+    },
+    {
+      "id": "event_crate",
+      "prompt": "ONE roadside found-supplies crate candidate, transparent pixelart. Small closed weathered wooden shipping crate bound by two coarse rope straps, ONE plain cream blank cloth tag tied on side, slightly skewed lid corner. Humble find on a rustic sunny ranch, not treasure chest, no gold ornaments, question mark, magic glow, words or contents revealed. Three-quarter top-down game view, upper-left light, logical32x28px sprite enlarged nearest, chunky wood planes, dark brown1px contour and8warm colors. Isolated and complete, no groundshadow or background."
+    }
+  ],
+  "outputs": [
+    {
+      "id": "radio_a",
+      "path": "C:\\Users\\masat\\.codex\\generated_images\\01a1062f-6339-7812-baec-d517611755ca\\exec-a516834b-0d1f-409a-b3ca-db530e15a498.png"
+    },
+    {
+      "id": "radio_b",
+      "path": "C:\\Users\\masat\\.codex\\generated_images\\01a1062f-6339-7812-baec-d517611755ca\\exec-1b23c86f-a2e6-44c0-b995-1f73dafe7383.png"
+    },
+    {
+      "id": "father_journal",
+      "path": "C:\\Users\\masat\\.codex\\generated_images\\01a1062f-6339-7812-baec-d517611755ca\\exec-eedc95fe-fc46-4c1d-a9ce-4696e971afb5.png"
+    },
+    {
+      "id": "father_letter",
+      "path": "C:\\Users\\masat\\.codex\\generated_images\\01a1062f-6339-7812-baec-d517611755ca\\exec-b6c91963-ffc6-4e26-bd1e-d75ff32b7d17.png"
+    },
+    {
+      "id": "crop",
+      "path": "C:\\Users\\masat\\.codex\\generated_images\\01a1062f-6339-7812-baec-d517611755ca\\exec-416725e0-115c-475a-8f64-6d7cea374c43.png"
+    },
+    {
+      "id": "resident_a",
+      "path": "C:\\Users\\masat\\.codex\\generated_images\\01a1062f-6339-7812-baec-d517611755ca\\exec-06853ba4-8c31-494e-a32f-6320d546b85e.png"
+    },
+    {
+      "id": "resident_b",
+      "path": "C:\\Users\\masat\\.codex\\generated_images\\01a1062f-6339-7812-baec-d517611755ca\\exec-69c6cbc4-1b0a-4d9a-a5fa-3dfcedd086b3.png"
+    },
+    {
+      "id": "watch_a",
+      "path": "C:\\Users\\masat\\.codex\\generated_images\\01a1062f-6339-7812-baec-d517611755ca\\exec-43b3b9ea-8496-45c2-a18e-d45ca67724e6.png"
+    },
+    {
+      "id": "watch_b",
+      "path": "C:\\Users\\masat\\.codex\\generated_images\\01a1062f-6339-7812-baec-d517611755ca\\exec-2f8bea4b-2a44-4b5c-b7fb-7108fa45e7fd.png"
+    },
+    {
+      "id": "keeper_mining",
+      "path": "C:\\Users\\masat\\.codex\\generated_images\\01a1062f-6339-7812-baec-d517611755ca\\exec-9229484e-f12d-4c89-a9c4-1e2283457af4.png"
+    },
+    {
+      "id": "keeper_logging",
+      "path": "C:\\Users\\masat\\.codex\\generated_images\\01a1062f-6339-7812-baec-d517611755ca\\exec-99ba9e9b-4ed8-4fb1-ae63-c0a3ee295ccb.png"
+    },
+    {
+      "id": "bed_a",
+      "path": "C:\\Users\\masat\\.codex\\generated_images\\01a1062f-6339-7812-baec-d517611755ca\\exec-48992ea0-7f49-432a-945c-535ff981223a.png"
+    },
+    {
+      "id": "bed_b",
+      "path": "C:\\Users\\masat\\.codex\\generated_images\\01a1062f-6339-7812-baec-d517611755ca\\exec-d7489827-eef4-4543-9e0d-88355add2114.png"
+    },
+    {
+      "id": "event_crate",
+      "path": "C:\\Users\\masat\\.codex\\generated_images\\01a1062f-6339-7812-baec-d517611755ca\\exec-9cd5ea80-5532-4dea-8e20-70a70c412c93.png"
+    }
+  ]
+}
