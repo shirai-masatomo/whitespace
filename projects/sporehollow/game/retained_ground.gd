@@ -40,6 +40,8 @@ func sync_measured():
 		world=w
 		for child in get_children():child.queue_free()
 		chunks.clear();stamps.clear();occupancy_signature=0
+		# Release previous-map scenery references before gameplay rendering.
+		preload("res://game/story_view.gd").cut_cells(w)
 		Board.cache_ground(w,TILE)
 		Rock.prepare_ground(w)
 		for y in range(ceili(w.H/float(SIZE))):
