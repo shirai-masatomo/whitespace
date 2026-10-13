@@ -1,0 +1,2185 @@
+{
+	"checks": [
+		{
+			"check": "Daily snapshot saves: wait",
+			"passed": true
+		},
+		{
+			"check": "Daily reload preserves physical goods and time: wait",
+			"passed": true
+		},
+		{
+			"check": "Daily snapshot saves: wait",
+			"passed": true
+		},
+		{
+			"check": "Daily reload preserves physical goods and time: wait",
+			"passed": true
+		},
+		{
+			"check": "Daily snapshot saves: wait",
+			"passed": true
+		},
+		{
+			"check": "Daily reload preserves physical goods and time: wait",
+			"passed": true
+		},
+		{
+			"check": "Natural world reaches at least its first night: wait",
+			"passed": true
+		},
+		{
+			"check": "No nonpositive physical stacks in observed play: wait",
+			"passed": true
+		},
+		{
+			"check": "Daily snapshot saves: prepare",
+			"passed": true
+		},
+		{
+			"check": "Daily reload preserves physical goods and time: prepare",
+			"passed": true
+		},
+		{
+			"check": "Daily snapshot saves: prepare",
+			"passed": true
+		},
+		{
+			"check": "Daily reload preserves physical goods and time: prepare",
+			"passed": true
+		},
+		{
+			"check": "Daily snapshot saves: prepare",
+			"passed": true
+		},
+		{
+			"check": "Daily reload preserves physical goods and time: prepare",
+			"passed": true
+		},
+		{
+			"check": "Natural world reaches at least its first night: prepare",
+			"passed": true
+		},
+		{
+			"check": "No nonpositive physical stacks in observed play: prepare",
+			"passed": true
+		}
+	],
+	"method": "Bounded production World.step with normal starting seed31 and two scripted policies, no forced victory/HP/resources. 3 days maximum, daily isolated save/load. This measures outcomes, not human comfort or fun.",
+	"passed": true,
+	"reports": [
+		{
+			"events": [
+				{
+					"key": "",
+					"text": "柴犬 → 誘拐者　10ダメージ",
+					"tick": 1208
+				},
+				{
+					"key": "",
+					"text": "誘拐者 → 柴犬　5ダメージ",
+					"tick": 1208
+				},
+				{
+					"key": "",
+					"text": "柴犬 → 誘拐者　10ダメージ",
+					"tick": 1213
+				},
+				{
+					"key": "",
+					"text": "誘拐者 → 柴犬　5ダメージ",
+					"tick": 1214
+				},
+				{
+					"key": "",
+					"text": "柴犬 → 誘拐者　10ダメージ",
+					"tick": 1218
+				},
+				{
+					"key": "",
+					"text": "誘拐者 → 柴犬　5ダメージ",
+					"tick": 1220
+				},
+				{
+					"key": "",
+					"text": "柴犬 → 誘拐者　10ダメージ",
+					"tick": 1225
+				},
+				{
+					"key": "",
+					"text": "誘拐者 → 柴犬　5ダメージ",
+					"tick": 1226
+				},
+				{
+					"key": "",
+					"text": "誘拐者 → 柴犬　5ダメージ",
+					"tick": 1232
+				},
+				{
+					"key": "",
+					"text": "柴犬 → 誘拐者　10ダメージ",
+					"tick": 1236
+				},
+				{
+					"key": "",
+					"text": "誘拐者を倒した",
+					"tick": 1236
+				},
+				{
+					"key": "raid_done:raid:1",
+					"text": "1日目の襲撃が終了。+32G / 経験16",
+					"tick": 1268
+				},
+				{
+					"key": "meal:keeper",
+					"text": "牧場主：食事中。終わったら仕事に戻ります",
+					"tick": 1404
+				},
+				{
+					"key": "meal_done:keeper",
+					"text": "牧場主：食事を終えて仕事に復帰",
+					"tick": 1411
+				},
+				{
+					"key": "calendar_morning:2",
+					"text": "2日目の朝になりました",
+					"tick": 1728
+				},
+				{
+					"key": "supplies:2",
+					"text": "木材8・キノコ3が届きました。入口で受け取れます",
+					"tick": 2088
+				},
+				{
+					"key": "meal:keeper",
+					"text": "牧場主：食事中。終わったら仕事に戻ります",
+					"tick": 2302
+				},
+				{
+					"key": "meal_done:keeper",
+					"text": "牧場主：食事を終えて仕事に復帰",
+					"tick": 2309
+				},
+				{
+					"key": "meal:keeper",
+					"text": "牧場主：食事中。終わったら仕事に戻ります",
+					"tick": 3202
+				},
+				{
+					"key": "meal_done:keeper",
+					"text": "牧場主：食事を終えて仕事に復帰",
+					"tick": 3209
+				},
+				{
+					"key": "calendar_morning:3",
+					"text": "3日目の朝。敵3体がまだ残っています",
+					"tick": 3456
+				},
+				{
+					"key": "",
+					"text": "柴犬 → サラリーマン　10ダメージ",
+					"tick": 3777
+				},
+				{
+					"key": "",
+					"text": "サラリーマン → 柴犬　3ダメージ",
+					"tick": 3777
+				},
+				{
+					"key": "",
+					"text": "サラリーマン → 柴犬　3ダメージ",
+					"tick": 3783
+				},
+				{
+					"key": "",
+					"text": "サラリーマン → 柴犬　3ダメージ",
+					"tick": 3789
+				},
+				{
+					"key": "",
+					"text": "柴犬 → サラリーマン　10ダメージ",
+					"tick": 3792
+				},
+				{
+					"key": "",
+					"text": "サラリーマン → 柴犬　3ダメージ",
+					"tick": 3795
+				},
+				{
+					"key": "",
+					"text": "サラリーマン → 柴犬　3ダメージ",
+					"tick": 3801
+				},
+				{
+					"key": "",
+					"text": "柴犬 → サラリーマン　10ダメージ",
+					"tick": 3803
+				},
+				{
+					"key": "",
+					"text": "サラリーマンを倒した",
+					"tick": 3803
+				},
+				{
+					"key": "supplies:3",
+					"text": "木材8・キノコ3が届きました。入口で受け取れます",
+					"tick": 3816
+				},
+				{
+					"key": "",
+					"text": "柴犬 → サラリーマン　10ダメージ",
+					"tick": 3954
+				},
+				{
+					"key": "",
+					"text": "サラリーマン → 柴犬　3ダメージ",
+					"tick": 3954
+				},
+				{
+					"key": "",
+					"text": "サラリーマン → 柴犬　3ダメージ",
+					"tick": 3960
+				},
+				{
+					"key": "",
+					"text": "柴犬 → サラリーマン　10ダメージ",
+					"tick": 3965
+				},
+				{
+					"key": "",
+					"text": "サラリーマン → 柴犬　3ダメージ",
+					"tick": 3966
+				},
+				{
+					"key": "",
+					"text": "サラリーマン → 柴犬　3ダメージ",
+					"tick": 3972
+				},
+				{
+					"key": "",
+					"text": "柴犬 → サラリーマン　10ダメージ",
+					"tick": 3976
+				},
+				{
+					"key": "",
+					"text": "サラリーマンを倒した",
+					"tick": 3976
+				},
+				{
+					"key": "meal:keeper",
+					"text": "牧場主：食事中。終わったら仕事に戻ります",
+					"tick": 4104
+				},
+				{
+					"key": "meal_done:keeper",
+					"text": "牧場主：食事を終えて仕事に復帰",
+					"tick": 4111
+				},
+				{
+					"key": "",
+					"text": "サラリーマン → 柴犬　3ダメージ",
+					"tick": 4269
+				},
+				{
+					"key": "",
+					"text": "柴犬 → サラリーマン　10ダメージ",
+					"tick": 4270
+				},
+				{
+					"key": "",
+					"text": "柴犬 → サラリーマン　10ダメージ",
+					"tick": 4275
+				},
+				{
+					"key": "",
+					"text": "サラリーマン → 柴犬　3ダメージ",
+					"tick": 4275
+				},
+				{
+					"key": "",
+					"text": "柴犬 → サラリーマン　10ダメージ",
+					"tick": 4280
+				},
+				{
+					"key": "",
+					"text": "サラリーマンを倒した",
+					"tick": 4280
+				},
+				{
+					"key": "raid_done:raid:2",
+					"text": "2日目の襲撃が終了。+32G / 経験16",
+					"tick": 4312
+				},
+				{
+					"key": "",
+					"text": "サラリーマン → 柴犬　3ダメージ",
+					"tick": 4603
+				},
+				{
+					"key": "",
+					"text": "柴犬 → サラリーマン　10ダメージ",
+					"tick": 4604
+				},
+				{
+					"key": "",
+					"text": "サラリーマン → 柴犬　3ダメージ",
+					"tick": 4609
+				},
+				{
+					"key": "",
+					"text": "柴犬 → サラリーマン　10ダメージ",
+					"tick": 4615
+				},
+				{
+					"key": "",
+					"text": "サラリーマン → 柴犬　3ダメージ",
+					"tick": 4615
+				},
+				{
+					"key": "",
+					"text": "柴犬 → サラリーマン　10ダメージ",
+					"tick": 4620
+				},
+				{
+					"key": "",
+					"text": "サラリーマンを倒した",
+					"tick": 4620
+				},
+				{
+					"key": "",
+					"text": "サラリーマン → 柴犬　3ダメージ",
+					"tick": 4621
+				},
+				{
+					"key": "",
+					"text": "柴犬 → サラリーマン　10ダメージ",
+					"tick": 4625
+				},
+				{
+					"key": "",
+					"text": "サラリーマン → 柴犬　3ダメージ",
+					"tick": 4627
+				},
+				{
+					"key": "",
+					"text": "柴犬 → サラリーマン　10ダメージ",
+					"tick": 4630
+				},
+				{
+					"key": "",
+					"text": "サラリーマン → 柴犬　3ダメージ",
+					"tick": 4633
+				},
+				{
+					"key": "",
+					"text": "柴犬 → サラリーマン　10ダメージ",
+					"tick": 4635
+				},
+				{
+					"key": "",
+					"text": "サラリーマンを倒した",
+					"tick": 4635
+				},
+				{
+					"key": "",
+					"text": "サラリーマン → 柴犬　3ダメージ",
+					"tick": 4949
+				},
+				{
+					"key": "",
+					"text": "柴犬 → サラリーマン　10ダメージ",
+					"tick": 4950
+				},
+				{
+					"key": "",
+					"text": "柴犬 → サラリーマン　10ダメージ",
+					"tick": 4955
+				},
+				{
+					"key": "",
+					"text": "サラリーマン → 柴犬　3ダメージ",
+					"tick": 4955
+				},
+				{
+					"key": "",
+					"text": "サラリーマン → 柴犬　3ダメージ",
+					"tick": 4961
+				},
+				{
+					"key": "",
+					"text": "柴犬 → サラリーマン　10ダメージ",
+					"tick": 4962
+				},
+				{
+					"key": "",
+					"text": "サラリーマンを倒した",
+					"tick": 4962
+				},
+				{
+					"key": "raid_done:raid:3",
+					"text": "3日目の襲撃が終了。+32G / 経験16",
+					"tick": 4994
+				},
+				{
+					"key": "meal:keeper",
+					"text": "牧場主：食事中。終わったら仕事に戻ります",
+					"tick": 5002
+				},
+				{
+					"key": "meal_done:keeper",
+					"text": "牧場主：食事を終えて仕事に復帰",
+					"tick": 5009
+				},
+				{
+					"key": "calendar_morning:4",
+					"text": "4日目の朝になりました",
+					"tick": 5184
+				}
+			],
+			"final": {
+				"built": 0,
+				"day": 4,
+				"enemies": 0,
+				"food": {
+					"available": 2,
+					"carried": 0,
+					"equipped": 0,
+					"forbidden": 0,
+					"outside": 6,
+					"owned": 8,
+					"reserved": 0,
+					"site": 0,
+					"stolen": 0,
+					"stored": 2
+				},
+				"gold": 136,
+				"idol_hp": 180,
+				"jobs": 0,
+				"keeper_hp": 30,
+				"reason": "",
+				"result": "",
+				"satiety": 65.8000000000139,
+				"sleepiness": 0.0,
+				"tick": 5184,
+				"time": "05:00  朝",
+				"used": {
+					"mushroom": 5
+				},
+				"wood": {
+					"available": 8,
+					"carried": 0,
+					"equipped": 0,
+					"forbidden": 0,
+					"outside": 16,
+					"owned": 24,
+					"reserved": 0,
+					"site": 0,
+					"stolen": 0,
+					"stored": 8
+				}
+			},
+			"idle_game_seconds": 106.75,
+			"policy": "wait",
+			"samples": [
+				{
+					"built": 0,
+					"day": 1,
+					"enemies": 0,
+					"food": {
+						"available": 7,
+						"carried": 0,
+						"equipped": 0,
+						"forbidden": 0,
+						"outside": 0,
+						"owned": 7,
+						"reserved": 0,
+						"site": 0,
+						"stolen": 0,
+						"stored": 7
+					},
+					"gold": 40,
+					"idol_hp": 180,
+					"jobs": 0,
+					"keeper_hp": 30,
+					"reason": "",
+					"result": "",
+					"satiety": 100.0,
+					"sleepiness": 0.0,
+					"tick": 0,
+					"time": "05:00  朝",
+					"used": {},
+					"wood": {
+						"available": 8,
+						"carried": 0,
+						"equipped": 0,
+						"forbidden": 0,
+						"outside": 0,
+						"owned": 8,
+						"reserved": 0,
+						"site": 0,
+						"stolen": 0,
+						"stored": 8
+					}
+				},
+				{
+					"built": 0,
+					"day": 1,
+					"enemies": 0,
+					"food": {
+						"available": 7,
+						"carried": 0,
+						"equipped": 0,
+						"forbidden": 0,
+						"outside": 0,
+						"owned": 7,
+						"reserved": 0,
+						"site": 0,
+						"stolen": 0,
+						"stored": 7
+					},
+					"gold": 40,
+					"idol_hp": 180,
+					"jobs": 0,
+					"keeper_hp": 30,
+					"reason": "",
+					"result": "",
+					"satiety": 78.4000000000012,
+					"sleepiness": 0.0,
+					"tick": 432,
+					"time": "11:00  昼",
+					"used": {},
+					"wood": {
+						"available": 8,
+						"carried": 0,
+						"equipped": 0,
+						"forbidden": 0,
+						"outside": 0,
+						"owned": 8,
+						"reserved": 0,
+						"site": 0,
+						"stolen": 0,
+						"stored": 8
+					}
+				},
+				{
+					"built": 0,
+					"day": 1,
+					"enemies": 0,
+					"food": {
+						"available": 7,
+						"carried": 0,
+						"equipped": 0,
+						"forbidden": 0,
+						"outside": 0,
+						"owned": 7,
+						"reserved": 0,
+						"site": 0,
+						"stolen": 0,
+						"stored": 7
+					},
+					"gold": 40,
+					"idol_hp": 180,
+					"jobs": 0,
+					"keeper_hp": 30,
+					"reason": "",
+					"result": "",
+					"satiety": 56.8000000000025,
+					"sleepiness": 0.0,
+					"tick": 864,
+					"time": "17:00  昼",
+					"used": {},
+					"wood": {
+						"available": 8,
+						"carried": 0,
+						"equipped": 0,
+						"forbidden": 0,
+						"outside": 0,
+						"owned": 8,
+						"reserved": 0,
+						"site": 0,
+						"stolen": 0,
+						"stored": 8
+					}
+				},
+				{
+					"built": 0,
+					"day": 1,
+					"enemies": 0,
+					"food": {
+						"available": 7,
+						"carried": 0,
+						"equipped": 0,
+						"forbidden": 0,
+						"outside": 0,
+						"owned": 7,
+						"reserved": 0,
+						"site": 0,
+						"stolen": 0,
+						"stored": 7
+					},
+					"gold": 72,
+					"idol_hp": 180,
+					"jobs": 0,
+					"keeper_hp": 30,
+					"reason": "",
+					"result": "",
+					"satiety": 35.2000000000037,
+					"sleepiness": 0.0,
+					"tick": 1296,
+					"time": "23:00  夜",
+					"used": {},
+					"wood": {
+						"available": 8,
+						"carried": 0,
+						"equipped": 0,
+						"forbidden": 0,
+						"outside": 0,
+						"owned": 8,
+						"reserved": 0,
+						"site": 0,
+						"stolen": 0,
+						"stored": 8
+					}
+				},
+				{
+					"built": 0,
+					"day": 2,
+					"enemies": 0,
+					"food": {
+						"available": 6,
+						"carried": 0,
+						"equipped": 0,
+						"forbidden": 0,
+						"outside": 0,
+						"owned": 6,
+						"reserved": 0,
+						"site": 0,
+						"stolen": 0,
+						"stored": 6
+					},
+					"gold": 72,
+					"idol_hp": 180,
+					"jobs": 0,
+					"keeper_hp": 30,
+					"reason": "",
+					"result": "",
+					"satiety": 58.6000000000047,
+					"sleepiness": 0.0,
+					"tick": 1728,
+					"time": "05:00  朝",
+					"used": {
+						"mushroom": 1
+					},
+					"wood": {
+						"available": 8,
+						"carried": 0,
+						"equipped": 0,
+						"forbidden": 0,
+						"outside": 0,
+						"owned": 8,
+						"reserved": 0,
+						"site": 0,
+						"stolen": 0,
+						"stored": 8
+					}
+				},
+				{
+					"built": 0,
+					"day": 2,
+					"enemies": 0,
+					"food": {
+						"available": 6,
+						"carried": 0,
+						"equipped": 0,
+						"forbidden": 0,
+						"outside": 3,
+						"owned": 9,
+						"reserved": 0,
+						"site": 0,
+						"stolen": 0,
+						"stored": 6
+					},
+					"gold": 72,
+					"idol_hp": 180,
+					"jobs": 0,
+					"keeper_hp": 30,
+					"reason": "",
+					"result": "",
+					"satiety": 37.000000000006,
+					"sleepiness": 0.0,
+					"tick": 2160,
+					"time": "11:00  昼",
+					"used": {
+						"mushroom": 1
+					},
+					"wood": {
+						"available": 8,
+						"carried": 0,
+						"equipped": 0,
+						"forbidden": 0,
+						"outside": 8,
+						"owned": 16,
+						"reserved": 0,
+						"site": 0,
+						"stolen": 0,
+						"stored": 8
+					}
+				},
+				{
+					"built": 0,
+					"day": 2,
+					"enemies": 0,
+					"food": {
+						"available": 5,
+						"carried": 0,
+						"equipped": 0,
+						"forbidden": 0,
+						"outside": 3,
+						"owned": 8,
+						"reserved": 0,
+						"site": 0,
+						"stolen": 0,
+						"stored": 5
+					},
+					"gold": 72,
+					"idol_hp": 180,
+					"jobs": 0,
+					"keeper_hp": 30,
+					"reason": "",
+					"result": "",
+					"satiety": 60.400000000007,
+					"sleepiness": 0.0,
+					"tick": 2592,
+					"time": "17:00  昼",
+					"used": {
+						"mushroom": 2
+					},
+					"wood": {
+						"available": 8,
+						"carried": 0,
+						"equipped": 0,
+						"forbidden": 0,
+						"outside": 8,
+						"owned": 16,
+						"reserved": 0,
+						"site": 0,
+						"stolen": 0,
+						"stored": 8
+					}
+				},
+				{
+					"built": 0,
+					"day": 2,
+					"enemies": 3,
+					"food": {
+						"available": 5,
+						"carried": 0,
+						"equipped": 0,
+						"forbidden": 0,
+						"outside": 3,
+						"owned": 8,
+						"reserved": 0,
+						"site": 0,
+						"stolen": 0,
+						"stored": 5
+					},
+					"gold": 72,
+					"idol_hp": 180,
+					"jobs": 0,
+					"keeper_hp": 30,
+					"reason": "",
+					"result": "",
+					"satiety": 38.8000000000082,
+					"sleepiness": 0.0,
+					"tick": 3024,
+					"time": "23:00  夜",
+					"used": {
+						"mushroom": 2
+					},
+					"wood": {
+						"available": 8,
+						"carried": 0,
+						"equipped": 0,
+						"forbidden": 0,
+						"outside": 8,
+						"owned": 16,
+						"reserved": 0,
+						"site": 0,
+						"stolen": 0,
+						"stored": 8
+					}
+				},
+				{
+					"built": 0,
+					"day": 3,
+					"enemies": 3,
+					"food": {
+						"available": 4,
+						"carried": 0,
+						"equipped": 0,
+						"forbidden": 0,
+						"outside": 3,
+						"owned": 7,
+						"reserved": 0,
+						"site": 0,
+						"stolen": 0,
+						"stored": 4
+					},
+					"gold": 72,
+					"idol_hp": 180,
+					"jobs": 0,
+					"keeper_hp": 30,
+					"reason": "",
+					"result": "",
+					"satiety": 62.2000000000093,
+					"sleepiness": 0.0,
+					"tick": 3456,
+					"time": "05:00  朝",
+					"used": {
+						"mushroom": 3
+					},
+					"wood": {
+						"available": 8,
+						"carried": 0,
+						"equipped": 0,
+						"forbidden": 0,
+						"outside": 8,
+						"owned": 16,
+						"reserved": 0,
+						"site": 0,
+						"stolen": 0,
+						"stored": 8
+					}
+				},
+				{
+					"built": 0,
+					"day": 3,
+					"enemies": 2,
+					"food": {
+						"available": 4,
+						"carried": 0,
+						"equipped": 0,
+						"forbidden": 0,
+						"outside": 6,
+						"owned": 10,
+						"reserved": 0,
+						"site": 0,
+						"stolen": 0,
+						"stored": 4
+					},
+					"gold": 72,
+					"idol_hp": 180,
+					"jobs": 0,
+					"keeper_hp": 30,
+					"reason": "",
+					"result": "",
+					"satiety": 40.6000000000105,
+					"sleepiness": 0.0,
+					"tick": 3888,
+					"time": "11:00  昼",
+					"used": {
+						"mushroom": 3
+					},
+					"wood": {
+						"available": 8,
+						"carried": 0,
+						"equipped": 0,
+						"forbidden": 0,
+						"outside": 16,
+						"owned": 24,
+						"reserved": 0,
+						"site": 0,
+						"stolen": 0,
+						"stored": 8
+					}
+				},
+				{
+					"built": 0,
+					"day": 3,
+					"enemies": 0,
+					"food": {
+						"available": 3,
+						"carried": 0,
+						"equipped": 0,
+						"forbidden": 0,
+						"outside": 6,
+						"owned": 9,
+						"reserved": 0,
+						"site": 0,
+						"stolen": 0,
+						"stored": 3
+					},
+					"gold": 104,
+					"idol_hp": 180,
+					"jobs": 0,
+					"keeper_hp": 30,
+					"reason": "",
+					"result": "",
+					"satiety": 64.0000000000116,
+					"sleepiness": 0.0,
+					"tick": 4320,
+					"time": "17:00  昼",
+					"used": {
+						"mushroom": 4
+					},
+					"wood": {
+						"available": 8,
+						"carried": 0,
+						"equipped": 0,
+						"forbidden": 0,
+						"outside": 16,
+						"owned": 24,
+						"reserved": 0,
+						"site": 0,
+						"stolen": 0,
+						"stored": 8
+					}
+				},
+				{
+					"built": 0,
+					"day": 3,
+					"enemies": 1,
+					"food": {
+						"available": 3,
+						"carried": 0,
+						"equipped": 0,
+						"forbidden": 0,
+						"outside": 6,
+						"owned": 9,
+						"reserved": 0,
+						"site": 0,
+						"stolen": 0,
+						"stored": 3
+					},
+					"gold": 104,
+					"idol_hp": 180,
+					"jobs": 0,
+					"keeper_hp": 30,
+					"reason": "",
+					"result": "",
+					"satiety": 42.4000000000128,
+					"sleepiness": 0.0,
+					"tick": 4752,
+					"time": "23:00  夜",
+					"used": {
+						"mushroom": 4
+					},
+					"wood": {
+						"available": 8,
+						"carried": 0,
+						"equipped": 0,
+						"forbidden": 0,
+						"outside": 16,
+						"owned": 24,
+						"reserved": 0,
+						"site": 0,
+						"stolen": 0,
+						"stored": 8
+					}
+				},
+				{
+					"built": 0,
+					"day": 4,
+					"enemies": 0,
+					"food": {
+						"available": 2,
+						"carried": 0,
+						"equipped": 0,
+						"forbidden": 0,
+						"outside": 6,
+						"owned": 8,
+						"reserved": 0,
+						"site": 0,
+						"stolen": 0,
+						"stored": 2
+					},
+					"gold": 136,
+					"idol_hp": 180,
+					"jobs": 0,
+					"keeper_hp": 30,
+					"reason": "",
+					"result": "",
+					"satiety": 65.8000000000139,
+					"sleepiness": 0.0,
+					"tick": 5184,
+					"time": "05:00  朝",
+					"used": {
+						"mushroom": 5
+					},
+					"wood": {
+						"available": 8,
+						"carried": 0,
+						"equipped": 0,
+						"forbidden": 0,
+						"outside": 16,
+						"owned": 24,
+						"reserved": 0,
+						"site": 0,
+						"stolen": 0,
+						"stored": 8
+					}
+				}
+			],
+			"seconds": 15.892,
+			"seed": 31,
+			"stop": "three_days"
+		},
+		{
+			"events": [
+				{
+					"key": "harvest_done:4",
+					"text": "伐採完了：現地に木材8個",
+					"tick": 39
+				},
+				{
+					"key": "harvest_done:5",
+					"text": "採掘完了：現地に石8個",
+					"tick": 106
+				},
+				{
+					"key": "work_block:3",
+					"text": "木壁：ここに誰かいます",
+					"tick": 107
+				},
+				{
+					"key": "train_done:6",
+					"text": "柴犬の調教完了：基礎忠誠 75 → 80",
+					"tick": 144
+				},
+				{
+					"key": "build_done:3",
+					"text": "木壁が完成しました",
+					"tick": 224
+				},
+				{
+					"key": "",
+					"text": "牧場主 → 誘拐者　2ダメージ",
+					"tick": 1203
+				},
+				{
+					"key": "",
+					"text": "柴犬 → 誘拐者　10ダメージ",
+					"tick": 1205
+				},
+				{
+					"key": "",
+					"text": "誘拐者 → 柴犬　5ダメージ",
+					"tick": 1205
+				},
+				{
+					"key": "",
+					"text": "牧場主 → 誘拐者　2ダメージ",
+					"tick": 1209
+				},
+				{
+					"key": "",
+					"text": "柴犬 → 誘拐者　10ダメージ",
+					"tick": 1210
+				},
+				{
+					"key": "",
+					"text": "誘拐者 → 柴犬　5ダメージ",
+					"tick": 1211
+				},
+				{
+					"key": "",
+					"text": "牧場主 → 誘拐者　2ダメージ",
+					"tick": 1215
+				},
+				{
+					"key": "",
+					"text": "柴犬 → 誘拐者　10ダメージ",
+					"tick": 1215
+				},
+				{
+					"key": "",
+					"text": "誘拐者 → 柴犬　5ダメージ",
+					"tick": 1217
+				},
+				{
+					"key": "",
+					"text": "牧場主 → 誘拐者　2ダメージ",
+					"tick": 1221
+				},
+				{
+					"key": "",
+					"text": "柴犬 → 誘拐者　10ダメージ",
+					"tick": 1221
+				},
+				{
+					"key": "",
+					"text": "誘拐者 → 柴犬　5ダメージ",
+					"tick": 1223
+				},
+				{
+					"key": "",
+					"text": "牧場主 → 誘拐者　2ダメージ",
+					"tick": 1227
+				},
+				{
+					"key": "",
+					"text": "誘拐者を倒した",
+					"tick": 1227
+				},
+				{
+					"key": "raid_done:raid:1",
+					"text": "1日目の襲撃が終了。+32G / 経験16",
+					"tick": 1259
+				},
+				{
+					"key": "meal:keeper",
+					"text": "牧場主：食事中。終わったら仕事に戻ります",
+					"tick": 1402
+				},
+				{
+					"key": "meal_done:keeper",
+					"text": "牧場主：食事を終えて仕事に復帰",
+					"tick": 1409
+				},
+				{
+					"key": "calendar_morning:2",
+					"text": "2日目の朝になりました",
+					"tick": 1728
+				},
+				{
+					"key": "work_block:2",
+					"text": "木壁：ここに誰かいます",
+					"tick": 1801
+				},
+				{
+					"key": "supplies:2",
+					"text": "木材8・キノコ3が届きました。入口で受け取れます",
+					"tick": 2088
+				},
+				{
+					"key": "meal:keeper",
+					"text": "牧場主：食事中。終わったら仕事に戻ります",
+					"tick": 2342
+				},
+				{
+					"key": "meal_done:keeper",
+					"text": "牧場主：食事を終えて仕事に復帰",
+					"tick": 2349
+				},
+				{
+					"key": "build_done:2",
+					"text": "木壁が完成しました",
+					"tick": 2449
+				},
+				{
+					"key": "",
+					"text": "サラリーマン → 柴犬　3ダメージ",
+					"tick": 2905
+				},
+				{
+					"key": "",
+					"text": "柴犬 → サラリーマン　10ダメージ",
+					"tick": 2906
+				},
+				{
+					"key": "",
+					"text": "柴犬 → サラリーマン　10ダメージ",
+					"tick": 2911
+				},
+				{
+					"key": "",
+					"text": "サラリーマン → 柴犬　3ダメージ",
+					"tick": 2911
+				},
+				{
+					"key": "",
+					"text": "柴犬 → サラリーマン　10ダメージ",
+					"tick": 2916
+				},
+				{
+					"key": "",
+					"text": "サラリーマンを倒した",
+					"tick": 2916
+				},
+				{
+					"key": "",
+					"text": "牧場主 → サラリーマン　2ダメージ",
+					"tick": 2968
+				},
+				{
+					"key": "",
+					"text": "柴犬 → サラリーマン　10ダメージ",
+					"tick": 2970
+				},
+				{
+					"key": "",
+					"text": "サラリーマン：電話中（撃破で中断）",
+					"tick": 2970
+				},
+				{
+					"key": "",
+					"text": "牧場主 → サラリーマン　2ダメージ",
+					"tick": 2978
+				},
+				{
+					"key": "",
+					"text": "サラリーマン：応援要請が成立",
+					"tick": 2978
+				},
+				{
+					"key": "",
+					"text": "サラリーマン → 柴犬　3ダメージ",
+					"tick": 2979
+				},
+				{
+					"key": "",
+					"text": "柴犬 → サラリーマン　10ダメージ",
+					"tick": 2981
+				},
+				{
+					"key": "",
+					"text": "サラリーマン → 柴犬　3ダメージ",
+					"tick": 2985
+				},
+				{
+					"key": "",
+					"text": "牧場主 → サラリーマン　2ダメージ",
+					"tick": 2988
+				},
+				{
+					"key": "",
+					"text": "サラリーマンの増援が地図の端から接近",
+					"tick": 2990
+				},
+				{
+					"key": "",
+					"text": "サラリーマンの増援が牧場に到着",
+					"tick": 2990
+				},
+				{
+					"key": "",
+					"text": "サラリーマン → 柴犬　3ダメージ",
+					"tick": 2991
+				},
+				{
+					"key": "",
+					"text": "柴犬 → サラリーマン　10ダメージ",
+					"tick": 2992
+				},
+				{
+					"key": "",
+					"text": "サラリーマンを倒した",
+					"tick": 2992
+				},
+				{
+					"key": "",
+					"text": "牧場主 → サラリーマン　2ダメージ",
+					"tick": 3111
+				},
+				{
+					"key": "",
+					"text": "柴犬 → サラリーマン　10ダメージ",
+					"tick": 3111
+				},
+				{
+					"key": "",
+					"text": "サラリーマン → 柴犬　3ダメージ",
+					"tick": 3111
+				},
+				{
+					"key": "",
+					"text": "サラリーマン → 柴犬　3ダメージ",
+					"tick": 3117
+				},
+				{
+					"key": "",
+					"text": "牧場主 → サラリーマン　2ダメージ",
+					"tick": 3121
+				},
+				{
+					"key": "",
+					"text": "柴犬 → サラリーマン　10ダメージ",
+					"tick": 3122
+				},
+				{
+					"key": "",
+					"text": "サラリーマン → 柴犬　3ダメージ",
+					"tick": 3123
+				},
+				{
+					"key": "",
+					"text": "サラリーマン → 柴犬　3ダメージ",
+					"tick": 3129
+				},
+				{
+					"key": "",
+					"text": "牧場主 → サラリーマン　2ダメージ",
+					"tick": 3131
+				},
+				{
+					"key": "",
+					"text": "柴犬 → サラリーマン　10ダメージ",
+					"tick": 3133
+				},
+				{
+					"key": "",
+					"text": "サラリーマンを倒した",
+					"tick": 3133
+				},
+				{
+					"key": "meal:keeper",
+					"text": "牧場主：食事中。終わったら仕事に戻ります",
+					"tick": 3202
+				},
+				{
+					"key": "meal_done:keeper",
+					"text": "牧場主：食事を終えて仕事に復帰",
+					"tick": 3209
+				},
+				{
+					"key": "",
+					"text": "柴犬 → サラリーマン　10ダメージ",
+					"tick": 3229
+				},
+				{
+					"key": "",
+					"text": "サラリーマン：電話中（撃破で中断）",
+					"tick": 3229
+				},
+				{
+					"key": "",
+					"text": "柴犬 → サラリーマン　10ダメージ",
+					"tick": 3234
+				},
+				{
+					"key": "",
+					"text": "サラリーマン：応援要請が成立",
+					"tick": 3237
+				},
+				{
+					"key": "",
+					"text": "サラリーマン → 柴犬　3ダメージ",
+					"tick": 3238
+				},
+				{
+					"key": "",
+					"text": "柴犬 → サラリーマン　10ダメージ",
+					"tick": 3239
+				},
+				{
+					"key": "",
+					"text": "サラリーマンを倒した",
+					"tick": 3239
+				},
+				{
+					"key": "",
+					"text": "サラリーマンの増援が地図の端から接近",
+					"tick": 3249
+				},
+				{
+					"key": "",
+					"text": "サラリーマンの増援が牧場に到着",
+					"tick": 3249
+				},
+				{
+					"key": "raid_done:raid:2",
+					"text": "2日目の襲撃が終了。+32G / 経験16",
+					"tick": 3271
+				},
+				{
+					"key": "calendar_morning:3",
+					"text": "3日目の朝。敵1体がまだ残っています",
+					"tick": 3456
+				},
+				{
+					"key": "",
+					"text": "柴犬 → サラリーマン　10ダメージ",
+					"tick": 3643
+				},
+				{
+					"key": "",
+					"text": "サラリーマン → 柴犬　3ダメージ",
+					"tick": 3643
+				},
+				{
+					"key": "",
+					"text": "サラリーマン → 柴犬　3ダメージ",
+					"tick": 3649
+				},
+				{
+					"key": "",
+					"text": "柴犬 → サラリーマン　10ダメージ",
+					"tick": 3654
+				},
+				{
+					"key": "",
+					"text": "サラリーマン：電話中（撃破で中断）",
+					"tick": 3654
+				},
+				{
+					"key": "",
+					"text": "柴犬 → サラリーマン　10ダメージ",
+					"tick": 3659
+				},
+				{
+					"key": "",
+					"text": "サラリーマン：電話を中断",
+					"tick": 3659
+				},
+				{
+					"key": "",
+					"text": "サラリーマンを倒した",
+					"tick": 3659
+				},
+				{
+					"key": "supplies:3",
+					"text": "木材8・キノコ3が届きました。入口で受け取れます",
+					"tick": 3816
+				},
+				{
+					"key": "build_done:1",
+					"text": "木壁が完成しました",
+					"tick": 4072
+				},
+				{
+					"key": "meal:keeper",
+					"text": "牧場主：食事中。終わったら仕事に戻ります",
+					"tick": 4135
+				},
+				{
+					"key": "meal_done:keeper",
+					"text": "牧場主：食事を終えて仕事に復帰",
+					"tick": 4142
+				},
+				{
+					"key": "",
+					"text": "サラリーマン → 柴犬　3ダメージ",
+					"tick": 4600
+				},
+				{
+					"key": "",
+					"text": "柴犬 → サラリーマン　10ダメージ",
+					"tick": 4601
+				},
+				{
+					"key": "",
+					"text": "柴犬 → サラリーマン　10ダメージ",
+					"tick": 4606
+				},
+				{
+					"key": "",
+					"text": "サラリーマン → 柴犬　3ダメージ",
+					"tick": 4606
+				},
+				{
+					"key": "",
+					"text": "サラリーマン → 柴犬　3ダメージ",
+					"tick": 4612
+				},
+				{
+					"key": "",
+					"text": "柴犬 → サラリーマン　10ダメージ",
+					"tick": 4616
+				},
+				{
+					"key": "",
+					"text": "サラリーマンを倒した",
+					"tick": 4616
+				},
+				{
+					"key": "",
+					"text": "柴犬 → サラリーマン　10ダメージ",
+					"tick": 4629
+				},
+				{
+					"key": "",
+					"text": "サラリーマン → 柴犬　3ダメージ",
+					"tick": 4633
+				},
+				{
+					"key": "",
+					"text": "サラリーマン → 柴犬　3ダメージ",
+					"tick": 4639
+				},
+				{
+					"key": "",
+					"text": "柴犬 → サラリーマン　10ダメージ",
+					"tick": 4640
+				},
+				{
+					"key": "",
+					"text": "サラリーマン → 柴犬　3ダメージ",
+					"tick": 4645
+				},
+				{
+					"key": "",
+					"text": "サラリーマン → 柴犬　3ダメージ",
+					"tick": 4652
+				},
+				{
+					"key": "",
+					"text": "柴犬 → サラリーマン　10ダメージ",
+					"tick": 4656
+				},
+				{
+					"key": "",
+					"text": "サラリーマンを倒した",
+					"tick": 4656
+				},
+				{
+					"key": "",
+					"text": "サラリーマン → 柴犬　3ダメージ",
+					"tick": 4951
+				},
+				{
+					"key": "",
+					"text": "柴犬 → サラリーマン　10ダメージ",
+					"tick": 4955
+				},
+				{
+					"key": "",
+					"text": "サラリーマン → 柴犬　3ダメージ",
+					"tick": 4957
+				},
+				{
+					"key": "",
+					"text": "柴犬 → サラリーマン　10ダメージ",
+					"tick": 4960
+				},
+				{
+					"key": "",
+					"text": "サラリーマン → 柴犬　3ダメージ",
+					"tick": 4963
+				},
+				{
+					"key": "",
+					"text": "柴犬 → サラリーマン　10ダメージ",
+					"tick": 4967
+				},
+				{
+					"key": "",
+					"text": "サラリーマンを倒した",
+					"tick": 4967
+				},
+				{
+					"key": "raid_done:raid:3",
+					"text": "3日目の襲撃が終了。+32G / 経験16",
+					"tick": 4999
+				},
+				{
+					"key": "meal:keeper",
+					"text": "牧場主：食事中。終わったら仕事に戻ります",
+					"tick": 5002
+				},
+				{
+					"key": "meal_done:keeper",
+					"text": "牧場主：食事を終えて仕事に復帰",
+					"tick": 5009
+				},
+				{
+					"key": "calendar_morning:4",
+					"text": "4日目の朝になりました",
+					"tick": 5184
+				}
+			],
+			"final": {
+				"built": 3,
+				"day": 4,
+				"enemies": 0,
+				"food": {
+					"available": 8,
+					"carried": 0,
+					"equipped": 0,
+					"forbidden": 0,
+					"outside": 0,
+					"owned": 8,
+					"reserved": 0,
+					"site": 0,
+					"stolen": 0,
+					"stored": 8
+				},
+				"gold": 136,
+				"idol_hp": 180,
+				"jobs": 0,
+				"keeper_hp": 30,
+				"reason": "",
+				"result": "",
+				"satiety": 65.8000000000136,
+				"sleepiness": 0.0,
+				"tick": 5184,
+				"time": "05:00  朝",
+				"used": {
+					"mushroom": 5,
+					"wood": 30
+				},
+				"wood": {
+					"available": 2,
+					"carried": 0,
+					"equipped": 0,
+					"forbidden": 0,
+					"outside": 0,
+					"owned": 2,
+					"reserved": 0,
+					"site": 0,
+					"stolen": 0,
+					"stored": 2
+				}
+			},
+			"idle_game_seconds": 62.25,
+			"policy": "prepare",
+			"samples": [
+				{
+					"built": 0,
+					"day": 1,
+					"enemies": 0,
+					"food": {
+						"available": 7,
+						"carried": 0,
+						"equipped": 0,
+						"forbidden": 0,
+						"outside": 0,
+						"owned": 7,
+						"reserved": 0,
+						"site": 0,
+						"stolen": 0,
+						"stored": 7
+					},
+					"gold": 40,
+					"idol_hp": 180,
+					"jobs": 6,
+					"keeper_hp": 30,
+					"reason": "",
+					"result": "",
+					"satiety": 100.0,
+					"sleepiness": 0.0,
+					"tick": 0,
+					"time": "05:00  朝",
+					"used": {},
+					"wood": {
+						"available": 8,
+						"carried": 0,
+						"equipped": 0,
+						"forbidden": 0,
+						"outside": 0,
+						"owned": 8,
+						"reserved": 0,
+						"site": 0,
+						"stolen": 0,
+						"stored": 8
+					}
+				},
+				{
+					"built": 1,
+					"day": 1,
+					"enemies": 0,
+					"food": {
+						"available": 7,
+						"carried": 0,
+						"equipped": 0,
+						"forbidden": 0,
+						"outside": 0,
+						"owned": 7,
+						"reserved": 0,
+						"site": 0,
+						"stolen": 0,
+						"stored": 7
+					},
+					"gold": 40,
+					"idol_hp": 180,
+					"jobs": 2,
+					"keeper_hp": 30,
+					"reason": "",
+					"result": "",
+					"satiety": 78.4000000000012,
+					"sleepiness": 25.0,
+					"tick": 432,
+					"time": "11:00  昼",
+					"used": {
+						"wood": 10
+					},
+					"wood": {
+						"available": 0,
+						"carried": 0,
+						"equipped": 0,
+						"forbidden": 0,
+						"outside": 0,
+						"owned": 6,
+						"reserved": 0,
+						"site": 6,
+						"stolen": 0,
+						"stored": 0
+					}
+				},
+				{
+					"built": 1,
+					"day": 1,
+					"enemies": 0,
+					"food": {
+						"available": 7,
+						"carried": 0,
+						"equipped": 0,
+						"forbidden": 0,
+						"outside": 0,
+						"owned": 7,
+						"reserved": 0,
+						"site": 0,
+						"stolen": 0,
+						"stored": 7
+					},
+					"gold": 40,
+					"idol_hp": 180,
+					"jobs": 2,
+					"keeper_hp": 30,
+					"reason": "",
+					"result": "",
+					"satiety": 56.8000000000025,
+					"sleepiness": 50.000000000001,
+					"tick": 864,
+					"time": "17:00  昼",
+					"used": {
+						"wood": 10
+					},
+					"wood": {
+						"available": 0,
+						"carried": 0,
+						"equipped": 0,
+						"forbidden": 0,
+						"outside": 0,
+						"owned": 6,
+						"reserved": 0,
+						"site": 6,
+						"stolen": 0,
+						"stored": 0
+					}
+				},
+				{
+					"built": 1,
+					"day": 1,
+					"enemies": 0,
+					"food": {
+						"available": 7,
+						"carried": 0,
+						"equipped": 0,
+						"forbidden": 0,
+						"outside": 0,
+						"owned": 7,
+						"reserved": 0,
+						"site": 0,
+						"stolen": 0,
+						"stored": 7
+					},
+					"gold": 72,
+					"idol_hp": 180,
+					"jobs": 2,
+					"keeper_hp": 30,
+					"reason": "",
+					"result": "",
+					"satiety": 35.2000000000037,
+					"sleepiness": 75.0000000000011,
+					"tick": 1296,
+					"time": "23:00  夜",
+					"used": {
+						"wood": 10
+					},
+					"wood": {
+						"available": 0,
+						"carried": 0,
+						"equipped": 0,
+						"forbidden": 0,
+						"outside": 0,
+						"owned": 6,
+						"reserved": 0,
+						"site": 6,
+						"stolen": 0,
+						"stored": 0
+					}
+				},
+				{
+					"built": 1,
+					"day": 2,
+					"enemies": 0,
+					"food": {
+						"available": 6,
+						"carried": 0,
+						"equipped": 0,
+						"forbidden": 0,
+						"outside": 0,
+						"owned": 6,
+						"reserved": 0,
+						"site": 0,
+						"stolen": 0,
+						"stored": 6
+					},
+					"gold": 72,
+					"idol_hp": 180,
+					"jobs": 2,
+					"keeper_hp": 30,
+					"reason": "",
+					"result": "",
+					"satiety": 58.6000000000047,
+					"sleepiness": 99.5370370370366,
+					"tick": 1728,
+					"time": "05:00  朝",
+					"used": {
+						"mushroom": 1,
+						"wood": 10
+					},
+					"wood": {
+						"available": 0,
+						"carried": 0,
+						"equipped": 0,
+						"forbidden": 0,
+						"outside": 0,
+						"owned": 6,
+						"reserved": 0,
+						"site": 6,
+						"stolen": 0,
+						"stored": 0
+					}
+				},
+				{
+					"built": 1,
+					"day": 2,
+					"enemies": 0,
+					"food": {
+						"available": 6,
+						"carried": 0,
+						"equipped": 0,
+						"forbidden": 0,
+						"outside": 3,
+						"owned": 9,
+						"reserved": 0,
+						"site": 0,
+						"stolen": 0,
+						"stored": 6
+					},
+					"gold": 72,
+					"idol_hp": 180,
+					"jobs": 4,
+					"keeper_hp": 30,
+					"reason": "",
+					"result": "",
+					"satiety": 37.000000000006,
+					"sleepiness": 100.0,
+					"tick": 2160,
+					"time": "11:00  昼",
+					"used": {
+						"mushroom": 1,
+						"wood": 10
+					},
+					"wood": {
+						"available": 0,
+						"carried": 0,
+						"equipped": 0,
+						"forbidden": 0,
+						"outside": 8,
+						"owned": 14,
+						"reserved": 0,
+						"site": 6,
+						"stolen": 0,
+						"stored": 0
+					}
+				},
+				{
+					"built": 2,
+					"day": 2,
+					"enemies": 0,
+					"food": {
+						"available": 5,
+						"carried": 3,
+						"equipped": 0,
+						"forbidden": 0,
+						"outside": 0,
+						"owned": 8,
+						"reserved": 0,
+						"site": 0,
+						"stolen": 0,
+						"stored": 5
+					},
+					"gold": 72,
+					"idol_hp": 180,
+					"jobs": 2,
+					"keeper_hp": 30,
+					"reason": "",
+					"result": "",
+					"satiety": 60.4000000000069,
+					"sleepiness": 98.597222222221,
+					"tick": 2592,
+					"time": "17:00  昼",
+					"used": {
+						"mushroom": 2,
+						"wood": 20
+					},
+					"wood": {
+						"available": 0,
+						"carried": 0,
+						"equipped": 0,
+						"forbidden": 0,
+						"outside": 0,
+						"owned": 4,
+						"reserved": 0,
+						"site": 4,
+						"stolen": 0,
+						"stored": 0
+					}
+				},
+				{
+					"built": 2,
+					"day": 2,
+					"enemies": 2,
+					"food": {
+						"available": 8,
+						"carried": 0,
+						"equipped": 0,
+						"forbidden": 0,
+						"outside": 0,
+						"owned": 8,
+						"reserved": 0,
+						"site": 0,
+						"stolen": 0,
+						"stored": 8
+					},
+					"gold": 72,
+					"idol_hp": 180,
+					"jobs": 1,
+					"keeper_hp": 30,
+					"reason": "",
+					"result": "",
+					"satiety": 38.8000000000081,
+					"sleepiness": 99.5231481481469,
+					"tick": 3024,
+					"time": "23:00  夜",
+					"used": {
+						"mushroom": 2,
+						"wood": 20
+					},
+					"wood": {
+						"available": 0,
+						"carried": 0,
+						"equipped": 0,
+						"forbidden": 0,
+						"outside": 0,
+						"owned": 4,
+						"reserved": 0,
+						"site": 4,
+						"stolen": 0,
+						"stored": 0
+					}
+				},
+				{
+					"built": 2,
+					"day": 3,
+					"enemies": 1,
+					"food": {
+						"available": 7,
+						"carried": 0,
+						"equipped": 0,
+						"forbidden": 0,
+						"outside": 0,
+						"owned": 7,
+						"reserved": 0,
+						"site": 0,
+						"stolen": 0,
+						"stored": 7
+					},
+					"gold": 104,
+					"idol_hp": 180,
+					"jobs": 1,
+					"keeper_hp": 30,
+					"reason": "",
+					"result": "",
+					"satiety": 62.2000000000092,
+					"sleepiness": 99.9861111111098,
+					"tick": 3456,
+					"time": "05:00  朝",
+					"used": {
+						"mushroom": 3,
+						"wood": 20
+					},
+					"wood": {
+						"available": 0,
+						"carried": 0,
+						"equipped": 0,
+						"forbidden": 0,
+						"outside": 0,
+						"owned": 4,
+						"reserved": 0,
+						"site": 4,
+						"stolen": 0,
+						"stored": 0
+					}
+				},
+				{
+					"built": 2,
+					"day": 3,
+					"enemies": 0,
+					"food": {
+						"available": 7,
+						"carried": 0,
+						"equipped": 0,
+						"forbidden": 0,
+						"outside": 3,
+						"owned": 10,
+						"reserved": 0,
+						"site": 0,
+						"stolen": 0,
+						"stored": 7
+					},
+					"gold": 104,
+					"idol_hp": 180,
+					"jobs": 3,
+					"keeper_hp": 30,
+					"reason": "",
+					"result": "",
+					"satiety": 40.6000000000104,
+					"sleepiness": 100.0,
+					"tick": 3888,
+					"time": "11:00  昼",
+					"used": {
+						"mushroom": 3,
+						"wood": 20
+					},
+					"wood": {
+						"available": 0,
+						"carried": 0,
+						"equipped": 0,
+						"forbidden": 0,
+						"outside": 8,
+						"owned": 12,
+						"reserved": 0,
+						"site": 4,
+						"stolen": 0,
+						"stored": 0
+					}
+				},
+				{
+					"built": 3,
+					"day": 3,
+					"enemies": 0,
+					"food": {
+						"available": 9,
+						"carried": 0,
+						"equipped": 0,
+						"forbidden": 0,
+						"outside": 0,
+						"owned": 9,
+						"reserved": 0,
+						"site": 0,
+						"stolen": 0,
+						"stored": 9
+					},
+					"gold": 104,
+					"idol_hp": 180,
+					"jobs": 0,
+					"keeper_hp": 30,
+					"reason": "",
+					"result": "",
+					"satiety": 64.0000000000113,
+					"sleepiness": 99.4652777777765,
+					"tick": 4320,
+					"time": "17:00  昼",
+					"used": {
+						"mushroom": 4,
+						"wood": 30
+					},
+					"wood": {
+						"available": 2,
+						"carried": 0,
+						"equipped": 0,
+						"forbidden": 0,
+						"outside": 0,
+						"owned": 2,
+						"reserved": 0,
+						"site": 0,
+						"stolen": 0,
+						"stored": 2
+					}
+				},
+				{
+					"built": 3,
+					"day": 3,
+					"enemies": 1,
+					"food": {
+						"available": 9,
+						"carried": 0,
+						"equipped": 0,
+						"forbidden": 0,
+						"outside": 0,
+						"owned": 9,
+						"reserved": 0,
+						"site": 0,
+						"stolen": 0,
+						"stored": 9
+					},
+					"gold": 104,
+					"idol_hp": 180,
+					"jobs": 0,
+					"keeper_hp": 30,
+					"reason": "",
+					"result": "",
+					"satiety": 42.4000000000126,
+					"sleepiness": 19.2013888888892,
+					"tick": 4752,
+					"time": "23:00  夜",
+					"used": {
+						"mushroom": 4,
+						"wood": 30
+					},
+					"wood": {
+						"available": 2,
+						"carried": 0,
+						"equipped": 0,
+						"forbidden": 0,
+						"outside": 0,
+						"owned": 2,
+						"reserved": 0,
+						"site": 0,
+						"stolen": 0,
+						"stored": 2
+					}
+				},
+				{
+					"built": 3,
+					"day": 4,
+					"enemies": 0,
+					"food": {
+						"available": 8,
+						"carried": 0,
+						"equipped": 0,
+						"forbidden": 0,
+						"outside": 0,
+						"owned": 8,
+						"reserved": 0,
+						"site": 0,
+						"stolen": 0,
+						"stored": 8
+					},
+					"gold": 136,
+					"idol_hp": 180,
+					"jobs": 0,
+					"keeper_hp": 30,
+					"reason": "",
+					"result": "",
+					"satiety": 65.8000000000136,
+					"sleepiness": 0.0,
+					"tick": 5184,
+					"time": "05:00  朝",
+					"used": {
+						"mushroom": 5,
+						"wood": 30
+					},
+					"wood": {
+						"available": 2,
+						"carried": 0,
+						"equipped": 0,
+						"forbidden": 0,
+						"outside": 0,
+						"owned": 2,
+						"reserved": 0,
+						"site": 0,
+						"stolen": 0,
+						"stored": 2
+					}
+				}
+			],
+			"seconds": 40.774,
+			"seed": 31,
+			"stop": "three_days"
+		}
+	]
+}

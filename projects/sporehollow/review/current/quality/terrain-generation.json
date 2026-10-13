@@ -1,0 +1,743 @@
+{
+	"checks": [
+		{
+			"check": "Only new campaigns use generator v2: 1",
+			"passed": true
+		},
+		{
+			"check": "Same seed reproduces all layers and objects: 1",
+			"passed": true
+		},
+		{
+			"check": "Separate saved region/material/vertex grids: 1",
+			"passed": true
+		},
+		{
+			"check": "Only nonblocking ground material labels: 1",
+			"passed": true
+		},
+		{
+			"check": "Five cohesive regions with mixed ground materials: 1",
+			"passed": true
+		},
+		{
+			"check": "At least one generated solid 3x3 rock shelf: 1",
+			"passed": true
+		},
+		{
+			"check": "Rock biome also has walkable gravel/bedrock: 1",
+			"passed": true
+		},
+		{
+			"check": "Every initially open cell connects to the keeper: 1",
+			"passed": true
+		},
+		{
+			"check": "All edges and corners remain open and reachable: 1",
+			"passed": true
+		},
+		{
+			"check": "Central building room, actors, merchant and ingress protected: 1",
+			"passed": true
+		},
+		{
+			"check": "Merchant and enemy approaches stay reachable: 1",
+			"passed": true
+		},
+		{
+			"check": "Sparse woodland never makes adjacent trunk walls: 1",
+			"passed": true
+		},
+		{
+			"check": "Unchanged per-cell stone yield: 1",
+			"passed": true
+		},
+		{
+			"check": "Existing harvest cap retained: weed seed 1",
+			"passed": true
+		},
+		{
+			"check": "Existing harvest cap retained: mushroom seed 1",
+			"passed": true
+		},
+		{
+			"check": "Existing harvest cap retained: stump seed 1",
+			"passed": true
+		},
+		{
+			"check": "Regional area is made of broad patches, not tiny fragments: rocky seed 1",
+			"passed": true
+		},
+		{
+			"check": "Dominant connected regional patch: rocky seed 1",
+			"passed": true
+		},
+		{
+			"check": "Regional area is made of broad patches, not tiny fragments: woodland seed 1",
+			"passed": true
+		},
+		{
+			"check": "Dominant connected regional patch: woodland seed 1",
+			"passed": true
+		},
+		{
+			"check": "Regional area is made of broad patches, not tiny fragments: dry seed 1",
+			"passed": true
+		},
+		{
+			"check": "Dominant connected regional patch: dry seed 1",
+			"passed": true
+		},
+		{
+			"check": "Regional area is made of broad patches, not tiny fragments: lush seed 1",
+			"passed": true
+		},
+		{
+			"check": "Only new campaigns use generator v2: 17",
+			"passed": true
+		},
+		{
+			"check": "Same seed reproduces all layers and objects: 17",
+			"passed": true
+		},
+		{
+			"check": "Different seeds alter region fields: 17",
+			"passed": true
+		},
+		{
+			"check": "Separate saved region/material/vertex grids: 17",
+			"passed": true
+		},
+		{
+			"check": "Only nonblocking ground material labels: 17",
+			"passed": true
+		},
+		{
+			"check": "Five cohesive regions with mixed ground materials: 17",
+			"passed": true
+		},
+		{
+			"check": "At least one generated solid 3x3 rock shelf: 17",
+			"passed": true
+		},
+		{
+			"check": "Rock biome also has walkable gravel/bedrock: 17",
+			"passed": true
+		},
+		{
+			"check": "Every initially open cell connects to the keeper: 17",
+			"passed": true
+		},
+		{
+			"check": "All edges and corners remain open and reachable: 17",
+			"passed": true
+		},
+		{
+			"check": "Central building room, actors, merchant and ingress protected: 17",
+			"passed": true
+		},
+		{
+			"check": "Merchant and enemy approaches stay reachable: 17",
+			"passed": true
+		},
+		{
+			"check": "Sparse woodland never makes adjacent trunk walls: 17",
+			"passed": true
+		},
+		{
+			"check": "Unchanged per-cell stone yield: 17",
+			"passed": true
+		},
+		{
+			"check": "Existing harvest cap retained: weed seed 17",
+			"passed": true
+		},
+		{
+			"check": "Existing harvest cap retained: mushroom seed 17",
+			"passed": true
+		},
+		{
+			"check": "Existing harvest cap retained: stump seed 17",
+			"passed": true
+		},
+		{
+			"check": "Regional area is made of broad patches, not tiny fragments: rocky seed 17",
+			"passed": true
+		},
+		{
+			"check": "Dominant connected regional patch: rocky seed 17",
+			"passed": true
+		},
+		{
+			"check": "Regional area is made of broad patches, not tiny fragments: woodland seed 17",
+			"passed": true
+		},
+		{
+			"check": "Dominant connected regional patch: woodland seed 17",
+			"passed": true
+		},
+		{
+			"check": "Regional area is made of broad patches, not tiny fragments: dry seed 17",
+			"passed": true
+		},
+		{
+			"check": "Dominant connected regional patch: dry seed 17",
+			"passed": true
+		},
+		{
+			"check": "Regional area is made of broad patches, not tiny fragments: lush seed 17",
+			"passed": true
+		},
+		{
+			"check": "Only new campaigns use generator v2: 31",
+			"passed": true
+		},
+		{
+			"check": "Same seed reproduces all layers and objects: 31",
+			"passed": true
+		},
+		{
+			"check": "Different seeds alter region fields: 31",
+			"passed": true
+		},
+		{
+			"check": "Separate saved region/material/vertex grids: 31",
+			"passed": true
+		},
+		{
+			"check": "Only nonblocking ground material labels: 31",
+			"passed": true
+		},
+		{
+			"check": "Five cohesive regions with mixed ground materials: 31",
+			"passed": true
+		},
+		{
+			"check": "At least one generated solid 3x3 rock shelf: 31",
+			"passed": true
+		},
+		{
+			"check": "Rock biome also has walkable gravel/bedrock: 31",
+			"passed": true
+		},
+		{
+			"check": "Every initially open cell connects to the keeper: 31",
+			"passed": true
+		},
+		{
+			"check": "All edges and corners remain open and reachable: 31",
+			"passed": true
+		},
+		{
+			"check": "Central building room, actors, merchant and ingress protected: 31",
+			"passed": true
+		},
+		{
+			"check": "Merchant and enemy approaches stay reachable: 31",
+			"passed": true
+		},
+		{
+			"check": "Sparse woodland never makes adjacent trunk walls: 31",
+			"passed": true
+		},
+		{
+			"check": "Unchanged per-cell stone yield: 31",
+			"passed": true
+		},
+		{
+			"check": "Existing harvest cap retained: weed seed 31",
+			"passed": true
+		},
+		{
+			"check": "Existing harvest cap retained: mushroom seed 31",
+			"passed": true
+		},
+		{
+			"check": "Existing harvest cap retained: stump seed 31",
+			"passed": true
+		},
+		{
+			"check": "Regional area is made of broad patches, not tiny fragments: rocky seed 31",
+			"passed": true
+		},
+		{
+			"check": "Dominant connected regional patch: rocky seed 31",
+			"passed": true
+		},
+		{
+			"check": "Regional area is made of broad patches, not tiny fragments: woodland seed 31",
+			"passed": true
+		},
+		{
+			"check": "Dominant connected regional patch: woodland seed 31",
+			"passed": true
+		},
+		{
+			"check": "Regional area is made of broad patches, not tiny fragments: dry seed 31",
+			"passed": true
+		},
+		{
+			"check": "Dominant connected regional patch: dry seed 31",
+			"passed": true
+		},
+		{
+			"check": "Regional area is made of broad patches, not tiny fragments: lush seed 31",
+			"passed": true
+		},
+		{
+			"check": "Only new campaigns use generator v2: 97",
+			"passed": true
+		},
+		{
+			"check": "Same seed reproduces all layers and objects: 97",
+			"passed": true
+		},
+		{
+			"check": "Different seeds alter region fields: 97",
+			"passed": true
+		},
+		{
+			"check": "Separate saved region/material/vertex grids: 97",
+			"passed": true
+		},
+		{
+			"check": "Only nonblocking ground material labels: 97",
+			"passed": true
+		},
+		{
+			"check": "Five cohesive regions with mixed ground materials: 97",
+			"passed": true
+		},
+		{
+			"check": "At least one generated solid 3x3 rock shelf: 97",
+			"passed": true
+		},
+		{
+			"check": "Rock biome also has walkable gravel/bedrock: 97",
+			"passed": true
+		},
+		{
+			"check": "Every initially open cell connects to the keeper: 97",
+			"passed": true
+		},
+		{
+			"check": "All edges and corners remain open and reachable: 97",
+			"passed": true
+		},
+		{
+			"check": "Central building room, actors, merchant and ingress protected: 97",
+			"passed": true
+		},
+		{
+			"check": "Merchant and enemy approaches stay reachable: 97",
+			"passed": true
+		},
+		{
+			"check": "Sparse woodland never makes adjacent trunk walls: 97",
+			"passed": true
+		},
+		{
+			"check": "Unchanged per-cell stone yield: 97",
+			"passed": true
+		},
+		{
+			"check": "Existing harvest cap retained: weed seed 97",
+			"passed": true
+		},
+		{
+			"check": "Existing harvest cap retained: mushroom seed 97",
+			"passed": true
+		},
+		{
+			"check": "Existing harvest cap retained: stump seed 97",
+			"passed": true
+		},
+		{
+			"check": "Regional area is made of broad patches, not tiny fragments: rocky seed 97",
+			"passed": true
+		},
+		{
+			"check": "Dominant connected regional patch: rocky seed 97",
+			"passed": true
+		},
+		{
+			"check": "Regional area is made of broad patches, not tiny fragments: woodland seed 97",
+			"passed": true
+		},
+		{
+			"check": "Dominant connected regional patch: woodland seed 97",
+			"passed": true
+		},
+		{
+			"check": "Regional area is made of broad patches, not tiny fragments: dry seed 97",
+			"passed": true
+		},
+		{
+			"check": "Dominant connected regional patch: dry seed 97",
+			"passed": true
+		},
+		{
+			"check": "Regional area is made of broad patches, not tiny fragments: lush seed 97",
+			"passed": true
+		},
+		{
+			"check": "Only new campaigns use generator v2: 2026",
+			"passed": true
+		},
+		{
+			"check": "Same seed reproduces all layers and objects: 2026",
+			"passed": true
+		},
+		{
+			"check": "Different seeds alter region fields: 2026",
+			"passed": true
+		},
+		{
+			"check": "Separate saved region/material/vertex grids: 2026",
+			"passed": true
+		},
+		{
+			"check": "Only nonblocking ground material labels: 2026",
+			"passed": true
+		},
+		{
+			"check": "Five cohesive regions with mixed ground materials: 2026",
+			"passed": true
+		},
+		{
+			"check": "At least one generated solid 3x3 rock shelf: 2026",
+			"passed": true
+		},
+		{
+			"check": "Rock biome also has walkable gravel/bedrock: 2026",
+			"passed": true
+		},
+		{
+			"check": "Every initially open cell connects to the keeper: 2026",
+			"passed": true
+		},
+		{
+			"check": "All edges and corners remain open and reachable: 2026",
+			"passed": true
+		},
+		{
+			"check": "Central building room, actors, merchant and ingress protected: 2026",
+			"passed": true
+		},
+		{
+			"check": "Merchant and enemy approaches stay reachable: 2026",
+			"passed": true
+		},
+		{
+			"check": "Sparse woodland never makes adjacent trunk walls: 2026",
+			"passed": true
+		},
+		{
+			"check": "Unchanged per-cell stone yield: 2026",
+			"passed": true
+		},
+		{
+			"check": "Existing harvest cap retained: weed seed 2026",
+			"passed": true
+		},
+		{
+			"check": "Existing harvest cap retained: mushroom seed 2026",
+			"passed": true
+		},
+		{
+			"check": "Existing harvest cap retained: stump seed 2026",
+			"passed": true
+		},
+		{
+			"check": "Regional area is made of broad patches, not tiny fragments: rocky seed 2026",
+			"passed": true
+		},
+		{
+			"check": "Dominant connected regional patch: rocky seed 2026",
+			"passed": true
+		},
+		{
+			"check": "Regional area is made of broad patches, not tiny fragments: woodland seed 2026",
+			"passed": true
+		},
+		{
+			"check": "Dominant connected regional patch: woodland seed 2026",
+			"passed": true
+		},
+		{
+			"check": "Regional area is made of broad patches, not tiny fragments: dry seed 2026",
+			"passed": true
+		},
+		{
+			"check": "Dominant connected regional patch: dry seed 2026",
+			"passed": true
+		},
+		{
+			"check": "Regional area is made of broad patches, not tiny fragments: lush seed 2026",
+			"passed": true
+		},
+		{
+			"check": "Safety fixture starts with an enclosed free pocket",
+			"passed": true
+		},
+		{
+			"check": "Safety repair removes one local rock barrier, without imposing a road",
+			"passed": true
+		},
+		{
+			"check": "Safety repair leaves idol and structures unchanged",
+			"passed": true
+		},
+		{
+			"check": "Saved v1 generation version is retained",
+			"passed": true
+		},
+		{
+			"check": "Saved v1 geometry and blended colors are not regenerated",
+			"passed": true
+		},
+		{
+			"check": "Saved world objects and actors survive visual metadata migration",
+			"passed": true
+		},
+		{
+			"check": "Depleted cells remain depleted on legacy load",
+			"passed": true
+		},
+		{
+			"check": "Legacy-shaped full snapshot writes",
+			"passed": true
+		},
+		{
+			"check": "Full v1 snapshot derives classification without upgrading generation",
+			"passed": true
+		},
+		{
+			"check": "Full v1 snapshot preserves removed objects and runtime items",
+			"passed": true
+		},
+		{
+			"check": "Render-facing classification and decoration never consume simulation RNG or regenerate layers",
+			"passed": true
+		}
+	],
+	"failures": 0,
+	"observations": [
+		{
+			"core": [
+				22,
+				27
+			],
+			"materials": {
+				"bedrock": 8,
+				"grass": 1397,
+				"gravel": 79,
+				"soil": 216
+			},
+			"reachable_cells": 1630,
+			"region_components": {
+				"dry": [
+					93
+				],
+				"lush": [
+					465,
+					17
+				],
+				"rocky": [
+					87
+				],
+				"woodland": [
+					143
+				]
+			},
+			"regions": {
+				"dry": 93,
+				"lush": 482,
+				"open": 895,
+				"rocky": 87,
+				"woodland": 143
+			},
+			"repairs": [
+				[
+					21,
+					27
+				]
+			],
+			"rocks": 27,
+			"seed": 1,
+			"trees": 20,
+			"world_creation_ms": 694.269
+		},
+		{
+			"core": [
+				38,
+				23
+			],
+			"materials": {
+				"bedrock": 41,
+				"grass": 1396,
+				"gravel": 60,
+				"soil": 203
+			},
+			"reachable_cells": 1650,
+			"region_components": {
+				"dry": [
+					117
+				],
+				"lush": [
+					457,
+					239,
+					51
+				],
+				"rocky": [
+					101
+				],
+				"woodland": [
+					151
+				]
+			},
+			"regions": {
+				"dry": 117,
+				"lush": 747,
+				"open": 584,
+				"rocky": 101,
+				"woodland": 151
+			},
+			"repairs": [
+				[
+					37,
+					23
+				]
+			],
+			"rocks": 11,
+			"seed": 17,
+			"trees": 16,
+			"world_creation_ms": 716.002
+		},
+		{
+			"core": [
+				14,
+				30
+			],
+			"materials": {
+				"bedrock": 79,
+				"grass": 1442,
+				"gravel": 55,
+				"soil": 124
+			},
+			"reachable_cells": 1646,
+			"region_components": {
+				"dry": [
+					78
+				],
+				"lush": [
+					155,
+					240,
+					234
+				],
+				"rocky": [
+					134
+				],
+				"woodland": [
+					121
+				]
+			},
+			"regions": {
+				"dry": 78,
+				"lush": 629,
+				"open": 738,
+				"rocky": 134,
+				"woodland": 121
+			},
+			"repairs": [],
+			"rocks": 18,
+			"seed": 31,
+			"trees": 13,
+			"world_creation_ms": 725.874
+		},
+		{
+			"core": [
+				16,
+				6
+			],
+			"materials": {
+				"bedrock": 58,
+				"grass": 1282,
+				"gravel": 80,
+				"soil": 280
+			},
+			"reachable_cells": 1635,
+			"region_components": {
+				"dry": [
+					175
+				],
+				"lush": [
+					12,
+					416,
+					1
+				],
+				"rocky": [
+					138
+				],
+				"woodland": [
+					161
+				]
+			},
+			"regions": {
+				"dry": 175,
+				"lush": 429,
+				"open": 797,
+				"rocky": 138,
+				"woodland": 161
+			},
+			"repairs": [],
+			"rocks": 18,
+			"seed": 97,
+			"trees": 24,
+			"world_creation_ms": 711.192
+		},
+		{
+			"core": [
+				6,
+				19
+			],
+			"materials": {
+				"bedrock": 77,
+				"grass": 1358,
+				"gravel": 64,
+				"soil": 201
+			},
+			"reachable_cells": 1616,
+			"region_components": {
+				"dry": [
+					93
+				],
+				"lush": [
+					141,
+					70,
+					131,
+					111
+				],
+				"rocky": [
+					141
+				],
+				"woodland": [
+					159
+				]
+			},
+			"regions": {
+				"dry": 93,
+				"lush": 453,
+				"open": 854,
+				"rocky": 141,
+				"woodland": 159
+			},
+			"repairs": [],
+			"rocks": 38,
+			"seed": 2026,
+			"trees": 23,
+			"world_creation_ms": 722.073
+		}
+	],
+	"timing_scope": "Full CPU world creation, not GPU frame performance"
+}

@@ -1,0 +1,175 @@
+{
+  "implementation_commit": "3fb97ff1ce669568000a54ea247339d68532f045",
+  "asset_delivery_commit": "3229d2655e35e82d178577cdd8acbbe66e9be4f8",
+  "build": {
+    "asset_delivery_commit": "3229d2655e35e82d178577cdd8acbbe66e9be4f8",
+    "commit": "3fb97ff",
+    "sha256": "6ECC6D82DB114ECAF860C053B560ADB7107431715E17EB23605FBB850675E404",
+    "automatically_launched": false,
+    "implementation_commit": "3fb97ff",
+    "normal_data_unchanged": true,
+    "utc": "2026-10-13T03:41:21.7792387Z",
+    "native_lifecycle_checks": 5,
+    "dirty": true
+  },
+  "screenshots": 22,
+  "runtime_errors": 0,
+  "test_counts": {
+    "quality-ledger": {
+      "passed": 15,
+      "total": 15
+    },
+    "quality-journey": {
+      "passed": 16,
+      "total": 16
+    },
+    "integrated-work": {
+      "passed": 30,
+      "total": 30
+    },
+    "integrated-input": {
+      "passed": 29,
+      "total": 29
+    },
+    "explicit-storage": {
+      "passed": 12,
+      "total": 12
+    },
+    "work-food-chain": {
+      "passed": 34,
+      "total": 34
+    },
+    "livestock09": {
+      "passed": 23,
+      "total": 23
+    },
+    "colony-tasks09": {
+      "passed": 26,
+      "total": 26
+    },
+    "review02": {
+      "passed": 40,
+      "total": 40
+    },
+    "visible-boundary": {
+      "passed": 51,
+      "total": 51
+    },
+    "terrain-generation": {
+      "passed": 130,
+      "total": 130
+    },
+    "mountains": {
+      "passed": 58,
+      "total": 58
+    },
+    "ui-survey": {
+      "passed": 31,
+      "total": 31
+    },
+    "close-entry": {
+      "passed": 2,
+      "total": 2
+    },
+    "resume-entry": {
+      "passed": 3,
+      "total": 3
+    }
+  },
+  "capture_base_commit": "cf004ab82f5e09e4141507bcd791aba76735d998",
+  "capture_matches_implementation_except": "inventory_view.gd: one whitespace-only blank line; old SHA256 reconstructed and verified",
+  "source_sha256": {
+    "adopted_art.gd": "26bba0e28b8ed2ce6d4d65832c77ac8aeaab9a410a7857c2063171a0375dc822",
+    "animal_corpse.gd": "7ba51fe185e534e8f9f0303a125f30219a3993c37ab67967297cc5e21185fd72",
+    "animal_data.gd": "117b18b4976ec0c9a15a02cb459c7807f3bc43eecaff8e105ba984f0eba7373a",
+    "animal_escape.gd": "d2b87c802d04a2ce12e395f0851e061acf295f5cf93e0a62d0fe70fada27ca7a",
+    "animal_guide.gd": "770d1820c96d06e656b3da68c53baf2a855fd14cc9589c83a4f83d6e19551ea2",
+    "animal_orders.gd": "8e0300362f290524e1bcdcaf44482e8c6b692f1307594020ff92706fb36da60e",
+    "animal_recovery.gd": "c5b093fc7844cc7571fad519aa299866531bc0f7364a8e51085d27a7ba722734",
+    "autonomy_entry_review.gd": "1d7d0a8140ae6458154bd7e588eb5bdbf5c8aaf01e0b6875528e22788fe2f887",
+    "biome_map.gd": "9b7b15c835f583185e877a47a749866144691559542bd03f6f9ceac3af5293d6",
+    "board_art.gd": "84c4a1f3d8ead5fdbf785f8b6823a295536932cfcae626bfa09e9f6e704bbe9b",
+    "book_view.gd": "a2f4b8c81db0e2319932fffd5b05de22f154daed3abce6817238548eb6c4c032",
+    "buildings.gd": "080575c4b41e6f4d5018879e7cb991bb0db7796c91b1c7f9e349b8193facc2f0",
+    "building_art.gd": "2aeaf3945fee041b10dd3dcf93c2d2a7ed5885cb73297784deb00ba2759d7707",
+    "colony_clock.gd": "01bd0cfe1722f9a6671bb5a2574ae5455db61b0b02c723845bbb881f7b7f0ec5",
+    "colony_cycle.gd": "45dc3ac5eac8bb570027f6afb17b099b4fb22c36565e0c2413014fcfadc89cb5",
+    "colony_land.gd": "01aa7e0890bc7ae78f7092c50b34479733bd8eedb7988dea4aedc2d532c2e99e",
+    "colony_menu.gd": "46a6c62f1f60f0efee36b39e260edeebc42fbb7e9104a6cb5aec9e1d85500042",
+    "colony_panels.gd": "0ba5eb10b665e1df89a22ec2cc1c67ce56e46e5b1e121faf4ff8f89ad92b9ab1",
+    "colony_tasks.gd": "81cc6ca7055bc3126a669f9505ca8862cf805ad6c9e284a209aa02ac072c4679",
+    "colony_task_controls.gd": "fe27b14c1d69e6d4621da57875328b916424cc4bc57d10f1eaa5cee7d3c9b8cc",
+    "colony_ui_state.gd": "688d7729174d5d007cbec9e5e575f19a2a94da3709d788b60df3833e954c69c1",
+    "colony_view_model.gd": "0047359e1189197a63f03d8f6fe8ea8c650363d138d0a023d351d19876f348b8",
+    "colony_zones.gd": "2397c9774524c5304b0a62a8120c5de3e8edac084b2b3493312a063e692fef56",
+    "combat_events.gd": "3a4ce6d793e6d8557ec317cd94243d8c82603cc6f5bc7e08960e40b6c8126b7c",
+    "construction_delivery.gd": "7b47699db2f76efb95bfde01aaa0ce7c3b6c5dec791693f935002378d8a697b6",
+    "cycle_entry_review.gd": "8abc98773e123dbf0b2cf5597994bb753235a8c14598b27b333cf452ca978050",
+    "decision_ai.gd": "7027cfd89753def348dcc8293bb7ef9dbe9765954633d91d32597e7024e5d8c9",
+    "delivered_art.gd": "9b3cc420dd941edede94bc7ec8746c4144b853e281f0e699a3fa7102c4653898",
+    "direction_art.gd": "adc7f55f3c110392eef7e8facedef3c2f6f8f93cf10c430f3b0d7b4891a5d89f",
+    "encounters.gd": "fb179cb0878d07ffc6d60e393f036e44a1aee8a275880bacf19b548399c48282",
+    "enemy_arrival.gd": "34d2dc975b7e928651841ae7fc7d7cbb7fda97e8cd40800c06bc7b13e57cca81",
+    "enemy_skills.gd": "862345acd6ed42cfc4e93f17f46967eef1be98873b0f1e4da59fe015a8c2f2c5",
+    "farm_audio.gd": "f4a44f0e3007b2811df9c239da6bc448cc9ed76abc52b063bb8b123ef05d3885",
+    "forest_departure.gd": "99ebf7e29dc0b6c03a1292ec7fd532701fb766af1cdb236246d403f9589030b2",
+    "forest_pattern.gd": "bc3528d11c12fed0eda04e7d9189a6adf0e9bf910abf9677cd2aac37158c4498",
+    "harvest_view.gd": "8b68225f8aba5717366485a15e307303363196b32394ae5ad5661a4eab55efae",
+    "harvest_work.gd": "e9487fe5f7a0253f7bec95d9d54ab72ca6c0bafef85f42ae11250ca275f01b47",
+    "human_combat.gd": "ff8d1510169010fe35a8c5292ceee6a25f12de8bf145908482cd3d6800162d33",
+    "human_food.gd": "5b2234dc80abb9622e9380b54ea6c7b94d8bbf9e7212eb9af388100476fcc394",
+    "human_nutrition.gd": "a7ad9d9123dd077d8603eaa831b2ce3cbabd17510cde4a2922674673b4a202ee",
+    "human_visual.gd": "2386f4b5f9ec943f62c17429758f836a0766b2b2770c5b2d475100a326acfa56",
+    "human_work.gd": "4add59e08b995c191524ac99885cbc740cd043416634a03d60030a7fd2f018a0",
+    "inventory_view.gd": "97c7066f02fafc257392619347e590e1851b93e28cd25bd1e48dce33451c0f7e",
+    "item_commands.gd": "53fb10c2c8a10d157672799fba1e69377b19f799e4497bf9eecdadc32868d307",
+    "journal_view.gd": "070645d33332fe8ae15d5214d86ec55afb7ed322d914a98e2f963e499c7f453d",
+    "keeper_jobs.gd": "f02770ffbfa12df3eeb2dca93dca649a77348ed4880632bb60a21457a82194c0",
+    "keeper_life.gd": "e2653e5f695f4a77e0f672d7d4b6827f47d82a79ea6035bbe85380a48ec2b56e",
+    "level_stats.gd": "ae95f82055ad4475d19312a8141f5f2075a82f7e48808a08bb31893c0fcf5ad8",
+    "livestock.gd": "9c625693a93d265743d9a6d93947015e5fae752a95d1ac56cc33e332b709e997",
+    "livestock_controls.gd": "874029b26156771f5ff47a1f95e0a2eea66b845bfed0a7d4741985d511dba145",
+    "main.gd": "7daa1c53d0b16201e13107516c19801cf94ec477500eff5f7505d4fa3820817f",
+    "market_view.gd": "907af8ffa4ff0b840f75cb3e0bec74ca791a9e503d245b08db6dffdb5f1805df",
+    "merchant_speech.gd": "97151f331dd812f80ae2a430915503a9f26ec0fb13b1b49e7ff4c8dff9742ca2",
+    "mining_mountains.gd": "2984bc04f13bee3a436e7aad3b560149f10cee88f9ae2b7e11f9dcdb70c03714",
+    "morning_save.gd": "53ded8a1b390e691af9919568e210bd0f4c07e7427db8bbb540f6e319f7a855f",
+    "mountain_view.gd": "2d5f004b0c74a0678186b484a3323ad3979d4d6bbad517e00af27f550390262c",
+    "onsite_clarity.gd": "3f573975e11e4b1c03fc8c5b4a32e11be5aa123186ded439146d234c2566cf66",
+    "onsite_clarity_review.gd": "67d859200cd7b6dbd8f44e5188fa506b82d9400a82216240c2f134dd8b3aa512",
+    "physical_stock.gd": "11fef3986a6051e0e8d80ec70cdb9c4c08a6a43c8ae6f59b62464985470ae9f6",
+    "player_events.gd": "641f70be802924e218469723d2ffa8100e82e966ce0e77dcb3bd0ff71a9d1ffa",
+    "progression.gd": "59186b40dc57ade51ac93a0072d635f539afd45d531578ee947cd05aa2acfc29",
+    "progression_art.gd": "18cea66779edf4536652566b5b324d8f22480baeedec90c45738f218e8e22ea3",
+    "progression_data.gd": "ad53c92d47753100de3f213c723a281f378a856c852f4ad81cc18d80d5a85bb0",
+    "progression_view.gd": "60698baa56ad1188e7225501c8d9eb5c8f44bf861ff92c47b130e16e6edc7f53",
+    "raider_ai.gd": "2843c48dcd3acfcd4fdb02c5af4804c1fc1f7e6c2dc3d0f6e7b5c7c6a43dd16c",
+    "ranch_content.gd": "a4ee2b67d41380110c24b6dcd01e4de2a5f953379304d061b5f1197dad08b552",
+    "research_snapshot.gd": "aed6ce37900798a6ad4e4b45ec7c1c50f21fc8f4e80e0e10c80cc90347460694",
+    "rock_art.gd": "93cd4f68fd02d558def0363bb174ade82c1ab3263e1f498e12b01b7c7470f651",
+    "rock_view.gd": "a54a61a139b08f2fb45ef39f4c95b48e1fcd359bd3365e85e846dcb2735dcdef",
+    "rules.gd": "b4e1103d8bbbc5dab230d89fbceaa2e914a6d3e51693282b99dfac1e10c7798d",
+    "shop_table.gd": "3a23b202fccb38183f8dc64bca0507b5b3eb78c04cdd7732c79a6de3721e7143",
+    "six_motion.gd": "f296354f470991ae99ef1cae025d6e420ee8f2a6b3b42b4e486575e7f2195891",
+    "six_motion_clips.gd": "df89739983b181f18e054ceffbd9b2fd6cba54ebb398cd459f5993107424456f",
+    "stages.gd": "2b47354bd07eeaf1dec5c2b6861519812b63328c98a5ce5d7b339d9d58615c8e",
+    "stock_view.gd": "f1743b5cc2e37f9d35255ee3d4b61668182914ab55401ec96c99404af6e490c3",
+    "story_view.gd": "b8887f71c63174cc96eec7a3082acb5b57b97ec0f23dd4be33b7c3e23da6446d",
+    "subtasks.gd": "3e4f5a9039398aa7e483257d9450a9a3fde560f2592fde2773f6dfe9458643a4",
+    "target_policy.gd": "7dc27d56693b92e6d2b2dbeb49536d9ab2df6a7cdffed8eb8151f7cb36cc6732",
+    "ui_assets.gd": "36ee3f44d5c2a4c1dfe8ec04b63e10c70867d739071ca56d9bbe8a3c51fb416a",
+    "ui_style.gd": "f02df78cbe74268a2cc4234b111bc87b9fdc8bccb7cfee3363d6308b135892db",
+    "wall_stroke.gd": "452cb9ab289b1b74fde025dd5cd17a242fefb58ad4f9f3d17c812f790500bcf9",
+    "work_policy.gd": "4e948c67bb7b0cc7820200a4a81259502998959c02a05ff76fec4ba9f376bf51",
+    "world.gd": "26a8e8ad49224032666e63a2afa8cbb89215d1828da628ffef03b0457e0cbe57",
+    "world_story_system.gd": "63aa43201763ae6826f998adf6af5865ef8f44b9abfbe8a99020ca92e3939e40",
+    "zone_controls.gd": "a1a28d108910043b12cbc94f594b45fdf736c91fa0d416d56d5c35aabf3202e6"
+  },
+  "exe_relative_path": "artifacts\\autonomy-entry-01\\bundle\\WhistleRanch-Autonomy-Partial.exe",
+  "shortcut": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\確認入口\\最新開発版.lnk",
+  "working_tree_note": "Existing import/uid changes from other work retained outside this commit; build dirty=true does not mean uncommitted game source.",
+  "project_size_mib": 906.6,
+  "start_project_size_mib": 902.8,
+  "cleanup": "dev workflow removed candidate EXE, isolated saves/log scratch and regenerated cache; existing prior review evidence retained",
+  "recorded_utc": "2026-10-13T03:42:50.183078+00:00"
+}

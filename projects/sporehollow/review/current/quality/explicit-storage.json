@@ -1,0 +1,54 @@
+{
+	"checks": [
+		{
+			"check": "New initial materials are physically separated in the central stockpile",
+			"passed": true
+		},
+		{
+			"check": "Creating and configuring storage does not move, claim, duplicate or automatically haul goods",
+			"passed": true
+		},
+		{
+			"check": "Load and zone resize preserve existing positions and ownership without creating work",
+			"passed": true
+		},
+		{
+			"check": "Explicit single collection reserves one real job and duplicate request creates none",
+			"passed": true
+		},
+		{
+			"check": "Worker physically picks up the specified wood before delivery",
+			"passed": true
+		},
+		{
+			"check": "Saved carrying resumes and drops exactly the original quantity at storage",
+			"passed": true
+		},
+		{
+			"check": "Unselected goods remain at their original position",
+			"passed": true
+		},
+		{
+			"check": "Explicit rectangle collection uses the same real haul path",
+			"passed": true
+		},
+		{
+			"check": "Uncollected off-stock food is not eaten",
+			"passed": true
+		},
+		{
+			"check": "Construction can still be explicitly designated",
+			"passed": true
+		},
+		{
+			"check": "Off-stock materials cannot complete a building before collection",
+			"passed": true
+		},
+		{
+			"check": "After explicit collection stored materials and food are used normally",
+			"passed": true
+		}
+	],
+	"failures": 0,
+	"method": "One production World.step group; controlled food/build fixtures and carried-state snapshot"
+}

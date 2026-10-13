@@ -1,0 +1,121 @@
+{
+	"failures": 0,
+	"groups": [
+		{
+			"checks": [
+				{
+					"check": "New farms place deterministic deposits on rocky terrain",
+					"passed": true
+				},
+				{
+					"check": "Generated rocks avoid trees, natural resources, buildings and entrances",
+					"passed": true
+				},
+				{
+					"check": "Explicit mining creates one real job and rejects duplicate designation",
+					"passed": true
+				},
+				{
+					"check": "Worker reaches the rock before mining; no early stone appears",
+					"passed": true
+				},
+				{
+					"check": "Cancelling started mining preserves the unmined deposit",
+					"passed": true
+				},
+				{
+					"check": "Forbidding a reserved rock stops progress and preserves its quantity",
+					"passed": true
+				},
+				{
+					"check": "Saved mining resumes and produces exactly eight physical stone at the rock",
+					"passed": true
+				},
+				{
+					"check": "Existing haul jobs move mined stone into permitted storage",
+					"passed": true
+				},
+				{
+					"check": "Campaign reload never regenerates a depleted rock or duplicates stone",
+					"passed": true
+				},
+				{
+					"check": "Disappeared mining target cancels without producing stone",
+					"passed": true
+				}
+			],
+			"name": "1 Deterministic rocks, physical mining, interruption and persistence"
+		},
+		{
+			"checks": [
+				{
+					"check": "Only one explicit training job is registered for the selected dog",
+					"passed": true
+				},
+				{
+					"check": "Training starts at the animal and does not grant loyalty early",
+					"passed": true
+				},
+				{
+					"check": "Cancelling started training grants no loyalty or daily completion",
+					"passed": true
+				},
+				{
+					"check": "Forbidden animal pauses training without granting loyalty",
+					"passed": true
+				},
+				{
+					"check": "Saved training changes the existing loyalty value once and enforces the disclosed daily limit",
+					"passed": true
+				},
+				{
+					"check": "Campaign preserves training result and daily guard",
+					"passed": true
+				},
+				{
+					"check": "The next morning permits another explicit training session",
+					"passed": true
+				},
+				{
+					"check": "hen receives no invented training effect",
+					"passed": true
+				},
+				{
+					"check": "cat receives no invented training effect",
+					"passed": true
+				},
+				{
+					"check": "maid receives no invented training effect",
+					"passed": true
+				},
+				{
+					"check": "A captive cannot be designated",
+					"passed": true
+				},
+				{
+					"check": "Foreign animals cannot be trained",
+					"passed": true
+				},
+				{
+					"check": "Existing animal work prevents conflicting training",
+					"passed": true
+				},
+				{
+					"check": "Capture during work blocks the loyalty effect",
+					"passed": true
+				},
+				{
+					"check": "Death cancels training with no reward",
+					"passed": true
+				},
+				{
+					"check": "Training and slaughter share the animal reservation namespace",
+					"passed": true
+				}
+			],
+			"name": "2 Player training: real loyalty, eligibility, ownership, cancellation and saved completion"
+		}
+	],
+	"method": "Controlled fixtures through production World.step and snapshot/campaign persistence. Simulation, not human play.",
+	"passed": true
+}
