@@ -1171,7 +1171,7 @@ func _route_input(event):
 	if world.working() and not menu_open and not field_book and not field_shop and event is InputEventMouseButton and event.pressed and event.button_index==MOUSE_BUTTON_RIGHT:
 		right_release_pending=true
 		if subtasks.dragging:subtasks.cancel();refresh()
-		elif dragging or press_pending:
+		elif group<0 and (dragging or press_pending):
 			cancel_wall_stroke();dragging=false;press_pending=false;drag_class="";drag_encounters.clear()
 		else:neutral()
 		get_viewport().set_input_as_handled();return

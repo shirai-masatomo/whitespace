@@ -34,7 +34,7 @@ func run():
 		check(game.selected_animals==[1,2] and game.selected_resources.is_empty() and game.group==-1,"Neutral drag selects only animals and keeps neutral; paused="+str(paused))
 		check(not game.animal_list_open and not game.animal_commands_open and w.jobs.is_empty(),"Selection does not open management or issue jobs")
 		check(game.camera.position==origin,"Neutral selection does not pan camera")
-	game.open_animal_commands(1);check(game.selected_animals==[1,2] and game.animal_commands_open,"Opening instructions preserves the multiselection without issuing commands")
+	await mouse(game.buttons.animal_instructions.get_global_rect().get_center());check(game.selected_animals==[1,2] and game.animal_commands_open,"Opening instructions preserves the multiselection without issuing commands")
 	game.neutral();await held_drag(at(Vector2i(20,19)),at(Vector2i(29,20)));await release(at(Vector2i(29,20)))
 	check(game.selected_resources.size()==8 and game.selected_animals.is_empty(),"Resources category and selection limit eight")
 	game.neutral();await held_drag(at(Vector2i(20,19)),at(Vector2i(29,18)));await release(at(Vector2i(29,18)))
