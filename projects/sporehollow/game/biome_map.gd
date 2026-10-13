@@ -1,6 +1,6 @@
 extends RefCounted
 ## Versioned scenery and placement only. Never used by movement or building rules.
-const VERSION=4
+const VERSION=5
 # Normalized regional scale, transition width and obstacle density; saved in new terrain.
 const SETTINGS={"region_scale":1.0,"region_thresholds":{"rocky":0.43,"woodland":0.40,"dry":0.42,"lush":0.48},"boundary_width":1.0,"tree_density":1.0,"rock_clusters_per_1700":1,"mountain_groups_per_1700":0.5}
 static func normalized(w,p: Vector2) -> Vector2:
@@ -51,21 +51,21 @@ static func sample(seed_number: int,p: Vector2,blobs: Array) -> Array:
 	var patch=noise(seed_number,original*0.38,311)
 	wood=maxf(wood,smoothstep(0.68,0.92,patch)*0.5*margin)
 	var sand=smoothstep(0.48,0.78,noise(seed_number,p*0.17,317))*smoothstep(0.12,0.55,dry)*(1.0-rock)
-	var clay=smoothstep(0.56,0.78,noise(seed_number,p*0.19,331))*(0.3+0.7*margin)*(1.0-rock)
+	var clay=smoothstep(0.12,0.36,rock)*(1.0-smoothstep(0.48,0.8,rock))*smoothstep(0.25,0.72,noise(seed_number,p*0.31,331))
 	var soil=clampf(dry*0.45+smoothstep(0.6,0.88,patch)*0.48,0,0.8)*(1.0-rock)
 	return [lush,wood,rock,dry,fine,sand,clay,soil]
 
 static func color_for(f: Array) -> Color:
-	var color=Color("839955").lerp(Color("69874b"),f[0]*0.7)
-	color=color.lerp(Color("617d48"),f[1]*0.65)
-	color=color.lerp(Color("a99a68"),f[3]*0.78)
+	var color=Color("867961").lerp(Color("768057"),clampf(f[0]*1.5+f[1]*0.25,0,0.85))
+	color=color.lerp(Color("6b7652"),f[1]*0.65)
+	color=color.lerp(Color("94836a"),f[3]*0.78)
 	color=color.lerp(Color("96917a"),f[2]*0.73)
 	if f.size()>5:
-		color=color.lerp(Color("987855"),clampf(f[7]*2.2,0,0.88)).lerp(Color("b49062"),clampf(f[5]*1.5,0,0.92)).lerp(Color("36576c"),f[6]*0.88)
+		color=color.lerp(Color("987855"),clampf(f[7]*2.2,0,0.88)).lerp(Color("a18b69"),clampf(f[5]*1.5,0,0.92)).lerp(Color("626b70"),f[6]*0.88)
 	return color.lightened((f[4]-0.5)*0.045)
 
 static func generate(seed_number: int,width: int,height: int,version: int=VERSION) -> Dictionary:
-	var blobs=lobes(seed_number);var fields=[];var vertices=[];var surface_vertices=[]
+	var blobs=lobes(seed_number);var fields=[];var vertices=[];var surface_vertices=[];var ground_weights=[]
 	var scale=Vector2(50.0/width,34.0/height)/SETTINGS.region_scale
 	for y in range(height):
 		for x in range(width):fields.append(sample(seed_number,Vector2(x+0.5,y+0.5)*scale,blobs))
@@ -78,8 +78,9 @@ static func generate(seed_number: int,width: int,height: int,version: int=VERSIO
 					var row=fields[clampi(y+dy,0,height-1)*width+clampi(x+dx,0,width-1)]
 					for i in range(f.size()):f[i]+=row[i]*0.25
 			var color=color_for(f);vertices.append([color.r,color.g,color.b])
+			ground_weights.append([clampf((f[0]*1.65+f[1]*0.25)*(1.0-f[2]),0,0.9),f[5],f[6],f[2]])
 			surface_vertices.append([smoothstep(0.25,0.58,f[2])*0.92,smoothstep(0.49,0.80,f[2])])
-	var result={"version":version,"generation_version":version,"settings":SETTINGS.duplicate(),"seed":seed_number,"width":width,"height":height,"fields":fields,"vertices":vertices,"surface_vertices":surface_vertices}
+	var result={"version":version,"generation_version":version,"settings":SETTINGS.duplicate(),"seed":seed_number,"width":width,"height":height,"fields":fields,"vertices":vertices,"surface_vertices":surface_vertices,"ground_weights":ground_weights}
 	classify(result)
 	return result
 
@@ -91,6 +92,7 @@ static func prepare(w):
 	if not w.terrain.has("regions") or not w.terrain.has("materials"):classify(w.terrain)
 	if not w.terrain.has("generation_version"):w.terrain.generation_version=int(w.terrain.get("version",1))
 	w.campaign.biome_map=w.terrain.duplicate(true)
+	prepare_nature(w)
 	if w.campaign.has("biome_natural"):
 		w.natural.clear()
 		for row in w.campaign.biome_natural:w.natural[Vector2i(row.pos[0],row.pos[1])]=row.kind
@@ -267,3 +269,38 @@ static func choose_site(w,sites: Array,resource: String) -> Vector2i:
 	for i in range(sites.size()):
 		if roll<=weights[i]:return sites[i]
 	return sites.back()
+
+# Cached cumulative weights preserve weighted conditional placement. Live occupancy
+# is checked only for sampled sites; a bounded exact fallback handles full maps.
+static func prepare_nature(w):
+	var key=[w.terrain.get("version",1),w.terrain.seed,w.W,w.H]
+	if w.nature_site_cache.get("key")==key:return
+	var sites=[];var cdf={};var totals={}
+	for kind in w.nature_config.weights:cdf[kind]=PackedFloat64Array();totals[kind]=0.0
+	for y in range(1,w.H-1):
+		for x in range(1,w.W-1):
+			var p=Vector2i(x,y);sites.append(p)
+			for kind in cdf:
+				totals[kind]+=resource_weight(w,p,kind);cdf[kind].append(totals[kind])
+	w.nature_site_cache={"key":key,"sites":sites,"cdf":cdf,"totals":totals}
+
+static func nature_site_valid(w,p):
+	return w.floors.get(p,{}).get("status") not in ["ready","building"] and not w.natural.has(p) and not w.rocks.has(p) and p not in w.entries and not w.field_items.any(func(item):return item.pos==p) and not w.live_structure(p) and not w.occupied(p) and w.walkable(p)
+
+static func sample_nature(w,kind):
+	prepare_nature(w)
+	var cached=w.nature_site_cache;var cdf=cached.cdf[kind]
+	for attempt in range(32):
+		var value=w.nature_rng.randf()*cached.totals[kind];var lo=0;var hi=cdf.size()-1
+		while lo<hi:
+			var mid=(lo+hi)/2
+			if cdf[mid]<value:lo=mid+1
+			else:hi=mid
+		var p=cached.sites[lo]
+		if nature_site_valid(w,p):return p
+	# No missed spawn and no forced placement: exact weighted scan on exceptional
+	# almost-full maps. It uses the same validity predicate as the fast route.
+	var sites=[]
+	for p in cached.sites:
+		if nature_site_valid(w,p):sites.append(p)
+	return null if sites.is_empty() else choose_site(w,sites,kind)

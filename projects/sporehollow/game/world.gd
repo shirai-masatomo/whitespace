@@ -1,4 +1,6 @@
 extends RefCounted
+var nature_site_cache={}
+const Metrics=preload("res://game/terrain_metrics.gd")
 const Content=preload("res://game/ranch_content.gd")
 ## Deterministic fixed-tick rules. No scene, Input, frame clock or rendering dependencies.
 const Combat=preload("res://game/combat_events.gd")
@@ -1112,13 +1114,23 @@ func step():
 	for key in workers:
 		if key!="keeper":Combat.recover(workers[key],DT,workers[key].get("resting",false))
 	for enemy in enemies: Combat.recover(enemy,DT)
+	var t_Cycle_step=Metrics.start()
 	Cycle.step(self)
+	Metrics.finish("Cycle_step",t_Cycle_step)
+	var t_Content_tick=Metrics.start()
 	Content.tick(self)
+	Metrics.finish("Content_tick",t_Content_tick)
 	for worker in workers.values():Nutrition.step(self,worker)
 	if not working():return
+	var t_Life_step=Metrics.start()
 	Life.step(self)
+	Metrics.finish("Life_step",t_Life_step)
+	var t_update_merchant_order=Metrics.start()
 	update_merchant_order()
+	Metrics.finish("update_merchant_order",t_update_merchant_order)
+	var t_Jobs_step=Metrics.start()
 	Jobs.step(self)
+	Metrics.finish("Jobs_step",t_Jobs_step)
 	if tick % ceili(Rules.NATURE.interval / DT) == 0: grow_nature()
 	command_power = minf(10, command_power + 0.07)
 	foods = foods.filter(func(f): return f.until > tick)
@@ -1128,12 +1140,16 @@ func step():
 		if not enemies.is_empty():enemies[-1].incident=event.get("incident","")
 		schedule_index+=1
 	for a in animals:
+		var t_animal_step=Metrics.start()
 		animal_step(a)
+		Metrics.finish("animal_step",t_animal_step)
 		if a.placed: open_for_ally(a.pos)
 
 		if a.path.back() != a.pos: a.path.append(a.pos)
 	for e in enemies:
+		var t_enemy_step=Metrics.start()
 		enemy_step(e)
+		Metrics.finish("enemy_step",t_enemy_step)
 		if e.get("reinforcement",false) and not e.get("reinforcement_arrived",false) and not e.done and e.hp>0 and inside(e.pos):
 			e.reinforcement_arrived=true
 			PlayerEvents.add(self,e.name+"の増援が牧場に到着")
@@ -1144,8 +1160,12 @@ func step():
 			"materials": materials, "keeper": keeper.state, "structures": structures.size()})
 	update_facing(keeper,previous_positions.keeper)
 	for a in animals: update_facing(a,previous_positions.get(a.id,a.pos))
+	var t_Progression_tick=Metrics.start()
 	Progression.tick(self)
+	Metrics.finish("Progression_tick",t_Progression_tick)
+	var t_Story_tick=Metrics.start()
 	Story.tick(self)
+	Metrics.finish("Story_tick",t_Story_tick)
 	Life.check_rest_until(self)
 	Cycle.settle_incidents(self)
 
@@ -1308,6 +1328,10 @@ func use_food(kind: String, animal_id: int, p: Vector2i) -> bool:
 	return false
 
 func grow_nature():
+	var started=Metrics.start()
+	grow_nature_measured()
+	Metrics.finish("nature",started)
+func grow_nature_measured():
 	metrics.nature_rolls += 1
 	if nature_rng.randf() >= nature_config.spawn_chance_per_second or natural.size() >= nature_config.limit: return
 	var choices = {}
@@ -1325,13 +1349,8 @@ func grow_nature():
 			kind = candidate
 			break
 	if kind == "": return
-	var sites = []
-	for y in range(1, H - 1):
-		for x in range(1, W - 1):
-			var p = Vector2i(x, y)
-			if walkable(p) and not occupied(p) and not live_structure(p) and not natural.has(p) and not rocks.has(p) and floors.get(p,{}).get("status") not in ["ready","building"] and p not in entries and not field_items.any(func(item): return item.pos == p): sites.append(p)
-	if sites.is_empty(): return
-	var p = Biome.choose_site(self,sites,kind)
+	var p = Biome.sample_nature(self,kind)
+	if p==null:return
 	natural[p] = kind
 	metrics[kind + "_spawned"] += 1
 

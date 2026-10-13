@@ -6,6 +6,15 @@ static var ground_source=null
 static var ground_version=""
 static var ground_cells=[]
 static var region_meshes={}
+const SOIL=preload("res://game/soil_surface.gdshader")
+static var material_cache:ShaderMaterial
+static func soil_material():
+	if material_cache==null:
+		material_cache=ShaderMaterial.new();material_cache.shader=SOIL
+		material_cache.set_shader_parameter("gravel",Ground.texture("biome_environment_v2/rock_ground/gravel.png"))
+		material_cache.set_shader_parameter("bedrock",Ground.texture("biome_environment_v2/rock_ground/bedrock.png"))
+	return material_cache
+static func textured(world):return world.terrain.get("version",1)>=5 and world.terrain.has("ground_weights")
 # Geometry, vertex colours and decorative choices are built once per terrain version.
 # Only viewport cells are submitted; changing rocks/trees never rebuilds this base.
 static func cache_ground(world,tile: Vector2):
@@ -18,7 +27,11 @@ static func ground_cell(world,tile: Vector2,cell: Vector2i) -> Dictionary:
 	if ground_cells[index]!=null:return ground_cells[index]
 	var p=Vector2(cell)*tile;var colors=PackedColorArray()
 	for q in [cell,cell+Vector2i.RIGHT,cell+Vector2i.ONE,cell+Vector2i.DOWN]:
-		var rgb=world.terrain.vertices[q.y*(world.W+1)+q.x];colors.append(Color(rgb[0],rgb[1],rgb[2]))
+		var at=q.y*(world.W+1)+q.x
+		if textured(world):
+			var f=world.terrain.ground_weights[at];colors.append(Color(f[0],f[1],f[2],f[3]))
+		else:
+			var rgb=world.terrain.vertices[at];colors.append(Color(rgb[0],rgb[1],rgb[2]))
 	var row={"points":PackedVector2Array([p,p+Vector2(tile.x,0),p+tile,p+Vector2(0,tile.y)]),"colors":colors,"decor":decor_key(world,cell),"offset":Vector2(floori(Biome.unit(world.terrain.seed,cell.x,cell.y,173)*15)-7,floori(Biome.unit(world.terrain.seed,cell.x,cell.y,179)*11)-5)}
 	ground_cells[index]=row;return row
 static func decor_key(world,p: Vector2i) -> String:
@@ -81,7 +94,7 @@ static func icon(kind: String) -> Texture2D:
 	return ImageTexture.create_from_image(img)
 
 # Static eight-cell chunks retain these draw commands until occupancy changes.
-static func draw_region(c: CanvasItem,world,tile: Vector2,box: Rect2i):
+static func prepare_region(world,tile: Vector2,box: Rect2i):
 	cache_ground(world,tile)
 	if not region_meshes.has(box):
 		var points=PackedVector3Array();var colors=PackedColorArray();var indices=PackedInt32Array()
@@ -92,14 +105,25 @@ static func draw_region(c: CanvasItem,world,tile: Vector2,box: Rect2i):
 				for index in [0,1,2,0,2,3]:indices.append(base+index)
 		var arrays=[];arrays.resize(Mesh.ARRAY_MAX);arrays[Mesh.ARRAY_VERTEX]=points;arrays[Mesh.ARRAY_COLOR]=colors;arrays[Mesh.ARRAY_INDEX]=indices
 		var mesh=ArrayMesh.new();mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES,arrays);region_meshes[box]=mesh
+	if not textured(world) and world.terrain.get("version",1)>=4 and world.terrain.has("surface_vertices"):prepare_surfaces(world,tile,box)
+
+static func draw_base(c,world,tile,box):
+	prepare_region(world,tile,box)
 	c.draw_mesh(region_meshes[box],null)
-	if world.terrain.get("version",1)>=4 and world.terrain.has("surface_vertices"):draw_surfaces(c,world,tile,box)
+	if not textured(world) and world.terrain.get("version",1)>=4 and world.terrain.has("surface_vertices"):
+		for layer in range(2):c.draw_mesh(region_meshes[str(box)+":"+str(layer)],Ground.texture("biome_environment_v2/rock_ground/"+("gravel" if layer==0 else "bedrock")+".png"))
+
+static func draw_region(c: CanvasItem,world,tile: Vector2,box: Rect2i):
+	draw_base(c,world,tile,box)
+	draw_decor(c,world,tile,box)
+
+static func draw_decor(c,world,tile,box):
 	for y in range(box.position.y,box.end.y):
 		for x in range(box.position.x,box.end.x):
 			var row=ground_cell(world,tile,Vector2i(x,y));var cell=Vector2i(x,y)
 			if row.decor!="" and not world.floors.has(cell) and not world.live_structure(cell) and not world.rocks.has(cell) and not world.natural.has(cell):Ground.paint(c,row.decor,(Vector2(cell)+Vector2(0.5,0.5))*tile+row.offset,0.8)
 
-static func draw_surfaces(c,world,tile: Vector2,box: Rect2i):
+static func prepare_surfaces(world,tile: Vector2,box: Rect2i):
 	for layer in range(2):
 		var key=str(box)+":"+str(layer)
 		if not region_meshes.has(key):
@@ -113,4 +137,4 @@ static func draw_surfaces(c,world,tile: Vector2,box: Rect2i):
 					for index in [0,1,2,0,2,3]:indices.append(base+index)
 			var arrays=[];arrays.resize(Mesh.ARRAY_MAX);arrays[Mesh.ARRAY_VERTEX]=points;arrays[Mesh.ARRAY_COLOR]=colors;arrays[Mesh.ARRAY_TEX_UV]=uv;arrays[Mesh.ARRAY_INDEX]=indices
 			var mesh=ArrayMesh.new();mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES,arrays);region_meshes[key]=mesh
-		c.draw_mesh(region_meshes[key],Ground.texture("biome_environment_v2/rock_ground/"+("gravel" if layer==0 else "bedrock")+".png"))
+

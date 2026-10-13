@@ -1,4 +1,5 @@
 extends Node2D
+const Metrics=preload("res://game/terrain_metrics.gd")
 const Assets=preload("res://game/ui_assets.gd")
 const Journal=preload("res://game/journal_view.gd")
 const ProgressArt=preload("res://game/progression_art.gd")
@@ -206,7 +207,6 @@ func _ready():
 	camera.position = Vector2(world.keeper.pos) * TILE
 	add_child(camera)
 	RenderingServer.set_default_clear_color(Color("344c3b"))
-	add_child(preload("res://game/retained_ground.gd").new())
 	var layer = CanvasLayer.new()
 	add_child(layer)
 	hud = Node2D.new()
@@ -250,6 +250,7 @@ func _ready():
 	add_child(book_view)
 	book_view.setup(self)
 	if world.phase == "shop": enter_daytime()
+	add_child(preload("res://game/retained_ground.gd").new())
 	recenter()
 	refresh()
 	controls.visible = not cinematic() and story_modal==""
@@ -436,6 +437,10 @@ func collect_selected():
 	refresh()
 
 func refresh():
+	var started=Metrics.start()
+	refresh_measured()
+	Metrics.finish("refresh",started)
+func refresh_measured():
 	colony_panel=null
 	if not selected.is_empty():colony_page=""
 	merchant_speech.update(self,0.0)
@@ -1559,6 +1564,10 @@ func clamp_camera():
 	camera.force_update_scroll()
 
 func _process(delta):
+	var started=Metrics.start()
+	_process_measured(delta)
+	Metrics.finish("main",started)
+func _process_measured(delta):
 	if world.phase=="shop" and not save_load_blocked:enter_daytime();refresh()
 	if seen_calendar_day!=world.last_daily_day:
 		seen_calendar_day=world.last_daily_day;arrival_bell=false;departure_started=-1;refresh()
@@ -1869,6 +1878,10 @@ func draw_structure(p: Vector2, b: Dictionary, preview: bool = false):
 
 var draw_profile={}
 func _draw():
+	var started=Metrics.start()
+	_draw_measured()
+	Metrics.finish("scene_draw",started)
+func _draw_measured():
 	var profile_started=Time.get_ticks_usec()
 	StoryView.stumps(self,get_canvas_transform().affine_inverse()*get_viewport_rect())
 	for cell in world.floors:

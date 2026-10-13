@@ -6,6 +6,7 @@ const WALL="biome_connections_v1/"
 const NODE="biome_environment_v2/rock_node/"
 const DAMAGE_KEYS=["biome_environment_v1/rock/damage/light.png","biome_environment_v1/rock/damage/heavy.png","biome_environment_v2/rock_node/wall_near_depleted_overlay.png"]
 static var clipped={}
+static var mineral_seams={}
 static var ground_source=null
 static var ground_kinds={}
 static var ground_offsets={}
@@ -48,6 +49,7 @@ static func rock(g,p: Vector2i):
 	if wall(w,p):
 		if not(mask(w,p)&4):Art.paint(g,NODE+"shadow_large.png",c+Vector2(0,14))
 		Art.paint(g,key,c)
+		static_seams(g,p,c)
 		for corner in inner(w,p):Art.paint(g,WALL+"inner/concave_"+corner+".png",c)
 		if level>0:g.draw_texture(clipped_damage(mask(w,p),level),(c-Vector2(24,33)).round())
 	else:
@@ -108,7 +110,15 @@ static func ground_layers(w,p: Vector2i) -> Array:
 static func cache_ground(w):
 	var token="%s:%s"%[w.terrain.get("version",0),w.terrain.seed]
 	if ground_source==w and ground_version==token:return
-	ground_source=w;ground_version=token;ground_kinds={};ground_offsets={}
+	ground_source=w;ground_version=token;ground_kinds={};ground_offsets={};mineral_seams.clear()
+static func prepare_ground(w):
+	cache_ground(w)
+	for y in range(w.H):
+		for x in range(w.W):
+			var p=Vector2i(x,y)
+			ground_kinds[p]=ground_layers(w,p)
+			if w.terrain.get("version",1)>=4 or ground_kinds[p]==["biome_environment_v2/rock_ground/pebbly_soil.png"]:
+				ground_offsets[p]=Vector2(floori(w.Biome.unit(w.terrain.seed,x,y,181)*17)-8,floori(w.Biome.unit(w.terrain.seed,x,y,191)*13)-6)
 static func ground(g,region: Rect2=Rect2()):
 	var w=g.world;cache_ground(w)
 	var visible=Rect2(Vector2.ZERO,Vector2(w.W,w.H)*g.TILE)
@@ -136,3 +146,21 @@ static func chips(g,p: Vector2i,age: float):
 	for i in range(4):
 		if age<durations[i]:Art.paint(g,"biome_environment_v1/rock/fx/chips_%02d.png"%i,g.center(p));return
 		age-=durations[i]
+
+static func static_seams(g,p,c):
+	var w=g.world;var key=[w.terrain.seed,p]
+	if not mineral_seams.has(key):
+		var dark=PackedVector2Array();var light=PackedVector2Array()
+		for i in range(3):
+			var x=floori(w.Biome.unit(w.seed_value,p.x,p.y,610+i)*29)-14
+			var y=floori(w.Biome.unit(w.seed_value,p.x,p.y,620+i)*17)-19
+			var q=Vector2(x,y)
+			# Interior only; never draw outside the delivered silhouette/doorway.
+			dark.append_array([q,q+Vector2(5,0),q+Vector2(5,0),q+Vector2(8,3)])
+			light.append_array([q+Vector2(0,2),q+Vector2(5,2)])
+		mineral_seams[key]=[dark,light]
+	var lines=mineral_seams[key]
+	g.draw_set_transform(c)
+	g.draw_multiline(lines[0],Color("9c9680"),1.0)
+	g.draw_multiline(lines[1],Color("c4bea6"),1.0)
+	g.draw_set_transform(Vector2.ZERO)
