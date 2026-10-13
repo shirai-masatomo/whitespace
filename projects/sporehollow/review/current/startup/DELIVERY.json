@@ -1,0 +1,240 @@
+{
+  "build": {
+    "asset_delivery_commit": "3229d2655e35e82d178577cdd8acbbe66e9be4f8",
+    "dirty": true,
+    "normal_data_unchanged": true,
+    "commit": "739de0e",
+    "native_lifecycle_checks": 10,
+    "implementation_commit": "739de0e",
+    "sha256": "B02ED1A538CE3F4478FEF6D2CA1A12CA6396B806A2B3CADD65B22F9AA45A0EEE",
+    "utc": "2026-10-13T13:57:57.0171346Z",
+    "automatically_launched": false
+  },
+  "tests": [
+    {
+      "suite": "loading.json",
+      "checks": [
+        {
+          "check": "Loading leaves world tick frozen and simulation disabled",
+          "passed": true
+        },
+        {
+          "check": "Loading rejects world keyboard input",
+          "passed": true
+        },
+        {
+          "check": "Loading leaves world tick frozen and simulation disabled",
+          "passed": true
+        },
+        {
+          "check": "Loading rejects world keyboard input",
+          "passed": true
+        },
+        {
+          "check": "Loading leaves world tick frozen and simulation disabled",
+          "passed": true
+        },
+        {
+          "check": "Loading rejects world keyboard input",
+          "passed": true
+        },
+        {
+          "check": "Loading leaves world tick frozen and simulation disabled",
+          "passed": true
+        },
+        {
+          "check": "Loading rejects world keyboard input",
+          "passed": true
+        },
+        {
+          "check": "Loading leaves world tick frozen and simulation disabled",
+          "passed": true
+        },
+        {
+          "check": "Loading rejects world keyboard input",
+          "passed": true
+        },
+        {
+          "check": "Loading leaves world tick frozen and simulation disabled",
+          "passed": true
+        },
+        {
+          "check": "Loading rejects world keyboard input",
+          "passed": true
+        },
+        {
+          "check": "Loading leaves world tick frozen and simulation disabled",
+          "passed": true
+        },
+        {
+          "check": "Loading rejects world keyboard input",
+          "passed": true
+        },
+        {
+          "check": "Preparation completes only after frozen initial draw",
+          "passed": true
+        },
+        {
+          "check": "New map is complete and controls enabled",
+          "passed": true
+        },
+        {
+          "check": "First-day merchant remains disabled",
+          "passed": true
+        },
+        {
+          "check": "Save fixture in isolated user-data",
+          "passed": true
+        },
+        {
+          "check": "Current map fixture available to native lifecycle test",
+          "passed": true
+        },
+        {
+          "check": "Loading leaves world tick frozen and simulation disabled",
+          "passed": true
+        },
+        {
+          "check": "Loading rejects world keyboard input",
+          "passed": true
+        },
+        {
+          "check": "Loading leaves world tick frozen and simulation disabled",
+          "passed": true
+        },
+        {
+          "check": "Loading rejects world keyboard input",
+          "passed": true
+        },
+        {
+          "check": "Loading leaves world tick frozen and simulation disabled",
+          "passed": true
+        },
+        {
+          "check": "Loading rejects world keyboard input",
+          "passed": true
+        },
+        {
+          "check": "Loading leaves world tick frozen and simulation disabled",
+          "passed": true
+        },
+        {
+          "check": "Loading rejects world keyboard input",
+          "passed": true
+        },
+        {
+          "check": "Loading leaves world tick frozen and simulation disabled",
+          "passed": true
+        },
+        {
+          "check": "Loading rejects world keyboard input",
+          "passed": true
+        },
+        {
+          "check": "Loading leaves world tick frozen and simulation disabled",
+          "passed": true
+        },
+        {
+          "check": "Loading rejects world keyboard input",
+          "passed": true
+        },
+        {
+          "check": "Loading leaves world tick frozen and simulation disabled",
+          "passed": true
+        },
+        {
+          "check": "Loading rejects world keyboard input",
+          "passed": true
+        },
+        {
+          "check": "Preparation completes only after frozen initial draw",
+          "passed": true
+        },
+        {
+          "check": "Normal startup restores existing map, stock, position and clock without advancing during loading",
+          "passed": true
+        },
+        {
+          "check": "Loading does not overwrite the existing save",
+          "passed": true
+        },
+        {
+          "check": "Simulation can advance after preparation",
+          "passed": true
+        }
+      ],
+      "failures": 0
+    },
+    {
+      "suite": "merchant-first-day.json",
+      "checks": [
+        {
+          "check": "Day 1 has no cart, bubble or interaction at tick 0",
+          "passed": true
+        },
+        {
+          "check": "Day 1 has no cart, bubble or interaction at tick 19",
+          "passed": true
+        },
+        {
+          "check": "Day 1 has no cart, bubble or interaction at tick 20",
+          "passed": true
+        },
+        {
+          "check": "Day 1 has no cart, bubble or interaction at tick 28",
+          "passed": true
+        },
+        {
+          "check": "Day 1 has no cart, bubble or interaction at tick 139",
+          "passed": true
+        },
+        {
+          "check": "Day 1 has no cart, bubble or interaction at tick 140",
+          "passed": true
+        },
+        {
+          "check": "Day 1 has no cart, bubble or interaction at tick 148",
+          "passed": true
+        },
+        {
+          "check": "Day 1 rejects negotiation with an accurate reason",
+          "passed": true
+        },
+        {
+          "check": "Day 1 starts neither arrival sound nor departure",
+          "passed": true
+        },
+        {
+          "check": "Save the current 100x68 world for separate-process EXE verification",
+          "passed": true
+        },
+        {
+          "check": "Restoring day 1 does not restore a merchant visit",
+          "passed": true
+        },
+        {
+          "check": "Actual dawn crossing schedules day 2 without an immediate arrival",
+          "passed": true
+        },
+        {
+          "check": "Day 2 still waits five seconds",
+          "passed": true
+        },
+        {
+          "check": "Day 2 cart animation starts from its own arrival tick",
+          "passed": true
+        },
+        {
+          "check": "Day 2 cart remains visible after arrival",
+          "passed": true
+        },
+        {
+          "check": "Day 2 leaves after its normal 30-second stay",
+          "passed": true
+        }
+      ],
+      "failures": 0
+    }
+  ],
+  "visual_source": "after-isolation.json holds exact measured source hashes; final code also preserves the existing isolated onsite review entry."
+}

@@ -1,16 +1,11 @@
-# 最新レビュー：初日の商人停止
+# 最新レビュー：起動準備とローディング
 
-通常EXE `64eae4d`。初日の商人来訪を停止、2日目以降は維持。起動直後の重さは未解消として切り分け中。[今回の変更・検査](ground_scroll/REPORT.md)。
+実装・通常EXE `739de0e`。作業ブランチ `codex/sporehollow-biome01`。
 
-## 前回：地表表現・スクロール性能
+- [起動負荷の内訳・変更・検証・残課題](startup/REPORT.md)
+- [ローディングの実画面](startup/loading.png) / [準備後](startup/after-ready.png)
+- [配布EXE・テスト結果](startup/DELIVERY.json)
 
-実装・通常EXE：`cb8a133427593abe65a01822ed127872df131f5f`。ブランチ `codex/sporehollow-biome01`。
+素材・マップ・音・初期描画の準備完了まで入力と世界時間を止める。初日の商人停止は維持。通常の起動入口は同じ。起動後の重さを全環境で解消したとは扱わない。
 
-- [変更・検証・残課題](ground_scroll/REPORT.md)
-- [3seedの修正前後・連続スクロール](ground_scroll/SCREENS.md)
-- [60fpsで3回の性能比較](ground_scroll/PERFORMANCE.md)
-- [配布EXEと撮影ソース照合](ground_scroll/DELIVERY.json)
-
-最新開発版の起動入口は同じショートカット。旧セーブの地形は保持、新景観は新規開始で確認。
-
-前回：[地形・100件・ドラッグ](terrain_quality/REPORT.md)、[分類別選択](selection_controls/REPORT.md)。
+前回：[初日商人停止・地表とスクロール](ground_scroll/REPORT.md)、[分類別選択](selection_controls/REPORT.md)。
