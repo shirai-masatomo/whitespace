@@ -1,0 +1,20 @@
+{
+  "project_mib": 1010.2,
+  "commit": "caf02f8",
+  "rollback_reference": "a519450",
+  "failures": 0,
+  "github_push": "blocked_by_approval_review",
+  "freeze_resolution": "unconfirmed",
+  "session_only": true,
+  "exe": "artifacts/autonomy-entry-01/bundle/WhistleRanch-Autonomy-Partial.exe",
+  "export_smoke": "passed_headless_Dummy",
+  "removed_diagnostic_bytes": 27125955,
+  "diagnostics_removed": true,
+  "headless_checks": 38,
+  "entry": "確認入口/最新開発版.lnk",
+  "sha256": "BFD152F5E5EC0A465C0BA35550A25F1D68F161E3C83DD335FEE3125B21CE668F",
+  "utc": "2026-10-13T15:39:20.7373403Z",
+  "asset_delivery_commit": "3229d2655e35e82d178577cdd8acbbe66e9be4f8",
+  "old_saves": "not_read_or_written_or_deleted",
+  "native_gpu_launch_performed": false
+}
