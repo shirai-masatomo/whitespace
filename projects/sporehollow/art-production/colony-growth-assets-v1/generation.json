@@ -1,0 +1,22 @@
+{
+  "tool": "builtin_imagegen",
+  "mode": "precise-object-edit",
+  "reference": "C:/Users/masat/.codex/worktrees/sporehollow-art/codex_test/projects/sporehollow/art-production/colony-growth-previews-v2/references/goldA_nearest6.png",
+  "variants": [
+    {
+      "state": "light",
+      "prompt": "Use case precise-object-edit. Edit the supplied exact adopted gold idol sprite. Output one single sprite on actual transparent RGBA background, no text or sheet. Preserve the recognizable horned frog-like gold idol with huge dark vertical oval mouth, eyes, bent arms on stepped rectangular pedestal. SAME viewpoint, proportions, footprint, light from upper left, warm rustic crisp pixel-art style, chunky pixel density. Original logical canvas 144x160, enlarged reference 864x960. Keep canvas framing and pedestal bottom registration identical. Do not invent face, symbols, new objects or background. LIGHT DAMAGE: small but clearly visible dark branching crack across upper left shoulder and pedestal, tip of one horn chipped, tiny side chip. Still upright, most gold intact. Keep exact original face and mouth shape. Show loss of a few silhouette pixels only, no major collapse.",
+      "path": "C:\\Users\\masat\\.codex\\generated_images\\01a1062f-6339-7812-baec-d517611755ca\\exec-9ed0b32a-eb33-4cf1-b500-77d1997de84c.png"
+    },
+    {
+      "state": "medium",
+      "prompt": "Use case precise-object-edit. Edit the supplied exact adopted gold idol sprite. Output one single sprite on actual transparent RGBA background, no text or sheet. Preserve the recognizable horned frog-like gold idol with huge dark vertical oval mouth, eyes, bent arms on stepped rectangular pedestal. SAME viewpoint, proportions, footprint, light from upper left, warm rustic crisp pixel-art style, chunky pixel density. Original logical canvas 144x160, enlarged reference 864x960. Keep canvas framing and pedestal bottom registration identical. Do not invent face, symbols, new objects or background. MEDIUM DAMAGE: left tall horn broken halfway, broken edge on right forearm and front pedestal corner, several wide branching dark fissures across shoulder and body. Gold moderately tarnished but still warm gold. Upright, same identifiable face and mouth, substantial silhouette chunks absent. Visibly worse than hairline crack, no rubble hiding base.",
+      "path": "C:\\Users\\masat\\.codex\\generated_images\\01a1062f-6339-7812-baec-d517611755ca\\exec-419d87e2-4ebf-4782-9333-ecb503dd7102.png"
+    },
+    {
+      "state": "heavy",
+      "prompt": "Use case precise-object-edit. Edit the supplied exact adopted gold idol sprite. Output one single sprite on actual transparent RGBA background, no text or sheet. Preserve the recognizable horned frog-like gold idol with huge dark vertical oval mouth, eyes, bent arms on stepped rectangular pedestal. SAME viewpoint, proportions, footprint, light from upper left, warm rustic crisp pixel-art style, chunky pixel density. Original logical canvas 144x160, enlarged reference 864x960. Keep canvas framing and pedestal bottom registration identical. Do not invent face, symbols, new objects or background. HEAVY DAMAGE / DANGER: both horn tips broken, left horn mostly missing, large chunk missing from outer right arm, broad structural fissure across left torso and pedestal, body leaning slightly left above SAME unmoved pedestal footprint. Same large oval mouth and gold frog idol identity. Dull gold, little shine, small fallen gold fragment directly on pedestal. Clearly near collapse at small size, but NOT totally collapsed, no new characters.",
+      "path": "C:\\Users\\masat\\.codex\\generated_images\\01a1062f-6339-7812-baec-d517611755ca\\exec-56e4ab1f-30f9-42a6-9aab-6929f04ca10a.png"
+    }
+  ]
+}
