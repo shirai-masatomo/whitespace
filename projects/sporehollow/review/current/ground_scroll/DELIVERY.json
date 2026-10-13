@@ -1,0 +1,16 @@
+{
+  "asset_delivery_commit": "3229d2655e35e82d178577cdd8acbbe66e9be4f8",
+  "normal_data_unchanged": true,
+  "native_lifecycle_checks": 10,
+  "sha256": "F8A00927C847639382690FBDA71B62F35411D8D673EAC58D32E94F82C33914F8",
+  "automatically_launched": false,
+  "utc": "2026-10-13T13:18:18.4653998Z",
+  "dirty": true,
+  "commit": "cb8a133",
+  "implementation_commit": "cb8a133427593abe65a01822ed127872df131f5f",
+  "rendered_source_matches": true,
+  "render_source_files": 88,
+  "review_base_commit": "54c447b4fe16bd312ce54b4bfa43b6875504da23",
+  "executable": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\autonomy-entry-01\\bundle\\WhistleRanch-Autonomy-Partial.exe",
+  "note": "Capture occurred before the final commit; every .gd/.gdshader SHA256 matches the committed implementation. Existing unrelated import metadata explains dirty=true."
+}

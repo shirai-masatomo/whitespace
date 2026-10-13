@@ -1,0 +1,146 @@
+[
+  {
+    "phase": "startup",
+    "version": "before",
+    "n": 887,
+    "mean": 16.935860202931227,
+    "p95": 19.996,
+    "p99": 20.978,
+    "max": 125.342,
+    "over25": 3,
+    "over50": 3,
+    "cpu_max": {
+      "main": 2.472,
+      "nature": 0.022,
+      "ground_sync": 1.427,
+      "chunk_draw": 96.341,
+      "scene_draw": 4.753
+    }
+  },
+  {
+    "phase": "startup",
+    "version": "after",
+    "n": 905,
+    "mean": 16.600742541436464,
+    "p95": 19.861,
+    "p99": 20.696,
+    "max": 22.763,
+    "over25": 0,
+    "over50": 0,
+    "cpu_max": {
+      "main": 2.311,
+      "nature": 0.022,
+      "ground_sync": 0.534,
+      "chunk_draw": 2.959,
+      "scene_draw": 4.258
+    }
+  },
+  {
+    "phase": "normal",
+    "version": "before",
+    "n": 884,
+    "mean": 17.020072398190045,
+    "p95": 20.995,
+    "p99": 30.223,
+    "max": 105.655,
+    "over25": 15,
+    "over50": 6,
+    "cpu_max": {
+      "main": 88.071,
+      "nature": 87.456,
+      "ground_sync": 1.005,
+      "chunk_draw": 10.838,
+      "scene_draw": 6.62
+    }
+  },
+  {
+    "phase": "normal",
+    "version": "after",
+    "n": 901,
+    "mean": 16.682247502774693,
+    "p95": 20.262,
+    "p99": 21.881,
+    "max": 23.894,
+    "over25": 0,
+    "over50": 0,
+    "cpu_max": {
+      "main": 2.827,
+      "nature": 0.227,
+      "ground_sync": 0.745,
+      "chunk_draw": 1.318,
+      "scene_draw": 6.459
+    }
+  },
+  {
+    "phase": "fast",
+    "version": "before",
+    "n": 900,
+    "mean": 16.691903333333332,
+    "p95": 22.892,
+    "p99": 25.084,
+    "max": 51.118,
+    "over25": 11,
+    "over50": 2,
+    "cpu_max": {
+      "main": 2.03,
+      "nature": 0.02,
+      "ground_sync": 0.978,
+      "chunk_draw": 32.09,
+      "scene_draw": 6.935
+    }
+  },
+  {
+    "phase": "fast",
+    "version": "after",
+    "n": 902,
+    "mean": 16.66680931263858,
+    "p95": 22.381,
+    "p99": 24.501,
+    "max": 26.383,
+    "over25": 4,
+    "over50": 0,
+    "cpu_max": {
+      "main": 2.39,
+      "nature": 0.021,
+      "ground_sync": 0.685,
+      "chunk_draw": 4.511,
+      "scene_draw": 7.302
+    }
+  },
+  {
+    "phase": "boundaries",
+    "version": "before",
+    "n": 903,
+    "mean": 16.647959025470655,
+    "p95": 21.195,
+    "p99": 24.459,
+    "max": 36.617,
+    "over25": 9,
+    "over50": 0,
+    "cpu_max": {
+      "main": 1.725,
+      "nature": 0.018,
+      "ground_sync": 1.209,
+      "chunk_draw": 18.447,
+      "scene_draw": 6.375
+    }
+  },
+  {
+    "phase": "boundaries",
+    "version": "after",
+    "n": 903,
+    "mean": 16.64308527131783,
+    "p95": 20.868,
+    "p99": 22.504,
+    "max": 23.843,
+    "over25": 0,
+    "over50": 0,
+    "cpu_max": {
+      "main": 1.926,
+      "nature": 0.022,
+      "ground_sync": 0.51,
+      "chunk_draw": 4.033,
+      "scene_draw": 7.472
+    }
+  }
+]

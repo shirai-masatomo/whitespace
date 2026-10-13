@@ -1,10 +1,10 @@
 # 現在の実装状態（2026-10-13）
 
-今回の地形品質改善：連続岩盤と砂利の移行、地域境界の揺らぎ、大岩山の減数・反転、土／砂／粘土地表、生成・描画キャッシュの軽量化、指定100件、UIをまたぐ選択ドラッグを実装。新規3seed・旧地形保存・100件・入力端・岩山の関連試験は合格。隔離GPU・通常EXE反映・保存再開も完了。最終結果は [terrain_quality/REPORT.md](review/current/terrain_quality/REPORT.md) へ集約。
+地表v5：土基礎の固定ピクセル模様、岩場寄りの青灰粘土、連続岩盤を実装。区画形状の事前準備と自然物候補の再利用でスクロール遅延を改善。関連310検査、最終EXEで旧／新セーブの起動終了再開10検査合格。冷間起動・低い岩壁の外形は残課題。[最終結果](review/current/ground_scroll/REPORT.md)。
 
 今回の操作変更：ニュートラルの左ドラッグは最初に囲んだ分類だけを最大8対象まで選択。徴兵中は敵の選択と対象付近の「攻撃」での確定を分離。動物の共通指示画面は複数選択を保持。地図移動はWASD、未選択時のホイールはズームを維持。保存済み地形は再生成せず保持。関連入力59検査合格、GPU・配布結果は [操作修正報告](review/current/selection_controls/REPORT.md) に記録。
 
-作業ブランチ：`codex/sporehollow-biome01`。現在の品質修正・テスト・配布の対応は [review/current/terrain_quality/REPORT.md](review/current/terrain_quality/REPORT.md)。過去のSHAを最新と混同しないこと。配布結果は同フォルダのDELIVERY.jsonが正本。
+作業ブランチ：`codex/sporehollow-biome01`。現在の品質修正・テスト・配布の対応は [review/current/ground_scroll/REPORT.md](review/current/ground_scroll/REPORT.md)。過去のSHAを最新と混同しないこと。配布結果は同フォルダのDELIVERY.jsonが正本。
 
 ## 実装済み
 
