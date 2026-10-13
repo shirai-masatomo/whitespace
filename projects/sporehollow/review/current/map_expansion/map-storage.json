@@ -1,0 +1,64 @@
+{
+  "checks": [
+    {
+      "check": "39 occupied: deliver only one, seven stay at source",
+      "passed": true
+    },
+    {
+      "check": "Full storage retains blocked designation with clear reason",
+      "passed": true
+    },
+    {
+      "check": "Full storage does not repeatedly pickup/drop or travel",
+      "passed": true
+    },
+    {
+      "check": "Adding another zone automatically resumes remaining seven",
+      "passed": true
+    },
+    {
+      "check": "39 free: normal carry-eight completes",
+      "passed": true
+    },
+    {
+      "check": "Completely full: no pickup",
+      "passed": true
+    },
+    {
+      "check": "Consumption frees reserved capacity and resumes automatically",
+      "passed": true
+    },
+    {
+      "check": "Two workers cannot double-book the last free slot or lose goods",
+      "passed": true
+    },
+    {
+      "check": "Two workers finish after expansion across multiple cells",
+      "passed": true
+    },
+    {
+      "check": "Same-kind consolidation outranks nearer empty cell",
+      "passed": true
+    },
+    {
+      "check": "Real worker picked up eight for save fixture",
+      "passed": true
+    },
+    {
+      "check": "Destination capacity reservation survives snapshot",
+      "passed": true
+    },
+    {
+      "check": "Restored carrier delivers once with exact totals",
+      "passed": true
+    },
+    {
+      "check": "Filter mismatch has distinct waiting reason",
+      "passed": true
+    },
+    {
+      "check": "Allowing material resumes waiting haul",
+      "passed": true
+    }
+  ]
+}

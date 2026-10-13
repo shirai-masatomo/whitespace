@@ -1,0 +1,5 @@
+{
+  "method": "CRLF and cmd.exe present/missing mock files; no game launch",
+  "checks": 3,
+  "passed": true
+}

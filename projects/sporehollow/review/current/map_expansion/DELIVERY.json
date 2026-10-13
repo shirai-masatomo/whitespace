@@ -1,0 +1,24 @@
+{
+  "normal_data_unchanged": true,
+  "asset_delivery_commit": "3229d2655e35e82d178577cdd8acbbe66e9be4f8",
+  "automatically_launched": false,
+  "utc": "2026-10-13T10:22:52.1010228Z",
+  "commit": "2609239",
+  "native_lifecycle_checks": 10,
+  "dirty": true,
+  "implementation_commit": "2609239",
+  "sha256": "2FE60C321EF1B1BD835D6129897EBCE1184F27FB167BC0538C28D0934F23FB51",
+  "implementation_commit_full": "260923924abe952f4ff2befe61831c80f8ab6e77",
+  "review_source_commit": "260923924abe952f4ff2befe61831c80f8ab6e77",
+  "new_map": [
+    100,
+    68
+  ],
+  "legacy_save_map": [
+    50,
+    34
+  ],
+  "source_tree_note": "Godot再生成メタデータが既存作業ツリーにあるためdirty=true。今回のgame/*.gdは記録した実装コミットと一致。",
+  "screens": "SCREENS.md",
+  "tests": "TESTS.md"
+}

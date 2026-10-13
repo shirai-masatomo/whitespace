@@ -1,18 +1,14 @@
-# 最新レビュー：総合品質改善
+# 最新レビュー：マップ・操作・物流の統合修正
 
-[修正・関連テスト・修正前後・未完了](quality/README.md)。作業ブランチは`codex/sporehollow-biome01`。素材3229d26を維持。通常EXEの反映結果は [DELIVERY.json](quality/DELIVERY.json) で確認してください。
+実装 `260923924abe952f4ff2befe61831c80f8ab6e77`、ブランチ `codex/sporehollow-biome01`。
 
-## 今回の確認ポイント
+- [変更結果・仮設定・残る差](map_expansion/REPORT.md)
+- [今回の実ゲーム36画面・連続12フレーム](map_expansion/SCREENS.md)
+- [関連テスト・新旧EXE保存復帰](map_expansion/TESTS.md)
+- [試遊EXE・素材・コード対応](map_expansion/DELIVERY.json)
 
-動物の選択描画、3匹／9匹の管理、人物情報と徴兵、像の操作、購入後の総所有数と備蓄、通路閉塞時の待機と再開。通常条件の3日間×2方針は自動観測で、人間の快適さや面白さの合格判定とは分けています。
+新規100×68、旧セーブ50×34維持。通常入口は確認入口/最新開発版.lnkの1本。既存セーブを読み込むと旧サイズのままです。
 
-## 比較原本と以前の実装
+人間の長時間の快適さ・面白さ、多数人FPSは自動技術検証と区別。拡充ロードマップ0〜11には未着手。
 
-- [修正前64画面・現行仕様調査](ui_survey/README.md)
-- [大岩山／小岩山](mountains/REPORT.md)
-- [採掘／伐採演出](harvest/REPORT.md)
-- [連続岩壁の正式素材](rock_connections/REPORT.md)
-- [地形生成](terrain_generation/REPORT.md)
-- [仕事・物流の前回引継ぎ](HANDOFF.md)
-
-通常の試遊入口は `確認入口/最新開発版.lnk` の1つ。過去資料に記載された配布SHAを現在の最新版と解釈しないこと。
+以前の証拠：[総合品質改善](quality/README.md)、[修正前64画面](ui_survey/README.md)、[岩山](mountains/REPORT.md)、[仕事物流引継ぎ](HANDOFF.md)。

@@ -1,0 +1,32 @@
+{
+  "checks": [
+    {
+      "check": "Plans accepted outside former 50x34 extent",
+      "passed": true
+    },
+    {
+      "check": "Real hauling and assembly complete three structures at far corner",
+      "passed": true
+    },
+    {
+      "check": "New outer corner routes around completed walls",
+      "passed": true
+    },
+    {
+      "check": "Actual enemy attack destroys wall and frees its logical cell",
+      "passed": true
+    },
+    {
+      "check": "Storage resize changes actual destination cells",
+      "passed": true
+    },
+    {
+      "check": "Zone removal removes destinations only",
+      "passed": true
+    },
+    {
+      "check": "Retreat path permits exactly the adjacent new outer exit",
+      "passed": true
+    }
+  ]
+}

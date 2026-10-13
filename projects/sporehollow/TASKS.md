@@ -1,6 +1,6 @@
 # 現在のタスク
 
-最新報告：[総合品質改善](review/current/quality/README.md)。過去の完了ログはreviewとGit履歴へ。
+最新報告：[マップ統合修正](review/current/map_expansion/README.md)。過去の完了ログはreviewとGit履歴へ。
 
 ## 今回の対応
 
@@ -51,4 +51,4 @@
 - 正式壁16接続の1マス表示、混在素材・ドア・破壊更新。
 - 関連試験、実GPU画像、統合・EXE再開検証、通常EXE反映、GitHub保存、後片付け。
 
-各項の結果は map_expansion/REPORT.md へ集約。新ロードマップ項番へは自動着手しない。
+実装・関連技術検証・配布済み。各項の結果は [map_expansion/REPORT.md](review/current/map_expansion/REPORT.md) へ集約。人間の操作感・多人数負荷は未判定。新ロードマップ項番へは自動着手しない。

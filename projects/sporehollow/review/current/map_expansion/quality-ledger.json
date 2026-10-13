@@ -1,0 +1,65 @@
+{
+  "checks": [
+    {
+      "check": "40 stored: total/stored/available agree",
+      "passed": true
+    },
+    {
+      "check": "Eight claimed is a subset, not extra ownership",
+      "passed": true
+    },
+    {
+      "check": "Two workers cannot reserve more than actual stack",
+      "passed": true
+    },
+    {
+      "check": "Pickup moves eight into carry, total unchanged",
+      "passed": true
+    },
+    {
+      "check": "Delivered material is counted on site once",
+      "passed": true
+    },
+    {
+      "check": "Construction consumes delivered eight once",
+      "passed": true
+    },
+    {
+      "check": "Production shop purchase succeeds",
+      "passed": true
+    },
+    {
+      "check": "Bought materials appear immediately in total ownership and remain outside storage",
+      "passed": true
+    },
+    {
+      "check": "Sell consumes exactly the existing set",
+      "passed": true
+    },
+    {
+      "check": "Animal priority controls actual completed training, enabled=false",
+      "passed": true
+    },
+    {
+      "check": "Animal priority controls actual completed training, enabled=true",
+      "passed": true
+    },
+    {
+      "check": "Transport had physically picked up eight before the other worker blocked its route",
+      "passed": true
+    },
+    {
+      "check": "Blocked transport retains the exact eight goods and job",
+      "passed": true
+    },
+    {
+      "check": "Worker blocking a one-cell passage causes stable waiting with a reason, not oscillation",
+      "passed": true
+    },
+    {
+      "check": "Clearing the actor obstruction resumes and delivers without manual reset",
+      "passed": true
+    }
+  ],
+  "passed": true
+}

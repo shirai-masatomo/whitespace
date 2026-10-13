@@ -1,0 +1,122 @@
+{
+	"checks": [
+		{
+			"check": "Initial stocked material is information-only and cannot create a pointless hauling loop",
+			"passed": true
+		},
+		{
+			"check": "Actual ordinary click selects material without scheduling collection",
+			"passed": true
+		},
+		{
+			"check": "Selected material exposes an explicit collection button",
+			"passed": true
+		},
+		{
+			"check": "Only the explicit action schedules collection while paused",
+			"passed": true
+		},
+		{
+			"check": "Selecting the object again does not duplicate the designation",
+			"passed": true
+		},
+		{
+			"check": "Command single click forbids a real item",
+			"passed": true
+		},
+		{
+			"check": "Allow restores permission without registering another haul",
+			"passed": true
+		},
+		{
+			"check": "Rectangle forbid applies to both items",
+			"passed": true
+		},
+		{
+			"check": "Rectangle allow restores both items without hauling",
+			"passed": true
+		},
+		{
+			"check": "Rectangle collection schedules exactly the new two item jobs",
+			"passed": true
+		},
+		{
+			"check": "Single clear cancels work without removing goods",
+			"passed": true
+		},
+		{
+			"check": "Rectangle clear cancels pending work and keeps goods",
+			"passed": true
+		},
+		{
+			"check": "Panel has real input controls: 0",
+			"passed": true
+		},
+		{
+			"check": "Right click over panel consumes press/release and preserves confirmed work: 0",
+			"passed": true
+		},
+		{
+			"check": "Panel has real input controls: 1",
+			"passed": true
+		},
+		{
+			"check": "Right click over panel consumes press/release and preserves confirmed work: 1",
+			"passed": true
+		},
+		{
+			"check": "Panel has real input controls: 4",
+			"passed": true
+		},
+		{
+			"check": "Right click over panel consumes press/release and preserves confirmed work: 4",
+			"passed": true
+		},
+		{
+			"check": "Right click over zone button returns neutral without cancelling work",
+			"passed": true
+		},
+		{
+			"check": "Role table has adopted portrait, name and priority cells",
+			"passed": true
+		},
+		{
+			"check": "Role cell changes actual worker policy through the GUI input route",
+			"passed": true
+		},
+		{
+			"check": "Architect keeps center clear at logical viewport (1280, 800)",
+			"passed": true
+		},
+		{
+			"check": "Architect category/tool controls do not overlap or exceed footer: (1280, 800)",
+			"passed": true
+		},
+		{
+			"check": "Animal table has real HP bar and adopted icon: (1280, 800)",
+			"passed": true
+		},
+		{
+			"check": "Animal list shares the instruction entry, not duplicated orders",
+			"passed": true
+		},
+		{
+			"check": "Architect keeps center clear at logical viewport (1920, 1080)",
+			"passed": true
+		},
+		{
+			"check": "Architect category/tool controls do not overlap or exceed footer: (1920, 1080)",
+			"passed": true
+		},
+		{
+			"check": "Animal table has real HP bar and adopted icon: (1920, 1080)",
+			"passed": true
+		},
+		{
+			"check": "Animal list shares the instruction entry, not duplicated orders",
+			"passed": true
+		}
+	],
+	"failures": 0,
+	"method": "Real Godot InputEvent routes and Control layout on headless viewport; no GPU images or OS input claim"
+}

@@ -1,0 +1,135 @@
+{
+  "checks": [
+    {
+      "check": "New map dimensions: 31",
+      "passed": true
+    },
+    {
+      "check": "Central initial actors and idol: 31",
+      "passed": true
+    },
+    {
+      "check": "Five broad regions, forest/rock connected areas >=100 cells: 31",
+      "passed": true
+    },
+    {
+      "check": "All corners and edge midpoints connected and valid exits: 31",
+      "passed": true
+    },
+    {
+      "check": "Enemy and merchant entries connected: 31",
+      "passed": true
+    },
+    {
+      "check": "New map saves",
+      "passed": true
+    },
+    {
+      "check": "100x68 snapshot restores exact terrain/resources/work",
+      "passed": true
+    },
+    {
+      "check": "New map dimensions: 73",
+      "passed": true
+    },
+    {
+      "check": "Central initial actors and idol: 73",
+      "passed": true
+    },
+    {
+      "check": "Five broad regions, forest/rock connected areas >=100 cells: 73",
+      "passed": true
+    },
+    {
+      "check": "All corners and edge midpoints connected and valid exits: 73",
+      "passed": true
+    },
+    {
+      "check": "Enemy and merchant entries connected: 73",
+      "passed": true
+    },
+    {
+      "check": "New map dimensions: 109",
+      "passed": true
+    },
+    {
+      "check": "Central initial actors and idol: 109",
+      "passed": true
+    },
+    {
+      "check": "Five broad regions, forest/rock connected areas >=100 cells: 109",
+      "passed": true
+    },
+    {
+      "check": "All corners and edge midpoints connected and valid exits: 109",
+      "passed": true
+    },
+    {
+      "check": "Enemy and merchant entries connected: 109",
+      "passed": true
+    },
+    {
+      "check": "Actual old snapshot retains 50x34 bounds",
+      "passed": true
+    }
+  ],
+  "regions": [
+    {
+      "area": {
+        "dry": 315,
+        "lush": 2514,
+        "open": 2930,
+        "rocky": 537,
+        "woodland": 504
+      },
+      "largest_connected": {
+        "dry": 315,
+        "lush": 952,
+        "open": 2889,
+        "rocky": 537,
+        "woodland": 504
+      },
+      "mountains": 16,
+      "seed": 31,
+      "trees": 61
+    },
+    {
+      "area": {
+        "dry": 368,
+        "lush": 1390,
+        "open": 4049,
+        "rocky": 523,
+        "woodland": 470
+      },
+      "largest_connected": {
+        "dry": 368,
+        "lush": 497,
+        "open": 4049,
+        "rocky": 523,
+        "woodland": 470
+      },
+      "mountains": 16,
+      "seed": 73,
+      "trees": 39
+    },
+    {
+      "area": {
+        "dry": 435,
+        "lush": 1438,
+        "open": 3998,
+        "rocky": 428,
+        "woodland": 501
+      },
+      "largest_connected": {
+        "dry": 435,
+        "lush": 1027,
+        "open": 3962,
+        "rocky": 428,
+        "woodland": 501
+      },
+      "mountains": 16,
+      "seed": 109,
+      "trees": 47
+    }
+  ]
+}

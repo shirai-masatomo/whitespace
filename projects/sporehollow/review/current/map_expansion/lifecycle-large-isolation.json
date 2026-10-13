@@ -1,0 +1,56 @@
+[
+  {
+    "phase": "close",
+    "command": "\"C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\validation\\current\\WhistleRanch-test.exe\" --audio-driver Dummy --rendering-method gl_compatibility --max-fps 30 --resolution 1280x800 --log-file \"C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\validation\\current\\lifecycle-large/close.log\" -- --isolated-review --review-cycle-entry",
+    "sha256": "2FE60C321EF1B1BD835D6129897EBCE1184F27FB167BC0538C28D0934F23FB51",
+    "result": {
+      "PID": 24388,
+      "ThreadID": 13304,
+      "ExitCode": 0,
+      "OwnedWindowCount": 2,
+      "Station": "Service-0x0-bf6d9650$",
+      "Desktop": "Render_4792eaefc2ce471291b97e1d0376ac00",
+      "ObservedDesktop": "Render_4792eaefc2ce471291b97e1d0376ac00",
+      "NonInteractive": true,
+      "DesktopMatched": true,
+      "TimedOut": false,
+      "OwnedWindows": [
+        "EngineWGLDetect: ",
+        "NVOpenGLPbuffer: __wglDummyWindowFodder",
+        "Engine: ",
+        "Engine: ホイッスル牧場・最新開発版（部分実装）"
+      ]
+    },
+    "end_utc": "2026-10-13T10:22:41.3140067Z",
+    "executable": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\validation\\current\\WhistleRanch-test.exe",
+    "start_utc": "2026-10-13T10:22:30.8611836Z",
+    "data_root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\validation\\current\\lifecycle-large/user-data"
+  },
+  {
+    "phase": "resume",
+    "command": "\"C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\validation\\current\\WhistleRanch-test.exe\" --audio-driver Dummy --rendering-method gl_compatibility --max-fps 30 --resolution 1280x800 --log-file \"C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\validation\\current\\lifecycle-large/resume.log\" -- --isolated-review --review-cycle-entry --resume-cycle-entry",
+    "sha256": "2FE60C321EF1B1BD835D6129897EBCE1184F27FB167BC0538C28D0934F23FB51",
+    "result": {
+      "PID": 17524,
+      "ThreadID": 35604,
+      "ExitCode": 0,
+      "OwnedWindowCount": 2,
+      "Station": "Service-0x0-bf6d9650$",
+      "Desktop": "Render_5241013af91442f4955e9a9ed55a2139",
+      "ObservedDesktop": "Render_5241013af91442f4955e9a9ed55a2139",
+      "NonInteractive": true,
+      "DesktopMatched": true,
+      "TimedOut": false,
+      "OwnedWindows": [
+        "EngineWGLDetect: ",
+        "NVOpenGLPbuffer: __wglDummyWindowFodder",
+        "Engine: ",
+        "Engine: ホイッスル牧場・最新開発版（部分実装）"
+      ]
+    },
+    "end_utc": "2026-10-13T10:22:51.0281611Z",
+    "executable": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\validation\\current\\WhistleRanch-test.exe",
+    "start_utc": "2026-10-13T10:22:41.4932150Z",
+    "data_root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\validation\\current\\lifecycle-large/user-data"
+  }
+]

@@ -1,0 +1,17 @@
+{
+  "biome-compat.json": "a1dffa9",
+  "integrated-input.json": "2609239",
+  "integrated-work.json": "a1dffa9",
+  "launcher.json": "2609239",
+  "map-actions.json": "a1dffa9",
+  "map-expansion.json": "2609239",
+  "map-storage.json": "a1dffa9",
+  "mountains.json": "a1dffa9",
+  "quality-ledger.json": "a1dffa9",
+  "lifecycle-close-entry.json": "2609239",
+  "lifecycle-isolation.json": "2609239",
+  "lifecycle-resume-entry.json": "2609239",
+  "lifecycle-large-close-entry.json": "2609239",
+  "lifecycle-large-isolation.json": "2609239",
+  "lifecycle-large-resume-entry.json": "2609239"
+}
