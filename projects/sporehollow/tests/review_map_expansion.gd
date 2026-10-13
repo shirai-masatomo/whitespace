@@ -92,7 +92,9 @@ func run():
 	var scroll=g.colony_panel.find_child("AnimalScroll",true,false)
 	for i in range(5):await mouse(scroll.get_global_rect().get_center(),MOUSE_BUTTON_WHEEL_DOWN)
 	check(scroll.scroll_vertical>0 and g.group==1,"List consumes scroll without changing commands")
-	g.neutral();await view(Vector2i(50,36));w.Zones.create(w,"stockpile",Vector2i(52,34),Vector2i(55,36));w.Zones.create(w,"residential",Vector2i(52,38),Vector2i(55,40));w.Stock.add(w,"wood",8,Vector2i(46,37));w.Stock.add(w,"stone",12,Vector2i(46,37));w.Stock.add(w,"egg",2,Vector2i(46,37));await mouse(g.get_canvas_transform()*g.center(Vector2i(46,37)));await shot("zones_items","連続ゾーンと物資の名称・数量")
+	g.neutral();await view(Vector2i(50,36));w.Zones.create(w,"stockpile",Vector2i(52,34),Vector2i(55,36));w.Zones.create(w,"residential",Vector2i(52,38),Vector2i(55,40));w.Stock.add(w,"wood",8,Vector2i(46,37));w.Stock.add(w,"stone",12,Vector2i(46,37));w.Stock.add(w,"egg",2,Vector2i(46,37));await mouse(g.get_canvas_transform()*g.center(Vector2i(46,37)))
+	var stock_lines=g.selected_stock_details();check("卵 ×2" in stock_lines and "木材 ×8" in stock_lines and "石 ×12" in stock_lines,"Selection retains every item kind and count without hover")
+	var off=InputEventMouseMotion.new();off.position=Vector2(1050,170);root.push_input(off);await process_frame;await shot("zones_items","連続ゾーンと物資の名称・数量（ホバーなし）")
 	g.neutral();w.structures.clear();w.floors.clear();w.natural.clear();w.field_items.clear();w.zones.clear();w.Zones.sync_storage(w);w.animals.clear();w.keeper.pos=Vector2i(40,32);w.story.idol.position=[30,30]
 	for mask in range(16):
 		var p=Vector2i(43+(mask%4)*4,27+(mask/4)*4);var cells=[p]

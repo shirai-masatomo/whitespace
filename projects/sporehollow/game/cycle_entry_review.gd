@@ -6,13 +6,17 @@ func run():
 	var g=get_parent();var out=OS.get_environment("FARM_REVIEW_OUTPUT");var resume="--resume-cycle-entry" in OS.get_cmdline_user_args();var checks=[]
 	if g.story_modal!="":g.StoryView.close(g)
 	if not resume:
-		g.world=g.Farm.Snapshot.restore(out+"/fixture.snapshot");g.world.paused=true;g.world.market_open=true
+		g.world=g.Farm.Snapshot.restore(out+"/fixture.snapshot");g.world.paused=true;g.world.market_open=true;g.world.story.intro_seen=true;g.world.Story.persist(g.world)
 		var expected=summary(g.world).duplicate(true);FileAccess.open(out+"/expected-entry.bin",FileAccess.WRITE).store_var(expected,false)
 		g.notification(NOTIFICATION_WM_CLOSE_REQUEST)
 		var saved=g.Farm.Snapshot.restore(g.development_save_path)
 		checks.append({"check":"Normal window-close handler saved all fixture state and cleared the transient market pause on restore","passed":saved!=null and summary(saved)==expected and not saved.market_open})
 	else:
 		var expected=FileAccess.open(out+"/expected-entry.bin",FileAccess.READ).get_var(false)
+		var actual=summary(g.world);var changed=[]
+		for field in expected:
+			if actual.get(field)!=expected[field]:changed.append(field)
+		if not changed.is_empty():print("Resume differs in: ",changed)
 		checks.append({"check":"Normal startup automatically resumed clock/zones/goods/work/enemies from previous process","passed":summary(g.world)==expected and not g.world.market_open})
 		g.world.paused=false;var tick=g.world.tick
 		var deadline=Time.get_ticks_msec()+2500

@@ -2159,8 +2159,9 @@ func draw_hud():
 			if not enemy.done and world.tick-enemy.born<16: draw_edge(enemy.pos,"人影 !",Color("f5d483"))
 	var details = ""
 	var egg_lines=selected_egg_lines()
-	if selected.get("kind")=="resource" and StockView.details(world,selected.pos)!="":
-		details=StockView.details(world,selected.pos)
+	var stock_details=selected_stock_details()
+	if stock_details!="":
+		details=stock_details
 	elif not egg_lines.is_empty():
 		panel(Rect2(16, 550, 446, 139))
 		for i in range(egg_lines.size()): label_on(hud, Vector2(30, 574+i*24), egg_lines[i], 14)
@@ -2722,6 +2723,11 @@ func draw_merchant_bubble():
 	var at=(anchor+Vector2(-42,-130)).clamp(Vector2(8,54),Vector2(1072,658))
 	# HUD pass is above all world trees/actors. Text remains dynamic and screen-sized.
 	MarketView.speech_bubble(self,hud,Rect2(at,Vector2(200,60)),"いらっしゃい、\n何か見ていくかい？",14)
+
+func selected_stock_details() -> String:
+	if selected_resources.size()==1:return StockView.details(world,selected_resources[0])
+	if selected.get("kind")=="resource":return StockView.details(world,selected.pos)
+	return ""
 
 func selected_egg_lines() -> Array:
 	var cells=selected_resources.duplicate()
