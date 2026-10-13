@@ -61,7 +61,7 @@ static func color_for(f: Array) -> Color:
 	color=color.lerp(Color("a99a68"),f[3]*0.78)
 	color=color.lerp(Color("96917a"),f[2]*0.73)
 	if f.size()>5:
-		color=color.lerp(Color("987855"),f[7]*0.6).lerp(Color("b49062"),f[5]*0.85).lerp(Color("36576c"),f[6]*0.88)
+		color=color.lerp(Color("987855"),clampf(f[7]*2.2,0,0.88)).lerp(Color("b49062"),clampf(f[5]*1.5,0,0.92)).lerp(Color("36576c"),f[6]*0.88)
 	return color.lightened((f[4]-0.5)*0.045)
 
 static func generate(seed_number: int,width: int,height: int,version: int=VERSION) -> Dictionary:

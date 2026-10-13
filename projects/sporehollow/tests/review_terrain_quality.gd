@@ -67,13 +67,14 @@ func run():
 		if not before and seed_number==31:
 			await view(Vector2i(50,34),1.0);await shot("center","建築余地・拠点の地表")
 			for kind in ["soil","sand","clay"]:
-				var found=false
-				for y in range(6,w.H-6):
-					for x in range(7,w.W-7):
-						var p=Vector2i(x,y)
-						if not found and w.Biome.material(w,p)==kind:
-							found=true;await view(p,1.0);await shot("surface_"+kind,"地表 "+kind,"新規seed31・仮配色。資源や移動効果は追加しない")
-				check(found,"Surface exists: "+kind)
+				var candidate=null;var strongest=-1.0;var channel={"soil":7,"sand":5,"clay":6}[kind]
+				for y in range(10,w.H-10):
+					for x in range(14,w.W-14):
+						var p=Vector2i(x,y);var intensity=w.Biome.field(w,p)[channel]
+						if w.Biome.material(w,p)==kind and intensity>strongest:candidate=p;strongest=intensity
+				check(candidate!=null,"Surface exists: "+kind)
+				if candidate!=null:
+					await view(candidate,1.0);await shot("surface_"+kind,"地表 "+kind,"新規seed31・分布の濃い地点・仮配色。資源や移動効果は追加しない")
 			await view(Vector2i(50,34),1.0);await live_probe()
 	FileAccess.open(out+"/terrain-performance.json",FileAccess.WRITE).store_string(JSON.stringify({"source_commit":OS.get_environment("FARM_REVIEW_COMMIT"),"before":before,"startup":timings,"job_limit":Farm.Jobs.LIMIT},"  "))
 	g.queue_free();await process_frame;quit(0 if checks.all(func(c):return c.passed) else 1)
