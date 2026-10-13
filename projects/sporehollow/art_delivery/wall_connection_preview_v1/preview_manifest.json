@@ -1,0 +1,171 @@
+{
+  "status": "preview_only_not_integrated",
+  "cell_px": [
+    48,
+    42
+  ],
+  "wall_canvas_px": [
+    48,
+    68
+  ],
+  "anchor_px": [
+    24,
+    34
+  ],
+  "production_pngs_added": 0,
+  "previews": [
+    {
+      "file": "cross_1x.png",
+      "size_px": [
+        1000,
+        1165
+      ],
+      "sha256": "46a9c04798f3ca5f4a2a15965f24a6a5bebb8b521277de89f034a74aa1ddb366",
+      "purpose": "comparison_only_not_game_asset"
+    },
+    {
+      "file": "cross_2x.png",
+      "size_px": [
+        2000,
+        2330
+      ],
+      "sha256": "014023f0b6e8d8a4f694ee7dac43fa808b79efe660211b26d361fabe9e3d5d2e",
+      "purpose": "comparison_only_not_game_asset"
+    },
+    {
+      "file": "door_1x.png",
+      "size_px": [
+        1000,
+        1165
+      ],
+      "sha256": "c12d28b3b52acb23c4cc2489c7a078d6c1cfde3f448c1e5f62f1914ccd65fad7",
+      "purpose": "comparison_only_not_game_asset"
+    },
+    {
+      "file": "door_2x.png",
+      "size_px": [
+        2000,
+        2330
+      ],
+      "sha256": "e047d25d2e7ccfe4678e4c11073119bf218cdaa8291e7d27b2290ca3f41cceff",
+      "purpose": "comparison_only_not_game_asset"
+    },
+    {
+      "file": "door_states_1x.png",
+      "size_px": [
+        1000,
+        790
+      ],
+      "sha256": "6812c8c7f5a7eab9d8fb218a05f56035469ea4aa33ba0ee6a6d4be73ab02ed6e",
+      "purpose": "comparison_only_not_game_asset"
+    },
+    {
+      "file": "elbow_1x.png",
+      "size_px": [
+        1000,
+        1165
+      ],
+      "sha256": "b4e3acd9fecb0a756662bd01eb869a60e2211234355571e5d9823804b9e2ddc9",
+      "purpose": "comparison_only_not_game_asset"
+    },
+    {
+      "file": "elbow_2x.png",
+      "size_px": [
+        2000,
+        2330
+      ],
+      "sha256": "3f19e68a2c1b1b5fb92a211e8bc0b6472df720ab82a0ea056eccc333a2e463fc",
+      "purpose": "comparison_only_not_game_asset"
+    },
+    {
+      "file": "horizontal_1x.png",
+      "size_px": [
+        1000,
+        1165
+      ],
+      "sha256": "aa0220b045f1e7c024937c7bdcf88684b0aef2863d6ff5d15b4eed2bbf374893",
+      "purpose": "comparison_only_not_game_asset"
+    },
+    {
+      "file": "horizontal_2x.png",
+      "size_px": [
+        2000,
+        2330
+      ],
+      "sha256": "52d4dad5a8644d9e4d7eb46961338a65199bd672abccb9b5b865e3c5b7babd44",
+      "purpose": "comparison_only_not_game_asset"
+    },
+    {
+      "file": "mixed_1x.png",
+      "size_px": [
+        1000,
+        455
+      ],
+      "sha256": "d9ecd1f4886658d338ace8aeb256a1da36d79d4be308be470e6da04aaa4f369a",
+      "purpose": "comparison_only_not_game_asset"
+    },
+    {
+      "file": "mixed_2x.png",
+      "size_px": [
+        2000,
+        910
+      ],
+      "sha256": "b29cd15de8702ca92b4720d23870a9a687a6027c02d0d17c66aad4f3e8dde270",
+      "purpose": "comparison_only_not_game_asset"
+    },
+    {
+      "file": "single_1x.png",
+      "size_px": [
+        1000,
+        1165
+      ],
+      "sha256": "48556cc741e348fd43a9cc276b28821a1459025e58972943b67b6ac4524dc874",
+      "purpose": "comparison_only_not_game_asset"
+    },
+    {
+      "file": "single_2x.png",
+      "size_px": [
+        2000,
+        2330
+      ],
+      "sha256": "d58caa0844f5d006e2e4023ffe86c77c8aa8a43de972e2f1d69541b97afb86f8",
+      "purpose": "comparison_only_not_game_asset"
+    },
+    {
+      "file": "tee_1x.png",
+      "size_px": [
+        1000,
+        1165
+      ],
+      "sha256": "23de3e56752aa9929c44b0e2ed1fc2782c82f4159ff12d0135c126eed6d4beee",
+      "purpose": "comparison_only_not_game_asset"
+    },
+    {
+      "file": "tee_2x.png",
+      "size_px": [
+        2000,
+        2330
+      ],
+      "sha256": "c077024ebfff0e12c1ef2adad70da2a731e14ad016da55be9ab322aa78eedfba",
+      "purpose": "comparison_only_not_game_asset"
+    },
+    {
+      "file": "vertical_1x.png",
+      "size_px": [
+        1000,
+        1165
+      ],
+      "sha256": "e76a8583c0cdce2a651947ae0f6cb89e3f91b9954c01b77a98f4cc226c21b590",
+      "purpose": "comparison_only_not_game_asset"
+    },
+    {
+      "file": "vertical_2x.png",
+      "size_px": [
+        2000,
+        2330
+      ],
+      "sha256": "77316b1bc50a2559640e4d5a6bbb37b2b9a3f600082f91561f13ad3c18230416",
+      "purpose": "comparison_only_not_game_asset"
+    }
+  ]
+}
