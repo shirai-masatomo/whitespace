@@ -1,0 +1,338 @@
+{
+  "checks": [
+    {
+      "check": "3x3 cluster starts with nine real cells and full centre mask: center",
+      "passed": true
+    },
+    {
+      "check": "An enclosed centre cannot be worked by teleporting through stone",
+      "passed": true
+    },
+    {
+      "check": "Real edge mining opens the corridor to the centre",
+      "passed": true
+    },
+    {
+      "check": "Damage appears before removal: center",
+      "passed": true
+    },
+    {
+      "check": "Save preserves cell progress and connection masks: center",
+      "passed": true
+    },
+    {
+      "check": "Only the requested cells are removed: center",
+      "passed": true
+    },
+    {
+      "check": "Actual collision/path updates after extraction: center",
+      "passed": true
+    },
+    {
+      "check": "Exact physical stone stays on site, not free construction stock: center",
+      "passed": true
+    },
+    {
+      "check": "No neighbour disappears or new deposit appears: center",
+      "passed": true
+    },
+    {
+      "check": "Biome boundary selection does not change with mining masks: center",
+      "passed": true
+    },
+    {
+      "check": "New diagonal concave seams appear when the centre is missing",
+      "passed": true
+    },
+    {
+      "check": "Post-mining restart does not respawn cells or duplicate drops: center",
+      "passed": true
+    },
+    {
+      "check": "3x3 cluster starts with nine real cells and full centre mask: edge",
+      "passed": true
+    },
+    {
+      "check": "Damage appears before removal: edge",
+      "passed": true
+    },
+    {
+      "check": "Save preserves cell progress and connection masks: edge",
+      "passed": true
+    },
+    {
+      "check": "Only the requested cells are removed: edge",
+      "passed": true
+    },
+    {
+      "check": "Actual collision/path updates after extraction: edge",
+      "passed": true
+    },
+    {
+      "check": "Exact physical stone stays on site, not free construction stock: edge",
+      "passed": true
+    },
+    {
+      "check": "No neighbour disappears or new deposit appears: edge",
+      "passed": true
+    },
+    {
+      "check": "Biome boundary selection does not change with mining masks: edge",
+      "passed": true
+    },
+    {
+      "check": "Post-mining restart does not respawn cells or duplicate drops: edge",
+      "passed": true
+    },
+    {
+      "check": "3x3 cluster starts with nine real cells and full centre mask: corner",
+      "passed": true
+    },
+    {
+      "check": "Damage appears before removal: corner",
+      "passed": true
+    },
+    {
+      "check": "Save preserves cell progress and connection masks: corner",
+      "passed": true
+    },
+    {
+      "check": "Only the requested cells are removed: corner",
+      "passed": true
+    },
+    {
+      "check": "Actual collision/path updates after extraction: corner",
+      "passed": true
+    },
+    {
+      "check": "Exact physical stone stays on site, not free construction stock: corner",
+      "passed": true
+    },
+    {
+      "check": "No neighbour disappears or new deposit appears: corner",
+      "passed": true
+    },
+    {
+      "check": "Biome boundary selection does not change with mining masks: corner",
+      "passed": true
+    },
+    {
+      "check": "Post-mining restart does not respawn cells or duplicate drops: corner",
+      "passed": true
+    },
+    {
+      "check": "Biome transition finishes inside rock biome without restarting on grass neighbour",
+      "passed": true
+    },
+    {
+      "check": "Single-node state preserves its size and foot anchor: 0.0",
+      "passed": true
+    },
+    {
+      "check": "Single-node state preserves its size and foot anchor: 1.1",
+      "passed": true
+    },
+    {
+      "check": "Single-node state preserves its size and foot anchor: 2.4",
+      "passed": true
+    },
+    {
+      "check": "Single-node state preserves its size and foot anchor: 3.6",
+      "passed": true
+    },
+    {
+      "check": "Damage never leaves mask alpha: 0/1",
+      "passed": true
+    },
+    {
+      "check": "Damage never leaves mask alpha: 0/2",
+      "passed": true
+    },
+    {
+      "check": "Damage never leaves mask alpha: 0/3",
+      "passed": true
+    },
+    {
+      "check": "Damage never leaves mask alpha: 1/1",
+      "passed": true
+    },
+    {
+      "check": "Damage never leaves mask alpha: 1/2",
+      "passed": true
+    },
+    {
+      "check": "Damage never leaves mask alpha: 1/3",
+      "passed": true
+    },
+    {
+      "check": "Damage never leaves mask alpha: 2/1",
+      "passed": true
+    },
+    {
+      "check": "Damage never leaves mask alpha: 2/2",
+      "passed": true
+    },
+    {
+      "check": "Damage never leaves mask alpha: 2/3",
+      "passed": true
+    },
+    {
+      "check": "Damage never leaves mask alpha: 3/1",
+      "passed": true
+    },
+    {
+      "check": "Damage never leaves mask alpha: 3/2",
+      "passed": true
+    },
+    {
+      "check": "Damage never leaves mask alpha: 3/3",
+      "passed": true
+    },
+    {
+      "check": "Damage never leaves mask alpha: 4/1",
+      "passed": true
+    },
+    {
+      "check": "Damage never leaves mask alpha: 4/2",
+      "passed": true
+    },
+    {
+      "check": "Damage never leaves mask alpha: 4/3",
+      "passed": true
+    },
+    {
+      "check": "Damage never leaves mask alpha: 5/1",
+      "passed": true
+    },
+    {
+      "check": "Damage never leaves mask alpha: 5/2",
+      "passed": true
+    },
+    {
+      "check": "Damage never leaves mask alpha: 5/3",
+      "passed": true
+    },
+    {
+      "check": "Damage never leaves mask alpha: 6/1",
+      "passed": true
+    },
+    {
+      "check": "Damage never leaves mask alpha: 6/2",
+      "passed": true
+    },
+    {
+      "check": "Damage never leaves mask alpha: 6/3",
+      "passed": true
+    },
+    {
+      "check": "Damage never leaves mask alpha: 7/1",
+      "passed": true
+    },
+    {
+      "check": "Damage never leaves mask alpha: 7/2",
+      "passed": true
+    },
+    {
+      "check": "Damage never leaves mask alpha: 7/3",
+      "passed": true
+    },
+    {
+      "check": "Damage never leaves mask alpha: 8/1",
+      "passed": true
+    },
+    {
+      "check": "Damage never leaves mask alpha: 8/2",
+      "passed": true
+    },
+    {
+      "check": "Damage never leaves mask alpha: 8/3",
+      "passed": true
+    },
+    {
+      "check": "Damage never leaves mask alpha: 9/1",
+      "passed": true
+    },
+    {
+      "check": "Damage never leaves mask alpha: 9/2",
+      "passed": true
+    },
+    {
+      "check": "Damage never leaves mask alpha: 9/3",
+      "passed": true
+    },
+    {
+      "check": "Damage never leaves mask alpha: 10/1",
+      "passed": true
+    },
+    {
+      "check": "Damage never leaves mask alpha: 10/2",
+      "passed": true
+    },
+    {
+      "check": "Damage never leaves mask alpha: 10/3",
+      "passed": true
+    },
+    {
+      "check": "Damage never leaves mask alpha: 11/1",
+      "passed": true
+    },
+    {
+      "check": "Damage never leaves mask alpha: 11/2",
+      "passed": true
+    },
+    {
+      "check": "Damage never leaves mask alpha: 11/3",
+      "passed": true
+    },
+    {
+      "check": "Damage never leaves mask alpha: 12/1",
+      "passed": true
+    },
+    {
+      "check": "Damage never leaves mask alpha: 12/2",
+      "passed": true
+    },
+    {
+      "check": "Damage never leaves mask alpha: 12/3",
+      "passed": true
+    },
+    {
+      "check": "Damage never leaves mask alpha: 13/1",
+      "passed": true
+    },
+    {
+      "check": "Damage never leaves mask alpha: 13/2",
+      "passed": true
+    },
+    {
+      "check": "Damage never leaves mask alpha: 13/3",
+      "passed": true
+    },
+    {
+      "check": "Damage never leaves mask alpha: 14/1",
+      "passed": true
+    },
+    {
+      "check": "Damage never leaves mask alpha: 14/2",
+      "passed": true
+    },
+    {
+      "check": "Damage never leaves mask alpha: 14/3",
+      "passed": true
+    },
+    {
+      "check": "Damage never leaves mask alpha: 15/1",
+      "passed": true
+    },
+    {
+      "check": "Damage never leaves mask alpha: 15/2",
+      "passed": true
+    },
+    {
+      "check": "Damage never leaves mask alpha: 15/3",
+      "passed": true
+    }
+  ],
+  "failures": 0,
+  "method": "Production World.step, enclosed-centre access, snapshot restore, exact drops and dynamic masks; all 48 damage mask clips"
+}

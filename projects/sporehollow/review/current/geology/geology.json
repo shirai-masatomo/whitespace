@@ -1,0 +1,364 @@
+{
+	"checks": [
+		{
+			"check": "Rock biome area 1/4 to 1/3: 31",
+			"passed": true
+		},
+		{
+			"check": "Large actual mineable connected mass: 31",
+			"passed": true
+		},
+		{
+			"check": "Stone yield unchanged; no new iron drops: 31",
+			"passed": true
+		},
+		{
+			"check": "Iron veins and normal stone coexist: 31",
+			"passed": true
+		},
+		{
+			"check": "Identifiable clay and sand surface: 31",
+			"passed": true
+		},
+		{
+			"check": "All traversable land remains connected: 31",
+			"passed": true
+		},
+		{
+			"check": "Multiple central transit routes are free of natural obstacles: 31",
+			"passed": true
+		},
+		{
+			"check": "Reachable mining perimeter: 31/0",
+			"passed": true
+		},
+		{
+			"check": "Reachable mining perimeter: 31/1",
+			"passed": true
+		},
+		{
+			"check": "Reachable mining perimeter: 31/2",
+			"passed": true
+		},
+		{
+			"check": "Reachable mining perimeter: 31/3",
+			"passed": true
+		},
+		{
+			"check": "Reachable mining perimeter: 31/4",
+			"passed": true
+		},
+		{
+			"check": "Reachable mining perimeter: 31/5",
+			"passed": true
+		},
+		{
+			"check": "Reachable mining perimeter: 31/6",
+			"passed": true
+		},
+		{
+			"check": "Reachable mining perimeter: 31/7",
+			"passed": true
+		},
+		{
+			"check": "Reachable mining perimeter: 31/8",
+			"passed": true
+		},
+		{
+			"check": "Reachable mining perimeter: 31/9",
+			"passed": true
+		},
+		{
+			"check": "Reachable mining perimeter: 31/10",
+			"passed": true
+		},
+		{
+			"check": "Reachable mining perimeter: 31/11",
+			"passed": true
+		},
+		{
+			"check": "Reachable mining perimeter: 31/12",
+			"passed": true
+		},
+		{
+			"check": "Reachable mining perimeter: 31/13",
+			"passed": true
+		},
+		{
+			"check": "Reachable mining perimeter: 31/14",
+			"passed": true
+		},
+		{
+			"check": "Reachable mining perimeter: 31/15",
+			"passed": true
+		},
+		{
+			"check": "Reachable mining perimeter: 31/16",
+			"passed": true
+		},
+		{
+			"check": "Reachable mining perimeter: 31/17",
+			"passed": true
+		},
+		{
+			"check": "Reachable mining perimeter: 31/18",
+			"passed": true
+		},
+		{
+			"check": "Reachable mining perimeter: 31/19",
+			"passed": true
+		},
+		{
+			"check": "Rock biome area 1/4 to 1/3: 97",
+			"passed": true
+		},
+		{
+			"check": "Large actual mineable connected mass: 97",
+			"passed": true
+		},
+		{
+			"check": "Stone yield unchanged; no new iron drops: 97",
+			"passed": true
+		},
+		{
+			"check": "Iron veins and normal stone coexist: 97",
+			"passed": true
+		},
+		{
+			"check": "Identifiable clay and sand surface: 97",
+			"passed": true
+		},
+		{
+			"check": "All traversable land remains connected: 97",
+			"passed": true
+		},
+		{
+			"check": "Multiple central transit routes are free of natural obstacles: 97",
+			"passed": true
+		},
+		{
+			"check": "Reachable mining perimeter: 97/0",
+			"passed": true
+		},
+		{
+			"check": "Reachable mining perimeter: 97/1",
+			"passed": true
+		},
+		{
+			"check": "Reachable mining perimeter: 97/2",
+			"passed": true
+		},
+		{
+			"check": "Reachable mining perimeter: 97/3",
+			"passed": true
+		},
+		{
+			"check": "Reachable mining perimeter: 97/4",
+			"passed": true
+		},
+		{
+			"check": "Reachable mining perimeter: 97/5",
+			"passed": true
+		},
+		{
+			"check": "Reachable mining perimeter: 97/6",
+			"passed": true
+		},
+		{
+			"check": "Reachable mining perimeter: 97/7",
+			"passed": true
+		},
+		{
+			"check": "Reachable mining perimeter: 97/8",
+			"passed": true
+		},
+		{
+			"check": "Reachable mining perimeter: 97/9",
+			"passed": true
+		},
+		{
+			"check": "Reachable mining perimeter: 97/10",
+			"passed": true
+		},
+		{
+			"check": "Reachable mining perimeter: 97/11",
+			"passed": true
+		},
+		{
+			"check": "Reachable mining perimeter: 97/12",
+			"passed": true
+		},
+		{
+			"check": "Reachable mining perimeter: 97/13",
+			"passed": true
+		},
+		{
+			"check": "Reachable mining perimeter: 97/14",
+			"passed": true
+		},
+		{
+			"check": "Reachable mining perimeter: 97/15",
+			"passed": true
+		},
+		{
+			"check": "Reachable mining perimeter: 97/16",
+			"passed": true
+		},
+		{
+			"check": "Reachable mining perimeter: 97/17",
+			"passed": true
+		},
+		{
+			"check": "Reachable mining perimeter: 97/18",
+			"passed": true
+		},
+		{
+			"check": "Reachable mining perimeter: 97/19",
+			"passed": true
+		},
+		{
+			"check": "Rock biome area 1/4 to 1/3: 2026",
+			"passed": true
+		},
+		{
+			"check": "Large actual mineable connected mass: 2026",
+			"passed": true
+		},
+		{
+			"check": "Stone yield unchanged; no new iron drops: 2026",
+			"passed": true
+		},
+		{
+			"check": "Iron veins and normal stone coexist: 2026",
+			"passed": true
+		},
+		{
+			"check": "Identifiable clay and sand surface: 2026",
+			"passed": true
+		},
+		{
+			"check": "All traversable land remains connected: 2026",
+			"passed": true
+		},
+		{
+			"check": "Multiple central transit routes are free of natural obstacles: 2026",
+			"passed": true
+		},
+		{
+			"check": "Reachable mining perimeter: 2026/0",
+			"passed": true
+		},
+		{
+			"check": "Reachable mining perimeter: 2026/1",
+			"passed": true
+		},
+		{
+			"check": "Reachable mining perimeter: 2026/2",
+			"passed": true
+		},
+		{
+			"check": "Reachable mining perimeter: 2026/3",
+			"passed": true
+		},
+		{
+			"check": "Reachable mining perimeter: 2026/4",
+			"passed": true
+		},
+		{
+			"check": "Reachable mining perimeter: 2026/5",
+			"passed": true
+		},
+		{
+			"check": "Reachable mining perimeter: 2026/6",
+			"passed": true
+		},
+		{
+			"check": "Reachable mining perimeter: 2026/7",
+			"passed": true
+		},
+		{
+			"check": "Reachable mining perimeter: 2026/8",
+			"passed": true
+		},
+		{
+			"check": "Reachable mining perimeter: 2026/9",
+			"passed": true
+		},
+		{
+			"check": "Reachable mining perimeter: 2026/10",
+			"passed": true
+		},
+		{
+			"check": "Reachable mining perimeter: 2026/11",
+			"passed": true
+		},
+		{
+			"check": "Reachable mining perimeter: 2026/12",
+			"passed": true
+		},
+		{
+			"check": "Reachable mining perimeter: 2026/13",
+			"passed": true
+		},
+		{
+			"check": "Reachable mining perimeter: 2026/14",
+			"passed": true
+		},
+		{
+			"check": "Reachable mining perimeter: 2026/15",
+			"passed": true
+		},
+		{
+			"check": "Reachable mining perimeter: 2026/16",
+			"passed": true
+		},
+		{
+			"check": "Reachable mining perimeter: 2026/17",
+			"passed": true
+		},
+		{
+			"check": "Reachable mining perimeter: 2026/18",
+			"passed": true
+		},
+		{
+			"check": "Reachable mining perimeter: 2026/19",
+			"passed": true
+		}
+	],
+	"failures": 0,
+	"samples": [
+		{
+			"component_sizes": [
+				1443
+			],
+			"iron_cells": 150,
+			"new_world_ms": 1805,
+			"region_fraction": 0.29,
+			"rock_cells": 1443,
+			"seed": 31,
+			"twenty_paths_ms": 1047.878
+		},
+		{
+			"component_sizes": [
+				1499
+			],
+			"iron_cells": 240,
+			"new_world_ms": 1912,
+			"region_fraction": 0.29,
+			"rock_cells": 1499,
+			"seed": 97,
+			"twenty_paths_ms": 750.025
+		},
+		{
+			"component_sizes": [
+				1535
+			],
+			"iron_cells": 255,
+			"new_world_ms": 1812,
+			"region_fraction": 0.29,
+			"rock_cells": 1535,
+			"seed": 2026,
+			"twenty_paths_ms": 228.584
+		}
+	]
+}

@@ -1,6 +1,8 @@
 extends RefCounted
 ## Read-only material selection. No collision, drop, generation or work mutation.
 const Art=preload("res://game/rock_art.gd")
+const GeologyArt=preload("res://game/geology_art.gd")
+static var geology_ground={}
 const TOP=Color("bcb59c") # Shared chip tint for legacy FX.
 const WALL="biome_connections_v1/"
 const NODE="biome_environment_v2/rock_node/"
@@ -14,12 +16,39 @@ static var ground_version=""
 const DIRS=[Vector2i.UP,Vector2i.RIGHT,Vector2i.DOWN,Vector2i.LEFT]
 const CORNERS={"nw":[0,3],"ne":[0,1],"sw":[2,3],"se":[2,1]}
 
-static func mask(w,p: Vector2i) -> int:
+static func raw_mask(w,p: Vector2i) -> int:
 	var value=0
 	for i in range(4):
 		if w.rocks.has(p+DIRS[i]):value|=1<<i
 	return value
+static func prepare_connections(w):
+	if w.get("rock_connections")==null:return
+	w.rock_connections.clear()
+	for p in w.rocks:w.rock_connections[p]={"mask":raw_mask(w,p),"inner":raw_inner(w,p)}
+	w.rock_connection_count=w.rocks.size();w.rock_connection_builds+=w.rocks.size();w.rock_visual_revision+=1
+	w.rock_changed_cells=[Vector2i(-1,-1)]
+static func mask(w,p: Vector2i) -> int:
+	if w.get("rock_connections")==null:return raw_mask(w,p)
+	if w.rock_connection_count!=w.rocks.size():prepare_connections(w)
+	if not w.rock_connections.has(p):return raw_mask(w,p)
+	return w.rock_connections[p].mask
+static func changed(w,p: Vector2i):
+	if w.get("rock_connections")==null:return
+	for dy in range(-1,2):
+		for dx in range(-1,2):
+			var q=p+Vector2i(dx,dy)
+			if w.rocks.has(q):w.rock_connections[q]={"mask":raw_mask(w,q),"inner":raw_inner(w,q)};w.rock_connection_builds+=1
+			else:w.rock_connections.erase(q)
+	w.rock_connection_count=w.rocks.size();w.rock_visual_revision+=1
+	w.rock_changed_cells.append(p)
+	# Renderer consumes changes; bound accumulation when running logic only.
+	if w.rock_changed_cells.size()>128:w.rock_changed_cells=[Vector2i(-1,-1)]
 static func inner(w,p: Vector2i) -> Array:
+	if w.get("rock_connections")!=null:
+		if w.rock_connection_count!=w.rocks.size():prepare_connections(w)
+		if w.rock_connections.has(p):return w.rock_connections[p].inner
+	return raw_inner(w,p)
+static func raw_inner(w,p: Vector2i) -> Array:
 	var result=[]
 	for name in CORNERS:
 		var a=DIRS[CORNERS[name][0]];var b=DIRS[CORNERS[name][1]]
@@ -34,11 +63,11 @@ static func node_size(w,p: Vector2i) -> String:
 static func stage(progress: float) -> int:return 3 if progress>=0.85 else 2 if progress>=0.5 else 1 if progress>=0.25 else 0
 static func normal_key(w,p: Vector2i) -> String:
 	return WALL+"normal/mask_%02d.png"%mask(w,p) if wall(w,p) else NODE+node_size(w,p)+"/"+["intact","damaged_1","damaged_2","near_depleted"][stage(w.Harvest.progress(w,"mine",p))]+".png"
-static func clipped_damage(m: int,level: int) -> Texture2D:
-	var key="%d:%d"%[m,level]
+static func clipped_damage(m: int,level: int,formal: bool=false) -> Texture2D:
+	var key="%d:%d:%s"%[m,level,formal]
 	if not clipped.has(key):
 		var image=Art.texture(DAMAGE_KEYS[level-1]).get_image().duplicate();image.convert(Image.FORMAT_RGBA8)
-		var base=Art.texture(WALL+"normal/mask_%02d.png"%m).get_image()
+		var base=GeologyArt.source("normal/mask_%02d.png"%m) if formal else Art.texture(WALL+"normal/mask_%02d.png"%m).get_image()
 		for y in range(image.get_height()):
 			for x in range(image.get_width()):
 				var color=image.get_pixel(x,y);color.a*=base.get_pixel(x,y).a;image.set_pixel(x,y,color)
@@ -46,14 +75,19 @@ static func clipped_damage(m: int,level: int) -> Texture2D:
 	return clipped[key]
 static func rock(g,p: Vector2i):
 	var w=g.world;var c=g.center(p);var key=normal_key(w,p);var level=stage(w.Harvest.progress(w,"mine",p))
-	if wall(w,p):
+	var formal=w.terrain.has("geology")
+	if formal or wall(w,p):
 		var connection=mask(w,p)
 		# One continuous contact strip, not a full isolated-rock shadow per cell.
 		if not(connection&4):g.draw_rect(contact_shadow(c,connection),Color(0.12,0.13,0.11,0.16))
-		Art.paint(g,key,c)
-		if connection!=15:static_seams(g,p,c)
-		for corner in inner(w,p):Art.paint(g,WALL+"inner/concave_"+corner+".png",c)
-		if level>0:g.draw_texture(clipped_damage(mask(w,p),level),(c-Vector2(24,33)).round())
+		if formal:
+			g.draw_texture(GeologyArt.rock(p,connection,w.rocks[p].get("geology")=="iron"),(c-Vector2(24,33)).round())
+			for corner in inner(w,p):g.draw_texture(GeologyArt.inner(corner),(c-Vector2(24,33)).round())
+		else:
+			Art.paint(g,key,c)
+			if connection!=15:static_seams(g,p,c)
+			for corner in inner(w,p):Art.paint(g,WALL+"inner/concave_"+corner+".png",c)
+		if level>0:g.draw_texture(clipped_damage(connection,level,formal),(c-Vector2(24,33)).round())
 	else:
 		Art.paint(g,NODE+"shadow_"+node_size(w,p)+".png",c+Vector2(0,14))
 		Art.paint(g,key,c+Vector2(0,14))
@@ -133,13 +167,15 @@ static func ground_layers(w,p: Vector2i) -> Array:
 static func cache_ground(w):
 	var token="%s:%s"%[w.terrain.get("version",0),w.terrain.seed]
 	if ground_source==w and ground_version==token:return
-	ground_source=w;ground_version=token;ground_kinds={};ground_offsets={};mineral_seams.clear()
+	ground_source=w;ground_version=token;ground_kinds={};ground_offsets={};geology_ground={};mineral_seams.clear()
 static func prepare_ground(w):
 	cache_ground(w)
+	GeologyArt.prepare(w)
 	for y in range(w.H):
 		for x in range(w.W):
 			var p=Vector2i(x,y)
 			ground_kinds[p]=ground_layers(w,p)
+			if w.terrain.has("geology") and w.Biome.material(w,p) in ["sand","clay"]:geology_ground[p]=GeologyArt.surface(w,p,w.Biome.material(w,p))
 			if w.terrain.get("version",1)>=4 or ground_kinds[p]==["biome_environment_v2/rock_ground/pebbly_soil.png"]:
 				ground_offsets[p]=Vector2(floori(w.Biome.unit(w.terrain.seed,x,y,181)*17)-8,floori(w.Biome.unit(w.terrain.seed,x,y,191)*13)-6)
 static func ground(g,region: Rect2=Rect2()):
@@ -155,6 +191,7 @@ static func ground(g,region: Rect2=Rect2()):
 				ground_kinds[p]=ground_layers(w,p)
 				if w.terrain.get("version",1)>=4 or ground_kinds[p]==["biome_environment_v2/rock_ground/pebbly_soil.png"]:
 					ground_offsets[p]=Vector2(floori(w.Biome.unit(w.terrain.seed,x,y,181)*17)-8,floori(w.Biome.unit(w.terrain.seed,x,y,191)*13)-6)
+			if geology_ground.has(p):g.draw_texture(geology_ground[p],g.center(p)-Vector2(24,21))
 			for key in ground_kinds.get(p,[]):Art.paint(g,key,g.center(p)+ground_offsets.get(p,Vector2.ZERO))
 			# Recorded in retained-ground chunks; not evaluated during camera scroll.
 			for layer in apron(w,p):Art.paint(g,layer.key,g.center(p)+layer.offset,layer.alpha)

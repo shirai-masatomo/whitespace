@@ -1,0 +1,352 @@
+{
+	"checks": [
+		{
+			"check": "Exact old path and tie order preserved: 31/0",
+			"passed": true
+		},
+		{
+			"check": "Exact old path and tie order preserved: 31/1",
+			"passed": true
+		},
+		{
+			"check": "Exact old path and tie order preserved: 31/2",
+			"passed": true
+		},
+		{
+			"check": "Exact old path and tie order preserved: 31/3",
+			"passed": true
+		},
+		{
+			"check": "Exact old path and tie order preserved: 31/4",
+			"passed": true
+		},
+		{
+			"check": "Exact old path and tie order preserved: 31/5",
+			"passed": true
+		},
+		{
+			"check": "Exact old path and tie order preserved: 31/6",
+			"passed": true
+		},
+		{
+			"check": "Exact old path and tie order preserved: 31/7",
+			"passed": true
+		},
+		{
+			"check": "Exact old path and tie order preserved: 31/8",
+			"passed": true
+		},
+		{
+			"check": "Exact old path and tie order preserved: 31/9",
+			"passed": true
+		},
+		{
+			"check": "Exact old path and tie order preserved: 31/10",
+			"passed": true
+		},
+		{
+			"check": "Exact old path and tie order preserved: 31/11",
+			"passed": true
+		},
+		{
+			"check": "Exact old path and tie order preserved: 31/12",
+			"passed": true
+		},
+		{
+			"check": "Exact old path and tie order preserved: 31/13",
+			"passed": true
+		},
+		{
+			"check": "Exact old path and tie order preserved: 31/14",
+			"passed": true
+		},
+		{
+			"check": "Exact old path and tie order preserved: 31/15",
+			"passed": true
+		},
+		{
+			"check": "Exact old path and tie order preserved: 31/16",
+			"passed": true
+		},
+		{
+			"check": "Exact old path and tie order preserved: 31/17",
+			"passed": true
+		},
+		{
+			"check": "Exact old path and tie order preserved: 31/18",
+			"passed": true
+		},
+		{
+			"check": "Exact old path and tie order preserved: 31/19",
+			"passed": true
+		},
+		{
+			"check": "Role/occupancy/outdoor/route-cost rules unchanged: 31/[true, false, false]",
+			"passed": true
+		},
+		{
+			"check": "Role/occupancy/outdoor/route-cost rules unchanged: 31/[false, true, false]",
+			"passed": true
+		},
+		{
+			"check": "Role/occupancy/outdoor/route-cost rules unchanged: 31/[false, false, true]",
+			"passed": true
+		},
+		{
+			"check": "Role/occupancy/outdoor/route-cost rules unchanged: 31/[true, true, true]",
+			"passed": true
+		},
+		{
+			"check": "Repeated drawing reads cached connections only: 31",
+			"passed": true
+		},
+		{
+			"check": "Mining updates no more than eight surviving neighbours: 31",
+			"passed": true
+		},
+		{
+			"check": "Local cache matches uncached truth after removal: 31",
+			"passed": true
+		},
+		{
+			"check": "Exact old path and tie order preserved: 97/0",
+			"passed": true
+		},
+		{
+			"check": "Exact old path and tie order preserved: 97/1",
+			"passed": true
+		},
+		{
+			"check": "Exact old path and tie order preserved: 97/2",
+			"passed": true
+		},
+		{
+			"check": "Exact old path and tie order preserved: 97/3",
+			"passed": true
+		},
+		{
+			"check": "Exact old path and tie order preserved: 97/4",
+			"passed": true
+		},
+		{
+			"check": "Exact old path and tie order preserved: 97/5",
+			"passed": true
+		},
+		{
+			"check": "Exact old path and tie order preserved: 97/6",
+			"passed": true
+		},
+		{
+			"check": "Exact old path and tie order preserved: 97/7",
+			"passed": true
+		},
+		{
+			"check": "Exact old path and tie order preserved: 97/8",
+			"passed": true
+		},
+		{
+			"check": "Exact old path and tie order preserved: 97/9",
+			"passed": true
+		},
+		{
+			"check": "Exact old path and tie order preserved: 97/10",
+			"passed": true
+		},
+		{
+			"check": "Exact old path and tie order preserved: 97/11",
+			"passed": true
+		},
+		{
+			"check": "Exact old path and tie order preserved: 97/12",
+			"passed": true
+		},
+		{
+			"check": "Exact old path and tie order preserved: 97/13",
+			"passed": true
+		},
+		{
+			"check": "Exact old path and tie order preserved: 97/14",
+			"passed": true
+		},
+		{
+			"check": "Exact old path and tie order preserved: 97/15",
+			"passed": true
+		},
+		{
+			"check": "Exact old path and tie order preserved: 97/16",
+			"passed": true
+		},
+		{
+			"check": "Exact old path and tie order preserved: 97/17",
+			"passed": true
+		},
+		{
+			"check": "Exact old path and tie order preserved: 97/18",
+			"passed": true
+		},
+		{
+			"check": "Exact old path and tie order preserved: 97/19",
+			"passed": true
+		},
+		{
+			"check": "Role/occupancy/outdoor/route-cost rules unchanged: 97/[true, false, false]",
+			"passed": true
+		},
+		{
+			"check": "Role/occupancy/outdoor/route-cost rules unchanged: 97/[false, true, false]",
+			"passed": true
+		},
+		{
+			"check": "Role/occupancy/outdoor/route-cost rules unchanged: 97/[false, false, true]",
+			"passed": true
+		},
+		{
+			"check": "Role/occupancy/outdoor/route-cost rules unchanged: 97/[true, true, true]",
+			"passed": true
+		},
+		{
+			"check": "Repeated drawing reads cached connections only: 97",
+			"passed": true
+		},
+		{
+			"check": "Mining updates no more than eight surviving neighbours: 97",
+			"passed": true
+		},
+		{
+			"check": "Local cache matches uncached truth after removal: 97",
+			"passed": true
+		},
+		{
+			"check": "Exact old path and tie order preserved: 2026/0",
+			"passed": true
+		},
+		{
+			"check": "Exact old path and tie order preserved: 2026/1",
+			"passed": true
+		},
+		{
+			"check": "Exact old path and tie order preserved: 2026/2",
+			"passed": true
+		},
+		{
+			"check": "Exact old path and tie order preserved: 2026/3",
+			"passed": true
+		},
+		{
+			"check": "Exact old path and tie order preserved: 2026/4",
+			"passed": true
+		},
+		{
+			"check": "Exact old path and tie order preserved: 2026/5",
+			"passed": true
+		},
+		{
+			"check": "Exact old path and tie order preserved: 2026/6",
+			"passed": true
+		},
+		{
+			"check": "Exact old path and tie order preserved: 2026/7",
+			"passed": true
+		},
+		{
+			"check": "Exact old path and tie order preserved: 2026/8",
+			"passed": true
+		},
+		{
+			"check": "Exact old path and tie order preserved: 2026/9",
+			"passed": true
+		},
+		{
+			"check": "Exact old path and tie order preserved: 2026/10",
+			"passed": true
+		},
+		{
+			"check": "Exact old path and tie order preserved: 2026/11",
+			"passed": true
+		},
+		{
+			"check": "Exact old path and tie order preserved: 2026/12",
+			"passed": true
+		},
+		{
+			"check": "Exact old path and tie order preserved: 2026/13",
+			"passed": true
+		},
+		{
+			"check": "Exact old path and tie order preserved: 2026/14",
+			"passed": true
+		},
+		{
+			"check": "Exact old path and tie order preserved: 2026/15",
+			"passed": true
+		},
+		{
+			"check": "Exact old path and tie order preserved: 2026/16",
+			"passed": true
+		},
+		{
+			"check": "Exact old path and tie order preserved: 2026/17",
+			"passed": true
+		},
+		{
+			"check": "Exact old path and tie order preserved: 2026/18",
+			"passed": true
+		},
+		{
+			"check": "Exact old path and tie order preserved: 2026/19",
+			"passed": true
+		},
+		{
+			"check": "Role/occupancy/outdoor/route-cost rules unchanged: 2026/[true, false, false]",
+			"passed": true
+		},
+		{
+			"check": "Role/occupancy/outdoor/route-cost rules unchanged: 2026/[false, true, false]",
+			"passed": true
+		},
+		{
+			"check": "Role/occupancy/outdoor/route-cost rules unchanged: 2026/[false, false, true]",
+			"passed": true
+		},
+		{
+			"check": "Role/occupancy/outdoor/route-cost rules unchanged: 2026/[true, true, true]",
+			"passed": true
+		},
+		{
+			"check": "Repeated drawing reads cached connections only: 2026",
+			"passed": true
+		},
+		{
+			"check": "Mining updates no more than eight surviving neighbours: 2026",
+			"passed": true
+		},
+		{
+			"check": "Local cache matches uncached truth after removal: 2026",
+			"passed": true
+		}
+	],
+	"failures": 0,
+	"samples": [
+		{
+			"connection_reads_without_rebuild": 7210,
+			"old_frontier_scan_ms": 2027.603,
+			"queries": 20,
+			"seed": 31,
+			"stable_heap_ms": 913.726
+		},
+		{
+			"connection_reads_without_rebuild": 7490,
+			"old_frontier_scan_ms": 1630.468,
+			"queries": 20,
+			"seed": 97,
+			"stable_heap_ms": 748.619
+		},
+		{
+			"connection_reads_without_rebuild": 7670,
+			"old_frontier_scan_ms": 464.648,
+			"queries": 20,
+			"seed": 2026,
+			"stable_heap_ms": 226.762
+		}
+	]
+}

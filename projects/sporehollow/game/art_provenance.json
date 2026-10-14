@@ -1,6 +1,6 @@
 {
   "delivery_branch": "codex/sporehollow-art-assets",
-  "latest_delivery_commit": "3229d2655e35e82d178577cdd8acbbe66e9be4f8",
+  "latest_delivery_commit": "adb33aa07da2ec57959e0315963f15003ddcd085",
   "characters_v1": "f3e4ae82b68c342b928dfb5dfcebb451353f9b8d",
   "characters_motion_v1": "ae950a3df8de7a3dbbd14f40dc3ef9df05e22fd4",
   "ranch_assets_v1": "57aab97c3efc495d7553ee412c68696945d8e846",
@@ -36,5 +36,6 @@
   "biome_environment_v1": "0a599a61079a339ab61a0b502f8dcc411ae2b33e",
   "biome_environment_v2": "0a599a61079a339ab61a0b502f8dcc411ae2b33e",
   "biome_connections_v1": "7b6e81320009710b861fca04d6b86470de3835d7",
-  "mining_rock_objects_v1": "3229d2655e35e82d178577cdd8acbbe66e9be4f8"
+  "mining_rock_objects_v1": "3229d2655e35e82d178577cdd8acbbe66e9be4f8",
+  "continuous_bedrock_v1": "adb33aa07da2ec57959e0315963f15003ddcd085"
 }

@@ -26,7 +26,7 @@ static func build(g):
 		g.ColonyPanels.label(panel,j.get("block_reason","") if j.get("state")=="blocked" else "採集担当が継続して採掘。石材は現地に残り、回収で備蓄へ運びます。",Vector2(12,80),14)
 	elif g.selected.get("kind")=="rock" and g.world.rocks.has(g.selected.pos):
 		var p=g.ColonyPanels.panel(g,Rect2(376,569,608,120));var cell=g.selected.pos
-		g.ColonyPanels.label(p,"採掘：岩1個 → 石8個 / 4秒",Vector2(12,8),16)
+		g.ColonyPanels.label(p,("鉄鉱脈のある岩盤" if g.world.rocks[cell].get("geology")=="iron" else "岩盤")+" · 採掘で石8個 / 4秒",Vector2(12,8),16)
 		var j=g.world.Tasks.job(g.world,"mine",cell);var why=g.world.Tasks.reason(g.world,"mine",cell,-1,j.get("id",-1))
 		g.add_button(g.palette,"mine","採掘を取り消す" if not j.is_empty() else "採掘を予約",Rect2(388,604,224,34),task.bind(g,"mine",cell))
 		g.buttons.mine.disabled=j.is_empty() and why!=""

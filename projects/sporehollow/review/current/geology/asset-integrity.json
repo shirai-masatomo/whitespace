@@ -1,0 +1,334 @@
+{
+  "delivery_commit": "adb33aa07da2ec57959e0315963f15003ddcd085",
+  "checks": [
+    {
+      "file": "top/atlas.png",
+      "passed": true
+    },
+    {
+      "file": "normal/mask_00.png",
+      "passed": true
+    },
+    {
+      "file": "top/mask_00.png",
+      "passed": true
+    },
+    {
+      "file": "normal/mask_01.png",
+      "passed": true
+    },
+    {
+      "file": "top/mask_01.png",
+      "passed": true
+    },
+    {
+      "file": "normal/mask_02.png",
+      "passed": true
+    },
+    {
+      "file": "top/mask_02.png",
+      "passed": true
+    },
+    {
+      "file": "normal/mask_03.png",
+      "passed": true
+    },
+    {
+      "file": "top/mask_03.png",
+      "passed": true
+    },
+    {
+      "file": "normal/mask_04.png",
+      "passed": true
+    },
+    {
+      "file": "top/mask_04.png",
+      "passed": true
+    },
+    {
+      "file": "normal/mask_05.png",
+      "passed": true
+    },
+    {
+      "file": "top/mask_05.png",
+      "passed": true
+    },
+    {
+      "file": "normal/mask_06.png",
+      "passed": true
+    },
+    {
+      "file": "top/mask_06.png",
+      "passed": true
+    },
+    {
+      "file": "normal/mask_07.png",
+      "passed": true
+    },
+    {
+      "file": "top/mask_07.png",
+      "passed": true
+    },
+    {
+      "file": "normal/mask_08.png",
+      "passed": true
+    },
+    {
+      "file": "top/mask_08.png",
+      "passed": true
+    },
+    {
+      "file": "normal/mask_09.png",
+      "passed": true
+    },
+    {
+      "file": "top/mask_09.png",
+      "passed": true
+    },
+    {
+      "file": "normal/mask_10.png",
+      "passed": true
+    },
+    {
+      "file": "top/mask_10.png",
+      "passed": true
+    },
+    {
+      "file": "normal/mask_11.png",
+      "passed": true
+    },
+    {
+      "file": "top/mask_11.png",
+      "passed": true
+    },
+    {
+      "file": "normal/mask_12.png",
+      "passed": true
+    },
+    {
+      "file": "top/mask_12.png",
+      "passed": true
+    },
+    {
+      "file": "normal/mask_13.png",
+      "passed": true
+    },
+    {
+      "file": "top/mask_13.png",
+      "passed": true
+    },
+    {
+      "file": "normal/mask_14.png",
+      "passed": true
+    },
+    {
+      "file": "top/mask_14.png",
+      "passed": true
+    },
+    {
+      "file": "normal/mask_15.png",
+      "passed": true
+    },
+    {
+      "file": "top/mask_15.png",
+      "passed": true
+    },
+    {
+      "file": "inner/concave_nw.png",
+      "passed": true
+    },
+    {
+      "file": "inner/concave_ne.png",
+      "passed": true
+    },
+    {
+      "file": "inner/concave_sw.png",
+      "passed": true
+    },
+    {
+      "file": "inner/concave_se.png",
+      "passed": true
+    },
+    {
+      "file": "iron/atlas.png",
+      "passed": true
+    },
+    {
+      "file": "iron/patch_00.png",
+      "passed": true
+    },
+    {
+      "file": "iron/patch_01.png",
+      "passed": true
+    },
+    {
+      "file": "iron/patch_02.png",
+      "passed": true
+    },
+    {
+      "file": "ground/clay/atlas.png",
+      "passed": true
+    },
+    {
+      "file": "ground/sand/atlas.png",
+      "passed": true
+    },
+    {
+      "file": "boundary/full.png",
+      "passed": true
+    },
+    {
+      "file": "ground/clay/full.png",
+      "passed": true
+    },
+    {
+      "file": "ground/sand/full.png",
+      "passed": true
+    },
+    {
+      "file": "boundary/edge_n.png",
+      "passed": true
+    },
+    {
+      "file": "ground/clay/edge_n.png",
+      "passed": true
+    },
+    {
+      "file": "ground/sand/edge_n.png",
+      "passed": true
+    },
+    {
+      "file": "boundary/edge_e.png",
+      "passed": true
+    },
+    {
+      "file": "ground/clay/edge_e.png",
+      "passed": true
+    },
+    {
+      "file": "ground/sand/edge_e.png",
+      "passed": true
+    },
+    {
+      "file": "boundary/edge_s.png",
+      "passed": true
+    },
+    {
+      "file": "ground/clay/edge_s.png",
+      "passed": true
+    },
+    {
+      "file": "ground/sand/edge_s.png",
+      "passed": true
+    },
+    {
+      "file": "boundary/edge_w.png",
+      "passed": true
+    },
+    {
+      "file": "ground/clay/edge_w.png",
+      "passed": true
+    },
+    {
+      "file": "ground/sand/edge_w.png",
+      "passed": true
+    },
+    {
+      "file": "boundary/outer_nw.png",
+      "passed": true
+    },
+    {
+      "file": "ground/clay/outer_nw.png",
+      "passed": true
+    },
+    {
+      "file": "ground/sand/outer_nw.png",
+      "passed": true
+    },
+    {
+      "file": "boundary/outer_ne.png",
+      "passed": true
+    },
+    {
+      "file": "ground/clay/outer_ne.png",
+      "passed": true
+    },
+    {
+      "file": "ground/sand/outer_ne.png",
+      "passed": true
+    },
+    {
+      "file": "boundary/outer_sw.png",
+      "passed": true
+    },
+    {
+      "file": "ground/clay/outer_sw.png",
+      "passed": true
+    },
+    {
+      "file": "ground/sand/outer_sw.png",
+      "passed": true
+    },
+    {
+      "file": "boundary/outer_se.png",
+      "passed": true
+    },
+    {
+      "file": "ground/clay/outer_se.png",
+      "passed": true
+    },
+    {
+      "file": "ground/sand/outer_se.png",
+      "passed": true
+    },
+    {
+      "file": "boundary/inner_nw.png",
+      "passed": true
+    },
+    {
+      "file": "ground/clay/inner_nw.png",
+      "passed": true
+    },
+    {
+      "file": "ground/sand/inner_nw.png",
+      "passed": true
+    },
+    {
+      "file": "boundary/inner_ne.png",
+      "passed": true
+    },
+    {
+      "file": "ground/clay/inner_ne.png",
+      "passed": true
+    },
+    {
+      "file": "ground/sand/inner_ne.png",
+      "passed": true
+    },
+    {
+      "file": "boundary/inner_sw.png",
+      "passed": true
+    },
+    {
+      "file": "ground/clay/inner_sw.png",
+      "passed": true
+    },
+    {
+      "file": "ground/sand/inner_sw.png",
+      "passed": true
+    },
+    {
+      "file": "boundary/inner_se.png",
+      "passed": true
+    },
+    {
+      "file": "ground/clay/inner_se.png",
+      "passed": true
+    },
+    {
+      "file": "ground/sand/inner_se.png",
+      "passed": true
+    }
+  ],
+  "failures": 0
+}

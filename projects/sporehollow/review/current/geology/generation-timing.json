@@ -1,0 +1,107 @@
+{
+	"method": "Headless low-priority sequential logic only, same seed and map size; no GPU or FPS measurement",
+	"rows": [
+		{
+			"mountains": 8,
+			"repairs": 0,
+			"rock_cells": 98,
+			"seed": 31,
+			"stages": {
+				"buildings.rooms": 4,
+				"rooms_cells": 27200,
+				"startup_population": 1243.755,
+				"startup_population_count": 2,
+				"startup_terrain": 55.829,
+				"startup_terrain_count": 2
+			},
+			"terrain_ms": 169.985,
+			"total_new_world_ms": 1765.787,
+			"version": 5
+		},
+		{
+			"mountains": 8,
+			"repairs": 0,
+			"rock_cells": 1443,
+			"seed": 31,
+			"stages": {
+				"buildings.rooms": 4,
+				"rooms_cells": 27200,
+				"startup_population": 1244.794,
+				"startup_population_count": 2,
+				"startup_terrain": 56.306,
+				"startup_terrain_count": 2
+			},
+			"terrain_ms": 259.679,
+			"total_new_world_ms": 1897.094,
+			"version": 6
+		},
+		{
+			"mountains": 8,
+			"repairs": 0,
+			"rock_cells": 86,
+			"seed": 97,
+			"stages": {
+				"buildings.rooms": 4,
+				"rooms_cells": 27200,
+				"startup_population": 1291.725,
+				"startup_population_count": 2,
+				"startup_terrain": 55.531,
+				"startup_terrain_count": 2
+			},
+			"terrain_ms": 175.292,
+			"total_new_world_ms": 1815.343,
+			"version": 5
+		},
+		{
+			"mountains": 8,
+			"repairs": 0,
+			"rock_cells": 1499,
+			"seed": 97,
+			"stages": {
+				"buildings.rooms": 4,
+				"rooms_cells": 27200,
+				"startup_population": 1238.24,
+				"startup_population_count": 2,
+				"startup_terrain": 58.872,
+				"startup_terrain_count": 2
+			},
+			"terrain_ms": 254.914,
+			"total_new_world_ms": 1896.677,
+			"version": 6
+		},
+		{
+			"mountains": 8,
+			"repairs": 0,
+			"rock_cells": 69,
+			"seed": 2026,
+			"stages": {
+				"buildings.rooms": 4,
+				"rooms_cells": 27200,
+				"startup_population": 1302.106,
+				"startup_population_count": 2,
+				"startup_terrain": 55.401,
+				"startup_terrain_count": 2
+			},
+			"terrain_ms": 170.662,
+			"total_new_world_ms": 1815.318,
+			"version": 5
+		},
+		{
+			"mountains": 8,
+			"repairs": 0,
+			"rock_cells": 1535,
+			"seed": 2026,
+			"stages": {
+				"buildings.rooms": 4,
+				"rooms_cells": 27200,
+				"startup_population": 1226.52,
+				"startup_population_count": 2,
+				"startup_terrain": 55.719,
+				"startup_terrain_count": 2
+			},
+			"terrain_ms": 264.012,
+			"total_new_world_ms": 1881.72,
+			"version": 6
+		}
+	]
+}

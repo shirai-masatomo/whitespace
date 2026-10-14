@@ -1,3 +1,9 @@
+# 大規模岩盤・地層：現在の確認入口
+
+[今回の変更・テスト・未確認範囲](geology/REPORT.md) / [画像一覧](geology/SCREENS.md) / [EXE反映記録](geology/DELIVERY.json)。通常デスクトップ起動・GPU負荷試験なし。以下は過去の配布記録。
+
+---
+
 # 最新配布4f16b50：建築現場表示・壁コスト5
 
 [変更と関連検証109項目](construction-sites/REPORT.md) / [配布記録](construction-sites/DELIVERY.json)。正式資材アイコン、工程表示と現場クリック情報、壁3種各5個。通常画面の自動起動・GPU試験なし。以下は過去の配布記録。

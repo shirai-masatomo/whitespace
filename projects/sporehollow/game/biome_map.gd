@@ -1,6 +1,7 @@
 extends RefCounted
 ## Versioned scenery and placement only. Never used by movement or building rules.
-const VERSION=5
+const VERSION=6
+const Geology=preload("res://game/geology.gd")
 # Normalized regional scale, transition width and obstacle density; saved in new terrain.
 const SETTINGS={"region_scale":1.0,"region_thresholds":{"rocky":0.43,"woodland":0.40,"dry":0.42,"lush":0.48},"boundary_width":1.0,"tree_density":1.0,"rock_clusters_per_1700":1,"mountain_groups_per_1700":0.5}
 static func normalized(w,p: Vector2) -> Vector2:
@@ -69,6 +70,7 @@ static func generate(seed_number: int,width: int,height: int,version: int=VERSIO
 	var scale=Vector2(50.0/width,34.0/height)/SETTINGS.region_scale
 	for y in range(height):
 		for x in range(width):fields.append(sample(seed_number,Vector2(x+0.5,y+0.5)*scale,blobs))
+	var geology=Geology.shape(seed_number,width,height,fields,noise,clearing) if version>=6 else {}
 	for y in range(height+1):
 		for x in range(width+1):
 			# Average neighboring samples: shared vertices, no per-cell patch seams.
@@ -81,6 +83,7 @@ static func generate(seed_number: int,width: int,height: int,version: int=VERSIO
 			ground_weights.append([clampf((f[0]*1.65+f[1]*0.25)*(1.0-f[2]),0,0.9),f[5],f[6],f[2]])
 			surface_vertices.append([smoothstep(0.25,0.58,f[2])*0.92,smoothstep(0.49,0.80,f[2])])
 	var result={"version":version,"generation_version":version,"settings":SETTINGS.duplicate(),"seed":seed_number,"width":width,"height":height,"fields":fields,"vertices":vertices,"surface_vertices":surface_vertices,"ground_weights":ground_weights}
+	if not geology.is_empty():result.geology=geology
 	classify(result)
 	return result
 
@@ -121,6 +124,7 @@ static func classify(data: Dictionary):
 			if f[6]>0.22:material_name="clay"
 			elif f[5]>0.20:material_name="sand"
 			elif f[7]>0.24:material_name="soil"
+		if data.has("geology") and data.geology.layers[materials.size()]!="soil":material_name=data.geology.layers[materials.size()]
 		materials.append(material_name)
 	data.regions=regions;data.materials=materials;data.surface_schema=1
 
@@ -148,12 +152,13 @@ static func populate(w):
 		for x in range(1,w.W-1):
 			var p=Vector2i(x,y);var f=field(w,p)
 			var patch=noise(w.seed_value,Vector2(p)*0.21,113)
-			if f[1]<0.28 or patch<0.32 or unit(w.seed_value,x,y,71)>f[1]*(0.22+patch*0.48)*SETTINGS.tree_density or protected(w,p) or not available(w,p):continue
+			if f[1]<0.28 or patch<0.32 or unit(w.seed_value,x,y,71)>f[1]*(0.22+patch*0.48)*SETTINGS.tree_density or protected(w,p) or Geology.core(w,p) or not available(w,p):continue
 			if [-1,0,1].any(func(dy):return [-1,0,1].any(func(dx):return w.trees.has(p+Vector2i(dx,dy)))):continue
 			w.trees[p]="biome-tree-%d-%d"%[x,y]
-	place_rocks(w)
+	if w.terrain.has("geology"):Geology.populate(w)
+	else:place_rocks(w)
 	var repairs=repair_connections(w)
-	w.terrain.placement={"version":VERSION,"repair_removed_cells":repairs,"rock_cells":w.rocks.size(),"tree_cells":w.trees.size(),"rock_layout_version":2}
+	w.terrain.placement={"version":VERSION,"repair_removed_cells":repairs,"rock_cells":w.rocks.size(),"tree_cells":w.trees.size(),"rock_layout_version":3 if w.terrain.has("geology") else 2}
 	w.story.trees=[]
 	for p in w.trees:w.story.trees.append({"id":w.trees[p],"position":[p.x,p.y]})
 	# Initial harvestables use existing kinds and caps, with weighted sampling.
@@ -178,7 +183,7 @@ static func populate(w):
 	w.Tasks.save(w);w.Story.persist(w);persist(w)
 
 static func protected(w,p: Vector2i) -> bool:
-	return p.x<=0 or p.y<=0 or p.x>=w.W-1 or p.y>=w.H-1 or clearing(normalized(w,Vector2(p)),w.seed_value)<0.8 or w.distance(p,w.MERCHANT_CELL)<=4 or w.entries.any(func(e):return w.distance(p,e)<=1) or w.distance(p,w.keeper.pos)<=2 or w.animals.any(func(a):return a.get("placed",false) and w.distance(p,a.pos)<=2)
+	return (w.terrain.has("geology") and Geology.route(w.seed_value,p,w.W,w.H)) or p.x<=0 or p.y<=0 or p.x>=w.W-1 or p.y>=w.H-1 or clearing(normalized(w,Vector2(p)),w.seed_value)<0.8 or w.distance(p,w.MERCHANT_CELL)<=4 or w.entries.any(func(e):return w.distance(p,e)<=1) or w.distance(p,w.keeper.pos)<=2 or w.animals.any(func(a):return a.get("placed",false) and w.distance(p,a.pos)<=2)
 
 static func rock_site(w,p: Vector2i) -> bool:
 	return w.inside(p) and not protected(w,p) and field(w,p)[2]>0.43 and available(w,p)

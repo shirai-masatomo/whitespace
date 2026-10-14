@@ -57,6 +57,7 @@ static func execute(w,j,actor):
 	var amount=w.rocks[j.pos].amount if j.kind=="mine" else w.Story.CLEAR_WOOD
 	if j.kind=="mine":
 		w.rocks.erase(j.pos)
+		preload("res://game/rock_view.gd").changed(w,j.pos)
 		if j.pos not in w.mined_rock_cells:w.mined_rock_cells.append(j.pos)
 		w.Tasks.save(w)
 	else:

@@ -30,7 +30,8 @@ func run():
 	check(b.get_theme_stylebox("hover").modulate_color!=selected,"Unselected hover differs from selection")
 	b.free()
 	for seed in [31,97,2026]:
-		var start=Time.get_ticks_msec();var w=Farm.new({},seed).begin_day();var sizes=components(w.rocks)
+		var start=Time.get_ticks_msec();var campaign=Farm.new_campaign();campaign.biome_map=Farm.Biome.generate(seed,100,68,5)
+		var w=Farm.new(campaign,seed).begin_day();var sizes=components(w.rocks)
 		var reachable=w.Biome.reachable(w);var free=0
 		for y in range(w.H):
 			for x in range(w.W):

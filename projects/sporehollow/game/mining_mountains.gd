@@ -57,7 +57,7 @@ static func populate(w):
 	for y in range(2,w.H-5):
 		for x in range(2,w.W-5):
 			var p=Vector2i(x,y)
-			if w.Biome.kind(w,p)=="rocky":sites.append(p)
+			if w.Biome.kind(w,p)=="rocky" and not w.Biome.Geology.core(w,p):sites.append(p)
 	sites.sort_custom(func(a,b):return w.Biome.unit(w.seed_value,a.x,a.y,421)<w.Biome.unit(w.seed_value,b.x,b.y,421))
 	var kinds=[]
 	for group in range(ceili(w.W*w.H/1700.0*w.Biome.SETTINGS.mountain_groups_per_1700)):kinds.append_array(["large","small","small","small"])
@@ -67,7 +67,7 @@ static func populate(w):
 			for y in range(box.position.y-1,box.end.y+1):
 				for x in range(box.position.x-1,box.end.x+1):
 					var c=Vector2i(x,y)
-					if w.Biome.protected(w,c) or not w.Biome.available(w,c):valid=false
+					if w.Biome.protected(w,c) or w.Biome.Geology.core(w,c) or not w.Biome.available(w,c):valid=false
 			if not valid:continue
 			var r=add(w,kind,p)
 			if r.is_empty():continue

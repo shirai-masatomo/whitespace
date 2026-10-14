@@ -2021,7 +2021,9 @@ func scene_actors() -> Array:
 		if key!="keeper" and world.workers[key].get("placed",false) and world.workers[key].get("carrier",-1)<0:actors.append({"y":actor_pixel(key,world.workers[key].pos).y+14,"x":world.workers[key].pos.x,"kind":"worker","data":key})
 	for r in world.mountains.values():
 		if r.remaining>0 or (world.tick-r.depleted_tick)*world.DT<world.Mountains.REMAINS_SECONDS:actors.append({"y":MountainView.foot(self,r).y,"x":r.pos.x,"kind":"mountain","data":r})
-	for p in world.rocks:actors.append({"y":center(p).y+14,"x":p.x,"kind":"rock","data":p})
+	var rock_visible=(get_canvas_transform().affine_inverse()*get_viewport_rect()).grow(70)
+	for p in world.rocks:
+		if rock_visible.has_point(center(p)):actors.append({"y":center(p).y+14,"x":p.x,"kind":"rock","data":p})
 	for p in world.trees: actors.append({"y":StoryView.tree_foot(self,p).y,"x":p.x,"kind":"tree","data":p})
 	if not world.story.idol.is_empty(): actors.append({"y":actor_pixel("idol",world.Story.at(world)).y+TILE.y+14,"x":world.Story.at(world).x,"kind":"idol"})
 	for cell in world.structures:

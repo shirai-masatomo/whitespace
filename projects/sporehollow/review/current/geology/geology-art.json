@@ -1,0 +1,5931 @@
+{
+	"checks": [
+		{
+			"check": "Rock asset loaded (38, 4)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (39, 4)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (40, 4)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (58, 4)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (59, 4)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (60, 4)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (61, 4)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (62, 4)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (63, 4)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (64, 4)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (37, 5)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (38, 5)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (39, 5)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (40, 5)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (41, 5)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (58, 5)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (59, 5)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (60, 5)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (61, 5)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (62, 5)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (63, 5)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (64, 5)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (37, 6)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (38, 6)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (39, 6)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (40, 6)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (41, 6)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (42, 6)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (57, 6)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (58, 6)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (59, 6)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (60, 6)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (61, 6)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (62, 6)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (63, 6)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (64, 6)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (65, 6)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (36, 7)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (37, 7)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (38, 7)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (39, 7)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (40, 7)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (41, 7)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (42, 7)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (43, 7)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (57, 7)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (58, 7)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (59, 7)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (60, 7)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (61, 7)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (62, 7)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (63, 7)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (64, 7)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (65, 7)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (66, 7)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (35, 8)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (36, 8)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (37, 8)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (38, 8)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (39, 8)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (40, 8)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (41, 8)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (42, 8)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (43, 8)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (57, 8)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (58, 8)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (59, 8)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (60, 8)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (61, 8)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (62, 8)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (63, 8)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (64, 8)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (65, 8)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (66, 8)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (67, 8)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (35, 9)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (36, 9)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (37, 9)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (38, 9)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (39, 9)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (40, 9)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (41, 9)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (42, 9)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (43, 9)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (44, 9)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (56, 9)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (57, 9)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (58, 9)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (59, 9)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (60, 9)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (61, 9)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (62, 9)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (63, 9)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (64, 9)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (65, 9)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (66, 9)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (67, 9)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (68, 9)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (34, 10)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (35, 10)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (36, 10)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (37, 10)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (38, 10)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (39, 10)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (40, 10)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (41, 10)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (42, 10)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (43, 10)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (44, 10)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (45, 10)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (56, 10)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (57, 10)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (58, 10)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (59, 10)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (60, 10)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (61, 10)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (62, 10)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (63, 10)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (64, 10)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (65, 10)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (66, 10)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (67, 10)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (68, 10)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (69, 10)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (70, 10)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (71, 10)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (72, 10)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (33, 11)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (34, 11)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (35, 11)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (36, 11)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (37, 11)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (38, 11)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (39, 11)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (40, 11)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (41, 11)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (42, 11)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (43, 11)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (44, 11)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (45, 11)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (55, 11)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (56, 11)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (57, 11)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (58, 11)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (59, 11)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (60, 11)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (61, 11)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (62, 11)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (63, 11)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (64, 11)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (65, 11)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (66, 11)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (67, 11)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (68, 11)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (69, 11)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (70, 11)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (71, 11)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (72, 11)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (73, 11)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (74, 11)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (75, 11)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (76, 11)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (77, 11)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (78, 11)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (79, 11)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (80, 11)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (81, 11)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (33, 12)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (34, 12)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (35, 12)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (36, 12)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (37, 12)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (38, 12)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (39, 12)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (40, 12)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (41, 12)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (42, 12)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (43, 12)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (44, 12)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (45, 12)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (53, 12)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (54, 12)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (55, 12)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (56, 12)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (57, 12)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (58, 12)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (59, 12)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (60, 12)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (61, 12)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (62, 12)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (63, 12)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (64, 12)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (65, 12)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (66, 12)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (67, 12)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (68, 12)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (69, 12)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (70, 12)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (71, 12)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (72, 12)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (73, 12)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (74, 12)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (75, 12)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (76, 12)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (77, 12)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (78, 12)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (79, 12)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (80, 12)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (81, 12)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (82, 12)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (83, 12)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (84, 12)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (30, 13)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (31, 13)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (32, 13)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (33, 13)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (34, 13)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (35, 13)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (36, 13)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (37, 13)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (38, 13)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (39, 13)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (40, 13)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (41, 13)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (42, 13)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (43, 13)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (44, 13)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (45, 13)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (46, 13)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (47, 13)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (48, 13)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (53, 13)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (54, 13)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (55, 13)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (56, 13)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (57, 13)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (58, 13)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (59, 13)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (60, 13)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (61, 13)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (62, 13)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (63, 13)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (64, 13)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (65, 13)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (66, 13)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (67, 13)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (68, 13)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (69, 13)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (70, 13)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (71, 13)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (72, 13)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (73, 13)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (74, 13)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (75, 13)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (76, 13)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (77, 13)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (78, 13)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (79, 13)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (80, 13)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (81, 13)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (82, 13)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (83, 13)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (84, 13)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (30, 14)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (31, 14)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (32, 14)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (33, 14)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (34, 14)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (35, 14)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (36, 14)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (37, 14)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (38, 14)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (39, 14)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (40, 14)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (41, 14)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (42, 14)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (43, 14)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (44, 14)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (45, 14)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (46, 14)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (47, 14)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (48, 14)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (49, 14)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (50, 14)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (51, 14)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (52, 14)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (53, 14)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (54, 14)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (55, 14)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (56, 14)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (57, 14)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (58, 14)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (59, 14)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (60, 14)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (61, 14)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (62, 14)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (63, 14)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (64, 14)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (65, 14)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (66, 14)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (67, 14)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (68, 14)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (69, 14)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (70, 14)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (71, 14)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (72, 14)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (73, 14)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (74, 14)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (75, 14)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (76, 14)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (77, 14)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (78, 14)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (79, 14)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (80, 14)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (81, 14)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (82, 14)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (83, 14)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (30, 15)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (31, 15)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (32, 15)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (33, 15)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (34, 15)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (35, 15)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (36, 15)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (37, 15)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (38, 15)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (39, 15)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (40, 15)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (41, 15)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (42, 15)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (43, 15)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (44, 15)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (45, 15)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (46, 15)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (47, 15)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (48, 15)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (49, 15)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (50, 15)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (51, 15)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (52, 15)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (53, 15)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (54, 15)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (55, 15)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (56, 15)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (60, 15)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (61, 15)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (62, 15)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (63, 15)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (64, 15)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (65, 15)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (66, 15)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (67, 15)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (68, 15)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (69, 15)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (70, 15)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (71, 15)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (72, 15)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (73, 15)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (74, 15)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (75, 15)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (76, 15)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (77, 15)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (78, 15)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (79, 15)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (80, 15)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (81, 15)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (82, 15)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (29, 16)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (30, 16)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (31, 16)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (32, 16)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (33, 16)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (34, 16)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (35, 16)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (36, 16)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (37, 16)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (38, 16)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (62, 16)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (63, 16)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (64, 16)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (65, 16)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (66, 16)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (67, 16)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (68, 16)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (69, 16)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (70, 16)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (71, 16)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (72, 16)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (73, 16)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (74, 16)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (75, 16)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (76, 16)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (77, 16)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (78, 16)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (79, 16)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (80, 16)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (81, 16)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (28, 17)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (29, 17)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (30, 17)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (31, 17)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (32, 17)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (33, 17)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (34, 17)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (35, 17)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (36, 17)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (64, 17)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (65, 17)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (66, 17)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (67, 17)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (68, 17)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (69, 17)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (70, 17)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (71, 17)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (72, 17)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (73, 17)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (74, 17)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (75, 17)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (76, 17)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (77, 17)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (78, 17)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (79, 17)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (80, 17)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (27, 18)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (28, 18)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (29, 18)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (30, 18)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (31, 18)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (32, 18)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (33, 18)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (34, 18)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (66, 18)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (67, 18)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (68, 18)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (69, 18)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (70, 18)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (71, 18)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (72, 18)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (73, 18)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (74, 18)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (75, 18)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (76, 18)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (77, 18)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (78, 18)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (79, 18)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (80, 18)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (24, 19)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (25, 19)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (26, 19)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (27, 19)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (28, 19)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (29, 19)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (30, 19)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (31, 19)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (32, 19)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (33, 19)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (68, 19)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (69, 19)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (70, 19)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (71, 19)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (72, 19)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (73, 19)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (74, 19)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (75, 19)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (76, 19)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (77, 19)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (78, 19)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (79, 19)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (23, 20)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (24, 20)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (25, 20)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (26, 20)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (27, 20)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (28, 20)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (29, 20)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (30, 20)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (31, 20)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (69, 20)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (70, 20)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (71, 20)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (72, 20)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (73, 20)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (74, 20)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (75, 20)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (76, 20)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (77, 20)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (78, 20)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (23, 21)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (24, 21)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (25, 21)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (26, 21)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (27, 21)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (28, 21)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (29, 21)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (30, 21)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (70, 21)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (71, 21)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (72, 21)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (73, 21)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (74, 21)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (75, 21)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (76, 21)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (77, 21)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (78, 21)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (22, 22)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (23, 22)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (24, 22)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (25, 22)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (26, 22)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (27, 22)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (28, 22)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (29, 22)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (71, 22)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (72, 22)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (73, 22)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (74, 22)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (75, 22)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (76, 22)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (77, 22)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (78, 22)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (22, 23)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (23, 23)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (24, 23)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (25, 23)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (26, 23)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (27, 23)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (28, 23)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (72, 23)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (73, 23)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (74, 23)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (75, 23)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (76, 23)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (77, 23)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (78, 23)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (22, 24)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (23, 24)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (24, 24)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (25, 24)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (26, 24)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (27, 24)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (28, 24)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (73, 24)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (74, 24)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (75, 24)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (76, 24)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (77, 24)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (78, 24)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (21, 25)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (22, 25)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (23, 25)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (24, 25)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (25, 25)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (26, 25)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (27, 25)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (73, 25)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (74, 25)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (75, 25)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (76, 25)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (77, 25)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (21, 26)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (22, 26)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (23, 26)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (24, 26)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (25, 26)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (26, 26)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (74, 26)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (75, 26)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (76, 26)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (77, 26)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (21, 27)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (22, 27)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (23, 27)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (24, 27)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (25, 27)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (26, 27)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (74, 27)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (75, 27)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (76, 27)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (77, 27)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (21, 28)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (22, 28)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (20, 29)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (21, 29)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (19, 30)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (20, 30)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (15, 31)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (16, 31)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (17, 31)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (18, 31)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (19, 31)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (15, 32)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (16, 32)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (17, 32)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (18, 32)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (11, 33)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (12, 33)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (13, 33)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (14, 33)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (15, 33)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (16, 33)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (17, 33)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (7, 34)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (8, 34)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (9, 34)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (10, 34)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (11, 34)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (12, 34)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (13, 34)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (14, 34)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (15, 34)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (16, 34)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (6, 35)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (7, 35)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (8, 35)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (9, 35)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (10, 35)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (11, 35)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (12, 35)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (13, 35)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (14, 35)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (15, 35)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (16, 35)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (5, 36)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (6, 36)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (7, 36)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (8, 36)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (9, 36)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (10, 36)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (11, 36)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (12, 36)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (13, 36)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (14, 36)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (15, 36)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (16, 36)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (4, 37)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (5, 37)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (6, 37)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (7, 37)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (8, 37)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (9, 37)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (10, 37)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (11, 37)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (12, 37)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (13, 37)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (14, 37)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (15, 37)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (16, 37)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (17, 37)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (4, 38)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (5, 38)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (6, 38)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (7, 38)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (8, 38)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (9, 38)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (10, 38)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (11, 38)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (12, 38)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (13, 38)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (14, 38)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (15, 38)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (16, 38)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (17, 38)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (4, 39)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (5, 39)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (6, 39)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (7, 39)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (8, 39)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (9, 39)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (10, 39)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (11, 39)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (12, 39)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (13, 39)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (14, 39)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (15, 39)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (16, 39)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (17, 39)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (18, 39)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (4, 40)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (5, 40)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (6, 40)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (7, 40)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (8, 40)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (9, 40)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (10, 40)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (11, 40)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (12, 40)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (13, 40)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (14, 40)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (15, 40)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (16, 40)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (17, 40)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (18, 40)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (19, 40)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (4, 41)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (5, 41)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (6, 41)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (7, 41)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (8, 41)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (9, 41)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (10, 41)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (11, 41)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (12, 41)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (13, 41)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (14, 41)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (15, 41)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (16, 41)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (17, 41)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (18, 41)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (19, 41)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (20, 41)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (4, 42)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (5, 42)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (6, 42)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (7, 42)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (8, 42)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (9, 42)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (10, 42)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (11, 42)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (12, 42)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (13, 42)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (14, 42)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (15, 42)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (16, 42)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (17, 42)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (18, 42)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (19, 42)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (20, 42)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (21, 42)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (4, 43)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (5, 43)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (6, 43)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (7, 43)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (8, 43)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (9, 43)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (10, 43)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (11, 43)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (12, 43)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (13, 43)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (14, 43)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (15, 43)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (16, 43)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (17, 43)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (18, 43)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (19, 43)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (20, 43)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (21, 43)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (22, 43)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (23, 43)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (24, 43)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (25, 43)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (26, 43)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (4, 44)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (5, 44)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (6, 44)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (7, 44)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (8, 44)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (9, 44)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (10, 44)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (11, 44)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (12, 44)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (13, 44)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (14, 44)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (15, 44)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (16, 44)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (17, 44)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (18, 44)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (19, 44)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (20, 44)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (21, 44)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (22, 44)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (23, 44)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (24, 44)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (25, 44)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (26, 44)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (27, 44)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (4, 45)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (5, 45)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (6, 45)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (7, 45)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (8, 45)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (9, 45)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (10, 45)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (11, 45)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (12, 45)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (13, 45)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (14, 45)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (15, 45)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (16, 45)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (17, 45)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (18, 45)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (19, 45)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (20, 45)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (21, 45)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (22, 45)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (23, 45)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (24, 45)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (25, 45)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (26, 45)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (27, 45)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (28, 45)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (4, 46)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (5, 46)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (6, 46)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (7, 46)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (8, 46)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (9, 46)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (10, 46)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (11, 46)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (12, 46)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (13, 46)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (14, 46)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (15, 46)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (16, 46)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (17, 46)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (18, 46)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (19, 46)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (20, 46)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (21, 46)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (22, 46)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (23, 46)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (24, 46)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (25, 46)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (26, 46)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (27, 46)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (28, 46)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (29, 46)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (4, 47)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (5, 47)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (6, 47)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (7, 47)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (8, 47)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (9, 47)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (10, 47)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (11, 47)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (12, 47)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (13, 47)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (14, 47)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (15, 47)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (16, 47)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (17, 47)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (18, 47)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (19, 47)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (20, 47)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (21, 47)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (22, 47)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (23, 47)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (24, 47)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (25, 47)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (26, 47)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (27, 47)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (28, 47)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (29, 47)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (30, 47)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (4, 48)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (5, 48)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (6, 48)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (7, 48)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (8, 48)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (9, 48)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (10, 48)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (11, 48)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (12, 48)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (13, 48)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (14, 48)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (15, 48)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (16, 48)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (17, 48)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (18, 48)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (19, 48)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (20, 48)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (21, 48)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (22, 48)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (23, 48)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (24, 48)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (25, 48)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (26, 48)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (27, 48)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (28, 48)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (29, 48)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (30, 48)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (31, 48)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (4, 49)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (5, 49)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (6, 49)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (7, 49)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (8, 49)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (9, 49)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (10, 49)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (11, 49)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (12, 49)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (13, 49)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (14, 49)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (15, 49)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (16, 49)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (17, 49)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (18, 49)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (19, 49)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (20, 49)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (21, 49)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (22, 49)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (23, 49)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (24, 49)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (25, 49)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (26, 49)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (27, 49)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (28, 49)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (29, 49)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (30, 49)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (31, 49)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (32, 49)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (4, 50)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (5, 50)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (6, 50)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (7, 50)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (8, 50)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (9, 50)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (10, 50)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (11, 50)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (12, 50)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (13, 50)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (14, 50)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (15, 50)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (16, 50)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (17, 50)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (18, 50)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (19, 50)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (20, 50)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (21, 50)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (22, 50)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (23, 50)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (24, 50)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (25, 50)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (26, 50)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (27, 50)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (28, 50)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (29, 50)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (30, 50)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (31, 50)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (32, 50)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (33, 50)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (4, 51)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (5, 51)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (6, 51)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (7, 51)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (8, 51)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (9, 51)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (10, 51)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (11, 51)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (12, 51)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (13, 51)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (14, 51)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (15, 51)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (16, 51)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (17, 51)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (18, 51)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (19, 51)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (20, 51)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (21, 51)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (22, 51)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (23, 51)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (24, 51)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (25, 51)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (26, 51)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (27, 51)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (28, 51)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (29, 51)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (30, 51)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (31, 51)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (32, 51)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (33, 51)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (34, 51)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (35, 51)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (4, 52)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (5, 52)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (6, 52)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (7, 52)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (8, 52)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (9, 52)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (10, 52)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (11, 52)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (12, 52)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (13, 52)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (14, 52)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (15, 52)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (16, 52)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (17, 52)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (18, 52)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (19, 52)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (20, 52)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (21, 52)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (22, 52)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (23, 52)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (24, 52)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (25, 52)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (26, 52)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (27, 52)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (28, 52)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (29, 52)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (30, 52)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (31, 52)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (32, 52)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (33, 52)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (34, 52)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (35, 52)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (36, 52)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (37, 52)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (4, 53)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (5, 53)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (6, 53)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (7, 53)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (8, 53)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (9, 53)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (10, 53)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (11, 53)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (12, 53)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (13, 53)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (14, 53)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (15, 53)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (16, 53)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (17, 53)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (18, 53)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (19, 53)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (20, 53)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (21, 53)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (22, 53)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (23, 53)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (24, 53)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (25, 53)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (26, 53)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (27, 53)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (28, 53)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (29, 53)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (30, 53)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (31, 53)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (32, 53)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (33, 53)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (34, 53)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (35, 53)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (36, 53)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (37, 53)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (38, 53)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (39, 53)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (40, 53)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (4, 54)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (5, 54)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (6, 54)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (7, 54)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (8, 54)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (9, 54)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (10, 54)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (11, 54)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (12, 54)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (13, 54)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (14, 54)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (15, 54)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (16, 54)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (17, 54)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (18, 54)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (19, 54)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (20, 54)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (21, 54)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (22, 54)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (23, 54)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (24, 54)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (25, 54)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (26, 54)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (27, 54)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (28, 54)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (29, 54)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (30, 54)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (31, 54)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (32, 54)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (33, 54)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (34, 54)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (35, 54)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (36, 54)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (37, 54)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (38, 54)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (39, 54)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (40, 54)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (41, 54)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (42, 54)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (43, 54)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (4, 55)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (5, 55)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (6, 55)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (7, 55)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (8, 55)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (9, 55)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (10, 55)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (11, 55)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (12, 55)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (13, 55)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (14, 55)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (15, 55)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (16, 55)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (17, 55)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (18, 55)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (19, 55)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (20, 55)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (21, 55)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (22, 55)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (23, 55)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (24, 55)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (25, 55)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (26, 55)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (27, 55)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (28, 55)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (29, 55)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (30, 55)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (31, 55)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (32, 55)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (33, 55)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (34, 55)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (35, 55)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (36, 55)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (37, 55)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (38, 55)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (39, 55)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (40, 55)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (41, 55)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (42, 55)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (43, 55)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (44, 55)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (45, 55)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (4, 56)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (5, 56)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (6, 56)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (7, 56)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (8, 56)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (9, 56)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (10, 56)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (11, 56)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (12, 56)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (13, 56)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (14, 56)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (15, 56)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (16, 56)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (17, 56)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (18, 56)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (19, 56)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (20, 56)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (21, 56)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (22, 56)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (23, 56)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (24, 56)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (25, 56)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (26, 56)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (27, 56)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (28, 56)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (29, 56)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (30, 56)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (31, 56)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (32, 56)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (33, 56)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (34, 56)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (35, 56)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (36, 56)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (37, 56)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (38, 56)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (39, 56)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (40, 56)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (41, 56)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (42, 56)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (43, 56)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (44, 56)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (45, 56)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (5, 57)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (6, 57)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (7, 57)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (8, 57)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (9, 57)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (10, 57)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (11, 57)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (12, 57)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (13, 57)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (14, 57)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (15, 57)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (16, 57)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (17, 57)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (18, 57)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (19, 57)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (20, 57)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (21, 57)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (22, 57)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (23, 57)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (24, 57)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (25, 57)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (26, 57)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (27, 57)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (28, 57)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (29, 57)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (30, 57)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (31, 57)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (32, 57)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (33, 57)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (34, 57)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (35, 57)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (36, 57)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (37, 57)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (38, 57)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (39, 57)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (40, 57)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (41, 57)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (42, 57)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (43, 57)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (44, 57)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (45, 57)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (6, 58)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (7, 58)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (8, 58)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (9, 58)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (10, 58)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (11, 58)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (12, 58)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (13, 58)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (14, 58)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (15, 58)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (16, 58)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (17, 58)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (18, 58)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (19, 58)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (20, 58)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (21, 58)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (22, 58)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (23, 58)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (24, 58)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (25, 58)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (26, 58)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (27, 58)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (28, 58)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (29, 58)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (30, 58)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (31, 58)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (32, 58)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (33, 58)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (34, 58)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (35, 58)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (36, 58)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (37, 58)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (38, 58)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (39, 58)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (40, 58)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (41, 58)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (42, 58)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (43, 58)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (44, 58)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (45, 58)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (6, 59)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (7, 59)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (8, 59)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (9, 59)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (10, 59)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (11, 59)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (12, 59)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (13, 59)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (14, 59)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (15, 59)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (16, 59)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (17, 59)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (18, 59)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (19, 59)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (20, 59)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (21, 59)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (22, 59)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (23, 59)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (24, 59)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (25, 59)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (26, 59)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (27, 59)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (28, 59)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (29, 59)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (30, 59)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (31, 59)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (32, 59)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (33, 59)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (34, 59)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (35, 59)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (36, 59)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (37, 59)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (38, 59)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (39, 59)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (40, 59)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (41, 59)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (42, 59)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (43, 59)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (44, 59)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (45, 59)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (7, 60)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (8, 60)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (9, 60)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (10, 60)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (11, 60)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (12, 60)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (13, 60)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (14, 60)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (15, 60)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (16, 60)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (17, 60)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (18, 60)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (19, 60)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (20, 60)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (21, 60)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (22, 60)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (23, 60)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (24, 60)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (25, 60)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (26, 60)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (27, 60)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (28, 60)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (29, 60)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (30, 60)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (31, 60)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (32, 60)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (33, 60)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (34, 60)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (35, 60)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (36, 60)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (37, 60)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (38, 60)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (39, 60)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (40, 60)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (41, 60)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (42, 60)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (43, 60)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (44, 60)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (45, 60)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (8, 61)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (9, 61)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (10, 61)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (11, 61)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (12, 61)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (13, 61)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (14, 61)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (15, 61)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (16, 61)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (17, 61)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (18, 61)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (19, 61)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (20, 61)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (21, 61)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (22, 61)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (23, 61)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (24, 61)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (25, 61)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (26, 61)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (27, 61)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (28, 61)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (29, 61)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (30, 61)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (31, 61)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (32, 61)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (33, 61)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (34, 61)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (35, 61)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (36, 61)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (37, 61)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (38, 61)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (39, 61)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (40, 61)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (41, 61)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (42, 61)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (43, 61)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (44, 61)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (45, 61)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (46, 61)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (8, 62)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (9, 62)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (10, 62)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (11, 62)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (12, 62)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (13, 62)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (14, 62)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (15, 62)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (16, 62)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (17, 62)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (18, 62)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (19, 62)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (20, 62)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (21, 62)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (22, 62)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (23, 62)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (24, 62)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (25, 62)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (26, 62)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (27, 62)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (28, 62)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (29, 62)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (30, 62)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (31, 62)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (32, 62)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (33, 62)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (34, 62)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (35, 62)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (36, 62)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (37, 62)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (38, 62)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (39, 62)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (40, 62)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (41, 62)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (42, 62)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (43, 62)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (44, 62)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (45, 62)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (46, 62)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (9, 63)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (10, 63)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (11, 63)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (12, 63)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (13, 63)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (14, 63)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (15, 63)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (16, 63)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (17, 63)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (18, 63)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (19, 63)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (20, 63)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (21, 63)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (22, 63)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (23, 63)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (24, 63)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (25, 63)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (26, 63)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (27, 63)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (28, 63)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (29, 63)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (30, 63)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (31, 63)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (32, 63)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (33, 63)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (34, 63)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (35, 63)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (36, 63)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (37, 63)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (38, 63)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (39, 63)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (40, 63)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (41, 63)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (42, 63)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (43, 63)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (44, 63)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (45, 63)",
+			"passed": true
+		},
+		{
+			"check": "Rock asset loaded (46, 63)",
+			"passed": true
+		},
+		{
+			"check": "Normal drawing reuses warmed rock cache",
+			"passed": true
+		},
+		{
+			"check": "Stone/iron preserve footprint alpha 0/false",
+			"passed": true
+		},
+		{
+			"check": "Stone/iron preserve footprint alpha 0/true",
+			"passed": true
+		},
+		{
+			"check": "Stone/iron preserve footprint alpha 1/false",
+			"passed": true
+		},
+		{
+			"check": "Stone/iron preserve footprint alpha 1/true",
+			"passed": true
+		},
+		{
+			"check": "Stone/iron preserve footprint alpha 2/false",
+			"passed": true
+		},
+		{
+			"check": "Stone/iron preserve footprint alpha 2/true",
+			"passed": true
+		},
+		{
+			"check": "Stone/iron preserve footprint alpha 3/false",
+			"passed": true
+		},
+		{
+			"check": "Stone/iron preserve footprint alpha 3/true",
+			"passed": true
+		},
+		{
+			"check": "Stone/iron preserve footprint alpha 4/false",
+			"passed": true
+		},
+		{
+			"check": "Stone/iron preserve footprint alpha 4/true",
+			"passed": true
+		},
+		{
+			"check": "Stone/iron preserve footprint alpha 5/false",
+			"passed": true
+		},
+		{
+			"check": "Stone/iron preserve footprint alpha 5/true",
+			"passed": true
+		},
+		{
+			"check": "Stone/iron preserve footprint alpha 6/false",
+			"passed": true
+		},
+		{
+			"check": "Stone/iron preserve footprint alpha 6/true",
+			"passed": true
+		},
+		{
+			"check": "Stone/iron preserve footprint alpha 7/false",
+			"passed": true
+		},
+		{
+			"check": "Stone/iron preserve footprint alpha 7/true",
+			"passed": true
+		},
+		{
+			"check": "Stone/iron preserve footprint alpha 8/false",
+			"passed": true
+		},
+		{
+			"check": "Stone/iron preserve footprint alpha 8/true",
+			"passed": true
+		},
+		{
+			"check": "Stone/iron preserve footprint alpha 9/false",
+			"passed": true
+		},
+		{
+			"check": "Stone/iron preserve footprint alpha 9/true",
+			"passed": true
+		},
+		{
+			"check": "Stone/iron preserve footprint alpha 10/false",
+			"passed": true
+		},
+		{
+			"check": "Stone/iron preserve footprint alpha 10/true",
+			"passed": true
+		},
+		{
+			"check": "Stone/iron preserve footprint alpha 11/false",
+			"passed": true
+		},
+		{
+			"check": "Stone/iron preserve footprint alpha 11/true",
+			"passed": true
+		},
+		{
+			"check": "Stone/iron preserve footprint alpha 12/false",
+			"passed": true
+		},
+		{
+			"check": "Stone/iron preserve footprint alpha 12/true",
+			"passed": true
+		},
+		{
+			"check": "Stone/iron preserve footprint alpha 13/false",
+			"passed": true
+		},
+		{
+			"check": "Stone/iron preserve footprint alpha 13/true",
+			"passed": true
+		},
+		{
+			"check": "Stone/iron preserve footprint alpha 14/false",
+			"passed": true
+		},
+		{
+			"check": "Stone/iron preserve footprint alpha 14/true",
+			"passed": true
+		},
+		{
+			"check": "Stone/iron preserve footprint alpha 15/false",
+			"passed": true
+		},
+		{
+			"check": "Stone/iron preserve footprint alpha 15/true",
+			"passed": true
+		},
+		{
+			"check": "Formal ground patch loaded clay",
+			"passed": true
+		},
+		{
+			"check": "Formal ground patch loaded sand",
+			"passed": true
+		},
+		{
+			"check": "Mining iron visual opens the actual cell",
+			"passed": true
+		},
+		{
+			"check": "Iron visual keeps existing 8-stone yield; no invented iron resource",
+			"passed": true
+		},
+		{
+			"check": "Mined connection removed",
+			"passed": true
+		}
+	],
+	"cpu_ground_and_texture_prepare_ms": 449.401,
+	"cpu_only": true,
+	"failures": 0
+}

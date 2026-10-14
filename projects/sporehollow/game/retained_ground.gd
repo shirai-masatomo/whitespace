@@ -9,6 +9,7 @@ var world
 var chunks={}
 var stamps={}
 var occupancy_signature=0
+var rock_revision=-1
 class Base extends Node2D:
 	var world
 	var box:Rect2i
@@ -61,12 +62,21 @@ func sync_measured():
 				if Board.textured(w):base.material=Board.soil_material()
 				node.add_child(base)
 		queue_redraw()
-	var occupancy=hash([w.floors,w.structures,w.rocks,w.natural,w.mined_rock_cells])
+	if rock_revision!=w.rock_visual_revision:
+		rock_revision=w.rock_visual_revision
+		if Vector2i(-1,-1) in w.rock_changed_cells:
+			for node in chunks.values():node.queue_redraw()
+		else:
+			for p in w.rock_changed_cells:
+				for key in rock_dependency_chunks(p):
+					if chunks.has(key):chunks[key].queue_redraw()
+		w.rock_changed_cells.clear()
+	var occupancy=hash([w.floors,w.structures,w.natural])
 	if occupancy!=occupancy_signature:
 		occupancy_signature=occupancy
 		var next={}
 		for key in chunks:next[key]=[]
-		var groups=[w.floors.keys(),w.structures.keys(),w.rocks.keys(),w.natural.keys(),w.mined_rock_cells]
+		var groups=[w.floors.keys(),w.structures.keys(),[],w.natural.keys(),[]]
 		for index in range(groups.size()):
 			for p in groups[index]:
 				var key=Vector2i(floori(float(p.x)/SIZE),floori(float(p.y)/SIZE))

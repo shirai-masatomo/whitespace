@@ -1,0 +1,2333 @@
+{
+  "schema_version": 1,
+  "delivery": "continuous_bedrock_v1",
+  "source_art_commit": "fc9e3646afe8708e5bc06756dcaf0448e77a93b6",
+  "source_implementation_commit": "7708cc34fb5da0adbc0e569fed8fcac2649d8c19",
+  "cell_px": [
+    48,
+    42
+  ],
+  "rock_canvas_px": [
+    48,
+    54
+  ],
+  "rock_anchor_px": [
+    24,
+    33
+  ],
+  "ground_anchor_px": [
+    24,
+    21
+  ],
+  "mask_bits": {
+    "N": 1,
+    "E": 2,
+    "S": 4,
+    "W": 8
+  },
+  "assets": [
+    {
+      "file": "top/atlas.png",
+      "size_px": [
+        384,
+        336
+      ],
+      "anchor_px": [
+        0,
+        0
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "role": "opaque seamless 8x8-cell roof surface; sample by WORLD cell position",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "fd900bafd2464ea168ae616118c292268943b920df64b8b42be58d4758a47a71",
+      "period_cells": [
+        8,
+        8
+      ],
+      "sample_origin": "world cell left/top; crop48x42 then paste at(0,12) in rock canvas"
+    },
+    {
+      "file": "normal/mask_00.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "role": "base body with quiet fallback roof; atlas overlay recommended",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "80c226d2f701ac4a3466e0e37b297ce750b3eb0ffbca9bfb82a61cc9d07f10da",
+      "connection_mask": 0
+    },
+    {
+      "file": "top/mask_00.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "role": "data mask: use ALPHA only; never draw white RGB",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "6c07c1cd502ada54e4c5a8a4689a3fa7f97db8cf9e29a001bf0ee7fb7b66468a",
+      "connection_mask": 0
+    },
+    {
+      "file": "normal/mask_01.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "role": "base body with quiet fallback roof; atlas overlay recommended",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "8ebf9577f37e09af53c89a09741df4914efca8f0c32a6cdd9d43a8bbdd1d4c71",
+      "connection_mask": 1
+    },
+    {
+      "file": "top/mask_01.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "role": "data mask: use ALPHA only; never draw white RGB",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "bc0342062cb8f1fd2b8a090cd33eebe906aa9424196daa6ce08e204bdea75e24",
+      "connection_mask": 1
+    },
+    {
+      "file": "normal/mask_02.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "role": "base body with quiet fallback roof; atlas overlay recommended",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "42bb6d001b49aa7c7ad59c2da61b8a278339533d7b4a843c364f5492faffbee7",
+      "connection_mask": 2
+    },
+    {
+      "file": "top/mask_02.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "role": "data mask: use ALPHA only; never draw white RGB",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "4459315517cfae5fdd56f56c0758cfc738cd211fe71f0fea4e2c9612d8fa0cfb",
+      "connection_mask": 2
+    },
+    {
+      "file": "normal/mask_03.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "role": "base body with quiet fallback roof; atlas overlay recommended",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "df4a634774756544f9095bf0adedebcc4920ba83e683a7801798b36173c83a28",
+      "connection_mask": 3
+    },
+    {
+      "file": "top/mask_03.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "role": "data mask: use ALPHA only; never draw white RGB",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "959bb8be4b6bcd32cc133e3d042452b69cfa3be7a25723659766161ccef9de2a",
+      "connection_mask": 3
+    },
+    {
+      "file": "normal/mask_04.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "role": "base body with quiet fallback roof; atlas overlay recommended",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "ab53436f204415af170702b7b9ef5166b7c77868f7ea832c59f306b4ce4b9b01",
+      "connection_mask": 4
+    },
+    {
+      "file": "top/mask_04.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "role": "data mask: use ALPHA only; never draw white RGB",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "d06f92f2ae4bce79119de7bcf25d7bf339ef7c49945e2365d6fc36edc0943bba",
+      "connection_mask": 4
+    },
+    {
+      "file": "normal/mask_05.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "role": "base body with quiet fallback roof; atlas overlay recommended",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "026ab257f61e67be37c2dbb01833958a2f55ff848cf84d69d353a80b62db0331",
+      "connection_mask": 5
+    },
+    {
+      "file": "top/mask_05.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "role": "data mask: use ALPHA only; never draw white RGB",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "55d3ad1a1aa9198606fe7439a2829ccb55e97987c71243a6ededa083cc3a89fb",
+      "connection_mask": 5
+    },
+    {
+      "file": "normal/mask_06.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "role": "base body with quiet fallback roof; atlas overlay recommended",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "56b76fcb5d287ad333cffa090a5e0061b6e3b9e9fa1e0b7865fc2a9fd675e842",
+      "connection_mask": 6
+    },
+    {
+      "file": "top/mask_06.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "role": "data mask: use ALPHA only; never draw white RGB",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "9ad67b359d40de85fa8869e520a479ded81105b23b2e2ab28531acce7353798b",
+      "connection_mask": 6
+    },
+    {
+      "file": "normal/mask_07.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "role": "base body with quiet fallback roof; atlas overlay recommended",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "ccd90e1e85290120b5dbee29ffa135cc25578c4cf0b8223c93323cae093ebd11",
+      "connection_mask": 7
+    },
+    {
+      "file": "top/mask_07.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "role": "data mask: use ALPHA only; never draw white RGB",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "47a3cb0167da900f3c58b10af8f853f9e787e0ceaba5e2f4644c4c25b4485344",
+      "connection_mask": 7
+    },
+    {
+      "file": "normal/mask_08.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "role": "base body with quiet fallback roof; atlas overlay recommended",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "8714653d6b78226ba8cf24c8e38bd2008b1d47ae3382a7da8e282ecb684cf12e",
+      "connection_mask": 8
+    },
+    {
+      "file": "top/mask_08.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "role": "data mask: use ALPHA only; never draw white RGB",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "4e81d38b3555818667bbd027370832f2cd031dfeb5beae43b83313003372668a",
+      "connection_mask": 8
+    },
+    {
+      "file": "normal/mask_09.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "role": "base body with quiet fallback roof; atlas overlay recommended",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "c77e1e920d79d794c4d3ac215cf4f7b4d9c4b350fae1cec66912d16a36a058c6",
+      "connection_mask": 9
+    },
+    {
+      "file": "top/mask_09.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "role": "data mask: use ALPHA only; never draw white RGB",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "616b8c799951afb6074eaa85be3cbcb85f35823b47dd65771aebe4e56468e956",
+      "connection_mask": 9
+    },
+    {
+      "file": "normal/mask_10.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "role": "base body with quiet fallback roof; atlas overlay recommended",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "ec4582a10d6d7c88cb4037745d1345b322a5433d00605a448c29c0538ebcca68",
+      "connection_mask": 10
+    },
+    {
+      "file": "top/mask_10.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "role": "data mask: use ALPHA only; never draw white RGB",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "462f46c51ae42d99fbe63116269963bb4f1dae0d49240825c336d28e86eedc0d",
+      "connection_mask": 10
+    },
+    {
+      "file": "normal/mask_11.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "role": "base body with quiet fallback roof; atlas overlay recommended",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "79e0e78969f43185523d255ce65f74f04b53547ef90c60fa00afb81727ea1370",
+      "connection_mask": 11
+    },
+    {
+      "file": "top/mask_11.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "role": "data mask: use ALPHA only; never draw white RGB",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "a5da0e6e3e01c5ebba37dd95c5698845f13a04e8a8eee9e566608e682657d87a",
+      "connection_mask": 11
+    },
+    {
+      "file": "normal/mask_12.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "role": "base body with quiet fallback roof; atlas overlay recommended",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "5b4d7a475e0443456ea3a63e36b1f4124e505d3a2e593b9719a9f2efa4e97e49",
+      "connection_mask": 12
+    },
+    {
+      "file": "top/mask_12.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "role": "data mask: use ALPHA only; never draw white RGB",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "2248b8b224a441e5e9556820091dc7c4f702707ba5d9aa1b0ebce863d4b11eca",
+      "connection_mask": 12
+    },
+    {
+      "file": "normal/mask_13.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "role": "base body with quiet fallback roof; atlas overlay recommended",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "8962e557abcac80602468527c8eaaffd87c8215076203c500b8d2f7a33cbbd4d",
+      "connection_mask": 13
+    },
+    {
+      "file": "top/mask_13.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "role": "data mask: use ALPHA only; never draw white RGB",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "645f7f10790db7ff1d14273a64ea4f6a6d8223af06a204009c91e725c81aa111",
+      "connection_mask": 13
+    },
+    {
+      "file": "normal/mask_14.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "role": "base body with quiet fallback roof; atlas overlay recommended",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "0ac20412434c88e13d81780a6b0e8e79cfb2fd7cc66caa4b1c1edd17e664841c",
+      "connection_mask": 14
+    },
+    {
+      "file": "top/mask_14.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "role": "data mask: use ALPHA only; never draw white RGB",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "84bb8dedd55bea351bed258df81f3b953577d416571b2e45b674fbf930432ee7",
+      "connection_mask": 14
+    },
+    {
+      "file": "normal/mask_15.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "role": "base body with quiet fallback roof; atlas overlay recommended",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "091ede951d3095c6d4d83359cb6d793cc33422dba76b7a0417a6c4c5d939cf5b",
+      "connection_mask": 15
+    },
+    {
+      "file": "top/mask_15.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "role": "data mask: use ALPHA only; never draw white RGB",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "86dbc283b32eb887fb7c10d8b13f8f56c28f11dd1633c23dab487a65a21d2ad3",
+      "connection_mask": 15
+    },
+    {
+      "file": "inner/concave_nw.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "role": "concave seam: both cardinals present and diagonal absent",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "8a5187a7410d254eb28e250e44772acad3ffd2465c7a788bc6235a93e29b8d55",
+      "corner": "nw"
+    },
+    {
+      "file": "inner/concave_ne.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "role": "concave seam: both cardinals present and diagonal absent",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "ae600f89c23239b60ba82d50a474c0be26f48c4614db97933739d00790b41f5b",
+      "corner": "ne"
+    },
+    {
+      "file": "inner/concave_sw.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "role": "concave seam: both cardinals present and diagonal absent",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "869402841766659c74a51c664829c56867615e22e3bd21d02166b4b6899995db",
+      "corner": "sw"
+    },
+    {
+      "file": "inner/concave_se.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "role": "concave seam: both cardinals present and diagonal absent",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "1fca25120e16f4454fa9d0e089e004c09804f0e87dd99e79e92540907184850d",
+      "corner": "se"
+    },
+    {
+      "file": "iron/atlas.png",
+      "size_px": [
+        384,
+        336
+      ],
+      "anchor_px": [
+        0,
+        0
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "role": "transparent oxidized ore veins; same global phase as rock roof",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "257c7c7bdc39abc6dcdd49f0553bd67a358bcdfbeff80f4aeb0fd01eb9ec3ab9",
+      "period_cells": [
+        8,
+        8
+      ],
+      "clip_to": "top/mask_XX alpha; not a separate rock collision"
+    },
+    {
+      "file": "iron/patch_00.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "role": "optional local ore cluster; use patch OR atlas, clip to roof",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "fd18bea471f9f470a6f07fe144509ce2e5f811b52b145e6c5c4e83151d13b299",
+      "source_cell": [
+        7,
+        7
+      ]
+    },
+    {
+      "file": "iron/patch_01.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "role": "optional local ore cluster; use patch OR atlas, clip to roof",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "a0c05d3f9930f2b957a7c37a61db88b57869de1c84414f0b02e661712dedea10",
+      "source_cell": [
+        5,
+        4
+      ]
+    },
+    {
+      "file": "iron/patch_02.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "role": "optional local ore cluster; use patch OR atlas, clip to roof",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "aacd483fc9dc6104927f46b73e20de8925ae6ba0923608e4def78be1c438b2ea",
+      "source_cell": [
+        0,
+        1
+      ]
+    },
+    {
+      "file": "ground/clay/atlas.png",
+      "size_px": [
+        192,
+        168
+      ],
+      "anchor_px": [
+        0,
+        0
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "role": "transparent 4x4-cell ground texture; keep existing mesh underneath",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "3b6b95246e1496fe01bd6bf0fdcc508f294243fdf42616c067a2886ec277f506",
+      "period_cells": [
+        4,
+        4
+      ]
+    },
+    {
+      "file": "ground/sand/atlas.png",
+      "size_px": [
+        192,
+        168
+      ],
+      "anchor_px": [
+        0,
+        0
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "role": "transparent 4x4-cell ground texture; keep existing mesh underneath",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "d9f5e90fb6c5800449aa3b7fc1d75e5a25ce2150f16eaf2854593a6bcfe68ef2",
+      "period_cells": [
+        4,
+        4
+      ]
+    },
+    {
+      "file": "boundary/full.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "role": "shared material mask ALPHA only; one inside-cell transition",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "7fd33b463a32c430cabf2f864354c38a362f5a0e0f69e87423b78349ae8c696f",
+      "boundary_kind": "full"
+    },
+    {
+      "file": "ground/clay/full.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "role": "ready ground overlay; shared boundary pre-applied",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "c5ca24a141544539652bdba5b0a7c4bb9fd2ae702694158fa3b50039a8039282",
+      "boundary_kind": "full"
+    },
+    {
+      "file": "ground/sand/full.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "role": "ready ground overlay; shared boundary pre-applied",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "b6f02454e3af9847e6a6db3e8be00951eaffa3027a65c6983599332d4c228026",
+      "boundary_kind": "full"
+    },
+    {
+      "file": "boundary/edge_n.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "role": "shared material mask ALPHA only; one inside-cell transition",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "090e27b3dc2062ceec74f1beb65bfaa572db96280439c8bba0ba87c67c665b2b",
+      "boundary_kind": "edge_n"
+    },
+    {
+      "file": "ground/clay/edge_n.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "role": "ready ground overlay; shared boundary pre-applied",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "663e34da29b6e1dcb0de7f2a14383534f793273f24074e53239ec16590d5cb6a",
+      "boundary_kind": "edge_n"
+    },
+    {
+      "file": "ground/sand/edge_n.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "role": "ready ground overlay; shared boundary pre-applied",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "3202654c3ae69fc56889d8a9a6ee9fdd5be5071ad3fa8b565c7305592adb48cc",
+      "boundary_kind": "edge_n"
+    },
+    {
+      "file": "boundary/edge_e.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "role": "shared material mask ALPHA only; one inside-cell transition",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "a6776c457caa265c703f2e7625ba48366ec7f6db5fe606d635b3f72ded57424e",
+      "boundary_kind": "edge_e"
+    },
+    {
+      "file": "ground/clay/edge_e.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "role": "ready ground overlay; shared boundary pre-applied",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "5e859fef3dbaa951a3bc686877f1dd004419b359df0e20429906ad0f0889d8e9",
+      "boundary_kind": "edge_e"
+    },
+    {
+      "file": "ground/sand/edge_e.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "role": "ready ground overlay; shared boundary pre-applied",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "61f5cd75647bf5d9ad58362ba297cf33b5707c7b69b39fe8eff1af412da34b7c",
+      "boundary_kind": "edge_e"
+    },
+    {
+      "file": "boundary/edge_s.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "role": "shared material mask ALPHA only; one inside-cell transition",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "41a051ba8523ac4537ccb853c78556d8d3523d602ff9337645d54992ec7e8863",
+      "boundary_kind": "edge_s"
+    },
+    {
+      "file": "ground/clay/edge_s.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "role": "ready ground overlay; shared boundary pre-applied",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "ba882d01b052d6c861abfd36ab164a256bcca98042857413b752ded58eeec3fc",
+      "boundary_kind": "edge_s"
+    },
+    {
+      "file": "ground/sand/edge_s.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "role": "ready ground overlay; shared boundary pre-applied",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "8fa34ccc198ba1d2a02fb450b43f5e6e90f584eb854b5db3664a3002d0636372",
+      "boundary_kind": "edge_s"
+    },
+    {
+      "file": "boundary/edge_w.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "role": "shared material mask ALPHA only; one inside-cell transition",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "3cf19c9649a241f0262fba3162724a16bceb5ed0bfc1af9302cbed453f1dabcd",
+      "boundary_kind": "edge_w"
+    },
+    {
+      "file": "ground/clay/edge_w.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "role": "ready ground overlay; shared boundary pre-applied",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "256e2fc8a0ea48d7999bfe456b8ae92ac6ad5afc0a6b73f236a0f895b8fec089",
+      "boundary_kind": "edge_w"
+    },
+    {
+      "file": "ground/sand/edge_w.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "role": "ready ground overlay; shared boundary pre-applied",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "c10c04dc6a0650f6c62a4c2203fcb00f1cb47b9161df8869bcfa0917bb69f45c",
+      "boundary_kind": "edge_w"
+    },
+    {
+      "file": "boundary/outer_nw.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "role": "shared material mask ALPHA only; one inside-cell transition",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "24e2d3d00167d85c404121cbf0f9250c8f938804ef11fb8f89479dc10ab86b45",
+      "boundary_kind": "outer_nw"
+    },
+    {
+      "file": "ground/clay/outer_nw.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "role": "ready ground overlay; shared boundary pre-applied",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "7e6d95479ce3471c5e9449fd86c49ccf844be0b0288294ea7c64c06f9a05c3f2",
+      "boundary_kind": "outer_nw"
+    },
+    {
+      "file": "ground/sand/outer_nw.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "role": "ready ground overlay; shared boundary pre-applied",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "496a14e1a9fdf9229010211d5b7ce4b77dbda14873e720bfe8561b76277513b1",
+      "boundary_kind": "outer_nw"
+    },
+    {
+      "file": "boundary/outer_ne.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "role": "shared material mask ALPHA only; one inside-cell transition",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "c6ecfbce6e8cb6bdc39be234c5e219f89cf3e182e05fe19842a371bc33e308f6",
+      "boundary_kind": "outer_ne"
+    },
+    {
+      "file": "ground/clay/outer_ne.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "role": "ready ground overlay; shared boundary pre-applied",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "81bee88b6fad79a26c45c32b1546c92442570685750ca33316f7483904bde144",
+      "boundary_kind": "outer_ne"
+    },
+    {
+      "file": "ground/sand/outer_ne.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "role": "ready ground overlay; shared boundary pre-applied",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "ac61fd66d678b6485e4849b40f9392d9e1932bfa622455ea97928e6e658a5db1",
+      "boundary_kind": "outer_ne"
+    },
+    {
+      "file": "boundary/outer_sw.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "role": "shared material mask ALPHA only; one inside-cell transition",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "1cdcb45b6b06519a3f3c530189ab744b6b783c2b4fb34831a0d4fb52d1fd4dd8",
+      "boundary_kind": "outer_sw"
+    },
+    {
+      "file": "ground/clay/outer_sw.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "role": "ready ground overlay; shared boundary pre-applied",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "310b73f976a8850e262556de1e6e0e8bd68925ecc87e17cafb4925c00df86df0",
+      "boundary_kind": "outer_sw"
+    },
+    {
+      "file": "ground/sand/outer_sw.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "role": "ready ground overlay; shared boundary pre-applied",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "6384305691d473d5c287fbe4ae3ddfe42f56d1a7af1915cfabc5face9b891d3f",
+      "boundary_kind": "outer_sw"
+    },
+    {
+      "file": "boundary/outer_se.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "role": "shared material mask ALPHA only; one inside-cell transition",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "1bad868476e64edf9db3cae06ff0c6c8774227e92cbdad433119583cc747c392",
+      "boundary_kind": "outer_se"
+    },
+    {
+      "file": "ground/clay/outer_se.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "role": "ready ground overlay; shared boundary pre-applied",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "7ceaa2bedebfdf96dba6f3b84c7a983256253be9b581f304d624b43e4dc7da7b",
+      "boundary_kind": "outer_se"
+    },
+    {
+      "file": "ground/sand/outer_se.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "role": "ready ground overlay; shared boundary pre-applied",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "6bb65d3d19bc538e058b24fcf209cb41963772a014e70fbdd2c7104dbe786e02",
+      "boundary_kind": "outer_se"
+    },
+    {
+      "file": "boundary/inner_nw.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "role": "shared material mask ALPHA only; one inside-cell transition",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "f6e257fcec0ca971f04d1aefbcb8c75a2b3fbc9004fb43b28e14cd83dac52cdd",
+      "boundary_kind": "inner_nw"
+    },
+    {
+      "file": "ground/clay/inner_nw.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "role": "ready ground overlay; shared boundary pre-applied",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "6b6dafba6e99128297f31b792b948cf56e1fe2916b6b90c7d46a5418e01ba4dc",
+      "boundary_kind": "inner_nw"
+    },
+    {
+      "file": "ground/sand/inner_nw.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "role": "ready ground overlay; shared boundary pre-applied",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "a9ce8868a2d4207abd17b3a001582bd46679f2b522ffe50a796a224ad1885904",
+      "boundary_kind": "inner_nw"
+    },
+    {
+      "file": "boundary/inner_ne.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "role": "shared material mask ALPHA only; one inside-cell transition",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "6706e7b2bad15744222b28f132b74bdc62e6244228819d42c9ac1e8bed6d1163",
+      "boundary_kind": "inner_ne"
+    },
+    {
+      "file": "ground/clay/inner_ne.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "role": "ready ground overlay; shared boundary pre-applied",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "99ea95f13f676e7c031a38a7d341417a41f9f2342a926d5cff78e2a73a7f9c78",
+      "boundary_kind": "inner_ne"
+    },
+    {
+      "file": "ground/sand/inner_ne.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "role": "ready ground overlay; shared boundary pre-applied",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "2e72cee078fb3db5aea1fd7ec88cef809628f857e4891536b94ec54962cf1209",
+      "boundary_kind": "inner_ne"
+    },
+    {
+      "file": "boundary/inner_sw.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "role": "shared material mask ALPHA only; one inside-cell transition",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "15c635257476aa7c7f2be106cad69d630e27198e3c13fd91ea3f3f872a38eff3",
+      "boundary_kind": "inner_sw"
+    },
+    {
+      "file": "ground/clay/inner_sw.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "role": "ready ground overlay; shared boundary pre-applied",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "f38cc63a65b6d3ec39e5819a61ad7016277f4a39b69ef8719b99a70209120a9d",
+      "boundary_kind": "inner_sw"
+    },
+    {
+      "file": "ground/sand/inner_sw.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "role": "ready ground overlay; shared boundary pre-applied",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "679e6903040d840c812daf9116d780a6d9d7e20f7cea405c51de610a8b27e8d7",
+      "boundary_kind": "inner_sw"
+    },
+    {
+      "file": "boundary/inner_se.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "role": "shared material mask ALPHA only; one inside-cell transition",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "784cecaad64afa5bc15cd94faedf972543c1b9bd1c13798ae751808df1889202",
+      "boundary_kind": "inner_se"
+    },
+    {
+      "file": "ground/clay/inner_se.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "role": "ready ground overlay; shared boundary pre-applied",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "3110c7ad8d16642284c03852435e7aeb3c95cfc3436174c4990c7eb9f3faf27d",
+      "boundary_kind": "inner_se"
+    },
+    {
+      "file": "ground/sand/inner_se.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "role": "ready ground overlay; shared boundary pre-applied",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "sha256": "be8f22ee026c30b0091a58e0ecbd8d852dcd9f391f058c63d17d7e1096bc5f3c",
+      "boundary_kind": "inner_se"
+    }
+  ],
+  "reuse": [
+    {
+      "file": "../biome_environment_v1/rock/ground/gravel.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "role": "gravel at sand→rock exterior",
+      "sha256": "21d6009ead2ae1a0aa0c7ca3b8866df1174f5f336769243e012c40fe3fdaeddd"
+    },
+    {
+      "file": "../biome_environment_v1/rock/ground/rubble.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "role": "mined rubble",
+      "sha256": "f9013df49fa164c4ca2e6ba2252e1988006c0ffceb6de61383d5fc9e6e25f2b8"
+    },
+    {
+      "file": "../biome_environment_v2/rock_mined/exposed_bedrock.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        21
+      ],
+      "role": "mined exposed ground",
+      "sha256": "3a1dc7fa7dcdc0b0581d5af51cf2154644cf03e0eb055cc8e6da66de2d99d8bf"
+    },
+    {
+      "file": "../biome_environment_v1/rock/damage/light.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "role": "light damage clipped to combined rock alpha",
+      "sha256": "f89eb5ff811c6fc510b57387d3f6fea743bcd0fe6850aac878d7bd6a3c969506"
+    },
+    {
+      "file": "../biome_environment_v1/rock/damage/heavy.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "role": "heavy damage clipped to combined rock alpha",
+      "sha256": "91ea8ee1e27a012961d47919a37a89f9a4a061070b31029be6478a8cf0380027"
+    },
+    {
+      "file": "../biome_environment_v2/rock_node/wall_near_depleted_overlay.png",
+      "size_px": [
+        48,
+        54
+      ],
+      "anchor_px": [
+        24,
+        33
+      ],
+      "role": "near-depleted damage clipped to combined rock alpha",
+      "sha256": "b5944ca2a84bba1b6d4792a52f01366c044d82891510900c9bcd3ae06ded7e45"
+    }
+  ],
+  "runtime_verified": false,
+  "filter": "nearest",
+  "alpha": "straight RGBA",
+  "top_atlas": {
+    "path": "top/atlas.png",
+    "size_px": [
+      384,
+      336
+    ],
+    "period_cells": [
+      8,
+      8
+    ],
+    "phase": "positive_mod(world_cell.x,8),positive_mod(world_cell.y,8)",
+    "source_rect": "(phase_x*48,phase_y*42,48,42)",
+    "paste_px": [
+      0,
+      12
+    ],
+    "clip": "top/mask_XX alpha",
+    "draw_order": [
+      "normal body",
+      "sampled top clipped to roof",
+      "iron clipped to roof",
+      "concave corner",
+      "existing damage clipped to combined alpha"
+    ]
+  },
+  "ground": {
+    "period_cells": [
+      4,
+      4
+    ],
+    "paste_px": [
+      0,
+      0
+    ],
+    "mode": "existing vertex color first; alpha texture next; boundary alpha once",
+    "boundary_convention": "edge_n has material N and outside S; outer_nw outside NW; inner_nw only NW missing",
+    "preferred": "sample ground/{material}/atlas.png by world phase; multiply ALPHA with boundary/{key}.png ALPHA",
+    "fallback": "ground/{material}/{key}.png precomposed"
+  },
+  "iron": {
+    "primary": "iron/atlas.png",
+    "period_cells": [
+      8,
+      8
+    ],
+    "paste_px": [
+      0,
+      12
+    ],
+    "clip": "roof alpha",
+    "alternate_patches": [
+      "iron/patch_00.png",
+      "iron/patch_01.png",
+      "iron/patch_02.png"
+    ],
+    "selection": "atlas OR stable one patch, never both. Ore cells share all rock neighbors for geometry. Optional edge-alpha fade into non-ore neighbors; never alter rock silhouette."
+  },
+  "unchanged": [
+    "large isolated rock mountain",
+    "existing rock collision and resource amounts",
+    "all previously adopted images"
+  ],
+  "unfinished": [
+    "runtime integration, EXE build, isolated game rendering are implementation responsibility"
+  ]
+}

@@ -158,6 +158,11 @@ const Nutrition=preload("res://game/human_nutrition.gd")
 const Livestock=preload("res://game/livestock.gd")
 const Tasks=preload("res://game/colony_tasks.gd")
 var rocks: Dictionary = {}
+var rock_connections: Dictionary = {}
+var rock_connection_count=-1
+var rock_connection_builds=0
+var rock_visual_revision=0
+var rock_changed_cells: Array = []
 var mountains: Dictionary = {}
 var mountain_cells: Dictionary = {}
 const Mountains=preload("res://game/mining_mountains.gd")
@@ -405,6 +410,7 @@ func _init(data: Dictionary = {}, seed_number: int = 17, stage_override: Diction
 	Mountains.init(self)
 	var populate_started=Metrics.start()
 	Biome.populate(self)
+	preload("res://game/rock_view.gd").prepare_connections(self)
 	Metrics.finish("startup_population",populate_started)
 	Harvest.init(self)
 	boundary_version=int(campaign.get("boundary_version",0))
@@ -485,15 +491,16 @@ func find_path(start: Vector2i, goal: Vector2i, raider: bool = false, avoid_acto
 	if inside(goal):
 		if not raider and not walkable(goal):return []
 	elif not ((raider or allow_exit) and Land.is_exit(goal,W,H)):return []
-	var frontier = [start]
+	var Heap=preload("res://game/path_heap.gd")
+	var frontier = [[start,float(distance(start,goal)),0,0.0]]
+	var active={start:0};var sequence=1
 	var cost = {start: 0.0}
 	var previous = {start: start}
 	while not frontier.is_empty():
 		preload("res://game/terrain_metrics.gd").count("path_expanded")
-		var best = 0
-		for i in range(1, frontier.size()):
-			if cost[frontier[i]] + distance(frontier[i], goal) < cost[frontier[best]] + distance(frontier[best], goal): best = i
-		var p: Vector2i = frontier.pop_at(best)
+		var entry=Heap.pop(frontier);var p:Vector2i=entry[0]
+		if not active.has(p) or entry[3]!=cost[p]:continue
+		active.erase(p)
 		if p == goal:
 			var path=[p]
 			while p != start:
@@ -513,7 +520,8 @@ func find_path(start: Vector2i, goal: Vector2i, raider: bool = false, avoid_acto
 			if not cost.has(n) or value < cost[n]:
 				cost[n] = value
 				previous[n] = p
-				if n not in frontier: frontier.append(n)
+				if not active.has(n):active[n]=sequence;sequence+=1
+				Heap.push(frontier,[n,value+distance(n,goal),active[n],value])
 	return []
 
 static func distance(a: Vector2i, b: Vector2i) -> int:
