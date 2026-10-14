@@ -1,0 +1,118 @@
+{
+	"checks": [
+		{
+			"check": "Single-cell mining uses the existing designation",
+			"passed": true
+		},
+		{
+			"check": "Progress changes while the active rock still blocks movement",
+			"passed": true
+		},
+		{
+			"check": "Strike events are emitted on actual work cadence",
+			"passed": true
+		},
+		{
+			"check": "PAUSE does not advance work or emit sound/particle events",
+			"passed": true
+		},
+		{
+			"check": "Interruption preserves rock damage",
+			"passed": true
+		},
+		{
+			"check": "Snapshot retains mining progress and work identity",
+			"passed": true
+		},
+		{
+			"check": "Only the mined cell disappears, neighbouring rock remains",
+			"passed": true
+		},
+		{
+			"check": "Collision/path/terrain re-evaluate the removed cell",
+			"passed": true
+		},
+		{
+			"check": "Mining creates eight real stones on site without supplying shared building stock",
+			"passed": true
+		},
+		{
+			"check": "Explicit collection transports stone to a stockpile",
+			"passed": true
+		},
+		{
+			"check": "Rectangle felling designates each tree once",
+			"passed": true
+		},
+		{
+			"check": "Felling uses the existing plant/gather work category",
+			"passed": true
+		},
+		{
+			"check": "Other priority cannot run a disabled plant/gather job",
+			"passed": true
+		},
+		{
+			"check": "Plant/gather priority makes the resident approach and chop",
+			"passed": true
+		},
+		{
+			"check": "Range forbid suspends felling, retains progress",
+			"passed": true
+		},
+		{
+			"check": "Allow does not duplicate orders",
+			"passed": true
+		},
+		{
+			"check": "Allow resumes the same work without creating an extra designation",
+			"passed": true
+		},
+		{
+			"check": "Cancel removes the order and keeps the tree and damage",
+			"passed": true
+		},
+		{
+			"check": "Campaign save preserves the same damaged tree without regeneration",
+			"passed": true
+		},
+		{
+			"check": "Both trees finish individually and leave exactly sixteen physical wood",
+			"passed": true
+		},
+		{
+			"check": "Felled cell loses tree collision; dropped wood remains a normal building obstacle",
+			"passed": true
+		},
+		{
+			"check": "Presentation events are bounded and completion is emitted once per tree",
+			"passed": true
+		},
+		{
+			"check": "Twelve simultaneous workers finish distinct cells with exact resource totals",
+			"passed": true
+		},
+		{
+			"check": "Simultaneous workers retain bounded event history without hidden work queues",
+			"passed": true
+		},
+		{
+			"check": "Mining and chopping use distinct non-silent PCM sounds",
+			"passed": true
+		},
+		{
+			"check": "Simultaneous workers share a bounded sound rate",
+			"passed": true
+		},
+		{
+			"check": "Offscreen/distant work is quiet while nearby work remains audible",
+			"passed": true
+		},
+		{
+			"check": "One hundred burst cues cannot create an audio pile-up",
+			"passed": true
+		}
+	],
+	"failures": 0,
+	"method": "Production World.step, real IDs and stock, interruption/forbid/cancel, campaign and full snapshot; PCM synthesis under Dummy audio"
+}

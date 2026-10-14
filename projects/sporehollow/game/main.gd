@@ -60,6 +60,7 @@ const ORDER_HELP={"auto":"状況に合わせて行動します。戦闘・救護
 const GROUP_TOOLS = [["place_wood_crate","place_wood_shelf","cooking_bench","carpentry_bench","sewing_bench","wall", "wood_wall", "stone_wall", "soil_tile", "wood_tile", "stone_tile", "door", "locked_door", "kennel", "coop", "place_kokeshi", "place_fossil"], ["auto", "guide", "stay", "wander", "rest", "attack_target", "equip", "milk", "charge"], ["collect"]]
 const RockView=preload("res://game/rock_view.gd")
 const MountainView=preload("res://game/mountain_view.gd")
+const WorkMotion=preload("res://game/work_motion.gd")
 const HarvestView=preload("res://game/harvest_view.gd")
 var harvest_view=HarvestView.new()
 const StockView=preload("res://game/stock_view.gd")
@@ -3069,33 +3070,29 @@ func draw_enemy_actor(e: Dictionary):
 func draw_registered_worker(key: String):
 	var a=world.workers[key];var foot=actor_pixel(key,a.pos)+Vector2(0,14)
 	var walking=Vector2(a.pos).distance_to(view_positions.get(key,Vector2(a.pos)))>0.025
-	Art.sprite(self,"keeper","walk" if walking else "idle",int(a.get("facing",1)),foot,visual_time,1.0,1.15*ACTOR_SCALE)
-	HarvestView.tool(self,key)
+	var work_pose=WorkMotion.describe(world,key,accumulated,walking,harvest_view.contacts.get(key,{}))
+	if not WorkMotion.paint(self,work_pose,foot,1.15*ACTOR_SCALE):
+		Art.sprite(self,"keeper","walk" if walking else "idle",int(a.get("facing",1)),foot,visual_time,1.0,1.15*ACTOR_SCALE)
 
 func draw_keeper_actor():
 	var p = actor_pixel("keeper", world.keeper.pos)
 	var walking = Farm.Life.able(world) and Vector2(world.keeper.pos).distance_to(view_positions.get("keeper",Vector2(world.keeper.pos)))>0.025
 	if world.keeper.carrier>=0:return # Composited once between the carrier rear/front layers.
+	var work_pose=WorkMotion.describe(world,"keeper",accumulated,walking,harvest_view.contacts.get("keeper",{}))
 	if Farm.Life.presentation(world) == "unconscious":
 		draw_set_transform(p + Vector2(0, 12), -PI * 0.5)
 		p = Vector2.ZERO
-	elif Farm.Life.presentation(world) in ["tired","exhausted"]:
+	elif work_pose.is_empty() and Farm.Life.presentation(world) in ["tired","exhausted"]:
 		draw_set_transform(p+Vector2(0,4),0.16)
 		p = Vector2.ZERO
 	var pose = actor_pose("keeper",world.keeper.resting,Farm.Life.presentation(world)=="sleeping",walking,"keeper")
 	if world.keeper.state=="hidden_rest" or world.keeper.get("nutrition_down",false): pose.action="rest"
-	Art.sprite(self,"keeper",pose.action,int(world.keeper.get("facing",1)),p+Vector2(0,14),pose.elapsed,1.0,1.15*ACTOR_SCALE)
-
-	if Farm.Life.able(world) and not world.Work.active(world).is_empty() and world.Work.active(world).state == "working" and HarvestView.active(self).is_empty():
-		var hand = p + Vector2(0,14) + Vector2(12,-9)*ACTOR_SCALE
-		var hammer = hand + Vector2(8, -8 + sin(visual_time * 18) * 6)
-		draw_line(hand, hammer, Color("a58051"), 3)
-		draw_rect(Rect2(hammer - Vector2(5, 3), Vector2(10, 6)), Color("c9c5a5"))
+	if not WorkMotion.paint(self,work_pose,p+Vector2(0,14),1.15*ACTOR_SCALE):
+		Art.sprite(self,"keeper",pose.action,int(world.keeper.get("facing",1)),p+Vector2(0,14),pose.elapsed,1.0,1.15*ACTOR_SCALE)
 	if world.keeper.state in ["restrained", "captured"]:
 		label_on(self, p + Vector2(14, -18), "!", 18, Color("f69773"))
 		draw_line(p + Vector2(-10, 8), p + Vector2(10, 8), Color("513f39"), 3)
 	draw_set_transform(Vector2.ZERO)
-	HarvestView.tool(self)
 	var owner_pixel = center(view_positions.get("keeper", Vector2(world.keeper.pos)))
 	if world.keeper.carrier < 0:
 		if selected.get("kind") == "keeper": draw_rect(keeper_hit_rect(), Color("ffe2a3"), false, 2)

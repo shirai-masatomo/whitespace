@@ -1,0 +1,25 @@
+{
+  "source_commit": "adb33aa07da2ec57959e0315963f15003ddcd085",
+  "checks": [
+    {
+      "file": "work_pose/mining_contact_right.png",
+      "sha256": "f8e9d204ad887a3ff4e8e2b9e8195467a85ebce111af43b94bd7d1c3373f440b",
+      "valid": true
+    },
+    {
+      "file": "work_pose/mining_contact_left.png",
+      "sha256": "c4bfd987f23f9c922fbbc0718562554ae64f65e2db7bc20147d5b75400bb8d60",
+      "valid": true
+    },
+    {
+      "file": "work_pose/logging_contact_right.png",
+      "sha256": "47eb81d0d2883fb2336ed1b9f302bd9bc69b27e55bb63ee59c227a55f8d33ee0",
+      "valid": true
+    },
+    {
+      "file": "work_pose/logging_contact_left.png",
+      "sha256": "a269776ae3e04c4ea462c3ede995f9eba8b33cec6f81e88e70aab1fb9a9ba6a8",
+      "valid": true
+    }
+  ]
+}

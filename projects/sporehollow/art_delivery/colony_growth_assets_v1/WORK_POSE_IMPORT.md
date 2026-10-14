@@ -1,0 +1,6 @@
+# 今回の部分取り込み
+
+素材コミットadb33aa07da2ec57959e0315963f15003ddcd085からwork_poseの4PNGのみ取り込み。
+同梱manifest/HANDOFF/ADOPTION/SOURCESは原本を保持しており、記載された他カテゴリのPNGを今回すべて取り込んだ意味ではない。
+ゲーム接続はgame/work_motion.gd、ハッシュ検査はreview/current/work-motion/asset-checks.json。
+振りかぶり・戻りは既存絵と仮描画。今回の変更は表示のみ。

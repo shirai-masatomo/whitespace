@@ -1,0 +1,1060 @@
+{
+  "delivery": "colony_growth_assets_v1",
+  "status": "adopted_minimum_assets_ready_for_integration",
+  "cell_px": [
+    48,
+    42
+  ],
+  "filter": "nearest",
+  "alpha": "straight RGBA, no color-key",
+  "assets": [
+    {
+      "file": "radio/radio_b_body.png",
+      "size_px": [
+        40,
+        36
+      ],
+      "anchor_px": [
+        20,
+        32
+      ],
+      "occupancy_cells": [
+        1,
+        1
+      ],
+      "layer": "world_object",
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "duration_mode": "hold_until_state_change",
+      "sha256": "d5aac13184c8dbbef8befd727edf1094c4970eb483f1125ff9636c2f31eeae24",
+      "source": "art-production\\colony-growth-previews-v2\\working\\radio_b.png",
+      "use": "adopted B green metal radio; no placement rule implied"
+    },
+    {
+      "file": "radio/radio_b_icon_24.png",
+      "size_px": [
+        24,
+        24
+      ],
+      "anchor_px": [
+        12,
+        22
+      ],
+      "occupancy_cells": null,
+      "layer": "ui",
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "duration_mode": "hold_until_state_change",
+      "sha256": "286aac11412db393c29b3fc7a30cec79ed285398f0ce88e68f4f2694705569c1",
+      "source": "radio/radio_b_body.png; native knob cleanup",
+      "use": "inventory/header radio icon; no baked text"
+    },
+    {
+      "file": "records/father_journal_closed.png",
+      "size_px": [
+        40,
+        40
+      ],
+      "anchor_px": [
+        20,
+        36
+      ],
+      "occupancy_cells": null,
+      "layer": "ui_or_world",
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "duration_mode": "hold_until_state_change",
+      "sha256": "90c24930a68b6228264d6378d762a7251333d3273bf7ac75f7820f4128b4ef56",
+      "source": "art-production\\colony-growth-previews-v2\\working\\father_journal.png",
+      "use": "father record exterior; content and discovery remain data"
+    },
+    {
+      "file": "records/father_letter_folded.png",
+      "size_px": [
+        40,
+        36
+      ],
+      "anchor_px": [
+        20,
+        32
+      ],
+      "occupancy_cells": null,
+      "layer": "ui_or_world",
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "duration_mode": "hold_until_state_change",
+      "sha256": "33a4e4459903accd8025c82990baac5b59793c2d9ec15adcae074089dd42fb42",
+      "source": "art-production\\colony-growth-previews-v2\\working\\father_letter.png",
+      "use": "father record exterior; content and discovery remain data"
+    },
+    {
+      "file": "work_pose/mining_contact_right.png",
+      "size_px": [
+        80,
+        64
+      ],
+      "anchor_px": [
+        28,
+        56
+      ],
+      "occupancy_cells": [
+        1,
+        1
+      ],
+      "layer": "world_object",
+      "action": "mining_contact",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "duration_mode": "hold_until_state_change",
+      "sha256": "f8e9d204ad887a3ff4e8e2b9e8195467a85ebce111af43b94bd7d1c3373f440b",
+      "source": "art-production\\colony-growth-previews-v2\\working\\keeper_mining_1_right.png",
+      "use": "approved contact key pose; not a complete animation",
+      "direction": "right",
+      "contact_px": [
+        51,
+        46
+      ],
+      "display_scale": 1.4375,
+      "animation_complete": false
+    },
+    {
+      "file": "work_pose/mining_contact_left.png",
+      "size_px": [
+        80,
+        64
+      ],
+      "anchor_px": [
+        52,
+        56
+      ],
+      "occupancy_cells": [
+        1,
+        1
+      ],
+      "layer": "world_object",
+      "action": "mining_contact",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "duration_mode": "hold_until_state_change",
+      "sha256": "c4bfd987f23f9c922fbbc0718562554ae64f65e2db7bc20147d5b75400bb8d60",
+      "source": "art-production\\colony-growth-previews-v2\\working\\keeper_mining_1_left.png",
+      "use": "approved contact key pose; not a complete animation",
+      "direction": "left",
+      "contact_px": [
+        28,
+        46
+      ],
+      "display_scale": 1.4375,
+      "animation_complete": false
+    },
+    {
+      "file": "work_pose/logging_contact_right.png",
+      "size_px": [
+        80,
+        64
+      ],
+      "anchor_px": [
+        28,
+        56
+      ],
+      "occupancy_cells": [
+        1,
+        1
+      ],
+      "layer": "world_object",
+      "action": "logging_contact",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "duration_mode": "hold_until_state_change",
+      "sha256": "47eb81d0d2883fb2336ed1b9f302bd9bc69b27e55bb63ee59c227a55f8d33ee0",
+      "source": "art-production\\colony-growth-previews-v2\\working\\keeper_logging_1_right.png",
+      "use": "approved contact key pose; not a complete animation",
+      "direction": "right",
+      "contact_px": [
+        59,
+        42
+      ],
+      "display_scale": 1.4375,
+      "animation_complete": false
+    },
+    {
+      "file": "work_pose/logging_contact_left.png",
+      "size_px": [
+        80,
+        64
+      ],
+      "anchor_px": [
+        52,
+        56
+      ],
+      "occupancy_cells": [
+        1,
+        1
+      ],
+      "layer": "world_object",
+      "action": "logging_contact",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "duration_mode": "hold_until_state_change",
+      "sha256": "a269776ae3e04c4ea462c3ede995f9eba8b33cec6f81e88e70aab1fb9a9ba6a8",
+      "source": "art-production\\colony-growth-previews-v2\\working\\keeper_logging_1_left.png",
+      "use": "approved contact key pose; not a complete animation",
+      "direction": "left",
+      "contact_px": [
+        20,
+        42
+      ],
+      "display_scale": 1.4375,
+      "animation_complete": false
+    },
+    {
+      "file": "resident/idle_right_00.png",
+      "size_px": [
+        40,
+        48
+      ],
+      "anchor_px": [
+        20,
+        44
+      ],
+      "occupancy_cells": [
+        1,
+        1
+      ],
+      "layer": "world_object",
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "duration_mode": "hold_until_state_change",
+      "sha256": "3be72cab7f551f00552de46c589e880e19814e4eb921ded049e887adff46114e",
+      "source": "art-production\\colony-growth-previews-v2\\working\\resident_a_right.png",
+      "use": "adopted resident A; headband and short hair",
+      "direction": "right",
+      "display_scale": 1.4375
+    },
+    {
+      "file": "resident/idle_left_00.png",
+      "size_px": [
+        40,
+        48
+      ],
+      "anchor_px": [
+        20,
+        44
+      ],
+      "occupancy_cells": [
+        1,
+        1
+      ],
+      "layer": "world_object",
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "duration_mode": "hold_until_state_change",
+      "sha256": "7d96c7fabfcbeb28d6dd5ac8d35efee32833282fbc9d879b0c69997a43438fbc",
+      "source": "resident/idle_right_00.png",
+      "use": "left idle, mirrored same clothes; no asymmetric insignia",
+      "direction": "left",
+      "display_scale": 1.4375
+    },
+    {
+      "file": "crop/00_tilled.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        40
+      ],
+      "occupancy_cells": [
+        1,
+        1
+      ],
+      "layer": "ground_then_crop",
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "duration_mode": "hold_until_state_change",
+      "sha256": "a13563d75107dc559c2526538ea075e1c1ee35f799c48c036bec7b2569dca96a",
+      "source": "art-production\\colony-growth-previews-v2\\working\\crop_0.png",
+      "use": "single pale root-crop appearance; name/yield/growth rules unspecified",
+      "visual_stage": 0,
+      "logical_state_mapping": "implementation-defined; 5 images do not require 5 game states"
+    },
+    {
+      "file": "crop/01_sown.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        40
+      ],
+      "occupancy_cells": [
+        1,
+        1
+      ],
+      "layer": "ground_then_crop",
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "duration_mode": "hold_until_state_change",
+      "sha256": "18313682e471d1145078c8b16b5b80e2d3ff912a634b8a11e25f3ac5a0b51396",
+      "source": "art-production\\colony-growth-previews-v2\\working\\crop_1.png",
+      "use": "single pale root-crop appearance; name/yield/growth rules unspecified",
+      "visual_stage": 1,
+      "logical_state_mapping": "implementation-defined; 5 images do not require 5 game states"
+    },
+    {
+      "file": "crop/02_sprout.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        40
+      ],
+      "occupancy_cells": [
+        1,
+        1
+      ],
+      "layer": "ground_then_crop",
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "duration_mode": "hold_until_state_change",
+      "sha256": "d4181b7309c2f2b855913225e9917c8158e7eb8a1aad50c5237871d318b98d71",
+      "source": "art-production\\colony-growth-previews-v2\\working\\crop_2.png",
+      "use": "single pale root-crop appearance; name/yield/growth rules unspecified",
+      "visual_stage": 2,
+      "logical_state_mapping": "implementation-defined; 5 images do not require 5 game states"
+    },
+    {
+      "file": "crop/03_growing.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        40
+      ],
+      "occupancy_cells": [
+        1,
+        1
+      ],
+      "layer": "ground_then_crop",
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "duration_mode": "hold_until_state_change",
+      "sha256": "1af6da4dca346c1b835698e20733b9dab551fcd82eff75a3b24e5023a60c5cdc",
+      "source": "art-production\\colony-growth-previews-v2\\working\\crop_3.png",
+      "use": "single pale root-crop appearance; name/yield/growth rules unspecified",
+      "visual_stage": 3,
+      "logical_state_mapping": "implementation-defined; 5 images do not require 5 game states"
+    },
+    {
+      "file": "crop/04_harvestable.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        40
+      ],
+      "occupancy_cells": [
+        1,
+        1
+      ],
+      "layer": "ground_then_crop",
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "duration_mode": "hold_until_state_change",
+      "sha256": "919241ce51285a3cd91a6fe2beee3d9fea08d5d8c85c8a6bd5e00be558110951",
+      "source": "art-production\\colony-growth-previews-v2\\working\\crop_4.png",
+      "use": "single pale root-crop appearance; name/yield/growth rules unspecified",
+      "visual_stage": 4,
+      "logical_state_mapping": "implementation-defined; 5 images do not require 5 game states"
+    },
+    {
+      "file": "bed/bed_a_rear.png",
+      "size_px": [
+        48,
+        84
+      ],
+      "anchor_px": [
+        24,
+        78
+      ],
+      "occupancy_cells": [
+        1,
+        2
+      ],
+      "layer": "object_rear",
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "duration_mode": "hold_until_state_change",
+      "sha256": "6a16a2146bdd6a4313810bb1bf57b855bbff9d9afca22e8b21999d039ff49d22",
+      "source": "approved bed_a pixel partition",
+      "use": "straw mat + pillow + uncovered frame; before sleeper"
+    },
+    {
+      "file": "bed/bed_a_blanket_front.png",
+      "size_px": [
+        48,
+        84
+      ],
+      "anchor_px": [
+        24,
+        78
+      ],
+      "occupancy_cells": [
+        1,
+        2
+      ],
+      "layer": "object_front",
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "duration_mode": "hold_until_state_change",
+      "sha256": "b5db8ae8fdb1fb034a09853f92c96720fd5862db26555551b504973fecad986c",
+      "source": "approved bed_a pixel partition",
+      "use": "blanket foreground; after compatible sleeper"
+    },
+    {
+      "file": "watch/bell_post.png",
+      "size_px": [
+        48,
+        56
+      ],
+      "anchor_px": [
+        24,
+        50
+      ],
+      "occupancy_cells": [
+        1,
+        1
+      ],
+      "layer": "world_object",
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "duration_mode": "hold_until_state_change",
+      "sha256": "ac30c582c707ea091e8a5043ac5429c0664e6750539b683c44d08f23f05d4404",
+      "source": "art-production\\colony-growth-previews-v2\\working\\watch_a.png",
+      "use": "small adopted bell post; no watch radius or enemy location"
+    },
+    {
+      "file": "watch/alert_16.png",
+      "size_px": [
+        16,
+        16
+      ],
+      "anchor_px": [
+        8,
+        15
+      ],
+      "occupancy_cells": null,
+      "layer": "status_overlay",
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "duration_mode": "hold_until_state_change",
+      "sha256": "6c7caf71ec49252e3482a1f0fdb61f84a6fe0d47a384c069389fbffa974b3c5c",
+      "source": "approved B4 triangle icon from preview compose.py",
+      "use": "adopted triangle alert; hide in normal state; above post or UI"
+    },
+    {
+      "file": "event/found_crate.png",
+      "size_px": [
+        48,
+        42
+      ],
+      "anchor_px": [
+        24,
+        38
+      ],
+      "occupancy_cells": [
+        1,
+        1
+      ],
+      "layer": "world_object",
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "duration_mode": "hold_until_state_change",
+      "sha256": "15a4d8a0519466eb450417e06d64574254a204e43518b5a6809483e3b2e66512",
+      "source": "art-production\\colony-growth-previews-v2\\working\\event_crate.png",
+      "use": "roadside event prop; tagged closed crate, not ordinary resource stack"
+    },
+    {
+      "file": "idol/goldA_damage_light.png",
+      "size_px": [
+        144,
+        160
+      ],
+      "anchor_px": [
+        72,
+        152
+      ],
+      "occupancy_cells": [
+        2,
+        2
+      ],
+      "layer": "world_object",
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "duration_mode": "hold_until_state_change",
+      "sha256": "bf5166f1460bf1c65c36bd9303482d1ec2fdbd8b494f8179c381d249b1ff4db9",
+      "source": "adopted goldA pixels + native silhouette/crack finishing guided by imagegen light study",
+      "use": "light damage body replacement; NOT overlay; preserve identity and pedestal anchor",
+      "health_threshold": null,
+      "damage_stage": 1,
+      "display_scale": 1.0
+    },
+    {
+      "file": "idol/goldA_damage_medium.png",
+      "size_px": [
+        144,
+        160
+      ],
+      "anchor_px": [
+        72,
+        152
+      ],
+      "occupancy_cells": [
+        2,
+        2
+      ],
+      "layer": "world_object",
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "duration_mode": "hold_until_state_change",
+      "sha256": "419ca22aaaabaddfe00c6bb8b32783acdd4dee300fea7ddb328c89417c39bd24",
+      "source": "adopted goldA pixels + native silhouette/crack finishing guided by imagegen medium study",
+      "use": "medium damage body replacement; NOT overlay; preserve identity and pedestal anchor",
+      "health_threshold": null,
+      "damage_stage": 2,
+      "display_scale": 1.0
+    },
+    {
+      "file": "idol/goldA_damage_heavy.png",
+      "size_px": [
+        144,
+        160
+      ],
+      "anchor_px": [
+        72,
+        152
+      ],
+      "occupancy_cells": [
+        2,
+        2
+      ],
+      "layer": "world_object",
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "duration_mode": "hold_until_state_change",
+      "sha256": "a261323a9cfb783c4b889d8f725ce32e0fdb79784cc80c150286264012f3957d",
+      "source": "adopted goldA pixels + native silhouette/crack finishing guided by imagegen heavy study",
+      "use": "heavy damage body replacement; NOT overlay; preserve identity and pedestal anchor",
+      "health_threshold": null,
+      "damage_stage": 3,
+      "display_scale": 1.0
+    },
+    {
+      "file": "idol/prayer_available_rim.png",
+      "size_px": [
+        144,
+        160
+      ],
+      "anchor_px": [
+        72,
+        152
+      ],
+      "occupancy_cells": [
+        2,
+        2
+      ],
+      "layer": "status_overlay",
+      "action": "static",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "duration_mode": "hold_until_state_change",
+      "sha256": "eb5f1f04e91d8bab8e6c05b6133cfe17d6cae2c0a2c2f70da179c28ca6b91e7d",
+      "source": "goldA alpha outer rim",
+      "use": "optional restrained night prayer availability outline; separate body layer",
+      "suggested_opacity": 0.38,
+      "damage_compatibility": "healthy only; do not overlay healthy silhouette on damaged body"
+    },
+    {
+      "file": "idol/ui_64x72_healthy.png",
+      "size_px": [
+        64,
+        72
+      ],
+      "anchor_px": [
+        32,
+        65
+      ],
+      "occupancy_cells": null,
+      "layer": "ui",
+      "action": "healthy",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "duration_mode": "hold_until_state_change",
+      "sha256": "9a713c580093f3d84f81a1fdba0e8a6d09283e809b18dfbb1b84b683ec248636",
+      "source": "art_delivery\\ui_world_direction_v1\\candidates\\world\\goldA.png",
+      "use": "small UI only: retouched cracks at target resolution; do not use as world sprite"
+    },
+    {
+      "file": "idol/ui_64x72_light.png",
+      "size_px": [
+        64,
+        72
+      ],
+      "anchor_px": [
+        32,
+        65
+      ],
+      "occupancy_cells": null,
+      "layer": "ui",
+      "action": "light",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "duration_mode": "hold_until_state_change",
+      "sha256": "eb9292a34aa25f854682e8bf8a48959d3427e321e684a10e41dc90ab18ef1dde",
+      "source": "art_delivery\\colony_growth_assets_v1\\idol\\goldA_damage_light.png",
+      "use": "small UI only: retouched cracks at target resolution; do not use as world sprite"
+    },
+    {
+      "file": "idol/ui_64x72_medium.png",
+      "size_px": [
+        64,
+        72
+      ],
+      "anchor_px": [
+        32,
+        65
+      ],
+      "occupancy_cells": null,
+      "layer": "ui",
+      "action": "medium",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "duration_mode": "hold_until_state_change",
+      "sha256": "96e7c5f7b206404db6235d0de0267c819b5e2a5cda42d21bc605b96bb97599f3",
+      "source": "art_delivery\\colony_growth_assets_v1\\idol\\goldA_damage_medium.png",
+      "use": "small UI only: retouched cracks at target resolution; do not use as world sprite"
+    },
+    {
+      "file": "idol/ui_64x72_heavy.png",
+      "size_px": [
+        64,
+        72
+      ],
+      "anchor_px": [
+        32,
+        65
+      ],
+      "occupancy_cells": null,
+      "layer": "ui",
+      "action": "heavy",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "duration_mode": "hold_until_state_change",
+      "sha256": "d2ddd1eb53b6882b9bbafce78a695e3fed78cc9db72a6c82a4d598f23df61946",
+      "source": "art_delivery\\colony_growth_assets_v1\\idol\\goldA_damage_heavy.png",
+      "use": "small UI only: retouched cracks at target resolution; do not use as world sprite"
+    }
+  ],
+  "reuse": [
+    {
+      "file": "../ui_world_direction_v1/candidates/world/goldA.png",
+      "size_px": [
+        144,
+        160
+      ],
+      "anchor_px": [
+        72,
+        152
+      ],
+      "occupancy_cells": [
+        2,
+        2
+      ],
+      "layer": "world_object",
+      "action": "healthy",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "sha256": "e0138b3052925a8e54b753682977cd4819c2e041ad9ddf2ababc9a2cc463d990",
+      "use": "healthy goldA unchanged; do not duplicate"
+    },
+    {
+      "file": "../effects_v1/sound_wave/00.png",
+      "size_px": [
+        32,
+        32
+      ],
+      "sha256": "3322ba74761f1fc05dc05b93ec9ece714f8e5c51da3acc917e8d95eb85af6e15",
+      "use": "optional existing sound wave for radio or small prayer sparkle; no duplicate PNG",
+      "anchor_px": [
+        16,
+        16
+      ],
+      "layer": "effect_overlay",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false
+    },
+    {
+      "file": "../effects_v1/sound_wave/01.png",
+      "size_px": [
+        32,
+        32
+      ],
+      "sha256": "cf1fb7427de0c7341e24bc6efe6d9c9e4d68a0f6dcc7a5bdd9eb6cdf5541c5c2",
+      "use": "optional existing sound wave for radio or small prayer sparkle; no duplicate PNG",
+      "anchor_px": [
+        16,
+        16
+      ],
+      "layer": "effect_overlay",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false
+    },
+    {
+      "file": "../effects_v1/build_complete/00.png",
+      "size_px": [
+        32,
+        32
+      ],
+      "sha256": "de525c16b9143683dd7212747e7cbd7eb88c9e0a1d6a5b5c83921bf91ae534fc",
+      "use": "optional existing sound wave for radio or small prayer sparkle; no duplicate PNG",
+      "anchor_px": [
+        16,
+        16
+      ],
+      "layer": "effect_overlay",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false
+    },
+    {
+      "file": "../effects_v1/build_complete/01.png",
+      "size_px": [
+        32,
+        32
+      ],
+      "sha256": "cc043ed5d1d8661cb47af4de9d4f5394e7715a918d78407e1633fbbfb8e4ec2d",
+      "use": "optional existing sound wave for radio or small prayer sparkle; no duplicate PNG",
+      "anchor_px": [
+        16,
+        16
+      ],
+      "layer": "effect_overlay",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false
+    },
+    {
+      "file": "../effects_v1/build_complete/02.png",
+      "size_px": [
+        32,
+        32
+      ],
+      "sha256": "78d2dc567f711e987141a872ba4301a969bbe88b40eb68dc88e0302e76fe8e6e",
+      "use": "optional existing sound wave for radio or small prayer sparkle; no duplicate PNG",
+      "anchor_px": [
+        16,
+        16
+      ],
+      "layer": "effect_overlay",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false
+    }
+  ],
+  "raw_sources": "../../art-production/colony-growth-assets-v1/originals/",
+  "prior_sources": "../../art-production/colony-growth-previews-v2/",
+  "shadow": "No added drop shadows. Existing object self-shading preserved.",
+  "animations": [
+    {
+      "name": "radio_broadcast",
+      "frame_files": [
+        "../effects_v1/sound_wave/00.png",
+        "../effects_v1/sound_wave/01.png"
+      ],
+      "frame_order": [
+        0,
+        1
+      ],
+      "frame_duration_ms": [
+        700,
+        700
+      ],
+      "loop": true,
+      "position": "radio anchor + (17,-29); center wave on that point; 0.5x example",
+      "optional": true,
+      "frame_sizes_px": [
+        [
+          32,
+          32
+        ],
+        [
+          32,
+          32
+        ]
+      ],
+      "frame_anchors_px": [
+        [
+          16,
+          16
+        ],
+        [
+          16,
+          16
+        ]
+      ]
+    },
+    {
+      "name": "prayer_sparkle",
+      "frame_files": [
+        "../effects_v1/build_complete/00.png",
+        "../effects_v1/build_complete/01.png",
+        "../effects_v1/build_complete/02.png"
+      ],
+      "frame_order": [
+        0,
+        1,
+        2
+      ],
+      "frame_duration_ms": [
+        180,
+        180,
+        240
+      ],
+      "loop": false,
+      "position": "small particle at pedestal corner; existing event controls timing",
+      "optional": true,
+      "frame_sizes_px": [
+        [
+          32,
+          32
+        ],
+        [
+          32,
+          32
+        ],
+        [
+          32,
+          32
+        ]
+      ],
+      "frame_anchors_px": [
+        [
+          16,
+          16
+        ],
+        [
+          16,
+          16
+        ],
+        [
+          16,
+          16
+        ]
+      ]
+    }
+  ],
+  "unfinished": [
+    "mining/logging windup and recovery motion; only approved contact keyposes included",
+    "resident walk and work motion; idle left/right included",
+    "occupied bed pose and runtime actor blanket depth matching",
+    "runtime integration and damage-state thresholds",
+    "UI reading page size, new names, recipes, prices, NPC/item data: not defined by art"
+  ],
+  "occupancy_note": "goldA 2x2 existing; others are art footprint proposals, not activated placement/collision rules",
+  "adoption_record": "ADOPTION.md",
+  "motion_scope": "formal still/keypose delivery, not full motion package"
+}

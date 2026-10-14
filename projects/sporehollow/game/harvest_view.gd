@@ -5,13 +5,18 @@ const EFFECT_SECONDS=0.65
 const GroundArt=preload("res://game/rock_art.gd")
 var source=null
 var seen=0
-func setup(w):source=w;seen=w.next_harvest_event-1
+var contacts={}
+func setup(w):source=w;seen=w.next_harvest_event-1;contacts.clear()
 func sync(g):
 	if source!=g.world:setup(g.world);return
 	var closest=[]
 	for e in g.world.harvest_events:
 		if e.id<=seen:continue
 		seen=e.id
+		if e.event=="strike":contacts[e.worker]={"tick":e.tick,"kind":e.kind,"pos":e.pos}
+		if contacts.size()>64:
+			for key in contacts.keys():
+				if contacts[key].tick<g.world.tick-4:contacts.erase(key)
 		if g.world.paused or e.event not in ["strike","complete"]:continue
 		var screen=g.get_canvas_transform()*g.center(e.pos)
 		if not Rect2(-80,-80,1440,960).has_point(screen):continue
@@ -21,29 +26,6 @@ func sync(g):
 	for e in closest.slice(0,2):
 		var distance=g.center(e.pos).distance_to(g.camera.position)/g.TILE.x
 		g.audio.harvest_cue(("mine_hit" if e.kind=="mine" else "chop_hit") if e.event=="strike" else ("rock_crumble" if e.kind=="mine" else "tree_fall"),distance)
-static func active(g,key: String="keeper") -> Dictionary:
-	var j=g.world.Work.active(g.world,key)
-	return j if not j.is_empty() and j.kind in g.world.Harvest.KINDS and j.state=="working" and not j.get("cancel_requested",false) else {}
-static func phase(g,j) -> float:
-	var a=g.world.workers.get(j.get("assigned_to","keeper"),g.world.keeper)
-	var elapsed=j.get("work_elapsed",0.0)+(0.0 if g.world.paused else minf(g.accumulated,g.world.DT)*g.world.Jobs.factor(a))
-	return fposmod(elapsed,g.world.Harvest.STRIKE_SECONDS)/g.world.Harvest.STRIKE_SECONDS
-static func tool(g,key: String="keeper"):
-	var j=active(g,key)
-	if j.is_empty():return
-	var a=g.world.workers[key];var foot=g.actor_pixel(key,a.pos)+Vector2(0,14)
-	var contact_cell=j.get("contact",j.pos)
-	var direction=Vector2(contact_cell-a.pos).normalized();var sweep=sin(phase(g,j)*PI)
-	var hand=foot+direction*8+Vector2(0,-21)
-	var contact=g.center(contact_cell)-direction*16 if j.kind=="mine" else g.StoryView.tree_foot(g,j.pos)-direction*6+Vector2(0,-14)
-	var tip=hand+(contact-hand).rotated(-1.05*sweep)
-	g.draw_line(foot+Vector2(0,-24),hand,Color("d3ad82"),4)
-	g.draw_line(hand-direction*6,tip,Color("8c6444"),3)
-	if j.kind=="mine":
-		g.draw_polyline(PackedVector2Array([tip+Vector2(-8,4),tip+Vector2(-3,-4),tip+Vector2(7,-3),tip+Vector2(11,3)]),Color("bbbfb4"),3)
-	else:
-		g.draw_colored_polygon(PackedVector2Array([tip+Vector2(-4,-7),tip+Vector2(5,-6),tip+Vector2(8,0),tip+Vector2(5,7),tip+Vector2(-4,5)]),Color("b9c2b5"))
-		g.draw_line(tip+Vector2(6,-4),tip+Vector2(7,4),Color("ede6cd"),2)
 static func tree(g,p: Vector2i,deep: bool=false):
 	var kick=0.0
 	for e in g.world.harvest_events.slice(-EVENT_DRAW_LIMIT):

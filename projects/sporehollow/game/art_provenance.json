@@ -37,5 +37,6 @@
   "biome_environment_v2": "0a599a61079a339ab61a0b502f8dcc411ae2b33e",
   "biome_connections_v1": "7b6e81320009710b861fca04d6b86470de3835d7",
   "mining_rock_objects_v1": "3229d2655e35e82d178577cdd8acbbe66e9be4f8",
-  "continuous_bedrock_v1": "adb33aa07da2ec57959e0315963f15003ddcd085"
+  "continuous_bedrock_v1": "adb33aa07da2ec57959e0315963f15003ddcd085",
+  "colony_growth_work_pose": "adb33aa07da2ec57959e0315963f15003ddcd085"
 }
