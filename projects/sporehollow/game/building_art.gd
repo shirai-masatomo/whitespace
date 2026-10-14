@@ -192,8 +192,33 @@ static func floor_path(kind: String) -> String:
 	var mat=material(kind)
 	return "floor/" if mat=="wood" else mat+"/floor/"
 
+# Rebalance adopted roof/side proportions while preserving cell-edge ports and
+# the lower foot anchor. One shared 24-vertex mesh, one draw call per layer.
+# The wider roof has the same cell-relative thickness on both axes (32x28).
+const WALL_SOURCE_X = [0.0,18.0,30.0,48.0]
+const WALL_DEST_X = [0.0,8.0,40.0,48.0]
+const WALL_SOURCE_Y = [0.0,2.0,16.0,28.0,44.0,68.0]
+const WALL_DEST_Y = [0.0,2.0,8.0,36.0,44.0,68.0]
+static var wall_mesh: ArrayMesh
+
+static func surface_mesh() -> ArrayMesh:
+	if wall_mesh!=null:return wall_mesh
+	var vertices=PackedVector2Array();var uv=PackedVector2Array();var indices=PackedInt32Array()
+	for y in range(WALL_SOURCE_Y.size()):
+		for x in range(WALL_SOURCE_X.size()):
+			vertices.append(Vector2(WALL_DEST_X[x],WALL_DEST_Y[y]))
+			uv.append(Vector2(WALL_SOURCE_X[x]/48.0,WALL_SOURCE_Y[y]/68.0))
+	for y in range(WALL_SOURCE_Y.size()-1):
+		for x in range(WALL_SOURCE_X.size()-1):
+			var i=y*4+x
+			indices.append_array(PackedInt32Array([i,i+1,i+4,i+1,i+5,i+4]))
+	var arrays=[];arrays.resize(Mesh.ARRAY_MAX)
+	arrays[Mesh.ARRAY_VERTEX]=vertices;arrays[Mesh.ARRAY_TEX_UV]=uv;arrays[Mesh.ARRAY_INDEX]=indices
+	wall_mesh=ArrayMesh.new();wall_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES,arrays)
+	return wall_mesh
+
 static func draw_outer_wall(game,texture: Texture2D,at: Vector2,color: Color):
-	game.draw_texture(texture,at,color)
+	game.draw_mesh(surface_mesh(),texture,Transform2D(0,at),color)
 
 static func wall(game,p: Vector2,b: Dictionary,preview: bool):
 	var mask=0 if preview else wall_mask(game,Vector2i(p/game.TILE))
@@ -226,10 +251,10 @@ static func door_layer(game,p: Vector2,b: Dictionary,layer: String):
 	var direction="vertical" if int(bool(mask&1))+int(bool(mask&4))>int(bool(mask&2))+int(bool(mask&8)) else "horizontal"
 	var root="door/"+direction+"_"
 	var at=(p-Vector2(24,34)).round()
-	if layer!="leaf":game.draw_texture(TEXTURES[root+layer+".png"],at);return
+	if layer!="leaf":draw_outer_wall(game,TEXTURES[root+layer+".png"],at,Color.WHITE);return
 	var state="open" if b.open else "closed"
-	game.draw_texture(TEXTURES[root+"leaf_"+state+("_damaged.png" if b.hp<=b.max_hp*0.5 else "_normal.png")],at)
-	if b.kind=="locked_door":game.draw_texture(TEXTURES[root+"lock_"+state+("_broken.png" if b.get("lock_hp",0)<=0 else "_normal.png")],at)
+	draw_outer_wall(game,TEXTURES[root+"leaf_"+state+("_damaged.png" if b.hp<=b.max_hp*0.5 else "_normal.png")],at,Color.WHITE)
+	if b.kind=="locked_door":draw_outer_wall(game,TEXTURES[root+"lock_"+state+("_broken.png" if b.get("lock_hp",0)<=0 else "_normal.png")],at,Color.WHITE)
 	if b.hp<b.max_hp:game.draw_rect(Rect2(p+Vector2(-18,19),Vector2(36.0*b.hp/b.max_hp,3)),Color("ebc171"))
 
 

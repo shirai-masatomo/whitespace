@@ -1,0 +1,1190 @@
+{
+	"checks": [
+		{
+			"check": "One draw of adopted texture; state unchanged wall/0/100",
+			"passed": true
+		},
+		{
+			"check": "Shared geometry reused wall/0/100",
+			"passed": true
+		},
+		{
+			"check": "One draw of adopted texture; state unchanged wall/0/25",
+			"passed": true
+		},
+		{
+			"check": "Shared geometry reused wall/0/25",
+			"passed": true
+		},
+		{
+			"check": "One draw of adopted texture; state unchanged wall/1/100",
+			"passed": true
+		},
+		{
+			"check": "Shared geometry reused wall/1/100",
+			"passed": true
+		},
+		{
+			"check": "One draw of adopted texture; state unchanged wall/1/25",
+			"passed": true
+		},
+		{
+			"check": "Shared geometry reused wall/1/25",
+			"passed": true
+		},
+		{
+			"check": "One draw of adopted texture; state unchanged wall/2/100",
+			"passed": true
+		},
+		{
+			"check": "Shared geometry reused wall/2/100",
+			"passed": true
+		},
+		{
+			"check": "One draw of adopted texture; state unchanged wall/2/25",
+			"passed": true
+		},
+		{
+			"check": "Shared geometry reused wall/2/25",
+			"passed": true
+		},
+		{
+			"check": "One draw of adopted texture; state unchanged wall/3/100",
+			"passed": true
+		},
+		{
+			"check": "Shared geometry reused wall/3/100",
+			"passed": true
+		},
+		{
+			"check": "One draw of adopted texture; state unchanged wall/3/25",
+			"passed": true
+		},
+		{
+			"check": "Shared geometry reused wall/3/25",
+			"passed": true
+		},
+		{
+			"check": "One draw of adopted texture; state unchanged wall/4/100",
+			"passed": true
+		},
+		{
+			"check": "Shared geometry reused wall/4/100",
+			"passed": true
+		},
+		{
+			"check": "One draw of adopted texture; state unchanged wall/4/25",
+			"passed": true
+		},
+		{
+			"check": "Shared geometry reused wall/4/25",
+			"passed": true
+		},
+		{
+			"check": "One draw of adopted texture; state unchanged wall/5/100",
+			"passed": true
+		},
+		{
+			"check": "Shared geometry reused wall/5/100",
+			"passed": true
+		},
+		{
+			"check": "One draw of adopted texture; state unchanged wall/5/25",
+			"passed": true
+		},
+		{
+			"check": "Shared geometry reused wall/5/25",
+			"passed": true
+		},
+		{
+			"check": "One draw of adopted texture; state unchanged wall/6/100",
+			"passed": true
+		},
+		{
+			"check": "Shared geometry reused wall/6/100",
+			"passed": true
+		},
+		{
+			"check": "One draw of adopted texture; state unchanged wall/6/25",
+			"passed": true
+		},
+		{
+			"check": "Shared geometry reused wall/6/25",
+			"passed": true
+		},
+		{
+			"check": "One draw of adopted texture; state unchanged wall/7/100",
+			"passed": true
+		},
+		{
+			"check": "Shared geometry reused wall/7/100",
+			"passed": true
+		},
+		{
+			"check": "One draw of adopted texture; state unchanged wall/7/25",
+			"passed": true
+		},
+		{
+			"check": "Shared geometry reused wall/7/25",
+			"passed": true
+		},
+		{
+			"check": "One draw of adopted texture; state unchanged wall/8/100",
+			"passed": true
+		},
+		{
+			"check": "Shared geometry reused wall/8/100",
+			"passed": true
+		},
+		{
+			"check": "One draw of adopted texture; state unchanged wall/8/25",
+			"passed": true
+		},
+		{
+			"check": "Shared geometry reused wall/8/25",
+			"passed": true
+		},
+		{
+			"check": "One draw of adopted texture; state unchanged wall/9/100",
+			"passed": true
+		},
+		{
+			"check": "Shared geometry reused wall/9/100",
+			"passed": true
+		},
+		{
+			"check": "One draw of adopted texture; state unchanged wall/9/25",
+			"passed": true
+		},
+		{
+			"check": "Shared geometry reused wall/9/25",
+			"passed": true
+		},
+		{
+			"check": "One draw of adopted texture; state unchanged wall/10/100",
+			"passed": true
+		},
+		{
+			"check": "Shared geometry reused wall/10/100",
+			"passed": true
+		},
+		{
+			"check": "One draw of adopted texture; state unchanged wall/10/25",
+			"passed": true
+		},
+		{
+			"check": "Shared geometry reused wall/10/25",
+			"passed": true
+		},
+		{
+			"check": "One draw of adopted texture; state unchanged wall/11/100",
+			"passed": true
+		},
+		{
+			"check": "Shared geometry reused wall/11/100",
+			"passed": true
+		},
+		{
+			"check": "One draw of adopted texture; state unchanged wall/11/25",
+			"passed": true
+		},
+		{
+			"check": "Shared geometry reused wall/11/25",
+			"passed": true
+		},
+		{
+			"check": "One draw of adopted texture; state unchanged wall/12/100",
+			"passed": true
+		},
+		{
+			"check": "Shared geometry reused wall/12/100",
+			"passed": true
+		},
+		{
+			"check": "One draw of adopted texture; state unchanged wall/12/25",
+			"passed": true
+		},
+		{
+			"check": "Shared geometry reused wall/12/25",
+			"passed": true
+		},
+		{
+			"check": "One draw of adopted texture; state unchanged wall/13/100",
+			"passed": true
+		},
+		{
+			"check": "Shared geometry reused wall/13/100",
+			"passed": true
+		},
+		{
+			"check": "One draw of adopted texture; state unchanged wall/13/25",
+			"passed": true
+		},
+		{
+			"check": "Shared geometry reused wall/13/25",
+			"passed": true
+		},
+		{
+			"check": "One draw of adopted texture; state unchanged wall/14/100",
+			"passed": true
+		},
+		{
+			"check": "Shared geometry reused wall/14/100",
+			"passed": true
+		},
+		{
+			"check": "One draw of adopted texture; state unchanged wall/14/25",
+			"passed": true
+		},
+		{
+			"check": "Shared geometry reused wall/14/25",
+			"passed": true
+		},
+		{
+			"check": "One draw of adopted texture; state unchanged wall/15/100",
+			"passed": true
+		},
+		{
+			"check": "Shared geometry reused wall/15/100",
+			"passed": true
+		},
+		{
+			"check": "One draw of adopted texture; state unchanged wall/15/25",
+			"passed": true
+		},
+		{
+			"check": "Shared geometry reused wall/15/25",
+			"passed": true
+		},
+		{
+			"check": "One draw of adopted texture; state unchanged wood_wall/0/100",
+			"passed": true
+		},
+		{
+			"check": "Shared geometry reused wood_wall/0/100",
+			"passed": true
+		},
+		{
+			"check": "One draw of adopted texture; state unchanged wood_wall/0/25",
+			"passed": true
+		},
+		{
+			"check": "Shared geometry reused wood_wall/0/25",
+			"passed": true
+		},
+		{
+			"check": "One draw of adopted texture; state unchanged wood_wall/1/100",
+			"passed": true
+		},
+		{
+			"check": "Shared geometry reused wood_wall/1/100",
+			"passed": true
+		},
+		{
+			"check": "One draw of adopted texture; state unchanged wood_wall/1/25",
+			"passed": true
+		},
+		{
+			"check": "Shared geometry reused wood_wall/1/25",
+			"passed": true
+		},
+		{
+			"check": "One draw of adopted texture; state unchanged wood_wall/2/100",
+			"passed": true
+		},
+		{
+			"check": "Shared geometry reused wood_wall/2/100",
+			"passed": true
+		},
+		{
+			"check": "One draw of adopted texture; state unchanged wood_wall/2/25",
+			"passed": true
+		},
+		{
+			"check": "Shared geometry reused wood_wall/2/25",
+			"passed": true
+		},
+		{
+			"check": "One draw of adopted texture; state unchanged wood_wall/3/100",
+			"passed": true
+		},
+		{
+			"check": "Shared geometry reused wood_wall/3/100",
+			"passed": true
+		},
+		{
+			"check": "One draw of adopted texture; state unchanged wood_wall/3/25",
+			"passed": true
+		},
+		{
+			"check": "Shared geometry reused wood_wall/3/25",
+			"passed": true
+		},
+		{
+			"check": "One draw of adopted texture; state unchanged wood_wall/4/100",
+			"passed": true
+		},
+		{
+			"check": "Shared geometry reused wood_wall/4/100",
+			"passed": true
+		},
+		{
+			"check": "One draw of adopted texture; state unchanged wood_wall/4/25",
+			"passed": true
+		},
+		{
+			"check": "Shared geometry reused wood_wall/4/25",
+			"passed": true
+		},
+		{
+			"check": "One draw of adopted texture; state unchanged wood_wall/5/100",
+			"passed": true
+		},
+		{
+			"check": "Shared geometry reused wood_wall/5/100",
+			"passed": true
+		},
+		{
+			"check": "One draw of adopted texture; state unchanged wood_wall/5/25",
+			"passed": true
+		},
+		{
+			"check": "Shared geometry reused wood_wall/5/25",
+			"passed": true
+		},
+		{
+			"check": "One draw of adopted texture; state unchanged wood_wall/6/100",
+			"passed": true
+		},
+		{
+			"check": "Shared geometry reused wood_wall/6/100",
+			"passed": true
+		},
+		{
+			"check": "One draw of adopted texture; state unchanged wood_wall/6/25",
+			"passed": true
+		},
+		{
+			"check": "Shared geometry reused wood_wall/6/25",
+			"passed": true
+		},
+		{
+			"check": "One draw of adopted texture; state unchanged wood_wall/7/100",
+			"passed": true
+		},
+		{
+			"check": "Shared geometry reused wood_wall/7/100",
+			"passed": true
+		},
+		{
+			"check": "One draw of adopted texture; state unchanged wood_wall/7/25",
+			"passed": true
+		},
+		{
+			"check": "Shared geometry reused wood_wall/7/25",
+			"passed": true
+		},
+		{
+			"check": "One draw of adopted texture; state unchanged wood_wall/8/100",
+			"passed": true
+		},
+		{
+			"check": "Shared geometry reused wood_wall/8/100",
+			"passed": true
+		},
+		{
+			"check": "One draw of adopted texture; state unchanged wood_wall/8/25",
+			"passed": true
+		},
+		{
+			"check": "Shared geometry reused wood_wall/8/25",
+			"passed": true
+		},
+		{
+			"check": "One draw of adopted texture; state unchanged wood_wall/9/100",
+			"passed": true
+		},
+		{
+			"check": "Shared geometry reused wood_wall/9/100",
+			"passed": true
+		},
+		{
+			"check": "One draw of adopted texture; state unchanged wood_wall/9/25",
+			"passed": true
+		},
+		{
+			"check": "Shared geometry reused wood_wall/9/25",
+			"passed": true
+		},
+		{
+			"check": "One draw of adopted texture; state unchanged wood_wall/10/100",
+			"passed": true
+		},
+		{
+			"check": "Shared geometry reused wood_wall/10/100",
+			"passed": true
+		},
+		{
+			"check": "One draw of adopted texture; state unchanged wood_wall/10/25",
+			"passed": true
+		},
+		{
+			"check": "Shared geometry reused wood_wall/10/25",
+			"passed": true
+		},
+		{
+			"check": "One draw of adopted texture; state unchanged wood_wall/11/100",
+			"passed": true
+		},
+		{
+			"check": "Shared geometry reused wood_wall/11/100",
+			"passed": true
+		},
+		{
+			"check": "One draw of adopted texture; state unchanged wood_wall/11/25",
+			"passed": true
+		},
+		{
+			"check": "Shared geometry reused wood_wall/11/25",
+			"passed": true
+		},
+		{
+			"check": "One draw of adopted texture; state unchanged wood_wall/12/100",
+			"passed": true
+		},
+		{
+			"check": "Shared geometry reused wood_wall/12/100",
+			"passed": true
+		},
+		{
+			"check": "One draw of adopted texture; state unchanged wood_wall/12/25",
+			"passed": true
+		},
+		{
+			"check": "Shared geometry reused wood_wall/12/25",
+			"passed": true
+		},
+		{
+			"check": "One draw of adopted texture; state unchanged wood_wall/13/100",
+			"passed": true
+		},
+		{
+			"check": "Shared geometry reused wood_wall/13/100",
+			"passed": true
+		},
+		{
+			"check": "One draw of adopted texture; state unchanged wood_wall/13/25",
+			"passed": true
+		},
+		{
+			"check": "Shared geometry reused wood_wall/13/25",
+			"passed": true
+		},
+		{
+			"check": "One draw of adopted texture; state unchanged wood_wall/14/100",
+			"passed": true
+		},
+		{
+			"check": "Shared geometry reused wood_wall/14/100",
+			"passed": true
+		},
+		{
+			"check": "One draw of adopted texture; state unchanged wood_wall/14/25",
+			"passed": true
+		},
+		{
+			"check": "Shared geometry reused wood_wall/14/25",
+			"passed": true
+		},
+		{
+			"check": "One draw of adopted texture; state unchanged wood_wall/15/100",
+			"passed": true
+		},
+		{
+			"check": "Shared geometry reused wood_wall/15/100",
+			"passed": true
+		},
+		{
+			"check": "One draw of adopted texture; state unchanged wood_wall/15/25",
+			"passed": true
+		},
+		{
+			"check": "Shared geometry reused wood_wall/15/25",
+			"passed": true
+		},
+		{
+			"check": "One draw of adopted texture; state unchanged stone_wall/0/100",
+			"passed": true
+		},
+		{
+			"check": "Shared geometry reused stone_wall/0/100",
+			"passed": true
+		},
+		{
+			"check": "One draw of adopted texture; state unchanged stone_wall/0/25",
+			"passed": true
+		},
+		{
+			"check": "Shared geometry reused stone_wall/0/25",
+			"passed": true
+		},
+		{
+			"check": "One draw of adopted texture; state unchanged stone_wall/1/100",
+			"passed": true
+		},
+		{
+			"check": "Shared geometry reused stone_wall/1/100",
+			"passed": true
+		},
+		{
+			"check": "One draw of adopted texture; state unchanged stone_wall/1/25",
+			"passed": true
+		},
+		{
+			"check": "Shared geometry reused stone_wall/1/25",
+			"passed": true
+		},
+		{
+			"check": "One draw of adopted texture; state unchanged stone_wall/2/100",
+			"passed": true
+		},
+		{
+			"check": "Shared geometry reused stone_wall/2/100",
+			"passed": true
+		},
+		{
+			"check": "One draw of adopted texture; state unchanged stone_wall/2/25",
+			"passed": true
+		},
+		{
+			"check": "Shared geometry reused stone_wall/2/25",
+			"passed": true
+		},
+		{
+			"check": "One draw of adopted texture; state unchanged stone_wall/3/100",
+			"passed": true
+		},
+		{
+			"check": "Shared geometry reused stone_wall/3/100",
+			"passed": true
+		},
+		{
+			"check": "One draw of adopted texture; state unchanged stone_wall/3/25",
+			"passed": true
+		},
+		{
+			"check": "Shared geometry reused stone_wall/3/25",
+			"passed": true
+		},
+		{
+			"check": "One draw of adopted texture; state unchanged stone_wall/4/100",
+			"passed": true
+		},
+		{
+			"check": "Shared geometry reused stone_wall/4/100",
+			"passed": true
+		},
+		{
+			"check": "One draw of adopted texture; state unchanged stone_wall/4/25",
+			"passed": true
+		},
+		{
+			"check": "Shared geometry reused stone_wall/4/25",
+			"passed": true
+		},
+		{
+			"check": "One draw of adopted texture; state unchanged stone_wall/5/100",
+			"passed": true
+		},
+		{
+			"check": "Shared geometry reused stone_wall/5/100",
+			"passed": true
+		},
+		{
+			"check": "One draw of adopted texture; state unchanged stone_wall/5/25",
+			"passed": true
+		},
+		{
+			"check": "Shared geometry reused stone_wall/5/25",
+			"passed": true
+		},
+		{
+			"check": "One draw of adopted texture; state unchanged stone_wall/6/100",
+			"passed": true
+		},
+		{
+			"check": "Shared geometry reused stone_wall/6/100",
+			"passed": true
+		},
+		{
+			"check": "One draw of adopted texture; state unchanged stone_wall/6/25",
+			"passed": true
+		},
+		{
+			"check": "Shared geometry reused stone_wall/6/25",
+			"passed": true
+		},
+		{
+			"check": "One draw of adopted texture; state unchanged stone_wall/7/100",
+			"passed": true
+		},
+		{
+			"check": "Shared geometry reused stone_wall/7/100",
+			"passed": true
+		},
+		{
+			"check": "One draw of adopted texture; state unchanged stone_wall/7/25",
+			"passed": true
+		},
+		{
+			"check": "Shared geometry reused stone_wall/7/25",
+			"passed": true
+		},
+		{
+			"check": "One draw of adopted texture; state unchanged stone_wall/8/100",
+			"passed": true
+		},
+		{
+			"check": "Shared geometry reused stone_wall/8/100",
+			"passed": true
+		},
+		{
+			"check": "One draw of adopted texture; state unchanged stone_wall/8/25",
+			"passed": true
+		},
+		{
+			"check": "Shared geometry reused stone_wall/8/25",
+			"passed": true
+		},
+		{
+			"check": "One draw of adopted texture; state unchanged stone_wall/9/100",
+			"passed": true
+		},
+		{
+			"check": "Shared geometry reused stone_wall/9/100",
+			"passed": true
+		},
+		{
+			"check": "One draw of adopted texture; state unchanged stone_wall/9/25",
+			"passed": true
+		},
+		{
+			"check": "Shared geometry reused stone_wall/9/25",
+			"passed": true
+		},
+		{
+			"check": "One draw of adopted texture; state unchanged stone_wall/10/100",
+			"passed": true
+		},
+		{
+			"check": "Shared geometry reused stone_wall/10/100",
+			"passed": true
+		},
+		{
+			"check": "One draw of adopted texture; state unchanged stone_wall/10/25",
+			"passed": true
+		},
+		{
+			"check": "Shared geometry reused stone_wall/10/25",
+			"passed": true
+		},
+		{
+			"check": "One draw of adopted texture; state unchanged stone_wall/11/100",
+			"passed": true
+		},
+		{
+			"check": "Shared geometry reused stone_wall/11/100",
+			"passed": true
+		},
+		{
+			"check": "One draw of adopted texture; state unchanged stone_wall/11/25",
+			"passed": true
+		},
+		{
+			"check": "Shared geometry reused stone_wall/11/25",
+			"passed": true
+		},
+		{
+			"check": "One draw of adopted texture; state unchanged stone_wall/12/100",
+			"passed": true
+		},
+		{
+			"check": "Shared geometry reused stone_wall/12/100",
+			"passed": true
+		},
+		{
+			"check": "One draw of adopted texture; state unchanged stone_wall/12/25",
+			"passed": true
+		},
+		{
+			"check": "Shared geometry reused stone_wall/12/25",
+			"passed": true
+		},
+		{
+			"check": "One draw of adopted texture; state unchanged stone_wall/13/100",
+			"passed": true
+		},
+		{
+			"check": "Shared geometry reused stone_wall/13/100",
+			"passed": true
+		},
+		{
+			"check": "One draw of adopted texture; state unchanged stone_wall/13/25",
+			"passed": true
+		},
+		{
+			"check": "Shared geometry reused stone_wall/13/25",
+			"passed": true
+		},
+		{
+			"check": "One draw of adopted texture; state unchanged stone_wall/14/100",
+			"passed": true
+		},
+		{
+			"check": "Shared geometry reused stone_wall/14/100",
+			"passed": true
+		},
+		{
+			"check": "One draw of adopted texture; state unchanged stone_wall/14/25",
+			"passed": true
+		},
+		{
+			"check": "Shared geometry reused stone_wall/14/25",
+			"passed": true
+		},
+		{
+			"check": "One draw of adopted texture; state unchanged stone_wall/15/100",
+			"passed": true
+		},
+		{
+			"check": "Shared geometry reused stone_wall/15/100",
+			"passed": true
+		},
+		{
+			"check": "One draw of adopted texture; state unchanged stone_wall/15/25",
+			"passed": true
+		},
+		{
+			"check": "Shared geometry reused stone_wall/15/25",
+			"passed": true
+		},
+		{
+			"check": "Geometry bounded at 24 vertices, 30 triangles",
+			"passed": true
+		},
+		{
+			"check": "Roof 32x28 has equal two-thirds cell thickness in both directions",
+			"passed": true
+		},
+		{
+			"check": "All connection ports retain exact 48x42 pitch",
+			"passed": true
+		},
+		{
+			"check": "Lower foot anchor remains unchanged",
+			"passed": true
+		},
+		{
+			"check": "Triangle coverage contains no gaps or extra overlapping area",
+			"passed": true
+		},
+		{
+			"check": "Door frame/leaf/lock share wall profile: 5/false",
+			"passed": true
+		},
+		{
+			"check": "Door frame/leaf/lock share wall profile: 5/true",
+			"passed": true
+		},
+		{
+			"check": "Door frame/leaf/lock share wall profile: 10/false",
+			"passed": true
+		},
+		{
+			"check": "Door frame/leaf/lock share wall profile: 10/true",
+			"passed": true
+		},
+		{
+			"check": "Door frame/leaf/lock share wall profile: 3/false",
+			"passed": true
+		},
+		{
+			"check": "Door frame/leaf/lock share wall profile: 3/true",
+			"passed": true
+		},
+		{
+			"check": "Door frame/leaf/lock share wall profile: 15/false",
+			"passed": true
+		},
+		{
+			"check": "Door frame/leaf/lock share wall profile: 15/true",
+			"passed": true
+		},
+		{
+			"check": "Preview keeps transparency",
+			"passed": true
+		},
+		{
+			"check": "Reserve wood_tile (40, 25)",
+			"passed": true
+		},
+		{
+			"check": "Reach wood_tile / walking",
+			"passed": true
+		},
+		{
+			"check": "Reserve wood_tile (30, 27)",
+			"passed": true
+		},
+		{
+			"check": "Reserve mine (32, 20)",
+			"passed": true
+		},
+		{
+			"check": "Reserve clear_tree (33, 20)",
+			"passed": true
+		},
+		{
+			"check": "Reserve haul (34, 20)",
+			"passed": true
+		},
+		{
+			"check": "New mixed/nearer/higher-priority reservations never preempt wood_tile / walking",
+			"passed": true
+		},
+		{
+			"check": "Original completes before reassignment wood_tile / walking",
+			"passed": true
+		},
+		{
+			"check": "No release/reclaim oscillation wood_tile / walking",
+			"passed": true
+		},
+		{
+			"check": "Reserve wood_tile (40, 25)",
+			"passed": true
+		},
+		{
+			"check": "Reach wood_tile / working",
+			"passed": true
+		},
+		{
+			"check": "Reserve wood_tile (39, 27)",
+			"passed": true
+		},
+		{
+			"check": "Reserve mine (32, 20)",
+			"passed": true
+		},
+		{
+			"check": "Reserve clear_tree (33, 20)",
+			"passed": true
+		},
+		{
+			"check": "Reserve haul (34, 20)",
+			"passed": true
+		},
+		{
+			"check": "New mixed/nearer/higher-priority reservations never preempt wood_tile / working",
+			"passed": true
+		},
+		{
+			"check": "Original completes before reassignment wood_tile / working",
+			"passed": true
+		},
+		{
+			"check": "No release/reclaim oscillation wood_tile / working",
+			"passed": true
+		},
+		{
+			"check": "Reserve mine (40, 25)",
+			"passed": true
+		},
+		{
+			"check": "Reach mine / walking",
+			"passed": true
+		},
+		{
+			"check": "Reserve wood_tile (30, 27)",
+			"passed": true
+		},
+		{
+			"check": "Reserve mine (32, 20)",
+			"passed": true
+		},
+		{
+			"check": "Reserve clear_tree (33, 20)",
+			"passed": true
+		},
+		{
+			"check": "Reserve haul (34, 20)",
+			"passed": true
+		},
+		{
+			"check": "New mixed/nearer/higher-priority reservations never preempt mine / walking",
+			"passed": true
+		},
+		{
+			"check": "Original completes before reassignment mine / walking",
+			"passed": true
+		},
+		{
+			"check": "No release/reclaim oscillation mine / walking",
+			"passed": true
+		},
+		{
+			"check": "Pending build priority applies after completion: mine / walking",
+			"passed": true
+		},
+		{
+			"check": "Reserve mine (40, 25)",
+			"passed": true
+		},
+		{
+			"check": "Reach mine / working",
+			"passed": true
+		},
+		{
+			"check": "Reserve wood_tile (39, 27)",
+			"passed": true
+		},
+		{
+			"check": "Reserve mine (32, 20)",
+			"passed": true
+		},
+		{
+			"check": "Reserve clear_tree (33, 20)",
+			"passed": true
+		},
+		{
+			"check": "Reserve haul (34, 20)",
+			"passed": true
+		},
+		{
+			"check": "New mixed/nearer/higher-priority reservations never preempt mine / working",
+			"passed": true
+		},
+		{
+			"check": "Original completes before reassignment mine / working",
+			"passed": true
+		},
+		{
+			"check": "No release/reclaim oscillation mine / working",
+			"passed": true
+		},
+		{
+			"check": "Pending build priority applies after completion: mine / working",
+			"passed": true
+		},
+		{
+			"check": "Reserve clear_tree (40, 25)",
+			"passed": true
+		},
+		{
+			"check": "Reach clear_tree / walking",
+			"passed": true
+		},
+		{
+			"check": "Reserve wood_tile (30, 27)",
+			"passed": true
+		},
+		{
+			"check": "Reserve mine (32, 20)",
+			"passed": true
+		},
+		{
+			"check": "Reserve clear_tree (33, 20)",
+			"passed": true
+		},
+		{
+			"check": "Reserve haul (34, 20)",
+			"passed": true
+		},
+		{
+			"check": "New mixed/nearer/higher-priority reservations never preempt clear_tree / walking",
+			"passed": true
+		},
+		{
+			"check": "Original completes before reassignment clear_tree / walking",
+			"passed": true
+		},
+		{
+			"check": "No release/reclaim oscillation clear_tree / walking",
+			"passed": true
+		},
+		{
+			"check": "Pending build priority applies after completion: clear_tree / walking",
+			"passed": true
+		},
+		{
+			"check": "Reserve clear_tree (40, 25)",
+			"passed": true
+		},
+		{
+			"check": "Reach clear_tree / working",
+			"passed": true
+		},
+		{
+			"check": "Reserve wood_tile (39, 27)",
+			"passed": true
+		},
+		{
+			"check": "Reserve mine (32, 20)",
+			"passed": true
+		},
+		{
+			"check": "Reserve clear_tree (33, 20)",
+			"passed": true
+		},
+		{
+			"check": "Reserve haul (34, 20)",
+			"passed": true
+		},
+		{
+			"check": "New mixed/nearer/higher-priority reservations never preempt clear_tree / working",
+			"passed": true
+		},
+		{
+			"check": "Original completes before reassignment clear_tree / working",
+			"passed": true
+		},
+		{
+			"check": "No release/reclaim oscillation clear_tree / working",
+			"passed": true
+		},
+		{
+			"check": "Pending build priority applies after completion: clear_tree / working",
+			"passed": true
+		},
+		{
+			"check": "Reserve haul (40, 25)",
+			"passed": true
+		},
+		{
+			"check": "Reach haul / walking",
+			"passed": true
+		},
+		{
+			"check": "Reserve wood_tile (30, 27)",
+			"passed": true
+		},
+		{
+			"check": "Reserve mine (32, 20)",
+			"passed": true
+		},
+		{
+			"check": "Reserve clear_tree (33, 20)",
+			"passed": true
+		},
+		{
+			"check": "Reserve haul (34, 20)",
+			"passed": true
+		},
+		{
+			"check": "New mixed/nearer/higher-priority reservations never preempt haul / walking",
+			"passed": true
+		},
+		{
+			"check": "Original completes before reassignment haul / walking",
+			"passed": true
+		},
+		{
+			"check": "No release/reclaim oscillation haul / walking",
+			"passed": true
+		},
+		{
+			"check": "Pending build priority applies after completion: haul / walking",
+			"passed": true
+		},
+		{
+			"check": "Reserve haul (40, 25)",
+			"passed": true
+		},
+		{
+			"check": "Reach haul / working",
+			"passed": true
+		},
+		{
+			"check": "Reserve wood_tile (39, 27)",
+			"passed": true
+		},
+		{
+			"check": "Reserve mine (32, 20)",
+			"passed": true
+		},
+		{
+			"check": "Reserve clear_tree (33, 20)",
+			"passed": true
+		},
+		{
+			"check": "Reserve haul (34, 20)",
+			"passed": true
+		},
+		{
+			"check": "New mixed/nearer/higher-priority reservations never preempt haul / working",
+			"passed": true
+		},
+		{
+			"check": "Original completes before reassignment haul / working",
+			"passed": true
+		},
+		{
+			"check": "No release/reclaim oscillation haul / working",
+			"passed": true
+		},
+		{
+			"check": "Pending build priority applies after completion: haul / working",
+			"passed": true
+		},
+		{
+			"check": "Reserve wood_tile (40, 25)",
+			"passed": true
+		},
+		{
+			"check": "Real material-fetch trip starts",
+			"passed": true
+		},
+		{
+			"check": "Reserve wood_tile (31, 26)",
+			"passed": true
+		},
+		{
+			"check": "New nearby plan does not redirect active material pickup/delivery",
+			"passed": true
+		},
+		{
+			"check": "Reserve mine (40, 25)",
+			"passed": true
+		},
+		{
+			"check": "Danger interrupts current job",
+			"passed": true
+		},
+		{
+			"check": "Same pending job resumes when danger clears",
+			"passed": true
+		},
+		{
+			"check": "Forbidden target releases claim and delays retry",
+			"passed": true
+		},
+		{
+			"check": "Blocked work does not reclaim on every tick",
+			"passed": true
+		},
+		{
+			"check": "Allowed target resumes without discarding progress",
+			"passed": true
+		},
+		{
+			"check": "Rest may interrupt work",
+			"passed": true
+		},
+		{
+			"check": "Explicit cancellation releases the job",
+			"passed": true
+		}
+	],
+	"failures": 0,
+	"method": "Production scheduler/executor, controlled fixed ticks; recorder-only draw calls; no scene/GPU"
+}
