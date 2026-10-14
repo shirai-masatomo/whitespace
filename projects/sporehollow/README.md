@@ -4,6 +4,12 @@
 
 Godot 4.7.2。新規100×68マスの牧場で現地作業を指定し、動物と黄金像を守る開発版です。総合品質改善の不一致修正を反映しています。旧仕様の資料はGit履歴で参照してください。
 
+## 仕様書の入口（2026-10-14）
+
+- **[ゲーム総合仕様書](GAME_SPEC.md)**：世界観、ゲーム進行、マップ生成・地面・岩場、仕事・物流、生活・戦闘・UIの現行仕様と資料索引。実装状況と企画案を区別。
+- **[製作・満腹度・スタミナの基本設計](CRAFTING_NEEDS_DESIGN.md)**：調理台・木工作業台・裁縫台、料理バフ、住人と動物のスタミナ／満腹度。**将来案であり、現行ゲーム未実装**。
+- 最新の実装／検証／EXE反映状態は従来どおり [PROJECT_STATE.md](PROJECT_STATE.md) と [review/current/PACKET.md](review/current/PACKET.md) を正本とする。
+
 ## 起動
 
 ローカル試遊の入口は、通常プロジェクトの `確認入口/最新開発版.lnk` です。開発元は `colony-structure-01-work/projects/sporehollow`。Godotではこのフォルダのproject.godotを開きます。Play.cmdも同じ1本のEXEを起動します。配布版のSHAはreview/current/verification/session-only-delivery.jsonとESCの版情報で確認します。
