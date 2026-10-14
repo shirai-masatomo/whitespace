@@ -83,6 +83,7 @@ static func available(w,kind: String) -> int:
 	return n
 
 static func sync(w):
+	w.stock_revision+=1
 	if not w.campaign.get("physical_stock",false):return
 	w.materials=available(w,"soil");w.wood=available(w,"wood");w.stone=available(w,"stone")
 	w.campaign.resources={"soil":w.materials,"wood":w.wood,"stone":w.stone}
@@ -168,10 +169,15 @@ static func prepare_build(w,j,_a) -> bool:
 	j.state="pending";j.block_reason="備蓄から材料の搬入を待っています";return false
 
 static func finish_build(w,j,success: bool):
+	var remaining=int(j.get("required",w.BUILD[j.kind].cost))
 	for row in w.field_items.duplicate():
 		if row.get("location")!="site" or row.job_id!=j.id:continue
 		if row.get("forbidden",false):row.location="ground";row.owner="";row.job_id=-1;row.erase("forbidden_reconciled")
-		elif success:w.stock_used[row.kind]=w.stock_used.get(row.kind,0)+row.amount;w.field_items.erase(row)
+		elif success:
+			var used=mini(remaining,row.amount) if row.kind==j.resource else 0
+			remaining-=used;row.amount-=used;w.stock_used[row.kind]=w.stock_used.get(row.kind,0)+used
+			if row.amount==0:w.field_items.erase(row)
+			else:row.location="ground";row.owner="";row.job_id=-1;row.stocked=false
 		else:
 			var refund=floori(row.amount*w.Rules.INTERRUPT_REFUND) if j.started else row.amount
 			w.stock_used[row.kind]=w.stock_used.get(row.kind,0)+row.amount-refund

@@ -12,9 +12,9 @@ const KIDNAPPER = {"max_hp": 50, "attack_power": 5, "object_attack_power": 2,
 	"counter_seconds": 1.0, "counter_duration": 4.0, "counter_cooldown": 2.0}
 # Gate cost/HP/time, repair coefficient, interruption refund and animal HP are PROVISIONAL.
 const BUILD = {
- "wall": {"cost":10,"hp":8,"seconds":1.0,"tier":0,"layer":"structure"},
- "wood_wall": {"cost":10,"resource":"wood","hp":16,"seconds":2.0,"tier":1,"layer":"structure"},
- "stone_wall": {"cost":10,"resource":"stone","hp":28,"seconds":3.0,"tier":2,"layer":"structure"},
+ "wall": {"cost":5,"hp":8,"seconds":1.0,"tier":0,"layer":"structure"},
+ "wood_wall": {"cost":5,"resource":"wood","hp":16,"seconds":2.0,"tier":1,"layer":"structure"},
+ "stone_wall": {"cost":5,"resource":"stone","hp":28,"seconds":3.0,"tier":2,"layer":"structure"},
  "soil_tile": {"cost":2,"hp":8,"seconds":1.0,"tier":0,"layer":"floor"},
  "wood_tile": {"cost":2,"resource":"wood","hp":16,"seconds":1.0,"tier":1,"layer":"floor"},
  "stone_tile": {"cost":2,"resource":"stone","hp":28,"seconds":1.0,"tier":2,"layer":"floor"},

@@ -1,3 +1,9 @@
+# 建築現場表示・壁コスト5
+
+[変更と関連検証109項目](construction-sites/REPORT.md) / [配布記録](construction-sites/DELIVERY.json)。正式資材アイコン、工程表示と現場クリック情報、壁3種各5個。通常画面の自動起動・GPU試験なし。以下は過去の配布記録。
+
+---
+
 # 最新配布：建築二段階・運搬20（d2595d3）
 
 [今回の実装・検証](construction-groups/REPORT.md)。施工グループ単位の搬入先行と運搬合計20を追加。追加指示により全更新を既存EXEへ反映済み。[配布記録](construction-groups/DELIVERY.json)。ロード39項目と書出EXEのheadless起動終了に合格。通常画面・GPUは自動起動していない。以下は過去の配布記録。

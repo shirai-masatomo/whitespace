@@ -27,6 +27,8 @@ const ANIMAL_DISPLAY_MULTIPLIER=1.25
 const ANIMAL_DRAW_SCALE=ACTOR_SCALE*ANIMAL_DISPLAY_MULTIPLIER
 const ColonyModel=preload("res://game/colony_view_model.gd")
 const Presentation=preload("res://game/colony_ui_state.gd")
+const ConstructionView=preload("res://game/construction_view.gd")
+var construction_view=ConstructionView.new()
 const ColonyMenu=preload("res://game/colony_menu.gd")
 var menu_page="main"
 var job_page=0
@@ -51,7 +53,7 @@ const HumanVisual=preload("res://game/human_visual.gd")
 const AnimalCorpse=preload("res://game/animal_corpse.gd")
 var six_art={}
 var six_revived={}
-const TOOLS = {"kennel":"犬小屋 木20","coop":"鶏小屋 木30","milk":"搾乳", "charge":"突撃", "place_kokeshi":"こけしを置く", "place_fossil":"化石を置く","wall": "土壁 土10", "wood_wall":"木壁 木10", "stone_wall":"石壁 石10", "soil_tile":"土床 土2", "wood_tile":"木床 木2", "stone_tile":"石床 石2", "door":"ドア 木10", "locked_door":"施錠 木20", "guide":"連れてく", "equip":"装備", "repair": "修理", "gate": "ドア開閉", "remove": "解体",
+const TOOLS = {"kennel":"犬小屋 木20","coop":"鶏小屋 木30","milk":"搾乳", "charge":"突撃", "place_kokeshi":"こけしを置く", "place_fossil":"化石を置く","wall": "土壁 土5", "wood_wall":"木壁 木5", "stone_wall":"石壁 石5", "soil_tile":"土床 土2", "wood_tile":"木床 木2", "stone_tile":"石床 石2", "door":"ドア 木10", "locked_door":"施錠 木20", "guide":"連れてく", "equip":"装備", "repair": "修理", "gate": "ドア開閉", "remove": "解体",
 	"attack_target":"狙え", "auto": "おまかせ", "stay": "待て", "wander": "警戒", "rest": "無理するな", "collect": "資源・卵・設計図", "dog_food": "犬用餌 HP+10", "hen_food": "鶏用餌 HP+8", "cat_food": "猫用餌 HP+8"}
 const ORDER_HELP={"auto":"状況に合わせて行動します。戦闘・救護・その動物の仕事を任せます。","guide":"行き先をクリックして一緒に歩きます。\n物や動物は、押した時点の近くの空き場所へ。\n1匹なら隣接し、遅い方に合わせます。\n複数は近くにまとまり、到着でおまかせへ。\n右クリックで行き先指定を解除します。","stay":"その場所で待ちます。近くの敵には応戦しますが、追いかけません。","wander":"周囲を巡回し、敵を見つけたら攻撃します。","rest":"安全と回復を優先します。危険から離れ、無理に追わず近くの敵に応戦します。","attack_target":"敵を選べ。狙える距離や見通しが必要です。","equip":"持ち物から装備を選び、主人公が届けます。","milk":"乳牛に近づいて搾乳します。1日1回です。","charge":"突撃する行き先を選びます。"}
 const GROUP_TOOLS = [["wall", "wood_wall", "stone_wall", "soil_tile", "wood_tile", "stone_tile", "door", "locked_door", "kennel", "coop", "place_kokeshi", "place_fossil"], ["auto", "guide", "stay", "wander", "rest", "attack_target", "equip", "milk", "charge"], ["collect"]]
@@ -448,6 +450,7 @@ func collect_selected():
 	refresh()
 
 func refresh():
+	construction_view.signature=[]
 	var started=Metrics.start()
 	refresh_measured()
 	Metrics.finish("refresh",started)
@@ -1047,6 +1050,7 @@ func prepare_work_plan_data(show_route: bool):
 		route_legs=world.Jobs.preview(world)
 
 func draw_work_plans():
+	construction_view.update(world)
 	preload("res://game/terrain_metrics.gd").count("main.draw_work_plans")
 	if not world.working(): return
 	var show_route=selected.get("kind")=="keeper" or queue_drag_id>=0 or hover_job>=0
@@ -1095,10 +1099,8 @@ func draw_work_plans():
 					var marker=center(t.dest)
 					draw_line(marker-Vector2(12,0),marker+Vector2(12,0),Color("dcd5a5"),2)
 					draw_circle(marker,3,UI.GOLD)
-		if Farm.BUILD.has(j.kind) and not j.started:
-			draw_rect(Rect2(q - Vector2(19, 14), Vector2(38, 28)), Color(0.79, 0.76, 0.55, 0.35))
-			for x in [-18, 18]:
-				draw_line(q + Vector2(x, 11), q + Vector2(x, -12), Color("bdac7a"), 3)
+		if Farm.BUILD.has(j.kind):
+			ConstructionView.draw(self,q,construction_view.rows[j.id])
 		else: draw_line(q + Vector2(-9, 10), q + Vector2(9, 10), Color("cfdfaa"), 3)
 		draw_line(q + Vector2(-10, -12), q + Vector2(-10, -27), Color("9b774e"), 3)
 		draw_rect(Rect2(q + Vector2(-18, -33), Vector2(22, 18)), Color("d8c692"))
@@ -1351,7 +1353,13 @@ func _route_input(event):
 		if event.physical_keycode in [KEY_SPACE, KEY_TAB, KEY_HOME, KEY_F3, KEY_F8, KEY_ESCAPE, KEY_1, KEY_2, KEY_3, KEY_4, KEY_KP_1, KEY_KP_2, KEY_KP_3, KEY_KP_4, KEY_E]:
 			get_viewport().set_input_as_handled()
 
+func selected_construction() -> Dictionary:
+	construction_view.update(world)
+	return construction_view.rows.get(selected.get("id",-1),{}) if selected.get("kind")=="job" else {}
+
 func pointer_over_ui() -> bool:
+	var construction=selected_construction()
+	if not construction.is_empty() and ConstructionView.panel_rect(construction.lines).has_point(pointer):return true
 	if is_instance_valid(colony_panel) and colony_panel.is_visible_in_tree() and colony_panel.get_global_rect().has_point(pointer):return true
 	if is_instance_valid(context_panel) and context_panel.is_visible_in_tree() and context_panel.get_global_rect().has_point(pointer): return true
 	if pointer.y < 49 or pointer.y > 748: return true
@@ -1880,7 +1888,6 @@ func draw_structure(p: Vector2, b: Dictionary, preview: bool = false):
 		draw_rect(Rect2(p - Vector2(18, 13), Vector2(36, 28)), Color(0.9, 0.8, 0.5, 0.25))
 		draw_rect(Rect2(p - Vector2(18, 13), Vector2(36, 28)), Color("e5c982"), false, 2)
 		draw_line(p - Vector2(14, 10), p + Vector2(14, 10), Color("e5c982"), 2)
-		draw_rect(Rect2(p + Vector2(-17, 17), Vector2(34 * (1.0 - float(b.remaining) / b.total_ticks), 3)), Color("b2ebcf"))
 		return
 	if b.kind not in Farm.Buildings.WALLS: draw_colored_polygon(PackedVector2Array([p + Vector2(-20, 10), p + Vector2(20, 10), p + Vector2(28, 24), p + Vector2(-12, 24)]), Color(0.12, 0.22, 0.13, 0.25))
 	if b.kind in Farm.Buildings.WALLS:
@@ -2226,7 +2233,10 @@ func draw_hud():
 	var details = ""
 	var egg_lines=selected_egg_lines()
 	var stock_details=selected_stock_details()
-	if stock_details!="":
+	var construction=selected_construction()
+	if not construction.is_empty():
+		details="\n".join(construction.lines)
+	elif stock_details!="":
 		details=stock_details
 	elif not egg_lines.is_empty():
 		panel(Rect2(16, 550, 446, 139))

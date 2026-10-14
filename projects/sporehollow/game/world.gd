@@ -179,6 +179,7 @@ const Snapshot=preload("res://game/research_snapshot.gd")
 var next_stock_id=1
 var storage_cells: Array = []
 var stock_used: Dictionary = {}
+var stock_revision=0
 var jobs: Array = []
 var next_job_id = 1
 var job_log: Array = []
@@ -380,6 +381,7 @@ func _init(data: Dictionary = {}, seed_number: int = 17, stage_override: Diction
 	Stock.init(self)
 	stock_used=campaign.get("stock_used",{}).duplicate()
 	Work.restore(self)
+	Delivery.migrate_wall_costs(self)
 	var terrain_started=Metrics.start()
 	Biome.prepare(self)
 	Metrics.finish("startup_terrain",terrain_started)

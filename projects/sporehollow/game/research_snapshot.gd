@@ -60,4 +60,5 @@ static func restore(path: String):
 	w.boundary_version=int(state.get("boundary_version",0))
 	w.Land.migrate(w)
 	w.Stock.reconcile_forbidden(w)
+	w.Delivery.migrate_wall_costs(w)
 	return w

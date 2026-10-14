@@ -43,14 +43,14 @@ func finish(w,count,limit=240):
 		tick(w)
 func normal_cases():
 	var w=fixture();stock(w,"wood",40)
-	var rows=group(w,3);var fully_delivered=false;var order_ok=true
+	var rows=group(w,4);var fully_delivered=false;var order_ok=true
 	for i in range(200):
 		if rows.all(func(j):return w.Stock.delivered(w,j)>=j.required):fully_delivered=true
 		tick(w)
 		if rows.any(func(j):return j.started):order_ok=order_ok and fully_delivered
-		if w.metrics.built==3:break
-	check(fully_delivered and order_ok and w.metrics.built==3,"All three sites receive 30 wood before any assembly; builder priority cannot bypass group")
-	check(w.Stock.totals(w).wood+w.stock_used.wood==40 and w.stock_used.wood==30,"Single-worker resources conserved")
+		if w.metrics.built==4:break
+	check(fully_delivered and order_ok and w.metrics.built==4,"All four sites receive 20 wood before any assembly; builder priority cannot bypass group")
+	check(w.Stock.totals(w).wood+w.stock_used.wood==40 and w.stock_used.wood==20,"Single-worker resources conserved")
 	check(max_cargo==20,"A real trip carries exactly 20")
 	# Finished/open groups never re-close when later gestures add unavailable work.
 	w=fixture();stock(w,"wood",20);rows=group(w,2)
@@ -70,7 +70,7 @@ func normal_cases():
 		if rows.any(func(j):return j.started):order_ok=order_ok and fully_delivered
 		if w.metrics.built==5:break
 	check(w.metrics.built==5 and order_ok,"Two workers deliver all sites then share assembly")
-	check(w.Stock.totals(w).wood+w.stock_used.wood==60 and w.stock_used.wood==50,"Two-worker claims conserve every unit")
+	check(w.Stock.totals(w).wood+w.stock_used.wood==60 and w.stock_used.wood==25,"Two-worker claims conserve every unit")
 	var completed=w.job_log.filter(func(r):return r.event=="completed");var ids={}
 	for row in completed:ids[row.id]=true
 	check(completed.size()==5 and ids.size()==5,"No duplicate construction completions")
@@ -78,16 +78,16 @@ func normal_cases():
 	finish(w,1)
 	check(w.metrics.built==1 and w.stock_used.wood==25 and w.Stock.totals(w).wood==15,"Requirement over 20 uses multiple trips without loss (25-unit fixture)")
 	w=fixture();stock(w,"wood",10);stock(w,"soil",10,Vector2i(26,23));stock(w,"stone",10,Vector2i(27,23))
-	group(w,1);group(w,1,"wall",Vector2i(36,26));group(w,1,"stone_wall",Vector2i(37,26))
+	group(w,1);group(w,1,"wall",Vector2i(36,26));group(w,1,"stone_wall",Vector2i(37,26));group(w,1,"wall",Vector2i(38,26))
 	var mixed=false
 	for i in range(180):
 		tick(w);var kinds={};var n=0
 		for row in w.Stock.cargo(w,"keeper"):kinds[row.kind]=true;n+=row.amount
 		mixed=mixed or (kinds.size()>1 and n==20)
-		if w.metrics.built==3:break
-	check(mixed and w.metrics.built==3,"Mixed material cargo totals 20, not 20 per kind")
+		if w.metrics.built==4:break
+	check(mixed and w.metrics.built==4,"Mixed material cargo totals 20, not 20 per kind")
 func exception_cases():
-	var w=fixture();stock(w,"wood",10);var rows=group(w,2)
+	var w=fixture();stock(w,"wood",5);var rows=group(w,2)
 	finish(w,1)
 	check(w.metrics.built==1 and w.jobs.size()==1 and w.jobs[0].get("material_wait",false),"Resource shortage releases stocked site and leaves reason on missing site")
 	stock(w,"wood",10);finish(w,2)

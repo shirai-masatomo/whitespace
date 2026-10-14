@@ -206,3 +206,39 @@ static func feasible(w,j,rows: Array,evaluators: Dictionary) -> bool:
 			if not is_inf(evaluation.distance_to(w,w.neighbors(row.pos))):return true
 	j.block_reason="材料を搬入する通路がありません" if has_hauler else "資材搬入を担当する住人がいません"
 	return false
+
+# Only at legacy data restore boundaries, never in the per-tick scheduler.
+static func migrate_wall_costs(w):
+	for j in w.jobs:
+		if j.kind not in w.Buildings.WALLS or int(j.get("required",j.get("reserved",0)))!=10:continue
+		# Release in-flight claims and retain physical cargo at its current position.
+		cancel_job(w,j)
+		j.required=w.BUILD[j.kind].cost;j.reserved=0;j.physical=true
+		var remaining=j.required
+		for row in w.field_items.duplicate():
+			if row.get("location")!="site" or row.get("job_id",-1)!=j.id or row.kind!=j.resource:continue
+			var keep=mini(remaining,row.amount);var excess=row.amount-keep;remaining-=keep
+			if excess>0:
+				if keep==0:row.location="ground";row.job_id=-1;row.owner="";row.stocked=false;row.pos=surplus_cell(w,j.pos)
+				else:
+					row.amount=keep
+					var returned=w.Stock.add(w,row.kind,excess,surplus_cell(w,j.pos))
+					returned.stocked=false;returned.forbidden=row.get("forbidden",false)
+		var site=w.Buildings.layer(w,j.kind).get(j.pos,{})
+		if site.get("status")=="building":site.cost=j.required
+		j.material_wait=w.Stock.delivered(w,j)<j.required
+		j.block_reason="" # scheduler will re-evaluate; started work and group latch survive
+	w.Stock.sync(w)
+
+static func surplus_cell(w,origin: Vector2i) -> Vector2i:
+	# Do not drop a cost-migration surplus on another active construction footprint.
+	var reserved={}
+	for pending in w.jobs:
+		if w.BUILD.has(pending.kind):reserved[pending.pos]=true
+	var seen={origin:true};var queue=[origin];var index=0
+	while index<queue.size():
+		var cell=queue[index];index+=1
+		if cell!=origin and not reserved.has(cell):return cell
+		for next in w.neighbors(cell):
+			if not seen.has(next) and w.inside(next) and w.walkable(next):seen[next]=true;queue.append(next)
+	return origin # fully sealed: preserve physical stock rather than deleting it
