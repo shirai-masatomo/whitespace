@@ -1,0 +1,238 @@
+{
+	"checks": [
+		{
+			"check": "Renderer preserves all four-direction connections and resource records: 0",
+			"passed": true
+		},
+		{
+			"check": "Uses adopted normal/single rock texture: 0",
+			"passed": true
+		},
+		{
+			"check": "Renderer preserves all four-direction connections and resource records: 1",
+			"passed": true
+		},
+		{
+			"check": "Uses adopted normal/single rock texture: 1",
+			"passed": true
+		},
+		{
+			"check": "Only exposed south edge has contact shadow: 1",
+			"passed": true
+		},
+		{
+			"check": "Renderer preserves all four-direction connections and resource records: 2",
+			"passed": true
+		},
+		{
+			"check": "Uses adopted normal/single rock texture: 2",
+			"passed": true
+		},
+		{
+			"check": "Only exposed south edge has contact shadow: 2",
+			"passed": true
+		},
+		{
+			"check": "Renderer preserves all four-direction connections and resource records: 3",
+			"passed": true
+		},
+		{
+			"check": "Uses adopted normal/single rock texture: 3",
+			"passed": true
+		},
+		{
+			"check": "Only exposed south edge has contact shadow: 3",
+			"passed": true
+		},
+		{
+			"check": "Renderer preserves all four-direction connections and resource records: 4",
+			"passed": true
+		},
+		{
+			"check": "Uses adopted normal/single rock texture: 4",
+			"passed": true
+		},
+		{
+			"check": "Only exposed south edge has contact shadow: 4",
+			"passed": true
+		},
+		{
+			"check": "Renderer preserves all four-direction connections and resource records: 5",
+			"passed": true
+		},
+		{
+			"check": "Uses adopted normal/single rock texture: 5",
+			"passed": true
+		},
+		{
+			"check": "Only exposed south edge has contact shadow: 5",
+			"passed": true
+		},
+		{
+			"check": "Renderer preserves all four-direction connections and resource records: 6",
+			"passed": true
+		},
+		{
+			"check": "Uses adopted normal/single rock texture: 6",
+			"passed": true
+		},
+		{
+			"check": "Only exposed south edge has contact shadow: 6",
+			"passed": true
+		},
+		{
+			"check": "Renderer preserves all four-direction connections and resource records: 7",
+			"passed": true
+		},
+		{
+			"check": "Uses adopted normal/single rock texture: 7",
+			"passed": true
+		},
+		{
+			"check": "Only exposed south edge has contact shadow: 7",
+			"passed": true
+		},
+		{
+			"check": "Renderer preserves all four-direction connections and resource records: 8",
+			"passed": true
+		},
+		{
+			"check": "Uses adopted normal/single rock texture: 8",
+			"passed": true
+		},
+		{
+			"check": "Only exposed south edge has contact shadow: 8",
+			"passed": true
+		},
+		{
+			"check": "Renderer preserves all four-direction connections and resource records: 9",
+			"passed": true
+		},
+		{
+			"check": "Uses adopted normal/single rock texture: 9",
+			"passed": true
+		},
+		{
+			"check": "Only exposed south edge has contact shadow: 9",
+			"passed": true
+		},
+		{
+			"check": "Renderer preserves all four-direction connections and resource records: 10",
+			"passed": true
+		},
+		{
+			"check": "Uses adopted normal/single rock texture: 10",
+			"passed": true
+		},
+		{
+			"check": "Only exposed south edge has contact shadow: 10",
+			"passed": true
+		},
+		{
+			"check": "Renderer preserves all four-direction connections and resource records: 11",
+			"passed": true
+		},
+		{
+			"check": "Uses adopted normal/single rock texture: 11",
+			"passed": true
+		},
+		{
+			"check": "Only exposed south edge has contact shadow: 11",
+			"passed": true
+		},
+		{
+			"check": "Renderer preserves all four-direction connections and resource records: 12",
+			"passed": true
+		},
+		{
+			"check": "Uses adopted normal/single rock texture: 12",
+			"passed": true
+		},
+		{
+			"check": "Only exposed south edge has contact shadow: 12",
+			"passed": true
+		},
+		{
+			"check": "Renderer preserves all four-direction connections and resource records: 13",
+			"passed": true
+		},
+		{
+			"check": "Uses adopted normal/single rock texture: 13",
+			"passed": true
+		},
+		{
+			"check": "Only exposed south edge has contact shadow: 13",
+			"passed": true
+		},
+		{
+			"check": "Renderer preserves all four-direction connections and resource records: 14",
+			"passed": true
+		},
+		{
+			"check": "Uses adopted normal/single rock texture: 14",
+			"passed": true
+		},
+		{
+			"check": "Only exposed south edge has contact shadow: 14",
+			"passed": true
+		},
+		{
+			"check": "Renderer preserves all four-direction connections and resource records: 15",
+			"passed": true
+		},
+		{
+			"check": "Uses adopted normal/single rock texture: 15",
+			"passed": true
+		},
+		{
+			"check": "Only exposed south edge has contact shadow: 15",
+			"passed": true
+		},
+		{
+			"check": "Interior has no repeated per-cell crack or isolated shadow",
+			"passed": true
+		},
+		{
+			"check": "Adjacent exposed south shadows touch without overlap or gap",
+			"passed": true
+		},
+		{
+			"check": "Perimeter layers use existing transparent soil and gravel art",
+			"passed": true
+		},
+		{
+			"check": "Perimeter positions are deterministic",
+			"passed": true
+		},
+		{
+			"check": "No apron on rock interior or distant soil",
+			"passed": true
+		},
+		{
+			"check": "Floor covers apron",
+			"passed": true
+		},
+		{
+			"check": "Building covers apron",
+			"passed": true
+		},
+		{
+			"check": "Decorating does not modify resources or mining scars",
+			"passed": true
+		},
+		{
+			"check": "Removing a neighbour updates apron; isolated rock does not claim connected terrain",
+			"passed": true
+		},
+		{
+			"check": "Mining/building rock across chunk edges/corners invalidates every dependent apron cell",
+			"passed": true
+		},
+		{
+			"check": "Each rock contributes to at most four dirty chunk signatures, not a whole-map redraw",
+			"passed": true
+		}
+	],
+	"failures": 0,
+	"method": "Headless CPU recording canvas and pure layout/cache dependency logic; no game scene or GPU"
+}

@@ -2084,7 +2084,7 @@ func draw_pointer_preview():
 		elif Farm.BUILD.has(tool):
 			valid = world.can_build(tool, cell)
 			show_preview = true
-			draw_rect(Rect2(Vector2(cell) * TILE + Vector2(3, 4), TILE - Vector2(6, 8)), Color(0.8, 0.8, 0.6, 0.3))
+			draw_rect(Rect2(Vector2(cell) * TILE + Vector2(2, 2), TILE - Vector2(4, 4)), Color(0.64, 0.90, 0.73, 0.18))
 		if show_preview:
 			draw_rect(Rect2(Vector2(cell) * TILE + Vector2(2, 2), TILE - Vector2(4, 4)), Color("a3e5ba") if valid else Color("ee8a77"), false, 3)
 			var mark = center(cell) + Vector2(17, -22)

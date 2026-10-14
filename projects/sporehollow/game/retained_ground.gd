@@ -26,6 +26,16 @@ class Chunk extends Node2D:
 		Board.draw_decor(self,world,TILE,box)
 		Rock.ground(self,Rect2(Vector2(box.position)*TILE,Vector2(box.size)*TILE))
 		Metrics.finish("chunk_draw",started)
+# Perimeter ground reads immediate neighbours and their connection masks.
+# A changed rock can therefore affect cells up to two steps away, across chunks.
+static func rock_dependency_chunks(p: Vector2i) -> Array:
+	var result=[]
+	for dy in [-2,0,2]:
+		for dx in [-2,0,2]:
+			var key=Vector2i(floori(float(p.x+dx)/SIZE),floori(float(p.y+dy)/SIZE))
+			if key not in result:result.append(key)
+	return result
+
 func _ready():
 	show_behind_parent=true
 	sync()
@@ -60,7 +70,9 @@ func sync_measured():
 		for index in range(groups.size()):
 			for p in groups[index]:
 				var key=Vector2i(floori(float(p.x)/SIZE),floori(float(p.y)/SIZE))
-				if next.has(key):next[key].append([index,p,w.live_structure(p) if index==1 else true])
+				var affected=rock_dependency_chunks(p) if index==2 else [key]
+				for target in affected:
+					if next.has(target):next[target].append([index,p,w.live_structure(p) if index==1 else true])
 		for key in chunks:
 			var signature=hash(next[key])
 			if stamps.get(key)!=signature:chunks[key].queue_redraw();stamps[key]=signature
