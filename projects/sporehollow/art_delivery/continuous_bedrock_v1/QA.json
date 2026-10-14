@@ -1,0 +1,894 @@
+{
+  "count": 220,
+  "passed": true,
+  "checks": [
+    {
+      "check": "top/atlas.png RGBA-size-hash",
+      "pass": true
+    },
+    {
+      "check": "normal/mask_00.png RGBA-size-hash",
+      "pass": true
+    },
+    {
+      "check": "top/mask_00.png RGBA-size-hash",
+      "pass": true
+    },
+    {
+      "check": "normal/mask_01.png RGBA-size-hash",
+      "pass": true
+    },
+    {
+      "check": "top/mask_01.png RGBA-size-hash",
+      "pass": true
+    },
+    {
+      "check": "normal/mask_02.png RGBA-size-hash",
+      "pass": true
+    },
+    {
+      "check": "top/mask_02.png RGBA-size-hash",
+      "pass": true
+    },
+    {
+      "check": "normal/mask_03.png RGBA-size-hash",
+      "pass": true
+    },
+    {
+      "check": "top/mask_03.png RGBA-size-hash",
+      "pass": true
+    },
+    {
+      "check": "normal/mask_04.png RGBA-size-hash",
+      "pass": true
+    },
+    {
+      "check": "top/mask_04.png RGBA-size-hash",
+      "pass": true
+    },
+    {
+      "check": "normal/mask_05.png RGBA-size-hash",
+      "pass": true
+    },
+    {
+      "check": "top/mask_05.png RGBA-size-hash",
+      "pass": true
+    },
+    {
+      "check": "normal/mask_06.png RGBA-size-hash",
+      "pass": true
+    },
+    {
+      "check": "top/mask_06.png RGBA-size-hash",
+      "pass": true
+    },
+    {
+      "check": "normal/mask_07.png RGBA-size-hash",
+      "pass": true
+    },
+    {
+      "check": "top/mask_07.png RGBA-size-hash",
+      "pass": true
+    },
+    {
+      "check": "normal/mask_08.png RGBA-size-hash",
+      "pass": true
+    },
+    {
+      "check": "top/mask_08.png RGBA-size-hash",
+      "pass": true
+    },
+    {
+      "check": "normal/mask_09.png RGBA-size-hash",
+      "pass": true
+    },
+    {
+      "check": "top/mask_09.png RGBA-size-hash",
+      "pass": true
+    },
+    {
+      "check": "normal/mask_10.png RGBA-size-hash",
+      "pass": true
+    },
+    {
+      "check": "top/mask_10.png RGBA-size-hash",
+      "pass": true
+    },
+    {
+      "check": "normal/mask_11.png RGBA-size-hash",
+      "pass": true
+    },
+    {
+      "check": "top/mask_11.png RGBA-size-hash",
+      "pass": true
+    },
+    {
+      "check": "normal/mask_12.png RGBA-size-hash",
+      "pass": true
+    },
+    {
+      "check": "top/mask_12.png RGBA-size-hash",
+      "pass": true
+    },
+    {
+      "check": "normal/mask_13.png RGBA-size-hash",
+      "pass": true
+    },
+    {
+      "check": "top/mask_13.png RGBA-size-hash",
+      "pass": true
+    },
+    {
+      "check": "normal/mask_14.png RGBA-size-hash",
+      "pass": true
+    },
+    {
+      "check": "top/mask_14.png RGBA-size-hash",
+      "pass": true
+    },
+    {
+      "check": "normal/mask_15.png RGBA-size-hash",
+      "pass": true
+    },
+    {
+      "check": "top/mask_15.png RGBA-size-hash",
+      "pass": true
+    },
+    {
+      "check": "inner/concave_nw.png RGBA-size-hash",
+      "pass": true
+    },
+    {
+      "check": "inner/concave_ne.png RGBA-size-hash",
+      "pass": true
+    },
+    {
+      "check": "inner/concave_sw.png RGBA-size-hash",
+      "pass": true
+    },
+    {
+      "check": "inner/concave_se.png RGBA-size-hash",
+      "pass": true
+    },
+    {
+      "check": "iron/atlas.png RGBA-size-hash",
+      "pass": true
+    },
+    {
+      "check": "iron/patch_00.png RGBA-size-hash",
+      "pass": true
+    },
+    {
+      "check": "iron/patch_01.png RGBA-size-hash",
+      "pass": true
+    },
+    {
+      "check": "iron/patch_02.png RGBA-size-hash",
+      "pass": true
+    },
+    {
+      "check": "ground/clay/atlas.png RGBA-size-hash",
+      "pass": true
+    },
+    {
+      "check": "ground/sand/atlas.png RGBA-size-hash",
+      "pass": true
+    },
+    {
+      "check": "boundary/full.png RGBA-size-hash",
+      "pass": true
+    },
+    {
+      "check": "ground/clay/full.png RGBA-size-hash",
+      "pass": true
+    },
+    {
+      "check": "ground/sand/full.png RGBA-size-hash",
+      "pass": true
+    },
+    {
+      "check": "boundary/edge_n.png RGBA-size-hash",
+      "pass": true
+    },
+    {
+      "check": "ground/clay/edge_n.png RGBA-size-hash",
+      "pass": true
+    },
+    {
+      "check": "ground/sand/edge_n.png RGBA-size-hash",
+      "pass": true
+    },
+    {
+      "check": "boundary/edge_e.png RGBA-size-hash",
+      "pass": true
+    },
+    {
+      "check": "ground/clay/edge_e.png RGBA-size-hash",
+      "pass": true
+    },
+    {
+      "check": "ground/sand/edge_e.png RGBA-size-hash",
+      "pass": true
+    },
+    {
+      "check": "boundary/edge_s.png RGBA-size-hash",
+      "pass": true
+    },
+    {
+      "check": "ground/clay/edge_s.png RGBA-size-hash",
+      "pass": true
+    },
+    {
+      "check": "ground/sand/edge_s.png RGBA-size-hash",
+      "pass": true
+    },
+    {
+      "check": "boundary/edge_w.png RGBA-size-hash",
+      "pass": true
+    },
+    {
+      "check": "ground/clay/edge_w.png RGBA-size-hash",
+      "pass": true
+    },
+    {
+      "check": "ground/sand/edge_w.png RGBA-size-hash",
+      "pass": true
+    },
+    {
+      "check": "boundary/outer_nw.png RGBA-size-hash",
+      "pass": true
+    },
+    {
+      "check": "ground/clay/outer_nw.png RGBA-size-hash",
+      "pass": true
+    },
+    {
+      "check": "ground/sand/outer_nw.png RGBA-size-hash",
+      "pass": true
+    },
+    {
+      "check": "boundary/outer_ne.png RGBA-size-hash",
+      "pass": true
+    },
+    {
+      "check": "ground/clay/outer_ne.png RGBA-size-hash",
+      "pass": true
+    },
+    {
+      "check": "ground/sand/outer_ne.png RGBA-size-hash",
+      "pass": true
+    },
+    {
+      "check": "boundary/outer_sw.png RGBA-size-hash",
+      "pass": true
+    },
+    {
+      "check": "ground/clay/outer_sw.png RGBA-size-hash",
+      "pass": true
+    },
+    {
+      "check": "ground/sand/outer_sw.png RGBA-size-hash",
+      "pass": true
+    },
+    {
+      "check": "boundary/outer_se.png RGBA-size-hash",
+      "pass": true
+    },
+    {
+      "check": "ground/clay/outer_se.png RGBA-size-hash",
+      "pass": true
+    },
+    {
+      "check": "ground/sand/outer_se.png RGBA-size-hash",
+      "pass": true
+    },
+    {
+      "check": "boundary/inner_nw.png RGBA-size-hash",
+      "pass": true
+    },
+    {
+      "check": "ground/clay/inner_nw.png RGBA-size-hash",
+      "pass": true
+    },
+    {
+      "check": "ground/sand/inner_nw.png RGBA-size-hash",
+      "pass": true
+    },
+    {
+      "check": "boundary/inner_ne.png RGBA-size-hash",
+      "pass": true
+    },
+    {
+      "check": "ground/clay/inner_ne.png RGBA-size-hash",
+      "pass": true
+    },
+    {
+      "check": "ground/sand/inner_ne.png RGBA-size-hash",
+      "pass": true
+    },
+    {
+      "check": "boundary/inner_sw.png RGBA-size-hash",
+      "pass": true
+    },
+    {
+      "check": "ground/clay/inner_sw.png RGBA-size-hash",
+      "pass": true
+    },
+    {
+      "check": "ground/sand/inner_sw.png RGBA-size-hash",
+      "pass": true
+    },
+    {
+      "check": "boundary/inner_se.png RGBA-size-hash",
+      "pass": true
+    },
+    {
+      "check": "ground/clay/inner_se.png RGBA-size-hash",
+      "pass": true
+    },
+    {
+      "check": "ground/sand/inner_se.png RGBA-size-hash",
+      "pass": true
+    },
+    {
+      "check": "mask15 roof fully opaque42rows",
+      "pass": true
+    },
+    {
+      "check": "ports 2/8/2",
+      "pass": true
+    },
+    {
+      "check": "ports 2/9/2",
+      "pass": true
+    },
+    {
+      "check": "ports 2/10/2",
+      "pass": true
+    },
+    {
+      "check": "ports 2/11/2",
+      "pass": true
+    },
+    {
+      "check": "ports 2/12/2",
+      "pass": true
+    },
+    {
+      "check": "ports 2/13/2",
+      "pass": true
+    },
+    {
+      "check": "ports 2/14/2",
+      "pass": true
+    },
+    {
+      "check": "ports 2/15/2",
+      "pass": true
+    },
+    {
+      "check": "ports 3/8/2",
+      "pass": true
+    },
+    {
+      "check": "ports 3/9/2",
+      "pass": true
+    },
+    {
+      "check": "ports 3/10/2",
+      "pass": true
+    },
+    {
+      "check": "ports 3/11/2",
+      "pass": true
+    },
+    {
+      "check": "ports 3/12/2",
+      "pass": true
+    },
+    {
+      "check": "ports 3/13/2",
+      "pass": true
+    },
+    {
+      "check": "ports 3/14/2",
+      "pass": true
+    },
+    {
+      "check": "ports 3/15/2",
+      "pass": true
+    },
+    {
+      "check": "ports 4/1/4",
+      "pass": true
+    },
+    {
+      "check": "ports 4/3/4",
+      "pass": true
+    },
+    {
+      "check": "ports 4/5/4",
+      "pass": true
+    },
+    {
+      "check": "ports 4/7/4",
+      "pass": true
+    },
+    {
+      "check": "ports 4/9/4",
+      "pass": true
+    },
+    {
+      "check": "ports 4/11/4",
+      "pass": true
+    },
+    {
+      "check": "ports 4/13/4",
+      "pass": true
+    },
+    {
+      "check": "ports 4/15/4",
+      "pass": true
+    },
+    {
+      "check": "ports 5/1/4",
+      "pass": true
+    },
+    {
+      "check": "ports 5/3/4",
+      "pass": true
+    },
+    {
+      "check": "ports 5/5/4",
+      "pass": true
+    },
+    {
+      "check": "ports 5/7/4",
+      "pass": true
+    },
+    {
+      "check": "ports 5/9/4",
+      "pass": true
+    },
+    {
+      "check": "ports 5/11/4",
+      "pass": true
+    },
+    {
+      "check": "ports 5/13/4",
+      "pass": true
+    },
+    {
+      "check": "ports 5/15/4",
+      "pass": true
+    },
+    {
+      "check": "ports 6/8/2",
+      "pass": true
+    },
+    {
+      "check": "ports 6/9/2",
+      "pass": true
+    },
+    {
+      "check": "ports 6/10/2",
+      "pass": true
+    },
+    {
+      "check": "ports 6/11/2",
+      "pass": true
+    },
+    {
+      "check": "ports 6/12/2",
+      "pass": true
+    },
+    {
+      "check": "ports 6/13/2",
+      "pass": true
+    },
+    {
+      "check": "ports 6/14/2",
+      "pass": true
+    },
+    {
+      "check": "ports 6/15/2",
+      "pass": true
+    },
+    {
+      "check": "ports 6/1/4",
+      "pass": true
+    },
+    {
+      "check": "ports 6/3/4",
+      "pass": true
+    },
+    {
+      "check": "ports 6/5/4",
+      "pass": true
+    },
+    {
+      "check": "ports 6/7/4",
+      "pass": true
+    },
+    {
+      "check": "ports 6/9/4",
+      "pass": true
+    },
+    {
+      "check": "ports 6/11/4",
+      "pass": true
+    },
+    {
+      "check": "ports 6/13/4",
+      "pass": true
+    },
+    {
+      "check": "ports 6/15/4",
+      "pass": true
+    },
+    {
+      "check": "ports 7/8/2",
+      "pass": true
+    },
+    {
+      "check": "ports 7/9/2",
+      "pass": true
+    },
+    {
+      "check": "ports 7/10/2",
+      "pass": true
+    },
+    {
+      "check": "ports 7/11/2",
+      "pass": true
+    },
+    {
+      "check": "ports 7/12/2",
+      "pass": true
+    },
+    {
+      "check": "ports 7/13/2",
+      "pass": true
+    },
+    {
+      "check": "ports 7/14/2",
+      "pass": true
+    },
+    {
+      "check": "ports 7/15/2",
+      "pass": true
+    },
+    {
+      "check": "ports 7/1/4",
+      "pass": true
+    },
+    {
+      "check": "ports 7/3/4",
+      "pass": true
+    },
+    {
+      "check": "ports 7/5/4",
+      "pass": true
+    },
+    {
+      "check": "ports 7/7/4",
+      "pass": true
+    },
+    {
+      "check": "ports 7/9/4",
+      "pass": true
+    },
+    {
+      "check": "ports 7/11/4",
+      "pass": true
+    },
+    {
+      "check": "ports 7/13/4",
+      "pass": true
+    },
+    {
+      "check": "ports 7/15/4",
+      "pass": true
+    },
+    {
+      "check": "ports 10/8/2",
+      "pass": true
+    },
+    {
+      "check": "ports 10/9/2",
+      "pass": true
+    },
+    {
+      "check": "ports 10/10/2",
+      "pass": true
+    },
+    {
+      "check": "ports 10/11/2",
+      "pass": true
+    },
+    {
+      "check": "ports 10/12/2",
+      "pass": true
+    },
+    {
+      "check": "ports 10/13/2",
+      "pass": true
+    },
+    {
+      "check": "ports 10/14/2",
+      "pass": true
+    },
+    {
+      "check": "ports 10/15/2",
+      "pass": true
+    },
+    {
+      "check": "ports 11/8/2",
+      "pass": true
+    },
+    {
+      "check": "ports 11/9/2",
+      "pass": true
+    },
+    {
+      "check": "ports 11/10/2",
+      "pass": true
+    },
+    {
+      "check": "ports 11/11/2",
+      "pass": true
+    },
+    {
+      "check": "ports 11/12/2",
+      "pass": true
+    },
+    {
+      "check": "ports 11/13/2",
+      "pass": true
+    },
+    {
+      "check": "ports 11/14/2",
+      "pass": true
+    },
+    {
+      "check": "ports 11/15/2",
+      "pass": true
+    },
+    {
+      "check": "ports 12/1/4",
+      "pass": true
+    },
+    {
+      "check": "ports 12/3/4",
+      "pass": true
+    },
+    {
+      "check": "ports 12/5/4",
+      "pass": true
+    },
+    {
+      "check": "ports 12/7/4",
+      "pass": true
+    },
+    {
+      "check": "ports 12/9/4",
+      "pass": true
+    },
+    {
+      "check": "ports 12/11/4",
+      "pass": true
+    },
+    {
+      "check": "ports 12/13/4",
+      "pass": true
+    },
+    {
+      "check": "ports 12/15/4",
+      "pass": true
+    },
+    {
+      "check": "ports 13/1/4",
+      "pass": true
+    },
+    {
+      "check": "ports 13/3/4",
+      "pass": true
+    },
+    {
+      "check": "ports 13/5/4",
+      "pass": true
+    },
+    {
+      "check": "ports 13/7/4",
+      "pass": true
+    },
+    {
+      "check": "ports 13/9/4",
+      "pass": true
+    },
+    {
+      "check": "ports 13/11/4",
+      "pass": true
+    },
+    {
+      "check": "ports 13/13/4",
+      "pass": true
+    },
+    {
+      "check": "ports 13/15/4",
+      "pass": true
+    },
+    {
+      "check": "ports 14/8/2",
+      "pass": true
+    },
+    {
+      "check": "ports 14/9/2",
+      "pass": true
+    },
+    {
+      "check": "ports 14/10/2",
+      "pass": true
+    },
+    {
+      "check": "ports 14/11/2",
+      "pass": true
+    },
+    {
+      "check": "ports 14/12/2",
+      "pass": true
+    },
+    {
+      "check": "ports 14/13/2",
+      "pass": true
+    },
+    {
+      "check": "ports 14/14/2",
+      "pass": true
+    },
+    {
+      "check": "ports 14/15/2",
+      "pass": true
+    },
+    {
+      "check": "ports 14/1/4",
+      "pass": true
+    },
+    {
+      "check": "ports 14/3/4",
+      "pass": true
+    },
+    {
+      "check": "ports 14/5/4",
+      "pass": true
+    },
+    {
+      "check": "ports 14/7/4",
+      "pass": true
+    },
+    {
+      "check": "ports 14/9/4",
+      "pass": true
+    },
+    {
+      "check": "ports 14/11/4",
+      "pass": true
+    },
+    {
+      "check": "ports 14/13/4",
+      "pass": true
+    },
+    {
+      "check": "ports 14/15/4",
+      "pass": true
+    },
+    {
+      "check": "ports 15/8/2",
+      "pass": true
+    },
+    {
+      "check": "ports 15/9/2",
+      "pass": true
+    },
+    {
+      "check": "ports 15/10/2",
+      "pass": true
+    },
+    {
+      "check": "ports 15/11/2",
+      "pass": true
+    },
+    {
+      "check": "ports 15/12/2",
+      "pass": true
+    },
+    {
+      "check": "ports 15/13/2",
+      "pass": true
+    },
+    {
+      "check": "ports 15/14/2",
+      "pass": true
+    },
+    {
+      "check": "ports 15/15/2",
+      "pass": true
+    },
+    {
+      "check": "ports 15/1/4",
+      "pass": true
+    },
+    {
+      "check": "ports 15/3/4",
+      "pass": true
+    },
+    {
+      "check": "ports 15/5/4",
+      "pass": true
+    },
+    {
+      "check": "ports 15/7/4",
+      "pass": true
+    },
+    {
+      "check": "ports 15/9/4",
+      "pass": true
+    },
+    {
+      "check": "ports 15/11/4",
+      "pass": true
+    },
+    {
+      "check": "ports 15/13/4",
+      "pass": true
+    },
+    {
+      "check": "ports 15/15/4",
+      "pass": true
+    },
+    {
+      "check": "100 interior cells exactly equal global atlas with no cell lines",
+      "pass": true
+    },
+    {
+      "check": "rock left/right periodic RGBA",
+      "pass": true
+    },
+    {
+      "check": "rock top/bottom periodic RGBA",
+      "pass": true
+    },
+    {
+      "check": "clay left/right periodic RGBA",
+      "pass": true
+    },
+    {
+      "check": "clay top/bottom periodic RGBA",
+      "pass": true
+    },
+    {
+      "check": "sand left/right periodic RGBA",
+      "pass": true
+    },
+    {
+      "check": "sand top/bottom periodic RGBA",
+      "pass": true
+    },
+    {
+      "check": "prior adopted PNGs unchanged",
+      "pass": true
+    },
+    {
+      "check": "cell-edge texture contrast not amplified",
+      "pass": true
+    }
+  ],
+  "prior_png_count": 2116,
+  "cell_edge_contrast": {
+    "grid_x": 1.123015873015873,
+    "all_x": 1.1657023560990158,
+    "grid_y": 1.3604166666666666,
+    "all_y": 1.4262944179262793
+  },
+  "actual_game_test": false
+}

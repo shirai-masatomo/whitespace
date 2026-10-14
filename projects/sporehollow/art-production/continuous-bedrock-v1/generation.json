@@ -1,0 +1,26 @@
+{
+  "tool": "builtin_imagegen",
+  "date": "2026-10-14",
+  "images": [
+    {
+      "name": "bedrock",
+      "path": "C:\\Users\\masat\\.codex\\generated_images\\01a1062f-6339-7812-baec-d517611755ca\\exec-ad0d1fce-005f-4d03-84c4-abf1677891cf.png",
+      "prompt": "Original production pixel-art material for Whistle Ranch, warm bright rustic overhead farm game. Reference is ONLY for palette, perspective and pixel density, not layout or copying. Crisp chunky pixel clusters, limited 12-18 color palette, directional upper-left light. No lettering, no UI, no frames, no grid, no characters, no recognizable borrowed game artwork. Create a full-bleed seamless repeatable surface texture of ONE massive continuous GREY / GREY-BROWN bedrock slab viewed from above. Not cobblestone paving, NOT individual square blocks or separate boulders, NOT white limestone. Broad heavy irregular rock facets with long intermittent fissures spanning multiple future game cells, quiet areas between fractures, moderate relief shading but no cast shadow. Irregular plates roughly 70-120 logical pixels across when output reduced to384x336. Texture covers all pixels. Macro texture for 8x8 cells, texture detail should be sparse and readable. Aspect ratio8:7, target logical384x336. Match game reference without its pale square tile appearance."
+    },
+    {
+      "name": "iron",
+      "path": "C:\\Users\\masat\\.codex\\generated_images\\01a1062f-6339-7812-baec-d517611755ca\\exec-c0cee687-69b5-4b2f-9e7e-e39ac0c321e5.png",
+      "prompt": "Original production pixel-art material for Whistle Ranch, warm bright rustic overhead farm game. Reference is ONLY for palette, perspective and pixel density, not layout or copying. Crisp chunky pixel clusters, limited 12-18 color palette, directional upper-left light. No lettering, no UI, no frames, no grid, no characters, no recognizable borrowed game artwork. Create a seamless scatter texture of dark oxidized IRON VEINS on a truly TRANSPARENT background. Only branching ore seams, compact irregular dark grey granular clusters, rust red-brown mineral streaks, very limited dull grey-metal glints. Irregular connected veins run diagonally across a wide texture, with large EMPTY transparent spaces between. Not silver, no glow, no rectangular patches, no standalone framed icons, no rock background. Thin bands 2-7 logical pixels wide at384x336. Intended transparent overlay on the same warm grey continuous bedrock. Aspect8:7 targetlogical384x336."
+    },
+    {
+      "name": "clay",
+      "path": "C:\\Users\\masat\\.codex\\generated_images\\01a1062f-6339-7812-baec-d517611755ca\\exec-4ceed71e-dc92-40af-b0f4-a01db30ded09.png",
+      "prompt": "Original production pixel-art material for Whistle Ranch, warm bright rustic overhead farm game. Reference is ONLY for palette, perspective and pixel density, not layout or copying. Crisp chunky pixel clusters, limited 12-18 color palette, directional upper-left light. No lettering, no UI, no frames, no grid, no characters, no recognizable borrowed game artwork. Full-bleed seamless overhead texture of DRY compacted CLAY SOIL, subdued dark BLUE-GREY and slate blue. Matte desaturated earthy surface, small cracked hardened plates and fine gritty particles. No flowing water, no reflections, no waves, no blue glow. Warm-grey inclusions and rough dry cracks clarify solid soil. Sparse irregular cracks with broad quiet patches, not paved cobblestones. Targetlogical192x168, aspect8:7, full texture to every edge, no rim."
+    },
+    {
+      "name": "sand",
+      "path": "C:\\Users\\masat\\.codex\\generated_images\\01a1062f-6339-7812-baec-d517611755ca\\exec-57b82221-bff2-4ebf-9d8f-8de48e3f1d1b.png",
+      "prompt": "Original production pixel-art material for Whistle Ranch, warm bright rustic overhead farm game. Reference is ONLY for palette, perspective and pixel density, not layout or copying. Crisp chunky pixel clusters, limited 12-18 color palette, directional upper-left light. No lettering, no UI, no frames, no grid, no characters, no recognizable borrowed game artwork. Full-bleed seamless overhead texture of BROWN/OCHRE SAND amid temperate grassland, not a desert scene. Warm muted brown tan earthy grains, subtle uneven grain density, tiny pebble and gravel pieces only sparsely. Fine clustered pixel grains distinguish sand from smooth dirt. No large dunes, no ripples like water, no plants, no cast shadow. Bright farm compatible, not yellow beach sand. Targetlogical192x168,aspect8:7,fulltexture to all edges, no rim."
+    }
+  ]
+}
