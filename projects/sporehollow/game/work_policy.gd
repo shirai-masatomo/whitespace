@@ -8,7 +8,7 @@ const PRIORITIES = {"build":3,"gather":2,"collect":3,"animal":4,"other":4,"haul"
 const LABELS = {"build":"建築","gather":"採集","collect":"回収","animal":"動物","other":"その他","haul":"運搬"}
 const PAGE_SIZE = 10
 
-const CARRY_CAPACITY = 8
+const CARRY_CAPACITY = 20
 const STORAGE_CAPACITY = 40
 const SATIETY_MAX = 100.0
 const EAT_THRESHOLD = 30.0

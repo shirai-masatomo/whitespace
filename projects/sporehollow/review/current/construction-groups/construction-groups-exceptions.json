@@ -1,0 +1,78 @@
+{
+	"checks": [
+		{
+			"check": "Drag accepts 2 wood_wall as 2 player jobs",
+			"passed": true
+		},
+		{
+			"check": "One immutable group per gesture",
+			"passed": true
+		},
+		{
+			"check": "Resource shortage releases stocked site and leaves reason on missing site",
+			"passed": true
+		},
+		{
+			"check": "Adding supplies later finishes remainder without resetting group",
+			"passed": true
+		},
+		{
+			"check": "Drag accepts 2 wood_wall as 2 player jobs",
+			"passed": true
+		},
+		{
+			"check": "One immutable group per gesture",
+			"passed": true
+		},
+		{
+			"check": "Unreachable site cannot permanently block supplied group member",
+			"passed": true
+		},
+		{
+			"check": "Drag accepts 3 wood_wall as 3 player jobs",
+			"passed": true
+		},
+		{
+			"check": "One immutable group per gesture",
+			"passed": true
+		},
+		{
+			"check": "Rest releases transport safely; cargo remains physical",
+			"passed": true
+		},
+		{
+			"check": "Cancel one grouped site after interrupted pickup; survivors finish without loss",
+			"passed": true
+		},
+		{
+			"check": "Drag accepts 2 wood_wall as 2 player jobs",
+			"passed": true
+		},
+		{
+			"check": "One immutable group per gesture",
+			"passed": true
+		},
+		{
+			"check": "Other reservation is not double-spent; supplied site is released",
+			"passed": true
+		},
+		{
+			"check": "Ordinary hauling retains physical stock and capacity-40 storage",
+			"passed": true
+		},
+		{
+			"check": "Storage cells never exceed 40",
+			"passed": true
+		},
+		{
+			"check": "All observed ticks: each worker cargo <=20 and claims <= physical amount",
+			"passed": true
+		},
+		{
+			"check": "Storage40 and designation100 unchanged",
+			"passed": true
+		}
+	],
+	"failures": 0,
+	"max_observed_cargo": 20
+}

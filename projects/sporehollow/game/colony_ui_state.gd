@@ -11,6 +11,7 @@ static func work_name(w,j: Dictionary) -> String:
 static func work_state(j: Dictionary) -> String:
 	if j.get("cancel_requested",false):return "取消待ち"
 	if j.get("delivery_owner","")!="":return "材料搬入中"
+	if j.get("block_reason","")==preload("res://game/construction_delivery.gd").GROUP_WAIT:return "グループ搬入待ち"
 	if j.get("material_wait",false):return "材料待ち"
 	if j.state=="blocked":
 		var why=j.get("block_reason","")

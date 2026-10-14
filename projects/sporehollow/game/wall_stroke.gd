@@ -54,6 +54,7 @@ func plan(w,force: bool=false) -> Dictionary:
 
 func commit(w) -> Dictionary:
 	var preview=plan(w,true);var accepted=0;var lookup=w.Jobs.index(w)
+	lookup.construction_group=w.next_job_id
 	for row in preview.rows:
 		if row.valid and w.act(kind,row.pos,-1,lookup):accepted+=1
 	var result={"accepted":accepted,"skipped":cells.size()-accepted,"reason":preview.reason}

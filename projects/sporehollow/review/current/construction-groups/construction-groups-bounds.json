@@ -1,0 +1,34 @@
+{
+	"checks": [
+		{
+			"check": "100 jobs allowed, 101st refused without creating stage jobs",
+			"passed": true
+		},
+		{
+			"check": "Barrier indexes jobs and physical stock once per scheduler step",
+			"passed": true
+		},
+		{
+			"check": "Zero-cost debug group becomes construction-ready",
+			"passed": true
+		},
+		{
+			"check": "Mining and chopping still finish with physical resource output",
+			"passed": true
+		},
+		{
+			"check": "Harvest quantities unchanged",
+			"passed": true
+		},
+		{
+			"check": "All observed ticks: each worker cargo <=20 and claims <= physical amount",
+			"passed": true
+		},
+		{
+			"check": "Storage40 and designation100 unchanged",
+			"passed": true
+		}
+	],
+	"failures": 0,
+	"max_observed_cargo": 0
+}

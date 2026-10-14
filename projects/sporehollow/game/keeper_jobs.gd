@@ -66,6 +66,9 @@ static func enqueue(w, kind: String, p: Vector2i, animal_id: int,lookup: Diction
 			if w.jobs.any(func(other):return other.get("stock_id",-1)==row.stock_id):return false
 			j.kind="haul";j.stock_id=row.stock_id;j.explicit_designation=true
 	j.physical=w.BUILD.has(kind)
+	if j.physical:
+		j.construction_group=lookup.get("construction_group",j.id)
+		j.construction_ready=not lookup.has("construction_group")
 	j.work_category=w.Work.category(w,j)
 	w.next_job_id+=1
 	if w.jobs.is_empty() and w.manual_goal==null and w.Life.able(w) and w.job_hold_reason in ["travel","manual","rescue","danger","rest_end"]: hold(w,"")

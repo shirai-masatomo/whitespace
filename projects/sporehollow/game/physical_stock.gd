@@ -125,9 +125,14 @@ static func reserve(w,kind: String,amount: int,token: String,actor: Dictionary,s
 		if remaining==0:break
 	sync(w);return result
 
+static func carry_free(w,key: String) -> int:
+	var count=0
+	for row in cargo(w,key):count+=row.amount
+	return maxi(0,Policy.CARRY_CAPACITY-count)
+
 static func pickup(w,row,token: String,actor: Dictionary,job_id: int) -> Dictionary:
 	var n=int(row.get("claims",{}).get(token,0))
-	if n<=0 or n>row.amount or row.location!="ground" or row.get("forbidden",false):return {}
+	if n<=0 or n>row.amount or n>carry_free(w,actor.work_key) or row.location!="ground" or row.get("forbidden",false):return {}
 	row.claims.erase(token);row.amount-=n
 	var carried=row.duplicate(true);carried.stock_id=w.next_stock_id;w.next_stock_id+=1;carried.amount=n;carried.claims={}
 	carried.location="carry";carried.owner=actor.work_key;carried.job_id=job_id;carried.pos=actor.pos;carried.incubating=false
@@ -157,6 +162,8 @@ static func delivered(w,j) -> int:
 
 static func prepare_build(w,j,_a) -> bool:
 	j.physical=true
+	if not w.Delivery.can_build(j):
+		j.state="pending";j.block_reason=w.Delivery.GROUP_WAIT;return false
 	if delivered(w,j)>=j.get("required",w.BUILD[j.kind].cost):return true
 	j.state="pending";j.block_reason="備蓄から材料の搬入を待っています";return false
 
@@ -233,7 +240,7 @@ static func haul_step(w,j,a):
 	j.stock_id=row.stock_id;j.pos=row.pos
 	if row.get("forbidden",false):j.state="blocked";j.block_reason="対象の物資は禁止中です";return
 	var token="job:%d"%j.id
-	var requested=mini(Policy.CARRY_CAPACITY,free_count(row)+int(row.claims.get(token,0)))
+	var requested=mini(carry_free(w,a.work_key),free_count(row)+int(row.claims.get(token,0)))
 	var plan=storage_plan(w,a,requested,row.kind,j.id)
 	if not plan.has("pos") or plan.amount<=0:j.state="blocked";j.block_reason=plan.get("reason","物資は別の人が使用中です");return
 	j.storage_target=plan.pos;j.storage_amount=plan.amount

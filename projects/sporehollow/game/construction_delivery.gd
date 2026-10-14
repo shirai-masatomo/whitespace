@@ -1,6 +1,7 @@
 extends RefCounted
 ## Internal transport stages; never adds another player designation.
 const RADIUS=6
+const GROUP_WAIT="同じ施工グループへの資材搬入を待っています"
 
 static func job(w,id: int) -> Dictionary:
 	for j in w.jobs:
@@ -41,8 +42,11 @@ static func start(w,key: String,proposal: Dictionary) -> Dictionary:
 	var a=w.workers[key];var first=job(w,proposal.seed_job)
 	if first.is_empty():return {}
 	var task={"kind":"build_delivery","id":first.id,"pos":first.pos,"phase":"fetch","state":"walking","allocations":[]}
-	var capacity=w.Work.Policy.CARRY_CAPACITY
-	var targets=plans(w,a);targets.erase(first);targets.push_front(first)
+	var capacity=w.Stock.carry_free(w,key)
+	var targets=plans(w,a)
+	var same=targets.filter(func(j):return j.get("construction_group",j.id)==first.get("construction_group",first.id))
+	targets=same+targets.filter(func(j):return j.get("construction_group",j.id)!=first.get("construction_group",first.id))
+	targets.erase(first);targets.push_front(first)
 	for j in targets:
 		if capacity<=0:break
 		if w.distance(first.pos,j.pos)>RADIUS:continue
@@ -129,3 +133,76 @@ static func step(w,key: String):
 static func reconcile(w):
 	for key in w.build_deliveries.keys():
 		if not w.workers.has(key):release(w,key)
+
+# Only unlatched groups enter the barrier scan. Site totals and source lists are
+# indexed once per scheduler step, not re-scanned for each build candidate.
+static func can_build(j) -> bool:
+	return j.get("started",false) or j.get("construction_ready",true)
+
+static func refresh_groups(w):
+	preload("res://game/terrain_metrics.gd").count("construction_group_job_rows",w.jobs.size())
+	var groups={}
+	for j in w.jobs:
+		if not w.BUILD.has(j.kind) or j.get("cancel_requested",false):continue
+		var id=j.get("construction_group",j.id)
+		if not groups.has(id):groups[id]=[]
+		groups[id].append(j)
+	var pending={}
+	for id in groups:
+		if groups[id].any(func(j):return not can_build(j)):pending[id]=groups[id]
+	if pending.is_empty():return
+	var totals={};var stock={}
+	preload("res://game/terrain_metrics.gd").count("construction_group_stock_rows",w.field_items.size())
+	for row in w.field_items:
+		if row.get("forbidden",false):continue
+		if row.get("location")=="site":
+			var token=str(row.job_id)+":"+row.kind
+			totals[token]=totals.get(token,0)+row.amount
+		elif row.get("location")=="ground" and w.Stock.free_count(row)>0 and (w.Stock.eligible(w,row) or row.get("construction_transfer",false)):
+			if not stock.has(row.kind):stock[row.kind]=[]
+			stock[row.kind].append(row)
+	var evaluators={}
+	for id in pending:
+		var members=pending[id];var missing=[];var missing_ids={};var filled=0
+		for j in members:
+			if j.get("required",w.BUILD[j.kind].cost)>totals.get(str(j.id)+":"+j.resource,0):missing.append(j);missing_ids[j.id]=true
+			else:filled+=1
+		var ready=missing.is_empty() or members.any(func(j):return can_build(j))
+		if not ready and filled>0:
+			# Actual in-flight reservations keep the barrier closed, including a
+			# temporary worker interruption until its normal release callback.
+			var possible=missing.any(func(j):return j.get("delivery_owner","")!="" and w.build_deliveries.has(j.delivery_owner))
+			if not possible:
+				for j in missing:
+					if feasible(w,j,stock.get(j.resource,[]),evaluators):possible=true;break
+			ready=not possible
+		if ready:
+			for j in members:
+				j.construction_ready=true
+				if j.get("block_reason","")==GROUP_WAIT:j.block_reason=""
+			w.job_log.append({"tick":w.tick,"event":"construction_group_ready","group":id,"partial":not missing.is_empty()})
+		else:
+			for j in members:
+				if not missing_ids.has(j.id) and not j.get("started",false):j.block_reason=GROUP_WAIT
+
+static func feasible(w,j,rows: Array,evaluators: Dictionary) -> bool:
+	var candidates=rows.filter(func(r):return not r.get("construction_transfer",false) or r.get("job_id",-1)==j.id)
+	if candidates.is_empty():
+		j.material_wait=true;j.block_reason="備蓄に使える資材がありません";return false
+	var why=w.Buildings.reason(w,j.kind,j.pos,false) if not j.started else ""
+	if why!="" and why!="ここに誰かいます":j.block_reason=why;return false
+	var has_hauler=false
+	for key in w.workers:
+		var a=w.workers[key]
+		# Rest, danger and an existing task do not make a potential hauler vanish.
+		if a.work_priorities.get("haul",0)<=0 or not a.get("placed",false) or a.get("dead",false) or a.get("hp",0)<=0:continue
+		if j.get("explicit_actor",key)!=key:continue
+		has_hauler=true
+		if why!="" and a.pos!=j.pos:continue
+		if not evaluators.has(key):evaluators[key]=preload("res://game/job_evaluation.gd").new(w,a.pos)
+		var evaluation=evaluators[key]
+		if is_inf(evaluation.distance_to(w,w.neighbors(j.pos))):continue
+		for row in candidates:
+			if not is_inf(evaluation.distance_to(w,w.neighbors(row.pos))):return true
+	j.block_reason="材料を搬入する通路がありません" if has_hauler else "資材搬入を担当する住人がいません"
+	return false

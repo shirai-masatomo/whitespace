@@ -129,7 +129,7 @@ static func claim(w,key: String,j) -> bool:
 
 static func effort(w,a,j,evaluation=null) -> float:
 	if w.work_claims.has(target_key(w,j)):return INF
-	if w.BUILD.has(j.kind) and w.Delivery.needed(w,j)>0:return INF
+	if w.BUILD.has(j.kind) and (not w.Delivery.can_build(j) or w.Delivery.needed(w,j)>0):return INF
 	var position=j.pos
 	if j.kind in ["train","slaughter"]:
 		var animal=w.Orders.animal(w,j.animal_id)
@@ -205,6 +205,7 @@ static func step(w):
 		if owner!="" and not w.workers.has(owner) and not(j.get("purpose","")=="merchant" and owner==w.merchant_worker):release(w,j);j.state="pending"
 		if j.get("cancel_requested",false):w.Jobs.cancel(w,j.id)
 		elif missing(w,j):w.Jobs.cancel(w,j.id,"target_missing")
+	w.Delivery.refresh_groups(w)
 	for key in w.workers:
 		var a=w.workers[key]
 		if w.Food.step(w,a):continue
