@@ -1,3 +1,5 @@
+<!-- 2026-10-14に旧review/currentから移動。現行仕様は ../../../GAME_SPEC.md / ../../current/PACKET.md -->
+
 # 撮影失敗の原因と修正（2026-10-12）
 
 **原因は撮影ランナーの誤り。配布用release EXEへ非対応の `--script` を渡していた。** GPU隔離の失敗や、ゲーム自体のフリーズではなかった。
@@ -16,6 +18,6 @@
 
 修正：`tools/review_integrated_visual.ps1`を開発用Godotと明示project pathへ限定。CLI対応を起動前確認。途中段階をファイルへ即時保存し、PNG保存失敗/枚数不足も検出。beforeとして現行EXEを古いa16def5と偽って撮るhardcodeも除去。古いEXEでの同条件beforeは未取得のまま。
 
-診断は[監査原本](verification/render-diagnosis.json)。画面は[今回の8枚](SCREENS_INTEGRATED.md)。実ゲームcodeは配布版と同じで、変更は撮影/診断用だけ。人物/鶏/猫/岩連結は明記したfixture。初期物資とUIの画素は確認したが、人間の快適さ/長時間試遊の合格とは分ける。
+診断は[監査原本](../../current/verification/render-diagnosis.json)。画面は[今回の8枚](SCREENS_INTEGRATED.md)。実ゲームcodeは配布版と同じで、変更は撮影/診断用だけ。人物/鶏/猫/岩連結は明記したfixture。初期物資とUIの画素は確認したが、人間の快適さ/長時間試遊の合格とは分ける。
 
 撮影で見つかった別課題：動物表は3行目が部分的に隠れ、見出しと列位置にもずれがある。連結岩は採用参考の自然さ/描込みにまだ差がある。今回は原因究明の範囲で記録し、完了扱いにしない。

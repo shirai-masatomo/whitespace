@@ -1,3 +1,5 @@
+<!-- 2026-10-14に旧review/currentから移動。現行仕様は ../../../GAME_SPEC.md / ../../current/PACKET.md -->
+
 # マップ動物の表示サイズ +25%（2026-10-12）
 
 正式ソース `colony-structure-01-work/projects/sporehollow`、ブランチ `codex/sporehollow-biome01`、作業開始HEAD `eba972e01b995df85fd65e5a71e7c4e934b46094`。既存の最新開発版ショートカットの参照先とREADME/DEVELOPMENT/AGENTSを照合して継続利用。新しいソースコピー・EXE・ショートカットは作成していません。
@@ -23,7 +25,7 @@ headless / Dummy音声 / 最大30fps / 直列 / 専用APPDATAで実施。通常�
 
 死亡回復テストの失敗は「既存回復日の翌日に柴犬が活動可能」「回復後に通常ターゲット対象へ戻る」の2点。このテストから参照される46のGDScriptはHEADと同一で、今回変更した描画2ファイルを読み込まないことを確認しました。シミュレーション側の既存テスト課題として残しています。変更前EXEでの再試験や、この無関係な挙動の修正は実施していません。
 
-[ログ・スコープ・保持確認](verification/last-run.json) / [死亡回復テスト依存比較](verification/animal-size-corpse-dependencies.json)
+[ログ・スコープ・保持確認](../../current/verification/last-run.json) / [死亡回復テスト依存比較](../../current/verification/animal-size-corpse-dependencies.json)
 
 ## 配布・残件
 

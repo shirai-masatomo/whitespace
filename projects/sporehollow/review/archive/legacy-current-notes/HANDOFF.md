@@ -1,8 +1,10 @@
+<!-- 2026-10-14に旧review/currentから移動。現行仕様は ../../../GAME_SPEC.md / ../../current/PACKET.md -->
+
 # 最新：連続岩場・部分採掘の正式素材
 
 実装 **b902042** を通常EXEへ反映済み。素材 **7b6e813**。関連222項目・実ゲームGPU撮影・EXE終了/再開5項目成功。3×3岩場の端・角、端から通路を開けて中央を採掘し、露出面・石材現物・保存を確認しました。
 
-[実画面と動き](rock_connections/SCREENS.md) / [報告](rock_connections/REPORT.md) / [版・ハッシュ・配布](rock_connections/DELIVERY.json)。境界の二重帯は実画面で検出して修正済み。ユーザーデスクトップでの起動なし。
+[実画面と動き](../../current/rock_connections/SCREENS.md) / [報告](../../current/rock_connections/REPORT.md) / [版・ハッシュ・配布](../../current/rock_connections/DELIVERY.json)。境界の二重帯は実画面で検出して修正済み。ユーザーデスクトップでの起動なし。
 
 ---
 
@@ -12,7 +14,7 @@
 
 ## 最新：採掘・伐採を実装・試遊版へ反映
 
-通常EXE ecc8543（正式素材b0e917a）、既存の最新開発版.lnk/Play.cmd。現地作業/進捗保持/1セル消失/回収前提の物資、打撃同期の仮描画/音/破片/揺れ/倒木。関連7スイート/新規28項目、PNG8枚/連続画像2本、EXE終了再開5項目成功。[成果と未納品パーツ](harvest/REPORT.md)・[動き/画面/音](harvest/SCREENS.md)。
+通常EXE ecc8543（正式素材b0e917a）、既存の最新開発版.lnk/Play.cmd。現地作業/進捗保持/1セル消失/回収前提の物資、打撃同期の仮描画/音/破片/揺れ/倒木。関連7スイート/新規28項目、PNG8枚/連続画像2本、EXE終了再開5項目成功。[成果と未納品パーツ](../../current/harvest/REPORT.md)・[動き/画面/音](../../current/harvest/SCREENS.md)。
 
 以下は前回の撮影障害の調査記録。
 
@@ -20,7 +22,7 @@
 
 2026-10-12。release EXEに非対応の `--script` を渡した私のランナーの誤り。引数が無視され、撮影スクリプトではなく通常ゲームが続いたためtimeout。隔離GPU/描画待機の障害ではなかった。開発用Godotへ切替え、CLI確認・段階記録・PNG/枚数確認を追加し、正式手順で8枚取得/実画素確認。
 
-[原因・決定的な比較](RENDER_DIAGNOSIS.md)・[更新後8枚](SCREENS_INTEGRATED.md)・[撮影版/EXE版/素材と画像ハッシュ](verification/integrated-images.json)。撮影ゲームcodeは配布bf6eeeaと同一。通常EXEは更新済みのまま、撮影修正はtools/testsだけ。beforeは未取得、動物表/岩の別課題は同ページへ記録。
+[原因・決定的な比較](RENDER_DIAGNOSIS.md)・[更新後8枚](SCREENS_INTEGRATED.md)・[撮影版/EXE版/素材と画像ハッシュ](../../current/verification/integrated-images.json)。撮影ゲームcodeは配布bf6eeeaと同一。通常EXEは更新済みのまま、撮影修正はtools/testsだけ。beforeは未取得、動物表/岩の別課題は同ページへ記録。
 
 下のtimeout/原因未特定は調査前の記録。現在の原因/撮影結果は本節を優先。
 
@@ -28,7 +30,7 @@
 
 2026-10-12 18:55 JST、既存EXEを **bf6eeea** へ更新。起動は従来の `確認入口/最新開発版.lnk` またはPlay.cmd。ESCの版情報で確認可能。正式素材b0e917a11f205190dde0136165a72c189f39e275、EXE SHA256 `0CA482AEB8D18928B0A0C0DBFA562AF8FFBA8CC6F5BA99E18C72B5E00307DFB0`。
 
-撮影失敗とEXE本体の確認を切り分け、既存dev.ps1 buildのWindows出力→smoke→非対話GPU起動/正常終了/別プロセス再開5項目→同じEXE置換まで成功。旧版/candidateを常備せず一時領域を整理。[配布記録](verification/integrated-deployment.json)・[検証原本](verification/integrated-publication.json)。
+撮影失敗とEXE本体の確認を切り分け、既存dev.ps1 buildのWindows出力→smoke→非対話GPU起動/正常終了/別プロセス再開5項目→同じEXE置換まで成功。旧版/candidateを常備せず一時領域を整理。[配布記録](../../current/verification/integrated-deployment.json)・[検証原本](../../current/verification/integrated-publication.json)。
 
 **撮影は未完了のまま。** 前回は外部before撮影スクリプトが120秒timeout、ゲームログが空で原因未特定。その失敗をEXE更新全体の阻害とした判断は訂正する。今回の通常EXE本体のGPU起動は成功。前回の未反映記録はGit履歴と失敗監査に保持。人間の画面評価は未実施。
 
@@ -38,11 +40,11 @@
 
 通常物資クリックの回収予約を廃止、明示の回収/禁止/許可/解除を単体/範囲へ接続。早期の右クリック入力処理でサブパネルでも選択解除し、解放の背後入力を防ぐ。役割表の状態列を除き、動物表に個体画像/区分/HP/対応操作、左下402pxアーキテクト/ゾーンを導入。
 
-採用岩場画像はユーザー貼付で実画素を確認し、[原本/出典](../../art-production/ROCK_REFERENCE.md)を保管。低い岩盤/4方向連結/前面/砂利/採掘跡へコード描画で反映。自然分布・既存セーブの位置/数・採掘量を維持し、概念画像そのものを盤面へ貼り付けない。動物1.25倍の元変更を保全。
+採用岩場画像はユーザー貼付で実画素を確認し、[原本/出典](../../../art-production/ROCK_REFERENCE.md)を保管。低い岩盤/4方向連結/前面/砂利/採掘跡へコード描画で反映。自然分布・既存セーブの位置/数・採掘量を維持し、概念画像そのものを盤面へ貼り付けない。動物1.25倍の元変更を保全。
 
 ## 検証
 
-関連12スイート成功。単独/分担配送、容量8、取消/徴兵/食事、物資保存、別プロセス再開の結果一致、優先度距離/待ち時間、単体/範囲命令、GUI入力経路の右クリック、1280/1920論理配置、岩描画51、動物表示303を確認。[現在の全記録](verification/integrated-results.json)。
+関連12スイート成功。単独/分担配送、容量8、取消/徴兵/食事、物資保存、別プロセス再開の結果一致、優先度距離/待ち時間、単体/範囲命令、GUI入力経路の右クリック、1280/1920論理配置、岩描画51、動物表示303を確認。[現在の全記録](../../current/verification/integrated-results.json)。
 
 動物死亡回復の以前の2失敗は、日次処理が使うlast_daily_dayをfixtureが更新していなかったため。ゲーム回復条件を緩めずfixtureを正し24項目成功。自然資源の旧テストは初日木材供給を備蓄へ置いた新仕様に期待値を合わせ、自然鉱床が追加在庫にならないことを60項目で確認。
 
