@@ -1,0 +1,19 @@
+{
+  "asset_delivery_commit": "adb33aa07da2ec57959e0315963f15003ddcd085",
+  "utc": "2026-10-14T14:34:42.1185063Z",
+  "native_game_launch_performed": false,
+  "commit": "c88c1fc2a84bc609e248dfb1ee1ca3f6af169e5d",
+  "diagnostics_removed": true,
+  "headless_loading_checks": 39,
+  "normal_data_unchanged": true,
+  "implementation_commit": "c88c1fc2a84bc609e248dfb1ee1ca3f6af169e5d",
+  "dirty": true,
+  "sha256": "E31C0A90129151638D2F253741EFE9ABA95944725C16ED159EE21689A813F96B",
+  "session_only": true,
+  "automatically_launched": false,
+  "native_lifecycle_checks": 0,
+  "bytes_before": 128367920,
+  "bytes_after": 128404184,
+  "uncommitted_scope": "Existing unrelated import/UID metadata only; work-motion source and four assets committed",
+  "verification": "148 related headless checks and four original asset hashes; CPU comparison images; no normal game launch or GPU test"
+}

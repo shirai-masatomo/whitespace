@@ -1,6 +1,6 @@
 # 作業モーション：現在の確認入口
 
-[報告・不足素材](work-motion/REPORT.md) / [左右比較画像・GIF](work-motion/SCREENS.md)。
+コードc88c1fc2・既存EXE反映済み。[配布記録](work-motion/DELIVERY.json) / [報告・不足素材](work-motion/REPORT.md) / [左右比較画像・GIF](work-motion/SCREENS.md)。
 確認画像は共通描画命令のCPU再現であり、ゲーム画面の撮影ではない。以下は過去記録。
 
 ---
