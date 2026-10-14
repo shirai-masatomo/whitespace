@@ -20,4 +20,3 @@ static func candidates(g) -> Array:
 		var db = g.drag_start.distance_squared_to(b.point)
 		return da < db if da != db else str(a["class"]) + str(a.id) < str(b["class"]) + str(b.id))
 	return result
-
