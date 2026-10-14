@@ -1,0 +1,15 @@
+{
+  "implementation_commit": "93ea1097b0831fb7ff096fa4f62286ed63351728",
+  "asset_delivery_commit": "adb33aa07da2ec57959e0315963f15003ddcd085",
+  "exe_path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow/artifacts/autonomy-entry-01/bundle/WhistleRanch-Autonomy-Partial.exe",
+  "sha256": "3E4FBF9172D2F6864A6D8BB5C6D63321A8CBF569FDD320D516985625CB7B587A",
+  "previous_bytes": 128333264,
+  "bytes": 128338952,
+  "headless_loading_checks": 39,
+  "related_checks": 126,
+  "automatically_launched": false,
+  "gpu_verified": false,
+  "native_input_verified": false,
+  "existing_headless_exit_warning": "ObjectDB warning reproduced on unchanged HEAD 61cd1709; unresolved",
+  "utc": "2026-10-14T13:32:28.9048737Z"
+}
