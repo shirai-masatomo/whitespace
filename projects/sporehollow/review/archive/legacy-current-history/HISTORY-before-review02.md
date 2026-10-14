@@ -1,14 +1,16 @@
+<!-- 過去の定点レビュー。現在の正本は ../../../GAME_SPEC.md と ../../current/PACKET.md。 -->
+
 # ホイッスル牧場 — AI・戦闘・情報表示の品質定点（2026-10-08）
 
 実装 **0d47970eb10c707d51c60ea9b961e4781f21f215**、素材 **a34390e584037cef78c9f49dcec4b18bd44f6f3d**。開始HEAD209d370から更新。後続レビュー保存コミットはゲーム内容を変えない。
 
-起動は **[Play.cmd](../../Play.cmd)**。ESCの版表示 `0d47970`。[EXE・SHA対応](revision-0d47970/build.json)。検証済みWindows版へ更新済み、自動起動なし。
+起動は **[Play.cmd](../../../Play.cmd)**。ESCの版表示 `0d47970`。[EXE・SHA対応](../../current/revision-0d47970/build.json)。検証済みWindows版へ更新済み、自動起動なし。
 
-- [代表5画面と見る点](revision-0d47970/SCREENS.md)
-- [変更・仮決定・未確認事項](revision-0d47970/REVIEW.md)
-- [実入力/画面観察](revision-0d47970/observations.json) / [非対話GPU監査](revision-0d47970/isolation.json)
-- [戦闘・増援・療養80検査](revision-0d47970/quality-tests.json)
-- [検証範囲](revision-0d47970/verification.json) / [関連ログ](revision-0d47970/logs) / [限定AI12](revision-0d47970/evaluation.json)
+- [代表5画面と見る点](../../current/revision-0d47970/SCREENS.md)
+- [変更・仮決定・未確認事項](../../current/revision-0d47970/REVIEW.md)
+- [実入力/画面観察](../../current/revision-0d47970/observations.json) / [非対話GPU監査](../../current/revision-0d47970/isolation.json)
+- [戦闘・増援・療養80検査](../../current/revision-0d47970/quality-tests.json)
+- [検証範囲](../../current/revision-0d47970/verification.json) / [関連ログ](../../current/revision-0d47970/logs) / [限定AI12](../../current/revision-0d47970/evaluation.json)
 
 敵Skillを共通データ化し、図鑑8枠/Rarity/Hoverを整理。舞姫の有限支援、敵メイド/陣営対応/特殊仲間化、被弾救出、誘拐猶予後の緩やかな療養、戦闘不能時の標的切替を統合。群生森、Human描画1.15、数字速度、牧場主の図鑑/持ち物、最新6件イベントも反映。
 

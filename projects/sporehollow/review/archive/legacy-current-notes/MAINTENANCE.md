@@ -1,3 +1,5 @@
+<!-- 2026-10-14に旧review/currentから移動。現行仕様は ../../../GAME_SPEC.md / ../../current/PACKET.md -->
+
 # 開発環境の整理
 
 ゲーム関連フォルダ（Git領域を除く）：10.33 → 3.72 GiB。
@@ -9,8 +11,8 @@
 
 残件：その他の旧フォルダ・古い確認入口の全体削除は審査で保留。未保存ソースのあるrelease-92d1048、release-c5c2833、research-three-encountersと保存データを保護。フォルダ全体削除まで完了したとは扱わない。
 
-[検証・容量](verification/maintenance.json) / [承認済み3フォルダの記録](verification/approved-folder-cleanup.json) / [共通工程](../../DEVELOPMENT.md)
+[検証・容量](../../current/verification/maintenance.json) / [承認済み3フォルダの記録](../../current/verification/approved-folder-cleanup.json) / [共通工程](../../../DEVELOPMENT.md)
 
 Documents/Codex全体の追加棚卸し（2026-10-12）：旧QA版90c0fdaのEXE1本、完了済み合成テスト出力16フォルダ、旧レビューコピーのキャッシュ2か所、残存する再生成キャッシュ300か所を削除。追加削減は約656 MiB。テスト結果JSON/ログは現行biome01レビューとSHA一致を確認し、通常セーブと現行EXEのハッシュも前後一致。
 図鑑レビューのedited/original、素材制作merchant-mouth-work、未保存修正のある3コピーは保護。複数の旧リポジトリには他プロジェクトもあり、ルート全体は削除していない。残存コピー全体の整理は引き続き未完了。今回ゲームコード変更・起動・通常セーブ変更なし。
-[追加棚卸し](verification/codex-storage-inventory.json) / [旧EXE・合成テスト](verification/codex-storage-cleanup.json) / [キャッシュ](verification/codex-cache-cleanup.json)
+[追加棚卸し](../../current/verification/codex-storage-inventory.json) / [旧EXE・合成テスト](../../current/verification/codex-storage-cleanup.json) / [キャッシュ](../../current/verification/codex-cache-cleanup.json)

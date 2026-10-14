@@ -1,14 +1,16 @@
+<!-- 過去の定点レビュー。現在の正本は ../../../GAME_SPEC.md と ../../current/PACKET.md。 -->
+
 # ホイッスル牧場 — A〜F 定点レビュー（2026-10-07）
 
 実装 **30207f2fa1ca73991e48473907cbd7315aaebe52**、素材 **5ac00e72c4036799de89f598c0374aa8efcf8549**。開始HEAD17bb527から更新。後続のレビュー保存コミットはゲーム内容を変えない。
 
-起動は **[Play.cmd](../../Play.cmd)**。ESCの版表示 `30207f2`、[配布EXEと素材の対応](revision-30207f2/build.json)。ユーザー版が起動していないことを確認して差し替えた。自動GUI起動・ユーザーのゲーム停止・通常セーブ変更なし。
+起動は **[Play.cmd](../../../Play.cmd)**。ESCの版表示 `30207f2`、[配布EXEと素材の対応](../../current/revision-30207f2/build.json)。ユーザー版が起動していないことを確認して差し替えた。自動GUI起動・ユーザーのゲーム停止・通常セーブ変更なし。
 
-- [代表10画面](revision-30207f2/SCREENS.md) / [ギャラリー](revision-30207f2/index.html)
-- [今回の変更・仮決定・残る差](revision-30207f2/REVIEW.md)
-- [入力と画面観察](revision-30207f2/ui-revision.json) / [非対話GPU監査](revision-30207f2/isolation.json)
-- [検証範囲と各ログ](revision-30207f2/verification.json) / [限定AI12試行](revision-30207f2/evaluation.json)
-- [採用UI素材の参照・ハッシュ](revision-30207f2/asset-usage.json)
+- [代表10画面](../../current/revision-30207f2/SCREENS.md) / [ギャラリー](../../current/revision-30207f2/index.html)
+- [今回の変更・仮決定・残る差](../../current/revision-30207f2/REVIEW.md)
+- [入力と画面観察](../../current/revision-30207f2/ui-revision.json) / [非対話GPU監査](../../current/revision-30207f2/isolation.json)
+- [検証範囲と各ログ](../../current/revision-30207f2/verification.json) / [限定AI12試行](../../current/revision-30207f2/evaluation.json)
+- [採用UI素材の参照・ハッシュ](../../current/revision-30207f2/asset-usage.json)
 
 ## 今回の操作
 
