@@ -1,0 +1,21 @@
+{
+  "native_lifecycle_checks": 0,
+  "dirty": true,
+  "automatically_launched": false,
+  "diagnostics_removed": true,
+  "sha256": "60F56945EFC9A5B2C9F75C6D0B2C966799AB108AA81F469B0603166EC0202BC5",
+  "headless_loading_checks": 39,
+  "session_only": true,
+  "commit": "c71fda5",
+  "native_game_launch_performed": false,
+  "asset_delivery_commit": "3229d2655e35e82d178577cdd8acbbe66e9be4f8",
+  "implementation_commit": "c71fda5",
+  "normal_data_unchanged": true,
+  "utc": "2026-10-14T12:01:16.6175283Z",
+  "related_logic_checks": 181,
+  "cpu_comparison_verified": true,
+  "exported_exe_not_started": true,
+  "visual_verification": "CPU comparison only; real game screenshots and native GPU unverified per no-auto-launch instruction",
+  "exe_bytes": 128129672,
+  "previous_exe_bytes": 128126744
+}

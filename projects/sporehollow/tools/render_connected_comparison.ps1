@@ -25,13 +25,13 @@ try {
  $g.DrawString('枠と色は実際のStyleBoxTexture設定。文字は比較画像用に別描画。',$small,$ink,12,195)
  $b.Save((Join-Path $dir 'architect-comparison.png'),[Drawing.Imaging.ImageFormat]::Png)
 }finally{$g.Dispose();$b.Dispose()}
-$b=[Drawing.Bitmap]::new(2240,760);$g=[Drawing.Graphics]::FromImage($b)
+$b=[Drawing.Bitmap]::new(2240,820);$g=[Drawing.Graphics]::FromImage($b)
 try {
  $g.Clear([Drawing.Color]::FromArgb(245,240,220));$g.InterpolationMode='NearestNeighbor';$g.PixelOffsetMode='Half'
  $g.DrawString('岩盤ブロック：同一seed・同一地形条件・同一縮尺のCPU描画比較',$font,$ink,20,12)
  $g.DrawString('修正前：分離した岩棚',$font,$ink,20,44);$g.DrawString('修正後：四方向に連結した岩塊',$font,$ink,1140,44)
  ImageAt $g 'rocks-before.png' 10 78
  ImageAt $g 'rocks-after.png' 1130 78
- $g.DrawString('実ゲームのスクリーンショットではありません。本番の岩接続・正式PNG・周囲の砕石描画を使用。地面シェーダー、樹木、他の物体とHUDは省略。',$small,$ink,20,730)
+ $g.DrawString('実ゲームのスクリーンショットではありません。本番の岩接続・正式PNG・周囲の砕石描画を使用。地面シェーダー、樹木、他の物体とHUDは省略。',$small,$ink,20,785)
  $b.Save((Join-Path $dir 'rocks-comparison.png'),[Drawing.Imaging.ImageFormat]::Png)
 }finally{$g.Dispose();$b.Dispose();$font.Dispose();$small.Dispose();$ink.Dispose()}
