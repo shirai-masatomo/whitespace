@@ -1,0 +1,28 @@
+{
+  "sha256": "1486E01561E777055EF3DC20F9611DB4356BD0447BFB9B4E0E0A330FE7A60298",
+  "headless_loading_checks": 39,
+  "utc": "2026-10-14T12:49:52.4071529Z",
+  "commit": "62b4c3a7",
+  "dirty": true,
+  "session_only": true,
+  "asset_delivery_commit": "adb33aa07da2ec57959e0315963f15003ddcd085",
+  "native_lifecycle_checks": 0,
+  "normal_data_unchanged": true,
+  "automatically_launched": false,
+  "native_game_launch_performed": false,
+  "diagnostics_removed": true,
+  "implementation_commit": "62b4c3a7",
+  "source_commit": "62b4c3a76276b26978a827cde6007bbbad72baec",
+  "exe_bytes": 128333264,
+  "previous_exe_bytes": 128129672,
+  "validation": "Headless related logic; CPU images; no native EXE launch, no GPU test",
+  "unverified": [
+    "GPU visuals",
+    "GPU performance",
+    "human input and feel"
+  ],
+  "export_geology_asset_entries": 84,
+  "export_originals_excluded": true,
+  "shortcut_verified": "C:\\Users\\masat\\Documents\\codex_test\\projects\\sporehollow\\確認入口\\最新開発版.lnk",
+  "exe_delta_bytes": 203592
+}
