@@ -554,8 +554,9 @@ func refresh_measured():
 		UI.selected(buttons[id], tool == id)
 		# Selected styling replaces the normal stylebox, so compact existing controls after it.
 		if group == 0 and id in GROUP_TOOLS[0]:
+			UI.architect_selected(buttons[id],tool==id)
 			buttons[id].add_theme_font_size_override("font_size",14)
-			for state in ["normal","hover","pressed","disabled"]:
+			for state in ["normal","hover","pressed","hover_pressed","disabled"]:
 				buttons[id].get_theme_stylebox(state).content_margin_left=5
 				buttons[id].get_theme_stylebox(state).content_margin_right=5
 				buttons[id].get_theme_stylebox(state).content_margin_top=4

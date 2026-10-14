@@ -1,0 +1,134 @@
+{
+	"checks": [
+		{
+			"check": "Selected light green survives hover",
+			"passed": true
+		},
+		{
+			"check": "Selection is green",
+			"passed": true
+		},
+		{
+			"check": "Pressed and hovered pressed remain consistent",
+			"passed": true
+		},
+		{
+			"check": "Unselected hover differs from selection",
+			"passed": true
+		},
+		{
+			"check": "At least 80% of rocks form one orthogonally connected body: 31",
+			"passed": true
+		},
+		{
+			"check": "Original rock count/resource budget preserved: 31",
+			"passed": true
+		},
+		{
+			"check": "Per-cell mining yield remains 8: 31",
+			"passed": true
+		},
+		{
+			"check": "Protected area remains clear and each actual rock blocks movement: 31",
+			"passed": true
+		},
+		{
+			"check": "All free ground remains reachable: 31",
+			"passed": true
+		},
+		{
+			"check": "Dense connected interior exists: 31",
+			"passed": true
+		},
+		{
+			"check": "At least 80% of rocks form one orthogonally connected body: 97",
+			"passed": true
+		},
+		{
+			"check": "Original rock count/resource budget preserved: 97",
+			"passed": true
+		},
+		{
+			"check": "Per-cell mining yield remains 8: 97",
+			"passed": true
+		},
+		{
+			"check": "Protected area remains clear and each actual rock blocks movement: 97",
+			"passed": true
+		},
+		{
+			"check": "All free ground remains reachable: 97",
+			"passed": true
+		},
+		{
+			"check": "Dense connected interior exists: 97",
+			"passed": true
+		},
+		{
+			"check": "At least 80% of rocks form one orthogonally connected body: 2026",
+			"passed": true
+		},
+		{
+			"check": "Original rock count/resource budget preserved: 2026",
+			"passed": true
+		},
+		{
+			"check": "Per-cell mining yield remains 8: 2026",
+			"passed": true
+		},
+		{
+			"check": "Protected area remains clear and each actual rock blocks movement: 2026",
+			"passed": true
+		},
+		{
+			"check": "All free ground remains reachable: 2026",
+			"passed": true
+		},
+		{
+			"check": "Dense connected interior exists: 2026",
+			"passed": true
+		}
+	],
+	"failures": 0,
+	"samples": [
+		{
+			"budget": 98,
+			"components": [
+				94,
+				1,
+				1,
+				1,
+				1
+			],
+			"generation_and_checks_ms": 1962,
+			"rocks": 98,
+			"seed": 31
+		},
+		{
+			"budget": 86,
+			"components": [
+				82,
+				1,
+				1,
+				1,
+				1
+			],
+			"generation_and_checks_ms": 2046,
+			"rocks": 86,
+			"seed": 97
+		},
+		{
+			"budget": 69,
+			"components": [
+				65,
+				1,
+				1,
+				1,
+				1
+			],
+			"generation_and_checks_ms": 1997,
+			"rocks": 69,
+			"seed": 2026
+		}
+	]
+}

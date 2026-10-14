@@ -46,6 +46,16 @@ static func button(button: Button, color: Color = PAPER):
 static func selected(button: Button, active: bool):
 	button.add_theme_stylebox_override("normal", surface(Color("c5d1a2") if active else PAPER, MOSS if active else WOOD))
 
+# Architect tools retain their light-green selection even under the pointer.
+static func architect_selected(button: Button,active: bool):
+	for state in ["normal","hover","pressed","hover_pressed"]:
+		var color=Color("bbd99c") if active else PAPER
+		if not active and state=="hover":color=PAPER.lightened(0.12)
+		elif state in ["pressed","hover_pressed"]:color=color.darkened(0.06)
+		var style=surface(color)
+		style.modulate_color=color
+		button.add_theme_stylebox_override(state,style)
+
 static func icon(kind: String) -> Texture2D:
 	if kind=="coin":return preload("res://game/delivered_art.gd").RESOURCES.gold[24]
 	if textures.has(kind): return textures[kind]

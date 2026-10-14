@@ -1,0 +1,8 @@
+{
+	"after_count": 98,
+	"before_count": 98,
+	"bounds": "[P: (9, 43), S: (33, 23)]",
+	"fixture": "same generated terrain and trees; initial harvestables cleared identically; before generator differs only by omitted consolidate call",
+	"method": "CPU Image compositing of production RockView.rock/apron and actual StyleBoxTexture settings; not game screenshots; background soil shader, actors, HUD and GPU untested",
+	"seed": 31
+}

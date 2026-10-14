@@ -1,0 +1,78 @@
+{
+	"checks": [
+		{
+			"check": "Actual Control uses hovered draw mode: wall",
+			"passed": true
+		},
+		{
+			"check": "Selected button remains green while hovered: wall",
+			"passed": true
+		},
+		{
+			"check": "Unselected hover is distinct: wall",
+			"passed": true
+		},
+		{
+			"check": "Selection and hover do not reserve construction: wall",
+			"passed": true
+		},
+		{
+			"check": "Current wall cost is five: wall",
+			"passed": true
+		},
+		{
+			"check": "Refresh keeps selection: wall",
+			"passed": true
+		},
+		{
+			"check": "Actual Control uses hovered draw mode: wood_wall",
+			"passed": true
+		},
+		{
+			"check": "Selected button remains green while hovered: wood_wall",
+			"passed": true
+		},
+		{
+			"check": "Unselected hover is distinct: wood_wall",
+			"passed": true
+		},
+		{
+			"check": "Selection and hover do not reserve construction: wood_wall",
+			"passed": true
+		},
+		{
+			"check": "Current wall cost is five: wood_wall",
+			"passed": true
+		},
+		{
+			"check": "Refresh keeps selection: wood_wall",
+			"passed": true
+		},
+		{
+			"check": "Actual Control uses hovered draw mode: stone_wall",
+			"passed": true
+		},
+		{
+			"check": "Selected button remains green while hovered: stone_wall",
+			"passed": true
+		},
+		{
+			"check": "Unselected hover is distinct: stone_wall",
+			"passed": true
+		},
+		{
+			"check": "Selection and hover do not reserve construction: stone_wall",
+			"passed": true
+		},
+		{
+			"check": "Current wall cost is five: stone_wall",
+			"passed": true
+		},
+		{
+			"check": "Refresh keeps selection: stone_wall",
+			"passed": true
+		}
+	],
+	"failures": 0,
+	"method": "Headless main Control tree with Viewport.push_input; no OS input, no native window, no GPU"
+}

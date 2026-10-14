@@ -153,7 +153,7 @@ static func populate(w):
 			w.trees[p]="biome-tree-%d-%d"%[x,y]
 	place_rocks(w)
 	var repairs=repair_connections(w)
-	w.terrain.placement={"version":VERSION,"repair_removed_cells":repairs,"rock_cells":w.rocks.size(),"tree_cells":w.trees.size()}
+	w.terrain.placement={"version":VERSION,"repair_removed_cells":repairs,"rock_cells":w.rocks.size(),"tree_cells":w.trees.size(),"rock_layout_version":2}
 	w.story.trees=[]
 	for p in w.trees:w.story.trees.append({"id":w.trees[p],"position":[p.x,p.y]})
 	# Initial harvestables use existing kinds and caps, with weighted sampling.
@@ -221,6 +221,87 @@ static func place_rocks(w):
 			if isolated>=12 or not eligible.has(p) or unit(w.seed_value,x,y,97)>0.035:continue
 			if w.rocks.keys().any(func(q):return maxi(absi(q.x-p.x),absi(q.y-p.y))<=2):continue
 			w.rocks[p]={"amount":w.Tasks.STONE_PER_ROCK,"forbidden":false};isolated+=1
+
+	consolidate_rocks(w,eligible,cores)
+
+static func consolidate_rocks(w,eligible: Dictionary,cores: Array):
+	# Keep the previous generator's total resource budget, but place it as a
+	# dense connected body rather than four spaced-out miniature shelves.
+	var records=w.rocks.values().duplicate(true)
+	if records.is_empty():return
+	w.terrain.rock_layout_budget=records.size()
+	var scattered=[]
+	for p in w.rocks:
+		if DIRECTIONS.all(func(d):return not w.rocks.has(p+d)):scattered.append(p)
+	var islands={}
+	for p in scattered:
+		if islands.size()>=mini(4,records.size()/12):break
+		islands[p]=true
+	var candidates=eligible.duplicate()
+	for p in islands:
+		for dy in range(-2,3):
+			for dx in range(-2,3):candidates.erase(p+Vector2i(dx,dy))
+	# Prefer room for a solid core, not a high-noise site threaded between trees.
+	var centers=[]
+	for row in cores:
+		var compactness=0.0
+		for dy in range(-6,7):
+			for dx in range(-6,7):
+				var offset=Vector2i(dx,dy);var distance=Vector2(offset).length()
+				if distance<=6.0 and candidates.has(row.pos+offset):compactness+=7.0-distance
+		centers.append({"pos":row.pos,"score":compactness})
+	centers.sort_custom(func(a,b):return a.score>b.score if a.score!=b.score else (a.pos.y<b.pos.y if a.pos.y!=b.pos.y else a.pos.x<b.pos.x))
+	var result={};var frontier={};var origin=Vector2i.ZERO
+	var remaining=records.size()-islands.size()
+	while result.size()<remaining and not candidates.is_empty():
+		if frontier.is_empty():
+			# Start only when a region is exhausted; prefer the strongest full core.
+			var found=false
+			for row in centers:
+				if candidates.has(row.pos):origin=row.pos;found=true;break
+			if not found:origin=candidates.keys()[0]
+			frontier[origin]=true
+		var chosen=Vector2i.ZERO;var score=INF
+		for p in frontier:
+			var adjacent=0
+			for d in DIRECTIONS:
+				if result.has(p+d):adjacent+=1
+			var distance=Vector2(p-origin)*Vector2(0.86,1.0)
+			if seals_free_ground(w,p,result):continue
+			var rank=distance.length()+noise(w.seed_value,Vector2(p)*0.28,619)*3.8-adjacent*0.8
+			if rank<score:score=rank;chosen=p
+		if score==INF:
+			for p in frontier:candidates.erase(p)
+			frontier.clear();continue
+		frontier.erase(chosen);candidates.erase(chosen)
+		result[chosen]=records[result.size()]
+		for d in DIRECTIONS:
+			var next=chosen+d
+			if candidates.has(next):frontier[next]=true
+	for p in islands:result[p]=records[result.size()]
+	# The reserved islands can reduce the candidate pool in a very small legacy
+	# map. Preserve every original unit without changing any mining rule.
+	if result.size()<records.size():
+		for p in eligible:
+			if not result.has(p):result[p]=records[result.size()]
+			if result.size()==records.size():break
+	w.rocks=result
+
+# A local eight-cell ring is sufficient to reject placements that can seal a
+# previously connected passage. Run only during generation, never during draw.
+static func seals_free_ground(w,p: Vector2i,placed: Dictionary) -> bool:
+	var free={}
+	for dy in range(-1,2):
+		for dx in range(-1,2):
+			var q=p+Vector2i(dx,dy)
+			if q!=p and w.inside(q) and not placed.has(q) and (w.rocks.has(q) or w.walkable(q)):free[q]=true
+	if free.size()<2:return false
+	var queue=[free.keys()[0]];free.erase(queue[0]);var i=0
+	while i<queue.size():
+		var q=queue[i];i+=1
+		for d in DIRECTIONS:
+			if free.has(q+d):free.erase(q+d);queue.append(q+d)
+	return not free.is_empty()
 
 static func reachable(w) -> Dictionary:
 	var seen={};var queue=[];var index=0
