@@ -18,6 +18,7 @@ func wait_ready(boot):
 		await process_frame
 	check(guarded and boot.finished and boot.failure=="" and boot.frozen_ok,"Preparation completes only after frozen initial draw")
 func run():
+	check(ProjectSettings.get_setting("application/run/max_fps",0)==60,"Normal project explicitly limits frame rate to 60 fps")
 	var out=OS.get_environment("FARM_REVIEW_OUTPUT")
 	if out=="" or "--isolated-review" not in OS.get_cmdline_user_args():quit(2);return
 	var boot=load("res://game/loading.tscn").instantiate();boot.review_mode=true;root.add_child(boot)

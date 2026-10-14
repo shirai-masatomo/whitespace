@@ -5,6 +5,7 @@ config/name="ホイッスル牧場・最新開発版（部分実装）"
 config/use_custom_user_dir=true
 config/custom_user_dir_name="WhistleResearchAutonomy"
 run/main_scene="res://game/loading.tscn"
+run/max_fps=60
 config/features=PackedStringArray("4.7", "GL Compatibility")
 
 [display]
