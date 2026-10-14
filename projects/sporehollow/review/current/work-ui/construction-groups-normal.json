@@ -1,0 +1,130 @@
+{
+	"checks": [
+		{
+			"check": "Drag accepts 4 wood_wall as 4 player jobs",
+			"passed": true
+		},
+		{
+			"check": "One immutable group per gesture",
+			"passed": true
+		},
+		{
+			"check": "All four sites receive 20 wood before any assembly; builder priority cannot bypass group",
+			"passed": true
+		},
+		{
+			"check": "Single-worker resources conserved",
+			"passed": true
+		},
+		{
+			"check": "A real trip carries exactly 20",
+			"passed": true
+		},
+		{
+			"check": "Drag accepts 2 wood_wall as 2 player jobs",
+			"passed": true
+		},
+		{
+			"check": "One immutable group per gesture",
+			"passed": true
+		},
+		{
+			"check": "Drag accepts 2 stone_wall as 2 player jobs",
+			"passed": true
+		},
+		{
+			"check": "One immutable group per gesture",
+			"passed": true
+		},
+		{
+			"check": "Later group cannot roll back already-started assembly",
+			"passed": true
+		},
+		{
+			"check": "New work retains active assignment or its completion",
+			"passed": true
+		},
+		{
+			"check": "Original group completes despite missing material in later group",
+			"passed": true
+		},
+		{
+			"check": "Drag accepts 5 wood_wall as 5 player jobs",
+			"passed": true
+		},
+		{
+			"check": "One immutable group per gesture",
+			"passed": true
+		},
+		{
+			"check": "Two workers deliver all sites then share assembly",
+			"passed": true
+		},
+		{
+			"check": "Two-worker claims conserve every unit",
+			"passed": true
+		},
+		{
+			"check": "No duplicate construction completions",
+			"passed": true
+		},
+		{
+			"check": "Drag accepts 1 wood_wall as 1 player jobs",
+			"passed": true
+		},
+		{
+			"check": "One immutable group per gesture",
+			"passed": true
+		},
+		{
+			"check": "Requirement over 20 uses multiple trips without loss (25-unit fixture)",
+			"passed": true
+		},
+		{
+			"check": "Drag accepts 1 wood_wall as 1 player jobs",
+			"passed": true
+		},
+		{
+			"check": "One immutable group per gesture",
+			"passed": true
+		},
+		{
+			"check": "Drag accepts 1 wall as 1 player jobs",
+			"passed": true
+		},
+		{
+			"check": "One immutable group per gesture",
+			"passed": true
+		},
+		{
+			"check": "Drag accepts 1 stone_wall as 1 player jobs",
+			"passed": true
+		},
+		{
+			"check": "One immutable group per gesture",
+			"passed": true
+		},
+		{
+			"check": "Drag accepts 1 wall as 1 player jobs",
+			"passed": true
+		},
+		{
+			"check": "One immutable group per gesture",
+			"passed": true
+		},
+		{
+			"check": "Mixed material cargo totals 20, not 20 per kind",
+			"passed": true
+		},
+		{
+			"check": "All observed ticks: each worker cargo <=20 and claims <= physical amount",
+			"passed": true
+		},
+		{
+			"check": "Storage40 and designation100 unchanged",
+			"passed": true
+		}
+	],
+	"failures": 0,
+	"max_observed_cargo": 20
+}

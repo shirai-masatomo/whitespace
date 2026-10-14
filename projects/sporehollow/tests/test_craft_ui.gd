@@ -21,10 +21,10 @@ func run():
 	check(g.world.jobs.any(func(j):return j.kind=="craft" and j.recipe=="roast_mushroom"),"Actual UI button registers a craft bill while paused")
 	check(g.crafting_panel.labels.size()==1 and "焼きキノコ" in g.crafting_panel.labels[0][0].text,"Bill shows recipe and ingredient quantities")
 	g.crafting_panel.close(g);g.group=0;g.architect_category="ゾーン";g.tool=""
-	var id=g.world.Zones.create(g.world,"stockpile",Vector2i(32,20),Vector2i(34,20));g.zone_controls.selected_id=id;g.refresh();await process_frame
+	var id=g.world.Zones.create(g.world,"stockpile",Vector2i(32,20),Vector2i(34,20));g.zone_controls.open(g,id);await process_frame
 	var tree=g.colony_panel.get_node_or_null("StockpileFilters")
 	check(tree!=null and tree.get_root().get_children().size()==6,"Stockpile UI has all six main categories")
-	var priorities=g.colony_panel.get_children().filter(func(c):return c is OptionButton)
+	var priorities=[g.colony_panel.get_node("ZonePriority")]
 	priorities[0].item_selected.emit(2);check(g.world.Zones.find(g.world,id).get("priority")==2,"Priority UI changes destination priority")
 	var ban=g.colony_panel.get_children().filter(func(c):return c is Button and c.text=="全禁止")[0];ban.pressed.emit();await process_frame
 	check(not g.world.Zones.accepts(g.world,Vector2i(32,20),"wood"),"All-forbid UI uses the same stock filter as hauling")

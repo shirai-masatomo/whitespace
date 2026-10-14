@@ -22,8 +22,8 @@ def render(root,commands):
    x,y,w,h=c["rect"];d.rectangle((x,y,x+w-1,y+h-1),fill=color)
  return canvas.convert("RGB")
 def main():
- ap=argparse.ArgumentParser();ap.add_argument("--project",type=Path,required=True);a=ap.parse_args();root=a.project
- out=root/"review/current/work-motion";data=json.loads((out/"motion-draw-commands.json").read_text(encoding="utf-8-sig"))
+ ap=argparse.ArgumentParser();ap.add_argument("--project",type=Path,required=True);ap.add_argument("--output",type=Path);ap.add_argument("--before",type=Path);a=ap.parse_args();root=a.project
+ out=a.output or root/"review/current/work-motion";data=json.loads((out/"motion-draw-commands.json").read_text(encoding="utf-8-sig"))
  manifest=json.loads((root/"art_delivery/colony_growth_assets_v1/manifest.json").read_text(encoding="utf-8"))
  def entries(obj):
   if isinstance(obj,dict):
@@ -63,5 +63,18 @@ def main():
     d.text((12+ci*200,29+ri*156),titles[kind]+("左 " if di<0 else "右 ")+{"windup":"振りかぶり","contact":"接触","return":"戻り"}[frame["stage"]],font=small,fill=(43,58,40))
   frames.append(pic)
  frames[0].save(out/"work-motion.gif",save_all=True,append_images=frames[1:],duration=83,loop=0,optimize=False)
+ if a.before:
+  old=json.loads(a.before.read_text(encoding="utf-8-sig"));comparisons=[]
+  for fi in range(36):
+   pic=Image.new("RGB",(1248,358),(236,230,210));d=ImageDraw.Draw(pic)
+   for side,version in enumerate([old,data]):
+    d.text((side*624+12,8),("変更前 c88c1fc2" if side==0 else "変更後 弧・加減速・道具の向き")+" / CPU描画",font=font,fill=(43,58,40))
+    for ci,kind in enumerate(titles):
+     for ri,di in enumerate([-1,1]):
+      frame=next(f for f in version["frames"] if f["kind"]==kind and f["direction"]==di and f["frame"]==fi)
+      pic.paste(render(root,frame["commands"]),(side*624+12+ci*200,45+ri*156))
+      d.text((side*624+12+ci*200,29+ri*156),titles[kind]+("左" if di<0 else "右"),font=small,fill=(43,58,40))
+   comparisons.append(pic)
+  comparisons[0].save(out/"motion-before-after.gif",save_all=True,append_images=comparisons[1:],duration=83,loop=0,optimize=False)
  print("Four official assets verified; CPU comparison PNG and 36-frame GIF saved.")
 if __name__=="__main__":main()

@@ -43,7 +43,9 @@ var item_commands=preload("res://game/item_commands.gd").new()
 var crafting_panel=preload("res://game/crafting_panel.gd").new()
 var zone_controls=preload("res://game/zone_controls.gd").new()
 var colony_page=""
-var architect_category="すべて"
+var architect_category="壁と扉"
+var architect_scroll={}
+var animal_scroll=0
 var colony_panel: Control
 var colony_signature=""
 const GROUPS = ["アーキテクト", "動物"]
@@ -314,6 +316,8 @@ func notice(text_value: String):
 	message_until_tick = world.tick + 14
 
 func select_group(index: int):
+	if index==1:show_animal_list();return
+	zone_controls.details_open=false
 	animal_list_open=index==1;animal_commands_open=false
 	merchant_context=false
 	zone_controls.pressed=false
@@ -348,7 +352,7 @@ func subtask_choices() -> Array:
 	var available: Array = []
 	if group == 0:
 		available = GROUP_TOOLS[0].filter(func(id): return id not in ["kennel","coop"] and (world.item_count(id.trim_prefix("place_"))>0 if id.begins_with("place_") else Farm.BUILD[id].get("blueprint", "") in ([""] + world.campaign.unlocked_blueprints)))
-		if architect_category!="すべて":available=available.filter(func(id):return id in ColonyModel.ARCHITECT[architect_category])
+		available=available.filter(func(id):return id in ColonyModel.ARCHITECT.get(architect_category,[]))
 	elif group == 1:
 		var animals = world.animals.filter(func(a): return a.id in selected_animals and a.placed and world.available(a))
 		available = GROUP_TOOLS[1].filter(func(id): return animals.any(func(a): return id in Farm.SPECIES[a.species].orders or (id=="milk" and a.species=="cow" and a.get("milked_day",-1)!=world.campaign.day) or (id=="equip" and selected_animals.size()==1 and Farm.ProgressData.ITEMS.keys().any(func(item):return Farm.Progression.can_equip(a,item)))))
@@ -383,17 +387,27 @@ func cycle_command_animal():
 func wheel_scroll_ui() -> bool:
 	var hovered = get_viewport().gui_get_hovered_control()
 	while is_instance_valid(hovered):
-		if hovered is ScrollContainer or hovered is TextEdit or hovered is ItemList: return true
+		if hovered is ScrollContainer or hovered is TextEdit or hovered is ItemList or hovered is Tree: return true
 		hovered = hovered.get_parent() as Control
 	return false
 
 func open_animal_commands(id: int):
 	if id not in selected_animals:choose_animal(id)
-	else:group=1;animal_list_open=false
+	else:
+		group=1;animal_list_open=false;selected_animal=id;selected={"kind":"animal","id":id}
 	animal_commands_open=true
 	refresh()
 
+func show_animal_list():
+	# View navigation preserves the multi-selection, but disarms any target command.
+	animal_list_open=true;animal_commands_open=false;equipment_open=false
+	group=1;colony_page="";tool="";merchant_context=false;zone_controls.details_open=false;zone_controls.pressed=false
+	selected_resources.clear();selected_structures.clear();selected_trees.clear();cancel_wall_stroke()
+	selected={"kind":"animal","id":selected_animal} if selected_animal>=0 else {}
+	refresh()
+
 func choose_animal(id: int, toggle: bool = false):
+	animal_list_open=false;zone_controls.details_open=false
 	animal_commands_open=false
 	merchant_context=false
 	colony_page=""
@@ -469,6 +483,10 @@ func refresh_measured():
 		if world.phase == "dawn":
 			sky_kind = "dawn"
 			sky_started = clock
+	var item_scroll=palette.get_node_or_null("ArchitectItems")
+	if item_scroll!=null:architect_scroll[item_scroll.get_meta("category")]=item_scroll.scroll_vertical
+	var roster_scroll=palette.find_child("AnimalScroll",true,false)
+	if roster_scroll!=null:animal_scroll=roster_scroll.scroll_vertical
 	for child in palette.get_children():
 		palette.remove_child(child)
 		child.queue_free()
@@ -539,9 +557,10 @@ func refresh_measured():
 		ColonyPanels.build_animal_commands(self)
 	elif group == 0 and world.working():
 		var choices = subtask_choices()
+		var items_parent=ColonyPanels.architect_content(self) if architect_category!="ゾーン" else palette
 		for i in range(choices.size()):
 			var id = choices[i]
-			add_button(palette, id, TOOLS[id], ColonyPanels.architect_tool_rect(self,i), select_tool.bind(id))
+			add_button(items_parent, id, TOOLS[id], ColonyPanels.architect_tool_rect(self,i), select_tool.bind(id))
 			var definition=Farm.BUILD.get(id,{})
 			buttons[id].tooltip_text = "%s\n%s ×%d · 施工 %s秒\n%s"%[TOOLS[id],world.Work.Policy.LABELS.get(definition.get("resource","soil"),{"soil":"土","wood":"木材","stone":"石"}.get(definition.get("resource","soil"),"材料")),definition.get("cost",0),str(definition.get("seconds",1)),"備蓄から搬入後に施工" if not definition.is_empty() else "必要な現物と空き場所を指定"]
 			if not definition.is_empty():
@@ -565,9 +584,11 @@ func refresh_measured():
 				buttons[id].get_theme_stylebox(state).content_margin_top=4
 				buttons[id].get_theme_stylebox(state).content_margin_bottom=4
 			buttons[id].size.y=32
-	if selected.get("kind")=="animal":
-		add_button(palette,"animal_instructions","指示",Rect2(354,576,90,34),open_animal_commands.bind(selected.id))
-		ColonyPanels.compact_button(self,buttons.animal_instructions)
+	if selected.get("kind")=="animal" and not animal_list_open:
+		var bottom=companion_card_rect().end.y
+		add_button(palette,"animal_instructions","指示",Rect2(20,bottom-40,112,32),open_animal_commands.bind(selected.id))
+		add_button(palette,"animal_back","一覧に戻る",Rect2(144,bottom-40,144,32),show_animal_list)
+		for id in ["animal_instructions","animal_back"]:ColonyPanels.compact_button(self,buttons[id])
 	if group == 2:
 		for id in subtask_choices(): UI.selected(buttons[id], subtasks.selected[2] == id)
 	ColonyPanels.build(self)
@@ -893,6 +914,7 @@ func choose_walk():
 	refresh()
 
 func neutral():
+	zone_controls.details_open=false
 	animal_list_open=false;animal_commands_open=false
 	merchant_context=false
 	subtasks.cancel()
@@ -1180,6 +1202,9 @@ func _input(event):
 	update_pointer_cursor()
 
 func _route_input(event):
+	var focus=get_viewport().gui_get_focus_owner()
+	if (focus is LineEdit or focus is TextEdit) and event is InputEventKey:
+		keys_down.clear();return # Leave typing to GUI; no camera, Tab, speed or pause shortcuts.
 	if menu_open or field_book or field_shop or story_modal!="" or (event is InputEventMouseButton and event.button_index==MOUSE_BUTTON_RIGHT and event.pressed):event_log.dragging=false;event_log.captured=false
 	if (event is InputEventKey and event.pressed) or (event is InputEventMouseButton and event.pressed) or (event is InputEventMouseMotion and event.relative.length_squared()>0):
 		world.Life.user_activity(world)
@@ -1373,9 +1398,15 @@ func pointer_over_ui() -> bool:
 	if is_instance_valid(context_panel) and context_panel.is_visible_in_tree() and context_panel.get_global_rect().has_point(pointer): return true
 	if pointer.y < 49 or pointer.y > 748: return true
 	if SHOW_JOB_QUEUE and world.working() and Rect2(1010,60,248,maxf(34,queue_bottom-60+40)).has_point(pointer): return true
-	if not selected.is_empty() and (keeper_card_rect() if selected.get("kind") in ["keeper","worker"] else Rect2(8,548,448,106) if selected.get("kind")=="animal" else Rect2(16,595,422,91)).has_point(pointer): return true
+	if not selected.is_empty() and not (selected.get("kind")=="animal" and animal_list_open) and selected.get("kind")!="zone" and (keeper_card_rect() if selected.get("kind") in ["keeper","worker"] else companion_card_rect() if selected.get("kind")=="animal" else Rect2(16,595,422,91)).has_point(pointer): return true
 	for button in buttons.values():
-		if is_instance_valid(button) and button.is_visible_in_tree() and button.get_global_rect().has_point(pointer): return true
+		if is_instance_valid(button) and button.is_visible_in_tree() and button.get_global_rect().has_point(pointer):
+			var parent=button.get_parent() as Control
+			var clipped=false
+			while parent!=null:
+				if parent.clip_contents and not parent.get_global_rect().has_point(pointer):clipped=true;break
+				parent=parent.get_parent() as Control
+			if not clipped:return true
 	return false
 
 func selection_less(a,b) -> bool:
@@ -1502,6 +1533,10 @@ func board_click(event):
 		if selected_merchant_worker()!="":merchant_context=true
 		refresh();return
 	var cell = Vector2i(get_canvas_transform().affine_inverse() * event.position / TILE)
+	# An occupied zone remains reachable without sacrificing normal item/building selection.
+	if tool=="" and (zone_controls.active(self) or (selected.get("kind") in ["resource","structure","job"] and selected.get("pos")==cell)):
+		for z in world.zones:
+			if cell in z.cells:zone_controls.open(self,z.id);return
 	if tool=="storage":
 		if not world.act("storage",cell):notice("歩ける地面を指定してください")
 		refresh();return
@@ -1564,6 +1599,10 @@ func board_click(event):
 		var hit=enemy_hit_rect(e).has_point(get_canvas_transform().affine_inverse()*event.position)
 		if not e.done and hit:
 			select_target("enemy",e.id);return
+	if tool=="" and not (selected.get("kind")=="keeper" and world.keeper.get("drafted",false)):
+		for z in world.zones:
+			if cell in z.cells:zone_controls.open(self,z.id);return
+	zone_controls.details_open=false
 	if selected.get("kind") == "keeper":
 		if not world.act("keeper_move",cell): notice("人物の「徴兵する」を押してから移動" if not world.keeper.get("drafted",false) else "移動できません")
 	elif tool in Farm.ORDERS:
@@ -2253,7 +2292,7 @@ func draw_hud():
 			if item.kind.ends_with("_plan"): details = Farm.Buildings.NAMES.get(item.kind.trim_suffix("_plan"),"建築")+"の設計図\n回収して習得を記録"
 	elif selected.get("kind") in ["keeper","worker"]:
 		draw_keeper_card(world.workers.get(selected.get("key","keeper"),world.keeper))
-	elif selected.get("kind") == "animal":
+	elif selected.get("kind") == "animal" and not animal_list_open:
 		draw_companion_card()
 	elif selected.get("kind") == "enemy":
 		for e in world.enemies:
@@ -2815,18 +2854,21 @@ func selected_egg_lines() -> Array:
 	var eggs=world.field_items.filter(func(item):return item.kind=="egg" and item.pos in cells)
 	return Clarity.eggs(world,eggs,cells.any(func(p):return job_reserved("collect",p)))
 
+func companion_card_rect() -> Rect2:
+	return Rect2(8,498 if animal_commands_open else 586,448,156)
+
 func draw_companion_card():
-	for a in world.animals:
-		if a.id!=selected.id:continue
-		hud.draw_style_box(companion_box(),Rect2(8,548,448,106))
-		draw_card_icon(hud,a.species,Vector2(42,620),0.65)
-		label_on(hud,Vector2(78,593),Farm.animal_name(a)+(" · "+Farm.SPECIES[a.species].title if a.get("name","")!="" else "")+"  Lv%d"%a.lv,17,UI.PAPER)
-		label_on(hud,Vector2(18,568),world.Needs.describe(world,a),12,UI.PAPER)
-		var detail=Clarity.dog(world,a) if a.species=="shiba" else ["休息中" if a.mode=="rest" else ("待機中" if a.mode=="stay" else "おまかせ")]
-		label_on(hud,Vector2(78,620),"満腹%d · スタミナ%d/%d"%[a.get("satiety",100),a.stamina,a.get("max_stamina",100)],13,UI.PAPER)
-		hud.draw_rect(Rect2(78,634,160,7),Color("293d35"))
-		hud.draw_rect(Rect2(78,634,160*clampf(float(a.hp)/maxi(1,a.max_hp),0,1),7),Color("90c19b"))
-		label_on(hud,Vector2(246,643),"HP %d / %d   選択 %d匹"%[a.hp,a.max_hp,selected_animals.size()],13,UI.PAPER)
+	var a=world.Orders.animal(world,selected.id)
+	if a.is_empty():return
+	var area=companion_card_rect();var p=area.position
+	hud.draw_style_box(companion_box(),area)
+	draw_card_icon(hud,a.species,p+Vector2(34,60),0.65)
+	label_on(hud,p+Vector2(70,27),(Farm.animal_name(a)+(" · "+Farm.SPECIES[a.species].title if a.get("name","")!="" else "")).left(20)+"  Lv%d"%a.lv,17,UI.PAPER)
+	label_on(hud,p+Vector2(70,49),"満腹%d · スタミナ%d/%d"%[a.get("satiety",100),a.stamina,a.get("max_stamina",100)],13,UI.PAPER)
+	label_on(hud,p+Vector2(12,103),world.Needs.describe(world,a).left(36),12,UI.PAPER)
+	hud.draw_rect(Rect2(p+Vector2(70,63),Vector2(160,7)),Color("293d35"))
+	hud.draw_rect(Rect2(p+Vector2(70,63),Vector2(160*clampf(float(a.hp)/maxi(1,a.max_hp),0,1),7)),Color("90c19b"))
+	label_on(hud,p+Vector2(238,72),"HP %d / %d   選択 %d匹"%[a.hp,a.max_hp,selected_animals.size()],13,UI.PAPER)
 
 func companion_box() -> StyleBox:
 	return UI.surface(UI.MOSS)

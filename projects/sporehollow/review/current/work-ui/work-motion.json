@@ -1,0 +1,205 @@
+{
+	"checks": [
+		{
+			"check": "Actual strike tick selects right contact",
+			"passed": true
+		},
+		{
+			"check": "Contact replaces body, no duplicate tool/body",
+			"passed": true
+		},
+		{
+			"check": "Official right anchor and dimensions",
+			"passed": true
+		},
+		{
+			"check": "Target left selects left anchor",
+			"passed": true
+		},
+		{
+			"check": "Walking interpolation retains walk sprite",
+			"passed": true
+		},
+		{
+			"check": "Approach is not work animation",
+			"passed": true
+		},
+		{
+			"check": "Stops during suspended",
+			"passed": true
+		},
+		{
+			"check": "Stops during blocked",
+			"passed": true
+		},
+		{
+			"check": "Stops during pending",
+			"passed": true
+		},
+		{
+			"check": "Cancel restores normal motion",
+			"passed": true
+		},
+		{
+			"check": "Low stamina rest restores normal motion",
+			"passed": true
+		},
+		{
+			"check": "Eating restores normal motion",
+			"passed": true
+		},
+		{
+			"check": "Presentation cannot release held jobs",
+			"passed": true
+		},
+		{
+			"check": "Pause freezes pose despite render time",
+			"passed": true
+		},
+		{
+			"check": "Contact returns to ordinary body",
+			"passed": true
+		},
+		{
+			"check": "Completion restores normal motion",
+			"passed": true
+		},
+		{
+			"check": "Material pickup never swings hammer",
+			"passed": true
+		},
+		{
+			"check": "Delivery never swings hammer",
+			"passed": true
+		},
+		{
+			"check": "Construction stage gets common hammer",
+			"passed": true
+		},
+		{
+			"check": "Crafting is not mistaken for construction",
+			"passed": true
+		},
+		{
+			"check": "Logging uses its real strike",
+			"passed": true
+		},
+		{
+			"check": "Registered residents share work motion",
+			"passed": true
+		},
+		{
+			"check": "Presentation does not mutate campaign/resources",
+			"passed": true
+		},
+		{
+			"check": "Production strike/contact alignment mine-1",
+			"passed": true
+		},
+		{
+			"check": "Production completion restores body mine-1",
+			"passed": true
+		},
+		{
+			"check": "Production strike/contact alignment mine1",
+			"passed": true
+		},
+		{
+			"check": "Production completion restores body mine1",
+			"passed": true
+		},
+		{
+			"check": "Production strike/contact alignment clear_tree-1",
+			"passed": true
+		},
+		{
+			"check": "Production completion restores body clear_tree-1",
+			"passed": true
+		},
+		{
+			"check": "Production strike/contact alignment clear_tree1",
+			"passed": true
+		},
+		{
+			"check": "Production completion restores body clear_tree1",
+			"passed": true
+		},
+		{
+			"check": "Three-stage mine-1windup",
+			"passed": true
+		},
+		{
+			"check": "Three-stage mine-1contact",
+			"passed": true
+		},
+		{
+			"check": "Three-stage mine-1return",
+			"passed": true
+		},
+		{
+			"check": "Three-stage mine1windup",
+			"passed": true
+		},
+		{
+			"check": "Three-stage mine1contact",
+			"passed": true
+		},
+		{
+			"check": "Three-stage mine1return",
+			"passed": true
+		},
+		{
+			"check": "Three-stage clear_tree-1windup",
+			"passed": true
+		},
+		{
+			"check": "Three-stage clear_tree-1contact",
+			"passed": true
+		},
+		{
+			"check": "Three-stage clear_tree-1return",
+			"passed": true
+		},
+		{
+			"check": "Three-stage clear_tree1windup",
+			"passed": true
+		},
+		{
+			"check": "Three-stage clear_tree1contact",
+			"passed": true
+		},
+		{
+			"check": "Three-stage clear_tree1return",
+			"passed": true
+		},
+		{
+			"check": "Three-stage build-1windup",
+			"passed": true
+		},
+		{
+			"check": "Three-stage build-1contact",
+			"passed": true
+		},
+		{
+			"check": "Three-stage build-1return",
+			"passed": true
+		},
+		{
+			"check": "Three-stage build1windup",
+			"passed": true
+		},
+		{
+			"check": "Three-stage build1contact",
+			"passed": true
+		},
+		{
+			"check": "Three-stage build1return",
+			"passed": true
+		},
+		{
+			"check": "All 216 sampled frames contain exactly one person",
+			"passed": true
+		}
+	],
+	"failures": 0
+}

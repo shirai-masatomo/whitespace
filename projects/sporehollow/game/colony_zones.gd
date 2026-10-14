@@ -10,6 +10,8 @@ static func init(w):
 		var z=saved.duplicate(true);z.cells=z.cells.map(func(p):return Vector2i(p[0],p[1]));w.zones.append(z)
 	if not w.campaign.has("zones") and not w.storage_cells.is_empty():
 		w.zones.append({"id":w.next_zone_id,"kind":"stockpile","cells":w.storage_cells.duplicate(),"allowed":TYPES.keys()});w.next_zone_id+=1
+	for z in w.zones:
+		if not z.has("name"):z.name=default_name(w,z.kind)
 	sync_storage(w)
 
 static func sync_storage(w):
@@ -41,8 +43,24 @@ static func create(w,kind: String,first: Vector2i,last: Vector2i) -> int:
 	var cells=cells_in(w,first,last)
 	if cells.is_empty():return -1
 	var id=w.next_zone_id;w.next_zone_id+=1
-	w.zones.append({"id":id,"kind":kind,"cells":cells,"allowed":TYPES.keys() if kind=="stockpile" else []})
+	w.zones.append({"id":id,"kind":kind,"name":default_name(w,kind),"cells":cells,"allowed":TYPES.keys() if kind=="stockpile" else []})
 	changed(w);return id
+
+static func default_name(w,kind:String) -> String:
+	var prefix="備蓄" if kind=="stockpile" else "居住"
+	var names=w.zones.map(func(z):return z.get("name",""))
+	var number=1
+	while prefix+str(number) in names:number+=1
+	return prefix+str(number)
+
+static func title(z:Dictionary) -> String:
+	return z.get("name",("備蓄" if z.kind=="stockpile" else "居住")+str(z.id))
+
+static func rename(w,id:int,text:String) -> bool:
+	var z=find(w,id);var clean=text.replace("\n","").replace("\r","").strip_edges().left(32)
+	if z.is_empty() or clean.is_empty():return false
+	z.name=clean;save(w) # Metadata only; never invalidate logistics, rest targets or goods.
+	return true
 
 static func resize(w,id: int,first: Vector2i,last: Vector2i) -> bool:
 	var z=find(w,id);var cells=cells_in(w,first,last)

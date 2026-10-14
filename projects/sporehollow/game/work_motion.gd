@@ -48,18 +48,33 @@ static func paint(canvas,state:Dictionary,foot:Vector2,scale_value:float)->bool:
 	var direction=state.facing
 	var hand=Vector2(7*direction,-23)
 	var hit=Vector2((31 if state.kind=="clear_tree" else 23)*direction,-14 if state.kind!="mine" else -10)
-	var rest=Vector2(13*direction,-24)
-	var raised=Vector2(-9*direction,-44)
+	# The handle pivots around the hand instead of shrinking to a six-pixel stub.
+	# Eased arc: a slower lift, a short accelerating strike, then a relaxed recovery.
+	var rest=Vector2(25*direction,-33)
+	var raised=Vector2(-7*direction,-46)
 	var tip=hit
-	if state.stage=="return":tip=hit.lerp(rest,clampf((state.phase-0.24)/0.31,0,1))
+	if state.stage=="return":tip=arc(hand,hit,rest,ease_motion(clampf((state.phase-0.24)/0.31,0,1)))
 	elif state.stage=="windup":
 		var t=state.phase if state.initial else clampf((state.phase-0.55)/0.45,0,1)
-		tip=rest.lerp(raised,t/0.7) if t<0.7 else raised.lerp(hit,(t-0.7)/0.3)
+		tip=arc(hand,rest,raised,ease_motion(t/0.7)) if t<0.7 else arc(hand,raised,hit,pow((t-0.7)/0.3,2.0))
 	var h=foot+hand*scale_value;var end=foot+tip*scale_value
 	canvas.draw_line(h,end,Color("8c6444"),2*scale_value)
+	# Head rotates with the shaft, mirrored for the same silhouette in both directions.
+	var forward=(tip-hand).normalized();var across=Vector2(-forward.y,forward.x)
 	if state.kind=="mine":
-		canvas.draw_polyline(PackedVector2Array([end+Vector2(-7,3)*scale_value,end+Vector2(-3,-3)*scale_value,end+Vector2(6,-3)*scale_value,end+Vector2(10,2)*scale_value]),Color("bbc0b3"),2*scale_value)
-	elif state.kind=="clear_tree":
-		canvas.draw_colored_polygon(PackedVector2Array([end+Vector2(-3,-5)*scale_value,end+Vector2(5,-5)*scale_value,end+Vector2(7,1)*scale_value,end+Vector2(4,5)*scale_value,end+Vector2(-3,3)*scale_value]),Color("bbc0b3"))
-	else:canvas.draw_rect(Rect2(end-Vector2(5,3)*scale_value,Vector2(10,6)*scale_value),Color("c9c5a5"))
+		var points=PackedVector2Array()
+		for offset in [Vector2(-9,-2),Vector2(-4,2),Vector2(5,2),Vector2(9,-2)]:points.append(end+(across*offset.x+forward*offset.y)*scale_value)
+		canvas.draw_polyline(points,Color("bbc0b3"),2*scale_value)
+	else:
+		var points=PackedVector2Array()
+		var shape=[Vector2(-3,-4),Vector2(5,-4),Vector2(7,1),Vector2(4,5),Vector2(-3,3)] if state.kind=="clear_tree" else [Vector2(-5,-3),Vector2(5,-3),Vector2(5,3),Vector2(-5,3)]
+		for offset in shape:points.append(end+(across*offset.x+forward*offset.y)*scale_value)
+		canvas.draw_colored_polygon(points,Color("bbc0b3") if state.kind=="clear_tree" else Color("c9c5a5"))
 	return true
+
+static func ease_motion(t:float)->float:
+	t=clampf(t,0,1);return t*t*(3.0-2.0*t)
+
+static func arc(pivot:Vector2,start:Vector2,end:Vector2,t:float)->Vector2:
+	var a=start-pivot;var b=end-pivot
+	return pivot+Vector2.from_angle(lerp_angle(a.angle(),b.angle(),t))*lerpf(a.length(),b.length(),t)
