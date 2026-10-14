@@ -1,0 +1,126 @@
+{
+	"checks": [
+		{
+			"check": "New initial goods occupy distinct physical cells",
+			"passed": true
+		},
+		{
+			"check": "Initial goods are valid stockpile stacks",
+			"passed": true
+		},
+		{
+			"check": "Initial stock is immediately usable",
+			"passed": true
+		},
+		{
+			"check": "Restore does not rearrange initial goods or IDs",
+			"passed": true
+		},
+		{
+			"check": "Rendering combines same-kind stack labels without changing any physical ID or quantity",
+			"passed": true
+		},
+		{
+			"check": "A plan can be placed before materials arrive",
+			"passed": true
+		},
+		{
+			"check": "Uncollected off-stock materials and food are not used",
+			"passed": true
+		},
+		{
+			"check": "Zone creation does not move goods or create hidden hauling",
+			"passed": true
+		},
+		{
+			"check": "Explicit collection creates the two transport designations",
+			"passed": true
+		},
+		{
+			"check": "Collected materials build and stored food feeds the sole worker",
+			"passed": true
+		},
+		{
+			"check": "Nearby sites share one internal delivery with no added designation",
+			"passed": true
+		},
+		{
+			"check": "Batched delivery respects total carrying capacity",
+			"passed": true
+		},
+		{
+			"check": "One person completes batched supply and assembly without duplication",
+			"passed": true
+		},
+		{
+			"check": "Separate hauling-only and building-only people cooperate",
+			"passed": true
+		},
+		{
+			"check": "Hauler delivers; builder assembles",
+			"passed": true
+		},
+		{
+			"check": "Active multi-site transport saves",
+			"passed": true
+		},
+		{
+			"check": "Transport assignments, cargo and reservation IDs restore",
+			"passed": true
+		},
+		{
+			"check": "Drafting releases the internal task without losing withdrawn goods",
+			"passed": true
+		},
+		{
+			"check": "Interrupted transfer resumes from its actual dropped location",
+			"passed": true
+		},
+		{
+			"check": "Cancelling one allocation keeps the other and conserves all goods",
+			"passed": true
+		},
+		{
+			"check": "Equal priorities choose a nearer later UI column over the earlier column",
+			"passed": true
+		},
+		{
+			"check": "A long-waiting feasible job gains priority within equal categories",
+			"passed": true
+		},
+		{
+			"check": "A zone over an uncollected pile is not a material receipt",
+			"passed": true
+		},
+		{
+			"check": "Explicit pickup/delivery inside the new zone records a real receipt",
+			"passed": true
+		},
+		{
+			"check": "Forbidden stock is not reserved or delivered",
+			"passed": true
+		},
+		{
+			"check": "Current construction hauling uses the existing real red-route planner",
+			"passed": true
+		},
+		{
+			"check": "Separate-process restart fixture saves live batch delivery",
+			"passed": true
+		},
+		{
+			"check": "Cancellation during pickup leaves the remaining site and exact physical goods",
+			"passed": true
+		},
+		{
+			"check": "Deleting a stockpile preserves its goods but prevents a not-yet-picked transport",
+			"passed": true
+		},
+		{
+			"check": "Restoring an allowed stockpile resumes the valid plan",
+			"passed": true
+		}
+	],
+	"failures": 0,
+	"method": "Production World.step, controlled workers, real material IDs and snapshot restore"
+}

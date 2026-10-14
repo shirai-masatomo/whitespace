@@ -3,25 +3,43 @@ const Policy=preload("res://game/work_policy.gd")
 const LIMIT = Policy.DESIGNATION_LIMIT
 const SPEED = 2.5
 
-static func build_reason(w, kind: String, p: Vector2i, extra_jobs: int=0, held_cost: int=0) -> String:
+# Index lives only for a synchronous preview/commit transaction, never across ticks.
+static func index(w) -> Dictionary:
+	var result={"kinds":{},"layers":{}}
+	for j in w.jobs:index_add(w,result,j)
+	preload("res://game/terrain_metrics.gd").count("job_index_rows",w.jobs.size())
+	return result
+
+static func index_add(w,lookup: Dictionary,j):
+	if not lookup.kinds.has(j.pos):lookup.kinds[j.pos]={}
+	lookup.kinds[j.pos][j.kind]=true
+	var target=w.BUILD[j.kind].layer if w.BUILD.has(j.kind) else j.get("target_layer","")
+	if target!="":
+		if not lookup.layers.has(j.pos):lookup.layers[j.pos]={}
+		lookup.layers[j.pos][target]=true
+
+static func build_reason(w, kind: String, p: Vector2i, extra_jobs: int=0, held_cost: int=0,lookup: Dictionary={}) -> String:
+	preload("res://game/terrain_metrics.gd").count("keeper_jobs.build_reason")
 	# Used both by the drag preview and the actual reservation; no world mutation.
 	if not w.working(): return "牧場作業中に予約してください"
 	if w.jobs.size()+extra_jobs>=LIMIT: return "指定は%d件まで"%LIMIT
 	if not w.BUILD.has(kind) or not w.inside(p): return "ここには建てられません"
-	if w.jobs.any(func(j):return j.pos==p and j.kind==kind): return "予約済みです"
-	if w.jobs.any(func(j):return j.pos==p and ((w.BUILD.has(j.kind) and w.BUILD[j.kind].layer==w.BUILD[kind].layer) or j.get("target_layer")==w.BUILD[kind].layer)): return "同じ場所に別の予定があります"
+	if lookup.is_empty():lookup=index(w)
+	if lookup.kinds.get(p,{}).has(kind): return "予約済みです"
+	if lookup.layers.get(p,{}).has(w.BUILD[kind].layer): return "同じ場所に別の予定があります"
 	var why=w.Buildings.reason(w,kind,p,false)
 	if why!="": return why
 	return ""
 
-static func enqueue(w, kind: String, p: Vector2i, animal_id: int) -> bool:
+static func enqueue(w, kind: String, p: Vector2i, animal_id: int,lookup: Dictionary={}) -> bool:
 	w.Stock.normalize(w)
 	if not w.working() or w.jobs.size()>=LIMIT or not w.inside(p): return false
-	if w.jobs.any(func(j):return j.pos==p and j.kind==kind): return false
+	if lookup.is_empty():lookup=index(w)
+	if lookup.kinds.get(p,{}).has(kind): return false
 	var resource=""
 	var cost=0
 	if w.BUILD.has(kind):
-		var why=build_reason(w,kind,p)
+		var why=build_reason(w,kind,p,0,0,lookup)
 		if why!="": w.say(why); return false
 		resource=w.BUILD[kind].get("resource","soil")
 		cost=0 if w.debug_enabled and w.debug_infinite else w.BUILD[kind].cost
@@ -41,7 +59,7 @@ static func enqueue(w, kind: String, p: Vector2i, animal_id: int) -> bool:
 		j.target_layer="floor" if kind.ends_with("_floor") else "structure"
 		var b=w.building_store(j.target_layer).get(p,{})
 		j.target_id=b.id; j.target_kind=b.kind
-		if w.jobs.any(func(other):return other.pos==p and ((w.BUILD.has(other.kind) and w.BUILD[other.kind].layer==j.target_layer) or other.get("target_layer")==j.target_layer)): return false
+		if lookup.layers.get(p,{}).has(j.target_layer): return false
 	if kind=="collect" and not w.items_at(p).is_empty():
 		var row=w.items_at(p)[0]
 		if row.kind!="skill_scroll" and not row.kind.ends_with("_plan"):
@@ -52,6 +70,7 @@ static func enqueue(w, kind: String, p: Vector2i, animal_id: int) -> bool:
 	w.next_job_id+=1
 	if w.jobs.is_empty() and w.manual_goal==null and w.Life.able(w) and w.job_hold_reason in ["travel","manual","rescue","danger","rest_end"]: hold(w,"")
 	w.jobs.append(j)
+	index_add(w,lookup,j)
 	w.Life.wake_auto(w)
 	w.job_log.append({"tick":w.tick,"event":"queued","id":j.id,"kind":kind,"pos":[p.x,p.y]})
 	return true
@@ -172,6 +191,7 @@ static func status(w) -> String:
 	return w.keeper.get("work_status","")
 
 static func path_to(w,start: Vector2i,goals: Array,outdoor: bool=false,avoid_actors: bool=false) -> Array:
+	preload("res://game/terrain_metrics.gd").count("keeper_jobs.path_to")
 	goals=goals.filter(func(p):return not outdoor or not w.is_indoor(p))
 	goals.sort_custom(func(a,b):
 		var da=w.distance(start,a); var db=w.distance(start,b)

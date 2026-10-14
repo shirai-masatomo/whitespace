@@ -127,7 +127,7 @@ static func claim(w,key: String,j) -> bool:
 	if w.workers.has(key):w.workers[key].work_job=j.id
 	return true
 
-static func effort(w,a,j) -> float:
+static func effort(w,a,j,evaluation=null) -> float:
 	if w.work_claims.has(target_key(w,j)):return INF
 	if w.BUILD.has(j.kind) and w.Delivery.needed(w,j)>0:return INF
 	var position=j.pos
@@ -146,18 +146,24 @@ static func effort(w,a,j) -> float:
 			block(w,j,plan.reason);return INF
 		position=row.pos
 	var goals=w.Mountains.job_goals(w,j) if j.has("mountain_id") else ([position] if j.kind=="move" else w.neighbors(position))
-	var route=w.Jobs.path_to(w,a.pos,goals)
-	if route.is_empty():
+	var distance: float
+	if evaluation==null:
+		var route=w.Jobs.path_to(w,a.pos,goals)
+		distance=INF if route.is_empty() else float(route.size()-1)
+	else:distance=evaluation.distance_to(w,goals)
+	if is_inf(distance):
 		block(w,j,"岩山へ通じる作業場所がありません" if j.has("mountain_id") else "対象へ通じる通路がありません")
 		return INF
-	return float(route.size()-1)+minf(20,j.get("remaining",0)*w.DT)
+	return distance+minf(20,j.get("remaining",0)*w.DT)
 
 static func score(w,j,efficiency: float) -> float:
 	# Waiting grows without a category-position bias, so feasible work cannot starve.
 	return efficiency-maxi(0,w.tick-j.get("queued_tick",w.tick))*w.DT*0.08
 
 static func choose(w,key: String) -> Dictionary:
+	preload("res://game/terrain_metrics.gd").count("human_work.choose")
 	var a=w.workers[key];var candidates=[]
+	var evaluation=preload("res://game/job_evaluation.gd").new(w,a.pos)
 	for j in w.jobs.duplicate():
 		if j.get("assigned_to","")!="" or j.get("cancel_requested",false) or w.tick<j.get("retry_at",0) or j.get("explicit_actor",key)!=key:continue
 		if key!="keeper" and not shared(w,j) and j.get("explicit_actor","")!=key:continue
@@ -168,7 +174,7 @@ static func choose(w,key: String) -> Dictionary:
 		if w.BUILD.has(j.kind) and not j.started:
 			var why=w.Buildings.reason(w,j.kind,j.pos,false)
 			if why!="" and not (why=="ここに誰かいます" and a.pos==j.pos):block(w,j,why);continue
-		var distance=effort(w,a,j)
+		var distance=effort(w,a,j,evaluation)
 		if is_inf(distance):continue
 		candidates.append({"job":j,"priority":priority,"score":score(w,j,distance)})
 	var delivery=w.Delivery.proposal(w,key)

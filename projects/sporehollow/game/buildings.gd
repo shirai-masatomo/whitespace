@@ -11,6 +11,7 @@ static func enclosure(b: Dictionary) -> bool:
 	return b.get("status") == "ready" and b.get("kind") in WALLS + DOORS
 
 static func rooms(w, proposed: Dictionary = {}) -> Dictionary:
+	preload("res://game/terrain_metrics.gd").count("buildings.rooms")
 	var barriers = {}
 	for p in w.structures:
 		if enclosure(w.structures[p]): barriers[p] = true
@@ -32,6 +33,7 @@ static func rooms(w, proposed: Dictionary = {}) -> Dictionary:
 			var valid = true
 			visited[start] = true
 			while not open.is_empty():
+				preload("res://game/terrain_metrics.gd").count("rooms_cells")
 				var cell = open.pop_back()
 				region.append(cell)
 				if not tiles.has(cell): valid = false
@@ -45,6 +47,7 @@ static func rooms(w, proposed: Dictionary = {}) -> Dictionary:
 	return indoor
 
 static func reason(w, kind: String, p: Vector2i, check_cost: bool = true) -> String:
+	preload("res://game/terrain_metrics.gd").count("buildings.reason")
 	if kind in ["kennel","coop"]: return "この建物は休止中です"
 	if not w.BUILD.has(kind) or not w.inside(p): return "ここには建てられません"
 	if w.trees.has(p): return "先に開拓が必要"
@@ -61,10 +64,29 @@ static func reason(w, kind: String, p: Vector2i, check_cost: bool = true) -> Str
 		if not compatible or data.get("tier",-1) <= w.BUILD.get(old.kind,{}).get("tier",0): return "上位の素材を選んでください"
 	elif old.get("status") == "building": return "工事中です"
 	if check_cost and not (w.debug_enabled and w.debug_infinite) and w.resource_amount(data.get("resource","soil")) < data.cost: return "素材が足りません"
-	var predicted = rooms(w,{"kind":kind,"pos":p})
-	for a in w.animals:
-		if a.placed and not w.SPECIES[a.species].can_enter_indoor and predicted.has(a.pos): return "先に犬を外へ誘導"
+	if encloses_outdoor_animal(w,kind,p):return "先に犬を外へ誘導"
 	return ""
+
+static func encloses_outdoor_animal(w,kind: String,p: Vector2i) -> bool:
+	# Only the connected region containing a restricted animal can reject construction.
+	# A single uncovered cell proves that region is outdoors: no whole-map flood is needed.
+	var added_floor=w.BUILD[kind].get("layer")=="floor"
+	var added_barrier=kind in WALLS or kind in DOORS
+	var idol=w.Story.idol_cells(w)
+	for a in w.animals:
+		if not a.placed or w.SPECIES[a.species].can_enter_indoor or not w.inside(a.pos) or enclosure(w.structures.get(a.pos,{})):continue
+		var seen={a.pos:true};var pending=[a.pos];var enclosed=true;var has_interior=false
+		while not pending.is_empty():
+			var cell=pending.pop_back()
+			has_interior=has_interior or (cell.x>0 and cell.y>0 and cell.x<w.W-1 and cell.y<w.H-1)
+			preload("res://game/terrain_metrics.gd").count("enclosure_cells")
+			if not w.inside(cell) or not ((added_floor and cell==p) or cell in idol or w.floors.get(cell,{}).get("status")=="ready"):
+				enclosed=false;break
+			for n in w.neighbors(cell):
+				if seen.has(n) or (added_barrier and n==p) or enclosure(w.structures.get(n,{})):continue
+				seen[n]=true;pending.append(n)
+		if enclosed and has_interior:return true
+	return false
 
 static func begin(w,j):
 	var store = layer(w,j.kind)

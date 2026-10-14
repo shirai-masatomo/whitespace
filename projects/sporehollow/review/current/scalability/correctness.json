@@ -1,0 +1,1201 @@
+{
+	"checks": [
+		{
+			"check": "Last wall rejects enclosing a dog",
+			"passed": true
+		},
+		{
+			"check": "Local enclosure matches whole-map reference: wall (12, 10)",
+			"passed": true
+		},
+		{
+			"check": "Local enclosure matches whole-map reference: door (12, 10)",
+			"passed": true
+		},
+		{
+			"check": "Last floor rejects enclosure even with an open door",
+			"passed": true
+		},
+		{
+			"check": "Local enclosure matches whole-map reference: soil_tile (11, 12)",
+			"passed": true
+		},
+		{
+			"check": "Construction allowed after dog leaves",
+			"passed": true
+		},
+		{
+			"check": "Local enclosure matches whole-map reference: wall (2, 1)",
+			"passed": true
+		},
+		{
+			"check": "Local enclosure matches whole-map reference: soil_tile (12, 16)",
+			"passed": true
+		},
+		{
+			"check": "Local enclosure matches whole-map reference: wall (15, 11)",
+			"passed": true
+		},
+		{
+			"check": "Local enclosure matches whole-map reference: soil_tile (11, 13)",
+			"passed": true
+		},
+		{
+			"check": "Local enclosure matches whole-map reference: wall (0, 5)",
+			"passed": true
+		},
+		{
+			"check": "Local enclosure matches whole-map reference: soil_tile (10, 14)",
+			"passed": true
+		},
+		{
+			"check": "Local enclosure matches whole-map reference: wall (12, 12)",
+			"passed": true
+		},
+		{
+			"check": "Local enclosure matches whole-map reference: soil_tile (11, 10)",
+			"passed": true
+		},
+		{
+			"check": "Local enclosure matches whole-map reference: wall (0, 4)",
+			"passed": true
+		},
+		{
+			"check": "Local enclosure matches whole-map reference: soil_tile (11, 14)",
+			"passed": true
+		},
+		{
+			"check": "Local enclosure matches whole-map reference: wall (10, 10)",
+			"passed": true
+		},
+		{
+			"check": "Local enclosure matches whole-map reference: soil_tile (14, 15)",
+			"passed": true
+		},
+		{
+			"check": "Local enclosure matches whole-map reference: wall (4, 0)",
+			"passed": true
+		},
+		{
+			"check": "Local enclosure matches whole-map reference: soil_tile (15, 14)",
+			"passed": true
+		},
+		{
+			"check": "Local enclosure matches whole-map reference: wall (14, 12)",
+			"passed": true
+		},
+		{
+			"check": "Local enclosure matches whole-map reference: soil_tile (11, 10)",
+			"passed": true
+		},
+		{
+			"check": "Local enclosure matches whole-map reference: wall (6, 2)",
+			"passed": true
+		},
+		{
+			"check": "Local enclosure matches whole-map reference: soil_tile (11, 13)",
+			"passed": true
+		},
+		{
+			"check": "Local enclosure matches whole-map reference: wall (14, 12)",
+			"passed": true
+		},
+		{
+			"check": "Local enclosure matches whole-map reference: soil_tile (12, 15)",
+			"passed": true
+		},
+		{
+			"check": "Local enclosure matches whole-map reference: wall (5, 4)",
+			"passed": true
+		},
+		{
+			"check": "Local enclosure matches whole-map reference: soil_tile (13, 14)",
+			"passed": true
+		},
+		{
+			"check": "Local enclosure matches whole-map reference: wall (10, 12)",
+			"passed": true
+		},
+		{
+			"check": "Local enclosure matches whole-map reference: soil_tile (10, 11)",
+			"passed": true
+		},
+		{
+			"check": "Local enclosure matches whole-map reference: wall (1, 3)",
+			"passed": true
+		},
+		{
+			"check": "Local enclosure matches whole-map reference: soil_tile (12, 13)",
+			"passed": true
+		},
+		{
+			"check": "Local enclosure matches whole-map reference: wall (16, 16)",
+			"passed": true
+		},
+		{
+			"check": "Local enclosure matches whole-map reference: soil_tile (15, 12)",
+			"passed": true
+		},
+		{
+			"check": "Local enclosure matches whole-map reference: wall (2, 4)",
+			"passed": true
+		},
+		{
+			"check": "Local enclosure matches whole-map reference: soil_tile (12, 10)",
+			"passed": true
+		},
+		{
+			"check": "Local enclosure matches whole-map reference: wall (11, 16)",
+			"passed": true
+		},
+		{
+			"check": "Local enclosure matches whole-map reference: soil_tile (15, 12)",
+			"passed": true
+		},
+		{
+			"check": "Local enclosure matches whole-map reference: wall (0, 4)",
+			"passed": true
+		},
+		{
+			"check": "Local enclosure matches whole-map reference: soil_tile (13, 11)",
+			"passed": true
+		},
+		{
+			"check": "Local enclosure matches whole-map reference: wall (11, 13)",
+			"passed": true
+		},
+		{
+			"check": "Local enclosure matches whole-map reference: soil_tile (15, 13)",
+			"passed": true
+		},
+		{
+			"check": "Local enclosure matches whole-map reference: wall (3, 2)",
+			"passed": true
+		},
+		{
+			"check": "Local enclosure matches whole-map reference: soil_tile (14, 12)",
+			"passed": true
+		},
+		{
+			"check": "Local enclosure matches whole-map reference: wall (12, 13)",
+			"passed": true
+		},
+		{
+			"check": "Local enclosure matches whole-map reference: soil_tile (14, 13)",
+			"passed": true
+		},
+		{
+			"check": "Local enclosure matches whole-map reference: wall (3, 4)",
+			"passed": true
+		},
+		{
+			"check": "Local enclosure matches whole-map reference: soil_tile (10, 14)",
+			"passed": true
+		},
+		{
+			"check": "Local enclosure matches whole-map reference: wall (16, 15)",
+			"passed": true
+		},
+		{
+			"check": "Local enclosure matches whole-map reference: soil_tile (14, 16)",
+			"passed": true
+		},
+		{
+			"check": "Local enclosure matches whole-map reference: wall (3, 1)",
+			"passed": true
+		},
+		{
+			"check": "Local enclosure matches whole-map reference: soil_tile (16, 11)",
+			"passed": true
+		},
+		{
+			"check": "Local enclosure matches whole-map reference: wall (12, 14)",
+			"passed": true
+		},
+		{
+			"check": "Local enclosure matches whole-map reference: soil_tile (13, 12)",
+			"passed": true
+		},
+		{
+			"check": "Local enclosure matches whole-map reference: wall (3, 2)",
+			"passed": true
+		},
+		{
+			"check": "Local enclosure matches whole-map reference: soil_tile (11, 16)",
+			"passed": true
+		},
+		{
+			"check": "Local enclosure matches whole-map reference: wall (15, 10)",
+			"passed": true
+		},
+		{
+			"check": "Local enclosure matches whole-map reference: soil_tile (12, 14)",
+			"passed": true
+		},
+		{
+			"check": "Local enclosure matches whole-map reference: wall (1, 0)",
+			"passed": true
+		},
+		{
+			"check": "Local enclosure matches whole-map reference: soil_tile (12, 15)",
+			"passed": true
+		},
+		{
+			"check": "Local enclosure matches whole-map reference: wall (14, 14)",
+			"passed": true
+		},
+		{
+			"check": "Local enclosure matches whole-map reference: soil_tile (15, 11)",
+			"passed": true
+		},
+		{
+			"check": "Local enclosure matches whole-map reference: wall (0, 5)",
+			"passed": true
+		},
+		{
+			"check": "Local enclosure matches whole-map reference: soil_tile (15, 11)",
+			"passed": true
+		},
+		{
+			"check": "Local enclosure matches whole-map reference: wall (13, 14)",
+			"passed": true
+		},
+		{
+			"check": "Local enclosure matches whole-map reference: soil_tile (13, 16)",
+			"passed": true
+		},
+		{
+			"check": "Local enclosure matches whole-map reference: wall (3, 6)",
+			"passed": true
+		},
+		{
+			"check": "Local enclosure matches whole-map reference: soil_tile (12, 13)",
+			"passed": true
+		},
+		{
+			"check": "Local enclosure matches whole-map reference: wall (15, 11)",
+			"passed": true
+		},
+		{
+			"check": "Local enclosure matches whole-map reference: soil_tile (15, 12)",
+			"passed": true
+		},
+		{
+			"check": "Local enclosure matches whole-map reference: wall (0, 5)",
+			"passed": true
+		},
+		{
+			"check": "Local enclosure matches whole-map reference: soil_tile (12, 14)",
+			"passed": true
+		},
+		{
+			"check": "Local enclosure matches whole-map reference: wall (10, 14)",
+			"passed": true
+		},
+		{
+			"check": "Local enclosure matches whole-map reference: soil_tile (12, 14)",
+			"passed": true
+		},
+		{
+			"check": "Local enclosure matches whole-map reference: wall (1, 3)",
+			"passed": true
+		},
+		{
+			"check": "Local enclosure matches whole-map reference: soil_tile (12, 10)",
+			"passed": true
+		},
+		{
+			"check": "Local enclosure matches whole-map reference: wall (14, 13)",
+			"passed": true
+		},
+		{
+			"check": "Local enclosure matches whole-map reference: soil_tile (11, 16)",
+			"passed": true
+		},
+		{
+			"check": "Local enclosure matches whole-map reference: wall (1, 3)",
+			"passed": true
+		},
+		{
+			"check": "Local enclosure matches whole-map reference: soil_tile (11, 10)",
+			"passed": true
+		},
+		{
+			"check": "Local enclosure matches whole-map reference: wall (14, 12)",
+			"passed": true
+		},
+		{
+			"check": "Local enclosure matches whole-map reference: soil_tile (15, 10)",
+			"passed": true
+		},
+		{
+			"check": "Local enclosure matches whole-map reference: wall (3, 2)",
+			"passed": true
+		},
+		{
+			"check": "Local enclosure matches whole-map reference: soil_tile (10, 14)",
+			"passed": true
+		},
+		{
+			"check": "Local enclosure matches whole-map reference: wall (12, 15)",
+			"passed": true
+		},
+		{
+			"check": "Local enclosure matches whole-map reference: soil_tile (10, 13)",
+			"passed": true
+		},
+		{
+			"check": "Unchanged preview does no cell validation; extension validates one new cell",
+			"passed": true
+		},
+		{
+			"check": "Paused same-tick occupancy invalidates preview",
+			"passed": true
+		},
+		{
+			"check": "Release revalidates tree and animal occupancy",
+			"passed": true
+		},
+		{
+			"check": "Fresh transaction sees cancellation and layer conflict",
+			"passed": true
+		},
+		{
+			"check": "100 reservations accepted and 101st rejected",
+			"passed": true
+		},
+		{
+			"check": "Completion releases reservation index for next transaction",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: open",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: open",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: open",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: open",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: open",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: open",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: open",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: open",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: open",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: open",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: open",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: open",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: open",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: open",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: open",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: open",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: open",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: open",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: open",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: open",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: open",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: open",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: open",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: open",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: open",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: open",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: open",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: open",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: open",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: open",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: open",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: open",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: open",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: open",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: open",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: open",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: open",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: open",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: open",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: open",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: open",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: open",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: open",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: open",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: open",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: open",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: open",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: open",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: open",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: open",
+			"passed": true
+		},
+		{
+			"check": "Selected job unchanged: open",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: blocked",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: blocked",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: blocked",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: blocked",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: blocked",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: blocked",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: blocked",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: blocked",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: blocked",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: blocked",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: blocked",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: blocked",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: blocked",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: blocked",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: blocked",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: blocked",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: blocked",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: blocked",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: blocked",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: blocked",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: blocked",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: blocked",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: blocked",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: blocked",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: blocked",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: blocked",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: blocked",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: blocked",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: blocked",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: blocked",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: blocked",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: blocked",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: blocked",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: blocked",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: blocked",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: blocked",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: blocked",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: blocked",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: blocked",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: blocked",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: blocked",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: blocked",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: blocked",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: blocked",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: blocked",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: blocked",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: blocked",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: blocked",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: blocked",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: blocked",
+			"passed": true
+		},
+		{
+			"check": "Selected job unchanged: blocked",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: door",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: door",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: door",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: door",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: door",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: door",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: door",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: door",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: door",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: door",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: door",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: door",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: door",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: door",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: door",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: door",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: door",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: door",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: door",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: door",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: door",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: door",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: door",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: door",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: door",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: door",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: door",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: door",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: door",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: door",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: door",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: door",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: door",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: door",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: door",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: door",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: door",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: door",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: door",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: door",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: door",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: door",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: door",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: door",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: door",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: door",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: door",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: door",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: door",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: door",
+			"passed": true
+		},
+		{
+			"check": "Selected job unchanged: door",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: door_open",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: door_open",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: door_open",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: door_open",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: door_open",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: door_open",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: door_open",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: door_open",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: door_open",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: door_open",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: door_open",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: door_open",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: door_open",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: door_open",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: door_open",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: door_open",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: door_open",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: door_open",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: door_open",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: door_open",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: door_open",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: door_open",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: door_open",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: door_open",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: door_open",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: door_open",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: door_open",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: door_open",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: door_open",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: door_open",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: door_open",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: door_open",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: door_open",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: door_open",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: door_open",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: door_open",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: door_open",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: door_open",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: door_open",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: door_open",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: door_open",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: door_open",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: door_open",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: door_open",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: door_open",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: door_open",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: door_open",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: door_open",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: door_open",
+			"passed": true
+		},
+		{
+			"check": "Evaluation distance preserves legacy goal order/cost: door_open",
+			"passed": true
+		},
+		{
+			"check": "Selected job unchanged: door_open",
+			"passed": true
+		},
+		{
+			"check": "Previously encountered static candidates need no repeat sort",
+			"passed": true
+		},
+		{
+			"check": "Tree addition/removal invalidates selection catalog",
+			"passed": true
+		},
+		{
+			"check": "Moving animal points remain live, outside static cache",
+			"passed": true
+		}
+	],
+	"failures": 0
+}

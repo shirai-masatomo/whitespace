@@ -1,0 +1,397 @@
+{
+	"map": [
+		100,
+		68
+	],
+	"method": "Headless Dummy; synthetic clear terrain; production methods; no GPU or EXE update",
+	"rows": [
+		{
+			"counts": {
+				"buildings.reason": 10,
+				"enclosure_cells": 10,
+				"job_index_rows": 0,
+				"keeper_jobs.build_reason": 10
+			},
+			"humans": 1,
+			"jobs_or_cells": 10,
+			"ms": 0.264,
+			"repeat": 1,
+			"stage": "preview_cold"
+		},
+		{
+			"counts": {},
+			"humans": 1,
+			"jobs_or_cells": 10,
+			"ms": 0.02,
+			"repeat": 3,
+			"stage": "preview_unchanged"
+		},
+		{
+			"counts": {
+				"buildings.reason": 20,
+				"enclosure_cells": 20,
+				"job_index_rows": 0,
+				"keeper_jobs.build_reason": 20
+			},
+			"humans": 1,
+			"jobs_or_cells": 10,
+			"ms": 0.555,
+			"repeat": 1,
+			"stage": "commit"
+		},
+		{
+			"counts": {
+				"main.selection_candidates": 10,
+				"selection_catalog_rebuilds": 1
+			},
+			"humans": 1,
+			"jobs_or_cells": 10,
+			"ms": 8.324,
+			"repeat": 10,
+			"stage": "selection_candidates_1000_trees"
+		},
+		{
+			"counts": {},
+			"humans": 1,
+			"jobs_or_cells": 10,
+			"ms": 0.003,
+			"repeat": 10,
+			"stage": "hidden_route_data"
+		},
+		{
+			"counts": {
+				"buildings.reason": 10,
+				"enclosure_cells": 10,
+				"human_work.choose": 1,
+				"path_expanded": 325,
+				"world.find_path": 10
+			},
+			"humans": 1,
+			"jobs_or_cells": 10,
+			"ms": 7.504,
+			"repeat": 1,
+			"stage": "choose"
+		},
+		{
+			"counts": {
+				"keeper_jobs.path_to": 10,
+				"path_expanded": 325,
+				"world.find_path": 10
+			},
+			"humans": 1,
+			"jobs_or_cells": 10,
+			"ms": 6.932,
+			"repeat": 1,
+			"stage": "path_requests"
+		},
+		{
+			"counts": {
+				"buildings.reason": 40,
+				"enclosure_cells": 40,
+				"human_work.choose": 5,
+				"path_expanded": 1825,
+				"world.find_path": 40
+			},
+			"humans": 5,
+			"jobs_or_cells": 10,
+			"ms": 43.858,
+			"repeat": 1,
+			"stage": "choose"
+		},
+		{
+			"counts": {
+				"keeper_jobs.path_to": 50,
+				"path_expanded": 2125,
+				"world.find_path": 50
+			},
+			"humans": 5,
+			"jobs_or_cells": 10,
+			"ms": 48.157,
+			"repeat": 1,
+			"stage": "path_requests"
+		},
+		{
+			"counts": {
+				"buildings.reason": 55,
+				"enclosure_cells": 55,
+				"human_work.choose": 10,
+				"path_expanded": 3025,
+				"world.find_path": 55
+			},
+			"humans": 10,
+			"jobs_or_cells": 10,
+			"ms": 78.486,
+			"repeat": 1,
+			"stage": "choose"
+		},
+		{
+			"counts": {
+				"keeper_jobs.path_to": 100,
+				"path_expanded": 5500,
+				"world.find_path": 100
+			},
+			"humans": 10,
+			"jobs_or_cells": 10,
+			"ms": 132.869,
+			"repeat": 1,
+			"stage": "path_requests"
+		},
+		{
+			"counts": {
+				"buildings.reason": 50,
+				"enclosure_cells": 50,
+				"job_index_rows": 0,
+				"keeper_jobs.build_reason": 50
+			},
+			"humans": 1,
+			"jobs_or_cells": 50,
+			"ms": 1.173,
+			"repeat": 1,
+			"stage": "preview_cold"
+		},
+		{
+			"counts": {},
+			"humans": 1,
+			"jobs_or_cells": 50,
+			"ms": 0.03,
+			"repeat": 3,
+			"stage": "preview_unchanged"
+		},
+		{
+			"counts": {
+				"buildings.reason": 100,
+				"enclosure_cells": 100,
+				"job_index_rows": 0,
+				"keeper_jobs.build_reason": 100
+			},
+			"humans": 1,
+			"jobs_or_cells": 50,
+			"ms": 2.76,
+			"repeat": 1,
+			"stage": "commit"
+		},
+		{
+			"counts": {
+				"main.selection_candidates": 10,
+				"selection_catalog_rebuilds": 1
+			},
+			"humans": 1,
+			"jobs_or_cells": 50,
+			"ms": 8.641,
+			"repeat": 10,
+			"stage": "selection_candidates_1000_trees"
+		},
+		{
+			"counts": {},
+			"humans": 1,
+			"jobs_or_cells": 50,
+			"ms": 0.003,
+			"repeat": 10,
+			"stage": "hidden_route_data"
+		},
+		{
+			"counts": {
+				"buildings.reason": 50,
+				"enclosure_cells": 50,
+				"evaluation_expanded": 592,
+				"human_work.choose": 1
+			},
+			"humans": 1,
+			"jobs_or_cells": 50,
+			"ms": 5.456,
+			"repeat": 1,
+			"stage": "choose"
+		},
+		{
+			"counts": {
+				"keeper_jobs.path_to": 50,
+				"path_expanded": 2275,
+				"world.find_path": 50
+			},
+			"humans": 1,
+			"jobs_or_cells": 50,
+			"ms": 51.92,
+			"repeat": 1,
+			"stage": "path_requests"
+		},
+		{
+			"counts": {
+				"buildings.reason": 240,
+				"enclosure_cells": 240,
+				"evaluation_expanded": 3688,
+				"human_work.choose": 5
+			},
+			"humans": 5,
+			"jobs_or_cells": 50,
+			"ms": 28.242,
+			"repeat": 1,
+			"stage": "choose"
+		},
+		{
+			"counts": {
+				"keeper_jobs.path_to": 250,
+				"path_expanded": 14875,
+				"world.find_path": 250
+			},
+			"humans": 5,
+			"jobs_or_cells": 50,
+			"ms": 371.185,
+			"repeat": 1,
+			"stage": "path_requests"
+		},
+		{
+			"counts": {
+				"buildings.reason": 455,
+				"enclosure_cells": 455,
+				"evaluation_expanded": 9517,
+				"human_work.choose": 10
+			},
+			"humans": 10,
+			"jobs_or_cells": 50,
+			"ms": 68.13,
+			"repeat": 1,
+			"stage": "choose"
+		},
+		{
+			"counts": {
+				"keeper_jobs.path_to": 500,
+				"path_expanded": 38490,
+				"world.find_path": 500
+			},
+			"humans": 10,
+			"jobs_or_cells": 50,
+			"ms": 1106.43,
+			"repeat": 1,
+			"stage": "path_requests"
+		},
+		{
+			"counts": {
+				"buildings.reason": 100,
+				"enclosure_cells": 100,
+				"job_index_rows": 0,
+				"keeper_jobs.build_reason": 100
+			},
+			"humans": 1,
+			"jobs_or_cells": 100,
+			"ms": 1.881,
+			"repeat": 1,
+			"stage": "preview_cold"
+		},
+		{
+			"counts": {},
+			"humans": 1,
+			"jobs_or_cells": 100,
+			"ms": 0.023,
+			"repeat": 3,
+			"stage": "preview_unchanged"
+		},
+		{
+			"counts": {
+				"buildings.reason": 200,
+				"enclosure_cells": 200,
+				"job_index_rows": 0,
+				"keeper_jobs.build_reason": 200
+			},
+			"humans": 1,
+			"jobs_or_cells": 100,
+			"ms": 5.195,
+			"repeat": 1,
+			"stage": "commit"
+		},
+		{
+			"counts": {
+				"main.selection_candidates": 10,
+				"selection_catalog_rebuilds": 1
+			},
+			"humans": 1,
+			"jobs_or_cells": 100,
+			"ms": 8.552,
+			"repeat": 10,
+			"stage": "selection_candidates_1000_trees"
+		},
+		{
+			"counts": {},
+			"humans": 1,
+			"jobs_or_cells": 100,
+			"ms": 0.003,
+			"repeat": 10,
+			"stage": "hidden_route_data"
+		},
+		{
+			"counts": {
+				"buildings.reason": 100,
+				"enclosure_cells": 100,
+				"evaluation_expanded": 989,
+				"human_work.choose": 1
+			},
+			"humans": 1,
+			"jobs_or_cells": 100,
+			"ms": 9.085,
+			"repeat": 1,
+			"stage": "choose"
+		},
+		{
+			"counts": {
+				"keeper_jobs.path_to": 100,
+				"path_expanded": 6175,
+				"world.find_path": 100
+			},
+			"humans": 1,
+			"jobs_or_cells": 100,
+			"ms": 153.569,
+			"repeat": 1,
+			"stage": "path_requests"
+		},
+		{
+			"counts": {
+				"buildings.reason": 490,
+				"enclosure_cells": 490,
+				"evaluation_expanded": 5885,
+				"human_work.choose": 5
+			},
+			"humans": 5,
+			"jobs_or_cells": 100,
+			"ms": 50.008,
+			"repeat": 1,
+			"stage": "choose"
+		},
+		{
+			"counts": {
+				"keeper_jobs.path_to": 500,
+				"path_expanded": 40375,
+				"world.find_path": 500
+			},
+			"humans": 5,
+			"jobs_or_cells": 100,
+			"ms": 1065.108,
+			"repeat": 1,
+			"stage": "path_requests"
+		},
+		{
+			"counts": {
+				"buildings.reason": 955,
+				"enclosure_cells": 955,
+				"evaluation_expanded": 14344,
+				"human_work.choose": 10
+			},
+			"humans": 10,
+			"jobs_or_cells": 100,
+			"ms": 114.856,
+			"repeat": 1,
+			"stage": "choose"
+		},
+		{
+			"counts": {
+				"keeper_jobs.path_to": 1000,
+				"path_expanded": 104290,
+				"world.find_path": 1000
+			},
+			"humans": 10,
+			"jobs_or_cells": 100,
+			"ms": 2907.425,
+			"repeat": 1,
+			"stage": "path_requests"
+		}
+	],
+	"seed": 731
+}

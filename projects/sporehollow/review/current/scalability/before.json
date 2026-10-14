@@ -1,0 +1,433 @@
+{
+	"map": [
+		100,
+		68
+	],
+	"method": "Headless Dummy; synthetic clear terrain; production methods; no GPU or EXE update",
+	"rows": [
+		{
+			"counts": {
+				"buildings.reason": 10,
+				"buildings.rooms": 10,
+				"keeper_jobs.build_reason": 10,
+				"rooms_cells": 67990
+			},
+			"humans": 1,
+			"jobs_or_cells": 10,
+			"ms": 158.199,
+			"repeat": 1,
+			"stage": "preview_cold"
+		},
+		{
+			"counts": {
+				"buildings.reason": 30,
+				"buildings.rooms": 30,
+				"keeper_jobs.build_reason": 30,
+				"rooms_cells": 203970
+			},
+			"humans": 1,
+			"jobs_or_cells": 10,
+			"ms": 471.34,
+			"repeat": 3,
+			"stage": "preview_unchanged"
+		},
+		{
+			"counts": {
+				"buildings.reason": 20,
+				"buildings.rooms": 20,
+				"keeper_jobs.build_reason": 20,
+				"rooms_cells": 135980
+			},
+			"humans": 1,
+			"jobs_or_cells": 10,
+			"ms": 314.148,
+			"repeat": 1,
+			"stage": "commit"
+		},
+		{
+			"counts": {
+				"main.selection_candidates": 10
+			},
+			"humans": 1,
+			"jobs_or_cells": 10,
+			"ms": 53.836,
+			"repeat": 10,
+			"stage": "selection_candidates_1000_trees"
+		},
+		{
+			"counts": {},
+			"humans": 1,
+			"jobs_or_cells": 10,
+			"ms": 6.016,
+			"repeat": 10,
+			"stage": "hidden_route_data"
+		},
+		{
+			"counts": {
+				"buildings.reason": 10,
+				"buildings.rooms": 10,
+				"human_work.choose": 1,
+				"keeper_jobs.path_to": 10,
+				"path_expanded": 325,
+				"rooms_cells": 67990,
+				"world.find_path": 10
+			},
+			"humans": 1,
+			"jobs_or_cells": 10,
+			"ms": 165.124,
+			"repeat": 1,
+			"stage": "choose"
+		},
+		{
+			"counts": {
+				"keeper_jobs.path_to": 10,
+				"path_expanded": 325,
+				"world.find_path": 10
+			},
+			"humans": 1,
+			"jobs_or_cells": 10,
+			"ms": 6.925,
+			"repeat": 1,
+			"stage": "path_requests"
+		},
+		{
+			"counts": {
+				"buildings.reason": 40,
+				"buildings.rooms": 40,
+				"human_work.choose": 5,
+				"keeper_jobs.path_to": 40,
+				"path_expanded": 1825,
+				"rooms_cells": 271960,
+				"world.find_path": 40
+			},
+			"humans": 5,
+			"jobs_or_cells": 10,
+			"ms": 673.909,
+			"repeat": 1,
+			"stage": "choose"
+		},
+		{
+			"counts": {
+				"keeper_jobs.path_to": 50,
+				"path_expanded": 2125,
+				"world.find_path": 50
+			},
+			"humans": 5,
+			"jobs_or_cells": 10,
+			"ms": 47.057,
+			"repeat": 1,
+			"stage": "path_requests"
+		},
+		{
+			"counts": {
+				"buildings.reason": 55,
+				"buildings.rooms": 55,
+				"human_work.choose": 10,
+				"keeper_jobs.path_to": 55,
+				"path_expanded": 3025,
+				"rooms_cells": 373945,
+				"world.find_path": 55
+			},
+			"humans": 10,
+			"jobs_or_cells": 10,
+			"ms": 942.612,
+			"repeat": 1,
+			"stage": "choose"
+		},
+		{
+			"counts": {
+				"keeper_jobs.path_to": 100,
+				"path_expanded": 5500,
+				"world.find_path": 100
+			},
+			"humans": 10,
+			"jobs_or_cells": 10,
+			"ms": 129.251,
+			"repeat": 1,
+			"stage": "path_requests"
+		},
+		{
+			"counts": {
+				"buildings.reason": 50,
+				"buildings.rooms": 50,
+				"keeper_jobs.build_reason": 50,
+				"rooms_cells": 339950
+			},
+			"humans": 1,
+			"jobs_or_cells": 50,
+			"ms": 783.297,
+			"repeat": 1,
+			"stage": "preview_cold"
+		},
+		{
+			"counts": {
+				"buildings.reason": 150,
+				"buildings.rooms": 150,
+				"keeper_jobs.build_reason": 150,
+				"rooms_cells": 1019850
+			},
+			"humans": 1,
+			"jobs_or_cells": 50,
+			"ms": 2365.226,
+			"repeat": 3,
+			"stage": "preview_unchanged"
+		},
+		{
+			"counts": {
+				"buildings.reason": 100,
+				"buildings.rooms": 100,
+				"keeper_jobs.build_reason": 100,
+				"rooms_cells": 679900
+			},
+			"humans": 1,
+			"jobs_or_cells": 50,
+			"ms": 1575.714,
+			"repeat": 1,
+			"stage": "commit"
+		},
+		{
+			"counts": {
+				"main.selection_candidates": 10
+			},
+			"humans": 1,
+			"jobs_or_cells": 50,
+			"ms": 54.324,
+			"repeat": 10,
+			"stage": "selection_candidates_1000_trees"
+		},
+		{
+			"counts": {},
+			"humans": 1,
+			"jobs_or_cells": 50,
+			"ms": 6.544,
+			"repeat": 10,
+			"stage": "hidden_route_data"
+		},
+		{
+			"counts": {
+				"buildings.reason": 50,
+				"buildings.rooms": 50,
+				"human_work.choose": 1,
+				"keeper_jobs.path_to": 50,
+				"path_expanded": 2275,
+				"rooms_cells": 339950,
+				"world.find_path": 50
+			},
+			"humans": 1,
+			"jobs_or_cells": 50,
+			"ms": 844.467,
+			"repeat": 1,
+			"stage": "choose"
+		},
+		{
+			"counts": {
+				"keeper_jobs.path_to": 50,
+				"path_expanded": 2275,
+				"world.find_path": 50
+			},
+			"humans": 1,
+			"jobs_or_cells": 50,
+			"ms": 51.722,
+			"repeat": 1,
+			"stage": "path_requests"
+		},
+		{
+			"counts": {
+				"buildings.reason": 240,
+				"buildings.rooms": 240,
+				"human_work.choose": 5,
+				"keeper_jobs.path_to": 240,
+				"path_expanded": 14589,
+				"rooms_cells": 1631760,
+				"world.find_path": 240
+			},
+			"humans": 5,
+			"jobs_or_cells": 50,
+			"ms": 4143.222,
+			"repeat": 1,
+			"stage": "choose"
+		},
+		{
+			"counts": {
+				"keeper_jobs.path_to": 250,
+				"path_expanded": 14875,
+				"world.find_path": 250
+			},
+			"humans": 5,
+			"jobs_or_cells": 50,
+			"ms": 349.596,
+			"repeat": 1,
+			"stage": "path_requests"
+		},
+		{
+			"counts": {
+				"buildings.reason": 455,
+				"buildings.rooms": 455,
+				"human_work.choose": 10,
+				"keeper_jobs.path_to": 455,
+				"path_expanded": 36189,
+				"rooms_cells": 3093545,
+				"world.find_path": 455
+			},
+			"humans": 10,
+			"jobs_or_cells": 50,
+			"ms": 8107.689,
+			"repeat": 1,
+			"stage": "choose"
+		},
+		{
+			"counts": {
+				"keeper_jobs.path_to": 500,
+				"path_expanded": 38490,
+				"world.find_path": 500
+			},
+			"humans": 10,
+			"jobs_or_cells": 50,
+			"ms": 965.254,
+			"repeat": 1,
+			"stage": "path_requests"
+		},
+		{
+			"counts": {
+				"buildings.reason": 100,
+				"buildings.rooms": 100,
+				"keeper_jobs.build_reason": 100,
+				"rooms_cells": 679900
+			},
+			"humans": 1,
+			"jobs_or_cells": 100,
+			"ms": 1567.142,
+			"repeat": 1,
+			"stage": "preview_cold"
+		},
+		{
+			"counts": {
+				"buildings.reason": 300,
+				"buildings.rooms": 300,
+				"keeper_jobs.build_reason": 300,
+				"rooms_cells": 2039700
+			},
+			"humans": 1,
+			"jobs_or_cells": 100,
+			"ms": 4700.705,
+			"repeat": 3,
+			"stage": "preview_unchanged"
+		},
+		{
+			"counts": {
+				"buildings.reason": 200,
+				"buildings.rooms": 200,
+				"keeper_jobs.build_reason": 200,
+				"rooms_cells": 1359800
+			},
+			"humans": 1,
+			"jobs_or_cells": 100,
+			"ms": 3154.781,
+			"repeat": 1,
+			"stage": "commit"
+		},
+		{
+			"counts": {
+				"main.selection_candidates": 10
+			},
+			"humans": 1,
+			"jobs_or_cells": 100,
+			"ms": 54.008,
+			"repeat": 10,
+			"stage": "selection_candidates_1000_trees"
+		},
+		{
+			"counts": {},
+			"humans": 1,
+			"jobs_or_cells": 100,
+			"ms": 7.19,
+			"repeat": 10,
+			"stage": "hidden_route_data"
+		},
+		{
+			"counts": {
+				"buildings.reason": 100,
+				"buildings.rooms": 100,
+				"human_work.choose": 1,
+				"keeper_jobs.path_to": 100,
+				"path_expanded": 6175,
+				"rooms_cells": 679900,
+				"world.find_path": 100
+			},
+			"humans": 1,
+			"jobs_or_cells": 100,
+			"ms": 1748.598,
+			"repeat": 1,
+			"stage": "choose"
+		},
+		{
+			"counts": {
+				"keeper_jobs.path_to": 100,
+				"path_expanded": 6175,
+				"world.find_path": 100
+			},
+			"humans": 1,
+			"jobs_or_cells": 100,
+			"ms": 148.876,
+			"repeat": 1,
+			"stage": "path_requests"
+		},
+		{
+			"counts": {
+				"buildings.reason": 490,
+				"buildings.rooms": 490,
+				"human_work.choose": 5,
+				"keeper_jobs.path_to": 490,
+				"path_expanded": 40089,
+				"rooms_cells": 3331510,
+				"world.find_path": 490
+			},
+			"humans": 5,
+			"jobs_or_cells": 100,
+			"ms": 8832.293,
+			"repeat": 1,
+			"stage": "choose"
+		},
+		{
+			"counts": {
+				"keeper_jobs.path_to": 500,
+				"path_expanded": 40375,
+				"world.find_path": 500
+			},
+			"humans": 5,
+			"jobs_or_cells": 100,
+			"ms": 1031.674,
+			"repeat": 1,
+			"stage": "path_requests"
+		},
+		{
+			"counts": {
+				"buildings.reason": 955,
+				"buildings.rooms": 955,
+				"human_work.choose": 10,
+				"keeper_jobs.path_to": 955,
+				"path_expanded": 101989,
+				"rooms_cells": 6493045,
+				"world.find_path": 955
+			},
+			"humans": 10,
+			"jobs_or_cells": 100,
+			"ms": 17932.55,
+			"repeat": 1,
+			"stage": "choose"
+		},
+		{
+			"counts": {
+				"keeper_jobs.path_to": 1000,
+				"path_expanded": 104290,
+				"world.find_path": 1000
+			},
+			"humans": 10,
+			"jobs_or_cells": 100,
+			"ms": 2806.119,
+			"repeat": 1,
+			"stage": "path_requests"
+		}
+	],
+	"seed": 731
+}

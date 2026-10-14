@@ -1,0 +1,13 @@
+{
+  "baseline_commit": "8e3a1e8",
+  "files": {
+    "game/buildings.gd": "1b879049354373e083fa0a25f4b9bccf908cbb3da0326083319e361c5ea3eef3",
+    "game/human_work.gd": "3b1ba002d703653c7bc343cbead28a243eb971525704caab67368f31ff5a0625",
+    "game/job_evaluation.gd": "56127b84c5a727fcc339f9c7228c8624bf9fba92d93f609d6f267502dcbff859",
+    "game/keeper_jobs.gd": "e8dabd083148b9eae5e7671bf6ad40ba3bc5714a733dda49f9f9c18652b8194f",
+    "game/main.gd": "d7d23a37a39a7103649da93411f0bfcaf3cf7d84be8b99ae947f7df91387bfb1",
+    "game/terrain_metrics.gd": "93d291173afbfa4ed82972274fb53cb4125a9660c80ad00bf820a4afd7ea03ea",
+    "game/wall_stroke.gd": "7b5128a2067e266dc531e70d6ae791b2d5914027b941c16039a498a3bc31550f",
+    "game/world.gd": "5c8f74258fe52f7685ba1fdd5700168ef613ffb661ef6d1543b9b7df1fd956c8"
+  }
+}

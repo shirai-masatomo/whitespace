@@ -1,0 +1,27 @@
+{
+	"passed": true,
+	"reference": "Exact candidate producer from 8e3a1e8; encounter loop copied from update_drag_class; world-coordinate rectangles, no OS or GPU",
+	"samples": [
+		{
+			"after_ms": 18.116,
+			"before_ms": 168.504,
+			"candidates": 1000,
+			"motions": 20,
+			"same_encounter_order": true
+		},
+		{
+			"after_ms": 17.92,
+			"before_ms": 170.329,
+			"candidates": 1000,
+			"motions": 20,
+			"same_encounter_order": true
+		},
+		{
+			"after_ms": 31.607,
+			"before_ms": 203.281,
+			"candidates": 1000,
+			"motions": 20,
+			"same_encounter_order": true
+		}
+	]
+}

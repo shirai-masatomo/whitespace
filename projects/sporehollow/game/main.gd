@@ -100,12 +100,15 @@ var press_position = Vector2.ZERO
 const SELECTION_LIMIT = 8
 var drag_class = ""
 var drag_encounters: Array = []
+var drag_ranks: Dictionary = {}
+var selection_static_key: Array=[]
+var selection_static_rows: Array=[]
 var wall_stroke=preload("res://game/wall_stroke.gd").new()
 var context_panel: Panel
 var ui_pointer_capture = false
 var context_signature = ""
 var selected_resources: Array = []
-var route_signature = ""
+var route_signature = null
 var route_legs: Array = []
 var mode_cursor = ""
 var queue_settle: Dictionary = {}
@@ -1034,13 +1037,20 @@ func refresh_jobs():
 		resume.pressed.connect(keeper_action.bind("resume_jobs"))
 		queue_controls.add_child(resume)
 
-func draw_work_plans():
-	if not world.working(): return
-	var signature = str(world.keeper.pos)+str(world.manual_goal)+str(world.jobs.map(func(j):return [j.id,j.pos,j.get("targets",[])]))+str(world.structures)+str(world.animals.map(func(a):return a.pos))+str(world.floors)+str(world.trees)+str(world.mountain_cells)+str(world.story.idol)
+func prepare_work_plan_data(show_route: bool):
+	if not show_route:return
+	if world.manual_goal==null and world.build_deliveries.get("keeper",{}).is_empty() and not world.jobs.any(func(j):return j.get("assigned_to","")=="keeper"):
+		route_legs=[];route_signature=null;return
+	var signature = hash([world.keeper.pos,world.manual_goal,world.jobs,world.structures,world.animals,world.floors,world.trees,world.rocks,world.mountain_cells,world.story.idol,world.build_deliveries,world.field_items])
 	if signature != route_signature:
 		route_signature=signature
 		route_legs=world.Jobs.preview(world)
+
+func draw_work_plans():
+	preload("res://game/terrain_metrics.gd").count("main.draw_work_plans")
+	if not world.working(): return
 	var show_route=selected.get("kind")=="keeper" or queue_drag_id>=0 or hover_job>=0
+	prepare_work_plan_data(show_route)
 	if show_route:
 		var segments={}
 		for leg in route_legs:
@@ -1073,6 +1083,8 @@ func draw_work_plans():
 			var occupied_cells=world.Mountains.footprint(world.mountains[j.mountain_id])
 			if not occupied_cells.is_empty():mark_cell=occupied_cells[0]
 		var q = center(mark_cell)
+		var screen=get_canvas_transform()*q
+		if j.kind!="animal_order" and not get_viewport_rect().grow(64).has_point(screen):continue
 		if j.kind=="move":
 			draw_line(q+Vector2(0,10),q+Vector2(0,-27),Color("e4cd9b"),3)
 			draw_colored_polygon(PackedVector2Array([q+Vector2(1,-27),q+Vector2(23,-20),q+Vector2(1,-13)]),Color("91dabd"))
@@ -1175,7 +1187,7 @@ func _route_input(event):
 		right_release_pending=true
 		if subtasks.dragging:subtasks.cancel();refresh()
 		elif group<0 and (dragging or press_pending):
-			cancel_wall_stroke();dragging=false;press_pending=false;drag_class="";drag_encounters.clear()
+			cancel_wall_stroke();dragging=false;press_pending=false;drag_class="";drag_encounters.clear();drag_ranks.clear()
 		else:neutral()
 		get_viewport().set_input_as_handled();return
 	if event is InputEventMouseButton and event.button_index==MOUSE_BUTTON_LEFT and not event.pressed and press_pending and dragging and wall_stroke.kind=="":
@@ -1349,42 +1361,56 @@ func pointer_over_ui() -> bool:
 		if is_instance_valid(button) and button.is_visible_in_tree() and button.get_global_rect().has_point(pointer): return true
 	return false
 
-func selection_candidates() -> Array:
-	var result = []
+func selection_less(a,b) -> bool:
+	var da=drag_start.distance_squared_to(a.point);var db=drag_start.distance_squared_to(b.point)
+	return da<db if da!=db else str(a["class"])+str(a.id)<str(b["class"])+str(b.id)
+
+func selection_candidates(area: Rect2=Rect2(),scoped: bool=false,new_only: bool=false) -> Array:
+	Metrics.count("main.selection_candidates")
+	var key=[world.get_instance_id(),drag_start,selection_layer,hash(world.natural),hash(world.field_items),hash(world.trees),hash(world.structures),hash(world.floors)]
+	if key!=selection_static_key:
+		selection_static_key=key;selection_static_rows=[];Metrics.count("selection_catalog_rebuilds")
+		var cells={}
+		for cell in world.natural:cells[cell]=true
+		for item in world.field_items:
+			if item.get("location","ground")=="ground":cells[item.pos]=true
+		for cell in cells:selection_static_rows.append({"class":"resource","id":cell,"point":center(cell)})
+		for cell in world.trees:selection_static_rows.append({"class":"tree","id":cell,"point":center(cell)})
+		for cell in world.structures:
+			if world.live_structure(cell) and selection_layer!="floor":selection_static_rows.append({"class":"structure","id":cell,"point":center(cell)})
+		for cell in world.floors:
+			if world.floors[cell].status=="ready" and (selection_layer=="floor" or not world.live_structure(cell)):selection_static_rows.append({"class":"floor","id":cell,"point":center(cell)})
+		selection_static_rows.sort_custom(selection_less)
+	var keep=func(c):return (group<0 or (group==0 and c["class"] in ["structure","floor"]) or (group==1 and c["class"]=="animal") or (group==2 and c["class"]=="resource")) and (not scoped or (area.has_point(c.point) and (drag_class=="" or c["class"]==drag_class) and (not new_only or not drag_ranks.has([c["class"],c.id]))))
+	var moving=[]
 	for a in world.animals:
-		if a.placed: result.append({"class": "animal", "id": a.id, "point": actor_pixel("a%d" % a.id, a.pos)})
-	var cells = world.natural.keys()
-	for item in world.field_items:
-		if item.get("location","ground")!="ground":continue
-		if item.pos not in cells: cells.append(item.pos)
-	for cell in cells: result.append({"class": "resource", "id": cell, "point": center(cell)})
-	for cell in world.trees: result.append({"class":"tree","id":cell,"point":center(cell)})
-	for cell in world.structures:
-		if world.live_structure(cell) and selection_layer!="floor": result.append({"class":"structure","id":cell,"point":center(cell)})
-	for cell in world.floors:
-		if world.floors[cell].status=="ready" and (selection_layer=="floor" or not world.live_structure(cell)): result.append({"class":"floor","id":cell,"point":center(cell)})
-	result = result.filter(func(c): return group<0 or (group==0 and c["class"] in ["structure","floor"]) or (group==1 and c["class"]=="animal") or (group==2 and c["class"]=="resource"))
-	result.sort_custom(func(a,b):
-		var da = drag_start.distance_squared_to(a.point)
-		var db = drag_start.distance_squared_to(b.point)
-		return da < db if da != db else str(a["class"]) + str(a.id) < str(b["class"]) + str(b.id))
+		if a.placed:
+			var row={"class":"animal","id":a.id,"point":actor_pixel("a%d"%a.id,a.pos)}
+			if keep.call(row):moving.append(row)
+	moving.sort_custom(selection_less)
+	var result=[];var i=0
+	for row in selection_static_rows:
+		if not keep.call(row):continue
+		while i<moving.size() and selection_less(moving[i],row):result.append(moving[i]);i+=1
+		result.append(row)
+	while i<moving.size():result.append(moving[i]);i+=1
 	return result
 
 func update_drag_class():
 	var end = get_canvas_transform().affine_inverse() * pointer
 	var area = Rect2(drag_start, end - drag_start).abs().grow(1)
-	for candidate in selection_candidates():
-		if not area.has_point(candidate.point): continue
+	for candidate in selection_candidates(area,true,true):
 		if drag_class == "": drag_class = candidate["class"]
 		if candidate["class"] == drag_class:
 			var key = [candidate["class"], candidate.id]
-			if key not in drag_encounters: drag_encounters.append(key)
+			if not drag_ranks.has(key):
+				drag_ranks[key]=drag_encounters.size();drag_encounters.append(key)
 
 func finish_drag():
 	update_drag_class()
 	var area = Rect2(drag_start, get_canvas_transform().affine_inverse() * pointer - drag_start).abs().grow(1)
-	var targets = selection_candidates().filter(func(c): return c["class"] == drag_class and area.has_point(c.point))
-	targets.sort_custom(func(a,b):return drag_encounters.find([a["class"],a.id]) < drag_encounters.find([b["class"],b.id]))
+	var targets = selection_candidates(area,true)
+	targets.sort_custom(func(a,b):return drag_ranks.get([a["class"],a.id],-1) < drag_ranks.get([b["class"],b.id],-1))
 	targets = targets.slice(0,SELECTION_LIMIT)
 	var neutral_selection=group<0
 	animal_list_open=false;animal_commands_open=false;merchant_context=false
@@ -1424,7 +1450,7 @@ func _unhandled_input(event):
 	press_position = event.position
 	drag_start = get_canvas_transform().affine_inverse() * pointer
 	drag_class = ""
-	drag_encounters.clear()
+	drag_encounters.clear();drag_ranks.clear()
 	if group==0 and tool in Farm.Buildings.WALLS:
 		wall_stroke.begin(tool,pointer_cell())
 		return
@@ -1539,7 +1565,7 @@ func _notification(what):
 		get_tree().quit()
 		return
 	if what == NOTIFICATION_WM_MOUSE_EXIT and press_pending:
-		cancel_wall_stroke();dragging=false;press_pending=false;drag_class="";drag_encounters.clear()
+		cancel_wall_stroke();dragging=false;press_pending=false;drag_class="";drag_encounters.clear();drag_ranks.clear()
 	if what == NOTIFICATION_WM_WINDOW_FOCUS_OUT:
 		cancel_wall_stroke()
 		keys_down.clear()

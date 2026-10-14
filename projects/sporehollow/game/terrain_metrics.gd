@@ -9,3 +9,6 @@ static func finish(label: String,started: int):
 	frame[label+"_count"]=frame.get(label+"_count",0)+1
 static func take() -> Dictionary:
 	var result=frame;frame={};return result
+
+static func count(label: String,amount: int=1):
+	if enabled:frame[label]=frame.get(label,0)+amount

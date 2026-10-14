@@ -476,6 +476,7 @@ func next_step(start: Vector2i, goal: Vector2i, raider: bool = false, avoid_acto
 	return path[1] if path.size()>1 else start
 
 func find_path(start: Vector2i, goal: Vector2i, raider: bool = false, avoid_actors: bool = false, outdoor_only: bool = false, route_costs: Dictionary = {}, allow_exit: bool = false) -> Array:
+	preload("res://game/terrain_metrics.gd").count("world.find_path")
 	if start == goal: return [start]
 	# Reject impossible endpoints before scanning the whole 100x68 map.
 	if Story.terrain_block(self,goal) or (outdoor_only and is_indoor(goal)):return []
@@ -486,6 +487,7 @@ func find_path(start: Vector2i, goal: Vector2i, raider: bool = false, avoid_acto
 	var cost = {start: 0.0}
 	var previous = {start: start}
 	while not frontier.is_empty():
+		preload("res://game/terrain_metrics.gd").count("path_expanded")
 		var best = 0
 		for i in range(1, frontier.size()):
 			if cost[frontier[i]] + distance(frontier[i], goal) < cost[frontier[best]] + distance(frontier[best], goal): best = i
@@ -548,7 +550,7 @@ func start_night():
 	night_started_tick = 0
 	milestones.append({"tick": tick, "kind": "nightfall"})
 
-func act(kind: String, p: Vector2i = Vector2i.ZERO, animal_id: int = -1) -> bool:
+func act(kind: String, p: Vector2i = Vector2i.ZERO, animal_id: int = -1,job_lookup: Dictionary={}) -> bool:
 	var accepted = false
 	if kind=="storage":
 		if working() and inside(p) and walkable(p) and p not in Story.idol_cells(self):
@@ -572,7 +574,7 @@ func act(kind: String, p: Vector2i = Vector2i.ZERO, animal_id: int = -1) -> bool
 		accepted = Jobs.cancel(self, animal_id)
 
 	else:
-		accepted = Jobs.enqueue(self, kind, p, animal_id)
+		accepted = Jobs.enqueue(self, kind, p, animal_id,job_lookup)
 	actions.append({"tick": tick, "kind": kind, "pos": [p.x, p.y], "accepted": accepted, "paused": paused, "animal_id": animal_id})
 	return accepted
 
