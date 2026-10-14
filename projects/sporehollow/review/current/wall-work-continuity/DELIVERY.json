@@ -1,0 +1,18 @@
+{
+  "native_game_launch_performed": false,
+  "normal_data_unchanged": true,
+  "sha256": "12573B7E86B8F7B77A6AB764483601CB1C9BBCD8FCBCF9F430285B4D52C410B4",
+  "asset_delivery_commit": "3229d2655e35e82d178577cdd8acbbe66e9be4f8",
+  "session_only": true,
+  "automatically_launched": false,
+  "dirty": true,
+  "native_lifecycle_checks": 0,
+  "commit": "d5fd35e",
+  "diagnostics_removed": true,
+  "headless_loading_checks": 39,
+  "implementation_commit": "d5fd35e",
+  "utc": "2026-10-14T10:55:24.5567733Z",
+  "related_logic_checks": 296,
+  "exported_headless_smoke_passed": true,
+  "visual_verification": "Not performed; manual user review required"
+}
