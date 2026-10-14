@@ -1,0 +1,19 @@
+{
+  "normal_data_unchanged": true,
+  "asset_delivery_commit": "adb33aa07da2ec57959e0315963f15003ddcd085",
+  "native_lifecycle_checks": 0,
+  "commit": "af4092dc43f545c0d132a57332a61218f13547b3",
+  "automatically_launched": false,
+  "diagnostics_removed": true,
+  "sha256": "7EE88271AB7D233A5C7EACAE71A492484FE42560AE7E16D79A276E5D56FAD0D9",
+  "utc": "2026-10-14T15:46:47.1889991Z",
+  "session_only": true,
+  "implementation_commit": "af4092dc43f545c0d132a57332a61218f13547b3",
+  "native_game_launch_performed": false,
+  "dirty": true,
+  "headless_loading_checks": 39,
+  "exe_bytes_before": 128404184,
+  "exe_bytes_after": 128409384,
+  "related_checks": 413,
+  "build_method": "Headless release export; no native game launch or GPU test"
+}
