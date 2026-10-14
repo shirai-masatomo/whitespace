@@ -1,32 +1,20 @@
 {
-  "format": "farm-generated-verification-v1",
+  "succeeded": true,
+  "purpose": "connected-rocks-export-publication",
   "records": [
     {
-      "text": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\n",
-      "path": "export-smoke.log"
-    },
-    {
-      "text": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\n[   0% ] first_scan_filesystem | Started プロジェクトの初期化 (5 steps)\n[   0% ] first_scan_filesystem | ファイル構造をスキャン中...\n[  16% ] first_scan_filesystem | グローバルクラス名を読み込み中...\n[  33% ] first_scan_filesystem | GDExtensionを検証中...\n[  50% ] first_scan_filesystem | 自動読み込みスクリプトを作成中...\n[  66% ] first_scan_filesystem | プラグインを初期化中...\n[  83% ] first_scan_filesystem | ファイルスキャンを開始...\n[ DONE ] first_scan_filesystem\n\n[   0% ] savepack | Started パック中 (102 steps)\n[ DONE ] savepack\n",
+      "text": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\r\n\r\n\u001b[92m[ DONE ]\u001b[39m \u001b[1mfirst_scan_filesystem\u001b[22m\r\n\u001b[0m\r\n\u001b[92m[ DONE ]\u001b[39m \u001b[1msavepack\u001b[22m\r\n\u001b[0m\r\n\r\n",
       "path": "export.log"
     },
     {
-      "text": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n[ DONE ] first_scan_filesystem\n[ DONE ] loading_editor_layout",
+      "text": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org",
       "path": "import.log"
-    },
-    {
-      "text": "{\r\n  \"method\": \"CRLF and cmd.exe present/missing mock files; no game launch\",\r\n  \"checks\": 3,\r\n  \"passed\": true\r\n}\r\n",
-      "path": "launcher.json"
     },
     {
       "text": "{\n\t\"checks\": [\n\t\t{\n\t\t\t\"check\": \"Normal project explicitly limits frame rate to 60 fps\",\n\t\t\t\"passed\": true\n\t\t},\n\t\t{\n\t\t\t\"check\": \"Loading leaves world tick frozen and simulation disabled\",\n\t\t\t\"passed\": true\n\t\t},\n\t\t{\n\t\t\t\"check\": \"Loading rejects world keyboard input\",\n\t\t\t\"passed\": true\n\t\t},\n\t\t{\n\t\t\t\"check\": \"Loading leaves world tick frozen and simulation disabled\",\n\t\t\t\"passed\": true\n\t\t},\n\t\t{\n\t\t\t\"check\": \"Loading rejects world keyboard input\",\n\t\t\t\"passed\": true\n\t\t},\n\t\t{\n\t\t\t\"check\": \"Loading leaves world tick frozen and simulation disabled\",\n\t\t\t\"passed\": true\n\t\t},\n\t\t{\n\t\t\t\"check\": \"Loading rejects world keyboard input\",\n\t\t\t\"passed\": true\n\t\t},\n\t\t{\n\t\t\t\"check\": \"Loading leaves world tick frozen and simulation disabled\",\n\t\t\t\"passed\": true\n\t\t},\n\t\t{\n\t\t\t\"check\": \"Loading rejects world keyboard input\",\n\t\t\t\"passed\": true\n\t\t},\n\t\t{\n\t\t\t\"check\": \"Loading leaves world tick frozen and simulation disabled\",\n\t\t\t\"passed\": true\n\t\t},\n\t\t{\n\t\t\t\"check\": \"Loading rejects world keyboard input\",\n\t\t\t\"passed\": true\n\t\t},\n\t\t{\n\t\t\t\"check\": \"Loading leaves world tick frozen and simulation disabled\",\n\t\t\t\"passed\": true\n\t\t},\n\t\t{\n\t\t\t\"check\": \"Loading rejects world keyboard input\",\n\t\t\t\"passed\": true\n\t\t},\n\t\t{\n\t\t\t\"check\": \"Loading leaves world tick frozen and simulation disabled\",\n\t\t\t\"passed\": true\n\t\t},\n\t\t{\n\t\t\t\"check\": \"Loading rejects world keyboard input\",\n\t\t\t\"passed\": true\n\t\t},\n\t\t{\n\t\t\t\"check\": \"Preparation completes only after frozen initial draw\",\n\t\t\t\"passed\": true\n\t\t},\n\t\t{\n\t\t\t\"check\": \"New map is complete and controls enabled\",\n\t\t\t\"passed\": true\n\t\t},\n\t\t{\n\t\t\t\"check\": \"First-day merchant remains disabled\",\n\t\t\t\"passed\": true\n\t\t},\n\t\t{\n\t\t\t\"check\": \"Save fixture in isolated user-data\",\n\t\t\t\"passed\": true\n\t\t},\n\t\t{\n\t\t\t\"check\": \"Loading leaves world tick frozen and simulation disabled\",\n\t\t\t\"passed\": true\n\t\t},\n\t\t{\n\t\t\t\"check\": \"Loading rejects world keyboard input\",\n\t\t\t\"passed\": true\n\t\t},\n\t\t{\n\t\t\t\"check\": \"Loading leaves world tick frozen and simulation disabled\",\n\t\t\t\"passed\": true\n\t\t},\n\t\t{\n\t\t\t\"check\": \"Loading rejects world keyboard input\",\n\t\t\t\"passed\": true\n\t\t},\n\t\t{\n\t\t\t\"check\": \"Loading leaves world tick frozen and simulation disabled\",\n\t\t\t\"passed\": true\n\t\t},\n\t\t{\n\t\t\t\"check\": \"Loading rejects world keyboard input\",\n\t\t\t\"passed\": true\n\t\t},\n\t\t{\n\t\t\t\"check\": \"Loading leaves world tick frozen and simulation disabled\",\n\t\t\t\"passed\": true\n\t\t},\n\t\t{\n\t\t\t\"check\": \"Loading rejects world keyboard input\",\n\t\t\t\"passed\": true\n\t\t},\n\t\t{\n\t\t\t\"check\": \"Loading leaves world tick frozen and simulation disabled\",\n\t\t\t\"passed\": true\n\t\t},\n\t\t{\n\t\t\t\"check\": \"Loading rejects world keyboard input\",\n\t\t\t\"passed\": true\n\t\t},\n\t\t{\n\t\t\t\"check\": \"Loading leaves world tick frozen and simulation disabled\",\n\t\t\t\"passed\": true\n\t\t},\n\t\t{\n\t\t\t\"check\": \"Loading rejects world keyboard input\",\n\t\t\t\"passed\": true\n\t\t},\n\t\t{\n\t\t\t\"check\": \"Loading leaves world tick frozen and simulation disabled\",\n\t\t\t\"passed\": true\n\t\t},\n\t\t{\n\t\t\t\"check\": \"Loading rejects world keyboard input\",\n\t\t\t\"passed\": true\n\t\t},\n\t\t{\n\t\t\t\"check\": \"Preparation completes only after frozen initial draw\",\n\t\t\t\"passed\": true\n\t\t},\n\t\t{\n\t\t\t\"check\": \"Normal startup ignores existing snapshot and creates a new map\",\n\t\t\t\"passed\": true\n\t\t},\n\t\t{\n\t\t\t\"check\": \"Menu exposes no save/load or save-on-exit\",\n\t\t\t\"passed\": true\n\t\t},\n\t\t{\n\t\t\t\"check\": \"New game creates no save history\",\n\t\t\t\"passed\": true\n\t\t},\n\t\t{\n\t\t\t\"check\": \"Loading does not overwrite the existing save\",\n\t\t\t\"passed\": true\n\t\t},\n\t\t{\n\t\t\t\"check\": \"Simulation can advance after preparation\",\n\t\t\t\"passed\": true\n\t\t}\n\t],\n\t\"failures\": 0\n}",
       "path": "loading.json"
-    },
-    {
-      "text": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nLoading: 39 checks, 0 failures\n",
-      "path": "loading.log"
     }
   ],
-  "purpose": "construction-site-state-and-cost",
-  "utc": "2026-10-14T11:42:46.0906061Z",
-  "succeeded": true
+  "utc": "2026-10-14T12:01:16.7434409Z",
+  "format": "farm-generated-verification-v1"
 }
