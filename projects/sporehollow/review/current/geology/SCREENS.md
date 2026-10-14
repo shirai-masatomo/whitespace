@@ -10,3 +10,13 @@
 - [同じ位置・1セル除去後](cpu-detail-after.png)
 
 前後画像は同一seed・同一切り出し。除去後画像は表示用fixture。実際のWorld.stepによる採掘・通行・資源生成は rock-connections.json と geology-art.json で別に検証する。画像担当の合成見本は完成ゲームの証拠として流用していない。
+
+## 外縁v6→v7：同一seed比較
+
+いずれも上記と同じCPU合成。下地の色面は簡易表示であり、通常の地面shaderの完成証拠ではない。
+
+| seed | 変更前v6 | 変更後v7 |
+|---|---|---|
+|31|[前](rim-31-v6.png)|[後](rim-31-v7.png)|
+|97|[前](rim-97-v6.png)|[後](rim-97-v7.png)|
+|2026|[前](rim-2026-v6.png)|[後](rim-2026-v7.png)|

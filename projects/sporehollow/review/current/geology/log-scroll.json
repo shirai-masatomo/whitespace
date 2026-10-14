@@ -1,0 +1,65 @@
+{
+	"checks": [
+		{
+			"check": "Empty log has a visible full thumb and 18px track",
+			"passed": true
+		},
+		{
+			"check": "Short history retains visible scrollbar",
+			"passed": true
+		},
+		{
+			"check": "New arrivals follow the bottom",
+			"passed": true
+		},
+		{
+			"check": "Wheel moves through history and consumes event",
+			"passed": true
+		},
+		{
+			"check": "Append does not change the row being read",
+			"passed": true
+		},
+		{
+			"check": "Bounded history eviction keeps the same surviving row",
+			"passed": true
+		},
+		{
+			"check": "Evicted anchor clamps to oldest retained entry, not bottom",
+			"passed": true
+		},
+		{
+			"check": "Thumb drag to bottom resumes following",
+			"passed": true
+		},
+		{
+			"check": "Release outside panel ends dragging",
+			"passed": true
+		},
+		{
+			"check": "Follow resumes for subsequent arrivals",
+			"passed": true
+		},
+		{
+			"check": "Outside wheel is left to the existing map/UI handler",
+			"passed": true
+		},
+		{
+			"check": "World drag release over log is not stolen",
+			"passed": true
+		},
+		{
+			"check": "Clicks in log do not leak into world selection",
+			"passed": true
+		},
+		{
+			"check": "Log-owned click release remains consumed outside panel",
+			"passed": true
+		},
+		{
+			"check": "History clear resets follow state",
+			"passed": true
+		}
+	],
+	"failures": 0
+}

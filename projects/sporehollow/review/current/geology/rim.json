@@ -1,0 +1,170 @@
+{
+	"checks": [
+		{
+			"check": "Mainland continuity 31",
+			"passed": true
+		},
+		{
+			"check": "All open land reachable 31",
+			"passed": true
+		},
+		{
+			"check": "Biome area retained 31",
+			"passed": true
+		},
+		{
+			"check": "No extra one-cell passages between rock faces 31",
+			"passed": true
+		},
+		{
+			"check": "Initial centre clear 31",
+			"passed": true
+		},
+		{
+			"check": "Longest straight edge shortened 31",
+			"passed": true
+		},
+		{
+			"check": "Long-edge exposure reduced 31",
+			"passed": true
+		},
+		{
+			"check": "Mineable area within ten percent 31",
+			"passed": true
+		},
+		{
+			"check": "Mainland continuity 97",
+			"passed": true
+		},
+		{
+			"check": "All open land reachable 97",
+			"passed": true
+		},
+		{
+			"check": "Biome area retained 97",
+			"passed": true
+		},
+		{
+			"check": "No extra one-cell passages between rock faces 97",
+			"passed": true
+		},
+		{
+			"check": "Initial centre clear 97",
+			"passed": true
+		},
+		{
+			"check": "Longest straight edge shortened 97",
+			"passed": true
+		},
+		{
+			"check": "Long-edge exposure reduced 97",
+			"passed": true
+		},
+		{
+			"check": "Mineable area within ten percent 97",
+			"passed": true
+		},
+		{
+			"check": "Mainland continuity 2026",
+			"passed": true
+		},
+		{
+			"check": "All open land reachable 2026",
+			"passed": true
+		},
+		{
+			"check": "Biome area retained 2026",
+			"passed": true
+		},
+		{
+			"check": "No extra one-cell passages between rock faces 2026",
+			"passed": true
+		},
+		{
+			"check": "Initial centre clear 2026",
+			"passed": true
+		},
+		{
+			"check": "Longest straight edge shortened 2026",
+			"passed": true
+		},
+		{
+			"check": "Long-edge exposure reduced 2026",
+			"passed": true
+		},
+		{
+			"check": "Mineable area within ten percent 2026",
+			"passed": true
+		}
+	],
+	"failures": 0,
+	"images": "CPU production RockView; simplified ground; not game screenshots",
+	"samples": [
+		{
+			"largest": 1443,
+			"long_edge_cells": 76,
+			"longest": 38,
+			"region": 0.29,
+			"rocks": 1443,
+			"seed": 31,
+			"slots": 0,
+			"version": 6,
+			"world_ms": 1718
+		},
+		{
+			"largest": 1394,
+			"long_edge_cells": 0,
+			"longest": 9,
+			"region": 0.311617647058824,
+			"rocks": 1394,
+			"seed": 31,
+			"slots": 0,
+			"version": 7,
+			"world_ms": 1654
+		},
+		{
+			"largest": 1499,
+			"long_edge_cells": 79,
+			"longest": 44,
+			"region": 0.29,
+			"rocks": 1499,
+			"seed": 97,
+			"slots": 0,
+			"version": 6,
+			"world_ms": 1676
+		},
+		{
+			"largest": 1417,
+			"long_edge_cells": 0,
+			"longest": 9,
+			"region": 0.305588235294118,
+			"rocks": 1458,
+			"seed": 97,
+			"slots": 0,
+			"version": 7,
+			"world_ms": 1995
+		},
+		{
+			"largest": 1535,
+			"long_edge_cells": 81,
+			"longest": 27,
+			"region": 0.29,
+			"rocks": 1535,
+			"seed": 2026,
+			"slots": 1,
+			"version": 6,
+			"world_ms": 1678
+		},
+		{
+			"largest": 1412,
+			"long_edge_cells": 0,
+			"longest": 9,
+			"region": 0.298676470588235,
+			"rocks": 1434,
+			"seed": 2026,
+			"slots": 0,
+			"version": 7,
+			"world_ms": 1656
+		}
+	]
+}

@@ -1,0 +1,23 @@
+{
+	"checks": [
+		{
+			"check": "Empty log: 1000 draws retain no additional objects",
+			"object_delta_after_warmup": 0.0,
+			"passed": true
+		},
+		{
+			"check": "Populated log: paragraphs and styles are reused for 1000 draws",
+			"object_delta_after_warmup": 0.0,
+			"passed": true
+		},
+		{
+			"check": "Updated text invalidates cached paragraphs",
+			"passed": true
+		},
+		{
+			"check": "Cleared history removes old paragraphs",
+			"passed": true
+		}
+	],
+	"failures": 0
+}

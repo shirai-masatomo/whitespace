@@ -1,6 +1,6 @@
 extends RefCounted
 ## Versioned scenery and placement only. Never used by movement or building rules.
-const VERSION=6
+const VERSION=7
 const Geology=preload("res://game/geology.gd")
 # Normalized regional scale, transition width and obstacle density; saved in new terrain.
 const SETTINGS={"region_scale":1.0,"region_thresholds":{"rocky":0.43,"woodland":0.40,"dry":0.42,"lush":0.48},"boundary_width":1.0,"tree_density":1.0,"rock_clusters_per_1700":1,"mountain_groups_per_1700":0.5}
@@ -70,7 +70,7 @@ static func generate(seed_number: int,width: int,height: int,version: int=VERSIO
 	var scale=Vector2(50.0/width,34.0/height)/SETTINGS.region_scale
 	for y in range(height):
 		for x in range(width):fields.append(sample(seed_number,Vector2(x+0.5,y+0.5)*scale,blobs))
-	var geology=Geology.shape(seed_number,width,height,fields,noise,clearing) if version>=6 else {}
+	var geology=Geology.shape(seed_number,width,height,fields,noise,clearing,version>=7) if version>=6 else {}
 	for y in range(height+1):
 		for x in range(width+1):
 			# Average neighboring samples: shared vertices, no per-cell patch seams.
@@ -183,6 +183,10 @@ static func populate(w):
 	w.Tasks.save(w);w.Story.persist(w);persist(w)
 
 static func protected(w,p: Vector2i) -> bool:
+	if w.terrain.get("version",1)>=7:
+		var delta=(p-w.MERCHANT_CELL).abs()
+		# Rounded entry clearing keeps its tip wider than one walkable cell.
+		if maxi(delta.x,delta.y)<=5 and delta.x+delta.y<=8:return true
 	return (w.terrain.has("geology") and Geology.route(w.seed_value,p,w.W,w.H)) or p.x<=0 or p.y<=0 or p.x>=w.W-1 or p.y>=w.H-1 or clearing(normalized(w,Vector2(p)),w.seed_value)<0.8 or w.distance(p,w.MERCHANT_CELL)<=4 or w.entries.any(func(e):return w.distance(p,e)<=1) or w.distance(p,w.keeper.pos)<=2 or w.animals.any(func(a):return a.get("placed",false) and w.distance(p,a.pos)<=2)
 
 static func rock_site(w,p: Vector2i) -> bool:

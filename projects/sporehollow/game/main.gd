@@ -91,6 +91,7 @@ var menu: Control
 var shop_side = "home"
 var shop_category = "animals"
 var shop_notice = ""
+var event_log=preload("res://game/event_log_view.gd").new()
 var event_scroll=0
 var event_log_rect=Rect2()
 var shop_level = "categories"
@@ -1174,6 +1175,7 @@ func _input(event):
 	update_pointer_cursor()
 
 func _route_input(event):
+	if menu_open or field_book or field_shop or story_modal!="" or (event is InputEventMouseButton and event.button_index==MOUSE_BUTTON_RIGHT and event.pressed):event_log.dragging=false;event_log.captured=false
 	if (event is InputEventKey and event.pressed) or (event is InputEventMouseButton and event.pressed) or (event is InputEventMouseMotion and event.relative.length_squared()>0):
 		world.Life.user_activity(world)
 	if event is InputEventKey and not event.pressed and event.physical_keycode==KEY_SHIFT:shift_latched=false
@@ -1198,6 +1200,8 @@ func _route_input(event):
 		pointer=event.position.clamp(Vector2.ZERO,get_viewport_rect().size)
 		finish_drag();dragging=false;ui_pointer_capture=false
 		get_viewport().set_input_as_handled();return
+	if world.working() and not field_book and not field_shop and not menu_open and not cinematic() and event_log.input(event,world.player_events):
+		get_viewport().set_input_as_handled();return
 	if zone_controls.input(self,event):get_viewport().set_input_as_handled();return
 	if item_commands.input(self,event):get_viewport().set_input_as_handled();return
 	if subtasks.input(self,event):
@@ -1208,9 +1212,7 @@ func _route_input(event):
 		return
 	if is_instance_valid(name_edit) and name_edit.has_focus(): return
 	if MarketView.scroll_ui(self,event):get_viewport().set_input_as_handled();return
-	if world.working() and not field_book and not field_shop and not menu_open and event is InputEventMouseButton and event.button_index in [MOUSE_BUTTON_WHEEL_UP,MOUSE_BUTTON_WHEEL_DOWN] and not world.player_events.is_empty() and event_log_rect.has_point(pointer):
-		if event.pressed:event_scroll=clampi(event_scroll+(1 if event.button_index==MOUSE_BUTTON_WHEEL_UP else -1),0,maxi(0,world.player_events.size()-6))
-		get_viewport().set_input_as_handled();return
+
 	if (world.phase == "shop" or field_book or field_shop) and event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT:
 		if event.pressed:
 			if morning_screen == "book": close_morning_screen()
@@ -1359,6 +1361,7 @@ func selected_construction() -> Dictionary:
 	return construction_view.rows.get(selected.get("id",-1),{}) if selected.get("kind")=="job" else {}
 
 func pointer_over_ui() -> bool:
+	if world.working() and not field_book and not field_shop and event_log_rect.has_point(pointer):return true
 	var construction=selected_construction()
 	if not construction.is_empty() and ConstructionView.panel_rect(construction.lines).has_point(pointer):return true
 	if is_instance_valid(colony_panel) and colony_panel.is_visible_in_tree() and colony_panel.get_global_rect().has_point(pointer):return true
@@ -1575,7 +1578,9 @@ func _notification(what):
 		return
 	if what == NOTIFICATION_WM_MOUSE_EXIT and press_pending:
 		cancel_wall_stroke();dragging=false;press_pending=false;drag_class="";drag_encounters.clear();drag_ranks.clear()
+	if what == NOTIFICATION_WM_MOUSE_EXIT:event_log.dragging=false;event_log.captured=false
 	if what == NOTIFICATION_WM_WINDOW_FOCUS_OUT:
+		event_log.dragging=false;event_log.captured=false
 		cancel_wall_stroke()
 		keys_down.clear()
 		shift_latched = false
@@ -2148,22 +2153,7 @@ func draw_hud():
 			var hp_pos=get_canvas_transform()*(actor_pixel("e%d"%e.id,e.pos)+Vector2(0,-66))-Vector2(22,0)
 			hud.draw_rect(Rect2(hp_pos-Vector2.ONE,Vector2(46,8)),Color("202a23"))
 			hud.draw_rect(Rect2(hp_pos,Vector2(44.0*e.hp/e.max_hp,6)),Color("e3aa88"))
-	if world.working() and not world.player_events.is_empty():
-		var paragraphs=[];var height=16.0
-		var log_width=268 if selected.get("kind","") in ["keeper","rock"] else 332
-		var log_left=1264-log_width
-		event_scroll=clampi(event_scroll,0,maxi(0,world.player_events.size()-6))
-		for row in world.player_events.slice(maxi(0,world.player_events.size()-6-event_scroll),world.player_events.size()-event_scroll):
-			var paragraph=TextParagraph.new();paragraph.add_string(row.text,FONT,13);paragraph.width=log_width-24
-			paragraph.break_flags=TextServer.BREAK_MANDATORY|TextServer.BREAK_WORD_BOUND|TextServer.BREAK_ADAPTIVE
-			paragraphs.append(paragraph);height+=paragraph.get_size().y+6
-		var y=723-height
-		event_log_rect=Rect2(log_left,y,log_width,height)
-		label_on(hud,Vector2(log_left+8,y-5),"ログ · ホイールで履歴"+(" · 過去" if event_scroll>0 else ""),11,UI.PAPER)
-		hud.draw_style_box(MarketView.panel(Color(0.12,0.19,0.15,0.72)),event_log_rect)
-		y+=8
-		for paragraph in paragraphs:
-			paragraph.draw(hud.get_canvas_item(),Vector2(log_left+12,y),UI.PAPER);y+=paragraph.get_size().y+6
+	if world.working():event_log.draw(self)
 	if world.phase == "dawn":
 		hud.draw_style_box(UI.surface(UI.PAPER), Rect2(330, 72, 620, 106))
 		label_on(hud, Vector2(365, 118), "夜明け", 30, Color("485e48"))

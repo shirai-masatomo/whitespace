@@ -1,3 +1,9 @@
+# 岩盤外縁・ログスクロール：現在の確認入口
+
+[変更・検証・未確認事項](geology/RIM_LOG.md) / [比較画像](geology/SCREENS.md) / [EXE反映](geology/RIM_LOG_DELIVERY.json)。通常ゲーム画面・GPU試験は自動起動していない。以下は過去記録。
+
+---
+
 # 大規模岩盤・地層：現在の確認入口
 
 [今回の変更・テスト・未確認範囲](geology/REPORT.md) / [画像一覧](geology/SCREENS.md) / [EXE反映記録](geology/DELIVERY.json)。通常デスクトップ起動・GPU負荷試験なし。以下は過去の配布記録。
