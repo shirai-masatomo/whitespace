@@ -40,6 +40,7 @@ const TaskControls=preload("res://game/colony_task_controls.gd")
 const LivestockControls=preload("res://game/livestock_controls.gd")
 var right_release_pending=false
 var item_commands=preload("res://game/item_commands.gd").new()
+var crafting_panel=preload("res://game/crafting_panel.gd").new()
 var zone_controls=preload("res://game/zone_controls.gd").new()
 var colony_page=""
 var architect_category="すべて"
@@ -53,10 +54,10 @@ const HumanVisual=preload("res://game/human_visual.gd")
 const AnimalCorpse=preload("res://game/animal_corpse.gd")
 var six_art={}
 var six_revived={}
-const TOOLS = {"kennel":"犬小屋 木20","coop":"鶏小屋 木30","milk":"搾乳", "charge":"突撃", "place_kokeshi":"こけしを置く", "place_fossil":"化石を置く","wall": "土壁 土5", "wood_wall":"木壁 木5", "stone_wall":"石壁 石5", "soil_tile":"土床 土2", "wood_tile":"木床 木2", "stone_tile":"石床 石2", "door":"ドア 木10", "locked_door":"施錠 木20", "guide":"連れてく", "equip":"装備", "repair": "修理", "gate": "ドア開閉", "remove": "解体",
+const TOOLS = {"place_wood_crate":"木箱を置く","place_wood_shelf":"木製棚を置く","cooking_bench":"調理台 木12","carpentry_bench":"木工台 木14","sewing_bench":"裁縫台 木10","kennel":"犬小屋 木20","coop":"鶏小屋 木30","milk":"搾乳", "charge":"突撃", "place_kokeshi":"こけしを置く", "place_fossil":"化石を置く","wall": "土壁 土5", "wood_wall":"木壁 木5", "stone_wall":"石壁 石5", "soil_tile":"土床 土2", "wood_tile":"木床 木2", "stone_tile":"石床 石2", "door":"ドア 木10", "locked_door":"施錠 木20", "guide":"連れてく", "equip":"装備", "repair": "修理", "gate": "ドア開閉", "remove": "解体",
 	"attack_target":"狙え", "auto": "おまかせ", "stay": "待て", "wander": "警戒", "rest": "無理するな", "collect": "資源・卵・設計図", "dog_food": "犬用餌 HP+10", "hen_food": "鶏用餌 HP+8", "cat_food": "猫用餌 HP+8"}
 const ORDER_HELP={"auto":"状況に合わせて行動します。戦闘・救護・その動物の仕事を任せます。","guide":"行き先をクリックして一緒に歩きます。\n物や動物は、押した時点の近くの空き場所へ。\n1匹なら隣接し、遅い方に合わせます。\n複数は近くにまとまり、到着でおまかせへ。\n右クリックで行き先指定を解除します。","stay":"その場所で待ちます。近くの敵には応戦しますが、追いかけません。","wander":"周囲を巡回し、敵を見つけたら攻撃します。","rest":"安全と回復を優先します。危険から離れ、無理に追わず近くの敵に応戦します。","attack_target":"敵を選べ。狙える距離や見通しが必要です。","equip":"持ち物から装備を選び、主人公が届けます。","milk":"乳牛に近づいて搾乳します。1日1回です。","charge":"突撃する行き先を選びます。"}
-const GROUP_TOOLS = [["wall", "wood_wall", "stone_wall", "soil_tile", "wood_tile", "stone_tile", "door", "locked_door", "kennel", "coop", "place_kokeshi", "place_fossil"], ["auto", "guide", "stay", "wander", "rest", "attack_target", "equip", "milk", "charge"], ["collect"]]
+const GROUP_TOOLS = [["place_wood_crate","place_wood_shelf","cooking_bench","carpentry_bench","sewing_bench","wall", "wood_wall", "stone_wall", "soil_tile", "wood_tile", "stone_tile", "door", "locked_door", "kennel", "coop", "place_kokeshi", "place_fossil"], ["auto", "guide", "stay", "wander", "rest", "attack_target", "equip", "milk", "charge"], ["collect"]]
 const RockView=preload("res://game/rock_view.gd")
 const MountainView=preload("res://game/mountain_view.gd")
 const HarvestView=preload("res://game/harvest_view.gd")
@@ -573,6 +574,7 @@ func refresh_measured():
 	TaskControls.build(self)
 	item_commands.build(self)
 	zone_controls.build(self)
+	crafting_panel.build(self)
 	colony_signature=ColonyPanels.signature(self)
 	if not field_book and not field_shop: build_context_actions()
 	if debug_view and not field_book and not field_shop: build_debug_controls()
@@ -685,6 +687,8 @@ func build_context_actions():
 		if selected_resources.any(func(p):return job_reserved("collect",p)):
 			rows.append(["cancel_near","取消","cross",cancel_selected_work,false,"選んだ回収予定を取り消す"])
 	else:
+		if selected_structures.size()==1 and world.Craft.Data.BENCHES.has(selected_store()[selected_structures[0]].kind) and selected_store()[selected_structures[0]].status=="ready":
+			rows.append(["craft_open","製作","hammer",crafting_panel.show.bind(self,selected_structures[0]),false,"この設備で製作する物と数量を指定"] )
 		var damaged = selected_structures.filter(func(p): return selected_store().get(p,{}).get("status")=="ready" and selected_store()[p].status == "ready" and (selected_store()[p].hp < selected_store()[p].max_hp or selected_store()[p].get("lock_hp",0)<selected_store()[p].get("max_lock_hp",0)))
 		if not damaged.is_empty():
 			var can_repair = damaged.any(func(p): return not job_reserved("repair_floor" if selection_layer=="floor" else "repair", p) and world.repair_quote(p,selection_layer).hp > 0)
@@ -1368,7 +1372,7 @@ func pointer_over_ui() -> bool:
 	if is_instance_valid(context_panel) and context_panel.is_visible_in_tree() and context_panel.get_global_rect().has_point(pointer): return true
 	if pointer.y < 49 or pointer.y > 748: return true
 	if SHOW_JOB_QUEUE and world.working() and Rect2(1010,60,248,maxf(34,queue_bottom-60+40)).has_point(pointer): return true
-	if not selected.is_empty() and (keeper_card_rect() if selected.get("kind") in ["keeper","worker"] else Rect2(8,568,448,86) if selected.get("kind")=="animal" else Rect2(16,595,422,91)).has_point(pointer): return true
+	if not selected.is_empty() and (keeper_card_rect() if selected.get("kind") in ["keeper","worker"] else Rect2(8,548,448,106) if selected.get("kind")=="animal" else Rect2(16,595,422,91)).has_point(pointer): return true
 	for button in buttons.values():
 		if is_instance_valid(button) and button.is_visible_in_tree() and button.get_global_rect().has_point(pointer): return true
 	return false
@@ -1599,6 +1603,7 @@ func clamp_camera():
 	camera.force_update_scroll()
 
 func _process(delta):
+	crafting_panel.step(self,delta)
 	var started=Metrics.start()
 	_process_measured(delta)
 	Metrics.finish("main",started)
@@ -1895,6 +1900,13 @@ func draw_structure(p: Vector2, b: Dictionary, preview: bool = false):
 		draw_rect(Rect2(p - Vector2(18, 13), Vector2(36, 28)), Color("e5c982"), false, 2)
 		draw_line(p - Vector2(14, 10), p + Vector2(14, 10), Color("e5c982"), 2)
 		return
+	if world.Craft.Data.BENCHES.has(b.kind):
+		# Temporary bench silhouette with existing material and tool icons.
+		draw_rect(Rect2(p+Vector2(-18,-4),Vector2(36,22)),UI.WOOD)
+		for x in [-15,11]:draw_rect(Rect2(p+Vector2(x,12),Vector2(4,9)),UI.WOOD)
+		draw_rect(Rect2(p+Vector2(-20,-10),Vector2(40,10)),Color("bc955c"))
+		draw_card_icon(self,{"cooking_bench":"mushroom","carpentry_bench":"wood","sewing_bench":"fiber"}[b.kind],p+Vector2(0,-12),0.35)
+		return
 	if b.kind not in Farm.Buildings.WALLS: draw_colored_polygon(PackedVector2Array([p + Vector2(-20, 10), p + Vector2(20, 10), p + Vector2(28, 24), p + Vector2(-12, 24)]), Color(0.12, 0.22, 0.13, 0.25))
 	if b.kind in Farm.Buildings.WALLS:
 		BuildingArt.wall(self,p,b,preview)
@@ -1945,7 +1957,7 @@ func _draw_measured():
 		elif item.kind in ["soil","wood","stone","mushroom"]:
 			if item.compact:draw_set_transform(q,0,Vector2.ONE*0.67);BoardArt.draw_resource(self,Vector2.ZERO,item.kind);draw_set_transform(Vector2.ZERO)
 			else:BoardArt.draw_resource(self,q,item.kind)
-		else:draw_line(q+Vector2(-5,6),q+Vector2(6,-8),Color("eee8cf"),3)
+		else:draw_card_icon(self,item.kind,q,0.4)
 		if item.amount>1:label_on(self,q+Vector2(-8,9 if item.compact else 18),str(item.amount),10 if item.compact else 12,UI.PAPER)
 		if item.forbidden>0:draw_line(q-Vector2(6,6),q+Vector2(6,6),UI.DANGER,2)
 	for cell in shown:
@@ -2645,6 +2657,7 @@ func restart_morning():
 	refresh()
 
 func draw_card_icon(c: CanvasItem, kind: String, p: Vector2, scale_value: float):
+	kind=preload("res://game/item_catalog.gd").item(kind).icon if preload("res://game/item_catalog.gd").ROWS.has(kind) else kind
 	if Assets.texture(kind)!=null: Assets.portrait(c,kind,Rect2(p-Vector2(24,28)*scale_value,Vector2(48,56)*scale_value)); return
 	if kind in ["doberman","bullfrog","hedgehog","collar","berry"]:
 		if kind in Farm.SPECIES: ProgressView.placeholder(self,c,kind,p,scale_value); return
@@ -2804,11 +2817,12 @@ func selected_egg_lines() -> Array:
 func draw_companion_card():
 	for a in world.animals:
 		if a.id!=selected.id:continue
-		hud.draw_style_box(companion_box(),Rect2(8,568,448,86))
+		hud.draw_style_box(companion_box(),Rect2(8,548,448,106))
 		draw_card_icon(hud,a.species,Vector2(42,620),0.65)
 		label_on(hud,Vector2(78,593),Farm.animal_name(a)+(" · "+Farm.SPECIES[a.species].title if a.get("name","")!="" else "")+"  Lv%d"%a.lv,17,UI.PAPER)
+		label_on(hud,Vector2(18,568),world.Needs.describe(world,a),12,UI.PAPER)
 		var detail=Clarity.dog(world,a) if a.species=="shiba" else ["休息中" if a.mode=="rest" else ("待機中" if a.mode=="stay" else "おまかせ")]
-		label_on(hud,Vector2(78,620),detail[0] if not detail.is_empty() else "待機",13,UI.PAPER)
+		label_on(hud,Vector2(78,620),"満腹%d · スタミナ%d/%d"%[a.get("satiety",100),a.stamina,a.get("max_stamina",100)],13,UI.PAPER)
 		hud.draw_rect(Rect2(78,634,160,7),Color("293d35"))
 		hud.draw_rect(Rect2(78,634,160*clampf(float(a.hp)/maxi(1,a.max_hp),0,1),7),Color("90c19b"))
 		label_on(hud,Vector2(246,643),"HP %d / %d   選択 %d匹"%[a.hp,a.max_hp,selected_animals.size()],13,UI.PAPER)
@@ -2839,6 +2853,7 @@ func draw_keeper_card(k: Dictionary):
 	if k.has("meal_remaining"):status="食事中 · 食後に仕事へ戻ります"
 	elif k.get("life_need","")=="food":status="備蓄の食料へ移動中"
 	label_on(hud,Vector2(22,605),status.left(46),13,UI.INK)
+	label_on(hud,Vector2(22,626),world.Needs.describe(world,k),13,UI.INK)
 
 func keeper_pixel() -> Vector2:
 	if world.keeper.carrier >= 0:

@@ -166,11 +166,11 @@ func run():
 	check(reload.Stock.totals(reload)==totals and totals.wood==30 and totals.mushroom==3,"Scalar legacy campaign migrates once and does not duplicate on reload")
 	var paid=Farm.new_campaign();paid.resources.soil=90;paid.work_jobs=[{"id":91,"kind":"wall","pos":[4,8],"animal_id":-1,"state":"pending","resource":"soil","reserved":10,"started":false}]
 	var migrated=Farm.new(paid,31).begin_day();migrated.trees.clear();migrated.day_seconds=9999;migrated.keeper.pos=Vector2i(4,7)
-	check(migrated.Stock.totals(migrated).soil==100 and migrated.jobs[0].reserved==0 and migrated.Stock.delivered(migrated,migrated.jobs[0])==10,"Legacy paid budget becomes site material once, separate from the remaining ground stock")
+	check(migrated.Stock.totals(migrated).soil==100 and migrated.jobs[0].reserved==0 and migrated.Stock.delivered(migrated,migrated.jobs[0])==5,"Legacy paid budget migrates to current wall cost five, returning surplus physically")
 	for i in range(30):
 		migrated.step()
 		if migrated.metrics.built==1:break
-	check(migrated.metrics.built==1 and migrated.Stock.totals(migrated).soil==90,"Legacy paid site completes without charging remaining stock")
+	check(migrated.metrics.built==1 and migrated.Stock.totals(migrated).soil==95,"Legacy paid site consumes current cost five without charging remaining stock")
 	check(Snap.save(reload,out+"/ledger.snapshot") and Snap.restore(out+"/ledger.snapshot").Stock.totals(Snap.restore(out+"/ledger.snapshot"))==totals,"Dedicated snapshot preserves ledger independently from ordinary save")
 	if DisplayServer.get_name()!="headless":await visual()
 	write_result("work-food-chain.json")

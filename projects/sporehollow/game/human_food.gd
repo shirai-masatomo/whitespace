@@ -1,5 +1,10 @@
 extends RefCounted
 const Policy=preload("res://game/work_policy.gd")
+# Emergency hand-reach food prevents a downed human from starving beside a meal.
+# Ordinary meal seeking still requires delivered stock and never steals claims.
+static func reachable_food(w,a,row)->bool:
+	return row.kind in Policy.HUMAN_FOOD and w.Stock.eligible(w,row,false) and (w.Stock.stored(w,row) or (a.get("malnutrition",0.0)>=w.Nutrition.WEAK and w.distance(a.pos,row.pos)<=1 and w.line_of_sight(a.pos,row.pos)))
+
 
 static func resume_rest(w,a):
 	if not a.has("meal_rest_kind"):return
@@ -20,7 +25,7 @@ static func step(w,a) -> bool:
 	if a.satiety>Policy.EAT_THRESHOLD and not a.has("meal_remaining") and not a.has("food_target"):return false
 	if w.tick<a.get("food_retry_at",0):return false
 	# No food available: do not repeatedly interrupt the very haul that will supply it.
-	if not down and not a.has("food_target") and w.Stock.cargo(w,a.work_key,-2).is_empty() and not w.field_items.any(func(row):return row.kind in Policy.HUMAN_FOOD and w.Stock.eligible(w,row) and not w.Jobs.path_to(w,a.pos,w.neighbors(row.pos)).is_empty()):
+	if not down and not a.has("food_target") and w.Stock.cargo(w,a.work_key,-2).is_empty() and not w.field_items.any(func(row):return reachable_food(w,a,row) and (w.distance(a.pos,row.pos)<=1 or not w.Jobs.path_to(w,a.pos,w.neighbors(row.pos)).is_empty())):
 		a.erase("life_need");a.food_retry_at=w.tick+ceili(Policy.RETRY_SECONDS/w.DT)
 		if not a.get("food_shortage",false):w.PlayerEvents.add(w,"備蓄へ食料を回収してください","food_shortage:"+a.work_key)
 		a.food_shortage=true;return false
@@ -47,7 +52,7 @@ static func step(w,a) -> bool:
 		if a.meal_remaining<=0:
 			var row=carried[0];row.amount-=1;w.stock_used[row.kind]=w.stock_used.get(row.kind,0)+1
 			if row.amount==0:w.field_items.erase(row)
-			a.satiety=minf(Policy.SATIETY_MAX,a.satiety+Policy.MEAL_GAIN)
+			w.Needs.meal(w,a,row.kind)
 			a.erase("meal_remaining");a.erase("food_target");a.erase("life_need");resume_rest(w,a)
 			a.work_status="食事を終え、仕事を選び直す"
 			w.PlayerEvents.add(w,w.PlayerEvents.name_of(w,a)+"：食事を終えて仕事に復帰","meal_done:"+a.work_key);w.Stock.sync(w)
@@ -59,12 +64,16 @@ static func step(w,a) -> bool:
 		for kind in Policy.HUMAN_FOOD:
 			var claim=w.Stock.reserve(w,kind,1,token,a)
 			if not claim.is_empty():a.food_target=claim[0].stock_id;target=w.Stock.find(w,a.food_target);break
+	if target.is_empty() and a.get("malnutrition",0.0)>=w.Nutrition.WEAK:
+		for row in w.field_items:
+			if reachable_food(w,a,row) and w.distance(a.pos,row.pos)<=1:
+				row.claims[token]=1;a.food_target=row.stock_id;target=row;break
 	if down:
 		# No walking or new rescue system: use carried food or unreserved food within reach.
 		if not target.is_empty() and w.distance(a.pos,target.pos)>1:w.Stock.release_token(w,token);a.erase("food_target");target={}
 		if target.is_empty():
 			for row in w.field_items:
-				if row.kind in Policy.HUMAN_FOOD and w.Stock.eligible(w,row) and w.distance(a.pos,row.pos)<=1 and w.line_of_sight(a.pos,row.pos):
+				if reachable_food(w,a,row) and w.distance(a.pos,row.pos)<=1 and w.line_of_sight(a.pos,row.pos):
 					row.claims[token]=1;a.food_target=row.stock_id;target=row;break
 		if not target.is_empty():w.Stock.pickup(w,target,token,a,-2);return true
 		a.work_status="栄養失調・行動不能 · 手元/隣の食料を待つ";return true

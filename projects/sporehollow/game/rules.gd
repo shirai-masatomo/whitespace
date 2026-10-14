@@ -5,13 +5,16 @@ const BARK = {"cooldown": 6.0, "range": 4, "stop_seconds": 1.0}
 const WHISTLE = {"range":6,"through_walls":true} # Provisional, independent of physical paths.
 const RESOURCE_TYPES = ["soil", "wood", "stone"]
 const NATURE = {"interval": 1.0, "spawn_chance_per_second": 0.2, "weights": {"weed": 80.0, "mushroom": 15.0, "stump": 5.0},
-	"caps": {"weed": 10, "mushroom": 3, "stump": 1}, "limit": 16, "weed_gold": 1, "mushroom_hp": 5, "stump_wood": 20}
+	"caps": {"weed": 10, "mushroom": 3, "stump": 1}, "limit": 16, "weed_fiber": 2, "mushroom_hp": 5, "stump_wood": 20}
 const REST = {"seconds": 5.0, "kennel_seconds": 1.0, "nearby": 6, "auto_hp_fraction": 0.5}
 const KIDNAPPER = {"max_hp": 50, "attack_power": 5, "object_attack_power": 2,
 	"sight_range": 6,
 	"counter_seconds": 1.0, "counter_duration": 4.0, "counter_cooldown": 2.0}
 # Gate cost/HP/time, repair coefficient, interruption refund and animal HP are PROVISIONAL.
 const BUILD = {
+ "cooking_bench":{"cost":12,"resource":"wood","hp":16,"seconds":4.0,"layer":"structure"},
+ "carpentry_bench":{"cost":14,"resource":"wood","hp":16,"seconds":4.0,"layer":"structure"},
+ "sewing_bench":{"cost":10,"resource":"wood","hp":16,"seconds":4.0,"layer":"structure"},
  "wall": {"cost":5,"hp":8,"seconds":1.0,"tier":0,"layer":"structure"},
  "wood_wall": {"cost":5,"resource":"wood","hp":16,"seconds":2.0,"tier":1,"layer":"structure"},
  "stone_wall": {"cost":5,"resource":"stone","hp":28,"seconds":3.0,"tier":2,"layer":"structure"},

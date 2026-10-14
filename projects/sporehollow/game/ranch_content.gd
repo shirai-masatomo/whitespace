@@ -1,6 +1,6 @@
 extends RefCounted
 ## G–M content on the existing individual, fixed-tick and FIFO lifecycles.
-const PLACEABLES=["kokeshi","fossil"]
+const PLACEABLES=["kokeshi","fossil","wood_crate","wood_shelf"]
 const CORPSE_SECONDS=8.0
 const RAGE={"UltimateID":"rage","Name":"激ギレ","Rarity":2,"UnlockLevel":1,"GaugeCost":100.0,"ConditionID":"enemy_near","Duration":6.0,"AIHints":{"threshold":0.5},"LevelScaling":{}}
 const REVIVE={"UltimateID":"resurrection","Name":"復活の舞","Rarity":2,"UnlockLevel":1,"GaugeCost":100.0,"ConditionID":"ally_downed","Duration":0.0,"AIHints":{"threshold":0.5,"priority":0.5},"LevelScaling":{}}
@@ -10,6 +10,7 @@ static func speed(w,a: Dictionary) -> float:
 	if w.field_items.any(func(i):return i.kind=="kokeshi" and i.get("placed",false) and w.distance(i.pos,a.pos)<=3): factor*=0.8
 	if a.get("species","")=="bull" and a.hp>0 and a.hp<=a.max_hp*0.5: factor*=1.5
 	if w.tick<a.get("dance_until",0): factor*=1.15
+	if a.get("needs_managed",false) and not a.has("work_key") and a.get("satiety",100)<=0:factor*=0.65
 	return factor
 
 static func attack_speed(w,a: Dictionary) -> float:

@@ -1,0 +1,46 @@
+{
+	"checks": [
+		{
+			"check": "Shared crafting panel has bounded layout",
+			"passed": true
+		},
+		{
+			"check": "Cooking choices come from shared recipe data",
+			"passed": true
+		},
+		{
+			"check": "Actual UI button registers a craft bill while paused",
+			"passed": true
+		},
+		{
+			"check": "Bill shows recipe and ingredient quantities",
+			"passed": true
+		},
+		{
+			"check": "Stockpile UI has all six main categories",
+			"passed": true
+		},
+		{
+			"check": "Priority UI changes destination priority",
+			"passed": true
+		},
+		{
+			"check": "All-forbid UI uses the same stock filter as hauling",
+			"passed": true
+		},
+		{
+			"check": "Clothing action does not overlap work/resume controls",
+			"passed": true
+		},
+		{
+			"check": "Selection data shows explicit no-food-effect state",
+			"passed": true
+		},
+		{
+			"check": "All three benches available in Architect",
+			"passed": true
+		}
+	],
+	"failures": 0,
+	"method": "Headless Control construction and signal dispatch, not visual/GPU review"
+}

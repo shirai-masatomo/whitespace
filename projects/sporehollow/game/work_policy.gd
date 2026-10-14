@@ -15,7 +15,7 @@ const EAT_THRESHOLD = 30.0
 const HUNGER_PER_SECOND = 0.2
 const MEAL_GAIN = 45.0
 const EAT_SECONDS = 2.0
-const HUMAN_FOOD = ["mushroom","egg","meat","milk"]
+const HUMAN_FOOD = ["stew","egg_meal","roast_meat","roast_mushroom","mushroom","egg","meat","milk"]
 const STARTING_FOOD = 4
 
 # One classification for scheduling, saved jobs and the designation list.

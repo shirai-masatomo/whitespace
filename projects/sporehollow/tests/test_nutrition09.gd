@@ -26,13 +26,13 @@ func run():
 	begin("1 Slow deterioration, work/movement effects, inability and later death")
 	var w=farm();var p=w.Work.Policy;var n=w.Nutrition
 	check((p.SATIETY_MAX-p.EAT_THRESHOLD)/p.HUNGER_PER_SECOND==350.0 and n.EMPTY_TO_DEATH_SECONDS==2*w.Cycle.Clock.DAY_SECONDS,"Full satiety reaches meal seeking at 350s; starvation then has two days before death")
-	w.keeper.malnutrition=24.99;w.step();check(is_equal_approx(w.Jobs.factor(w.keeper),0.8),"First deterioration reduces real movement and work factor to 80 percent")
+	w.keeper.malnutrition=24.99;w.step();check(is_equal_approx(w.Jobs.factor(w.keeper),0.65),"Empty satiety caps movement/work at 65 percent without multiplying malnutrition penalties")
 	w.keeper.malnutrition=49.99;w.step();check(is_equal_approx(w.Jobs.factor(w.keeper),0.5),"Severe deterioration reduces real movement and work factor to 50 percent")
 	w.Work.set_drafted(w,"keeper",true);w.Life.command(w,"keeper_move",Vector2i(15,8));w.keeper.malnutrition=74.99;var position=w.keeper.pos
 	w.step();check(w.keeper.nutrition_down and w.keeper.hp>0 and not w.keeper.get("dead",false) and w.keeper.pos==position,"Inability interrupts a drafted move while still alive")
 	check(not w.Life.able(w) and not w.Life.plan_rest_until(w,"night"),"Inability cannot move, attack or accelerate time via rest")
 	check(is_equal_approx((n.DEATH-n.DOWN)*n.EMPTY_TO_DEATH_SECONDS/100.0,216.0),"The separate death threshold leaves 216 seconds after inability without food")
-	check(not w.animals[0].has("satiety") and not w.animals[0].has("malnutrition"),"Animal hunger is not introduced")
+	check(w.animals[0].get("satiety",0)>0 and w.animals[0].get("needs_managed",false),"Owned animals use common hunger without human malnutrition counter")
 	w.keeper.malnutrition=99.99;w.step();check(w.keeper.dead and w.keeper.hp==0 and w.result=="loss" and w.story.defeat_reason=="malnutrition","Later starvation has an explicit terminal death result")
 	w.incidents.append({"id":"defeat-proof","day":1,"settled":false});w.enemies.append({"incident":"defeat-proof","done":true});var gold=w.campaign.gold;w.Cycle.settle_incidents(w)
 	check(w.campaign.gold==gold and not w.incidents[-1].settled,"Defeat cannot trigger the provisional raid completion reward")

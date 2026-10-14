@@ -27,6 +27,10 @@ const DT = 0.25
 const NEST = Vector2i(20, 12)
 const Shop = preload("res://game/shop_table.gd")
 const Rules = preload("res://game/rules.gd")
+var craft_stock_cache={}
+var craft_revision=0
+const Needs=preload("res://game/living_needs.gd")
+const Craft=preload("res://game/crafting.gd")
 const BUILD = Rules.BUILD
 const ORDERS = ["auto", "stay", "wander", "rest", "attack_target", "guide", "charge"]
 const Buildings = preload("res://game/buildings.gd")
@@ -565,7 +569,7 @@ func act(kind: String, p: Vector2i = Vector2i.ZERO, animal_id: int = -1,job_look
 	if kind=="storage":
 		if working() and inside(p) and walkable(p) and p not in Story.idol_cells(self):
 			accepted=Zones.create(self,"stockpile",p,p)>=0
-	elif kind in ["milk","place_kokeshi","place_fossil"]:
+	elif kind in ["milk","place_kokeshi","place_fossil","place_wood_crate","place_wood_shelf"]:
 		accepted=Content.queue(self,kind,p,animal_id)
 	elif kind in Story.ACTIONS:
 		accepted = Story.enqueue(self,kind,p)
@@ -634,7 +638,7 @@ func _execute_local(kind: String, p: Vector2i = Vector2i.ZERO, animal_id: int = 
 				var harvest: String = natural[p]
 				natural.erase(p)
 				metrics[harvest + "_collected"] += 1
-				if harvest == "weed": campaign.gold += Rules.NATURE.weed_gold
+				if harvest == "weed": Stock.add(self,"fiber",Rules.NATURE.weed_fiber,p)
 				elif harvest == "mushroom": Stock.add(self,"mushroom",1,p)
 				elif harvest == "stump": Stock.add(self,"wood",Rules.NATURE.stump_wood,p)
 				accepted = true
@@ -736,6 +740,7 @@ func animal_step(a: Dictionary):
 	if Livestock.held(self,a):a.state="と殺作業中";return
 	if Tasks.held(self,a):a.state="調教中";return
 	if merchant_worker=="a%d"%a.id and merchant_approach!=null:return
+	if Needs.animal_action(self,a):return
 	if Orders.follow(self,a): return
 	if not a.pending.is_empty() and tick >= a.pending.at:
 		release_kennel(a)
@@ -810,7 +815,7 @@ func animal_step(a: Dictionary):
 		a.state = "呼び戻し"
 	elif not a.rescuing and a.stamina < 14:
 		a.state = "ひと休み"
-		a.stamina = minf(100, a.stamina + 0.8)
+		a.stamina = a.stamina if a.get("needs_managed",false) else minf(100, a.stamina + 0.8)
 		return
 	elif not targets.is_empty() and (a.rescuing or a.mode != "stay" or distance(a.pos, targets[0].pos) <= 1):
 		if not a.has("first_contact_tick"): a.first_contact_tick = tick
@@ -838,7 +843,7 @@ func animal_step(a: Dictionary):
 			return
 		if distance(a.pos, goal) <= 1 and line_of_sight(a.pos,goal) and tick >= a.next_attack:
 			a.next_attack = tick + ceili(a.attack_seconds / DT / Content.attack_speed(self,a))
-			a.stamina = maxf(0, a.stamina - 8)
+			a.stamina = maxf(0, a.stamina - 8*a.get("food_cost_factor",1.0))
 			var enemy = targets[0]
 			Progression.enemy_hurt(self,enemy,a.attack_power,a.id)
 			combat_log.append({"tick": tick, "source": "animal", "id": a.id, "target": enemy.id, "damage": a.attack_power})
@@ -860,7 +865,7 @@ func animal_step(a: Dictionary):
 	else:
 		a.ai_context = "idle"
 		a.state = "待機" if a.mode == "stay" else "見張り"
-		a.stamina = minf(100, a.stamina + (0.3))
+		a.stamina = a.stamina if a.get("needs_managed",false) else minf(100, a.stamina + 0.3)
 	a.move_credit = minf(1.75, a.move_credit + a.move_speed * Content.speed(self,a) * DT * (Rules.SHIBA.rescue_multiplier if a.rescuing else 1.0))
 	if a.move_credit >= 1 and distance(a.pos, goal) > (1 if chasing else 0):
 		a.move_credit -= 1
@@ -868,7 +873,7 @@ func animal_step(a: Dictionary):
 		if move != a.pos and not actor_occupied(move, a.pos):
 			open_for_ally(move)
 			a.pos = move
-			a.stamina = maxf(0, a.stamina - 0.65)
+			a.stamina = a.stamina if a.get("needs_managed",false) else maxf(0, a.stamina - 0.65)
 	else:
 		a.move_credit = minf(a.move_credit, 0.75)
 
@@ -878,7 +883,7 @@ func release_kennel(a: Dictionary):
 func rest_step(a: Dictionary, explicit: bool):
 	a.rest_settled = true
 	a.state = "休む" if explicit else "自主休養"
-	a.stamina = minf(100, a.stamina + 0.8)
+	a.stamina = a.stamina if a.get("needs_managed",false) else minf(100, a.stamina + 0.8)
 	a.rest_ticks += 1
 	if a.rest_ticks >= ceili(Rules.REST.seconds / DT):
 		a.hp = mini(a.max_hp, a.hp + 1)
@@ -1130,6 +1135,7 @@ func step():
 	Life.begin_rest_until(self)
 	if phase=="day" and merchant_waiting():merchant_leave_at=maxf(merchant_leave_at,(tick+1)*DT)
 	tick += 1
+	Needs.begin(self)
 	if not keeper.has("has_stamina"): Combat.init_actor(keeper,true)
 	Combat.recover(keeper,DT,keeper.resting)
 	for key in workers:
@@ -1187,6 +1193,7 @@ func step():
 	var t_Story_tick=Metrics.start()
 	Story.tick(self)
 	Metrics.finish("Story_tick",t_Story_tick)
+	Needs.finish(self)
 	Life.check_rest_until(self)
 	Cycle.settle_incidents(self)
 

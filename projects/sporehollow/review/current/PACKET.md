@@ -1,3 +1,9 @@
+# 製作・備蓄・生活基盤：現在の確認入口
+
+[今回の変更・検証・残課題](crafting/REPORT.md) / [EXE反映記録](crafting/DELIVERY.json) / [現行設計](../../CRAFTING_NEEDS_DESIGN.md)。通常ゲーム画面・GPU試験は自動起動していません。以下は過去記録。
+
+---
+
 # 岩盤外縁・ログスクロール：現在の確認入口
 
 [変更・検証・未確認事項](geology/RIM_LOG.md) / [比較画像](geology/SCREENS.md) / [EXE反映](geology/RIM_LOG_DELIVERY.json)。通常ゲーム画面・GPU試験は自動起動していない。以下は過去記録。

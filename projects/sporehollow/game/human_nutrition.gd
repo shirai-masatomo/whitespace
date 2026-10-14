@@ -10,6 +10,7 @@ const RESUME=50.0
 
 static func factor(a: Dictionary) -> float:
 	if a.get("dead",false) or a.get("nutrition_down",false):return 0.0
+	if a.get("satiety",100)<=0:return minf(0.65,0.5 if a.get("malnutrition",0.0)>=SEVERE else 0.8 if a.get("malnutrition",0.0)>=WEAK else 1.0)
 	return 0.5 if a.get("malnutrition",0.0)>=SEVERE else (0.8 if a.get("malnutrition",0.0)>=WEAK else 1.0)
 
 static func status(a: Dictionary) -> String:

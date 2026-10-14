@@ -7,8 +7,8 @@ static func task(g,kind: String,p: Vector2i,id: int=-1):
 static func forbid(g,p: Vector2i):
 	var r=g.world.Mountains.resource(g.world,p)
 	g.world.Tasks.set_forbidden(g.world,"mine",p,-1,not (g.world.rocks.get(p,{}) if r.is_empty() else r).get("forbidden",false));g.refresh()
-static func gear(g,item: String):
-	if not g.world.HumanCombat.equip(g.world,item):g.notice("装備は現物と作業可能な状態が必要です")
+static func gear(g,item: String,key: String="keeper"):
+	if not g.world.HumanCombat.equip(g.world,item,key):g.notice("装備は現物と作業可能な状態が必要です")
 	g.refresh()
 static func draft(g,key: String="keeper"):
 	if not g.world.Work.set_drafted(g.world,key,not g.world.workers[key].get("drafted",false)):g.notice("今は徴兵できません")
@@ -39,9 +39,13 @@ static func build(g):
 		var p=g.ColonyPanels.panel(g,Rect2(8,518,636,224))
 		p.add_theme_stylebox_override("panel",StyleBoxEmpty.new())
 		g.ColonyPanels.label(p,("牧場主" if key=="keeper" else a.get("name",key))+" · "+("徴兵中" if a.get("drafted",false) else "暮らしと仕事"),Vector2(14,6),18)
-		g.ColonyPanels.label(p,"装備：%s  射程%d / 威力%d"%[profile.name,profile.range,profile.damage],Vector2(14,98),13)
+		p.tooltip_text="装備：%s  射程%d / 威力%d"%[profile.name,profile.range,profile.damage]
 		g.add_button(g.palette,"keeper_draft","徴兵を解除" if a.get("drafted",false) else "徴兵する",Rect2(16,646,156,36),draft.bind(g,key))
 		g.buttons.keeper_draft.disabled=not a.get("drafted",false) and (a.state!="free" or a.hp<=0 or a.forced_rest or a.get("nutrition_down",false))
+		var clothes=a.get("clothing",{})
+		g.add_button(g.palette,"human_clothes","服を着る" if clothes.is_empty() else "服を外す",Rect2(536,646,100,36),gear.bind(g,"fiber_clothes" if clothes.is_empty() else "unequip_clothes",key))
+		g.buttons.human_clothes.disabled=a.get("drafted",false) or (clothes.is_empty() and g.world.Stock.available(g.world,"fiber_clothes")<1)
+		g.buttons.human_clothes.tooltip_text="防具性能・耐久はありません。現物を装備します。"
 		if key!="keeper":
 			g.ColonyPanels.label(p,"通常仕事は役割の優先度に従います。",Vector2(14,178),14)
 			return

@@ -83,6 +83,7 @@ static func cancel(w,id: int,reason: String="cancelled") -> bool:
 		if j.id!=id: continue
 		if w.paused and (j.started or j.get("targets",[]).any(func(t):return t.issued)):
 			j.cancel_requested=true; return true
+		if j.kind=="craft":w.Craft.cancel(w,j)
 		w.Delivery.cancel_job(w,j)
 		w.Work.release(w,j)
 		if j.kind=="animal_order": w.Orders.stop(w,j)
@@ -104,7 +105,7 @@ static func walk(w,j,goals: Array,actor: Dictionary={}) -> bool:
 	goals=goals.filter(func(p):return w.walkable(p) and not w.actor_occupied(p,actor.pos))
 	if actor.pos in goals: return true
 	j.state="walking"
-	actor.move_credit=minf(1.9,actor.move_credit+SPEED*factor(actor)*(w.Content.speed(w,actor) if actor.get("work_key","")=="keeper" else 1.0)*w.DT)
+	actor.move_credit=minf(1.9,actor.move_credit+SPEED*movement_factor(actor)*(w.Content.speed(w,actor) if actor.get("work_key","")=="keeper" else 1.0)*w.DT)
 	if actor.move_credit<1: return false
 	var outdoor=j.kind=="animal_order" and j.order=="guide" and j.targets.any(func(t):return t.issued and not w.SPECIES[w.Orders.animal(w,t.id).get("species","hen")].can_enter_indoor) and not w.is_indoor(actor.pos)
 	# Keep actor avoidance for the whole route, not just one bypass step; otherwise
@@ -132,18 +133,22 @@ static func walk(w,j,goals: Array,actor: Dictionary={}) -> bool:
 	return false
 
 static func factor(actor: Dictionary) -> float:
+	return movement_factor(actor)*actor.get("food_work_factor",1.0)
+
+static func movement_factor(actor: Dictionary) -> float:
 	return (0.6 if actor.get("sleepiness",0)>=80 else 1.0)*preload("res://game/human_nutrition.gd").factor(actor)
 
 static func step(w):
 	w.Work.step(w)
 
 static func execute(w,j,actor: Dictionary):
+	if j.kind=="craft":w.Craft.step(w,j,actor);return
 	if j.kind in ["direct_attack","keeper_equipment"]:w.HumanCombat.execute(w,j,actor);return
 	if j.kind in w.Tasks.KINDS:w.Tasks.execute(w,j,actor);return
 	if j.kind=="slaughter":w.Livestock.execute(w,j,actor);return
 	if j.kind=="haul":w.Stock.haul_step(w,j,actor);return
 	if w.BUILD.has(j.kind) and not w.Stock.prepare_build(w,j,actor):return
-	if j.kind in ["milk","place_kokeshi","place_fossil"]:w.Content.job(w,j);return
+	if j.kind in ["milk","place_kokeshi","place_fossil","place_wood_crate","place_wood_shelf"]:w.Content.job(w,j);return
 	if j.kind=="equip": w.Progression.equip_step(w,j); return
 	if j.kind in w.Story.ACTIONS: w.Story.step_job(w,j); return
 	if j.has("target_id"):

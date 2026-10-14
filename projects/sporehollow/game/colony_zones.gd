@@ -1,5 +1,6 @@
 extends RefCounted
 # Areas guide hauling and rest; they never own or remove physical goods.
+const Catalog=preload("res://game/item_catalog.gd")
 const TYPES={"soil":"土","wood":"木材","stone":"石","food":"食料","equipment":"装備","other":"その他"}
 const FOOD=["egg","mushroom","meat","milk"]
 
@@ -56,7 +57,7 @@ static func remove(w,id: int) -> bool:
 static func set_allowed(w,id: int,types: Array):
 	var z=find(w,id)
 	if z.is_empty() or z.kind!="stockpile":return
-	z.allowed=types.filter(func(t):return TYPES.has(t));changed(w)
+	z.allowed=types.filter(func(t):return TYPES.has(t));z.erase("filter");changed(w)
 
 static func stock_type(w,kind: String) -> String:
 	if kind in ["soil","wood","stone"]:return kind
@@ -66,11 +67,29 @@ static func stock_type(w,kind: String) -> String:
 
 static func accepts(w,p: Vector2i,kind: String) -> bool:
 	for z in w.zones:
-		if z.kind=="stockpile" and p in z.cells and stock_type(w,kind) in z.allowed:return true
+		if z.kind=="stockpile" and p in z.cells and accepts_item(w,z,kind):return true
 	return false
 
-static func storage_for(w,kind: String) -> Array:
-	return w.storage_cells.filter(func(p):return accepts(w,p,kind))
+static func accepts_item(w,z,kind:String)->bool:
+	return Catalog.accepted(z,kind) if z.has("filter") else stock_type(w,kind) in z.allowed
+static func priority_map(w,kind:String)->Dictionary:
+	var result={}
+	for z in w.zones:
+		if z.kind!="stockpile" or not accepts_item(w,z,kind):continue
+		for p in z.cells:result[p]=maxi(result.get(p,-1),z.get("priority",1))
+	return result
+static func storage_for(w,kind: String) -> Array:return priority_map(w,kind).keys()
+static func filter_change(w,id:int,scope:String,key:String,value:bool):
+	var z=find(w,id)
+	if z.is_empty() or z.kind!="stockpile":return
+	if not z.has("filter"):
+		Catalog.configure(z,"all","",false)
+		for item in Catalog.ROWS:z.filter.items[item]=stock_type(w,item) in z.allowed
+	Catalog.configure(z,scope,key,value);changed(w)
+static func set_priority(w,id:int,value:int):
+	var z=find(w,id)
+	if z.is_empty():return
+	z.priority=clampi(value,0,2);changed(w)
 
 static func changed(w):
 	sync_storage(w)

@@ -1,0 +1,57 @@
+{
+	"checks": [
+		{
+			"check": "Fixed bill accepted as one job",
+			"passed": true
+		},
+		{
+			"check": "Internal delivery does not create extra player jobs",
+			"passed": true
+		},
+		{
+			"check": "Materials reserved once",
+			"passed": true
+		},
+		{
+			"check": "Repeated preparation does not double reserve",
+			"passed": true
+		},
+		{
+			"check": "Physical ingredient pickup",
+			"passed": true
+		},
+		{
+			"check": "Interruption keeps cargo at actual location",
+			"passed": true
+		},
+		{
+			"check": "Two outputs physical, exactly ten wood consumed",
+			"passed": true
+		},
+		{
+			"check": "New bill accepted",
+			"passed": true
+		},
+		{
+			"check": "Insufficient ingredients wait with reason",
+			"passed": true
+		},
+		{
+			"check": "Removed bench refunds unused cargo without loss",
+			"passed": true
+		},
+		{
+			"check": "Target-stock bill sleeps when two outputs already exist",
+			"passed": true
+		},
+		{
+			"check": "Target-stock bill resumes after stock decreases",
+			"passed": true
+		},
+		{
+			"check": "Concurrent target-stock bills include promised output",
+			"passed": true
+		}
+	],
+	"failures": 0
+}

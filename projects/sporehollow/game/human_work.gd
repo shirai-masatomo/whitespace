@@ -24,9 +24,10 @@ static func category(w,j) -> String:
 	return Policy.category(w,j)
 
 static func shared(w,j) -> bool:
-	return w.BUILD.has(j.kind) or j.kind in ["collect","haul","slaughter","mine","train","clear_tree"]
+	return w.BUILD.has(j.kind) or j.kind in ["collect","haul","slaughter","mine","train","clear_tree","craft"] or (j.kind=="keeper_equipment" and j.has("explicit_actor"))
 
 static func target_key(w,j) -> String:
+	if j.kind=="craft":return "bench:%d"%j.bench_id
 	if j.kind in ["slaughter","train"]:return "animal:%d"%j.animal_id
 	if j.has("mountain_id"):return j.mountain_id
 	if j.kind in ["mine","clear_tree"]:return "%s:%d:%d"%[j.kind,j.pos.x,j.pos.y]
@@ -95,6 +96,7 @@ static func reason(w,key: String,a) -> String:
 	return ""
 
 static func missing(w,j) -> bool:
+	if j.kind=="craft":return not w.Craft.valid(w,j)
 	if j.kind in w.Tasks.KINDS:return w.Tasks.missing(w,j)
 	if j.kind=="slaughter":return w.Livestock.missing(w,j)
 	if j.kind=="haul":return j.get("haul_sources",[j.get("stock_id",-1)]).all(func(id):return w.Stock.find(w,id).is_empty()) and not w.field_items.any(func(r):return r.get("location")=="carry" and r.get("job_id",-1)==j.id)
@@ -128,6 +130,7 @@ static func claim(w,key: String,j) -> bool:
 	return true
 
 static func effort(w,a,j,evaluation=null) -> float:
+	if j.kind=="craft" and not w.Craft.ready(w,j):return INF
 	if w.work_claims.has(target_key(w,j)):return INF
 	if w.BUILD.has(j.kind) and (not w.Delivery.can_build(j) or w.Delivery.needed(w,j)>0):return INF
 	var position=j.pos
@@ -209,6 +212,7 @@ static func step(w):
 	for key in w.workers:
 		var a=w.workers[key]
 		if w.Food.step(w,a):continue
+		if a.get("needs_rest",false) and a.get("hp",0)>0 and a.get("state","")=="free" and not a.get("nutrition_down",false) and not a.get("dead",false) and a.get("placed",false) and a.get("carrier",-1)<0 and not a.get("danger_near",false) and not a.get("drafted",false):a.work_status="ひと休み · 回復後に同じ仕事を再開";continue
 		var why=reason(w,key,a)
 		if why!="":
 			var current=active(w,key)

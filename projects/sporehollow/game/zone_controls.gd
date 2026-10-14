@@ -19,8 +19,8 @@ func toggle(g,kind: String):
 	g.world.Zones.set_allowed(g.world,z.id,allowed);g.refresh()
 func build(g):
 	if not active(g) or not g.world.working() or g.field_shop or g.field_book or g.story_modal!="":return
-	var top=g.ColonyPanels.architect_area(g).position.y-208
-	var p=g.ColonyPanels.panel(g,Rect2(8,top,402,204))
+	var top=g.ColonyPanels.architect_area(g).position.y-440
+	var p=g.ColonyPanels.panel(g,Rect2(8,top,402,436))
 	g.ColonyPanels.label(p,"ゾーン · 備蓄＝物資保管 / 居住＝休息",Vector2(12,8),15)
 	for entry in [["stockpile","備蓄追加",0],["residential","居住追加",1],["resize","範囲変更",2],["","指定取消",3]]:
 		var id="zone_"+(entry[0] if entry[0]!="" else "cancel")
@@ -35,10 +35,26 @@ func build(g):
 	g.add_button(g.palette,"zone_delete","削除",Rect2(310,top+76,88,30),remove.bind(g));g.buttons.zone_delete.disabled=selected_id<0;g.buttons.zone_resize.disabled=selected_id<0
 	var z=g.world.Zones.find(g.world,selected_id)
 	if not z.is_empty() and z.kind=="stockpile":
-		var index=0
-		for kind in g.world.Zones.TYPES:
-			var id="zone_type_"+kind;g.add_button(g.palette,id,g.world.Zones.TYPES[kind],Rect2(20+(index%3)*128,top+116+floori(index/3.0)*32,120,28),toggle.bind(g,kind));g.ColonyPanels.compact_button(g,g.buttons[id],12);g.UI.selected(g.buttons[id],kind in z.allowed);index+=1
-		g.ColonyPanels.label(p,"40個/マス · 搬入は命令の「回収」で指定",Vector2(12,182),12)
+		for entry in [["全許可",true,0],["全禁止",false,1]]:
+			var button=Button.new();button.text=entry[0];button.position=Vector2(12+entry[2]*88,114);button.size=Vector2(82,30);p.add_child(button);g.UI.button(button);button.pressed.connect(func():g.world.Zones.filter_change(g.world,z.id,"all","",entry[1]);g.refresh())
+		var priority=OptionButton.new();priority.position=Vector2(198,114);priority.size=Vector2(184,30);p.add_child(priority);g.UI.button(priority)
+		for text in ["優先度：低","優先度：通常","優先度：高"]:priority.add_item(text)
+		priority.select(z.get("priority",1));priority.item_selected.connect(func(i):g.world.Zones.set_priority(g.world,z.id,i))
+		var tree=Tree.new();tree.name="StockpileFilters";tree.position=Vector2(12,152);tree.size=Vector2(376,246);tree.hide_root=true;tree.add_theme_font_size_override("font_size",13);p.add_child(tree);var root=tree.create_item()
+		var catalog=g.world.Zones.Catalog
+		for main in catalog.CATEGORIES:
+			var main_ids=catalog.ROWS.keys().filter(func(id):return catalog.item(id).category==main)
+			var parent=filter_row(tree,root,catalog.CATEGORIES[main][0],"categories",main,main_ids,g,z)
+			for sub in catalog.CATEGORIES[main][1]:
+				var sub_ids=main_ids.filter(func(id):return catalog.item(id).subcategory==sub)
+				var branch=filter_row(tree,parent,catalog.CATEGORIES[main][1][sub],"subs",sub,sub_ids,g,z)
+				for id in sub_ids:filter_row(tree,branch,catalog.title(id),"items",id,[id],g,z)
+				branch.collapsed=true
+			parent.collapsed=true
+		tree.item_edited.connect(func():
+			var item=tree.get_edited();var meta=item.get_metadata(0)
+			g.world.Zones.filter_change(g.world,z.id,meta[0],meta[1],item.is_checked(0));update_checks(tree.get_root(),g,z))
+		g.ColonyPanels.label(p,"40個/マス · 設定変更で既存物資は移動しません",Vector2(12,409),12)
 	else: g.ColonyPanels.label(p,"到達可能な居住ゾーンで休息します。\n物資や建物を移動・削除しません。",Vector2(12,120),14)
 func cell(g,point: Vector2) -> Vector2i:return Vector2i((g.get_canvas_transform().affine_inverse()*point/g.TILE).floor())
 func input(g,event) -> bool:
@@ -80,3 +96,11 @@ func draw(g):
 	var area=Rect2(Vector2(low)*g.TILE,Vector2(high-low+Vector2i.ONE)*g.TILE)
 	g.draw_rect(area,Color(0.65,0.85,0.84,0.16));g.draw_rect(area,Color("f3df9e"),false,2)
 	g.label_on(g,g.get_canvas_transform().affine_inverse()*g.pointer+Vector2(12,-12),"ゾーン %dマス"%g.world.Zones.cells_in(g.world,from,to).size(),15,g.UI.PAPER)
+
+func filter_row(tree,parent,text,scope,key,ids,g,z):
+	var row=tree.create_item(parent);row.set_cell_mode(0,TreeItem.CELL_MODE_CHECK);row.set_text(0,text);row.set_editable(0,true);row.set_metadata(0,[scope,key,ids]);set_check(row,g,z);return row
+func set_check(row,g,z):
+	var ids=row.get_metadata(0)[2];var enabled=ids.filter(func(id):return g.world.Zones.accepts_item(g.world,z,id)).size()
+	row.set_checked(0,enabled==ids.size() and enabled>0);row.set_indeterminate(0,enabled>0 and enabled<ids.size())
+func update_checks(parent,g,z):
+	for child in parent.get_children():set_check(child,g,z);update_checks(child,g,z)

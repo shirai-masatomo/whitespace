@@ -1,0 +1,91 @@
+{
+	"failures": 0,
+	"groups": [
+		{
+			"checks": [
+				{
+					"check": "Full satiety reaches meal seeking at 350s; starvation then has two days before death",
+					"passed": true
+				},
+				{
+					"check": "Empty satiety caps movement/work at 65 percent without multiplying malnutrition penalties",
+					"passed": true
+				},
+				{
+					"check": "Severe deterioration reduces real movement and work factor to 50 percent",
+					"passed": true
+				},
+				{
+					"check": "Inability interrupts a drafted move while still alive",
+					"passed": true
+				},
+				{
+					"check": "Inability cannot move, attack or accelerate time via rest",
+					"passed": true
+				},
+				{
+					"check": "The separate death threshold leaves 216 seconds after inability without food",
+					"passed": true
+				},
+				{
+					"check": "Owned animals use common hunger without human malnutrition counter",
+					"passed": true
+				},
+				{
+					"check": "Later starvation has an explicit terminal death result",
+					"passed": true
+				},
+				{
+					"check": "Defeat cannot trigger the provisional raid completion reward",
+					"passed": true
+				}
+			],
+			"name": "1 Slow deterioration, work/movement effects, inability and later death"
+		},
+		{
+			"checks": [
+				{
+					"check": "Forbidden nearby food is neither eaten nor duplicated",
+					"passed": true
+				},
+				{
+					"check": "Incapacitated drafted worker eats food at own feet even with every exit blocked",
+					"passed": true
+				},
+				{
+					"check": "One meal consumes exactly one physical meat and does not instantly remove inability",
+					"passed": true
+				},
+				{
+					"check": "Saved in-flight meal resumes without duplicate consumption",
+					"passed": true
+				},
+				{
+					"check": "Fed worker gradually recovers for more than 100 seconds before becoming able",
+					"passed": true
+				},
+				{
+					"check": "Malnourished forced sleeper pauses residential travel while food owns movement",
+					"passed": true
+				},
+				{
+					"check": "After the meal the original forced rest resumes without competing movement",
+					"passed": true
+				},
+				{
+					"check": "No reachable food restores the original manual rest instead of dropping it",
+					"passed": true
+				}
+			],
+			"name": "2 Hand-reach recovery, prohibition, gradual return and save during a meal",
+			"observation": {
+				"after": 49.9710648148148,
+				"before": 75.2025462962964,
+				"meat_consumed": 2,
+				"recovery_seconds": 109.0
+			}
+		}
+	],
+	"method": "Controlled fixture at starvation thresholds; production World.step, physical food and full snapshot. Not a natural multi-day playthrough.",
+	"passed": true
+}

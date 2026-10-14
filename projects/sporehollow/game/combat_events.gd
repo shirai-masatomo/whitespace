@@ -46,12 +46,14 @@ static func hit(w,source: Dictionary,target: Dictionary,action: String,damage: f
 
 static func pay(a: Dictionary,action: String) -> bool:
 	if not a.get("has_stamina",false):return true
-	var cost=COSTS.get(action,0.0)
+	if a.get("needs_managed",false) and action=="move":return true
+	var cost=COSTS.get(action,0.0)*a.get("food_cost_factor",1.0)
 	if a.stamina<cost:return false
 	a.stamina=maxf(0,a.stamina-cost)
 	return true
 
 static func recover(a: Dictionary,dt: float,rest: bool=false):
+	if a.get("needs_managed",false):return
 	if a.get("has_stamina",false) and a.get("hp",0)>0:
 		a.stamina=minf(a.max_stamina,a.stamina+a.stamina_regen*dt*(3.0 if rest else 1.0))
 

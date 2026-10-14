@@ -1,0 +1,519 @@
+{
+	"checks": [
+		{
+			"check": "Bench build can be designated: cooking_bench",
+			"passed": true
+		},
+		{
+			"check": "Bench build can be designated: carpentry_bench",
+			"passed": true
+		},
+		{
+			"check": "Bench build can be designated: sewing_bench",
+			"passed": true
+		},
+		{
+			"check": "Three benches built by real delivery/construction AI",
+			"passed": true
+		},
+		{
+			"check": "Recipe bill: roast_mushroom",
+			"passed": true
+		},
+		{
+			"check": "Recipe bill: egg_meal",
+			"passed": true
+		},
+		{
+			"check": "Recipe bill: roast_meat",
+			"passed": true
+		},
+		{
+			"check": "Recipe bill: stew",
+			"passed": true
+		},
+		{
+			"check": "Recipe bill: wood_crate",
+			"passed": true
+		},
+		{
+			"check": "Recipe bill: wood_shelf",
+			"passed": true
+		},
+		{
+			"check": "Recipe bill: fiber_clothes",
+			"passed": true
+		},
+		{
+			"check": "Craft snapshot fixture written",
+			"passed": true
+		},
+		{
+			"check": "In-flight claims/cargo restore without duplication",
+			"passed": true
+		},
+		{
+			"check": "All seven bills finish through production World.step",
+			"passed": true
+		},
+		{
+			"check": "Two residents both participate without duplicate bench ownership",
+			"passed": true
+		},
+		{
+			"check": "Carry cap and material conservation through interruption/reload",
+			"passed": true
+		},
+		{
+			"check": "Physical finished output: roast_mushroom",
+			"passed": true
+		},
+		{
+			"check": "Physical finished output: egg_meal",
+			"passed": true
+		},
+		{
+			"check": "Physical finished output: roast_meat",
+			"passed": true
+		},
+		{
+			"check": "Physical finished output: stew",
+			"passed": true
+		},
+		{
+			"check": "Physical finished output: wood_crate",
+			"passed": true
+		},
+		{
+			"check": "Physical finished output: wood_shelf",
+			"passed": true
+		},
+		{
+			"check": "Physical finished output: fiber_clothes",
+			"passed": true
+		},
+		{
+			"check": "Stamina rest retains current job identity",
+			"passed": true
+		},
+		{
+			"check": "Human clothing action accepted",
+			"passed": true
+		},
+		{
+			"check": "Clothing is physically equipped without replacing weapon",
+			"passed": true
+		},
+		{
+			"check": "Equipped clothing remains in ownership accounting",
+			"passed": true
+		},
+		{
+			"check": "Bill slot 1",
+			"passed": true
+		},
+		{
+			"check": "Bill slot 2",
+			"passed": true
+		},
+		{
+			"check": "Bill slot 3",
+			"passed": true
+		},
+		{
+			"check": "Bill slot 4",
+			"passed": true
+		},
+		{
+			"check": "Bill slot 5",
+			"passed": true
+		},
+		{
+			"check": "Bill slot 6",
+			"passed": true
+		},
+		{
+			"check": "Bill slot 7",
+			"passed": true
+		},
+		{
+			"check": "Bill slot 8",
+			"passed": true
+		},
+		{
+			"check": "Bill slot 9",
+			"passed": true
+		},
+		{
+			"check": "Bill slot 10",
+			"passed": true
+		},
+		{
+			"check": "Bill slot 11",
+			"passed": true
+		},
+		{
+			"check": "Bill slot 12",
+			"passed": true
+		},
+		{
+			"check": "Bill slot 13",
+			"passed": true
+		},
+		{
+			"check": "Bill slot 14",
+			"passed": true
+		},
+		{
+			"check": "Bill slot 15",
+			"passed": true
+		},
+		{
+			"check": "Bill slot 16",
+			"passed": true
+		},
+		{
+			"check": "Bill slot 17",
+			"passed": true
+		},
+		{
+			"check": "Bill slot 18",
+			"passed": true
+		},
+		{
+			"check": "Bill slot 19",
+			"passed": true
+		},
+		{
+			"check": "Bill slot 20",
+			"passed": true
+		},
+		{
+			"check": "Bill slot 21",
+			"passed": true
+		},
+		{
+			"check": "Bill slot 22",
+			"passed": true
+		},
+		{
+			"check": "Bill slot 23",
+			"passed": true
+		},
+		{
+			"check": "Bill slot 24",
+			"passed": true
+		},
+		{
+			"check": "Bill slot 25",
+			"passed": true
+		},
+		{
+			"check": "Bill slot 26",
+			"passed": true
+		},
+		{
+			"check": "Bill slot 27",
+			"passed": true
+		},
+		{
+			"check": "Bill slot 28",
+			"passed": true
+		},
+		{
+			"check": "Bill slot 29",
+			"passed": true
+		},
+		{
+			"check": "Bill slot 30",
+			"passed": true
+		},
+		{
+			"check": "Bill slot 31",
+			"passed": true
+		},
+		{
+			"check": "Bill slot 32",
+			"passed": true
+		},
+		{
+			"check": "Bill slot 33",
+			"passed": true
+		},
+		{
+			"check": "Bill slot 34",
+			"passed": true
+		},
+		{
+			"check": "Bill slot 35",
+			"passed": true
+		},
+		{
+			"check": "Bill slot 36",
+			"passed": true
+		},
+		{
+			"check": "Bill slot 37",
+			"passed": true
+		},
+		{
+			"check": "Bill slot 38",
+			"passed": true
+		},
+		{
+			"check": "Bill slot 39",
+			"passed": true
+		},
+		{
+			"check": "Bill slot 40",
+			"passed": true
+		},
+		{
+			"check": "Bill slot 41",
+			"passed": true
+		},
+		{
+			"check": "Bill slot 42",
+			"passed": true
+		},
+		{
+			"check": "Bill slot 43",
+			"passed": true
+		},
+		{
+			"check": "Bill slot 44",
+			"passed": true
+		},
+		{
+			"check": "Bill slot 45",
+			"passed": true
+		},
+		{
+			"check": "Bill slot 46",
+			"passed": true
+		},
+		{
+			"check": "Bill slot 47",
+			"passed": true
+		},
+		{
+			"check": "Bill slot 48",
+			"passed": true
+		},
+		{
+			"check": "Bill slot 49",
+			"passed": true
+		},
+		{
+			"check": "Bill slot 50",
+			"passed": true
+		},
+		{
+			"check": "Bill slot 51",
+			"passed": true
+		},
+		{
+			"check": "Bill slot 52",
+			"passed": true
+		},
+		{
+			"check": "Bill slot 53",
+			"passed": true
+		},
+		{
+			"check": "Bill slot 54",
+			"passed": true
+		},
+		{
+			"check": "Bill slot 55",
+			"passed": true
+		},
+		{
+			"check": "Bill slot 56",
+			"passed": true
+		},
+		{
+			"check": "Bill slot 57",
+			"passed": true
+		},
+		{
+			"check": "Bill slot 58",
+			"passed": true
+		},
+		{
+			"check": "Bill slot 59",
+			"passed": true
+		},
+		{
+			"check": "Bill slot 60",
+			"passed": true
+		},
+		{
+			"check": "Bill slot 61",
+			"passed": true
+		},
+		{
+			"check": "Bill slot 62",
+			"passed": true
+		},
+		{
+			"check": "Bill slot 63",
+			"passed": true
+		},
+		{
+			"check": "Bill slot 64",
+			"passed": true
+		},
+		{
+			"check": "Bill slot 65",
+			"passed": true
+		},
+		{
+			"check": "Bill slot 66",
+			"passed": true
+		},
+		{
+			"check": "Bill slot 67",
+			"passed": true
+		},
+		{
+			"check": "Bill slot 68",
+			"passed": true
+		},
+		{
+			"check": "Bill slot 69",
+			"passed": true
+		},
+		{
+			"check": "Bill slot 70",
+			"passed": true
+		},
+		{
+			"check": "Bill slot 71",
+			"passed": true
+		},
+		{
+			"check": "Bill slot 72",
+			"passed": true
+		},
+		{
+			"check": "Bill slot 73",
+			"passed": true
+		},
+		{
+			"check": "Bill slot 74",
+			"passed": true
+		},
+		{
+			"check": "Bill slot 75",
+			"passed": true
+		},
+		{
+			"check": "Bill slot 76",
+			"passed": true
+		},
+		{
+			"check": "Bill slot 77",
+			"passed": true
+		},
+		{
+			"check": "Bill slot 78",
+			"passed": true
+		},
+		{
+			"check": "Bill slot 79",
+			"passed": true
+		},
+		{
+			"check": "Bill slot 80",
+			"passed": true
+		},
+		{
+			"check": "Bill slot 81",
+			"passed": true
+		},
+		{
+			"check": "Bill slot 82",
+			"passed": true
+		},
+		{
+			"check": "Bill slot 83",
+			"passed": true
+		},
+		{
+			"check": "Bill slot 84",
+			"passed": true
+		},
+		{
+			"check": "Bill slot 85",
+			"passed": true
+		},
+		{
+			"check": "Bill slot 86",
+			"passed": true
+		},
+		{
+			"check": "Bill slot 87",
+			"passed": true
+		},
+		{
+			"check": "Bill slot 88",
+			"passed": true
+		},
+		{
+			"check": "Bill slot 89",
+			"passed": true
+		},
+		{
+			"check": "Bill slot 90",
+			"passed": true
+		},
+		{
+			"check": "Bill slot 91",
+			"passed": true
+		},
+		{
+			"check": "Bill slot 92",
+			"passed": true
+		},
+		{
+			"check": "Bill slot 93",
+			"passed": true
+		},
+		{
+			"check": "Bill slot 94",
+			"passed": true
+		},
+		{
+			"check": "Bill slot 95",
+			"passed": true
+		},
+		{
+			"check": "Bill slot 96",
+			"passed": true
+		},
+		{
+			"check": "Bill slot 97",
+			"passed": true
+		},
+		{
+			"check": "Bill slot 98",
+			"passed": true
+		},
+		{
+			"check": "Bill slot 99",
+			"passed": true
+		},
+		{
+			"check": "Bill slot 100",
+			"passed": true
+		},
+		{
+			"check": "101st bill rejected",
+			"passed": true
+		}
+	],
+	"failures": 0,
+	"maximum_cargo": 6,
+	"tick": 317
+}
