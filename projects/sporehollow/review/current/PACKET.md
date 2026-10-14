@@ -1,6 +1,6 @@
-# 建築二段階・運搬20（ソースのみ）
+# 最新配布：建築二段階・運搬20（d2595d3）
 
-[今回の実装・検証](construction-groups/REPORT.md)。施工グループ単位の搬入先行と運搬合計20を追加。今回はEXE反映前に報告する指定のため、最新配布EXEは下記d5fd35eのまま。ゲーム・GPUは自動起動していない。
+[今回の実装・検証](construction-groups/REPORT.md)。施工グループ単位の搬入先行と運搬合計20を追加。追加指示により全更新を既存EXEへ反映済み。[配布記録](construction-groups/DELIVERY.json)。ロード39項目と書出EXEのheadless起動終了に合格。通常画面・GPUは自動起動していない。以下は過去の配布記録。
 
 ---
 
