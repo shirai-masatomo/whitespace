@@ -1,0 +1,20 @@
+{
+  "session_only": true,
+  "sha256": "5E63614F3C64E4BC252F498D6143DED130DE537861EC10D14416231AE73CEC35",
+  "dirty": true,
+  "automatically_launched": false,
+  "asset_delivery_commit": "adb33aa07da2ec57959e0315963f15003ddcd085",
+  "diagnostics_removed": true,
+  "native_lifecycle_checks": 0,
+  "utc": "2026-10-14T14:20:54.4380017Z",
+  "native_game_launch_performed": false,
+  "normal_data_unchanged": true,
+  "headless_loading_checks": 39,
+  "commit": "70d9d80238c5186467b2434c8791e1cee75eecb2",
+  "implementation_commit": "70d9d80238c5186467b2434c8791e1cee75eecb2",
+  "bytes_before": 128338952,
+  "bytes_after": 128367920,
+  "uncommitted_scope": "Pre-existing Godot import/UID metadata; task game source committed",
+  "exe": "artifacts/autonomy-entry-01/bundle/WhistleRanch-Autonomy-Partial.exe",
+  "test_mode": "headless loading only; no exported or normal game auto-launch"
+}

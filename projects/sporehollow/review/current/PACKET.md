@@ -1,6 +1,6 @@
 # 製作・備蓄・生活基盤：現在の確認入口
 
-[今回の変更・検証・残課題](crafting/REPORT.md) / [EXE反映記録](crafting/DELIVERY.json) / [現行設計](../../CRAFTING_NEEDS_DESIGN.md)。通常ゲーム画面・GPU試験は自動起動していません。以下は過去記録。
+コード70d9d802・関連394チェック通過・既存EXE反映済み。[今回の変更・検証・残課題](crafting/REPORT.md) / [EXE反映記録](crafting/DELIVERY.json) / [現行設計](../../CRAFTING_NEEDS_DESIGN.md)。通常ゲーム画面・GPU試験は自動起動していません。以下は過去記録。
 
 ---
 
