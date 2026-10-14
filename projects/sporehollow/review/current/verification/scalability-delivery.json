@@ -1,0 +1,17 @@
+{
+  "implementation_commit": "e125d2b",
+  "bulk_performance_commit": "e4e406a",
+  "exe": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\autonomy-entry-01\\bundle\\WhistleRanch-Autonomy-Partial.exe",
+  "sha256": "C28DFE50E90C306D0BEA2582B7F3917BE347B0F9A048023FCA77A967D81C89FF",
+  "headless_loading_checks": 39,
+  "loading_failures": 0,
+  "export_smoke": "passed_headless_Dummy_30fps",
+  "normal_fps_limit": 60,
+  "native_gpu_launch_performed": false,
+  "resource_stability_test_performed": false,
+  "user_data_changed": false,
+  "existing_caches_deleted": false,
+  "candidate_removed": true,
+  "scalability_source_hashes_match": 8,
+  "utc": "2026-10-14T10:22:57.744262+00:00"
+}
