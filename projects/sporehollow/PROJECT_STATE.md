@@ -1,3 +1,5 @@
+<!-- 技術・配布状態用。世界観とゲーム仕様は [SPEC.md](SPEC.md) が正本です。 -->
+
 # 建築ゴースト・資材補充（2026-10-15）
 
 完成画像の半透明プレビュー、設置不可理由、予約時の現物資材確保、F3資材補充を実装。関連335チェック＋正式素材10枚照合を通過。[変更・検証・EXE反映記録](review/current/building-preview/REPORT.md)。通常ゲーム自動起動なし。コードbaf16ef0を既存最新EXEへ反映済み。ハッシュとビルド記録は同フォルダDELIVERY.json。以下は過去記録。
@@ -26,7 +28,7 @@
 
 ## 過去の企画採用記録（今回実装へ移行）
 
-製作・生活基盤の旧「設計のみ」の記載は冒頭の実装状態へ更新。現行正本は [CRAFTING_NEEDS_DESIGN.md](CRAFTING_NEEDS_DESIGN.md)。
+製作・生活基盤の旧「設計のみ」の記載は冒頭の実装状態へ更新。現行正本は [CRAFTING_NEEDS_DESIGN.md](docs/internal/CRAFTING_NEEDS_DESIGN.md)。
 
 ## 岩盤外縁・ログスクロール（2026-10-14）
 
