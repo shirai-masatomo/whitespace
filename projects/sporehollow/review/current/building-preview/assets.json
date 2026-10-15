@@ -1,0 +1,126 @@
+{
+  "source_commit": "f7c521e72047119bed1121c1cebad1b5ddacfe31",
+  "checks": [
+    {
+      "file": "benches/cooking_bench.png",
+      "passed": true,
+      "size": [
+        48,
+        48
+      ],
+      "anchor": [
+        24,
+        44
+      ]
+    },
+    {
+      "file": "ui_icons/cooking_bench.png",
+      "passed": true,
+      "size": [
+        32,
+        32
+      ],
+      "anchor": [
+        16,
+        16
+      ]
+    },
+    {
+      "file": "benches/carpentry_bench.png",
+      "passed": true,
+      "size": [
+        48,
+        48
+      ],
+      "anchor": [
+        24,
+        44
+      ]
+    },
+    {
+      "file": "ui_icons/carpentry_bench.png",
+      "passed": true,
+      "size": [
+        32,
+        32
+      ],
+      "anchor": [
+        16,
+        16
+      ]
+    },
+    {
+      "file": "benches/sewing_bench.png",
+      "passed": true,
+      "size": [
+        48,
+        48
+      ],
+      "anchor": [
+        24,
+        44
+      ]
+    },
+    {
+      "file": "ui_icons/sewing_bench.png",
+      "passed": true,
+      "size": [
+        32,
+        32
+      ],
+      "anchor": [
+        16,
+        16
+      ]
+    },
+    {
+      "file": "placeables/wood_crate.png",
+      "passed": true,
+      "size": [
+        48,
+        48
+      ],
+      "anchor": [
+        24,
+        44
+      ]
+    },
+    {
+      "file": "ui_icons/wood_crate.png",
+      "passed": true,
+      "size": [
+        32,
+        32
+      ],
+      "anchor": [
+        16,
+        16
+      ]
+    },
+    {
+      "file": "placeables/wood_shelf.png",
+      "passed": true,
+      "size": [
+        48,
+        48
+      ],
+      "anchor": [
+        24,
+        44
+      ]
+    },
+    {
+      "file": "ui_icons/wood_shelf.png",
+      "passed": true,
+      "size": [
+        32,
+        32
+      ],
+      "anchor": [
+        16,
+        16
+      ]
+    }
+  ],
+  "failures": 0
+}

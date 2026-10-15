@@ -1,0 +1,996 @@
+{
+  "schema_version": 1,
+  "delivery": "crafting_assets_v1",
+  "implementation_ref": "aa3eb39a18b250a3a34f987744eb1b6fd7b24cb9",
+  "art_base": "adb33aa07da2ec57959e0315963f15003ddcd085",
+  "cell_px": [
+    48,
+    42
+  ],
+  "filter": "nearest",
+  "format": "straight RGBA",
+  "assets": [
+    {
+      "file": "benches/cooking_bench.png",
+      "id": "cooking_bench",
+      "usage": "world",
+      "size_px": [
+        48,
+        48
+      ],
+      "anchor_px": [
+        24,
+        44
+      ],
+      "alpha_bbox": [
+        2,
+        21,
+        46,
+        44
+      ],
+      "sha256": "e13586b322141c03a78bbacb8cb1e353a4f47275f5d357695da91b0e2dd374eb",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "placement": "cell center + (0,21)",
+      "body_px": [
+        44,
+        23
+      ],
+      "source": "../../art-production/crafting-assets-v1/originals/cooking_bench.png"
+    },
+    {
+      "file": "ui_icons/cooking_bench.png",
+      "id": "cooking_bench",
+      "usage": "ui",
+      "size_px": [
+        32,
+        32
+      ],
+      "anchor_px": [
+        16,
+        16
+      ],
+      "alpha_bbox": [
+        2,
+        8,
+        30,
+        23
+      ],
+      "sha256": "7745c0191c819021e863c6573f1d826c3a87b9603cab6625778bc414f7cb1334",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "placement": "UI rectangle center",
+      "body_px": [
+        28,
+        15
+      ]
+    },
+    {
+      "file": "benches/carpentry_bench.png",
+      "id": "carpentry_bench",
+      "usage": "world",
+      "size_px": [
+        48,
+        48
+      ],
+      "anchor_px": [
+        24,
+        44
+      ],
+      "alpha_bbox": [
+        2,
+        21,
+        46,
+        44
+      ],
+      "sha256": "08ce7d3b1a109ac5dc00c6b4c0bd840b97c6768be27dea49d6db79fd3f7c181f",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "placement": "cell center + (0,21)",
+      "body_px": [
+        44,
+        23
+      ],
+      "source": "../../art-production/crafting-assets-v1/originals/carpentry_bench.png"
+    },
+    {
+      "file": "ui_icons/carpentry_bench.png",
+      "id": "carpentry_bench",
+      "usage": "ui",
+      "size_px": [
+        32,
+        32
+      ],
+      "anchor_px": [
+        16,
+        16
+      ],
+      "alpha_bbox": [
+        2,
+        8,
+        30,
+        23
+      ],
+      "sha256": "c82ed48271c9ae901f2ce7e98af281f5a64fe5db2074de2645e9125c2909c51d",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "placement": "UI rectangle center",
+      "body_px": [
+        28,
+        15
+      ]
+    },
+    {
+      "file": "benches/sewing_bench.png",
+      "id": "sewing_bench",
+      "usage": "world",
+      "size_px": [
+        48,
+        48
+      ],
+      "anchor_px": [
+        24,
+        44
+      ],
+      "alpha_bbox": [
+        2,
+        17,
+        46,
+        44
+      ],
+      "sha256": "ebbe93d073ff7fa814af3eb3b04028bc6e722d44a1717e7f31801bf876a432eb",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "placement": "cell center + (0,21)",
+      "body_px": [
+        44,
+        27
+      ],
+      "source": "../../art-production/crafting-assets-v1/originals/sewing_bench.png"
+    },
+    {
+      "file": "ui_icons/sewing_bench.png",
+      "id": "sewing_bench",
+      "usage": "ui",
+      "size_px": [
+        32,
+        32
+      ],
+      "anchor_px": [
+        16,
+        16
+      ],
+      "alpha_bbox": [
+        2,
+        7,
+        30,
+        24
+      ],
+      "sha256": "35142878fd0ac319247dbf080b7ec5775571b9ae03ff54450d5031c7e269e63e",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "placement": "UI rectangle center",
+      "body_px": [
+        28,
+        17
+      ]
+    },
+    {
+      "file": "placeables/wood_crate.png",
+      "id": "wood_crate",
+      "usage": "world",
+      "size_px": [
+        48,
+        48
+      ],
+      "anchor_px": [
+        24,
+        44
+      ],
+      "alpha_bbox": [
+        10,
+        17,
+        38,
+        44
+      ],
+      "sha256": "90ff9889a9fcd29b77a23bcfa71694a8614d386c6b70a87413582b098013fd34",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "placement": "cell center + (0,21)",
+      "body_px": [
+        28,
+        27
+      ],
+      "source": "../../art-production/crafting-assets-v1/originals/wood_crate.png"
+    },
+    {
+      "file": "ui_icons/wood_crate.png",
+      "id": "wood_crate",
+      "usage": "ui",
+      "size_px": [
+        32,
+        32
+      ],
+      "anchor_px": [
+        16,
+        16
+      ],
+      "alpha_bbox": [
+        2,
+        2,
+        30,
+        29
+      ],
+      "sha256": "40ed0c1ca504444245f1ad06095b5b9ab852b429c0b12291a89f4467d544f21b",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "placement": "UI rectangle center",
+      "body_px": [
+        28,
+        27
+      ]
+    },
+    {
+      "file": "placeables/wood_shelf.png",
+      "id": "wood_shelf",
+      "usage": "world",
+      "size_px": [
+        48,
+        48
+      ],
+      "anchor_px": [
+        24,
+        44
+      ],
+      "alpha_bbox": [
+        9,
+        3,
+        40,
+        44
+      ],
+      "sha256": "4a17a020677d0610c92e71ad0ae1ecbad59c913b3e9060328e3e9e5088678d7d",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "occupied_cells": [
+        1,
+        1
+      ],
+      "placement": "cell center + (0,21)",
+      "body_px": [
+        31,
+        41
+      ],
+      "source": "../../art-production/crafting-assets-v1/originals/wood_shelf.png"
+    },
+    {
+      "file": "ui_icons/wood_shelf.png",
+      "id": "wood_shelf",
+      "usage": "ui",
+      "size_px": [
+        32,
+        32
+      ],
+      "anchor_px": [
+        16,
+        16
+      ],
+      "alpha_bbox": [
+        5,
+        2,
+        26,
+        30
+      ],
+      "sha256": "f22194a06716e7ed477243cf97836f4626282cf40db855aebdb244c19ad1517d",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "placement": "UI rectangle center",
+      "body_px": [
+        21,
+        28
+      ]
+    },
+    {
+      "file": "items/fiber_bundle.png",
+      "id": "fiber",
+      "usage": "world",
+      "size_px": [
+        32,
+        32
+      ],
+      "anchor_px": [
+        16,
+        28
+      ],
+      "alpha_bbox": [
+        4,
+        9,
+        28,
+        28
+      ],
+      "sha256": "abe2e6bdbc73ad183bc1b2dfc43e3518ea8cff03eeb2e61a233916002b8d0cfa",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "placement": "item ground foot",
+      "body_px": [
+        24,
+        20
+      ],
+      "source": "../../art-production/crafting-assets-v1/originals/fiber_bundle.png"
+    },
+    {
+      "file": "ui_icons/fiber_bundle.png",
+      "id": "fiber",
+      "usage": "ui",
+      "size_px": [
+        32,
+        32
+      ],
+      "anchor_px": [
+        16,
+        16
+      ],
+      "alpha_bbox": [
+        2,
+        5,
+        30,
+        27
+      ],
+      "sha256": "6c85ad18ce2ce23d579e02d2fc82276b55e1b4152a58808f60bf1aa2ebd65ee2",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "placement": "UI rectangle center",
+      "body_px": [
+        28,
+        23
+      ]
+    },
+    {
+      "file": "items/fiber_clothes.png",
+      "id": "fiber_clothes",
+      "usage": "world",
+      "size_px": [
+        32,
+        32
+      ],
+      "anchor_px": [
+        16,
+        28
+      ],
+      "alpha_bbox": [
+        3,
+        7,
+        29,
+        28
+      ],
+      "sha256": "ae1bff9f6689b2506409a9a0a848f17fc43b22921b4ad2a97f32633a9d63d20d",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "placement": "item ground foot",
+      "body_px": [
+        26,
+        21
+      ],
+      "source": "../../art-production/crafting-assets-v1/originals/fiber_clothes.png"
+    },
+    {
+      "file": "ui_icons/fiber_clothes.png",
+      "id": "fiber_clothes",
+      "usage": "ui",
+      "size_px": [
+        32,
+        32
+      ],
+      "anchor_px": [
+        16,
+        16
+      ],
+      "alpha_bbox": [
+        2,
+        5,
+        30,
+        27
+      ],
+      "sha256": "84c3649601b8cf1fe2a3084a453bffd69c14a52e29d11a6644462b344fd8de1f",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "placement": "UI rectangle center",
+      "body_px": [
+        28,
+        22
+      ]
+    },
+    {
+      "file": "food/roast_mushroom.png",
+      "id": "roast_mushroom",
+      "usage": "world",
+      "size_px": [
+        32,
+        32
+      ],
+      "anchor_px": [
+        16,
+        28
+      ],
+      "alpha_bbox": [
+        4,
+        14,
+        28,
+        28
+      ],
+      "sha256": "3163d05ddcf58bc183b40a099c0cbc1c8793f15125b6957ffedee8c0b98dd66d",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "placement": "item ground foot",
+      "body_px": [
+        24,
+        14
+      ],
+      "source": "../../art-production/crafting-assets-v1/originals/roast_mushroom.png"
+    },
+    {
+      "file": "ui_icons/roast_mushroom.png",
+      "id": "roast_mushroom",
+      "usage": "ui",
+      "size_px": [
+        32,
+        32
+      ],
+      "anchor_px": [
+        16,
+        16
+      ],
+      "alpha_bbox": [
+        2,
+        7,
+        30,
+        24
+      ],
+      "sha256": "0ab95c4d99d4fa652503071362bc38d0ea5e307f3c0a0715a8ca6d68e5c61aee",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "placement": "UI rectangle center",
+      "body_px": [
+        28,
+        17
+      ]
+    },
+    {
+      "file": "food/egg_meal.png",
+      "id": "egg_meal",
+      "usage": "world",
+      "size_px": [
+        32,
+        32
+      ],
+      "anchor_px": [
+        16,
+        28
+      ],
+      "alpha_bbox": [
+        4,
+        16,
+        28,
+        28
+      ],
+      "sha256": "89e661d619f39acbb6d6876c1bcd4f4567c7326a441084913f2a73d896e52445",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "placement": "item ground foot",
+      "body_px": [
+        24,
+        12
+      ],
+      "source": "../../art-production/crafting-assets-v1/originals/egg_meal.png"
+    },
+    {
+      "file": "ui_icons/egg_meal.png",
+      "id": "egg_meal",
+      "usage": "ui",
+      "size_px": [
+        32,
+        32
+      ],
+      "anchor_px": [
+        16,
+        16
+      ],
+      "alpha_bbox": [
+        2,
+        8,
+        30,
+        23
+      ],
+      "sha256": "659b8e2af2a7dd7561703fc346126d1d3e404061cac417658ba0737c9de5de40",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "placement": "UI rectangle center",
+      "body_px": [
+        28,
+        15
+      ]
+    },
+    {
+      "file": "food/roast_meat.png",
+      "id": "roast_meat",
+      "usage": "world",
+      "size_px": [
+        32,
+        32
+      ],
+      "anchor_px": [
+        16,
+        28
+      ],
+      "alpha_bbox": [
+        4,
+        13,
+        28,
+        28
+      ],
+      "sha256": "885778bc0b3774b46a0e65d0d7e38dcf705cc13212ece95219c931c541a0a415",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "placement": "item ground foot",
+      "body_px": [
+        24,
+        15
+      ],
+      "source": "../../art-production/crafting-assets-v1/originals/roast_meat.png"
+    },
+    {
+      "file": "ui_icons/roast_meat.png",
+      "id": "roast_meat",
+      "usage": "ui",
+      "size_px": [
+        32,
+        32
+      ],
+      "anchor_px": [
+        16,
+        16
+      ],
+      "alpha_bbox": [
+        2,
+        7,
+        30,
+        24
+      ],
+      "sha256": "41e72833481f26403de8a39f73a4b1e4db58400eda3f41c7a44873d0002e483c",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "placement": "UI rectangle center",
+      "body_px": [
+        28,
+        17
+      ]
+    },
+    {
+      "file": "food/stew.png",
+      "id": "stew",
+      "usage": "world",
+      "size_px": [
+        32,
+        32
+      ],
+      "anchor_px": [
+        16,
+        28
+      ],
+      "alpha_bbox": [
+        4,
+        6,
+        28,
+        28
+      ],
+      "sha256": "3fc733678d7e1a24368c259ab4d24348d98b5b7e5033cf8cb310791bfb990784",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "placement": "item ground foot",
+      "body_px": [
+        24,
+        22
+      ],
+      "source": "../../art-production/crafting-assets-v1/originals/stew.png"
+    },
+    {
+      "file": "ui_icons/stew.png",
+      "id": "stew",
+      "usage": "ui",
+      "size_px": [
+        32,
+        32
+      ],
+      "anchor_px": [
+        16,
+        16
+      ],
+      "alpha_bbox": [
+        2,
+        3,
+        30,
+        29
+      ],
+      "sha256": "6a6cab09a2b6ec4bb8a5036ea53c85cceff26d709843707e6edea30a4db0dd46",
+      "frame_order": [
+        0
+      ],
+      "frame_duration_ms": [
+        null
+      ],
+      "loop": false,
+      "shadow_baked": false,
+      "occupied_cells": [
+        0,
+        0
+      ],
+      "placement": "UI rectangle center",
+      "body_px": [
+        28,
+        26
+      ]
+    }
+  ],
+  "details": [
+    {
+      "name": "cooking_bench",
+      "label": "調理台",
+      "source_bbox": [
+        141,
+        315,
+        1201,
+        879
+      ],
+      "world_body": [
+        44,
+        23
+      ]
+    },
+    {
+      "name": "carpentry_bench",
+      "label": "木工作業台",
+      "source_bbox": [
+        111,
+        291,
+        1296,
+        909
+      ],
+      "world_body": [
+        44,
+        23
+      ]
+    },
+    {
+      "name": "sewing_bench",
+      "label": "裁縫台",
+      "source_bbox": [
+        178,
+        266,
+        1202,
+        894
+      ],
+      "world_body": [
+        44,
+        27
+      ]
+    },
+    {
+      "name": "wood_crate",
+      "label": "木箱",
+      "source_bbox": [
+        366,
+        324,
+        989,
+        921
+      ],
+      "world_body": [
+        28,
+        27
+      ]
+    },
+    {
+      "name": "wood_shelf",
+      "label": "木製棚",
+      "source_bbox": [
+        286,
+        366,
+        839,
+        1098
+      ],
+      "world_body": [
+        31,
+        41
+      ]
+    },
+    {
+      "name": "fiber_bundle",
+      "label": "植物繊維",
+      "source_bbox": [
+        242,
+        260,
+        1135,
+        986
+      ],
+      "world_body": [
+        24,
+        20
+      ]
+    },
+    {
+      "name": "fiber_clothes",
+      "label": "草繊維の服",
+      "source_bbox": [
+        121,
+        176,
+        1214,
+        1039
+      ],
+      "world_body": [
+        26,
+        21
+      ]
+    },
+    {
+      "name": "roast_mushroom",
+      "label": "焼きキノコ",
+      "source_bbox": [
+        425,
+        387,
+        1011,
+        735
+      ],
+      "world_body": [
+        24,
+        14
+      ]
+    },
+    {
+      "name": "egg_meal",
+      "label": "卵料理",
+      "source_bbox": [
+        330,
+        341,
+        1119,
+        750
+      ],
+      "world_body": [
+        24,
+        12
+      ]
+    },
+    {
+      "name": "roast_meat",
+      "label": "焼き肉",
+      "source_bbox": [
+        386,
+        347,
+        1063,
+        764
+      ],
+      "world_body": [
+        24,
+        15
+      ]
+    },
+    {
+      "name": "stew",
+      "label": "肉とキノコの煮込み",
+      "source_bbox": [
+        365,
+        364,
+        920,
+        882
+      ],
+      "world_body": [
+        24,
+        22
+      ]
+    }
+  ],
+  "runtime_verified": false
+}

@@ -1,4 +1,18 @@
 extends RefCounted
+const FURNITURE_WORLD = {
+	"cooking_bench":preload("res://art_delivery/crafting_assets_v1/benches/cooking_bench.png"),
+	"carpentry_bench":preload("res://art_delivery/crafting_assets_v1/benches/carpentry_bench.png"),
+	"sewing_bench":preload("res://art_delivery/crafting_assets_v1/benches/sewing_bench.png"),
+	"wood_crate":preload("res://art_delivery/crafting_assets_v1/placeables/wood_crate.png"),
+	"wood_shelf":preload("res://art_delivery/crafting_assets_v1/placeables/wood_shelf.png"),
+}
+const FURNITURE_UI = {
+	"cooking_bench":preload("res://art_delivery/crafting_assets_v1/ui_icons/cooking_bench.png"),
+	"carpentry_bench":preload("res://art_delivery/crafting_assets_v1/ui_icons/carpentry_bench.png"),
+	"sewing_bench":preload("res://art_delivery/crafting_assets_v1/ui_icons/sewing_bench.png"),
+	"wood_crate":preload("res://art_delivery/crafting_assets_v1/ui_icons/wood_crate.png"),
+	"wood_shelf":preload("res://art_delivery/crafting_assets_v1/ui_icons/wood_shelf.png"),
+}
 const TEXTURES = {
 	"soil/floor/base.png": preload("res://art_delivery/earth_stone_buildings_v1/soil/floor/base.png"),
 	"soil/wall/normal/mask_00.png": preload("res://art_delivery/earth_stone_buildings_v1/soil/wall/normal/mask_00.png"),
@@ -221,21 +235,22 @@ static func draw_outer_wall(game,texture: Texture2D,at: Vector2,color: Color):
 	game.draw_mesh(surface_mesh(),texture,Transform2D(0,at),color)
 
 static func wall(game,p: Vector2,b: Dictionary,preview: bool):
-	var mask=0 if preview else wall_mask(game,Vector2i(p/game.TILE))
+	var mask=b.preview_mask if b.has("preview_mask") else wall_mask(game,Vector2i(p/game.TILE))
 	var state="damaged" if b.hp<=b.max_hp*0.5 else "normal"
 	var mat=material(b.kind)
 	var path="wall/%s/wood_mask_%02d.png"%[state,mask] if mat=="wood" else "%s/wall/%s/mask_%02d.png"%[mat,state,mask]
-	draw_outer_wall(game,TEXTURES[path],(p-Vector2(24,34)).round(),Color(1,1,1,0.45 if preview else 1.0))
+	draw_outer_wall(game,TEXTURES[path],(p-Vector2(24,34)).round(),b.get("tint",Color(1,1,1,0.45 if preview else 1.0)))
 
 static func floor_tile(game,cell: Vector2i):
-	var p=Vector2(cell)*game.TILE
-	var kind=game.world.floors[cell].kind
-	var path=floor_path(kind)
-	game.draw_texture(TEXTURES[path+("wood_00.png" if material(kind)=="wood" else "base.png")],p)
 	var mask=0
 	for pair in [[Vector2i.UP,1],[Vector2i.RIGHT,2],[Vector2i.DOWN,4],[Vector2i.LEFT,8]]:
 		if game.world.floors.get(cell+pair[0],{}).get("status")!="ready":mask+=pair[1]
-	game.draw_texture(TEXTURES[path+"perimeter/mask_%02d.png"%mask],p)
+	floor_at(game,cell,game.world.floors[cell].kind,mask)
+
+static func floor_at(game,cell:Vector2i,kind:String,mask:int,tint:Color=Color.WHITE):
+	var p=Vector2(cell)*game.TILE;var path=floor_path(kind)
+	game.draw_texture(TEXTURES[path+("wood_00.png" if material(kind)=="wood" else "base.png")],p,tint)
+	game.draw_texture(TEXTURES[path+"perimeter/mask_%02d.png"%mask],p,tint)
 
 static func boundaries(game):
 	for cell in game.world.floors:
@@ -247,14 +262,26 @@ static func boundaries(game):
 				game.draw_texture(TEXTURES[floor_path(a.kind)+"boundary/%s.png"%pair[1]],Vector2(cell)*game.TILE)
 
 static func door_layer(game,p: Vector2,b: Dictionary,layer: String):
-	var mask=wall_mask(game,Vector2i(p/game.TILE))
+	var mask=b.preview_mask if b.has("preview_mask") else wall_mask(game,Vector2i(p/game.TILE))
+	var tint=b.get("tint",Color.WHITE)
 	var direction="vertical" if int(bool(mask&1))+int(bool(mask&4))>int(bool(mask&2))+int(bool(mask&8)) else "horizontal"
 	var root="door/"+direction+"_"
 	var at=(p-Vector2(24,34)).round()
-	if layer!="leaf":draw_outer_wall(game,TEXTURES[root+layer+".png"],at,Color.WHITE);return
+	if layer!="leaf":draw_outer_wall(game,TEXTURES[root+layer+".png"],at,tint);return
 	var state="open" if b.open else "closed"
-	draw_outer_wall(game,TEXTURES[root+"leaf_"+state+("_damaged.png" if b.hp<=b.max_hp*0.5 else "_normal.png")],at,Color.WHITE)
-	if b.kind=="locked_door":draw_outer_wall(game,TEXTURES[root+"lock_"+state+("_broken.png" if b.get("lock_hp",0)<=0 else "_normal.png")],at,Color.WHITE)
+	draw_outer_wall(game,TEXTURES[root+"leaf_"+state+("_damaged.png" if b.hp<=b.max_hp*0.5 else "_normal.png")],at,tint)
+	if b.kind=="locked_door":draw_outer_wall(game,TEXTURES[root+"lock_"+state+("_broken.png" if b.get("lock_hp",0)<=0 else "_normal.png")],at,tint)
 	if b.hp<b.max_hp:game.draw_rect(Rect2(p+Vector2(-18,19),Vector2(36.0*b.hp/b.max_hp,3)),Color("ebc171"))
 
 
+
+static func bench(game,p:Vector2,kind:String,tint:Color=Color.WHITE):
+	# 48x48 original, anchor(24,44), foot at cell center+(0,21).
+	game.draw_texture(FURNITURE_WORLD[kind],(p+Vector2(-24,-23)).round(),tint)
+
+static func placeable(game,p:Vector2,kind:String,tint:Color=Color.WHITE):
+	var assets=preload("res://game/direction_art.gd").ASSETS
+	if kind in ["kokeshi","fossil"]:
+		var row=assets["kokeshi.idle" if kind=="kokeshi" else "new.fossil"]
+		game.draw_texture(row.texture,(p+Vector2(0,14)-row.anchor).round(),tint)
+	else:bench(game,p,kind,tint)

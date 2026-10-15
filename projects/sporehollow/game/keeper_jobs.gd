@@ -1,11 +1,13 @@
 extends RefCounted
+const Reservations=preload("res://game/build_reservations.gd")
 const Policy=preload("res://game/work_policy.gd")
 const LIMIT = Policy.DESIGNATION_LIMIT
 const SPEED = 2.5
 
 # Index lives only for a synchronous preview/commit transaction, never across ticks.
 static func index(w) -> Dictionary:
-	var result={"kinds":{},"layers":{}}
+	var result={"kinds":{},"layers":{},"materials":{}}
+	for kind in w.Rules.RESOURCE_TYPES:result.materials[kind]=Reservations.available(w,kind)
 	for j in w.jobs:index_add(w,result,j)
 	preload("res://game/terrain_metrics.gd").count("job_index_rows",w.jobs.size())
 	return result
@@ -13,7 +15,7 @@ static func index(w) -> Dictionary:
 static func index_add(w,lookup: Dictionary,j):
 	if not lookup.kinds.has(j.pos):lookup.kinds[j.pos]={}
 	lookup.kinds[j.pos][j.kind]=true
-	var target=w.BUILD[j.kind].layer if w.BUILD.has(j.kind) else j.get("target_layer","")
+	var target=w.BUILD[j.kind].layer if w.BUILD.has(j.kind) else ("structure" if j.kind.begins_with("place_") else j.get("target_layer",""))
 	if target!="":
 		if not lookup.layers.has(j.pos):lookup.layers[j.pos]={}
 		lookup.layers[j.pos][target]=true
@@ -29,20 +31,26 @@ static func build_reason(w, kind: String, p: Vector2i, extra_jobs: int=0, held_c
 	if lookup.layers.get(p,{}).has(w.BUILD[kind].layer): return "同じ場所に別の予定があります"
 	var why=w.Buildings.reason(w,kind,p,false)
 	if why!="": return why
-	return ""
+	return Reservations.shortage(w,kind,held_cost,lookup.get("materials",{}).get(w.BUILD[kind].get("resource","soil"),-1))
 
 static func enqueue(w, kind: String, p: Vector2i, animal_id: int,lookup: Dictionary={}) -> bool:
 	w.Stock.normalize(w)
-	if not w.working() or w.jobs.size()>=LIMIT or not w.inside(p): return false
+	if not w.working() or w.jobs.size()>=LIMIT or not w.inside(p):
+		if w.BUILD.has(kind) and not lookup.get("quiet",false):Reservations.reject(w,kind,build_reason(w,kind,p,0,0,lookup))
+		return false
 	if lookup.is_empty():lookup=index(w)
-	if lookup.kinds.get(p,{}).has(kind): return false
+	if lookup.kinds.get(p,{}).has(kind):
+		if w.BUILD.has(kind) and not lookup.get("quiet",false):Reservations.reject(w,kind,"予約済みです")
+		return false
 	var resource=""
 	var cost=0
 	if w.BUILD.has(kind):
 		var why=build_reason(w,kind,p,0,0,lookup)
-		if why!="": w.say(why); return false
+		if why!="":
+			if not lookup.get("quiet",false):Reservations.reject(w,kind,why)
+			return false
 		resource=w.BUILD[kind].get("resource","soil")
-		cost=0 if w.debug_enabled and w.debug_infinite else w.BUILD[kind].cost
+		cost=w.BUILD[kind].cost
 	elif kind=="move":
 		if not w.walkable(p): return false
 	elif kind=="collect":
@@ -67,6 +75,9 @@ static func enqueue(w, kind: String, p: Vector2i, animal_id: int,lookup: Diction
 			j.kind="haul";j.stock_id=row.stock_id;j.explicit_designation=true
 	j.physical=w.BUILD.has(kind)
 	if j.physical:
+		if not Reservations.claim(w,j):return false
+		j.plan_claimed=true
+		lookup.materials[resource]=maxi(0,int(lookup.materials.get(resource,0))-cost)
 		j.construction_group=lookup.get("construction_group",j.id)
 		j.construction_ready=not lookup.has("construction_group")
 	j.work_category=w.Work.category(w,j)
@@ -85,6 +96,7 @@ static func cancel(w,id: int,reason: String="cancelled") -> bool:
 			j.cancel_requested=true; return true
 		if j.kind=="craft":w.Craft.cancel(w,j)
 		w.Delivery.cancel_job(w,j)
+		w.Stock.release_token(w,Reservations.token(j))
 		w.Work.release(w,j)
 		if j.kind=="animal_order": w.Orders.stop(w,j)
 		if w.BUILD.has(j.kind):
@@ -181,6 +193,7 @@ static func execute(w,j,actor: Dictionary):
 	complete(w,j,w._execute_local(j.kind,j.pos,j.animal_id))
 
 static func complete(w,j: Dictionary,ok: bool):
+	if j.kind.begins_with("place_"):w.Stock.release_token(w,Reservations.token(j))
 	if w.BUILD.has(j.kind) and j.get("physical",false):
 		w.Stock.finish_build(w,j,ok)
 		if ok:w.PlayerEvents.add(w,w.Buildings.NAMES.get(j.kind,"建物")+"が完成しました","build_done:%d"%j.id)

@@ -38,7 +38,6 @@ const Orders = preload("res://game/animal_orders.gd")
 var floors: Dictionary = {}
 var indoor: Dictionary = {}
 var debug_enabled = false
-var debug_infinite = false
 var campaign: Dictionary
 var checkpoint: Dictionary
 var stage = 1
@@ -1068,7 +1067,7 @@ func repair_quote(p: Vector2i, target_layer: String="structure") -> Dictionary:
 	var b = building_store(target_layer)[p]
 	var unit_cost: float = maxf(1,b.cost) * Rules.REPAIR_FACTOR / b.max_hp
 	var missing=b.max_hp-b.hp+b.get("max_lock_hp",0)-b.get("lock_hp",0)
-	var recovery=(missing if debug_enabled and debug_infinite else mini(missing,floori(resource_amount(b.get("resource","soil"))/unit_cost)))
+	var recovery=mini(missing,floori(resource_amount(b.get("resource","soil"))/unit_cost))
 	return {"hp":recovery,"cost":ceili(recovery*unit_cost)}
 
 func repair(p: Vector2i, target_layer: String="structure") -> bool:
@@ -1076,7 +1075,7 @@ func repair(p: Vector2i, target_layer: String="structure") -> bool:
 	var quote=repair_quote(p,target_layer)
 	if quote.hp<=0: return false
 	var b=building_store(target_layer)[p]
-	if not(debug_enabled and debug_infinite): add_resource(b.get("resource","soil"),-quote.cost)
+	add_resource(b.get("resource","soil"),-quote.cost)
 	var body=mini(quote.hp,b.max_hp-b.hp)
 	b.hp+=body
 	b.lock_hp=b.get("lock_hp",0)+quote.hp-body
@@ -1683,10 +1682,10 @@ func rescue_exit(a: Dictionary, target: Vector2i=Vector2i(-1,-1)) -> Vector2i:
 	return sites[0] if not sites.is_empty() else a.pos
 
 func debug_action(action: String, selection: Dictionary = {}) -> bool:
-	if not debug_enabled: return false
+	if not debug_enabled or action=="infinite": return false
 	if action=="spawn_enemy": return debug_spawn_enemy(selection.get("enemy_kind",""))
 	if action=="lock" and (selection.get("kind")!="structure" or structures.get(selection.get("pos"),{}).get("kind")!="locked_door" or structures.get(selection.get("pos"),{}).get("status")!="ready"): return false
-	if action=="infinite": debug_infinite=not debug_infinite
+	if action=="replenish": Stock.debug_replenish(self)
 	elif action=="whistle": campaign.items.whistle=1
 	elif SPECIES.has(action):
 		var id=campaign.next_animal_id

@@ -57,7 +57,6 @@ static func panel_rect(lines: Array) -> Rect2:
 static func draw(c,q: Vector2,row: Dictionary):
 	var stage=row.stage
 	if stage!="working":
-		c.draw_rect(Rect2(q-Vector2(19,14),Vector2(38,28)),Color(0.79,0.76,0.55,0.35))
 		for x in [-18,18]:c.draw_line(q+Vector2(x,11),q+Vector2(x,-12),Color("bdac7a"),3)
 	if row.delivered>0:
 		# Reuse adopted square resource art; no generated or stretched material sprites.

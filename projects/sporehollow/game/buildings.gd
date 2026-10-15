@@ -63,7 +63,7 @@ static func reason(w, kind: String, p: Vector2i, check_cost: bool = true) -> Str
 		var compatible = (kind in WALLS and old.kind in WALLS) or data.get("layer") == "floor"
 		if not compatible or data.get("tier",-1) <= w.BUILD.get(old.kind,{}).get("tier",0): return "上位の素材を選んでください"
 	elif old.get("status") == "building": return "工事中です"
-	if check_cost and not (w.debug_enabled and w.debug_infinite) and w.resource_amount(data.get("resource","soil")) < data.cost: return "素材が足りません"
+	if check_cost and w.resource_amount(data.get("resource","soil")) < data.cost: return "素材が足りません"
 	if encloses_outdoor_animal(w,kind,p):return "先に犬を外へ誘導"
 	return ""
 

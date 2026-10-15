@@ -110,6 +110,8 @@ var drag_encounters: Array = []
 var drag_ranks: Dictionary = {}
 var selection_static_key: Array=[]
 var selection_static_rows: Array=[]
+var planned_ghost=preload("res://game/building_ghost.gd").new()
+var building_ghost=preload("res://game/building_ghost.gd").new()
 var wall_stroke=preload("res://game/wall_stroke.gd").new()
 var context_panel: Panel
 var ui_pointer_capture = false
@@ -564,13 +566,14 @@ func refresh_measured():
 			var definition=Farm.BUILD.get(id,{})
 			buttons[id].tooltip_text = "%s\n%s ×%d · 施工 %s秒\n%s"%[TOOLS[id],world.Work.Policy.LABELS.get(definition.get("resource","soil"),{"soil":"土","wood":"木材","stone":"石"}.get(definition.get("resource","soil"),"材料")),definition.get("cost",0),str(definition.get("seconds",1)),"備蓄から搬入後に施工" if not definition.is_empty() else "必要な現物と空き場所を指定"]
 			if not definition.is_empty():
-				var available=world.resource_amount(definition.get("resource","soil"))
-				buttons[id].tooltip_text+="\n利用可能 %d / 必要 %d"%[available,definition.get("cost",0)]+("\n材料不足：先に備蓄へ回収してください。予約はできます。" if available<definition.get("cost",0) else "")
+				var available=world.Jobs.Reservations.available(world,definition.get("resource","soil"))
+				buttons[id].tooltip_text+="\n利用可能 %d / 必要 %d"%[available,definition.get("cost",0)]+("\n資材不足：先に備蓄へ回収してください。新しい予約はできません。" if available<definition.get("cost",0) else "")
 				if available<definition.get("cost",0):buttons[id].text=TOOLS[id].split(" ")[0]+" · 不足"
 			if Farm.Shop.FOOD.has(id):
 				buttons[id].text += " ×%d" % world.item_count(id)
 			if id in ["wall", "wood_wall", "stone_wall", "soil_tile", "wood_tile", "stone_tile", "door", "locked_door", "kennel", "coop"]:
 				buttons[id].icon = BoardArt.icon(Farm.BUILD[id].get("resource","soil"))
+			if BuildingArt.FURNITURE_UI.has(id.trim_prefix("place_")):buttons[id].icon=BuildingArt.FURNITURE_UI[id.trim_prefix("place_")]
 	for id in TOOLS:
 		if not buttons.has(id):continue
 		UI.selected(buttons[id], tool == id)
@@ -1080,6 +1083,7 @@ func prepare_work_plan_data(show_route: bool):
 
 func draw_work_plans():
 	construction_view.update(world)
+	planned_ghost.update(world)
 	preload("res://game/terrain_metrics.gd").count("main.draw_work_plans")
 	if not world.working(): return
 	var show_route=selected.get("kind")=="keeper" or queue_drag_id>=0 or hover_job>=0
@@ -1129,7 +1133,9 @@ func draw_work_plans():
 					draw_line(marker-Vector2(12,0),marker+Vector2(12,0),Color("dcd5a5"),2)
 					draw_circle(marker,3,UI.GOLD)
 		if Farm.BUILD.has(j.kind):
+			planned_ghost.draw(self,j.kind,j.pos)
 			ConstructionView.draw(self,q,construction_view.rows[j.id])
+		elif j.kind.begins_with("place_"):planned_ghost.draw(self,j.kind,j.pos)
 		else: draw_line(q + Vector2(-9, 10), q + Vector2(9, 10), Color("cfdfaa"), 3)
 		draw_line(q + Vector2(-10, -12), q + Vector2(-10, -27), Color("9b774e"), 3)
 		draw_rect(Rect2(q + Vector2(-18, -33), Vector2(22, 18)), Color("d8c692"))
@@ -1499,7 +1505,7 @@ func _unhandled_input(event):
 	drag_start = get_canvas_transform().affine_inverse() * pointer
 	drag_class = ""
 	drag_encounters.clear();drag_ranks.clear()
-	if group==0 and tool in Farm.Buildings.WALLS:
+	if group==0 and Farm.BUILD.has(tool):
 		wall_stroke.begin(tool,pointer_cell())
 		return
 	for candidate in selection_candidates():
@@ -1935,18 +1941,9 @@ func draw_structure(p: Vector2, b: Dictionary, preview: bool = false):
 			rect(p + Vector2(-15, 4), Vector2(13, 8), "82775d")
 			rect(p + Vector2(3, 7), Vector2(10, 6), "82775d")
 		return
-	if b.status == "building":
-		draw_rect(Rect2(p - Vector2(18, 13), Vector2(36, 28)), Color(0.9, 0.8, 0.5, 0.25))
-		draw_rect(Rect2(p - Vector2(18, 13), Vector2(36, 28)), Color("e5c982"), false, 2)
-		draw_line(p - Vector2(14, 10), p + Vector2(14, 10), Color("e5c982"), 2)
-		return
+	if b.status == "building":return # Shared ghost + delivery/scaffold overlay in draw_work_plans.
 	if world.Craft.Data.BENCHES.has(b.kind):
-		# Temporary bench silhouette with existing material and tool icons.
-		draw_rect(Rect2(p+Vector2(-18,-4),Vector2(36,22)),UI.WOOD)
-		for x in [-15,11]:draw_rect(Rect2(p+Vector2(x,12),Vector2(4,9)),UI.WOOD)
-		draw_rect(Rect2(p+Vector2(-20,-10),Vector2(40,10)),Color("bc955c"))
-		draw_card_icon(self,{"cooking_bench":"mushroom","carpentry_bench":"wood","sewing_bench":"fiber"}[b.kind],p+Vector2(0,-12),0.35)
-		return
+		BuildingArt.bench(self,p,b.kind,b.get("tint",Color.WHITE));return
 	if b.kind not in Farm.Buildings.WALLS: draw_colored_polygon(PackedVector2Array([p + Vector2(-20, 10), p + Vector2(20, 10), p + Vector2(28, 24), p + Vector2(-12, 24)]), Color(0.12, 0.22, 0.13, 0.25))
 	if b.kind in Farm.Buildings.WALLS:
 		BuildingArt.wall(self,p,b,preview)
@@ -1991,7 +1988,7 @@ func _draw_measured():
 		if shown[item.pos]>4:continue
 		var q=center(item.pos)+item.offset
 		if item.kind.ends_with("_plan") or item.kind=="skill_scroll":draw_texture(Art.SCROLL,(q-Vector2(12,10)).round())
-		elif item.kind in ["kokeshi","fossil"]:Direction.draw(self,"kokeshi.idle" if item.kind=="kokeshi" else "new.fossil",q+Vector2(0,14))
+		elif item.kind in world.Content.PLACEABLES:BuildingArt.placeable(self,q,item.kind)
 		elif item.kind=="egg":draw_circle(q,5 if item.compact else 7,Color("fff0c7"))
 		elif item.kind=="chick":draw_circle(q,6 if item.compact else 8,Color("efd160"))
 		elif item.kind in ["soil","wood","stone","mushroom"]:
@@ -2103,12 +2100,8 @@ func scene_actors() -> Array:
 func draw_pointer_preview():
 	if wall_stroke.kind!="":
 		var preview=wall_stroke.plan(world)
-		for row in preview.rows:
-			var color=Color("a3e5ba") if row.valid else Color("ee8a77")
-			var rect=Rect2(Vector2(row.pos)*TILE+Vector2(2,2),TILE-Vector2(4,4))
-			draw_rect(rect,Color(color,0.2));draw_rect(rect,color,false,3)
-			if not row.valid:
-				draw_line(rect.position+Vector2(5,5),rect.end-Vector2(5,5),color,2)
+		building_ghost.update(world,wall_stroke.kind,preview.rows)
+		for row in preview.rows:building_ghost.draw(self,wall_stroke.kind,row.pos,row.valid)
 		var hint="離して%d件予約 / 未登録%d件"%[preview.accepted,preview.skipped]
 		if preview.reason!="":hint+="（%s）"%preview.reason
 		label_on(self,get_canvas_transform().affine_inverse()*pointer+Vector2(14,-20),hint,16,UI.PAPER)
@@ -2141,17 +2134,21 @@ func draw_pointer_preview():
 				art_alpha = 1.0
 				draw_set_transform(Vector2.ZERO)
 		elif tool.begins_with("place_"):
-			valid=world.Content.can_place(world,cell);show_preview=true
-			Direction.draw(self,"kokeshi.idle" if tool=="place_kokeshi" else "new.fossil",center(cell)+Vector2(0,14),0.5)
+			var why=world.Content.place_reason(world,tool,cell)
+			building_ghost.draw(self,tool,cell,why=="")
+			if why!="":label_on(self,get_canvas_transform().affine_inverse()*pointer+Vector2(14,-26),why,15,UI.PAPER)
+			return
 		elif tool=="charge" and selected_animal>=0:
 			valid=world.walkable(cell);show_preview=true
 			var origin=world.Orders.animal(world,selected_animal).pos
 			var path=world.Content.line(origin,cell)
 			for point in path:draw_circle(center(point),2,UI.DANGER)
 		elif Farm.BUILD.has(tool):
-			valid = world.can_build(tool, cell)
-			show_preview = true
-			draw_rect(Rect2(Vector2(cell) * TILE + Vector2(2, 2), TILE - Vector2(4, 4)), Color(0.64, 0.90, 0.73, 0.18))
+			var draft=building_ghost.preview(world,tool,cell)
+			building_ghost.update(world,tool,draft.rows)
+			building_ghost.draw(self,tool,cell,draft.accepted==1)
+			if draft.reason!="":label_on(self,get_canvas_transform().affine_inverse()*pointer+Vector2(14,-26),draft.reason,15,UI.PAPER)
+			return
 		if show_preview:
 			draw_rect(Rect2(Vector2(cell) * TILE + Vector2(2, 2), TILE - Vector2(4, 4)), Color("a3e5ba") if valid else Color("ee8a77"), false, 3)
 			var mark = center(cell) + Vector2(17, -22)
@@ -2235,8 +2232,8 @@ func draw_hud():
 	for i in range(4):
 		var kind = ["soil", "wood", "stone", "gold"][i]
 		BoardArt.draw_resource(hud, Vector2(162 + i * 115, 24), kind)
-		label_on(hud, Vector2(181 + i * 115, 31), ("∞" if kind!="gold" and world.debug_enabled and world.debug_infinite else ("%dG"%world.campaign.gold if kind=="gold" else "%s %d"%[world.Work.Policy.LABELS.get(kind,{"soil":"土","wood":"木材","stone":"石"}[kind]),world.Stock.summary(world,kind).owned])), 17)
-		if kind!="gold" and not (world.debug_enabled and world.debug_infinite) and world.Stock.summary(world,kind).available!=world.Stock.summary(world,kind).owned:
+		label_on(hud, Vector2(181 + i * 115, 31), ("%dG"%world.campaign.gold if kind=="gold" else "%s %d"%[world.Work.Policy.LABELS.get(kind,{"soil":"土","wood":"木材","stone":"石"}[kind]),world.Stock.summary(world,kind).owned]), 17)
+		if kind!="gold" and world.Stock.summary(world,kind).available!=world.Stock.summary(world,kind).owned:
 			label_on(hud,Vector2(181+i*115,44),"使える %d"%world.Stock.summary(world,kind).available,10,UI.INK)
 	if Rect2(142, 0, 480, 49).has_point(pointer):
 		var index=clampi(int((pointer.x-142)/115),0,3)
@@ -2697,6 +2694,9 @@ func restart_morning():
 	refresh()
 
 func draw_card_icon(c: CanvasItem, kind: String, p: Vector2, scale_value: float):
+	if BuildingArt.FURNITURE_UI.has(kind):
+		var size_value=32.0 if scale_value<1 else 64.0
+		c.draw_texture_rect(BuildingArt.FURNITURE_UI[kind],Rect2(p-Vector2.ONE*size_value*0.5,Vector2.ONE*size_value),false);return
 	kind=preload("res://game/item_catalog.gd").item(kind).icon if preload("res://game/item_catalog.gd").ROWS.has(kind) else kind
 	if Assets.texture(kind)!=null: Assets.portrait(c,kind,Rect2(p-Vector2(24,28)*scale_value,Vector2(48,56)*scale_value)); return
 	if kind in ["doberman","bullfrog","hedgehog","collar","berry"]:
@@ -2946,10 +2946,11 @@ func rest_button_text() -> String:
 	return "朝まで休む"
 
 func build_debug_controls():
-	var entries=[["infinite","素材∞"],["whistle","ホイッスル"],["shiba","柴犬＋"],["hen","鶏＋"],["cat","猫＋"],["hurt","HP−10"],["heal","HP＋10"],["lock","ロック−4"]]
+	var entries=[["replenish","資材補充（各40）"],["whistle","ホイッスル"],["shiba","柴犬＋"],["hen","鶏＋"],["cat","猫＋"],["hurt","HP−10"],["heal","HP＋10"],["lock","ロック−4"]]
 	for i in range(entries.size()):
 		var row=entries[i]
-		add_button(palette,"debug_"+row[0],("素材∞ ON" if world.debug_infinite else "素材∞ OFF") if row[0]=="infinite" else row[1],Rect2(16+(i%2)*124,145+(i/2)*37,118,32),debug_action.bind(row[0]))
+		add_button(palette,"debug_"+row[0],row[1],Rect2(16+(i%2)*148,145+(i/2)*37,142,32),debug_action.bind(row[0]))
+		ColonyPanels.compact_button(self,buttons["debug_"+row[0]],14)
 
 	buttons.debug_lock.disabled=selected.get("kind")!="structure" or world.structures.get(selected.get("pos"),{}).get("kind")!="locked_door" or world.structures.get(selected.get("pos"),{}).get("status")!="ready"
 	var kinds=Farm.ProgressData.ENEMY_ROWS.keys()+["doberman"]

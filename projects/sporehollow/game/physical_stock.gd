@@ -170,6 +170,7 @@ static func prepare_build(w,j,_a) -> bool:
 	j.state="pending";j.block_reason="備蓄から材料の搬入を待っています";return false
 
 static func finish_build(w,j,success: bool):
+	w.Stock.release_token(w,preload("res://game/build_reservations.gd").token(j))
 	var remaining=int(j.get("required",w.BUILD[j.kind].cost))
 	for row in w.field_items.duplicate():
 		if row.get("location")!="site" or row.job_id!=j.id:continue
@@ -382,3 +383,29 @@ static func summary(w,kind: String) -> Dictionary:
 	for e in w.enemies:
 		if e.get("stolen",{}).get("kind","")==kind:q.stolen+=int(e.stolen.get("amount",1))
 	return q
+
+# Explicit one-click physical refill; extensible only with catalogued item IDs.
+static func debug_replenish(w,kinds: Array=MATERIALS) -> Dictionary:
+	if not w.debug_enabled:return {}
+	var result={};var added=[];var missing=[]
+	for kind in kinds:
+		if result.has(kind) or not preload("res://game/item_catalog.gd").ROWS.has(kind) or preload("res://game/item_catalog.gd").item(kind).category!="resource":continue
+		var left=40;var reason=""
+		while left>0:
+			var plan=storage_plan(w,w.keeper,left,kind)
+			if not plan.has("pos"):reason=plan.reason;break
+			var n=mini(left,plan.amount)
+			if n<=0:reason="備蓄が満杯です";break
+			var stack={}
+			for row in w.field_items:
+				if row.kind==kind and row.pos==plan.pos and stored(w,row) and not row.get("forbidden",false) and not row.get("placed",false) and not row.get("construction_transfer",false) and not row.get("craft_transfer",false):stack=row;break
+			if stack.is_empty():add(w,kind,n,plan.pos).stocked=true
+			else:stack.amount+=n;sync(w)
+			left-=n
+		var name={"soil":"土","wood":"木材","stone":"石材"}.get(kind,kind)
+		result[kind]={"added":40-left,"missing":left,"reason":reason}
+		if left<40:added.append("%s%d"%[name,40-left])
+		if left>0:missing.append("%s%d：%s"%[name,left,reason])
+	var message="デバッグ補充："+("・".join(added)+"を追加" if not added.is_empty() else "追加なし")
+	if not missing.is_empty():message+="。"+"／".join(missing)
+	w.PlayerEvents.add(w,message);w.say(message);return result

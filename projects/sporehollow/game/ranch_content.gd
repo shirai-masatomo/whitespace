@@ -17,22 +17,38 @@ static func attack_speed(w,a: Dictionary) -> float:
 	return (1.15 if w.tick<a.get("dance_until",0) else 1.0)*(1.5 if a.get("species","")=="bull" and a.hp<=a.max_hp*0.5 else 1.0)
 
 static func queue(w,kind: String,p: Vector2i,id: int) -> bool:
-	if not w.working() or w.jobs.size()>=w.Jobs.LIMIT:return false
 	if kind=="milk":
+		if not w.working() or w.jobs.size()>=w.Jobs.LIMIT:return false
 		var a=w.Orders.animal(w,id)
 		if not w.Orders.active(w,a) or a.species!="cow" or a.get("milked_day",-1)==w.campaign.day:return false
 		if w.jobs.any(func(j):return j.kind==kind and j.animal_id==id):return false
 		p=a.pos
 	else:
 		var item=kind.trim_prefix("place_")
-		if item not in PLACEABLES or not can_place(w,p):return false
-		if w.item_count(item)<=w.jobs.filter(func(j):return j.kind==kind).size():return false
-		if w.jobs.any(func(j):return j.pos==p and j.kind.begins_with("place_")):return false
+		var why=place_reason(w,kind,p)
+		if why!="":
+			var message=preload("res://game/item_catalog.gd").title(item)+"を設置できません："+why
+			w.say(message);w.PlayerEvents.add(w,message);return false
 	if w.jobs.is_empty() and w.manual_goal==null and w.Life.able(w) and w.job_hold_reason in ["travel","manual","rescue","danger","rest_end"]:w.Jobs.hold(w,"")
-	w.jobs.append({"id":w.next_job_id,"kind":kind,"pos":p,"animal_id":id,"state":"pending","started":false,"reserved":0,"resource":""})
+	var j={"id":w.next_job_id,"kind":kind,"pos":p,"animal_id":id,"state":"pending","started":false,"reserved":0,"resource":""}
+	if kind.begins_with("place_"):
+		j.resource=kind.trim_prefix("place_");j.required=1
+		if not w.Jobs.Reservations.claim(w,j):return false
+		j.plan_claimed=true
+	w.jobs.append(j)
 	w.next_job_id+=1;w.Life.wake_auto(w)
 	w.job_log.append({"tick":w.tick,"event":"queued","id":w.next_job_id-1,"kind":kind})
 	return true
+
+static func place_reason(w,kind:String,p:Vector2i) -> String:
+	var item=kind.trim_prefix("place_")
+	if item not in PLACEABLES:return "対応していない設置物です"
+	if not w.working():return "牧場作業中に予約してください"
+	if w.jobs.size()>=w.Jobs.LIMIT:return "指定は100件まで"
+	if not can_place(w,p):return "対象マスが占有されているか、地形条件に合いません"
+	if w.jobs.any(func(j):return j.pos==p and (j.kind.begins_with("place_") or w.BUILD.has(j.kind))):return "同じ場所に別の予定があります"
+	var n=w.Jobs.Reservations.place_available(w,item)
+	return "資材不足：%s（必要1／利用可能%d）"%[preload("res://game/item_catalog.gd").title(item),n] if n<1 else ""
 
 static func can_place(w,p: Vector2i) -> bool:
 	return w.inside(p) and w.walkable(p) and not w.occupied(p) and not w.live_structure(p) and not w.natural.has(p) and w.items_at(p).is_empty()
@@ -45,7 +61,10 @@ static func job(w,j):
 		j.pos=cow.pos
 	else:
 		if not can_place(w,j.pos):j.state="blocked";j.block_reason="置く場所を空けてください";return
-		if w.item_count(j.kind.trim_prefix("place_"))<1:w.Jobs.complete(w,j,false);return
+		if j.get("plan_claimed",false):
+			if not w.field_items.any(func(row):return w.Jobs.Reservations.held(row,j)>0 and w.Jobs.Reservations.source(w,row,j)):
+				if not w.Jobs.Reservations.claim(w,j):j.state="blocked";j.block_reason="備蓄に使える設置物がありません";return
+		elif w.item_count(j.kind.trim_prefix("place_"))<1:w.Jobs.complete(w,j,false);return
 	if not w.Jobs.walk(w,j,w.neighbors(j.pos)):return
 	j.state="working";j.started=true;j.progress=j.get("progress",0.0)+w.DT*w.Life.factor(w)
 	if j.progress<2.0:return
@@ -55,7 +74,10 @@ static func job(w,j):
 			if owned.id==cow.id:owned.milked_day=cow.milked_day
 	else:
 		var kind=j.kind.trim_prefix("place_")
-		w.add_item(kind,-1);w.field_items.append({"id":"placed-%d-%d"%[w.campaign.day,j.id],"kind":kind,"pos":j.pos,"placed":true,"born_day":w.campaign.day})
+		if j.get("plan_claimed",false):
+			if not w.Jobs.Reservations.consume_place(w,j):j.state="blocked";return
+		else:w.add_item(kind,-1)
+		w.field_items.append({"id":"placed-%d-%d"%[w.campaign.day,j.id],"kind":kind,"pos":j.pos,"placed":true,"born_day":w.campaign.day})
 	w.Jobs.complete(w,j,true)
 
 static func ally_walk(w,a,goal: Vector2i,multiplier: float=1.0):

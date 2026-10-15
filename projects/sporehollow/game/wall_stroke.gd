@@ -34,7 +34,7 @@ static func segment(a: Vector2i,b: Vector2i) -> Array:
 
 func state_key(w) -> Array:
 	# Hash existing state once per preview (not once per cell). Release always revalidates.
-	return [w.get_instance_id(),kind,w.phase,w.tick,w.W,w.H,w.logistics_entry,w.debug_enabled,w.debug_infinite,
+	return [w.get_instance_id(),kind,w.phase,w.tick,w.W,w.H,w.logistics_entry,w.debug_enabled,
 		hash(w.structures),hash(w.floors),hash(w.trees),hash(w.rocks),hash(w.mountain_cells),hash(w.story.idol),
 		hash(w.animals),hash(w.workers),hash(w.keeper),hash(w.enemies),hash(w.foods),hash(w.natural),hash(w.field_items),hash(w.jobs),hash(w.campaign.unlocked_blueprints)]
 
@@ -48,15 +48,22 @@ func plan(w,force: bool=false) -> Dictionary:
 		cached_rows.append({"pos":p,"valid":why=="","reason":why})
 		if why=="":
 			cached_accepted+=1
-			cached_cost+=0 if w.debug_enabled and w.debug_infinite else int(w.BUILD[kind].cost)
+			cached_cost+=int(w.BUILD[kind].cost)
 		elif cached_reason=="":cached_reason=why
 	return {"rows":cached_rows,"accepted":cached_accepted,"skipped":cached_rows.size()-cached_accepted,"cost":cached_cost,"reason":cached_reason}
 
 func commit(w) -> Dictionary:
-	var preview=plan(w,true);var accepted=0;var lookup=w.Jobs.index(w)
-	lookup.construction_group=w.next_job_id
+	var preview=plan(w,true);var accepted=0;var lookup=w.Jobs.index(w);var reasons={}
+	lookup.construction_group=w.next_job_id;lookup.quiet=true
 	for row in preview.rows:
-		if row.valid and w.act(kind,row.pos,-1,lookup):accepted+=1
-	var result={"accepted":accepted,"skipped":cells.size()-accepted,"reason":preview.reason}
+		var why=row.reason
+		if row.valid:
+			why=w.Jobs.build_reason(w,kind,row.pos,0,0,lookup)
+			if why=="" and w.act(kind,row.pos,-1,lookup):accepted+=1;continue
+			if why=="":why="資材の確保に失敗しました"
+		reasons[why]=int(reasons.get(why,0))+1
+	for why in reasons:w.Jobs.Reservations.reject(w,kind,why+"（%d件）"%reasons[why])
+	var result={"accepted":accepted,"skipped":cells.size()-accepted,"reason":preview.reason,"reasons":reasons}
+	if cells.size()>1:w.PlayerEvents.add(w,"建築指定：%d件予約／%d件未登録"%[accepted,result.skipped])
 	clear()
 	return result

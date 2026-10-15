@@ -1,5 +1,6 @@
 extends RefCounted
 ## Internal transport stages; never adds another player designation.
+const Reservations=preload("res://game/build_reservations.gd")
 const RADIUS=6
 const GROUP_WAIT="同じ施工グループへの資材搬入を待っています"
 
@@ -19,8 +20,8 @@ static func plans(w,a) -> Array:
 	return rows
 
 static func sources(w,j,a) -> Array:
-	var rows=w.field_items.filter(func(r):return r.kind==j.resource and r.get("location")=="ground" and not r.get("forbidden",false) and w.Stock.free_count(r)>0 and (w.Stock.eligible(w,r) or (r.get("construction_transfer",false) and r.get("job_id",-1)==j.id)))
-	rows.sort_custom(func(x,y):return w.distance(a.pos,x.pos)<w.distance(a.pos,y.pos) if w.distance(a.pos,x.pos)!=w.distance(a.pos,y.pos) else x.stock_id<y.stock_id)
+	var rows=w.field_items.filter(func(r):return Reservations.usable(w,r,j)>0)
+	rows.sort_custom(func(x,y):return Reservations.held(x,j)>Reservations.held(y,j) if (Reservations.held(x,j)>0)!=(Reservations.held(y,j)>0) else w.distance(a.pos,x.pos)<w.distance(a.pos,y.pos) if w.distance(a.pos,x.pos)!=w.distance(a.pos,y.pos) else x.stock_id<y.stock_id)
 	return rows
 
 static func proposal(w,key: String) -> Dictionary:
@@ -58,7 +59,7 @@ static func start(w,key: String,proposal: Dictionary) -> Dictionary:
 		for row in sources(w,j,a):
 			if left<=0:break
 			if w.Jobs.path_to(w,a.pos,w.neighbors(row.pos)).is_empty():continue
-			var n=mini(left,w.Stock.free_count(row));row.claims[token]=n;claims.append({"stock_id":row.stock_id,"amount":n});left-=n;capacity-=n
+			var n=mini(left,Reservations.usable(w,row,j));Reservations.transfer(w,row,j,token,n);claims.append({"stock_id":row.stock_id,"amount":n});left-=n;capacity-=n
 		if claims.is_empty():continue
 		task.allocations.append({"job_id":j.id,"token":token,"claims":claims});j.delivery_owner=key;j.material_wait=false;j.block_reason=""
 	if task.allocations.is_empty():return {}
@@ -69,7 +70,7 @@ static func release(w,key: String):
 	var task=w.build_deliveries.get(key,{})
 	if task.is_empty():return
 	for entry in task.allocations:
-		w.Stock.release_token(w,entry.token)
+		Reservations.return_claim(w,entry.token,job(w,entry.job_id))
 		var j=job(w,entry.job_id)
 		if not j.is_empty() and j.get("delivery_owner","")==key:j.delivery_owner=""
 	for row in w.Stock.cargo(w,key):
@@ -78,6 +79,7 @@ static func release(w,key: String):
 	w.build_deliveries.erase(key);w.Stock.sync(w)
 
 static func cancel_job(w,j):
+	w.Stock.release_token(w,Reservations.token(j))
 	for key in w.build_deliveries.keys():
 		var task=w.build_deliveries[key]
 		for entry in task.allocations.duplicate():
@@ -158,7 +160,7 @@ static func refresh_groups(w):
 		if row.get("location")=="site":
 			var token=str(row.job_id)+":"+row.kind
 			totals[token]=totals.get(token,0)+row.amount
-		elif row.get("location")=="ground" and w.Stock.free_count(row)>0 and (w.Stock.eligible(w,row) or row.get("construction_transfer",false)):
+		elif row.get("location")=="ground" and (w.Stock.stored(w,row) or row.get("construction_transfer",false)):
 			if not stock.has(row.kind):stock[row.kind]=[]
 			stock[row.kind].append(row)
 	var evaluators={}
@@ -186,7 +188,7 @@ static func refresh_groups(w):
 				if not missing_ids.has(j.id) and not j.get("started",false):j.block_reason=GROUP_WAIT
 
 static func feasible(w,j,rows: Array,evaluators: Dictionary) -> bool:
-	var candidates=rows.filter(func(r):return not r.get("construction_transfer",false) or r.get("job_id",-1)==j.id)
+	var candidates=rows.filter(func(r):return Reservations.usable(w,r,j)>0)
 	if candidates.is_empty():
 		j.material_wait=true;j.block_reason="備蓄に使える資材がありません";return false
 	var why=w.Buildings.reason(w,j.kind,j.pos,false) if not j.started else ""

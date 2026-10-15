@@ -57,7 +57,9 @@ func normal_cases():
 	for i in range(100):
 		tick(w)
 		if rows.any(func(j):return j.started):break
+	var unavailable=stock(w,"stone",10,Vector2i(27,23))
 	var active=w.Work.active(w).get("id",-1);var added=group(w,2,"stone_wall",Vector2i(35,29))
+	unavailable.forbidden=true
 	check(rows.all(func(j):return j.construction_ready) and added[0].construction_group!=rows[0].construction_group,"Later group cannot roll back already-started assembly")
 	tick(w);check(w.Work.active(w).get("id",active)==active or not w.jobs.any(func(j):return j.id==active),"New work retains active assignment or its completion")
 	finish(w,2);check(w.metrics.built==2,"Original group completes despite missing material in later group")

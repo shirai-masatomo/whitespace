@@ -3,6 +3,8 @@
 更新：2026-10-15。対象：WhiteSpace / projects/sporehollow / codex/sporehollow-biome01。
 この文書は**一読で現在のゲームの全体像が分かる簡潔な索引**。詳細な敵・動物・アイテム・技能・数値は末尾の個別資料が正本。製作・生活の現行基盤と未確定の拡張は [CRAFTING_NEEDS_DESIGN.md](CRAFTING_NEEDS_DESIGN.md) で区別する。
 
+現行の建築表示：完成画像45%ゴースト、不可は赤色＋禁止マーク＋実際の理由。新規予約は備蓄の未禁止・未予約の現物を確保できる場合に限る。既存予定は保護し、搬入→施工を維持。F3「素材無限」は廃止し「資材補充（各40）」へ置換。詳細はBUILDINGS／WORK_SYSTEMS、検証は[建築プレビュー報告](review/current/building-preview/REPORT.md)。
+
 ## 0. 凡例と優先順位
 
 - **現行**：現行ブランチの資料／コードで確認できる仕様。ただし人間の実画面試遊が未完の箇所は保証しない。
