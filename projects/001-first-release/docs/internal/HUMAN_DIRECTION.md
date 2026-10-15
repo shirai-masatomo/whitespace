@@ -1,3 +1,5 @@
+<!-- 技術・過去レビュー用。人間の仕様書は [SPEC.md](../../SPEC.md)。 -->
+
 # DIVE DIVE — HUMAN DIRECTION
 
 更新: 2026-09-28 / 定期自律開発PAUSED。会話の最新方針を反映。

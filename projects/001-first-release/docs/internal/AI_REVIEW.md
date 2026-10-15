@@ -1,3 +1,5 @@
+<!-- 技術・過去レビュー用。人間の仕様書は [SPEC.md](../../SPEC.md)。 -->
+
 # DIVE DIVE — AI REVIEW
 
 2026-09-28 / DD-098 / **CHANGES・通し試作 / 3D STOPPED / 定期再開PAUSED**。実装者の自己レビュー。

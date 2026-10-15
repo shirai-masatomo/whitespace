@@ -1,3 +1,5 @@
+<!-- 技術・過去レビュー用。人間の仕様書は [SPEC.md](../../SPEC.md)。 -->
+
 # DIVE DIVE — EXTERNAL AI REVIEW
 
 更新: 2026-09-26

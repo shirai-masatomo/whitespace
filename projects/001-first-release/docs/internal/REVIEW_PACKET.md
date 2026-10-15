@@ -1,3 +1,5 @@
+<!-- 技術・過去レビュー用。人間の仕様書は [SPEC.md](../../SPEC.md)。 -->
+
 # DIVE DIVE 2D — REVIEW PACKET
 
 2026-09-28 / DD-097の指定アート資料（d5a2091） / **CHANGES・指定アート確認 / 定期再開PAUSED**。3Dは凍結。
@@ -6,10 +8,10 @@
 
 | 画面 | 実深度 | 見るところ |
 | --- | --- | --- |
-| [浅海](review/two-d-art/shallow.png) | 14m（浅海への入口） | 水面・薄れる光芒・粒子・酸素藻。地形/UIはぼかさない |
-| [海底〜裂け目](review/two-d-art/seabed.png) | 448m | 砂と岩の差、流れる泡/砂、隙間の水球 |
-| [生物層](review/two-d-art/biology.png) | 624m | 不穏な青、局所的な水球光、巨大な影 |
-| [巨大タコ](review/two-d-art/creature.png) | 652m | 段階陰影と控えめな反射。写実モンスターにしない |
+| [浅海](../../review/two-d-art/shallow.png) | 14m（浅海への入口） | 水面・薄れる光芒・粒子・酸素藻。地形/UIはぼかさない |
+| [海底〜裂け目](../../review/two-d-art/seabed.png) | 448m | 砂と岩の差、流れる泡/砂、隙間の水球 |
+| [生物層](../../review/two-d-art/biology.png) | 624m | 不穏な青、局所的な水球光、巨大な影 |
+| [巨大タコ](../../review/two-d-art/creature.png) | 652m | 段階陰影と控えめな反射。写実モンスターにしない |
 
 画像はd5a2091の描画。後続DD-098は最深部まで接続済みで、最新の範囲/検証/残課題はPROJECT_STATE/AI_REVIEWへ記載。本ページの4枚は前半アートの参考であり、後半の確認画像ではない。Godot 4.7.2 Compatibility、RTX 4070 SUPER、1280×720、通常追従カメラ/zoom 1.25。指定位置で短い通常沈降を行い、カメラが落ち着いてから撮影。全行程の連続プレイを撮った資料ではない。画面外・Dummy音声・非捕捉。
 
