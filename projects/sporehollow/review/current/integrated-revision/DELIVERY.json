@@ -1,0 +1,19 @@
+{
+  "commit": "420737ad229bb3c907168699390965ca066906d4",
+  "sha256": "939002A6EE5BB33AF9D6242C61519D4B2CA17E9A421BA1F9F2985163628C3200",
+  "asset_delivery_commit": "f7c521e72047119bed1121c1cebad1b5ddacfe31",
+  "headless_loading_checks": 39,
+  "utc": "2026-10-15T13:10:12.5795684Z",
+  "session_only": true,
+  "native_lifecycle_checks": 0,
+  "dirty": true,
+  "normal_data_unchanged": true,
+  "implementation_commit": "420737ad229bb3c907168699390965ca066906d4",
+  "native_game_launch_performed": false,
+  "diagnostics_removed": true,
+  "automatically_launched": false,
+  "path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-10\\task\\colony-structure-01-work\\projects\\sporehollow\\artifacts\\autonomy-entry-01\\bundle\\WhistleRanch-Autonomy-Partial.exe",
+  "previous_bytes": 128451768,
+  "bytes": 128470688,
+  "dirty_note": "Pre-existing Godot import metadata retained; gameplay source is committed."
+}
