@@ -54,6 +54,7 @@ static func enqueue(w, kind: String, p: Vector2i, animal_id: int,lookup: Diction
 	elif kind=="move":
 		if not w.walkable(p): return false
 	elif kind=="collect":
+		if w.natural_forbidden.get(p,false):return false
 		if w.items_at(p).is_empty() and not w.natural.has(p) and not(p==w.nest and w.eggs>0): return false
 	elif kind in ["repair", "repair_floor"]:
 		if w.repair_quote(p, "floor" if kind=="repair_floor" else "structure").hp<=0: return false
@@ -154,6 +155,7 @@ static func step(w):
 	w.Work.step(w)
 
 static func execute(w,j,actor: Dictionary):
+	if j.kind=="collect" and (w.natural_forbidden.get(j.pos,false) or not w.items_at(j.pos,true).is_empty() and w.items_at(j.pos).is_empty()):j.state="blocked";j.block_reason="採集対象は禁止中です";return
 	if j.kind=="craft":w.Craft.step(w,j,actor);return
 	if j.kind in ["direct_attack","keeper_equipment"]:w.HumanCombat.execute(w,j,actor);return
 	if j.kind in w.Tasks.KINDS:w.Tasks.execute(w,j,actor);return

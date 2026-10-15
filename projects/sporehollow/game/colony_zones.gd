@@ -15,12 +15,12 @@ static func init(w):
 	sync_storage(w)
 
 static func sync_storage(w):
-	w.storage_cells=[]
+	w.storage_cells=[];var seen={}
 	for z in w.zones:
 		w.next_zone_id=maxi(w.next_zone_id,z.id+1)
 		if z.kind!="stockpile":continue
 		for p in z.cells:
-			if w.inside(p) and p not in w.storage_cells:w.storage_cells.append(p)
+			if w.inside(p) and not seen.has(p):seen[p]=true;w.storage_cells.append(p)
 
 static func save(w):
 	w.campaign.zones=[];w.campaign.next_zone_id=w.next_zone_id
@@ -38,13 +38,70 @@ static func cells_in(w,first: Vector2i,last: Vector2i) -> Array:
 		for x in range(maxi(0,mini(first.x,last.x)),mini(w.W-1,maxi(first.x,last.x))+1):cells.append(Vector2i(x,y))
 	return cells
 
-static func create(w,kind: String,first: Vector2i,last: Vector2i) -> int:
-	if kind not in ["stockpile","residential"]:return -1
-	var cells=cells_in(w,first,last)
-	if cells.is_empty():return -1
-	var id=w.next_zone_id;w.next_zone_id+=1
-	w.zones.append({"id":id,"kind":kind,"name":default_name(w,kind),"cells":cells,"allowed":TYPES.keys() if kind=="stockpile" else []})
-	changed(w);return id
+const LIMIT=10
+const DIRS=[Vector2i.UP,Vector2i.RIGHT,Vector2i.DOWN,Vector2i.LEFT]
+static func ordered(cells:Array)->Array:
+	cells.sort_custom(func(a,b):return a.y<b.y if a.y!=b.y else a.x<b.x)
+	return cells
+static func components(cells:Array)->Array:
+	var remaining={};var result=[]
+	for p in ordered(cells.duplicate()):remaining[p]=true
+	while not remaining.is_empty():
+		var queue=[remaining.keys()[0]];remaining.erase(queue[0]);var i=0
+		while i<queue.size():
+			var p=queue[i];i+=1
+			for d in DIRS:
+				if remaining.has(p+d):remaining.erase(p+d);queue.append(p+d)
+		result.append(ordered(queue))
+	result.sort_custom(func(a,b):return a.size()>b.size() if a.size()!=b.size() else (a[0].y<b[0].y if a[0].y!=b[0].y else a[0].x<b[0].x))
+	return result
+static func create(w,kind:String,first:Vector2i,last:Vector2i)->int:
+	return add_cells(w,kind,cells_in(w,first,last))
+static func add_cells(w,kind:String,cells:Array)->int:
+	if kind not in ["stockpile","residential"] or cells.is_empty():return -1
+	var merged={}
+	for p in cells:
+		if w.inside(p):merged[p]=true
+	if merged.is_empty():return -1
+	var touching=[];var changed_set=true
+	while changed_set:
+		changed_set=false
+		for z in w.zones:
+			if z.kind!=kind or z in touching:continue
+			if z.cells.any(func(p):return merged.has(p) or DIRS.any(func(d):return merged.has(p+d))):
+				touching.append(z);changed_set=true
+				for p in z.cells:merged[p]=true
+	touching.sort_custom(func(a,b):return a.id<b.id)
+	var z={}
+	if touching.is_empty():
+		if w.zones.filter(func(row):return row.kind==kind).size()>=LIMIT:
+			w.say("同じ種類のゾーンは10個までです");return -1
+		z={"id":w.next_zone_id,"kind":kind,"name":default_name(w,kind),"cells":[],"allowed":TYPES.keys() if kind=="stockpile" else []}
+		w.next_zone_id+=1;w.zones.append(z)
+	else:
+		z=touching[0] # Oldest ID wins name, priority and filters, deterministically.
+		for other in touching.slice(1):w.zones.erase(other)
+	z.cells=ordered(merged.keys());changed(w);return z.id
+static func subtract(w,cells:Array,id:int=-1)->int:
+	var cut={};var count=0;var fragments=[]
+	for p in cells:cut[p]=true
+	var rows=w.zones.duplicate();rows.sort_custom(func(a,b):return a.id<b.id)
+	for z in rows:
+		if id>=0 and z.id!=id:continue
+		var remaining=z.cells.filter(func(p):return not cut.has(p));count+=z.cells.size()-remaining.size()
+		if remaining.size()==z.cells.size():continue
+		var parts=components(remaining)
+		if parts.is_empty():w.zones.erase(z);continue
+		z.cells=parts[0]
+		for part in parts.slice(1):fragments.append({"source":z,"cells":part})
+	var dropped=0
+	for fragment in fragments:
+		var source=fragment.source
+		if w.zones.filter(func(z):return z.kind==source.kind).size()>=LIMIT:dropped+=fragment.cells.size();continue
+		var z=source.duplicate(true);z.id=w.next_zone_id;w.next_zone_id+=1;z.name=default_name(w,z.kind);z.cells=fragment.cells;w.zones.append(z)
+	if count>0:changed(w)
+	if dropped>0:w.say("ゾーン上限：分断片%dマスの指定を解除。物資はその場に残ります"%dropped)
+	return count
 
 static func default_name(w,kind:String) -> String:
 	var prefix="備蓄" if kind=="stockpile" else "居住"
@@ -62,10 +119,9 @@ static func rename(w,id:int,text:String) -> bool:
 	z.name=clean;save(w) # Metadata only; never invalidate logistics, rest targets or goods.
 	return true
 
-static func resize(w,id: int,first: Vector2i,last: Vector2i) -> bool:
-	var z=find(w,id);var cells=cells_in(w,first,last)
-	if z.is_empty() or cells.is_empty():return false
-	z.cells=cells;changed(w);return true
+static func resize(w,id:int,first:Vector2i,last:Vector2i)->bool:
+	var z=find(w,id)
+	return false if z.is_empty() else add_cells(w,z.kind,cells_in(w,first,last))>=0
 
 static func remove(w,id: int) -> bool:
 	var z=find(w,id)

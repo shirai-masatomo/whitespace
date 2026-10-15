@@ -149,7 +149,10 @@ static func escort_ally(w,a):
 		if best.is_empty():continue
 		a.escort_target=target.id;a.state="仲間に同行";a.action_id="walk"
 		w.Progression.walk(w,a,best[-1]);return
-	a.erase("escort_target");a.state="支援相手を待つ";a.action_id="idle"
+	a.erase("escort_target")
+	var rally=w.RaidNavigation.objective(w,a)
+	a.state="仲間の進軍先へ向かう" if rally!=a.pos else "支援相手を待つ";a.action_id="walk" if rally!=a.pos else "idle"
+	if rally!=a.pos:w.Progression.walk(w,a,rally)
 
 static func maid_step(w,a,enemy: bool) -> bool:
 	if enemy and recruit_maid(w,a):return true
@@ -220,7 +223,7 @@ static func maid_step(w,a,enemy: bool) -> bool:
 		w.skill_log.append({"tick":w.tick,"actor":a.id,"skill":"coffee_support","faction":"enemy" if enemy else "owned","target":target.get("id",-1)})
 		if helped:
 			w.Combat.grant(w,a,"SkillHit","coffee_support",str(target.get("id",-1)));w.PlayerEvents.add(w,"メイド：コーヒー配布","coffee:"+str(a.get("faction"))+str(a.id))
-	elif w.find_path(a.pos,target.pos).is_empty():served.append(target.get("id",-1));a.coffee_served=served
+	elif (w.RaidNavigation.route(w,a,target.pos,false,false) if enemy else w.find_path(a.pos,target.pos)).is_empty():served.append(target.get("id",-1));a.coffee_served=served
 	elif enemy:w.Progression.walk(w,a,target.pos)
 	else:ally_walk(w,a,target.pos)
 	return true
@@ -308,7 +311,7 @@ static func enemy_step(w,e) -> bool:
 			if a.hp>0 and a.get("placed",true) and not preload("res://game/animal_recovery.gd").protected(w,a) and w.distance(a.pos,targets[0].pos)<=1 and w.line_of_sight(targets[0].pos,a.pos):a.poison_until=w.tick+ceili(5.0/w.DT);a.poison_source=e.id
 		return true
 	if w.tick<e.get("poison_visual_until",0):return true
-	var items=w.field_items.filter(func(i):return i.get("location","ground")=="ground" and i.kind!="chick" and w.distance(e.pos,i.pos)<=e.sight_range and w.line_of_sight(e.pos,i.pos))
+	var items=w.field_items.filter(func(i):return i.get("location","ground")=="ground" and i.kind!="chick" and w.tick>=e.get("unreachable_targets",{}).get(str(i.pos),0) and w.distance(e.pos,i.pos)<=e.sight_range and w.line_of_sight(e.pos,i.pos))
 	items.sort_custom(func(a,b):return w.distance(e.pos,a.pos)<w.distance(e.pos,b.pos) if w.distance(e.pos,a.pos)!=w.distance(e.pos,b.pos) else str(a.pos)<str(b.pos))
 	if not items.is_empty():
 		var item=items[0]

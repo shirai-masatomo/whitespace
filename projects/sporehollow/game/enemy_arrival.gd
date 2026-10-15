@@ -48,6 +48,7 @@ static func choose(w,e) -> Dictionary:
 			if not cost.has(n) or value<cost[n]:
 				cost[n]=value;previous[n]=p
 				if n not in open:open.append(n)
+	goals=goals.filter(func(p):return w.RaidNavigation.field(w,true).distance.has(p) or not w.inside(p))
 	if goals.is_empty():return {}
 	# An already perceived goal only breaks close cost ties; unseen objectives stay unknown.
 	var objective=e.get("chosen_target",{}).get("pos",e.get("last_known_keeper_position"))
@@ -101,7 +102,7 @@ static func step(w,e) -> bool:
 			e.arrival_plans=e.get("arrival_plans",0)+1;e.arrival_blocked_ticks=0
 			e.arrival_observation={"tick":w.tick,"goal":plan.goal,"score":plan.score,"candidates":plan.candidates,"scouting":plan.scouting,"from":e.pos,"sight":e.sight_range}
 		else:
-			e.arrival_route=[];e.erase("arrival_goal");e.erase("arrival_gate");e.arrival_retry_tick=w.tick+ceili(BLOCKED_REPLAN_SECONDS/w.DT)
+			e.arrival_route=[];e.erase("arrival_goal");e.erase("arrival_gate");e.arrival_failures=e.get("arrival_failures",0)+1;e.arrival_retry_tick=w.tick+ceili(minf(8.0,BLOCKED_REPLAN_SECONDS*e.arrival_failures)/w.DT);e.raid_reason="侵入経路なし：間隔を空けて再評価"
 			e.state="入口を探す"
 			# Approach a visible obstacle to discover side openings; never enter unseen terrain.
 			var next=e.pos+inward

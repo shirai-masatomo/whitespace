@@ -280,11 +280,12 @@ static func save(w):
 
 static func totals(w) -> Dictionary:
 	var result={}
-	if not w.keeper.get("equipment",{}).is_empty():result[w.keeper.equipment.item_id]=1
+	for a in w.workers.values():
+		if not a.get("equipment",{}).is_empty():result[a.equipment.item_id]=result.get(a.equipment.item_id,0)+1
 	for a in w.workers.values():
 		if not a.get("clothing",{}).is_empty():result[a.clothing.item_id]=result.get(a.clothing.item_id,0)+1
 	for row in w.field_items:result[row.kind]=result.get(row.kind,0)+row.get("amount",1)
-	for a in w.animals:
+	for a in w.animals.filter(func(a):return not w.workers.has("a%d"%a.id)):
 		if not a.get("equipment",{}).is_empty():result[a.equipment.item_id]=result.get(a.equipment.item_id,0)+1
 	for e in w.enemies:
 		if not e.get("stolen",{}).is_empty():result[e.stolen.kind]=result.get(e.stolen.kind,0)+e.stolen.get("amount",1)
@@ -335,6 +336,19 @@ static func designate(w,kind: String,first: Vector2i,last: Vector2i) -> Dictiona
 		return {"accepted":accepted,"skipped":targets.size()-accepted}
 	if kind not in ["haul","forbid","allow"] or not w.working():return {"accepted":0,"skipped":0}
 	var rows=command_targets(w,first,last,kind);var accepted=w.Harvest.forbid(w,first,last,kind=="forbid") if kind in ["forbid","allow"] else 0
+	if kind in ["forbid","allow"]:
+		var area=Rect2i(Vector2i(mini(first.x,last.x),mini(first.y,last.y)),Vector2i(absi(last.x-first.x)+1,absi(last.y-first.y)+1))
+		for p in w.natural:
+			if not area.has_point(p) or w.natural_forbidden.get(p,false)==(kind=="forbid"):continue
+			if kind=="forbid":w.natural_forbidden[p]=true
+			else:w.natural_forbidden.erase(p)
+			accepted+=1
+			for j in w.jobs:
+				if j.kind=="collect" and j.pos==p:
+					if kind=="forbid":w.Work.block(w,j,"採集対象は禁止中です")
+					else:j.retry_at=w.tick
+		for a in w.animals:
+			if area.has_point(a.pos) and a.get("forbidden",false)!=(kind=="forbid") and w.Livestock.set_forbidden(w,a.id,kind=="forbid"):accepted+=1
 	var object_accepted=accepted
 	for row in rows:
 		if kind=="haul":
@@ -376,7 +390,7 @@ static func summary(w,kind: String) -> Dictionary:
 		var claimed=0
 		for amount in row.get("claims",{}).values():claimed+=int(amount)
 		q.reserved+=mini(n,claimed)
-	for a in [w.keeper]+w.animals:
+	for a in w.workers.values()+w.animals.filter(func(a):return not w.workers.has("a%d"%a.id)):
 		if a.get("equipment",{}).get("item_id","")==kind:q.equipped+=1;q.owned+=1
 	for a in w.workers.values():
 		if a.get("clothing",{}).get("item_id","")==kind:q.equipped+=1;q.owned+=1

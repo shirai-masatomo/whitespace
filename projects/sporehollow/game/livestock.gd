@@ -34,6 +34,10 @@ static func set_forbidden(w,id: int,value: bool) -> bool:
 	var a=w.Orders.animal(w,id)
 	if not owned(w,a) or classification(a)=="person":return false
 	a.forbidden=value;persist_flags(w,a)
+	var training=w.Tasks.job(w,"train",a.pos,id)
+	if not training.is_empty():
+		if value:w.Work.block(w,training,"この動物の作業は禁止中です")
+		else:training.retry_at=w.tick
 	var j=job(w,id)
 	if not j.is_empty() and value:w.Work.block(w,j,"対象のと殺は禁止中です")
 	elif not j.is_empty():j.retry_at=w.tick

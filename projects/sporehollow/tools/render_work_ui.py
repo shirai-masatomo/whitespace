@@ -4,7 +4,7 @@ from pathlib import Path
 from PIL import Image,ImageDraw,ImageFont,ImageColor
 
 def main():
- ap=argparse.ArgumentParser();ap.add_argument('--project',type=Path,required=True);a=ap.parse_args();out=a.project/'review/current/work-ui'
+ ap=argparse.ArgumentParser();ap.add_argument('--project',type=Path,required=True);ap.add_argument('--output',type=Path);a=ap.parse_args();out=a.output or a.project/'review/current/work-ui'
  data=json.loads((out/'ui-layouts.json').read_text(encoding='utf-8-sig'))['layouts']
  def font(size):return ImageFont.truetype('C:/Windows/Fonts/meiryo.ttc',int(size))
  def draw_scene(row):

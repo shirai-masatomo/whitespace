@@ -74,7 +74,9 @@ func run():
 				else:
 					var sc=g.palette.get_node("ArchitectItems")
 					check(sc.get_global_rect().end.y<=positions[0].position.y and sc.vertical_scroll_mode==ScrollContainer.SCROLL_MODE_SHOW_ALWAYS,"Only upper items scroll; scrollbar always visible")
-					for id in g.subtask_choices():check(g.buttons[id].get_parent()==sc.get_child(0),"Building tool lives in clipped scroll body "+id)
+					for id in g.subtask_choices():
+							check(g.buttons[id].get_parent()==sc.get_child(0),"Building tool lives in clipped scroll body "+id)
+							check(g.buttons[id].text==g.TOOLS[id].split(" ")[0],"Architect name-only label "+id)
 				if repeat==0:snapshot("architect-"+category)
 		g.select_group(1);await process_frame
 		check(g.animal_list_open and g.palette.find_child("AnimalList",true,false)!=null and not g.buttons.has("animal_instructions"),"Animal main tab opens list only")
@@ -139,9 +141,14 @@ func run():
 	check(not g.zone_controls.details_open and g.tool=="zone_resize" and g.group==0,"Resize returns to basic palette")
 	g.zone_controls.select(g,"zone_stockpile");var begin=g.screen_cell(p);var end=g.screen_cell(p+Vector2i.ONE)
 	g.pointer=begin;g.zone_controls.input(g,mouse(begin,true));g.pointer=end;g.zone_controls.input(g,mouse(end,false));await process_frame
-	check(not g.zone_controls.details_open and not g.zone_controls.pressed and w.zones.size()==3,"Zone creation drag creates once without opening details")
+	check(not g.zone_controls.details_open and not g.zone_controls.pressed and w.zones.size()==2 and w.Zones.find(w,stock).cells.has(p+Vector2i.ONE),"Zone creation drag merges existing area once without opening details")
 	g.zone_controls.open(g,stock);await process_frame;g.colony_panel.get_node("CloseZone").pressed.emit();await process_frame
 	check(not g.zone_controls.details_open and g.selected.is_empty(),"Details close clears zone context")
+	g.select_group(0);g.ColonyPanels.architecture_category(g,"ゾーン");g.buttons.zone_cancel.pressed.emit();begin=g.screen_cell(p+Vector2i.ONE)
+	g.pointer=begin;g.zone_controls.input(g,mouse(begin,true));g.zone_controls.input(g,mouse(begin,false))
+	check(not w.Zones.find(w,stock).cells.has(p+Vector2i.ONE),"Zone cancel button removes clicked cell through input handler")
+	g.neutral();g.selected={"kind":"keeper"};g.refresh();await process_frame
+	check(not g.buttons.has("inventory") and g.buttons.has("keeper_equip") and g.buttons.has("human_clothes"),"Resident status exposes equipment instead of inventory")
 	# Map animal selection also uses the individual state; multi-selection survives list navigation.
 	var a=w.animals[0];g.neutral();g.board_click(mouse(g.get_canvas_transform()*g.animal_hit_rect(a).get_center(),true));await process_frame
 	check(g.selected.get("kind")=="animal" and g.selected.id==a.id and not g.animal_list_open,"Map animal click opens correct individual")

@@ -1,5 +1,9 @@
 extends RefCounted
 var nature_site_cache={}
+var natural_forbidden={}
+var navigation_revision=0
+var raid_navigation={}
+const RaidNavigation=preload("res://game/raid_navigation.gd")
 const Metrics=preload("res://game/terrain_metrics.gd")
 const Content=preload("res://game/ranch_content.gd")
 ## Deterministic fixed-tick rules. No scene, Input, frame clock or rendering dependencies.
@@ -48,6 +52,8 @@ var phase = "shop" # Legacy save boundary, entered directly as daytime by the sc
 var market_open=false
 const MERCHANT_DELAY=5.0
 const MERCHANT_SECONDS=30.0
+const Merchant=preload("res://game/merchant_visit.gd")
+var merchant_visit={}
 var merchant_approach=null
 var merchant_approach_job=-1
 var merchant_leave_at=MERCHANT_DELAY+MERCHANT_SECONDS
@@ -142,7 +148,7 @@ func merchant_visit_enabled() -> bool:
 	return int(campaign.day)>=2
 
 func merchant_present() -> bool:
-	return merchant_visit_enabled() and working() and tick>=merchant_arrive_tick and (tick*DT<merchant_leave_at or merchant_waiting() or market_open)
+	return merchant_visit_enabled() and working() and Merchant.available(self)
 
 const HumanCombat=preload("res://game/human_combat.gd")
 const Life = preload("res://game/keeper_life.gd")
@@ -486,7 +492,7 @@ func next_step(start: Vector2i, goal: Vector2i, raider: bool = false, avoid_acto
 	var path = find_path(start,goal,raider,avoid_actors)
 	return path[1] if path.size()>1 else start
 
-func find_path(start: Vector2i, goal: Vector2i, raider: bool = false, avoid_actors: bool = false, outdoor_only: bool = false, route_costs: Dictionary = {}, allow_exit: bool = false) -> Array:
+func find_path(start: Vector2i, goal: Vector2i, raider: bool = false, avoid_actors: bool = false, outdoor_only: bool = false, route_costs: Dictionary = {}, allow_exit: bool = false, enemy_rules: bool = false) -> Array:
 	preload("res://game/terrain_metrics.gd").count("world.find_path")
 	if start == goal: return [start]
 	# Reject impossible endpoints before scanning the whole 100x68 map.
@@ -517,7 +523,7 @@ func find_path(start: Vector2i, goal: Vector2i, raider: bool = false, avoid_acto
 			if outdoor_only and is_indoor(n): continue
 			if avoid_actors and n != goal and actor_occupied(n, start): continue
 			var blocked = blocks(n)
-			if blocked and not raider and structures.get(n,{}).get("kind") not in Buildings.DOORS: continue
+			if blocked and not raider and (structures.get(n,{}).get("kind") not in Buildings.DOORS or enemy_rules and structures[n].get("lock_hp",0)>0): continue
 			# Compare walking actions with the actual number of object attacks needed.
 			var value: float = cost[p] + 1.0 + maxf(0.0,route_costs.get(n,0.0)) + (ceilf(float(structures[n].hp) / Rules.KIDNAPPER.object_attack_power) if blocked else 0)
 			if not cost.has(n) or value < cost[n]:
@@ -602,6 +608,7 @@ func _execute_local(kind: String, p: Vector2i = Vector2i.ZERO, animal_id: int = 
 		elif not paused:
 			if kind == "gate" and live_structure(p) and structures[p].status == "ready" and structures[p].kind in Buildings.DOORS and not occupied(p):
 				structures[p].open = not structures[p].open
+				invalidate_navigation()
 				accepted = true
 			elif kind in ["repair","repair_floor"]:
 				accepted = repair(p,"floor" if kind=="repair_floor" else "structure")
@@ -634,6 +641,8 @@ func _execute_local(kind: String, p: Vector2i = Vector2i.ZERO, animal_id: int = 
 				milestones.append({"tick": tick, "kind": "item_collected", "item": item.kind})
 				accepted = true
 			elif kind == "collect" and natural.has(p):
+				if natural_forbidden.get(p,false):return false
+				natural_forbidden.erase(p)
 				var harvest: String = natural[p]
 				natural.erase(p)
 				metrics[harvest + "_collected"] += 1
@@ -674,14 +683,14 @@ func spawn_enemy(event: Dictionary):
 	border.sort_custom(func(a,b):return distance(a,origin)<distance(b,origin) if distance(a,origin)!=distance(b,origin) else a.y*W+a.x<b.y*W+b.x)
 	var found=false
 	for candidate in border:
-		if not walkable(candidate) or actor_occupied(candidate,candidate+Vector2i(999,999)) or live_structure(candidate):continue
+		if not walkable(candidate) or actor_occupied(candidate,candidate+Vector2i(999,999)) or live_structure(candidate) or not RaidNavigation.field(self,true).distance.has(candidate):continue
 		origin=candidate;found=true;break
 	if not found:
 		# A fully walled perimeter must not silently delete a raid. The adjacent
 		# visible outside cell is only an arrival position, never a walkable forest.
 		for candidate in border:
 			var outside=exit_for(candidate)
-			if not actor_occupied(outside,outside+Vector2i(999,999)):
+			if not Story.terrain_block(self,candidate) and RaidNavigation.field(self,true).distance.has(candidate) and not actor_occupied(outside,outside+Vector2i(999,999)):
 				origin=outside;found=true;break
 	if not found:say("地図の端に出現できる空きマスがありません");return
 	entry=origin.clamp(Vector2i.ONE,Vector2i(W-2,H-2))
@@ -1020,10 +1029,11 @@ func move_enemy(e: Dictionary, next: Vector2i,goal=null):
 		var door=structures[next]
 		if door.get("lock_hp",0)>0:
 			door.lock_hp=maxi(0,door.lock_hp-e.object_attack_power)
+			if door.lock_hp==0:invalidate_navigation()
 			e.state="ロックを壊す"
 			combat_log.append({"tick":tick,"source":"lock","id":e.id,"target":door.id,"damage":e.object_attack_power})
 			return
-		door.open=true
+		door.open=true;invalidate_navigation()
 		e.state="ドアを開ける"
 		return
 	if blocks(next):
@@ -1142,6 +1152,7 @@ func step():
 	for enemy in enemies: Combat.recover(enemy,DT)
 	var t_Cycle_step=Metrics.start()
 	Cycle.step(self)
+	Merchant.step(self)
 	Metrics.finish("Cycle_step",t_Cycle_step)
 	var t_Content_tick=Metrics.start()
 	Content.tick(self)
@@ -1640,7 +1651,11 @@ func admit(a: Dictionary,preferred: Vector2i):
 	a.pos=sites[0]; a.home=a.pos; a.order=a.pos; a.path=[a.pos]; a.placed=true; a.deployment="resident"
 	job_log.append({"tick":tick,"event":"admitted","animal_id":a.id,"pos":[a.pos.x,a.pos.y]})
 
+func invalidate_navigation():
+	navigation_revision+=1;raid_navigation.clear()
+
 func refresh_indoor():
+	invalidate_navigation()
 	indoor=Buildings.rooms(self)
 
 func is_indoor(p: Vector2i) -> bool:
@@ -1657,7 +1672,7 @@ func animal_next(a: Dictionary,goal: Vector2i) -> Vector2i:
 	return path[1] if path.size()>1 and not actor_occupied(path[1],a.pos) else a.pos
 
 func open_for_ally(p: Vector2i):
-	if structures.get(p,{}).get("kind") in Buildings.DOORS and structures[p].status=="ready": structures[p].open=true
+	if structures.get(p,{}).get("kind") in Buildings.DOORS and structures[p].status=="ready" and not structures[p].open:structures[p].open=true;invalidate_navigation()
 
 func queue_order(kind: String,ids: Array,p: Vector2i) -> bool:
 	return Orders.enqueue(self,kind,ids,p)

@@ -68,7 +68,7 @@ static func animal_action(w,a)->bool:
 	if row.is_empty():
 		if "weed" in diet:
 			for cell in [a.pos]+w.neighbors(a.pos):
-				if w.natural.get(cell)=="weed" and w.line_of_sight(a.pos,cell):w.natural.erase(cell);meal(w,a,"hen_food");a.state="食事中";return true
+				if w.natural.get(cell)=="weed" and not w.natural_forbidden.get(cell,false) and w.line_of_sight(a.pos,cell):w.natural.erase(cell);meal(w,a,"hen_food");a.state="食事中";return true
 		return false
 	if w.distance(a.pos,row.pos)<=1 and w.line_of_sight(a.pos,row.pos):
 		row.amount-=1;w.stock_used[row.kind]=w.stock_used.get(row.kind,0)+1;meal(w,a,row.kind)

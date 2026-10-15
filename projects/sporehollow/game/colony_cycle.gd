@@ -15,8 +15,7 @@ static func init(w):
 	w.colony_version=2
 	w.calendar_ticks=int(w.campaign.get("calendar_ticks",(w.campaign.day-1)*Clock.TICKS_PER_DAY))
 	w.last_daily_day=int(w.campaign.get("last_daily_day",w.campaign.day))
-	w.merchant_arrive_tick=w.tick+ceili(w.MERCHANT_DELAY/w.DT)
-	w.merchant_leave_at=w.tick*w.DT+w.MERCHANT_DELAY+w.MERCHANT_SECONDS
+	w.Merchant.schedule(w)
 	w.spawn_schedule.clear();w.schedule_index=0;w.night_started_tick=0
 	w.day_seconds=Clock.DAY_SECONDS
 	if w.phase!="shop":w.phase="defend" if period(w)=="night" else "day"
@@ -49,8 +48,7 @@ static func daily(w,day: int):
 		if a.species=="shiba" and not a.get("lost",false) and not a.get("dead",false) and a.hp<=0 and day>a.unavailable_through_day:
 			a.hp=maxi(1,a.max_hp/2);a.convalescent_ticks=0
 	w.Stock.normalize(w);w.Stock.sync(w)
-	w.merchant_arrive_tick=w.tick+ceili(w.MERCHANT_DELAY/w.DT)
-	w.merchant_leave_at=w.tick*w.DT+w.MERCHANT_DELAY+w.MERCHANT_SECONDS
+	w.Merchant.schedule(w)
 	w.shop_stock=w.Shop.generate(w.stage,w.seed_value+day,w.campaign.unlocked_blueprints,day)
 	var remaining=preload("res://game/colony_ui_state.gd").threats(w).size()
 	w.PlayerEvents.add(w,("%d日目の朝。敵%d体がまだ残っています"%[day,remaining]) if remaining>0 else "%d日目の朝になりました"%day,"calendar_morning:%d"%day)

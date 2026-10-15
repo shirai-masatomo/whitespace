@@ -198,12 +198,15 @@ static func target_candidates(w,e) -> Array:
 	if e.can_see_keeper and w.Life.targetable(w): candidates.append({"kind":"keeper","id":-1,"pos":w.keeper.pos})
 	for a in w.animals:
 		if a.placed and a.hp>0 and not a.get("dead",false) and not preload("res://game/animal_recovery.gd").protected(w,a) and not (e.archetype=="maid" and a.species=="cow") and w.distance(e.pos,a.pos)<=e.sight_range and w.line_of_sight(e.pos,a.pos): candidates.append({"kind":"animal","id":a.id,"pos":a.pos})
+	for key in w.workers:
+		var a=w.workers[key]
+		if key!="keeper" and not w.animals.any(func(b):return key=="a%d"%b.id) and a.get("placed",false) and a.hp>0 and a.state=="free" and w.distance(e.pos,a.pos)<=e.sight_range and w.line_of_sight(e.pos,a.pos):candidates.append({"kind":"worker","id":key,"pos":a.pos})
 	for p in w.structures:
 		if w.live_structure(p) and w.distance(e.pos,p)<=e.sight_range and w.line_of_sight(e.pos,p,true): candidates.append({"kind":"structure","id":w.structures[p].id,"pos":p})
 	var idol=Targets.observe(w,e)
 	if not idol.is_empty():candidates.append(idol)
 	var weights=Targets.weights(w,e)
-	return candidates.filter(func(t):return weights.get(t.kind,0)>0 and not (e.archetype=="martial_artist" and ((t.kind=="keeper" and w.keeper.hp<=1) or (t.kind=="animal" and w.Orders.animal(w,t.id).hp<=1))))
+	return candidates.filter(func(t):return w.tick>=e.get("unreachable_targets",{}).get(str(t.pos),0) and weights.get("keeper" if t.kind=="worker" else t.kind,0)>0 and not (e.archetype=="martial_artist" and ((t.kind=="keeper" and w.keeper.hp<=1) or (t.kind=="animal" and w.Orders.animal(w,t.id).hp<=1) or (t.kind=="worker" and w.workers[t.id].hp<=1))))
 
 static func select_target(w,e,candidates: Array) -> Dictionary:
 	if candidates.is_empty(): return {}
@@ -214,7 +217,7 @@ static func select_target(w,e,candidates: Array) -> Dictionary:
 		groups[t.kind].append(t)
 	var kinds=groups.keys()
 	var weights=Targets.weights(w,e)
-	var kind=kinds[Data.weighted(w.rng,kinds.map(func(k):return weights.get("idol" if k=="idol_memory" else k,0)))]
+	var kind=kinds[Data.weighted(w.rng,kinds.map(func(k):return weights.get("idol" if k=="idol_memory" else "keeper" if k=="worker" else k,0)))]
 	var rows=groups[kind]
 	rows.sort_custom(func(a,b):return w.distance(e.pos,a.pos)<w.distance(e.pos,b.pos) if w.distance(e.pos,a.pos)!=w.distance(e.pos,b.pos) else a.id<b.id)
 	return rows[0] if w.rng.randf()*100<e.ai_accuracy else rows[w.rng.randi_range(0,rows.size()-1)]
@@ -247,7 +250,7 @@ static func enemy_step(w,e) -> bool:
 	if not retaliating:candidates=Targets.focus(w,e,candidates)
 	var target=e.get("chosen_target",{})
 	var current=candidates.filter(func(t):return t.kind==target.get("kind") and t.id==target.get("id"))
-	if current.is_empty() or w.tick>=e.get("choose_at",0):
+	if current.is_empty():
 		target=select_target(w,e,candidates); e.chosen_target=target
 		e.choose_at=w.tick+ceili((0.5+(100-e.ai_accuracy)*0.025)/w.DT)
 	else: target=current[0]; e.chosen_target=target
@@ -264,7 +267,7 @@ static func enemy_step(w,e) -> bool:
 		e.bow_target=str(target.kind)+str(target.id); e.bow_until=w.tick+ceili(Data.SPECIAL.bow_seconds/w.DT); e.action_id="bow"; e.observed_action=true; return true
 	if e.archetype=="animal_tamer" and target.kind=="animal" and tame(w,e,w.Orders.animal(w,target.id)): return true
 	var dist=w.distance(e.pos,target.pos)
-	if e.archetype=="ninja" and target.kind in ["keeper","animal"] and dist>1 and dist<=Data.SPECIAL.shuriken_range and w.line_of_sight(e.pos,target.pos) and w.tick>=e.get("shuriken_at",0) and w.Combat.pay(e,"skill"):
+	if e.archetype=="ninja" and target.kind in ["keeper","worker","animal"] and dist>1 and dist<=Data.SPECIAL.shuriken_range and w.line_of_sight(e.pos,target.pos) and w.tick>=e.get("shuriken_at",0) and w.Combat.pay(e,"skill"):
 		w.PlayerEvents.add(w,e.name+"：手裏剣")
 		e.shuriken_at=w.tick+ceili(Data.EnemySkills.get_skill("shuriken").Cooldown/w.DT); e.action_id="shuriken"; e.state="手裏剣"; strike(w,e,target,Data.SPECIAL.shuriken_damage); return true
 	if dist<=1 and w.line_of_sight(e.pos,target.pos,target.kind in ["structure","idol"]):
@@ -277,6 +280,11 @@ static func enemy_step(w,e) -> bool:
 
 static func contact_goal(w,e,target: Dictionary) -> Vector2i:
 	# The idol footprint is solid. Plan to a reachable attack cell, never into the sprite.
+	var cached=e.get("idol_contact",{})
+	if cached.get("revision",-1)==w.navigation_revision and w.tick<cached.get("until",0) and not w.actor_occupied(cached.pos,e.pos):return cached.pos
+	var rally=w.RaidNavigation.rally(w,e)
+	if rally!=e.pos and not w.actor_occupied(rally,e.pos):
+		e.idol_contact={"pos":rally,"revision":w.navigation_revision,"until":w.tick+12};return rally
 	var options=[]
 	for surface in w.Story.idol_cells(w):
 		for p in w.neighbors(surface):
@@ -286,7 +294,9 @@ static func contact_goal(w,e,target: Dictionary) -> Vector2i:
 		if w.actor_occupied(p,e.pos):continue # The goal cell itself is exempted by find_path's occupancy filter.
 		var route=w.find_path(e.pos,p,true,true,e.species=="doberman")
 		if not route.is_empty() and (best.is_empty() or route.size()<best.size()):best=route
-	return best[-1] if not best.is_empty() else e.pos
+	var result=best[-1] if not best.is_empty() else e.pos
+	e.idol_contact={"pos":result,"revision":w.navigation_revision,"until":w.tick+12}
+	return result
 
 static func walk(w,e,goal: Vector2i):
 	var speed=e.move_speed*w.Content.speed(w,e)
@@ -305,9 +315,19 @@ static func walk(w,e,goal: Vector2i):
 	if not break_objects and w.inside(goal):
 		var detour=w.RaiderAI.route(e,w,goal,false,true)
 		if not detour.is_empty(): route=detour
+	if route.is_empty():
+		if not e.has("raid_stalled_since"):e.raid_stalled_since=w.tick
+		if w.tick-e.raid_stalled_since>=ceili(6.0/w.DT):
+			if not e.has("unreachable_targets"):e.unreachable_targets={}
+			for p in e.unreachable_targets.keys():
+				if e.unreachable_targets[p]<=w.tick:e.unreachable_targets.erase(p)
+			e.unreachable_targets[str(goal)]=w.tick+ceili(12.0/w.DT)
+			e.chosen_target={};e.last_known_keeper_position=null;e.raid_goal_until=0;e.raid_stalled_since=w.tick
+		return
+	e.erase("raid_stalled_since")
 	var next=route[1] if route.size()>1 else e.pos
 	if e.species=="doberman" and w.is_indoor(next): e.state="外で待つ"; return
-	if w.blocks(next) and not break_objects:
+	if w.blocks(next) and not break_objects and (w.structures[next].kind not in w.Buildings.DOORS or w.structures[next].get("lock_hp",0)>0):
 		e.search_goal=null; e.chosen_target={}; e.state="道を探す"; return
 	var before=e.pos
 	w.move_enemy(e,next,goal)
@@ -327,6 +347,15 @@ static func strike(w,e,t,override_damage: int=-1):
 		damage=roundi(damage*(0.85 if w.tick<e.weakened_until else 1.0))
 		var hit=e.duplicate(); hit.attack_power=damage; w.Life.hurt(w,hit)
 		if e.archetype=="martial_artist" and w.keeper.hp<=1: bow_end(w,e)
+	elif t.kind=="worker":
+		var a=w.workers.get(t.id,{})
+		if a.is_empty():return
+		var damage=e.human_attack if override_damage<0 else override_damage
+		if e.archetype=="martial_artist":damage=mini(damage,maxi(0,a.hp-1))
+		damage=roundi(damage*(0.85 if w.tick<e.weakened_until else 1.0))
+		a.hp=maxi(0,a.hp-damage);a.hurt_until=w.tick+4
+		if a.hp<=0:a.state="unconscious";w.Work.interrupt(w,t.id,"負傷で作業中断")
+		w.PlayerEvents.add(w,e.name+" → "+a.get("name",t.id)+"　%dダメージ"%damage)
 	elif t.kind=="animal":
 		var a=w.Orders.animal(w,t.id)
 		if a.is_empty(): return

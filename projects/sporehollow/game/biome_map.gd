@@ -1,6 +1,6 @@
 extends RefCounted
 ## Versioned scenery and placement only. Never used by movement or building rules.
-const VERSION=7
+const VERSION=8
 const Geology=preload("res://game/geology.gd")
 # Normalized regional scale, transition width and obstacle density; saved in new terrain.
 const SETTINGS={"region_scale":1.0,"region_thresholds":{"rocky":0.43,"woodland":0.40,"dry":0.42,"lush":0.48},"boundary_width":1.0,"tree_density":1.0,"rock_clusters_per_1700":1,"mountain_groups_per_1700":0.5}
@@ -71,6 +71,7 @@ static func generate(seed_number: int,width: int,height: int,version: int=VERSIO
 	for y in range(height):
 		for x in range(width):fields.append(sample(seed_number,Vector2(x+0.5,y+0.5)*scale,blobs))
 	var geology=Geology.shape(seed_number,width,height,fields,noise,clearing,version>=7) if version>=6 else {}
+	if version>=8:expand_woodland(seed_number,width,height,fields)
 	for y in range(height+1):
 		for x in range(width+1):
 			# Average neighboring samples: shared vertices, no per-cell patch seams.
@@ -394,3 +395,37 @@ static func sample_nature(w,kind):
 	for p in cached.sites:
 		if nature_site_valid(w,p):sites.append(p)
 	return null if sites.is_empty() else choose_site(w,sites,kind)
+
+# Connected forest region, independent of tree occupancy; evaluated once at generation.
+static func expand_woodland(seed_number:int,width:int,height:int,fields:Array):
+	var scores={};var start=Vector2i.ZERO;var best=-1.0
+	for y in range(height):
+		for x in range(width):
+			var p=Vector2i(x,y);var f=fields[y*width+x]
+			if f[2]>0.43 or clearing(Vector2(p)*Vector2(50.0/width,34.0/height),seed_number)<0.82:continue
+			var score=f[1]+0.15*noise(seed_number,Vector2(p)*0.07,809)
+			scores[p]=score
+			if score>best:best=score;start=p
+	var queue=[];var seen={};var selected={};var serial=0
+	if scores.has(start):Geology.Heap.push(queue,[start,-scores[start],0]);seen[start]=true
+	while not queue.is_empty() and selected.size()<roundi(width*height*0.29):
+		var p=Geology.Heap.pop(queue)[0];selected[p]=true
+		for d in DIRECTIONS:
+			var q=p+d
+			if scores.has(q) and not seen.has(q):
+				serial+=1;seen[q]=true;Geology.Heap.push(queue,[q,-scores[q],serial])
+	var depth={};var edges=[]
+	for p in selected:
+		if DIRECTIONS.any(func(d):return not selected.has(p+d)):depth[p]=0;edges.append(p)
+	var i=0
+	while i<edges.size():
+		var p=edges[i];i+=1
+		for d in DIRECTIONS:
+			var q=p+d
+			if selected.has(q) and not depth.has(q):depth[q]=depth[p]+1;edges.append(q)
+	for y in range(height):
+		for x in range(width):
+			var p=Vector2i(x,y);var f=fields[y*width+x]
+			if selected.has(p):
+				f[1]=0.41+0.45*smoothstep(0.0,8.0,depth[p]);f[3]*=0.4
+			else:f[1]=minf(f[1],0.39)

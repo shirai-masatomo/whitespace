@@ -1,5 +1,7 @@
 extends RefCounted
 const CLIPS = {
+	"shiba/idle/right":{"frames":[preload("res://art_delivery/characters_v1/shiba_idle_right_00.png")],"anchor":Vector2(24,44),"duration":1.0,"loop":false},
+	"shiba/idle/left":{"frames":[preload("res://art_delivery/characters_v1/shiba_idle_left_00.png")],"anchor":Vector2(24,44),"duration":1.0,"loop":false},
 	"keeper/idle/right":{"frames":[preload("res://art_delivery/characters_v1/keeper_idle_right_00.png")],"anchor":Vector2(16,44),"duration":1.0,"loop":false},
 	"keeper/settle/right": {"frames":[preload("res://art_delivery/characters_motion_v1/keeper/settle_right_00.png"),preload("res://art_delivery/characters_motion_v1/keeper/settle_right_01.png")],"anchor":Vector2(16,44),"duration":0.18,"loop":false},
 	"keeper/settle/left": {"frames":[preload("res://art_delivery/characters_motion_v1/keeper/settle_left_00.png"),preload("res://art_delivery/characters_motion_v1/keeper/settle_left_01.png")],"anchor":Vector2(16,44),"duration":0.18,"loop":false},
@@ -38,18 +40,18 @@ const CART = preload("res://art_delivery/cart_ui_detail_v1/cart.png")
 const CLOSED = preload("res://assets/ui/journal_cover_green.png")
 const SCROLL = preload("res://art_delivery/ranch_assets_v1/scroll/idle_none_00.png")
 
-static func sprite(canvas: CanvasItem, who: String, action: String, facing: int, foot: Vector2, elapsed: float=0, alpha: float=1, visual_scale: float=1.0):
-	var key = who+"/"+action+("/left" if facing<0 else "/right")
-	if not CLIPS.has(key):
-		if who=="keeper": preload("res://game/ui_style.gd").keeper(canvas,foot,facing)
-		elif who=="shiba": preload("res://game/ui_style.gd").shiba(canvas,foot,0 if facing<0 else 2,alpha)
-		else: push_error("Missing adopted animation: "+key)
-		return
-	var clip = CLIPS[key]
-	var index = maxi(0,int(elapsed/clip.duration))
-	index = index%clip.frames.size() if clip.loop else mini(index,clip.frames.size()-1)
-	canvas.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
-	canvas.draw_texture_rect(clip.frames[index],Rect2((foot-clip.anchor*visual_scale).round(),clip.frames[index].get_size()*visual_scale),false,Color(1,1,1,alpha))
+static func frame(who:String,action:String,facing:int,foot:Vector2,elapsed:float=0,visual_scale:float=1.0)->Dictionary:
+	var key=who+"/"+action+("/left" if facing<0 else "/right")
+	if not CLIPS.has(key):key=who+"/idle"+("/left" if facing<0 else "/right")
+	if not CLIPS.has(key):return {}
+	var clip=CLIPS[key];var index=maxi(0,int(elapsed/clip.duration))
+	index=index%clip.frames.size() if clip.loop else mini(index,clip.frames.size()-1)
+	return {"texture":clip.frames[index],"rect":Rect2((foot-clip.anchor*visual_scale).round(),clip.frames[index].get_size()*visual_scale),"anchor":clip.anchor,"key":key}
+static func sprite(canvas:CanvasItem,who:String,action:String,facing:int,foot:Vector2,elapsed:float=0,alpha:float=1,visual_scale:float=1.0):
+	var row=frame(who,action,facing,foot,elapsed,visual_scale)
+	if row.is_empty():return
+	canvas.texture_filter=CanvasItem.TEXTURE_FILTER_NEAREST
+	canvas.draw_texture_rect(row.texture,row.rect,false,Color(1,1,1,alpha))
 
 static func fit(canvas: CanvasItem, texture: Texture2D, rect: Rect2):
 	var scale = minf(rect.size.x/texture.get_width(),rect.size.y/texture.get_height())
@@ -60,7 +62,7 @@ static func fit(canvas: CanvasItem, texture: Texture2D, rect: Rect2):
 static var used_bounds: Dictionary = {}
 static func bounds(who: String, action: String, facing: int, foot: Vector2, elapsed: float) -> Rect2:
 	var key=who+"/"+action+("/left" if facing<0 else "/right")
-	if not CLIPS.has(key): return Rect2(foot-Vector2(16,44),Vector2(32,48))
+	if not CLIPS.has(key) or who=="shiba" and action=="idle": return Rect2(foot-Vector2(16,44),Vector2(32,48)) # Preserve pre-existing click bounds; rendering scale is independent.
 	var clip=CLIPS[key]
 	var index=maxi(0,int(elapsed/clip.duration))
 	index=index%clip.frames.size() if clip.loop else mini(index,clip.frames.size()-1)

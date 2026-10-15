@@ -1,0 +1,893 @@
+{
+	"checks": [
+		{
+			"check": "Default walls/doors and no Architect All category",
+			"passed": true
+		},
+		{
+			"check": "Every existing building/place tool has exactly one category",
+			"passed": true
+		},
+		{
+			"check": "Fixed category geometry (1280, 800) 壁と扉 pass0",
+			"passed": true
+		},
+		{
+			"check": "Category strip inside panel and above main mode bar",
+			"passed": true
+		},
+		{
+			"check": "Category buttons do not overlap",
+			"passed": true
+		},
+		{
+			"check": "Category buttons do not overlap",
+			"passed": true
+		},
+		{
+			"check": "Category buttons do not overlap",
+			"passed": true
+		},
+		{
+			"check": "Only upper items scroll; scrollbar always visible",
+			"passed": true
+		},
+		{
+			"check": "Building tool lives in clipped scroll body wall",
+			"passed": true
+		},
+		{
+			"check": "Architect name-only label wall",
+			"passed": true
+		},
+		{
+			"check": "Building tool lives in clipped scroll body wood_wall",
+			"passed": true
+		},
+		{
+			"check": "Architect name-only label wood_wall",
+			"passed": true
+		},
+		{
+			"check": "Building tool lives in clipped scroll body stone_wall",
+			"passed": true
+		},
+		{
+			"check": "Architect name-only label stone_wall",
+			"passed": true
+		},
+		{
+			"check": "Building tool lives in clipped scroll body door",
+			"passed": true
+		},
+		{
+			"check": "Architect name-only label door",
+			"passed": true
+		},
+		{
+			"check": "Building tool lives in clipped scroll body locked_door",
+			"passed": true
+		},
+		{
+			"check": "Architect name-only label locked_door",
+			"passed": true
+		},
+		{
+			"check": "Fixed category geometry (1280, 800) 床 pass0",
+			"passed": true
+		},
+		{
+			"check": "Category strip inside panel and above main mode bar",
+			"passed": true
+		},
+		{
+			"check": "Category buttons do not overlap",
+			"passed": true
+		},
+		{
+			"check": "Category buttons do not overlap",
+			"passed": true
+		},
+		{
+			"check": "Category buttons do not overlap",
+			"passed": true
+		},
+		{
+			"check": "Only upper items scroll; scrollbar always visible",
+			"passed": true
+		},
+		{
+			"check": "Building tool lives in clipped scroll body soil_tile",
+			"passed": true
+		},
+		{
+			"check": "Architect name-only label soil_tile",
+			"passed": true
+		},
+		{
+			"check": "Building tool lives in clipped scroll body wood_tile",
+			"passed": true
+		},
+		{
+			"check": "Architect name-only label wood_tile",
+			"passed": true
+		},
+		{
+			"check": "Building tool lives in clipped scroll body stone_tile",
+			"passed": true
+		},
+		{
+			"check": "Architect name-only label stone_tile",
+			"passed": true
+		},
+		{
+			"check": "Fixed category geometry (1280, 800) 設置 pass0",
+			"passed": true
+		},
+		{
+			"check": "Category strip inside panel and above main mode bar",
+			"passed": true
+		},
+		{
+			"check": "Category buttons do not overlap",
+			"passed": true
+		},
+		{
+			"check": "Category buttons do not overlap",
+			"passed": true
+		},
+		{
+			"check": "Category buttons do not overlap",
+			"passed": true
+		},
+		{
+			"check": "Only upper items scroll; scrollbar always visible",
+			"passed": true
+		},
+		{
+			"check": "Building tool lives in clipped scroll body cooking_bench",
+			"passed": true
+		},
+		{
+			"check": "Architect name-only label cooking_bench",
+			"passed": true
+		},
+		{
+			"check": "Building tool lives in clipped scroll body carpentry_bench",
+			"passed": true
+		},
+		{
+			"check": "Architect name-only label carpentry_bench",
+			"passed": true
+		},
+		{
+			"check": "Building tool lives in clipped scroll body sewing_bench",
+			"passed": true
+		},
+		{
+			"check": "Architect name-only label sewing_bench",
+			"passed": true
+		},
+		{
+			"check": "Fixed category geometry (1280, 800) ゾーン pass0",
+			"passed": true
+		},
+		{
+			"check": "Category strip inside panel and above main mode bar",
+			"passed": true
+		},
+		{
+			"check": "Category buttons do not overlap",
+			"passed": true
+		},
+		{
+			"check": "Category buttons do not overlap",
+			"passed": true
+		},
+		{
+			"check": "Category buttons do not overlap",
+			"passed": true
+		},
+		{
+			"check": "Zone palette exposes only creation/edit tools",
+			"passed": true
+		},
+		{
+			"check": "Fixed category geometry (1280, 800) 壁と扉 pass1",
+			"passed": true
+		},
+		{
+			"check": "Category strip inside panel and above main mode bar",
+			"passed": true
+		},
+		{
+			"check": "Category buttons do not overlap",
+			"passed": true
+		},
+		{
+			"check": "Category buttons do not overlap",
+			"passed": true
+		},
+		{
+			"check": "Category buttons do not overlap",
+			"passed": true
+		},
+		{
+			"check": "Only upper items scroll; scrollbar always visible",
+			"passed": true
+		},
+		{
+			"check": "Building tool lives in clipped scroll body wall",
+			"passed": true
+		},
+		{
+			"check": "Architect name-only label wall",
+			"passed": true
+		},
+		{
+			"check": "Building tool lives in clipped scroll body wood_wall",
+			"passed": true
+		},
+		{
+			"check": "Architect name-only label wood_wall",
+			"passed": true
+		},
+		{
+			"check": "Building tool lives in clipped scroll body stone_wall",
+			"passed": true
+		},
+		{
+			"check": "Architect name-only label stone_wall",
+			"passed": true
+		},
+		{
+			"check": "Building tool lives in clipped scroll body door",
+			"passed": true
+		},
+		{
+			"check": "Architect name-only label door",
+			"passed": true
+		},
+		{
+			"check": "Building tool lives in clipped scroll body locked_door",
+			"passed": true
+		},
+		{
+			"check": "Architect name-only label locked_door",
+			"passed": true
+		},
+		{
+			"check": "Fixed category geometry (1280, 800) 床 pass1",
+			"passed": true
+		},
+		{
+			"check": "Category strip inside panel and above main mode bar",
+			"passed": true
+		},
+		{
+			"check": "Category buttons do not overlap",
+			"passed": true
+		},
+		{
+			"check": "Category buttons do not overlap",
+			"passed": true
+		},
+		{
+			"check": "Category buttons do not overlap",
+			"passed": true
+		},
+		{
+			"check": "Only upper items scroll; scrollbar always visible",
+			"passed": true
+		},
+		{
+			"check": "Building tool lives in clipped scroll body soil_tile",
+			"passed": true
+		},
+		{
+			"check": "Architect name-only label soil_tile",
+			"passed": true
+		},
+		{
+			"check": "Building tool lives in clipped scroll body wood_tile",
+			"passed": true
+		},
+		{
+			"check": "Architect name-only label wood_tile",
+			"passed": true
+		},
+		{
+			"check": "Building tool lives in clipped scroll body stone_tile",
+			"passed": true
+		},
+		{
+			"check": "Architect name-only label stone_tile",
+			"passed": true
+		},
+		{
+			"check": "Fixed category geometry (1280, 800) 設置 pass1",
+			"passed": true
+		},
+		{
+			"check": "Category strip inside panel and above main mode bar",
+			"passed": true
+		},
+		{
+			"check": "Category buttons do not overlap",
+			"passed": true
+		},
+		{
+			"check": "Category buttons do not overlap",
+			"passed": true
+		},
+		{
+			"check": "Category buttons do not overlap",
+			"passed": true
+		},
+		{
+			"check": "Only upper items scroll; scrollbar always visible",
+			"passed": true
+		},
+		{
+			"check": "Building tool lives in clipped scroll body cooking_bench",
+			"passed": true
+		},
+		{
+			"check": "Architect name-only label cooking_bench",
+			"passed": true
+		},
+		{
+			"check": "Building tool lives in clipped scroll body carpentry_bench",
+			"passed": true
+		},
+		{
+			"check": "Architect name-only label carpentry_bench",
+			"passed": true
+		},
+		{
+			"check": "Building tool lives in clipped scroll body sewing_bench",
+			"passed": true
+		},
+		{
+			"check": "Architect name-only label sewing_bench",
+			"passed": true
+		},
+		{
+			"check": "Fixed category geometry (1280, 800) ゾーン pass1",
+			"passed": true
+		},
+		{
+			"check": "Category strip inside panel and above main mode bar",
+			"passed": true
+		},
+		{
+			"check": "Category buttons do not overlap",
+			"passed": true
+		},
+		{
+			"check": "Category buttons do not overlap",
+			"passed": true
+		},
+		{
+			"check": "Category buttons do not overlap",
+			"passed": true
+		},
+		{
+			"check": "Zone palette exposes only creation/edit tools",
+			"passed": true
+		},
+		{
+			"check": "Animal main tab opens list only",
+			"passed": true
+		},
+		{
+			"check": "Individual view replaces list",
+			"passed": true
+		},
+		{
+			"check": "Individual view is compact",
+			"passed": true
+		},
+		{
+			"check": "Command menu below card, not overlapping",
+			"passed": true
+		},
+		{
+			"check": "Return to list retains selection and hides individual actions",
+			"passed": true
+		},
+		{
+			"check": "Unused animal panel area does not block world input",
+			"passed": true
+		},
+		{
+			"check": "Fixed category geometry (1600, 1000) 壁と扉 pass0",
+			"passed": true
+		},
+		{
+			"check": "Category strip inside panel and above main mode bar",
+			"passed": true
+		},
+		{
+			"check": "Category buttons do not overlap",
+			"passed": true
+		},
+		{
+			"check": "Category buttons do not overlap",
+			"passed": true
+		},
+		{
+			"check": "Category buttons do not overlap",
+			"passed": true
+		},
+		{
+			"check": "Only upper items scroll; scrollbar always visible",
+			"passed": true
+		},
+		{
+			"check": "Building tool lives in clipped scroll body wall",
+			"passed": true
+		},
+		{
+			"check": "Architect name-only label wall",
+			"passed": true
+		},
+		{
+			"check": "Building tool lives in clipped scroll body wood_wall",
+			"passed": true
+		},
+		{
+			"check": "Architect name-only label wood_wall",
+			"passed": true
+		},
+		{
+			"check": "Building tool lives in clipped scroll body stone_wall",
+			"passed": true
+		},
+		{
+			"check": "Architect name-only label stone_wall",
+			"passed": true
+		},
+		{
+			"check": "Building tool lives in clipped scroll body door",
+			"passed": true
+		},
+		{
+			"check": "Architect name-only label door",
+			"passed": true
+		},
+		{
+			"check": "Building tool lives in clipped scroll body locked_door",
+			"passed": true
+		},
+		{
+			"check": "Architect name-only label locked_door",
+			"passed": true
+		},
+		{
+			"check": "Fixed category geometry (1600, 1000) 床 pass0",
+			"passed": true
+		},
+		{
+			"check": "Category strip inside panel and above main mode bar",
+			"passed": true
+		},
+		{
+			"check": "Category buttons do not overlap",
+			"passed": true
+		},
+		{
+			"check": "Category buttons do not overlap",
+			"passed": true
+		},
+		{
+			"check": "Category buttons do not overlap",
+			"passed": true
+		},
+		{
+			"check": "Only upper items scroll; scrollbar always visible",
+			"passed": true
+		},
+		{
+			"check": "Building tool lives in clipped scroll body soil_tile",
+			"passed": true
+		},
+		{
+			"check": "Architect name-only label soil_tile",
+			"passed": true
+		},
+		{
+			"check": "Building tool lives in clipped scroll body wood_tile",
+			"passed": true
+		},
+		{
+			"check": "Architect name-only label wood_tile",
+			"passed": true
+		},
+		{
+			"check": "Building tool lives in clipped scroll body stone_tile",
+			"passed": true
+		},
+		{
+			"check": "Architect name-only label stone_tile",
+			"passed": true
+		},
+		{
+			"check": "Fixed category geometry (1600, 1000) 設置 pass0",
+			"passed": true
+		},
+		{
+			"check": "Category strip inside panel and above main mode bar",
+			"passed": true
+		},
+		{
+			"check": "Category buttons do not overlap",
+			"passed": true
+		},
+		{
+			"check": "Category buttons do not overlap",
+			"passed": true
+		},
+		{
+			"check": "Category buttons do not overlap",
+			"passed": true
+		},
+		{
+			"check": "Only upper items scroll; scrollbar always visible",
+			"passed": true
+		},
+		{
+			"check": "Building tool lives in clipped scroll body cooking_bench",
+			"passed": true
+		},
+		{
+			"check": "Architect name-only label cooking_bench",
+			"passed": true
+		},
+		{
+			"check": "Building tool lives in clipped scroll body carpentry_bench",
+			"passed": true
+		},
+		{
+			"check": "Architect name-only label carpentry_bench",
+			"passed": true
+		},
+		{
+			"check": "Building tool lives in clipped scroll body sewing_bench",
+			"passed": true
+		},
+		{
+			"check": "Architect name-only label sewing_bench",
+			"passed": true
+		},
+		{
+			"check": "Fixed category geometry (1600, 1000) ゾーン pass0",
+			"passed": true
+		},
+		{
+			"check": "Category strip inside panel and above main mode bar",
+			"passed": true
+		},
+		{
+			"check": "Category buttons do not overlap",
+			"passed": true
+		},
+		{
+			"check": "Category buttons do not overlap",
+			"passed": true
+		},
+		{
+			"check": "Category buttons do not overlap",
+			"passed": true
+		},
+		{
+			"check": "Zone palette exposes only creation/edit tools",
+			"passed": true
+		},
+		{
+			"check": "Fixed category geometry (1600, 1000) 壁と扉 pass1",
+			"passed": true
+		},
+		{
+			"check": "Category strip inside panel and above main mode bar",
+			"passed": true
+		},
+		{
+			"check": "Category buttons do not overlap",
+			"passed": true
+		},
+		{
+			"check": "Category buttons do not overlap",
+			"passed": true
+		},
+		{
+			"check": "Category buttons do not overlap",
+			"passed": true
+		},
+		{
+			"check": "Only upper items scroll; scrollbar always visible",
+			"passed": true
+		},
+		{
+			"check": "Building tool lives in clipped scroll body wall",
+			"passed": true
+		},
+		{
+			"check": "Architect name-only label wall",
+			"passed": true
+		},
+		{
+			"check": "Building tool lives in clipped scroll body wood_wall",
+			"passed": true
+		},
+		{
+			"check": "Architect name-only label wood_wall",
+			"passed": true
+		},
+		{
+			"check": "Building tool lives in clipped scroll body stone_wall",
+			"passed": true
+		},
+		{
+			"check": "Architect name-only label stone_wall",
+			"passed": true
+		},
+		{
+			"check": "Building tool lives in clipped scroll body door",
+			"passed": true
+		},
+		{
+			"check": "Architect name-only label door",
+			"passed": true
+		},
+		{
+			"check": "Building tool lives in clipped scroll body locked_door",
+			"passed": true
+		},
+		{
+			"check": "Architect name-only label locked_door",
+			"passed": true
+		},
+		{
+			"check": "Fixed category geometry (1600, 1000) 床 pass1",
+			"passed": true
+		},
+		{
+			"check": "Category strip inside panel and above main mode bar",
+			"passed": true
+		},
+		{
+			"check": "Category buttons do not overlap",
+			"passed": true
+		},
+		{
+			"check": "Category buttons do not overlap",
+			"passed": true
+		},
+		{
+			"check": "Category buttons do not overlap",
+			"passed": true
+		},
+		{
+			"check": "Only upper items scroll; scrollbar always visible",
+			"passed": true
+		},
+		{
+			"check": "Building tool lives in clipped scroll body soil_tile",
+			"passed": true
+		},
+		{
+			"check": "Architect name-only label soil_tile",
+			"passed": true
+		},
+		{
+			"check": "Building tool lives in clipped scroll body wood_tile",
+			"passed": true
+		},
+		{
+			"check": "Architect name-only label wood_tile",
+			"passed": true
+		},
+		{
+			"check": "Building tool lives in clipped scroll body stone_tile",
+			"passed": true
+		},
+		{
+			"check": "Architect name-only label stone_tile",
+			"passed": true
+		},
+		{
+			"check": "Fixed category geometry (1600, 1000) 設置 pass1",
+			"passed": true
+		},
+		{
+			"check": "Category strip inside panel and above main mode bar",
+			"passed": true
+		},
+		{
+			"check": "Category buttons do not overlap",
+			"passed": true
+		},
+		{
+			"check": "Category buttons do not overlap",
+			"passed": true
+		},
+		{
+			"check": "Category buttons do not overlap",
+			"passed": true
+		},
+		{
+			"check": "Only upper items scroll; scrollbar always visible",
+			"passed": true
+		},
+		{
+			"check": "Building tool lives in clipped scroll body cooking_bench",
+			"passed": true
+		},
+		{
+			"check": "Architect name-only label cooking_bench",
+			"passed": true
+		},
+		{
+			"check": "Building tool lives in clipped scroll body carpentry_bench",
+			"passed": true
+		},
+		{
+			"check": "Architect name-only label carpentry_bench",
+			"passed": true
+		},
+		{
+			"check": "Building tool lives in clipped scroll body sewing_bench",
+			"passed": true
+		},
+		{
+			"check": "Architect name-only label sewing_bench",
+			"passed": true
+		},
+		{
+			"check": "Fixed category geometry (1600, 1000) ゾーン pass1",
+			"passed": true
+		},
+		{
+			"check": "Category strip inside panel and above main mode bar",
+			"passed": true
+		},
+		{
+			"check": "Category buttons do not overlap",
+			"passed": true
+		},
+		{
+			"check": "Category buttons do not overlap",
+			"passed": true
+		},
+		{
+			"check": "Category buttons do not overlap",
+			"passed": true
+		},
+		{
+			"check": "Zone palette exposes only creation/edit tools",
+			"passed": true
+		},
+		{
+			"check": "Animal main tab opens list only",
+			"passed": true
+		},
+		{
+			"check": "Individual view replaces list",
+			"passed": true
+		},
+		{
+			"check": "Individual view is compact",
+			"passed": true
+		},
+		{
+			"check": "Command menu below card, not overlapping",
+			"passed": true
+		},
+		{
+			"check": "Return to list retains selection and hides individual actions",
+			"passed": true
+		},
+		{
+			"check": "Unused animal panel area does not block world input",
+			"passed": true
+		},
+		{
+			"check": "Overflow palette wheel scrolls items without map zoom",
+			"passed": true
+		},
+		{
+			"check": "Names auto-number independently of stable IDs",
+			"passed": true
+		},
+		{
+			"check": "Map left click opens existing stockpile details",
+			"passed": true
+		},
+		{
+			"check": "Independent details panel exists",
+			"passed": true
+		},
+		{
+			"check": "Name typing cannot pause, change speed/mode, or move camera",
+			"passed": true
+		},
+		{
+			"check": "Rename changes metadata only",
+			"passed": true
+		},
+		{
+			"check": "Rename also updates zone selector list",
+			"passed": true
+		},
+		{
+			"check": "Name stored alongside zone data without restoring save/load",
+			"passed": true
+		},
+		{
+			"check": "Empty names rejected",
+			"passed": true
+		},
+		{
+			"check": "Priority setting still updates hauling data",
+			"passed": true
+		},
+		{
+			"check": "All main/sub/individual filter hierarchy retained",
+			"passed": true
+		},
+		{
+			"check": "Filter tree wheel scroll is local, not camera zoom",
+			"passed": true
+		},
+		{
+			"check": "Filter changes preserve physical goods and area",
+			"passed": true
+		},
+		{
+			"check": "Residential details have no unused stock filter region",
+			"passed": true
+		},
+		{
+			"check": "Resize returns to basic palette",
+			"passed": true
+		},
+		{
+			"check": "Zone creation drag merges existing area once without opening details",
+			"passed": true
+		},
+		{
+			"check": "Details close clears zone context",
+			"passed": true
+		},
+		{
+			"check": "Zone cancel button removes clicked cell through input handler",
+			"passed": true
+		},
+		{
+			"check": "Resident status exposes equipment instead of inventory",
+			"passed": true
+		},
+		{
+			"check": "Map animal click opens correct individual",
+			"passed": true
+		},
+		{
+			"check": "Multiple animal selection survives list return",
+			"passed": true
+		},
+		{
+			"check": "Instructions on a selected list row uses that individual without losing the multi-selection",
+			"passed": true
+		},
+		{
+			"check": "Cat selection uses cat, not Shiba status",
+			"passed": true
+		},
+		{
+			"check": "Hidden work queue and 100-job limit retained",
+			"passed": true
+		}
+	],
+	"failures": 0
+}

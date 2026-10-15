@@ -1,0 +1,1951 @@
+{
+  "checks": [
+    {
+      "check": "Harvest reservation accepted before prohibition",
+      "passed": true
+    },
+    {
+      "check": "Forbidding natural harvest blocks existing job and excludes assignment",
+      "passed": true
+    },
+    {
+      "check": "Forbidden weed cannot be harvested through direct execution",
+      "passed": true
+    },
+    {
+      "check": "Allow resumes one physical fiber yield without duplication",
+      "passed": true
+    },
+    {
+      "check": "Forbidden physical equipment excluded from stock and equip",
+      "passed": true
+    },
+    {
+      "check": "Forbidden stock cannot be reserved for materials",
+      "passed": true
+    },
+    {
+      "check": "Resident can request physical equipment",
+      "passed": true
+    },
+    {
+      "check": "Equipment job claims the correct resident",
+      "passed": true
+    },
+    {
+      "check": "Resident equips one item with conserved physical total",
+      "passed": true
+    },
+    {
+      "check": "Resident can request unequip",
+      "passed": true
+    },
+    {
+      "check": "Unequip returns one physical item at resident without loss",
+      "passed": true
+    },
+    {
+      "check": "Training can be designated",
+      "passed": true
+    },
+    {
+      "check": "Area forbid blocks animal training immediately",
+      "passed": true
+    },
+    {
+      "check": "Allow preserves existing animal job and permits resume",
+      "passed": true
+    },
+    {
+      "check": "salaryman actual AI marches around rock barrier without teleport",
+      "passed": true
+    },
+    {
+      "check": "ninja actual AI marches around rock barrier without teleport",
+      "passed": true
+    },
+    {
+      "check": "runner actual AI marches around rock barrier without teleport",
+      "passed": true
+    },
+    {
+      "check": "kidnapper actual AI marches around rock barrier without teleport",
+      "passed": true
+    },
+    {
+      "check": "destroyer actual AI marches around rock barrier without teleport",
+      "passed": true
+    },
+    {
+      "check": "martial_artist actual AI marches around rock barrier without teleport",
+      "passed": true
+    },
+    {
+      "check": "Residential tendency uses visible zone",
+      "passed": true
+    },
+    {
+      "check": "Reached zone goal yields onward march, not short oscillation",
+      "passed": true
+    },
+    {
+      "check": "Looting tendency uses visible storage",
+      "passed": true
+    },
+    {
+      "check": "Visible non-keeper residents are attack candidates",
+      "passed": true
+    },
+    {
+      "check": "Resident behind rock is not revealed",
+      "passed": true
+    },
+    {
+      "check": "Unreachable route has bounded retry, not repeated per evaluation",
+      "passed": true
+    },
+    {
+      "check": "Terrain change invalidates failed-route cache",
+      "passed": true
+    },
+    {
+      "check": "Non-breaker detours around locked door instead of stalling",
+      "passed": true
+    },
+    {
+      "check": "Door state invalidates enemy route cache without room rescan",
+      "passed": true
+    },
+    {
+      "check": "Maid still provides coffee to adjacent ally",
+      "passed": true
+    },
+    {
+      "check": "Maid normal attack remains disabled",
+      "passed": true
+    },
+    {
+      "check": "Dancer resurrection retains corpse, once-only and HP rules",
+      "passed": true
+    },
+    {
+      "check": "Dancer death remains a corpse; other dancers exclude its archetype",
+      "passed": true
+    },
+    {
+      "check": "Thief still steals physical goods before retreat",
+      "passed": true
+    },
+    {
+      "check": "Carrying thief retreats instead of joining central rally",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot shiba idle -1 frame0",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot shiba idle -1 frame1",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot shiba idle -1 frame2",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot shiba idle -1 frame3",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot shiba walk -1 frame0",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot shiba walk -1 frame1",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot shiba walk -1 frame2",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot shiba walk -1 frame3",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot shiba run -1 frame0",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot shiba run -1 frame1",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot shiba run -1 frame2",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot shiba run -1 frame3",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot shiba rest -1 frame0",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot shiba rest -1 frame1",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot shiba rest -1 frame2",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot shiba rest -1 frame3",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot shiba attack -1 frame0",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot shiba attack -1 frame1",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot shiba attack -1 frame2",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot shiba attack -1 frame3",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot shiba hurt -1 frame0",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot shiba hurt -1 frame1",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot shiba hurt -1 frame2",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot shiba hurt -1 frame3",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot shiba settle -1 frame0",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot shiba settle -1 frame1",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot shiba settle -1 frame2",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot shiba settle -1 frame3",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot shiba wake -1 frame0",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot shiba wake -1 frame1",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot shiba wake -1 frame2",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot shiba wake -1 frame3",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot shiba idle 1 frame0",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot shiba idle 1 frame1",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot shiba idle 1 frame2",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot shiba idle 1 frame3",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot shiba walk 1 frame0",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot shiba walk 1 frame1",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot shiba walk 1 frame2",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot shiba walk 1 frame3",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot shiba run 1 frame0",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot shiba run 1 frame1",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot shiba run 1 frame2",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot shiba run 1 frame3",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot shiba rest 1 frame0",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot shiba rest 1 frame1",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot shiba rest 1 frame2",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot shiba rest 1 frame3",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot shiba attack 1 frame0",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot shiba attack 1 frame1",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot shiba attack 1 frame2",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot shiba attack 1 frame3",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot shiba hurt 1 frame0",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot shiba hurt 1 frame1",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot shiba hurt 1 frame2",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot shiba hurt 1 frame3",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot shiba settle 1 frame0",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot shiba settle 1 frame1",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot shiba settle 1 frame2",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot shiba settle 1 frame3",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot shiba wake 1 frame0",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot shiba wake 1 frame1",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot shiba wake 1 frame2",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot shiba wake 1 frame3",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot keeper idle -1 frame0",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot keeper idle -1 frame1",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot keeper idle -1 frame2",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot keeper idle -1 frame3",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot keeper walk -1 frame0",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot keeper walk -1 frame1",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot keeper walk -1 frame2",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot keeper walk -1 frame3",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot keeper run -1 frame0",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot keeper run -1 frame1",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot keeper run -1 frame2",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot keeper run -1 frame3",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot keeper rest -1 frame0",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot keeper rest -1 frame1",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot keeper rest -1 frame2",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot keeper rest -1 frame3",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot keeper attack -1 frame0",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot keeper attack -1 frame1",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot keeper attack -1 frame2",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot keeper attack -1 frame3",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot keeper hurt -1 frame0",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot keeper hurt -1 frame1",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot keeper hurt -1 frame2",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot keeper hurt -1 frame3",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot keeper settle -1 frame0",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot keeper settle -1 frame1",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot keeper settle -1 frame2",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot keeper settle -1 frame3",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot keeper wake -1 frame0",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot keeper wake -1 frame1",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot keeper wake -1 frame2",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot keeper wake -1 frame3",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot keeper idle 1 frame0",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot keeper idle 1 frame1",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot keeper idle 1 frame2",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot keeper idle 1 frame3",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot keeper walk 1 frame0",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot keeper walk 1 frame1",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot keeper walk 1 frame2",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot keeper walk 1 frame3",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot keeper run 1 frame0",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot keeper run 1 frame1",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot keeper run 1 frame2",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot keeper run 1 frame3",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot keeper rest 1 frame0",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot keeper rest 1 frame1",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot keeper rest 1 frame2",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot keeper rest 1 frame3",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot keeper attack 1 frame0",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot keeper attack 1 frame1",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot keeper attack 1 frame2",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot keeper attack 1 frame3",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot keeper hurt 1 frame0",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot keeper hurt 1 frame1",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot keeper hurt 1 frame2",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot keeper hurt 1 frame3",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot keeper settle 1 frame0",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot keeper settle 1 frame1",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot keeper settle 1 frame2",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot keeper settle 1 frame3",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot keeper wake 1 frame0",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot keeper wake 1 frame1",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot keeper wake 1 frame2",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot keeper wake 1 frame3",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot cat idle -1 frame0",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot cat idle -1 frame1",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot cat idle -1 frame2",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot cat idle -1 frame3",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot cat walk -1 frame0",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot cat walk -1 frame1",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot cat walk -1 frame2",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot cat walk -1 frame3",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot cat run -1 frame0",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot cat run -1 frame1",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot cat run -1 frame2",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot cat run -1 frame3",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot cat rest -1 frame0",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot cat rest -1 frame1",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot cat rest -1 frame2",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot cat rest -1 frame3",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot cat attack -1 frame0",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot cat attack -1 frame1",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot cat attack -1 frame2",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot cat attack -1 frame3",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot cat hurt -1 frame0",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot cat hurt -1 frame1",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot cat hurt -1 frame2",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot cat hurt -1 frame3",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot cat settle -1 frame0",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot cat settle -1 frame1",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot cat settle -1 frame2",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot cat settle -1 frame3",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot cat wake -1 frame0",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot cat wake -1 frame1",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot cat wake -1 frame2",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot cat wake -1 frame3",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot cat idle 1 frame0",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot cat idle 1 frame1",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot cat idle 1 frame2",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot cat idle 1 frame3",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot cat walk 1 frame0",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot cat walk 1 frame1",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot cat walk 1 frame2",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot cat walk 1 frame3",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot cat run 1 frame0",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot cat run 1 frame1",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot cat run 1 frame2",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot cat run 1 frame3",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot cat rest 1 frame0",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot cat rest 1 frame1",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot cat rest 1 frame2",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot cat rest 1 frame3",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot cat attack 1 frame0",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot cat attack 1 frame1",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot cat attack 1 frame2",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot cat attack 1 frame3",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot cat hurt 1 frame0",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot cat hurt 1 frame1",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot cat hurt 1 frame2",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot cat hurt 1 frame3",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot cat settle 1 frame0",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot cat settle 1 frame1",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot cat settle 1 frame2",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot cat settle 1 frame3",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot cat wake 1 frame0",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot cat wake 1 frame1",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot cat wake 1 frame2",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot cat wake 1 frame3",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot hen idle -1 frame0",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot hen idle -1 frame1",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot hen idle -1 frame2",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot hen idle -1 frame3",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot hen walk -1 frame0",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot hen walk -1 frame1",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot hen walk -1 frame2",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot hen walk -1 frame3",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot hen run -1 frame0",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot hen run -1 frame1",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot hen run -1 frame2",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot hen run -1 frame3",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot hen rest -1 frame0",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot hen rest -1 frame1",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot hen rest -1 frame2",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot hen rest -1 frame3",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot hen attack -1 frame0",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot hen attack -1 frame1",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot hen attack -1 frame2",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot hen attack -1 frame3",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot hen hurt -1 frame0",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot hen hurt -1 frame1",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot hen hurt -1 frame2",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot hen hurt -1 frame3",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot hen settle -1 frame0",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot hen settle -1 frame1",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot hen settle -1 frame2",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot hen settle -1 frame3",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot hen wake -1 frame0",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot hen wake -1 frame1",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot hen wake -1 frame2",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot hen wake -1 frame3",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot hen idle 1 frame0",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot hen idle 1 frame1",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot hen idle 1 frame2",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot hen idle 1 frame3",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot hen walk 1 frame0",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot hen walk 1 frame1",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot hen walk 1 frame2",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot hen walk 1 frame3",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot hen run 1 frame0",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot hen run 1 frame1",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot hen run 1 frame2",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot hen run 1 frame3",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot hen rest 1 frame0",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot hen rest 1 frame1",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot hen rest 1 frame2",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot hen rest 1 frame3",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot hen attack 1 frame0",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot hen attack 1 frame1",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot hen attack 1 frame2",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot hen attack 1 frame3",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot hen hurt 1 frame0",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot hen hurt 1 frame1",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot hen hurt 1 frame2",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot hen hurt 1 frame3",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot hen settle 1 frame0",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot hen settle 1 frame1",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot hen settle 1 frame2",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot hen settle 1 frame3",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot hen wake 1 frame0",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot hen wake 1 frame1",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot hen wake 1 frame2",
+      "passed": true
+    },
+    {
+      "check": "Shared scale/foot hen wake 1 frame3",
+      "passed": true
+    },
+    {
+      "check": "Cover remains completely still for first 0.4 seconds",
+      "passed": true
+    },
+    {
+      "check": "Opening final frame equals open book origin, size and page commands",
+      "passed": true
+    },
+    {
+      "check": "Closing starts at identical open-book geometry",
+      "passed": true
+    }
+  ],
+  "failures": 0,
+  "frames": [
+    {
+      "action": "idle",
+      "facing": -1,
+      "index": 0,
+      "path": "res://art_delivery/characters_v1/shiba_idle_left_00.png",
+      "rect": [
+        70.0,
+        38.0,
+        115.200004577637,
+        115.200004577637
+      ]
+    },
+    {
+      "action": "idle",
+      "facing": -1,
+      "index": 1,
+      "path": "res://art_delivery/characters_v1/shiba_idle_left_00.png",
+      "rect": [
+        70.0,
+        38.0,
+        115.200004577637,
+        115.200004577637
+      ]
+    },
+    {
+      "action": "idle",
+      "facing": -1,
+      "index": 2,
+      "path": "res://art_delivery/characters_v1/shiba_idle_left_00.png",
+      "rect": [
+        70.0,
+        38.0,
+        115.200004577637,
+        115.200004577637
+      ]
+    },
+    {
+      "action": "idle",
+      "facing": -1,
+      "index": 3,
+      "path": "res://art_delivery/characters_v1/shiba_idle_left_00.png",
+      "rect": [
+        70.0,
+        38.0,
+        115.200004577637,
+        115.200004577637
+      ]
+    },
+    {
+      "action": "walk",
+      "facing": -1,
+      "index": 0,
+      "path": "res://art_delivery/characters_motion_v1/shiba/walk_left_00.png",
+      "rect": [
+        70.0,
+        38.0,
+        115.200004577637,
+        115.200004577637
+      ]
+    },
+    {
+      "action": "walk",
+      "facing": -1,
+      "index": 1,
+      "path": "res://art_delivery/characters_motion_v1/shiba/walk_left_01.png",
+      "rect": [
+        70.0,
+        38.0,
+        115.200004577637,
+        115.200004577637
+      ]
+    },
+    {
+      "action": "walk",
+      "facing": -1,
+      "index": 2,
+      "path": "res://art_delivery/characters_motion_v1/shiba/walk_left_02.png",
+      "rect": [
+        70.0,
+        38.0,
+        115.200004577637,
+        115.200004577637
+      ]
+    },
+    {
+      "action": "walk",
+      "facing": -1,
+      "index": 3,
+      "path": "res://art_delivery/characters_motion_v1/shiba/walk_left_03.png",
+      "rect": [
+        70.0,
+        38.0,
+        115.200004577637,
+        115.200004577637
+      ]
+    },
+    {
+      "action": "run",
+      "facing": -1,
+      "index": 0,
+      "path": "res://art_delivery/characters_v1/shiba_idle_left_00.png",
+      "rect": [
+        70.0,
+        38.0,
+        115.200004577637,
+        115.200004577637
+      ]
+    },
+    {
+      "action": "run",
+      "facing": -1,
+      "index": 1,
+      "path": "res://art_delivery/characters_v1/shiba_idle_left_00.png",
+      "rect": [
+        70.0,
+        38.0,
+        115.200004577637,
+        115.200004577637
+      ]
+    },
+    {
+      "action": "run",
+      "facing": -1,
+      "index": 2,
+      "path": "res://art_delivery/characters_v1/shiba_idle_left_00.png",
+      "rect": [
+        70.0,
+        38.0,
+        115.200004577637,
+        115.200004577637
+      ]
+    },
+    {
+      "action": "run",
+      "facing": -1,
+      "index": 3,
+      "path": "res://art_delivery/characters_v1/shiba_idle_left_00.png",
+      "rect": [
+        70.0,
+        38.0,
+        115.200004577637,
+        115.200004577637
+      ]
+    },
+    {
+      "action": "rest",
+      "facing": -1,
+      "index": 0,
+      "path": "res://art_delivery/characters_motion_v1/shiba/rest_left_00.png",
+      "rect": [
+        70.0,
+        38.0,
+        115.200004577637,
+        115.200004577637
+      ]
+    },
+    {
+      "action": "rest",
+      "facing": -1,
+      "index": 1,
+      "path": "res://art_delivery/characters_motion_v1/shiba/rest_left_00.png",
+      "rect": [
+        70.0,
+        38.0,
+        115.200004577637,
+        115.200004577637
+      ]
+    },
+    {
+      "action": "rest",
+      "facing": -1,
+      "index": 2,
+      "path": "res://art_delivery/characters_motion_v1/shiba/rest_left_00.png",
+      "rect": [
+        70.0,
+        38.0,
+        115.200004577637,
+        115.200004577637
+      ]
+    },
+    {
+      "action": "rest",
+      "facing": -1,
+      "index": 3,
+      "path": "res://art_delivery/characters_motion_v1/shiba/rest_left_00.png",
+      "rect": [
+        70.0,
+        38.0,
+        115.200004577637,
+        115.200004577637
+      ]
+    },
+    {
+      "action": "attack",
+      "facing": -1,
+      "index": 0,
+      "path": "res://art_delivery/characters_v1/shiba_idle_left_00.png",
+      "rect": [
+        70.0,
+        38.0,
+        115.200004577637,
+        115.200004577637
+      ]
+    },
+    {
+      "action": "attack",
+      "facing": -1,
+      "index": 1,
+      "path": "res://art_delivery/characters_v1/shiba_idle_left_00.png",
+      "rect": [
+        70.0,
+        38.0,
+        115.200004577637,
+        115.200004577637
+      ]
+    },
+    {
+      "action": "attack",
+      "facing": -1,
+      "index": 2,
+      "path": "res://art_delivery/characters_v1/shiba_idle_left_00.png",
+      "rect": [
+        70.0,
+        38.0,
+        115.200004577637,
+        115.200004577637
+      ]
+    },
+    {
+      "action": "attack",
+      "facing": -1,
+      "index": 3,
+      "path": "res://art_delivery/characters_v1/shiba_idle_left_00.png",
+      "rect": [
+        70.0,
+        38.0,
+        115.200004577637,
+        115.200004577637
+      ]
+    },
+    {
+      "action": "hurt",
+      "facing": -1,
+      "index": 0,
+      "path": "res://art_delivery/characters_v1/shiba_idle_left_00.png",
+      "rect": [
+        70.0,
+        38.0,
+        115.200004577637,
+        115.200004577637
+      ]
+    },
+    {
+      "action": "hurt",
+      "facing": -1,
+      "index": 1,
+      "path": "res://art_delivery/characters_v1/shiba_idle_left_00.png",
+      "rect": [
+        70.0,
+        38.0,
+        115.200004577637,
+        115.200004577637
+      ]
+    },
+    {
+      "action": "hurt",
+      "facing": -1,
+      "index": 2,
+      "path": "res://art_delivery/characters_v1/shiba_idle_left_00.png",
+      "rect": [
+        70.0,
+        38.0,
+        115.200004577637,
+        115.200004577637
+      ]
+    },
+    {
+      "action": "hurt",
+      "facing": -1,
+      "index": 3,
+      "path": "res://art_delivery/characters_v1/shiba_idle_left_00.png",
+      "rect": [
+        70.0,
+        38.0,
+        115.200004577637,
+        115.200004577637
+      ]
+    },
+    {
+      "action": "settle",
+      "facing": -1,
+      "index": 0,
+      "path": "res://art_delivery/characters_motion_v1/shiba/settle_left_00.png",
+      "rect": [
+        70.0,
+        38.0,
+        115.200004577637,
+        115.200004577637
+      ]
+    },
+    {
+      "action": "settle",
+      "facing": -1,
+      "index": 1,
+      "path": "res://art_delivery/characters_motion_v1/shiba/settle_left_00.png",
+      "rect": [
+        70.0,
+        38.0,
+        115.200004577637,
+        115.200004577637
+      ]
+    },
+    {
+      "action": "settle",
+      "facing": -1,
+      "index": 2,
+      "path": "res://art_delivery/characters_motion_v1/shiba/settle_left_01.png",
+      "rect": [
+        70.0,
+        38.0,
+        115.200004577637,
+        115.200004577637
+      ]
+    },
+    {
+      "action": "settle",
+      "facing": -1,
+      "index": 3,
+      "path": "res://art_delivery/characters_motion_v1/shiba/settle_left_01.png",
+      "rect": [
+        70.0,
+        38.0,
+        115.200004577637,
+        115.200004577637
+      ]
+    },
+    {
+      "action": "wake",
+      "facing": -1,
+      "index": 0,
+      "path": "res://art_delivery/characters_motion_v1/shiba/wake_left_00.png",
+      "rect": [
+        70.0,
+        38.0,
+        115.200004577637,
+        115.200004577637
+      ]
+    },
+    {
+      "action": "wake",
+      "facing": -1,
+      "index": 1,
+      "path": "res://art_delivery/characters_motion_v1/shiba/wake_left_00.png",
+      "rect": [
+        70.0,
+        38.0,
+        115.200004577637,
+        115.200004577637
+      ]
+    },
+    {
+      "action": "wake",
+      "facing": -1,
+      "index": 2,
+      "path": "res://art_delivery/characters_motion_v1/shiba/wake_left_01.png",
+      "rect": [
+        70.0,
+        38.0,
+        115.200004577637,
+        115.200004577637
+      ]
+    },
+    {
+      "action": "wake",
+      "facing": -1,
+      "index": 3,
+      "path": "res://art_delivery/characters_motion_v1/shiba/wake_left_01.png",
+      "rect": [
+        70.0,
+        38.0,
+        115.200004577637,
+        115.200004577637
+      ]
+    },
+    {
+      "action": "idle",
+      "facing": 1,
+      "index": 0,
+      "path": "res://art_delivery/characters_v1/shiba_idle_right_00.png",
+      "rect": [
+        70.0,
+        38.0,
+        115.200004577637,
+        115.200004577637
+      ]
+    },
+    {
+      "action": "idle",
+      "facing": 1,
+      "index": 1,
+      "path": "res://art_delivery/characters_v1/shiba_idle_right_00.png",
+      "rect": [
+        70.0,
+        38.0,
+        115.200004577637,
+        115.200004577637
+      ]
+    },
+    {
+      "action": "idle",
+      "facing": 1,
+      "index": 2,
+      "path": "res://art_delivery/characters_v1/shiba_idle_right_00.png",
+      "rect": [
+        70.0,
+        38.0,
+        115.200004577637,
+        115.200004577637
+      ]
+    },
+    {
+      "action": "idle",
+      "facing": 1,
+      "index": 3,
+      "path": "res://art_delivery/characters_v1/shiba_idle_right_00.png",
+      "rect": [
+        70.0,
+        38.0,
+        115.200004577637,
+        115.200004577637
+      ]
+    },
+    {
+      "action": "walk",
+      "facing": 1,
+      "index": 0,
+      "path": "res://art_delivery/characters_motion_v1/shiba/walk_right_00.png",
+      "rect": [
+        70.0,
+        38.0,
+        115.200004577637,
+        115.200004577637
+      ]
+    },
+    {
+      "action": "walk",
+      "facing": 1,
+      "index": 1,
+      "path": "res://art_delivery/characters_motion_v1/shiba/walk_right_01.png",
+      "rect": [
+        70.0,
+        38.0,
+        115.200004577637,
+        115.200004577637
+      ]
+    },
+    {
+      "action": "walk",
+      "facing": 1,
+      "index": 2,
+      "path": "res://art_delivery/characters_motion_v1/shiba/walk_right_02.png",
+      "rect": [
+        70.0,
+        38.0,
+        115.200004577637,
+        115.200004577637
+      ]
+    },
+    {
+      "action": "walk",
+      "facing": 1,
+      "index": 3,
+      "path": "res://art_delivery/characters_motion_v1/shiba/walk_right_03.png",
+      "rect": [
+        70.0,
+        38.0,
+        115.200004577637,
+        115.200004577637
+      ]
+    },
+    {
+      "action": "run",
+      "facing": 1,
+      "index": 0,
+      "path": "res://art_delivery/characters_v1/shiba_idle_right_00.png",
+      "rect": [
+        70.0,
+        38.0,
+        115.200004577637,
+        115.200004577637
+      ]
+    },
+    {
+      "action": "run",
+      "facing": 1,
+      "index": 1,
+      "path": "res://art_delivery/characters_v1/shiba_idle_right_00.png",
+      "rect": [
+        70.0,
+        38.0,
+        115.200004577637,
+        115.200004577637
+      ]
+    },
+    {
+      "action": "run",
+      "facing": 1,
+      "index": 2,
+      "path": "res://art_delivery/characters_v1/shiba_idle_right_00.png",
+      "rect": [
+        70.0,
+        38.0,
+        115.200004577637,
+        115.200004577637
+      ]
+    },
+    {
+      "action": "run",
+      "facing": 1,
+      "index": 3,
+      "path": "res://art_delivery/characters_v1/shiba_idle_right_00.png",
+      "rect": [
+        70.0,
+        38.0,
+        115.200004577637,
+        115.200004577637
+      ]
+    },
+    {
+      "action": "rest",
+      "facing": 1,
+      "index": 0,
+      "path": "res://art_delivery/characters_motion_v1/shiba/rest_right_00.png",
+      "rect": [
+        70.0,
+        38.0,
+        115.200004577637,
+        115.200004577637
+      ]
+    },
+    {
+      "action": "rest",
+      "facing": 1,
+      "index": 1,
+      "path": "res://art_delivery/characters_motion_v1/shiba/rest_right_00.png",
+      "rect": [
+        70.0,
+        38.0,
+        115.200004577637,
+        115.200004577637
+      ]
+    },
+    {
+      "action": "rest",
+      "facing": 1,
+      "index": 2,
+      "path": "res://art_delivery/characters_motion_v1/shiba/rest_right_00.png",
+      "rect": [
+        70.0,
+        38.0,
+        115.200004577637,
+        115.200004577637
+      ]
+    },
+    {
+      "action": "rest",
+      "facing": 1,
+      "index": 3,
+      "path": "res://art_delivery/characters_motion_v1/shiba/rest_right_00.png",
+      "rect": [
+        70.0,
+        38.0,
+        115.200004577637,
+        115.200004577637
+      ]
+    },
+    {
+      "action": "attack",
+      "facing": 1,
+      "index": 0,
+      "path": "res://art_delivery/characters_v1/shiba_idle_right_00.png",
+      "rect": [
+        70.0,
+        38.0,
+        115.200004577637,
+        115.200004577637
+      ]
+    },
+    {
+      "action": "attack",
+      "facing": 1,
+      "index": 1,
+      "path": "res://art_delivery/characters_v1/shiba_idle_right_00.png",
+      "rect": [
+        70.0,
+        38.0,
+        115.200004577637,
+        115.200004577637
+      ]
+    },
+    {
+      "action": "attack",
+      "facing": 1,
+      "index": 2,
+      "path": "res://art_delivery/characters_v1/shiba_idle_right_00.png",
+      "rect": [
+        70.0,
+        38.0,
+        115.200004577637,
+        115.200004577637
+      ]
+    },
+    {
+      "action": "attack",
+      "facing": 1,
+      "index": 3,
+      "path": "res://art_delivery/characters_v1/shiba_idle_right_00.png",
+      "rect": [
+        70.0,
+        38.0,
+        115.200004577637,
+        115.200004577637
+      ]
+    },
+    {
+      "action": "hurt",
+      "facing": 1,
+      "index": 0,
+      "path": "res://art_delivery/characters_v1/shiba_idle_right_00.png",
+      "rect": [
+        70.0,
+        38.0,
+        115.200004577637,
+        115.200004577637
+      ]
+    },
+    {
+      "action": "hurt",
+      "facing": 1,
+      "index": 1,
+      "path": "res://art_delivery/characters_v1/shiba_idle_right_00.png",
+      "rect": [
+        70.0,
+        38.0,
+        115.200004577637,
+        115.200004577637
+      ]
+    },
+    {
+      "action": "hurt",
+      "facing": 1,
+      "index": 2,
+      "path": "res://art_delivery/characters_v1/shiba_idle_right_00.png",
+      "rect": [
+        70.0,
+        38.0,
+        115.200004577637,
+        115.200004577637
+      ]
+    },
+    {
+      "action": "hurt",
+      "facing": 1,
+      "index": 3,
+      "path": "res://art_delivery/characters_v1/shiba_idle_right_00.png",
+      "rect": [
+        70.0,
+        38.0,
+        115.200004577637,
+        115.200004577637
+      ]
+    },
+    {
+      "action": "settle",
+      "facing": 1,
+      "index": 0,
+      "path": "res://art_delivery/characters_motion_v1/shiba/settle_right_00.png",
+      "rect": [
+        70.0,
+        38.0,
+        115.200004577637,
+        115.200004577637
+      ]
+    },
+    {
+      "action": "settle",
+      "facing": 1,
+      "index": 1,
+      "path": "res://art_delivery/characters_motion_v1/shiba/settle_right_00.png",
+      "rect": [
+        70.0,
+        38.0,
+        115.200004577637,
+        115.200004577637
+      ]
+    },
+    {
+      "action": "settle",
+      "facing": 1,
+      "index": 2,
+      "path": "res://art_delivery/characters_motion_v1/shiba/settle_right_01.png",
+      "rect": [
+        70.0,
+        38.0,
+        115.200004577637,
+        115.200004577637
+      ]
+    },
+    {
+      "action": "settle",
+      "facing": 1,
+      "index": 3,
+      "path": "res://art_delivery/characters_motion_v1/shiba/settle_right_01.png",
+      "rect": [
+        70.0,
+        38.0,
+        115.200004577637,
+        115.200004577637
+      ]
+    },
+    {
+      "action": "wake",
+      "facing": 1,
+      "index": 0,
+      "path": "res://art_delivery/characters_motion_v1/shiba/wake_right_00.png",
+      "rect": [
+        70.0,
+        38.0,
+        115.200004577637,
+        115.200004577637
+      ]
+    },
+    {
+      "action": "wake",
+      "facing": 1,
+      "index": 1,
+      "path": "res://art_delivery/characters_motion_v1/shiba/wake_right_00.png",
+      "rect": [
+        70.0,
+        38.0,
+        115.200004577637,
+        115.200004577637
+      ]
+    },
+    {
+      "action": "wake",
+      "facing": 1,
+      "index": 2,
+      "path": "res://art_delivery/characters_motion_v1/shiba/wake_right_01.png",
+      "rect": [
+        70.0,
+        38.0,
+        115.200004577637,
+        115.200004577637
+      ]
+    },
+    {
+      "action": "wake",
+      "facing": 1,
+      "index": 3,
+      "path": "res://art_delivery/characters_motion_v1/shiba/wake_right_01.png",
+      "rect": [
+        70.0,
+        38.0,
+        115.200004577637,
+        115.200004577637
+      ]
+    }
+  ]
+}

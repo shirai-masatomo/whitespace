@@ -359,7 +359,7 @@ func subtask_choices() -> Array:
 		var animals = world.animals.filter(func(a): return a.id in selected_animals and a.placed and world.available(a))
 		available = GROUP_TOOLS[1].filter(func(id): return animals.any(func(a): return id in Farm.SPECIES[a.species].orders or (id=="milk" and a.species=="cow" and a.get("milked_day",-1)!=world.campaign.day) or (id=="equip" and selected_animals.size()==1 and Farm.ProgressData.ITEMS.keys().any(func(item):return Farm.Progression.can_equip(a,item)))))
 	elif group == 2:
-		available = ["keeper_rest", "resume_jobs", "coffee", "energy_drink", "keeper_book", "inventory"].filter(func(id): return buttons.has(id) and not buttons[id].disabled and buttons[id].is_visible_in_tree())
+		available = ["keeper_rest", "resume_jobs", "coffee", "energy_drink", "keeper_book"].filter(func(id): return buttons.has(id) and not buttons[id].disabled and buttons[id].is_visible_in_tree())
 	return subtasks.choices(group, available) if group >= 0 else []
 
 func cycle_subtool(reverse: bool = false):
@@ -547,8 +547,6 @@ func refresh_measured():
 		buttons.resume_jobs.tooltip_text="徴兵を解除してください" if world.keeper.get("drafted",false) else "通常の仕事を再評価します"
 		add_button(palette,"keeper_book","図鑑",Rect2(266,698,104,36),open_book)
 		buttons.keeper_book.icon=UI.icon("book_closed")
-		add_button(palette,"inventory","持ち物",Rect2(378,698,112,36),preload("res://game/inventory_view.gd").open.bind(self))
-		buttons.inventory.icon=UI.icon("basket")
 		for i in range(2):
 			var drink = ["coffee", "energy_drink"][i]
 			if world.item_count(drink) > 0:
@@ -568,7 +566,7 @@ func refresh_measured():
 			if not definition.is_empty():
 				var available=world.Jobs.Reservations.available(world,definition.get("resource","soil"))
 				buttons[id].tooltip_text+="\n利用可能 %d / 必要 %d"%[available,definition.get("cost",0)]+("\n資材不足：先に備蓄へ回収してください。新しい予約はできません。" if available<definition.get("cost",0) else "")
-				if available<definition.get("cost",0):buttons[id].text=TOOLS[id].split(" ")[0]+" · 不足"
+				buttons[id].text=TOOLS[id].split(" ")[0]
 			if Farm.Shop.FOOD.has(id):
 				buttons[id].text += " ×%d" % world.item_count(id)
 			if id in ["wall", "wood_wall", "stone_wall", "soil_tile", "wood_tile", "stone_tile", "door", "locked_door", "kennel", "coop"]:
@@ -731,7 +729,7 @@ func build_context_actions():
 	var row_width=140 if selected.get("kind")=="idol" else 112
 	context_panel.size = Vector2(432,218) if selected.get("kind")=="idol" else Vector2(rows.size()*row_width+12,68)
 	var title = Label.new()
-	title.text = "商人 · 交渉" if merchant_context else ("黄金像" if selected.get("kind")=="idol" else ("開拓する木" if selected.get("kind")=="tree" else ("選択 %d/8" % count if count > 1 else (StockView.details(world,selected_resources[0]).split("\n")[0].split(" · ")[0] if not selected_resources.is_empty() else ("床" if selection_layer=="floor" else "建物")))))
+	title.text = "商人 · 交渉" if merchant_context else ("黄金像" if selected.get("kind")=="idol" else (("開拓する木 · 禁止中" if selected_trees.any(func(p):return world.tree_work.get(p,{}).get("forbidden",false)) else "開拓する木") if selected.get("kind")=="tree" else ("選択 %d/8" % count if count > 1 else (StockView.details(world,selected_resources[0]).split("\n")[0].split(" · ")[0] if not selected_resources.is_empty() else ("床" if selection_layer=="floor" else "建物")))))
 	if selected.get("kind")=="enemy":title.text="対象への操作"
 	title.position = Vector2(9,3)
 	if not selected_resources.is_empty():
@@ -826,8 +824,10 @@ func harvest_selected_trees():
 	notice("伐採：%d件指定 / 未登録%d件"%[accepted,selected_trees.size()-accepted]);refresh()
 
 func harvest_tree_forbid(value: bool):
-	for p in selected_trees:world.Tasks.set_forbidden(world,"clear_tree",p,-1,value)
-	refresh()
+	var count=0
+	for p in selected_trees:
+		if world.Harvest.target(world,"clear_tree",p).get("forbidden",false)!=value and world.Tasks.set_forbidden(world,"clear_tree",p,-1,value):count+=1
+	notice(("禁止" if value else "許可")+"：%d件変更"%count);refresh()
 
 func cancel_selected_work():
 	for j in world.jobs.duplicate():
@@ -1667,7 +1667,7 @@ func _process_measured(delta):
 
 	if wall_stroke.kind!="" and (group!=0 or tool!=wall_stroke.kind or menu_open or field_book or field_shop or story_modal!="" or cinematic() or not world.working()):cancel_wall_stroke()
 	if book_motion != "":
-		var duration = 0.42 if book_motion.begins_with("turning") else 0.54
+		var duration = 0.42 if book_motion.begins_with("turning") else (0.94 if book_motion=="opening" else 0.54)
 		if clock - book_started >= duration:
 			if book_motion.begins_with("turning"): training_id = book_next_id
 			elif book_motion == "closing":
@@ -1977,6 +1977,7 @@ func _draw_measured():
 		draw_rect(Rect2(Vector2(cell)*TILE,TILE),Color(0.22,0.35,0.45,0.22 if debug_view else 0.08))
 	for p in world.natural:
 		BoardArt.draw_resource(self, center(p) + Vector2(sin(visual_time * 1.3 + p.x) * (1.5 if world.natural[p] == "weed" else 0.3), 0), world.natural[p])
+		if world.natural_forbidden.get(p,false):label_on(self,center(p),"×",18,UI.DANGER)
 	for f in world.foods:
 		draw_circle(center(f.pos), 10, Color("d3a762"))
 		draw_circle(center(f.pos), 6, Color("70513b"))
@@ -1996,7 +1997,7 @@ func _draw_measured():
 			else:BoardArt.draw_resource(self,q,item.kind)
 		else:draw_card_icon(self,item.kind,q,0.4)
 		if item.amount>1:label_on(self,q+Vector2(-8,9 if item.compact else 18),str(item.amount),10 if item.compact else 12,UI.PAPER)
-		if item.forbidden>0:draw_line(q-Vector2(6,6),q+Vector2(6,6),UI.DANGER,2)
+		if item.forbidden>0:label_on(self,q,"×",18,UI.DANGER)
 	for cell in shown:
 		if shown[cell]>4:label_on(self,center(cell)+Vector2(5,18),"+%d"%(shown[cell]-4),10,UI.PAPER)
 	for a in world.workers.values():
@@ -2542,7 +2543,7 @@ func open_book():
 
 func close_morning_screen():
 	if morning_screen == "book":
-		if book_motion == "closing": return
+		if book_motion != "": return
 		book_motion = "closing"
 		book_started = clock
 	elif field_shop and morning_screen=="market":
@@ -2820,28 +2821,22 @@ func merchant_visual_elapsed() -> float:
 	return elapsed
 
 func merchant_world_position() -> Vector2:
-	var elapsed=merchant_visual_elapsed()
-	var arriving=clampf(elapsed/1.8,0,1)
-	var leaving=maxf(0,elapsed-Farm.MERCHANT_SECONDS)
-	return center(world.MERCHANT_CELL)+Vector2(-240*(1-arriving)-leaving*280,0)
+	return world.Merchant.pixel_cell(world,clampf(accumulated,0,Farm.DT))*TILE+TILE*0.5
 
 func draw_market_world():
-	if world.phase!="day":return
-	var elapsed=merchant_visual_elapsed()
-	if elapsed<0 or elapsed>=Farm.MERCHANT_SECONDS+1:return
-	var q=merchant_world_position()
-	SixMotion.paint(self,"merchant","cart_move" if elapsed<1.8 or elapsed>Farm.MERCHANT_SECONDS else "cart_idle",-1 if elapsed>Farm.MERCHANT_SECONDS else 1,q+Vector2(20,30),visual_time)
-	if world.merchant_present():label_on(self,q+Vector2(95,0),"商人 · 待っています" if world.merchant_waiting() and world.tick*Farm.DT>=Farm.MERCHANT_DELAY+Farm.MERCHANT_SECONDS else "商人 · あと%d秒"%maxi(0,ceili(world.merchant_leave_at-world.tick*Farm.DT)),14,UI.PAPER)
+	if not world.Merchant.visible(world):return
+	var v=world.merchant_visit;var q=merchant_world_position()
+	var moving=world.Merchant.pixel_cell(world,clampf(accumulated,0,Farm.DT)).distance_to(Vector2(world.MERCHANT_CELL))>0.01
+	SixMotion.paint(self,"merchant","cart_move" if moving else "cart_idle",v.get("facing",1),q+Vector2(20,30),visual_time)
+	label_on(self,q+Vector2(65,0),{"approach":"商人 · 来訪中","waiting":"商人 · 交渉できます","return":"商人 · 帰還中"}.get(v.state,"商人"),14,UI.PAPER)
 
 func draw_merchant_bubble():
-	# Keep the ambient greeting away from active work/selection panels. The cart label remains visible.
 	if group>=0 or colony_page!="" or not selected.is_empty() or tool!="":return
-	if not world.merchant_present() or merchant_visual_elapsed()<1.8:return
+	if not world.merchant_present() or world.tick>=world.merchant_visit.get("speech_until",0):return
 	var anchor=get_canvas_transform()*merchant_world_position()
 	if not Rect2(0,49,1280,699).has_point(anchor):return
 	var at=(anchor+Vector2(-42,-130)).clamp(Vector2(8,54),Vector2(1072,658))
-	# HUD pass is above all world trees/actors. Text remains dynamic and screen-sized.
-	MarketView.speech_bubble(self,hud,Rect2(at,Vector2(200,60)),"いらっしゃい、\n何か見ていくかい？",14)
+	MarketView.speech_bubble(self,hud,Rect2(at,Vector2(220,60)),world.merchant_visit.get("speech",""),14)
 
 func selected_stock_details() -> String:
 	if selected_resources.size()==1:return StockView.details(world,selected_resources[0])
@@ -3205,7 +3200,7 @@ func draw_animal_actor(a: Dictionary):
 	draw_circle(p + Vector2(0, 13), 18, Color(0.1, 0.2, 0.13, 0.25))
 	if a.species in ["shiba","cat","hen"]:
 		var foot=p+Vector2(0,14)
-		# Scale the existing renderer too: Shiba idle uses its unscaled fallback.
+		# All base clips and fallback images share the same foot-anchored display transform.
 		draw_set_transform(foot*(1.0-ANIMAL_DISPLAY_MULTIPLIER),0,Vector2.ONE*ANIMAL_DISPLAY_MULTIPLIER)
 		draw_animal_sprite(p,a,a.species)
 		draw_set_transform(Vector2.ZERO)
@@ -3230,6 +3225,7 @@ func draw_animal_actor(a: Dictionary):
 		if danger:
 			color.a = 0.65 + 0.25 * sin(clock * 4)
 			label_on(self, p + Vector2(-4, -29), "!", 23, color)
+	if a.get("forbidden",false):label_on(self,p+Vector2(18,-20),"×",20,UI.DANGER)
 	if a.hp <= 0: draw_down_stars(p)
 	var status_label=animal_status_label(a)
 	if status_label!="":label_on(self,p+Vector2(-54,-43),status_label,14 if a.get("abductor",-1)>=0 else 12,Color("ffe0a2") if a.get("abductor",-1)>=0 else UI.PAPER)

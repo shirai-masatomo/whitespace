@@ -16,8 +16,8 @@ func close(g):
 	details_open=false
 	if g.selected.get("kind")=="zone":g.selected.clear()
 	g.refresh()
-func resize(g):
-	details_open=false;g.selected.clear();g.group=0;g.architect_category="ゾーン";g.tool="zone_resize";g.refresh()
+func resize(g,erase:bool=false):
+	details_open=false;g.selected.clear();g.group=0;g.architect_category="ゾーン";g.tool="zone_subtract" if erase else "zone_resize";g.refresh()
 func remove(g):
 	if g.world.Zones.remove(g.world,selected_id):
 		selected_id=-1;details_open=false;g.selected.clear();g.tool="";g.notice("ゾーンを削除しました。物資は元の場所に残ります。")
@@ -32,7 +32,7 @@ func build(g):
 	if not g.world.working() or g.field_shop or g.field_book or g.story_modal!="":return
 	if active(g):
 		# Creation palette has no filter editor and never opens details during a stroke.
-		for entry in [["stockpile","備蓄追加",0],["residential","居住追加",1],["resize","範囲変更",2],["","指定取消",3]]:
+		for entry in [["stockpile","備蓄追加",0],["residential","居住追加",1],["resize","範囲変更",2],["cancel","指定取消",3]]:
 			var id="zone_"+(entry[0] if entry[0]!="" else "cancel")
 			g.add_button(g.palette,id,entry[1],Rect2(16+int(entry[2])*96,586,90,32),select.bind(g,"zone_"+entry[0] if entry[0]!="" else ""))
 			g.ColonyPanels.compact_button(g,g.buttons[id],12);g.UI.architect_selected(g.buttons[id],g.tool=="zone_"+entry[0]);g.ColonyPanels.compact_button(g,g.buttons[id],12,true);g.buttons[id].size=Vector2(90,32)
@@ -83,8 +83,8 @@ func build(g):
 			g.world.Zones.filter_change(g.world,z.id,meta[0],meta[1],item.is_checked(0));update_checks(tree.get_root(),g,z))
 		g.ColonyPanels.label(p,"40個/マス · 既存物資は移動しません",Vector2(12,407),12)
 	else:g.ColonyPanels.label(p,"到達可能な居住ゾーンで休息します。\n物資や建物は移動・削除しません。",Vector2(12,112),14)
-	for entry in [["範囲変更",resize.bind(g),12],["ゾーン削除",remove.bind(g),210]]:
-		var button=Button.new();button.text=entry[0];button.position=Vector2(entry[2],height-44);button.size=Vector2(188,32);p.add_child(button);g.ColonyPanels.compact_button(g,button);button.pressed.connect(entry[1])
+	for entry in [["マス追加",resize.bind(g),12],["マス削除",resize.bind(g,true),142],["全体削除",remove.bind(g),272]]:
+		var button=Button.new();button.text=entry[0];button.position=Vector2(entry[2],height-44);button.size=Vector2(126,32);p.add_child(button);g.ColonyPanels.compact_button(g,button);button.pressed.connect(entry[1])
 func cell(g,point:Vector2) -> Vector2i:return Vector2i((g.get_canvas_transform().affine_inverse()*point/g.TILE).floor())
 func input(g,event) -> bool:
 	if not active(g) or not g.world.working() or g.menu_open or g.field_shop or g.field_book or g.story_modal!="" or g.cinematic():pressed=false;return false
@@ -95,9 +95,13 @@ func input(g,event) -> bool:
 			first=cell(g,event.position);last=first;pressed=true;return true
 		elif pressed:
 			pressed=false
-			if g.pointer_over_ui():return true
 			last=cell(g,event.position)
-			if g.tool=="zone_resize":g.world.Zones.resize(g.world,selected_id,first,last)
+			if g.tool in ["zone_subtract","zone_cancel"]:
+				var n=g.world.Zones.subtract(g.world,g.world.Zones.cells_in(g.world,first,last),selected_id if g.tool=="zone_subtract" else -1)
+				g.notice("ゾーン%dマスの指定を解除しました。物資はその場に残ります"%n)
+			elif g.tool=="zone_resize":
+				var z=g.world.Zones.find(g.world,selected_id)
+				if not z.is_empty():selected_id=g.world.Zones.add_cells(g.world,z.kind,g.world.Zones.cells_in(g.world,first,last))
 			else:selected_id=g.world.Zones.create(g.world,g.tool.trim_prefix("zone_"),first,last)
 			g.refresh();return true
 	return false
@@ -118,7 +122,7 @@ func draw(g):
 	var from=first if pressed else cell(g,g.pointer);var to=last if pressed else from
 	var low=Vector2i(mini(from.x,to.x),mini(from.y,to.y));var high=Vector2i(maxi(from.x,to.x),maxi(from.y,to.y))
 	var area=Rect2(Vector2(low)*g.TILE,Vector2(high-low+Vector2i.ONE)*g.TILE)
-	g.draw_rect(area,Color(0.65,0.85,0.84,0.16));g.draw_rect(area,Color("f3df9e"),false,2)
+	g.draw_rect(area,Color(0.9,0.3,0.25,0.3) if g.tool in ["zone_cancel","zone_subtract"] else Color(0.65,0.85,0.84,0.16));g.draw_rect(area,Color("f3df9e"),false,2)
 	g.label_on(g,g.get_canvas_transform().affine_inverse()*g.pointer+Vector2(12,-12),"ゾーン %dマス"%g.world.Zones.cells_in(g.world,from,to).size(),15,g.UI.PAPER)
 
 func filter_row(tree,parent,text,scope,key,ids,g,z):

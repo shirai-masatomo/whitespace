@@ -36,25 +36,8 @@ static func target(e: Dictionary, w) -> Vector2i:
 			else:
 				e.search_route_active=true
 				return e.last_known_keeper_position
-	e.search_route_active=true
-	if e.search_goal!=null and e.pos==e.search_goal:
-		e.search_visits[e.search_goal]=e.search_visits.get(e.search_goal,0)+1
-		e.search_goal=null
-	if e.search_goal!=null and reachable(e,w,e.search_goal):return e.search_goal
-	var options = []
-	for y in [3, w.H/2, w.H-4]:
-		for x in [4, w.W/3, w.W*2/3, w.W-4]:
-			var p=Vector2i(x,y)
-			if p!=e.pos and reachable(e,w,p):options.append(p)
-	if options.is_empty():e.search_goal=null;e.search_state="行ける道を探す";return e.pos
-	# Count arrivals, not selections. A reachable unfinished goal is not expired by a timer.
-	options.sort_custom(func(a, b):
-		var ca = e.search_visits.get(a, 0) * 100 + w.distance(e.pos, a)
-		var cb = e.search_visits.get(b, 0) * 100 + w.distance(e.pos, b)
-		return (a.y * w.W + a.x) < (b.y * w.W + b.x) if ca == cb else ca < cb)
-	e.search_goal = options[0]
-	e.search_goal_until = w.tick + 64 # Legacy observation field, no longer a retarget deadline.
-	return e.search_goal
+	e.search_route_active=false
+	return w.RaidNavigation.objective(w,e)
 
 static func forget_keeper(e: Dictionary,reason: String):
 	e.last_known_keeper_position=null;e.search_goal=null
@@ -62,7 +45,7 @@ static func forget_keeper(e: Dictionary,reason: String):
 	e.keeper_memory_end=reason;e.search_state="周辺を探す"
 
 static func reachable(e: Dictionary,w,p: Vector2i) -> bool:
-	return not w.Story.terrain_block(w,p) and not w.find_path(e.pos,p,w.Progression.Targets.can_damage_object(w,e),false,e.get("species","")=="doberman").is_empty()
+	return not w.Story.terrain_block(w,p) and not route(e,w,p,w.Progression.Targets.can_damage_object(w,e),false).is_empty()
 
 # Provisional: 24 seconds, at most 48 cells, +0.75 per recent visit (cap 2.25).
 # Only forgotten-target exploration uses this cost; paths stay legal and reversible.
@@ -75,7 +58,7 @@ static func costs(e,w) -> Dictionary:
 	return result
 
 static func route(e,w,goal: Vector2i,break_objects: bool,avoid_actors: bool) -> Array:
-	return w.find_path(e.pos,goal,break_objects,avoid_actors,e.get("species","")=="doberman",costs(e,w),true)
+	return w.RaidNavigation.route(w,e,goal,break_objects,avoid_actors)
 
 static func remember_step(e,w,origin: Vector2i,destination: Vector2i):
 	if not e.get("search_route_active",false) or e.flee or e.carry=="keeper":return

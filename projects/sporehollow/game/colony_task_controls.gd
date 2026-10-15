@@ -6,7 +6,9 @@ static func task(g,kind: String,p: Vector2i,id: int=-1):
 	g.refresh()
 static func forbid(g,p: Vector2i):
 	var r=g.world.Mountains.resource(g.world,p)
-	g.world.Tasks.set_forbidden(g.world,"mine",p,-1,not (g.world.rocks.get(p,{}) if r.is_empty() else r).get("forbidden",false));g.refresh()
+	var value=not (g.world.rocks.get(p,{}) if r.is_empty() else r).get("forbidden",false)
+	var changed=g.world.Tasks.set_forbidden(g.world,"mine",p,-1,value)
+	g.notice(("禁止" if value else "許可")+"：%d件変更"%int(changed));g.refresh()
 static func gear(g,item: String,key: String="keeper"):
 	if not g.world.HumanCombat.equip(g.world,item,key):g.notice("装備は現物と作業可能な状態が必要です")
 	g.refresh()
@@ -42,16 +44,15 @@ static func build(g):
 		p.tooltip_text="装備：%s  射程%d / 威力%d"%[profile.name,profile.range,profile.damage]
 		g.add_button(g.palette,"keeper_draft","徴兵を解除" if a.get("drafted",false) else "徴兵する",Rect2(16,646,156,36),draft.bind(g,key))
 		g.buttons.keeper_draft.disabled=not a.get("drafted",false) and (a.state!="free" or a.hp<=0 or a.forced_rest or a.get("nutrition_down",false))
+		g.ColonyPanels.label(p,"武器："+profile.name+"　衣服："+("なし" if a.get("clothing",{}).is_empty() else g.world.Zones.Catalog.title(a.clothing.item_id)),Vector2(14,100),14)
 		var clothes=a.get("clothing",{})
 		g.add_button(g.palette,"human_clothes","服を着る" if clothes.is_empty() else "服を外す",Rect2(536,646,100,36),gear.bind(g,"fiber_clothes" if clothes.is_empty() else "unequip_clothes",key))
 		g.buttons.human_clothes.disabled=a.get("drafted",false) or (clothes.is_empty() and g.world.Stock.available(g.world,"fiber_clothes")<1)
 		g.buttons.human_clothes.tooltip_text="防具性能・耐久はありません。現物を装備します。"
-		if key!="keeper":
-			g.ColonyPanels.label(p,"通常仕事は役割の優先度に従います。",Vector2(14,178),14)
-			return
-		g.add_button(g.palette,"keeper_equip","長柄を装備",Rect2(180,646,166,36),gear.bind(g,"wood_staff"))
-		g.add_button(g.palette,"keeper_unequip","装備を外す",Rect2(354,646,174,36),gear.bind(g,"unequip"))
-		var pending=g.world.jobs.any(func(j):return j.kind=="keeper_equipment")
+		g.add_button(g.palette,"keeper_equip","長柄を装備",Rect2(180,646,166,36),gear.bind(g,"wood_staff",key))
+		g.add_button(g.palette,"keeper_unequip","装備を外す",Rect2(354,646,174,36),gear.bind(g,"unequip",key))
+		var pending=g.world.jobs.any(func(j):return j.kind=="keeper_equipment" and j.get("explicit_actor","keeper")==key)
+		g.buttons.human_clothes.disabled=g.buttons.human_clothes.disabled or pending
 		g.buttons.keeper_equip.disabled=pending or g.world.Stock.available(g.world,"wood_staff")<1 or a.get("drafted",false)
 		g.buttons.keeper_unequip.disabled=pending or a.get("equipment",{}).is_empty() or a.get("drafted",false)
 		g.buttons.keeper_equip.tooltip_text="装備作業を予約中" if pending else "現物まで移動して装備します。徴兵中は変更できません。"
@@ -68,7 +69,7 @@ static func draw(g):
 		if r.forbidden:g.label_on(g,g.center(r.pos),"×",18,g.UI.DANGER)
 	for p in g.world.rocks:
 		var c=g.center(p)
-		if g.world.rocks[p].get("forbidden",false):g.draw_line(c-Vector2(11,11),c+Vector2(11,11),g.UI.DANGER,3)
+		if g.world.rocks[p].get("forbidden",false):g.label_on(g,c,"×",20,g.UI.DANGER)
 		if g.selected.get("kind")=="rock" and g.selected.pos==p:g.draw_rect(Rect2(c-Vector2(22,20),Vector2(44,40)),g.UI.GOLD,false,2)
 static func signature(g) -> String:
 	return str([g.selected,g.world.keeper.get("equipment",{}),g.world.keeper.get("drafted",false),g.world.Stock.available(g.world,"wood_staff"),g.world.rocks,g.world.mountains.values().map(func(r):return [r.id,r.stage,r.remaining,r.forbidden,int(r.elapsed)]),g.world.jobs.map(func(j):return [j.id,j.kind,j.state])])

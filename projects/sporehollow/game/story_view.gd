@@ -28,6 +28,7 @@ static func tree(g,p: Vector2i,deep: bool=false,kick: float=0.0):
 	if notch!="":GroundArt.paint(g,notch,Vector2.ZERO)
 	g.Assets.Direction.draw(g,id+"_canopy",Vector2.ZERO,0.55 if obscured else (0.85 if deep else 1.0))
 	g.draw_set_transform(Vector2.ZERO)
+	if g.world.tree_work.get(p,{}).get("forbidden",false):g.label_on(g,foot+Vector2(-7,-22),"×",22,g.UI.DANGER)
 static func cut_cells(w) -> Array:
 	# The saved original tree records keep exact IDs/positions after logging.
 	# Rebuild this small lookup only when history grows (or a different save opens).

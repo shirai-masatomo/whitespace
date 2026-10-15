@@ -28,5 +28,5 @@ static func details(w,cell: Vector2i) -> String:
 		if row.pos!=cell:continue
 		var name={"soil":"土","wood":"木材","stone":"石","mushroom":"キノコ","egg":"卵","dog_food":"犬の餌","hen_food":"鶏の餌","meat":"肉","milk":"牛乳","whistle":"ホイッスル","coffee":"コーヒー","energy_drink":"活力ドリンク","wood_staff":"木の長柄","feather":"羽","kokeshi":"こけし","fossil":"化石","chick":"ひよこ","cat_food":"猫の餌","skill_scroll":"技の巻物"}.get(row.kind,w.ProgressData.ITEMS.get(row.kind,{}).get("name",(w.Buildings.NAMES.get(row.kind.trim_suffix("_plan"),"建築")+"の設計図") if row.kind.ends_with("_plan") else preload("res://game/item_catalog.gd").title(row.kind)))
 		lines.append("%s ×%d · 備蓄%d%s"%[name,row.amount,row.stored," · 禁止%d"%row.forbidden if row.forbidden>0 else ""])
-	if lines.is_empty() and w.natural.has(cell):lines.append({"weed":"雑草","stump":"切り株","mushroom":"キノコ"}.get(w.natural[cell],w.natural[cell])+" ×1")
+	if lines.is_empty() and w.natural.has(cell):lines.append({"weed":"雑草","stump":"切り株","mushroom":"キノコ"}.get(w.natural[cell],w.natural[cell])+" ×1"+(" · 禁止中" if w.natural_forbidden.get(cell,false) else ""))
 	return "\n".join(lines)

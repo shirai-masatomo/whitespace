@@ -2,6 +2,9 @@ extends Node
 const Art = preload("res://game/adopted_art.gd")
 const UI = preload("res://game/ui_style.gd")
 const OPEN = preload("res://art_delivery/ranch_assets_v1/book/open_00.png")
+const ORIGIN=preload("res://game/journal_view.gd").BOOK_ORIGIN
+const OPEN_BOUNDS=Rect2(72,36,880,568)
+const COVER_HOLD=0.4
 const ROOT = "res://art_delivery/ranch_assets_v1/book/"
 var sequences: Dictionary = {}
 var quads: Dictionary = {}
@@ -42,7 +45,7 @@ func _process(_delta):
 	for page in pages: page.render_target_update_mode=SubViewport.UPDATE_DISABLED if state=="closed" else SubViewport.UPDATE_ALWAYS
 
 func duration() -> float:
-	return 0.42 if state.begins_with("turning") else 0.54
+	return 0.42 if state.begins_with("turning") else (0.94 if state=="opening" else 0.54)
 
 func region(canvas, texture, area: Rect2):
 	if area.size.x>0: canvas.draw_texture_rect_region(texture,area,area)
@@ -57,9 +60,9 @@ func moving_content(canvas, texture, quad: Array, source: Rect2):
 func draw(canvas):
 	var motion=game.book_motion
 	var elapsed=game.clock-game.book_started
-	var t=clampf(elapsed/(0.42 if motion.begins_with("turning") else 0.54),0,0.999)
+	var t=clampf((elapsed-0.4 if motion=="opening" else elapsed)/(0.42 if motion.begins_with("turning") else 0.54),0,1)
 	var index=mini(5,int(t*6))
-	var origin=Vector2(128,100)
+	var origin=ORIGIN
 	var scale=1.0
 	if motion in ["opening","closing"]:
 		draw_cover_motion(canvas,t if motion=="opening" else 1.0-t)
@@ -93,16 +96,16 @@ func draw(canvas):
 # Adopted single cover PNG; hinge geometry is provisional until matching motion art arrives.
 # Interior information stays live and is only exposed once the cover has opened.
 func draw_cover_motion(canvas,progress: float):
-	canvas.draw_set_transform(Vector2(128,100))
-	canvas.texture_filter=CanvasItem.TEXTURE_FILTER_LINEAR
+	canvas.draw_set_transform(ORIGIN)
+	canvas.texture_filter=CanvasItem.TEXTURE_FILTER_NEAREST
 	var texture=Art.CLOSED
 	var used=cover_bounds
-	var ratio=minf(440.0/used.size.x,560.0/used.size.y)
+	var ratio=OPEN_BOUNDS.size.y/used.size.y
 	var size=used.size*ratio
-	var hinge=Vector2(512,320-size.y*0.5)
-	var turn=smoothstep(0.18,1.0,progress)
+	var hinge=Vector2(OPEN_BOUNDS.get_center().x-size.x*0.5*(1.0-smoothstep(0.0,1.0,progress)),OPEN_BOUNDS.position.y)
+	var turn=smoothstep(0.0,1.0,progress)
 	if turn>0:
-		canvas.draw_texture(OPEN,Vector2.ZERO)
+		canvas.draw_texture(OPEN,Vector2.ZERO,Color(1,1,1,smoothstep(0.0,0.5,turn)))
 		if turn>0.88:canvas.draw_texture(pages[0].get_texture(),Vector2.ZERO,Color(1,1,1,(turn-0.88)/0.12))
 	var angle=turn*PI
 	var width=size.x*cos(angle)

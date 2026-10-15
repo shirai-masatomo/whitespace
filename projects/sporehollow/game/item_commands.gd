@@ -30,7 +30,6 @@ func input(g,event) -> bool:
 			first=cell(g,event.position);last=first;pressed=true;return true
 		elif pressed:
 			pressed=false
-			if g.pointer_over_ui():return true
 			last=cell(g,event.position)
 			var result=g.world.Stock.designate(g.world,g.tool,first,last)
 			g.notice("%s：%d件指定 / %d件登録済み・対象外"%[LABELS[g.tool],result.accepted,result.skipped]);g.refresh();return true
@@ -42,7 +41,13 @@ func draw(g):
 	var area=Rect2(Vector2(low)*g.TILE,Vector2(high-low+Vector2i.ONE)*g.TILE)
 	g.draw_rect(area,Color(0.8,0.85,0.65,0.15));g.draw_rect(area,Color("f3df9e"),false,2)
 	var targets=g.world.Harvest.cells(g.world,from,to,g.tool).map(func(p):return {"pos":p}) if g.tool in g.world.Harvest.KINDS else (g.world.Stock.cancel_targets(g.world,from,to) if g.tool=="clear" else g.world.Stock.command_targets(g.world,from,to,g.tool))
-	if g.tool in ["forbid","allow"]:targets.append_array(g.world.Harvest.cells(g.world,from,to).map(func(p):return {"pos":p}))
+	if g.tool in ["forbid","allow"]:
+		targets.append_array(g.world.Harvest.cells(g.world,from,to).map(func(p):return {"pos":p}))
+		var rect=Rect2i(low,high-low+Vector2i.ONE)
+		for p in g.world.natural:
+			if rect.has_point(p) and g.world.natural_forbidden.get(p,false)!=(g.tool=="forbid"):targets.append({"pos":p})
+		for a in g.world.animals:
+			if rect.has_point(a.pos) and g.world.Livestock.owned(g.world,a) and a.get("forbidden",false)!=(g.tool=="forbid"):targets.append({"pos":a.pos})
 	var drawn={}
 	for row in targets:
 		var mountain=g.world.Mountains.resource(g.world,row.pos) if g.tool in ["mine","clear","forbid","allow"] else {}

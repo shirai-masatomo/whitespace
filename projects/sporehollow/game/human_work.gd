@@ -101,7 +101,7 @@ static func missing(w,j) -> bool:
 	if j.kind=="slaughter":return w.Livestock.missing(w,j)
 	if j.kind=="haul":return j.get("haul_sources",[j.get("stock_id",-1)]).all(func(id):return w.Stock.find(w,id).is_empty()) and not w.field_items.any(func(r):return r.get("location")=="carry" and r.get("job_id",-1)==j.id)
 	if j.kind=="collect":
-		return w.items_at(j.pos).is_empty() and not w.natural.has(j.pos) and not(j.pos==w.nest and w.eggs>0)
+		return w.items_at(j.pos,true).is_empty() and not w.natural.has(j.pos) and not(j.pos==w.nest and w.eggs>0)
 	if w.BUILD.has(j.kind) and j.started:
 		var site=w.Buildings.layer(w,j.kind).get(j.pos,{})
 		return site.is_empty() or site.get("status") not in ["building","ready"] or (j.has("site_id") and site.get("id")!=j.site_id)
@@ -130,6 +130,8 @@ static func claim(w,key: String,j) -> bool:
 	return true
 
 static func effort(w,a,j,evaluation=null) -> float:
+	if j.kind=="collect" and w.natural_forbidden.get(j.pos,false):return INF
+	if j.kind in w.Tasks.KINDS and w.Tasks.reason(w,j.kind,j.pos,j.get("animal_id",-1),j.id)!="":return INF
 	if j.kind=="craft" and not w.Craft.ready(w,j):return INF
 	if w.work_claims.has(target_key(w,j)):return INF
 	if w.BUILD.has(j.kind) and (not w.Delivery.can_build(j) or w.Delivery.needed(w,j)>0):return INF
