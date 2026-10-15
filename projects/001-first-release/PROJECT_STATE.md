@@ -1,3 +1,5 @@
+<!-- この文書は開発状態・ビルドの記録。世界観・ゲーム仕様は [SPEC.md](SPEC.md)。 -->
+
 # DIVE DIVE — PROJECT STATE
 
 更新: 2026-09-28 / **2D主開発・通し試作 / CHANGES / 3D STOPPED / 定期再開PAUSED**。
