@@ -1,0 +1,598 @@
+{
+  "passed": true,
+  "count": 146,
+  "checks": [
+    {
+      "check": "benches/cooking_bench.png RGBA/dimensions",
+      "pass": true
+    },
+    {
+      "check": "benches/cooking_bench.png hash",
+      "pass": true
+    },
+    {
+      "check": "benches/cooking_bench.png transparent margin",
+      "pass": true
+    },
+    {
+      "check": "benches/cooking_bench.png hard alpha",
+      "pass": true
+    },
+    {
+      "check": "benches/cooking_bench.png clean invisible RGB",
+      "pass": true
+    },
+    {
+      "check": "benches/cooking_bench.png palette <=32",
+      "pass": true
+    },
+    {
+      "check": "benches/cooking_bench.png fixed ground baseline",
+      "pass": true
+    },
+    {
+      "check": "ui_icons/cooking_bench.png RGBA/dimensions",
+      "pass": true
+    },
+    {
+      "check": "ui_icons/cooking_bench.png hash",
+      "pass": true
+    },
+    {
+      "check": "ui_icons/cooking_bench.png transparent margin",
+      "pass": true
+    },
+    {
+      "check": "ui_icons/cooking_bench.png hard alpha",
+      "pass": true
+    },
+    {
+      "check": "ui_icons/cooking_bench.png clean invisible RGB",
+      "pass": true
+    },
+    {
+      "check": "ui_icons/cooking_bench.png palette <=32",
+      "pass": true
+    },
+    {
+      "check": "benches/carpentry_bench.png RGBA/dimensions",
+      "pass": true
+    },
+    {
+      "check": "benches/carpentry_bench.png hash",
+      "pass": true
+    },
+    {
+      "check": "benches/carpentry_bench.png transparent margin",
+      "pass": true
+    },
+    {
+      "check": "benches/carpentry_bench.png hard alpha",
+      "pass": true
+    },
+    {
+      "check": "benches/carpentry_bench.png clean invisible RGB",
+      "pass": true
+    },
+    {
+      "check": "benches/carpentry_bench.png palette <=32",
+      "pass": true
+    },
+    {
+      "check": "benches/carpentry_bench.png fixed ground baseline",
+      "pass": true
+    },
+    {
+      "check": "ui_icons/carpentry_bench.png RGBA/dimensions",
+      "pass": true
+    },
+    {
+      "check": "ui_icons/carpentry_bench.png hash",
+      "pass": true
+    },
+    {
+      "check": "ui_icons/carpentry_bench.png transparent margin",
+      "pass": true
+    },
+    {
+      "check": "ui_icons/carpentry_bench.png hard alpha",
+      "pass": true
+    },
+    {
+      "check": "ui_icons/carpentry_bench.png clean invisible RGB",
+      "pass": true
+    },
+    {
+      "check": "ui_icons/carpentry_bench.png palette <=32",
+      "pass": true
+    },
+    {
+      "check": "benches/sewing_bench.png RGBA/dimensions",
+      "pass": true
+    },
+    {
+      "check": "benches/sewing_bench.png hash",
+      "pass": true
+    },
+    {
+      "check": "benches/sewing_bench.png transparent margin",
+      "pass": true
+    },
+    {
+      "check": "benches/sewing_bench.png hard alpha",
+      "pass": true
+    },
+    {
+      "check": "benches/sewing_bench.png clean invisible RGB",
+      "pass": true
+    },
+    {
+      "check": "benches/sewing_bench.png palette <=32",
+      "pass": true
+    },
+    {
+      "check": "benches/sewing_bench.png fixed ground baseline",
+      "pass": true
+    },
+    {
+      "check": "ui_icons/sewing_bench.png RGBA/dimensions",
+      "pass": true
+    },
+    {
+      "check": "ui_icons/sewing_bench.png hash",
+      "pass": true
+    },
+    {
+      "check": "ui_icons/sewing_bench.png transparent margin",
+      "pass": true
+    },
+    {
+      "check": "ui_icons/sewing_bench.png hard alpha",
+      "pass": true
+    },
+    {
+      "check": "ui_icons/sewing_bench.png clean invisible RGB",
+      "pass": true
+    },
+    {
+      "check": "ui_icons/sewing_bench.png palette <=32",
+      "pass": true
+    },
+    {
+      "check": "placeables/wood_crate.png RGBA/dimensions",
+      "pass": true
+    },
+    {
+      "check": "placeables/wood_crate.png hash",
+      "pass": true
+    },
+    {
+      "check": "placeables/wood_crate.png transparent margin",
+      "pass": true
+    },
+    {
+      "check": "placeables/wood_crate.png hard alpha",
+      "pass": true
+    },
+    {
+      "check": "placeables/wood_crate.png clean invisible RGB",
+      "pass": true
+    },
+    {
+      "check": "placeables/wood_crate.png palette <=32",
+      "pass": true
+    },
+    {
+      "check": "placeables/wood_crate.png fixed ground baseline",
+      "pass": true
+    },
+    {
+      "check": "ui_icons/wood_crate.png RGBA/dimensions",
+      "pass": true
+    },
+    {
+      "check": "ui_icons/wood_crate.png hash",
+      "pass": true
+    },
+    {
+      "check": "ui_icons/wood_crate.png transparent margin",
+      "pass": true
+    },
+    {
+      "check": "ui_icons/wood_crate.png hard alpha",
+      "pass": true
+    },
+    {
+      "check": "ui_icons/wood_crate.png clean invisible RGB",
+      "pass": true
+    },
+    {
+      "check": "ui_icons/wood_crate.png palette <=32",
+      "pass": true
+    },
+    {
+      "check": "placeables/wood_shelf.png RGBA/dimensions",
+      "pass": true
+    },
+    {
+      "check": "placeables/wood_shelf.png hash",
+      "pass": true
+    },
+    {
+      "check": "placeables/wood_shelf.png transparent margin",
+      "pass": true
+    },
+    {
+      "check": "placeables/wood_shelf.png hard alpha",
+      "pass": true
+    },
+    {
+      "check": "placeables/wood_shelf.png clean invisible RGB",
+      "pass": true
+    },
+    {
+      "check": "placeables/wood_shelf.png palette <=32",
+      "pass": true
+    },
+    {
+      "check": "placeables/wood_shelf.png fixed ground baseline",
+      "pass": true
+    },
+    {
+      "check": "ui_icons/wood_shelf.png RGBA/dimensions",
+      "pass": true
+    },
+    {
+      "check": "ui_icons/wood_shelf.png hash",
+      "pass": true
+    },
+    {
+      "check": "ui_icons/wood_shelf.png transparent margin",
+      "pass": true
+    },
+    {
+      "check": "ui_icons/wood_shelf.png hard alpha",
+      "pass": true
+    },
+    {
+      "check": "ui_icons/wood_shelf.png clean invisible RGB",
+      "pass": true
+    },
+    {
+      "check": "ui_icons/wood_shelf.png palette <=32",
+      "pass": true
+    },
+    {
+      "check": "items/fiber_bundle.png RGBA/dimensions",
+      "pass": true
+    },
+    {
+      "check": "items/fiber_bundle.png hash",
+      "pass": true
+    },
+    {
+      "check": "items/fiber_bundle.png transparent margin",
+      "pass": true
+    },
+    {
+      "check": "items/fiber_bundle.png hard alpha",
+      "pass": true
+    },
+    {
+      "check": "items/fiber_bundle.png clean invisible RGB",
+      "pass": true
+    },
+    {
+      "check": "items/fiber_bundle.png palette <=32",
+      "pass": true
+    },
+    {
+      "check": "items/fiber_bundle.png fixed ground baseline",
+      "pass": true
+    },
+    {
+      "check": "ui_icons/fiber_bundle.png RGBA/dimensions",
+      "pass": true
+    },
+    {
+      "check": "ui_icons/fiber_bundle.png hash",
+      "pass": true
+    },
+    {
+      "check": "ui_icons/fiber_bundle.png transparent margin",
+      "pass": true
+    },
+    {
+      "check": "ui_icons/fiber_bundle.png hard alpha",
+      "pass": true
+    },
+    {
+      "check": "ui_icons/fiber_bundle.png clean invisible RGB",
+      "pass": true
+    },
+    {
+      "check": "ui_icons/fiber_bundle.png palette <=32",
+      "pass": true
+    },
+    {
+      "check": "items/fiber_clothes.png RGBA/dimensions",
+      "pass": true
+    },
+    {
+      "check": "items/fiber_clothes.png hash",
+      "pass": true
+    },
+    {
+      "check": "items/fiber_clothes.png transparent margin",
+      "pass": true
+    },
+    {
+      "check": "items/fiber_clothes.png hard alpha",
+      "pass": true
+    },
+    {
+      "check": "items/fiber_clothes.png clean invisible RGB",
+      "pass": true
+    },
+    {
+      "check": "items/fiber_clothes.png palette <=32",
+      "pass": true
+    },
+    {
+      "check": "items/fiber_clothes.png fixed ground baseline",
+      "pass": true
+    },
+    {
+      "check": "ui_icons/fiber_clothes.png RGBA/dimensions",
+      "pass": true
+    },
+    {
+      "check": "ui_icons/fiber_clothes.png hash",
+      "pass": true
+    },
+    {
+      "check": "ui_icons/fiber_clothes.png transparent margin",
+      "pass": true
+    },
+    {
+      "check": "ui_icons/fiber_clothes.png hard alpha",
+      "pass": true
+    },
+    {
+      "check": "ui_icons/fiber_clothes.png clean invisible RGB",
+      "pass": true
+    },
+    {
+      "check": "ui_icons/fiber_clothes.png palette <=32",
+      "pass": true
+    },
+    {
+      "check": "food/roast_mushroom.png RGBA/dimensions",
+      "pass": true
+    },
+    {
+      "check": "food/roast_mushroom.png hash",
+      "pass": true
+    },
+    {
+      "check": "food/roast_mushroom.png transparent margin",
+      "pass": true
+    },
+    {
+      "check": "food/roast_mushroom.png hard alpha",
+      "pass": true
+    },
+    {
+      "check": "food/roast_mushroom.png clean invisible RGB",
+      "pass": true
+    },
+    {
+      "check": "food/roast_mushroom.png palette <=32",
+      "pass": true
+    },
+    {
+      "check": "food/roast_mushroom.png fixed ground baseline",
+      "pass": true
+    },
+    {
+      "check": "ui_icons/roast_mushroom.png RGBA/dimensions",
+      "pass": true
+    },
+    {
+      "check": "ui_icons/roast_mushroom.png hash",
+      "pass": true
+    },
+    {
+      "check": "ui_icons/roast_mushroom.png transparent margin",
+      "pass": true
+    },
+    {
+      "check": "ui_icons/roast_mushroom.png hard alpha",
+      "pass": true
+    },
+    {
+      "check": "ui_icons/roast_mushroom.png clean invisible RGB",
+      "pass": true
+    },
+    {
+      "check": "ui_icons/roast_mushroom.png palette <=32",
+      "pass": true
+    },
+    {
+      "check": "food/egg_meal.png RGBA/dimensions",
+      "pass": true
+    },
+    {
+      "check": "food/egg_meal.png hash",
+      "pass": true
+    },
+    {
+      "check": "food/egg_meal.png transparent margin",
+      "pass": true
+    },
+    {
+      "check": "food/egg_meal.png hard alpha",
+      "pass": true
+    },
+    {
+      "check": "food/egg_meal.png clean invisible RGB",
+      "pass": true
+    },
+    {
+      "check": "food/egg_meal.png palette <=32",
+      "pass": true
+    },
+    {
+      "check": "food/egg_meal.png fixed ground baseline",
+      "pass": true
+    },
+    {
+      "check": "food/egg_meal.png opaque white retained",
+      "pass": true
+    },
+    {
+      "check": "ui_icons/egg_meal.png RGBA/dimensions",
+      "pass": true
+    },
+    {
+      "check": "ui_icons/egg_meal.png hash",
+      "pass": true
+    },
+    {
+      "check": "ui_icons/egg_meal.png transparent margin",
+      "pass": true
+    },
+    {
+      "check": "ui_icons/egg_meal.png hard alpha",
+      "pass": true
+    },
+    {
+      "check": "ui_icons/egg_meal.png clean invisible RGB",
+      "pass": true
+    },
+    {
+      "check": "ui_icons/egg_meal.png palette <=32",
+      "pass": true
+    },
+    {
+      "check": "ui_icons/egg_meal.png opaque white retained",
+      "pass": true
+    },
+    {
+      "check": "food/roast_meat.png RGBA/dimensions",
+      "pass": true
+    },
+    {
+      "check": "food/roast_meat.png hash",
+      "pass": true
+    },
+    {
+      "check": "food/roast_meat.png transparent margin",
+      "pass": true
+    },
+    {
+      "check": "food/roast_meat.png hard alpha",
+      "pass": true
+    },
+    {
+      "check": "food/roast_meat.png clean invisible RGB",
+      "pass": true
+    },
+    {
+      "check": "food/roast_meat.png palette <=32",
+      "pass": true
+    },
+    {
+      "check": "food/roast_meat.png fixed ground baseline",
+      "pass": true
+    },
+    {
+      "check": "ui_icons/roast_meat.png RGBA/dimensions",
+      "pass": true
+    },
+    {
+      "check": "ui_icons/roast_meat.png hash",
+      "pass": true
+    },
+    {
+      "check": "ui_icons/roast_meat.png transparent margin",
+      "pass": true
+    },
+    {
+      "check": "ui_icons/roast_meat.png hard alpha",
+      "pass": true
+    },
+    {
+      "check": "ui_icons/roast_meat.png clean invisible RGB",
+      "pass": true
+    },
+    {
+      "check": "ui_icons/roast_meat.png palette <=32",
+      "pass": true
+    },
+    {
+      "check": "food/stew.png RGBA/dimensions",
+      "pass": true
+    },
+    {
+      "check": "food/stew.png hash",
+      "pass": true
+    },
+    {
+      "check": "food/stew.png transparent margin",
+      "pass": true
+    },
+    {
+      "check": "food/stew.png hard alpha",
+      "pass": true
+    },
+    {
+      "check": "food/stew.png clean invisible RGB",
+      "pass": true
+    },
+    {
+      "check": "food/stew.png palette <=32",
+      "pass": true
+    },
+    {
+      "check": "food/stew.png fixed ground baseline",
+      "pass": true
+    },
+    {
+      "check": "ui_icons/stew.png RGBA/dimensions",
+      "pass": true
+    },
+    {
+      "check": "ui_icons/stew.png hash",
+      "pass": true
+    },
+    {
+      "check": "ui_icons/stew.png transparent margin",
+      "pass": true
+    },
+    {
+      "check": "ui_icons/stew.png hard alpha",
+      "pass": true
+    },
+    {
+      "check": "ui_icons/stew.png clean invisible RGB",
+      "pass": true
+    },
+    {
+      "check": "ui_icons/stew.png palette <=32",
+      "pass": true
+    },
+    {
+      "check": "11 world and 11 UI",
+      "pass": true
+    }
+  ],
+  "runtime_verified": false,
+  "visual_review": [
+    "native field composite",
+    "native wood floor composite",
+    "nearest3x catalogue",
+    "dark/light alpha",
+    "tool/food pixel inspection"
+  ]
+}
