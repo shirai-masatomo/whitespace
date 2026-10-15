@@ -1,3 +1,5 @@
+<!-- 技術・配布状態用。世界観とゲーム仕様は [SPEC.md](SPEC.md) が正本です。 -->
+
 # 地形・襲撃・ゾーン・商人・UI（2026-10-15）
 
 現行コードを統合修正。森林29%、中央へ進む襲撃経路、マス単位ゾーン編集、昼間に歩いて来訪・帰還する商人、住民装備UI、禁止表示、柴犬の共通倍率、本の0.4秒静止を実装。[検証と残課題](review/current/integrated-revision/REPORT.md)。通常画面は自動起動せず、EXEの反映結果は同フォルダDELIVERY.jsonを正本とする。以下は過去記録。
@@ -32,7 +34,7 @@
 
 ## 過去の企画採用記録（今回実装へ移行）
 
-製作・生活基盤の旧「設計のみ」の記載は冒頭の実装状態へ更新。現行正本は [CRAFTING_NEEDS_DESIGN.md](CRAFTING_NEEDS_DESIGN.md)。
+製作・生活基盤の旧「設計のみ」の記載は冒頭の実装状態へ更新。現行正本は [CRAFTING_NEEDS_DESIGN.md](docs/internal/CRAFTING_NEEDS_DESIGN.md)。
 
 ## 岩盤外縁・ログスクロール（2026-10-14）
 

@@ -1,16 +1,18 @@
+<!-- 開発者向け詳細・旧版資料。ユーザー向けの世界観とゲーム仕様は [SPEC.md](../../SPEC.md)。文中のソース相対パスはプロジェクト直下を基準とする。 -->
+
 # ホイッスル牧場 — ゲーム仕様の総合入口
 
 更新：2026-10-15。対象：WhiteSpace / projects/sporehollow / codex/sporehollow-biome01。
 この文書は**一読で現在のゲームの全体像が分かる簡潔な索引**。詳細な敵・動物・アイテム・技能・数値は末尾の個別資料が正本。製作・生活の現行基盤と未確定の拡張は [CRAFTING_NEEDS_DESIGN.md](CRAFTING_NEEDS_DESIGN.md) で区別する。
 
-現行の建築表示：完成画像45%ゴースト、不可は赤色＋禁止マーク＋実際の理由。新規予約は備蓄の未禁止・未予約の現物を確保できる場合に限る。既存予定は保護し、搬入→施工を維持。F3「素材無限」は廃止し「資材補充（各40）」へ置換。詳細はBUILDINGS／WORK_SYSTEMS、検証は[建築プレビュー報告](review/current/building-preview/REPORT.md)。
+現行の建築表示：完成画像45%ゴースト、不可は赤色＋禁止マーク＋実際の理由。新規予約は備蓄の未禁止・未予約の現物を確保できる場合に限る。既存予定は保護し、搬入→施工を維持。F3「素材無限」は廃止し「資材補充（各40）」へ置換。詳細はBUILDINGS／WORK_SYSTEMS、検証は[建築プレビュー報告](../../review/current/building-preview/REPORT.md)。
 
 ## 0. 凡例と優先順位
 
 - **現行**：現行ブランチの資料／コードで確認できる仕様。ただし人間の実画面試遊が未完の箇所は保証しない。
 - **仮値**：動作または設計があるが数値／バランスは未確定。
 - **企画案**：ゲーム本体へ未反映。新たな指示なしに実装済みと宣言しない。
-- 現在の反映版・検証状態は [PROJECT_STATE.md](PROJECT_STATE.md)、[review/current/PACKET.md](review/current/PACKET.md)、[README.md](README.md) を優先。古い文書の「セーブ可能」「旧マップ寸法」「地形version4」などは過去版の記録であり、現行仕様ではない。
+- 現在の反映版・検証状態は [PROJECT_STATE.md](../../PROJECT_STATE.md)、[review/current/PACKET.md](../../review/current/PACKET.md)、[README.md](../../README.md) を優先。古い文書の「セーブ可能」「旧マップ寸法」「地形version4」などは過去版の記録であり、現行仕様ではない。
 - 物語上の確定事項は [WORLD_STORY.md](WORLD_STORY.md)、個別の実装／仮値は [WORLD_SYSTEMS.md](WORLD_SYSTEMS.md) を参照。
 
 ## 1. ゲームの核と進行（現行＋仮）
@@ -74,7 +76,7 @@
 - **現行**：人と飼育動物に共通の満腹・スタミナを導入。満腹帯により最大100/90/80/60/40、回復1/1/.75/.5/.25。低スタミナでは受託仕事を保持して休み、回復後に再開。
 - 人の空腹は既存Nutrition、スタミナはNeeds、攻撃/スキルは既存Combatへ分担し二重計算を避ける。眠気は既存の睡眠指標。飢餓時の遅延HPダメージと人の既存栄養失調死亡を統合。
 - 食性・料理効果・仮値・未確認範囲は [CRAFTING_NEEDS_DESIGN.md](CRAFTING_NEEDS_DESIGN.md)。
-- 動物種ごとの仕様・実装対象と未実装候補：[ANIMALS.md](ANIMALS.md)。敵の目的・索敵・状態・固有技能：[ENEMIES.md](ENEMIES.md)。
+- 動物種ごとの仕様・実装対象と未実装候補：[ANIMALS.md](../catalog/ANIMALS.md)。敵の目的・索敵・状態・固有技能：[ENEMIES.md](../catalog/ENEMIES.md)。
 
 ## 5. 製作・備蓄（現行）
 
@@ -87,13 +89,13 @@
 
 ## 6. UI・行商人・成長・戦闘（現行の概要）
 
-- ニュートラルでドラッグすると最初に囲んだ分類を最大8対象選択。建築のドラッグと別。各モードの操作、命令ホイール切替、取消・禁止・許可、動物の共通指示は [README.md](README.md)。
-- 役割表で住人の優先度を調整。キャラや建築予定をクリックすると状態カードと理由を表示。図鑑は動物と敵の一覧・個体詳細・命名・Lvとスキル。詳細は [ANIMALS.md](ANIMALS.md)、[ENEMIES.md](ENEMIES.md)。
+- ニュートラルでドラッグすると最初に囲んだ分類を最大8対象選択。建築のドラッグと別。各モードの操作、命令ホイール切替、取消・禁止・許可、動物の共通指示は [README.md](../../README.md)。
+- 役割表で住人の優先度を調整。キャラや建築予定をクリックすると状態カードと理由を表示。図鑑は動物と敵の一覧・個体詳細・命名・Lvとスキル。詳細は [ANIMALS.md](../catalog/ANIMALS.md)、[ENEMIES.md](../catalog/ENEMIES.md)。
 - 行商人は2日目以降、日別seedで10:00〜12:29に入口から来訪（仮時刻）。0.8マス/秒で安全な住民の3〜4マス先へ歩き、9歩ごとに短い休止。到着後30秒以上滞在し、交渉に向かう間は待つ。夜には帰還、帰路閉塞時も夜開始40秒後までに退場する（仮上限）。移動時間と30秒を夜までに確保できない場合は来訪しない。現地で話しかけて売買・図鑑へ進む。商品購入後の現物は受入口へ入り、搬入しなければ通常は作業素材に使えない。
-- 祈りは2夜目以降の夜、カテゴリから選んだ報酬とカルマ・遅延反作用が核。初期襲撃は祈りのせいではない。世界観・敵AIの詳細は [WORLD_STORY.md](WORLD_STORY.md)、[WORLD_SYSTEMS.md](WORLD_SYSTEMS.md)、[ENEMIES.md](ENEMIES.md)。
+- 祈りは2夜目以降の夜、カテゴリから選んだ報酬とカルマ・遅延反作用が核。初期襲撃は祈りのせいではない。世界観・敵AIの詳細は [WORLD_STORY.md](WORLD_STORY.md)、[WORLD_SYSTEMS.md](WORLD_SYSTEMS.md)、[ENEMIES.md](../catalog/ENEMIES.md)。
 - 住民の持ち物入口は廃止。状態パネルから武器・衣服の装備／解除を既存現物仕事で指定する。図鑑は正式表紙を0.4秒静止して開き、開閉完了とページの位置・サイズを共通化。
 - 敵は中央の黄金像を進軍目印とし、視認した住民・動物・施設へ役割に従って分岐。像を直接攻撃できる条件と固有能力は維持する。
-- 装備・消耗品・スキル・レアリティ・素材の参照は [ITEMS.md](ITEMS.md) と [ANIMALS.md](ANIMALS.md)。
+- 装備・消耗品・スキル・レアリティ・素材の参照は [ITEMS.md](../catalog/ITEMS.md) と [ANIMALS.md](../catalog/ANIMALS.md)。
 
 ## 7. 実装範囲と運用上の制約
 
@@ -109,15 +111,15 @@
 | 分野 | 詳細資料 | 内容 |
 |---|---|---|
 | 製作・料理・衣服・満腹度／スタミナ案 | [CRAFTING_NEEDS_DESIGN.md](CRAFTING_NEEDS_DESIGN.md) | 今回の未実装・調整可能な基本設計 |
-| 現行操作・開発状態 | [README.md](README.md)、[PROJECT_STATE.md](PROJECT_STATE.md)、[TASKS.md](TASKS.md) | 現行操作、実装範囲、残課題 |
-| マップ・地質・岩山 | [WORLD_SYSTEMS.md](WORLD_SYSTEMS.md)、[ART_SPEC.md](ART_SPEC.md)、[review/current/connected-rocks/REPORT.md](review/current/connected-rocks/REPORT.md) | 地形・採掘、接続岩塊、画像仕様。生成ルールの詳細は game/biome_map.gd |
+| 現行操作・開発状態 | [README.md](../../README.md)、[PROJECT_STATE.md](../../PROJECT_STATE.md)、[TASKS.md](TASKS.md) | 現行操作、実装範囲、残課題 |
+| マップ・地質・岩山 | [WORLD_SYSTEMS.md](WORLD_SYSTEMS.md)、[ART_SPEC.md](ART_SPEC.md)、[review/current/connected-rocks/REPORT.md](../../review/current/connected-rocks/REPORT.md) | 地形・採掘、接続岩塊、画像仕様。生成ルールの詳細は game/biome_map.gd |
 | 建築物・コスト・設置条件 | [BUILDINGS.md](BUILDINGS.md) | 壁・床・ドア・部屋・現場表示 |
 | 仕事・物流・備蓄 | [WORK_SYSTEMS.md](WORK_SYSTEMS.md) | 優先順位、グループ施工、運搬、在庫 |
-| 動物・個体技能 | [ANIMALS.md](ANIMALS.md) | 実装対象・未実装候補と個別能力 |
-| 敵・AI・標的 | [ENEMIES.md](ENEMIES.md) | 敵一覧、技能、行動の条件 |
-| アイテム・装備・レアリティ | [ITEMS.md](ITEMS.md) | 一覧と効果／装備規則 |
+| 動物・個体技能 | [ANIMALS.md](../catalog/ANIMALS.md) | 実装対象・未実装候補と個別能力 |
+| 敵・AI・標的 | [ENEMIES.md](../catalog/ENEMIES.md) | 敵一覧、技能、行動の条件 |
+| アイテム・装備・レアリティ | [ITEMS.md](../catalog/ITEMS.md) | 一覧と効果／装備規則 |
 | 世界観・物語・祈り | [WORLD_STORY.md](WORLD_STORY.md)、[WORLD_SYSTEMS.md](WORLD_SYSTEMS.md) | 確定した物語の核とシステム仕様 |
-| 素材の場所・制作条件 | [ART_SPEC.md](ART_SPEC.md)、[assets/](assets/) | 画像の寸法と参照先 |
-| ロードマップ・開発・検証 | [ROADMAP.md](ROADMAP.md)、[DEVELOPMENT.md](DEVELOPMENT.md)、[review/current/PACKET.md](review/current/PACKET.md) | 過去版の記述混入に注意 |
+| 素材の場所・制作条件 | [ART_SPEC.md](ART_SPEC.md)、[assets/](../../assets) | 画像の寸法と参照先 |
+| ロードマップ・開発・検証 | [ROADMAP.md](ROADMAP.md)、[DEVELOPMENT.md](DEVELOPMENT.md)、[review/current/PACKET.md](../../review/current/PACKET.md) | 過去版の記述混入に注意 |
 
 **大きく増える一覧（敵・動物・アイテム・建築・画像）はそれぞれ別資料を正本とし、本書では無制限に転記しない。**

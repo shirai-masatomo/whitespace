@@ -7,6 +7,7 @@ WhiteSpace全体の目的、ブランド、リポジトリ、自律度の方針�
 
 | Project | 位置づけ | 自律モード | 状態 |
 | --- | --- | --- | --- |
-| [ホイッスル牧場（仮）](sporehollow/README.md) | 育成・リアルタイム建築・間接防衛 | 指定範囲の自律試作 / 定期再開なし | 空き地に建築し、柴犬で牧場主の連れ去りを防ぐWindows試作 |
+| [ホイッスル牧場（仕様）](sporehollow/SPEC.md) | 育成・リアルタイム建築・間接防衛 | 指定範囲の自律試作 / 定期再開なし | 空き地に建築し、柴犬で牧場主の連れ去りを防ぐWindows試作 |
 | [言語ジェンガ（仮）](language-jenga/README.md) | 宥めよ・会話/言語実験 | 通常 | 資産集約済み・休止中 |
-| [DIVE DIVE](001-first-release/README.md) | 初期リリースを目指す2D水中探索ゲーム | **指定範囲を自律制作 / 定期再開PAUSED** | L1〜L6・最深部/結末まで約1,960m通し試作。3D開発STOPPED |
+| [DIVE DIVE（仕様）](https://github.com/shirai-masatomo/whitespace/blob/codex/dive-dive-playground/projects/001-first-release/SPEC.md) | 初期リリースを目指す2D水中探索ゲーム | **指定範囲を自律制作 / 定期再開PAUSED** | L1〜L6・最深部/結末まで約1,960m通し試作。3D開発STOPPED |
+| [Coffee：世界観とゲーム仕様](https://github.com/shirai-masatomo/whitespace/blob/codex/coffee-conversation-boundaries/SPEC.md) | コーヒー場面を通じた会話と意味の実験 | 通常の試作 | 別ブランチで管理 |

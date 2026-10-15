@@ -1,3 +1,12 @@
+# 仕様書の整理に関する最優先ルール
+
+- ユーザーが見る・適宜変更する世界観とゲーム仕様の正本は **[SPEC.md](SPEC.md) の1ファイル**。
+- 仕様追加・修正を受けたら、現行／採用・未反映／仮を分けてSPEC.mdに要点を反映し、項目ごとの新たなユーザー用MDを増やさない。
+- 敵・動物・品目の大量一覧はdocs/catalog。制作・実装契約・作業手順・長い変更履歴はdocs/internal、reviewに保持する。
+- 文書更新とゲーム・EXE反映を同一視しない。過去の素材納品・検証原本は不用意に削除しない。
+
+---
+
 # ホイッスル牧場：共通開発ルール
 
 - 現行の開発フォルダを継続利用する。新しいプロジェクトコピーを標準手順にしない。履歴はGitのブランチ・コミットで管理する。
@@ -13,7 +22,7 @@
 
 ## 資料の更新・整理（2026-10-14）
 
-- ユーザーが仕様を採用・変更したら、[GAME_SPEC.md](GAME_SPEC.md) に短く反映し、詳細は関係する設計正本（例：[CRAFTING_NEEDS_DESIGN.md](CRAFTING_NEEDS_DESIGN.md)、[WORK_SYSTEMS.md](WORK_SYSTEMS.md)、[ITEMS.md](ITEMS.md)）だけ更新する。READMEは入口・操作概要に限定し、同じ表を無制限に複製しない。
+- ユーザーが仕様を採用・変更したら、[GAME_SPEC.md](docs/internal/GAME_SPEC.md) に短く反映し、詳細は関係する設計正本（例：[CRAFTING_NEEDS_DESIGN.md](docs/internal/CRAFTING_NEEDS_DESIGN.md)、[WORK_SYSTEMS.md](docs/internal/WORK_SYSTEMS.md)、[ITEMS.md](docs/catalog/ITEMS.md)）だけ更新する。READMEは入口・操作概要に限定し、同じ表を無制限に複製しない。
 - 資料の各節に **現行実装／採用した将来仕様／未確定案／過去記録** を明記する。ドキュメントへの記載だけでコード・EXE反映済みとは報告しない。
 - 現行仕様と過去レビューを同じ場所で「最新」と呼ばない。過去の引継ぎ・古い定点レビューは review/archive へ整理する。重要な検査・素材権利・納品・署名・Git履歴を一括削除しない。
 - 詳細な敵・動物・品目はそれぞれ ENEMIES／ANIMALS／ITEMS、建築・物流は BUILDINGS／WORK_SYSTEMS を正本にする。
