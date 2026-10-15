@@ -1,0 +1,20 @@
+{
+  "normal_data_unchanged": true,
+  "automatically_launched": false,
+  "asset_delivery_commit": "f7c521e72047119bed1121c1cebad1b5ddacfe31",
+  "implementation_commit": "baf16ef01c4a06842ac49c2df5a15452baec2bf6",
+  "diagnostics_removed": true,
+  "commit": "baf16ef01c4a06842ac49c2df5a15452baec2bf6",
+  "headless_loading_checks": 39,
+  "session_only": true,
+  "native_game_launch_performed": false,
+  "dirty": true,
+  "sha256": "58B0FE590E57C53956F0A35253720E7D05E8914257189F4AE8DE7C32D90FDC00",
+  "native_lifecycle_checks": 0,
+  "utc": "2026-10-15T09:37:23.5382189Z",
+  "related_logic_ui_checks": 335,
+  "asset_checks": 10,
+  "exe_bytes_before": 128409384,
+  "exe_bytes_after": 128451768,
+  "visual_verification": "production draw commands rendered on CPU; no native GPU claim"
+}

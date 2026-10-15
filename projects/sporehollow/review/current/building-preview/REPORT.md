@@ -46,4 +46,6 @@ headless・Dummy音声・30fps上限・BelowNormal・各120秒停止条件・直
 
 ## EXEと履歴
 
-コードのコミット後、既存の `artifacts/autonomy-entry-01/bundle/WhistleRanch-Autonomy-Partial.exe` へheadlessビルドを反映する。反映完了のコミット・SHA256は [DELIVERY.json](DELIVERY.json) を正本とする。既存の最新開発版ショートカットを維持し、候補EXE・一時検証データだけを後片付けする。
+コード `baf16ef01c4a06842ac49c2df5a15452baec2bf6` をheadlessビルドし、既存の `artifacts/autonomy-entry-01/bundle/WhistleRanch-Autonomy-Partial.exe` へ反映済み。SHA256は `58B0FE590E57C53956F0A35253720E7D05E8914257189F4AE8DE7C32D90FDC00`。通常ゲーム自動起動なし。既存の最新開発版ショートカットを使用する。[配布記録](DELIVERY.json)。
+
+EXEは128,409,384→128,451,768 bytes（+42,384）。プロジェクトは1042.17→1042.42MiB（約+0.25MiB）。候補EXE・一時検証ユーザーデータを削除、artifacts内EXEは1本。正式素材・元のユーザーデータ・他担当の未保存import/uidは保持。
