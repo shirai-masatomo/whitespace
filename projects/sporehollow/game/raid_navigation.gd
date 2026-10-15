@@ -3,7 +3,7 @@ extends RefCounted
 const POLICIES={"kidnapper":["residential"],"salaryman":["residential","stockpile"],"ninja":["residential"],"runner":["residential"],"thief":["stockpile"],"destroyer":["residential","stockpile"],"animal_tamer":[],"doberman":[],"dancer":[],"maid":[]}
 static func passable(w,p:Vector2i,breaker:bool)->bool:
 	if not w.inside(p) or w.Story.terrain_block(w,p):return false
-	return breaker or not w.blocks(p) or (w.structures[p].kind in w.Buildings.DOORS and w.structures[p].get("lock_hp",0)<=0)
+	return breaker or not w.blocks(p) or (w.structures[w.Buildings.anchor(w,p)].kind in w.Buildings.DOORS and w.structures[w.Buildings.anchor(w,p)].get("lock_hp",0)<=0)
 static func field(w,breaker:bool,outdoor:bool=false)->Dictionary:
 	var key=str([breaker,outdoor]);var cache=w.raid_navigation.get(key,{})
 	if cache.get("revision",-1)==w.navigation_revision:return cache

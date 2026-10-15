@@ -6,7 +6,7 @@ const SPEED = 2.5
 
 # Index lives only for a synchronous preview/commit transaction, never across ticks.
 static func index(w) -> Dictionary:
-	var result={"kinds":{},"layers":{},"materials":{}}
+	var result={"kinds":{},"layers":{},"materials":{},"bench_cells":{}}
 	for kind in w.Rules.RESOURCE_TYPES:result.materials[kind]=Reservations.available(w,kind)
 	for j in w.jobs:index_add(w,result,j)
 	preload("res://game/terrain_metrics.gd").count("job_index_rows",w.jobs.size())
@@ -17,8 +17,10 @@ static func index_add(w,lookup: Dictionary,j):
 	lookup.kinds[j.pos][j.kind]=true
 	var target=w.BUILD[j.kind].layer if w.BUILD.has(j.kind) else ("structure" if j.kind.begins_with("place_") else j.get("target_layer",""))
 	if target!="":
-		if not lookup.layers.has(j.pos):lookup.layers[j.pos]={}
-		lookup.layers[j.pos][target]=true
+		for cell in w.Buildings.cells(j.kind,j.pos):
+			if not lookup.layers.has(cell):lookup.layers[cell]={}
+			lookup.layers[cell][target]=true
+			if j.kind in w.Buildings.BENCHES:lookup.bench_cells[cell]=true
 
 static func build_reason(w, kind: String, p: Vector2i, extra_jobs: int=0, held_cost: int=0,lookup: Dictionary={}) -> String:
 	preload("res://game/terrain_metrics.gd").count("keeper_jobs.build_reason")
@@ -28,13 +30,15 @@ static func build_reason(w, kind: String, p: Vector2i, extra_jobs: int=0, held_c
 	if not w.BUILD.has(kind) or not w.inside(p): return "ここには建てられません"
 	if lookup.is_empty():lookup=index(w)
 	if lookup.kinds.get(p,{}).has(kind): return "予約済みです"
-	if lookup.layers.get(p,{}).has(w.BUILD[kind].layer): return "同じ場所に別の予定があります"
+	for cell in w.Buildings.cells(kind,p):
+		if (kind in w.Buildings.BENCHES and not lookup.layers.get(cell,{}).is_empty()) or lookup.bench_cells.get(cell,false) or lookup.layers.get(cell,{}).has(w.BUILD[kind].layer):return "同じ場所に別の予定があります"
 	var why=w.Buildings.reason(w,kind,p,false)
 	if why!="": return why
 	return Reservations.shortage(w,kind,held_cost,lookup.get("materials",{}).get(w.BUILD[kind].get("resource","soil"),-1))
 
 static func enqueue(w, kind: String, p: Vector2i, animal_id: int,lookup: Dictionary={}) -> bool:
 	w.Stock.normalize(w)
+	if kind in ["remove","repair","gate"]:p=w.Buildings.anchor(w,p)
 	if not w.working() or w.jobs.size()>=LIMIT or not w.inside(p):
 		if w.BUILD.has(kind) and not lookup.get("quiet",false):Reservations.reject(w,kind,build_reason(w,kind,p,0,0,lookup))
 		return false
@@ -174,7 +178,9 @@ static func execute(w,j,actor: Dictionary):
 	if w.BUILD.has(j.kind) and not j.started:
 		var why=w.Buildings.reason(w,j.kind,j.pos,false)
 		if why!="" and not (why=="ここに誰かいます" and actor.pos==j.pos): j.state="blocked"; j.block_reason=why; return
-	var goals=[j.pos] if j.kind=="move" else w.neighbors(j.pos)
+	var goals=[j.pos] if j.kind=="move" else w.Buildings.job_goals(w,j)
+	if w.BUILD.has(j.kind):goals=preload("res://game/construction_safety.gd").work_goals(w,j,actor,goals)
+	if goals.is_empty():w.Work.block(w,j,"退避経路を確保できません");return
 	if actor.pos not in goals:
 		walk(w,j,goals,actor); return
 	if j.kind=="move":
@@ -184,6 +190,8 @@ static func execute(w,j,actor: Dictionary):
 		if not j.started:
 			var why=w.Buildings.reason(w,j.kind,j.pos,false)
 			if why!="": j.state="blocked"; j.block_reason=why; return
+			if not preload("res://game/construction_safety.gd").can_finish(w,j,actor):
+				w.Work.block(w,j,"退避経路を確保できません");return
 			w.Buildings.begin(w,j)
 		j.phase="work"
 		w.Buildings.advance(w,j,factor(actor))

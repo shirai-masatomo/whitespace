@@ -60,4 +60,4 @@ func draw(g):
 			for p in cells:bounds=bounds.merge(Rect2(Vector2(p)*g.TILE,g.TILE))
 			g.draw_rect(bounds,Color("ffeab4"),false,3)
 		else:g.draw_rect(Rect2(g.center(row.pos if g.tool=="clear" else (row.pos if row.get("stock_id",-1)<0 else g.world.Stock.command_pos(g.world,row)))-Vector2(15,15),Vector2(30,30)),Color("ffeab4"),false,3)
-	g.label_on(g,g.get_canvas_transform().affine_inverse()*g.pointer+Vector2(12,-12),"%s %d件"%[LABELS[g.tool],targets.size()],15,g.UI.PAPER)
+	pass # Result notification lives in the fixed HUD; no floating world notice.

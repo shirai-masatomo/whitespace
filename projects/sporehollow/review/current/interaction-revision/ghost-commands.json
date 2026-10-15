@@ -1,0 +1,1415 @@
+{
+	"pictures": [
+		{
+			"commands": [
+				{
+					"color": [
+						1.0,
+						1.0,
+						1.0,
+						0.449999988079071
+					],
+					"path": "res://art_delivery/earth_stone_buildings_v1/soil/wall/normal/mask_00.png",
+					"rect": [
+						48.0,
+						29.0,
+						48,
+						68
+					],
+					"type": "mesh"
+				}
+			],
+			"name": "wall 可"
+		},
+		{
+			"commands": [
+				{
+					"color": [
+						1.0,
+						0.340000003576279,
+						0.280000001192093,
+						0.479999989271164
+					],
+					"path": "res://art_delivery/earth_stone_buildings_v1/soil/wall/normal/mask_00.png",
+					"rect": [
+						48.0,
+						29.0,
+						48,
+						68
+					],
+					"type": "mesh"
+				},
+				{
+					"at": [
+						72.0,
+						63.0
+					],
+					"color": [
+						0.929411768913269,
+						0.384313732385635,
+						0.34901961684227,
+						1.0
+					],
+					"radius": 11,
+					"type": "arc",
+					"width": 2.5
+				},
+				{
+					"color": [
+						0.929411768913269,
+						0.384313732385635,
+						0.34901961684227,
+						1.0
+					],
+					"points": [
+						[
+							64.0,
+							71.0
+						],
+						[
+							80.0,
+							55.0
+						]
+					],
+					"type": "line",
+					"width": 2.5
+				}
+			],
+			"name": "wall 不可"
+		},
+		{
+			"commands": [
+				{
+					"color": [
+						1.0,
+						1.0,
+						1.0,
+						0.449999988079071
+					],
+					"path": "res://art_delivery/wood_buildings_v1/wall/normal/wood_mask_00.png",
+					"rect": [
+						48.0,
+						29.0,
+						48,
+						68
+					],
+					"type": "mesh"
+				}
+			],
+			"name": "wood_wall 可"
+		},
+		{
+			"commands": [
+				{
+					"color": [
+						1.0,
+						0.340000003576279,
+						0.280000001192093,
+						0.479999989271164
+					],
+					"path": "res://art_delivery/wood_buildings_v1/wall/normal/wood_mask_00.png",
+					"rect": [
+						48.0,
+						29.0,
+						48,
+						68
+					],
+					"type": "mesh"
+				},
+				{
+					"at": [
+						72.0,
+						63.0
+					],
+					"color": [
+						0.929411768913269,
+						0.384313732385635,
+						0.34901961684227,
+						1.0
+					],
+					"radius": 11,
+					"type": "arc",
+					"width": 2.5
+				},
+				{
+					"color": [
+						0.929411768913269,
+						0.384313732385635,
+						0.34901961684227,
+						1.0
+					],
+					"points": [
+						[
+							64.0,
+							71.0
+						],
+						[
+							80.0,
+							55.0
+						]
+					],
+					"type": "line",
+					"width": 2.5
+				}
+			],
+			"name": "wood_wall 不可"
+		},
+		{
+			"commands": [
+				{
+					"color": [
+						1.0,
+						1.0,
+						1.0,
+						0.449999988079071
+					],
+					"path": "res://art_delivery/earth_stone_buildings_v1/stone/wall/normal/mask_00.png",
+					"rect": [
+						48.0,
+						29.0,
+						48,
+						68
+					],
+					"type": "mesh"
+				}
+			],
+			"name": "stone_wall 可"
+		},
+		{
+			"commands": [
+				{
+					"color": [
+						1.0,
+						0.340000003576279,
+						0.280000001192093,
+						0.479999989271164
+					],
+					"path": "res://art_delivery/earth_stone_buildings_v1/stone/wall/normal/mask_00.png",
+					"rect": [
+						48.0,
+						29.0,
+						48,
+						68
+					],
+					"type": "mesh"
+				},
+				{
+					"at": [
+						72.0,
+						63.0
+					],
+					"color": [
+						0.929411768913269,
+						0.384313732385635,
+						0.34901961684227,
+						1.0
+					],
+					"radius": 11,
+					"type": "arc",
+					"width": 2.5
+				},
+				{
+					"color": [
+						0.929411768913269,
+						0.384313732385635,
+						0.34901961684227,
+						1.0
+					],
+					"points": [
+						[
+							64.0,
+							71.0
+						],
+						[
+							80.0,
+							55.0
+						]
+					],
+					"type": "line",
+					"width": 2.5
+				}
+			],
+			"name": "stone_wall 不可"
+		},
+		{
+			"commands": [
+				{
+					"color": [
+						1.0,
+						1.0,
+						1.0,
+						0.449999988079071
+					],
+					"path": "res://art_delivery/wood_buildings_v1/door/horizontal_frame_rear.png",
+					"rect": [
+						48.0,
+						29.0,
+						48,
+						68
+					],
+					"type": "sprite"
+				},
+				{
+					"color": [
+						1.0,
+						1.0,
+						1.0,
+						0.449999988079071
+					],
+					"path": "res://art_delivery/wood_buildings_v1/door/horizontal_leaf_closed_normal.png",
+					"rect": [
+						48.0,
+						29.0,
+						48,
+						68
+					],
+					"type": "sprite"
+				},
+				{
+					"color": [
+						1.0,
+						1.0,
+						1.0,
+						0.449999988079071
+					],
+					"path": "res://art_delivery/wood_buildings_v1/door/horizontal_frame_front.png",
+					"rect": [
+						48.0,
+						29.0,
+						48,
+						68
+					],
+					"type": "sprite"
+				}
+			],
+			"name": "door 可"
+		},
+		{
+			"commands": [
+				{
+					"color": [
+						1.0,
+						0.340000003576279,
+						0.280000001192093,
+						0.479999989271164
+					],
+					"path": "res://art_delivery/wood_buildings_v1/door/horizontal_frame_rear.png",
+					"rect": [
+						48.0,
+						29.0,
+						48,
+						68
+					],
+					"type": "sprite"
+				},
+				{
+					"color": [
+						1.0,
+						0.340000003576279,
+						0.280000001192093,
+						0.479999989271164
+					],
+					"path": "res://art_delivery/wood_buildings_v1/door/horizontal_leaf_closed_normal.png",
+					"rect": [
+						48.0,
+						29.0,
+						48,
+						68
+					],
+					"type": "sprite"
+				},
+				{
+					"color": [
+						1.0,
+						0.340000003576279,
+						0.280000001192093,
+						0.479999989271164
+					],
+					"path": "res://art_delivery/wood_buildings_v1/door/horizontal_frame_front.png",
+					"rect": [
+						48.0,
+						29.0,
+						48,
+						68
+					],
+					"type": "sprite"
+				},
+				{
+					"at": [
+						72.0,
+						63.0
+					],
+					"color": [
+						0.929411768913269,
+						0.384313732385635,
+						0.34901961684227,
+						1.0
+					],
+					"radius": 11,
+					"type": "arc",
+					"width": 2.5
+				},
+				{
+					"color": [
+						0.929411768913269,
+						0.384313732385635,
+						0.34901961684227,
+						1.0
+					],
+					"points": [
+						[
+							64.0,
+							71.0
+						],
+						[
+							80.0,
+							55.0
+						]
+					],
+					"type": "line",
+					"width": 2.5
+				}
+			],
+			"name": "door 不可"
+		},
+		{
+			"commands": [
+				{
+					"color": [
+						1.0,
+						1.0,
+						1.0,
+						0.449999988079071
+					],
+					"path": "res://art_delivery/wood_buildings_v1/door/horizontal_frame_rear.png",
+					"rect": [
+						48.0,
+						29.0,
+						48,
+						68
+					],
+					"type": "sprite"
+				},
+				{
+					"color": [
+						1.0,
+						1.0,
+						1.0,
+						0.449999988079071
+					],
+					"path": "res://art_delivery/wood_buildings_v1/door/horizontal_leaf_closed_normal.png",
+					"rect": [
+						48.0,
+						29.0,
+						48,
+						68
+					],
+					"type": "sprite"
+				},
+				{
+					"color": [
+						1.0,
+						1.0,
+						1.0,
+						0.449999988079071
+					],
+					"path": "res://art_delivery/wood_buildings_v1/door/horizontal_lock_closed_normal.png",
+					"rect": [
+						48.0,
+						29.0,
+						48,
+						68
+					],
+					"type": "sprite"
+				},
+				{
+					"color": [
+						1.0,
+						1.0,
+						1.0,
+						0.449999988079071
+					],
+					"path": "res://art_delivery/wood_buildings_v1/door/horizontal_frame_front.png",
+					"rect": [
+						48.0,
+						29.0,
+						48,
+						68
+					],
+					"type": "sprite"
+				}
+			],
+			"name": "locked_door 可"
+		},
+		{
+			"commands": [
+				{
+					"color": [
+						1.0,
+						0.340000003576279,
+						0.280000001192093,
+						0.479999989271164
+					],
+					"path": "res://art_delivery/wood_buildings_v1/door/horizontal_frame_rear.png",
+					"rect": [
+						48.0,
+						29.0,
+						48,
+						68
+					],
+					"type": "sprite"
+				},
+				{
+					"color": [
+						1.0,
+						0.340000003576279,
+						0.280000001192093,
+						0.479999989271164
+					],
+					"path": "res://art_delivery/wood_buildings_v1/door/horizontal_leaf_closed_normal.png",
+					"rect": [
+						48.0,
+						29.0,
+						48,
+						68
+					],
+					"type": "sprite"
+				},
+				{
+					"color": [
+						1.0,
+						0.340000003576279,
+						0.280000001192093,
+						0.479999989271164
+					],
+					"path": "res://art_delivery/wood_buildings_v1/door/horizontal_lock_closed_normal.png",
+					"rect": [
+						48.0,
+						29.0,
+						48,
+						68
+					],
+					"type": "sprite"
+				},
+				{
+					"color": [
+						1.0,
+						0.340000003576279,
+						0.280000001192093,
+						0.479999989271164
+					],
+					"path": "res://art_delivery/wood_buildings_v1/door/horizontal_frame_front.png",
+					"rect": [
+						48.0,
+						29.0,
+						48,
+						68
+					],
+					"type": "sprite"
+				},
+				{
+					"at": [
+						72.0,
+						63.0
+					],
+					"color": [
+						0.929411768913269,
+						0.384313732385635,
+						0.34901961684227,
+						1.0
+					],
+					"radius": 11,
+					"type": "arc",
+					"width": 2.5
+				},
+				{
+					"color": [
+						0.929411768913269,
+						0.384313732385635,
+						0.34901961684227,
+						1.0
+					],
+					"points": [
+						[
+							64.0,
+							71.0
+						],
+						[
+							80.0,
+							55.0
+						]
+					],
+					"type": "line",
+					"width": 2.5
+				}
+			],
+			"name": "locked_door 不可"
+		},
+		{
+			"commands": [
+				{
+					"color": [
+						1.0,
+						1.0,
+						1.0,
+						0.449999988079071
+					],
+					"path": "res://art_delivery/earth_stone_buildings_v1/soil/floor/base.png",
+					"rect": [
+						48.0,
+						42.0,
+						48,
+						42
+					],
+					"type": "sprite"
+				},
+				{
+					"color": [
+						1.0,
+						1.0,
+						1.0,
+						0.449999988079071
+					],
+					"path": "res://art_delivery/earth_stone_buildings_v1/soil/floor/perimeter/mask_15.png",
+					"rect": [
+						48.0,
+						42.0,
+						48,
+						42
+					],
+					"type": "sprite"
+				}
+			],
+			"name": "soil_tile 可"
+		},
+		{
+			"commands": [
+				{
+					"color": [
+						1.0,
+						0.340000003576279,
+						0.280000001192093,
+						0.479999989271164
+					],
+					"path": "res://art_delivery/earth_stone_buildings_v1/soil/floor/base.png",
+					"rect": [
+						48.0,
+						42.0,
+						48,
+						42
+					],
+					"type": "sprite"
+				},
+				{
+					"color": [
+						1.0,
+						0.340000003576279,
+						0.280000001192093,
+						0.479999989271164
+					],
+					"path": "res://art_delivery/earth_stone_buildings_v1/soil/floor/perimeter/mask_15.png",
+					"rect": [
+						48.0,
+						42.0,
+						48,
+						42
+					],
+					"type": "sprite"
+				},
+				{
+					"at": [
+						72.0,
+						63.0
+					],
+					"color": [
+						0.929411768913269,
+						0.384313732385635,
+						0.34901961684227,
+						1.0
+					],
+					"radius": 11,
+					"type": "arc",
+					"width": 2.5
+				},
+				{
+					"color": [
+						0.929411768913269,
+						0.384313732385635,
+						0.34901961684227,
+						1.0
+					],
+					"points": [
+						[
+							64.0,
+							71.0
+						],
+						[
+							80.0,
+							55.0
+						]
+					],
+					"type": "line",
+					"width": 2.5
+				}
+			],
+			"name": "soil_tile 不可"
+		},
+		{
+			"commands": [
+				{
+					"color": [
+						1.0,
+						1.0,
+						1.0,
+						0.449999988079071
+					],
+					"path": "res://art_delivery/wood_buildings_v1/floor/wood_00.png",
+					"rect": [
+						48.0,
+						42.0,
+						48,
+						42
+					],
+					"type": "sprite"
+				},
+				{
+					"color": [
+						1.0,
+						1.0,
+						1.0,
+						0.449999988079071
+					],
+					"path": "res://art_delivery/wood_buildings_v1/floor/perimeter/mask_15.png",
+					"rect": [
+						48.0,
+						42.0,
+						48,
+						42
+					],
+					"type": "sprite"
+				}
+			],
+			"name": "wood_tile 可"
+		},
+		{
+			"commands": [
+				{
+					"color": [
+						1.0,
+						0.340000003576279,
+						0.280000001192093,
+						0.479999989271164
+					],
+					"path": "res://art_delivery/wood_buildings_v1/floor/wood_00.png",
+					"rect": [
+						48.0,
+						42.0,
+						48,
+						42
+					],
+					"type": "sprite"
+				},
+				{
+					"color": [
+						1.0,
+						0.340000003576279,
+						0.280000001192093,
+						0.479999989271164
+					],
+					"path": "res://art_delivery/wood_buildings_v1/floor/perimeter/mask_15.png",
+					"rect": [
+						48.0,
+						42.0,
+						48,
+						42
+					],
+					"type": "sprite"
+				},
+				{
+					"at": [
+						72.0,
+						63.0
+					],
+					"color": [
+						0.929411768913269,
+						0.384313732385635,
+						0.34901961684227,
+						1.0
+					],
+					"radius": 11,
+					"type": "arc",
+					"width": 2.5
+				},
+				{
+					"color": [
+						0.929411768913269,
+						0.384313732385635,
+						0.34901961684227,
+						1.0
+					],
+					"points": [
+						[
+							64.0,
+							71.0
+						],
+						[
+							80.0,
+							55.0
+						]
+					],
+					"type": "line",
+					"width": 2.5
+				}
+			],
+			"name": "wood_tile 不可"
+		},
+		{
+			"commands": [
+				{
+					"color": [
+						1.0,
+						1.0,
+						1.0,
+						0.449999988079071
+					],
+					"path": "res://art_delivery/earth_stone_buildings_v1/stone/floor/base.png",
+					"rect": [
+						48.0,
+						42.0,
+						48,
+						42
+					],
+					"type": "sprite"
+				},
+				{
+					"color": [
+						1.0,
+						1.0,
+						1.0,
+						0.449999988079071
+					],
+					"path": "res://art_delivery/earth_stone_buildings_v1/stone/floor/perimeter/mask_15.png",
+					"rect": [
+						48.0,
+						42.0,
+						48,
+						42
+					],
+					"type": "sprite"
+				}
+			],
+			"name": "stone_tile 可"
+		},
+		{
+			"commands": [
+				{
+					"color": [
+						1.0,
+						0.340000003576279,
+						0.280000001192093,
+						0.479999989271164
+					],
+					"path": "res://art_delivery/earth_stone_buildings_v1/stone/floor/base.png",
+					"rect": [
+						48.0,
+						42.0,
+						48,
+						42
+					],
+					"type": "sprite"
+				},
+				{
+					"color": [
+						1.0,
+						0.340000003576279,
+						0.280000001192093,
+						0.479999989271164
+					],
+					"path": "res://art_delivery/earth_stone_buildings_v1/stone/floor/perimeter/mask_15.png",
+					"rect": [
+						48.0,
+						42.0,
+						48,
+						42
+					],
+					"type": "sprite"
+				},
+				{
+					"at": [
+						72.0,
+						63.0
+					],
+					"color": [
+						0.929411768913269,
+						0.384313732385635,
+						0.34901961684227,
+						1.0
+					],
+					"radius": 11,
+					"type": "arc",
+					"width": 2.5
+				},
+				{
+					"color": [
+						0.929411768913269,
+						0.384313732385635,
+						0.34901961684227,
+						1.0
+					],
+					"points": [
+						[
+							64.0,
+							71.0
+						],
+						[
+							80.0,
+							55.0
+						]
+					],
+					"type": "line",
+					"width": 2.5
+				}
+			],
+			"name": "stone_tile 不可"
+		},
+		{
+			"commands": [
+				{
+					"color": [
+						1.0,
+						1.0,
+						1.0,
+						0.449999988079071
+					],
+					"path": "res://art_delivery/crafting_assets_v1/benches/cooking_bench.png",
+					"rect": [
+						48.0,
+						38.0,
+						96.0,
+						88.0
+					],
+					"type": "sprite"
+				}
+			],
+			"name": "cooking_bench 可"
+		},
+		{
+			"commands": [
+				{
+					"color": [
+						1.0,
+						0.340000003576279,
+						0.280000001192093,
+						0.479999989271164
+					],
+					"path": "res://art_delivery/crafting_assets_v1/benches/cooking_bench.png",
+					"rect": [
+						48.0,
+						38.0,
+						96.0,
+						88.0
+					],
+					"type": "sprite"
+				},
+				{
+					"at": [
+						72.0,
+						63.0
+					],
+					"color": [
+						0.929411768913269,
+						0.384313732385635,
+						0.34901961684227,
+						1.0
+					],
+					"radius": 11,
+					"type": "arc",
+					"width": 2.5
+				},
+				{
+					"color": [
+						0.929411768913269,
+						0.384313732385635,
+						0.34901961684227,
+						1.0
+					],
+					"points": [
+						[
+							64.0,
+							71.0
+						],
+						[
+							80.0,
+							55.0
+						]
+					],
+					"type": "line",
+					"width": 2.5
+				}
+			],
+			"name": "cooking_bench 不可"
+		},
+		{
+			"commands": [
+				{
+					"color": [
+						1.0,
+						1.0,
+						1.0,
+						0.449999988079071
+					],
+					"path": "res://art_delivery/crafting_assets_v1/benches/carpentry_bench.png",
+					"rect": [
+						48.0,
+						38.0,
+						96.0,
+						88.0
+					],
+					"type": "sprite"
+				}
+			],
+			"name": "carpentry_bench 可"
+		},
+		{
+			"commands": [
+				{
+					"color": [
+						1.0,
+						0.340000003576279,
+						0.280000001192093,
+						0.479999989271164
+					],
+					"path": "res://art_delivery/crafting_assets_v1/benches/carpentry_bench.png",
+					"rect": [
+						48.0,
+						38.0,
+						96.0,
+						88.0
+					],
+					"type": "sprite"
+				},
+				{
+					"at": [
+						72.0,
+						63.0
+					],
+					"color": [
+						0.929411768913269,
+						0.384313732385635,
+						0.34901961684227,
+						1.0
+					],
+					"radius": 11,
+					"type": "arc",
+					"width": 2.5
+				},
+				{
+					"color": [
+						0.929411768913269,
+						0.384313732385635,
+						0.34901961684227,
+						1.0
+					],
+					"points": [
+						[
+							64.0,
+							71.0
+						],
+						[
+							80.0,
+							55.0
+						]
+					],
+					"type": "line",
+					"width": 2.5
+				}
+			],
+			"name": "carpentry_bench 不可"
+		},
+		{
+			"commands": [
+				{
+					"color": [
+						1.0,
+						1.0,
+						1.0,
+						0.449999988079071
+					],
+					"path": "res://art_delivery/crafting_assets_v1/benches/sewing_bench.png",
+					"rect": [
+						48.0,
+						38.0,
+						96.0,
+						88.0
+					],
+					"type": "sprite"
+				}
+			],
+			"name": "sewing_bench 可"
+		},
+		{
+			"commands": [
+				{
+					"color": [
+						1.0,
+						0.340000003576279,
+						0.280000001192093,
+						0.479999989271164
+					],
+					"path": "res://art_delivery/crafting_assets_v1/benches/sewing_bench.png",
+					"rect": [
+						48.0,
+						38.0,
+						96.0,
+						88.0
+					],
+					"type": "sprite"
+				},
+				{
+					"at": [
+						72.0,
+						63.0
+					],
+					"color": [
+						0.929411768913269,
+						0.384313732385635,
+						0.34901961684227,
+						1.0
+					],
+					"radius": 11,
+					"type": "arc",
+					"width": 2.5
+				},
+				{
+					"color": [
+						0.929411768913269,
+						0.384313732385635,
+						0.34901961684227,
+						1.0
+					],
+					"points": [
+						[
+							64.0,
+							71.0
+						],
+						[
+							80.0,
+							55.0
+						]
+					],
+					"type": "line",
+					"width": 2.5
+				}
+			],
+			"name": "sewing_bench 不可"
+		},
+		{
+			"commands": [
+				{
+					"color": [
+						1.0,
+						1.0,
+						1.0,
+						0.449999988079071
+					],
+					"path": "res://art_delivery/crafting_assets_v1/placeables/wood_crate.png",
+					"rect": [
+						48.0,
+						40.0,
+						48,
+						48
+					],
+					"type": "sprite"
+				}
+			],
+			"name": "place_wood_crate 可"
+		},
+		{
+			"commands": [
+				{
+					"color": [
+						1.0,
+						0.340000003576279,
+						0.280000001192093,
+						0.479999989271164
+					],
+					"path": "res://art_delivery/crafting_assets_v1/placeables/wood_crate.png",
+					"rect": [
+						48.0,
+						40.0,
+						48,
+						48
+					],
+					"type": "sprite"
+				},
+				{
+					"at": [
+						72.0,
+						63.0
+					],
+					"color": [
+						0.929411768913269,
+						0.384313732385635,
+						0.34901961684227,
+						1.0
+					],
+					"radius": 11,
+					"type": "arc",
+					"width": 2.5
+				},
+				{
+					"color": [
+						0.929411768913269,
+						0.384313732385635,
+						0.34901961684227,
+						1.0
+					],
+					"points": [
+						[
+							64.0,
+							71.0
+						],
+						[
+							80.0,
+							55.0
+						]
+					],
+					"type": "line",
+					"width": 2.5
+				}
+			],
+			"name": "place_wood_crate 不可"
+		},
+		{
+			"commands": [
+				{
+					"color": [
+						1.0,
+						1.0,
+						1.0,
+						0.449999988079071
+					],
+					"path": "res://art_delivery/crafting_assets_v1/placeables/wood_shelf.png",
+					"rect": [
+						48.0,
+						40.0,
+						48,
+						48
+					],
+					"type": "sprite"
+				}
+			],
+			"name": "place_wood_shelf 可"
+		},
+		{
+			"commands": [
+				{
+					"color": [
+						1.0,
+						0.340000003576279,
+						0.280000001192093,
+						0.479999989271164
+					],
+					"path": "res://art_delivery/crafting_assets_v1/placeables/wood_shelf.png",
+					"rect": [
+						48.0,
+						40.0,
+						48,
+						48
+					],
+					"type": "sprite"
+				},
+				{
+					"at": [
+						72.0,
+						63.0
+					],
+					"color": [
+						0.929411768913269,
+						0.384313732385635,
+						0.34901961684227,
+						1.0
+					],
+					"radius": 11,
+					"type": "arc",
+					"width": 2.5
+				},
+				{
+					"color": [
+						0.929411768913269,
+						0.384313732385635,
+						0.34901961684227,
+						1.0
+					],
+					"points": [
+						[
+							64.0,
+							71.0
+						],
+						[
+							80.0,
+							55.0
+						]
+					],
+					"type": "line",
+					"width": 2.5
+				}
+			],
+			"name": "place_wood_shelf 不可"
+		},
+		{
+			"commands": [
+				{
+					"color": [
+						1.0,
+						1.0,
+						1.0,
+						0.449999988079071
+					],
+					"path": "res://art_delivery/ui_world_direction_v2/candidates/kokeshi/idle.png",
+					"rect": [
+						56.0,
+						41.0,
+						32,
+						40
+					],
+					"type": "sprite"
+				}
+			],
+			"name": "place_kokeshi 可"
+		},
+		{
+			"commands": [
+				{
+					"color": [
+						1.0,
+						0.340000003576279,
+						0.280000001192093,
+						0.479999989271164
+					],
+					"path": "res://art_delivery/ui_world_direction_v2/candidates/kokeshi/idle.png",
+					"rect": [
+						56.0,
+						41.0,
+						32,
+						40
+					],
+					"type": "sprite"
+				},
+				{
+					"at": [
+						72.0,
+						63.0
+					],
+					"color": [
+						0.929411768913269,
+						0.384313732385635,
+						0.34901961684227,
+						1.0
+					],
+					"radius": 11,
+					"type": "arc",
+					"width": 2.5
+				},
+				{
+					"color": [
+						0.929411768913269,
+						0.384313732385635,
+						0.34901961684227,
+						1.0
+					],
+					"points": [
+						[
+							64.0,
+							71.0
+						],
+						[
+							80.0,
+							55.0
+						]
+					],
+					"type": "line",
+					"width": 2.5
+				}
+			],
+			"name": "place_kokeshi 不可"
+		},
+		{
+			"commands": [
+				{
+					"color": [
+						1.0,
+						1.0,
+						1.0,
+						0.449999988079071
+					],
+					"path": "res://art_delivery/ui_world_direction_v1/candidates/new/fossil.png",
+					"rect": [
+						48.0,
+						41.0,
+						48,
+						40
+					],
+					"type": "sprite"
+				}
+			],
+			"name": "place_fossil 可"
+		},
+		{
+			"commands": [
+				{
+					"color": [
+						1.0,
+						0.340000003576279,
+						0.280000001192093,
+						0.479999989271164
+					],
+					"path": "res://art_delivery/ui_world_direction_v1/candidates/new/fossil.png",
+					"rect": [
+						48.0,
+						41.0,
+						48,
+						40
+					],
+					"type": "sprite"
+				},
+				{
+					"at": [
+						72.0,
+						63.0
+					],
+					"color": [
+						0.929411768913269,
+						0.384313732385635,
+						0.34901961684227,
+						1.0
+					],
+					"radius": 11,
+					"type": "arc",
+					"width": 2.5
+				},
+				{
+					"color": [
+						0.929411768913269,
+						0.384313732385635,
+						0.34901961684227,
+						1.0
+					],
+					"points": [
+						[
+							64.0,
+							71.0
+						],
+						[
+							80.0,
+							55.0
+						]
+					],
+					"type": "line",
+					"width": 2.5
+				}
+			],
+			"name": "place_fossil 不可"
+		}
+	]
+}

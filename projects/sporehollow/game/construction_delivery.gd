@@ -30,7 +30,7 @@ static func proposal(w,key: String) -> Dictionary:
 	for j in plans(w,a):
 		var why=w.Buildings.reason(w,j.kind,j.pos,false) if not j.started else ""
 		if why!="" and not (why=="ここに誰かいます" and a.pos==j.pos):j.block_reason=why;continue
-		var destination=w.Jobs.path_to(w,a.pos,w.neighbors(j.pos))
+		var destination=w.Jobs.path_to(w,a.pos,w.Buildings.job_goals(w,j))
 		if destination.is_empty():j.block_reason="材料を搬入する通路がありません";continue
 		for row in sources(w,j,a):
 			var route=w.Jobs.path_to(w,a.pos,w.neighbors(row.pos))
@@ -51,7 +51,7 @@ static func start(w,key: String,proposal: Dictionary) -> Dictionary:
 	for j in targets:
 		if capacity<=0:break
 		if w.distance(first.pos,j.pos)>RADIUS:continue
-		if w.Jobs.path_to(w,a.pos,w.neighbors(j.pos)).is_empty():continue
+		if w.Jobs.path_to(w,a.pos,w.Buildings.job_goals(w,j)).is_empty():continue
 		if not j.started:
 			var why=w.Buildings.reason(w,j.kind,j.pos,false)
 			if why!="" and not (why=="ここに誰かいます" and a.pos==j.pos):continue
@@ -121,7 +121,7 @@ static func step(w,key: String):
 	var j=job(w,cargo[0].job_id)
 	if j.is_empty():release(w,key);return
 	task.phase="deliver";task.pos=j.pos;a.work_status="建築現場へ材料を搬入"
-	if w.Jobs.walk(w,task,w.neighbors(j.pos),a):
+	if w.Jobs.walk(w,task,w.Buildings.job_goals(w,j),a):
 		for row in cargo:
 			if row.job_id!=j.id:continue
 			row.location="site";row.owner="";row.pos=j.pos;row.erase("construction_transfer")
@@ -203,7 +203,7 @@ static func feasible(w,j,rows: Array,evaluators: Dictionary) -> bool:
 		if why!="" and a.pos!=j.pos:continue
 		if not evaluators.has(key):evaluators[key]=preload("res://game/job_evaluation.gd").new(w,a.pos)
 		var evaluation=evaluators[key]
-		if is_inf(evaluation.distance_to(w,w.neighbors(j.pos))):continue
+		if is_inf(evaluation.distance_to(w,w.Buildings.job_goals(w,j))):continue
 		for row in candidates:
 			if not is_inf(evaluation.distance_to(w,w.neighbors(row.pos))):return true
 	j.block_reason="材料を搬入する通路がありません" if has_hauler else "資材搬入を担当する住人がいません"

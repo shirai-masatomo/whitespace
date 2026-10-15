@@ -10,20 +10,42 @@ static func schedule(w):
 	w.merchant_visit={"state":"scheduled" if day>=2 and now<=minute else "gone","day":day,"route":[],"credit":0.0,"steps":0,"pause_until":0,"retry":0}
 static func safe(w,p)->bool:
 	return not w.enemies.any(func(e):return not e.done and e.hp>0 and w.distance(e.pos,p)<7)
+static func exclusion(w)->Dictionary:
+	var cells={};var blocked={}
+	for p in w.structures:
+		for q in w.Buildings.cells(w.structures[p].kind,p):cells[q]=true
+	for p in w.floors:cells[p]=true
+	for z in w.zones:
+		for p in z.cells:cells[p]=true
+	for j in w.jobs:
+		if w.BUILD.has(j.kind):
+			for p in w.Buildings.cells(j.kind,j.pos):cells[p]=true
+	for p in cells:
+		blocked[p]=true
+		for q in w.neighbors(p):blocked[q]=true
+	return blocked
+static func clearance(w,p)->bool:
+	for q in [p]+w.neighbors(p):
+		if w.live_structure(q) or w.floors.get(q,{}).get("status")=="ready":return false
+		if w.zones.any(func(z):return q in z.cells):return false
+		if w.jobs.any(func(j):return w.BUILD.has(j.kind) and q in w.Buildings.cells(j.kind,j.pos)):return false
+	return true
 static func goals(w)->Array:
+	var blocked=exclusion(w)
 	var result=[]
 	for a in w.workers.values():
 		if a.hp<=0 or not a.get("placed",false) or a.get("state")!="free" or not safe(w,a.pos):continue
 		for dy in range(-3,4):
 			for dx in range(-3,4):
 				var q=a.pos+Vector2i(dx,dy)
-				if absi(dx)+absi(dy) in [3,4] and w.walkable(q) and not w.actor_occupied(q,q+Vector2i(999,999)) and q not in result:result.append(q)
+				if absi(dx)+absi(dy) in [3,4] and w.walkable(q) and not w.actor_occupied(q,q+Vector2i(999,999)) and q not in result and not blocked.has(q):result.append(q)
 	if result.is_empty():
 		for q in w.neighbors(w.keeper.pos):
-			if w.walkable(q) and safe(w,q):result.append(q)
+			if w.walkable(q) and safe(w,q) and not blocked.has(q):result.append(q)
 	return result
-static func route_to(w,start:Vector2i,targets:Array)->Array:
+static func route_to(w,start:Vector2i,targets:Array,avoid_sites:bool=true)->Array:
 	# One multi-goal BFS, not a full A* per candidate. Only on arrival/replan.
+	var blocked=exclusion(w) if avoid_sites else {}
 	var wanted={};var previous={start:start};var queue=[start];var i=0
 	for q in targets:
 		if w.walkable(q):wanted[q]=true
@@ -34,8 +56,9 @@ static func route_to(w,start:Vector2i,targets:Array)->Array:
 			while p!=start:p=previous[p];path.push_front(p)
 			return path
 		for q in w.neighbors(p):
+			if avoid_sites and not wanted.has(q) and blocked.has(q):continue
 			if not previous.has(q) and w.walkable(q) and not w.actor_occupied(q,start):previous[q]=p;queue.append(q)
-	return []
+	return route_to(w,start,targets,false) if avoid_sites else []
 static func arrive(w):
 	var visit=w.merchant_visit;var destinations=goals(w);var best=[]
 	# Multi-source reverse BFS: all safe stopping cells share one border search.
@@ -72,13 +95,22 @@ static func step(w):
 		return
 	if w.Cycle.period(w)=="night":leave(w)
 	elif w.tick>=v.get("leave_after",w.tick+1) and v.state=="waiting" and not w.merchant_waiting():leave(w)
-	if v.state=="waiting":return
+	if v.state=="waiting":
+		var signature=[w.navigation_revision,w.jobs.map(func(j):return j.id),hash(w.zones)]
+		if v.get("site_signature",[])!=signature:
+			v.site_signature=signature
+			if not clearance(w,w.MERCHANT_CELL):
+				var destinations=goals(w);destinations.erase(w.MERCHANT_CELL)
+				var escape=route_to(w,w.MERCHANT_CELL,destinations)
+				if escape.size()>1:v.state="approach";v.goal=escape[-1];v.route=escape
+				else:leave(w)
+		if v.state=="waiting":return
 	if v.state=="return" and w.tick>=v.hard_end:
 		v.state="gone";w.PlayerEvents.add(w,"商人は帰路を確保できず、退場しました");return
 	if w.tick<v.pause_until or w.tick<v.retry:return
 	var route=v.route
 	if route.is_empty() or route[0]!=w.MERCHANT_CELL or route.size()>1 and not w.walkable(route[1]):
-		var targets=w.Land.border_cells(w.W,w.H) if v.state=="return" else ([v.goal] if w.walkable(v.goal) and safe(w,v.goal) and not w.actor_occupied(v.goal,w.MERCHANT_CELL) else goals(w))
+		var targets=w.Land.border_cells(w.W,w.H) if v.state=="return" else ([v.goal] if w.walkable(v.goal) and safe(w,v.goal) and clearance(w,v.goal) and not w.actor_occupied(v.goal,w.MERCHANT_CELL) else goals(w))
 		route=route_to(w,w.MERCHANT_CELL,targets);v.route=route
 		if route.is_empty():v.retry=w.tick+ceili(3.0/w.DT);return
 	if route.size()==1:

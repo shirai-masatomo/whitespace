@@ -43,7 +43,6 @@ static func describe(w,j,total: int,usable: int) -> Dictionary:
 			reason="資材搬入の担当設定がありません" if category=="haul" else "建築の担当設定がありません"
 		elif stage=="ready":reason="施工担当の割当待ち"
 	if j.get("cancel_requested",false):reason="取消待ち"
-	elif w.paused:reason="時間停止中"+("／"+reason if reason!="" else "")
 	elif w.jobs_held:reason="作業保留中"+("／"+reason if reason!="" else "")
 	if reason!="":
 		var text="待機理由："+reason

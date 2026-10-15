@@ -171,7 +171,7 @@ func rendering():
 		var completed=g.calls[0];g.calls.clear();ghost.update(w)
 		ghost.draw(g,"place_"+kind if kind in ["wood_crate","wood_shelf"] else kind,p)
 		check(completed.path==g.calls[0].path and completed.rect==g.calls[0].rect,"Official completed and ghost image/anchor identical: "+kind)
-		check(completed.rect==[48.0,40.0,48,48],"Official48x48 with anchor(24,44) at center+(0,21): "+kind)
+		check(completed.rect==([48.0,38.0,96.0,88.0] if kind in w.Buildings.BENCHES else [48.0,40.0,48,48]),"Official art uses footprint-matched anchor: "+kind)
 	# Production normal wall and ghost share exact mesh anchor and texture, every mask.
 	for mask in range(16):
 		w.structures.clear();var rows=[]

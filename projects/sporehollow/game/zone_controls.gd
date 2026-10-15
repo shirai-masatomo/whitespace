@@ -107,17 +107,17 @@ func input(g,event) -> bool:
 	return false
 func draw(g):
 	for z in g.world.zones:
-		var color=Color("8dc5c9") if z.kind=="stockpile" else Color("d7ba86")
+		var color=Color("83e9f5") if z.kind=="stockpile" else Color("e4adff")
 		var cells={}
 		for p in z.cells:cells[p]=true
 		for p in z.cells:
 			var corner=Vector2(p)*g.TILE;var selected=(active(g) or details_open) and z.id==selected_id
-			g.draw_rect(Rect2(corner,g.TILE),Color(color,0.16 if selected else 0.04))
+			g.draw_rect(Rect2(corner,g.TILE),Color(color,0.20 if selected else 0.08))
 			for edge in [[Vector2i.UP,Vector2.ZERO,Vector2(g.TILE.x,0)],[Vector2i.RIGHT,Vector2(g.TILE.x,0),g.TILE],[Vector2i.DOWN,Vector2(0,g.TILE.y),g.TILE],[Vector2i.LEFT,Vector2.ZERO,Vector2(0,g.TILE.y)]]:
-				if not cells.has(p+edge[0]):g.draw_line(corner+edge[1],corner+edge[2],color,3 if selected else 1)
-		if (active(g) or (details_open and z.id==selected_id)) and not z.cells.is_empty():
-			var at=g.center(z.cells[0])+Vector2(-17,-8)
-			g.label_on(g,at,g.world.Zones.title(z),14,g.UI.INK)
+				if not cells.has(p+edge[0]):
+					g.draw_line(corner+edge[1],corner+edge[2],Color("2a333b"),5 if selected else 3)
+					g.draw_line(corner+edge[1],corner+edge[2],color,3 if selected else 1.8)
+
 	if not active(g) or not g.tool.begins_with("zone_") or g.pointer_over_ui():return
 	var from=first if pressed else cell(g,g.pointer);var to=last if pressed else from
 	var low=Vector2i(mini(from.x,to.x),mini(from.y,to.y));var high=Vector2i(maxi(from.x,to.x),maxi(from.y,to.y))
@@ -132,3 +132,16 @@ func set_check(row,g,z):
 	row.set_checked(0,enabled==ids.size() and enabled>0);row.set_indeterminate(0,enabled>0 and enabled<ids.size())
 func update_checks(parent,g,z):
 	for child in parent.get_children():set_check(child,g,z);update_checks(child,g,z)
+
+func draw_labels(g):
+	for z in g.world.zones:
+		if not (active(g) or details_open and z.id==selected_id) or z.cells.is_empty():continue
+		var first_visible=null
+		for p in z.cells:
+			var screen=g.get_canvas_transform()*g.center(p)
+			if Rect2(0,50,1280,690).has_point(screen):first_visible=screen;break
+		if first_visible==null:continue
+		var text=g.world.Zones.title(z);var width=g.FONT.get_string_size(text,HORIZONTAL_ALIGNMENT_LEFT,-1,14).x+16
+		var at=(first_visible+Vector2(-17,-8)).clamp(Vector2(8,76),Vector2(1272-width,725))
+		g.hud.draw_style_box(g.UI.surface(Color("f1eddb")),Rect2(at-Vector2(5,18),Vector2(width,25)))
+		g.label_on(g.hud,at,text,14,g.UI.INK)

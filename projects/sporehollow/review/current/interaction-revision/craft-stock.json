@@ -1,0 +1,165 @@
+{
+	"checks": [
+		{
+			"check": "Weed can be harvested",
+			"passed": true
+		},
+		{
+			"check": "Weed yields two physical fiber and no gold",
+			"passed": true
+		},
+		{
+			"check": "Repeated harvest cannot duplicate fiber",
+			"passed": true
+		},
+		{
+			"check": "Valid taxonomy soil",
+			"passed": true
+		},
+		{
+			"check": "Valid taxonomy stone",
+			"passed": true
+		},
+		{
+			"check": "Valid taxonomy wood",
+			"passed": true
+		},
+		{
+			"check": "Valid taxonomy fiber",
+			"passed": true
+		},
+		{
+			"check": "Valid taxonomy mushroom",
+			"passed": true
+		},
+		{
+			"check": "Valid taxonomy egg",
+			"passed": true
+		},
+		{
+			"check": "Valid taxonomy meat",
+			"passed": true
+		},
+		{
+			"check": "Valid taxonomy milk",
+			"passed": true
+		},
+		{
+			"check": "Valid taxonomy roast_mushroom",
+			"passed": true
+		},
+		{
+			"check": "Valid taxonomy egg_meal",
+			"passed": true
+		},
+		{
+			"check": "Valid taxonomy roast_meat",
+			"passed": true
+		},
+		{
+			"check": "Valid taxonomy stew",
+			"passed": true
+		},
+		{
+			"check": "Valid taxonomy dog_food",
+			"passed": true
+		},
+		{
+			"check": "Valid taxonomy hen_food",
+			"passed": true
+		},
+		{
+			"check": "Valid taxonomy cat_food",
+			"passed": true
+		},
+		{
+			"check": "Valid taxonomy wood_staff",
+			"passed": true
+		},
+		{
+			"check": "Valid taxonomy fiber_clothes",
+			"passed": true
+		},
+		{
+			"check": "Valid taxonomy collar",
+			"passed": true
+		},
+		{
+			"check": "Valid taxonomy whistle",
+			"passed": true
+		},
+		{
+			"check": "Valid taxonomy berry",
+			"passed": true
+		},
+		{
+			"check": "Valid taxonomy coffee",
+			"passed": true
+		},
+		{
+			"check": "Valid taxonomy energy_drink",
+			"passed": true
+		},
+		{
+			"check": "Valid taxonomy wood_crate",
+			"passed": true
+		},
+		{
+			"check": "Valid taxonomy wood_shelf",
+			"passed": true
+		},
+		{
+			"check": "Valid taxonomy kokeshi",
+			"passed": true
+		},
+		{
+			"check": "Valid taxonomy fossil",
+			"passed": true
+		},
+		{
+			"check": "Valid taxonomy feather",
+			"passed": true
+		},
+		{
+			"check": "Valid taxonomy skill_scroll",
+			"passed": true
+		},
+		{
+			"check": "Valid taxonomy chick",
+			"passed": true
+		},
+		{
+			"check": "Valid taxonomy kennel_plan",
+			"passed": true
+		},
+		{
+			"check": "Valid taxonomy coop_plan",
+			"passed": true
+		},
+		{
+			"check": "Main-category filter",
+			"passed": true
+		},
+		{
+			"check": "Subcategory override",
+			"passed": true
+		},
+		{
+			"check": "Individual override",
+			"passed": true
+		},
+		{
+			"check": "High-priority zone reserves remaining one of forty",
+			"passed": true
+		},
+		{
+			"check": "Reserved capacity falls back to another zone",
+			"passed": true
+		},
+		{
+			"check": "Changing filters preserves existing goods and location",
+			"passed": true
+		}
+	],
+	"failures": 0
+}

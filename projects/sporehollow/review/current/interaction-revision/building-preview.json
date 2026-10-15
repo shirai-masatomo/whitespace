@@ -1,0 +1,810 @@
+{
+	"checks": [
+		{
+			"check": "No material preview is invalid 0",
+			"passed": true
+		},
+		{
+			"check": "No material preview is invalid 1",
+			"passed": true
+		},
+		{
+			"check": "No material preview is invalid 2",
+			"passed": true
+		},
+		{
+			"check": "No material preview is invalid 3",
+			"passed": true
+		},
+		{
+			"check": "No material preview is invalid 4",
+			"passed": true
+		},
+		{
+			"check": "No material preview is invalid 5",
+			"passed": true
+		},
+		{
+			"check": "No material preview is invalid 6",
+			"passed": true
+		},
+		{
+			"check": "No material preview is invalid 7",
+			"passed": true
+		},
+		{
+			"check": "No material preview is invalid 8",
+			"passed": true
+		},
+		{
+			"check": "No material preview is invalid 9",
+			"passed": true
+		},
+		{
+			"check": "No material preview is invalid 10",
+			"passed": true
+		},
+		{
+			"check": "No material preview is invalid 11",
+			"passed": true
+		},
+		{
+			"check": "No material preview is invalid 12",
+			"passed": true
+		},
+		{
+			"check": "No material preview is invalid 13",
+			"passed": true
+		},
+		{
+			"check": "No material preview is invalid 14",
+			"passed": true
+		},
+		{
+			"check": "No material preview is invalid 15",
+			"passed": true
+		},
+		{
+			"check": "No material preview is invalid 16",
+			"passed": true
+		},
+		{
+			"check": "No material preview is invalid 17",
+			"passed": true
+		},
+		{
+			"check": "No material preview is invalid 18",
+			"passed": true
+		},
+		{
+			"check": "No material preview is invalid 19",
+			"passed": true
+		},
+		{
+			"check": "No material preview is invalid 20",
+			"passed": true
+		},
+		{
+			"check": "No material preview is invalid 21",
+			"passed": true
+		},
+		{
+			"check": "No material preview is invalid 22",
+			"passed": true
+		},
+		{
+			"check": "No material preview is invalid 23",
+			"passed": true
+		},
+		{
+			"check": "No material preview is invalid 24",
+			"passed": true
+		},
+		{
+			"check": "No material preview is invalid 25",
+			"passed": true
+		},
+		{
+			"check": "No material preview is invalid 26",
+			"passed": true
+		},
+		{
+			"check": "No material preview is invalid 27",
+			"passed": true
+		},
+		{
+			"check": "No material preview is invalid 28",
+			"passed": true
+		},
+		{
+			"check": "No material preview is invalid 29",
+			"passed": true
+		},
+		{
+			"check": "Hover emits no player log",
+			"passed": true
+		},
+		{
+			"check": "Confirm rejects with material name, cost and available amount",
+			"passed": true
+		},
+		{
+			"check": "Failed confirmation adds no designation",
+			"passed": true
+		},
+		{
+			"check": "Debug button accepts one explicit refill",
+			"passed": true
+		},
+		{
+			"check": "Refill creates 40 physical units of each existing resource",
+			"passed": true
+		},
+		{
+			"check": "Refill remains inside storage and capacity40",
+			"passed": true
+		},
+		{
+			"check": "Refill invalidates cached shortage preview immediately",
+			"passed": true
+		},
+		{
+			"check": "Same wooden wall accepted after refill",
+			"passed": true
+		},
+		{
+			"check": "Reservation claims five physical units without consuming them",
+			"passed": true
+		},
+		{
+			"check": "Real delivery and assembly finish the designated wall",
+			"passed": true
+		},
+		{
+			"check": "Exactly five units consumed after completion",
+			"passed": true
+		},
+		{
+			"check": "No automatic refill across simulation ticks",
+			"passed": true
+		},
+		{
+			"check": "Removed infinite-material action cannot bypass inventory",
+			"passed": true
+		},
+		{
+			"check": "Drag budget accepts affordable subset, rejects the rest",
+			"passed": true
+		},
+		{
+			"check": "Commit has same budget and no double reservation",
+			"passed": true
+		},
+		{
+			"check": "One deduplicated reason plus batch counts, not one log per rejected cell",
+			"passed": true
+		},
+		{
+			"check": "Other consumers cannot spend claimed stock",
+			"passed": true
+		},
+		{
+			"check": "Cancelling an unstarted plan releases its claim without loss",
+			"passed": true
+		},
+		{
+			"check": "Unstored resources do not fund construction",
+			"passed": true
+		},
+		{
+			"check": "Forbidden stock cannot fund construction",
+			"passed": true
+		},
+		{
+			"check": "Existing designation survives later shortage",
+			"passed": true
+		},
+		{
+			"check": "Actual rock collision reason takes precedence over material reason",
+			"passed": true
+		},
+		{
+			"check": "Collision rejection reaches player log on confirm",
+			"passed": true
+		},
+		{
+			"check": "Disabled/blueprint building remains unavailable",
+			"passed": true
+		},
+		{
+			"check": "Furniture can reserve a stored completed item",
+			"passed": true
+		},
+		{
+			"check": "Same furniture cannot be reserved twice",
+			"passed": true
+		},
+		{
+			"check": "Building cannot overlap an already planned furniture item",
+			"passed": true
+		},
+		{
+			"check": "Reserved furniture reaches completed placement",
+			"passed": true
+		},
+		{
+			"check": "Placed furniture is no longer available",
+			"passed": true
+		},
+		{
+			"check": "Delivery claims replace, rather than add to, plan claims",
+			"passed": true
+		},
+		{
+			"check": "Interrupted fetch restores physical plan claim",
+			"passed": true
+		},
+		{
+			"check": "Cancellation fixture reaches real carried materials",
+			"passed": true
+		},
+		{
+			"check": "In-transit cancellation preserves physical total and releases all claims",
+			"passed": true
+		},
+		{
+			"check": "Unfunded pre-existing reservation is deducted from new budget",
+			"passed": true
+		},
+		{
+			"check": "Existing reservations cannot be displaced by newly accepted jobs",
+			"passed": true
+		},
+		{
+			"check": "Dropped construction cargo cannot fund another site even inside storage",
+			"passed": true
+		},
+		{
+			"check": "Replacement source releases old physical claim; never reserves twice the requirement",
+			"passed": true
+		},
+		{
+			"check": "No storage: no spawn, full shortfall",
+			"passed": true
+		},
+		{
+			"check": "No storage explanation in log",
+			"passed": true
+		},
+		{
+			"check": "One space: partial refill one, never overflow or fallback",
+			"passed": true
+		},
+		{
+			"check": "Repeated refill on full storage adds nothing",
+			"passed": true
+		},
+		{
+			"check": "All-deny filter respected",
+			"passed": true
+		},
+		{
+			"check": "Individual item filter respected",
+			"passed": true
+		},
+		{
+			"check": "High-priority storage wins before nearer ordinary storage",
+			"passed": true
+		},
+		{
+			"check": "In-flight hauling capacity reservations are respected",
+			"passed": true
+		},
+		{
+			"check": "Normal gameplay cannot use debug refill",
+			"passed": true
+		},
+		{
+			"check": "Real material budget supports 10 designations",
+			"passed": true
+		},
+		{
+			"check": "Physical reservations remain exact for 10 jobs",
+			"passed": true
+		},
+		{
+			"check": "Real material budget supports 50 designations",
+			"passed": true
+		},
+		{
+			"check": "Physical reservations remain exact for 50 jobs",
+			"passed": true
+		},
+		{
+			"check": "Real material budget supports 100 designations",
+			"passed": true
+		},
+		{
+			"check": "Physical reservations remain exact for 100 jobs",
+			"passed": true
+		},
+		{
+			"check": "101st job refused despite sufficient material",
+			"passed": true
+		},
+		{
+			"check": "wall true uses existing translucent art",
+			"passed": true
+		},
+		{
+			"check": "wall true prohibition mark correct",
+			"passed": true
+		},
+		{
+			"check": "wall false uses existing translucent art",
+			"passed": true
+		},
+		{
+			"check": "wall false prohibition mark correct",
+			"passed": true
+		},
+		{
+			"check": "wood_wall true uses existing translucent art",
+			"passed": true
+		},
+		{
+			"check": "wood_wall true prohibition mark correct",
+			"passed": true
+		},
+		{
+			"check": "wood_wall false uses existing translucent art",
+			"passed": true
+		},
+		{
+			"check": "wood_wall false prohibition mark correct",
+			"passed": true
+		},
+		{
+			"check": "stone_wall true uses existing translucent art",
+			"passed": true
+		},
+		{
+			"check": "stone_wall true prohibition mark correct",
+			"passed": true
+		},
+		{
+			"check": "stone_wall false uses existing translucent art",
+			"passed": true
+		},
+		{
+			"check": "stone_wall false prohibition mark correct",
+			"passed": true
+		},
+		{
+			"check": "door true uses existing translucent art",
+			"passed": true
+		},
+		{
+			"check": "door true prohibition mark correct",
+			"passed": true
+		},
+		{
+			"check": "door false uses existing translucent art",
+			"passed": true
+		},
+		{
+			"check": "door false prohibition mark correct",
+			"passed": true
+		},
+		{
+			"check": "locked_door true uses existing translucent art",
+			"passed": true
+		},
+		{
+			"check": "locked_door true prohibition mark correct",
+			"passed": true
+		},
+		{
+			"check": "locked_door false uses existing translucent art",
+			"passed": true
+		},
+		{
+			"check": "locked_door false prohibition mark correct",
+			"passed": true
+		},
+		{
+			"check": "soil_tile true uses existing translucent art",
+			"passed": true
+		},
+		{
+			"check": "soil_tile true prohibition mark correct",
+			"passed": true
+		},
+		{
+			"check": "soil_tile false uses existing translucent art",
+			"passed": true
+		},
+		{
+			"check": "soil_tile false prohibition mark correct",
+			"passed": true
+		},
+		{
+			"check": "wood_tile true uses existing translucent art",
+			"passed": true
+		},
+		{
+			"check": "wood_tile true prohibition mark correct",
+			"passed": true
+		},
+		{
+			"check": "wood_tile false uses existing translucent art",
+			"passed": true
+		},
+		{
+			"check": "wood_tile false prohibition mark correct",
+			"passed": true
+		},
+		{
+			"check": "stone_tile true uses existing translucent art",
+			"passed": true
+		},
+		{
+			"check": "stone_tile true prohibition mark correct",
+			"passed": true
+		},
+		{
+			"check": "stone_tile false uses existing translucent art",
+			"passed": true
+		},
+		{
+			"check": "stone_tile false prohibition mark correct",
+			"passed": true
+		},
+		{
+			"check": "cooking_bench true uses existing translucent art",
+			"passed": true
+		},
+		{
+			"check": "cooking_bench true prohibition mark correct",
+			"passed": true
+		},
+		{
+			"check": "cooking_bench false uses existing translucent art",
+			"passed": true
+		},
+		{
+			"check": "cooking_bench false prohibition mark correct",
+			"passed": true
+		},
+		{
+			"check": "carpentry_bench true uses existing translucent art",
+			"passed": true
+		},
+		{
+			"check": "carpentry_bench true prohibition mark correct",
+			"passed": true
+		},
+		{
+			"check": "carpentry_bench false uses existing translucent art",
+			"passed": true
+		},
+		{
+			"check": "carpentry_bench false prohibition mark correct",
+			"passed": true
+		},
+		{
+			"check": "sewing_bench true uses existing translucent art",
+			"passed": true
+		},
+		{
+			"check": "sewing_bench true prohibition mark correct",
+			"passed": true
+		},
+		{
+			"check": "sewing_bench false uses existing translucent art",
+			"passed": true
+		},
+		{
+			"check": "sewing_bench false prohibition mark correct",
+			"passed": true
+		},
+		{
+			"check": "place_wood_crate true uses existing translucent art",
+			"passed": true
+		},
+		{
+			"check": "place_wood_crate true prohibition mark correct",
+			"passed": true
+		},
+		{
+			"check": "place_wood_crate false uses existing translucent art",
+			"passed": true
+		},
+		{
+			"check": "place_wood_crate false prohibition mark correct",
+			"passed": true
+		},
+		{
+			"check": "place_wood_shelf true uses existing translucent art",
+			"passed": true
+		},
+		{
+			"check": "place_wood_shelf true prohibition mark correct",
+			"passed": true
+		},
+		{
+			"check": "place_wood_shelf false uses existing translucent art",
+			"passed": true
+		},
+		{
+			"check": "place_wood_shelf false prohibition mark correct",
+			"passed": true
+		},
+		{
+			"check": "place_kokeshi true uses existing translucent art",
+			"passed": true
+		},
+		{
+			"check": "place_kokeshi true prohibition mark correct",
+			"passed": true
+		},
+		{
+			"check": "place_kokeshi false uses existing translucent art",
+			"passed": true
+		},
+		{
+			"check": "place_kokeshi false prohibition mark correct",
+			"passed": true
+		},
+		{
+			"check": "place_fossil true uses existing translucent art",
+			"passed": true
+		},
+		{
+			"check": "place_fossil true prohibition mark correct",
+			"passed": true
+		},
+		{
+			"check": "place_fossil false uses existing translucent art",
+			"passed": true
+		},
+		{
+			"check": "place_fossil false prohibition mark correct",
+			"passed": true
+		},
+		{
+			"check": "Official completed and ghost image/anchor identical: cooking_bench",
+			"passed": true
+		},
+		{
+			"check": "Official art uses footprint-matched anchor: cooking_bench",
+			"passed": true
+		},
+		{
+			"check": "Official completed and ghost image/anchor identical: carpentry_bench",
+			"passed": true
+		},
+		{
+			"check": "Official art uses footprint-matched anchor: carpentry_bench",
+			"passed": true
+		},
+		{
+			"check": "Official completed and ghost image/anchor identical: sewing_bench",
+			"passed": true
+		},
+		{
+			"check": "Official art uses footprint-matched anchor: sewing_bench",
+			"passed": true
+		},
+		{
+			"check": "Official completed and ghost image/anchor identical: wood_crate",
+			"passed": true
+		},
+		{
+			"check": "Official art uses footprint-matched anchor: wood_crate",
+			"passed": true
+		},
+		{
+			"check": "Official completed and ghost image/anchor identical: wood_shelf",
+			"passed": true
+		},
+		{
+			"check": "Official art uses footprint-matched anchor: wood_shelf",
+			"passed": true
+		},
+		{
+			"check": "All 16 wall connections including corners/cross 0",
+			"passed": true
+		},
+		{
+			"check": "Completed wall and ghost texture/anchor identical 0",
+			"passed": true
+		},
+		{
+			"check": "All 16 wall connections including corners/cross 1",
+			"passed": true
+		},
+		{
+			"check": "Completed wall and ghost texture/anchor identical 1",
+			"passed": true
+		},
+		{
+			"check": "All 16 wall connections including corners/cross 2",
+			"passed": true
+		},
+		{
+			"check": "Completed wall and ghost texture/anchor identical 2",
+			"passed": true
+		},
+		{
+			"check": "All 16 wall connections including corners/cross 3",
+			"passed": true
+		},
+		{
+			"check": "Completed wall and ghost texture/anchor identical 3",
+			"passed": true
+		},
+		{
+			"check": "All 16 wall connections including corners/cross 4",
+			"passed": true
+		},
+		{
+			"check": "Completed wall and ghost texture/anchor identical 4",
+			"passed": true
+		},
+		{
+			"check": "All 16 wall connections including corners/cross 5",
+			"passed": true
+		},
+		{
+			"check": "Completed wall and ghost texture/anchor identical 5",
+			"passed": true
+		},
+		{
+			"check": "All 16 wall connections including corners/cross 6",
+			"passed": true
+		},
+		{
+			"check": "Completed wall and ghost texture/anchor identical 6",
+			"passed": true
+		},
+		{
+			"check": "All 16 wall connections including corners/cross 7",
+			"passed": true
+		},
+		{
+			"check": "Completed wall and ghost texture/anchor identical 7",
+			"passed": true
+		},
+		{
+			"check": "All 16 wall connections including corners/cross 8",
+			"passed": true
+		},
+		{
+			"check": "Completed wall and ghost texture/anchor identical 8",
+			"passed": true
+		},
+		{
+			"check": "All 16 wall connections including corners/cross 9",
+			"passed": true
+		},
+		{
+			"check": "Completed wall and ghost texture/anchor identical 9",
+			"passed": true
+		},
+		{
+			"check": "All 16 wall connections including corners/cross 10",
+			"passed": true
+		},
+		{
+			"check": "Completed wall and ghost texture/anchor identical 10",
+			"passed": true
+		},
+		{
+			"check": "All 16 wall connections including corners/cross 11",
+			"passed": true
+		},
+		{
+			"check": "Completed wall and ghost texture/anchor identical 11",
+			"passed": true
+		},
+		{
+			"check": "All 16 wall connections including corners/cross 12",
+			"passed": true
+		},
+		{
+			"check": "Completed wall and ghost texture/anchor identical 12",
+			"passed": true
+		},
+		{
+			"check": "All 16 wall connections including corners/cross 13",
+			"passed": true
+		},
+		{
+			"check": "Completed wall and ghost texture/anchor identical 13",
+			"passed": true
+		},
+		{
+			"check": "All 16 wall connections including corners/cross 14",
+			"passed": true
+		},
+		{
+			"check": "Completed wall and ghost texture/anchor identical 14",
+			"passed": true
+		},
+		{
+			"check": "All 16 wall connections including corners/cross 15",
+			"passed": true
+		},
+		{
+			"check": "Completed wall and ghost texture/anchor identical 15",
+			"passed": true
+		},
+		{
+			"check": "Planned and dragged neighbors both connect",
+			"passed": true
+		},
+		{
+			"check": "Unchanged adjacency not rebuilt across 120 frames",
+			"passed": true
+		},
+		{
+			"check": "Floor preview hides common internal edge",
+			"passed": true
+		},
+		{
+			"check": "Production UI initializes without opening a game window",
+			"passed": true
+		},
+		{
+			"check": "Architect tooltip explains shortage rejection",
+			"passed": true
+		},
+		{
+			"check": "Debug UI contains refill instead of infinite toggle",
+			"passed": true
+		},
+		{
+			"check": "Debug button has requested label",
+			"passed": true
+		},
+		{
+			"check": "Actual UI button creates physical resources",
+			"passed": true
+		},
+		{
+			"check": "World mouse press arms construction ghost gesture",
+			"passed": true
+		},
+		{
+			"check": "World release commits through shared budget validation",
+			"passed": true
+		},
+		{
+			"check": "Confirmed ghost remains selectable as original construction site",
+			"passed": true
+		},
+		{
+			"check": "Existing site panel distinguishes reservation from delivery",
+			"passed": true
+		}
+	],
+	"failures": 0,
+	"timings": [
+		{
+			"commit_ms": 3.549,
+			"jobs": 10,
+			"preview_ms": 0.426
+		},
+		{
+			"commit_ms": 13.995,
+			"jobs": 50,
+			"preview_ms": 1.389
+		},
+		{
+			"commit_ms": 28.858,
+			"jobs": 100,
+			"preview_ms": 2.783
+		}
+	]
+}

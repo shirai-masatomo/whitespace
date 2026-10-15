@@ -267,17 +267,19 @@ static func door_layer(game,p: Vector2,b: Dictionary,layer: String):
 	var direction="vertical" if int(bool(mask&1))+int(bool(mask&4))>int(bool(mask&2))+int(bool(mask&8)) else "horizontal"
 	var root="door/"+direction+"_"
 	var at=(p-Vector2(24,34)).round()
-	if layer!="leaf":draw_outer_wall(game,TEXTURES[root+layer+".png"],at,tint);return
+	if layer!="leaf":game.draw_texture(TEXTURES[root+layer+".png"],at,tint);return
 	var state="open" if b.open else "closed"
-	draw_outer_wall(game,TEXTURES[root+"leaf_"+state+("_damaged.png" if b.hp<=b.max_hp*0.5 else "_normal.png")],at,tint)
-	if b.kind=="locked_door":draw_outer_wall(game,TEXTURES[root+"lock_"+state+("_broken.png" if b.get("lock_hp",0)<=0 else "_normal.png")],at,tint)
+	game.draw_texture(TEXTURES[root+"leaf_"+state+("_damaged.png" if b.hp<=b.max_hp*0.5 else "_normal.png")],at,tint)
+	if b.kind=="locked_door":game.draw_texture(TEXTURES[root+"lock_"+state+("_broken.png" if b.get("lock_hp",0)<=0 else "_normal.png")],at,tint)
 	if b.hp<b.max_hp:game.draw_rect(Rect2(p+Vector2(-18,19),Vector2(36.0*b.hp/b.max_hp,3)),Color("ebc171"))
 
 
 
 static func bench(game,p:Vector2,kind:String,tint:Color=Color.WHITE):
 	# 48x48 original, anchor(24,44), foot at cell center+(0,21).
-	game.draw_texture(FURNITURE_WORLD[kind],(p+Vector2(-24,-23)).round(),tint)
+	if kind in ["cooking_bench","carpentry_bench","sewing_bench"]:
+		game.draw_texture_rect(FURNITURE_WORLD[kind],Rect2((p+Vector2(-24,-25)).round(),Vector2(96,88)),false,tint)
+	else:game.draw_texture(FURNITURE_WORLD[kind],(p+Vector2(-24,-23)).round(),tint)
 
 static func placeable(game,p:Vector2,kind:String,tint:Color=Color.WHITE):
 	var assets=preload("res://game/direction_art.gd").ASSETS

@@ -23,7 +23,7 @@ static func build(g):
 		button(g,"menu_exit","終了",Rect2(400,444,480,44),g.notification.bind(g.NOTIFICATION_WM_CLOSE_REQUEST))
 		var boundary=label(g.menu,"現在は保存機能がありません。\n終了すると次回は新しい牧場から始まります。",Vector2(400,514),17,480);boundary.name="SessionOnlyNote"
 	elif g.menu_page=="help":
-		var guide=label(g.menu,"左クリック：選択・指定\n右クリック：選択解除。取消は命令のキャンセル\n未選択で左ドラッグ：同じ分類を複数選択（8対象まで）\nWASD：地図移動\n未選択のホイール / Ctrl＋ホイール：ズーム\nTab：モード　Shift：指示する動物\n命令のホイール：6種類を巡回（Ctrlはズーム）\n建築・命令・ゾーン：クリックまたは範囲指定\n徴兵：地面で移動。対象を選んで「攻撃」。通常仕事は保留\nSpace：停止／再開\n1 / 2 / 3：0.5 / 1 / 2倍　4：休息中のみ4倍\n＋ / ＝ / テンキー＋：速く　− / テンキー−：遅く",Vector2(330,230),19,640);guide.name="ControlGuide";guide.size.y=420
+		var guide=label(g.menu,"左クリック：選択・指定\n右クリック：選択解除。取消は命令のキャンセル\n未選択で左ドラッグ：同じ分類を複数選択（8対象まで）\nWASD：地図移動\nホイール：ズーム / Ctrl＋ホイール：操作切替\nTab：モード　Shift：指示する動物\nE：主要作業 / X：選択した予定の取消・建物の解体\n建築・命令・ゾーン：クリックまたは範囲指定\n徴兵：地面で移動。対象を選んで「攻撃」。通常仕事は保留\nSpace：停止／再開\n1 / 2 / 3：1 / 2 / 3倍（一時停止中も選択可）\n＋ / ＝ / テンキー＋：速く　− / テンキー−：遅く",Vector2(330,230),19,640);guide.name="ControlGuide";guide.size.y=420
 	elif g.menu_page=="version":
 		var m=JSON.parse_string(FileAccess.get_file_as_string("res://game/build_stamp.json")) if FileAccess.file_exists("res://game/build_stamp.json") else {}
 		label(g.menu,"ホイッスル牧場・開発版\n\n本体 "+str(m.get("commit","未記録")).left(8)+"\n素材 "+str(m.get("asset_delivery_commit","未記録")).left(8)+"\n\n調整中の仕様と未確認範囲は試遊の報告書へ記録しています。",Vector2(330,240),20,640)

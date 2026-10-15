@@ -461,10 +461,11 @@ func walkable(p: Vector2i) -> bool:
 	return inside(p) and not Story.terrain_block(self,p) and (not blocks(p) or (structures.get(p,{}).get("kind") in Buildings.DOORS))
 
 func blocks(p: Vector2i) -> bool:
-	return structures.has(p) and structures[p].status == "ready" and structures[p].kind not in ["kennel", "coop"] and not structures[p].open
+	var b=structures.get(Buildings.anchor(self,p),{})
+	return b.get("status") in ["ready","building"] and (b.get("status")=="ready" or b.get("kind") in Buildings.BENCHES) and b.get("kind") not in ["kennel","coop"] and not b.get("open",false)
 
 func live_structure(p: Vector2i) -> bool:
-	return structures.has(p) and structures[p].status in ["ready", "building"]
+	return structures.get(Buildings.anchor(self,p),{}).get("status") in ["ready","building"]
 
 func occupied(p: Vector2i) -> bool:
 	return workers.values().any(func(a):return a.get("placed",false) and a.pos==p and not a.get("dead",false)) or (keeper.placed and p == keeper.pos) or animals.any(func(a): return a.placed and a.pos == p) or enemies.any(func(e): return not e.done and e.hp>0 and e.pos == p) or foods.any(func(f): return f.pos == p)
@@ -525,7 +526,7 @@ func find_path(start: Vector2i, goal: Vector2i, raider: bool = false, avoid_acto
 			var blocked = blocks(n)
 			if blocked and not raider and (structures.get(n,{}).get("kind") not in Buildings.DOORS or enemy_rules and structures[n].get("lock_hp",0)>0): continue
 			# Compare walking actions with the actual number of object attacks needed.
-			var value: float = cost[p] + 1.0 + maxf(0.0,route_costs.get(n,0.0)) + (ceilf(float(structures[n].hp) / Rules.KIDNAPPER.object_attack_power) if blocked else 0)
+			var value: float = cost[p] + 1.0 + maxf(0.0,route_costs.get(n,0.0)) + (ceilf(float(structures[Buildings.anchor(self,n)].hp) / Rules.KIDNAPPER.object_attack_power) if blocked else 0)
 			if not cost.has(n) or value < cost[n]:
 				cost[n] = value
 				previous[n] = p
@@ -1017,16 +1018,16 @@ func move_enemy(e: Dictionary, next: Vector2i,goal=null):
 		if route.size()<2 or actor_occupied(route[1],e.pos):return
 		next=route[1]
 	if blocks(next) and e.get("archetype","kidnapper")!="kidnapper":
-		var obstacle=structures[next]
+		var obstacle=structures[Buildings.anchor(self,next)]
 		var attack_needed=obstacle.kind not in Buildings.DOORS or obstacle.get("lock_hp",0)>0
 		if attack_needed:
 			if not Progression.Targets.can_damage_object(self,e) or tick<e.next_attack: return
 			e.next_attack=tick+ceili(e.attack_interval/DT)
 			e.observed_action=true
-	if blocks(next) and (structures[next].kind not in Buildings.DOORS or structures[next].get("lock_hp",0)>0):
+	if blocks(next) and (structures[Buildings.anchor(self,next)].kind not in Buildings.DOORS or structures[Buildings.anchor(self,next)].get("lock_hp",0)>0):
 		if not Combat.pay(e,"attack"): e.state="息を整える"; return
 	if blocks(next) and structures.get(next,{}).get("kind") in Buildings.DOORS:
-		var door=structures[next]
+		var door=structures[Buildings.anchor(self,next)]
 		if door.get("lock_hp",0)>0:
 			door.lock_hp=maxi(0,door.lock_hp-e.object_attack_power)
 			if door.lock_hp==0:invalidate_navigation()
@@ -1037,7 +1038,7 @@ func move_enemy(e: Dictionary, next: Vector2i,goal=null):
 		e.state="ドアを開ける"
 		return
 	if blocks(next):
-		var b = structures[next]
+		var b = structures[Buildings.anchor(self,next)]
 		var damage = maxi(0, e.object_attack_power - b.armor)
 		var applied = mini(b.hp, damage)
 		b.hp -= applied
@@ -1548,6 +1549,7 @@ func line_of_sight(from: Vector2i, to: Vector2i, target_surface: bool=false) -> 
 	return true
 
 func blocks_sight(p: Vector2i) -> bool:
+	p=Buildings.anchor(self,p)
 	if Story.terrain_block(self,p): return true
 	if not structures.has(p) or structures[p].status != "ready": return false
 	var b = structures[p]

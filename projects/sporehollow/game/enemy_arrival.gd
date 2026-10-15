@@ -85,7 +85,7 @@ static func step(w,e) -> bool:
 	if w.tick<e.get("arrival_retry_tick",0):e.state="入口を探す";return true
 	var blocked=route.size()>1 and (w.actor_occupied(route[1],e.pos) or w.Story.terrain_block(w,route[1]))
 	if route.size()>1 and w.blocks(route[1]):
-		var obstacle=w.structures[route[1]]
+		var obstacle=w.structures[w.Buildings.anchor(w,route[1])]
 		var cannot_break=not w.Progression.Targets.can_damage_object(w,e) and (obstacle.kind not in w.Buildings.DOORS or obstacle.get("lock_hp",0)>0)
 		blocked=blocked or cannot_break or e.get("arrival_barriers",{}).get(route[1],-1)!=obstacle.id
 	e.arrival_blocked_ticks=e.get("arrival_blocked_ticks",0)+1 if blocked else 0
@@ -98,7 +98,7 @@ static func step(w,e) -> bool:
 			e.arrival_gate=plan.gate;e.arrival_last_gate=plan.gate
 			e.arrival_barriers={}
 			for cell in route:
-				if w.blocks(cell):e.arrival_barriers[cell]=w.structures[cell].id
+				if w.blocks(cell):e.arrival_barriers[cell]=w.structures[w.Buildings.anchor(w,cell)].id
 			e.arrival_plans=e.get("arrival_plans",0)+1;e.arrival_blocked_ticks=0
 			e.arrival_observation={"tick":w.tick,"goal":plan.goal,"score":plan.score,"candidates":plan.candidates,"scouting":plan.scouting,"from":e.pos,"sight":e.sight_range}
 		else:

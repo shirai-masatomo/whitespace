@@ -1,0 +1,525 @@
+{
+	"checks": [
+		{
+			"check": "Shared cross has dark/light/red layers and partial dot",
+			"passed": true
+		},
+		{
+			"check": "Cross remains seven pixels thick at zoom 0.25",
+			"passed": true
+		},
+		{
+			"check": "Shared cross has dark/light/red layers and partial dot",
+			"passed": true
+		},
+		{
+			"check": "Cross remains seven pixels thick at zoom 0.25",
+			"passed": true
+		},
+		{
+			"check": "Shared cross has dark/light/red layers and partial dot",
+			"passed": true
+		},
+		{
+			"check": "Cross remains seven pixels thick at zoom 0.5",
+			"passed": true
+		},
+		{
+			"check": "Shared cross has dark/light/red layers and partial dot",
+			"passed": true
+		},
+		{
+			"check": "Cross remains seven pixels thick at zoom 0.5",
+			"passed": true
+		},
+		{
+			"check": "Shared cross has dark/light/red layers and partial dot",
+			"passed": true
+		},
+		{
+			"check": "Cross remains seven pixels thick at zoom 1.0",
+			"passed": true
+		},
+		{
+			"check": "Shared cross has dark/light/red layers and partial dot",
+			"passed": true
+		},
+		{
+			"check": "Cross remains seven pixels thick at zoom 1.0",
+			"passed": true
+		},
+		{
+			"check": "Shared cross has dark/light/red layers and partial dot",
+			"passed": true
+		},
+		{
+			"check": "Cross remains seven pixels thick at zoom 1.5",
+			"passed": true
+		},
+		{
+			"check": "Shared cross has dark/light/red layers and partial dot",
+			"passed": true
+		},
+		{
+			"check": "Cross remains seven pixels thick at zoom 1.5",
+			"passed": true
+		},
+		{
+			"check": "Four-cell footprint cooking_bench",
+			"passed": true
+		},
+		{
+			"check": "Eight external work goals cooking_bench",
+			"passed": true
+		},
+		{
+			"check": "Every covered tree blocks cooking_bench",
+			"passed": true
+		},
+		{
+			"check": "Every covered tree blocks cooking_bench",
+			"passed": true
+		},
+		{
+			"check": "Every covered tree blocks cooking_bench",
+			"passed": true
+		},
+		{
+			"check": "Every covered tree blocks cooking_bench",
+			"passed": true
+		},
+		{
+			"check": "Bench accepted once cooking_bench",
+			"passed": true
+		},
+		{
+			"check": "Planned footprint blocks child overlap",
+			"passed": true
+		},
+		{
+			"check": "Planned bench also rejects overlapping floor plan",
+			"passed": true
+		},
+		{
+			"check": "Cancel from covered child cell",
+			"passed": true
+		},
+		{
+			"check": "Completed footprint blocked and resolves anchor",
+			"passed": true
+		},
+		{
+			"check": "Completed footprint blocked and resolves anchor",
+			"passed": true
+		},
+		{
+			"check": "Completed footprint blocked and resolves anchor",
+			"passed": true
+		},
+		{
+			"check": "Completed footprint blocked and resolves anchor",
+			"passed": true
+		},
+		{
+			"check": "Raider collision resolves covered cell",
+			"passed": true
+		},
+		{
+			"check": "Raider collision resolves covered cell",
+			"passed": true
+		},
+		{
+			"check": "Raider collision resolves covered cell",
+			"passed": true
+		},
+		{
+			"check": "Raider collision resolves covered cell",
+			"passed": true
+		},
+		{
+			"check": "Demolition resolves same bench",
+			"passed": true
+		},
+		{
+			"check": "Single target identity",
+			"passed": true
+		},
+		{
+			"check": "Four-cell footprint carpentry_bench",
+			"passed": true
+		},
+		{
+			"check": "Eight external work goals carpentry_bench",
+			"passed": true
+		},
+		{
+			"check": "Every covered tree blocks carpentry_bench",
+			"passed": true
+		},
+		{
+			"check": "Every covered tree blocks carpentry_bench",
+			"passed": true
+		},
+		{
+			"check": "Every covered tree blocks carpentry_bench",
+			"passed": true
+		},
+		{
+			"check": "Every covered tree blocks carpentry_bench",
+			"passed": true
+		},
+		{
+			"check": "Bench accepted once carpentry_bench",
+			"passed": true
+		},
+		{
+			"check": "Planned footprint blocks child overlap",
+			"passed": true
+		},
+		{
+			"check": "Planned bench also rejects overlapping floor plan",
+			"passed": true
+		},
+		{
+			"check": "Cancel from covered child cell",
+			"passed": true
+		},
+		{
+			"check": "Completed footprint blocked and resolves anchor",
+			"passed": true
+		},
+		{
+			"check": "Completed footprint blocked and resolves anchor",
+			"passed": true
+		},
+		{
+			"check": "Completed footprint blocked and resolves anchor",
+			"passed": true
+		},
+		{
+			"check": "Completed footprint blocked and resolves anchor",
+			"passed": true
+		},
+		{
+			"check": "Raider collision resolves covered cell",
+			"passed": true
+		},
+		{
+			"check": "Raider collision resolves covered cell",
+			"passed": true
+		},
+		{
+			"check": "Raider collision resolves covered cell",
+			"passed": true
+		},
+		{
+			"check": "Raider collision resolves covered cell",
+			"passed": true
+		},
+		{
+			"check": "Demolition resolves same bench",
+			"passed": true
+		},
+		{
+			"check": "Single target identity",
+			"passed": true
+		},
+		{
+			"check": "Four-cell footprint sewing_bench",
+			"passed": true
+		},
+		{
+			"check": "Eight external work goals sewing_bench",
+			"passed": true
+		},
+		{
+			"check": "Every covered tree blocks sewing_bench",
+			"passed": true
+		},
+		{
+			"check": "Every covered tree blocks sewing_bench",
+			"passed": true
+		},
+		{
+			"check": "Every covered tree blocks sewing_bench",
+			"passed": true
+		},
+		{
+			"check": "Every covered tree blocks sewing_bench",
+			"passed": true
+		},
+		{
+			"check": "Bench accepted once sewing_bench",
+			"passed": true
+		},
+		{
+			"check": "Planned footprint blocks child overlap",
+			"passed": true
+		},
+		{
+			"check": "Planned bench also rejects overlapping floor plan",
+			"passed": true
+		},
+		{
+			"check": "Cancel from covered child cell",
+			"passed": true
+		},
+		{
+			"check": "Completed footprint blocked and resolves anchor",
+			"passed": true
+		},
+		{
+			"check": "Completed footprint blocked and resolves anchor",
+			"passed": true
+		},
+		{
+			"check": "Completed footprint blocked and resolves anchor",
+			"passed": true
+		},
+		{
+			"check": "Completed footprint blocked and resolves anchor",
+			"passed": true
+		},
+		{
+			"check": "Raider collision resolves covered cell",
+			"passed": true
+		},
+		{
+			"check": "Raider collision resolves covered cell",
+			"passed": true
+		},
+		{
+			"check": "Raider collision resolves covered cell",
+			"passed": true
+		},
+		{
+			"check": "Raider collision resolves covered cell",
+			"passed": true
+		},
+		{
+			"check": "Demolition resolves same bench",
+			"passed": true
+		},
+		{
+			"check": "Single target identity",
+			"passed": true
+		},
+		{
+			"check": "Last wall cannot trap worker inside",
+			"passed": true
+		},
+		{
+			"check": "Inside construction goal excluded",
+			"passed": true
+		},
+		{
+			"check": "Outside worker can close empty room",
+			"passed": true
+		},
+		{
+			"check": "Outside builder cannot seal a second worker inside",
+			"passed": true
+		},
+		{
+			"check": "Merchant inside prevents sealing",
+			"passed": true
+		},
+		{
+			"check": "Usable door preserves escape",
+			"passed": true
+		},
+		{
+			"check": "Physical two-by-two bench reservation",
+			"passed": true
+		},
+		{
+			"check": "Actual delivery and assembly finish outside two-by-two footprint",
+			"passed": true
+		},
+		{
+			"check": "Bench cost unchanged and consumed once",
+			"passed": true
+		},
+		{
+			"check": "Craft from covered child resolves facility",
+			"passed": true
+		},
+		{
+			"check": "Actual worker fetches ingredients and produces at expanded bench",
+			"passed": true
+		},
+		{
+			"check": "Craft consumes exact physical ingredients",
+			"passed": true
+		},
+		{
+			"check": "Craft output appears outside equipment footprint",
+			"passed": true
+		},
+		{
+			"check": "Build plan next to waiting merchant accepted",
+			"passed": true
+		},
+		{
+			"check": "Merchant relocates when a neighboring plan is added",
+			"passed": true
+		},
+		{
+			"check": "New waiting point avoids plans, buildings and zones",
+			"passed": true
+		},
+		{
+			"check": "Bounded return prevents endless merchant stay",
+			"passed": true
+		},
+		{
+			"check": "Headless production UI initializes",
+			"passed": true
+		},
+		{
+			"check": "Speed selectable while paused",
+			"passed": true
+		},
+		{
+			"check": "Speed selectable while paused",
+			"passed": true
+		},
+		{
+			"check": "Speed selectable while paused",
+			"passed": true
+		},
+		{
+			"check": "Speed cycles 3 to 1",
+			"passed": true
+		},
+		{
+			"check": "Equipment click opens individual context",
+			"passed": true
+		},
+		{
+			"check": "E opens crafting for correct bench",
+			"passed": true
+		},
+		{
+			"check": "Resource menu forbids physical stock",
+			"passed": true
+		},
+		{
+			"check": "Forbidden selection offers Allow",
+			"passed": true
+		},
+		{
+			"check": "Allow restores existing same physical item",
+			"passed": true
+		},
+		{
+			"check": "Crown click finds tree without image readback",
+			"passed": true
+		},
+		{
+			"check": "Two-by-two object appears only once in range catalogue",
+			"passed": true
+		},
+		{
+			"check": "Ordinary wheel zooms in mode -1",
+			"passed": true
+		},
+		{
+			"check": "Control wheel does not zoom in mode -1",
+			"passed": true
+		},
+		{
+			"check": "Ordinary wheel zooms in mode 0",
+			"passed": true
+		},
+		{
+			"check": "Control wheel does not zoom in mode 0",
+			"passed": true
+		},
+		{
+			"check": "Ordinary wheel zooms in mode 1",
+			"passed": true
+		},
+		{
+			"check": "Control wheel does not zoom in mode 1",
+			"passed": true
+		},
+		{
+			"check": "Ordinary wheel zooms in mode 2",
+			"passed": true
+		},
+		{
+			"check": "Control wheel does not zoom in mode 2",
+			"passed": true
+		},
+		{
+			"check": "Ordinary wheel zooms in mode 4",
+			"passed": true
+		},
+		{
+			"check": "Control wheel does not zoom in mode 4",
+			"passed": true
+		},
+		{
+			"check": "Command wheel arms tool without creating jobs",
+			"passed": true
+		},
+		{
+			"check": "Ctrl wheel advances command",
+			"passed": true
+		},
+		{
+			"check": "Number-key speed mapping",
+			"passed": true
+		},
+		{
+			"check": "Number-key speed mapping",
+			"passed": true
+		},
+		{
+			"check": "Number-key speed mapping",
+			"passed": true
+		},
+		{
+			"check": "Actual E dispatch opens crafting",
+			"passed": true
+		},
+		{
+			"check": "X queues demolition rather than deleting equipment",
+			"passed": true
+		},
+		{
+			"check": "Range selection mixes completed bench and planned wall",
+			"passed": true
+		},
+		{
+			"check": "Mixed X cancels plan and queues one equipment demolition",
+			"passed": true
+		},
+		{
+			"check": "Pause preserves actual blocked reason",
+			"passed": true
+		},
+		{
+			"check": "Text input suppresses X shortcut",
+			"passed": true
+		}
+	],
+	"failures": 0,
+	"timings": [
+		{
+			"cached_mean_ms": 0.0305,
+			"case": "escape_check",
+			"cold_ms": 6.038
+		},
+		{
+			"case": "bench_delivery_and_build",
+			"ms": 42.416,
+			"ticks": 49
+		},
+		{
+			"case": "merchant_relocation",
+			"ms": 0.736
+		}
+	]
+}

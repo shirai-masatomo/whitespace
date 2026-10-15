@@ -22,17 +22,17 @@ static func build(g):
 		if r.is_empty():return
 		var panel=g.ColonyPanels.panel(g,Rect2(376,569,608,120));var j=g.world.Tasks.job(g.world,"mine",r.pos)
 		g.ColonyPanels.label(panel,("大岩山" if r.kind=="large" else "小岩山")+"  残り石材 %d / %d  %s"%[r.remaining,g.world.Mountains.CONFIG[r.kind].amount,"採掘済み" if r.remaining<=0 else "採掘 %.0f%%"%(100.0*r.elapsed/g.world.Mountains.CONFIG[r.kind].seconds)],Vector2(12,8),16)
-		g.add_button(g.palette,"mine","採掘を取り消す" if not j.is_empty() else "採掘を予約",Rect2(388,604,224,34),task.bind(g,"mine",r.pos))
-		g.buttons.mine.disabled=j.is_empty() and (r.remaining<=0 or r.forbidden)
-		g.add_button(g.palette,"mine_forbid","禁止を解除" if r.forbidden else "採掘を禁止",Rect2(626,604,224,34),forbid.bind(g,r.pos))
+		g.add_button(g.palette,"mine","採掘",Rect2(388,604,224,34),g.Actions.primary.bind(g))
+		g.buttons.mine.disabled=not j.is_empty() or (r.remaining<=0 or r.forbidden)
+		g.add_button(g.palette,"mine_forbid","許可" if r.forbidden else "禁止",Rect2(626,604,224,34),forbid.bind(g,r.pos))
 		g.ColonyPanels.label(panel,j.get("block_reason","") if j.get("state")=="blocked" else "採集担当が継続して採掘。石材は現地に残り、回収で備蓄へ運びます。",Vector2(12,80),14)
 	elif g.selected.get("kind")=="rock" and g.world.rocks.has(g.selected.pos):
 		var p=g.ColonyPanels.panel(g,Rect2(376,569,608,120));var cell=g.selected.pos
 		g.ColonyPanels.label(p,("鉄鉱脈のある岩盤" if g.world.rocks[cell].get("geology")=="iron" else "岩盤")+" · 採掘で石8個 / 4秒",Vector2(12,8),16)
 		var j=g.world.Tasks.job(g.world,"mine",cell);var why=g.world.Tasks.reason(g.world,"mine",cell,-1,j.get("id",-1))
-		g.add_button(g.palette,"mine","採掘を取り消す" if not j.is_empty() else "採掘を予約",Rect2(388,604,224,34),task.bind(g,"mine",cell))
-		g.buttons.mine.disabled=j.is_empty() and why!=""
-		g.add_button(g.palette,"mine_forbid","禁止を解除" if g.world.rocks[cell].get("forbidden",false) else "採掘を禁止",Rect2(626,604,224,34),forbid.bind(g,cell))
+		g.add_button(g.palette,"mine","採掘",Rect2(388,604,224,34),g.Actions.primary.bind(g))
+		g.buttons.mine.disabled=not j.is_empty() or why!=""
+		g.add_button(g.palette,"mine_forbid","許可" if g.world.rocks[cell].get("forbidden",false) else "禁止",Rect2(626,604,224,34),forbid.bind(g,cell))
 		g.ColonyPanels.label(p,why if why!="" else "採集の優先順位で実行。石は完成後に運搬できます。",Vector2(12,80),14)
 	elif g.selected.get("kind") in ["keeper","worker"]:
 		var key=g.selected.get("key","keeper")
@@ -56,6 +56,10 @@ static func build(g):
 		g.buttons.keeper_equip.disabled=pending or g.world.Stock.available(g.world,"wood_staff")<1 or a.get("drafted",false)
 		g.buttons.keeper_unequip.disabled=pending or a.get("equipment",{}).is_empty() or a.get("drafted",false)
 		g.buttons.keeper_equip.tooltip_text="装備作業を予約中" if pending else "現物まで移動して装備します。徴兵中は変更できません。"
+	if g.selected.get("kind") in ["rock","mountain"]:
+		var cell=g.selected.pos if g.selected.has("pos") else g.world.mountains[g.selected.id].pos
+		if not g.world.Tasks.job(g.world,"mine",cell).is_empty():
+			g.add_button(g.palette,"cancel_near","取消",Rect2(864,604,100,34),g.Actions.cancel_or_remove.bind(g))
 static func draw(g):
 	for r in g.world.mountains.values():
 		var selected=g.selected.get("kind")=="mountain" and typeof(g.selected.get("id"))==TYPE_STRING and g.selected.id==r.id
@@ -65,11 +69,10 @@ static func draw(g):
 			if not cells.is_empty():
 				var bounds=Rect2(Vector2(cells[0])*g.TILE,g.TILE)
 				for p in cells:bounds=bounds.merge(Rect2(Vector2(p)*g.TILE,g.TILE))
-				g.draw_rect(bounds,g.UI.GOLD if selected else Color("dcb18e"),false,3 if selected else 1)
-		if r.forbidden:g.label_on(g,g.center(r.pos),"×",18,g.UI.DANGER)
+				if selected:g.SelectionVisual.outline(g,bounds)
+				else:g.draw_rect(bounds,Color("dcb18e"),false,1)
 	for p in g.world.rocks:
 		var c=g.center(p)
-		if g.world.rocks[p].get("forbidden",false):g.label_on(g,c,"×",20,g.UI.DANGER)
-		if g.selected.get("kind")=="rock" and g.selected.pos==p:g.draw_rect(Rect2(c-Vector2(22,20),Vector2(44,40)),g.UI.GOLD,false,2)
+		if g.selected.get("kind")=="rock" and g.selected.pos==p:g.SelectionVisual.outline(g,Rect2(c-Vector2(22,20),Vector2(44,40)))
 static func signature(g) -> String:
 	return str([g.selected,g.world.keeper.get("equipment",{}),g.world.keeper.get("drafted",false),g.world.Stock.available(g.world,"wood_staff"),g.world.rocks,g.world.mountains.values().map(func(r):return [r.id,r.stage,r.remaining,r.forbidden,int(r.elapsed)]),g.world.jobs.map(func(j):return [j.id,j.kind,j.state])])

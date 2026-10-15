@@ -327,7 +327,7 @@ static func walk(w,e,goal: Vector2i):
 	e.erase("raid_stalled_since")
 	var next=route[1] if route.size()>1 else e.pos
 	if e.species=="doberman" and w.is_indoor(next): e.state="外で待つ"; return
-	if w.blocks(next) and not break_objects and (w.structures[next].kind not in w.Buildings.DOORS or w.structures[next].get("lock_hp",0)>0):
+	if w.blocks(next) and not break_objects and (w.structures[w.Buildings.anchor(w,next)].kind not in w.Buildings.DOORS or w.structures[w.Buildings.anchor(w,next)].get("lock_hp",0)>0):
 		e.search_goal=null; e.chosen_target={}; e.state="道を探す"; return
 	var before=e.pos
 	w.move_enemy(e,next,goal)

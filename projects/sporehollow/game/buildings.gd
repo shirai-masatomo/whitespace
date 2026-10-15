@@ -2,6 +2,24 @@ extends RefCounted
 ## Shared topology, two construction layers and transactional onsite upgrades.
 const NAMES = {"cooking_bench":"調理台","carpentry_bench":"木工作業台","sewing_bench":"裁縫台","wall":"土壁","wood_wall":"木壁","stone_wall":"石壁","soil_tile":"土タイル","wood_tile":"木タイル","stone_tile":"石タイル","door":"ドア","locked_door":"ロック付きドア","kennel":"犬小屋","coop":"鶏小屋"}
 const WALLS = ["wall", "wood_wall", "stone_wall"]
+const BENCHES = ["cooking_bench","carpentry_bench","sewing_bench"]
+static func cells(kind: String,p: Vector2i) -> Array:
+	return [p,p+Vector2i.RIGHT,p+Vector2i.DOWN,p+Vector2i.ONE] if kind in BENCHES else [p]
+static func anchor(w,p: Vector2i) -> Vector2i:
+	for offset in [Vector2i.ZERO,Vector2i.LEFT,Vector2i.UP,-Vector2i.ONE]:
+		var q=p+offset;var b=w.structures.get(q,{})
+		if b.get("status") in ["ready","building"] and p in cells(b.kind,q):return q
+	return p
+static func perimeter(kind: String,p: Vector2i) -> Array:
+	var occupied=cells(kind,p);var result=[]
+	for q in occupied:
+		for n in [q+Vector2i.LEFT,q+Vector2i.RIGHT,q+Vector2i.UP,q+Vector2i.DOWN]:
+			if n not in occupied and n not in result:result.append(n)
+	return result
+static func job_goals(w,j) -> Array:
+	var kind=j.kind if w.BUILD.has(j.kind) else w.structures.get(j.pos,{}).get("kind","")
+	return perimeter(kind,j.pos)
+
 const DOORS = ["door", "locked_door", "gate"]
 
 static func layer(w, kind: String) -> Dictionary:
@@ -47,6 +65,12 @@ static func rooms(w, proposed: Dictionary = {}) -> Dictionary:
 	return indoor
 
 static func reason(w, kind: String, p: Vector2i, check_cost: bool = true) -> String:
+	for cell in cells(kind,p):
+		var why=cell_reason(w,kind,cell,check_cost)
+		if why!="":return why
+	return ""
+
+static func cell_reason(w, kind: String, p: Vector2i, check_cost: bool = true) -> String:
 	preload("res://game/terrain_metrics.gd").count("buildings.reason")
 	if kind in ["kennel","coop"]: return "この建物は休止中です"
 	if not w.BUILD.has(kind) or not w.inside(p): return "ここには建てられません"
@@ -58,7 +82,8 @@ static func reason(w, kind: String, p: Vector2i, check_cost: bool = true) -> Str
 	if w.natural.has(p) or not w.items_at(p).is_empty() or w.field_items.any(func(i):return i.pos==p and i.get("location","ground")=="ground"): return "物があるため建設できません"
 	var data = w.BUILD[kind]
 	if data.get("blueprint", "") not in [""] + w.campaign.unlocked_blueprints: return "作り方をまだ知りません"
-	var old = layer(w,kind).get(p,{})
+	var old = layer(w,kind).get(anchor(w,p) if w.BUILD[kind].get("layer")!="floor" else p,{})
+	if w.BUILD[kind].get("layer")=="floor" and w.structures.get(anchor(w,p),{}).get("kind") in BENCHES:return "設備の場所です"
 	if old.get("status") == "ready":
 		var compatible = (kind in WALLS and old.kind in WALLS) or data.get("layer") == "floor"
 		if not compatible or data.get("tier",-1) <= w.BUILD.get(old.kind,{}).get("tier",0): return "上位の素材を選んでください"
@@ -99,6 +124,7 @@ static func begin(w,j):
 		store[j.pos] = {"id":w.next_structure_id,"kind":j.kind,"status":"building","hp":0,"max_hp":d.hp,"cost":j.get("required",j.reserved),"resource":j.resource,"open":false,"armor":0,"remaining":j.remaining,"total_ticks":j.remaining}
 		w.next_structure_id += 1
 	j.site_id=store.get(j.pos,{}).get("id",-1)
+	w.invalidate_navigation()
 
 static func advance(w,j,work_factor: float=1.0):
 	# Own new site is ignored for validation; upgrades retain the old functioning object.
@@ -110,6 +136,9 @@ static func advance(w,j,work_factor: float=1.0):
 	if why != "":
 		j.state = "blocked"; j.block_reason = why
 		return
+	var worker=w.workers.get(j.get("assigned_to","keeper"),w.keeper)
+	if not preload("res://game/construction_safety.gd").can_finish(w,j,worker):
+		w.Work.block(w,j,"退避経路を確保できません");return
 	j.state = "working"
 	j.remaining -= work_factor
 	if site.get("status") == "building": site.remaining = j.remaining

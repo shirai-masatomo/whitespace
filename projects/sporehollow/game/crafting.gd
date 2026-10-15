@@ -6,6 +6,7 @@ static func valid(w,j)->bool:
 	return b.get("id")==j.bench_id and b.get("status")=="ready" and b.get("kind")==Data.RECIPES[j.recipe].bench
 static func enqueue(w,p:Vector2i,recipe:String,mode:String,amount:int)->bool:
 	if not w.working() or not Data.RECIPES.has(recipe) or mode not in ["count","stock"] or amount<1 or amount>100 or w.jobs.size()>=w.Jobs.LIMIT:return false
+	p=w.Buildings.anchor(w,p)
 	var b=w.structures.get(p,{})
 	if b.get("status")!="ready" or b.get("kind")!=Data.RECIPES[recipe].bench:return false
 	var j={"id":w.next_job_id,"kind":"craft","pos":p,"bench_id":b.id,"recipe":recipe,"bill_mode":mode,"bill_amount":amount,"made":0,"craft_progress":0.0,"animal_id":-1,"state":"pending","resource":"","reserved":0,"started":false,"work_category":"other"}
@@ -65,7 +66,7 @@ static func step(w,j,a):
 	var carried=w.Stock.cargo(w,a.work_key,j.id)
 	if not carried.is_empty():
 		j.phase="deliver"
-		if not w.Jobs.walk(w,j,w.neighbors(j.pos),a):return
+		if not w.Jobs.walk(w,j,w.Buildings.job_goals(w,j),a):return
 		for r in carried:r.location="site";r.pos=j.pos;r.owner="";r.erase("craft_transfer")
 		w.Stock.sync(w);return
 	# Recover interrupted cargo at its real location before claiming replacement ingredients.
@@ -88,7 +89,7 @@ static func step(w,j,a):
 		for r in w.field_items:
 			if r.location=="site" and r.job_id==j.id and r.kind==kind and not r.get("forbidden",false):onsite+=r.amount
 		if onsite<rec.ingredients[kind]:j.state="blocked";j.block_reason="搬入した材料を確認しています";return
-	if not w.Jobs.walk(w,j,w.neighbors(j.pos),a):return
+	if not w.Jobs.walk(w,j,w.Buildings.job_goals(w,j),a):return
 	j.phase="work";j.state="working";j.started=true;j.block_reason="";j.craft_progress+=w.DT*w.Jobs.factor(a)
 	if j.craft_progress<rec.seconds:return
 	for kind in rec.ingredients:

@@ -317,6 +317,10 @@ static func cancel_targets(w,first: Vector2i,last: Vector2i) -> Array:
 	for j in w.jobs:
 		if j.get("cancel_requested",false):continue
 		var p=j.pos
+		if w.BUILD.has(j.kind):
+			var bounds=Rect2i(Vector2i(mini(first.x,last.x),mini(first.y,last.y)),Vector2i(absi(last.x-first.x)+1,absi(last.y-first.y)+1))
+			if w.Buildings.cells(j.kind,j.pos).any(func(q):return bounds.has_point(q)):rows.append(j)
+			continue
 		if j.has("mountain_id"):
 			if w.Mountains.overlapping(w.mountains[j.mountain_id],first,last):rows.append(j)
 			continue

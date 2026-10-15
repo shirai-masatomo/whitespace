@@ -150,7 +150,8 @@ static func effort(w,a,j,evaluation=null) -> float:
 		if not plan.has("pos"):
 			block(w,j,plan.reason);return INF
 		position=row.pos
-	var goals=w.Mountains.job_goals(w,j) if j.has("mountain_id") else ([position] if j.kind=="move" else w.neighbors(position))
+	var goals=w.Mountains.job_goals(w,j) if j.has("mountain_id") else ([position] if j.kind=="move" else (w.Buildings.job_goals(w,j) if w.BUILD.has(j.kind) or j.kind in ["craft","remove","repair","gate"] else w.neighbors(position)))
+	if w.BUILD.has(j.kind):goals=preload("res://game/construction_safety.gd").work_goals(w,j,a,goals)
 	var distance: float
 	if evaluation==null:
 		var route=w.Jobs.path_to(w,a.pos,goals)
