@@ -1,0 +1,31 @@
+name: One-time audited stale branch cleanup
+
+on:
+  push:
+    branches:
+      - codex/sporehollow-biome01
+    paths:
+      - .github/workflows/one-time-branch-cleanup.yml
+
+permissions:
+  contents: write
+  pull-requests: read
+
+concurrency:
+  group: whitespace-one-time-branch-cleanup
+  cancel-in-progress: false
+
+jobs:
+  cleanup:
+    if: github.repository == 'shirai-masatomo/whitespace' && github.ref == 'refs/heads/codex/sporehollow-biome01'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Delete only ancestry-verified obsolete branches
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: ./tools/prune-redundant-branches.ps1 -Apply
