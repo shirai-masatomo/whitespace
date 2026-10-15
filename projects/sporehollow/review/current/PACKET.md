@@ -1,6 +1,6 @@
 # 操作・設備・選択表示（2026-10-16）
 
-赤い×の視認性、2×2作業台、ホイール・E/X・1〜3倍速、混在範囲選択、施工と商人の退避を更新。[結果・試験・残課題](interaction-revision/REPORT.md)／[禁止マーク比較](interaction-revision/forbidden-comparison.png)。実画面自動起動なし。EXE反映は同フォルダDELIVERY.jsonを参照。以下は過去記録。
+赤い×の視認性、2×2作業台、ホイール・E/X・1〜3倍速、混在範囲選択、施工と商人の退避を更新。[結果・試験・残課題](interaction-revision/REPORT.md)／[禁止マーク比較](interaction-revision/forbidden-comparison.png)。実画面自動起動なし。コード1aa428f2を既存の最新開発版EXEへ反映済み。関連990チェック失敗0。配布SHA256は同フォルダDELIVERY.jsonを参照。以下は過去記録。
 
 ---
 

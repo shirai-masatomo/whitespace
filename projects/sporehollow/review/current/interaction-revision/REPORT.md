@@ -27,4 +27,4 @@
 
 ## 配布
 
-GitHubの `codex/sporehollow-biome01` へ保存し、既存の最新開発版EXE一本へ反映する。実際の反映コミット・SHA256・自動起動していないことは `DELIVERY.json` を参照。ユーザーデータ、正式素材、他担当の未保存import/uid変更は保持。
+コード `1aa428f2` を既存の最新開発版EXE一本へ反映済み。GitHubの `codex/sporehollow-biome01` へコードと検証資料を保存。関連990チェック、失敗0。EXEは128,487,912 bytes（旧版比+17,224 bytes）。候補EXE・一時ユーザーデータは検証領域から削除済み。実際の反映コミット・SHA256・自動起動していないことは `DELIVERY.json` を参照。ユーザーデータ、正式素材、他担当の未保存import/uid変更は保持。
