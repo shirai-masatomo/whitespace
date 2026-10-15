@@ -6,10 +6,10 @@ WhiteSpaceは、**ゲーム・小説・映像・ARG・仮想現実・Webなど�
 
 ## プロジェクト
 
-- [ホイッスル牧場（仮）](projects/sporehollow/README.md)
+- [ホイッスル牧場・世界観と仕様](projects/sporehollow/SPEC.md)
   空き地に壁・門を築き、柴犬で牧場主の連れ去りを防ぐ独立2D試作。Godot製Windowsアプリ。Stage 1→育成・購入→Stage 2が動作。DIVE DIVEとは別管理。
 
-- [DIVE DIVE](projects/001-first-release/README.md)
+- [DIVE DIVE・世界観と仕様](projects/001-first-release/SPEC.md)
   深い海底へ潜る2D水中探索ゲーム。地形・酸素・採掘を核に、海上から生物・沈没船・神話・星海を経て最深部と結末まで、約1,960mの通し試作が動作。3D版は開発停止・保存、定期再開はPAUSED。
 
 - [言語ジェンガ（仮）](projects/language-jenga/README.md)
