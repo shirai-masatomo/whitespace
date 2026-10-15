@@ -1,0 +1,7 @@
+{
+  "name": "fiber_clothes_clean",
+  "date": "2026-10-15",
+  "tool": "builtin_imagegen_edit",
+  "prompt": "Edit only this existing Whistle Ranch tunic sprite. Preserve its compact short-sleeve tunic silhouette, proportions, open neck, waist tie, warm ivory/beige cloth, front slightly elevated view and transparent background. Make the clothing look clean and neatly sewn: REMOVE all visible coarse grass fibres, green flecks, mottled speckling, fraying and the patch. Replace with smooth plain cream fabric rendered as broad clean PIXEL ART color clusters with only 3-4 simple fold/shadow regions. Neat sleeve cuffs and hem, understated brown tie. Still a humble simple early-settlement garment, not luxurious, not armor. Keep upper-left light, restrained brown edge, no soft gradient, no texture noise. No person, text, ground or shadow. Entire object centered with transparent margins. This is for a 26x21 pixel in-game item and 28x22 UI icon, so simplify rather than add detail.",
+  "path": "C:\\Users\\masat\\.codex\\generated_images\\01a1062f-6339-7812-baec-d517611755ca\\exec-a55b2e75-317d-4455-9b87-4b301b3d06f4.png"
+}

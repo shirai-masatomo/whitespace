@@ -594,5 +594,9 @@
     "nearest3x catalogue",
     "dark/light alpha",
     "tool/food pixel inspection"
-  ]
+  ],
+  "clothing_revision": {
+    "other_20_png_unchanged": true,
+    "old_original_preserved": true
+  }
 }

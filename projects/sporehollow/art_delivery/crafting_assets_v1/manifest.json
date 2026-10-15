@@ -478,7 +478,7 @@
         29,
         28
       ],
-      "sha256": "ae1bff9f6689b2506409a9a0a848f17fc43b22921b4ad2a97f32633a9d63d20d",
+      "sha256": "f5d988bbdec0b90c203928e241332489c91818cd78064bfbfa1883929e2e1f43",
       "frame_order": [
         0
       ],
@@ -496,7 +496,7 @@
         26,
         21
       ],
-      "source": "../../art-production/crafting-assets-v1/originals/fiber_clothes.png"
+      "source": "../../art-production/crafting-assets-v1/originals/fiber_clothes_clean.png"
     },
     {
       "file": "ui_icons/fiber_clothes.png",
@@ -516,7 +516,7 @@
         30,
         27
       ],
-      "sha256": "84c3649601b8cf1fe2a3084a453bffd69c14a52e29d11a6644462b344fd8de1f",
+      "sha256": "36c3fe1cbe574318126030d61726b5f5261a23a77c1f4362af41e10b298d3836",
       "frame_order": [
         0
       ],
@@ -927,8 +927,8 @@
       "source_bbox": [
         121,
         176,
-        1214,
-        1039
+        1204,
+        1040
       ],
       "world_body": [
         26,

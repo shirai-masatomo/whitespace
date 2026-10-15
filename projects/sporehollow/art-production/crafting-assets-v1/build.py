@@ -26,7 +26,8 @@ def save(im,rel,anchor,id,kind,extra):
  assets.append(dict(file=rel,id=id,usage=kind,size_px=list(im.size),anchor_px=list(anchor),alpha_bbox=list(im.getbbox()),sha256=sha(p),frame_order=[0],frame_duration_ms=[None],loop=False,shadow_baked=False,**extra))
  return im
 for name,jp,folder,limit in rows:
- raw=load(S/'originals'/f'{name}.png');small,box=fit(raw,limit);big=folder in ['benches','placeables'];canvas=(48,48) if big else (32,32);anchor=(24,44) if big else (16,28)
+ source_name='fiber_clothes_clean' if name=='fiber_clothes' else name
+ raw=load(S/'originals'/f'{source_name}.png');small,box=fit(raw,limit);big=folder in ['benches','placeables'];canvas=(48,48) if big else (32,32);anchor=(24,44) if big else (16,28)
  world=Image.new('RGBA',canvas);xy=(anchor[0]-small.width//2,anchor[1]-small.height);world.alpha_composite(small,xy)
  # Final-size pixel edits: preserve the saw's teeth and opaque yolk/white separation.
  d=ImageDraw.Draw(world)
@@ -37,7 +38,7 @@ for name,jp,folder,limit in rows:
  if name=='egg_meal':
   d.ellipse((10,20,15,24),fill='#d5a647');d.point([(11,20),(12,20),(11,21)],fill='#edc664')
  id='fiber' if name=='fiber_bundle' else name
- worlds[name]=save(world,f'{folder}/{name}.png',anchor,id,'world',dict(occupied_cells=[1,1] if big else [0,0],placement='cell center + (0,21)' if big else 'item ground foot',body_px=list(small.size),source='../../art-production/crafting-assets-v1/originals/'+name+'.png'))
+ worlds[name]=save(world,f'{folder}/{name}.png',anchor,id,'world',dict(occupied_cells=[1,1] if big else [0,0],placement='cell center + (0,21)' if big else 'item ground foot',body_px=list(small.size),source='../../art-production/crafting-assets-v1/originals/'+source_name+'.png'))
  # UI is re-rasterized from original at a separate size. Keep one recognizable object.
  icon,_=fit(raw,(28,28));ui=Image.new('RGBA',(32,32));ui.alpha_composite(icon,((32-icon.width)//2,(32-icon.height)//2))
  uis[name]=save(ui,f'ui_icons/{name}.png',(16,16),id,'ui',dict(occupied_cells=[0,0],placement='UI rectangle center',body_px=list(icon.size)))
