@@ -1,7 +1,9 @@
+<!-- 開発者向け詳細・旧版資料。ユーザー向けの世界観とゲーム仕様は [SPEC.md](../../SPEC.md)。文中のソース相対パスはプロジェクト直下を基準とする。 -->
+
 ## 作業接触ポーズの接続（2026-10-14・現行）
 
 colony_growth_assets_v1/work_poseの採掘・伐採左右4枚を使用。素材adb33aa0、80×64、足元右(28,56)／左(52,56)、倍率1.4375。通常人物と排他的に表示し、接触時に仮道具を重ねない。原本PNG無加工。WorkMotionが表示専用で共通接続。
-振りかぶり／戻り／建築全身の正式コマは不足し、今回仮描画。[比較・不足一覧](review/current/work-motion/REPORT.md)。
+振りかぶり／戻り／建築全身の正式コマは不足し、今回仮描画。[比較・不足一覧](../../review/current/work-motion/REPORT.md)。
 
 ## 製作・生活基盤：正式画像不足（2026-10-14）
 
@@ -16,7 +18,7 @@ colony_growth_assets_v1/work_poseの採掘・伐採左右4枚を使用。素材a
 
 ## 連続岩盤正式素材（2026-10-14採用）
 
-`continuous_bedrock_v1`、納品 `adb33aa07da2ec57959e0315963f15003ddcd085` を統合。82点のRGBA（データマスクを含む）。詳細は [HANDOFF](art_delivery/continuous_bedrock_v1/HANDOFF.md)。48×54岩体のアンカー(24,33)、48×42地面、N1/E2/S4/W8。8×8広域上面と鉱脈、4×4地表模様を世界座標の位相でCPU合成・キャッシュする。通常岩と鉄鉱で接続を分断しない。境界はalphaのみ使用。
+`continuous_bedrock_v1`、納品 `adb33aa07da2ec57959e0315963f15003ddcd085` を統合。82点のRGBA（データマスクを含む）。詳細は [HANDOFF](../../art_delivery/continuous_bedrock_v1/HANDOFF.md)。48×54岩体のアンカー(24,33)、48×42地面、N1/E2/S4/W8。8×8広域上面と鉱脈、4×4地表模様を世界座標の位相でCPU合成・キャッシュする。通常岩と鉄鉱で接続を分断しない。境界はalphaのみ使用。
 
 原画・制作手順・採用証拠を保持し、原画とレビュー画像はEXEのexport対象外。追加の不足素材は今回なし。GPUでの最終画面確認は未実施。
 
@@ -30,7 +32,7 @@ colony_growth_assets_v1/work_poseの採掘・伐採左右4枚を使用。素材a
 
 ## 使用状況
 
-個別の実パス・SHA256・寸法・納品SHA・コード参照は [asset-usage.json](review/current/asset-usage.json)。`tools/audit_art.py`で納品manifestのハッシュとの一致を検査する。画面検証対象SHAは [PACKET](review/current/PACKET.md)。
+個別の実パス・SHA256・寸法・納品SHA・コード参照は [asset-usage.json](../../review/current/asset-usage.json)。`tools/audit_art.py`で納品manifestのハッシュとの一致を検査する。画面検証対象SHAは [PACKET](../../review/current/PACKET.md)。
 
 | 表示箇所 | 採用素材 / 実際のパス（art_delivery以下） | 納品コミット | 取り込み |
 |---|---|---|---|
@@ -65,7 +67,7 @@ colony_growth_assets_v1/work_poseの採掘・伐採左右4枚を使用。素材a
 - 木の縦横ドアはe648cf75を採用。48×68、アンカー(24,34)。柱後/扉+ロック/柱前を接地深度で人物と合成。通常と損傷は本体HP50%、ロックは独立HP0。通行・施錠ルールは不変。
 - 既存誘拐者は採用v2の正式動作へ置換。32×48・足元(16,44)、運搬支持点は右(12,16)/左(20,16)。主人公原版を-90度、左は回転後水平反転し、保持腕と顔を前面合成。専用の脱力した主人公姿勢は未納品。新しい敵種は追加しない。
 
-HANDOFF/manifest/原画/ライセンスを保全する。ranch v1の商人/露店はv2に置換された記録として保管し、実行対象にしない。納品review画像は素材比較でありゲームの検証証拠には使わない。出典は各HANDOFFと [SOURCES](assets/ui/SOURCES.md)。
+HANDOFF/manifest/原画/ライセンスを保全する。ranch v1の商人/露店はv2に置換された記録として保管し、実行対象にしない。納品review画像は素材比較でありゲームの検証証拠には使わない。出典は各HANDOFFと [SOURCES](../../assets/ui/SOURCES.md)。
 
 土・木・石の179建材PNGを追加接続。旧単色壁/床描画は置換し、耐久・通行・屋内判定・改築費は不変。床境界は北/西側セルのE/Sへ一度だけ描画する。
 
@@ -197,7 +199,7 @@ Human盤面は足元を固定して1.15倍（keeper/adopted_art、既存Human/pr
 
 動物の盤面表示は既存から1.25倍、足元基準と物理判定は維持。原寸PNG・人物・図鑑UIは変更しない。左右/動作242正式フレームと変更前ランタイム判定を303項目で比較。
 
-ユーザー貼付の採用岩場原本は[ROCK_REFERENCE](art-production/ROCK_REFERENCE.md)、SHA256 `ce72193e41b5de27e87d393fb66ba6c635c208d6ba1535dee71b91400f9009ec`。`game/rock_view.gd`が既存岩の実座標と4方向隣接から低い岩盤、暗い正面、砂利、採掘跡をコード描画。原本は制作資料としてexport対象外。画像生成・原本加工・資源生成変更は行わない。自然分布が孤立岩なら孤立描画のまま。連結の画面証拠は制御した配置と区別する。
+ユーザー貼付の採用岩場原本は[ROCK_REFERENCE](../../art-production/ROCK_REFERENCE.md)、SHA256 `ce72193e41b5de27e87d393fb66ba6c635c208d6ba1535dee71b91400f9009ec`。`game/rock_view.gd`が既存岩の実座標と4方向隣接から低い岩盤、暗い正面、砂利、採掘跡をコード描画。原本は制作資料としてexport対象外。画像生成・原本加工・資源生成変更は行わない。自然分布が孤立岩なら孤立描画のまま。連結の画面証拠は制御した配置と区別する。
 
 役割/動物表は既存正式肖像/アイコン、物資は既存アイコンを使用。表示集約は物理ID・数量・座標を変えない。GPUの実画面確認状態はレビューへ分離。
 
