@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b141c">
+  <title>DIVE IN UNDER — 10F Prototype</title>
+  <link rel="stylesheet" href="./style.css">
+  <script src="./core.js" defer></script>
+  <script src="./app.js" defer></script>
+</head>
+<body>
+  <div class="page">
+    <header class="masthead">
+      <div class="brand">
+        <span class="eyebrow">WHITESPACE / PROTOTYPE 0.1</span>
+        <h1>DIVE <em>IN</em> UNDER</h1>
+        <p>潜るほど、持ち帰りたいものが増えていく。</p>
+      </div>
+      <div class="mast-stats">
+        <div><span class="muted">最深到達</span><strong id="deepest">1F</strong></div>
+        <div><span class="muted">10Fの門番</span><strong id="boss-status">未討伐</strong></div>
+        <div><span class="muted">保存</span><strong id="save-status">ローカル</strong></div>
+      </div>
+    </header>
+
+    <div class="layout">
+      <main class="main-column">
+        <section class="panel expedition">
+          <div class="section-heading">
+            <div>
+              <div class="eyebrow">EXPEDITION</div>
+              <h2 id="place-title">地上 / 拠点</h2>
+            </div>
+            <span class="pill" id="mode-pill">準備中</span>
+          </div>
+          <div class="cave-art" aria-hidden="true">
+            <div class="cave-a"></div>
+            <div class="cave-b"></div>
+            <div class="vertical-line"></div>
+            <div class="glow"></div>
+            <div class="cave-overlay">
+              <span id="place-small">地上拠点</span>
+              <strong id="depth-number">01</strong>
+              <small id="depth-label">到達するたびに、次の階が開く。</small>
+            </div>
+          </div>
+          <div id="primary-actions" class="primary-actions"></div>
+          <p class="hint" id="action-hint">地下では「潜る」「地上に戻る」の二択だけ。</p>
+        </section>
+
+        <section class="panel encounter" aria-live="polite">
+          <div class="section-heading compact">
+            <div class="eyebrow">LATEST ENCOUNTER</div>
+            <span id="encounter-tag" class="pill">記録</span>
+          </div>
+          <h2 id="encounter-title">探索の準備</h2>
+          <p id="encounter-text"></p>
+          <div class="detail-lines" id="encounter-details"></div>
+        </section>
+
+        <section class="panel">
+          <div class="section-heading compact">
+            <h2>探索履歴</h2>
+            <span class="muted">RECENT LOG</span>
+          </div>
+          <ol id="history" class="history-list"></ol>
+        </section>
+      </main>
+
+      <aside class="side-column">
+        <section class="panel">
+          <div class="section-heading compact"><h2>探索隊</h2><span class="muted">PARTY</span></div>
+          <div id="party-summary"></div>
+          <div id="roster"></div>
+        </section>
+
+        <section class="panel" id="town-panel">
+          <div class="section-heading compact"><h2>地上施設</h2><span class="muted">SURFACE</span></div>
+          <div id="town-content"></div>
+        </section>
+
+        <section class="panel">
+          <div class="section-heading compact"><h2>主人公のスキル</h2><span class="muted">SKILL BUILD</span></div>
+          <div id="skills"></div>
+        </section>
+
+        <section class="panel">
+          <div class="section-heading compact"><h2>装備と耐久</h2><span class="muted">EQUIPMENT</span></div>
+          <div id="equipment"></div>
+        </section>
+
+        <section class="panel">
+          <div class="section-heading compact"><h2>所持品・倉庫</h2><span class="muted">INVENTORY</span></div>
+          <div id="inventory"></div>
+        </section>
+      </aside>
+    </div>
+    <footer>
+      <span>10F試作 / バランス調整前 / 実装されるのは地下10Fまで</span>
+      <button class="text-button" id="reset-button" type="button">最初からやり直す</button>
+    </footer>
+  </div>
+  <div id="toast" role="status" aria-live="polite" class="toast"></div>
+</body>
+</html>
