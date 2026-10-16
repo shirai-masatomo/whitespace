@@ -9,3 +9,4 @@ WhiteSpace全体の目的、ブランド、リポジトリ、自律度の方針�
 | --- | --- | --- | --- |
 | [言語ジェンガ（仮）](language-jenga/README.md) | 宥めよ・会話/言語実験 | 通常 | 資産集約済み・休止中 |
 | [DIVE DIVE](001-first-release/README.md) | 初期リリースを目指す3D水中高難易度アクション | **完全自律型 / 1時間監視** | Forward+ / リアル層Vertical Slice制作（SELF_CONTINUE） |
+| [Dive In Under](dive-in-under/README.md) | B100系・地下潜行オート戦闘RPG | 仕様策定と地下1〜10Fのブラウザ試作 | プロトタイプ検証中 |
