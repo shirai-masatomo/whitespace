@@ -38,13 +38,8 @@ static func build(g):
 		var key=g.selected.get("key","keeper")
 		if not g.world.workers.has(key):return
 		var a=g.world.workers[key];var profile=g.world.HumanCombat.profile(a)
-		var p=g.ColonyPanels.panel(g,Rect2(8,518,636,224))
-		p.add_theme_stylebox_override("panel",StyleBoxEmpty.new())
-		g.ColonyPanels.label(p,("牧場主" if key=="keeper" else a.get("name",key))+" · "+("徴兵中" if a.get("drafted",false) else "暮らしと仕事"),Vector2(14,6),18)
-		p.tooltip_text="装備：%s  射程%d / 威力%d"%[profile.name,profile.range,profile.damage]
 		g.add_button(g.palette,"keeper_draft","徴兵を解除" if a.get("drafted",false) else "徴兵する",Rect2(16,646,156,36),draft.bind(g,key))
 		g.buttons.keeper_draft.disabled=not a.get("drafted",false) and (a.state!="free" or a.hp<=0 or a.forced_rest or a.get("nutrition_down",false))
-		g.ColonyPanels.label(p,"武器："+profile.name+"　衣服："+("なし" if a.get("clothing",{}).is_empty() else g.world.Zones.Catalog.title(a.clothing.item_id)),Vector2(14,100),14)
 		var clothes=a.get("clothing",{})
 		g.add_button(g.palette,"human_clothes","服を着る" if clothes.is_empty() else "服を外す",Rect2(536,646,100,36),gear.bind(g,"fiber_clothes" if clothes.is_empty() else "unequip_clothes",key))
 		g.buttons.human_clothes.disabled=a.get("drafted",false) or (clothes.is_empty() and g.world.Stock.available(g.world,"fiber_clothes")<1)

@@ -83,7 +83,7 @@ func run():
 		g.HomeUI.back(g);check(g.selected.get("key")=="helper","Back restores individual status")
 		var zid=g.world.Zones.create(g.world,"stockpile",Vector2i(31,25),Vector2i(32,25));g.zone_controls.open(g,zid);g.zone_controls.access_tab=true;g.refresh()
 		var access=g.colony_panel.find_child("StockAccess",true,false)
-		check(access!=null and not g.colony_panel.find_child("StockpileFilters",true,false).visible,"Access editor replaces filter tree without duplicate large panels")
+		check(access!=null and g.colony_panel.find_child("StockpileFilters",true,false).visible,"Access and filters share a single two-column panel")
 		access.find_child("Access_helper",true,false).toggled.emit(false)
 		check(not g.world.Access.allowed_at(g.world,Vector2i(31,25),helper),"Access checkbox edits actual withdrawal permission")
 		var text=g.world.Resident.describe(helper);check("満足度" in text,"Resident details expose satisfaction and traits")

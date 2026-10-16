@@ -22,7 +22,7 @@ static func person_selected(g,row: Dictionary):
 
 # Keep tab and tool geometry together; main uses architect_tool_rect for its buttons.
 static func architect_area(g) -> Rect2:
-	return Rect2(8,578,402,164)
+	return Rect2(8,438,904,304)
 
 static func readable_scroll(scroll:ScrollContainer):
 	var track=StyleBoxFlat.new();track.bg_color=Color("cfc5aa");track.content_margin_left=6;track.content_margin_right=6
@@ -31,14 +31,14 @@ static func readable_scroll(scroll:ScrollContainer):
 	for state in ["grabber","grabber_highlight","grabber_pressed"]:bar.add_theme_stylebox_override(state,thumb)
 
 static func architect_content(g) -> Control:
-	var scroll=ScrollContainer.new();scroll.name="ArchitectItems";scroll.position=Vector2(16,586);scroll.size=Vector2(386,112)
+	var scroll=ScrollContainer.new();scroll.name="ArchitectItems";scroll.position=Vector2(136,450);scroll.size=Vector2(452,278)
 	scroll.horizontal_scroll_mode=ScrollContainer.SCROLL_MODE_DISABLED;scroll.vertical_scroll_mode=ScrollContainer.SCROLL_MODE_SHOW_ALWAYS
 	g.palette.add_child(scroll);readable_scroll(scroll);scroll.set_meta("category",g.architect_category);scroll.set_deferred("scroll_vertical",g.architect_scroll.get(g.architect_category,0))
-	var body=Control.new();body.custom_minimum_size=Vector2(368,maxi(36,ceili(g.subtask_choices().size()/3.0)*36));scroll.add_child(body)
+	var body=Control.new();body.custom_minimum_size=Vector2(434,maxi(100,ceili(g.subtask_choices().size()/4.0)*100));scroll.add_child(body)
 	return body
 
 static func architect_tool_rect(g,index: int) -> Rect2:
-	return Rect2((index%3)*122,floori(index/3.0)*36,116,32)
+	return Rect2((index%4)*108,floori(index/4.0)*100,102,96)
 
 static func animal_tool_rect(index: int) -> Rect2:
 	return Rect2(16+(index%6)*104,665+floori(index/6.0)*36,98,32)
@@ -111,9 +111,10 @@ static func build(g):
 		var index=0
 		for category in Model.ARCHITECT:
 			var id="architect_category_%d"%index
-			g.add_button(g.palette,id,category,Rect2(16+index*96,706,90,30),architecture_category.bind(g,category))
-			compact_button(g,g.buttons[id],13);g.UI.architect_selected(g.buttons[id],g.architect_category==category);compact_button(g,g.buttons[id],13,true);g.buttons[id].size=Vector2(90,30);index+=1
-		if g.architect_category!="ゾーン" and g.subtask_choices().is_empty():label(g.colony_panel,"今は使えるものがありません",Vector2(12,12),14)
+			g.add_button(g.palette,id,category,Rect2(16,450+index*46,108,40),architecture_category.bind(g,category))
+			compact_button(g,g.buttons[id],13);g.UI.architect_selected(g.buttons[id],g.architect_category==category);compact_button(g,g.buttons[id],13,true);g.buttons[id].size=Vector2(108,40);index+=1
+		if g.architect_category!="ゾーン" and g.subtask_choices().is_empty():label(g.colony_panel,"今は使えるものがありません",Vector2(136,12),14)
+		g.ReviewUI.architect_details(g)
 	elif g.colony_page=="roles":build_roles(g)
 	elif g.group==1 and g.animal_list_open:build_animals(g)
 
@@ -165,6 +166,8 @@ static func draft_changed(g,key: String):
 	g.refresh()
 
 static func signature(g) -> String:
+	if g.group==0:return str([g.world.stock_revision,g.world.jobs.size()])
+	if g.selected.get("kind")=="zone":return str(g.world.get_meta("access_revision",0))
 	if g.colony_page in ["schedule","life"]:return str([g.life_tab,g.life_actor,g.world.Sleep.hour(g.world),g.world.Sleep.people(g.world).keys()])
 	if g.selected.get("kind")=="house":return str([int(g.world.tick/4),g.world.homes.get(g.selected.get("id",-1),{}),g.world.Sleep.people(g.world).values().map(func(a):return [a.get("home_id",-1),a.get("bed_id",-1)])])
 	if g.group==1:return str(g.world.animals.map(func(a):return [a.id,a.get("name",""),a.hp,a.placed,a.get("dead",false),a.get("husbandry_class",""),a.get("forbidden",false),a.get("last_training_day",-1),g.world.Progression.loyalty(a)]))+str(g.world.jobs.filter(func(j):return j.kind in ["train","slaughter"]).map(func(j):return [j.id,j.get("cancel_requested",false)]))

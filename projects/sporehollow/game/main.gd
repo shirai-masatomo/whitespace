@@ -6,6 +6,8 @@ const ProgressArt=preload("res://game/progression_art.gd")
 const ProgressView=preload("res://game/progression_view.gd")
 var book_section="animals"
 var equipment_open=false
+const ReviewUI=preload("res://game/review_ui.gd")
+var resident_tab="ステータス"
 const StoryView = preload("res://game/story_view.gd")
 var story_modal=""
 var story_page=0
@@ -592,6 +594,10 @@ func refresh_measured():
 			if id in ["wall", "wood_wall", "stone_wall", "soil_tile", "wood_tile", "stone_tile", "door", "locked_door", "kennel", "coop"]:
 				buttons[id].icon = BoardArt.icon(Farm.BUILD[id].get("resource","soil"))
 			if BuildingArt.FURNITURE_UI.has(id.trim_prefix("place_")):buttons[id].icon=BuildingArt.FURNITURE_UI[id.trim_prefix("place_")]
+			buttons[id].icon=ReviewUI.icon(id);ReviewUI.tool_art(buttons[id],id)
+			buttons[id].expand_icon=true;buttons[id].add_theme_constant_override("icon_max_width",46)
+			buttons[id].vertical_icon_alignment=VERTICAL_ALIGNMENT_TOP
+			buttons[id].icon_alignment=HORIZONTAL_ALIGNMENT_CENTER
 	for id in TOOLS:
 		if not buttons.has(id):continue
 		UI.selected(buttons[id], tool == id)
@@ -604,7 +610,7 @@ func refresh_measured():
 				buttons[id].get_theme_stylebox(state).content_margin_right=5
 				buttons[id].get_theme_stylebox(state).content_margin_top=4
 				buttons[id].get_theme_stylebox(state).content_margin_bottom=4
-			buttons[id].size.y=32
+			buttons[id].size.y=96
 	if selected.get("kind")=="animal" and not animal_list_open:
 		var bottom=companion_card_rect().end.y
 		add_button(palette,"animal_instructions","指示",Rect2(20,bottom-40,112,32),open_animal_commands.bind(selected.id))
@@ -616,6 +622,7 @@ func refresh_measured():
 	HomeUI.build(self)
 	LivestockControls.build(self)
 	TaskControls.build(self)
+	if selected.get("kind") in ["keeper","worker"] and world.working() and not field_book and not field_shop and story_modal=="":ReviewUI.resident(self)
 	item_commands.build(self)
 	zone_controls.build(self)
 	crafting_panel.build(self)
@@ -2947,29 +2954,10 @@ func dog_facing(a: Dictionary) -> float:
 	return float(a.get("facing",1))
 
 func keeper_card_rect() -> Rect2:
-	return Rect2(8,518,636,224)
+	return Rect2(16,402,896,340)
 
-func draw_keeper_card(k: Dictionary):
-	hud.draw_style_box(UI.surface(UI.PAPER),keeper_card_rect())
-	var names=["HP","満腹","眠気","スタミナ"]
-	var values=[float(k.hp),float(k.get("satiety",100)),float(k.sleepiness),float(k.stamina)]
-	var maximum=[float(k.max_hp),100.0,100.0,float(k.max_stamina)]
-	var colors=[Color("b97058"),Color("8ca05b"),Color("838cba"),Color("c5a353")]
-	for i in range(4):
-		var x=22+(i%2)*306;var y=558+floori(i/2.0)*25
-		label_on(hud,Vector2(x,y),names[i],13,UI.INK)
-		hud.draw_rect(Rect2(x+65,y-9,144,8),Color("c8c1a5"))
-		hud.draw_rect(Rect2(x+65,y-9,144*clampf(values[i]/maxf(1,maximum[i]),0,1),8),colors[i])
-		label_on(hud,Vector2(x+216,y),"%d / %d"%[values[i],maximum[i]],13,UI.INK)
-	var status=preload("res://game/colony_ui_state.gd").work_summary(world) if k.get("work_key","keeper")=="keeper" else k.get("work_status","待機")
-	if status=="":status=k.get("rest_reason","休息") if k.resting else "待機"
-	if k.has("meal_remaining"):status="食事中 · 食後に仕事へ戻ります"
-	elif k.get("life_need","")=="food":status="備蓄の食料へ移動中"
-	label_on(hud,Vector2(22,605),status.left(46),13,UI.INK)
-	label_on(hud,Vector2(22,626),world.Needs.describe(world,k),13,UI.INK)
-	var life=world.Resident.describe(k).split("\n")
-	label_on(hud,Vector2(22,648),life[0],13,UI.INK)
-	label_on(hud,Vector2(22,669),life[1].left(44),12,UI.INK)
+func draw_keeper_card(_k: Dictionary):
+	pass # ResidentDetails owns the status display and live values.
 
 func keeper_pixel() -> Vector2:
 	if world.keeper.carrier >= 0:

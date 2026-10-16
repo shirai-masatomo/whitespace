@@ -111,24 +111,22 @@ static func wake(g,key:String):
 	if a.get("resting",false):g.world.Sleep.wake(g.world,a,true);g.refresh()
 static func house(g):
 	var h=g.world.homes.get(g.selected.get("id",-1),{})
-	if h.is_empty():
-		var missing=Panels.panel(g,Rect2(16,622,396,120))
-		Panels.label(missing,"家屋が成立していません",Vector2(12,12),18)
-		Panels.label(missing,"壁・ドア・床の完成状態を確認してください",Vector2(12,43),13)
-		g.add_button(missing,"house_close","閉じる",Rect2(276,78,108,28),close.bind(g));return
+	if h.is_empty():return
 	var residents=g.world.Homes.residents(g.world,h.id)
-	var p=Panels.panel(g,Rect2(16,422,396,320));p.name="HouseStatus"
-	Panels.label(p,g.world.Homes.title(g.world,h),Vector2(12,10),20)
-	Panels.label(p,"%dマス · ベッド%d / 空き%d · %s"%[h.cells.size(),h.beds.size(),maxi(0,h.beds.size()-residents.size()),"損傷あり" if g.world.Homes.damaged(g.world,h) else "正常"],Vector2(12,42),14)
-	Panels.label(p,"居住者："+("なし" if residents.is_empty() else "・".join(residents.map(func(a):return g.world.PlayerEvents.name_of(g.world,a)))) ,Vector2(12,68),14)
-	Panels.label(p,"設備："+("なし" if h.fixtures.is_empty() else "・".join(h.fixtures).left(30)),Vector2(12,94),13)
-	Panels.label(p,"ダブルクリックで内部を個別選択 / Escで終了",Vector2(12,120),12)
-	var scroll=ScrollContainer.new();scroll.position=Vector2(12,150);scroll.size=Vector2(372,120);scroll.vertical_scroll_mode=ScrollContainer.SCROLL_MODE_SHOW_ALWAYS;p.add_child(scroll);Panels.readable_scroll(scroll)
+	var p=Panels.panel(g,Rect2(16,402,896,340));p.name="HouseStatus"
+	Panels.label(p,g.world.Homes.title(g.world,h),Vector2(14,12),20)
+	g.ReviewUI.button(g,p,"house_close","閉じる",Rect2(790,10,92,32),close.bind(g))
+	var facts="種別：住居\n状態：%s\n広さ：%dマス\n\n設備\nベッド：%d（空き%d）\nその他：%s"%["損傷あり" if g.world.Homes.damaged(g.world,h) else "完成",h.cells.size(),h.beds.size(),maxi(0,h.beds.size()-residents.size()),"なし" if h.fixtures.is_empty() else "・".join(h.fixtures)]
+	g.ReviewUI.text(p,"HouseFacts",facts,Rect2(14,62,266,222),15)
+	Panels.label(p,"居住者・割り当て",Vector2(300,62),17)
+	var scroll=ScrollContainer.new();scroll.name="HouseResidents";scroll.position=Vector2(300,96);scroll.size=Vector2(288,208);scroll.vertical_scroll_mode=ScrollContainer.SCROLL_MODE_SHOW_ALWAYS;scroll.horizontal_scroll_mode=ScrollContainer.SCROLL_MODE_DISABLED;p.add_child(scroll);Panels.readable_scroll(scroll)
 	var list=VBoxContainer.new();scroll.add_child(list)
 	for key in g.world.Sleep.people(g.world):
-		var a=g.world.Sleep.people(g.world)[key];var b=Button.new();b.custom_minimum_size=Vector2(344,30);b.text=g.world.PlayerEvents.name_of(g.world,a)+("の割当を解除" if a.get("home_id",-1)==h.id else "を割当")
+		var a=g.world.Sleep.people(g.world)[key];var b=Button.new();b.custom_minimum_size=Vector2(266,34);b.text=g.world.PlayerEvents.name_of(g.world,a)+("：割当済み / 解除" if a.get("home_id",-1)==h.id else "：割当")
 		b.disabled=a.get("home_id",-1)!=h.id and residents.size()>=h.beds.size();Panels.compact_button(g,b);b.pressed.connect(unassign.bind(g,key) if a.get("home_id",-1)==h.id else assign.bind(g,h.id,key));list.add_child(b)
-	g.add_button(p,"house_close","閉じる",Rect2(276,280,108,28),close.bind(g))
+	g.ReviewUI.room_map(g,p,h)
+	Panels.label(p,"室内見取り図",Vector2(664,310),12)
+	Panels.label(p,"マップ上の家屋をダブルクリックすると内部を選択できます",Vector2(14,310),12)
 static func build(g):
 	if g.field_book or g.field_shop or not g.world.working():return
 	g.add_button(g.palette,"life_main","生活",Rect2(580,754,116,36),open_schedule.bind(g))

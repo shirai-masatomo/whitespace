@@ -35,20 +35,20 @@ func build(g):
 		# Creation palette has no filter editor and never opens details during a stroke.
 		for entry in [["stockpile","備蓄追加",0],["residential","居住追加",1],["resize","範囲変更",2],["cancel","指定取消",3]]:
 			var id="zone_"+(entry[0] if entry[0]!="" else "cancel")
-			g.add_button(g.palette,id,entry[1],Rect2(16+int(entry[2])*96,586,90,32),select.bind(g,"zone_"+entry[0] if entry[0]!="" else ""))
-			g.ColonyPanels.compact_button(g,g.buttons[id],12);g.UI.architect_selected(g.buttons[id],g.tool=="zone_"+entry[0]);g.ColonyPanels.compact_button(g,g.buttons[id],12,true);g.buttons[id].size=Vector2(90,32)
+			g.add_button(g.palette,id,entry[1],Rect2(144+(int(entry[2])%2)*208,458+(int(entry[2])/2)*48,196,36),select.bind(g,"zone_"+entry[0] if entry[0]!="" else ""))
+			g.ColonyPanels.compact_button(g,g.buttons[id],12);g.UI.architect_selected(g.buttons[id],g.tool=="zone_"+entry[0]);g.ColonyPanels.compact_button(g,g.buttons[id],12,true);g.buttons[id].size=Vector2(196,36)
 		g.buttons.zone_resize.disabled=g.world.Zones.find(g.world,selected_id).is_empty()
 		g.buttons.zone_resize.tooltip_text="最後に作成・選択したゾーンの範囲を変更"
 	if not details_open:return
 	var z=g.world.Zones.find(g.world,selected_id)
 	if z.is_empty() or g.selected.get("kind")!="zone":details_open=false;return
-	var stock=z.kind=="stockpile";var height=486 if stock else 226
-	var p=g.ColonyPanels.panel(g,Rect2(8,742-height,410,height));p.name="ZoneDetails"
+	var stock=z.kind=="stockpile";var height=400 if stock else 226
+	var p=g.ColonyPanels.panel(g,Rect2(16,742-height,896,height));p.name="ZoneDetails"
 	picker=OptionButton.new();picker.name="ZoneSelector";picker.position=Vector2(12,7);picker.size=Vector2(296,30);p.add_child(picker);g.ColonyPanels.compact_button(g,picker,14)
 	for zone in g.world.zones:picker.add_item(g.world.Zones.title(zone),zone.id)
 	picker.select(picker.get_item_index(selected_id));picker.tooltip_text="ゾーンを切り替える"
 	picker.item_selected.connect(func(index):open(g,picker.get_item_id(index)))
-	var exit_button=Button.new();exit_button.name="CloseZone";exit_button.text="閉じる";exit_button.position=Vector2(318,7);exit_button.size=Vector2(80,30);p.add_child(exit_button);g.ColonyPanels.compact_button(g,exit_button);exit_button.pressed.connect(close.bind(g))
+	var exit_button=Button.new();exit_button.name="CloseZone";exit_button.text="閉じる";exit_button.position=Vector2(790,10);exit_button.size=Vector2(92,30);p.add_child(exit_button);g.ColonyPanels.compact_button(g,exit_button);exit_button.pressed.connect(close.bind(g))
 	name_edit=LineEdit.new();name_edit.name="ZoneName";name_edit.position=Vector2(12,44);name_edit.size=Vector2(296,32);name_edit.max_length=32;name_edit.text=g.world.Zones.title(z);p.add_child(name_edit)
 	name_edit.focus_entered.connect(func():g.keys_down.clear());name_edit.text_submitted.connect(func(text):rename(g,text);name_edit.release_focus())
 	name_edit.focus_exited.connect(func():
@@ -63,15 +63,14 @@ func build(g):
 		var priority=OptionButton.new();priority.name="ZonePriority";priority.position=Vector2(198,110);priority.size=Vector2(200,30);priority.focus_mode=Control.FOCUS_NONE;p.add_child(priority);g.ColonyPanels.compact_button(g,priority,13);priority.size=Vector2(200,30)
 		for text in ["優先度：低","優先度：通常","優先度：高"]:priority.add_item(text)
 		priority.select(z.get("priority",1));priority.item_selected.connect(func(i):g.world.Zones.set_priority(g.world,z.id,i))
-		for i in range(2):
-			var button=Button.new();button.text=["保管品目","利用権限"][i];button.position=Vector2(12+i*194,148);button.size=Vector2(188,30);p.add_child(button);g.ColonyPanels.compact_button(g,button);g.UI.selected(button,access_tab==(i==1));button.pressed.connect(func():access_tab=i==1;g.refresh())
-		if access_tab:
-			var scroll=ScrollContainer.new();scroll.name="StockAccess";scroll.position=Vector2(12,184);scroll.size=Vector2(386,214);scroll.vertical_scroll_mode=ScrollContainer.SCROLL_MODE_SHOW_ALWAYS;p.add_child(scroll);g.ColonyPanels.readable_scroll(scroll)
-			var list=VBoxContainer.new();scroll.add_child(list)
-			for key in g.world.Sleep.people(g.world):
-				var a=g.world.Sleep.people(g.world)[key];var allowed=z.cells.filter(func(q):return g.world.Access.allowed_at(g.world,q,a)).size()
-				var check=CheckBox.new();check.name="Access_"+key;check.text=g.world.PlayerEvents.name_of(g.world,a)+("（部屋ごとに異なります）" if allowed>0 and allowed<z.cells.size() else "");check.button_pressed=allowed==z.cells.size();check.custom_minimum_size=Vector2(350,30);list.add_child(check);check.toggled.connect(func(value):g.world.Access.set_permission(g.world,z,key,value);g.refresh())
-		var tree=Tree.new();tree.name="StockpileFilters";tree.position=Vector2(12,184);tree.size=Vector2(386,214);tree.visible=not access_tab;tree.hide_root=true;tree.add_theme_font_size_override("font_size",13);p.add_child(tree);var root=tree.create_item()
+		g.ColonyPanels.label(p,"保管するアイテム",Vector2(12,152),16)
+		g.ColonyPanels.label(p,"利用権限（持ち出せる住民）",Vector2(464,78),16)
+		var scroll=ScrollContainer.new();scroll.name="StockAccess";scroll.position=Vector2(464,108);scroll.size=Vector2(414,196);scroll.vertical_scroll_mode=ScrollContainer.SCROLL_MODE_SHOW_ALWAYS;p.add_child(scroll);g.ColonyPanels.readable_scroll(scroll)
+		var list=VBoxContainer.new();scroll.add_child(list)
+		for key in g.world.Sleep.people(g.world):
+			var a=g.world.Sleep.people(g.world)[key];var allowed=z.cells.filter(func(q):return g.world.Access.allowed_at(g.world,q,a)).size()
+			var check=CheckBox.new();check.name="Access_"+key;check.text=g.world.PlayerEvents.name_of(g.world,a)+("（部屋ごとに異なります）" if allowed>0 and allowed<z.cells.size() else "");check.button_pressed=allowed==z.cells.size();check.custom_minimum_size=Vector2(390,30);list.add_child(check);check.toggled.connect(func(value):g.world.Access.set_permission(g.world,z,key,value);g.refresh())
+		var tree=Tree.new();tree.name="StockpileFilters";tree.position=Vector2(12,184);tree.size=Vector2(426,156);tree.visible=true;tree.hide_root=true;tree.add_theme_font_size_override("font_size",13);p.add_child(tree);var root=tree.create_item()
 		# Godot Tree owns its own scrollbar; keep a legible track/thumb.
 		var track=StyleBoxFlat.new();track.bg_color=Color("ddd5bf");track.content_margin_left=7;track.content_margin_right=7
 		var grab=StyleBoxFlat.new();grab.bg_color=Color("718261");grab.set_corner_radius_all(3)
@@ -90,10 +89,13 @@ func build(g):
 		tree.item_edited.connect(func():
 			var item=tree.get_edited();var meta=item.get_metadata(0)
 			g.world.Zones.filter_change(g.world,z.id,meta[0],meta[1],item.is_checked(0));update_checks(tree.get_root(),g,z))
-		g.ColonyPanels.label(p,"持出しの権限です。通行・搬入は可能。" if access_tab else "40個/マス · 既存物資は移動しません",Vector2(12,407),12)
+		g.ColonyPanels.label(p,"40個/マス · 既存物資は移動しません",Vector2(12,344),12)
+		g.ColonyPanels.label(p,"初期設定：居住者を許可。屋外は全員。\n手動設定が優先されます。通行・搬入は可能。",Vector2(464,310),12)
+		var reset=Button.new();reset.name="ResetAccess";reset.text="利用権限を既定に戻す";reset.position=Vector2(464,358);reset.size=Vector2(414,30);p.add_child(reset);g.ColonyPanels.compact_button(g,reset)
+		reset.pressed.connect(func():z.erase("access_cells");g.world.Access.changed(g.world);g.refresh())
 	else:g.ColonyPanels.label(p,"到達可能な居住ゾーンで休息します。\n物資や建物は移動・削除しません。",Vector2(12,112),14)
 	for entry in [["マス追加",resize.bind(g),12],["マス削除",resize.bind(g,true),142],["全体削除",remove.bind(g),272]]:
-		var button=Button.new();button.text=entry[0];button.position=Vector2(entry[2],height-44);button.size=Vector2(126,32);p.add_child(button);g.ColonyPanels.compact_button(g,button);button.pressed.connect(entry[1])
+		var button=Button.new();button.text=entry[0];button.position=Vector2(entry[2],height-32);button.size=Vector2(126,28);p.add_child(button);g.ColonyPanels.compact_button(g,button);button.pressed.connect(entry[1])
 func cell(g,point:Vector2) -> Vector2i:return Vector2i((g.get_canvas_transform().affine_inverse()*point/g.TILE).floor())
 func input(g,event) -> bool:
 	if not active(g) or not g.world.working() or g.menu_open or g.field_shop or g.field_book or g.story_modal!="" or g.cinematic():pressed=false;return false
