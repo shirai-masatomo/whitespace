@@ -3176,9 +3176,6 @@ func draw_enemy_actor(e: Dictionary):
 	elif "壊す" in e.state:
 		draw_line(p + Vector2(0, -24), p + Vector2(0, -38), Color("dfb981"), 3)
 		draw_line(p + Vector2(-7, -37), p + Vector2(7, -37), Color("dfb981"), 5)
-	elif not e.flee and e.carry == "" and e.get("archetype","kidnapper")=="kidnapper":
-		draw_circle(p + Vector2(0, -32), 4, Color("8bd2c5"))
-		draw_line(p + Vector2(-6, -24), p + Vector2(6, -24), Color("8bd2c5"), 3)
 	if debug_view: label_on(self, p + Vector2(20, 0), e.state, 12)
 	if e.hp > 0 and not e.flee and world.tick < e.sight_reaction_until: label_on(self, p + Vector2(15, -30), e.sight_reaction, 26, Color("ffe0a0"))
 	elif e.hp > 0 and not e.flee and e.state == "迷う": label_on(self, p + Vector2(15, -23), "?", 16, Color("c8cfb4"))
