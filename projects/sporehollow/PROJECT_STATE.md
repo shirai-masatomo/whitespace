@@ -1,3 +1,9 @@
+# 建築予約・家屋・時間割・睡眠（2026-10-16）
+
+実装 `328e2add` を既存の最新開発版EXEへ反映済み。資材待ち予約、家屋・ベッド割当、全人間の時間割／睡眠、誘拐者の人間優先・入口探索、壁と床の隙間を更新。関連504チェック失敗0。通常ゲームは自動起動していない。[変更・検証・残課題](review/current/interaction-revision/REPORT.md)／[CPU描画比較](review/current/interaction-revision/housing-floor-comparison.png)／[配布記録](review/current/interaction-revision/DELIVERY.json)。通常デスクトップの操作感と実GPU描画は未検証。以下は過去記録。
+
+---
+
 <!-- 技術・配布状態用。世界観とゲーム仕様は [SPEC.md](SPEC.md) が正本です。 -->
 
 # 地形・襲撃・ゾーン・商人・UI（2026-10-15）

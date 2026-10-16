@@ -1,4 +1,3 @@
-Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
-[92m[ DONE ][39m [1mfirst_scan_filesystem[22m
-[92m[ DONE ][39m [1mupdate_scripts_classes[22m
-[92m[ DONE ][39m [1msavepack[22m
+Implementation: 328e2add9c8671213b9f6785b580ae5d4060df14
+import exit 0; headless/Dummy/max-fps30/BelowNormal; no native window
+export exit 0; headless/Dummy/max-fps30/BelowNormal; no native window
