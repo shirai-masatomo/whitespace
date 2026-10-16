@@ -206,6 +206,7 @@ static func execute(w,j,actor: Dictionary):
 	complete(w,j,w._execute_local(j.kind,j.pos,j.animal_id))
 
 static func complete(w,j: Dictionary,ok: bool):
+	if j.get("personal",false):w.Work.release(w,j);j.personal_finished=true;return
 	if j.kind.begins_with("place_"):w.Stock.release_token(w,Reservations.token(j))
 	if w.BUILD.has(j.kind) and j.get("physical",false):
 		w.Stock.finish_build(w,j,ok)

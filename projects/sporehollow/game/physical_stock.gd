@@ -198,7 +198,7 @@ static func storage_used(w,pos: Vector2i) -> int:
 
 static func storage_free(w,pos: Vector2i,except_job: int=-1) -> int:
 	var reserved=0
-	for j in w.jobs:
+	for j in w.jobs+w.Work.Ambient.jobs(w):
 		if j.id!=except_job and j.get("storage_target")==pos:reserved+=int(j.get("storage_amount",0))
 	return maxi(0,Policy.STORAGE_CAPACITY-storage_used(w,pos)-reserved)
 
@@ -212,7 +212,7 @@ static func storage_plan(w,a,amount: int,kind: String,job_id: int=-1) -> Diction
 	for row in w.field_items:
 		if row.kind==kind and stored(w,row):same[row.pos]=true
 	var old=null
-	for j in w.jobs:
+	for j in w.jobs+w.Work.Ambient.jobs(w):
 		if j.id==job_id:old=j.get("storage_target")
 	cells.sort_custom(func(x,y):return priorities.get(x,1)>priorities.get(y,1) if priorities.get(x,1)!=priorities.get(y,1) else x==old if x==old or y==old else (same.has(x) if same.has(x)!=same.has(y) else (w.distance(a.pos,x)<w.distance(a.pos,y) if w.distance(a.pos,x)!=w.distance(a.pos,y) else x.y*w.W+x.x<y.y*w.W+y.x)))
 	for p in cells:
@@ -242,6 +242,7 @@ static func haul_step(w,j,a):
 			left-=count
 		j.erase("storage_target");j.erase("storage_amount");sync(w)
 		if not cargo(w,a.work_key,j.id).is_empty():return
+		if j.get("personal",false):w.Jobs.complete(w,j,true);return
 		if j.get("haul_sources",[j.stock_id]).any(func(id):return not find(w,id).is_empty() and not stored(w,find(w,id))):j.state="walking";j.phase="fetch"
 		else:w.Jobs.complete(w,j,true)
 		return

@@ -113,9 +113,9 @@ static func house(g):
 	var h=g.world.homes.get(g.selected.get("id",-1),{})
 	if h.is_empty():return
 	var residents=g.world.Homes.residents(g.world,h.id)
-	var p=Panels.panel(g,Rect2(16,402,896,340));p.name="HouseStatus"
+	var p=Panels.panel(g,Rect2(16,402,604,340));p.name="HouseStatus"
 	Panels.label(p,g.world.Homes.title(g.world,h),Vector2(14,12),20)
-	g.ReviewUI.button(g,p,"house_close","閉じる",Rect2(790,10,92,32),close.bind(g))
+	g.ReviewUI.button(g,p,"house_close","閉じる",Rect2(498,10,92,32),close.bind(g))
 	var facts="種別：住居\n状態：%s\n広さ：%dマス\n\n設備\nベッド：%d（空き%d）\nその他：%s"%["損傷あり" if g.world.Homes.damaged(g.world,h) else "完成",h.cells.size(),h.beds.size(),maxi(0,h.beds.size()-residents.size()),"なし" if h.fixtures.is_empty() else "・".join(h.fixtures)]
 	g.ReviewUI.text(p,"HouseFacts",facts,Rect2(14,62,266,222),15)
 	Panels.label(p,"居住者・割り当て",Vector2(300,62),17)
@@ -124,8 +124,6 @@ static func house(g):
 	for key in g.world.Sleep.people(g.world):
 		var a=g.world.Sleep.people(g.world)[key];var b=Button.new();b.custom_minimum_size=Vector2(266,34);b.text=g.world.PlayerEvents.name_of(g.world,a)+("：割当済み / 解除" if a.get("home_id",-1)==h.id else "：割当")
 		b.disabled=a.get("home_id",-1)!=h.id and residents.size()>=h.beds.size();Panels.compact_button(g,b);b.pressed.connect(unassign.bind(g,key) if a.get("home_id",-1)==h.id else assign.bind(g,h.id,key));list.add_child(b)
-	g.ReviewUI.room_map(g,p,h)
-	Panels.label(p,"室内見取り図",Vector2(664,310),12)
 	Panels.label(p,"マップ上の家屋をダブルクリックすると内部を選択できます",Vector2(14,310),12)
 static func build(g):
 	if g.field_book or g.field_shop or not g.world.working():return

@@ -51,9 +51,15 @@ func run():
 	s.begin("wood_wall",Vector2i(40,25));check(s.plan(w).rows[0].waiting_material,"New draft respects earlier commitments")
 	w.trees[Vector2i(40,25)]="test";check(not s.plan(w).rows[0].valid,"Invalid placement remains distinct from reservable shortage")
 	var pen=Capture.new();pen.world=w;var ghost=Ghost.new();var ghosts=[]
-	for kind in ["wood_wall","door","wood_tile","cooking_bench"]:
+	for kind in ["wood_wall","door","wood_tile","cooking_bench","bed"]:
 		for state in ["before","normal","wait","invalid"]:
-			pen.calls.clear();ghost.draw(pen,kind,Vector2i(1,1),state!="invalid",state=="wait");ghosts.append({"kind":kind,"state":state,"calls":pen.calls.duplicate(true)})
+			pen.calls.clear();ghost.draw(pen,kind,Vector2i(1,1),state!="invalid",state in ["wait","before"]);
+			if state=="before":
+				for call in pen.calls:
+					if call.has("tint"):call.tint=Color(1,0.42,0.25,0.56).to_html()
+			if state=="wait":check(pen.calls.any(func(c):return c.get("tint","")==Color(1,.20,.12,.72).to_html()),"Stronger red shortage tint: "+kind)
+			if kind=="bed":check(pen.calls[0].at==[48.0,28.0] and pen.calls[0].path.ends_with("bed_assets_v1/bed.png"),"Official bed anchor and texture "+state)
+			ghosts.append({"kind":kind,"state":state,"calls":pen.calls.duplicate(true)})
 			check(pen.calls.any(func(c):return c.has("arc"))==(state=="invalid"),"Prohibition only for invalid "+kind+" / "+state)
 	# Nine material combinations, same floor/wall anchors in three modes.
 	var rooms=[]

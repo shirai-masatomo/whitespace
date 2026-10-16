@@ -594,10 +594,7 @@ func refresh_measured():
 			if id in ["wall", "wood_wall", "stone_wall", "soil_tile", "wood_tile", "stone_tile", "door", "locked_door", "kennel", "coop"]:
 				buttons[id].icon = BoardArt.icon(Farm.BUILD[id].get("resource","soil"))
 			if BuildingArt.FURNITURE_UI.has(id.trim_prefix("place_")):buttons[id].icon=BuildingArt.FURNITURE_UI[id.trim_prefix("place_")]
-			buttons[id].icon=ReviewUI.icon(id);ReviewUI.tool_art(buttons[id],id)
-			buttons[id].expand_icon=true;buttons[id].add_theme_constant_override("icon_max_width",46)
-			buttons[id].vertical_icon_alignment=VERTICAL_ALIGNMENT_TOP
-			buttons[id].icon_alignment=HORIZONTAL_ALIGNMENT_CENTER
+			ReviewUI.tool_art(buttons[id],id)
 	for id in TOOLS:
 		if not buttons.has(id):continue
 		UI.selected(buttons[id], tool == id)
@@ -1184,6 +1181,7 @@ func draw_work_plans():
 			ConstructionView.draw(self,q,construction_view.rows[j.id])
 		elif j.kind.begins_with("place_"):planned_ghost.draw(self,j.kind,j.pos)
 		else: draw_line(q + Vector2(-9, 10), q + Vector2(9, 10), Color("cfdfaa"), 3)
+		if Farm.BUILD.has(j.kind):continue
 		draw_line(q + Vector2(-10, -12), q + Vector2(-10, -27), Color("9b774e"), 3)
 		draw_rect(Rect2(q + Vector2(-18, -33), Vector2(22, 18)), Color("d8c692"))
 		draw_texture_rect(UI.icon("hammer" if Farm.BUILD.has(j.kind) else "basket"),Rect2(q+Vector2(-16,-31),Vector2(18,16)),false)
@@ -2168,6 +2166,18 @@ func pending_build_at(cell: Vector2i) -> bool:
 	planned_ghost.update(world)
 	return planned_ghost.reserved_cells.has(cell)
 
+func construction_shortage_at(cell:Vector2i) -> bool:
+	construction_view.update(world)
+	for job in world.jobs:
+		if Farm.BUILD.has(job.kind) and cell in world.Buildings.cells(job.kind,job.pos):return construction_view.rows.get(job.id,{}).get("waiting_material",false)
+	if wall_stroke.kind!="":
+		for row in wall_stroke.plan(world).rows:
+			if row.pos==cell:return row.valid and row.waiting_material
+	elif Farm.BUILD.has(tool):
+		var rows=building_ghost.preview(world,tool,cell).rows
+		return not rows.is_empty() and rows[0].valid and rows[0].waiting_material
+	return false
+
 func draw_pointer_preview():
 	if wall_stroke.kind!="":
 		var preview=wall_stroke.plan(world)
@@ -2397,7 +2407,12 @@ func draw_hud():
 		panel(Rect2(16,top,422,28+lines.size()*24))
 		for i in range(lines.size()):label_on(hud,Vector2(30,top+25+i*24),lines[i],16)
 	var cell = Vector2i(get_canvas_transform().affine_inverse() * pointer / TILE)
-	if not pointer_over_ui() and world.inside(cell) and StockView.details(world,cell)!="":
+	if not pointer_over_ui() and world.inside(cell) and construction_shortage_at(cell):
+		var at=(pointer+Vector2(18,20)).clamp(Vector2(8,54),Vector2(660,668))
+		hud.draw_style_box(MarketView.panel(UI.PAPER,UI.WOOD),Rect2(at,Vector2(250,62)))
+		label_on(hud,at+Vector2(10,24),"建設不可（素材不足）",15,Color("a73626"))
+		label_on(hud,at+Vector2(10,49),"予約は可能",14,UI.INK)
+	elif not pointer_over_ui() and world.inside(cell) and StockView.details(world,cell)!="":
 		var lines=StockView.details(world,cell).split("\n")
 		var height=20+lines.size()*22
 		var p=(pointer+Vector2(16,20)).clamp(Vector2(8,54),Vector2(868,740-height))

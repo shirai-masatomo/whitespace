@@ -79,7 +79,8 @@ static func resident(g):
 		var profile=g.world.HumanCombat.profile(a)
 		text(p,"Equipment","武器：%s\n射程 %d / 威力 %d\n\n衣服：%s\n\n装備は備蓄の現物を使用します。"%[profile.name,profile.range,profile.damage,"なし" if a.get("clothing",{}).is_empty() else g.world.Zones.Catalog.title(a.clothing.item_id)],Rect2(282,68,570,160),16)
 	elif g.resident_tab=="仕事":
-		text(p,"Work","現在の仕事："+a.get("work_status","待機")+"\n\n役割画面で仕事の優先度を変更できます。\n生活画面で時間割と食事優先を設定できます。",Rect2(282,68,570,150),16)
+		text(p,"Work","現在の仕事："+a.get("work_status","待機")+"\n\n役割画面で仕事の優先度を変更できます。\n生活画面で時間割と食事優先を設定できます。",Rect2(282,68,570,104),16)
+		var auto=CheckBox.new();auto.name="AutoCollect";auto.text="自動収集（指定仕事がないとき）";auto.position=Vector2(282,176);auto.size=Vector2(400,34);auto.button_pressed=a.get("auto_collect",true);auto.toggled.connect(func(value):g.world.Work.Ambient.set_enabled(g.world,a,value));p.add_child(auto);Panels.compact_button(g,auto,14)
 		button(g,p,"resident_roles","仕事の優先度",Rect2(282,228,180,34),roles.bind(g,key))
 	elif g.resident_tab=="履歴":
 		var memories=[]
@@ -94,39 +95,13 @@ static func resident(g):
 		var b=g.buttons[id];b.visible=(g.resident_tab=="装備") if id in equipment else (g.resident_tab in ["ステータス","仕事"])
 		b.reparent(p);Panels.compact_button(g,b,13)
 		if b.visible:b.position=Vector2(14+index*124,296);b.size=Vector2(118,32);index+=1
-class BedIcon extends Control:
-	func _draw():
-		draw_set_transform(Vector2(size.x/2,size.y/2),0,Vector2.ONE*minf(size.x/48,size.y/42))
-		Art.bed(self,Vector2.ZERO)
 static func tool_art(button,kind):
-	if kind!="bed":return
-	var bed=BedIcon.new();bed.position=Vector2(26,6);bed.size=Vector2(48,42);bed.mouse_filter=Control.MOUSE_FILTER_IGNORE;button.add_child(bed)
-class RoomMap extends Control:
-	var tiles=[]
-	func _draw():
-		draw_rect(Rect2(Vector2.ZERO,size),Color("65705a"))
-		for row in tiles:
-			if row.get("kind","")=="bed":
-				draw_set_transform(row.rect.get_center(),0,Vector2.ONE*row.rect.size.x/48);Art.bed(self,Vector2.ZERO);draw_set_transform(Vector2.ZERO)
-			elif row.texture!=null:draw_texture_rect(row.texture,row.rect,false)
-			else:draw_rect(row.rect,Color("9b8d6a"))
-static func room_map(g,parent,h):
-	var map=RoomMap.new();map.name="RoomPreview";map.position=Vector2(610,60);map.size=Vector2(262,242);map.mouse_filter=Control.MOUSE_FILTER_IGNORE;map.texture_filter=CanvasItem.TEXTURE_FILTER_NEAREST;parent.add_child(map)
-	var cached=g.world.get_meta("room_preview_cache",{})
-	if cached.get("id",-1)==h.id and cached.get("revision",-1)==g.world.navigation_revision:
-		map.tiles=cached.tiles;return map
-	var bounds=Rect2i(h.cells.keys()[0],Vector2i.ONE)
-	for q in h.cells:bounds=bounds.merge(Rect2i(q,Vector2i.ONE))
-	bounds=bounds.grow(1);var scale=minf(250.0/bounds.size.x,230.0/bounds.size.y);var offset=(map.size-Vector2(bounds.size)*scale)/2
-	for x in range(bounds.position.x,bounds.end.x):
-		for y in range(bounds.position.y,bounds.end.y):
-			var q=Vector2i(x,y);var rect=Rect2(offset+Vector2(q-bounds.position)*scale,Vector2.ONE*scale)
-			if g.world.floors.has(q):map.tiles.append({"texture":icon(g.world.floors[q].kind),"rect":rect})
-			var b=g.world.structures.get(q,{})
-			if not b.is_empty() and b.get("status")=="ready":
-				var texture=icon(b.kind)
-				if b.kind in g.world.Buildings.WALLS:
-					texture=Art.TEXTURES.get(("wall/normal/wood_mask_%02d.png" if b.kind=="wood_wall" else Art.material(b.kind)+"/wall/normal/mask_%02d.png")%Art.wall_mask(g,q))
-				map.tiles.append({"texture":texture,"rect":rect,"kind":b.kind})
-	g.world.set_meta("room_preview_cache",{"id":h.id,"revision":g.world.navigation_revision,"tiles":map.tiles})
-	return map
+	var title=button.text;button.text="";button.icon=null
+	var image=icon(kind)
+	if image!=null:
+		# Offline measured alpha bounds: no get_image/readback or runtime crop work.
+		var bounds={"cooking_bench":Rect2(2,8,28,15),"carpentry_bench":Rect2(2,8,28,15),"sewing_bench":Rect2(2,7,28,17),"bed":Rect2(16,4,31,56)}
+		if bounds.has(kind):
+			var atlas=AtlasTexture.new();atlas.atlas=image;atlas.region=bounds[kind];image=atlas
+		var art=TextureRect.new();art.name="BuildIcon";art.texture=image;art.position=Vector2(16,9);art.size=Vector2(70,56);art.expand_mode=TextureRect.EXPAND_IGNORE_SIZE;art.stretch_mode=TextureRect.STRETCH_KEEP_ASPECT_CENTERED;art.texture_filter=CanvasItem.TEXTURE_FILTER_NEAREST;art.mouse_filter=Control.MOUSE_FILTER_IGNORE;button.add_child(art)
+	var name_label=Label.new();name_label.name="BuildName";name_label.text=title;name_label.position=Vector2(3,68);name_label.size=Vector2(96,24);name_label.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER;name_label.add_theme_font_size_override("font_size",13);name_label.add_theme_color_override("font_color",Color("354b3d"));name_label.mouse_filter=Control.MOUSE_FILTER_IGNORE;button.add_child(name_label)

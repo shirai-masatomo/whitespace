@@ -6,7 +6,9 @@ func nodes(node,rows):
 		var rect=node.get_global_rect();var row={"name":str(node.name),"type":node.get_class(),"rect":[rect.position.x,rect.position.y,rect.size.x,rect.size.y]}
 		if node is Label or node is Button:row.text=node.text;row.font=node.get_theme_font_size("font_size")
 		if node is Label:row.wrap=node.autowrap_mode!=TextServer.AUTOWRAP_OFF
-		if node is TextureRect and node.texture!=null:row.texture=node.texture.resource_path
+		if node is TextureRect and node.texture!=null:
+			row.texture=node.texture.atlas.resource_path if node.texture is AtlasTexture else node.texture.resource_path
+			if node.texture is AtlasTexture:row.crop=[node.texture.region.position.x,node.texture.region.position.y,node.texture.region.end.x,node.texture.region.end.y]
 		if node is Button and node.icon!=null:row.icon=node.icon.resource_path
 		if node is ProgressBar:row.value=node.value;row.maximum=node.max_value
 		if node is Tree:
@@ -18,9 +20,6 @@ func nodes(node,rows):
 			var style=node.get_theme_stylebox("normal")
 			if style is StyleBoxFlat:row.color=style.bg_color.to_html()
 			elif style is StyleBoxTexture:row.color=style.modulate_color.to_html()
-		if node.get_script()==g_review().RoomMap:
-			row.tiles=[]
-			for t in node.tiles:row.tiles.append({"kind":t.get("kind",""),"texture":t.texture.resource_path if t.texture!=null else "","rect":[t.rect.position.x,t.rect.position.y,t.rect.size.x,t.rect.size.y]})
 		rows.append(row)
 	for child in node.get_children():nodes(child,rows)
 func g_review():return preload("res://game/review_ui.gd")
@@ -36,7 +35,7 @@ func run():
 		var g=boot.game;g.set_process(false);g.world=fixture();w=g.world;w.paused=true;g.story_modal="";g.field_book=false;g.field_shop=false
 		var helper=w.keeper.duplicate(true);helper.name="田中";w.Work.register(w,"helper",helper)
 		for dimensions in [Vector2i(1280,800),Vector2i(1600,1000)]:
-			root.size=dimensions;g.choose_walk();g.resident_tab="ステータス";g.refresh();await process_frame
+			helper.auto_collect=true;root.size=dimensions;g.choose_walk();g.resident_tab="ステータス";g.refresh();await process_frame
 			check(g.colony_panel.name=="ResidentDetails","Resident owns one detail panel")
 			check(g.buttons.keeper_draft.visible and not g.buttons.keeper_equip.visible,"Status keeps draft, hides equipment actions")
 			var status=g.colony_panel.get_node("ResidentStatus");check(status.nodes.size()==5,"Five live status bars")
@@ -49,17 +48,20 @@ func run():
 			layout(g,"equipment",dimensions)
 			g.colony_panel.get_node("ResidentPicker").item_selected.emit(1);check(g.selected.key=="helper","Picker selects actual resident")
 			g.buttons.time_tab.pressed.emit();check(g.life_actor=="helper","Life tab uses selected resident");g.HomeUI.back(g)
-			g.buttons.resident_tab_2.pressed.emit();g.buttons.resident_roles.pressed.emit();check(g.roles_actor=="helper" and g.colony_page=="roles","Work opens selected roles")
+			g.buttons.resident_tab_2.pressed.emit();await process_frame;layout(g,"resident-work",dimensions);check(g.colony_panel.get_node("AutoCollect").button_pressed,"Auto collect defaults on for resident");g.colony_panel.get_node("AutoCollect").toggled.emit(false);check(not helper.auto_collect,"Personal checkbox changes selected resident only");g.buttons.resident_roles.pressed.emit();check(g.roles_actor=="helper" and g.colony_page=="roles","Work opens selected roles")
 			g.select_group(0);var before=[]
 			for i in range(4):before.append(g.buttons["architect_category_%d"%i].get_global_rect())
 			for category in g.ColonyModel.ARCHITECT:
 				g.ColonyPanels.architecture_category(g,category)
 				for i in range(4):check(g.buttons["architect_category_%d"%i].get_global_rect()==before[i],"Fixed left categories: "+category)
 			g.ColonyPanels.architecture_category(g,"壁と扉");g.select_tool("wall");await process_frame
-			check(g.buttons.wall.icon!=null and g.buttons.wall.size.y==96,"Construction grid uses building image")
+			check(g.buttons.wall.has_node("BuildIcon") and g.buttons.wall.size.y==96,"Construction grid uses building image")
 			for kind in ["wall","wood_wall","stone_wall","soil_tile","wood_tile","stone_tile","door","locked_door","cooking_bench"]:check(g.ReviewUI.icon(kind)!=null,"Actual asset present: "+kind)
 			check(g.colony_panel.has_node("BuildDescription"),"Selected construction has material details")
 			layout(g,"architect",dimensions)
+			g.ColonyPanels.architecture_category(g,"設置");await process_frame;layout(g,"architect-equipment",dimensions)
+			for kind in ["cooking_bench","carpentry_bench","sewing_bench","bed"]:check(g.buttons[kind].get_node("BuildIcon").get_rect()==Rect2(16,9,70,56),"Unified visible icon box: "+kind)
+			g.ColonyPanels.architecture_category(g,"床");await process_frame;layout(g,"architect-floors",dimensions)
 			var zid=w.Zones.create(w,"stockpile",Vector2i(31,25),Vector2i(32,25));g.zone_controls.open(g,zid);await process_frame
 			var tree=g.colony_panel.find_child("StockpileFilters",true,false);var access=g.colony_panel.find_child("StockAccess",true,false)
 			check(tree.visible and access.visible and not tree.get_global_rect().intersects(access.get_global_rect()),"Filters and access visible in separate columns")
@@ -70,12 +72,9 @@ func run():
 			await process_frame;layout(g,"stockpile",dimensions)
 			g.neutral();house(Vector2i(15,15));ready("bed",Vector2i(17,17));w.refresh_indoor();w.Zones.create(w,"residential",Vector2i(16,16),Vector2i(18,18));w.Homes.assign_pending(w)
 			g.selected={"kind":"house","id":w.homes.keys()[0]};g.refresh();await process_frame
-			check(g.colony_panel.has_node("RoomPreview") and g.colony_panel.get_node("RoomPreview").tiles.size()>0,"House map from real cells")
-			check(g.colony_panel.get_node("RoomPreview").tiles.all(func(t):return t.texture!=null or t.get("kind")=="bed"),"Room map has no missing wall/floor texture")
+			check(not g.colony_panel.has_node("RoomPreview") and g.colony_panel.size.x==604,"Compact house omits map")
 			check(g.colony_panel.get_node("HouseFacts").text.contains("ベッド：1"),"House bed count from data")
 			layout(g,"house",dimensions)
-			var cached=w.get_meta("room_preview_cache");g.refresh();check(w.get_meta("room_preview_cache")==cached,"Unchanged house reuses one bounded preview cache")
-			w.invalidate_navigation();g.refresh();check(w.get_meta("room_preview_cache").revision==w.navigation_revision,"House topology invalidates preview cache")
 		boot.queue_free();await process_frame
 	var failed=checks.filter(func(c):return not c.passed).size()
 	for entry in [["reference-ui.json",{"checks":checks,"count":checks.size(),"failed":failed}],["reference-ui-layouts.json",{"layouts":layouts}]]:

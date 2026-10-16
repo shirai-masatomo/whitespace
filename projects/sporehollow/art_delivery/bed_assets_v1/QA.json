@@ -1,0 +1,59 @@
+{
+  "passed": true,
+  "count": 13,
+  "checks": [
+    {
+      "check": "bed.png RGBA dimensions",
+      "passed": true
+    },
+    {
+      "check": "bed.png binary alpha",
+      "passed": true
+    },
+    {
+      "check": "bed.png invisible rgb clean",
+      "passed": true
+    },
+    {
+      "check": "bed.png palette <=24",
+      "passed": true
+    },
+    {
+      "check": "bed.png pillow opaque",
+      "passed": true
+    },
+    {
+      "check": "bed_ui.png RGBA dimensions",
+      "passed": true
+    },
+    {
+      "check": "bed_ui.png binary alpha",
+      "passed": true
+    },
+    {
+      "check": "bed_ui.png invisible rgb clean",
+      "passed": true
+    },
+    {
+      "check": "bed_ui.png palette <=24",
+      "passed": true
+    },
+    {
+      "check": "bed_ui.png pillow opaque",
+      "passed": true
+    },
+    {
+      "check": "world south contact reaches anchor",
+      "passed": true
+    },
+    {
+      "check": "UI centered 4px vertical margin",
+      "passed": true
+    },
+    {
+      "check": "UI horizontal center",
+      "passed": true
+    }
+  ],
+  "runtime_verified": false
+}

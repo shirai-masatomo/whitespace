@@ -1,6 +1,6 @@
 {
   "delivery_branch": "codex/sporehollow-art-assets",
-  "latest_delivery_commit": "f7c521e72047119bed1121c1cebad1b5ddacfe31",
+  "latest_delivery_commit": "54300cef37f964183d7832379d2be575b68d1c99",
   "characters_v1": "f3e4ae82b68c342b928dfb5dfcebb451353f9b8d",
   "characters_motion_v1": "ae950a3df8de7a3dbbd14f40dc3ef9df05e22fd4",
   "ranch_assets_v1": "57aab97c3efc495d7553ee412c68696945d8e846",
@@ -42,5 +42,6 @@
   "crafting_assets_v1": {
     "commit": "f7c521e72047119bed1121c1cebad1b5ddacfe31",
     "scope": "3 benches + wood_crate/wood_shelf, world and UI; other delivered items not integrated in this task"
-  }
+  },
+  "bed_assets_v1": "54300cef37f964183d7832379d2be575b68d1c99"
 }

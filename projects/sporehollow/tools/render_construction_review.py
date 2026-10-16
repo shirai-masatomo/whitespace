@@ -34,7 +34,7 @@ def render(calls,size):
   if 'tint' in c:source=ImageChops.multiply(source,Image.new('RGBA',source.size,color(c['tint'])))
   image.alpha_composite(source,tuple(map(int,c['at'])))
  return image
-names={'wall':'土壁','wood_wall':'木壁','stone_wall':'石壁','soil_tile':'土床','wood_tile':'木床','stone_tile':'石床','door':'扉','cooking_bench':'調理台'}
+names={'wall':'土壁','wood_wall':'木壁','stone_wall':'石壁','soil_tile':'土床','wood_tile':'木床','stone_tile':'石床','door':'扉','cooking_bench':'調理台','bed':'ベッド'}
 sheet=Image.new('RGB',(1032,9*326+56),'#f1e8ce');pen=ImageDraw.Draw(sheet)
 pen.text((12,5),'本番描画命令＋正式PNGのCPU合成比較（実ゲームのスクリーンショットではありません）',font=font,fill='#273f32')
 for i,row in enumerate(data['rooms']):
@@ -45,11 +45,11 @@ for i,row in enumerate(data['rooms']):
 sheet.save(d/'construction-floor-comparison.png')
 # Representative wood/wood row, plus both unlike floor materials.
 sheet.crop((0,56+3*326,1032,56+6*326)).save(d/'construction-floor-detail.png')
-sheet=Image.new('RGB',(880,4*194+68),'#f1e8ce');pen=ImageDraw.Draw(sheet)
+sheet=Image.new('RGB',(880,5*194+68),'#f1e8ce');pen=ImageDraw.Draw(sheet)
 pen.text((12,5),'建築ゴーストのCPU合成：資材待ちは砂時計、設置不可だけ禁止マーク',font=font,fill='#273f32')
 for i,row in enumerate(data['ghosts']):
  x=(i%4)*220+10;y=(i//4)*194+64
- label={'before':'変更前（不足時も白）','normal':'資材あり','wait':'資材待ち・予約可能','invalid':'設置不可・予約不可'}[row['state']]
+ label={'before':'変更前（赤橙・薄い）','normal':'資材あり','wait':'資材待ち・予約可能','invalid':'設置不可・予約不可'}[row['state']]
  pen.text((x,y-25),label,font=font,fill='#273f32');pen.text((x,y+139),names[row['kind']],font=font,fill='#273f32')
  sheet.paste(render(row['calls'],(200,136)).convert('RGB'),(x,y))
 sheet.save(d/'construction-ghost-comparison.png')

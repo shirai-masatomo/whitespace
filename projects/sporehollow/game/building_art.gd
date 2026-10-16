@@ -1,4 +1,5 @@
 extends RefCounted
+const BED=preload("res://art_delivery/bed_assets_v1/bed.png")
 const FURNITURE_WORLD = {
 	"cooking_bench":preload("res://art_delivery/crafting_assets_v1/benches/cooking_bench.png"),
 	"carpentry_bench":preload("res://art_delivery/crafting_assets_v1/benches/carpentry_bench.png"),
@@ -7,6 +8,7 @@ const FURNITURE_WORLD = {
 	"wood_shelf":preload("res://art_delivery/crafting_assets_v1/placeables/wood_shelf.png"),
 }
 const FURNITURE_UI = {
+	"bed":preload("res://art_delivery/bed_assets_v1/bed_ui.png"),
 	"cooking_bench":preload("res://art_delivery/crafting_assets_v1/ui_icons/cooking_bench.png"),
 	"carpentry_bench":preload("res://art_delivery/crafting_assets_v1/ui_icons/carpentry_bench.png"),
 	"sewing_bench":preload("res://art_delivery/crafting_assets_v1/ui_icons/sewing_bench.png"),
@@ -309,6 +311,5 @@ static func placeable(game,p:Vector2,kind:String,tint:Color=Color.WHITE):
 	else:bench(game,p,kind,tint)
 
 static func bed(game,p:Vector2,tint:Color=Color.WHITE):
-	# Provisional furniture, 1x1 ground footprint; no new asset generation.
-	for row in [[Rect2(-20,-17,40,37),Color("765539")],[Rect2(-17,-14,34,29),Color("d7ceab")],[Rect2(-15,-12,30,9),Color("f1e9d5")],[Rect2(-15,0,30,13),Color("819773")]]:
-		game.draw_rect(Rect2(p+row[0].position,row[0].size),row[1]*tint)
+	# Foot at cell top-left+(24,42), texture anchor(24,56); same image for ghosts.
+	game.draw_texture(BED,(p+Vector2(-24,-35)).round(),tint)

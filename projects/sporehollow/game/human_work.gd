@@ -1,14 +1,17 @@
 extends RefCounted
 ## Selection/ownership only. Jobs executes onsite operations; Life owns emergencies/rest.
+const Ambient=preload("res://game/ambient_work.gd")
 const Policy=preload("res://game/work_policy.gd")
 
 static func register(w,key: String,actor: Dictionary):
 	w.workers[key]=actor
 	actor.work_key=key
+	actor.auto_collect=actor.get("auto_collect",true)
 	w.Sleep.initialize(actor)
 	w.housing_dirty=true
 	migrate_priorities(actor)
 	actor.work_job=-1
+	actor.erase("personal_haul");actor.erase("idle_move")
 	actor.work_status="仕事を探しています"
 	actor.drafted=actor.get("drafted",false)
 
@@ -52,6 +55,7 @@ static func release(w,j):
 
 static func interrupt(w,key: String,reason: String):
 	w.Delivery.release(w,key)
+	if w.workers.has(key):Ambient.stop(w,w.workers[key])
 	var j=active(w,key)
 	if not j.is_empty():
 		release(w,j)
@@ -86,7 +90,6 @@ static func reason(w,key: String,a) -> String:
 	if a.get("hp",0)<=0 or a.get("state","")!="free":return "負傷・療養中"
 	if not a.get("placed",false):return "到着待ち"
 	if a.get("resting",false):return a.get("rest_reason","休息中")
-	if w.Sleep.activity(w,a)=="free" and not a.get("drafted",false):return "自由時間"
 	if a.get("drafted",false):return "徴兵中"
 	if w.tick<a.get("hurt_until",0):return "被弾から回復中"
 	if a.get("danger_near",false):return "近くの敵に対応中"
@@ -201,7 +204,7 @@ static func choose(w,key: String) -> Dictionary:
 static func step(w):
 	w.Stock.step(w)
 	w.Delivery.reconcile(w)
-	var live_ids=w.jobs.map(func(j):return j.id)
+	var live_ids=(w.jobs+Ambient.jobs(w)).map(func(j):return j.id)
 	for token in w.work_claims.keys():
 		if w.work_claims[token] not in live_ids:w.work_claims.erase(token)
 	for a in w.workers.values():
@@ -217,20 +220,26 @@ static func step(w):
 	w.Delivery.refresh_groups(w)
 	for key in w.workers:
 		var a=w.workers[key]
-		if w.Food.step(w,a):continue
+		if w.Food.step(w,a):Ambient.stop(w,a);continue
 		if a.get("needs_rest",false) and a.get("hp",0)>0 and a.get("state","")=="free" and not a.get("nutrition_down",false) and not a.get("dead",false) and a.get("placed",false) and a.get("carrier",-1)<0 and not a.get("danger_near",false) and not a.get("drafted",false):a.work_status="ひと休み · 回復後に同じ仕事を再開";continue
 		var why=reason(w,key,a)
 		if why!="":
 			var current=active(w,key)
 			if not current.is_empty() and not allowed(w,key,current):interrupt(w,key,why)
 			if not w.jobs.any(func(row):return row.kind in ["move","direct_attack"] and allowed(w,key,row)):interrupt(w,key,why);continue
-		if w.build_deliveries.has(key):w.Delivery.step(w,key);continue
+		if not Ambient.safe(w,a):Ambient.stop(w,a)
+		if w.build_deliveries.has(key):Ambient.stop(w,a);w.Delivery.step(w,key);continue
+		# Finish a carried batch before switching, so stock never teleports or disappears.
+		if Ambient.carrying(w,a) and Ambient.collect(w,a):continue
 		var j=active(w,key)
 		if j.is_empty():j=choose(w,key)
+		if not j.is_empty():Ambient.stop(w,a);a.erase("idle_anchor")
 		if j.get("kind","")=="build_delivery":w.Delivery.step(w,key);continue
 		if j.is_empty():
+			if Ambient.collect(w,a):continue
 			var blocked=w.jobs.filter(func(row):return row.state=="blocked")
 			a.work_status="仕事の指定待ち" if w.jobs.is_empty() else (blocked[0].get("block_reason","実行できる仕事を待つ") if not blocked.is_empty() else "担当可能な仕事を待つ")
+			Ambient.idle(w,a)
 			continue
 		w.Jobs.execute(w,j,a)
 		if not w.jobs.has(j):a.work_job=-1;a.work_status="仕事を完了・次を探す";continue

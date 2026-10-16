@@ -38,7 +38,7 @@ func preview(w,kind:String,cell:Vector2i) -> Dictionary:
 	if cursor.kind!=kind or cursor.cells!=[cell]:cursor.begin(kind,cell)
 	return cursor.plan(w)
 func draw(g,kind:String,cell:Vector2i,valid:bool=true,waiting_material:bool=false):
-	var tint=Color(1,0.42,0.25,0.56) if valid and waiting_material else (Color(1,1,1,0.45) if valid else Color(1,0.34,0.28,0.48))
+	var tint=Color(1,.20,.12,.72) if valid and waiting_material else (Color(1,1,1,0.45) if valid else Color(1,0.34,0.28,0.48))
 	var p=g.center(cell)
 	if kind.begins_with("place_"):Art.placeable(g,p,kind.trim_prefix("place_"),tint)
 	elif g.world.BUILD[kind].layer=="floor":Art.floor_at(g,cell,kind,mask(g.world,kind,cell),tint)

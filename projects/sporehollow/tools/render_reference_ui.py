@@ -6,12 +6,13 @@ p=Path(__file__).resolve().parents[1]
 out=p/'review/current/interaction-revision'
 layouts=json.loads((out/'reference-ui-layouts.json').read_text(encoding='utf-8-sig'))['layouts']
 def font(n):return ImageFont.truetype('C:/Windows/Fonts/meiryo.ttc',int(n))
-def texture(im,path,box,stretch=False):
+def texture(im,path,box,stretch=False,crop=None):
  if not path or not path.startswith('res://'):return
  f=p/path[6:]
  if not f.exists():return
- pic=Image.open(f).convert('RGBA');pic=pic.resize((max(1,int(box[2])),max(1,int(box[3]))),Image.Resampling.NEAREST) if stretch else pic
- if not stretch:pic.thumbnail((max(1,int(box[2])),max(1,int(box[3]))),Image.Resampling.NEAREST)
+ pic=Image.open(f).convert('RGBA');pic=pic.crop(tuple(crop)) if crop else pic;pic=pic.resize((max(1,int(box[2])),max(1,int(box[3]))),Image.Resampling.NEAREST) if stretch else pic
+ if not stretch:
+  scale=min(box[2]/pic.width,box[3]/pic.height);pic=pic.resize((max(1,round(pic.width*scale)),max(1,round(pic.height*scale))),Image.Resampling.NEAREST)
  im.paste(pic,(int(box[0]+(box[2]-pic.width)/2),int(box[1]+(box[3]-pic.height)/2)),pic)
 def wrap(text,width,size):
  result=[]
@@ -40,7 +41,7 @@ for row in layouts:
    d.text((x,y),wrap(txt.replace('\r',''),w,size) if n.get('wrap',False) else txt.replace('\r',''),font=font(size),fill='#283f32',spacing=2)
   elif typ=='ProgressBar':
    d.rectangle(box,fill='#c8c1a5');d.rectangle((x,y,x+w*n['value']/max(1,n['maximum']),y+h),fill='#78a76a')
-  elif typ=='TextureRect':texture(im,n.get('texture',''),(x,y,w,h))
+  elif typ=='TextureRect':texture(im,n.get('texture',''),(x,y,w,h),crop=n.get('crop'))
   elif typ=='VScrollBar':d.rectangle(box,fill='#718261')
   if 'tiles' in n:
    d.rectangle(box,fill='#65705a')
