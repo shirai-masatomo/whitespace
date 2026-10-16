@@ -8,7 +8,8 @@
 - **[UIモック4枚](docs/UI_MOCKS.md)** — タイトル／初回探索／死亡／倉庫（画像あり）
 - **[仕様と実装状況の表](docs/IMPLEMENTATION_STATUS.md)** — 何が「今」「次」「後」なのか
 - **[設計判断台帳](docs/DESIGN_DECISIONS.md)** — 既に決めたことと確認事項
-- **[初期EXE～10Fプロトタイプの進め方](docs/PROTOTYPE_10F.md)**
+- **[初期EXE～10Fプロトタイプの進め方](docs/PROTOTYPE_10F.md)
+- **[戦闘シミュレーター：導入決定／未実装](docs/BATTLE_SIMULATION.md)** — ゲーム共通の戦闘コアをヘッドレス検証にも使用**
 
 ### 直近の目標
 

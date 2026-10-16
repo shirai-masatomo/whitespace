@@ -60,6 +60,6 @@
 
 - **本ファイルが簡易的な全体仕様の正本**。敵の基礎HP・ATK・DEF・SP・SPD・EXP・Gold・ドロップ率と固有AIは[敵台帳](docs/ENEMIES.md)、全体Lv補正は[戦闘仕様](docs/COMBAT.md)を正本とする。
 - 詳細： [階層](docs/FLOORS.md) / [敵](docs/ENEMIES.md) / [アイテム](docs/ITEMS.md) / [仲間](docs/ALLIES.md) / [イベント](docs/EVENTS.md) / [戦闘](docs/COMBAT.md) / [スキル一覧](docs/SKILLS.md) / [黄金像](docs/SHRINE.md)。
-- **[画面イメージ4枚と画面遷移](docs/UI_MOCKS.md)** ／ **[仕様と実装範囲の対応表](docs/IMPLEMENTATION_STATUS.md)**。
+- **[画面イメージ4枚と画面遷移](docs/UI_MOCKS.md)** ／ **[仕様と実装範囲の対応表](docs/IMPLEMENTATION_STATUS.md)** ／ **[戦闘シミュレーター（導入決定・未実装）](docs/BATTLE_SIMULATION.md)**。
 - **最優先は見た目と基幹フローの検証**：ゲーム開始→1人で地下探索→死亡→町→所持品／倉庫整理→2回目以降の探索／帰還。最終的な1〜10F試作の前段階とする。
-- Codexへの実装依頼は**まだ行わない**。依頼されたらWindows EXEの開発を段階分けしたプロンプトを作成する。画面画像・仕様表も一緒に渡す。
+- Codexへの実装依頼は**まだ行わない**。**戦闘コアをゲーム本体とヘッドレスシミュレーターで共用し、勝率・死亡率・ターン数・残HPを固定乱数シードで比較する仕組みは導入決定**。依頼されたらWindows EXEの開発を段階分けしたプロンプトを作成する。画面画像・仕様表も一緒に渡す。
