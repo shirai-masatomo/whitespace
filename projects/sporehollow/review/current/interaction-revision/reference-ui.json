@@ -1,0 +1,418 @@
+{
+  "checks": [
+    {
+      "check": "Production loading ready",
+      "passed": true
+    },
+    {
+      "check": "Resident owns one detail panel",
+      "passed": true
+    },
+    {
+      "check": "Status keeps draft, hides equipment actions",
+      "passed": true
+    },
+    {
+      "check": "Five live status bars",
+      "passed": true
+    },
+    {
+      "check": "Status bars have clear separation",
+      "passed": true
+    },
+    {
+      "check": "Trait lines fit without Windows CRLF duplication",
+      "passed": true
+    },
+    {
+      "check": "Status updates from live actor",
+      "passed": true
+    },
+    {
+      "check": "Panel avoids log and bottom menu: resident",
+      "passed": true
+    },
+    {
+      "check": "Equipment tab uses original gear controls",
+      "passed": true
+    },
+    {
+      "check": "Panel avoids log and bottom menu: equipment",
+      "passed": true
+    },
+    {
+      "check": "Picker selects actual resident",
+      "passed": true
+    },
+    {
+      "check": "Life tab uses selected resident",
+      "passed": true
+    },
+    {
+      "check": "Work opens selected roles",
+      "passed": true
+    },
+    {
+      "check": "Fixed left categories: 壁と扉",
+      "passed": true
+    },
+    {
+      "check": "Fixed left categories: 壁と扉",
+      "passed": true
+    },
+    {
+      "check": "Fixed left categories: 壁と扉",
+      "passed": true
+    },
+    {
+      "check": "Fixed left categories: 壁と扉",
+      "passed": true
+    },
+    {
+      "check": "Fixed left categories: 床",
+      "passed": true
+    },
+    {
+      "check": "Fixed left categories: 床",
+      "passed": true
+    },
+    {
+      "check": "Fixed left categories: 床",
+      "passed": true
+    },
+    {
+      "check": "Fixed left categories: 床",
+      "passed": true
+    },
+    {
+      "check": "Fixed left categories: 設置",
+      "passed": true
+    },
+    {
+      "check": "Fixed left categories: 設置",
+      "passed": true
+    },
+    {
+      "check": "Fixed left categories: 設置",
+      "passed": true
+    },
+    {
+      "check": "Fixed left categories: 設置",
+      "passed": true
+    },
+    {
+      "check": "Fixed left categories: ゾーン",
+      "passed": true
+    },
+    {
+      "check": "Fixed left categories: ゾーン",
+      "passed": true
+    },
+    {
+      "check": "Fixed left categories: ゾーン",
+      "passed": true
+    },
+    {
+      "check": "Fixed left categories: ゾーン",
+      "passed": true
+    },
+    {
+      "check": "Construction grid uses building image",
+      "passed": true
+    },
+    {
+      "check": "Actual asset present: wall",
+      "passed": true
+    },
+    {
+      "check": "Actual asset present: wood_wall",
+      "passed": true
+    },
+    {
+      "check": "Actual asset present: stone_wall",
+      "passed": true
+    },
+    {
+      "check": "Actual asset present: soil_tile",
+      "passed": true
+    },
+    {
+      "check": "Actual asset present: wood_tile",
+      "passed": true
+    },
+    {
+      "check": "Actual asset present: stone_tile",
+      "passed": true
+    },
+    {
+      "check": "Actual asset present: door",
+      "passed": true
+    },
+    {
+      "check": "Actual asset present: locked_door",
+      "passed": true
+    },
+    {
+      "check": "Actual asset present: cooking_bench",
+      "passed": true
+    },
+    {
+      "check": "Selected construction has material details",
+      "passed": true
+    },
+    {
+      "check": "Panel avoids log and bottom menu: architect",
+      "passed": true
+    },
+    {
+      "check": "Filters and access visible in separate columns",
+      "passed": true
+    },
+    {
+      "check": "Permission callback retains restriction",
+      "passed": true
+    },
+    {
+      "check": "Reset returns outdoor access to existing default",
+      "passed": true
+    },
+    {
+      "check": "Rename/access do not alter cells or items",
+      "passed": true
+    },
+    {
+      "check": "Panel avoids log and bottom menu: stockpile",
+      "passed": true
+    },
+    {
+      "check": "House map from real cells",
+      "passed": true
+    },
+    {
+      "check": "Room map has no missing wall/floor texture",
+      "passed": true
+    },
+    {
+      "check": "House bed count from data",
+      "passed": true
+    },
+    {
+      "check": "Panel avoids log and bottom menu: house",
+      "passed": true
+    },
+    {
+      "check": "Unchanged house reuses one bounded preview cache",
+      "passed": true
+    },
+    {
+      "check": "House topology invalidates preview cache",
+      "passed": true
+    },
+    {
+      "check": "Resident owns one detail panel",
+      "passed": true
+    },
+    {
+      "check": "Status keeps draft, hides equipment actions",
+      "passed": true
+    },
+    {
+      "check": "Five live status bars",
+      "passed": true
+    },
+    {
+      "check": "Status bars have clear separation",
+      "passed": true
+    },
+    {
+      "check": "Trait lines fit without Windows CRLF duplication",
+      "passed": true
+    },
+    {
+      "check": "Status updates from live actor",
+      "passed": true
+    },
+    {
+      "check": "Panel avoids log and bottom menu: resident",
+      "passed": true
+    },
+    {
+      "check": "Equipment tab uses original gear controls",
+      "passed": true
+    },
+    {
+      "check": "Panel avoids log and bottom menu: equipment",
+      "passed": true
+    },
+    {
+      "check": "Picker selects actual resident",
+      "passed": true
+    },
+    {
+      "check": "Life tab uses selected resident",
+      "passed": true
+    },
+    {
+      "check": "Work opens selected roles",
+      "passed": true
+    },
+    {
+      "check": "Fixed left categories: 壁と扉",
+      "passed": true
+    },
+    {
+      "check": "Fixed left categories: 壁と扉",
+      "passed": true
+    },
+    {
+      "check": "Fixed left categories: 壁と扉",
+      "passed": true
+    },
+    {
+      "check": "Fixed left categories: 壁と扉",
+      "passed": true
+    },
+    {
+      "check": "Fixed left categories: 床",
+      "passed": true
+    },
+    {
+      "check": "Fixed left categories: 床",
+      "passed": true
+    },
+    {
+      "check": "Fixed left categories: 床",
+      "passed": true
+    },
+    {
+      "check": "Fixed left categories: 床",
+      "passed": true
+    },
+    {
+      "check": "Fixed left categories: 設置",
+      "passed": true
+    },
+    {
+      "check": "Fixed left categories: 設置",
+      "passed": true
+    },
+    {
+      "check": "Fixed left categories: 設置",
+      "passed": true
+    },
+    {
+      "check": "Fixed left categories: 設置",
+      "passed": true
+    },
+    {
+      "check": "Fixed left categories: ゾーン",
+      "passed": true
+    },
+    {
+      "check": "Fixed left categories: ゾーン",
+      "passed": true
+    },
+    {
+      "check": "Fixed left categories: ゾーン",
+      "passed": true
+    },
+    {
+      "check": "Fixed left categories: ゾーン",
+      "passed": true
+    },
+    {
+      "check": "Construction grid uses building image",
+      "passed": true
+    },
+    {
+      "check": "Actual asset present: wall",
+      "passed": true
+    },
+    {
+      "check": "Actual asset present: wood_wall",
+      "passed": true
+    },
+    {
+      "check": "Actual asset present: stone_wall",
+      "passed": true
+    },
+    {
+      "check": "Actual asset present: soil_tile",
+      "passed": true
+    },
+    {
+      "check": "Actual asset present: wood_tile",
+      "passed": true
+    },
+    {
+      "check": "Actual asset present: stone_tile",
+      "passed": true
+    },
+    {
+      "check": "Actual asset present: door",
+      "passed": true
+    },
+    {
+      "check": "Actual asset present: locked_door",
+      "passed": true
+    },
+    {
+      "check": "Actual asset present: cooking_bench",
+      "passed": true
+    },
+    {
+      "check": "Selected construction has material details",
+      "passed": true
+    },
+    {
+      "check": "Panel avoids log and bottom menu: architect",
+      "passed": true
+    },
+    {
+      "check": "Filters and access visible in separate columns",
+      "passed": true
+    },
+    {
+      "check": "Permission callback retains restriction",
+      "passed": true
+    },
+    {
+      "check": "Reset returns outdoor access to existing default",
+      "passed": true
+    },
+    {
+      "check": "Rename/access do not alter cells or items",
+      "passed": true
+    },
+    {
+      "check": "Panel avoids log and bottom menu: stockpile",
+      "passed": true
+    },
+    {
+      "check": "House map from real cells",
+      "passed": true
+    },
+    {
+      "check": "Room map has no missing wall/floor texture",
+      "passed": true
+    },
+    {
+      "check": "House bed count from data",
+      "passed": true
+    },
+    {
+      "check": "Panel avoids log and bottom menu: house",
+      "passed": true
+    },
+    {
+      "check": "Unchanged house reuses one bounded preview cache",
+      "passed": true
+    },
+    {
+      "check": "House topology invalidates preview cache",
+      "passed": true
+    }
+  ],
+  "count": 103,
+  "failed": 0
+}

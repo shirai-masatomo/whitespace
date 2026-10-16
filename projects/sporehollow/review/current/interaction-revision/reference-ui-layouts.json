@@ -1,0 +1,3356 @@
+{
+  "layouts": [
+    {
+      "name": "resident",
+      "nodes": [
+        {
+          "name": "@Control@13",
+          "rect": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "type": "Control"
+        },
+        {
+          "name": "ResidentDetails",
+          "rect": [
+            16.0,
+            402.0,
+            896.0,
+            340.0
+          ],
+          "type": "Panel"
+        },
+        {
+          "font": 20,
+          "name": "Heading",
+          "rect": [
+            30.0,
+            414.0,
+            90.0,
+            30.0
+          ],
+          "text": "住民詳細",
+          "type": "Label",
+          "wrap": true
+        },
+        {
+          "color": "eadebfff",
+          "font": 14,
+          "name": "ResidentPicker",
+          "rect": [
+            128.0,
+            412.0,
+            180.0,
+            32.0
+          ],
+          "text": "牧場主",
+          "type": "OptionButton"
+        },
+        {
+          "color": "bbd99cff",
+          "font": 14,
+          "name": "@Button@335",
+          "rect": [
+            322.0,
+            412.0,
+            90.0,
+            32.0
+          ],
+          "text": "ステータス",
+          "type": "Button"
+        },
+        {
+          "color": "e7d9b5ff",
+          "font": 14,
+          "name": "@Button@336",
+          "rect": [
+            418.0,
+            412.0,
+            90.0,
+            32.0
+          ],
+          "text": "装備",
+          "type": "Button"
+        },
+        {
+          "color": "e7d9b5ff",
+          "font": 14,
+          "name": "@Button@337",
+          "rect": [
+            514.0,
+            412.0,
+            90.0,
+            32.0
+          ],
+          "text": "仕事",
+          "type": "Button"
+        },
+        {
+          "color": "e7d9b5ff",
+          "font": 14,
+          "name": "@Button@338",
+          "rect": [
+            610.0,
+            412.0,
+            90.0,
+            32.0
+          ],
+          "text": "履歴",
+          "type": "Button"
+        },
+        {
+          "color": "eadebfff",
+          "font": 14,
+          "name": "@Button@319",
+          "rect": [
+            710.0,
+            412.0,
+            84.0,
+            32.0
+          ],
+          "text": "生活",
+          "type": "Button"
+        },
+        {
+          "color": "eadebfff",
+          "font": 14,
+          "name": "@Button@339",
+          "rect": [
+            806.0,
+            412.0,
+            92.0,
+            32.0
+          ],
+          "text": "閉じる",
+          "type": "Button"
+        },
+        {
+          "name": "@TextureRect@340",
+          "rect": [
+            36.0,
+            464.0,
+            72.0,
+            94.0
+          ],
+          "texture": "res://art_delivery/characters_v1/keeper_idle_right_00.png",
+          "type": "TextureRect"
+        },
+        {
+          "font": 17,
+          "name": "Name",
+          "rect": [
+            120.0,
+            466.0,
+            146.0,
+            76.0
+          ],
+          "text": "牧場主\n牧場主",
+          "type": "Label",
+          "wrap": true
+        },
+        {
+          "font": 14,
+          "name": "Traits",
+          "rect": [
+            36.0,
+            564.0,
+            230.0,
+            120.0
+          ],
+          "text": "特性\n生活：通常\n食欲：通常\n仕事：普通",
+          "type": "Label",
+          "wrap": true
+        },
+        {
+          "name": "ResidentStatus",
+          "rect": [
+            282.0,
+            462.0,
+            610.0,
+            224.0
+          ],
+          "type": "Control"
+        },
+        {
+          "font": 13,
+          "name": "Name_hp",
+          "rect": [
+            282.0,
+            462.0,
+            76.0,
+            25.0
+          ],
+          "text": "HP",
+          "type": "Label",
+          "wrap": true
+        },
+        {
+          "maximum": 30.0,
+          "name": "@ProgressBar@341",
+          "rect": [
+            360.0,
+            468.0,
+            128.0,
+            12.0
+          ],
+          "type": "ProgressBar",
+          "value": 17.0
+        },
+        {
+          "font": 13,
+          "name": "Value_hp",
+          "rect": [
+            496.0,
+            462.0,
+            86.0,
+            24.0
+          ],
+          "text": "17 / 30",
+          "type": "Label",
+          "wrap": true
+        },
+        {
+          "font": 13,
+          "name": "Name_stamina",
+          "rect": [
+            282.0,
+            489.0,
+            76.0,
+            25.0
+          ],
+          "text": "スタミナ",
+          "type": "Label",
+          "wrap": true
+        },
+        {
+          "maximum": 100.0,
+          "name": "@ProgressBar@342",
+          "rect": [
+            360.0,
+            495.0,
+            128.0,
+            12.0
+          ],
+          "type": "ProgressBar",
+          "value": 100.0
+        },
+        {
+          "font": 13,
+          "name": "Value_stamina",
+          "rect": [
+            496.0,
+            489.0,
+            86.0,
+            24.0
+          ],
+          "text": "100 / 100",
+          "type": "Label",
+          "wrap": true
+        },
+        {
+          "font": 13,
+          "name": "Name_satiety",
+          "rect": [
+            282.0,
+            516.0,
+            76.0,
+            25.0
+          ],
+          "text": "満腹度",
+          "type": "Label",
+          "wrap": true
+        },
+        {
+          "maximum": 100.0,
+          "name": "@ProgressBar@343",
+          "rect": [
+            360.0,
+            522.0,
+            128.0,
+            12.0
+          ],
+          "type": "ProgressBar",
+          "value": 100.0
+        },
+        {
+          "font": 13,
+          "name": "Value_satiety",
+          "rect": [
+            496.0,
+            516.0,
+            86.0,
+            24.0
+          ],
+          "text": "100 / 100",
+          "type": "Label",
+          "wrap": true
+        },
+        {
+          "font": 13,
+          "name": "Name_sleepiness",
+          "rect": [
+            282.0,
+            543.0,
+            76.0,
+            25.0
+          ],
+          "text": "眠気",
+          "type": "Label",
+          "wrap": true
+        },
+        {
+          "maximum": 100.0,
+          "name": "@ProgressBar@344",
+          "rect": [
+            360.0,
+            549.0,
+            128.0,
+            12.0
+          ],
+          "type": "ProgressBar",
+          "value": 0.0
+        },
+        {
+          "font": 13,
+          "name": "Value_sleepiness",
+          "rect": [
+            496.0,
+            543.0,
+            86.0,
+            24.0
+          ],
+          "text": "0 / 100",
+          "type": "Label",
+          "wrap": true
+        },
+        {
+          "font": 13,
+          "name": "Name_satisfaction",
+          "rect": [
+            282.0,
+            570.0,
+            76.0,
+            25.0
+          ],
+          "text": "満足度",
+          "type": "Label",
+          "wrap": true
+        },
+        {
+          "maximum": 100.0,
+          "name": "@ProgressBar@345",
+          "rect": [
+            360.0,
+            576.0,
+            128.0,
+            12.0
+          ],
+          "type": "ProgressBar",
+          "value": 50.0
+        },
+        {
+          "font": 13,
+          "name": "Value_satisfaction",
+          "rect": [
+            496.0,
+            570.0,
+            86.0,
+            24.0
+          ],
+          "text": "50 / 100",
+          "type": "Label",
+          "wrap": true
+        },
+        {
+          "font": 14,
+          "name": "Mood",
+          "rect": [
+            282.0,
+            608.0,
+            298.0,
+            74.0
+          ],
+          "text": "リラックス\n普段の生活",
+          "type": "Label",
+          "wrap": true
+        },
+        {
+          "font": 16,
+          "name": "ActionHeading",
+          "rect": [
+            602.0,
+            462.0,
+            270.0,
+            25.0
+          ],
+          "text": "現在の行動",
+          "type": "Label",
+          "wrap": true
+        },
+        {
+          "font": 14,
+          "name": "Action",
+          "rect": [
+            602.0,
+            491.0,
+            270.0,
+            58.0
+          ],
+          "text": "仕事を探しています",
+          "type": "Label",
+          "wrap": true
+        },
+        {
+          "font": 14,
+          "name": "Meal",
+          "rect": [
+            602.0,
+            562.0,
+            270.0,
+            112.0
+          ],
+          "text": "食事効果なし",
+          "type": "Label",
+          "wrap": true
+        },
+        {
+          "color": "eadebfff",
+          "font": 13,
+          "icon": "",
+          "name": "@Button@315",
+          "rect": [
+            30.0,
+            698.0,
+            118.0,
+            32.0
+          ],
+          "text": "休息",
+          "type": "Button"
+        },
+        {
+          "color": "eadebfff",
+          "font": 13,
+          "icon": "",
+          "name": "@Button@316",
+          "rect": [
+            154.0,
+            698.0,
+            118.0,
+            32.0
+          ],
+          "text": "作業再開",
+          "type": "Button"
+        },
+        {
+          "color": "eadebfff",
+          "font": 13,
+          "icon": "",
+          "name": "@Button@317",
+          "rect": [
+            278.0,
+            698.0,
+            118.0,
+            32.0
+          ],
+          "text": "図鑑",
+          "type": "Button"
+        },
+        {
+          "color": "eadebfff",
+          "font": 13,
+          "name": "@Button@320",
+          "rect": [
+            402.0,
+            698.0,
+            118.0,
+            32.0
+          ],
+          "text": "徴兵する",
+          "type": "Button"
+        },
+        {
+          "color": "eadebfff",
+          "font": 16,
+          "name": "@Button@318",
+          "rect": [
+            580.0,
+            754.0,
+            116.0,
+            44.0
+          ],
+          "text": "生活",
+          "type": "Button"
+        }
+      ],
+      "window": [
+        1280,
+        800
+      ]
+    },
+    {
+      "name": "equipment",
+      "nodes": [
+        {
+          "name": "@Control@13",
+          "rect": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "type": "Control"
+        },
+        {
+          "name": "ResidentDetails",
+          "rect": [
+            16.0,
+            402.0,
+            896.0,
+            340.0
+          ],
+          "type": "Panel"
+        },
+        {
+          "font": 20,
+          "name": "Heading",
+          "rect": [
+            30.0,
+            414.0,
+            90.0,
+            30.0
+          ],
+          "text": "住民詳細",
+          "type": "Label",
+          "wrap": true
+        },
+        {
+          "color": "eadebfff",
+          "font": 14,
+          "name": "ResidentPicker",
+          "rect": [
+            128.0,
+            412.0,
+            180.0,
+            32.0
+          ],
+          "text": "牧場主",
+          "type": "OptionButton"
+        },
+        {
+          "color": "e7d9b5ff",
+          "font": 14,
+          "name": "@Button@600",
+          "rect": [
+            322.0,
+            412.0,
+            90.0,
+            32.0
+          ],
+          "text": "ステータス",
+          "type": "Button"
+        },
+        {
+          "color": "bbd99cff",
+          "font": 14,
+          "name": "@Button@601",
+          "rect": [
+            418.0,
+            412.0,
+            90.0,
+            32.0
+          ],
+          "text": "装備",
+          "type": "Button"
+        },
+        {
+          "color": "e7d9b5ff",
+          "font": 14,
+          "name": "@Button@602",
+          "rect": [
+            514.0,
+            412.0,
+            90.0,
+            32.0
+          ],
+          "text": "仕事",
+          "type": "Button"
+        },
+        {
+          "color": "e7d9b5ff",
+          "font": 14,
+          "name": "@Button@603",
+          "rect": [
+            610.0,
+            412.0,
+            90.0,
+            32.0
+          ],
+          "text": "履歴",
+          "type": "Button"
+        },
+        {
+          "color": "eadebfff",
+          "font": 14,
+          "name": "@Button@584",
+          "rect": [
+            710.0,
+            412.0,
+            84.0,
+            32.0
+          ],
+          "text": "生活",
+          "type": "Button"
+        },
+        {
+          "color": "eadebfff",
+          "font": 14,
+          "name": "@Button@604",
+          "rect": [
+            806.0,
+            412.0,
+            92.0,
+            32.0
+          ],
+          "text": "閉じる",
+          "type": "Button"
+        },
+        {
+          "name": "@TextureRect@605",
+          "rect": [
+            36.0,
+            464.0,
+            72.0,
+            94.0
+          ],
+          "texture": "res://art_delivery/characters_v1/keeper_idle_right_00.png",
+          "type": "TextureRect"
+        },
+        {
+          "font": 17,
+          "name": "Name",
+          "rect": [
+            120.0,
+            466.0,
+            146.0,
+            76.0
+          ],
+          "text": "牧場主\n牧場主",
+          "type": "Label",
+          "wrap": true
+        },
+        {
+          "font": 14,
+          "name": "Traits",
+          "rect": [
+            36.0,
+            564.0,
+            230.0,
+            120.0
+          ],
+          "text": "特性\n生活：通常\n食欲：通常\n仕事：普通",
+          "type": "Label",
+          "wrap": true
+        },
+        {
+          "font": 16,
+          "name": "Equipment",
+          "rect": [
+            298.0,
+            470.0,
+            570.0,
+            160.0
+          ],
+          "text": "武器：素手\n射程 1 / 威力 2\n\n衣服：なし\n\n装備は備蓄の現物を使用します。",
+          "type": "Label",
+          "wrap": true
+        },
+        {
+          "color": "eadebfff",
+          "font": 13,
+          "name": "@Button@587",
+          "rect": [
+            30.0,
+            698.0,
+            118.0,
+            32.0
+          ],
+          "text": "長柄を装備",
+          "type": "Button"
+        },
+        {
+          "color": "eadebfff",
+          "font": 13,
+          "name": "@Button@588",
+          "rect": [
+            154.0,
+            698.0,
+            118.0,
+            32.0
+          ],
+          "text": "装備を外す",
+          "type": "Button"
+        },
+        {
+          "color": "eadebfff",
+          "font": 13,
+          "name": "@Button@586",
+          "rect": [
+            278.0,
+            698.0,
+            118.0,
+            32.0
+          ],
+          "text": "服を着る",
+          "type": "Button"
+        },
+        {
+          "color": "eadebfff",
+          "font": 16,
+          "name": "@Button@583",
+          "rect": [
+            580.0,
+            754.0,
+            116.0,
+            44.0
+          ],
+          "text": "生活",
+          "type": "Button"
+        }
+      ],
+      "window": [
+        1280,
+        800
+      ]
+    },
+    {
+      "name": "architect",
+      "nodes": [
+        {
+          "name": "@Control@13",
+          "rect": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "type": "Control"
+        },
+        {
+          "name": "@Panel@841",
+          "rect": [
+            8.0,
+            438.0,
+            904.0,
+            304.0
+          ],
+          "type": "Panel"
+        },
+        {
+          "font": 19,
+          "name": "BuildTitle",
+          "rect": [
+            602.0,
+            456.0,
+            282.0,
+            34.0
+          ],
+          "text": "土壁",
+          "type": "Label",
+          "wrap": true
+        },
+        {
+          "font": 14,
+          "name": "BuildDescription",
+          "rect": [
+            602.0,
+            498.0,
+            335.0,
+            226.0
+          ],
+          "text": "壁で囲み、床と扉を整えると家屋になります。\n\n必要素材：土 ×5\n利用可能：0（資材待ちで予約可能）\n\n施工時間：1.0秒\n\n資材搬入 → 施工",
+          "type": "Label",
+          "wrap": true
+        },
+        {
+          "name": "ArchitectItems",
+          "rect": [
+            136.0,
+            450.0,
+            452.0,
+            278.0
+          ],
+          "type": "ScrollContainer"
+        },
+        {
+          "name": "@Control@835",
+          "rect": [
+            136.0,
+            450.0,
+            434.0,
+            200.0
+          ],
+          "type": "Control"
+        },
+        {
+          "color": "bbd99cff",
+          "font": 14,
+          "icon": "res://art_delivery/earth_stone_buildings_v1/soil/wall/normal/mask_00.png",
+          "name": "@Button@836",
+          "rect": [
+            136.0,
+            450.0,
+            102.0,
+            96.0
+          ],
+          "text": "土壁",
+          "type": "Button"
+        },
+        {
+          "color": "e7d9b5ff",
+          "font": 14,
+          "icon": "res://art_delivery/wood_buildings_v1/wall/normal/wood_mask_00.png",
+          "name": "@Button@837",
+          "rect": [
+            244.0,
+            450.0,
+            102.0,
+            96.0
+          ],
+          "text": "木壁",
+          "type": "Button"
+        },
+        {
+          "color": "e7d9b5ff",
+          "font": 14,
+          "icon": "res://art_delivery/earth_stone_buildings_v1/stone/wall/normal/mask_00.png",
+          "name": "@Button@838",
+          "rect": [
+            352.0,
+            450.0,
+            102.0,
+            96.0
+          ],
+          "text": "石壁",
+          "type": "Button"
+        },
+        {
+          "color": "e7d9b5ff",
+          "font": 14,
+          "icon": "res://art_delivery/wood_buildings_v1/door/horizontal_leaf_closed_normal.png",
+          "name": "@Button@839",
+          "rect": [
+            460.0,
+            450.0,
+            102.0,
+            96.0
+          ],
+          "text": "ドア",
+          "type": "Button"
+        },
+        {
+          "color": "e7d9b5ff",
+          "font": 14,
+          "icon": "res://art_delivery/wood_buildings_v1/door/horizontal_leaf_closed_normal.png",
+          "name": "@Button@840",
+          "rect": [
+            136.0,
+            550.0,
+            102.0,
+            96.0
+          ],
+          "text": "施錠",
+          "type": "Button"
+        },
+        {
+          "color": "bbd99cff",
+          "font": 13,
+          "name": "@Button@842",
+          "rect": [
+            16.0,
+            450.0,
+            108.0,
+            40.0
+          ],
+          "text": "壁と扉",
+          "type": "Button"
+        },
+        {
+          "color": "e7d9b5ff",
+          "font": 13,
+          "name": "@Button@843",
+          "rect": [
+            16.0,
+            496.0,
+            108.0,
+            40.0
+          ],
+          "text": "床",
+          "type": "Button"
+        },
+        {
+          "color": "e7d9b5ff",
+          "font": 13,
+          "name": "@Button@844",
+          "rect": [
+            16.0,
+            542.0,
+            108.0,
+            40.0
+          ],
+          "text": "設置",
+          "type": "Button"
+        },
+        {
+          "color": "e7d9b5ff",
+          "font": 13,
+          "name": "@Button@845",
+          "rect": [
+            16.0,
+            588.0,
+            108.0,
+            40.0
+          ],
+          "text": "ゾーン",
+          "type": "Button"
+        },
+        {
+          "color": "eadebfff",
+          "font": 16,
+          "name": "@Button@846",
+          "rect": [
+            580.0,
+            754.0,
+            116.0,
+            44.0
+          ],
+          "text": "生活",
+          "type": "Button"
+        }
+      ],
+      "window": [
+        1280,
+        800
+      ]
+    },
+    {
+      "name": "stockpile",
+      "nodes": [
+        {
+          "name": "@Control@13",
+          "rect": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "type": "Control"
+        },
+        {
+          "name": "ZoneDetails",
+          "rect": [
+            16.0,
+            342.0,
+            896.0,
+            400.0
+          ],
+          "type": "Panel"
+        },
+        {
+          "color": "eadebfff",
+          "font": 14,
+          "name": "ZoneSelector",
+          "rect": [
+            28.0,
+            349.0,
+            296.0,
+            30.0
+          ],
+          "text": "食材置場",
+          "type": "OptionButton"
+        },
+        {
+          "color": "eadebfff",
+          "font": 14,
+          "name": "CloseZone",
+          "rect": [
+            806.0,
+            352.0,
+            92.0,
+            31.0
+          ],
+          "text": "閉じる",
+          "type": "Button"
+        },
+        {
+          "name": "ZoneName",
+          "rect": [
+            28.0,
+            386.0,
+            296.0,
+            32.0
+          ],
+          "text": "食材置場",
+          "type": "LineEdit"
+        },
+        {
+          "color": "eadebfff",
+          "font": 14,
+          "name": "RenameZone",
+          "rect": [
+            334.0,
+            386.0,
+            80.0,
+            32.0
+          ],
+          "text": "変更",
+          "type": "Button"
+        },
+        {
+          "font": 13,
+          "name": "@Label@956",
+          "rect": [
+            28.0,
+            424.0,
+            149.0,
+            20.0
+          ],
+          "text": "備蓄 · 2マス · 範囲 2 × 1",
+          "type": "Label",
+          "wrap": false
+        },
+        {
+          "color": "eadebfff",
+          "font": 14,
+          "name": "@Button@957",
+          "rect": [
+            28.0,
+            452.0,
+            82.0,
+            31.0
+          ],
+          "text": "全許可",
+          "type": "Button"
+        },
+        {
+          "color": "eadebfff",
+          "font": 14,
+          "name": "@Button@958",
+          "rect": [
+            116.0,
+            452.0,
+            82.0,
+            31.0
+          ],
+          "text": "全禁止",
+          "type": "Button"
+        },
+        {
+          "color": "eadebfff",
+          "font": 13,
+          "name": "ZonePriority",
+          "rect": [
+            214.0,
+            452.0,
+            200.0,
+            30.0
+          ],
+          "text": "優先度：通常",
+          "type": "OptionButton"
+        },
+        {
+          "font": 16,
+          "name": "@Label@969",
+          "rect": [
+            28.0,
+            494.0,
+            127.0,
+            24.0
+          ],
+          "text": "保管するアイテム",
+          "type": "Label",
+          "wrap": false
+        },
+        {
+          "font": 16,
+          "name": "@Label@970",
+          "rect": [
+            480.0,
+            420.0,
+            208.0,
+            24.0
+          ],
+          "text": "利用権限（持ち出せる住民）",
+          "type": "Label",
+          "wrap": false
+        },
+        {
+          "name": "StockAccess",
+          "rect": [
+            480.0,
+            450.0,
+            414.0,
+            196.0
+          ],
+          "type": "ScrollContainer"
+        },
+        {
+          "name": "@VBoxContainer@973",
+          "rect": [
+            480.0,
+            450.0,
+            390.0,
+            68.0
+          ],
+          "type": "VBoxContainer"
+        },
+        {
+          "font": 16,
+          "name": "Access_keeper",
+          "rect": [
+            480.0,
+            450.0,
+            390.0,
+            32.0
+          ],
+          "text": "牧場主",
+          "type": "CheckBox"
+        },
+        {
+          "font": 16,
+          "name": "Access_helper",
+          "rect": [
+            480.0,
+            486.0,
+            390.0,
+            32.0
+          ],
+          "text": "田中",
+          "type": "CheckBox"
+        },
+        {
+          "name": "StockpileFilters",
+          "rect": [
+            28.0,
+            526.0,
+            426.0,
+            156.0
+          ],
+          "text": "☑ 資源・素材\n☑ 食料\n☑ 装備・道具\n☑ 医療・消耗品\n☑ 設備・家具\n☑ その他・特殊\n",
+          "type": "Tree"
+        },
+        {
+          "font": 12,
+          "name": "@Label@987",
+          "rect": [
+            28.0,
+            686.0,
+            199.0,
+            18.0
+          ],
+          "text": "40個/マス · 既存物資は移動しません",
+          "type": "Label",
+          "wrap": false
+        },
+        {
+          "font": 12,
+          "name": "@Label@988",
+          "rect": [
+            480.0,
+            652.0,
+            251.0,
+            39.0
+          ],
+          "text": "初期設定：居住者を許可。屋外は全員。\n手動設定が優先されます。通行・搬入は可能。",
+          "type": "Label",
+          "wrap": false
+        },
+        {
+          "color": "eadebfff",
+          "font": 14,
+          "name": "ResetAccess",
+          "rect": [
+            480.0,
+            700.0,
+            414.0,
+            31.0
+          ],
+          "text": "利用権限を既定に戻す",
+          "type": "Button"
+        },
+        {
+          "color": "eadebfff",
+          "font": 14,
+          "name": "@Button@989",
+          "rect": [
+            28.0,
+            710.0,
+            126.0,
+            31.0
+          ],
+          "text": "マス追加",
+          "type": "Button"
+        },
+        {
+          "color": "eadebfff",
+          "font": 14,
+          "name": "@Button@990",
+          "rect": [
+            158.0,
+            710.0,
+            126.0,
+            31.0
+          ],
+          "text": "マス削除",
+          "type": "Button"
+        },
+        {
+          "color": "eadebfff",
+          "font": 14,
+          "name": "@Button@991",
+          "rect": [
+            288.0,
+            710.0,
+            126.0,
+            31.0
+          ],
+          "text": "全体削除",
+          "type": "Button"
+        },
+        {
+          "color": "eadebfff",
+          "font": 16,
+          "name": "@Button@944",
+          "rect": [
+            580.0,
+            754.0,
+            116.0,
+            44.0
+          ],
+          "text": "生活",
+          "type": "Button"
+        }
+      ],
+      "window": [
+        1280,
+        800
+      ]
+    },
+    {
+      "name": "house",
+      "nodes": [
+        {
+          "name": "@Control@13",
+          "rect": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "type": "Control"
+        },
+        {
+          "name": "HouseStatus",
+          "rect": [
+            16.0,
+            402.0,
+            896.0,
+            340.0
+          ],
+          "type": "Panel"
+        },
+        {
+          "font": 20,
+          "name": "@Label@995",
+          "rect": [
+            30.0,
+            414.0,
+            80.0,
+            30.0
+          ],
+          "text": "田中の家",
+          "type": "Label",
+          "wrap": false
+        },
+        {
+          "color": "eadebfff",
+          "font": 14,
+          "name": "@Button@996",
+          "rect": [
+            806.0,
+            412.0,
+            92.0,
+            32.0
+          ],
+          "text": "閉じる",
+          "type": "Button"
+        },
+        {
+          "font": 15,
+          "name": "HouseFacts",
+          "rect": [
+            30.0,
+            464.0,
+            266.0,
+            222.0
+          ],
+          "text": "種別：住居\n状態：完成\n広さ：9マス\n\n設備\nベッド：1（空き0）\nその他：なし",
+          "type": "Label",
+          "wrap": true
+        },
+        {
+          "font": 17,
+          "name": "@Label@997",
+          "rect": [
+            316.0,
+            464.0,
+            136.0,
+            25.0
+          ],
+          "text": "居住者・割り当て",
+          "type": "Label",
+          "wrap": false
+        },
+        {
+          "name": "HouseResidents",
+          "rect": [
+            316.0,
+            498.0,
+            288.0,
+            208.0
+          ],
+          "type": "ScrollContainer"
+        },
+        {
+          "name": "@VBoxContainer@1000",
+          "rect": [
+            316.0,
+            498.0,
+            266.0,
+            72.0
+          ],
+          "type": "VBoxContainer"
+        },
+        {
+          "color": "eadebfff",
+          "font": 14,
+          "name": "@Button@1001",
+          "rect": [
+            316.0,
+            498.0,
+            266.0,
+            34.0
+          ],
+          "text": "牧場主：割当",
+          "type": "Button"
+        },
+        {
+          "color": "eadebfff",
+          "font": 14,
+          "name": "@Button@1002",
+          "rect": [
+            316.0,
+            536.0,
+            266.0,
+            34.0
+          ],
+          "text": "田中：割当済み / 解除",
+          "type": "Button"
+        },
+        {
+          "name": "RoomPreview",
+          "rect": [
+            626.0,
+            462.0,
+            262.0,
+            242.0
+          ],
+          "tiles": [
+            {
+              "kind": "wood_wall",
+              "rect": [
+                16.0,
+                6.0,
+                46.0,
+                46.0
+              ],
+              "texture": "res://art_delivery/wood_buildings_v1/wall/normal/wood_mask_06.png"
+            },
+            {
+              "kind": "wood_wall",
+              "rect": [
+                16.0,
+                52.0,
+                46.0,
+                46.0
+              ],
+              "texture": "res://art_delivery/wood_buildings_v1/wall/normal/wood_mask_05.png"
+            },
+            {
+              "kind": "wood_wall",
+              "rect": [
+                16.0,
+                98.0,
+                46.0,
+                46.0
+              ],
+              "texture": "res://art_delivery/wood_buildings_v1/wall/normal/wood_mask_05.png"
+            },
+            {
+              "kind": "wood_wall",
+              "rect": [
+                16.0,
+                144.0,
+                46.0,
+                46.0
+              ],
+              "texture": "res://art_delivery/wood_buildings_v1/wall/normal/wood_mask_05.png"
+            },
+            {
+              "kind": "wood_wall",
+              "rect": [
+                16.0,
+                190.0,
+                46.0,
+                46.0
+              ],
+              "texture": "res://art_delivery/wood_buildings_v1/wall/normal/wood_mask_03.png"
+            },
+            {
+              "kind": "wood_wall",
+              "rect": [
+                62.0,
+                6.0,
+                46.0,
+                46.0
+              ],
+              "texture": "res://art_delivery/wood_buildings_v1/wall/normal/wood_mask_10.png"
+            },
+            {
+              "kind": "",
+              "rect": [
+                62.0,
+                52.0,
+                46.0,
+                46.0
+              ],
+              "texture": "res://art_delivery/wood_buildings_v1/floor/wood_00.png"
+            },
+            {
+              "kind": "",
+              "rect": [
+                62.0,
+                98.0,
+                46.0,
+                46.0
+              ],
+              "texture": "res://art_delivery/wood_buildings_v1/floor/wood_00.png"
+            },
+            {
+              "kind": "",
+              "rect": [
+                62.0,
+                144.0,
+                46.0,
+                46.0
+              ],
+              "texture": "res://art_delivery/wood_buildings_v1/floor/wood_00.png"
+            },
+            {
+              "kind": "wood_wall",
+              "rect": [
+                62.0,
+                190.0,
+                46.0,
+                46.0
+              ],
+              "texture": "res://art_delivery/wood_buildings_v1/wall/normal/wood_mask_10.png"
+            },
+            {
+              "kind": "door",
+              "rect": [
+                108.0,
+                6.0,
+                46.0,
+                46.0
+              ],
+              "texture": "res://art_delivery/wood_buildings_v1/door/horizontal_leaf_closed_normal.png"
+            },
+            {
+              "kind": "",
+              "rect": [
+                108.0,
+                52.0,
+                46.0,
+                46.0
+              ],
+              "texture": "res://art_delivery/wood_buildings_v1/floor/wood_00.png"
+            },
+            {
+              "kind": "",
+              "rect": [
+                108.0,
+                98.0,
+                46.0,
+                46.0
+              ],
+              "texture": "res://art_delivery/wood_buildings_v1/floor/wood_00.png"
+            },
+            {
+              "kind": "bed",
+              "rect": [
+                108.0,
+                98.0,
+                46.0,
+                46.0
+              ],
+              "texture": ""
+            },
+            {
+              "kind": "",
+              "rect": [
+                108.0,
+                144.0,
+                46.0,
+                46.0
+              ],
+              "texture": "res://art_delivery/wood_buildings_v1/floor/wood_00.png"
+            },
+            {
+              "kind": "wood_wall",
+              "rect": [
+                108.0,
+                190.0,
+                46.0,
+                46.0
+              ],
+              "texture": "res://art_delivery/wood_buildings_v1/wall/normal/wood_mask_10.png"
+            },
+            {
+              "kind": "wood_wall",
+              "rect": [
+                154.0,
+                6.0,
+                46.0,
+                46.0
+              ],
+              "texture": "res://art_delivery/wood_buildings_v1/wall/normal/wood_mask_10.png"
+            },
+            {
+              "kind": "",
+              "rect": [
+                154.0,
+                52.0,
+                46.0,
+                46.0
+              ],
+              "texture": "res://art_delivery/wood_buildings_v1/floor/wood_00.png"
+            },
+            {
+              "kind": "",
+              "rect": [
+                154.0,
+                98.0,
+                46.0,
+                46.0
+              ],
+              "texture": "res://art_delivery/wood_buildings_v1/floor/wood_00.png"
+            },
+            {
+              "kind": "",
+              "rect": [
+                154.0,
+                144.0,
+                46.0,
+                46.0
+              ],
+              "texture": "res://art_delivery/wood_buildings_v1/floor/wood_00.png"
+            },
+            {
+              "kind": "wood_wall",
+              "rect": [
+                154.0,
+                190.0,
+                46.0,
+                46.0
+              ],
+              "texture": "res://art_delivery/wood_buildings_v1/wall/normal/wood_mask_10.png"
+            },
+            {
+              "kind": "wood_wall",
+              "rect": [
+                200.0,
+                6.0,
+                46.0,
+                46.0
+              ],
+              "texture": "res://art_delivery/wood_buildings_v1/wall/normal/wood_mask_12.png"
+            },
+            {
+              "kind": "wood_wall",
+              "rect": [
+                200.0,
+                52.0,
+                46.0,
+                46.0
+              ],
+              "texture": "res://art_delivery/wood_buildings_v1/wall/normal/wood_mask_05.png"
+            },
+            {
+              "kind": "wood_wall",
+              "rect": [
+                200.0,
+                98.0,
+                46.0,
+                46.0
+              ],
+              "texture": "res://art_delivery/wood_buildings_v1/wall/normal/wood_mask_05.png"
+            },
+            {
+              "kind": "wood_wall",
+              "rect": [
+                200.0,
+                144.0,
+                46.0,
+                46.0
+              ],
+              "texture": "res://art_delivery/wood_buildings_v1/wall/normal/wood_mask_05.png"
+            },
+            {
+              "kind": "wood_wall",
+              "rect": [
+                200.0,
+                190.0,
+                46.0,
+                46.0
+              ],
+              "texture": "res://art_delivery/wood_buildings_v1/wall/normal/wood_mask_09.png"
+            }
+          ],
+          "type": "Control"
+        },
+        {
+          "font": 12,
+          "name": "@Label@1003",
+          "rect": [
+            680.0,
+            712.0,
+            72.0,
+            18.0
+          ],
+          "text": "室内見取り図",
+          "type": "Label",
+          "wrap": false
+        },
+        {
+          "font": 12,
+          "name": "@Label@1004",
+          "rect": [
+            30.0,
+            712.0,
+            324.0,
+            18.0
+          ],
+          "text": "マップ上の家屋をダブルクリックすると内部を選択できます",
+          "type": "Label",
+          "wrap": false
+        },
+        {
+          "color": "eadebfff",
+          "font": 16,
+          "name": "@Button@993",
+          "rect": [
+            580.0,
+            754.0,
+            116.0,
+            44.0
+          ],
+          "text": "生活",
+          "type": "Button"
+        }
+      ],
+      "window": [
+        1280,
+        800
+      ]
+    },
+    {
+      "name": "resident",
+      "nodes": [
+        {
+          "name": "@Control@13",
+          "rect": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "type": "Control"
+        },
+        {
+          "name": "ResidentDetails",
+          "rect": [
+            16.0,
+            402.0,
+            896.0,
+            340.0
+          ],
+          "type": "Panel"
+        },
+        {
+          "font": 20,
+          "name": "Heading",
+          "rect": [
+            30.0,
+            414.0,
+            90.0,
+            30.0
+          ],
+          "text": "住民詳細",
+          "type": "Label",
+          "wrap": true
+        },
+        {
+          "color": "eadebfff",
+          "font": 14,
+          "name": "ResidentPicker",
+          "rect": [
+            128.0,
+            412.0,
+            180.0,
+            32.0
+          ],
+          "text": "牧場主",
+          "type": "OptionButton"
+        },
+        {
+          "color": "bbd99cff",
+          "font": 14,
+          "name": "@Button@1081",
+          "rect": [
+            322.0,
+            412.0,
+            90.0,
+            32.0
+          ],
+          "text": "ステータス",
+          "type": "Button"
+        },
+        {
+          "color": "e7d9b5ff",
+          "font": 14,
+          "name": "@Button@1082",
+          "rect": [
+            418.0,
+            412.0,
+            90.0,
+            32.0
+          ],
+          "text": "装備",
+          "type": "Button"
+        },
+        {
+          "color": "e7d9b5ff",
+          "font": 14,
+          "name": "@Button@1083",
+          "rect": [
+            514.0,
+            412.0,
+            90.0,
+            32.0
+          ],
+          "text": "仕事",
+          "type": "Button"
+        },
+        {
+          "color": "e7d9b5ff",
+          "font": 14,
+          "name": "@Button@1084",
+          "rect": [
+            610.0,
+            412.0,
+            90.0,
+            32.0
+          ],
+          "text": "履歴",
+          "type": "Button"
+        },
+        {
+          "color": "eadebfff",
+          "font": 14,
+          "name": "@Button@1065",
+          "rect": [
+            710.0,
+            412.0,
+            84.0,
+            32.0
+          ],
+          "text": "生活",
+          "type": "Button"
+        },
+        {
+          "color": "eadebfff",
+          "font": 14,
+          "name": "@Button@1085",
+          "rect": [
+            806.0,
+            412.0,
+            92.0,
+            32.0
+          ],
+          "text": "閉じる",
+          "type": "Button"
+        },
+        {
+          "name": "@TextureRect@1086",
+          "rect": [
+            36.0,
+            464.0,
+            72.0,
+            94.0
+          ],
+          "texture": "res://art_delivery/characters_v1/keeper_idle_right_00.png",
+          "type": "TextureRect"
+        },
+        {
+          "font": 17,
+          "name": "Name",
+          "rect": [
+            120.0,
+            466.0,
+            146.0,
+            76.0
+          ],
+          "text": "牧場主\n牧場主",
+          "type": "Label",
+          "wrap": true
+        },
+        {
+          "font": 14,
+          "name": "Traits",
+          "rect": [
+            36.0,
+            564.0,
+            230.0,
+            120.0
+          ],
+          "text": "特性\n生活：通常\n食欲：通常\n仕事：普通",
+          "type": "Label",
+          "wrap": true
+        },
+        {
+          "name": "ResidentStatus",
+          "rect": [
+            282.0,
+            462.0,
+            610.0,
+            224.0
+          ],
+          "type": "Control"
+        },
+        {
+          "font": 13,
+          "name": "Name_hp",
+          "rect": [
+            282.0,
+            462.0,
+            76.0,
+            25.0
+          ],
+          "text": "HP",
+          "type": "Label",
+          "wrap": true
+        },
+        {
+          "maximum": 30.0,
+          "name": "@ProgressBar@1087",
+          "rect": [
+            360.0,
+            468.0,
+            128.0,
+            12.0
+          ],
+          "type": "ProgressBar",
+          "value": 17.0
+        },
+        {
+          "font": 13,
+          "name": "Value_hp",
+          "rect": [
+            496.0,
+            462.0,
+            86.0,
+            24.0
+          ],
+          "text": "17 / 30",
+          "type": "Label",
+          "wrap": true
+        },
+        {
+          "font": 13,
+          "name": "Name_stamina",
+          "rect": [
+            282.0,
+            489.0,
+            76.0,
+            25.0
+          ],
+          "text": "スタミナ",
+          "type": "Label",
+          "wrap": true
+        },
+        {
+          "maximum": 100.0,
+          "name": "@ProgressBar@1088",
+          "rect": [
+            360.0,
+            495.0,
+            128.0,
+            12.0
+          ],
+          "type": "ProgressBar",
+          "value": 100.0
+        },
+        {
+          "font": 13,
+          "name": "Value_stamina",
+          "rect": [
+            496.0,
+            489.0,
+            86.0,
+            24.0
+          ],
+          "text": "100 / 100",
+          "type": "Label",
+          "wrap": true
+        },
+        {
+          "font": 13,
+          "name": "Name_satiety",
+          "rect": [
+            282.0,
+            516.0,
+            76.0,
+            25.0
+          ],
+          "text": "満腹度",
+          "type": "Label",
+          "wrap": true
+        },
+        {
+          "maximum": 100.0,
+          "name": "@ProgressBar@1089",
+          "rect": [
+            360.0,
+            522.0,
+            128.0,
+            12.0
+          ],
+          "type": "ProgressBar",
+          "value": 100.0
+        },
+        {
+          "font": 13,
+          "name": "Value_satiety",
+          "rect": [
+            496.0,
+            516.0,
+            86.0,
+            24.0
+          ],
+          "text": "100 / 100",
+          "type": "Label",
+          "wrap": true
+        },
+        {
+          "font": 13,
+          "name": "Name_sleepiness",
+          "rect": [
+            282.0,
+            543.0,
+            76.0,
+            25.0
+          ],
+          "text": "眠気",
+          "type": "Label",
+          "wrap": true
+        },
+        {
+          "maximum": 100.0,
+          "name": "@ProgressBar@1090",
+          "rect": [
+            360.0,
+            549.0,
+            128.0,
+            12.0
+          ],
+          "type": "ProgressBar",
+          "value": 0.0
+        },
+        {
+          "font": 13,
+          "name": "Value_sleepiness",
+          "rect": [
+            496.0,
+            543.0,
+            86.0,
+            24.0
+          ],
+          "text": "0 / 100",
+          "type": "Label",
+          "wrap": true
+        },
+        {
+          "font": 13,
+          "name": "Name_satisfaction",
+          "rect": [
+            282.0,
+            570.0,
+            76.0,
+            25.0
+          ],
+          "text": "満足度",
+          "type": "Label",
+          "wrap": true
+        },
+        {
+          "maximum": 100.0,
+          "name": "@ProgressBar@1091",
+          "rect": [
+            360.0,
+            576.0,
+            128.0,
+            12.0
+          ],
+          "type": "ProgressBar",
+          "value": 50.0
+        },
+        {
+          "font": 13,
+          "name": "Value_satisfaction",
+          "rect": [
+            496.0,
+            570.0,
+            86.0,
+            24.0
+          ],
+          "text": "50 / 100",
+          "type": "Label",
+          "wrap": true
+        },
+        {
+          "font": 14,
+          "name": "Mood",
+          "rect": [
+            282.0,
+            608.0,
+            298.0,
+            74.0
+          ],
+          "text": "リラックス\n普段の生活",
+          "type": "Label",
+          "wrap": true
+        },
+        {
+          "font": 16,
+          "name": "ActionHeading",
+          "rect": [
+            602.0,
+            462.0,
+            270.0,
+            25.0
+          ],
+          "text": "現在の行動",
+          "type": "Label",
+          "wrap": true
+        },
+        {
+          "font": 14,
+          "name": "Action",
+          "rect": [
+            602.0,
+            491.0,
+            270.0,
+            58.0
+          ],
+          "text": "仕事を探しています",
+          "type": "Label",
+          "wrap": true
+        },
+        {
+          "font": 14,
+          "name": "Meal",
+          "rect": [
+            602.0,
+            562.0,
+            270.0,
+            112.0
+          ],
+          "text": "食事効果なし",
+          "type": "Label",
+          "wrap": true
+        },
+        {
+          "color": "eadebfff",
+          "font": 13,
+          "icon": "",
+          "name": "@Button@1061",
+          "rect": [
+            30.0,
+            698.0,
+            118.0,
+            32.0
+          ],
+          "text": "休息",
+          "type": "Button"
+        },
+        {
+          "color": "eadebfff",
+          "font": 13,
+          "icon": "",
+          "name": "@Button@1062",
+          "rect": [
+            154.0,
+            698.0,
+            118.0,
+            32.0
+          ],
+          "text": "作業再開",
+          "type": "Button"
+        },
+        {
+          "color": "eadebfff",
+          "font": 13,
+          "icon": "",
+          "name": "@Button@1063",
+          "rect": [
+            278.0,
+            698.0,
+            118.0,
+            32.0
+          ],
+          "text": "図鑑",
+          "type": "Button"
+        },
+        {
+          "color": "eadebfff",
+          "font": 13,
+          "name": "@Button@1066",
+          "rect": [
+            402.0,
+            698.0,
+            118.0,
+            32.0
+          ],
+          "text": "徴兵する",
+          "type": "Button"
+        },
+        {
+          "color": "eadebfff",
+          "font": 16,
+          "name": "@Button@1064",
+          "rect": [
+            580.0,
+            754.0,
+            116.0,
+            44.0
+          ],
+          "text": "生活",
+          "type": "Button"
+        }
+      ],
+      "window": [
+        1600,
+        1000
+      ]
+    },
+    {
+      "name": "equipment",
+      "nodes": [
+        {
+          "name": "@Control@13",
+          "rect": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "type": "Control"
+        },
+        {
+          "name": "ResidentDetails",
+          "rect": [
+            16.0,
+            402.0,
+            896.0,
+            340.0
+          ],
+          "type": "Panel"
+        },
+        {
+          "font": 20,
+          "name": "Heading",
+          "rect": [
+            30.0,
+            414.0,
+            90.0,
+            30.0
+          ],
+          "text": "住民詳細",
+          "type": "Label",
+          "wrap": true
+        },
+        {
+          "color": "eadebfff",
+          "font": 14,
+          "name": "ResidentPicker",
+          "rect": [
+            128.0,
+            412.0,
+            180.0,
+            32.0
+          ],
+          "text": "牧場主",
+          "type": "OptionButton"
+        },
+        {
+          "color": "e7d9b5ff",
+          "font": 14,
+          "name": "@Button@1112",
+          "rect": [
+            322.0,
+            412.0,
+            90.0,
+            32.0
+          ],
+          "text": "ステータス",
+          "type": "Button"
+        },
+        {
+          "color": "bbd99cff",
+          "font": 14,
+          "name": "@Button@1113",
+          "rect": [
+            418.0,
+            412.0,
+            90.0,
+            32.0
+          ],
+          "text": "装備",
+          "type": "Button"
+        },
+        {
+          "color": "e7d9b5ff",
+          "font": 14,
+          "name": "@Button@1114",
+          "rect": [
+            514.0,
+            412.0,
+            90.0,
+            32.0
+          ],
+          "text": "仕事",
+          "type": "Button"
+        },
+        {
+          "color": "e7d9b5ff",
+          "font": 14,
+          "name": "@Button@1115",
+          "rect": [
+            610.0,
+            412.0,
+            90.0,
+            32.0
+          ],
+          "text": "履歴",
+          "type": "Button"
+        },
+        {
+          "color": "eadebfff",
+          "font": 14,
+          "name": "@Button@1096",
+          "rect": [
+            710.0,
+            412.0,
+            84.0,
+            32.0
+          ],
+          "text": "生活",
+          "type": "Button"
+        },
+        {
+          "color": "eadebfff",
+          "font": 14,
+          "name": "@Button@1116",
+          "rect": [
+            806.0,
+            412.0,
+            92.0,
+            32.0
+          ],
+          "text": "閉じる",
+          "type": "Button"
+        },
+        {
+          "name": "@TextureRect@1117",
+          "rect": [
+            36.0,
+            464.0,
+            72.0,
+            94.0
+          ],
+          "texture": "res://art_delivery/characters_v1/keeper_idle_right_00.png",
+          "type": "TextureRect"
+        },
+        {
+          "font": 17,
+          "name": "Name",
+          "rect": [
+            120.0,
+            466.0,
+            146.0,
+            76.0
+          ],
+          "text": "牧場主\n牧場主",
+          "type": "Label",
+          "wrap": true
+        },
+        {
+          "font": 14,
+          "name": "Traits",
+          "rect": [
+            36.0,
+            564.0,
+            230.0,
+            120.0
+          ],
+          "text": "特性\n生活：通常\n食欲：通常\n仕事：普通",
+          "type": "Label",
+          "wrap": true
+        },
+        {
+          "font": 16,
+          "name": "Equipment",
+          "rect": [
+            298.0,
+            470.0,
+            570.0,
+            160.0
+          ],
+          "text": "武器：素手\n射程 1 / 威力 2\n\n衣服：なし\n\n装備は備蓄の現物を使用します。",
+          "type": "Label",
+          "wrap": true
+        },
+        {
+          "color": "eadebfff",
+          "font": 13,
+          "name": "@Button@1099",
+          "rect": [
+            30.0,
+            698.0,
+            118.0,
+            32.0
+          ],
+          "text": "長柄を装備",
+          "type": "Button"
+        },
+        {
+          "color": "eadebfff",
+          "font": 13,
+          "name": "@Button@1100",
+          "rect": [
+            154.0,
+            698.0,
+            118.0,
+            32.0
+          ],
+          "text": "装備を外す",
+          "type": "Button"
+        },
+        {
+          "color": "eadebfff",
+          "font": 13,
+          "name": "@Button@1098",
+          "rect": [
+            278.0,
+            698.0,
+            118.0,
+            32.0
+          ],
+          "text": "服を着る",
+          "type": "Button"
+        },
+        {
+          "color": "eadebfff",
+          "font": 16,
+          "name": "@Button@1095",
+          "rect": [
+            580.0,
+            754.0,
+            116.0,
+            44.0
+          ],
+          "text": "生活",
+          "type": "Button"
+        }
+      ],
+      "window": [
+        1600,
+        1000
+      ]
+    },
+    {
+      "name": "architect",
+      "nodes": [
+        {
+          "name": "@Control@13",
+          "rect": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "type": "Control"
+        },
+        {
+          "name": "@Panel@1353",
+          "rect": [
+            8.0,
+            438.0,
+            904.0,
+            304.0
+          ],
+          "type": "Panel"
+        },
+        {
+          "font": 19,
+          "name": "BuildTitle",
+          "rect": [
+            602.0,
+            456.0,
+            282.0,
+            34.0
+          ],
+          "text": "土壁",
+          "type": "Label",
+          "wrap": true
+        },
+        {
+          "font": 14,
+          "name": "BuildDescription",
+          "rect": [
+            602.0,
+            498.0,
+            335.0,
+            226.0
+          ],
+          "text": "壁で囲み、床と扉を整えると家屋になります。\n\n必要素材：土 ×5\n利用可能：0（資材待ちで予約可能）\n\n施工時間：1.0秒\n\n資材搬入 → 施工",
+          "type": "Label",
+          "wrap": true
+        },
+        {
+          "name": "ArchitectItems",
+          "rect": [
+            136.0,
+            450.0,
+            452.0,
+            278.0
+          ],
+          "type": "ScrollContainer"
+        },
+        {
+          "name": "@Control@1347",
+          "rect": [
+            136.0,
+            450.0,
+            434.0,
+            200.0
+          ],
+          "type": "Control"
+        },
+        {
+          "color": "bbd99cff",
+          "font": 14,
+          "icon": "res://art_delivery/earth_stone_buildings_v1/soil/wall/normal/mask_00.png",
+          "name": "@Button@1348",
+          "rect": [
+            136.0,
+            450.0,
+            102.0,
+            96.0
+          ],
+          "text": "土壁",
+          "type": "Button"
+        },
+        {
+          "color": "e7d9b5ff",
+          "font": 14,
+          "icon": "res://art_delivery/wood_buildings_v1/wall/normal/wood_mask_00.png",
+          "name": "@Button@1349",
+          "rect": [
+            244.0,
+            450.0,
+            102.0,
+            96.0
+          ],
+          "text": "木壁",
+          "type": "Button"
+        },
+        {
+          "color": "e7d9b5ff",
+          "font": 14,
+          "icon": "res://art_delivery/earth_stone_buildings_v1/stone/wall/normal/mask_00.png",
+          "name": "@Button@1350",
+          "rect": [
+            352.0,
+            450.0,
+            102.0,
+            96.0
+          ],
+          "text": "石壁",
+          "type": "Button"
+        },
+        {
+          "color": "e7d9b5ff",
+          "font": 14,
+          "icon": "res://art_delivery/wood_buildings_v1/door/horizontal_leaf_closed_normal.png",
+          "name": "@Button@1351",
+          "rect": [
+            460.0,
+            450.0,
+            102.0,
+            96.0
+          ],
+          "text": "ドア",
+          "type": "Button"
+        },
+        {
+          "color": "e7d9b5ff",
+          "font": 14,
+          "icon": "res://art_delivery/wood_buildings_v1/door/horizontal_leaf_closed_normal.png",
+          "name": "@Button@1352",
+          "rect": [
+            136.0,
+            550.0,
+            102.0,
+            96.0
+          ],
+          "text": "施錠",
+          "type": "Button"
+        },
+        {
+          "color": "bbd99cff",
+          "font": 13,
+          "name": "@Button@1354",
+          "rect": [
+            16.0,
+            450.0,
+            108.0,
+            40.0
+          ],
+          "text": "壁と扉",
+          "type": "Button"
+        },
+        {
+          "color": "e7d9b5ff",
+          "font": 13,
+          "name": "@Button@1355",
+          "rect": [
+            16.0,
+            496.0,
+            108.0,
+            40.0
+          ],
+          "text": "床",
+          "type": "Button"
+        },
+        {
+          "color": "e7d9b5ff",
+          "font": 13,
+          "name": "@Button@1356",
+          "rect": [
+            16.0,
+            542.0,
+            108.0,
+            40.0
+          ],
+          "text": "設置",
+          "type": "Button"
+        },
+        {
+          "color": "e7d9b5ff",
+          "font": 13,
+          "name": "@Button@1357",
+          "rect": [
+            16.0,
+            588.0,
+            108.0,
+            40.0
+          ],
+          "text": "ゾーン",
+          "type": "Button"
+        },
+        {
+          "color": "eadebfff",
+          "font": 16,
+          "name": "@Button@1358",
+          "rect": [
+            580.0,
+            754.0,
+            116.0,
+            44.0
+          ],
+          "text": "生活",
+          "type": "Button"
+        }
+      ],
+      "window": [
+        1600,
+        1000
+      ]
+    },
+    {
+      "name": "stockpile",
+      "nodes": [
+        {
+          "name": "@Control@13",
+          "rect": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "type": "Control"
+        },
+        {
+          "name": "ZoneDetails",
+          "rect": [
+            16.0,
+            342.0,
+            896.0,
+            400.0
+          ],
+          "type": "Panel"
+        },
+        {
+          "color": "eadebfff",
+          "font": 14,
+          "name": "ZoneSelector",
+          "rect": [
+            28.0,
+            349.0,
+            296.0,
+            30.0
+          ],
+          "text": "食材置場",
+          "type": "OptionButton"
+        },
+        {
+          "color": "eadebfff",
+          "font": 14,
+          "name": "CloseZone",
+          "rect": [
+            806.0,
+            352.0,
+            92.0,
+            31.0
+          ],
+          "text": "閉じる",
+          "type": "Button"
+        },
+        {
+          "name": "ZoneName",
+          "rect": [
+            28.0,
+            386.0,
+            296.0,
+            32.0
+          ],
+          "text": "食材置場",
+          "type": "LineEdit"
+        },
+        {
+          "color": "eadebfff",
+          "font": 14,
+          "name": "RenameZone",
+          "rect": [
+            334.0,
+            386.0,
+            80.0,
+            32.0
+          ],
+          "text": "変更",
+          "type": "Button"
+        },
+        {
+          "font": 13,
+          "name": "@Label@1468",
+          "rect": [
+            28.0,
+            424.0,
+            149.0,
+            20.0
+          ],
+          "text": "備蓄 · 2マス · 範囲 2 × 1",
+          "type": "Label",
+          "wrap": false
+        },
+        {
+          "color": "eadebfff",
+          "font": 14,
+          "name": "@Button@1469",
+          "rect": [
+            28.0,
+            452.0,
+            82.0,
+            31.0
+          ],
+          "text": "全許可",
+          "type": "Button"
+        },
+        {
+          "color": "eadebfff",
+          "font": 14,
+          "name": "@Button@1470",
+          "rect": [
+            116.0,
+            452.0,
+            82.0,
+            31.0
+          ],
+          "text": "全禁止",
+          "type": "Button"
+        },
+        {
+          "color": "eadebfff",
+          "font": 13,
+          "name": "ZonePriority",
+          "rect": [
+            214.0,
+            452.0,
+            200.0,
+            30.0
+          ],
+          "text": "優先度：通常",
+          "type": "OptionButton"
+        },
+        {
+          "font": 16,
+          "name": "@Label@1481",
+          "rect": [
+            28.0,
+            494.0,
+            127.0,
+            24.0
+          ],
+          "text": "保管するアイテム",
+          "type": "Label",
+          "wrap": false
+        },
+        {
+          "font": 16,
+          "name": "@Label@1482",
+          "rect": [
+            480.0,
+            420.0,
+            208.0,
+            24.0
+          ],
+          "text": "利用権限（持ち出せる住民）",
+          "type": "Label",
+          "wrap": false
+        },
+        {
+          "name": "StockAccess",
+          "rect": [
+            480.0,
+            450.0,
+            414.0,
+            196.0
+          ],
+          "type": "ScrollContainer"
+        },
+        {
+          "name": "@VBoxContainer@1485",
+          "rect": [
+            480.0,
+            450.0,
+            390.0,
+            68.0
+          ],
+          "type": "VBoxContainer"
+        },
+        {
+          "font": 16,
+          "name": "Access_keeper",
+          "rect": [
+            480.0,
+            450.0,
+            390.0,
+            32.0
+          ],
+          "text": "牧場主",
+          "type": "CheckBox"
+        },
+        {
+          "font": 16,
+          "name": "Access_helper",
+          "rect": [
+            480.0,
+            486.0,
+            390.0,
+            32.0
+          ],
+          "text": "田中",
+          "type": "CheckBox"
+        },
+        {
+          "name": "StockpileFilters",
+          "rect": [
+            28.0,
+            526.0,
+            426.0,
+            156.0
+          ],
+          "text": "☑ 資源・素材\n☑ 食料\n☑ 装備・道具\n☑ 医療・消耗品\n☑ 設備・家具\n☑ その他・特殊\n",
+          "type": "Tree"
+        },
+        {
+          "font": 12,
+          "name": "@Label@1499",
+          "rect": [
+            28.0,
+            686.0,
+            199.0,
+            18.0
+          ],
+          "text": "40個/マス · 既存物資は移動しません",
+          "type": "Label",
+          "wrap": false
+        },
+        {
+          "font": 12,
+          "name": "@Label@1500",
+          "rect": [
+            480.0,
+            652.0,
+            251.0,
+            39.0
+          ],
+          "text": "初期設定：居住者を許可。屋外は全員。\n手動設定が優先されます。通行・搬入は可能。",
+          "type": "Label",
+          "wrap": false
+        },
+        {
+          "color": "eadebfff",
+          "font": 14,
+          "name": "ResetAccess",
+          "rect": [
+            480.0,
+            700.0,
+            414.0,
+            31.0
+          ],
+          "text": "利用権限を既定に戻す",
+          "type": "Button"
+        },
+        {
+          "color": "eadebfff",
+          "font": 14,
+          "name": "@Button@1501",
+          "rect": [
+            28.0,
+            710.0,
+            126.0,
+            31.0
+          ],
+          "text": "マス追加",
+          "type": "Button"
+        },
+        {
+          "color": "eadebfff",
+          "font": 14,
+          "name": "@Button@1502",
+          "rect": [
+            158.0,
+            710.0,
+            126.0,
+            31.0
+          ],
+          "text": "マス削除",
+          "type": "Button"
+        },
+        {
+          "color": "eadebfff",
+          "font": 14,
+          "name": "@Button@1503",
+          "rect": [
+            288.0,
+            710.0,
+            126.0,
+            31.0
+          ],
+          "text": "全体削除",
+          "type": "Button"
+        },
+        {
+          "color": "eadebfff",
+          "font": 16,
+          "name": "@Button@1456",
+          "rect": [
+            580.0,
+            754.0,
+            116.0,
+            44.0
+          ],
+          "text": "生活",
+          "type": "Button"
+        }
+      ],
+      "window": [
+        1600,
+        1000
+      ]
+    },
+    {
+      "name": "house",
+      "nodes": [
+        {
+          "name": "@Control@13",
+          "rect": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "type": "Control"
+        },
+        {
+          "name": "HouseStatus",
+          "rect": [
+            16.0,
+            402.0,
+            896.0,
+            340.0
+          ],
+          "type": "Panel"
+        },
+        {
+          "font": 20,
+          "name": "@Label@1507",
+          "rect": [
+            30.0,
+            414.0,
+            80.0,
+            30.0
+          ],
+          "text": "田中の家",
+          "type": "Label",
+          "wrap": false
+        },
+        {
+          "color": "eadebfff",
+          "font": 14,
+          "name": "@Button@1508",
+          "rect": [
+            806.0,
+            412.0,
+            92.0,
+            32.0
+          ],
+          "text": "閉じる",
+          "type": "Button"
+        },
+        {
+          "font": 15,
+          "name": "HouseFacts",
+          "rect": [
+            30.0,
+            464.0,
+            266.0,
+            222.0
+          ],
+          "text": "種別：住居\n状態：完成\n広さ：9マス\n\n設備\nベッド：1（空き0）\nその他：なし",
+          "type": "Label",
+          "wrap": true
+        },
+        {
+          "font": 17,
+          "name": "@Label@1509",
+          "rect": [
+            316.0,
+            464.0,
+            136.0,
+            25.0
+          ],
+          "text": "居住者・割り当て",
+          "type": "Label",
+          "wrap": false
+        },
+        {
+          "name": "HouseResidents",
+          "rect": [
+            316.0,
+            498.0,
+            288.0,
+            208.0
+          ],
+          "type": "ScrollContainer"
+        },
+        {
+          "name": "@VBoxContainer@1512",
+          "rect": [
+            316.0,
+            498.0,
+            266.0,
+            72.0
+          ],
+          "type": "VBoxContainer"
+        },
+        {
+          "color": "eadebfff",
+          "font": 14,
+          "name": "@Button@1513",
+          "rect": [
+            316.0,
+            498.0,
+            266.0,
+            34.0
+          ],
+          "text": "牧場主：割当",
+          "type": "Button"
+        },
+        {
+          "color": "eadebfff",
+          "font": 14,
+          "name": "@Button@1514",
+          "rect": [
+            316.0,
+            536.0,
+            266.0,
+            34.0
+          ],
+          "text": "田中：割当済み / 解除",
+          "type": "Button"
+        },
+        {
+          "name": "RoomPreview",
+          "rect": [
+            626.0,
+            462.0,
+            262.0,
+            242.0
+          ],
+          "tiles": [
+            {
+              "kind": "wood_wall",
+              "rect": [
+                16.0,
+                6.0,
+                46.0,
+                46.0
+              ],
+              "texture": "res://art_delivery/wood_buildings_v1/wall/normal/wood_mask_06.png"
+            },
+            {
+              "kind": "wood_wall",
+              "rect": [
+                16.0,
+                52.0,
+                46.0,
+                46.0
+              ],
+              "texture": "res://art_delivery/wood_buildings_v1/wall/normal/wood_mask_05.png"
+            },
+            {
+              "kind": "wood_wall",
+              "rect": [
+                16.0,
+                98.0,
+                46.0,
+                46.0
+              ],
+              "texture": "res://art_delivery/wood_buildings_v1/wall/normal/wood_mask_05.png"
+            },
+            {
+              "kind": "wood_wall",
+              "rect": [
+                16.0,
+                144.0,
+                46.0,
+                46.0
+              ],
+              "texture": "res://art_delivery/wood_buildings_v1/wall/normal/wood_mask_05.png"
+            },
+            {
+              "kind": "wood_wall",
+              "rect": [
+                16.0,
+                190.0,
+                46.0,
+                46.0
+              ],
+              "texture": "res://art_delivery/wood_buildings_v1/wall/normal/wood_mask_03.png"
+            },
+            {
+              "kind": "wood_wall",
+              "rect": [
+                62.0,
+                6.0,
+                46.0,
+                46.0
+              ],
+              "texture": "res://art_delivery/wood_buildings_v1/wall/normal/wood_mask_10.png"
+            },
+            {
+              "kind": "",
+              "rect": [
+                62.0,
+                52.0,
+                46.0,
+                46.0
+              ],
+              "texture": "res://art_delivery/wood_buildings_v1/floor/wood_00.png"
+            },
+            {
+              "kind": "",
+              "rect": [
+                62.0,
+                98.0,
+                46.0,
+                46.0
+              ],
+              "texture": "res://art_delivery/wood_buildings_v1/floor/wood_00.png"
+            },
+            {
+              "kind": "",
+              "rect": [
+                62.0,
+                144.0,
+                46.0,
+                46.0
+              ],
+              "texture": "res://art_delivery/wood_buildings_v1/floor/wood_00.png"
+            },
+            {
+              "kind": "wood_wall",
+              "rect": [
+                62.0,
+                190.0,
+                46.0,
+                46.0
+              ],
+              "texture": "res://art_delivery/wood_buildings_v1/wall/normal/wood_mask_10.png"
+            },
+            {
+              "kind": "door",
+              "rect": [
+                108.0,
+                6.0,
+                46.0,
+                46.0
+              ],
+              "texture": "res://art_delivery/wood_buildings_v1/door/horizontal_leaf_closed_normal.png"
+            },
+            {
+              "kind": "",
+              "rect": [
+                108.0,
+                52.0,
+                46.0,
+                46.0
+              ],
+              "texture": "res://art_delivery/wood_buildings_v1/floor/wood_00.png"
+            },
+            {
+              "kind": "",
+              "rect": [
+                108.0,
+                98.0,
+                46.0,
+                46.0
+              ],
+              "texture": "res://art_delivery/wood_buildings_v1/floor/wood_00.png"
+            },
+            {
+              "kind": "bed",
+              "rect": [
+                108.0,
+                98.0,
+                46.0,
+                46.0
+              ],
+              "texture": ""
+            },
+            {
+              "kind": "",
+              "rect": [
+                108.0,
+                144.0,
+                46.0,
+                46.0
+              ],
+              "texture": "res://art_delivery/wood_buildings_v1/floor/wood_00.png"
+            },
+            {
+              "kind": "wood_wall",
+              "rect": [
+                108.0,
+                190.0,
+                46.0,
+                46.0
+              ],
+              "texture": "res://art_delivery/wood_buildings_v1/wall/normal/wood_mask_10.png"
+            },
+            {
+              "kind": "wood_wall",
+              "rect": [
+                154.0,
+                6.0,
+                46.0,
+                46.0
+              ],
+              "texture": "res://art_delivery/wood_buildings_v1/wall/normal/wood_mask_10.png"
+            },
+            {
+              "kind": "",
+              "rect": [
+                154.0,
+                52.0,
+                46.0,
+                46.0
+              ],
+              "texture": "res://art_delivery/wood_buildings_v1/floor/wood_00.png"
+            },
+            {
+              "kind": "",
+              "rect": [
+                154.0,
+                98.0,
+                46.0,
+                46.0
+              ],
+              "texture": "res://art_delivery/wood_buildings_v1/floor/wood_00.png"
+            },
+            {
+              "kind": "",
+              "rect": [
+                154.0,
+                144.0,
+                46.0,
+                46.0
+              ],
+              "texture": "res://art_delivery/wood_buildings_v1/floor/wood_00.png"
+            },
+            {
+              "kind": "wood_wall",
+              "rect": [
+                154.0,
+                190.0,
+                46.0,
+                46.0
+              ],
+              "texture": "res://art_delivery/wood_buildings_v1/wall/normal/wood_mask_10.png"
+            },
+            {
+              "kind": "wood_wall",
+              "rect": [
+                200.0,
+                6.0,
+                46.0,
+                46.0
+              ],
+              "texture": "res://art_delivery/wood_buildings_v1/wall/normal/wood_mask_12.png"
+            },
+            {
+              "kind": "wood_wall",
+              "rect": [
+                200.0,
+                52.0,
+                46.0,
+                46.0
+              ],
+              "texture": "res://art_delivery/wood_buildings_v1/wall/normal/wood_mask_05.png"
+            },
+            {
+              "kind": "wood_wall",
+              "rect": [
+                200.0,
+                98.0,
+                46.0,
+                46.0
+              ],
+              "texture": "res://art_delivery/wood_buildings_v1/wall/normal/wood_mask_05.png"
+            },
+            {
+              "kind": "wood_wall",
+              "rect": [
+                200.0,
+                144.0,
+                46.0,
+                46.0
+              ],
+              "texture": "res://art_delivery/wood_buildings_v1/wall/normal/wood_mask_05.png"
+            },
+            {
+              "kind": "wood_wall",
+              "rect": [
+                200.0,
+                190.0,
+                46.0,
+                46.0
+              ],
+              "texture": "res://art_delivery/wood_buildings_v1/wall/normal/wood_mask_09.png"
+            }
+          ],
+          "type": "Control"
+        },
+        {
+          "font": 12,
+          "name": "@Label@1515",
+          "rect": [
+            680.0,
+            712.0,
+            72.0,
+            18.0
+          ],
+          "text": "室内見取り図",
+          "type": "Label",
+          "wrap": false
+        },
+        {
+          "font": 12,
+          "name": "@Label@1516",
+          "rect": [
+            30.0,
+            712.0,
+            324.0,
+            18.0
+          ],
+          "text": "マップ上の家屋をダブルクリックすると内部を選択できます",
+          "type": "Label",
+          "wrap": false
+        },
+        {
+          "color": "eadebfff",
+          "font": 16,
+          "name": "@Button@1505",
+          "rect": [
+            580.0,
+            754.0,
+            116.0,
+            44.0
+          ],
+          "text": "生活",
+          "type": "Button"
+        }
+      ],
+      "window": [
+        1600,
+        1000
+      ]
+    }
+  ]
+}

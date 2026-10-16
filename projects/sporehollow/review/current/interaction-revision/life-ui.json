@@ -249,7 +249,7 @@
       "passed": true
     },
     {
-      "check": "Access editor replaces filter tree without duplicate large panels",
+      "check": "Access and filters share a single two-column panel",
       "passed": true
     },
     {
