@@ -1,25 +1,29 @@
 # Dive In Under
 
-**地下へ潜るほど報酬は増えるが、仲間・装備を失う危険も増すフルオート戦闘ダンジョンRPG。**
+**地下へ潜るほど報酬は増えるが、死と装備の消耗を伴う、フルオート戦闘ダンジョンRPG。**
 
-## 現在地：設計整理／Codex実装は未依頼
-- **仕様の正本**: [SPEC.md](SPEC.md) — ここだけ読めばゲーム全体が分かるようにする。
-- **優先的な未決定事項**: [DESIGN_DECISIONS.md](docs/DESIGN_DECISIONS.md)
-- **10F設計検証の目標**: [PROTOTYPE_10F.md](docs/PROTOTYPE_10F.md)
-- **Steam向け最終配布**は Windows `.exe`＋必要な同梱アセットを想定。実装はCodexに依頼する段階で別途開始。
-- **古い編成ルールのブラウザ試作**: [ZIP](Dive-In-Under-10F-prototype.zip)／[ソース](prototype/index.html)。**主人公＋人間2名＋それぞれの配下／友好度／忠実度の仕様は未実装**。設計検討用の参考。
+## 現在地：画面デザイン＋仕様の整理（Codex未依頼）
 
-## 詳細資料
+- **[SPEC.md：全体仕様の正本](SPEC.md)** — ゲームの大枠と確定要件
+- **[UIモック4枚](docs/UI_MOCKS.md)** — タイトル／初回探索／死亡／倉庫（画像あり）
+- **[仕様と実装状況の表](docs/IMPLEMENTATION_STATUS.md)** — 何が「今」「次」「後」なのか
+- **[設計判断台帳](docs/DESIGN_DECISIONS.md)** — 既に決めたことと確認事項
+- **[初期EXE～10Fプロトタイプの進め方](docs/PROTOTYPE_10F.md)**
 
-| 分野 | 管理資料 |
-| --- | --- |
-| 階層・出現範囲・確率 | [FLOORS.md](docs/FLOORS.md) |
-| 敵・ボス一覧 | [ENEMIES.md](docs/ENEMIES.md) |
-| アイテム・装備・支給品 | [ITEMS.md](docs/ITEMS.md) |
-| 仲間（人・動物・魔物）／友好度／忠実度 | [ALLIES.md](docs/ALLIES.md) |
-| 階層イベント | [EVENTS.md](docs/EVENTS.md) |
-| オート戦闘 | [COMBAT.md](docs/COMBAT.md) |
-| 黄金像 | [SHRINE.md](docs/SHRINE.md) |
-| 参考作品の調査 | [RESEARCH.md](docs/RESEARCH.md) |
+### 直近の目標
 
-**資料管理の原則**：確定仕様と仮案を分ける。階層帯で候補IDを一覧し、個別の敵・仲間・装備・イベント定義を重複させない。Codexの実装プロンプトは**明示的な依頼後に段階的に作成**する。
+Windows EXEで **新規開始 → 主人公単独の初回探索（帰還不可） → 必ず死亡 → 町 → 倉庫／所持品／装備の整理 → 再探索・帰還**を、ある程度統一感のあるデザインで体験できるようにする。**現時点では実装は行わず、Codexへの指示準備のみ**。
+
+## 将来の主要仕様
+
+- 最大6人：主人公＋人間2名、各人間に動物・魔物の配下1体。
+- 人間同士の友好度・連携、配下との忠実度、行動順を決める素早さ。
+- 人間の装備は右手・左手（武器／盾）＋防具4＋装飾5＝11枠。
+- B100X風のスキル自動選択、Darkest Dungeon II風の関係効果は今後予定。Wizardry風の隊列は候補。
+- 10Fごとボス、1F・11F・21F…は到達すると開始地点が解放。
+
+## 詳細台帳
+
+[階層](docs/FLOORS.md) / [敵](docs/ENEMIES.md) / [アイテム](docs/ITEMS.md) / [仲間](docs/ALLIES.md) / [イベント](docs/EVENTS.md) / [戦闘](docs/COMBAT.md) / [黄金像](docs/SHRINE.md) / [参考資料](docs/RESEARCH.md)
+
+**旧ブラウザ試作**：[過去の試作ZIP](Dive-In-Under-10F-prototype.zip) ／ [ソース](prototype/index.html)。古いパーティ構造・初回帰還可能のルールを使っており、**今回の仕様には対応していない**。新しいWindows EXEは未作成。
