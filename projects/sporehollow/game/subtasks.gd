@@ -4,6 +4,7 @@ var order = {0: [], 1: [], 2: []}
 var selected = {0: "", 1: "", 2: ""}
 var pressed = ""
 var origin = Vector2.ZERO
+var pressed_rect = Rect2()
 var dragging = false
 var mode = -1
 var insertion = -1
@@ -36,22 +37,33 @@ func cancel():
 	slots.clear()
 	insertion = -1
 
+# A scrolled card is clickable only where it is actually visible. Icon and
+# caption share the Button rectangle; neither has an independent hit region.
+func visible_rect(button: Control) -> Rect2:
+	var rect=button.get_global_rect()
+	var parent=button.get_parent()
+	while parent!=null:
+		if parent is Control and parent.clip_contents:rect=rect.intersection(parent.get_global_rect())
+		parent=parent.get_parent()
+	return rect
+
 func input(game, event) -> bool:
 	if pressed != "" and ((event is InputEventKey and event.pressed and event.physical_keycode == KEY_ESCAPE) or (event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_RIGHT)):
 		cancel()
 		game.refresh()
 		return true
-	if game.menu_open or game.field_book or game.story_modal!="" or not game.world.working(): return false
+	if game.menu_open or game.field_book or game.field_shop or game.story_modal!="" or not game.world.working(): return false
 	if pressed != "" and event is InputEventMouseButton and event.button_index in [MOUSE_BUTTON_WHEEL_UP,MOUSE_BUTTON_WHEEL_DOWN]: return true
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		if event.pressed:
 			for id in game.subtask_choices():
 				if not game.buttons.has(id): continue
 				var button = game.buttons[id]
-				if button.disabled or not button.is_visible_in_tree() or not button.get_global_rect().has_point(event.position): continue
+				if button.disabled or not button.is_visible_in_tree() or not visible_rect(button).has_point(event.position): continue
 				pressed = id
-				label = button.text
+				label = button.get_node("BuildName").text if button.has_node("BuildName") else button.text
 				origin = event.position
+				pressed_rect = visible_rect(button)
 				mode = game.group
 				slots.clear()
 				for other in game.subtask_choices():
@@ -61,7 +73,7 @@ func input(game, event) -> bool:
 				return true
 		elif pressed != "":
 			var id = pressed
-			var execute = not dragging and game.buttons.has(id) and game.buttons[id].get_global_rect().has_point(event.position)
+			var execute = not dragging and game.buttons.has(id) and visible_rect(game.buttons[id]).has_point(event.position) and not game.buttons[id].disabled
 			if dragging and game.group == mode and area.grow(12).has_point(event.position) and insertion >= 0:
 				var visible_ids = slots.map(func(slot): return slot.id)
 				visible_ids.erase(id)
@@ -82,7 +94,9 @@ func input(game, event) -> bool:
 			return true
 	if event is InputEventMouseMotion and pressed != "":
 		if mode != game.group: cancel(); return true
-		if event.position.distance_to(origin) >= 7: dragging = true
+		# Moving inside a construction card is still a click. The old 7px
+		# threshold cancelled clicks even over the same icon/padding.
+		if event.position.distance_to(origin) >= 7 and (mode!=0 or not pressed_rect.has_point(event.position)): dragging = true
 		if dragging:
 			var best = INF
 			for i in range(slots.size()):
@@ -99,7 +113,7 @@ func draw(game):
 		button.modulate.a = 0.18 if slot.id == pressed else 1.0
 		var offset = Vector2.ZERO
 		if insertion >= 0 and slot.id != pressed and slots.find(slot) >= insertion: offset.x = 5
-		button.position = slot.rect.position + offset
+		button.global_position = slot.rect.position + offset
 	if insertion >= 0 and area.grow(12).has_point(game.pointer):
 		var rect = slots[insertion].rect
 		game.overlay.draw_line(rect.position-Vector2(4,2),rect.position+Vector2(-4,rect.size.y+2),Color("ba704e"),4)

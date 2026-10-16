@@ -1,0 +1,3566 @@
+{
+  "checks": [
+    {
+      "category": "壁と扉",
+      "drift": false,
+      "id": "wall",
+      "passed": true,
+      "portion": "(0.04, 0.04)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": false,
+      "id": "wall",
+      "passed": true,
+      "portion": "(0.5, 0.04)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": false,
+      "id": "wall",
+      "passed": true,
+      "portion": "(0.96, 0.04)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": false,
+      "id": "wall",
+      "passed": true,
+      "portion": "(0.04, 0.5)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": false,
+      "id": "wall",
+      "passed": true,
+      "portion": "(0.5, 0.5)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": false,
+      "id": "wall",
+      "passed": true,
+      "portion": "(0.96, 0.5)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": false,
+      "id": "wall",
+      "passed": true,
+      "portion": "(0.04, 0.96)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": false,
+      "id": "wall",
+      "passed": true,
+      "portion": "(0.5, 0.96)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": false,
+      "id": "wall",
+      "passed": true,
+      "portion": "(0.96, 0.96)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": true,
+      "id": "wall",
+      "passed": true,
+      "portion": "(0.04, 0.04)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": true,
+      "id": "wall",
+      "passed": true,
+      "portion": "(0.5, 0.04)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": true,
+      "id": "wall",
+      "passed": true,
+      "portion": "(0.96, 0.04)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": true,
+      "id": "wall",
+      "passed": true,
+      "portion": "(0.04, 0.5)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": true,
+      "id": "wall",
+      "passed": true,
+      "portion": "(0.5, 0.5)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": true,
+      "id": "wall",
+      "passed": true,
+      "portion": "(0.96, 0.5)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": true,
+      "id": "wall",
+      "passed": true,
+      "portion": "(0.04, 0.96)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": true,
+      "id": "wall",
+      "passed": true,
+      "portion": "(0.5, 0.96)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": true,
+      "id": "wall",
+      "passed": true,
+      "portion": "(0.96, 0.96)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": false,
+      "id": "wood_wall",
+      "passed": true,
+      "portion": "(0.04, 0.04)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": false,
+      "id": "wood_wall",
+      "passed": true,
+      "portion": "(0.5, 0.04)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": false,
+      "id": "wood_wall",
+      "passed": true,
+      "portion": "(0.96, 0.04)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": false,
+      "id": "wood_wall",
+      "passed": true,
+      "portion": "(0.04, 0.5)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": false,
+      "id": "wood_wall",
+      "passed": true,
+      "portion": "(0.5, 0.5)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": false,
+      "id": "wood_wall",
+      "passed": true,
+      "portion": "(0.96, 0.5)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": false,
+      "id": "wood_wall",
+      "passed": true,
+      "portion": "(0.04, 0.96)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": false,
+      "id": "wood_wall",
+      "passed": true,
+      "portion": "(0.5, 0.96)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": false,
+      "id": "wood_wall",
+      "passed": true,
+      "portion": "(0.96, 0.96)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": true,
+      "id": "wood_wall",
+      "passed": true,
+      "portion": "(0.04, 0.04)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": true,
+      "id": "wood_wall",
+      "passed": true,
+      "portion": "(0.5, 0.04)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": true,
+      "id": "wood_wall",
+      "passed": true,
+      "portion": "(0.96, 0.04)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": true,
+      "id": "wood_wall",
+      "passed": true,
+      "portion": "(0.04, 0.5)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": true,
+      "id": "wood_wall",
+      "passed": true,
+      "portion": "(0.5, 0.5)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": true,
+      "id": "wood_wall",
+      "passed": true,
+      "portion": "(0.96, 0.5)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": true,
+      "id": "wood_wall",
+      "passed": true,
+      "portion": "(0.04, 0.96)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": true,
+      "id": "wood_wall",
+      "passed": true,
+      "portion": "(0.5, 0.96)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": true,
+      "id": "wood_wall",
+      "passed": true,
+      "portion": "(0.96, 0.96)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": false,
+      "id": "stone_wall",
+      "passed": true,
+      "portion": "(0.04, 0.04)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": false,
+      "id": "stone_wall",
+      "passed": true,
+      "portion": "(0.5, 0.04)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": false,
+      "id": "stone_wall",
+      "passed": true,
+      "portion": "(0.96, 0.04)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": false,
+      "id": "stone_wall",
+      "passed": true,
+      "portion": "(0.04, 0.5)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": false,
+      "id": "stone_wall",
+      "passed": true,
+      "portion": "(0.5, 0.5)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": false,
+      "id": "stone_wall",
+      "passed": true,
+      "portion": "(0.96, 0.5)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": false,
+      "id": "stone_wall",
+      "passed": true,
+      "portion": "(0.04, 0.96)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": false,
+      "id": "stone_wall",
+      "passed": true,
+      "portion": "(0.5, 0.96)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": false,
+      "id": "stone_wall",
+      "passed": true,
+      "portion": "(0.96, 0.96)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": true,
+      "id": "stone_wall",
+      "passed": true,
+      "portion": "(0.04, 0.04)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": true,
+      "id": "stone_wall",
+      "passed": true,
+      "portion": "(0.5, 0.04)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": true,
+      "id": "stone_wall",
+      "passed": true,
+      "portion": "(0.96, 0.04)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": true,
+      "id": "stone_wall",
+      "passed": true,
+      "portion": "(0.04, 0.5)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": true,
+      "id": "stone_wall",
+      "passed": true,
+      "portion": "(0.5, 0.5)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": true,
+      "id": "stone_wall",
+      "passed": true,
+      "portion": "(0.96, 0.5)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": true,
+      "id": "stone_wall",
+      "passed": true,
+      "portion": "(0.04, 0.96)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": true,
+      "id": "stone_wall",
+      "passed": true,
+      "portion": "(0.5, 0.96)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": true,
+      "id": "stone_wall",
+      "passed": true,
+      "portion": "(0.96, 0.96)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": false,
+      "id": "door",
+      "passed": true,
+      "portion": "(0.04, 0.04)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": false,
+      "id": "door",
+      "passed": true,
+      "portion": "(0.5, 0.04)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": false,
+      "id": "door",
+      "passed": true,
+      "portion": "(0.96, 0.04)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": false,
+      "id": "door",
+      "passed": true,
+      "portion": "(0.04, 0.5)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": false,
+      "id": "door",
+      "passed": true,
+      "portion": "(0.5, 0.5)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": false,
+      "id": "door",
+      "passed": true,
+      "portion": "(0.96, 0.5)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": false,
+      "id": "door",
+      "passed": true,
+      "portion": "(0.04, 0.96)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": false,
+      "id": "door",
+      "passed": true,
+      "portion": "(0.5, 0.96)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": false,
+      "id": "door",
+      "passed": true,
+      "portion": "(0.96, 0.96)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": true,
+      "id": "door",
+      "passed": true,
+      "portion": "(0.04, 0.04)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": true,
+      "id": "door",
+      "passed": true,
+      "portion": "(0.5, 0.04)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": true,
+      "id": "door",
+      "passed": true,
+      "portion": "(0.96, 0.04)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": true,
+      "id": "door",
+      "passed": true,
+      "portion": "(0.04, 0.5)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": true,
+      "id": "door",
+      "passed": true,
+      "portion": "(0.5, 0.5)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": true,
+      "id": "door",
+      "passed": true,
+      "portion": "(0.96, 0.5)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": true,
+      "id": "door",
+      "passed": true,
+      "portion": "(0.04, 0.96)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": true,
+      "id": "door",
+      "passed": true,
+      "portion": "(0.5, 0.96)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": true,
+      "id": "door",
+      "passed": true,
+      "portion": "(0.96, 0.96)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": false,
+      "id": "locked_door",
+      "passed": true,
+      "portion": "(0.04, 0.04)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": false,
+      "id": "locked_door",
+      "passed": true,
+      "portion": "(0.5, 0.04)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": false,
+      "id": "locked_door",
+      "passed": true,
+      "portion": "(0.96, 0.04)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": false,
+      "id": "locked_door",
+      "passed": true,
+      "portion": "(0.04, 0.5)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": false,
+      "id": "locked_door",
+      "passed": true,
+      "portion": "(0.5, 0.5)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": false,
+      "id": "locked_door",
+      "passed": true,
+      "portion": "(0.96, 0.5)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": false,
+      "id": "locked_door",
+      "passed": true,
+      "portion": "(0.04, 0.96)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": false,
+      "id": "locked_door",
+      "passed": true,
+      "portion": "(0.5, 0.96)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": false,
+      "id": "locked_door",
+      "passed": true,
+      "portion": "(0.96, 0.96)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": true,
+      "id": "locked_door",
+      "passed": true,
+      "portion": "(0.04, 0.04)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": true,
+      "id": "locked_door",
+      "passed": true,
+      "portion": "(0.5, 0.04)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": true,
+      "id": "locked_door",
+      "passed": true,
+      "portion": "(0.96, 0.04)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": true,
+      "id": "locked_door",
+      "passed": true,
+      "portion": "(0.04, 0.5)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": true,
+      "id": "locked_door",
+      "passed": true,
+      "portion": "(0.5, 0.5)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": true,
+      "id": "locked_door",
+      "passed": true,
+      "portion": "(0.96, 0.5)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": true,
+      "id": "locked_door",
+      "passed": true,
+      "portion": "(0.04, 0.96)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": true,
+      "id": "locked_door",
+      "passed": true,
+      "portion": "(0.5, 0.96)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": true,
+      "id": "locked_door",
+      "passed": true,
+      "portion": "(0.96, 0.96)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "床",
+      "drift": false,
+      "id": "soil_tile",
+      "passed": true,
+      "portion": "(0.04, 0.04)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "床",
+      "drift": false,
+      "id": "soil_tile",
+      "passed": true,
+      "portion": "(0.5, 0.04)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "床",
+      "drift": false,
+      "id": "soil_tile",
+      "passed": true,
+      "portion": "(0.96, 0.04)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "床",
+      "drift": false,
+      "id": "soil_tile",
+      "passed": true,
+      "portion": "(0.04, 0.5)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "床",
+      "drift": false,
+      "id": "soil_tile",
+      "passed": true,
+      "portion": "(0.5, 0.5)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "床",
+      "drift": false,
+      "id": "soil_tile",
+      "passed": true,
+      "portion": "(0.96, 0.5)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "床",
+      "drift": false,
+      "id": "soil_tile",
+      "passed": true,
+      "portion": "(0.04, 0.96)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "床",
+      "drift": false,
+      "id": "soil_tile",
+      "passed": true,
+      "portion": "(0.5, 0.96)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "床",
+      "drift": false,
+      "id": "soil_tile",
+      "passed": true,
+      "portion": "(0.96, 0.96)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "床",
+      "drift": true,
+      "id": "soil_tile",
+      "passed": true,
+      "portion": "(0.04, 0.04)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "床",
+      "drift": true,
+      "id": "soil_tile",
+      "passed": true,
+      "portion": "(0.5, 0.04)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "床",
+      "drift": true,
+      "id": "soil_tile",
+      "passed": true,
+      "portion": "(0.96, 0.04)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "床",
+      "drift": true,
+      "id": "soil_tile",
+      "passed": true,
+      "portion": "(0.04, 0.5)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "床",
+      "drift": true,
+      "id": "soil_tile",
+      "passed": true,
+      "portion": "(0.5, 0.5)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "床",
+      "drift": true,
+      "id": "soil_tile",
+      "passed": true,
+      "portion": "(0.96, 0.5)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "床",
+      "drift": true,
+      "id": "soil_tile",
+      "passed": true,
+      "portion": "(0.04, 0.96)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "床",
+      "drift": true,
+      "id": "soil_tile",
+      "passed": true,
+      "portion": "(0.5, 0.96)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "床",
+      "drift": true,
+      "id": "soil_tile",
+      "passed": true,
+      "portion": "(0.96, 0.96)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "床",
+      "drift": false,
+      "id": "wood_tile",
+      "passed": true,
+      "portion": "(0.04, 0.04)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "床",
+      "drift": false,
+      "id": "wood_tile",
+      "passed": true,
+      "portion": "(0.5, 0.04)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "床",
+      "drift": false,
+      "id": "wood_tile",
+      "passed": true,
+      "portion": "(0.96, 0.04)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "床",
+      "drift": false,
+      "id": "wood_tile",
+      "passed": true,
+      "portion": "(0.04, 0.5)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "床",
+      "drift": false,
+      "id": "wood_tile",
+      "passed": true,
+      "portion": "(0.5, 0.5)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "床",
+      "drift": false,
+      "id": "wood_tile",
+      "passed": true,
+      "portion": "(0.96, 0.5)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "床",
+      "drift": false,
+      "id": "wood_tile",
+      "passed": true,
+      "portion": "(0.04, 0.96)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "床",
+      "drift": false,
+      "id": "wood_tile",
+      "passed": true,
+      "portion": "(0.5, 0.96)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "床",
+      "drift": false,
+      "id": "wood_tile",
+      "passed": true,
+      "portion": "(0.96, 0.96)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "床",
+      "drift": true,
+      "id": "wood_tile",
+      "passed": true,
+      "portion": "(0.04, 0.04)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "床",
+      "drift": true,
+      "id": "wood_tile",
+      "passed": true,
+      "portion": "(0.5, 0.04)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "床",
+      "drift": true,
+      "id": "wood_tile",
+      "passed": true,
+      "portion": "(0.96, 0.04)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "床",
+      "drift": true,
+      "id": "wood_tile",
+      "passed": true,
+      "portion": "(0.04, 0.5)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "床",
+      "drift": true,
+      "id": "wood_tile",
+      "passed": true,
+      "portion": "(0.5, 0.5)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "床",
+      "drift": true,
+      "id": "wood_tile",
+      "passed": true,
+      "portion": "(0.96, 0.5)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "床",
+      "drift": true,
+      "id": "wood_tile",
+      "passed": true,
+      "portion": "(0.04, 0.96)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "床",
+      "drift": true,
+      "id": "wood_tile",
+      "passed": true,
+      "portion": "(0.5, 0.96)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "床",
+      "drift": true,
+      "id": "wood_tile",
+      "passed": true,
+      "portion": "(0.96, 0.96)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "床",
+      "drift": false,
+      "id": "stone_tile",
+      "passed": true,
+      "portion": "(0.04, 0.04)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "床",
+      "drift": false,
+      "id": "stone_tile",
+      "passed": true,
+      "portion": "(0.5, 0.04)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "床",
+      "drift": false,
+      "id": "stone_tile",
+      "passed": true,
+      "portion": "(0.96, 0.04)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "床",
+      "drift": false,
+      "id": "stone_tile",
+      "passed": true,
+      "portion": "(0.04, 0.5)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "床",
+      "drift": false,
+      "id": "stone_tile",
+      "passed": true,
+      "portion": "(0.5, 0.5)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "床",
+      "drift": false,
+      "id": "stone_tile",
+      "passed": true,
+      "portion": "(0.96, 0.5)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "床",
+      "drift": false,
+      "id": "stone_tile",
+      "passed": true,
+      "portion": "(0.04, 0.96)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "床",
+      "drift": false,
+      "id": "stone_tile",
+      "passed": true,
+      "portion": "(0.5, 0.96)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "床",
+      "drift": false,
+      "id": "stone_tile",
+      "passed": true,
+      "portion": "(0.96, 0.96)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "床",
+      "drift": true,
+      "id": "stone_tile",
+      "passed": true,
+      "portion": "(0.04, 0.04)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "床",
+      "drift": true,
+      "id": "stone_tile",
+      "passed": true,
+      "portion": "(0.5, 0.04)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "床",
+      "drift": true,
+      "id": "stone_tile",
+      "passed": true,
+      "portion": "(0.96, 0.04)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "床",
+      "drift": true,
+      "id": "stone_tile",
+      "passed": true,
+      "portion": "(0.04, 0.5)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "床",
+      "drift": true,
+      "id": "stone_tile",
+      "passed": true,
+      "portion": "(0.5, 0.5)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "床",
+      "drift": true,
+      "id": "stone_tile",
+      "passed": true,
+      "portion": "(0.96, 0.5)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "床",
+      "drift": true,
+      "id": "stone_tile",
+      "passed": true,
+      "portion": "(0.04, 0.96)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "床",
+      "drift": true,
+      "id": "stone_tile",
+      "passed": true,
+      "portion": "(0.5, 0.96)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "床",
+      "drift": true,
+      "id": "stone_tile",
+      "passed": true,
+      "portion": "(0.96, 0.96)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "設置",
+      "drift": false,
+      "id": "bed",
+      "passed": true,
+      "portion": "(0.04, 0.04)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "設置",
+      "drift": false,
+      "id": "bed",
+      "passed": true,
+      "portion": "(0.5, 0.04)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "設置",
+      "drift": false,
+      "id": "bed",
+      "passed": true,
+      "portion": "(0.96, 0.04)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "設置",
+      "drift": false,
+      "id": "bed",
+      "passed": true,
+      "portion": "(0.04, 0.5)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "設置",
+      "drift": false,
+      "id": "bed",
+      "passed": true,
+      "portion": "(0.5, 0.5)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "設置",
+      "drift": false,
+      "id": "bed",
+      "passed": true,
+      "portion": "(0.96, 0.5)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "設置",
+      "drift": false,
+      "id": "bed",
+      "passed": true,
+      "portion": "(0.04, 0.96)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "設置",
+      "drift": false,
+      "id": "bed",
+      "passed": true,
+      "portion": "(0.5, 0.96)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "設置",
+      "drift": false,
+      "id": "bed",
+      "passed": true,
+      "portion": "(0.96, 0.96)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "設置",
+      "drift": true,
+      "id": "bed",
+      "passed": true,
+      "portion": "(0.04, 0.04)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "設置",
+      "drift": true,
+      "id": "bed",
+      "passed": true,
+      "portion": "(0.5, 0.04)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "設置",
+      "drift": true,
+      "id": "bed",
+      "passed": true,
+      "portion": "(0.96, 0.04)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "設置",
+      "drift": true,
+      "id": "bed",
+      "passed": true,
+      "portion": "(0.04, 0.5)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "設置",
+      "drift": true,
+      "id": "bed",
+      "passed": true,
+      "portion": "(0.5, 0.5)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "設置",
+      "drift": true,
+      "id": "bed",
+      "passed": true,
+      "portion": "(0.96, 0.5)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "設置",
+      "drift": true,
+      "id": "bed",
+      "passed": true,
+      "portion": "(0.04, 0.96)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "設置",
+      "drift": true,
+      "id": "bed",
+      "passed": true,
+      "portion": "(0.5, 0.96)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "設置",
+      "drift": true,
+      "id": "bed",
+      "passed": true,
+      "portion": "(0.96, 0.96)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "設置",
+      "drift": false,
+      "id": "cooking_bench",
+      "passed": true,
+      "portion": "(0.04, 0.04)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "設置",
+      "drift": false,
+      "id": "cooking_bench",
+      "passed": true,
+      "portion": "(0.5, 0.04)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "設置",
+      "drift": false,
+      "id": "cooking_bench",
+      "passed": true,
+      "portion": "(0.96, 0.04)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "設置",
+      "drift": false,
+      "id": "cooking_bench",
+      "passed": true,
+      "portion": "(0.04, 0.5)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "設置",
+      "drift": false,
+      "id": "cooking_bench",
+      "passed": true,
+      "portion": "(0.5, 0.5)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "設置",
+      "drift": false,
+      "id": "cooking_bench",
+      "passed": true,
+      "portion": "(0.96, 0.5)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "設置",
+      "drift": false,
+      "id": "cooking_bench",
+      "passed": true,
+      "portion": "(0.04, 0.96)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "設置",
+      "drift": false,
+      "id": "cooking_bench",
+      "passed": true,
+      "portion": "(0.5, 0.96)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "設置",
+      "drift": false,
+      "id": "cooking_bench",
+      "passed": true,
+      "portion": "(0.96, 0.96)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "設置",
+      "drift": true,
+      "id": "cooking_bench",
+      "passed": true,
+      "portion": "(0.04, 0.04)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "設置",
+      "drift": true,
+      "id": "cooking_bench",
+      "passed": true,
+      "portion": "(0.5, 0.04)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "設置",
+      "drift": true,
+      "id": "cooking_bench",
+      "passed": true,
+      "portion": "(0.96, 0.04)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "設置",
+      "drift": true,
+      "id": "cooking_bench",
+      "passed": true,
+      "portion": "(0.04, 0.5)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "設置",
+      "drift": true,
+      "id": "cooking_bench",
+      "passed": true,
+      "portion": "(0.5, 0.5)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "設置",
+      "drift": true,
+      "id": "cooking_bench",
+      "passed": true,
+      "portion": "(0.96, 0.5)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "設置",
+      "drift": true,
+      "id": "cooking_bench",
+      "passed": true,
+      "portion": "(0.04, 0.96)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "設置",
+      "drift": true,
+      "id": "cooking_bench",
+      "passed": true,
+      "portion": "(0.5, 0.96)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "設置",
+      "drift": true,
+      "id": "cooking_bench",
+      "passed": true,
+      "portion": "(0.96, 0.96)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "設置",
+      "drift": false,
+      "id": "carpentry_bench",
+      "passed": true,
+      "portion": "(0.04, 0.04)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "設置",
+      "drift": false,
+      "id": "carpentry_bench",
+      "passed": true,
+      "portion": "(0.5, 0.04)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "設置",
+      "drift": false,
+      "id": "carpentry_bench",
+      "passed": true,
+      "portion": "(0.96, 0.04)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "設置",
+      "drift": false,
+      "id": "carpentry_bench",
+      "passed": true,
+      "portion": "(0.04, 0.5)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "設置",
+      "drift": false,
+      "id": "carpentry_bench",
+      "passed": true,
+      "portion": "(0.5, 0.5)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "設置",
+      "drift": false,
+      "id": "carpentry_bench",
+      "passed": true,
+      "portion": "(0.96, 0.5)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "設置",
+      "drift": false,
+      "id": "carpentry_bench",
+      "passed": true,
+      "portion": "(0.04, 0.96)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "設置",
+      "drift": false,
+      "id": "carpentry_bench",
+      "passed": true,
+      "portion": "(0.5, 0.96)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "設置",
+      "drift": false,
+      "id": "carpentry_bench",
+      "passed": true,
+      "portion": "(0.96, 0.96)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "設置",
+      "drift": true,
+      "id": "carpentry_bench",
+      "passed": true,
+      "portion": "(0.04, 0.04)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "設置",
+      "drift": true,
+      "id": "carpentry_bench",
+      "passed": true,
+      "portion": "(0.5, 0.04)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "設置",
+      "drift": true,
+      "id": "carpentry_bench",
+      "passed": true,
+      "portion": "(0.96, 0.04)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "設置",
+      "drift": true,
+      "id": "carpentry_bench",
+      "passed": true,
+      "portion": "(0.04, 0.5)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "設置",
+      "drift": true,
+      "id": "carpentry_bench",
+      "passed": true,
+      "portion": "(0.5, 0.5)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "設置",
+      "drift": true,
+      "id": "carpentry_bench",
+      "passed": true,
+      "portion": "(0.96, 0.5)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "設置",
+      "drift": true,
+      "id": "carpentry_bench",
+      "passed": true,
+      "portion": "(0.04, 0.96)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "設置",
+      "drift": true,
+      "id": "carpentry_bench",
+      "passed": true,
+      "portion": "(0.5, 0.96)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "設置",
+      "drift": true,
+      "id": "carpentry_bench",
+      "passed": true,
+      "portion": "(0.96, 0.96)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "設置",
+      "drift": false,
+      "id": "sewing_bench",
+      "passed": true,
+      "portion": "(0.04, 0.04)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "設置",
+      "drift": false,
+      "id": "sewing_bench",
+      "passed": true,
+      "portion": "(0.5, 0.04)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "設置",
+      "drift": false,
+      "id": "sewing_bench",
+      "passed": true,
+      "portion": "(0.96, 0.04)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "設置",
+      "drift": false,
+      "id": "sewing_bench",
+      "passed": true,
+      "portion": "(0.04, 0.5)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "設置",
+      "drift": false,
+      "id": "sewing_bench",
+      "passed": true,
+      "portion": "(0.5, 0.5)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "設置",
+      "drift": false,
+      "id": "sewing_bench",
+      "passed": true,
+      "portion": "(0.96, 0.5)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "設置",
+      "drift": false,
+      "id": "sewing_bench",
+      "passed": true,
+      "portion": "(0.04, 0.96)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "設置",
+      "drift": false,
+      "id": "sewing_bench",
+      "passed": true,
+      "portion": "(0.5, 0.96)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "設置",
+      "drift": false,
+      "id": "sewing_bench",
+      "passed": true,
+      "portion": "(0.96, 0.96)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "設置",
+      "drift": true,
+      "id": "sewing_bench",
+      "passed": true,
+      "portion": "(0.04, 0.04)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "設置",
+      "drift": true,
+      "id": "sewing_bench",
+      "passed": true,
+      "portion": "(0.5, 0.04)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "設置",
+      "drift": true,
+      "id": "sewing_bench",
+      "passed": true,
+      "portion": "(0.96, 0.04)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "設置",
+      "drift": true,
+      "id": "sewing_bench",
+      "passed": true,
+      "portion": "(0.04, 0.5)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "設置",
+      "drift": true,
+      "id": "sewing_bench",
+      "passed": true,
+      "portion": "(0.5, 0.5)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "設置",
+      "drift": true,
+      "id": "sewing_bench",
+      "passed": true,
+      "portion": "(0.96, 0.5)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "設置",
+      "drift": true,
+      "id": "sewing_bench",
+      "passed": true,
+      "portion": "(0.04, 0.96)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "設置",
+      "drift": true,
+      "id": "sewing_bench",
+      "passed": true,
+      "portion": "(0.5, 0.96)",
+      "window": "(1280, 800)"
+    },
+    {
+      "category": "設置",
+      "drift": true,
+      "id": "sewing_bench",
+      "passed": true,
+      "portion": "(0.96, 0.96)",
+      "window": "(1280, 800)"
+    },
+    {
+      "check": "Leaving a card still permits deliberate reordering (1280, 800)",
+      "passed": true
+    },
+    {
+      "check": "Reorder keeps card in scroll-container coordinates: wall",
+      "passed": true
+    },
+    {
+      "check": "Reorder keeps card in scroll-container coordinates: wood_wall",
+      "passed": true
+    },
+    {
+      "check": "Reorder keeps card in scroll-container coordinates: stone_wall",
+      "passed": true
+    },
+    {
+      "check": "Reorder keeps card in scroll-container coordinates: door",
+      "passed": true
+    },
+    {
+      "check": "Reorder keeps card in scroll-container coordinates: locked_door",
+      "passed": true
+    },
+    {
+      "check": "Reordering does not select or place a building",
+      "passed": true
+    },
+    {
+      "check": "Disabled card cannot be selected",
+      "passed": true
+    },
+    {
+      "check": "Right click cancels held card without placement",
+      "passed": true
+    },
+    {
+      "check": "Clipped caption does not capture clicks",
+      "passed": true
+    },
+    {
+      "check": "Visible part of scrolled card is selectable",
+      "passed": true
+    },
+    {
+      "check": "Gap between cards does not select either card",
+      "passed": true
+    },
+    {
+      "check": "Button interactions never place building jobs",
+      "passed": true
+    },
+    {
+      "category": "壁と扉",
+      "drift": false,
+      "id": "wood_wall",
+      "passed": true,
+      "portion": "(0.04, 0.04)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": false,
+      "id": "wood_wall",
+      "passed": true,
+      "portion": "(0.5, 0.04)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": false,
+      "id": "wood_wall",
+      "passed": true,
+      "portion": "(0.96, 0.04)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": false,
+      "id": "wood_wall",
+      "passed": true,
+      "portion": "(0.04, 0.5)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": false,
+      "id": "wood_wall",
+      "passed": true,
+      "portion": "(0.5, 0.5)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": false,
+      "id": "wood_wall",
+      "passed": true,
+      "portion": "(0.96, 0.5)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": false,
+      "id": "wood_wall",
+      "passed": true,
+      "portion": "(0.04, 0.96)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": false,
+      "id": "wood_wall",
+      "passed": true,
+      "portion": "(0.5, 0.96)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": false,
+      "id": "wood_wall",
+      "passed": true,
+      "portion": "(0.96, 0.96)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": true,
+      "id": "wood_wall",
+      "passed": true,
+      "portion": "(0.04, 0.04)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": true,
+      "id": "wood_wall",
+      "passed": true,
+      "portion": "(0.5, 0.04)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": true,
+      "id": "wood_wall",
+      "passed": true,
+      "portion": "(0.96, 0.04)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": true,
+      "id": "wood_wall",
+      "passed": true,
+      "portion": "(0.04, 0.5)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": true,
+      "id": "wood_wall",
+      "passed": true,
+      "portion": "(0.5, 0.5)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": true,
+      "id": "wood_wall",
+      "passed": true,
+      "portion": "(0.96, 0.5)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": true,
+      "id": "wood_wall",
+      "passed": true,
+      "portion": "(0.04, 0.96)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": true,
+      "id": "wood_wall",
+      "passed": true,
+      "portion": "(0.5, 0.96)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": true,
+      "id": "wood_wall",
+      "passed": true,
+      "portion": "(0.96, 0.96)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": false,
+      "id": "wall",
+      "passed": true,
+      "portion": "(0.04, 0.04)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": false,
+      "id": "wall",
+      "passed": true,
+      "portion": "(0.5, 0.04)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": false,
+      "id": "wall",
+      "passed": true,
+      "portion": "(0.96, 0.04)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": false,
+      "id": "wall",
+      "passed": true,
+      "portion": "(0.04, 0.5)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": false,
+      "id": "wall",
+      "passed": true,
+      "portion": "(0.5, 0.5)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": false,
+      "id": "wall",
+      "passed": true,
+      "portion": "(0.96, 0.5)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": false,
+      "id": "wall",
+      "passed": true,
+      "portion": "(0.04, 0.96)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": false,
+      "id": "wall",
+      "passed": true,
+      "portion": "(0.5, 0.96)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": false,
+      "id": "wall",
+      "passed": true,
+      "portion": "(0.96, 0.96)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": true,
+      "id": "wall",
+      "passed": true,
+      "portion": "(0.04, 0.04)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": true,
+      "id": "wall",
+      "passed": true,
+      "portion": "(0.5, 0.04)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": true,
+      "id": "wall",
+      "passed": true,
+      "portion": "(0.96, 0.04)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": true,
+      "id": "wall",
+      "passed": true,
+      "portion": "(0.04, 0.5)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": true,
+      "id": "wall",
+      "passed": true,
+      "portion": "(0.5, 0.5)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": true,
+      "id": "wall",
+      "passed": true,
+      "portion": "(0.96, 0.5)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": true,
+      "id": "wall",
+      "passed": true,
+      "portion": "(0.04, 0.96)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": true,
+      "id": "wall",
+      "passed": true,
+      "portion": "(0.5, 0.96)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": true,
+      "id": "wall",
+      "passed": true,
+      "portion": "(0.96, 0.96)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": false,
+      "id": "stone_wall",
+      "passed": true,
+      "portion": "(0.04, 0.04)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": false,
+      "id": "stone_wall",
+      "passed": true,
+      "portion": "(0.5, 0.04)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": false,
+      "id": "stone_wall",
+      "passed": true,
+      "portion": "(0.96, 0.04)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": false,
+      "id": "stone_wall",
+      "passed": true,
+      "portion": "(0.04, 0.5)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": false,
+      "id": "stone_wall",
+      "passed": true,
+      "portion": "(0.5, 0.5)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": false,
+      "id": "stone_wall",
+      "passed": true,
+      "portion": "(0.96, 0.5)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": false,
+      "id": "stone_wall",
+      "passed": true,
+      "portion": "(0.04, 0.96)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": false,
+      "id": "stone_wall",
+      "passed": true,
+      "portion": "(0.5, 0.96)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": false,
+      "id": "stone_wall",
+      "passed": true,
+      "portion": "(0.96, 0.96)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": true,
+      "id": "stone_wall",
+      "passed": true,
+      "portion": "(0.04, 0.04)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": true,
+      "id": "stone_wall",
+      "passed": true,
+      "portion": "(0.5, 0.04)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": true,
+      "id": "stone_wall",
+      "passed": true,
+      "portion": "(0.96, 0.04)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": true,
+      "id": "stone_wall",
+      "passed": true,
+      "portion": "(0.04, 0.5)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": true,
+      "id": "stone_wall",
+      "passed": true,
+      "portion": "(0.5, 0.5)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": true,
+      "id": "stone_wall",
+      "passed": true,
+      "portion": "(0.96, 0.5)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": true,
+      "id": "stone_wall",
+      "passed": true,
+      "portion": "(0.04, 0.96)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": true,
+      "id": "stone_wall",
+      "passed": true,
+      "portion": "(0.5, 0.96)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": true,
+      "id": "stone_wall",
+      "passed": true,
+      "portion": "(0.96, 0.96)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": false,
+      "id": "door",
+      "passed": true,
+      "portion": "(0.04, 0.04)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": false,
+      "id": "door",
+      "passed": true,
+      "portion": "(0.5, 0.04)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": false,
+      "id": "door",
+      "passed": true,
+      "portion": "(0.96, 0.04)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": false,
+      "id": "door",
+      "passed": true,
+      "portion": "(0.04, 0.5)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": false,
+      "id": "door",
+      "passed": true,
+      "portion": "(0.5, 0.5)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": false,
+      "id": "door",
+      "passed": true,
+      "portion": "(0.96, 0.5)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": false,
+      "id": "door",
+      "passed": true,
+      "portion": "(0.04, 0.96)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": false,
+      "id": "door",
+      "passed": true,
+      "portion": "(0.5, 0.96)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": false,
+      "id": "door",
+      "passed": true,
+      "portion": "(0.96, 0.96)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": true,
+      "id": "door",
+      "passed": true,
+      "portion": "(0.04, 0.04)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": true,
+      "id": "door",
+      "passed": true,
+      "portion": "(0.5, 0.04)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": true,
+      "id": "door",
+      "passed": true,
+      "portion": "(0.96, 0.04)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": true,
+      "id": "door",
+      "passed": true,
+      "portion": "(0.04, 0.5)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": true,
+      "id": "door",
+      "passed": true,
+      "portion": "(0.5, 0.5)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": true,
+      "id": "door",
+      "passed": true,
+      "portion": "(0.96, 0.5)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": true,
+      "id": "door",
+      "passed": true,
+      "portion": "(0.04, 0.96)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": true,
+      "id": "door",
+      "passed": true,
+      "portion": "(0.5, 0.96)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": true,
+      "id": "door",
+      "passed": true,
+      "portion": "(0.96, 0.96)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": false,
+      "id": "locked_door",
+      "passed": true,
+      "portion": "(0.04, 0.04)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": false,
+      "id": "locked_door",
+      "passed": true,
+      "portion": "(0.5, 0.04)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": false,
+      "id": "locked_door",
+      "passed": true,
+      "portion": "(0.96, 0.04)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": false,
+      "id": "locked_door",
+      "passed": true,
+      "portion": "(0.04, 0.5)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": false,
+      "id": "locked_door",
+      "passed": true,
+      "portion": "(0.5, 0.5)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": false,
+      "id": "locked_door",
+      "passed": true,
+      "portion": "(0.96, 0.5)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": false,
+      "id": "locked_door",
+      "passed": true,
+      "portion": "(0.04, 0.96)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": false,
+      "id": "locked_door",
+      "passed": true,
+      "portion": "(0.5, 0.96)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": false,
+      "id": "locked_door",
+      "passed": true,
+      "portion": "(0.96, 0.96)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": true,
+      "id": "locked_door",
+      "passed": true,
+      "portion": "(0.04, 0.04)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": true,
+      "id": "locked_door",
+      "passed": true,
+      "portion": "(0.5, 0.04)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": true,
+      "id": "locked_door",
+      "passed": true,
+      "portion": "(0.96, 0.04)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": true,
+      "id": "locked_door",
+      "passed": true,
+      "portion": "(0.04, 0.5)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": true,
+      "id": "locked_door",
+      "passed": true,
+      "portion": "(0.5, 0.5)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": true,
+      "id": "locked_door",
+      "passed": true,
+      "portion": "(0.96, 0.5)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": true,
+      "id": "locked_door",
+      "passed": true,
+      "portion": "(0.04, 0.96)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": true,
+      "id": "locked_door",
+      "passed": true,
+      "portion": "(0.5, 0.96)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "壁と扉",
+      "drift": true,
+      "id": "locked_door",
+      "passed": true,
+      "portion": "(0.96, 0.96)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "床",
+      "drift": false,
+      "id": "soil_tile",
+      "passed": true,
+      "portion": "(0.04, 0.04)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "床",
+      "drift": false,
+      "id": "soil_tile",
+      "passed": true,
+      "portion": "(0.5, 0.04)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "床",
+      "drift": false,
+      "id": "soil_tile",
+      "passed": true,
+      "portion": "(0.96, 0.04)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "床",
+      "drift": false,
+      "id": "soil_tile",
+      "passed": true,
+      "portion": "(0.04, 0.5)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "床",
+      "drift": false,
+      "id": "soil_tile",
+      "passed": true,
+      "portion": "(0.5, 0.5)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "床",
+      "drift": false,
+      "id": "soil_tile",
+      "passed": true,
+      "portion": "(0.96, 0.5)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "床",
+      "drift": false,
+      "id": "soil_tile",
+      "passed": true,
+      "portion": "(0.04, 0.96)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "床",
+      "drift": false,
+      "id": "soil_tile",
+      "passed": true,
+      "portion": "(0.5, 0.96)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "床",
+      "drift": false,
+      "id": "soil_tile",
+      "passed": true,
+      "portion": "(0.96, 0.96)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "床",
+      "drift": true,
+      "id": "soil_tile",
+      "passed": true,
+      "portion": "(0.04, 0.04)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "床",
+      "drift": true,
+      "id": "soil_tile",
+      "passed": true,
+      "portion": "(0.5, 0.04)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "床",
+      "drift": true,
+      "id": "soil_tile",
+      "passed": true,
+      "portion": "(0.96, 0.04)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "床",
+      "drift": true,
+      "id": "soil_tile",
+      "passed": true,
+      "portion": "(0.04, 0.5)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "床",
+      "drift": true,
+      "id": "soil_tile",
+      "passed": true,
+      "portion": "(0.5, 0.5)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "床",
+      "drift": true,
+      "id": "soil_tile",
+      "passed": true,
+      "portion": "(0.96, 0.5)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "床",
+      "drift": true,
+      "id": "soil_tile",
+      "passed": true,
+      "portion": "(0.04, 0.96)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "床",
+      "drift": true,
+      "id": "soil_tile",
+      "passed": true,
+      "portion": "(0.5, 0.96)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "床",
+      "drift": true,
+      "id": "soil_tile",
+      "passed": true,
+      "portion": "(0.96, 0.96)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "床",
+      "drift": false,
+      "id": "wood_tile",
+      "passed": true,
+      "portion": "(0.04, 0.04)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "床",
+      "drift": false,
+      "id": "wood_tile",
+      "passed": true,
+      "portion": "(0.5, 0.04)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "床",
+      "drift": false,
+      "id": "wood_tile",
+      "passed": true,
+      "portion": "(0.96, 0.04)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "床",
+      "drift": false,
+      "id": "wood_tile",
+      "passed": true,
+      "portion": "(0.04, 0.5)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "床",
+      "drift": false,
+      "id": "wood_tile",
+      "passed": true,
+      "portion": "(0.5, 0.5)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "床",
+      "drift": false,
+      "id": "wood_tile",
+      "passed": true,
+      "portion": "(0.96, 0.5)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "床",
+      "drift": false,
+      "id": "wood_tile",
+      "passed": true,
+      "portion": "(0.04, 0.96)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "床",
+      "drift": false,
+      "id": "wood_tile",
+      "passed": true,
+      "portion": "(0.5, 0.96)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "床",
+      "drift": false,
+      "id": "wood_tile",
+      "passed": true,
+      "portion": "(0.96, 0.96)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "床",
+      "drift": true,
+      "id": "wood_tile",
+      "passed": true,
+      "portion": "(0.04, 0.04)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "床",
+      "drift": true,
+      "id": "wood_tile",
+      "passed": true,
+      "portion": "(0.5, 0.04)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "床",
+      "drift": true,
+      "id": "wood_tile",
+      "passed": true,
+      "portion": "(0.96, 0.04)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "床",
+      "drift": true,
+      "id": "wood_tile",
+      "passed": true,
+      "portion": "(0.04, 0.5)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "床",
+      "drift": true,
+      "id": "wood_tile",
+      "passed": true,
+      "portion": "(0.5, 0.5)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "床",
+      "drift": true,
+      "id": "wood_tile",
+      "passed": true,
+      "portion": "(0.96, 0.5)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "床",
+      "drift": true,
+      "id": "wood_tile",
+      "passed": true,
+      "portion": "(0.04, 0.96)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "床",
+      "drift": true,
+      "id": "wood_tile",
+      "passed": true,
+      "portion": "(0.5, 0.96)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "床",
+      "drift": true,
+      "id": "wood_tile",
+      "passed": true,
+      "portion": "(0.96, 0.96)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "床",
+      "drift": false,
+      "id": "stone_tile",
+      "passed": true,
+      "portion": "(0.04, 0.04)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "床",
+      "drift": false,
+      "id": "stone_tile",
+      "passed": true,
+      "portion": "(0.5, 0.04)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "床",
+      "drift": false,
+      "id": "stone_tile",
+      "passed": true,
+      "portion": "(0.96, 0.04)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "床",
+      "drift": false,
+      "id": "stone_tile",
+      "passed": true,
+      "portion": "(0.04, 0.5)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "床",
+      "drift": false,
+      "id": "stone_tile",
+      "passed": true,
+      "portion": "(0.5, 0.5)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "床",
+      "drift": false,
+      "id": "stone_tile",
+      "passed": true,
+      "portion": "(0.96, 0.5)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "床",
+      "drift": false,
+      "id": "stone_tile",
+      "passed": true,
+      "portion": "(0.04, 0.96)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "床",
+      "drift": false,
+      "id": "stone_tile",
+      "passed": true,
+      "portion": "(0.5, 0.96)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "床",
+      "drift": false,
+      "id": "stone_tile",
+      "passed": true,
+      "portion": "(0.96, 0.96)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "床",
+      "drift": true,
+      "id": "stone_tile",
+      "passed": true,
+      "portion": "(0.04, 0.04)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "床",
+      "drift": true,
+      "id": "stone_tile",
+      "passed": true,
+      "portion": "(0.5, 0.04)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "床",
+      "drift": true,
+      "id": "stone_tile",
+      "passed": true,
+      "portion": "(0.96, 0.04)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "床",
+      "drift": true,
+      "id": "stone_tile",
+      "passed": true,
+      "portion": "(0.04, 0.5)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "床",
+      "drift": true,
+      "id": "stone_tile",
+      "passed": true,
+      "portion": "(0.5, 0.5)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "床",
+      "drift": true,
+      "id": "stone_tile",
+      "passed": true,
+      "portion": "(0.96, 0.5)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "床",
+      "drift": true,
+      "id": "stone_tile",
+      "passed": true,
+      "portion": "(0.04, 0.96)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "床",
+      "drift": true,
+      "id": "stone_tile",
+      "passed": true,
+      "portion": "(0.5, 0.96)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "床",
+      "drift": true,
+      "id": "stone_tile",
+      "passed": true,
+      "portion": "(0.96, 0.96)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "設置",
+      "drift": false,
+      "id": "bed",
+      "passed": true,
+      "portion": "(0.04, 0.04)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "設置",
+      "drift": false,
+      "id": "bed",
+      "passed": true,
+      "portion": "(0.5, 0.04)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "設置",
+      "drift": false,
+      "id": "bed",
+      "passed": true,
+      "portion": "(0.96, 0.04)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "設置",
+      "drift": false,
+      "id": "bed",
+      "passed": true,
+      "portion": "(0.04, 0.5)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "設置",
+      "drift": false,
+      "id": "bed",
+      "passed": true,
+      "portion": "(0.5, 0.5)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "設置",
+      "drift": false,
+      "id": "bed",
+      "passed": true,
+      "portion": "(0.96, 0.5)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "設置",
+      "drift": false,
+      "id": "bed",
+      "passed": true,
+      "portion": "(0.04, 0.96)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "設置",
+      "drift": false,
+      "id": "bed",
+      "passed": true,
+      "portion": "(0.5, 0.96)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "設置",
+      "drift": false,
+      "id": "bed",
+      "passed": true,
+      "portion": "(0.96, 0.96)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "設置",
+      "drift": true,
+      "id": "bed",
+      "passed": true,
+      "portion": "(0.04, 0.04)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "設置",
+      "drift": true,
+      "id": "bed",
+      "passed": true,
+      "portion": "(0.5, 0.04)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "設置",
+      "drift": true,
+      "id": "bed",
+      "passed": true,
+      "portion": "(0.96, 0.04)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "設置",
+      "drift": true,
+      "id": "bed",
+      "passed": true,
+      "portion": "(0.04, 0.5)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "設置",
+      "drift": true,
+      "id": "bed",
+      "passed": true,
+      "portion": "(0.5, 0.5)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "設置",
+      "drift": true,
+      "id": "bed",
+      "passed": true,
+      "portion": "(0.96, 0.5)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "設置",
+      "drift": true,
+      "id": "bed",
+      "passed": true,
+      "portion": "(0.04, 0.96)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "設置",
+      "drift": true,
+      "id": "bed",
+      "passed": true,
+      "portion": "(0.5, 0.96)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "設置",
+      "drift": true,
+      "id": "bed",
+      "passed": true,
+      "portion": "(0.96, 0.96)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "設置",
+      "drift": false,
+      "id": "cooking_bench",
+      "passed": true,
+      "portion": "(0.04, 0.04)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "設置",
+      "drift": false,
+      "id": "cooking_bench",
+      "passed": true,
+      "portion": "(0.5, 0.04)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "設置",
+      "drift": false,
+      "id": "cooking_bench",
+      "passed": true,
+      "portion": "(0.96, 0.04)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "設置",
+      "drift": false,
+      "id": "cooking_bench",
+      "passed": true,
+      "portion": "(0.04, 0.5)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "設置",
+      "drift": false,
+      "id": "cooking_bench",
+      "passed": true,
+      "portion": "(0.5, 0.5)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "設置",
+      "drift": false,
+      "id": "cooking_bench",
+      "passed": true,
+      "portion": "(0.96, 0.5)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "設置",
+      "drift": false,
+      "id": "cooking_bench",
+      "passed": true,
+      "portion": "(0.04, 0.96)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "設置",
+      "drift": false,
+      "id": "cooking_bench",
+      "passed": true,
+      "portion": "(0.5, 0.96)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "設置",
+      "drift": false,
+      "id": "cooking_bench",
+      "passed": true,
+      "portion": "(0.96, 0.96)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "設置",
+      "drift": true,
+      "id": "cooking_bench",
+      "passed": true,
+      "portion": "(0.04, 0.04)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "設置",
+      "drift": true,
+      "id": "cooking_bench",
+      "passed": true,
+      "portion": "(0.5, 0.04)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "設置",
+      "drift": true,
+      "id": "cooking_bench",
+      "passed": true,
+      "portion": "(0.96, 0.04)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "設置",
+      "drift": true,
+      "id": "cooking_bench",
+      "passed": true,
+      "portion": "(0.04, 0.5)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "設置",
+      "drift": true,
+      "id": "cooking_bench",
+      "passed": true,
+      "portion": "(0.5, 0.5)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "設置",
+      "drift": true,
+      "id": "cooking_bench",
+      "passed": true,
+      "portion": "(0.96, 0.5)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "設置",
+      "drift": true,
+      "id": "cooking_bench",
+      "passed": true,
+      "portion": "(0.04, 0.96)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "設置",
+      "drift": true,
+      "id": "cooking_bench",
+      "passed": true,
+      "portion": "(0.5, 0.96)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "設置",
+      "drift": true,
+      "id": "cooking_bench",
+      "passed": true,
+      "portion": "(0.96, 0.96)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "設置",
+      "drift": false,
+      "id": "carpentry_bench",
+      "passed": true,
+      "portion": "(0.04, 0.04)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "設置",
+      "drift": false,
+      "id": "carpentry_bench",
+      "passed": true,
+      "portion": "(0.5, 0.04)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "設置",
+      "drift": false,
+      "id": "carpentry_bench",
+      "passed": true,
+      "portion": "(0.96, 0.04)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "設置",
+      "drift": false,
+      "id": "carpentry_bench",
+      "passed": true,
+      "portion": "(0.04, 0.5)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "設置",
+      "drift": false,
+      "id": "carpentry_bench",
+      "passed": true,
+      "portion": "(0.5, 0.5)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "設置",
+      "drift": false,
+      "id": "carpentry_bench",
+      "passed": true,
+      "portion": "(0.96, 0.5)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "設置",
+      "drift": false,
+      "id": "carpentry_bench",
+      "passed": true,
+      "portion": "(0.04, 0.96)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "設置",
+      "drift": false,
+      "id": "carpentry_bench",
+      "passed": true,
+      "portion": "(0.5, 0.96)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "設置",
+      "drift": false,
+      "id": "carpentry_bench",
+      "passed": true,
+      "portion": "(0.96, 0.96)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "設置",
+      "drift": true,
+      "id": "carpentry_bench",
+      "passed": true,
+      "portion": "(0.04, 0.04)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "設置",
+      "drift": true,
+      "id": "carpentry_bench",
+      "passed": true,
+      "portion": "(0.5, 0.04)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "設置",
+      "drift": true,
+      "id": "carpentry_bench",
+      "passed": true,
+      "portion": "(0.96, 0.04)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "設置",
+      "drift": true,
+      "id": "carpentry_bench",
+      "passed": true,
+      "portion": "(0.04, 0.5)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "設置",
+      "drift": true,
+      "id": "carpentry_bench",
+      "passed": true,
+      "portion": "(0.5, 0.5)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "設置",
+      "drift": true,
+      "id": "carpentry_bench",
+      "passed": true,
+      "portion": "(0.96, 0.5)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "設置",
+      "drift": true,
+      "id": "carpentry_bench",
+      "passed": true,
+      "portion": "(0.04, 0.96)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "設置",
+      "drift": true,
+      "id": "carpentry_bench",
+      "passed": true,
+      "portion": "(0.5, 0.96)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "設置",
+      "drift": true,
+      "id": "carpentry_bench",
+      "passed": true,
+      "portion": "(0.96, 0.96)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "設置",
+      "drift": false,
+      "id": "sewing_bench",
+      "passed": true,
+      "portion": "(0.04, 0.04)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "設置",
+      "drift": false,
+      "id": "sewing_bench",
+      "passed": true,
+      "portion": "(0.5, 0.04)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "設置",
+      "drift": false,
+      "id": "sewing_bench",
+      "passed": true,
+      "portion": "(0.96, 0.04)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "設置",
+      "drift": false,
+      "id": "sewing_bench",
+      "passed": true,
+      "portion": "(0.04, 0.5)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "設置",
+      "drift": false,
+      "id": "sewing_bench",
+      "passed": true,
+      "portion": "(0.5, 0.5)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "設置",
+      "drift": false,
+      "id": "sewing_bench",
+      "passed": true,
+      "portion": "(0.96, 0.5)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "設置",
+      "drift": false,
+      "id": "sewing_bench",
+      "passed": true,
+      "portion": "(0.04, 0.96)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "設置",
+      "drift": false,
+      "id": "sewing_bench",
+      "passed": true,
+      "portion": "(0.5, 0.96)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "設置",
+      "drift": false,
+      "id": "sewing_bench",
+      "passed": true,
+      "portion": "(0.96, 0.96)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "設置",
+      "drift": true,
+      "id": "sewing_bench",
+      "passed": true,
+      "portion": "(0.04, 0.04)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "設置",
+      "drift": true,
+      "id": "sewing_bench",
+      "passed": true,
+      "portion": "(0.5, 0.04)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "設置",
+      "drift": true,
+      "id": "sewing_bench",
+      "passed": true,
+      "portion": "(0.96, 0.04)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "設置",
+      "drift": true,
+      "id": "sewing_bench",
+      "passed": true,
+      "portion": "(0.04, 0.5)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "設置",
+      "drift": true,
+      "id": "sewing_bench",
+      "passed": true,
+      "portion": "(0.5, 0.5)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "設置",
+      "drift": true,
+      "id": "sewing_bench",
+      "passed": true,
+      "portion": "(0.96, 0.5)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "設置",
+      "drift": true,
+      "id": "sewing_bench",
+      "passed": true,
+      "portion": "(0.04, 0.96)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "設置",
+      "drift": true,
+      "id": "sewing_bench",
+      "passed": true,
+      "portion": "(0.5, 0.96)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "category": "設置",
+      "drift": true,
+      "id": "sewing_bench",
+      "passed": true,
+      "portion": "(0.96, 0.96)",
+      "window": "(1600, 1000)"
+    },
+    {
+      "check": "Leaving a card still permits deliberate reordering (1600, 1000)",
+      "passed": true
+    },
+    {
+      "check": "Reorder keeps card in scroll-container coordinates: wood_wall",
+      "passed": true
+    },
+    {
+      "check": "Reorder keeps card in scroll-container coordinates: wall",
+      "passed": true
+    },
+    {
+      "check": "Reorder keeps card in scroll-container coordinates: stone_wall",
+      "passed": true
+    },
+    {
+      "check": "Reorder keeps card in scroll-container coordinates: door",
+      "passed": true
+    },
+    {
+      "check": "Reorder keeps card in scroll-container coordinates: locked_door",
+      "passed": true
+    },
+    {
+      "check": "Reordering does not select or place a building",
+      "passed": true
+    },
+    {
+      "check": "Disabled card cannot be selected",
+      "passed": true
+    },
+    {
+      "check": "Right click cancels held card without placement",
+      "passed": true
+    },
+    {
+      "check": "Clipped caption does not capture clicks",
+      "passed": true
+    },
+    {
+      "check": "Visible part of scrolled card is selectable",
+      "passed": true
+    },
+    {
+      "check": "Gap between cards does not select either card",
+      "passed": true
+    },
+    {
+      "check": "Button interactions never place building jobs",
+      "passed": true
+    }
+  ],
+  "count": 458,
+  "failed": 0
+}
