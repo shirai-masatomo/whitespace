@@ -1,0 +1,41 @@
+{
+  "checks": [
+    {
+      "check": "Production headless loading completes",
+      "passed": true
+    },
+    {
+      "check": "Accept unfunded wall",
+      "passed": true
+    },
+    {
+      "check": "Actual transport delivers3/5",
+      "passed": true
+    },
+    {
+      "check": "Production selected card reads actual3/5 shortage",
+      "passed": true
+    },
+    {
+      "check": "X-key cancels paused partial site and releases3",
+      "passed": true
+    },
+    {
+      "check": "X leaves ordinary unowned physical goods",
+      "passed": true
+    },
+    {
+      "check": "Returned materials remain collectible after UI cancel",
+      "passed": true
+    },
+    {
+      "check": "UI-cancelled goods reach stockpile",
+      "passed": true
+    },
+    {
+      "check": "Click on2x2 far cell selects same construction job",
+      "passed": true
+    }
+  ],
+  "failed": 0
+}

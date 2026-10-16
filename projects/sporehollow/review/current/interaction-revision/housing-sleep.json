@@ -617,7 +617,7 @@
       "passed": true
     },
     {
-      "check": "All twelve interior boundary sides receive cropped floor underlay",
+      "check": "Six eight-pixel side contacts and one bounded doorway threshold",
       "passed": true
     },
     {

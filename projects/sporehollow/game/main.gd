@@ -1169,7 +1169,7 @@ func draw_work_plans():
 					draw_line(marker-Vector2(12,0),marker+Vector2(12,0),Color("dcd5a5"),2)
 					draw_circle(marker,3,UI.GOLD)
 		if Farm.BUILD.has(j.kind):
-			planned_ghost.draw(self,j.kind,j.pos)
+			planned_ghost.draw(self,j.kind,j.pos,true,construction_view.rows[j.id].get("waiting_material",false))
 			ConstructionView.draw(self,q,construction_view.rows[j.id])
 		elif j.kind.begins_with("place_"):planned_ghost.draw(self,j.kind,j.pos)
 		else: draw_line(q + Vector2(-9, 10), q + Vector2(9, 10), Color("cfdfaa"), 3)
@@ -2156,7 +2156,7 @@ func draw_pointer_preview():
 	if wall_stroke.kind!="":
 		var preview=wall_stroke.plan(world)
 		building_ghost.update(world,wall_stroke.kind,preview.rows)
-		for row in preview.rows:building_ghost.draw(self,wall_stroke.kind,row.pos,row.valid)
+		for row in preview.rows:building_ghost.draw(self,wall_stroke.kind,row.pos,row.valid,row.waiting_material)
 		var hint="離して%d件予約 / 未登録%d件"%[preview.accepted,preview.skipped]
 		if preview.reason!="":hint+="（%s）"%preview.reason
 		label_on(self,get_canvas_transform().affine_inverse()*pointer+Vector2(14,-20),hint,16,UI.PAPER)
@@ -2201,7 +2201,7 @@ func draw_pointer_preview():
 		elif Farm.BUILD.has(tool):
 			var draft=building_ghost.preview(world,tool,cell)
 			building_ghost.update(world,tool,draft.rows)
-			building_ghost.draw(self,tool,cell,draft.accepted==1)
+			building_ghost.draw(self,tool,cell,draft.accepted==1,draft.rows[0].waiting_material)
 			if draft.reason!="":label_on(self,get_canvas_transform().affine_inverse()*pointer+Vector2(14,-26),draft.reason,15,UI.PAPER)
 			return
 		if show_preview:

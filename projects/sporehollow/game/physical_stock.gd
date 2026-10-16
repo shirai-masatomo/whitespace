@@ -176,7 +176,7 @@ static func finish_build(w,j,success: bool):
 	var remaining=int(j.get("required",w.BUILD[j.kind].cost))
 	for row in w.field_items.duplicate():
 		if row.get("location")!="site" or row.job_id!=j.id:continue
-		if row.get("forbidden",false):row.location="ground";row.owner="";row.job_id=-1;row.erase("forbidden_reconciled")
+		if row.get("forbidden",false):row.location="ground";row.owner="";row.job_id=-1;row.stocked=false;row.erase("forbidden_reconciled")
 		elif success:
 			var used=mini(remaining,row.amount) if row.kind==j.resource else 0
 			remaining-=used;row.amount-=used;w.stock_used[row.kind]=w.stock_used.get(row.kind,0)+used
@@ -185,7 +185,8 @@ static func finish_build(w,j,success: bool):
 		else:
 			var refund=floori(row.amount*w.Rules.INTERRUPT_REFUND) if j.started else row.amount
 			w.stock_used[row.kind]=w.stock_used.get(row.kind,0)+row.amount-refund
-			row.amount=refund;row.location="ground";row.job_id=-1
+			row.amount=refund;row.location="ground";row.job_id=-1;row.stocked=false;row.claims={}
+			row.erase("construction_transfer")
 			if refund==0:w.field_items.erase(row)
 	sync(w)
 
@@ -341,6 +342,11 @@ static func designate(w,kind: String,first: Vector2i,last: Vector2i) -> Dictiona
 			if w.Jobs.cancel(w,j.id):accepted+=1
 		return {"accepted":accepted,"skipped":targets.size()-accepted}
 	if kind not in ["haul","forbid","allow"] or not w.working():return {"accepted":0,"skipped":0}
+	if kind=="haul":
+		var locked=w.field_items.any(func(r):return construction_locked(r) and Rect2i(Vector2i(mini(first.x,last.x),mini(first.y,last.y)),Vector2i(absi(last.x-first.x)+1,absi(last.y-first.y)+1)).has_point(r.pos))
+		if locked:
+			var message="現場用に確保した資材は回収できません。先に作業予約をキャンセルしてください"
+			w.say(message);w.PlayerEvents.add(w,message)
 	var rows=command_targets(w,first,last,kind);var accepted=w.Harvest.forbid(w,first,last,kind=="forbid") if kind in ["forbid","allow"] else 0
 	if kind in ["forbid","allow"]:
 		var area=Rect2i(Vector2i(mini(first.x,last.x),mini(first.y,last.y)),Vector2i(absi(last.x-first.x)+1,absi(last.y-first.y)+1))
@@ -429,3 +435,15 @@ static func debug_replenish(w,kinds: Array=MATERIALS) -> Dictionary:
 	var message="デバッグ補充："+("・".join(added)+"を追加" if not added.is_empty() else "追加なし")
 	if not missing.is_empty():message+="。"+"／".join(missing)
 	w.PlayerEvents.add(w,message);w.say(message);return result
+
+static func construction_locked(row) -> bool:
+	return row.get("location")=="site" or row.get("construction_transfer",false)
+
+static func collection_reason(w,p:Vector2i) -> String:
+	if w.natural.has(p) and not w.natural_forbidden.get(p,false):return ""
+	var locked=false
+	for row in w.field_items:
+		if row.pos!=p:continue
+		if construction_locked(row):locked=true
+		elif row.get("location")=="ground" and not row.get("forbidden",false) and not row.get("craft_transfer",false) and not row.get("placed",false) and not stored(w,row):return ""
+	return "現場用に確保した資材です。回収するには作業予約をキャンセルしてください" if locked else ""

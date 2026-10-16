@@ -1,0 +1,828 @@
+{
+  "checks": [
+    {
+      "check": "Accept unfunded wall",
+      "passed": true
+    },
+    {
+      "check": "Actual transport delivers3/5",
+      "passed": true
+    },
+    {
+      "check": "A: direct stocked top-up resumes",
+      "passed": true
+    },
+    {
+      "check": "Accept unfunded wall",
+      "passed": true
+    },
+    {
+      "check": "Actual transport delivers3/5",
+      "passed": true
+    },
+    {
+      "check": "Loose visible goods not yet available",
+      "passed": true
+    },
+    {
+      "check": "A: ordinary collection accepted",
+      "passed": true
+    },
+    {
+      "check": "A: long wait then ordinary haul resumes",
+      "passed": true
+    },
+    {
+      "check": "Accept unfunded wall",
+      "passed": true
+    },
+    {
+      "check": "Actual transport delivers3/5",
+      "passed": true
+    },
+    {
+      "check": "A: debug restock resumes",
+      "passed": true
+    },
+    {
+      "check": "Accept unfunded wall",
+      "passed": true
+    },
+    {
+      "check": "Actual transport delivers3/5",
+      "passed": true
+    },
+    {
+      "check": "B: cancel designation accepted",
+      "passed": true
+    },
+    {
+      "check": "B: three released, IDs detached",
+      "passed": true
+    },
+    {
+      "check": "B: cancelled job never revives",
+      "passed": true
+    },
+    {
+      "check": "D: released site accepted for haul",
+      "passed": true
+    },
+    {
+      "check": "D: all returned goods stocked",
+      "passed": true
+    },
+    {
+      "check": "B: same position accepts fresh designation",
+      "passed": true
+    },
+    {
+      "check": "B: fresh reservation consumes released materials",
+      "passed": true
+    },
+    {
+      "check": "Accept unfunded wall",
+      "passed": true
+    },
+    {
+      "check": "Actual transport delivers3/5",
+      "passed": true
+    },
+    {
+      "check": "C: both collection entry points reject active site",
+      "passed": true
+    },
+    {
+      "check": "C: collection attempt retains site IDs and3 units",
+      "passed": true
+    },
+    {
+      "check": "C: recovery after collection attempt",
+      "passed": true
+    },
+    {
+      "check": "Accept unfunded wall",
+      "passed": true
+    },
+    {
+      "check": "Actual transport delivers3/5",
+      "passed": true
+    },
+    {
+      "check": "Interruption of second delivery recovers",
+      "passed": true
+    },
+    {
+      "check": "Accept unfunded wall",
+      "passed": true
+    },
+    {
+      "check": "Actual transport delivers3/5",
+      "passed": true
+    },
+    {
+      "check": "Forbidden stock is not stolen",
+      "passed": true
+    },
+    {
+      "check": "Allow stock resumes",
+      "passed": true
+    },
+    {
+      "check": "Accept unfunded wall",
+      "passed": true
+    },
+    {
+      "check": "Actual transport delivers3/5",
+      "passed": true
+    },
+    {
+      "check": "Allow site resumes",
+      "passed": true
+    },
+    {
+      "check": "Batch5+3 then2 completes exactly10",
+      "passed": true
+    },
+    {
+      "check": "Accept unfunded wall",
+      "passed": true
+    },
+    {
+      "check": "Actual transport delivers3/5",
+      "passed": true
+    },
+    {
+      "check": "Own interrupted cargo does not permanently block site",
+      "passed": false
+    }
+  ],
+  "failed": 1,
+  "traces": [
+    {
+      "available": 0,
+      "deliveries": {},
+      "items": [
+        {
+          "amount": 3,
+          "born_day": 1,
+          "claims": {},
+          "incubating": false,
+          "job_id": 1,
+          "kind": "wood",
+          "location": "site",
+          "owner": "",
+          "pos": "(35, 25)",
+          "stock_id": 9,
+          "stocked": true
+        }
+      ],
+      "jobs": [
+        {
+          "animal_id": -1,
+          "block_reason": "資材待ち：備蓄に使える資材がありません",
+          "construction_group": 1,
+          "construction_ready": true,
+          "delivery_owner": "",
+          "id": 1,
+          "kind": "wood_wall",
+          "material_wait": true,
+          "physical": true,
+          "plan_claimed": false,
+          "pos": "(35, 25)",
+          "queued_tick": 0,
+          "required": 5,
+          "reserved": 0,
+          "resource": "wood",
+          "started": false,
+          "state": "pending",
+          "work_category": "build"
+        }
+      ],
+      "label": "partial",
+      "status": "担当可能な仕事を待つ",
+      "tick": 98,
+      "worker_reason": ""
+    },
+    {
+      "available": 0,
+      "deliveries": {},
+      "items": [],
+      "jobs": [],
+      "label": "A: direct stocked top-up resumes",
+      "status": "仕事の指定待ち",
+      "tick": 258,
+      "worker_reason": ""
+    },
+    {
+      "available": 0,
+      "deliveries": {},
+      "items": [
+        {
+          "amount": 3,
+          "born_day": 1,
+          "claims": {},
+          "incubating": false,
+          "job_id": 1,
+          "kind": "wood",
+          "location": "site",
+          "owner": "",
+          "pos": "(35, 25)",
+          "stock_id": 9,
+          "stocked": true
+        }
+      ],
+      "jobs": [
+        {
+          "animal_id": -1,
+          "block_reason": "資材待ち：備蓄に使える資材がありません",
+          "construction_group": 1,
+          "construction_ready": true,
+          "delivery_owner": "",
+          "id": 1,
+          "kind": "wood_wall",
+          "material_wait": true,
+          "physical": true,
+          "plan_claimed": false,
+          "pos": "(35, 25)",
+          "queued_tick": 0,
+          "required": 5,
+          "reserved": 0,
+          "resource": "wood",
+          "started": false,
+          "state": "pending",
+          "work_category": "build"
+        }
+      ],
+      "label": "partial",
+      "status": "担当可能な仕事を待つ",
+      "tick": 98,
+      "worker_reason": ""
+    },
+    {
+      "available": 0,
+      "deliveries": {},
+      "items": [],
+      "jobs": [],
+      "label": "A: long wait then ordinary haul resumes",
+      "status": "仕事の指定待ち",
+      "tick": 858,
+      "worker_reason": ""
+    },
+    {
+      "available": 0,
+      "deliveries": {},
+      "items": [
+        {
+          "amount": 3,
+          "born_day": 1,
+          "claims": {},
+          "incubating": false,
+          "job_id": 1,
+          "kind": "wood",
+          "location": "site",
+          "owner": "",
+          "pos": "(35, 25)",
+          "stock_id": 9,
+          "stocked": true
+        }
+      ],
+      "jobs": [
+        {
+          "animal_id": -1,
+          "block_reason": "資材待ち：備蓄に使える資材がありません",
+          "construction_group": 1,
+          "construction_ready": true,
+          "delivery_owner": "",
+          "id": 1,
+          "kind": "wood_wall",
+          "material_wait": true,
+          "physical": true,
+          "plan_claimed": false,
+          "pos": "(35, 25)",
+          "queued_tick": 0,
+          "required": 5,
+          "reserved": 0,
+          "resource": "wood",
+          "started": false,
+          "state": "pending",
+          "work_category": "build"
+        }
+      ],
+      "label": "partial",
+      "status": "担当可能な仕事を待つ",
+      "tick": 98,
+      "worker_reason": ""
+    },
+    {
+      "available": 38,
+      "deliveries": {},
+      "items": [
+        {
+          "amount": 38,
+          "born_day": 1,
+          "claims": {},
+          "incubating": false,
+          "job_id": -1,
+          "kind": "wood",
+          "location": "ground",
+          "owner": "",
+          "pos": "(28, 24)",
+          "stock_id": 10,
+          "stocked": true
+        }
+      ],
+      "jobs": [],
+      "label": "A: debug restock resumes",
+      "status": "仕事の指定待ち",
+      "tick": 258,
+      "worker_reason": ""
+    },
+    {
+      "available": 0,
+      "deliveries": {},
+      "items": [
+        {
+          "amount": 3,
+          "born_day": 1,
+          "claims": {},
+          "incubating": false,
+          "job_id": 1,
+          "kind": "wood",
+          "location": "site",
+          "owner": "",
+          "pos": "(35, 25)",
+          "stock_id": 9,
+          "stocked": true
+        }
+      ],
+      "jobs": [
+        {
+          "animal_id": -1,
+          "block_reason": "資材待ち：備蓄に使える資材がありません",
+          "construction_group": 1,
+          "construction_ready": true,
+          "delivery_owner": "",
+          "id": 1,
+          "kind": "wood_wall",
+          "material_wait": true,
+          "physical": true,
+          "plan_claimed": false,
+          "pos": "(35, 25)",
+          "queued_tick": 0,
+          "required": 5,
+          "reserved": 0,
+          "resource": "wood",
+          "started": false,
+          "state": "pending",
+          "work_category": "build"
+        }
+      ],
+      "label": "partial",
+      "status": "担当可能な仕事を待つ",
+      "tick": 98,
+      "worker_reason": ""
+    },
+    {
+      "available": 0,
+      "deliveries": {},
+      "items": [],
+      "jobs": [],
+      "label": "B: fresh reservation consumes released materials",
+      "status": "仕事の指定待ち",
+      "tick": 408,
+      "worker_reason": ""
+    },
+    {
+      "available": 0,
+      "deliveries": {},
+      "items": [
+        {
+          "amount": 3,
+          "born_day": 1,
+          "claims": {},
+          "incubating": false,
+          "job_id": 1,
+          "kind": "wood",
+          "location": "site",
+          "owner": "",
+          "pos": "(35, 25)",
+          "stock_id": 9,
+          "stocked": true
+        }
+      ],
+      "jobs": [
+        {
+          "animal_id": -1,
+          "block_reason": "資材待ち：備蓄に使える資材がありません",
+          "construction_group": 1,
+          "construction_ready": true,
+          "delivery_owner": "",
+          "id": 1,
+          "kind": "wood_wall",
+          "material_wait": true,
+          "physical": true,
+          "plan_claimed": false,
+          "pos": "(35, 25)",
+          "queued_tick": 0,
+          "required": 5,
+          "reserved": 0,
+          "resource": "wood",
+          "started": false,
+          "state": "pending",
+          "work_category": "build"
+        }
+      ],
+      "label": "partial",
+      "status": "担当可能な仕事を待つ",
+      "tick": 98,
+      "worker_reason": ""
+    },
+    {
+      "available": 0,
+      "deliveries": {},
+      "items": [],
+      "jobs": [],
+      "label": "C: recovery after collection attempt",
+      "status": "仕事の指定待ち",
+      "tick": 258,
+      "worker_reason": ""
+    },
+    {
+      "available": 0,
+      "deliveries": {},
+      "items": [
+        {
+          "amount": 3,
+          "born_day": 1,
+          "claims": {},
+          "incubating": false,
+          "job_id": 1,
+          "kind": "wood",
+          "location": "site",
+          "owner": "",
+          "pos": "(35, 25)",
+          "stock_id": 9,
+          "stocked": true
+        }
+      ],
+      "jobs": [
+        {
+          "animal_id": -1,
+          "block_reason": "資材待ち：備蓄に使える資材がありません",
+          "construction_group": 1,
+          "construction_ready": true,
+          "delivery_owner": "",
+          "id": 1,
+          "kind": "wood_wall",
+          "material_wait": true,
+          "physical": true,
+          "plan_claimed": false,
+          "pos": "(35, 25)",
+          "queued_tick": 0,
+          "required": 5,
+          "reserved": 0,
+          "resource": "wood",
+          "started": false,
+          "state": "pending",
+          "work_category": "build"
+        }
+      ],
+      "label": "partial",
+      "status": "担当可能な仕事を待つ",
+      "tick": 98,
+      "worker_reason": ""
+    },
+    {
+      "available": 0,
+      "deliveries": {},
+      "items": [],
+      "jobs": [],
+      "label": "Interruption of second delivery recovers",
+      "status": "仕事の指定待ち",
+      "tick": 276,
+      "worker_reason": ""
+    },
+    {
+      "available": 0,
+      "deliveries": {},
+      "items": [
+        {
+          "amount": 3,
+          "born_day": 1,
+          "claims": {},
+          "incubating": false,
+          "job_id": 1,
+          "kind": "wood",
+          "location": "site",
+          "owner": "",
+          "pos": "(35, 25)",
+          "stock_id": 9,
+          "stocked": true
+        }
+      ],
+      "jobs": [
+        {
+          "animal_id": -1,
+          "block_reason": "資材待ち：備蓄に使える資材がありません",
+          "construction_group": 1,
+          "construction_ready": true,
+          "delivery_owner": "",
+          "id": 1,
+          "kind": "wood_wall",
+          "material_wait": true,
+          "physical": true,
+          "plan_claimed": false,
+          "pos": "(35, 25)",
+          "queued_tick": 0,
+          "required": 5,
+          "reserved": 0,
+          "resource": "wood",
+          "started": false,
+          "state": "pending",
+          "work_category": "build"
+        }
+      ],
+      "label": "partial",
+      "status": "担当可能な仕事を待つ",
+      "tick": 98,
+      "worker_reason": ""
+    },
+    {
+      "available": 0,
+      "deliveries": {},
+      "items": [],
+      "jobs": [],
+      "label": "Allow stock resumes",
+      "status": "仕事の指定待ち",
+      "tick": 298,
+      "worker_reason": ""
+    },
+    {
+      "available": 0,
+      "deliveries": {},
+      "items": [
+        {
+          "amount": 3,
+          "born_day": 1,
+          "claims": {},
+          "incubating": false,
+          "job_id": 1,
+          "kind": "wood",
+          "location": "site",
+          "owner": "",
+          "pos": "(35, 25)",
+          "stock_id": 9,
+          "stocked": true
+        }
+      ],
+      "jobs": [
+        {
+          "animal_id": -1,
+          "block_reason": "資材待ち：備蓄に使える資材がありません",
+          "construction_group": 1,
+          "construction_ready": true,
+          "delivery_owner": "",
+          "id": 1,
+          "kind": "wood_wall",
+          "material_wait": true,
+          "physical": true,
+          "plan_claimed": false,
+          "pos": "(35, 25)",
+          "queued_tick": 0,
+          "required": 5,
+          "reserved": 0,
+          "resource": "wood",
+          "started": false,
+          "state": "pending",
+          "work_category": "build"
+        }
+      ],
+      "label": "partial",
+      "status": "担当可能な仕事を待つ",
+      "tick": 98,
+      "worker_reason": ""
+    },
+    {
+      "available": 0,
+      "deliveries": {},
+      "items": [],
+      "jobs": [],
+      "label": "Allow site resumes",
+      "status": "仕事の指定待ち",
+      "tick": 288,
+      "worker_reason": ""
+    },
+    {
+      "available": 0,
+      "deliveries": {},
+      "items": [
+        {
+          "amount": 3,
+          "born_day": 1,
+          "claims": {},
+          "incubating": false,
+          "job_id": 2,
+          "kind": "wood",
+          "location": "site",
+          "owner": "",
+          "pos": "(36, 25)",
+          "stock_id": 10,
+          "stocked": true
+        }
+      ],
+      "jobs": [
+        {
+          "animal_id": -1,
+          "block_reason": "資材待ち：備蓄に使える資材がありません",
+          "construction_group": 1,
+          "construction_ready": true,
+          "delivery_owner": "",
+          "id": 2,
+          "kind": "wood_wall",
+          "material_wait": true,
+          "physical": true,
+          "plan_claimed": false,
+          "pos": "(36, 25)",
+          "queued_tick": 0,
+          "required": 5,
+          "reserved": 0,
+          "resource": "wood",
+          "started": false,
+          "state": "pending",
+          "work_category": "build"
+        }
+      ],
+      "label": "batch-partial",
+      "status": "担当可能な仕事を待つ",
+      "tick": 100,
+      "worker_reason": ""
+    },
+    {
+      "available": 0,
+      "deliveries": {},
+      "items": [
+        {
+          "amount": 3,
+          "born_day": 1,
+          "claims": {},
+          "incubating": false,
+          "job_id": 1,
+          "kind": "wood",
+          "location": "site",
+          "owner": "",
+          "pos": "(35, 25)",
+          "stock_id": 9,
+          "stocked": true
+        }
+      ],
+      "jobs": [
+        {
+          "animal_id": -1,
+          "block_reason": "資材待ち：備蓄に使える資材がありません",
+          "construction_group": 1,
+          "construction_ready": true,
+          "delivery_owner": "",
+          "id": 1,
+          "kind": "wood_wall",
+          "material_wait": true,
+          "physical": true,
+          "plan_claimed": false,
+          "pos": "(35, 25)",
+          "queued_tick": 0,
+          "required": 5,
+          "reserved": 0,
+          "resource": "wood",
+          "started": false,
+          "state": "pending",
+          "work_category": "build"
+        }
+      ],
+      "label": "partial",
+      "status": "担当可能な仕事を待つ",
+      "tick": 98,
+      "worker_reason": ""
+    },
+    {
+      "available": 0,
+      "deliveries": {},
+      "items": [
+        {
+          "amount": 3,
+          "born_day": 1,
+          "claims": {},
+          "incubating": false,
+          "job_id": 1,
+          "kind": "wood",
+          "location": "site",
+          "owner": "",
+          "pos": "(35, 25)",
+          "stock_id": 9,
+          "stocked": true
+        },
+        {
+          "amount": 2,
+          "born_day": 1,
+          "claims": {},
+          "construction_transfer": true,
+          "incubating": false,
+          "job_id": 1,
+          "kind": "wood",
+          "location": "ground",
+          "owner": "",
+          "pos": "(35, 25)",
+          "stock_id": 11,
+          "stocked": true
+        }
+      ],
+      "jobs": [
+        {
+          "animal_id": -1,
+          "block_reason": "",
+          "construction_group": 1,
+          "construction_ready": true,
+          "delivery_owner": "",
+          "id": 1,
+          "kind": "wood_wall",
+          "material_wait": false,
+          "physical": true,
+          "plan_claimed": false,
+          "pos": "(35, 25)",
+          "queued_tick": 0,
+          "required": 5,
+          "reserved": 0,
+          "resource": "wood",
+          "started": false,
+          "state": "pending",
+          "work_category": "build"
+        }
+      ],
+      "label": "cargo-dropped-on-own-plan",
+      "status": "休息中",
+      "tick": 115,
+      "worker_reason": ""
+    },
+    {
+      "available": 0,
+      "deliveries": {},
+      "items": [
+        {
+          "amount": 3,
+          "born_day": 1,
+          "claims": {},
+          "incubating": false,
+          "job_id": 1,
+          "kind": "wood",
+          "location": "site",
+          "owner": "",
+          "pos": "(35, 25)",
+          "stock_id": 9,
+          "stocked": true
+        },
+        {
+          "amount": 2,
+          "born_day": 1,
+          "claims": {},
+          "construction_transfer": true,
+          "incubating": false,
+          "job_id": 1,
+          "kind": "wood",
+          "location": "ground",
+          "owner": "",
+          "pos": "(35, 25)",
+          "stock_id": 11,
+          "stocked": true
+        }
+      ],
+      "jobs": [
+        {
+          "animal_id": -1,
+          "assigned_to": "",
+          "block_reason": "物があるため建設できません",
+          "construction_group": 1,
+          "construction_ready": true,
+          "delivery_owner": "",
+          "id": 1,
+          "kind": "wood_wall",
+          "material_wait": false,
+          "notified_block": "物があるため建設できません",
+          "physical": true,
+          "plan_claimed": false,
+          "pos": "(35, 25)",
+          "queued_tick": 0,
+          "required": 5,
+          "reserved": 0,
+          "resource": "wood",
+          "retry_at": 276,
+          "started": false,
+          "state": "blocked",
+          "work_category": "build"
+        }
+      ],
+      "label": "Own interrupted cargo does not permanently block site",
+      "status": "物があるため建設できません",
+      "tick": 275,
+      "worker_reason": ""
+    }
+  ]
+}

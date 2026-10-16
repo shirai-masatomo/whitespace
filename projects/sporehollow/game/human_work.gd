@@ -181,7 +181,7 @@ static func choose(w,key: String) -> Dictionary:
 		if not allowed(w,key,j):continue
 		if missing(w,j):w.Jobs.cancel(w,j.id,"target_missing");continue
 		if w.BUILD.has(j.kind) and not j.started:
-			var why=w.Buildings.reason(w,j.kind,j.pos,false)
+			var why=w.Buildings.reason(w,j.kind,j.pos,false,j.id)
 			if why!="" and not (why=="ここに誰かいます" and a.pos==j.pos):block(w,j,why);continue
 		var distance=effort(w,a,j,evaluation)
 		if is_inf(distance):continue

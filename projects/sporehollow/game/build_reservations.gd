@@ -68,3 +68,32 @@ static func consume_place(w,j) -> bool:
 			if row.amount==0:w.field_items.erase(row)
 			w.stock_used[row.kind]=w.stock_used.get(row.kind,0)+1;w.Stock.sync(w);return true
 	return false
+
+# Read-only display allocation: each physical unit covers at most one plan.
+# Linear stock/job scan, shared by committed-site cards and draft previews.
+static func presentation(w) -> Dictionary:
+	var budget={};var site={};var owned={};var totals={}
+	for row in w.field_items:
+		var id=int(row.get("job_id",-1));var kind=row.kind
+		if row.get("location")=="site":
+			totals[id]=totals.get(id,0)+int(row.amount)
+			if not row.get("forbidden",false):site[id]=site.get(id,0)+int(row.amount)
+		elif row.get("construction_transfer",false):
+			if not row.get("forbidden",false):owned[id]=owned.get(id,0)+int(row.amount)
+		elif w.Stock.stored(w,row) and not row.get("placed",false) and not row.get("craft_transfer",false):
+			budget[kind]=budget.get(kind,0)+w.Stock.free_count(row)
+			if row.get("forbidden",false):continue
+			for key in row.get("claims",{}):
+				if key.begins_with("plan:") or key.begins_with("construction:"):
+					var owner=int(key.get_slice(":",key.get_slice_count(":")-1))
+					owned[owner]=owned.get(owner,0)+int(row.claims[key])
+	var plans={}
+	for j in w.jobs:
+		if not w.BUILD.has(j.kind):continue
+		var missing=maxi(0,int(j.get("required",w.BUILD[j.kind].cost))-int(site.get(j.id,0)))
+		var needed=maxi(0,missing-int(owned.get(j.id,0)))
+		var free=int(budget.get(j.resource,0));var covered=mini(needed,free)
+		if j.get("cancel_requested",false):covered=needed
+		else:budget[j.resource]=free-covered
+		plans[j.id]={"waiting_material":covered<needed,"unfunded":needed-covered,"total":int(totals.get(j.id,0)),"usable":int(site.get(j.id,0)),"missing":missing}
+	return {"plans":plans,"remaining":budget}

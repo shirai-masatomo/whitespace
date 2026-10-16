@@ -64,13 +64,13 @@ static func rooms(w, proposed: Dictionary = {}) -> Dictionary:
 				for cell in region: indoor[cell] = true
 	return indoor
 
-static func reason(w, kind: String, p: Vector2i, check_cost: bool = true) -> String:
+static func reason(w, kind: String, p: Vector2i, check_cost: bool = true,job_id: int=-1) -> String:
 	for cell in cells(kind,p):
-		var why=cell_reason(w,kind,cell,check_cost)
+		var why=cell_reason(w,kind,cell,check_cost,job_id)
 		if why!="":return why
 	return ""
 
-static func cell_reason(w, kind: String, p: Vector2i, check_cost: bool = true) -> String:
+static func cell_reason(w, kind: String, p: Vector2i, check_cost: bool = true,job_id: int=-1) -> String:
 	preload("res://game/terrain_metrics.gd").count("buildings.reason")
 	if kind in ["kennel","coop"]: return "この建物は休止中です"
 	if not w.BUILD.has(kind) or not w.inside(p): return "ここには建てられません"
@@ -79,7 +79,7 @@ static func cell_reason(w, kind: String, p: Vector2i, check_cost: bool = true) -
 	if p in w.Story.idol_cells(w): return "黄金像の場所です"
 	if p==w.logistics_entry: return "受入口と通路を空けてください"
 	if w.occupied(p): return "ここに誰かいます"
-	if w.natural.has(p) or not w.items_at(p).is_empty() or w.field_items.any(func(i):return i.pos==p and i.get("location","ground")=="ground"): return "物があるため建設できません"
+	if w.natural.has(p) or w.field_items.any(func(i):return i.pos==p and i.get("location","ground")=="ground" and not (job_id>=0 and i.get("construction_transfer",false) and i.get("job_id",-1)==job_id)): return "物があるため建設できません"
 	var data = w.BUILD[kind]
 	if data.get("blueprint", "") not in [""] + w.campaign.unlocked_blueprints: return "作り方をまだ知りません"
 	var old = layer(w,kind).get(anchor(w,p) if w.BUILD[kind].get("layer")!="floor" else p,{})

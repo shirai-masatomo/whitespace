@@ -28,15 +28,19 @@ static func proposal(w,key: String) -> Dictionary:
 	var a=w.workers[key]
 	if int(a.work_priorities.get("haul",0))<=0 or w.tick<a.get("delivery_retry",0):return {}
 	for j in plans(w,a):
-		var why=w.Buildings.reason(w,j.kind,j.pos,false) if not j.started else ""
+		var why=w.Buildings.reason(w,j.kind,j.pos,false,j.id) if not j.started else ""
 		if why!="" and not (why=="ここに誰かいます" and a.pos==j.pos):j.block_reason=why;continue
 		var destination=w.Jobs.path_to(w,a.pos,w.Buildings.job_goals(w,j))
 		if destination.is_empty():j.block_reason="材料を搬入する通路がありません";continue
-		for row in sources(w,j,a):
+		var candidates=sources(w,j,a)
+		for row in candidates:
 			var route=w.Jobs.path_to(w,a.pos,w.neighbors(row.pos))
 			if route.is_empty():continue
 			return {"kind":"build_delivery","id":j.id,"pos":row.pos,"seed_job":j.id,"priority":a.work_priorities.haul,"effort":float(route.size()+w.distance(row.pos,j.pos)),"queued_tick":j.get("queued_tick",w.tick)}
-		j.material_wait=true;j.block_reason="資材待ち：備蓄に使える資材がありません"
+		j.material_wait=true
+		if not candidates.is_empty():j.block_reason="材料の備蓄へ通じる通路がありません"
+		elif w.field_items.any(func(r):return Reservations.usable(w,r,j)>0):j.block_reason="資材待ち：備蓄を利用できる担当者が必要です"
+		else:j.block_reason="資材待ち：備蓄に使える資材がありません"
 	return {}
 
 static func start(w,key: String,proposal: Dictionary) -> Dictionary:
@@ -53,7 +57,7 @@ static func start(w,key: String,proposal: Dictionary) -> Dictionary:
 		if w.distance(first.pos,j.pos)>RADIUS:continue
 		if w.Jobs.path_to(w,a.pos,w.Buildings.job_goals(w,j)).is_empty():continue
 		if not j.started:
-			var why=w.Buildings.reason(w,j.kind,j.pos,false)
+			var why=w.Buildings.reason(w,j.kind,j.pos,false,j.id)
 			if why!="" and not (why=="ここに誰かいます" and a.pos==j.pos):continue
 		var left=mini(capacity,needed(w,j));var claims=[];var token="construction:%s:%d"%[key,j.id]
 		for row in sources(w,j,a):
@@ -135,6 +139,19 @@ static func step(w,key: String):
 static func reconcile(w):
 	for key in w.build_deliveries.keys():
 		if not w.workers.has(key):release(w,key)
+	var owners={}
+	for key in w.build_deliveries:
+		for allocation in w.build_deliveries[key].allocations:owners[allocation.job_id]=key
+	for j in w.jobs:
+		if not w.BUILD.has(j.kind):continue
+		var owner=j.get("delivery_owner","")
+		if owner!="" and owners.get(j.id,"")!=owner:
+			Reservations.return_claim(w,"construction:%s:%d"%[owner,j.id],j)
+			j.delivery_owner="";j.delivery_retry=w.tick;j.block_reason="";j.material_wait=needed(w,j)>0
+	for row in w.field_items:
+		if row.get("construction_transfer",false) and row.get("location")=="carry" and owners.get(row.job_id,"")!=row.owner:
+			if w.workers.has(row.owner):row.pos=w.workers[row.owner].pos
+			row.location="ground";row.owner="";w.Stock.sync(w)
 
 # Only unlatched groups enter the barrier scan. Site totals and source lists are
 # indexed once per scheduler step, not re-scanned for each build candidate.
@@ -191,7 +208,7 @@ static func feasible(w,j,rows: Array,evaluators: Dictionary) -> bool:
 	var candidates=rows.filter(func(r):return Reservations.usable(w,r,j)>0)
 	if candidates.is_empty():
 		j.material_wait=true;j.block_reason="資材待ち：備蓄に使える資材がありません";return false
-	var why=w.Buildings.reason(w,j.kind,j.pos,false) if not j.started else ""
+	var why=w.Buildings.reason(w,j.kind,j.pos,false,j.id) if not j.started else ""
 	if why!="" and why!="ここに誰かいます":j.block_reason=why;return false
 	var has_hauler=false
 	for key in w.workers:

@@ -244,15 +244,28 @@ static func wall(game,p: Vector2,b: Dictionary,preview: bool):
 static func floor_tile(game,cell: Vector2i):
 	var mask=0
 	for pair in [[Vector2i.UP,1],[Vector2i.RIGHT,2],[Vector2i.DOWN,4],[Vector2i.LEFT,8]]:
-		if game.world.floors.get(cell+pair[0],{}).get("status")!="ready":mask+=pair[1]
+		var p=cell+pair[0]
+		if game.world.floors.get(p,{}).get("status")!="ready" and not game.world.Buildings.enclosure(game.world.structures.get(p,{})):mask+=pair[1]
 	floor_at(game,cell,game.world.floors[cell].kind,mask)
 	var kind=game.world.floors[cell].kind;var path=floor_path(kind)
 	var tex=TEXTURES[path+("wood_00.png" if material(kind)=="wood" else "base.png")]
-	for d in [Vector2i.UP,Vector2i.DOWN,Vector2i.LEFT,Vector2i.RIGHT]:
-		if not game.world.Buildings.enclosure(game.world.structures.get(cell+d,{})):continue
-		var offset=Vector2(0,-21) if d==Vector2i.UP else Vector2(0,42) if d==Vector2i.DOWN else Vector2(-24,0) if d==Vector2i.LEFT else Vector2(48,0)
-		var size=Vector2(48,21) if d.x==0 else Vector2(24,42)
-		game.draw_texture_rect_region(tex,Rect2(Vector2(cell)*game.TILE+offset,size),Rect2(Vector2.ZERO,size))
+	# The wall mesh's side contact is eight pixels inside its cell. Continue
+	# only that strip, not half a floor tile. No north/south overshoot.
+	for d in [Vector2i.LEFT,Vector2i.RIGHT]:
+		var b=game.world.structures.get(cell+d,{})
+		if game.world.floors.get(cell+d,{}).get("status")=="ready":continue
+		if not game.world.Buildings.enclosure(b) or b.kind not in game.world.Buildings.WALLS:continue
+		var left=d==Vector2i.LEFT
+		game.draw_texture_rect_region(tex,Rect2(Vector2(cell)*game.TILE+Vector2(-8 if left else 48,0),Vector2(8,42)),Rect2(Vector2(40 if left else 0,0),Vector2(8,42)))
+	# A doorway has its own single-cell threshold. Choose one neighbouring
+	# floor deterministically so mixed floors never overpaint each other.
+	for d in [Vector2i.UP,Vector2i.RIGHT,Vector2i.DOWN,Vector2i.LEFT]:
+		var door=cell+d;var b=game.world.structures.get(door,{})
+		if not game.world.Buildings.enclosure(b) or b.kind not in game.world.Buildings.DOORS or game.world.floors.get(door,{}).get("status")=="ready":continue
+		var source=Vector2i(-1,-1)
+		for side in [Vector2i.UP,Vector2i.DOWN,Vector2i.LEFT,Vector2i.RIGHT]:
+			if game.world.floors.get(door+side,{}).get("status")=="ready":source=door+side;break
+		if source==cell:game.draw_texture_rect_region(tex,Rect2(Vector2(door)*game.TILE,game.TILE),Rect2(Vector2.ZERO,game.TILE))
 
 static func floor_at(game,cell:Vector2i,kind:String,mask:int,tint:Color=Color.WHITE):
 	var p=Vector2(cell)*game.TILE;var path=floor_path(kind)

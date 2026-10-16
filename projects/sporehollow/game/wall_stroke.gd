@@ -9,6 +9,7 @@ var cached_rows: Array=[]
 var cached_accepted=0
 var cached_cost=0
 var cached_reason=""
+var cached_budget={}
 
 func clear():
 	kind="";cells.clear();seen.clear();last=null
@@ -42,10 +43,14 @@ func plan(w,force: bool=false) -> Dictionary:
 	var key=state_key(w)
 	if force or key!=cache_key or cached_rows.size()>cells.size():
 		cache_key=key;cached_rows=[];cached_accepted=0;cached_cost=0;cached_reason=""
+		cached_budget=w.Jobs.Reservations.presentation(w).remaining
 	var lookup=w.Jobs.index(w) if cached_rows.size()<cells.size() else {}
 	for i in range(cached_rows.size(),cells.size()):
 		var p=cells[i];var why=w.Jobs.build_reason(w,kind,p,cached_accepted,cached_cost,lookup)
-		cached_rows.append({"pos":p,"valid":why=="","reason":why})
+		var resource=w.BUILD[kind].get("resource","soil");var cost=int(w.BUILD[kind].cost)
+		var free=int(cached_budget.get(resource,0));var waiting=why=="" and free<cost
+		cached_rows.append({"pos":p,"valid":why=="","reason":why,"waiting_material":waiting,"unfunded":maxi(0,cost-free)})
+		if why=="":cached_budget[resource]=maxi(0,free-cost)
 		if why=="":
 			cached_accepted+=1
 			cached_cost+=int(w.BUILD[kind].cost)

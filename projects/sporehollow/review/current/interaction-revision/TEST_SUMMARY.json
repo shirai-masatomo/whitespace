@@ -1,15 +1,25 @@
 {
-  "topic": "resident-life integration",
-  "method": "headless, Dummy audio, 30fps, bounded serial tests; no native desktop launch",
+  "topic": "construction recovery, shortage display and floor-wall contact",
+  "method": "headless/Dummy/30fps, serial bounded tests; CPU image compositing; no native desktop launch",
   "suites": [
     {
-      "suite": "resident-life",
-      "checks": 55,
+      "suite": "construction-recovery",
+      "checks": 39,
       "failures": 0
     },
     {
-      "suite": "life-ui",
+      "suite": "construction-edges",
       "checks": 22,
+      "failures": 0
+    },
+    {
+      "suite": "construction-visual",
+      "checks": 37,
+      "failures": 0
+    },
+    {
+      "suite": "construction-input",
+      "checks": 9,
       "failures": 0
     },
     {
@@ -18,8 +28,8 @@
       "failures": 0
     },
     {
-      "suite": "crafting",
-      "checks": 13,
+      "suite": "construction-groups-normal",
+      "checks": 31,
       "failures": 0
     },
     {
@@ -28,27 +38,16 @@
       "failures": 0
     },
     {
-      "suite": "living-needs",
-      "checks": 29,
-      "failures": 0
-    },
-    {
-      "suite": "construction-groups-normal",
-      "checks": 31,
-      "failures": 0
-    },
-    {
-      "suite": "nutrition",
-      "checks": 17,
-      "failures": 0
-    },
-    {
       "suite": "loading",
       "checks": 39,
       "failures": 0
     }
   ],
-  "checks": 415,
+  "total": 386,
   "failures": 0,
-  "native_gpu_verified": false
+  "baseline_repro": {
+    "checks": 39,
+    "failures": 1,
+    "file": "construction-recovery-before.json"
+  }
 }

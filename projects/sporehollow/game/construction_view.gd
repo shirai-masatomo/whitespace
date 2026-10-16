@@ -9,19 +9,16 @@ func update(w):
 	var key=[w.get_instance_id(),w.tick,w.stock_revision,w.next_job_id,w.jobs.size(),w.paused,w.jobs_held]
 	if key==signature:return
 	signature=key;rows.clear();rebuilds+=1
-	var totals={}
-	for item in w.field_items:
-		if item.get("location")!="site":continue
-		var token=str(item.get("job_id",-1))+":"+item.kind
-		if not totals.has(token):totals[token]={"all":0,"usable":0}
-		totals[token].all+=item.amount
-		if not item.get("forbidden",false):totals[token].usable+=item.amount
+	var budget=w.Jobs.Reservations.presentation(w).plans
 	for j in w.jobs:
 		if not w.BUILD.has(j.kind):continue
-		var amounts=totals.get(str(j.id)+":"+j.resource,{"all":0,"usable":0})
-		rows[j.id]=describe(w,j,amounts.all,amounts.usable)
+		var amounts=budget.get(j.id,{"total":0,"usable":0,"waiting_material":false,"unfunded":0})
+		rows[j.id]=describe(w,j,amounts.total,amounts.usable,amounts.unfunded)
+		rows[j.id].waiting_material=amounts.waiting_material
+		rows[j.id].unfunded=amounts.unfunded
+		if amounts.waiting_material:rows[j.id].lines.insert(2,"資材待ち：備蓄の未確保分 %d"%amounts.unfunded)
 
-static func describe(w,j,total: int,usable: int) -> Dictionary:
+static func describe(w,j,total: int,usable: int,unfunded:int=-1) -> Dictionary:
 	var required=int(j.get("required",w.BUILD[j.kind].cost))
 	var missing=maxi(0,required-usable)
 	var stage="empty"
@@ -36,6 +33,7 @@ static func describe(w,j,total: int,usable: int) -> Dictionary:
 	if total>usable:lines.append("搬入済みのうち禁止中：%d"%(total-usable))
 	if stage=="working":lines.append("施工進捗：%d%%"%roundi(progress*100))
 	var reason=j.get("block_reason","")
+	if unfunded==0 and reason=="資材待ち：備蓄に使える資材がありません":reason=""
 	if stage=="ready" and not w.Delivery.can_build(j):reason=w.Delivery.GROUP_WAIT
 	if reason=="" and j.get("assigned_to","")=="" and j.get("delivery_owner","")=="":
 		var category="haul" if missing>0 else "build"

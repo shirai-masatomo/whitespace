@@ -17,7 +17,7 @@ func update(w,kind:String="",rows:Array=[]):
 			else:structures[j.pos]=j.kind
 	for row in rows:
 		# Geometrically invalid cells do not become bridges between accepted ghosts.
-		if not row.valid and not row.reason.begins_with("資材不足"):continue
+		if not row.valid:continue
 		if w.BUILD.get(kind,{}).get("layer")=="floor":floors[row.pos]=kind
 		else:structures[row.pos]=kind
 func mask(w,kind:String,cell:Vector2i) -> int:
@@ -34,8 +34,8 @@ func mask(w,kind:String,cell:Vector2i) -> int:
 func preview(w,kind:String,cell:Vector2i) -> Dictionary:
 	if cursor.kind!=kind or cursor.cells!=[cell]:cursor.begin(kind,cell)
 	return cursor.plan(w)
-func draw(g,kind:String,cell:Vector2i,valid:bool=true):
-	var tint=Color(1,1,1,0.45) if valid else Color(1,0.34,0.28,0.48)
+func draw(g,kind:String,cell:Vector2i,valid:bool=true,waiting_material:bool=false):
+	var tint=Color(1,0.42,0.25,0.56) if valid and waiting_material else (Color(1,1,1,0.45) if valid else Color(1,0.34,0.28,0.48))
 	var p=g.center(cell)
 	if kind.begins_with("place_"):Art.placeable(g,p,kind.trim_prefix("place_"),tint)
 	elif g.world.BUILD[kind].layer=="floor":Art.floor_at(g,cell,kind,mask(g.world,kind,cell),tint)
@@ -49,3 +49,11 @@ func draw(g,kind:String,cell:Vector2i,valid:bool=true):
 	if not valid:
 		g.draw_arc(p,11,0,TAU,24,Color("ed6259"),2.5)
 		g.draw_line(p+Vector2(-8,8),p+Vector2(8,-8),Color("ed6259"),2.5)
+
+	elif waiting_material:
+		# Small hourglass, no prohibition slash; designation remains valid.
+		var at=g.center(cell)+Vector2(15,-19)
+		g.draw_rect(Rect2(at-Vector2(7,9),Vector2(14,18)),Color("493b32"))
+		g.draw_line(at+Vector2(-4,-6),at+Vector2(4,-6),Color("ffd392"),2)
+		g.draw_line(at+Vector2(-4,6),at+Vector2(4,6),Color("ffd392"),2)
+		g.draw_polyline(PackedVector2Array([at+Vector2(-4,-5),at+Vector2(3,5),at+Vector2(-3,5),at+Vector2(4,-5)]),Color("ffd392"),2)

@@ -58,6 +58,8 @@ static func enqueue(w, kind: String, p: Vector2i, animal_id: int,lookup: Diction
 	elif kind=="move":
 		if not w.walkable(p): return false
 	elif kind=="collect":
+		var locked=w.Stock.collection_reason(w,p)
+		if locked!="":w.say(locked);w.PlayerEvents.add(w,locked);return false
 		if w.natural_forbidden.get(p,false):return false
 		if w.items_at(p).is_empty() and not w.natural.has(p) and not(p==w.nest and w.eggs>0): return false
 	elif kind in ["repair", "repair_floor"]:
@@ -74,7 +76,9 @@ static func enqueue(w, kind: String, p: Vector2i, animal_id: int,lookup: Diction
 		j.target_id=b.id; j.target_kind=b.kind
 		if lookup.layers.get(p,{}).has(j.target_layer): return false
 	if kind=="collect" and not w.items_at(p).is_empty():
-		var row=w.items_at(p)[0]
+		var candidates=w.items_at(p).filter(func(r):return not w.Stock.construction_locked(r) and not r.get("craft_transfer",false))
+		if candidates.is_empty():return false
+		var row=candidates[0]
 		if row.kind!="skill_scroll" and not row.kind.ends_with("_plan"):
 			if w.jobs.any(func(other):return other.get("stock_id",-1)==row.stock_id):return false
 			j.kind="haul";j.stock_id=row.stock_id;j.explicit_designation=true
@@ -175,7 +179,7 @@ static func execute(w,j,actor: Dictionary):
 		if j.kind in ["remove","remove_floor"] and w.occupied(j.pos) and actor.pos!=j.pos: j.state="blocked"; j.block_reason="誰かがいます"; return
 	if j.kind=="animal_order": w.Orders.step(w,j); return
 	if w.BUILD.has(j.kind) and not j.started:
-		var why=w.Buildings.reason(w,j.kind,j.pos,false)
+		var why=w.Buildings.reason(w,j.kind,j.pos,false,j.id)
 		if why!="" and not (why=="ここに誰かいます" and actor.pos==j.pos): j.state="blocked"; j.block_reason=why; return
 	var goals=[j.pos] if j.kind=="move" else w.Buildings.job_goals(w,j)
 	if w.BUILD.has(j.kind):goals=preload("res://game/construction_safety.gd").work_goals(w,j,actor,goals)
@@ -187,7 +191,7 @@ static func execute(w,j,actor: Dictionary):
 		complete(w,j,true); return
 	if w.BUILD.has(j.kind):
 		if not j.started:
-			var why=w.Buildings.reason(w,j.kind,j.pos,false)
+			var why=w.Buildings.reason(w,j.kind,j.pos,false,j.id)
 			if why!="": j.state="blocked"; j.block_reason=why; return
 			if not preload("res://game/construction_safety.gd").can_finish(w,j,actor):
 				w.Work.block(w,j,"退避経路を確保できません");return

@@ -13,7 +13,7 @@ func fixture():
 	result.campaign.unlocked_blueprints.append_array(["wood_wall","stone_wall","locked_door"])
 	result.refresh_indoor();return result
 func ready(kind:String,q:Vector2i):
-	var d=w.BUILD[kind];var b={"id":w.next_structure_id,"kind":kind,"status":"ready","hp":d.hp,"max_hp":d.hp,"cost":d.cost,"resource":d.resource,"armor":0,"open":false,"lock_hp":8 if kind=="locked_door" else 0}
+	var d=w.BUILD[kind];var b={"id":w.next_structure_id,"kind":kind,"status":"ready","hp":d.hp,"max_hp":d.hp,"cost":d.cost,"resource":d.get("resource","soil"),"armor":0,"open":false,"lock_hp":8 if kind=="locked_door" else 0}
 	w.next_structure_id+=1;w.Buildings.layer(w,kind)[q]=b
 func house(origin:Vector2i):
 	for x in range(5):
@@ -174,7 +174,7 @@ func rendering():
 				art.floor_at(pen,q,w.floors[q].kind,mask)
 		var regions=pen.calls.filter(func(c):return c.has("src"))
 		if updated:
-			check(regions.size()==12,"All twelve interior boundary sides receive cropped floor underlay")
+			check(regions.size()==7,"Six eight-pixel side contacts and one bounded doorway threshold")
 			check(regions.all(func(c):return c.src[2]<=48 and c.src[3]<=42),"Floor underlay crops the original without image scaling")
 		for q in w.structures:
 			var b=w.structures[q]
