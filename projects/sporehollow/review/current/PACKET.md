@@ -1,3 +1,11 @@
+# 食事・住居権限・生活UI・心情（2026-10-16）
+
+実装 `ff50a685` を既存の最新開発版EXEへ反映済み。生活タブ、個人別食事優先度、睡眠中の満腹0起床、部屋別住居、備蓄持出し権限、危険反応・集中・満足度を統合。関連415チェック失敗0。通常デスクトップ起動・GPU負荷試験は実施していない。実機操作感と長期バランスは未検証。
+
+[変更・試験・残課題](interaction-revision/REPORT.md)／[試験一覧](interaction-revision/TEST_SUMMARY.json)／[EXEハッシュ・配布記録](interaction-revision/DELIVERY.json)。入口は従来の「最新開発版.lnk」1本を維持。以下は過去記録。
+
+---
+
 # 建築予約・家屋・時間割・睡眠（2026-10-16）
 
 実装 `328e2add` を既存の最新開発版EXEへ反映済み。資材待ち予約、家屋・ベッド割当、全人間の時間割／睡眠、誘拐者の人間優先・入口探索、壁と床の隙間を更新。関連504チェック失敗0。通常ゲームは自動起動していない。[変更・検証・残課題](interaction-revision/REPORT.md)／[CPU描画比較](interaction-revision/housing-floor-comparison.png)／[配布記録](interaction-revision/DELIVERY.json)。通常デスクトップの操作感と実GPU描画は未検証。以下は過去記録。

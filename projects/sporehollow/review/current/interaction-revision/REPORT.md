@@ -38,4 +38,6 @@
 
 ## EXE
 
-既存の最新開発版入口とEXE1本を維持。反映SHA・ハッシュ・headless起動確認数は同フォルダDELIVERY.json、書出し結果はlife-export.txtを参照。EXEをユーザーデスクトップで自動起動しない。
+実装 `ff50a685` を既存EXEへ反映済み（2026-10-16）。SHA256 `EB449A6F2EC061F4A346EBB655AF107566A4549255208DD551AE24FF0B4A28D0`。既存の最新開発版入口とEXE1本を維持。反映SHA・ハッシュ・headless起動確認数は同フォルダDELIVERY.json、書出し結果はlife-export.txtを参照。EXEをユーザーデスクトップで自動起動しない。
+
+候補EXE・隔離ユーザーデータは検証領域の所有確認後に削除。素材import/uid等の既存差分は保全しており、ビルド記録のdirty=trueはそれを含む。通常データは変更していない。
