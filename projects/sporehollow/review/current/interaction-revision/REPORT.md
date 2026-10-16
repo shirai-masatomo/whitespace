@@ -48,4 +48,8 @@ headless UI終了時の既存ObjectDB警告（647〜1424）は残る。メモリ
 
 ## 配布
 
-コード・関連試験完了。EXEはこの時点では未反映。反映後にDELIVERY.jsonとこの節を更新する。
+実装 `104323b9` を既存の最新開発版EXEへ反映済み（2026-10-16）。SHA256 `38207F909E012F8825C148C4F8ED78590F7BDD69A78B1A434AC4869033E5CA15`、128,527,008 bytes。入口は従来の「確認入口／最新開発版.lnk」1本。EXEも1本。headless import/export成功、起動シーン39チェック成功。ネイティブEXEの自動起動はしていない。
+
+配布先：`artifacts/autonomy-entry-01/bundle/WhistleRanch-Autonomy-Partial.exe`。詳細はDELIVERY.json、construction-import.txt、construction-export.txt。ビルド記録のdirty=trueは保全した既存import/uid等を含む。
+
+候補EXE・隔離ユーザーデータ・今回の重複.logと一時編集スクリプトを整理。既存素材・通常データ・他担当の差分は保持。プロジェクトは約1.02GiB（前回記録から約0.65MiB増、主に比較画像・検証記録）。
