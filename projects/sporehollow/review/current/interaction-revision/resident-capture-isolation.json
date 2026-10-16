@@ -1,0 +1,28 @@
+{
+  "scenario": "resident detail only",
+  "timeout_seconds": 60,
+  "result": {
+    "PID": 24432,
+    "ThreadID": 23664,
+    "ExitCode": 0,
+    "OwnedWindowCount": 2,
+    "Station": "Service-0x0-1b7214$",
+    "Desktop": "Render_e556af699c504a4baf6c0f11e08db2e1",
+    "ObservedDesktop": "Render_e556af699c504a4baf6c0f11e08db2e1",
+    "NonInteractive": true,
+    "DesktopMatched": true,
+    "TimedOut": false,
+    "OwnedWindows": [
+      "EngineWGLDetect: ",
+      "NVOpenGLPbuffer: __wglDummyWindowFodder",
+      "Engine: ",
+      "Engine: ホイッスル牧場・最新開発版（部分実装） (DEBUG)"
+    ]
+  },
+  "start_utc": "2026-10-16T13:20:46.8633137Z",
+  "end_utc": "2026-10-16T13:20:58.7447913Z",
+  "normal_desktop_fallback": false,
+  "success": true,
+  "source_commit": "78565fc6b4bcb692c48451b7abd531921681faa5",
+  "fps_limit": 30
+}

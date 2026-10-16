@@ -1,0 +1,15 @@
+{
+  "elapsed_ms": 10507,
+  "fps_limit": 30,
+  "height": 800,
+  "method": "actual Godot viewport, private noninteractive desktop; same game source as current EXE, not an EXE-window screenshot",
+  "paused": true,
+  "png_error": 0,
+  "rendering_driver": "NVIDIA GeForce RTX 4070 SUPER",
+  "scene": "resident detail",
+  "seed": 809161895,
+  "setup": "fresh generated map, default resident; no fabricated equipment or mood; selected keeper via existing UI handler",
+  "source_commit": "78565fc6b4bcb692c48451b7abd531921681faa5",
+  "tick": 0,
+  "width": 1280
+}
