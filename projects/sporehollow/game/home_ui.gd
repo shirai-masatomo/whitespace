@@ -14,9 +14,11 @@ class Hours:
 		if status_tick!=game.world.tick:
 			status_tick=game.world.tick
 			var status=get_parent().get_node_or_null("SleepStatus")
+			var current=get_parent().get_node_or_null("CurrentState")
 			var wake_button=get_parent().get_node_or_null("Wake")
 			if wake_button!=null:wake_button.disabled=not actor.get("resting",false)
-			if status!=null:status.text="眠気 %d · %s"%[actor.sleepiness,actor.get("work_status",actor.get("state","待機")).left(24)]
+			if status!=null:status.text="眠気：%d　｜　%s"%[actor.sleepiness,actor.get("work_status",actor.get("state","待機")).left(24)]
+			if current!=null:current.text="睡眠中" if actor.get("resting",false) else "活動中"
 		queue_redraw()
 	func _gui_input(event):
 		if event is InputEventMouseButton and event.button_index==MOUSE_BUTTON_LEFT:
@@ -32,10 +34,19 @@ class Hours:
 	func _draw():
 		var table=actor.get("pending_timetable",actor.timetable)
 		for h in range(24):
-			draw_rect(Rect2(h*24,0,23,28),COLORS[table[h]])
-			draw_string(game.FONT,Vector2(h*24+4,18),str(h),HORIZONTAL_ALIGNMENT_LEFT,-1,11,Color("162c25"))
-			if h==game.world.Sleep.hour(game.world):draw_rect(Rect2(h*24,0,23,28),Color("fff6cb"),false,2)
-static func open_schedule(g,key:String="keeper"):
+			draw_rect(Rect2(h*24,0,23,38),COLORS[table[h]])
+			draw_string(game.FONT,Vector2(h*24+4,24),str(h),HORIZONTAL_ALIGNMENT_LEFT,-1,11,Color("162c25"))
+			if h==game.world.Sleep.hour(game.world):draw_rect(Rect2(h*24,0,23,38),Color("fff6cb"),false,2)
+static func compact(g,id:String,height:float=34):
+	Panels.compact_button(g,g.buttons[id],14,true);g.buttons[id].size.y=height
+static func role_person(g,key:String):g.roles_actor=key;g.refresh()
+static func summary(g,a)->String:
+	g.world.Resident.initialize(a)
+	return "生活タイプ：%s　食欲：%s　危険反応：%s\n満足度 %d/100　｜　%s"%[{"early":"朝型","normal":"通常","late":"夜型"}.get(a.life_type,"通常"),g.world.Resident.APPETITE_NAMES[a.appetite],g.world.Resident.REACTIONS[a.danger_state],a.satisfaction,a.get("mood_reasons",["普段の生活"])[0] if not a.get("mood_reasons",[]).is_empty() else "普段の生活"]
+static func open_schedule(g,key:String=""):
+	if key=="":
+		key=g.roles_actor if g.colony_page=="roles" else g.selected.get("key","keeper")
+		if g.selected.get("kind")=="animal" and g.world.Orders.animal(g.world,g.selected.get("id",-1)).get("category")=="human":key="a%d"%g.selected.id
 	if g.colony_page in ["life","schedule"]:return
 	g.life_return={"group":g.group,"page":g.colony_page,"selected":g.selected.duplicate(true),"animal_list":g.animal_list_open}
 	g.neutral();g.colony_page="life";g.life_actor=key;g.refresh()
@@ -45,6 +56,14 @@ static func brush(g,kind:String):g.schedule_brush=kind;g.refresh()
 static func tab(g,kind:String):g.life_tab=kind;g.refresh()
 static func person(g,key:String):g.life_actor=key;g.refresh()
 static func priority(g,a,combination:String,index:int):g.world.FoodPrefs.change(a,combination,index+1);g.refresh()
+class LifeSummary:
+	extends Label
+	var game
+	var actor
+	var last_tick=-1
+	func _process(_dt):
+		if last_tick==game.world.tick:return
+		last_tick=game.world.tick;text=game.HomeUI.summary(game,actor)
 static func schedule(g):
 	var people=g.world.Sleep.people(g.world)
 	if not people.has(g.life_actor):g.life_actor="keeper"
@@ -55,30 +74,33 @@ static func schedule(g):
 	for key in people:picker.add_item(g.world.PlayerEvents.name_of(g.world,people[key]))
 	picker.select(people.keys().find(g.life_actor));picker.item_selected.connect(func(i):person(g,people.keys()[i]))
 	for i in range(2):
-		var kind=["schedule","food"][i];g.add_button(p,"life_"+kind,["時間割","食事"][i],Rect2(348+i*110,8,104,30),tab.bind(g,kind));g.UI.selected(g.buttons["life_"+kind],g.life_tab==kind)
-	g.add_button(p,"life_back","戻る",Rect2(676,8,108,30),back.bind(g))
-	Panels.label(p,g.world.Resident.describe(a),Vector2(12,49),13)
-	var summary=p.get_child(p.get_child_count()-1);summary.size=Vector2(760,48);summary.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART;summary.tooltip_text=g.world.Resident.describe(a)
-	var scroll=ScrollContainer.new();scroll.name="LifeContent";scroll.position=Vector2(12,102);scroll.size=Vector2(772,226);scroll.horizontal_scroll_mode=ScrollContainer.SCROLL_MODE_DISABLED;scroll.vertical_scroll_mode=ScrollContainer.SCROLL_MODE_SHOW_ALWAYS;p.add_child(scroll);Panels.readable_scroll(scroll)
-	var body=Control.new();body.custom_minimum_size=Vector2(746,214);scroll.add_child(body)
+		var kind=["schedule","food"][i];g.add_button(p,"life_"+kind,["時間割","食事"][i],Rect2(348+i*110,8,104,30),tab.bind(g,kind));g.UI.architect_selected(g.buttons["life_"+kind],g.life_tab==kind);compact(g,"life_"+kind,30)
+	g.add_button(p,"life_back","戻る",Rect2(676,8,108,30),back.bind(g));compact(g,"life_back",30)
+	var info=LifeSummary.new();info.name="LifeSummary";info.game=g;info.actor=a;info.text=summary(g,a);info.position=Vector2(12,50);info.size=Vector2(760,44);info.add_theme_font_size_override("font_size",14);info.add_theme_color_override("font_color",g.UI.INK);info.tooltip_text=g.world.Resident.describe(a);p.add_child(info)
+	var divider=HSeparator.new();divider.position=Vector2(12,98);divider.size=Vector2(772,2);p.add_child(divider)
+	var scroll=ScrollContainer.new();scroll.name="LifeContent";scroll.position=Vector2(12,110);scroll.size=Vector2(772,218);scroll.horizontal_scroll_mode=ScrollContainer.SCROLL_MODE_DISABLED;scroll.vertical_scroll_mode=ScrollContainer.SCROLL_MODE_SHOW_ALWAYS;p.add_child(scroll);Panels.readable_scroll(scroll)
+	var body=Control.new();body.name="LifeBody";body.custom_minimum_size=Vector2(746,204);scroll.add_child(body)
 	if g.life_tab=="schedule":
-		Panels.label(body,"0〜23時をドラッグ。変更は次の時間帯から適用します。",Vector2(0,4),14)
-		Panels.label(body,{"early":"朝型","normal":"通常型","late":"夜型"}[a.life_type]+" / "+{"short":"ショートスリーパー","normal":"通常","long":"ロングスリーパー"}[a.sleep_trait],Vector2(0,32),13)
+		Panels.label(body,"0〜23時をドラッグして設定。変更は次の時間帯から適用します。",Vector2(0,4),14)
 		for i in range(3):
-			var kind=["sleep","work","free"][i];g.add_button(body,"schedule_"+kind,g.world.Sleep.LABELS[kind],Rect2(i*104,62,98,30),brush.bind(g,kind));g.UI.selected(g.buttons["schedule_"+kind],g.schedule_brush==kind)
-		var hours=Hours.new();hours.game=g;hours.actor=a;hours.position=Vector2(0,106);hours.size=Vector2(576,28);body.add_child(hours)
-		Panels.label(body,"",Vector2(0,148),13);body.get_child(body.get_child_count()-1).name="SleepStatus"
-		g.add_button(body,"life_wake","起こす",Rect2(624,106,108,30),wake.bind(g,g.life_actor));g.buttons.life_wake.name="Wake";g.buttons.life_wake.disabled=not a.get("resting",false)
+			var kind=["sleep","work","free"][i];g.add_button(body,"schedule_"+kind,g.world.Sleep.LABELS[kind],Rect2(i*110,44,104,34),brush.bind(g,kind));g.UI.architect_selected(g.buttons["schedule_"+kind],g.schedule_brush==kind);compact(g,"schedule_"+kind)
+		var hours=Hours.new();hours.name="ScheduleHours";hours.game=g;hours.actor=a;hours.position=Vector2(0,96);hours.size=Vector2(576,38);body.add_child(hours)
+		Panels.label(body,"眠気：%d　｜　%s"%[a.sleepiness,a.get("work_status",a.get("state","待機")).left(24)],Vector2(0,150),14);body.get_child(body.get_child_count()-1).name="SleepStatus"
+		var border=VSeparator.new();border.position=Vector2(594,44);border.size=Vector2(2,100);body.add_child(border)
+		Panels.label(body,"現在の状態",Vector2(614,44),14)
+		Panels.label(body,"睡眠中" if a.get("resting",false) else "活動中",Vector2(614,70),16);body.get_child(body.get_child_count()-1).name="CurrentState"
+		g.add_button(body,"life_wake","起こす",Rect2(614,100,118,34),wake.bind(g,g.life_actor));g.buttons.life_wake.name="Wake";g.buttons.life_wake.disabled=not a.get("resting",false)
+		compact(g,"life_wake");g.buttons.life_wake.tooltip_text="選択中の住民を起こす"
 	else:
-		Panels.label(body,"1 最優先 → 8 最低。番号を変えると、同じ番号の設定と入れ替わります。",Vector2(0,4),13)
-		for tier in range(4):Panels.label(body,g.world.Zones.Catalog.FOOD_TIERS[tier],Vector2(180+tier*136,38),14)
+		Panels.label(body,"1が最優先、数字が大きいほど優先度が下がります。\n同じ数字は同順位として扱われます。",Vector2(0,0),14)
+		for tier in range(4):Panels.label(body,g.world.Zones.Catalog.FOOD_TIERS[tier],Vector2(194+tier*136,50),14)
 		for row in range(2):
-			var category=["cooked","raw"][row];Panels.label(body,["調理済み食品","生食材"][row],Vector2(0,76+row*44),14)
+			var category=["cooked","raw"][row];Panels.label(body,["調理済み食品","生食材"][row],Vector2(0,82+row*46),14)
 			for tier in range(4):
-				var combination=category+":"+str(tier);var choice=OptionButton.new();choice.name="Food_"+category+str(tier);choice.position=Vector2(166+tier*136,70+row*44);choice.size=Vector2(116,32);body.add_child(choice);Panels.compact_button(g,choice)
-				for rank in range(1,9):choice.add_item(str(rank))
-				choice.select(a.food_order.find(combination));choice.item_selected.connect(func(index):priority(g,a,combination,index))
-		Panels.label(body,"利用権限・禁止・予約・通路を確認して選択。飼料は対象外。",Vector2(0,174),13)
+				var combination=category+":"+str(tier);var choice=OptionButton.new();choice.name="Food_"+category+str(tier);choice.position=Vector2(166+tier*136,76+row*46);choice.size=Vector2(116,34);body.add_child(choice);Panels.compact_button(g,choice,14)
+				for rank_value in range(1,9):choice.add_item(str(rank_value))
+				choice.select(g.world.FoodPrefs.value(a,combination)-1);choice.item_selected.connect(func(index):priority(g,a,combination,index))
+		Panels.label(body,"利用権限・禁止・予約・通路を確認して選択。飼料は対象外。",Vector2(0,178),13)
 static func assign(g,id:int,key:String):
 	g.world.Homes.assign(g.world,id,key);g.refresh()
 static func unassign(g,key:String):
@@ -112,7 +134,13 @@ static func build(g):
 	g.add_button(g.palette,"life_main","生活",Rect2(580,754,116,36),open_schedule.bind(g))
 	if g.colony_page in ["schedule","life"]:schedule(g);return
 	if g.selected.get("kind")=="house":house(g);return
-	if g.colony_page=="roles":g.add_button(g.colony_panel,"time_tab","生活",Rect2(510,8,116,26),open_schedule.bind(g))
+	if g.colony_page=="roles":
+		var people=g.world.Sleep.people(g.world)
+		if not people.has(g.roles_actor):g.roles_actor="keeper"
+		var picker=OptionButton.new();picker.name="RoleLifeResident";picker.position=Vector2(254,8);picker.size=Vector2(244,26);g.colony_panel.add_child(picker);Panels.compact_button(g,picker)
+		for key in people:picker.add_item(g.world.PlayerEvents.name_of(g.world,people[key]))
+		picker.select(people.keys().find(g.roles_actor));picker.item_selected.connect(func(i):role_person(g,people.keys()[i]));picker.tooltip_text="生活設定の対象住民"
+		g.add_button(g.colony_panel,"time_tab","生活",Rect2(510,8,116,26),open_schedule.bind(g,g.roles_actor));compact(g,"time_tab",26)
 	elif g.selected.get("kind") in ["keeper","worker"]:
 		g.add_button(g.palette,"time_tab","生活",Rect2(386,698,108,36),open_schedule.bind(g,g.selected.get("key","keeper")))
 		var key=g.selected.get("key","keeper")

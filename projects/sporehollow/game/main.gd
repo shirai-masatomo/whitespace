@@ -97,6 +97,7 @@ var home_click_id=-1
 var home_click_time=0
 var schedule_brush="sleep"
 var life_tab="schedule"
+var roles_actor="keeper"
 var life_actor="keeper"
 var life_return={}
 var selection_ids: Dictionary = {}
@@ -333,6 +334,9 @@ func notice(text_value: String):
 	message_until_tick = world.tick + 14
 
 func select_group(index: int):
+	if index==3:
+		if selected.get("kind") in ["keeper","worker"]:roles_actor=selected.get("key","keeper")
+		elif selected.get("kind")=="animal" and world.Orders.animal(world,selected.get("id",-1)).get("category")=="human":roles_actor="a%d"%selected.id
 	home_individual=-1
 	if index==1:show_animal_list();return
 	zone_controls.details_open=false

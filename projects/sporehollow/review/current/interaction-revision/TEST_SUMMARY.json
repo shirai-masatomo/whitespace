@@ -1,15 +1,15 @@
 {
-  "topic": "reserved construction hover preview",
-  "method": "headless Dummy 30fps; production draw_pointer_preview with captured draw requests; no native game launch",
+  "topic": "life UI and independent tied food priorities",
+  "method": "headless Dummy 30fps; actual Control bounds and CPU layout previews; no native game launch",
   "suites": [
     {
-      "suite": "reserved-preview",
-      "checks": 92,
+      "suite": "life-ui",
+      "checks": 65,
       "failures": 0
     },
     {
-      "suite": "construction-visual",
-      "checks": 37,
+      "suite": "resident-life",
+      "checks": 55,
       "failures": 0
     },
     {
@@ -18,59 +18,11 @@
       "failures": 0
     }
   ],
-  "total_checks": 168,
+  "total_checks": 159,
   "failures": 0,
-  "previous_review": {
-    "topic": "construction recovery, shortage display and floor-wall contact",
-    "method": "headless/Dummy/30fps, serial bounded tests; CPU image compositing; no native desktop launch",
-    "suites": [
-      {
-        "suite": "construction-recovery",
-        "checks": 39,
-        "failures": 0
-      },
-      {
-        "suite": "construction-edges",
-        "checks": 22,
-        "failures": 0
-      },
-      {
-        "suite": "construction-visual",
-        "checks": 37,
-        "failures": 0
-      },
-      {
-        "suite": "construction-input",
-        "checks": 9,
-        "failures": 0
-      },
-      {
-        "suite": "housing-sleep",
-        "checks": 169,
-        "failures": 0
-      },
-      {
-        "suite": "construction-groups-normal",
-        "checks": 31,
-        "failures": 0
-      },
-      {
-        "suite": "craft-stock",
-        "checks": 40,
-        "failures": 0
-      },
-      {
-        "suite": "loading",
-        "checks": 39,
-        "failures": 0
-      }
-    ],
-    "total": 386,
-    "failures": 0,
-    "baseline_repro": {
-      "checks": 39,
-      "failures": 1,
-      "file": "construction-recovery-before.json"
-    }
-  }
+  "unverified": [
+    "native UI/GPU appearance",
+    "game save-file load (save feature remains disabled)",
+    "long-session resource stability"
+  ]
 }

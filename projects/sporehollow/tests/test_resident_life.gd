@@ -12,7 +12,7 @@ func food():
 	check(w.Zones.Catalog.FOOD_TIERS.size()==4 and w.Work.Policy.HUMAN_FOOD.all(func(id):return w.Zones.Catalog.item(id).tier==0),"Four tiers, all current human foods simple")
 	w.FoodPrefs.initialize(a);check(w.FoodPrefs.order(a)[0] in ["stew","egg_meal","roast_meat","roast_mushroom"],"Default cooked before raw")
 	w.FoodPrefs.change(a,"raw:0",1)
-	check(a.food_order[0]=="raw:0" and a.food_order.size()==8 and a.food_order.all(func(value):return a.food_order.count(value)==1),"Priority editing swaps unique ranks")
+	check(a.food_priorities["raw:0"]==1 and a.food_priorities["cooked:3"]==1 and a.food_priorities["cooked:0"]==4,"Priority editing retains equal ranks without swaps")
 	var z=w.Zones.find(w,w.Zones.create(w,"stockpile",Vector2i(31,25),Vector2i(32,25)))
 	w.Stock.add(w,"mushroom",4,Vector2i(31,25));w.Stock.add(w,"stew",2,Vector2i(32,25));a.satiety=20;a.appetite="normal";a.timetable.fill("work")
 	w.Food.step(w,a);check(w.Stock.find(w,a.get("food_target",-1)).get("kind")=="mushroom","Actual food choice uses resident raw priority")

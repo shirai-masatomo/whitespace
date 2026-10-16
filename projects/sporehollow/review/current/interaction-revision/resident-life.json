@@ -21,7 +21,7 @@
       "passed": true
     },
     {
-      "check": "Priority editing swaps unique ranks",
+      "check": "Priority editing retains equal ranks without swaps",
       "passed": true
     },
     {

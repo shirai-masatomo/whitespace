@@ -14,6 +14,7 @@ static func architecture_category(g,category: String):
 	g.architect_category=category;g.tool="";g.cancel_wall_stroke();g.refresh()
 
 static func person_selected(g,row: Dictionary):
+	if g.world.Sleep.people(g.world).has(row.key):g.roles_actor=row.key
 	if row.key=="keeper":g.choose_walk()
 	elif row.has("animal_id"):g.choose_animal(row.animal_id)
 	elif g.world.workers.has(row.key):
@@ -78,14 +79,14 @@ static func priority_style(button: Button,value: int):
 static func build_roles(g):
 	var people=Model.people(g.world)
 	var list_height=mini(174,maxi(34,people.size()*34))
-	var panel_height=94+list_height
+	var panel_height=108+list_height
 	var p=panel(g,Rect2(16,742-panel_height,640,panel_height))
 	label(p,"仕事の優先度",Vector2(14,9),19)
-	label(p,"1 最優先 → 4 最低 · 空欄は停止 · 同順位は距離と条件で選択",Vector2(14,35),13)
-	label(p,"人物",Vector2(18,59),13)
+	label(p,"1 最優先 → 4 最低 · 空欄は停止 · 同順位は距離と条件で選択",Vector2(14,43),13)
+	label(p,"人物",Vector2(18,67),13)
 	var order=g.world.Work.Policy.ORDER
-	for i in range(order.size()):label(p,g.world.Work.Policy.LABELS[order[i]],Vector2(224+i*60,59),13)
-	var scroll=ScrollContainer.new();scroll.position=Vector2(12,80);scroll.size=Vector2(616,list_height)
+	for i in range(order.size()):label(p,g.world.Work.Policy.LABELS[order[i]],Vector2(224+i*60,67),13)
+	var scroll=ScrollContainer.new();scroll.position=Vector2(12,92);scroll.size=Vector2(616,list_height)
 	scroll.horizontal_scroll_mode=ScrollContainer.SCROLL_MODE_DISABLED;p.add_child(scroll)
 	var list=VBoxContainer.new();list.add_theme_constant_override("separation",2);list.size_flags_horizontal=Control.SIZE_EXPAND_FILL;scroll.add_child(list)
 	for row in people:
@@ -154,6 +155,7 @@ static func animal_action(g,id: int,command: String):
 
 
 static func priority_changed(g,key: String,kind: String):
+	g.roles_actor=key
 	var a=g.world.workers[key]
 	g.world.Work.set_priority(g.world,key,kind,(a.work_priorities[kind]+1)%5)
 	g.refresh()

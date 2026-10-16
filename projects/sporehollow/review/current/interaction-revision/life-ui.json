@@ -1,6 +1,106 @@
 {
   "checks": [
     {
+      "check": "Legacy rank permutation migrates losslessly without rewriting original",
+      "passed": true
+    },
+    {
+      "check": "Changing one cell never swaps another",
+      "passed": true
+    },
+    {
+      "check": "All equal ranks use cooked/raw row then tier then existing item order",
+      "passed": true
+    },
+    {
+      "check": "Stable tie ordering repeat 0",
+      "passed": true
+    },
+    {
+      "check": "Stable tie ordering repeat 1",
+      "passed": true
+    },
+    {
+      "check": "Stable tie ordering repeat 2",
+      "passed": true
+    },
+    {
+      "check": "Stable tie ordering repeat 3",
+      "passed": true
+    },
+    {
+      "check": "Stable tie ordering repeat 4",
+      "passed": true
+    },
+    {
+      "check": "Stable tie ordering repeat 5",
+      "passed": true
+    },
+    {
+      "check": "Stable tie ordering repeat 6",
+      "passed": true
+    },
+    {
+      "check": "Stable tie ordering repeat 7",
+      "passed": true
+    },
+    {
+      "check": "Stable tie ordering repeat 8",
+      "passed": true
+    },
+    {
+      "check": "Stable tie ordering repeat 9",
+      "passed": true
+    },
+    {
+      "check": "Stable tie ordering repeat 10",
+      "passed": true
+    },
+    {
+      "check": "Stable tie ordering repeat 11",
+      "passed": true
+    },
+    {
+      "check": "Stable tie ordering repeat 12",
+      "passed": true
+    },
+    {
+      "check": "Stable tie ordering repeat 13",
+      "passed": true
+    },
+    {
+      "check": "Stable tie ordering repeat 14",
+      "passed": true
+    },
+    {
+      "check": "Stable tie ordering repeat 15",
+      "passed": true
+    },
+    {
+      "check": "Stable tie ordering repeat 16",
+      "passed": true
+    },
+    {
+      "check": "Stable tie ordering repeat 17",
+      "passed": true
+    },
+    {
+      "check": "Stable tie ordering repeat 18",
+      "passed": true
+    },
+    {
+      "check": "Stable tie ordering repeat 19",
+      "passed": true
+    },
+    {
+      "check": "JSON round trip retains duplicate ranks",
+      "passed": true
+    },
+    {
+      "check": "Partial newer data keeps equal values and fills missing cells",
+      "passed": true
+    },
+    {
       "check": "Production loading ready with life features",
       "passed": true
     },
@@ -9,7 +109,19 @@
       "passed": true
     },
     {
-      "check": "Roles opens same life screen",
+      "check": "Bottom menu callback opens life",
+      "passed": true
+    },
+    {
+      "check": "Roles preserves selected resident",
+      "passed": true
+    },
+    {
+      "check": "Roles life callback uses selected human",
+      "passed": true
+    },
+    {
+      "check": "Roles resident picker chooses keeper",
       "passed": true
     },
     {
@@ -29,6 +141,10 @@
       "passed": true
     },
     {
+      "check": "UI permits three tied cells without swaps",
+      "passed": true
+    },
+    {
       "check": "Life panel fits logical canvas (1280, 800)",
       "passed": true
     },
@@ -45,6 +161,34 @@
       "passed": true
     },
     {
+      "check": "Header buttons do not overlap resident information",
+      "passed": true
+    },
+    {
+      "check": "Life information fits two labelled lines",
+      "passed": true
+    },
+    {
+      "check": "Matrix controls align and fit content width",
+      "passed": true
+    },
+    {
+      "check": "Tab switch preserves shared header coordinates",
+      "passed": true
+    },
+    {
+      "check": "Wake action does not overlap hours",
+      "passed": true
+    },
+    {
+      "check": "Life panel stays above main navigation",
+      "passed": true
+    },
+    {
+      "check": "Role life button does not overlap description",
+      "passed": true
+    },
+    {
       "check": "Life panel fits logical canvas (1600, 1000)",
       "passed": true
     },
@@ -58,6 +202,34 @@
     },
     {
       "check": "Food tab does not duplicate timetable panel",
+      "passed": true
+    },
+    {
+      "check": "Header buttons do not overlap resident information",
+      "passed": true
+    },
+    {
+      "check": "Life information fits two labelled lines",
+      "passed": true
+    },
+    {
+      "check": "Matrix controls align and fit content width",
+      "passed": true
+    },
+    {
+      "check": "Tab switch preserves shared header coordinates",
+      "passed": true
+    },
+    {
+      "check": "Wake action does not overlap hours",
+      "passed": true
+    },
+    {
+      "check": "Life panel stays above main navigation",
+      "passed": true
+    },
+    {
+      "check": "Role life button does not overlap description",
       "passed": true
     },
     {
@@ -89,6 +261,6 @@
       "passed": true
     }
   ],
-  "count": 22,
+  "count": 65,
   "failed": 0
 }
