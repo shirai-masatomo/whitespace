@@ -10,7 +10,14 @@
 | **Slay the Spire** | 経路を選ぶことで強敵・イベント・休息・報酬のリスクを取捨選択する構造。 | 経路選択は今回採らないが、**リスクを見てから進む意思決定**は必要 |
 | **Darkest Dungeon II** | 「Affinity System」では旅で仲間同士の関係が良くも悪くも変わり、戦闘の相乗効果／障害になる。 | **人間同士の友好度→見える連携**の具体的な参考例 |
 
+## 参考作品の防御・スキル運用に関する補足
+
+- **Wizardry（初期作）**：アーマークラスは命中判定にも関わる。Dive In Underは初心者にも分かりやすい**攻撃ATK／防御DEF**を採用するため、計算式はそのまま引き継がない。
+- **B100X**：物理攻撃と防御、命中、スキル自動使用を分けて考える参考になる。ただしB100Xの装備・防御式と、本作の[仮計算式](COMBAT.md)は同一ではない。
+
 ## 出典
+- [B100X 序盤ガイド・物理攻撃と魔法攻撃の設計（公式）](https://nussygame.com/b100x/641354752677052416-html/)
+- [Wizardry 初期作のマニュアル（PDF）](https://wizardryarchives.com/downloads/archivesmanual.pdf)
 - [B100X 概要（公式）](https://nussygame.com/b100x/about/)
 - [B100X デザイン：ジョブとスキル（開発者解説）](https://nussygame.com/b100x/611631856282222592-html/)
 - [B100X デザイン：アイテム合成（開発者解説）](https://nussygame.com/b100x/190908662048-html/)

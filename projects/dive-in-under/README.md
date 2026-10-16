@@ -24,6 +24,6 @@ Windows EXEで **新規開始 → 主人公単独の初回探索（帰還不可�
 
 ## 詳細台帳
 
-[階層](docs/FLOORS.md) / [敵](docs/ENEMIES.md) / [アイテム](docs/ITEMS.md) / [仲間](docs/ALLIES.md) / [イベント](docs/EVENTS.md) / [戦闘](docs/COMBAT.md) / [黄金像](docs/SHRINE.md) / [参考資料](docs/RESEARCH.md)
+[階層](docs/FLOORS.md) / [敵](docs/ENEMIES.md) / [アイテム](docs/ITEMS.md) / [仲間](docs/ALLIES.md) / [イベント](docs/EVENTS.md) / [戦闘共通仕様](docs/COMBAT.md) / [スキル一覧](docs/SKILLS.md) / [黄金像](docs/SHRINE.md) / [参考資料](docs/RESEARCH.md)
 
 **旧ブラウザ試作**：[過去の試作ZIP](Dive-In-Under-10F-prototype.zip) ／ [ソース](prototype/index.html)。古いパーティ構造・初回帰還可能のルールを使っており、**今回の仕様には対応していない**。新しいWindows EXEは未作成。
