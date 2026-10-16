@@ -726,6 +726,241 @@
       ]
     },
     {
+      "name": "resident-work",
+      "nodes": [
+        {
+          "name": "@Control@13",
+          "rect": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "type": "Control"
+        },
+        {
+          "name": "ResidentDetails",
+          "rect": [
+            16.0,
+            402.0,
+            896.0,
+            340.0
+          ],
+          "type": "Panel"
+        },
+        {
+          "font": 20,
+          "name": "Heading",
+          "rect": [
+            30.0,
+            414.0,
+            90.0,
+            30.0
+          ],
+          "text": "住民詳細",
+          "type": "Label",
+          "wrap": true
+        },
+        {
+          "color": "eadebfff",
+          "font": 14,
+          "name": "ResidentPicker",
+          "rect": [
+            128.0,
+            412.0,
+            180.0,
+            32.0
+          ],
+          "text": "田中",
+          "type": "OptionButton"
+        },
+        {
+          "color": "e7d9b5ff",
+          "font": 14,
+          "name": "@Button@715",
+          "rect": [
+            322.0,
+            412.0,
+            90.0,
+            32.0
+          ],
+          "text": "ステータス",
+          "type": "Button"
+        },
+        {
+          "color": "e7d9b5ff",
+          "font": 14,
+          "name": "@Button@716",
+          "rect": [
+            418.0,
+            412.0,
+            90.0,
+            32.0
+          ],
+          "text": "装備",
+          "type": "Button"
+        },
+        {
+          "color": "bbd99cff",
+          "font": 14,
+          "name": "@Button@717",
+          "rect": [
+            514.0,
+            412.0,
+            90.0,
+            32.0
+          ],
+          "text": "仕事",
+          "type": "Button"
+        },
+        {
+          "color": "e7d9b5ff",
+          "font": 14,
+          "name": "@Button@718",
+          "rect": [
+            610.0,
+            412.0,
+            90.0,
+            32.0
+          ],
+          "text": "履歴",
+          "type": "Button"
+        },
+        {
+          "color": "eadebfff",
+          "font": 14,
+          "name": "@Button@699",
+          "rect": [
+            710.0,
+            412.0,
+            84.0,
+            32.0
+          ],
+          "text": "生活",
+          "type": "Button"
+        },
+        {
+          "color": "eadebfff",
+          "font": 14,
+          "name": "@Button@719",
+          "rect": [
+            806.0,
+            412.0,
+            92.0,
+            32.0
+          ],
+          "text": "閉じる",
+          "type": "Button"
+        },
+        {
+          "name": "@TextureRect@720",
+          "rect": [
+            36.0,
+            464.0,
+            72.0,
+            94.0
+          ],
+          "texture": "res://art_delivery/characters_v1/keeper_idle_right_00.png",
+          "type": "TextureRect"
+        },
+        {
+          "font": 17,
+          "name": "Name",
+          "rect": [
+            120.0,
+            466.0,
+            146.0,
+            76.0
+          ],
+          "text": "田中\n住民",
+          "type": "Label",
+          "wrap": true
+        },
+        {
+          "font": 14,
+          "name": "Traits",
+          "rect": [
+            36.0,
+            564.0,
+            230.0,
+            120.0
+          ],
+          "text": "特性\n生活：通常\n食欲：通常\n仕事：普通",
+          "type": "Label",
+          "wrap": true
+        },
+        {
+          "font": 16,
+          "name": "Work",
+          "rect": [
+            298.0,
+            470.0,
+            570.0,
+            105.0
+          ],
+          "text": "現在の仕事：仕事を探しています\n\n役割画面で仕事の優先度を変更できます。\n生活画面で時間割と食事優先を設定できます。",
+          "type": "Label",
+          "wrap": true
+        },
+        {
+          "color": "eadebfff",
+          "font": 14,
+          "name": "AutoCollect",
+          "rect": [
+            298.0,
+            578.0,
+            400.0,
+            34.0
+          ],
+          "text": "自動収集（指定仕事がないとき）",
+          "type": "CheckBox"
+        },
+        {
+          "color": "eadebfff",
+          "font": 14,
+          "name": "@Button@726",
+          "rect": [
+            298.0,
+            630.0,
+            180.0,
+            34.0
+          ],
+          "text": "仕事の優先度",
+          "type": "Button"
+        },
+        {
+          "color": "eadebfff",
+          "font": 13,
+          "name": "@Button@700",
+          "rect": [
+            30.0,
+            698.0,
+            118.0,
+            32.0
+          ],
+          "text": "徴兵する",
+          "type": "Button"
+        },
+        {
+          "color": "eadebfff",
+          "font": 16,
+          "name": "@Button@698",
+          "rect": [
+            580.0,
+            754.0,
+            116.0,
+            44.0
+          ],
+          "text": "生活",
+          "type": "Button"
+        }
+      ],
+      "window": [
+        1280,
+        800
+      ]
+    },
+    {
       "name": "architect",
       "nodes": [
         {
@@ -739,7 +974,7 @@
           "type": "Control"
         },
         {
-          "name": "@Panel@841",
+          "name": "@Panel@840",
           "rect": [
             8.0,
             438.0,
@@ -785,7 +1020,7 @@
           "type": "ScrollContainer"
         },
         {
-          "name": "@Control@835",
+          "name": "@Control@834",
           "rect": [
             136.0,
             450.0,
@@ -797,77 +1032,192 @@
         {
           "color": "bbd99cff",
           "font": 14,
-          "icon": "res://art_delivery/earth_stone_buildings_v1/soil/wall/normal/mask_00.png",
-          "name": "@Button@836",
+          "name": "@Button@835",
           "rect": [
             136.0,
             450.0,
             102.0,
             96.0
           ],
-          "text": "土壁",
+          "text": "",
           "type": "Button"
+        },
+        {
+          "name": "BuildIcon",
+          "rect": [
+            152.0,
+            459.0,
+            70.0,
+            68.0
+          ],
+          "texture": "res://art_delivery/earth_stone_buildings_v1/soil/wall/normal/mask_00.png",
+          "type": "TextureRect"
+        },
+        {
+          "font": 13,
+          "name": "BuildName",
+          "rect": [
+            139.0,
+            518.0,
+            96.0,
+            24.0
+          ],
+          "text": "土壁",
+          "type": "Label",
+          "wrap": false
         },
         {
           "color": "e7d9b5ff",
           "font": 14,
-          "icon": "res://art_delivery/wood_buildings_v1/wall/normal/wood_mask_00.png",
-          "name": "@Button@837",
+          "name": "@Button@836",
           "rect": [
             244.0,
             450.0,
             102.0,
             96.0
           ],
-          "text": "木壁",
+          "text": "",
           "type": "Button"
+        },
+        {
+          "name": "BuildIcon",
+          "rect": [
+            260.0,
+            459.0,
+            70.0,
+            68.0
+          ],
+          "texture": "res://art_delivery/wood_buildings_v1/wall/normal/wood_mask_00.png",
+          "type": "TextureRect"
+        },
+        {
+          "font": 13,
+          "name": "BuildName",
+          "rect": [
+            247.0,
+            518.0,
+            96.0,
+            24.0
+          ],
+          "text": "木壁",
+          "type": "Label",
+          "wrap": false
         },
         {
           "color": "e7d9b5ff",
           "font": 14,
-          "icon": "res://art_delivery/earth_stone_buildings_v1/stone/wall/normal/mask_00.png",
-          "name": "@Button@838",
+          "name": "@Button@837",
           "rect": [
             352.0,
             450.0,
             102.0,
             96.0
           ],
-          "text": "石壁",
+          "text": "",
           "type": "Button"
+        },
+        {
+          "name": "BuildIcon",
+          "rect": [
+            368.0,
+            459.0,
+            70.0,
+            68.0
+          ],
+          "texture": "res://art_delivery/earth_stone_buildings_v1/stone/wall/normal/mask_00.png",
+          "type": "TextureRect"
+        },
+        {
+          "font": 13,
+          "name": "BuildName",
+          "rect": [
+            355.0,
+            518.0,
+            96.0,
+            24.0
+          ],
+          "text": "石壁",
+          "type": "Label",
+          "wrap": false
         },
         {
           "color": "e7d9b5ff",
           "font": 14,
-          "icon": "res://art_delivery/wood_buildings_v1/door/horizontal_leaf_closed_normal.png",
-          "name": "@Button@839",
+          "name": "@Button@838",
           "rect": [
             460.0,
             450.0,
             102.0,
             96.0
           ],
-          "text": "ドア",
+          "text": "",
           "type": "Button"
+        },
+        {
+          "name": "BuildIcon",
+          "rect": [
+            476.0,
+            459.0,
+            70.0,
+            68.0
+          ],
+          "texture": "res://art_delivery/wood_buildings_v1/door/horizontal_leaf_closed_normal.png",
+          "type": "TextureRect"
+        },
+        {
+          "font": 13,
+          "name": "BuildName",
+          "rect": [
+            463.0,
+            518.0,
+            96.0,
+            24.0
+          ],
+          "text": "ドア",
+          "type": "Label",
+          "wrap": false
         },
         {
           "color": "e7d9b5ff",
           "font": 14,
-          "icon": "res://art_delivery/wood_buildings_v1/door/horizontal_leaf_closed_normal.png",
-          "name": "@Button@840",
+          "name": "@Button@839",
           "rect": [
             136.0,
             550.0,
             102.0,
             96.0
           ],
-          "text": "施錠",
+          "text": "",
           "type": "Button"
+        },
+        {
+          "name": "BuildIcon",
+          "rect": [
+            152.0,
+            559.0,
+            70.0,
+            68.0
+          ],
+          "texture": "res://art_delivery/wood_buildings_v1/door/horizontal_leaf_closed_normal.png",
+          "type": "TextureRect"
+        },
+        {
+          "font": 13,
+          "name": "BuildName",
+          "rect": [
+            139.0,
+            618.0,
+            96.0,
+            24.0
+          ],
+          "text": "施錠",
+          "type": "Label",
+          "wrap": false
         },
         {
           "color": "bbd99cff",
           "font": 13,
-          "name": "@Button@842",
+          "name": "@Button@841",
           "rect": [
             16.0,
             450.0,
@@ -880,7 +1230,7 @@
         {
           "color": "e7d9b5ff",
           "font": 13,
-          "name": "@Button@843",
+          "name": "@Button@842",
           "rect": [
             16.0,
             496.0,
@@ -893,7 +1243,7 @@
         {
           "color": "e7d9b5ff",
           "font": 13,
-          "name": "@Button@844",
+          "name": "@Button@843",
           "rect": [
             16.0,
             542.0,
@@ -906,7 +1256,7 @@
         {
           "color": "e7d9b5ff",
           "font": 13,
-          "name": "@Button@845",
+          "name": "@Button@844",
           "rect": [
             16.0,
             588.0,
@@ -919,7 +1269,570 @@
         {
           "color": "eadebfff",
           "font": 16,
-          "name": "@Button@846",
+          "name": "@Button@845",
+          "rect": [
+            580.0,
+            754.0,
+            116.0,
+            44.0
+          ],
+          "text": "生活",
+          "type": "Button"
+        }
+      ],
+      "window": [
+        1280,
+        800
+      ]
+    },
+    {
+      "name": "architect-equipment",
+      "nodes": [
+        {
+          "name": "@Control@13",
+          "rect": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "type": "Control"
+        },
+        {
+          "name": "@Panel@853",
+          "rect": [
+            8.0,
+            438.0,
+            904.0,
+            304.0
+          ],
+          "type": "Panel"
+        },
+        {
+          "font": 19,
+          "name": "BuildTitle",
+          "rect": [
+            602.0,
+            456.0,
+            282.0,
+            34.0
+          ],
+          "text": "建築物を選択",
+          "type": "Label",
+          "wrap": true
+        },
+        {
+          "font": 14,
+          "name": "BuildDescription",
+          "rect": [
+            602.0,
+            498.0,
+            282.0,
+            226.0
+          ],
+          "text": "左のカテゴリから建築物を選び、\nマップ上で位置を指定します。",
+          "type": "Label",
+          "wrap": true
+        },
+        {
+          "name": "ArchitectItems",
+          "rect": [
+            136.0,
+            450.0,
+            452.0,
+            278.0
+          ],
+          "type": "ScrollContainer"
+        },
+        {
+          "name": "@Control@848",
+          "rect": [
+            136.0,
+            450.0,
+            434.0,
+            100.0
+          ],
+          "type": "Control"
+        },
+        {
+          "color": "e7d9b5ff",
+          "font": 14,
+          "name": "@Button@849",
+          "rect": [
+            136.0,
+            450.0,
+            102.0,
+            96.0
+          ],
+          "text": "",
+          "type": "Button"
+        },
+        {
+          "crop": [
+            16.0,
+            4.0,
+            47.0,
+            60.0
+          ],
+          "name": "BuildIcon",
+          "rect": [
+            152.0,
+            459.0,
+            70.0,
+            56.0
+          ],
+          "texture": "res://art_delivery/bed_assets_v1/bed_ui.png",
+          "type": "TextureRect"
+        },
+        {
+          "font": 13,
+          "name": "BuildName",
+          "rect": [
+            139.0,
+            518.0,
+            96.0,
+            24.0
+          ],
+          "text": "ベッド",
+          "type": "Label",
+          "wrap": false
+        },
+        {
+          "color": "e7d9b5ff",
+          "font": 14,
+          "name": "@Button@850",
+          "rect": [
+            244.0,
+            450.0,
+            102.0,
+            96.0
+          ],
+          "text": "",
+          "type": "Button"
+        },
+        {
+          "crop": [
+            2.0,
+            8.0,
+            30.0,
+            23.0
+          ],
+          "name": "BuildIcon",
+          "rect": [
+            260.0,
+            459.0,
+            70.0,
+            56.0
+          ],
+          "texture": "res://art_delivery/crafting_assets_v1/ui_icons/cooking_bench.png",
+          "type": "TextureRect"
+        },
+        {
+          "font": 13,
+          "name": "BuildName",
+          "rect": [
+            247.0,
+            518.0,
+            96.0,
+            24.0
+          ],
+          "text": "調理台",
+          "type": "Label",
+          "wrap": false
+        },
+        {
+          "color": "e7d9b5ff",
+          "font": 14,
+          "name": "@Button@851",
+          "rect": [
+            352.0,
+            450.0,
+            102.0,
+            96.0
+          ],
+          "text": "",
+          "type": "Button"
+        },
+        {
+          "crop": [
+            2.0,
+            8.0,
+            30.0,
+            23.0
+          ],
+          "name": "BuildIcon",
+          "rect": [
+            368.0,
+            459.0,
+            70.0,
+            56.0
+          ],
+          "texture": "res://art_delivery/crafting_assets_v1/ui_icons/carpentry_bench.png",
+          "type": "TextureRect"
+        },
+        {
+          "font": 13,
+          "name": "BuildName",
+          "rect": [
+            355.0,
+            518.0,
+            96.0,
+            24.0
+          ],
+          "text": "木工台",
+          "type": "Label",
+          "wrap": false
+        },
+        {
+          "color": "e7d9b5ff",
+          "font": 14,
+          "name": "@Button@852",
+          "rect": [
+            460.0,
+            450.0,
+            102.0,
+            96.0
+          ],
+          "text": "",
+          "type": "Button"
+        },
+        {
+          "crop": [
+            2.0,
+            7.0,
+            30.0,
+            24.0
+          ],
+          "name": "BuildIcon",
+          "rect": [
+            476.0,
+            459.0,
+            70.0,
+            56.0
+          ],
+          "texture": "res://art_delivery/crafting_assets_v1/ui_icons/sewing_bench.png",
+          "type": "TextureRect"
+        },
+        {
+          "font": 13,
+          "name": "BuildName",
+          "rect": [
+            463.0,
+            518.0,
+            96.0,
+            24.0
+          ],
+          "text": "裁縫台",
+          "type": "Label",
+          "wrap": false
+        },
+        {
+          "color": "e7d9b5ff",
+          "font": 13,
+          "name": "@Button@854",
+          "rect": [
+            16.0,
+            450.0,
+            108.0,
+            40.0
+          ],
+          "text": "壁と扉",
+          "type": "Button"
+        },
+        {
+          "color": "e7d9b5ff",
+          "font": 13,
+          "name": "@Button@855",
+          "rect": [
+            16.0,
+            496.0,
+            108.0,
+            40.0
+          ],
+          "text": "床",
+          "type": "Button"
+        },
+        {
+          "color": "bbd99cff",
+          "font": 13,
+          "name": "@Button@856",
+          "rect": [
+            16.0,
+            542.0,
+            108.0,
+            40.0
+          ],
+          "text": "設置",
+          "type": "Button"
+        },
+        {
+          "color": "e7d9b5ff",
+          "font": 13,
+          "name": "@Button@857",
+          "rect": [
+            16.0,
+            588.0,
+            108.0,
+            40.0
+          ],
+          "text": "ゾーン",
+          "type": "Button"
+        },
+        {
+          "color": "eadebfff",
+          "font": 16,
+          "name": "@Button@858",
+          "rect": [
+            580.0,
+            754.0,
+            116.0,
+            44.0
+          ],
+          "text": "生活",
+          "type": "Button"
+        }
+      ],
+      "window": [
+        1280,
+        800
+      ]
+    },
+    {
+      "name": "architect-floors",
+      "nodes": [
+        {
+          "name": "@Control@13",
+          "rect": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "type": "Control"
+        },
+        {
+          "name": "@Panel@865",
+          "rect": [
+            8.0,
+            438.0,
+            904.0,
+            304.0
+          ],
+          "type": "Panel"
+        },
+        {
+          "font": 19,
+          "name": "BuildTitle",
+          "rect": [
+            602.0,
+            456.0,
+            282.0,
+            34.0
+          ],
+          "text": "建築物を選択",
+          "type": "Label",
+          "wrap": true
+        },
+        {
+          "font": 14,
+          "name": "BuildDescription",
+          "rect": [
+            602.0,
+            498.0,
+            282.0,
+            226.0
+          ],
+          "text": "左のカテゴリから建築物を選び、\nマップ上で位置を指定します。",
+          "type": "Label",
+          "wrap": true
+        },
+        {
+          "name": "ArchitectItems",
+          "rect": [
+            136.0,
+            450.0,
+            452.0,
+            278.0
+          ],
+          "type": "ScrollContainer"
+        },
+        {
+          "name": "@Control@861",
+          "rect": [
+            136.0,
+            450.0,
+            434.0,
+            100.0
+          ],
+          "type": "Control"
+        },
+        {
+          "color": "e7d9b5ff",
+          "font": 14,
+          "name": "@Button@862",
+          "rect": [
+            136.0,
+            450.0,
+            102.0,
+            96.0
+          ],
+          "text": "",
+          "type": "Button"
+        },
+        {
+          "name": "BuildIcon",
+          "rect": [
+            152.0,
+            459.0,
+            70.0,
+            56.0
+          ],
+          "texture": "res://art_delivery/earth_stone_buildings_v1/soil/floor/base.png",
+          "type": "TextureRect"
+        },
+        {
+          "font": 13,
+          "name": "BuildName",
+          "rect": [
+            139.0,
+            518.0,
+            96.0,
+            24.0
+          ],
+          "text": "土床",
+          "type": "Label",
+          "wrap": false
+        },
+        {
+          "color": "e7d9b5ff",
+          "font": 14,
+          "name": "@Button@863",
+          "rect": [
+            244.0,
+            450.0,
+            102.0,
+            96.0
+          ],
+          "text": "",
+          "type": "Button"
+        },
+        {
+          "name": "BuildIcon",
+          "rect": [
+            260.0,
+            459.0,
+            70.0,
+            56.0
+          ],
+          "texture": "res://art_delivery/wood_buildings_v1/floor/wood_00.png",
+          "type": "TextureRect"
+        },
+        {
+          "font": 13,
+          "name": "BuildName",
+          "rect": [
+            247.0,
+            518.0,
+            96.0,
+            24.0
+          ],
+          "text": "木床",
+          "type": "Label",
+          "wrap": false
+        },
+        {
+          "color": "e7d9b5ff",
+          "font": 14,
+          "name": "@Button@864",
+          "rect": [
+            352.0,
+            450.0,
+            102.0,
+            96.0
+          ],
+          "text": "",
+          "type": "Button"
+        },
+        {
+          "name": "BuildIcon",
+          "rect": [
+            368.0,
+            459.0,
+            70.0,
+            56.0
+          ],
+          "texture": "res://art_delivery/earth_stone_buildings_v1/stone/floor/base.png",
+          "type": "TextureRect"
+        },
+        {
+          "font": 13,
+          "name": "BuildName",
+          "rect": [
+            355.0,
+            518.0,
+            96.0,
+            24.0
+          ],
+          "text": "石床",
+          "type": "Label",
+          "wrap": false
+        },
+        {
+          "color": "e7d9b5ff",
+          "font": 13,
+          "name": "@Button@866",
+          "rect": [
+            16.0,
+            450.0,
+            108.0,
+            40.0
+          ],
+          "text": "壁と扉",
+          "type": "Button"
+        },
+        {
+          "color": "bbd99cff",
+          "font": 13,
+          "name": "@Button@867",
+          "rect": [
+            16.0,
+            496.0,
+            108.0,
+            40.0
+          ],
+          "text": "床",
+          "type": "Button"
+        },
+        {
+          "color": "e7d9b5ff",
+          "font": 13,
+          "name": "@Button@868",
+          "rect": [
+            16.0,
+            542.0,
+            108.0,
+            40.0
+          ],
+          "text": "設置",
+          "type": "Button"
+        },
+        {
+          "color": "e7d9b5ff",
+          "font": 13,
+          "name": "@Button@869",
+          "rect": [
+            16.0,
+            588.0,
+            108.0,
+            40.0
+          ],
+          "text": "ゾーン",
+          "type": "Button"
+        },
+        {
+          "color": "eadebfff",
+          "font": 16,
+          "name": "@Button@870",
           "rect": [
             580.0,
             754.0,
@@ -1010,7 +1923,7 @@
         },
         {
           "font": 13,
-          "name": "@Label@956",
+          "name": "@Label@980",
           "rect": [
             28.0,
             424.0,
@@ -1024,7 +1937,7 @@
         {
           "color": "eadebfff",
           "font": 14,
-          "name": "@Button@957",
+          "name": "@Button@981",
           "rect": [
             28.0,
             452.0,
@@ -1037,7 +1950,7 @@
         {
           "color": "eadebfff",
           "font": 14,
-          "name": "@Button@958",
+          "name": "@Button@982",
           "rect": [
             116.0,
             452.0,
@@ -1062,7 +1975,7 @@
         },
         {
           "font": 16,
-          "name": "@Label@969",
+          "name": "@Label@993",
           "rect": [
             28.0,
             494.0,
@@ -1075,7 +1988,7 @@
         },
         {
           "font": 16,
-          "name": "@Label@970",
+          "name": "@Label@994",
           "rect": [
             480.0,
             420.0,
@@ -1097,7 +2010,7 @@
           "type": "ScrollContainer"
         },
         {
-          "name": "@VBoxContainer@973",
+          "name": "@VBoxContainer@997",
           "rect": [
             480.0,
             450.0,
@@ -1143,7 +2056,7 @@
         },
         {
           "font": 12,
-          "name": "@Label@987",
+          "name": "@Label@1011",
           "rect": [
             28.0,
             686.0,
@@ -1156,7 +2069,7 @@
         },
         {
           "font": 12,
-          "name": "@Label@988",
+          "name": "@Label@1012",
           "rect": [
             480.0,
             652.0,
@@ -1183,7 +2096,7 @@
         {
           "color": "eadebfff",
           "font": 14,
-          "name": "@Button@989",
+          "name": "@Button@1013",
           "rect": [
             28.0,
             710.0,
@@ -1196,7 +2109,7 @@
         {
           "color": "eadebfff",
           "font": 14,
-          "name": "@Button@990",
+          "name": "@Button@1014",
           "rect": [
             158.0,
             710.0,
@@ -1209,7 +2122,7 @@
         {
           "color": "eadebfff",
           "font": 14,
-          "name": "@Button@991",
+          "name": "@Button@1015",
           "rect": [
             288.0,
             710.0,
@@ -1222,7 +2135,7 @@
         {
           "color": "eadebfff",
           "font": 16,
-          "name": "@Button@944",
+          "name": "@Button@968",
           "rect": [
             580.0,
             754.0,
@@ -1256,14 +2169,14 @@
           "rect": [
             16.0,
             402.0,
-            896.0,
+            604.0,
             340.0
           ],
           "type": "Panel"
         },
         {
           "font": 20,
-          "name": "@Label@995",
+          "name": "@Label@1019",
           "rect": [
             30.0,
             414.0,
@@ -1277,9 +2190,9 @@
         {
           "color": "eadebfff",
           "font": 14,
-          "name": "@Button@996",
+          "name": "@Button@1020",
           "rect": [
-            806.0,
+            514.0,
             412.0,
             92.0,
             32.0
@@ -1302,7 +2215,7 @@
         },
         {
           "font": 17,
-          "name": "@Label@997",
+          "name": "@Label@1021",
           "rect": [
             316.0,
             464.0,
@@ -1324,7 +2237,7 @@
           "type": "ScrollContainer"
         },
         {
-          "name": "@VBoxContainer@1000",
+          "name": "@VBoxContainer@1024",
           "rect": [
             316.0,
             498.0,
@@ -1336,7 +2249,7 @@
         {
           "color": "eadebfff",
           "font": 14,
-          "name": "@Button@1001",
+          "name": "@Button@1025",
           "rect": [
             316.0,
             498.0,
@@ -1349,7 +2262,7 @@
         {
           "color": "eadebfff",
           "font": 14,
-          "name": "@Button@1002",
+          "name": "@Button@1026",
           "rect": [
             316.0,
             536.0,
@@ -1360,293 +2273,8 @@
           "type": "Button"
         },
         {
-          "name": "RoomPreview",
-          "rect": [
-            626.0,
-            462.0,
-            262.0,
-            242.0
-          ],
-          "tiles": [
-            {
-              "kind": "wood_wall",
-              "rect": [
-                16.0,
-                6.0,
-                46.0,
-                46.0
-              ],
-              "texture": "res://art_delivery/wood_buildings_v1/wall/normal/wood_mask_06.png"
-            },
-            {
-              "kind": "wood_wall",
-              "rect": [
-                16.0,
-                52.0,
-                46.0,
-                46.0
-              ],
-              "texture": "res://art_delivery/wood_buildings_v1/wall/normal/wood_mask_05.png"
-            },
-            {
-              "kind": "wood_wall",
-              "rect": [
-                16.0,
-                98.0,
-                46.0,
-                46.0
-              ],
-              "texture": "res://art_delivery/wood_buildings_v1/wall/normal/wood_mask_05.png"
-            },
-            {
-              "kind": "wood_wall",
-              "rect": [
-                16.0,
-                144.0,
-                46.0,
-                46.0
-              ],
-              "texture": "res://art_delivery/wood_buildings_v1/wall/normal/wood_mask_05.png"
-            },
-            {
-              "kind": "wood_wall",
-              "rect": [
-                16.0,
-                190.0,
-                46.0,
-                46.0
-              ],
-              "texture": "res://art_delivery/wood_buildings_v1/wall/normal/wood_mask_03.png"
-            },
-            {
-              "kind": "wood_wall",
-              "rect": [
-                62.0,
-                6.0,
-                46.0,
-                46.0
-              ],
-              "texture": "res://art_delivery/wood_buildings_v1/wall/normal/wood_mask_10.png"
-            },
-            {
-              "kind": "",
-              "rect": [
-                62.0,
-                52.0,
-                46.0,
-                46.0
-              ],
-              "texture": "res://art_delivery/wood_buildings_v1/floor/wood_00.png"
-            },
-            {
-              "kind": "",
-              "rect": [
-                62.0,
-                98.0,
-                46.0,
-                46.0
-              ],
-              "texture": "res://art_delivery/wood_buildings_v1/floor/wood_00.png"
-            },
-            {
-              "kind": "",
-              "rect": [
-                62.0,
-                144.0,
-                46.0,
-                46.0
-              ],
-              "texture": "res://art_delivery/wood_buildings_v1/floor/wood_00.png"
-            },
-            {
-              "kind": "wood_wall",
-              "rect": [
-                62.0,
-                190.0,
-                46.0,
-                46.0
-              ],
-              "texture": "res://art_delivery/wood_buildings_v1/wall/normal/wood_mask_10.png"
-            },
-            {
-              "kind": "door",
-              "rect": [
-                108.0,
-                6.0,
-                46.0,
-                46.0
-              ],
-              "texture": "res://art_delivery/wood_buildings_v1/door/horizontal_leaf_closed_normal.png"
-            },
-            {
-              "kind": "",
-              "rect": [
-                108.0,
-                52.0,
-                46.0,
-                46.0
-              ],
-              "texture": "res://art_delivery/wood_buildings_v1/floor/wood_00.png"
-            },
-            {
-              "kind": "",
-              "rect": [
-                108.0,
-                98.0,
-                46.0,
-                46.0
-              ],
-              "texture": "res://art_delivery/wood_buildings_v1/floor/wood_00.png"
-            },
-            {
-              "kind": "bed",
-              "rect": [
-                108.0,
-                98.0,
-                46.0,
-                46.0
-              ],
-              "texture": ""
-            },
-            {
-              "kind": "",
-              "rect": [
-                108.0,
-                144.0,
-                46.0,
-                46.0
-              ],
-              "texture": "res://art_delivery/wood_buildings_v1/floor/wood_00.png"
-            },
-            {
-              "kind": "wood_wall",
-              "rect": [
-                108.0,
-                190.0,
-                46.0,
-                46.0
-              ],
-              "texture": "res://art_delivery/wood_buildings_v1/wall/normal/wood_mask_10.png"
-            },
-            {
-              "kind": "wood_wall",
-              "rect": [
-                154.0,
-                6.0,
-                46.0,
-                46.0
-              ],
-              "texture": "res://art_delivery/wood_buildings_v1/wall/normal/wood_mask_10.png"
-            },
-            {
-              "kind": "",
-              "rect": [
-                154.0,
-                52.0,
-                46.0,
-                46.0
-              ],
-              "texture": "res://art_delivery/wood_buildings_v1/floor/wood_00.png"
-            },
-            {
-              "kind": "",
-              "rect": [
-                154.0,
-                98.0,
-                46.0,
-                46.0
-              ],
-              "texture": "res://art_delivery/wood_buildings_v1/floor/wood_00.png"
-            },
-            {
-              "kind": "",
-              "rect": [
-                154.0,
-                144.0,
-                46.0,
-                46.0
-              ],
-              "texture": "res://art_delivery/wood_buildings_v1/floor/wood_00.png"
-            },
-            {
-              "kind": "wood_wall",
-              "rect": [
-                154.0,
-                190.0,
-                46.0,
-                46.0
-              ],
-              "texture": "res://art_delivery/wood_buildings_v1/wall/normal/wood_mask_10.png"
-            },
-            {
-              "kind": "wood_wall",
-              "rect": [
-                200.0,
-                6.0,
-                46.0,
-                46.0
-              ],
-              "texture": "res://art_delivery/wood_buildings_v1/wall/normal/wood_mask_12.png"
-            },
-            {
-              "kind": "wood_wall",
-              "rect": [
-                200.0,
-                52.0,
-                46.0,
-                46.0
-              ],
-              "texture": "res://art_delivery/wood_buildings_v1/wall/normal/wood_mask_05.png"
-            },
-            {
-              "kind": "wood_wall",
-              "rect": [
-                200.0,
-                98.0,
-                46.0,
-                46.0
-              ],
-              "texture": "res://art_delivery/wood_buildings_v1/wall/normal/wood_mask_05.png"
-            },
-            {
-              "kind": "wood_wall",
-              "rect": [
-                200.0,
-                144.0,
-                46.0,
-                46.0
-              ],
-              "texture": "res://art_delivery/wood_buildings_v1/wall/normal/wood_mask_05.png"
-            },
-            {
-              "kind": "wood_wall",
-              "rect": [
-                200.0,
-                190.0,
-                46.0,
-                46.0
-              ],
-              "texture": "res://art_delivery/wood_buildings_v1/wall/normal/wood_mask_09.png"
-            }
-          ],
-          "type": "Control"
-        },
-        {
           "font": 12,
-          "name": "@Label@1003",
-          "rect": [
-            680.0,
-            712.0,
-            72.0,
-            18.0
-          ],
-          "text": "室内見取り図",
-          "type": "Label",
-          "wrap": false
-        },
-        {
-          "font": 12,
-          "name": "@Label@1004",
+          "name": "@Label@1027",
           "rect": [
             30.0,
             712.0,
@@ -1660,7 +2288,7 @@
         {
           "color": "eadebfff",
           "font": 16,
-          "name": "@Button@993",
+          "name": "@Button@1017",
           "rect": [
             580.0,
             754.0,
@@ -1728,7 +2356,7 @@
         {
           "color": "bbd99cff",
           "font": 14,
-          "name": "@Button@1081",
+          "name": "@Button@1080",
           "rect": [
             322.0,
             412.0,
@@ -1741,7 +2369,7 @@
         {
           "color": "e7d9b5ff",
           "font": 14,
-          "name": "@Button@1082",
+          "name": "@Button@1081",
           "rect": [
             418.0,
             412.0,
@@ -1754,7 +2382,7 @@
         {
           "color": "e7d9b5ff",
           "font": 14,
-          "name": "@Button@1083",
+          "name": "@Button@1082",
           "rect": [
             514.0,
             412.0,
@@ -1767,7 +2395,7 @@
         {
           "color": "e7d9b5ff",
           "font": 14,
-          "name": "@Button@1084",
+          "name": "@Button@1083",
           "rect": [
             610.0,
             412.0,
@@ -1780,7 +2408,7 @@
         {
           "color": "eadebfff",
           "font": 14,
-          "name": "@Button@1065",
+          "name": "@Button@1064",
           "rect": [
             710.0,
             412.0,
@@ -1793,7 +2421,7 @@
         {
           "color": "eadebfff",
           "font": 14,
-          "name": "@Button@1085",
+          "name": "@Button@1084",
           "rect": [
             806.0,
             412.0,
@@ -1804,7 +2432,7 @@
           "type": "Button"
         },
         {
-          "name": "@TextureRect@1086",
+          "name": "@TextureRect@1085",
           "rect": [
             36.0,
             464.0,
@@ -1865,7 +2493,7 @@
         },
         {
           "maximum": 30.0,
-          "name": "@ProgressBar@1087",
+          "name": "@ProgressBar@1086",
           "rect": [
             360.0,
             468.0,
@@ -1903,7 +2531,7 @@
         },
         {
           "maximum": 100.0,
-          "name": "@ProgressBar@1088",
+          "name": "@ProgressBar@1087",
           "rect": [
             360.0,
             495.0,
@@ -1941,7 +2569,7 @@
         },
         {
           "maximum": 100.0,
-          "name": "@ProgressBar@1089",
+          "name": "@ProgressBar@1088",
           "rect": [
             360.0,
             522.0,
@@ -1979,7 +2607,7 @@
         },
         {
           "maximum": 100.0,
-          "name": "@ProgressBar@1090",
+          "name": "@ProgressBar@1089",
           "rect": [
             360.0,
             549.0,
@@ -2017,7 +2645,7 @@
         },
         {
           "maximum": 100.0,
-          "name": "@ProgressBar@1091",
+          "name": "@ProgressBar@1090",
           "rect": [
             360.0,
             576.0,
@@ -2096,7 +2724,7 @@
           "color": "eadebfff",
           "font": 13,
           "icon": "",
-          "name": "@Button@1061",
+          "name": "@Button@1060",
           "rect": [
             30.0,
             698.0,
@@ -2110,7 +2738,7 @@
           "color": "eadebfff",
           "font": 13,
           "icon": "",
-          "name": "@Button@1062",
+          "name": "@Button@1061",
           "rect": [
             154.0,
             698.0,
@@ -2124,7 +2752,7 @@
           "color": "eadebfff",
           "font": 13,
           "icon": "",
-          "name": "@Button@1063",
+          "name": "@Button@1062",
           "rect": [
             278.0,
             698.0,
@@ -2137,7 +2765,7 @@
         {
           "color": "eadebfff",
           "font": 13,
-          "name": "@Button@1066",
+          "name": "@Button@1065",
           "rect": [
             402.0,
             698.0,
@@ -2150,7 +2778,7 @@
         {
           "color": "eadebfff",
           "font": 16,
-          "name": "@Button@1064",
+          "name": "@Button@1063",
           "rect": [
             580.0,
             754.0,
@@ -2218,7 +2846,7 @@
         {
           "color": "e7d9b5ff",
           "font": 14,
-          "name": "@Button@1112",
+          "name": "@Button@1111",
           "rect": [
             322.0,
             412.0,
@@ -2231,7 +2859,7 @@
         {
           "color": "bbd99cff",
           "font": 14,
-          "name": "@Button@1113",
+          "name": "@Button@1112",
           "rect": [
             418.0,
             412.0,
@@ -2244,7 +2872,7 @@
         {
           "color": "e7d9b5ff",
           "font": 14,
-          "name": "@Button@1114",
+          "name": "@Button@1113",
           "rect": [
             514.0,
             412.0,
@@ -2257,7 +2885,7 @@
         {
           "color": "e7d9b5ff",
           "font": 14,
-          "name": "@Button@1115",
+          "name": "@Button@1114",
           "rect": [
             610.0,
             412.0,
@@ -2270,7 +2898,7 @@
         {
           "color": "eadebfff",
           "font": 14,
-          "name": "@Button@1096",
+          "name": "@Button@1095",
           "rect": [
             710.0,
             412.0,
@@ -2283,7 +2911,7 @@
         {
           "color": "eadebfff",
           "font": 14,
-          "name": "@Button@1116",
+          "name": "@Button@1115",
           "rect": [
             806.0,
             412.0,
@@ -2294,7 +2922,7 @@
           "type": "Button"
         },
         {
-          "name": "@TextureRect@1117",
+          "name": "@TextureRect@1116",
           "rect": [
             36.0,
             464.0,
@@ -2346,7 +2974,7 @@
         {
           "color": "eadebfff",
           "font": 13,
-          "name": "@Button@1099",
+          "name": "@Button@1098",
           "rect": [
             30.0,
             698.0,
@@ -2359,7 +2987,7 @@
         {
           "color": "eadebfff",
           "font": 13,
-          "name": "@Button@1100",
+          "name": "@Button@1099",
           "rect": [
             154.0,
             698.0,
@@ -2372,7 +3000,7 @@
         {
           "color": "eadebfff",
           "font": 13,
-          "name": "@Button@1098",
+          "name": "@Button@1097",
           "rect": [
             278.0,
             698.0,
@@ -2385,7 +3013,242 @@
         {
           "color": "eadebfff",
           "font": 16,
-          "name": "@Button@1095",
+          "name": "@Button@1094",
+          "rect": [
+            580.0,
+            754.0,
+            116.0,
+            44.0
+          ],
+          "text": "生活",
+          "type": "Button"
+        }
+      ],
+      "window": [
+        1600,
+        1000
+      ]
+    },
+    {
+      "name": "resident-work",
+      "nodes": [
+        {
+          "name": "@Control@13",
+          "rect": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "type": "Control"
+        },
+        {
+          "name": "ResidentDetails",
+          "rect": [
+            16.0,
+            402.0,
+            896.0,
+            340.0
+          ],
+          "type": "Panel"
+        },
+        {
+          "font": 20,
+          "name": "Heading",
+          "rect": [
+            30.0,
+            414.0,
+            90.0,
+            30.0
+          ],
+          "text": "住民詳細",
+          "type": "Label",
+          "wrap": true
+        },
+        {
+          "color": "eadebfff",
+          "font": 14,
+          "name": "ResidentPicker",
+          "rect": [
+            128.0,
+            412.0,
+            180.0,
+            32.0
+          ],
+          "text": "田中",
+          "type": "OptionButton"
+        },
+        {
+          "color": "e7d9b5ff",
+          "font": 14,
+          "name": "@Button@1226",
+          "rect": [
+            322.0,
+            412.0,
+            90.0,
+            32.0
+          ],
+          "text": "ステータス",
+          "type": "Button"
+        },
+        {
+          "color": "e7d9b5ff",
+          "font": 14,
+          "name": "@Button@1227",
+          "rect": [
+            418.0,
+            412.0,
+            90.0,
+            32.0
+          ],
+          "text": "装備",
+          "type": "Button"
+        },
+        {
+          "color": "bbd99cff",
+          "font": 14,
+          "name": "@Button@1228",
+          "rect": [
+            514.0,
+            412.0,
+            90.0,
+            32.0
+          ],
+          "text": "仕事",
+          "type": "Button"
+        },
+        {
+          "color": "e7d9b5ff",
+          "font": 14,
+          "name": "@Button@1229",
+          "rect": [
+            610.0,
+            412.0,
+            90.0,
+            32.0
+          ],
+          "text": "履歴",
+          "type": "Button"
+        },
+        {
+          "color": "eadebfff",
+          "font": 14,
+          "name": "@Button@1210",
+          "rect": [
+            710.0,
+            412.0,
+            84.0,
+            32.0
+          ],
+          "text": "生活",
+          "type": "Button"
+        },
+        {
+          "color": "eadebfff",
+          "font": 14,
+          "name": "@Button@1230",
+          "rect": [
+            806.0,
+            412.0,
+            92.0,
+            32.0
+          ],
+          "text": "閉じる",
+          "type": "Button"
+        },
+        {
+          "name": "@TextureRect@1231",
+          "rect": [
+            36.0,
+            464.0,
+            72.0,
+            94.0
+          ],
+          "texture": "res://art_delivery/characters_v1/keeper_idle_right_00.png",
+          "type": "TextureRect"
+        },
+        {
+          "font": 17,
+          "name": "Name",
+          "rect": [
+            120.0,
+            466.0,
+            146.0,
+            76.0
+          ],
+          "text": "田中\n住民",
+          "type": "Label",
+          "wrap": true
+        },
+        {
+          "font": 14,
+          "name": "Traits",
+          "rect": [
+            36.0,
+            564.0,
+            230.0,
+            120.0
+          ],
+          "text": "特性\n生活：通常\n食欲：通常\n仕事：普通",
+          "type": "Label",
+          "wrap": true
+        },
+        {
+          "font": 16,
+          "name": "Work",
+          "rect": [
+            298.0,
+            470.0,
+            570.0,
+            105.0
+          ],
+          "text": "現在の仕事：仕事を探しています\n\n役割画面で仕事の優先度を変更できます。\n生活画面で時間割と食事優先を設定できます。",
+          "type": "Label",
+          "wrap": true
+        },
+        {
+          "color": "eadebfff",
+          "font": 14,
+          "name": "AutoCollect",
+          "rect": [
+            298.0,
+            578.0,
+            400.0,
+            34.0
+          ],
+          "text": "自動収集（指定仕事がないとき）",
+          "type": "CheckBox"
+        },
+        {
+          "color": "eadebfff",
+          "font": 14,
+          "name": "@Button@1237",
+          "rect": [
+            298.0,
+            630.0,
+            180.0,
+            34.0
+          ],
+          "text": "仕事の優先度",
+          "type": "Button"
+        },
+        {
+          "color": "eadebfff",
+          "font": 13,
+          "name": "@Button@1211",
+          "rect": [
+            30.0,
+            698.0,
+            118.0,
+            32.0
+          ],
+          "text": "徴兵する",
+          "type": "Button"
+        },
+        {
+          "color": "eadebfff",
+          "font": 16,
+          "name": "@Button@1209",
           "rect": [
             580.0,
             754.0,
@@ -2415,7 +3278,7 @@
           "type": "Control"
         },
         {
-          "name": "@Panel@1353",
+          "name": "@Panel@1349",
           "rect": [
             8.0,
             438.0,
@@ -2461,7 +3324,7 @@
           "type": "ScrollContainer"
         },
         {
-          "name": "@Control@1347",
+          "name": "@Control@1343",
           "rect": [
             136.0,
             450.0,
@@ -2473,77 +3336,192 @@
         {
           "color": "bbd99cff",
           "font": 14,
-          "icon": "res://art_delivery/earth_stone_buildings_v1/soil/wall/normal/mask_00.png",
-          "name": "@Button@1348",
+          "name": "@Button@1344",
           "rect": [
             136.0,
             450.0,
             102.0,
             96.0
           ],
-          "text": "土壁",
+          "text": "",
           "type": "Button"
+        },
+        {
+          "name": "BuildIcon",
+          "rect": [
+            152.0,
+            459.0,
+            70.0,
+            68.0
+          ],
+          "texture": "res://art_delivery/earth_stone_buildings_v1/soil/wall/normal/mask_00.png",
+          "type": "TextureRect"
+        },
+        {
+          "font": 13,
+          "name": "BuildName",
+          "rect": [
+            139.0,
+            518.0,
+            96.0,
+            24.0
+          ],
+          "text": "土壁",
+          "type": "Label",
+          "wrap": false
         },
         {
           "color": "e7d9b5ff",
           "font": 14,
-          "icon": "res://art_delivery/wood_buildings_v1/wall/normal/wood_mask_00.png",
-          "name": "@Button@1349",
+          "name": "@Button@1345",
           "rect": [
             244.0,
             450.0,
             102.0,
             96.0
           ],
-          "text": "木壁",
+          "text": "",
           "type": "Button"
+        },
+        {
+          "name": "BuildIcon",
+          "rect": [
+            260.0,
+            459.0,
+            70.0,
+            68.0
+          ],
+          "texture": "res://art_delivery/wood_buildings_v1/wall/normal/wood_mask_00.png",
+          "type": "TextureRect"
+        },
+        {
+          "font": 13,
+          "name": "BuildName",
+          "rect": [
+            247.0,
+            518.0,
+            96.0,
+            24.0
+          ],
+          "text": "木壁",
+          "type": "Label",
+          "wrap": false
         },
         {
           "color": "e7d9b5ff",
           "font": 14,
-          "icon": "res://art_delivery/earth_stone_buildings_v1/stone/wall/normal/mask_00.png",
-          "name": "@Button@1350",
+          "name": "@Button@1346",
           "rect": [
             352.0,
             450.0,
             102.0,
             96.0
           ],
-          "text": "石壁",
+          "text": "",
           "type": "Button"
+        },
+        {
+          "name": "BuildIcon",
+          "rect": [
+            368.0,
+            459.0,
+            70.0,
+            68.0
+          ],
+          "texture": "res://art_delivery/earth_stone_buildings_v1/stone/wall/normal/mask_00.png",
+          "type": "TextureRect"
+        },
+        {
+          "font": 13,
+          "name": "BuildName",
+          "rect": [
+            355.0,
+            518.0,
+            96.0,
+            24.0
+          ],
+          "text": "石壁",
+          "type": "Label",
+          "wrap": false
         },
         {
           "color": "e7d9b5ff",
           "font": 14,
-          "icon": "res://art_delivery/wood_buildings_v1/door/horizontal_leaf_closed_normal.png",
-          "name": "@Button@1351",
+          "name": "@Button@1347",
           "rect": [
             460.0,
             450.0,
             102.0,
             96.0
           ],
-          "text": "ドア",
+          "text": "",
           "type": "Button"
+        },
+        {
+          "name": "BuildIcon",
+          "rect": [
+            476.0,
+            459.0,
+            70.0,
+            68.0
+          ],
+          "texture": "res://art_delivery/wood_buildings_v1/door/horizontal_leaf_closed_normal.png",
+          "type": "TextureRect"
+        },
+        {
+          "font": 13,
+          "name": "BuildName",
+          "rect": [
+            463.0,
+            518.0,
+            96.0,
+            24.0
+          ],
+          "text": "ドア",
+          "type": "Label",
+          "wrap": false
         },
         {
           "color": "e7d9b5ff",
           "font": 14,
-          "icon": "res://art_delivery/wood_buildings_v1/door/horizontal_leaf_closed_normal.png",
-          "name": "@Button@1352",
+          "name": "@Button@1348",
           "rect": [
             136.0,
             550.0,
             102.0,
             96.0
           ],
-          "text": "施錠",
+          "text": "",
           "type": "Button"
+        },
+        {
+          "name": "BuildIcon",
+          "rect": [
+            152.0,
+            559.0,
+            70.0,
+            68.0
+          ],
+          "texture": "res://art_delivery/wood_buildings_v1/door/horizontal_leaf_closed_normal.png",
+          "type": "TextureRect"
+        },
+        {
+          "font": 13,
+          "name": "BuildName",
+          "rect": [
+            139.0,
+            618.0,
+            96.0,
+            24.0
+          ],
+          "text": "施錠",
+          "type": "Label",
+          "wrap": false
         },
         {
           "color": "bbd99cff",
           "font": 13,
-          "name": "@Button@1354",
+          "name": "@Button@1350",
           "rect": [
             16.0,
             450.0,
@@ -2556,7 +3534,7 @@
         {
           "color": "e7d9b5ff",
           "font": 13,
-          "name": "@Button@1355",
+          "name": "@Button@1351",
           "rect": [
             16.0,
             496.0,
@@ -2569,7 +3547,7 @@
         {
           "color": "e7d9b5ff",
           "font": 13,
-          "name": "@Button@1356",
+          "name": "@Button@1352",
           "rect": [
             16.0,
             542.0,
@@ -2582,7 +3560,7 @@
         {
           "color": "e7d9b5ff",
           "font": 13,
-          "name": "@Button@1357",
+          "name": "@Button@1353",
           "rect": [
             16.0,
             588.0,
@@ -2595,7 +3573,570 @@
         {
           "color": "eadebfff",
           "font": 16,
+          "name": "@Button@1354",
+          "rect": [
+            580.0,
+            754.0,
+            116.0,
+            44.0
+          ],
+          "text": "生活",
+          "type": "Button"
+        }
+      ],
+      "window": [
+        1600,
+        1000
+      ]
+    },
+    {
+      "name": "architect-equipment",
+      "nodes": [
+        {
+          "name": "@Control@13",
+          "rect": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "type": "Control"
+        },
+        {
+          "name": "@Panel@1362",
+          "rect": [
+            8.0,
+            438.0,
+            904.0,
+            304.0
+          ],
+          "type": "Panel"
+        },
+        {
+          "font": 19,
+          "name": "BuildTitle",
+          "rect": [
+            602.0,
+            456.0,
+            282.0,
+            34.0
+          ],
+          "text": "建築物を選択",
+          "type": "Label",
+          "wrap": true
+        },
+        {
+          "font": 14,
+          "name": "BuildDescription",
+          "rect": [
+            602.0,
+            498.0,
+            282.0,
+            226.0
+          ],
+          "text": "左のカテゴリから建築物を選び、\nマップ上で位置を指定します。",
+          "type": "Label",
+          "wrap": true
+        },
+        {
+          "name": "ArchitectItems",
+          "rect": [
+            136.0,
+            450.0,
+            452.0,
+            278.0
+          ],
+          "type": "ScrollContainer"
+        },
+        {
+          "name": "@Control@1357",
+          "rect": [
+            136.0,
+            450.0,
+            434.0,
+            100.0
+          ],
+          "type": "Control"
+        },
+        {
+          "color": "e7d9b5ff",
+          "font": 14,
           "name": "@Button@1358",
+          "rect": [
+            136.0,
+            450.0,
+            102.0,
+            96.0
+          ],
+          "text": "",
+          "type": "Button"
+        },
+        {
+          "crop": [
+            16.0,
+            4.0,
+            47.0,
+            60.0
+          ],
+          "name": "BuildIcon",
+          "rect": [
+            152.0,
+            459.0,
+            70.0,
+            56.0
+          ],
+          "texture": "res://art_delivery/bed_assets_v1/bed_ui.png",
+          "type": "TextureRect"
+        },
+        {
+          "font": 13,
+          "name": "BuildName",
+          "rect": [
+            139.0,
+            518.0,
+            96.0,
+            24.0
+          ],
+          "text": "ベッド",
+          "type": "Label",
+          "wrap": false
+        },
+        {
+          "color": "e7d9b5ff",
+          "font": 14,
+          "name": "@Button@1359",
+          "rect": [
+            244.0,
+            450.0,
+            102.0,
+            96.0
+          ],
+          "text": "",
+          "type": "Button"
+        },
+        {
+          "crop": [
+            2.0,
+            8.0,
+            30.0,
+            23.0
+          ],
+          "name": "BuildIcon",
+          "rect": [
+            260.0,
+            459.0,
+            70.0,
+            56.0
+          ],
+          "texture": "res://art_delivery/crafting_assets_v1/ui_icons/cooking_bench.png",
+          "type": "TextureRect"
+        },
+        {
+          "font": 13,
+          "name": "BuildName",
+          "rect": [
+            247.0,
+            518.0,
+            96.0,
+            24.0
+          ],
+          "text": "調理台",
+          "type": "Label",
+          "wrap": false
+        },
+        {
+          "color": "e7d9b5ff",
+          "font": 14,
+          "name": "@Button@1360",
+          "rect": [
+            352.0,
+            450.0,
+            102.0,
+            96.0
+          ],
+          "text": "",
+          "type": "Button"
+        },
+        {
+          "crop": [
+            2.0,
+            8.0,
+            30.0,
+            23.0
+          ],
+          "name": "BuildIcon",
+          "rect": [
+            368.0,
+            459.0,
+            70.0,
+            56.0
+          ],
+          "texture": "res://art_delivery/crafting_assets_v1/ui_icons/carpentry_bench.png",
+          "type": "TextureRect"
+        },
+        {
+          "font": 13,
+          "name": "BuildName",
+          "rect": [
+            355.0,
+            518.0,
+            96.0,
+            24.0
+          ],
+          "text": "木工台",
+          "type": "Label",
+          "wrap": false
+        },
+        {
+          "color": "e7d9b5ff",
+          "font": 14,
+          "name": "@Button@1361",
+          "rect": [
+            460.0,
+            450.0,
+            102.0,
+            96.0
+          ],
+          "text": "",
+          "type": "Button"
+        },
+        {
+          "crop": [
+            2.0,
+            7.0,
+            30.0,
+            24.0
+          ],
+          "name": "BuildIcon",
+          "rect": [
+            476.0,
+            459.0,
+            70.0,
+            56.0
+          ],
+          "texture": "res://art_delivery/crafting_assets_v1/ui_icons/sewing_bench.png",
+          "type": "TextureRect"
+        },
+        {
+          "font": 13,
+          "name": "BuildName",
+          "rect": [
+            463.0,
+            518.0,
+            96.0,
+            24.0
+          ],
+          "text": "裁縫台",
+          "type": "Label",
+          "wrap": false
+        },
+        {
+          "color": "e7d9b5ff",
+          "font": 13,
+          "name": "@Button@1363",
+          "rect": [
+            16.0,
+            450.0,
+            108.0,
+            40.0
+          ],
+          "text": "壁と扉",
+          "type": "Button"
+        },
+        {
+          "color": "e7d9b5ff",
+          "font": 13,
+          "name": "@Button@1364",
+          "rect": [
+            16.0,
+            496.0,
+            108.0,
+            40.0
+          ],
+          "text": "床",
+          "type": "Button"
+        },
+        {
+          "color": "bbd99cff",
+          "font": 13,
+          "name": "@Button@1365",
+          "rect": [
+            16.0,
+            542.0,
+            108.0,
+            40.0
+          ],
+          "text": "設置",
+          "type": "Button"
+        },
+        {
+          "color": "e7d9b5ff",
+          "font": 13,
+          "name": "@Button@1366",
+          "rect": [
+            16.0,
+            588.0,
+            108.0,
+            40.0
+          ],
+          "text": "ゾーン",
+          "type": "Button"
+        },
+        {
+          "color": "eadebfff",
+          "font": 16,
+          "name": "@Button@1367",
+          "rect": [
+            580.0,
+            754.0,
+            116.0,
+            44.0
+          ],
+          "text": "生活",
+          "type": "Button"
+        }
+      ],
+      "window": [
+        1600,
+        1000
+      ]
+    },
+    {
+      "name": "architect-floors",
+      "nodes": [
+        {
+          "name": "@Control@13",
+          "rect": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "type": "Control"
+        },
+        {
+          "name": "@Panel@1374",
+          "rect": [
+            8.0,
+            438.0,
+            904.0,
+            304.0
+          ],
+          "type": "Panel"
+        },
+        {
+          "font": 19,
+          "name": "BuildTitle",
+          "rect": [
+            602.0,
+            456.0,
+            282.0,
+            34.0
+          ],
+          "text": "建築物を選択",
+          "type": "Label",
+          "wrap": true
+        },
+        {
+          "font": 14,
+          "name": "BuildDescription",
+          "rect": [
+            602.0,
+            498.0,
+            282.0,
+            226.0
+          ],
+          "text": "左のカテゴリから建築物を選び、\nマップ上で位置を指定します。",
+          "type": "Label",
+          "wrap": true
+        },
+        {
+          "name": "ArchitectItems",
+          "rect": [
+            136.0,
+            450.0,
+            452.0,
+            278.0
+          ],
+          "type": "ScrollContainer"
+        },
+        {
+          "name": "@Control@1370",
+          "rect": [
+            136.0,
+            450.0,
+            434.0,
+            100.0
+          ],
+          "type": "Control"
+        },
+        {
+          "color": "e7d9b5ff",
+          "font": 14,
+          "name": "@Button@1371",
+          "rect": [
+            136.0,
+            450.0,
+            102.0,
+            96.0
+          ],
+          "text": "",
+          "type": "Button"
+        },
+        {
+          "name": "BuildIcon",
+          "rect": [
+            152.0,
+            459.0,
+            70.0,
+            56.0
+          ],
+          "texture": "res://art_delivery/earth_stone_buildings_v1/soil/floor/base.png",
+          "type": "TextureRect"
+        },
+        {
+          "font": 13,
+          "name": "BuildName",
+          "rect": [
+            139.0,
+            518.0,
+            96.0,
+            24.0
+          ],
+          "text": "土床",
+          "type": "Label",
+          "wrap": false
+        },
+        {
+          "color": "e7d9b5ff",
+          "font": 14,
+          "name": "@Button@1372",
+          "rect": [
+            244.0,
+            450.0,
+            102.0,
+            96.0
+          ],
+          "text": "",
+          "type": "Button"
+        },
+        {
+          "name": "BuildIcon",
+          "rect": [
+            260.0,
+            459.0,
+            70.0,
+            56.0
+          ],
+          "texture": "res://art_delivery/wood_buildings_v1/floor/wood_00.png",
+          "type": "TextureRect"
+        },
+        {
+          "font": 13,
+          "name": "BuildName",
+          "rect": [
+            247.0,
+            518.0,
+            96.0,
+            24.0
+          ],
+          "text": "木床",
+          "type": "Label",
+          "wrap": false
+        },
+        {
+          "color": "e7d9b5ff",
+          "font": 14,
+          "name": "@Button@1373",
+          "rect": [
+            352.0,
+            450.0,
+            102.0,
+            96.0
+          ],
+          "text": "",
+          "type": "Button"
+        },
+        {
+          "name": "BuildIcon",
+          "rect": [
+            368.0,
+            459.0,
+            70.0,
+            56.0
+          ],
+          "texture": "res://art_delivery/earth_stone_buildings_v1/stone/floor/base.png",
+          "type": "TextureRect"
+        },
+        {
+          "font": 13,
+          "name": "BuildName",
+          "rect": [
+            355.0,
+            518.0,
+            96.0,
+            24.0
+          ],
+          "text": "石床",
+          "type": "Label",
+          "wrap": false
+        },
+        {
+          "color": "e7d9b5ff",
+          "font": 13,
+          "name": "@Button@1375",
+          "rect": [
+            16.0,
+            450.0,
+            108.0,
+            40.0
+          ],
+          "text": "壁と扉",
+          "type": "Button"
+        },
+        {
+          "color": "bbd99cff",
+          "font": 13,
+          "name": "@Button@1376",
+          "rect": [
+            16.0,
+            496.0,
+            108.0,
+            40.0
+          ],
+          "text": "床",
+          "type": "Button"
+        },
+        {
+          "color": "e7d9b5ff",
+          "font": 13,
+          "name": "@Button@1377",
+          "rect": [
+            16.0,
+            542.0,
+            108.0,
+            40.0
+          ],
+          "text": "設置",
+          "type": "Button"
+        },
+        {
+          "color": "e7d9b5ff",
+          "font": 13,
+          "name": "@Button@1378",
+          "rect": [
+            16.0,
+            588.0,
+            108.0,
+            40.0
+          ],
+          "text": "ゾーン",
+          "type": "Button"
+        },
+        {
+          "color": "eadebfff",
+          "font": 16,
+          "name": "@Button@1379",
           "rect": [
             580.0,
             754.0,
@@ -2686,7 +4227,7 @@
         },
         {
           "font": 13,
-          "name": "@Label@1468",
+          "name": "@Label@1489",
           "rect": [
             28.0,
             424.0,
@@ -2700,7 +4241,7 @@
         {
           "color": "eadebfff",
           "font": 14,
-          "name": "@Button@1469",
+          "name": "@Button@1490",
           "rect": [
             28.0,
             452.0,
@@ -2713,7 +4254,7 @@
         {
           "color": "eadebfff",
           "font": 14,
-          "name": "@Button@1470",
+          "name": "@Button@1491",
           "rect": [
             116.0,
             452.0,
@@ -2738,7 +4279,7 @@
         },
         {
           "font": 16,
-          "name": "@Label@1481",
+          "name": "@Label@1502",
           "rect": [
             28.0,
             494.0,
@@ -2751,7 +4292,7 @@
         },
         {
           "font": 16,
-          "name": "@Label@1482",
+          "name": "@Label@1503",
           "rect": [
             480.0,
             420.0,
@@ -2773,7 +4314,7 @@
           "type": "ScrollContainer"
         },
         {
-          "name": "@VBoxContainer@1485",
+          "name": "@VBoxContainer@1506",
           "rect": [
             480.0,
             450.0,
@@ -2819,7 +4360,7 @@
         },
         {
           "font": 12,
-          "name": "@Label@1499",
+          "name": "@Label@1520",
           "rect": [
             28.0,
             686.0,
@@ -2832,7 +4373,7 @@
         },
         {
           "font": 12,
-          "name": "@Label@1500",
+          "name": "@Label@1521",
           "rect": [
             480.0,
             652.0,
@@ -2859,7 +4400,7 @@
         {
           "color": "eadebfff",
           "font": 14,
-          "name": "@Button@1501",
+          "name": "@Button@1522",
           "rect": [
             28.0,
             710.0,
@@ -2872,7 +4413,7 @@
         {
           "color": "eadebfff",
           "font": 14,
-          "name": "@Button@1502",
+          "name": "@Button@1523",
           "rect": [
             158.0,
             710.0,
@@ -2885,7 +4426,7 @@
         {
           "color": "eadebfff",
           "font": 14,
-          "name": "@Button@1503",
+          "name": "@Button@1524",
           "rect": [
             288.0,
             710.0,
@@ -2898,7 +4439,7 @@
         {
           "color": "eadebfff",
           "font": 16,
-          "name": "@Button@1456",
+          "name": "@Button@1477",
           "rect": [
             580.0,
             754.0,
@@ -2932,14 +4473,14 @@
           "rect": [
             16.0,
             402.0,
-            896.0,
+            604.0,
             340.0
           ],
           "type": "Panel"
         },
         {
           "font": 20,
-          "name": "@Label@1507",
+          "name": "@Label@1528",
           "rect": [
             30.0,
             414.0,
@@ -2953,9 +4494,9 @@
         {
           "color": "eadebfff",
           "font": 14,
-          "name": "@Button@1508",
+          "name": "@Button@1529",
           "rect": [
-            806.0,
+            514.0,
             412.0,
             92.0,
             32.0
@@ -2978,7 +4519,7 @@
         },
         {
           "font": 17,
-          "name": "@Label@1509",
+          "name": "@Label@1530",
           "rect": [
             316.0,
             464.0,
@@ -3000,7 +4541,7 @@
           "type": "ScrollContainer"
         },
         {
-          "name": "@VBoxContainer@1512",
+          "name": "@VBoxContainer@1533",
           "rect": [
             316.0,
             498.0,
@@ -3012,7 +4553,7 @@
         {
           "color": "eadebfff",
           "font": 14,
-          "name": "@Button@1513",
+          "name": "@Button@1534",
           "rect": [
             316.0,
             498.0,
@@ -3025,7 +4566,7 @@
         {
           "color": "eadebfff",
           "font": 14,
-          "name": "@Button@1514",
+          "name": "@Button@1535",
           "rect": [
             316.0,
             536.0,
@@ -3036,293 +4577,8 @@
           "type": "Button"
         },
         {
-          "name": "RoomPreview",
-          "rect": [
-            626.0,
-            462.0,
-            262.0,
-            242.0
-          ],
-          "tiles": [
-            {
-              "kind": "wood_wall",
-              "rect": [
-                16.0,
-                6.0,
-                46.0,
-                46.0
-              ],
-              "texture": "res://art_delivery/wood_buildings_v1/wall/normal/wood_mask_06.png"
-            },
-            {
-              "kind": "wood_wall",
-              "rect": [
-                16.0,
-                52.0,
-                46.0,
-                46.0
-              ],
-              "texture": "res://art_delivery/wood_buildings_v1/wall/normal/wood_mask_05.png"
-            },
-            {
-              "kind": "wood_wall",
-              "rect": [
-                16.0,
-                98.0,
-                46.0,
-                46.0
-              ],
-              "texture": "res://art_delivery/wood_buildings_v1/wall/normal/wood_mask_05.png"
-            },
-            {
-              "kind": "wood_wall",
-              "rect": [
-                16.0,
-                144.0,
-                46.0,
-                46.0
-              ],
-              "texture": "res://art_delivery/wood_buildings_v1/wall/normal/wood_mask_05.png"
-            },
-            {
-              "kind": "wood_wall",
-              "rect": [
-                16.0,
-                190.0,
-                46.0,
-                46.0
-              ],
-              "texture": "res://art_delivery/wood_buildings_v1/wall/normal/wood_mask_03.png"
-            },
-            {
-              "kind": "wood_wall",
-              "rect": [
-                62.0,
-                6.0,
-                46.0,
-                46.0
-              ],
-              "texture": "res://art_delivery/wood_buildings_v1/wall/normal/wood_mask_10.png"
-            },
-            {
-              "kind": "",
-              "rect": [
-                62.0,
-                52.0,
-                46.0,
-                46.0
-              ],
-              "texture": "res://art_delivery/wood_buildings_v1/floor/wood_00.png"
-            },
-            {
-              "kind": "",
-              "rect": [
-                62.0,
-                98.0,
-                46.0,
-                46.0
-              ],
-              "texture": "res://art_delivery/wood_buildings_v1/floor/wood_00.png"
-            },
-            {
-              "kind": "",
-              "rect": [
-                62.0,
-                144.0,
-                46.0,
-                46.0
-              ],
-              "texture": "res://art_delivery/wood_buildings_v1/floor/wood_00.png"
-            },
-            {
-              "kind": "wood_wall",
-              "rect": [
-                62.0,
-                190.0,
-                46.0,
-                46.0
-              ],
-              "texture": "res://art_delivery/wood_buildings_v1/wall/normal/wood_mask_10.png"
-            },
-            {
-              "kind": "door",
-              "rect": [
-                108.0,
-                6.0,
-                46.0,
-                46.0
-              ],
-              "texture": "res://art_delivery/wood_buildings_v1/door/horizontal_leaf_closed_normal.png"
-            },
-            {
-              "kind": "",
-              "rect": [
-                108.0,
-                52.0,
-                46.0,
-                46.0
-              ],
-              "texture": "res://art_delivery/wood_buildings_v1/floor/wood_00.png"
-            },
-            {
-              "kind": "",
-              "rect": [
-                108.0,
-                98.0,
-                46.0,
-                46.0
-              ],
-              "texture": "res://art_delivery/wood_buildings_v1/floor/wood_00.png"
-            },
-            {
-              "kind": "bed",
-              "rect": [
-                108.0,
-                98.0,
-                46.0,
-                46.0
-              ],
-              "texture": ""
-            },
-            {
-              "kind": "",
-              "rect": [
-                108.0,
-                144.0,
-                46.0,
-                46.0
-              ],
-              "texture": "res://art_delivery/wood_buildings_v1/floor/wood_00.png"
-            },
-            {
-              "kind": "wood_wall",
-              "rect": [
-                108.0,
-                190.0,
-                46.0,
-                46.0
-              ],
-              "texture": "res://art_delivery/wood_buildings_v1/wall/normal/wood_mask_10.png"
-            },
-            {
-              "kind": "wood_wall",
-              "rect": [
-                154.0,
-                6.0,
-                46.0,
-                46.0
-              ],
-              "texture": "res://art_delivery/wood_buildings_v1/wall/normal/wood_mask_10.png"
-            },
-            {
-              "kind": "",
-              "rect": [
-                154.0,
-                52.0,
-                46.0,
-                46.0
-              ],
-              "texture": "res://art_delivery/wood_buildings_v1/floor/wood_00.png"
-            },
-            {
-              "kind": "",
-              "rect": [
-                154.0,
-                98.0,
-                46.0,
-                46.0
-              ],
-              "texture": "res://art_delivery/wood_buildings_v1/floor/wood_00.png"
-            },
-            {
-              "kind": "",
-              "rect": [
-                154.0,
-                144.0,
-                46.0,
-                46.0
-              ],
-              "texture": "res://art_delivery/wood_buildings_v1/floor/wood_00.png"
-            },
-            {
-              "kind": "wood_wall",
-              "rect": [
-                154.0,
-                190.0,
-                46.0,
-                46.0
-              ],
-              "texture": "res://art_delivery/wood_buildings_v1/wall/normal/wood_mask_10.png"
-            },
-            {
-              "kind": "wood_wall",
-              "rect": [
-                200.0,
-                6.0,
-                46.0,
-                46.0
-              ],
-              "texture": "res://art_delivery/wood_buildings_v1/wall/normal/wood_mask_12.png"
-            },
-            {
-              "kind": "wood_wall",
-              "rect": [
-                200.0,
-                52.0,
-                46.0,
-                46.0
-              ],
-              "texture": "res://art_delivery/wood_buildings_v1/wall/normal/wood_mask_05.png"
-            },
-            {
-              "kind": "wood_wall",
-              "rect": [
-                200.0,
-                98.0,
-                46.0,
-                46.0
-              ],
-              "texture": "res://art_delivery/wood_buildings_v1/wall/normal/wood_mask_05.png"
-            },
-            {
-              "kind": "wood_wall",
-              "rect": [
-                200.0,
-                144.0,
-                46.0,
-                46.0
-              ],
-              "texture": "res://art_delivery/wood_buildings_v1/wall/normal/wood_mask_05.png"
-            },
-            {
-              "kind": "wood_wall",
-              "rect": [
-                200.0,
-                190.0,
-                46.0,
-                46.0
-              ],
-              "texture": "res://art_delivery/wood_buildings_v1/wall/normal/wood_mask_09.png"
-            }
-          ],
-          "type": "Control"
-        },
-        {
           "font": 12,
-          "name": "@Label@1515",
-          "rect": [
-            680.0,
-            712.0,
-            72.0,
-            18.0
-          ],
-          "text": "室内見取り図",
-          "type": "Label",
-          "wrap": false
-        },
-        {
-          "font": 12,
-          "name": "@Label@1516",
+          "name": "@Label@1536",
           "rect": [
             30.0,
             712.0,
@@ -3336,7 +4592,7 @@
         {
           "color": "eadebfff",
           "font": 16,
-          "name": "@Button@1505",
+          "name": "@Button@1526",
           "rect": [
             580.0,
             754.0,

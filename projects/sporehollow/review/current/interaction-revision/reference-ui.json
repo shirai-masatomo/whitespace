@@ -49,6 +49,18 @@
       "passed": true
     },
     {
+      "check": "Panel avoids log and bottom menu: resident-work",
+      "passed": true
+    },
+    {
+      "check": "Auto collect defaults on for resident",
+      "passed": true
+    },
+    {
+      "check": "Personal checkbox changes selected resident only",
+      "passed": true
+    },
+    {
       "check": "Work opens selected roles",
       "passed": true
     },
@@ -165,6 +177,30 @@
       "passed": true
     },
     {
+      "check": "Panel avoids log and bottom menu: architect-equipment",
+      "passed": true
+    },
+    {
+      "check": "Unified visible icon box: cooking_bench",
+      "passed": true
+    },
+    {
+      "check": "Unified visible icon box: carpentry_bench",
+      "passed": true
+    },
+    {
+      "check": "Unified visible icon box: sewing_bench",
+      "passed": true
+    },
+    {
+      "check": "Unified visible icon box: bed",
+      "passed": true
+    },
+    {
+      "check": "Panel avoids log and bottom menu: architect-floors",
+      "passed": true
+    },
+    {
       "check": "Filters and access visible in separate columns",
       "passed": true
     },
@@ -185,11 +221,7 @@
       "passed": true
     },
     {
-      "check": "House map from real cells",
-      "passed": true
-    },
-    {
-      "check": "Room map has no missing wall/floor texture",
+      "check": "Compact house omits map",
       "passed": true
     },
     {
@@ -198,14 +230,6 @@
     },
     {
       "check": "Panel avoids log and bottom menu: house",
-      "passed": true
-    },
-    {
-      "check": "Unchanged house reuses one bounded preview cache",
-      "passed": true
-    },
-    {
-      "check": "House topology invalidates preview cache",
       "passed": true
     },
     {
@@ -253,6 +277,18 @@
       "passed": true
     },
     {
+      "check": "Panel avoids log and bottom menu: resident-work",
+      "passed": true
+    },
+    {
+      "check": "Auto collect defaults on for resident",
+      "passed": true
+    },
+    {
+      "check": "Personal checkbox changes selected resident only",
+      "passed": true
+    },
+    {
       "check": "Work opens selected roles",
       "passed": true
     },
@@ -369,6 +405,30 @@
       "passed": true
     },
     {
+      "check": "Panel avoids log and bottom menu: architect-equipment",
+      "passed": true
+    },
+    {
+      "check": "Unified visible icon box: cooking_bench",
+      "passed": true
+    },
+    {
+      "check": "Unified visible icon box: carpentry_bench",
+      "passed": true
+    },
+    {
+      "check": "Unified visible icon box: sewing_bench",
+      "passed": true
+    },
+    {
+      "check": "Unified visible icon box: bed",
+      "passed": true
+    },
+    {
+      "check": "Panel avoids log and bottom menu: architect-floors",
+      "passed": true
+    },
+    {
       "check": "Filters and access visible in separate columns",
       "passed": true
     },
@@ -389,11 +449,7 @@
       "passed": true
     },
     {
-      "check": "House map from real cells",
-      "passed": true
-    },
-    {
-      "check": "Room map has no missing wall/floor texture",
+      "check": "Compact house omits map",
       "passed": true
     },
     {
@@ -403,16 +459,8 @@
     {
       "check": "Panel avoids log and bottom menu: house",
       "passed": true
-    },
-    {
-      "check": "Unchanged house reuses one bounded preview cache",
-      "passed": true
-    },
-    {
-      "check": "House topology invalidates preview cache",
-      "passed": true
     }
   ],
-  "count": 103,
+  "count": 115,
   "failed": 0
 }

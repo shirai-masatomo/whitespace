@@ -1,3 +1,9 @@
+# 建築UI・自動収集・自由時間・待機（2026-10-17）
+
+実装69e65278を既存の最新開発版EXEへ反映済み。自由時間の仕事継続、自動収集、近距離待機、建築不足表示、正式ベッドを実装。関連405確認失敗0。通常ゲーム画面は起動せずheadlessとCPU比較で検証。[変更・画像・検証・配布](interaction-revision/REPORT.md)。
+
+---
+
 # 4画面のUI改善（2026-10-16）
 
 住民詳細・アーキテクト・備蓄・家屋を参考画像に沿って整理。[変更・検証・CPU確認図・残課題](interaction-revision/REPORT.md) / [EXE配布記録](interaction-revision/DELIVERY.json)。以下は改善前の資料。

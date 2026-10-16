@@ -1,15 +1,15 @@
 {
-  "native_game_launch_performed": false,
-  "normal_data_unchanged": true,
-  "native_lifecycle_checks": 0,
-  "diagnostics_removed": true,
   "session_only": true,
   "headless_loading_checks": 39,
-  "asset_delivery_commit": "f7c521e72047119bed1121c1cebad1b5ddacfe31",
-  "implementation_commit": "21894307d2d793247ffcfde95e09c706cf39069f",
-  "commit": "21894307d2d793247ffcfde95e09c706cf39069f",
+  "commit": "69e65278ec09ba7dd750f4f14653169649dd1a91",
+  "diagnostics_removed": true,
+  "native_lifecycle_checks": 0,
+  "automatically_launched": false,
+  "sha256": "5DBC1F6FA2D8D8CB0BC98B1B9F4BDEDE39158A717D06F9C60C66451AA0E9ED9D",
+  "native_game_launch_performed": false,
+  "utc": "2026-10-16T16:55:03.3184107Z",
+  "normal_data_unchanged": true,
+  "asset_delivery_commit": "54300cef37f964183d7832379d2be575b68d1c99",
   "dirty": true,
-  "utc": "2026-10-16T14:44:01.7535031Z",
-  "sha256": "33770251F73E46891055A3B514FF18A66BCE7B096E105280CD41DD486949529D",
-  "automatically_launched": false
+  "implementation_commit": "69e65278ec09ba7dd750f4f14653169649dd1a91"
 }

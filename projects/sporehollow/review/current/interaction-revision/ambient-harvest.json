@@ -1,0 +1,74 @@
+{
+  "checks": [
+    {
+      "check": "Free schedule accepts real mining/felling",
+      "passed": true
+    },
+    {
+      "check": "World.step harvests and auto collects actual wood and stone outputs",
+      "passed": true
+    },
+    {
+      "check": "Harvest designations precede collection, carry<=20",
+      "passed": true
+    },
+    {
+      "check": "Craft bill accepts during free time",
+      "passed": true
+    },
+    {
+      "check": "Production ticks complete crafting during free time",
+      "passed": true
+    },
+    {
+      "check": "Auto haul uses final one unit of free capacity",
+      "passed": true
+    },
+    {
+      "check": "Full stock never picks excess or loses it",
+      "passed": true
+    },
+    {
+      "check": "Expansion resumes collection",
+      "passed": true
+    },
+    {
+      "check": "Partial site really receives three",
+      "passed": true
+    },
+    {
+      "check": "Cancelled site materials auto-return to stock without minting",
+      "passed": true
+    },
+    {
+      "check": "Explicit work replaces idle immediately",
+      "passed": true
+    },
+    {
+      "check": "Work/free switch does not cancel construction",
+      "passed": true
+    },
+    {
+      "check": "Auto actually picks physical cargo",
+      "passed": true
+    },
+    {
+      "check": "New designation does not discard an in-flight batch",
+      "passed": true
+    },
+    {
+      "check": "Batch delivery safely yields to explicit collection",
+      "passed": true
+    },
+    {
+      "check": "Automatic pickup honors withdrawal permissions",
+      "passed": true
+    },
+    {
+      "check": "Live raid blocks fallback collection and wandering even at a distance",
+      "passed": true
+    }
+  ],
+  "count": 17,
+  "failed": 0
+}
