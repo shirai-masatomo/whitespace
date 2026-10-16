@@ -1,0 +1,46 @@
+{
+  "elapsed_ms": 10135,
+  "failed": false,
+  "fps_limit": 30,
+  "method": "Actual Godot viewport on private noninteractive desktop; current game source, not packaged EXE window; uncropped",
+  "rendering_driver": "NVIDIA GeForce RTX 4070 SUPER",
+  "screens": [
+    {
+      "file": "02-current-architect.png",
+      "height": 800,
+      "png_error": 0,
+      "seed": 851181099,
+      "setup": "Fresh map; architect walls/doors; soil wall pointer preview; no reservation committed",
+      "tick": 0,
+      "width": 1280
+    },
+    {
+      "file": "03-current-stockpile-filters.png",
+      "height": 800,
+      "png_error": 0,
+      "seed": 851181099,
+      "setup": "Initial stockpile, default filter tree, storage items tab",
+      "tick": 0,
+      "width": 1280
+    },
+    {
+      "file": "04-current-stockpile-access.png",
+      "height": 800,
+      "png_error": 0,
+      "seed": 851181099,
+      "setup": "Same initial stockpile, resident withdrawal permission tab",
+      "tick": 0,
+      "width": 1280
+    },
+    {
+      "file": "05-current-house.png",
+      "height": 800,
+      "png_error": 0,
+      "seed": 851181099,
+      "setup": "Staged fixture only: completed 5x5 wood wall/floor enclosure, door, one bed, 3x3 residential zone; keeper assigned by existing home rules. Not player progress.",
+      "tick": 0,
+      "width": 1280
+    }
+  ],
+  "source_commit": "3e71308faf32474a188bb4b64b01e67323840dfa"
+}

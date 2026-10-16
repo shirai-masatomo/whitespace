@@ -1,0 +1,29 @@
+{
+  "fps_limit": 30,
+  "success": false,
+  "timeout_seconds": 60,
+  "normal_desktop_fallback": false,
+  "end_utc": "2026-10-16T13:31:42.1625203Z",
+  "scenario": "architect, stockpile filters/access, staged house",
+  "start_utc": "2026-10-16T13:31:31.7598364Z",
+  "result": {
+    "PID": 21364,
+    "ThreadID": 5952,
+    "ExitCode": 1,
+    "OwnedWindowCount": 2,
+    "Station": "Service-0x0-1b7214$",
+    "Desktop": "Render_d3420cc9f415403b87166f0f8b80c690",
+    "ObservedDesktop": "Render_d3420cc9f415403b87166f0f8b80c690",
+    "NonInteractive": true,
+    "DesktopMatched": true,
+    "TimedOut": false,
+    "OwnedWindows": [
+      "EngineWGLDetect: ",
+      "NVOpenGLPbuffer: __wglDummyWindowFodder",
+      "Engine: ",
+      "Engine: ホイッスル牧場・最新開発版（部分実装） (DEBUG)"
+    ]
+  },
+  "error": "Isolated capture failed; no normal-desktop fallback",
+  "source_commit": "3e71308faf32474a188bb4b64b01e67323840dfa"
+}
