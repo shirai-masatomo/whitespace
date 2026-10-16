@@ -1,3 +1,9 @@
+# 生活UIと食事の同順位設定（2026-10-16）
+
+実装 176b79af を既存の最新開発版EXEへ反映済み。生活画面の配置と役割からの住民引継ぎを改善し、食事優先は同順位可・他セル交換なし。関連159チェック失敗0、2解像度の実Control座標とCPU確認図を保存。ゲームの自動起動なし。セーブ機能は無効のままで、旧順位データの互換移行のみ検証。[結果・残課題](review/current/interaction-revision/REPORT.md)／[配布記録](review/current/interaction-revision/DELIVERY.json)。以下は過去記録。
+
+---
+
 # 建築予約済みセルの重複プレビュー抑止（2026-10-16）
 
 実装 1f7d7c87 を既存の最新開発版EXEへ反映済み。床・壁・扉・2×2設備・家具で新規配置の重複表示を抑え、確定済みゴースト・資材待ち・内部の重複拒否を維持。関連168チェック失敗0。通常ゲームの自動起動なし。[検証結果](review/current/interaction-revision/REPORT.md)／[配布記録](review/current/interaction-revision/DELIVERY.json)。以下は過去記録。
