@@ -33,7 +33,7 @@
     E03: { name: "鉄羽コウモリ", hp: 13, atk: 5, def: 0, speed: 8, exp: 7, min: 3 },
     E04: { name: "坑道ゴブリン", hp: 18, atk: 6, def: 1, speed: 5, exp: 9, min: 4 },
     E05: { name: "岩甲虫", hp: 24, atk: 7, def: 3, speed: 2, exp: 12, min: 7 },
-    B10: { name: "門番の石像", hp: 42, atk: 8, def: 2, speed: 3, exp: 26, min: 10 }
+    B10: { name: "門番の石像", hp: 54, atk: 11, def: 3, speed: 3, exp: 26, min: 10 }
   };
 
   const EVENTS = {
@@ -79,7 +79,7 @@
     const def = ALLIES[id];
     if (!def) throw Error("Unknown ally: " + id);
     return {
-      uid: "a" + s.nextId++, id: id, level: 1, xp: 0, hp: def.hp,
+      uid: "a" + s.nextId++, id: id, ability: def.ability, level: 1, xp: 0, hp: def.hp,
       dead: false, pendingReturn: false, equipment: {}
     };
   }
@@ -133,7 +133,7 @@
   }
 
   function stats(s, uid) {
-    let base, level, skills = [], equipment = {};
+    let base, level, skills = [], equipment = {}, extraDef = 0;
     if (uid === "hero") {
       base = { name: "主人公", hp: 26, atk: 6, def: 1, speed: 5 };
       level = s.hero.level;
@@ -145,13 +145,14 @@
       base = ALLIES[a.id];
       level = a.level;
       equipment = a.equipment || {};
+      extraDef = a.ability === "硬い毛皮" ? 2 : 0;
     }
     const passive = (stat) => skills.reduce((sum, id) => sum + (SKILLS[id] && SKILLS[id][stat] || 0), 0);
     return {
       name: base.name, level: level,
       maxHp: base.hp + (level - 1) * 3 + passive("hp") + equippedBonus(equipment, "hp"),
       atk: base.atk + (level - 1) + passive("atk") + equippedBonus(equipment, "atk"),
-      def: base.def + Math.floor((level - 1) / 2) + passive("def") + equippedBonus(equipment, "def"),
+      def: base.def + Math.floor((level - 1) / 2) + passive("def") + equippedBonus(equipment, "def") + extraDef,
       speed: base.speed + passive("speed") + equippedBonus(equipment, "speed")
     };
   }
@@ -217,7 +218,7 @@
     const extra = Math.max(0, floor - def.min);
     const foe = {
       name: def.name, hp: def.hp + extra,
-      atk: def.atk + Math.floor(extra / 3),
+      atk: def.atk + Math.floor(extra / 3) + Math.floor((floor - 1) / 3),
       def: def.def, speed: def.speed, exp: def.exp + floor
     };
     const details = [];
@@ -260,7 +261,7 @@
           const damage = Math.max(1, stat.atk - foe.def + Math.floor(rng() * 3) - 1);
           foe.hp = Math.max(0, foe.hp - damage);
           details.push("R" + round + " " + stat.name + " → " + foe.name + " " + damage + "ダメージ");
-          if (a && a.id === "A01" && foe.hp > 0 && rng() < 0.25) {
+          if (a && a.id === "A01" && a.ability === "追撃" && foe.hp > 0 && rng() < 0.25) {
             foe.hp = Math.max(0, foe.hp - 2);
             details.push("　洞穴犬の追撃！ 2ダメージ");
           }
@@ -411,7 +412,9 @@
           summary = "補修石（アイテム）";
         } else {
           const id = choose(["A01", "A02"], rng);
-          const ally = makeAlly(s, id); s.allies.push(ally);
+          const ally = makeAlly(s, id);
+          if (id === "A01" && rng() < 0.5) ally.ability = "硬い毛皮";
+          s.allies.push(ally);
           if (s.party.length < 2) s.party.push(ally.uid);
           summary = ALLIES[id].name + "（仲間）";
         }

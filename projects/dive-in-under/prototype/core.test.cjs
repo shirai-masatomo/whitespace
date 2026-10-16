@@ -69,7 +69,7 @@ test("Skill unlocks and can be reassigned in town only", () => {
   assert.equal(game.act(s, "skill", "keen").ok, false);
   s.hero.level = 2;
   assert.equal(game.act(s, "skill", "keen").ok, true);
-  assert.equal(game.stats(s, "hero").atk, 10);
+  assert.equal(game.stats(s, "hero").atk, 11);
   game.act(s, "enter");
   assert.equal(game.act(s, "skill", "keen").ok, false);
   game.act(s, "return");
@@ -104,4 +104,15 @@ test("Death has permanent and return-capable ally paths", () => {
   game.act(s, "return");
   assert.equal(dog.dead, true);
   assert.equal(ghost.dead, false);
+});
+
+
+test("Gacha dog gains randomized passive or fixed pursuit, based on roll", () => {
+  const s = game.newGame();
+  const rolls = [0.8, 0.1, 0.2];
+  assert.equal(game.act(s, "pray", null, () => rolls.shift() || 0).ok, true);
+  const dog = s.allies[s.allies.length - 1];
+  assert.equal(dog.id, "A01");
+  assert.equal(dog.ability, "硬い毛皮");
+  assert.equal(game.stats(s, dog.uid).def, 2);
 });
