@@ -1,0 +1,374 @@
+{
+  "checks": [
+    {
+      "check": "Designation accepted: wall",
+      "passed": true
+    },
+    {
+      "check": "No duplicate hover ghost/text: wall(35, 25)",
+      "passed": true
+    },
+    {
+      "check": "Actual duplicate still rejected: wall",
+      "passed": true
+    },
+    {
+      "check": "Committed material-wait display retained: wall",
+      "passed": true
+    },
+    {
+      "check": "Repeated hover reuses footprint cache: wall",
+      "passed": true
+    },
+    {
+      "check": "Cancel restores reservable shortage preview: wall",
+      "passed": true
+    },
+    {
+      "check": "Designation accepted: wood_wall",
+      "passed": true
+    },
+    {
+      "check": "No duplicate hover ghost/text: wood_wall(35, 25)",
+      "passed": true
+    },
+    {
+      "check": "Actual duplicate still rejected: wood_wall",
+      "passed": true
+    },
+    {
+      "check": "Committed material-wait display retained: wood_wall",
+      "passed": true
+    },
+    {
+      "check": "Repeated hover reuses footprint cache: wood_wall",
+      "passed": true
+    },
+    {
+      "check": "Cancel restores reservable shortage preview: wood_wall",
+      "passed": true
+    },
+    {
+      "check": "Designation accepted: stone_wall",
+      "passed": true
+    },
+    {
+      "check": "No duplicate hover ghost/text: stone_wall(35, 25)",
+      "passed": true
+    },
+    {
+      "check": "Actual duplicate still rejected: stone_wall",
+      "passed": true
+    },
+    {
+      "check": "Committed material-wait display retained: stone_wall",
+      "passed": true
+    },
+    {
+      "check": "Repeated hover reuses footprint cache: stone_wall",
+      "passed": true
+    },
+    {
+      "check": "Cancel restores reservable shortage preview: stone_wall",
+      "passed": true
+    },
+    {
+      "check": "Designation accepted: soil_tile",
+      "passed": true
+    },
+    {
+      "check": "No duplicate hover ghost/text: soil_tile(35, 25)",
+      "passed": true
+    },
+    {
+      "check": "Actual duplicate still rejected: soil_tile",
+      "passed": true
+    },
+    {
+      "check": "Committed material-wait display retained: soil_tile",
+      "passed": true
+    },
+    {
+      "check": "Repeated hover reuses footprint cache: soil_tile",
+      "passed": true
+    },
+    {
+      "check": "Cancel restores reservable shortage preview: soil_tile",
+      "passed": true
+    },
+    {
+      "check": "Designation accepted: wood_tile",
+      "passed": true
+    },
+    {
+      "check": "No duplicate hover ghost/text: wood_tile(35, 25)",
+      "passed": true
+    },
+    {
+      "check": "Actual duplicate still rejected: wood_tile",
+      "passed": true
+    },
+    {
+      "check": "Committed material-wait display retained: wood_tile",
+      "passed": true
+    },
+    {
+      "check": "Repeated hover reuses footprint cache: wood_tile",
+      "passed": true
+    },
+    {
+      "check": "Cancel restores reservable shortage preview: wood_tile",
+      "passed": true
+    },
+    {
+      "check": "Designation accepted: stone_tile",
+      "passed": true
+    },
+    {
+      "check": "No duplicate hover ghost/text: stone_tile(35, 25)",
+      "passed": true
+    },
+    {
+      "check": "Actual duplicate still rejected: stone_tile",
+      "passed": true
+    },
+    {
+      "check": "Committed material-wait display retained: stone_tile",
+      "passed": true
+    },
+    {
+      "check": "Repeated hover reuses footprint cache: stone_tile",
+      "passed": true
+    },
+    {
+      "check": "Cancel restores reservable shortage preview: stone_tile",
+      "passed": true
+    },
+    {
+      "check": "Designation accepted: door",
+      "passed": true
+    },
+    {
+      "check": "No duplicate hover ghost/text: door(35, 25)",
+      "passed": true
+    },
+    {
+      "check": "Actual duplicate still rejected: door",
+      "passed": true
+    },
+    {
+      "check": "Committed material-wait display retained: door",
+      "passed": true
+    },
+    {
+      "check": "Repeated hover reuses footprint cache: door",
+      "passed": true
+    },
+    {
+      "check": "Cancel restores reservable shortage preview: door",
+      "passed": true
+    },
+    {
+      "check": "Designation accepted: locked_door",
+      "passed": true
+    },
+    {
+      "check": "No duplicate hover ghost/text: locked_door(35, 25)",
+      "passed": true
+    },
+    {
+      "check": "Actual duplicate still rejected: locked_door",
+      "passed": true
+    },
+    {
+      "check": "Committed material-wait display retained: locked_door",
+      "passed": true
+    },
+    {
+      "check": "Repeated hover reuses footprint cache: locked_door",
+      "passed": true
+    },
+    {
+      "check": "Cancel restores reservable shortage preview: locked_door",
+      "passed": true
+    },
+    {
+      "check": "Designation accepted: cooking_bench",
+      "passed": true
+    },
+    {
+      "check": "No duplicate hover ghost/text: cooking_bench(35, 25)",
+      "passed": true
+    },
+    {
+      "check": "No duplicate hover ghost/text: cooking_bench(36, 25)",
+      "passed": true
+    },
+    {
+      "check": "No duplicate hover ghost/text: cooking_bench(35, 26)",
+      "passed": true
+    },
+    {
+      "check": "No duplicate hover ghost/text: cooking_bench(36, 26)",
+      "passed": true
+    },
+    {
+      "check": "Actual duplicate still rejected: cooking_bench",
+      "passed": true
+    },
+    {
+      "check": "Committed material-wait display retained: cooking_bench",
+      "passed": true
+    },
+    {
+      "check": "Repeated hover reuses footprint cache: cooking_bench",
+      "passed": true
+    },
+    {
+      "check": "Cancel restores reservable shortage preview: cooking_bench",
+      "passed": true
+    },
+    {
+      "check": "Designation accepted: carpentry_bench",
+      "passed": true
+    },
+    {
+      "check": "No duplicate hover ghost/text: carpentry_bench(35, 25)",
+      "passed": true
+    },
+    {
+      "check": "No duplicate hover ghost/text: carpentry_bench(36, 25)",
+      "passed": true
+    },
+    {
+      "check": "No duplicate hover ghost/text: carpentry_bench(35, 26)",
+      "passed": true
+    },
+    {
+      "check": "No duplicate hover ghost/text: carpentry_bench(36, 26)",
+      "passed": true
+    },
+    {
+      "check": "Actual duplicate still rejected: carpentry_bench",
+      "passed": true
+    },
+    {
+      "check": "Committed material-wait display retained: carpentry_bench",
+      "passed": true
+    },
+    {
+      "check": "Repeated hover reuses footprint cache: carpentry_bench",
+      "passed": true
+    },
+    {
+      "check": "Cancel restores reservable shortage preview: carpentry_bench",
+      "passed": true
+    },
+    {
+      "check": "Designation accepted: sewing_bench",
+      "passed": true
+    },
+    {
+      "check": "No duplicate hover ghost/text: sewing_bench(35, 25)",
+      "passed": true
+    },
+    {
+      "check": "No duplicate hover ghost/text: sewing_bench(36, 25)",
+      "passed": true
+    },
+    {
+      "check": "No duplicate hover ghost/text: sewing_bench(35, 26)",
+      "passed": true
+    },
+    {
+      "check": "No duplicate hover ghost/text: sewing_bench(36, 26)",
+      "passed": true
+    },
+    {
+      "check": "Actual duplicate still rejected: sewing_bench",
+      "passed": true
+    },
+    {
+      "check": "Committed material-wait display retained: sewing_bench",
+      "passed": true
+    },
+    {
+      "check": "Repeated hover reuses footprint cache: sewing_bench",
+      "passed": true
+    },
+    {
+      "check": "Cancel restores reservable shortage preview: sewing_bench",
+      "passed": true
+    },
+    {
+      "check": "Designation accepted: bed",
+      "passed": true
+    },
+    {
+      "check": "No duplicate hover ghost/text: bed(35, 25)",
+      "passed": true
+    },
+    {
+      "check": "Actual duplicate still rejected: bed",
+      "passed": true
+    },
+    {
+      "check": "Committed material-wait display retained: bed",
+      "passed": true
+    },
+    {
+      "check": "Repeated hover reuses footprint cache: bed",
+      "passed": true
+    },
+    {
+      "check": "Cancel restores reservable shortage preview: bed",
+      "passed": true
+    },
+    {
+      "check": "All-reserved drag has no overlay",
+      "passed": true
+    },
+    {
+      "check": "Mixed drag retains empty-cell shortage ghost only",
+      "passed": true
+    },
+    {
+      "check": "Mixed drag does not leak reserved hover reason",
+      "passed": true
+    },
+    {
+      "check": "Mixed commit rejects duplicate and accepts unfunded new cell",
+      "passed": true
+    },
+    {
+      "check": "Empty cell retains shortage preview",
+      "passed": true
+    },
+    {
+      "check": "Other obstruction retains invalid ghost and reason",
+      "passed": true
+    },
+    {
+      "check": "Funded empty cell retains normal ghost",
+      "passed": true
+    },
+    {
+      "check": "Non-building job does not suppress invalid preview",
+      "passed": true
+    },
+    {
+      "check": "Furniture reservation suppresses duplicate placement preview",
+      "passed": true
+    },
+    {
+      "check": "Existing furniture reservation suppresses other new building overlays",
+      "passed": true
+    },
+    {
+      "check": "Different tool also respects full bench footprint",
+      "passed": true
+    }
+  ],
+  "count": 92,
+  "failed": 0
+}

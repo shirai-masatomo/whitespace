@@ -2152,13 +2152,24 @@ func scene_actors() -> Array:
 	actors.sort_custom(func(a,b): return a.y<b.y if a.y!=b.y else (a.x<b.x if a.x!=b.x else a.kind<b.kind))
 	return actors
 
+func pending_build_at(cell: Vector2i) -> bool:
+	# Reuse committed-ghost cache; suppress only the new hover layer.
+	planned_ghost.update(world)
+	return planned_ghost.reserved_cells.has(cell)
+
 func draw_pointer_preview():
 	if wall_stroke.kind!="":
 		var preview=wall_stroke.plan(world)
 		building_ghost.update(world,wall_stroke.kind,preview.rows)
-		for row in preview.rows:building_ghost.draw(self,wall_stroke.kind,row.pos,row.valid,row.waiting_material)
+		planned_ghost.update(world)
+		var visible_rows=preview.rows.filter(func(row):return not planned_ghost.reserved_cells.has(row.pos))
+		if visible_rows.is_empty():return
+		for row in visible_rows:building_ghost.draw(self,wall_stroke.kind,row.pos,row.valid,row.waiting_material)
 		var hint="離して%d件予約 / 未登録%d件"%[preview.accepted,preview.skipped]
-		if preview.reason!="":hint+="（%s）"%preview.reason
+		for row in visible_rows:
+			if row.reason!="":
+				hint+="（%s）"%row.reason
+				break
 		label_on(self,get_canvas_transform().affine_inverse()*pointer+Vector2(14,-20),hint,16,UI.PAPER)
 		return
 	var cell = Vector2i(get_canvas_transform().affine_inverse() * pointer / TILE)
@@ -2189,6 +2200,7 @@ func draw_pointer_preview():
 				art_alpha = 1.0
 				draw_set_transform(Vector2.ZERO)
 		elif tool.begins_with("place_"):
+			if pending_build_at(cell):return
 			var why=world.Content.place_reason(world,tool,cell)
 			building_ghost.draw(self,tool,cell,why=="")
 			if why!="":label_on(self,get_canvas_transform().affine_inverse()*pointer+Vector2(14,-26),why,15,UI.PAPER)
@@ -2199,6 +2211,7 @@ func draw_pointer_preview():
 			var path=world.Content.line(origin,cell)
 			for point in path:draw_circle(center(point),2,UI.DANGER)
 		elif Farm.BUILD.has(tool):
+			if pending_build_at(cell):return
 			var draft=building_ghost.preview(world,tool,cell)
 			building_ghost.update(world,tool,draft.rows)
 			building_ghost.draw(self,tool,cell,draft.accepted==1,draft.rows[0].waiting_material)

@@ -6,12 +6,15 @@ var key=[]
 var structures={}
 var floors={}
 var masks={}
+var reserved_cells={}
 var rebuilds=0
 func update(w,kind:String="",rows:Array=[]):
 	var signature=[w.get_instance_id(),hash(w.jobs),hash(w.structures),hash(w.floors),kind,hash(rows)]
 	if signature==key:return
-	key=signature;structures.clear();floors.clear();masks.clear();rebuilds+=1
+	key=signature;structures.clear();floors.clear();masks.clear();reserved_cells.clear();rebuilds+=1
 	for j in w.jobs:
+		if w.BUILD.has(j.kind) or j.kind.begins_with("place_"):
+			for cell in w.Buildings.cells(j.kind,j.pos):reserved_cells[cell]=true
 		if w.BUILD.has(j.kind):
 			if w.BUILD[j.kind].layer=="floor":floors[j.pos]=j.kind
 			else:structures[j.pos]=j.kind
