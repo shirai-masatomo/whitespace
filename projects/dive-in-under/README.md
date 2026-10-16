@@ -5,7 +5,7 @@
 - 参考作品: B100シリーズ / Slay the Spire / パワプロクンポケット11 裏サクセス / Wizardry
 - 現在地: 仕様整理＋地下1〜10Fの試作
 - **親仕様（まずここ）**: [SPEC.md](SPEC.md)
-- **10Fプロトタイプ**: [prototype/index.html](prototype/index.html)（ブラウザで直接開く。試作値は未確定）
+- **10Fプロトタイプを遊ぶ**: [試遊用ZIPを取得](Dive-In-Under-10F-prototype.zip) → 展開して index.html をChrome / Edgeで開く。 [ソース](prototype/index.html)（試作値は未確定）
 - **試作の検証項目**: [docs/PROTOTYPE_10F.md](docs/PROTOTYPE_10F.md)
 
 ## 詳細資料
