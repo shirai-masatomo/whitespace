@@ -6,6 +6,7 @@ var selected_id=-1
 var details_open=false
 var name_edit:LineEdit
 var picker:OptionButton
+var access_tab=false
 
 func active(g) -> bool:return g.group==0 and g.architect_category=="ゾーン"
 func select(g,kind:String):
@@ -62,7 +63,15 @@ func build(g):
 		var priority=OptionButton.new();priority.name="ZonePriority";priority.position=Vector2(198,110);priority.size=Vector2(200,30);priority.focus_mode=Control.FOCUS_NONE;p.add_child(priority);g.ColonyPanels.compact_button(g,priority,13);priority.size=Vector2(200,30)
 		for text in ["優先度：低","優先度：通常","優先度：高"]:priority.add_item(text)
 		priority.select(z.get("priority",1));priority.item_selected.connect(func(i):g.world.Zones.set_priority(g.world,z.id,i))
-		var tree=Tree.new();tree.name="StockpileFilters";tree.position=Vector2(12,148);tree.size=Vector2(386,250);tree.hide_root=true;tree.add_theme_font_size_override("font_size",13);p.add_child(tree);var root=tree.create_item()
+		for i in range(2):
+			var button=Button.new();button.text=["保管品目","利用権限"][i];button.position=Vector2(12+i*194,148);button.size=Vector2(188,30);p.add_child(button);g.ColonyPanels.compact_button(g,button);g.UI.selected(button,access_tab==(i==1));button.pressed.connect(func():access_tab=i==1;g.refresh())
+		if access_tab:
+			var scroll=ScrollContainer.new();scroll.name="StockAccess";scroll.position=Vector2(12,184);scroll.size=Vector2(386,214);scroll.vertical_scroll_mode=ScrollContainer.SCROLL_MODE_SHOW_ALWAYS;p.add_child(scroll);g.ColonyPanels.readable_scroll(scroll)
+			var list=VBoxContainer.new();scroll.add_child(list)
+			for key in g.world.Sleep.people(g.world):
+				var a=g.world.Sleep.people(g.world)[key];var allowed=z.cells.filter(func(q):return g.world.Access.allowed_at(g.world,q,a)).size()
+				var check=CheckBox.new();check.name="Access_"+key;check.text=g.world.PlayerEvents.name_of(g.world,a)+("（部屋ごとに異なります）" if allowed>0 and allowed<z.cells.size() else "");check.button_pressed=allowed==z.cells.size();check.custom_minimum_size=Vector2(350,30);list.add_child(check);check.toggled.connect(func(value):g.world.Access.set_permission(g.world,z,key,value);g.refresh())
+		var tree=Tree.new();tree.name="StockpileFilters";tree.position=Vector2(12,184);tree.size=Vector2(386,214);tree.visible=not access_tab;tree.hide_root=true;tree.add_theme_font_size_override("font_size",13);p.add_child(tree);var root=tree.create_item()
 		# Godot Tree owns its own scrollbar; keep a legible track/thumb.
 		var track=StyleBoxFlat.new();track.bg_color=Color("ddd5bf");track.content_margin_left=7;track.content_margin_right=7
 		var grab=StyleBoxFlat.new();grab.bg_color=Color("718261");grab.set_corner_radius_all(3)
@@ -81,7 +90,7 @@ func build(g):
 		tree.item_edited.connect(func():
 			var item=tree.get_edited();var meta=item.get_metadata(0)
 			g.world.Zones.filter_change(g.world,z.id,meta[0],meta[1],item.is_checked(0));update_checks(tree.get_root(),g,z))
-		g.ColonyPanels.label(p,"40個/マス · 既存物資は移動しません",Vector2(12,407),12)
+		g.ColonyPanels.label(p,"持出しの権限です。通行・搬入は可能。" if access_tab else "40個/マス · 既存物資は移動しません",Vector2(12,407),12)
 	else:g.ColonyPanels.label(p,"到達可能な居住ゾーンで休息します。\n物資や建物は移動・削除しません。",Vector2(12,112),14)
 	for entry in [["マス追加",resize.bind(g),12],["マス削除",resize.bind(g,true),142],["全体削除",remove.bind(g),272]]:
 		var button=Button.new();button.text=entry[0];button.position=Vector2(entry[2],height-44);button.size=Vector2(126,32);p.add_child(button);g.ColonyPanels.compact_button(g,button);button.pressed.connect(entry[1])

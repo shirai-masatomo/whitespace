@@ -20,7 +20,7 @@ static func plans(w,a) -> Array:
 	return rows
 
 static func sources(w,j,a) -> Array:
-	var rows=w.field_items.filter(func(r):return Reservations.usable(w,r,j)>0)
+	var rows=w.field_items.filter(func(r):return Reservations.usable(w,r,j)>0 and w.Access.can_take(w,r,a))
 	rows.sort_custom(func(x,y):return Reservations.held(x,j)>Reservations.held(y,j) if (Reservations.held(x,j)>0)!=(Reservations.held(y,j)>0) else w.distance(a.pos,x.pos)<w.distance(a.pos,y.pos) if w.distance(a.pos,x.pos)!=w.distance(a.pos,y.pos) else x.stock_id<y.stock_id)
 	return rows
 
@@ -106,7 +106,7 @@ static func step(w,key: String):
 	for entry in task.allocations:
 		if entry.claims.is_empty():continue
 		var row=w.Stock.find(w,entry.claims[0].stock_id)
-		if row.is_empty() or row.get("forbidden",false) or row.get("claims",{}).get(entry.token,0)<=0:
+		if row.is_empty() or row.get("forbidden",false) or not w.Access.can_take(w,row,a) or row.get("claims",{}).get(entry.token,0)<=0:
 			a.work_status="搬入する資材を再確認";release(w,key);return
 		if not row.get("construction_transfer",false) and not w.Stock.stored(w,row):release(w,key);return
 		task.phase="fetch";task.pos=row.pos;a.work_status="建築材料を備蓄へ取りに移動"
@@ -205,7 +205,7 @@ static func feasible(w,j,rows: Array,evaluators: Dictionary) -> bool:
 		var evaluation=evaluators[key]
 		if is_inf(evaluation.distance_to(w,w.Buildings.job_goals(w,j))):continue
 		for row in candidates:
-			if not is_inf(evaluation.distance_to(w,w.neighbors(row.pos))):return true
+			if w.Access.can_take(w,row,a) and not is_inf(evaluation.distance_to(w,w.neighbors(row.pos))):return true
 	j.block_reason="材料を搬入する通路がありません" if has_hauler else "資材搬入を担当する住人がいません"
 	return false
 

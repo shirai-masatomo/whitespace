@@ -14,12 +14,10 @@ static func rebuild(w):
 				var b=w.structures.get(n,{})
 				if w.Buildings.enclosure(b) and b.kind in w.Buildings.DOORS:
 					doors[n]=true
-					for across in w.neighbors(n):
-						if remaining.has(across):stack.append(across)
 		var entrance=false
 		for d in doors:
 			for n in w.neighbors(d):
-				if not cells.has(n) and not w.indoor.has(n) and w.walkable(n):entrance=true
+				if not cells.has(n) and w.walkable(n):entrance=true
 		if entrance and cells.keys().all(func(q):return w.floors.get(q,{}).get("status")=="ready"):groups.append({"cells":cells,"doors":doors})
 	var old=w.homes;var fresh={};var used={};w.home_cells.clear()
 	groups.sort_custom(func(a,b):return a.cells.size()>b.cells.size())
@@ -43,14 +41,16 @@ static func rebuild(w):
 				var boundary=w.structures.get(n,{})
 				if w.Buildings.enclosure(boundary) and boundary.hp<boundary.max_hp:group.damaged=true
 		group.beds.sort_custom(func(a,b):return a.id<b.id);fresh[best]=group
-	w.homes=fresh;w.housing_dirty=true
+	w.homes=fresh;w.housing_dirty=true;w.Access.changed(w)
 static func at(w,p:Vector2i)->Dictionary:return w.homes.get(w.home_cells.get(p,-1),{})
 static func bed(w,a)->Dictionary:
 	var h=w.homes.get(a.get("home_id",-1),{})
 	for b in h.get("beds",[]):
 		if b.id==a.get("bed_id",-1):return b
 	return {}
-static func residents(w,id:int)->Array:return w.Sleep.people(w).values().filter(func(a):return a.get("home_id",-1)==id)
+static func residents(w,id:int)->Array:
+	var rows=w.Sleep.people(w).values().filter(func(a):return a.get("home_id",-1)==id)
+	rows.sort_custom(func(a,b):return a.get("home_order",0)<b.get("home_order",0));return rows
 static func damaged(w,h)->bool:
 	for q in h.cells:
 		for n in w.neighbors(q):
@@ -59,7 +59,7 @@ static func damaged(w,h)->bool:
 	return false
 static func title(w,h)->String:
 	var people=residents(w,h.id)
-	return "家屋" if people.is_empty() else people[0].get("name","牧場主")+("の家" if people.size()==1 else "たちの家")
+	return "家屋" if people.is_empty() else w.PlayerEvents.name_of(w,people[0])+("の家" if people.size()==1 else "達の家")
 static func usable(w,a,b)->bool:
 	return not w.Jobs.path_to(w,a.pos,w.Buildings.perimeter("bed",b.pos).filter(func(q):return w.home_cells.get(q,-1)==w.home_cells.get(b.pos,-2))).is_empty()
 static func assign(w,id:int,key:String,manual:bool=true)->bool:
@@ -70,13 +70,16 @@ static func assign(w,id:int,key:String,manual:bool=true)->bool:
 		if other!=a:occupied[other.get("bed_id",-1)]=true
 	for b in h.beds:
 		if not occupied.has(b.id) and usable(w,a,b):
+			if a.get("home_id",-1)!=id:
+				w.set_meta("home_order",w.get_meta("home_order",0)+1);a.home_order=w.get_meta("home_order")
+			w.Access.changed(w)
 			a.erase("home_manual_optout");a.home_id=id;a.bed_id=b.id;a.home_manual=manual;a.erase("rest_target");a.erase("rest_reason");return true
 	return false
 static func assign_pending(w):
 	var roster=w.Sleep.people(w).values().map(func(a):return [w.Sleep.actor_key(a),a.get("dead",false),a.get("lost",false),a.get("placed",false)])
 	if w.get_meta("housing_roster",[])!=roster:w.housing_dirty=true;w.set_meta("housing_roster",roster)
 	if not w.housing_dirty:return
-	w.housing_dirty=false
+	w.housing_dirty=false;w.Access.changed(w)
 	for a in w.Sleep.people(w).values():
 		if a.has("bed_id"):
 			for id in w.homes:

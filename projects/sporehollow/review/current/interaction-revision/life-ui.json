@@ -1,0 +1,94 @@
+{
+  "checks": [
+    {
+      "check": "Production loading ready with life features",
+      "passed": true
+    },
+    {
+      "check": "Main screen life entry",
+      "passed": true
+    },
+    {
+      "check": "Roles opens same life screen",
+      "passed": true
+    },
+    {
+      "check": "Individual opens selected human",
+      "passed": true
+    },
+    {
+      "check": "Existing24-hour drag edits chosen resident",
+      "passed": true
+    },
+    {
+      "check": "Priority UI changes only selected resident",
+      "passed": true
+    },
+    {
+      "check": "Resident switch retains food settings",
+      "passed": true
+    },
+    {
+      "check": "Life panel fits logical canvas (1280, 800)",
+      "passed": true
+    },
+    {
+      "check": "Eight unique matrix controls (1280, 800)",
+      "passed": true
+    },
+    {
+      "check": "Visible scroll track (1280, 800)",
+      "passed": true
+    },
+    {
+      "check": "Food tab does not duplicate timetable panel",
+      "passed": true
+    },
+    {
+      "check": "Life panel fits logical canvas (1600, 1000)",
+      "passed": true
+    },
+    {
+      "check": "Eight unique matrix controls (1600, 1000)",
+      "passed": true
+    },
+    {
+      "check": "Visible scroll track (1600, 1000)",
+      "passed": true
+    },
+    {
+      "check": "Food tab does not duplicate timetable panel",
+      "passed": true
+    },
+    {
+      "check": "Reopening life preserves return origin and resident",
+      "passed": true
+    },
+    {
+      "check": "Back restores role origin",
+      "passed": true
+    },
+    {
+      "check": "Individual status callback passes actual identity",
+      "passed": true
+    },
+    {
+      "check": "Back restores individual status",
+      "passed": true
+    },
+    {
+      "check": "Access editor replaces filter tree without duplicate large panels",
+      "passed": true
+    },
+    {
+      "check": "Access checkbox edits actual withdrawal permission",
+      "passed": true
+    },
+    {
+      "check": "Resident details expose satisfaction and traits",
+      "passed": true
+    }
+  ],
+  "count": 22,
+  "failed": 0
+}

@@ -33,6 +33,9 @@ const Shop = preload("res://game/shop_table.gd")
 const Rules = preload("res://game/rules.gd")
 var craft_stock_cache={}
 var craft_revision=0
+const Resident=preload("res://game/resident_life.gd")
+const Access=preload("res://game/stock_access.gd")
+const FoodPrefs=preload("res://game/food_preferences.gd")
 const Needs=preload("res://game/living_needs.gd")
 const Craft=preload("res://game/crafting.gd")
 const BUILD = Rules.BUILD
@@ -752,7 +755,9 @@ func animal_step(a: Dictionary):
 		a.rescuing = false
 		release_kennel(a)
 		return
-	if a.get("category","")=="human" and a.get("resting",false):return
+	if a.get("category","")=="human":
+		if Food.step(self,a):return
+		if a.get("resting",false):return
 	if Livestock.held(self,a):a.state="と殺作業中";return
 	if Tasks.held(self,a):a.state="調教中";return
 	if merchant_worker=="a%d"%a.id and merchant_approach!=null:return
@@ -1170,7 +1175,8 @@ func step():
 	var t_Life_step=Metrics.start()
 	Life.step(self)
 	Homes.assign_pending(self)
-	for actor in Sleep.people(self).values():Sleep.step(self,actor)
+	for actor in Sleep.people(self).values():
+		Resident.step(self,actor);Sleep.step(self,actor)
 	Metrics.finish("Life_step",t_Life_step)
 	var t_update_merchant_order=Metrics.start()
 	update_merchant_order()
@@ -1369,8 +1375,8 @@ func use_food(kind: String, animal_id: int, p: Vector2i) -> bool:
 	var food = Shop.FOOD[kind]
 	for a in animals:
 		if (a.id == animal_id or (animal_id < 0 and a.pos == p)) and a.placed and a.category == food.category and a.hp > 0 and a.hp < a.max_hp:
+			if not Stock.consume(self,kind,1):return false
 			a.hp = mini(a.max_hp, a.hp + food.hp)
-			Stock.consume(self,kind,1)
 			metrics.fed += 1
 			return true
 	return false
@@ -1409,8 +1415,8 @@ func heal_with_mushrooms():
 		candidates.sort_custom(func(a, b): return a.id < b.id if a.hp * b.max_hp == b.hp * a.max_hp else a.hp * b.max_hp < b.hp * a.max_hp)
 		var a = candidates[0]
 		var restored = mini(Rules.NATURE.mushroom_hp, a.max_hp - a.hp)
+		if not Stock.consume(self,"mushroom",1):break
 		a.hp += restored
-		Stock.consume(self,"mushroom",1)
 		metrics.mushrooms_used += 1
 		metrics.mushroom_healing += restored
 
@@ -1456,10 +1462,10 @@ func sell(id: String, animal_id: int = -1) -> bool:
 		campaign.animals.erase(found[0]) # No last-animal softlock. Placed facilities are not sale inventory.
 	elif p.Category == "materials":
 		if resource_amount(id) < p.Amount: return false
-		add_resource(id, -p.Amount)
+		if not Stock.consume(self,id,p.Amount):return false
 	elif p.Category == "items":
 		if item_count(id) < p.Amount: return false
-		add_item(id, -p.Amount) # Registry is independent: selling a plan never revokes unlock.
+		if not Stock.consume(self,id,p.Amount):return false # Selling never revokes unlock.
 	else: return false
 	campaign.gold += p.SellPrice
 	shop_log.append({"side": "sell", "product": id, "animal_id": animal_id, "amount": p.Amount, "gold": p.SellPrice})

@@ -26,8 +26,8 @@ func run():
 	begin("1 Slow deterioration, work/movement effects, inability and later death")
 	var w=farm();var p=w.Work.Policy;var n=w.Nutrition
 	check((p.SATIETY_MAX-p.EAT_THRESHOLD)/p.HUNGER_PER_SECOND==350.0 and n.EMPTY_TO_DEATH_SECONDS==2*w.Cycle.Clock.DAY_SECONDS,"Full satiety reaches meal seeking at 350s; starvation then has two days before death")
-	w.keeper.malnutrition=24.99;w.step();check(is_equal_approx(w.Jobs.factor(w.keeper),0.65),"Empty satiety caps movement/work at 65 percent without multiplying malnutrition penalties")
-	w.keeper.malnutrition=49.99;w.step();check(is_equal_approx(w.Jobs.factor(w.keeper),0.5),"Severe deterioration reduces real movement and work factor to 50 percent")
+	w.keeper.malnutrition=24.99;w.step();check(is_equal_approx(w.Jobs.movement_factor(w.keeper),0.65) and is_equal_approx(w.Jobs.factor(w.keeper),0.65*w.keeper.mood_work),"Empty satiety caps movement/work at 65 percent without multiplying malnutrition penalties")
+	w.keeper.malnutrition=49.99;w.step();check(is_equal_approx(w.Jobs.movement_factor(w.keeper),0.5) and is_equal_approx(w.Jobs.factor(w.keeper),0.5*w.keeper.mood_work),"Severe deterioration reduces real movement and work factor to 50 percent")
 	w.Work.set_drafted(w,"keeper",true);w.Life.command(w,"keeper_move",Vector2i(15,8));w.keeper.malnutrition=74.99;var position=w.keeper.pos
 	w.step();check(w.keeper.nutrition_down and w.keeper.hp>0 and not w.keeper.get("dead",false) and w.keeper.pos==position,"Inability interrupts a drafted move while still alive")
 	check(not w.Life.able(w) and not w.Life.plan_rest_until(w,"night"),"Inability cannot move, attack or accelerate time via rest")
@@ -58,13 +58,13 @@ func run():
 		if not w.keeper.nutrition_down:break
 	check(not w.keeper.nutrition_down and w.keeper.malnutrition<50 and w.tick-recovery_start>400 and w.keeper.pos==Vector2i(6,8),"Fed worker gradually recovers for more than 100 seconds before becoming able")
 	group.observation={"recovery_seconds":(w.tick-recovery_start)*w.DT,"before":recovery_level,"after":w.keeper.malnutrition,"meat_consumed":w.stock_used.get("meat",0)}
-	w=farm();w.keeper.malnutrition=60;w.Zones.create(w,"residential",Vector2i(20,8),Vector2i(20,8));w.Life.set_rest(w,true,"forced");w.keeper.forced_rest=true;w.Stock.add(w,"milk",1,Vector2i(6,9))
+	w=farm();w.keeper.sleepiness=60;w.keeper.timetable.fill("sleep");w.keeper.malnutrition=60;w.Zones.create(w,"residential",Vector2i(20,8),Vector2i(20,8));w.Life.set_rest(w,true,"forced");w.keeper.forced_rest=true;w.Stock.add(w,"milk",1,Vector2i(6,9))
 	for i in range(3):w.step()
-	check(w.keeper.get("life_need","")=="food" and not w.keeper.resting and w.keeper.get("meal_rest_kind","")=="forced","Malnourished forced sleeper pauses residential travel while food owns movement")
+	check(w.keeper.get("life_need","")=="food" and not w.keeper.resting and w.keeper.get("sleep_food_wait",false),"Malnourished forced sleeper pauses residential travel while food owns movement")
 	for i in range(15):w.step()
-	check(w.stock_used.get("milk",0)==1 and w.keeper.resting and w.keeper.rest_kind=="forced","After the meal the original forced rest resumes without competing movement")
+	check(w.stock_used.get("milk",0)==1 and w.keeper.resting and w.keeper.rest_kind=="scheduled","After the meal scheduled sleep resumes without competing movement")
 	w=farm();w.keeper.malnutrition=60;w.Life.set_rest(w,true,"manual");w.step()
-	check(w.keeper.resting and w.keeper.rest_kind=="manual" and not w.keeper.has("meal_rest_kind"),"No reachable food restores the original manual rest instead of dropping it")
+	check(not w.keeper.resting and w.keeper.get("sleep_food_wait",false),"Zero satiety without reachable food stays awake awaiting food")
 	write("nutrition.json")
 func write(name):
 	report.passed=failures==0;report.failures=failures;FileAccess.open(out+"/"+name,FileAccess.WRITE).store_string(JSON.stringify(report,"\t"));print("Nutrition09: ",report.groups.size()," groups, ",failures," failures");quit(0 if failures==0 else 1)

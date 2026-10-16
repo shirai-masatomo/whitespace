@@ -1,0 +1,226 @@
+{
+  "checks": [
+    {
+      "check": "Appetite independent hunger rate small",
+      "passed": true
+    },
+    {
+      "check": "Appetite independent hunger rate normal",
+      "passed": true
+    },
+    {
+      "check": "Appetite independent hunger rate large",
+      "passed": true
+    },
+    {
+      "check": "Four tiers, all current human foods simple",
+      "passed": true
+    },
+    {
+      "check": "Default cooked before raw",
+      "passed": true
+    },
+    {
+      "check": "Priority editing swaps unique ranks",
+      "passed": true
+    },
+    {
+      "check": "Actual food choice uses resident raw priority",
+      "passed": true
+    },
+    {
+      "check": "Denied food not claimed or consumed",
+      "passed": true
+    },
+    {
+      "check": "Cooked setting selects cooked physical stock",
+      "passed": true
+    },
+    {
+      "check": "Sleeping stays asleep at satiety 30",
+      "passed": true
+    },
+    {
+      "check": "Sleeping stays asleep at satiety 1",
+      "passed": true
+    },
+    {
+      "check": "Zero satiety wakes sleeper",
+      "passed": true
+    },
+    {
+      "check": "Two-second physical meal returns to scheduled sleep",
+      "passed": true
+    },
+    {
+      "check": "No food retries without forced-sleep oscillation",
+      "passed": true
+    },
+    {
+      "check": "Restocking releases hungry wake latch and resumes sleep",
+      "passed": true
+    },
+    {
+      "check": "Interior door gives independent homes",
+      "passed": true
+    },
+    {
+      "check": "Open interior door still separates rooms",
+      "passed": true
+    },
+    {
+      "check": "Each resident gets own room and bed",
+      "passed": true
+    },
+    {
+      "check": "Cross-room single zone isolates occupied room goods",
+      "passed": true
+    },
+    {
+      "check": "Other room keeps own access",
+      "passed": true
+    },
+    {
+      "check": "Withdrawal ban does not block delivery or walking",
+      "passed": true
+    },
+    {
+      "check": "Public job cannot reserve another resident private materials",
+      "passed": true
+    },
+    {
+      "check": "Direct consumption uses same permission",
+      "passed": true
+    },
+    {
+      "check": "Authorized resident reserves goods",
+      "passed": true
+    },
+    {
+      "check": "Permission revocation safely releases uncollected claim",
+      "passed": true
+    },
+    {
+      "check": "New roommate can be assigned",
+      "passed": true
+    },
+    {
+      "check": "New resident auto access, manual denial retained",
+      "passed": true
+    },
+    {
+      "check": "Earliest assigned resident names shared home",
+      "passed": true
+    },
+    {
+      "check": "Manual permission restores withdrawal",
+      "passed": true
+    },
+    {
+      "check": "Filter and access remain separate; no item loss",
+      "passed": true
+    },
+    {
+      "check": "Construction source scan respects actor permission",
+      "passed": true
+    },
+    {
+      "check": "Crafting cannot reserve unauthorized wood",
+      "passed": true
+    },
+    {
+      "check": "Equipment uses same withdrawal check",
+      "passed": true
+    },
+    {
+      "check": "Denied construction does not consume stock",
+      "passed": true
+    },
+    {
+      "check": "Restored access resumes delivery and construction exactly once",
+      "passed": true
+    },
+    {
+      "check": "Clothing designation accepted",
+      "passed": true
+    },
+    {
+      "check": "Authorized equipment uses one physical item",
+      "passed": true
+    },
+    {
+      "check": "Denied automatic mushroom healing exits without infinite loop or free heal",
+      "passed": true
+    },
+    {
+      "check": "Human companion shares two-second meal system without worker registration",
+      "passed": true
+    },
+    {
+      "check": "Human support AI retained while life settings include companion",
+      "passed": true
+    },
+    {
+      "check": "Unseen enemy does not reveal coordinates or trigger personal detection",
+      "passed": true
+    },
+    {
+      "check": "Distracted detection cannot see through a wall",
+      "passed": true
+    },
+    {
+      "check": "Seen danger wakes and prevents sleep at fatigue100",
+      "passed": true
+    },
+    {
+      "check": "Attack wakes immediately and records extreme tension",
+      "passed": true
+    },
+    {
+      "check": "Remaining enemy holds tension after attacker leaves sight",
+      "passed": true
+    },
+    {
+      "check": "Safe interval releases tension and reevaluates forced sleep",
+      "passed": true
+    },
+    {
+      "check": "Focus probabilities independent, builder highest, never guaranteed",
+      "passed": true
+    },
+    {
+      "check": "Sustained work can probabilistically enter focus",
+      "passed": true
+    },
+    {
+      "check": "Focus stamina reduction applied exactly once",
+      "passed": true
+    },
+    {
+      "check": "Focus does not stack or extend on every tick",
+      "passed": true
+    },
+    {
+      "check": "Interruption clears both focus corrections",
+      "passed": true
+    },
+    {
+      "check": "Repeated events bounded by event type",
+      "passed": true
+    },
+    {
+      "check": "Simple food gives meal satisfaction without quality penalty",
+      "passed": true
+    },
+    {
+      "check": "Mood memories expire and satisfaction stays bounded",
+      "passed": true
+    },
+    {
+      "check": "Distracted appetite_kind has bounded detection bonus",
+      "passed": true
+    }
+  ],
+  "count": 55,
+  "failed": 0
+}

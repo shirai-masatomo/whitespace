@@ -236,6 +236,7 @@ static func hurt(w, e):
 	var originals=w.enemies.filter(func(actor):return actor.id==e.id)
 	if not originals.is_empty():w.Combat.hit(w,originals[0],k,e.get("combat_action","attack"),before-k.hp,e.get("combat_skill",false))
 	k.hurt_until = w.tick + 8
+	w.Resident.attacked(w,k)
 	if before>k.hp:
 		w.last_keeper_attacker_id=e.id;w.rescue_until=w.tick+ceili(6.0/w.DT)
 	danger(w, "keeper_hit")

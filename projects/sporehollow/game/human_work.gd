@@ -57,7 +57,7 @@ static func interrupt(w,key: String,reason: String):
 		release(w,j)
 		j.state="suspended";j.block_reason=reason;j.retry_at=w.tick
 		w.job_log.append({"tick":w.tick,"event":"suspended","id":j.id,"worker":key,"reason":reason})
-	if w.workers.has(key):w.workers[key].work_status=reason
+	if w.workers.has(key):w.workers[key].work_status=reason;w.Resident.clear_focus(w.workers[key])
 
 static func set_priority(w,key: String,kind: String,value: int):
 	if not w.workers.has(key) or not Policy.PRIORITIES.has(kind):return

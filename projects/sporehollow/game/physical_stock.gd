@@ -94,12 +94,13 @@ static func sync(w):
 	for kind in MATERIALS+["egg","mushroom"]:counts.erase(kind)
 	w.campaign.items=counts
 
-static func consume(w,kind: String,amount: int) -> bool:
+static func consume(w,kind: String,amount: int,actor:Dictionary={}) -> bool:
+	if actor.is_empty():actor=w.keeper
 	normalize(w)
-	if available(w,kind)<amount:return false
+	if w.field_items.filter(func(r):return r.kind==kind and eligible(w,r) and w.Access.can_take(w,r,actor)).reduce(func(n,r):return n+free_count(r),0)<amount:return false
 	var remaining=amount
 	for row in w.field_items.duplicate():
-		if row.kind!=kind or not eligible(w,row):continue
+		if row.kind!=kind or not eligible(w,row) or not w.Access.can_take(w,row,actor):continue
 		var used=mini(remaining,free_count(row));row.amount-=used;remaining-=used
 		if row.amount==0:w.field_items.erase(row)
 		if remaining==0:break
@@ -117,7 +118,7 @@ static func release_token(w,token: String):
 
 static func reserve(w,kind: String,amount: int,token: String,actor: Dictionary,specific: int=-1,storage_only: bool=true) -> Array:
 	normalize(w)
-	var rows=w.field_items.filter(func(r):return r.kind==kind and eligible(w,r,storage_only) and (specific<0 or r.stock_id==specific))
+	var rows=w.field_items.filter(func(r):return r.kind==kind and eligible(w,r,storage_only) and w.Access.can_take(w,r,actor) and (specific<0 or r.stock_id==specific))
 	rows.sort_custom(func(a,b):return w.distance(actor.pos,a.pos)<w.distance(actor.pos,b.pos) if w.distance(actor.pos,a.pos)!=w.distance(actor.pos,b.pos) else a.stock_id<b.stock_id)
 	var result=[];var remaining=amount
 	for row in rows:
@@ -133,11 +134,12 @@ static func carry_free(w,key: String) -> int:
 	return maxi(0,Policy.CARRY_CAPACITY-count)
 
 static func pickup(w,row,token: String,actor: Dictionary,job_id: int) -> Dictionary:
+	if not w.Access.can_take(w,row,actor):row.get("claims",{}).erase(token);sync(w);return {}
 	var n=int(row.get("claims",{}).get(token,0))
-	if n<=0 or n>row.amount or n>carry_free(w,actor.work_key) or row.location!="ground" or row.get("forbidden",false):return {}
+	if n<=0 or n>row.amount or n>carry_free(w,w.Sleep.actor_key(actor)) or row.location!="ground" or row.get("forbidden",false):return {}
 	row.claims.erase(token);row.amount-=n
 	var carried=row.duplicate(true);carried.stock_id=w.next_stock_id;w.next_stock_id+=1;carried.amount=n;carried.claims={}
-	carried.location="carry";carried.owner=actor.work_key;carried.job_id=job_id;carried.pos=actor.pos;carried.incubating=false
+	carried.location="carry";carried.owner=w.Sleep.actor_key(actor);carried.job_id=job_id;carried.pos=actor.pos;carried.incubating=false
 	if row.amount==0:w.field_items.erase(row)
 	w.field_items.append(carried);sync(w);return carried
 

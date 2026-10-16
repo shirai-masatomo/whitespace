@@ -23,7 +23,7 @@ static func status(a: Dictionary) -> String:
 
 static func step(w,a: Dictionary):
 	if a.get("dead",false) or a.get("lost",false) or not a.get("placed",false):return
-	a.satiety=maxf(0,a.get("satiety",w.Work.Policy.SATIETY_MAX)-w.Work.Policy.HUNGER_PER_SECOND*w.DT)
+	a.satiety=maxf(0,a.get("satiety",w.Work.Policy.SATIETY_MAX)-w.Work.Policy.HUNGER_PER_SECOND*w.DT*w.Resident.appetite(a))
 	var old=a.get("malnutrition",0.0)
 	a.malnutrition=clampf(old+(100.0/EMPTY_TO_DEATH_SECONDS if a.satiety<=0 else -100.0/RECOVERY_SECONDS)*w.DT,0,DEATH)
 	if a.malnutrition>=DOWN and not a.get("nutrition_down",false):

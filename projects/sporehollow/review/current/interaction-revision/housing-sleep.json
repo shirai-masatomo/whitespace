@@ -577,7 +577,7 @@
       "passed": true
     },
     {
-      "check": "Interior door joins two floored rooms into one house",
+      "check": "Interior door separates independent homes",
       "passed": true
     },
     {

@@ -62,7 +62,7 @@ static func equip_step(w,j,a):
 		if j.get("material_claims",[]).is_empty():j.material_claims=w.Stock.reserve(w,j.item_id,1,token,a)
 		if j.material_claims.is_empty():j.state="blocked";j.block_reason="届く場所に装備がありません";return
 		var row=w.Stock.find(w,j.material_claims[0].stock_id)
-		if row.is_empty() or row.get("forbidden",false) or row.claims.get(token,0)<1:w.Stock.release_token(w,token);j.erase("material_claims");j.state="blocked";j.block_reason="予約した装備が使えません";return
+		if row.is_empty() or row.get("forbidden",false) or not w.Access.can_take(w,row,a) or row.claims.get(token,0)<1:w.Stock.release_token(w,token);j.erase("material_claims");j.state="blocked";j.block_reason="予約した装備が使えません";return
 		j.phase="fetch"
 		if w.Jobs.walk(w,j,w.neighbors(row.pos),a):w.Stock.pickup(w,row,token,a,j.id);j.erase("material_claims")
 		return

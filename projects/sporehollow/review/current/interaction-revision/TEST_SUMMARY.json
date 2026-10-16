@@ -1,46 +1,54 @@
 {
-  "scope": "2026-10-16 homes/sleep/material-wait",
-  "tests": [
+  "topic": "resident-life integration",
+  "method": "headless, Dummy audio, 30fps, bounded serial tests; no native desktop launch",
+  "suites": [
     {
-      "file": "housing-sleep.json",
+      "suite": "resident-life",
+      "checks": 55,
+      "failures": 0
+    },
+    {
+      "suite": "life-ui",
+      "checks": 22,
+      "failures": 0
+    },
+    {
+      "suite": "housing-sleep",
       "checks": 169,
       "failures": 0
     },
     {
-      "file": "building-preview.json",
-      "checks": 197,
+      "suite": "crafting",
+      "checks": 13,
       "failures": 0
     },
     {
-      "file": "construction-groups-normal.json",
-      "checks": 31,
-      "failures": 0
-    },
-    {
-      "file": "craft-stock.json",
+      "suite": "craft-stock",
       "checks": 40,
       "failures": 0
     },
     {
-      "file": "harvest.json",
-      "checks": 28,
+      "suite": "living-needs",
+      "checks": 29,
       "failures": 0
     },
     {
-      "file": "loading.json",
+      "suite": "construction-groups-normal",
+      "checks": 31,
+      "failures": 0
+    },
+    {
+      "suite": "nutrition",
+      "checks": 17,
+      "failures": 0
+    },
+    {
+      "suite": "loading",
       "checks": 39,
       "failures": 0
     }
   ],
-  "total_checks": 504,
-  "native_game_launched": false,
-  "renderer": "headless",
-  "max_fps": 30,
-  "audio": "Dummy",
-  "timeout_per_process_seconds": 120,
-  "unverified": [
-    "native GPU visual and interaction",
-    "long session balance",
-    "shutdown ObjectDB residual objects"
-  ]
+  "checks": 415,
+  "failures": 0,
+  "native_gpu_verified": false
 }

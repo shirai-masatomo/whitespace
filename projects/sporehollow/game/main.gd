@@ -96,6 +96,9 @@ var home_individual=-1
 var home_click_id=-1
 var home_click_time=0
 var schedule_brush="sleep"
+var life_tab="schedule"
+var life_actor="keeper"
+var life_return={}
 var selection_ids: Dictionary = {}
 var menu_open = false
 var menu_was_paused = false
@@ -1296,7 +1299,7 @@ func _route_input(event):
 		return
 	if event is InputEventKey and event.pressed and not event.echo and event.physical_keycode == KEY_ESCAPE:
 		if home_individual>=0:home_individual=-1;neutral();refresh()
-		elif colony_page=="schedule" or selected.get("kind")=="house":neutral();refresh()
+		elif colony_page in ["schedule","life"] or selected.get("kind")=="house":neutral();refresh()
 		elif wall_stroke.kind!="":cancel_wall_stroke();notice("壁の予約を取り消しました")
 		elif (world.phase == "shop" or field_book or field_shop) and (morning_screen != "morning" or field_shop): close_morning_screen()
 		elif menu_open and menu_page!="main":ColonyMenu.page(self,"main")
@@ -2900,6 +2903,7 @@ func selected_egg_lines() -> Array:
 	return Clarity.eggs(world,eggs,cells.any(func(p):return job_reserved("collect",p)))
 
 func companion_card_rect() -> Rect2:
+	if world.Orders.animal(world,selected.get("id",-1)).get("category","")=="human":return Rect2(8,442 if animal_commands_open else 530,448,212)
 	return Rect2(8,498 if animal_commands_open else 586,448,156)
 
 func draw_companion_card():
@@ -2911,6 +2915,10 @@ func draw_companion_card():
 	label_on(hud,p+Vector2(70,27),(Farm.animal_name(a)+(" · "+Farm.SPECIES[a.species].title if a.get("name","")!="" else "")).left(20)+"  Lv%d"%a.lv,17,UI.PAPER)
 	label_on(hud,p+Vector2(70,49),"満腹%d · スタミナ%d/%d"%[a.get("satiety",100),a.stamina,a.get("max_stamina",100)],13,UI.PAPER)
 	label_on(hud,p+Vector2(12,103),world.Needs.describe(world,a).left(36),12,UI.PAPER)
+	if a.get("category","")=="human":
+		var life=world.Resident.describe(a).split("\n")
+		label_on(hud,p+Vector2(12,126),life[0].left(32),12,UI.PAPER)
+		label_on(hud,p+Vector2(12,147),life[1].left(32),12,UI.PAPER)
 	hud.draw_rect(Rect2(p+Vector2(70,63),Vector2(160,7)),Color("293d35"))
 	hud.draw_rect(Rect2(p+Vector2(70,63),Vector2(160*clampf(float(a.hp)/maxi(1,a.max_hp),0,1),7)),Color("90c19b"))
 	label_on(hud,p+Vector2(238,72),"HP %d / %d   選択 %d匹"%[a.hp,a.max_hp,selected_animals.size()],13,UI.PAPER)
@@ -2942,6 +2950,9 @@ func draw_keeper_card(k: Dictionary):
 	elif k.get("life_need","")=="food":status="備蓄の食料へ移動中"
 	label_on(hud,Vector2(22,605),status.left(46),13,UI.INK)
 	label_on(hud,Vector2(22,626),world.Needs.describe(world,k),13,UI.INK)
+	var life=world.Resident.describe(k).split("\n")
+	label_on(hud,Vector2(22,648),life[0],13,UI.INK)
+	label_on(hud,Vector2(22,669),life[1].left(44),12,UI.INK)
 
 func keeper_pixel() -> Vector2:
 	if world.keeper.carrier >= 0:

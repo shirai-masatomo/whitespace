@@ -55,7 +55,7 @@ func housing():
 	check(not helper.has("bed_id"),"One bed never assigns two residents")
 	ready("bed",origin+Vector2i(3,2));w.refresh_indoor();w.Homes.assign_pending(w)
 	check(helper.get("bed_id",-1)!=w.keeper.bed_id and helper.get("home_id")==id,"Second bed assigns second resident, preserving first")
-	check("たちの家" in w.Homes.title(w,w.homes[id]),"House title describes multiple residents")
+	check("達の家" in w.Homes.title(w,w.homes[id]),"House title describes multiple residents")
 	var bed=w.Homes.bed(w,helper);w.structures.erase(bed.pos);w.refresh_indoor();w.Homes.assign_pending(w);check(not helper.has("home_id"),"Removed bed releases obsolete resident assignment")
 	w.structures[door].status="destroyed";w.refresh_indoor();w.Homes.assign_pending(w);check(w.homes.is_empty() and not w.keeper.has("home_id"),"Broken enclosure invalidates house and home assignment")
 func deep():
@@ -72,7 +72,7 @@ func deep():
 	for x in range(9):
 		for y in range(5):ready("wood_wall" if x in [0,4,8] or y in [0,4] else "wood_tile",Vector2i(10+x,10+y))
 	ready("door",Vector2i(12,10));ready("door",Vector2i(14,12));w.refresh_indoor()
-	check(w.homes.size()==1 and w.homes.values()[0].cells.size()==18,"Interior door joins two floored rooms into one house")
+	check(w.homes.size()==2 and w.homes.values()[0].cells.size()==9,"Interior door separates independent homes")
 	var id=w.homes.keys()[0];ready("wood_wall",Vector2i(14,12));ready("door",Vector2i(16,10));w.refresh_indoor();check(w.homes.size()==2 and w.homes.has(id),"Partition produces two houses and retains one stable ID")
 	w.structures[Vector2i(12,10)].kind="wood_wall";w.structures[Vector2i(16,10)].kind="wood_wall";w.refresh_indoor();check(w.homes.is_empty(),"Doorless sealed rooms are not inhabitable houses")
 	# An unseen resident does not leak its exact position to an invader.

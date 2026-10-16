@@ -80,7 +80,7 @@ static func add_cells(w,kind:String,cells:Array)->int:
 		w.next_zone_id+=1;w.zones.append(z)
 	else:
 		z=touching[0] # Oldest ID wins name, priority and filters, deterministically.
-		for other in touching.slice(1):w.zones.erase(other)
+		for other in touching.slice(1):w.Access.merge(z,other);w.zones.erase(other)
 	z.cells=ordered(merged.keys());changed(w);return z.id
 static func subtract(w,cells:Array,id:int=-1)->int:
 	var cut={};var count=0;var fragments=[]
@@ -166,6 +166,7 @@ static func set_priority(w,id:int,value:int):
 	z.priority=clampi(value,0,2);changed(w)
 
 static func changed(w):
+	w.Access.changed(w)
 	w.housing_dirty=true
 	sync_storage(w)
 	w.Stock.sync(w)

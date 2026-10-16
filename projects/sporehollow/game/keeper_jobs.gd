@@ -149,7 +149,7 @@ static func walk(w,j,goals: Array,actor: Dictionary={}) -> bool:
 	return false
 
 static func factor(actor: Dictionary) -> float:
-	return movement_factor(actor)*actor.get("food_work_factor",1.0)
+	return movement_factor(actor)*actor.get("food_work_factor",1.0)*actor.get("focus_work",1.0)*actor.get("mood_work",1.0)
 
 static func movement_factor(actor: Dictionary) -> float:
 	return (0.6 if actor.get("sleepiness",0)>=80 else 1.0)*preload("res://game/human_nutrition.gd").factor(actor)

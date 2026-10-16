@@ -2,6 +2,8 @@ extends RefCounted
 ## Physical taxonomy is independent of recipe ingredients and usage tags.
 const CATEGORIES={"resource":["資源・素材",{"earth":"土砂石材","wood":"木材","metal":"金属","fiber":"繊維・皮革","component":"加工部材"}],"food":["食料",{"raw":"生食材","cooked":"調理済み食品","feed":"飼料"}],"equipment":["装備・道具",{"clothing":"衣服","armor":"防具","weapon":"武器","tool":"道具"}],"medical":["医療・消耗品",{"medicine":"医療品","consumable":"消耗品"}],"furniture":["設備・家具",{"furniture":"家具","installation":"設置物"}],"special":["その他・特殊",{"trade":"交易品","blueprint":"設計図","special":"特殊品"}]}
 # name, main category, subcategory, usage tags, existing placeholder icon
+const FOOD_TIERS=["簡素","普通","上等","豪華"]
+# Optional sixth field is tier; all existing foods default to simple.
 const ROWS={
 	"soil":["土","resource","earth",["building"],"soil"],"stone":["石材","resource","earth",["building"],"stone"],"wood":["木材","resource","wood",["building","carpentry"],"wood"],"fiber":["植物繊維","resource","fiber",["tailoring"],"feather"],
 	"mushroom":["キノコ","food","raw",["cooking","meal"],"mushroom"],"egg":["卵","food","raw",["cooking","meal"],"egg"],"meat":["肉","food","raw",["cooking","meal"],"meat"],"milk":["ミルク","food","raw",["cooking","meal"],"milk"],
@@ -13,7 +15,7 @@ const ROWS={
 	"kennel_plan":["犬小屋の設計図","special","blueprint",["learn"],"book"],"coop_plan":["鶏小屋の設計図","special","blueprint",["learn"],"book"]}
 static func item(id:String)->Dictionary:
 	var r=ROWS.get(id,[id,"special","blueprint" if id.ends_with("_plan") else "special",[],"basket"])
-	return {"id":id,"name":r[0],"category":r[1],"subcategory":r[2],"tags":r[3],"icon":r[4]}
+	return {"id":id,"name":r[0],"category":r[1],"subcategory":r[2],"tags":r[3],"icon":r[4],"tier":int(r[5]) if r.size()>5 else 0}
 static func title(id:String)->String:return item(id).name
 static func accepted(z:Dictionary,id:String)->bool:
 	var f=z.get("filter",{});var data=item(id)

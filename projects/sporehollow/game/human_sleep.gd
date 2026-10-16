@@ -17,6 +17,7 @@ static func defaults(kind:String)->Array:
 	for hour in range(24):result.append("sleep" if fposmod(hour-span[0],24)<6 else ("work" if hour>=6 and hour<18 else "free"))
 	return result
 static func initialize(a):
+	preload("res://game/resident_life.gd").initialize(a)
 	if not a.has("life_type"):a.life_type="normal" if actor_key(a)=="keeper" else TYPES.keys()[absi(hash(actor_key(a)))%3]
 	if not a.has("sleep_trait"):a.sleep_trait="normal" if actor_key(a)=="keeper" else TRAITS.keys()[absi(hash(actor_key(a)+"recovery"))%3]
 	if not a.has("sleepiness"):a.sleepiness=0.0
@@ -70,11 +71,14 @@ static func recovery(w,a)->float:
 static func step(w,a):
 	initialize(a);var planned=activity(w,a)
 	if not a.get("placed",false) or a.get("dead",false) or a.get("hp",0)<=0 or (a.has("work_key") and a.get("state","")!="free") or a.get("carrier",-1)>=0 or a.get("nutrition_down",false):return
-	var danger=w.enemies.any(func(e):return not e.done and e.hp>0 and not e.flee and w.distance(e.pos,a.pos)<=3)
-	a.danger_near=danger
+	var near=w.enemies.any(func(e):return not e.done and e.hp>0 and not e.flee and w.distance(e.pos,a.pos)<=3 and w.line_of_sight(a.pos,e.pos))
+	var danger=a.get("danger_state","relaxed")!="relaxed" or near
+	a.danger_near=near or a.get("danger_state","relaxed") in ["alert","extreme"]
+	if a.get("resting",false) and a.get("satiety",100)<=0:
+		a.sleep_food_wait=true;wake(w,a)
 	if a.get("resting",false) and (danger or a.get("drafted",false)):wake(w,a,true)
 	if a.get("resting",false) and a.get("rest_kind","")=="scheduled" and planned!="sleep" and not a.get("forced_rest",false):wake(w,a)
-	if not a.get("resting",false) and not danger and not a.get("drafted",false) and a.get("life_need","")!="food" and w.tick>=a.get("wake_until",0):
+	if not a.get("resting",false) and not danger and not a.get("sleep_food_wait",false) and a.get("satiety",100)>0 and not a.get("drafted",false) and a.get("life_need","")!="food" and w.tick>=a.get("wake_until",0):
 		if a.sleepiness>=100:begin(w,a,true)
 		elif planned=="sleep" and a.sleepiness>=50 and a.get("satiety",100)>w.Work.Policy.EAT_THRESHOLD:begin(w,a,false)
 	if a.get("resting",false):
@@ -86,5 +90,5 @@ static func step(w,a):
 		if a.heal_credit>=5:a.hp=mini(a.max_hp,a.hp+1);a.heal_credit-=5
 		a.work_status=a.get("rest_reason","睡眠中")
 		if not a.has("work_key"):a.state="休む"
-		if a.sleepiness<=0 and a.get("rest_kind","") in ["scheduled","forced"]:wake(w,a)
+		if a.sleepiness<=0 and a.get("rest_kind","") in ["scheduled","forced"]:w.Resident.remember(w,a,"rested");wake(w,a)
 	else:a.sleepiness=minf(100,a.sleepiness+100.0/432.0*a.sleep_rate*w.DT)

@@ -12,6 +12,10 @@ static func meal(w,a,kind:String):
 		# One meal effect slot: a new cooked buff replaces/refreshes it, never multiplies it.
 		a.meal_effect={"name":food.effect,"until":w.tick+ceili(food.duration/w.DT),"regen":food.get("regen",1.0),"cost":food.get("cost",1.0),"work":food.get("work",1.0)}
 	refresh_effect(w,a)
+	if a.get("work_key","")!="" or a.get("category","")=="human":
+		w.Resident.remember(w,a,"meal")
+		var tier=preload("res://game/item_catalog.gd").item(kind).tier
+		if tier>0:w.Resident.remember(w,a,"quality",tier)
 static func refresh_effect(w,a):
 	if a.has("meal_effect") and a.meal_effect.until<=w.tick:a.erase("meal_effect")
 	var effect=a.get("meal_effect",{})
@@ -25,7 +29,7 @@ static func begin(w):
 static func update(w,a,human:bool):
 	if a.get("dead",false) or a.get("lost",false) or not a.get("placed",false):return
 	init(a);refresh_effect(w,a)
-	if not human:a.satiety=maxf(0,a.satiety-Data.ANIMAL_HUNGER*w.DT)
+	if not human:a.satiety=maxf(0,a.satiety-Data.ANIMAL_HUNGER*w.DT*(w.Resident.appetite(a) if a.get("category","")=="human" else 1.0))
 	var limits=band(a.satiety);a.max_stamina=limits[1];a.stamina=minf(a.stamina,a.max_stamina)
 	var moving=a.get("needs_last_pos",a.pos)!=a.pos;a.needs_last_pos=a.pos
 	var task=w.Work.active(w,a.work_key) if human else {}
@@ -35,7 +39,7 @@ static func update(w,a,human:bool):
 	var activity="rest" if rest else ("haul" if hauling else ("work" if working else ("wander" if not human and a.get("mode","")=="auto" and not a.get("rescuing",false) and a.get("state","") not in ["追跡","救出本能"] else "move") if moving else "idle"))
 	if w.enemies.any(func(e):return not e.done and e.hp>0 and w.distance(e.pos,a.pos)<=2) and not rest:activity="combat" if not moving else "move"
 	var rate=Data.RATES[activity]
-	a.stamina=clampf(a.stamina+rate*w.DT*(limits[2]*a.food_regen_factor if rate>0 else a.food_cost_factor),0,a.max_stamina)
+	a.stamina=clampf(a.stamina+rate*w.DT*(limits[2]*a.food_regen_factor if rate>0 else a.food_cost_factor*(a.get("focus_cost",1.0) if activity=="work" else 1.0)),0,a.max_stamina)
 	if a.stamina<=Data.REST_AT:a.needs_rest=true
 	elif a.stamina>=minf(Data.RESUME_AT,a.max_stamina*0.8):a.needs_rest=false
 	if a.satiety>0:a.starve_seconds=0.0;a.starve_damage=0.0;return
@@ -55,7 +59,7 @@ static func animal_action(w,a)->bool:
 	if a.has("work_key") and w.workers.has(a.work_key):return false
 	if w.enemies.any(func(e):return not e.done and not e.flee and e.hp>0 and w.distance(e.pos,a.pos)<=a.detection_range):return false
 	if a.get("needs_rest",false):a.state="ひと休み";return true
-	if a.get("satiety",100)>30:return false
+	if a.get("category","")=="human" or a.get("satiety",100)>30:return false
 	var diet=Data.DIETS.get(a.species,w.Work.Policy.HUMAN_FOOD)
 	var row=w.Stock.find(w,a.get("needs_food_id",-1))
 	if not row.is_empty() and (row.kind not in diet or not w.Stock.eligible(w,row,false)):row={}

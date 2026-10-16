@@ -60,7 +60,7 @@ static func equip_step(w,j):
 		if j.get("material_claims",[]).is_empty():j.material_claims=w.Stock.reserve(w,j.item_id,1,token,w.keeper)
 		if j.material_claims.is_empty():j.state="blocked";j.block_reason="届く場所に装備がありません";return
 		var row=w.Stock.find(w,j.material_claims[0].stock_id)
-		if row.is_empty() or row.get("forbidden",false) or row.claims.get(token,0)<1:w.Stock.release_token(w,token);j.erase("material_claims");j.state="blocked";j.block_reason="予約した装備が使えません";return
+		if row.is_empty() or row.get("forbidden",false) or not w.Access.can_take(w,row,w.keeper) or row.claims.get(token,0)<1:w.Stock.release_token(w,token);j.erase("material_claims");j.state="blocked";j.block_reason="予約した装備が使えません";return
 		j.phase="fetch"
 		if w.Jobs.walk(w,j,w.neighbors(row.pos)):w.Stock.pickup(w,row,token,w.keeper,j.id);j.erase("material_claims")
 		return
@@ -98,6 +98,7 @@ static func remove_animal(w,a,reason: String):
 	w.milestones.append({"tick":w.tick,"kind":reason,"animal_id":a.id})
 
 static func animal_hurt(w,a,e,raw: int,nonlethal: bool=false):
+	if a.get("category","")=="human":w.Resident.attacked(w,a)
 	if a.hp<=0 or a.get("dead",false) or a.get("lost",false): return
 	if preload("res://game/animal_recovery.gd").protected(w,a):return
 	var damage=maxi(0,raw-defense(a,w.tick))
@@ -353,7 +354,7 @@ static func strike(w,e,t,override_damage: int=-1):
 		var damage=e.human_attack if override_damage<0 else override_damage
 		if e.archetype=="martial_artist":damage=mini(damage,maxi(0,a.hp-1))
 		damage=roundi(damage*(0.85 if w.tick<e.weakened_until else 1.0))
-		a.hp=maxi(0,a.hp-damage);a.hurt_until=w.tick+4
+		a.hp=maxi(0,a.hp-damage);a.hurt_until=w.tick+4;w.Resident.attacked(w,a)
 		if a.hp<=0:a.state="unconscious";w.Work.interrupt(w,t.id,"負傷で作業中断")
 		w.PlayerEvents.add(w,e.name+" → "+a.get("name",t.id)+"　%dダメージ"%damage)
 	elif t.kind=="animal":

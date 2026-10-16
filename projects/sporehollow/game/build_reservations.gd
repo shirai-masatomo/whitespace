@@ -62,7 +62,7 @@ static func place_available(w,kind:String) -> int:
 	return maxi(0,count)
 static func consume_place(w,j) -> bool:
 	for row in w.field_items.duplicate():
-		if held(row,j)>0 and source(w,row,j):
+		if held(row,j)>0 and source(w,row,j) and w.Access.can_take(w,row,w.workers.get(j.get("assigned_to","keeper"),w.keeper)):
 			row.claims[token(j)]-=1;row.amount-=1
 			if row.claims[token(j)]==0:row.claims.erase(token(j))
 			if row.amount==0:w.field_items.erase(row)

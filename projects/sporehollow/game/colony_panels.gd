@@ -163,7 +163,7 @@ static func draft_changed(g,key: String):
 	g.refresh()
 
 static func signature(g) -> String:
-	if g.colony_page=="schedule":return str([g.world.Sleep.hour(g.world),g.world.Sleep.people(g.world).keys()])
+	if g.colony_page in ["schedule","life"]:return str([g.life_tab,g.life_actor,g.world.Sleep.hour(g.world),g.world.Sleep.people(g.world).keys()])
 	if g.selected.get("kind")=="house":return str([int(g.world.tick/4),g.world.homes.get(g.selected.get("id",-1),{}),g.world.Sleep.people(g.world).values().map(func(a):return [a.get("home_id",-1),a.get("bed_id",-1)])])
 	if g.group==1:return str(g.world.animals.map(func(a):return [a.id,a.get("name",""),a.hp,a.placed,a.get("dead",false),a.get("husbandry_class",""),a.get("forbidden",false),a.get("last_training_day",-1),g.world.Progression.loyalty(a)]))+str(g.world.jobs.filter(func(j):return j.kind in ["train","slaughter"]).map(func(j):return [j.id,j.get("cancel_requested",false)]))
 	if g.colony_page=="roles":

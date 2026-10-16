@@ -35,10 +35,15 @@ static func ready(w,j)->bool:
 	return j.get("batch_active",false) or j.bill_mode=="count" or remaining_stock(w,j)>0
 static func prepare(w,j,a)->bool:
 	var rec=Data.RECIPES[j.recipe];var changed=false
+	for r in w.field_items:
+		if r.get("craft_transfer",false) and r.job_id==j.id and not w.Access.can_take(w,r,a):
+			j.state="blocked";j.block_reason="中断した材料の持出し権限がありません";return false
+	for row in w.field_items:
+		if row.claims.get(token(j),0)>0 and not w.Access.can_take(w,row,a):row.claims.erase(token(j));changed=true
 	for kind in rec.ingredients:
 		var need=rec.ingredients[kind]-holding(w,j,kind)
 		if need<=0:continue
-		var rows=w.field_items.filter(func(r):return r.kind==kind and w.Stock.stored(w,r) and w.Stock.eligible(w,r))
+		var rows=w.field_items.filter(func(r):return r.kind==kind and w.Stock.stored(w,r) and w.Stock.eligible(w,r) and w.Access.can_take(w,r,a))
 		rows.sort_custom(func(x,y):return w.distance(a.pos,x.pos)<w.distance(a.pos,y.pos))
 		for r in rows:
 			if w.Jobs.path_to(w,a.pos,w.neighbors(r.pos)+[r.pos]).is_empty():continue
