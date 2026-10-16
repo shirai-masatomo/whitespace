@@ -44,6 +44,7 @@ func draw(g,kind:String,cell:Vector2i,valid:bool=true):
 		if kind in g.world.Buildings.WALLS:Art.wall(g,p,b,true)
 		elif kind in g.world.Buildings.DOORS:
 			for part in ["frame_rear","leaf","frame_front"]:Art.door_layer(g,p,b,part)
+		elif kind=="bed":Art.bed(g,p,tint)
 		elif g.world.Craft.Data.BENCHES.has(kind):Art.bench(g,p,kind,tint)
 	if not valid:
 		g.draw_arc(p,11,0,TAU,24,Color("ed6259"),2.5)

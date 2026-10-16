@@ -100,28 +100,28 @@ static func command(w, kind: String, p: Vector2i) -> bool:
 		return true
 	if w.paused:
 		if kind in ["keeper_rest", "resume_jobs"]:
-			if k.state != "free" or k.forced_rest: return false
+			if k.state != "free": return false
 			stop_rest_until(w,"manual")
 			k.pending_command = {"kind": kind, "pos": p}
 			return true
 		return false
 	if kind == "keeper_rest":
-		if k.state != "free" or k.forced_rest: return false
+		if k.state != "free": return false
 		stop_rest_until(w,"manual")
 		if not k.resting:
 			k.hold_before_rest = w.job_hold_reason if w.jobs_held else ""
 			set_rest(w, true)
 			w.Jobs.hold(w, "rest")
 		else:
-			set_rest(w, false)
+			w.Sleep.wake(w,k,true)
 			w.Jobs.hold(w, k.get("hold_before_rest", "") if k.get("hold_before_rest", "") != "travel" else "")
 		w.manual_goal = null
 		w.life_log.append({"tick": w.tick, "event": "rest" if k.resting else "wake"})
 		return true
 	if kind == "resume_jobs":
-		if k.state != "free" or k.forced_rest: return false
+		if k.state != "free": return false
 		stop_rest_until(w,"manual")
-		set_rest(w, false)
+		w.Sleep.wake(w,k,true)
 		w.manual_goal = null
 		w.Jobs.hold(w, "")
 		return true
@@ -205,33 +205,6 @@ static func step(w):
 	k.danger_near = near
 	if near: wake_auto(w)
 	if k.get("life_need","")=="food":return # Food owns movement until this meal ends.
-	idle_step(w,near)
-	if k.resting:
-		if not w.Zones.rest_step(w,k):return
-		k.rest_elapsed = k.get("rest_elapsed", 0.0) + (0.0 if k.get("rest_started_tick",-1)==w.tick else w.DT)
-		var onset=3.0 if w.is_indoor(k.pos) else 5.0
-		if k.get("asleep",false): k.sleepiness=maxf(0,k.sleepiness-(4.0 if w.is_indoor(k.pos) else 2.0)*w.DT)
-		elif k.rest_elapsed>=onset:
-			k.asleep=true
-			w.life_log.append({"tick":w.tick,"event":"rest_recovery_started","indoor":w.is_indoor(k.pos)})
-		k.heal_credit += w.DT
-		if k.heal_credit >= 5:
-			k.hp = mini(k.max_hp, k.hp + 1)
-			k.heal_credit -= 5
-		if k.forced_rest and k.sleepiness < 80:
-			k.forced_rest = false
-			if w.rest_skip.is_empty(): set_rest(w, false)
-	else:
-		k.sleepiness = minf(100, k.sleepiness + 100.0 / FATIGUE_SECONDS * w.DT)
-		for threshold in [60, 80, 90, 100]:
-			if k.sleepiness >= threshold and k.warned < threshold:
-				k.warned = threshold
-				w.milestones.append({"tick": w.tick, "kind": "sleep_warning", "value": threshold})
-		if k.sleepiness >= 100:
-			k.forced_rest = true
-			set_rest(w, true,"forced")
-			end_move(w)
-	if k.sleepiness < 60: k.warned = 0
 	# Explicit target jobs own attack timing; otherwise defend within equipped reach.
 	if able(w) and w.tick>=k.next_attack and not w.jobs.any(func(j):return j.kind=="direct_attack" and not j.get("cancel_requested",false)):
 		var threats=w.enemies.filter(func(e):return close_attack_target(w,e))
@@ -273,7 +246,7 @@ static func hurt(w, e):
 		k.state = "unconscious"
 		if originals.is_empty():w.PlayerEvents.add(w,"牧場主：気絶")
 		k.recover_ticks = 0
-		set_rest(w, false)
+		w.Sleep.wake(w,k,true)
 		w.manual_goal = null
 		w.Jobs.hold(w, "rescue")
 		w.milestones.append({"tick": w.tick, "kind": "keeper_down", "id": e.id})

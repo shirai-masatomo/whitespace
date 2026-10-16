@@ -1,6 +1,6 @@
 extends RefCounted
 ## Shared topology, two construction layers and transactional onsite upgrades.
-const NAMES = {"cooking_bench":"調理台","carpentry_bench":"木工作業台","sewing_bench":"裁縫台","wall":"土壁","wood_wall":"木壁","stone_wall":"石壁","soil_tile":"土タイル","wood_tile":"木タイル","stone_tile":"石タイル","door":"ドア","locked_door":"ロック付きドア","kennel":"犬小屋","coop":"鶏小屋"}
+const NAMES = {"bed":"ベッド","cooking_bench":"調理台","carpentry_bench":"木工作業台","sewing_bench":"裁縫台","wall":"土壁","wood_wall":"木壁","stone_wall":"石壁","soil_tile":"土タイル","wood_tile":"木タイル","stone_tile":"石タイル","door":"ドア","locked_door":"ロック付きドア","kennel":"犬小屋","coop":"鶏小屋"}
 const WALLS = ["wall", "wood_wall", "stone_wall"]
 const BENCHES = ["cooking_bench","carpentry_bench","sewing_bench"]
 static func cells(kind: String,p: Vector2i) -> Array:

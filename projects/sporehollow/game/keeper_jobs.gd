@@ -34,7 +34,7 @@ static func build_reason(w, kind: String, p: Vector2i, extra_jobs: int=0, held_c
 		if (kind in w.Buildings.BENCHES and not lookup.layers.get(cell,{}).is_empty()) or lookup.bench_cells.get(cell,false) or lookup.layers.get(cell,{}).has(w.BUILD[kind].layer):return "同じ場所に別の予定があります"
 	var why=w.Buildings.reason(w,kind,p,false)
 	if why!="": return why
-	return Reservations.shortage(w,kind,held_cost,lookup.get("materials",{}).get(w.BUILD[kind].get("resource","soil"),-1))
+	return "" # Designation is independent of current stock; delivery reserves physical goods.
 
 static func enqueue(w, kind: String, p: Vector2i, animal_id: int,lookup: Dictionary={}) -> bool:
 	w.Stock.normalize(w)
@@ -80,8 +80,7 @@ static func enqueue(w, kind: String, p: Vector2i, animal_id: int,lookup: Diction
 			j.kind="haul";j.stock_id=row.stock_id;j.explicit_designation=true
 	j.physical=w.BUILD.has(kind)
 	if j.physical:
-		if not Reservations.claim(w,j):return false
-		j.plan_claimed=true
+		j.plan_claimed=false # Partial delivery owns claims, not the designation.
 		lookup.materials[resource]=maxi(0,int(lookup.materials.get(resource,0))-cost)
 		j.construction_group=lookup.get("construction_group",j.id)
 		j.construction_ready=not lookup.has("construction_group")

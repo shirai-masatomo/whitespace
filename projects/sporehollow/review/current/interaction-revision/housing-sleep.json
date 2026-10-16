@@ -1,0 +1,682 @@
+{
+  "checks": [
+    {
+      "check": "Zero stock permits ordinary ghost and designation",
+      "passed": true
+    },
+    {
+      "check": "Unfunded job remains pending, not cancelled",
+      "passed": true
+    },
+    {
+      "check": "Three of five units delivered without premature assembly",
+      "passed": true
+    },
+    {
+      "check": "Later two units restart delivery and finish without redesignation",
+      "passed": true
+    },
+    {
+      "check": "Five physical units consumed exactly once",
+      "passed": true
+    },
+    {
+      "check": "Unfunded limit at designation 1",
+      "passed": true
+    },
+    {
+      "check": "Unfunded limit at designation 2",
+      "passed": true
+    },
+    {
+      "check": "Unfunded limit at designation 3",
+      "passed": true
+    },
+    {
+      "check": "Unfunded limit at designation 4",
+      "passed": true
+    },
+    {
+      "check": "Unfunded limit at designation 5",
+      "passed": true
+    },
+    {
+      "check": "Unfunded limit at designation 6",
+      "passed": true
+    },
+    {
+      "check": "Unfunded limit at designation 7",
+      "passed": true
+    },
+    {
+      "check": "Unfunded limit at designation 8",
+      "passed": true
+    },
+    {
+      "check": "Unfunded limit at designation 9",
+      "passed": true
+    },
+    {
+      "check": "Unfunded limit at designation 10",
+      "passed": true
+    },
+    {
+      "check": "Unfunded limit at designation 11",
+      "passed": true
+    },
+    {
+      "check": "Unfunded limit at designation 12",
+      "passed": true
+    },
+    {
+      "check": "Unfunded limit at designation 13",
+      "passed": true
+    },
+    {
+      "check": "Unfunded limit at designation 14",
+      "passed": true
+    },
+    {
+      "check": "Unfunded limit at designation 15",
+      "passed": true
+    },
+    {
+      "check": "Unfunded limit at designation 16",
+      "passed": true
+    },
+    {
+      "check": "Unfunded limit at designation 17",
+      "passed": true
+    },
+    {
+      "check": "Unfunded limit at designation 18",
+      "passed": true
+    },
+    {
+      "check": "Unfunded limit at designation 19",
+      "passed": true
+    },
+    {
+      "check": "Unfunded limit at designation 20",
+      "passed": true
+    },
+    {
+      "check": "Unfunded limit at designation 21",
+      "passed": true
+    },
+    {
+      "check": "Unfunded limit at designation 22",
+      "passed": true
+    },
+    {
+      "check": "Unfunded limit at designation 23",
+      "passed": true
+    },
+    {
+      "check": "Unfunded limit at designation 24",
+      "passed": true
+    },
+    {
+      "check": "Unfunded limit at designation 25",
+      "passed": true
+    },
+    {
+      "check": "Unfunded limit at designation 26",
+      "passed": true
+    },
+    {
+      "check": "Unfunded limit at designation 27",
+      "passed": true
+    },
+    {
+      "check": "Unfunded limit at designation 28",
+      "passed": true
+    },
+    {
+      "check": "Unfunded limit at designation 29",
+      "passed": true
+    },
+    {
+      "check": "Unfunded limit at designation 30",
+      "passed": true
+    },
+    {
+      "check": "Unfunded limit at designation 31",
+      "passed": true
+    },
+    {
+      "check": "Unfunded limit at designation 32",
+      "passed": true
+    },
+    {
+      "check": "Unfunded limit at designation 33",
+      "passed": true
+    },
+    {
+      "check": "Unfunded limit at designation 34",
+      "passed": true
+    },
+    {
+      "check": "Unfunded limit at designation 35",
+      "passed": true
+    },
+    {
+      "check": "Unfunded limit at designation 36",
+      "passed": true
+    },
+    {
+      "check": "Unfunded limit at designation 37",
+      "passed": true
+    },
+    {
+      "check": "Unfunded limit at designation 38",
+      "passed": true
+    },
+    {
+      "check": "Unfunded limit at designation 39",
+      "passed": true
+    },
+    {
+      "check": "Unfunded limit at designation 40",
+      "passed": true
+    },
+    {
+      "check": "Unfunded limit at designation 41",
+      "passed": true
+    },
+    {
+      "check": "Unfunded limit at designation 42",
+      "passed": true
+    },
+    {
+      "check": "Unfunded limit at designation 43",
+      "passed": true
+    },
+    {
+      "check": "Unfunded limit at designation 44",
+      "passed": true
+    },
+    {
+      "check": "Unfunded limit at designation 45",
+      "passed": true
+    },
+    {
+      "check": "Unfunded limit at designation 46",
+      "passed": true
+    },
+    {
+      "check": "Unfunded limit at designation 47",
+      "passed": true
+    },
+    {
+      "check": "Unfunded limit at designation 48",
+      "passed": true
+    },
+    {
+      "check": "Unfunded limit at designation 49",
+      "passed": true
+    },
+    {
+      "check": "Unfunded limit at designation 50",
+      "passed": true
+    },
+    {
+      "check": "Unfunded limit at designation 51",
+      "passed": true
+    },
+    {
+      "check": "Unfunded limit at designation 52",
+      "passed": true
+    },
+    {
+      "check": "Unfunded limit at designation 53",
+      "passed": true
+    },
+    {
+      "check": "Unfunded limit at designation 54",
+      "passed": true
+    },
+    {
+      "check": "Unfunded limit at designation 55",
+      "passed": true
+    },
+    {
+      "check": "Unfunded limit at designation 56",
+      "passed": true
+    },
+    {
+      "check": "Unfunded limit at designation 57",
+      "passed": true
+    },
+    {
+      "check": "Unfunded limit at designation 58",
+      "passed": true
+    },
+    {
+      "check": "Unfunded limit at designation 59",
+      "passed": true
+    },
+    {
+      "check": "Unfunded limit at designation 60",
+      "passed": true
+    },
+    {
+      "check": "Unfunded limit at designation 61",
+      "passed": true
+    },
+    {
+      "check": "Unfunded limit at designation 62",
+      "passed": true
+    },
+    {
+      "check": "Unfunded limit at designation 63",
+      "passed": true
+    },
+    {
+      "check": "Unfunded limit at designation 64",
+      "passed": true
+    },
+    {
+      "check": "Unfunded limit at designation 65",
+      "passed": true
+    },
+    {
+      "check": "Unfunded limit at designation 66",
+      "passed": true
+    },
+    {
+      "check": "Unfunded limit at designation 67",
+      "passed": true
+    },
+    {
+      "check": "Unfunded limit at designation 68",
+      "passed": true
+    },
+    {
+      "check": "Unfunded limit at designation 69",
+      "passed": true
+    },
+    {
+      "check": "Unfunded limit at designation 70",
+      "passed": true
+    },
+    {
+      "check": "Unfunded limit at designation 71",
+      "passed": true
+    },
+    {
+      "check": "Unfunded limit at designation 72",
+      "passed": true
+    },
+    {
+      "check": "Unfunded limit at designation 73",
+      "passed": true
+    },
+    {
+      "check": "Unfunded limit at designation 74",
+      "passed": true
+    },
+    {
+      "check": "Unfunded limit at designation 75",
+      "passed": true
+    },
+    {
+      "check": "Unfunded limit at designation 76",
+      "passed": true
+    },
+    {
+      "check": "Unfunded limit at designation 77",
+      "passed": true
+    },
+    {
+      "check": "Unfunded limit at designation 78",
+      "passed": true
+    },
+    {
+      "check": "Unfunded limit at designation 79",
+      "passed": true
+    },
+    {
+      "check": "Unfunded limit at designation 80",
+      "passed": true
+    },
+    {
+      "check": "Unfunded limit at designation 81",
+      "passed": true
+    },
+    {
+      "check": "Unfunded limit at designation 82",
+      "passed": true
+    },
+    {
+      "check": "Unfunded limit at designation 83",
+      "passed": true
+    },
+    {
+      "check": "Unfunded limit at designation 84",
+      "passed": true
+    },
+    {
+      "check": "Unfunded limit at designation 85",
+      "passed": true
+    },
+    {
+      "check": "Unfunded limit at designation 86",
+      "passed": true
+    },
+    {
+      "check": "Unfunded limit at designation 87",
+      "passed": true
+    },
+    {
+      "check": "Unfunded limit at designation 88",
+      "passed": true
+    },
+    {
+      "check": "Unfunded limit at designation 89",
+      "passed": true
+    },
+    {
+      "check": "Unfunded limit at designation 90",
+      "passed": true
+    },
+    {
+      "check": "Unfunded limit at designation 91",
+      "passed": true
+    },
+    {
+      "check": "Unfunded limit at designation 92",
+      "passed": true
+    },
+    {
+      "check": "Unfunded limit at designation 93",
+      "passed": true
+    },
+    {
+      "check": "Unfunded limit at designation 94",
+      "passed": true
+    },
+    {
+      "check": "Unfunded limit at designation 95",
+      "passed": true
+    },
+    {
+      "check": "Unfunded limit at designation 96",
+      "passed": true
+    },
+    {
+      "check": "Unfunded limit at designation 97",
+      "passed": true
+    },
+    {
+      "check": "Unfunded limit at designation 98",
+      "passed": true
+    },
+    {
+      "check": "Unfunded limit at designation 99",
+      "passed": true
+    },
+    {
+      "check": "Unfunded limit at designation 100",
+      "passed": true
+    },
+    {
+      "check": "Unfunded limit at designation 101",
+      "passed": true
+    },
+    {
+      "check": "Reservation cap stays100",
+      "passed": true
+    },
+    {
+      "check": "Unfunded cancellation creates no resources",
+      "passed": true
+    },
+    {
+      "check": "Completed floor/wall/door creates nine-cell house",
+      "passed": true
+    },
+    {
+      "check": "Missing one completed floor invalidates house",
+      "passed": true
+    },
+    {
+      "check": "Open door preserves stable house ID",
+      "passed": true
+    },
+    {
+      "check": "Unrelated building preserves house ID",
+      "passed": true
+    },
+    {
+      "check": "Residential zone auto-assigns keeper to a bed",
+      "passed": true
+    },
+    {
+      "check": "One bed never assigns two residents",
+      "passed": true
+    },
+    {
+      "check": "Second bed assigns second resident, preserving first",
+      "passed": true
+    },
+    {
+      "check": "House title describes multiple residents",
+      "passed": true
+    },
+    {
+      "check": "Removed bed releases obsolete resident assignment",
+      "passed": true
+    },
+    {
+      "check": "Broken enclosure invalidates house and home assignment",
+      "passed": true
+    },
+    {
+      "check": "Sleep timetable begins at sleepiness50",
+      "passed": true
+    },
+    {
+      "check": "Schedule end wakes before complete recovery",
+      "passed": true
+    },
+    {
+      "check": "Exhaustion overrides work schedule",
+      "passed": true
+    },
+    {
+      "check": "Manual wake grace prevents immediate sleep loop",
+      "passed": true
+    },
+    {
+      "check": "Exhaustion re-evaluated after bounded wake grace",
+      "passed": true
+    },
+    {
+      "check": "Forced sleep ends at zero",
+      "passed": true
+    },
+    {
+      "check": "Ordinary preferred-time ground sleep recovers100 per108s",
+      "passed": true
+    },
+    {
+      "check": "Short sleeper recovers faster",
+      "passed": true
+    },
+    {
+      "check": "Long sleeper recovers slower",
+      "passed": true
+    },
+    {
+      "check": "Off-type sleeping is less efficient",
+      "passed": true
+    },
+    {
+      "check": "432 simulation seconds raise ordinary sleepiness0 to100",
+      "passed": true
+    },
+    {
+      "check": "Six default hours for early",
+      "passed": true
+    },
+    {
+      "check": "Six default hours for normal",
+      "passed": true
+    },
+    {
+      "check": "Six default hours for late",
+      "passed": true
+    },
+    {
+      "check": "Early schedule wraps midnight",
+      "passed": true
+    },
+    {
+      "check": "Editing timetable does not change current hour",
+      "passed": true
+    },
+    {
+      "check": "Pending edit activates at next hour",
+      "passed": true
+    },
+    {
+      "check": "Edited schedule governs sleep",
+      "passed": true
+    },
+    {
+      "check": "Draft overrides scheduled sleep",
+      "passed": true
+    },
+    {
+      "check": "Visible resident outranks closer structure",
+      "passed": true
+    },
+    {
+      "check": "Kidnapper has no independent building attack target",
+      "passed": true
+    },
+    {
+      "check": "Human memory stores last observed position",
+      "passed": true
+    },
+    {
+      "check": "Destroyer keeps structural target",
+      "passed": true
+    },
+    {
+      "check": "Assigned resident walks into house and sleeps at own bed access cell",
+      "passed": true
+    },
+    {
+      "check": "Assigned bed increases recovery",
+      "passed": true
+    },
+    {
+      "check": "Keeper Life does not apply a second sleep/HP recovery",
+      "passed": true
+    },
+    {
+      "check": "Interior door joins two floored rooms into one house",
+      "passed": true
+    },
+    {
+      "check": "Partition produces two houses and retains one stable ID",
+      "passed": true
+    },
+    {
+      "check": "Doorless sealed rooms are not inhabitable houses",
+      "passed": true
+    },
+    {
+      "check": "Closed wall/door hides resident from direct sight",
+      "passed": true
+    },
+    {
+      "check": "Visible entrance supplies an interior search waypoint, not hidden resident coordinate",
+      "passed": true
+    },
+    {
+      "check": "Invader uses ordinary door before breaking walls",
+      "passed": true
+    },
+    {
+      "check": "Actual movement opens unlocked door",
+      "passed": true
+    },
+    {
+      "check": "Visited house search gets a bounded revisit cooldown",
+      "passed": true
+    },
+    {
+      "check": "Keeper down does not remove other visible humans from candidates",
+      "passed": true
+    },
+    {
+      "check": "Cancellation returns partial materials without loss",
+      "passed": true
+    },
+    {
+      "check": "All twelve interior boundary sides receive cropped floor underlay",
+      "passed": true
+    },
+    {
+      "check": "Floor underlay crops the original without image scaling",
+      "passed": true
+    },
+    {
+      "check": "Production loading builds UI headlessly",
+      "passed": true
+    },
+    {
+      "check": "Time tab builds a24-hour resident panel",
+      "passed": true
+    },
+    {
+      "check": "Time panel fits1280x800 logical canvas",
+      "passed": true
+    },
+    {
+      "check": "Every human timetable row provides manual wake control",
+      "passed": true
+    },
+    {
+      "check": "Timetable brush supports midnight-crossing sleep",
+      "passed": true
+    },
+    {
+      "check": "Schedule logical layout remains within bounds (1280, 800)",
+      "passed": true
+    },
+    {
+      "check": "Schedule logical layout remains within bounds (1600, 1000)",
+      "passed": true
+    },
+    {
+      "check": "Single click selects house",
+      "passed": true
+    },
+    {
+      "check": "Second click enters individual floor selection",
+      "passed": true
+    },
+    {
+      "check": "Escape exits individual mode without opening menu",
+      "passed": true
+    },
+    {
+      "check": "Bed available through architect furniture category",
+      "passed": true
+    },
+    {
+      "check": "Construction inside house bypasses normal house selection",
+      "passed": true
+    },
+    {
+      "check": "House status uses dedicated compact panel",
+      "passed": true
+    }
+  ],
+  "count": 169,
+  "failed": 0
+}

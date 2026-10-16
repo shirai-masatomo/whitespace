@@ -225,7 +225,7 @@ static func select_target(w,e,candidates: Array) -> Dictionary:
 static func enemy_step(w,e) -> bool:
 	if e.flee: return false
 	var kidnapper=e.get("archetype","kidnapper")=="kidnapper"
-	if kidnapper and (e.carry!="" or w.Life.targetable(w,true) and w.keeper.hp<=0 or e.role!="kidnapper"): return false
+	if kidnapper and (e.carry!="" or (e.can_see_keeper and w.keeper.hp<=0 and w.distance(e.pos,w.keeper.pos)<=1) or e.role!="kidnapper"): return false
 	if e.hp<=0 or e.get("dead",false):w.Content.corpse_step(w,e);return true
 	if e.get("phone_started",false):
 		e.state="応援を呼ぶ"; e.action_id="phone_call"

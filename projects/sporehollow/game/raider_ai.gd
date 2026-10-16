@@ -26,6 +26,9 @@ static func perceive(e: Dictionary, w):
 static func target(e: Dictionary, w) -> Vector2i:
 	if e.flee or e.carry == "keeper": return w.Story.exit_goal(w,e)
 	if e.can_see_keeper: return e.last_known_keeper_position
+	if e.archetype=="kidnapper" and e.has("human_memory"):
+		if w.tick<e.get("human_memory_until",0) and e.pos!=e.human_memory and reachable(e,w,e.human_memory):return e.human_memory
+		e.erase("human_memory")
 	if e.last_known_keeper_position != null:
 		if e.pos==e.last_known_keeper_position:forget_keeper(e,"arrived")
 		elif not reachable(e,w,e.last_known_keeper_position):forget_keeper(e,"unreachable")

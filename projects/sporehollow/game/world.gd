@@ -41,6 +41,12 @@ const Buildings = preload("res://game/buildings.gd")
 const Orders = preload("res://game/animal_orders.gd")
 var floors: Dictionary = {}
 var indoor: Dictionary = {}
+const Homes=preload("res://game/housing.gd")
+const Sleep=preload("res://game/human_sleep.gd")
+var homes: Dictionary={}
+var home_cells: Dictionary={}
+var next_home_id=1
+var housing_dirty=true
 var debug_enabled = false
 var campaign: Dictionary
 var checkpoint: Dictionary
@@ -746,6 +752,7 @@ func animal_step(a: Dictionary):
 		a.rescuing = false
 		release_kennel(a)
 		return
+	if a.get("category","")=="human" and a.get("resting",false):return
 	if Livestock.held(self,a):a.state="と殺作業中";return
 	if Tasks.held(self,a):a.state="調教中";return
 	if merchant_worker=="a%d"%a.id and merchant_approach!=null:return
@@ -1162,6 +1169,8 @@ func step():
 	if not working():return
 	var t_Life_step=Metrics.start()
 	Life.step(self)
+	Homes.assign_pending(self)
+	for actor in Sleep.people(self).values():Sleep.step(self,actor)
 	Metrics.finish("Life_step",t_Life_step)
 	var t_update_merchant_order=Metrics.start()
 	update_merchant_order()
@@ -1659,6 +1668,7 @@ func invalidate_navigation():
 func refresh_indoor():
 	invalidate_navigation()
 	indoor=Buildings.rooms(self)
+	Homes.rebuild(self)
 
 func is_indoor(p: Vector2i) -> bool:
 	return indoor.has(p)

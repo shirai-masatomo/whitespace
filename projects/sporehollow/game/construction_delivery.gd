@@ -36,7 +36,7 @@ static func proposal(w,key: String) -> Dictionary:
 			var route=w.Jobs.path_to(w,a.pos,w.neighbors(row.pos))
 			if route.is_empty():continue
 			return {"kind":"build_delivery","id":j.id,"pos":row.pos,"seed_job":j.id,"priority":a.work_priorities.haul,"effort":float(route.size()+w.distance(row.pos,j.pos)),"queued_tick":j.get("queued_tick",w.tick)}
-		j.material_wait=true;j.block_reason="備蓄に使える資材がありません"
+		j.material_wait=true;j.block_reason="資材待ち：備蓄に使える資材がありません"
 	return {}
 
 static func start(w,key: String,proposal: Dictionary) -> Dictionary:
@@ -190,7 +190,7 @@ static func refresh_groups(w):
 static func feasible(w,j,rows: Array,evaluators: Dictionary) -> bool:
 	var candidates=rows.filter(func(r):return Reservations.usable(w,r,j)>0)
 	if candidates.is_empty():
-		j.material_wait=true;j.block_reason="備蓄に使える資材がありません";return false
+		j.material_wait=true;j.block_reason="資材待ち：備蓄に使える資材がありません";return false
 	var why=w.Buildings.reason(w,j.kind,j.pos,false) if not j.started else ""
 	if why!="" and why!="ここに誰かいます":j.block_reason=why;return false
 	var has_hauler=false

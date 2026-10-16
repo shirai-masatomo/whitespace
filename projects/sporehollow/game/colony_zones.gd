@@ -166,6 +166,7 @@ static func set_priority(w,id:int,value:int):
 	z.priority=clampi(value,0,2);changed(w)
 
 static func changed(w):
+	w.housing_dirty=true
 	sync_storage(w)
 	w.Stock.sync(w)
 	# Existing ownership/cargo is retained. Each haul step reselects its destination;

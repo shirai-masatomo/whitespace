@@ -246,6 +246,13 @@ static func floor_tile(game,cell: Vector2i):
 	for pair in [[Vector2i.UP,1],[Vector2i.RIGHT,2],[Vector2i.DOWN,4],[Vector2i.LEFT,8]]:
 		if game.world.floors.get(cell+pair[0],{}).get("status")!="ready":mask+=pair[1]
 	floor_at(game,cell,game.world.floors[cell].kind,mask)
+	var kind=game.world.floors[cell].kind;var path=floor_path(kind)
+	var tex=TEXTURES[path+("wood_00.png" if material(kind)=="wood" else "base.png")]
+	for d in [Vector2i.UP,Vector2i.DOWN,Vector2i.LEFT,Vector2i.RIGHT]:
+		if not game.world.Buildings.enclosure(game.world.structures.get(cell+d,{})):continue
+		var offset=Vector2(0,-21) if d==Vector2i.UP else Vector2(0,42) if d==Vector2i.DOWN else Vector2(-24,0) if d==Vector2i.LEFT else Vector2(48,0)
+		var size=Vector2(48,21) if d.x==0 else Vector2(24,42)
+		game.draw_texture_rect_region(tex,Rect2(Vector2(cell)*game.TILE+offset,size),Rect2(Vector2.ZERO,size))
 
 static func floor_at(game,cell:Vector2i,kind:String,mask:int,tint:Color=Color.WHITE):
 	var p=Vector2(cell)*game.TILE;var path=floor_path(kind)
@@ -287,3 +294,8 @@ static func placeable(game,p:Vector2,kind:String,tint:Color=Color.WHITE):
 		var row=assets["kokeshi.idle" if kind=="kokeshi" else "new.fossil"]
 		game.draw_texture(row.texture,(p+Vector2(0,14)-row.anchor).round(),tint)
 	else:bench(game,p,kind,tint)
+
+static func bed(game,p:Vector2,tint:Color=Color.WHITE):
+	# Provisional furniture, 1x1 ground footprint; no new asset generation.
+	for row in [[Rect2(-20,-17,40,37),Color("765539")],[Rect2(-17,-14,34,29),Color("d7ceab")],[Rect2(-15,-12,30,9),Color("f1e9d5")],[Rect2(-15,0,30,13),Color("819773")]]:
+		game.draw_rect(Rect2(p+row[0].position,row[0].size),row[1]*tint)

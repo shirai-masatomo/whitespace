@@ -5,6 +5,8 @@ const Policy=preload("res://game/work_policy.gd")
 static func register(w,key: String,actor: Dictionary):
 	w.workers[key]=actor
 	actor.work_key=key
+	w.Sleep.initialize(actor)
+	w.housing_dirty=true
 	migrate_priorities(actor)
 	actor.work_job=-1
 	actor.work_status="仕事を探しています"
@@ -83,7 +85,8 @@ static func reason(w,key: String,a) -> String:
 	if a.get("carrier",-1)>=0 or a.get("state","") in ["captured","restrained"]:return "連れ去り・拘束中"
 	if a.get("hp",0)<=0 or a.get("state","")!="free":return "負傷・療養中"
 	if not a.get("placed",false):return "到着待ち"
-	if a.get("resting",false):return "休息中"
+	if a.get("resting",false):return a.get("rest_reason","休息中")
+	if w.Sleep.activity(w,a)=="free" and not a.get("drafted",false):return "自由時間"
 	if a.get("drafted",false):return "徴兵中"
 	if w.tick<a.get("hurt_until",0):return "被弾から回復中"
 	if a.get("danger_near",false):return "近くの敵に対応中"

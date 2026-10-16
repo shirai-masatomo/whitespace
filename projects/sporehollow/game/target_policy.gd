@@ -24,6 +24,7 @@ static func can_damage_object(w,e,kind: String="structure") -> bool:
 static func weights(w,e) -> Dictionary:
 	var row=DOWN_WEIGHTS.get(e.archetype,e.target_weights) if keeper_down(w) else e.target_weights
 	var result=row.duplicate()
+	if e.archetype=="kidnapper":result.keeper=maxi(1,e.target_weights.get("keeper",100));result.structure=0
 	if not can_damage_object(w,e,"idol"):result.idol=0
 	if not can_damage_object(w,e):result.structure=0
 	return result
@@ -41,9 +42,12 @@ static func observe(w,e) -> Dictionary:
 	return {}
 
 static func focus(w,e,candidates: Array) -> Array:
-	if e.archetype=="kidnapper" and w.Life.targetable(w,true):
-		var keeper=candidates.filter(func(t):return t.kind=="keeper")
-		if not keeper.is_empty():return keeper
+	if e.archetype=="kidnapper":
+		var humans=candidates.filter(func(t):return t.kind in ["keeper","worker"] or (t.kind=="animal" and w.Orders.animal(w,t.id).get("category","")=="human"))
+		if not humans.is_empty():
+			humans.sort_custom(func(a,b):return w.distance(e.pos,a.pos)<w.distance(e.pos,b.pos))
+			e.human_memory=humans[0].pos;e.human_memory_until=w.tick+ceili(12.0/w.DT);return humans
+		return [] # Buildings are route obstacles, never a kidnapper's independent goal.
 	if not keeper_down(w) or e.archetype not in PRESSURE_ROLES or e.object_attack_power<=0:return candidates
 	var idol=candidates.filter(func(t):return t.kind=="idol")
 	if not idol.is_empty():return idol

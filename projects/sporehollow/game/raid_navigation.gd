@@ -28,7 +28,7 @@ static func rally(w,e)->Vector2i:
 		return p
 	return e.pos
 static func objective(w,e)->Vector2i:
-	if e.get("raid_goal_zone",-1)>=0 and e.get("raid_goal")==e.pos:
+	if e.get("raid_goal_zone",-1)!=-1 and e.get("raid_goal")==e.pos:
 		if not e.has("raid_zone_visits"):e.raid_zone_visits={}
 		for id in e.raid_zone_visits.keys():
 			if e.raid_zone_visits[id]<=w.tick:e.raid_zone_visits.erase(id)
@@ -37,6 +37,15 @@ static func objective(w,e)->Vector2i:
 		e.raid_goal_zone=-1;e.raid_goal_until=0
 	if e.get("raid_goal_revision",-1)==w.navigation_revision and w.tick<e.get("raid_goal_until",0):return e.get("raid_goal",e.pos)
 	var goals=[]
+	if e.archetype=="kidnapper":
+		for id in w.homes:
+			if e.get("raid_zone_visits",{}).get(-id-2,0)>w.tick:continue
+			var h=w.homes[id]
+			# Discover an entrance by sight; never inspect resident coordinates.
+			for d in h.doors:
+				if w.distance(e.pos,d)>e.sight_range or not w.line_of_sight(e.pos,d,true):continue
+				for q in w.neighbors(d):
+					if h.cells.has(q) and w.walkable(q):goals.append({"pos":q,"zone":-id-2,"reason":"見つけた家屋を探索"});break
 	for kind in POLICIES.get(e.archetype,[]):
 		for z in w.zones:
 			if z.kind!=kind or e.get("raid_zone_visits",{}).get(z.id,0)>w.tick:continue
@@ -63,7 +72,8 @@ static func route(w,e,goal:Vector2i,breaker:bool,avoid:bool)->Array:
 	# Shared field is usable only for rally routes, not combat or retreat.
 	var nav=field(w,breaker,e.get("species","")=="doberman") if w.inside(e.pos) and not e.flee and e.get("carry","")=="" else {}
 	path=[]
-	if not nav.is_empty() and nav.distance.get(goal,-1)==0 and nav.distance.has(e.pos):
+	if e.archetype=="kidnapper":path=w.find_path(e.pos,goal,false,avoid,false,{},true,true)
+	if path.is_empty() and not nav.is_empty() and nav.distance.get(goal,-1)==0 and nav.distance.has(e.pos):
 		var p=e.pos;path=[p]
 		while nav.next.has(p):p=nav.next[p];path.append(p)
 		if path[-1]!=goal or avoid and path.size()>1 and w.actor_occupied(path[1],e.pos):path=[]

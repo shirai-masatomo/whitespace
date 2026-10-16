@@ -75,6 +75,7 @@ static func update(g,a: Dictionary,enemy: bool):
 	if p.has("once"):
 		if t-p.once_at<duration(who,p.once):action=p.once
 		else:p.erase("once")
+	if not enemy and a.get("category","")=="human" and a.get("asleep",false):action="rest" if Data.CLIPS.has(who+"/rest/right") else "idle"
 	if a.get("flee",false) and a.hp>0 and walking and who in ["maid","dancer","thief"]:action="retreat"
 	if a.hp<=0:
 		action="downed" if who in ["dancer","thief"] else "death"

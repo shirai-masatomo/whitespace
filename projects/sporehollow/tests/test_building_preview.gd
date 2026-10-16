@@ -26,16 +26,17 @@ func log_contains(w,text):return w.player_events.any(func(r):return text in r.te
 func logic():
 	var w=fixture();var p=Vector2i(35,26);var ghost=Ghost.new()
 	var before=w.player_events.size()
-	for i in range(30):check(ghost.preview(w,"wood_wall",p).accepted==0,"No material preview is invalid %d"%i)
+	for i in range(30):check(ghost.preview(w,"wood_wall",p).accepted==1,"No material preview is accepted %d"%i)
 	check(w.player_events.size()==before,"Hover emits no player log")
-	check(not w.act("wood_wall",p) and log_contains(w,"木材不足（必要5／利用可能0）"),"Confirm rejects with material name, cost and available amount")
-	check(w.jobs.is_empty(),"Failed confirmation adds no designation")
+	check(w.act("wood_wall",p),"Confirm accepts designation without material")
+	check(w.jobs.size()==1,"Unfunded designation retained")
+	w.Jobs.cancel(w,w.jobs[0].id)
 	check(w.debug_action("replenish"),"Debug button accepts one explicit refill")
 	check(total(w,"wood")==40 and total(w,"soil")==40 and total(w,"stone")==40,"Refill creates 40 physical units of each existing resource")
 	check(w.field_items.all(func(r):return w.Stock.stored(w,r)) and w.storage_cells.all(func(c):return w.Stock.storage_used(w,c)<=40),"Refill remains inside storage and capacity40")
 	check(ghost.preview(w,"wood_wall",p).accepted==1,"Refill invalidates cached shortage preview immediately")
 	check(w.act("wood_wall",p),"Same wooden wall accepted after refill")
-	check(w.Stock.available(w,"wood")==35 and w.Stock.summary(w,"wood").reserved==5,"Reservation claims five physical units without consuming them")
+	check(w.Stock.available(w,"wood")==40 and w.Stock.summary(w,"wood").reserved==0,"Designation does not claim physical stock before delivery")
 	var initial=total(w,"wood")
 	for i in range(150):
 		tick(w)
@@ -49,19 +50,19 @@ func logic():
 	# New reservation, cancellation and existing delivery claims share the same physical budget.
 	w=fixture();w.Stock.add(w,"wood",12,Vector2i(25,23))
 	var s=Stroke.new();s.begin("wood_wall",p);s.add(p+Vector2i(3,0))
-	var plan=s.plan(w);check(plan.accepted==2 and plan.skipped==2,"Drag budget accepts affordable subset, rejects the rest")
+	var plan=s.plan(w);check(plan.accepted==4 and plan.skipped==0,"Drag accepts all geometrically valid unfunded sites")
 	var result=s.commit(w)
-	check(result.accepted==2 and w.Stock.available(w,"wood")==2,"Commit has same budget and no double reservation")
-	check(w.player_events.size()==2 and log_contains(w,"2件予約／2件未登録"),"One deduplicated reason plus batch counts, not one log per rejected cell")
-	check(not w.Stock.consume(w,"wood",3),"Other consumers cannot spend claimed stock")
+	check(result.accepted==4 and w.Stock.available(w,"wood")==12,"Commit keeps available stock independent of designation")
+	check(w.player_events.size()==1 and log_contains(w,"4件予約／0件未登録"),"One deduplicated reason plus batch counts, not one log per rejected cell")
+	check(w.Stock.consume(w,"wood",3),"Other consumers may spend stock not yet claimed by delivery")
 	var j=w.jobs[0];w.Jobs.cancel(w,j.id)
-	check(w.Stock.available(w,"wood")==7 and total(w,"wood")==12,"Cancelling an unstarted plan releases its claim without loss")
+	check(w.Stock.available(w,"wood")==9 and total(w,"wood")==9,"Cancelling an unstarted plan releases its claim without loss")
 	w.Stock.add(w,"wood",5,Vector2i(29,23)).stocked=false
-	check(w.Stock.available(w,"wood")==7,"Unstored resources do not fund construction")
+	check(w.Stock.available(w,"wood")==9,"Unstored resources do not fund construction")
 	w.field_items[0].forbidden=true
-	check(not w.act("wood_wall",p+Vector2i(0,2)),"Forbidden stock cannot fund construction")
+	check(w.act("wood_wall",p+Vector2i(0,2)),"Forbidden stock does not prevent an unfunded designation")
 	# Existing plans are left intact when stock is forbidden or removed from a zone.
-	check(w.jobs.size()==1 and w.jobs[0].required==5,"Existing designation survives later shortage")
+	check(w.jobs.size()==4 and w.jobs[0].required==5,"Existing designation survives later shortage")
 	w=fixture();w.Stock.add(w,"wood",40,Vector2i(25,23));w.rocks[p]={"amount":8}
 	check("岩" in w.Jobs.build_reason(w,"wood_wall",p),"Actual rock collision reason takes precedence over material reason")
 	w.act("wood_wall",p);check(log_contains(w,"岩を採掘"),"Collision rejection reaches player log on confirm")
@@ -83,7 +84,7 @@ func interruptions():
 	var j=w.jobs[0];w.Delivery.start(w,"keeper",{"seed_job":j.id})
 	check(w.Stock.available(w,"wood")==35,"Delivery claims replace, rather than add to, plan claims")
 	w.Delivery.release(w,"keeper")
-	check(w.Stock.available(w,"wood")==35 and w.field_items[0].claims.get("plan:%d"%j.id,0)==5,"Interrupted fetch restores physical plan claim")
+	check(w.Stock.available(w,"wood")==40 and w.field_items[0].claims.is_empty(),"Interrupted fetch releases its physical claim without losing stock")
 	w.Delivery.start(w,"keeper",{"seed_job":j.id})
 	for i in range(80):
 		w.tick+=1;w.Delivery.step(w,"keeper")
@@ -93,8 +94,8 @@ func interruptions():
 	check(total(w,"wood")==40 and w.jobs.is_empty() and w.field_items.all(func(row):return row.claims.is_empty()),"In-transit cancellation preserves physical total and releases all claims")
 	w=fixture();w.Stock.add(w,"wood",10,Vector2i(25,23));w.act("wood_wall",p);j=w.jobs[0]
 	w.Stock.release_token(w,"plan:%d"%j.id);j.erase("plan_claimed")
-	check(w.Jobs.Reservations.available(w,"wood")==5,"Unfunded pre-existing reservation is deducted from new budget")
-	check(w.act("wood_wall",p+Vector2i.RIGHT) and not w.act("wood_wall",p+Vector2i(2,0)),"Existing reservations cannot be displaced by newly accepted jobs")
+	check(w.Jobs.Reservations.available(w,"wood")==10,"Unfunded designations do not reserve imaginary stock")
+	check(w.act("wood_wall",p+Vector2i.RIGHT) and w.act("wood_wall",p+Vector2i(2,0)) and w.jobs.size()==3,"New unfunded designations preserve existing jobs")
 	w=fixture();w.Stock.add(w,"wood",10,Vector2i(25,23));w.act("wood_wall",p);j=w.jobs[0]
 	var transfer=w.Stock.add(w,"wood",3,Vector2i(25,23));transfer.construction_transfer=true;transfer.job_id=j.id
 	check(w.Jobs.Reservations.usable(w,transfer,{"id":999,"resource":"wood"})==0,"Dropped construction cargo cannot fund another site even inside storage")
@@ -136,7 +137,7 @@ func scale_cases():
 		var start=Time.get_ticks_usec();var preview=s.plan(w);var ms=(Time.get_ticks_usec()-start)/1000.0
 		start=Time.get_ticks_usec();var result=s.commit(w);var commit=(Time.get_ticks_usec()-start)/1000.0
 		check(preview.accepted==n and result.accepted==n,"Real material budget supports %d designations"%n)
-		check(w.Stock.available(w,"wood")==600-5*n,"Physical reservations remain exact for %d jobs"%n)
+		check(w.Stock.available(w,"wood")==600 and w.Stock.summary(w,"wood").reserved==0,"Designation and delivery claims remain separate for %d jobs"%n)
 		timings.append({"jobs":n,"preview_ms":ms,"commit_ms":commit})
 		if n==100:check(not w.act("wood_wall",Vector2i(40,15)) and w.jobs.size()==100,"101st job refused despite sufficient material")
 class Painter:
@@ -197,7 +198,7 @@ func ui():
 	check(boot.finished,"Production UI initializes without opening a game window")
 	if not boot.finished:return
 	var g=boot.game;g.set_process(false);g.world=fixture();g.world.paused=true;g.story_modal="";g.field_shop=false;g.field_book=false;g.neutral();g.group=0;g.architect_category="壁と扉";g.refresh()
-	check("予約はできません" in g.buttons.wood_wall.tooltip_text or "新しい予約はできません" in g.buttons.wood_wall.tooltip_text,"Architect tooltip explains shortage rejection")
+	check("資材待ち" in g.buttons.wood_wall.tooltip_text,"Architect tooltip explains material waiting")
 	g.debug_view=true;g.refresh()
 	check(g.buttons.has("debug_replenish") and not g.buttons.has("debug_infinite"),"Debug UI contains refill instead of infinite toggle")
 	check(g.buttons.debug_replenish.text=="資材補充（各40）","Debug button has requested label")

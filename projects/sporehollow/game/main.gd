@@ -56,10 +56,10 @@ const HumanVisual=preload("res://game/human_visual.gd")
 const AnimalCorpse=preload("res://game/animal_corpse.gd")
 var six_art={}
 var six_revived={}
-const TOOLS = {"place_wood_crate":"木箱を置く","place_wood_shelf":"木製棚を置く","cooking_bench":"調理台 木12","carpentry_bench":"木工台 木14","sewing_bench":"裁縫台 木10","kennel":"犬小屋 木20","coop":"鶏小屋 木30","milk":"搾乳", "charge":"突撃", "place_kokeshi":"こけしを置く", "place_fossil":"化石を置く","wall": "土壁 土5", "wood_wall":"木壁 木5", "stone_wall":"石壁 石5", "soil_tile":"土床 土2", "wood_tile":"木床 木2", "stone_tile":"石床 石2", "door":"ドア 木10", "locked_door":"施錠 木20", "guide":"連れてく", "equip":"装備", "repair": "修理", "gate": "ドア開閉", "remove": "解体",
+const TOOLS = {"bed":"ベッド","place_wood_crate":"木箱を置く","place_wood_shelf":"木製棚を置く","cooking_bench":"調理台 木12","carpentry_bench":"木工台 木14","sewing_bench":"裁縫台 木10","kennel":"犬小屋 木20","coop":"鶏小屋 木30","milk":"搾乳", "charge":"突撃", "place_kokeshi":"こけしを置く", "place_fossil":"化石を置く","wall": "土壁 土5", "wood_wall":"木壁 木5", "stone_wall":"石壁 石5", "soil_tile":"土床 土2", "wood_tile":"木床 木2", "stone_tile":"石床 石2", "door":"ドア 木10", "locked_door":"施錠 木20", "guide":"連れてく", "equip":"装備", "repair": "修理", "gate": "ドア開閉", "remove": "解体",
 	"attack_target":"狙え", "auto": "おまかせ", "stay": "待て", "wander": "警戒", "rest": "無理するな", "collect": "資源・卵・設計図", "dog_food": "犬用餌 HP+10", "hen_food": "鶏用餌 HP+8", "cat_food": "猫用餌 HP+8"}
 const ORDER_HELP={"auto":"状況に合わせて行動します。戦闘・救護・その動物の仕事を任せます。","guide":"行き先をクリックして一緒に歩きます。\n物や動物は、押した時点の近くの空き場所へ。\n1匹なら隣接し、遅い方に合わせます。\n複数は近くにまとまり、到着でおまかせへ。\n右クリックで行き先指定を解除します。","stay":"その場所で待ちます。近くの敵には応戦しますが、追いかけません。","wander":"周囲を巡回し、敵を見つけたら攻撃します。","rest":"安全と回復を優先します。危険から離れ、無理に追わず近くの敵に応戦します。","attack_target":"敵を選べ。狙える距離や見通しが必要です。","equip":"持ち物から装備を選び、主人公が届けます。","milk":"乳牛に近づいて搾乳します。1日1回です。","charge":"突撃する行き先を選びます。"}
-const GROUP_TOOLS = [["place_wood_crate","place_wood_shelf","cooking_bench","carpentry_bench","sewing_bench","wall", "wood_wall", "stone_wall", "soil_tile", "wood_tile", "stone_tile", "door", "locked_door", "kennel", "coop", "place_kokeshi", "place_fossil"], ["auto", "guide", "stay", "wander", "rest", "attack_target", "equip", "milk", "charge"], ["collect"]]
+const GROUP_TOOLS = [["bed","place_wood_crate","place_wood_shelf","cooking_bench","carpentry_bench","sewing_bench","wall", "wood_wall", "stone_wall", "soil_tile", "wood_tile", "stone_tile", "door", "locked_door", "kennel", "coop", "place_kokeshi", "place_fossil"], ["auto", "guide", "stay", "wander", "rest", "attack_target", "equip", "milk", "charge"], ["collect"]]
 const RockView=preload("res://game/rock_view.gd")
 const MountainView=preload("res://game/mountain_view.gd")
 const WorkMotion=preload("res://game/work_motion.gd")
@@ -91,6 +91,11 @@ const Actions=preload("res://game/selection_actions.gd")
 var selected_buildings: Array=[]
 var selected_structures: Array = []
 var selection_layer = "structure"
+const HomeUI=preload("res://game/home_ui.gd")
+var home_individual=-1
+var home_click_id=-1
+var home_click_time=0
+var schedule_brush="sleep"
 var selection_ids: Dictionary = {}
 var menu_open = false
 var menu_was_paused = false
@@ -325,6 +330,7 @@ func notice(text_value: String):
 	message_until_tick = world.tick + 14
 
 func select_group(index: int):
+	home_individual=-1
 	if index==1:show_animal_list();return
 	zone_controls.details_open=false
 	animal_list_open=index==1;animal_commands_open=false
@@ -545,12 +551,12 @@ func refresh_measured():
 	elif selected.get("kind") == "keeper" and world.working():
 		add_button(palette, "keeper_rest", "起きる" if world.keeper.resting or world.keeper.state=="hidden_rest" else "休息", Rect2(16, 698, 112, 36), keeper_action.bind("keeper_rest"))
 		buttons.keeper_rest.icon = UI.icon("moon")
-		buttons.keeper_rest.disabled = (world.keeper.get("drafted",false) or world.keeper.forced_rest or world.keeper.state != "free" or world.keeper.get("nutrition_down",false)) and not Farm.Life.can_wake_hidden(world)
+		buttons.keeper_rest.disabled = (world.keeper.get("drafted",false) or world.keeper.state != "free" or world.keeper.get("nutrition_down",false)) and not Farm.Life.can_wake_hidden(world)
 		buttons.keeper_rest.tooltip_text="徴兵を解除してください" if world.keeper.get("drafted",false) else "居住へ移動して休息。未指定なら現在地で休みます"
 		if world.keeper.state=="hidden_rest":buttons.keeper_rest.tooltip_text="HPが1以上なら起きられます。起きると敵の攻撃対象へ戻ります。HP8で自動復帰します。"
 		add_button(palette, "resume_jobs", "作業再開", Rect2(136, 698, 120, 36), keeper_action.bind("resume_jobs"))
 		buttons.resume_jobs.icon = UI.icon("hammer")
-		buttons.resume_jobs.disabled = world.keeper.get("drafted",false) or world.keeper.forced_rest or world.keeper.state != "free" or world.keeper.get("nutrition_down",false)
+		buttons.resume_jobs.disabled = world.keeper.get("drafted",false) or world.keeper.state != "free" or world.keeper.get("nutrition_down",false)
 		buttons.resume_jobs.tooltip_text="徴兵を解除してください" if world.keeper.get("drafted",false) else "通常の仕事を再評価します"
 		add_button(palette,"keeper_book","図鑑",Rect2(266,698,104,36),open_book)
 		buttons.keeper_book.icon=UI.icon("book_closed")
@@ -572,7 +578,7 @@ func refresh_measured():
 			buttons[id].tooltip_text = "%s\n%s ×%d · 施工 %s秒\n%s"%[TOOLS[id],world.Work.Policy.LABELS.get(definition.get("resource","soil"),{"soil":"土","wood":"木材","stone":"石"}.get(definition.get("resource","soil"),"材料")),definition.get("cost",0),str(definition.get("seconds",1)),"備蓄から搬入後に施工" if not definition.is_empty() else "必要な現物と空き場所を指定"]
 			if not definition.is_empty():
 				var available=world.Jobs.Reservations.available(world,definition.get("resource","soil"))
-				buttons[id].tooltip_text+="\n利用可能 %d / 必要 %d"%[available,definition.get("cost",0)]+("\n資材不足：先に備蓄へ回収してください。新しい予約はできません。" if available<definition.get("cost",0) else "")
+				buttons[id].tooltip_text+="\n利用可能 %d / 必要 %d"%[available,definition.get("cost",0)]+("\n資材待ちで予約できます。備蓄への回収後、自動で搬入します。" if available<definition.get("cost",0) else "")
 				buttons[id].text=TOOLS[id].split(" ")[0]
 			if Farm.Shop.FOOD.has(id):
 				buttons[id].text += " ×%d" % world.item_count(id)
@@ -600,6 +606,7 @@ func refresh_measured():
 	if group == 2:
 		for id in subtask_choices(): UI.selected(buttons[id], subtasks.selected[2] == id)
 	ColonyPanels.build(self)
+	HomeUI.build(self)
 	LivestockControls.build(self)
 	TaskControls.build(self)
 	item_commands.build(self)
@@ -1288,7 +1295,9 @@ func _route_input(event):
 		get_viewport().set_input_as_handled()
 		return
 	if event is InputEventKey and event.pressed and not event.echo and event.physical_keycode == KEY_ESCAPE:
-		if wall_stroke.kind!="":cancel_wall_stroke();notice("壁の予約を取り消しました")
+		if home_individual>=0:home_individual=-1;neutral();refresh()
+		elif colony_page=="schedule" or selected.get("kind")=="house":neutral();refresh()
+		elif wall_stroke.kind!="":cancel_wall_stroke();notice("壁の予約を取り消しました")
 		elif (world.phase == "shop" or field_book or field_shop) and (morning_screen != "morning" or field_shop): close_morning_screen()
 		elif menu_open and menu_page!="main":ColonyMenu.page(self,"main")
 		else: toggle_menu()
@@ -1572,6 +1581,14 @@ func board_click(event):
 		if selected_merchant_worker()!="":merchant_context=true
 		refresh();return
 	var cell = Vector2i(get_canvas_transform().affine_inverse() * event.position / TILE)
+	var home=world.Homes.at(world,cell)
+	if home_individual>=0 and home.get("id",-1)!=home_individual:home_individual=-1
+	if group<0 and tool=="" and not event.ctrl_pressed and not world.keeper.get("drafted",false) and not home.is_empty():
+		var now=Time.get_ticks_msec()
+		if home_click_id==home.id and now-home_click_time<500:home_individual=home.id
+		home_click_id=home.id;home_click_time=now
+		if home_individual!=home.id:
+			neutral();selected={"kind":"house","id":home.id};refresh();return
 	# An occupied zone remains reachable without sacrificing normal item/building selection.
 	if tool=="" and (zone_controls.active(self) or (selected.get("kind") in ["resource","structure","job"] and selected.get("pos")==cell)):
 		for z in world.zones:
@@ -1976,6 +1993,7 @@ func draw_structure(p: Vector2, b: Dictionary, preview: bool = false):
 			rect(p + Vector2(3, 7), Vector2(10, 6), "82775d")
 		return
 	if b.status == "building":return # Shared ghost + delivery/scaffold overlay in draw_work_plans.
+	if b.kind=="bed":BuildingArt.bed(self,p,b.get("tint",Color.WHITE));return
 	if world.Craft.Data.BENCHES.has(b.kind):
 		BuildingArt.bench(self,p,b.kind,b.get("tint",Color.WHITE));return
 	if b.kind not in Farm.Buildings.WALLS: draw_colored_polygon(PackedVector2Array([p + Vector2(-20, 10), p + Vector2(20, 10), p + Vector2(28, 24), p + Vector2(-12, 24)]), Color(0.12, 0.22, 0.13, 0.25))
@@ -3137,15 +3155,19 @@ func draw_enemy_actor(e: Dictionary):
 		draw_rect(enemy_hit_rect(e), Color("e6c998"), false, 2)
 
 
+func sleep_position(a:Dictionary,normal:Vector2)->Vector2:
+	var b=world.Homes.bed(world,a)
+	return center(b.pos) if a.get("asleep",false) and not b.is_empty() and a.get("rest_target") == a.pos else normal
+
 func draw_registered_worker(key: String):
-	var a=world.workers[key];var foot=actor_pixel(key,a.pos)+Vector2(0,14)
+	var a=world.workers[key];var foot=sleep_position(a,actor_pixel(key,a.pos))+Vector2(0,14)
 	var walking=Vector2(a.pos).distance_to(view_positions.get(key,Vector2(a.pos)))>0.025
 	var work_pose=WorkMotion.describe(world,key,accumulated,walking,harvest_view.contacts.get(key,{}))
 	if not WorkMotion.paint(self,work_pose,foot,1.15*ACTOR_SCALE):
-		Art.sprite(self,"keeper","walk" if walking else "idle",int(a.get("facing",1)),foot,visual_time,1.0,1.15*ACTOR_SCALE)
+		Art.sprite(self,"keeper","sleep" if a.get("asleep",false) else "rest" if a.get("resting",false) else "walk" if walking else "idle",int(a.get("facing",1)),foot,visual_time,1.0,1.15*ACTOR_SCALE)
 
 func draw_keeper_actor():
-	var p = actor_pixel("keeper", world.keeper.pos)
+	var p = sleep_position(world.keeper,actor_pixel("keeper", world.keeper.pos))
 	var walking = Farm.Life.able(world) and Vector2(world.keeper.pos).distance_to(view_positions.get("keeper",Vector2(world.keeper.pos)))>0.025
 	if world.keeper.carrier>=0:return # Composited once between the carrier rear/front layers.
 	var work_pose=WorkMotion.describe(world,"keeper",accumulated,walking,harvest_view.contacts.get("keeper",{}))
@@ -3227,7 +3249,7 @@ func animal_status_label(a: Dictionary) -> String:
 
 func draw_animal_actor(a: Dictionary):
 	if not a.placed: return
-	var p = actor_pixel("a%d" % a.id, a.pos)
+	var p = sleep_position(a,actor_pixel("a%d" % a.id, a.pos)) if a.get("category","")=="human" else actor_pixel("a%d" % a.id, a.pos)
 	draw_ready(a,p)
 	draw_circle(p + Vector2(0, 13), 18, Color(0.1, 0.2, 0.13, 0.25))
 	if a.species in ["shiba","cat","hen"]:

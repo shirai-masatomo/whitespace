@@ -1,123 +1,123 @@
 {
 	"checks": [
 		{
-			"check": "No material preview is invalid 0",
+			"check": "No material preview is accepted 0",
 			"passed": true
 		},
 		{
-			"check": "No material preview is invalid 1",
+			"check": "No material preview is accepted 1",
 			"passed": true
 		},
 		{
-			"check": "No material preview is invalid 2",
+			"check": "No material preview is accepted 2",
 			"passed": true
 		},
 		{
-			"check": "No material preview is invalid 3",
+			"check": "No material preview is accepted 3",
 			"passed": true
 		},
 		{
-			"check": "No material preview is invalid 4",
+			"check": "No material preview is accepted 4",
 			"passed": true
 		},
 		{
-			"check": "No material preview is invalid 5",
+			"check": "No material preview is accepted 5",
 			"passed": true
 		},
 		{
-			"check": "No material preview is invalid 6",
+			"check": "No material preview is accepted 6",
 			"passed": true
 		},
 		{
-			"check": "No material preview is invalid 7",
+			"check": "No material preview is accepted 7",
 			"passed": true
 		},
 		{
-			"check": "No material preview is invalid 8",
+			"check": "No material preview is accepted 8",
 			"passed": true
 		},
 		{
-			"check": "No material preview is invalid 9",
+			"check": "No material preview is accepted 9",
 			"passed": true
 		},
 		{
-			"check": "No material preview is invalid 10",
+			"check": "No material preview is accepted 10",
 			"passed": true
 		},
 		{
-			"check": "No material preview is invalid 11",
+			"check": "No material preview is accepted 11",
 			"passed": true
 		},
 		{
-			"check": "No material preview is invalid 12",
+			"check": "No material preview is accepted 12",
 			"passed": true
 		},
 		{
-			"check": "No material preview is invalid 13",
+			"check": "No material preview is accepted 13",
 			"passed": true
 		},
 		{
-			"check": "No material preview is invalid 14",
+			"check": "No material preview is accepted 14",
 			"passed": true
 		},
 		{
-			"check": "No material preview is invalid 15",
+			"check": "No material preview is accepted 15",
 			"passed": true
 		},
 		{
-			"check": "No material preview is invalid 16",
+			"check": "No material preview is accepted 16",
 			"passed": true
 		},
 		{
-			"check": "No material preview is invalid 17",
+			"check": "No material preview is accepted 17",
 			"passed": true
 		},
 		{
-			"check": "No material preview is invalid 18",
+			"check": "No material preview is accepted 18",
 			"passed": true
 		},
 		{
-			"check": "No material preview is invalid 19",
+			"check": "No material preview is accepted 19",
 			"passed": true
 		},
 		{
-			"check": "No material preview is invalid 20",
+			"check": "No material preview is accepted 20",
 			"passed": true
 		},
 		{
-			"check": "No material preview is invalid 21",
+			"check": "No material preview is accepted 21",
 			"passed": true
 		},
 		{
-			"check": "No material preview is invalid 22",
+			"check": "No material preview is accepted 22",
 			"passed": true
 		},
 		{
-			"check": "No material preview is invalid 23",
+			"check": "No material preview is accepted 23",
 			"passed": true
 		},
 		{
-			"check": "No material preview is invalid 24",
+			"check": "No material preview is accepted 24",
 			"passed": true
 		},
 		{
-			"check": "No material preview is invalid 25",
+			"check": "No material preview is accepted 25",
 			"passed": true
 		},
 		{
-			"check": "No material preview is invalid 26",
+			"check": "No material preview is accepted 26",
 			"passed": true
 		},
 		{
-			"check": "No material preview is invalid 27",
+			"check": "No material preview is accepted 27",
 			"passed": true
 		},
 		{
-			"check": "No material preview is invalid 28",
+			"check": "No material preview is accepted 28",
 			"passed": true
 		},
 		{
-			"check": "No material preview is invalid 29",
+			"check": "No material preview is accepted 29",
 			"passed": true
 		},
 		{
@@ -125,11 +125,11 @@
 			"passed": true
 		},
 		{
-			"check": "Confirm rejects with material name, cost and available amount",
+			"check": "Confirm accepts designation without material",
 			"passed": true
 		},
 		{
-			"check": "Failed confirmation adds no designation",
+			"check": "Unfunded designation retained",
 			"passed": true
 		},
 		{
@@ -153,7 +153,7 @@
 			"passed": true
 		},
 		{
-			"check": "Reservation claims five physical units without consuming them",
+			"check": "Designation does not claim physical stock before delivery",
 			"passed": true
 		},
 		{
@@ -173,11 +173,11 @@
 			"passed": true
 		},
 		{
-			"check": "Drag budget accepts affordable subset, rejects the rest",
+			"check": "Drag accepts all geometrically valid unfunded sites",
 			"passed": true
 		},
 		{
-			"check": "Commit has same budget and no double reservation",
+			"check": "Commit keeps available stock independent of designation",
 			"passed": true
 		},
 		{
@@ -185,7 +185,7 @@
 			"passed": true
 		},
 		{
-			"check": "Other consumers cannot spend claimed stock",
+			"check": "Other consumers may spend stock not yet claimed by delivery",
 			"passed": true
 		},
 		{
@@ -197,7 +197,7 @@
 			"passed": true
 		},
 		{
-			"check": "Forbidden stock cannot fund construction",
+			"check": "Forbidden stock does not prevent an unfunded designation",
 			"passed": true
 		},
 		{
@@ -241,7 +241,7 @@
 			"passed": true
 		},
 		{
-			"check": "Interrupted fetch restores physical plan claim",
+			"check": "Interrupted fetch releases its physical claim without losing stock",
 			"passed": true
 		},
 		{
@@ -253,11 +253,11 @@
 			"passed": true
 		},
 		{
-			"check": "Unfunded pre-existing reservation is deducted from new budget",
+			"check": "Unfunded designations do not reserve imaginary stock",
 			"passed": true
 		},
 		{
-			"check": "Existing reservations cannot be displaced by newly accepted jobs",
+			"check": "New unfunded designations preserve existing jobs",
 			"passed": true
 		},
 		{
@@ -309,7 +309,7 @@
 			"passed": true
 		},
 		{
-			"check": "Physical reservations remain exact for 10 jobs",
+			"check": "Designation and delivery claims remain separate for 10 jobs",
 			"passed": true
 		},
 		{
@@ -317,7 +317,7 @@
 			"passed": true
 		},
 		{
-			"check": "Physical reservations remain exact for 50 jobs",
+			"check": "Designation and delivery claims remain separate for 50 jobs",
 			"passed": true
 		},
 		{
@@ -325,7 +325,7 @@
 			"passed": true
 		},
 		{
-			"check": "Physical reservations remain exact for 100 jobs",
+			"check": "Designation and delivery claims remain separate for 100 jobs",
 			"passed": true
 		},
 		{
@@ -757,7 +757,7 @@
 			"passed": true
 		},
 		{
-			"check": "Architect tooltip explains shortage rejection",
+			"check": "Architect tooltip explains material waiting",
 			"passed": true
 		},
 		{
@@ -792,19 +792,19 @@
 	"failures": 0,
 	"timings": [
 		{
-			"commit_ms": 3.549,
+			"commit_ms": 1.019,
 			"jobs": 10,
-			"preview_ms": 0.426
+			"preview_ms": 0.35
 		},
 		{
-			"commit_ms": 13.995,
+			"commit_ms": 4.921,
 			"jobs": 50,
-			"preview_ms": 1.389
+			"preview_ms": 1.305
 		},
 		{
-			"commit_ms": 28.858,
+			"commit_ms": 16.201,
 			"jobs": 100,
-			"preview_ms": 2.783
+			"preview_ms": 3.511
 		}
 	]
 }

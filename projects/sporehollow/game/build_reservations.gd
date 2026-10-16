@@ -8,19 +8,10 @@ static func source(w,row,j) -> bool:
 static func usable(w,row,j) -> int:
 	return w.Stock.free_count(row)+held(row,j) if source(w,row,j) else 0
 static func available(w,kind: String) -> int:
-	# Unfunded legacy reservations retain their place in the material budget.
-	var covered={};var free=0
+	var count=0
 	for row in w.field_items:
-		if row.kind!=kind:continue
-		if w.Stock.stored(w,row) and not row.get("placed",false) and not row.get("construction_transfer",false) and not row.get("craft_transfer",false):free+=w.Stock.free_count(row)
-		if row.get("job_id",-1)>=0 and (row.get("location") in ["site","carry"] or row.get("construction_transfer",false)) and not row.get("forbidden",false):covered[row.job_id]=covered.get(row.job_id,0)+row.amount
-		for key in (row.get("claims",{}) if not row.get("forbidden",false) and w.Stock.stored(w,row) else {}):
-			if key.begins_with("plan:") or key.begins_with("construction:"):
-				var id=int(key.get_slice(":",key.get_slice_count(":")-1))
-				covered[id]=covered.get(id,0)+row.claims[key]
-	for j in w.jobs:
-		if w.BUILD.has(j.kind) and j.resource==kind:free-=maxi(0,int(j.get("required",w.BUILD[j.kind].cost))-int(covered.get(j.id,0)))
-	return maxi(0,free)
+		if row.kind==kind and w.Stock.stored(w,row) and not row.get("placed",false) and not row.get("construction_transfer",false) and not row.get("craft_transfer",false):count+=w.Stock.free_count(row)
+	return count
 static func shortage(w,kind: String,held_cost:int=0,budget:int=-1) -> String:
 	var data=w.BUILD[kind];var resource=data.get("resource","soil")
 	var required=int(data.cost)+held_cost;var count=available(w,resource) if budget<0 else budget

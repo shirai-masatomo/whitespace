@@ -1,0 +1,798 @@
+{
+  "dx": [
+    0.0,
+    8.0,
+    40.0,
+    48.0
+  ],
+  "dy": [
+    0.0,
+    2.0,
+    8.0,
+    36.0,
+    44.0,
+    68.0
+  ],
+  "pages": [
+    [
+      {
+        "at": [
+          96.0,
+          84.0
+        ],
+        "path": "res://art_delivery/wood_buildings_v1/floor/wood_00.png"
+      },
+      {
+        "at": [
+          96.0,
+          84.0
+        ],
+        "path": "res://art_delivery/wood_buildings_v1/floor/perimeter/mask_09.png"
+      },
+      {
+        "at": [
+          96.0,
+          126.0
+        ],
+        "path": "res://art_delivery/wood_buildings_v1/floor/wood_00.png"
+      },
+      {
+        "at": [
+          96.0,
+          126.0
+        ],
+        "path": "res://art_delivery/wood_buildings_v1/floor/perimeter/mask_08.png"
+      },
+      {
+        "at": [
+          96.0,
+          168.0
+        ],
+        "path": "res://art_delivery/wood_buildings_v1/floor/wood_00.png"
+      },
+      {
+        "at": [
+          96.0,
+          168.0
+        ],
+        "path": "res://art_delivery/wood_buildings_v1/floor/perimeter/mask_12.png"
+      },
+      {
+        "at": [
+          144.0,
+          84.0
+        ],
+        "path": "res://art_delivery/wood_buildings_v1/floor/wood_00.png"
+      },
+      {
+        "at": [
+          144.0,
+          84.0
+        ],
+        "path": "res://art_delivery/wood_buildings_v1/floor/perimeter/mask_01.png"
+      },
+      {
+        "at": [
+          144.0,
+          126.0
+        ],
+        "path": "res://art_delivery/wood_buildings_v1/floor/wood_00.png"
+      },
+      {
+        "at": [
+          144.0,
+          126.0
+        ],
+        "path": "res://art_delivery/wood_buildings_v1/floor/perimeter/mask_00.png"
+      },
+      {
+        "at": [
+          144.0,
+          168.0
+        ],
+        "path": "res://art_delivery/wood_buildings_v1/floor/wood_00.png"
+      },
+      {
+        "at": [
+          144.0,
+          168.0
+        ],
+        "path": "res://art_delivery/wood_buildings_v1/floor/perimeter/mask_04.png"
+      },
+      {
+        "at": [
+          192.0,
+          84.0
+        ],
+        "path": "res://art_delivery/wood_buildings_v1/floor/wood_00.png"
+      },
+      {
+        "at": [
+          192.0,
+          84.0
+        ],
+        "path": "res://art_delivery/wood_buildings_v1/floor/perimeter/mask_03.png"
+      },
+      {
+        "at": [
+          192.0,
+          126.0
+        ],
+        "path": "res://art_delivery/wood_buildings_v1/floor/wood_00.png"
+      },
+      {
+        "at": [
+          192.0,
+          126.0
+        ],
+        "path": "res://art_delivery/wood_buildings_v1/floor/perimeter/mask_02.png"
+      },
+      {
+        "at": [
+          192.0,
+          168.0
+        ],
+        "path": "res://art_delivery/wood_buildings_v1/floor/wood_00.png"
+      },
+      {
+        "at": [
+          192.0,
+          168.0
+        ],
+        "path": "res://art_delivery/wood_buildings_v1/floor/perimeter/mask_06.png"
+      },
+      {
+        "at": [
+          48.0,
+          29.0
+        ],
+        "mesh": true,
+        "path": "res://art_delivery/wood_buildings_v1/wall/normal/wood_mask_06.png"
+      },
+      {
+        "at": [
+          48.0,
+          71.0
+        ],
+        "mesh": true,
+        "path": "res://art_delivery/wood_buildings_v1/wall/normal/wood_mask_05.png"
+      },
+      {
+        "at": [
+          48.0,
+          113.0
+        ],
+        "mesh": true,
+        "path": "res://art_delivery/wood_buildings_v1/wall/normal/wood_mask_05.png"
+      },
+      {
+        "at": [
+          48.0,
+          155.0
+        ],
+        "mesh": true,
+        "path": "res://art_delivery/wood_buildings_v1/wall/normal/wood_mask_05.png"
+      },
+      {
+        "at": [
+          48.0,
+          197.0
+        ],
+        "mesh": true,
+        "path": "res://art_delivery/wood_buildings_v1/wall/normal/wood_mask_03.png"
+      },
+      {
+        "at": [
+          96.0,
+          29.0
+        ],
+        "mesh": true,
+        "path": "res://art_delivery/wood_buildings_v1/wall/normal/wood_mask_10.png"
+      },
+      {
+        "at": [
+          96.0,
+          197.0
+        ],
+        "mesh": true,
+        "path": "res://art_delivery/wood_buildings_v1/wall/normal/wood_mask_10.png"
+      },
+      {
+        "at": [
+          144.0,
+          29.0
+        ],
+        "path": "res://art_delivery/wood_buildings_v1/door/horizontal_frame_rear.png"
+      },
+      {
+        "at": [
+          144.0,
+          29.0
+        ],
+        "path": "res://art_delivery/wood_buildings_v1/door/horizontal_leaf_closed_normal.png"
+      },
+      {
+        "at": [
+          144.0,
+          29.0
+        ],
+        "path": "res://art_delivery/wood_buildings_v1/door/horizontal_frame_front.png"
+      },
+      {
+        "at": [
+          144.0,
+          197.0
+        ],
+        "mesh": true,
+        "path": "res://art_delivery/wood_buildings_v1/wall/normal/wood_mask_10.png"
+      },
+      {
+        "at": [
+          192.0,
+          29.0
+        ],
+        "mesh": true,
+        "path": "res://art_delivery/wood_buildings_v1/wall/normal/wood_mask_10.png"
+      },
+      {
+        "at": [
+          192.0,
+          197.0
+        ],
+        "mesh": true,
+        "path": "res://art_delivery/wood_buildings_v1/wall/normal/wood_mask_10.png"
+      },
+      {
+        "at": [
+          240.0,
+          29.0
+        ],
+        "mesh": true,
+        "path": "res://art_delivery/wood_buildings_v1/wall/normal/wood_mask_12.png"
+      },
+      {
+        "at": [
+          240.0,
+          71.0
+        ],
+        "mesh": true,
+        "path": "res://art_delivery/wood_buildings_v1/wall/normal/wood_mask_05.png"
+      },
+      {
+        "at": [
+          240.0,
+          113.0
+        ],
+        "mesh": true,
+        "path": "res://art_delivery/wood_buildings_v1/wall/normal/wood_mask_05.png"
+      },
+      {
+        "at": [
+          240.0,
+          155.0
+        ],
+        "mesh": true,
+        "path": "res://art_delivery/wood_buildings_v1/wall/normal/wood_mask_05.png"
+      },
+      {
+        "at": [
+          240.0,
+          197.0
+        ],
+        "mesh": true,
+        "path": "res://art_delivery/wood_buildings_v1/wall/normal/wood_mask_09.png"
+      },
+      {
+        "color": "765539ff",
+        "rect": [
+          148.0,
+          130.0,
+          40.0,
+          37.0
+        ]
+      },
+      {
+        "color": "d7ceabff",
+        "rect": [
+          151.0,
+          133.0,
+          34.0,
+          29.0
+        ]
+      },
+      {
+        "color": "f1e9d5ff",
+        "rect": [
+          153.0,
+          135.0,
+          30.0,
+          9.0
+        ]
+      },
+      {
+        "color": "819773ff",
+        "rect": [
+          153.0,
+          147.0,
+          30.0,
+          13.0
+        ]
+      }
+    ],
+    [
+      {
+        "at": [
+          96.0,
+          84.0
+        ],
+        "path": "res://art_delivery/wood_buildings_v1/floor/wood_00.png"
+      },
+      {
+        "at": [
+          96.0,
+          84.0
+        ],
+        "path": "res://art_delivery/wood_buildings_v1/floor/perimeter/mask_09.png"
+      },
+      {
+        "at": [
+          96.0,
+          63.0
+        ],
+        "path": "res://art_delivery/wood_buildings_v1/floor/wood_00.png",
+        "src": [
+          0.0,
+          0.0,
+          48.0,
+          21.0
+        ]
+      },
+      {
+        "at": [
+          72.0,
+          84.0
+        ],
+        "path": "res://art_delivery/wood_buildings_v1/floor/wood_00.png",
+        "src": [
+          0.0,
+          0.0,
+          24.0,
+          42.0
+        ]
+      },
+      {
+        "at": [
+          96.0,
+          126.0
+        ],
+        "path": "res://art_delivery/wood_buildings_v1/floor/wood_00.png"
+      },
+      {
+        "at": [
+          96.0,
+          126.0
+        ],
+        "path": "res://art_delivery/wood_buildings_v1/floor/perimeter/mask_08.png"
+      },
+      {
+        "at": [
+          72.0,
+          126.0
+        ],
+        "path": "res://art_delivery/wood_buildings_v1/floor/wood_00.png",
+        "src": [
+          0.0,
+          0.0,
+          24.0,
+          42.0
+        ]
+      },
+      {
+        "at": [
+          96.0,
+          168.0
+        ],
+        "path": "res://art_delivery/wood_buildings_v1/floor/wood_00.png"
+      },
+      {
+        "at": [
+          96.0,
+          168.0
+        ],
+        "path": "res://art_delivery/wood_buildings_v1/floor/perimeter/mask_12.png"
+      },
+      {
+        "at": [
+          96.0,
+          210.0
+        ],
+        "path": "res://art_delivery/wood_buildings_v1/floor/wood_00.png",
+        "src": [
+          0.0,
+          0.0,
+          48.0,
+          21.0
+        ]
+      },
+      {
+        "at": [
+          72.0,
+          168.0
+        ],
+        "path": "res://art_delivery/wood_buildings_v1/floor/wood_00.png",
+        "src": [
+          0.0,
+          0.0,
+          24.0,
+          42.0
+        ]
+      },
+      {
+        "at": [
+          144.0,
+          84.0
+        ],
+        "path": "res://art_delivery/wood_buildings_v1/floor/wood_00.png"
+      },
+      {
+        "at": [
+          144.0,
+          84.0
+        ],
+        "path": "res://art_delivery/wood_buildings_v1/floor/perimeter/mask_01.png"
+      },
+      {
+        "at": [
+          144.0,
+          63.0
+        ],
+        "path": "res://art_delivery/wood_buildings_v1/floor/wood_00.png",
+        "src": [
+          0.0,
+          0.0,
+          48.0,
+          21.0
+        ]
+      },
+      {
+        "at": [
+          144.0,
+          126.0
+        ],
+        "path": "res://art_delivery/wood_buildings_v1/floor/wood_00.png"
+      },
+      {
+        "at": [
+          144.0,
+          126.0
+        ],
+        "path": "res://art_delivery/wood_buildings_v1/floor/perimeter/mask_00.png"
+      },
+      {
+        "at": [
+          144.0,
+          168.0
+        ],
+        "path": "res://art_delivery/wood_buildings_v1/floor/wood_00.png"
+      },
+      {
+        "at": [
+          144.0,
+          168.0
+        ],
+        "path": "res://art_delivery/wood_buildings_v1/floor/perimeter/mask_04.png"
+      },
+      {
+        "at": [
+          144.0,
+          210.0
+        ],
+        "path": "res://art_delivery/wood_buildings_v1/floor/wood_00.png",
+        "src": [
+          0.0,
+          0.0,
+          48.0,
+          21.0
+        ]
+      },
+      {
+        "at": [
+          192.0,
+          84.0
+        ],
+        "path": "res://art_delivery/wood_buildings_v1/floor/wood_00.png"
+      },
+      {
+        "at": [
+          192.0,
+          84.0
+        ],
+        "path": "res://art_delivery/wood_buildings_v1/floor/perimeter/mask_03.png"
+      },
+      {
+        "at": [
+          192.0,
+          63.0
+        ],
+        "path": "res://art_delivery/wood_buildings_v1/floor/wood_00.png",
+        "src": [
+          0.0,
+          0.0,
+          48.0,
+          21.0
+        ]
+      },
+      {
+        "at": [
+          240.0,
+          84.0
+        ],
+        "path": "res://art_delivery/wood_buildings_v1/floor/wood_00.png",
+        "src": [
+          0.0,
+          0.0,
+          24.0,
+          42.0
+        ]
+      },
+      {
+        "at": [
+          192.0,
+          126.0
+        ],
+        "path": "res://art_delivery/wood_buildings_v1/floor/wood_00.png"
+      },
+      {
+        "at": [
+          192.0,
+          126.0
+        ],
+        "path": "res://art_delivery/wood_buildings_v1/floor/perimeter/mask_02.png"
+      },
+      {
+        "at": [
+          240.0,
+          126.0
+        ],
+        "path": "res://art_delivery/wood_buildings_v1/floor/wood_00.png",
+        "src": [
+          0.0,
+          0.0,
+          24.0,
+          42.0
+        ]
+      },
+      {
+        "at": [
+          192.0,
+          168.0
+        ],
+        "path": "res://art_delivery/wood_buildings_v1/floor/wood_00.png"
+      },
+      {
+        "at": [
+          192.0,
+          168.0
+        ],
+        "path": "res://art_delivery/wood_buildings_v1/floor/perimeter/mask_06.png"
+      },
+      {
+        "at": [
+          192.0,
+          210.0
+        ],
+        "path": "res://art_delivery/wood_buildings_v1/floor/wood_00.png",
+        "src": [
+          0.0,
+          0.0,
+          48.0,
+          21.0
+        ]
+      },
+      {
+        "at": [
+          240.0,
+          168.0
+        ],
+        "path": "res://art_delivery/wood_buildings_v1/floor/wood_00.png",
+        "src": [
+          0.0,
+          0.0,
+          24.0,
+          42.0
+        ]
+      },
+      {
+        "at": [
+          48.0,
+          29.0
+        ],
+        "mesh": true,
+        "path": "res://art_delivery/wood_buildings_v1/wall/normal/wood_mask_06.png"
+      },
+      {
+        "at": [
+          48.0,
+          71.0
+        ],
+        "mesh": true,
+        "path": "res://art_delivery/wood_buildings_v1/wall/normal/wood_mask_05.png"
+      },
+      {
+        "at": [
+          48.0,
+          113.0
+        ],
+        "mesh": true,
+        "path": "res://art_delivery/wood_buildings_v1/wall/normal/wood_mask_05.png"
+      },
+      {
+        "at": [
+          48.0,
+          155.0
+        ],
+        "mesh": true,
+        "path": "res://art_delivery/wood_buildings_v1/wall/normal/wood_mask_05.png"
+      },
+      {
+        "at": [
+          48.0,
+          197.0
+        ],
+        "mesh": true,
+        "path": "res://art_delivery/wood_buildings_v1/wall/normal/wood_mask_03.png"
+      },
+      {
+        "at": [
+          96.0,
+          29.0
+        ],
+        "mesh": true,
+        "path": "res://art_delivery/wood_buildings_v1/wall/normal/wood_mask_10.png"
+      },
+      {
+        "at": [
+          96.0,
+          197.0
+        ],
+        "mesh": true,
+        "path": "res://art_delivery/wood_buildings_v1/wall/normal/wood_mask_10.png"
+      },
+      {
+        "at": [
+          144.0,
+          29.0
+        ],
+        "path": "res://art_delivery/wood_buildings_v1/door/horizontal_frame_rear.png"
+      },
+      {
+        "at": [
+          144.0,
+          29.0
+        ],
+        "path": "res://art_delivery/wood_buildings_v1/door/horizontal_leaf_closed_normal.png"
+      },
+      {
+        "at": [
+          144.0,
+          29.0
+        ],
+        "path": "res://art_delivery/wood_buildings_v1/door/horizontal_frame_front.png"
+      },
+      {
+        "at": [
+          144.0,
+          197.0
+        ],
+        "mesh": true,
+        "path": "res://art_delivery/wood_buildings_v1/wall/normal/wood_mask_10.png"
+      },
+      {
+        "at": [
+          192.0,
+          29.0
+        ],
+        "mesh": true,
+        "path": "res://art_delivery/wood_buildings_v1/wall/normal/wood_mask_10.png"
+      },
+      {
+        "at": [
+          192.0,
+          197.0
+        ],
+        "mesh": true,
+        "path": "res://art_delivery/wood_buildings_v1/wall/normal/wood_mask_10.png"
+      },
+      {
+        "at": [
+          240.0,
+          29.0
+        ],
+        "mesh": true,
+        "path": "res://art_delivery/wood_buildings_v1/wall/normal/wood_mask_12.png"
+      },
+      {
+        "at": [
+          240.0,
+          71.0
+        ],
+        "mesh": true,
+        "path": "res://art_delivery/wood_buildings_v1/wall/normal/wood_mask_05.png"
+      },
+      {
+        "at": [
+          240.0,
+          113.0
+        ],
+        "mesh": true,
+        "path": "res://art_delivery/wood_buildings_v1/wall/normal/wood_mask_05.png"
+      },
+      {
+        "at": [
+          240.0,
+          155.0
+        ],
+        "mesh": true,
+        "path": "res://art_delivery/wood_buildings_v1/wall/normal/wood_mask_05.png"
+      },
+      {
+        "at": [
+          240.0,
+          197.0
+        ],
+        "mesh": true,
+        "path": "res://art_delivery/wood_buildings_v1/wall/normal/wood_mask_09.png"
+      },
+      {
+        "color": "765539ff",
+        "rect": [
+          148.0,
+          130.0,
+          40.0,
+          37.0
+        ]
+      },
+      {
+        "color": "d7ceabff",
+        "rect": [
+          151.0,
+          133.0,
+          34.0,
+          29.0
+        ]
+      },
+      {
+        "color": "f1e9d5ff",
+        "rect": [
+          153.0,
+          135.0,
+          30.0,
+          9.0
+        ]
+      },
+      {
+        "color": "819773ff",
+        "rect": [
+          153.0,
+          147.0,
+          30.0,
+          13.0
+        ]
+      }
+    ]
+  ],
+  "sx": [
+    0.0,
+    18.0,
+    30.0,
+    48.0
+  ],
+  "sy": [
+    0.0,
+    2.0,
+    16.0,
+    28.0,
+    44.0,
+    68.0
+  ]
+}
