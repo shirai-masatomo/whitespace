@@ -18,6 +18,9 @@ var resume_probe := false
 var campaign_replay_path := ""
 var campaign_resume := false
 var campaign_final_probe := false
+var migration_probe := false
+var migration_resume := false
+const MigrationProbe = preload("res://ui/migration_probe.gd")
 var campaign_seed := 123
 const CampaignReplay = preload("res://ui/campaign_replay.gd")
 
@@ -28,6 +31,8 @@ func initialize_game() -> void:
 	if smoke_dir!="": save_path=smoke_dir.path_join("campaign-smoke.json")
 	for arg in OS.get_cmdline_user_args():
 		if arg=="--resume-probe": resume_probe=true
+		if smoke_dir!="" and arg=="--migration-probe": migration_probe=true
+		if smoke_dir!="" and arg=="--migration-resume": migration_resume=true
 		if smoke_dir!="" and arg.begins_with("--campaign-replay="): campaign_replay_path=arg.trim_prefix("--campaign-replay=")
 		if arg=="--campaign-resume": campaign_resume=true
 		if arg=="--campaign-final-probe": campaign_final_probe=true
@@ -326,6 +331,8 @@ func show_town(root: VBoxContainer) -> void:
 	var depart:=command("HP/SP回復済み  →  もう一度地下へ","depart"); root.add_child(depart)
 
 func smoke(quit_on_finish: bool = true) -> void:
+	if migration_probe:
+		await MigrationProbe.run(self,migration_resume); return
 	if campaign_replay_path!="":
 		await CampaignReplay.run(self); return
 	if resume_probe:
@@ -355,6 +362,9 @@ func smoke(quit_on_finish: bool = true) -> void:
 	await click_control(play_buttons.town)
 	if rendered: await capture("06-town.png")
 	var uid: String=campaign.inventory[0]
+	await CampaignReplay.click(self,"deposit",{"uid":uid})
+	await CampaignReplay.click(self,"withdraw",{"uid":uid})
+	if not smoke_check(uid in campaign.inventory and campaign.warehouse.is_empty(),"Initial return enables warehouse roundtrip"): return
 	# Find actual town buttons; core inventory stress tests separately cover every move.
 	var equip_button:=find_button(screen,"装備")
 	await click_control(equip_button)

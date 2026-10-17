@@ -32,7 +32,11 @@ func _initialize() -> void:
 		battle=E.act(battle,"round",battle.revision,{},data,legacy)
 		check(battle.phase=="battle","legacy active battle fixture")
 		var dead:=explore.duplicate(true); E.finish(dead,"death","normal old death",legacy)
-		for source in [before,inside,result,town,explore,battle,dead]:
+		var fixture_dir:=ProjectSettings.globalize_path("res://artifacts/migration-fixtures")
+		DirAccess.make_dir_recursive_absolute(fixture_dir)
+		var cases:={"before":before,"inside":inside,"story":result,"town":town,"explore":explore,"battle":battle,"death":dead}
+		for name in cases: put(fixture_dir.path_join(version.right(1)+"-"+name+".json"),cases[name])
+		for source in cases.values():
 			check(E.validate(source,data,legacy)=="","valid legacy fixture "+source.phase)
 			var path: String=ProjectSettings.globalize_path("user://first-migration-%d.json"%checks)
 			put(path,source)
