@@ -1,0 +1,305 @@
+{
+  "metadata": {
+    "combat_sha256": "d823ae3565a6c60d7381d50d540dd9ef76b10cc6304648bc00749acb2fc43487",
+    "config_sha256": "4c060a204a1513b9a947bae91a105a95cc51a3ed615801ed0e9ba12003a4791b",
+    "config_version": "2026-10-17.loop-provisional.2",
+    "data_sha256": "603a6c581be3893664bf4d8c466c661635095470c6cd8b8fe39c68a42a60f357",
+    "data_version": "2026-10-17.foundation.1",
+    "engine": "4.7.2-stable (official)",
+    "expedition_sha256": "6c1dbd4aaac9524e79b5abd5ee93a706c7868a8f5209c16cf87b927572d7f7c1",
+    "game_commit": "152db912b0d5220d42cd59234d13947e6439a387",
+    "policy_code_sha256": "348489a0a50cb38bc99256c016aace3ce03699191fae3b53721ba38e66b65acb",
+    "policy_sha256": "16b08c7109dd5c70b345371b18af622e1ad5e23d0863938f52565c2f3a15c170",
+    "runner_contract": "campaign-v1"
+  },
+  "metrics": {
+    "clear_rate": 1.0,
+    "clears": 1000,
+    "death_rate_per_normal_trip": 0.0835486649440138,
+    "draws": 0,
+    "exp_earned": 633574,
+    "final_exp": {
+      "count": 1000,
+      "max": 1084,
+      "mean": 633.574,
+      "median": 628.0,
+      "min": 311,
+      "p10": 485,
+      "p90": 784
+    },
+    "final_gold": {
+      "count": 1000,
+      "max": 825,
+      "mean": 473.35,
+      "median": 466.5,
+      "min": 238,
+      "p10": 366,
+      "p90": 586
+    },
+    "final_items": {
+      "count": 1000,
+      "max": 48,
+      "mean": 28.065,
+      "median": 28.0,
+      "min": 13,
+      "p10": 21,
+      "p90": 35
+    },
+    "final_level": {
+      "count": 1000,
+      "max": 13,
+      "mean": 10.212,
+      "median": 10.0,
+      "min": 7,
+      "p10": 9,
+      "p90": 11
+    },
+    "gold_earned": 499732,
+    "invalid_results": 0,
+    "loot_earned": 27065,
+    "mean_exp_earned_per_trip": 49.6103672382742,
+    "mean_gold_earned_per_trip": 39.1302168976588,
+    "mean_loot_earned_per_trip": 2.11925456111503,
+    "normal_deaths": 1067,
+    "normal_trips": 12771,
+    "reach_10F_rate": 1.0,
+    "reached_10F": 1000,
+    "remaining_hp_per_trip": {
+      "count": 12771,
+      "max": 58,
+      "mean": 20.6567222613734,
+      "median": 20.0,
+      "min": 0,
+      "p10": 4,
+      "p90": 37
+    },
+    "returns": 10704,
+    "rounds_per_trip": {
+      "count": 12771,
+      "max": 24,
+      "mean": 11.5286978310234,
+      "median": 12.0,
+      "min": 0,
+      "p10": 4,
+      "p90": 17
+    },
+    "story_deaths_excluded": 1000,
+    "trials": 1000,
+    "trips_to_clear": {
+      "count": 1000,
+      "max": 19,
+      "mean": 12.771,
+      "median": 13.0,
+      "min": 8,
+      "p10": 11,
+      "p90": 15
+    }
+  },
+  "comparison": {
+    "after": {
+      "combat_sha256": "d823ae3565a6c60d7381d50d540dd9ef76b10cc6304648bc00749acb2fc43487",
+      "config_sha256": "4c060a204a1513b9a947bae91a105a95cc51a3ed615801ed0e9ba12003a4791b",
+      "config_version": "2026-10-17.loop-provisional.2",
+      "data_sha256": "603a6c581be3893664bf4d8c466c661635095470c6cd8b8fe39c68a42a60f357",
+      "data_version": "2026-10-17.foundation.1",
+      "engine": "4.7.2-stable (official)",
+      "expedition_sha256": "6c1dbd4aaac9524e79b5abd5ee93a706c7868a8f5209c16cf87b927572d7f7c1",
+      "game_commit": "152db912b0d5220d42cd59234d13947e6439a387",
+      "policy_code_sha256": "348489a0a50cb38bc99256c016aace3ce03699191fae3b53721ba38e66b65acb",
+      "policy_sha256": "16b08c7109dd5c70b345371b18af622e1ad5e23d0863938f52565c2f3a15c170",
+      "runner_contract": "campaign-v1"
+    },
+    "after_metrics": {
+      "clear_rate": 1.0,
+      "clears": 1000.0,
+      "death_rate_per_normal_trip": 0.0835486649440138,
+      "draws": 0.0,
+      "exp_earned": 633574.0,
+      "final_exp": {
+        "count": 1000.0,
+        "max": 1084.0,
+        "mean": 633.574,
+        "median": 628.0,
+        "min": 311.0,
+        "p10": 485.0,
+        "p90": 784.0
+      },
+      "final_gold": {
+        "count": 1000.0,
+        "max": 825.0,
+        "mean": 473.35,
+        "median": 466.5,
+        "min": 238.0,
+        "p10": 366.0,
+        "p90": 586.0
+      },
+      "final_items": {
+        "count": 1000.0,
+        "max": 48.0,
+        "mean": 28.065,
+        "median": 28.0,
+        "min": 13.0,
+        "p10": 21.0,
+        "p90": 35.0
+      },
+      "final_level": {
+        "count": 1000.0,
+        "max": 13.0,
+        "mean": 10.212,
+        "median": 10.0,
+        "min": 7.0,
+        "p10": 9.0,
+        "p90": 11.0
+      },
+      "gold_earned": 499732.0,
+      "invalid_results": 0.0,
+      "loot_earned": 27065.0,
+      "mean_exp_earned_per_trip": 49.6103672382742,
+      "mean_gold_earned_per_trip": 39.1302168976588,
+      "mean_loot_earned_per_trip": 2.11925456111503,
+      "normal_deaths": 1067.0,
+      "normal_trips": 12771.0,
+      "reach_10F_rate": 1.0,
+      "reached_10F": 1000.0,
+      "remaining_hp_per_trip": {
+        "count": 12771.0,
+        "max": 58.0,
+        "mean": 20.6567222613734,
+        "median": 20.0,
+        "min": 0.0,
+        "p10": 4.0,
+        "p90": 37.0
+      },
+      "returns": 10704.0,
+      "rounds_per_trip": {
+        "count": 12771.0,
+        "max": 24.0,
+        "mean": 11.5286978310234,
+        "median": 12.0,
+        "min": 0.0,
+        "p10": 4.0,
+        "p90": 17.0
+      },
+      "story_deaths_excluded": 1000.0,
+      "trials": 1000.0,
+      "trips_to_clear": {
+        "count": 1000.0,
+        "max": 19.0,
+        "mean": 12.771,
+        "median": 13.0,
+        "min": 8.0,
+        "p10": 11.0,
+        "p90": 15.0
+      }
+    },
+    "before": {
+      "combat_sha256": "d823ae3565a6c60d7381d50d540dd9ef76b10cc6304648bc00749acb2fc43487",
+      "config_sha256": "4c060a204a1513b9a947bae91a105a95cc51a3ed615801ed0e9ba12003a4791b",
+      "config_version": "2026-10-17.loop-provisional.2",
+      "data_sha256": "603a6c581be3893664bf4d8c466c661635095470c6cd8b8fe39c68a42a60f357",
+      "data_version": "2026-10-17.foundation.1",
+      "engine": "4.7.2-stable (official)",
+      "expedition_sha256": "6c1dbd4aaac9524e79b5abd5ee93a706c7868a8f5209c16cf87b927572d7f7c1",
+      "game_commit": "d146437",
+      "policy_code_sha256": "348489a0a50cb38bc99256c016aace3ce03699191fae3b53721ba38e66b65acb",
+      "policy_sha256": "16b08c7109dd5c70b345371b18af622e1ad5e23d0863938f52565c2f3a15c170",
+      "runner_contract": "campaign-v1"
+    },
+    "before_metrics": {
+      "clear_rate": 1.0,
+      "clears": 1000.0,
+      "death_rate_per_normal_trip": 0.0835486649440138,
+      "draws": 0.0,
+      "exp_earned": 633574.0,
+      "final_exp": {
+        "count": 1000.0,
+        "max": 1084.0,
+        "mean": 633.574,
+        "median": 628.0,
+        "min": 311.0,
+        "p10": 485.0,
+        "p90": 784.0
+      },
+      "final_gold": {
+        "count": 1000.0,
+        "max": 825.0,
+        "mean": 473.35,
+        "median": 466.5,
+        "min": 238.0,
+        "p10": 366.0,
+        "p90": 586.0
+      },
+      "final_items": {
+        "count": 1000.0,
+        "max": 48.0,
+        "mean": 28.065,
+        "median": 28.0,
+        "min": 13.0,
+        "p10": 21.0,
+        "p90": 35.0
+      },
+      "final_level": {
+        "count": 1000.0,
+        "max": 13.0,
+        "mean": 10.212,
+        "median": 10.0,
+        "min": 7.0,
+        "p10": 9.0,
+        "p90": 11.0
+      },
+      "gold_earned": 499732.0,
+      "invalid_results": 0.0,
+      "loot_earned": 27065.0,
+      "mean_exp_earned_per_trip": 49.6103672382742,
+      "mean_gold_earned_per_trip": 39.1302168976588,
+      "mean_loot_earned_per_trip": 2.11925456111503,
+      "normal_deaths": 1067.0,
+      "normal_trips": 12771.0,
+      "reach_10F_rate": 1.0,
+      "reached_10F": 1000.0,
+      "remaining_hp_per_trip": {
+        "count": 12771.0,
+        "max": 58.0,
+        "mean": 20.6567222613734,
+        "median": 20.0,
+        "min": 0.0,
+        "p10": 4.0,
+        "p90": 37.0
+      },
+      "returns": 10704.0,
+      "rounds_per_trip": {
+        "count": 12771.0,
+        "max": 24.0,
+        "mean": 11.5286978310234,
+        "median": 12.0,
+        "min": 0.0,
+        "p10": 4.0,
+        "p90": 17.0
+      },
+      "story_deaths_excluded": 1000.0,
+      "trials": 1000.0,
+      "trips_to_clear": {
+        "count": 1000.0,
+        "max": 19.0,
+        "mean": 12.771,
+        "median": 13.0,
+        "min": 8.0,
+        "p10": 11.0,
+        "p90": 15.0
+      }
+    },
+    "delta": {
+      "clear_rate": 0.0,
+      "death_rate_per_normal_trip": 0.0,
+      "exp_earned": 0.0,
+      "gold_earned": 0.0,
+      "loot_earned": 0.0,
+      "normal_trips": 0.0,
+      "reach_10F_rate": 0.0
+    },
+    "strict": true,
+    "strict_equal": true
+  },
+  "runtime_commit": "4f6720192732a7f9d8d24f2d6347220ff637654f",
+  "runtime_difference": "visual metadata and note only; combat/expedition/data/policy unchanged"
+}

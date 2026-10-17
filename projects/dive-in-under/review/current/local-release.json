@@ -1,9 +1,9 @@
 {
-  "published_utc": "2026-10-17T12:36:50.6872851Z",
-  "game_commit": "04778428be0e0d7c74b23240707cde6403f04704",
-  "relative_directory": "releases/04778428be0e0d7c74b23240707cde6403f04704-9fd9b00a",
-  "previous_directory": "releases/7bc5f347d2c94019ff20acb9bc4ba83ab6c06fa7-14bc7557",
-  "pck_sha256": "473FC64BA9CF5FF7DB0F3A75F9B39DB69E0B40297B0AD4438A5F28C1FF18F066",
+  "previous_directory": "releases/04778428be0e0d7c74b23240707cde6403f04704-9fd9b00a",
   "exe_sha256": "D34D36F3BE1A6C49C56525AE86469B92E4F417DDF0B43CF00DD80C385C4B0562",
-  "existing_processes_untouched": true
+  "pck_sha256": "4220621EE117302210F24A74F9025C5C05183DC093BE96D6DC79D7B147A8C8E4",
+  "existing_processes_untouched": true,
+  "game_commit": "4f6720192732a7f9d8d24f2d6347220ff637654f",
+  "published_utc": "2026-10-17T13:57:11.1001605Z",
+  "relative_directory": "releases/4f6720192732a7f9d8d24f2d6347220ff637654f-18badaab"
 }

@@ -1,0 +1,47 @@
+{
+  "runtime_commit": "4f6720192732a7f9d8d24f2d6347220ff637654f",
+  "version": "0.4.4-adopted-baseline",
+  "resolution": [
+    1280,
+    720
+  ],
+  "reference_camera_complete": false,
+  "normal_background_pending": true,
+  "screenshots": [
+    {
+      "path": "59-adopted-title.png",
+      "sha256": "79c41584ef2359b393e69c27698ae7b379e7de31ed86071beb05ece6af85c818",
+      "audit": "59-adopted-title-audit.json"
+    },
+    {
+      "path": "60-boss-depth-placement.png",
+      "sha256": "b94a33bc5a4b1ab4c06d750bbbdf582183f242ece85904d6252095b7eb471777",
+      "audit": "60-boss-depth-placement-audit.json"
+    },
+    {
+      "path": "61-rat-v2.png",
+      "sha256": "cbf1b62b04b0ba539bcb8348a4d5475a062a704bf4830cc5765fde9d69e8f8c6",
+      "audit": "61-rat-v2-audit.json"
+    },
+    {
+      "path": "62-current-normal-battle.png",
+      "sha256": "5f6879e729310e0ad7d03427a7ee1b0df1336afdc6bb8ba213b0b9c879a229f4",
+      "audit": "62-current-normal-battle-audit.json"
+    },
+    {
+      "path": "63-current-town.png",
+      "sha256": "2088e2bc77aa83c086364f2b76b5e75ebdf266a8eda2ec77d8e0be1c2384188b",
+      "audit": "63-current-town-audit.json"
+    },
+    {
+      "path": "64-current-exploration.png",
+      "sha256": "8d3fdaca5bb059a7d3ed8abf8f785cf63425df024e1071e5ee9701c78eaa425a",
+      "audit": "64-current-exploration-audit.json"
+    },
+    {
+      "path": "65-current-death.png",
+      "sha256": "bdc9816bd3bcd1161df4641f5f634641c3136403a2a6617b6e129532fa2ce616",
+      "audit": "65-current-death-audit.json"
+    }
+  ]
+}

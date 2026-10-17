@@ -1,46 +1,36 @@
-# Dive In Under — 確認入口
+# Dive In Under — 実画面と技術記録
 
-**最新：静止素材9点と現配置を基準として採用済み。ただし参考PX-02の斜め視点への一致は未達。採用と視点の完成判定を分ける。工程1全体は未完了。**
+**0.4.4 / 静止素材の採用反映・ボスの前後配置改善・ネズミv2。参考の斜め視点は未達、工程1全体も未完了。**
 
-PCの確認入口は「01 ゲームを起動」「02 画像・画面を確認」「03 変更点」の3項目。以下は技術記録で、入口直下には並べない。
+PCの確認入口は「01 ゲームを起動」「02 画像・画面を確認」「03 変更点」の3項目を維持。ゲーム起動は従来の[Play.cmd](Play.cmd)が検証済み最新版を選ぶ。[画像付き比較](index.html) / [Windows ZIP](../../build/DiveInUnder-foundation-windows-x64.zip) / [操作・保存手順](../../tools/PLAY.txt)。
 
+## 戦闘画面の変更が見えにくかった理由
 
-**前版0.4.3 / 既存UI改善＋やや斜めの構図＋残敵4候補。基準5点は採用済み、新規4点は未採用。工程1全体は未完了。**
+調査時点の入口→Play.cmd→current.txtは0.4.3、ソース0477842を指しており、EXE/PCKのSHAは配布記録と一致。旧版へのリンクではなかった。読取確認時にDiveInUnderプロセスは見つからず、ユーザーが見たウィンドウの実行版までは断定しない。
 
-PCの同じ `確認入口.lnk` → [Play.cmd](Play.cmd) または [画像付き比較ページ](index.html)。[Windows ZIP](../../build/DiveInUnder-foundation-windows-x64.zip) / [現在のEXE](../../build/releases/04778428be0e0d7c74b23240707cde6403f04704-9fd9b00a/DiveInUnder.exe) / [操作・保存手順](../../tools/PLAY.txt) / [環境](../../docs/DEVELOPMENT.md) / [SHA](build-manifest.json) / [安全切替記録](local-release.json)。EXEとPCKを同じ場所へ展開します。
+0.4.3は中央612×270の画面で敵(171,208)、主人公(416,236)という**28pxの前後差**と1.04倍の背景クロップだけ。レイアウトや原画のカメラは従来どおりで、参考PX-02の斜め視点への一致を「実装済み」とした説明は不十分だった。現在も通常洞窟の細い水平足場は未修正。
 
-実行ソース `04778428be0e0d7c74b23240707cde6403f04704`、Godot `4.7.2.stable.official.ed1daf0bf`。旧EXE/PCKと使用中プロセスを保持し、新しい検証済みreleaseへの参照だけ更新しました。通常デスクトップへの自動起動は行っていません。
+今回の0.4.4は既存ボス床の範囲内で、敵(184,190)、主人公(428,246)へ配置し前後差56px、石像175px高。ネズミv2は原画のまま差替え、v1を保持。**この変更だけで戦闘画面全体の視点問題が解消したとはしない。** 通常床面の改善を最優先に、人物は共通カメラを確定してから比較し、全再生成を前提としない。[画像担当への仕様](../../docs/IMAGE_PRODUCTION_HANDOFF.md)。
 
-## 今回の小単位
+## 最新の実EXE
 
-1. **0.4.2 UI改善**：控えめな羊皮紙繊維・真鍮枠・見出し帯・装備11行/既存能力効果。自己レビューで無効ボタン幅と文字/枠の余白を修正し再検証。[町の前後](index.html#town) / [0.4.2証拠](README-0.4.2.md)。5素材の採用表示も更新済み。
-2. **0.4.3 構図**：最新指示「参考のようにやや斜め視点」を反映。既存背景を1.04倍で静的クロップ、敵を左奥、主人公を右手前へ。612×270の絵領域で足元は敵(171,208)、主人公(416,236)。画面構図だけの決定で、隊列/前後衛/配下のルールは未実装・未決定です。
-3. **残敵4候補**：納品のSHAと9原稿すべてを照合。アルファ16以上の本体境界＋4px余白をAtlas表示範囲にし、微小アルファで本体が縮むのを防止。原画は無変更。コウモリは18px浮く静止配置案。採用はまだ宣言しません。
+[タイトル](59-adopted-title.png) / [通常戦闘](62-current-normal-battle.png) / [ボス修正後](60-boss-depth-placement.png) / [修正前0.4.3](56-oblique-boss.png) / [ネズミv2](61-rat-v2.png) / [町](63-current-town.png) / [探索](64-current-exploration.png) / [初回死亡](65-current-death.png)。
 
-## 実EXEと素材の比較
+元の9素材の採用通知を[履歴](visual-adoption.json)へ反映。新納品のネズミv2は承認済みの視点修正に基づく差替えとして原稿SHAと表示域を記録し、旧9点の採用通知と区別する。[全原稿記録](../../assets/visual-candidates/v1/manifest.json)。
 
-| 内容 | 実画面 |
-| --- | --- |
-| 新規候補 | [E01 地底ネズミ](51-enemy-rat.png) / [E02 粘菌スライム](52-enemy-slime.png) / [E03 鉄羽コウモリ](53-enemy-bat.png) / [E05 岩甲虫](54-enemy-beetle.png) |
-| 斜め配置 | [E04](55-oblique-goblin.png) / [B10](56-oblique-boss.png) / [変更前0.4.2](45-ui-battle.png) |
-| 他画面 | [タイトル](57-oblique-title.png) / [探索](58-oblique-exploration.png) / [町](44-ui-town.png) / [結果](49-ui-result.png) |
+## 検証と配布
 
-町・結果の44/49画像は同じUIの0.4.2収録です。[採用5点と未採用4点の一覧](visual-candidates.md) / [画像制作への共通引継ぎ](../../docs/IMAGE_PRODUCTION_HANDOFF.md) / [今回画面のSHAと監査](oblique-evidence.json)。
+実行ソース `4f6720192732a7f9d8d24f2d6347220ff637654f`、Godot4.7.2。自己レビューでv2測定値の古いメタデータを修正し、再テスト・再ビルド・隔離実EXEを再検証。
 
-## 回帰と配布の証拠
+- [142](camera-tests.log)＋[180](camera-loop-tests.log)＋[44](camera-campaign-tests.log)項目、ヘッドレスUI、Windowsビルド成功。
+- [隔離290操作](camera-campaign-isolated-campaign-complete.json)と[ヘッドレス290操作](camera-campaign-headless-campaign-complete.json)、途中・突破後の別EXE保存再開成功。[非対話Station/Desktop監査](camera-campaign-isolated-isolation-complete.json)。通常デスクトップへの操作なし。
+- 固定1000seedを再実行し全記録・SHA・指標が従来と厳密一致。1000/1000突破、通常12,771探索・1,067死亡（8.35%）、突破まで平均12.771/中央値13。初回死亡1000件は別枠。[要約](camera-campaign-repeat.txt) / [比較JSON](camera-campaign-summary.json) / [全件JSON.gz](camera-campaign-repeat.json.gz)。シミュレーター記録は152db91、その後は表示注記・素材メタデータのみ変更。
+- クリアSHA `edd3cace3bb8376f1e2d80cb0cc6a44270874df5893a0a91906b036046996d2a`、保存SHA `0dcca1d55581aba169a1ed6ee4251688e37a2d6320da3042789a17c8b33dc6fa` は従来一致。
+- [ZIP/EXE/PCK SHA](build-manifest.json) / [安全切替](local-release.json) / [画面SHA](camera-evidence.json)。旧EXE/PCKと使用中プロセスを保持し、Play.cmdの参照のみ切替。
+- [Draft PR5](https://github.com/shirai-masatomo/whitespace/pull/5) / [今回CIの状態](https://github.com/shirai-masatomo/whitespace/pull/5/checks)。今回の最終版CIは結果待ちで、旧0.4.3の成功と混同しない。
 
-- [142](oblique-tests.log)＋[180](oblique-loop-tests.log)＋[44](oblique-campaign-tests.log)チェック、ヘッドレスUI、Windowsビルド成功。[隔離290操作](oblique-campaign-isolated-campaign-complete.json) / [ヘッドレス290操作](oblique-campaign-headless-campaign-complete.json) / [別EXE保存再開](oblique-campaign-isolated-campaign-final.json)。
-- クリア/保存SHAは従来と一致。通常13探索・死亡1・帰還11、初回死亡は別で1回。6種すべてで全身が領域内、原画9枚SHA一致を確認。[隔離監査](oblique-campaign-isolated-isolation-complete.json) / [GPUログ](oblique-campaign-isolated-complete.log)。
-- コア・データ・保存・探索方針の差分なし。新規4画像以外のPNGは不変。1000seedのローカル再計算は省略し、今回CIの厳密比較を別記録します。[従来1000seed全文JSON.gz](visual-campaign-repeat.json.gz) / [日本語要約](visual-campaign-repeat.txt)。
-- UI単位0.4.2の[PR CIは成功](https://github.com/shirai-masatomo/whitespace/actions/runs/39032622680)、head7bc5f34、checkout0cc6b1e。[CI ZIP](https://github.com/shirai-masatomo/whitespace/actions/runs/39032622680/artifacts/12100624678) / [ログ](https://github.com/shirai-masatomo/whitespace/actions/runs/39032622680/artifacts/12101301288) / [記録](ci-ui-refinement.json)。並行pushは後続更新によりキャンセル。0.4.3とは分離します。
+## 残る工程1条件
 
-[Draft PR #5](https://github.com/shirai-masatomo/whitespace/pull/5) / [最新CI Checks](https://github.com/shirai-masatomo/whitespace/pull/5/checks)。
+最新main8c0711dを取り込み。正本は「毒・暗闇・麻痺＋防御態勢を先行導入し、短い画面エフェクトまで実装する」と追加。実遭遇、途中保存/再開、状態あり/なしの固定シード・10F比較は未実装。まず視点問題を優先。仲間・全状態・高度AI・キャラモーション・工程2は追加しない。
 
-## 残項目
-
-4候補と斜め構図の節目レビュー。ネズミは横向き寄り、スライム/甲虫は上面が見え、コウモリは浮き量を含めて判断します。現在は2D素材の配置で奥行きを表現しており、原画のカメラ角度は変えていません。より明確な斜め俯瞰が必要なら、広い床面と奥行き方向を持つ背景、双方の3/4向き静止画が追加仕様候補です。まず現在の実画面を比較します。
-
-PXの装飾・装備アイコン配置との一致、別解像度、OS物理入力、長時間試遊は未達/未検証。完全な同時セーブ書込み排他は未対応。工程1全体は未完了。仲間・隊列ルール・全スキル・耐久・工程2・モーションは追加していません。
-
-
-0.4.3の[PR CI39033111419](https://github.com/shirai-masatomo/whitespace/actions/runs/39033111419)は全工程成功。head/runtime `04778428be0e0d7c74b23240707cde6403f04704`、実checkout merge `c12d5a555944b0a0e67d1cfea2c7cbad5a8b888e`。366チェック、1000seed全記録/状態SHA/全指標の厳密再比較、EXE290操作/別プロセス再開、故障注入10件を確認。[CI Windows ZIP](https://github.com/shirai-masatomo/whitespace/actions/runs/39033111419/artifacts/12100724828) / [JSON・ログ](https://github.com/shirai-masatomo/whitespace/actions/runs/39033111419/artifacts/12101691163)、期限2027-01-15。後続の比較画像/引継ぎ/CI記録コミットは資料のみで、この成功コード版と区別する。
+OS物理入力、他解像度、長時間試遊、複数同時セーブ書込の完全排他は未検証/未対応。[工程1照合](../../docs/PHASE_01_ACCEPTANCE.md) / [前版の記録](README-0.4.3.md)。
