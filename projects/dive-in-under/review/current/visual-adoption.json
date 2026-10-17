@@ -69,5 +69,16 @@
     "runtime_at_approval": "04778428be0e0d7c74b23240707cde6403f04704",
     "viewpoint_followup": "実装されてるように見えないが",
     "viewpoint_status": "unresolved; reference-camera correction required"
-  }
+  },
+  "revision_adoptions": [
+    {
+      "id": "cavern",
+      "file": "dive-ordinary-cave-candidate-v2.png",
+      "sha256": "b251f52cde26bf44481a83de844a6879e5ec6d4d18aa91d7dfd32b25dfab3f6b",
+      "date": "2026-10-17",
+      "user_statement": "納品されたものを採用で構いません。",
+      "status": "adopted-as-current-baseline",
+      "original_v1_preserved": true
+    }
+  ]
 }
