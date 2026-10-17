@@ -4,15 +4,15 @@ extends RefCounted
 const ROOT := "res://assets/visual-candidates/v1/"
 const FILES := {"cavern":"dive-ordinary-cave-candidate-v1.png", "boss":"dive-boss-gate-cave-candidate-v1.png",
 	"hero":"dive-hero-static-candidate-v1.png", "E04":"dive-e04-goblin-static-candidate-v1.png", "B10":"dive-b10-gatekeeper-static-candidate-v1.png",
-	"E01":"dive-e01-underground-rat-static-candidate-v1.png","E02":"dive-e02-slime-mold-static-candidate-v1.png",
+	"E01":"dive-e01-underground-rat-static-candidate-v2.png","E02":"dive-e02-slime-mold-static-candidate-v1.png",
 	"E03":"dive-e03-ironwing-bat-static-candidate-v1.png","E05":"dive-e05-rock-beetle-static-candidate-v1.png"}
 static var cache: Dictionary = {}
 static var actor_cache: Dictionary = {}
 const FEET := {"hero":Vector2(640,1135),"E04":Vector2(565,1156),"B10":Vector2(646,1221),
-	"E01":Vector2(770,1007),"E02":Vector2(627,949),"E03":Vector2(520,1030),"E05":Vector2(645,1093)}
+	"E01":Vector2(800,1013),"E02":Vector2(627,949),"E03":Vector2(520,1030),"E05":Vector2(645,1093)}
 # Measured alpha>=16 body bounds plus 4px fringe. Atlas crops leave PNG bytes intact.
 # Faint, distant alpha specks must not determine the visible body's fit.
-const BODY_REGIONS := {"E01":Rect2(30,472,1195,541),"E02":Rect2(24,323,1206,632),
+const BODY_REGIONS := {"E01":Rect2(16,382,1230,637),"E02":Rect2(24,323,1206,632),
 	"E03":Rect2(32,236,1197,799),"E05":Rect2(47,308,1197,791)}
 const UNAPPROVED := []
 

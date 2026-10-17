@@ -145,9 +145,9 @@
     },
     {
       "id": "E01",
-      "file": "dive-e01-underground-rat-static-candidate-v1.png",
-      "sha256": "f6f4fbb9ddea4e1984aa92137d619470829b17c3b97fc892e0ae0449328abe86",
-      "bytes": 551496,
+      "file": "dive-e01-underground-rat-static-candidate-v2.png",
+      "sha256": "d9b3a1cf7aa2ef3287c25400c217accb1e28b5e5d53455ab707ffd56d2490869",
+      "bytes": 678012,
       "width": 1254,
       "height": 1254,
       "alpha_bounds": {
@@ -198,21 +198,38 @@
         }
       },
       "display_region_xywh": [
-        30,
-        472,
-        1195,
-        541
+        16,
+        382,
+        1230,
+        637
       ],
       "display_region_basis": "alpha>=16 body bbox plus 4px fringe; observed image; original unchanged",
       "feet_source": [
-        770,
-        1007
+        800,
+        1013
       ],
-      "status": "adopted-as-current-baseline",
+      "status": "viewpoint-correction-v2-applied-for-comparison",
       "facing": "right",
       "generation": "dedicated image production chat image_gen; one generation per asset; references adopted hero/E04/B10 and latest battle mock; parent-reported provenance",
       "motion": "none",
-      "static_hover_proposal_px": 0
+      "static_hover_proposal_px": 0,
+      "source_local_name": "dive-e01-underground-rat-static-candidate-v2.png",
+      "pixels": {
+        "width": 1254,
+        "height": 1254,
+        "alpha16_bbox_inclusive": [
+          20,
+          386,
+          1241,
+          1014
+        ],
+        "alpha128_bbox_inclusive": [
+          20,
+          386,
+          1240,
+          1013
+        ]
+      }
     },
     {
       "id": "E02",
@@ -434,5 +451,78 @@
     "permanent_lock": false,
     "static_only": true
   },
-  "viewpoint_acceptance": "incomplete: placement alone does not match reference camera"
+  "viewpoint_acceptance": "incomplete: placement alone does not match reference camera",
+  "superseded_assets": [
+    {
+      "id": "E01",
+      "file": "dive-e01-underground-rat-static-candidate-v1.png",
+      "sha256": "f6f4fbb9ddea4e1984aa92137d619470829b17c3b97fc892e0ae0449328abe86",
+      "bytes": 551496,
+      "width": 1254,
+      "height": 1254,
+      "alpha_bounds": {
+        "1": {
+          "count": 336446,
+          "inclusive": [
+            31,
+            23,
+            1225,
+            1227
+          ]
+        },
+        "128": {
+          "count": 305661,
+          "inclusive": [
+            34,
+            476,
+            1220,
+            1007
+          ]
+        },
+        "16": {
+          "count": 311436,
+          "inclusive": [
+            34,
+            476,
+            1220,
+            1008
+          ]
+        },
+        "240": {
+          "count": 298568,
+          "inclusive": [
+            35,
+            477,
+            1219,
+            1006
+          ]
+        },
+        "64": {
+          "count": 308150,
+          "inclusive": [
+            34,
+            476,
+            1220,
+            1007
+          ]
+        }
+      },
+      "display_region_xywh": [
+        30,
+        472,
+        1195,
+        541
+      ],
+      "display_region_basis": "alpha>=16 body bbox plus 4px fringe; observed image; original unchanged",
+      "feet_source": [
+        770,
+        1007
+      ],
+      "status": "adopted-as-current-baseline",
+      "facing": "right",
+      "generation": "dedicated image production chat image_gen; one generation per asset; references adopted hero/E04/B10 and latest battle mock; parent-reported provenance",
+      "motion": "none",
+      "static_hover_proposal_px": 0
+    }
+  ]
 }

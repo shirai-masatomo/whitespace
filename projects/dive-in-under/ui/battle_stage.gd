@@ -12,7 +12,7 @@ var enemy_alive := true
 const BACKGROUND_ZOOM := 1.04
 const NEAR_HERO := Vector2(0.68,12.0)
 const FAR_ENEMY := Vector2(0.28,-16.0)
-const ENEMY_HEIGHTS := {"E01":100.0,"E02":110.0,"E03":140.0,"E04":140.0,"E05":145.0,"B10":195.0}
+const ENEMY_HEIGHTS := {"E01":100.0,"E02":110.0,"E03":140.0,"E04":140.0,"E05":145.0,"B10":175.0}
 const PALETTE := {"o":"17242b","h":"324553","b":"766047","g":"b4a17b","s":"dfb282","e":"f6d578",
 	"t":"486878","m":"6d917a","l":"9ab494","r":"c27a53","a":"c6d0c5","w":"ece9c8"}
 const HERO := [
@@ -90,6 +90,12 @@ func ground_y() -> float:
 func display_foot(position_hint: Vector2) -> Vector2:
 	return Vector2(roundf(size.x*position_hint.x),roundf(ground_y()+position_hint.y*size.y/270.0))
 
+func hero_position_hint() -> Vector2:
+	return Vector2(0.70,22.0) if floor_number>=10 else NEAR_HERO
+
+func enemy_position_hint() -> Vector2:
+	return Vector2(0.30,-34.0) if floor_number>=10 else FAR_ENEMY
+
 func place_actor(actor: Sprite2D, key: String, position_hint: Vector2, target_height: float) -> void:
 	if actor.texture == null: return
 	var dimensions := actor.texture.get_size()
@@ -105,8 +111,8 @@ func layout_art() -> void:
 	# Slight crop emphasizes the existing floor; no PNG alteration or rotation.
 	scenery.pivot_offset = size*0.5
 	scenery.scale = Vector2.ONE*BACKGROUND_ZOOM
-	place_actor(hero_art,"hero",NEAR_HERO,165)
-	place_actor(enemy_art,enemy_id,FAR_ENEMY,ENEMY_HEIGHTS.get(enemy_id,140.0))
+	place_actor(hero_art,"hero",hero_position_hint(),165)
+	place_actor(enemy_art,enemy_id,enemy_position_hint(),ENEMY_HEIGHTS.get(enemy_id,140.0))
 	queue_redraw()
 
 func visual_audit() -> Dictionary:
@@ -128,8 +134,8 @@ func visual_audit() -> Dictionary:
 	return {"background":VisualAssets.background_key(floor_number),"background_loaded":scenery.texture != null,
 		"depth":floor_number,"stage_size":[size.x,size.y],"filter":"nearest","aspect":"preserved",
 		"composition":"offset-only-reference-camera-unresolved","background_zoom":BACKGROUND_ZOOM,
-		"near_hero_foot":[display_foot(NEAR_HERO).x,display_foot(NEAR_HERO).y],
-		"far_enemy_foot":[display_foot(FAR_ENEMY).x,display_foot(FAR_ENEMY).y],"formation_rules":false,
+		"near_hero_foot":[display_foot(hero_position_hint()).x,display_foot(hero_position_hint()).y],
+		"far_enemy_foot":[display_foot(enemy_position_hint()).x,display_foot(enemy_position_hint()).y],"formation_rules":false,
 		"static_only":true,"adoption":"nine-assets-current-baseline","actors":actors}
 
 func sprite(pattern: Array, origin: Vector2, pixel: int, _alive: bool) -> void:
@@ -162,5 +168,5 @@ func _draw() -> void:
 	if scenery == null or scenery.texture == null: draw_placeholder_background()
 	var patterns := {"E01":RAT,"E02":SLIME,"E03":BAT,"E04":GOBLIN,"E05":BEETLE,"B10":STATUE}
 	var pattern: Array = patterns.get(enemy_id,GOBLIN)
-	if enemy_id!="" and (enemy_art == null or enemy_art.texture == null): sprite(pattern,display_foot(FAR_ENEMY)-Vector2(45,pattern.size()*5),5,enemy_alive)
-	if hero_art == null or hero_art.texture == null: sprite(HERO,display_foot(NEAR_HERO)-Vector2(45,HERO.size()*5),5,hero_alive)
+	if enemy_id!="" and (enemy_art == null or enemy_art.texture == null): sprite(pattern,display_foot(enemy_position_hint())-Vector2(45,pattern.size()*5),5,enemy_alive)
+	if hero_art == null or hero_art.texture == null: sprite(HERO,display_foot(hero_position_hint())-Vector2(45,HERO.size()*5),5,hero_alive)
