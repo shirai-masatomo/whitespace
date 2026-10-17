@@ -176,6 +176,7 @@ static func step_battle(s: Dictionary, data: Dictionary, cfg: Dictionary) -> voi
 			note(s,"%s → %s  %s" % ["主人公" if entry.actor=="hero" else b.enemy.name,
 				b.enemy.name if entry.target=="enemy" else "主人公",str(entry.damage)+" ダメージ" if entry.hit else "ミス"])
 	if b.outcome == "victory":
+		s.last_outcome="victory"
 		gain_exp(s,int(b.reward.exp),cfg)
 		s.gold += int(b.reward.gold)
 		note(s,"勝利  EXP +%d / Gold +%d" % [b.reward.exp,b.reward.gold])
@@ -192,6 +193,7 @@ static func step_battle(s: Dictionary, data: Dictionary, cfg: Dictionary) -> voi
 	elif b.outcome == "draw": finish(s,"draw","50ラウンドで戦闘を打ち切り、探索を中断した。",cfg)
 
 static func descend(s: Dictionary, data: Dictionary, cfg: Dictionary) -> void:
+	s.last_outcome=""
 	s.floor += 1
 	s.highest_floor = maxi(int(s.floor),int(s.highest_floor))
 	if not s.first_done:
@@ -248,6 +250,7 @@ static func act(previous: Dictionary, action: String, expected_revision: int, ar
 				s.hp=h.max_hp; s.sp=h.max_sp; changed=true
 		"depart":
 			if s.phase=="town" and s.first_done:
+				s.last_outcome=""
 				s.phase="explore"; s.floor=0; s.result={}; s.journal=[]; s.trips+=1
 				note(s,"町でHP/SPを回復し、地下へ向かった。"); changed=true
 		"deposit","withdraw","equip","unequip":
@@ -284,6 +287,7 @@ static func validate(s: Dictionary, data: Dictionary, cfg: Dictionary) -> String
 	if not s.first_done is bool or s.story_deaths>1 or s.first_done!=(s.story_deaths==1): return "Invalid tutorial state"
 	if s.floor>10 or s.highest_floor>11 or s.floor>s.highest_floor or s.next_item<1 or s.trips<1: return "Invalid progression"
 	if not s.phase in ["explore","battle","event","result","town"]: return "Unknown phase"
+	if not s.get("last_outcome","") in ["","victory"]: return "Invalid encounter outcome"
 	for key in ["rng","items","equipment","battle","result"]:
 		if not s[key] is Dictionary: return "Invalid dictionary: "+key
 	for key in ["inventory","warehouse","journal"]:

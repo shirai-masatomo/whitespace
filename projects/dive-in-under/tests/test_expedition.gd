@@ -105,6 +105,7 @@ func _initialize() -> void:
 	check(normalized(E.battle_state(fighting,data))==normalized(E.battle_state(normalized(fighting),data)),"midbattle JSON replay retains exact trace")
 	while fighting.phase=="battle": fighting=action(fighting,"round")
 	check(fighting.phase=="explore" and fighting.exp==4 and fighting.gold==2,"battle rewards from shared core")
+	check(fighting.get("last_outcome")=="victory" and action(fighting,"descend").get("last_outcome")=="","victory banner belongs only to the resolved encounter")
 	check(action(fighting,"round")==fighting,"replayed finish cannot grant reward again")
 	for event_id in ["EV01","EV02","EV04","EV05"]:
 		var event_state:=action(state_town,"depart")

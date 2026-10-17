@@ -159,6 +159,9 @@ func show_exploration(root: VBoxContainer) -> void:
 		paragraph(center,"%s Lv.%d   HP %d / %d" % [b.enemy.name,b.enemy.level,b.enemy.hp,b.enemy.max_hp])
 		var bar:=health_bar(Color("b4523b")); bar.max_value=b.enemy.max_hp; bar.value=b.enemy.hp; center.add_child(bar)
 		paragraph(center,"ROUND %02d / 完全自動" % b.round,17)
+	elif campaign.phase=="explore" and campaign.get("last_outcome","")=="victory":
+		var banner:=paragraph(center,"勝利  /  次の一歩を選ぶ",28)
+		banner.add_theme_color_override("font_color",Color("f0bd72"))
 	else: paragraph(center,"静かな通路" if campaign.phase=="explore" else cfg.events[campaign.event].name,22)
 	var picture:=Control.new(); picture.set_script(BattleStage); picture.enemy_id=campaign.battle.get("enemy_id",""); picture.clip_contents=true; center.add_child(picture)
 	if campaign.phase=="event":
@@ -280,6 +283,7 @@ func smoke(quit_on_finish: bool = true) -> void:
 		while campaign.phase=="battle": perform("round",{},int(campaign.revision))
 	elif campaign.phase=="event": perform("event",{"choice":"skip"},int(campaign.revision))
 	if not smoke_check(campaign.phase=="explore" and campaign.first_done,"Normal first floor survived"): return
+	if rendered: await capture("10-normal-victory.png")
 	await click_control(play_buttons["return"])
 	if rendered: await capture("08-return-result.png")
 	await click_control(play_buttons.town)
