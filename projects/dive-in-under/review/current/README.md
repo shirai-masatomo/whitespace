@@ -1,36 +1,31 @@
-# Dive In Under — 実画面と技術記録
+# Dive In Under — 広い戦闘場の確認
 
-**0.4.4 / 静止素材の採用反映・ボスの前後配置改善・ネズミv2。参考の斜め視点は未達、工程1全体も未完了。**
+**0.4.5 / 896×504の広い戦闘場＋採用済み通常洞窟v2。工程1全体は未完了。**
 
-PCの確認入口は「01 ゲームを起動」「02 画像・画面を確認」「03 変更点」の3項目を維持。ゲーム起動は従来の[Play.cmd](Play.cmd)が検証済み最新版を選ぶ。[画像付き比較](index.html) / [Windows ZIP](../../build/DiveInUnder-foundation-windows-x64.zip) / [操作・保存手順](../../tools/PLAY.txt)。
+PCの確認入口は「01 ゲームを起動」「02 画像・画面を確認」「03 変更点」の3項目を維持。[Windows ZIP](../../build/DiveInUnder-foundation-windows-x64.zip) / [起動・保存手順](../../tools/PLAY.txt) / [参考と実EXEの横並び比較](index.html)。旧EXE/PCK・ユーザーセーブ・使用中プロセスを保持し、Play.cmdの参照だけ安全切替した。
 
-## 戦闘画面の変更が見えにくかった理由
+## 画面全体の変更
 
-調査時点の入口→Play.cmd→current.txtは0.4.3、ソース0477842を指しており、EXE/PCKのSHAは配布記録と一致。旧版へのリンクではなかった。読取確認時にDiveInUnderプロセスは見つからず、ユーザーが見たウィンドウの実行版までは断定しない。
+常設左パネルを廃して、戦闘場を612×270から**896×504**へ拡大。画面原点(16,16)、右336×688にHP/SP・ステータス・潜行/帰還・停止/速度、下896×172にログを配置。独立したControl/Button/Label等で動作し、主人公1人・完全自動戦闘を維持。
 
-0.4.3は中央612×270の画面で敵(171,208)、主人公(416,236)という**28pxの前後差**と1.04倍の背景クロップだけ。レイアウトや原画のカメラは従来どおりで、参考PX-02の斜め視点への一致を「実装済み」とした説明は不十分だった。現在も通常洞窟の細い水平足場は未修正。
+通常洞窟v2はユーザーの「納品されたものを採用で構いません。」で採用。1672×941 RGB、2,998,881bytes、SHA `b251f52cde26bf44481a83de844a6879e5ec6d4d18aa91d7dfd32b25dfab3f6b` 一致。16:9を維持しズーム1.0、回転/剪断/横潰しなし。画像内足元は敵(269,312)、主人公(609,433)、足元下約71px。通常6敵の全身・尾・翼、近景床、ボス頭上、右操作とログを実画像で確認。
 
-今回の0.4.4は既存ボス床の範囲内で、敵(184,190)、主人公(428,246)へ配置し前後差56px、石像175px高。ネズミv2は原画のまま差替え、v1を保持。**この変更だけで戦闘画面全体の視点問題が解消したとはしない。** 通常床面の改善を最優先に、人物は共通カメラを確定してから比較し、全再生成を前提としない。[画像担当への仕様](../../docs/IMAGE_PRODUCTION_HANDOFF.md)。
+[変更前0.4.4](62-current-normal-battle.png) / [通常戦闘](66-wide-normal-battle.png) / [ボス](67-wide-boss.png) / [探索](68-wide-exploration.png) / [イベント](69-wide-event.png) / [町](75-wide-town.png) / [タイトル](76-wide-title.png) / [死亡結果](74-wide-death.png)。[画像担当への寸法・床面仕様](../../docs/IMAGE_PRODUCTION_HANDOFF.md)。
 
-## 最新の実EXE
+## 検証と版
 
-[タイトル](59-adopted-title.png) / [通常戦闘](62-current-normal-battle.png) / [ボス修正後](60-boss-depth-placement.png) / [修正前0.4.3](56-oblique-boss.png) / [ネズミv2](61-rat-v2.png) / [町](63-current-town.png) / [探索](64-current-exploration.png) / [初回死亡](65-current-death.png)。
+実行ソース `718e07564f73286c5482a999ea7423df773c32f3`、Godot4.7.2。自己レビューでスクロール時に消えるログ見出しを固定し、背景上で読める不透明な帯へ修正。再テスト・再ビルド・隔離撮影を実施。
 
-元の9素材の採用通知を[履歴](visual-adoption.json)へ反映。新納品のネズミv2は承認済みの視点修正に基づく差替えとして原稿SHAと表示域を記録し、旧9点の採用通知と区別する。[全原稿記録](../../assets/visual-candidates/v1/manifest.json)。
+- [戦闘142](wide-tests.log)＋[探索/保存180](wide-loop-tests.log)＋[通常探索44](wide-campaign-tests.log)、ヘッドレスUI成功。最終差分は採用メタデータのみでゲーム/UIコードはこのテスト対象と同じ。
+- 最終EXE/PCKで[隔離290操作](wide-campaign-isolated-campaign-complete.json)と[ヘッドレス290操作](wide-campaign-headless-campaign-complete.json)、途中/突破後の別EXE再開成功。[非対話Station/Desktop監査](wide-campaign-isolated-isolation-complete.json)。通常デスクトップ操作なし。
+- コア・データ・探索方針6ファイルのSHAが[直近1000seed](camera-campaign-summary.json)と一致。今回の画面変更で1000seedのローカル再計算は繰り返さず、成功済み0.4.4 CIの3×1000件と同じロジックを使用。290操作の全状態SHAも従来一致。
+- 指定された[CI39038821159](https://github.com/shirai-masatomo/whitespace/actions/runs/39038821159)は**全工程成功**。checkout/head c84d01f、366チェック、1000seed単発再比較、通常探索3×1000、EXE290操作、故障注入10件。[CI ZIP](https://github.com/shirai-masatomo/whitespace/actions/runs/39038821159/artifacts/12103492471) / [ログ](https://github.com/shirai-masatomo/whitespace/actions/runs/39038821159/artifacts/12103447600) / [記録](ci-camera.json)。これは広い戦闘場追加前の0.4.4 CIであり、今回0.4.5のCI成功とは言わない。
+- [配布SHA](build-manifest.json) / [安全切替記録](local-release.json) / [画面SHA・表示領域監査](wide-evidence.json) / [Draft PR5と最新Checks](https://github.com/shirai-masatomo/whitespace/pull/5)。
 
-## 検証と配布
+## 後続と履歴
 
-実行ソース `4f6720192732a7f9d8d24f2d6347220ff637654f`、Godot4.7.2。自己レビューでv2測定値の古いメタデータを修正し、再テスト・再ビルド・隔離実EXEを再検証。
+状態4効果は仕様抽出のみで未実装。[正本パスと決定範囲](../../docs/PHASE_01_ACCEPTANCE.md)。キャラモーションは追加しない。
 
-- [142](camera-tests.log)＋[180](camera-loop-tests.log)＋[44](camera-campaign-tests.log)項目、ヘッドレスUI、Windowsビルド成功。
-- [隔離290操作](camera-campaign-isolated-campaign-complete.json)と[ヘッドレス290操作](camera-campaign-headless-campaign-complete.json)、途中・突破後の別EXE保存再開成功。[非対話Station/Desktop監査](camera-campaign-isolated-isolation-complete.json)。通常デスクトップへの操作なし。
-- 固定1000seedを再実行し全記録・SHA・指標が従来と厳密一致。1000/1000突破、通常12,771探索・1,067死亡（8.35%）、突破まで平均12.771/中央値13。初回死亡1000件は別枠。[要約](camera-campaign-repeat.txt) / [比較JSON](camera-campaign-summary.json) / [全件JSON.gz](camera-campaign-repeat.json.gz)。シミュレーター記録は152db91、その後は表示注記・素材メタデータのみ変更。
-- クリアSHA `edd3cace3bb8376f1e2d80cb0cc6a44270874df5893a0a91906b036046996d2a`、保存SHA `0dcca1d55581aba169a1ed6ee4251688e37a2d6320da3042789a17c8b33dc6fa` は従来一致。
-- [ZIP/EXE/PCK SHA](build-manifest.json) / [安全切替](local-release.json) / [画面SHA](camera-evidence.json)。旧EXE/PCKと使用中プロセスを保持し、Play.cmdの参照のみ切替。
-- [Draft PR5](https://github.com/shirai-masatomo/whitespace/pull/5) / [今回CIの状態](https://github.com/shirai-masatomo/whitespace/pull/5/checks)。今回の最終版CIは結果待ちで、旧0.4.3の成功と混同しない。
+**新たに依頼された初回強制死亡・帰還禁止の廃止は、この0.4.5の画面変更とは別単位で反映する。** このZIPには従来の初回導入が残る。最新mainの変更指示を取り込み、初回帰還・通常死亡・旧セーブ互換を後続検証する。旧統計を新仕様へ無理に一致させない。
 
-## 残る工程1条件
-
-最新main8c0711dを取り込み。正本は「毒・暗闇・麻痺＋防御態勢を先行導入し、短い画面エフェクトまで実装する」と追加。実遭遇、途中保存/再開、状態あり/なしの固定シード・10F比較は未実装。まず視点問題を優先。仲間・全状態・高度AI・キャラモーション・工程2は追加しない。
-
-OS物理入力、他解像度、長時間試遊、複数同時セーブ書込の完全排他は未検証/未対応。[工程1照合](../../docs/PHASE_01_ACCEPTANCE.md) / [前版の記録](README-0.4.3.md)。
+OS物理入力・他解像度・長時間試遊は未検証。開発用の単発戦闘確認ツールは従来レイアウトを保持、本編の探索/戦闘を今回拡大した。[前版記録](README-0.4.4.md)。
