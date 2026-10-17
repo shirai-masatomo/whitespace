@@ -1,7 +1,25 @@
 extends Control
-## Original code-native pixel study. No mock image is loaded.
+## Independent static background; no UI reference image is loaded.
+const VisualAssets = preload("res://ui/visual_assets.gd")
+var scenery: TextureRect
+var floor_number := 1
+
+func set_depth(value: int) -> void:
+	floor_number = value
+	if scenery != null:
+		scenery.texture = VisualAssets.texture(VisualAssets.background_key(value))
+		scenery.modulate = VisualAssets.depth_tint(value)
+	queue_redraw()
 func _ready() -> void:
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
+	scenery = TextureRect.new()
+	scenery.mouse_filter = MOUSE_FILTER_IGNORE
+	scenery.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	scenery.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	scenery.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
+	scenery.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	add_child(scenery)
+	set_depth(floor_number)
 	resized.connect(queue_redraw)
 
 func tile(x: float, y: float, w: float, h: float, color: String) -> void:
@@ -16,6 +34,7 @@ func lantern(x: float, y: float) -> void:
 	tile(x-3,y+11,11,2,"604b2c")
 
 func _draw() -> void:
+	if scenery != null and scenery.texture != null: return
 	draw_set_transform(Vector2.ZERO,0,size / Vector2(320,180))
 	tile(0,0,320,180,"07131d")
 	var rng := RandomNumberGenerator.new()

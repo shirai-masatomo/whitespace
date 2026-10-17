@@ -5,3 +5,4 @@ build/
 assets/ui-mocks/*.import
 assets/ui-mocks/**/*.import
 
+assets/visual-candidates/**/*.import

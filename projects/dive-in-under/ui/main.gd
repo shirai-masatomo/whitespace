@@ -2,6 +2,9 @@ extends Control
 const Combat = preload("res://core/combat.gd")
 const Catalog = preload("res://core/catalog.gd")
 const Cavern = preload("res://ui/cavern.gd")
+const VisualAssets = preload("res://ui/visual_assets.gd")
+const PanelFrame = preload("res://ui/panel_frame.gd")
+var background: Control
 const BattleStage = preload("res://ui/battle_stage.gd")
 var data: Dictionary
 var screen: Control
@@ -57,6 +60,7 @@ func _ready() -> void:
 		style.set_font_size("font_size",type,18)
 	theme = style
 	var bg := Control.new()
+	background = bg
 	bg.set_script(Cavern)
 	bg.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	add_child(bg)
@@ -83,7 +87,10 @@ func box(fill: Color, border: Color, width: int = 1) -> StyleBoxFlat:
 	s.border_color = border
 	s.set_border_width_all(width)
 	s.set_content_margin_all(14)
-	s.set_corner_radius_all(3)
+	s.set_corner_radius_all(0)
+	s.shadow_color = Color("090d10")
+	s.shadow_size = 3
+	s.shadow_offset = Vector2(2,2)
 	return s
 
 func text_label(value: String, font_size: int = 18) -> Label:
@@ -99,18 +106,21 @@ func button(value: String, callback: Callable) -> Button:
 	b.pressed.connect(callback)
 	return b
 
-func column(parent: Node, min_width: float = 0, parchment: bool = false) -> VBoxContainer:
+func column(parent: Node, min_width: float = 0, parchment: bool = false, scenery: bool = false) -> VBoxContainer:
 	var panel := PanelContainer.new()
 	panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	panel.custom_minimum_size.x = min_width
-	panel.add_theme_stylebox_override("panel",box(Color("d3bd8d") if parchment else Color(0.025,0.07,0.085,0.95),Color("987b49"),2))
+	panel.add_theme_stylebox_override("panel",box(Color("d8c092") if parchment else Color(0.025,0.07,0.085,0.24 if scenery else 0.90),Color("b18a4d"),3))
 	if parchment:
 		var paper_theme := Theme.new()
 		paper_theme.set_color("font_color","Label",Color("292922"))
 		panel.theme = paper_theme
 	parent.add_child(panel)
+	var ornament := Control.new()
+	ornament.set_script(PanelFrame)
+	panel.add_child(ornament)
 	var v := VBoxContainer.new()
-	v.add_theme_constant_override("separation",10)
+	v.add_theme_constant_override("separation",8)
 	panel.add_child(v)
 	return v
 
@@ -299,7 +309,8 @@ func refresh() -> void:
 	hero_sp.value = h.sp
 	enemy_hp.max_value = e.max_hp
 	enemy_hp.value = e.hp
-	stage.enemy_id = e.id
+	stage.set_encounter(e.id,10 if e.id=="B10" else 4)
+	background.set_depth(10 if e.id=="B10" else 4)
 	stage.hero_alive = h.hp > 0
 	stage.enemy_alive = e.hp > 0
 	stage.queue_redraw()
@@ -317,12 +328,21 @@ func refresh() -> void:
 	if state.outcome == "victory":
 		log_view.append_text("\n報酬試算  EXP %d / Gold %d（保存はしません）\n" % [state.reward.exp,state.reward.gold])
 
+func collect_visual_audits(node: Node) -> Array:
+	var result: Array = []
+	if node.has_method("visual_audit"): result.append(node.visual_audit())
+	for child in node.get_children(): result.append_array(collect_visual_audits(child))
+	return result
+
 func capture(filename: String) -> void:
 	await RenderingServer.frame_post_draw
 	var error := get_viewport().get_texture().get_image().save_png(smoke_dir.path_join(filename))
 	if error != OK:
 		push_error("Screenshot failed: " + str(error))
 		get_tree().quit(1)
+	var audit := FileAccess.open(smoke_dir.path_join(filename.trim_suffix(".png")+"-visual.json"),FileAccess.WRITE)
+	audit.store_string(JSON.stringify({"run_id":smoke_run_id,"screenshot":filename,"stages":collect_visual_audits(screen)},"\t"))
+	audit.close()
 
 func click_control(control: Button) -> void:
 	# Route through this app's viewport hit-testing; never inject OS input.

@@ -48,6 +48,7 @@ func _notification(what: int) -> void:
 		get_tree().quit()
 
 func show_title() -> void:
+	background.set_depth(1)
 	timer.stop()
 	if is_instance_valid(play_timer): play_timer.stop()
 	ui_mode="title"; title_visible=true
@@ -76,7 +77,7 @@ func show_title() -> void:
 	if loaded.get("status","") not in ["ok","missing"]: notice=loaded.get("error","")
 	var status:=text_label(notice,16); status.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART; root.add_child(status)
 	var spacer:=Control.new(); spacer.size_flags_vertical=Control.SIZE_EXPAND_FILL; root.add_child(spacer)
-	root.add_child(text_label("0.3.0 solo10  ·  工程1試作  ·  初回イベント・成長・死亡ペナルティは仮設定",16))
+	root.add_child(text_label("0.4.0 visual candidate A  ·  工程1試作  ·  初回イベント・成長・死亡ペナルティは仮設定",16))
 	new_button.grab_focus()
 
 func show_battle() -> void:
@@ -135,8 +136,21 @@ func command(label: String, action: String, args: Dictionary = {}) -> Button:
 func paragraph(parent: Node, value: String, font_size: int = 18) -> Label:
 	var l:=text_label(value,font_size); l.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART; parent.add_child(l); return l
 
+func portrait(parent: Node, height: float) -> void:
+	var texture := VisualAssets.actor_texture("hero")
+	if texture == null: return
+	var image := TextureRect.new()
+	image.texture = texture
+	image.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	image.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	image.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	image.custom_minimum_size = Vector2(height*1.1,height)
+	image.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	parent.add_child(image)
+
 func show_campaign() -> void:
 	timer.stop(); play_timer.stop(); title_visible=false; ui_mode="campaign"; play_buttons={}
+	background.set_depth(campaign.floor if campaign.phase not in ["town","result"] else 1)
 	var root:=root_layout()
 	var header:=HBoxContainer.new(); header.custom_minimum_size.y=52; root.add_child(header)
 	var names: Dictionary={"explore":"地下への道","battle":"自動戦闘","event":"地下の出来事","result":"探索結果","town":"町 / 倉庫と装備"}
@@ -153,8 +167,9 @@ func show_campaign() -> void:
 
 func show_exploration(root: VBoxContainer) -> void:
 	var row:=HBoxContainer.new(); row.size_flags_vertical=Control.SIZE_EXPAND_FILL; row.add_theme_constant_override("separation",16); root.add_child(row)
-	var controls:=column(row,230)
+	var controls:=column(row,210)
 	controls.add_child(text_label("地下 %d F" % campaign.floor,30))
+	paragraph(controls,VisualAssets.depth_name(campaign.floor),17)
 	paragraph(controls,"初めての探索" if not campaign.first_done else "第 %d 回の探索" % campaign.trips)
 	paragraph(controls,"帰り道は、まだ見つからない。" if not campaign.first_done else "進むか、持ち帰るか。",16)
 	var down:=command("さらに潜る" if campaign.floor>0 else "地下1Fへ潜る","descend")
@@ -165,7 +180,7 @@ func show_exploration(root: VBoxContainer) -> void:
 		var pause:=button("一時停止" if auto_play else "自動戦闘を再開",func(): auto_play=not auto_play; show_campaign())
 		controls.add_child(pause); play_buttons["pause"]=pause
 		controls.add_child(button("速度：%d倍" % play_speed,func(): play_speed=2 if play_speed==1 else 1; show_campaign()))
-	var center:=column(row,550)
+	var center:=column(row,640,false,true)
 	var h:=Expedition.hero(campaign,cfg)
 	if campaign.phase=="battle":
 		var b:=Expedition.battle_state(campaign,data)
@@ -176,17 +191,18 @@ func show_exploration(root: VBoxContainer) -> void:
 		var banner:=paragraph(center,"勝利  /  次の一歩を選ぶ",28)
 		banner.add_theme_color_override("font_color",Color("f0bd72"))
 	else: paragraph(center,"静かな通路" if campaign.phase=="explore" else cfg.events[campaign.event].name,22)
-	var picture:=Control.new(); picture.set_script(BattleStage); picture.enemy_id=campaign.battle.get("enemy_id",""); picture.clip_contents=true; center.add_child(picture)
+	var picture:=Control.new(); picture.set_script(BattleStage); picture.floor_number=campaign.floor; picture.enemy_id=campaign.battle.get("enemy_id",""); picture.clip_contents=true; center.add_child(picture)
 	if campaign.phase=="event":
 		var choices:=HBoxContainer.new(); center.add_child(choices)
 		choices.add_child(command(cfg.events[campaign.event].choice,"event",{"choice":"accept"}))
 		choices.add_child(command("見送る","event",{"choice":"skip"}))
-	center.add_child(text_label("探索ログ（スクロールで過去を表示）",15))
+	center.add_child(text_label(VisualAssets.preview_note(picture.enemy_id),14))
 	var log:=RichTextLabel.new(); log.custom_minimum_size.y=100; log.size_flags_vertical=Control.SIZE_EXPAND_FILL; log.scroll_following=true
 	log.add_theme_stylebox_override("normal",box(Color("081215"),Color("987b49")))
 	log.text="\n".join(campaign.journal); center.add_child(log)
 	var status:=column(row,250,true)
 	status.add_child(text_label("主人公 / Lv.%d" % h.level,23))
+	portrait(status,84)
 	status.add_child(text_label("HP  %d / %d" % [h.hp,h.max_hp],20))
 	var hpbar:=health_bar(Color("a84936")); hpbar.max_value=h.max_hp; hpbar.value=h.hp; status.add_child(hpbar)
 	status.add_child(text_label("SP  %d / %d" % [h.sp,h.max_sp],20))
@@ -246,7 +262,10 @@ func show_town(root: VBoxContainer) -> void:
 	root.add_child(text_label("HP %d / %d   SP %d / %d   Lv.%d   ATK %d  DEF %d  SPD %d   /   Gold %d" % [h.hp,h.max_hp,h.sp,h.max_sp,h.level,h.atk,h.def,h.spd,campaign.gold],21))
 	var row:=HBoxContainer.new(); row.size_flags_vertical=Control.SIZE_EXPAND_FILL; row.add_theme_constant_override("separation",16); root.add_child(row)
 	var bag:=column(row,300); bag.add_child(text_label("所持品 / 携行",24)); item_list(bag,"inventory")
-	var equipment:=column(row,430,true); equipment.add_child(text_label("装備 / 11部位",24))
+	var equipment:=column(row,430,true)
+	var equipment_heading:=HBoxContainer.new(); equipment.add_child(equipment_heading)
+	var equipment_title:=text_label("装備 / 11部位",24); equipment_title.size_flags_horizontal=Control.SIZE_EXPAND_FILL; equipment_heading.add_child(equipment_title)
+	portrait(equipment_heading,62)
 	equipment.add_theme_constant_override("separation",2)
 	for slot in Expedition.SLOTS:
 		var line:=HBoxContainer.new(); equipment.add_child(line)

@@ -73,6 +73,13 @@ static func run(game: Control) -> void:
 			elif game.campaign.phase=="battle" and game.campaign.floor==10: name="16-campaign-boss.png"
 			elif game.campaign.phase=="result" and game.campaign.result.kind=="clear": name="17-campaign-clear.png"
 			if name!="" and not screenshots.has(name): await game.capture(name); screenshots[name]=true
+			# Art-review captures are observational: they do not mutate campaign state.
+			var art_name := ""
+			if game.campaign.phase=="battle" and game.campaign.battle.enemy_id=="E04": art_name="19-candidate-goblin.png"
+			elif game.campaign.phase in ["explore","battle"] and game.campaign.floor>=7 and game.campaign.floor<10: art_name="22-candidate-deep.png"
+			elif game.campaign.phase in ["explore","battle"] and game.campaign.floor>=4 and game.campaign.floor<=6: art_name="21-candidate-middle.png"
+			elif game.campaign.phase=="explore" and game.campaign.floor==1: art_name="20-candidate-shallow.png"
+			if art_name!="" and not screenshots.has(art_name): await game.capture(art_name); screenshots[art_name]=true
 		if not game.campaign_resume and game.campaign.phase=="battle" and game.campaign.trips>=3 and game.campaign.battle.rounds==1:
 			write_result(game,{"run_id":game.smoke_run_id,"checkpoint":true,"complete":false,"rendered":rendered,"next_index":index,"state_sha256":hash_state(game.campaign),"save_sha256":game.save_store.digest(),"seed":replay.seed})
 			game.get_tree().quit(); return
