@@ -66,3 +66,7 @@ GitHub側では [Draft PR #5](https://github.com/shirai-masatomo/whitespace/pull
 過去の `solo-E*-*.json`、`scenario-summary.json`、`first-start-*` は基盤472bc01時点の保存済み証拠です。現在の版の証拠として流用していません。機能別状態は [IMPLEMENTATION_STATUS.md](../../docs/IMPLEMENTATION_STATUS.md)、工程の残りは [PROGRESS.md](../../docs/dot/PROGRESS.md)。
 
 Libraryにもタイトル・初回探索・死亡結果・町の4枚を保存しました。[Library IDと画像SHA](library-images.json)。035d3fdで保存した画像と214a1a9の再撮影は4枚とも同一SHAです。
+
+## CIの実測記録
+
+2026-10-17のhead `32b87a1` で [push CI](https://github.com/shirai-masatomo/whitespace/actions/runs/39025558947) と [PR CI](https://github.com/shirai-masatomo/whitespace/actions/runs/39025562061) が成功。PRの実checkoutは `d5348538a2052105dacc707b3eea3bd58689893d`。戦闘142＋ループ177・厳密1000seed比較・EXE再開・故障注入6件が成功し、[CI ZIP](https://github.com/shirai-masatomo/whitespace/actions/runs/39025562061/artifacts/12098357692) と [CIログ](https://github.com/shirai-masatomo/whitespace/actions/runs/39025562061/artifacts/12098372666) を保存。期限2027-01-15。ローカルGPU検証版214a1a9とは区別する。 [詳細JSON](ci.json)。この証拠追記後のheadはPR Checksで確認する。

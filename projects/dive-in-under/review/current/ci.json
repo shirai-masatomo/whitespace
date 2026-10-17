@@ -1,0 +1,67 @@
+{
+  "recorded_utc": "2026-10-17T10:39:00Z",
+  "local_game_commit": "214a1a91e98f5c9dd05dc3808173fecb6541045d",
+  "runs": [
+    {
+      "run_id": 39025562061,
+      "event": "pull_request",
+      "head_sha": "32b87a1d2976c7b6e51a4eeffb9de49771a5f047",
+      "checkout_sha": "d5348538a2052105dacc707b3eea3bd58689893d",
+      "conclusion": "success",
+      "url": "https://github.com/shirai-masatomo/whitespace/actions/runs/39025562061",
+      "job_id": 117375740811,
+      "artifacts": [
+        {
+          "id": 12098372666,
+          "name": "DiveInUnder-foundation-evidence",
+          "url": "https://github.com/shirai-masatomo/whitespace/actions/runs/39025562061/artifacts/12098372666",
+          "expires_at": "2027-01-15T10:36:47Z"
+        },
+        {
+          "id": 12098357692,
+          "name": "DiveInUnder-foundation-windows-x64",
+          "url": "https://github.com/shirai-masatomo/whitespace/actions/runs/39025562061/artifacts/12098357692",
+          "expires_at": "2027-01-15T10:36:47Z"
+        }
+      ],
+      "verified": {
+        "combat_checks": 142,
+        "loop_checks": 177,
+        "harness_faults": 6,
+        "strict_repeat": true,
+        "exe_restart": true
+      }
+    },
+    {
+      "run_id": 39025558947,
+      "event": "push",
+      "head_sha": "32b87a1d2976c7b6e51a4eeffb9de49771a5f047",
+      "checkout_sha": "32b87a1d2976c7b6e51a4eeffb9de49771a5f047",
+      "conclusion": "success",
+      "url": "https://github.com/shirai-masatomo/whitespace/actions/runs/39025558947",
+      "job_id": 117375731843,
+      "artifacts": [
+        {
+          "id": 12098287957,
+          "name": "DiveInUnder-foundation-evidence",
+          "url": "https://github.com/shirai-masatomo/whitespace/actions/runs/39025558947/artifacts/12098287957",
+          "expires_at": "2027-01-15T10:36:44Z"
+        },
+        {
+          "id": 12098158474,
+          "name": "DiveInUnder-foundation-windows-x64",
+          "url": "https://github.com/shirai-masatomo/whitespace/actions/runs/39025558947/artifacts/12098158474",
+          "expires_at": "2027-01-15T10:36:44Z"
+        }
+      ],
+      "verified": {
+        "combat_checks": 142,
+        "loop_checks": 177,
+        "harness_faults": 6,
+        "strict_repeat": true,
+        "exe_restart": true
+      }
+    }
+  ],
+  "note": "この記録を追加した後続コミットのCIはPR Checksで確認する。ローカルGPU証拠とCI checkoutは別のコミット。"
+}

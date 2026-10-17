@@ -35,7 +35,7 @@ main be0e601 の追加設計（COMBAT v0.2の8属性・状態異常・追加能�
 - 自己レビュー後、町の出発ボタンを画面内へ修正、装備効果を表示、保存の戦闘能力整合と未来版の巻戻し防止を追加し、再テスト・再ビルド・隔離EXE確認を実施。
 - ユーザーの追加指示で、牧場の既存ローカル `確認入口` に `Dive In Under 確認.lnk` を1個だけ追加。本作の `review/current/` を参照する。既存リンク・牧場コードは無変更、新しい確認フォルダは作成せず。Play.cmd/EXE/PCK/版/リンクを検査し、自動起動は行っていない。
 - 同じ保存への同時書込みの完全排他、保存設定版の自動移行、長時間プレイは未対応/未検証。書込み失敗時は状態変更を取り消す。
-- CIのheadと実checkoutを区別する。前回PR head243d6adはmerge commit7ca6c12を実行した。今回の最終CI情報は[PR Checks](https://github.com/shirai-masatomo/whitespace/pull/5/checks)と確認入口の記録に追記する。
+- CIのheadと実checkoutを区別する。前回PR head243d6adはmerge commit7ca6c12を実行した。2026-10-17のhead `32b87a1` で [push CI](https://github.com/shirai-masatomo/whitespace/actions/runs/39025558947) と [PR CI](https://github.com/shirai-masatomo/whitespace/actions/runs/39025562061) が成功。PRの実checkoutは `d5348538a2052105dacc707b3eea3bd58689893d`。戦闘142＋ループ177・厳密1000seed比較・EXE再開・故障注入6件が成功し、[CI ZIP](https://github.com/shirai-masatomo/whitespace/actions/runs/39025562061/artifacts/12098357692) と [CIログ](https://github.com/shirai-masatomo/whitespace/actions/runs/39025562061/artifacts/12098372666) を保存。期限2027-01-15。ローカルGPU検証版214a1a9とは区別する。 [CI記録](../../review/current/ci.json)。
 
 - 通常勝利バナーを追加し177項目で再検証。CI39025060294は故障注入の期待exit1がPowerShell親へ残るため失敗した。全検査後に終了コードを0へ戻し、GitHubと同じラッパーで再実行してexit0を確認した（80c5054）。
 
