@@ -135,3 +135,6 @@ main be0e601 の追加設計（COMBAT v0.2の8属性・状態異常・追加能�
 366チェック・ヘッドレスUI・Windowsビルド、隔離/ヘッドレス290操作・途中/突破後の別EXE再開成功。クリアSHA `edd3cace3bb8376f1e2d80cb0cc6a44270874df5893a0a91906b036046996d2a`、保存SHA `0dcca1d55581aba169a1ed6ee4251688e37a2d6320da3042789a17c8b33dc6fa` を維持。[監査](../../review/current/oblique-campaign-isolated-isolation-complete.json) / [画面SHA](../../review/current/oblique-evidence.json) / [配布SHA](../../review/current/build-manifest.json)。旧EXE/PCK保持・参照のみ安全切替。通常デスクトップへの自動起動なし。コア/データ/保存/探索方針は不変。ローカル1000seed再計算は省略、今回CIの結果を旧版とは分けて記録する。
 
 4候補と構図の採否/節目レビュー、PX細部・装備アイコン配置が残る。OS物理入力/別解像度/長時間試遊は未検証。追加画像生成・新操作・モーション・仲間・工程2なし。工程1全体は未完了。
+
+
+0.4.3の[PR CI39033111419](https://github.com/shirai-masatomo/whitespace/actions/runs/39033111419)は全工程成功。head/runtime `04778428be0e0d7c74b23240707cde6403f04704`、実checkout merge `c12d5a555944b0a0e67d1cfea2c7cbad5a8b888e`。366チェック、1000seed全記録/状態SHA/全指標の厳密再比較、EXE290操作/別プロセス再開、故障注入10件を確認。[CI Windows ZIP](https://github.com/shirai-masatomo/whitespace/actions/runs/39033111419/artifacts/12100724828) / [JSON・ログ](https://github.com/shirai-masatomo/whitespace/actions/runs/39033111419/artifacts/12101691163)、期限2027-01-15。後続の比較画像/引継ぎ/CI記録コミットは資料のみで、この成功コード版と区別する。

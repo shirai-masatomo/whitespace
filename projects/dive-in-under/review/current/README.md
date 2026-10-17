@@ -36,3 +36,6 @@ PCの同じ `確認入口.lnk` → [Play.cmd](Play.cmd) または [画像付き�
 4候補と斜め構図の節目レビュー。ネズミは横向き寄り、スライム/甲虫は上面が見え、コウモリは浮き量を含めて判断します。現在は2D素材の配置で奥行きを表現しており、原画のカメラ角度は変えていません。より明確な斜め俯瞰が必要なら、広い床面と奥行き方向を持つ背景、双方の3/4向き静止画が追加仕様候補です。まず現在の実画面を比較します。
 
 PXの装飾・装備アイコン配置との一致、別解像度、OS物理入力、長時間試遊は未達/未検証。完全な同時セーブ書込み排他は未対応。工程1全体は未完了。仲間・隊列ルール・全スキル・耐久・工程2・モーションは追加していません。
+
+
+0.4.3の[PR CI39033111419](https://github.com/shirai-masatomo/whitespace/actions/runs/39033111419)は全工程成功。head/runtime `04778428be0e0d7c74b23240707cde6403f04704`、実checkout merge `c12d5a555944b0a0e67d1cfea2c7cbad5a8b888e`。366チェック、1000seed全記録/状態SHA/全指標の厳密再比較、EXE290操作/別プロセス再開、故障注入10件を確認。[CI Windows ZIP](https://github.com/shirai-masatomo/whitespace/actions/runs/39033111419/artifacts/12100724828) / [JSON・ログ](https://github.com/shirai-masatomo/whitespace/actions/runs/39033111419/artifacts/12101691163)、期限2027-01-15。後続の比較画像/引継ぎ/CI記録コミットは資料のみで、この成功コード版と区別する。
