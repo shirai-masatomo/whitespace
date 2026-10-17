@@ -20,7 +20,7 @@
 
 ### 直近の目標
 
-Windows EXEで **新規開始 → 主人公単独の初回探索（帰還不可） → 必ず死亡 → 町 → 倉庫／所持品／装備の整理 → 再探索・帰還**を、ある程度統一感のあるデザインで体験できるようにする。**工程1の前半で基幹ループを作り、同じ工程1で10Fを単独突破できるまで仕上げる。仲間は工程5まで入れない**。Dotにはまだ実行を依頼していない。
+Windows EXEで **新規開始 → 主人公単独で1Fから通常探索（最初から帰還可能） → 帰還またはHP0による通常死亡 → 町 → 倉庫・装備・再探索 → 10Fボス突破**を、現行2DドットUIで遊べるようにする。**初回必死イベントと帰還禁止は廃止**。[実装変更依頼](docs/dot/CHANGE_2026-10-17_FIRST_EXPEDITION.md)。仲間は工程5。
 
 ## 作業中の工程1
 
@@ -41,4 +41,4 @@ Windows EXEで **新規開始 → 主人公単独の初回探索（帰還不可�
 
 [階層（敵出現率・Lv・宝箱確率）](docs/FLOORS.md) / [敵（基礎能力・EXP・Gold・ドロップ）](docs/ENEMIES.md) / [アイテム](docs/ITEMS.md) / [仲間](docs/ALLIES.md) / [イベント](docs/EVENTS.md) / [戦闘共通仕様](docs/COMBAT.md) / [スキル一覧](docs/SKILLS.md) / [黄金像](docs/SHRINE.md) / [参考資料](docs/RESEARCH.md)
 
-**旧ブラウザ試作**：[過去の試作ZIP](Dive-In-Under-10F-prototype.zip) ／ [ソース](prototype/index.html)。古いパーティ構造・初回帰還可能のルールを使っており、**今回の仕様には対応していない**。新しいWindows EXEは未作成。
+**旧ブラウザ試作**：[過去の試作ZIP](Dive-In-Under-10F-prototype.zip) ／ [ソース](prototype/index.html)。古いパーティ構造など現行と異なる仕様を含むため、**そのまま現行のWindows版とは扱わない**。新しいWindows EXEは未作成。
