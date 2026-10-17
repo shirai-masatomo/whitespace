@@ -38,3 +38,6 @@ $evidence | ConvertTo-Json | Set-Content (Join-Path $artifacts 'harness-faults.j
 # Restore a successful current EXE log/result after negative tests.
 & (Join-Path $project 'tools/smoke.ps1')
 Write-Output 'HARNESS_FAULT_TESTS: 6 cases rejected as expected'
+# GitHub's pwsh wrapper exits with LASTEXITCODE. The expected native exit 1
+# must not leak after every rejection and the final positive smoke passed.
+$global:LASTEXITCODE = 0
