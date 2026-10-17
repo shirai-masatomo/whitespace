@@ -1,0 +1,41 @@
+{
+  "date": "2026-10-17",
+  "status": "adopted-as-current-baseline",
+  "user_statement": "とりあえず採用でいいよ",
+  "permanent_lock": false,
+  "static_only": true,
+  "runtime_at_approval": "187e7f7b2f97ccfda10539340907fe766bebba42",
+  "historical_manifest_status_preserved": true,
+  "assets": [
+    {
+      "id": "cavern",
+      "file": "dive-ordinary-cave-candidate-v1.png",
+      "sha256": "bd4596d01a561e6c26d7652e04298c60c17697bedbbc284418a58528d2ed8a7b",
+      "status": "adopted-as-current-baseline"
+    },
+    {
+      "id": "boss",
+      "file": "dive-boss-gate-cave-candidate-v1.png",
+      "sha256": "f71f3b070312a91c3d4eee40c212a90385af1fcf652fd52d74f6da93b1b65f33",
+      "status": "adopted-as-current-baseline"
+    },
+    {
+      "id": "B10",
+      "file": "dive-b10-gatekeeper-static-candidate-v1.png",
+      "sha256": "15111b49424358284893d98c212e82b78e72419c4ad9d0388db526822dd8bd58",
+      "status": "adopted-as-current-baseline"
+    },
+    {
+      "id": "hero",
+      "file": "dive-hero-static-candidate-v1.png",
+      "sha256": "27eda9f13520ea888eeb2e18301c0df1e5b72c582a8f43ea8ba10fff39e91048",
+      "status": "adopted-as-current-baseline"
+    },
+    {
+      "id": "E04",
+      "file": "dive-e04-goblin-static-candidate-v1.png",
+      "sha256": "c94e1a08ea616fc3176f26282682d9daede8672eab76911f2b8cfa6c3f58df16",
+      "status": "adopted-as-current-baseline"
+    }
+  ]
+}
