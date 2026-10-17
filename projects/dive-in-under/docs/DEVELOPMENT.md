@@ -119,3 +119,9 @@ Godot/GDScript/Windows/GPUの固定環境は上記から変更なし。現在の
 設定.1はexpedition-legacy.jsonとして固定し、既存保存はその設定で継続。設定.2は新規保存に適用。未知の設定は拒否。自動書換えによる能力変更や戦闘途中の変化を避ける。保存の同時書込み完全排他は引き続き未実装。
 
 [最新の全受入照合・制約](PHASE_01_ACCEPTANCE.md)が現在の状態。追加の画作り要件は未達で、OS物理入力の未検証と混同しない。
+
+## 静止画像候補A 0.4の確認入口
+
+ユーザー指定の入口は `C:\Users\masat\Documents\codex_test\projects\Dive In Under\確認入口.lnk`。以前のDive専用リンクだけを移動し、元の牧場入口には触れていない。背景と透過原稿は `assets/visual-candidates/v1/` に保存し、SHA・サイズ・来歴をmanifest.jsonへ記録。高解像度原稿を編集せずGodotで比率維持/nearest表示する。ゲームコア・保存形式・数値は0.3と同じ。候補の採否は未確定。
+
+実行版`b358aa1`の独立Windows出力で、通常290操作・途中と突破後の保存再開・非対話描画を検証。通常1000seedの全結果は前版と厳密一致。[最新証拠](../review/current/README.md)、[制作チャット引継ぎ](IMAGE_PRODUCTION_HANDOFF.md)。Library正式ヘルパーはこのWindowsでメタデータAPI非対応だったため、ユーザーが明示保存したローカルファイルを受領。転送手順を改変・迂回していない。

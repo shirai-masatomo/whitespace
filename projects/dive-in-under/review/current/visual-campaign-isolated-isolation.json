@@ -1,0 +1,30 @@
+{
+  "executable": "C:\\Users\\masat\\Documents\\Codex\\2026-10-17\\task\\dive-in-under-work\\projects\\dive-in-under\\build\\releases\\b358aa15a53d759ad0a601313312e2062648b53a-938d4ac1\\DiveInUnder.exe",
+  "data_root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-17\\task\\dive-in-under-work\\projects\\dive-in-under\\artifacts\\campaign-isolated",
+  "mode": "isolated_exe",
+  "result": {
+    "PID": 28812,
+    "ThreadID": 26536,
+    "ExitCode": 0,
+    "OwnedWindowCount": 2,
+    "Station": "Service-0x0-1b7214$",
+    "Desktop": "Render_20cc69e1f0bb4cb2a2c3a673a7f62329",
+    "ObservedDesktop": "Render_20cc69e1f0bb4cb2a2c3a673a7f62329",
+    "NonInteractive": true,
+    "DesktopMatched": true,
+    "TimedOut": false
+  },
+  "command": "\"C:\\Users\\masat\\Documents\\Codex\\2026-10-17\\task\\dive-in-under-work\\projects\\dive-in-under\\build\\releases\\b358aa15a53d759ad0a601313312e2062648b53a-938d4ac1\\DiveInUnder.exe\" --audio-driver Dummy --rendering-method gl_compatibility --max-fps 120 --resolution 1280x720 --log-file \"C:\\Users\\masat\\Documents\\Codex\\2026-10-17\\task\\dive-in-under-work\\projects\\dive-in-under\\artifacts\\campaign-isolated\\render.log\" -- --smoke-dir=\"C:\\Users\\masat\\Documents\\Codex\\2026-10-17\\task\\dive-in-under-work\\projects\\dive-in-under\\artifacts\\campaign-isolated\" --smoke-run-id=b31dee7cdb8c44e380b946df524cb0c1 --campaign-replay=\"C:\\Users\\masat\\Documents\\Codex\\2026-10-17\\task\\dive-in-under-work\\projects\\dive-in-under\\artifacts\\campaign-replay.json\" --campaign-seed=10000 --campaign-final-probe",
+  "normal_desktop_fallback": false,
+  "pck_sha256": "D0BF1F7B9FB53BCF3A510E9244515DFBCE3541DB0A70C99B94422DFE4232BCF5",
+  "build": {
+    "game_commit": "b358aa15a53d759ad0a601313312e2062648b53a",
+    "data_version": "2026-10-17.foundation.1",
+    "engine": "4.7.2.stable.official.ed1daf0bf",
+    "campaign_config_version": "2026-10-17.loop-provisional.2"
+  },
+  "start_utc": "2026-10-17T11:49:54.2809622Z",
+  "exe_sha256": "D34D36F3BE1A6C49C56525AE86469B92E4F417DDF0B43CF00DD80C385C4B0562",
+  "run_id": "b31dee7cdb8c44e380b946df524cb0c1",
+  "end_utc": "2026-10-17T11:49:55.3336085Z"
+}

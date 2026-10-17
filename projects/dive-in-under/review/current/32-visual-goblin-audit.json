@@ -1,0 +1,55 @@
+{
+	"run_id": "96a0ec097a6a4521b9c76caee39fb5f4",
+	"screenshot": "19-candidate-goblin.png",
+	"stages": [
+		{
+			"actors": [
+				{
+					"candidate_loaded": true,
+					"foot": [
+						459.0,
+						221.0
+					],
+					"id": "hero",
+					"top_left": [
+						373.285705566406,
+						71.9375
+					],
+					"visible_size": [
+						165.267852783203,
+						165.0
+					],
+					"within_stage": true
+				},
+				{
+					"candidate_loaded": true,
+					"foot": [
+						147.0,
+						221.0
+					],
+					"id": "E04",
+					"top_left": [
+						79.1251068115234,
+						87.7729949951172
+					],
+					"visible_size": [
+						148.964370727539,
+						145.0
+					],
+					"within_stage": true
+				}
+			],
+			"adoption": "pending",
+			"aspect": "preserved",
+			"background": "cavern",
+			"background_loaded": true,
+			"depth": 4,
+			"filter": "nearest",
+			"stage_size": [
+				612.0,
+				270.0
+			],
+			"static_only": true
+		}
+	]
+}

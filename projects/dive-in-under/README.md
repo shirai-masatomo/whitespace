@@ -2,16 +2,16 @@
 
 **地下へ潜るほど報酬は増えるが、死と装備の消耗を伴う、フルオート戦闘ダンジョンRPG。**
 
-## 現在地：通常ソロ10Fを検証、工程1の画作りは未達
+## 現在地：通常ソロ10Fと静止画像候補Aを検証、素材採否は未完了
 
-**[今回の確認入口（ローカル起動・ZIP・実画面・素材一覧）](review/current/README.md)** ／ [開発環境](docs/DEVELOPMENT.md) ／ [Draft PR #5](https://github.com/shirai-masatomo/whitespace/pull/5)。探索・初回死亡1回・町・倉庫・装備・成長・保存再開まで実装。通常の新規セーブからソロ10F突破・隔離EXEの操作/保存再開を検証済み。独立背景画像と静止スプライトの画作り要件は未達です。
+**[今回の確認入口（ローカル起動・ZIP・実画面・素材一覧）](review/current/README.md)** ／ [開発環境](docs/DEVELOPMENT.md) ／ [Draft PR #5](https://github.com/shirai-masatomo/whitespace/pull/5)。探索・初回死亡1回・町・倉庫・装備・成長・保存再開まで実装。通常の新規セーブからソロ10F突破・隔離EXEの操作/保存再開を検証済み。独立背景画像2点と透過主人公/E04/B10を候補Aとして組み込み、素材採否と残る敵は未完了です。
 
 - **[SPEC.md：全体仕様の正本](SPEC.md)** — ゲームの大枠と確定要件
 - **[現行2DドットUI参考3枚](docs/UI_MOCKS.md)** — 探索・戦闘・装備／ステータス。旧4枚は履歴へ
 - **[仕様と実装状況の表](docs/IMPLEMENTATION_STATUS.md)** — 何が「今」「次」「後」なのか
 - **[設計判断台帳](docs/DESIGN_DECISIONS.md)** — 既に決めたことと確認事項
 - **[初期EXE～10Fプロトタイプの進め方](docs/PROTOTYPE_10F.md)**
-- **[戦闘シミュレーターの要件](docs/BATTLE_SIMULATION.md)** — 単発戦闘の共通コア・固定seed統計・同条件比較を実装。継続探索は未実装
+- **[戦闘シミュレーターの要件](docs/BATTLE_SIMULATION.md)** — 単発戦闘の共通コア・固定seed統計・同条件比較を実装。通常新規1000seedの反復探索も検証済み
 
 ### 自律開発への引き継ぎ
 
