@@ -1,6 +1,6 @@
 # Dive In Under — Dot自律開発 工程進捗
 
-> **実証資料確認（2026-10-17）**：[作業ブランチのレビュー入口](../../review/current/README.md)（作業ブランチ上）に、Windows Codexによる**単発戦闘コア・142項目テスト／1000seed検証／Windows CI成功**の証拠あり。**工程1全体は未完了**。mainの本台帳は設計同期用で、ブランチの[最新進捗](https://github.com/shirai-masatomo/whitespace/blob/dot/dive-in-under/phase-01/projects/dive-in-under/docs/dot/PROGRESS.md)を優先して作業状態を確認する。工程1〜4は主人公単独、工程5で仲間。
+> **実証資料確認（2026-10-17）**：[作業ブランチのレビュー入口](https://github.com/shirai-masatomo/whitespace/blob/dot/dive-in-under/phase-01/projects/dive-in-under/review/current/README.md)（作業ブランチ上）に、Windows Codexによる**単発戦闘コア・142項目テスト／1000seed検証／Windows CI成功**の証拠あり。**工程1全体は未完了**。mainの本台帳は設計同期用で、ブランチの[最新進捗](https://github.com/shirai-masatomo/whitespace/blob/dot/dive-in-under/phase-01/projects/dive-in-under/docs/dot/PROGRESS.md)を優先して作業状態を確認する。工程1〜4は主人公単独、工程5で仲間。
 >
 > 工程単位の状態を本資料、機能単位の状態を[IMPLEMENTATION_STATUS.md](../IMPLEMENTATION_STATUS.md)で管理する。進捗状況は実際のテスト・成果物がなければ「完了」にしない。
 
