@@ -79,6 +79,8 @@ static func run(game: Control) -> void:
 			elif game.campaign.phase in ["explore","battle"] and game.campaign.floor>=7 and game.campaign.floor<10: art_name="22-candidate-deep.png"
 			elif game.campaign.phase in ["explore","battle"] and game.campaign.floor>=4 and game.campaign.floor<=6: art_name="21-candidate-middle.png"
 			elif game.campaign.phase=="explore" and game.campaign.floor==1: art_name="20-candidate-shallow.png"
+			if game.campaign.phase=="event" and not screenshots.has("24-wide-event.png"):
+				await game.capture("24-wide-event.png"); screenshots["24-wide-event.png"]=true
 			if art_name!="" and not screenshots.has(art_name): await game.capture(art_name); screenshots[art_name]=true
 			if game.campaign.phase=="battle" and game.campaign.battle.enemy_id in ["E01","E02","E03","E05"]:
 				var enemy_capture: String = "23-enemy-%s.png" % game.campaign.battle.enemy_id.to_lower()

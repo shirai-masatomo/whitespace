@@ -197,9 +197,11 @@ func show_wide_exploration() -> void:
 		hud_rows.add_child(text_label("地下 %d F  /  %s" % [campaign.floor,VisualAssets.depth_name(campaign.floor)],22))
 		var message: String=cfg.events[campaign.event].name if campaign.phase=="event" else ("勝利 / 次の一歩を選ぶ" if campaign.get("last_outcome","")=="victory" else "静かな通路")
 		hud_rows.add_child(text_label(message,18))
-	var log:=RichTextLabel.new(); log.custom_minimum_size.y=150; log.size_flags_vertical=Control.SIZE_EXPAND_FILL; log.scroll_following=true
+	var journal:=VBoxContainer.new(); journal.add_theme_constant_override("separation",4); journal.size_flags_vertical=Control.SIZE_EXPAND_FILL; field.add_child(journal)
+	journal.add_child(text_label("メッセージ / 戦闘は完全自動",16))
+	var log:=RichTextLabel.new(); log.custom_minimum_size.y=128; log.size_flags_vertical=Control.SIZE_EXPAND_FILL; log.scroll_following=true
 	log.add_theme_stylebox_override("normal",box(Color("081215"),Color("987b49")))
-	log.text="メッセージ\n"+"\n".join(campaign.journal); field.add_child(log)
+	log.text="\n".join(campaign.journal); journal.add_child(log)
 	var status:=column(row,336,true); status.get_parent().size_flags_horizontal=Control.SIZE_FILL; status.add_theme_constant_override("separation",6)
 	var h:=Expedition.hero(campaign,cfg)
 	section_heading(status,"主人公 / Lv.%d" % h.level)
