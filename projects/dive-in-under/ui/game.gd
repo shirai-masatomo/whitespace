@@ -58,7 +58,7 @@ func show_title() -> void:
 	var gap:=Control.new(); gap.custom_minimum_size.y=35; root.add_child(gap)
 	var row:=HBoxContainer.new(); row.add_theme_constant_override("separation",32); root.add_child(row)
 	var left:=column(row,500)
-	left.add_child(text_label("ひとりで潜り、町へ持ち帰る",26))
+	section_heading(left,"ひとりで潜り、町へ持ち帰る")
 	continue_button=button("続きから",continue_campaign)
 	continue_button.disabled=not loaded.get("ok",false)
 	left.add_child(continue_button)
@@ -67,7 +67,7 @@ func show_title() -> void:
 	if loaded.get("status","")=="recoverable": left.add_child(button("前回の保存から復旧する",recover_campaign))
 	left.add_child(button("終了",func(): get_tree().quit()))
 	var right:=column(row,400)
-	right.add_child(text_label("探索・帰還・再挑戦",24))
+	section_heading(right,"探索・帰還・再挑戦")
 	var explanation:=text_label("初めての探索では帰還できません。\nその後は、町で回復して何度でも挑めます。\n\n変更は操作ごとに自動保存されます。",18)
 	explanation.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART; right.add_child(explanation)
 	right.add_child(HSeparator.new())
@@ -77,7 +77,7 @@ func show_title() -> void:
 	if loaded.get("status","") not in ["ok","missing"]: notice=loaded.get("error","")
 	var status:=text_label(notice,16); status.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART; root.add_child(status)
 	var spacer:=Control.new(); spacer.size_flags_vertical=Control.SIZE_EXPAND_FILL; root.add_child(spacer)
-	root.add_child(text_label("0.4.1 visual candidate A  ·  工程1試作  ·  初回イベント・成長・死亡ペナルティは仮設定",16))
+	root.add_child(text_label("0.4.2 UI refinement  ·  工程1試作  ·  基準素材5点採用済み / 数値は仮設定",16))
 	new_button.grab_focus()
 
 func show_battle() -> void:
@@ -160,7 +160,7 @@ func show_campaign() -> void:
 	if campaign.phase=="town": show_town(root)
 	elif campaign.phase=="result": show_result(root)
 	else: show_exploration(root)
-	var footer:=text_label(notice if notice!="" else "自動保存済み  ·  主人公ひとり  ·  静止ドットは候補素材 / 数値・ペナルティは試作設定",15)
+	var footer:=text_label(notice if notice!="" else "自動保存済み  ·  主人公ひとり  ·  基準素材5点採用済み / 数値・ペナルティは試作設定",15)
 	footer.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART; root.add_child(footer)
 	if campaign.phase=="battle" and auto_play:
 		play_timer.wait_time=0.6/play_speed; play_timer.start()
@@ -201,7 +201,7 @@ func show_exploration(root: VBoxContainer) -> void:
 	log.add_theme_stylebox_override("normal",box(Color("081215"),Color("987b49")))
 	log.text="\n".join(campaign.journal); center.add_child(log)
 	var status:=column(row,250,true)
-	status.add_child(text_label("主人公 / Lv.%d" % h.level,23))
+	section_heading(status,"主人公 / Lv.%d" % h.level)
 	portrait(status,84)
 	status.add_child(text_label("HP  %d / %d" % [h.hp,h.max_hp],20))
 	var hpbar:=health_bar(Color("a84936")); hpbar.max_value=h.max_hp; hpbar.value=h.hp; status.add_child(hpbar)
@@ -224,7 +224,7 @@ func show_result(root: VBoxContainer) -> void:
 	if campaign.result.kind=="story_death": paragraph(info,"この初回イベントは記録済みです。次の探索では再発しません。",18)
 	info.add_child(command("町へ戻り、再挑戦の準備","town"))
 	var log:=column(row,350,true)
-	paragraph(log,"最後の記録",24)
+	section_heading(log,"最後の記録")
 	paragraph(log,"\n".join(campaign.journal.slice(-7)),17)
 
 func compact_button(label: String, callback: Callable) -> Button:
@@ -241,10 +241,8 @@ func item_list(parent: VBoxContainer, source: String) -> void:
 	for uid in campaign[source]:
 		var item: Dictionary=cfg.items[campaign.items[uid]]
 		paragraph(list,item.name,17)
-		var effects: Array=[]
-		for key in item.stats:
-			effects.append({"max_hp":"HP","max_sp":"SP","atk":"ATK","def":"DEF","spd":"SPD"}[key]+" +"+str(item.stats[key]))
-		if not effects.is_empty(): paragraph(list," / ".join(effects),15)
+		var effects := item_effects(item)
+		if effects != "": paragraph(list,effects,15)
 		var row:=HBoxContainer.new(); list.add_child(row)
 		var revision:=int(campaign.revision)
 		if source=="inventory":
@@ -256,6 +254,12 @@ func item_list(parent: VBoxContainer, source: String) -> void:
 			withdraw.set_meta("campaign_action","withdraw"); withdraw.set_meta("campaign_args",{"uid":uid}); row.add_child(withdraw)
 		list.add_child(HSeparator.new())
 	if campaign[source].is_empty(): paragraph(list,"まだ何もありません。",17)
+
+func item_effects(item: Dictionary) -> String:
+	var effects: Array[String] = []
+	for key in item.stats:
+		effects.append("%s %+d" % [{"max_hp":"HP","max_sp":"SP","atk":"ATK","def":"DEF","spd":"SPD"}[key],int(item.stats[key])])
+	return " / ".join(effects)
 
 func show_town(root: VBoxContainer) -> void:
 	var h:=Expedition.hero(campaign,cfg)
@@ -271,20 +275,32 @@ func show_town(root: VBoxContainer) -> void:
 	summary_text.add_theme_color_override("font_color",Color("f1ead9"))
 	summary.add_child(summary_text)
 	var row:=HBoxContainer.new(); row.size_flags_vertical=Control.SIZE_EXPAND_FILL; row.add_theme_constant_override("separation",16); root.add_child(row)
-	var bag:=column(row,300); bag.add_child(text_label("所持品 / 携行",24)); item_list(bag,"inventory")
+	var bag:=column(row,300); section_heading(bag,"所持品 / 携行"); item_list(bag,"inventory")
 	var equipment:=column(row,430,true)
-	var equipment_heading:=HBoxContainer.new(); equipment.add_child(equipment_heading)
-	var equipment_title:=text_label("装備 / 11部位",24); equipment_title.size_flags_horizontal=Control.SIZE_EXPAND_FILL; equipment_heading.add_child(equipment_title)
-	portrait(equipment_heading,62)
-	equipment.add_theme_constant_override("separation",2)
+	var equipment_heading:=section_heading(equipment,"装備 / 11部位")
+	portrait(equipment_heading,34)
+	equipment.add_theme_constant_override("separation",1)
+	var slot_index := 0
 	for slot in Expedition.SLOTS:
-		var line:=HBoxContainer.new(); equipment.add_child(line)
 		var uid: String=campaign.equipment[slot]
-		var label:=text_label(cfg.slots[slot]+"："+("—" if uid=="" else cfg.items[campaign.items[uid]].name),16)
+		var item: Dictionary = {} if uid=="" else cfg.items[campaign.items[uid]]
+		var strip := PanelContainer.new()
+		var strip_style := box(Color("cfb786") if slot_index%2==0 else Color("dac597"),Color("ad9060"),1)
+		strip_style.shadow_size=0
+		strip_style.content_margin_left=6; strip_style.content_margin_right=4
+		strip_style.content_margin_top=0; strip_style.content_margin_bottom=0
+		strip.add_theme_stylebox_override("panel",strip_style)
+		equipment.add_child(strip)
+		var line:=HBoxContainer.new(); line.add_theme_constant_override("separation",5); strip.add_child(line)
+		var slot_label:=text_label(cfg.slots[slot],16); slot_label.custom_minimum_size.x=54; line.add_child(slot_label)
+		var label:=text_label("—" if uid=="" else item.name,16)
 		label.size_flags_horizontal=Control.SIZE_EXPAND_FILL; line.add_child(label)
+		var effect:=text_label("" if uid=="" else item_effects(item),14)
+		effect.add_theme_color_override("font_color",Color("41452a")); line.add_child(effect)
 		var revision:=int(campaign.revision)
 		var remove:=compact_button("外す",func(): perform("unequip",{"slot":slot},revision)); remove.disabled=uid==""; line.add_child(remove)
-	var storage:=column(row,300); storage.add_child(text_label("倉庫",24)); item_list(storage,"warehouse")
+		slot_index += 1
+	var storage:=column(row,300); section_heading(storage,"倉庫"); item_list(storage,"warehouse")
 	var depart:=command("HP/SP回復済み  →  もう一度地下へ","depart"); root.add_child(depart)
 
 func smoke(quit_on_finish: bool = true) -> void:

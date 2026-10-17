@@ -120,11 +120,28 @@ func column(parent: Node, min_width: float = 0, parchment: bool = false, scenery
 	parent.add_child(panel)
 	var ornament := Control.new()
 	ornament.set_script(PanelFrame)
+	ornament.parchment = parchment
 	panel.add_child(ornament)
 	var v := VBoxContainer.new()
 	v.add_theme_constant_override("separation",8)
 	panel.add_child(v)
 	return v
+
+func section_heading(parent: Node, value: String) -> HBoxContainer:
+	var panel := PanelContainer.new()
+	var style := box(Color("cbb17c"),Color("806039"),1)
+	style.shadow_size = 0
+	style.content_margin_left = 10; style.content_margin_right = 10
+	style.content_margin_top = 3; style.content_margin_bottom = 3
+	panel.add_theme_stylebox_override("panel",style)
+	parent.add_child(panel)
+	var row := HBoxContainer.new()
+	panel.add_child(row)
+	var heading := text_label(value,21)
+	heading.add_theme_color_override("font_color",Color("302618"))
+	heading.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	row.add_child(heading)
+	return row
 
 func root_layout() -> VBoxContainer:
 	if is_instance_valid(screen):

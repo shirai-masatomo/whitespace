@@ -1,6 +1,6 @@
 extends RefCounted
-## Display-only candidate assets. Never read by Combat, Expedition or SaveStore.
-## Candidate status is independent of whether a preview is installed.
+## Display-only assets adopted as the current baseline on 2026-10-17.
+## Never read by Combat, Expedition or SaveStore. Original filenames are retained.
 const ROOT := "res://assets/visual-candidates/v1/"
 const FILES := {"cavern":"dive-ordinary-cave-candidate-v1.png", "boss":"dive-boss-gate-cave-candidate-v1.png",
 	"hero":"dive-hero-static-candidate-v1.png", "E04":"dive-e04-goblin-static-candidate-v1.png", "B10":"dive-b10-gatekeeper-static-candidate-v1.png"}
@@ -50,6 +50,6 @@ static func background_key(floor_number: int) -> String:
 	return "boss" if floor_number >= 10 else "cavern"
 
 static func preview_note(enemy_id: String) -> String:
-	var note := "静止画 候補A / 採否未定"
+	var note := "背景・主人公・E04・B10：現基準として採用済み"
 	if enemy_id != "" and texture(enemy_id) == null: note += " · この敵は仮表示"
 	return note

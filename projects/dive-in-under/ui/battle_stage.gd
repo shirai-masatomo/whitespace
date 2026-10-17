@@ -111,7 +111,7 @@ func visual_audit() -> Dictionary:
 		actors.append(entry)
 	return {"background":VisualAssets.background_key(floor_number),"background_loaded":scenery.texture != null,
 		"depth":floor_number,"stage_size":[size.x,size.y],"filter":"nearest","aspect":"preserved",
-		"static_only":true,"adoption":"pending","actors":actors}
+		"static_only":true,"adoption":"five-assets-current-baseline","actors":actors}
 
 func sprite(pattern: Array, origin: Vector2, pixel: int, _alive: bool) -> void:
 	for y in range(pattern.size()):
