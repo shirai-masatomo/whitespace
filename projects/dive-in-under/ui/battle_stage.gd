@@ -12,6 +12,7 @@ var enemy_alive := true
 const BACKGROUND_ZOOM := 1.04
 const NEAR_HERO := Vector2(0.68,12.0)
 const FAR_ENEMY := Vector2(0.28,-16.0)
+const ENEMY_HEIGHTS := {"E01":100.0,"E02":110.0,"E03":140.0,"E04":140.0,"E05":145.0,"B10":195.0}
 const PALETTE := {"o":"17242b","h":"324553","b":"766047","g":"b4a17b","s":"dfb282","e":"f6d578",
 	"t":"486878","m":"6d917a","l":"9ab494","r":"c27a53","a":"c6d0c5","w":"ece9c8"}
 const HERO := [
@@ -97,6 +98,7 @@ func place_actor(actor: Sprite2D, key: String, position_hint: Vector2, target_he
 	actor.centered = false
 	actor.offset = -VisualAssets.actor_foot(key)
 	actor.position = display_foot(position_hint)
+	if key == "E03": actor.position.y -= 18.0*size.y/270.0 # Static hover placement, not animation.
 	actor.z_index = int(actor.position.y)
 
 func layout_art() -> void:
@@ -104,20 +106,23 @@ func layout_art() -> void:
 	scenery.pivot_offset = size*0.5
 	scenery.scale = Vector2.ONE*BACKGROUND_ZOOM
 	place_actor(hero_art,"hero",NEAR_HERO,165)
-	place_actor(enemy_art,enemy_id,FAR_ENEMY,195 if enemy_id == "B10" else 140)
+	place_actor(enemy_art,enemy_id,FAR_ENEMY,ENEMY_HEIGHTS.get(enemy_id,140.0))
 	queue_redraw()
 
 func visual_audit() -> Dictionary:
 	var actors: Array = []
 	for pair in [["hero",hero_art],[enemy_id,enemy_art]]:
 		var actor: Sprite2D = pair[1]
-		var entry := {"id":pair[0],"candidate_loaded":actor.texture != null}
+		var entry := {"id":pair[0],"candidate_loaded":actor.texture != null,
+			"adoption":"candidate-unapproved" if pair[0] in VisualAssets.UNAPPROVED else "adopted-current-baseline"}
 		if actor.texture != null:
 			var extent := actor.texture.get_size() * actor.scale
 			entry["visible_size"] = [extent.x,extent.y]
 			var top_left := actor.position+actor.offset*actor.scale
 			entry["top_left"] = [top_left.x,top_left.y]
 			entry["foot"] = [actor.position.x,actor.position.y]
+			entry["body_region"] = str(actor.texture.region)
+			entry["static_hover_px"] = 18.0*size.y/270.0 if pair[0]=="E03" else 0.0
 			entry["within_stage"] = Rect2(Vector2.ZERO,size).encloses(Rect2(top_left,extent))
 		actors.append(entry)
 	return {"background":VisualAssets.background_key(floor_number),"background_loaded":scenery.texture != null,

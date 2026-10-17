@@ -80,6 +80,9 @@ static func run(game: Control) -> void:
 			elif game.campaign.phase in ["explore","battle"] and game.campaign.floor>=4 and game.campaign.floor<=6: art_name="21-candidate-middle.png"
 			elif game.campaign.phase=="explore" and game.campaign.floor==1: art_name="20-candidate-shallow.png"
 			if art_name!="" and not screenshots.has(art_name): await game.capture(art_name); screenshots[art_name]=true
+			if game.campaign.phase=="battle" and game.campaign.battle.enemy_id in ["E01","E02","E03","E05"]:
+				var enemy_capture: String = "23-enemy-%s.png" % game.campaign.battle.enemy_id.to_lower()
+				if not screenshots.has(enemy_capture): await game.capture(enemy_capture); screenshots[enemy_capture]=true
 		if not game.campaign_resume and game.campaign.phase=="battle" and game.campaign.trips>=3 and game.campaign.battle.rounds==1:
 			write_result(game,{"run_id":game.smoke_run_id,"checkpoint":true,"complete":false,"rendered":rendered,"next_index":index,"state_sha256":hash_state(game.campaign),"save_sha256":game.save_store.digest(),"seed":replay.seed})
 			game.get_tree().quit(); return
