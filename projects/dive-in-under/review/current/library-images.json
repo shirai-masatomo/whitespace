@@ -5,25 +5,30 @@
       "file_name": "01-title.png",
       "library_file_id": "libfile_707b67f0f9f88191a516e806eca97d8d",
       "file_id": "file_00000000d7f081fba9f34cc2c0002935",
-      "current_version_number": 0
+      "current_version_number": 0,
+      "sha256": "bd6c4678f395c3a07acb00ff683689db4f5b6e85be84ae0e8f3bacef5369282d"
     },
     {
       "file_name": "04-first-exploration.png",
       "library_file_id": "libfile_76be15ea098c819199fa02a180c3f0b3",
       "file_id": "file_00000000681c81fb904ad74cf010e085",
-      "current_version_number": 0
+      "current_version_number": 0,
+      "sha256": "658e952552c9c0da5c13d671eae8f43a3db9063f291fad7f623b89932c2ad211"
     },
     {
       "file_name": "05-death-result.png",
       "library_file_id": "libfile_c5cd1d7b289c8191a5a0921d6c9d0797",
       "file_id": "file_00000000793081f899eecb8e8b73c346",
-      "current_version_number": 0
+      "current_version_number": 0,
+      "sha256": "34b45703c9d7429d42bbd91639dba232a13b2b380105fb828dae750b521d88d5"
     },
     {
       "file_name": "06-town.png",
       "library_file_id": "libfile_59a0310dc87481918040f966d7cf9faf",
       "file_id": "file_00000000514881fb912c31ae1b81fd64",
-      "current_version_number": 0
+      "current_version_number": 0,
+      "sha256": "3fb082ec7fb10ebfb69df7141760fb9eccc6c38823c5ce6c191039bf6e3c19d2"
     }
-  ]
+  ],
+  "verified_identical_in_game_commit": "214a1a91e98f5c9dd05dc3808173fecb6541045d"
 }

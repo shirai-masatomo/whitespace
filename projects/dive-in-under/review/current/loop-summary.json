@@ -1,5 +1,5 @@
 {
-	"checks": 176,
+	"checks": 177,
 	"failures": [],
 	"final_10F_balance_verified": false,
 	"policy": "return after 3F; equip empty slots; accept events",

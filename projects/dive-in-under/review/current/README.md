@@ -1,6 +1,6 @@
 # Dive In Under — ローカル確認入口
 
-**工程1の基幹ループ 0.2.0。工程1全体は未完了です。** 実装・ローカルEXE検証対象：`035d3fdf6de34bbbae1d574143e7833af098aad0`。後続の資料コミット、PR head、CIが実際にcheckoutしたmerge commitは区別します。
+**工程1の基幹ループ 0.2.0。工程1全体は未完了です。** 実装・ローカルEXE検証対象：`214a1a91e98f5c9dd05dc3808173fecb6541045d`。後続の資料コミット、PR head、CIが実際にcheckoutしたmerge commitは区別します。
 
 ## このPCで試す
 
@@ -25,6 +25,7 @@ GitHub側では [Draft PR #5](https://github.com/shirai-masatomo/whitespace/pull
 | [![死亡結果](05-death-result.png)](05-death-result.png) | 初回済フラグを死亡時点で保存。大きな死亡バナーと町への再挑戦導線 |
 | [![町](06-town.png)](06-town.png) | PX-03の羊皮紙。所持品/倉庫/11部位、不要な操作は無効表示 |
 | [![通常戦闘](07-normal-battle.png)](07-normal-battle.png) | PX-02。全自動、速度状態、暗いログ背景、敵と主人公のHP |
+| [通常勝利](10-normal-victory.png) | 本編でも勝利を大きなバナーで明示 |
 | [帰還結果](08-return-result.png) / [通常死亡](09-normal-death.png) | 初回イベントとは別の通常戦闘死亡と再挑戦 |
 | [単発ツール](02-battle.png) / [単発結果](03-battle-result.png) | 開発用の固定seed確認。本編保存には影響しない |
 
@@ -45,12 +46,12 @@ GitHub側では [Draft PR #5](https://github.com/shirai-masatomo/whitespace/pull
 
 ## 検証結果
 
-- [戦闘142項目](tests.log)、[ループ/保存176項目](loop-tests.log)：失敗0。
+- [戦闘142項目](tests.log)、[ループ/保存177項目](loop-tests.log)：失敗0。
 - [100seed×12回の反復探索](loop-summary.json)：3F帰還方針、空き部位に装備、イベント実行。通常の死亡後も再出発でき、アイテム所有・初回済状態が破綻しないことを検証。**最終10Fバランスの検証ではありません**。
 - [基準1000seed](simulation.json) / [日本語要約](simulation.json.txt) / [厳密同条件比較](comparison.json)：正規化records・各log SHA・全metrics一致。勝率21.6%、死亡78.4%、平均4.152/中央値4ラウンド、全戦闘残HP平均1.331。
 - [故障注入6件](harness-faults.json)：Start切断、Back切断、古い成功JSONを残した結果未出力、隔離/ヘッドレス共通nonce検査、traceだけの改変、metricだけの改変をすべて拒否。
 - [EXE入力経路](exe-headless.json) / [別EXEプロセスによる戦闘途中再開](resume-smoke.json) / [EXEログ](exe-headless.log)。保存SHAとrevisionが一致。
-- [隔離監査](isolation.json) / [GPUログ](render.log) / [描画入力確認](ui-smoke.json) / [ビルドログ](export.log)。PID 25836、専用Desktop所属、所有窓2、終了0、run ID一致。
+- [隔離監査](isolation.json) / [GPUログ](render.log) / [描画入力確認](ui-smoke.json) / [ビルドログ](export.log)。PID 20272、専用Desktop所属、所有窓2、終了0、run ID一致。
 
 自己レビュー後に、町の出発ボタンが画面外へ押し出される配置、保存した戦闘の能力値整合、未来の保存版の巻戻し防止、検証の偽陽性3件を修正して再テストしました。物理入力・長時間試遊は未検証。
 
@@ -63,3 +64,5 @@ GitHub側では [Draft PR #5](https://github.com/shirai-masatomo/whitespace/pull
 保存はバージョン検査、一時ファイル検証、前回.bak、置換を行い、失敗時は画面の状態更新を取り消します。破損時は元データを保持して復旧/新規開始を明示選択。新規・復旧は元データを退避します。同じ保存の同時プレイは避けてください。SHAによる外部更新検出はありますが、同時書込みの完全な排他・別設定版からの移行は未対応です。
 
 過去の `solo-E*-*.json`、`scenario-summary.json`、`first-start-*` は基盤472bc01時点の保存済み証拠です。現在の版の証拠として流用していません。機能別状態は [IMPLEMENTATION_STATUS.md](../../docs/IMPLEMENTATION_STATUS.md)、工程の残りは [PROGRESS.md](../../docs/dot/PROGRESS.md)。
+
+Libraryにもタイトル・初回探索・死亡結果・町の4枚を保存しました。[Library IDと画像SHA](library-images.json)。035d3fdで保存した画像と214a1a9の再撮影は4枚とも同一SHAです。

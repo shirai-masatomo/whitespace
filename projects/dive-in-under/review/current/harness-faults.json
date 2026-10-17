@@ -1,7 +1,7 @@
 [
   {
-    "case": "shared-isolated-headless-stale-nonce",
-    "rejected": true
+    "rejected": true,
+    "case": "shared-isolated-headless-stale-nonce"
   },
   {
     "case": "start",

@@ -24,18 +24,20 @@
 
 main be0e601 の追加設計（COMBAT v0.2の8属性・状態異常・追加能力、ITEMSの個体差・印）を統合した。物理通常攻撃式は同じであり、追加機能は将来設計として保持し、今回の実装範囲を拡張しない。
 
-## 今回の基幹ループ（035d3fd）
+## 今回の基幹ループ（214a1a9）
 
 - 新規→初回探索→仮2Fシナリオ死亡（死亡時点で済フラグ保存）→結果→町→倉庫/11枠→通常探索/帰還/死亡/再挑戦を実装。すべて主人公単独、仲間・犬・ガチャ・耐久・全スキルなし。
 - `expedition.json` に初期値・Lv成長・イベント・死亡ペナルティを分離。既定の町無料全回復、EXP/装備保持で再出発可能。FLOORS/ENEMIES/ITEMS/EVENTSの1〜10Fデータを使用。EV03除外、適格イベント個別重みは未定のため等確率。
-- [戦闘142](../../review/current/tests.log)＋[ループ/保存176](../../review/current/loop-tests.log)成功。[100seed×12回の3F帰還反復](../../review/current/loop-summary.json)を検証。高Lv入力で10Fボス→11F記録→再挑戦の分岐を検査したが、通常成長による10F攻略バランス証明は未実施。
+- [戦闘142](../../review/current/tests.log)＋[ループ/保存177](../../review/current/loop-tests.log)成功。[100seed×12回の3F帰還反復](../../review/current/loop-summary.json)を検証。高Lv入力で10Fボス→11F記録→再挑戦の分岐を検査したが、通常成長による10F攻略バランス証明は未実施。
 - 一時保存→検証→前回.bak→置換、外部更新検出、破損/未来版拒否、明示的なバックアップ復旧。初回途中/死亡結果/町/戦闘途中の再開、連打、装備入替、所有重複/消失、保存失敗をテスト。
-- [別EXE再起動](../../review/current/resume-smoke.json)で戦闘途中のrevision33・保存SHA一致。[実画面9枚と入口](../../review/current/README.md)、[隔離監査](../../review/current/isolation.json)で非WinSta0/非表示・専用Desktop・起動PID所属・終了0を確認。人間のOS入力は未検証。
+- [別EXE再起動](../../review/current/resume-smoke.json)で戦闘途中のrevision33・保存SHA一致。[実画面10枚と入口](../../review/current/README.md)、[隔離監査](../../review/current/isolation.json)で非WinSta0/非表示・専用Desktop・起動PID所属・終了0を確認。人間のOS入力は未検証。
 - 独立レビューの検証偽陽性3件を修正：[故障注入6件](../../review/current/harness-faults.json)を拒否。CIの厳密再現はrecords/log SHA/全metricsを正規化比較し、不一致でexit1。Start/停止/再開/再戦/Backを確認後だけ成功出力。両EXEハーネスは共通nonce照合で古い成功JSONを拒否。
 - 自己レビュー後、町の出発ボタンを画面内へ修正、装備効果を表示、保存の戦闘能力整合と未来版の巻戻し防止を追加し、再テスト・再ビルド・隔離EXE確認を実施。
 - ユーザーの追加指示で、牧場の既存ローカル `確認入口` に `Dive In Under 確認.lnk` を1個だけ追加。本作の `review/current/` を参照する。既存リンク・牧場コードは無変更、新しい確認フォルダは作成せず。Play.cmd/EXE/PCK/版/リンクを検査し、自動起動は行っていない。
 - 同じ保存への同時書込みの完全排他、保存設定版の自動移行、長時間プレイは未対応/未検証。書込み失敗時は状態変更を取り消す。
 - CIのheadと実checkoutを区別する。前回PR head243d6adはmerge commit7ca6c12を実行した。今回の最終CI情報は[PR Checks](https://github.com/shirai-masatomo/whitespace/pull/5/checks)と確認入口の記録に追記する。
+
+- 通常勝利バナーを追加し177項目で再検証。CI39025060294は故障注入の期待exit1がPowerShell親へ残るため失敗した。全検査後に終了コードを0へ戻し、GitHubと同じラッパーで再実行してexit0を確認した（80c5054）。
 
 ## 前回の戦闘基盤（472bc01）の記録
 
