@@ -16,11 +16,15 @@ func _draw() -> void:
 		for inset in [1,3]:
 			draw_rect(Rect2(Vector2.ONE*inset,size-Vector2.ONE*inset*2),Color(0.30,0.19,0.08,0.14),false,1)
 	# Recessed brass rim; content remains independent and draws above this node.
-	draw_line(Vector2(8,0),Vector2(size.x-8,0),Color("e0bc75"),1)
-	draw_line(Vector2(0,8),Vector2(0,size.y-8),Color("cfaa63"),1)
-	draw_line(Vector2(8,size.y-1),Vector2(size.x-8,size.y-1),Color("654b2b"),2)
-	draw_line(Vector2(size.x-1,8),Vector2(size.x-1,size.y-8),Color("654b2b"),2)
-	for point in [Vector2.ZERO,Vector2(size.x-8,0),Vector2(0,size.y-8),size-Vector2(8,8)]:
+	# Keep the rim in the panel's 14px padding, outside all labels and buttons.
+	var origin := Vector2(-8,-8)
+	var extent := size+Vector2(16,16)
+	draw_line(origin+Vector2(8,0),origin+Vector2(extent.x-8,0),Color("e0bc75"),1)
+	draw_line(origin+Vector2(0,8),origin+Vector2(0,extent.y-8),Color("cfaa63"),1)
+	draw_line(origin+Vector2(8,extent.y-1),origin+Vector2(extent.x-8,extent.y-1),Color("654b2b"),2)
+	draw_line(origin+Vector2(extent.x-1,8),origin+Vector2(extent.x-1,extent.y-8),Color("654b2b"),2)
+	for offset in [Vector2.ZERO,Vector2(extent.x-8,0),Vector2(0,extent.y-8),extent-Vector2(8,8)]:
+		var point: Vector2 = origin+offset
 		draw_rect(Rect2(point,Vector2(8,8)),Color("231c17"))
 		draw_rect(Rect2(point+Vector2(1,1),Vector2(6,6)),Color("8d6734"))
 		draw_rect(Rect2(point+Vector2(2,2),Vector2(3,3)),Color("e5c57c"))
