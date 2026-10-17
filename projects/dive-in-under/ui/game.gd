@@ -77,7 +77,7 @@ func show_title() -> void:
 	if loaded.get("status","") not in ["ok","missing"]: notice=loaded.get("error","")
 	var status:=text_label(notice,16); status.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART; root.add_child(status)
 	var spacer:=Control.new(); spacer.size_flags_vertical=Control.SIZE_EXPAND_FILL; root.add_child(spacer)
-	root.add_child(text_label("0.4.4 adopted baseline  ·  工程1試作  ·  静止素材9点採用済み / 数値は仮設定",16))
+	root.add_child(text_label("0.4.5 wide battlefield  ·  工程1試作  ·  静止素材9点採用済み / 数値は仮設定",16))
 	new_button.grab_focus()
 
 func show_battle() -> void:
@@ -151,6 +151,11 @@ func portrait(parent: Node, height: float) -> void:
 func show_campaign() -> void:
 	timer.stop(); play_timer.stop(); title_visible=false; ui_mode="campaign"; play_buttons={}
 	background.set_depth(campaign.floor if campaign.phase not in ["town","result"] else 1)
+	if campaign.phase in ["explore","battle","event"]:
+		show_wide_exploration()
+		if campaign.phase=="battle" and auto_play:
+			play_timer.wait_time=0.6/play_speed; play_timer.start()
+		return
 	var root:=root_layout()
 	var header:=HBoxContainer.new(); header.custom_minimum_size.y=52; root.add_child(header)
 	var names: Dictionary={"explore":"地下への道","battle":"自動戦闘","event":"地下の出来事","result":"探索結果","town":"町 / 倉庫と装備"}
@@ -159,57 +164,67 @@ func show_campaign() -> void:
 	header.add_child(title); play_buttons["title"]=title
 	if campaign.phase=="town": show_town(root)
 	elif campaign.phase=="result": show_result(root)
-	else: show_exploration(root)
-	var footer:=text_label(notice if notice!="" else "0.4.4  ·  自動保存済み  ·  主人公ひとり  ·  静止素材9点採用済み / 数値・ペナルティは試作設定",15)
+	else: show_wide_exploration()
+	var footer:=text_label(notice if notice!="" else "0.4.5  ·  自動保存済み  ·  主人公ひとり  ·  静止素材9点採用済み / 数値・ペナルティは試作設定",15)
 	footer.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART; root.add_child(footer)
 	if campaign.phase=="battle" and auto_play:
 		play_timer.wait_time=0.6/play_speed; play_timer.start()
 
-func show_exploration(root: VBoxContainer) -> void:
-	var row:=HBoxContainer.new(); row.size_flags_vertical=Control.SIZE_EXPAND_FILL; row.add_theme_constant_override("separation",16); root.add_child(row)
-	var controls:=column(row,210)
-	controls.add_child(text_label("地下 %d F" % campaign.floor,30))
-	paragraph(controls,VisualAssets.depth_name(campaign.floor),17)
-	paragraph(controls,"初めての探索" if not campaign.first_done else "第 %d 回の探索" % campaign.trips)
-	paragraph(controls,"帰り道は、まだ見つからない。" if not campaign.first_done else "進むか、持ち帰るか。",16)
-	var down:=command("さらに潜る" if campaign.floor>0 else "地下1Fへ潜る","descend")
-	down.disabled=campaign.phase!="explore" or campaign.floor>=10; controls.add_child(down)
-	var retreat:=command("町へ帰還する","return")
-	retreat.disabled=not campaign.first_done or campaign.phase!="explore"; controls.add_child(retreat)
-	if campaign.phase=="battle":
-		var pause:=button("一時停止" if auto_play else "自動戦闘を再開",func(): auto_play=not auto_play; show_campaign())
-		controls.add_child(pause); play_buttons["pause"]=pause
-		controls.add_child(button("速度：%d倍" % play_speed,func(): play_speed=2 if play_speed==1 else 1; show_campaign()))
-	var center:=column(row,640,false,true)
-	var h:=Expedition.hero(campaign,cfg)
+func compact_control(control: Button) -> Button:
+	control.custom_minimum_size.y=42
+	for mode in ["normal","hover","pressed","disabled","focus"]:
+		var style:=control.get_theme_stylebox(mode).duplicate() as StyleBoxFlat
+		style.set_content_margin_all(7)
+		control.add_theme_stylebox_override(mode,style)
+	return control
+
+func show_wide_exploration() -> void:
+	var root:=root_layout()
+	for side in ["left","right","top","bottom"]: screen.add_theme_constant_override("margin_"+side,16)
+	root.add_theme_constant_override("separation",0)
+	var row:=HBoxContainer.new(); row.add_theme_constant_override("separation",16); row.size_flags_vertical=Control.SIZE_EXPAND_FILL; root.add_child(row)
+	var field:=VBoxContainer.new(); field.custom_minimum_size.x=896; field.size_flags_horizontal=Control.SIZE_EXPAND_FILL; field.add_theme_constant_override("separation",12); row.add_child(field)
+	var picture:=Control.new(); picture.set_script(BattleStage); picture.wide_layout=true; picture.floor_number=campaign.floor; picture.enemy_id=campaign.battle.get("enemy_id",""); field.add_child(picture)
+	# Small live HUD over the distant scenery; the floor remains unobstructed.
+	var hud:=PanelContainer.new(); hud.position=Vector2(12,12); hud.size=Vector2(490,0)
+	hud.add_theme_stylebox_override("panel",box(Color(0.025,0.07,0.085,0.92),Color("b18a4d"),2)); picture.add_child(hud)
+	var hud_rows:=VBoxContainer.new(); hud_rows.add_theme_constant_override("separation",3); hud.add_child(hud_rows)
 	if campaign.phase=="battle":
 		var b:=Expedition.battle_state(campaign,data)
-		paragraph(center,"%s Lv.%d   HP %d / %d" % [b.enemy.name,b.enemy.level,b.enemy.hp,b.enemy.max_hp])
-		var bar:=health_bar(Color("b4523b")); bar.max_value=b.enemy.max_hp; bar.value=b.enemy.hp; center.add_child(bar)
-		paragraph(center,"ROUND %02d / 完全自動" % b.round,17)
-	elif campaign.phase=="explore" and campaign.get("last_outcome","")=="victory":
-		var banner:=paragraph(center,"勝利  /  次の一歩を選ぶ",28)
-		banner.add_theme_color_override("font_color",Color("f0bd72"))
-	else: paragraph(center,"静かな通路" if campaign.phase=="explore" else cfg.events[campaign.event].name,22)
-	var picture:=Control.new(); picture.set_script(BattleStage); picture.floor_number=campaign.floor; picture.enemy_id=campaign.battle.get("enemy_id",""); picture.clip_contents=true; center.add_child(picture)
-	if campaign.phase=="event":
-		var choices:=HBoxContainer.new(); center.add_child(choices)
-		choices.add_child(command(cfg.events[campaign.event].choice,"event",{"choice":"accept"}))
-		choices.add_child(command("見送る","event",{"choice":"skip"}))
-	center.add_child(text_label(VisualAssets.preview_note(picture.enemy_id),14))
-	var log:=RichTextLabel.new(); log.custom_minimum_size.y=100; log.size_flags_vertical=Control.SIZE_EXPAND_FILL; log.scroll_following=true
+		hud_rows.add_child(text_label("%s Lv.%d  HP %d / %d  ROUND %02d" % [b.enemy.name,b.enemy.level,b.enemy.hp,b.enemy.max_hp,b.round],18))
+		var bar:=health_bar(Color("b4523b")); bar.max_value=b.enemy.max_hp; bar.value=b.enemy.hp; hud_rows.add_child(bar)
+	else:
+		hud_rows.add_child(text_label("地下 %d F  /  %s" % [campaign.floor,VisualAssets.depth_name(campaign.floor)],22))
+		var message: String=cfg.events[campaign.event].name if campaign.phase=="event" else ("勝利 / 次の一歩を選ぶ" if campaign.get("last_outcome","")=="victory" else "静かな通路")
+		hud_rows.add_child(text_label(message,18))
+	var log:=RichTextLabel.new(); log.custom_minimum_size.y=150; log.size_flags_vertical=Control.SIZE_EXPAND_FILL; log.scroll_following=true
 	log.add_theme_stylebox_override("normal",box(Color("081215"),Color("987b49")))
-	log.text="\n".join(campaign.journal); center.add_child(log)
-	var status:=column(row,250,true)
+	log.text="メッセージ\n"+"\n".join(campaign.journal); field.add_child(log)
+	var status:=column(row,336,true); status.get_parent().size_flags_horizontal=Control.SIZE_FILL; status.add_theme_constant_override("separation",6)
+	var h:=Expedition.hero(campaign,cfg)
 	section_heading(status,"主人公 / Lv.%d" % h.level)
-	portrait(status,84)
 	status.add_child(text_label("HP  %d / %d" % [h.hp,h.max_hp],20))
 	var hpbar:=health_bar(Color("a84936")); hpbar.max_value=h.max_hp; hpbar.value=h.hp; status.add_child(hpbar)
 	status.add_child(text_label("SP  %d / %d" % [h.sp,h.max_sp],20))
 	var spbar:=health_bar(Color("327e9b")); spbar.max_value=maxi(1,h.max_sp); spbar.value=h.sp; status.add_child(spbar)
-	paragraph(status,"ATK %d   DEF %d\nSPD %d\n\nGold %d\n携行品 %d個\n最深到達 %dF" % [h.atk,h.def,h.spd,campaign.gold,campaign.inventory.size(),campaign.highest_floor],19)
+	paragraph(status,"ATK %d   DEF %d   SPD %d\nGold %d  / 携行品 %d個" % [h.atk,h.def,h.spd,campaign.gold,campaign.inventory.size()],18)
 	var growth:=Expedition.level_info(campaign,cfg)
 	paragraph(status,"次のLvまで EXP %d / %d" % [growth.progress,growth.next],16)
+	section_heading(status,"地下 %d F / 最深 %d F" % [campaign.floor,campaign.highest_floor])
+	paragraph(status,VisualAssets.depth_name(campaign.floor),17)
+	paragraph(status,"初回探索：帰還できません" if not campaign.first_done else "第 %d 回の探索" % campaign.trips,16)
+	var down:=compact_control(command("さらに潜る" if campaign.floor>0 else "地下1Fへ潜る","descend")); down.disabled=campaign.phase!="explore" or campaign.floor>=10; status.add_child(down)
+	var retreat:=compact_control(command("町へ帰還する","return")); retreat.disabled=not campaign.first_done or campaign.phase!="explore"; status.add_child(retreat)
+	if campaign.phase=="battle":
+		var playback:=HBoxContainer.new(); playback.add_theme_constant_override("separation",8); status.add_child(playback)
+		var pause:=compact_control(button("一時停止" if auto_play else "戦闘を再開",func(): auto_play=not auto_play; show_campaign())); pause.size_flags_horizontal=Control.SIZE_EXPAND_FILL; playback.add_child(pause); play_buttons["pause"]=pause
+		var speed:=compact_control(button("速度 %d倍" % play_speed,func(): play_speed=2 if play_speed==1 else 1; show_campaign())); playback.add_child(speed)
+	if campaign.phase=="event":
+		status.add_child(compact_control(command(cfg.events[campaign.event].choice,"event",{"choice":"accept"})))
+		status.add_child(compact_control(command("見送る","event",{"choice":"skip"})))
+	var spacer:=Control.new(); spacer.size_flags_vertical=Control.SIZE_EXPAND_FILL; status.add_child(spacer)
+	paragraph(status,notice if notice!="" else "0.4.5 / 自動保存済み",14)
+	var title:=compact_control(button("保存済み / タイトルへ",func(): loaded=save_store.load_game(); show_title())); status.add_child(title); play_buttons["title"]=title
 
 func show_result(root: VBoxContainer) -> void:
 	var row:=HBoxContainer.new(); row.size_flags_vertical=Control.SIZE_EXPAND_FILL; row.add_theme_constant_override("separation",32); root.add_child(row)

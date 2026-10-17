@@ -2,6 +2,7 @@ extends Control
 ## Layered, static candidate preview. Legacy dots remain only for missing actors.
 const VisualAssets = preload("res://ui/visual_assets.gd")
 var floor_number := 1
+var wide_layout := false
 var scenery: TextureRect
 var hero_art: Sprite2D
 var enemy_art: Sprite2D
@@ -52,14 +53,14 @@ const STATUE := [
 func _ready() -> void:
 	mouse_filter = MOUSE_FILTER_IGNORE
 	texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
-	custom_minimum_size.y = 270
+	custom_minimum_size = Vector2(896,504) if wide_layout else Vector2(0,270)
 	clip_contents = true
 	scenery = TextureRect.new()
 	scenery.show_behind_parent = true
 	scenery.mouse_filter = MOUSE_FILTER_IGNORE
 	scenery.texture = VisualAssets.texture(VisualAssets.background_key(floor_number))
 	scenery.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-	scenery.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
+	scenery.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED if wide_layout else TextureRect.STRETCH_KEEP_ASPECT_COVERED
 	scenery.modulate = VisualAssets.depth_tint(floor_number)
 	scenery.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	add_child(scenery)
@@ -88,12 +89,15 @@ func ground_y() -> float:
 	return 705.0*factor-(source.y*factor-size.y)*0.5
 
 func display_foot(position_hint: Vector2) -> Vector2:
+	if wide_layout: return Vector2(roundf(size.x*position_hint.x),roundf(size.y*position_hint.y))
 	return Vector2(roundf(size.x*position_hint.x),roundf(ground_y()+position_hint.y*size.y/270.0))
 
 func hero_position_hint() -> Vector2:
+	if wide_layout: return Vector2(0.70,0.80 if floor_number>=10 else 0.79)
 	return Vector2(0.70,22.0) if floor_number>=10 else NEAR_HERO
 
 func enemy_position_hint() -> Vector2:
+	if wide_layout: return Vector2(0.30,0.64 if floor_number>=10 else 0.71)
 	return Vector2(0.30,-34.0) if floor_number>=10 else FAR_ENEMY
 
 func place_actor(actor: Sprite2D, key: String, position_hint: Vector2, target_height: float) -> void:
@@ -110,9 +114,9 @@ func place_actor(actor: Sprite2D, key: String, position_hint: Vector2, target_he
 func layout_art() -> void:
 	# Slight crop emphasizes the existing floor; no PNG alteration or rotation.
 	scenery.pivot_offset = size*0.5
-	scenery.scale = Vector2.ONE*BACKGROUND_ZOOM
-	place_actor(hero_art,"hero",hero_position_hint(),165)
-	place_actor(enemy_art,enemy_id,enemy_position_hint(),ENEMY_HEIGHTS.get(enemy_id,140.0))
+	scenery.scale = Vector2.ONE if wide_layout else Vector2.ONE*BACKGROUND_ZOOM
+	place_actor(hero_art,"hero",hero_position_hint(),245 if wide_layout else 165)
+	place_actor(enemy_art,enemy_id,enemy_position_hint(),(230.0 if enemy_id=="B10" else 190.0) if wide_layout else ENEMY_HEIGHTS.get(enemy_id,140.0))
 	queue_redraw()
 
 func visual_audit() -> Dictionary:
@@ -133,7 +137,7 @@ func visual_audit() -> Dictionary:
 		actors.append(entry)
 	return {"background":VisualAssets.background_key(floor_number),"background_loaded":scenery.texture != null,
 		"depth":floor_number,"stage_size":[size.x,size.y],"filter":"nearest","aspect":"preserved",
-		"composition":"offset-only-reference-camera-unresolved","background_zoom":BACKGROUND_ZOOM,
+		"composition":"offset-only-reference-camera-unresolved","background_zoom":1.0 if wide_layout else BACKGROUND_ZOOM,"wide_layout":wide_layout,"global_rect":str(get_global_rect()),"background_aspect":16.0/9.0,
 		"near_hero_foot":[display_foot(hero_position_hint()).x,display_foot(hero_position_hint()).y],
 		"far_enemy_foot":[display_foot(enemy_position_hint()).x,display_foot(enemy_position_hint()).y],"formation_rules":false,
 		"static_only":true,"adoption":"nine-assets-current-baseline","actors":actors}
