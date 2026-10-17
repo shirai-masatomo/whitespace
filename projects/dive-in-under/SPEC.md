@@ -2,7 +2,7 @@
 
 > **目的**：地下へ潜るほど得られるものは増えるが、死・消耗・装備劣化のリスクも増える。事前の準備、仲間・配下の組合せ、撤退判断が主なプレイとなる。
 >
-> **現在地**：Godotによる工程1の**単発戦闘基盤がCodex作業ブランチで進行中**（[作業レビュー入口](https://github.com/shirai-masatomo/whitespace/blob/dot/dive-in-under/phase-01/projects/dive-in-under/review/current/README.md)）。1〜10Fの反復探索は未完了。本仕様が確定要件の正本であり、Windows EXEでの配布を想定する。
+> **現在地**：Godot工程1の通常ソロ10F版0.3を作業ブランチで検証（[受入照合](docs/PHASE_01_ACCEPTANCE.md)）。通常新規1000seed・隔離EXE操作・保存再開の証拠あり。追加の[画作り受入条件](docs/dot/PHASE_01_VISUAL_TARGET.md)は未達で、工程1全体は進行中。
 
 ## 最初のゲーム体験（確定）
 

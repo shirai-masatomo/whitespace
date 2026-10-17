@@ -1,0 +1,9 @@
+{
+  "published_utc": "2026-10-17T11:00:33.6776871Z",
+  "game_commit": "24314385e5ed6c4f6d4fffefc5be87108d073d11",
+  "exe_sha256": "D34D36F3BE1A6C49C56525AE86469B92E4F417DDF0B43CF00DD80C385C4B0562",
+  "relative_directory": "releases/24314385e5ed6c4f6d4fffefc5be87108d073d11-851ac5dd",
+  "pck_sha256": "C0A7F33B5C08610B8EB974322CA0A36369020A539EA0F23FC778963EF3C0F83A",
+  "existing_processes_untouched": true,
+  "previous_directory": "windows"
+}

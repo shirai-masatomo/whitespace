@@ -2,9 +2,9 @@
 
 **地下へ潜るほど報酬は増えるが、死と装備の消耗を伴う、フルオート戦闘ダンジョンRPG。**
 
-## 現在地：工程1の基幹ループを実装、10F攻略バランスは次の検証
+## 現在地：通常ソロ10Fを検証、工程1の画作りは未達
 
-**[今回の確認入口（ローカル起動・ZIP・実画面・素材一覧）](review/current/README.md)** ／ [開発環境](docs/DEVELOPMENT.md) ／ [Draft PR #5](https://github.com/shirai-masatomo/whitespace/pull/5)。探索・初回死亡1回・町・倉庫・装備・成長・保存再開まで実装。通常のソロ10F突破バランスと人間の試遊は後続です。
+**[今回の確認入口（ローカル起動・ZIP・実画面・素材一覧）](review/current/README.md)** ／ [開発環境](docs/DEVELOPMENT.md) ／ [Draft PR #5](https://github.com/shirai-masatomo/whitespace/pull/5)。探索・初回死亡1回・町・倉庫・装備・成長・保存再開まで実装。通常の新規セーブからソロ10F突破・隔離EXEの操作/保存再開を検証済み。独立背景画像と静止スプライトの画作り要件は未達です。
 
 - **[SPEC.md：全体仕様の正本](SPEC.md)** — ゲームの大枠と確定要件
 - **[現行2DドットUI参考3枚](docs/UI_MOCKS.md)** — 探索・戦闘・装備／ステータス。旧4枚は履歴へ

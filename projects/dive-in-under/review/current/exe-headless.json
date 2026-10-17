@@ -8,10 +8,10 @@
 	"outcome": "defeat",
 	"rendered": false,
 	"rounds": 4,
-	"run_id": "07c0a481d1804bd8bab5aaadb3ee19b8",
+	"run_id": "879b4966c31845f2899abaa1d2dd6b80",
 	"save_path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-17\\task\\dive-in-under-work\\projects\\dive-in-under\\artifacts\\exe-headless/campaign-smoke.json",
 	"saved_revision": 33.0,
-	"saved_sha256": "1df1c9a6e6b2a7847ae6a2b02f725dc29619c0e263bef698b82fc785bfdfc476",
+	"saved_sha256": "a3b9bc2c2bfae3174d7a7a7f9cfd43cd2686a01bd9c2c8b39849ae16cc285bc2",
 	"tool_start_pause_resume_restart_back": true,
 	"ui_core_equal": true,
 	"viewport_mouse_input": true

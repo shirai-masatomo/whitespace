@@ -99,3 +99,23 @@ Windows隔離再起動でGodotの `shader_gles3.cpp:802`（キャッシュのハ
 - `tests/test_harness.ps1` は意図的な不一致/入力断線/古いJSONを拒否することを確認。`tools/smoke_result.ps1` がヘッドレス/隔離描画のrun IDを共通検証。成功JSONは本編とツールの全確認後のみ書く。EXEヘッドレスは終了後に別プロセスで戦闘途中の保存を読み直す。
 - ローカル入口は同じ `review/current` のindex.htmlとPlay.cmd。牧場の既存確認フォルダに本作へ向くリンク1個だけを追加し、牧場の起動先・コードは無変更。ゲームやエクスプローラーを勝手に起動しない。
 - CIの `github.sha` はpull_requestイベントでmerge commitを指す。PR headと実checkout SHAを分けて報告し、BUILD.jsonの値を実行ソースとして扱う。
+
+## 0.3通常ソロ10F・安全な配布更新
+
+Godot/GDScript/Windows/GPUの固定環境は上記から変更なし。現在の本体と設定はBUILD.jsonを参照。通常1000seed比較と実EXEの再現は以下。
+
+```powershell
+./tools/verify_campaign.ps1 -GameCommit (git rev-parse HEAD)
+./tools/campaign_smoke.ps1
+./tests/test_campaign_harness.ps1
+./tools/campaign_smoke.ps1 -Rendered
+./tools/publish_local.ps1
+```
+
+`verify_campaign` は設定.1/.2の1000seed前後比較、.2の厳密再実行、seed10000全操作列を作る。通常探索の分子・分母は初回を除外。元の単発戦闘ランナーも維持する。GUI再現は同じExpeditionの操作列に従い、実Controlのviewportクリックと本番Timerコールバックを使用。全操作状態を照合し、3つのEXEで途中/突破後保存を検証。OS物理入力は別の未検証範囲。
+
+`dev.ps1 build` は既存EXEを触らず `build/releases/<commit>-<unique>/` を新規作成。検証はcandidate.txtの参照先へ。publish_localは同じEXE/PCKの隔離監査・保存再開・厳密統計が通った後だけcurrent.txtを原子的に置換する。Play.cmdはcurrent.txtを読む。以前のwindows/と配布ディレクトリは削除しない。既存ゲームを終了しない。
+
+設定.1はexpedition-legacy.jsonとして固定し、既存保存はその設定で継続。設定.2は新規保存に適用。未知の設定は拒否。自動書換えによる能力変更や戦闘途中の変化を避ける。保存の同時書込み完全排他は引き続き未実装。
+
+[最新の全受入照合・制約](PHASE_01_ACCEPTANCE.md)が現在の状態。追加の画作り要件は未達で、OS物理入力の未検証と混同しない。
