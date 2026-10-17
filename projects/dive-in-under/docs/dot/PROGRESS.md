@@ -1,5 +1,7 @@
 # Dive In Under — Dot自律開発 工程進捗
 
+> **最新0.4.2**：羊皮紙/真鍮枠・見出し・装備11行を改善し、採用済み5点のEXE注記を更新。残敵4種は未納品。工程1全体は未完了。[実画面・証拠](../../review/current/README.md)。
+
 > **最新0.4.1**：町の能力値一覧の可読性を修正し隔離Windows EXEを再検証。5点は現基準として採用済み。残る敵とPX画作りの課題があり、工程1全体は未完了。[実画面・証拠](../../review/current/README.md)。
 
 > **実測更新（2026-10-17）**：通常ソロ10FのWindows EXE 0.3.0を検証。**工程1全体は画作り要件が未達で進行中**。[全受入照合](../PHASE_01_ACCEPTANCE.md)、[同じローカル確認入口](../../review/current/README.md)。工程2へ進まず親の受入評価へ戻す。
@@ -115,3 +117,9 @@ main be0e601 の追加設計（COMBAT v0.2の8属性・状態異常・追加能�
 
 
 町の可読性修正0.4.1のCIはhead `cf7cfac259d0f39934fafefbe7f4d8082e38804e` で [PR run39031447916](https://github.com/shirai-masatomo/whitespace/actions/runs/39031447916) と [push run39031444026](https://github.com/shirai-masatomo/whitespace/actions/runs/39031444026) が成功。PR実checkoutは `9390b89d0b1587f20fc86d4e1736b0f372c66aa7`。366チェック・1000seed厳密再比較・EXE290操作/別プロセス再開・故障注入10件を確認。[CI Windows ZIP](https://github.com/shirai-masatomo/whitespace/actions/runs/39031447916/artifacts/12100702226) / [JSON・ログ](https://github.com/shirai-masatomo/whitespace/actions/runs/39031447916/artifacts/12101150514)、期限2027-01-15。後続の採用通知/引継ぎ/CI記録は資料のみで、ローカル配布ソース187e7f7と区別する。
+
+## 2026-10-17 UI小単位 0.4.2
+
+ソース `7bc5f347d2c94019ff20acb9bc4ba83ab6c06fa7`。既存Godot部品で羊皮紙繊維・真鍮枠・見出し帯・装備11行と既存能力効果を整列。自己レビューで無効ボタン幅と枠/文字の余白を修正し366チェック・Windows再ビルド・隔離/ヘッドレス290操作・3プロセス保存再開成功。クリアSHA `edd3cace3bb8376f1e2d80cb0cc6a44270874df5893a0a91906b036046996d2a`、保存SHA `0dcca1d55581aba169a1ed6ee4251688e37a2d6320da3042789a17c8b33dc6fa` 維持。旧EXE/PCKを保持し参照だけ安全切替。[変更後の町](../../review/current/44-ui-town.png) / [変更前0.4.1](../../review/current/41-town-status-readable.png) / [画面SHA](../../review/current/ui-refinement-evidence.json) / [配布SHA](../../review/current/build-manifest.json) / [隔離監査](../../review/current/ui-refinement-campaign-isolated-isolation-complete.json)。通常デスクトップ操作なし。
+
+採用済み注記とmanifestを更新、原稿PNG・コア・データ・保存・操作は不変。新規画像/モーション/新機能なし。未納品4敵は仮表示のまま、納品後に別単位で組み込む。PXの細部装飾や装備アイコン配置は一致しておらず、画作りの節目レビューは継続。追加UI画像は現時点で不要。OS物理入力・別解像度・長時間試遊は未検証。工程1全体は未完了。

@@ -1,0 +1,59 @@
+{
+  "runtime_commit": "7bc5f347d2c94019ff20acb9bc4ba83ab6c06fa7",
+  "resolution": [
+    1280,
+    720
+  ],
+  "scope": "Native UI only; adopted metadata updated; core/data/PNG unchanged",
+  "screenshots": [
+    {
+      "path": "44-ui-town.png",
+      "bytes": 624554,
+      "sha256": "11c8aad3d1a9f709e793ea0efc3537a7997e5b42794dc1f92ef60aa1aa17f77c",
+      "audit": "44-ui-town-audit.json",
+      "capture_filename": "18-campaign-clear-town.png"
+    },
+    {
+      "path": "45-ui-battle.png",
+      "bytes": 977059,
+      "sha256": "3734736cf5e40533bb230ec4828963e176954ad3f2eaadf9fe36bd781023ee54",
+      "audit": "45-ui-battle-audit.json",
+      "capture_filename": "19-candidate-goblin.png"
+    },
+    {
+      "path": "46-ui-title.png",
+      "bytes": 1237682,
+      "sha256": "dd0f640fcbbb2deeb5a4d5fb5fd9bc89018514c4ac109fffe8dbcf2bf9bf0ecb",
+      "audit": "46-ui-title-audit.json",
+      "capture_filename": "11-campaign-title.png"
+    },
+    {
+      "path": "47-ui-boss.png",
+      "bytes": 973100,
+      "sha256": "4674c2dd3fe6f4155239f3ac3b64cb6571f7f0d4c4db04e5afe1c9967d8c75ae",
+      "audit": "47-ui-boss-audit.json",
+      "capture_filename": "16-campaign-boss.png"
+    },
+    {
+      "path": "48-ui-first-town.png",
+      "bytes": 589102,
+      "sha256": "059e0b427b63bf7a6222193398937168d770f00d95095a878d09eba6cf0e8675",
+      "audit": "48-ui-first-town-audit.json",
+      "capture_filename": "14-campaign-town.png"
+    },
+    {
+      "path": "49-ui-result.png",
+      "bytes": 558703,
+      "sha256": "6126df174b65bf6c22b88cd476978dc0e575656f4a743c6275e2ca9b9baf8e0d",
+      "audit": "49-ui-result-audit.json",
+      "capture_filename": "13-campaign-first-death.png"
+    },
+    {
+      "path": "50-ui-exploration.png",
+      "bytes": 989670,
+      "sha256": "411e4f9da3c70f9af92a2bfcd9aaa74def5bd556e2b690788ff4864e644a2ce0",
+      "audit": "50-ui-exploration-audit.json",
+      "capture_filename": "20-candidate-shallow.png"
+    }
+  ]
+}
