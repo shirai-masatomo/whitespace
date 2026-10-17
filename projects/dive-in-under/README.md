@@ -5,7 +5,7 @@
 ## 現在地：Dot自律開発の指示・工程準備が完了（ユーザーからDotへの実行指示待ち）
 
 - **[SPEC.md：全体仕様の正本](SPEC.md)** — ゲームの大枠と確定要件
-- **[UIモック4枚](docs/UI_MOCKS.md)** — タイトル／初回探索／死亡／倉庫（画像あり）
+- **[現行2DドットUI参考3枚](docs/UI_MOCKS.md)** — 探索・戦闘・装備／ステータス。旧4枚は履歴へ
 - **[仕様と実装状況の表](docs/IMPLEMENTATION_STATUS.md)** — 何が「今」「次」「後」なのか
 - **[設計判断台帳](docs/DESIGN_DECISIONS.md)** — 既に決めたことと確認事項
 - **[初期EXE～10Fプロトタイプの進め方](docs/PROTOTYPE_10F.md)**
