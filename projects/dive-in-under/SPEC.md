@@ -68,3 +68,8 @@
 - **[現行2Dドット参考3枚と画面遷移](docs/UI_MOCKS.md)** ／ **[仕様と実装範囲の対応表](docs/IMPLEMENTATION_STATUS.md)** ／ **[戦闘シミュレーター（導入決定・未実装）](docs/BATTLE_SIMULATION.md)**。
 - **工程1の完了条件**：主人公1人で**新規開始直後から通常の1F探索・帰還が可能**で、帰還／通常死亡→町→装備・倉庫→何度でも再探索できる。**10Fの通常ボス戦で突破可能**。現行2Dドット画風・斜め視点・静止キャラと先行4状態の小エフェクト・共通戦闘コアを実装する。**強制死亡・帰還禁止は廃止**。[工程1](docs/dot/PHASE_01.md)／[変更指示](docs/dot/CHANGE_2026-10-17_FIRST_EXPEDITION.md)。仲間は工程5。
 - **現在のWindows実装はDotが工程1を進行中**。作業ブランチの[レビュー入口](https://github.com/shirai-masatomo/whitespace/blob/dot/dive-in-under/phase-01/projects/dive-in-under/review/current/README.md)を参照。仕様書変更と実際のWindows EXE反映は別であり、Dot側でコード・CI・セーブ互換を検証する。
+
+
+## エリア1：地下1〜10Fの敵の分布（2026-10-17）
+
+**1〜5Fは洞窟の小型生物を主役**にし、**6〜9Fは濡れ岩ガニ・洞窟カエル・水棲トカゲの3種を主役**にする。10Fは従来の門番の石像。青い地下滝・木橋・苔・石床の背景をこの10F区間で共用し、11F以降のエリアでは景観を変える。詳細と仮の敵出現率は[エリア資料](docs/BIOME_01_10F.md)／[階層](docs/FLOORS.md)／[敵](docs/ENEMIES.md)。**資料改定とゲーム実装は別**。新3種は戦闘用の静止画候補だけ作り、採否を確認する。

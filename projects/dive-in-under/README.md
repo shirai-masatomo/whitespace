@@ -44,3 +44,7 @@ Windows EXEで **新規開始 → 主人公単独で1Fから通常探索（最�
 [階層（敵出現率・Lv・宝箱確率）](docs/FLOORS.md) / [敵（基礎能力・EXP・Gold・ドロップ）](docs/ENEMIES.md) / [アイテム](docs/ITEMS.md) / [仲間](docs/ALLIES.md) / [イベント](docs/EVENTS.md) / [戦闘共通仕様](docs/COMBAT.md) / [スキル一覧](docs/SKILLS.md) / [黄金像](docs/SHRINE.md) / [参考資料](docs/RESEARCH.md)
 
 **旧ブラウザ試作**：[過去の試作ZIP](Dive-In-Under-10F-prototype.zip) ／ [ソース](prototype/index.html)。古いパーティ構造など現行と異なる仕様を含むため参考として無変更で保全し、新Windows基盤へ直接移植していません。
+
+## 地下1〜10F：青い滝洞窟の敵生態系
+
+[エリア資料・静止画像の制作要件](docs/BIOME_01_10F.md)／[階層別の敵種確率とLv](docs/FLOORS.md)／[敵の仮能力・ドロップ](docs/ENEMIES.md)。**1〜5F＝洞窟小型生物、6〜9F＝水辺の3種、10F＝門番石像**。既存のPC実装へ反映したかはDotの工程1レビューで別途確認。
