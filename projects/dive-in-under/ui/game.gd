@@ -179,7 +179,7 @@ func show_campaign() -> void:
 func compact_control(control: Button) -> Button:
 	control.custom_minimum_size.y=42
 	for mode in ["normal","hover","pressed","disabled","focus"]:
-		var style:=control.get_theme_stylebox(mode).duplicate() as StyleBoxFlat
+		var style:=theme.get_stylebox(mode,"Button").duplicate() as StyleBoxFlat
 		style.set_content_margin_all(7)
 		control.add_theme_stylebox_override(mode,style)
 	return control
@@ -232,7 +232,7 @@ func show_wide_exploration() -> void:
 		status.add_child(compact_control(command(cfg.events[campaign.event].choice,"event",{"choice":"accept"})))
 		status.add_child(compact_control(command("見送る","event",{"choice":"skip"})))
 	var spacer:=Control.new(); spacer.size_flags_vertical=Control.SIZE_EXPAND_FILL; status.add_child(spacer)
-	paragraph(status,notice if notice!="" else "0.4.5 / 自動保存済み",14)
+	paragraph(status,notice if notice!="" else "0.4.6 / 自動保存済み",14)
 	var title:=compact_control(button("保存済み / タイトルへ",func(): loaded=save_store.load_game(); show_title())); status.add_child(title); play_buttons["title"]=title
 
 func show_result(root: VBoxContainer) -> void:

@@ -52,7 +52,9 @@ func _ready() -> void:
 		style.set_stylebox("normal",type,box(Color("cdb784"),Color("927044"),2))
 		style.set_stylebox("hover",type,box(Color("ead29b"),Color("e0af53"),2))
 		style.set_stylebox("pressed",type,box(Color("ad976b"),Color("e6cc86"),2))
-		var focus := box(Color(0,0,0,0),Color("5fd6da"),2)
+		style.set_stylebox("disabled",type,box(Color("303a3c"),Color("596467"),1))
+		style.set_color("font_disabled_color",type,Color("9da7a7"))
+		var focus := box(Color(0,0,0,0),Color("005b73"),3)
 		focus.shadow_size = 0
 		style.set_stylebox("focus",type,focus)
 		style.set_color("font_color",type,Color("231f1b"))

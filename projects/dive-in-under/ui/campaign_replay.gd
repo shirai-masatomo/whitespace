@@ -66,6 +66,9 @@ static func run(game: Control) -> void:
 		if not game.smoke_check(hash_state(game.campaign)==expected.state_sha256,"UI/core divergence at action %d %s"%[index,expected.action]): return
 		index+=1
 		if rendered:
+			if game.campaign.phase=="battle" and not screenshots.has("28-button-states.png"):
+				game.play_buttons.pause.grab_focus()
+				await game.capture("28-button-states.png"); screenshots["28-button-states.png"]=true
 			var name:=""
 			if game.campaign.trips==1 and game.campaign.floor==1: name="12-campaign-first.png"
 			elif game.campaign.phase=="town": name="14-campaign-town.png"
