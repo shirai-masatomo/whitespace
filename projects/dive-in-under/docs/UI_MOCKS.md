@@ -25,7 +25,7 @@
 
 ## 正しい画面遷移
 
-\`\`\`text
+```text
 タイトル
   └─ 新規開始 ──> 初回探索（主人公1人、帰還不可）
                         ├─ 自動戦闘・宝・イベント
@@ -35,7 +35,7 @@
                                                   └─ 再探索 ──> 2回目以降の地下
                                                                     ├─ 潜る
                                                                     └─ 帰還
-\`\`\`
+```
 
 **重要**：黄金像が光り、犬が仲間になるのは**将来追加する導入イベント**。UI-03→UI-04の間にはまだ挟まない。
 
@@ -70,6 +70,6 @@
 
 ## 素材の保管先
 
-- **GitHub**： \`projects/dive-in-under/assets/ui-mocks/*.webp\`（1672×941のレビュー用高品質WebP）。
-- **元のPNG画像**：ChatGPTのLibrary \`/WhiteSpace/Dive In Under/UI Mocks/\` に4枚を保管。別途、元PNGとこの資料をまとめた配布ZIPを提供。
+- **GitHub**： `projects/dive-in-under/assets/ui-mocks/*.webp`（1672×941のレビュー用高品質WebP）。
+- **元のPNG画像**：ChatGPTのLibrary `/WhiteSpace/Dive In Under/UI Mocks/` に4枚を保管。別途、元PNGとこの資料をまとめた配布ZIPを提供。
 - **利用位置づけ**：参照用画像。UIパーツの切り出しや他ゲームの画面・ロゴのコピーではなく、この作品独自のゲームUIとして再設計する。
