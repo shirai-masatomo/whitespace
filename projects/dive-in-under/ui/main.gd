@@ -358,6 +358,9 @@ func collect_visual_audits(node: Node) -> Array:
 	return result
 
 func capture(filename: String) -> void:
+	# Nested Containers settle deferred minimum-size/layout updates before evidence capture.
+	await get_tree().process_frame
+	await get_tree().process_frame
 	await RenderingServer.frame_post_draw
 	var error := get_viewport().get_texture().get_image().save_png(smoke_dir.path_join(filename))
 	if error != OK:
