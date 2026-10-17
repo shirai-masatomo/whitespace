@@ -68,7 +68,7 @@ func show_title() -> void:
 	left.add_child(button("終了",func(): get_tree().quit()))
 	var right:=column(row,400)
 	section_heading(right,"探索・帰還・再挑戦")
-	var explanation:=text_label("初めての探索では帰還できません。\nその後は、町で回復して何度でも挑めます。\n\n変更は操作ごとに自動保存されます。",18)
+	var explanation:=text_label("最初から1Fを探索し、解決後は町へ帰還できます。\nHPが0になると通常の死亡です。町で回復し何度でも挑めます。\n\n変更は操作ごとに自動保存されます。",18)
 	explanation.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART; right.add_child(explanation)
 	right.add_child(HSeparator.new())
 	launch_button=button("開発用：単発戦闘の確認",show_battle)
@@ -77,7 +77,7 @@ func show_title() -> void:
 	if loaded.get("status","") not in ["ok","missing"]: notice=loaded.get("error","")
 	var status:=text_label(notice,16); status.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART; root.add_child(status)
 	var spacer:=Control.new(); spacer.size_flags_vertical=Control.SIZE_EXPAND_FILL; root.add_child(spacer)
-	root.add_child(text_label("0.4.5 wide battlefield  ·  工程1試作  ·  静止素材9点採用済み / 数値は仮設定",16))
+	root.add_child(text_label("0.4.6 normal first expedition  ·  工程1試作  ·  静止素材9点採用済み / 数値は仮設定",16))
 	new_button.grab_focus()
 
 func show_battle() -> void:
@@ -99,6 +99,7 @@ func start_new() -> void:
 	if error!="": notice=error; show_title(); return
 	cfg=Expedition.load_config(); save_store.cfg=cfg
 	var candidate:=Expedition.fresh(cfg,campaign_seed if smoke_dir!="" else int(Time.get_ticks_usec()%2147483647))
+	candidate=Expedition.act(candidate,"descend",int(candidate.revision),{},data,cfg)
 	error=save_store.write_game(candidate)
 	if error!="": notice=error; show_title(); return
 	campaign=candidate; loaded={"ok":true,"status":"ok"}; notice=""; auto_play=true
@@ -215,9 +216,9 @@ func show_wide_exploration() -> void:
 	paragraph(status,"次のLvまで EXP %d / %d" % [growth.progress,growth.next],16)
 	section_heading(status,"地下 %d F / 最深 %d F" % [campaign.floor,campaign.highest_floor])
 	paragraph(status,VisualAssets.depth_name(campaign.floor),17)
-	paragraph(status,"初回探索：帰還できません" if not campaign.first_done else "第 %d 回の探索" % campaign.trips,16)
+	paragraph(status,"第 %d 回の通常探索" % Expedition.normal_trips(campaign),16)
 	var down:=compact_control(command("さらに潜る" if campaign.floor>0 else "地下1Fへ潜る","descend")); down.disabled=campaign.phase!="explore" or campaign.floor>=10; status.add_child(down)
-	var retreat:=compact_control(command("町へ帰還する","return")); retreat.disabled=not campaign.first_done or campaign.phase!="explore"; status.add_child(retreat)
+	var retreat:=compact_control(command("町へ帰還する","return")); retreat.disabled=campaign.phase!="explore"; status.add_child(retreat)
 	if campaign.phase=="battle":
 		var playback:=HBoxContainer.new(); playback.add_theme_constant_override("separation",8); status.add_child(playback)
 		var pause:=compact_control(button("一時停止" if auto_play else "戦闘を再開",func(): auto_play=not auto_play; show_campaign())); pause.size_flags_horizontal=Control.SIZE_EXPAND_FILL; playback.add_child(pause); play_buttons["pause"]=pause
@@ -232,14 +233,14 @@ func show_wide_exploration() -> void:
 func show_result(root: VBoxContainer) -> void:
 	var row:=HBoxContainer.new(); row.size_flags_vertical=Control.SIZE_EXPAND_FILL; row.add_theme_constant_override("separation",32); root.add_child(row)
 	var info:=column(row,700)
-	var labels: Dictionary={"death":"主人公死亡","story_death":"主人公死亡 / 初回イベント","return":"帰還成功","draw":"戦闘打切り / 探索中断","clear":"10F突破"}
+	var labels: Dictionary={"death":"主人公死亡","story_death":"旧版の導入イベント記録","return":"帰還成功","draw":"戦闘打切り / 探索中断","clear":"10F突破"}
 	var banner:=paragraph(info,labels[campaign.result.kind],36)
 	banner.add_theme_color_override("font_color",Color("f0bd72"))
 	paragraph(info,campaign.result.reason,24)
 	paragraph(info,"到達 %dF   /   Lv.%d   /   Gold %d" % [campaign.result.floor,Expedition.hero(campaign,cfg).level,campaign.gold],22)
 	var loss: Dictionary=campaign.result.loss
 	paragraph(info,"今回の損失：Gold %d / EXP %d / 携行品 %d\n町ではHP/SPを全回復します。再挑戦に費用はかかりません。" % [loss.gold,loss.exp,loss.items],18)
-	if campaign.result.kind=="story_death": paragraph(info,"この初回イベントは記録済みです。次の探索では再発しません。",18)
+	if campaign.result.kind=="story_death": paragraph(info,"旧版の履歴です。通常死亡数には加えません。町へ戻って探索を続けられます。",18)
 	info.add_child(command("町へ戻り、再挑戦の準備","town"))
 	var log:=column(row,350,true)
 	section_heading(log,"最後の記録")
@@ -329,7 +330,7 @@ func smoke(quit_on_finish: bool = true) -> void:
 		await CampaignReplay.run(self); return
 	if resume_probe:
 		var original = JSON.parse_string(FileAccess.get_file_as_string(smoke_dir.path_join("ui-smoke.json")))
-		if not smoke_check(loaded.ok and campaign.first_done and campaign.revision==original.saved_revision and save_store.digest()==original.saved_sha256,"Separate EXE restart checkpoint"): return
+		if not smoke_check(loaded.ok and campaign.schema_version==2 and campaign.revision==original.saved_revision and save_store.digest()==original.saved_sha256,"Separate EXE restart checkpoint"): return
 		var f:=FileAccess.open(smoke_dir.path_join("resume-smoke.json"),FileAccess.WRITE)
 		f.store_string(JSON.stringify({"run_id":smoke_run_id,"restart_loaded":true,"revision":campaign.revision,"phase":campaign.phase,"save_sha256":save_store.digest()},"\t")); f.close()
 		get_tree().quit(); return
@@ -338,18 +339,19 @@ func smoke(quit_on_finish: bool = true) -> void:
 	var rendered:=DisplayServer.get_name()!="headless"
 	await click_control(new_button)
 	if is_instance_valid(confirm_button) and confirm_button.is_inside_tree(): await click_control(confirm_button)
-	if not smoke_check(campaign.phase=="explore" and not campaign.first_done,"New game enters first exploration"): return
-	if not smoke_check(play_buttons["return"].disabled,"First return disabled"): return
-	await click_control(play_buttons.descend)
+	auto_play=false; play_timer.stop()
+	if not smoke_check(campaign.floor==1 and campaign.story_deaths==0,"New game enters normal 1F"): return
 	if rendered: await capture("04-first-exploration.png")
-	await click_control(play_buttons.title)
-	await click_control(continue_button)
-	if not smoke_check(campaign.floor==1 and not campaign.first_done,"Continue initial exploration"): return
-	await click_control(play_buttons.descend)
-	if not smoke_check(campaign.phase=="result" and campaign.first_done,"First death saved"): return
-	if rendered: await capture("05-death-result.png")
 	await click_control(play_buttons.title); await click_control(continue_button)
-	if not smoke_check(campaign.phase=="result" and campaign.story_deaths==1,"Continue death result"): return
+	if not smoke_check(campaign.floor==1 and campaign.story_deaths==0,"Continue initial normal exploration"): return
+	while campaign.phase=="battle": perform("round",{},int(campaign.revision))
+	if campaign.phase=="event": perform("event",{"choice":"skip"},int(campaign.revision))
+	if not smoke_check(campaign.phase=="explore" and not play_buttons["return"].disabled,"First return enabled after encounter"): return
+	await click_control(play_buttons["return"])
+	if not smoke_check(campaign.result.kind=="return" and campaign.deaths==0,"Initial living return saved"): return
+	if rendered: await capture("05-first-return.png")
+	await click_control(play_buttons.title); await click_control(continue_button)
+	if not smoke_check(campaign.result.kind=="return","Continue initial return result"): return
 	await click_control(play_buttons.town)
 	if rendered: await capture("06-town.png")
 	var uid: String=campaign.inventory[0]
@@ -366,13 +368,13 @@ func smoke(quit_on_finish: bool = true) -> void:
 		if rendered: await capture("07-normal-battle.png")
 		while campaign.phase=="battle": perform("round",{},int(campaign.revision))
 	elif campaign.phase=="event": perform("event",{"choice":"skip"},int(campaign.revision))
-	if not smoke_check(campaign.phase=="explore" and campaign.first_done,"Normal first floor survived"): return
+	if not smoke_check(campaign.phase=="explore" and campaign.story_deaths==0,"Normal first floor survived"): return
 	if rendered: await capture("10-normal-victory.png")
 	await click_control(play_buttons["return"])
 	if rendered: await capture("08-return-result.png")
 	await click_control(play_buttons.town)
 	await click_control(play_buttons.depart)
-	if not smoke_check(campaign.story_deaths==1 and campaign.hp>0,"Retry does not repeat forced death"): return
+	if not smoke_check(campaign.story_deaths==0 and campaign.hp>0,"Retry does not repeat forced death"): return
 	# Proceed normally until a real death or 10F clear; no altered stats or forced outcomes.
 	var budget:=0
 	while campaign.phase!="result" and budget<600:
@@ -380,10 +382,25 @@ func smoke(quit_on_finish: bool = true) -> void:
 		elif campaign.phase=="battle": perform("round",{},int(campaign.revision))
 		elif campaign.phase=="event": perform("event",{"choice":"accept"},int(campaign.revision))
 		budget+=1
-	if not smoke_check(campaign.phase=="result" and campaign.result.kind=="death" and campaign.story_deaths==1,"Normal combat death independent of tutorial"): return
+	if not smoke_check(campaign.phase=="result" and campaign.result.kind=="death" and campaign.story_deaths==0,"Normal combat death independent of tutorial"): return
 	if rendered: await capture("09-normal-death.png")
 	await click_control(play_buttons.town)
 	await click_control(play_buttons.depart)
+	# A separate new profile verifies real HP0 on the very first ordinary expedition.
+	await click_control(play_buttons.title)
+	await click_control(new_button)
+	if is_instance_valid(confirm_button) and confirm_button.is_inside_tree(): await click_control(confirm_button)
+	auto_play=false; play_timer.stop(); budget=0
+	while campaign.phase!="result" and budget<600:
+		if campaign.phase=="explore": await click_control(play_buttons.descend)
+		elif campaign.phase=="battle": perform("round",{},int(campaign.revision))
+		elif campaign.phase=="event": perform("event",{"choice":"skip"},int(campaign.revision))
+		budget+=1
+	if not smoke_check(campaign.result.kind=="death" and campaign.hp==0 and campaign.trips==1 and campaign.deaths==1 and campaign.story_deaths==0,"First expedition dies only by normal HP0 combat"): return
+	if rendered: await capture("25-first-normal-death.png")
+	await click_control(play_buttons.title); await click_control(continue_button)
+	if not smoke_check(campaign.result.kind=="death" and campaign.deaths==1,"First normal death result survives restart to title"): return
+	await click_control(play_buttons.town); await click_control(play_buttons.depart)
 	# Leave a real, in-progress battle checkpoint for a separate EXE restart.
 	budget=0
 	while campaign.phase!="battle" and budget<10:

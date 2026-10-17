@@ -39,7 +39,6 @@ static func choose(s: Dictionary, cfg: Dictionary, policy: Dictionary) -> Dictio
 			var harmful: bool=ev.effect=="hp" and ev.amount<0
 			return {"action":"event","args":{"choice":"skip" if harmful and policy.skip_harmful_events else "accept"}}
 		"explore":
-			if not s.first_done: return {"action":"descend","args":{}}
 			var h:=E.hero(s,cfg)
 			var limit:=10
 			for row in policy.floor_limits:

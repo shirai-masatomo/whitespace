@@ -15,7 +15,7 @@ static func play(data: Dictionary, cfg: Dictionary, policy: Dictionary, seed_val
 	var actions: Array=[]
 	var floors: Dictionary={}
 	for floor_number in range(1,11): floors[str(floor_number)]={"entries":0,"deaths":0,"returns":0,"clears":0,"battles":0,"chests":0,"events":0,"enemies":{},"levels":{},"items":{}}
-	var trip: Dictionary={}
+	var trip: Dictionary={"trip":1,"start_level":1,"exp_start":s.exp,"gold_start":s.gold,"exp_earned":0,"gold_earned":0,"loot":{},"rounds":0,"hp_lost_in_combat":0,"floor_max":0}
 	var error:=""
 	var step_count:=0
 	var digest:=""
@@ -36,7 +36,7 @@ static func play(data: Dictionary, cfg: Dictionary, policy: Dictionary, seed_val
 		if trace: actions.append({"action":choice.action,"args":choice.args,"revision":s.revision,"phase":s.phase,"floor":s.floor,"state_sha256":state_hash(s)})
 		if choice.action=="depart":
 			trip={"trip":E.normal_trips(s),"start_level":E.hero(s,cfg).level,"exp_start":s.exp,"gold_start":s.gold,"exp_earned":0,"gold_earned":0,"loot":{},"rounds":0,"hp_lost_in_combat":0,"floor_max":0}
-		if before.first_done and choice.action=="descend":
+		if choice.action=="descend":
 			var f: Dictionary=floors[str(s.floor)]
 			f.entries+=1; trip.floor_max=s.floor
 			if s.floor==10: reached10=true
@@ -46,7 +46,7 @@ static func play(data: Dictionary, cfg: Dictionary, policy: Dictionary, seed_val
 				f.levels[str(s.battle.enemy_level)]=int(f.levels.get(str(s.battle.enemy_level),0))+1
 			elif s.phase=="event": f.events+=1
 			else: f.chests+=1
-		if before.first_done and not trip.is_empty():
+		if not trip.is_empty():
 			trip.exp_earned+=maxi(0,int(s.exp)-int(before.exp))
 			trip.gold_earned+=maxi(0,int(s.gold)-int(before.gold))
 			if choice.action=="round":
@@ -77,7 +77,7 @@ static func play(data: Dictionary, cfg: Dictionary, policy: Dictionary, seed_val
 			if not cfg.death_penalty.lose_inventory and s.items.size()<owned: error="permanent item loss"; break
 			highest_level=level; owned=s.items.size()
 	if step_count>=30000: error="action budget exhausted"
-	if story_count!=1 or s.story_deaths!=1: error="tutorial must occur exactly once"
+	if story_count!=0 or s.story_deaths!=0: error="new campaigns must never create a story death"
 	return {"seed":seed_value,"cleared":s.phase=="result" and s.result.kind=="clear","reached_10F":reached10,"normal_trips":records.size(),"normal_deaths":E.normal_deaths(s),"story_deaths":story_count,"level":E.hero(s,cfg).level,"exp":s.exp,"gold":s.gold,"items":s.items.size(),"highest_floor":s.highest_floor,"error":error,"state_sha256":state_hash(s),"trace_sha256":digest,"trips":records,"floors":floors,"actions":actions if trace else [],"final_state":s if trace else {}}
 
 static func run(data: Dictionary, cfg: Dictionary, policy: Dictionary, seeds: Array) -> Dictionary:
@@ -148,4 +148,4 @@ static func compare(before: Dictionary, after: Dictionary, strict: bool) -> Dict
 
 static func summary(r: Dictionary) -> String:
 	var m: Dictionary=r.metrics
-	return "通常探索 / %s / %d新規セーブ / 最大%d探索\n10F到達 %.2f%% / 突破 %.2f%%\n通常探索 %d回 / 通常死亡 %d回 (%.2f%%/探索) / 帰還%d / 打切り%d\n初回探索・死亡%d件は分母・分子から除外\n突破まで探索数 %s\n最終Lv %s\nEXP獲得 %.3f / Gold獲得 %.3f / 戦利品 %.3f (各通常探索平均)\n異常seed %s / 未突破seed %s\n" % [r.policy.policy_id,m.trials,r.policy.max_trips,m.reach_10F_rate*100,m.clear_rate*100,m.normal_trips,m.normal_deaths,m.death_rate_per_normal_trip*100,m.returns,m.draws,m.story_deaths_excluded,JSON.stringify(m.trips_to_clear),JSON.stringify(m.final_level),m.mean_exp_earned_per_trip,m.mean_gold_earned_per_trip,m.mean_loot_earned_per_trip,JSON.stringify(r.anomalies),JSON.stringify(r.nonclear_seeds)]
+	return "通常探索 / %s / %d新規セーブ / 最大%d探索\n10F到達 %.2f%% / 突破 %.2f%%\n通常探索 %d回 / 通常死亡 %d回 (%.2f%%/探索) / 帰還%d / 打切り%d\n初回から通常探索に算入（旧履歴死亡%d件のみ除外）\n突破まで探索数 %s\n最終Lv %s\nEXP獲得 %.3f / Gold獲得 %.3f / 戦利品 %.3f (各通常探索平均)\n異常seed %s / 未突破seed %s\n" % [r.policy.policy_id,m.trials,r.policy.max_trips,m.reach_10F_rate*100,m.clear_rate*100,m.normal_trips,m.normal_deaths,m.death_rate_per_normal_trip*100,m.returns,m.draws,m.story_deaths_excluded,JSON.stringify(m.trips_to_clear),JSON.stringify(m.final_level),m.mean_exp_earned_per_trip,m.mean_gold_earned_per_trip,m.mean_loot_earned_per_trip,JSON.stringify(r.anomalies),JSON.stringify(r.nonclear_seeds)]

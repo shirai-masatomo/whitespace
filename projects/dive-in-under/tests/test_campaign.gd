@@ -53,7 +53,7 @@ func _initialize() -> void:
 	var policy: Dictionary=JSON.parse_string(FileAccess.get_file_as_string("res://data/scenarios/campaign.json"))
 	var one:=Sim.play(data,cfg,policy,10000,true)
 	check(one.cleared and one.normal_trips>1 and one.highest_floor==11,"fresh normal campaign clears 10F")
-	check(one.story_deaths==1 and one.trips.size()==one.normal_trips,"tutorial excluded from normal trips")
+	check(one.story_deaths==0 and one.trips.size()==one.normal_trips,"first expedition included in normal trips")
 	var deaths:=0
 	for trip in one.trips: deaths+=int(trip.outcome=="death")
 	check(deaths==one.normal_deaths,"normal deaths derived from normal trip outcomes")

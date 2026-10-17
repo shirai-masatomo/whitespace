@@ -32,20 +32,24 @@ func _initialize() -> void:
 	var s:=E.fresh(cfg,123)
 	check(E.validate(s,data,cfg)=="","new save valid")
 	check(E.hero(s,cfg).max_hp==24 and s.equipment.size()==11,"provisional initial stats and 11 slots")
-	check(action(s,"return")==s and action(s,"town")==s,"no town or return during first exploration")
+	check(action(s,"return").result.kind=="return" and action(s,"town")==s,"initial return allowed; town requires result")
 	var before:=s.duplicate(true)
 	s=action(s,"descend")
-	check(before.floor==0 and s.floor==1,"pure transition")
+	check(before.floor==0 and s.floor==1,"pure normal 1F transition")
 	var resumed:=normalized(s)
-	check(action(resumed,"descend").result.kind=="story_death","quit during tutorial resumes guaranteed scenario death")
+	check(E.validate(resumed,data,cfg)=="","initial encounter checkpoint valid")
+	while s.phase=="battle": s=action(s,"round")
+	if s.phase=="event": s=action(s,"event",{"choice":"skip"})
 	var revision:=int(s.revision)
-	s=action(s,"descend")
-	check(s.first_done and s.story_deaths==1 and s.hp==0 and s.phase=="result","story flag committed at death, before acknowledgement")
+	s=action(s,"return")
+	check(s.story_deaths==0 and s.hp>0 and s.result.kind=="return","initial living return, no forced death")
 	check(E.act(s,"descend",revision,{},data,cfg)==s,"double click old revision ignored")
-	check(E.validate(normalized(s),data,cfg)=="","death-result checkpoint valid")
+	check(E.validate(normalized(s),data,cfg)=="","return-result checkpoint valid")
 	s=action(normalized(s),"town")
 	check(s.hp==E.hero(s,cfg).max_hp and s.sp==E.hero(s,cfg).max_sp,"town restores HP/SP")
 	check(action(s,"town")==s,"repeated acknowledgement ignored")
+	# Equipment unit fixture starts without encounter rewards.
+	s=action(action(E.fresh(cfg,123),"return"),"town")
 	var uid: String=s.inventory[0]
 	var count: int=s.items.size()
 	s=action(s,"equip",{"uid":uid})
@@ -69,13 +73,13 @@ func _initialize() -> void:
 	var state_town:=normalized(s)
 	for i in 15:
 		s=action(s,"depart"); s=action(s,"return"); s=action(s,"town")
-	check(s.first_done and s.story_deaths==1 and s.items==state_town.items,"repeated depart/return retains items and tutorial flag")
+	check(not s.first_done and s.story_deaths==0 and s.items==state_town.items,"repeated depart/return retains items and history flag")
 	E.gain_exp(s,12,cfg)
 	check(E.hero(s,cfg).level==2 and E.hero(s,cfg).atk==7,"minimal growth is applied once")
 	var level_two:=normalized(s)
 	s=action(s,"depart")
 	E.finish(s,"death","test normal death",cfg)
-	check(s.story_deaths==1 and s.result.loss.exp==0,"normal death never repeats story, default XP retained")
+	check(s.story_deaths==0 and s.result.loss.exp==0,"normal death never repeats story, default XP retained")
 	s=action(s,"town")
 	check(s.exp==level_two.exp and s.items==level_two.items and s.hp>0,"no irreversible depletion after normal death")
 	var alternate:=cfg.duplicate(true)
@@ -115,7 +119,7 @@ func _initialize() -> void:
 		var accepted:=action(event_state,"event",{"choice":"accept"})
 		match event_id:
 			"EV01": check(accepted.hp==9,"spring restores six HP")
-			"EV02": check(accepted.result.kind=="death" and accepted.story_deaths==1,"event death is normal death")
+			"EV02": check(accepted.result.kind=="death" and accepted.story_deaths==0,"event death is normal death")
 			"EV04": check(accepted.exp==4,"sign grants four EXP")
 			"EV05": check(accepted.items.size()==event_state.items.size()+1,"residue grants repair stone without durability system")
 	# High-level fixture covers the boss transition, not a normal-progression balance proof.
@@ -151,12 +155,13 @@ func _initialize() -> void:
 	check(store.read_one(path+".never-created").status=="missing","new profile without save")
 	check(store.load_game().ok,"existing save loaded")
 	var initial_checkpoint:=action(E.fresh(cfg,55),"descend")
-	var death_checkpoint:=action(initial_checkpoint,"descend")
-	check(E.normal_deaths(death_checkpoint)==0 and E.normal_trips(death_checkpoint)==0,"tutorial excluded from normal numerator and denominator")
+	var death_checkpoint:=E.fresh(cfg,55)
+	E.finish(death_checkpoint,"death","ordinary HP0 result fixture",cfg)
+	check(E.normal_deaths(death_checkpoint)==1 and E.normal_trips(death_checkpoint)==1,"first death counted as normal numerator and denominator")
 	var legacy_death:=normalized(death_checkpoint)
-	check(E.normal_deaths(legacy_death)==0 and E.validate(legacy_death,data,cfg)=="","legacy total-death save remains compatible")
-	legacy_death.deaths=0
-	check(E.validate(legacy_death,data,cfg)!="","invalid lifetime/story counters rejected")
+	check(E.normal_deaths(legacy_death)==1 and E.validate(legacy_death,data,cfg)=="","ordinary death checkpoint valid")
+	legacy_death.deaths=2
+	check(E.validate(legacy_death,data,cfg)!="","invalid lifetime counters rejected")
 	for checkpoint in [E.fresh(cfg,55),initial_checkpoint,death_checkpoint,state_town]:
 		check(store.write_game(checkpoint)=="","write each lifecycle checkpoint")
 		var reopened:=Store.new(path,data,cfg)
@@ -201,7 +206,7 @@ func _initialize() -> void:
 	var records: Array=[]
 	for seed_value in 100:
 		var campaign:=E.fresh(cfg,seed_value)
-		while not campaign.first_done: campaign=action(campaign,"descend")
+		campaign=action(campaign,"return")
 		campaign=action(campaign,"town")
 		var valid:=true
 		for trip in 12:
@@ -218,7 +223,7 @@ func _initialize() -> void:
 				budget+=1
 			valid=valid and budget<600 and E.validate(campaign,data,cfg)==""
 			campaign=action(normalized(campaign),"town")
-			valid=valid and campaign.hp>0 and campaign.story_deaths==1
+			valid=valid and campaign.hp>0 and campaign.story_deaths==0
 		check(valid,"12 repeated trips remain valid, seed %d" % seed_value)
 		records.append({"seed":seed_value,"trips":12,"level":E.hero(campaign,cfg).level,"normal_deaths":E.normal_deaths(campaign),"story_deaths":campaign.story_deaths,"lifetime_deaths":campaign.deaths,"items":campaign.items.size(),"highest_floor":campaign.highest_floor})
 	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path("res://artifacts"))

@@ -36,7 +36,7 @@ static func run(game: Control) -> void:
 	game.auto_play=false
 	if game.campaign_final_probe:
 		var prior=JSON.parse_string(FileAccess.get_file_as_string(game.smoke_dir.path_join("campaign-ui.json")))
-		if not game.smoke_check(prior is Dictionary and prior.complete and game.loaded.ok and prior.save_sha256==game.save_store.digest() and game.campaign.highest_floor==11 and game.campaign.story_deaths==1,"Third EXE retains clear/EXP/Gold/equipment/storage state"): return
+		if not game.smoke_check(prior is Dictionary and prior.complete and game.loaded.ok and prior.save_sha256==game.save_store.digest() and game.campaign.highest_floor==11 and game.campaign.story_deaths==0,"Third EXE retains clear/EXP/Gold/equipment/storage state"): return
 		var f:=FileAccess.open(game.smoke_dir.path_join("campaign-final.json"),FileAccess.WRITE)
 		f.store_string(JSON.stringify({"run_id":game.smoke_run_id,"final_restart":true,"save_sha256":game.save_store.digest(),"highest_floor":game.campaign.highest_floor,"story_deaths":game.campaign.story_deaths,"rendered":rendered},"\t")); f.close()
 		game.get_tree().quit(); return
@@ -50,7 +50,8 @@ static func run(game: Control) -> void:
 		await game.click_control(game.new_button)
 		if is_instance_valid(game.confirm_button) and game.confirm_button.is_inside_tree(): await game.click_control(game.confirm_button)
 		game.auto_play=false
-		if not game.smoke_check(game.campaign.seed==replay.seed and game.campaign.exp==0 and not game.campaign.first_done,"Fresh normal starting stats/seed"): return
+		if not game.smoke_check(game.campaign.seed==replay.seed and game.campaign.floor==1 and game.campaign.story_deaths==0 and hash_state(game.campaign)==replay.actions[0].state_sha256,"Fresh normal 1F matches shared first transition"): return
+		index=1
 	var screenshots: Dictionary={}
 	while index<replay.actions.size():
 		var expected: Dictionary=replay.actions[index]
@@ -66,9 +67,9 @@ static func run(game: Control) -> void:
 		index+=1
 		if rendered:
 			var name:=""
-			if not game.campaign.first_done and game.campaign.floor==1: name="12-campaign-first.png"
+			if game.campaign.trips==1 and game.campaign.floor==1: name="12-campaign-first.png"
 			elif game.campaign.phase=="town": name="14-campaign-town.png"
-			elif game.campaign.phase=="result" and game.campaign.result.kind=="story_death": name="13-campaign-first-death.png"
+			elif game.campaign.phase=="result" and game.campaign.result.kind=="return": name="13-campaign-return.png"
 			elif game.campaign.phase=="result" and game.campaign.result.kind=="death": name="15-campaign-normal-death.png"
 			elif game.campaign.phase=="battle" and game.campaign.floor==10: name="16-campaign-boss.png"
 			elif game.campaign.phase=="result" and game.campaign.result.kind=="clear": name="17-campaign-clear.png"

@@ -38,6 +38,7 @@ try {
         Run-Godot 'tests' @('--script','tests/test_combat.gd')
         Run-Godot 'loop-tests' @('--script','tests/test_expedition.gd')
         Run-Godot 'campaign-tests' @('--script','tests/test_campaign.gd')
+        Run-Godot 'first-expedition-tests' @('--script','tests/test_first_expedition.gd')
         Run-Godot 'ui-headless' @('--',"--smoke-dir=$artifacts","--smoke-run-id=$([guid]::NewGuid().ToString('N'))")
     }
     if ($Task -in @('simulate','verify')) {

@@ -6,8 +6,8 @@ const STATS = ["max_hp","atk","def","spd","max_sp"]
 const SLOTS = ["right_hand","left_hand","head","body","legs","feet","neck","ears","eyes","finger","wrist"]
 
 static func load_config(version: String="") -> Dictionary:
-	if not version in ["","2026-10-17.loop-provisional.1","2026-10-17.loop-provisional.2"]: return {}
-	var filename: String="expedition-legacy.json" if version=="2026-10-17.loop-provisional.1" else "expedition.json"
+	if not version in ["","2026-10-17.loop-provisional.1","2026-10-17.loop-provisional.2","2026-10-17.loop-provisional.3"]: return {}
+	var filename: String="expedition-legacy.json" if version=="2026-10-17.loop-provisional.1" else ("expedition-legacy-2.json" if version=="2026-10-17.loop-provisional.2" else "expedition.json")
 	var value = JSON.parse_string(FileAccess.get_file_as_string("res://data/v1/"+filename))
 	if not value is Dictionary: return {}
 	var problem:=validate_config(value,Catalog.load_data())
@@ -15,7 +15,7 @@ static func load_config(version: String="") -> Dictionary:
 	return value
 
 static func validate_config(c: Dictionary, data: Dictionary) -> String:
-	for key in ["initial","growth","tutorial","death_penalty","slots","items","drops","events"]:
+	for key in ["initial","growth","death_penalty","slots","items","drops","events"]:
 		if not c.get(key) is Dictionary: return "Invalid loop config: "+key
 	if c.get("schema_version")!=1 or not c.get("config_version") is String or c.config_version=="": return "Invalid config version"
 	if c.slots.size()!=11: return "Config must contain 11 slots"
@@ -25,7 +25,7 @@ static func validate_config(c: Dictionary, data: Dictionary) -> String:
 		if not integer(c.initial.get(key),0,10000) or not integer(c.growth.get(key),0,1000): return "Invalid initial/growth stat"
 	if c.initial.max_hp<1 or c.initial.atk<1 or c.initial.spd<1 or not integer(c.initial.get("gold"),0,1000000): return "Invalid initial bounds"
 	if not integer(c.growth.get("exp_step"),1,1000000) or not integer(c.growth.get("level_cap"),1,100): return "Invalid growth bounds"
-	if not integer(c.tutorial.get("death_floor"),1,10) or not c.tutorial.get("reason") is String or not c.tutorial.get("intro") is String: return "Invalid tutorial"
+	if not c.get("intro",c.get("tutorial",{}).get("intro")) is String: return "Invalid introduction"
 	for key in ["gold_fraction","unspent_exp_fraction"]:
 		if not Catalog.numeric(c.death_penalty.get(key)) or c.death_penalty[key]<0 or c.death_penalty[key]>1: return "Invalid death penalty"
 	if not c.death_penalty.get("lose_inventory") is bool: return "Invalid item-loss flag"
@@ -68,11 +68,11 @@ static func validate_config(c: Dictionary, data: Dictionary) -> String:
 	return ""
 
 static func fresh(cfg: Dictionary, seed_value: int) -> Dictionary:
-	var s := {"schema_version":1,"config_version":cfg.config_version,"revision":0,"seed":seed_value,
+	var s := {"schema_version":2,"config_version":cfg.config_version,"revision":0,"seed":seed_value,
 		"rng":{"explore":0,"battle":0,"loot":0},"phase":"explore","first_done":false,"story_deaths":0,
 		"floor":0,"highest_floor":0,"exp":0,"gold":int(cfg.initial.gold),"hp":int(cfg.initial.max_hp),
 		"sp":int(cfg.initial.max_sp),"items":{},"inventory":[],"warehouse":[],"equipment":{},"next_item":1,
-		"battle":{},"event":"","result":{},"journal":[cfg.tutorial.intro],"trips":1,"deaths":0}
+		"battle":{},"event":"","result":{},"journal":[cfg.get("intro","主人公ひとりで地下へ踏み出した。探索の解決後は町へ帰還できる。")],"trips":1,"deaths":0}
 	for slot in SLOTS: s.equipment[slot] = ""
 	for id in cfg.initial.items: add_item(s,id)
 	return s
@@ -90,7 +90,7 @@ static func normal_deaths(s: Dictionary) -> int:
 	return int(s.deaths)-int(s.story_deaths)
 
 static func normal_trips(s: Dictionary) -> int:
-	return int(s.trips)-1
+	return int(s.trips)-(1 if s.schema_version==1 else int(s.story_deaths))
 
 static func hero(s: Dictionary, cfg: Dictionary) -> Dictionary:
 	var level: int = level_info(s,cfg).level
@@ -147,21 +147,18 @@ static func gain_exp(s: Dictionary, amount: int, cfg: Dictionary) -> void:
 
 static func finish(s: Dictionary, kind: String, reason: String, cfg: Dictionary) -> void:
 	var loss := {"gold":0,"exp":0,"items":0}
-	if kind in ["death","story_death"]:
-		s.hp = 0
-		s.deaths += 1
-		if kind == "story_death":
-			s.first_done = true
-			s.story_deaths = 1
-		else:
-			loss.gold = floori(s.gold * cfg.death_penalty.gold_fraction)
-			loss.exp = floori(level_info(s,cfg).progress * cfg.death_penalty.unspent_exp_fraction)
-			s.gold -= loss.gold
-			s.exp -= loss.exp
-			if cfg.death_penalty.lose_inventory:
-				loss.items = s.inventory.size()
-				for uid in s.inventory: s.items.erase(uid)
-				s.inventory.clear()
+	if kind=="story_death": return # Legacy history is read-only; never create a new forced death.
+	if kind=="death":
+		s.hp=0
+		s.deaths+=1
+		loss.gold = floori(s.gold * cfg.death_penalty.gold_fraction)
+		loss.exp = floori(level_info(s,cfg).progress * cfg.death_penalty.unspent_exp_fraction)
+		s.gold -= loss.gold
+		s.exp -= loss.exp
+		if cfg.death_penalty.lose_inventory:
+			loss.items = s.inventory.size()
+			for uid in s.inventory: s.items.erase(uid)
+			s.inventory.clear()
 	s.result = {"kind":kind,"reason":reason,"floor":int(s.floor),"loss":loss}
 	s.phase = "result"
 	s.battle = {}
@@ -206,10 +203,6 @@ static func descend(s: Dictionary, data: Dictionary, cfg: Dictionary) -> void:
 	s.last_outcome=""
 	s.floor += 1
 	s.highest_floor = maxi(int(s.floor),int(s.highest_floor))
-	if not s.first_done:
-		if s.floor >= cfg.tutorial.death_floor: finish(s,"story_death",cfg.tutorial.reason,cfg)
-		else: note(s,"地下%dF。静かな通路がさらに奥へ続いている。" % s.floor)
-		return
 	var row := floor_row(data.floors,int(s.floor))
 	var roll := draw(s,"explore",100)
 	if roll < row.encounters[0]:
@@ -240,7 +233,7 @@ static func act(previous: Dictionary, action: String, expected_revision: int, ar
 		"round":
 			if s.phase=="battle": step_battle(s,data,cfg); changed=true
 		"return":
-			if s.phase=="explore" and s.first_done:
+			if s.phase=="explore":
 				finish(s,"return","持ち帰った品を抱え、町への道を戻った。",cfg); changed=true
 		"event":
 			if s.phase=="event" and args.get("choice","") in ["accept","skip"]:
@@ -259,7 +252,7 @@ static func act(previous: Dictionary, action: String, expected_revision: int, ar
 				var h := hero(s,cfg)
 				s.hp=h.max_hp; s.sp=h.max_sp; changed=true
 		"depart":
-			if s.phase=="town" and s.first_done:
+			if s.phase=="town":
 				s.last_outcome=""
 				s.phase="explore"; s.floor=0; s.result={}; s.journal=[]; s.trips+=1
 				note(s,"町でHP/SPを回復し、地下へ向かった。"); changed=true
@@ -291,10 +284,10 @@ static func integer(v: Variant, low: int, high: int) -> bool:
 static func validate(s: Dictionary, data: Dictionary, cfg: Dictionary) -> String:
 	for key in ["schema_version","config_version","revision","seed","rng","phase","first_done","story_deaths","floor","highest_floor","exp","gold","hp","sp","items","inventory","warehouse","equipment","next_item","battle","event","result","journal","trips","deaths"]:
 		if not s.has(key): return "Missing save field: "+key
-	if s.schema_version!=1 or s.config_version!=cfg.config_version: return "Unsupported save/config version"
+	if (s.schema_version!=1 and s.schema_version!=2) or s.config_version!=cfg.config_version: return "Unsupported save/config version"
 	for key in ["revision","seed","story_deaths","floor","highest_floor","exp","gold","hp","sp","next_item","trips","deaths"]:
 		if not integer(s[key],0,2147483647): return "Invalid number: "+key
-	if not s.first_done is bool or s.story_deaths>1 or s.first_done!=(s.story_deaths==1): return "Invalid tutorial state"
+	if not s.first_done is bool or s.story_deaths>1 or s.first_done!=(s.story_deaths==1): return "Invalid legacy history flags"
 	if s.deaths<s.story_deaths or normal_deaths(s)>normal_trips(s): return "Invalid death counters"
 	if s.floor>10 or s.highest_floor>11 or s.floor>s.highest_floor or s.next_item<1 or s.trips<1: return "Invalid progression"
 	if not s.phase in ["explore","battle","event","result","town"]: return "Unknown phase"
@@ -329,13 +322,13 @@ static func validate(s: Dictionary, data: Dictionary, cfg: Dictionary) -> String
 	var h := hero(s,cfg)
 	if s.hp>h.max_hp or s.sp>h.max_sp: return "HP/SP out of range"
 	if s.phase!="result" and s.hp==0: return "Dead hero outside result"
-	if s.phase=="town" and (not s.first_done or s.floor!=0 or s.hp!=h.max_hp or s.sp!=h.max_sp): return "Invalid town"
+	if s.phase=="town" and (s.floor!=0 or s.hp!=h.max_hp or s.sp!=h.max_sp): return "Invalid town"
 	if s.phase=="event":
-		if not s.first_done or not cfg.events.has(s.event) or s.floor<1 or s.floor>9: return "Invalid event"
+		if not cfg.events.has(s.event) or s.floor<1 or s.floor>9: return "Invalid event"
 	elif s.event!="": return "Event outside event phase"
 	if s.phase=="battle":
 		var b: Dictionary=s.battle
-		if not s.first_done or s.floor<1: return "Invalid battle phase"
+		if s.floor<1: return "Invalid battle phase"
 		for key in ["enemy_id","enemy_level","seed","hero","rounds"]:
 			if not b.has(key): return "Missing battle field"
 		if not b.enemy_id is String or not data.enemies.has(b.enemy_id) or not integer(b.enemy_level,1,100) or not integer(b.seed,0,2147483647) or not integer(b.rounds,0,49) or not b.hero is Dictionary: return "Invalid battle input"
@@ -353,5 +346,16 @@ static func validate(s: Dictionary, data: Dictionary, cfg: Dictionary) -> String
 		for key in ["gold","exp","items"]:
 			if not integer(s.result.loss.get(key),0,2147483647): return "Invalid result loss"
 		if s.result.kind in ["story_death","death"] and s.hp!=0: return "Death result with positive HP"
-	if not s.first_done and (s.phase!="explore" or s.floor>=cfg.tutorial.death_floor): return "Tutorial skipped"
+	if s.schema_version==1 and not s.first_done and (s.phase!="explore" or s.floor>=cfg.get("tutorial",{}).get("death_floor",2)): return "Invalid legacy introduction"
+	if s.phase=="result" and s.result.kind=="story_death" and s.story_deaths!=1: return "Invalid legacy death history"
 	return ""
+
+static func migrate(s: Dictionary) -> Dictionary:
+	# Called only after validating the old schema/config. Preserve possessions and counters.
+	if s.schema_version!=1: return s
+	var migrated:=s.duplicate(true)
+	migrated.schema_version=2
+	note(migrated,"旧セーブを引き継いだ。初回制限はなく、探索の解決後は町へ帰還できる。")
+	if migrated.phase=="result" and migrated.result.kind=="story_death":
+		migrated.result.reason="旧版で記録された導入イベントの結果です。町へ戻り、通常探索を続けられます。"
+	return migrated
