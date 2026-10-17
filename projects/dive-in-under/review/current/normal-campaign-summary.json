@@ -1,0 +1,604 @@
+{
+  "metadata": {
+    "combat_sha256": "d823ae3565a6c60d7381d50d540dd9ef76b10cc6304648bc00749acb2fc43487",
+    "config_sha256": "83835216a3a3cdf63464e1c98ced1c170ed5271c7ca407b21206586beb7c0cbd",
+    "config_version": "2026-10-17.loop-provisional.3",
+    "data_sha256": "603a6c581be3893664bf4d8c466c661635095470c6cd8b8fe39c68a42a60f357",
+    "data_version": "2026-10-17.foundation.1",
+    "engine": "4.7.2-stable (official)",
+    "expedition_sha256": "5e499d673d7d1a3cdf0f67e1a477325151773a938698ef576ec741bcc54be672",
+    "game_commit": "4492fb30b3bdd8074f58bbb9f820a37fd59ef4d0",
+    "policy_code_sha256": "9d5690e66531d714016d0ee16c340e006dcf367712d19d57e6377a8d191f3903",
+    "policy_sha256": "16b08c7109dd5c70b345371b18af622e1ad5e23d0863938f52565c2f3a15c170",
+    "runner_contract": "campaign-v1"
+  },
+  "metrics": {
+    "clear_rate": 1.0,
+    "clears": 1000,
+    "death_rate_per_normal_trip": 0.0845136552155881,
+    "draws": 0,
+    "exp_earned": 633722,
+    "final_exp": {
+      "count": 1000,
+      "max": 1084,
+      "mean": 633.722,
+      "median": 628.0,
+      "min": 311,
+      "p10": 486,
+      "p90": 785
+    },
+    "final_gold": {
+      "count": 1000,
+      "max": 825,
+      "mean": 473.22,
+      "median": 466.0,
+      "min": 238,
+      "p10": 366,
+      "p90": 586
+    },
+    "final_items": {
+      "count": 1000,
+      "max": 48,
+      "mean": 28.091,
+      "median": 28.0,
+      "min": 13,
+      "p10": 21,
+      "p90": 35
+    },
+    "final_level": {
+      "count": 1000,
+      "max": 13,
+      "mean": 10.215,
+      "median": 10.0,
+      "min": 7,
+      "p10": 9,
+      "p90": 11
+    },
+    "gold_earned": 499818,
+    "invalid_results": 0,
+    "loot_earned": 27091,
+    "mean_exp_earned_per_trip": 49.590891306049,
+    "mean_gold_earned_per_trip": 39.1124501134674,
+    "mean_loot_earned_per_trip": 2.11996243837546,
+    "normal_deaths": 1080,
+    "normal_trips": 12779,
+    "reach_10F_rate": 1.0,
+    "reached_10F": 1000,
+    "remaining_hp_per_trip": {
+      "count": 12779,
+      "max": 58,
+      "mean": 20.6064637295563,
+      "median": 20.0,
+      "min": 0,
+      "p10": 3,
+      "p90": 37
+    },
+    "returns": 10699,
+    "rounds_per_trip": {
+      "count": 12779,
+      "max": 24,
+      "mean": 11.5241411691056,
+      "median": 12.0,
+      "min": 0,
+      "p10": 4,
+      "p90": 17
+    },
+    "story_deaths_excluded": 0,
+    "trials": 1000,
+    "trips_to_clear": {
+      "count": 1000,
+      "max": 19,
+      "mean": 12.779,
+      "median": 13.0,
+      "min": 8,
+      "p10": 11,
+      "p90": 15
+    }
+  },
+  "floors": {
+    "1": {
+      "battles": 8899,
+      "chests": 2623,
+      "clears": 0,
+      "death_rate_per_entry": 0.0,
+      "deaths": 0,
+      "enemies": {
+        "E01": 6216,
+        "E02": 2683
+      },
+      "entries": 12779,
+      "events": 1257,
+      "items": {
+        "I01": 1928,
+        "I02": 931,
+        "I04": 905,
+        "I10": 185
+      },
+      "levels": {
+        "1": 8899
+      },
+      "return_rate_per_entry": 0.0,
+      "returns": 0,
+      "seed_reach_rate": 1.0,
+      "seed_reached": 1000
+    },
+    "10": {
+      "battles": 1863,
+      "chests": 0,
+      "clears": 1000,
+      "death_rate_per_entry": 0.463231347289318,
+      "deaths": 863,
+      "enemies": {
+        "B10": 1863
+      },
+      "entries": 1863,
+      "events": 0,
+      "items": {
+        "I10": 493,
+        "I11": 352
+      },
+      "levels": {
+        "6": 1863
+      },
+      "return_rate_per_entry": 0.0,
+      "returns": 0,
+      "seed_reach_rate": 1.0,
+      "seed_reached": 1000
+    },
+    "2": {
+      "battles": 8965,
+      "chests": 2544,
+      "clears": 0,
+      "death_rate_per_entry": 0.0,
+      "deaths": 0,
+      "enemies": {
+        "E01": 5411,
+        "E02": 3554
+      },
+      "entries": 12779,
+      "events": 1270,
+      "items": {
+        "I01": 1490,
+        "I04": 1133,
+        "I10": 1228
+      },
+      "levels": {
+        "1": 4448,
+        "2": 4517
+      },
+      "return_rate_per_entry": 0.000234760153376634,
+      "returns": 3,
+      "seed_reach_rate": 1.0,
+      "seed_reached": 1000
+    },
+    "3": {
+      "battles": 8908,
+      "chests": 2587,
+      "clears": 0,
+      "death_rate_per_entry": 0.00140889167188478,
+      "deaths": 18,
+      "enemies": {
+        "E01": 3066,
+        "E02": 3148,
+        "E03": 2694
+      },
+      "entries": 12776,
+      "events": 1281,
+      "items": {
+        "I01": 1197,
+        "I04": 1314,
+        "I08": 87,
+        "I10": 1262
+      },
+      "levels": {
+        "2": 4443,
+        "3": 4465
+      },
+      "return_rate_per_entry": 0.205932999373826,
+      "returns": 2631,
+      "seed_reach_rate": 1.0,
+      "seed_reached": 1000
+    },
+    "4": {
+      "battles": 7557,
+      "chests": 1512,
+      "clears": 0,
+      "death_rate_per_entry": 0.000493729633652612,
+      "deaths": 5,
+      "enemies": {
+        "E02": 2657,
+        "E03": 2659,
+        "E04": 2241
+      },
+      "entries": 10127,
+      "events": 1058,
+      "items": {
+        "I01": 163,
+        "I03": 404,
+        "I04": 242,
+        "I05": 709,
+        "I06": 481,
+        "I08": 68,
+        "I10": 609
+      },
+      "levels": {
+        "2": 2583,
+        "3": 2454,
+        "4": 2520
+      },
+      "return_rate_per_entry": 0.0191567097857213,
+      "returns": 194,
+      "seed_reach_rate": 1.0,
+      "seed_reached": 1000
+    },
+    "5": {
+      "battles": 7438,
+      "chests": 1498,
+      "clears": 0,
+      "death_rate_per_entry": 0.000705076551168413,
+      "deaths": 7,
+      "enemies": {
+        "E02": 2642,
+        "E03": 2521,
+        "E04": 2275
+      },
+      "entries": 9928,
+      "events": 992,
+      "items": {
+        "I01": 171,
+        "I03": 392,
+        "I04": 230,
+        "I05": 677,
+        "I06": 498,
+        "I08": 95,
+        "I10": 666
+      },
+      "levels": {
+        "2": 2460,
+        "3": 2548,
+        "4": 2430
+      },
+      "return_rate_per_entry": 0.0407937147461724,
+      "returns": 405,
+      "seed_reach_rate": 1.0,
+      "seed_reached": 1000
+    },
+    "6": {
+      "battles": 7087,
+      "chests": 1423,
+      "clears": 0,
+      "death_rate_per_entry": 0.000525430853299706,
+      "deaths": 5,
+      "enemies": {
+        "E02": 2482,
+        "E03": 2435,
+        "E04": 2170
+      },
+      "entries": 9516,
+      "events": 1006,
+      "items": {
+        "I01": 152,
+        "I03": 350,
+        "I04": 245,
+        "I05": 686,
+        "I06": 453,
+        "I08": 59,
+        "I10": 616
+      },
+      "levels": {
+        "2": 2400,
+        "3": 2364,
+        "4": 2323
+      },
+      "return_rate_per_entry": 0.218894493484657,
+      "returns": 2083,
+      "seed_reach_rate": 1.0,
+      "seed_reached": 1000
+    },
+    "7": {
+      "battles": 5943,
+      "chests": 733,
+      "clears": 0,
+      "death_rate_per_entry": 0.00807754442649435,
+      "deaths": 60,
+      "enemies": {
+        "E03": 1447,
+        "E04": 2392,
+        "E05": 2104
+      },
+      "entries": 7428,
+      "events": 752,
+      "items": {
+        "I04": 133,
+        "I05": 278,
+        "I06": 579,
+        "I07": 293,
+        "I08": 157,
+        "I09": 90,
+        "I10": 895,
+        "I11": 28
+      },
+      "levels": {
+        "4": 2015,
+        "5": 1956,
+        "6": 1972
+      },
+      "return_rate_per_entry": 0.0971997845988153,
+      "returns": 722,
+      "seed_reach_rate": 1.0,
+      "seed_reached": 1000
+    },
+    "8": {
+      "battles": 5360,
+      "chests": 648,
+      "clears": 0,
+      "death_rate_per_entry": 0.00647005717724947,
+      "deaths": 43,
+      "enemies": {
+        "E03": 1336,
+        "E04": 2099,
+        "E05": 1925
+      },
+      "entries": 6646,
+      "events": 638,
+      "items": {
+        "I04": 113,
+        "I05": 265,
+        "I06": 490,
+        "I07": 250,
+        "I08": 130,
+        "I09": 68,
+        "I10": 793,
+        "I11": 32
+      },
+      "levels": {
+        "4": 1808,
+        "5": 1776,
+        "6": 1776
+      },
+      "return_rate_per_entry": 0.136473066506169,
+      "returns": 907,
+      "seed_reach_rate": 1.0,
+      "seed_reached": 1000
+    },
+    "9": {
+      "battles": 4556,
+      "chests": 554,
+      "clears": 0,
+      "death_rate_per_entry": 0.0138693820224719,
+      "deaths": 79,
+      "enemies": {
+        "E04": 2009,
+        "E05": 2547
+      },
+      "entries": 5696,
+      "events": 586,
+      "items": {
+        "I05": 240,
+        "I06": 464,
+        "I07": 232,
+        "I08": 80,
+        "I09": 94,
+        "I10": 786,
+        "I11": 130
+      },
+      "levels": {
+        "5": 1569,
+        "6": 1482,
+        "7": 1505
+      },
+      "return_rate_per_entry": 0.659058988764045,
+      "returns": 3754,
+      "seed_reach_rate": 1.0,
+      "seed_reached": 1000
+    }
+  },
+  "anomalies": [],
+  "nonclear_seeds": [],
+  "strict_repeat": {
+    "after": {
+      "combat_sha256": "d823ae3565a6c60d7381d50d540dd9ef76b10cc6304648bc00749acb2fc43487",
+      "config_sha256": "83835216a3a3cdf63464e1c98ced1c170ed5271c7ca407b21206586beb7c0cbd",
+      "config_version": "2026-10-17.loop-provisional.3",
+      "data_sha256": "603a6c581be3893664bf4d8c466c661635095470c6cd8b8fe39c68a42a60f357",
+      "data_version": "2026-10-17.foundation.1",
+      "engine": "4.7.2-stable (official)",
+      "expedition_sha256": "5e499d673d7d1a3cdf0f67e1a477325151773a938698ef576ec741bcc54be672",
+      "game_commit": "4492fb30b3bdd8074f58bbb9f820a37fd59ef4d0",
+      "policy_code_sha256": "9d5690e66531d714016d0ee16c340e006dcf367712d19d57e6377a8d191f3903",
+      "policy_sha256": "16b08c7109dd5c70b345371b18af622e1ad5e23d0863938f52565c2f3a15c170",
+      "runner_contract": "campaign-v1"
+    },
+    "after_metrics": {
+      "clear_rate": 1.0,
+      "clears": 1000.0,
+      "death_rate_per_normal_trip": 0.0845136552155881,
+      "draws": 0.0,
+      "exp_earned": 633722.0,
+      "final_exp": {
+        "count": 1000.0,
+        "max": 1084.0,
+        "mean": 633.722,
+        "median": 628.0,
+        "min": 311.0,
+        "p10": 486.0,
+        "p90": 785.0
+      },
+      "final_gold": {
+        "count": 1000.0,
+        "max": 825.0,
+        "mean": 473.22,
+        "median": 466.0,
+        "min": 238.0,
+        "p10": 366.0,
+        "p90": 586.0
+      },
+      "final_items": {
+        "count": 1000.0,
+        "max": 48.0,
+        "mean": 28.091,
+        "median": 28.0,
+        "min": 13.0,
+        "p10": 21.0,
+        "p90": 35.0
+      },
+      "final_level": {
+        "count": 1000.0,
+        "max": 13.0,
+        "mean": 10.215,
+        "median": 10.0,
+        "min": 7.0,
+        "p10": 9.0,
+        "p90": 11.0
+      },
+      "gold_earned": 499818.0,
+      "invalid_results": 0.0,
+      "loot_earned": 27091.0,
+      "mean_exp_earned_per_trip": 49.590891306049,
+      "mean_gold_earned_per_trip": 39.1124501134674,
+      "mean_loot_earned_per_trip": 2.11996243837546,
+      "normal_deaths": 1080.0,
+      "normal_trips": 12779.0,
+      "reach_10F_rate": 1.0,
+      "reached_10F": 1000.0,
+      "remaining_hp_per_trip": {
+        "count": 12779.0,
+        "max": 58.0,
+        "mean": 20.6064637295563,
+        "median": 20.0,
+        "min": 0.0,
+        "p10": 3.0,
+        "p90": 37.0
+      },
+      "returns": 10699.0,
+      "rounds_per_trip": {
+        "count": 12779.0,
+        "max": 24.0,
+        "mean": 11.5241411691056,
+        "median": 12.0,
+        "min": 0.0,
+        "p10": 4.0,
+        "p90": 17.0
+      },
+      "story_deaths_excluded": 0.0,
+      "trials": 1000.0,
+      "trips_to_clear": {
+        "count": 1000.0,
+        "max": 19.0,
+        "mean": 12.779,
+        "median": 13.0,
+        "min": 8.0,
+        "p10": 11.0,
+        "p90": 15.0
+      }
+    },
+    "before": {
+      "combat_sha256": "d823ae3565a6c60d7381d50d540dd9ef76b10cc6304648bc00749acb2fc43487",
+      "config_sha256": "83835216a3a3cdf63464e1c98ced1c170ed5271c7ca407b21206586beb7c0cbd",
+      "config_version": "2026-10-17.loop-provisional.3",
+      "data_sha256": "603a6c581be3893664bf4d8c466c661635095470c6cd8b8fe39c68a42a60f357",
+      "data_version": "2026-10-17.foundation.1",
+      "engine": "4.7.2-stable (official)",
+      "expedition_sha256": "5e499d673d7d1a3cdf0f67e1a477325151773a938698ef576ec741bcc54be672",
+      "game_commit": "4492fb30b3bdd8074f58bbb9f820a37fd59ef4d0",
+      "policy_code_sha256": "9d5690e66531d714016d0ee16c340e006dcf367712d19d57e6377a8d191f3903",
+      "policy_sha256": "16b08c7109dd5c70b345371b18af622e1ad5e23d0863938f52565c2f3a15c170",
+      "runner_contract": "campaign-v1"
+    },
+    "before_metrics": {
+      "clear_rate": 1.0,
+      "clears": 1000.0,
+      "death_rate_per_normal_trip": 0.0845136552155881,
+      "draws": 0.0,
+      "exp_earned": 633722.0,
+      "final_exp": {
+        "count": 1000.0,
+        "max": 1084.0,
+        "mean": 633.722,
+        "median": 628.0,
+        "min": 311.0,
+        "p10": 486.0,
+        "p90": 785.0
+      },
+      "final_gold": {
+        "count": 1000.0,
+        "max": 825.0,
+        "mean": 473.22,
+        "median": 466.0,
+        "min": 238.0,
+        "p10": 366.0,
+        "p90": 586.0
+      },
+      "final_items": {
+        "count": 1000.0,
+        "max": 48.0,
+        "mean": 28.091,
+        "median": 28.0,
+        "min": 13.0,
+        "p10": 21.0,
+        "p90": 35.0
+      },
+      "final_level": {
+        "count": 1000.0,
+        "max": 13.0,
+        "mean": 10.215,
+        "median": 10.0,
+        "min": 7.0,
+        "p10": 9.0,
+        "p90": 11.0
+      },
+      "gold_earned": 499818.0,
+      "invalid_results": 0.0,
+      "loot_earned": 27091.0,
+      "mean_exp_earned_per_trip": 49.590891306049,
+      "mean_gold_earned_per_trip": 39.1124501134674,
+      "mean_loot_earned_per_trip": 2.11996243837546,
+      "normal_deaths": 1080.0,
+      "normal_trips": 12779.0,
+      "reach_10F_rate": 1.0,
+      "reached_10F": 1000.0,
+      "remaining_hp_per_trip": {
+        "count": 12779.0,
+        "max": 58.0,
+        "mean": 20.6064637295563,
+        "median": 20.0,
+        "min": 0.0,
+        "p10": 3.0,
+        "p90": 37.0
+      },
+      "returns": 10699.0,
+      "rounds_per_trip": {
+        "count": 12779.0,
+        "max": 24.0,
+        "mean": 11.5241411691056,
+        "median": 12.0,
+        "min": 0.0,
+        "p10": 4.0,
+        "p90": 17.0
+      },
+      "story_deaths_excluded": 0.0,
+      "trials": 1000.0,
+      "trips_to_clear": {
+        "count": 1000.0,
+        "max": 19.0,
+        "mean": 12.779,
+        "median": 13.0,
+        "min": 8.0,
+        "p10": 11.0,
+        "p90": 15.0
+      }
+    },
+    "delta": {
+      "clear_rate": 0.0,
+      "death_rate_per_normal_trip": 0.0,
+      "exp_earned": 0.0,
+      "gold_earned": 0.0,
+      "loot_earned": 0.0,
+      "normal_trips": 0.0,
+      "reach_10F_rate": 0.0
+    },
+    "strict": true,
+    "strict_equal": true
+  },
+  "source_hashes_match_release": "e7c63c65a47712f39702531009a8b2d3d5e7a93a"
+}

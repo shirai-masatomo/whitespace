@@ -1,0 +1,72 @@
+{
+	"run_id": "47ac4bd7e73b40b9a0b3d0ac9c37f512",
+	"screenshot": "19-candidate-goblin.png",
+	"stages": [
+		{
+			"actors": [
+				{
+					"adoption": "adopted-current-baseline",
+					"body_region": "[P: (0.0, 22.0), S: (1234.0, 1232.0)]",
+					"candidate_loaded": true,
+					"foot": [
+						416.0,
+						236.0
+					],
+					"id": "hero",
+					"static_hover_px": 0.0,
+					"top_left": [
+						330.285705566406,
+						86.9375
+					],
+					"visible_size": [
+						165.267852783203,
+						165.0
+					],
+					"within_stage": true
+				},
+				{
+					"adoption": "adopted-current-baseline",
+					"body_region": "[P: (0.0, 47.0), S: (1240.0, 1207.0)]",
+					"candidate_loaded": true,
+					"foot": [
+						171.0,
+						208.0
+					],
+					"id": "E04",
+					"static_hover_px": 0.0,
+					"top_left": [
+						105.465614318848,
+						79.3670196533203
+					],
+					"visible_size": [
+						143.827667236328,
+						140.0
+					],
+					"within_stage": true
+				}
+			],
+			"adoption": "nine-assets-current-baseline",
+			"aspect": "preserved",
+			"background": "cavern",
+			"background_loaded": true,
+			"background_zoom": 1.04,
+			"composition": "offset-only-reference-camera-unresolved",
+			"depth": 4,
+			"far_enemy_foot": [
+				171.0,
+				208.0
+			],
+			"filter": "nearest",
+			"formation_rules": false,
+			"near_hero_foot": [
+				416.0,
+				236.0
+			],
+			"stage_size": [
+				612.0,
+				270.0
+			],
+			"static_only": true
+		}
+	]
+}

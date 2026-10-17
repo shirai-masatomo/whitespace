@@ -1,0 +1,4029 @@
+{
+	"anomalies": [],
+	"floors": {
+		"1": {
+			"battles": 8,
+			"chests": 5,
+			"clears": 0,
+			"death_rate_per_entry": 0.0,
+			"deaths": 0,
+			"enemies": {
+				"E01": 6,
+				"E02": 2
+			},
+			"entries": 13,
+			"events": 0,
+			"items": {
+				"I01": 2,
+				"I02": 1,
+				"I04": 3
+			},
+			"levels": {
+				"1": 8
+			},
+			"return_rate_per_entry": 0.0,
+			"returns": 0,
+			"seed_reach_rate": 1.0,
+			"seed_reached": 1
+		},
+		"10": {
+			"battles": 2,
+			"chests": 0,
+			"clears": 1,
+			"death_rate_per_entry": 0.5,
+			"deaths": 1,
+			"enemies": {
+				"B10": 2
+			},
+			"entries": 2,
+			"events": 0,
+			"items": {
+				"I11": 1
+			},
+			"levels": {
+				"6": 2
+			},
+			"return_rate_per_entry": 0.0,
+			"returns": 0,
+			"seed_reach_rate": 1.0,
+			"seed_reached": 1
+		},
+		"2": {
+			"battles": 6,
+			"chests": 4,
+			"clears": 0,
+			"death_rate_per_entry": 0.0,
+			"deaths": 0,
+			"enemies": {
+				"E01": 3,
+				"E02": 3
+			},
+			"entries": 13,
+			"events": 3,
+			"items": {
+				"I01": 2,
+				"I04": 1,
+				"I10": 2
+			},
+			"levels": {
+				"1": 3,
+				"2": 3
+			},
+			"return_rate_per_entry": 0.0,
+			"returns": 0,
+			"seed_reach_rate": 1.0,
+			"seed_reached": 1
+		},
+		"3": {
+			"battles": 9,
+			"chests": 4,
+			"clears": 0,
+			"death_rate_per_entry": 0.0,
+			"deaths": 0,
+			"enemies": {
+				"E01": 6,
+				"E02": 1,
+				"E03": 2
+			},
+			"entries": 13,
+			"events": 0,
+			"items": {
+				"I04": 3,
+				"I10": 2
+			},
+			"levels": {
+				"2": 4,
+				"3": 5
+			},
+			"return_rate_per_entry": 0.307692307692308,
+			"returns": 4,
+			"seed_reach_rate": 1.0,
+			"seed_reached": 1
+		},
+		"4": {
+			"battles": 9,
+			"chests": 0,
+			"clears": 0,
+			"death_rate_per_entry": 0.0,
+			"deaths": 0,
+			"enemies": {
+				"E02": 4,
+				"E03": 2,
+				"E04": 3
+			},
+			"entries": 9,
+			"events": 0,
+			"items": {
+				"I05": 1
+			},
+			"levels": {
+				"2": 3,
+				"3": 3,
+				"4": 3
+			},
+			"return_rate_per_entry": 0.0,
+			"returns": 0,
+			"seed_reach_rate": 1.0,
+			"seed_reached": 1
+		},
+		"5": {
+			"battles": 6,
+			"chests": 2,
+			"clears": 0,
+			"death_rate_per_entry": 0.0,
+			"deaths": 0,
+			"enemies": {
+				"E02": 2,
+				"E03": 3,
+				"E04": 1
+			},
+			"entries": 9,
+			"events": 1,
+			"items": {
+				"I05": 1,
+				"I06": 1,
+				"I10": 1
+			},
+			"levels": {
+				"3": 2,
+				"4": 4
+			},
+			"return_rate_per_entry": 0.0,
+			"returns": 0,
+			"seed_reach_rate": 1.0,
+			"seed_reached": 1
+		},
+		"6": {
+			"battles": 7,
+			"chests": 0,
+			"clears": 0,
+			"death_rate_per_entry": 0.0,
+			"deaths": 0,
+			"enemies": {
+				"E02": 3,
+				"E03": 2,
+				"E04": 2
+			},
+			"entries": 9,
+			"events": 2,
+			"items": {
+				"I10": 2
+			},
+			"levels": {
+				"2": 3,
+				"4": 4
+			},
+			"return_rate_per_entry": 0.333333333333333,
+			"returns": 3,
+			"seed_reach_rate": 1.0,
+			"seed_reached": 1
+		},
+		"7": {
+			"battles": 4,
+			"chests": 1,
+			"clears": 0,
+			"death_rate_per_entry": 0.0,
+			"deaths": 0,
+			"enemies": {
+				"E03": 1,
+				"E04": 3
+			},
+			"entries": 6,
+			"events": 1,
+			"items": {
+				"I09": 1,
+				"I10": 1
+			},
+			"levels": {
+				"4": 3,
+				"5": 1
+			},
+			"return_rate_per_entry": 0.0,
+			"returns": 0,
+			"seed_reach_rate": 1.0,
+			"seed_reached": 1
+		},
+		"8": {
+			"battles": 6,
+			"chests": 0,
+			"clears": 0,
+			"death_rate_per_entry": 0.0,
+			"deaths": 0,
+			"enemies": {
+				"E03": 1,
+				"E04": 3,
+				"E05": 2
+			},
+			"entries": 6,
+			"events": 0,
+			"items": {
+				"I06": 1,
+				"I10": 1
+			},
+			"levels": {
+				"4": 3,
+				"5": 2,
+				"6": 1
+			},
+			"return_rate_per_entry": 0.0,
+			"returns": 0,
+			"seed_reach_rate": 1.0,
+			"seed_reached": 1
+		},
+		"9": {
+			"battles": 5,
+			"chests": 0,
+			"clears": 0,
+			"death_rate_per_entry": 0.0,
+			"deaths": 0,
+			"enemies": {
+				"E04": 3,
+				"E05": 2
+			},
+			"entries": 6,
+			"events": 1,
+			"items": {
+				"I10": 1
+			},
+			"levels": {
+				"6": 3,
+				"7": 2
+			},
+			"return_rate_per_entry": 0.666666666666667,
+			"returns": 4,
+			"seed_reach_rate": 1.0,
+			"seed_reached": 1
+		}
+	},
+	"metadata": {
+		"combat_sha256": "d823ae3565a6c60d7381d50d540dd9ef76b10cc6304648bc00749acb2fc43487",
+		"config_sha256": "4c060a204a1513b9a947bae91a105a95cc51a3ed615801ed0e9ba12003a4791b",
+		"config_version": "2026-10-17.loop-provisional.2",
+		"data_sha256": "603a6c581be3893664bf4d8c466c661635095470c6cd8b8fe39c68a42a60f357",
+		"data_version": "2026-10-17.foundation.1",
+		"engine": "4.7.2-stable (official)",
+		"expedition_sha256": "6c1dbd4aaac9524e79b5abd5ee93a706c7868a8f5209c16cf87b927572d7f7c1",
+		"game_commit": "d146437",
+		"policy_code_sha256": "348489a0a50cb38bc99256c016aace3ce03699191fae3b53721ba38e66b65acb",
+		"policy_sha256": "16b08c7109dd5c70b345371b18af622e1ad5e23d0863938f52565c2f3a15c170",
+		"runner_contract": "campaign-v1"
+	},
+	"metrics": {
+		"clear_rate": 1.0,
+		"clears": 1,
+		"death_rate_per_normal_trip": 0.0769230769230769,
+		"draws": 0,
+		"exp_earned": 585,
+		"final_exp": {
+			"count": 1,
+			"max": 585,
+			"mean": 585.0,
+			"median": 585.0,
+			"min": 585,
+			"p10": 585,
+			"p90": 585
+		},
+		"final_gold": {
+			"count": 1,
+			"max": 447,
+			"mean": 447.0,
+			"median": 447.0,
+			"min": 447,
+			"p10": 447,
+			"p90": 447
+		},
+		"final_items": {
+			"count": 1,
+			"max": 29,
+			"mean": 29.0,
+			"median": 29.0,
+			"min": 29,
+			"p10": 29,
+			"p90": 29
+		},
+		"final_level": {
+			"count": 1,
+			"max": 10,
+			"mean": 10.0,
+			"median": 10.0,
+			"min": 10,
+			"p10": 10,
+			"p90": 10
+		},
+		"gold_earned": 463,
+		"invalid_results": 0,
+		"loot_earned": 28,
+		"mean_exp_earned_per_trip": 45.0,
+		"mean_gold_earned_per_trip": 35.6153846153846,
+		"mean_loot_earned_per_trip": 2.15384615384615,
+		"normal_deaths": 1,
+		"normal_trips": 13,
+		"reach_10F_rate": 1.0,
+		"reached_10F": 1,
+		"remaining_hp_per_trip": {
+			"count": 13,
+			"max": 40,
+			"mean": 23.3846153846154,
+			"median": 25.0,
+			"min": 0,
+			"p10": 9,
+			"p90": 36
+		},
+		"returns": 11,
+		"rounds_per_trip": {
+			"count": 13,
+			"max": 18,
+			"mean": 10.0,
+			"median": 9.0,
+			"min": 2,
+			"p10": 3,
+			"p90": 16
+		},
+		"story_deaths_excluded": 1,
+		"trials": 1,
+		"trips_to_clear": {
+			"count": 1,
+			"max": 13,
+			"mean": 13.0,
+			"median": 13.0,
+			"min": 13,
+			"p10": 13,
+			"p90": 13
+		}
+	},
+	"nonclear_seeds": [],
+	"policy": {
+		"boss_min_hp_fraction": 0.7,
+		"equipment_weights": {
+			"atk": 4.0,
+			"def": 4.0,
+			"max_hp": 1.0,
+			"max_sp": 0.0,
+			"spd": 1.0
+		},
+		"floor_limits": [
+			{
+				"below_level": 3.0,
+				"floor": 3.0
+			},
+			{
+				"below_level": 5.0,
+				"floor": 6.0
+			},
+			{
+				"below_level": 101.0,
+				"floor": 10.0
+			}
+		],
+		"max_trips": 30.0,
+		"note": "試験方針。表示Lv/HP/装備効果のみ参照。乱数先読み・敵戦闘予測・階層スキップなし。",
+		"policy_id": "solo-steady-v1",
+		"return_hp_fraction": 0.45,
+		"schema_version": 1.0,
+		"skip_harmful_events": true,
+		"store_spares": true
+	},
+	"records": [
+		{
+			"actions": [],
+			"cleared": true,
+			"error": "",
+			"exp": 585,
+			"final_state": {},
+			"floors": {
+				"1": {
+					"battles": 8,
+					"chests": 5,
+					"clears": 0,
+					"deaths": 0,
+					"enemies": {
+						"E01": 6,
+						"E02": 2
+					},
+					"entries": 13,
+					"events": 0,
+					"items": {
+						"I01": 2,
+						"I02": 1,
+						"I04": 3
+					},
+					"levels": {
+						"1": 8
+					},
+					"returns": 0
+				},
+				"10": {
+					"battles": 2,
+					"chests": 0,
+					"clears": 1,
+					"deaths": 1,
+					"enemies": {
+						"B10": 2
+					},
+					"entries": 2,
+					"events": 0,
+					"items": {
+						"I11": 1
+					},
+					"levels": {
+						"6": 2
+					},
+					"returns": 0
+				},
+				"2": {
+					"battles": 6,
+					"chests": 4,
+					"clears": 0,
+					"deaths": 0,
+					"enemies": {
+						"E01": 3,
+						"E02": 3
+					},
+					"entries": 13,
+					"events": 3,
+					"items": {
+						"I01": 2,
+						"I04": 1,
+						"I10": 2
+					},
+					"levels": {
+						"1": 3,
+						"2": 3
+					},
+					"returns": 0
+				},
+				"3": {
+					"battles": 9,
+					"chests": 4,
+					"clears": 0,
+					"deaths": 0,
+					"enemies": {
+						"E01": 6,
+						"E02": 1,
+						"E03": 2
+					},
+					"entries": 13,
+					"events": 0,
+					"items": {
+						"I04": 3,
+						"I10": 2
+					},
+					"levels": {
+						"2": 4,
+						"3": 5
+					},
+					"returns": 4
+				},
+				"4": {
+					"battles": 9,
+					"chests": 0,
+					"clears": 0,
+					"deaths": 0,
+					"enemies": {
+						"E02": 4,
+						"E03": 2,
+						"E04": 3
+					},
+					"entries": 9,
+					"events": 0,
+					"items": {
+						"I05": 1
+					},
+					"levels": {
+						"2": 3,
+						"3": 3,
+						"4": 3
+					},
+					"returns": 0
+				},
+				"5": {
+					"battles": 6,
+					"chests": 2,
+					"clears": 0,
+					"deaths": 0,
+					"enemies": {
+						"E02": 2,
+						"E03": 3,
+						"E04": 1
+					},
+					"entries": 9,
+					"events": 1,
+					"items": {
+						"I05": 1,
+						"I06": 1,
+						"I10": 1
+					},
+					"levels": {
+						"3": 2,
+						"4": 4
+					},
+					"returns": 0
+				},
+				"6": {
+					"battles": 7,
+					"chests": 0,
+					"clears": 0,
+					"deaths": 0,
+					"enemies": {
+						"E02": 3,
+						"E03": 2,
+						"E04": 2
+					},
+					"entries": 9,
+					"events": 2,
+					"items": {
+						"I10": 2
+					},
+					"levels": {
+						"2": 3,
+						"4": 4
+					},
+					"returns": 3
+				},
+				"7": {
+					"battles": 4,
+					"chests": 1,
+					"clears": 0,
+					"deaths": 0,
+					"enemies": {
+						"E03": 1,
+						"E04": 3
+					},
+					"entries": 6,
+					"events": 1,
+					"items": {
+						"I09": 1,
+						"I10": 1
+					},
+					"levels": {
+						"4": 3,
+						"5": 1
+					},
+					"returns": 0
+				},
+				"8": {
+					"battles": 6,
+					"chests": 0,
+					"clears": 0,
+					"deaths": 0,
+					"enemies": {
+						"E03": 1,
+						"E04": 3,
+						"E05": 2
+					},
+					"entries": 6,
+					"events": 0,
+					"items": {
+						"I06": 1,
+						"I10": 1
+					},
+					"levels": {
+						"4": 3,
+						"5": 2,
+						"6": 1
+					},
+					"returns": 0
+				},
+				"9": {
+					"battles": 5,
+					"chests": 0,
+					"clears": 0,
+					"deaths": 0,
+					"enemies": {
+						"E04": 3,
+						"E05": 2
+					},
+					"entries": 6,
+					"events": 1,
+					"items": {
+						"I10": 1
+					},
+					"levels": {
+						"6": 3,
+						"7": 2
+					},
+					"returns": 4
+				}
+			},
+			"gold": 447,
+			"highest_floor": 11,
+			"items": 29,
+			"level": 10,
+			"normal_deaths": 1,
+			"normal_trips": 13,
+			"reached_10F": true,
+			"seed": 10000,
+			"state_sha256": "edd3cace3bb8376f1e2d80cb0cc6a44270874df5893a0a91906b036046996d2a",
+			"story_deaths": 1,
+			"trace_sha256": "ebc748cf14f776d16d3b5eabd7e364f11548ec964ec08cdafe76ae1a05fe86d0",
+			"trips": [
+				{
+					"end_level": 1,
+					"exp_earned": 5,
+					"exp_end": 5,
+					"exp_start": 0,
+					"floor_max": 3,
+					"gold_earned": 3,
+					"gold_end": 3,
+					"gold_start": 0,
+					"hp_lost_in_combat": 4,
+					"loot": {
+						"I02": 1,
+						"I10": 1
+					},
+					"loss": {
+						"exp": 0,
+						"gold": 0,
+						"items": 0
+					},
+					"outcome": "return",
+					"remaining_hp": 20,
+					"rounds": 3,
+					"start_level": 1,
+					"trip": 1
+				},
+				{
+					"end_level": 2,
+					"exp_earned": 9,
+					"exp_end": 14,
+					"exp_start": 5,
+					"floor_max": 3,
+					"gold_earned": 4,
+					"gold_end": 7,
+					"gold_start": 3,
+					"hp_lost_in_combat": 4,
+					"loot": {
+						"I10": 1
+					},
+					"loss": {
+						"exp": 0,
+						"gold": 0,
+						"items": 0
+					},
+					"outcome": "return",
+					"remaining_hp": 25,
+					"rounds": 4,
+					"start_level": 1,
+					"trip": 2
+				},
+				{
+					"end_level": 2,
+					"exp_earned": 14,
+					"exp_end": 28,
+					"exp_start": 14,
+					"floor_max": 3,
+					"gold_earned": 6,
+					"gold_end": 13,
+					"gold_start": 7,
+					"hp_lost_in_combat": 3,
+					"loot": {
+						"I04": 1
+					},
+					"loss": {
+						"exp": 0,
+						"gold": 0,
+						"items": 0
+					},
+					"outcome": "return",
+					"remaining_hp": 26,
+					"rounds": 5,
+					"start_level": 2,
+					"trip": 3
+				},
+				{
+					"end_level": 2,
+					"exp_earned": 5,
+					"exp_end": 33,
+					"exp_start": 28,
+					"floor_max": 3,
+					"gold_earned": 2,
+					"gold_end": 15,
+					"gold_start": 13,
+					"hp_lost_in_combat": 2,
+					"loot": {
+						"I01": 1,
+						"I04": 1
+					},
+					"loss": {
+						"exp": 0,
+						"gold": 0,
+						"items": 0
+					},
+					"outcome": "return",
+					"remaining_hp": 27,
+					"rounds": 2,
+					"start_level": 2,
+					"trip": 4
+				},
+				{
+					"end_level": 3,
+					"exp_earned": 22,
+					"exp_end": 55,
+					"exp_start": 33,
+					"floor_max": 6,
+					"gold_earned": 16,
+					"gold_end": 31,
+					"gold_start": 15,
+					"hp_lost_in_combat": 10,
+					"loot": {
+						"I04": 2,
+						"I10": 1
+					},
+					"loss": {
+						"exp": 0,
+						"gold": 0,
+						"items": 0
+					},
+					"outcome": "return",
+					"remaining_hp": 24,
+					"rounds": 7,
+					"start_level": 2,
+					"trip": 5
+				},
+				{
+					"end_level": 4,
+					"exp_earned": 26,
+					"exp_end": 81,
+					"exp_start": 55,
+					"floor_max": 6,
+					"gold_earned": 19,
+					"gold_end": 50,
+					"gold_start": 31,
+					"hp_lost_in_combat": 17,
+					"loot": {
+						"I01": 1,
+						"I04": 1,
+						"I05": 1
+					},
+					"loss": {
+						"exp": 0,
+						"gold": 0,
+						"items": 0
+					},
+					"outcome": "return",
+					"remaining_hp": 22,
+					"rounds": 8,
+					"start_level": 3,
+					"trip": 6
+				},
+				{
+					"end_level": 4,
+					"exp_earned": 37,
+					"exp_end": 118,
+					"exp_start": 81,
+					"floor_max": 6,
+					"gold_earned": 23,
+					"gold_end": 73,
+					"gold_start": 50,
+					"hp_lost_in_combat": 21,
+					"loot": {
+						"I10": 1
+					},
+					"loss": {
+						"exp": 0,
+						"gold": 0,
+						"items": 0
+					},
+					"outcome": "return",
+					"remaining_hp": 18,
+					"rounds": 9,
+					"start_level": 4,
+					"trip": 7
+				},
+				{
+					"end_level": 6,
+					"exp_earned": 63,
+					"exp_end": 181,
+					"exp_start": 118,
+					"floor_max": 9,
+					"gold_earned": 51,
+					"gold_end": 124,
+					"gold_start": 73,
+					"hp_lost_in_combat": 40,
+					"loot": {
+						"I01": 1,
+						"I04": 1,
+						"I06": 1
+					},
+					"loss": {
+						"exp": 0,
+						"gold": 0,
+						"items": 0
+					},
+					"outcome": "return",
+					"remaining_hp": 9,
+					"rounds": 15,
+					"start_level": 4,
+					"trip": 8
+				},
+				{
+					"end_level": 6,
+					"exp_earned": 52,
+					"exp_end": 233,
+					"exp_start": 181,
+					"floor_max": 10,
+					"gold_earned": 42,
+					"gold_end": 150,
+					"gold_start": 124,
+					"hp_lost_in_combat": 55,
+					"loot": {
+						"I05": 1,
+						"I10": 4
+					},
+					"loss": {
+						"exp": 0,
+						"gold": 16,
+						"items": 0
+					},
+					"outcome": "death",
+					"remaining_hp": 0,
+					"rounds": 16,
+					"start_level": 6,
+					"trip": 9
+				},
+				{
+					"end_level": 7,
+					"exp_earned": 88,
+					"exp_end": 321,
+					"exp_start": 233,
+					"floor_max": 9,
+					"gold_earned": 66,
+					"gold_end": 216,
+					"gold_start": 150,
+					"hp_lost_in_combat": 22,
+					"loot": {
+						"I01": 1
+					},
+					"loss": {
+						"exp": 0,
+						"gold": 0,
+						"items": 0
+					},
+					"outcome": "return",
+					"remaining_hp": 32,
+					"rounds": 16,
+					"start_level": 6,
+					"trip": 10
+				},
+				{
+					"end_level": 8,
+					"exp_earned": 64,
+					"exp_end": 385,
+					"exp_start": 321,
+					"floor_max": 9,
+					"gold_earned": 51,
+					"gold_end": 267,
+					"gold_start": 216,
+					"hp_lost_in_combat": 29,
+					"loot": {
+						"I04": 1,
+						"I09": 1
+					},
+					"loss": {
+						"exp": 0,
+						"gold": 0,
+						"items": 0
+					},
+					"outcome": "return",
+					"remaining_hp": 36,
+					"rounds": 14,
+					"start_level": 7,
+					"trip": 11
+				},
+				{
+					"end_level": 9,
+					"exp_earned": 83,
+					"exp_end": 468,
+					"exp_start": 385,
+					"floor_max": 9,
+					"gold_earned": 66,
+					"gold_end": 333,
+					"gold_start": 267,
+					"hp_lost_in_combat": 24,
+					"loot": {
+						"I10": 2
+					},
+					"loss": {
+						"exp": 0,
+						"gold": 0,
+						"items": 0
+					},
+					"outcome": "return",
+					"remaining_hp": 40,
+					"rounds": 13,
+					"start_level": 8,
+					"trip": 12
+				},
+				{
+					"end_level": 10,
+					"exp_earned": 117,
+					"exp_end": 585,
+					"exp_start": 468,
+					"floor_max": 10,
+					"gold_earned": 114,
+					"gold_end": 447,
+					"gold_start": 333,
+					"hp_lost_in_combat": 44,
+					"loot": {
+						"I06": 1,
+						"I11": 1
+					},
+					"loss": {
+						"exp": 0,
+						"gold": 0,
+						"items": 0
+					},
+					"outcome": "clear",
+					"remaining_hp": 25,
+					"rounds": 18,
+					"start_level": 9,
+					"trip": 13
+				}
+			]
+		}
+	],
+	"replay": {
+		"actions": [
+			{
+				"action": "descend",
+				"args": {},
+				"floor": 1,
+				"phase": "explore",
+				"revision": 1,
+				"state_sha256": "c01b220c76645a9c9b543dc0659e732509fbf0e33d2b49a3dcdf583d20da4e69"
+			},
+			{
+				"action": "descend",
+				"args": {},
+				"floor": 2,
+				"phase": "result",
+				"revision": 2,
+				"state_sha256": "41a780c4ae5af204260dae87e4a9dbd588010cb257abe10449b488ef40452317"
+			},
+			{
+				"action": "town",
+				"args": {},
+				"floor": 0,
+				"phase": "town",
+				"revision": 3,
+				"state_sha256": "37bd00b6f1ff1a02c632b60cb72135797e67951554d15fa14214db1ca70c7676"
+			},
+			{
+				"action": "equip",
+				"args": {
+					"uid": "item-1"
+				},
+				"floor": 0,
+				"phase": "town",
+				"revision": 4,
+				"state_sha256": "da62c718de8b08fb844c7007be0c6a318c03c971f735ba0960d8f1f3f277c6b4"
+			},
+			{
+				"action": "depart",
+				"args": {},
+				"floor": 0,
+				"phase": "explore",
+				"revision": 5,
+				"state_sha256": "10491d98feb3b52e127f91105b64a7470f98e91616ff9992867b2258e03a4bc9"
+			},
+			{
+				"action": "descend",
+				"args": {},
+				"floor": 1,
+				"phase": "explore",
+				"revision": 6,
+				"state_sha256": "ac4ff878877fb68a20956bfa82309aa18d41bdd72916b248b97cf01930a2db90"
+			},
+			{
+				"action": "descend",
+				"args": {},
+				"floor": 2,
+				"phase": "battle",
+				"revision": 7,
+				"state_sha256": "ff2676e601034ee8b229866fabcf70c0b8f7a39824514478846859c8be5658b4"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 2,
+				"phase": "battle",
+				"revision": 8,
+				"state_sha256": "d442da2fa81f2dffa15d7729ee56eaa402c0a1ffb1060d6ef680923093666eee"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 2,
+				"phase": "battle",
+				"revision": 9,
+				"state_sha256": "15f0e98dde1dd5368e2906ed13f7d9359a8221e449d264e355a4ed9258848677"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 2,
+				"phase": "explore",
+				"revision": 10,
+				"state_sha256": "537cb033c7cbef166c11dbf08db765980b2530f32098f1915ba0463c97b3a5ef"
+			},
+			{
+				"action": "descend",
+				"args": {},
+				"floor": 3,
+				"phase": "explore",
+				"revision": 11,
+				"state_sha256": "7a61ac72081b2bac8c48e565323267dbc0c0acafe1d92d1b520296f1ce03b41b"
+			},
+			{
+				"action": "return",
+				"args": {},
+				"floor": 3,
+				"phase": "result",
+				"revision": 12,
+				"state_sha256": "3ee0e9719eab8fed070f7bf290b94ad67cc19f016ed9f0a0281b7d0259d2480c"
+			},
+			{
+				"action": "town",
+				"args": {},
+				"floor": 0,
+				"phase": "town",
+				"revision": 13,
+				"state_sha256": "f5e17a8e568ece47e12f7eabfa3ea6f5705283cf847d10dd020116d2e62aceb5"
+			},
+			{
+				"action": "equip",
+				"args": {
+					"uid": "item-2"
+				},
+				"floor": 0,
+				"phase": "town",
+				"revision": 14,
+				"state_sha256": "cedab0302361dfde5e8d44607dee963990ec4b78cb342b6904b4a88d4c97c4fc"
+			},
+			{
+				"action": "deposit",
+				"args": {
+					"uid": "item-3"
+				},
+				"floor": 0,
+				"phase": "town",
+				"revision": 15,
+				"state_sha256": "0e782783591ba470d6d1f153391e1703ed97a4a91c67ca15033d160f509895c4"
+			},
+			{
+				"action": "depart",
+				"args": {},
+				"floor": 0,
+				"phase": "explore",
+				"revision": 16,
+				"state_sha256": "b3dca359ade14e18c97da8291f55f3de7ac271541430ae8b250b044b95c4c617"
+			},
+			{
+				"action": "descend",
+				"args": {},
+				"floor": 1,
+				"phase": "battle",
+				"revision": 17,
+				"state_sha256": "e644e02e6ce3dab0b65776081ea8908379171adef6b79373b585cf74a5a2cdd4"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 1,
+				"phase": "battle",
+				"revision": 18,
+				"state_sha256": "5babd67018766e51d7948e454ab390bb13c98ee6fe03623c6f69a4a4b4fb2cfd"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 1,
+				"phase": "explore",
+				"revision": 19,
+				"state_sha256": "4a4d113daf4e328463b5a7dc59ffc0cb85e76c63675ac4b62a8bf0bb7a6e7708"
+			},
+			{
+				"action": "descend",
+				"args": {},
+				"floor": 2,
+				"phase": "explore",
+				"revision": 20,
+				"state_sha256": "44593d7eb0d0504de6c071f0863ee480e4b2ef46022474da2fdc2ac94c876244"
+			},
+			{
+				"action": "descend",
+				"args": {},
+				"floor": 3,
+				"phase": "battle",
+				"revision": 21,
+				"state_sha256": "99a3d991f26b943f73acaff1212649665a4024ad5e9e712e3e44f6cfa6c103b2"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 3,
+				"phase": "battle",
+				"revision": 22,
+				"state_sha256": "8501d2a58129ee83a17c9d39e3d66d7cac1f418e804f72f9ecc4809ed678e67e"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 3,
+				"phase": "explore",
+				"revision": 23,
+				"state_sha256": "b55ba8579f555441c05010c9382a2de59d9763a7282e45d0688054a1245b93fd"
+			},
+			{
+				"action": "return",
+				"args": {},
+				"floor": 3,
+				"phase": "result",
+				"revision": 24,
+				"state_sha256": "9da44bbe11d05d0a6417ef9bfc8f2098ef249d9eb537c649ad8848c850ad9ebe"
+			},
+			{
+				"action": "town",
+				"args": {},
+				"floor": 0,
+				"phase": "town",
+				"revision": 25,
+				"state_sha256": "7d4d503f7dcb46b5ec31845ca92681f7e722e6e5328bd995a5cd8a70154d6701"
+			},
+			{
+				"action": "deposit",
+				"args": {
+					"uid": "item-4"
+				},
+				"floor": 0,
+				"phase": "town",
+				"revision": 26,
+				"state_sha256": "3071046083b339d5a885d87fa0cce13e7724c6335ff71cbe81a2284f00b34166"
+			},
+			{
+				"action": "depart",
+				"args": {},
+				"floor": 0,
+				"phase": "explore",
+				"revision": 27,
+				"state_sha256": "b23b9dff6ca95c9752230b3fee882f5acf051e3d28d6f787c537f1631e6df657"
+			},
+			{
+				"action": "descend",
+				"args": {},
+				"floor": 1,
+				"phase": "battle",
+				"revision": 28,
+				"state_sha256": "3eeedeb3da7795472f721e3ef37f6a7fd76bb1966d7ae4f40351f5a7474eb3b6"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 1,
+				"phase": "battle",
+				"revision": 29,
+				"state_sha256": "4d7532e655b1d08d44805f3ba563ff5ce743baec92263f93f9f6a45b4ba31bf1"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 1,
+				"phase": "explore",
+				"revision": 30,
+				"state_sha256": "fd037d779eb06ddf4c14ff7c3689e1aae8429131be2897c0138a1ee12e0e2f74"
+			},
+			{
+				"action": "descend",
+				"args": {},
+				"floor": 2,
+				"phase": "battle",
+				"revision": 31,
+				"state_sha256": "1fd0861a907ff4976fa175acc255d0689ebc543f914bc72d3bc4f8fe540213b7"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 2,
+				"phase": "battle",
+				"revision": 32,
+				"state_sha256": "7c7d47294ac4df9d0723f6bc621ca08a5ea503ec07716b72bf2463c3221a101d"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 2,
+				"phase": "explore",
+				"revision": 33,
+				"state_sha256": "6591f0c6829bc9114526b16abda9f03bce50e97f76a2ca547e96b3c5a3a306d7"
+			},
+			{
+				"action": "descend",
+				"args": {},
+				"floor": 3,
+				"phase": "battle",
+				"revision": 34,
+				"state_sha256": "783425ee51410347590c21ad89efd2734165ee0b73a68719ad0f0a70b85b2af2"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 3,
+				"phase": "explore",
+				"revision": 35,
+				"state_sha256": "3a61746c4eb2b620dd316aaa5f684e9d4344b1a418f969be345b426eb1618c20"
+			},
+			{
+				"action": "return",
+				"args": {},
+				"floor": 3,
+				"phase": "result",
+				"revision": 36,
+				"state_sha256": "8fbbfe391a8a0c17c5f6ccd8b18e90d5fe1bcbc74f7e2fac3b579dd92cb48ee6"
+			},
+			{
+				"action": "town",
+				"args": {},
+				"floor": 0,
+				"phase": "town",
+				"revision": 37,
+				"state_sha256": "6759120fa6f444754579f1f9c8a0051540d474d4e7387af07da9a06dfff3ccba"
+			},
+			{
+				"action": "equip",
+				"args": {
+					"uid": "item-5"
+				},
+				"floor": 0,
+				"phase": "town",
+				"revision": 38,
+				"state_sha256": "3f2f45af255e06fc97d183f8238e650e993d990b4e67da4abc4a8b9835996ada"
+			},
+			{
+				"action": "depart",
+				"args": {},
+				"floor": 0,
+				"phase": "explore",
+				"revision": 39,
+				"state_sha256": "02b7d929712031d43ed91b2362c3a297c75197f78266b27af63fbbcddfb7a1f7"
+			},
+			{
+				"action": "descend",
+				"args": {},
+				"floor": 1,
+				"phase": "explore",
+				"revision": 40,
+				"state_sha256": "e857e1f656a8f4c3a036598693a532a88b030b50f4305a5c79f848936f172271"
+			},
+			{
+				"action": "descend",
+				"args": {},
+				"floor": 2,
+				"phase": "event",
+				"revision": 41,
+				"state_sha256": "48fb4033cc9a7d9d6e954eae5ac7c555f119eb3075f016c4c2a6b0a61fa15c07"
+			},
+			{
+				"action": "event",
+				"args": {
+					"choice": "skip"
+				},
+				"floor": 2,
+				"phase": "explore",
+				"revision": 42,
+				"state_sha256": "9242f88b97f977720602ab9863efbbed387959c9a0a95ccaf2e8796d92914adb"
+			},
+			{
+				"action": "descend",
+				"args": {},
+				"floor": 3,
+				"phase": "battle",
+				"revision": 43,
+				"state_sha256": "fbcaf638f4212752483041948b6b26e252f0ba8d5b5c6acc8e8153ce28ba2772"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 3,
+				"phase": "battle",
+				"revision": 44,
+				"state_sha256": "a261602feb31eb9ffdba0832986cf8c3bfd138ef448d136039072093e85fea32"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 3,
+				"phase": "explore",
+				"revision": 45,
+				"state_sha256": "3921b75be552351502c8dd7ee8e801d02319bf84b77a45d7c8e8f5eb58aaeda3"
+			},
+			{
+				"action": "return",
+				"args": {},
+				"floor": 3,
+				"phase": "result",
+				"revision": 46,
+				"state_sha256": "e464d0a3c5b24c8bc2ef24b0e70a93de8561d9952a58f150eca54da0882c88b0"
+			},
+			{
+				"action": "town",
+				"args": {},
+				"floor": 0,
+				"phase": "town",
+				"revision": 47,
+				"state_sha256": "4286e20e2b48f7760f3ac9cd7b5c18ed345621423ee2ffb31b8e4c9ba66a641e"
+			},
+			{
+				"action": "deposit",
+				"args": {
+					"uid": "item-6"
+				},
+				"floor": 0,
+				"phase": "town",
+				"revision": 48,
+				"state_sha256": "82ca8f7e088943bc574ca59734554fd1db334406cda6d387767398870872f5ea"
+			},
+			{
+				"action": "deposit",
+				"args": {
+					"uid": "item-7"
+				},
+				"floor": 0,
+				"phase": "town",
+				"revision": 49,
+				"state_sha256": "a2abfb5e8adce252a85fc60d1e3f127df12ca13a66eaf8dfcbde772f5dcc0c63"
+			},
+			{
+				"action": "depart",
+				"args": {},
+				"floor": 0,
+				"phase": "explore",
+				"revision": 50,
+				"state_sha256": "8e5b0a6b07ba511994618320c479929c901aa237caa42d27fcd8c18581052f16"
+			},
+			{
+				"action": "descend",
+				"args": {},
+				"floor": 1,
+				"phase": "explore",
+				"revision": 51,
+				"state_sha256": "34b0466007ab47bcdfc7da8f3034dfb3742783c629d54a12ca40dc7d8f441c77"
+			},
+			{
+				"action": "descend",
+				"args": {},
+				"floor": 2,
+				"phase": "battle",
+				"revision": 52,
+				"state_sha256": "0380d55977af2f2b6be8bb256796a9815d9f19674ea48e8a19ca17e8780126dc"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 2,
+				"phase": "battle",
+				"revision": 53,
+				"state_sha256": "68f3fc12d25cebd3de6a06d7f1ba64c8ae2413d9945047c771edf1091504f7a6"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 2,
+				"phase": "explore",
+				"revision": 54,
+				"state_sha256": "ae87f05be182ccefa6f8b8ac1a160290f1fea59bee8b0ff706846597ac791fc5"
+			},
+			{
+				"action": "descend",
+				"args": {},
+				"floor": 3,
+				"phase": "explore",
+				"revision": 55,
+				"state_sha256": "37e68a2f3e7ddccc7a7b2d827a7ba9a52b669dd1ec14d817e35989dfeb654dc5"
+			},
+			{
+				"action": "descend",
+				"args": {},
+				"floor": 4,
+				"phase": "battle",
+				"revision": 56,
+				"state_sha256": "395ca2c395975c5f22f94cedffdab4dd0c7a7739669280faa36983af8c67438e"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 4,
+				"phase": "battle",
+				"revision": 57,
+				"state_sha256": "4863233b6471b1b329a883e79e358bba094c6a5f4d9ff9ad9e51d366f386e72e"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 4,
+				"phase": "battle",
+				"revision": 58,
+				"state_sha256": "f72f2bc4183420422eddee097c3734886308a5a16d0c6e9355d730504f16aaf0"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 4,
+				"phase": "explore",
+				"revision": 59,
+				"state_sha256": "0b870e3d3f17320fd2c3a5558ce84f58342097b40085a771a99927a1a11bb9ca"
+			},
+			{
+				"action": "descend",
+				"args": {},
+				"floor": 5,
+				"phase": "event",
+				"revision": 60,
+				"state_sha256": "2db06dc945e94eb66699e0f951c73b25e532db78ee89638397b74a0d1f0fc95a"
+			},
+			{
+				"action": "event",
+				"args": {
+					"choice": "skip"
+				},
+				"floor": 5,
+				"phase": "explore",
+				"revision": 61,
+				"state_sha256": "49a409d673bc8184e4cebb7ed4c366ce6220d9a59657a672dc7557e235aa860f"
+			},
+			{
+				"action": "descend",
+				"args": {},
+				"floor": 6,
+				"phase": "battle",
+				"revision": 62,
+				"state_sha256": "99bf4538849500ec8deb4b31959136bf36c2c06accb9680fdee8b75416b30d7d"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 6,
+				"phase": "battle",
+				"revision": 63,
+				"state_sha256": "f102ddbb41294d4b7caafa07dc0853ea305e7f64a7bce716ec1c00ec4abc0075"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 6,
+				"phase": "explore",
+				"revision": 64,
+				"state_sha256": "8cb50fae6a317f67d41e766a11bb7eaae67b5e9b7bb631827952ec19d050b34d"
+			},
+			{
+				"action": "return",
+				"args": {},
+				"floor": 6,
+				"phase": "result",
+				"revision": 65,
+				"state_sha256": "719464b4dc0a1723f48383b5a7daf27de0c6ba137d5c397ed0726d87862bb788"
+			},
+			{
+				"action": "town",
+				"args": {},
+				"floor": 0,
+				"phase": "town",
+				"revision": 66,
+				"state_sha256": "c9ad46494902bf1f0be566a21130067969a766573cc38b9aa743408b60ea14be"
+			},
+			{
+				"action": "deposit",
+				"args": {
+					"uid": "item-8"
+				},
+				"floor": 0,
+				"phase": "town",
+				"revision": 67,
+				"state_sha256": "db65c1a434270410e41cd3126d63c718c5f8042b981ede4cd1e8df3cd9f3407f"
+			},
+			{
+				"action": "deposit",
+				"args": {
+					"uid": "item-9"
+				},
+				"floor": 0,
+				"phase": "town",
+				"revision": 68,
+				"state_sha256": "2a698c19883a89baa7cc7dd0358e755b76173e502904b194ce2aded4b0306a4b"
+			},
+			{
+				"action": "deposit",
+				"args": {
+					"uid": "item-10"
+				},
+				"floor": 0,
+				"phase": "town",
+				"revision": 69,
+				"state_sha256": "a4b952b5564ea750770492eeb98d6d02b5c51a9c7c61a642ad6771df61687cba"
+			},
+			{
+				"action": "depart",
+				"args": {},
+				"floor": 0,
+				"phase": "explore",
+				"revision": 70,
+				"state_sha256": "b42b92ac3b5596d318d6335739a2f4d554e1d5bb28a67108e5652d0e322023d9"
+			},
+			{
+				"action": "descend",
+				"args": {},
+				"floor": 1,
+				"phase": "explore",
+				"revision": 71,
+				"state_sha256": "295a2ed914058aeb42ec5653a8891215e976cd5dcf09b6b6e8c38838fa929cb8"
+			},
+			{
+				"action": "descend",
+				"args": {},
+				"floor": 2,
+				"phase": "explore",
+				"revision": 72,
+				"state_sha256": "0cc0ce1fd7582658c70995f45289b4db27f691742d2676290ca75d08d641b1b7"
+			},
+			{
+				"action": "descend",
+				"args": {},
+				"floor": 3,
+				"phase": "battle",
+				"revision": 73,
+				"state_sha256": "99ed285fea4c99c15ff26bce602d09f5f0448e795207bcc76d5447bb805e7b2b"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 3,
+				"phase": "battle",
+				"revision": 74,
+				"state_sha256": "cdeeb99e95aa84201f5398bdd7740931de5432860703e5a933ebc9fcbf030f50"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 3,
+				"phase": "explore",
+				"revision": 75,
+				"state_sha256": "9386e2ce3b4fef26384a625f5600af2777fa1e08d69fdc787d1c1d3d8f86397c"
+			},
+			{
+				"action": "descend",
+				"args": {},
+				"floor": 4,
+				"phase": "battle",
+				"revision": 76,
+				"state_sha256": "32e4794eb2ab0a8511cf3c466d7526b25256e52aa2dd5ce7489dab789b6a944f"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 4,
+				"phase": "battle",
+				"revision": 77,
+				"state_sha256": "d0696f8502262a2d7d4eaf821274dca41f54a21c89fc1f02ea1a88cacab31ead"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 4,
+				"phase": "battle",
+				"revision": 78,
+				"state_sha256": "7189a14309091dbc5d40740777707ab7de1d381c81f37e271f1d0d9d442d4bf3"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 4,
+				"phase": "explore",
+				"revision": 79,
+				"state_sha256": "7f3a679d3f5484426a450e6e71887d6af98b76cb6b867562cf98d4095a9a9337"
+			},
+			{
+				"action": "descend",
+				"args": {},
+				"floor": 5,
+				"phase": "explore",
+				"revision": 80,
+				"state_sha256": "a06ee8d5329964c371b779ffe4aca0a55a9ecee382c92c6da59918bab9687f51"
+			},
+			{
+				"action": "descend",
+				"args": {},
+				"floor": 6,
+				"phase": "battle",
+				"revision": 81,
+				"state_sha256": "697cf9dace9b49194a93839dece5230ca60d5ce059ba88928aa6cd02cfceba44"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 6,
+				"phase": "battle",
+				"revision": 82,
+				"state_sha256": "7fe21a091590ffe03023aea846d93e52ce493b05fc3996ab71eda91f01f2aaaf"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 6,
+				"phase": "battle",
+				"revision": 83,
+				"state_sha256": "e5ff756a43e6be0196a0620a16a72ddc6e1db57560e2e9afee3338e39202f080"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 6,
+				"phase": "explore",
+				"revision": 84,
+				"state_sha256": "189d23dbb43d2c55fb22ec911e56361d3a475a8537ec26129a85fdaafba9283a"
+			},
+			{
+				"action": "return",
+				"args": {},
+				"floor": 6,
+				"phase": "result",
+				"revision": 85,
+				"state_sha256": "bd10c8505f45b97c1a33a131f06baf4e194848260ddd8cb27c56de26153e4419"
+			},
+			{
+				"action": "town",
+				"args": {},
+				"floor": 0,
+				"phase": "town",
+				"revision": 86,
+				"state_sha256": "6efd212b976eb02f83c5a20845f5240b0a177ff66ef02b1fad75360bc11cfb29"
+			},
+			{
+				"action": "equip",
+				"args": {
+					"uid": "item-13"
+				},
+				"floor": 0,
+				"phase": "town",
+				"revision": 87,
+				"state_sha256": "a3de8585effbbb903e53d43c48add96709b57e573094ac2321b71636a7eb504f"
+			},
+			{
+				"action": "deposit",
+				"args": {
+					"uid": "item-11"
+				},
+				"floor": 0,
+				"phase": "town",
+				"revision": 88,
+				"state_sha256": "178ad9c4149de3b62e66a6901a370ec6a098c6241bc8d0abfa7053c23e6dbd08"
+			},
+			{
+				"action": "deposit",
+				"args": {
+					"uid": "item-12"
+				},
+				"floor": 0,
+				"phase": "town",
+				"revision": 89,
+				"state_sha256": "13a44653f07fb36a5476ecd5880ad492cf0301396eb8d5cd21be74b9d292123a"
+			},
+			{
+				"action": "depart",
+				"args": {},
+				"floor": 0,
+				"phase": "explore",
+				"revision": 90,
+				"state_sha256": "7359b2ae2f2904a29eb9ce69cb78daaa76258e09c13ca7491a2a6c79238eb316"
+			},
+			{
+				"action": "descend",
+				"args": {},
+				"floor": 1,
+				"phase": "battle",
+				"revision": 91,
+				"state_sha256": "f7f74d728ca74a0d8f4c216e255da35ab3893cb0bd70ab9bc9d57d5554bd64ca"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 1,
+				"phase": "explore",
+				"revision": 92,
+				"state_sha256": "af1f0a8ab3dce1d3eed81dd1fd62d3de61d2bd5894958cdc279ebfad20aa24a7"
+			},
+			{
+				"action": "descend",
+				"args": {},
+				"floor": 2,
+				"phase": "event",
+				"revision": 93,
+				"state_sha256": "ae26bceadcf420cbb6e7fc5364102e9419b17778f68f5550180af774e407ebcb"
+			},
+			{
+				"action": "event",
+				"args": {
+					"choice": "accept"
+				},
+				"floor": 2,
+				"phase": "explore",
+				"revision": 94,
+				"state_sha256": "226cd9dbeaa20733ad26ca0537a1b30551c9622fc00e1374d95f2d336c68c686"
+			},
+			{
+				"action": "descend",
+				"args": {},
+				"floor": 3,
+				"phase": "explore",
+				"revision": 95,
+				"state_sha256": "7342ff2c14d009da0f06c2e044e45c31a5c3a034085fa121a196f98529f436e4"
+			},
+			{
+				"action": "descend",
+				"args": {},
+				"floor": 4,
+				"phase": "battle",
+				"revision": 96,
+				"state_sha256": "8c221591db427675a916c61fa028531a3af1811bf052430548d47d55529381a9"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 4,
+				"phase": "battle",
+				"revision": 97,
+				"state_sha256": "377d84c2037e5e4b983dce7e94dbbe7b34d9b42e8109c3350fdde862f8ba87e1"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 4,
+				"phase": "battle",
+				"revision": 98,
+				"state_sha256": "73d6d8b4e9b1f92b3d139b0498e2694c67e9a976cc3c27f2a3e2cfe4496ddaae"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 4,
+				"phase": "battle",
+				"revision": 99,
+				"state_sha256": "c6fb4f02c7212dc529bc2aaecbcd5821e0519dbb96a2bdbbf452e6051036b27f"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 4,
+				"phase": "explore",
+				"revision": 100,
+				"state_sha256": "8dafd18655ca82f4f6f3c9d236ada35c5de377caaf7961c2803d64a09e59ae7f"
+			},
+			{
+				"action": "descend",
+				"args": {},
+				"floor": 5,
+				"phase": "battle",
+				"revision": 101,
+				"state_sha256": "9af0248d22095fab1214ade1f871db25d66d7f98f05daed6ac1ecf5651866f92"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 5,
+				"phase": "battle",
+				"revision": 102,
+				"state_sha256": "d33065278081fb1daef93e9fbc57b5f08b24e1e6c1fb4215a3eb42055f692718"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 5,
+				"phase": "explore",
+				"revision": 103,
+				"state_sha256": "882310b018f8cfd3d7178a48de71b8ca0845bab116ffb010954bf92ad78244cf"
+			},
+			{
+				"action": "descend",
+				"args": {},
+				"floor": 6,
+				"phase": "battle",
+				"revision": 104,
+				"state_sha256": "cb99f618020465651f9821805a52b4ff34b3eeedb60aaae18825fd3134ee133a"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 6,
+				"phase": "battle",
+				"revision": 105,
+				"state_sha256": "9908021c3d5df07dfe49c69dd45f7a24a185047e8ff0d4eb00290cc728db55f6"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 6,
+				"phase": "explore",
+				"revision": 106,
+				"state_sha256": "008ed275e482f93ad67351686cb7456f230bcbb9c00ef159c565406ba290b376"
+			},
+			{
+				"action": "return",
+				"args": {},
+				"floor": 6,
+				"phase": "result",
+				"revision": 107,
+				"state_sha256": "893f5df30e5c51ad5d2cb25b707a6188376b5b76f0470aba9e0e88cd15930e29"
+			},
+			{
+				"action": "town",
+				"args": {},
+				"floor": 0,
+				"phase": "town",
+				"revision": 108,
+				"state_sha256": "a805e29a7db881ff8f039750e049603739d3afec5aa9caf20de53bbd08835590"
+			},
+			{
+				"action": "deposit",
+				"args": {
+					"uid": "item-14"
+				},
+				"floor": 0,
+				"phase": "town",
+				"revision": 109,
+				"state_sha256": "10de9fdfa044d0705a73661e173473acbfd1992840058a0f984e186271ca7231"
+			},
+			{
+				"action": "depart",
+				"args": {},
+				"floor": 0,
+				"phase": "explore",
+				"revision": 110,
+				"state_sha256": "2e4d6e9c4821fd2a21d625b76598220e8c3e1b66ffe28fa001197bc6a8d6b247"
+			},
+			{
+				"action": "descend",
+				"args": {},
+				"floor": 1,
+				"phase": "battle",
+				"revision": 111,
+				"state_sha256": "68a7ca840e55958ca7562c01e512a5a92748a48ba6d3e8fea03514daf79a109f"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 1,
+				"phase": "explore",
+				"revision": 112,
+				"state_sha256": "bd0df2bad7a4aabdf77c06e6d3d561b35c9a13a6ae324ae2638cec55c386f4fe"
+			},
+			{
+				"action": "descend",
+				"args": {},
+				"floor": 2,
+				"phase": "explore",
+				"revision": 113,
+				"state_sha256": "195e092d110c74eb07d69aee814631f27b7e50592b148307f7bbd7f420bfce5a"
+			},
+			{
+				"action": "descend",
+				"args": {},
+				"floor": 3,
+				"phase": "explore",
+				"revision": 114,
+				"state_sha256": "11a6fe69e94960a205ec68864855c0effdf35fca766c589a715ec79bba1f1364"
+			},
+			{
+				"action": "descend",
+				"args": {},
+				"floor": 4,
+				"phase": "battle",
+				"revision": 115,
+				"state_sha256": "fe48e00535412df824d9e5bc2a35d4fa94898b0fd6c81054678ab1a8413bcc04"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 4,
+				"phase": "battle",
+				"revision": 116,
+				"state_sha256": "dd9faf3d5cd1afe10c0c6ad73c0b98468fd460bae09f0fa4c3638127a2d3e861"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 4,
+				"phase": "explore",
+				"revision": 117,
+				"state_sha256": "5549ad6e6b49c71f61215857ea80288dd7e3a673bcae8de59bf78c6c3fd14674"
+			},
+			{
+				"action": "descend",
+				"args": {},
+				"floor": 5,
+				"phase": "explore",
+				"revision": 118,
+				"state_sha256": "ed6399d4878d95bd7bb8254091d9392273a87f13151672a2a650fcc9a312b3d1"
+			},
+			{
+				"action": "descend",
+				"args": {},
+				"floor": 6,
+				"phase": "battle",
+				"revision": 119,
+				"state_sha256": "7fef5d79adf65962251b3d936dd504debb4ddc0dfe4b88b11ac7b0e6126200bb"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 6,
+				"phase": "battle",
+				"revision": 120,
+				"state_sha256": "e60d263157da4f18bdaeb594188dc34937684c1ec8f5646bf0f9a391200ffe69"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 6,
+				"phase": "explore",
+				"revision": 121,
+				"state_sha256": "1b8f9b8cea05cd752565ea56b07acaa12080fa8f4156dc0acf810987bcda251e"
+			},
+			{
+				"action": "descend",
+				"args": {},
+				"floor": 7,
+				"phase": "battle",
+				"revision": 122,
+				"state_sha256": "7a38cbe9de4f311be8ad4d213158b3d42d141ca212d73792371c404a27cca8b7"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 7,
+				"phase": "battle",
+				"revision": 123,
+				"state_sha256": "2d3ae387d000d9378ccdae3b02861362135b0f8afd4da842ae52c9b33f9384f7"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 7,
+				"phase": "battle",
+				"revision": 124,
+				"state_sha256": "45f95fdbf0ce468bc5ab2f657bf31e15ac5d39d08902ac04577a5aef08429111"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 7,
+				"phase": "explore",
+				"revision": 125,
+				"state_sha256": "eaff5a00c07d6bcb2e01725d50168efb46a13e8c61363e0a1109f6a8134b4681"
+			},
+			{
+				"action": "descend",
+				"args": {},
+				"floor": 8,
+				"phase": "battle",
+				"revision": 126,
+				"state_sha256": "460a6f2a4063bb56b91e751ccdf75c456ca73339d1955ca87ad98f543f791c0b"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 8,
+				"phase": "battle",
+				"revision": 127,
+				"state_sha256": "094b450825676e70fdfa5980df9b277b3ceaeb595fa02f988039d18c57396beb"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 8,
+				"phase": "explore",
+				"revision": 128,
+				"state_sha256": "251e761e27d27114f3f4398f5d86792d0b299cbbb9d64eb5d4f26cad1bdddd96"
+			},
+			{
+				"action": "descend",
+				"args": {},
+				"floor": 9,
+				"phase": "battle",
+				"revision": 129,
+				"state_sha256": "1228e32dd82408d963277694e1a8053a2f7306e2a368a75069a95d582b4571c4"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 9,
+				"phase": "battle",
+				"revision": 130,
+				"state_sha256": "7c1e7f6213170634bc15484a483c161823b7c2b6d13cdc98fe00cd472748174a"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 9,
+				"phase": "battle",
+				"revision": 131,
+				"state_sha256": "ad6198b5f419830a0c05a3064c68f1098fb858ec908dc349d0dcd60b7884a6ed"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 9,
+				"phase": "battle",
+				"revision": 132,
+				"state_sha256": "be6bd3092355056b06047a3b9a3010f6f02e8d5cb4e26a20558c9bd17d9b9e40"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 9,
+				"phase": "battle",
+				"revision": 133,
+				"state_sha256": "fb234042173e766d510416f4b8762f6f885a9ea66a63c04e8586196013f8b440"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 9,
+				"phase": "explore",
+				"revision": 134,
+				"state_sha256": "dd7d68ce55f21650e56d0919a21d57029cdc3bbbe48b5e789f58d2c3fee00572"
+			},
+			{
+				"action": "return",
+				"args": {},
+				"floor": 9,
+				"phase": "result",
+				"revision": 135,
+				"state_sha256": "be283cc1705e890cf4ad16cb0b5b9e5a330008b49a9b8b7bb9e7f130b8385a47"
+			},
+			{
+				"action": "town",
+				"args": {},
+				"floor": 0,
+				"phase": "town",
+				"revision": 136,
+				"state_sha256": "4504fdc5c4e7274c6368e405988b5401760f25c61994b0fcb43ee7c7312cec21"
+			},
+			{
+				"action": "equip",
+				"args": {
+					"uid": "item-17"
+				},
+				"floor": 0,
+				"phase": "town",
+				"revision": 137,
+				"state_sha256": "883c76d24f053af628478c7bda543ec2e42091c8ca02474f23c9d70137488fa2"
+			},
+			{
+				"action": "deposit",
+				"args": {
+					"uid": "item-15"
+				},
+				"floor": 0,
+				"phase": "town",
+				"revision": 138,
+				"state_sha256": "225987bf4160feb0ed9f2c54c96f4fff7affa384c16a97e1a9ff930a10192654"
+			},
+			{
+				"action": "deposit",
+				"args": {
+					"uid": "item-16"
+				},
+				"floor": 0,
+				"phase": "town",
+				"revision": 139,
+				"state_sha256": "c5ebb53c8ef55149a16820afe6b457920ccf5cd1906d03be8265aa89826fe944"
+			},
+			{
+				"action": "depart",
+				"args": {},
+				"floor": 0,
+				"phase": "explore",
+				"revision": 140,
+				"state_sha256": "15c44351274bd561e0bc81059b3fcc244533351db1c0661933a24e049fe4f481"
+			},
+			{
+				"action": "descend",
+				"args": {},
+				"floor": 1,
+				"phase": "battle",
+				"revision": 141,
+				"state_sha256": "82cc3dc39f6272fc232839e3764cfb6bd55716afc258cc89ba55fc4e738e7de9"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 1,
+				"phase": "explore",
+				"revision": 142,
+				"state_sha256": "ea5ae46cf7ab9f07ee3556b46cb8021c4e43183a7e852f977beb20dd9be2ff3c"
+			},
+			{
+				"action": "descend",
+				"args": {},
+				"floor": 2,
+				"phase": "explore",
+				"revision": 143,
+				"state_sha256": "50c659f4ca21b442cdf18e9e177af8f4aac3c5ce974bb8a828f67621d7209be7"
+			},
+			{
+				"action": "descend",
+				"args": {},
+				"floor": 3,
+				"phase": "battle",
+				"revision": 144,
+				"state_sha256": "0d3807e5a33d04aaa11414b7fcdbd968a9581537e8d417ae5cda9dd031bdbe8c"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 3,
+				"phase": "battle",
+				"revision": 145,
+				"state_sha256": "640e2475719138096db2040a28cbbfb10e42f5830481d6828ad30fb3e6afcc3f"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 3,
+				"phase": "explore",
+				"revision": 146,
+				"state_sha256": "9c80c5ddcc23d6ef2d5f8a6c444730929ed56b4e9ebbb37e1120c586f751bb8b"
+			},
+			{
+				"action": "descend",
+				"args": {},
+				"floor": 4,
+				"phase": "battle",
+				"revision": 147,
+				"state_sha256": "d0421db57df4b966e57976293fee37db0ae55d9d5b01db7be1d516ecb054b8df"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 4,
+				"phase": "battle",
+				"revision": 148,
+				"state_sha256": "26013a40bf381b851b1424fe6325c8591cb22c69721d74b9a7c7674c9c30a05b"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 4,
+				"phase": "explore",
+				"revision": 149,
+				"state_sha256": "83f39d01f34a0650919f44fd8cb8d4e4d4b2967906dc4361ec0bfb53af653243"
+			},
+			{
+				"action": "descend",
+				"args": {},
+				"floor": 5,
+				"phase": "battle",
+				"revision": 150,
+				"state_sha256": "6f22d89355a97ee4a9c9bf272d9f3579d383d6cfcff1b551cf4c7fd00c75d90c"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 5,
+				"phase": "battle",
+				"revision": 151,
+				"state_sha256": "7cca3ff52d474d2d620b3e45fd258045282fc8a0bfec6d3cc2b51a634bdd3f0b"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 5,
+				"phase": "explore",
+				"revision": 152,
+				"state_sha256": "565a5d06274e2e03ff64584983887847383703454a56e00f2440e3cd83e210e2"
+			},
+			{
+				"action": "descend",
+				"args": {},
+				"floor": 6,
+				"phase": "event",
+				"revision": 153,
+				"state_sha256": "fcdef0fc557d7344bfcce973a0687e795a73c6b75690003560b9253cc5eeac71"
+			},
+			{
+				"action": "event",
+				"args": {
+					"choice": "accept"
+				},
+				"floor": 6,
+				"phase": "explore",
+				"revision": 154,
+				"state_sha256": "37e4ced0b54bfcf38cfaa6b9c70440b2989f10c1a4610ee170555a5ecdb4310c"
+			},
+			{
+				"action": "descend",
+				"args": {},
+				"floor": 7,
+				"phase": "event",
+				"revision": 155,
+				"state_sha256": "cb878502712980959bb822752f31ba39171ab426b410d68e494b2b7eae332209"
+			},
+			{
+				"action": "event",
+				"args": {
+					"choice": "accept"
+				},
+				"floor": 7,
+				"phase": "explore",
+				"revision": 156,
+				"state_sha256": "5d14ca5a60fe9533ac1780f03272acbce977d4e7807b0f39db1662cc1471a423"
+			},
+			{
+				"action": "descend",
+				"args": {},
+				"floor": 8,
+				"phase": "battle",
+				"revision": 157,
+				"state_sha256": "cfd4e810abb89829336d38ce30af8cede14759c4fe329aa72169a65b1951789a"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 8,
+				"phase": "battle",
+				"revision": 158,
+				"state_sha256": "a93287fde61d3141da244137cedc258af44a80da7c1b6eb1e3feabe82a68c926"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 8,
+				"phase": "battle",
+				"revision": 159,
+				"state_sha256": "372d6266fe905e1716646f222b46de77fa944f777f3cc30cd2e4b171957063a9"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 8,
+				"phase": "explore",
+				"revision": 160,
+				"state_sha256": "0850f91f9c8dc181b235ae5f8083919f70ccc2055fb439a4f675144758cbfd01"
+			},
+			{
+				"action": "descend",
+				"args": {},
+				"floor": 9,
+				"phase": "event",
+				"revision": 161,
+				"state_sha256": "41b1e2d944b1db53ac171cc93f5d1c059986f62fa5d64e24b98f2d2443a0c8a7"
+			},
+			{
+				"action": "event",
+				"args": {
+					"choice": "accept"
+				},
+				"floor": 9,
+				"phase": "explore",
+				"revision": 162,
+				"state_sha256": "09e6c05465b4e24942dbe2762a2b6cc918788517046fa36cf4e333d1476e8601"
+			},
+			{
+				"action": "descend",
+				"args": {},
+				"floor": 10,
+				"phase": "battle",
+				"revision": 163,
+				"state_sha256": "9a48dab559eeeb225c394cd07e6666a8ba97d28dfa02149e1f444a19d18cf0d3"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 10,
+				"phase": "battle",
+				"revision": 164,
+				"state_sha256": "232c109aeb3aba0deea74049a3ff3eabc71bb6ea97d53ceae7b886d0536d7f63"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 10,
+				"phase": "battle",
+				"revision": 165,
+				"state_sha256": "962b8845ab5543aa3ccb92bcf0727bb30b83408268d226a6da01270ec22abf22"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 10,
+				"phase": "battle",
+				"revision": 166,
+				"state_sha256": "367dc0f7f0ba80d8718f184bc06b4920868dc036762b510ac56d3e72ba66e639"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 10,
+				"phase": "battle",
+				"revision": 167,
+				"state_sha256": "cac56c03d220503af2f763396b299af87dbb075ea0f28e5633c9c7026d41ed8b"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 10,
+				"phase": "battle",
+				"revision": 168,
+				"state_sha256": "02d5d86cb1b2ba48226e2b63fb89b41a2cfb5c1c8d5863023502e409cdb53e2e"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 10,
+				"phase": "result",
+				"revision": 169,
+				"state_sha256": "efb50bbb19d5533aa86c29d363902472bd9f1a7da21df383a93b09aec08bb8eb"
+			},
+			{
+				"action": "town",
+				"args": {},
+				"floor": 0,
+				"phase": "town",
+				"revision": 170,
+				"state_sha256": "81669ad4a5df5fefe3a8fa3db7f645fa7a36e3288aa6718f368efd2a5d303c7d"
+			},
+			{
+				"action": "deposit",
+				"args": {
+					"uid": "item-18"
+				},
+				"floor": 0,
+				"phase": "town",
+				"revision": 171,
+				"state_sha256": "e368ad5e81224706e453779a09897020bae55898af14c5ac1b4a13a56f8b6729"
+			},
+			{
+				"action": "deposit",
+				"args": {
+					"uid": "item-19"
+				},
+				"floor": 0,
+				"phase": "town",
+				"revision": 172,
+				"state_sha256": "94b4f780da7c029ab883d7a9b57713135e030d90da2bc19023bae7c47d531052"
+			},
+			{
+				"action": "deposit",
+				"args": {
+					"uid": "item-20"
+				},
+				"floor": 0,
+				"phase": "town",
+				"revision": 173,
+				"state_sha256": "6f94320daa49a69587eef29b8db631cea01e217bb614ff8f193eb862185ccb9f"
+			},
+			{
+				"action": "deposit",
+				"args": {
+					"uid": "item-21"
+				},
+				"floor": 0,
+				"phase": "town",
+				"revision": 174,
+				"state_sha256": "6387ae88c0aa7a27ad74cc79382e83c621dcc493ad607e01865f8658ea9f1d1d"
+			},
+			{
+				"action": "deposit",
+				"args": {
+					"uid": "item-22"
+				},
+				"floor": 0,
+				"phase": "town",
+				"revision": 175,
+				"state_sha256": "9299051628476722eede54ae1d8074556167973a087efc5b69e387da5d512a5f"
+			},
+			{
+				"action": "depart",
+				"args": {},
+				"floor": 0,
+				"phase": "explore",
+				"revision": 176,
+				"state_sha256": "73a2e1fe8797da70562ec0b624f08eb42cb624538676a56357855b417a253683"
+			},
+			{
+				"action": "descend",
+				"args": {},
+				"floor": 1,
+				"phase": "battle",
+				"revision": 177,
+				"state_sha256": "6da2751858a08eda8bfde0d3d6c68a7ef1b082117b4eb0f7d2f0925a28c5adf0"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 1,
+				"phase": "battle",
+				"revision": 178,
+				"state_sha256": "3feb6bd7d7b40eefcd4ac734bc9f75834c475eacf98d7714bb4827f43ec5c736"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 1,
+				"phase": "explore",
+				"revision": 179,
+				"state_sha256": "47269ead6cf6d7093b908800606038be6a6c6505b0942fdf5eea5d64342989e2"
+			},
+			{
+				"action": "descend",
+				"args": {},
+				"floor": 2,
+				"phase": "battle",
+				"revision": 180,
+				"state_sha256": "0b8622380a346c2ea51a5b6b644de72863cd4435df6428ccec63b641e9dd4b97"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 2,
+				"phase": "explore",
+				"revision": 181,
+				"state_sha256": "3c7e91e85f1258a43f7a34951e9bfb9cc80c116a6a02f2a603617a7d3ba3b267"
+			},
+			{
+				"action": "descend",
+				"args": {},
+				"floor": 3,
+				"phase": "battle",
+				"revision": 182,
+				"state_sha256": "306c8f3042423e20d082d8f5512789b37910ac89bc70b7ace5d66e402b779d3a"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 3,
+				"phase": "explore",
+				"revision": 183,
+				"state_sha256": "eb876b2d94b3de2a6465b45f98806b536524176f1c208d7cece3a410b6a4aa8f"
+			},
+			{
+				"action": "descend",
+				"args": {},
+				"floor": 4,
+				"phase": "battle",
+				"revision": 184,
+				"state_sha256": "ed5fec85978f50d1eb28e6c0b81f22f1e9d035ab6e989ea3c4dcf18d72360234"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 4,
+				"phase": "explore",
+				"revision": 185,
+				"state_sha256": "3f833c4ab25bed4f9d3d4569bd7eb573995fa4122d9793afb64ab36ba8900c1d"
+			},
+			{
+				"action": "descend",
+				"args": {},
+				"floor": 5,
+				"phase": "battle",
+				"revision": 186,
+				"state_sha256": "e4b04a04163f3878eefd6627a78b1f35e621b6e6001c9b6b69c56b0245d79e17"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 5,
+				"phase": "battle",
+				"revision": 187,
+				"state_sha256": "ab4abc2afea4c2a1e801b164a6d547dcc5ed738d3df77938ff1ed4cf1312853c"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 5,
+				"phase": "explore",
+				"revision": 188,
+				"state_sha256": "6c5202beae13a1e46eb60edf439792bab6b5db63cb45015d1b947bdd70f7adc3"
+			},
+			{
+				"action": "descend",
+				"args": {},
+				"floor": 6,
+				"phase": "battle",
+				"revision": 189,
+				"state_sha256": "41fcb070617d281d49cbb1d45d54144db6c3e5f50a60737b2128c13b11e3a5be"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 6,
+				"phase": "battle",
+				"revision": 190,
+				"state_sha256": "b56e8b14379b663fa393bb34dd8be5c10a01409f5365d92bf9e035aba8565052"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 6,
+				"phase": "explore",
+				"revision": 191,
+				"state_sha256": "7370479e62d486c89ead0ec678e3889eb718f34ed0ebd20d834bd0f5d0e3cc71"
+			},
+			{
+				"action": "descend",
+				"args": {},
+				"floor": 7,
+				"phase": "battle",
+				"revision": 192,
+				"state_sha256": "e4e2425a36e85702e670b1b8fb466f6cbae5f1f9f63af3dbf29d78478736253f"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 7,
+				"phase": "battle",
+				"revision": 193,
+				"state_sha256": "7aba1dbb2ca3950dab9f0cfdd5b72c35e16dc25b122577c04c811c32e6324879"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 7,
+				"phase": "explore",
+				"revision": 194,
+				"state_sha256": "a213d7c98fd9bcd343224737d13c78bdfaa1c3ed5ee902a79d54d7dbd55fca0e"
+			},
+			{
+				"action": "descend",
+				"args": {},
+				"floor": 8,
+				"phase": "battle",
+				"revision": 195,
+				"state_sha256": "5c772687b703087f73b32789b2e0520903f114171d48eba4b4d6dda26827890e"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 8,
+				"phase": "battle",
+				"revision": 196,
+				"state_sha256": "3aea515b0fb24ccb804dce5d4202c8d0acc6f199898940ac1e717c8fc44db83d"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 8,
+				"phase": "explore",
+				"revision": 197,
+				"state_sha256": "c621ad5bc26a8b58e718e552d19e9e25401aa0e28c8416baa718291544bd7362"
+			},
+			{
+				"action": "descend",
+				"args": {},
+				"floor": 9,
+				"phase": "battle",
+				"revision": 198,
+				"state_sha256": "121d98ad5ea5d8b32d5475bf1d284c04631db8c3225cf13deed8e33497776139"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 9,
+				"phase": "battle",
+				"revision": 199,
+				"state_sha256": "7f4095d554aeda298bb4c527078708cec86f75f33510a1ff951325b63cdba15c"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 9,
+				"phase": "battle",
+				"revision": 200,
+				"state_sha256": "054086c1fed753bf08ad4e8e595bb78bdd0cc53155bb9940040c390680d341a1"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 9,
+				"phase": "explore",
+				"revision": 201,
+				"state_sha256": "d41c9165dc5204f65fb17a3e68a5e63e417ade2fc0035df0675a6bc099e748bb"
+			},
+			{
+				"action": "return",
+				"args": {},
+				"floor": 9,
+				"phase": "result",
+				"revision": 202,
+				"state_sha256": "910e4fddac6d52fac329685a41b0dcc2256e749fab4b84c279f39e3bb552e0af"
+			},
+			{
+				"action": "town",
+				"args": {},
+				"floor": 0,
+				"phase": "town",
+				"revision": 203,
+				"state_sha256": "e0408bbbb79844ce4fdda8913153373ce881b7d5feedcda11f89638e289ac02b"
+			},
+			{
+				"action": "deposit",
+				"args": {
+					"uid": "item-23"
+				},
+				"floor": 0,
+				"phase": "town",
+				"revision": 204,
+				"state_sha256": "454ce29a9f721c38323f7b04fa7c7d6e51f3bf36fb0a222a39a8ce57ba130de0"
+			},
+			{
+				"action": "depart",
+				"args": {},
+				"floor": 0,
+				"phase": "explore",
+				"revision": 205,
+				"state_sha256": "b641de61fd7b6d369cb3326c8696cd2c9b0d89621c9ab76d3dbeca67f0d104bb"
+			},
+			{
+				"action": "descend",
+				"args": {},
+				"floor": 1,
+				"phase": "explore",
+				"revision": 206,
+				"state_sha256": "9cfba500e4fdfbb42ef5159718d2d699f4a23de2147e73b5fc6fe070b1d7bb28"
+			},
+			{
+				"action": "descend",
+				"args": {},
+				"floor": 2,
+				"phase": "battle",
+				"revision": 207,
+				"state_sha256": "ba836e1bd08f19ae39ed1b7de5d23bdb6d88a3a437671a0a02f12e4a9504edc9"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 2,
+				"phase": "explore",
+				"revision": 208,
+				"state_sha256": "5bfc457faa0e1f820a76897f178b90a0b661537d26b9bc1c29bb6915db6a03b5"
+			},
+			{
+				"action": "descend",
+				"args": {},
+				"floor": 3,
+				"phase": "battle",
+				"revision": 209,
+				"state_sha256": "46878d9057434b8c3c1a04f90325d08068d7930bb239a9e4a16cfceeb6b9573a"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 3,
+				"phase": "battle",
+				"revision": 210,
+				"state_sha256": "1d66b6b83d3772bc06b0e32b01c7cb73f4cb5475f3da07f8835611075be549e8"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 3,
+				"phase": "explore",
+				"revision": 211,
+				"state_sha256": "f00e45f2acd631520736a539cb42420413679b95bb1b4583b53892acac56492d"
+			},
+			{
+				"action": "descend",
+				"args": {},
+				"floor": 4,
+				"phase": "battle",
+				"revision": 212,
+				"state_sha256": "4d454bc83a1361c1f60a838fb681532066add48a936a20e8737aaeb22e1efc0f"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 4,
+				"phase": "battle",
+				"revision": 213,
+				"state_sha256": "446ad9d9c666792e899bdc19570dda51558b68ef291940888201f7c601a32b20"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 4,
+				"phase": "explore",
+				"revision": 214,
+				"state_sha256": "da18cb3b6d080647c11b606da69423db4a99d45cbac039af29a1bf1a37c7f239"
+			},
+			{
+				"action": "descend",
+				"args": {},
+				"floor": 5,
+				"phase": "battle",
+				"revision": 215,
+				"state_sha256": "7a86b4367e1ff02fcb82a22fa1128783d2b7a1a837d3dbf9d8b1f8b6abd6f88f"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 5,
+				"phase": "battle",
+				"revision": 216,
+				"state_sha256": "57f60a6b3bad0283b18de21947ecd1896b7258294d0f23d9ac9edadd8381dd98"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 5,
+				"phase": "explore",
+				"revision": 217,
+				"state_sha256": "76c5cd59d53bed4b68a10102ced9116ec2867052dbfdda2684a904d4a4aa03ef"
+			},
+			{
+				"action": "descend",
+				"args": {},
+				"floor": 6,
+				"phase": "event",
+				"revision": 218,
+				"state_sha256": "43e0eaaf88544c296ff9913e51d58cb535a8c365b42eb968f84bb30bbb239286"
+			},
+			{
+				"action": "event",
+				"args": {
+					"choice": "accept"
+				},
+				"floor": 6,
+				"phase": "explore",
+				"revision": 219,
+				"state_sha256": "f28dcb778c97ffd8ec55d771bebe1b4c77a7c2209b2508b4b5322bc76c993fdc"
+			},
+			{
+				"action": "descend",
+				"args": {},
+				"floor": 7,
+				"phase": "explore",
+				"revision": 220,
+				"state_sha256": "c0f0eef1ea7c51cc856374f74b9f5fcaa6001db5f7e357d4f483ec4d167d9161"
+			},
+			{
+				"action": "descend",
+				"args": {},
+				"floor": 8,
+				"phase": "battle",
+				"revision": 221,
+				"state_sha256": "54a13176157353ce32b1357163c737036a34593170c607cd9838d069a765618b"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 8,
+				"phase": "battle",
+				"revision": 222,
+				"state_sha256": "6bd1adae5677b8b721f4a554f148cd6c5e508fab6c99ed93ca0cd0eda15037cd"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 8,
+				"phase": "battle",
+				"revision": 223,
+				"state_sha256": "dfa6749700f2f4287312b505d258beb5b24d00093920c5c07cd5aae3b05bad35"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 8,
+				"phase": "explore",
+				"revision": 224,
+				"state_sha256": "89442f36083e2b2033068cf32bc588674b9f7106b1ffcc324c531790a22ad24d"
+			},
+			{
+				"action": "descend",
+				"args": {},
+				"floor": 9,
+				"phase": "battle",
+				"revision": 225,
+				"state_sha256": "645e90f7afee97439165e465db4f33975e7258c531ca87701758adf2018a9359"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 9,
+				"phase": "battle",
+				"revision": 226,
+				"state_sha256": "4434a9cd32cdbcce0ada3fc4d88faf65b467ea407582532ad8c161f03b59e2df"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 9,
+				"phase": "battle",
+				"revision": 227,
+				"state_sha256": "0c3b38784e4e52f723934616e01c53d36e4b17f9a02a72a3512ea3f6c4bb1826"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 9,
+				"phase": "battle",
+				"revision": 228,
+				"state_sha256": "a3943c7815eead9bc972e41ce9a4c0a0ea7729b38468f10407a819e928f9ce94"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 9,
+				"phase": "explore",
+				"revision": 229,
+				"state_sha256": "84edde6188369dc1655f7cac4028618bba607fbc1eeb65047e92dc3e094a0b99"
+			},
+			{
+				"action": "return",
+				"args": {},
+				"floor": 9,
+				"phase": "result",
+				"revision": 230,
+				"state_sha256": "9db9252d201186d66f69eb41a96003658d0df7f0d9422b73dd41731df8aa6c23"
+			},
+			{
+				"action": "town",
+				"args": {},
+				"floor": 0,
+				"phase": "town",
+				"revision": 231,
+				"state_sha256": "321f9f11d1910d82a388851427e8c74fc7ab2d42986ab68c29b69f641bac498f"
+			},
+			{
+				"action": "equip",
+				"args": {
+					"uid": "item-25"
+				},
+				"floor": 0,
+				"phase": "town",
+				"revision": 232,
+				"state_sha256": "6de5b9ba2d73f37f3855ee1e7e1a89e413179ace8fcbf9b4e128028901afac42"
+			},
+			{
+				"action": "deposit",
+				"args": {
+					"uid": "item-24"
+				},
+				"floor": 0,
+				"phase": "town",
+				"revision": 233,
+				"state_sha256": "6c452200aa797ed920fec2ef271931a726647496e6c3f05ac461f26f6de0c945"
+			},
+			{
+				"action": "depart",
+				"args": {},
+				"floor": 0,
+				"phase": "explore",
+				"revision": 234,
+				"state_sha256": "396551fd6f5c8ea9b5955b06ecc2650270420d896ebaac0f329b1d3b1cf9d008"
+			},
+			{
+				"action": "descend",
+				"args": {},
+				"floor": 1,
+				"phase": "battle",
+				"revision": 235,
+				"state_sha256": "d8c538f1691fd5116ab6eb276363a9574156a34be0539078c9599ad31b379119"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 1,
+				"phase": "explore",
+				"revision": 236,
+				"state_sha256": "df130de0d8836751694e598a9e47f5b0835b2ce29e1004a5f289e31f7bc341e5"
+			},
+			{
+				"action": "descend",
+				"args": {},
+				"floor": 2,
+				"phase": "event",
+				"revision": 237,
+				"state_sha256": "1e60ad61b4e351c8ad52a0304b6061a3ef3906a050a54cde4611246b3b9b48cb"
+			},
+			{
+				"action": "event",
+				"args": {
+					"choice": "accept"
+				},
+				"floor": 2,
+				"phase": "explore",
+				"revision": 238,
+				"state_sha256": "1878e27d660c07b1b8179a148c09a506fac77bf79489ec7ef6236219139da1da"
+			},
+			{
+				"action": "descend",
+				"args": {},
+				"floor": 3,
+				"phase": "battle",
+				"revision": 239,
+				"state_sha256": "3aa3c87c0e78608559ca4f2770154d7b3527bb0ab86547f41e72c38da5b5c9aa"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 3,
+				"phase": "explore",
+				"revision": 240,
+				"state_sha256": "54767d18fb2df4c64930eccc6ab357b81935c09804fa808d544f807a9999393c"
+			},
+			{
+				"action": "descend",
+				"args": {},
+				"floor": 4,
+				"phase": "battle",
+				"revision": 241,
+				"state_sha256": "7f7e1e78d0759c563cbd9020753248bf7a3530ab66b302e9af018f74cd175669"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 4,
+				"phase": "explore",
+				"revision": 242,
+				"state_sha256": "619e7baf1f8c887aed392aa69538ea9661c529f7372d7e083742520941dd2d2c"
+			},
+			{
+				"action": "descend",
+				"args": {},
+				"floor": 5,
+				"phase": "battle",
+				"revision": 243,
+				"state_sha256": "2e919b205021de233fcd35c556c0d4db2978c72fdfe653acac9812b42eb43e21"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 5,
+				"phase": "explore",
+				"revision": 244,
+				"state_sha256": "98a6080dd8d82d6c35a51fe6fe298ce0afb6325b94135234f1e1f50013652bd0"
+			},
+			{
+				"action": "descend",
+				"args": {},
+				"floor": 6,
+				"phase": "battle",
+				"revision": 245,
+				"state_sha256": "d5044ada2bb3977e5451271fbee98cbe8b8c22104293b1f1308b6f72b8f35939"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 6,
+				"phase": "explore",
+				"revision": 246,
+				"state_sha256": "dbd9e19d810f6bbb41fac5a24468268459274014a6545a6030b893eb6ce66c02"
+			},
+			{
+				"action": "descend",
+				"args": {},
+				"floor": 7,
+				"phase": "battle",
+				"revision": 247,
+				"state_sha256": "49dbf01ad4eac44137bed89bed0b192f09286ca954b9aee6d249be0b4bb87531"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 7,
+				"phase": "battle",
+				"revision": 248,
+				"state_sha256": "d9a32443698578bb961ff2828aded547091a1f935038c9a4b8ec81c061d55fdc"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 7,
+				"phase": "explore",
+				"revision": 249,
+				"state_sha256": "c2abdf122994f805c93e797cca39477c0c27ec77c3ffc060de6b4a33d217d3fc"
+			},
+			{
+				"action": "descend",
+				"args": {},
+				"floor": 8,
+				"phase": "battle",
+				"revision": 250,
+				"state_sha256": "59ce7a5d8c69f0698c089725ce596bc5586d6a8428f48a61f9db2810b105706b"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 8,
+				"phase": "battle",
+				"revision": 251,
+				"state_sha256": "77af8a41b8761ebe94cb74b9af548beb38187764d66f2f21427dba9cc184d2c8"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 8,
+				"phase": "battle",
+				"revision": 252,
+				"state_sha256": "2111707ca2ca2b04b2623a53ac26529c9301eacc4093744e3f864a4c3b13cff4"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 8,
+				"phase": "explore",
+				"revision": 253,
+				"state_sha256": "b3fafade2f71493780e924c562b25f4c5bcc77b1086768000c66b08670e7e42c"
+			},
+			{
+				"action": "descend",
+				"args": {},
+				"floor": 9,
+				"phase": "battle",
+				"revision": 254,
+				"state_sha256": "27105c14f81b8fed66a13183e3ae8be363bcf715c0664f452584bb58faf3f66c"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 9,
+				"phase": "battle",
+				"revision": 255,
+				"state_sha256": "db2447a2b91498e4ec329fdbf166376afeae62efc26387c1cae6054e12277400"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 9,
+				"phase": "battle",
+				"revision": 256,
+				"state_sha256": "eb1d5fe964e34ef20750002ee79a14a27aad45f6b6b37ff940019176cb768c53"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 9,
+				"phase": "explore",
+				"revision": 257,
+				"state_sha256": "30e7b426735fd26abe3dc4f1d84375cc05513155b9e8592e0410e06aa2362740"
+			},
+			{
+				"action": "return",
+				"args": {},
+				"floor": 9,
+				"phase": "result",
+				"revision": 258,
+				"state_sha256": "aa3818af4eb5ccf89b7299aa6d832729e7829045a60429ade1444b3a64106f17"
+			},
+			{
+				"action": "town",
+				"args": {},
+				"floor": 0,
+				"phase": "town",
+				"revision": 259,
+				"state_sha256": "48fdc29d0ff9af967ed9a319093ee4fd01731b87e4f081d8d12cabc536daf97b"
+			},
+			{
+				"action": "deposit",
+				"args": {
+					"uid": "item-26"
+				},
+				"floor": 0,
+				"phase": "town",
+				"revision": 260,
+				"state_sha256": "2224b188663a55882c9802ecdc03670af98ea998b37fc8cea47a91f6b92d41a1"
+			},
+			{
+				"action": "deposit",
+				"args": {
+					"uid": "item-27"
+				},
+				"floor": 0,
+				"phase": "town",
+				"revision": 261,
+				"state_sha256": "b50afcd8154a0d0bf57734e4553c419bcb361e258bd670fbc043e13ee818652b"
+			},
+			{
+				"action": "depart",
+				"args": {},
+				"floor": 0,
+				"phase": "explore",
+				"revision": 262,
+				"state_sha256": "4a0cc2fa7face52476bc47c237ea7d63192a9f0aceab095d4f64e0e5592dfaab"
+			},
+			{
+				"action": "descend",
+				"args": {},
+				"floor": 1,
+				"phase": "battle",
+				"revision": 263,
+				"state_sha256": "393aad616bed354ee860588a656140698b954b3d80fcdc5b254e79c3abf64fb0"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 1,
+				"phase": "explore",
+				"revision": 264,
+				"state_sha256": "b886f6a7f3e6a593366ea4a9f8562e6fd26e7c7f67bf403c98b46bf80617a0cb"
+			},
+			{
+				"action": "descend",
+				"args": {},
+				"floor": 2,
+				"phase": "battle",
+				"revision": 265,
+				"state_sha256": "c15cbcd34cf7cc6647e1eda3d8dfdeb1fc034c5d6a165ebf2570562c6c9543fc"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 2,
+				"phase": "explore",
+				"revision": 266,
+				"state_sha256": "6dce40b83a3352f0b35186bfdb999da2558fddf121d7943b6ef1b175998a391e"
+			},
+			{
+				"action": "descend",
+				"args": {},
+				"floor": 3,
+				"phase": "battle",
+				"revision": 267,
+				"state_sha256": "50bb0fb0ecdc3db34a015244d56f88c4466725de10a03f9a8d13c0e5035adb6b"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 3,
+				"phase": "explore",
+				"revision": 268,
+				"state_sha256": "3e1b9ae84ac0905d0d9e41eef2e2222eb8b938d7ca265e1e15f8a94ee7377009"
+			},
+			{
+				"action": "descend",
+				"args": {},
+				"floor": 4,
+				"phase": "battle",
+				"revision": 269,
+				"state_sha256": "ce213f31be5c6b6fbc8e7d1870af6a15cfa35c164bb3f2d00b6d7a818d90a1c2"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 4,
+				"phase": "explore",
+				"revision": 270,
+				"state_sha256": "c961bdfdf4774e0561e0c831f785b0b40d248fc013757f83aaef0d37650100ff"
+			},
+			{
+				"action": "descend",
+				"args": {},
+				"floor": 5,
+				"phase": "battle",
+				"revision": 271,
+				"state_sha256": "861391a822a4be4629b1c3103772a88dc0a689759c65b6bf36142299868a9b46"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 5,
+				"phase": "explore",
+				"revision": 272,
+				"state_sha256": "2d4ed3eb7e648225076972488ad42c2bc016937e5522c7da4c1419548c30cf9f"
+			},
+			{
+				"action": "descend",
+				"args": {},
+				"floor": 6,
+				"phase": "battle",
+				"revision": 273,
+				"state_sha256": "60dbbcf9ab8c9c425e9fe96db305bbdac47b670bbd86b49616bff6daeb2c37b7"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 6,
+				"phase": "explore",
+				"revision": 274,
+				"state_sha256": "4e02839c09dadf216a147660976f672775756fbeb97214b2496dd31c5c8d0c10"
+			},
+			{
+				"action": "descend",
+				"args": {},
+				"floor": 7,
+				"phase": "battle",
+				"revision": 275,
+				"state_sha256": "2091a50e2b4335bc06ead4cd9a03f56cf8a98563863766da1e603b7da62ff276"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 7,
+				"phase": "explore",
+				"revision": 276,
+				"state_sha256": "3d3ef584ce57974fdc52a80a09da609d706319d8971a1a9560b4471208981047"
+			},
+			{
+				"action": "descend",
+				"args": {},
+				"floor": 8,
+				"phase": "battle",
+				"revision": 277,
+				"state_sha256": "b40b957d824548c79eae6c39b7c70dcb2141ae07245b43daa086b166bed60c69"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 8,
+				"phase": "battle",
+				"revision": 278,
+				"state_sha256": "1ecc8e464bc8ef9bd0c1183fee33cfc44a412a0ffebd3b6386d8ffe4f2ca4cc8"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 8,
+				"phase": "explore",
+				"revision": 279,
+				"state_sha256": "29252436ebd22ba5bbf882c87c8229773328382bc7c4f8833908eed470afd326"
+			},
+			{
+				"action": "descend",
+				"args": {},
+				"floor": 9,
+				"phase": "battle",
+				"revision": 280,
+				"state_sha256": "e7b32680df5d10cba785c9efeffb2bfb171a567a57bde00124b61771fa7c2529"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 9,
+				"phase": "battle",
+				"revision": 281,
+				"state_sha256": "a4fe0e8b557aa5e1a2fba3dc7f4ed2ba780171c94cb1bda3a65671e49cd86108"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 9,
+				"phase": "explore",
+				"revision": 282,
+				"state_sha256": "ddfd6e94939b6395d9246bba7f4af3f56cc62b08daeb75a7ede3f1106e3b1a64"
+			},
+			{
+				"action": "descend",
+				"args": {},
+				"floor": 10,
+				"phase": "battle",
+				"revision": 283,
+				"state_sha256": "bc85caaa049a133f70bc717f69db99025ba549d198bebd12c960ade312ef7d05"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 10,
+				"phase": "battle",
+				"revision": 284,
+				"state_sha256": "8aef5a48582b8e27dfdf35957a8be75923dfda18c0389ace11829e192ac96caf"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 10,
+				"phase": "battle",
+				"revision": 285,
+				"state_sha256": "aa92dd25077f7f9255237012e4150a2f9f27879878185503dd66d1d8f97aa7fc"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 10,
+				"phase": "battle",
+				"revision": 286,
+				"state_sha256": "1da3468a59a23a9a51cd67f6d2f7972c5dc78f0547b495c724faa3a88a62fb70"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 10,
+				"phase": "battle",
+				"revision": 287,
+				"state_sha256": "df7903ee0fda95101140e6aa0df606b8400cfd08f115d90202da50c436cda535"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 10,
+				"phase": "battle",
+				"revision": 288,
+				"state_sha256": "9af4788664943d98c4d8f29433e2e1a37ede273319a350f7007af1132cf6f5b0"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 10,
+				"phase": "battle",
+				"revision": 289,
+				"state_sha256": "ed44283eeaf67ffe1f76d610f423798b4c2c79e2b67e06f79f6377b3d12a5a39"
+			},
+			{
+				"action": "round",
+				"args": {},
+				"floor": 10,
+				"phase": "result",
+				"revision": 290,
+				"state_sha256": "edd3cace3bb8376f1e2d80cb0cc6a44270874df5893a0a91906b036046996d2a"
+			}
+		],
+		"cleared": true,
+		"error": "",
+		"exp": 585,
+		"final_state": {
+			"battle": {},
+			"config_version": "2026-10-17.loop-provisional.2",
+			"deaths": 2,
+			"equipment": {
+				"body": "item-2",
+				"ears": "",
+				"eyes": "item-25",
+				"feet": "item-5",
+				"finger": "item-13",
+				"head": "item-1",
+				"left_hand": "",
+				"legs": "",
+				"neck": "",
+				"right_hand": "",
+				"wrist": "item-17"
+			},
+			"event": "",
+			"exp": 585,
+			"first_done": true,
+			"floor": 10,
+			"gold": 447,
+			"highest_floor": 11,
+			"hp": 25,
+			"inventory": [
+				"item-28",
+				"item-29"
+			],
+			"items": {
+				"item-1": "I01",
+				"item-10": "I10",
+				"item-11": "I01",
+				"item-12": "I04",
+				"item-13": "I05",
+				"item-14": "I10",
+				"item-15": "I01",
+				"item-16": "I04",
+				"item-17": "I06",
+				"item-18": "I10",
+				"item-19": "I05",
+				"item-2": "I02",
+				"item-20": "I10",
+				"item-21": "I10",
+				"item-22": "I10",
+				"item-23": "I01",
+				"item-24": "I04",
+				"item-25": "I09",
+				"item-26": "I10",
+				"item-27": "I10",
+				"item-28": "I06",
+				"item-29": "I11",
+				"item-3": "I10",
+				"item-4": "I10",
+				"item-5": "I04",
+				"item-6": "I01",
+				"item-7": "I04",
+				"item-8": "I04",
+				"item-9": "I04"
+			},
+			"journal": [
+				"入手：守りの腕輪",
+				"地下9F：坑道ゴブリン Lv.6 が現れた。",
+				"主人公 → 坑道ゴブリン  15 ダメージ",
+				"坑道ゴブリン → 主人公  4 ダメージ",
+				"主人公 → 坑道ゴブリン  14 ダメージ",
+				"Lv.10 に成長した。",
+				"勝利  EXP +15 / Gold +13",
+				"地下10F：門番の石像 Lv.6 が現れた。",
+				"主人公 → 門番の石像  13 ダメージ",
+				"門番の石像 → 主人公  8 ダメージ",
+				"主人公 → 門番の石像  13 ダメージ",
+				"門番の石像 → 主人公  ミス",
+				"主人公 → 門番の石像  13 ダメージ",
+				"門番の石像 → 主人公  ミス",
+				"主人公 → 門番の石像  13 ダメージ",
+				"門番の石像 → 主人公  8 ダメージ",
+				"主人公 → 門番の石像  13 ダメージ",
+				"門番の石像 → 主人公  8 ダメージ",
+				"主人公 → 門番の石像  14 ダメージ",
+				"門番の石像 → 主人公  8 ダメージ",
+				"主人公 → 門番の石像  13 ダメージ",
+				"勝利  EXP +44 / Gold +64",
+				"入手：深層の指輪",
+				"10Fの門番を倒した。11Fへの到達を記録し、町へ帰還する。"
+			],
+			"last_outcome": "victory",
+			"next_item": 30,
+			"phase": "result",
+			"result": {
+				"floor": 10,
+				"kind": "clear",
+				"loss": {
+					"exp": 0,
+					"gold": 0,
+					"items": 0
+				},
+				"reason": "10Fの門番を倒した。11Fへの到達を記録し、町へ帰還する。"
+			},
+			"revision": 290,
+			"rng": {
+				"battle": 62,
+				"explore": 218,
+				"loot": 157
+			},
+			"schema_version": 1,
+			"seed": 10000,
+			"sp": 9,
+			"story_deaths": 1,
+			"trips": 14,
+			"warehouse": [
+				"item-3",
+				"item-4",
+				"item-6",
+				"item-7",
+				"item-8",
+				"item-9",
+				"item-10",
+				"item-11",
+				"item-12",
+				"item-14",
+				"item-15",
+				"item-16",
+				"item-18",
+				"item-19",
+				"item-20",
+				"item-21",
+				"item-22",
+				"item-23",
+				"item-24",
+				"item-26",
+				"item-27"
+			]
+		},
+		"floors": {
+			"1": {
+				"battles": 8,
+				"chests": 5,
+				"clears": 0,
+				"deaths": 0,
+				"enemies": {
+					"E01": 6,
+					"E02": 2
+				},
+				"entries": 13,
+				"events": 0,
+				"items": {
+					"I01": 2,
+					"I02": 1,
+					"I04": 3
+				},
+				"levels": {
+					"1": 8
+				},
+				"returns": 0
+			},
+			"10": {
+				"battles": 2,
+				"chests": 0,
+				"clears": 1,
+				"deaths": 1,
+				"enemies": {
+					"B10": 2
+				},
+				"entries": 2,
+				"events": 0,
+				"items": {
+					"I11": 1
+				},
+				"levels": {
+					"6": 2
+				},
+				"returns": 0
+			},
+			"2": {
+				"battles": 6,
+				"chests": 4,
+				"clears": 0,
+				"deaths": 0,
+				"enemies": {
+					"E01": 3,
+					"E02": 3
+				},
+				"entries": 13,
+				"events": 3,
+				"items": {
+					"I01": 2,
+					"I04": 1,
+					"I10": 2
+				},
+				"levels": {
+					"1": 3,
+					"2": 3
+				},
+				"returns": 0
+			},
+			"3": {
+				"battles": 9,
+				"chests": 4,
+				"clears": 0,
+				"deaths": 0,
+				"enemies": {
+					"E01": 6,
+					"E02": 1,
+					"E03": 2
+				},
+				"entries": 13,
+				"events": 0,
+				"items": {
+					"I04": 3,
+					"I10": 2
+				},
+				"levels": {
+					"2": 4,
+					"3": 5
+				},
+				"returns": 4
+			},
+			"4": {
+				"battles": 9,
+				"chests": 0,
+				"clears": 0,
+				"deaths": 0,
+				"enemies": {
+					"E02": 4,
+					"E03": 2,
+					"E04": 3
+				},
+				"entries": 9,
+				"events": 0,
+				"items": {
+					"I05": 1
+				},
+				"levels": {
+					"2": 3,
+					"3": 3,
+					"4": 3
+				},
+				"returns": 0
+			},
+			"5": {
+				"battles": 6,
+				"chests": 2,
+				"clears": 0,
+				"deaths": 0,
+				"enemies": {
+					"E02": 2,
+					"E03": 3,
+					"E04": 1
+				},
+				"entries": 9,
+				"events": 1,
+				"items": {
+					"I05": 1,
+					"I06": 1,
+					"I10": 1
+				},
+				"levels": {
+					"3": 2,
+					"4": 4
+				},
+				"returns": 0
+			},
+			"6": {
+				"battles": 7,
+				"chests": 0,
+				"clears": 0,
+				"deaths": 0,
+				"enemies": {
+					"E02": 3,
+					"E03": 2,
+					"E04": 2
+				},
+				"entries": 9,
+				"events": 2,
+				"items": {
+					"I10": 2
+				},
+				"levels": {
+					"2": 3,
+					"4": 4
+				},
+				"returns": 3
+			},
+			"7": {
+				"battles": 4,
+				"chests": 1,
+				"clears": 0,
+				"deaths": 0,
+				"enemies": {
+					"E03": 1,
+					"E04": 3
+				},
+				"entries": 6,
+				"events": 1,
+				"items": {
+					"I09": 1,
+					"I10": 1
+				},
+				"levels": {
+					"4": 3,
+					"5": 1
+				},
+				"returns": 0
+			},
+			"8": {
+				"battles": 6,
+				"chests": 0,
+				"clears": 0,
+				"deaths": 0,
+				"enemies": {
+					"E03": 1,
+					"E04": 3,
+					"E05": 2
+				},
+				"entries": 6,
+				"events": 0,
+				"items": {
+					"I06": 1,
+					"I10": 1
+				},
+				"levels": {
+					"4": 3,
+					"5": 2,
+					"6": 1
+				},
+				"returns": 0
+			},
+			"9": {
+				"battles": 5,
+				"chests": 0,
+				"clears": 0,
+				"deaths": 0,
+				"enemies": {
+					"E04": 3,
+					"E05": 2
+				},
+				"entries": 6,
+				"events": 1,
+				"items": {
+					"I10": 1
+				},
+				"levels": {
+					"6": 3,
+					"7": 2
+				},
+				"returns": 4
+			}
+		},
+		"gold": 447,
+		"highest_floor": 11,
+		"items": 29,
+		"level": 10,
+		"normal_deaths": 1,
+		"normal_trips": 13,
+		"reached_10F": true,
+		"seed": 10000,
+		"state_sha256": "edd3cace3bb8376f1e2d80cb0cc6a44270874df5893a0a91906b036046996d2a",
+		"story_deaths": 1,
+		"trace_sha256": "ebc748cf14f776d16d3b5eabd7e364f11548ec964ec08cdafe76ae1a05fe86d0",
+		"trips": [
+			{
+				"end_level": 1,
+				"exp_earned": 5,
+				"exp_end": 5,
+				"exp_start": 0,
+				"floor_max": 3,
+				"gold_earned": 3,
+				"gold_end": 3,
+				"gold_start": 0,
+				"hp_lost_in_combat": 4,
+				"loot": {
+					"I02": 1,
+					"I10": 1
+				},
+				"loss": {
+					"exp": 0,
+					"gold": 0,
+					"items": 0
+				},
+				"outcome": "return",
+				"remaining_hp": 20,
+				"rounds": 3,
+				"start_level": 1,
+				"trip": 1
+			},
+			{
+				"end_level": 2,
+				"exp_earned": 9,
+				"exp_end": 14,
+				"exp_start": 5,
+				"floor_max": 3,
+				"gold_earned": 4,
+				"gold_end": 7,
+				"gold_start": 3,
+				"hp_lost_in_combat": 4,
+				"loot": {
+					"I10": 1
+				},
+				"loss": {
+					"exp": 0,
+					"gold": 0,
+					"items": 0
+				},
+				"outcome": "return",
+				"remaining_hp": 25,
+				"rounds": 4,
+				"start_level": 1,
+				"trip": 2
+			},
+			{
+				"end_level": 2,
+				"exp_earned": 14,
+				"exp_end": 28,
+				"exp_start": 14,
+				"floor_max": 3,
+				"gold_earned": 6,
+				"gold_end": 13,
+				"gold_start": 7,
+				"hp_lost_in_combat": 3,
+				"loot": {
+					"I04": 1
+				},
+				"loss": {
+					"exp": 0,
+					"gold": 0,
+					"items": 0
+				},
+				"outcome": "return",
+				"remaining_hp": 26,
+				"rounds": 5,
+				"start_level": 2,
+				"trip": 3
+			},
+			{
+				"end_level": 2,
+				"exp_earned": 5,
+				"exp_end": 33,
+				"exp_start": 28,
+				"floor_max": 3,
+				"gold_earned": 2,
+				"gold_end": 15,
+				"gold_start": 13,
+				"hp_lost_in_combat": 2,
+				"loot": {
+					"I01": 1,
+					"I04": 1
+				},
+				"loss": {
+					"exp": 0,
+					"gold": 0,
+					"items": 0
+				},
+				"outcome": "return",
+				"remaining_hp": 27,
+				"rounds": 2,
+				"start_level": 2,
+				"trip": 4
+			},
+			{
+				"end_level": 3,
+				"exp_earned": 22,
+				"exp_end": 55,
+				"exp_start": 33,
+				"floor_max": 6,
+				"gold_earned": 16,
+				"gold_end": 31,
+				"gold_start": 15,
+				"hp_lost_in_combat": 10,
+				"loot": {
+					"I04": 2,
+					"I10": 1
+				},
+				"loss": {
+					"exp": 0,
+					"gold": 0,
+					"items": 0
+				},
+				"outcome": "return",
+				"remaining_hp": 24,
+				"rounds": 7,
+				"start_level": 2,
+				"trip": 5
+			},
+			{
+				"end_level": 4,
+				"exp_earned": 26,
+				"exp_end": 81,
+				"exp_start": 55,
+				"floor_max": 6,
+				"gold_earned": 19,
+				"gold_end": 50,
+				"gold_start": 31,
+				"hp_lost_in_combat": 17,
+				"loot": {
+					"I01": 1,
+					"I04": 1,
+					"I05": 1
+				},
+				"loss": {
+					"exp": 0,
+					"gold": 0,
+					"items": 0
+				},
+				"outcome": "return",
+				"remaining_hp": 22,
+				"rounds": 8,
+				"start_level": 3,
+				"trip": 6
+			},
+			{
+				"end_level": 4,
+				"exp_earned": 37,
+				"exp_end": 118,
+				"exp_start": 81,
+				"floor_max": 6,
+				"gold_earned": 23,
+				"gold_end": 73,
+				"gold_start": 50,
+				"hp_lost_in_combat": 21,
+				"loot": {
+					"I10": 1
+				},
+				"loss": {
+					"exp": 0,
+					"gold": 0,
+					"items": 0
+				},
+				"outcome": "return",
+				"remaining_hp": 18,
+				"rounds": 9,
+				"start_level": 4,
+				"trip": 7
+			},
+			{
+				"end_level": 6,
+				"exp_earned": 63,
+				"exp_end": 181,
+				"exp_start": 118,
+				"floor_max": 9,
+				"gold_earned": 51,
+				"gold_end": 124,
+				"gold_start": 73,
+				"hp_lost_in_combat": 40,
+				"loot": {
+					"I01": 1,
+					"I04": 1,
+					"I06": 1
+				},
+				"loss": {
+					"exp": 0,
+					"gold": 0,
+					"items": 0
+				},
+				"outcome": "return",
+				"remaining_hp": 9,
+				"rounds": 15,
+				"start_level": 4,
+				"trip": 8
+			},
+			{
+				"end_level": 6,
+				"exp_earned": 52,
+				"exp_end": 233,
+				"exp_start": 181,
+				"floor_max": 10,
+				"gold_earned": 42,
+				"gold_end": 150,
+				"gold_start": 124,
+				"hp_lost_in_combat": 55,
+				"loot": {
+					"I05": 1,
+					"I10": 4
+				},
+				"loss": {
+					"exp": 0,
+					"gold": 16,
+					"items": 0
+				},
+				"outcome": "death",
+				"remaining_hp": 0,
+				"rounds": 16,
+				"start_level": 6,
+				"trip": 9
+			},
+			{
+				"end_level": 7,
+				"exp_earned": 88,
+				"exp_end": 321,
+				"exp_start": 233,
+				"floor_max": 9,
+				"gold_earned": 66,
+				"gold_end": 216,
+				"gold_start": 150,
+				"hp_lost_in_combat": 22,
+				"loot": {
+					"I01": 1
+				},
+				"loss": {
+					"exp": 0,
+					"gold": 0,
+					"items": 0
+				},
+				"outcome": "return",
+				"remaining_hp": 32,
+				"rounds": 16,
+				"start_level": 6,
+				"trip": 10
+			},
+			{
+				"end_level": 8,
+				"exp_earned": 64,
+				"exp_end": 385,
+				"exp_start": 321,
+				"floor_max": 9,
+				"gold_earned": 51,
+				"gold_end": 267,
+				"gold_start": 216,
+				"hp_lost_in_combat": 29,
+				"loot": {
+					"I04": 1,
+					"I09": 1
+				},
+				"loss": {
+					"exp": 0,
+					"gold": 0,
+					"items": 0
+				},
+				"outcome": "return",
+				"remaining_hp": 36,
+				"rounds": 14,
+				"start_level": 7,
+				"trip": 11
+			},
+			{
+				"end_level": 9,
+				"exp_earned": 83,
+				"exp_end": 468,
+				"exp_start": 385,
+				"floor_max": 9,
+				"gold_earned": 66,
+				"gold_end": 333,
+				"gold_start": 267,
+				"hp_lost_in_combat": 24,
+				"loot": {
+					"I10": 2
+				},
+				"loss": {
+					"exp": 0,
+					"gold": 0,
+					"items": 0
+				},
+				"outcome": "return",
+				"remaining_hp": 40,
+				"rounds": 13,
+				"start_level": 8,
+				"trip": 12
+			},
+			{
+				"end_level": 10,
+				"exp_earned": 117,
+				"exp_end": 585,
+				"exp_start": 468,
+				"floor_max": 10,
+				"gold_earned": 114,
+				"gold_end": 447,
+				"gold_start": 333,
+				"hp_lost_in_combat": 44,
+				"loot": {
+					"I06": 1,
+					"I11": 1
+				},
+				"loss": {
+					"exp": 0,
+					"gold": 0,
+					"items": 0
+				},
+				"outcome": "clear",
+				"remaining_hp": 25,
+				"rounds": 18,
+				"start_level": 9,
+				"trip": 13
+			}
+		]
+	},
+	"schema_version": 1,
+	"seeds": [
+		10000
+	]
+}

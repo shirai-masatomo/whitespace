@@ -1,0 +1,31 @@
+{
+  "runtime_commit": "187e7f7b2f97ccfda10539340907fe766bebba42",
+  "resolution": [
+    1280,
+    720
+  ],
+  "scope": "Town status opaque panel and version label only; core/data/art unchanged from b358aa1",
+  "screenshots": [
+    {
+      "path": "41-town-status-readable.png",
+      "bytes": 625891,
+      "sha256": "1b18ca75579f030e55ae23b44cd03176c856a4375977990d65a406d41dda04ef",
+      "audit": "41-town-status-readable-audit.json",
+      "capture_filename": "18-campaign-clear-town.png"
+    },
+    {
+      "path": "42-readability-title.png",
+      "bytes": 1247289,
+      "sha256": "acf361345d3791d58ac912c3ba489155032f318aac6d73b556a2a8edea09eb25",
+      "audit": "42-readability-title-audit.json",
+      "capture_filename": "11-campaign-title.png"
+    },
+    {
+      "path": "43-town-status-first-return.png",
+      "bytes": 591586,
+      "sha256": "58864955d4d9b456f80e3245ea909c7cec8aa9e996f94950b820c0e7d53750d5",
+      "audit": "43-town-status-first-return-audit.json",
+      "capture_filename": "14-campaign-town.png"
+    }
+  ]
+}

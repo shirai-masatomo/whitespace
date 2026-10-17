@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "policy_id": "solo-steady-v1",
+  "max_trips": 30,
+  "floor_limits": [{"below_level":3,"floor":3},{"below_level":5,"floor":6},{"below_level":101,"floor":10}],
+  "return_hp_fraction": 0.45,
+  "boss_min_hp_fraction": 0.7,
+  "equipment_weights": {"atk":4,"def":4,"max_hp":1,"spd":1,"max_sp":0},
+  "skip_harmful_events": true,
+  "store_spares": true,
+  "note": "試験方針。表示Lv/HP/装備効果のみ参照。乱数先読み・敵戦闘予測・階層スキップなし。"
+}

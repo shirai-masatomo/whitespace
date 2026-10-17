@@ -1,0 +1,148 @@
+{
+	"controls": [
+		{
+			"rect": "[P: (952.0, 33.0), S: (288.0, 24.0)]",
+			"text": "主人公 / Lv.2"
+		},
+		{
+			"rect": "[P: (942.0, 66.0), S: (308.0, 23.0)]",
+			"text": "HP  28 / 29"
+		},
+		{
+			"rect": "[P: (942.0, 113.0), S: (308.0, 23.0)]",
+			"text": "SP  1 / 1"
+		},
+		{
+			"rect": "[P: (942.0, 160.0), S: (308.0, 43.0)]",
+			"text": "ATK 7   DEF 4   SPD 6\nGold 9  / 携行品 1個"
+		},
+		{
+			"rect": "[P: (942.0, 209.0), S: (308.0, 19.0)]",
+			"text": "次のLvまで EXP 6 / 24"
+		},
+		{
+			"rect": "[P: (952.0, 237.0), S: (288.0, 24.0)]",
+			"text": "地下 2 F / 最深 3 F"
+		},
+		{
+			"rect": "[P: (942.0, 270.0), S: (308.0, 19.0)]",
+			"text": "浅層 · 灯りの坑道"
+		},
+		{
+			"rect": "[P: (942.0, 295.0), S: (308.0, 19.0)]",
+			"text": "第 3 回の通常探索"
+		},
+		{
+			"disabled": true,
+			"focus": false,
+			"font_color": "(0.6157, 0.6549, 0.6549, 1.0)",
+			"rect": "[P: (942.0, 320.0), S: (308.0, 42.0)]",
+			"text": "さらに潜る"
+		},
+		{
+			"disabled": true,
+			"focus": false,
+			"font_color": "(0.6157, 0.6549, 0.6549, 1.0)",
+			"rect": "[P: (942.0, 368.0), S: (308.0, 42.0)]",
+			"text": "町へ帰還する"
+		},
+		{
+			"disabled": false,
+			"focus": true,
+			"font_color": "(0.1373, 0.1216, 0.1059, 1.0)",
+			"rect": "[P: (942.0, 416.0), S: (216.0, 42.0)]",
+			"text": "戦闘を再開"
+		},
+		{
+			"disabled": false,
+			"focus": false,
+			"font_color": "(0.1373, 0.1216, 0.1059, 1.0)",
+			"rect": "[P: (1166.0, 416.0), S: (84.0, 42.0)]",
+			"text": "速度 1倍"
+		},
+		{
+			"rect": "[P: (942.0, 625.0), S: (308.0, 17.0)]",
+			"text": "0.4.6 / 自動保存済み"
+		},
+		{
+			"disabled": false,
+			"focus": false,
+			"font_color": "(0.1373, 0.1216, 0.1059, 1.0)",
+			"rect": "[P: (942.0, 648.0), S: (308.0, 42.0)]",
+			"text": "保存済み / タイトルへ"
+		}
+	],
+	"run_id": "e83e459f43ce4239b7f3aa3877216f63",
+	"screenshot": "28-button-states.png",
+	"stages": [
+		{
+			"actors": [
+				{
+					"adoption": "adopted-current-baseline",
+					"body_region": "[P: (0.0, 22.0), S: (1234.0, 1232.0)]",
+					"candidate_loaded": true,
+					"foot": [
+						609.0,
+						433.0
+					],
+					"id": "hero",
+					"static_hover_px": 0.0,
+					"top_left": [
+						481.727264404297,
+						211.664764404297
+					],
+					"visible_size": [
+						245.397735595703,
+						245.0
+					],
+					"within_stage": true
+				},
+				{
+					"adoption": "authorized-viewpoint-revision-v2",
+					"body_region": "[P: (16.0, 382.0), S: (1230.0, 637.0)]",
+					"candidate_loaded": true,
+					"foot": [
+						269.0,
+						312.0
+					],
+					"id": "E01",
+					"static_hover_px": 0.0,
+					"top_left": [
+						74.8229675292969,
+						155.717208862305
+					],
+					"visible_size": [
+						304.639984130859,
+						157.768844604492
+					],
+					"within_stage": true
+				}
+			],
+			"adoption": "nine-assets-current-baseline",
+			"aspect": "preserved",
+			"background": "cavern",
+			"background_aspect": 1.77777777777778,
+			"background_loaded": true,
+			"background_zoom": 1.0,
+			"composition": "wide-floor-reference-comparison",
+			"depth": 2,
+			"far_enemy_foot": [
+				269.0,
+				312.0
+			],
+			"filter": "nearest",
+			"formation_rules": false,
+			"global_rect": "[P: (16.0, 16.0), S: (896.0, 504.0)]",
+			"near_hero_foot": [
+				609.0,
+				433.0
+			],
+			"stage_size": [
+				896.0,
+				504.0
+			],
+			"static_only": true,
+			"wide_layout": true
+		}
+	]
+}

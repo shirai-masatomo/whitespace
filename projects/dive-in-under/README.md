@@ -2,14 +2,16 @@
 
 **地下へ潜るほど報酬は増えるが、死と装備の消耗を伴う、フルオート戦闘ダンジョンRPG。**
 
-## 現在地：Dot自律開発の指示・工程準備が完了（ユーザーからDotへの実行指示待ち）
+## 現在地：初回通常化・ボス床面修正 0.4.6
+
+**[確認入口・ZIP・実画面・ログ](review/current/README.md)** ／ [開発環境](docs/DEVELOPMENT.md) ／ [Draft PR #5](https://github.com/shirai-masatomo/whitespace/pull/5)。初回から1Fの通常探索と帰還が可能。旧セーブの育成・装備を保持して移行。1000固定seed全件10F突破、旧6種の実EXE移行・再起動、通常／ボスの連続床面を隔離確認。**毒・暗闇・麻痺・防御態勢と短いエフェクトは未実装。工程1全体は未完了。**
 
 - **[SPEC.md：全体仕様の正本](SPEC.md)** — ゲームの大枠と確定要件
 - **[現行2DドットUI参考3枚](docs/UI_MOCKS.md)** — 探索・戦闘・装備／ステータス。旧4枚は履歴へ
 - **[仕様と実装状況の表](docs/IMPLEMENTATION_STATUS.md)** — 何が「今」「次」「後」なのか
 - **[設計判断台帳](docs/DESIGN_DECISIONS.md)** — 既に決めたことと確認事項
 - **[初期EXE～10Fプロトタイプの進め方](docs/PROTOTYPE_10F.md)**
-- **[戦闘シミュレーター設計](docs/BATTLE_SIMULATION.md)** — 工程1の単発戦闘コアはCodex作業ブランチに実装・検証結果あり。反復探索まで未完成
+- **[戦闘シミュレーターの要件](docs/BATTLE_SIMULATION.md)** — 単発戦闘の共通コア・固定seed統計・同条件比較を実装。通常新規1000seedの反復探索も検証済み
 
 ### 自律開発への引き継ぎ
 
@@ -41,8 +43,7 @@ Windows EXEで **新規開始 → 主人公単独で1Fから通常探索（最�
 
 [階層（敵出現率・Lv・宝箱確率）](docs/FLOORS.md) / [敵（基礎能力・EXP・Gold・ドロップ）](docs/ENEMIES.md) / [アイテム](docs/ITEMS.md) / [仲間](docs/ALLIES.md) / [イベント](docs/EVENTS.md) / [戦闘共通仕様](docs/COMBAT.md) / [スキル一覧](docs/SKILLS.md) / [黄金像](docs/SHRINE.md) / [参考資料](docs/RESEARCH.md)
 
-**旧ブラウザ試作**：[過去の試作ZIP](Dive-In-Under-10F-prototype.zip) ／ [ソース](prototype/index.html)。古いパーティ構造など現行と異なる仕様を含むため、**そのまま現行のWindows版とは扱わない**。新しいWindows EXEは未作成。
-
+**旧ブラウザ試作**：[過去の試作ZIP](Dive-In-Under-10F-prototype.zip) ／ [ソース](prototype/index.html)。古いパーティ構造など現行と異なる仕様を含むため参考として無変更で保全し、新Windows基盤へ直接移植していません。
 
 ## 地下1〜10F：青い滝洞窟の敵生態系
 

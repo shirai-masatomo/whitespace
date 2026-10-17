@@ -1,0 +1,86 @@
+{
+  "runtime_commit": "b358aa15a53d759ad0a601313312e2062648b53a",
+  "resolution": [
+    1280,
+    720
+  ],
+  "screenshots": [
+    {
+      "path": "30-visual-title.png",
+      "bytes": 1247394,
+      "sha256": "f21a09cf9a8fffb1aa2ef2933448bd843b21569731f4eb7b2a8284dcff6572bc",
+      "audit": "30-visual-title-audit.json",
+      "capture_filename": "11-campaign-title.png"
+    },
+    {
+      "path": "31-visual-first.png",
+      "bytes": 955881,
+      "sha256": "864df601889430cad79c003f0f84a17cf4eb7e54fd8b03cff0e420d0c818cc45",
+      "audit": "31-visual-first-audit.json",
+      "capture_filename": "12-campaign-first.png"
+    },
+    {
+      "path": "32-visual-goblin.png",
+      "bytes": 967945,
+      "sha256": "3a7731ec4fdb1b456e33ce3142bd8b9074aa6eca542fd99289186aeaac9f31b4",
+      "audit": "32-visual-goblin-audit.json",
+      "capture_filename": "19-candidate-goblin.png"
+    },
+    {
+      "path": "33-visual-deep.png",
+      "bytes": 917748,
+      "sha256": "c192adab9c57df8c72f39646e6358dde7ab8e13e6b7a03b4f62a16afa896c4dc",
+      "audit": "33-visual-deep-audit.json",
+      "capture_filename": "22-candidate-deep.png"
+    },
+    {
+      "path": "34-visual-boss.png",
+      "bytes": 963918,
+      "sha256": "648bcf3c2cb852ac4986d1621971646a048235321c9d4fd8273cc7ae5e0c29d8",
+      "audit": "34-visual-boss-audit.json",
+      "capture_filename": "16-campaign-boss.png"
+    },
+    {
+      "path": "35-visual-town.png",
+      "bytes": 677117,
+      "sha256": "95fa6ef949e879a62c0b4703a98e7da309d19f33965c3dd803fde7f84483ec94",
+      "audit": "35-visual-town-audit.json",
+      "capture_filename": "18-campaign-clear-town.png"
+    },
+    {
+      "path": "36-visual-first-death.png",
+      "bytes": 549484,
+      "sha256": "66083ab65ffb169a8d8cef93e3f10fdd40ef4a7b6dd2b2e32469dd1b9e4f7a0c",
+      "audit": "36-visual-first-death-audit.json",
+      "capture_filename": "13-campaign-first-death.png"
+    },
+    {
+      "path": "37-visual-clear.png",
+      "bytes": 552465,
+      "sha256": "1529f8c360975cb68d1599f48d552202f0c26589ca327a7f12be52e9ba0bea3a",
+      "audit": "37-visual-clear-audit.json",
+      "capture_filename": "17-campaign-clear.png"
+    },
+    {
+      "path": "38-visual-middle.png",
+      "bytes": 972739,
+      "sha256": "f16153ce06c7b5fc0221c5d98d980b5732761f59322d3057cf70cf06b25d9f85",
+      "audit": "38-visual-middle-audit.json",
+      "capture_filename": "21-candidate-middle.png"
+    },
+    {
+      "path": "39-visual-shallow.png",
+      "bytes": 980829,
+      "sha256": "d5e1047c3618105ba904752d71cff1895c4363781f9a5c90facd7ce12d696f86",
+      "audit": "39-visual-shallow-audit.json",
+      "capture_filename": "20-candidate-shallow.png"
+    },
+    {
+      "path": "40-visual-normal-death.png",
+      "bytes": 548719,
+      "sha256": "a767c611a8d50b0165f07f96e18a17cd18f77457f2c4ed923d7b9b69ba26380b",
+      "audit": "40-visual-normal-death-audit.json",
+      "capture_filename": "15-campaign-normal-death.png"
+    }
+  ]
+}

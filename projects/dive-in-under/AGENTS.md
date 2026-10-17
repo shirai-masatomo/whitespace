@@ -11,3 +11,4 @@
 7. 作業対象は原則 projects/dive-in-under/ と、本作品用の .github/workflows/ のファイルだけ。DIVE DIVE・ホイッスル牧場・言語ジェンガ・共通GitHub設定を勝手に変更しない。
 8. 各工程の結果・残課題を [PROGRESS.md](docs/dot/PROGRESS.md) と [IMPLEMENTATION_STATUS.md](docs/IMPLEMENTATION_STATUS.md) に証拠付きで記録する。確定要件を勝手に変更せず、衝突・重大判断だけ人間へ報告する。
 9. 正式なSteam公開、支払い、外部有料素材購入、認証情報の共有、本番データ破壊、他プロジェクトへの影響のある操作は行わない。
+10. 画面変更の自己レビューでは [恒常的画面レビュー](docs/VISUAL_SELF_REVIEW.md) を使用し、**描画成立**と**画面の自然さ（接地・連続床・前景余白・縮尺・遠近・向き）**を独立して判定する。範囲内に収まることだけで自然さを合格にせず、同じ実EXEの変更前後・通常／ボス比較と欠点→修正→再確認を残す。

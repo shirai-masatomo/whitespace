@@ -1,0 +1,31 @@
+[
+  {
+    "rejected": true,
+    "case": "shared-isolated-headless-stale-nonce"
+  },
+  {
+    "stale_result_unchanged": true,
+    "case": "start",
+    "rejected": true
+  },
+  {
+    "stale_result_unchanged": true,
+    "case": "back",
+    "rejected": true
+  },
+  {
+    "stale_result_unchanged": true,
+    "case": "omit-result",
+    "rejected": true
+  },
+  {
+    "exit_code": 1,
+    "case": "strict-trace",
+    "rejected": true
+  },
+  {
+    "exit_code": 1,
+    "case": "strict-metrics",
+    "rejected": true
+  }
+]

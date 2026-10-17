@@ -1,0 +1,33 @@
+{
+  "head_sha": "24314385e5ed6c4f6d4fffefc5be87108d073d11",
+  "checkout_sha": "24314385e5ed6c4f6d4fffefc5be87108d073d11",
+  "event": "push",
+  "run_id": 39026936268,
+  "job_id": 117379737336,
+  "conclusion": "success",
+  "url": "https://github.com/shirai-masatomo/whitespace/actions/runs/39026936268",
+  "artifacts": [
+    {
+      "id": 12099420409,
+      "name": "DiveInUnder-foundation-windows-x64",
+      "url": "https://github.com/shirai-masatomo/whitespace/actions/runs/39026936268/artifacts/12099420409",
+      "expires_at": "2027-01-15T10:58:51Z"
+    },
+    {
+      "id": 12099415456,
+      "name": "DiveInUnder-foundation-evidence",
+      "url": "https://github.com/shirai-masatomo/whitespace/actions/runs/39026936268/artifacts/12099415456",
+      "expires_at": "2027-01-15T10:58:51Z"
+    }
+  ],
+  "checks": {
+    "combat": 142,
+    "loop": 180,
+    "campaign": 44,
+    "harness_faults": 10,
+    "normal_seeds": 1000,
+    "strict_campaign_replay": true,
+    "exe_processes": 3
+  },
+  "note": "main e7cc5a2との資料統合後のPR head/merge CIは後続。最新版はPR Checksを参照。"
+}

@@ -1,0 +1,34 @@
+{
+  "run": 39038821159,
+  "job": 117414112585,
+  "head": "c84d01fb10caf43b4f3cddc7431a3abbaa683bf2",
+  "checkout_commit": "c84d01fb10caf43b4f3cddc7431a3abbaa683bf2",
+  "conclusion": "success",
+  "scope": "0.4.4 source/evidence before the 0.4.5 wide battlefield and cave v2",
+  "checks": {
+    "combat": 142,
+    "expedition_save": 180,
+    "campaign": 44,
+    "single_battle_seeds": 1000,
+    "campaign_seeds_per_pass": 1000,
+    "campaign_passes": 3,
+    "exe_actions": 290,
+    "fault_cases": 10
+  },
+  "artifacts": [
+    {
+      "id": 12103492471,
+      "name": "DiveInUnder-foundation-windows-x64",
+      "url": "https://github.com/shirai-masatomo/whitespace/actions/runs/39038821159/artifacts/12103492471",
+      "expires_at": "2027-01-15T13:59:22Z",
+      "digest": "sha256:07cf652f4555cef447aa55a99b117fb04947aae566f5765805ed465da0fca8b3"
+    },
+    {
+      "id": 12103447600,
+      "name": "DiveInUnder-foundation-evidence",
+      "url": "https://github.com/shirai-masatomo/whitespace/actions/runs/39038821159/artifacts/12103447600",
+      "expires_at": "2027-01-15T13:59:22Z",
+      "digest": "sha256:7b746377c39359fe709a6f39844da9acd1d5dff102eab5199ef04233c1d402d3"
+    }
+  ]
+}

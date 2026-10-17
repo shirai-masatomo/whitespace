@@ -1,0 +1,7 @@
+{
+  "version": "4.7.2-stable",
+  "runtime_version": "4.7.2.stable.official.ed1daf0bf",
+  "editor_sha256": "731980f9608d61333e5baf54a2ef17210acc7a538446c0cb9969f002aca1e953",
+  "templates_sha256": "f298490b8d44d934be425a5a65a51bf15f422428b229a06a6e11d9ffea248011",
+  "release_url": "https://github.com/godotengine/godot-builds/releases/download/4.7.2-stable"
+}

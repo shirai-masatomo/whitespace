@@ -1,0 +1,20 @@
+{
+  "end_utc": "2026-10-17T10:14:40.3916716Z",
+  "data_root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-17\\task\\dive-in-under-work\\projects\\dive-in-under\\artifacts\\isolated",
+  "start_utc": "2026-10-17T10:14:40.3828251Z",
+  "mode": "permission_probe",
+  "result": {
+    "PID": 0,
+    "ThreadID": 0,
+    "ExitCode": 0,
+    "OwnedWindowCount": 0,
+    "Station": "Service-0x0-1b7214$",
+    "Desktop": "Render_abc646618bad4b4f8a8c29d5d20784cb",
+    "ObservedDesktop": null,
+    "NonInteractive": true,
+    "DesktopMatched": false,
+    "TimedOut": false
+  },
+  "normal_desktop_fallback": false,
+  "run_id": "95c112078eee4ea29eb86a5f60b5f9d2"
+}

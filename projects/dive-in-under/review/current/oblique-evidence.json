@@ -1,0 +1,66 @@
+{
+  "runtime_commit": "04778428be0e0d7c74b23240707cde6403f04704",
+  "resolution": [
+    1280,
+    720
+  ],
+  "scope": "Display-only oblique composition and four unapproved static enemy candidates",
+  "screenshots": [
+    {
+      "path": "51-enemy-rat.png",
+      "bytes": 996319,
+      "sha256": "de6cb328ad70874d979b9531edc7aac1c91229b108c71195c86b0ffeead80701",
+      "audit": "51-enemy-rat-audit.json",
+      "capture_filename": "23-enemy-e01.png"
+    },
+    {
+      "path": "52-enemy-slime.png",
+      "bytes": 975420,
+      "sha256": "e62183e3d15a63e0ea610eb78672c6667488e16a5fdc0f4f2f4488eea6f84afd",
+      "audit": "52-enemy-slime-audit.json",
+      "capture_filename": "23-enemy-e02.png"
+    },
+    {
+      "path": "53-enemy-bat.png",
+      "bytes": 976011,
+      "sha256": "7059429ccdb1e6f4382b580d9dc8c1df056255f379a46d9fb30c9a0f8a0b8eeb",
+      "audit": "53-enemy-bat-audit.json",
+      "capture_filename": "23-enemy-e03.png"
+    },
+    {
+      "path": "54-enemy-beetle.png",
+      "bytes": 927819,
+      "sha256": "a5acd30d091854da84414d2cbcf24ea5e3c91a8438df78179ec46f4bb3fa8c92",
+      "audit": "54-enemy-beetle-audit.json",
+      "capture_filename": "23-enemy-e05.png"
+    },
+    {
+      "path": "55-oblique-goblin.png",
+      "bytes": 976814,
+      "sha256": "665b6545a75ca01eef183f142d6b11fbc2fd0444398e8ccc0f942618020d48e2",
+      "audit": "55-oblique-goblin-audit.json",
+      "capture_filename": "19-candidate-goblin.png"
+    },
+    {
+      "path": "56-oblique-boss.png",
+      "bytes": 974049,
+      "sha256": "a24232b083f7169f06b7aa20ff2e95c17711df7ee12b6bd9d5d22fce5f866a18",
+      "audit": "56-oblique-boss-audit.json",
+      "capture_filename": "16-campaign-boss.png"
+    },
+    {
+      "path": "57-oblique-title.png",
+      "bytes": 1238731,
+      "sha256": "01281b94b98573ec52687298049c8bf94f1ba7cf10e2f84a87d265b5ef7f950e",
+      "audit": "57-oblique-title-audit.json",
+      "capture_filename": "11-campaign-title.png"
+    },
+    {
+      "path": "58-oblique-exploration.png",
+      "bytes": 988612,
+      "sha256": "3cce10cd97bc44d512259aa4e425c3d32c93c8b2c3f482ba4a3ba38662e773ec",
+      "audit": "58-oblique-exploration-audit.json",
+      "capture_filename": "20-candidate-shallow.png"
+    }
+  ]
+}
