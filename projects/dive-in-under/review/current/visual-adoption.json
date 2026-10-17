@@ -79,6 +79,13 @@
       "user_statement": "納品されたものを採用で構いません。",
       "status": "adopted-as-current-baseline",
       "original_v1_preserved": true
+    },
+    {
+      "file": "dive-boss-gate-cave-candidate-v2.png",
+      "sha256": "84903779b817a4f063acaba4094a9d024b3b8b4917dd0a4f8148cc53fd3aff6a",
+      "status": "integrated-user-requested-boss-floor-correction",
+      "runtime": "e7c63c65a47712f39702531009a8b2d3d5e7a93a",
+      "old_v1_retained": true
     }
   ]
 }

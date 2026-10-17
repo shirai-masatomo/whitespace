@@ -76,8 +76,8 @@ JSONは各seedの勝敗・ラウンド・双方残HP・報酬・ログSHA256、�
 - 起動監査・ハッシュ・終了結果は `artifacts/isolated/isolation.json`。APPDATA/LOCALAPPDATAも同所に分離。画像はアプリのviewport、操作はアプリ内のMouseButton入力経路。**OS入力や人手による実操作の証拠ではない**。アクセス拒否なら停止し、GUI以外の作業を続ける。
 - Computer Useスキルを確認したが、必要なnode_repl APIがこのセッションにない。ユーザー操作中のゲームは終了していない。旧方式の通常画面への表示可能性は上記のとおり残る。
 - フォントはWindowsの Yu Gothic UI / Meiryo を参照し同梱していない。他言語OSでの日本語フォント表示は未検証。
-- 初回死亡、死亡ペナルティ、回復、成長は `expedition.json` の交換可能な仮設定として導入。正式決定ではない。単発ランナーの試験能力値とは用途を区別する。
-- 反復探索・帰還/死亡、初回死亡1回と永続化、町/倉庫/装備/保存、4実画面以上を実装・隔離確認済み。通常ルールでのソロ10F攻略バランス証明と人間のWindows実操作が残る。仲間・犬・黄金像の仲間排出は工程5まで作らない。
+- 通常死亡ペナルティ、回復、成長は `expedition.json` の交換可能な仮設定として導入。正式決定ではない。単発ランナーの試験能力値とは用途を区別する。
+- 初回から通常探索・帰還／HP0死亡、町／倉庫／装備／保存、旧セーブ移行を実装・隔離確認済み。1000seedの反復ソロ10Fと実EXE再開も確認。状態4効果が未実装。仲間・犬・黄金像の仲間排出は工程5まで作らない。
 - SPECや設計台帳の古い「未着手／実装開始待ち」は設計時点の記述。現在のユーザー承認と2026-10-17工程順を適用し、確定仕様そのものは書き換えていない。
 
 ## 確認入口と素材方針
@@ -125,3 +125,9 @@ Godot/GDScript/Windows/GPUの固定環境は上記から変更なし。現在の
 ユーザー指定の入口は `C:\Users\masat\Documents\codex_test\projects\Dive In Under\確認入口.lnk`。以前のDive専用リンクだけを移動し、元の牧場入口には触れていない。背景と透過原稿は `assets/visual-candidates/v1/` に保存し、SHA・サイズ・来歴をmanifest.jsonへ記録。高解像度原稿を編集せずGodotで比率維持/nearest表示する。ゲームコア・保存形式・数値は0.3と同じ。候補の採否は未確定。
 
 実行版`b358aa1`の独立Windows出力で、通常290操作・途中と突破後の保存再開・非対話描画を検証。通常1000seedの全結果は前版と厳密一致。[最新証拠](../review/current/README.md)、[制作チャット引継ぎ](IMAGE_PRODUCTION_HANDOFF.md)。Library正式ヘルパーはこのWindowsでメタデータAPI非対応だったため、ユーザーが明示保存したローカルファイルを受領。転送手順を改変・迂回していない。
+
+## 0.4.6の保存移行と検証
+
+現在の設定は `2026-10-17.loop-provisional.3`、保存schema2。旧設定.1（HP成長4）と.2（HP成長5）を別ファイルで保持し、旧セーブの設定を引き継ぐ。初回制限フラグは履歴のみ。読み込みは書き換えず、移行後最初の保存で原本の `.preserved-*` を作る。競合書込み・未来版・破損の拒否を維持する。旧バイナリは新schema2を読めないので、移行後に旧EXEと同時進行しない。
+
+追加検証：`./tools/verify_campaign.ps1`、`./tools/campaign_smoke.ps1`、許可確認後の `./tools/campaign_smoke.ps1 -Rendered`、`./tools/migration_smoke.ps1` と `-Rendered`。移行用旧セーブは `tests/test_first_expedition.gd` がartifactsへ生成し、ユーザー実セーブを流用しない。生成されるWindows ZIPは署名なし。EXE/PCKは不変リリースフォルダに置き、検証後 `tools/publish_local.ps1` でcurrent.txtだけ切替する。

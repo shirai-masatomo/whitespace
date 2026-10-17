@@ -1,0 +1,30 @@
+{
+  "build": {
+    "engine": "4.7.2.stable.official.ed1daf0bf",
+    "campaign_config_version": "2026-10-17.loop-provisional.3",
+    "data_version": "2026-10-17.foundation.1",
+    "game_commit": "e7c63c65a47712f39702531009a8b2d3d5e7a93a"
+  },
+  "pck_sha256": "948E60CBE7768EF85D0E1D2C68795E080A5DE8A2A4731A31DDE8CAAE9AD7A0E3",
+  "start_utc": "2026-10-17T14:52:41.9780918Z",
+  "result": {
+    "PID": 10344,
+    "ThreadID": 24880,
+    "ExitCode": 0,
+    "OwnedWindowCount": 2,
+    "Station": "Service-0x0-1b7214$",
+    "Desktop": "Render_32c377a626f842099eb3126c2dda6ebc",
+    "ObservedDesktop": "Render_32c377a626f842099eb3126c2dda6ebc",
+    "NonInteractive": true,
+    "DesktopMatched": true,
+    "TimedOut": false
+  },
+  "data_root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-17\\task\\dive-in-under-work\\projects\\dive-in-under\\artifacts\\campaign-isolated",
+  "executable": "C:\\Users\\masat\\Documents\\Codex\\2026-10-17\\task\\dive-in-under-work\\projects\\dive-in-under\\build\\releases\\e7c63c65a47712f39702531009a8b2d3d5e7a93a-b21e00e2\\DiveInUnder.exe",
+  "command": "\"C:\\Users\\masat\\Documents\\Codex\\2026-10-17\\task\\dive-in-under-work\\projects\\dive-in-under\\build\\releases\\e7c63c65a47712f39702531009a8b2d3d5e7a93a-b21e00e2\\DiveInUnder.exe\" --audio-driver Dummy --rendering-method gl_compatibility --max-fps 120 --resolution 1280x720 --log-file \"C:\\Users\\masat\\Documents\\Codex\\2026-10-17\\task\\dive-in-under-work\\projects\\dive-in-under\\artifacts\\campaign-isolated\\render.log\" -- --smoke-dir=\"C:\\Users\\masat\\Documents\\Codex\\2026-10-17\\task\\dive-in-under-work\\projects\\dive-in-under\\artifacts\\campaign-isolated\" --smoke-run-id=102e70891c0a48b683621b8f12820108 --campaign-replay=\"C:\\Users\\masat\\Documents\\Codex\\2026-10-17\\task\\dive-in-under-work\\projects\\dive-in-under\\artifacts\\campaign-replay.json\" --campaign-seed=10000",
+  "end_utc": "2026-10-17T14:52:46.5438528Z",
+  "run_id": "102e70891c0a48b683621b8f12820108",
+  "mode": "isolated_exe",
+  "normal_desktop_fallback": false,
+  "exe_sha256": "D34D36F3BE1A6C49C56525AE86469B92E4F417DDF0B43CF00DD80C385C4B0562"
+}
