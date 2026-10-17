@@ -5,7 +5,8 @@ param(
     [string]$Scenario = 'res://data/scenarios/baseline.json',
     [string]$Baseline = '',
     [string]$Output = '',
-    [string]$GameCommit = ''
+    [string]$GameCommit = '',
+    [switch]$StrictRepeat
 )
 $ErrorActionPreference = 'Stop'
 $project = $PSScriptRoot
@@ -35,12 +36,14 @@ function Run-Godot([string]$Name, [string[]]$Arguments) {
 try {
     if ($Task -in @('test','verify')) {
         Run-Godot 'tests' @('--script','tests/test_combat.gd')
-        Run-Godot 'ui-headless' @('--',"--smoke-dir=$artifacts")
+        Run-Godot 'loop-tests' @('--script','tests/test_expedition.gd')
+        Run-Godot 'ui-headless' @('--',"--smoke-dir=$artifacts","--smoke-run-id=$([guid]::NewGuid().ToString('N'))")
     }
     if ($Task -in @('simulate','verify')) {
         if (!$Output) { $Output = Join-Path $artifacts 'simulation.json' }
         $simArgs = @('--script','tools/runner.gd','--',"--trials=$Trials","--seed=$Seed","--scenario=$Scenario","--out=$Output","--commit=$GameCommit")
         if ($Baseline) { $simArgs += "--baseline=$Baseline" }
+        if ($StrictRepeat) { $simArgs += '--strict=true' }
         Run-Godot 'simulation' $simArgs
     }
     if ($Task -in @('build','verify')) {

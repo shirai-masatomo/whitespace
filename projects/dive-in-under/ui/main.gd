@@ -24,6 +24,13 @@ var hero_sp: ProgressBar
 var enemy_hp: ProgressBar
 var ids: Array = []
 var smoke_dir := ""
+var smoke_run_id := ""
+var smoke_fault := ""
+var smoke_report: Dictionary = {}
+var round_button: Button
+var speed_button: Button
+var tool_started := false
+var title_visible := false
 
 func _ready() -> void:
 	get_window().min_size = Vector2i(1280,720)
@@ -60,9 +67,15 @@ func _ready() -> void:
 	for argument in OS.get_cmdline_user_args():
 		if argument.begins_with("--smoke-dir="):
 			smoke_dir = argument.trim_prefix("--smoke-dir=")
+		if argument.begins_with("--smoke-run-id="): smoke_run_id=argument.trim_prefix("--smoke-run-id=")
+		if argument.begins_with("--smoke-fault="): smoke_fault=argument.trim_prefix("--smoke-fault=")
+	initialize_game()
 	show_title()
 	if not smoke_dir.is_empty():
 		smoke.call_deferred()
+
+func initialize_game() -> void:
+	pass
 
 func box(fill: Color, border: Color, width: int = 1) -> StyleBoxFlat:
 	var s := StyleBoxFlat.new()
@@ -117,6 +130,7 @@ func root_layout() -> VBoxContainer:
 	return root
 
 func show_title() -> void:
+	title_visible=true
 	timer.stop()
 	var root := root_layout()
 	root.add_child(text_label("D I V E   I N   U N D E R",48))
@@ -144,6 +158,7 @@ func show_title() -> void:
 	launch_button.grab_focus()
 
 func show_battle() -> void:
+	title_visible=false
 	timer.stop()
 	var root := root_layout()
 	var header := HBoxContainer.new()
@@ -184,8 +199,10 @@ func show_battle() -> void:
 	controls.add_child(start_button)
 	auto_button = button("一時停止",toggle_auto)
 	controls.add_child(auto_button)
-	controls.add_child(button("1ラウンド進行",func(): timer.stop(); next_round(); auto_button.text = "自動再生"))
-	controls.add_child(button("早送り  ×2",func(): timer.wait_time = 0.25; if state.outcome == "ongoing": timer.start()))
+	round_button=button("1ラウンド進行",func(): timer.stop(); next_round(); auto_button.text = "自動再生")
+	controls.add_child(round_button)
+	speed_button=button("速度：1倍",func(): timer.wait_time=0.25 if timer.wait_time==0.5 else 0.5; speed_button.text="速度：2倍" if timer.wait_time==0.25 else "速度：1倍")
+	controls.add_child(speed_button)
 	var center := column(row,550)
 	enemy_label = text_label("",18)
 	center.add_child(enemy_label)
@@ -202,13 +219,14 @@ func show_battle() -> void:
 	log_view.custom_minimum_size.y = 100
 	log_view.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	log_view.scroll_following = true
+	log_view.add_theme_stylebox_override("normal",box(Color("081215"),Color("987b49")))
 	log_view.add_theme_font_size_override("normal_font_size",17)
 	center.add_child(log_view)
 	var status := column(row,210,true)
 	status.add_child(text_label("主人公 / 単独",22))
 	hero_label = text_label("",18)
 	status.add_child(hero_label)
-	status.add_child(text_label("HP",16))
+	status.add_child(text_label("HP（現在 / 最大は上記）",16))
 	hero_hp = health_bar(Color("a84936"))
 	status.add_child(hero_hp)
 	status.add_child(text_label("SP",16))
@@ -233,13 +251,19 @@ func health_bar(color: Color) -> ProgressBar:
 	return bar
 
 func reset_battle() -> void:
+	tool_started=false
 	state = Combat.start(data.hero_fixture, Combat.enemy(data,ids[enemy_choice.selected],int(level_input.value)),data.rules,int(seed_input.value))
 	refresh()
 	auto_button.text = "自動再生"
+	auto_button.disabled=true
+	round_button.disabled=true
 
 func begin_battle() -> void:
 	timer.stop()
 	reset_battle()
+	tool_started=true
+	auto_button.disabled=false
+	round_button.disabled=false
 	timer.start()
 	auto_button.text = "一時停止"
 
@@ -254,10 +278,14 @@ func toggle_auto() -> void:
 		auto_button.text = "自動再生"
 
 func next_round() -> void:
+	if not tool_started: return
 	state = Combat.advance(state)
 	if state.outcome != "ongoing":
 		timer.stop()
 		auto_button.text = "戦闘終了"
+		auto_button.disabled=true
+		round_button.disabled=true
+		start_button.text="同じ条件で再戦"
 	refresh()
 
 func refresh() -> void:
@@ -278,6 +306,7 @@ func refresh() -> void:
 	var names := {"hero":"主人公","enemy":str(e.name)}
 	var outcomes := {"ongoing":"戦闘中", "victory":"勝利", "defeat":"主人公死亡", "draw":"50ラウンドで打切り"}
 	result_label.text = "ROUND %02d   /   %s   /   seed %d" % [state.round,outcomes[state.outcome],state.seed]
+	result_label.add_theme_font_size_override("font_size",24 if state.outcome!="ongoing" else 17)
 	log_view.clear()
 	for entry in state.log:
 		if entry.type == "round":
@@ -297,6 +326,8 @@ func capture(filename: String) -> void:
 
 func click_control(control: Button) -> void:
 	# Route through this app's viewport hit-testing; never inject OS input.
+	await get_tree().process_frame
+	await get_tree().process_frame
 	var point := control.get_global_rect().get_center()
 	for pressed in [true,false]:
 		var event := InputEventMouseButton.new()
@@ -307,9 +338,11 @@ func click_control(control: Button) -> void:
 		get_viewport().push_input(event,true)
 		await get_tree().process_frame
 
-func smoke() -> void:
+func smoke(quit_on_finish: bool = true) -> void:
 	# Application-level regression hook. It is not a claim of manual OS input.
 	var rendered := DisplayServer.get_name() != "headless"
+	if smoke_fault=="omit-result": get_tree().quit(); return
+	if not smoke_check(smoke_run_id!="","missing run ID"): return
 	if rendered:
 		await get_tree().create_timer(0.4).timeout
 		await capture("01-title.png")
@@ -319,7 +352,19 @@ func smoke() -> void:
 		push_error("Title button input failed")
 		get_tree().quit(1)
 		return
+	if smoke_fault=="start": start_button.pressed.disconnect(begin_battle)
 	await click_control(start_button)
+	if not smoke_check(tool_started and not timer.is_stopped(),"Start must start playback"): return
+	await click_control(auto_button)
+	if not smoke_check(timer.is_stopped(),"Pause must stop timer"): return
+	await click_control(auto_button)
+	if not smoke_check(not timer.is_stopped(),"Resume must start timer"): return
+	await click_control(speed_button)
+	if not smoke_check(timer.wait_time==0.25 and speed_button.text=="速度：2倍","Speed state"): return
+	timer.stop()
+	next_round()
+	await click_control(start_button)
+	if not smoke_check(state.round==0 and not timer.is_stopped(),"Restart resets round and playback"): return
 	timer.stop()
 	next_round()
 	if rendered:
@@ -333,11 +378,20 @@ func smoke() -> void:
 		return
 	if rendered:
 		await capture("03-battle-result.png")
-	var file := FileAccess.open(smoke_dir.path_join("ui-smoke.json"),FileAccess.WRITE)
-	file.store_string(JSON.stringify({"engine":Engine.get_version_info().string,"display":DisplayServer.get_name(),
-		"rendered":rendered,"manual_input":false,"viewport_mouse_input":true,"ui_core_equal":true,"outcome":state.outcome,"rounds":state.round},"\t"))
-	file.close()
+	if smoke_fault=="back": back_button.pressed.disconnect(show_title)
 	await click_control(back_button)
 	await get_tree().process_frame
-	print("UI_SMOKE_OK rendered=",rendered," manual_input=false")
-	get_tree().quit()
+	if not smoke_check(title_visible and is_instance_valid(launch_button) and launch_button.is_inside_tree(),"Back must return to title"): return
+	smoke_report={"run_id":smoke_run_id,"engine":Engine.get_version_info().string,"display":DisplayServer.get_name(),
+		"rendered":rendered,"manual_input":false,"viewport_mouse_input":true,"ui_core_equal":true,"outcome":state.outcome,"rounds":state.round,
+		"tool_start_pause_resume_restart_back":true}
+	if quit_on_finish: write_smoke_result(); get_tree().quit()
+
+func smoke_check(ok: bool, message: String) -> bool:
+	if not ok: push_error("SMOKE_CHECK_FAILED: "+message); get_tree().quit(1)
+	return ok
+
+func write_smoke_result() -> void:
+	var file := FileAccess.open(smoke_dir.path_join("ui-smoke.json"),FileAccess.WRITE)
+	file.store_string(JSON.stringify(smoke_report,"\t")); file.close()
+	print("UI_SMOKE_OK run_id=",smoke_run_id)

@@ -72,5 +72,5 @@ func _draw() -> void:
 		draw_rect(Rect2(x+4,90,8,17),Color("ffdb7b"))
 	var patterns := {"E01":RAT,"E02":SLIME,"E03":BAT,"E04":GOBLIN,"E05":BEETLE,"B10":STATUE}
 	var pattern: Array = patterns.get(enemy_id,GOBLIN)
-	sprite(pattern,Vector2(size.x*0.17,size.y-35-pattern.size()*5),5,enemy_alive)
+	if enemy_id!="": sprite(pattern,Vector2(size.x*0.17,size.y-35-pattern.size()*5),5,enemy_alive)
 	sprite(HERO,Vector2(size.x*0.72,size.y-35-HERO.size()*5),5,hero_alive)

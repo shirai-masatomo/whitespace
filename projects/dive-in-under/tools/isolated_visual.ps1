@@ -1,5 +1,6 @@
 param([switch]$ProbeOnly)
 $ErrorActionPreference = 'Stop'
+. (Join-Path $PSScriptRoot 'smoke_result.ps1')
 $project = Split-Path $PSScriptRoot -Parent
 $runDir = Join-Path $project 'artifacts/isolated'
 New-Item -ItemType Directory -Force $runDir | Out-Null
@@ -11,8 +12,10 @@ $environment['LOCALAPPDATA'] = Join-Path $runDir 'local-data'
 # Keep this renderer's user/cache data separate from the default desktop runs.
 $exe = Join-Path $project 'build/windows/DiveInUnder.exe'
 $log = Join-Path $runDir 'render.log'
-$cmd = '"' + $exe + '" --audio-driver Dummy --rendering-method gl_compatibility --max-fps 30 --resolution 1280x720 --log-file "' + $log + '" -- --smoke-dir="' + $runDir + '"'
+$runId = [guid]::NewGuid().ToString('N')
+$cmd = '"' + $exe + '" --audio-driver Dummy --rendering-method gl_compatibility --max-fps 30 --resolution 1280x720 --log-file "' + $log + '" -- --smoke-dir="' + $runDir + '" --smoke-run-id=' + $runId
 $record = @{ mode= $(if($ProbeOnly){'permission_probe'}else{'isolated_exe'}); start_utc=[DateTime]::UtcNow.ToString('o'); normal_desktop_fallback=$false; data_root=$runDir }
+$record.run_id=$runId
 $audit = Join-Path $runDir $(if($ProbeOnly){'permission-probe.json'}else{'isolation.json'})
 try {
     if ($ProbeOnly) { $result = [DiveIsolatedDesktop]::Run('','','',$environment,5) }
@@ -37,7 +40,6 @@ if (!$result.NonInteractive) { throw 'Interactive station rejected; no fallback'
 if (!$ProbeOnly) {
     if ($result.ExitCode -ne 0 -or !$result.DesktopMatched -or $result.TimedOut) { throw 'Isolated renderer failed' }
     if (Select-String -LiteralPath $log -Pattern 'SCRIPT ERROR:|^ERROR:' -Quiet) { throw 'Renderer logged errors' }
-    $smoke = Get-Content (Join-Path $runDir 'ui-smoke.json') -Raw | ConvertFrom-Json
-    if (!$smoke.rendered -or !$smoke.ui_core_equal) { throw 'Invalid rendered smoke result' }
+    $smoke = Assert-SmokeResult -Path (Join-Path $runDir 'ui-smoke.json') -RunId $runId -Rendered $true
 }
 $result | ConvertTo-Json
