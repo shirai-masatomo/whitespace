@@ -1,5 +1,7 @@
 # Dive In Under — Dot自律開発 工程進捗
 
+> **最新0.4.1**：町の能力値一覧の可読性を修正し隔離Windows EXEを再検証。素材採否とPX画作りの残課題があり、工程1全体は未完了。[実画面・証拠](../../review/current/README.md)。
+
 > **実測更新（2026-10-17）**：通常ソロ10FのWindows EXE 0.3.0を検証。**工程1全体は画作り要件が未達で進行中**。[全受入照合](../PHASE_01_ACCEPTANCE.md)、[同じローカル確認入口](../../review/current/README.md)。工程2へ進まず親の受入評価へ戻す。
 >
 > 工程単位の状態を本資料、機能単位の状態を[IMPLEMENTATION_STATUS.md](../IMPLEMENTATION_STATUS.md)で管理する。進捗状況は実際のテスト・成果物がなければ「完了」にしない。
@@ -97,3 +99,12 @@ main be0e601 の追加設計（COMBAT v0.2の8属性・状態異常・追加能�
 - ZIP 46,174,510 bytes、SHA-256 `c09a2ce7de7468dd9b043325e0fb8d0d0df46636a16e370de06588162198299d`。[配布記録](../../review/current/build-manifest.json)。PR #5と同一工程ブランチで継続し、最新CIはChecks参照。
 - [画像制作チャットへの短い引継ぎ](../IMAGE_PRODUCTION_HANDOFF.md)を追加。正本・固定ルール・候補寸法・左右/足元・納品先・未採用状態を分離。制作チャットへ実際に送信したとは主張しない。
 - **工程1全体は未完了。5候補の採否・PXへの近さの節目レビュー、残る敵の展開は未完了。** モーション/仲間/全スキル/耐久/11F内容は追加しない。OS物理入力/他解像度/長時間試遊は未検証。今回の11枚は0.4の実画面、01〜18と旧CIは履歴として保存。
+
+## 2026-10-17 0.4.1 — 町の能力値一覧の可読性修正
+
+- 実行ソース `187e7f7b2f97ccfda10539340907fe766bebba42`、Godot4.7.2。HP/SP/Lv/ATK/DEF/SPD/Goldへ不透明な濃色パネルを追加。21px文字、左右12px/上下4px余白。既存画像・コア・データ・通常探索方針の差分なし。
+- 142＋180＋44チェックとヘッドレスUI成功、Windows再ビルド後に自己レビュー。隔離EXEの[修正後の町](../../review/current/41-town-status-readable.png)と[初回帰還](../../review/current/43-town-status-first-return.png)で文字・装備11部位・再出発ボタンの収まりを確認。修正前35画像は保存。
+- [隔離290操作](../../review/current/readability-campaign-isolated-campaign-complete.json)とヘッドレス版、途中/突破後の別EXE再開成功。通常13探索・死亡1・帰還11、初回死亡は別で1回。クリアSHA `edd3cace3bb8376f1e2d80cb0cc6a44270874df5893a0a91906b036046996d2a`、保存SHA `0dcca1d55581aba169a1ed6ee4251688e37a2d6320da3042789a17c8b33dc6fa` は0.4と一致。
+- 3プロセスとも非対話Station `Service-0x0-1b7214$`＋専用Desktop、終了0・タイムアウトなし。[監査](../../review/current/readability-campaign-isolated-isolation-complete.json)、[GPUログ](../../review/current/readability-campaign-isolated-complete.log)。通常デスクトップへ自動起動せず、既存プロセス/EXE/PCKを保持したまま同じPlay.cmdの参照だけ更新。
+- [配布SHA](../../review/current/build-manifest.json)と[安全切替記録](../../review/current/local-release.json)。今回ローカル1000seed再計算は行わず、コア/データ不変を照合して0.4の全記録一致証拠を継承。CIは今回headの結果と既存34783efの成功を分けて記録する。
+- **羊皮紙・真鍮の素材感、装備UIの表現はPX参考より簡素で残課題。** 素材採否は未承認。追加画像制作・工程2以降へは進めず、工程1全体も未完了。OS物理入力・別解像度・長時間試遊は未検証。

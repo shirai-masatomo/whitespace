@@ -1,24 +1,24 @@
 {
-  "game_commit": "b358aa15a53d759ad0a601313312e2062648b53a",
+  "game_commit": "187e7f7b2f97ccfda10539340907fe766bebba42",
   "data_version": "2026-10-17.foundation.1",
   "engine": "4.7.2.stable.official.ed1daf0bf",
   "campaign_config_version": "2026-10-17.loop-provisional.2",
-  "game_version": "0.4.0-visual-candidate-a",
+  "game_version": "0.4.1-visual-candidate-a",
   "files": [
     {
       "path": "build/DiveInUnder-foundation-windows-x64.zip",
-      "bytes": 46174510,
-      "sha256": "c09a2ce7de7468dd9b043325e0fb8d0d0df46636a16e370de06588162198299d"
+      "bytes": 46175011,
+      "sha256": "ecdd72099afa786ee5ae9a43313975b7bac96e1e37751b6a6ffafdb1ac01b07a"
     },
     {
-      "path": "build/releases/b358aa15a53d759ad0a601313312e2062648b53a-938d4ac1/DiveInUnder.exe",
+      "path": "build/releases/187e7f7b2f97ccfda10539340907fe766bebba42-c1bc31aa/DiveInUnder.exe",
       "bytes": 109268480,
       "sha256": "d34d36f3be1a6c49c56525ae86469b92e4f417ddf0b43cf00dd80c385c4b0562"
     },
     {
-      "path": "build/releases/b358aa15a53d759ad0a601313312e2062648b53a-938d4ac1/DiveInUnder.pck",
-      "bytes": 6913292,
-      "sha256": "d0bf1f7b9fb53bcf3a510e9244515dfbce3541db0a70c99b94422dfe4232bcf5"
+      "path": "build/releases/187e7f7b2f97ccfda10539340907fe766bebba42-c1bc31aa/DiveInUnder.pck",
+      "bytes": 6913724,
+      "sha256": "6d9046f5cee8e06aedcc55da8226cebc06985056a1747df0e8c92a1d17901d8a"
     }
   ]
 }

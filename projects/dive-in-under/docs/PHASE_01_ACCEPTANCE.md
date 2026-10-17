@@ -62,3 +62,12 @@ EXP/Gold/戦利品の合計が減るのは早く突破して試験が終了す�
 ## 静止画像候補Aの追補
 
 実EXE `b358aa15a53d759ad0a601313312e2062648b53a` の0.4[素材と実EXE比較](../review/current/visual-candidates.md)／[画像制作引継ぎ](IMAGE_PRODUCTION_HANDOFF.md)。上記0.3の通常進行・統計を保持し、独立背景2点と透過主人公/E04/B10を未採用候補として表示。浅層/中層/深層は静的色調と深度名、10Fは専用門背景。実UI・保存・290操作のSHAは一致。画像の縮小・向き・接地、パネル・文字の見やすさの採否はユーザーの節目レビューへ返す。E01〜E03/E05の画像は採用後に展開し、モーションは作らない。従来の「独立画像が未実装」という記述は0.3時点の履歴で、現在の未達は素材採否と全敵展開。
+
+## 2026-10-17 0.4.1 — 町の能力値一覧の可読性修正
+
+- 実行ソース `187e7f7b2f97ccfda10539340907fe766bebba42`、Godot4.7.2。HP/SP/Lv/ATK/DEF/SPD/Goldへ不透明な濃色パネルを追加。21px文字、左右12px/上下4px余白。既存画像・コア・データ・通常探索方針の差分なし。
+- 142＋180＋44チェックとヘッドレスUI成功、Windows再ビルド後に自己レビュー。隔離EXEの[修正後の町](../review/current/41-town-status-readable.png)と[初回帰還](../review/current/43-town-status-first-return.png)で文字・装備11部位・再出発ボタンの収まりを確認。修正前35画像は保存。
+- [隔離290操作](../review/current/readability-campaign-isolated-campaign-complete.json)とヘッドレス版、途中/突破後の別EXE再開成功。通常13探索・死亡1・帰還11、初回死亡は別で1回。クリアSHA `edd3cace3bb8376f1e2d80cb0cc6a44270874df5893a0a91906b036046996d2a`、保存SHA `0dcca1d55581aba169a1ed6ee4251688e37a2d6320da3042789a17c8b33dc6fa` は0.4と一致。
+- 3プロセスとも非対話Station `Service-0x0-1b7214$`＋専用Desktop、終了0・タイムアウトなし。[監査](../review/current/readability-campaign-isolated-isolation-complete.json)、[GPUログ](../review/current/readability-campaign-isolated-complete.log)。通常デスクトップへ自動起動せず、既存プロセス/EXE/PCKを保持したまま同じPlay.cmdの参照だけ更新。
+- [配布SHA](../review/current/build-manifest.json)と[安全切替記録](../review/current/local-release.json)。今回ローカル1000seed再計算は行わず、コア/データ不変を照合して0.4の全記録一致証拠を継承。CIは今回headの結果と既存34783efの成功を分けて記録する。
+- **羊皮紙・真鍮の素材感、装備UIの表現はPX参考より簡素で残課題。** 素材採否は未承認。追加画像制作・工程2以降へは進めず、工程1全体も未完了。OS物理入力・別解像度・長時間試遊は未検証。

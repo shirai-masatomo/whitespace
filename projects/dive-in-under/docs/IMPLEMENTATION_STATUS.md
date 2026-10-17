@@ -1,5 +1,7 @@
 # 仕様 × 画面 × 実装範囲（引き継ぎ確認表）
 
+> **最新0.4.1**：町の能力値一覧の可読性を修正し隔離Windows EXEを再検証。素材採否とPX画作りの残課題があり、工程1全体は未完了。[実画面・証拠](../review/current/README.md)。
+
 > **この表が「膨らませた仕様のうち何を取り込んだか」の一覧。** 必要に応じて仕様追加後にここも更新する。
 >
 > **2026-10-17 通常ソロ10F更新**：実EXE `2431438`。通常新規seed10000の13探索・290操作、途中/突破後の別EXE再開が共通コアと一致。戦闘142＋保存180＋10F44項目成功。1000seed全件突破、初回死亡を統計から除外。[全受入項目](PHASE_01_ACCEPTANCE.md)。**main e7cc5a2の画作り要件は未達、工程1全体は進行中**。
@@ -71,3 +73,12 @@ TextureRect/Sprite2Dによる静止素材受入と実UI分離を作業ツリー�
 ### 現在：静止画像候補A 0.4を検証（2026-10-17）
 
 上記転送失敗はユーザー指定のローカルPNG受渡しで解消。5原稿の実ピクセル・アルファ・寸法・コピーSHAを確認し、独立背景2点＋主人公/E04/B10をTextureRect/Sprite2Dで表示。深度色調/10F門、実UI、ステータス・装備表示を追加。`b358aa1`の実EXEで隔離290操作と3回起動、保存SHA、画面11枚を確認。[候補比較](../review/current/visual-candidates.md)／[画像制作引継ぎ](IMAGE_PRODUCTION_HANDOFF.md)。通常1000seed厳密比較が従来と一致。素材採否とE01〜E03/E05は未達、工程1全体は未完了。
+
+## 2026-10-17 0.4.1 — 町の能力値一覧の可読性修正
+
+- 実行ソース `187e7f7b2f97ccfda10539340907fe766bebba42`、Godot4.7.2。HP/SP/Lv/ATK/DEF/SPD/Goldへ不透明な濃色パネルを追加。21px文字、左右12px/上下4px余白。既存画像・コア・データ・通常探索方針の差分なし。
+- 142＋180＋44チェックとヘッドレスUI成功、Windows再ビルド後に自己レビュー。隔離EXEの[修正後の町](../review/current/41-town-status-readable.png)と[初回帰還](../review/current/43-town-status-first-return.png)で文字・装備11部位・再出発ボタンの収まりを確認。修正前35画像は保存。
+- [隔離290操作](../review/current/readability-campaign-isolated-campaign-complete.json)とヘッドレス版、途中/突破後の別EXE再開成功。通常13探索・死亡1・帰還11、初回死亡は別で1回。クリアSHA `edd3cace3bb8376f1e2d80cb0cc6a44270874df5893a0a91906b036046996d2a`、保存SHA `0dcca1d55581aba169a1ed6ee4251688e37a2d6320da3042789a17c8b33dc6fa` は0.4と一致。
+- 3プロセスとも非対話Station `Service-0x0-1b7214$`＋専用Desktop、終了0・タイムアウトなし。[監査](../review/current/readability-campaign-isolated-isolation-complete.json)、[GPUログ](../review/current/readability-campaign-isolated-complete.log)。通常デスクトップへ自動起動せず、既存プロセス/EXE/PCKを保持したまま同じPlay.cmdの参照だけ更新。
+- [配布SHA](../review/current/build-manifest.json)と[安全切替記録](../review/current/local-release.json)。今回ローカル1000seed再計算は行わず、コア/データ不変を照合して0.4の全記録一致証拠を継承。CIは今回headの結果と既存34783efの成功を分けて記録する。
+- **羊皮紙・真鍮の素材感、装備UIの表現はPX参考より簡素で残課題。** 素材採否は未承認。追加画像制作・工程2以降へは進めず、工程1全体も未完了。OS物理入力・別解像度・長時間試遊は未検証。

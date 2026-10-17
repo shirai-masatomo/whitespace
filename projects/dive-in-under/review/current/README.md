@@ -1,6 +1,6 @@
 # Dive In Under — 確認入口
 
-**0.4.0 visual candidate A / 通常ソロ10Fを維持した静止画像候補版。5点すべて未採用、工程1全体は未完了。**
+**0.4.1 visual candidate A / 通常ソロ10Fを維持した静止画像候補版。5点すべて未採用、工程1全体は未完了。**
 
 PCの入口を本作品のフォルダへ集約しました。
 
@@ -8,9 +8,9 @@ PCの入口を本作品のフォルダへ集約しました。
 
 ここから **[Play.cmd](Play.cmd)** または **[画像付き比較ページ](index.html)** を開きます。元の牧場フォルダから移したのは以前作成したDive専用ショートカット1個のみ。他の入口・ファイルは変更していません。
 
-[Windows ZIP](../../build/DiveInUnder-foundation-windows-x64.zip) / [現在のEXE](../../build/releases/b358aa15a53d759ad0a601313312e2062648b53a-938d4ac1/DiveInUnder.exe) / [操作・保存手順](../../tools/PLAY.txt) / [環境](../../docs/DEVELOPMENT.md) / [配布SHA](build-manifest.json) / [安全切替記録](local-release.json)。ZIPはEXEとPCKを同じ場所へ展開します。
+[Windows ZIP](../../build/DiveInUnder-foundation-windows-x64.zip) / [現在のEXE](../../build/releases/187e7f7b2f97ccfda10539340907fe766bebba42-c1bc31aa/DiveInUnder.exe) / [操作・保存手順](../../tools/PLAY.txt) / [環境](../../docs/DEVELOPMENT.md) / [配布SHA](build-manifest.json) / [安全切替記録](local-release.json)。ZIPはEXEとPCKを同じ場所へ展開します。
 
-実行ソース `b358aa15a53d759ad0a601313312e2062648b53a`、Godot `4.7.2.stable.official.ed1daf0bf`。既存セーブ／戦闘／数値／探索方針は変更なし。旧実行ファイルは停止・上書きせず、検証済みreleaseへの参照だけ切り替えました。
+実行ソース `187e7f7b2f97ccfda10539340907fe766bebba42`、Godot `4.7.2.stable.official.ed1daf0bf`。既存セーブ／戦闘／数値／探索方針は変更なし。旧実行ファイルは停止・上書きせず、検証済みreleaseへの参照だけ切り替えました。
 
 ## 素材の採否と画像制作
 
@@ -22,11 +22,22 @@ PCの入口を本作品のフォルダへ集約しました。
 
 | 内容 | 画面 |
 | --- | --- |
-| タイトル／初回 | [タイトル](30-visual-title.png) / [帰還不可の初回](31-visual-first.png) |
+| タイトル／初回 | [タイトル](42-readability-title.png) / [帰還不可の初回](31-visual-first.png) |
 | 通常洞窟／深度 | [浅層](39-visual-shallow.png) / [中層](38-visual-middle.png) / [深層](33-visual-deep.png) |
 | 候補キャラ | [主人公＋E04](32-visual-goblin.png) / [主人公＋B10](34-visual-boss.png) |
-| 町・装備・倉庫 | [ステータス／11部位／倉庫](35-visual-town.png) |
+| 町・装備・倉庫 | [ステータス／11部位／倉庫](41-town-status-readable.png) |
 | 死亡／突破 | [初回死亡](36-visual-first-death.png) / [通常死亡](40-visual-normal-death.png) / [10F突破](37-visual-clear.png) |
+
+## 0.4.1 — 町の能力値の読みやすさだけを修正
+
+HP/SP/Lv/ATK/DEF/SPD/Goldを不透明な濃色パネルへ配置。文字21px、左右12px・上下4pxの余白。1280×720の実EXEで一覧、装備11部位、再出発ボタンが収まることを確認しました。[修正後](41-town-status-readable.png) / [修正前0.4](35-visual-town.png) / [初回帰還後](43-town-status-first-return.png)。他の旧画像30〜40はb358aa1時点の履歴です。
+
+- [戦闘142](readability-tests.log)＋[探索/保存180](readability-loop-tests.log)＋[10F44](readability-campaign-tests.log)成功。Windows再ビルド後に実画面を自己レビュー。
+- [隔離EXE290操作](readability-campaign-isolated-campaign-complete.json)、[ヘッドレスEXE](readability-campaign-headless-campaign-complete.json)、[別EXE保存再開](readability-campaign-isolated-campaign-final.json)成功。0.4とクリア・保存SHAが一致。
+- [隔離監査](readability-campaign-isolated-isolation-complete.json) / [GPUログ](readability-campaign-isolated-complete.log) / [画像SHA](readability-evidence.json)。3プロセスとも非対話Station＋専用Desktop、終了0、タイムアウトなし。
+- コア・データ・既存PNG・シミュレーション方針はb358aa1から差分なし。1000seedのローカル全件再計算は今回省略し、下記0.4の厳密比較を継承。今回のCI結果はPR Checksで別管理します。
+
+羊皮紙・真鍮の素材感と装備UIはPX参考より簡素で、画作りの残課題です。5素材の採否は未承認のまま。追加画像制作には進みません。
 
 ## 回帰証拠
 
