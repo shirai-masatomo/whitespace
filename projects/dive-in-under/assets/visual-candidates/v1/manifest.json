@@ -40,28 +40,30 @@
     },
     {
       "id": "boss",
-      "file": "dive-boss-gate-cave-candidate-v1.png",
-      "source_local_name": "ChatGPT 画像 2026年10月17日 20_35_31.png",
-      "library_file_id": "libfile_84b6a62d76788191a203abb9272fe90f",
-      "sha256": "f71f3b070312a91c3d4eee40c212a90385af1fcf652fd52d74f6da93b1b65f33",
-      "bytes": 2592971,
-      "pixels": {
-        "alpha128_bbox": [
-          0,
-          0,
-          1672,
-          941
+      "file": "dive-boss-gate-cave-candidate-v2.png",
+      "source_local_name": "dive-boss-gate-cave-candidate-v2.png",
+      "sha256": "84903779b817a4f063acaba4094a9d024b3b8b4917dd0a4f8148cc53fd3aff6a",
+      "bytes": 3446049,
+      "width": 1672,
+      "height": 941,
+      "pixel_format": "RGB",
+      "status": "adopted-user-requested-floor-correction",
+      "generation": "dedicated parent image task; original bytes copied unchanged",
+      "background_actor_anchors_source": {
+        "enemy": [
+          502,
+          602
         ],
-        "alpha_max": 255,
-        "width": 1672,
-        "height": 941,
-        "alpha_min": 255,
-        "partial_alpha_pixels": 0,
-        "transparent_pixels": 0
+        "hero": [
+          1170,
+          753
+        ]
       },
-      "feet_source": null,
-      "status": "adopted-as-current-baseline",
-      "facing": null
+      "adoption": {
+        "date": "2026-10-17",
+        "scope": "user-requested boss floor continuity repair; authorized integration without another approval"
+      },
+      "rendering": "16:9 aspect preserved, no rotation/shear/nonuniform scale"
     },
     {
       "id": "B10",
@@ -551,6 +553,31 @@
       },
       "feet_source": null,
       "status": "adopted-as-current-baseline",
+      "facing": null
+    },
+    {
+      "id": "boss",
+      "file": "dive-boss-gate-cave-candidate-v1.png",
+      "source_local_name": "ChatGPT 画像 2026年10月17日 20_35_31.png",
+      "library_file_id": "libfile_84b6a62d76788191a203abb9272fe90f",
+      "sha256": "f71f3b070312a91c3d4eee40c212a90385af1fcf652fd52d74f6da93b1b65f33",
+      "bytes": 2592971,
+      "pixels": {
+        "alpha128_bbox": [
+          0,
+          0,
+          1672,
+          941
+        ],
+        "alpha_max": 255,
+        "width": 1672,
+        "height": 941,
+        "alpha_min": 255,
+        "partial_alpha_pixels": 0,
+        "transparent_pixels": 0
+      },
+      "feet_source": null,
+      "status": "superseded-boss-floor-v1-retained",
       "facing": null
     }
   ]

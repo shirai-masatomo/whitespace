@@ -93,11 +93,11 @@ func display_foot(position_hint: Vector2) -> Vector2:
 	return Vector2(roundf(size.x*position_hint.x),roundf(ground_y()+position_hint.y*size.y/270.0))
 
 func hero_position_hint() -> Vector2:
-	if wide_layout: return Vector2(0.70,0.80) if floor_number>=10 else Vector2(1137.0/1672.0,809.0/941.0)
+	if wide_layout: return Vector2(1170.0/1672.0,753.0/941.0) if floor_number>=10 else Vector2(1137.0/1672.0,809.0/941.0)
 	return Vector2(0.70,22.0) if floor_number>=10 else NEAR_HERO
 
 func enemy_position_hint() -> Vector2:
-	if wide_layout: return Vector2(0.30,0.64) if floor_number>=10 else Vector2(502.0/1672.0,583.0/941.0)
+	if wide_layout: return Vector2(502.0/1672.0,602.0/941.0) if floor_number>=10 else Vector2(502.0/1672.0,583.0/941.0)
 	return Vector2(0.30,-34.0) if floor_number>=10 else FAR_ENEMY
 
 func place_actor(actor: Sprite2D, key: String, position_hint: Vector2, target_height: float) -> void:
