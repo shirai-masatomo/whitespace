@@ -1,30 +1,15 @@
 param([switch]$Rendered)
 $ErrorActionPreference = 'Stop'
+if ($Rendered) { throw 'Normal-desktop rendering is prohibited. Use tools/isolated_visual.ps1 after a successful permission probe.' }
 $project = Split-Path $PSScriptRoot -Parent
-$mode = if ($Rendered) { 'rendered' } else { 'headless' }
-$runDir = Join-Path $project "artifacts/exe-$mode"
+$runDir = Join-Path $project 'artifacts/exe-headless'
 New-Item -ItemType Directory -Force $runDir | Out-Null
-Copy-Item (Join-Path $project 'build/windows/DiveInUnder.exe') $runDir -Force
-Copy-Item (Join-Path $project 'build/windows/DiveInUnder.pck') $runDir -Force
-# Overrides live only beside this private copy, never in the distributed ZIP.
-if ($Rendered) {
-    @'
-[display]
-window/size/no_focus=true
-window/size/initial_position_type=0
-window/size/initial_position=Vector2i(-20000, -20000)
-window/size/borderless=true
-window/energy_saving/keep_screen_on=false
-'@ | Set-Content (Join-Path $runDir 'override.cfg') -Encoding utf8
-}
 $envBefore = $env:APPDATA
 $env:APPDATA = Join-Path $runDir 'user-data'
 New-Item -ItemType Directory -Force $env:APPDATA | Out-Null
-$exe = Join-Path $runDir 'DiveInUnder.exe'
+$exe = Join-Path $project 'build/windows/DiveInUnder.exe'
 $log = Join-Path $runDir 'run.log'
-$arguments = @('--log-file', $log, '--audio-driver','Dummy','--quit-after','600')
-if ($Rendered) { $arguments += @('--position','-20000,-20000','--resolution','1280x720','--rendering-method','gl_compatibility') }
-else { $arguments += '--headless' }
+$arguments = @('--headless','--log-file', $log, '--audio-driver','Dummy','--quit-after','600')
 $arguments += @('--',"--smoke-dir=$runDir")
 $quoted = ($arguments | ForEach-Object { '"' + $_.Replace('"','\"') + '"' }) -join ' '
 try {
@@ -40,10 +25,5 @@ try {
     if (!(Test-Path $resultPath)) { throw 'No smoke result' }
     $result = Get-Content $resultPath -Raw | ConvertFrom-Json
     if (!$result.ui_core_equal -or $result.rendered -ne [bool]$Rendered) { throw 'Unexpected smoke result' }
-    if ($Rendered) {
-        foreach ($name in @('01-title.png','02-battle.png','03-battle-result.png')) {
-            if (!(Test-Path (Join-Path $runDir $name))) { throw "Missing screenshot: $name" }
-        }
-    }
     $result | ConvertTo-Json
 } finally { $env:APPDATA = $envBefore }

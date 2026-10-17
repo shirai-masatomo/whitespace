@@ -2,6 +2,7 @@ extends Control
 const Combat = preload("res://core/combat.gd")
 const Catalog = preload("res://core/catalog.gd")
 const Cavern = preload("res://ui/cavern.gd")
+const BattleStage = preload("res://ui/battle_stage.gd")
 var data: Dictionary
 var screen: Control
 var state: Dictionary = {}
@@ -17,6 +18,10 @@ var start_button: Button
 var auto_button: Button
 var launch_button: Button
 var back_button: Button
+var stage: Control
+var hero_hp: ProgressBar
+var hero_sp: ProgressBar
+var enemy_hp: ProgressBar
 var ids: Array = []
 var smoke_dir := ""
 
@@ -34,11 +39,14 @@ func _ready() -> void:
 	style.set_color("font_color", "Label", Color("e2ddcc"))
 	style.set_color("default_color", "RichTextLabel", Color("d5dfda"))
 	for type in ["Button", "OptionButton"]:
-		style.set_stylebox("normal",type,box(Color("112c32"),Color("7c704e")))
-		style.set_stylebox("hover",type,box(Color("1c454c"),Color("bba574")))
-		style.set_stylebox("pressed",type,box(Color("0a2026"),Color("e6cc86")))
+		style.set_stylebox("normal",type,box(Color("cdb784"),Color("927044"),2))
+		style.set_stylebox("hover",type,box(Color("ead29b"),Color("e0af53"),2))
+		style.set_stylebox("pressed",type,box(Color("ad976b"),Color("e6cc86"),2))
 		style.set_stylebox("focus",type,box(Color(0,0,0,0),Color("5fd6da"),2))
-		style.set_color("font_color",type,Color("e9e2cc"))
+		style.set_color("font_color",type,Color("231f1b"))
+		style.set_color("font_hover_color",type,Color("231f1b"))
+		style.set_color("font_pressed_color",type,Color("231f1b"))
+		style.set_color("font_focus_color",type,Color("231f1b"))
 		style.set_font_size("font_size",type,18)
 	theme = style
 	var bg := Control.new()
@@ -78,11 +86,15 @@ func button(value: String, callback: Callable) -> Button:
 	b.pressed.connect(callback)
 	return b
 
-func column(parent: Node, min_width: float = 0) -> VBoxContainer:
+func column(parent: Node, min_width: float = 0, parchment: bool = false) -> VBoxContainer:
 	var panel := PanelContainer.new()
 	panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	panel.custom_minimum_size.x = min_width
-	panel.add_theme_stylebox_override("panel",box(Color(0.025,0.07,0.085,0.95),Color("6b644d")))
+	panel.add_theme_stylebox_override("panel",box(Color("d3bd8d") if parchment else Color(0.025,0.07,0.085,0.95),Color("987b49"),2))
+	if parchment:
+		var paper_theme := Theme.new()
+		paper_theme.set_color("font_color","Label",Color("292922"))
+		panel.theme = paper_theme
 	parent.add_child(panel)
 	var v := VBoxContainer.new()
 	v.add_theme_constant_override("separation",10)
@@ -128,13 +140,14 @@ func show_title() -> void:
 	spacer.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	root.add_child(spacer)
 	root.add_child(text_label("開発用の基盤ビルド。探索・初回死亡・町・倉庫・保存は今後の実装です。",17))
-	root.add_child(text_label("0.1.0 foundation  ·  Godot 4.7.2  ·  主人公の数値と背景は試作用",15))
+	root.add_child(text_label("0.1.0 foundation  ·  Godot 4.7.2  ·  主人公の数値とドット表現は試作用",15))
 	launch_button.grab_focus()
 
 func show_battle() -> void:
 	timer.stop()
 	var root := root_layout()
 	var header := HBoxContainer.new()
+	header.custom_minimum_size.y = 52
 	root.add_child(header)
 	var heading := text_label("Dive In Under   /   戦闘確認",30)
 	heading.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -145,7 +158,7 @@ func show_battle() -> void:
 	row.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	row.add_theme_constant_override("separation",16)
 	root.add_child(row)
-	var controls := column(row,270)
+	var controls := column(row,210)
 	controls.size_flags_horizontal = Control.SIZE_FILL
 	controls.add_child(text_label("検証条件",24))
 	enemy_choice = OptionButton.new()
@@ -167,32 +180,57 @@ func show_battle() -> void:
 	seed_input.max_value = 2147383647
 	seed_input.value = 10000
 	controls.add_child(seed_input)
-	start_button = button("この条件で自動戦闘",begin_battle)
+	start_button = button("自動戦闘を開始",begin_battle)
 	controls.add_child(start_button)
 	auto_button = button("一時停止",toggle_auto)
 	controls.add_child(auto_button)
-	controls.add_child(button("1ラウンド進める",func(): timer.stop(); next_round(); auto_button.text = "自動再生"))
-	var center := column(row,460)
-	enemy_label = text_label("",22)
+	controls.add_child(button("1ラウンド進行",func(): timer.stop(); next_round(); auto_button.text = "自動再生"))
+	controls.add_child(button("早送り  ×2",func(): timer.wait_time = 0.25; if state.outcome == "ongoing": timer.start()))
+	var center := column(row,550)
+	enemy_label = text_label("",18)
 	center.add_child(enemy_label)
-	result_label = text_label("",20)
+	enemy_hp = health_bar(Color("b4523b"))
+	center.add_child(enemy_hp)
+	stage = Control.new()
+	stage.set_script(BattleStage)
+	stage.clip_contents = true
+	center.add_child(stage)
+	result_label = text_label("",17)
 	result_label.add_theme_color_override("font_color",Color("c9b77d"))
 	center.add_child(result_label)
-	center.add_child(HSeparator.new())
 	log_view = RichTextLabel.new()
+	log_view.custom_minimum_size.y = 100
 	log_view.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	log_view.scroll_following = true
 	log_view.add_theme_font_size_override("normal_font_size",17)
 	center.add_child(log_view)
-	var status := column(row,240)
-	status.add_child(text_label("主人公 / 単独",24))
-	hero_label = text_label("",20)
+	var status := column(row,210,true)
+	status.add_child(text_label("主人公 / 単独",22))
+	hero_label = text_label("",18)
 	status.add_child(hero_label)
+	status.add_child(text_label("HP",16))
+	hero_hp = health_bar(Color("a84936"))
+	status.add_child(hero_hp)
+	status.add_child(text_label("SP",16))
+	hero_sp = health_bar(Color("327e9b"))
+	status.add_child(hero_sp)
 	status.add_child(HSeparator.new())
-	status.add_child(text_label("通常攻撃のみ\n\n命中 95%\n会心 5% / 1.5倍\n\n上限 50ラウンド",17))
+	status.add_child(text_label("完全自動 / 通常攻撃\n命中 95%\n会心 5% / 1.5倍\n上限 50ラウンド",16))
 	root.add_child(text_label("独立した単発戦闘です。敵スキル・装備・成長・戦利品の所持管理は未実装。",16))
 	reset_battle()
 	start_button.grab_focus()
+
+func health_bar(color: Color) -> ProgressBar:
+	var bar := ProgressBar.new()
+	bar.custom_minimum_size.y = 12
+	bar.show_percentage = false
+	var background := box(Color("1c292a"),Color("544b33"))
+	var fill := box(color,color)
+	background.set_content_margin_all(0)
+	fill.set_content_margin_all(0)
+	bar.add_theme_stylebox_override("background",background)
+	bar.add_theme_stylebox_override("fill",fill)
+	return bar
 
 func reset_battle() -> void:
 	state = Combat.start(data.hero_fixture, Combat.enemy(data,ids[enemy_choice.selected],int(level_input.value)),data.rules,int(seed_input.value))
@@ -225,8 +263,18 @@ func next_round() -> void:
 func refresh() -> void:
 	var h: Dictionary = state.hero
 	var e: Dictionary = state.enemy
-	hero_label.text = "Lv. %d\n\nHP  %d / %d\nSP  %d / %d\n\n攻撃    %d\n防御    %d\n素早さ  %d\n\n試験用の仮能力" % [h.level,h.hp,h.max_hp,h.sp,h.max_sp,h.atk,h.def,h.spd]
-	enemy_label.text = "%s  Lv.%d\nHP %d / %d   攻撃 %d / 防御 %d / 速さ %d" % [e.name,e.level,e.hp,e.max_hp,e.atk,e.def,e.spd]
+	hero_label.text = "Lv. %d\nHP  %d / %d\nSP  %d / %d\nATK  %d\nDEF  %d\nSPD  %d\n試験用の仮能力" % [h.level,h.hp,h.max_hp,h.sp,h.max_sp,h.atk,h.def,h.spd]
+	enemy_label.text = "%s  Lv.%d   HP %d / %d\nATK %d / DEF %d / SPD %d / SP %d" % [e.name,e.level,e.hp,e.max_hp,e.atk,e.def,e.spd,e.sp]
+	hero_hp.max_value = h.max_hp
+	hero_hp.value = h.hp
+	hero_sp.max_value = maxi(1,h.max_sp)
+	hero_sp.value = h.sp
+	enemy_hp.max_value = e.max_hp
+	enemy_hp.value = e.hp
+	stage.enemy_id = e.id
+	stage.hero_alive = h.hp > 0
+	stage.enemy_alive = e.hp > 0
+	stage.queue_redraw()
 	var names := {"hero":"主人公","enemy":str(e.name)}
 	var outcomes := {"ongoing":"戦闘中", "victory":"勝利", "defeat":"主人公死亡", "draw":"50ラウンドで打切り"}
 	result_label.text = "ROUND %02d   /   %s   /   seed %d" % [state.round,outcomes[state.outcome],state.seed]
@@ -247,14 +295,31 @@ func capture(filename: String) -> void:
 		push_error("Screenshot failed: " + str(error))
 		get_tree().quit(1)
 
+func click_control(control: Button) -> void:
+	# Route through this app's viewport hit-testing; never inject OS input.
+	var point := control.get_global_rect().get_center()
+	for pressed in [true,false]:
+		var event := InputEventMouseButton.new()
+		event.position = point
+		event.global_position = point
+		event.button_index = MOUSE_BUTTON_LEFT
+		event.pressed = pressed
+		get_viewport().push_input(event,true)
+		await get_tree().process_frame
+
 func smoke() -> void:
 	# Application-level regression hook. It is not a claim of manual OS input.
 	var rendered := DisplayServer.get_name() != "headless"
 	if rendered:
+		await get_tree().create_timer(0.4).timeout
 		await capture("01-title.png")
-	launch_button.pressed.emit()
+	await click_control(launch_button)
 	await get_tree().process_frame
-	start_button.pressed.emit()
+	if not is_instance_valid(start_button):
+		push_error("Title button input failed")
+		get_tree().quit(1)
+		return
+	await click_control(start_button)
 	timer.stop()
 	next_round()
 	if rendered:
@@ -270,9 +335,9 @@ func smoke() -> void:
 		await capture("03-battle-result.png")
 	var file := FileAccess.open(smoke_dir.path_join("ui-smoke.json"),FileAccess.WRITE)
 	file.store_string(JSON.stringify({"engine":Engine.get_version_info().string,"display":DisplayServer.get_name(),
-		"rendered":rendered,"manual_input":false,"ui_core_equal":true,"outcome":state.outcome,"rounds":state.round},"\t"))
+		"rendered":rendered,"manual_input":false,"viewport_mouse_input":true,"ui_core_equal":true,"outcome":state.outcome,"rounds":state.round},"\t"))
 	file.close()
-	back_button.pressed.emit()
+	await click_control(back_button)
 	await get_tree().process_frame
 	print("UI_SMOKE_OK rendered=",rendered," manual_input=false")
 	get_tree().quit()

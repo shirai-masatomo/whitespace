@@ -3,4 +3,5 @@
 artifacts/
 build/
 assets/ui-mocks/*.import
+assets/ui-mocks/**/*.import
 

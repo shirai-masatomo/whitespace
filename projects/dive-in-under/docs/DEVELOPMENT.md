@@ -31,8 +31,10 @@
 ./dev.ps1 -Task verify
 ./dev.ps1 -Task simulate -Baseline "$PWD/artifacts/simulation.json" -Output "$PWD/artifacts/comparison.json"
 ./tools/smoke.ps1
-# 通常デスクトップを操作しない描画試験：画面外・no_focusの専用EXEコピー。
-./tools/smoke.ps1 -Rendered
+# ゲーム起動なしで非表示ステーション・専用Desktopの権限を検査。
+./tools/isolated_visual.ps1 -ProbeOnly
+# 成功した場合だけ非対話Window Station内で実EXEを描画。
+./tools/isolated_visual.ps1
 # ユーザーが通常のウィンドウで操作する場合。
 ./dev.ps1 -Task play
 ```
@@ -50,7 +52,7 @@ ZIPを展開して `DiveInUnder.exe` を起動し、「戦闘を確認する」�
 - 同速は戦闘専用 `RandomNumberGenerator`、各ラウンドで確定。命中→会心→振れ幅の順。HP0は即停止、50ラウンドは死亡と別のdraw。スキルは未実装のため通常攻撃倍率1.0。
 - `core/catalog.gd`：データ読込と形・値・参照ID検証。ゲームとランナーが共用。
 - `tools/runner.gd` / `tools/simulation.gd`：実行・集計・比較のみ。ダメージ式の複製なし。
-- `ui/main.gd`：タイトルと単発戦闘の確認画面。モックをクリック画像にせず、GodotのButton/Label等を使用。背景はオリジナルの仮図形。モックの質感・人物・敵イラスト・完成UIの再現は未実施。
+- `ui/main.gd`：タイトルと単発戦闘の確認画面。モックをクリック画像にせず、GodotのButton/Label等を使用。最新mainのPX-01〜03を実ピクセルで確認し、青緑の洞窟・滝・暖色ランタン・羊皮紙/真鍮パネル・主人公と敵の静止ドット仮表示・HP/SPバーへ段階更新。正式な量産素材の採用は未決定。
 
 ## シミュレーターの条件
 
@@ -68,9 +70,17 @@ JSONは各seedの勝敗・ラウンド・双方残HP・報酬・ログSHA256、�
 
 ## 検証の限界と引き継ぎ
 
-- `tools/smoke.ps1 -Rendered` は専用コピーだけに `override.cfg` を置き、画面外・フォーカスなしで起動する。アプリ自身のviewport画像とボタンsignal経由の回帰試験。**OS入力や人手による実操作の証拠ではない**。
-- Computer Useスキルを確認したが、必要なnode_repl APIがこのセッションにない。既存のユーザー操作中ゲーム・通常デスクトップを操作していない。
+- `tools/smoke.ps1` はヘッドレスのみ。旧 `-Rendered`（画面外/no_focus）は**通常デスクトップから隔離されない**ため禁止し、指定しても起動前にエラー終了する。停止指示前にこの方法で表示された可能性は否定できない。旧画像はローカル `artifacts/exe-rendered` に保持し、現行の隔離証拠と区別。
+- `tools/isolated_desktop.cs` は牧場の既存成功手順を読み取り参照し、本作品に限定して整理。OSのログオン単位の非対話ステーションを直接要求し、`WinSta0`でないことと非表示をプロセス作成前に検査。UUIDの専用Desktopを`STARTUPINFO.lpDesktop`へ指定。専用Desktopだけを列挙して起動PIDのウィンドウ所属を記録する。SwitchDesktop、SendInput、通常デスクトップの列挙、拒否後の代替経路、牧場の整理削除処理は持ち込まない。
+- 起動監査・ハッシュ・終了結果は `artifacts/isolated/isolation.json`。APPDATA/LOCALAPPDATAも同所に分離。画像はアプリのviewport、操作はアプリ内のMouseButton入力経路。**OS入力や人手による実操作の証拠ではない**。アクセス拒否なら停止し、GUI以外の作業を続ける。
+- Computer Useスキルを確認したが、必要なnode_repl APIがこのセッションにない。ユーザー操作中のゲームは終了していない。旧方式の通常画面への表示可能性は上記のとおり残る。
 - フォントはWindowsの Yu Gothic UI / Meiryo を参照し同梱していない。他言語OSでの日本語フォント表示は未検証。
 - 初回死亡、死亡ペナルティ、回復、成長の正式仕様は決めていない。今回の仮値は戦闘試験の主人公HP24/ATK6/DEF1/SPD6/SP0のみ。後続はPHASE_01が許可した可変設定として導入する。
 - 1〜10F継戦、反復探索・帰還、初回死亡1回限定と永続化、町/倉庫/装備/保存、通常ルールでのソロ10F突破、4実画面、Windows実操作が残る。仲間・犬・黄金像の仲間排出は工程5まで作らない。
 - SPECや設計台帳の古い「未着手／実装開始待ち」は設計時点の記述。現在のユーザー承認と2026-10-17工程順を適用し、確定仕様そのものは書き換えていない。
+
+## 確認入口と素材方針
+
+ユーザー向け入口は [review/current/README.md](../review/current/README.md) の1か所。最新ZIPは既存buildを参照し、実画面・素材一覧・手順・判断事項へ案内する。別チェックアウトは既存作業保全のための開発場所であり、画面隔離ではない。
+
+最新の明示方針：当面の主人公・敵・味方の素材は**戦闘画面用の静止表示1枚**。画面に置いた見え方で採用/不採用を判断し、採用後もしばらく静止画で使用。待機/攻撃/被弾/歩行モーション、表情差分、カットイン、演出強化は作らない。工程1〜4はゲームループ・UI・戦闘成立を優先し、仲間は工程5まで前倒ししない。今回のコード内ピクセルパターンは未承認の候補で、独立PNG素材はまだない。
