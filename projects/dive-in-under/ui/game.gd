@@ -366,8 +366,7 @@ func smoke(quit_on_finish: bool = true) -> void:
 	await CampaignReplay.click(self,"withdraw",{"uid":uid})
 	if not smoke_check(uid in campaign.inventory and campaign.warehouse.is_empty(),"Initial return enables warehouse roundtrip"): return
 	# Find actual town buttons; core inventory stress tests separately cover every move.
-	var equip_button:=find_button(screen,"装備")
-	await click_control(equip_button)
+	await CampaignReplay.click(self,"equip",{"uid":uid})
 	if not smoke_check(campaign.equipment.head==uid,"Town equip input"): return
 	await click_control(play_buttons.depart)
 	if not smoke_check(campaign.phase=="explore","Town departure input"): return
