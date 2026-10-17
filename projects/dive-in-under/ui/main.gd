@@ -52,7 +52,9 @@ func _ready() -> void:
 		style.set_stylebox("normal",type,box(Color("cdb784"),Color("927044"),2))
 		style.set_stylebox("hover",type,box(Color("ead29b"),Color("e0af53"),2))
 		style.set_stylebox("pressed",type,box(Color("ad976b"),Color("e6cc86"),2))
-		style.set_stylebox("focus",type,box(Color(0,0,0,0),Color("5fd6da"),2))
+		var focus := box(Color(0,0,0,0),Color("5fd6da"),2)
+		focus.shadow_size = 0
+		style.set_stylebox("focus",type,focus)
 		style.set_color("font_color",type,Color("231f1b"))
 		style.set_color("font_hover_color",type,Color("231f1b"))
 		style.set_color("font_pressed_color",type,Color("231f1b"))
@@ -256,6 +258,8 @@ func health_bar(color: Color) -> ProgressBar:
 	var fill := box(color,color)
 	background.set_content_margin_all(0)
 	fill.set_content_margin_all(0)
+	background.shadow_size = 0
+	fill.shadow_size = 0
 	bar.add_theme_stylebox_override("background",background)
 	bar.add_theme_stylebox_override("fill",fill)
 	return bar
