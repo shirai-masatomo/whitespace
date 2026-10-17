@@ -59,6 +59,7 @@ static func background_key(floor_number: int) -> String:
 
 static func preview_note(enemy_id: String) -> String:
 	var note := "静止素材9点：採用済み"
+	if enemy_id == "E01": note += " / ネズミ視点修正版v2"
 	if enemy_id in UNAPPROVED: note += " / %s：未採用候補" % enemy_id
 	if enemy_id != "" and texture(enemy_id) == null: note += " · この敵は仮表示"
 	return note

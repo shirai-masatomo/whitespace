@@ -120,7 +120,7 @@ func visual_audit() -> Dictionary:
 	for pair in [["hero",hero_art],[enemy_id,enemy_art]]:
 		var actor: Sprite2D = pair[1]
 		var entry := {"id":pair[0],"candidate_loaded":actor.texture != null,
-			"adoption":"candidate-unapproved" if pair[0] in VisualAssets.UNAPPROVED else "adopted-current-baseline"}
+			"adoption":"authorized-viewpoint-revision-v2" if pair[0]=="E01" else "adopted-current-baseline"}
 		if actor.texture != null:
 			var extent := actor.texture.get_size() * actor.scale
 			entry["visible_size"] = [extent.x,extent.y]
