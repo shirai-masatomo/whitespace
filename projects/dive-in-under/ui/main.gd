@@ -357,6 +357,19 @@ func collect_visual_audits(node: Node) -> Array:
 	for child in node.get_children(): result.append_array(collect_visual_audits(child))
 	return result
 
+func collect_control_audits(node: Node) -> Array:
+	var result: Array=[]
+	if node is Label or node is Button:
+		var rect: Rect2=node.get_global_rect()
+		if rect.position.x>850:
+			var item: Dictionary={"text":node.text,"rect":str(rect)}
+			if node is Button:
+				item.disabled=node.disabled; item.focus=node.has_focus()
+				item.font_color=str(node.get_theme_color("font_disabled_color" if node.disabled else "font_color"))
+			result.append(item)
+	for child in node.get_children(): result.append_array(collect_control_audits(child))
+	return result
+
 func capture(filename: String) -> void:
 	# Nested Containers settle deferred minimum-size/layout updates before evidence capture.
 	await get_tree().process_frame
@@ -367,7 +380,7 @@ func capture(filename: String) -> void:
 		push_error("Screenshot failed: " + str(error))
 		get_tree().quit(1)
 	var audit := FileAccess.open(smoke_dir.path_join(filename.trim_suffix(".png")+"-visual.json"),FileAccess.WRITE)
-	audit.store_string(JSON.stringify({"run_id":smoke_run_id,"screenshot":filename,"stages":collect_visual_audits(screen)},"\t"))
+	audit.store_string(JSON.stringify({"run_id":smoke_run_id,"screenshot":filename,"stages":collect_visual_audits(screen),"controls":collect_control_audits(screen)},"\t"))
 	audit.close()
 
 func click_control(control: Button) -> void:

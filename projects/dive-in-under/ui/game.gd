@@ -171,7 +171,7 @@ func show_campaign() -> void:
 	if campaign.phase=="town": show_town(root)
 	elif campaign.phase=="result": show_result(root)
 	else: show_wide_exploration()
-	var footer:=text_label(notice if notice!="" else "0.4.5  ·  自動保存済み  ·  主人公ひとり  ·  静止素材9点採用済み / 数値・ペナルティは試作設定",15)
+	var footer:=text_label(notice if notice!="" else "0.4.6  ·  自動保存済み  ·  主人公ひとり  ·  静止素材9点採用済み / 数値・ペナルティは試作設定",15)
 	footer.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART; root.add_child(footer)
 	if campaign.phase=="battle" and auto_play:
 		play_timer.wait_time=0.6/play_speed; play_timer.start()
@@ -209,7 +209,7 @@ func show_wide_exploration() -> void:
 	var log:=RichTextLabel.new(); log.custom_minimum_size.y=128; log.size_flags_vertical=Control.SIZE_EXPAND_FILL; log.scroll_following=true
 	log.add_theme_stylebox_override("normal",box(Color("081215"),Color("987b49")))
 	log.text="\n".join(campaign.journal); journal.add_child(log)
-	var status:=column(row,336,true); status.get_parent().size_flags_horizontal=Control.SIZE_FILL; status.add_theme_constant_override("separation",6)
+	var status:=column(row,336,true); status.get_parent().z_index=1000; status.get_parent().clip_contents=true; status.get_parent().size_flags_horizontal=Control.SIZE_FILL; status.add_theme_constant_override("separation",6)
 	var h:=Expedition.hero(campaign,cfg)
 	section_heading(status,"主人公 / Lv.%d" % h.level)
 	status.add_child(text_label("HP  %d / %d" % [h.hp,h.max_hp],20))
