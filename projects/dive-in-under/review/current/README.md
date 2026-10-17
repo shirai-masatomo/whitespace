@@ -5,7 +5,7 @@
 ## 試す
 
 - このPC：[最新Windows ZIP](../../build/DiveInUnder-foundation-windows-x64.zip) / [EXE](../../build/windows/DiveInUnder.exe) / [操作手順](../../tools/PLAY.txt)。EXEとPCKは同じフォルダに置きます。
-- GitHub：[Draft PR #5](https://github.com/shirai-masatomo/whitespace/pull/5) の専用CIから `DiveInUnder-foundation-windows-x64` をダウンロード。実行結果の最新リンクは [進捗](../../docs/dot/PROGRESS.md)。このPC向けのbuildリンクはGitHub上では取得できません。
+- GitHub：[成功CIのZIP](https://github.com/shirai-masatomo/whitespace/actions/runs/39022931253/artifacts/12096484715) / [CIログ一式](https://github.com/shirai-masatomo/whitespace/actions/runs/39022931253/artifacts/12097054030)（head `ae0f8a2`、2027-01-15まで、GitHubログインが必要な場合あり）。[Draft PR #5](https://github.com/shirai-masatomo/whitespace/pull/5) の後続CIでも `DiveInUnder-foundation-windows-x64` を取得できます。このPC内の上のbuildリンクはGitHub上では取得できません。CIとローカル版のソースはBUILD.jsonで区別します。
 - 「戦闘を確認する」→敵/Lv/シード→「自動戦闘を開始」。停止・早送り・1ラウンド進行・再戦・タイトルへ戻る操作を確認できます。探索ゲーム本編・保存は未実装です。
 - 正確な環境・再現コマンド：[開発環境資料](../../docs/DEVELOPMENT.md)。Godot **4.7.2.stable.official.ed1daf0bf** / 同版テンプレート / GDScript。
 

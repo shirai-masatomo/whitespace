@@ -31,7 +31,7 @@
 - 追加の4条件も各1,000seed、異常結果0。E01 Lv1: 勝率100%/平均2.043ラウンド/残HP平均20.957、E02 Lv1: 100%/3.061/19.905、E04 Lv2: 97.7%/4.175/8.382、E04 Lv3: 26.6%/4.140/1.676。[条件別集計](../../review/current/scenario-summary.json)。敵Lv以外同一でもLv2→3で急変するため、後続の成長・装備・回復を含む調整が必要。
 - Windows EXEのヘッドレス入力経路と、非対話Window Station内の隔離GPU描画を実測。キャッシュ修正後2回連続正常終了、GPUログのERRORなし。最終PID16780、非WinSta0/非表示、専用Desktop一致、所有窓2、終了0。[隔離監査](../../review/current/isolation.json)、[GPUログ](../../review/current/render.log)、[初回監査](../../review/current/first-start-isolation.json)。
 - 実画面3枚はタイトルと戦闘確認の2画面/3状態。現行PX-01〜03を実際に確認し、青緑の洞窟、水、橙色ランタン、真鍮/羊皮紙パネル、主人公1人と敵の静止ドットに反映。画像をクリック画面にはしていない。素材は候補・未承認、キャラクターは静止画1枚方針。装備11枠の画面は未実装。
-- CI初回コード `35b7aaa` の [PR実行](https://github.com/shirai-masatomo/whitespace/actions/runs/39021793971) は成功。最新headの結果は [PR Checks](https://github.com/shirai-masatomo/whitespace/pull/5/checks) に表示（最新head成功を未確認のまま断定しない）。課金・支払い・Steam公開は行っていない。
+- CI `ae0f8a287cda5fb79791b68eec8ac7be411d479b` の [Windows PR実行](https://github.com/shirai-masatomo/whitespace/actions/runs/39022931253) は成功（2026-10-17）。テスト/エクスポート/同seed比較/実EXEヘッドレス/ZIPと証拠アップロードを完了。[CI配布ZIP](https://github.com/shirai-masatomo/whitespace/actions/runs/39022931253/artifacts/12096484715) / [CIログ一式](https://github.com/shirai-masatomo/whitespace/actions/runs/39022931253/artifacts/12097054030)、保存期限2027-01-15。この記録の追記後のhead結果は [PR Checks](https://github.com/shirai-masatomo/whitespace/pull/5/checks) で区別する。CI版はBUILD.jsonにソースコミットを記録し、ローカルGPU確認版472bc01と区別。課金・支払い・Steam公開は行っていない。
 
 ## 自己レビューで修正し再検証した点
 
