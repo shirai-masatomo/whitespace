@@ -1,0 +1,18 @@
+Dive In Under — 工程1 戦闘基盤 0.1.0
+
+ZIPを展開し、DiveInUnder.exeを起動してください。
+DiveInUnder.pckはEXEと同じフォルダに置いてください。
+Windows x64 / OpenGL 3.3互換描画。未署名の開発用ビルドです。
+
+1. 「戦闘を確認する」を選択。
+2. 敵・レベル・シードを選び「この条件で自動戦闘」。
+3. 一時停止、1ラウンド進行、同条件での再戦ができます。
+4. 「タイトルへ」で戻り、「終了」で本アプリを閉じます。
+
+今回は戦闘基盤のみ。探索・初回死亡・町・倉庫・保存・成長・装備・10F攻略は未実装。
+主人公の能力値と図形背景は試作用仮値。仲間・犬・黄金像の仲間排出は工程5以降。
+このビルドはセーブデータを使用しません。
+
+Godot Engine 4.7.2-stable / GDScript
+Godot Engine is licensed under the MIT License. See GODOT_LICENSE.txt and GODOT_COPYRIGHT.txt.
+https://godotengine.org/license/

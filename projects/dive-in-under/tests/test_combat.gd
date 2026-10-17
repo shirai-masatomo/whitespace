@@ -76,11 +76,31 @@ func _initialize() -> void:
 	check(missed.outcome == "draw" and missed.hero.hp == data.hero_fixture.hp, "miss does no damage")
 	var scenario: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://data/scenarios/baseline.json"))
 	check(Runner.validate_scenario(scenario,data).is_empty(), "scenario validation")
+	var bad_data := data.duplicate(true)
+	bad_data.rules.enemy_growth.def_interval = 0
+	check(not Catalog.validate(bad_data).is_empty(), "reject division by zero config")
+	bad_data = data.duplicate(true)
+	bad_data.floors[0].enemies = {"UNKNOWN":100}
+	check(not Catalog.validate(bad_data).is_empty(), "reject undefined enemy ID")
+	bad_data = data.duplicate(true)
+	bad_data.floors[0].encounters = [60,20,10]
+	check(not Catalog.validate(bad_data).is_empty(), "reject invalid encounter sum")
+	var bad_scenario := scenario.duplicate(true)
+	bad_scenario.enemy_level = 2.5
+	check(not Runner.validate_scenario(bad_scenario,data).is_empty(), "reject fractional enemy level")
+	bad_scenario = scenario.duplicate(true)
+	bad_scenario.skills = ["not-implemented"]
+	check(not Runner.validate_scenario(bad_scenario,data).is_empty(), "do not silently ignore skills")
+	bad_scenario = scenario.duplicate(true)
+	bad_scenario.hero.hp = -1
+	check(not Runner.validate_scenario(bad_scenario,data).is_empty(), "reject negative HP input")
 	var report := Simulation.run(data, scenario, range(1000))
 	report.metadata = {"engine":"test","runner_contract":"single-battle-v1","game_commit":"test"}
 	check(report.metrics.invalid_results == 0 and report.records.size() == 1000, "1000 fixed seeds invariants")
 	check(report.metrics.wins + report.metrics.deaths + report.metrics.draws == 1000, "exclusive outcomes")
 	check(Simulation.compare(report, report).delta.win_rate == 0.0, "same conditions zero diff")
+	var reloaded: Dictionary = JSON.parse_string(JSON.stringify(report))
+	check(not Simulation.compare(reloaded, report).has("error"), "baseline survives JSON disk roundtrip")
 	var wrong := report.duplicate(true)
 	wrong.seeds[0] = 999999
 	check(Simulation.compare(report, wrong).has("error"), "reject seed mismatch")

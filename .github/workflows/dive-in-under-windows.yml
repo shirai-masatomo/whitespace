@@ -1,0 +1,59 @@
+name: Dive In Under Windows foundation
+on:
+  pull_request:
+    paths:
+      - 'projects/dive-in-under/**'
+      - '.github/workflows/dive-in-under-windows.yml'
+  push:
+    branches: ['dot/dive-in-under/**', 'main']
+    paths:
+      - 'projects/dive-in-under/**'
+      - '.github/workflows/dive-in-under-windows.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: dive-in-under-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  windows:
+    runs-on: windows-latest
+    timeout-minutes: 25
+    defaults:
+      run:
+        shell: pwsh
+        working-directory: projects/dive-in-under
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            projects/dive-in-under
+          sparse-checkout-cone-mode: true
+      - uses: actions/cache@v4
+        with:
+          path: projects/dive-in-under/.tools
+          key: dive-in-under-godot-${{ runner.os }}-${{ hashFiles('projects/dive-in-under/tools/godot-version.json') }}
+      - name: Verify engine and templates
+        run: ./tools/setup.ps1
+      - name: Test, simulate and export
+        run: ./dev.ps1 -Task verify -GameCommit '${{ github.sha }}'
+      - name: Repeat same seeds and compare
+        run: ./dev.ps1 -Task simulate -GameCommit '${{ github.sha }}' -Baseline "$PWD/artifacts/simulation.json" -Output "$PWD/artifacts/comparison.json"
+      - name: Run exported Windows EXE (headless UI smoke)
+        run: ./tools/smoke.ps1
+      - uses: actions/upload-artifact@v4
+        with:
+          name: DiveInUnder-foundation-windows-x64
+          path: projects/dive-in-under/build/DiveInUnder-foundation-windows-x64.zip
+          if-no-files-found: error
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: DiveInUnder-foundation-evidence
+          path: |
+            projects/dive-in-under/artifacts/*.log
+            projects/dive-in-under/artifacts/*.json
+            projects/dive-in-under/artifacts/*.txt
+            projects/dive-in-under/artifacts/exe-headless/run.log
+            projects/dive-in-under/artifacts/exe-headless/ui-smoke.json
+          if-no-files-found: warn

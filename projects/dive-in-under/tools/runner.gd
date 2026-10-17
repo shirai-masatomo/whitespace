@@ -72,15 +72,10 @@ static func validate_scenario(scenario: Dictionary, data: Dictionary) -> String:
 			return "Missing scenario field: " + key
 	if scenario.schema_version != 1 or not data.enemies.has(scenario.enemy_id):
 		return "Unsupported scenario version/enemy"
-	if float(scenario.enemy_level) != floorf(float(scenario.enemy_level)) or scenario.enemy_level < 1 or scenario.enemy_level > 100:
+	if not Catalog.numeric(scenario.enemy_level) or float(scenario.enemy_level) != floorf(float(scenario.enemy_level)) or scenario.enemy_level < 1 or scenario.enemy_level > 100:
 		return "Enemy level must be an integer in 1..100"
+	if not scenario.equipment is Array or not scenario.skills is Array or not scenario.hero is Dictionary:
+		return "Invalid scenario container type"
 	if not scenario.equipment.is_empty() or not scenario.skills.is_empty():
 		return "Equipment/skills are not implemented; pass effective hero stats and empty arrays"
-	for key in ["level", "max_hp", "hp", "atk", "def", "spd", "max_sp", "sp"]:
-		if not scenario.hero.has(key) or not (typeof(scenario.hero[key]) in [TYPE_INT, TYPE_FLOAT]):
-			return "Missing/nonnumeric hero stat: " + key
-		if scenario.hero[key] < 0 or scenario.hero[key] > 1000000 or scenario.hero[key] != floorf(scenario.hero[key]):
-			return "Invalid hero stat: " + key
-	if scenario.hero.max_hp < 1 or scenario.hero.hp > scenario.hero.max_hp or scenario.hero.sp > scenario.hero.max_sp or scenario.hero.level < 1:
-		return "Invalid hero HP/SP/level range"
-	return ""
+	return Catalog.validate_hero(scenario.hero)

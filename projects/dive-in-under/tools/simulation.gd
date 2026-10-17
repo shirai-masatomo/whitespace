@@ -50,6 +50,9 @@ static func run(data: Dictionary, scenario: Dictionary, seeds: Array) -> Diction
 		"limitations": ["Normal attacks only; no skills/status/durability/allies.", "Single battle; no exploration progression or forced-death event.", "Hero stats are provisional effective stats, not a growth curve."]}
 
 static func compare(before: Dictionary, after: Dictionary) -> Dictionary:
+	# JSON numbers reload as floats. Normalize both sides before deep comparison.
+	before = JSON.parse_string(JSON.stringify(before))
+	after = JSON.parse_string(JSON.stringify(after))
 	for key in ["schema_version", "scenario", "seeds"]:
 		if not before.has(key) or before[key] != after[key]:
 			return {"error": "Comparison conditions differ: " + key}
