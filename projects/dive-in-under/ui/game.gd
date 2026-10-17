@@ -77,7 +77,7 @@ func show_title() -> void:
 	if loaded.get("status","") not in ["ok","missing"]: notice=loaded.get("error","")
 	var status:=text_label(notice,16); status.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART; root.add_child(status)
 	var spacer:=Control.new(); spacer.size_flags_vertical=Control.SIZE_EXPAND_FILL; root.add_child(spacer)
-	root.add_child(text_label("0.4.0 visual candidate A  ·  工程1試作  ·  初回イベント・成長・死亡ペナルティは仮設定",16))
+	root.add_child(text_label("0.4.1 visual candidate A  ·  工程1試作  ·  初回イベント・成長・死亡ペナルティは仮設定",16))
 	new_button.grab_focus()
 
 func show_battle() -> void:
@@ -259,7 +259,17 @@ func item_list(parent: VBoxContainer, source: String) -> void:
 
 func show_town(root: VBoxContainer) -> void:
 	var h:=Expedition.hero(campaign,cfg)
-	root.add_child(text_label("HP %d / %d   SP %d / %d   Lv.%d   ATK %d  DEF %d  SPD %d   /   Gold %d" % [h.hp,h.max_hp,h.sp,h.max_sp,h.level,h.atk,h.def,h.spd,campaign.gold],21))
+	var summary:=PanelContainer.new()
+	summary.mouse_filter=Control.MOUSE_FILTER_IGNORE
+	var summary_style:=box(Color("0b1d25"),Color("b18a4d"),2)
+	summary_style.shadow_size=0
+	summary_style.content_margin_left=12; summary_style.content_margin_right=12
+	summary_style.content_margin_top=4; summary_style.content_margin_bottom=4
+	summary.add_theme_stylebox_override("panel",summary_style)
+	root.add_child(summary)
+	var summary_text:=text_label("HP %d / %d   SP %d / %d   Lv.%d   ATK %d  DEF %d  SPD %d   /   Gold %d" % [h.hp,h.max_hp,h.sp,h.max_sp,h.level,h.atk,h.def,h.spd,campaign.gold],21)
+	summary_text.add_theme_color_override("font_color",Color("f1ead9"))
+	summary.add_child(summary_text)
 	var row:=HBoxContainer.new(); row.size_flags_vertical=Control.SIZE_EXPAND_FILL; row.add_theme_constant_override("separation",16); root.add_child(row)
 	var bag:=column(row,300); bag.add_child(text_label("所持品 / 携行",24)); item_list(bag,"inventory")
 	var equipment:=column(row,430,true)
