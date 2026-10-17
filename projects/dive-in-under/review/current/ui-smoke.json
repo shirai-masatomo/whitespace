@@ -1,0 +1,10 @@
+{
+	"display": "Windows",
+	"engine": "4.7.2-stable (official)",
+	"manual_input": false,
+	"outcome": "defeat",
+	"rendered": true,
+	"rounds": 4,
+	"ui_core_equal": true,
+	"viewport_mouse_input": true
+}

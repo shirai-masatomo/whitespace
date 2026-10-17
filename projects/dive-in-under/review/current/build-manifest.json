@@ -1,0 +1,21 @@
+{
+  "game_commit": "472bc01a9a816530fcb462e4ff90883e354b94cc",
+  "engine": "4.7.2.stable.official.ed1daf0bf",
+  "files": [
+    {
+      "path": "build/DiveInUnder-foundation-windows-x64.zip",
+      "bytes": 39308979,
+      "sha256": "e5326b641dfa3404895cf0d44c5a009e8df0f8f3c196c443f6bf797fd9791077"
+    },
+    {
+      "path": "build/windows/DiveInUnder.exe",
+      "bytes": 109268480,
+      "sha256": "d34d36f3be1a6c49c56525ae86469b92e4f417ddf0b43cf00dd80c385c4b0562"
+    },
+    {
+      "path": "build/windows/DiveInUnder.pck",
+      "bytes": 31144,
+      "sha256": "8640ab0deaa9230c42cfc7a6e87a1b9b569e8cca8eebca19fd29e1a2c9d53264"
+    }
+  ]
+}
