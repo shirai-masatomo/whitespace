@@ -198,7 +198,8 @@ func show_wide_exploration() -> void:
 		var message: String=cfg.events[campaign.event].name if campaign.phase=="event" else ("勝利 / 次の一歩を選ぶ" if campaign.get("last_outcome","")=="victory" else "静かな通路")
 		hud_rows.add_child(text_label(message,18))
 	var journal:=VBoxContainer.new(); journal.add_theme_constant_override("separation",4); journal.size_flags_vertical=Control.SIZE_EXPAND_FILL; field.add_child(journal)
-	journal.add_child(text_label("メッセージ / 戦闘は完全自動",16))
+	var log_heading:=PanelContainer.new(); var heading_style:=box(Color("081215"),Color("987b49")); heading_style.set_content_margin_all(4); log_heading.add_theme_stylebox_override("panel",heading_style); journal.add_child(log_heading)
+	log_heading.add_child(text_label("メッセージ / 戦闘は完全自動",16))
 	var log:=RichTextLabel.new(); log.custom_minimum_size.y=128; log.size_flags_vertical=Control.SIZE_EXPAND_FILL; log.scroll_following=true
 	log.add_theme_stylebox_override("normal",box(Color("081215"),Color("987b49")))
 	log.text="\n".join(campaign.journal); journal.add_child(log)
