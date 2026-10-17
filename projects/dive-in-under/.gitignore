@@ -1,0 +1,6 @@
+.godot/
+.tools/
+artifacts/
+build/
+assets/ui-mocks/*.import
+
