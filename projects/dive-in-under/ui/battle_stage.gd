@@ -93,11 +93,11 @@ func display_foot(position_hint: Vector2) -> Vector2:
 	return Vector2(roundf(size.x*position_hint.x),roundf(ground_y()+position_hint.y*size.y/270.0))
 
 func hero_position_hint() -> Vector2:
-	if wide_layout: return Vector2(0.70,0.80 if floor_number>=10 else 0.79)
+	if wide_layout: return Vector2(0.70,0.80) if floor_number>=10 else Vector2(1137.0/1672.0,809.0/941.0)
 	return Vector2(0.70,22.0) if floor_number>=10 else NEAR_HERO
 
 func enemy_position_hint() -> Vector2:
-	if wide_layout: return Vector2(0.30,0.64 if floor_number>=10 else 0.71)
+	if wide_layout: return Vector2(0.30,0.64) if floor_number>=10 else Vector2(502.0/1672.0,583.0/941.0)
 	return Vector2(0.30,-34.0) if floor_number>=10 else FAR_ENEMY
 
 func place_actor(actor: Sprite2D, key: String, position_hint: Vector2, target_height: float) -> void:
@@ -137,7 +137,7 @@ func visual_audit() -> Dictionary:
 		actors.append(entry)
 	return {"background":VisualAssets.background_key(floor_number),"background_loaded":scenery.texture != null,
 		"depth":floor_number,"stage_size":[size.x,size.y],"filter":"nearest","aspect":"preserved",
-		"composition":"offset-only-reference-camera-unresolved","background_zoom":1.0 if wide_layout else BACKGROUND_ZOOM,"wide_layout":wide_layout,"global_rect":str(get_global_rect()),"background_aspect":16.0/9.0,
+		"composition":"wide-floor-reference-comparison" if wide_layout else "development-tool-layout","background_zoom":1.0 if wide_layout else BACKGROUND_ZOOM,"wide_layout":wide_layout,"global_rect":str(get_global_rect()),"background_aspect":16.0/9.0,
 		"near_hero_foot":[display_foot(hero_position_hint()).x,display_foot(hero_position_hint()).y],
 		"far_enemy_foot":[display_foot(enemy_position_hint()).x,display_foot(enemy_position_hint()).y],"formation_rules":false,
 		"static_only":true,"adoption":"nine-assets-current-baseline","actors":actors}

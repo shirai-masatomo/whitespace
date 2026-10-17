@@ -2,7 +2,7 @@ extends RefCounted
 ## Display-only assets adopted as the current baseline on 2026-10-17.
 ## Never read by Combat, Expedition or SaveStore. Original filenames are retained.
 const ROOT := "res://assets/visual-candidates/v1/"
-const FILES := {"cavern":"dive-ordinary-cave-candidate-v1.png", "boss":"dive-boss-gate-cave-candidate-v1.png",
+const FILES := {"cavern":"dive-ordinary-cave-candidate-v2.png", "boss":"dive-boss-gate-cave-candidate-v1.png",
 	"hero":"dive-hero-static-candidate-v1.png", "E04":"dive-e04-goblin-static-candidate-v1.png", "B10":"dive-b10-gatekeeper-static-candidate-v1.png",
 	"E01":"dive-e01-underground-rat-static-candidate-v2.png","E02":"dive-e02-slime-mold-static-candidate-v1.png",
 	"E03":"dive-e03-ironwing-bat-static-candidate-v1.png","E05":"dive-e05-rock-beetle-static-candidate-v1.png"}
