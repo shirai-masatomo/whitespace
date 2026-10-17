@@ -16,7 +16,7 @@ foreach ($kind in @('trace','metrics','floor')) {
     $changed = $original | ConvertTo-Json -Depth 80 | ConvertFrom-Json
     if ($kind -eq 'trace') { $changed.records[0].trace_sha256='bad' }
     elseif ($kind -eq 'metrics') { $changed.metrics.clear_rate=0.5 }
-    else { $changed.floors.'10'.deaths=1 }
+    else { $changed.floors.'10'.deaths+=1 }
     $path = Join-Path $artifacts "campaign-fault-$kind.json"
     [IO.File]::WriteAllText($path,($changed | ConvertTo-Json -Depth 80),[Text.UTF8Encoding]::new($false))
     & $godot --headless --path $project --script tools/campaign_compare.gd -- "--before=$replay" "--after=$path" "--out=$artifacts/campaign-fault-$kind-result.json" --strict=true 2>&1 | Out-File (Join-Path $artifacts "campaign-fault-$kind.log") -Encoding utf8
