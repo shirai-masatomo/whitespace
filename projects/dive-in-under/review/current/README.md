@@ -56,3 +56,6 @@ HP/SP/Lv/ATK/DEF/SPD/Goldを不透明な濃色パネルへ配置。文字21px、
 ## 採用通知後の資料更新
 
 2026-10-17、ユーザーの「とりあえず採用でいいよ」により、背景2点・主人公・E04坑道ゴブリン・B10門番の石像の5点を現時点の基準素材として採用。永久固定ではなく、必要な見直しは可能。静止画のみを維持。 [採用記録](visual-adoption.json) / [残る4敵の制作仕様](../../docs/IMAGE_PRODUCTION_HANDOFF.md)。0.4.1 EXEと画像は採用通知前の収録のため、候補/採否未定の表示を含みます。今回の資料更新で実行ファイルは作り直さず、可読性修正のCIと後続UI調整の結果を混同しません。
+
+
+町の可読性修正0.4.1のCIはhead `cf7cfac259d0f39934fafefbe7f4d8082e38804e` で [PR run39031447916](https://github.com/shirai-masatomo/whitespace/actions/runs/39031447916) と [push run39031444026](https://github.com/shirai-masatomo/whitespace/actions/runs/39031444026) が成功。PR実checkoutは `9390b89d0b1587f20fc86d4e1736b0f372c66aa7`。366チェック・1000seed厳密再比較・EXE290操作/別プロセス再開・故障注入10件を確認。[CI Windows ZIP](https://github.com/shirai-masatomo/whitespace/actions/runs/39031447916/artifacts/12100702226) / [JSON・ログ](https://github.com/shirai-masatomo/whitespace/actions/runs/39031447916/artifacts/12101150514)、期限2027-01-15。後続の採用通知/引継ぎ/CI記録は資料のみで、ローカル配布ソース187e7f7と区別する。

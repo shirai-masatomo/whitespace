@@ -86,3 +86,6 @@ TextureRect/Sprite2Dによる静止素材受入と実UI分離を作業ツリー�
 ## 2026-10-17 採用通知後の資料更新
 
 2026-10-17、ユーザーの「とりあえず採用でいいよ」により、背景2点・主人公・E04坑道ゴブリン・B10門番の石像の5点を現時点の基準素材として採用。永久固定ではなく、必要な見直しは可能。静止画のみを維持。 [採用一覧](../review/current/visual-candidates.md)。原稿・過去の監査・ZIPは変更せず履歴を保持。0.4.1のEXE内注記は採用通知前のまま、次のUI単位で更新する。残る敵4種の正確な名称・現設定・表示上限・向き・ファイル名案を共通の画像制作引継ぎへ抽出済み。親が制作チャットへ依頼し、こちらでは生成しない。羊皮紙/真鍮の質感・セクション階層・装備表示の改善は工程1の未実装残作業として小分けで進める。今回の可読性修正と後続UI作業のテスト/CIを分離する。工程1全体は未完了。
+
+
+町の可読性修正0.4.1のCIはhead `cf7cfac259d0f39934fafefbe7f4d8082e38804e` で [PR run39031447916](https://github.com/shirai-masatomo/whitespace/actions/runs/39031447916) と [push run39031444026](https://github.com/shirai-masatomo/whitespace/actions/runs/39031444026) が成功。PR実checkoutは `9390b89d0b1587f20fc86d4e1736b0f372c66aa7`。366チェック・1000seed厳密再比較・EXE290操作/別プロセス再開・故障注入10件を確認。[CI Windows ZIP](https://github.com/shirai-masatomo/whitespace/actions/runs/39031447916/artifacts/12100702226) / [JSON・ログ](https://github.com/shirai-masatomo/whitespace/actions/runs/39031447916/artifacts/12101150514)、期限2027-01-15。後続の採用通知/引継ぎ/CI記録は資料のみで、ローカル配布ソース187e7f7と区別する。

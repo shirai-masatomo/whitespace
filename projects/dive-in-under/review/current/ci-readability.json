@@ -1,0 +1,33 @@
+{
+  "pr_head": "cf7cfac259d0f39934fafefbe7f4d8082e38804e",
+  "pr_checkout_merge_commit": "9390b89d0b1587f20fc86d4e1736b0f372c66aa7",
+  "local_runtime_commit": "187e7f7b2f97ccfda10539340907fe766bebba42",
+  "pr_run": 39031447916,
+  "push_run": 39031444026,
+  "pr_job": 117392550987,
+  "conclusion": "success",
+  "scope": "0.4.1 town readability; later adoption/docs commits have no runtime changes",
+  "checks": {
+    "combat": 142,
+    "expedition": 180,
+    "campaign": 44,
+    "fixed_seeds": 1000,
+    "strict_repeat": "all records/state hashes/metrics equal",
+    "exported_exe_actions": 290,
+    "faults_rejected": 10
+  },
+  "artifacts": [
+    {
+      "id": 12101150514,
+      "name": "DiveInUnder-foundation-evidence",
+      "url": "https://github.com/shirai-masatomo/whitespace/actions/runs/39031447916/artifacts/12101150514",
+      "expires": "2027-01-15T12:09:58Z"
+    },
+    {
+      "id": 12100702226,
+      "name": "DiveInUnder-foundation-windows-x64",
+      "url": "https://github.com/shirai-masatomo/whitespace/actions/runs/39031447916/artifacts/12100702226",
+      "expires": "2027-01-15T12:09:58Z"
+    }
+  ]
+}
