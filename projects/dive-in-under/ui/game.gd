@@ -229,10 +229,13 @@ func show_result(root: VBoxContainer) -> void:
 
 func compact_button(label: String, callback: Callable) -> Button:
 	var b:=button(label,callback); b.custom_minimum_size.y=28; b.add_theme_font_size_override("font_size",16)
-	for state_name in ["normal","hover","pressed"]:
-		var style: StyleBox=theme.get_stylebox(state_name,"Button").duplicate()
+	for state_name in ["normal","hover","pressed","disabled"]:
+		var style: StyleBoxFlat=theme.get_stylebox("normal" if state_name=="disabled" else state_name,"Button").duplicate()
 		style.content_margin_top=3; style.content_margin_bottom=3
+		if state_name=="disabled":
+			style.bg_color=Color("c0ad83"); style.border_color=Color("a28c61"); style.shadow_size=0
 		b.add_theme_stylebox_override(state_name,style)
+	b.add_theme_color_override("font_disabled_color",Color("70634a"))
 	return b
 
 func item_list(parent: VBoxContainer, source: String) -> void:
