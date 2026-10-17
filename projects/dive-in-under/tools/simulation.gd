@@ -49,19 +49,29 @@ static func run(data: Dictionary, scenario: Dictionary, seeds: Array) -> Diction
 		"records": records,
 		"limitations": ["Normal attacks only; no skills/status/durability/allies.", "Single battle; no exploration progression or forced-death event.", "Hero stats are provisional effective stats, not a growth curve."]}
 
-static func compare(before: Dictionary, after: Dictionary) -> Dictionary:
+static func compare(before: Dictionary, after: Dictionary, strict: bool = false) -> Dictionary:
 	# JSON numbers reload as floats. Normalize both sides before deep comparison.
 	before = JSON.parse_string(JSON.stringify(before))
 	after = JSON.parse_string(JSON.stringify(after))
 	for key in ["schema_version", "scenario", "seeds"]:
 		if not before.has(key) or before[key] != after[key]:
 			return {"error": "Comparison conditions differ: " + key}
-	if not before.has("metadata") or not before.has("metrics"):
+	if not before.get("metadata") is Dictionary or not before.get("metrics") is Dictionary:
 		return {"error": "Missing baseline metadata/metrics"}
 	for key in ["engine", "runner_contract"]:
 		if before.metadata.get(key) != after.metadata.get(key):
 			return {"error": "Comparison environment differs: " + key}
 	var differences := {}
+	if not before.metrics is Dictionary or before.metrics.keys().size()!=after.metrics.keys().size():
+		return {"error":"Invalid baseline metrics"}
+	for key in after.metrics:
+		if not before.metrics.has(key): return {"error":"Missing metric: "+key}
+		if after.metrics[key] is Dictionary:
+			if not before.metrics[key] is Dictionary: return {"error":"Invalid metric: "+key}
+			for field in after.metrics[key]:
+				if not before.metrics[key].has(field): return {"error":"Missing distribution field"}
+				if before.metrics[key][field]!=null and not typeof(before.metrics[key][field]) in [TYPE_INT,TYPE_FLOAT]: return {"error":"Invalid distribution value"}
+		elif before.metrics[key]!=null and not typeof(before.metrics[key]) in [TYPE_INT,TYPE_FLOAT]: return {"error":"Invalid metric value"}
 	for key in ["win_rate", "death_rate", "draw_rate"]:
 		differences[key] = float(after.metrics[key]) - float(before.metrics[key])
 	for key in ["rounds", "remaining_hp", "winning_hp"]:
@@ -69,7 +79,9 @@ static func compare(before: Dictionary, after: Dictionary) -> Dictionary:
 			var left = before.metrics[key][metric]
 			var right = after.metrics[key][metric]
 			differences[key + "." + metric] = null if left == null or right == null else float(right) - float(left)
+	var identical: bool = before.metrics==after.metrics and before.get("records")==after.get("records")
 	return {"before": before.metadata, "after": after.metadata, "trials": after.seeds.size(),
+		"strict":strict,"strict_equal":identical,"records_equal":before.get("records")==after.get("records"),
 		"before_metrics": before.metrics, "after_metrics": after.metrics, "delta": differences}
 
 static func summary(report: Dictionary) -> String:

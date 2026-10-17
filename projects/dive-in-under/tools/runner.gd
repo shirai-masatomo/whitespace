@@ -16,7 +16,7 @@ func write_file(path: String, content: String) -> bool:
 
 func _initialize() -> void:
 	var options := {"trials": "1000", "seed": "10000", "scenario": "res://data/scenarios/baseline.json",
-		"data": Catalog.PATH, "out": "", "commit": "unrecorded", "baseline": ""}
+		"data": Catalog.PATH, "out": "", "commit": "unrecorded", "baseline": "", "strict":"false"}
 	for argument in OS.get_cmdline_user_args():
 		var pair := argument.trim_prefix("--").split("=", true, 1)
 		if pair.size() != 2 or not options.has(pair[0]):
@@ -27,6 +27,9 @@ func _initialize() -> void:
 		fail("Require integer --trials, --seed and --out=path")
 		return
 	var count := int(options.trials)
+	if not options.strict in ["true","false"] or (options.strict=="true" and options.baseline.is_empty()):
+		fail("--strict=true requires a baseline; strict accepts true/false")
+		return
 	var first := int(options.seed)
 	if count < 1 or count > 100000 or first < 0 or first > 2147383647:
 		fail("Trials must be 1..100000; seed must be 0..2147383647")
@@ -55,7 +58,7 @@ func _initialize() -> void:
 		if not baseline is Dictionary:
 			fail("Invalid baseline JSON")
 			return
-		report.comparison = Simulation.compare(baseline, report)
+		report.comparison = Simulation.compare(baseline, report,options.strict=="true")
 		if report.comparison.has("error"):
 			fail(report.comparison.error)
 			return
@@ -64,6 +67,10 @@ func _initialize() -> void:
 		fail("Cannot write output: " + options.out)
 		return
 	print(summary)
+	if options.strict=="true" and not report.comparison.strict_equal:
+		printerr("STRICT_REPLAY_MISMATCH: normalized records/log hashes/metrics differ")
+		quit(1)
+		return
 	quit(0 if report.metrics.invalid_results == 0 else 1)
 
 static func validate_scenario(scenario: Dictionary, data: Dictionary) -> String:
