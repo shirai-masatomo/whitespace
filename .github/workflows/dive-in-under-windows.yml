@@ -39,6 +39,12 @@ jobs:
         run: ./dev.ps1 -Task verify -GameCommit '${{ github.sha }}'
       - name: Repeat same seeds and compare
         run: ./dev.ps1 -Task simulate -GameCommit '${{ github.sha }}' -Baseline "$PWD/artifacts/simulation.json" -Output "$PWD/artifacts/comparison.json" -StrictRepeat
+      - name: Compare normal campaigns and strict replay
+        run: ./tools/verify_campaign.ps1 -GameCommit '${{ github.sha }}'
+      - name: Replay normal 10F with three exported EXE processes
+        run: |
+          ./tools/campaign_smoke.ps1
+          ./tests/test_campaign_harness.ps1
       - name: Run exported Windows EXE (headless UI smoke)
         run: ./tools/smoke.ps1
       - name: Reject injected replay and UI smoke faults
@@ -58,4 +64,6 @@ jobs:
             projects/dive-in-under/artifacts/*.txt
             projects/dive-in-under/artifacts/exe-headless/run.log
             projects/dive-in-under/artifacts/exe-headless/*.json
+            projects/dive-in-under/artifacts/campaign-headless/*.json
+            projects/dive-in-under/artifacts/campaign-headless/*.log
           if-no-files-found: warn
