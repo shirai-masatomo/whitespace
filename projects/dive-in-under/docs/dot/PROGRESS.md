@@ -1,12 +1,12 @@
 # Dive In Under — Dot自律開発 工程進捗
 
-> **実測更新（2026-10-17）**：Windows PCのCodexで工程1の戦闘基盤を実装・検証。**工程1全体は未完了**。確認入口は [review/current/README.md](../../review/current/README.md) の1か所。最新工程順は工程1〜4が主人公単独、工程5で仲間。Dot自身の接続・稼働はこの実装の検証対象外。
+> **実測更新（2026-10-17）**：Windows PCのCodexで工程1の保存付き基幹ループを実装・検証。**工程1全体は未完了**。確認入口は [review/current/README.md](../../review/current/README.md) の1か所。最新工程順は工程1〜4が主人公単独、工程5で仲間。Dot自身の接続・稼働はこの実装の検証対象外。
 >
 > 工程単位の状態を本資料、機能単位の状態を[IMPLEMENTATION_STATUS.md](../IMPLEMENTATION_STATUS.md)で管理する。進捗状況は実際のテスト・成果物がなければ「完了」にしない。
 
 | 工程 | 到達点 | 状態 | 検証証拠（PR／CI／Windows ZIP／実画面／シミュレーション） |
 | --- | --- | --- | --- |
-| **01** | **主人公単独・繰り返し探索／帰還／死亡→10F突破** | **進行中（今回の戦闘基盤のみ検証済み）** | [Draft PR #5](https://github.com/shirai-masatomo/whitespace/pull/5)、[Windows ZIP・画面・ログ](../../review/current/README.md)。共通戦闘コア・固定seed集計・タイトル/戦闘確認画面・専用CIまで |
+| **01** | **主人公単独・繰り返し探索／帰還／死亡→10F突破** | **進行中（基幹ループ検証済み、10Fバランス未検証）** | [Draft PR #5](https://github.com/shirai-masatomo/whitespace/pull/5)、[Windows ZIP・画面・ログ](../../review/current/README.md)。初回死亡1回・通常探索/帰還/死亡・町/倉庫/11枠・成長・保存再開まで |
 | **02** | ソロ用装備11枠・耐久・育成・経済・支給所 | **未着手** | なし |
 | **03** | 階層・宝箱・ドロップ・イベント、黄金像のアイテム／装備 | **未着手** | なし |
 | **04** | 主人公／敵の自動スキル・SP・状態異常・戦闘AI | **未着手** | なし |
@@ -20,9 +20,22 @@
 
 ## 次のタスク
 
-親タスクからの次の限定依頼を待つ。工程1は通常の反復探索・帰還・死亡、初回死亡1回だけの永続状態、町/倉庫/保存、最低限の装備と成長、通常のソロ10F突破、4実画面、Windows上の人間による実操作が残る。初回死亡階・持帰り/ロスト・回復/成長等の未確定値を今回の単発戦闘の仮値で固定しない。工程2以降や仲間を先行実装しない。
+親タスクからの次の限定依頼を待つ。通常の反復探索・成長・装備によるソロ10F突破の再現シナリオと最終バランス、人間によるWindows実操作が残る。工程2以降・仲間は先行実装しない。初回イベント・死亡ペナルティ・成長等の仮設定を正式決定にしない。
 
-## 今回の基盤と証拠
+## 今回の基幹ループ（035d3fd）
+
+- 新規→初回探索→仮2Fシナリオ死亡（死亡時点で済フラグ保存）→結果→町→倉庫/11枠→通常探索/帰還/死亡/再挑戦を実装。すべて主人公単独、仲間・犬・ガチャ・耐久・全スキルなし。
+- `expedition.json` に初期値・Lv成長・イベント・死亡ペナルティを分離。既定の町無料全回復、EXP/装備保持で再出発可能。FLOORS/ENEMIES/ITEMS/EVENTSの1〜10Fデータを使用。EV03除外、適格イベント個別重みは未定のため等確率。
+- [戦闘142](../../review/current/tests.log)＋[ループ/保存176](../../review/current/loop-tests.log)成功。[100seed×12回の3F帰還反復](../../review/current/loop-summary.json)を検証。高Lv入力で10Fボス→11F記録→再挑戦の分岐を検査したが、通常成長による10F攻略バランス証明は未実施。
+- 一時保存→検証→前回.bak→置換、外部更新検出、破損/未来版拒否、明示的なバックアップ復旧。初回途中/死亡結果/町/戦闘途中の再開、連打、装備入替、所有重複/消失、保存失敗をテスト。
+- [別EXE再起動](../../review/current/resume-smoke.json)で戦闘途中のrevision33・保存SHA一致。[実画面9枚と入口](../../review/current/README.md)、[隔離監査](../../review/current/isolation.json)で非WinSta0/非表示・専用Desktop・起動PID所属・終了0を確認。人間のOS入力は未検証。
+- 独立レビューの検証偽陽性3件を修正：[故障注入6件](../../review/current/harness-faults.json)を拒否。CIの厳密再現はrecords/log SHA/全metricsを正規化比較し、不一致でexit1。Start/停止/再開/再戦/Backを確認後だけ成功出力。両EXEハーネスは共通nonce照合で古い成功JSONを拒否。
+- 自己レビュー後、町の出発ボタンを画面内へ修正、装備効果を表示、保存の戦闘能力整合と未来版の巻戻し防止を追加し、再テスト・再ビルド・隔離EXE確認を実施。
+- ユーザーの追加指示で、牧場の既存ローカル `確認入口` に `Dive In Under 確認.lnk` を1個だけ追加。本作の `review/current/` を参照する。既存リンク・牧場コードは無変更、新しい確認フォルダは作成せず。Play.cmd/EXE/PCK/版/リンクを検査し、自動起動は行っていない。
+- 同じ保存への同時書込みの完全排他、保存設定版の自動移行、長時間プレイは未対応/未検証。書込み失敗時は状態変更を取り消す。
+- CIのheadと実checkoutを区別する。前回PR head243d6adはmerge commit7ca6c12を実行した。今回の最終CI情報は[PR Checks](https://github.com/shirai-masatomo/whitespace/pull/5/checks)と確認入口の記録に追記する。
+
+## 前回の戦闘基盤（472bc01）の記録
 
 - ソース: `472bc01a9a816530fcb462e4ff90883e354b94cc`。この後の資料・証拠追記コミットとは区別。ブランチ `dot/dive-in-under/phase-01`、main `5b016439da69730a601dd80cc1c24a4a722b8857` をマージ済み。旧prototypeと他作品の既存未コミット変更は変更していない。
 - Godot `4.7.2.stable.official.ed1daf0bf` + 同版テンプレート + GDScript。配布ZIPはEXE/PCK/手順/ライセンス/BUILD.json、未署名。正確な環境・再現方法は [DEVELOPMENT.md](../DEVELOPMENT.md)。

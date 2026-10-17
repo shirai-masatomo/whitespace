@@ -1,0 +1,18 @@
+<!doctype html><html lang="ja"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Dive In Under ローカル確認</title>
+<style>body{background:#0b2029;color:#e6ddc5;font:17px/1.65 "Yu Gothic UI",Meiryo,sans-serif;margin:0}main{max-width:1100px;margin:auto;padding:32px}h1{letter-spacing:.06em}h2{color:#e2bd78}a{color:#82d3d5}section{border:1px solid #927044;padding:20px;margin:20px 0;background:#0a181e}code{overflow-wrap:anywhere}img{width:100%;border:1px solid #927044}nav{display:flex;flex-wrap:wrap;gap:12px}nav a{padding:12px 18px;background:#ceb886;color:#242118;text-decoration:none;border-radius:3px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:20px}.small{font-size:14px;color:#b8beb7}li{margin:8px 0}</style>
+<main><h1>DIVE IN UNDER</h1><p>ローカル確認入口 · 工程1 基幹ループ 0.2.0</p>
+<section><h2>ゲームを試す</h2><p>このフォルダの <strong>Play.cmd をダブルクリック</strong>すると、既存buildのEXEを起動します。ゲームを自動で起動するページではありません。</p>
+<nav><a href="Play.cmd">Play.cmd</a><a href="../../build/windows/">EXE / PCKのある場所</a><a href="../../build/DiveInUnder-foundation-windows-x64.zip">最新ローカルZIP</a><a href="../../tools/PLAY.txt">試遊手順</a></nav>
+<p class="small">ブラウザーがcmdやフォルダのリンクを制限する場合は、開いている確認フォルダでPlay.cmdを実行してください。新しいフォルダへ複製する必要はありません。</p>
+<p id="build-status">確認済み配布物：<strong>0.2.0 loop / 035d3fd</strong>。Windows EXEの非対話GPU描画・本編入力経路・保存後の別EXE再起動を確認済み。<a href="../../build/windows/BUILD.json">BUILD.json</a> / <a href="build-manifest.json">SHA256</a>。人間の実操作はこれからです。</p></section>
+<section><h2>今回の操作</h2><ol><li>「新しく始める」→地下1F→さらに潜る。初回のみ帰還不可、仮設定の2Fでシナリオ死亡。</li><li>結果から町へ。HP/SPが回復します。所持品を装備・預入、倉庫から取出し、11枠から装備解除ができます。</li><li>再出発→通常の潜行・自動戦闘・イベント・帰還・死亡・再挑戦。各操作を自動保存し、「続きから」で途中を再開。</li></ol>
+<p>「開発用：単発戦闘の確認」は本編へ影響しない検証ツールです。初期値・成長・初回イベント・死亡ペナルティは試作設定で、正式決定ではありません。</p></section>
+<section><h2>実EXEの画面</h2><div class="grid">
+<div><a href="01-title.png"><img src="01-title.png" alt="タイトル"></a><p>タイトル</p></div>
+<div><a href="04-first-exploration.png"><img src="04-first-exploration.png" alt="初回探索"></a><p>初回探索・帰還不可</p></div>
+<div><a href="05-death-result.png"><img src="05-death-result.png" alt="初回死亡結果"></a><p>初回死亡・再挑戦の入口</p></div>
+<div><a href="06-town.png"><img src="06-town.png" alt="町と11枠装備倉庫"></a><p>町・所持品・11枠・倉庫</p></div>
+<div><a href="07-normal-battle.png"><img src="07-normal-battle.png" alt="通常戦闘"></a><p>通常の自動戦闘</p></div>
+<div><a href="09-normal-death.png"><img src="09-normal-death.png" alt="通常死亡結果"></a><p>通常死亡・回復して再挑戦</p></div></div></section>
+<section><h2>素材・参照</h2><p>主人公・敵は <a href="../../ui/battle_stage.gd">コード内の静止ドットパターン</a>、洞窟背景は <a href="../../ui/cavern.gd">描画コード</a>です。正式PNGの採用ではありません。モーション・表情差分は制作していません。</p><nav><a href="README.md">素材一覧・全証拠</a><a href="../../assets/ui-mocks/README.md">既存参考画像の一覧</a><a href="../../docs/DEVELOPMENT.md">開発環境</a></nav></section>
+<section><h2>未完了・確認すること</h2><p><strong>工程1全体は未完了</strong>です。通常の成長・装備・反復探索によるソロ10F攻略の最終バランスと、人間のWindows実操作は未確認。11Fの内容、仲間・犬・ガチャ・耐久・全スキルは未実装です。</p><p>操作の分かりやすさ、ログと数値の読みやすさ、保存再開、装備と倉庫の移動を確認してください。初回イベントや仮の能力値は今後調整できます。</p><a href="../../docs/dot/PROGRESS.md">実装と残項目の進捗</a> · <a href="https://github.com/shirai-masatomo/whitespace/pull/5">Draft PR #5 / CI配布</a></section></main></html>

@@ -10,7 +10,7 @@
 		"data_sha256": "603a6c581be3893664bf4d8c466c661635095470c6cd8b8fe39c68a42a60f357",
 		"data_version": "2026-10-17.foundation.1",
 		"engine": "4.7.2-stable (official)",
-		"game_commit": "472bc01a9a816530fcb462e4ff90883e354b94cc",
+		"game_commit": "035d3fdf6de34bbbae1d574143e7833af098aad0",
 		"runner_contract": "single-battle-v1",
 		"scenario_sha256": "663eab031824755bf68464c7ff30d57de7c7a0b07e1519ae794e106eb17e5a99"
 	},

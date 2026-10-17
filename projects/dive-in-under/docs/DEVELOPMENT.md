@@ -1,6 +1,6 @@
-# 開発環境と戦闘基盤（2026-10-17）
+# 開発環境・戦闘基盤・基幹ループ（2026-10-17）
 
-今回の範囲は工程1の基盤。**工程1全体は未完了**。進捗・証拠・次の依頼は [PROGRESS.md](dot/PROGRESS.md)、機能別状態は [IMPLEMENTATION_STATUS.md](IMPLEMENTATION_STATUS.md) を参照。
+今回の範囲は工程1の保存付き基幹ループまで。**工程1全体は未完了**。進捗・証拠・次の依頼は [PROGRESS.md](dot/PROGRESS.md)、機能別状態は [IMPLEMENTATION_STATUS.md](IMPLEMENTATION_STATUS.md) を参照。
 
 ## 環境一覧
 
@@ -29,8 +29,9 @@
 # ./tools/setup.ps1 -ArchiveDirectory C:\path\to\archives
 
 ./dev.ps1 -Task verify
-./dev.ps1 -Task simulate -Baseline "$PWD/artifacts/simulation.json" -Output "$PWD/artifacts/comparison.json"
+./dev.ps1 -Task simulate -Baseline "$PWD/artifacts/simulation.json" -Output "$PWD/artifacts/comparison.json" -StrictRepeat
 ./tools/smoke.ps1
+./tests/test_harness.ps1
 # ゲーム起動なしで非表示ステーション・専用Desktopの権限を検査。
 ./tools/isolated_visual.ps1 -ProbeOnly
 # 成功した場合だけ非対話Window Station内で実EXEを描画。
@@ -39,7 +40,7 @@
 ./dev.ps1 -Task play
 ```
 
-`dev.ps1` は `test / simulate / build / verify / play` を受け付ける。`verify` はテスト→ヘッドレスUI→1,000回の単発戦闘→Windowsビルド。成果物は `build/DiveInUnder-foundation-windows-x64.zip`、ログと統計は `artifacts/`。Godotのユーザーデータはこのプロジェクトの `artifacts/user-data` に隔離する。テンプレートも `.tools/templates` のみ。システムのGodot設定を書き換えない。
+`dev.ps1` は `test / simulate / build / verify / play` を受け付ける。`verify` は戦闘/ループ/保存テスト→ヘッドレスUI→1,000回の単発戦闘→Windowsビルド。成果物は `build/DiveInUnder-foundation-windows-x64.zip`、ログと統計は `artifacts/`。Godotのユーザーデータはこのプロジェクトの `artifacts/user-data` に隔離する。テンプレートも `.tools/templates` のみ。システムのGodot設定を書き換えない。
 
 Gitコマンドが制限環境で使えない場合は、確認済みのコミットを `-GameCommit` に明示できる。作業中ビルドは `+dirty` などで区別し、正式コミットと偽らない。実機ではsandbox内でGodotのsafe-saveが失敗し、許可済みビルドを権限付きで再実行すると成功した。セキュリティ設定の変更はしていない。
 
@@ -47,12 +48,12 @@ ZIPを展開して `DiveInUnder.exe` を起動し、「戦闘を確認する」�
 
 ## データと共通コア
 
-- `data/v1/balance.json`：COMBATの仮式係数、ENEMIESの6種の基礎値、FLOORSの1〜10Fの遭遇比率・敵候補・Lv範囲。今回の階層テーブルは**参照データのみ**で、探索抽選はまだ呼ばない。宝箱・イベント・ドロップは後続で正本から追加する。
+- `data/v1/balance.json`：COMBATの仮式係数、ENEMIESの6種の基礎値、FLOORSの1〜10Fの遭遇比率・敵候補・Lv範囲。本編が階層テーブルを抽選に使用する。宝箱・イベント・ドロップは `expedition.json` に正本から追加。
 - `core/combat.gd`：ファイル・UI・時計・グローバル乱数に依存しない計算。コピーした状態を返す。`enemy()`が基礎値＋Lvから1度だけ計算し、階層倍率を受け取らない。`start()`→`advance()`をUIと`simulate()`が共用する。
 - 同速は戦闘専用 `RandomNumberGenerator`、各ラウンドで確定。命中→会心→振れ幅の順。HP0は即停止、50ラウンドは死亡と別のdraw。スキルは未実装のため通常攻撃倍率1.0。
 - `core/catalog.gd`：データ読込と形・値・参照ID検証。ゲームとランナーが共用。
 - `tools/runner.gd` / `tools/simulation.gd`：実行・集計・比較のみ。ダメージ式の複製なし。
-- `ui/main.gd`：タイトルと単発戦闘の確認画面。モックをクリック画像にせず、GodotのButton/Label等を使用。最新mainのPX-01〜03を実ピクセルで確認し、青緑の洞窟・滝・暖色ランタン・羊皮紙/真鍮パネル・主人公と敵の静止ドット仮表示・HP/SPバーへ段階更新。正式な量産素材の採用は未決定。
+- `ui/game.gd`：本編のタイトル・探索/戦闘・結果・町/倉庫/装備。`ui/main.gd`：共通部品と独立単発ツール。モックをクリック画像にせず、GodotのButton/Label等を使用。PX-01〜03を確認し、青緑の洞窟・滝・暖色ランタン・羊皮紙/真鍮パネル・静止ドット候補・HP/SPバーへ反映。正式な量産素材の採用は未決定。
 
 ## シミュレーターの条件
 
@@ -75,8 +76,8 @@ JSONは各seedの勝敗・ラウンド・双方残HP・報酬・ログSHA256、�
 - 起動監査・ハッシュ・終了結果は `artifacts/isolated/isolation.json`。APPDATA/LOCALAPPDATAも同所に分離。画像はアプリのviewport、操作はアプリ内のMouseButton入力経路。**OS入力や人手による実操作の証拠ではない**。アクセス拒否なら停止し、GUI以外の作業を続ける。
 - Computer Useスキルを確認したが、必要なnode_repl APIがこのセッションにない。ユーザー操作中のゲームは終了していない。旧方式の通常画面への表示可能性は上記のとおり残る。
 - フォントはWindowsの Yu Gothic UI / Meiryo を参照し同梱していない。他言語OSでの日本語フォント表示は未検証。
-- 初回死亡、死亡ペナルティ、回復、成長の正式仕様は決めていない。今回の仮値は戦闘試験の主人公HP24/ATK6/DEF1/SPD6/SP0のみ。後続はPHASE_01が許可した可変設定として導入する。
-- 1〜10F継戦、反復探索・帰還、初回死亡1回限定と永続化、町/倉庫/装備/保存、通常ルールでのソロ10F突破、4実画面、Windows実操作が残る。仲間・犬・黄金像の仲間排出は工程5まで作らない。
+- 初回死亡、死亡ペナルティ、回復、成長は `expedition.json` の交換可能な仮設定として導入。正式決定ではない。単発ランナーの試験能力値とは用途を区別する。
+- 反復探索・帰還/死亡、初回死亡1回と永続化、町/倉庫/装備/保存、4実画面以上を実装・隔離確認済み。通常ルールでのソロ10F攻略バランス証明と人間のWindows実操作が残る。仲間・犬・黄金像の仲間排出は工程5まで作らない。
 - SPECや設計台帳の古い「未着手／実装開始待ち」は設計時点の記述。現在のユーザー承認と2026-10-17工程順を適用し、確定仕様そのものは書き換えていない。
 
 ## 確認入口と素材方針
@@ -86,3 +87,15 @@ Windows隔離再起動でGodotの `shader_gles3.cpp:802`（キャッシュのハ
 ユーザー向け入口は [review/current/README.md](../review/current/README.md) の1か所。最新ZIPは既存buildを参照し、実画面・素材一覧・手順・判断事項へ案内する。別チェックアウトは既存作業保全のための開発場所であり、画面隔離ではない。
 
 最新の明示方針：当面の主人公・敵・味方の素材は**戦闘画面用の静止表示1枚**。画面に置いた見え方で採用/不採用を判断し、採用後もしばらく静止画で使用。待機/攻撃/被弾/歩行モーション、表情差分、カットイン、演出強化は作らない。工程1〜4はゲームループ・UI・戦闘成立を優先し、仲間は工程5まで前倒ししない。今回のコード内ピクセルパターンは未承認の候補で、独立PNG素材はまだない。
+
+## 基幹ループ 0.2.0 の構成と制約
+
+- `core/expedition.gd`：ファイルに依存しない状態遷移（設定ロード関数は境界）。初回シナリオ/通常探索/戦闘/イベント/結果/町、装備とLv実効値、独立した探索/戦闘/戦利品乱数。戦闘式は既存Combatを呼ぶ。
+- 保存は小さいseedとカウンター、戦闘開始時能力・seed・ラウンド数を保持し、再開時は同じCombatで再構成。64bit RNG stateをJSONの浮動小数へ渡さない。入力revisionを持つ古いUI操作は適用しない。
+- `core/save_store.gd`：schema/config版と所有個体ID・状態を検査、一時書込み・flush・再検査、前回.bak保全、rename置換。失敗時はUI側の状態変更を取り消す。破損時に黙ってリセットせず、復旧/新規開始の前に元ファイルを同じ保存先へ退避。
+- 既定の保存は `user://campaign-v1.json`（Windowsの具体的な場所はPLAY.txt）。旧戦闘基盤には保存データがなかったため移行対象なし。異なるconfig版の自動移行は未実装。同じ保存で同時プレイしない。SHAによる変更検出はあるがCASとrename間の完全な排他は実装していない。
+- `ui/game.gd` は本編UI、`ui/main.gd` は共通UI部品と独立単発ツール。本編4画面以上を追加、全キャラクター静止コードパターンのまま。11部位を表示し、アイテム個体は所持品/倉庫/装備のいずれか一か所だけが所有する。
+- 基準シミュレーターの主人公は従来の試験専用実効値。本編のLv成長や装備をその入力へ二重適用しない。`-StrictRepeat` / runner `--strict=true` がCI用厳密比較。通常比較は意図したバランス差を報告し成功終了できる。
+- `tests/test_harness.ps1` は意図的な不一致/入力断線/古いJSONを拒否することを確認。`tools/smoke_result.ps1` がヘッドレス/隔離描画のrun IDを共通検証。成功JSONは本編とツールの全確認後のみ書く。EXEヘッドレスは終了後に別プロセスで戦闘途中の保存を読み直す。
+- ローカル入口は同じ `review/current` のindex.htmlとPlay.cmd。牧場の既存確認フォルダに本作へ向くリンク1個だけを追加し、牧場の起動先・コードは無変更。ゲームやエクスプローラーを勝手に起動しない。
+- CIの `github.sha` はpull_requestイベントでmerge commitを指す。PR headと実checkout SHAを分けて報告し、BUILD.jsonの値を実行ソースとして扱う。

@@ -1,44 +1,65 @@
-# Dive In Under — 今回の確認入口
+# Dive In Under — ローカル確認入口
 
-**工程1の戦闘基盤。工程1全体は未完了です。** この場所を最新版の確認入口として更新利用します。実装・検証対象：`472bc01a9a816530fcb462e4ff90883e354b94cc`。資料のみの追記コミットとは区別します。
+**工程1の基幹ループ 0.2.0。工程1全体は未完了です。** 実装・ローカルEXE検証対象：`035d3fdf6de34bbbae1d574143e7833af098aad0`。後続の資料コミット、PR head、CIが実際にcheckoutしたmerge commitは区別します。
 
-## 試す
+## このPCで試す
 
-- このPC：[最新Windows ZIP](../../build/DiveInUnder-foundation-windows-x64.zip) / [EXE](../../build/windows/DiveInUnder.exe) / [操作手順](../../tools/PLAY.txt)。EXEとPCKは同じフォルダに置きます。
-- GitHub：[成功CIのZIP](https://github.com/shirai-masatomo/whitespace/actions/runs/39022931253/artifacts/12096484715) / [CIログ一式](https://github.com/shirai-masatomo/whitespace/actions/runs/39022931253/artifacts/12097054030)（head `ae0f8a2`、2027-01-15まで、GitHubログインが必要な場合あり）。[Draft PR #5](https://github.com/shirai-masatomo/whitespace/pull/5) の後続CIでも `DiveInUnder-foundation-windows-x64` を取得できます。このPC内の上のbuildリンクはGitHub上では取得できません。CIとローカル版のソースはBUILD.jsonで区別します。
-- 「戦闘を確認する」→敵/Lv/シード→「自動戦闘を開始」。停止・早送り・1ラウンド進行・再戦・タイトルへ戻る操作を確認できます。探索ゲーム本編・保存は未実装です。
-- 正確な環境・再現コマンド：[開発環境資料](../../docs/DEVELOPMENT.md)。Godot **4.7.2.stable.official.ed1daf0bf** / 同版テンプレート / GDScript。
+普段の牧場の確認フォルダに **Dive In Under 確認.lnk** を1個だけ追加しました。既存の牧場リンクと起動先は変更していません。
 
-## 実画面と新参考UI
+`C:\Users\masat\Documents\codex_test\projects\sporehollow\確認入口\Dive In Under 確認.lnk`
 
-| 実行中EXEの画面 | 対応参考 | 今回反映した点・残り |
+1. ショートカットを開き、このフォルダの **[Play.cmd](Play.cmd)** をダブルクリックすると最新EXEを起動できます。
+2. **[index.html](index.html)** を開くと、画像付きの操作・素材・未完了一覧を確認できます。
+3. 「新しく始める」→初回探索→死亡結果→町→装備・倉庫→再探索・帰還・死亡・再挑戦。「続きから」は途中の保存を再開します。
+
+[ローカルZIP](../../build/DiveInUnder-foundation-windows-x64.zip) / [EXE](../../build/windows/DiveInUnder.exe) / [起動手順・保存先](../../tools/PLAY.txt) / [環境一覧](../../docs/DEVELOPMENT.md) / [配布物SHA256](build-manifest.json)。EXE/PCKペアを同じ場所に置きます。ブラウザーがcmdリンクを制限する場合は、このフォルダでPlay.cmdを実行してください。自動起動はしていません。
+
+GitHub側では [Draft PR #5](https://github.com/shirai-masatomo/whitespace/pull/5) の最新Windows CIから `DiveInUnder-foundation-windows-x64` を取得します。配布ファイル名は既存の入口を維持するため継続しています。CI版はBUILD.jsonで実際のソースコミットを確認してください。
+
+## 実EXEの画面と参考
+
+| 実画面 | 対応参考・今回の確認 |
+| --- | --- |
+| [![タイトル](01-title.png)](01-title.png) | 新規開始/続きから/開発用単発ツールを分離。PX-01の洞窟・水・ランタン |
+| [![初回探索](04-first-exploration.png)](04-first-exploration.png) | PX-01。主人公1人、帰還不可、ログ枠・HP/SP現在/最大 |
+| [![死亡結果](05-death-result.png)](05-death-result.png) | 初回済フラグを死亡時点で保存。大きな死亡バナーと町への再挑戦導線 |
+| [![町](06-town.png)](06-town.png) | PX-03の羊皮紙。所持品/倉庫/11部位、不要な操作は無効表示 |
+| [![通常戦闘](07-normal-battle.png)](07-normal-battle.png) | PX-02。全自動、速度状態、暗いログ背景、敵と主人公のHP |
+| [帰還結果](08-return-result.png) / [通常死亡](09-normal-death.png) | 初回イベントとは別の通常戦闘死亡と再挑戦 |
+| [単発ツール](02-battle.png) / [単発結果](03-battle-result.png) | 開発用の固定seed確認。本編保存には影響しない |
+
+撮影は非WinSta0・非表示Station内の専用Desktop、実EXEのGPU viewportから取得。通常デスクトップにゲームを出していません。入力はアプリ内マウスイベント経路であり、**人間の物理マウス/キーボード試遊を代替する証拠ではありません**。
+
+タイトル・初回探索・死亡結果・町の4枚はChatGPT Libraryにも保存しました。[ネイティブ添付用library_file_id一覧](library-images.json)。元PNGに返却されたLibrary version拡張属性を設定済みです。
+
+## 素材一覧
+
+| 素材/参照 | 状態・用途 | 実体 |
 | --- | --- | --- |
-| [![タイトル](01-title.png)](01-title.png) | [PX-01](../../assets/ui-mocks/01_exploration_pixel.webp) | 洞窟・滝・木の足場・暖色灯・真鍮枠。ロゴや装飾は仮 |
-| [![戦闘](02-battle.png)](02-battle.png) | [PX-02](../../assets/ui-mocks/02_battle_pixel.webp)、[PX-03](../../assets/ui-mocks/03_status_pixel.webp) | 主人公1人＋敵、静止ドット仮表示、HP/SP実値、羊皮紙パネル、自動戦闘ログ |
-| [![戦闘結果](03-battle-result.png)](03-battle-result.png) | PX-02のログ配置 | 単発戦闘の終了状態。工程1の「死亡結果→町」画面ではない |
+| 主人公、E01〜E05、B10 | 静止ドット候補・未承認。各キャラクター静止表示1種類、独立PNG素材なし | [battle_stage.gd](../../ui/battle_stage.gd)、上の実画面 |
+| 洞窟・水・ランタン | コード描画の仮背景 | [cavern.gd](../../ui/cavern.gd) |
+| 現行PX-01〜03 | 既存の画風参照。実装素材ではない | [参照一覧](../../assets/ui-mocks/README.md) |
+| 旧モック4枚 | 差し替え済み履歴 | [既存archive](../../assets/ui-mocks/archive/2026-10-16/) |
 
-モック画像をゲーム画面に貼り付けていません。手動の「たたかう/スキル/アイテム/逃げる」、仲間3人、ミニマップ・横移動、追加属性・器用さ、画像中のLvや装備名は導入していません。装備UIは未実装で、将来の正式11枠を少ない枠へ置き換えていません。
+モーション・表情差分・カットイン・演出差分は追加していません。素材一覧のための画像コピーや別の確認フォルダは作っていません。
 
-## 素材一覧・確認事項
+## 検証結果
 
-**最新制作方針：キャラクターは戦闘用の静止画1枚で見え方を確認し、採用後もしばらく静止画を継続。** モーション・表情差分・カットイン・演出強化は後工程。工程1〜4はソロのゲームループ・UI・戦闘成立を優先します。
+- [戦闘142項目](tests.log)、[ループ/保存176項目](loop-tests.log)：失敗0。
+- [100seed×12回の反復探索](loop-summary.json)：3F帰還方針、空き部位に装備、イベント実行。通常の死亡後も再出発でき、アイテム所有・初回済状態が破綻しないことを検証。**最終10Fバランスの検証ではありません**。
+- [基準1000seed](simulation.json) / [日本語要約](simulation.json.txt) / [厳密同条件比較](comparison.json)：正規化records・各log SHA・全metrics一致。勝率21.6%、死亡78.4%、平均4.152/中央値4ラウンド、全戦闘残HP平均1.331。
+- [故障注入6件](harness-faults.json)：Start切断、Back切断、古い成功JSONを残した結果未出力、隔離/ヘッドレス共通nonce検査、traceだけの改変、metricだけの改変をすべて拒否。
+- [EXE入力経路](exe-headless.json) / [別EXEプロセスによる戦闘途中再開](resume-smoke.json) / [EXEログ](exe-headless.log)。保存SHAとrevisionが一致。
+- [隔離監査](isolation.json) / [GPUログ](render.log) / [描画入力確認](ui-smoke.json) / [ビルドログ](export.log)。PID 25836、専用Desktop所属、所有窓2、終了0、run ID一致。
 
-| 素材/参照 | 確認用サムネイル | 用途・状態 | 元データ |
-| --- | --- | --- | --- |
-| 主人公＋E04静止ドット仮表示 | [戦闘画面](02-battle.png) | **候補・未承認**。表示検証に使用中、正式採用ではない | [battle_stage.gd](../../ui/battle_stage.gd) の HERO/GOBLIN |
-| E01/E02/E03/E05/B10静止ドット仮表示 | 単体画像なし | **候補・未承認**。敵選択時の静止表示。個別の美術受入は未実施 | 同ファイルの RAT/SLIME/BAT/BEETLE/STATUE |
-| 洞窟・滝・ランタンの仮背景 | [タイトル画面](01-title.png) | **候補・未承認**、コードで描く試作背景 | [cavern.gd](../../ui/cavern.gd) |
-| 現行PX-01〜03 | [既存画像一覧](../../assets/ui-mocks/README.md) | **参照モック**。実装素材ではない | [UI_MOCKS.md](../../docs/UI_MOCKS.md) |
-| 旧モック4枚 | [既存アーカイブ](../../assets/ui-mocks/archive/2026-10-16/) | **差し替え済み参照**。現在の画風基準に使わない | アーカイブ内の原画像 |
+自己レビュー後に、町の出発ボタンが画面外へ押し出される配置、保存した戦闘の能力値整合、未来の保存版の巻戻し防止、検証の偽陽性3件を修正して再テストしました。物理入力・長時間試遊は未検証。
 
-独立したキャラクターPNG/生成AI素材は今回まだ作っていません。コード内の静止パターンと実画面を区別して管理し、一覧のための画像コピーやダミー素材は増やしません。現時点の判断事項は「静止ドットのサイズ・読みやすさ・羊皮紙の色味」の見え方。未承認の仮表示を量産素材として確定しません。
+## 仮設定・未完了
 
-## 検証証拠と限界
+初回2Fイベント、HP24/ATK6/DEF1/SPD6/SP0、帽子1個、Lv成長、町無料回復、通常死亡Gold10%減/EXP・装備・携行品保持は [expedition.json](../../data/v1/expedition.json) の交換可能な試作設定です。イベント候補の個別重みは未定のため、適格候補間を等確率にしています。EV03仲間加入は除外済み。
 
-- [142項目のテストログ](tests.log) / [基準1000seed JSON](simulation.json) / [日本語要約](simulation.json.txt) / [同条件比較](comparison.json) / [比較要約](comparison.json.txt)
-- [追加4条件の集計JSON](scenario-summary.json)：各1000seed。全seed結果：[E01 Lv1](solo-E01-L1.json) / [E02 Lv1](solo-E02-L1.json) / [E04 Lv2](solo-E04-L2.json) / [E04 Lv3](solo-E04-L3.json)
-- [ビルドログ](export.log) / [配布物ハッシュ](build-manifest.json) / [隔離監査](isolation.json) / [隔離GPUログ](render.log) / [UI入力確認](ui-smoke.json)
-- キャッシュ修正後2回連続成功：[1回目監査](first-start-isolation.json) / [1回目GPUログ](first-start-render.log)。[EXEヘッドレス](exe-headless.log) も成功。
-- 隔離監査は非WinSta0・非表示ステーション、専用Desktop内の起動PID所属、終了コードを確認。OSの入力・画面切替は使わず、Godot内のマウス入力経路とViewport撮影です。**物理マウス/キーボードでの人手試遊は未検証**。
-- 停止指示前の画面外/no_focus方式は画面隔離ではありません。通常画面に見えた可能性があり、旧画像はローカルartifactsに保持。現在はその起動経路を禁止し、上記の非対話Desktop方式へ変更しています。
-- 3枚はタイトル＋単発戦闘の状態。工程1の必須4実画面・反復探索・10F攻略を満たした証拠ではありません。未実装一覧は [進捗](../../docs/dot/PROGRESS.md) に集約。
+10F固定ボス・11F到達記録と再出発の分岐は実装しました。高Lv入力で分岐をテストしましたが、**通常の複数回探索・成長・装備による10F突破の最終バランス証明は次のまとまり**です。11Fの内容、仲間/犬/ガチャ/耐久/全スキル、正式PNG採用は未実装です。
+
+保存はバージョン検査、一時ファイル検証、前回.bak、置換を行い、失敗時は画面の状態更新を取り消します。破損時は元データを保持して復旧/新規開始を明示選択。新規・復旧は元データを退避します。同じ保存の同時プレイは避けてください。SHAによる外部更新検出はありますが、同時書込みの完全な排他・別設定版からの移行は未対応です。
+
+過去の `solo-E*-*.json`、`scenario-summary.json`、`first-start-*` は基盤472bc01時点の保存済み証拠です。現在の版の証拠として流用していません。機能別状態は [IMPLEMENTATION_STATUS.md](../../docs/IMPLEMENTATION_STATUS.md)、工程の残りは [PROGRESS.md](../../docs/dot/PROGRESS.md)。

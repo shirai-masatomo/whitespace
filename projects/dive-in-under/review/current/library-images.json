@@ -1,0 +1,29 @@
+{
+  "game_commit": "035d3fdf6de34bbbae1d574143e7833af098aad0",
+  "images": [
+    {
+      "file_name": "01-title.png",
+      "library_file_id": "libfile_707b67f0f9f88191a516e806eca97d8d",
+      "file_id": "file_00000000d7f081fba9f34cc2c0002935",
+      "current_version_number": 0
+    },
+    {
+      "file_name": "04-first-exploration.png",
+      "library_file_id": "libfile_76be15ea098c819199fa02a180c3f0b3",
+      "file_id": "file_00000000681c81fb904ad74cf010e085",
+      "current_version_number": 0
+    },
+    {
+      "file_name": "05-death-result.png",
+      "library_file_id": "libfile_c5cd1d7b289c8191a5a0921d6c9d0797",
+      "file_id": "file_00000000793081f899eecb8e8b73c346",
+      "current_version_number": 0
+    },
+    {
+      "file_name": "06-town.png",
+      "library_file_id": "libfile_59a0310dc87481918040f966d7cf9faf",
+      "file_id": "file_00000000514881fb912c31ae1b81fd64",
+      "current_version_number": 0
+    }
+  ]
+}

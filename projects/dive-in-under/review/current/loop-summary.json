@@ -1,0 +1,810 @@
+{
+	"checks": 176,
+	"failures": [],
+	"final_10F_balance_verified": false,
+	"policy": "return after 3F; equip empty slots; accept events",
+	"records": [
+		{
+			"deaths": 1.0,
+			"highest_floor": 3.0,
+			"items": 6,
+			"level": 5,
+			"seed": 0,
+			"trips": 12
+		},
+		{
+			"deaths": 1.0,
+			"highest_floor": 3.0,
+			"items": 9,
+			"level": 5,
+			"seed": 1,
+			"trips": 12
+		},
+		{
+			"deaths": 1.0,
+			"highest_floor": 3.0,
+			"items": 15,
+			"level": 4,
+			"seed": 2,
+			"trips": 12
+		},
+		{
+			"deaths": 1.0,
+			"highest_floor": 3.0,
+			"items": 12,
+			"level": 4,
+			"seed": 3,
+			"trips": 12
+		},
+		{
+			"deaths": 1.0,
+			"highest_floor": 3.0,
+			"items": 11,
+			"level": 5,
+			"seed": 4,
+			"trips": 12
+		},
+		{
+			"deaths": 1.0,
+			"highest_floor": 3.0,
+			"items": 8,
+			"level": 5,
+			"seed": 5,
+			"trips": 12
+		},
+		{
+			"deaths": 1.0,
+			"highest_floor": 3.0,
+			"items": 11,
+			"level": 4,
+			"seed": 6,
+			"trips": 12
+		},
+		{
+			"deaths": 1.0,
+			"highest_floor": 3.0,
+			"items": 7,
+			"level": 5,
+			"seed": 7,
+			"trips": 12
+		},
+		{
+			"deaths": 1.0,
+			"highest_floor": 3.0,
+			"items": 17,
+			"level": 5,
+			"seed": 8,
+			"trips": 12
+		},
+		{
+			"deaths": 1.0,
+			"highest_floor": 3.0,
+			"items": 7,
+			"level": 5,
+			"seed": 9,
+			"trips": 12
+		},
+		{
+			"deaths": 1.0,
+			"highest_floor": 3.0,
+			"items": 8,
+			"level": 5,
+			"seed": 10,
+			"trips": 12
+		},
+		{
+			"deaths": 1.0,
+			"highest_floor": 3.0,
+			"items": 14,
+			"level": 5,
+			"seed": 11,
+			"trips": 12
+		},
+		{
+			"deaths": 1.0,
+			"highest_floor": 3.0,
+			"items": 10,
+			"level": 5,
+			"seed": 12,
+			"trips": 12
+		},
+		{
+			"deaths": 1.0,
+			"highest_floor": 3.0,
+			"items": 6,
+			"level": 5,
+			"seed": 13,
+			"trips": 12
+		},
+		{
+			"deaths": 1.0,
+			"highest_floor": 3.0,
+			"items": 11,
+			"level": 5,
+			"seed": 14,
+			"trips": 12
+		},
+		{
+			"deaths": 1.0,
+			"highest_floor": 3.0,
+			"items": 18,
+			"level": 5,
+			"seed": 15,
+			"trips": 12
+		},
+		{
+			"deaths": 1.0,
+			"highest_floor": 3.0,
+			"items": 13,
+			"level": 5,
+			"seed": 16,
+			"trips": 12
+		},
+		{
+			"deaths": 1.0,
+			"highest_floor": 3.0,
+			"items": 9,
+			"level": 5,
+			"seed": 17,
+			"trips": 12
+		},
+		{
+			"deaths": 1.0,
+			"highest_floor": 3.0,
+			"items": 13,
+			"level": 4,
+			"seed": 18,
+			"trips": 12
+		},
+		{
+			"deaths": 1.0,
+			"highest_floor": 3.0,
+			"items": 10,
+			"level": 5,
+			"seed": 19,
+			"trips": 12
+		},
+		{
+			"deaths": 1.0,
+			"highest_floor": 3.0,
+			"items": 14,
+			"level": 4,
+			"seed": 20,
+			"trips": 12
+		},
+		{
+			"deaths": 1.0,
+			"highest_floor": 3.0,
+			"items": 15,
+			"level": 5,
+			"seed": 21,
+			"trips": 12
+		},
+		{
+			"deaths": 1.0,
+			"highest_floor": 3.0,
+			"items": 13,
+			"level": 5,
+			"seed": 22,
+			"trips": 12
+		},
+		{
+			"deaths": 1.0,
+			"highest_floor": 3.0,
+			"items": 14,
+			"level": 4,
+			"seed": 23,
+			"trips": 12
+		},
+		{
+			"deaths": 1.0,
+			"highest_floor": 3.0,
+			"items": 13,
+			"level": 5,
+			"seed": 24,
+			"trips": 12
+		},
+		{
+			"deaths": 1.0,
+			"highest_floor": 3.0,
+			"items": 11,
+			"level": 5,
+			"seed": 25,
+			"trips": 12
+		},
+		{
+			"deaths": 1.0,
+			"highest_floor": 3.0,
+			"items": 15,
+			"level": 4,
+			"seed": 26,
+			"trips": 12
+		},
+		{
+			"deaths": 1.0,
+			"highest_floor": 3.0,
+			"items": 7,
+			"level": 5,
+			"seed": 27,
+			"trips": 12
+		},
+		{
+			"deaths": 1.0,
+			"highest_floor": 3.0,
+			"items": 9,
+			"level": 5,
+			"seed": 28,
+			"trips": 12
+		},
+		{
+			"deaths": 1.0,
+			"highest_floor": 3.0,
+			"items": 10,
+			"level": 5,
+			"seed": 29,
+			"trips": 12
+		},
+		{
+			"deaths": 1.0,
+			"highest_floor": 3.0,
+			"items": 9,
+			"level": 5,
+			"seed": 30,
+			"trips": 12
+		},
+		{
+			"deaths": 1.0,
+			"highest_floor": 3.0,
+			"items": 14,
+			"level": 5,
+			"seed": 31,
+			"trips": 12
+		},
+		{
+			"deaths": 1.0,
+			"highest_floor": 3.0,
+			"items": 11,
+			"level": 5,
+			"seed": 32,
+			"trips": 12
+		},
+		{
+			"deaths": 1.0,
+			"highest_floor": 3.0,
+			"items": 12,
+			"level": 5,
+			"seed": 33,
+			"trips": 12
+		},
+		{
+			"deaths": 1.0,
+			"highest_floor": 3.0,
+			"items": 17,
+			"level": 4,
+			"seed": 34,
+			"trips": 12
+		},
+		{
+			"deaths": 1.0,
+			"highest_floor": 3.0,
+			"items": 11,
+			"level": 5,
+			"seed": 35,
+			"trips": 12
+		},
+		{
+			"deaths": 1.0,
+			"highest_floor": 3.0,
+			"items": 12,
+			"level": 5,
+			"seed": 36,
+			"trips": 12
+		},
+		{
+			"deaths": 1.0,
+			"highest_floor": 3.0,
+			"items": 14,
+			"level": 4,
+			"seed": 37,
+			"trips": 12
+		},
+		{
+			"deaths": 1.0,
+			"highest_floor": 3.0,
+			"items": 12,
+			"level": 5,
+			"seed": 38,
+			"trips": 12
+		},
+		{
+			"deaths": 1.0,
+			"highest_floor": 3.0,
+			"items": 11,
+			"level": 5,
+			"seed": 39,
+			"trips": 12
+		},
+		{
+			"deaths": 1.0,
+			"highest_floor": 3.0,
+			"items": 8,
+			"level": 5,
+			"seed": 40,
+			"trips": 12
+		},
+		{
+			"deaths": 1.0,
+			"highest_floor": 3.0,
+			"items": 13,
+			"level": 4,
+			"seed": 41,
+			"trips": 12
+		},
+		{
+			"deaths": 1.0,
+			"highest_floor": 3.0,
+			"items": 17,
+			"level": 4,
+			"seed": 42,
+			"trips": 12
+		},
+		{
+			"deaths": 1.0,
+			"highest_floor": 3.0,
+			"items": 8,
+			"level": 5,
+			"seed": 43,
+			"trips": 12
+		},
+		{
+			"deaths": 1.0,
+			"highest_floor": 3.0,
+			"items": 8,
+			"level": 5,
+			"seed": 44,
+			"trips": 12
+		},
+		{
+			"deaths": 1.0,
+			"highest_floor": 3.0,
+			"items": 12,
+			"level": 5,
+			"seed": 45,
+			"trips": 12
+		},
+		{
+			"deaths": 1.0,
+			"highest_floor": 3.0,
+			"items": 13,
+			"level": 5,
+			"seed": 46,
+			"trips": 12
+		},
+		{
+			"deaths": 1.0,
+			"highest_floor": 3.0,
+			"items": 16,
+			"level": 5,
+			"seed": 47,
+			"trips": 12
+		},
+		{
+			"deaths": 1.0,
+			"highest_floor": 3.0,
+			"items": 16,
+			"level": 5,
+			"seed": 48,
+			"trips": 12
+		},
+		{
+			"deaths": 1.0,
+			"highest_floor": 3.0,
+			"items": 9,
+			"level": 5,
+			"seed": 49,
+			"trips": 12
+		},
+		{
+			"deaths": 1.0,
+			"highest_floor": 3.0,
+			"items": 10,
+			"level": 5,
+			"seed": 50,
+			"trips": 12
+		},
+		{
+			"deaths": 1.0,
+			"highest_floor": 3.0,
+			"items": 19,
+			"level": 5,
+			"seed": 51,
+			"trips": 12
+		},
+		{
+			"deaths": 1.0,
+			"highest_floor": 3.0,
+			"items": 11,
+			"level": 4,
+			"seed": 52,
+			"trips": 12
+		},
+		{
+			"deaths": 1.0,
+			"highest_floor": 3.0,
+			"items": 9,
+			"level": 5,
+			"seed": 53,
+			"trips": 12
+		},
+		{
+			"deaths": 1.0,
+			"highest_floor": 3.0,
+			"items": 13,
+			"level": 5,
+			"seed": 54,
+			"trips": 12
+		},
+		{
+			"deaths": 1.0,
+			"highest_floor": 3.0,
+			"items": 9,
+			"level": 5,
+			"seed": 55,
+			"trips": 12
+		},
+		{
+			"deaths": 1.0,
+			"highest_floor": 3.0,
+			"items": 13,
+			"level": 5,
+			"seed": 56,
+			"trips": 12
+		},
+		{
+			"deaths": 1.0,
+			"highest_floor": 3.0,
+			"items": 10,
+			"level": 5,
+			"seed": 57,
+			"trips": 12
+		},
+		{
+			"deaths": 1.0,
+			"highest_floor": 3.0,
+			"items": 16,
+			"level": 5,
+			"seed": 58,
+			"trips": 12
+		},
+		{
+			"deaths": 1.0,
+			"highest_floor": 3.0,
+			"items": 15,
+			"level": 4,
+			"seed": 59,
+			"trips": 12
+		},
+		{
+			"deaths": 1.0,
+			"highest_floor": 3.0,
+			"items": 12,
+			"level": 5,
+			"seed": 60,
+			"trips": 12
+		},
+		{
+			"deaths": 1.0,
+			"highest_floor": 3.0,
+			"items": 8,
+			"level": 5,
+			"seed": 61,
+			"trips": 12
+		},
+		{
+			"deaths": 1.0,
+			"highest_floor": 3.0,
+			"items": 14,
+			"level": 5,
+			"seed": 62,
+			"trips": 12
+		},
+		{
+			"deaths": 1.0,
+			"highest_floor": 3.0,
+			"items": 13,
+			"level": 5,
+			"seed": 63,
+			"trips": 12
+		},
+		{
+			"deaths": 1.0,
+			"highest_floor": 3.0,
+			"items": 14,
+			"level": 4,
+			"seed": 64,
+			"trips": 12
+		},
+		{
+			"deaths": 1.0,
+			"highest_floor": 3.0,
+			"items": 18,
+			"level": 4,
+			"seed": 65,
+			"trips": 12
+		},
+		{
+			"deaths": 1.0,
+			"highest_floor": 3.0,
+			"items": 11,
+			"level": 5,
+			"seed": 66,
+			"trips": 12
+		},
+		{
+			"deaths": 1.0,
+			"highest_floor": 3.0,
+			"items": 14,
+			"level": 5,
+			"seed": 67,
+			"trips": 12
+		},
+		{
+			"deaths": 1.0,
+			"highest_floor": 3.0,
+			"items": 14,
+			"level": 5,
+			"seed": 68,
+			"trips": 12
+		},
+		{
+			"deaths": 1.0,
+			"highest_floor": 3.0,
+			"items": 10,
+			"level": 5,
+			"seed": 69,
+			"trips": 12
+		},
+		{
+			"deaths": 1.0,
+			"highest_floor": 3.0,
+			"items": 10,
+			"level": 5,
+			"seed": 70,
+			"trips": 12
+		},
+		{
+			"deaths": 1.0,
+			"highest_floor": 3.0,
+			"items": 15,
+			"level": 5,
+			"seed": 71,
+			"trips": 12
+		},
+		{
+			"deaths": 1.0,
+			"highest_floor": 3.0,
+			"items": 14,
+			"level": 5,
+			"seed": 72,
+			"trips": 12
+		},
+		{
+			"deaths": 1.0,
+			"highest_floor": 3.0,
+			"items": 14,
+			"level": 5,
+			"seed": 73,
+			"trips": 12
+		},
+		{
+			"deaths": 1.0,
+			"highest_floor": 3.0,
+			"items": 13,
+			"level": 5,
+			"seed": 74,
+			"trips": 12
+		},
+		{
+			"deaths": 1.0,
+			"highest_floor": 3.0,
+			"items": 13,
+			"level": 5,
+			"seed": 75,
+			"trips": 12
+		},
+		{
+			"deaths": 1.0,
+			"highest_floor": 3.0,
+			"items": 9,
+			"level": 5,
+			"seed": 76,
+			"trips": 12
+		},
+		{
+			"deaths": 1.0,
+			"highest_floor": 3.0,
+			"items": 11,
+			"level": 5,
+			"seed": 77,
+			"trips": 12
+		},
+		{
+			"deaths": 1.0,
+			"highest_floor": 3.0,
+			"items": 11,
+			"level": 5,
+			"seed": 78,
+			"trips": 12
+		},
+		{
+			"deaths": 1.0,
+			"highest_floor": 3.0,
+			"items": 16,
+			"level": 5,
+			"seed": 79,
+			"trips": 12
+		},
+		{
+			"deaths": 1.0,
+			"highest_floor": 3.0,
+			"items": 16,
+			"level": 5,
+			"seed": 80,
+			"trips": 12
+		},
+		{
+			"deaths": 1.0,
+			"highest_floor": 3.0,
+			"items": 14,
+			"level": 5,
+			"seed": 81,
+			"trips": 12
+		},
+		{
+			"deaths": 1.0,
+			"highest_floor": 3.0,
+			"items": 10,
+			"level": 5,
+			"seed": 82,
+			"trips": 12
+		},
+		{
+			"deaths": 1.0,
+			"highest_floor": 3.0,
+			"items": 15,
+			"level": 5,
+			"seed": 83,
+			"trips": 12
+		},
+		{
+			"deaths": 1.0,
+			"highest_floor": 3.0,
+			"items": 13,
+			"level": 5,
+			"seed": 84,
+			"trips": 12
+		},
+		{
+			"deaths": 1.0,
+			"highest_floor": 3.0,
+			"items": 11,
+			"level": 5,
+			"seed": 85,
+			"trips": 12
+		},
+		{
+			"deaths": 1.0,
+			"highest_floor": 3.0,
+			"items": 5,
+			"level": 5,
+			"seed": 86,
+			"trips": 12
+		},
+		{
+			"deaths": 1.0,
+			"highest_floor": 3.0,
+			"items": 9,
+			"level": 5,
+			"seed": 87,
+			"trips": 12
+		},
+		{
+			"deaths": 1.0,
+			"highest_floor": 3.0,
+			"items": 9,
+			"level": 5,
+			"seed": 88,
+			"trips": 12
+		},
+		{
+			"deaths": 1.0,
+			"highest_floor": 3.0,
+			"items": 15,
+			"level": 5,
+			"seed": 89,
+			"trips": 12
+		},
+		{
+			"deaths": 1.0,
+			"highest_floor": 3.0,
+			"items": 16,
+			"level": 4,
+			"seed": 90,
+			"trips": 12
+		},
+		{
+			"deaths": 1.0,
+			"highest_floor": 3.0,
+			"items": 10,
+			"level": 5,
+			"seed": 91,
+			"trips": 12
+		},
+		{
+			"deaths": 1.0,
+			"highest_floor": 3.0,
+			"items": 10,
+			"level": 5,
+			"seed": 92,
+			"trips": 12
+		},
+		{
+			"deaths": 1.0,
+			"highest_floor": 3.0,
+			"items": 7,
+			"level": 5,
+			"seed": 93,
+			"trips": 12
+		},
+		{
+			"deaths": 1.0,
+			"highest_floor": 3.0,
+			"items": 10,
+			"level": 5,
+			"seed": 94,
+			"trips": 12
+		},
+		{
+			"deaths": 1.0,
+			"highest_floor": 3.0,
+			"items": 16,
+			"level": 5,
+			"seed": 95,
+			"trips": 12
+		},
+		{
+			"deaths": 1.0,
+			"highest_floor": 3.0,
+			"items": 15,
+			"level": 5,
+			"seed": 96,
+			"trips": 12
+		},
+		{
+			"deaths": 1.0,
+			"highest_floor": 3.0,
+			"items": 20,
+			"level": 5,
+			"seed": 97,
+			"trips": 12
+		},
+		{
+			"deaths": 1.0,
+			"highest_floor": 3.0,
+			"items": 15,
+			"level": 5,
+			"seed": 98,
+			"trips": 12
+		},
+		{
+			"deaths": 1.0,
+			"highest_floor": 3.0,
+			"items": 11,
+			"level": 4,
+			"seed": 99,
+			"trips": 12
+		}
+	],
+	"seeds": 100,
+	"trips_each": 12
+}
