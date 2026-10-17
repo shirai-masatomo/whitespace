@@ -6,7 +6,7 @@
   "game_version": "0.4.2-ui-refinement",
   "files": [
     {
-      "path": "build/DiveInUnder-foundation-windows-x64.zip",
+      "path": "build/releases/7bc5f347d2c94019ff20acb9bc4ba83ab6c06fa7-14bc7557/DiveInUnder-0.4.2-windows-x64.zip",
       "bytes": 46177131,
       "sha256": "121e10923916855d983aab636ec9a9d93f8582faf96fe3f2bd1f0e0b33a6b6b9"
     },

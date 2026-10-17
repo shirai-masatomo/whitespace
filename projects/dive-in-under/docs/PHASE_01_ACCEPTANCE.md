@@ -1,6 +1,8 @@
 # 工程1 — 通常ソロ10F検証と残る受入項目（2026-10-17）
 
-> **最新0.4.2**：羊皮紙/真鍮枠・見出し・装備11行を改善し、採用済み5点のEXE注記を更新。残敵4種は未納品。工程1全体は未完了。[実画面・証拠](../review/current/README.md)。
+> **最新0.4.3**：UI改善済み。やや斜め構図と納品4敵の未採用候補を実EXEで比較。基準5点は採用済み。工程1全体は未完了。[最新入口](../review/current/README.md)。
+
+> **前回0.4.2時点**：羊皮紙/真鍮枠・見出し・装備11行を改善し、採用済み5点のEXE注記を更新。残敵4種は未納品。工程1全体は未完了。[実画面・証拠](../review/current/README.md)。
 
 **通常進行の実装側検証は成功。工程1全体は、追加された画作り要件が未達のため進行中。** 親の受入評価へ返し、工程2へ進まない。基準は main `e7cc5a2` の [PHASE_01](dot/PHASE_01.md) と [VISUAL_TARGET](dot/PHASE_01_VISUAL_TARGET.md)。
 
@@ -83,3 +85,13 @@ EXP/Gold/戦利品の合計が減るのは早く突破して試験が終了す�
 ソース `7bc5f347d2c94019ff20acb9bc4ba83ab6c06fa7`。既存Godot部品で羊皮紙繊維・真鍮枠・見出し帯・装備11行と既存能力効果を整列。自己レビューで無効ボタン幅と枠/文字の余白を修正し366チェック・Windows再ビルド・隔離/ヘッドレス290操作・3プロセス保存再開成功。クリアSHA `edd3cace3bb8376f1e2d80cb0cc6a44270874df5893a0a91906b036046996d2a`、保存SHA `0dcca1d55581aba169a1ed6ee4251688e37a2d6320da3042789a17c8b33dc6fa` 維持。旧EXE/PCKを保持し参照だけ安全切替。[変更後の町](../review/current/44-ui-town.png) / [変更前0.4.1](../review/current/41-town-status-readable.png) / [画面SHA](../review/current/ui-refinement-evidence.json) / [配布SHA](../review/current/build-manifest.json) / [隔離監査](../review/current/ui-refinement-campaign-isolated-isolation-complete.json)。通常デスクトップ操作なし。
 
 採用済み注記とmanifestを更新、原稿PNG・コア・データ・保存・操作は不変。新規画像/モーション/新機能なし。未納品4敵は仮表示のまま、納品後に別単位で組み込む。PXの細部装飾や装備アイコン配置は一致しておらず、画作りの節目レビューは継続。追加UI画像は現時点で不要。OS物理入力・別解像度・長時間試遊は未検証。工程1全体は未完了。
+
+## 2026-10-17 0.4.3 — 斜め構図・4敵候補
+
+実行ソース `04778428be0e0d7c74b23240707cde6403f04704`。UI小単位0.4.2は7bc5f34の[PR CI39032622680](https://github.com/shirai-masatomo/whitespace/actions/runs/39032622680)で成功。次に最新ユーザー指示のやや斜め視点を表示配置のみで反映（敵左奥/主人公右手前）。将来隊列の表示追加余地を考慮するが、隊列/前後衛/配下のルールは未実装・未決定、主人公1人のまま。
+
+4納品PNGは親提示SHA一致、原画9枚SHA不変。実測アルファ16境界＋4pxでAtlas表示、個別足元、コウモリ18px浮き静止案。[候補一覧・実画面](../review/current/visual-candidates.md) / [斜めE04](../review/current/55-oblique-goblin.png) / [10F](../review/current/56-oblique-boss.png)。4点は未採用。6敵すべての全身/尾/翼/足元が領域内、HP/SP/ログを確認。ネズミの横向き寄り、原画視点そのものは変えていない点を残課題として引継ぎ。
+
+366チェック・ヘッドレスUI・Windowsビルド、隔離/ヘッドレス290操作・途中/突破後の別EXE再開成功。クリアSHA `edd3cace3bb8376f1e2d80cb0cc6a44270874df5893a0a91906b036046996d2a`、保存SHA `0dcca1d55581aba169a1ed6ee4251688e37a2d6320da3042789a17c8b33dc6fa` を維持。[監査](../review/current/oblique-campaign-isolated-isolation-complete.json) / [画面SHA](../review/current/oblique-evidence.json) / [配布SHA](../review/current/build-manifest.json)。旧EXE/PCK保持・参照のみ安全切替。通常デスクトップへの自動起動なし。コア/データ/保存/探索方針は不変。ローカル1000seed再計算は省略、今回CIの結果を旧版とは分けて記録する。
+
+4候補と構図の採否/節目レビュー、PX細部・装備アイコン配置が残る。OS物理入力/別解像度/長時間試遊は未検証。追加画像生成・新操作・モーション・仲間・工程2なし。工程1全体は未完了。

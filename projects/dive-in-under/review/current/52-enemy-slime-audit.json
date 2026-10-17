@@ -1,0 +1,72 @@
+{
+	"run_id": "5904903d46934053910926d4b425b32e",
+	"screenshot": "23-enemy-e02.png",
+	"stages": [
+		{
+			"actors": [
+				{
+					"adoption": "adopted-current-baseline",
+					"body_region": "[P: (0.0, 22.0), S: (1234.0, 1232.0)]",
+					"candidate_loaded": true,
+					"foot": [
+						416.0,
+						236.0
+					],
+					"id": "hero",
+					"static_hover_px": 0.0,
+					"top_left": [
+						330.285705566406,
+						86.9375
+					],
+					"visible_size": [
+						165.267852783203,
+						165.0
+					],
+					"within_stage": true
+				},
+				{
+					"adoption": "candidate-unapproved",
+					"body_region": "[P: (24.0, 323.0), S: (1206.0, 632.0)]",
+					"candidate_loaded": true,
+					"foot": [
+						171.0,
+						208.0
+					],
+					"id": "E02",
+					"static_hover_px": 0.0,
+					"top_left": [
+						66.9599990844727,
+						99.9916458129883
+					],
+					"visible_size": [
+						208.080001831055,
+						109.043579101563
+					],
+					"within_stage": true
+				}
+			],
+			"adoption": "five-assets-current-baseline",
+			"aspect": "preserved",
+			"background": "cavern",
+			"background_loaded": true,
+			"background_zoom": 1.04,
+			"composition": "slightly-oblique-single-hero",
+			"depth": 2,
+			"far_enemy_foot": [
+				171.0,
+				208.0
+			],
+			"filter": "nearest",
+			"formation_rules": false,
+			"near_hero_foot": [
+				416.0,
+				236.0
+			],
+			"stage_size": [
+				612.0,
+				270.0
+			],
+			"static_only": true
+		}
+	]
+}
