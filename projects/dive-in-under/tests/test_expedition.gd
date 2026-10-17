@@ -152,6 +152,11 @@ func _initialize() -> void:
 	check(store.load_game().ok,"existing save loaded")
 	var initial_checkpoint:=action(E.fresh(cfg,55),"descend")
 	var death_checkpoint:=action(initial_checkpoint,"descend")
+	check(E.normal_deaths(death_checkpoint)==0 and E.normal_trips(death_checkpoint)==0,"tutorial excluded from normal numerator and denominator")
+	var legacy_death:=normalized(death_checkpoint)
+	check(E.normal_deaths(legacy_death)==0 and E.validate(legacy_death,data,cfg)=="","legacy total-death save remains compatible")
+	legacy_death.deaths=0
+	check(E.validate(legacy_death,data,cfg)!="","invalid lifetime/story counters rejected")
 	for checkpoint in [E.fresh(cfg,55),initial_checkpoint,death_checkpoint,state_town]:
 		check(store.write_game(checkpoint)=="","write each lifecycle checkpoint")
 		var reopened:=Store.new(path,data,cfg)
@@ -215,7 +220,7 @@ func _initialize() -> void:
 			campaign=action(normalized(campaign),"town")
 			valid=valid and campaign.hp>0 and campaign.story_deaths==1
 		check(valid,"12 repeated trips remain valid, seed %d" % seed_value)
-		records.append({"seed":seed_value,"trips":12,"level":E.hero(campaign,cfg).level,"deaths":campaign.deaths,"items":campaign.items.size(),"highest_floor":campaign.highest_floor})
+		records.append({"seed":seed_value,"trips":12,"level":E.hero(campaign,cfg).level,"normal_deaths":E.normal_deaths(campaign),"story_deaths":campaign.story_deaths,"lifetime_deaths":campaign.deaths,"items":campaign.items.size(),"highest_floor":campaign.highest_floor})
 	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path("res://artifacts"))
 	put("res://artifacts/loop-summary.json",JSON.stringify({"checks":checks,"failures":failures,"seeds":100,"trips_each":12,"policy":"return after 3F; equip empty slots; accept events","final_10F_balance_verified":false,"records":records},"\t"))
 	print("LOOP_TESTS: %d checks, %d failures" % [checks,failures.size()])

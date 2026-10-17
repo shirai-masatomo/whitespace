@@ -1,9 +1,9 @@
-; Phase 01 foundation. The exploration loop is not implemented yet.
+; Phase 01 solo exploration, persistent progression and normal 10F replay.
 config_version=5
 
 [application]
 config/name="Dive In Under — 戦闘基盤"
-config/version="0.2.0-loop"
+config/version="0.3.0-solo10"
 run/main_scene="res://ui/main.tscn"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 

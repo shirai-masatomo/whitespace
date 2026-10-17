@@ -5,8 +5,10 @@ const Catalog = preload("res://core/catalog.gd")
 const STATS = ["max_hp","atk","def","spd","max_sp"]
 const SLOTS = ["right_hand","left_hand","head","body","legs","feet","neck","ears","eyes","finger","wrist"]
 
-static func load_config() -> Dictionary:
-	var value = JSON.parse_string(FileAccess.get_file_as_string("res://data/v1/expedition.json"))
+static func load_config(version: String="") -> Dictionary:
+	if not version in ["","2026-10-17.loop-provisional.1","2026-10-17.loop-provisional.2"]: return {}
+	var filename: String="expedition-legacy.json" if version=="2026-10-17.loop-provisional.1" else "expedition.json"
+	var value = JSON.parse_string(FileAccess.get_file_as_string("res://data/v1/"+filename))
 	if not value is Dictionary: return {}
 	var problem:=validate_config(value,Catalog.load_data())
 	if problem!="": push_error(problem); return {}
@@ -82,6 +84,13 @@ static func level_info(s: Dictionary, cfg: Dictionary) -> Dictionary:
 		spent += int(cfg.growth.exp_step) * level
 		level += 1
 	return {"level":level,"spent":spent,"progress":int(s.exp)-spent,"next":int(cfg.growth.exp_step)*level}
+
+static func normal_deaths(s: Dictionary) -> int:
+	# Legacy saves store lifetime deaths, including the one introductory event.
+	return int(s.deaths)-int(s.story_deaths)
+
+static func normal_trips(s: Dictionary) -> int:
+	return int(s.trips)-1
 
 static func hero(s: Dictionary, cfg: Dictionary) -> Dictionary:
 	var level: int = level_info(s,cfg).level
@@ -167,11 +176,12 @@ static func battle_state(s: Dictionary, data: Dictionary) -> Dictionary:
 	return result
 
 static func step_battle(s: Dictionary, data: Dictionary, cfg: Dictionary) -> void:
-	var b := Combat.advance(battle_state(s,data))
+	var previous := battle_state(s,data)
+	var b := Combat.advance(previous)
 	s.battle.rounds += 1
 	s.hp = int(b.hero.hp)
 	s.sp = int(b.hero.sp)
-	for entry in b.log.slice(-3):
+	for entry in b.log.slice(previous.log.size()):
 		if entry.type == "attack":
 			note(s,"%s → %s  %s" % ["主人公" if entry.actor=="hero" else b.enemy.name,
 				b.enemy.name if entry.target=="enemy" else "主人公",str(entry.damage)+" ダメージ" if entry.hit else "ミス"])
@@ -285,6 +295,7 @@ static func validate(s: Dictionary, data: Dictionary, cfg: Dictionary) -> String
 	for key in ["revision","seed","story_deaths","floor","highest_floor","exp","gold","hp","sp","next_item","trips","deaths"]:
 		if not integer(s[key],0,2147483647): return "Invalid number: "+key
 	if not s.first_done is bool or s.story_deaths>1 or s.first_done!=(s.story_deaths==1): return "Invalid tutorial state"
+	if s.deaths<s.story_deaths or normal_deaths(s)>normal_trips(s): return "Invalid death counters"
 	if s.floor>10 or s.highest_floor>11 or s.floor>s.highest_floor or s.next_item<1 or s.trips<1: return "Invalid progression"
 	if not s.phase in ["explore","battle","event","result","town"]: return "Unknown phase"
 	if not s.get("last_outcome","") in ["","victory"]: return "Invalid encounter outcome"

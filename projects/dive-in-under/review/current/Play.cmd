@@ -1,6 +1,8 @@
 @echo off
 chcp 65001 >nul
-set "DIU_BUILD=%~dp0..\..\build\windows"
+set "DIU_REL=windows"
+if exist "%~dp0..\..\build\current.txt" set /p DIU_REL=<"%~dp0..\..\build\current.txt"
+set "DIU_BUILD=%~dp0..\..\build\%DIU_REL%"
 if not exist "%DIU_BUILD%\DiveInUnder.exe" (
   echo Windows EXEがありません。確認ページのCI ZIPを同じ構成で展開してください。
   pause

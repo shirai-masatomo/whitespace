@@ -15,6 +15,11 @@ var new_button: Button
 var confirm_button: Button
 var continue_button: Button
 var resume_probe := false
+var campaign_replay_path := ""
+var campaign_resume := false
+var campaign_final_probe := false
+var campaign_seed := 123
+const CampaignReplay = preload("res://ui/campaign_replay.gd")
 
 func initialize_game() -> void:
 	cfg=Expedition.load_config()
@@ -23,8 +28,13 @@ func initialize_game() -> void:
 	if smoke_dir!="": save_path=smoke_dir.path_join("campaign-smoke.json")
 	for arg in OS.get_cmdline_user_args():
 		if arg=="--resume-probe": resume_probe=true
+		if smoke_dir!="" and arg.begins_with("--campaign-replay="): campaign_replay_path=arg.trim_prefix("--campaign-replay=")
+		if arg=="--campaign-resume": campaign_resume=true
+		if arg=="--campaign-final-probe": campaign_final_probe=true
+		if smoke_dir!="" and arg.begins_with("--campaign-seed="): campaign_seed=int(arg.trim_prefix("--campaign-seed="))
 	save_store=SaveStore.new(save_path,data,cfg)
 	loaded=save_store.load_game()
+	cfg=save_store.cfg
 	if loaded.ok: campaign=loaded.state
 	play_timer=Timer.new()
 	play_timer.wait_time=0.6
@@ -66,7 +76,7 @@ func show_title() -> void:
 	if loaded.get("status","") not in ["ok","missing"]: notice=loaded.get("error","")
 	var status:=text_label(notice,16); status.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART; root.add_child(status)
 	var spacer:=Control.new(); spacer.size_flags_vertical=Control.SIZE_EXPAND_FILL; root.add_child(spacer)
-	root.add_child(text_label("0.2.0 loop  ·  工程1試作  ·  初回イベント・成長・死亡ペナルティは仮設定",16))
+	root.add_child(text_label("0.3.0 solo10  ·  工程1試作  ·  初回イベント・成長・死亡ペナルティは仮設定",16))
 	new_button.grab_focus()
 
 func show_battle() -> void:
@@ -86,7 +96,8 @@ func request_new() -> void:
 func start_new() -> void:
 	var error: String=save_store.preserve_current()
 	if error!="": notice=error; show_title(); return
-	var candidate:=Expedition.fresh(cfg,123 if smoke_dir!="" else int(Time.get_ticks_usec()%2147483647))
+	cfg=Expedition.load_config(); save_store.cfg=cfg
+	var candidate:=Expedition.fresh(cfg,campaign_seed if smoke_dir!="" else int(Time.get_ticks_usec()%2147483647))
 	error=save_store.write_game(candidate)
 	if error!="": notice=error; show_title(); return
 	campaign=candidate; loaded={"ok":true,"status":"ok"}; notice=""; auto_play=true
@@ -101,6 +112,7 @@ func recover_campaign() -> void:
 func continue_campaign() -> void:
 	loaded=save_store.load_game()
 	if not loaded.ok: notice=loaded.error; show_title(); return
+	cfg=save_store.cfg
 	campaign=loaded.state; auto_play=false; notice=""; show_campaign()
 
 func perform(action: String, args: Dictionary, revision: int) -> void:
@@ -117,6 +129,7 @@ func command(label: String, action: String, args: Dictionary = {}) -> Button:
 	var revision:=int(campaign.revision)
 	var b:=button(label,func(): perform(action,args,revision))
 	play_buttons[action]=b
+	b.set_meta("campaign_action",action); b.set_meta("campaign_args",args)
 	return b
 
 func paragraph(parent: Node, value: String, font_size: int = 18) -> Label:
@@ -219,9 +232,12 @@ func item_list(parent: VBoxContainer, source: String) -> void:
 		var row:=HBoxContainer.new(); list.add_child(row)
 		var revision:=int(campaign.revision)
 		if source=="inventory":
-			var equip:=compact_button("装備",func(): perform("equip",{"uid":uid},revision)); equip.disabled=item.slot==""; row.add_child(equip)
-			row.add_child(compact_button("預ける",func(): perform("deposit",{"uid":uid},revision)))
-		else: row.add_child(compact_button("取り出す",func(): perform("withdraw",{"uid":uid},revision)))
+			var equip:=compact_button("装備",func(): perform("equip",{"uid":uid},revision)); equip.disabled=item.slot==""; equip.set_meta("campaign_action","equip"); equip.set_meta("campaign_args",{"uid":uid}); row.add_child(equip)
+			var deposit:=compact_button("預ける",func(): perform("deposit",{"uid":uid},revision))
+			deposit.set_meta("campaign_action","deposit"); deposit.set_meta("campaign_args",{"uid":uid}); row.add_child(deposit)
+		else:
+			var withdraw:=compact_button("取り出す",func(): perform("withdraw",{"uid":uid},revision))
+			withdraw.set_meta("campaign_action","withdraw"); withdraw.set_meta("campaign_args",{"uid":uid}); row.add_child(withdraw)
 		list.add_child(HSeparator.new())
 	if campaign[source].is_empty(): paragraph(list,"まだ何もありません。",17)
 
@@ -243,6 +259,8 @@ func show_town(root: VBoxContainer) -> void:
 	var depart:=command("HP/SP回復済み  →  もう一度地下へ","depart"); root.add_child(depart)
 
 func smoke(quit_on_finish: bool = true) -> void:
+	if campaign_replay_path!="":
+		await CampaignReplay.run(self); return
 	if resume_probe:
 		var original = JSON.parse_string(FileAccess.get_file_as_string(smoke_dir.path_join("ui-smoke.json")))
 		if not smoke_check(loaded.ok and campaign.first_done and campaign.revision==original.saved_revision and save_store.digest()==original.saved_sha256,"Separate EXE restart checkpoint"): return

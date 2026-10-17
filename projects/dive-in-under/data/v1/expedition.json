@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "config_version": "2026-10-17.loop-provisional.1",
+  "config_version": "2026-10-17.loop-provisional.2",
   "provisional": true,
   "note": "初期値・成長・初回死亡・死亡ペナルティは交換可能な試作設定。正式決定ではない。",
   "initial": {"max_hp":24,"atk":6,"def":1,"spd":6,"max_sp":0,"gold":0,"items":["I01"]},
-  "growth": {"max_hp":4,"atk":1,"def":0,"spd":0,"max_sp":1,"exp_step":12,"level_cap":50},
+  "growth": {"max_hp":5,"atk":1,"def":0,"spd":0,"max_sp":1,"exp_step":12,"level_cap":50},
   "tutorial": {"death_floor":2,"reason":"足場が崩れ、闇の底へ落ちた。","intro":"手探りで地下へ踏み入れる。まだ帰り道は見つからない。"},
   "death_penalty": {"gold_fraction":0.1,"unspent_exp_fraction":0.0,"lose_inventory":false},
   "slots": {"right_hand":"右手","left_hand":"左手","head":"頭","body":"上半身","legs":"下半身","feet":"足","neck":"首","ears":"耳","eyes":"目","finger":"指","wrist":"腕"},

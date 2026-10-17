@@ -1,5 +1,5 @@
 param(
-    [ValidateSet('test','simulate','build','verify','play')][string]$Task = 'verify',
+    [ValidateSet('test','simulate','build','verify','play','campaign')][string]$Task = 'verify',
     [int]$Trials = 1000,
     [int]$Seed = 10000,
     [string]$Scenario = 'res://data/scenarios/baseline.json',
@@ -37,6 +37,7 @@ try {
     if ($Task -in @('test','verify')) {
         Run-Godot 'tests' @('--script','tests/test_combat.gd')
         Run-Godot 'loop-tests' @('--script','tests/test_expedition.gd')
+        Run-Godot 'campaign-tests' @('--script','tests/test_campaign.gd')
         Run-Godot 'ui-headless' @('--',"--smoke-dir=$artifacts","--smoke-run-id=$([guid]::NewGuid().ToString('N'))")
     }
     if ($Task -in @('simulate','verify')) {
@@ -46,8 +47,19 @@ try {
         if ($StrictRepeat) { $simArgs += '--strict=true' }
         Run-Godot 'simulation' $simArgs
     }
+    if ($Task -eq 'campaign') {
+        if (!$Output) { $Output = Join-Path $artifacts 'campaign.json' }
+        $args = @('--script','tools/campaign_runner.gd','--',"--trials=$Trials","--seed=$Seed","--out=$Output","--commit=$GameCommit")
+        if ($Baseline) { $args += "--baseline=$Baseline" }
+        if ($StrictRepeat) { $args += '--strict=true' }
+        Run-Godot 'campaign' $args
+    }
     if ($Task -in @('build','verify')) {
-        $build = Join-Path $project 'build/windows'
+        # Never overwrite a live user's executable or PCK. Each export is immutable.
+        $buildKey = ($GameCommit -replace '[^a-zA-Z0-9-]', '_') + '-' + [guid]::NewGuid().ToString('N').Substring(0,8)
+        $relativeBuild = 'releases/' + $buildKey
+        $build = Join-Path $project ('build/' + $relativeBuild)
+        if (Test-Path $build) { throw 'Refusing to overwrite an existing release directory' }
         New-Item -ItemType Directory -Force $build | Out-Null
         Set-Content (Join-Path $project 'build/.gdignore') ''
         Run-Godot 'import' @('--editor','--import','--quit')
@@ -57,6 +69,7 @@ try {
         Copy-Item (Join-Path $project 'assets/licenses/GODOT_COPYRIGHT.txt') $build
         @{ game_commit=$GameCommit; engine=$version.Trim(); data_version=(Get-Content (Join-Path $project 'data/v1/balance.json') -Raw | ConvertFrom-Json).data_version } | ConvertTo-Json | Set-Content (Join-Path $build 'BUILD.json') -Encoding utf8
         Compress-Archive -Path (Join-Path $build '*') -DestinationPath (Join-Path $project 'build/DiveInUnder-foundation-windows-x64.zip') -Force
+        Set-Content (Join-Path $project 'build/candidate.txt') $relativeBuild -Encoding ascii
         Get-FileHash (Join-Path $project 'build/DiveInUnder-foundation-windows-x64.zip') -Algorithm SHA256 | Format-List
     }
     if ($Task -eq 'play') {

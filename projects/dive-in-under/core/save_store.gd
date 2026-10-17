@@ -27,16 +27,22 @@ func read_one(file_path: String) -> Dictionary:
 		return {"ok":false,"status":"invalid","error":"保存データが壊れています。元ファイルを保持しました。"}
 	if parser.data.has("schema_version") and parser.data.schema_version!=1:
 		return {"ok":false,"status":"version","error":"未対応の保存形式です。古いバックアップへの自動巻戻しはしません。"}
-	var problem := Expedition.validate(parser.data,data,cfg)
+	var saved_config: Dictionary=cfg
+	if parser.data.get("config_version")!=cfg.config_version:
+		saved_config=Expedition.load_config(str(parser.data.get("config_version","unknown")))
+		if saved_config.is_empty(): return {"ok":false,"status":"version","error":"未対応の設定版です。元データは保持しました。"}
+	var problem := Expedition.validate(parser.data,data,saved_config)
 	if problem!="": return {"ok":false,"status":"version" if problem.begins_with("Unsupported") else "invalid","error":problem}
-	return {"ok":true,"status":"ok","state":parser.data,"error":""}
+	return {"ok":true,"status":"ok","state":parser.data,"config":saved_config,"error":""}
 
 func load_game() -> Dictionary:
 	fingerprint=digest()
 	var current := read_one(path)
-	if current.ok or current.status=="version": return current
+	if current.ok: cfg=current.config; return current
+	if current.status=="version": return current
 	var backup := read_one(path+".bak")
 	if backup.ok:
+		cfg=backup.config
 		return {"ok":false,"status":"recoverable","state":backup.state,"error":"現在の保存が読めません。前回の保存から復旧できます。元データは退避します。"}
 	return current
 

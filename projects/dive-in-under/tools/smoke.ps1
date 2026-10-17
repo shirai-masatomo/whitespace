@@ -8,7 +8,9 @@ New-Item -ItemType Directory -Force $runDir | Out-Null
 $envBefore = $env:APPDATA
 $env:APPDATA = Join-Path $runDir 'user-data'
 New-Item -ItemType Directory -Force $env:APPDATA | Out-Null
-$exe = Join-Path $project 'build/windows/DiveInUnder.exe'
+. (Join-Path $PSScriptRoot 'build_path.ps1')
+$build = Resolve-DiveBuild -Project $project
+$exe = Join-Path $build 'DiveInUnder.exe'
 $log = Join-Path $runDir 'run.log'
 $runId = [guid]::NewGuid().ToString('N')
 $arguments = @('--headless','--log-file', $log, '--audio-driver','Dummy','--quit-after','2000')
