@@ -127,10 +127,10 @@ func visual_audit() -> Dictionary:
 		actors.append(entry)
 	return {"background":VisualAssets.background_key(floor_number),"background_loaded":scenery.texture != null,
 		"depth":floor_number,"stage_size":[size.x,size.y],"filter":"nearest","aspect":"preserved",
-		"composition":"slightly-oblique-single-hero","background_zoom":BACKGROUND_ZOOM,
+		"composition":"offset-only-reference-camera-unresolved","background_zoom":BACKGROUND_ZOOM,
 		"near_hero_foot":[display_foot(NEAR_HERO).x,display_foot(NEAR_HERO).y],
 		"far_enemy_foot":[display_foot(FAR_ENEMY).x,display_foot(FAR_ENEMY).y],"formation_rules":false,
-		"static_only":true,"adoption":"five-assets-current-baseline","actors":actors}
+		"static_only":true,"adoption":"nine-assets-current-baseline","actors":actors}
 
 func sprite(pattern: Array, origin: Vector2, pixel: int, _alive: bool) -> void:
 	for y in range(pattern.size()):

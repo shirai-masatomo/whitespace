@@ -1,6 +1,11 @@
 # Dive In Under — 確認入口
 
-**0.4.3 / 既存UI改善＋やや斜めの構図＋残敵4候補。基準5点は採用済み、新規4点は未採用。工程1全体は未完了。**
+**最新：静止素材9点と現配置を基準として採用済み。ただし参考PX-02の斜め視点への一致は未達。採用と視点の完成判定を分ける。工程1全体は未完了。**
+
+PCの確認入口は「01 ゲームを起動」「02 画像・画面を確認」「03 変更点」の3項目。以下は技術記録で、入口直下には並べない。
+
+
+**前版0.4.3 / 既存UI改善＋やや斜めの構図＋残敵4候補。基準5点は採用済み、新規4点は未採用。工程1全体は未完了。**
 
 PCの同じ `確認入口.lnk` → [Play.cmd](Play.cmd) または [画像付き比較ページ](index.html)。[Windows ZIP](../../build/DiveInUnder-foundation-windows-x64.zip) / [現在のEXE](../../build/releases/04778428be0e0d7c74b23240707cde6403f04704-9fd9b00a/DiveInUnder.exe) / [操作・保存手順](../../tools/PLAY.txt) / [環境](../../docs/DEVELOPMENT.md) / [SHA](build-manifest.json) / [安全切替記録](local-release.json)。EXEとPCKを同じ場所へ展開します。
 

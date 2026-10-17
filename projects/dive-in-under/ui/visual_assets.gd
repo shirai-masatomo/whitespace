@@ -14,7 +14,7 @@ const FEET := {"hero":Vector2(640,1135),"E04":Vector2(565,1156),"B10":Vector2(64
 # Faint, distant alpha specks must not determine the visible body's fit.
 const BODY_REGIONS := {"E01":Rect2(30,472,1195,541),"E02":Rect2(24,323,1206,632),
 	"E03":Rect2(32,236,1197,799),"E05":Rect2(47,308,1197,791)}
-const UNAPPROVED := ["E01","E02","E03","E05"]
+const UNAPPROVED := []
 
 static func texture(key: String) -> Texture2D:
 	if not FILES.has(key): return null
@@ -58,7 +58,7 @@ static func background_key(floor_number: int) -> String:
 	return "boss" if floor_number >= 10 else "cavern"
 
 static func preview_note(enemy_id: String) -> String:
-	var note := "基準5点：採用済み（現基準）"
+	var note := "静止素材9点：採用済み"
 	if enemy_id in UNAPPROVED: note += " / %s：未採用候補" % enemy_id
 	if enemy_id != "" and texture(enemy_id) == null: note += " · この敵は仮表示"
 	return note

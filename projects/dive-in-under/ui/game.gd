@@ -77,7 +77,7 @@ func show_title() -> void:
 	if loaded.get("status","") not in ["ok","missing"]: notice=loaded.get("error","")
 	var status:=text_label(notice,16); status.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART; root.add_child(status)
 	var spacer:=Control.new(); spacer.size_flags_vertical=Control.SIZE_EXPAND_FILL; root.add_child(spacer)
-	root.add_child(text_label("0.4.3 oblique composition  ·  工程1試作  ·  基準素材5点採用済み / 数値は仮設定",16))
+	root.add_child(text_label("0.4.4 adopted baseline  ·  工程1試作  ·  静止素材9点採用済み / 数値は仮設定",16))
 	new_button.grab_focus()
 
 func show_battle() -> void:
@@ -160,7 +160,7 @@ func show_campaign() -> void:
 	if campaign.phase=="town": show_town(root)
 	elif campaign.phase=="result": show_result(root)
 	else: show_exploration(root)
-	var footer:=text_label(notice if notice!="" else "自動保存済み  ·  主人公ひとり  ·  基準素材5点採用済み / 数値・ペナルティは試作設定",15)
+	var footer:=text_label(notice if notice!="" else "0.4.4  ·  自動保存済み  ·  主人公ひとり  ·  静止素材9点採用済み / 数値・ペナルティは試作設定",15)
 	footer.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART; root.add_child(footer)
 	if campaign.phase=="battle" and auto_play:
 		play_timer.wait_time=0.6/play_speed; play_timer.start()
