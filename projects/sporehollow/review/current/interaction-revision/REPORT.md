@@ -15,7 +15,7 @@
 - [既存UI](reference-ui.json)：115確認、失敗0。
 - [起動](loading.json)：39確認、失敗0。
 
-すべてGodot headless / Dummy音声 / 30fps上限、各プロセス120秒打切り。Viewportへ入力して検証し、OS入力や通常ゲームの自動起動・GPU試験はしない。ユーザー環境での操作感は未確認。配布EXEは [DELIVERY.json](DELIVERY.json) で識別する。
+すべてGodot headless / Dummy音声 / 30fps上限、各プロセス120秒打切り。Viewportへ入力して検証し、OS入力や通常ゲームの自動起動・GPU試験はしない。ユーザー環境での操作感は未確認。実装 `a63fffee` を既存の最新開発版EXEへ反映し、SHA256一致を確認。候補・検証領域・編集用一時ファイルは整理済み。通常配布EXEは1本。[配布記録](DELIVERY.json)。
 
 ---
 
