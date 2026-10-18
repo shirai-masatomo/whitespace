@@ -1,0 +1,37 @@
+{
+	"controls": [
+		{
+			"rect": "[P: (1096.0, 25.0), S: (150.0, 40.0)]",
+			"text": "G  0"
+		},
+		{
+			"rect": "[P: (966.0, 100.0), S: (283.0, 32.0)]",
+			"text": "アイテム詳細"
+		},
+		{
+			"rect": "[P: (942.0, 282.0), S: (300.0, 40.0)]",
+			"text": "アイテムを選んでください"
+		},
+		{
+			"disabled": false,
+			"focus": false,
+			"font_color": "(0.9098, 0.8902, 0.8078, 1.0)",
+			"rect": "[P: (1024.0, 646.0), S: (240.0, 58.0)]",
+			"text": "戻る"
+		}
+	],
+	"run_id": "f167b3479bfe400a844d7306c713afd9",
+	"screenshot": "warehouse-empty.png",
+	"stages": [
+		{
+			"backpack_capacity": 15,
+			"cloth_capacity": 3,
+			"columns": 3,
+			"kind": "warehouse",
+			"no_equipment_commands": true,
+			"selected_source": "inventory",
+			"selected_uid": "",
+			"visible_warehouse_items": 0
+		}
+	]
+}

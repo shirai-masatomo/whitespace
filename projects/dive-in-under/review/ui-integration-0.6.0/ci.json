@@ -1,0 +1,14 @@
+{
+  "run_id": 39150351325,
+  "head_sha": "1c39a5c13e4626c2914f49aae47ee76ecbfcb6aa",
+  "conclusion": "success",
+  "verification_scope": "session-ui-unchanged-core",
+  "baseline_core_data_commit": "a5c3c6925fbc501d24ce84ccfa1f2fbbeed74456",
+  "build_artifact_id": 12145395642,
+  "build_artifact_sha256": "cf7f5ebf240bd3a00d5e1e75effb8ddbe53c4c0f1ca11ec7e5f85632cb677ebc",
+  "evidence_artifact_id": 12145291106,
+  "evidence_artifact_sha256": "1ce450f1e5b931fbd590f95edf9d05d7f2f6905b8fa745a9a3d8a681d2ae1959",
+  "first_pass_run_id": 39149718800,
+  "failed_import_fixed_run_id": 39150167145,
+  "user_desktop_launched": false
+}

@@ -30,3 +30,5 @@
 
 [起動・準備](STARTUP_PREPARATION_UI.md)／[ミニマップ](DUNGEON_MAP.md)／[元素材監査](UI_ASSET_INVENTORY_2026-10-18.md)／[今回の不足素材](UI_INTEGRATION_ASSETS.md)。
 数値・経歴・属性耐性・仲間などは参考画像から仕様化しない。
+
+未承認候補：今回追加の未承認画像はなし。未適用／旧版は台帳で区別し、ファイル名のcandidateだけで未承認と判断しない。
