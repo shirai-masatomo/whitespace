@@ -17,7 +17,7 @@ func log_case(data: Dictionary, cfg: Dictionary, defeat: bool) -> void:
 	if defeat: h.hp=6; h.max_hp=6; h.atk=1; h.def=0; h.spd=1
 	else: h.def=2
 	s.hp=h.hp
-	s.battle={"hero":h,"enemy_id":"E01","enemy_level":1,"seed":7,"rounds":0}
+	s.battle={"hero":h,"enemy_id":"E01","enemy_level":1,"seed":7,"rounds":0,"rules_version":2}
 	while s.phase=="battle":
 		var before:=E.battle_state(s,data)
 		var expected:=E.Combat.advance(before)

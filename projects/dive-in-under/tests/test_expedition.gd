@@ -104,7 +104,7 @@ func _initialize() -> void:
 	# Replay mid-battle from a JSON-safe seed + round checkpoint, then apply rewards only once.
 	var fighting:=action(state_town,"depart")
 	fighting.phase="battle"; fighting.floor=1; fighting.highest_floor=1
-	fighting.battle={"enemy_id":"E01","enemy_level":1,"seed":7,"hero":E.hero(fighting,cfg),"rounds":0}
+	fighting.battle={"enemy_id":"E01","enemy_level":1,"seed":7,"hero":E.hero(fighting,cfg),"rounds":0,"rules_version":2}
 	fighting=action(fighting,"round")
 	check(normalized(E.battle_state(fighting,data))==normalized(E.battle_state(normalized(fighting),data)),"midbattle JSON replay retains exact trace")
 	while fighting.phase=="battle": fighting=action(fighting,"round")
@@ -145,7 +145,7 @@ func _initialize() -> void:
 	var stall:=action(state_town,"depart")
 	stall.phase="battle"; stall.floor=1; stall.highest_floor=1
 	var h:=E.hero(stall,cfg); h.max_hp=10000; h.hp=10000; h.atk=1; h.def=10000
-	stall.hp=10000; stall.battle={"enemy_id":"B10","enemy_level":6,"seed":42,"hero":h,"rounds":0}
+	stall.hp=10000; stall.battle={"enemy_id":"B10","enemy_level":6,"seed":42,"hero":h,"rounds":0,"rules_version":2}
 	while stall.phase=="battle": stall=action(stall,"round")
 	check(stall.result.kind=="draw" and stall.deaths==state_town.deaths,"50-round interruption distinct from death")
 	# Filesystem failure cases are confined to test-owned user:// paths.

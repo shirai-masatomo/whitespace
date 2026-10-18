@@ -14,7 +14,7 @@ function Invoke-Campaign([string]$Name,[string[]]$Extra) {
     if (Select-String -LiteralPath $log -Pattern 'SCRIPT ERROR:|^ERROR:' -Quiet) { throw "$Name logged errors" }
 }
 try {
-    Invoke-Campaign 'campaign-before' @('--config=res://data/v1/expedition-legacy.json')
+    Invoke-Campaign 'campaign-before' @('--config=res://data/v1/expedition-no-defense.json')
     Invoke-Campaign 'campaign-after' @("--baseline=$artifacts/campaign-before.json")
     Invoke-Campaign 'campaign-repeat' @("--baseline=$artifacts/campaign-after.json",'--strict=true')
     $Trials = 1

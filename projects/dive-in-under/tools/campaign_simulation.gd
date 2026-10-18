@@ -12,6 +12,7 @@ static func state_hash(s: Dictionary) -> String:
 static func play(data: Dictionary, cfg: Dictionary, policy: Dictionary, seed_value: int, trace: bool=false) -> Dictionary:
 	var s:=E.fresh(cfg,seed_value)
 	var records: Array=[]
+	var battle_results: Array=[]
 	var actions: Array=[]
 	var floors: Dictionary={}
 	for floor_number in range(1,11): floors[str(floor_number)]={"entries":0,"deaths":0,"returns":0,"clears":0,"battles":0,"chests":0,"events":0,"enemies":{},"levels":{},"items":{}}
@@ -54,6 +55,7 @@ static func play(data: Dictionary, cfg: Dictionary, policy: Dictionary, seed_val
 				# Measure before level-up recovery; query the shared combat core.
 				var combat:=E.Combat.advance(E.battle_state(before,data))
 				trip.hp_lost_in_combat+=maxi(0,int(before.hp)-int(combat.hero.hp))
+				if combat.outcome!="ongoing": battle_results.append({"rounds":combat.round,"hp":combat.hero.hp,"outcome":combat.outcome,"casts":combat.log.filter(func(e):return e.type=="skill").size()})
 			for uid in s.items:
 				if not before.items.has(uid):
 					var id: String=s.items[uid]
@@ -78,7 +80,7 @@ static func play(data: Dictionary, cfg: Dictionary, policy: Dictionary, seed_val
 			highest_level=level; owned=s.items.size()
 	if step_count>=30000: error="action budget exhausted"
 	if story_count!=0 or s.story_deaths!=0: error="new campaigns must never create a story death"
-	return {"seed":seed_value,"cleared":s.phase=="result" and s.result.kind=="clear","reached_10F":reached10,"normal_trips":records.size(),"normal_deaths":E.normal_deaths(s),"story_deaths":story_count,"level":E.hero(s,cfg).level,"exp":s.exp,"gold":s.gold,"items":s.items.size(),"highest_floor":s.highest_floor,"error":error,"state_sha256":state_hash(s),"trace_sha256":digest,"trips":records,"floors":floors,"actions":actions if trace else [],"final_state":s if trace else {}}
+	return {"seed":seed_value,"cleared":s.phase=="result" and s.result.kind=="clear","reached_10F":reached10,"normal_trips":records.size(),"normal_deaths":E.normal_deaths(s),"story_deaths":story_count,"level":E.hero(s,cfg).level,"exp":s.exp,"gold":s.gold,"items":s.items.size(),"highest_floor":s.highest_floor,"error":error,"state_sha256":state_hash(s),"trace_sha256":digest,"trips":records,"battle_results":battle_results,"floors":floors,"actions":actions if trace else [],"final_state":s if trace else {}}
 
 static func run(data: Dictionary, cfg: Dictionary, policy: Dictionary, seeds: Array) -> Dictionary:
 	var records: Array=[]
@@ -87,6 +89,9 @@ static func run(data: Dictionary, cfg: Dictionary, policy: Dictionary, seeds: Ar
 	var exp_values: Array=[]
 	var gold_values: Array=[]
 	var loot_values: Array=[]
+	var battle_rounds: Array=[]
+	var battle_hp: Array=[]
+	var defense_casts:=0
 	var rounds: Array=[]
 	var remaining: Array=[]
 	var anomalies: Array=[]
@@ -96,6 +101,8 @@ static func run(data: Dictionary, cfg: Dictionary, policy: Dictionary, seeds: Ar
 	for seed_value in seeds:
 		var record:=play(data,cfg,policy,int(seed_value))
 		records.append(record)
+		for battle in record.battle_results:
+			battle_rounds.append(battle.rounds); battle_hp.append(battle.hp); defense_casts+=int(battle.casts)
 		totals.normal_trips+=record.normal_trips; totals.normal_deaths+=record.normal_deaths
 		totals.story_deaths_excluded+=record.story_deaths; totals.reached_10F+=int(record.reached_10F)
 		if record.cleared: totals.clears+=1; clear_trips.append(record.normal_trips)
@@ -126,6 +133,7 @@ static func run(data: Dictionary, cfg: Dictionary, policy: Dictionary, seeds: Ar
 	totals.trips_to_clear=Stats.distribution(clear_trips); totals.final_level=Stats.distribution(levels)
 	totals.final_exp=Stats.distribution(exp_values); totals.final_gold=Stats.distribution(gold_values); totals.final_items=Stats.distribution(loot_values)
 	totals.rounds_per_trip=Stats.distribution(rounds); totals.remaining_hp_per_trip=Stats.distribution(remaining)
+	totals.battle_rounds=Stats.distribution(battle_rounds); totals.battle_remaining_hp=Stats.distribution(battle_hp); totals.defense_casts=defense_casts
 	totals.invalid_results=anomalies.size()
 	return {"schema_version":1,"policy":policy,"seeds":seeds,"metrics":totals,"floors":floors,"anomalies":anomalies,"nonclear_seeds":nonclear,"records":records}
 
@@ -148,4 +156,5 @@ static func compare(before: Dictionary, after: Dictionary, strict: bool) -> Dict
 
 static func summary(r: Dictionary) -> String:
 	var m: Dictionary=r.metrics
-	return "通常探索 / %s / %d新規セーブ / 最大%d探索\n10F到達 %.2f%% / 突破 %.2f%%\n通常探索 %d回 / 通常死亡 %d回 (%.2f%%/探索) / 帰還%d / 打切り%d\n初回から通常探索に算入（旧履歴死亡%d件のみ除外）\n突破まで探索数 %s\n最終Lv %s\nEXP獲得 %.3f / Gold獲得 %.3f / 戦利品 %.3f (各通常探索平均)\n異常seed %s / 未突破seed %s\n" % [r.policy.policy_id,m.trials,r.policy.max_trips,m.reach_10F_rate*100,m.clear_rate*100,m.normal_trips,m.normal_deaths,m.death_rate_per_normal_trip*100,m.returns,m.draws,m.story_deaths_excluded,JSON.stringify(m.trips_to_clear),JSON.stringify(m.final_level),m.mean_exp_earned_per_trip,m.mean_gold_earned_per_trip,m.mean_loot_earned_per_trip,JSON.stringify(r.anomalies),JSON.stringify(r.nonclear_seeds)]
+	var extra: String="戦闘ラウンド %s / 戦闘後HP %s / 防御発動 %d\n"%[JSON.stringify(m.get("battle_rounds",{})),JSON.stringify(m.get("battle_remaining_hp",{})),int(m.get("defense_casts",0))]
+	return extra+"通常探索 / %s / %d新規セーブ / 最大%d探索\n10F到達 %.2f%% / 突破 %.2f%%\n通常探索 %d回 / 通常死亡 %d回 (%.2f%%/探索) / 帰還%d / 打切り%d\n初回から通常探索に算入（旧履歴死亡%d件のみ除外）\n突破まで探索数 %s\n最終Lv %s\nEXP獲得 %.3f / Gold獲得 %.3f / 戦利品 %.3f (各通常探索平均)\n異常seed %s / 未突破seed %s\n" % [r.policy.policy_id,m.trials,r.policy.max_trips,m.reach_10F_rate*100,m.clear_rate*100,m.normal_trips,m.normal_deaths,m.death_rate_per_normal_trip*100,m.returns,m.draws,m.story_deaths_excluded,JSON.stringify(m.trips_to_clear),JSON.stringify(m.final_level),m.mean_exp_earned_per_trip,m.mean_gold_earned_per_trip,m.mean_loot_earned_per_trip,JSON.stringify(r.anomalies),JSON.stringify(r.nonclear_seeds)]

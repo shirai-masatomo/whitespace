@@ -1,6 +1,8 @@
 extends "res://ui/main.gd"
 const Expedition = preload("res://core/expedition.gd")
 const SaveStore = preload("res://core/save_store.gd")
+const DefenseBadge = preload("res://ui/defense_badge.gd")
+var last_defense_flash := ""
 var cfg: Dictionary
 var campaign: Dictionary = {}
 var save_store: RefCounted
@@ -82,7 +84,7 @@ func show_title() -> void:
 	if loaded.get("status","") not in ["ok","missing"]: notice=loaded.get("error","")
 	var status:=text_label(notice,16); status.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART; root.add_child(status)
 	var spacer:=Control.new(); spacer.size_flags_vertical=Control.SIZE_EXPAND_FILL; root.add_child(spacer)
-	root.add_child(text_label("0.4.6 normal first expedition  ·  工程1試作  ·  静止素材9点採用済み / 数値は仮設定",16))
+	root.add_child(text_label("0.4.7 initial defense pilot  ·  工程1試作  ·  静止素材9点採用済み / 数値は仮設定",16))
 	new_button.grab_focus()
 
 func show_battle() -> void:
@@ -171,7 +173,7 @@ func show_campaign() -> void:
 	if campaign.phase=="town": show_town(root)
 	elif campaign.phase=="result": show_result(root)
 	else: show_wide_exploration()
-	var footer:=text_label(notice if notice!="" else "0.4.6  ·  自動保存済み  ·  主人公ひとり  ·  静止素材9点採用済み / 数値・ペナルティは試作設定",15)
+	var footer:=text_label(notice if notice!="" else "0.4.7  ·  自動保存済み  ·  主人公ひとり  ·  静止素材9点採用済み / 数値・ペナルティは試作設定",15)
 	footer.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART; root.add_child(footer)
 	if campaign.phase=="battle" and auto_play:
 		play_timer.wait_time=0.6/play_speed; play_timer.start()
@@ -197,6 +199,16 @@ func show_wide_exploration() -> void:
 	var hud_rows:=VBoxContainer.new(); hud_rows.add_theme_constant_override("separation",3); hud.add_child(hud_rows)
 	if campaign.phase=="battle":
 		var b:=Expedition.battle_state(campaign,data)
+		if b.hero.defense_until>=0:
+			var badge:=Control.new(); badge.set_script(DefenseBadge)
+			badge.size=Vector2(44,52)
+			var place_badge:=func(): badge.position=picture.display_foot(picture.hero_position_hint())-Vector2(125,200)
+			picture.resized.connect(place_badge)
+			place_badge.call_deferred()
+			var key: String="%s/%s/%s"%[campaign.battle.seed,b.round,campaign.revision]
+			badge.flash=key!=last_defense_flash and b.log.any(func(entry):return entry.type=="skill" and entry.round==b.round and entry.actor=="hero")
+			if badge.flash: last_defense_flash=key
+			picture.add_child(badge)
 		hud_rows.add_child(text_label("%s Lv.%d  HP %d / %d  ROUND %02d" % [b.enemy.name,b.enemy.level,b.enemy.hp,b.enemy.max_hp,b.round],18))
 		var bar:=health_bar(Color("b4523b")); bar.max_value=b.enemy.max_hp; bar.value=b.enemy.hp; hud_rows.add_child(bar)
 	else:
@@ -217,6 +229,20 @@ func show_wide_exploration() -> void:
 	status.add_child(text_label("SP  %d / %d" % [h.sp,h.max_sp],20))
 	var spbar:=health_bar(Color("327e9b")); spbar.max_value=maxi(1,h.max_sp); spbar.value=h.sp; status.add_child(spbar)
 	paragraph(status,"ATK %d   DEF %d   SPD %d\nGold %d  / 携行品 %d個" % [h.atk,h.def,h.spd,campaign.gold,campaign.inventory.size()],18)
+	var defense_text: String="防御 / 自動・SP%d"%int(data.rules.skills.S105.sp_cost)
+	if campaign.phase=="battle":
+		var defense_state:=Expedition.battle_state(campaign,data)
+		if defense_state.hero.defense_until>=0:
+			defense_text+="\n防御中 DEF %.1f / 次の自身行動終了まで"%Expedition.Combat.effective_def(defense_state.hero,data.rules)
+		elif not "S105" in defense_state.hero.skills:
+			defense_text+="\n旧戦闘の継続中 / 次の戦闘から使用"
+		elif defense_state.hero.cooldown_until>defense_state.hero.action_count:
+			defense_text+="\n再使用まで残り%d行動機会"%int(defense_state.hero.cooldown_until-defense_state.hero.action_count)
+		elif h.sp<int(data.rules.skills.S105.sp_cost): defense_text+="\nSP不足 / 町で回復"
+		else: defense_text+="\nHP60%以下で自動使用"
+	else: defense_text+="\nHP60%以下で自動使用"
+	var defense_label:=paragraph(status,defense_text,15)
+	defense_label.add_theme_color_override("font_color",Color("124459"))
 	var growth:=Expedition.level_info(campaign,cfg)
 	paragraph(status,"次のLvまで EXP %d / %d" % [growth.progress,growth.next],16)
 	section_heading(status,"地下 %d F / 最深 %d F" % [campaign.floor,campaign.highest_floor])
@@ -232,7 +258,7 @@ func show_wide_exploration() -> void:
 		status.add_child(compact_control(command(cfg.events[campaign.event].choice,"event",{"choice":"accept"})))
 		status.add_child(compact_control(command("見送る","event",{"choice":"skip"})))
 	var spacer:=Control.new(); spacer.size_flags_vertical=Control.SIZE_EXPAND_FILL; status.add_child(spacer)
-	paragraph(status,notice if notice!="" else "0.4.6 / 自動保存済み",14)
+	paragraph(status,notice if notice!="" else "0.4.7 / 自動保存済み",14)
 	var title:=compact_control(button("保存済み / タイトルへ",func(): loaded=save_store.load_game(); show_title())); status.add_child(title); play_buttons["title"]=title
 
 func show_result(root: VBoxContainer) -> void:
@@ -337,7 +363,7 @@ func smoke(quit_on_finish: bool = true) -> void:
 		await CampaignReplay.run(self); return
 	if resume_probe:
 		var original = JSON.parse_string(FileAccess.get_file_as_string(smoke_dir.path_join("ui-smoke.json")))
-		if not smoke_check(loaded.ok and campaign.schema_version==2 and campaign.revision==original.saved_revision and save_store.digest()==original.saved_sha256,"Separate EXE restart checkpoint"): return
+		if not smoke_check(loaded.ok and campaign.schema_version==3 and campaign.revision==original.saved_revision and save_store.digest()==original.saved_sha256,"Separate EXE restart checkpoint"): return
 		var f:=FileAccess.open(smoke_dir.path_join("resume-smoke.json"),FileAccess.WRITE)
 		f.store_string(JSON.stringify({"run_id":smoke_run_id,"restart_loaded":true,"revision":campaign.revision,"phase":campaign.phase,"save_sha256":save_store.digest()},"\t")); f.close()
 		get_tree().quit(); return

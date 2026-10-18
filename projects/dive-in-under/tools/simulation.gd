@@ -47,7 +47,7 @@ static func run(data: Dictionary, scenario: Dictionary, seeds: Array) -> Diction
 			"rounds": distribution(turns), "remaining_hp": distribution(hp), "winning_hp": distribution(winning_hp),
 			"invalid_results": invalid, "ally_death_rate": null},
 		"records": records,
-		"limitations": ["Normal attacks only; no skills/status/durability/allies.", "Single battle; no exploration progression or forced-death event.", "Hero stats are provisional effective stats, not a growth curve."]}
+		"limitations": ["Normal attacks and explicit S105 only; no other skills/status/durability/allies.", "Single battle; no exploration progression or forced-death event.", "Hero stats are provisional effective stats, not a growth curve."]}
 
 static func compare(before: Dictionary, after: Dictionary, strict: bool = false) -> Dictionary:
 	# JSON numbers reload as floats. Normalize both sides before deep comparison.

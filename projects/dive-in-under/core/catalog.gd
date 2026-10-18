@@ -85,6 +85,13 @@ static func validate(data: Dictionary) -> String:
 			return "Invalid floor weights/levels"
 	if expected_floor != 11:
 		return "Floor catalog must end at 10"
+	if not data.rules.get("skills",{}) is Dictionary: return "Invalid skills container"
+	for id in data.rules.get("skills",{}):
+		if id!="S105" or not data.rules.skills[id] is Dictionary: return "Unsupported skill definition"
+		var skill: Dictionary=data.rules.skills[id]
+		for key in ["sp_cost","hp_threshold","def_bonus","duration_own_actions","cooldown_own_actions"]:
+			if not numeric(skill.get(key)) or skill[key]<0: return "Invalid S105 parameter"
+		if skill.hp_threshold>1 or skill.duration_own_actions!=1 or skill.cooldown_own_actions!=3 or skill.sp_cost!=3: return "Invalid S105 timing/cost"
 	return validate_hero(data.hero_fixture)
 
 static func numeric(value: Variant) -> bool:
@@ -98,4 +105,9 @@ static func validate_hero(hero: Dictionary) -> String:
 			return "Invalid hero stat: " + key
 	if hero.max_hp < 1 or hero.hp > hero.max_hp or hero.sp > hero.max_sp or hero.level < 1:
 		return "Invalid hero HP/SP/level range"
+	if not hero.get("skills",[]) is Array: return "Invalid hero skills"
+	var seen: Array=[]
+	for id in hero.get("skills",[]):
+		if id!="S105" or id in seen: return "Unsupported/duplicate hero skill"
+		seen.append(id)
 	return ""

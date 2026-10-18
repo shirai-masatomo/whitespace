@@ -17,7 +17,7 @@ if ($Rendered) {
 $originalAppData = $env:APPDATA
 $records = @()
 try {
-    foreach ($case in @('1-before','2-inside','2-story','1-town','2-battle','2-death')) {
+    foreach ($case in @('1-before','2-inside','2-story','1-town','2-battle','2-death','3-battle')) {
         $dir = Join-Path $root ($case+'-'+[guid]::NewGuid().ToString('N'))
         New-Item -ItemType Directory $dir | Out-Null
         $fixture = Join-Path $project "artifacts/migration-fixtures/$case.json"

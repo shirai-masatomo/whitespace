@@ -83,6 +83,7 @@ static func validate_scenario(scenario: Dictionary, data: Dictionary) -> String:
 		return "Enemy level must be an integer in 1..100"
 	if not scenario.equipment is Array or not scenario.skills is Array or not scenario.hero is Dictionary:
 		return "Invalid scenario container type"
-	if not scenario.equipment.is_empty() or not scenario.skills.is_empty():
-		return "Equipment/skills are not implemented; pass effective hero stats and empty arrays"
+	if not scenario.equipment.is_empty():
+		return "Equipment input is unsupported; pass effective stats"
+	if scenario.skills!=scenario.hero.get("skills",[]): return "Scenario and hero skills differ"
 	return Catalog.validate_hero(scenario.hero)
