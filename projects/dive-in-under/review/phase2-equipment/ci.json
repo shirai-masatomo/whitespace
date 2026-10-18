@@ -1,0 +1,10 @@
+{
+  "run_id": 39122064852,
+  "head_sha": "89147d8daee0a4801942bc196797c7ad4b734325",
+  "conclusion": "success",
+  "windows_artifact": 12134193210,
+  "evidence_artifact": 12134816129,
+  "scope": "one structural save/equipment CI run; no large seed statistics",
+  "local_source_commit": "629e5d0ad7237fe140fa1bd1db568334d32d568c",
+  "normal_entry": "0.4.6 unchanged"
+}

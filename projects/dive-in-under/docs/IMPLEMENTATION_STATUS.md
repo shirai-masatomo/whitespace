@@ -1,5 +1,7 @@
 ## 工程2・耐久/修理の最初の単位（2026-10-18）
 
+**CI39122064852成功**（head89147d8）。[Windows ZIP](https://github.com/shirai-masatomo/whitespace/actions/runs/39122064852/artifacts/12134193210) / [CIログ・JSON](https://github.com/shirai-masatomo/whitespace/actions/runs/39122064852/artifacts/12134816129)。保存形式と進行処理を変更した節目のCIを1回実施し、機能・少数seed比較・10FのEXE再開・旧保存8ケース・修理/再起動・故障拒否を通過。ローカルで同じ全試験は重複実行していない。後続は文書更新のみ。
+
 工程1は既存証拠で受入済み。工程2専用ブランチ`codex/dive-in-under/phase-02`、実行ソース`629e5d0ad7237fe140fa1bd1db568334d32d568c`。個体耐久・装備実効値・破損・町の修理・保存形式4/旧1〜3の原本退避を実装。対象35+保存180チェック、通常10F固定1例、隔離EXEの実修理と別EXE再起動が成功。画面レビューで破損時の行効果を実効値へ修正。仮値は独立JSON。通常入口0.4.6はSHA不変。
 
 [画像/ZIP/証拠](../review/phase2-equipment/README.md) / [未決事項の一括一覧](PHASE_02_OPEN_DECISIONS.md)。初期装備5点・収納15+3・死亡全損/再調達・支給所は後続。工程2全体は進行中。試遊待ちは停止理由にしない。

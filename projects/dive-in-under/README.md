@@ -1,3 +1,7 @@
+## 工程2・最初の単位を実装
+
+装備耐久・破損・町の修理と旧保存保全を[PR #6](https://github.com/shirai-masatomo/whitespace/pull/6)へ反映。CI39122064852成功。[画像・別セーブ試遊](review/phase2-equipment/index.html) / [未決事項の一括一覧](docs/PHASE_02_OPEN_DECISIONS.md)。通常入口0.4.6を維持し、工程2全体は進行中。モデル設定は変更しない。
+
 # 工程1受入・工程2へ移行
 
 2026-10-18、既存証拠で[工程1の受入条件](docs/PHASE_01_ACCEPTANCE.md)を達成と判定。試遊待ちで停止せず工程2へ進む。通常入口0.4.6は維持。以下の工程1未完了記述は履歴。
