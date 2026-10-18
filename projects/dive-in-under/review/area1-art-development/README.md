@@ -22,3 +22,5 @@ B：今回の固定表示で合格。左奥の敵と右手前の主人公が同�
 ## 最終試遊と残件
 
 通常の「01 ゲームを起動」は引き続き0.4.6。新画像込みは任意の0.4.10開発版を別セーブで起動し、初回帰還→町→再探索、6〜9Fの新敵、通常死亡から再挑戦、保存後の再起動を人間が確認できる。通常画面の人間による実操作・別解像度・長時間試遊は未実施。工程1全体の最終受入は未確定。装備/収納/死亡全損統合は工程2、AI改善は工程4、仲間は工程5、統計バランスは工程7。
+
+CIは`812260e`の[39110669724](https://github.com/shirai-masatomo/whitespace/actions/runs/39110669724)で成功。画像変更用の取込み・書出し・限定EXE表示/帰還スモークを通過し、未変更機能の全面再試験はスキップ。[Windows ZIP](https://github.com/shirai-masatomo/whitespace/actions/runs/39110669724/artifacts/12130367311) / [CIログ・JSON](https://github.com/shirai-masatomo/whitespace/actions/runs/39110669724/artifacts/12130372329)。期限2027-01-16。[CI識別](ci.json)。ローカル隔離画面のソースは49824a2、CI実checkoutは3fb9b9dで、ビルドSHAを混同しない。後続更新はREADMEと証拠の文書のみ。

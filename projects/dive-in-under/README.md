@@ -1,5 +1,7 @@
 # Dive In Under
 
+> **最新開発版0.4.10**：採用許可済みE06〜E08静止画像を組込み。[比較・別セーブ試遊](review/area1-art-development/index.html)／[実EXE確認と残件](review/area1-art-development/README.md)。通常の起動入口と既存配布は0.4.6を維持。以下の0.4.9以前の画像待ちは履歴。工程1の最終受入・通常画面の人間による実操作は未完了。
+
 > **開発版0.4.9**：毒・暗闇・麻痺と短い表示を先行実装。[状態の契約と検証](docs/STATUS_PILOT_IMPLEMENTATION.md)。確認入口は0.4.6のまま。新敵静止画・人間の実操作確認が残り、工程1全体は未完了。
 
 > **開発ブランチの更新（2026-10-18）**：S105「防御」は初期所持・SP不足時は通常攻撃、手番消費の仮仕様で実装済み。確認入口と配布は0.4.6を維持。新敵E06〜E08の通常遭遇・報酬・旧保存互換は開発版0.4.8で実装・検証済み。静止画3枚は未納品のためID仮表示。[開発版の証拠](review/area1-development/README.md)・[制作依頼](docs/AREA1_ENEMY_IMAGE_REQUEST.md)。[検証方針](docs/dot/TEST_POLICY.md)に従い、工程1の大量統計・難易度分析は打切り。[進捗](docs/dot/PROGRESS.md)。
