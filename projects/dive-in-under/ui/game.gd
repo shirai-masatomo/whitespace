@@ -12,7 +12,7 @@ var play_speed := 1
 var ui_mode := "title"
 var notice := ""
 var play_buttons: Dictionary = {}
-var town_page := "warehouse"
+var town_page := "hub"
 var warehouse_state: Dictionary = {}
 var warehouse_view: Control
 var status_view: Control
@@ -31,6 +31,7 @@ var campaign_seed := 123
 const CampaignReplay = preload("res://ui/campaign_replay.gd")
 
 func initialize_game() -> void:
+	get_window().title="Dive In Under 0.5.3"
 	cfg=Expedition.load_config()
 	if cfg.is_empty(): get_tree().quit(1); return
 	var save_path := "user://campaign-v1.json"
@@ -81,14 +82,15 @@ func show_title() -> void:
 	section_heading(right,"探索・帰還・再挑戦")
 	var explanation:=text_label("最初から1Fを探索し、解決後は町へ帰還できます。\nHPが0になると通常の死亡です。町で回復し何度でも挑めます。\n\n変更は操作ごとに自動保存されます。",18)
 	explanation.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART; right.add_child(explanation)
-	right.add_child(HSeparator.new())
-	launch_button=button("開発用：単発戦闘の確認",show_battle)
-	right.add_child(launch_button)
-	right.add_child(text_label("本編の保存・成長へは影響しません。",16))
+	if smoke_dir!="" or "--developer-tools" in OS.get_cmdline_user_args():
+		right.add_child(HSeparator.new())
+		launch_button=button("開発用：単発戦闘の確認",show_battle)
+		right.add_child(launch_button)
+		right.add_child(text_label("本編の保存・成長へは影響しません。",16))
 	if loaded.get("status","") not in ["ok","missing"]: notice=loaded.get("error","")
 	var status:=text_label(notice,16); status.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART; root.add_child(status)
 	var spacer:=Control.new(); spacer.size_flags_vertical=Control.SIZE_EXPAND_FILL; root.add_child(spacer)
-	root.add_child(text_label("0.5.2 status preview  ·  工程1試作  ·  静止素材12点採用済み / 数値は仮設定",16))
+	root.add_child(text_label("0.5.3",16))
 	new_button.grab_focus()
 
 func show_battle() -> void:
@@ -138,7 +140,7 @@ func perform(action: String, args: Dictionary, revision: int) -> void:
 		auto_play=false; notice="保存できないため操作を取り消しました："+error
 		show_campaign(); return
 	campaign=candidate; loaded={"ok":true,"status":"ok"}; notice=""
-	if action=="town": town_page="warehouse"
+	if action=="town": town_page="hub"
 	if action in ["deposit","withdraw","to_cloth"]:
 		warehouse_state.uid=args.get("uid","")
 		warehouse_state.source={"deposit":"warehouse","withdraw":"inventory","to_cloth":"cloth"}[action]
@@ -196,7 +198,7 @@ func show_campaign() -> void:
 		else: show_town_hub(root)
 	elif campaign.phase=="result": show_result(root)
 	else: show_wide_exploration()
-	var footer:=text_label(notice if notice!="" else "0.5.2  ·  自動保存済み  ·  主人公ひとり  ·  静止素材12点採用済み / 数値・ペナルティは試作設定",15)
+	var footer:=text_label(notice if notice!="" else "0.5.3  ·  自動保存済み",15)
 	footer.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART; root.add_child(footer)
 	if campaign.phase=="battle" and auto_play:
 		play_timer.wait_time=0.6/play_speed; play_timer.start()
