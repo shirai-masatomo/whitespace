@@ -83,7 +83,7 @@ func show_title() -> void:
 	if loaded.get("status","") not in ["ok","missing"]: notice=loaded.get("error","")
 	var status:=text_label(notice,16); status.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART; root.add_child(status)
 	var spacer:=Control.new(); spacer.size_flags_vertical=Control.SIZE_EXPAND_FILL; root.add_child(spacer)
-	root.add_child(text_label("0.4.10 enemy art  ·  工程1試作  ·  静止素材12点採用済み / 数値は仮設定",16))
+	root.add_child(text_label("0.5.0 equipment condition  ·  工程1試作  ·  静止素材12点採用済み / 数値は仮設定",16))
 	new_button.grab_focus()
 
 func show_battle() -> void:
@@ -172,7 +172,7 @@ func show_campaign() -> void:
 	if campaign.phase=="town": show_town(root)
 	elif campaign.phase=="result": show_result(root)
 	else: show_wide_exploration()
-	var footer:=text_label(notice if notice!="" else "0.4.10  ·  自動保存済み  ·  主人公ひとり  ·  静止素材12点採用済み / 数値・ペナルティは試作設定",15)
+	var footer:=text_label(notice if notice!="" else "0.5.0  ·  自動保存済み  ·  主人公ひとり  ·  静止素材12点採用済み / 数値・ペナルティは試作設定",15)
 	footer.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART; root.add_child(footer)
 	if campaign.phase=="battle" and auto_play:
 		play_timer.wait_time=0.6/play_speed; play_timer.start()
@@ -258,7 +258,7 @@ func show_wide_exploration() -> void:
 		status.add_child(compact_control(command(cfg.events[campaign.event].choice,"event",{"choice":"accept"})))
 		status.add_child(compact_control(command("見送る","event",{"choice":"skip"})))
 	var spacer:=Control.new(); spacer.size_flags_vertical=Control.SIZE_EXPAND_FILL; status.add_child(spacer)
-	paragraph(status,notice if notice!="" else "0.4.10 / 自動保存済み",14)
+	paragraph(status,notice if notice!="" else "0.5.0 / 自動保存済み",14)
 	var title:=compact_control(button("保存済み / タイトルへ",func(): loaded=save_store.load_game(); show_title())); status.add_child(title); play_buttons["title"]=title
 
 func show_result(root: VBoxContainer) -> void:
@@ -294,6 +294,7 @@ func item_list(parent: VBoxContainer, source: String) -> void:
 	for uid in campaign[source]:
 		var item: Dictionary=cfg.items[campaign.items[uid]]
 		paragraph(list,item.name,17)
+		if item.slot!="": paragraph(list,condition_text(uid),15)
 		var effects := item_effects(item)
 		if effects != "": paragraph(list,effects,15)
 		var row:=HBoxContainer.new(); list.add_child(row)
@@ -305,8 +306,21 @@ func item_list(parent: VBoxContainer, source: String) -> void:
 		else:
 			var withdraw:=compact_button("取り出す",func(): perform("withdraw",{"uid":uid},revision))
 			withdraw.set_meta("campaign_action","withdraw"); withdraw.set_meta("campaign_args",{"uid":uid}); row.add_child(withdraw)
+		if item.slot!="": row.add_child(repair_button(uid))
 		list.add_child(HSeparator.new())
 	if campaign[source].is_empty(): paragraph(list,"まだ何もありません。",17)
+
+func condition_text(uid: String) -> String:
+	var value: Dictionary=campaign.item_condition[uid]
+	return "%s耐久 %d/%d"%["破損 / " if value.current==0 else "",value.current,value.maximum]
+
+func repair_button(uid: String) -> Button:
+	var price:=Expedition.Condition.cost(campaign,uid,cfg)
+	var revision:=int(campaign.revision)
+	var b:=compact_button("修理 %dG"%maxi(0,price),func(): perform("repair",{"uid":uid},revision))
+	b.disabled=price<=0 or campaign.gold<price
+	b.set_meta("campaign_action","repair"); b.set_meta("campaign_args",{"uid":uid})
+	return b
 
 func item_effects(item: Dictionary) -> String:
 	var effects: Array[String] = []
@@ -333,6 +347,8 @@ func show_town(root: VBoxContainer) -> void:
 	var equipment_heading:=section_heading(equipment,"装備 / 11部位")
 	portrait(equipment_heading,34)
 	equipment.add_theme_constant_override("separation",1)
+	var gear_scroll:=ScrollContainer.new(); gear_scroll.size_flags_vertical=Control.SIZE_EXPAND_FILL; equipment.add_child(gear_scroll)
+	var gear_rows:=VBoxContainer.new(); gear_rows.size_flags_horizontal=Control.SIZE_EXPAND_FILL; gear_scroll.add_child(gear_rows)
 	var slot_index := 0
 	for slot in Expedition.SLOTS:
 		var uid: String=campaign.equipment[slot]
@@ -343,8 +359,9 @@ func show_town(root: VBoxContainer) -> void:
 		strip_style.content_margin_left=6; strip_style.content_margin_right=4
 		strip_style.content_margin_top=0; strip_style.content_margin_bottom=0
 		strip.add_theme_stylebox_override("panel",strip_style)
-		equipment.add_child(strip)
-		var line:=HBoxContainer.new(); line.add_theme_constant_override("separation",5); strip.add_child(line)
+		gear_rows.add_child(strip)
+		var strip_rows:=VBoxContainer.new(); strip_rows.add_theme_constant_override("separation",1); strip.add_child(strip_rows)
+		var line:=HBoxContainer.new(); line.add_theme_constant_override("separation",5); strip_rows.add_child(line)
 		var slot_label:=text_label(cfg.slots[slot],16); slot_label.custom_minimum_size.x=54; line.add_child(slot_label)
 		var label:=text_label("—" if uid=="" else item.name,16)
 		label.size_flags_horizontal=Control.SIZE_EXPAND_FILL; line.add_child(label)
@@ -352,11 +369,17 @@ func show_town(root: VBoxContainer) -> void:
 		effect.add_theme_color_override("font_color",Color("41452a")); line.add_child(effect)
 		var revision:=int(campaign.revision)
 		var remove:=compact_button("外す",func(): perform("unequip",{"slot":slot},revision)); remove.disabled=uid==""; line.add_child(remove)
+		if uid!="":
+			var condition_row:=HBoxContainer.new(); strip_rows.add_child(condition_row)
+			var value:=text_label(condition_text(uid),14); value.size_flags_horizontal=Control.SIZE_EXPAND_FILL; condition_row.add_child(value)
+			condition_row.add_child(repair_button(uid))
 		slot_index += 1
 	var storage:=column(row,300); section_heading(storage,"倉庫"); item_list(storage,"warehouse")
 	var depart:=command("HP/SP回復済み  →  もう一度地下へ","depart"); root.add_child(depart)
 
 func smoke(quit_on_finish: bool = true) -> void:
+	if "--equipment-review" in OS.get_cmdline_user_args():
+		await preload("res://ui/equipment_review.gd").run(self); return
 	if "--enemy-art-review" in OS.get_cmdline_user_args():
 		await preload("res://ui/enemy_art_review.gd").run(self); return
 	if migration_probe:
@@ -365,7 +388,7 @@ func smoke(quit_on_finish: bool = true) -> void:
 		await CampaignReplay.run(self); return
 	if resume_probe:
 		var original = JSON.parse_string(FileAccess.get_file_as_string(smoke_dir.path_join("ui-smoke.json")))
-		if not smoke_check(loaded.ok and campaign.schema_version==3 and campaign.revision==original.saved_revision and save_store.digest()==original.saved_sha256,"Separate EXE restart checkpoint"): return
+		if not smoke_check(loaded.ok and campaign.schema_version==4 and campaign.revision==original.saved_revision and save_store.digest()==original.saved_sha256,"Separate EXE restart checkpoint"): return
 		var f:=FileAccess.open(smoke_dir.path_join("resume-smoke.json"),FileAccess.WRITE)
 		f.store_string(JSON.stringify({"run_id":smoke_run_id,"restart_loaded":true,"revision":campaign.revision,"phase":campaign.phase,"save_sha256":save_store.digest()},"\t")); f.close()
 		get_tree().quit(); return

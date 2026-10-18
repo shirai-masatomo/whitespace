@@ -1,7 +1,7 @@
-﻿param([switch]$Isolated, [string]$RunDirectory = "", [string]$BuildDirectory = "")
+﻿param([switch]$Isolated, [string]$RunDirectory = "", [string]$BuildDirectory = "", [ValidateSet("enemy-art","equipment")][string]$Review = "enemy-art", [switch]$Resume)
 $ErrorActionPreference = 'Stop'
 $project = Split-Path $PSScriptRoot -Parent
-if (!$RunDirectory) { $RunDirectory = Join-Path $project $(if ($Isolated) {'artifacts/enemy-art-isolated'} else {'artifacts/enemy-art-headless'}) }
+if (!$RunDirectory) { $RunDirectory = Join-Path $project $(if ($Isolated) {"artifacts/$Review-isolated"} else {"artifacts/$Review-headless"}) }
 New-Item -ItemType Directory -Force -Path $RunDirectory | Out-Null
 if (!$BuildDirectory) {
     . (Join-Path $PSScriptRoot 'build_path.ps1')
@@ -14,7 +14,8 @@ $environment = [Collections.Generic.SortedDictionary[string,string]]::new([Strin
 [Environment]::GetEnvironmentVariables().GetEnumerator() | ForEach-Object { $environment[$_.Key] = [string]$_.Value }
 $environment['APPDATA'] = Join-Path $RunDirectory 'user-data'
 $environment['LOCALAPPDATA'] = Join-Path $RunDirectory 'local-data'
-$arguments = @('--audio-driver','Dummy','--rendering-method','gl_compatibility','--max-fps','30','--resolution','1280x720','--log-file',$log,'--',"--smoke-dir=$RunDirectory","--smoke-run-id=$runId",'--enemy-art-review')
+$arguments = @('--audio-driver','Dummy','--rendering-method','gl_compatibility','--max-fps','30','--resolution','1280x720','--log-file',$log,'--',"--smoke-dir=$RunDirectory","--smoke-run-id=$runId",("--" + $Review + "-review"))
+if ($Resume) { $arguments += "--equipment-review-resume" }
 if ($Isolated) {
     Add-Type -Path (Join-Path $PSScriptRoot 'isolated_desktop.cs')
     $probe = [DiveIsolatedDesktop]::Run('','','',$environment,5)
@@ -34,6 +35,8 @@ if ($Isolated) {
     } finally { $env:APPDATA=$oldAppData; $env:LOCALAPPDATA=$oldLocalData }
 }
 if (Select-String -LiteralPath $log -Pattern 'SCRIPT ERROR:|^ERROR:' -Quiet) { throw 'Engine errors in image review' }
-$report=Get-Content -LiteralPath (Join-Path $RunDirectory 'enemy-art-review.json') -Raw | ConvertFrom-Json
-if ($report.run_id -ne $runId -or !$report.complete -or !$report.first_return_town -or $report.rendered -ne [bool]$Isolated -or $report.cases.Count -ne 5) { throw 'Missing/current image review result' }
-Write-Output "Enemy art review passed: 5 fixed display cases + first return/town; rendered=$Isolated; run_id=$runId"
+$reportName = if ($Resume) {"equipment-review-resume.json"} else {"$Review-review.json"}
+$report=Get-Content -LiteralPath (Join-Path $RunDirectory $reportName) -Raw | ConvertFrom-Json
+if ($report.run_id -ne $runId -or !$report.complete -or $report.rendered -ne [bool]$Isolated) { throw 'Missing/current image review result' }
+if ($Review -eq "enemy-art" -and (!$report.first_return_town -or $report.cases.Count -ne 5)) { throw "Incomplete enemy art cases" }
+Write-Output "$Review review passed; rendered=$Isolated; resume=$Resume; run_id=$runId"

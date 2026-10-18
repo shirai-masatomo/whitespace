@@ -91,6 +91,11 @@ jobs:
       - name: Migrate legacy saves in exported EXE and restart
         if: steps.scope.outputs.art_only != 'true'
         run: ./tools/migration_smoke.ps1
+      - name: Repair exported equipment and reopen save
+        if: steps.scope.outputs.art_only != 'true'
+        run: |
+          ./tools/enemy_art_review.ps1 -Review equipment
+          ./tools/enemy_art_review.ps1 -Review equipment -Resume
       - name: Reject injected replay and UI smoke faults
         if: steps.scope.outputs.art_only != 'true'
         run: ./tests/test_harness.ps1
@@ -113,6 +118,8 @@ jobs:
             projects/dive-in-under/artifacts/*.log
             projects/dive-in-under/artifacts/*.json
             projects/dive-in-under/artifacts/*.txt
+            projects/dive-in-under/artifacts/equipment-headless/*.json
+            projects/dive-in-under/artifacts/equipment-headless/*.log
             projects/dive-in-under/artifacts/enemy-art-headless/*.json
             projects/dive-in-under/artifacts/enemy-art-headless/*.log
             projects/dive-in-under/artifacts/exe-headless/run.log

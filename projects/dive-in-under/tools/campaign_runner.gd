@@ -21,6 +21,7 @@ func _initialize() -> void:
 	if not o.strict in ["true","false"] or not o.trace in ["true","false"] or (o.strict=="true" and o.baseline==""): stop("Invalid strict/trace flag"); return
 	var data:=Catalog.load_data()
 	var cfg=JSON.parse_string(FileAccess.get_file_as_string(o.config))
+	if cfg is Dictionary: cfg.condition_rules=JSON.parse_string(FileAccess.get_file_as_string("res://data/v1/equipment-condition.json"))
 	var policy=JSON.parse_string(FileAccess.get_file_as_string(o.policy))
 	if not cfg is Dictionary or E.validate_config(cfg,data)!="": stop("Invalid config"); return
 	if not policy is Dictionary or Sim.Policy.validate(policy)!="": stop("Invalid policy"); return
@@ -28,6 +29,8 @@ func _initialize() -> void:
 	var report:=Sim.run(data,cfg,policy,range(int(o.seed),int(o.seed)+int(o.trials)))
 	report.metadata={"engine":Engine.get_version_info().string,"runner_contract":"campaign-v1","game_commit":o.commit,"config_version":cfg.config_version,"data_version":data.data_version,"config_sha256":FileAccess.get_sha256(o.config),"data_sha256":FileAccess.get_sha256(Catalog.PATH),"policy_sha256":FileAccess.get_sha256(o.policy),"combat_sha256":FileAccess.get_sha256("res://core/combat.gd"),"expedition_sha256":FileAccess.get_sha256("res://core/expedition.gd"),"policy_code_sha256":FileAccess.get_sha256("res://tools/campaign_policy.gd")}
 	report.metadata.enemy_pack_sha256=FileAccess.get_sha256(data.enemy_pack) if data.has("enemy_pack") else ""
+	report.metadata.equipment_condition_sha256=FileAccess.get_sha256("res://core/equipment_condition.gd")
+	report.metadata.condition_rules_sha256=FileAccess.get_sha256("res://data/v1/equipment-condition.json")
 	var summary:=Sim.summary(report)
 	if o.baseline!="":
 		var baseline=JSON.parse_string(FileAccess.get_file_as_string(o.baseline))
