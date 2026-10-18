@@ -27,6 +27,7 @@
 ## ダンジョン
 
 - 基本のプレイヤー操作は**「潜る」「地上に戻る」**。ただしイベント発生中の**選択肢は許可**。
+- **命名構造（2026-10-19採用）**：ダンジョン全体は**一つの名称**、1〜10F・11〜20F…の各階層帯は**第N層域＋区域固有名（○○層など）**、その中の通常経路・分岐経路は**本洞／支洞＋ルート固有名**で識別する。固有名（例：翠簾層など）は候補のままで、命名構造のみ確定。[命名規則](docs/DUNGEON_NAMING.md)を参照。
 - **階層構造は事前定義された一本道＋条件付き分岐**。特定の階で指定アイテムを所持すると所定の枝へ進める。各階層ノードの種類（BOSS／敵／宝／イベント）も事前に固定され、次階層の種別抽選は行わない。具体的な分岐階・条件・ノードは未決定。[分岐・マップ仕様](docs/DUNGEON_MAP.md)が正本。
 - [階層台帳](docs/FLOORS.md)は敵種・出現Lv、宝アイテム、イベント等の候補を管理する。**既存の戦闘／宝／イベント比率は旧・遭遇種別抽選案であり、新しいノード種別固定方式を優先する**。敵や宝の内容に残す抽選の詳細は別途決定。
 - **10F / 20F / 30F ...** にボス。
@@ -109,7 +110,7 @@
 ## ドキュメント／制作
 
 - **本ファイルが簡易的な全体仕様の正本**。敵の基礎HP・ATK・DEF・SP・SPD・EXP・Gold・ドロップ率と固有AIは[敵台帳](docs/ENEMIES.md)、全体Lv補正は[戦闘仕様](docs/COMBAT.md)を正本とする。
-- 詳細： [起動・冒険準備](docs/STARTUP_PREPARATION_UI.md) / [階層](docs/FLOORS.md) / [階層分岐・ミニマップ](docs/DUNGEON_MAP.md) / [敵](docs/ENEMIES.md) / [アイテム](docs/ITEMS.md) / [仲間](docs/ALLIES.md) / [イベント](docs/EVENTS.md) / [戦闘](docs/COMBAT.md) / [スキル一覧](docs/SKILLS.md) / [黄金像](docs/SHRINE.md)。
+- 詳細： [起動・冒険準備](docs/STARTUP_PREPARATION_UI.md) / [階層](docs/FLOORS.md) / [階層分岐・ミニマップ](docs/DUNGEON_MAP.md) / [層域・ルート命名規則](docs/DUNGEON_NAMING.md) / [敵](docs/ENEMIES.md) / [アイテム](docs/ITEMS.md) / [仲間](docs/ALLIES.md) / [イベント](docs/EVENTS.md) / [戦闘](docs/COMBAT.md) / [スキル一覧](docs/SKILLS.md) / [黄金像](docs/SHRINE.md)。
 - **[現行2Dドット参考3枚と画面遷移](docs/UI_MOCKS.md)** ／ **[仕様と実装範囲の対応表](docs/IMPLEMENTATION_STATUS.md)** ／ **[戦闘シミュレーター（導入決定・未実装）](docs/BATTLE_SIMULATION.md)**。
 - **工程1の試遊フロー（2026-10-19上書き）**：主人公1人で**起動→はじめる→冒険準備ハブ→専用のステータス／装備／倉庫→出発→1F探索**。初回から帰還可。帰還／通常死亡→結果→冒険準備ハブ→再探索できる。**再起動時は必ず最初からで、保存・ロードは不要**。**10Fの通常ボス戦で突破可能**。現行2Dドット画風・斜め視点・静止キャラと先行4状態の小エフェクト・共通戦闘コアを実装する。**強制死亡・帰還禁止は廃止**。[工程1](docs/dot/PHASE_01.md)／[変更指示](docs/dot/CHANGE_2026-10-17_FIRST_EXPEDITION.md)。仲間は工程5。
 - **現在のWindows実装はDotが工程1を進行中**。作業ブランチの[レビュー入口](https://github.com/shirai-masatomo/whitespace/blob/dot/dive-in-under/phase-01/projects/dive-in-under/review/current/README.md)を参照。仕様書変更と実際のWindows EXE反映は別であり、Dot側でコード・CI・セーブ互換を検証する。
