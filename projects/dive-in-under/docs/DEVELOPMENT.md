@@ -1,5 +1,9 @@
 # 開発環境・戦闘基盤・基幹ループ（2026-10-17）
 
+**2026-10-18更新**：[TEST_POLICY](dot/TEST_POLICY.md)を適用。現行の確認入口は0.4.6、開発ブランチはS105「防御」追加済みで未配布。既存1170件・隔離EXEの証拠を再利用し、死亡率の追加分析はしない。初期SP0と行動を消費する防御を維持する。
+
+通常CIは単発8seed／通常探索3seedの再現確認と必要な機能・保存・EXEスモーク。文書だけの変更ではCIを起動しない。大量統計は明示した `-Trials 1000` 等で実行可能だが、工程1の小修正では実行しない。新敵3種の準備データは `data/v1/area1-enemies-staged.json`、最小確認は `--headless --script tests/test_enemy_pack.gd`。通常遭遇・画像・敵スキル・保存テーブルは未切替。
+
 今回の範囲は工程1の保存付き基幹ループまで。**工程1全体は未完了**。進捗・証拠・次の依頼は [PROGRESS.md](dot/PROGRESS.md)、機能別状態は [IMPLEMENTATION_STATUS.md](IMPLEMENTATION_STATUS.md) を参照。
 
 ## 環境一覧
@@ -40,7 +44,7 @@
 ./dev.ps1 -Task play
 ```
 
-`dev.ps1` は `test / simulate / build / verify / play` を受け付ける。`verify` は戦闘/ループ/保存テスト→ヘッドレスUI→1,000回の単発戦闘→Windowsビルド。成果物は `build/DiveInUnder-foundation-windows-x64.zip`、ログと統計は `artifacts/`。Godotのユーザーデータはこのプロジェクトの `artifacts/user-data` に隔離する。テンプレートも `.tools/templates` のみ。システムのGodot設定を書き換えない。
+`dev.ps1` は `test / simulate / build / verify / play` を受け付ける。`verify` は戦闘/ループ/保存テスト→ヘッドレスUI→既定8回の単発戦闘→Windowsビルド。成果物は `build/DiveInUnder-foundation-windows-x64.zip`、ログと統計は `artifacts/`。Godotのユーザーデータはこのプロジェクトの `artifacts/user-data` に隔離する。テンプレートも `.tools/templates` のみ。システムのGodot設定を書き換えない。
 
 Gitコマンドが制限環境で使えない場合は、確認済みのコミットを `-GameCommit` に明示できる。作業中ビルドは `+dirty` などで区別し、正式コミットと偽らない。実機ではsandbox内でGodotのsafe-saveが失敗し、許可済みビルドを権限付きで再実行すると成功した。セキュリティ設定の変更はしていない。
 
@@ -50,7 +54,7 @@ ZIPを展開して `DiveInUnder.exe` を起動し、「戦闘を確認する」�
 
 - `data/v1/balance.json`：COMBATの仮式係数、ENEMIESの6種の基礎値、FLOORSの1〜10Fの遭遇比率・敵候補・Lv範囲。本編が階層テーブルを抽選に使用する。宝箱・イベント・ドロップは `expedition.json` に正本から追加。
 - `core/combat.gd`：ファイル・UI・時計・グローバル乱数に依存しない計算。コピーした状態を返す。`enemy()`が基礎値＋Lvから1度だけ計算し、階層倍率を受け取らない。`start()`→`advance()`をUIと`simulate()`が共用する。
-- 同速は戦闘専用 `RandomNumberGenerator`、各ラウンドで確定。命中→会心→振れ幅の順。HP0は即停止、50ラウンドは死亡と別のdraw。スキルは未実装のため通常攻撃倍率1.0。
+- 同速は戦闘専用 `RandomNumberGenerator`、各ラウンドで確定。命中→会心→振れ幅の順。HP0は即停止、50ラウンドは死亡と別のdraw。通常攻撃倍率1.0。開発版ではS105「防御」を追加し、行動を消費する。
 - `core/catalog.gd`：データ読込と形・値・参照ID検証。ゲームとランナーが共用。
 - `tools/runner.gd` / `tools/simulation.gd`：実行・集計・比較のみ。ダメージ式の複製なし。
 - `ui/game.gd`：本編のタイトル・探索/戦闘・結果・町/倉庫/装備。`ui/main.gd`：共通部品と独立単発ツール。モックをクリック画像にせず、GodotのButton/Label等を使用。PX-01〜03を確認し、青緑の洞窟・滝・暖色ランタン・羊皮紙/真鍮パネル・静止ドット候補・HP/SPバーへ反映。正式な量産素材の採用は未決定。
@@ -63,7 +67,7 @@ ZIPを展開して `DiveInUnder.exe` を起動し、「戦闘を確認する」�
   -Output "$PWD/artifacts/baseline.json"
 ```
 
-シナリオには敵ID/Lvと主人公の**実効能力・現在HP/SP**を与える。`hero.level`は記録値で、主人公の成長係数はまだ適用しない。装備・スキル配列は空のみ受理し、未実装機能を黙って無視しない。試行数は1〜100,000、標準1,000。シード集合は開始値からの連番を全件保存する。
+シナリオには敵ID/Lvと主人公の**実効能力・現在HP/SP**を与える。`hero.level`は記録値で、主人公の成長係数はまだ適用しない。装備配列は空のみ、スキルは空またはS105を受理し、未実装機能を黙って無視しない。試行数は1〜100,000、標準8。シード集合は開始値からの連番を全件保存する。
 
 JSONは各seedの勝敗・ラウンド・双方残HP・報酬・ログSHA256、勝率・死亡率・打切り率、平均/中央値/p10/p90、勝利時残HP分布、ゲームコミット・エンジン・データ版・設定版・SHA256を含む。人間向けの `.json.txt` も出力。ターン数は**ラウンド数**。仲間死亡率は対象外を示すnull、勝利ゼロ件時の勝利HPもnull。
 
@@ -102,7 +106,7 @@ Windows隔離再起動でGodotの `shader_gles3.cpp:802`（キャッシュのハ
 
 ## 0.3通常ソロ10F・安全な配布更新
 
-Godot/GDScript/Windows/GPUの固定環境は上記から変更なし。現在の本体と設定はBUILD.jsonを参照。通常1000seed比較と実EXEの再現は以下。
+Godot/GDScript/Windows/GPUの固定環境は上記から変更なし。現在の本体と設定はBUILD.jsonを参照。次の手順は現行の少数ケース比較と実EXEの再現に更新済み。
 
 ```powershell
 ./tools/verify_campaign.ps1 -GameCommit (git rev-parse HEAD)
@@ -112,7 +116,7 @@ Godot/GDScript/Windows/GPUの固定環境は上記から変更なし。現在の
 ./tools/publish_local.ps1
 ```
 
-`verify_campaign` は設定.1/.2の1000seed前後比較、.2の厳密再実行、seed10000全操作列を作る。通常探索の分子・分母は初回を除外。元の単発戦闘ランナーも維持する。GUI再現は同じExpeditionの操作列に従い、実Controlのviewportクリックと本番Timerコールバックを使用。全操作状態を照合し、3つのEXEで途中/突破後保存を検証。OS物理入力は別の未検証範囲。
+`verify_campaign` は防御なし／現在設定を既定3seedで比較し、同条件の厳密再実行とseed10000全操作列を作る。通常探索には初回を含める。元の単発戦闘ランナーも維持する。GUI再現は同じExpeditionの操作列に従い、実Controlのviewportクリックと本番Timerコールバックを使用。全操作状態を照合し、3つのEXEで途中/突破後保存を検証。OS物理入力は別の未検証範囲。
 
 `dev.ps1 build` は既存EXEを触らず `build/releases/<commit>-<unique>/` を新規作成。検証はcandidate.txtの参照先へ。publish_localは同じEXE/PCKの隔離監査・保存再開・厳密統計が通った後だけcurrent.txtを原子的に置換する。Play.cmdはcurrent.txtを読む。以前のwindows/と配布ディレクトリは削除しない。既存ゲームを終了しない。
 

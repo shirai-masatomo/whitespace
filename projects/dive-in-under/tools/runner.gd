@@ -15,7 +15,7 @@ func write_file(path: String, content: String) -> bool:
 	return true
 
 func _initialize() -> void:
-	var options := {"trials": "1000", "seed": "10000", "scenario": "res://data/scenarios/baseline.json",
+	var options := {"trials": "8", "seed": "10000", "scenario": "res://data/scenarios/baseline.json",
 		"data": Catalog.PATH, "out": "", "commit": "unrecorded", "baseline": "", "strict":"false"}
 	for argument in OS.get_cmdline_user_args():
 		var pair := argument.trim_prefix("--").split("=", true, 1)

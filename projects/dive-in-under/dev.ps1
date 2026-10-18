@@ -1,6 +1,6 @@
 param(
     [ValidateSet('test','simulate','build','verify','play','campaign')][string]$Task = 'verify',
-    [int]$Trials = 1000,
+    [int]$Trials = 8,
     [int]$Seed = 10000,
     [string]$Scenario = 'res://data/scenarios/baseline.json',
     [string]$Baseline = '',
@@ -36,6 +36,7 @@ function Run-Godot([string]$Name, [string[]]$Arguments) {
 try {
     if ($Task -in @('test','verify')) {
         Run-Godot 'tests' @('--script','tests/test_combat.gd')
+        Run-Godot 'enemy-pack-tests' @('--script','tests/test_enemy_pack.gd')
         Run-Godot 'defense-tests' @('--script','tests/test_defense.gd')
         Run-Godot 'loop-tests' @('--script','tests/test_expedition.gd')
         Run-Godot 'campaign-tests' @('--script','tests/test_campaign.gd')

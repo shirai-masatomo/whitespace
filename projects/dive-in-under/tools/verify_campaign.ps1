@@ -1,4 +1,4 @@
-param([string]$GameCommit = '', [int]$Trials = 1000)
+param([string]$GameCommit = '', [int]$Trials = 3)
 $ErrorActionPreference = 'Stop'
 $project = Split-Path $PSScriptRoot -Parent
 if (!$GameCommit) { $GameCommit = git -C $project rev-parse HEAD }

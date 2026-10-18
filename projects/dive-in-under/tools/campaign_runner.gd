@@ -12,7 +12,7 @@ func write(path: String, value: String) -> bool:
 	f.store_string(value); f.close(); return true
 
 func _initialize() -> void:
-	var o: Dictionary={"trials":"1000","seed":"10000","out":"","config":"res://data/v1/expedition.json","policy":"res://data/scenarios/campaign.json","commit":"unrecorded","baseline":"","strict":"false","trace":"false"}
+	var o: Dictionary={"trials":"3","seed":"10000","out":"","config":"res://data/v1/expedition.json","policy":"res://data/scenarios/campaign.json","commit":"unrecorded","baseline":"","strict":"false","trace":"false"}
 	for arg in OS.get_cmdline_user_args():
 		var pair:=arg.trim_prefix("--").split("=",true,1)
 		if pair.size()!=2 or not o.has(pair[0]): stop("Unknown argument: "+arg); return

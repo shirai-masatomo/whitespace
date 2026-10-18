@@ -2,12 +2,28 @@ name: Dive In Under Windows foundation
 on:
   pull_request:
     paths:
-      - 'projects/dive-in-under/**'
+      - 'projects/dive-in-under/core/**'
+      - 'projects/dive-in-under/ui/**'
+      - 'projects/dive-in-under/data/**'
+      - 'projects/dive-in-under/assets/**'
+      - 'projects/dive-in-under/tests/**'
+      - 'projects/dive-in-under/tools/**'
+      - 'projects/dive-in-under/*.godot'
+      - 'projects/dive-in-under/*.cfg'
+      - 'projects/dive-in-under/*.ps1'
       - '.github/workflows/dive-in-under-windows.yml'
   push:
     branches: ['dot/dive-in-under/**', 'main']
     paths:
-      - 'projects/dive-in-under/**'
+      - 'projects/dive-in-under/core/**'
+      - 'projects/dive-in-under/ui/**'
+      - 'projects/dive-in-under/data/**'
+      - 'projects/dive-in-under/assets/**'
+      - 'projects/dive-in-under/tests/**'
+      - 'projects/dive-in-under/tools/**'
+      - 'projects/dive-in-under/*.godot'
+      - 'projects/dive-in-under/*.cfg'
+      - 'projects/dive-in-under/*.ps1'
       - '.github/workflows/dive-in-under-windows.yml'
   workflow_dispatch:
 permissions:
@@ -35,12 +51,12 @@ jobs:
           key: dive-in-under-godot-${{ runner.os }}-${{ hashFiles('projects/dive-in-under/tools/godot-version.json') }}
       - name: Verify engine and templates
         run: ./tools/setup.ps1
-      - name: Test, simulate and export
-        run: ./dev.ps1 -Task verify -GameCommit '${{ github.sha }}'
+      - name: Functional tests, 8-seed smoke and export
+        run: ./dev.ps1 -Task verify -Trials 8 -GameCommit '${{ github.sha }}'
       - name: Repeat same seeds and compare
-        run: ./dev.ps1 -Task simulate -GameCommit '${{ github.sha }}' -Baseline "$PWD/artifacts/simulation.json" -Output "$PWD/artifacts/comparison.json" -StrictRepeat
-      - name: Compare normal campaigns and strict replay
-        run: ./tools/verify_campaign.ps1 -GameCommit '${{ github.sha }}'
+        run: ./dev.ps1 -Task simulate -Trials 8 -GameCommit '${{ github.sha }}' -Baseline "$PWD/artifacts/simulation.json" -Output "$PWD/artifacts/comparison.json" -StrictRepeat
+      - name: Three fixed campaigns and strict replay
+        run: ./tools/verify_campaign.ps1 -Trials 3 -GameCommit '${{ github.sha }}'
       - name: Replay normal 10F with three exported EXE processes
         run: |
           ./tools/campaign_smoke.ps1
