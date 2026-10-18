@@ -1,0 +1,356 @@
+{
+	"battle": {},
+	"cloth": [
+		"item-13",
+		"item-14",
+		"item-15"
+	],
+	"condition_version": 1.0,
+	"config_version": "2026-10-17.loop-provisional.4",
+	"deaths": 0.0,
+	"equipment": {
+		"body": "",
+		"ears": "",
+		"eyes": "",
+		"feet": "",
+		"finger": "",
+		"head": "",
+		"left_hand": "",
+		"legs": "",
+		"neck": "",
+		"right_hand": "",
+		"wrist": ""
+	},
+	"event": "",
+	"exp": 0.0,
+	"first_done": false,
+	"floor": 0.0,
+	"gold": 1024.0,
+	"hero_skills": [
+		"S105"
+	],
+	"highest_floor": 0.0,
+	"hp": 24,
+	"inventory": [
+		"item-1",
+		"item-2",
+		"item-3",
+		"item-4",
+		"item-5",
+		"item-6",
+		"item-7",
+		"item-8",
+		"item-9",
+		"item-10",
+		"item-12",
+		"item-11"
+	],
+	"item_condition": {
+		"item-1": {
+			"current": 100.0,
+			"maximum": 100.0
+		},
+		"item-10": {
+			"current": 100.0,
+			"maximum": 100.0
+		},
+		"item-11": {
+			"current": 100.0,
+			"maximum": 100.0
+		},
+		"item-12": {
+			"current": 100.0,
+			"maximum": 100.0
+		},
+		"item-13": {
+			"current": 100.0,
+			"maximum": 100.0
+		},
+		"item-14": {
+			"current": 100.0,
+			"maximum": 100.0
+		},
+		"item-15": {
+			"current": 100.0,
+			"maximum": 100.0
+		},
+		"item-16": {
+			"current": 100.0,
+			"maximum": 100.0
+		},
+		"item-17": {
+			"current": 100.0,
+			"maximum": 100.0
+		},
+		"item-18": {
+			"current": 100.0,
+			"maximum": 100.0
+		},
+		"item-19": {
+			"current": 100.0,
+			"maximum": 100.0
+		},
+		"item-2": {
+			"current": 100.0,
+			"maximum": 100.0
+		},
+		"item-20": {
+			"current": 100.0,
+			"maximum": 100.0
+		},
+		"item-21": {
+			"current": 100.0,
+			"maximum": 100.0
+		},
+		"item-22": {
+			"current": 100.0,
+			"maximum": 100.0
+		},
+		"item-23": {
+			"current": 100.0,
+			"maximum": 100.0
+		},
+		"item-24": {
+			"current": 100.0,
+			"maximum": 100.0
+		},
+		"item-25": {
+			"current": 100.0,
+			"maximum": 100.0
+		},
+		"item-26": {
+			"current": 100.0,
+			"maximum": 100.0
+		},
+		"item-27": {
+			"current": 100.0,
+			"maximum": 100.0
+		},
+		"item-28": {
+			"current": 100.0,
+			"maximum": 100.0
+		},
+		"item-29": {
+			"current": 100.0,
+			"maximum": 100.0
+		},
+		"item-3": {
+			"current": 100.0,
+			"maximum": 100.0
+		},
+		"item-30": {
+			"current": 100.0,
+			"maximum": 100.0
+		},
+		"item-31": {
+			"current": 100.0,
+			"maximum": 100.0
+		},
+		"item-32": {
+			"current": 100.0,
+			"maximum": 100.0
+		},
+		"item-33": {
+			"current": 100.0,
+			"maximum": 100.0
+		},
+		"item-34": {
+			"current": 100.0,
+			"maximum": 100.0
+		},
+		"item-35": {
+			"current": 100.0,
+			"maximum": 100.0
+		},
+		"item-36": {
+			"current": 100.0,
+			"maximum": 100.0
+		},
+		"item-37": {
+			"current": 100.0,
+			"maximum": 100.0
+		},
+		"item-38": {
+			"current": 100.0,
+			"maximum": 100.0
+		},
+		"item-39": {
+			"current": 100.0,
+			"maximum": 100.0
+		},
+		"item-4": {
+			"current": 100.0,
+			"maximum": 100.0
+		},
+		"item-40": {
+			"current": 100.0,
+			"maximum": 100.0
+		},
+		"item-41": {
+			"current": 100.0,
+			"maximum": 100.0
+		},
+		"item-42": {
+			"current": 100.0,
+			"maximum": 100.0
+		},
+		"item-43": {
+			"current": 100.0,
+			"maximum": 100.0
+		},
+		"item-44": {
+			"current": 28.0,
+			"maximum": 100.0
+		},
+		"item-45": {
+			"current": 100.0,
+			"maximum": 100.0
+		},
+		"item-46": {
+			"current": 100.0,
+			"maximum": 100.0
+		},
+		"item-47": {
+			"current": 100.0,
+			"maximum": 100.0
+		},
+		"item-48": {
+			"current": 100.0,
+			"maximum": 100.0
+		},
+		"item-5": {
+			"current": 100.0,
+			"maximum": 100.0
+		},
+		"item-6": {
+			"current": 100.0,
+			"maximum": 100.0
+		},
+		"item-7": {
+			"current": 100.0,
+			"maximum": 100.0
+		},
+		"item-8": {
+			"current": 100.0,
+			"maximum": 100.0
+		},
+		"item-9": {
+			"current": 100.0,
+			"maximum": 100.0
+		}
+	},
+	"items": {
+		"item-1": "I01",
+		"item-10": "I09",
+		"item-11": "I10",
+		"item-12": "I11",
+		"item-13": "I01",
+		"item-14": "I02",
+		"item-15": "I03",
+		"item-16": "I04",
+		"item-17": "I05",
+		"item-18": "I06",
+		"item-19": "I07",
+		"item-2": "I01",
+		"item-20": "I08",
+		"item-21": "I09",
+		"item-22": "I10",
+		"item-23": "I11",
+		"item-24": "I01",
+		"item-25": "I02",
+		"item-26": "I03",
+		"item-27": "I04",
+		"item-28": "I05",
+		"item-29": "I06",
+		"item-3": "I02",
+		"item-30": "I07",
+		"item-31": "I08",
+		"item-32": "I09",
+		"item-33": "I10",
+		"item-34": "I11",
+		"item-35": "I01",
+		"item-36": "I02",
+		"item-37": "I03",
+		"item-38": "I04",
+		"item-39": "I05",
+		"item-4": "I03",
+		"item-40": "I06",
+		"item-41": "I07",
+		"item-42": "I08",
+		"item-43": "I09",
+		"item-44": "I10",
+		"item-45": "I11",
+		"item-46": "I01",
+		"item-47": "I02",
+		"item-48": "I03",
+		"item-5": "I04",
+		"item-6": "I05",
+		"item-7": "I06",
+		"item-8": "I07",
+		"item-9": "I08"
+	},
+	"journal": [
+		"主人公ひとりで地下へ踏み出した。探索の解決後は町へ帰還できる。",
+		"持ち帰った品を抱え、町への道を戻った。",
+		"所持品を保全し、父親の風呂敷を使えるようにした。"
+	],
+	"next_item": 49.0,
+	"phase": "town",
+	"result": {
+		"floor": 0.0,
+		"kind": "return",
+		"loss": {
+			"exp": 0.0,
+			"gold": 0.0,
+			"items": 0.0
+		},
+		"reason": "持ち帰った品を抱え、町への道を戻った。"
+	},
+	"revision": 10.0,
+	"rng": {
+		"battle": 0.0,
+		"explore": 0.0,
+		"loot": 0.0
+	},
+	"schema_version": 5,
+	"seed": 10000.0,
+	"sp": 0,
+	"storage_version": 1,
+	"story_deaths": 0.0,
+	"trips": 1.0,
+	"warehouse": [
+		"item-24",
+		"item-35",
+		"item-46",
+		"item-25",
+		"item-36",
+		"item-47",
+		"item-26",
+		"item-37",
+		"item-48",
+		"item-16",
+		"item-27",
+		"item-38",
+		"item-17",
+		"item-28",
+		"item-39",
+		"item-18",
+		"item-29",
+		"item-40",
+		"item-19",
+		"item-30",
+		"item-41",
+		"item-20",
+		"item-31",
+		"item-42",
+		"item-21",
+		"item-32",
+		"item-43",
+		"item-23",
+		"item-34",
+		"item-45",
+		"item-22",
+		"item-33",
+		"item-44"
+	]
+}

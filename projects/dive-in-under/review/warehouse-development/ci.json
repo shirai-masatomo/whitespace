@@ -1,0 +1,11 @@
+{
+  "run_id": 39131396836,
+  "url": "https://github.com/shirai-masatomo/whitespace/actions/runs/39131396836",
+  "status": "completed",
+  "conclusion": "success",
+  "head_sha": "aa7e81397dd3140bcf899cdd904d7754bb5d82a3",
+  "windows_artifact": 12138027132,
+  "evidence_artifact": 12137677964,
+  "initial_failed_run": 39130884974,
+  "failure_fixed": "campaign replay now uses warehouse Back then town title; production warehouse unchanged"
+}

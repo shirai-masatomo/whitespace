@@ -1,0 +1,17 @@
+{
+	"backpack": 12,
+	"category_empty": true,
+	"cloth": 3,
+	"complete": true,
+	"damaged_uid": "item-44",
+	"equipment_separate": true,
+	"fixture_only": true,
+	"manual_input": false,
+	"rendered": true,
+	"run_id": "6a54ea147d154d11ad8ad66a041721ce",
+	"save_sha256": "45c1f1b7bc59a12889514a8dea5c6c9d74b93aaf9c79be9b3e38c60f4dc4cae8",
+	"schema4_archive_sha256": "9555a2170e46167539e16c68502bd5a2ce2498ea908251ec5571f4e2f77704ae",
+	"three_columns": true,
+	"viewport_transfers": true,
+	"warehouse": 33
+}
