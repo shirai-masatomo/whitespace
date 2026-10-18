@@ -1,0 +1,69 @@
+{
+  "cases": [
+    {
+      "original_sha256": "9d096c6acb6a957581cb617332737080856d4a454d64cc15ea14cb34c72721cb",
+      "directory": "D:\\a\\whitespace\\whitespace\\projects\\dive-in-under\\artifacts\\migration-headless\\1-before-4f8e27f60f334edb97e16f148a693daa",
+      "case": "1-before",
+      "complete": true,
+      "save_sha256": "1b0dcc6c003e156aaf41ec131bc4c017a2dee54948d49c89ef4c242782a5859d"
+    },
+    {
+      "original_sha256": "46c402ae634c8d941768c56396bb7b8bf2d33d6c6dacb32bd6af325a93960b11",
+      "directory": "D:\\a\\whitespace\\whitespace\\projects\\dive-in-under\\artifacts\\migration-headless\\2-inside-f3600a7a80cb40ad8b18c50a60e08ac2",
+      "case": "2-inside",
+      "complete": true,
+      "save_sha256": "ac86d5e989d49b1f09d334d275952ab787e1236169d8b80b3097ac07f3a49999"
+    },
+    {
+      "original_sha256": "9999e93b872fca408d7c6dac4c495eee7ac2f7ada0c3d6b404aa5b5e14720485",
+      "directory": "D:\\a\\whitespace\\whitespace\\projects\\dive-in-under\\artifacts\\migration-headless\\2-story-b927a0fd2cc845078fdec64a68e814c5",
+      "case": "2-story",
+      "complete": true,
+      "save_sha256": "801114e38dfc9971a248a3a4a21c463869936017aded5577b04c8d711c7a19a9"
+    },
+    {
+      "original_sha256": "f0273c77fe9edd2490e3aba9e9670013f28096a880d7b4b48074c4ce0833cc28",
+      "directory": "D:\\a\\whitespace\\whitespace\\projects\\dive-in-under\\artifacts\\migration-headless\\1-town-df01f7f3ed08466f91970352cfa7eacb",
+      "case": "1-town",
+      "complete": true,
+      "save_sha256": "51825bba40ecfdf8fc809c338afbbbdb321b4e7d5cd39c5ba1c349030f62bd39"
+    },
+    {
+      "original_sha256": "03d17b529e2109266a6b0d88d45bb8f7a16af740192f995b6fee55a9fb0bf17a",
+      "directory": "D:\\a\\whitespace\\whitespace\\projects\\dive-in-under\\artifacts\\migration-headless\\2-battle-310455c2a16b440db7b08b4abc102221",
+      "case": "2-battle",
+      "complete": true,
+      "save_sha256": "43f4fddc2da31b4e05fab5fb01c9fd0c87ba0c7856ffdf830a165bc79df94360"
+    },
+    {
+      "original_sha256": "f1774009586373a5cbdd0fbb7d3950d8f81a27f51d4bdec4019c1f10e2aab480",
+      "directory": "D:\\a\\whitespace\\whitespace\\projects\\dive-in-under\\artifacts\\migration-headless\\2-death-4a49705761f24d36b933cd57c46c7e86",
+      "case": "2-death",
+      "complete": true,
+      "save_sha256": "71f6929845568775140805ae4e53cb9305279ee6506633b3a164780cbf51f795"
+    },
+    {
+      "original_sha256": "5c4371596c4460672165ee8f91b8100e406ade551124adcd6bb8d7d7f0a64548",
+      "directory": "D:\\a\\whitespace\\whitespace\\projects\\dive-in-under\\artifacts\\migration-headless\\3-battle-8b4eb8fc42fb4e0b99436d6801a1ccd0",
+      "case": "3-battle",
+      "complete": true,
+      "save_sha256": "7335710d79400679de93bd16c0cae7fb135500a9f36b3c0cebed01f9d625adef"
+    },
+    {
+      "original_sha256": "6229eef83419b38c8677636d80c6daf1cbc80c4cbdd54848bb5a8d3f20f9d57a",
+      "directory": "D:\\a\\whitespace\\whitespace\\projects\\dive-in-under\\artifacts\\migration-headless\\4-old-floor-08a3c987c50b4792bb3d1ab31c80b48b",
+      "case": "4-old-floor",
+      "complete": true,
+      "save_sha256": "3d89575ba75d3e01378a8f89271b389b1ff0112d67f3d68fed0cffce930ad386"
+    }
+  ],
+  "rendered": false,
+  "build": {
+    "data_version": "2026-10-18.status-pilot.1",
+    "campaign_config_version": "2026-10-17.loop-provisional.5",
+    "engine": "4.7.2.stable.official.ed1daf0bf",
+    "version": "0.5.4",
+    "game_commit": "a5c3c6925fbc501d24ce84ccfa1f2fbbeed74456"
+  },
+  "complete": true
+}

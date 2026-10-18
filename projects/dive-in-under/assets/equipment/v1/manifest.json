@@ -1,0 +1,120 @@
+{
+  "schema_version": 1,
+  "source": "User attachment 2026-10-19 (1448x1086 RGBA), unchanged",
+  "sheet": "equipment-sheet.png",
+  "blue_cloak": "adventurer-cloak-blue.png",
+  "regions": {
+    "A01": [
+      20,
+      65,
+      275,
+      345
+    ],
+    "red_cloak": [
+      297,
+      65,
+      283,
+      345
+    ],
+    "A03": [
+      585,
+      76,
+      307,
+      338
+    ],
+    "A04": [
+      901,
+      77,
+      244,
+      334
+    ],
+    "A05": [
+      1150,
+      129,
+      285,
+      283
+    ],
+    "I01": [
+      20,
+      437,
+      278,
+      290
+    ],
+    "I02": [
+      299,
+      423,
+      293,
+      308
+    ],
+    "I03": [
+      597,
+      417,
+      266,
+      314
+    ],
+    "I04": [
+      864,
+      447,
+      284,
+      287
+    ],
+    "I05": [
+      1178,
+      470,
+      253,
+      264
+    ],
+    "I06": [
+      20,
+      758,
+      276,
+      293
+    ],
+    "I07": [
+      306,
+      742,
+      290,
+      306
+    ],
+    "I08": [
+      620,
+      749,
+      185,
+      299
+    ],
+    "I09": [
+      867,
+      757,
+      287,
+      299
+    ],
+    "I11": [
+      1164,
+      747,
+      270,
+      306
+    ]
+  },
+  "live_templates": [
+    "I01",
+    "I02",
+    "I03",
+    "I04",
+    "I05",
+    "I06",
+    "I07",
+    "I08",
+    "I09",
+    "I11",
+    "A02"
+  ],
+  "reserved_unimplemented": [
+    "A01",
+    "A03",
+    "A04",
+    "A05",
+    "red_cloak"
+  ],
+  "generation_mode": "built-in image_gen",
+  "prompt": "Use case: precise-object-edit. Input: attached 15 equipment sprite sheet is the edit target and pixel-art style reference. Extract ONLY the hooded cloak in the top row, second column. Produce one standalone inventory icon of that exact hooded cloak, recoloring only its red fabric to rich adventurer blue: deep navy shadows, medium cobalt/blue cloth, subtle desaturated blue highlights. Preserve its hood opening, silver clasp, folds, ragged hem silhouette, pixel clusters and finely detailed 2D pixel-art style. No wearer, face, hands, other equipment, UI, letters or ground shadow. Center the whole cloak with a small transparent margin; do not crop its tips. Genuine transparent background. This is the blue initial adventurer cloak for Dive In Under."
+}

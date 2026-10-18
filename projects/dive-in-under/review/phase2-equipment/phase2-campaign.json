@@ -1,0 +1,2174 @@
+{
+	"anomalies": [],
+	"floors": {
+		"1": {
+			"battles": 17,
+			"chests": 7,
+			"clears": 0,
+			"death_rate_per_entry": 0.0,
+			"deaths": 0,
+			"enemies": {
+				"E01": 16,
+				"E02": 1
+			},
+			"entries": 25,
+			"events": 1,
+			"items": {
+				"I01": 2,
+				"I02": 3,
+				"I04": 6
+			},
+			"levels": {
+				"1": 17
+			},
+			"return_rate_per_entry": 0.0,
+			"returns": 0,
+			"seed_reach_rate": 1.0,
+			"seed_reached": 1
+		},
+		"10": {
+			"battles": 4,
+			"chests": 0,
+			"clears": 1,
+			"death_rate_per_entry": 0.75,
+			"deaths": 3,
+			"enemies": {
+				"B10": 4
+			},
+			"entries": 4,
+			"events": 0,
+			"items": {
+				"I10": 1
+			},
+			"levels": {
+				"6": 4
+			},
+			"return_rate_per_entry": 0.0,
+			"returns": 0,
+			"seed_reach_rate": 1.0,
+			"seed_reached": 1
+		},
+		"2": {
+			"battles": 16,
+			"chests": 5,
+			"clears": 0,
+			"death_rate_per_entry": 0.0,
+			"deaths": 0,
+			"enemies": {
+				"E01": 8,
+				"E02": 6,
+				"E03": 2
+			},
+			"entries": 25,
+			"events": 4,
+			"items": {
+				"I01": 2,
+				"I04": 2,
+				"I10": 3
+			},
+			"levels": {
+				"1": 10,
+				"2": 6
+			},
+			"return_rate_per_entry": 0.0,
+			"returns": 0,
+			"seed_reach_rate": 1.0,
+			"seed_reached": 1
+		},
+		"3": {
+			"battles": 18,
+			"chests": 6,
+			"clears": 0,
+			"death_rate_per_entry": 0.0,
+			"deaths": 0,
+			"enemies": {
+				"E01": 7,
+				"E02": 9,
+				"E03": 2
+			},
+			"entries": 25,
+			"events": 1,
+			"items": {
+				"I01": 1,
+				"I04": 3,
+				"I10": 4
+			},
+			"levels": {
+				"2": 7,
+				"3": 11
+			},
+			"return_rate_per_entry": 0.16,
+			"returns": 4,
+			"seed_reach_rate": 1.0,
+			"seed_reached": 1
+		},
+		"4": {
+			"battles": 17,
+			"chests": 3,
+			"clears": 0,
+			"death_rate_per_entry": 0.0,
+			"deaths": 0,
+			"enemies": {
+				"E01": 2,
+				"E02": 6,
+				"E03": 5,
+				"E04": 4
+			},
+			"entries": 21,
+			"events": 1,
+			"items": {
+				"I01": 1,
+				"I03": 1,
+				"I04": 2,
+				"I05": 3
+			},
+			"levels": {
+				"2": 7,
+				"3": 6,
+				"4": 4
+			},
+			"return_rate_per_entry": 0.0,
+			"returns": 0,
+			"seed_reach_rate": 1.0,
+			"seed_reached": 1
+		},
+		"5": {
+			"battles": 15,
+			"chests": 5,
+			"clears": 0,
+			"death_rate_per_entry": 0.0,
+			"deaths": 0,
+			"enemies": {
+				"E01": 3,
+				"E02": 3,
+				"E03": 5,
+				"E04": 4
+			},
+			"entries": 21,
+			"events": 1,
+			"items": {
+				"I01": 1,
+				"I03": 1,
+				"I04": 2,
+				"I05": 1,
+				"I06": 1,
+				"I10": 2
+			},
+			"levels": {
+				"2": 2,
+				"3": 4,
+				"4": 9
+			},
+			"return_rate_per_entry": 0.0,
+			"returns": 0,
+			"seed_reach_rate": 1.0,
+			"seed_reached": 1
+		},
+		"6": {
+			"battles": 19,
+			"chests": 2,
+			"clears": 0,
+			"death_rate_per_entry": 0.0476190476190476,
+			"deaths": 1,
+			"enemies": {
+				"E04": 5,
+				"E05": 2,
+				"E06": 7,
+				"E07": 5
+			},
+			"entries": 21,
+			"events": 0,
+			"items": {
+				"I04": 1,
+				"I05": 2,
+				"I06": 3,
+				"I10": 4
+			},
+			"levels": {
+				"3": 9,
+				"4": 3,
+				"5": 7
+			},
+			"return_rate_per_entry": 0.0952380952380952,
+			"returns": 2,
+			"seed_reach_rate": 1.0,
+			"seed_reached": 1
+		},
+		"7": {
+			"battles": 15,
+			"chests": 0,
+			"clears": 0,
+			"death_rate_per_entry": 0.0,
+			"deaths": 0,
+			"enemies": {
+				"E04": 5,
+				"E06": 3,
+				"E07": 6,
+				"E08": 1
+			},
+			"entries": 18,
+			"events": 3,
+			"items": {
+				"I06": 1,
+				"I08": 1,
+				"I10": 1
+			},
+			"levels": {
+				"4": 5,
+				"5": 3,
+				"6": 7
+			},
+			"return_rate_per_entry": 0.111111111111111,
+			"returns": 2,
+			"seed_reach_rate": 1.0,
+			"seed_reached": 1
+		},
+		"8": {
+			"battles": 15,
+			"chests": 0,
+			"clears": 0,
+			"death_rate_per_entry": 0.0,
+			"deaths": 0,
+			"enemies": {
+				"E04": 3,
+				"E06": 2,
+				"E07": 6,
+				"E08": 4
+			},
+			"entries": 16,
+			"events": 1,
+			"items": {},
+			"levels": {
+				"4": 6,
+				"5": 1,
+				"6": 8
+			},
+			"return_rate_per_entry": 0.3125,
+			"returns": 5,
+			"seed_reach_rate": 1.0,
+			"seed_reached": 1
+		},
+		"9": {
+			"battles": 7,
+			"chests": 1,
+			"clears": 0,
+			"death_rate_per_entry": 0.0,
+			"deaths": 0,
+			"enemies": {
+				"E05": 1,
+				"E06": 3,
+				"E07": 1,
+				"E08": 2
+			},
+			"entries": 11,
+			"events": 3,
+			"items": {
+				"I10": 4
+			},
+			"levels": {
+				"5": 3,
+				"6": 3,
+				"7": 1
+			},
+			"return_rate_per_entry": 0.636363636363636,
+			"returns": 7,
+			"seed_reach_rate": 1.0,
+			"seed_reached": 1
+		}
+	},
+	"metadata": {
+		"combat_sha256": "c23c08d8f24eb2ab3cb178a721a29f4049147bda2515cb7ad98fdfbf73644511",
+		"condition_rules_sha256": "73568da9f9ce4c2d7e861c19f1b4663a5ecd9ff98bc93b19933680146695e501",
+		"config_sha256": "7a054649962747435933a2cfcb6bfc3a138ac9e3612d87b9286f776ce11635c9",
+		"config_version": "2026-10-17.loop-provisional.4",
+		"data_sha256": "ef372be5a31bdd0531f149d8dba4ba31227e251b5ce959043e5fc36eea9730cc",
+		"data_version": "2026-10-18.status-pilot.1",
+		"enemy_pack_sha256": "1ccd0f7c661c13a60b741ae680d61657c1209ea483ac556fcd9617d28c843ef1",
+		"engine": "4.7.2-stable (official)",
+		"equipment_condition_sha256": "9c965a04dbd3a8421bed3bffa3dbc0747bf96bf15f4d2ed80c89a5907e7a57f5",
+		"expedition_sha256": "1dce116a6221350be00d0e6b98f57bc2498eb1d8ba27b7a9734e79f02445a622",
+		"game_commit": "phase2-condition-working-diff",
+		"policy_code_sha256": "9d5690e66531d714016d0ee16c340e006dcf367712d19d57e6377a8d191f3903",
+		"policy_sha256": "16b08c7109dd5c70b345371b18af622e1ad5e23d0863938f52565c2f3a15c170",
+		"runner_contract": "campaign-v1"
+	},
+	"metrics": {
+		"battle_remaining_hp": {
+			"count": 143,
+			"max": 94,
+			"mean": 56.5104895104895,
+			"median": 60.0,
+			"min": 0,
+			"p10": 22,
+			"p90": 88
+		},
+		"battle_rounds": {
+			"count": 143,
+			"max": 7,
+			"mean": 2.22377622377622,
+			"median": 2.0,
+			"min": 1,
+			"p10": 1,
+			"p90": 4
+		},
+		"clear_rate": 1.0,
+		"clears": 1,
+		"death_rate_per_normal_trip": 0.16,
+		"defense_casts": 23,
+		"draws": 0,
+		"exp_earned": 1551,
+		"final_exp": {
+			"count": 1,
+			"max": 1551,
+			"mean": 1551.0,
+			"median": 1551.0,
+			"min": 1551,
+			"p10": 1551,
+			"p90": 1551
+		},
+		"final_gold": {
+			"count": 1,
+			"max": 908,
+			"mean": 908.0,
+			"median": 908.0,
+			"min": 908,
+			"p10": 908,
+			"p90": 908
+		},
+		"final_items": {
+			"count": 1,
+			"max": 60,
+			"mean": 60.0,
+			"median": 60.0,
+			"min": 60,
+			"p10": 60,
+			"p90": 60
+		},
+		"final_level": {
+			"count": 1,
+			"max": 16,
+			"mean": 16.0,
+			"median": 16.0,
+			"min": 16,
+			"p10": 16,
+			"p90": 16
+		},
+		"gold_earned": 1134,
+		"invalid_results": 0,
+		"loot_earned": 59,
+		"mean_exp_earned_per_trip": 62.04,
+		"mean_gold_earned_per_trip": 45.36,
+		"mean_loot_earned_per_trip": 2.36,
+		"normal_deaths": 4,
+		"normal_trips": 25,
+		"reach_10F_rate": 1.0,
+		"reached_10F": 1,
+		"remaining_hp_per_trip": {
+			"count": 25,
+			"max": 60,
+			"mean": 23.36,
+			"median": 25.0,
+			"min": 0,
+			"p10": 0,
+			"p90": 42
+		},
+		"returns": 20,
+		"rounds_per_trip": {
+			"count": 25,
+			"max": 19,
+			"mean": 12.72,
+			"median": 14.0,
+			"min": 2,
+			"p10": 4,
+			"p90": 18
+		},
+		"story_deaths_excluded": 0,
+		"trials": 1,
+		"trips_to_clear": {
+			"count": 1,
+			"max": 25,
+			"mean": 25.0,
+			"median": 25.0,
+			"min": 25,
+			"p10": 25,
+			"p90": 25
+		}
+	},
+	"nonclear_seeds": [],
+	"policy": {
+		"boss_min_hp_fraction": 0.7,
+		"equipment_weights": {
+			"atk": 4.0,
+			"def": 4.0,
+			"max_hp": 1.0,
+			"max_sp": 0.0,
+			"spd": 1.0
+		},
+		"floor_limits": [
+			{
+				"below_level": 3.0,
+				"floor": 3.0
+			},
+			{
+				"below_level": 5.0,
+				"floor": 6.0
+			},
+			{
+				"below_level": 101.0,
+				"floor": 10.0
+			}
+		],
+		"max_trips": 30.0,
+		"note": "試験方針。表示Lv/HP/装備効果のみ参照。乱数先読み・敵戦闘予測・階層スキップなし。",
+		"policy_id": "solo-steady-v1",
+		"return_hp_fraction": 0.45,
+		"schema_version": 1.0,
+		"skip_harmful_events": true,
+		"store_spares": true
+	},
+	"records": [
+		{
+			"actions": [],
+			"battle_results": [
+				{
+					"casts": 0,
+					"hp": 20,
+					"outcome": "victory",
+					"rounds": 3
+				},
+				{
+					"casts": 0,
+					"hp": 21,
+					"outcome": "victory",
+					"rounds": 2
+				},
+				{
+					"casts": 0,
+					"hp": 20,
+					"outcome": "victory",
+					"rounds": 2
+				},
+				{
+					"casts": 0,
+					"hp": 28,
+					"outcome": "victory",
+					"rounds": 2
+				},
+				{
+					"casts": 0,
+					"hp": 26,
+					"outcome": "victory",
+					"rounds": 2
+				},
+				{
+					"casts": 0,
+					"hp": 26,
+					"outcome": "victory",
+					"rounds": 1
+				},
+				{
+					"casts": 0,
+					"hp": 27,
+					"outcome": "victory",
+					"rounds": 2
+				},
+				{
+					"casts": 0,
+					"hp": 25,
+					"outcome": "victory",
+					"rounds": 2
+				},
+				{
+					"casts": 0,
+					"hp": 22,
+					"outcome": "victory",
+					"rounds": 3
+				},
+				{
+					"casts": 0,
+					"hp": 0,
+					"outcome": "defeat",
+					"rounds": 6
+				},
+				{
+					"casts": 0,
+					"hp": 33,
+					"outcome": "victory",
+					"rounds": 2
+				},
+				{
+					"casts": 0,
+					"hp": 24,
+					"outcome": "victory",
+					"rounds": 3
+				},
+				{
+					"casts": 0,
+					"hp": 8,
+					"outcome": "victory",
+					"rounds": 4
+				},
+				{
+					"casts": 0,
+					"hp": 38,
+					"outcome": "victory",
+					"rounds": 1
+				},
+				{
+					"casts": 0,
+					"hp": 32,
+					"outcome": "victory",
+					"rounds": 3
+				},
+				{
+					"casts": 0,
+					"hp": 27,
+					"outcome": "victory",
+					"rounds": 2
+				},
+				{
+					"casts": 1,
+					"hp": 10,
+					"outcome": "victory",
+					"rounds": 5
+				},
+				{
+					"casts": 0,
+					"hp": 44,
+					"outcome": "victory",
+					"rounds": 1
+				},
+				{
+					"casts": 0,
+					"hp": 43,
+					"outcome": "victory",
+					"rounds": 2
+				},
+				{
+					"casts": 0,
+					"hp": 27,
+					"outcome": "victory",
+					"rounds": 5
+				},
+				{
+					"casts": 1,
+					"hp": 8,
+					"outcome": "victory",
+					"rounds": 6
+				},
+				{
+					"casts": 0,
+					"hp": 42,
+					"outcome": "victory",
+					"rounds": 3
+				},
+				{
+					"casts": 0,
+					"hp": 42,
+					"outcome": "victory",
+					"rounds": 1
+				},
+				{
+					"casts": 0,
+					"hp": 41,
+					"outcome": "victory",
+					"rounds": 2
+				},
+				{
+					"casts": 0,
+					"hp": 35,
+					"outcome": "victory",
+					"rounds": 3
+				},
+				{
+					"casts": 0,
+					"hp": 34,
+					"outcome": "victory",
+					"rounds": 3
+				},
+				{
+					"casts": 1,
+					"hp": 25,
+					"outcome": "victory",
+					"rounds": 4
+				},
+				{
+					"casts": 0,
+					"hp": 49,
+					"outcome": "victory",
+					"rounds": 1
+				},
+				{
+					"casts": 0,
+					"hp": 49,
+					"outcome": "victory",
+					"rounds": 1
+				},
+				{
+					"casts": 0,
+					"hp": 43,
+					"outcome": "victory",
+					"rounds": 3
+				},
+				{
+					"casts": 0,
+					"hp": 43,
+					"outcome": "victory",
+					"rounds": 2
+				},
+				{
+					"casts": 0,
+					"hp": 36,
+					"outcome": "victory",
+					"rounds": 3
+				},
+				{
+					"casts": 1,
+					"hp": 19,
+					"outcome": "victory",
+					"rounds": 4
+				},
+				{
+					"casts": 0,
+					"hp": 54,
+					"outcome": "victory",
+					"rounds": 1
+				},
+				{
+					"casts": 0,
+					"hp": 54,
+					"outcome": "victory",
+					"rounds": 1
+				},
+				{
+					"casts": 0,
+					"hp": 54,
+					"outcome": "victory",
+					"rounds": 1
+				},
+				{
+					"casts": 0,
+					"hp": 54,
+					"outcome": "victory",
+					"rounds": 1
+				},
+				{
+					"casts": 0,
+					"hp": 43,
+					"outcome": "victory",
+					"rounds": 4
+				},
+				{
+					"casts": 0,
+					"hp": 38,
+					"outcome": "victory",
+					"rounds": 2
+				},
+				{
+					"casts": 0,
+					"hp": 39,
+					"outcome": "victory",
+					"rounds": 2
+				},
+				{
+					"casts": 1,
+					"hp": 27,
+					"outcome": "victory",
+					"rounds": 5
+				},
+				{
+					"casts": 0,
+					"hp": 59,
+					"outcome": "victory",
+					"rounds": 1
+				},
+				{
+					"casts": 0,
+					"hp": 57,
+					"outcome": "victory",
+					"rounds": 2
+				},
+				{
+					"casts": 0,
+					"hp": 53,
+					"outcome": "victory",
+					"rounds": 2
+				},
+				{
+					"casts": 0,
+					"hp": 50,
+					"outcome": "victory",
+					"rounds": 2
+				},
+				{
+					"casts": 0,
+					"hp": 42,
+					"outcome": "victory",
+					"rounds": 4
+				},
+				{
+					"casts": 0,
+					"hp": 41,
+					"outcome": "victory",
+					"rounds": 2
+				},
+				{
+					"casts": 0,
+					"hp": 63,
+					"outcome": "victory",
+					"rounds": 1
+				},
+				{
+					"casts": 0,
+					"hp": 62,
+					"outcome": "victory",
+					"rounds": 1
+				},
+				{
+					"casts": 0,
+					"hp": 62,
+					"outcome": "victory",
+					"rounds": 1
+				},
+				{
+					"casts": 0,
+					"hp": 59,
+					"outcome": "victory",
+					"rounds": 2
+				},
+				{
+					"casts": 0,
+					"hp": 56,
+					"outcome": "victory",
+					"rounds": 2
+				},
+				{
+					"casts": 0,
+					"hp": 46,
+					"outcome": "victory",
+					"rounds": 3
+				},
+				{
+					"casts": 1,
+					"hp": 34,
+					"outcome": "victory",
+					"rounds": 3
+				},
+				{
+					"casts": 1,
+					"hp": 22,
+					"outcome": "victory",
+					"rounds": 4
+				},
+				{
+					"casts": 0,
+					"hp": 69,
+					"outcome": "victory",
+					"rounds": 1
+				},
+				{
+					"casts": 0,
+					"hp": 69,
+					"outcome": "victory",
+					"rounds": 1
+				},
+				{
+					"casts": 0,
+					"hp": 69,
+					"outcome": "victory",
+					"rounds": 1
+				},
+				{
+					"casts": 0,
+					"hp": 69,
+					"outcome": "victory",
+					"rounds": 1
+				},
+				{
+					"casts": 0,
+					"hp": 69,
+					"outcome": "victory",
+					"rounds": 1
+				},
+				{
+					"casts": 0,
+					"hp": 65,
+					"outcome": "victory",
+					"rounds": 2
+				},
+				{
+					"casts": 0,
+					"hp": 61,
+					"outcome": "victory",
+					"rounds": 2
+				},
+				{
+					"casts": 1,
+					"hp": 28,
+					"outcome": "victory",
+					"rounds": 5
+				},
+				{
+					"casts": 0,
+					"hp": 67,
+					"outcome": "victory",
+					"rounds": 1
+				},
+				{
+					"casts": 0,
+					"hp": 67,
+					"outcome": "victory",
+					"rounds": 1
+				},
+				{
+					"casts": 0,
+					"hp": 65,
+					"outcome": "victory",
+					"rounds": 1
+				},
+				{
+					"casts": 0,
+					"hp": 64,
+					"outcome": "victory",
+					"rounds": 2
+				},
+				{
+					"casts": 0,
+					"hp": 58,
+					"outcome": "victory",
+					"rounds": 2
+				},
+				{
+					"casts": 0,
+					"hp": 53,
+					"outcome": "victory",
+					"rounds": 2
+				},
+				{
+					"casts": 1,
+					"hp": 0,
+					"outcome": "defeat",
+					"rounds": 5
+				},
+				{
+					"casts": 0,
+					"hp": 72,
+					"outcome": "victory",
+					"rounds": 1
+				},
+				{
+					"casts": 0,
+					"hp": 72,
+					"outcome": "victory",
+					"rounds": 1
+				},
+				{
+					"casts": 0,
+					"hp": 72,
+					"outcome": "victory",
+					"rounds": 1
+				},
+				{
+					"casts": 0,
+					"hp": 58,
+					"outcome": "victory",
+					"rounds": 4
+				},
+				{
+					"casts": 0,
+					"hp": 50,
+					"outcome": "victory",
+					"rounds": 3
+				},
+				{
+					"casts": 1,
+					"hp": 37,
+					"outcome": "victory",
+					"rounds": 3
+				},
+				{
+					"casts": 1,
+					"hp": 18,
+					"outcome": "victory",
+					"rounds": 4
+				},
+				{
+					"casts": 0,
+					"hp": 77,
+					"outcome": "victory",
+					"rounds": 1
+				},
+				{
+					"casts": 0,
+					"hp": 77,
+					"outcome": "victory",
+					"rounds": 1
+				},
+				{
+					"casts": 0,
+					"hp": 75,
+					"outcome": "victory",
+					"rounds": 1
+				},
+				{
+					"casts": 0,
+					"hp": 70,
+					"outcome": "victory",
+					"rounds": 2
+				},
+				{
+					"casts": 0,
+					"hp": 62,
+					"outcome": "victory",
+					"rounds": 2
+				},
+				{
+					"casts": 0,
+					"hp": 50,
+					"outcome": "victory",
+					"rounds": 3
+				},
+				{
+					"casts": 0,
+					"hp": 79,
+					"outcome": "victory",
+					"rounds": 1
+				},
+				{
+					"casts": 0,
+					"hp": 79,
+					"outcome": "victory",
+					"rounds": 1
+				},
+				{
+					"casts": 0,
+					"hp": 76,
+					"outcome": "victory",
+					"rounds": 1
+				},
+				{
+					"casts": 0,
+					"hp": 71,
+					"outcome": "victory",
+					"rounds": 2
+				},
+				{
+					"casts": 0,
+					"hp": 61,
+					"outcome": "victory",
+					"rounds": 3
+				},
+				{
+					"casts": 0,
+					"hp": 56,
+					"outcome": "victory",
+					"rounds": 2
+				},
+				{
+					"casts": 1,
+					"hp": 42,
+					"outcome": "victory",
+					"rounds": 4
+				},
+				{
+					"casts": 0,
+					"hp": 77,
+					"outcome": "victory",
+					"rounds": 1
+				},
+				{
+					"casts": 0,
+					"hp": 80,
+					"outcome": "victory",
+					"rounds": 1
+				},
+				{
+					"casts": 0,
+					"hp": 78,
+					"outcome": "victory",
+					"rounds": 1
+				},
+				{
+					"casts": 0,
+					"hp": 74,
+					"outcome": "victory",
+					"rounds": 1
+				},
+				{
+					"casts": 0,
+					"hp": 72,
+					"outcome": "victory",
+					"rounds": 1
+				},
+				{
+					"casts": 0,
+					"hp": 67,
+					"outcome": "victory",
+					"rounds": 2
+				},
+				{
+					"casts": 0,
+					"hp": 58,
+					"outcome": "victory",
+					"rounds": 3
+				},
+				{
+					"casts": 2,
+					"hp": 27,
+					"outcome": "victory",
+					"rounds": 6
+				},
+				{
+					"casts": 0,
+					"hp": 84,
+					"outcome": "victory",
+					"rounds": 1
+				},
+				{
+					"casts": 0,
+					"hp": 82,
+					"outcome": "victory",
+					"rounds": 1
+				},
+				{
+					"casts": 0,
+					"hp": 80,
+					"outcome": "victory",
+					"rounds": 1
+				},
+				{
+					"casts": 0,
+					"hp": 78,
+					"outcome": "victory",
+					"rounds": 1
+				},
+				{
+					"casts": 0,
+					"hp": 75,
+					"outcome": "victory",
+					"rounds": 1
+				},
+				{
+					"casts": 0,
+					"hp": 65,
+					"outcome": "victory",
+					"rounds": 4
+				},
+				{
+					"casts": 1,
+					"hp": 38,
+					"outcome": "victory",
+					"rounds": 4
+				},
+				{
+					"casts": 1,
+					"hp": 23,
+					"outcome": "victory",
+					"rounds": 3
+				},
+				{
+					"casts": 0,
+					"hp": 89,
+					"outcome": "victory",
+					"rounds": 1
+				},
+				{
+					"casts": 0,
+					"hp": 81,
+					"outcome": "victory",
+					"rounds": 2
+				},
+				{
+					"casts": 0,
+					"hp": 81,
+					"outcome": "victory",
+					"rounds": 2
+				},
+				{
+					"casts": 0,
+					"hp": 69,
+					"outcome": "victory",
+					"rounds": 2
+				},
+				{
+					"casts": 1,
+					"hp": 38,
+					"outcome": "victory",
+					"rounds": 5
+				},
+				{
+					"casts": 0,
+					"hp": 87,
+					"outcome": "victory",
+					"rounds": 2
+				},
+				{
+					"casts": 0,
+					"hp": 87,
+					"outcome": "victory",
+					"rounds": 1
+				},
+				{
+					"casts": 0,
+					"hp": 87,
+					"outcome": "victory",
+					"rounds": 1
+				},
+				{
+					"casts": 0,
+					"hp": 87,
+					"outcome": "victory",
+					"rounds": 1
+				},
+				{
+					"casts": 0,
+					"hp": 87,
+					"outcome": "victory",
+					"rounds": 2
+				},
+				{
+					"casts": 0,
+					"hp": 82,
+					"outcome": "victory",
+					"rounds": 2
+				},
+				{
+					"casts": 0,
+					"hp": 60,
+					"outcome": "victory",
+					"rounds": 5
+				},
+				{
+					"casts": 0,
+					"hp": 89,
+					"outcome": "victory",
+					"rounds": 1
+				},
+				{
+					"casts": 0,
+					"hp": 89,
+					"outcome": "victory",
+					"rounds": 1
+				},
+				{
+					"casts": 0,
+					"hp": 94,
+					"outcome": "victory",
+					"rounds": 1
+				},
+				{
+					"casts": 0,
+					"hp": 94,
+					"outcome": "victory",
+					"rounds": 1
+				},
+				{
+					"casts": 0,
+					"hp": 89,
+					"outcome": "victory",
+					"rounds": 2
+				},
+				{
+					"casts": 0,
+					"hp": 83,
+					"outcome": "victory",
+					"rounds": 2
+				},
+				{
+					"casts": 0,
+					"hp": 67,
+					"outcome": "victory",
+					"rounds": 3
+				},
+				{
+					"casts": 2,
+					"hp": 0,
+					"outcome": "defeat",
+					"rounds": 7
+				},
+				{
+					"casts": 0,
+					"hp": 94,
+					"outcome": "victory",
+					"rounds": 1
+				},
+				{
+					"casts": 0,
+					"hp": 94,
+					"outcome": "victory",
+					"rounds": 1
+				},
+				{
+					"casts": 0,
+					"hp": 94,
+					"outcome": "victory",
+					"rounds": 1
+				},
+				{
+					"casts": 0,
+					"hp": 84,
+					"outcome": "victory",
+					"rounds": 3
+				},
+				{
+					"casts": 0,
+					"hp": 79,
+					"outcome": "victory",
+					"rounds": 2
+				},
+				{
+					"casts": 0,
+					"hp": 73,
+					"outcome": "victory",
+					"rounds": 2
+				},
+				{
+					"casts": 0,
+					"hp": 66,
+					"outcome": "victory",
+					"rounds": 2
+				},
+				{
+					"casts": 2,
+					"hp": 0,
+					"outcome": "defeat",
+					"rounds": 7
+				},
+				{
+					"casts": 0,
+					"hp": 94,
+					"outcome": "victory",
+					"rounds": 1
+				},
+				{
+					"casts": 0,
+					"hp": 94,
+					"outcome": "victory",
+					"rounds": 1
+				},
+				{
+					"casts": 0,
+					"hp": 94,
+					"outcome": "victory",
+					"rounds": 1
+				},
+				{
+					"casts": 0,
+					"hp": 94,
+					"outcome": "victory",
+					"rounds": 1
+				},
+				{
+					"casts": 0,
+					"hp": 88,
+					"outcome": "victory",
+					"rounds": 2
+				},
+				{
+					"casts": 0,
+					"hp": 93,
+					"outcome": "victory",
+					"rounds": 1
+				},
+				{
+					"casts": 0,
+					"hp": 86,
+					"outcome": "victory",
+					"rounds": 2
+				},
+				{
+					"casts": 1,
+					"hp": 78,
+					"outcome": "victory",
+					"rounds": 3
+				},
+				{
+					"casts": 1,
+					"hp": 15,
+					"outcome": "victory",
+					"rounds": 6
+				}
+			],
+			"cleared": true,
+			"error": "",
+			"exp": 1551,
+			"final_state": {},
+			"floors": {
+				"1": {
+					"battles": 17,
+					"chests": 7,
+					"clears": 0,
+					"deaths": 0,
+					"enemies": {
+						"E01": 16,
+						"E02": 1
+					},
+					"entries": 25,
+					"events": 1,
+					"items": {
+						"I01": 2,
+						"I02": 3,
+						"I04": 6
+					},
+					"levels": {
+						"1": 17
+					},
+					"returns": 0
+				},
+				"10": {
+					"battles": 4,
+					"chests": 0,
+					"clears": 1,
+					"deaths": 3,
+					"enemies": {
+						"B10": 4
+					},
+					"entries": 4,
+					"events": 0,
+					"items": {
+						"I10": 1
+					},
+					"levels": {
+						"6": 4
+					},
+					"returns": 0
+				},
+				"2": {
+					"battles": 16,
+					"chests": 5,
+					"clears": 0,
+					"deaths": 0,
+					"enemies": {
+						"E01": 8,
+						"E02": 6,
+						"E03": 2
+					},
+					"entries": 25,
+					"events": 4,
+					"items": {
+						"I01": 2,
+						"I04": 2,
+						"I10": 3
+					},
+					"levels": {
+						"1": 10,
+						"2": 6
+					},
+					"returns": 0
+				},
+				"3": {
+					"battles": 18,
+					"chests": 6,
+					"clears": 0,
+					"deaths": 0,
+					"enemies": {
+						"E01": 7,
+						"E02": 9,
+						"E03": 2
+					},
+					"entries": 25,
+					"events": 1,
+					"items": {
+						"I01": 1,
+						"I04": 3,
+						"I10": 4
+					},
+					"levels": {
+						"2": 7,
+						"3": 11
+					},
+					"returns": 4
+				},
+				"4": {
+					"battles": 17,
+					"chests": 3,
+					"clears": 0,
+					"deaths": 0,
+					"enemies": {
+						"E01": 2,
+						"E02": 6,
+						"E03": 5,
+						"E04": 4
+					},
+					"entries": 21,
+					"events": 1,
+					"items": {
+						"I01": 1,
+						"I03": 1,
+						"I04": 2,
+						"I05": 3
+					},
+					"levels": {
+						"2": 7,
+						"3": 6,
+						"4": 4
+					},
+					"returns": 0
+				},
+				"5": {
+					"battles": 15,
+					"chests": 5,
+					"clears": 0,
+					"deaths": 0,
+					"enemies": {
+						"E01": 3,
+						"E02": 3,
+						"E03": 5,
+						"E04": 4
+					},
+					"entries": 21,
+					"events": 1,
+					"items": {
+						"I01": 1,
+						"I03": 1,
+						"I04": 2,
+						"I05": 1,
+						"I06": 1,
+						"I10": 2
+					},
+					"levels": {
+						"2": 2,
+						"3": 4,
+						"4": 9
+					},
+					"returns": 0
+				},
+				"6": {
+					"battles": 19,
+					"chests": 2,
+					"clears": 0,
+					"deaths": 1,
+					"enemies": {
+						"E04": 5,
+						"E05": 2,
+						"E06": 7,
+						"E07": 5
+					},
+					"entries": 21,
+					"events": 0,
+					"items": {
+						"I04": 1,
+						"I05": 2,
+						"I06": 3,
+						"I10": 4
+					},
+					"levels": {
+						"3": 9,
+						"4": 3,
+						"5": 7
+					},
+					"returns": 2
+				},
+				"7": {
+					"battles": 15,
+					"chests": 0,
+					"clears": 0,
+					"deaths": 0,
+					"enemies": {
+						"E04": 5,
+						"E06": 3,
+						"E07": 6,
+						"E08": 1
+					},
+					"entries": 18,
+					"events": 3,
+					"items": {
+						"I06": 1,
+						"I08": 1,
+						"I10": 1
+					},
+					"levels": {
+						"4": 5,
+						"5": 3,
+						"6": 7
+					},
+					"returns": 2
+				},
+				"8": {
+					"battles": 15,
+					"chests": 0,
+					"clears": 0,
+					"deaths": 0,
+					"enemies": {
+						"E04": 3,
+						"E06": 2,
+						"E07": 6,
+						"E08": 4
+					},
+					"entries": 16,
+					"events": 1,
+					"items": {},
+					"levels": {
+						"4": 6,
+						"5": 1,
+						"6": 8
+					},
+					"returns": 5
+				},
+				"9": {
+					"battles": 7,
+					"chests": 1,
+					"clears": 0,
+					"deaths": 0,
+					"enemies": {
+						"E05": 1,
+						"E06": 3,
+						"E07": 1,
+						"E08": 2
+					},
+					"entries": 11,
+					"events": 3,
+					"items": {
+						"I10": 4
+					},
+					"levels": {
+						"5": 3,
+						"6": 3,
+						"7": 1
+					},
+					"returns": 7
+				}
+			},
+			"gold": 908,
+			"highest_floor": 11,
+			"items": 60,
+			"level": 16,
+			"normal_deaths": 4,
+			"normal_trips": 25,
+			"reached_10F": true,
+			"seed": 10000,
+			"state_sha256": "8b8bcdb82054cf8c256da75f0adc7779a6824c373058b20a0574b8c29327e768",
+			"story_deaths": 0,
+			"trace_sha256": "b725be97547c79f6c1ce81e364631a474f74fcedc1f0a97e9cd8293a7f88934c",
+			"trips": [
+				{
+					"end_level": 1,
+					"exp_earned": 5,
+					"exp_end": 5,
+					"exp_start": 0,
+					"floor_max": 3,
+					"gold_earned": 3,
+					"gold_end": 3,
+					"gold_start": 0,
+					"hp_lost_in_combat": 4,
+					"loot": {
+						"I02": 1,
+						"I10": 1
+					},
+					"loss": {
+						"exp": 0,
+						"gold": 0,
+						"items": 0
+					},
+					"outcome": "return",
+					"remaining_hp": 20,
+					"rounds": 3,
+					"start_level": 1,
+					"trip": 1
+				},
+				{
+					"end_level": 2,
+					"exp_earned": 9,
+					"exp_end": 14,
+					"exp_start": 5,
+					"floor_max": 3,
+					"gold_earned": 4,
+					"gold_end": 7,
+					"gold_start": 3,
+					"hp_lost_in_combat": 4,
+					"loot": {
+						"I10": 1
+					},
+					"loss": {
+						"exp": 0,
+						"gold": 0,
+						"items": 0
+					},
+					"outcome": "return",
+					"remaining_hp": 25,
+					"rounds": 4,
+					"start_level": 1,
+					"trip": 2
+				},
+				{
+					"end_level": 2,
+					"exp_earned": 14,
+					"exp_end": 28,
+					"exp_start": 14,
+					"floor_max": 3,
+					"gold_earned": 6,
+					"gold_end": 13,
+					"gold_start": 7,
+					"hp_lost_in_combat": 3,
+					"loot": {
+						"I04": 1
+					},
+					"loss": {
+						"exp": 0,
+						"gold": 0,
+						"items": 0
+					},
+					"outcome": "return",
+					"remaining_hp": 26,
+					"rounds": 5,
+					"start_level": 2,
+					"trip": 3
+				},
+				{
+					"end_level": 2,
+					"exp_earned": 5,
+					"exp_end": 33,
+					"exp_start": 28,
+					"floor_max": 3,
+					"gold_earned": 2,
+					"gold_end": 15,
+					"gold_start": 13,
+					"hp_lost_in_combat": 2,
+					"loot": {
+						"I01": 1,
+						"I04": 1
+					},
+					"loss": {
+						"exp": 0,
+						"gold": 0,
+						"items": 0
+					},
+					"outcome": "return",
+					"remaining_hp": 27,
+					"rounds": 2,
+					"start_level": 2,
+					"trip": 4
+				},
+				{
+					"end_level": 3,
+					"exp_earned": 17,
+					"exp_end": 50,
+					"exp_start": 33,
+					"floor_max": 6,
+					"gold_earned": 14,
+					"gold_end": 27,
+					"gold_start": 15,
+					"hp_lost_in_combat": 34,
+					"loot": {
+						"I04": 2
+					},
+					"loss": {
+						"exp": 0,
+						"gold": 2,
+						"items": 0
+					},
+					"outcome": "death",
+					"remaining_hp": 0,
+					"rounds": 11,
+					"start_level": 2,
+					"trip": 5
+				},
+				{
+					"end_level": 4,
+					"exp_earned": 31,
+					"exp_end": 81,
+					"exp_start": 50,
+					"floor_max": 6,
+					"gold_earned": 21,
+					"gold_end": 48,
+					"gold_start": 27,
+					"hp_lost_in_combat": 26,
+					"loot": {
+						"I01": 1,
+						"I04": 1,
+						"I10": 2
+					},
+					"loss": {
+						"exp": 0,
+						"gold": 0,
+						"items": 0
+					},
+					"outcome": "return",
+					"remaining_hp": 13,
+					"rounds": 9,
+					"start_level": 3,
+					"trip": 6
+				},
+				{
+					"end_level": 5,
+					"exp_earned": 44,
+					"exp_end": 125,
+					"exp_start": 81,
+					"floor_max": 6,
+					"gold_earned": 31,
+					"gold_end": 79,
+					"gold_start": 48,
+					"hp_lost_in_combat": 29,
+					"loot": {
+						"I10": 1
+					},
+					"loss": {
+						"exp": 0,
+						"gold": 0,
+						"items": 0
+					},
+					"outcome": "return",
+					"remaining_hp": 15,
+					"rounds": 11,
+					"start_level": 4,
+					"trip": 7
+				},
+				{
+					"end_level": 5,
+					"exp_earned": 40,
+					"exp_end": 165,
+					"exp_start": 125,
+					"floor_max": 7,
+					"gold_earned": 27,
+					"gold_end": 106,
+					"gold_start": 79,
+					"hp_lost_in_combat": 36,
+					"loot": {
+						"I06": 1,
+						"I10": 3
+					},
+					"loss": {
+						"exp": 0,
+						"gold": 0,
+						"items": 0
+					},
+					"outcome": "return",
+					"remaining_hp": 8,
+					"rounds": 14,
+					"start_level": 5,
+					"trip": 8
+				},
+				{
+					"end_level": 6,
+					"exp_earned": 65,
+					"exp_end": 230,
+					"exp_start": 165,
+					"floor_max": 9,
+					"gold_earned": 45,
+					"gold_end": 151,
+					"gold_start": 106,
+					"hp_lost_in_combat": 24,
+					"loot": {
+						"I05": 1,
+						"I10": 1
+					},
+					"loss": {
+						"exp": 0,
+						"gold": 0,
+						"items": 0
+					},
+					"outcome": "return",
+					"remaining_hp": 25,
+					"rounds": 16,
+					"start_level": 5,
+					"trip": 9
+				},
+				{
+					"end_level": 7,
+					"exp_earned": 64,
+					"exp_end": 294,
+					"exp_start": 230,
+					"floor_max": 7,
+					"gold_earned": 47,
+					"gold_end": 198,
+					"gold_start": 151,
+					"hp_lost_in_combat": 35,
+					"loot": {
+						"I04": 1,
+						"I10": 1
+					},
+					"loss": {
+						"exp": 0,
+						"gold": 0,
+						"items": 0
+					},
+					"outcome": "return",
+					"remaining_hp": 19,
+					"rounds": 14,
+					"start_level": 6,
+					"trip": 10
+				},
+				{
+					"end_level": 8,
+					"exp_earned": 84,
+					"exp_end": 378,
+					"exp_start": 294,
+					"floor_max": 9,
+					"gold_earned": 59,
+					"gold_end": 257,
+					"gold_start": 198,
+					"hp_lost_in_combat": 32,
+					"loot": {
+						"I04": 1,
+						"I06": 1
+					},
+					"loss": {
+						"exp": 0,
+						"gold": 0,
+						"items": 0
+					},
+					"outcome": "return",
+					"remaining_hp": 27,
+					"rounds": 17,
+					"start_level": 7,
+					"trip": 11
+				},
+				{
+					"end_level": 9,
+					"exp_earned": 83,
+					"exp_end": 461,
+					"exp_start": 378,
+					"floor_max": 9,
+					"gold_earned": 64,
+					"gold_end": 321,
+					"gold_start": 257,
+					"hp_lost_in_combat": 29,
+					"loot": {
+						"I10": 1
+					},
+					"loss": {
+						"exp": 0,
+						"gold": 0,
+						"items": 0
+					},
+					"outcome": "return",
+					"remaining_hp": 41,
+					"rounds": 13,
+					"start_level": 8,
+					"trip": 12
+				},
+				{
+					"end_level": 10,
+					"exp_earned": 90,
+					"exp_end": 551,
+					"exp_start": 461,
+					"floor_max": 8,
+					"gold_earned": 66,
+					"gold_end": 387,
+					"gold_start": 321,
+					"hp_lost_in_combat": 42,
+					"loot": {
+						"I05": 1,
+						"I10": 1
+					},
+					"loss": {
+						"exp": 0,
+						"gold": 0,
+						"items": 0
+					},
+					"outcome": "return",
+					"remaining_hp": 27,
+					"rounds": 17,
+					"start_level": 9,
+					"trip": 13
+				},
+				{
+					"end_level": 10,
+					"exp_earned": 78,
+					"exp_end": 629,
+					"exp_start": 551,
+					"floor_max": 8,
+					"gold_earned": 56,
+					"gold_end": 443,
+					"gold_start": 387,
+					"hp_lost_in_combat": 41,
+					"loot": {
+						"I06": 1
+					},
+					"loss": {
+						"exp": 0,
+						"gold": 0,
+						"items": 0
+					},
+					"outcome": "return",
+					"remaining_hp": 28,
+					"rounds": 14,
+					"start_level": 10,
+					"trip": 14
+				},
+				{
+					"end_level": 11,
+					"exp_earned": 71,
+					"exp_end": 700,
+					"exp_start": 629,
+					"floor_max": 10,
+					"gold_earned": 49,
+					"gold_end": 443,
+					"gold_start": 443,
+					"hp_lost_in_combat": 78,
+					"loot": {
+						"I06": 1,
+						"I10": 2
+					},
+					"loss": {
+						"exp": 0,
+						"gold": 49,
+						"items": 0
+					},
+					"outcome": "death",
+					"remaining_hp": 0,
+					"rounds": 14,
+					"start_level": 10,
+					"trip": 15
+				},
+				{
+					"end_level": 12,
+					"exp_earned": 93,
+					"exp_end": 793,
+					"exp_start": 700,
+					"floor_max": 9,
+					"gold_earned": 65,
+					"gold_end": 508,
+					"gold_start": 443,
+					"hp_lost_in_combat": 56,
+					"loot": {
+						"I02": 1,
+						"I04": 1
+					},
+					"loss": {
+						"exp": 0,
+						"gold": 0,
+						"items": 0
+					},
+					"outcome": "return",
+					"remaining_hp": 23,
+					"rounds": 17,
+					"start_level": 11,
+					"trip": 16
+				},
+				{
+					"end_level": 12,
+					"exp_earned": 64,
+					"exp_end": 857,
+					"exp_start": 793,
+					"floor_max": 9,
+					"gold_earned": 43,
+					"gold_end": 551,
+					"gold_start": 508,
+					"hp_lost_in_combat": 29,
+					"loot": {
+						"I03": 1,
+						"I04": 1,
+						"I05": 2
+					},
+					"loss": {
+						"exp": 0,
+						"gold": 0,
+						"items": 0
+					},
+					"outcome": "return",
+					"remaining_hp": 50,
+					"rounds": 10,
+					"start_level": 12,
+					"trip": 17
+				},
+				{
+					"end_level": 12,
+					"exp_earned": 76,
+					"exp_end": 933,
+					"exp_start": 857,
+					"floor_max": 9,
+					"gold_earned": 55,
+					"gold_end": 606,
+					"gold_start": 551,
+					"hp_lost_in_combat": 37,
+					"loot": {
+						"I01": 1,
+						"I02": 1,
+						"I04": 1,
+						"I10": 2
+					},
+					"loss": {
+						"exp": 0,
+						"gold": 0,
+						"items": 0
+					},
+					"outcome": "return",
+					"remaining_hp": 42,
+					"rounds": 14,
+					"start_level": 12,
+					"trip": 18
+				},
+				{
+					"end_level": 13,
+					"exp_earned": 89,
+					"exp_end": 1022,
+					"exp_start": 933,
+					"floor_max": 8,
+					"gold_earned": 65,
+					"gold_end": 671,
+					"gold_start": 606,
+					"hp_lost_in_combat": 57,
+					"loot": {
+						"I01": 1,
+						"I10": 1
+					},
+					"loss": {
+						"exp": 0,
+						"gold": 0,
+						"items": 0
+					},
+					"outcome": "return",
+					"remaining_hp": 27,
+					"rounds": 16,
+					"start_level": 12,
+					"trip": 19
+				},
+				{
+					"end_level": 14,
+					"exp_earned": 81,
+					"exp_end": 1103,
+					"exp_start": 1022,
+					"floor_max": 8,
+					"gold_earned": 53,
+					"gold_end": 724,
+					"gold_start": 671,
+					"hp_lost_in_combat": 61,
+					"loot": {
+						"I01": 2,
+						"I04": 2
+					},
+					"loss": {
+						"exp": 0,
+						"gold": 0,
+						"items": 0
+					},
+					"outcome": "return",
+					"remaining_hp": 28,
+					"rounds": 16,
+					"start_level": 13,
+					"trip": 20
+				},
+				{
+					"end_level": 14,
+					"exp_earned": 77,
+					"exp_end": 1180,
+					"exp_start": 1103,
+					"floor_max": 8,
+					"gold_earned": 59,
+					"gold_end": 783,
+					"gold_start": 724,
+					"hp_lost_in_combat": 51,
+					"loot": {
+						"I01": 1,
+						"I04": 1,
+						"I05": 2,
+						"I08": 1
+					},
+					"loss": {
+						"exp": 0,
+						"gold": 0,
+						"items": 0
+					},
+					"outcome": "return",
+					"remaining_hp": 38,
+					"rounds": 12,
+					"start_level": 14,
+					"trip": 21
+				},
+				{
+					"end_level": 14,
+					"exp_earned": 74,
+					"exp_end": 1254,
+					"exp_start": 1180,
+					"floor_max": 9,
+					"gold_earned": 51,
+					"gold_end": 834,
+					"gold_start": 783,
+					"hp_lost_in_combat": 29,
+					"loot": {
+						"I03": 1
+					},
+					"loss": {
+						"exp": 0,
+						"gold": 0,
+						"items": 0
+					},
+					"outcome": "return",
+					"remaining_hp": 60,
+					"rounds": 14,
+					"start_level": 14,
+					"trip": 22
+				},
+				{
+					"end_level": 15,
+					"exp_earned": 81,
+					"exp_end": 1335,
+					"exp_start": 1254,
+					"floor_max": 10,
+					"gold_earned": 56,
+					"gold_end": 801,
+					"gold_start": 834,
+					"hp_lost_in_combat": 94,
+					"loot": {
+						"I04": 2
+					},
+					"loss": {
+						"exp": 0,
+						"gold": 89,
+						"items": 0
+					},
+					"outcome": "death",
+					"remaining_hp": 0,
+					"rounds": 18,
+					"start_level": 14,
+					"trip": 23
+				},
+				{
+					"end_level": 15,
+					"exp_earned": 78,
+					"exp_end": 1413,
+					"exp_start": 1335,
+					"floor_max": 10,
+					"gold_earned": 59,
+					"gold_end": 774,
+					"gold_start": 801,
+					"hp_lost_in_combat": 94,
+					"loot": {
+						"I04": 1,
+						"I06": 1,
+						"I10": 1
+					},
+					"loss": {
+						"exp": 0,
+						"gold": 86,
+						"items": 0
+					},
+					"outcome": "death",
+					"remaining_hp": 0,
+					"rounds": 19,
+					"start_level": 15,
+					"trip": 24
+				},
+				{
+					"end_level": 16,
+					"exp_earned": 138,
+					"exp_end": 1551,
+					"exp_start": 1413,
+					"floor_max": 10,
+					"gold_earned": 134,
+					"gold_end": 908,
+					"gold_start": 774,
+					"hp_lost_in_combat": 84,
+					"loot": {
+						"I10": 1
+					},
+					"loss": {
+						"exp": 0,
+						"gold": 0,
+						"items": 0
+					},
+					"outcome": "clear",
+					"remaining_hp": 15,
+					"rounds": 18,
+					"start_level": 15,
+					"trip": 25
+				}
+			]
+		}
+	],
+	"schema_version": 1,
+	"seeds": [
+		10000
+	]
+}

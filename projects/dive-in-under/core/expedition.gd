@@ -2,19 +2,26 @@ extends RefCounted
 ## Pure campaign transitions. UI, filesystem and combat formula are outside this core.
 const Combat = preload("res://core/combat.gd")
 const Catalog = preload("res://core/catalog.gd")
+const Condition = preload("res://core/equipment_condition.gd")
+const Storage = preload("res://core/storage.gd")
 const STATS = ["max_hp","atk","def","spd","max_sp"]
 const SLOTS = ["right_hand","left_hand","head","body","legs","feet","neck","ears","eyes","finger","wrist"]
 
 static func load_config(version: String="") -> Dictionary:
-	if not version in ["","2026-10-17.loop-provisional.1","2026-10-17.loop-provisional.2","2026-10-17.loop-provisional.3","2026-10-17.loop-provisional.4"]: return {}
-	var filename: String="expedition-legacy.json" if version=="2026-10-17.loop-provisional.1" else ("expedition-legacy-2.json" if version=="2026-10-17.loop-provisional.2" else ("expedition-legacy-3.json" if version=="2026-10-17.loop-provisional.3" else "expedition.json"))
+	if not version in ["","2026-10-17.loop-provisional.1","2026-10-17.loop-provisional.2","2026-10-17.loop-provisional.3","2026-10-17.loop-provisional.4","2026-10-17.loop-provisional.5"]: return {}
+	var filename: String="expedition-legacy.json" if version=="2026-10-17.loop-provisional.1" else ("expedition-legacy-2.json" if version=="2026-10-17.loop-provisional.2" else ("expedition-legacy-3.json" if version=="2026-10-17.loop-provisional.3" else ("expedition-legacy-4.json" if version=="2026-10-17.loop-provisional.4" else "expedition.json")))
 	var value = JSON.parse_string(FileAccess.get_file_as_string("res://data/v1/"+filename))
 	if not value is Dictionary: return {}
+	value.condition_rules=JSON.parse_string(FileAccess.get_file_as_string("res://data/v1/equipment-condition.json"))
 	var problem:=validate_config(value,Catalog.load_data())
 	if problem!="": push_error(problem); return {}
 	return value
 
 static func validate_config(c: Dictionary, data: Dictionary) -> String:
+	if not c.get("condition_rules") is Dictionary: return "Invalid condition rules"
+	var rules: Dictionary=c.condition_rules
+	if rules.get("schema_version")!=1 or rules.get("maximum")!=Condition.MAXIMUM: return "Unsupported condition rules"
+	if not integer(rules.get("wear_per_battle"),0,100) or not integer(rules.get("repair_gold_per_point"),1,1000): return "Invalid condition wear/repair"
 	for key in ["initial","growth","death_penalty","slots","items","drops","events"]:
 		if not c.get(key) is Dictionary: return "Invalid loop config: "+key
 	if c.get("schema_version")!=1 or not c.get("config_version") is String or c.config_version=="": return "Invalid config version"
@@ -37,6 +44,10 @@ static func validate_config(c: Dictionary, data: Dictionary) -> String:
 	if not c.initial.get("items") is Array: return "Invalid starting items"
 	for id in c.initial.items:
 		if not c.items.has(id): return "Unknown starting item"
+	var starting_gear=c.initial.get("equipment",{})
+	if not starting_gear is Dictionary: return "Invalid starting equipment"
+	for slot in starting_gear:
+		if not slot in SLOTS or not c.items.has(starting_gear[slot]) or c.items[starting_gear[slot]].slot!=slot: return "Invalid starting equipment slot"
 	for enemy_id in data.enemies:
 		var table=drop_table(c,data,enemy_id)
 		if not table is Dictionary: return "Missing drop table"
@@ -74,13 +85,17 @@ static func drop_table(cfg: Dictionary, data: Dictionary, enemy_id: String) -> V
 	return cfg.drops.get(enemy_id,data.get("enemy_drops",{}).get(enemy_id))
 
 static func fresh(cfg: Dictionary, seed_value: int) -> Dictionary:
-	var s := {"schema_version":3,"hero_skills":cfg.get("hero_skills",["S105"]).duplicate(),"config_version":cfg.config_version,"revision":0,"seed":seed_value,
+	var s := {"schema_version":5,"condition_version":1,"item_condition":{},"storage_version":1,"cloth":[],"hero_skills":cfg.get("hero_skills",["S105"]).duplicate(),"config_version":cfg.config_version,"revision":0,"seed":seed_value,
 		"rng":{"explore":0,"battle":0,"loot":0},"phase":"explore","first_done":false,"story_deaths":0,
 		"floor":0,"highest_floor":0,"exp":0,"gold":int(cfg.initial.gold),"hp":int(cfg.initial.max_hp),
 		"sp":int(cfg.initial.max_sp),"items":{},"inventory":[],"warehouse":[],"equipment":{},"next_item":1,
 		"battle":{},"event":"","result":{},"journal":[cfg.get("intro","主人公ひとりで地下へ踏み出した。探索の解決後は町へ帰還できる。")],"trips":1,"deaths":0}
 	for slot in SLOTS: s.equipment[slot] = ""
 	for id in cfg.initial.items: add_item(s,id)
+	for slot in cfg.initial.get("equipment",{}):
+		var uid:=add_item(s,cfg.initial.equipment[slot])
+		s.inventory.erase(uid); s.equipment[slot]=uid
+	var unit:=hero(s,cfg); s.hp=unit.max_hp; s.sp=unit.max_sp
 	return s
 
 static func level_info(s: Dictionary, cfg: Dictionary) -> Dictionary:
@@ -104,7 +119,7 @@ static func hero(s: Dictionary, cfg: Dictionary) -> Dictionary:
 	for key in STATS: h[key] = int(cfg.initial[key]) + (level-1)*int(cfg.growth[key])
 	for uid in s.equipment.values():
 		if uid == "": continue
-		for key in cfg.items[s.items[uid]].stats: h[key] += int(cfg.items[s.items[uid]].stats[key])
+		for key in cfg.items[s.items[uid]].stats: h[key] += Condition.bonus(s,uid,int(cfg.items[s.items[uid]].stats[key]))
 	return Combat.normalized(h)
 
 static func note(s: Dictionary, value: String) -> void:
@@ -115,6 +130,7 @@ static func add_item(s: Dictionary, id: String) -> String:
 	var uid := "item-%d" % int(s.next_item)
 	s.next_item += 1
 	s.items[uid] = id
+	if int(s.schema_version)>=4: s.item_condition[uid]=Condition.fresh()
 	s.inventory.append(uid)
 	return uid
 
@@ -163,7 +179,9 @@ static func finish(s: Dictionary, kind: String, reason: String, cfg: Dictionary)
 		s.exp -= loss.exp
 		if cfg.death_penalty.lose_inventory:
 			loss.items = s.inventory.size()
-			for uid in s.inventory: s.items.erase(uid)
+			for uid in s.inventory:
+				s.items.erase(uid)
+				if int(s.schema_version)>=4: s.item_condition.erase(uid)
 			s.inventory.clear()
 	s.result = {"kind":kind,"reason":reason,"floor":int(s.floor),"loss":loss}
 	s.phase = "result"
@@ -203,6 +221,10 @@ static func step_battle(s: Dictionary, data: Dictionary, cfg: Dictionary) -> voi
 			note(s,"%s：%s解除（%s）。" % [who,statuses.get(entry.get("status","defense"),"状態"),{"expired":"持続終了","death":"死亡","battle_end":"戦闘終了"}.get(entry.reason,entry.reason)])
 		elif entry.type == "attack":
 			note(s,"%s → %s  %s" % [who,b.enemy.name if entry.target=="enemy" else "主人公",str(entry.damage)+" ダメージ" if entry.hit else "MISS / ミス"])
+	if b.outcome!="ongoing":
+		Condition.wear(s,cfg)
+		var after_wear:=hero(s,cfg)
+		s.hp=mini(int(s.hp),int(after_wear.max_hp)); s.sp=mini(int(s.sp),int(after_wear.max_sp))
 	if b.outcome == "victory":
 		s.last_outcome="victory"
 		gain_exp(s,int(b.reward.exp),cfg)
@@ -278,13 +300,26 @@ static func act(previous: Dictionary, action: String, expected_revision: int, ar
 				s.last_outcome=""
 				s.phase="explore"; s.floor=0; s.result={}; s.journal=[]; s.trips+=1
 				note(s,"町でHP/SPを回復し、地下へ向かった。"); changed=true
+		"repair":
+			var uid: String=args.get("uid","")
+			if s.phase=="town":
+				var price:=Condition.cost(s,uid,cfg)
+				if price>0 and int(s.gold)>=price:
+					s.gold-=price
+					s.item_condition[uid].current=s.item_condition[uid].maximum
+					var h:=hero(s,cfg); s.hp=h.max_hp; s.sp=h.max_sp
+					note(s,"装備を修理した。Gold -%d"%price); changed=true
+		"organize":
+			changed=Storage.organize(s,cfg,args.get("mode","category"))
+		"to_cloth":
+			changed=Storage.move(s,args.get("uid",""),args.get("source","inventory"),"cloth",cfg)
 		"deposit","withdraw","equip","unequip":
 			if s.phase=="town":
 				var uid: String = args.get("uid","")
-				if action=="deposit" and uid in s.inventory:
-					s.inventory.erase(uid); s.warehouse.append(uid); changed=true
-				elif action=="withdraw" and uid in s.warehouse:
-					s.warehouse.erase(uid); s.inventory.append(uid); changed=true
+				if action=="deposit":
+					changed=Storage.move(s,uid,args.get("source","inventory"),"warehouse",cfg)
+				elif action=="withdraw":
+					changed=Storage.move(s,uid,args.get("source","warehouse"),"inventory",cfg)
 				elif action=="equip" and uid in s.inventory:
 					var slot: String = cfg.items[s.items[uid]].slot
 					if slot in SLOTS:
@@ -292,7 +327,7 @@ static func act(previous: Dictionary, action: String, expected_revision: int, ar
 						s.inventory.erase(uid); s.equipment[slot]=uid; changed=true
 				elif action=="unequip":
 					var slot: String = args.get("slot","")
-					if slot in SLOTS and s.equipment[slot] != "":
+					if slot in SLOTS and s.equipment[slot] != "" and s.inventory.size()<Storage.BACKPACK_CAPACITY:
 						s.inventory.append(s.equipment[slot]); s.equipment[slot]=""; changed=true
 				if changed:
 					var h := hero(s,cfg)
@@ -306,8 +341,8 @@ static func integer(v: Variant, low: int, high: int) -> bool:
 static func validate(s: Dictionary, data: Dictionary, cfg: Dictionary) -> String:
 	for key in ["schema_version","config_version","revision","seed","rng","phase","first_done","story_deaths","floor","highest_floor","exp","gold","hp","sp","items","inventory","warehouse","equipment","next_item","battle","event","result","journal","trips","deaths"]:
 		if not s.has(key): return "Missing save field: "+key
-	if (s.schema_version!=1 and s.schema_version!=2 and s.schema_version!=3) or s.config_version!=cfg.config_version: return "Unsupported save/config version"
-	if s.schema_version==3 and (not s.get("hero_skills") is Array or s.hero_skills!=cfg.get("hero_skills",["S105"])): return "Invalid initial skill ownership"
+	if (s.schema_version!=1 and s.schema_version!=2 and s.schema_version!=3 and s.schema_version!=4 and s.schema_version!=5) or s.config_version!=cfg.config_version: return "Unsupported save/config version"
+	if s.schema_version>=3 and (not s.get("hero_skills") is Array or s.hero_skills!=cfg.get("hero_skills",["S105"])): return "Invalid initial skill ownership"
 	for key in ["revision","seed","story_deaths","floor","highest_floor","exp","gold","hp","sp","next_item","trips","deaths"]:
 		if not integer(s[key],0,2147483647): return "Invalid number: "+key
 	if not s.first_done is bool or s.story_deaths>1 or s.first_done!=(s.story_deaths==1): return "Invalid legacy history flags"
@@ -327,6 +362,9 @@ static func validate(s: Dictionary, data: Dictionary, cfg: Dictionary) -> String
 	if s.equipment.size()!=11: return "Equipment must contain 11 slots"
 	var owned: Array = s.inventory.duplicate()
 	owned.append_array(s.warehouse)
+	if s.schema_version>=5:
+		if s.get("storage_version")!=1 or not s.get("cloth") is Array or s.cloth.size()>Storage.CLOTH_CAPACITY: return "Invalid cloth storage"
+		owned.append_array(s.cloth)
 	for slot in SLOTS:
 		if not s.equipment.has(slot) or not s.equipment[slot] is String: return "Missing slot"
 		var uid: String = s.equipment[slot]
@@ -342,6 +380,8 @@ static func validate(s: Dictionary, data: Dictionary, cfg: Dictionary) -> String
 		if int(uid.trim_prefix("item-"))<1 or int(uid.trim_prefix("item-"))>=s.next_item: return "Invalid next item ID"
 		if not s.items[uid] is String or not cfg.items.has(s.items[uid]): return "Unknown item ID"
 	if seen.size()!=s.items.size(): return "Orphaned item"
+	var condition_error:=Condition.validate(s)
+	if condition_error!="": return condition_error
 	var h := hero(s,cfg)
 	if s.hp>h.max_hp or s.sp>h.max_sp: return "HP/SP out of range"
 	if s.phase!="result" and s.hp==0: return "Dead hero outside result"
@@ -381,12 +421,18 @@ static func validate(s: Dictionary, data: Dictionary, cfg: Dictionary) -> String
 	return ""
 
 static func migrate(s: Dictionary) -> Dictionary:
-	# Called only after validating the old schema/config. Preserve possessions and counters.
-	if s.schema_version==3: return s
+	# Validated legacy state is copied; first write archives its original bytes.
+	if s.schema_version==5: return s
 	var migrated:=s.duplicate(true)
-	migrated.schema_version=3
-	migrated.hero_skills=["S105"]
-	note(migrated,"旧セーブを保全して防御を習得。戦闘途中の場合は次の戦闘から使用する。")
+	if s.schema_version<4:
+		migrated.condition_version=1
+		migrated.item_condition={}
+		for uid in migrated.items: migrated.item_condition[uid]=Condition.fresh()
+		migrated.hero_skills=["S105"]
+	migrated.schema_version=5
+	migrated.storage_version=1
+	migrated.cloth=[]
+	note(migrated,"所持品を保全し、父親の風呂敷を使えるようにした。")
 	if migrated.phase=="result" and migrated.result.kind=="story_death":
 		migrated.result.reason="旧版で記録された導入イベントの結果です。町へ戻り、通常探索を続けられます。"
 	return migrated

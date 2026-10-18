@@ -14,7 +14,7 @@ $exe = Join-Path $build 'DiveInUnder.exe'
 $log = Join-Path $runDir 'run.log'
 $runId = [guid]::NewGuid().ToString('N')
 $arguments = @('--headless','--log-file', $log, '--audio-driver','Dummy','--quit-after','2000')
-$arguments += @('--',"--smoke-dir=$runDir","--smoke-run-id=$runId")
+$arguments += @('--','--legacy-persistence-check',"--smoke-dir=$runDir","--smoke-run-id=$runId")
 if ($Fault) { $arguments += "--smoke-fault=$Fault" }
 if ($ResumeProbe) { $arguments += '--resume-probe' }
 $quoted = ($arguments | ForEach-Object { '"' + $_.Replace('"','\"') + '"' }) -join ' '

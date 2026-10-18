@@ -1,0 +1,5 @@
+{
+  "schema_version": 1,
+  "facts": { "species": "人間" },
+  "source_note": "SPEC.mdの主人公と人間の装備仕様。年齢・職業・出身・人物紹介は未設定。参考UIの文言を採用しない。"
+}

@@ -1,0 +1,19 @@
+{
+	"complete": true,
+	"equipment_slots": 11,
+	"fixture_only": true,
+	"keyboard": true,
+	"manual_os_input": false,
+	"no_mutation": true,
+	"origin_return": true,
+	"read_only": true,
+	"rendered": true,
+	"run_id": "c3db5d433b0d4b28899cdfc145a3a8e9",
+	"same_left_panel": true,
+	"same_screen": true,
+	"save_after_sha256": "5209889baa8703cd883059456e6ab781e160dc5db92d7b8d0a518069db27b345",
+	"save_sha256": "5209889baa8703cd883059456e6ab781e160dc5db92d7b8d0a518069db27b345",
+	"state_sha256": "190b8d2a0f6adb3be6a87c0bd74f592cfb6aecf19b08dd1d8e6c2a7ecca9b6b3",
+	"tabs": 4,
+	"wheel_scroll": true
+}

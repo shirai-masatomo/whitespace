@@ -1,0 +1,8 @@
+{
+  "run_id": 39142842662,
+  "url": "https://github.com/shirai-masatomo/whitespace/actions/runs/39142842662",
+  "head_sha": "7e13e50227d2a42db37852988f1e6a65b59406e3",
+  "status": "completed",
+  "conclusion": "success",
+  "scope": "status UI + normal UI/restart; core/data unchanged"
+}

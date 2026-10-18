@@ -23,7 +23,7 @@ func put(path: String, text: String) -> void:
 	f.store_string(text); f.close()
 
 func _initialize() -> void:
-	data=Catalog.load_data(); cfg=E.load_config()
+	data=Catalog.load_data(); cfg=E.load_config("2026-10-17.loop-provisional.4") # Keep the legacy empty-equipment fixture; new starter is tested separately.
 	check(E.validate_config(cfg,data)=="","loop config valid")
 	var bad_config:=cfg.duplicate(true); bad_config.event_floors[3].ids.append("EV03")
 	check(E.validate_config(bad_config,data)!="","recruitment event excluded")

@@ -1,3 +1,5 @@
+assets/equipment/**/*.import
+assets/interface/**/*.import
 .godot/
 .tools/
 artifacts/
@@ -7,3 +9,5 @@ assets/ui-mocks/**/*.import
 
 assets/visual-candidates/**/*.import
 review/**/*.import
+
+assets/ui-reference/**/*.import

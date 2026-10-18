@@ -1,0 +1,10 @@
+{
+  "normal_shortcut_verified": true,
+  "pck_sha256": "A1C49A6F3AAB6CF69D28D1618ADA465EE623C4506EE7037780AC150D7FCD34D0",
+  "entry_count": 3,
+  "profile_isolated_for_startup_check": true,
+  "startup_without_smoke_hook": true,
+  "version": "0.5.3",
+  "normal_user_save_untouched": true,
+  "distribution_pck_match": true
+}

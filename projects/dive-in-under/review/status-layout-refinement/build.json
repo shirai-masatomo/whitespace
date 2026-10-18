@@ -1,0 +1,17 @@
+{
+  "zip_sha256": "E7DC997F8613365686447DAAB4C44774FF8FE73977C4EA56C16E51AC99E9947F",
+  "reference_sha256": "C923D526CD8F4BB832FD7B3A866BB22D1B051C54C2231DCED2F1B0921CD66C3B",
+  "version": "0.5.3",
+  "build_directory": "C:\\Users\\masat\\Documents\\Codex\\2026-10-17\\task\\dive-in-under-work\\projects\\dive-in-under\\build\\releases\\7e13e50227d2a42db37852988f1e6a65b59406e3-0.5.3",
+  "game_commit": "7e13e50227d2a42db37852988f1e6a65b59406e3",
+  "resolution": [
+    1280,
+    720
+  ],
+  "engine": "4.7.2.stable.official.ed1daf0bf",
+  "verification_screens_use_isolated_fixture": true,
+  "pck_sha256": "A1C49A6F3AAB6CF69D28D1618ADA465EE623C4506EE7037780AC150D7FCD34D0",
+  "user_save_modified_by_review": false,
+  "exe_sha256": "D34D36F3BE1A6C49C56525AE86469B92E4F417DDF0B43CF00DD80C385C4B0562",
+  "normal_distribution": true
+}

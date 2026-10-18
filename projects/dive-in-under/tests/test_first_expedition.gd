@@ -45,7 +45,7 @@ func _initialize() -> void:
 			check(loaded.ok and loaded.migrated,"legacy load and migration")
 			if not loaded.ok: continue
 			var s: Dictionary=loaded.state
-			check(s.schema_version==3 and FileAccess.get_sha256(path)==sha,"read-only migration preserves original bytes")
+			check(s.schema_version==5 and FileAccess.get_sha256(path)==sha,"read-only migration preserves original bytes")
 			for key in fields: check(s[key]==JSON.parse_string(JSON.stringify(source))[key],"migration preserves "+key)
 			check(store.cfg.growth==legacy.growth,"old growth remains pinned")
 			check(E.normal_deaths(s)==source.deaths-source.story_deaths,"story history excluded from ordinary deaths")
@@ -67,7 +67,8 @@ func _initialize() -> void:
 	s=E.act(s,"return",s.revision,{},data,cfg)
 	check(s.result.kind=="return" and s.deaths==0,"first return")
 	s=E.act(s,"town",s.revision,{},data,cfg)
-	var uid: String=s.inventory[0]
+	var uid: String=s.equipment.head
+	s=E.act(s,"unequip",s.revision,{"slot":"head"},data,cfg)
 	for action in ["deposit","withdraw","equip"]: s=E.act(s,action,s.revision,{"uid":uid},data,cfg)
 	check(s.equipment.head==uid and s.warehouse.is_empty(),"first return enables storage and equipment")
 	s=E.act(s,"depart",s.revision,{},data,cfg)

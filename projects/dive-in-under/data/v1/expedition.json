@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "config_version": "2026-10-17.loop-provisional.4",
+  "config_version": "2026-10-17.loop-provisional.5",
   "provisional": true,
   "note": "初期値・成長・通常死亡ペナルティは交換可能な試作設定。正式決定ではない。",
   "initial": {
@@ -10,9 +10,10 @@
     "spd": 6,
     "max_sp": 0,
     "gold": 0,
-    "items": [
-      "I01"
-    ]
+    "items": [],
+    "equipment": {
+      "head": "A02"
+    }
   },
   "growth": {
     "max_hp": 5,
@@ -117,6 +118,15 @@
       "stats": {
         "atk": 4
       }
+    },
+    "A02": {
+      "name": "冒険者のマント",
+      "slot": "head",
+      "stats": {
+        "def": 1
+      },
+      "description": "旅立ちの青いフード付きマント。頭に装備し、帽子とは同時に着用できない。",
+      "provisional_note": "防御+1、耐久100は調整用の仮値。旧I01とは別の種類。"
     }
   },
   "drops": {

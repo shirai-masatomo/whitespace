@@ -22,7 +22,7 @@ try {
         } else {
             $runId = [guid]::NewGuid().ToString('N')
             $log = Join-Path $runDir "$stage.log"
-            $arguments = ' --headless --max-fps 120 --audio-driver Dummy --log-file "' + $log + '" -- --smoke-dir="' + $runDir + '" --smoke-run-id=' + $runId + ' --campaign-replay="' + $Replay + '" --campaign-seed=' + $expected.replay.seed
+            $arguments = ' --headless --max-fps 120 --audio-driver Dummy --log-file "' + $log + '" -- --legacy-persistence-check --smoke-dir="' + $runDir + '" --smoke-run-id=' + $runId + ' --campaign-replay="' + $Replay + '" --campaign-seed=' + $expected.replay.seed
             if ($stage -eq 'complete') { $arguments += ' --campaign-resume' }
             if ($stage -eq 'final') { $arguments += ' --campaign-final-probe' }
             $process = Start-Process -FilePath $exe -ArgumentList $arguments -WindowStyle Hidden -PassThru

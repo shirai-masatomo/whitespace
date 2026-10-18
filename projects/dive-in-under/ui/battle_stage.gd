@@ -3,6 +3,7 @@ extends Control
 const VisualAssets = preload("res://ui/visual_assets.gd")
 var floor_number := 1
 var wide_layout := false
+var integrated_layout:=false
 var scenery: TextureRect
 var hero_art: Sprite2D
 var enemy_art: Sprite2D
@@ -53,7 +54,7 @@ const STATUE := [
 func _ready() -> void:
 	mouse_filter = MOUSE_FILTER_IGNORE
 	texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
-	custom_minimum_size = Vector2(896,504) if wide_layout else Vector2(0,270)
+	custom_minimum_size = Vector2.ZERO if integrated_layout else (Vector2(896,504) if wide_layout else Vector2(0,270))
 	clip_contents = true
 	scenery = TextureRect.new()
 	scenery.show_behind_parent = true
@@ -115,8 +116,8 @@ func layout_art() -> void:
 	# Slight crop emphasizes the existing floor; no PNG alteration or rotation.
 	scenery.pivot_offset = size*0.5
 	scenery.scale = Vector2.ONE if wide_layout else Vector2.ONE*BACKGROUND_ZOOM
-	place_actor(hero_art,"hero",hero_position_hint(),245 if wide_layout else 165)
-	place_actor(enemy_art,enemy_id,enemy_position_hint(),(230.0 if enemy_id=="B10" else 190.0) if wide_layout else ENEMY_HEIGHTS.get(enemy_id,140.0))
+	place_actor(hero_art,"hero",hero_position_hint(),245.0*size.y/504.0 if integrated_layout else (245 if wide_layout else 165))
+	place_actor(enemy_art,enemy_id,enemy_position_hint(),((230.0 if enemy_id=="B10" else 190.0)*size.y/504.0 if integrated_layout else (230.0 if enemy_id=="B10" else 190.0)) if wide_layout else ENEMY_HEIGHTS.get(enemy_id,140.0))
 	queue_redraw()
 
 func visual_audit() -> Dictionary:
