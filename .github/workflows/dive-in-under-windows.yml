@@ -137,10 +137,11 @@ jobs:
         if: steps.scope.outputs.art_only == 'true'
         run: ./tools/enemy_art_review.ps1
       - uses: actions/upload-artifact@v4
+        if: always()
         with:
           name: DiveInUnder-foundation-windows-x64
           path: projects/dive-in-under/build/DiveInUnder-foundation-windows-x64.zip
-          if-no-files-found: error
+          if-no-files-found: warn
       - uses: actions/upload-artifact@v4
         if: always()
         with:

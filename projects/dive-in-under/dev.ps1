@@ -34,6 +34,7 @@ function Run-Godot([string]$Name, [string[]]$Arguments) {
     if (Select-String -LiteralPath $logPath -Pattern 'SCRIPT ERROR:|^ERROR:' -Quiet) { throw "$Name logged an engine error" }
 }
 try {
+    if ($Task -in @('test','verify','build')) { Run-Godot 'import' @('--editor','--import','--quit') }
     if ($Task -in @('test','verify')) {
         Run-Godot 'starter-equipment-tests' @('--script','tests/test_starter_equipment.gd')
         Run-Godot 'storage-tests' @('--script','tests/test_storage.gd')
@@ -70,7 +71,6 @@ try {
         if (Test-Path $build) { throw 'Refusing to overwrite an existing release directory' }
         New-Item -ItemType Directory -Force $build | Out-Null
         Set-Content (Join-Path $project 'build/.gdignore') ''
-        Run-Godot 'import' @('--editor','--import','--quit')
         Run-Godot 'export' @('--export-release','Windows Desktop',(Join-Path $build 'DiveInUnder.exe'))
         Copy-Item (Join-Path $project 'tools/PLAY.txt') $build
         Copy-Item (Join-Path $project 'assets/licenses/GODOT_LICENSE.txt') $build
