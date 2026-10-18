@@ -6,13 +6,14 @@ static func region(key: String, r: Rect2) -> AtlasTexture:
 	if cache.has(key): return cache[key]
 	var t:=AtlasTexture.new(); t.atlas=SHEET; t.region=r; t.filter_clip=true; cache[key]=t; return t
 static func button_style(mode: String, selected: bool=false) -> StyleBoxTexture:
-	var r:=Rect2(726,684,160,78)
-	if selected or mode=="hover": r=Rect2(895,684,163,78)
-	if mode=="pressed": r=Rect2(1063,684,162,78)
-	if mode=="disabled": r=Rect2(1231,684,163,78)
-	var st:=StyleBoxTexture.new(); st.texture=region("button-"+str(r.position.x),r)
+	var r:=Rect2(726,691,160,64)
+	if selected: r=Rect2(895,691,163,64)
+	if mode=="pressed": r=Rect2(1063,691,162,64)
+	if mode=="disabled": r=Rect2(1231,691,163,64)
+	var st:=StyleBoxTexture.new(); st.texture=SHEET; st.region_rect=r
+	if mode=="hover": st.modulate_color=Color(1.15,1.15,1.12)
 	for side in [SIDE_LEFT,SIDE_TOP,SIDE_RIGHT,SIDE_BOTTOM]:
-		st.set_texture_margin(side,12); st.set_content_margin(side,4)
+		st.set_texture_margin(side,9); st.set_content_margin(side,4)
 	return st
 static func paper(parent: Control, r: Rect2) -> void:
 	var n:=NinePatchRect.new(); n.texture=region("parchment",Rect2(83,108,511,369))

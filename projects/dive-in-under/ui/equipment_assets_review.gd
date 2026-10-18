@@ -2,6 +2,11 @@ extends RefCounted
 const Art=preload("res://ui/equipment_art.gd")
 static func write(game: Control, value: Dictionary, name: String) -> void:
 	var f:=FileAccess.open(game.smoke_dir.path_join(name),FileAccess.WRITE); f.store_string(JSON.stringify(value,"\t")); f.close()
+static func icons_fit(node: Node) -> bool:
+	for child in node.get_children():
+		if child is TextureRect and node is Control and not Rect2(Vector2.ZERO,node.size).encloses(child.get_rect()): return false
+		if not icons_fit(child): return false
+	return true
 static func run(game: Control) -> void:
 	var rendered:=DisplayServer.get_name()!="headless"
 	if "--equipment-assets-review-resume" in OS.get_cmdline_user_args():
@@ -43,6 +48,7 @@ static func run(game: Control) -> void:
 	if not game.smoke_check(game.save_store.write_game(game.campaign)=="","Gallery fixture saves valid ownership"): return
 	game.warehouse_state.uid=hat; game.warehouse_state.source="inventory"; game.open_town_page("warehouse")
 	await game.get_tree().process_frame
+	if not game.smoke_check(icons_fit(game.warehouse_view),"Warehouse sprite bounds fit actual controls"): return
 	if rendered: await game.capture("equipment-warehouse.png")
 	var old_cfg: Dictionary=game.Expedition.load_config("2026-10-17.loop-provisional.4")
 	var old: Dictionary=game.Expedition.fresh(old_cfg,123)

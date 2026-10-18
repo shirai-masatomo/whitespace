@@ -21,11 +21,13 @@ func _ready() -> void:
 	build()
 func label_at(parent: Control, value: String, r: Rect2, font_size: int=18, color: Color=INK) -> Label:
 	var l:=Label.new(); l.clip_text=true; l.text=value; l.position=r.position; l.size=r.size
+	l.set_meta("normal_color",color)
+	if parent is Button and parent.get_meta("gold_surface",false): color=Color("302b23")
 	l.add_theme_font_size_override("font_size",font_size); l.add_theme_color_override("font_color",color)
 	l.clip_text=true; l.mouse_filter=Control.MOUSE_FILTER_IGNORE
 	parent.add_child(l); return l
 func icon_at(parent: Control, kind: String, r: Rect2, template_id: String="") -> void:
-	var t:=TextureRect.new(); t.texture=EquipmentArt.texture(template_id,kind) if template_id!="" else Icons.texture(kind); t.position=r.position; t.size=r.size
+	var t:=TextureRect.new(); t.expand_mode=TextureRect.EXPAND_IGNORE_SIZE; t.texture=EquipmentArt.texture(template_id,kind) if template_id!="" else Icons.texture(kind); t.position=r.position; t.size=r.size
 	t.texture_filter=CanvasItem.TEXTURE_FILTER_NEAREST; t.expand_mode=TextureRect.EXPAND_IGNORE_SIZE; t.stretch_mode=TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 	t.mouse_filter=Control.MOUSE_FILTER_IGNORE; parent.add_child(t)
 func panel(r: Rect2, title: String, kind: String, purple: bool=false, main: bool=false) -> Control:
@@ -33,6 +35,10 @@ func panel(r: Rect2, title: String, kind: String, purple: bool=false, main: bool
 	icon_at(p,kind,Rect2(13,8,32,32)); label_at(p,title,Rect2(50,8,r.size.x-65,32),22,GOLD)
 	return p
 func skin(b: Button, selected: bool=false, purple: bool=false) -> void:
+	var textured:=b.size.y>=45 or b.custom_minimum_size.y>=45
+	b.set_meta("gold_surface",selected and textured)
+	for child in b.get_children():
+		if child is Label: child.add_theme_color_override("font_color",Color("302b23") if selected and textured else child.get_meta("normal_color",INK))
 	b.add_theme_font_size_override("font_size",19)
 	for state in ["normal","hover","pressed","disabled","focus"]:
 		var st:=StyleBoxFlat.new()
@@ -44,10 +50,10 @@ func skin(b: Button, selected: bool=false, purple: bool=false) -> void:
 		if state=="pressed": st.bg_color=Color("5a472a")
 		if state=="disabled": st.bg_color=Color("0a1519"); st.border_color=Color("344045")
 		if state=="focus": st.bg_color=Color(0,0,0,0); st.border_color=Color("69c1cb"); st.set_border_width_all(2)
-		b.add_theme_stylebox_override(state,st if state=="focus" else InterfaceArt.button_style(state,selected))
+		b.add_theme_stylebox_override(state,st if state=="focus" or not textured else InterfaceArt.button_style(state,selected))
 		b.add_theme_color_override("font_"+("color" if state=="normal" else state+"_color"),INK if state!="disabled" else Color("697c7c"))
-	b.add_theme_color_override("font_hover_color",Color("302b23"))
-	if selected: b.add_theme_color_override("font_color",Color("302b23"))
+	b.add_theme_color_override("font_hover_color",Color("302b23") if selected and textured else INK)
+	if selected and textured: b.add_theme_color_override("font_color",Color("302b23"))
 func rebuild() -> void:
 	game.show_campaign()
 func select_item(source: String, uid: String) -> void:

@@ -45,6 +45,8 @@ func _ready() -> void:
 	entry.finished.connect(func(): input_locked=false; tab_buttons.equipment.grab_focus())
 func label_at(parent: Control, value: String, r: Rect2, font_size: int=18, color: Color=INK) -> Label:
 	var l:=Label.new(); l.clip_text=true; l.text=value; l.position=r.position; l.size=r.size
+	l.set_meta("normal_color",color)
+	if parent is Button and parent.get_meta("gold_surface",false): color=DARK
 	l.add_theme_font_size_override("font_size",font_size); l.add_theme_color_override("font_color",color); l.mouse_filter=Control.MOUSE_FILTER_IGNORE; parent.add_child(l); return l
 func image_at(parent: Control, texture: Texture2D, r: Rect2, crop: bool=false) -> TextureRect:
 	var t:=TextureRect.new(); t.expand_mode=TextureRect.EXPAND_IGNORE_SIZE; t.texture=texture; t.position=r.position; t.size=r.size
@@ -57,6 +59,10 @@ func panel(r: Rect2, title: String, prominent: bool=false, ornament_only: bool=f
 	if title!="": label_at(p,title,Rect2(20,8,r.size.x-40,32),22,GOLD)
 	return p
 func skin(b: Button, selected: bool=false) -> void:
+	var textured:=b.size.y>=45
+	b.set_meta("gold_surface",selected and textured)
+	for child in b.get_children():
+		if child is Label: child.add_theme_color_override("font_color",DARK if selected and textured else child.get_meta("normal_color",INK))
 	for mode in ["normal","hover","pressed","disabled","focus"]:
 		var st:=StyleBoxFlat.new(); st.set_content_margin_all(4); st.set_border_width_all(1); st.bg_color=Color("0b1b21"); st.border_color=Color("6a5b41")
 		if selected: st.bg_color=Color("393329"); st.border_color=GOLD; st.set_border_width_all(2)
@@ -64,11 +70,11 @@ func skin(b: Button, selected: bool=false) -> void:
 		if mode=="pressed": st.bg_color=Color("4b3925"); st.border_color=Color("85653a"); st.border_width_top=3; st.border_width_left=3
 		if mode=="disabled": st.bg_color=Color("101c20"); st.border_color=Color("364443")
 		if mode=="focus": st.bg_color=Color.TRANSPARENT; st.border_color=Color("71bec6"); st.set_border_width_all(2)
-		b.add_theme_stylebox_override(mode,st if mode=="focus" else InterfaceArt.button_style(mode,selected))
+		b.add_theme_stylebox_override(mode,st if mode=="focus" or not textured else InterfaceArt.button_style(mode,selected))
 	b.add_theme_color_override("font_color",INK); b.add_theme_color_override("font_hover_color",Color("fff2d5")); b.add_theme_color_override("font_pressed_color",GOLD); b.add_theme_color_override("font_focus_color",INK); b.add_theme_color_override("font_disabled_color",Color("71807d"))
-	if selected:
+	if selected and textured:
 		for key in ["font_color","font_hover_color","font_focus_color"]: b.add_theme_color_override(key,DARK)
-	b.add_theme_color_override("font_hover_color",DARK)
+	b.add_theme_color_override("font_hover_color",DARK if selected and textured else INK)
 	b.add_theme_font_size_override("font_size",18)
 func button_at(parent: Control, text: String, r: Rect2, callback: Callable, selected: bool=false) -> Button:
 	var b:=Button.new(); b.text=text; b.position=r.position; b.size=r.size; skin(b,selected); parent.add_child(b); b.pressed.connect(callback); return b
@@ -190,8 +196,8 @@ func build_equipment() -> void:
 		for i in column.size():
 			var slot: String=column[i]; var item:=Model.equipment(game.campaign,game.cfg,slot)
 			var b:=item_button(slot,"",Rect2(x,16+i*(64 if right else 72),150,58))
-			label_at(b,game.cfg.slots[slot],Rect2(44,3,101,22),14,MUTED)
-			var name_label:=label_at(b,item.name,Rect2(44,25,101,28),14)
+			label_at(b,game.cfg.slots[slot],Rect2(44,9,101,18),13,MUTED)
+			var name_label:=label_at(b,item.name,Rect2(44,28,101,22),14)
 			name_label.text_overrun_behavior=TextServer.OVERRUN_TRIM_ELLIPSIS
 			if not item.empty: image_at(b,EquipmentArt.texture(item.template_id,slot),Rect2(3,11,39,39))
 			else: label_at(b,"—",Rect2(10,14,30,28),23,Color("667b7c"))
