@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "source": "User-supplied interface sheet 2026-10-19, 1448x1086 RGBA, unchanged",
+  "applied": [
+    "stone/brass frame corners and edges",
+    "parchment",
+    "blue/gold/brown/disabled button nine-patches"
+  ],
+  "not_applied": [
+    "prefilled gauges (actual values remain engine-rendered)",
+    "scrollbar and jewel variants reserved"
+  ],
+  "implementation": "Native AtlasTexture, StyleBoxTexture, NinePatchRect. Labels, focus, hit areas and callbacks stay native."
+}

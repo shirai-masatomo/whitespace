@@ -8,8 +8,8 @@ const STATS = ["max_hp","atk","def","spd","max_sp"]
 const SLOTS = ["right_hand","left_hand","head","body","legs","feet","neck","ears","eyes","finger","wrist"]
 
 static func load_config(version: String="") -> Dictionary:
-	if not version in ["","2026-10-17.loop-provisional.1","2026-10-17.loop-provisional.2","2026-10-17.loop-provisional.3","2026-10-17.loop-provisional.4"]: return {}
-	var filename: String="expedition-legacy.json" if version=="2026-10-17.loop-provisional.1" else ("expedition-legacy-2.json" if version=="2026-10-17.loop-provisional.2" else ("expedition-legacy-3.json" if version=="2026-10-17.loop-provisional.3" else "expedition.json"))
+	if not version in ["","2026-10-17.loop-provisional.1","2026-10-17.loop-provisional.2","2026-10-17.loop-provisional.3","2026-10-17.loop-provisional.4","2026-10-17.loop-provisional.5"]: return {}
+	var filename: String="expedition-legacy.json" if version=="2026-10-17.loop-provisional.1" else ("expedition-legacy-2.json" if version=="2026-10-17.loop-provisional.2" else ("expedition-legacy-3.json" if version=="2026-10-17.loop-provisional.3" else ("expedition-legacy-4.json" if version=="2026-10-17.loop-provisional.4" else "expedition.json")))
 	var value = JSON.parse_string(FileAccess.get_file_as_string("res://data/v1/"+filename))
 	if not value is Dictionary: return {}
 	value.condition_rules=JSON.parse_string(FileAccess.get_file_as_string("res://data/v1/equipment-condition.json"))
@@ -44,6 +44,10 @@ static func validate_config(c: Dictionary, data: Dictionary) -> String:
 	if not c.initial.get("items") is Array: return "Invalid starting items"
 	for id in c.initial.items:
 		if not c.items.has(id): return "Unknown starting item"
+	var starting_gear=c.initial.get("equipment",{})
+	if not starting_gear is Dictionary: return "Invalid starting equipment"
+	for slot in starting_gear:
+		if not slot in SLOTS or not c.items.has(starting_gear[slot]) or c.items[starting_gear[slot]].slot!=slot: return "Invalid starting equipment slot"
 	for enemy_id in data.enemies:
 		var table=drop_table(c,data,enemy_id)
 		if not table is Dictionary: return "Missing drop table"
@@ -88,6 +92,10 @@ static func fresh(cfg: Dictionary, seed_value: int) -> Dictionary:
 		"battle":{},"event":"","result":{},"journal":[cfg.get("intro","主人公ひとりで地下へ踏み出した。探索の解決後は町へ帰還できる。")],"trips":1,"deaths":0}
 	for slot in SLOTS: s.equipment[slot] = ""
 	for id in cfg.initial.items: add_item(s,id)
+	for slot in cfg.initial.get("equipment",{}):
+		var uid:=add_item(s,cfg.initial.equipment[slot])
+		s.inventory.erase(uid); s.equipment[slot]=uid
+	var unit:=hero(s,cfg); s.hp=unit.max_hp; s.sp=unit.max_sp
 	return s
 
 static func level_info(s: Dictionary, cfg: Dictionary) -> Dictionary:

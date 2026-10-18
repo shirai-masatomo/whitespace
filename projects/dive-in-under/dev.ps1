@@ -35,6 +35,7 @@ function Run-Godot([string]$Name, [string[]]$Arguments) {
 }
 try {
     if ($Task -in @('test','verify')) {
+        Run-Godot 'starter-equipment-tests' @('--script','tests/test_starter_equipment.gd')
         Run-Godot 'storage-tests' @('--script','tests/test_storage.gd')
         Run-Godot 'equipment-condition-tests' @('--script','tests/test_equipment_condition.gd')
         Run-Godot 'tests' @('--script','tests/test_combat.gd')
@@ -74,7 +75,8 @@ try {
         Copy-Item (Join-Path $project 'tools/PLAY.txt') $build
         Copy-Item (Join-Path $project 'assets/licenses/GODOT_LICENSE.txt') $build
         Copy-Item (Join-Path $project 'assets/licenses/GODOT_COPYRIGHT.txt') $build
-        @{ game_commit=$GameCommit; engine=$version.Trim(); data_version=(Get-Content (Join-Path $project 'data/v1/balance.json') -Raw | ConvertFrom-Json).data_version; campaign_config_version=(Get-Content (Join-Path $project 'data/v1/expedition.json') -Raw | ConvertFrom-Json).config_version } | ConvertTo-Json | Set-Content (Join-Path $build 'BUILD.json') -Encoding utf8
+        $appVersion = [regex]::Match((Get-Content (Join-Path $project 'project.godot') -Raw),'config/version="([^"]+)"').Groups[1].Value
+        @{ version=$appVersion; game_commit=$GameCommit; engine=$version.Trim(); data_version=(Get-Content (Join-Path $project 'data/v1/balance.json') -Raw | ConvertFrom-Json).data_version; campaign_config_version=(Get-Content (Join-Path $project 'data/v1/expedition.json') -Raw | ConvertFrom-Json).config_version } | ConvertTo-Json | Set-Content (Join-Path $build 'BUILD.json') -Encoding utf8
         Compress-Archive -Path (Join-Path $build '*') -DestinationPath (Join-Path $project 'build/DiveInUnder-foundation-windows-x64.zip') -Force
         Set-Content (Join-Path $project 'build/candidate.txt') $relativeBuild -Encoding ascii
         Get-FileHash (Join-Path $project 'build/DiveInUnder-foundation-windows-x64.zip') -Algorithm SHA256 | Format-List

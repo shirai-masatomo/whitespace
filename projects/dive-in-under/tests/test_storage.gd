@@ -11,7 +11,7 @@ func check(value: bool, message: String) -> void:
 func act(s: Dictionary, action: String, args: Dictionary={}) -> Dictionary:
 	return E.act(s,action,int(s.revision),args,data,cfg)
 func _initialize() -> void:
-	data=E.Catalog.load_data(); cfg=E.load_config()
+	data=E.Catalog.load_data(); cfg=E.load_config("2026-10-17.loop-provisional.4") # Keep the legacy empty-equipment fixture; new starter is tested separately.
 	var s:=act(act(E.fresh(cfg,123),"return"),"town")
 	var uid: String=s.inventory[0]; s.item_condition[uid].current=27
 	s=act(s,"deposit",{"uid":uid}); s=act(s,"to_cloth",{"uid":uid,"source":"warehouse"})

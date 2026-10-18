@@ -16,7 +16,7 @@ static func equipment(s: Dictionary, cfg: Dictionary, slot: String) -> Dictionar
 	var uid: String=s.equipment[slot]
 	if uid=="": return {"empty":true,"slot":slot,"name":"装備なし"}
 	var item: Dictionary=cfg.items[s.items[uid]]
-	return {"empty":false,"slot":slot,"uid":uid,"name":Items.name_of(item),"description":item.get("description",Items.DESCRIPTIONS.get(s.items[uid],"")),"condition":s.item_condition[uid].duplicate(true),"item":item.duplicate(true)}
+	return {"empty":false,"slot":slot,"uid":uid,"template_id":s.items[uid],"name":Items.name_of(item),"description":item.get("description",Items.DESCRIPTIONS.get(s.items[uid],"")),"condition":s.item_condition[uid].duplicate(true),"item":item.duplicate(true)}
 static func base_value(s: Dictionary, cfg: Dictionary, key: String) -> int:
 	return int(cfg.initial[key])+(int(E.level_info(s,cfg).level)-1)*int(cfg.growth[key])
 static func effects(unit: Dictionary, rules: Dictionary) -> Array:

@@ -1,4 +1,4 @@
-param([switch]$Isolated, [string]$RunDirectory = "", [string]$BuildDirectory = "", [ValidateSet("enemy-art","equipment","warehouse","status")][string]$Review = "enemy-art", [switch]$Resume)
+param([switch]$Isolated, [string]$RunDirectory = "", [string]$BuildDirectory = "", [ValidateSet("enemy-art","equipment","warehouse","status","equipment-assets")][string]$Review = "enemy-art", [switch]$Resume)
 $ErrorActionPreference = 'Stop'
 $project = Split-Path $PSScriptRoot -Parent
 if (!$RunDirectory) { $RunDirectory = Join-Path $project $(if ($Isolated) {"artifacts/$Review-isolated"} else {"artifacts/$Review-headless"}) }

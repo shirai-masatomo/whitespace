@@ -1,9 +1,11 @@
 extends Control
 ## Town-only, read-only character view. Tabs never rebuild the outer screen.
+const InterfaceArt=preload("res://ui/interface_art.gd")
 const Symbols=preload("res://ui/status_symbols.gd")
 const Model=preload("res://ui/status_model.gd")
 const E=preload("res://core/expedition.gd")
 const Art=preload("res://ui/visual_assets.gd")
+const EquipmentArt=preload("res://ui/equipment_art.gd")
 const Icons=preload("res://ui/item_icons.gd")
 const Frame=preload("res://ui/warehouse_frame.gd")
 const Paper=preload("res://ui/panel_frame.gd")
@@ -62,14 +64,16 @@ func skin(b: Button, selected: bool=false) -> void:
 		if mode=="pressed": st.bg_color=Color("4b3925"); st.border_color=Color("85653a"); st.border_width_top=3; st.border_width_left=3
 		if mode=="disabled": st.bg_color=Color("101c20"); st.border_color=Color("364443")
 		if mode=="focus": st.bg_color=Color.TRANSPARENT; st.border_color=Color("71bec6"); st.set_border_width_all(2)
-		b.add_theme_stylebox_override(mode,st)
+		b.add_theme_stylebox_override(mode,st if mode=="focus" else InterfaceArt.button_style(mode,selected))
 	b.add_theme_color_override("font_color",INK); b.add_theme_color_override("font_hover_color",Color("fff2d5")); b.add_theme_color_override("font_pressed_color",GOLD); b.add_theme_color_override("font_focus_color",INK); b.add_theme_color_override("font_disabled_color",Color("71807d"))
+	if selected:
+		for key in ["font_color","font_hover_color","font_focus_color"]: b.add_theme_color_override(key,DARK)
+	b.add_theme_color_override("font_hover_color",DARK)
 	b.add_theme_font_size_override("font_size",18)
 func button_at(parent: Control, text: String, r: Rect2, callback: Callable, selected: bool=false) -> Button:
 	var b:=Button.new(); b.text=text; b.position=r.position; b.size=r.size; skin(b,selected); parent.add_child(b); b.pressed.connect(callback); return b
 func paper_at(parent: Control, r: Rect2) -> void:
-	var c:=ColorRect.new(); c.color=Color("d1bc8e"); c.position=r.position; c.size=r.size; c.mouse_filter=Control.MOUSE_FILTER_IGNORE; parent.add_child(c)
-	var fibers:=Control.new(); fibers.set_script(Paper); fibers.parchment=true; fibers.position=r.position+Vector2(8,8); fibers.size=r.size-Vector2(16,16); parent.add_child(fibers)
+	InterfaceArt.paper(parent,r)
 func build() -> void:
 	var header:=panel(Rect2(16,14,1248,64),"",true)
 	image_at(header,Icons.texture("lantern"),Rect2(12,8,40,40))
@@ -189,7 +193,7 @@ func build_equipment() -> void:
 			label_at(b,game.cfg.slots[slot],Rect2(44,3,101,22),14,MUTED)
 			var name_label:=label_at(b,item.name,Rect2(44,25,101,28),14)
 			name_label.text_overrun_behavior=TextServer.OVERRUN_TRIM_ELLIPSIS
-			if not item.empty: image_at(b,Icons.texture(slot),Rect2(3,11,39,39))
+			if not item.empty: image_at(b,EquipmentArt.texture(item.template_id,slot),Rect2(3,11,39,39))
 			else: label_at(b,"—",Rect2(10,14,30,28),23,Color("667b7c"))
 			b.tooltip_text=game.cfg.slots[slot]+" / "+item.name+" / Enterで詳細"
 	label_at(central,"装備枠を選ぶと詳細を表示",Rect2(164,365,226,26),15,GOLD)
@@ -260,7 +264,7 @@ func update_details() -> void:
 	var id: String=selection[active_tab]
 	if active_tab=="equipment":
 		var item:=Model.equipment(game.campaign,game.cfg,id)
-		detail_heading(item.name,Icons.texture(id) if not item.empty else Symbols.texture("def"),"装備・"+game.cfg.slots[id])
+		detail_heading(item.name,EquipmentArt.texture(item.template_id,id) if not item.empty else Symbols.texture("def"),"装備・"+game.cfg.slots[id])
 		if item.empty:
 			detail_text("この部位には何も装備していません。",18)
 		else:

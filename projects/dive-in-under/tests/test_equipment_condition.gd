@@ -13,7 +13,7 @@ func act(s: Dictionary, name: String, args: Dictionary={}) -> Dictionary:
 func put(path: String, value: Dictionary) -> void:
 	var file:=FileAccess.open(path,FileAccess.WRITE); file.store_string(JSON.stringify(value)); file.close()
 func _initialize() -> void:
-	data=E.Catalog.load_data(); cfg=E.load_config()
+	data=E.Catalog.load_data(); cfg=E.load_config("2026-10-17.loop-provisional.4") # Keep the legacy empty-equipment fixture; new starter is tested separately.
 	var s:=act(act(E.fresh(cfg,10000),"return"),"town")
 	var hat: String=s.inventory[0]
 	s=act(s,"equip",{"uid":hat})

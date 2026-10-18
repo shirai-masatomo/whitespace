@@ -1,0 +1,278 @@
+{
+  "schema_version": 1,
+  "config_version": "2026-10-17.loop-provisional.4",
+  "provisional": true,
+  "note": "初期値・成長・通常死亡ペナルティは交換可能な試作設定。正式決定ではない。",
+  "initial": {
+    "max_hp": 24,
+    "atk": 6,
+    "def": 1,
+    "spd": 6,
+    "max_sp": 0,
+    "gold": 0,
+    "items": [
+      "I01"
+    ]
+  },
+  "growth": {
+    "max_hp": 5,
+    "atk": 1,
+    "def": 0,
+    "spd": 0,
+    "max_sp": 1,
+    "exp_step": 12,
+    "level_cap": 50
+  },
+  "intro": "主人公ひとりで地下へ踏み出した。探索の解決後は町へ帰還できる。",
+  "death_penalty": {
+    "gold_fraction": 0.1,
+    "unspent_exp_fraction": 0.0,
+    "lose_inventory": false
+  },
+  "slots": {
+    "right_hand": "右手",
+    "left_hand": "左手",
+    "head": "頭",
+    "body": "上半身",
+    "legs": "下半身",
+    "feet": "足",
+    "neck": "首",
+    "ears": "耳",
+    "eyes": "目",
+    "finger": "指",
+    "wrist": "腕"
+  },
+  "items": {
+    "I01": {
+      "name": "皮の帽子",
+      "slot": "head",
+      "stats": {
+        "def": 1
+      }
+    },
+    "I02": {
+      "name": "粗布の上着",
+      "slot": "body",
+      "stats": {
+        "def": 2
+      }
+    },
+    "I03": {
+      "name": "革のズボン",
+      "slot": "legs",
+      "stats": {
+        "def": 1
+      }
+    },
+    "I04": {
+      "name": "古いブーツ",
+      "slot": "feet",
+      "stats": {
+        "def": 1
+      }
+    },
+    "I05": {
+      "name": "鉄の指輪",
+      "slot": "finger",
+      "stats": {
+        "atk": 2
+      }
+    },
+    "I06": {
+      "name": "守りの腕輪",
+      "slot": "wrist",
+      "stats": {
+        "def": 2
+      }
+    },
+    "I07": {
+      "name": "煤けた首飾り",
+      "slot": "neck",
+      "stats": {
+        "max_hp": 5
+      }
+    },
+    "I08": {
+      "name": "火花の耳飾り",
+      "slot": "ears",
+      "stats": {
+        "spd": 2
+      }
+    },
+    "I09": {
+      "name": "透視レンズ",
+      "slot": "eyes",
+      "stats": {
+        "atk": 1
+      }
+    },
+    "I10": {
+      "name": "補修石（使用は後工程）",
+      "slot": "",
+      "stats": {}
+    },
+    "I11": {
+      "name": "深層の指輪",
+      "slot": "finger",
+      "stats": {
+        "atk": 4
+      }
+    }
+  },
+  "drops": {
+    "E01": {
+      "I01": 12,
+      "I04": 4
+    },
+    "E02": {
+      "I10": 7,
+      "I01": 6
+    },
+    "E03": {
+      "I04": 9,
+      "I08": 3
+    },
+    "E04": {
+      "I05": 12,
+      "I06": 5,
+      "I10": 8
+    },
+    "E05": {
+      "I06": 14,
+      "I07": 6,
+      "I10": 12
+    },
+    "B10": {
+      "I11": 35,
+      "I10": 50
+    }
+  },
+  "chests": [
+    {
+      "from": 1,
+      "to": 1,
+      "items": {
+        "I01": 40,
+        "I02": 35,
+        "I04": 25
+      }
+    },
+    {
+      "from": 2,
+      "to": 3,
+      "items": {
+        "I01": 25,
+        "I04": 35,
+        "I10": 40
+      }
+    },
+    {
+      "from": 4,
+      "to": 6,
+      "items": {
+        "I03": 25,
+        "I05": 30,
+        "I06": 25,
+        "I10": 20
+      }
+    },
+    {
+      "from": 7,
+      "to": 8,
+      "items": {
+        "I06": 20,
+        "I07": 20,
+        "I08": 15,
+        "I09": 10,
+        "I10": 30,
+        "I11": 5
+      }
+    },
+    {
+      "from": 9,
+      "to": 9,
+      "items": {
+        "I07": 15,
+        "I08": 15,
+        "I09": 20,
+        "I10": 30,
+        "I11": 20
+      }
+    }
+  ],
+  "event_floors": [
+    {
+      "from": 1,
+      "to": 1,
+      "ids": [
+        "EV01",
+        "EV04"
+      ]
+    },
+    {
+      "from": 2,
+      "to": 3,
+      "ids": [
+        "EV01",
+        "EV02",
+        "EV04"
+      ]
+    },
+    {
+      "from": 4,
+      "to": 4,
+      "ids": [
+        "EV01",
+        "EV02",
+        "EV04"
+      ]
+    },
+    {
+      "from": 5,
+      "to": 6,
+      "ids": [
+        "EV01",
+        "EV02"
+      ]
+    },
+    {
+      "from": 7,
+      "to": 9,
+      "ids": [
+        "EV01",
+        "EV02",
+        "EV05"
+      ]
+    }
+  ],
+  "events": {
+    "EV01": {
+      "name": "地下の湧き水",
+      "choice": "水を飲む",
+      "effect": "hp",
+      "amount": 6
+    },
+    "EV02": {
+      "name": "崩れた足場",
+      "choice": "足場を渡る",
+      "effect": "hp",
+      "amount": -3
+    },
+    "EV04": {
+      "name": "古い標識",
+      "choice": "標識を読む",
+      "effect": "exp",
+      "amount": 4
+    },
+    "EV05": {
+      "name": "祈祷の残光",
+      "choice": "残された石を拾う",
+      "effect": "item",
+      "item": "I10"
+    }
+  },
+  "event_note": "EV03は工程5まで除外。適格候補の個別重み未定のため等確率。各イベントは実行/見送るの試作2択。",
+  "hero_skills": [
+    "S105"
+  ]
+}

@@ -67,7 +67,8 @@ func _initialize() -> void:
 	s=E.act(s,"return",s.revision,{},data,cfg)
 	check(s.result.kind=="return" and s.deaths==0,"first return")
 	s=E.act(s,"town",s.revision,{},data,cfg)
-	var uid: String=s.inventory[0]
+	var uid: String=s.equipment.head
+	s=E.act(s,"unequip",s.revision,{"slot":"head"},data,cfg)
 	for action in ["deposit","withdraw","equip"]: s=E.act(s,action,s.revision,{"uid":uid},data,cfg)
 	check(s.equipment.head==uid and s.warehouse.is_empty(),"first return enables storage and equipment")
 	s=E.act(s,"depart",s.revision,{},data,cfg)

@@ -31,7 +31,7 @@ var campaign_seed := 123
 const CampaignReplay = preload("res://ui/campaign_replay.gd")
 
 func initialize_game() -> void:
-	get_window().title="Dive In Under 0.5.3"
+	get_window().title="Dive In Under 0.5.4"
 	cfg=Expedition.load_config()
 	if cfg.is_empty(): get_tree().quit(1); return
 	var save_path := "user://campaign-v1.json"
@@ -90,7 +90,7 @@ func show_title() -> void:
 	if loaded.get("status","") not in ["ok","missing"]: notice=loaded.get("error","")
 	var status:=text_label(notice,16); status.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART; root.add_child(status)
 	var spacer:=Control.new(); spacer.size_flags_vertical=Control.SIZE_EXPAND_FILL; root.add_child(spacer)
-	root.add_child(text_label("0.5.3",16))
+	root.add_child(text_label("0.5.4",16))
 	new_button.grab_focus()
 
 func show_battle() -> void:
@@ -198,7 +198,7 @@ func show_campaign() -> void:
 		else: show_town_hub(root)
 	elif campaign.phase=="result": show_result(root)
 	else: show_wide_exploration()
-	var footer:=text_label(notice if notice!="" else "0.5.3  ·  自動保存済み",15)
+	var footer:=text_label(notice if notice!="" else "0.5.4  ·  自動保存済み",15)
 	footer.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART; root.add_child(footer)
 	if campaign.phase=="battle" and auto_play:
 		play_timer.wait_time=0.6/play_speed; play_timer.start()
@@ -314,12 +314,17 @@ func compact_button(label: String, callback: Callable) -> Button:
 	b.add_theme_color_override("font_disabled_color",Color("70634a"))
 	return b
 
+func item_picture(uid: String, pixels: int=32) -> TextureRect:
+	var t:=TextureRect.new(); t.texture=preload("res://ui/equipment_art.gd").texture(campaign.items[uid],cfg.items[campaign.items[uid]].slot)
+	t.custom_minimum_size=Vector2(pixels,pixels); t.expand_mode=TextureRect.EXPAND_IGNORE_SIZE; t.stretch_mode=TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	t.texture_filter=CanvasItem.TEXTURE_FILTER_NEAREST; t.mouse_filter=Control.MOUSE_FILTER_IGNORE; return t
+
 func item_list(parent: VBoxContainer, source: String) -> void:
 	var scroll:=ScrollContainer.new(); scroll.size_flags_vertical=Control.SIZE_EXPAND_FILL; scroll.custom_minimum_size.y=200; parent.add_child(scroll)
 	var list:=VBoxContainer.new(); list.size_flags_horizontal=Control.SIZE_EXPAND_FILL; scroll.add_child(list)
 	for uid in campaign[source]:
 		var item: Dictionary=cfg.items[campaign.items[uid]]
-		paragraph(list,item.name,17)
+		var heading:=HBoxContainer.new(); list.add_child(heading); heading.add_child(item_picture(uid)); heading.add_child(text_label(item.name,17))
 		if item.slot!="": paragraph(list,condition_text(uid),15)
 		var effects := item_effects(item,uid)
 		if effects != "": paragraph(list,effects,15)
@@ -401,13 +406,14 @@ func show_equipment(root: VBoxContainer) -> void:
 		gear_rows.add_child(strip)
 		var strip_rows:=VBoxContainer.new(); strip_rows.add_theme_constant_override("separation",1); strip.add_child(strip_rows)
 		var line:=HBoxContainer.new(); line.add_theme_constant_override("separation",5); strip_rows.add_child(line)
+		if uid!="": line.add_child(item_picture(uid,24))
 		var slot_label:=text_label(cfg.slots[slot],16); slot_label.custom_minimum_size.x=54; line.add_child(slot_label)
 		var label:=text_label("—" if uid=="" else item.name,16)
 		label.size_flags_horizontal=Control.SIZE_EXPAND_FILL; line.add_child(label)
 		var effect:=text_label("" if uid=="" else item_effects(item,uid),14)
 		effect.add_theme_color_override("font_color",Color("41452a")); line.add_child(effect)
 		var revision:=int(campaign.revision)
-		var remove:=compact_button("外す",func(): perform("unequip",{"slot":slot},revision)); remove.disabled=uid==""; line.add_child(remove)
+		var remove:=compact_button("外す",func(): perform("unequip",{"slot":slot},revision)); remove.disabled=uid==""; remove.set_meta("campaign_action","unequip"); remove.set_meta("campaign_args",{"slot":slot}); line.add_child(remove)
 		if uid!="":
 			var condition_row:=HBoxContainer.new(); strip_rows.add_child(condition_row)
 			var value:=text_label(condition_text(uid),14); value.size_flags_horizontal=Control.SIZE_EXPAND_FILL; condition_row.add_child(value)
@@ -417,6 +423,8 @@ func show_equipment(root: VBoxContainer) -> void:
 	var depart:=command("HP/SP回復済み  →  もう一度地下へ","depart"); root.add_child(depart)
 
 func smoke(quit_on_finish: bool = true) -> void:
+	if "--equipment-assets-review" in OS.get_cmdline_user_args():
+		await preload("res://ui/equipment_assets_review.gd").run(self); return
 	if "--status-review" in OS.get_cmdline_user_args():
 		await preload("res://ui/status_review.gd").run(self); return
 	if "--warehouse-review" in OS.get_cmdline_user_args():
@@ -455,7 +463,8 @@ func smoke(quit_on_finish: bool = true) -> void:
 	if not smoke_check(campaign.result.kind=="return","Continue initial return result"): return
 	await click_control(play_buttons.town)
 	if rendered: await capture("06-town.png")
-	var uid: String=campaign.inventory[0]
+	var uid: String=campaign.equipment.head
+	if not await CampaignReplay.click(self,"unequip",{"slot":"head"}): return
 	await CampaignReplay.click(self,"deposit",{"uid":uid})
 	await CampaignReplay.click(self,"withdraw",{"uid":uid})
 	if not smoke_check(uid in campaign.inventory and campaign.warehouse.is_empty(),"Initial return enables warehouse roundtrip"): return

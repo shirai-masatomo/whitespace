@@ -1,5 +1,7 @@
 extends Control
+const InterfaceArt=preload("res://ui/interface_art.gd")
 const Frame=preload("res://ui/warehouse_frame.gd")
+const EquipmentArt=preload("res://ui/equipment_art.gd")
 const Icons=preload("res://ui/item_icons.gd")
 const Catalog=preload("res://ui/warehouse_catalog.gd")
 const Storage=preload("res://core/storage.gd")
@@ -22,8 +24,8 @@ func label_at(parent: Control, value: String, r: Rect2, font_size: int=18, color
 	l.add_theme_font_size_override("font_size",font_size); l.add_theme_color_override("font_color",color)
 	l.clip_text=true; l.mouse_filter=Control.MOUSE_FILTER_IGNORE
 	parent.add_child(l); return l
-func icon_at(parent: Control, kind: String, r: Rect2) -> void:
-	var t:=TextureRect.new(); t.texture=Icons.texture(kind); t.position=r.position; t.size=r.size
+func icon_at(parent: Control, kind: String, r: Rect2, template_id: String="") -> void:
+	var t:=TextureRect.new(); t.texture=EquipmentArt.texture(template_id,kind) if template_id!="" else Icons.texture(kind); t.position=r.position; t.size=r.size
 	t.texture_filter=CanvasItem.TEXTURE_FILTER_NEAREST; t.expand_mode=TextureRect.EXPAND_IGNORE_SIZE; t.stretch_mode=TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 	t.mouse_filter=Control.MOUSE_FILTER_IGNORE; parent.add_child(t)
 func panel(r: Rect2, title: String, kind: String, purple: bool=false, main: bool=false) -> Control:
@@ -42,8 +44,10 @@ func skin(b: Button, selected: bool=false, purple: bool=false) -> void:
 		if state=="pressed": st.bg_color=Color("5a472a")
 		if state=="disabled": st.bg_color=Color("0a1519"); st.border_color=Color("344045")
 		if state=="focus": st.bg_color=Color(0,0,0,0); st.border_color=Color("69c1cb"); st.set_border_width_all(2)
-		b.add_theme_stylebox_override(state,st)
+		b.add_theme_stylebox_override(state,st if state=="focus" else InterfaceArt.button_style(state,selected))
 		b.add_theme_color_override("font_"+("color" if state=="normal" else state+"_color"),INK if state!="disabled" else Color("697c7c"))
+	b.add_theme_color_override("font_hover_color",Color("302b23"))
+	if selected: b.add_theme_color_override("font_color",Color("302b23"))
 func rebuild() -> void:
 	game.show_campaign()
 func select_item(source: String, uid: String) -> void:
@@ -64,7 +68,7 @@ func build_list(p: Control, source: String, r: Rect2) -> ScrollContainer:
 		var item: Dictionary=game.cfg.items[game.campaign.items[uid]]
 		var b:=Button.new(); b.custom_minimum_size=Vector2(r.size.x-12,34 if source=="cloth" else 42); b.size_flags_horizontal=Control.SIZE_EXPAND_FILL
 		skin(b,uid==selected_uid,source=="cloth"); box.add_child(b)
-		icon_at(b,item.slot,Rect2(5,0,32,32) if source=="cloth" else Rect2(5,2,36,36))
+		icon_at(b,item.slot,Rect2(5,0,32,32) if source=="cloth" else Rect2(5,2,36,36),game.campaign.items[uid])
 		var name_label:=label_at(b,Catalog.name_of(item),Rect2(46,0,r.size.x-100,32 if source=="cloth" else 36),17)
 		name_label.text_overrun_behavior=TextServer.OVERRUN_TRIM_ELLIPSIS
 		label_at(b,"×1",Rect2(r.size.x-51,0,30,32 if source=="cloth" else 34),16,MUTED)
@@ -115,7 +119,7 @@ func build() -> void:
 		if category!="all" and Storage.category(item)!=category: continue
 		visible_items.append(uid)
 		var tile:=Button.new(); tile.custom_minimum_size=Vector2(84,88); skin(tile,uid==selected_uid); grid.add_child(tile)
-		icon_at(tile,item.slot,Rect2(10,0,64,64))
+		icon_at(tile,item.slot,Rect2(10,0,64,64),game.campaign.items[uid])
 		label_at(tile,"×1",Rect2(53,45,28,22),15)
 		var title:=label_at(tile,Catalog.name_of(item),Rect2(4,61,76,22),12,MUTED); title.text_overrun_behavior=TextServer.OVERRUN_TRIM_ELLIPSIS; title.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER
 		if item.slot!="":
@@ -143,7 +147,7 @@ func build_details(p: Control) -> void:
 		label_at(p,"アイテムを選んでください",Rect2(26,190,300,40),20,MUTED); return
 	var item: Dictionary=game.cfg.items[game.campaign.items[selected_uid]]
 	var d:=Catalog.details(game.campaign,selected_uid,game.cfg)
-	icon_at(p,item.slot,Rect2(18,54,90,90))
+	icon_at(p,item.slot,Rect2(18,54,90,90),game.campaign.items[selected_uid])
 	var title:=label_at(p,d.name,Rect2(116,56,212,52),22,GOLD); title.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART
 	label_at(p,d.type+" / "+{"inventory":"バックパック","warehouse":"倉庫","cloth":"父親の風呂敷"}[selected_source],Rect2(116,110,213,28),14,MUTED)
 	label_at(p,"所持数 %d     倉庫内数 %d"%[d.carried,d.stored],Rect2(20,151,310,28),17)

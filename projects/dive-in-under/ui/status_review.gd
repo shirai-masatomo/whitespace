@@ -21,7 +21,7 @@ static func run(game: Control) -> void:
 		s=game.Expedition.act(s,"return",int(s.revision),{},game.data,game.cfg)
 		s=game.Expedition.act(s,"town",int(s.revision),{},game.data,game.cfg)
 		game.Expedition.gain_exp(s,40,game.cfg)
-		var hat: String=s.inventory[0]
+		var hat: String=game.Expedition.add_item(s,"I01")
 		s=game.Expedition.act(s,"equip",int(s.revision),{"uid":hat},game.data,game.cfg)
 		for id in ["I05","I07"]:
 			var uid: String=game.Expedition.add_item(s,id)

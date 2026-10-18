@@ -1,3 +1,5 @@
+assets/equipment/**/*.import
+assets/interface/**/*.import
 .godot/
 .tools/
 artifacts/
