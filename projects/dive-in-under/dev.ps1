@@ -47,7 +47,7 @@ try {
         Run-Godot 'loop-tests' @('--script','tests/test_expedition.gd')
         Run-Godot 'campaign-tests' @('--script','tests/test_campaign.gd')
         Run-Godot 'first-expedition-tests' @('--script','tests/test_first_expedition.gd')
-        Run-Godot 'ui-headless' @('--',"--smoke-dir=$artifacts","--smoke-run-id=$([guid]::NewGuid().ToString('N'))")
+        Run-Godot 'ui-headless' @('--','--legacy-persistence-check',"--smoke-dir=$artifacts","--smoke-run-id=$([guid]::NewGuid().ToString('N'))")
     }
     if ($Task -in @('simulate','verify')) {
         if (!$Output) { $Output = Join-Path $artifacts 'simulation.json' }

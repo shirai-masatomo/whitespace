@@ -29,7 +29,7 @@ try {
             $argsText = '--audio-driver Dummy --max-fps 120 --log-file "'+$log+'"'
             if ($Rendered) { $argsText += ' --rendering-method gl_compatibility --resolution 1280x720' }
             else { $argsText += ' --headless' }
-            $argsText += ' -- --smoke-dir="'+$dir+'" --smoke-run-id='+$runId+' --migration-probe'
+            $argsText += ' -- --legacy-persistence-check --smoke-dir="'+$dir+'" --smoke-run-id='+$runId+' --migration-probe'
             if ($stage -eq 'restart') { $argsText += ' --migration-resume' }
             $environment['APPDATA'] = Join-Path $dir 'user-data'
             $environment['LOCALAPPDATA'] = Join-Path $dir 'local-data'

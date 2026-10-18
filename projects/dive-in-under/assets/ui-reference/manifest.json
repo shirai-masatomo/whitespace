@@ -1,0 +1,431 @@
+{
+  "schema_version": 1,
+  "index": "docs/UI_REFERENCE_INDEX.md",
+  "source_docs_commit": "a8b1e6c",
+  "missing_formal_references": [],
+  "screenshots_are_not_references": true,
+  "entries": [
+    {
+      "id": "WH-USER",
+      "screen": "warehouse",
+      "kind": "supplemental-reference",
+      "adoption": "User-supplied warehouse composition reference; layout authorized; not a new formal PX",
+      "version": "user-2026-10-19",
+      "path": "assets/ui-reference/supplemental/codex-clipboard-3bd6518a-8b3d-40fe-ab28-2e27fb813dec.png",
+      "original_file": "C:\\Users\\masat\\AppData\\Local\\Temp\\codex-clipboard-3bd6518a-8b3d-40fe-ab28-2e27fb813dec.png",
+      "sha256": "dad02143e71973002d4e26d67291dacaa3b3685fbfcc1fb874d169aad1fb9508"
+    },
+    {
+      "id": "STATUS-USER",
+      "screen": "status",
+      "kind": "supplemental-reference",
+      "adoption": "User-supplied supplementary status reference; sample numbers are not data",
+      "version": "user-2026-10-19",
+      "path": "assets/ui-reference/supplemental/codex-clipboard-5404089b-cc35-42b9-afdb-7899bfc9b370.png",
+      "original_file": "C:\\Users\\masat\\AppData\\Local\\Temp\\codex-clipboard-5404089b-cc35-42b9-afdb-7899bfc9b370.png",
+      "sha256": "e3292bcdae063258d72e968769f206e46b13a8ada83bd2d9355524d7e36e87dd"
+    },
+    {
+      "id": "STATUS-SHEET",
+      "screen": "status",
+      "kind": "supplemental-reference",
+      "adoption": "User-supplied four-tab design sheet; supplementary, not formal PX",
+      "version": "user-2026-10-19",
+      "path": "assets/ui-reference/supplemental/codex-clipboard-33e5c708-c4fe-41d7-8d2f-0827e2595a55.png",
+      "original_file": "C:\\Users\\masat\\AppData\\Local\\Temp\\codex-clipboard-33e5c708-c4fe-41d7-8d2f-0827e2595a55.png",
+      "sha256": "c923d526cd8f4bb832fd7b3a866bb22d1b051c54c2231dced2f1b0921cd66c3b"
+    },
+    {
+      "id": "PX-01",
+      "screen": "01_exploration_pixel",
+      "kind": "formal-reference",
+      "adoption": "approved-current-style",
+      "version": "2026-10-17",
+      "path": "assets/ui-mocks/01_exploration_pixel.webp",
+      "original_file": "assets/ui-mocks/01_exploration_pixel.webp",
+      "sha256": "d409995e039066e0098bebedc3a3eb2defc9de45bbbc27b095b204032825b860"
+    },
+    {
+      "id": "PX-02",
+      "screen": "02_battle_pixel",
+      "kind": "formal-reference",
+      "adoption": "approved-current-style",
+      "version": "2026-10-17",
+      "path": "assets/ui-mocks/02_battle_pixel.webp",
+      "original_file": "assets/ui-mocks/02_battle_pixel.webp",
+      "sha256": "3e5c3b07e2f8c47f84a1eec69bcdbf87a465a0d9b2e86c11a5d4c2de06f350b5"
+    },
+    {
+      "id": "PX-03",
+      "screen": "03_status_pixel",
+      "kind": "formal-reference",
+      "adoption": "approved-current-style",
+      "version": "2026-10-17",
+      "path": "assets/ui-mocks/03_status_pixel.webp",
+      "original_file": "assets/ui-mocks/03_status_pixel.webp",
+      "sha256": "ce4e51222b0999eb4d2ee508e5e20e5b74222a129060b26f5468fb97ac26b73d"
+    },
+    {
+      "id": "ARCHIVE-01_title_screen",
+      "screen": "01_title_screen",
+      "kind": "archive",
+      "adoption": "historical-not-current",
+      "version": "2026-10-16",
+      "path": "assets/ui-mocks/archive/2026-10-16/01_title_screen.webp",
+      "original_file": "assets/ui-mocks/archive/2026-10-16/01_title_screen.webp",
+      "sha256": "e7f34af8bd39bde228cfa3dfbba657871dc6d5d407197e3875dbf3eb237ef929"
+    },
+    {
+      "id": "ARCHIVE-02_first_exploration",
+      "screen": "02_first_exploration",
+      "kind": "archive",
+      "adoption": "historical-not-current",
+      "version": "2026-10-16",
+      "path": "assets/ui-mocks/archive/2026-10-16/02_first_exploration.webp",
+      "original_file": "assets/ui-mocks/archive/2026-10-16/02_first_exploration.webp",
+      "sha256": "0b7378f9ecfeb36116310bcb9e71b6a656746de8f6dd35b1edfd4c72c582833e"
+    },
+    {
+      "id": "ARCHIVE-03_death_result",
+      "screen": "03_death_result",
+      "kind": "archive",
+      "adoption": "historical-not-current",
+      "version": "2026-10-16",
+      "path": "assets/ui-mocks/archive/2026-10-16/03_death_result.webp",
+      "original_file": "assets/ui-mocks/archive/2026-10-16/03_death_result.webp",
+      "sha256": "d1933240ab114d8674df2879031505aca1bd14c4fa8ead955b855e098a73044f"
+    },
+    {
+      "id": "ARCHIVE-04_warehouse",
+      "screen": "04_warehouse",
+      "kind": "archive",
+      "adoption": "historical-not-current",
+      "version": "2026-10-16",
+      "path": "assets/ui-mocks/archive/2026-10-16/04_warehouse.webp",
+      "original_file": "assets/ui-mocks/archive/2026-10-16/04_warehouse.webp",
+      "sha256": "6b02461dc1c3e90cd83a16fc40b8bd21b846cc40709aa8a9dd28193a30439238"
+    },
+    {
+      "id": "adventurer-cloak-blue",
+      "kind": "runtime-material",
+      "adoption": "authorized-and-used-0.5.4",
+      "version": "v1",
+      "path": "assets/equipment/v1/adventurer-cloak-blue.png",
+      "original_file": "adventurer-cloak-blue.png",
+      "sha256": "c9aad2358957bd09455c99ae4afb69e3b005852009c335ebdcc862a3783c2d23"
+    },
+    {
+      "id": "equipment-sheet",
+      "kind": "runtime-material",
+      "adoption": "authorized-and-used-0.5.4",
+      "version": "v1",
+      "path": "assets/equipment/v1/equipment-sheet.png",
+      "original_file": "equipment-sheet.png",
+      "sha256": "0c779681bc8b9895c8b1ecf2894dbf0da4471de56a8c879a927403e9db7200ec"
+    },
+    {
+      "id": "interface-sheet",
+      "kind": "runtime-material",
+      "adoption": "authorized-and-used-0.5.4",
+      "version": "v1",
+      "path": "assets/interface/v1/interface-sheet.png",
+      "original_file": "interface-sheet.png",
+      "sha256": "4d983dcae426eed7f1500af3e57217c37c7771c3b66d9cd1a08c41b379eee7c6"
+    },
+    {
+      "id": "dive-b10-gatekeeper-static-candidate-v1",
+      "kind": "runtime-material",
+      "adoption": "see-original-manifest; filename-candidate-is-not-adoption-status",
+      "version": "original",
+      "path": "assets/visual-candidates/v1/dive-b10-gatekeeper-static-candidate-v1.png",
+      "original_file": "dive-b10-gatekeeper-static-candidate-v1.png",
+      "sha256": "15111b49424358284893d98c212e82b78e72419c4ad9d0388db526822dd8bd58"
+    },
+    {
+      "id": "dive-boss-gate-cave-candidate-v1",
+      "kind": "runtime-material",
+      "adoption": "see-original-manifest; filename-candidate-is-not-adoption-status",
+      "version": "original",
+      "path": "assets/visual-candidates/v1/dive-boss-gate-cave-candidate-v1.png",
+      "original_file": "dive-boss-gate-cave-candidate-v1.png",
+      "sha256": "f71f3b070312a91c3d4eee40c212a90385af1fcf652fd52d74f6da93b1b65f33"
+    },
+    {
+      "id": "dive-boss-gate-cave-candidate-v2",
+      "kind": "runtime-material",
+      "adoption": "see-original-manifest; filename-candidate-is-not-adoption-status",
+      "version": "original",
+      "path": "assets/visual-candidates/v1/dive-boss-gate-cave-candidate-v2.png",
+      "original_file": "dive-boss-gate-cave-candidate-v2.png",
+      "sha256": "84903779b817a4f063acaba4094a9d024b3b8b4917dd0a4f8148cc53fd3aff6a"
+    },
+    {
+      "id": "dive-e01-underground-rat-static-candidate-v1",
+      "kind": "runtime-material",
+      "adoption": "see-original-manifest; filename-candidate-is-not-adoption-status",
+      "version": "original",
+      "path": "assets/visual-candidates/v1/dive-e01-underground-rat-static-candidate-v1.png",
+      "original_file": "dive-e01-underground-rat-static-candidate-v1.png",
+      "sha256": "f6f4fbb9ddea4e1984aa92137d619470829b17c3b97fc892e0ae0449328abe86"
+    },
+    {
+      "id": "dive-e01-underground-rat-static-candidate-v2",
+      "kind": "runtime-material",
+      "adoption": "see-original-manifest; filename-candidate-is-not-adoption-status",
+      "version": "original",
+      "path": "assets/visual-candidates/v1/dive-e01-underground-rat-static-candidate-v2.png",
+      "original_file": "dive-e01-underground-rat-static-candidate-v2.png",
+      "sha256": "d9b3a1cf7aa2ef3287c25400c217accb1e28b5e5d53455ab707ffd56d2490869"
+    },
+    {
+      "id": "dive-e02-slime-mold-static-candidate-v1",
+      "kind": "runtime-material",
+      "adoption": "see-original-manifest; filename-candidate-is-not-adoption-status",
+      "version": "original",
+      "path": "assets/visual-candidates/v1/dive-e02-slime-mold-static-candidate-v1.png",
+      "original_file": "dive-e02-slime-mold-static-candidate-v1.png",
+      "sha256": "ca02e521eb295acb25a77e92d038c2a8dbae86897d1753a490d9f02631dd81a0"
+    },
+    {
+      "id": "dive-e03-ironwing-bat-static-candidate-v1",
+      "kind": "runtime-material",
+      "adoption": "see-original-manifest; filename-candidate-is-not-adoption-status",
+      "version": "original",
+      "path": "assets/visual-candidates/v1/dive-e03-ironwing-bat-static-candidate-v1.png",
+      "original_file": "dive-e03-ironwing-bat-static-candidate-v1.png",
+      "sha256": "bc3b8d9c1935f566d6e345778e2e0e63e2d971ea5d5ebf35e5b98b6f06c744ee"
+    },
+    {
+      "id": "dive-e04-goblin-static-candidate-v1",
+      "kind": "runtime-material",
+      "adoption": "see-original-manifest; filename-candidate-is-not-adoption-status",
+      "version": "original",
+      "path": "assets/visual-candidates/v1/dive-e04-goblin-static-candidate-v1.png",
+      "original_file": "dive-e04-goblin-static-candidate-v1.png",
+      "sha256": "c94e1a08ea616fc3176f26282682d9daede8672eab76911f2b8cfa6c3f58df16"
+    },
+    {
+      "id": "dive-e05-rock-beetle-static-candidate-v1",
+      "kind": "runtime-material",
+      "adoption": "see-original-manifest; filename-candidate-is-not-adoption-status",
+      "version": "original",
+      "path": "assets/visual-candidates/v1/dive-e05-rock-beetle-static-candidate-v1.png",
+      "original_file": "dive-e05-rock-beetle-static-candidate-v1.png",
+      "sha256": "bde4dac053754c597fa75873547e8a0b9fa799117e7312a0a193dc0854c73aad"
+    },
+    {
+      "id": "dive-e06-wet-rock-crab-static-candidate-v1",
+      "kind": "runtime-material",
+      "adoption": "see-original-manifest; filename-candidate-is-not-adoption-status",
+      "version": "original",
+      "path": "assets/visual-candidates/v1/dive-e06-wet-rock-crab-static-candidate-v1.png",
+      "original_file": "dive-e06-wet-rock-crab-static-candidate-v1.png",
+      "sha256": "64bd9154da2fb2e88766a1266282abbab19890d2e5c60242bc016b450e082cc5"
+    },
+    {
+      "id": "dive-e07-cave-frog-static-candidate-v1",
+      "kind": "runtime-material",
+      "adoption": "see-original-manifest; filename-candidate-is-not-adoption-status",
+      "version": "original",
+      "path": "assets/visual-candidates/v1/dive-e07-cave-frog-static-candidate-v1.png",
+      "original_file": "dive-e07-cave-frog-static-candidate-v1.png",
+      "sha256": "163caeee0775f79dddd3085d8b65e80602dd92bbd176047432f6c71387da81a8"
+    },
+    {
+      "id": "dive-e08-aquatic-lizard-static-candidate-v1",
+      "kind": "runtime-material",
+      "adoption": "see-original-manifest; filename-candidate-is-not-adoption-status",
+      "version": "original",
+      "path": "assets/visual-candidates/v1/dive-e08-aquatic-lizard-static-candidate-v1.png",
+      "original_file": "dive-e08-aquatic-lizard-static-candidate-v1.png",
+      "sha256": "1812396a55efdb5b3d5f82a0522d918b160d62f755106b78384650c8138a2c82"
+    },
+    {
+      "id": "dive-hero-static-candidate-v1",
+      "kind": "runtime-material",
+      "adoption": "see-original-manifest; filename-candidate-is-not-adoption-status",
+      "version": "original",
+      "path": "assets/visual-candidates/v1/dive-hero-static-candidate-v1.png",
+      "original_file": "dive-hero-static-candidate-v1.png",
+      "sha256": "27eda9f13520ea888eeb2e18301c0df1e5b72c582a8f43ea8ba10fff39e91048"
+    },
+    {
+      "id": "dive-ordinary-cave-candidate-v1",
+      "kind": "runtime-material",
+      "adoption": "see-original-manifest; filename-candidate-is-not-adoption-status",
+      "version": "original",
+      "path": "assets/visual-candidates/v1/dive-ordinary-cave-candidate-v1.png",
+      "original_file": "dive-ordinary-cave-candidate-v1.png",
+      "sha256": "bd4596d01a561e6c26d7652e04298c60c17697bedbbc284418a58528d2ed8a7b"
+    },
+    {
+      "id": "dive-ordinary-cave-candidate-v2",
+      "kind": "runtime-material",
+      "adoption": "see-original-manifest; filename-candidate-is-not-adoption-status",
+      "version": "original",
+      "path": "assets/visual-candidates/v1/dive-ordinary-cave-candidate-v2.png",
+      "original_file": "dive-ordinary-cave-candidate-v2.png",
+      "sha256": "b251f52cde26bf44481a83de844a6879e5ec6d4d18aa91d7dfd32b25dfab3f6b"
+    },
+    {
+      "id": "containers",
+      "kind": "independent-runtime-material",
+      "adoption": "user-supplied-this-task; exact PNG preserved",
+      "version": "2026-10-19",
+      "path": "assets/interface/v2/containers.png",
+      "original_file": "codex-clipboard-b6753d3d-c4c1-4ad8-8815-16577b1f1736.png",
+      "sha256": "0acd74b55f1425198a908c18e7b06643af78d4b853e98ba0929f76062983b631"
+    },
+    {
+      "id": "preparation-town",
+      "kind": "independent-runtime-material",
+      "adoption": "user-supplied-this-task; exact PNG preserved",
+      "version": "2026-10-19",
+      "path": "assets/interface/v2/preparation-town.png",
+      "original_file": "codex-clipboard-55591339-33ca-4bb8-ace0-a31519186476.png",
+      "sha256": "0099701ee051ef03f173cbeb1d40bbd07e65c53ad4668361869790e6dc199cd8"
+    },
+    {
+      "id": "symbols",
+      "kind": "independent-runtime-material",
+      "adoption": "user-supplied-this-task; exact PNG preserved",
+      "version": "2026-10-19",
+      "path": "assets/interface/v2/symbols.png",
+      "original_file": "codex-clipboard-bcc5126b-98fc-4146-be8a-ecd0976d1649.png",
+      "sha256": "3566eb073440266df018d90b4a04d81197ffa7854dbbe58fd42135be398eaae3"
+    },
+    {
+      "id": "warehouse-room-duplicate",
+      "kind": "independent-runtime-material",
+      "adoption": "user-supplied-this-task; exact PNG preserved",
+      "version": "2026-10-19",
+      "path": "assets/interface/v2/warehouse-room-duplicate.png",
+      "original_file": "codex-clipboard-9bafb643-2013-4e3a-b616-c46eb389bac8.png",
+      "sha256": "4d957fd356e3c276ed0b29714f4129df5f83e69a78d60be4197735b139fd7e18"
+    },
+    {
+      "id": "warehouse-room",
+      "kind": "independent-runtime-material",
+      "adoption": "user-supplied-this-task; exact PNG preserved",
+      "version": "2026-10-19",
+      "path": "assets/interface/v2/warehouse-room.png",
+      "original_file": "codex-clipboard-74e99a9c-5925-4603-8a08-496cbac36bc6.png",
+      "sha256": "4d957fd356e3c276ed0b29714f4129df5f83e69a78d60be4197735b139fd7e18"
+    },
+    {
+      "id": "preparation-latest",
+      "kind": "user-current-target-not-runtime",
+      "adoption": "user-supplied-this-task; exact PNG preserved",
+      "version": "2026-10-19",
+      "path": "assets/ui-reference/supplemental/preparation-latest.png",
+      "original_file": "preparation-latest.png",
+      "sha256": "b7204cbb6a187078f0195c0fe4eeb751feb5f5753a1ecc76fbb55f0f9df2e5d2"
+    },
+    {
+      "id": "title-latest",
+      "kind": "user-current-target-not-runtime",
+      "adoption": "user-supplied-this-task; exact PNG preserved",
+      "version": "2026-10-19",
+      "path": "assets/ui-reference/supplemental/title-latest.png",
+      "original_file": "title-latest.png",
+      "sha256": "ab6de2c940dd26e98118a22811187bdce16ac48b341cee02a7c65fa772d2035a"
+    },
+    {
+      "id": "warehouse-latest",
+      "kind": "user-current-target-not-runtime",
+      "adoption": "user-supplied-this-task; exact PNG preserved",
+      "version": "2026-10-19",
+      "path": "assets/ui-reference/supplemental/warehouse-latest.png",
+      "original_file": "warehouse-latest.png",
+      "sha256": "5fae9490b76136dc1228c2a7272beb4623414617c0196279f87fdca464025441"
+    },
+    {
+      "id": "surface-preparation.png",
+      "kind": "independent-background-no-ui",
+      "adoption": "user-supplied-for-current-task",
+      "version": "2026-10-19",
+      "path": "assets/interface/v2/surface-preparation.png",
+      "original_file": "C:\\Users\\masat\\AppData\\Local\\Temp\\codex-clipboard-fc74634d-f6e0-4508-bc57-ebadfc14721a.png",
+      "sha256": "53be7d7a0dd769d20d6bbd110035b2437713f37ac09059475f88ef5dfa7d9dc4"
+    },
+    {
+      "id": "surface-warehouse.png",
+      "kind": "independent-background-no-ui",
+      "adoption": "user-supplied-for-current-task",
+      "version": "2026-10-19",
+      "path": "assets/interface/v2/surface-warehouse.png",
+      "original_file": "C:\\Users\\masat\\AppData\\Local\\Temp\\codex-clipboard-d9c0e1a6-4fcc-4e89-9697-4520752a7386.png",
+      "sha256": "9e5ba1a94f75ab1e978b48fc3da202ccabf0fcfcc0162c846bdff1cea86a64c0"
+    },
+    {
+      "id": "surface-title.png",
+      "kind": "independent-background-no-ui",
+      "adoption": "user-supplied-for-current-task",
+      "version": "2026-10-19",
+      "path": "assets/interface/v2/surface-title.png",
+      "original_file": "C:\\Users\\masat\\AppData\\Local\\Temp\\codex-clipboard-515b6b1b-99d5-4fca-8fe9-168f84ed031d.png",
+      "sha256": "1c76d562ab25eb3f037eb8aae9753182e941c7ba9673b7b25f0afe74d37b9371"
+    },
+    {
+      "id": "BEFORE-77-normal-first-title",
+      "screen": "77-normal-first-title",
+      "kind": "implementation-screenshot",
+      "adoption": "comparison evidence only; never design source",
+      "version": "historical pre-0.5.4 capture; original name retained",
+      "path": "review/current/77-normal-first-title.png",
+      "original_file": "review/current/77-normal-first-title.png",
+      "sha256": "5a1a08a9627b70d5eed108ccd39a7d3d4b31354f2fd101d892a4f0c4686fc9b8"
+    },
+    {
+      "id": "BEFORE-80-first-town",
+      "screen": "80-first-town",
+      "kind": "implementation-screenshot",
+      "adoption": "comparison evidence only; never design source",
+      "version": "historical pre-0.5.4 capture; original name retained",
+      "path": "review/current/80-first-town.png",
+      "original_file": "review/current/80-first-town.png",
+      "sha256": "8d9e0c83f9a5829eca2e61a25353157678517325215763a5406f6b665d772009"
+    },
+    {
+      "id": "BEFORE-88-normal-exploration",
+      "screen": "88-normal-exploration",
+      "kind": "implementation-screenshot",
+      "adoption": "comparison evidence only; never design source",
+      "version": "historical pre-0.5.4 capture; original name retained",
+      "path": "review/current/88-normal-exploration.png",
+      "original_file": "review/current/88-normal-exploration.png",
+      "sha256": "6c89b5fb0cf20be245f9157d34559920cf4db8c6e212f89f036dbb26bf4eb0be"
+    },
+    {
+      "id": "BEFORE-82-normal-battle",
+      "screen": "82-normal-battle",
+      "kind": "implementation-screenshot",
+      "adoption": "comparison evidence only; never design source",
+      "version": "historical pre-0.5.4 capture; original name retained",
+      "path": "review/current/82-normal-battle.png",
+      "original_file": "review/current/82-normal-battle.png",
+      "sha256": "62e7d0ea6dc012528eb86af380c70f855e2b13e95095d14afae28d59a35becbc"
+    },
+    {
+      "id": "BEFORE-equipment-warehouse",
+      "screen": "equipment-warehouse",
+      "kind": "implementation-screenshot",
+      "adoption": "comparison evidence only; never design source",
+      "version": "0.5.4",
+      "path": "review/equipment-and-interface/equipment-assets-isolated/equipment-warehouse.png",
+      "original_file": "review/equipment-and-interface/equipment-assets-isolated/equipment-warehouse.png",
+      "sha256": "c2abe73078a58eadce7da7a85721da5018b18b7dbc7a4131c6c8bf81507b7f5a"
+    },
+    {
+      "id": "BEFORE-status-equipment",
+      "screen": "status-equipment",
+      "kind": "implementation-screenshot",
+      "adoption": "comparison evidence only; never design source",
+      "version": "0.5.4",
+      "path": "review/equipment-and-interface/status-isolated/status-equipment.png",
+      "original_file": "review/equipment-and-interface/status-isolated/status-equipment.png",
+      "sha256": "fa2912431e1edb3bbe3778071173832e023c725ee2198f3d0365ba4d0d3039ef"
+    }
+  ],
+  "formal_numbering_note": "PX-01..03 unchanged; newly supplied title/preparation/warehouse targets have no PX number."
+}

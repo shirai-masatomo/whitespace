@@ -1,5 +1,7 @@
 extends Control
 const InterfaceArt=preload("res://ui/interface_art.gd")
+const UISkin=preload("res://ui/ui_skin.gd")
+const Symbols=preload("res://ui/status_symbols.gd")
 const Frame=preload("res://ui/warehouse_frame.gd")
 const EquipmentArt=preload("res://ui/equipment_art.gd")
 const Icons=preload("res://ui/item_icons.gd")
@@ -21,18 +23,21 @@ func _ready() -> void:
 	build()
 func label_at(parent: Control, value: String, r: Rect2, font_size: int=18, color: Color=INK) -> Label:
 	var l:=Label.new(); l.clip_text=true; l.text=value; l.position=r.position; l.size=r.size
+	if parent.get_meta("paper_header",false) and r.position.y<40: color=Color("30291e")
 	l.set_meta("normal_color",color)
 	if parent is Button and parent.get_meta("gold_surface",false): color=Color("302b23")
 	l.add_theme_font_size_override("font_size",font_size); l.add_theme_color_override("font_color",color)
 	l.clip_text=true; l.mouse_filter=Control.MOUSE_FILTER_IGNORE
 	parent.add_child(l); return l
 func icon_at(parent: Control, kind: String, r: Rect2, template_id: String="") -> void:
-	var t:=TextureRect.new(); t.expand_mode=TextureRect.EXPAND_IGNORE_SIZE; t.texture=EquipmentArt.texture(template_id,kind) if template_id!="" else Icons.texture(kind); t.position=r.position; t.size=r.size
+	var t:=TextureRect.new(); t.expand_mode=TextureRect.EXPAND_IGNORE_SIZE; t.texture=EquipmentArt.texture(template_id,kind) if template_id!="" else (preload("res://ui/interface_symbols.gd").texture("bag" if kind=="backpack" else kind) if kind in ["backpack","cloth","warehouse"] else Icons.texture(kind)); t.position=r.position; t.size=r.size
 	t.texture_filter=CanvasItem.TEXTURE_FILTER_NEAREST; t.expand_mode=TextureRect.EXPAND_IGNORE_SIZE; t.stretch_mode=TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 	t.mouse_filter=Control.MOUSE_FILTER_IGNORE; parent.add_child(t)
 func panel(r: Rect2, title: String, kind: String, purple: bool=false, main: bool=false) -> Control:
 	var p:=Control.new(); p.set_script(Frame); p.position=r.position; p.size=r.size; p.cloth=purple; p.prominent=main; add_child(p)
-	icon_at(p,kind,Rect2(13,8,32,32)); label_at(p,title,Rect2(50,8,r.size.x-65,32),22,GOLD)
+	p.set_meta("paper_header",true)
+	InterfaceArt.paper(p,Rect2(11,9,r.size.x-22,46 if r.size.y==64 else 35))
+	icon_at(p,kind,Rect2(13,8,32,32)); label_at(p,title,Rect2(50,8,r.size.x-65,32),22,Color("30291e"))
 	return p
 func skin(b: Button, selected: bool=false, purple: bool=false) -> void:
 	var textured:=b.size.y>=45 or b.custom_minimum_size.y>=45
@@ -65,7 +70,7 @@ func remember_scroll() -> void:
 	if is_instance_valid(cloth_scroll): game.warehouse_state.cloth_scroll=cloth_scroll.scroll_vertical
 func scroll_area(p: Control, r: Rect2) -> ScrollContainer:
 	var sc:=ScrollContainer.new(); sc.position=r.position; sc.size=r.size
-	sc.horizontal_scroll_mode=ScrollContainer.SCROLL_MODE_DISABLED; p.add_child(sc)
+	sc.theme=UISkin.scroll_theme(); sc.horizontal_scroll_mode=ScrollContainer.SCROLL_MODE_DISABLED; p.add_child(sc)
 	return sc
 func build_list(p: Control, source: String, r: Rect2) -> ScrollContainer:
 	var sc:=scroll_area(p,r)
@@ -84,6 +89,7 @@ func build_list(p: Control, source: String, r: Rect2) -> ScrollContainer:
 	if game.campaign[source].is_empty(): label_at(p,"中身はありません",Rect2(22,r.position.y+12,r.size.x-20,28),17,MUTED)
 	return sc
 func build() -> void:
+	UISkin.picture(self,preload("res://assets/interface/v2/surface-warehouse.png"),Rect2(0,0,1280,720),true)
 	selected_source=game.warehouse_state.get("source","inventory")
 	selected_uid=game.warehouse_state.get("uid","")
 	if not selected_uid in game.campaign.get(selected_source,[]):
@@ -95,10 +101,10 @@ func build() -> void:
 	var header:=panel(Rect2(16,14,1248,64),"","lantern")
 	var brand:=label_at(header,"Dive In Under",Rect2(53,9,285,44),31,GOLD)
 	var serif:=SystemFont.new(); serif.font_names=PackedStringArray(["Georgia"]); brand.add_theme_font_override("font",serif)
-	label_at(header,"町 ・ 倉庫",Rect2(352,11,300,40),27)
+	label_at(header,"倉庫 ・ 所持品",Rect2(352,11,300,40),27)
 	label_at(header,"持ち帰ったものを、次の旅へ。",Rect2(690,14,340,34),16,MUTED)
 	label_at(header,"G  %d"%game.campaign.gold,Rect2(1080,11,150,40),23,GOLD)
-	var left:=panel(Rect2(16,92,296,318),"所持品","body")
+	var left:=panel(Rect2(16,92,296,318),"所持品","backpack")
 	label_at(left,"%d / 15"%game.campaign.inventory.size(),Rect2(198,9,78,30),18)
 	bag_scroll=build_list(left,"inventory",Rect2(14,55,268,246))
 	var cloth:=panel(Rect2(16,422,296,200),"父親の風呂敷","cloth",true)
@@ -125,9 +131,9 @@ func build() -> void:
 		if category!="all" and Storage.category(item)!=category: continue
 		visible_items.append(uid)
 		var tile:=Button.new(); tile.custom_minimum_size=Vector2(84,88); skin(tile,uid==selected_uid); grid.add_child(tile)
-		icon_at(tile,item.slot,Rect2(10,0,64,64),game.campaign.items[uid])
+		icon_at(tile,item.slot,Rect2(13,8,58,54),game.campaign.items[uid])
 		label_at(tile,"×1",Rect2(53,45,28,22),15)
-		var title:=label_at(tile,Catalog.name_of(item),Rect2(4,61,76,22),12,MUTED); title.text_overrun_behavior=TextServer.OVERRUN_TRIM_ELLIPSIS; title.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER
+		var title:=label_at(tile,Catalog.name_of(item),Rect2(4,64,76,20),12,MUTED); title.text_overrun_behavior=TextServer.OVERRUN_TRIM_ELLIPSIS; title.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER
 		if item.slot!="":
 			var bar:=ColorRect.new(); bar.position=Vector2(8,84); bar.size=Vector2(68.0*game.campaign.item_condition[uid].current/100,2); bar.color=Color("72b8a1") if game.campaign.item_condition[uid].current>0 else Color("a95646"); bar.mouse_filter=Control.MOUSE_FILTER_IGNORE; tile.add_child(bar)
 		tile.tooltip_text=Catalog.name_of(item)+" ×1\n"+game.condition_text(uid)
@@ -137,7 +143,7 @@ func build() -> void:
 	var right:=panel(Rect2(916,92,348,530),"アイテム詳細","eyes")
 	build_details(right)
 	build_actions()
-	label_at(self,game.notice if game.notice!="" else "アイテムを選び、下のボタンで移動します。変更は自動保存されます。",Rect2(24,623,1230,22),14,MUTED)
+	label_at(self,game.notice if game.notice!="" else "アイテムを選び、下のボタンで移動します。移動後もこの起動中は保持されます。",Rect2(24,623,1230,22),14,MUTED)
 	bag_scroll.set_deferred("scroll_vertical",game.warehouse_state.get("bag_scroll",0))
 	grid_scroll.set_deferred("scroll_vertical",game.warehouse_state.get("grid_scroll",0))
 	cloth_scroll.set_deferred("scroll_vertical",game.warehouse_state.get("cloth_scroll",0))

@@ -15,6 +15,8 @@ const GLYPHS={
 "normal":["    x    ","   xxx   ","  xxxxx  "," xxxxxxx ","  xxxxx  ","   xxx   ","    x    "],
 "bag":["   xxx   ","  xxxxx  "," xxxxxxx "," xx x xx "," xxxxxxx "," xx x xx "," xxxxxxx "]}
 static func texture(key: String) -> Texture2D:
+	var supplied: Texture2D=preload("res://ui/interface_symbols.gd").texture(key)
+	if supplied!=null: return supplied
 	if cache.has(key): return cache[key]
 	var rows: Array=GLYPHS.get(key,GLYPHS.normal)
 	var ink:=Color(COLORS.get(key,COLORS.normal))

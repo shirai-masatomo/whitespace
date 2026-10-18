@@ -15,7 +15,7 @@ $environment = [Collections.Generic.SortedDictionary[string,string]]::new([Strin
 [Environment]::GetEnvironmentVariables().GetEnumerator() | ForEach-Object { $environment[$_.Key] = [string]$_.Value }
 $environment['APPDATA'] = Join-Path $RunDirectory 'user-data'
 $environment['LOCALAPPDATA'] = Join-Path $RunDirectory 'local-data'
-$arguments = @('--audio-driver','Dummy','--rendering-method','gl_compatibility','--max-fps','30','--resolution','1280x720','--log-file',$log,'--',"--smoke-dir=$RunDirectory","--smoke-run-id=$runId",("--" + $Review + "-review"))
+$arguments = @('--audio-driver','Dummy','--rendering-method','gl_compatibility','--max-fps','30','--resolution','1280x720','--log-file',$log,'--','--legacy-persistence-check',"--smoke-dir=$RunDirectory","--smoke-run-id=$runId",("--" + $Review + "-review"))
 if ($Resume) { $arguments += "--$Review-review-resume" }
 if ($Isolated) {
     Add-Type -Path (Join-Path $PSScriptRoot 'isolated_desktop.cs')

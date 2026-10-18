@@ -2,6 +2,11 @@ extends "res://ui/main.gd"
 const Expedition = preload("res://core/expedition.gd")
 const SaveStore = preload("res://core/save_store.gd")
 var last_defense_flash := ""
+var legacy_persistence_mode:=false
+var session_departed:=false
+var route_map_open:=false
+var play_view: Control
+var equipment_focus: String="head"
 var cfg: Dictionary
 var campaign: Dictionary = {}
 var save_store: RefCounted
@@ -31,7 +36,9 @@ var campaign_seed := 123
 const CampaignReplay = preload("res://ui/campaign_replay.gd")
 
 func initialize_game() -> void:
-	get_window().title="Dive In Under 0.5.4"
+	get_window().title="Dive In Under 0.6.0"
+	Engine.max_fps=60
+	legacy_persistence_mode=smoke_dir!="" and "--legacy-persistence-check" in OS.get_cmdline_user_args()
 	cfg=Expedition.load_config()
 	if cfg.is_empty(): get_tree().quit(1); return
 	var save_path := "user://campaign-v1.json"
@@ -44,10 +51,12 @@ func initialize_game() -> void:
 		if arg=="--campaign-resume": campaign_resume=true
 		if arg=="--campaign-final-probe": campaign_final_probe=true
 		if smoke_dir!="" and arg.begins_with("--campaign-seed="): campaign_seed=int(arg.trim_prefix("--campaign-seed="))
-	save_store=SaveStore.new(save_path,data,cfg)
-	loaded=save_store.load_game()
-	cfg=save_store.cfg
-	if loaded.ok: campaign=loaded.state
+	if legacy_persistence_mode:
+		save_store=SaveStore.new(save_path,data,cfg)
+		loaded=save_store.load_game(); cfg=save_store.cfg
+		if loaded.ok: campaign=loaded.state
+	else:
+		loaded={"ok":false,"status":"missing"}
 	play_timer=Timer.new()
 	play_timer.wait_time=0.6
 	play_timer.timeout.connect(func(): if campaign.get("phase")=="battle" and ui_mode=="campaign": perform("round",{},int(campaign.revision)))
@@ -60,6 +69,8 @@ func _notification(what: int) -> void:
 		get_tree().quit()
 
 func show_title() -> void:
+	if not legacy_persistence_mode:
+		timer.stop(); play_timer.stop(); ui_mode="title"; title_visible=true; show_play_view("title"); return
 	background.set_depth(1)
 	timer.stop()
 	if is_instance_valid(play_timer): play_timer.stop()
@@ -98,6 +109,10 @@ func show_battle() -> void:
 	super.show_battle()
 
 func request_new() -> void:
+	if not legacy_persistence_mode:
+		if campaign.is_empty(): start_new()
+		else: show_campaign()
+		return
 	if FileAccess.file_exists(save_store.path):
 		var root:=root_layout()
 		root.add_child(text_label("新しい探索を始めますか",32))
@@ -108,6 +123,9 @@ func request_new() -> void:
 	else: start_new()
 
 func start_new() -> void:
+	if not legacy_persistence_mode:
+		cfg=Expedition.load_config(); campaign=Expedition.fresh(cfg,campaign_seed if smoke_dir!="" else int(Time.get_ticks_usec()%2147483647))
+		campaign.phase="town"; town_page="hub"; session_departed=false; warehouse_state={}; auto_play=true; notice=""; show_campaign(); return
 	var error: String=save_store.preserve_current()
 	if error!="": notice=error; show_title(); return
 	cfg=Expedition.load_config(); save_store.cfg=cfg
@@ -135,10 +153,15 @@ func perform(action: String, args: Dictionary, revision: int) -> void:
 	if candidate==campaign:
 		if action=="organize": notice="すでに選択した順序に整理されています。"; show_campaign()
 		return
-	var error: String=save_store.write_game(candidate)
-	if error!="":
-		auto_play=false; notice="保存できないため操作を取り消しました："+error
-		show_campaign(); return
+	if legacy_persistence_mode:
+		var error: String=save_store.write_game(candidate)
+		if error!="":
+			auto_play=false; notice="保存できないため操作を取り消しました："+error
+			show_campaign(); return
+	elif action=="depart":
+		if not session_departed: candidate.trips-=1
+		session_departed=true
+		candidate=Expedition.act(candidate,"descend",int(candidate.revision),{},data,cfg)
 	campaign=candidate; loaded={"ok":true,"status":"ok"}; notice=""
 	if action=="town": town_page="hub"
 	if action in ["deposit","withdraw","to_cloth"]:
@@ -170,7 +193,27 @@ func portrait(parent: Node, height: float) -> void:
 	image.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	parent.add_child(image)
 
+func show_play_view(mode: String) -> void:
+	root_layout()
+	var old:=screen.get_child(0); screen.remove_child(old); old.queue_free()
+	for side in ["left","right","top","bottom"]: screen.add_theme_constant_override("margin_"+side,0)
+	play_view=Control.new(); play_view.set_script(preload("res://ui/play_view.gd")); play_view.game=self; play_view.mode=mode; screen.add_child(play_view)
 func show_campaign() -> void:
+	if not legacy_persistence_mode:
+		timer.stop(); play_timer.stop(); title_visible=false; ui_mode="campaign"; play_buttons={}
+		background.set_depth(maxi(1,int(campaign.floor)))
+		if campaign.phase=="town" and town_page in ["status","warehouse"]:
+			root_layout()
+			var old:=screen.get_child(0); screen.remove_child(old); old.queue_free()
+			for side in ["left","right","top","bottom"]: screen.add_theme_constant_override("margin_"+side,0)
+			if town_page=="status":
+				status_view=Control.new(); status_view.set_script(preload("res://ui/status_view.gd")); status_view.game=self; status_view.return_page="hub"; screen.add_child(status_view)
+			else:
+				warehouse_view=Control.new(); warehouse_view.set_script(preload("res://ui/warehouse_view.gd")); warehouse_view.game=self; screen.add_child(warehouse_view)
+		else:
+			show_play_view("equipment" if campaign.phase=="town" and town_page=="equipment" else ("hub" if campaign.phase=="town" else ("result" if campaign.phase=="result" else "exploration")))
+		if campaign.phase=="battle" and auto_play: play_timer.wait_time=0.6/play_speed; play_timer.start()
+		return
 	timer.stop(); play_timer.stop(); title_visible=false; ui_mode="campaign"; play_buttons={}
 	background.set_depth(campaign.floor if campaign.phase not in ["town","result"] else 1)
 	if campaign.phase in ["explore","battle","event"]:
@@ -423,6 +466,10 @@ func show_equipment(root: VBoxContainer) -> void:
 	var depart:=command("HP/SP回復済み  →  もう一度地下へ","depart"); root.add_child(depart)
 
 func smoke(quit_on_finish: bool = true) -> void:
+	if "--ui-integration-review" in OS.get_cmdline_user_args():
+		await preload("res://ui/integration_review.gd").run(self); return
+	if not legacy_persistence_mode:
+		get_tree().quit(2); return # Explicit verification flag is required; never enter legacy tests from normal play.
 	if "--equipment-assets-review" in OS.get_cmdline_user_args():
 		await preload("res://ui/equipment_assets_review.gd").run(self); return
 	if "--status-review" in OS.get_cmdline_user_args():

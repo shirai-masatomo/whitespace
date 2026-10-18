@@ -15,7 +15,7 @@ $build = Resolve-DiveBuild -Project $project
 $exe = Join-Path $build 'DiveInUnder.exe'
 $log = Join-Path $runDir 'render.log'
 $runId = [guid]::NewGuid().ToString('N')
-$cmd = '"' + $exe + '" --audio-driver Dummy --rendering-method gl_compatibility --max-fps 30 --resolution 1280x720 --log-file "' + $log + '" -- --smoke-dir="' + $runDir + '" --smoke-run-id=' + $runId
+$cmd = '"' + $exe + '" --audio-driver Dummy --rendering-method gl_compatibility --max-fps 30 --resolution 1280x720 --log-file "' + $log + '" -- --legacy-persistence-check --smoke-dir="' + $runDir + '" --smoke-run-id=' + $runId
 if ($CampaignReplay) {
     $replayData = Get-Content $CampaignReplay -Raw -Encoding utf8 | ConvertFrom-Json
     $cmd += ' --campaign-replay="' + $CampaignReplay + '" --campaign-seed=' + $replayData.replay.seed

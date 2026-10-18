@@ -8,6 +8,7 @@ const Art=preload("res://ui/visual_assets.gd")
 const EquipmentArt=preload("res://ui/equipment_art.gd")
 const Icons=preload("res://ui/item_icons.gd")
 const Frame=preload("res://ui/warehouse_frame.gd")
+const UISkin=preload("res://ui/ui_skin.gd")
 const Paper=preload("res://ui/panel_frame.gd")
 const GOLD=Color("e5c37e")
 const INK=Color("e8e3ce")
@@ -55,9 +56,7 @@ func image_at(parent: Control, texture: Texture2D, r: Rect2, crop: bool=false) -
 func face() -> Texture2D:
 	var atlas:=AtlasTexture.new(); atlas.atlas=Art.texture("hero"); atlas.region=Rect2(410,210,390,370); return atlas
 func panel(r: Rect2, title: String, prominent: bool=false, ornament_only: bool=false) -> Control:
-	var p:=Control.new(); p.set_script(Frame); p.prominent=prominent; p.ornament_only=ornament_only; p.position=r.position; p.size=r.size; add_child(p)
-	if title!="": label_at(p,title,Rect2(20,8,r.size.x-40,32),22,GOLD)
-	return p
+	return UISkin.panel(self,r,title)
 func skin(b: Button, selected: bool=false) -> void:
 	var textured:=b.size.y>=45
 	b.set_meta("gold_surface",selected and textured)
@@ -85,7 +84,7 @@ func build() -> void:
 	image_at(header,Icons.texture("lantern"),Rect2(12,8,40,40))
 	var brand:=label_at(header,"Dive In Under",Rect2(54,9,280,44),31,GOLD); var serif:=SystemFont.new(); serif.font_names=PackedStringArray(["Georgia"]); brand.add_theme_font_override("font",serif)
 	label_at(header,"ステータス",Rect2(350,10,280,40),27)
-	label_at(header,"町  /  主人公",Rect2(780,14,250,34),18,MUTED)
+	label_at(header,"冒険の準備  /  主人公",Rect2(780,14,250,34),18,MUTED)
 	label_at(header,"G  %d"%game.campaign.gold,Rect2(1080,11,145,40),23,GOLD)
 	left_panel=panel(Rect2(16,92,296,510),unit.name,true)
 	build_left()
@@ -101,7 +100,7 @@ func build() -> void:
 	build_party()
 	back_button=button_at(self,"戻る",Rect2(1060,616,204,88),request_close)
 	var border:=Control.new(); border.set_script(Frame); border.ornament_only=true; back_button.add_child(border); border.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	back_button.add_theme_font_size_override("font_size",24); back_button.tooltip_text="町へ戻る / Esc"
+	back_button.add_theme_font_size_override("font_size",24); back_button.tooltip_text="町へ冒険準備へ / Esc"
 	build_content()
 	wire_tabs()
 func build_left() -> void:
@@ -124,9 +123,8 @@ func make_gauge(key: String, title: String, current: int, maximum: int, y: int, 
 	label_at(left_panel,title,Rect2(141,y-6,47,23),14,DARK)
 	left_values[key]=label_at(left_panel,"%d / %d"%[current,maximum],Rect2(184,y-6,88,23),14,DARK)
 	left_values[key].horizontal_alignment=HORIZONTAL_ALIGNMENT_RIGHT
-	var bar:=ProgressBar.new(); bar.position=Vector2(141,y+19); bar.size=Vector2(132,13); bar.max_value=maxi(1,maximum); bar.value=current; bar.show_percentage=false; bar.mouse_filter=Control.MOUSE_FILTER_IGNORE
-	var bg:=StyleBoxFlat.new(); bg.bg_color=Color("352f28"); bg.border_color=Color("685237"); bg.set_border_width_all(1); bar.add_theme_stylebox_override("background",bg)
-	var fill:=StyleBoxFlat.new(); fill.bg_color=color; fill.border_color=color.lightened(0.3); fill.set_border_width_all(1); bar.add_theme_stylebox_override("fill",fill); left_panel.add_child(bar); bar.size=Vector2(132,13); bars[key]=bar
+	var bar:=Control.new(); bar.set_script(preload("res://ui/vital_gauge.gd")); bar.position=Vector2(141,y+19); bar.size=Vector2(132,13); bar.max_value=maxi(1,maximum); bar.value=current; bar.mouse_filter=Control.MOUSE_FILTER_IGNORE
+	bar.tint=color; left_panel.add_child(bar); bar.size=Vector2(132,13); bars[key]=bar
 	gauges[key]={"current":current,"maximum":maximum}
 func refresh_character() -> void:
 	# Called only when the owning screen receives an actual data refresh.
@@ -154,7 +152,7 @@ func build_party() -> void:
 		label_at(card,info[1],Rect2(10,9,108,28),15,GOLD)
 		image_at(card,Symbols.texture("bag") if info[0]=="inventory" else Icons.texture("cloth"),Rect2(8,47,36,33))
 		container_counts[info[0]]=label_at(card,"%d / %d"%[game.campaign[info[0]].size(),info[3]],Rect2(47,46,72,34),18)
-		card.tooltip_text="内容の移動は町の倉庫で行います。"
+		card.tooltip_text="内容の移動は準備画面の倉庫で行います。"
 func clear_children(parent: Node) -> void:
 	for child in parent.get_children(): parent.remove_child(child); child.queue_free()
 func choose_tab(key: String) -> void:
@@ -188,8 +186,8 @@ func build_content() -> void:
 	if not ids.is_empty(): tab_buttons[active_tab].focus_next=tab_buttons[active_tab].get_path_to(item_buttons[ids[0]])
 	back_button.focus_next=back_button.get_path_to(tab_buttons[active_tab])
 func build_equipment() -> void:
-	var scene:=image_at(central,Art.texture("cavern"),Rect2(160,20,232,358),true); scene.modulate=Color(0.62,0.72,0.72)
-	image_at(central,Art.actor_texture("hero"),Rect2(152,89,248,270))
+	var scene:=image_at(central,Art.texture("cavern"),Rect2(151,10,250,380),true); scene.modulate=Color(0.62,0.72,0.72)
+	image_at(central,Art.actor_texture("hero"),Rect2(142,52,268,326))
 	for c in 2:
 		var column: Array=[["head","body","right_hand","legs","feet"],["neck","ears","eyes","left_hand","wrist","finger"]][c]
 		var right: bool=c==1; var x:=402 if right else 0
@@ -281,8 +279,8 @@ func update_details() -> void:
 			detail_row("特殊効果","—")
 			detail_row("追加能力","未導入")
 			detail_row("刻印","未導入")
-		section("装備の変更","装備枠の選択では外れません。変更・修理は、町に戻って「装備・修理」から行えます。")
-		detail_text("大切な装備は、町の倉庫や父親の風呂敷へ保管できます。",16,MUTED)
+		section("装備の変更","装備枠の選択では外れません。変更・修理は、冒険準備に戻って「装備」から行えます。")
+		detail_text("大切な装備は、準備画面の倉庫や父親の風呂敷へ保管できます。",16,MUTED)
 		if id=="head": detail_text("マントも、この頭枠に装備します。",15,MUTED)
 	elif active_tab=="abilities":
 		detail_heading(Model.STAT_NAMES[id],Symbols.texture({"max_hp":"hp","max_sp":"sp"}.get(id,id)))
@@ -317,7 +315,7 @@ func update_details() -> void:
 		else:
 			detail_heading("旅の記録",Symbols.texture("normal"))
 			detail_row("到達記録","%d F"%game.campaign.highest_floor); detail_row("通常の探索","%d 回"%E.normal_trips(game.campaign)); detail_row("通常の死亡","%d 回"%E.normal_deaths(game.campaign))
-			detail_text("この記録は現在のセーブから表示しています。",17,MUTED)
+			detail_text("この起動中の冒険の記録です。",17,MUTED)
 	detail_scroll.set_deferred("scroll_vertical",0)
 	if is_instance_valid(detail_tween): detail_tween.kill()
 	details.modulate.a=0.5; detail_tween=create_tween(); detail_tween.tween_property(details,"modulate:a",1.0,0.08)
