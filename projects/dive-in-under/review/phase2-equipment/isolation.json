@@ -1,0 +1,18 @@
+{
+  "normal_desktop_fallback": false,
+  "result": {
+    "PID": 6176,
+    "ThreadID": 25296,
+    "ExitCode": 0,
+    "OwnedWindowCount": 2,
+    "Station": "Service-0x0-1b7214$",
+    "Desktop": "Render_b284b81f2b944d4083ee83a26560bfff",
+    "ObservedDesktop": "Render_b284b81f2b944d4083ee83a26560bfff",
+    "NonInteractive": true,
+    "DesktopMatched": true,
+    "TimedOut": false
+  },
+  "run_id": "cff425a93ff94882a3d4a2a7841f4380",
+  "pck_sha256": "E1C971741F3DC03C7E74774E792B7A322477C039C7ADAB6E63E72229D161710A",
+  "exe_sha256": "D34D36F3BE1A6C49C56525AE86469B92E4F417DDF0B43CF00DD80C385C4B0562"
+}

@@ -1,0 +1,16 @@
+{
+	"complete": true,
+	"condition": {
+		"current": 100,
+		"maximum": 100
+	},
+	"fixture_only": true,
+	"gold": 150,
+	"legacy_archive_sha256": "a8a1ec68e214aaf548e453c9c72e416ddacea2f4736e356dedecd6462335850b",
+	"manual_input": false,
+	"rendered": true,
+	"repair_input": true,
+	"run_id": "2a0ba948b24a461a925175d516af9338",
+	"save_sha256": "b2f08bc30a8bbf0118d9db84f5fae3a7f1891cf1146baf23a82babc1463e0f38",
+	"schema_version": 4
+}
