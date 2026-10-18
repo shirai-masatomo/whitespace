@@ -95,12 +95,12 @@ func build() -> void:
 		b.add_theme_font_size_override("font_size",17); b.set_meta("status_tab",key); tab_buttons[key]=b; index+=1
 	central=Control.new(); central.position=Vector2(14,61); central.size=Vector2(552,432); middle.add_child(central)
 	var right:=panel(Rect2(916,92,348,510),"詳細")
-	detail_scroll=ScrollContainer.new(); detail_scroll.position=Vector2(18,54); detail_scroll.size=Vector2(312,436); detail_scroll.horizontal_scroll_mode=ScrollContainer.SCROLL_MODE_DISABLED; right.add_child(detail_scroll)
+	detail_scroll=ScrollContainer.new(); detail_scroll.position=Vector2(18,54); detail_scroll.size=Vector2(312,436); detail_scroll.horizontal_scroll_mode=ScrollContainer.SCROLL_MODE_DISABLED; detail_scroll.theme=UISkin.scroll_theme(); right.add_child(detail_scroll)
 	details=VBoxContainer.new(); details.size_flags_horizontal=Control.SIZE_EXPAND_FILL; details.add_theme_constant_override("separation",12); detail_scroll.add_child(details)
 	build_party()
 	back_button=button_at(self,"戻る",Rect2(1060,616,204,88),request_close)
 	var border:=Control.new(); border.set_script(Frame); border.ornament_only=true; back_button.add_child(border); border.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	back_button.add_theme_font_size_override("font_size",24); back_button.tooltip_text="町へ冒険準備へ / Esc"
+	back_button.add_theme_font_size_override("font_size",24); back_button.tooltip_text="冒険準備へ / Esc"
 	build_content()
 	wire_tabs()
 func build_left() -> void:
@@ -150,7 +150,7 @@ func build_party() -> void:
 	for info in [["inventory","所持品","bag",15,784],["cloth","父親の風呂敷","cloth",3,922]]:
 		var card:=panel(Rect2(info[4],616,126,88),"")
 		label_at(card,info[1],Rect2(10,9,108,28),15,GOLD)
-		image_at(card,Symbols.texture("bag") if info[0]=="inventory" else Icons.texture("cloth"),Rect2(8,47,36,33))
+		image_at(card,Symbols.texture("bag") if info[0]=="inventory" else preload("res://ui/interface_symbols.gd").texture("cloth"),Rect2(8,47,36,33))
 		container_counts[info[0]]=label_at(card,"%d / %d"%[game.campaign[info[0]].size(),info[3]],Rect2(47,46,72,34),18)
 		card.tooltip_text="内容の移動は準備画面の倉庫で行います。"
 func clear_children(parent: Node) -> void:

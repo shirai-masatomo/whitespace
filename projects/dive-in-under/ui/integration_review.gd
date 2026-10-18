@@ -47,7 +47,7 @@ static func run(game: Control) -> void:
 		if arg.begins_with("--reference-root="): root=arg.trim_prefix("--reference-root=")
 	if not check(game,DisplayServer.get_name()!="headless" and not game.legacy_persistence_mode and game.save_store==null and game.campaign.is_empty(),"Normal session starts fresh without SaveStore"): return
 	if not check(game,find_nav(game.screen,"start")!=null and not "続きから" in preload("res://ui/status_review.gd").text_in(game.screen),"Title has start, no continue"): return
-	await shot(game,"title")
+	await shot(game,"title-restarted" if restart else "title")
 	await click(game,"start")
 	game.auto_play=false
 	if not check(game,game.campaign.phase=="town" and game.campaign.floor==0 and game.campaign.trips==1,"Start opens preparation before first expedition"): return
@@ -85,6 +85,8 @@ static func run(game: Control) -> void:
 	for item_uid in game.campaign.inventory.duplicate():
 		game.perform("deposit",{"uid":item_uid},int(game.campaign.revision))
 	game.warehouse_state.source="warehouse"; game.warehouse_state.uid=game.campaign.warehouse[0]; game.show_campaign()
+	E.add_item(game.campaign,"I04"); E.add_item(game.campaign,"I10")
+	game.show_campaign()
 	await shot(game,"warehouse")
 	await game.click_control(game.find_button(game.screen,"戻る"))
 	await click(game,"equipment")
@@ -101,14 +103,16 @@ static func run(game: Control) -> void:
 	if not check(game,game.campaign.floor==1 and game.campaign.trips==1,"Depart enters real 1F and keeps first trip count"): return
 	var after_depart: Dictionary=game.campaign.duplicate(true)
 	# Render fixed normal/boss/event/result states; each is identified as a fixture.
-	fixture(game,"E01",1)
+	fixture(game,"E04",1)
+	if not check(game,game.campaign.phase=="battle","Battle screenshot is captured before automatic outcome"): return
+	await shot(game,"battle")
 	game.auto_play=true; game.show_campaign()
 	await game.get_tree().create_timer(0.73).timeout
 	game.auto_play=false; game.play_timer.stop()
 	if not check(game,int(game.campaign.battle.get("rounds",0))>0 or game.campaign.phase!="battle","Normal battle advances automatically"): return
-	await shot(game,"battle")
 	fixture(game,"B10",10); await shot(game,"boss")
 	game.campaign=after_depart
+	game.campaign.journal=["地下1F：探索を続けている。"]
 	game.campaign.phase="explore"; game.campaign.battle={}; game.campaign.floor=1
 	game.show_campaign(); await shot(game,"exploration")
 	if not check(game,game.play_view.route.nodes().size()==3 and not game.play_view.route.nodes()[2].type_revealed,"Minimap only previous/current/next; concealed future kind"): return

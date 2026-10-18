@@ -3,6 +3,7 @@ const Art=preload("res://ui/interface_art.gd")
 ## Independent, integer-aligned UI ornament. Text and controls stay engine-rendered.
 var ornament_only := false
 var cloth := false
+var heading_line:=true
 var prominent := false
 func _ready() -> void:
 	texture_filter=CanvasItem.TEXTURE_FILTER_NEAREST
@@ -15,7 +16,7 @@ func _draw() -> void:
 	if not ornament_only: draw_rect(r.grow(-5),Color("30283c") if cloth else Color("09191e"))
 	draw_rect(r.grow(-7),Color("b08a47") if prominent else Color("625339"),false,1)
 	Art.frame(self,r)
-	if not ornament_only: draw_line(Vector2(18,45),Vector2(size.x-18,45),Color("95723b"),1)
+	if not ornament_only and heading_line: draw_line(Vector2(18,45),Vector2(size.x-18,45),Color("95723b"),1)
 	if cloth:
 		for x in range(22,int(size.x)-22,12):
 			draw_line(Vector2(x,size.y-11),Vector2(x+4,size.y-15),Color("66517d"))

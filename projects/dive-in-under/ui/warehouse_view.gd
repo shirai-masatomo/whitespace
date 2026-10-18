@@ -24,11 +24,12 @@ func _ready() -> void:
 func label_at(parent: Control, value: String, r: Rect2, font_size: int=18, color: Color=INK) -> Label:
 	var l:=Label.new(); l.clip_text=true; l.text=value; l.position=r.position; l.size=r.size
 	if parent.get_meta("paper_header",false) and r.position.y<40: color=Color("30291e")
+	if parent.get_meta("paper_body",false) and r.position.y>=40: color=Color("655035") if color==MUTED else Color("30291e")
 	l.set_meta("normal_color",color)
 	if parent is Button and parent.get_meta("gold_surface",false): color=Color("302b23")
 	l.add_theme_font_size_override("font_size",font_size); l.add_theme_color_override("font_color",color)
 	l.clip_text=true; l.mouse_filter=Control.MOUSE_FILTER_IGNORE
-	parent.add_child(l); return l
+	parent.add_child(l); l.size=r.size; return l
 func icon_at(parent: Control, kind: String, r: Rect2, template_id: String="") -> void:
 	var t:=TextureRect.new(); t.expand_mode=TextureRect.EXPAND_IGNORE_SIZE; t.texture=EquipmentArt.texture(template_id,kind) if template_id!="" else (preload("res://ui/interface_symbols.gd").texture("bag" if kind=="backpack" else kind) if kind in ["backpack","cloth","warehouse"] else Icons.texture(kind)); t.position=r.position; t.size=r.size
 	t.texture_filter=CanvasItem.TEXTURE_FILTER_NEAREST; t.expand_mode=TextureRect.EXPAND_IGNORE_SIZE; t.stretch_mode=TextureRect.STRETCH_KEEP_ASPECT_CENTERED
@@ -36,6 +37,8 @@ func icon_at(parent: Control, kind: String, r: Rect2, template_id: String="") ->
 func panel(r: Rect2, title: String, kind: String, purple: bool=false, main: bool=false) -> Control:
 	var p:=Control.new(); p.set_script(Frame); p.position=r.position; p.size=r.size; p.cloth=purple; p.prominent=main; add_child(p)
 	p.set_meta("paper_header",true)
+	if kind=="eyes":
+		InterfaceArt.paper(p,Rect2(10,44,r.size.x-20,r.size.y-54)); p.set_meta("paper_body",true)
 	InterfaceArt.paper(p,Rect2(11,9,r.size.x-22,46 if r.size.y==64 else 35))
 	icon_at(p,kind,Rect2(13,8,32,32)); label_at(p,title,Rect2(50,8,r.size.x-65,32),22,Color("30291e"))
 	return p

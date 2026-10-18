@@ -15,7 +15,7 @@ func nodes() -> Array:
 func positions() -> Array:
 	var output: Array=[]; var list:=nodes()
 	for i in list.size():
-		if expanded: output.append(Vector2(70+(i%6)*125,85+(i/6)*140))
+		if expanded: output.append(Vector2(70+(i%6 if i<6 else 11-i)*125,85+(i/6)*140))
 		else: output.append(Vector2(38+i*76,38))
 	return output
 func _draw() -> void:

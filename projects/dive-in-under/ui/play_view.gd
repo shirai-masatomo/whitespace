@@ -67,6 +67,7 @@ func build_title() -> void:
 	game.new_button=nav(p,"はじめる",Rect2(66,263,488,68),game.request_new,"start",true)
 	nav(p,"終了",Rect2(66,348,488,57),func():game.get_tree().quit(),"quit")
 	UISkin.label(self,"0.6.0",Rect2(1170,675,85,25),15)
+	game.new_button.add_theme_font_size_override("font_size",30)
 	game.new_button.grab_focus()
 func build_hub() -> void:
 	header("冒険の準備")
@@ -75,9 +76,10 @@ func build_hub() -> void:
 	for i in entries.size():
 		var page: String=entries[i][1]
 		var b:=nav(menu,entries[i][0],Rect2(27,75+i*83,412,66),func():game.open_status() if page=="status" else game.open_town_page(page),page)
-		var icon: Texture2D=Symbols.texture("normal") if page=="status" else (preload("res://ui/interface_symbols.gd").texture("warehouse") if page=="warehouse" else Items.texture("A01"))
+		b.add_theme_font_size_override("font_size",25)
+		var icon: Texture2D=Symbols.texture("exp") if page=="status" else (preload("res://ui/interface_symbols.gd").texture("warehouse") if page=="warehouse" else Items.texture("A01"))
 		UISkin.picture(b,icon,Rect2(16,12,42,42))
-	command(menu,"探索に出発",Rect2(27,331,412,76),"depart",{},true)
+	command(menu,"探索に出発",Rect2(27,331,412,76),"depart",{},true).add_theme_font_size_override("font_size",27)
 	nav(menu,"タイトルへ",Rect2(27,435,193,58),game.show_title,"title")
 	nav(menu,"終了",Rect2(231,435,208,58),func():game.get_tree().quit(),"quit")
 	var card:=hero_card(Rect2(820,131,372,548))
@@ -88,7 +90,8 @@ func build_hub() -> void:
 		if uid=="": continue
 		UISkin.picture(card,Items.texture(game.campaign.items[uid],slot),Rect2(20+index*58,470,50,50)); index+=1
 		if index==5: break
-	UISkin.label(self,"持ち帰った品を預け、装備を整えよう。",Rect2(570,612,224,66),18,UISkin.INK,true)
+	var note:=UISkin.panel(self,Rect2(570,588,224,91))
+	UISkin.label(note,"持ち帰った品を預け、装備を整えよう。",Rect2(17,15,190,65),17,UISkin.INK,true)
 func add_stage(r: Rect2, enemy: String="") -> void:
 	stage=Control.new(); stage.set_script(game.BattleStage); stage.wide_layout=true; stage.integrated_layout=true
 	stage.floor_number=game.campaign.floor; stage.enemy_id=enemy; stage.position=r.position; stage.size=r.size; add_child(stage)
@@ -138,7 +141,7 @@ func build_exploration() -> void:
 func open_routes() -> void:
 	if is_instance_valid(routes_overlay): return
 	game.route_map_open=true
-	routes_overlay=Control.new(); routes_overlay.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT); add_child(routes_overlay)
+	routes_overlay=Control.new(); routes_overlay.z_index=1000; routes_overlay.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT); add_child(routes_overlay)
 	var shade:=ColorRect.new(); shade.color=Color(0,0,0,0.76); shade.size=Vector2(1280,720); routes_overlay.add_child(shade)
 	var panel:=UISkin.panel(routes_overlay,Rect2(210,96,860,528),"階層の全景")
 	var map:=Control.new(); map.set_script(Routes); map.expanded=true; map.floor_number=game.campaign.floor; map.highest_floor=game.campaign.highest_floor; map.position=Vector2(20,55); map.size=Vector2(820,325); panel.add_child(map)
