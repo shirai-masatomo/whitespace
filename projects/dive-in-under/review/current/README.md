@@ -1,3 +1,7 @@
+# 新敵3種の開発版画像
+
+[0.4.10の比較・任意の別セーブ試遊](../area1-art-development/index.html)。通常確認入口は0.4.6を維持。
+
 # Dive In Under — 初回通常化とボス床面修正
 
 **0.4.6 / 初回から通常探索・帰還。工程1全体は未完了。** [Windows ZIP](../../build/DiveInUnder-foundation-windows-x64.zip) / [操作手順](../../tools/PLAY.txt) / [実画面比較](index.html) / [Draft PR #5](https://github.com/shirai-masatomo/whitespace/pull/5)。PCの入口は「01 ゲームを起動」「02 画像・画面を確認」「03 変更点」の3項目。

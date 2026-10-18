@@ -27,8 +27,10 @@ if ($Isolated) {
     $oldAppData=$env:APPDATA; $oldLocalData=$env:LOCALAPPDATA
     try {
         $env:APPDATA=$environment['APPDATA']; $env:LOCALAPPDATA=$environment['LOCALAPPDATA']
-        & $exe --headless @arguments
-        if ($LASTEXITCODE -ne 0) { throw 'Headless image review failed' }
+        $headlessArguments = @('--headless') + $arguments
+        $quotedArguments = ($headlessArguments | ForEach-Object { '"' + $_ + '"' }) -join ' '
+        $process = Start-Process -FilePath $exe -ArgumentList $quotedArguments -WindowStyle Hidden -Wait -PassThru
+        if ($process.ExitCode -ne 0) { throw 'Headless image review failed' }
     } finally { $env:APPDATA=$oldAppData; $env:LOCALAPPDATA=$oldLocalData }
 }
 if (Select-String -LiteralPath $log -Pattern 'SCRIPT ERROR:|^ERROR:' -Quiet) { throw 'Engine errors in image review' }
