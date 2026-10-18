@@ -33,7 +33,7 @@ static func button(parent: Node, text: String, r: Rect2, call: Callable, primary
 	b.add_theme_stylebox_override("focus",focus); b.add_theme_color_override("font_focus_color",DARK if primary else INK)
 	return b
 static func gauge(parent: Node, value: int, maximum: int, r: Rect2, tint: Color) -> Control:
-	var c:=Control.new(); c.set_script(Gauges); c.value=value; c.max_value=maximum; c.tint=tint; c.position=r.position; c.size=r.size; c.heading_line=title!=""; parent.add_child(c); return c
+	var c:=Control.new(); c.set_script(Gauges); c.value=value; c.max_value=maximum; c.tint=tint; c.position=r.position; c.size=r.size; parent.add_child(c); return c
 static func scroll_theme() -> Theme:
 	var t:=Theme.new()
 	for mode in ["scroll","grabber","grabber_highlight","grabber_pressed"]:
