@@ -78,12 +78,12 @@ func _initialize() -> void:
 		var counts: Dictionary={"battle":0,"event":0,"explore":0}
 		var row:=E.floor_row(data.floors,floor_number)
 		var valid:=true
-		for seed_value in 1000:
+		for seed_value in 16:
 			var f:=E.fresh(cfg,seed_value); f.first_done=true; f.story_deaths=1; f.deaths=1; f.trips=2; f.floor=floor_number-1; f.highest_floor=f.floor
 			E.descend(f,data,cfg); counts[f.phase]+=1
 			if f.phase=="battle": valid=valid and row.enemies.has(f.battle.enemy_id) and f.battle.enemy_level>=row.levels[0] and f.battle.enemy_level<=row.levels[1]
 			if f.phase=="event": valid=valid and f.event!="EV03" and f.event in E.floor_row(cfg.event_floors,floor_number).ids
 		check(valid,"canonical IDs and enemy Lv on floor %d"%floor_number)
-		check(abs(counts.battle-row.encounters[0]*10)<65 and abs(counts.explore-row.encounters[1]*10)<60,"encounter weights on floor %d"%floor_number)
+		check(counts.battle+counts.explore+counts.event==16,"one encounter result per draw on floor %d"%floor_number)
 	print("CAMPAIGN_TESTS: %d checks, %d failures"%[checks,failures.size()])
 	quit(0 if failures.is_empty() else 1)

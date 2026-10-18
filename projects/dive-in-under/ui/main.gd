@@ -1,4 +1,5 @@
 extends Control
+const StatusOverlay = preload("res://ui/status_overlay.gd")
 const Combat = preload("res://core/combat.gd")
 const Catalog = preload("res://core/catalog.gd")
 const Cavern = preload("res://ui/cavern.gd")
@@ -264,8 +265,8 @@ func show_battle() -> void:
 	hero_sp = health_bar(Color("327e9b"))
 	status.add_child(hero_sp)
 	status.add_child(HSeparator.new())
-	status.add_child(text_label("完全自動 / 通常攻撃\n命中 95%\n会心 5% / 1.5倍\n上限 50ラウンド",16))
-	root.add_child(text_label("独立した単発戦闘です。敵スキル・装備・成長・戦利品の所持管理は未実装。",16))
+	status.add_child(text_label("完全自動 / 状態技に対応\n命中 95%\n会心 5% / 1.5倍\n上限 50ラウンド",16))
+	root.add_child(text_label("独立した単発戦闘です。S102〜S105に対応。本編の所持品・成長・保存には影響しません。",16))
 	reset_battle()
 	start_button.grab_focus()
 
@@ -337,6 +338,12 @@ func refresh() -> void:
 	stage.hero_alive = h.hp > 0
 	stage.enemy_alive = e.hp > 0
 	stage.queue_redraw()
+	for child in stage.get_children():
+		if child.get_meta("status_overlay",false): stage.remove_child(child); child.queue_free()
+	var overlay:=Control.new(); overlay.set_script(StatusOverlay); overlay.set_meta("status_overlay",true)
+	overlay.battle=state
+	overlay.effects=state.log.filter(func(entry):return entry.round==state.round and (entry.type in ["status_applied","status_damage","action_skipped"] or (entry.type=="skill" and entry.skill=="S105")))
+	stage.add_child(overlay)
 	var names := {"hero":"主人公","enemy":str(e.name)}
 	var outcomes := {"ongoing":"戦闘中", "victory":"勝利", "defeat":"主人公死亡", "draw":"50ラウンドで打切り"}
 	result_label.text = "ROUND %02d   /   %s   /   seed %d" % [state.round,outcomes[state.outcome],state.seed]
@@ -345,9 +352,14 @@ func refresh() -> void:
 	for entry in state.log:
 		if entry.type == "round":
 			log_view.append_text("\n第%dラウンド  %s → %s\n" % [entry.round,names[entry.order[0]],names[entry.order[1]]])
-		else:
+		elif entry.type=="attack":
 			var detail := "%d ダメージ%s" % [entry.damage,"（会心）" if entry.critical else ""] if entry.hit else "ミス"
 			log_view.append_text("%s → %s  %s%s\n" % [names[entry.actor],names[entry.target],detail," / HP0" if entry.death else ""])
+		elif entry.type=="skill": log_view.append_text("%s：%s / SP %d\n"%[names[entry.actor],data.rules.skills[entry.skill].get("name","防御"),entry.sp])
+		elif entry.type=="status_applied": log_view.append_text("%s：%s 付与 / %d機会\n"%[names[entry.target],StatusOverlay.LABELS[entry.status],entry.remaining])
+		elif entry.type=="status_damage": log_view.append_text("%s：毒 %d ダメージ\n"%[names[entry.actor],entry.damage])
+		elif entry.type=="action_skipped": log_view.append_text(names[entry.actor]+"：麻痺で行動不能\n")
+		elif entry.type=="status_removed": log_view.append_text("%s：%s 解除\n"%[names[entry.actor],StatusOverlay.LABELS[entry.get("status","defense")]])
 	if state.outcome == "victory":
 		log_view.append_text("\n報酬試算  EXP %d / Gold %d（保存はしません）\n" % [state.reward.exp,state.reward.gold])
 
@@ -437,6 +449,23 @@ func smoke(quit_on_finish: bool = true) -> void:
 		return
 	if rendered:
 		await capture("03-battle-result.png")
+	# Small deterministic presentation fixtures use unchanged production data.
+	for fixture in [["E04",4,"poison"],["E03",4,"blind"],["E05",6,"paralysis"]]:
+		var found_seed: int=-1
+		for candidate_seed in range(1,17):
+			var trial:=Combat.simulate(data.hero_fixture,Combat.enemy(data,fixture[0],fixture[1]),data.rules,candidate_seed)
+			if trial.log.any(func(e):return e.type=="status_applied" and e.status==fixture[2]): found_seed=candidate_seed; break
+		if not smoke_check(found_seed>=0,"Fixed status presentation fixture: "+fixture[2]): return
+		enemy_choice.select(ids.find(fixture[0])); level_input.value=fixture[1]; seed_input.value=found_seed
+		await click_control(start_button); timer.stop()
+		var shown:=false
+		while state.outcome=="ongoing":
+			next_round()
+			if state.log.any(func(e):return e.round==state.round and e.type=="status_applied" and e.status==fixture[2]):
+				shown=true
+				if rendered: await capture("32-status-tool-%s.png"%fixture[2])
+				break
+		if not smoke_check(shown,"Status skill passes through real UI round callback"): return
 	if smoke_fault=="back": back_button.pressed.disconnect(show_title)
 	await click_control(back_button)
 	await get_tree().process_frame

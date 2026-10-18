@@ -36,6 +36,7 @@ function Run-Godot([string]$Name, [string[]]$Arguments) {
 try {
     if ($Task -in @('test','verify')) {
         Run-Godot 'tests' @('--script','tests/test_combat.gd')
+        Run-Godot 'status-tests' @('--script','tests/test_status.gd')
         Run-Godot 'area1-encounter-tests' @('--script','tests/test_area1_encounters.gd')
         Run-Godot 'enemy-pack-tests' @('--script','tests/test_enemy_pack.gd')
         Run-Godot 'defense-tests' @('--script','tests/test_defense.gd')

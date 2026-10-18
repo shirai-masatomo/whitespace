@@ -43,7 +43,7 @@ static func run(game: Control) -> void:
 	if game.campaign_resume:
 		var prior=JSON.parse_string(FileAccess.get_file_as_string(game.smoke_dir.path_join("campaign-ui.json")))
 		if not game.smoke_check(prior is Dictionary and prior.checkpoint and game.loaded.ok and prior.save_sha256==game.save_store.digest() and prior.state_sha256==hash_state(game.campaign),"Real EXE checkpoint restored exactly"): return
-		if not game.smoke_check(game.Expedition.battle_state(game.campaign,game.data).hero.defense_until>=0,"Defense status survives separate EXE restart"): return
+		if not game.smoke_check(JSON.parse_string(JSON.stringify(game.Expedition.battle_state(game.campaign,game.data).hero.statuses))==prior.active_statuses and not prior.active_statuses.is_empty(),"Active status survives separate EXE restart"): return
 		index=int(prior.next_index)
 		await game.click_control(game.continue_button)
 	else:
@@ -68,6 +68,15 @@ static func run(game: Control) -> void:
 		index+=1
 		var defending: bool=game.campaign.phase=="battle" and game.Expedition.battle_state(game.campaign,game.data).hero.defense_until>=0
 		if rendered:
+			if game.campaign.phase=="battle":
+				var live: Dictionary=game.Expedition.battle_state(game.campaign,game.data)
+				for effect in live.log.filter(func(e):return e.round==live.round and e.type in ["status_applied","status_damage","action_skipped"]):
+					var shot: String="31-status-%s.png"%effect.status
+					if not screenshots.has(shot):
+						await game.capture(shot); screenshots[shot]=true
+						var before_status:=hash_state(game.campaign)
+						await game.get_tree().create_timer(0.45).timeout
+						if not game.smoke_check(before_status==hash_state(game.campaign),"Status visual effect never mutates combat"): return
 			if defending and not screenshots.has("29-defense-active.png"):
 				await game.capture("29-defense-active.png"); screenshots["29-defense-active.png"]=true
 				var before_effect:=hash_state(game.campaign)
@@ -97,8 +106,9 @@ static func run(game: Control) -> void:
 			if game.campaign.phase=="battle" and game.campaign.battle.enemy_id in ["E01","E02","E03","E05","E06","E07","E08"]:
 				var enemy_capture: String = "23-enemy-%s.png" % game.campaign.battle.enemy_id.to_lower()
 				if not screenshots.has(enemy_capture): await game.capture(enemy_capture); screenshots[enemy_capture]=true
-		if not game.campaign_resume and defending:
-			write_result(game,{"run_id":game.smoke_run_id,"checkpoint":true,"complete":false,"rendered":rendered,"next_index":index,"state_sha256":hash_state(game.campaign),"save_sha256":game.save_store.digest(),"seed":replay.seed,"defense_active":true})
+		var active_statuses: Dictionary=game.Expedition.battle_state(game.campaign,game.data).hero.statuses if game.campaign.phase=="battle" else {}
+		if not game.campaign_resume and not active_statuses.is_empty():
+			write_result(game,{"run_id":game.smoke_run_id,"checkpoint":true,"complete":false,"rendered":rendered,"next_index":index,"state_sha256":hash_state(game.campaign),"save_sha256":game.save_store.digest(),"seed":replay.seed,"active_statuses":active_statuses})
 			game.get_tree().quit(); return
 	if not game.smoke_check(game.campaign.phase=="result" and game.campaign.result.kind=="clear" and game.campaign.highest_floor==11 and hash_state(game.campaign)==replay.state_sha256,"Normal 10F clear exactly matches headless"): return
 	var clear_hash:=hash_state(game.campaign)

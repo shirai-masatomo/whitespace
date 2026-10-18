@@ -1,0 +1,132 @@
+{
+	"controls": [
+		{
+			"disabled": false,
+			"focus": false,
+			"font_color": "(0.1373, 0.1216, 0.1059, 1.0)",
+			"rect": "[P: (1130.0, 32.0), S: (118.0, 52.0)]",
+			"text": "タイトルへ"
+		},
+		{
+			"rect": "[P: (945.0, 116.0), S: (289.0, 25.0)]",
+			"text": "主人公 / 単独"
+		},
+		{
+			"rect": "[P: (945.0, 149.0), S: (289.0, 158.0)]",
+			"text": "Lv. 1\nHP  18 / 24\nSP  0 / 0\nATK  6\nDEF  1\nSPD  6\n試験用の仮能力"
+		},
+		{
+			"rect": "[P: (945.0, 315.0), S: (289.0, 19.0)]",
+			"text": "HP（現在 / 最大は上記）"
+		},
+		{
+			"rect": "[P: (945.0, 362.0), S: (289.0, 19.0)]",
+			"text": "SP"
+		},
+		{
+			"rect": "[P: (945.0, 421.0), S: (289.0, 85.0)]",
+			"text": "完全自動 / 状態技に対応\n命中 95%\n会心 5% / 1.5倍\n上限 50ラウンド"
+		}
+	],
+	"run_id": "5f7144345b6f4631b2d86bdf3b4c8aea",
+	"screenshot": "32-status-tool-paralysis.png",
+	"stages": [
+		{
+			"actors": [
+				{
+					"adoption": "adopted-current-baseline",
+					"body_region": "[P: (0.0, 22.0), S: (1234.0, 1232.0)]",
+					"candidate_loaded": true,
+					"foot": [
+						355.0,
+						223.0
+					],
+					"id": "hero",
+					"static_hover_px": 0.0,
+					"top_left": [
+						269.285705566406,
+						73.9375
+					],
+					"visible_size": [
+						165.267852783203,
+						165.0
+					],
+					"within_stage": true
+				},
+				{
+					"adoption": "adopted-current-baseline",
+					"body_region": "[P: (47.0, 308.0), S: (1197.0, 791.0)]",
+					"candidate_loaded": true,
+					"foot": [
+						146.0,
+						195.0
+					],
+					"id": "E05",
+					"static_hover_px": 0.0,
+					"top_left": [
+						57.3341293334961,
+						78.6075134277344
+					],
+					"visible_size": [
+						177.480010986328,
+						117.282112121582
+					],
+					"within_stage": true
+				}
+			],
+			"adoption": "nine-assets-current-baseline",
+			"aspect": "preserved",
+			"background": "cavern",
+			"background_aspect": 1.77777777777778,
+			"background_loaded": true,
+			"background_zoom": 1.04,
+			"composition": "development-tool-layout",
+			"depth": 4,
+			"far_enemy_foot": [
+				146.0,
+				195.0
+			],
+			"filter": "nearest",
+			"formation_rules": false,
+			"global_rect": "[P: (379.0, 187.0), S: (522.0, 270.0)]",
+			"near_hero_foot": [
+				355.0,
+				223.0
+			],
+			"stage_size": [
+				522.0,
+				270.0
+			],
+			"static_only": true,
+			"wide_layout": false
+		},
+		{
+			"combat_rng_used": false,
+			"duration_seconds": 0.4,
+			"effect": "phase1-statuses",
+			"enemy_statuses": {},
+			"events": [
+				{
+					"actor": "enemy",
+					"potency": 0.0,
+					"reapplied": false,
+					"remaining": 1,
+					"round": 1,
+					"skill": "S104",
+					"status": "paralysis",
+					"target": "hero",
+					"type": "status_applied"
+				}
+			],
+			"hero_statuses": {
+				"paralysis": {
+					"potency": 0.0,
+					"remaining": 1,
+					"skill": "S104",
+					"source": "enemy"
+				}
+			},
+			"static_character": true
+		}
+	]
+}

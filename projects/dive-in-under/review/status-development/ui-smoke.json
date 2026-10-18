@@ -1,0 +1,18 @@
+{
+	"checkpoint_phase": "battle",
+	"display": "Windows",
+	"engine": "4.7.2-stable (official)",
+	"loop_input": true,
+	"manual_input": false,
+	"normal_death_retry": true,
+	"outcome": "ongoing",
+	"rendered": true,
+	"rounds": 1,
+	"run_id": "5f7144345b6f4631b2d86bdf3b4c8aea",
+	"save_path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-17\\task\\dive-in-under-work\\projects\\dive-in-under\\artifacts\\isolated/campaign-smoke.json",
+	"saved_revision": 26.0,
+	"saved_sha256": "4ef32190e25c1f5dc4a904167bbbcaf5ea53ad18ff9dc4bfbfa543ea5cbb185e",
+	"tool_start_pause_resume_restart_back": true,
+	"ui_core_equal": true,
+	"viewport_mouse_input": true
+}

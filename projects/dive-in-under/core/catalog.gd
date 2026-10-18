@@ -98,11 +98,24 @@ static func validate(data: Dictionary) -> String:
 		return "Floor catalog must end at 10"
 	if not data.rules.get("skills",{}) is Dictionary: return "Invalid skills container"
 	for id in data.rules.get("skills",{}):
-		if id!="S105" or not data.rules.skills[id] is Dictionary: return "Unsupported skill definition"
+		if not id in ["S102","S103","S104","S105"] or not data.rules.skills[id] is Dictionary: return "Unsupported skill definition"
 		var skill: Dictionary=data.rules.skills[id]
-		for key in ["sp_cost","hp_threshold","def_bonus","duration_own_actions","cooldown_own_actions"]:
-			if not numeric(skill.get(key)) or skill[key]<0: return "Invalid S105 parameter"
-		if skill.hp_threshold>1 or skill.duration_own_actions!=1 or skill.cooldown_own_actions!=3 or skill.sp_cost!=3: return "Invalid S105 timing/cost"
+		for key in ["sp_cost","duration_own_actions","cooldown_own_actions"]:
+			if not numeric(skill.get(key)) or skill[key]<0 or skill[key]!=floorf(skill[key]): return "Invalid skill timing/cost"
+		if skill.duration_own_actions<1: return "Invalid skill duration"
+		if id=="S105":
+			for key in ["hp_threshold","def_bonus"]:
+				if not numeric(skill.get(key)) or skill[key]<0: return "Invalid S105 parameter"
+			if skill.hp_threshold>1 or skill.duration_own_actions!=1 or skill.cooldown_own_actions!=3 or skill.sp_cost!=3: return "Invalid S105 timing/cost"
+		else:
+			for key in ["damage_multiplier","apply_chance","potency"]:
+				if not numeric(skill.get(key)) or skill[key]<0: return "Invalid status skill parameter"
+			if skill.apply_chance>1 or (id=="S103" and skill.potency>1): return "Invalid status probability"
+			if skill.get("status_id")!={"S102":"poison","S103":"blind","S104":"paralysis"}[id] or skill.get("stack_rule")!="replace": return "Invalid status contract"
+	for id in data.enemies:
+		if not data.enemies[id].get("skills",[]) is Array: return "Invalid enemy skills"
+		for skill_id in data.enemies[id].get("skills",[]):
+			if not data.rules.get("skills",{}).has(skill_id): return "Unknown enemy skill"
 	if data.has("legacy_floors"):
 		var legacy:=data.duplicate(true)
 		legacy.floors=legacy.legacy_floors; legacy.erase("legacy_floors")
@@ -124,6 +137,6 @@ static func validate_hero(hero: Dictionary) -> String:
 	if not hero.get("skills",[]) is Array: return "Invalid hero skills"
 	var seen: Array=[]
 	for id in hero.get("skills",[]):
-		if id!="S105" or id in seen: return "Unsupported/duplicate hero skill"
+		if not id in ["S102","S103","S104","S105"] or id in seen: return "Unsupported/duplicate hero skill"
 		seen.append(id)
 	return ""

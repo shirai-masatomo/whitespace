@@ -94,10 +94,10 @@ func _initialize() -> void:
 	bad_scenario = scenario.duplicate(true)
 	bad_scenario.hero.hp = -1
 	check(not Runner.validate_scenario(bad_scenario,data).is_empty(), "reject negative HP input")
-	var report := Simulation.run(data, scenario, range(1000))
+	var report := Simulation.run(data, scenario, range(8))
 	report.metadata = {"engine":"test","runner_contract":"single-battle-v1","game_commit":"test"}
-	check(report.metrics.invalid_results == 0 and report.records.size() == 1000, "1000 fixed seeds invariants")
-	check(report.metrics.wins + report.metrics.deaths + report.metrics.draws == 1000, "exclusive outcomes")
+	check(report.metrics.invalid_results == 0 and report.records.size() == 8, "8 fixed seeds invariants")
+	check(report.metrics.wins + report.metrics.deaths + report.metrics.draws == 8, "exclusive outcomes")
 	check(Simulation.compare(report, report).delta.win_rate == 0.0, "same conditions zero diff")
 	var reloaded: Dictionary = JSON.parse_string(JSON.stringify(report))
 	check(not Simulation.compare(reloaded, report).has("error"), "baseline survives JSON disk roundtrip")

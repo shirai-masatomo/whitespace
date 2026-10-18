@@ -55,7 +55,7 @@ static func play(data: Dictionary, cfg: Dictionary, policy: Dictionary, seed_val
 				# Measure before level-up recovery; query the shared combat core.
 				var combat:=E.Combat.advance(E.battle_state(before,data))
 				trip.hp_lost_in_combat+=maxi(0,int(before.hp)-int(combat.hero.hp))
-				if combat.outcome!="ongoing": battle_results.append({"rounds":combat.round,"hp":combat.hero.hp,"outcome":combat.outcome,"casts":combat.log.filter(func(e):return e.type=="skill").size()})
+				if combat.outcome!="ongoing": battle_results.append({"rounds":combat.round,"hp":combat.hero.hp,"outcome":combat.outcome,"casts":combat.log.filter(func(e):return e.type=="skill" and e.skill=="S105").size()})
 			for uid in s.items:
 				if not before.items.has(uid):
 					var id: String=s.items[uid]

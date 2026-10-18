@@ -86,7 +86,7 @@ static func compare(before: Dictionary, after: Dictionary, strict: bool = false)
 
 static func summary(report: Dictionary) -> String:
 	var m: Dictionary = report.metrics
-	return ("単発戦闘 / %s / %d seeds\n勝率 %.2f%% / 主人公死亡率 %.2f%% / 打切り %.2f%%\n平均ラウンド %.3f / 中央値 %.3f\n残HP（全戦闘） 平均 %.3f / 中央値 %.3f / p10 %s / p90 %s\n勝利時残HP %s\n異常結果 %d\n仲間・スキル・耐久は未実装。この単発レポートは連続探索を含みません。難易度の適正を証明する試験ではありません。\n" %
+	return ("単発戦闘 / %s / %d seeds\n勝率 %.2f%% / 主人公死亡率 %.2f%% / 打切り %.2f%%\n平均ラウンド %.3f / 中央値 %.3f\n残HP（全戦闘） 平均 %.3f / 中央値 %.3f / p10 %s / p90 %s\n勝利時残HP %s\n異常結果 %d\nS102〜S105のみ先行対応。仲間・その他のスキル・耐久は未実装。この単発レポートは連続探索を含みません。難易度の適正を証明する試験ではありません。\n" %
 		[report.scenario.scenario_id, m.trials, m.win_rate * 100.0, m.death_rate * 100.0, m.draw_rate * 100.0,
 		m.rounds.mean, m.rounds.median, m.remaining_hp.mean, m.remaining_hp.median,
 		str(m.remaining_hp.p10), str(m.remaining_hp.p90), JSON.stringify(m.winning_hp), m.invalid_results])

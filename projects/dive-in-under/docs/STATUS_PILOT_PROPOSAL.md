@@ -1,5 +1,7 @@
 # 工程1・先行4効果の実装前提案（未採用・未実装）
 
+> 2026-10-18更新：この文書は過去の未採用提案。現在の実装と仮契約は[状態3種の実装記録](STATUS_PILOT_IMPLEMENTATION.md)を参照。3F制限は導入せず、初期SP0と主人公のS105所有を維持。大量比較はTEST_POLICYにより後工程へ保留する。
+
 2026-10-17。正本は [工程1](dot/PHASE_01.md)、[SKILLS](SKILLS.md)、[COMBAT](COMBAT.md)、[ENEMIES](ENEMIES.md)、[FLOORS](FLOORS.md)、[シミュレーター](BATTLE_SIMULATION.md)。**本書は技術的な推奨案であり、正本の確定仕様や仮値を上書きしない。コード・保存形式・配布版は変更していない。**
 
 ## 確定範囲と仮値

@@ -1,5 +1,7 @@
 # 開発環境・戦闘基盤・基幹ループ（2026-10-17）
 
+**開発版0.4.9**：S102〜105の共通処理と状態UIを実装。新規戦闘rules_version3、旧1/2は旧技構成で継続。[暫定契約](STATUS_PILOT_IMPLEMENTATION.md)。対象試験は `--headless --script tests/test_status.gd`。既存1000件のユニット集計を8件へ、階層別抽選確認を16件へ縮小し、機能確認だけを通常CIに残す。確認入口は0.4.6を維持。
+
 **2026-10-18更新**：[TEST_POLICY](dot/TEST_POLICY.md)を適用。現行の確認入口は0.4.6、開発ブランチはS105「防御」追加済みで未配布。既存1170件・隔離EXEの証拠を再利用し、死亡率の追加分析はしない。初期SP0と行動を消費する防御を維持する。
 
 通常CIは単発8seed／通常探索3seedの再現確認と必要な機能・保存・EXEスモーク。文書だけの変更ではCIを起動しない。大量統計は明示した `-Trials 1000` 等で実行可能だが、工程1の小修正では実行しない。開発版0.4.8の新敵3種は `data/v1/area1-enemies.json` から共通カタログへ読み込み、通常遭遇・報酬に使用。最小確認は `--headless --script tests/test_enemy_pack.gd` と `tests/test_area1_encounters.gd`。戦闘保存の `encounter_version:2` は新遭遇表、欠落/1は `balance.json` の旧表を検証に使う。旧戦闘終了後は新表へ進む。旧設定ファイルの書換えは不要。画像3枚と敵スキルは未実装。通常CIはPR時のみで、同じpushの二重実行を避ける。

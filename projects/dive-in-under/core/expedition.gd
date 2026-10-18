@@ -174,7 +174,12 @@ static func finish(s: Dictionary, kind: String, reason: String, cfg: Dictionary)
 static func battle_state(s: Dictionary, data: Dictionary) -> Dictionary:
 	if s.battle.is_empty(): return {}
 	var b: Dictionary = s.battle
-	var result := Combat.start(b.hero,Combat.enemy(data,b.enemy_id,int(b.enemy_level)),data.rules,int(b.seed))
+	var foe:=Combat.enemy(data,b.enemy_id,int(b.enemy_level))
+	var rules: Dictionary=data.rules.duplicate(true)
+	if b.get("rules_version",1)<3:
+		foe.skills=[]
+		rules.status_pilot=false
+	var result := Combat.start(b.hero,foe,rules,int(b.seed))
 	for i in int(b.rounds): result = Combat.advance(result)
 	return result
 
@@ -185,13 +190,19 @@ static func step_battle(s: Dictionary, data: Dictionary, cfg: Dictionary) -> voi
 	s.hp = int(b.hero.hp)
 	s.sp = int(b.hero.sp)
 	for entry in b.log.slice(previous.log.size()):
+		var who: String="主人公" if entry.get("actor","")=="hero" else b.enemy.name
+		var statuses: Dictionary={"poison":"毒","blind":"暗闇","paralysis":"麻痺","defense":"防御"}
 		if entry.type == "skill":
-			note(s,"主人公：防御  SP -%d / DEF +%d%%（次の自身行動終了まで）" % [int(data.rules.skills.S105.sp_cost),roundi(data.rules.skills.S105.def_bonus*100)])
+			var skill: Dictionary=data.rules.skills[entry.skill]
+			note(s,"%s：%s  SP -%d" % [who,skill.get("name","防御"),int(skill.sp_cost)])
+		elif entry.type == "status_applied":
+			note(s,"%s：%s%s（残り%d行動機会）" % ["主人公" if entry.target=="hero" else b.enemy.name,statuses[entry.status],"を更新" if entry.reapplied else "を付与",entry.remaining])
+		elif entry.type == "status_damage": note(s,"%s：毒 %d ダメージ%s" % [who,entry.damage," / HP0" if entry.death else ""])
+		elif entry.type == "action_skipped": note(s,who+"：麻痺で行動できない。")
 		elif entry.type == "status_removed":
-			note(s,"防御が解除された（%s）。" % {"expired":"持続終了","death":"死亡","battle_end":"戦闘終了"}.get(entry.reason,entry.reason))
+			note(s,"%s：%s解除（%s）。" % [who,statuses.get(entry.get("status","defense"),"状態"),{"expired":"持続終了","death":"死亡","battle_end":"戦闘終了"}.get(entry.reason,entry.reason)])
 		elif entry.type == "attack":
-			note(s,"%s → %s  %s" % ["主人公" if entry.actor=="hero" else b.enemy.name,
-				b.enemy.name if entry.target=="enemy" else "主人公",str(entry.damage)+" ダメージ" if entry.hit else "ミス"])
+			note(s,"%s → %s  %s" % [who,b.enemy.name if entry.target=="enemy" else "主人公",str(entry.damage)+" ダメージ" if entry.hit else "MISS / ミス"])
 	if b.outcome == "victory":
 		s.last_outcome="victory"
 		gain_exp(s,int(b.reward.exp),cfg)
@@ -219,7 +230,7 @@ static func descend(s: Dictionary, data: Dictionary, cfg: Dictionary) -> void:
 	if roll < row.encounters[0]:
 		var id := weighted(s,"explore",row.enemies)
 		var level := int(row.levels[0]) + draw(s,"explore",int(row.levels[1]-row.levels[0])+1)
-		s.battle = {"enemy_id":id,"enemy_level":level,"seed":draw(s,"battle",2147483647),"hero":hero(s,cfg),"rounds":0,"rules_version":2,"encounter_version":2}
+		s.battle = {"enemy_id":id,"enemy_level":level,"seed":draw(s,"battle",2147483647),"hero":hero(s,cfg),"rounds":0,"rules_version":3,"encounter_version":2}
 		s.phase = "battle"
 		note(s,"地下%dF：%s Lv.%d が現れた。" % [s.floor,data.enemies[id].name,level])
 	elif roll < row.encounters[0]+row.encounters[1]:
@@ -345,8 +356,8 @@ static func validate(s: Dictionary, data: Dictionary, cfg: Dictionary) -> String
 			if not b.has(key): return "Missing battle field"
 		if not b.enemy_id is String or not data.enemies.has(b.enemy_id) or not integer(b.enemy_level,1,100) or not integer(b.seed,0,2147483647) or not integer(b.rounds,0,49) or not b.hero is Dictionary: return "Invalid battle input"
 		if Catalog.validate_hero(b.hero)!="": return "Invalid battle hero"
-		if b.get("rules_version",1)!=1 and b.get("rules_version",1)!=2: return "Unknown combat rules version"
-		if b.get("rules_version",1)==2 and b.hero.get("skills",[])!=h.skills: return "Invalid battle skill ownership"
+		if not integer(b.get("rules_version",1),1,3): return "Unknown combat rules version"
+		if b.get("rules_version",1)>=2 and b.hero.get("skills",[])!=h.skills: return "Invalid battle skill ownership"
 		if b.get("rules_version",1)==1 and not b.hero.get("skills",[]).is_empty(): return "Legacy battle must remain skill-free"
 		for key in STATS+["level"]:
 			if b.hero[key]!=h[key]: return "Battle effective stats differ from campaign"
