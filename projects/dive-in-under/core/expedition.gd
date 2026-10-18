@@ -38,9 +38,10 @@ static func validate_config(c: Dictionary, data: Dictionary) -> String:
 	for id in c.initial.items:
 		if not c.items.has(id): return "Unknown starting item"
 	for enemy_id in data.enemies:
-		if not c.drops.get(enemy_id) is Dictionary: return "Missing drop table"
-		for id in c.drops[enemy_id]:
-			if not c.items.has(id) or not integer(c.drops[enemy_id][id],0,100): return "Invalid drop"
+		var table=drop_table(c,data,enemy_id)
+		if not table is Dictionary: return "Missing drop table"
+		for id in table:
+			if not c.items.has(id) or not integer(table[id],0,100): return "Invalid drop"
 	for key in ["chests","event_floors"]:
 		if not c.get(key) is Array: return "Invalid floor detail table"
 		var expected:=1
@@ -66,6 +67,11 @@ static func validate_config(c: Dictionary, data: Dictionary) -> String:
 			if not c.items.has(e.get("item")): return "Unknown event item"
 		elif not integer(e.get("amount"),-10000 if e.effect=="hp" else 0,10000): return "Invalid event amount"
 	return ""
+
+static func drop_table(cfg: Dictionary, data: Dictionary, enemy_id: String) -> Variant:
+	# Legacy growth/item configurations retain their own old-enemy drops. New IDs
+	# have one shared table in the versioned enemy pack, without rewriting old configs.
+	return cfg.drops.get(enemy_id,data.get("enemy_drops",{}).get(enemy_id))
 
 static func fresh(cfg: Dictionary, seed_value: int) -> Dictionary:
 	var s := {"schema_version":3,"hero_skills":cfg.get("hero_skills",["S105"]).duplicate(),"config_version":cfg.config_version,"revision":0,"seed":seed_value,
@@ -191,8 +197,9 @@ static func step_battle(s: Dictionary, data: Dictionary, cfg: Dictionary) -> voi
 		gain_exp(s,int(b.reward.exp),cfg)
 		s.gold += int(b.reward.gold)
 		note(s,"勝利  EXP +%d / Gold +%d" % [b.reward.exp,b.reward.gold])
-		for id in cfg.drops[b.enemy.id]:
-			if draw(s,"loot",100) < cfg.drops[b.enemy.id][id]:
+		var drops: Dictionary=drop_table(cfg,data,b.enemy.id)
+		for id in drops:
+			if draw(s,"loot",100) < drops[id]:
 				add_item(s,id)
 				note(s,"入手："+cfg.items[id].name)
 		s.phase = "explore"
@@ -212,7 +219,7 @@ static func descend(s: Dictionary, data: Dictionary, cfg: Dictionary) -> void:
 	if roll < row.encounters[0]:
 		var id := weighted(s,"explore",row.enemies)
 		var level := int(row.levels[0]) + draw(s,"explore",int(row.levels[1]-row.levels[0])+1)
-		s.battle = {"enemy_id":id,"enemy_level":level,"seed":draw(s,"battle",2147483647),"hero":hero(s,cfg),"rounds":0,"rules_version":2}
+		s.battle = {"enemy_id":id,"enemy_level":level,"seed":draw(s,"battle",2147483647),"hero":hero(s,cfg),"rounds":0,"rules_version":2,"encounter_version":2}
 		s.phase = "battle"
 		note(s,"地下%dF：%s Lv.%d が現れた。" % [s.floor,data.enemies[id].name,level])
 	elif roll < row.encounters[0]+row.encounters[1]:
@@ -343,7 +350,11 @@ static func validate(s: Dictionary, data: Dictionary, cfg: Dictionary) -> String
 		if b.get("rules_version",1)==1 and not b.hero.get("skills",[]).is_empty(): return "Legacy battle must remain skill-free"
 		for key in STATS+["level"]:
 			if b.hero[key]!=h[key]: return "Battle effective stats differ from campaign"
-		var row:=floor_row(data.floors,int(s.floor))
+		if b.get("encounter_version",1)!=1 and b.get("encounter_version",1)!=2: return "Unknown encounter version"
+		# Existing checkpoints are validated against the table that created them.
+		# All newly drawn encounters use v2, including after a legacy save resumes.
+		var table: Array=data.get("legacy_floors",data.floors) if b.get("encounter_version",1)==1 else data.floors
+		var row:=floor_row(table,int(s.floor))
 		if not row.enemies.has(b.enemy_id) or b.enemy_level<row.levels[0] or b.enemy_level>row.levels[1]: return "Battle enemy outside floor table"
 		var combat := battle_state(s,data)
 		if combat.outcome!="ongoing" or combat.hero.hp!=s.hp or combat.hero.sp!=s.sp: return "Inconsistent battle checkpoint"

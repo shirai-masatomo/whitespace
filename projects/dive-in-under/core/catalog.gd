@@ -7,6 +7,17 @@ static func load_data(path: String = PATH) -> Dictionary:
 	if not parsed is Dictionary:
 		push_error("Invalid data JSON: " + path)
 		return {}
+	if parsed.has("enemy_pack"):
+		if parsed.enemy_pack!="res://data/v1/area1-enemies.json":
+			push_error("Unsupported enemy pack"); return {}
+		var pack=JSON.parse_string(FileAccess.get_file_as_string(parsed.enemy_pack))
+		if not pack is Dictionary or pack.get("schema_version")!=1 or not pack.get("enemies") is Dictionary or not pack.get("drops") is Dictionary:
+			push_error("Invalid enemy pack"); return {}
+		if not parsed.get("enemies") is Dictionary: push_error("Invalid enemy catalog"); return {}
+		for id in pack.enemies:
+			if parsed.enemies.has(id): push_error("Enemy pack overwrites existing ID"); return {}
+			parsed.enemies[id]=pack.enemies[id]
+		parsed.enemy_drops=pack.drops
 	var problem := validate(parsed)
 	if not problem.is_empty():
 		push_error(problem)
@@ -92,6 +103,11 @@ static func validate(data: Dictionary) -> String:
 		for key in ["sp_cost","hp_threshold","def_bonus","duration_own_actions","cooldown_own_actions"]:
 			if not numeric(skill.get(key)) or skill[key]<0: return "Invalid S105 parameter"
 		if skill.hp_threshold>1 or skill.duration_own_actions!=1 or skill.cooldown_own_actions!=3 or skill.sp_cost!=3: return "Invalid S105 timing/cost"
+	if data.has("legacy_floors"):
+		var legacy:=data.duplicate(true)
+		legacy.floors=legacy.legacy_floors; legacy.erase("legacy_floors")
+		var problem:=validate(legacy)
+		if problem!="": return "Invalid legacy floor table: "+problem
 	return validate_hero(data.hero_fixture)
 
 static func numeric(value: Variant) -> bool:

@@ -145,7 +145,7 @@ static func compare(before: Dictionary, after: Dictionary, strict: bool) -> Dict
 		if before.get("metadata",{}).get(key)!=after.metadata.get(key): return {"error":"Comparison environment differs: "+key}
 	if not before.get("metrics") is Dictionary or not before.get("records") is Array or not before.get("floors") is Dictionary: return {"error":"Malformed baseline"}
 	if strict:
-		for key in ["config_sha256","data_sha256","policy_sha256","combat_sha256","expedition_sha256","policy_code_sha256"]:
+		for key in ["config_sha256","data_sha256","enemy_pack_sha256","policy_sha256","combat_sha256","expedition_sha256","policy_code_sha256"]:
 			if before.metadata.get(key)!=after.metadata.get(key): return {"error":"Strict source differs: "+key}
 	var equal: bool=before.metrics==after.metrics and before.records==after.records and before.floors==after.floors and before.anomalies==after.anomalies and before.nonclear_seeds==after.nonclear_seeds
 	var delta: Dictionary={}

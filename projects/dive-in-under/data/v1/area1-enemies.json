@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "data_version": "2026-10-18.area1-enemies.staged.1",
-  "staged": true,
-  "note": "工程1の新敵定義。通常遭遇・敵スキル・画像採用はまだ切り替えない。既存の保存・抽選テーブルは維持。",
+  "data_version": "2026-10-18.area1-enemies.1",
+  "staged": false,
+  "note": "工程1の通常遭遇へ接続。画像は未提供、敵スキルは未実装。",
   "sources": [
     "docs/ENEMIES.md"
   ],

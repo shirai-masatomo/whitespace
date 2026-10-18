@@ -1,5 +1,5 @@
 extends SceneTree
-## Small preparation check. The production encounter catalog is not switched yet.
+## Fixed cases for active new IDs, rewards, and unchanged legacy configuration.
 const Catalog = preload("res://core/catalog.gd")
 const Combat = preload("res://core/combat.gd")
 const Expedition = preload("res://core/expedition.gd")
@@ -11,12 +11,12 @@ func check(value: bool,message: String) -> void:
 func _initialize() -> void:
 	var active:=Catalog.load_data()
 	var active_hash:=JSON.stringify(active).sha256_text()
-	var pack: Dictionary=JSON.parse_string(FileAccess.get_file_as_string("res://data/v1/area1-enemies-staged.json"))
-	check(pack.schema_version==1 and pack.staged==true,"explicit staged version")
+	var pack: Dictionary=JSON.parse_string(FileAccess.get_file_as_string("res://data/v1/area1-enemies.json"))
+	check(pack.schema_version==1 and pack.staged==false,"explicit active version")
 	check(pack.enemies.keys()==["E06","E07","E08"],"exactly three approved new IDs")
 	var candidate:=active.duplicate(true)
 	for id in pack.enemies:
-		check(not active.enemies.has(id),"new ID cannot overwrite old enemy: "+id)
+		check(active.enemies[id]==pack.enemies[id],"active catalog imports canonical enemy: "+id)
 		candidate.enemies[id]=pack.enemies[id].duplicate(true)
 	check(Catalog.validate(candidate)=="","new definitions accepted by shared catalog")
 	var cfg:=Expedition.load_config().duplicate(true)

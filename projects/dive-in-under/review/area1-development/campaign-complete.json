@@ -1,0 +1,19 @@
+{
+	"checkpoint": false,
+	"clear_state_sha256": "2c5e90c5d874300c9c941b3a84c32ca36195e9d121928c241c1124581656dcd5",
+	"complete": true,
+	"expected_clear_sha256": "2c5e90c5d874300c9c941b3a84c32ca36195e9d121928c241c1124581656dcd5",
+	"highest_floor": 11.0,
+	"input": "viewport clicks; real Timer timeout callback; no OS input",
+	"normal_deaths": 1.0,
+	"normal_trips": 12.0,
+	"post_clear_replay": true,
+	"rendered": true,
+	"restarted": true,
+	"run_id": "772ec3a87f654a09b45fb79ae577857c",
+	"save_sha256": "cc100f5d792920a4af79b936a0c5c6707d646df9a12eeace6444997f9a4307c0",
+	"seed": 10000.0,
+	"story_deaths": 0.0,
+	"verified_actions": 269,
+	"warehouse_roundtrip": true
+}

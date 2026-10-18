@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "data_version": "2026-10-17.foundation.1",
+  "data_version": "2026-10-18.area1.1",
   "config_version": "combat-v0.2.hero-defense.1",
   "provisional": true,
   "sources": [
@@ -125,6 +125,208 @@
       ],
       "enemies": {
         "E01": 60,
+        "E02": 30,
+        "E03": 10
+      },
+      "levels": [
+        1,
+        2
+      ]
+    },
+    {
+      "from": 3,
+      "to": 3,
+      "encounters": [
+        70,
+        20,
+        10
+      ],
+      "enemies": {
+        "E01": 35,
+        "E02": 40,
+        "E03": 25
+      },
+      "levels": [
+        2,
+        3
+      ]
+    },
+    {
+      "from": 4,
+      "to": 4,
+      "encounters": [
+        75,
+        15,
+        10
+      ],
+      "enemies": {
+        "E01": 15,
+        "E02": 30,
+        "E03": 35,
+        "E04": 20
+      },
+      "levels": [
+        2,
+        4
+      ]
+    },
+    {
+      "from": 5,
+      "to": 5,
+      "encounters": [
+        75,
+        15,
+        10
+      ],
+      "enemies": {
+        "E01": 10,
+        "E02": 20,
+        "E03": 35,
+        "E04": 25,
+        "E05": 10
+      },
+      "levels": [
+        2,
+        4
+      ]
+    },
+    {
+      "from": 6,
+      "to": 6,
+      "encounters": [
+        75,
+        15,
+        10
+      ],
+      "enemies": {
+        "E06": 40,
+        "E07": 35,
+        "E04": 15,
+        "E05": 10
+      },
+      "levels": [
+        3,
+        5
+      ]
+    },
+    {
+      "from": 7,
+      "to": 7,
+      "encounters": [
+        80,
+        10,
+        10
+      ],
+      "enemies": {
+        "E06": 35,
+        "E07": 35,
+        "E08": 10,
+        "E04": 10,
+        "E05": 10
+      },
+      "levels": [
+        4,
+        6
+      ]
+    },
+    {
+      "from": 8,
+      "to": 8,
+      "encounters": [
+        80,
+        10,
+        10
+      ],
+      "enemies": {
+        "E06": 25,
+        "E07": 25,
+        "E08": 30,
+        "E04": 10,
+        "E05": 10
+      },
+      "levels": [
+        4,
+        6
+      ]
+    },
+    {
+      "from": 9,
+      "to": 9,
+      "encounters": [
+        80,
+        10,
+        10
+      ],
+      "enemies": {
+        "E06": 15,
+        "E07": 20,
+        "E08": 45,
+        "E04": 10,
+        "E05": 10
+      },
+      "levels": [
+        5,
+        7
+      ]
+    },
+    {
+      "from": 10,
+      "to": 10,
+      "encounters": [
+        100,
+        0,
+        0
+      ],
+      "enemies": {
+        "B10": 100
+      },
+      "levels": [
+        6,
+        6
+      ]
+    }
+  ],
+  "hero_fixture": {
+    "name": "主人公",
+    "level": 1,
+    "max_hp": 24,
+    "hp": 24,
+    "atk": 6,
+    "def": 1,
+    "spd": 6,
+    "max_sp": 0,
+    "sp": 0
+  },
+  "fixture_note": "主人公の値は戦闘基盤の試験専用仮値。成長曲線・初期装備の正式仕様ではない。敵スキル・ドロップ・宝箱・イベントは未実装。",
+  "enemy_pack": "res://data/v1/area1-enemies.json",
+  "legacy_floors": [
+    {
+      "from": 1,
+      "to": 1,
+      "encounters": [
+        70,
+        20,
+        10
+      ],
+      "enemies": {
+        "E01": 70,
+        "E02": 30
+      },
+      "levels": [
+        1,
+        1
+      ]
+    },
+    {
+      "from": 2,
+      "to": 2,
+      "encounters": [
+        70,
+        20,
+        10
+      ],
+      "enemies": {
+        "E01": 60,
         "E02": 40
       },
       "levels": [
@@ -219,17 +421,5 @@
         6
       ]
     }
-  ],
-  "hero_fixture": {
-    "name": "主人公",
-    "level": 1,
-    "max_hp": 24,
-    "hp": 24,
-    "atk": 6,
-    "def": 1,
-    "spd": 6,
-    "max_sp": 0,
-    "sp": 0
-  },
-  "fixture_note": "主人公の値は戦闘基盤の試験専用仮値。成長曲線・初期装備の正式仕様ではない。敵スキル・ドロップ・宝箱・イベントは未実装。"
+  ]
 }

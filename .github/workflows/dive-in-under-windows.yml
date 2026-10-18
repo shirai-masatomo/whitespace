@@ -13,7 +13,8 @@ on:
       - 'projects/dive-in-under/*.ps1'
       - '.github/workflows/dive-in-under-windows.yml'
   push:
-    branches: ['dot/dive-in-under/**', 'main']
+    # Open development PRs run once via pull_request, avoiding duplicate push runs.
+    branches: ['main']
     paths:
       - 'projects/dive-in-under/core/**'
       - 'projects/dive-in-under/ui/**'

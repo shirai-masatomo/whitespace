@@ -52,6 +52,7 @@ func _initialize() -> void:
 		"game_commit": options.commit, "data_version": data.data_version, "config_version": data.config_version,
 		"data_sha256": FileAccess.get_sha256(options.data), "scenario_sha256": FileAccess.get_sha256(options.scenario),
 		"combat_sha256": FileAccess.get_sha256("res://core/combat.gd")}
+	report.metadata.enemy_pack_sha256=FileAccess.get_sha256(data.enemy_pack) if data.has("enemy_pack") else ""
 	var summary := Simulation.summary(report)
 	if not options.baseline.is_empty():
 		var baseline = JSON.parse_string(FileAccess.get_file_as_string(options.baseline))

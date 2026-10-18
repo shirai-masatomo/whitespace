@@ -2,7 +2,7 @@
 
 **2026-10-18更新**：[TEST_POLICY](dot/TEST_POLICY.md)を適用。現行の確認入口は0.4.6、開発ブランチはS105「防御」追加済みで未配布。既存1170件・隔離EXEの証拠を再利用し、死亡率の追加分析はしない。初期SP0と行動を消費する防御を維持する。
 
-通常CIは単発8seed／通常探索3seedの再現確認と必要な機能・保存・EXEスモーク。文書だけの変更ではCIを起動しない。大量統計は明示した `-Trials 1000` 等で実行可能だが、工程1の小修正では実行しない。新敵3種の準備データは `data/v1/area1-enemies-staged.json`、最小確認は `--headless --script tests/test_enemy_pack.gd`。通常遭遇・画像・敵スキル・保存テーブルは未切替。
+通常CIは単発8seed／通常探索3seedの再現確認と必要な機能・保存・EXEスモーク。文書だけの変更ではCIを起動しない。大量統計は明示した `-Trials 1000` 等で実行可能だが、工程1の小修正では実行しない。開発版0.4.8の新敵3種は `data/v1/area1-enemies.json` から共通カタログへ読み込み、通常遭遇・報酬に使用。最小確認は `--headless --script tests/test_enemy_pack.gd` と `tests/test_area1_encounters.gd`。戦闘保存の `encounter_version:2` は新遭遇表、欠落/1は `balance.json` の旧表を検証に使う。旧戦闘終了後は新表へ進む。旧設定ファイルの書換えは不要。画像3枚と敵スキルは未実装。通常CIはPR時のみで、同じpushの二重実行を避ける。
 
 今回の範囲は工程1の保存付き基幹ループまで。**工程1全体は未完了**。進捗・証拠・次の依頼は [PROGRESS.md](dot/PROGRESS.md)、機能別状態は [IMPLEMENTATION_STATUS.md](IMPLEMENTATION_STATUS.md) を参照。
 
@@ -52,7 +52,7 @@ ZIPを展開して `DiveInUnder.exe` を起動し、「戦闘を確認する」�
 
 ## データと共通コア
 
-- `data/v1/balance.json`：COMBATの仮式係数、ENEMIESの6種の基礎値、FLOORSの1〜10Fの遭遇比率・敵候補・Lv範囲。本編が階層テーブルを抽選に使用する。宝箱・イベント・ドロップは `expedition.json` に正本から追加。
+- `data/v1/balance.json`：COMBATの仮式係数、ENEMIESの既存6種と `area1-enemies.json` の新3種の基礎値、FLOORSの1〜10Fの遭遇比率・敵候補・Lv範囲。本編が階層テーブルを抽選に使用する。宝箱・イベント・ドロップは `expedition.json` に正本から追加。
 - `core/combat.gd`：ファイル・UI・時計・グローバル乱数に依存しない計算。コピーした状態を返す。`enemy()`が基礎値＋Lvから1度だけ計算し、階層倍率を受け取らない。`start()`→`advance()`をUIと`simulate()`が共用する。
 - 同速は戦闘専用 `RandomNumberGenerator`、各ラウンドで確定。命中→会心→振れ幅の順。HP0は即停止、50ラウンドは死亡と別のdraw。通常攻撃倍率1.0。開発版ではS105「防御」を追加し、行動を消費する。
 - `core/catalog.gd`：データ読込と形・値・参照ID検証。ゲームとランナーが共用。

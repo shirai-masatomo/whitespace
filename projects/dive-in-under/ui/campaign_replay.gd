@@ -94,7 +94,7 @@ static func run(game: Control) -> void:
 			if game.campaign.phase=="event" and not screenshots.has("24-wide-event.png"):
 				await game.capture("24-wide-event.png"); screenshots["24-wide-event.png"]=true
 			if art_name!="" and not screenshots.has(art_name): await game.capture(art_name); screenshots[art_name]=true
-			if game.campaign.phase=="battle" and game.campaign.battle.enemy_id in ["E01","E02","E03","E05"]:
+			if game.campaign.phase=="battle" and game.campaign.battle.enemy_id in ["E01","E02","E03","E05","E06","E07","E08"]:
 				var enemy_capture: String = "23-enemy-%s.png" % game.campaign.battle.enemy_id.to_lower()
 				if not screenshots.has(enemy_capture): await game.capture(enemy_capture); screenshots[enemy_capture]=true
 		if not game.campaign_resume and defending:

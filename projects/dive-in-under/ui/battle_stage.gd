@@ -171,6 +171,14 @@ func draw_placeholder_background() -> void:
 func _draw() -> void:
 	if scenery == null or scenery.texture == null: draw_placeholder_background()
 	var patterns := {"E01":RAT,"E02":SLIME,"E03":BAT,"E04":GOBLIN,"E05":BEETLE,"B10":STATUE}
-	var pattern: Array = patterns.get(enemy_id,GOBLIN)
-	if enemy_id!="" and (enemy_art == null or enemy_art.texture == null): sprite(pattern,display_foot(enemy_position_hint())-Vector2(45,pattern.size()*5),5,enemy_alive)
+	if enemy_id!="" and (enemy_art == null or enemy_art.texture == null):
+		if patterns.has(enemy_id):
+			var pattern: Array=patterns[enemy_id]
+			sprite(pattern,display_foot(enemy_position_hint())-Vector2(45,pattern.size()*5),5,enemy_alive)
+		else:
+			var point:=display_foot(enemy_position_hint())-Vector2(70,80)
+			draw_rect(Rect2(point,Vector2(140,80)),Color(0.03,0.09,0.12,0.85))
+			draw_rect(Rect2(point,Vector2(140,80)),Color("c7ae75"),false,2)
+			draw_string(get_theme_default_font(),point+Vector2(18,30),enemy_id,HORIZONTAL_ALIGNMENT_LEFT,-1,22,Color("e2ddcc"))
+			draw_string(get_theme_default_font(),point+Vector2(18,60),"画像待ち",HORIZONTAL_ALIGNMENT_LEFT,-1,18,Color("e2ddcc"))
 	if hero_art == null or hero_art.texture == null: sprite(HERO,display_foot(hero_position_hint())-Vector2(45,HERO.size()*5),5,hero_alive)
