@@ -29,6 +29,7 @@ Windows EXEで **新規開始 → 主人公単独で1Fから通常探索（最�
 - [Codexブランチのレビュー入口](https://github.com/shirai-masatomo/whitespace/blob/dot/dive-in-under/phase-01/projects/dive-in-under/review/current/README.md) — Godot単発戦闘・検証・UIの進捗。**工程1全体は未完了**。
 - mainでは確定仕様と設計を更新中。作業ブランチのコードと設計文書は統合時に照合する。
 
+- **[初期装備・バックパック・父親の風呂敷・死亡ロスト、帰還・出撃制限の検討](SPEC.md#初期装備持ち物死亡時の喪失確定仕様)** — 確定要件と未採用の将来案を区別して記録。詳細は[アイテム](docs/ITEMS.md)／[判断台帳](docs/DESIGN_DECISIONS.md)。
 ## 将来の主要仕様
 
 - 最大6人：主人公＋人間2名、各人間に動物・魔物の配下1体。
