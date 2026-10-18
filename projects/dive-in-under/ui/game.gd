@@ -295,7 +295,7 @@ func item_list(parent: VBoxContainer, source: String) -> void:
 		var item: Dictionary=cfg.items[campaign.items[uid]]
 		paragraph(list,item.name,17)
 		if item.slot!="": paragraph(list,condition_text(uid),15)
-		var effects := item_effects(item)
+		var effects := item_effects(item,uid)
 		if effects != "": paragraph(list,effects,15)
 		var row:=HBoxContainer.new(); list.add_child(row)
 		var revision:=int(campaign.revision)
@@ -322,10 +322,10 @@ func repair_button(uid: String) -> Button:
 	b.set_meta("campaign_action","repair"); b.set_meta("campaign_args",{"uid":uid})
 	return b
 
-func item_effects(item: Dictionary) -> String:
+func item_effects(item: Dictionary, uid: String="") -> String:
 	var effects: Array[String] = []
 	for key in item.stats:
-		effects.append("%s %+d" % [{"max_hp":"HP","max_sp":"SP","atk":"ATK","def":"DEF","spd":"SPD"}[key],int(item.stats[key])])
+		effects.append("%s %+d" % [{"max_hp":"HP","max_sp":"SP","atk":"ATK","def":"DEF","spd":"SPD"}[key],Expedition.Condition.bonus(campaign,uid,int(item.stats[key])) if uid!="" else int(item.stats[key])])
 	return " / ".join(effects)
 
 func show_town(root: VBoxContainer) -> void:
@@ -365,7 +365,7 @@ func show_town(root: VBoxContainer) -> void:
 		var slot_label:=text_label(cfg.slots[slot],16); slot_label.custom_minimum_size.x=54; line.add_child(slot_label)
 		var label:=text_label("—" if uid=="" else item.name,16)
 		label.size_flags_horizontal=Control.SIZE_EXPAND_FILL; line.add_child(label)
-		var effect:=text_label("" if uid=="" else item_effects(item),14)
+		var effect:=text_label("" if uid=="" else item_effects(item,uid),14)
 		effect.add_theme_color_override("font_color",Color("41452a")); line.add_child(effect)
 		var revision:=int(campaign.revision)
 		var remove:=compact_button("外す",func(): perform("unequip",{"slot":slot},revision)); remove.disabled=uid==""; line.add_child(remove)
