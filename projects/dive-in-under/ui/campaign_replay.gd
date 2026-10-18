@@ -12,6 +12,16 @@ static func find_command(node: Node, action: String, args: Dictionary) -> Button
 	return null
 
 static func click(game: Control, action: String, args: Dictionary) -> bool:
+	if game.campaign.phase=="town":
+		if action in ["equip","unequip","repair"]:
+			game.open_town_page("equipment")
+		elif action=="depart" and game.town_page=="warehouse":
+			game.open_town_page("hub")
+		elif action in ["deposit","withdraw","to_cloth","organize"]:
+			if action!="organize":
+				game.warehouse_state.uid=args.get("uid","")
+				game.warehouse_state.source=args.get("source","warehouse" if action=="withdraw" else "inventory")
+			game.open_town_page("warehouse")
 	var target:=find_command(game.screen,action,args)
 	if not game.smoke_check(target!=null and not target.disabled,"Missing/enabled command "+action): return false
 	await game.get_tree().process_frame

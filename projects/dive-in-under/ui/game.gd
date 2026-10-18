@@ -12,6 +12,9 @@ var play_speed := 1
 var ui_mode := "title"
 var notice := ""
 var play_buttons: Dictionary = {}
+var town_page := "warehouse"
+var warehouse_state: Dictionary = {}
+var warehouse_view: Control
 var new_button: Button
 var confirm_button: Button
 var continue_button: Button
@@ -83,7 +86,7 @@ func show_title() -> void:
 	if loaded.get("status","") not in ["ok","missing"]: notice=loaded.get("error","")
 	var status:=text_label(notice,16); status.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART; root.add_child(status)
 	var spacer:=Control.new(); spacer.size_flags_vertical=Control.SIZE_EXPAND_FILL; root.add_child(spacer)
-	root.add_child(text_label("0.5.0 equipment condition  ·  工程1試作  ·  静止素材12点採用済み / 数値は仮設定",16))
+	root.add_child(text_label("0.5.1 warehouse preview  ·  工程1試作  ·  静止素材12点採用済み / 数値は仮設定",16))
 	new_button.grab_focus()
 
 func show_battle() -> void:
@@ -125,12 +128,20 @@ func continue_campaign() -> void:
 
 func perform(action: String, args: Dictionary, revision: int) -> void:
 	var candidate:=Expedition.act(campaign,action,revision,args,data,cfg)
-	if candidate==campaign: return
+	if candidate==campaign:
+		if action=="organize": notice="すでに選択した順序に整理されています。"; show_campaign()
+		return
 	var error: String=save_store.write_game(candidate)
 	if error!="":
 		auto_play=false; notice="保存できないため操作を取り消しました："+error
 		show_campaign(); return
 	campaign=candidate; loaded={"ok":true,"status":"ok"}; notice=""
+	if action=="town": town_page="warehouse"
+	if action in ["deposit","withdraw","to_cloth"]:
+		warehouse_state.uid=args.get("uid","")
+		warehouse_state.source={"deposit":"warehouse","withdraw":"inventory","to_cloth":"cloth"}[action]
+		notice={"deposit":"倉庫へ預けました。","withdraw":"バックパックへ引き出しました。","to_cloth":"父親の風呂敷へ移しました。"}[action]
+	if action=="organize": notice="選択した順序に整理しました。"
 	show_campaign()
 
 func command(label: String, action: String, args: Dictionary = {}) -> Button:
@@ -163,16 +174,26 @@ func show_campaign() -> void:
 		if campaign.phase=="battle" and auto_play:
 			play_timer.wait_time=0.6/play_speed; play_timer.start()
 		return
+	if campaign.phase=="town" and town_page=="warehouse":
+		root_layout()
+		var old_root:=screen.get_child(0); screen.remove_child(old_root); old_root.queue_free()
+		for side in ["left","right","top","bottom"]: screen.add_theme_constant_override("margin_"+side,0)
+		warehouse_view=Control.new()
+		warehouse_view.set_script(preload("res://ui/warehouse_view.gd")); warehouse_view.game=self
+		screen.add_child(warehouse_view)
+		return
 	var root:=root_layout()
 	var header:=HBoxContainer.new(); header.custom_minimum_size.y=52; root.add_child(header)
-	var names: Dictionary={"explore":"地下への道","battle":"自動戦闘","event":"地下の出来事","result":"探索結果","town":"町 / 倉庫と装備"}
+	var names: Dictionary={"explore":"地下への道","battle":"自動戦闘","event":"地下の出来事","result":"探索結果","town":"町 / 装備" if town_page=="equipment" else "地下の町"}
 	var heading:=text_label(names[campaign.phase],30); heading.size_flags_horizontal=Control.SIZE_EXPAND_FILL; header.add_child(heading)
 	var title:=button("保存済み / タイトルへ",func(): loaded=save_store.load_game(); show_title())
 	header.add_child(title); play_buttons["title"]=title
-	if campaign.phase=="town": show_town(root)
+	if campaign.phase=="town":
+		if town_page=="equipment": show_equipment(root)
+		else: show_town_hub(root)
 	elif campaign.phase=="result": show_result(root)
 	else: show_wide_exploration()
-	var footer:=text_label(notice if notice!="" else "0.5.0  ·  自動保存済み  ·  主人公ひとり  ·  静止素材12点採用済み / 数値・ペナルティは試作設定",15)
+	var footer:=text_label(notice if notice!="" else "0.5.1  ·  自動保存済み  ·  主人公ひとり  ·  静止素材12点採用済み / 数値・ペナルティは試作設定",15)
 	footer.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART; root.add_child(footer)
 	if campaign.phase=="battle" and auto_play:
 		play_timer.wait_time=0.6/play_speed; play_timer.start()
@@ -301,11 +322,6 @@ func item_list(parent: VBoxContainer, source: String) -> void:
 		var revision:=int(campaign.revision)
 		if source=="inventory":
 			var equip:=compact_button("装備",func(): perform("equip",{"uid":uid},revision)); equip.disabled=item.slot==""; equip.set_meta("campaign_action","equip"); equip.set_meta("campaign_args",{"uid":uid}); row.add_child(equip)
-			var deposit:=compact_button("預ける",func(): perform("deposit",{"uid":uid},revision))
-			deposit.set_meta("campaign_action","deposit"); deposit.set_meta("campaign_args",{"uid":uid}); row.add_child(deposit)
-		else:
-			var withdraw:=compact_button("取り出す",func(): perform("withdraw",{"uid":uid},revision))
-			withdraw.set_meta("campaign_action","withdraw"); withdraw.set_meta("campaign_args",{"uid":uid}); row.add_child(withdraw)
 		if item.slot!="": row.add_child(repair_button(uid))
 		list.add_child(HSeparator.new())
 	if campaign[source].is_empty(): paragraph(list,"まだ何もありません。",17)
@@ -328,7 +344,19 @@ func item_effects(item: Dictionary, uid: String="") -> String:
 		effects.append("%s %+d" % [{"max_hp":"HP","max_sp":"SP","atk":"ATK","def":"DEF","spd":"SPD"}[key],Expedition.Condition.bonus(campaign,uid,int(item.stats[key])) if uid!="" else int(item.stats[key])])
 	return " / ".join(effects)
 
-func show_town(root: VBoxContainer) -> void:
+func open_town_page(page: String) -> void:
+	town_page=page; show_campaign()
+
+func show_town_hub(root: VBoxContainer) -> void:
+	var welcome:=column(root,700)
+	section_heading(welcome,"次の旅の支度")
+	paragraph(welcome,"ランタンの灯りが迎える、地下の町。
+持ち帰った品を預け、装備を整えよう。",22)
+	welcome.add_child(button("倉庫を開く",func(): open_town_page("warehouse")))
+	welcome.add_child(button("装備・修理",func(): open_town_page("equipment")))
+	welcome.add_child(command("地下へ潜る","depart"))
+
+func show_equipment(root: VBoxContainer) -> void:
 	var h:=Expedition.hero(campaign,cfg)
 	var summary:=PanelContainer.new()
 	summary.mouse_filter=Control.MOUSE_FILTER_IGNORE
@@ -374,10 +402,12 @@ func show_town(root: VBoxContainer) -> void:
 			var value:=text_label(condition_text(uid),14); value.size_flags_horizontal=Control.SIZE_EXPAND_FILL; condition_row.add_child(value)
 			condition_row.add_child(repair_button(uid))
 		slot_index += 1
-	var storage:=column(row,300); section_heading(storage,"倉庫"); item_list(storage,"warehouse")
+	root.add_child(button("町へ戻る",func(): open_town_page("hub")))
 	var depart:=command("HP/SP回復済み  →  もう一度地下へ","depart"); root.add_child(depart)
 
 func smoke(quit_on_finish: bool = true) -> void:
+	if "--warehouse-review" in OS.get_cmdline_user_args():
+		await preload("res://ui/warehouse_review.gd").run(self); return
 	if "--equipment-review" in OS.get_cmdline_user_args():
 		await preload("res://ui/equipment_review.gd").run(self); return
 	if "--enemy-art-review" in OS.get_cmdline_user_args():
@@ -388,7 +418,7 @@ func smoke(quit_on_finish: bool = true) -> void:
 		await CampaignReplay.run(self); return
 	if resume_probe:
 		var original = JSON.parse_string(FileAccess.get_file_as_string(smoke_dir.path_join("ui-smoke.json")))
-		if not smoke_check(loaded.ok and campaign.schema_version==4 and campaign.revision==original.saved_revision and save_store.digest()==original.saved_sha256,"Separate EXE restart checkpoint"): return
+		if not smoke_check(loaded.ok and campaign.schema_version==5 and campaign.revision==original.saved_revision and save_store.digest()==original.saved_sha256,"Separate EXE restart checkpoint"): return
 		var f:=FileAccess.open(smoke_dir.path_join("resume-smoke.json"),FileAccess.WRITE)
 		f.store_string(JSON.stringify({"run_id":smoke_run_id,"restart_loaded":true,"revision":campaign.revision,"phase":campaign.phase,"save_sha256":save_store.digest()},"\t")); f.close()
 		get_tree().quit(); return
@@ -419,7 +449,7 @@ func smoke(quit_on_finish: bool = true) -> void:
 	# Find actual town buttons; core inventory stress tests separately cover every move.
 	await CampaignReplay.click(self,"equip",{"uid":uid})
 	if not smoke_check(campaign.equipment.head==uid,"Town equip input"): return
-	await click_control(play_buttons.depart)
+	await CampaignReplay.click(self,"depart",{})
 	if not smoke_check(campaign.phase=="explore","Town departure input"): return
 	auto_play=false
 	await click_control(play_buttons.descend)
@@ -433,7 +463,7 @@ func smoke(quit_on_finish: bool = true) -> void:
 	await click_control(play_buttons["return"])
 	if rendered: await capture("08-return-result.png")
 	await click_control(play_buttons.town)
-	await click_control(play_buttons.depart)
+	await CampaignReplay.click(self,"depart",{})
 	if not smoke_check(campaign.story_deaths==0 and campaign.hp>0,"Retry does not repeat forced death"): return
 	# Proceed normally until a real death or 10F clear; no altered stats or forced outcomes.
 	var budget:=0
@@ -445,7 +475,7 @@ func smoke(quit_on_finish: bool = true) -> void:
 	if not smoke_check(campaign.phase=="result" and campaign.result.kind=="death" and campaign.story_deaths==0,"Normal combat death independent of tutorial"): return
 	if rendered: await capture("09-normal-death.png")
 	await click_control(play_buttons.town)
-	await click_control(play_buttons.depart)
+	await CampaignReplay.click(self,"depart",{})
 	# A separate new profile verifies real HP0 on the very first ordinary expedition.
 	await click_control(play_buttons.title)
 	await click_control(new_button)
@@ -460,7 +490,7 @@ func smoke(quit_on_finish: bool = true) -> void:
 	if rendered: await capture("25-first-normal-death.png")
 	await click_control(play_buttons.title); await click_control(continue_button)
 	if not smoke_check(campaign.result.kind=="death" and campaign.deaths==1,"First normal death result survives restart to title"): return
-	await click_control(play_buttons.town); await click_control(play_buttons.depart)
+	await click_control(play_buttons.town); await CampaignReplay.click(self,"depart",{})
 	# Leave a real, in-progress battle checkpoint for a separate EXE restart.
 	budget=0
 	while campaign.phase!="battle" and budget<10:

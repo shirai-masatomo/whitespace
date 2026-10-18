@@ -20,7 +20,7 @@ func _initialize() -> void:
 	var ring:=E.add_item(s,"I05"); s=act(s,"equip",{"uid":ring})
 	var amulet:=E.add_item(s,"I07"); s=act(s,"equip",{"uid":amulet})
 	var material:=E.add_item(s,"I10")
-	check(E.validate(s,data,cfg)=="" and s.schema_version==4,"new schema and all instances valid")
+	check(E.validate(s,data,cfg)=="" and s.schema_version==5,"new schema and all instances valid")
 	check(E.hero(s,cfg).atk==8 and E.hero(s,cfg).max_hp==29 and E.hero(s,cfg).def==2,"full equipment stats")
 	s.item_condition[ring].current=50
 	check(E.hero(s,cfg).atk==7,"damaged equipment changes actual hero stats")
@@ -73,14 +73,15 @@ func _initialize() -> void:
 	check(fighting.phase!="battle" and fighting.item_condition[worn_uid].current==before-1,"wear once at battle resolution")
 	check(E.validate(fighting,data,cfg)=="","post-battle ownership and effective HP valid")
 	# Each old schema remains readable without overwriting original bytes.
-	for schema in [1,2,3]:
+	for schema in [1,2,3,4]:
 		var old:=E.fresh(cfg,123); old.schema_version=schema
-		old.erase("condition_version"); old.erase("item_condition")
+		old.erase("storage_version"); old.erase("cloth")
+		if schema<4: old.erase("condition_version"); old.erase("item_condition")
 		if schema<3: old.erase("hero_skills")
 		put(path,old)
 		var original:=FileAccess.get_sha256(path)
 		store=Store.new(path,data,cfg); loaded=store.load_game()
-		check(loaded.ok and loaded.migrated and loaded.state.schema_version==4,"legacy schema %d loads"%schema)
+		check(loaded.ok and loaded.migrated and loaded.state.schema_version==5,"legacy schema %d loads"%schema)
 		if loaded.ok:
 			check(FileAccess.get_sha256(path)==original and loaded.state.items==JSON.parse_string(JSON.stringify(old.items)),"legacy possessions and bytes preserved")
 			check(store.write_game(loaded.state)=="" and FileAccess.get_sha256(store.last_preserved_path)==original,"exact legacy archive before replacement")

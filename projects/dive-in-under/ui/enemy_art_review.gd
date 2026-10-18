@@ -38,7 +38,7 @@ static func run(game: Control) -> void:
 	await game.click_control(game.play_buttons["return"])
 	if not game.smoke_check(game.campaign.result.kind=="return","First return input"): return
 	await game.click_control(game.play_buttons.town)
-	if not game.smoke_check(game.campaign.phase=="town" and not game.play_buttons.depart.disabled,"Town and retry controls"): return
+	if not game.smoke_check(game.campaign.phase=="town" and game.find_button(game.screen,"戻る")!=null,"Town and retry controls"): return
 	if rendered: await game.capture("first-return-town.png")
 	var report:={"run_id":game.smoke_run_id,"engine":Engine.get_version_info().string,"rendered":rendered,"complete":true,"fixture_only":true,"manual_input":false,"first_return_town":true,"cases":cases}
 	var file:=FileAccess.open(game.smoke_dir.path_join("enemy-art-review.json"),FileAccess.WRITE)

@@ -27,7 +27,7 @@ func read_one(file_path: String) -> Dictionary:
 	var parser := JSON.new()
 	if parser.parse(file.get_as_text())!=OK or not parser.data is Dictionary:
 		return {"ok":false,"status":"invalid","error":"保存データが壊れています。元ファイルを保持しました。"}
-	if parser.data.has("schema_version") and (parser.data.schema_version!=1 and parser.data.schema_version!=2 and parser.data.schema_version!=3 and parser.data.schema_version!=4):
+	if parser.data.has("schema_version") and (parser.data.schema_version!=1 and parser.data.schema_version!=2 and parser.data.schema_version!=3 and parser.data.schema_version!=4 and parser.data.schema_version!=5):
 		return {"ok":false,"status":"version","error":"未対応の保存形式です。古いバックアップへの自動巻戻しはしません。"}
 	var saved_config: Dictionary=cfg
 	if parser.data.get("config_version")!=cfg.config_version:
@@ -38,7 +38,7 @@ func read_one(file_path: String) -> Dictionary:
 	var migrated:=Expedition.migrate(parser.data)
 	problem=Expedition.validate(migrated,data,saved_config)
 	if problem!="": return {"ok":false,"status":"invalid","error":problem}
-	return {"ok":true,"status":"ok","state":migrated,"config":saved_config,"migrated":parser.data.schema_version!=4,"error":""}
+	return {"ok":true,"status":"ok","state":migrated,"config":saved_config,"migrated":parser.data.schema_version!=5,"error":""}
 
 func load_game() -> Dictionary:
 	fingerprint=digest()

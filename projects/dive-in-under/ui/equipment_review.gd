@@ -5,8 +5,8 @@ static func run(game: Control) -> void:
 	var resume: bool="--equipment-review-resume" in OS.get_cmdline_user_args()
 	if resume:
 		var prior=JSON.parse_string(FileAccess.get_file_as_string(game.smoke_dir.path_join("equipment-review.json")))
-		if not game.smoke_check(game.loaded.ok and not game.loaded.migrated and game.campaign.schema_version==4 and game.save_store.digest()==prior.save_sha256,"Separate EXE reload retains repair/condition/Gold"): return
-		game.auto_play=false; game.show_campaign()
+		if not game.smoke_check(game.loaded.ok and not game.loaded.migrated and game.campaign.schema_version==5 and game.save_store.digest()==prior.save_sha256,"Separate EXE reload retains repair/condition/Gold"): return
+		game.auto_play=false; game.open_town_page("equipment")
 		if rendered: await game.capture("equipment-restarted.png")
 		write(game,{"run_id":game.smoke_run_id,"rendered":rendered,"complete":true,"save_sha256":game.save_store.digest(),"separate_restart":true},"equipment-review-resume.json")
 		game.get_tree().quit(); return
@@ -23,11 +23,11 @@ static func run(game: Control) -> void:
 	game.campaign=game.loaded.state; game.auto_play=false
 	game.campaign.gold=250 # Presentation fixture, never a production award.
 	game.notice="耐久・修理の固定確認用 / 所持金は試験用"
-	game.show_campaign()
+	game.open_town_page("equipment")
 	if rendered: await game.capture("equipment-full.png")
 	var uid: String=game.campaign.equipment.head
 	game.campaign.item_condition[uid].current=0
-	game.show_campaign()
+	game.open_town_page("equipment")
 	if not game.smoke_check(game.Expedition.hero(game.campaign,game.cfg).def==1,"Broken gear has zero actual bonus"): return
 	if rendered: await game.capture("equipment-broken.png")
 	if not await game.CampaignReplay.click(game,"repair",{"uid":uid}): return

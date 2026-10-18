@@ -3,6 +3,7 @@ extends RefCounted
 const Combat = preload("res://core/combat.gd")
 const Catalog = preload("res://core/catalog.gd")
 const Condition = preload("res://core/equipment_condition.gd")
+const Storage = preload("res://core/storage.gd")
 const STATS = ["max_hp","atk","def","spd","max_sp"]
 const SLOTS = ["right_hand","left_hand","head","body","legs","feet","neck","ears","eyes","finger","wrist"]
 
@@ -80,7 +81,7 @@ static func drop_table(cfg: Dictionary, data: Dictionary, enemy_id: String) -> V
 	return cfg.drops.get(enemy_id,data.get("enemy_drops",{}).get(enemy_id))
 
 static func fresh(cfg: Dictionary, seed_value: int) -> Dictionary:
-	var s := {"schema_version":4,"condition_version":1,"item_condition":{},"hero_skills":cfg.get("hero_skills",["S105"]).duplicate(),"config_version":cfg.config_version,"revision":0,"seed":seed_value,
+	var s := {"schema_version":5,"condition_version":1,"item_condition":{},"storage_version":1,"cloth":[],"hero_skills":cfg.get("hero_skills",["S105"]).duplicate(),"config_version":cfg.config_version,"revision":0,"seed":seed_value,
 		"rng":{"explore":0,"battle":0,"loot":0},"phase":"explore","first_done":false,"story_deaths":0,
 		"floor":0,"highest_floor":0,"exp":0,"gold":int(cfg.initial.gold),"hp":int(cfg.initial.max_hp),
 		"sp":int(cfg.initial.max_sp),"items":{},"inventory":[],"warehouse":[],"equipment":{},"next_item":1,
@@ -300,13 +301,17 @@ static func act(previous: Dictionary, action: String, expected_revision: int, ar
 					s.item_condition[uid].current=s.item_condition[uid].maximum
 					var h:=hero(s,cfg); s.hp=h.max_hp; s.sp=h.max_sp
 					note(s,"装備を修理した。Gold -%d"%price); changed=true
+		"organize":
+			changed=Storage.organize(s,cfg,args.get("mode","category"))
+		"to_cloth":
+			changed=Storage.move(s,args.get("uid",""),args.get("source","inventory"),"cloth",cfg)
 		"deposit","withdraw","equip","unequip":
 			if s.phase=="town":
 				var uid: String = args.get("uid","")
-				if action=="deposit" and uid in s.inventory:
-					s.inventory.erase(uid); s.warehouse.append(uid); changed=true
-				elif action=="withdraw" and uid in s.warehouse:
-					s.warehouse.erase(uid); s.inventory.append(uid); changed=true
+				if action=="deposit":
+					changed=Storage.move(s,uid,args.get("source","inventory"),"warehouse",cfg)
+				elif action=="withdraw":
+					changed=Storage.move(s,uid,args.get("source","warehouse"),"inventory",cfg)
 				elif action=="equip" and uid in s.inventory:
 					var slot: String = cfg.items[s.items[uid]].slot
 					if slot in SLOTS:
@@ -314,7 +319,7 @@ static func act(previous: Dictionary, action: String, expected_revision: int, ar
 						s.inventory.erase(uid); s.equipment[slot]=uid; changed=true
 				elif action=="unequip":
 					var slot: String = args.get("slot","")
-					if slot in SLOTS and s.equipment[slot] != "":
+					if slot in SLOTS and s.equipment[slot] != "" and s.inventory.size()<Storage.BACKPACK_CAPACITY:
 						s.inventory.append(s.equipment[slot]); s.equipment[slot]=""; changed=true
 				if changed:
 					var h := hero(s,cfg)
@@ -328,7 +333,7 @@ static func integer(v: Variant, low: int, high: int) -> bool:
 static func validate(s: Dictionary, data: Dictionary, cfg: Dictionary) -> String:
 	for key in ["schema_version","config_version","revision","seed","rng","phase","first_done","story_deaths","floor","highest_floor","exp","gold","hp","sp","items","inventory","warehouse","equipment","next_item","battle","event","result","journal","trips","deaths"]:
 		if not s.has(key): return "Missing save field: "+key
-	if (s.schema_version!=1 and s.schema_version!=2 and s.schema_version!=3 and s.schema_version!=4) or s.config_version!=cfg.config_version: return "Unsupported save/config version"
+	if (s.schema_version!=1 and s.schema_version!=2 and s.schema_version!=3 and s.schema_version!=4 and s.schema_version!=5) or s.config_version!=cfg.config_version: return "Unsupported save/config version"
 	if s.schema_version>=3 and (not s.get("hero_skills") is Array or s.hero_skills!=cfg.get("hero_skills",["S105"])): return "Invalid initial skill ownership"
 	for key in ["revision","seed","story_deaths","floor","highest_floor","exp","gold","hp","sp","next_item","trips","deaths"]:
 		if not integer(s[key],0,2147483647): return "Invalid number: "+key
@@ -349,6 +354,9 @@ static func validate(s: Dictionary, data: Dictionary, cfg: Dictionary) -> String
 	if s.equipment.size()!=11: return "Equipment must contain 11 slots"
 	var owned: Array = s.inventory.duplicate()
 	owned.append_array(s.warehouse)
+	if s.schema_version>=5:
+		if s.get("storage_version")!=1 or not s.get("cloth") is Array or s.cloth.size()>Storage.CLOTH_CAPACITY: return "Invalid cloth storage"
+		owned.append_array(s.cloth)
 	for slot in SLOTS:
 		if not s.equipment.has(slot) or not s.equipment[slot] is String: return "Missing slot"
 		var uid: String = s.equipment[slot]
@@ -405,15 +413,18 @@ static func validate(s: Dictionary, data: Dictionary, cfg: Dictionary) -> String
 	return ""
 
 static func migrate(s: Dictionary) -> Dictionary:
-	# Called only after validating the old schema/config. Preserve possessions and counters.
-	if s.schema_version==4: return s
+	# Validated legacy state is copied; first write archives its original bytes.
+	if s.schema_version==5: return s
 	var migrated:=s.duplicate(true)
-	migrated.schema_version=4
-	migrated.condition_version=1
-	migrated.item_condition={}
-	for uid in migrated.items: migrated.item_condition[uid]=Condition.fresh()
-	migrated.hero_skills=["S105"]
-	note(migrated,"旧セーブを保全し、装備個体へ耐久値を追加した。既存の能力と戦闘途中の入力は保持する。")
+	if s.schema_version<4:
+		migrated.condition_version=1
+		migrated.item_condition={}
+		for uid in migrated.items: migrated.item_condition[uid]=Condition.fresh()
+		migrated.hero_skills=["S105"]
+	migrated.schema_version=5
+	migrated.storage_version=1
+	migrated.cloth=[]
+	note(migrated,"所持品を保全し、父親の風呂敷を使えるようにした。")
 	if migrated.phase=="result" and migrated.result.kind=="story_death":
 		migrated.result.reason="旧版で記録された導入イベントの結果です。町へ戻り、通常探索を続けられます。"
 	return migrated

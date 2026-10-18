@@ -5,13 +5,13 @@ static func run(game: Control, resume: bool) -> void:
 	var rendered:=DisplayServer.get_name()!="headless"
 	if resume:
 		var prior=JSON.parse_string(FileAccess.get_file_as_string(path))
-		if not game.smoke_check(prior is Dictionary and prior.complete and game.loaded.ok and not game.loaded.migrated and game.campaign.schema_version==4 and game.save_store.digest()==prior.save_sha256,"Migrated save reopens in a separate EXE"): return
+		if not game.smoke_check(prior is Dictionary and prior.complete and game.loaded.ok and not game.loaded.migrated and game.campaign.schema_version==5 and game.save_store.digest()==prior.save_sha256,"Migrated save reopens in a separate EXE"): return
 		var f:=FileAccess.open(game.smoke_dir.path_join("migration-restart.json"),FileAccess.WRITE)
 		f.store_string(JSON.stringify({"run_id":game.smoke_run_id,"complete":true,"rendered":rendered,"save_sha256":game.save_store.digest()},"\t")); f.close()
 		game.get_tree().quit(); return
 	var old=JSON.parse_string(FileAccess.get_file_as_string(game.save_store.path))
 	var old_hash: String=game.save_store.digest()
-	if not game.smoke_check(old is Dictionary and (old.schema_version==1 or old.schema_version==2 or old.schema_version==3) and game.loaded.ok and game.loaded.migrated and game.campaign.schema_version==4,"Legacy fixture loads without rewriting original"): return
+	if not game.smoke_check(old is Dictionary and (old.schema_version==1 or old.schema_version==2 or old.schema_version==3 or old.schema_version==4) and game.loaded.ok and game.loaded.migrated and game.campaign.schema_version==5,"Legacy fixture loads without rewriting original"): return
 	for key in ["config_version","revision","seed","rng","first_done","story_deaths","floor","highest_floor","exp","gold","hp","sp","items","inventory","warehouse","equipment","next_item","battle","event","trips","deaths"]:
 		if not game.smoke_check(game.campaign[key]==old[key],"Legacy EXE preserves "+key): return
 	await game.click_control(game.continue_button)

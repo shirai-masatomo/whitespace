@@ -1,4 +1,4 @@
-﻿param(
+param(
     [ValidateSet('test','simulate','build','verify','play','campaign')][string]$Task = 'verify',
     [int]$Trials = 8,
     [int]$Seed = 10000,
@@ -35,6 +35,7 @@ function Run-Godot([string]$Name, [string[]]$Arguments) {
 }
 try {
     if ($Task -in @('test','verify')) {
+        Run-Godot 'storage-tests' @('--script','tests/test_storage.gd')
         Run-Godot 'equipment-condition-tests' @('--script','tests/test_equipment_condition.gd')
         Run-Godot 'tests' @('--script','tests/test_combat.gd')
         Run-Godot 'status-tests' @('--script','tests/test_status.gd')

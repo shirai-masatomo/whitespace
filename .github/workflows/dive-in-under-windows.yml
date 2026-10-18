@@ -96,6 +96,11 @@ jobs:
         run: |
           ./tools/enemy_art_review.ps1 -Review equipment
           ./tools/enemy_art_review.ps1 -Review equipment -Resume
+      - name: Warehouse transfer, filtering and separate restart
+        if: steps.scope.outputs.art_only != 'true'
+        run: |
+          ./tools/enemy_art_review.ps1 -Review warehouse
+          ./tools/enemy_art_review.ps1 -Review warehouse -Resume
       - name: Reject injected replay and UI smoke faults
         if: steps.scope.outputs.art_only != 'true'
         run: ./tests/test_harness.ps1
@@ -118,6 +123,8 @@ jobs:
             projects/dive-in-under/artifacts/*.log
             projects/dive-in-under/artifacts/*.json
             projects/dive-in-under/artifacts/*.txt
+            projects/dive-in-under/artifacts/warehouse-headless/*.json
+            projects/dive-in-under/artifacts/warehouse-headless/*.log
             projects/dive-in-under/artifacts/equipment-headless/*.json
             projects/dive-in-under/artifacts/equipment-headless/*.log
             projects/dive-in-under/artifacts/enemy-art-headless/*.json
