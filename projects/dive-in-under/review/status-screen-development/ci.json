@@ -1,0 +1,10 @@
+{
+  "run_id": 39132795610,
+  "url": "https://github.com/shirai-masatomo/whitespace/actions/runs/39132795610",
+  "status": "completed",
+  "conclusion": "success",
+  "head_sha": "355ded7c0a2af3e97718033d647e979758b5f8bc",
+  "windows_artifact": 12138279396,
+  "evidence_artifact": 12139005584,
+  "scope": "status-only UI; core/save-format tests reused from 39131396836"
+}
