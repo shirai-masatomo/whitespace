@@ -15,6 +15,8 @@ var play_buttons: Dictionary = {}
 var town_page := "warehouse"
 var warehouse_state: Dictionary = {}
 var warehouse_view: Control
+var status_view: Control
+var status_return_page := "hub"
 var new_button: Button
 var confirm_button: Button
 var continue_button: Button
@@ -86,7 +88,7 @@ func show_title() -> void:
 	if loaded.get("status","") not in ["ok","missing"]: notice=loaded.get("error","")
 	var status:=text_label(notice,16); status.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART; root.add_child(status)
 	var spacer:=Control.new(); spacer.size_flags_vertical=Control.SIZE_EXPAND_FILL; root.add_child(spacer)
-	root.add_child(text_label("0.5.1 warehouse preview  ·  工程1試作  ·  静止素材12点採用済み / 数値は仮設定",16))
+	root.add_child(text_label("0.5.2 status preview  ·  工程1試作  ·  静止素材12点採用済み / 数値は仮設定",16))
 	new_button.grab_focus()
 
 func show_battle() -> void:
@@ -174,13 +176,14 @@ func show_campaign() -> void:
 		if campaign.phase=="battle" and auto_play:
 			play_timer.wait_time=0.6/play_speed; play_timer.start()
 		return
-	if campaign.phase=="town" and town_page=="warehouse":
+	if campaign.phase=="town" and town_page in ["warehouse","status"]:
 		root_layout()
 		var old_root:=screen.get_child(0); screen.remove_child(old_root); old_root.queue_free()
 		for side in ["left","right","top","bottom"]: screen.add_theme_constant_override("margin_"+side,0)
-		warehouse_view=Control.new()
-		warehouse_view.set_script(preload("res://ui/warehouse_view.gd")); warehouse_view.game=self
-		screen.add_child(warehouse_view)
+		if town_page=="warehouse":
+			warehouse_view=Control.new(); warehouse_view.set_script(preload("res://ui/warehouse_view.gd")); warehouse_view.game=self; screen.add_child(warehouse_view)
+		else:
+			status_view=Control.new(); status_view.set_script(preload("res://ui/status_view.gd")); status_view.game=self; status_view.return_page=status_return_page; screen.add_child(status_view)
 		return
 	var root:=root_layout()
 	var header:=HBoxContainer.new(); header.custom_minimum_size.y=52; root.add_child(header)
@@ -193,7 +196,7 @@ func show_campaign() -> void:
 		else: show_town_hub(root)
 	elif campaign.phase=="result": show_result(root)
 	else: show_wide_exploration()
-	var footer:=text_label(notice if notice!="" else "0.5.1  ·  自動保存済み  ·  主人公ひとり  ·  静止素材12点採用済み / 数値・ペナルティは試作設定",15)
+	var footer:=text_label(notice if notice!="" else "0.5.2  ·  自動保存済み  ·  主人公ひとり  ·  静止素材12点採用済み / 数値・ペナルティは試作設定",15)
 	footer.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART; root.add_child(footer)
 	if campaign.phase=="battle" and auto_play:
 		play_timer.wait_time=0.6/play_speed; play_timer.start()
@@ -347,11 +350,17 @@ func item_effects(item: Dictionary, uid: String="") -> String:
 func open_town_page(page: String) -> void:
 	town_page=page; show_campaign()
 
+func open_status() -> void:
+	if campaign.phase!="town": return
+	status_return_page=town_page
+	open_town_page("status")
+
 func show_town_hub(root: VBoxContainer) -> void:
 	var welcome:=column(root,700)
 	section_heading(welcome,"次の旅の支度")
 	paragraph(welcome,"ランタンの灯りが迎える、地下の町。
 持ち帰った品を預け、装備を整えよう。",22)
+	welcome.add_child(button("ステータス",open_status))
 	welcome.add_child(button("倉庫を開く",func(): open_town_page("warehouse")))
 	welcome.add_child(button("装備・修理",func(): open_town_page("equipment")))
 	welcome.add_child(command("地下へ潜る","depart"))
@@ -406,6 +415,8 @@ func show_equipment(root: VBoxContainer) -> void:
 	var depart:=command("HP/SP回復済み  →  もう一度地下へ","depart"); root.add_child(depart)
 
 func smoke(quit_on_finish: bool = true) -> void:
+	if "--status-review" in OS.get_cmdline_user_args():
+		await preload("res://ui/status_review.gd").run(self); return
 	if "--warehouse-review" in OS.get_cmdline_user_args():
 		await preload("res://ui/warehouse_review.gd").run(self); return
 	if "--equipment-review" in OS.get_cmdline_user_args():
