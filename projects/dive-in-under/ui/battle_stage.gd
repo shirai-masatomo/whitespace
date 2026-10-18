@@ -140,7 +140,7 @@ func visual_audit() -> Dictionary:
 		"composition":"wide-floor-reference-comparison" if wide_layout else "development-tool-layout","background_zoom":1.0 if wide_layout else BACKGROUND_ZOOM,"wide_layout":wide_layout,"global_rect":str(get_global_rect()),"background_aspect":16.0/9.0,
 		"near_hero_foot":[display_foot(hero_position_hint()).x,display_foot(hero_position_hint()).y],
 		"far_enemy_foot":[display_foot(enemy_position_hint()).x,display_foot(enemy_position_hint()).y],"formation_rules":false,
-		"static_only":true,"adoption":"nine-assets-current-baseline","actors":actors}
+		"static_only":true,"adoption":"twelve-assets-current-baseline","actors":actors}
 
 func sprite(pattern: Array, origin: Vector2, pixel: int, _alive: bool) -> void:
 	for y in range(pattern.size()):

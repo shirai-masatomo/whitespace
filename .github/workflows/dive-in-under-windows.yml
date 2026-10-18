@@ -43,9 +43,28 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
+          fetch-depth: 0
           sparse-checkout: |
             projects/dive-in-under
           sparse-checkout-cone-mode: true
+      - name: Select verification for the changed files
+        id: scope
+        env:
+          PREVIOUS_HEAD: ${{ github.event.before }}
+          CURRENT_HEAD: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: |
+          $artOnly = $false
+          if ($env:PREVIOUS_HEAD -match '^[0-9a-f]{40}$' -and $env:PREVIOUS_HEAD -ne ('0' * 40)) {
+            git cat-file -e "$($env:PREVIOUS_HEAD)^{commit}" 2>$null
+            if ($LASTEXITCODE -eq 0) {
+              $files = @(git diff --name-only $env:PREVIOUS_HEAD $env:CURRENT_HEAD)
+              $allowed = '^(projects/dive-in-under/(assets/visual-candidates/|review/|docs/)|projects/dive-in-under/ui/(visual_assets|battle_stage|game|enemy_art_review)\.gd(\.uid)?$|projects/dive-in-under/export_presets\.cfg$|projects/dive-in-under/tools/enemy_art_review\.ps1$|\.github/workflows/dive-in-under-windows\.yml$)'
+              $artOnly = $files.Count -gt 0 -and @($files | Where-Object { $_ -notmatch $allowed }).Count -eq 0
+            }
+          }
+          $global:LASTEXITCODE = 0
+          "art_only=$($artOnly.ToString().ToLowerInvariant())" >> $env:GITHUB_OUTPUT
+          Write-Output "Art-only verification: $artOnly (previously verified core/data unchanged)"
       - uses: actions/cache@v4
         with:
           path: projects/dive-in-under/.tools
@@ -53,21 +72,34 @@ jobs:
       - name: Verify engine and templates
         run: ./tools/setup.ps1
       - name: Functional tests, 8-seed smoke and export
+        if: steps.scope.outputs.art_only != 'true'
         run: ./dev.ps1 -Task verify -Trials 8 -GameCommit '${{ github.sha }}'
       - name: Repeat same seeds and compare
+        if: steps.scope.outputs.art_only != 'true'
         run: ./dev.ps1 -Task simulate -Trials 8 -GameCommit '${{ github.sha }}' -Baseline "$PWD/artifacts/simulation.json" -Output "$PWD/artifacts/comparison.json" -StrictRepeat
       - name: Three fixed campaigns and strict replay
+        if: steps.scope.outputs.art_only != 'true'
         run: ./tools/verify_campaign.ps1 -Trials 3 -GameCommit '${{ github.sha }}'
       - name: Replay normal 10F with three exported EXE processes
+        if: steps.scope.outputs.art_only != 'true'
         run: |
           ./tools/campaign_smoke.ps1
           ./tests/test_campaign_harness.ps1
       - name: Run exported Windows EXE (headless UI smoke)
+        if: steps.scope.outputs.art_only != 'true'
         run: ./tools/smoke.ps1
       - name: Migrate legacy saves in exported EXE and restart
+        if: steps.scope.outputs.art_only != 'true'
         run: ./tools/migration_smoke.ps1
       - name: Reject injected replay and UI smoke faults
+        if: steps.scope.outputs.art_only != 'true'
         run: ./tests/test_harness.ps1
+      - name: Import and export unchanged-core art update
+        if: steps.scope.outputs.art_only == 'true'
+        run: ./dev.ps1 -Task build -GameCommit '${{ github.sha }}'
+      - name: Targeted exported EXE image and first-return smoke
+        if: steps.scope.outputs.art_only == 'true'
+        run: ./tools/enemy_art_review.ps1
       - uses: actions/upload-artifact@v4
         with:
           name: DiveInUnder-foundation-windows-x64
@@ -81,6 +113,8 @@ jobs:
             projects/dive-in-under/artifacts/*.log
             projects/dive-in-under/artifacts/*.json
             projects/dive-in-under/artifacts/*.txt
+            projects/dive-in-under/artifacts/enemy-art-headless/*.json
+            projects/dive-in-under/artifacts/enemy-art-headless/*.log
             projects/dive-in-under/artifacts/exe-headless/run.log
             projects/dive-in-under/artifacts/exe-headless/*.json
             projects/dive-in-under/artifacts/campaign-headless/*.json
