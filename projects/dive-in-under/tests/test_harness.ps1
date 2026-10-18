@@ -30,7 +30,7 @@ foreach ($fault in @('trace','metrics')) {
     $inputFile=Join-Path $artifacts "fault-$fault.json"
     [IO.File]::WriteAllText($inputFile,($changed | ConvertTo-Json -Depth 40),[Text.UTF8Encoding]::new($false))
     $outputFile=Join-Path $artifacts "fault-$fault-result.json"
-    & $godot --headless --path $project --script tools/runner.gd -- --trials=1000 --seed=10000 "--out=$outputFile" "--baseline=$inputFile" --strict=true 2>&1 | Out-File (Join-Path $artifacts "fault-$fault.log") -Encoding utf8
+    & $godot --headless --path $project --script tools/runner.gd -- "--trials=$($baseline.seeds.Count)" "--seed=$($baseline.seeds[0])" "--out=$outputFile" "--baseline=$inputFile" --strict=true 2>&1 | Out-File (Join-Path $artifacts "fault-$fault.log") -Encoding utf8
     if ($LASTEXITCODE -ne 1) { throw "Strict replay failed to reject $fault with exit 1" }
     $evidence.Add(@{case="strict-$fault";rejected=$true;exit_code=$LASTEXITCODE})
 }
