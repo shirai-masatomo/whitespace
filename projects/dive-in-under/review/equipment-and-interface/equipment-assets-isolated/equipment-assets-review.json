@@ -1,0 +1,15 @@
+{
+	"blue_cloak_uid": "item-1",
+	"complete": true,
+	"fixture_gallery_only": true,
+	"head_exclusive": true,
+	"legacy_preserved": true,
+	"legacy_sha256": "dbdb7c41ec5e74bf313e30d503800b6513574958e53f2a84f2f995ff5a443e4e",
+	"mapped_existing": 10,
+	"new_game_button": true,
+	"rendered": true,
+	"run_id": "0d1b8566d5404ffbab0a052974d4af46",
+	"save_sha256": "af7f22f83eb795ea30a9d318306605100e6ad4fc10a39a353311bbfda27842f8",
+	"starter_worn": true,
+	"viewport_transfers": true
+}

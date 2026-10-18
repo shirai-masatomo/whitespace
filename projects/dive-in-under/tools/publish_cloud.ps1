@@ -27,7 +27,7 @@ if (!$art.new_game_button -or !$art.starter_worn -or !$art.head_exclusive -or !$
 $status=Read-Proof 'status-isolated/status-review.json'
 $statusRestart=Read-Proof 'status-isolated/status-review-resume.json'
 if (!$status.read_only -or !$status.no_mutation -or !$status.keyboard -or !$status.wheel_scroll -or !$status.origin_return -or !$statusRestart.separate_restart -or $status.save_sha256 -ne $status.save_after_sha256 -or $status.save_sha256 -ne $statusRestart.save_sha256) { throw 'Status interactions must remain read-only and restartable' }
-$migration=Read-Proof 'migration-headless/migration-summary.json'
+$migration=Read-Proof 'migration-headless/summary.json'
 if (!$migration.complete -or $migration.cases.Count -lt 8 -or $migration.build.game_commit -ne $meta.game_commit) { throw 'All required legacy EXE cases must pass' }
 $repeat=Read-Proof 'campaign-repeat.json'
 $campaign=Read-Proof 'campaign-headless/campaign-complete.json'
