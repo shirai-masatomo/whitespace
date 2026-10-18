@@ -14,7 +14,7 @@ function Run([string]$name,[string[]]$extra){
 try{
  if(-not $DeliveryOnly){
  Run 'import' @('--editor','--import')
- foreach($suite in $Suites){if($suite -notin @('ambient-harvest','ambient-work','reference-ui','reserved-preview','life-ui','construction-visual','button-hit')){throw 'Unknown focused suite'};Run $suite @('--script',('res://tests/test_'+$suite.Replace('-','_')+'.gd'),'--','--isolated-review')}
+ foreach($suite in $Suites){if($suite -notin @('ambient-harvest','ambient-work','reference-ui','reserved-preview','life-ui','construction-visual','button-hit','category-click')){throw 'Unknown focused suite'};Run $suite @('--script',('res://tests/test_'+$suite.Replace('-','_')+'.gd'),'--','--isolated-review')}
  }
  Run 'loading' @('--script','res://tests/test_loading.gd','--','--isolated-review')
  if($Publish){$revision=(git -C $project rev-parse HEAD).Trim();$stamp=Get-Content -LiteralPath (Join-Path $project 'game/build_stamp.json') -Raw | ConvertFrom-Json;$stamp.commit=$revision;$stamp.dirty=$true;$stamp.asset_delivery_commit=(Get-Content -LiteralPath (Join-Path $project 'game/art_provenance.json') -Raw | ConvertFrom-Json).latest_delivery_commit;$stamp | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $project 'game/build_stamp.json') -Encoding utf8;Run 'export' @('--export-release','Windows Desktop',(Join-Path $scratch 'WhistleRanch-test.exe')); & (Join-Path $project 'tools/publish_build.ps1') -Executable (Join-Path $scratch 'WhistleRanch-test.exe') -Revision $revision -Dirty $true;Copy-Item -LiteralPath (Join-Path $project 'artifacts/autonomy-entry-01/bundle/BUILD.json') -Destination (Join-Path $evidence 'DELIVERY.json') -Force}

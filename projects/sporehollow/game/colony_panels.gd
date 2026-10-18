@@ -111,7 +111,9 @@ static func build(g):
 		var index=0
 		for category in Model.ARCHITECT:
 			var id="architect_category_%d"%index
-			g.add_button(g.palette,id,category,Rect2(16,450+index*46,108,40),architecture_category.bind(g,category))
+			if not g.buttons.has(id):
+				g.add_button(g.palette,id,category,Rect2(16,450+index*46,108,40),architecture_category.bind(g,category))
+				g.buttons[id].set_meta("architect_category",true)
 			compact_button(g,g.buttons[id],13);g.UI.architect_selected(g.buttons[id],g.architect_category==category);compact_button(g,g.buttons[id],13,true);g.buttons[id].size=Vector2(108,40);index+=1
 		if g.architect_category!="ゾーン" and g.subtask_choices().is_empty():label(g.colony_panel,"今は使えるものがありません",Vector2(136,12),14)
 		g.ReviewUI.architect_details(g)

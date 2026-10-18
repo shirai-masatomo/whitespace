@@ -511,10 +511,15 @@ func refresh_measured():
 	if item_scroll!=null:architect_scroll[item_scroll.get_meta("category")]=item_scroll.scroll_vertical
 	var roster_scroll=palette.find_child("AnimalScroll",true,false)
 	if roster_scroll!=null:animal_scroll=roster_scroll.scroll_vertical
+	# Stock/job changes refresh item details even during a mouse press. Keep
+	# the fixed category Buttons alive so Godot can complete that same click.
+	var keep_categories=group==0 and world.working() and not field_book and not field_shop and story_modal==""
 	for child in palette.get_children():
+		if keep_categories and child.has_meta("architect_category"):continue
 		palette.remove_child(child)
 		child.queue_free()
 	for id in buttons.keys():
+		if keep_categories and id.begins_with("architect_category_"):continue
 		if not id.begins_with("menu_") and id not in ["pause", "speed", "home", "advance", "retry", "group0", "group1", "group2", "walk", "roles", "commands", "threats"]: buttons.erase(id)
 	buttons.walk.visible = false
 	buttons.commands.visible=world.working() and not field_book and not field_shop

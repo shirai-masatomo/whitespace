@@ -1,0 +1,1854 @@
+{
+  "checks": [
+    {
+      "change_while_held": "none",
+      "passed": true,
+      "point": "(0.04, 0.08)",
+      "same_button": true,
+      "target": "壁と扉",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "none",
+      "passed": true,
+      "point": "(0.5, 0.08)",
+      "same_button": true,
+      "target": "壁と扉",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "none",
+      "passed": true,
+      "point": "(0.96, 0.08)",
+      "same_button": true,
+      "target": "壁と扉",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "none",
+      "passed": true,
+      "point": "(0.04, 0.5)",
+      "same_button": true,
+      "target": "壁と扉",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "none",
+      "passed": true,
+      "point": "(0.5, 0.5)",
+      "same_button": true,
+      "target": "壁と扉",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "none",
+      "passed": true,
+      "point": "(0.96, 0.5)",
+      "same_button": true,
+      "target": "壁と扉",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "none",
+      "passed": true,
+      "point": "(0.04, 0.92)",
+      "same_button": true,
+      "target": "壁と扉",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "none",
+      "passed": true,
+      "point": "(0.5, 0.92)",
+      "same_button": true,
+      "target": "壁と扉",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "none",
+      "passed": true,
+      "point": "(0.96, 0.92)",
+      "same_button": true,
+      "target": "壁と扉",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "stock",
+      "passed": true,
+      "point": "(0.04, 0.08)",
+      "same_button": true,
+      "target": "壁と扉",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "stock",
+      "passed": true,
+      "point": "(0.5, 0.08)",
+      "same_button": true,
+      "target": "壁と扉",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "stock",
+      "passed": true,
+      "point": "(0.96, 0.08)",
+      "same_button": true,
+      "target": "壁と扉",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "stock",
+      "passed": true,
+      "point": "(0.04, 0.5)",
+      "same_button": true,
+      "target": "壁と扉",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "stock",
+      "passed": true,
+      "point": "(0.5, 0.5)",
+      "same_button": true,
+      "target": "壁と扉",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "stock",
+      "passed": true,
+      "point": "(0.96, 0.5)",
+      "same_button": true,
+      "target": "壁と扉",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "stock",
+      "passed": true,
+      "point": "(0.04, 0.92)",
+      "same_button": true,
+      "target": "壁と扉",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "stock",
+      "passed": true,
+      "point": "(0.5, 0.92)",
+      "same_button": true,
+      "target": "壁と扉",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "stock",
+      "passed": true,
+      "point": "(0.96, 0.92)",
+      "same_button": true,
+      "target": "壁と扉",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "job",
+      "passed": true,
+      "point": "(0.04, 0.08)",
+      "same_button": true,
+      "target": "壁と扉",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "job",
+      "passed": true,
+      "point": "(0.5, 0.08)",
+      "same_button": true,
+      "target": "壁と扉",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "job",
+      "passed": true,
+      "point": "(0.96, 0.08)",
+      "same_button": true,
+      "target": "壁と扉",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "job",
+      "passed": true,
+      "point": "(0.04, 0.5)",
+      "same_button": true,
+      "target": "壁と扉",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "job",
+      "passed": true,
+      "point": "(0.5, 0.5)",
+      "same_button": true,
+      "target": "壁と扉",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "job",
+      "passed": true,
+      "point": "(0.96, 0.5)",
+      "same_button": true,
+      "target": "壁と扉",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "job",
+      "passed": true,
+      "point": "(0.04, 0.92)",
+      "same_button": true,
+      "target": "壁と扉",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "job",
+      "passed": true,
+      "point": "(0.5, 0.92)",
+      "same_button": true,
+      "target": "壁と扉",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "job",
+      "passed": true,
+      "point": "(0.96, 0.92)",
+      "same_button": true,
+      "target": "壁と扉",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "none",
+      "passed": true,
+      "point": "(0.04, 0.08)",
+      "same_button": true,
+      "target": "床",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "none",
+      "passed": true,
+      "point": "(0.5, 0.08)",
+      "same_button": true,
+      "target": "床",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "none",
+      "passed": true,
+      "point": "(0.96, 0.08)",
+      "same_button": true,
+      "target": "床",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "none",
+      "passed": true,
+      "point": "(0.04, 0.5)",
+      "same_button": true,
+      "target": "床",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "none",
+      "passed": true,
+      "point": "(0.5, 0.5)",
+      "same_button": true,
+      "target": "床",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "none",
+      "passed": true,
+      "point": "(0.96, 0.5)",
+      "same_button": true,
+      "target": "床",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "none",
+      "passed": true,
+      "point": "(0.04, 0.92)",
+      "same_button": true,
+      "target": "床",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "none",
+      "passed": true,
+      "point": "(0.5, 0.92)",
+      "same_button": true,
+      "target": "床",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "none",
+      "passed": true,
+      "point": "(0.96, 0.92)",
+      "same_button": true,
+      "target": "床",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "stock",
+      "passed": true,
+      "point": "(0.04, 0.08)",
+      "same_button": true,
+      "target": "床",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "stock",
+      "passed": true,
+      "point": "(0.5, 0.08)",
+      "same_button": true,
+      "target": "床",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "stock",
+      "passed": true,
+      "point": "(0.96, 0.08)",
+      "same_button": true,
+      "target": "床",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "stock",
+      "passed": true,
+      "point": "(0.04, 0.5)",
+      "same_button": true,
+      "target": "床",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "stock",
+      "passed": true,
+      "point": "(0.5, 0.5)",
+      "same_button": true,
+      "target": "床",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "stock",
+      "passed": true,
+      "point": "(0.96, 0.5)",
+      "same_button": true,
+      "target": "床",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "stock",
+      "passed": true,
+      "point": "(0.04, 0.92)",
+      "same_button": true,
+      "target": "床",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "stock",
+      "passed": true,
+      "point": "(0.5, 0.92)",
+      "same_button": true,
+      "target": "床",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "stock",
+      "passed": true,
+      "point": "(0.96, 0.92)",
+      "same_button": true,
+      "target": "床",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "job",
+      "passed": true,
+      "point": "(0.04, 0.08)",
+      "same_button": true,
+      "target": "床",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "job",
+      "passed": true,
+      "point": "(0.5, 0.08)",
+      "same_button": true,
+      "target": "床",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "job",
+      "passed": true,
+      "point": "(0.96, 0.08)",
+      "same_button": true,
+      "target": "床",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "job",
+      "passed": true,
+      "point": "(0.04, 0.5)",
+      "same_button": true,
+      "target": "床",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "job",
+      "passed": true,
+      "point": "(0.5, 0.5)",
+      "same_button": true,
+      "target": "床",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "job",
+      "passed": true,
+      "point": "(0.96, 0.5)",
+      "same_button": true,
+      "target": "床",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "job",
+      "passed": true,
+      "point": "(0.04, 0.92)",
+      "same_button": true,
+      "target": "床",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "job",
+      "passed": true,
+      "point": "(0.5, 0.92)",
+      "same_button": true,
+      "target": "床",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "job",
+      "passed": true,
+      "point": "(0.96, 0.92)",
+      "same_button": true,
+      "target": "床",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "none",
+      "passed": true,
+      "point": "(0.04, 0.08)",
+      "same_button": true,
+      "target": "設置",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "none",
+      "passed": true,
+      "point": "(0.5, 0.08)",
+      "same_button": true,
+      "target": "設置",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "none",
+      "passed": true,
+      "point": "(0.96, 0.08)",
+      "same_button": true,
+      "target": "設置",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "none",
+      "passed": true,
+      "point": "(0.04, 0.5)",
+      "same_button": true,
+      "target": "設置",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "none",
+      "passed": true,
+      "point": "(0.5, 0.5)",
+      "same_button": true,
+      "target": "設置",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "none",
+      "passed": true,
+      "point": "(0.96, 0.5)",
+      "same_button": true,
+      "target": "設置",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "none",
+      "passed": true,
+      "point": "(0.04, 0.92)",
+      "same_button": true,
+      "target": "設置",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "none",
+      "passed": true,
+      "point": "(0.5, 0.92)",
+      "same_button": true,
+      "target": "設置",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "none",
+      "passed": true,
+      "point": "(0.96, 0.92)",
+      "same_button": true,
+      "target": "設置",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "stock",
+      "passed": true,
+      "point": "(0.04, 0.08)",
+      "same_button": true,
+      "target": "設置",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "stock",
+      "passed": true,
+      "point": "(0.5, 0.08)",
+      "same_button": true,
+      "target": "設置",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "stock",
+      "passed": true,
+      "point": "(0.96, 0.08)",
+      "same_button": true,
+      "target": "設置",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "stock",
+      "passed": true,
+      "point": "(0.04, 0.5)",
+      "same_button": true,
+      "target": "設置",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "stock",
+      "passed": true,
+      "point": "(0.5, 0.5)",
+      "same_button": true,
+      "target": "設置",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "stock",
+      "passed": true,
+      "point": "(0.96, 0.5)",
+      "same_button": true,
+      "target": "設置",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "stock",
+      "passed": true,
+      "point": "(0.04, 0.92)",
+      "same_button": true,
+      "target": "設置",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "stock",
+      "passed": true,
+      "point": "(0.5, 0.92)",
+      "same_button": true,
+      "target": "設置",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "stock",
+      "passed": true,
+      "point": "(0.96, 0.92)",
+      "same_button": true,
+      "target": "設置",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "job",
+      "passed": true,
+      "point": "(0.04, 0.08)",
+      "same_button": true,
+      "target": "設置",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "job",
+      "passed": true,
+      "point": "(0.5, 0.08)",
+      "same_button": true,
+      "target": "設置",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "job",
+      "passed": true,
+      "point": "(0.96, 0.08)",
+      "same_button": true,
+      "target": "設置",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "job",
+      "passed": true,
+      "point": "(0.04, 0.5)",
+      "same_button": true,
+      "target": "設置",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "job",
+      "passed": true,
+      "point": "(0.5, 0.5)",
+      "same_button": true,
+      "target": "設置",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "job",
+      "passed": true,
+      "point": "(0.96, 0.5)",
+      "same_button": true,
+      "target": "設置",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "job",
+      "passed": true,
+      "point": "(0.04, 0.92)",
+      "same_button": true,
+      "target": "設置",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "job",
+      "passed": true,
+      "point": "(0.5, 0.92)",
+      "same_button": true,
+      "target": "設置",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "job",
+      "passed": true,
+      "point": "(0.96, 0.92)",
+      "same_button": true,
+      "target": "設置",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "none",
+      "passed": true,
+      "point": "(0.04, 0.08)",
+      "same_button": true,
+      "target": "ゾーン",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "none",
+      "passed": true,
+      "point": "(0.5, 0.08)",
+      "same_button": true,
+      "target": "ゾーン",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "none",
+      "passed": true,
+      "point": "(0.96, 0.08)",
+      "same_button": true,
+      "target": "ゾーン",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "none",
+      "passed": true,
+      "point": "(0.04, 0.5)",
+      "same_button": true,
+      "target": "ゾーン",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "none",
+      "passed": true,
+      "point": "(0.5, 0.5)",
+      "same_button": true,
+      "target": "ゾーン",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "none",
+      "passed": true,
+      "point": "(0.96, 0.5)",
+      "same_button": true,
+      "target": "ゾーン",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "none",
+      "passed": true,
+      "point": "(0.04, 0.92)",
+      "same_button": true,
+      "target": "ゾーン",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "none",
+      "passed": true,
+      "point": "(0.5, 0.92)",
+      "same_button": true,
+      "target": "ゾーン",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "none",
+      "passed": true,
+      "point": "(0.96, 0.92)",
+      "same_button": true,
+      "target": "ゾーン",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "stock",
+      "passed": true,
+      "point": "(0.04, 0.08)",
+      "same_button": true,
+      "target": "ゾーン",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "stock",
+      "passed": true,
+      "point": "(0.5, 0.08)",
+      "same_button": true,
+      "target": "ゾーン",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "stock",
+      "passed": true,
+      "point": "(0.96, 0.08)",
+      "same_button": true,
+      "target": "ゾーン",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "stock",
+      "passed": true,
+      "point": "(0.04, 0.5)",
+      "same_button": true,
+      "target": "ゾーン",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "stock",
+      "passed": true,
+      "point": "(0.5, 0.5)",
+      "same_button": true,
+      "target": "ゾーン",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "stock",
+      "passed": true,
+      "point": "(0.96, 0.5)",
+      "same_button": true,
+      "target": "ゾーン",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "stock",
+      "passed": true,
+      "point": "(0.04, 0.92)",
+      "same_button": true,
+      "target": "ゾーン",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "stock",
+      "passed": true,
+      "point": "(0.5, 0.92)",
+      "same_button": true,
+      "target": "ゾーン",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "stock",
+      "passed": true,
+      "point": "(0.96, 0.92)",
+      "same_button": true,
+      "target": "ゾーン",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "job",
+      "passed": true,
+      "point": "(0.04, 0.08)",
+      "same_button": true,
+      "target": "ゾーン",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "job",
+      "passed": true,
+      "point": "(0.5, 0.08)",
+      "same_button": true,
+      "target": "ゾーン",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "job",
+      "passed": true,
+      "point": "(0.96, 0.08)",
+      "same_button": true,
+      "target": "ゾーン",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "job",
+      "passed": true,
+      "point": "(0.04, 0.5)",
+      "same_button": true,
+      "target": "ゾーン",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "job",
+      "passed": true,
+      "point": "(0.5, 0.5)",
+      "same_button": true,
+      "target": "ゾーン",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "job",
+      "passed": true,
+      "point": "(0.96, 0.5)",
+      "same_button": true,
+      "target": "ゾーン",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "job",
+      "passed": true,
+      "point": "(0.04, 0.92)",
+      "same_button": true,
+      "target": "ゾーン",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "job",
+      "passed": true,
+      "point": "(0.5, 0.92)",
+      "same_button": true,
+      "target": "ゾーン",
+      "window": "(1280, 800)"
+    },
+    {
+      "change_while_held": "job",
+      "passed": true,
+      "point": "(0.96, 0.92)",
+      "same_button": true,
+      "target": "ゾーン",
+      "window": "(1280, 800)"
+    },
+    {
+      "check": "Exactly four category controls after repeated refresh",
+      "passed": true
+    },
+    {
+      "check": "Refresh preserves instance and geometry: 壁と扉",
+      "passed": true
+    },
+    {
+      "check": "No duplicate category callback: 壁と扉",
+      "passed": true
+    },
+    {
+      "check": "Refresh preserves instance and geometry: 床",
+      "passed": true
+    },
+    {
+      "check": "No duplicate category callback: 床",
+      "passed": true
+    },
+    {
+      "check": "Refresh preserves instance and geometry: 設置",
+      "passed": true
+    },
+    {
+      "check": "No duplicate category callback: 設置",
+      "passed": true
+    },
+    {
+      "check": "Refresh preserves instance and geometry: ゾーン",
+      "passed": true
+    },
+    {
+      "check": "No duplicate category callback: ゾーン",
+      "passed": true
+    },
+    {
+      "check": "Stock/details still refresh while category controls are retained",
+      "passed": true
+    },
+    {
+      "check": "Releasing outside the category cancels selection",
+      "passed": true
+    },
+    {
+      "check": "Disabled category does not activate",
+      "passed": true
+    },
+    {
+      "check": "Right click removes category controls and cancels held press",
+      "passed": true
+    },
+    {
+      "check": "Re-entering architect creates fresh controls once",
+      "passed": true
+    },
+    {
+      "check": "No invisible category controls after mode change",
+      "passed": true
+    },
+    {
+      "change_while_held": "none",
+      "passed": true,
+      "point": "(0.04, 0.08)",
+      "same_button": true,
+      "target": "壁と扉",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "none",
+      "passed": true,
+      "point": "(0.5, 0.08)",
+      "same_button": true,
+      "target": "壁と扉",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "none",
+      "passed": true,
+      "point": "(0.96, 0.08)",
+      "same_button": true,
+      "target": "壁と扉",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "none",
+      "passed": true,
+      "point": "(0.04, 0.5)",
+      "same_button": true,
+      "target": "壁と扉",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "none",
+      "passed": true,
+      "point": "(0.5, 0.5)",
+      "same_button": true,
+      "target": "壁と扉",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "none",
+      "passed": true,
+      "point": "(0.96, 0.5)",
+      "same_button": true,
+      "target": "壁と扉",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "none",
+      "passed": true,
+      "point": "(0.04, 0.92)",
+      "same_button": true,
+      "target": "壁と扉",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "none",
+      "passed": true,
+      "point": "(0.5, 0.92)",
+      "same_button": true,
+      "target": "壁と扉",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "none",
+      "passed": true,
+      "point": "(0.96, 0.92)",
+      "same_button": true,
+      "target": "壁と扉",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "stock",
+      "passed": true,
+      "point": "(0.04, 0.08)",
+      "same_button": true,
+      "target": "壁と扉",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "stock",
+      "passed": true,
+      "point": "(0.5, 0.08)",
+      "same_button": true,
+      "target": "壁と扉",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "stock",
+      "passed": true,
+      "point": "(0.96, 0.08)",
+      "same_button": true,
+      "target": "壁と扉",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "stock",
+      "passed": true,
+      "point": "(0.04, 0.5)",
+      "same_button": true,
+      "target": "壁と扉",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "stock",
+      "passed": true,
+      "point": "(0.5, 0.5)",
+      "same_button": true,
+      "target": "壁と扉",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "stock",
+      "passed": true,
+      "point": "(0.96, 0.5)",
+      "same_button": true,
+      "target": "壁と扉",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "stock",
+      "passed": true,
+      "point": "(0.04, 0.92)",
+      "same_button": true,
+      "target": "壁と扉",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "stock",
+      "passed": true,
+      "point": "(0.5, 0.92)",
+      "same_button": true,
+      "target": "壁と扉",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "stock",
+      "passed": true,
+      "point": "(0.96, 0.92)",
+      "same_button": true,
+      "target": "壁と扉",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "job",
+      "passed": true,
+      "point": "(0.04, 0.08)",
+      "same_button": true,
+      "target": "壁と扉",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "job",
+      "passed": true,
+      "point": "(0.5, 0.08)",
+      "same_button": true,
+      "target": "壁と扉",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "job",
+      "passed": true,
+      "point": "(0.96, 0.08)",
+      "same_button": true,
+      "target": "壁と扉",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "job",
+      "passed": true,
+      "point": "(0.04, 0.5)",
+      "same_button": true,
+      "target": "壁と扉",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "job",
+      "passed": true,
+      "point": "(0.5, 0.5)",
+      "same_button": true,
+      "target": "壁と扉",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "job",
+      "passed": true,
+      "point": "(0.96, 0.5)",
+      "same_button": true,
+      "target": "壁と扉",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "job",
+      "passed": true,
+      "point": "(0.04, 0.92)",
+      "same_button": true,
+      "target": "壁と扉",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "job",
+      "passed": true,
+      "point": "(0.5, 0.92)",
+      "same_button": true,
+      "target": "壁と扉",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "job",
+      "passed": true,
+      "point": "(0.96, 0.92)",
+      "same_button": true,
+      "target": "壁と扉",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "none",
+      "passed": true,
+      "point": "(0.04, 0.08)",
+      "same_button": true,
+      "target": "床",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "none",
+      "passed": true,
+      "point": "(0.5, 0.08)",
+      "same_button": true,
+      "target": "床",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "none",
+      "passed": true,
+      "point": "(0.96, 0.08)",
+      "same_button": true,
+      "target": "床",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "none",
+      "passed": true,
+      "point": "(0.04, 0.5)",
+      "same_button": true,
+      "target": "床",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "none",
+      "passed": true,
+      "point": "(0.5, 0.5)",
+      "same_button": true,
+      "target": "床",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "none",
+      "passed": true,
+      "point": "(0.96, 0.5)",
+      "same_button": true,
+      "target": "床",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "none",
+      "passed": true,
+      "point": "(0.04, 0.92)",
+      "same_button": true,
+      "target": "床",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "none",
+      "passed": true,
+      "point": "(0.5, 0.92)",
+      "same_button": true,
+      "target": "床",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "none",
+      "passed": true,
+      "point": "(0.96, 0.92)",
+      "same_button": true,
+      "target": "床",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "stock",
+      "passed": true,
+      "point": "(0.04, 0.08)",
+      "same_button": true,
+      "target": "床",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "stock",
+      "passed": true,
+      "point": "(0.5, 0.08)",
+      "same_button": true,
+      "target": "床",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "stock",
+      "passed": true,
+      "point": "(0.96, 0.08)",
+      "same_button": true,
+      "target": "床",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "stock",
+      "passed": true,
+      "point": "(0.04, 0.5)",
+      "same_button": true,
+      "target": "床",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "stock",
+      "passed": true,
+      "point": "(0.5, 0.5)",
+      "same_button": true,
+      "target": "床",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "stock",
+      "passed": true,
+      "point": "(0.96, 0.5)",
+      "same_button": true,
+      "target": "床",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "stock",
+      "passed": true,
+      "point": "(0.04, 0.92)",
+      "same_button": true,
+      "target": "床",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "stock",
+      "passed": true,
+      "point": "(0.5, 0.92)",
+      "same_button": true,
+      "target": "床",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "stock",
+      "passed": true,
+      "point": "(0.96, 0.92)",
+      "same_button": true,
+      "target": "床",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "job",
+      "passed": true,
+      "point": "(0.04, 0.08)",
+      "same_button": true,
+      "target": "床",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "job",
+      "passed": true,
+      "point": "(0.5, 0.08)",
+      "same_button": true,
+      "target": "床",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "job",
+      "passed": true,
+      "point": "(0.96, 0.08)",
+      "same_button": true,
+      "target": "床",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "job",
+      "passed": true,
+      "point": "(0.04, 0.5)",
+      "same_button": true,
+      "target": "床",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "job",
+      "passed": true,
+      "point": "(0.5, 0.5)",
+      "same_button": true,
+      "target": "床",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "job",
+      "passed": true,
+      "point": "(0.96, 0.5)",
+      "same_button": true,
+      "target": "床",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "job",
+      "passed": true,
+      "point": "(0.04, 0.92)",
+      "same_button": true,
+      "target": "床",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "job",
+      "passed": true,
+      "point": "(0.5, 0.92)",
+      "same_button": true,
+      "target": "床",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "job",
+      "passed": true,
+      "point": "(0.96, 0.92)",
+      "same_button": true,
+      "target": "床",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "none",
+      "passed": true,
+      "point": "(0.04, 0.08)",
+      "same_button": true,
+      "target": "設置",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "none",
+      "passed": true,
+      "point": "(0.5, 0.08)",
+      "same_button": true,
+      "target": "設置",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "none",
+      "passed": true,
+      "point": "(0.96, 0.08)",
+      "same_button": true,
+      "target": "設置",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "none",
+      "passed": true,
+      "point": "(0.04, 0.5)",
+      "same_button": true,
+      "target": "設置",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "none",
+      "passed": true,
+      "point": "(0.5, 0.5)",
+      "same_button": true,
+      "target": "設置",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "none",
+      "passed": true,
+      "point": "(0.96, 0.5)",
+      "same_button": true,
+      "target": "設置",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "none",
+      "passed": true,
+      "point": "(0.04, 0.92)",
+      "same_button": true,
+      "target": "設置",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "none",
+      "passed": true,
+      "point": "(0.5, 0.92)",
+      "same_button": true,
+      "target": "設置",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "none",
+      "passed": true,
+      "point": "(0.96, 0.92)",
+      "same_button": true,
+      "target": "設置",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "stock",
+      "passed": true,
+      "point": "(0.04, 0.08)",
+      "same_button": true,
+      "target": "設置",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "stock",
+      "passed": true,
+      "point": "(0.5, 0.08)",
+      "same_button": true,
+      "target": "設置",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "stock",
+      "passed": true,
+      "point": "(0.96, 0.08)",
+      "same_button": true,
+      "target": "設置",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "stock",
+      "passed": true,
+      "point": "(0.04, 0.5)",
+      "same_button": true,
+      "target": "設置",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "stock",
+      "passed": true,
+      "point": "(0.5, 0.5)",
+      "same_button": true,
+      "target": "設置",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "stock",
+      "passed": true,
+      "point": "(0.96, 0.5)",
+      "same_button": true,
+      "target": "設置",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "stock",
+      "passed": true,
+      "point": "(0.04, 0.92)",
+      "same_button": true,
+      "target": "設置",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "stock",
+      "passed": true,
+      "point": "(0.5, 0.92)",
+      "same_button": true,
+      "target": "設置",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "stock",
+      "passed": true,
+      "point": "(0.96, 0.92)",
+      "same_button": true,
+      "target": "設置",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "job",
+      "passed": true,
+      "point": "(0.04, 0.08)",
+      "same_button": true,
+      "target": "設置",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "job",
+      "passed": true,
+      "point": "(0.5, 0.08)",
+      "same_button": true,
+      "target": "設置",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "job",
+      "passed": true,
+      "point": "(0.96, 0.08)",
+      "same_button": true,
+      "target": "設置",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "job",
+      "passed": true,
+      "point": "(0.04, 0.5)",
+      "same_button": true,
+      "target": "設置",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "job",
+      "passed": true,
+      "point": "(0.5, 0.5)",
+      "same_button": true,
+      "target": "設置",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "job",
+      "passed": true,
+      "point": "(0.96, 0.5)",
+      "same_button": true,
+      "target": "設置",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "job",
+      "passed": true,
+      "point": "(0.04, 0.92)",
+      "same_button": true,
+      "target": "設置",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "job",
+      "passed": true,
+      "point": "(0.5, 0.92)",
+      "same_button": true,
+      "target": "設置",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "job",
+      "passed": true,
+      "point": "(0.96, 0.92)",
+      "same_button": true,
+      "target": "設置",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "none",
+      "passed": true,
+      "point": "(0.04, 0.08)",
+      "same_button": true,
+      "target": "ゾーン",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "none",
+      "passed": true,
+      "point": "(0.5, 0.08)",
+      "same_button": true,
+      "target": "ゾーン",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "none",
+      "passed": true,
+      "point": "(0.96, 0.08)",
+      "same_button": true,
+      "target": "ゾーン",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "none",
+      "passed": true,
+      "point": "(0.04, 0.5)",
+      "same_button": true,
+      "target": "ゾーン",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "none",
+      "passed": true,
+      "point": "(0.5, 0.5)",
+      "same_button": true,
+      "target": "ゾーン",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "none",
+      "passed": true,
+      "point": "(0.96, 0.5)",
+      "same_button": true,
+      "target": "ゾーン",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "none",
+      "passed": true,
+      "point": "(0.04, 0.92)",
+      "same_button": true,
+      "target": "ゾーン",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "none",
+      "passed": true,
+      "point": "(0.5, 0.92)",
+      "same_button": true,
+      "target": "ゾーン",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "none",
+      "passed": true,
+      "point": "(0.96, 0.92)",
+      "same_button": true,
+      "target": "ゾーン",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "stock",
+      "passed": true,
+      "point": "(0.04, 0.08)",
+      "same_button": true,
+      "target": "ゾーン",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "stock",
+      "passed": true,
+      "point": "(0.5, 0.08)",
+      "same_button": true,
+      "target": "ゾーン",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "stock",
+      "passed": true,
+      "point": "(0.96, 0.08)",
+      "same_button": true,
+      "target": "ゾーン",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "stock",
+      "passed": true,
+      "point": "(0.04, 0.5)",
+      "same_button": true,
+      "target": "ゾーン",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "stock",
+      "passed": true,
+      "point": "(0.5, 0.5)",
+      "same_button": true,
+      "target": "ゾーン",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "stock",
+      "passed": true,
+      "point": "(0.96, 0.5)",
+      "same_button": true,
+      "target": "ゾーン",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "stock",
+      "passed": true,
+      "point": "(0.04, 0.92)",
+      "same_button": true,
+      "target": "ゾーン",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "stock",
+      "passed": true,
+      "point": "(0.5, 0.92)",
+      "same_button": true,
+      "target": "ゾーン",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "stock",
+      "passed": true,
+      "point": "(0.96, 0.92)",
+      "same_button": true,
+      "target": "ゾーン",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "job",
+      "passed": true,
+      "point": "(0.04, 0.08)",
+      "same_button": true,
+      "target": "ゾーン",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "job",
+      "passed": true,
+      "point": "(0.5, 0.08)",
+      "same_button": true,
+      "target": "ゾーン",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "job",
+      "passed": true,
+      "point": "(0.96, 0.08)",
+      "same_button": true,
+      "target": "ゾーン",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "job",
+      "passed": true,
+      "point": "(0.04, 0.5)",
+      "same_button": true,
+      "target": "ゾーン",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "job",
+      "passed": true,
+      "point": "(0.5, 0.5)",
+      "same_button": true,
+      "target": "ゾーン",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "job",
+      "passed": true,
+      "point": "(0.96, 0.5)",
+      "same_button": true,
+      "target": "ゾーン",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "job",
+      "passed": true,
+      "point": "(0.04, 0.92)",
+      "same_button": true,
+      "target": "ゾーン",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "job",
+      "passed": true,
+      "point": "(0.5, 0.92)",
+      "same_button": true,
+      "target": "ゾーン",
+      "window": "(1600, 1000)"
+    },
+    {
+      "change_while_held": "job",
+      "passed": true,
+      "point": "(0.96, 0.92)",
+      "same_button": true,
+      "target": "ゾーン",
+      "window": "(1600, 1000)"
+    },
+    {
+      "check": "Exactly four category controls after repeated refresh",
+      "passed": true
+    },
+    {
+      "check": "Refresh preserves instance and geometry: 壁と扉",
+      "passed": true
+    },
+    {
+      "check": "No duplicate category callback: 壁と扉",
+      "passed": true
+    },
+    {
+      "check": "Refresh preserves instance and geometry: 床",
+      "passed": true
+    },
+    {
+      "check": "No duplicate category callback: 床",
+      "passed": true
+    },
+    {
+      "check": "Refresh preserves instance and geometry: 設置",
+      "passed": true
+    },
+    {
+      "check": "No duplicate category callback: 設置",
+      "passed": true
+    },
+    {
+      "check": "Refresh preserves instance and geometry: ゾーン",
+      "passed": true
+    },
+    {
+      "check": "No duplicate category callback: ゾーン",
+      "passed": true
+    },
+    {
+      "check": "Stock/details still refresh while category controls are retained",
+      "passed": true
+    },
+    {
+      "check": "Releasing outside the category cancels selection",
+      "passed": true
+    },
+    {
+      "check": "Disabled category does not activate",
+      "passed": true
+    },
+    {
+      "check": "Right click removes category controls and cancels held press",
+      "passed": true
+    },
+    {
+      "check": "Re-entering architect creates fresh controls once",
+      "passed": true
+    },
+    {
+      "check": "No invisible category controls after mode change",
+      "passed": true
+    }
+  ],
+  "count": 246,
+  "failed": 0
+}
