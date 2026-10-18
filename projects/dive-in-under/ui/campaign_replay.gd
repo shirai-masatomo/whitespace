@@ -130,6 +130,7 @@ static func run(game: Control) -> void:
 	if not game.smoke_check(uid in game.campaign.inventory and not uid in game.campaign.warehouse,"Warehouse withdraw input"): return
 	await click(game,"deposit",{"uid":uid})
 	if not game.smoke_check(uid in game.campaign.warehouse and not uid in game.campaign.inventory,"Warehouse deposit input"): return
+	await game.click_control(game.find_button(game.screen,"戻る"))
 	await game.click_control(game.play_buttons.title); await game.click_control(game.continue_button)
 	if not game.smoke_check(game.campaign.phase=="town" and game.campaign.highest_floor==11,"Saved clear/town reopened"): return
 	if rendered: await game.capture("18-campaign-clear-town.png")
