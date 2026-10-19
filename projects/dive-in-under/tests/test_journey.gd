@@ -59,17 +59,22 @@ func _initialize() -> void:
 	check(act(field,"round")==field,"event cannot advance battle")
 	field=act(field,"continue_event"); check(field.phase=="explore","event returns")
 	# Small later-area fixture uses the same node lookup, receipt and event logic; never shipped as public content.
-	var later: Dictionary=cfg.journey.duplicate(true); later.public_max_floor=12
-	for n in [11,12]:
-		var node: Dictionary=cfg.journey.nodes[1 if n==11 else 2].duplicate(true); node.id="test-%d"%n; node.floor=n; later.nodes.append(node)
-	later.nodes[10].rewards={"I11":100}; later.nodes[11].events=["EV05"]
+	var later: Dictionary=cfg.journey.duplicate(true); later.public_max_floor=13
+	var extension: Dictionary=JSON.parse_string(FileAccess.get_file_as_string("res://data/scenarios/journey-extension.json"))
+	later.nodes.append_array(extension.nodes)
 	check(E.Journey.validate_definition(later,data,cfg)=="","later content references")
+	var bad: Dictionary=later.duplicate(true); bad.nodes[11].floor=11
+	check(E.Journey.validate_definition(bad,data,cfg)!="","duplicate JSON floor rejected")
+	bad=later.duplicate(true); bad.nodes[10].rewards={"missing":100}
+	check(E.Journey.validate_definition(bad,data,cfg)!="","unknown future reward rejected")
 	var old: Dictionary=cfg.journey; cfg.journey=later
 	var future:=initial(); future.phase="explore"; future.trips=1; future.floor=10; future.highest_floor=10
 	future=act(future,"descend"); check(future.phase=="treasure" and future.pending_rewards[0].id=="I11","later treasure uses common flow")
 	future=act(future,"open_chest"); future=act(future,"claim_reward",{"token":future.pending_rewards[0].token}); future=act(future,"continue_rewards"); future=act(future,"descend")
 	future=act(future,"journey_event",{"choice":"take"}); check(future.phase=="event_result" and future.pending_rewards[0].id=="I10","later event uses common flow")
-	future=act(future,"continue_event"); cfg.journey=old
+	future=act(future,"continue_event"); future=act(future,"claim_reward",{"token":future.pending_rewards[0].token}); future=act(future,"continue_rewards"); future=act(future,"descend")
+	check(future.phase=="battle" and future.battle.enemy_id=="E08" and future.battle.enemy_level==8,"later enemy uses unchanged battle flow")
+	cfg.journey=old
 	# One fresh, deterministic route with normal actions and no prepared growth/gear.
 	var normal:=initial(); normal.seed=10000
 	var plan: Array=[]; var cleared_trip:=0

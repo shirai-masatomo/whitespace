@@ -2,7 +2,7 @@ extends ScrollContainer
 var view: Control
 var destination: String
 func _can_drop_data(_at: Vector2, value: Variant) -> bool:
-	return view.accepts(value,destination)
+	return view.accepts(value,destination,true)
 func _drop_data(_at: Vector2, value: Variant) -> void:
 	view.call_deferred("move_item",value.uid,value.source,destination,int(value.revision))
 func _notification(what: int) -> void:

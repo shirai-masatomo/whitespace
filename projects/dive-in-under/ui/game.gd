@@ -200,6 +200,7 @@ func perform(action: String, args: Dictionary, revision: int) -> void:
 		warehouse_state.source={"deposit":"warehouse","withdraw":"inventory","to_cloth":"cloth"}[action]
 		notice={"deposit":"倉庫へ預けました。","withdraw":"バックパックへ引き出しました。","to_cloth":"父親の風呂敷へ移しました。"}[action]
 	if action=="organize": notice="選択した順序に整理しました。"
+	if action=="open_chest": preload("res://ui/journey_sound.gd").play(self,330)
 	if action=="transfer": notice="%sへ移しました。×1 / 個体・耐久を保持"%{"warehouse":"倉庫","inventory":"バックパック","cloth":"父親の風呂敷"}[args.destination]
 	if action in ["claim_reward","exchange_reward","abandon_rewards"]: reward_confirmation=""
 	if action in ["equip","unequip"]: equipment_candidate=""

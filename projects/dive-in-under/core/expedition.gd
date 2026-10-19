@@ -242,7 +242,7 @@ static func step_battle(s: Dictionary, data: Dictionary, cfg: Dictionary) -> voi
 			if draw(s,"loot",100) < drops[id]:
 				if Journey.active(s): Journey.add_reward(s,id)
 				else: add_item(s,id)
-				note(s,"発見："+cfg.items[id].name)
+				note(s,("発見：" if Journey.active(s) else "入手：")+cfg.items[id].name)
 		s.phase = "explore"
 		s.battle = {}
 		if Journey.active(s):
@@ -346,7 +346,7 @@ static func act(previous: Dictionary, action: String, expected_revision: int, ar
 			if Journey.active(s) and s.phase=="event_result":
 				s.phase="explore" if s.pending_rewards.is_empty() else "reward"; s.reward_return="explore"; s.reward_origin="イベントの獲得品"; s.last_reward={}; s.event_result={}; changed=true
 		"event":
-			if s.phase=="event" and args.get("choice","") in ["accept","skip"]:
+			if not Journey.active(s) and s.phase=="event" and args.get("choice","") in ["accept","skip"]:
 				var event: Dictionary = cfg.events[s.event]
 				if args.choice == "accept":
 					match event.effect:

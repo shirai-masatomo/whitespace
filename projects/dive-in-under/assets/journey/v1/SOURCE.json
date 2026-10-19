@@ -1,0 +1,28 @@
+{
+  "asset": "treasure-chest-states.png",
+  "sha256": "a0da7c32057d7b807de21278dc624b1f205505297791b74ad0b65cc14375400e",
+  "dimensions": [
+    1774,
+    887
+  ],
+  "generated_with": "built-in image_gen",
+  "use": "Independent transparent closed/open chest, not a game screenshot",
+  "pixel_edits": false,
+  "regions": {
+    "closed": [
+      0,
+      0,
+      887,
+      887
+    ],
+    "opened": [
+      887,
+      0,
+      887,
+      887
+    ]
+  },
+  "original": "C:\\Users\\masat\\.codex\\generated_images\\01a14ded-46e9-77e1-b200-5cf96c845474\\exec-d7b2fcb8-d614-416e-9210-42d6ad1ec0e8.png",
+  "adoption": "new implementation asset; final user visual evaluation pending",
+  "prompt": "Use case: stylized-concept. Asset type: one two-frame sprite sheet for Dive In Under, a detailed 2D pixel-art cave dungeon RPG. Transparent RGBA background. A single modest old wooden dungeon treasure chest with aged brass bands, hinges and a small central latch, warm lantern highlights, dark brown oak and muted teal shadows. MATCH a richly detailed fantasy pixel-art game with parchment, aged brass UI and teal cave scenery. Two equally sized square cells side by side in a wide sheet: LEFT the chest CLOSED; RIGHT the exact same chest OPEN with lid raised, empty dark interior and a restrained warm golden light inside. Same scale, same front three-quarter view, same baseline, matching wood details and brass construction. Each chest fully contained in its own half with at least 12 percent transparent padding, no overlap between cells. Crisp controlled pixel clusters and readable silhouette, suitable to reduce to approximately 150x150 displayed pixels, no smooth 3D render, no cartoon face. No coins flying out, no particles outside the chest, no scenery, no ground plane, no text, no letters, no watermark, no UI. Make a professional original reusable game sprite sheet, genuinely transparent around both chests."
+}

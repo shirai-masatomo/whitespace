@@ -4,6 +4,11 @@ const UI=preload("res://ui/integration_review.gd")
 const Replay=preload("res://ui/campaign_replay.gd")
 static func wait(game: Control, duration: float=0.08) -> void:
 	await game.get_tree().create_timer(duration).timeout
+static func motion_shot(game: Control, filename: String) -> void:
+	await RenderingServer.frame_post_draw
+	var image: Image=game.get_viewport().get_texture().get_image()
+	if not game.smoke_check(image.save_png(game.smoke_dir.path_join(filename+".png"))==OK,"Motion frame saved"): return
+	UI.write(game,{"run_id":game.smoke_run_id,"ticks_ms":Time.get_ticks_msec(),"presenting":game.presenting,"visual_battle":game.presentation_battle,"stage":game.play_view.stage.visual_audit()},filename+"-visual.json")
 static func checkpoint(game: Control, value: String) -> void:
 	UI.write(game,{"stage":value,"run_id":game.smoke_run_id,"revision":game.campaign.get("revision",0),"phase":game.campaign.get("phase","")},"progress.json")
 static func key(game: Control, code: Key, echo: bool=false) -> void:
@@ -74,9 +79,9 @@ static func run(game: Control) -> void:
 				await game.get_tree().process_frame
 			if not game.smoke_check(game.campaign.revision==int(expected.revision),"Exactly one normal Timer round"): return
 			if not seen.has("impact"):
-				await wait(game,0.06); await game.capture("04-attack-before-impact.png")
-				await wait(game,0.04); await game.capture("04-attack-impact.png")
-				await wait(game,0.05); await game.capture("04-attack-return.png"); seen.impact=true
+				await motion_shot(game,"04-attack-before-impact")
+				await wait(game,0.085); await motion_shot(game,"04-attack-impact")
+				await wait(game,0.085); await motion_shot(game,"04-attack-return"); seen.impact=true
 			if not paused_tested and game.campaign.phase=="battle":
 				await key(game,KEY_SPACE)
 				var frozen: String=Replay.hash_state(game.campaign)
@@ -147,10 +152,27 @@ static func run(game: Control) -> void:
 	await command(game,"exchange_reward",{"confirmed":true,"replace_uid":uid,"token":token})
 	if not game.smoke_check(game.campaign.inventory.size()==15 and game.campaign.pending_rewards.is_empty() and not game.campaign.items.has(uid) and E.validate(game.campaign,game.data,game.cfg)=="","Confirmed full bag exchange is atomic"): return
 	await command(game,"continue_rewards")
+	checkpoint(game,"fixture-later-data")
+	var normal_cfg: Dictionary=game.cfg.journey; var prior_state: Dictionary=game.campaign.duplicate(true)
+	var extension_path: String=""
+	for arg in OS.get_cmdline_user_args():
+		if arg.begins_with("--journey-extension="): extension_path=arg.trim_prefix("--journey-extension=")
+	var extension: Dictionary=JSON.parse_string(FileAccess.get_file_as_string(extension_path))
+	game.cfg.journey=normal_cfg.duplicate(true); game.cfg.journey.public_max_floor=13; game.cfg.journey.nodes.append_array(extension.nodes)
+	game.campaign=E.fresh(game.cfg,123); E.Journey.enable(game.campaign); game.campaign.phase="explore"; game.campaign.floor=10; game.campaign.highest_floor=10
+	game.campaign.trips=1; game.auto_play=false; game.field_equipment=false; game.show_campaign()
+	await command(game,"descend")
+	if not game.smoke_check(game.campaign.phase=="treasure" and game.dungeon_music.playing and game.dungeon_music.stream.loop,"Later data changes background/BGM using same screen"): return
+	await game.capture("fixture-15-later-treasure.png")
+	await command(game,"open_chest"); await command(game,"claim_reward",{"token":game.campaign.pending_rewards[0].token}); await command(game,"continue_rewards"); await command(game,"descend")
+	await command(game,"journey_event",{"choice":"take"}); await command(game,"continue_event"); await command(game,"claim_reward",{"token":game.campaign.pending_rewards[0].token}); await command(game,"continue_rewards"); await command(game,"descend")
+	if not game.smoke_check(game.campaign.phase=="battle" and game.campaign.battle.enemy_id=="E08" and game.campaign.battle.enemy_level==8,"Later enemy/reward/event use common transitions"): return
+	await game.capture("fixture-16-later-enemy.png")
+	game.cfg.journey=normal_cfg; game.campaign=prior_state; game.intro_active=false
 	checkpoint(game,"fixtures-return-reset")
 	game.route_map_open=true; E.finish(game.campaign,"death","固定の敗北遷移確認",game.cfg); game.show_campaign(); await command(game,"town")
 	await key(game,KEY_ESCAPE)
 	if not game.smoke_check(game.title_visible and not game.route_map_open and not game.presenting,"First town Esc, map and presentation reset after defeat"): return
 	var quit: Button=UI.find_nav(game.screen,"quit")
-	quit.pressed.connect(func():UI.write(game,{"complete":true,"rendered":true,"no_save_store":game.save_store==null,"run_id":game.smoke_run_id,"exit_button_pressed":true,"normal_route":normal_result,"fixtures":{"click_select":true,"shift":true,"native_drag":true,"outside_drop":true,"identity_durability":37,"full_receipt":true,"death_reset":true},"seen":seen},"journey-review.json"))
+	quit.pressed.connect(func():UI.write(game,{"complete":true,"rendered":true,"no_save_store":game.save_store==null,"run_id":game.smoke_run_id,"exit_button_pressed":true,"normal_route":normal_result,"fixtures":{"click_select":true,"shift":true,"native_drag":true,"outside_drop":true,"identity_durability":37,"full_receipt":true,"death_reset":true,"later_data":true},"seen":seen},"journey-review.json"))
 	await game.click_control(quit)

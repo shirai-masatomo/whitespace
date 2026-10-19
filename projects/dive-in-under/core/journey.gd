@@ -32,18 +32,19 @@ static func validate_definition(value: Dictionary, data: Dictionary, cfg: Dictio
 	var ids: Array=[]; var floors: Array=[]
 	for n in value.nodes:
 		if not n is Dictionary or not n.has_all(["id","floor","kind","background","bgm"]): return "Invalid node"
-		if n.id in ids or n.floor in floors or not n.kind in ["enemy","boss","treasure","event"]: return "Duplicate or invalid node"
+		if not n.id is String or n.id=="" or not (n.floor is float or n.floor is int) or n.floor!=floorf(n.floor) or n.floor<1 or n.floor>maximum: return "Invalid node identity/floor"
+		if n.id in ids or int(n.floor) in floors or not n.kind in ["enemy","boss","treasure","event"]: return "Duplicate or invalid node"
 		ids.append(n.id); floors.append(int(n.floor))
-		if not n.background in ["cavern","boss"]: return "Unknown background key"
+		if not n.background is String or (not n.background in ["cavern","boss"] and (not ResourceLoader.exists(n.background) or not load(n.background) is Texture2D)): return "Missing background"
 		if n.bgm!="" and not ResourceLoader.exists(n.bgm): return "Missing node BGM"
 		if n.kind in ["enemy","boss"]:
 			if not n.get("enemies") is Dictionary or n.enemies.is_empty() or not n.get("levels") is Array or n.levels.size()!=2 or n.levels[0]<1 or n.levels[1]<n.levels[0]: return "Invalid enemy node"
 			for id in n.enemies:
-				if not data.enemies.has(id) or n.enemies[id]<=0: return "Unknown node enemy"
+				if not data.enemies.has(id) or not positive_weight(n.enemies[id]): return "Unknown node enemy"
 		elif n.kind=="treasure":
 			if not n.get("rewards") is Dictionary or n.rewards.is_empty(): return "Empty treasure"
 			for id in n.rewards:
-				if not cfg.items.has(id) or n.rewards[id]<=0: return "Unknown reward"
+				if not cfg.items.has(id) or not positive_weight(n.rewards[id]): return "Unknown reward"
 		else:
 			if not n.get("events") is Array or n.events.is_empty(): return "Empty events"
 			for id in n.events:
@@ -57,3 +58,6 @@ static func validate_definition(value: Dictionary, data: Dictionary, cfg: Dictio
 			if not choice.has_all(["id","label","effect","result"]) or not choice.effect in ["hp","exp","item","none"]: return "Invalid event choice"
 			if choice.effect=="item" and not cfg.items.has(choice.get("item","")): return "Unknown event reward"
 	return ""
+
+static func positive_weight(value: Variant) -> bool:
+	return (value is float or value is int) and value==floorf(value) and value>0 and value<=100000

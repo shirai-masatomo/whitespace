@@ -14,6 +14,6 @@ func _get_drag_data(_at: Vector2) -> Variant:
 	view.drag_payload=payload
 	return payload
 func _can_drop_data(_at: Vector2, value: Variant) -> bool:
-	return view.accepts(value,source)
+	return view.accepts(value,source,true)
 func _drop_data(_at: Vector2, value: Variant) -> void:
 	view.call_deferred("move_item",value.uid,value.source,source,int(value.revision))

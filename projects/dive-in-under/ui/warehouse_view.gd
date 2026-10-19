@@ -20,6 +20,7 @@ var cloth_scroll: ScrollContainer
 var visible_items: Array=[]
 var drag_payload: Dictionary={}
 var detail_move: Button
+var guide_label: Label
 func _ready() -> void:
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	build()
@@ -158,7 +159,7 @@ func build() -> void:
 	build_details(right)
 	build_actions()
 	var guide:=ColorRect.new(); guide.position=Vector2(16,610); guide.size=Vector2(1248,30); guide.color=Color("10242d"); guide.mouse_filter=Control.MOUSE_FILTER_IGNORE; add_child(guide)
-	label_at(self,game.notice if game.notice!="" else "左クリック：詳細 / Shift＋クリック：倉庫⇔所持品 / ドラッグ：光る収納へ / 1枠1点",Rect2(28,613,1224,24),15,INK)
+	guide_label=label_at(self,game.notice if game.notice!="" else "左クリック：詳細 / Shift＋クリック：倉庫⇔所持品 / ドラッグ：光る収納へ / 1枠1点",Rect2(28,613,1224,24),15,INK)
 	bag_scroll.set_deferred("scroll_vertical",game.warehouse_state.get("bag_scroll",0))
 	grid_scroll.set_deferred("scroll_vertical",game.warehouse_state.get("grid_scroll",0))
 	cloth_scroll.set_deferred("scroll_vertical",game.warehouse_state.get("cloth_scroll",0))
@@ -221,8 +222,11 @@ func build_actions() -> void:
 		icon_at(b,e[3],Rect2(16,8,40,40))
 		b.pressed.connect(remember_scroll)
 		if i==0 and is_instance_valid(detail_move): detail_move.grab_focus()
-func accepts(value: Variant, destination: String) -> bool:
-	return value is Dictionary and value.get("kind")=="dive-item" and value.get("revision")==game.campaign.revision and Storage.reason(game.campaign,value.get("uid",""),value.get("source",""),destination,game.cfg)==""
+func accepts(value: Variant, destination: String, explain: bool=false) -> bool:
+	if not value is Dictionary or value.get("kind")!="dive-item" or value.get("revision")!=game.campaign.revision: return false
+	var reason: String=Storage.reason(game.campaign,value.get("uid",""),value.get("source",""),destination,game.cfg)
+	if explain and is_instance_valid(guide_label): guide_label.text=reason if reason!="" else "離すと%sへ移動します。×1 / 個体・耐久を保持"%{"inventory":"バックパック","warehouse":"倉庫","cloth":"風呂敷"}[destination]
+	return reason==""
 func move_item(uid: String, source: String, destination: String, revision: int) -> void:
 	remember_scroll()
 	game.transfer_item(uid,source,destination,revision)

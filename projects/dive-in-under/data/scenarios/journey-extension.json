@@ -1,0 +1,39 @@
+{
+  "note": "Isolated acceptance data only; not part of the public 1-10F route. Merge these nodes into a copied journey definition.",
+  "nodes": [
+    {
+      "id": "fixture-11",
+      "floor": 11,
+      "kind": "treasure",
+      "background": "res://assets/visual-candidates/v1/dive-boss-gate-cave-candidate-v2.png",
+      "bgm": "res://assets/bgm/adventure_preparation_loop.ogg",
+      "rewards": {
+        "I11": 100
+      }
+    },
+    {
+      "id": "fixture-12",
+      "floor": 12,
+      "kind": "event",
+      "background": "cavern",
+      "bgm": "",
+      "events": [
+        "EV05"
+      ]
+    },
+    {
+      "id": "fixture-13",
+      "floor": 13,
+      "kind": "enemy",
+      "background": "boss",
+      "bgm": "",
+      "enemies": {
+        "E08": 100
+      },
+      "levels": [
+        8,
+        8
+      ]
+    }
+  ]
+}

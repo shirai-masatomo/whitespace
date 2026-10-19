@@ -8,6 +8,7 @@ var scenery: TextureRect
 var hero_art: Sprite2D
 var enemy_art: Sprite2D
 var background_override: String=""
+var effect_playing:=false
 var enemy_id := "E04"
 var hero_alive := true
 var enemy_alive := true
@@ -60,7 +61,7 @@ func _ready() -> void:
 	scenery = TextureRect.new()
 	scenery.show_behind_parent = true
 	scenery.mouse_filter = MOUSE_FILTER_IGNORE
-	scenery.texture = VisualAssets.texture(background_override if background_override!="" else VisualAssets.background_key(floor_number))
+	scenery.texture = VisualAssets.background_texture(background_override if background_override!="" else VisualAssets.background_key(floor_number))
 	scenery.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	scenery.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED if wide_layout else TextureRect.STRETCH_KEEP_ASPECT_COVERED
 	scenery.modulate = VisualAssets.depth_tint(floor_number)
@@ -79,7 +80,7 @@ func set_encounter(value: String, depth: int) -> void:
 	enemy_id = value
 	floor_number = depth
 	if scenery != null:
-		scenery.texture = VisualAssets.texture(VisualAssets.background_key(depth))
+		scenery.texture = VisualAssets.background_texture(background_override if background_override!="" else VisualAssets.background_key(depth))
 		scenery.modulate = VisualAssets.depth_tint(depth)
 		enemy_art.texture = VisualAssets.actor_texture(value)
 		layout_art()
@@ -142,7 +143,7 @@ func visual_audit() -> Dictionary:
 		"composition":"wide-floor-reference-comparison" if wide_layout else "development-tool-layout","background_zoom":1.0 if wide_layout else BACKGROUND_ZOOM,"wide_layout":wide_layout,"global_rect":str(get_global_rect()),"background_aspect":16.0/9.0,
 		"near_hero_foot":[display_foot(hero_position_hint()).x,display_foot(hero_position_hint()).y],
 		"far_enemy_foot":[display_foot(enemy_position_hint()).x,display_foot(enemy_position_hint()).y],"formation_rules":false,
-		"static_only":true,"adoption":"twelve-assets-current-baseline","actors":actors}
+		"static_only":not effect_playing,"motion":"transient-lunge-hit-return" if effect_playing else "rest","adoption":"twelve-assets-current-baseline","actors":actors}
 
 func sprite(pattern: Array, origin: Vector2, pixel: int, _alive: bool) -> void:
 	for y in range(pattern.size()):
@@ -186,6 +187,7 @@ func _draw() -> void:
 	if hero_art == null or hero_art.texture == null: sprite(HERO,display_foot(hero_position_hint())-Vector2(45,HERO.size()*5),5,hero_alive)
 
 func present_event(event: Dictionary, game: Control) -> void:
+	effect_playing=true
 	var actor: Sprite2D=hero_art if event.get("actor","hero")=="hero" else enemy_art
 	var target: Sprite2D=hero_art if event.get("target",event.get("actor","hero"))=="hero" else enemy_art
 	var origin: Vector2=actor.position
@@ -208,4 +210,4 @@ func present_event(event: Dictionary, game: Control) -> void:
 		if event.get("hit",false) or event.type=="status_damage": target.modulate=Color("f39c7d")
 	)
 	tween.tween_property(actor,"position",origin,duration)
-	tween.tween_callback(func(): target.modulate=Color.WHITE)
+	tween.tween_callback(func(): target.modulate=Color.WHITE; effect_playing=false)

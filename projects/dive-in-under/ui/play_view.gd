@@ -152,8 +152,9 @@ func build_exploration() -> void:
 	var journal:=UISkin.panel(self,Rect2(248,522,748,182),"旅の記録")
 	var log:=RichTextLabel.new(); log.position=Vector2(17,51); log.size=Vector2(714,116); log.text="\n".join((game.presentation_journal if game.presenting else s.journal).slice(-8)); log.scroll_following=true; log.add_theme_font_size_override("normal_font_size",17); log.theme=UISkin.scroll_theme(); journal.add_child(log)
 	if game.intro_active and battling:
-		var intro:=UISkin.panel(stage,Rect2(80,170,588,80),"",true)
-		var label:=UISkin.label(intro,("10Fの門番  /  " if s.floor==10 else "遭遇  /  ")+game.display_battle().enemy.name,Rect2(18,15,552,47),27,UISkin.DARK); label.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER
+		var intro:=UISkin.panel(stage,Rect2(310,25,418,75),"",true)
+		intro.z_index=980
+		var label:=UISkin.label(intro,("10Fの門番\n" if s.floor==10 else "遭遇\n")+game.display_battle().enemy.name,Rect2(12,6,394,63),23,UISkin.DARK,true); label.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER
 		intro.modulate.a=0; intro.create_tween().tween_property(intro,"modulate:a",1.0,0.12)
 	if game.route_map_open: open_routes()
 func open_routes() -> void:
@@ -198,7 +199,7 @@ func build_equipment() -> void:
 		var slot: String=E.SLOTS[i]; var uid: String=game.campaign.equipment[slot]
 		var x:=17+(i%2)*265; var y:=61+(i/2)*72
 		var name: String="装備なし" if uid=="" else game.cfg.items[game.campaign.items[uid]].name
-		var b:=nav(center,"",Rect2(x,y,254,64),func():game.equipment_focus=slot;game.show_campaign(),"slot-"+slot,game.equipment_focus==slot)
+		var b:=nav(center,"",Rect2(x,y,254,64),func():game.equipment_focus=slot;game.equipment_candidate="";game.show_campaign(),"slot-"+slot,game.equipment_focus==slot)
 		UISkin.quiet_button(b,game.equipment_focus==slot)
 		var ink: Color=UISkin.INK
 		UISkin.label(b,game.cfg.slots[slot],Rect2(54,10,185,20),13,ink); UISkin.label(b,name,Rect2(54,30,185,24),16,ink)
@@ -211,15 +212,20 @@ func build_equipment() -> void:
 		UISkin.picture(details,Items.texture(game.campaign.items[selected],item.slot),Rect2(26,64,85,85))
 		UISkin.label(details,item.name,Rect2(125,73,217,74),22,UISkin.DARK,true)
 		UISkin.label(details,game.item_effects(item,selected)+"\n"+game.condition_text(selected),Rect2(26,180,320,88),21,UISkin.DARK,true)
-		UISkin.label(details,item.get("description",preload("res://ui/warehouse_catalog.gd").DESCRIPTIONS.get(game.campaign.items[selected],"")),Rect2(26,280,320,105) if game.equipment_candidate=="" else Rect2(26,360,320,26),18,UISkin.DARK,true)
+		if game.equipment_candidate=="":
+			UISkin.label(details,item.get("description",preload("res://ui/warehouse_catalog.gd").DESCRIPTIONS.get(game.campaign.items[selected],"")),Rect2(26,280,320,105) if game.equipment_candidate=="" else Rect2(26,360,320,0),18,UISkin.DARK,true)
+
 		var candidate: bool=selected!=equipped
 		if candidate: UISkin.label(details,"現在："+(game.cfg.items[game.campaign.items[equipped]].name if equipped!="" else "未装備"),Rect2(26,149,320,28),15,UISkin.DARK)
 		if candidate:
 			var preview: Dictionary=E.act(game.campaign,"equip",int(game.campaign.revision),{"uid":selected},game.data,game.cfg)
 			var before: Dictionary=E.hero(game.campaign,game.cfg); var after: Dictionary=E.hero(preview,game.cfg)
-			var delta: Array[String]=[]
-			for key in [["atk","攻撃"],["def","防御"],["spd","素早さ"],["max_hp","最大HP"],["max_sp","最大SP"]]: delta.append("%s %+d"%[key[1],int(after[key[0]])-int(before[key[0]])])
-			UISkin.label(details,"比較："+" / ".join(delta),Rect2(24,275,322,86),17,UISkin.DARK,true)
+			UISkin.label(details,"現在 → 交換後   /   増減",Rect2(24,270,322,24),15,UISkin.DARK)
+			var keys: Array=[["atk","攻撃"],["def","防御"],["spd","素早さ"],["max_hp","最大HP"],["max_sp","最大SP"]]
+			for i in keys.size():
+				var key: Array=keys[i]
+				UISkin.label(details,"%s   %d → %d   (%+d)"%[key[1],before[key[0]],after[key[0]],int(after[key[0]])-int(before[key[0]])],Rect2(26,296+i*18,320,20),15,UISkin.DARK)
+
 		var remove:=command(details,"この装備へ交換" if candidate else "装備を外す",Rect2(22,398,326,50),"equip" if candidate else "unequip",{"uid":selected} if candidate else {"slot":game.equipment_focus})
 		remove.disabled=not candidate and game.campaign.inventory.size()>=15
 		if remove.disabled:
@@ -229,7 +235,8 @@ func build_equipment() -> void:
 		var repair:=command(details,"修理  %d G"%maxi(0,cost),Rect2(22,461,326,50),"repair",{"uid":selected}); repair.disabled=game.campaign.phase!="town" or cost<=0 or game.campaign.gold<cost
 	else: UISkin.label(details,"この部位には何も装備していません。",Rect2(28,184,314,100),23,UISkin.DARK,true)
 	nav(self,"冒険準備へ戻る" if game.campaign.phase=="town" else "探索へ戻る",Rect2(16,643,300,60),func():game.open_town_page("hub") if game.campaign.phase=="town" else game.close_equipment(),"back")
-	UISkin.label(self,"所持品から装備し、部位を選んで詳細を確認。",Rect2(349,654,700,37),19)
+	var effective: Dictionary=E.hero(game.campaign,game.cfg)
+	UISkin.label(self,"現在の能力  攻撃 %d / 防御 %d / 素早さ %d / HP %d/%d / SP %d/%d"%[effective.atk,effective.def,effective.spd,effective.hp,effective.max_hp,effective.sp,effective.max_sp],Rect2(339,654,920,37),17)
 func refresh_vitals() -> void:
 	if game.display_battle().is_empty(): return
 	var b: Dictionary=game.display_battle()

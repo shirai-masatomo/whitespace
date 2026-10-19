@@ -20,7 +20,7 @@ func _ready() -> void:
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	var s: Dictionary=game.campaign
 	var node: Dictionary=E.Journey.node(game.cfg,int(s.floor))
-	UISkin.picture(self,Art.texture(node.get("background","cavern")),Rect2(0,0,1280,720),true)
+	UISkin.picture(self,Art.background_texture(node.get("background","cavern")),Rect2(0,0,1280,720),true)
 	var veil:=ColorRect.new(); veil.color=Color(0.01,0.04,0.06,0.35); veil.size=Vector2(1280,720); veil.mouse_filter=MOUSE_FILTER_IGNORE; add_child(veil)
 	var header:=UISkin.panel(self,Rect2(16,14,1248,60),"",true); UISkin.logo(header,Rect2(18,1,162,54))
 	label_at(header,"地下 %d F  /  %s"%[s.floor,{"treasure":"宝箱を発見","reward":"獲得品の確認","event":"道中の出来事","event_result":"選択の結果"}[s.phase]],Rect2(212,11,790,37),25,true)
@@ -28,10 +28,14 @@ func _ready() -> void:
 	if s.phase=="treasure": build_chest()
 	elif s.phase in ["event","event_result"]: build_event()
 	else: build_rewards()
+func chest_texture(opened: bool=false) -> Texture2D:
+	var source: Texture2D=preload("res://assets/journey/v1/treasure-chest-states.png")
+	var atlas:=AtlasTexture.new(); atlas.atlas=source; atlas.region=Rect2(887 if opened else 0,0,887,887); atlas.filter_clip=true
+	return atlas
 func build_chest() -> void:
 	var panel:=UISkin.panel(self,Rect2(302,132,676,482),"道の片隅に、古い宝箱",true)
-	var chest:=UISkin.picture(panel,preload("res://ui/item_icons.gd").texture("warehouse"),Rect2(243,66,190,190))
-	chest.pivot_offset=Vector2(95,95); chest.scale=Vector2(0.92,0.92)
+	var chest:=UISkin.picture(panel,chest_texture(),Rect2(228,54,220,220))
+	chest.pivot_offset=Vector2(110,110); chest.scale=Vector2(0.92,0.92)
 	chest.create_tween().tween_property(chest,"scale",Vector2.ONE,0.2).set_trans(Tween.TRANS_BACK)
 	label_at(panel,"誰かが残した品が入っている。
 中身を確かめて、次の旅の力にしよう。",Rect2(66,270,544,81),22,true)
@@ -64,6 +68,7 @@ func build_rewards() -> void:
 		row.pressed.connect(func():game.replace_selected=uid; game.reward_confirmation=""; game.show_campaign())
 	label_at(left,"入替時は選んだ所持品を手放します。",Rect2(18,463,282,35),14)
 	var center:=UISkin.panel(self,Rect2(346,92,482,516),s.reward_origin)
+	if s.reward_origin=="宝箱": UISkin.picture(center,chest_texture(true),Rect2(375,48,78,65))
 	var earned: Dictionary=s.get("last_reward",{})
 	label_at(center,"EXP +%d / Gold +%d"%[earned.get("exp",0),earned.get("gold",0)],Rect2(22,59,438,39),20)
 	if s.pending_rewards.is_empty(): label_at(center,"すべて確認しました。",Rect2(40,213,402,70),24)
@@ -111,3 +116,6 @@ func _unhandled_key_input(event: InputEvent) -> void:
 		get_viewport().set_input_as_handled()
 		game.notice="未受領品は残っています。受領または明示的に諦めてから進んでください。"
 		notice_label.text=game.notice
+
+func visual_audit() -> Dictionary:
+	return {"kind":"journey-receipt-event","floor":game.campaign.floor,"phase":game.campaign.phase,"pending":game.campaign.pending_rewards.size(),"background":E.Journey.node(game.cfg,int(game.campaign.floor)).get("background","")}

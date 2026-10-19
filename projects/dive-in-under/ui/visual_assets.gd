@@ -67,3 +67,8 @@ static func preview_note(enemy_id: String) -> String:
 	if enemy_id in UNAPPROVED: note += " / %s：未採用候補" % enemy_id
 	if enemy_id != "" and texture(enemy_id) == null: note += " · この敵は仮表示"
 	return note
+
+static func background_texture(value: String) -> Texture2D:
+	if FILES.has(value): return texture(value)
+	if not cache.has(value): cache[value]=load(value) if ResourceLoader.exists(value) else null
+	return cache[value] as Texture2D
