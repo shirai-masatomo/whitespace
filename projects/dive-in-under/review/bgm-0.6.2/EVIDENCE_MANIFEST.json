@@ -1,0 +1,54 @@
+{
+  "runtime_source": "67bf4b2be45f37d1f315978fd212516e1ebd9cd7",
+  "ci_run_id": 39236684696,
+  "files": [
+    {
+      "path": "evidence/bgm-review.json",
+      "sha256": "789321aa7371cfd63ad6b84ad88791031eea95058e734efdcfd552312de0507a",
+      "bytes": 2172
+    },
+    {
+      "path": "evidence/departure-fade.wav",
+      "sha256": "067e7d279fa1886e1d00c496602ded576cf7ee5b2d1c09798d637c90e2b1c46d",
+      "bytes": 196652,
+      "seconds": 1.1145578231292517,
+      "sample_rate": 44100,
+      "channels": 2,
+      "peak": 0.107879638671875
+    },
+    {
+      "path": "evidence/isolation.json",
+      "sha256": "cbe74a91761f16705a162688d5d680e39af94ea184fafc077b5e54aa91291298",
+      "bytes": 865
+    },
+    {
+      "path": "evidence/loop-diagnostic.json",
+      "sha256": "1a0bb2d7692f3529867cfed70ee8a00bcfb4b4160c4af4936bbf6124a00a98a2",
+      "bytes": 337
+    },
+    {
+      "path": "evidence/native-loop-boundary.wav",
+      "sha256": "ada6b87cb73385fae63ca2dadd9e975edf31cdd377f1545d6e0632fc1f41705e",
+      "bytes": 475180,
+      "seconds": 2.693514739229025,
+      "sample_rate": 44100,
+      "channels": 2,
+      "peak": 0.128448486328125
+    },
+    {
+      "path": "evidence/preparation-bgm-visual.json",
+      "sha256": "e102e47471effd801dc4354161f97fb8489f3091fdffcf3965ba54bcca467718",
+      "bytes": 473
+    },
+    {
+      "path": "evidence/preparation-bgm.png",
+      "sha256": "162ecba766128fbc8157d640b1fd1553c3e5d4f7084a8956a14ae454389b1894",
+      "bytes": 1384382
+    },
+    {
+      "path": "evidence/render.log",
+      "sha256": "16da9780fdcd8c2794363732994c83e2bcdc367e63bb4cc8a7778141b604da74",
+      "bytes": 489
+    }
+  ]
+}

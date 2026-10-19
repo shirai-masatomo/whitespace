@@ -1,0 +1,22 @@
+{
+  "elapsed_ms": 11811,
+  "pck_sha256": "56178F9CC70FEF173B77D5CD83173520DDB3FC167361D853F77B19A28E2C734B",
+  "normal_desktop_fallback": false,
+  "save_before_sha256": "3CD592CEEE01710203461247492A664B7AA98CE6C1D7162B11B0554B1ED252E6",
+  "run_id": "93f42032ed1243b68c77edd03cf391a8",
+  "normal_user_data_accessed": false,
+  "exe_sha256": "D34D36F3BE1A6C49C56525AE86469B92E4F417DDF0B43CF00DD80C385C4B0562",
+  "result": {
+    "PID": 3320,
+    "ThreadID": 2524,
+    "ExitCode": 1,
+    "OwnedWindowCount": 1,
+    "Station": "Service-0x0-ff3e1$",
+    "Desktop": "Render_ebbb46d4388947a29c9311adcf22f8b4",
+    "ObservedDesktop": "Render_ebbb46d4388947a29c9311adcf22f8b4",
+    "NonInteractive": true,
+    "DesktopMatched": true,
+    "TimedOut": false
+  },
+  "save_after_sha256": "3CD592CEEE01710203461247492A664B7AA98CE6C1D7162B11B0554B1ED252E6"
+}

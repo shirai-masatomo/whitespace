@@ -1,0 +1,17 @@
+{
+  "build_artifact_id": 12177098103,
+  "exe_sha256": "D34D36F3BE1A6C49C56525AE86469B92E4F417DDF0B43CF00DD80C385C4B0562",
+  "ci_run_id": 39233227479,
+  "version": "0.6.1",
+  "game_commit": "7620325e00e063f48a869535aef64994a8f31815",
+  "evidence_artifact_id": 12178122971,
+  "zip_sha256": "6A4AB639BC5A2C798C7D3C669B32BE57DC4065AE19AF8C38EE621B69EE0FD015",
+  "pck_sha256": "C62775F04DECA1CAA5058AC85CA31AAE5A24E11F1DA417456C1A90CC7596A85A",
+  "verification": "cloud-ui-feedback-01-07-unchanged-core",
+  "previous_zip_archive": "C:\\Users\\masat\\Documents\\Codex\\2026-10-17\\task\\dive-in-under-work\\projects\\dive-in-under\\build\\archive\\DiveInUnder-previous-981D3D137604.zip",
+  "user_save_edited_by_publish": false,
+  "relative_directory": "releases/7620325e00e063f48a869535aef64994a8f31815-0.6.1",
+  "previous_directory": "releases/1c39a5c13e4626c2914f49aae47ee76ecbfcb6aa-0.6.0",
+  "existing_processes_untouched": true,
+  "published_utc": "2026-10-19T10:00:05.6207470Z"
+}

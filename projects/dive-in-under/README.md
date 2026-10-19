@@ -1,3 +1,7 @@
+## 現在の通常入口：0.6.2（2026-10-19）
+
+[起動方法・最新版ZIP](review/current/README.md)／[冒険準備BGM「旅立ちの支度」](review/bgm-0.6.2/README.md)。mainで進行中。通常入口は検証済み0.6.2へ接続し、0.6.1以前は保持。以下の通常0.4.6維持などの記述は当時の履歴であり、現在の起動先は本節とreview/currentを正本とする。
+
 ## 工程2・最初の単位を実装
 
 装備耐久・破損・町の修理と旧保存保全を[PR #6](https://github.com/shirai-masatomo/whitespace/pull/6)へ反映。CI39122064852成功。[画像・別セーブ試遊](review/phase2-equipment/index.html) / [未決事項の一括一覧](docs/PHASE_02_OPEN_DECISIONS.md)。通常入口0.4.6を維持し、工程2全体は進行中。モデル設定は変更しない。

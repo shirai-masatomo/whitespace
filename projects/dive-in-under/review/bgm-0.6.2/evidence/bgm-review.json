@@ -1,0 +1,91 @@
+{
+	"after_wrap": 1.19641721248627,
+	"audio_driver": "Dummy",
+	"bgm_gain_db": -16.0,
+	"capture_discarded_frames": 0,
+	"complete": true,
+	"continuity": true,
+	"fade_immediate": 0.976190447807312,
+	"fade_middle": 0.595238089561462,
+	"fade_out": true,
+	"fade_seconds": 0.7,
+	"length_seconds": 75.7894821166992,
+	"listening_status": "technical PCM check only; user listening and actual device balance pending",
+	"loop_offset": 0.0,
+	"loop_wrap": true,
+	"mix_rate": 44100.0,
+	"native_loop": true,
+	"near_end": 74.2923812866211,
+	"no_save_store": true,
+	"pcm": {
+		"frames": 118784,
+		"longest_near_silence_seconds": 0.0,
+		"max_sample_delta": 0.0397714655846357,
+		"peak": 0.128458425402641,
+		"rms": 0.0314201207171199
+	},
+	"pcm_audible": true,
+	"quiet_bus": true,
+	"rapid_return": true,
+	"rendered": true,
+	"run_id": "22e37389bc5948aba408f97403405fdc",
+	"screens": [
+		{
+			"gain_linear": 1.0,
+			"playback_id": -9223371989828237844,
+			"player_id": 45399147917,
+			"playing": true,
+			"position": 0.745941042900085,
+			"screen": "preparation"
+		},
+		{
+			"gain_linear": 1.0,
+			"playback_id": -9223371989828237844,
+			"player_id": 45399147917,
+			"playing": true,
+			"position": 1.30321991443634,
+			"screen": "status-abilities"
+		},
+		{
+			"gain_linear": 1.0,
+			"playback_id": -9223371989828237844,
+			"player_id": 45399147917,
+			"playing": true,
+			"position": 1.39609980583191,
+			"screen": "status-conditions"
+		},
+		{
+			"gain_linear": 1.0,
+			"playback_id": -9223371989828237844,
+			"player_id": 45399147917,
+			"playing": true,
+			"position": 1.58185946941376,
+			"screen": "status-profile"
+		},
+		{
+			"gain_linear": 1.0,
+			"playback_id": -9223371989828237844,
+			"player_id": 45399147917,
+			"playing": true,
+			"position": 1.76761901378632,
+			"screen": "status-equipment"
+		},
+		{
+			"gain_linear": 1.0,
+			"playback_id": -9223371989828237844,
+			"player_id": 45399147917,
+			"playing": true,
+			"position": 2.41777777671814,
+			"screen": "warehouse"
+		},
+		{
+			"gain_linear": 1.0,
+			"playback_id": -9223371989828237844,
+			"player_id": 45399147917,
+			"playing": true,
+			"position": 3.25369620323181,
+			"screen": "equipment"
+		}
+	],
+	"title_silent": true
+}

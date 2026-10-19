@@ -1,0 +1,19 @@
+{
+  "first_pass_run_id": 39236067557,
+  "final_isolated_processes": 1,
+  "verification_scope": "preparation-bgm-unchanged-core",
+  "run_id": 39236684696,
+  "user_listening_evaluation": "pending",
+  "build_artifact_digest": "sha256:144b828533437ccee35d5e8bafc907198d9f740f8e1ee46c4b65377d8b0ba4a0",
+  "build_artifact_id": 12179911587,
+  "original_audio_sha256": "133bdd590b005469e20c9b9520e8b5047bb279ad09f0d29df0bd7d675c87f7df",
+  "evidence_artifact_id": 12179736745,
+  "first_pass_failure": "review seek playback identity, not production music",
+  "local_engine_launches": 0,
+  "url": "https://github.com/shirai-masatomo/whitespace/actions/runs/39236684696",
+  "final_elapsed_ms": 15483,
+  "evidence_artifact_digest": "sha256:88f4b02706e08cde7340c16ffd2f3db1a64c6d76163dbc7ad3ffab10dbbd142b",
+  "head_sha": "67bf4b2be45f37d1f315978fd212516e1ebd9cd7",
+  "conclusion": "success",
+  "first_pass_elapsed_ms": 11811
+}

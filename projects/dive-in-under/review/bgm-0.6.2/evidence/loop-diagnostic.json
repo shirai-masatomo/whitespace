@@ -1,0 +1,13 @@
+{
+	"after_loop_playback_id": -9223371941677627531,
+	"after_wrap": 1.19641721248627,
+	"before_loop_playback_id": -9223371941677627531,
+	"near_end": 74.2923812866211,
+	"pcm": {
+		"frames": 118784,
+		"longest_near_silence_seconds": 0.0,
+		"max_sample_delta": 0.0397714655846357,
+		"peak": 0.128458425402641,
+		"rms": 0.0314201207171199
+	}
+}
