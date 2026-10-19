@@ -39,7 +39,7 @@ var input_locked:=true
 var return_page: String="hub"
 func _ready() -> void:
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	unit=Model.actor(game.campaign,game.cfg,game.data)
+	unit=game.display_battle().hero if game.campaign.phase=="battle" else Model.actor(game.campaign,game.cfg,game.data)
 	build()
 	modulate.a=0.0
 	var entry:=create_tween(); entry.tween_property(self,"modulate:a",1.0,0.20)
@@ -65,9 +65,8 @@ func paper_at(parent: Control, r: Rect2) -> void:
 	InterfaceArt.paper(parent,r)
 func build() -> void:
 	var header:=panel(Rect2(16,14,1248,64),"",true)
-	UISkin.logo(header,Rect2(20,1,168,56))
-	label_at(header,"ステータス",Rect2(222,10,380,40),27)
-	label_at(header,"冒険の準備  /  主人公",Rect2(780,14,250,34),18,MUTED)
+	label_at(header,"ステータス",Rect2(28,10,540,40),27)
+	label_at(header,"主人公  /  能力・装備の確認",Rect2(780,14,250,34),18,MUTED)
 	label_at(header,"G  %d"%game.campaign.gold,Rect2(1080,11,145,40),23,GOLD)
 	left_panel=panel(Rect2(16,92,296,510),unit.name,true)
 	build_left()
@@ -80,7 +79,7 @@ func build() -> void:
 	var right:=panel(Rect2(916,92,348,510),"詳細")
 	detail_scroll=ScrollContainer.new(); detail_scroll.position=Vector2(18,54); detail_scroll.size=Vector2(312,382); detail_scroll.horizontal_scroll_mode=ScrollContainer.SCROLL_MODE_DISABLED; detail_scroll.theme=UISkin.scroll_theme(); right.add_child(detail_scroll)
 	details=VBoxContainer.new(); details.size_flags_horizontal=Control.SIZE_EXPAND_FILL; details.add_theme_constant_override("separation",12); detail_scroll.add_child(details)
-	label_at(right,"変更・修理は準備の「装備」から",Rect2(20,454,310,38),14,MUTED)
+	label_at(right,"装備変更は［I］ / 修理は冒険準備で",Rect2(20,454,310,38),14,MUTED)
 	build_party()
 	back_button=button_at(self,"戻る",Rect2(1060,616,204,88),request_close)
 	var border:=Control.new(); border.set_script(Frame); border.ornament_only=true; back_button.add_child(border); border.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
@@ -92,7 +91,7 @@ func build_left() -> void:
 	image_at(left_panel,face(),Rect2(24,61,105,124))
 	label_at(left_panel,"Lv.%d"%unit.level,Rect2(145,73,130,38),27,DARK)
 	label_at(left_panel,Model.profile().get("species","未設定"),Rect2(145,119,130,28),17,Color("675135"))
-	label_at(left_panel,"冒険準備中",Rect2(145,150,130,26),14,Color("675135"))
+	label_at(left_panel,"冒険準備中" if game.campaign.phase=="town" else "地下 %d F"%game.campaign.floor,Rect2(145,150,130,26),14,Color("675135"))
 	UISkin.rule(left_panel,Rect2(24,201,248,1),Color("ad946b"))
 	make_gauge("hp","HP",int(unit.hp),int(unit.max_hp),225,Color("a83d32"))
 	make_gauge("sp","SP",int(unit.sp),int(unit.max_sp),270,Color("267c9c"))
@@ -307,7 +306,7 @@ func request_close() -> void:
 	if closing or input_locked: return
 	closing=true; back_button.disabled=true
 	var exit:=create_tween(); exit.tween_property(self,"modulate:a",0.0,0.18)
-	exit.finished.connect(func(): if is_inside_tree(): game.open_town_page(return_page))
+	exit.finished.connect(func(): if is_inside_tree(): game.close_status())
 func _unhandled_key_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.echo and not input_locked and not closing:
 		if event.keycode>=KEY_1 and event.keycode<=KEY_4:

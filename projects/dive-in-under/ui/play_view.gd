@@ -31,13 +31,12 @@ func _ready() -> void:
 		"hub": build_hub()
 		"equipment": build_equipment()
 		"result": build_result()
-		"treasure","reward","event","event_result":
-			var view:=Control.new(); view.set_script(preload("res://ui/journey_view.gd")); view.game=game; add_child(view)
+		"exploration","explore","battle","treasure","reward","event","event_result":
+			var view:=Control.new(); view.set_script(preload("res://ui/flow_view.gd")); view.game=game; stage=null; add_child(view); stage=view.stage; route=view.route
 		_: build_exploration()
 func header(title: String) -> void:
 	var p:=UISkin.panel(self,Rect2(16,14,1248,60),"",true)
-	UISkin.logo(p,Rect2(18,1,162,54))
-	UISkin.label(p,title,Rect2(211,12,760,34),25,UISkin.DARK)
+	UISkin.label(p,title,Rect2(28,12,1000,34),25,UISkin.DARK)
 	if not game.campaign.is_empty(): UISkin.label(p,"G  %d"%game.campaign.gold,Rect2(1080,13,140,32),21,UISkin.DARK)
 func nav(parent: Node, text: String, r: Rect2, call: Callable, key: String="", primary: bool=false) -> Button:
 	var b:=UISkin.button(parent,text,r,call,primary)
@@ -45,7 +44,8 @@ func nav(parent: Node, text: String, r: Rect2, call: Callable, key: String="", p
 	return b
 func command(parent: Node, text: String, r: Rect2, action: String, args: Dictionary={}, primary: bool=false) -> Button:
 	var revision: int=game.campaign.revision
-	var b:=nav(parent,text,r,func(): game.perform(action,args,revision),"",primary)
+	var epoch: int=game.ui_epoch
+	var b:=nav(parent,text,r,func(): game.ui_action(func():game.perform(action,args,revision),epoch),"",primary)
 	b.set_meta("campaign_action",action); b.set_meta("campaign_args",args); game.play_buttons[action]=b
 	return b
 func hero_card(r: Rect2) -> Control:
@@ -75,7 +75,7 @@ func build_title() -> void:
 	var caption:=UISkin.label(p,"支度を整え、まだ見ぬ深みへ。",Rect2(78,215,464,32),22,UISkin.DARK); caption.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER
 	game.new_button=nav(p,"はじめる",Rect2(66,275,488,64),game.request_new,"start",true)
 	nav(p,"終了",Rect2(66,355,488,64),func():game.get_tree().quit(),"quit")
-	UISkin.label(self,"0.7.0",Rect2(1170,675,85,25),15)
+	UISkin.label(self,"0.8.0",Rect2(1170,675,85,25),15)
 	game.new_button.add_theme_font_size_override("font_size",30); game.new_button.grab_focus()
 func build_hub() -> void:
 	header("冒険の準備")
@@ -184,26 +184,17 @@ func build_result() -> void:
 	UISkin.label(journal,"\n".join(s.journal.slice(-8)),Rect2(25,67,390,410),19,UISkin.INK,true)
 func build_equipment() -> void:
 	header("装備")
-	var bag:=UISkin.panel(self,Rect2(16,92,300,532),"バックパック")
-	var sc:=ScrollContainer.new(); sc.position=Vector2(14,55); sc.size=Vector2(272,460); sc.horizontal_scroll_mode=ScrollContainer.SCROLL_MODE_DISABLED; sc.theme=UISkin.scroll_theme(); bag.add_child(sc)
-	var list:=VBoxContainer.new(); list.size_flags_horizontal=Control.SIZE_EXPAND_FILL; sc.add_child(list)
-	for uid in game.campaign.inventory:
-		var item: Dictionary=game.cfg.items[game.campaign.items[uid]]
-		var row:=Control.new(); row.custom_minimum_size=Vector2(255,96); list.add_child(row)
-		UISkin.picture(row,Items.texture(game.campaign.items[uid],item.slot),Rect2(4,4,44,44))
-		UISkin.label(row,item.name,Rect2(54,6,196,33),16)
-		var pick:=nav(row,"比較する",Rect2(52,47,192,40),func():game.equipment_candidate=uid; game.equipment_focus=item.slot if item.slot!="" else game.equipment_focus; game.show_campaign(),"compare-"+uid); pick.disabled=item.slot==""
-	if game.campaign.inventory.is_empty(): UISkin.label(bag,"所持品はありません。",Rect2(22,85,256,50),17,UISkin.MUTED)
-	var center:=UISkin.panel(self,Rect2(328,92,554,532),"装備部位")
-	for i in E.SLOTS.size():
-		var slot: String=E.SLOTS[i]; var uid: String=game.campaign.equipment[slot]
-		var x:=17+(i%2)*265; var y:=61+(i/2)*72
-		var name: String="装備なし" if uid=="" else game.cfg.items[game.campaign.items[uid]].name
-		var b:=nav(center,"",Rect2(x,y,254,64),func():game.equipment_focus=slot;game.equipment_candidate="";game.show_campaign(),"slot-"+slot,game.equipment_focus==slot)
-		UISkin.quiet_button(b,game.equipment_focus==slot)
-		var ink: Color=UISkin.INK
-		UISkin.label(b,game.cfg.slots[slot],Rect2(54,10,185,20),13,ink); UISkin.label(b,name,Rect2(54,30,185,24),16,ink)
-		if uid!="": UISkin.picture(b,Items.texture(game.campaign.items[uid],slot),Rect2(8,12,40,40))
+	var bag:=UISkin.panel(self,Rect2(16,92,300,532),"所持品  %d / 15"%game.campaign.inventory.size())
+	preload("res://ui/item_grid.gd").bag(bag,game,self,Vector2(25,66),3,80)
+	var center:=UISkin.panel(self,Rect2(328,92,554,532),"装備 / 11部位")
+	UISkin.picture(center,Art.texture("cavern"),Rect2(94,53,366,449),true).modulate=Color(.57,.67,.68)
+	UISkin.picture(center,Art.actor_texture("hero"),Rect2(100,142,354,350))
+	for c in 2:
+		var slots: Array=[["head","body","right_hand","legs","feet"],["neck","ears","eyes","left_hand","wrist","finger"]][c]
+		for i in slots.size():
+			var slot: String=slots[i]
+			preload("res://ui/item_grid.gd").cell(center,game,self,Rect2(472 if c==1 else 14,65+i*68,68,64),"equipment",game.campaign.equipment[slot],slot,game.equipment_focus==slot)
+	UISkin.label(center,"ダブルクリックで交換 / 部位へドラッグ\n装備をバックパックへドラッグで解除",Rect2(96,64,364,67),15,UISkin.INK,true)
 	var details:=UISkin.panel(self,Rect2(894,92,370,532),"装備の詳細",true)
 	var equipped: String=game.campaign.equipment[game.equipment_focus]
 	var selected: String=game.equipment_candidate if game.equipment_candidate in game.campaign.inventory else equipped
@@ -215,7 +206,7 @@ func build_equipment() -> void:
 		if game.equipment_candidate=="":
 			UISkin.label(details,item.get("description",preload("res://ui/warehouse_catalog.gd").DESCRIPTIONS.get(game.campaign.items[selected],"")),Rect2(26,280,320,105) if game.equipment_candidate=="" else Rect2(26,360,320,0),18,UISkin.DARK,true)
 
-		var candidate: bool=selected!=equipped
+		var candidate: bool=selected!=equipped and item.slot!=""
 		if candidate: UISkin.label(details,"現在："+(game.cfg.items[game.campaign.items[equipped]].name if equipped!="" else "未装備"),Rect2(26,149,320,28),15,UISkin.DARK)
 		if candidate:
 			var preview: Dictionary=E.act(game.campaign,"equip",int(game.campaign.revision),{"uid":selected},game.data,game.cfg)
@@ -227,7 +218,7 @@ func build_equipment() -> void:
 				UISkin.label(details,"%s   %d → %d   (%+d)"%[key[1],before[key[0]],after[key[0]],int(after[key[0]])-int(before[key[0]])],Rect2(26,296+i*18,320,20),15,UISkin.DARK)
 
 		var remove:=command(details,"この装備へ交換" if candidate else "装備を外す",Rect2(22,398,326,50),"equip" if candidate else "unequip",{"uid":selected} if candidate else {"slot":game.equipment_focus})
-		remove.disabled=not candidate and game.campaign.inventory.size()>=15
+		remove.disabled=item.slot=="" or (not candidate and game.campaign.inventory.size()>=15)
 		if remove.disabled:
 			remove.tooltip_text="バックパックに空きがありません"
 			UISkin.label(details,"バックパックに空きがありません",Rect2(22,363,326,28),15,UISkin.DARK)
@@ -239,6 +230,8 @@ func build_equipment() -> void:
 	UISkin.label(self,"現在の能力  攻撃 %d / 防御 %d / 素早さ %d / HP %d/%d / SP %d/%d"%[effective.atk,effective.def,effective.spd,effective.hp,effective.max_hp,effective.sp,effective.max_sp],Rect2(339,654,920,37),17)
 func refresh_vitals() -> void:
 	if game.display_battle().is_empty(): return
+	for child in get_children():
+		if child.has_method("refresh_live"): child.refresh_live()
 	var b: Dictionary=game.display_battle()
 	if vitals.has("hero_hp"):
 		vitals.hero_hp.text="HP  %d / %d"%[b.hero.hp,b.hero.max_hp]; vitals.hero_bar.value=b.hero.hp
@@ -246,8 +239,6 @@ func refresh_vitals() -> void:
 	if vitals.has("enemy_hp"):
 		vitals.enemy_hp.text="HP %d / %d  ・  ROUND %d"%[b.enemy.hp,b.enemy.max_hp,b.round]; vitals.enemy_bar.value=b.enemy.hp
 func _unhandled_key_input(event: InputEvent) -> void:
-	if event is InputEventKey and event.pressed and not event.echo and event.keycode==KEY_E and game.campaign.get("phase")=="explore":
-		get_viewport().set_input_as_handled(); game.call_deferred("open_field_equipment"); return
 	if event.is_action_pressed("ui_cancel"):
 		get_viewport().set_input_as_handled()
 		# Keep the receiving Control alive until the viewport finishes dispatching this key.
@@ -259,3 +250,18 @@ func _unhandled_key_input(event: InputEvent) -> void:
 func visual_audit() -> Dictionary:
 	return {"kind":"session-ui","screen":mode,"session_only":not game.legacy_persistence_mode,"stage_rect":str(stage.get_global_rect()) if is_instance_valid(stage) else "","route":route.nodes() if is_instance_valid(route) else []}
 
+
+func select_item(source: String, uid: String, slot: String="") -> void:
+	if uid=="" and slot=="": return
+	game.flow_selection={"kind":source,"uid":uid,"slot":slot}
+	game.equipment_candidate=uid if source=="inventory" else ""
+	if slot!="": game.equipment_focus=slot
+	elif uid!="" and game.cfg.items[game.campaign.items[uid]].slot!="": game.equipment_focus=game.cfg.items[game.campaign.items[uid]].slot
+	game.call_deferred("show_campaign")
+func activate_item(source: String, uid: String, slot: String="") -> void:
+	if uid=="" or source!="inventory": return
+	preload("res://ui/gear_actions.gd").apply(game,preload("res://ui/gear_actions.gd").payload(game,source,uid,slot),"equipment")
+func accepts_gear(value: Variant, destination: String, slot: String="") -> bool:
+	return preload("res://ui/gear_actions.gd").reason(game,value,destination,slot)==""
+func drop_gear(value: Dictionary, destination: String, slot: String="") -> void:
+	preload("res://ui/gear_actions.gd").apply(game,value,destination,slot)

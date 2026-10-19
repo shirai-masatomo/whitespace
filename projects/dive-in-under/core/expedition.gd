@@ -304,6 +304,36 @@ static func act(previous: Dictionary, action: String, expected_revision: int, ar
 		"descend":
 			if s.phase=="explore" and s.floor<(int(cfg.journey.public_max_floor) if Journey.active(s) else 10):
 				descend(s,data,cfg); changed=true
+		"advance_ready","claim_all_advance":
+			# Receipt, acknowledgement and exactly ONE next node are one transaction.
+			# Reject the entire transaction before allocating any instance when it cannot fit.
+			if Journey.active(s) and s.phase in ["explore","reward","event_result"]:
+				var pending: Array=s.pending_rewards
+				if (pending.is_empty() or action=="claim_all_advance") and s.inventory.size()+pending.size()<=Storage.BACKPACK_CAPACITY:
+					for reward in pending:
+						add_item(s,reward.id); s.trip_items+=1; note(s,"受領："+cfg.items[reward.id].name+" ×1")
+					s.pending_rewards=[]
+					var clear: bool=s.phase=="reward" and s.reward_return=="clear"
+					s.event_result={}; s.erase("round_presentation")
+					if clear:
+						s.highest_floor=int(s.floor)+1; finish(s,"clear","%dFの門番を倒した。次の層域への到達を記録し、町へ帰還する。"%s.floor,cfg)
+					elif s.floor<int(cfg.journey.public_max_floor):
+						s.phase="explore"; descend(s,data,cfg)
+					else: return previous
+					changed=true
+		"equip_reward":
+			if Journey.active(s) and s.phase=="reward":
+				var index: int=Journey.reward_index(s,args.get("token",""))
+				if index>=0:
+					var reward: Dictionary=s.pending_rewards[index]
+					var slot: String=cfg.items[reward.id].slot
+					if slot in SLOTS and args.get("slot",slot)==slot and (s.equipment[slot]=="" or s.inventory.size()<Storage.BACKPACK_CAPACITY):
+						var uid: String=add_item(s,reward.id)
+						s.inventory.erase(uid)
+						if s.equipment[slot]!="": s.inventory.append(s.equipment[slot])
+						s.equipment[slot]=uid; s.pending_rewards.remove_at(index); s.trip_items+=1
+						var h: Dictionary=hero(s,cfg); s.hp=mini(int(s.hp),int(h.max_hp)); s.sp=mini(int(s.sp),int(h.max_sp))
+						note(s,"受領して装備："+cfg.items[reward.id].name); changed=true
 		"round":
 			if s.phase=="battle": step_battle(s,data,cfg); changed=true
 		"return":
@@ -383,7 +413,7 @@ static func act(previous: Dictionary, action: String, expected_revision: int, ar
 		"to_cloth":
 			changed=Storage.move(s,args.get("uid",""),args.get("source","inventory"),"cloth",cfg)
 		"deposit","withdraw","equip","unequip":
-			if s.phase=="town" or (Journey.active(s) and s.phase in ["explore","reward"] and action in ["equip","unequip"]):
+			if s.phase=="town" or (Journey.active(s) and s.phase in ["explore","reward","treasure","event","event_result"] and action in ["equip","unequip"]):
 				var uid: String = args.get("uid","")
 				if action=="deposit":
 					changed=Storage.move(s,uid,args.get("source","inventory"),"warehouse",cfg)
@@ -391,7 +421,7 @@ static func act(previous: Dictionary, action: String, expected_revision: int, ar
 					changed=Storage.move(s,uid,args.get("source","warehouse"),"inventory",cfg)
 				elif action=="equip" and uid in s.inventory:
 					var slot: String = cfg.items[s.items[uid]].slot
-					if slot in SLOTS:
+					if slot in SLOTS and args.get("slot",slot)==slot:
 						if s.equipment[slot] != "": s.inventory.append(s.equipment[slot])
 						s.inventory.erase(uid); s.equipment[slot]=uid; changed=true
 				elif action=="unequip":

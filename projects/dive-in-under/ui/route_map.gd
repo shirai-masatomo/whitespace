@@ -1,32 +1,33 @@
 extends Control
-## Read-only topology of the CURRENT implemented linear route.
-## No invented branches, keys, content types or scouting ability.
+## Vertical, read-only topology. Node CONTENTS remain undisclosed.
+signal opened
 var floor_number:=1
 var highest_floor:=0
 var expanded:=false
-func _ready() -> void: mouse_filter=Control.MOUSE_FILTER_IGNORE
+var max_floor:=10
+func _ready() -> void:
+	mouse_filter=Control.MOUSE_FILTER_PASS
+	custom_minimum_size=Vector2(200,44*max_floor+28)
+func _gui_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton and event.button_index==MOUSE_BUTTON_LEFT and event.pressed:
+		accept_event(); opened.emit()
 func nodes() -> Array:
 	var result: Array=[]
-	var range_to_show: Array=range(1,12) if expanded else [floor_number-1,floor_number,floor_number+1]
-	for number in range_to_show:
-		if number<0 or number>11: continue
-		result.append({"id":"floor-%d"%number,"label":"地上" if number==0 else "%d F"%number,"current":number==floor_number,"visited":number<floor_number,"type_revealed":false})
+	for number in range(1,max_floor+1):
+		result.append({"id":"floor-%d"%number,"label":"%d F"%number,"current":number==floor_number,"visited":number<=highest_floor and number!=floor_number,"type_revealed":false})
 	return result
 func positions() -> Array:
-	var output: Array=[]; var list:=nodes()
-	for i in list.size():
-		if expanded: output.append(Vector2(70+(i%6 if i<6 else 11-i)*125,85+(i/6)*140))
-		else: output.append(Vector2(38+i*76,38))
+	var output: Array=[]
+	for i in nodes().size(): output.append(Vector2(50,25+i*44))
 	return output
 func _draw() -> void:
-	var list:=nodes(); var points:=positions()
-	for i in range(1,points.size()):
-		draw_line(points[i-1],points[i],Color("668487") if list[i-1].visited else Color("344e56"),2)
-	var font:=get_theme_default_font()
+	var list:=nodes(); var points:=positions(); var font:=get_theme_default_font()
+	for i in range(1,points.size()): draw_line(points[i-1],points[i],Color("668487") if list[i-1].visited or list[i-1].current else Color("344e56"),2)
 	for i in list.size():
-		var point: Vector2=points[i]; var node: Dictionary=list[i]
-		var color:=Color("f1cb79") if node.current else (Color("6dafa7") if node.visited else Color("344e56"))
-		draw_rect(Rect2(point-Vector2(9,9),Vector2(18,18)),Color("101f26"))
-		draw_rect(Rect2(point-Vector2(9,9),Vector2(18,18)),color,false,2)
-		if node.current: draw_rect(Rect2(point-Vector2(4,4),Vector2(8,8)),color)
-		draw_string(font,point+Vector2(-15,34),node.label,HORIZONTAL_ALIGNMENT_LEFT,-1,16,Color("e6ddc4"))
+		var p: Vector2=points[i]; var n: Dictionary=list[i]
+		var color:=Color("f1cb79") if n.current else (Color("6dafa7") if n.visited else Color("344e56"))
+		draw_rect(Rect2(p-Vector2.ONE*8,Vector2.ONE*16),Color("101f26")); draw_rect(Rect2(p-Vector2.ONE*8,Vector2.ONE*16),color,false,2)
+		if n.current: draw_rect(Rect2(p-Vector2.ONE*3,Vector2.ONE*6),color)
+		draw_string(font,p+Vector2(24,6),n.label+("  現在地" if n.current else ("  通過済" if n.visited else "  未到達")),HORIZONTAL_ALIGNMENT_LEFT,-1,16,Color("e6ddc4"))
+func visual_audit() -> Dictionary:
+	return {"orientation":"vertical","nodes":nodes(),"positions":positions().map(func(p):return [p.x,p.y])}
