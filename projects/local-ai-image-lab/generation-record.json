@@ -1,0 +1,99 @@
+{
+  "date": "2026-10-19",
+  "engine": "ComfyUI v0.42.1 / local NVIDIA GPU",
+  "settings": {
+    "width": 832,
+    "height": 1216,
+    "steps": 28,
+    "cfg": 5.0,
+    "sampler": "euler_ancestral",
+    "scheduler": "normal",
+    "seeds": [
+      419274,
+      419275
+    ]
+  },
+  "positive": "1girl, solo, original adult woman, age 28, mature face, blonde hair, long hair, blue eyes, gentle smile, white high-neck blouse, navy cardigan, fully clothed, holding book, library, bookshelves, upper body, looking at viewer, eye level, soft daylight, full color anime illustration, vibrant colors, clean outlines, soft shading, masterpiece, best quality",
+  "negative": "monochrome, greyscale, pencil sketch, unfinished line drawing, child, teenager, school uniform, cleavage, open shirt, exposed chest, nudity, underwear, seductive pose, photorealistic, photograph, 3d, text, logo, watermark, blurry, lowres, bad anatomy, malformed hands, extra fingers, extra limbs, multiple people",
+  "method": "Same positive/negative prompts, seeds, size and sampler for every model; not individually optimized; no reference image or identity adapter.",
+  "samples": [
+    {
+      "model_id": "sdxl",
+      "model_label": "SDXL Base 1.0",
+      "seed": 419274,
+      "image": "images/sdxl_419274_00002_.png",
+      "sha256": "9a95a7c588786acf7dbb5f7ed24f2b72d3b1943c0740f5101d907d42167548d8",
+      "dimensions": [
+        832,
+        1216
+      ],
+      "workflow": "workflows/08-compare-sdxl-1.json",
+      "elapsed_seconds": 10.326
+    },
+    {
+      "model_id": "sdxl",
+      "model_label": "SDXL Base 1.0",
+      "seed": 419275,
+      "image": "images/sdxl_419275_00002_.png",
+      "sha256": "24546d48e3841777604cce61455ec5f8b8995f47a5cc6d268277d4956b5e7f48",
+      "dimensions": [
+        832,
+        1216
+      ],
+      "workflow": "workflows/08-compare-sdxl-2.json",
+      "elapsed_seconds": 8.407
+    },
+    {
+      "model_id": "animagine31",
+      "model_label": "Animagine XL 3.1",
+      "seed": 419274,
+      "image": "images/animagine31_419274_00001_.png",
+      "sha256": "adb2d9ffb7fb044bd3f3e3f710931cb07d2cc4d99358b7b84b3d5a24b2947b69",
+      "dimensions": [
+        832,
+        1216
+      ],
+      "workflow": "workflows/08-compare-animagine31-1.json",
+      "elapsed_seconds": 12.369
+    },
+    {
+      "model_id": "animagine31",
+      "model_label": "Animagine XL 3.1",
+      "seed": 419275,
+      "image": "images/animagine31_419275_00001_.png",
+      "sha256": "3c47331633450a6593916b8ca89f396e8e104089782dfbc505955fe8396c5e27",
+      "dimensions": [
+        832,
+        1216
+      ],
+      "workflow": "workflows/08-compare-animagine31-2.json",
+      "elapsed_seconds": 8.286
+    },
+    {
+      "model_id": "animagine40",
+      "model_label": "Animagine XL 4.0 Opt",
+      "seed": 419274,
+      "image": "images/animagine40_419274_00001_.png",
+      "sha256": "1f5667cb05fa5a334a69397f9ec3aee32d36c561c3f8e51ede79a3a0f0f9fdf5",
+      "dimensions": [
+        832,
+        1216
+      ],
+      "workflow": "workflows/08-compare-animagine40-1.json",
+      "elapsed_seconds": 14.377
+    },
+    {
+      "model_id": "animagine40",
+      "model_label": "Animagine XL 4.0 Opt",
+      "seed": 419275,
+      "image": "images/animagine40_419275_00001_.png",
+      "sha256": "acc28dfa8231d14dbb7e7d003c82f2258d008d576ee2aaf9a2b8547675fb2813",
+      "dimensions": [
+        832,
+        1216
+      ],
+      "workflow": "workflows/08-compare-animagine40-2.json",
+      "elapsed_seconds": 8.259
+    }
+  ]
+}
