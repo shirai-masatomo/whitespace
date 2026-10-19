@@ -33,7 +33,7 @@ static func validate_definition(value: Dictionary, data: Dictionary, cfg: Dictio
 	for n in value.nodes:
 		if not n is Dictionary or not n.has_all(["id","floor","kind","background","bgm"]): return "Invalid node"
 		if n.id in ids or n.floor in floors or not n.kind in ["enemy","boss","treasure","event"]: return "Duplicate or invalid node"
-		ids.append(n.id); floors.append(n.floor)
+		ids.append(n.id); floors.append(int(n.floor))
 		if not n.background in ["cavern","boss"]: return "Unknown background key"
 		if n.bgm!="" and not ResourceLoader.exists(n.bgm): return "Missing node BGM"
 		if n.kind in ["enemy","boss"]:

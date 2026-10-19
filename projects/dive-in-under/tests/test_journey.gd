@@ -16,6 +16,7 @@ func initial() -> Dictionary:
 	return s
 func _initialize() -> void:
 	data=E.Catalog.load_data(); cfg=E.load_config()
+	if cfg.is_empty(): quit(1); return
 	check(not cfg.is_empty() and E.Journey.validate_definition(cfg.journey,data,cfg)=="","route references")
 	var s:=initial(); var uid:=E.add_item(s,"I01"); s.item_condition[uid].current=37
 	var before: int=s.items.size()
@@ -69,4 +70,27 @@ func _initialize() -> void:
 	future=act(future,"open_chest"); future=act(future,"claim_reward",{"token":future.pending_rewards[0].token}); future=act(future,"continue_rewards"); future=act(future,"descend")
 	future=act(future,"journey_event",{"choice":"take"}); check(future.phase=="event_result" and future.pending_rewards[0].id=="I10","later event uses common flow")
 	future=act(future,"continue_event"); cfg.journey=old
+	# One fresh, deterministic route with normal actions and no prepared growth/gear.
+	var normal:=initial(); normal.seed=10000
+	var plan: Array=[]; var cleared_trip:=0
+	for step in 700:
+		if normal.trips>18: break
+		var choice: Dictionary=preload("res://tools/journey_policy.gd").choose(normal,cfg)
+		if choice.is_empty(): break
+		var next: Dictionary=E.act(normal,choice.action,int(normal.revision),choice.args,data,cfg)
+		if choice.action=="depart": next=E.act(next,"descend",int(next.revision),{},data,cfg)
+		if not check_transition(next,normal,choice.action): break
+		normal=next
+		plan.append({"action":choice.action,"args":choice.args,"sha256":JSON.stringify(JSON.parse_string(JSON.stringify(normal))).sha256_text(),"phase":normal.phase,"floor":normal.floor,"revision":normal.revision})
+		if normal.phase=="result" and normal.result.kind=="clear": cleared_trip=int(normal.trips)
+		if cleared_trip>0 and normal.trips>cleared_trip: break
+	check(cleared_trip>0 and normal.trips>cleared_trip,"fresh normal 10F clear, return, organize and redepart")
+	var output:=FileAccess.open("res://artifacts/journey-plan.json",FileAccess.WRITE)
+	output.store_string(JSON.stringify({"seed":10000,"actions":plan,"cleared_trip":cleared_trip,"final_level":E.hero(normal,cfg).level,"complete":cleared_trip>0 and normal.trips>cleared_trip},"\t")); output.close()
+	print("JOURNEY_PLAN actions=%d trips=%d clear_trip=%d level=%d phase=%s"%[plan.size(),normal.trips,cleared_trip,E.hero(normal,cfg).level,normal.phase])
 	print("JOURNEY_TESTS: %d checks, %d failures"%[count,failures]); quit(0 if failures==0 else 1)
+
+func check_transition(next: Dictionary, previous: Dictionary, action: String) -> bool:
+	var reason: String=E.validate(next,data,cfg)
+	if next==previous or reason!="": check(false,"normal route "+action+" / "+reason); return false
+	return true

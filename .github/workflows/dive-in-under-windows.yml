@@ -186,7 +186,7 @@ jobs:
             $log = "$PWD/artifacts/journey-$label.log"
             $arguments = @('--headless','--path',"$PWD",'--log-file',$log) + $entry
             $process = Start-Process -FilePath $engine -ArgumentList (($arguments | ForEach-Object { '"' + $_ + '"' }) -join ' ') -WindowStyle Hidden -PassThru
-            if (!$process.WaitForExit(45000)) { $process.Kill(); throw 'Focused core/import timeout' }
+            if (!$process.WaitForExit(45000)) { $process.Kill(); if (Test-Path $log) { Get-Content $log | Select-Object -Last 35 }; throw 'Focused core/import timeout' }
             $process.Refresh()
             if ($process.ExitCode -ne 0 -or (Select-String -LiteralPath $log -Pattern 'SCRIPT ERROR:|^ERROR:' -Quiet)) { Get-Content $log; throw 'Focused core/import failed' }
             Get-Content $log | Select-Object -Last 4

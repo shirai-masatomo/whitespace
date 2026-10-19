@@ -211,7 +211,7 @@ func build_actions() -> void:
 			if e[1]=="organize": b=game.command(e[0]+" [R]",e[1],args)
 			else:
 				b=game.button(e[0]+(" [F]" if e[1]=="to_cloth" else ""),func():move_item(selected_uid,selected_source,e[2],int(game.campaign.revision)))
-				b.set_meta("campaign_action",e[1]); game.play_buttons[e[1]]=b
+				b.set_meta("campaign_action",e[1]); b.set_meta("campaign_args",args); game.play_buttons[e[1]]=b
 			if e[1]!="organize":
 				var error:=Storage.reason(game.campaign,selected_uid,selected_source,e[2],game.cfg)
 				b.tooltip_text=error
