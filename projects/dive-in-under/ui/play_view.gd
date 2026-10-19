@@ -39,13 +39,14 @@ func header(title: String) -> void:
 	UISkin.label(p,title,Rect2(28,12,1000,34),25,UISkin.DARK)
 	if not game.campaign.is_empty(): UISkin.label(p,"G  %d"%game.campaign.gold,Rect2(1080,13,140,32),21,UISkin.DARK)
 func nav(parent: Node, text: String, r: Rect2, call: Callable, key: String="", primary: bool=false) -> Button:
-	var b:=UISkin.button(parent,text,r,call,primary)
+	var epoch: int=game.ui_epoch
+	var b:=UISkin.button(parent,text,r,func():game.ui_action(call,epoch),primary)
+	if primary: game.set_primary(b)
 	if key!="": b.set_meta("nav",key)
 	return b
 func command(parent: Node, text: String, r: Rect2, action: String, args: Dictionary={}, primary: bool=false) -> Button:
 	var revision: int=game.campaign.revision
-	var epoch: int=game.ui_epoch
-	var b:=nav(parent,text,r,func(): game.ui_action(func():game.perform(action,args,revision),epoch),"",primary)
+	var b:=nav(parent,text,r,func():game.perform(action,args,revision),"",primary)
 	b.set_meta("campaign_action",action); b.set_meta("campaign_args",args); game.play_buttons[action]=b
 	return b
 func hero_card(r: Rect2) -> Control:
@@ -87,7 +88,7 @@ func build_hub() -> void:
 		UISkin.quiet_button(b); b.add_theme_font_size_override("font_size",25)
 		var icon: Texture2D=Symbols.texture("exp") if page=="status" else (preload("res://ui/interface_symbols.gd").texture("warehouse") if page=="warehouse" else Items.texture("A01"))
 		UISkin.picture(b,icon,Rect2(16,12,42,42))
-	command(menu,"探索に出発",Rect2(27,331,412,76),"depart",{},true).add_theme_font_size_override("font_size",27)
+	command(menu,"探索に出発［E］",Rect2(27,331,412,76),"depart",{},true).add_theme_font_size_override("font_size",27)
 	nav(menu,"タイトルへ",Rect2(27,435,193,58),game.show_title,"title")
 	nav(menu,"終了",Rect2(231,435,208,58),func():game.get_tree().quit(),"quit")
 	var card:=hero_card(Rect2(820,131,372,430))

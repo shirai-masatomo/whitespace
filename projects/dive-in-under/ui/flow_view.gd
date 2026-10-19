@@ -42,6 +42,7 @@ func _ready() -> void:
 	var s: Dictionary=game.campaign
 	var node: Dictionary=E.Journey.node(game.cfg,int(s.floor))
 	battle=game.display_battle() if s.phase=="battle" or game.presenting else {}
+	if game.flow_selection.get("kind")=="pending" and E.Journey.reward_index(s,game.flow_selection.get("uid",""))<0: game.flow_selection={"kind":"actor","side":"hero"}
 	UISkin.picture(self,Art.background_texture(node.get("background","cavern")),Rect2(0,0,1280,720),true).modulate=Color(.46,.55,.58)
 	var head:=UISkin.panel(self,Rect2(16,14,1248,60),"",true)
 	var phase: String="battle" if not battle.is_empty() else s.phase

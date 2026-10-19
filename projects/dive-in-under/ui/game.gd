@@ -97,6 +97,7 @@ func _notification(what: int) -> void:
 		get_tree().quit()
 
 func show_title() -> void:
+	ui_epoch+=1; primary_button=null
 	cancel_presentation(); intro_active=false; field_equipment=false
 	if is_instance_valid(dungeon_music): dungeon_music.stop(); dungeon_music_path=""
 	route_map_open=false
@@ -199,6 +200,13 @@ func perform(action: String, args: Dictionary, revision: int) -> void:
 		session_departed=true
 		candidate=Expedition.act(candidate,"descend",int(candidate.revision),{},data,cfg)
 	campaign=candidate; loaded={"ok":true,"status":"ok"}; notice=""
+	if action in ["equip","equip_reward"]:
+		var equipped_uid: String=args.get("uid","item-%d"%(int(campaign.next_item)-1))
+		if campaign.items.has(equipped_uid):
+			equipment_focus=cfg.items[campaign.items[equipped_uid]].slot
+			flow_selection={"kind":"equipment","uid":equipped_uid,"slot":equipment_focus}
+	elif action=="unequip" and not campaign.inventory.is_empty(): flow_selection={"kind":"inventory","uid":campaign.inventory[-1],"slot":""}
+	elif action=="claim_reward": flow_selection={"kind":"inventory","uid":"item-%d"%(int(campaign.next_item)-1),"slot":""}
 	if action in ["town","depart"]:
 		town_page="hub"; field_equipment=false; intro_seen={}; intro_active=false; cancel_presentation()
 		if action=="depart": auto_play=true

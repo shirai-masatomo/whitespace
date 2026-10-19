@@ -67,7 +67,7 @@ static func run(game: Control) -> void:
 	if not check(game,DisplayServer.get_name()!="headless" and game.save_store==null and game.campaign.is_empty(),"Fresh isolated actual distribution EXE"): return
 	await game.capture("00-title.png"); if not check(game,logos(game.screen)==1,"Title retains exactly one adopted logo"): return
 	await nav(game,"start"); await shot(game,"01-preparation")
-	await command(game,"depart")
+	await key(game,KEY_E)
 	await key_event(game,KEY_SPACE,true); await key_event(game,KEY_SPACE,false); await wait(game,.5)
 	if not check(game,game.campaign.floor==1 and game.campaign.phase=="battle" and not game.auto_play,"Normal first encounter paused"): return
 	await shot(game,"02-battle")
@@ -163,6 +163,8 @@ static func run(game: Control) -> void:
 	if not check(game,game.campaign.phase=="reward" and game.campaign.pending_rewards.size()==1,"Rapid mouse repeat does not pierce destination primary"): return
 	await key_event(game,KEY_E,true); await key_event(game,KEY_E,false)
 	if not check(game,game.campaign.phase=="reward","Transition input quarantine rejects immediate E"): return
+	await wait(game,.15); await key_event(game,KEY_E,true); await key_event(game,KEY_E,false)
+	if not check(game,game.campaign.phase=="reward","Rapid fresh E repeats are rejected after release too"): return
 	# Fitting all-receipt native click counts are fixed by actual controls, not a macro.
 	await key(game,KEY_E)
 	if not check(game,game.campaign.floor==3 and game.campaign.phase=="event","One receipt primary still advances after release/quiet interval"): return
