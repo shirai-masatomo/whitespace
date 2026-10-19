@@ -2,6 +2,8 @@
 
 **3モデル×2シード＝6枚の共通条件比較**と、**Animagine 4.0 Optの通常設定テスト1枚**を載せた確認用ギャラリー。2026-10-19にWindows PCのComfyUIで実機生成。一般向けの服を着た人物のみ。
 
+**同一キャラクターの別構図・衣装・背景を作る手順**: [ChatGPT画像編集／ComfyUI／Codexの使い分けと実務プレイブック](CHARACTER_VARIATION_PLAYBOOK.md)。現在の環境の検証済み・未検証を区別し、img2img、Inpainting、OpenPose、IP-Adapterの導入・確認手順を記載。
+
 **今回、新規の有料契約・アカウント登録・無料体験の申込み・支払いはしていない。モデルの取得とローカル生成に従量課金はない。** PCの電気代・契約に応じた通信費、および既存のCodex契約・利用枠は別。詳しくは [料金・利用条件](USAGE.md)。
 
 **別系統の画風も見る:** [Web上の公式参考画像（Animagine / Illustrious / Pony、NoobAIはリンク）](WEB_REFERENCES.md)。モデルを追加取得せずに閲覧できる外部作例で、このPCの生成結果とは区別する。
