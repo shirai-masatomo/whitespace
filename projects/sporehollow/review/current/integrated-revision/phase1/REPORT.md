@@ -98,4 +98,4 @@ Godot headless、Dummy音声、30fps上限、BelowNormal、直列。各プロセ
 
 ## 配布
 
-安全なheadlessロード/ビルド後、既存EXE一本へ反映しハッシュを記録する。通常ゲームは自動起動しない。配布時の結果は [DELIVERY.json](DELIVERY.json)。所有検証領域・候補EXE・編集スクリプトを整理し、通常データ・素材原本・Git履歴は保持する。
+実装 `15f608178964b7cc20e05f4a7ec599d79f5061bd` を既存の最新開発版EXEへ反映済み。SHA256 `51C3CAC113558CF1AAD644973D3CA9E3BCC260CF55422D4CF4505119F56A5426` がBUILD・EXE・[EXE_SMOKE.json](EXE_SMOKE.json)で一致。EXEそのものをheadless/Dummy/30fps/隔離データで7.12秒起動し終了コード0。通常画面は未起動。**終了時ObjectDB警告1421件は残り、原因の全特定・解消は未完了**。UIを明示破棄した3回でWorld残留0の検証とは区別する。配布記録は [DELIVERY.json](DELIVERY.json)。所有検証領域・候補EXE・編集スクリプトは整理し、配布EXE1本と既存入口を維持。通常データ・素材原本・Git履歴は保持。

@@ -2,7 +2,7 @@
 
 コード・関連headlessゲートを完了。900確認、失敗0。資材待ち100件/10人の不要経路探索、地面/岩場/切り株キャッシュのWorld強参照、無制限の研究履歴を修正。3seed翌朝・seed731の3夜・部分搬入/取消/権限/生活/救出と仕事復帰を確認。実機操作・GPU・10夜/長時間安定性は未検証。
 
-[状態遷移・再現原因・数値・残課題](review/current/integrated-revision/phase1/REPORT.md) / [機械可読結果と工程2ベースライン](review/current/integrated-revision/phase1/RESULTS.json)。最新EXEは安全なビルド後に既存入口へ反映し、同フォルダDELIVERY.jsonでコードとハッシュを識別する。工程2は未着手。
+[状態遷移・再現原因・数値・残課題](review/current/integrated-revision/phase1/REPORT.md) / [機械可読結果と工程2ベースライン](review/current/integrated-revision/phase1/RESULTS.json)。実装 `15f60817` を既存の最新EXEへ反映済み。同フォルダDELIVERY.jsonでコードとハッシュを識別。EXEの隔離headless起動終了は成功（7.12秒、終了0）。終了時ObjectDB警告1421件は未解消で、World解放の3回試験と区別する。工程2は未着手。
 
 以下は過去の計画格納・実装記録。現在の配布実体は上記の配布記録を参照。
 

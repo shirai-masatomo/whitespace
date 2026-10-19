@@ -3012,7 +3012,11 @@
       "expanded_nodes": 1013
     }
   ],
-  "warnings": {},
+  "warnings": {
+    "exe-smoke.log": [
+      "WARNING: 1421 ObjectDB instances were leaked at exit (run with `--verbose` for details)."
+    ]
+  },
   "unmeasured": [
     "Native Windows interaction and presentation",
     "GPU/VRAM/FPS and render frame pacing",

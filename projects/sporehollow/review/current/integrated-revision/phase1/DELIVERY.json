@@ -1,0 +1,17 @@
+{
+  "native_game_launch_performed": false,
+  "headless_loading_checks": 39,
+  "native_lifecycle_checks": 0,
+  "dirty": true,
+  "implementation_commit": "15f608178964b7cc20e05f4a7ec599d79f5061bd",
+  "asset_delivery_commit": "54300cef37f964183d7832379d2be575b68d1c99",
+  "diagnostics_removed": true,
+  "normal_data_unchanged": true,
+  "sha256": "51C3CAC113558CF1AAD644973D3CA9E3BCC260CF55422D4CF4505119F56A5426",
+  "automatically_launched": false,
+  "utc": "2026-10-19T11:22:26.9654658Z",
+  "commit": "15f608178964b7cc20e05f4a7ec599d79f5061bd",
+  "session_only": true,
+  "headless_exe_exit_code": 0,
+  "headless_exe_exit_warning": "1421 ObjectDB instances; unresolved"
+}
