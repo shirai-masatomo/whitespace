@@ -1,0 +1,15 @@
+{
+  "conclusion": "success",
+  "run_id": 39233227479,
+  "head_sha": "7620325e00e063f48a869535aef64994a8f31815",
+  "branch": "main",
+  "verification_scope": "ui-feedback-01-07-unchanged-core",
+  "baseline_core_data_commit": "a5c3c6925fbc501d24ce84ccfa1f2fbbeed74456",
+  "build_artifact_id": 12177098103,
+  "build_artifact_sha256": "f7b2e7396cfa53ebc52ee924e60baccc285bd55eee5925475c4f1e001e5bc1a9",
+  "evidence_artifact_id": 12178122971,
+  "evidence_artifact_sha256": "605f04f4cb72018fd82840e471c8b80c4278a3aacbe144fbfba536e6054260e4",
+  "first_pass_run": 39232543599,
+  "first_pass_source": "0885e96f88e6504f21679797daeb1fa44ff2fac4",
+  "parse_error_fixed_run": 39232049404
+}

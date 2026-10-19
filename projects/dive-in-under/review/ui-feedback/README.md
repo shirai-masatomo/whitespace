@@ -1,3 +1,34 @@
+# UIフィードバック01〜07 — 対応指示と実装結果
+
+**2026-10-19、ユーザーから01〜07の実装指示を直接受領**。[指示記録](history/REQUEST_2026-10-19.md)。
+最新のブランチ・版・入口を先に確認し、残存する7件を対象に修正した。
+**実装状態とユーザーの見た目評価・採用判断を分ける。全7件は修正済み、ユーザー評価は未評価、採用は未判断。**
+
+- 対応版：**0.6.1**、実行ソース **7620325e00e063f48a869535aef64994a8f31815**。
+- 開発：**main**。旧phase-02の未反映実装をa4b07f7で統合後、mainで修正。
+- 起動：既存「01 ゲームを起動」→ review/current/Play.cmd → 検証済み0.6.1。通常入口とZIPを切替済み。
+- [番号別の実画面比較](responses/0.6.1/index.html)／[確認結果と未確認](responses/0.6.1/README.md)／[着手時に残っていた根拠](responses/0.6.1/INITIAL_CHECK.md)／[CI](https://github.com/shirai-masatomo/whitespace/actions/runs/39233227479)。
+- 既に解消済みとして変更を省いた番号はなし。BGM・戦闘処理・ゲーム仕様の変更なし。
+
+| 番号 | 実装状態 | 変更・理由 | ユーザー評価 | 採用判断 | 実画面比較 |
+| --- | --- | --- | --- | --- | --- |
+| 01 | 修正済み | 枠内は実測した幅に収まる明示的な「…」。右詳細とツールチップは正式名全文。 | 未評価 | 未判断 | [前](images/01-status-equipment.png)／[後](responses/0.6.1/after/01-status-equipment.png)／[比較](responses/0.6.1/01.html) |
+| 02 | 修正済み | 日本語の行分割データを配布物へ含め、説明を日本語・単語境界で折り返す。 | 未評価 | 未判断 | [前](images/02-equipment.png)／[後](responses/0.6.1/after/02-equipment.png)／[比較](responses/0.6.1/02.html) |
+| 03 | 修正済み | 6列を維持してマスの名前領域を独立。枠から離し、下部案内に暗い帯を付ける。 | 未評価 | 未判断 | [前](images/03-warehouse.png)／[後](responses/0.6.1/after/03-warehouse.png)／[比較](responses/0.6.1/03.html) |
+| 04 | 修正済み | 項目名・現在値・内訳を同じ文字サイズ／縦中央と共通の上下余白へ。 | 未評価 | 未判断 | [前](images/04-status-abilities.png)／[後](responses/0.6.1/after/04-status-abilities.png)／[比較](responses/0.6.1/04.html) |
+| 05 | 修正済み | ボタン位置は維持。不透明な全面パネルを、タイトル直下だけの小さい半透過プレートへ。 | 未評価 | 未判断 | [前](images/05-title.png)／[後](responses/0.6.1/after/05-title.png)／[比較](responses/0.6.1/05.html) |
+| 06 | 修正済み | HPバーを数値の直下・肖像の横へ移す。出発ボタンと残りの構成は維持。 | 未評価 | 未判断 | [前](images/06-preparation.png)／[後](responses/0.6.1/after/06-preparation.png)／[比較](responses/0.6.1/06.html) |
+| 07 | 修正済み | 固定敵から名前・Lv・登場ログを一緒に生成。通常遭遇は別の1例で区別して確認。 | 未評価 | 未判断 | [前](images/07-battle.png)／[後](responses/0.6.1/after/07-battle.png)／[比較](responses/0.6.1/07.html) |
+
+最終確認はクラウドの隔離EXE1回・10.659秒。対象7件、準備へ戻る、倉庫往復、ステータスの非破壊性、07の通常遭遇1例を確認。
+ローカルのビルド・ゲーム起動、大量seed、長時間試験は行っていない。別解像度・ユーザーPCのGUI・全敵全階層・ユーザーの最終評価は未確認。
+
+原レビューのPNG・出典・評価履歴は保持。[最初のレビュー本文](history/original-0.6.0-README.md)と[最初の画像出典](history/original-0.6.0-IMAGE_SOURCES.md)を無変更で保存。以下も元のレビュー・評価状態をそのまま残した履歴であり、上の今回の実装許可／状態とは区別する。
+
+---
+
+# 初回レビュー履歴（0.6.0保存時・原文）
+
 # Dive In Under UIレビュー — ユーザー評価用
 
 対象 **0.6.0** ／ 整理日 **2026-10-19（日本時間）**

@@ -13,3 +13,13 @@
 | 05 | [images/05-title.png](images/05-title.png) | 7baa9770f5f356d2ec27f26c7db6043493a70150 | 1563584 |
 | 06 | [images/06-preparation.png](images/06-preparation.png) | 21a9710582f1751a36f9c0e37acbf24c71e51353 | 1383038 |
 | 07 | [images/07-battle.png](images/07-battle.png) | 35737238d9973b5faa7aa64fef02dafb74a1c098 | 1502368 |
+
+
+## 今回の修正後（0.6.1）
+
+原画像と上の出典は変更していない。
+修正後は [responses/0.6.1/IMAGE_MANIFEST.json](responses/0.6.1/IMAGE_MANIFEST.json) に全8枚のファイル名・バイト数・SHA-256を記録。
+実行ソース7620325e00e063f48a869535aef64994a8f31815、main、GitHub CI39233227479の配布EXE/PCK、1280×720、非対話隔離デスクトップ、実Buttonのアプリ内入力。
+無加工PNGで、生成・補筆・理想図への置換は行っていない。
+01〜07は前後の同条件をできるだけ維持。07-normal-encounter.pngは固定撮影と区別した通常遭遇seed123の1例。
+前後の条件・限界は [対応結果](responses/0.6.1/README.md) を参照。

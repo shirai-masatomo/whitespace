@@ -1,0 +1,74 @@
+{
+  "source_commit": "7620325e00e063f48a869535aef64994a8f31815",
+  "run_id": 39233227479,
+  "resolution": [
+    1280,
+    720
+  ],
+  "images": [
+    {
+      "file": "after/01-status-equipment.png",
+      "sha256": "8bdcf61d98ff7ba1db99347c2d6371effbbe9717325503aab725d89c1aae3b8d",
+      "bytes": 1164918,
+      "source": "GitHub CI 39233227479: ui-feedback/01-status-equipment.png",
+      "kind": "unaltered actual EXE capture",
+      "fixture": false
+    },
+    {
+      "file": "after/02-equipment.png",
+      "sha256": "24b9c4e51769d5b2dae159de3ea3852f6e5e7220b2b0692d92a2a7bb00c5d572",
+      "bytes": 1093289,
+      "source": "GitHub CI 39233227479: ui-feedback/02-equipment.png",
+      "kind": "unaltered actual EXE capture",
+      "fixture": true
+    },
+    {
+      "file": "after/03-warehouse.png",
+      "sha256": "02f255d16b43afa76bf80e8732d157ab29a25cdc4f6f1c3433979441a08f34b0",
+      "bytes": 912596,
+      "source": "GitHub CI 39233227479: ui-feedback/03-warehouse.png",
+      "kind": "unaltered actual EXE capture",
+      "fixture": true
+    },
+    {
+      "file": "after/04-status-abilities.png",
+      "sha256": "bef774e17afa3d5478eff5e8de47bdc9269c6ae21b27c679a6be10ebb52ecf3b",
+      "bytes": 873089,
+      "source": "GitHub CI 39233227479: ui-feedback/04-status-abilities.png",
+      "kind": "unaltered actual EXE capture",
+      "fixture": false
+    },
+    {
+      "file": "after/05-title.png",
+      "sha256": "fcffe5c0daa22c471d854bb545cf076fc6eec882d44c59cfc9e34958b361becb",
+      "bytes": 1854440,
+      "source": "GitHub CI 39233227479: ui-feedback/05-title.png",
+      "kind": "unaltered actual EXE capture",
+      "fixture": false
+    },
+    {
+      "file": "after/06-preparation.png",
+      "sha256": "162ecba766128fbc8157d640b1fd1553c3e5d4f7084a8956a14ae454389b1894",
+      "bytes": 1384382,
+      "source": "GitHub CI 39233227479: ui-feedback/06-preparation.png",
+      "kind": "unaltered actual EXE capture",
+      "fixture": false
+    },
+    {
+      "file": "after/07-battle.png",
+      "sha256": "ffa12f3b3dbe6ce5a1dffe2fdbc9801135fc12d78549372aa1fcd19d4b574e79",
+      "bytes": 1502784,
+      "source": "GitHub CI 39233227479: ui-feedback/07-battle.png",
+      "kind": "unaltered actual EXE capture",
+      "fixture": true
+    },
+    {
+      "file": "after/07-normal-encounter.png",
+      "sha256": "f14a4e22e86d4f4ba0f78d0dbf2842cdb3052fa974707b6bb22d11c1090abfa5",
+      "bytes": 1497709,
+      "source": "GitHub CI 39233227479: ui-feedback/07-normal-encounter.png",
+      "kind": "unaltered actual EXE capture",
+      "fixture": false
+    }
+  ]
+}

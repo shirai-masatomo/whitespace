@@ -1,0 +1,158 @@
+{
+	"battle_core_changed": false,
+	"checks": {
+		"01": {
+			"detail_full_name": true,
+			"full": "冒険者のマント",
+			"rect": "[P: (385.0, 198.0), S: (90.0, 19.0)]",
+			"visible": "冒険者のマ…"
+		},
+		"02": {
+			"equipment": [
+				{
+					"label_lines": 3,
+					"language": "ja",
+					"lines": [
+						"旅立ちの青いフード付きマント。頭に",
+						"装備し、帽子とは同時に着用できな",
+						"い。"
+					],
+					"rect": "[P: (920.0, 372.0), S: (320.0, 105.0)]",
+					"text": "旅立ちの青いフード付きマント。頭に装備し、帽子とは同時に着用できない。"
+				}
+			],
+			"punctuation_ok": true,
+			"status": [
+				{
+					"label_lines": 3,
+					"language": "ja",
+					"lines": [
+						"旅立ちの青いフード付きマント。頭に",
+						"装備し、帽子とは同時に着用できな",
+						"い。"
+					],
+					"rect": "[P: (934.0, 226.0), S: (304.0, 63.0)]",
+					"text": "旅立ちの青いフード付きマント。頭に装備し、帽子とは同時に着用できない。"
+				}
+			],
+			"text_server_data": true
+		},
+		"03": {
+			"backpack": 15,
+			"cloth": 3,
+			"columns": 3,
+			"names": [
+				{
+					"full": "粗布の上着",
+					"rect": "[P: (348.0, 266.0), S: (64.0, 22.0)]",
+					"visible": "粗布の上着"
+				},
+				{
+					"full": "革のズボン",
+					"rect": "[P: (437.0, 266.0), S: (64.0, 22.0)]",
+					"visible": "革のズボン"
+				},
+				{
+					"full": "古いブーツ",
+					"rect": "[P: (526.0, 266.0), S: (64.0, 22.0)]",
+					"visible": "古いブーツ"
+				},
+				{
+					"full": "鉄の指輪",
+					"rect": "[P: (615.0, 266.0), S: (64.0, 22.0)]",
+					"visible": "鉄の指輪"
+				},
+				{
+					"full": "守りの腕輪",
+					"rect": "[P: (704.0, 266.0), S: (64.0, 22.0)]",
+					"visible": "守りの腕輪"
+				},
+				{
+					"full": "煤けた首飾り",
+					"rect": "[P: (793.0, 266.0), S: (64.0, 22.0)]",
+					"visible": "煤けた首…"
+				},
+				{
+					"full": "火花の耳飾り",
+					"rect": "[P: (348.0, 384.0), S: (64.0, 22.0)]",
+					"visible": "火花の耳…"
+				},
+				{
+					"full": "透視レンズ",
+					"rect": "[P: (437.0, 384.0), S: (64.0, 22.0)]",
+					"visible": "透視レンズ"
+				},
+				{
+					"full": "深層の指輪",
+					"rect": "[P: (526.0, 384.0), S: (64.0, 22.0)]",
+					"visible": "深層の指輪"
+				}
+			],
+			"transfer": true
+		},
+		"04": {
+			"aligned": true,
+			"rows": [
+				[
+					"[P: (48.0, 12.0), S: (160.0, 30.0)]",
+					"[P: (205.0, 12.0), S: (118.0, 30.0)]",
+					"[P: (342.0, 12.0), S: (177.0, 30.0)]"
+				],
+				[
+					"[P: (48.0, 12.0), S: (160.0, 30.0)]",
+					"[P: (205.0, 12.0), S: (118.0, 30.0)]",
+					"[P: (342.0, 12.0), S: (177.0, 30.0)]"
+				],
+				[
+					"[P: (48.0, 12.0), S: (160.0, 30.0)]",
+					"[P: (205.0, 12.0), S: (118.0, 30.0)]",
+					"[P: (342.0, 12.0), S: (177.0, 30.0)]"
+				],
+				[
+					"[P: (48.0, 12.0), S: (160.0, 30.0)]",
+					"[P: (205.0, 12.0), S: (118.0, 30.0)]",
+					"[P: (342.0, 12.0), S: (177.0, 30.0)]"
+				],
+				[
+					"[P: (48.0, 12.0), S: (160.0, 30.0)]",
+					"[P: (205.0, 12.0), S: (118.0, 30.0)]",
+					"[P: (342.0, 12.0), S: (177.0, 30.0)]"
+				]
+			]
+		},
+		"05": {
+			"layout_change": "Only title plate reduced from 620x460 to 620x148; controls stay in place",
+			"start_button_tested": true,
+			"user_evaluation": "pending"
+		},
+		"06": {
+			"hp": 24,
+			"max_hp": 24,
+			"same_initial_state": true
+		},
+		"07": {
+			"appearance_log": "地下1F：坑道ゴブリン Lv.1 が現れた。",
+			"fixture_aligned": true,
+			"fixture_id": "E04",
+			"name": "坑道ゴブリン",
+			"normal_case": {
+				"appearance_log": "地下1F：地底ネズミ Lv.1 が現れた。",
+				"consistent": true,
+				"id": "E01",
+				"name": "地底ネズミ",
+				"seed": 123
+			}
+		}
+	},
+	"complete": true,
+	"no_save_store": true,
+	"normal_encounter_sample": 1,
+	"rendered": true,
+	"review": "ui-feedback-01-07",
+	"run_id": "591aaf69f3364c2f888ef59bd7916771",
+	"status_read_only": true,
+	"user_adoption": "pending",
+	"user_evaluation": "pending",
+	"version": "0.6.1",
+	"warehouse_transfers": true
+}

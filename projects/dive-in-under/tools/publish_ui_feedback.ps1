@@ -37,7 +37,7 @@ try {
         if ($hash -ne (Get-FileHash (Join-Path $build $name)).Hash) { throw 'ZIP payload mismatch' }
     }
 } finally { $archive.Dispose() }
-if ($VerifyOnly) { Write-Output 'Exact cloud CI, session UI, restart, unchanged core/data and ZIP checks passed'; return }
+if ($VerifyOnly) { Write-Output 'Exact cloud CI, seven UI cases, one normal encounter, unchanged core/data and ZIP checks passed'; return }
 $relative=(Get-Content (Join-Path $buildRoot 'candidate.txt') -Raw).Trim()
 $pointer=Join-Path $buildRoot 'current.txt'
 $previous=(Get-Content $pointer -Raw).Trim()
