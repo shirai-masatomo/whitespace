@@ -130,7 +130,8 @@ static func run(game: Control) -> void:
 	fixture(game)
 	var old: String=E.add_item(game.campaign,"I02"); game.campaign.inventory.erase(old); game.campaign.equipment.body=old; game.campaign.item_condition[old].current=37
 	var candidate: String=E.add_item(game.campaign,"I02")
-	while game.campaign.inventory.size()<15: E.add_item(game.campaign,"I10")
+	while game.campaign.inventory.size()<14: E.add_item(game.campaign,"I10")
+	var boots: String=E.add_item(game.campaign,"I04")
 	E.Journey.add_reward(game.campaign,"I11"); var token: String=game.campaign.pending_rewards[0].token
 	game.show_campaign(); await wait(game); await shot(game,"11-full-reward")
 	frozen=Replay.hash_state(game.campaign); await key(game,KEY_E)
@@ -145,6 +146,10 @@ static func run(game: Control) -> void:
 	if not check(game,Replay.hash_state(game.campaign)==frozen,"Outside drop restores source"): return
 	await Old.drag(game,cell(game.screen,"equipment",candidate,"body"),cell(game.screen,"inventory",old).get_global_rect().get_center())
 	if not check(game,Replay.hash_state(game.campaign)==frozen,"Full backpack rejects equipped-to-bag drag"): return
+	await double_click(game,cell(game.screen,"inventory",boots))
+	if not check(game,game.campaign.inventory.size()==14 and game.campaign.equipment.feet==boots,"Equip from bag frees one slot"): return
+	await Old.drag(game,cell(game.screen,"equipment",candidate,"body"),cell(game.screen,"inventory",old).get_global_rect().get_center())
+	if not check(game,game.campaign.equipment.body=="" and candidate in game.campaign.inventory and game.campaign.inventory.size()==15 and game.campaign.item_condition[old].current==37,"Equipped-to-bag drag succeeds with one free slot, preserving both instances"): return
 	await key(game,KEY_ESCAPE)
 	await double_click(game,cell(game.screen,"pending",token))
 	if not check(game,game.campaign.pending_rewards.is_empty() and game.campaign.equipment.finger!="" and game.campaign.inventory.size()==15,"Pending reward equips directly into free slot without loss or extra capacity"): return
@@ -176,10 +181,19 @@ static func run(game: Control) -> void:
 	await shot(game,"15-status-follow-motion"); stage.hero_art.position=origin
 	game.presentation_battle.hero.statuses={}; game.presentation_battle.enemy.statuses={}; shell(game).refresh_live()
 	await shot(game,"16-status-cleared")
+	game.flow_selection={"kind":"actor","side":"enemy"}; game.presentation_battle.enemy.hp=0; shell(game).refresh_live()
+	if not check(game,game.flow_selection.get("side")=="hero" and not shell(game).actor_huds.enemy.visible,"Defeated target clears old enemy detail and HP"): return
 	game.cancel_presentation(); game.intro_active=false; game.campaign.phase="reward"; game.campaign.battle={}; game.campaign.pending_rewards=[]; game.show_campaign(); await shot(game,"17-after-battle")
 	if not check(game,not is_instance_valid(stage) or not stage.is_inside_tree(),"Old actor effects removed on screen switch"): return
+	fixture(game); game.campaign.phase="battle"; game.campaign.floor=10; game.campaign.highest_floor=10
+	game.campaign.battle={"enemy_id":"B10","enemy_level":10,"seed":123,"hero":E.hero(game.campaign,game.cfg),"rounds":0,"rules_version":3,"encounter_version":2}
+	game.show_campaign(); await wait(game,1.0); await shot(game,"18-boss-and-deep-map")
+	var deep: Control=shell(game).route
+	var current_point: Vector2=deep.global_position+deep.positions()[9]
+	if not check(game,deep.get_parent().get_global_rect().has_point(current_point) and not deep.nodes().any(func(n):return n.type_revealed),"Deep current node is scrolled into view without revealing contents"): return
+	game.campaign.phase="reward"; game.campaign.battle={}; game.campaign.pending_rewards=[]; game.show_campaign()
 	# Restoration and rejection checks use the same core revision guard after UI gestures.
 	if not check(game,E.validate(game.campaign,game.data,game.cfg)=="","Final fixture retains valid ownership/state"): return
 	game.show_title(); await wait(game)
-	UI.write(game,{"complete":true,"rendered":true,"run_id":game.smoke_run_id,"no_save_store":game.save_store==null,"normal":normal,"fixtures":{"full_one_for_one":true,"invalid_drop":true,"outside_drop":true,"full_unequip":true,"pending_direct_equip":true,"held_E":true,"mouse_repeat":true,"map_preserves_pending":true,"stable_shell":true,"status_follows_sprite":true,"status_cleanup":true},"exit_button_pressed":true},"flow-review.json")
+	UI.write(game,{"complete":true,"rendered":true,"run_id":game.smoke_run_id,"no_save_store":game.save_store==null,"normal":normal,"fixtures":{"full_one_for_one":true,"invalid_drop":true,"outside_drop":true,"full_unequip":true,"unequip_with_space":true,"deep_map":true,"dead_target_cleared":true,"pending_direct_equip":true,"held_E":true,"mouse_repeat":true,"map_preserves_pending":true,"stable_shell":true,"status_follows_sprite":true,"status_cleanup":true},"exit_button_pressed":true},"flow-review.json")
 	await nav(game,"quit")

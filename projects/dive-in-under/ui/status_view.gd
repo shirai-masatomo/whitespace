@@ -79,7 +79,7 @@ func build() -> void:
 	var right:=panel(Rect2(916,92,348,510),"詳細")
 	detail_scroll=ScrollContainer.new(); detail_scroll.position=Vector2(18,54); detail_scroll.size=Vector2(312,382); detail_scroll.horizontal_scroll_mode=ScrollContainer.SCROLL_MODE_DISABLED; detail_scroll.theme=UISkin.scroll_theme(); right.add_child(detail_scroll)
 	details=VBoxContainer.new(); details.size_flags_horizontal=Control.SIZE_EXPAND_FILL; details.add_theme_constant_override("separation",12); detail_scroll.add_child(details)
-	label_at(right,"装備変更は［I］ / 修理は冒険準備で",Rect2(20,454,310,38),14,MUTED)
+	label_at(right,"装備変更は準備の「装備」から" if game.campaign.phase=="town" else "装備変更は「所持品・装備」から",Rect2(20,454,310,38),14,MUTED)
 	build_party()
 	back_button=button_at(self,"戻る",Rect2(1060,616,204,88),request_close)
 	var border:=Control.new(); border.set_script(Frame); border.ornament_only=true; back_button.add_child(border); border.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)

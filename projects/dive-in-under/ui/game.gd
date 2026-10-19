@@ -188,7 +188,7 @@ func perform(action: String, args: Dictionary, revision: int) -> void:
 	var old_journal: Array=campaign.get("journal",[]).duplicate()
 	var candidate:=Expedition.act(campaign,action,revision,args,data,cfg)
 	if candidate==campaign:
-		if action=="organize": notice="すでに選択した順序に整理されています。"; show_campaign()
+		if action in ["organize","organize_bag"]: notice="すでに選択した順序に整理されています。"; show_campaign()
 		return
 	if legacy_persistence_mode:
 		var error: String=save_store.write_game(candidate)
@@ -210,7 +210,7 @@ func perform(action: String, args: Dictionary, revision: int) -> void:
 		warehouse_state.uid=args.get("uid","")
 		warehouse_state.source={"deposit":"warehouse","withdraw":"inventory","to_cloth":"cloth"}[action]
 		notice={"deposit":"倉庫へ預けました。","withdraw":"バックパックへ引き出しました。","to_cloth":"父親の風呂敷へ移しました。"}[action]
-	if action=="organize": notice="選択した順序に整理しました。"
+	if action in ["organize","organize_bag"]: notice="選択した順序に整理しました。"
 	if action=="open_chest": preload("res://ui/journey_sound.gd").play(self,330)
 	if action=="transfer": notice="%sへ移しました。×1 / 個体・耐久を保持"%{"warehouse":"倉庫","inventory":"バックパック","cloth":"父親の風呂敷"}[args.destination]
 	if action in ["claim_reward","exchange_reward","abandon_rewards","equip_reward"]: reward_confirmation=""
@@ -720,6 +720,8 @@ func present_round(record: Dictionary) -> void:
 	presenting=true; presentation_battle=record.before.duplicate(true); play_timer.stop(); show_campaign()
 	for event in record.events:
 		if generation!=presentation_generation: return
+		if event.type in ["status_applied","status_removed"]:
+			impact(event); continue
 		if not event.type in ["attack","status_damage","action_skipped","skill"]: continue
 		if is_instance_valid(play_view.stage): play_view.stage.present_event(event,self)
 		await get_tree().create_timer(0.30/float(play_speed)).timeout
@@ -730,7 +732,16 @@ func impact(event: Dictionary) -> void:
 	if not presenting: return
 	var side: String=event.get("target",event.get("actor","hero"))
 	if event.has("target_hp"): presentation_battle[side].hp=event.target_hp
-	if event.type=="skill" and event.has("sp"): presentation_battle[event.actor].sp=event.sp
+	if event.type=="skill" and event.has("sp"):
+		presentation_battle[event.actor].sp=event.sp
+		if event.skill=="S105":
+			presentation_battle[event.actor].defense_until=event.expires_after_action
+			presentation_battle[event.actor].action_count=int(event.expires_after_action)-int(data.rules.skills.S105.duration_own_actions)
+	if event.type=="status_applied": presentation_battle[side].statuses[event.status]={"remaining":event.remaining,"potency":event.potency,"skill":event.skill,"source":event.actor}
+	if event.type=="status_removed":
+		if event.status=="defense": presentation_battle[side].defense_until=-1
+		else: presentation_battle[side].statuses.erase(event.status)
+	if presentation_battle[side].hp<=0: presentation_battle[side].statuses={}; presentation_battle[side].defense_until=-1
 	if is_instance_valid(play_view): play_view.refresh_vitals()
 func update_dungeon_music() -> void:
 	var path: String=""

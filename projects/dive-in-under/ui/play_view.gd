@@ -219,7 +219,7 @@ func build_equipment() -> void:
 
 		var remove:=command(details,"この装備へ交換" if candidate else "装備を外す",Rect2(22,398,326,50),"equip" if candidate else "unequip",{"uid":selected} if candidate else {"slot":game.equipment_focus})
 		remove.disabled=item.slot=="" or (not candidate and game.campaign.inventory.size()>=15)
-		if remove.disabled:
+		if remove.disabled and item.slot!="":
 			remove.tooltip_text="バックパックに空きがありません"
 			UISkin.label(details,"バックパックに空きがありません",Rect2(22,363,326,28),15,UISkin.DARK)
 		var cost:=E.Condition.cost(game.campaign,selected,game.cfg)
@@ -261,6 +261,8 @@ func select_item(source: String, uid: String, slot: String="") -> void:
 func activate_item(source: String, uid: String, slot: String="") -> void:
 	if uid=="" or source!="inventory": return
 	preload("res://ui/gear_actions.gd").apply(game,preload("res://ui/gear_actions.gd").payload(game,source,uid,slot),"equipment")
+func show_drag_reason(text: String) -> void:
+	tooltip_text=text
 func accepts_gear(value: Variant, destination: String, slot: String="") -> bool:
 	return preload("res://ui/gear_actions.gd").reason(game,value,destination,slot)==""
 func drop_gear(value: Dictionary, destination: String, slot: String="") -> void:

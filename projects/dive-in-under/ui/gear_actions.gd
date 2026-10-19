@@ -29,3 +29,16 @@ static func apply(game: Control, payload: Dictionary, destination: String, slot:
 	else: game.perform("equip",{"uid":payload.uid,"slot":slot} if slot!="" else {"uid":payload.uid},int(payload.revision))
 static func payload(game: Control, source: String, uid: String, slot: String="") -> Dictionary:
 	return {"kind":"equipment-item","source":source,"uid":uid,"slot":slot,"revision":int(game.campaign.revision)}
+
+static func compared_hero(game: Control, source: String, uid: String) -> Dictionary:
+	var preview: Dictionary=game.campaign.duplicate(true)
+	if source=="pending":
+		var index: int=E.Journey.reward_index(preview,uid)
+		if index>=0:
+			var template: String=preview.pending_rewards[index].id; var slot: String=game.cfg.items[template].slot
+			if slot!="":
+				preview.items["comparison-only"]=template; preview.item_condition["comparison-only"]=E.Condition.fresh(); preview.equipment[slot]="comparison-only"
+	elif uid in preview.inventory:
+		var slot: String=game.cfg.items[preview.items[uid]].slot
+		if slot!="": preview.equipment[slot]=uid
+	return E.hero(preview,game.cfg)

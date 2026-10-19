@@ -73,8 +73,9 @@ func build_left() -> void:
 	label_at(card,"主人公  Lv.%d"%hero.level,Rect2(16,8,192,24),17)
 	hero_hp=label_at(card,"HP %d / %d"%[hero.hp,hero.max_hp],Rect2(16,28,192,22),17)
 	hero_bar=UISkin.gauge(card,hero.hp,hero.max_hp,Rect2(16,52,192,8),Color("b83e32"))
-	hero_sp=label_at(card,"SP %d / %d"%[hero.sp,hero.max_sp],Rect2(16,62,192,20),14)
-	var bag:=UISkin.panel(self,Rect2(16,460,224,244),"所持品  %d / 15"%s.inventory.size())
+	hero_sp=label_at(card,"SP %d / %d"%[hero.sp,hero.max_sp],Rect2(16,62,192,16),13)
+	var bag:=UISkin.panel(self,Rect2(16,460,224,244),"所持品 %d/15"%s.inventory.size())
+	var sort:=action(bag,"整列",Rect2(157,12,53,29),"organize_bag"); sort.add_theme_font_size_override("font_size",14); sort.tooltip_text="種類順に整列 / 空き枠数は変わりません。"; sort.disabled=not battle.is_empty()
 	Grid.bag(bag,game,self,Vector2(18,50),4,44)
 	drag_hint=label_at(self,game.notice,Rect2(260,74,702,18),12); drag_hint.z_index=1000
 func build_map() -> void:
@@ -84,7 +85,7 @@ func build_map() -> void:
 	route.opened.connect(func():call_deferred("open_routes")); route.size_flags_horizontal=Control.SIZE_EXPAND_FILL
 	sc.set_deferred("scroll_vertical",maxi(0,(int(game.campaign.floor)-1)*44-78))
 func build_field() -> void:
-	stage=Control.new(); stage.set_script(preload("res://ui/battle_stage.gd")); stage.position=Vector2(252,86); stage.size=Vector2(718,400); stage.integrated_layout=true; stage.wide_layout=true; stage.floor_number=int(game.campaign.floor); stage.enemy_id=battle.enemy.id if not battle.is_empty() else ""; add_child(stage)
+	stage=Control.new(); stage.set_script(preload("res://ui/battle_stage.gd")); stage.position=Vector2(252,86); stage.size=Vector2(718,400); stage.integrated_layout=true; stage.wide_layout=true; stage.floor_number=int(game.campaign.floor); stage.background_override=E.Journey.node(game.cfg,int(game.campaign.floor)).get("background",""); stage.enemy_id=battle.enemy.id if not battle.is_empty() else ""; add_child(stage)
 	if battle.is_empty(): stage.enemy_art.visible=false
 	else:
 		var overlay:=Control.new(); overlay.set_script(preload("res://ui/status_overlay.gd")); overlay.battle=battle; stage.add_child(overlay)
@@ -185,16 +186,18 @@ func drop_gear(value: Dictionary, destination: String, slot: String="") -> void:
 func refresh_details() -> void:
 	if is_instance_valid(detail_body): detail.remove_child(detail_body); detail_body.queue_free()
 	detail_body=Control.new(); detail_body.position=Vector2(16,52); detail_body.size=Vector2(250,278); detail.add_child(detail_body)
+	for hud in actor_huds.values(): hud.queue_redraw()
 	var selection: Dictionary=game.flow_selection
 	if selection.get("kind")=="actor":
 		var side: String=selection.get("side","hero")
 		if side=="enemy" and (battle.is_empty() or battle.enemy.hp<=0): game.flow_selection={"kind":"actor","side":"hero"}; side="hero"
 		var h: Dictionary=battle[side] if not battle.is_empty() else E.hero(game.campaign,game.cfg)
-		label_at(detail_body,h.name+"  Lv.%d"%h.level,Rect2(0,0,250,44),22,true)
-		label_at(detail_body,"HP %d / %d\nSP %d / %d\n攻撃 %d   防御 %d\n素早さ %d"%[h.hp,h.max_hp,h.sp,h.max_sp,h.atk,h.def,h.spd],Rect2(0,53,250,113),18,true)
-		var effects: Array=Model.effects(h,game.data.rules); var text: Array[String]=[]
-		for effect in effects: text.append(effect.name+" / 残り%d機会"%effect.remaining+"\n"+effect.text)
-		label_at(detail_body,"\n".join(text) if not text.is_empty() else "状態異常なし",Rect2(0,177,250,97),15,true)
+		var scroll:=ScrollContainer.new(); scroll.size=Vector2(250,278); scroll.horizontal_scroll_mode=ScrollContainer.SCROLL_MODE_DISABLED; scroll.theme=UISkin.scroll_theme(); detail_body.add_child(scroll)
+		var body:=VBoxContainer.new(); body.size_flags_horizontal=Control.SIZE_EXPAND_FILL; body.add_theme_constant_override("separation",12); scroll.add_child(body)
+		var effects: Array=Model.effects(h,game.data.rules); var texts: Array[String]=[]
+		for effect in effects: texts.append(effect.name+" / 残り%d機会"%effect.remaining+"\n"+effect.text)
+		for row in [[h.name+"  Lv.%d"%h.level,22],["HP %d / %d\nSP %d / %d\n攻撃 %d   防御 %d\n素早さ %d"%[h.hp,h.max_hp,h.sp,h.max_sp,h.atk,h.def,h.spd],18],["\n".join(texts) if not texts.is_empty() else "状態異常なし",15]]:
+			var l:=Label.new(); l.text=row[0]; l.language="ja"; l.autowrap_mode=TextServer.AUTOWRAP_WORD; l.add_theme_font_size_override("font_size",row[1]); l.add_theme_color_override("font_color",UISkin.DARK); body.add_child(l)
 		return
 	var uid: String=selection.get("uid",""); var template: String=""; var slot: String=selection.get("slot","")
 	if selection.kind=="pending":
@@ -210,8 +213,7 @@ func refresh_details() -> void:
 	for key in item.stats: lines.append({"atk":"攻撃","def":"防御","spd":"素早さ","max_hp":"最大HP","max_sp":"最大SP"}[key]+" %+d"%int(item.stats[key]))
 	if uid in game.campaign.items: lines.append(game.condition_text(uid))
 	if item.slot!="" and selection.kind in ["inventory","pending"]:
-		var candidate: Dictionary=E.act(game.campaign,"equip_reward" if selection.kind=="pending" else "equip",int(game.campaign.revision),{"token":uid} if selection.kind=="pending" else {"uid":uid},game.data,game.cfg)
-		var before: Dictionary=E.hero(game.campaign,game.cfg); var after: Dictionary=E.hero(candidate,game.cfg)
+		var before: Dictionary=E.hero(game.campaign,game.cfg); var after: Dictionary=Gear.compared_hero(game,selection.kind,uid)
 		var compare: Array[String]=[]
 		for key in [["atk","攻撃"],["def","防御"],["spd","速"],["max_hp","HP"],["max_sp","SP"]]: compare.append("%s %+d"%[key[1],int(after[key[0]])-int(before[key[0]])])
 		lines.append("交換差："+" / ".join(compare))

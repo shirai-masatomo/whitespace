@@ -15,6 +15,8 @@ func _ready() -> void:
 	bar=UISkin.gauge(self,1,1,Rect2(4,21,148,7),Color("b83e32") if side=="hero" else Color("b0783a"))
 	hp=UISkin.label(self,"",Rect2(4,29,148,16),12); hp.horizontal_alignment=HORIZONTAL_ALIGNMENT_RIGHT
 	body_pick=Button.new(); body_pick.flat=true; body_pick.mouse_default_cursor_shape=CURSOR_POINTING_HAND; body_pick.set_meta("actor_body",side); body_pick.pressed.connect(func():host.select_actor(side)); stage.add_child(body_pick); body_pick.z_index=900
+	for state in ["normal","hover","pressed","focus"]:
+		body_pick.add_theme_stylebox_override(state,StyleBoxEmpty.new()); pick.add_theme_stylebox_override(state,StyleBoxEmpty.new())
 	refresh()
 func _process(_delta: float) -> void:
 	var actor: Sprite2D=stage.hero_art if side=="hero" else stage.enemy_art
@@ -27,3 +29,8 @@ func refresh() -> void:
 	name_label.text=unit.name; hp.text="%d / %d"%[unit.hp,unit.max_hp]; bar.value=unit.hp; bar.max_value=unit.max_hp
 func visual_audit() -> Dictionary:
 	return {"side":side,"visible":visible,"rect":str(get_global_rect()),"body_rect":str(body_pick.get_global_rect()),"hp":hp.text}
+
+func _draw() -> void:
+	draw_rect(Rect2(Vector2.ZERO,size),Color(.015,.04,.055,.88))
+	var selected: bool=host.game.flow_selection.get("kind")=="actor" and host.game.flow_selection.get("side")==side
+	draw_rect(Rect2(Vector2.ZERO,size),Color("e7c47d") if selected else Color("455b60"),false,1)

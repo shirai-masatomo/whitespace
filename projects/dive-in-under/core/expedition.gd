@@ -408,6 +408,11 @@ static func act(previous: Dictionary, action: String, expected_revision: int, ar
 					note(s,"装備を修理した。Gold -%d"%price); changed=true
 		"transfer":
 			changed=Storage.move(s,args.get("uid",""),args.get("source",""),args.get("destination",""),cfg)
+		"organize_bag":
+			if Journey.active(s) and s.phase in ["town","explore","reward","event","event_result","treasure"]:
+				var before: Array=s.inventory.duplicate()
+				s.inventory.sort_custom(func(a,b):return Storage.sort_key(s,a,cfg,"category")<Storage.sort_key(s,b,cfg,"category"))
+				changed=before!=s.inventory
 		"organize":
 			changed=Storage.organize(s,cfg,args.get("mode","category"))
 		"to_cloth":

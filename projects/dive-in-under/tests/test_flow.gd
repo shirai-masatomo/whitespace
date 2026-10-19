@@ -44,4 +44,8 @@ func _initialize() -> void:
 	var result:=E.act(last,"advance_ready",int(last.revision),{},data,cfg)
 	check(result.phase=="result" and result.result.kind=="clear" and result.floor==10,"boss confirmation does not skip to 11F")
 	for state in [a,b,c,swapped,equipped,result]: check(E.validate(state,data,cfg)=="","result is valid: "+E.validate(state,data,cfg))
+	var sort_state:=swapped.duplicate(true); sort_state.inventory.reverse()
+	var sorted_state:=E.act(sort_state,"organize_bag",int(sort_state.revision),{},data,cfg)
+	var sorted_ids: Array=sorted_state.inventory.duplicate(); var old_ids: Array=sort_state.inventory.duplicate(); sorted_ids.sort(); old_ids.sort()
+	check(sorted_ids==old_ids and sorted_state.items==sort_state.items and sorted_state.item_condition==sort_state.item_condition,"sort preserves instances and conditions")
 	print("FLOW_CORE_OK checks="+str(checks)); quit()
