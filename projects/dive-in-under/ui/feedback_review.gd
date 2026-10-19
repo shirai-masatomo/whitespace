@@ -2,7 +2,6 @@ extends RefCounted
 ## Seven focused UI checks. Fixed fixtures never enter normal startup.
 const E=preload("res://core/expedition.gd")
 const UI=preload("res://ui/integration_review.gd")
-const Skin=preload("res://ui/ui_skin.gd")
 static func labels(node: Node) -> Array[Label]:
 	var out: Array[Label]=[]
 	if node is Label: out.append(node)
