@@ -1,0 +1,42 @@
+{
+	"run_id": "96a0ec097a6a4521b9c76caee39fb5f4",
+	"screenshot": "22-candidate-deep.png",
+	"stages": [
+		{
+			"actors": [
+				{
+					"candidate_loaded": true,
+					"foot": [
+						459.0,
+						221.0
+					],
+					"id": "hero",
+					"top_left": [
+						373.285705566406,
+						71.9375
+					],
+					"visible_size": [
+						165.267852783203,
+						165.0
+					],
+					"within_stage": true
+				},
+				{
+					"candidate_loaded": false,
+					"id": ""
+				}
+			],
+			"adoption": "pending",
+			"aspect": "preserved",
+			"background": "cavern",
+			"background_loaded": true,
+			"depth": 7,
+			"filter": "nearest",
+			"stage_size": [
+				612.0,
+				270.0
+			],
+			"static_only": true
+		}
+	]
+}

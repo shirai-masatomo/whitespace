@@ -1,0 +1,472 @@
+{
+  "schema_version": 1,
+  "data_version": "2026-10-18.status-pilot.1",
+  "config_version": "combat-v0.2.hero-defense.1",
+  "provisional": true,
+  "sources": [
+    "docs/COMBAT.md",
+    "docs/ENEMIES.md",
+    "docs/FLOORS.md",
+    "docs/SKILLS.md"
+  ],
+  "rules": {
+    "max_rounds": 50,
+    "hit_chance": 0.95,
+    "critical_chance": 0.05,
+    "critical_multiplier": 1.5,
+    "variance_min": 0.95,
+    "variance_max": 1.05,
+    "enemy_growth": {
+      "hp": 0.1,
+      "atk": 0.06,
+      "def_interval": 5,
+      "sp_interval": 3,
+      "exp": 0.14,
+      "gold": 0.12
+    },
+    "skills": {
+      "S105": {
+        "name": "防御",
+        "sp_cost": 3,
+        "hp_threshold": 0.6,
+        "def_bonus": 0.3,
+        "duration_own_actions": 1,
+        "cooldown_own_actions": 3
+      },
+      "S102": {
+        "name": "毒牙",
+        "sp_cost": 4,
+        "damage_multiplier": 0.9,
+        "apply_chance": 0.3,
+        "status_id": "poison",
+        "duration_own_actions": 3,
+        "cooldown_own_actions": 3,
+        "potency": 0.2,
+        "trigger_timing": "opportunity_start",
+        "stack_rule": "replace"
+      },
+      "S103": {
+        "name": "目くらまし",
+        "sp_cost": 3,
+        "damage_multiplier": 0.8,
+        "apply_chance": 0.5,
+        "status_id": "blind",
+        "duration_own_actions": 2,
+        "cooldown_own_actions": 3,
+        "potency": 0.25,
+        "trigger_timing": "opportunity",
+        "stack_rule": "replace"
+      },
+      "S104": {
+        "name": "足止め",
+        "sp_cost": 5,
+        "damage_multiplier": 0.8,
+        "apply_chance": 0.2,
+        "status_id": "paralysis",
+        "duration_own_actions": 1,
+        "cooldown_own_actions": 4,
+        "potency": 0,
+        "trigger_timing": "opportunity",
+        "stack_rule": "replace"
+      }
+    },
+    "status_pilot": true
+  },
+  "enemies": {
+    "E01": {
+      "name": "地底ネズミ",
+      "hp": 8,
+      "atk": 3,
+      "def": 0,
+      "spd": 6,
+      "sp": 0,
+      "exp": 4,
+      "gold": 2
+    },
+    "E02": {
+      "name": "粘菌スライム",
+      "hp": 11,
+      "atk": 3,
+      "def": 1,
+      "spd": 2,
+      "sp": 0,
+      "exp": 5,
+      "gold": 3
+    },
+    "E03": {
+      "name": "鉄羽コウモリ",
+      "hp": 13,
+      "atk": 5,
+      "def": 0,
+      "spd": 8,
+      "sp": 4,
+      "exp": 7,
+      "gold": 5,
+      "skills": [
+        "S103"
+      ]
+    },
+    "E04": {
+      "name": "坑道ゴブリン",
+      "hp": 18,
+      "atk": 6,
+      "def": 1,
+      "spd": 5,
+      "sp": 6,
+      "exp": 9,
+      "gold": 8,
+      "skills": [
+        "S102"
+      ]
+    },
+    "E05": {
+      "name": "岩甲虫",
+      "hp": 24,
+      "atk": 7,
+      "def": 3,
+      "spd": 2,
+      "sp": 6,
+      "exp": 12,
+      "gold": 12,
+      "skills": [
+        "S105",
+        "S104"
+      ]
+    },
+    "B10": {
+      "name": "門番の石像",
+      "hp": 54,
+      "atk": 11,
+      "def": 3,
+      "spd": 3,
+      "sp": 12,
+      "exp": 26,
+      "gold": 40
+    }
+  },
+  "floors": [
+    {
+      "from": 1,
+      "to": 1,
+      "encounters": [
+        70,
+        20,
+        10
+      ],
+      "enemies": {
+        "E01": 70,
+        "E02": 30
+      },
+      "levels": [
+        1,
+        1
+      ]
+    },
+    {
+      "from": 2,
+      "to": 2,
+      "encounters": [
+        70,
+        20,
+        10
+      ],
+      "enemies": {
+        "E01": 60,
+        "E02": 30,
+        "E03": 10
+      },
+      "levels": [
+        1,
+        2
+      ]
+    },
+    {
+      "from": 3,
+      "to": 3,
+      "encounters": [
+        70,
+        20,
+        10
+      ],
+      "enemies": {
+        "E01": 35,
+        "E02": 40,
+        "E03": 25
+      },
+      "levels": [
+        2,
+        3
+      ]
+    },
+    {
+      "from": 4,
+      "to": 4,
+      "encounters": [
+        75,
+        15,
+        10
+      ],
+      "enemies": {
+        "E01": 15,
+        "E02": 30,
+        "E03": 35,
+        "E04": 20
+      },
+      "levels": [
+        2,
+        4
+      ]
+    },
+    {
+      "from": 5,
+      "to": 5,
+      "encounters": [
+        75,
+        15,
+        10
+      ],
+      "enemies": {
+        "E01": 10,
+        "E02": 20,
+        "E03": 35,
+        "E04": 25,
+        "E05": 10
+      },
+      "levels": [
+        2,
+        4
+      ]
+    },
+    {
+      "from": 6,
+      "to": 6,
+      "encounters": [
+        75,
+        15,
+        10
+      ],
+      "enemies": {
+        "E06": 40,
+        "E07": 35,
+        "E04": 15,
+        "E05": 10
+      },
+      "levels": [
+        3,
+        5
+      ]
+    },
+    {
+      "from": 7,
+      "to": 7,
+      "encounters": [
+        80,
+        10,
+        10
+      ],
+      "enemies": {
+        "E06": 35,
+        "E07": 35,
+        "E08": 10,
+        "E04": 10,
+        "E05": 10
+      },
+      "levels": [
+        4,
+        6
+      ]
+    },
+    {
+      "from": 8,
+      "to": 8,
+      "encounters": [
+        80,
+        10,
+        10
+      ],
+      "enemies": {
+        "E06": 25,
+        "E07": 25,
+        "E08": 30,
+        "E04": 10,
+        "E05": 10
+      },
+      "levels": [
+        4,
+        6
+      ]
+    },
+    {
+      "from": 9,
+      "to": 9,
+      "encounters": [
+        80,
+        10,
+        10
+      ],
+      "enemies": {
+        "E06": 15,
+        "E07": 20,
+        "E08": 45,
+        "E04": 10,
+        "E05": 10
+      },
+      "levels": [
+        5,
+        7
+      ]
+    },
+    {
+      "from": 10,
+      "to": 10,
+      "encounters": [
+        100,
+        0,
+        0
+      ],
+      "enemies": {
+        "B10": 100
+      },
+      "levels": [
+        6,
+        6
+      ]
+    }
+  ],
+  "hero_fixture": {
+    "name": "主人公",
+    "level": 1,
+    "max_hp": 24,
+    "hp": 24,
+    "atk": 6,
+    "def": 1,
+    "spd": 6,
+    "max_sp": 0,
+    "sp": 0
+  },
+  "fixture_note": "主人公の値は戦闘基盤の試験専用仮値。成長曲線・初期装備の正式仕様ではない。敵スキル・ドロップ・宝箱・イベントは未実装。",
+  "enemy_pack": "res://data/v1/area1-enemies.json",
+  "legacy_floors": [
+    {
+      "from": 1,
+      "to": 1,
+      "encounters": [
+        70,
+        20,
+        10
+      ],
+      "enemies": {
+        "E01": 70,
+        "E02": 30
+      },
+      "levels": [
+        1,
+        1
+      ]
+    },
+    {
+      "from": 2,
+      "to": 2,
+      "encounters": [
+        70,
+        20,
+        10
+      ],
+      "enemies": {
+        "E01": 60,
+        "E02": 40
+      },
+      "levels": [
+        1,
+        2
+      ]
+    },
+    {
+      "from": 3,
+      "to": 3,
+      "encounters": [
+        70,
+        20,
+        10
+      ],
+      "enemies": {
+        "E01": 35,
+        "E02": 35,
+        "E03": 30
+      },
+      "levels": [
+        2,
+        3
+      ]
+    },
+    {
+      "from": 4,
+      "to": 6,
+      "encounters": [
+        75,
+        15,
+        10
+      ],
+      "enemies": {
+        "E02": 35,
+        "E03": 35,
+        "E04": 30
+      },
+      "levels": [
+        2,
+        4
+      ]
+    },
+    {
+      "from": 7,
+      "to": 8,
+      "encounters": [
+        80,
+        10,
+        10
+      ],
+      "enemies": {
+        "E03": 25,
+        "E04": 40,
+        "E05": 35
+      },
+      "levels": [
+        4,
+        6
+      ]
+    },
+    {
+      "from": 9,
+      "to": 9,
+      "encounters": [
+        80,
+        10,
+        10
+      ],
+      "enemies": {
+        "E04": 45,
+        "E05": 55
+      },
+      "levels": [
+        5,
+        7
+      ]
+    },
+    {
+      "from": 10,
+      "to": 10,
+      "encounters": [
+        100,
+        0,
+        0
+      ],
+      "enemies": {
+        "B10": 100
+      },
+      "levels": [
+        6,
+        6
+      ]
+    }
+  ]
+}

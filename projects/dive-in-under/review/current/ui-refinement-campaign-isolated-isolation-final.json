@@ -1,0 +1,30 @@
+{
+  "run_id": "c5fcf95e501642ba8efe3826d26bfcdc",
+  "result": {
+    "PID": 5944,
+    "ThreadID": 6176,
+    "ExitCode": 0,
+    "OwnedWindowCount": 2,
+    "Station": "Service-0x0-1b7214$",
+    "Desktop": "Render_0e2928a1c33c49f293f5c6ad94f802b6",
+    "ObservedDesktop": "Render_0e2928a1c33c49f293f5c6ad94f802b6",
+    "NonInteractive": true,
+    "DesktopMatched": true,
+    "TimedOut": false
+  },
+  "start_utc": "2026-10-17T12:28:15.6318133Z",
+  "end_utc": "2026-10-17T12:28:16.8062164Z",
+  "build": {
+    "game_commit": "7bc5f347d2c94019ff20acb9bc4ba83ab6c06fa7",
+    "engine": "4.7.2.stable.official.ed1daf0bf",
+    "data_version": "2026-10-17.foundation.1",
+    "campaign_config_version": "2026-10-17.loop-provisional.2"
+  },
+  "exe_sha256": "D34D36F3BE1A6C49C56525AE86469B92E4F417DDF0B43CF00DD80C385C4B0562",
+  "command": "\"C:\\Users\\masat\\Documents\\Codex\\2026-10-17\\task\\dive-in-under-work\\projects\\dive-in-under\\build\\releases\\7bc5f347d2c94019ff20acb9bc4ba83ab6c06fa7-14bc7557\\DiveInUnder.exe\" --audio-driver Dummy --rendering-method gl_compatibility --max-fps 120 --resolution 1280x720 --log-file \"C:\\Users\\masat\\Documents\\Codex\\2026-10-17\\task\\dive-in-under-work\\projects\\dive-in-under\\artifacts\\campaign-isolated\\render.log\" -- --smoke-dir=\"C:\\Users\\masat\\Documents\\Codex\\2026-10-17\\task\\dive-in-under-work\\projects\\dive-in-under\\artifacts\\campaign-isolated\" --smoke-run-id=c5fcf95e501642ba8efe3826d26bfcdc --campaign-replay=\"C:\\Users\\masat\\Documents\\Codex\\2026-10-17\\task\\dive-in-under-work\\projects\\dive-in-under\\artifacts\\campaign-replay.json\" --campaign-seed=10000 --campaign-final-probe",
+  "normal_desktop_fallback": false,
+  "mode": "isolated_exe",
+  "data_root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-17\\task\\dive-in-under-work\\projects\\dive-in-under\\artifacts\\campaign-isolated",
+  "pck_sha256": "AC70F179D67F8400448EE2203C4D02F9343F7916E0854EE6F16796F1F595FC95",
+  "executable": "C:\\Users\\masat\\Documents\\Codex\\2026-10-17\\task\\dive-in-under-work\\projects\\dive-in-under\\build\\releases\\7bc5f347d2c94019ff20acb9bc4ba83ab6c06fa7-14bc7557\\DiveInUnder.exe"
+}

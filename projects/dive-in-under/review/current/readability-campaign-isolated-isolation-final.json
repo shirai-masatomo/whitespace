@@ -1,0 +1,30 @@
+{
+  "start_utc": "2026-10-17T12:07:45.2984597Z",
+  "end_utc": "2026-10-17T12:07:46.3948059Z",
+  "executable": "C:\\Users\\masat\\Documents\\Codex\\2026-10-17\\task\\dive-in-under-work\\projects\\dive-in-under\\build\\releases\\187e7f7b2f97ccfda10539340907fe766bebba42-c1bc31aa\\DiveInUnder.exe",
+  "data_root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-17\\task\\dive-in-under-work\\projects\\dive-in-under\\artifacts\\campaign-isolated",
+  "pck_sha256": "6D9046F5CEE8E06AEDCC55DA8226CEBC06985056A1747DF0E8C92A1D17901D8A",
+  "mode": "isolated_exe",
+  "command": "\"C:\\Users\\masat\\Documents\\Codex\\2026-10-17\\task\\dive-in-under-work\\projects\\dive-in-under\\build\\releases\\187e7f7b2f97ccfda10539340907fe766bebba42-c1bc31aa\\DiveInUnder.exe\" --audio-driver Dummy --rendering-method gl_compatibility --max-fps 120 --resolution 1280x720 --log-file \"C:\\Users\\masat\\Documents\\Codex\\2026-10-17\\task\\dive-in-under-work\\projects\\dive-in-under\\artifacts\\campaign-isolated\\render.log\" -- --smoke-dir=\"C:\\Users\\masat\\Documents\\Codex\\2026-10-17\\task\\dive-in-under-work\\projects\\dive-in-under\\artifacts\\campaign-isolated\" --smoke-run-id=416ca7b7380f4d15812a9e3eb5742ae0 --campaign-replay=\"C:\\Users\\masat\\Documents\\Codex\\2026-10-17\\task\\dive-in-under-work\\projects\\dive-in-under\\artifacts\\campaign-replay.json\" --campaign-seed=10000 --campaign-final-probe",
+  "normal_desktop_fallback": false,
+  "result": {
+    "PID": 24996,
+    "ThreadID": 14456,
+    "ExitCode": 0,
+    "OwnedWindowCount": 2,
+    "Station": "Service-0x0-1b7214$",
+    "Desktop": "Render_8a72a4fb02804065a5ed57df7f4f83dc",
+    "ObservedDesktop": "Render_8a72a4fb02804065a5ed57df7f4f83dc",
+    "NonInteractive": true,
+    "DesktopMatched": true,
+    "TimedOut": false
+  },
+  "run_id": "416ca7b7380f4d15812a9e3eb5742ae0",
+  "build": {
+    "engine": "4.7.2.stable.official.ed1daf0bf",
+    "campaign_config_version": "2026-10-17.loop-provisional.2",
+    "data_version": "2026-10-17.foundation.1",
+    "game_commit": "187e7f7b2f97ccfda10539340907fe766bebba42"
+  },
+  "exe_sha256": "D34D36F3BE1A6C49C56525AE86469B92E4F417DDF0B43CF00DD80C385C4B0562"
+}

@@ -1,0 +1,30 @@
+{
+  "start_utc": "2026-10-17T13:56:21.3960718Z",
+  "build": {
+    "engine": "4.7.2.stable.official.ed1daf0bf",
+    "game_commit": "4f6720192732a7f9d8d24f2d6347220ff637654f",
+    "data_version": "2026-10-17.foundation.1",
+    "campaign_config_version": "2026-10-17.loop-provisional.2"
+  },
+  "mode": "isolated_exe",
+  "end_utc": "2026-10-17T13:56:36.5579689Z",
+  "data_root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-17\\task\\dive-in-under-work\\projects\\dive-in-under\\artifacts\\campaign-isolated",
+  "pck_sha256": "4220621EE117302210F24A74F9025C5C05183DC093BE96D6DC79D7B147A8C8E4",
+  "exe_sha256": "D34D36F3BE1A6C49C56525AE86469B92E4F417DDF0B43CF00DD80C385C4B0562",
+  "command": "\"C:\\Users\\masat\\Documents\\Codex\\2026-10-17\\task\\dive-in-under-work\\projects\\dive-in-under\\build\\releases\\4f6720192732a7f9d8d24f2d6347220ff637654f-18badaab\\DiveInUnder.exe\" --audio-driver Dummy --rendering-method gl_compatibility --max-fps 120 --resolution 1280x720 --log-file \"C:\\Users\\masat\\Documents\\Codex\\2026-10-17\\task\\dive-in-under-work\\projects\\dive-in-under\\artifacts\\campaign-isolated\\render.log\" -- --smoke-dir=\"C:\\Users\\masat\\Documents\\Codex\\2026-10-17\\task\\dive-in-under-work\\projects\\dive-in-under\\artifacts\\campaign-isolated\" --smoke-run-id=47ac4bd7e73b40b9a0b3d0ac9c37f512 --campaign-replay=\"C:\\Users\\masat\\Documents\\Codex\\2026-10-17\\task\\dive-in-under-work\\projects\\dive-in-under\\artifacts\\campaign-replay.json\" --campaign-seed=10000 --campaign-resume",
+  "run_id": "47ac4bd7e73b40b9a0b3d0ac9c37f512",
+  "executable": "C:\\Users\\masat\\Documents\\Codex\\2026-10-17\\task\\dive-in-under-work\\projects\\dive-in-under\\build\\releases\\4f6720192732a7f9d8d24f2d6347220ff637654f-18badaab\\DiveInUnder.exe",
+  "result": {
+    "PID": 9364,
+    "ThreadID": 22444,
+    "ExitCode": 0,
+    "OwnedWindowCount": 2,
+    "Station": "Service-0x0-1b7214$",
+    "Desktop": "Render_404fa864c509462b9ac3b639c8d7e0cf",
+    "ObservedDesktop": "Render_404fa864c509462b9ac3b639c8d7e0cf",
+    "NonInteractive": true,
+    "DesktopMatched": true,
+    "TimedOut": false
+  },
+  "normal_desktop_fallback": false
+}

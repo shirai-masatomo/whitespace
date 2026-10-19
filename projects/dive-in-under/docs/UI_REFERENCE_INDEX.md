@@ -1,3 +1,5 @@
+> 統合時点（2026-10-19）：mainへ実装0.6.0を統合。最新の通常入口は review/current/Play.cmd。本文内の旧版・取込待ち記述は策定時点の履歴で、現在の実装は review/ui-integration-0.6.0/ と区別して参照する。
+
 # Dive In Under — UI参照入口（旧索引）
 
 **全画面の参考UIと、実際の最新ゲームスクリーンショットへの入口を [UI_MOCKS.md](UI_MOCKS.md) に統合しました（2026-10-19）。**
@@ -12,3 +14,5 @@
 - [画像部品不足リスト](UI_ASSET_INVENTORY_2026-10-18.md)
 
 **留意**：参考UIの完成イメージをゲーム画面へ丸貼りしない。正式参照（原稿）／チャットで採用されGitHub取込待ち／実装済みのスクリーンショット／archiveを区別する。現通常配布版は2026-10-19の照合時点で **0.5.4**。古い紹介ページの0.5.3等は最新とは扱わない。
+
+最新実装・証拠は [0.6.0](../review/ui-integration-0.6.0/README.md)、素材の元ファイル・版・SHAは [manifest](../assets/ui-reference/manifest.json)。今回のフィードバック作業は [ui-feedback](../review/ui-feedback/README.md)。

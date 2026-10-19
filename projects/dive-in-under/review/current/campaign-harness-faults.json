@@ -1,0 +1,21 @@
+[
+  {
+    "case": "campaign-stale-nonce",
+    "rejected": true
+  },
+  {
+    "case": "campaign-strict-trace",
+    "exit_code": 1,
+    "rejected": true
+  },
+  {
+    "case": "campaign-strict-metrics",
+    "exit_code": 1,
+    "rejected": true
+  },
+  {
+    "case": "campaign-strict-floor",
+    "exit_code": 1,
+    "rejected": true
+  }
+]

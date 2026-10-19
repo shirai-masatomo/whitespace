@@ -1,0 +1,21 @@
+{
+  "run_id": 39110669724,
+  "head_sha": "812260e56c9f4ffe255494214379b4a1c4bfbc29",
+  "merge_sha": "3fb9b9d7f04eb970497081e45171263330d7da02",
+  "status": "completed",
+  "conclusion": "success",
+  "verification": "Godot import/export and five fixed display cases plus first return/town in headless exported EXE",
+  "full_unchanged_logic_tests": "skipped; reuse successful 78f9e42 CI39107438025",
+  "artifacts": [
+    {
+      "id": 12130367311,
+      "name": "DiveInUnder-foundation-windows-x64",
+      "digest": "sha256:79d00eb6c10fb3bb9fd689e67a2a2f7bf5f69990fe16f14daf0ec3edbaff7347"
+    },
+    {
+      "id": 12130372329,
+      "name": "DiveInUnder-foundation-evidence",
+      "digest": "sha256:c5b865c0dc0aa6cba33f234cee62412d090d3f5fcdadcfb3e3db8e57d80bb845"
+    }
+  ]
+}

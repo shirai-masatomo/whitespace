@@ -1,0 +1,155 @@
+{
+  "complete": true,
+  "build": {
+    "engine": "4.7.2.stable.official.ed1daf0bf",
+    "campaign_config_version": "2026-10-17.loop-provisional.3",
+    "data_version": "2026-10-17.foundation.1",
+    "game_commit": "e7c63c65a47712f39702531009a8b2d3d5e7a93a"
+  },
+  "cases": [
+    {
+      "case": "1-before",
+      "complete": true,
+      "original_sha256": "71dd42364e85a3e7ec5069bb4f9ad8818b303415bd505a745bea434daec6faf5",
+      "save_sha256": "00b385c09fa60089c74dee1701b283873d46d463ad2796ae407ba1f22db8b46b",
+      "migration": {
+        "archive_path": "test-fixture archive (original bytes SHA above)",
+        "archive_sha256": "71dd42364e85a3e7ec5069bb4f9ad8818b303415bd505a745bea434daec6faf5",
+        "complete": true,
+        "config_version": "2026-10-17.loop-provisional.1",
+        "normal_deaths": 0,
+        "old_sha256": "71dd42364e85a3e7ec5069bb4f9ad8818b303415bd505a745bea434daec6faf5",
+        "rendered": false,
+        "run_id": "37f4c50c01e5427ea3c592acf06725d8",
+        "save_sha256": "00b385c09fa60089c74dee1701b283873d46d463ad2796ae407ba1f22db8b46b",
+        "story_deaths": 0.0
+      },
+      "restart": {
+        "complete": true,
+        "rendered": false,
+        "run_id": "5631413422d34f999229a68ea88a9fc6",
+        "save_sha256": "00b385c09fa60089c74dee1701b283873d46d463ad2796ae407ba1f22db8b46b"
+      }
+    },
+    {
+      "case": "2-inside",
+      "complete": true,
+      "original_sha256": "04afd4f94c6e65a5dbe59afe148a7b2928f9d0d14f8b29f7b969a61d44313c04",
+      "save_sha256": "8fc8606ea9062d6412f618ba5944e7312bddf447e028f31715357999743d1ba6",
+      "migration": {
+        "archive_path": "test-fixture archive (original bytes SHA above)",
+        "archive_sha256": "04afd4f94c6e65a5dbe59afe148a7b2928f9d0d14f8b29f7b969a61d44313c04",
+        "complete": true,
+        "config_version": "2026-10-17.loop-provisional.2",
+        "normal_deaths": 0,
+        "old_sha256": "04afd4f94c6e65a5dbe59afe148a7b2928f9d0d14f8b29f7b969a61d44313c04",
+        "rendered": false,
+        "run_id": "121c81ab600149ff9ade027e31e73fee",
+        "save_sha256": "8fc8606ea9062d6412f618ba5944e7312bddf447e028f31715357999743d1ba6",
+        "story_deaths": 0.0
+      },
+      "restart": {
+        "complete": true,
+        "rendered": false,
+        "run_id": "ae6d668fe50441e4b04fa08ac1483d68",
+        "save_sha256": "8fc8606ea9062d6412f618ba5944e7312bddf447e028f31715357999743d1ba6"
+      }
+    },
+    {
+      "case": "2-story",
+      "complete": true,
+      "original_sha256": "3d50207777c1fd2ac729cf4eb6cfbbcd754f9399dd6c335b7441ce8e8ad71844",
+      "save_sha256": "5a5584be0d753ff2e4816452863d19f56f07969eb029d94811be2f5200e0fb85",
+      "migration": {
+        "archive_path": "test-fixture archive (original bytes SHA above)",
+        "archive_sha256": "3d50207777c1fd2ac729cf4eb6cfbbcd754f9399dd6c335b7441ce8e8ad71844",
+        "complete": true,
+        "config_version": "2026-10-17.loop-provisional.2",
+        "normal_deaths": 0,
+        "old_sha256": "3d50207777c1fd2ac729cf4eb6cfbbcd754f9399dd6c335b7441ce8e8ad71844",
+        "rendered": false,
+        "run_id": "9707c4ef2bdb47348ce9e36e22930dcf",
+        "save_sha256": "5a5584be0d753ff2e4816452863d19f56f07969eb029d94811be2f5200e0fb85",
+        "story_deaths": 1.0
+      },
+      "restart": {
+        "complete": true,
+        "rendered": false,
+        "run_id": "2392ada80bf840dc95c36f28bf9d192d",
+        "save_sha256": "5a5584be0d753ff2e4816452863d19f56f07969eb029d94811be2f5200e0fb85"
+      }
+    },
+    {
+      "case": "1-town",
+      "complete": true,
+      "original_sha256": "b0d7ce8e2eb5fb6069f4be042cbb60b18968152365d47933c1e7c872c23059ff",
+      "save_sha256": "85b9e8ed74815fd71ed33d235b99aa4aa59c567ed005a8995173e0ee1329a832",
+      "migration": {
+        "archive_path": "test-fixture archive (original bytes SHA above)",
+        "archive_sha256": "b0d7ce8e2eb5fb6069f4be042cbb60b18968152365d47933c1e7c872c23059ff",
+        "complete": true,
+        "config_version": "2026-10-17.loop-provisional.1",
+        "normal_deaths": 0,
+        "old_sha256": "b0d7ce8e2eb5fb6069f4be042cbb60b18968152365d47933c1e7c872c23059ff",
+        "rendered": false,
+        "run_id": "bd103d6f7eac49ec8c7cd211f38dc3c0",
+        "save_sha256": "85b9e8ed74815fd71ed33d235b99aa4aa59c567ed005a8995173e0ee1329a832",
+        "story_deaths": 1.0
+      },
+      "restart": {
+        "complete": true,
+        "rendered": false,
+        "run_id": "4129763bced54efbb990a93efb7d4a9c",
+        "save_sha256": "85b9e8ed74815fd71ed33d235b99aa4aa59c567ed005a8995173e0ee1329a832"
+      }
+    },
+    {
+      "case": "2-battle",
+      "complete": true,
+      "original_sha256": "006de74c684772081e8aae42007caad0b65e34133e117794aa9855a01ba1c764",
+      "save_sha256": "589dfe1d9961043cdb8abca36ba0f734696acf304f3a6f5408e0753d3295e21d",
+      "migration": {
+        "archive_path": "test-fixture archive (original bytes SHA above)",
+        "archive_sha256": "006de74c684772081e8aae42007caad0b65e34133e117794aa9855a01ba1c764",
+        "complete": true,
+        "config_version": "2026-10-17.loop-provisional.2",
+        "normal_deaths": 1,
+        "old_sha256": "006de74c684772081e8aae42007caad0b65e34133e117794aa9855a01ba1c764",
+        "rendered": false,
+        "run_id": "e3522bee747a49aea5d9a8400c810bac",
+        "save_sha256": "589dfe1d9961043cdb8abca36ba0f734696acf304f3a6f5408e0753d3295e21d",
+        "story_deaths": 1.0
+      },
+      "restart": {
+        "complete": true,
+        "rendered": false,
+        "run_id": "176092b9ab6c47a8a977d818076c8691",
+        "save_sha256": "589dfe1d9961043cdb8abca36ba0f734696acf304f3a6f5408e0753d3295e21d"
+      }
+    },
+    {
+      "case": "2-death",
+      "complete": true,
+      "original_sha256": "9970376adcc86ce7014fd42976492457ac2c80286b2fc1dff0b3ab4703545d1f",
+      "save_sha256": "94eba2f7aab05f60fe81dddbcaa4bda8ad7b2f290a6e0c48d2efbcb51c0880a2",
+      "migration": {
+        "archive_path": "test-fixture archive (original bytes SHA above)",
+        "archive_sha256": "9970376adcc86ce7014fd42976492457ac2c80286b2fc1dff0b3ab4703545d1f",
+        "complete": true,
+        "config_version": "2026-10-17.loop-provisional.2",
+        "normal_deaths": 1,
+        "old_sha256": "9970376adcc86ce7014fd42976492457ac2c80286b2fc1dff0b3ab4703545d1f",
+        "rendered": false,
+        "run_id": "6d5b1e7f3f3c4ed38a01368c1c6dddf6",
+        "save_sha256": "94eba2f7aab05f60fe81dddbcaa4bda8ad7b2f290a6e0c48d2efbcb51c0880a2",
+        "story_deaths": 1.0
+      },
+      "restart": {
+        "complete": true,
+        "rendered": false,
+        "run_id": "1995fedd4488414584c17ff13bb8cf55",
+        "save_sha256": "94eba2f7aab05f60fe81dddbcaa4bda8ad7b2f290a6e0c48d2efbcb51c0880a2"
+      }
+    }
+  ]
+}

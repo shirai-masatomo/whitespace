@@ -1,0 +1,25 @@
+{
+  "checkpoint_phase": "battle",
+  "display": "headless",
+  "engine": "4.7.2-stable (official)",
+  "loop_input": true,
+  "manual_input": false,
+  "normal_death_retry": true,
+  "outcome": "ongoing",
+  "rendered": false,
+  "rounds": 1,
+  "run_id": "5b692aa46ebf43eb8004adc8cc486d51",
+  "save_path": "C:\\Users\\masat\\Documents\\Codex\\2026-10-17\\task\\dive-in-under-work\\projects\\dive-in-under\\artifacts\\exe-headless/campaign-smoke.json",
+  "saved_revision": 26.0,
+  "saved_sha256": "99f98e8690f08e0f05d180a3c32157afceda0c5b20622d3e8799e6a60e107f04",
+  "tool_start_pause_resume_restart_back": true,
+  "ui_core_equal": true,
+  "viewport_mouse_input": true
+}
+{
+  "phase": "battle",
+  "restart_loaded": true,
+  "revision": 26.0,
+  "run_id": "d29060b8302a4cbfaf77823c3ca2e550",
+  "save_sha256": "99f98e8690f08e0f05d180a3c32157afceda0c5b20622d3e8799e6a60e107f04"
+}

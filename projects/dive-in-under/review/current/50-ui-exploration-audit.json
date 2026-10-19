@@ -1,0 +1,42 @@
+{
+	"run_id": "68807c55da9d4a17b74c046eac5e2a0e",
+	"screenshot": "20-candidate-shallow.png",
+	"stages": [
+		{
+			"actors": [
+				{
+					"candidate_loaded": true,
+					"foot": [
+						459.0,
+						221.0
+					],
+					"id": "hero",
+					"top_left": [
+						373.285705566406,
+						71.9375
+					],
+					"visible_size": [
+						165.267852783203,
+						165.0
+					],
+					"within_stage": true
+				},
+				{
+					"candidate_loaded": false,
+					"id": ""
+				}
+			],
+			"adoption": "five-assets-current-baseline",
+			"aspect": "preserved",
+			"background": "cavern",
+			"background_loaded": true,
+			"depth": 1,
+			"filter": "nearest",
+			"stage_size": [
+				612.0,
+				270.0
+			],
+			"static_only": true
+		}
+	]
+}

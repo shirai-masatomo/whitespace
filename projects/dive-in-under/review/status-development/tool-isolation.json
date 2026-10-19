@@ -1,0 +1,30 @@
+{
+  "result": {
+    "PID": 26612,
+    "ThreadID": 29280,
+    "ExitCode": 0,
+    "OwnedWindowCount": 2,
+    "Station": "Service-0x0-1b7214$",
+    "Desktop": "Render_8189966011804856bc75d923b32f7bb0",
+    "ObservedDesktop": "Render_8189966011804856bc75d923b32f7bb0",
+    "NonInteractive": true,
+    "DesktopMatched": true,
+    "TimedOut": false
+  },
+  "data_root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-17\\task\\dive-in-under-work\\projects\\dive-in-under\\artifacts\\isolated",
+  "pck_sha256": "7A010DDEF39F7C67B291095C47BB719B7B2B68B9CA1745F53482EADFE6003153",
+  "executable": "C:\\Users\\masat\\Documents\\Codex\\2026-10-17\\task\\dive-in-under-work\\projects\\dive-in-under\\build\\releases\\a2244cf325ca90b9b6e9907f21cda1b768b6c561_status-final-4be9c3a1\\DiveInUnder.exe",
+  "exe_sha256": "D34D36F3BE1A6C49C56525AE86469B92E4F417DDF0B43CF00DD80C385C4B0562",
+  "build": {
+    "game_commit": "a2244cf325ca90b9b6e9907f21cda1b768b6c561+status-final",
+    "campaign_config_version": "2026-10-17.loop-provisional.4",
+    "data_version": "2026-10-18.status-pilot.1",
+    "engine": "4.7.2.stable.official.ed1daf0bf"
+  },
+  "run_id": "5f7144345b6f4631b2d86bdf3b4c8aea",
+  "normal_desktop_fallback": false,
+  "mode": "isolated_exe",
+  "end_utc": "2026-10-18T07:20:17.7188732Z",
+  "command": "\"C:\\Users\\masat\\Documents\\Codex\\2026-10-17\\task\\dive-in-under-work\\projects\\dive-in-under\\build\\releases\\a2244cf325ca90b9b6e9907f21cda1b768b6c561_status-final-4be9c3a1\\DiveInUnder.exe\" --audio-driver Dummy --rendering-method gl_compatibility --max-fps 30 --resolution 1280x720 --log-file \"C:\\Users\\masat\\Documents\\Codex\\2026-10-17\\task\\dive-in-under-work\\projects\\dive-in-under\\artifacts\\isolated\\render.log\" -- --smoke-dir=\"C:\\Users\\masat\\Documents\\Codex\\2026-10-17\\task\\dive-in-under-work\\projects\\dive-in-under\\artifacts\\isolated\" --smoke-run-id=5f7144345b6f4631b2d86bdf3b4c8aea",
+  "start_utc": "2026-10-18T07:20:07.1691800Z"
+}

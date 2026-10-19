@@ -1,0 +1,148 @@
+{
+	"battle": {},
+	"cloth": [],
+	"condition_version": 1,
+	"config_version": "2026-10-17.loop-provisional.5",
+	"deaths": 0,
+	"equipment": {
+		"body": "",
+		"ears": "",
+		"eyes": "",
+		"feet": "",
+		"finger": "",
+		"head": "item-1",
+		"left_hand": "",
+		"legs": "",
+		"neck": "",
+		"right_hand": "",
+		"wrist": ""
+	},
+	"event": "",
+	"exp": 4,
+	"first_done": false,
+	"floor": 0,
+	"gold": 2,
+	"hero_skills": [
+		"S105"
+	],
+	"highest_floor": 1,
+	"hp": 24,
+	"inventory": [
+		"item-2",
+		"item-3"
+	],
+	"item_condition": {
+		"item-1": {
+			"current": 99,
+			"maximum": 100
+		},
+		"item-10": {
+			"current": 100,
+			"maximum": 100
+		},
+		"item-11": {
+			"current": 100,
+			"maximum": 100
+		},
+		"item-12": {
+			"current": 100,
+			"maximum": 100
+		},
+		"item-13": {
+			"current": 100,
+			"maximum": 100
+		},
+		"item-2": {
+			"current": 100,
+			"maximum": 100
+		},
+		"item-3": {
+			"current": 100,
+			"maximum": 100
+		},
+		"item-4": {
+			"current": 100,
+			"maximum": 100
+		},
+		"item-5": {
+			"current": 100,
+			"maximum": 100
+		},
+		"item-6": {
+			"current": 100,
+			"maximum": 100
+		},
+		"item-7": {
+			"current": 100,
+			"maximum": 100
+		},
+		"item-8": {
+			"current": 100,
+			"maximum": 100
+		},
+		"item-9": {
+			"current": 100,
+			"maximum": 100
+		}
+	},
+	"items": {
+		"item-1": "A02",
+		"item-10": "I07",
+		"item-11": "I08",
+		"item-12": "I09",
+		"item-13": "I11",
+		"item-2": "I01",
+		"item-3": "I01",
+		"item-4": "I01",
+		"item-5": "I02",
+		"item-6": "I03",
+		"item-7": "I04",
+		"item-8": "I05",
+		"item-9": "I06"
+	},
+	"journal": [
+		"主人公ひとりで地下へ踏み出した。探索の解決後は町へ帰還できる。",
+		"地下1F：地底ネズミ Lv.1 が現れた。",
+		"主人公 → 地底ネズミ  9 ダメージ",
+		"勝利  EXP +4 / Gold +2",
+		"入手：皮の帽子",
+		"持ち帰った品を抱え、町への道を戻った。"
+	],
+	"last_outcome": "victory",
+	"next_item": 14,
+	"phase": "town",
+	"result": {
+		"floor": 1,
+		"kind": "return",
+		"loss": {
+			"exp": 0,
+			"gold": 0,
+			"items": 0
+		},
+		"reason": "持ち帰った品を抱え、町への道を戻った。"
+	},
+	"revision": 11,
+	"rng": {
+		"battle": 1,
+		"explore": 3,
+		"loot": 2
+	},
+	"schema_version": 5,
+	"seed": 123,
+	"sp": 0,
+	"storage_version": 1,
+	"story_deaths": 0,
+	"trips": 1,
+	"warehouse": [
+		"item-4",
+		"item-5",
+		"item-6",
+		"item-7",
+		"item-8",
+		"item-9",
+		"item-10",
+		"item-11",
+		"item-12",
+		"item-13"
+	]
+}

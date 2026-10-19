@@ -1,0 +1,69 @@
+{
+  "runtime": "e7c63c65a47712f39702531009a8b2d3d5e7a93a",
+  "images": [
+    {
+      "file": "77-normal-first-title.png",
+      "sha256": "5a1a08a9627b70d5eed108ccd39a7d3d4b31354f2fd101d892a4f0c4686fc9b8",
+      "source_run_id": "74b1173e3b0948e58b686543225809ae"
+    },
+    {
+      "file": "78-normal-first-1f.png",
+      "sha256": "4a34994d49c31e14470192129072d6607df067db38a27c747e1f9de90f5de742",
+      "source_run_id": "74b1173e3b0948e58b686543225809ae"
+    },
+    {
+      "file": "79-first-return.png",
+      "sha256": "b22a78ee1e9c161d6221c516fab09d862bbfd3189048e81f5a063fe7b300c0d5",
+      "source_run_id": "74b1173e3b0948e58b686543225809ae"
+    },
+    {
+      "file": "80-first-town.png",
+      "sha256": "8d9e0c83f9a5829eca2e61a25353157678517325215763a5406f6b665d772009",
+      "source_run_id": "74b1173e3b0948e58b686543225809ae"
+    },
+    {
+      "file": "81-first-natural-death.png",
+      "sha256": "339ba3884cb402e2cec9cc18a2cfadc24c3c203998ddaf436211ff4aec2ecc1e",
+      "source_run_id": "74b1173e3b0948e58b686543225809ae"
+    },
+    {
+      "file": "82-normal-battle.png",
+      "sha256": "62e7d0ea6dc012528eb86af380c70f855e2b13e95095d14afae28d59a35becbc",
+      "source_run_id": "e83e459f43ce4239b7f3aa3877216f63"
+    },
+    {
+      "file": "83-boss-floor-v2.png",
+      "sha256": "2aaa3e983c523aab753288ac1d13d7bc9841b2a88416f86198cf76a213998573",
+      "source_run_id": "e83e459f43ce4239b7f3aa3877216f63"
+    },
+    {
+      "file": "84-button-states.png",
+      "sha256": "13fc79f8a2e8faa532950e1d09b9b7ea63c43ddeca747993d248f495182dfe34",
+      "source_run_id": "e83e459f43ce4239b7f3aa3877216f63"
+    },
+    {
+      "file": "85-normal-clear.png",
+      "sha256": "b683bfc8c643d6678366a00de1bd716c4e9ca4f09df22f91b938ae9ea91c3c05",
+      "source_run_id": "e83e459f43ce4239b7f3aa3877216f63"
+    },
+    {
+      "file": "88-normal-exploration.png",
+      "sha256": "6c89b5fb0cf20be245f9157d34559920cf4db8c6e212f89f036dbb26bf4eb0be",
+      "source_run_id": "e83e459f43ce4239b7f3aa3877216f63"
+    },
+    {
+      "file": "86-legacy-history.png",
+      "sha256": "ec5bd19a431e1906062242d26f3e2bf3db94aa1f8c15508658a5bf28e8afcba7",
+      "source_run_id": "9b0cbcc9019348e8bef660bbdd10e4c1"
+    },
+    {
+      "file": "87-legacy-return.png",
+      "sha256": "71421a5d04f065c02c01a15ba9dc2b33fdd757f06ea36b1606636d21d7d8b719",
+      "source_run_id": "9b0cbcc9019348e8bef660bbdd10e4c1"
+    }
+  ],
+  "boss_background_sha256": "84903779b817a4f063acaba4094a9d024b3b8b4917dd0a4f8148cc53fd3aff6a",
+  "source_hashes_match_campaign": true,
+  "normal_desktop_used": false,
+  "old_user_saves_used": false
+}

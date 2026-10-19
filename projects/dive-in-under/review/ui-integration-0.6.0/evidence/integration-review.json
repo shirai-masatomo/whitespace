@@ -1,0 +1,40 @@
+{
+	"auto_battle": true,
+	"bag_capacity": 15,
+	"cloth_capacity": 3,
+	"comparisons": 6,
+	"complete": true,
+	"depart_1f": true,
+	"fixture_screens": [
+		"warehouse",
+		"preparation-grown",
+		"battle",
+		"boss",
+		"exploration",
+		"map",
+		"event",
+		"death",
+		"clear"
+	],
+	"map_hidden_kinds": true,
+	"no_save_store": true,
+	"normal_screens": [
+		"title",
+		"preparation",
+		"status-equipment",
+		"status-abilities",
+		"status-conditions",
+		"status-profile",
+		"warehouse-empty",
+		"equipment",
+		"return"
+	],
+	"rendered": true,
+	"restart_required": true,
+	"run_id": "f167b3479bfe400a844d7306c713afd9",
+	"same_process_retention": true,
+	"session_only": true,
+	"slots": 11,
+	"tabs": 4,
+	"warehouse_transfers": true
+}

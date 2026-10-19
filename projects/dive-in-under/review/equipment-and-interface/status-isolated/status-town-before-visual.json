@@ -1,0 +1,14 @@
+{
+	"controls": [
+		{
+			"disabled": false,
+			"focus": false,
+			"font_color": "(0.1373, 0.1216, 0.1059, 1.0)",
+			"rect": "[P: (1039.0, 32.0), S: (209.0, 52.0)]",
+			"text": "保存済み / タイトルへ"
+		}
+	],
+	"run_id": "851a35a48d9942b7af293c2d74612110",
+	"screenshot": "status-town-before.png",
+	"stages": []
+}

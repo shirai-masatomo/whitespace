@@ -1,0 +1,81 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+[   0% ] first_scan_filesystem | Started プロジェクトの初期化 (5 steps)
+[   0% ] first_scan_filesystem | ファイル構造をスキャン中...
+[  16% ] first_scan_filesystem | グローバルクラス名を読み込み中...
+[  33% ] first_scan_filesystem | GDExtensionを検証中...
+[  50% ] first_scan_filesystem | 自動読み込みスクリプトを作成中...
+[  66% ] first_scan_filesystem | プラグインを初期化中...
+[  83% ] first_scan_filesystem | ファイルスキャンを開始...
+[ DONE ] first_scan_filesystem
+
+[   0% ] savepack | Started パック中 (102 steps)
+[   1% ] savepack | ファイルの保存中: res://.godot/exported/133200997/export-e71838b5e531267044f615ce022c4372-main.scn
+[   3% ] savepack | ファイルの保存中: res://ui/game.gdc
+[   6% ] savepack | ファイルの保存中: res://ui/enemy_art_review.gdc
+[   9% ] savepack | ファイルの保存中: res://ui/defense_badge.gdc
+[  12% ] savepack | ファイルの保存中: res://ui/status_overlay.gdc
+[  14% ] savepack | ファイルの保存中: res://ui/campaign_replay.gdc
+[  17% ] savepack | ファイルの保存中: res://ui/migration_probe.gdc
+[  20% ] savepack | ファイルの保存中: res://ui/main.gdc
+[  23% ] savepack | ファイルの保存中: res://ui/cavern.gdc
+[  26% ] savepack | ファイルの保存中: res://ui/battle_stage.gdc
+[  28% ] savepack | ファイルの保存中: res://ui/visual_assets.gdc
+[  31% ] savepack | ファイルの保存中: res://ui/panel_frame.gdc
+[  33% ] savepack | ファイルの保存中: res://.godot/imported/dive-b10-gatekeeper-static-candidate-v1.png-c2a791a01a432ed0f28fe2516a2996d3.ctex
+[  33% ] savepack | ファイルの保存中: res://assets/visual-candidates/v1/dive-b10-gatekeeper-static-candidate-v1.png.import
+[  36% ] savepack | ファイルの保存中: res://.godot/imported/dive-boss-gate-cave-candidate-v2.png-f9e18e79ef30df8aa8bd2bcb43abd536.ctex
+[  36% ] savepack | ファイルの保存中: res://assets/visual-candidates/v1/dive-boss-gate-cave-candidate-v2.png.import
+[  38% ] savepack | ファイルの保存中: res://.godot/imported/dive-e04-goblin-static-candidate-v1.png-9a15dbf15fe5f460a0dfd14d4438f9fd.ctex
+[  38% ] savepack | ファイルの保存中: res://assets/visual-candidates/v1/dive-e04-goblin-static-candidate-v1.png.import
+[  41% ] savepack | ファイルの保存中: res://.godot/imported/dive-hero-static-candidate-v1.png-7c35e7e551f28863e2b565b0c426d260.ctex
+[  41% ] savepack | ファイルの保存中: res://assets/visual-candidates/v1/dive-hero-static-candidate-v1.png.import
+[  44% ] savepack | ファイルの保存中: res://.godot/imported/dive-ordinary-cave-candidate-v2.png-d90ad973d19e8e7b55e598b681583c87.ctex
+[  44% ] savepack | ファイルの保存中: res://assets/visual-candidates/v1/dive-ordinary-cave-candidate-v2.png.import
+[  47% ] savepack | ファイルの保存中: res://.godot/imported/dive-e01-underground-rat-static-candidate-v2.png-f70a49ac302bda5a6f43234745a277c3.ctex
+[  47% ] savepack | ファイルの保存中: res://assets/visual-candidates/v1/dive-e01-underground-rat-static-candidate-v2.png.import
+[  50% ] savepack | ファイルの保存中: res://.godot/imported/dive-e02-slime-mold-static-candidate-v1.png-60009f11e4cfb1d21410ee1d4eb890a4.ctex
+[  50% ] savepack | ファイルの保存中: res://assets/visual-candidates/v1/dive-e02-slime-mold-static-candidate-v1.png.import
+[  52% ] savepack | ファイルの保存中: res://.godot/imported/dive-e03-ironwing-bat-static-candidate-v1.png-3acabe25bff6af8bb26449b3be3b988f.ctex
+[  52% ] savepack | ファイルの保存中: res://assets/visual-candidates/v1/dive-e03-ironwing-bat-static-candidate-v1.png.import
+[  55% ] savepack | ファイルの保存中: res://.godot/imported/dive-e05-rock-beetle-static-candidate-v1.png-6ce69aeb09541780546145e56ed4702a.ctex
+[  55% ] savepack | ファイルの保存中: res://assets/visual-candidates/v1/dive-e05-rock-beetle-static-candidate-v1.png.import
+[  58% ] savepack | ファイルの保存中: res://.godot/imported/dive-e06-wet-rock-crab-static-candidate-v1.png-dd72b597a2db89de37dd680630b4082e.ctex
+[  58% ] savepack | ファイルの保存中: res://assets/visual-candidates/v1/dive-e06-wet-rock-crab-static-candidate-v1.png.import
+[  61% ] savepack | ファイルの保存中: res://.godot/imported/dive-e07-cave-frog-static-candidate-v1.png-984bfebfa1f2384a2daa8036fe707cb3.ctex
+[  61% ] savepack | ファイルの保存中: res://assets/visual-candidates/v1/dive-e07-cave-frog-static-candidate-v1.png.import
+[  63% ] savepack | ファイルの保存中: res://.godot/imported/dive-e08-aquatic-lizard-static-candidate-v1.png-fd810aa5730632f6e431f27a4d821978.ctex
+[  63% ] savepack | ファイルの保存中: res://assets/visual-candidates/v1/dive-e08-aquatic-lizard-static-candidate-v1.png.import
+[  66% ] savepack | ファイルの保存中: res://core/combat.gdc
+[  68% ] savepack | ファイルの保存中: res://core/catalog.gdc
+[  71% ] savepack | ファイルの保存中: res://core/expedition.gdc
+[  74% ] savepack | ファイルの保存中: res://core/save_store.gdc
+[  76% ] savepack | ファイルの保存中: res://assets/visual-candidates/v1/manifest.json
+[  79% ] savepack | ファイルの保存中: res://data/v1/area1-enemies.json
+[  82% ] savepack | ファイルの保存中: res://data/v1/balance.json
+[  85% ] savepack | ファイルの保存中: res://data/v1/expedition-legacy-2.json
+[  87% ] savepack | ファイルの保存中: res://data/v1/expedition-legacy-3.json
+[  90% ] savepack | ファイルの保存中: res://data/v1/expedition-legacy.json
+[  93% ] savepack | ファイルの保存中: res://data/v1/expedition-no-defense.json
+[  96% ] savepack | ファイルの保存中: res://data/v1/expedition.json
+[  96% ] savepack | ファイルの保存中: res://ui/main.tscn.remap
+[  96% ] savepack | ファイルの保存中: res://ui/game.gd.remap
+[  96% ] savepack | ファイルの保存中: res://ui/enemy_art_review.gd.remap
+[  96% ] savepack | ファイルの保存中: res://ui/defense_badge.gd.remap
+[  96% ] savepack | ファイルの保存中: res://ui/status_overlay.gd.remap
+[  96% ] savepack | ファイルの保存中: res://ui/campaign_replay.gd.remap
+[  96% ] savepack | ファイルの保存中: res://ui/migration_probe.gd.remap
+[  96% ] savepack | ファイルの保存中: res://ui/main.gd.remap
+[  96% ] savepack | ファイルの保存中: res://ui/cavern.gd.remap
+[  96% ] savepack | ファイルの保存中: res://ui/battle_stage.gd.remap
+[  96% ] savepack | ファイルの保存中: res://ui/visual_assets.gd.remap
+[  96% ] savepack | ファイルの保存中: res://ui/panel_frame.gd.remap
+[  96% ] savepack | ファイルの保存中: res://core/combat.gd.remap
+[  96% ] savepack | ファイルの保存中: res://core/catalog.gd.remap
+[  96% ] savepack | ファイルの保存中: res://core/expedition.gd.remap
+[  96% ] savepack | ファイルの保存中: res://core/save_store.gd.remap
+[  96% ] savepack | ファイルの保存中: res://.godot/global_script_class_cache.cfg
+[  96% ] savepack | ファイルの保存中: res://.godot/uid_cache.bin
+[  96% ] savepack | ファイルの保存中: res://project.binary
+[ DONE ] savepack
+

@@ -1,3 +1,5 @@
+> 2026-10-19追記：以下はce11a3ec時点の履歴監査。今回の素材採用と残りは [UI_INTEGRATION_ASSETS.md](UI_INTEGRATION_ASSETS.md) に更新。独立町背景・状態アイコン・UIシート等は既に添付から保存済み。
+
 # Dive In Under — UI素材の不足・コード描画監査と一括制作案（2026-10-18）
 
 [全体仕様](../SPEC.md) ｜ [現行UI参考](UI_MOCKS.md) ｜ [所持品・装備仕様](ITEMS.md) ｜ [工程2](dot/PHASE_02.md) ｜ [最小テスト方針](dot/TEST_POLICY.md)

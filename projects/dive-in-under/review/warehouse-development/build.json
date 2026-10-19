@@ -1,0 +1,20 @@
+{
+  "engine": "4.7.2.stable.official.ed1daf0bf",
+  "normal_desktop_untouched": true,
+  "resolution": [
+    1280,
+    720
+  ],
+  "preserved_distribution": {
+    "review/current/Play.cmd": "0B76AA6AB860664DB111B0E9CACCFDD0F998FC5F998CB6542697ECF57DFA1D77",
+    "build/DiveInUnder-foundation-windows-x64.zip": "4D26D06BFE985FB750E3AC3CBAB47216D9EF9B27A04E645354C280DD285AD3E4",
+    "build/current.txt": "BC8F6CAF214D3C98AED359FF8A95771E1B0E494A1D5CAFBC75F3444997241AFB"
+  },
+  "build_directory": "C:\\Users\\masat\\Documents\\Codex\\2026-10-17\\task\\dive-in-under-work\\projects\\dive-in-under\\build\\releases\\aa7e81397dd3140bcf899cdd904d7754bb5d82a3-warehouse-preview",
+  "pck_sha256": "C1916502A603D9A039ACBD426E9F00AB9A9C79368BBDC5A53C9DE61BA0FB3F72",
+  "source_commit": "aa7e81397dd3140bcf899cdd904d7754bb5d82a3",
+  "fixture_only": true,
+  "exe_sha256": "D34D36F3BE1A6C49C56525AE86469B92E4F417DDF0B43CF00DD80C385C4B0562",
+  "version": "0.5.1-warehouse-preview",
+  "zip_sha256": "EA0270A69CF722A1D50AD39D46558BFA34065255D0D93BA4727C63A41C95B035"
+}

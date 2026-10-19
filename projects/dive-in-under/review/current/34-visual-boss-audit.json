@@ -1,0 +1,55 @@
+{
+	"run_id": "96a0ec097a6a4521b9c76caee39fb5f4",
+	"screenshot": "16-campaign-boss.png",
+	"stages": [
+		{
+			"actors": [
+				{
+					"candidate_loaded": true,
+					"foot": [
+						459.0,
+						221.0
+					],
+					"id": "hero",
+					"top_left": [
+						373.285705566406,
+						71.9375
+					],
+					"visible_size": [
+						165.267852783203,
+						165.0
+					],
+					"within_stage": true
+				},
+				{
+					"candidate_loaded": true,
+					"foot": [
+						147.0,
+						221.0
+					],
+					"id": "B10",
+					"top_left": [
+						41.3939437866211,
+						21.3947448730469
+					],
+					"visible_size": [
+						204.509567260742,
+						205.0
+					],
+					"within_stage": true
+				}
+			],
+			"adoption": "pending",
+			"aspect": "preserved",
+			"background": "boss",
+			"background_loaded": true,
+			"depth": 10,
+			"filter": "nearest",
+			"stage_size": [
+				612.0,
+				270.0
+			],
+			"static_only": true
+		}
+	]
+}

@@ -1,0 +1,20 @@
+{
+  "data_root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-17\\task\\dive-in-under-work\\projects\\dive-in-under\\artifacts\\campaign-isolated",
+  "mode": "permission_probe",
+  "normal_desktop_fallback": false,
+  "result": {
+    "PID": 0,
+    "ThreadID": 0,
+    "ExitCode": 0,
+    "OwnedWindowCount": 0,
+    "Station": "Service-0x0-1b7214$",
+    "Desktop": "Render_bc8e72a0741c464f9a48e4de2619a1a0",
+    "ObservedDesktop": null,
+    "NonInteractive": true,
+    "DesktopMatched": false,
+    "TimedOut": false
+  },
+  "start_utc": "2026-10-17T11:49:39.0201165Z",
+  "end_utc": "2026-10-17T11:49:39.0284144Z",
+  "run_id": "29305f33f04c43a29cf498ed0d2850fa"
+}

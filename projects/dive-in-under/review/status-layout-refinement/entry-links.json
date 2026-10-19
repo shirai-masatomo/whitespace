@@ -1,0 +1,17 @@
+[
+  {
+    "name": "01 ゲームを起動.lnk",
+    "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-17\\task\\dive-in-under-work\\projects\\dive-in-under\\review\\current\\Play.cmd",
+    "arguments": ""
+  },
+  {
+    "name": "02 画像・画面を確認.lnk",
+    "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-17\\task\\dive-in-under-work\\projects\\dive-in-under\\review\\current\\index.html",
+    "arguments": ""
+  },
+  {
+    "name": "03 変更点.lnk",
+    "target": "C:\\Users\\masat\\Documents\\Codex\\2026-10-17\\task\\dive-in-under-work\\projects\\dive-in-under\\artifacts\\confirmation-changes.txt",
+    "arguments": ""
+  }
+]

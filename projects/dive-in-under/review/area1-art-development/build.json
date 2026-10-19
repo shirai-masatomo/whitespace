@@ -1,0 +1,72 @@
+{
+  "source_commit": "49824a2f90694ef11d393461d711fc82474fbd72",
+  "version": "0.4.10-preview",
+  "engine": "4.7.2.stable.official.ed1daf0bf",
+  "resolution": [
+    1280,
+    720
+  ],
+  "build_directory": "C:\\Users\\masat\\Documents\\Codex\\2026-10-17\\task\\dive-in-under-work\\projects\\dive-in-under\\build\\releases\\49824a2f90694ef11d393461d711fc82474fbd72-enemy-art",
+  "zip": "C:\\Users\\masat\\Documents\\Codex\\2026-10-17\\task\\dive-in-under-work\\projects\\dive-in-under\\build\\DiveInUnder-0.4.10-committed-preview-windows-x64.zip",
+  "exe_sha256": "d34d36f3be1a6c49c56525ae86469b92e4f417ddf0b43cf00dd80c385c4b0562",
+  "pck_sha256": "fa427e46b9e1861fe69756e57538f3c3164afd043b60fddf2ece83a703044294",
+  "zip_sha256": "08b7362b01c500523cc86475952314387341b5b620a8fe30158a2655db797910",
+  "preserved_distribution": {
+    "review/current/Play.cmd": "0B76AA6AB860664DB111B0E9CACCFDD0F998FC5F998CB6542697ECF57DFA1D77",
+    "build/DiveInUnder-foundation-windows-x64.zip": "4D26D06BFE985FB750E3AC3CBAB47216D9EF9B27A04E645354C280DD285AD3E4",
+    "build/current.txt": "BC8F6CAF214D3C98AED359FF8A95771E1B0E494A1D5CAFBC75F3444997241AFB"
+  },
+  "originals": [
+    {
+      "id": "E06",
+      "file": "dive-e06-wet-rock-crab-static-candidate-v1.png",
+      "sha256": "64bd9154da2fb2e88766a1266282abbab19890d2e5c60242bc016b450e082cc5",
+      "original_unchanged": true,
+      "feet_source": [
+        460,
+        1078
+      ],
+      "display_region_xywh": [
+        27,
+        269,
+        1212,
+        821
+      ]
+    },
+    {
+      "id": "E07",
+      "file": "dive-e07-cave-frog-static-candidate-v1.png",
+      "sha256": "163caeee0775f79dddd3085d8b65e80602dd92bbd176047432f6c71387da81a8",
+      "original_unchanged": true,
+      "feet_source": [
+        865,
+        1168
+      ],
+      "display_region_xywh": [
+        47,
+        390,
+        1192,
+        783
+      ]
+    },
+    {
+      "id": "E08",
+      "file": "dive-e08-aquatic-lizard-static-candidate-v1.png",
+      "sha256": "1812396a55efdb5b3d5f82a0522d918b160d62f755106b78384650c8138a2c82",
+      "original_unchanged": true,
+      "feet_source": [
+        839,
+        1096
+      ],
+      "display_region_xywh": [
+        15,
+        223,
+        1215,
+        878
+      ]
+    }
+  ],
+  "prior_logic_evidence_commit": "78f9e42ad1b0f3e541325772409930ee30f6a30f",
+  "prior_ci_run": 39107438025,
+  "fixture_not_normal_campaign": true
+}

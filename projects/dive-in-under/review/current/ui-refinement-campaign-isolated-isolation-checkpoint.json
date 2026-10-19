@@ -1,0 +1,30 @@
+{
+  "run_id": "494135a22cf74c0381d15bd3bf30299e",
+  "result": {
+    "PID": 8788,
+    "ThreadID": 18444,
+    "ExitCode": 0,
+    "OwnedWindowCount": 2,
+    "Station": "Service-0x0-1b7214$",
+    "Desktop": "Render_b8408a0dd49a4c4abf58182585a0aa24",
+    "ObservedDesktop": "Render_b8408a0dd49a4c4abf58182585a0aa24",
+    "NonInteractive": true,
+    "DesktopMatched": true,
+    "TimedOut": false
+  },
+  "start_utc": "2026-10-17T12:27:58.6150126Z",
+  "end_utc": "2026-10-17T12:28:01.4193742Z",
+  "build": {
+    "game_commit": "7bc5f347d2c94019ff20acb9bc4ba83ab6c06fa7",
+    "engine": "4.7.2.stable.official.ed1daf0bf",
+    "data_version": "2026-10-17.foundation.1",
+    "campaign_config_version": "2026-10-17.loop-provisional.2"
+  },
+  "exe_sha256": "D34D36F3BE1A6C49C56525AE86469B92E4F417DDF0B43CF00DD80C385C4B0562",
+  "command": "\"C:\\Users\\masat\\Documents\\Codex\\2026-10-17\\task\\dive-in-under-work\\projects\\dive-in-under\\build\\releases\\7bc5f347d2c94019ff20acb9bc4ba83ab6c06fa7-14bc7557\\DiveInUnder.exe\" --audio-driver Dummy --rendering-method gl_compatibility --max-fps 120 --resolution 1280x720 --log-file \"C:\\Users\\masat\\Documents\\Codex\\2026-10-17\\task\\dive-in-under-work\\projects\\dive-in-under\\artifacts\\campaign-isolated\\render.log\" -- --smoke-dir=\"C:\\Users\\masat\\Documents\\Codex\\2026-10-17\\task\\dive-in-under-work\\projects\\dive-in-under\\artifacts\\campaign-isolated\" --smoke-run-id=494135a22cf74c0381d15bd3bf30299e --campaign-replay=\"C:\\Users\\masat\\Documents\\Codex\\2026-10-17\\task\\dive-in-under-work\\projects\\dive-in-under\\artifacts\\campaign-replay.json\" --campaign-seed=10000",
+  "normal_desktop_fallback": false,
+  "mode": "isolated_exe",
+  "data_root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-17\\task\\dive-in-under-work\\projects\\dive-in-under\\artifacts\\campaign-isolated",
+  "pck_sha256": "AC70F179D67F8400448EE2203C4D02F9343F7916E0854EE6F16796F1F595FC95",
+  "executable": "C:\\Users\\masat\\Documents\\Codex\\2026-10-17\\task\\dive-in-under-work\\projects\\dive-in-under\\build\\releases\\7bc5f347d2c94019ff20acb9bc4ba83ab6c06fa7-14bc7557\\DiveInUnder.exe"
+}

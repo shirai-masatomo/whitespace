@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "scenario_id": "solo-E04-L4",
+  "enemy_id": "E04",
+  "enemy_level": 4,
+  "hero": {"name": "主人公", "level": 1, "max_hp": 24, "hp": 24, "atk": 6, "def": 1, "spd": 6, "max_sp": 0, "sp": 0},
+  "equipment": [], "skills": [],
+  "note": "単発戦闘の試験専用仮値。装備・スキル効果と主人公Lv成長は未実装。heroは実効能力の入力。"
+}

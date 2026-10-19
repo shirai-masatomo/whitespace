@@ -1,0 +1,172 @@
+{
+  "game_commit": "472bc01a9a816530fcb462e4ff90883e354b94cc",
+  "seed_start": 10000,
+  "trials_per_scenario": 1000,
+  "limitations": "単発戦闘。成長・装備・回復・連続探索を含まず、適正難易度の証明ではない。",
+  "scenarios": [
+    {
+      "id": "solo-E01-L1",
+      "metrics": {
+        "ally_death_rate": null,
+        "death_rate": 0.0,
+        "deaths": 0,
+        "draw_rate": 0.0,
+        "draws": 0,
+        "invalid_results": 0,
+        "remaining_hp": {
+          "count": 1000,
+          "max": 24,
+          "mean": 20.957,
+          "median": 21.5,
+          "min": 14,
+          "p10": 20,
+          "p90": 22
+        },
+        "rounds": {
+          "count": 1000,
+          "max": 5,
+          "mean": 2.043,
+          "median": 2.0,
+          "min": 1,
+          "p10": 2,
+          "p90": 2
+        },
+        "trials": 1000,
+        "win_rate": 1.0,
+        "winning_hp": {
+          "count": 1000,
+          "max": 24,
+          "mean": 20.957,
+          "median": 21.5,
+          "min": 14,
+          "p10": 20,
+          "p90": 22
+        },
+        "wins": 1000
+      }
+    },
+    {
+      "id": "solo-E02-L1",
+      "metrics": {
+        "ally_death_rate": null,
+        "death_rate": 0.0,
+        "deaths": 0,
+        "draw_rate": 0.0,
+        "draws": 0,
+        "invalid_results": 0,
+        "remaining_hp": {
+          "count": 1000,
+          "max": 24,
+          "mean": 19.905,
+          "median": 20.0,
+          "min": 14,
+          "p10": 18,
+          "p90": 22
+        },
+        "rounds": {
+          "count": 1000,
+          "max": 6,
+          "mean": 3.061,
+          "median": 3.0,
+          "min": 2,
+          "p10": 3,
+          "p90": 4
+        },
+        "trials": 1000,
+        "win_rate": 1.0,
+        "winning_hp": {
+          "count": 1000,
+          "max": 24,
+          "mean": 19.905,
+          "median": 20.0,
+          "min": 14,
+          "p10": 18,
+          "p90": 22
+        },
+        "wins": 1000
+      }
+    },
+    {
+      "id": "solo-E04-L2",
+      "metrics": {
+        "ally_death_rate": null,
+        "death_rate": 0.023,
+        "deaths": 23,
+        "draw_rate": 0.0,
+        "draws": 0,
+        "invalid_results": 0,
+        "remaining_hp": {
+          "count": 1000,
+          "max": 19,
+          "mean": 8.382,
+          "median": 9.0,
+          "min": 0,
+          "p10": 4,
+          "p90": 14
+        },
+        "rounds": {
+          "count": 1000,
+          "max": 6,
+          "mean": 4.175,
+          "median": 4.0,
+          "min": 3,
+          "p10": 4,
+          "p90": 5
+        },
+        "trials": 1000,
+        "win_rate": 0.977,
+        "winning_hp": {
+          "count": 977,
+          "max": 19,
+          "mean": 8.57932446264074,
+          "median": 9.0,
+          "min": 1,
+          "p10": 4,
+          "p90": 14
+        },
+        "wins": 977
+      }
+    },
+    {
+      "id": "solo-E04-L3",
+      "metrics": {
+        "ally_death_rate": null,
+        "death_rate": 0.734,
+        "deaths": 734,
+        "draw_rate": 0.0,
+        "draws": 0,
+        "invalid_results": 0,
+        "remaining_hp": {
+          "count": 1000,
+          "max": 18,
+          "mean": 1.676,
+          "median": 0.0,
+          "min": 0,
+          "p10": 0,
+          "p90": 6
+        },
+        "rounds": {
+          "count": 1000,
+          "max": 6,
+          "mean": 4.14,
+          "median": 4.0,
+          "min": 3,
+          "p10": 4,
+          "p90": 5
+        },
+        "trials": 1000,
+        "win_rate": 0.266,
+        "winning_hp": {
+          "count": 266,
+          "max": 18,
+          "mean": 6.30075187969925,
+          "median": 6.0,
+          "min": 3,
+          "p10": 3,
+          "p90": 9
+        },
+        "wins": 266
+      }
+    }
+  ]
+}

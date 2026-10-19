@@ -1,0 +1,19 @@
+{
+	"controls": [
+		{
+			"rect": "[P: (1170.0, 675.0), S: (85.0, 25.0)]",
+			"text": "0.6.0"
+		}
+	],
+	"run_id": "f167b3479bfe400a844d7306c713afd9",
+	"screenshot": "title.png",
+	"stages": [
+		{
+			"kind": "session-ui",
+			"route": [],
+			"screen": "title",
+			"session_only": true,
+			"stage_rect": ""
+		}
+	]
+}

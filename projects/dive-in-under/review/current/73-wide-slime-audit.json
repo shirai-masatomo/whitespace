@@ -1,0 +1,75 @@
+{
+	"run_id": "94fef8b7386d4c268ab5a6fc9a945b39",
+	"screenshot": "23-enemy-e02.png",
+	"stages": [
+		{
+			"actors": [
+				{
+					"adoption": "adopted-current-baseline",
+					"body_region": "[P: (0.0, 22.0), S: (1234.0, 1232.0)]",
+					"candidate_loaded": true,
+					"foot": [
+						609.0,
+						433.0
+					],
+					"id": "hero",
+					"static_hover_px": 0.0,
+					"top_left": [
+						481.727264404297,
+						211.664764404297
+					],
+					"visible_size": [
+						245.397735595703,
+						245.0
+					],
+					"within_stage": true
+				},
+				{
+					"adoption": "adopted-current-baseline",
+					"body_region": "[P: (24.0, 323.0), S: (1206.0, 632.0)]",
+					"candidate_loaded": true,
+					"foot": [
+						269.0,
+						312.0
+					],
+					"id": "E02",
+					"static_hover_px": 0.0,
+					"top_left": [
+						116.679992675781,
+						153.8701171875
+					],
+					"visible_size": [
+						304.640014648438,
+						159.6455078125
+					],
+					"within_stage": true
+				}
+			],
+			"adoption": "nine-assets-current-baseline",
+			"aspect": "preserved",
+			"background": "cavern",
+			"background_aspect": 1.77777777777778,
+			"background_loaded": true,
+			"background_zoom": 1.0,
+			"composition": "wide-floor-reference-comparison",
+			"depth": 2,
+			"far_enemy_foot": [
+				269.0,
+				312.0
+			],
+			"filter": "nearest",
+			"formation_rules": false,
+			"global_rect": "[P: (16.0, 16.0), S: (896.0, 504.0)]",
+			"near_hero_foot": [
+				609.0,
+				433.0
+			],
+			"stage_size": [
+				896.0,
+				504.0
+			],
+			"static_only": true,
+			"wide_layout": true
+		}
+	]
+}

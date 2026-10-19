@@ -1,0 +1,75 @@
+{
+	"run_id": "94fef8b7386d4c268ab5a6fc9a945b39",
+	"screenshot": "16-campaign-boss.png",
+	"stages": [
+		{
+			"actors": [
+				{
+					"adoption": "adopted-current-baseline",
+					"body_region": "[P: (0.0, 22.0), S: (1234.0, 1232.0)]",
+					"candidate_loaded": true,
+					"foot": [
+						627.0,
+						403.0
+					],
+					"id": "hero",
+					"static_hover_px": 0.0,
+					"top_left": [
+						499.727264404297,
+						181.664764404297
+					],
+					"visible_size": [
+						245.397735595703,
+						245.0
+					],
+					"within_stage": true
+				},
+				{
+					"adoption": "adopted-current-baseline",
+					"body_region": "[P: (0.0, 0.0), S: (1251.0, 1254.0)]",
+					"candidate_loaded": true,
+					"foot": [
+						269.0,
+						323.0
+					],
+					"id": "B10",
+					"static_hover_px": 0.0,
+					"top_left": [
+						150.515151977539,
+						99.0526428222656
+					],
+					"visible_size": [
+						229.449752807617,
+						230.0
+					],
+					"within_stage": true
+				}
+			],
+			"adoption": "nine-assets-current-baseline",
+			"aspect": "preserved",
+			"background": "boss",
+			"background_aspect": 1.77777777777778,
+			"background_loaded": true,
+			"background_zoom": 1.0,
+			"composition": "wide-floor-reference-comparison",
+			"depth": 10,
+			"far_enemy_foot": [
+				269.0,
+				323.0
+			],
+			"filter": "nearest",
+			"formation_rules": false,
+			"global_rect": "[P: (16.0, 16.0), S: (896.0, 504.0)]",
+			"near_hero_foot": [
+				627.0,
+				403.0
+			],
+			"stage_size": [
+				896.0,
+				504.0
+			],
+			"static_only": true,
+			"wide_layout": true
+		}
+	]
+}

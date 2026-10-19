@@ -1,0 +1,32 @@
+{
+  "runtime_commit": "04778428be0e0d7c74b23240707cde6403f04704",
+  "pr_head": "04778428be0e0d7c74b23240707cde6403f04704",
+  "checkout_merge": "c12d5a555944b0a0e67d1cfea2c7cbad5a8b888e",
+  "run": 39033111419,
+  "job": 117397440246,
+  "conclusion": "success",
+  "scope": "0.4.3 oblique composition and four unapproved enemy candidates; includes 0.4.2 native UI",
+  "checks": {
+    "combat": 142,
+    "loop": 180,
+    "campaign": 44,
+    "seeds": 1000,
+    "strict_repeat": "all records/state hashes/metrics equal",
+    "actions": 290,
+    "faults": 10
+  },
+  "artifacts": [
+    {
+      "id": 12101691163,
+      "name": "DiveInUnder-foundation-evidence",
+      "url": "https://github.com/shirai-masatomo/whitespace/actions/runs/39033111419/artifacts/12101691163",
+      "expires": "2027-01-15T12:35:12Z"
+    },
+    {
+      "id": 12100724828,
+      "name": "DiveInUnder-foundation-windows-x64",
+      "url": "https://github.com/shirai-masatomo/whitespace/actions/runs/39033111419/artifacts/12100724828",
+      "expires": "2027-01-15T12:35:12Z"
+    }
+  ]
+}

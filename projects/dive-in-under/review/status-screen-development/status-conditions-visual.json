@@ -1,0 +1,75 @@
+{
+	"controls": [
+		{
+			"rect": "[P: (1096.0, 25.0), S: (145.0, 40.0)]",
+			"text": "G  0"
+		},
+		{
+			"rect": "[P: (936.0, 100.0), S: (308.0, 32.0)]",
+			"text": "詳細"
+		},
+		{
+			"rect": "[P: (934.0, 146.0), S: (312.0, 29.0)]",
+			"text": "現在の状態"
+		},
+		{
+			"rect": "[P: (934.0, 187.0), S: (312.0, 47.0)]",
+			"text": "状態異常や防御態勢は付与されていません。"
+		},
+		{
+			"rect": "[P: (934.0, 246.0), S: (312.0, 19.0)]",
+			"text": "状態の期間"
+		},
+		{
+			"rect": "[P: (934.0, 277.0), S: (312.0, 43.0)]",
+			"text": "付与中の状態を選ぶと、効果と残りの自身行動機会をここに表示します。"
+		},
+		{
+			"rect": "[P: (934.0, 348.0), S: (312.0, 19.0)]",
+			"text": "属性耐性"
+		},
+		{
+			"rect": "[P: (934.0, 379.0), S: (312.0, 43.0)]",
+			"text": "火・水・雷・土・風・光・闇・無。属性ごとの耐性は未設定です。"
+		},
+		{
+			"disabled": false,
+			"focus": false,
+			"font_color": "(0.9098, 0.8902, 0.8078, 1.0)",
+			"rect": "[P: (980.0, 616.0), S: (284.0, 88.0)]",
+			"text": "戻る"
+		}
+	],
+	"run_id": "4596778bce8b4a2ebd2532aba7ac8448",
+	"screenshot": "status-conditions.png",
+	"stages": [
+		{
+			"detail_scroll_max": 292.0,
+			"equipment_slots": 11,
+			"gauge_values": {
+				"exp": {
+					"current": 4,
+					"maximum": 36
+				},
+				"hp": {
+					"current": 34,
+					"maximum": 34
+				},
+				"sp": {
+					"current": 2,
+					"maximum": 2
+				}
+			},
+			"hero": "主人公",
+			"item_rects": {
+				"current": "[P: (346.0, 201.0), S: (536.0, 49.0)]"
+			},
+			"kind": "status",
+			"party_active": 1,
+			"party_reserved": 5,
+			"read_only": true,
+			"selected": "current",
+			"tab": "conditions"
+		}
+	]
+}

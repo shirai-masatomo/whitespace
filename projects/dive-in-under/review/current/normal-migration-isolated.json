@@ -1,0 +1,431 @@
+{
+  "complete": true,
+  "build": {
+    "engine": "4.7.2.stable.official.ed1daf0bf",
+    "campaign_config_version": "2026-10-17.loop-provisional.3",
+    "data_version": "2026-10-17.foundation.1",
+    "game_commit": "e7c63c65a47712f39702531009a8b2d3d5e7a93a"
+  },
+  "cases": [
+    {
+      "case": "1-before",
+      "complete": true,
+      "original_sha256": "71dd42364e85a3e7ec5069bb4f9ad8818b303415bd505a745bea434daec6faf5",
+      "save_sha256": "00b385c09fa60089c74dee1701b283873d46d463ad2796ae407ba1f22db8b46b",
+      "migration": {
+        "archive_path": "test-fixture archive (original bytes SHA above)",
+        "archive_sha256": "71dd42364e85a3e7ec5069bb4f9ad8818b303415bd505a745bea434daec6faf5",
+        "complete": true,
+        "config_version": "2026-10-17.loop-provisional.1",
+        "normal_deaths": 0,
+        "old_sha256": "71dd42364e85a3e7ec5069bb4f9ad8818b303415bd505a745bea434daec6faf5",
+        "rendered": true,
+        "run_id": "204877b638484035b1d6daba608c69fd",
+        "save_sha256": "00b385c09fa60089c74dee1701b283873d46d463ad2796ae407ba1f22db8b46b",
+        "story_deaths": 0.0
+      },
+      "restart": {
+        "complete": true,
+        "rendered": true,
+        "run_id": "4fae9371d1d04919b118ca1191fedac0",
+        "save_sha256": "00b385c09fa60089c74dee1701b283873d46d463ad2796ae407ba1f22db8b46b"
+      },
+      "isolation_migrate": {
+        "result": {
+          "PID": 17964,
+          "ThreadID": 28204,
+          "ExitCode": 0,
+          "OwnedWindowCount": 2,
+          "Station": "Service-0x0-1b7214$",
+          "Desktop": "Render_c080c1fbbec54662b19ff8bddcd6b10f",
+          "ObservedDesktop": "Render_c080c1fbbec54662b19ff8bddcd6b10f",
+          "NonInteractive": true,
+          "DesktopMatched": true,
+          "TimedOut": false
+        },
+        "exe_sha256": "D34D36F3BE1A6C49C56525AE86469B92E4F417DDF0B43CF00DD80C385C4B0562",
+        "build": {
+          "engine": "4.7.2.stable.official.ed1daf0bf",
+          "campaign_config_version": "2026-10-17.loop-provisional.3",
+          "data_version": "2026-10-17.foundation.1",
+          "game_commit": "e7c63c65a47712f39702531009a8b2d3d5e7a93a"
+        },
+        "run_id": "204877b638484035b1d6daba608c69fd",
+        "pck_sha256": "948E60CBE7768EF85D0E1D2C68795E080A5DE8A2A4731A31DDE8CAAE9AD7A0E3"
+      },
+      "isolation_restart": {
+        "result": {
+          "PID": 24504,
+          "ThreadID": 3300,
+          "ExitCode": 0,
+          "OwnedWindowCount": 2,
+          "Station": "Service-0x0-1b7214$",
+          "Desktop": "Render_74e16111ed7e4f658638a28b80faae4a",
+          "ObservedDesktop": "Render_74e16111ed7e4f658638a28b80faae4a",
+          "NonInteractive": true,
+          "DesktopMatched": true,
+          "TimedOut": false
+        },
+        "exe_sha256": "D34D36F3BE1A6C49C56525AE86469B92E4F417DDF0B43CF00DD80C385C4B0562",
+        "build": {
+          "engine": "4.7.2.stable.official.ed1daf0bf",
+          "campaign_config_version": "2026-10-17.loop-provisional.3",
+          "data_version": "2026-10-17.foundation.1",
+          "game_commit": "e7c63c65a47712f39702531009a8b2d3d5e7a93a"
+        },
+        "run_id": "4fae9371d1d04919b118ca1191fedac0",
+        "pck_sha256": "948E60CBE7768EF85D0E1D2C68795E080A5DE8A2A4731A31DDE8CAAE9AD7A0E3"
+      }
+    },
+    {
+      "case": "2-inside",
+      "complete": true,
+      "original_sha256": "04afd4f94c6e65a5dbe59afe148a7b2928f9d0d14f8b29f7b969a61d44313c04",
+      "save_sha256": "8fc8606ea9062d6412f618ba5944e7312bddf447e028f31715357999743d1ba6",
+      "migration": {
+        "archive_path": "test-fixture archive (original bytes SHA above)",
+        "archive_sha256": "04afd4f94c6e65a5dbe59afe148a7b2928f9d0d14f8b29f7b969a61d44313c04",
+        "complete": true,
+        "config_version": "2026-10-17.loop-provisional.2",
+        "normal_deaths": 0,
+        "old_sha256": "04afd4f94c6e65a5dbe59afe148a7b2928f9d0d14f8b29f7b969a61d44313c04",
+        "rendered": true,
+        "run_id": "17bf1408af2d46bd965affbd1c7426ec",
+        "save_sha256": "8fc8606ea9062d6412f618ba5944e7312bddf447e028f31715357999743d1ba6",
+        "story_deaths": 0.0
+      },
+      "restart": {
+        "complete": true,
+        "rendered": true,
+        "run_id": "429ffb1480524183b2dac7bc4fbfce9c",
+        "save_sha256": "8fc8606ea9062d6412f618ba5944e7312bddf447e028f31715357999743d1ba6"
+      },
+      "isolation_migrate": {
+        "result": {
+          "PID": 23288,
+          "ThreadID": 25372,
+          "ExitCode": 0,
+          "OwnedWindowCount": 2,
+          "Station": "Service-0x0-1b7214$",
+          "Desktop": "Render_cb1c3b4a6bc24927a2caff9bb60332dd",
+          "ObservedDesktop": "Render_cb1c3b4a6bc24927a2caff9bb60332dd",
+          "NonInteractive": true,
+          "DesktopMatched": true,
+          "TimedOut": false
+        },
+        "exe_sha256": "D34D36F3BE1A6C49C56525AE86469B92E4F417DDF0B43CF00DD80C385C4B0562",
+        "build": {
+          "engine": "4.7.2.stable.official.ed1daf0bf",
+          "campaign_config_version": "2026-10-17.loop-provisional.3",
+          "data_version": "2026-10-17.foundation.1",
+          "game_commit": "e7c63c65a47712f39702531009a8b2d3d5e7a93a"
+        },
+        "run_id": "17bf1408af2d46bd965affbd1c7426ec",
+        "pck_sha256": "948E60CBE7768EF85D0E1D2C68795E080A5DE8A2A4731A31DDE8CAAE9AD7A0E3"
+      },
+      "isolation_restart": {
+        "result": {
+          "PID": 8804,
+          "ThreadID": 7756,
+          "ExitCode": 0,
+          "OwnedWindowCount": 2,
+          "Station": "Service-0x0-1b7214$",
+          "Desktop": "Render_d45e3ecaed6242d8afa39bacd2626a05",
+          "ObservedDesktop": "Render_d45e3ecaed6242d8afa39bacd2626a05",
+          "NonInteractive": true,
+          "DesktopMatched": true,
+          "TimedOut": false
+        },
+        "exe_sha256": "D34D36F3BE1A6C49C56525AE86469B92E4F417DDF0B43CF00DD80C385C4B0562",
+        "build": {
+          "engine": "4.7.2.stable.official.ed1daf0bf",
+          "campaign_config_version": "2026-10-17.loop-provisional.3",
+          "data_version": "2026-10-17.foundation.1",
+          "game_commit": "e7c63c65a47712f39702531009a8b2d3d5e7a93a"
+        },
+        "run_id": "429ffb1480524183b2dac7bc4fbfce9c",
+        "pck_sha256": "948E60CBE7768EF85D0E1D2C68795E080A5DE8A2A4731A31DDE8CAAE9AD7A0E3"
+      }
+    },
+    {
+      "case": "2-story",
+      "complete": true,
+      "original_sha256": "3d50207777c1fd2ac729cf4eb6cfbbcd754f9399dd6c335b7441ce8e8ad71844",
+      "save_sha256": "5a5584be0d753ff2e4816452863d19f56f07969eb029d94811be2f5200e0fb85",
+      "migration": {
+        "archive_path": "test-fixture archive (original bytes SHA above)",
+        "archive_sha256": "3d50207777c1fd2ac729cf4eb6cfbbcd754f9399dd6c335b7441ce8e8ad71844",
+        "complete": true,
+        "config_version": "2026-10-17.loop-provisional.2",
+        "normal_deaths": 0,
+        "old_sha256": "3d50207777c1fd2ac729cf4eb6cfbbcd754f9399dd6c335b7441ce8e8ad71844",
+        "rendered": true,
+        "run_id": "9b0cbcc9019348e8bef660bbdd10e4c1",
+        "save_sha256": "5a5584be0d753ff2e4816452863d19f56f07969eb029d94811be2f5200e0fb85",
+        "story_deaths": 1.0
+      },
+      "restart": {
+        "complete": true,
+        "rendered": true,
+        "run_id": "950f5b46678a446798bba9b175afb38b",
+        "save_sha256": "5a5584be0d753ff2e4816452863d19f56f07969eb029d94811be2f5200e0fb85"
+      },
+      "isolation_migrate": {
+        "result": {
+          "PID": 28988,
+          "ThreadID": 23668,
+          "ExitCode": 0,
+          "OwnedWindowCount": 2,
+          "Station": "Service-0x0-1b7214$",
+          "Desktop": "Render_12bfacca9bd34e8287a2eae07a50ec08",
+          "ObservedDesktop": "Render_12bfacca9bd34e8287a2eae07a50ec08",
+          "NonInteractive": true,
+          "DesktopMatched": true,
+          "TimedOut": false
+        },
+        "exe_sha256": "D34D36F3BE1A6C49C56525AE86469B92E4F417DDF0B43CF00DD80C385C4B0562",
+        "build": {
+          "engine": "4.7.2.stable.official.ed1daf0bf",
+          "campaign_config_version": "2026-10-17.loop-provisional.3",
+          "data_version": "2026-10-17.foundation.1",
+          "game_commit": "e7c63c65a47712f39702531009a8b2d3d5e7a93a"
+        },
+        "run_id": "9b0cbcc9019348e8bef660bbdd10e4c1",
+        "pck_sha256": "948E60CBE7768EF85D0E1D2C68795E080A5DE8A2A4731A31DDE8CAAE9AD7A0E3"
+      },
+      "isolation_restart": {
+        "result": {
+          "PID": 28976,
+          "ThreadID": 17880,
+          "ExitCode": 0,
+          "OwnedWindowCount": 2,
+          "Station": "Service-0x0-1b7214$",
+          "Desktop": "Render_28da1447d8c0454d98fb75e4dfbe0f58",
+          "ObservedDesktop": "Render_28da1447d8c0454d98fb75e4dfbe0f58",
+          "NonInteractive": true,
+          "DesktopMatched": true,
+          "TimedOut": false
+        },
+        "exe_sha256": "D34D36F3BE1A6C49C56525AE86469B92E4F417DDF0B43CF00DD80C385C4B0562",
+        "build": {
+          "engine": "4.7.2.stable.official.ed1daf0bf",
+          "campaign_config_version": "2026-10-17.loop-provisional.3",
+          "data_version": "2026-10-17.foundation.1",
+          "game_commit": "e7c63c65a47712f39702531009a8b2d3d5e7a93a"
+        },
+        "run_id": "950f5b46678a446798bba9b175afb38b",
+        "pck_sha256": "948E60CBE7768EF85D0E1D2C68795E080A5DE8A2A4731A31DDE8CAAE9AD7A0E3"
+      }
+    },
+    {
+      "case": "1-town",
+      "complete": true,
+      "original_sha256": "b0d7ce8e2eb5fb6069f4be042cbb60b18968152365d47933c1e7c872c23059ff",
+      "save_sha256": "85b9e8ed74815fd71ed33d235b99aa4aa59c567ed005a8995173e0ee1329a832",
+      "migration": {
+        "archive_path": "test-fixture archive (original bytes SHA above)",
+        "archive_sha256": "b0d7ce8e2eb5fb6069f4be042cbb60b18968152365d47933c1e7c872c23059ff",
+        "complete": true,
+        "config_version": "2026-10-17.loop-provisional.1",
+        "normal_deaths": 0,
+        "old_sha256": "b0d7ce8e2eb5fb6069f4be042cbb60b18968152365d47933c1e7c872c23059ff",
+        "rendered": true,
+        "run_id": "1b0ce5b28b584dd98eafe52041b3eb99",
+        "save_sha256": "85b9e8ed74815fd71ed33d235b99aa4aa59c567ed005a8995173e0ee1329a832",
+        "story_deaths": 1.0
+      },
+      "restart": {
+        "complete": true,
+        "rendered": true,
+        "run_id": "0095024252854d2f82e0dbc54e98ef51",
+        "save_sha256": "85b9e8ed74815fd71ed33d235b99aa4aa59c567ed005a8995173e0ee1329a832"
+      },
+      "isolation_migrate": {
+        "result": {
+          "PID": 2012,
+          "ThreadID": 25064,
+          "ExitCode": 0,
+          "OwnedWindowCount": 2,
+          "Station": "Service-0x0-1b7214$",
+          "Desktop": "Render_e17df4a39c6f48f89e0724b0028a5490",
+          "ObservedDesktop": "Render_e17df4a39c6f48f89e0724b0028a5490",
+          "NonInteractive": true,
+          "DesktopMatched": true,
+          "TimedOut": false
+        },
+        "exe_sha256": "D34D36F3BE1A6C49C56525AE86469B92E4F417DDF0B43CF00DD80C385C4B0562",
+        "build": {
+          "engine": "4.7.2.stable.official.ed1daf0bf",
+          "campaign_config_version": "2026-10-17.loop-provisional.3",
+          "data_version": "2026-10-17.foundation.1",
+          "game_commit": "e7c63c65a47712f39702531009a8b2d3d5e7a93a"
+        },
+        "run_id": "1b0ce5b28b584dd98eafe52041b3eb99",
+        "pck_sha256": "948E60CBE7768EF85D0E1D2C68795E080A5DE8A2A4731A31DDE8CAAE9AD7A0E3"
+      },
+      "isolation_restart": {
+        "result": {
+          "PID": 21772,
+          "ThreadID": 17704,
+          "ExitCode": 0,
+          "OwnedWindowCount": 2,
+          "Station": "Service-0x0-1b7214$",
+          "Desktop": "Render_a521588f1f8f4981bc882590e101a700",
+          "ObservedDesktop": "Render_a521588f1f8f4981bc882590e101a700",
+          "NonInteractive": true,
+          "DesktopMatched": true,
+          "TimedOut": false
+        },
+        "exe_sha256": "D34D36F3BE1A6C49C56525AE86469B92E4F417DDF0B43CF00DD80C385C4B0562",
+        "build": {
+          "engine": "4.7.2.stable.official.ed1daf0bf",
+          "campaign_config_version": "2026-10-17.loop-provisional.3",
+          "data_version": "2026-10-17.foundation.1",
+          "game_commit": "e7c63c65a47712f39702531009a8b2d3d5e7a93a"
+        },
+        "run_id": "0095024252854d2f82e0dbc54e98ef51",
+        "pck_sha256": "948E60CBE7768EF85D0E1D2C68795E080A5DE8A2A4731A31DDE8CAAE9AD7A0E3"
+      }
+    },
+    {
+      "case": "2-battle",
+      "complete": true,
+      "original_sha256": "006de74c684772081e8aae42007caad0b65e34133e117794aa9855a01ba1c764",
+      "save_sha256": "589dfe1d9961043cdb8abca36ba0f734696acf304f3a6f5408e0753d3295e21d",
+      "migration": {
+        "archive_path": "test-fixture archive (original bytes SHA above)",
+        "archive_sha256": "006de74c684772081e8aae42007caad0b65e34133e117794aa9855a01ba1c764",
+        "complete": true,
+        "config_version": "2026-10-17.loop-provisional.2",
+        "normal_deaths": 1,
+        "old_sha256": "006de74c684772081e8aae42007caad0b65e34133e117794aa9855a01ba1c764",
+        "rendered": true,
+        "run_id": "2b2f419c09d3467d8a400a0c6ef11510",
+        "save_sha256": "589dfe1d9961043cdb8abca36ba0f734696acf304f3a6f5408e0753d3295e21d",
+        "story_deaths": 1.0
+      },
+      "restart": {
+        "complete": true,
+        "rendered": true,
+        "run_id": "f9f79398def34cbc9e058a11c70268ee",
+        "save_sha256": "589dfe1d9961043cdb8abca36ba0f734696acf304f3a6f5408e0753d3295e21d"
+      },
+      "isolation_migrate": {
+        "result": {
+          "PID": 8628,
+          "ThreadID": 18400,
+          "ExitCode": 0,
+          "OwnedWindowCount": 2,
+          "Station": "Service-0x0-1b7214$",
+          "Desktop": "Render_447cce8719214dfa9cdbb5bf7375b109",
+          "ObservedDesktop": "Render_447cce8719214dfa9cdbb5bf7375b109",
+          "NonInteractive": true,
+          "DesktopMatched": true,
+          "TimedOut": false
+        },
+        "exe_sha256": "D34D36F3BE1A6C49C56525AE86469B92E4F417DDF0B43CF00DD80C385C4B0562",
+        "build": {
+          "engine": "4.7.2.stable.official.ed1daf0bf",
+          "campaign_config_version": "2026-10-17.loop-provisional.3",
+          "data_version": "2026-10-17.foundation.1",
+          "game_commit": "e7c63c65a47712f39702531009a8b2d3d5e7a93a"
+        },
+        "run_id": "2b2f419c09d3467d8a400a0c6ef11510",
+        "pck_sha256": "948E60CBE7768EF85D0E1D2C68795E080A5DE8A2A4731A31DDE8CAAE9AD7A0E3"
+      },
+      "isolation_restart": {
+        "result": {
+          "PID": 16452,
+          "ThreadID": 16440,
+          "ExitCode": 0,
+          "OwnedWindowCount": 2,
+          "Station": "Service-0x0-1b7214$",
+          "Desktop": "Render_1239cbf056fe4caaa7833c014a4acecf",
+          "ObservedDesktop": "Render_1239cbf056fe4caaa7833c014a4acecf",
+          "NonInteractive": true,
+          "DesktopMatched": true,
+          "TimedOut": false
+        },
+        "exe_sha256": "D34D36F3BE1A6C49C56525AE86469B92E4F417DDF0B43CF00DD80C385C4B0562",
+        "build": {
+          "engine": "4.7.2.stable.official.ed1daf0bf",
+          "campaign_config_version": "2026-10-17.loop-provisional.3",
+          "data_version": "2026-10-17.foundation.1",
+          "game_commit": "e7c63c65a47712f39702531009a8b2d3d5e7a93a"
+        },
+        "run_id": "f9f79398def34cbc9e058a11c70268ee",
+        "pck_sha256": "948E60CBE7768EF85D0E1D2C68795E080A5DE8A2A4731A31DDE8CAAE9AD7A0E3"
+      }
+    },
+    {
+      "case": "2-death",
+      "complete": true,
+      "original_sha256": "9970376adcc86ce7014fd42976492457ac2c80286b2fc1dff0b3ab4703545d1f",
+      "save_sha256": "94eba2f7aab05f60fe81dddbcaa4bda8ad7b2f290a6e0c48d2efbcb51c0880a2",
+      "migration": {
+        "archive_path": "test-fixture archive (original bytes SHA above)",
+        "archive_sha256": "9970376adcc86ce7014fd42976492457ac2c80286b2fc1dff0b3ab4703545d1f",
+        "complete": true,
+        "config_version": "2026-10-17.loop-provisional.2",
+        "normal_deaths": 1,
+        "old_sha256": "9970376adcc86ce7014fd42976492457ac2c80286b2fc1dff0b3ab4703545d1f",
+        "rendered": true,
+        "run_id": "978e9b350feb4d8e8b4de7a81f2e3ee7",
+        "save_sha256": "94eba2f7aab05f60fe81dddbcaa4bda8ad7b2f290a6e0c48d2efbcb51c0880a2",
+        "story_deaths": 1.0
+      },
+      "restart": {
+        "complete": true,
+        "rendered": true,
+        "run_id": "5044081a3d854a58b02bff5480317c91",
+        "save_sha256": "94eba2f7aab05f60fe81dddbcaa4bda8ad7b2f290a6e0c48d2efbcb51c0880a2"
+      },
+      "isolation_migrate": {
+        "result": {
+          "PID": 26860,
+          "ThreadID": 24560,
+          "ExitCode": 0,
+          "OwnedWindowCount": 2,
+          "Station": "Service-0x0-1b7214$",
+          "Desktop": "Render_e6ef251ba72c4792adce60981c1d9ef0",
+          "ObservedDesktop": "Render_e6ef251ba72c4792adce60981c1d9ef0",
+          "NonInteractive": true,
+          "DesktopMatched": true,
+          "TimedOut": false
+        },
+        "exe_sha256": "D34D36F3BE1A6C49C56525AE86469B92E4F417DDF0B43CF00DD80C385C4B0562",
+        "build": {
+          "engine": "4.7.2.stable.official.ed1daf0bf",
+          "campaign_config_version": "2026-10-17.loop-provisional.3",
+          "data_version": "2026-10-17.foundation.1",
+          "game_commit": "e7c63c65a47712f39702531009a8b2d3d5e7a93a"
+        },
+        "run_id": "978e9b350feb4d8e8b4de7a81f2e3ee7",
+        "pck_sha256": "948E60CBE7768EF85D0E1D2C68795E080A5DE8A2A4731A31DDE8CAAE9AD7A0E3"
+      },
+      "isolation_restart": {
+        "result": {
+          "PID": 7192,
+          "ThreadID": 24736,
+          "ExitCode": 0,
+          "OwnedWindowCount": 2,
+          "Station": "Service-0x0-1b7214$",
+          "Desktop": "Render_5041070780b540afba5dc14d7623d667",
+          "ObservedDesktop": "Render_5041070780b540afba5dc14d7623d667",
+          "NonInteractive": true,
+          "DesktopMatched": true,
+          "TimedOut": false
+        },
+        "exe_sha256": "D34D36F3BE1A6C49C56525AE86469B92E4F417DDF0B43CF00DD80C385C4B0562",
+        "build": {
+          "engine": "4.7.2.stable.official.ed1daf0bf",
+          "campaign_config_version": "2026-10-17.loop-provisional.3",
+          "data_version": "2026-10-17.foundation.1",
+          "game_commit": "e7c63c65a47712f39702531009a8b2d3d5e7a93a"
+        },
+        "run_id": "5044081a3d854a58b02bff5480317c91",
+        "pck_sha256": "948E60CBE7768EF85D0E1D2C68795E080A5DE8A2A4731A31DDE8CAAE9AD7A0E3"
+      }
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "mode": "isolated_exe",
+  "normal_desktop_fallback": false,
+  "end_utc": "2026-10-17T10:59:40.2334383Z",
+  "command": "\"C:\\Users\\masat\\Documents\\Codex\\2026-10-17\\task\\dive-in-under-work\\projects\\dive-in-under\\build\\releases\\24314385e5ed6c4f6d4fffefc5be87108d073d11-851ac5dd\\DiveInUnder.exe\" --audio-driver Dummy --rendering-method gl_compatibility --max-fps 120 --resolution 1280x720 --log-file \"C:\\Users\\masat\\Documents\\Codex\\2026-10-17\\task\\dive-in-under-work\\projects\\dive-in-under\\artifacts\\campaign-isolated\\render.log\" -- --smoke-dir=\"C:\\Users\\masat\\Documents\\Codex\\2026-10-17\\task\\dive-in-under-work\\projects\\dive-in-under\\artifacts\\campaign-isolated\" --smoke-run-id=39fd0880739543fa80bf01ad1db6cb9a --campaign-replay=\"C:\\Users\\masat\\Documents\\Codex\\2026-10-17\\task\\dive-in-under-work\\projects\\dive-in-under\\artifacts\\campaign-replay.json\" --campaign-seed=10000 --campaign-resume",
+  "executable": "C:\\Users\\masat\\Documents\\Codex\\2026-10-17\\task\\dive-in-under-work\\projects\\dive-in-under\\build\\releases\\24314385e5ed6c4f6d4fffefc5be87108d073d11-851ac5dd\\DiveInUnder.exe",
+  "pck_sha256": "C0A7F33B5C08610B8EB974322CA0A36369020A539EA0F23FC778963EF3C0F83A",
+  "run_id": "39fd0880739543fa80bf01ad1db6cb9a",
+  "start_utc": "2026-10-17T10:59:28.8775773Z",
+  "result": {
+    "PID": 2276,
+    "ThreadID": 18428,
+    "ExitCode": 0,
+    "OwnedWindowCount": 2,
+    "Station": "Service-0x0-1b7214$",
+    "Desktop": "Render_32e1343a5ee34fd9a52f5f4431fe11d9",
+    "ObservedDesktop": "Render_32e1343a5ee34fd9a52f5f4431fe11d9",
+    "NonInteractive": true,
+    "DesktopMatched": true,
+    "TimedOut": false
+  },
+  "data_root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-17\\task\\dive-in-under-work\\projects\\dive-in-under\\artifacts\\campaign-isolated",
+  "build": {
+    "engine": "4.7.2.stable.official.ed1daf0bf",
+    "game_commit": "24314385e5ed6c4f6d4fffefc5be87108d073d11",
+    "campaign_config_version": "2026-10-17.loop-provisional.2",
+    "data_version": "2026-10-17.foundation.1"
+  },
+  "exe_sha256": "D34D36F3BE1A6C49C56525AE86469B92E4F417DDF0B43CF00DD80C385C4B0562"
+}

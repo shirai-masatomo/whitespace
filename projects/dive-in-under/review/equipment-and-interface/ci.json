@@ -1,0 +1,12 @@
+{
+  "verification_scope": "full-structural",
+  "render_location": "GitHub-hosted windows-latest; isolated desktop",
+  "head_sha": "a5c3c6925fbc501d24ce84ccfa1f2fbbeed74456",
+  "local_godot_run_after_freeze_report": false,
+  "evidence_artifact_id": 12144070897,
+  "build_artifact_id": 12143229525,
+  "conclusion": "success",
+  "build_artifact_sha256": "df908ee1588d1e224064ca0aa3a66e0380f1402599d1de42a5507ad1c3c80974",
+  "evidence_artifact_sha256": "323f6120d975c188bab7b08de264bff60f3b7c835020ae85921d9e411e6418dc",
+  "run_id": 39146623104
+}

@@ -1,0 +1,19 @@
+{
+  "cases": [
+    {
+      "directory": "C:\\Users\\masat\\Documents\\Codex\\2026-10-17\\task\\dive-in-under-work\\projects\\dive-in-under\\artifacts\\migration-isolated\\4-old-floor-282b58aa0a7a4dca8957e0b0a93e0360",
+      "save_sha256": "353b29bb6fe03f3594d8cfef810ecd34d7e875e0512449db4db4012d8303f7a0",
+      "complete": true,
+      "case": "4-old-floor",
+      "original_sha256": "d64c65ef4f3d5c31ad1128eb3563a0d3ff07b688a477a5f557da67ae8c6f0d0e"
+    }
+  ],
+  "build": {
+    "data_version": "2026-10-18.area1.1",
+    "campaign_config_version": "2026-10-17.loop-provisional.4",
+    "game_commit": "55b240eb9df52b58dca76447281490e189d8d2aa+dirty",
+    "engine": "4.7.2.stable.official.ed1daf0bf"
+  },
+  "complete": true,
+  "rendered": true
+}

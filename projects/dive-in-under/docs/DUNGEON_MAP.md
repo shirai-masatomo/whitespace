@@ -1,3 +1,5 @@
+> 統合時点（2026-10-19）：mainへ実装0.6.0を統合。最新の通常入口は review/current/Play.cmd。本文内の旧版・取込待ち記述は策定時点の履歴で、現在の実装は review/ui-integration-0.6.0/ と区別して参照する。
+
 # ダンジョン階層分岐・探索ミニマップ（2026-10-19／確定方針）
 
 [全体仕様](../SPEC.md) ｜ [階層台帳](FLOORS.md) ｜ [UI参考](UI_MOCKS.md) ｜ [アイテム](ITEMS.md) ｜ [仲間・スキル](ALLIES.md) / [SKILLS.md](SKILLS.md)

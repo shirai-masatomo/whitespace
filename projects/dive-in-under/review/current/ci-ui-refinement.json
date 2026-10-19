@@ -1,0 +1,21 @@
+{
+  "pr_head": "7bc5f347d2c94019ff20acb9bc4ba83ab6c06fa7",
+  "checkout_merge": "0cc6b1eb8c7e53def95a9e4f28d1aa9dcd7af315",
+  "run": 39032622680,
+  "job": 117396085853,
+  "conclusion": "success",
+  "scope": "0.4.2 native UI, before oblique composition/new enemies",
+  "zip": "https://github.com/shirai-masatomo/whitespace/actions/runs/39032622680/artifacts/12100624678",
+  "evidence": "https://github.com/shirai-masatomo/whitespace/actions/runs/39032622680/artifacts/12101301288",
+  "expires": "2027-01-15",
+  "checks": {
+    "combat": 142,
+    "loop": 180,
+    "campaign": 44,
+    "seeds": 1000,
+    "actions": 290,
+    "faults": 10
+  },
+  "parallel_push_run": 39032619115,
+  "parallel_push_conclusion": "cancelled"
+}

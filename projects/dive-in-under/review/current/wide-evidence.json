@@ -1,0 +1,91 @@
+{
+  "runtime_commit": "718e07564f73286c5482a999ea7423df773c32f3",
+  "version": "0.4.5-wide-battlefield",
+  "resolution": [
+    1280,
+    720
+  ],
+  "battlefield_rect": [
+    16,
+    16,
+    896,
+    504
+  ],
+  "right_panel_rect": [
+    928,
+    16,
+    336,
+    688
+  ],
+  "log_area_rect": [
+    16,
+    532,
+    896,
+    172
+  ],
+  "source_background": [
+    1672,
+    941
+  ],
+  "background_zoom": 1.0,
+  "image_transforms": "aspect preserved, no rotation, no shear",
+  "cavern_v2_sha256": "b251f52cde26bf44481a83de844a6879e5ec6d4d18aa91d7dfd32b25dfab3f6b",
+  "core_data_policy_hashes_match_previous_1000_seeds": true,
+  "screenshots": [
+    {
+      "path": "66-wide-normal-battle.png",
+      "audit": "66-wide-normal-battle-audit.json",
+      "sha256": "add675f7fe0666a0d6ec66747462926615c1dc866a5a5c2ff900347a97fcec28"
+    },
+    {
+      "path": "67-wide-boss.png",
+      "audit": "67-wide-boss-audit.json",
+      "sha256": "745316202cc64cbc1293f10d9f2913dfbc535111c7ecd302398eb8c78809724b"
+    },
+    {
+      "path": "68-wide-exploration.png",
+      "audit": "68-wide-exploration-audit.json",
+      "sha256": "f4dd975702e1c89c52efe72d1897737ac22df92cd583cae216a6d487ef19f4b3"
+    },
+    {
+      "path": "69-wide-event.png",
+      "audit": "69-wide-event-audit.json",
+      "sha256": "44130ead9d7fbca73c180022a310fafb9e9545f0bdf1b6a7ec011f3cd034dd7c"
+    },
+    {
+      "path": "70-wide-bat.png",
+      "audit": "70-wide-bat-audit.json",
+      "sha256": "e4a90d3aee28edc9b4cccf88c8290766af8c10b1dc144445207f85e3c8ae8fbb"
+    },
+    {
+      "path": "71-wide-beetle.png",
+      "audit": "71-wide-beetle-audit.json",
+      "sha256": "8a342b41aff7ce0c6e6b22c74acc34c057b12d330b48339c4c19333cc5e21f32"
+    },
+    {
+      "path": "72-wide-rat.png",
+      "audit": "72-wide-rat-audit.json",
+      "sha256": "31e32a5c3c656973029e4ac0ce085f38838a0f34d8c46482708edfad207fd5ba"
+    },
+    {
+      "path": "73-wide-slime.png",
+      "audit": "73-wide-slime-audit.json",
+      "sha256": "3ff9dabf344d2eb81694007709ca8e764f0e30cd618e905c27f9e64cf0222f54"
+    },
+    {
+      "path": "74-wide-death.png",
+      "audit": "74-wide-death-audit.json",
+      "sha256": "5bc7e9b2ea2c90724c7f1dc1c93ab3da4434da58e6546ca2b902219ac75c7041"
+    },
+    {
+      "path": "75-wide-town.png",
+      "audit": "75-wide-town-audit.json",
+      "sha256": "4c87b46eb1168730dcc98a7f23ceba7db19bfb64aeb1447e7b49aee18c566f7b"
+    },
+    {
+      "path": "76-wide-title.png",
+      "audit": "76-wide-title-audit.json",
+      "sha256": "8008683af85bcd479fd66d04fecb30eeac21c56cad92493e62f2a0efdd1fa135"
+    }
+  ]
+}

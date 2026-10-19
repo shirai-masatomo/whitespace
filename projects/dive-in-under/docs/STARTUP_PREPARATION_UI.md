@@ -1,3 +1,5 @@
+> 統合時点（2026-10-19）：mainへ実装0.6.0を統合。最新の通常入口は review/current/Play.cmd。本文内の旧版・取込待ち記述は策定時点の履歴で、現在の実装は review/ui-integration-0.6.0/ と区別して参照する。
+
 # 起動・冒険準備画面 — 現段階の試遊仕様（2026-10-19）
 
 [全体仕様](../SPEC.md) ｜ [UI参考](UI_MOCKS.md) ｜ [装備・収納](ITEMS.md) ｜ [実装状況](IMPLEMENTATION_STATUS.md)

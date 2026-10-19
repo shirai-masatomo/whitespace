@@ -1,0 +1,158 @@
+{
+	"controls": [
+		{
+			"rect": "[P: (1096.0, 27.0), S: (140.0, 32.0)]",
+			"text": "G  37"
+		},
+		{
+			"rect": "[P: (1031.0, 288.0), S: (210.0, 30.0)]",
+			"text": "主人公  /  Lv.3"
+		},
+		{
+			"rect": "[P: (1134.0, 339.0), S: (50.0, 24.0)]",
+			"text": "HP"
+		},
+		{
+			"rect": "[P: (1133.0, 364.0), S: (111.0, 26.0)]",
+			"text": "30 / 34"
+		},
+		{
+			"rect": "[P: (1028.0, 489.0), S: (216.0, 28.0)]",
+			"text": "SP   2 / 2"
+		},
+		{
+			"rect": "[P: (1028.0, 551.0), S: (216.0, 26.0)]",
+			"text": "EXP   4 / 36"
+		},
+		{
+			"rect": "[P: (1028.0, 617.0), S: (216.0, 30.0)]",
+			"text": "攻撃 8   防御 2   素早さ 6"
+		},
+		{
+			"rect": "[P: (1028.0, 659.0), S: (216.0, 36.0)]",
+			"text": "状態異常なし"
+		},
+		{
+			"rect": "[P: (1031.0, 98.0), S: (210.0, 30.0)]",
+			"text": "階層のつながり"
+		},
+		{
+			"disabled": false,
+			"focus": false,
+			"font_color": "(0.1373, 0.1216, 0.1059, 1.0)",
+			"rect": "[P: (1016.0, 134.0), S: (240.0, 112.0)]",
+			"text": ""
+		}
+	],
+	"run_id": "f167b3479bfe400a844d7306c713afd9",
+	"screenshot": "boss.png",
+	"stages": [
+		{
+			"kind": "session-ui",
+			"route": [
+				{
+					"current": false,
+					"id": "floor-9",
+					"label": "9 F",
+					"type_revealed": false,
+					"visited": true
+				},
+				{
+					"current": true,
+					"id": "floor-10",
+					"label": "10 F",
+					"type_revealed": false,
+					"visited": false
+				},
+				{
+					"current": false,
+					"id": "floor-11",
+					"label": "11 F",
+					"type_revealed": false,
+					"visited": false
+				}
+			],
+			"screen": "exploration",
+			"session_only": true,
+			"stage_rect": "[P: (248.0, 86.0), S: (748.0, 421.0)]"
+		},
+		{
+			"actors": [
+				{
+					"adoption": "adopted-current-baseline",
+					"body_region": "[P: (0.0, 22.0), S: (1234.0, 1232.0)]",
+					"candidate_loaded": true,
+					"foot": [
+						523.0,
+						337.0
+					],
+					"id": "hero",
+					"static_hover_px": 0.0,
+					"top_left": [
+						416.686859130859,
+						152.114822387695
+					],
+					"visible_size": [
+						204.985015869141,
+						204.652786254883
+					],
+					"within_stage": true
+				},
+				{
+					"adoption": "adopted-current-baseline",
+					"body_region": "[P: (0.0, 0.0), S: (1251.0, 1254.0)]",
+					"candidate_loaded": true,
+					"foot": [
+						225.0,
+						269.0
+					],
+					"id": "B10",
+					"static_hover_px": 0.0,
+					"top_left": [
+						126.027534484863,
+						81.9328460693359
+					],
+					"visible_size": [
+						191.663391113281,
+						192.123016357422
+					],
+					"within_stage": true
+				}
+			],
+			"adoption": "twelve-assets-current-baseline",
+			"aspect": "preserved",
+			"background": "boss",
+			"background_aspect": 1.77777777777778,
+			"background_loaded": true,
+			"background_zoom": 1.0,
+			"composition": "wide-floor-reference-comparison",
+			"depth": 10,
+			"far_enemy_foot": [
+				225.0,
+				269.0
+			],
+			"filter": "nearest",
+			"formation_rules": false,
+			"global_rect": "[P: (248.0, 86.0), S: (748.0, 421.0)]",
+			"near_hero_foot": [
+				523.0,
+				337.0
+			],
+			"stage_size": [
+				748.0,
+				421.0
+			],
+			"static_only": true,
+			"wide_layout": true
+		},
+		{
+			"combat_rng_used": false,
+			"duration_seconds": 0.4,
+			"effect": "phase1-statuses",
+			"enemy_statuses": {},
+			"events": [],
+			"hero_statuses": {},
+			"static_character": true
+		}
+	]
+}

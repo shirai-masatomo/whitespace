@@ -1,0 +1,84 @@
+{
+	"controls": [
+		{
+			"rect": "[P: (1096.0, 25.0), S: (145.0, 40.0)]",
+			"text": "G  0"
+		},
+		{
+			"rect": "[P: (936.0, 100.0), S: (308.0, 32.0)]",
+			"text": "詳細"
+		},
+		{
+			"rect": "[P: (934.0, 146.0), S: (312.0, 29.0)]",
+			"text": "旅の記録"
+		},
+		{
+			"rect": "[P: (934.0, 187.0), S: (312.0, 19.0)]",
+			"text": "到達記録"
+		},
+		{
+			"rect": "[P: (934.0, 218.0), S: (312.0, 20.0)]",
+			"text": "0 F"
+		},
+		{
+			"rect": "[P: (934.0, 266.0), S: (312.0, 19.0)]",
+			"text": "通常の探索"
+		},
+		{
+			"rect": "[P: (934.0, 297.0), S: (312.0, 20.0)]",
+			"text": "1 回"
+		},
+		{
+			"rect": "[P: (934.0, 345.0), S: (312.0, 19.0)]",
+			"text": "通常の死亡"
+		},
+		{
+			"rect": "[P: (934.0, 376.0), S: (312.0, 20.0)]",
+			"text": "0 回"
+		},
+		{
+			"rect": "[P: (934.0, 424.0), S: (312.0, 41.0)]",
+			"text": "この記録は現在のセーブから表示しています。"
+		},
+		{
+			"disabled": false,
+			"focus": false,
+			"font_color": "(0.9098, 0.8902, 0.8078, 1.0)",
+			"rect": "[P: (980.0, 616.0), S: (284.0, 88.0)]",
+			"text": "戻る"
+		}
+	],
+	"run_id": "4596778bce8b4a2ebd2532aba7ac8448",
+	"screenshot": "status-profile.png",
+	"stages": [
+		{
+			"detail_scroll_max": 319.0,
+			"equipment_slots": 11,
+			"gauge_values": {
+				"exp": {
+					"current": 4,
+					"maximum": 36
+				},
+				"hp": {
+					"current": 34,
+					"maximum": 34
+				},
+				"sp": {
+					"current": 2,
+					"maximum": 2
+				}
+			},
+			"hero": "主人公",
+			"item_rects": {
+				"journey": "[P: (346.0, 269.0), S: (536.0, 48.0)]",
+				"species": "[P: (346.0, 208.0), S: (536.0, 48.0)]"
+			},
+			"kind": "status",
+			"party_active": 1,
+			"party_reserved": 5,
+			"read_only": true,
+			"selected": "journey",
+			"tab": "profile"
+		}
+	]
+}

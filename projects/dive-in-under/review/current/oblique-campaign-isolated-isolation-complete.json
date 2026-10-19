@@ -1,0 +1,30 @@
+{
+  "exe_sha256": "D34D36F3BE1A6C49C56525AE86469B92E4F417DDF0B43CF00DD80C385C4B0562",
+  "mode": "isolated_exe",
+  "result": {
+    "PID": 17488,
+    "ThreadID": 27392,
+    "ExitCode": 0,
+    "OwnedWindowCount": 2,
+    "Station": "Service-0x0-1b7214$",
+    "Desktop": "Render_42b6227afffe45b899ca4ecbb57a4398",
+    "ObservedDesktop": "Render_42b6227afffe45b899ca4ecbb57a4398",
+    "NonInteractive": true,
+    "DesktopMatched": true,
+    "TimedOut": false
+  },
+  "end_utc": "2026-10-17T12:35:35.0640530Z",
+  "run_id": "5904903d46934053910926d4b425b32e",
+  "build": {
+    "data_version": "2026-10-17.foundation.1",
+    "campaign_config_version": "2026-10-17.loop-provisional.2",
+    "engine": "4.7.2.stable.official.ed1daf0bf",
+    "game_commit": "04778428be0e0d7c74b23240707cde6403f04704"
+  },
+  "normal_desktop_fallback": false,
+  "data_root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-17\\task\\dive-in-under-work\\projects\\dive-in-under\\artifacts\\campaign-isolated",
+  "executable": "C:\\Users\\masat\\Documents\\Codex\\2026-10-17\\task\\dive-in-under-work\\projects\\dive-in-under\\build\\releases\\04778428be0e0d7c74b23240707cde6403f04704-9fd9b00a\\DiveInUnder.exe",
+  "command": "\"C:\\Users\\masat\\Documents\\Codex\\2026-10-17\\task\\dive-in-under-work\\projects\\dive-in-under\\build\\releases\\04778428be0e0d7c74b23240707cde6403f04704-9fd9b00a\\DiveInUnder.exe\" --audio-driver Dummy --rendering-method gl_compatibility --max-fps 120 --resolution 1280x720 --log-file \"C:\\Users\\masat\\Documents\\Codex\\2026-10-17\\task\\dive-in-under-work\\projects\\dive-in-under\\artifacts\\campaign-isolated\\render.log\" -- --smoke-dir=\"C:\\Users\\masat\\Documents\\Codex\\2026-10-17\\task\\dive-in-under-work\\projects\\dive-in-under\\artifacts\\campaign-isolated\" --smoke-run-id=5904903d46934053910926d4b425b32e --campaign-replay=\"C:\\Users\\masat\\Documents\\Codex\\2026-10-17\\task\\dive-in-under-work\\projects\\dive-in-under\\artifacts\\campaign-replay.json\" --campaign-seed=10000 --campaign-resume",
+  "start_utc": "2026-10-17T12:35:21.3079045Z",
+  "pck_sha256": "473FC64BA9CF5FF7DB0F3A75F9B39DB69E0B40297B0AD4438A5F28C1FF18F066"
+}

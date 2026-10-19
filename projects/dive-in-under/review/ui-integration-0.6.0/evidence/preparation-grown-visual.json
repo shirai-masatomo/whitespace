@@ -1,0 +1,27 @@
+{
+	"controls": [
+		{
+			"rect": "[P: (1096.0, 27.0), S: (140.0, 32.0)]",
+			"text": "G  37"
+		},
+		{
+			"rect": "[P: (946.0, 194.0), S: (50.0, 24.0)]",
+			"text": "HP"
+		},
+		{
+			"rect": "[P: (945.0, 219.0), S: (227.0, 26.0)]",
+			"text": "34 / 34"
+		}
+	],
+	"run_id": "f167b3479bfe400a844d7306c713afd9",
+	"screenshot": "preparation-grown.png",
+	"stages": [
+		{
+			"kind": "session-ui",
+			"route": [],
+			"screen": "hub",
+			"session_only": true,
+			"stage_rect": ""
+		}
+	]
+}

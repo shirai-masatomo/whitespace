@@ -1,0 +1,30 @@
+{
+  "data_root": "C:\\Users\\masat\\Documents\\Codex\\2026-10-17\\task\\dive-in-under-work\\projects\\dive-in-under\\artifacts\\isolated",
+  "start_utc": "2026-10-17T14:52:42.5296630Z",
+  "build": {
+    "engine": "4.7.2.stable.official.ed1daf0bf",
+    "campaign_config_version": "2026-10-17.loop-provisional.3",
+    "data_version": "2026-10-17.foundation.1",
+    "game_commit": "e7c63c65a47712f39702531009a8b2d3d5e7a93a"
+  },
+  "normal_desktop_fallback": false,
+  "exe_sha256": "D34D36F3BE1A6C49C56525AE86469B92E4F417DDF0B43CF00DD80C385C4B0562",
+  "pck_sha256": "948E60CBE7768EF85D0E1D2C68795E080A5DE8A2A4731A31DDE8CAAE9AD7A0E3",
+  "run_id": "74b1173e3b0948e58b686543225809ae",
+  "mode": "isolated_exe",
+  "end_utc": "2026-10-17T14:52:53.3258858Z",
+  "command": "\"C:\\Users\\masat\\Documents\\Codex\\2026-10-17\\task\\dive-in-under-work\\projects\\dive-in-under\\build\\releases\\e7c63c65a47712f39702531009a8b2d3d5e7a93a-b21e00e2\\DiveInUnder.exe\" --audio-driver Dummy --rendering-method gl_compatibility --max-fps 30 --resolution 1280x720 --log-file \"C:\\Users\\masat\\Documents\\Codex\\2026-10-17\\task\\dive-in-under-work\\projects\\dive-in-under\\artifacts\\isolated\\render.log\" -- --smoke-dir=\"C:\\Users\\masat\\Documents\\Codex\\2026-10-17\\task\\dive-in-under-work\\projects\\dive-in-under\\artifacts\\isolated\" --smoke-run-id=74b1173e3b0948e58b686543225809ae",
+  "result": {
+    "PID": 21660,
+    "ThreadID": 20748,
+    "ExitCode": 0,
+    "OwnedWindowCount": 2,
+    "Station": "Service-0x0-1b7214$",
+    "Desktop": "Render_08317191caac42ada367e70d282cfef2",
+    "ObservedDesktop": "Render_08317191caac42ada367e70d282cfef2",
+    "NonInteractive": true,
+    "DesktopMatched": true,
+    "TimedOut": false
+  },
+  "executable": "C:\\Users\\masat\\Documents\\Codex\\2026-10-17\\task\\dive-in-under-work\\projects\\dive-in-under\\build\\releases\\e7c63c65a47712f39702531009a8b2d3d5e7a93a-b21e00e2\\DiveInUnder.exe"
+}
