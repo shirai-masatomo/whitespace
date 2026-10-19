@@ -194,7 +194,7 @@ jobs:
         timeout-minutes: 4
         env:
           GITHUB_TOKEN: ${{ github.token }}
-        run: ./tools/refinement_review.ps1
+        run: ./tools/refinement_review.ps1 -AfterOnly
       - uses: actions/upload-artifact@v4
         if: always()
         with:
