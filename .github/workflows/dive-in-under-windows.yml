@@ -194,6 +194,10 @@ jobs:
       - name: Export session UI with unchanged core and data
         if: steps.scope.outputs.integration_only == 'true' && (steps.scope.outputs.journey_only != 'true' || hashFiles('projects/dive-in-under/tools/journey-ready.txt') != '')
         run: ./dev.ps1 -Task build -GameCommit '${{ github.event.pull_request.head.sha || github.sha }}'
+      - name: One normal journey and focused safety fixtures in isolated exported EXE
+        if: steps.scope.outputs.journey_only == 'true' && hashFiles('projects/dive-in-under/tools/journey-ready.txt') != ''
+        timeout-minutes: 5
+        run: ./tools/journey_review.ps1
       - name: Isolated session UI, transitions, comparison screenshots and fresh restart
         if: steps.scope.outputs.integration_only == 'true' && steps.scope.outputs.feedback_only != 'true' && steps.scope.outputs.bgm_only != 'true' && steps.scope.outputs.title_only != 'true' && steps.scope.outputs.refinement_only != 'true' && steps.scope.outputs.journey_only != 'true'
         timeout-minutes: 4

@@ -59,6 +59,7 @@ func build_rewards() -> void:
 	for uid in s.inventory:
 		var item: Dictionary=game.cfg.items[s.items[uid]]
 		var row:=Button.new(); row.text=item.name; row.custom_minimum_size=Vector2(265,40); UISkin.quiet_button(row,uid==game.replace_selected); list.add_child(row)
+		row.set_meta("nav","replace-"+uid)
 		row.tooltip_text=item.name+" / "+game.condition_text(uid)
 		row.pressed.connect(func():game.replace_selected=uid; game.reward_confirmation=""; game.show_campaign())
 	label_at(left,"入替時は選んだ所持品を手放します。",Rect2(18,463,282,35),14)

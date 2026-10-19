@@ -29,7 +29,7 @@ static func choose(s: Dictionary, cfg: Dictionary) -> Dictionary:
 		"result": return {"action":"town","args":{}}
 		"explore":
 			var h: Dictionary=E.hero(s,cfg)
-			var limit: int=4 if h.level<3 else (8 if h.level<5 else 10)
-			var threshold: float=0.82 if s.floor==9 else 0.48
+			var limit: int=4 if h.level<2 else (8 if h.level<3 else 10)
+			var threshold: float=0.55 if s.floor==9 else 0.42
 			return {"action":"return" if s.floor>0 and (s.floor>=limit or float(h.hp)/h.max_hp<threshold) else "descend","args":{}}
 	return {}

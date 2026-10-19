@@ -123,7 +123,7 @@ func build_exploration() -> void:
 		command(left,game.cfg.events[s.event].choice,Rect2(14,287,192,53),"event",{"choice":"accept"})
 		command(left,"見送る",Rect2(14,349,192,53),"event",{"choice":"skip"})
 	else: UISkin.label(left,"拾った品は [E] で比較・交換。",Rect2(18,346,185,74),17,UISkin.INK,true)
-	if not battling and s.phase=="explore": nav(left,"所持品・装備 [E]",Rect2(14,279,192,51),game.open_field_equipment,"field-equipment")
+	if not battling and s.phase=="explore": nav(left,"所持品・装備 [E]",Rect2(14,279,192,51),game.open_field_equipment,"field-equipment").add_theme_font_size_override("font_size",16)
 	add_stage(Rect2(248,86,748,421),game.display_battle().enemy.id if battling else "")
 	var border:=UISkin.panel(self,Rect2(248,86,748,421)); border.mouse_filter=Control.MOUSE_FILTER_IGNORE; border.ornament_only=true
 	if s.phase=="event":
@@ -213,6 +213,7 @@ func build_equipment() -> void:
 		UISkin.label(details,game.item_effects(item,selected)+"\n"+game.condition_text(selected),Rect2(26,180,320,88),21,UISkin.DARK,true)
 		UISkin.label(details,item.get("description",preload("res://ui/warehouse_catalog.gd").DESCRIPTIONS.get(game.campaign.items[selected],"")),Rect2(26,280,320,105) if game.equipment_candidate=="" else Rect2(26,360,320,26),18,UISkin.DARK,true)
 		var candidate: bool=selected!=equipped
+		if candidate: UISkin.label(details,"現在："+(game.cfg.items[game.campaign.items[equipped]].name if equipped!="" else "未装備"),Rect2(26,149,320,28),15,UISkin.DARK)
 		if candidate:
 			var preview: Dictionary=E.act(game.campaign,"equip",int(game.campaign.revision),{"uid":selected},game.data,game.cfg)
 			var before: Dictionary=E.hero(game.campaign,game.cfg); var after: Dictionary=E.hero(preview,game.cfg)
