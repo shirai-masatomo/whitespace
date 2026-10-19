@@ -59,6 +59,47 @@
 ### 納品
 需給比較、必要コード・関連テスト、正式素材依頼、SPEC/PROJECT_STATE/レビュー、コミットと最新EXE反映。調整した仮値と変更根拠を残し工程3へ進まない。
 
+### 工程2終了後のUI・デザインレビュー引継ぎ（2026-10-19追加・必須）
+
+工程2はまず食料/栽培のロジック・動作・バランスを実装・検証・EXE反映する。**その後、工程1〜2のUI/デザインの現状を撮影してレビューに引き渡す**。大幅なUI再設計を先に進めず、ChatGPTによる画像を見たレビュー後に改善優先順を決める。画像納品はユーザーのレビュー依頼に基づく工程2の追加納品条件。
+
+**画像の正規保存先（GitHubへコミット・pushすること）**
+\`projects/sporehollow/review/current/integrated-revision/phase2/screenshots/\`
+
+**同階層のレビュー資料**
+- \`projects/sporehollow/review/current/integrated-revision/phase2/REPORT.md\`：工程2の実装・検証・UI現状・要確認事項と正式画像の不足。
+- \`projects/sporehollow/review/current/integrated-revision/phase2/UI_REVIEW_INDEX.md\`：PNGを相対リンク/インライン画像で一覧にし、画面名・目的・操作遷移・状態を1枚ずつ記す。GitHub上で各PNGを開ける状態にする。
+- \`projects/sporehollow/review/current/integrated-revision/phase2/SCREENSHOT_MANIFEST.json\`：画像名、source_commit、EXE/source整合、画像解像度、seed、ゲーム内日/時刻、実World.step由来か明示fixtureか、操作/選択状態、使用した撮影方式、生成時刻、差異、隔離条件/実行結果を機械可読で記録。
+- \`review/current/PACKET.md\`：工程2レポート・画像一覧へのリンクを最上部付近に追加する。
+
+**撮影対象（可能な限り10〜12枚、PNG原寸。最低8場面）**
+1. \`01-day-overview.png\`：朝〜昼の全画面HUD、人物・資材・仕事・ログと地形。
+2. \`02-architect-mushroom.png\`：建築カテゴリとキノコ栽培床の選択・費用・配置プレビュー。
+3. \`03-mushroom-pending.png\`：建築予定・素材待ち・部分搬入などの実状態。
+4. \`04-mushroom-growing.png\`：栽培設備選択、植菌/生育中、残り時間・材料情報。
+5. \`05-mushroom-harvest.png\`：収穫可能/収穫後の現物発生と回収状態。
+6. \`06-cooking-workbench.png\`：料理の注文・所要素材・現物/製作進捗。
+7. \`07-stockpile-food.png\`：備蓄の食料フィルタ・数量・受入/持出し権限。
+8. \`08-resident-food.png\`：住民詳細と生活→食事優先（調理済み/生食材×4ティア）。
+9. \`09-resident-work.png\`：住民の仕事優先/自動収集・満腹・現在行動。
+10. \`10-night-overview.png\`：夜間/襲撃時の全画面HUD、敵・住民・ログ。
+11. \`11-house-sleep.png\`：【可能なら】家屋・ベッド・睡眠状態。
+12. \`12-wide-overview-1600.png\`：【可能なら】1600×1000の実UIを示す全画面。基本は1280×800を優先。
+
+各画像は**現行ゲームソースの実Viewportの描画**とし、CPU合成による確認図・画像生成・手書きモックはスクリーンショットと混同しない。撮影状態を作るためのfixtureは使用可だが、fixtureの有無と設定値を必ず明示し、自然プレイの到達と偽らない。名前だけ存在する画面をでっち上げない。指定場面が用意できない場合は不足リストと理由を提出する。以前の \`interaction-revision\` の古い画像を新バージョンだと誤記・上書きしない。
+
+**安全に撮影する方法**
+- 既存 \`tools/SAFE_RENDER.md\` と \`tools/isolated_desktop.cs\`、\`tools/capture_ui_review.ps1\` 等を参照。必要なら専用の短い撮影fixtureを追加する。通常のWindowsデスクトップ・通常ゲームEXEを自動起動しない。
+- 物理GPUを共有するため完全な安全性は保証できない。非対話WindowStationを検証し、1プロセス・最大30fps・60秒以内/回・直列、Dummy音声、隔離APPDATA、時間内打切り、OS入力なし。異常や重いフリーズ兆候があれば中止。**通常デスクトップへフォールバックしない。**
+- 既存の隔離方式が使用不能または危険なら、架空のスクショで代用せず、headless Control座標検証・CPU確認図は明確に別物として提出。ユーザーが実機で撮影するための再現手順を記録し、レビューは実PNG取得待ちとする。
+- 撮影前に作業者が運用環境とソースの整合を確認する。撮影後は既存正式素材/ユーザーデータ/EXEを保護し、一時領域だけ安全に整理する。
+
+**後続のChatGPTレビュー**
+ユーザーが工程2の完了・画像格納を知らせた時点で、ChatGPTがGitHubのPNG（実画面）を視認し、工程1〜2までの品質を横断評価する。参照先はRimWorldの仕事・製作指示、Oxygen Not Includedの資源と状態の可視化、Against the Stormのレシピ/消費制御、Clanfolkの生活・生産。外観を模倣せず、**情報設計、クリック回数、状態の分かりやすさ、ゲーム内での操作経路、ドット調と各UIの一貫性**を比較。改善案はP0/P1/P2、具体的な対象画面・修正案・期待効果・検証観点の表で示す。
+- レビューまでは「工程2：ロジック実装・検証完了／UIレビュー待ち」と分けて記録する。レビュー前に工程3へ自動着手しない。
+- 別担当によるレビューをCodexが勝手に「完了」と宣言しない。スクリーンショット納品でCodex側の引継ぎは完了、最終的なデザイン評価と追加改善の採否はChatGPTとユーザーに残す。
+
+
 ---
 
 ## 工程3：敵AI・防衛戦略の強化（Codexへそのまま渡す）
