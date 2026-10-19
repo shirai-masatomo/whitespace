@@ -605,7 +605,7 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventKey and (event.keycode==KEY_SPACE or event.physical_keycode==KEY_SPACE):
 		get_viewport().set_input_as_handled()
 		if event.pressed and not event.echo:
-			auto_play=not auto_play; play_timer.stop(); show_campaign()
+			auto_play=not auto_play; play_timer.stop(); call_deferred("show_campaign")
 func resume_auto_battle() -> void:
 	if campaign.get("phase")=="battle" and not auto_play:
 		auto_play=true; show_campaign()

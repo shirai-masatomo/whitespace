@@ -25,6 +25,8 @@ static func count_logos(node: Node) -> int:
 	var count:=1 if node is TextureRect and node.texture!=null and node.texture.resource_path=="res://assets/title/v1/dive-in-under-logo-gold-deep-shadow.png" else 0
 	for child in node.get_children(): count+=count_logos(child)
 	return count
+static func checkpoint(game: Control, stage: String) -> void:
+	UI.write(game,{"run_id":game.smoke_run_id,"stage":stage,"phase":game.campaign.get("phase",""),"auto_play":game.auto_play,"timer_stopped":game.play_timer.is_stopped()},"progress.json")
 static func run(game: Control, before: bool=false) -> void:
 	var proof: Dictionary={"mode":"before" if before else "after","run_id":game.smoke_run_id,"rendered":DisplayServer.get_name()!="headless","no_save_store":game.save_store==null,"checks":{},"logo_screens":[]}
 	if not UI.check(game,proof.rendered and not game.legacy_persistence_mode and game.save_store==null,"Rendered session without persistence"): return
@@ -99,13 +101,18 @@ static func run(game: Control, before: bool=false) -> void:
 			if not UI.check(game,record.count==1,"One adopted logo on "+record.screen): return
 		proof.checks["01"]={"logo_screens":proof.logo_screens,"title_dimmer_already_resolved":true}
 		# Normal timer and viewport key route. Hold Space echoes while paused, then wait >3 ticks.
+		checkpoint(game,"06-before-space")
 		game.auto_play=true; game.show_campaign(); await wait(game,0.08); await key(game,KEY_SPACE)
+		checkpoint(game,"06-stopped")
 		if not UI.check(game,not game.auto_play and game.play_timer.is_stopped(),"Space stops normal auto-battle"): return
 		var frozen: String=game.CampaignReplay.hash_state(game.campaign)
 		for i in 4: await key(game,KEY_SPACE,true)
+		checkpoint(game,"06-echoes")
 		await UI.click(game,"map"); await UI.click(game,"close-map"); await wait(game,2.0)
 		if not UI.check(game,not game.auto_play and game.CampaignReplay.hash_state(game.campaign)==frozen,"Paused rounds HP/SP rewards unchanged through time, echoes and map operations"): return
+		checkpoint(game,"06-frozen")
 		await key(game,KEY_SPACE)
+		checkpoint(game,"06-resumed-key")
 		if not UI.check(game,game.auto_play and not game.play_timer.is_stopped(),"Explicit latest request: Space resumes"): return
 		await key(game,KEY_SPACE)
 		if not UI.check(game,not game.auto_play,"Second stop works"): return
@@ -117,8 +124,10 @@ static func run(game: Control, before: bool=false) -> void:
 		await wait(game,0.7)
 		if not UI.check(game,game.campaign.battle.get("rounds",0)>0 or game.campaign.phase!="battle","Resumed timer advances normally"): return
 		game.auto_play=false; game.play_timer.stop()
+		checkpoint(game,"06-complete")
 		proof.checks["06"]={"space_stop_resume":true,"echo_ignored":true,"freeze_seconds":2.0,"all_state_frozen":true,"button_resume":true}
 		# Transition fixtures call the actual existing finish function. No long death/clear simulation.
+		checkpoint(game,"07-start")
 		for result_kind in ["death","clear"]:
 			fixture(game); battle_fixture(game); game.route_map_open=true; game.show_campaign()
 			E.finish(game.campaign,result_kind,"地図持越しの固定確認",game.cfg); game.show_campaign()
@@ -130,6 +139,7 @@ static func run(game: Control, before: bool=false) -> void:
 			game.show_campaign(); game.perform("depart",{},int(game.campaign.revision)); game.auto_play=false; game.play_timer.stop()
 			if not UI.check(game,not game.route_map_open and not is_instance_valid(game.play_view.routes_overlay),"Next expedition keeps map closed"): return
 		proof.checks["07"]={"death":true,"clear":true,"first_town_esc":true,"next_departure_closed":true,"map_does_not_pause_battle":true}
+		checkpoint(game,"08-start")
 		fixture(game); var cloak: String=game.campaign.equipment.head
 		game.campaign.item_condition[cloak].current=37
 		while game.campaign.inventory.size()<15: E.add_item(game.campaign,"I10")
