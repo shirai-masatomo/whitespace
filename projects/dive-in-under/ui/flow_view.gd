@@ -23,6 +23,7 @@ var hero_sp: Label
 var detail_body: Control
 var choice_buttons: Dictionary={}
 var choice_confirm: Button
+var drag_hint: Label
 func nav(parent: Control, text: String, rect: Rect2, callback: Callable, key: String="", primary: bool=false) -> Button:
 	var epoch: int=game.ui_epoch
 	var b:=UISkin.button(parent,text,rect,func():game.ui_action(callback,epoch),primary)
@@ -59,7 +60,7 @@ func _ready() -> void:
 	if game.reward_confirmation!="" and phase=="reward": confirmation()
 func build_left() -> void:
 	var s: Dictionary=game.campaign
-	var p:=UISkin.panel(self,Rect2(16,86,224,282),"探索操作")
+	var p:=UISkin.panel(self,Rect2(16,86,224,266),"探索操作")
 	var descend:=action(p,"さらに潜る［E］",Rect2(14,54,196,49),"advance_ready",{},s.phase=="explore" and not game.presenting)
 	descend.disabled=s.phase!="explore" or game.presenting
 	descend.tooltip_text="この出来事を確認してから進めます。" if s.phase!="battle" else "戦闘中は進めません。"
@@ -67,14 +68,15 @@ func build_left() -> void:
 	nav(p,"ステータス［C］",Rect2(14,164,196,42),game.open_status,"field-status")
 	var back:=action(p,"町へ帰還",Rect2(14,216,196,42),"return"); back.disabled=s.phase!="explore" or game.presenting; back.tooltip_text="未受領品や出来事を確認してから帰還できます。"
 	var hero: Dictionary=battle.hero if not battle.is_empty() else E.hero(s,game.cfg)
-	var card:=UISkin.panel(self,Rect2(16,380,224,98),"")
-	var pick:=Button.new(); pick.flat=true; pick.size=Vector2(224,98); pick.mouse_default_cursor_shape=CURSOR_POINTING_HAND; card.add_child(pick); pick.pressed.connect(func():select_actor("hero")); pick.set_meta("actor_select","hero")
+	var card:=UISkin.panel(self,Rect2(16,364,224,84),"")
+	var pick:=Button.new(); pick.flat=true; pick.size=Vector2(224,84); pick.mouse_default_cursor_shape=CURSOR_POINTING_HAND; card.add_child(pick); pick.pressed.connect(func():select_actor("hero")); pick.set_meta("actor_select","hero")
 	label_at(card,"主人公  Lv.%d"%hero.level,Rect2(16,8,192,24),17)
-	hero_hp=label_at(card,"HP %d / %d"%[hero.hp,hero.max_hp],Rect2(16,32,192,22),17)
-	hero_bar=UISkin.gauge(card,hero.hp,hero.max_hp,Rect2(16,58,192,9),Color("b83e32"))
-	hero_sp=label_at(card,"SP %d / %d"%[hero.sp,hero.max_sp],Rect2(16,72,192,20),14)
-	var bag:=UISkin.panel(self,Rect2(16,490,224,214),"所持品  %d / 15"%s.inventory.size())
+	hero_hp=label_at(card,"HP %d / %d"%[hero.hp,hero.max_hp],Rect2(16,28,192,22),17)
+	hero_bar=UISkin.gauge(card,hero.hp,hero.max_hp,Rect2(16,52,192,8),Color("b83e32"))
+	hero_sp=label_at(card,"SP %d / %d"%[hero.sp,hero.max_sp],Rect2(16,62,192,20),14)
+	var bag:=UISkin.panel(self,Rect2(16,460,224,244),"所持品  %d / 15"%s.inventory.size())
 	Grid.bag(bag,game,self,Vector2(18,50),4,44)
+	drag_hint=label_at(self,game.notice,Rect2(260,74,702,18),12); drag_hint.z_index=1000
 func build_map() -> void:
 	var p:=UISkin.panel(self,Rect2(982,86,282,260),"地図  /  クリックで拡大")
 	var sc:=ScrollContainer.new(); sc.position=Vector2(14,52); sc.size=Vector2(254,193); sc.horizontal_scroll_mode=ScrollContainer.SCROLL_MODE_DISABLED; sc.theme=UISkin.scroll_theme(); p.add_child(sc)
@@ -176,6 +178,8 @@ func activate_item(source: String, uid: String, slot: String="") -> void:
 	Gear.apply(game,payload,"equipment")
 func accepts_gear(value: Variant, destination: String, slot: String="") -> bool:
 	return Gear.reason(game,value,destination,slot)==""
+func show_drag_reason(text: String) -> void:
+	if is_instance_valid(drag_hint): drag_hint.text=text
 func drop_gear(value: Dictionary, destination: String, slot: String="") -> void:
 	Gear.apply(game,value,destination,slot)
 func refresh_details() -> void:
@@ -263,4 +267,4 @@ func _unhandled_key_input(event: InputEvent) -> void:
 		get_viewport().set_input_as_handled()
 		if game.route_map_open: call_deferred("close_routes")
 func visual_audit() -> Dictionary:
-	return {"kind":"stable-exploration-shell","phase":game.campaign.phase,"left_rect":[16,86,224,282],"map_rect":[982,86,282,260],"detail_rect":[982,358,282,346],"selected":game.flow_selection.duplicate(true),"map_vertical":true,"map_open":game.route_map_open,"pending":game.campaign.pending_rewards.size(),"primary":game.primary_button.text if is_instance_valid(game.primary_button) else "","actor_huds":actor_huds.keys(),"logo":false}
+	return {"kind":"stable-exploration-shell","phase":game.campaign.phase,"left_rect":[16,86,224,266],"map_rect":[982,86,282,260],"detail_rect":[982,358,282,346],"selected":game.flow_selection.duplicate(true),"map_vertical":true,"map_open":game.route_map_open,"pending":game.campaign.pending_rewards.size(),"primary":game.primary_button.text if is_instance_valid(game.primary_button) else "","actor_huds":actor_huds.keys(),"logo":false}

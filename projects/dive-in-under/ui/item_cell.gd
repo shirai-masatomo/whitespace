@@ -14,7 +14,10 @@ func _get_drag_data(_at: Vector2) -> Variant:
 	var preview:=Label.new(); preview.text=tooltip_text; preview.add_theme_font_size_override("font_size",16)
 	set_drag_preview(preview); game.gear_drag=payload; return payload
 func _can_drop_data(_at: Vector2, value: Variant) -> bool:
-	return host.accepts_gear(value,source,slot)
+	var allowed: bool=host.accepts_gear(value,source,slot)
+	if host.has_method("show_drag_reason"):
+		host.show_drag_reason("ここへ移動できます。" if allowed else preload("res://ui/gear_actions.gd").reason(game,value,source,slot))
+	return allowed
 func _drop_data(_at: Vector2, value: Variant) -> void:
 	host.call_deferred("drop_gear",value,source,slot)
 func _notification(what: int) -> void:

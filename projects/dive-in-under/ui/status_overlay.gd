@@ -32,7 +32,7 @@ func _draw() -> void:
 			var p:=point(side)+Vector2(-66,-46-i*25)
 			var color: Color=COLORS[id]
 			draw_rect(Rect2(p+Vector2(-9,-9),Vector2(18,18)),Color(.02,.06,.08,.88))
-			draw_string(font,p+Vector2(-7,6),LABELS[id].left(1),HORIZONTAL_ALIGNMENT_LEFT,-1,15,color)
+			draw_texture_rect(preload("res://ui/status_symbols.gd").texture(id),Rect2(p-Vector2.ONE*9,Vector2.ONE*18),false)
 			var around:=point(side)+Vector2(0,-62)
 			var phase: float=float(Time.get_ticks_msec()%1600)/1600.0
 			color.a=.48
