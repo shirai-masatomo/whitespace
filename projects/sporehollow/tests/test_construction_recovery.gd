@@ -1,7 +1,8 @@
 extends "res://tests/test_housing_sleep.gd"
 var traces=[]
 func setup():
-	w=fixture();w.Zones.create(w,"stockpile",Vector2i(25,23),Vector2i(28,24));w.keeper.timetable.fill("work")
+	w=fixture();w.keeper.auto_collect=false # These cases exercise explicit collection after cancellation.
+	w.Zones.create(w,"stockpile",Vector2i(25,23),Vector2i(28,24));w.keeper.timetable.fill("work")
 	w.keeper.work_priorities.haul=1;w.keeper.work_priorities.build=1
 func supply(n:int,p=Vector2i(25,23)):return w.Stock.add(w,"wood",n,p)
 func trace(label):

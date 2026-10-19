@@ -1,0 +1,65 @@
+{
+  "checks": [
+    {
+      "check": "Production boot cycle 0",
+      "passed": true
+    },
+    {
+      "check": "Game scene and loading node released cycle 0",
+      "passed": true
+    },
+    {
+      "check": "World reference released after UI closes cycle 0",
+      "passed": true
+    },
+    {
+      "check": "Production boot cycle 1",
+      "passed": true
+    },
+    {
+      "check": "Game scene and loading node released cycle 1",
+      "passed": true
+    },
+    {
+      "check": "World reference released after UI closes cycle 1",
+      "passed": true
+    },
+    {
+      "check": "Production boot cycle 2",
+      "passed": true
+    },
+    {
+      "check": "Game scene and loading node released cycle 2",
+      "passed": true
+    },
+    {
+      "check": "World reference released after UI closes cycle 2",
+      "passed": true
+    }
+  ],
+  "failures": 0,
+  "rows": [
+    {
+      "cycle": 0,
+      "nodes": 1,
+      "objects": 7337,
+      "resources": 1541,
+      "static_bytes": 152328056
+    },
+    {
+      "cycle": 1,
+      "nodes": 1,
+      "objects": 7205,
+      "resources": 1541,
+      "static_bytes": 151589352
+    },
+    {
+      "cycle": 2,
+      "nodes": 1,
+      "objects": 7337,
+      "resources": 1541,
+      "static_bytes": 152356256
+    }
+  ],
+  "scope": "Three finite headless boot/UI/close cycles; not a long-duration memory-leak guarantee"
+}

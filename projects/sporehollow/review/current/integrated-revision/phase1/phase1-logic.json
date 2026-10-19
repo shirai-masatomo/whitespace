@@ -1,0 +1,303 @@
+{
+  "checks": [
+    {
+      "check": "31: zero-material plan accepted",
+      "passed": true
+    },
+    {
+      "check": "No zero-material construction",
+      "passed": true
+    },
+    {
+      "check": "31: World.step physically delivers3/5",
+      "passed": true
+    },
+    {
+      "check": "Partial delivery remains owned during wait",
+      "passed": true
+    },
+    {
+      "check": "Site cannot be stolen by collection",
+      "passed": true
+    },
+    {
+      "check": "31: ordinary haul top-up completes existing job",
+      "passed": true
+    },
+    {
+      "check": "Five consumed exactly once",
+      "passed": true
+    },
+    {
+      "check": "31: zero-material plan accepted",
+      "passed": true
+    },
+    {
+      "check": "No zero-material construction",
+      "passed": true
+    },
+    {
+      "check": "31: World.step physically delivers3/5",
+      "passed": true
+    },
+    {
+      "check": "Partial delivery remains owned during wait",
+      "passed": true
+    },
+    {
+      "check": "Partial job cancels",
+      "passed": true
+    },
+    {
+      "check": "Cancel releases same physical quantity and claims",
+      "passed": true
+    },
+    {
+      "check": "Cancelled cargo returns to stock",
+      "passed": true
+    },
+    {
+      "check": "Access denied prevents withdrawal",
+      "passed": true
+    },
+    {
+      "check": "Permission change resumes same construction",
+      "passed": true
+    },
+    {
+      "check": "Meal interrupts then actual work resumes",
+      "passed": true
+    },
+    {
+      "check": "Actual meal consumed physical food",
+      "passed": true
+    },
+    {
+      "check": "Draft accepted",
+      "passed": true
+    },
+    {
+      "check": "Draft suspends ordinary work",
+      "passed": true
+    },
+    {
+      "check": "Undraft resumes work",
+      "passed": true
+    },
+    {
+      "check": "Assigned bed reached through real steps",
+      "passed": true
+    },
+    {
+      "check": "Visible threat wakes sleep instead of automatic sleep during attack",
+      "passed": true
+    },
+    {
+      "check": "731: zero-material plan accepted",
+      "passed": true
+    },
+    {
+      "check": "No zero-material construction",
+      "passed": true
+    },
+    {
+      "check": "731: World.step physically delivers3/5",
+      "passed": true
+    },
+    {
+      "check": "Partial delivery remains owned during wait",
+      "passed": true
+    },
+    {
+      "check": "Site cannot be stolen by collection",
+      "passed": true
+    },
+    {
+      "check": "731: ordinary haul top-up completes existing job",
+      "passed": true
+    },
+    {
+      "check": "Five consumed exactly once",
+      "passed": true
+    },
+    {
+      "check": "731: zero-material plan accepted",
+      "passed": true
+    },
+    {
+      "check": "No zero-material construction",
+      "passed": true
+    },
+    {
+      "check": "731: World.step physically delivers3/5",
+      "passed": true
+    },
+    {
+      "check": "Partial delivery remains owned during wait",
+      "passed": true
+    },
+    {
+      "check": "Partial job cancels",
+      "passed": true
+    },
+    {
+      "check": "Cancel releases same physical quantity and claims",
+      "passed": true
+    },
+    {
+      "check": "Cancelled cargo returns to stock",
+      "passed": true
+    },
+    {
+      "check": "Access denied prevents withdrawal",
+      "passed": true
+    },
+    {
+      "check": "Permission change resumes same construction",
+      "passed": true
+    },
+    {
+      "check": "Meal interrupts then actual work resumes",
+      "passed": true
+    },
+    {
+      "check": "Actual meal consumed physical food",
+      "passed": true
+    },
+    {
+      "check": "Draft accepted",
+      "passed": true
+    },
+    {
+      "check": "Draft suspends ordinary work",
+      "passed": true
+    },
+    {
+      "check": "Undraft resumes work",
+      "passed": true
+    },
+    {
+      "check": "Assigned bed reached through real steps",
+      "passed": true
+    },
+    {
+      "check": "Visible threat wakes sleep instead of automatic sleep during attack",
+      "passed": true
+    },
+    {
+      "check": "20261019: zero-material plan accepted",
+      "passed": true
+    },
+    {
+      "check": "No zero-material construction",
+      "passed": true
+    },
+    {
+      "check": "20261019: World.step physically delivers3/5",
+      "passed": true
+    },
+    {
+      "check": "Partial delivery remains owned during wait",
+      "passed": true
+    },
+    {
+      "check": "Site cannot be stolen by collection",
+      "passed": true
+    },
+    {
+      "check": "20261019: ordinary haul top-up completes existing job",
+      "passed": true
+    },
+    {
+      "check": "Five consumed exactly once",
+      "passed": true
+    },
+    {
+      "check": "20261019: zero-material plan accepted",
+      "passed": true
+    },
+    {
+      "check": "No zero-material construction",
+      "passed": true
+    },
+    {
+      "check": "20261019: World.step physically delivers3/5",
+      "passed": true
+    },
+    {
+      "check": "Partial delivery remains owned during wait",
+      "passed": true
+    },
+    {
+      "check": "Partial job cancels",
+      "passed": true
+    },
+    {
+      "check": "Cancel releases same physical quantity and claims",
+      "passed": true
+    },
+    {
+      "check": "Cancelled cargo returns to stock",
+      "passed": true
+    },
+    {
+      "check": "Access denied prevents withdrawal",
+      "passed": true
+    },
+    {
+      "check": "Permission change resumes same construction",
+      "passed": true
+    },
+    {
+      "check": "Meal interrupts then actual work resumes",
+      "passed": true
+    },
+    {
+      "check": "Actual meal consumed physical food",
+      "passed": true
+    },
+    {
+      "check": "Draft accepted",
+      "passed": true
+    },
+    {
+      "check": "Draft suspends ordinary work",
+      "passed": true
+    },
+    {
+      "check": "Undraft resumes work",
+      "passed": true
+    },
+    {
+      "check": "Assigned bed reached through real steps",
+      "passed": true
+    },
+    {
+      "check": "Visible threat wakes sleep instead of automatic sleep during attack",
+      "passed": true
+    }
+  ],
+  "count": 69,
+  "failed": 0,
+  "rows": [
+    {
+      "checks_so_far": 23,
+      "claims": 0,
+      "seed": 31,
+      "tick": 21
+    },
+    {
+      "checks_so_far": 46,
+      "claims": 0,
+      "seed": 731,
+      "tick": 21
+    },
+    {
+      "checks_so_far": 69,
+      "claims": 0,
+      "seed": 20261019,
+      "tick": 21
+    }
+  ],
+  "wall_seconds": 46.11
+}

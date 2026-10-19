@@ -251,6 +251,14 @@ var foods: Array = []
 var actions: Array = []
 var traces: Array = []
 var events: Array = []
+# Recent research histories are not authoritative game state. Bound their RAM
+# use during session-only play; quantities, live jobs and aggregate metrics stay intact.
+const HISTORY_LIMITS={"actions":1024,"traces":512,"job_log":2048,"combat_log":2048,"life_log":1024,"milestones":1024}
+func trim_history():
+	for field in HISTORY_LIMITS:
+		var rows=get(field)
+		if rows.size()>HISTORY_LIMITS[field]:set(field,rows.slice(-HISTORY_LIMITS[field]))
+
 var spawned = 0
 var eggs = 0
 var nest = NEST
@@ -605,6 +613,7 @@ func act(kind: String, p: Vector2i = Vector2i.ZERO, animal_id: int = -1,job_look
 	else:
 		accepted = Jobs.enqueue(self, kind, p, animal_id,job_lookup)
 	actions.append({"tick": tick, "kind": kind, "pos": [p.x, p.y], "accepted": accepted, "paused": paused, "animal_id": animal_id})
+	trim_history() # Paused clicks must also remain bounded.
 	return accepted
 
 func _execute_local(kind: String, p: Vector2i = Vector2i.ZERO, animal_id: int = -1) -> bool:
@@ -1222,6 +1231,7 @@ func step():
 	Needs.finish(self)
 	Life.check_rest_until(self)
 	Cycle.settle_incidents(self)
+	if tick%32==0:trim_history()
 
 func finish(won: bool):
 	if won:Cycle.settle_incidents(self);return

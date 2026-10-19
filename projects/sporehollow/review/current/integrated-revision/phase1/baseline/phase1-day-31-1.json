@@ -1,0 +1,220 @@
+{
+  "calendar_ticks": 1728,
+  "checks": [
+    {
+      "check": "Production 100x68 generated map",
+      "passed": true
+    },
+    {
+      "check": "IDs/claims/carry/storage invariants: ",
+      "passed": true
+    },
+    {
+      "check": "Simulation advances or explains a normal defeat",
+      "passed": true
+    },
+    {
+      "check": "A loss has its real defeat reason",
+      "passed": true
+    },
+    {
+      "check": "Night reached naturally",
+      "passed": true
+    },
+    {
+      "check": "Dawn reached or normal loss recorded, never forced",
+      "passed": true
+    }
+  ],
+  "cpu_step_ms": {
+    "max": 69.927,
+    "mean": 2.00006886574074,
+    "p95": 9.551,
+    "p99": 22.662
+  },
+  "daily_day": 2,
+  "enemies": {
+    "done": 1,
+    "total": 1
+  },
+  "failures": 0,
+  "final_stock": {
+    "dog_food": 2,
+    "fiber": 6,
+    "mushroom": 7,
+    "soil": 85,
+    "wood": 16
+  },
+  "gold": 72,
+  "history": {
+    "actions": 1401,
+    "combat": 42,
+    "jobs": 25,
+    "life": 4,
+    "samples": 216
+  },
+  "hp": 30,
+  "idol_hp": 180,
+  "initial_stock": {
+    "dog_food": 2,
+    "mushroom": 7,
+    "soil": 100,
+    "wood": 8
+  },
+  "jobs": 0,
+  "metrics": {
+    "bark_casts": 1,
+    "bark_targets": 1,
+    "barks": 1,
+    "built": 3,
+    "captures": 0,
+    "coins": 3,
+    "commands": 0.0,
+    "destroyed": 0,
+    "eggs_collected": 0,
+    "eggs_produced": 0,
+    "fed": 0,
+    "interrupted": 0,
+    "mushroom_collected": 0,
+    "mushroom_healing": 0,
+    "mushroom_spawned": 2,
+    "mushrooms_used": 0,
+    "nature_rolls": 432,
+    "orders": 0,
+    "repaired": 0,
+    "repelled": 1,
+    "rescues": 0,
+    "soil_repair": 0,
+    "stolen": 0,
+    "structure_damage": 0,
+    "stump_collected": 0,
+    "stump_spawned": 0,
+    "weed_collected": 3,
+    "weed_spawned": 3
+  },
+  "nights": 1,
+  "peak_static_bytes": 90457968,
+  "reason": "",
+  "result": "",
+  "samples": [
+    {
+      "claims": 0,
+      "day": 1,
+      "enemies": 0,
+      "hp": 30,
+      "jobs": 3,
+      "satiety": 87.2000000000007,
+      "status": "建築材料を備蓄へ取りに移動",
+      "stock": {
+        "dog_food": 2,
+        "fiber": 6,
+        "mushroom": 7,
+        "soil": 100,
+        "wood": 16
+      },
+      "tick": 256
+    },
+    {
+      "claims": 0,
+      "day": 1,
+      "enemies": 0,
+      "hp": 30,
+      "jobs": 0,
+      "satiety": 74.4000000000015,
+      "status": "自動収集 · 備蓄へ運搬中",
+      "stock": {
+        "dog_food": 2,
+        "fiber": 6,
+        "mushroom": 7,
+        "soil": 85,
+        "wood": 16
+      },
+      "tick": 512
+    },
+    {
+      "claims": 0,
+      "day": 1,
+      "enemies": 0,
+      "hp": 30,
+      "jobs": 0,
+      "satiety": 61.6000000000022,
+      "status": "仕事の指定待ち",
+      "stock": {
+        "dog_food": 2,
+        "fiber": 6,
+        "mushroom": 7,
+        "soil": 85,
+        "wood": 16
+      },
+      "tick": 768
+    },
+    {
+      "claims": 0,
+      "day": 1,
+      "enemies": 0,
+      "hp": 30,
+      "jobs": 0,
+      "satiety": 48.8000000000029,
+      "status": "仕事の指定待ち",
+      "stock": {
+        "dog_food": 2,
+        "fiber": 6,
+        "mushroom": 7,
+        "soil": 85,
+        "wood": 16
+      },
+      "tick": 1024
+    },
+    {
+      "claims": 0,
+      "day": 1,
+      "enemies": 1,
+      "hp": 20,
+      "jobs": 0,
+      "satiety": 36.0000000000036,
+      "status": "近くを散歩中",
+      "stock": {
+        "dog_food": 2,
+        "fiber": 6,
+        "mushroom": 7,
+        "soil": 85,
+        "wood": 16
+      },
+      "tick": 1280
+    },
+    {
+      "claims": 0,
+      "day": 2,
+      "enemies": 1,
+      "hp": 28,
+      "jobs": 0,
+      "satiety": 23.2000000000037,
+      "status": "居住ゾーン未指定：現在地で休息",
+      "stock": {
+        "dog_food": 2,
+        "fiber": 6,
+        "mushroom": 7,
+        "soil": 85,
+        "wood": 16
+      },
+      "tick": 1536
+    }
+  ],
+  "satiety": 13.6000000000036,
+  "scope": "Production World.step, normal player designations on generated terrain, no injected wins/resources, headless; not GPU/frame pacing or human play",
+  "seed": 31,
+  "seen": {
+    "built": true,
+    "harvest": true,
+    "meal": false,
+    "night": true,
+    "sleep": true
+  },
+  "ticks": 1728,
+  "used": {
+    "soil": 15
+  },
+  "wall_seconds": 3.596,
+  "worker_reason": "空腹・食事を優先",
+  "worker_status": "空腹 · 食べ物へ移動中"
+}

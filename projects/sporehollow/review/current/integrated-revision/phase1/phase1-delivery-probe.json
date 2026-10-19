@@ -1,0 +1,42 @@
+{
+  "checks": [
+    {
+      "check": "Unfunded plans remain pending without a fabricated delivery",
+      "passed": true
+    },
+    {
+      "check": "Ten residents can obtain real deliveries after replenishment",
+      "passed": true
+    },
+    {
+      "check": "Concurrent material reservations conserve all500 units",
+      "passed": true
+    }
+  ],
+  "failures": 0,
+  "rows": [
+    {
+      "condition": "no-materials",
+      "counts": {
+        "buildings.reason": 2000,
+        "human_work.choose": 10
+      },
+      "jobs": 100,
+      "ms": 66.467,
+      "workers": 10
+    },
+    {
+      "condition": "500-physical-soil",
+      "counts": {
+        "buildings.reason": 1050,
+        "human_work.choose": 10,
+        "keeper_jobs.path_to": 100,
+        "path_expanded": 1183,
+        "world.find_path": 100
+      },
+      "jobs": 100,
+      "ms": 120.267,
+      "workers": 10
+    }
+  ]
+}

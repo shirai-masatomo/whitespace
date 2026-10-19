@@ -1,0 +1,66 @@
+{
+  "checks": [
+    {
+      "check": "31: real damage causes unconsciousness",
+      "passed": true
+    },
+    {
+      "check": "Kidnapper physically captures unconscious keeper",
+      "passed": true
+    },
+    {
+      "check": "Defeating carrier clears both capture links",
+      "passed": true
+    },
+    {
+      "check": "Hidden recovery eventually returns to the existing construction",
+      "passed": true
+    },
+    {
+      "check": "Recovery consumes original construction resources exactly once",
+      "passed": true
+    },
+    {
+      "check": "731: real damage causes unconsciousness",
+      "passed": true
+    },
+    {
+      "check": "Kidnapper physically captures unconscious keeper",
+      "passed": true
+    },
+    {
+      "check": "Defeating carrier clears both capture links",
+      "passed": true
+    },
+    {
+      "check": "Hidden recovery eventually returns to the existing construction",
+      "passed": true
+    },
+    {
+      "check": "Recovery consumes original construction resources exactly once",
+      "passed": true
+    },
+    {
+      "check": "20261019: real damage causes unconsciousness",
+      "passed": true
+    },
+    {
+      "check": "Kidnapper physically captures unconscious keeper",
+      "passed": true
+    },
+    {
+      "check": "Defeating carrier clears both capture links",
+      "passed": true
+    },
+    {
+      "check": "Hidden recovery eventually returns to the existing construction",
+      "passed": true
+    },
+    {
+      "check": "Recovery consumes original construction resources exactly once",
+      "passed": true
+    }
+  ],
+  "count": 15,
+  "failed": 0
+}

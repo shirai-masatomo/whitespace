@@ -1,3 +1,13 @@
+# 工程1：既存システムの統合・安定化（2026-10-19）
+
+コード・関連headlessゲートを完了。900確認、失敗0。資材待ち100件/10人の不要経路探索、地面/岩場/切り株キャッシュのWorld強参照、無制限の研究履歴を修正。3seed翌朝・seed731の3夜・部分搬入/取消/権限/生活/救出と仕事復帰を確認。実機操作・GPU・10夜/長時間安定性は未検証。
+
+[状態遷移・再現原因・数値・残課題](review/current/integrated-revision/phase1/REPORT.md) / [機械可読結果と工程2ベースライン](review/current/integrated-revision/phase1/RESULTS.json)。最新EXEは安全なビルド後に既存入口へ反映し、同フォルダDELIVERY.jsonでコードとハッシュを識別する。工程2は未着手。
+
+以下は過去の計画格納・実装記録。現在の配布実体は上記の配布記録を参照。
+
+---
+
 # 工程1〜6の指示書を保存（2026-10-19／ゲームは未変更）
 
 承認済み工程の順序を [docs/internal/ROADMAP.md](docs/internal/ROADMAP.md)、Codexが1工程ずつ実行する**全文プロンプト**を [docs/internal/TASKS.md](docs/internal/TASKS.md) へ格納。キノコ栽培床・住民募集・追加資源等は【仮】設計であり、この文書更新だけでは**工程1〜6の実装・テスト・EXE反映は未実施**。実装状況と配布実体は下の既存記録および [review/current/interaction-revision/DELIVERY.json](review/current/interaction-revision/DELIVERY.json) を参照。ユーザーから工程1の個別開始依頼を受けるまで作業を自動開始しない。

@@ -40,6 +40,11 @@ static func rock_dependency_chunks(p: Vector2i) -> Array:
 func _ready():
 	show_behind_parent=true
 	sync()
+func _exit_tree():
+	Board.release_ground(world)
+	Rock.release_ground(world)
+	preload("res://game/story_view.gd").release_stumps(world)
+	world=null;chunks.clear();stamps.clear()
 func _process(_delta):sync()
 func sync():
 	var started=Metrics.start()

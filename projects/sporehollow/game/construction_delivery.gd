@@ -30,17 +30,21 @@ static func proposal(w,key: String) -> Dictionary:
 	for j in plans(w,a):
 		var why=w.Buildings.reason(w,j.kind,j.pos,false,j.id) if not j.started else ""
 		if why!="" and not (why=="ここに誰かいます" and a.pos==j.pos):j.block_reason=why;continue
+		# No path can produce missing material. Check usable physical sources
+		# first: otherwise J unfunded plans cause H*J pointless route searches.
+		var candidates=sources(w,j,a)
+		if candidates.is_empty():
+			j.material_wait=true
+			j.block_reason="資材待ち：備蓄を利用できる担当者が必要です" if w.field_items.any(func(r):return Reservations.usable(w,r,j)>0) else "資材待ち：備蓄に使える資材がありません"
+			continue
 		var destination=w.Jobs.path_to(w,a.pos,w.Buildings.job_goals(w,j))
 		if destination.is_empty():j.block_reason="材料を搬入する通路がありません";continue
-		var candidates=sources(w,j,a)
 		for row in candidates:
 			var route=w.Jobs.path_to(w,a.pos,w.neighbors(row.pos))
 			if route.is_empty():continue
 			return {"kind":"build_delivery","id":j.id,"pos":row.pos,"seed_job":j.id,"priority":a.work_priorities.haul,"effort":float(route.size()+w.distance(row.pos,j.pos)),"queued_tick":j.get("queued_tick",w.tick)}
 		j.material_wait=true
-		if not candidates.is_empty():j.block_reason="材料の備蓄へ通じる通路がありません"
-		elif w.field_items.any(func(r):return Reservations.usable(w,r,j)>0):j.block_reason="資材待ち：備蓄を利用できる担当者が必要です"
-		else:j.block_reason="資材待ち：備蓄に使える資材がありません"
+		j.block_reason="材料の備蓄へ通じる通路がありません"
 	return {}
 
 static func start(w,key: String,proposal: Dictionary) -> Dictionary:

@@ -1,0 +1,3 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PHASE1_DELIVERY_PROBE failures=0 rows=[{ "condition": "no-materials", "jobs": 100, "workers": 10, "ms": 66.467, "counts": { "human_work.choose": 10, "buildings.reason": 2000 } }, { "condition": "500-physical-soil", "jobs": 100, "workers": 10, "ms": 120.267, "counts": { "human_work.choose": 10, "buildings.reason": 1050, "keeper_jobs.path_to": 100, "world.find_path": 100, "path_expanded": 1183 } }]

@@ -2,7 +2,7 @@ extends RefCounted
 const Delivered = preload("res://game/delivered_art.gd")
 const Biome=preload("res://game/biome_map.gd")
 const Ground=preload("res://game/rock_art.gd")
-static var ground_source=null
+static var ground_source:WeakRef
 static var ground_version=""
 static var ground_cells=[]
 static var region_meshes={}
@@ -19,9 +19,14 @@ static func textured(world):return world.terrain.get("version",1)>=5 and world.t
 # Only viewport cells are submitted; changing rocks/trees never rebuilds this base.
 static func cache_ground(world,tile: Vector2):
 	var token="%s:%s:%s"%[world.terrain.get("version",0),world.terrain.seed,tile]
-	if ground_source==world and ground_version==token:return
-	ground_source=world;ground_version=token;ground_cells=[];region_meshes.clear()
+	if ground_source!=null and ground_source.get_ref()==world and ground_version==token:return
+	ground_source=weakref(world);ground_version=token;ground_cells=[];region_meshes.clear()
 	ground_cells.resize(world.W*world.H)
+static func release_ground(world):
+	# Only the owning scene may release this shared cache. A scene closing
+	# after another scene has prepared a new world must not clear the new one.
+	if ground_source==null or ground_source.get_ref()!=world:return
+	ground_source=null;ground_version="";ground_cells.clear();region_meshes.clear();material_cache=null
 static func ground_cell(world,tile: Vector2,cell: Vector2i) -> Dictionary:
 	var index=cell.y*world.W+cell.x
 	if ground_cells[index]!=null:return ground_cells[index]

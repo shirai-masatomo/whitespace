@@ -9,7 +9,7 @@ const NODE="biome_environment_v2/rock_node/"
 const DAMAGE_KEYS=["biome_environment_v1/rock/damage/light.png","biome_environment_v1/rock/damage/heavy.png","biome_environment_v2/rock_node/wall_near_depleted_overlay.png"]
 static var clipped={}
 static var mineral_seams={}
-static var ground_source=null
+static var ground_source:WeakRef
 static var ground_kinds={}
 static var ground_offsets={}
 static var ground_version=""
@@ -166,8 +166,8 @@ static func ground_layers(w,p: Vector2i) -> Array:
 	return []
 static func cache_ground(w):
 	var token="%s:%s"%[w.terrain.get("version",0),w.terrain.seed]
-	if ground_source==w and ground_version==token:return
-	ground_source=w;ground_version=token;ground_kinds={};ground_offsets={};geology_ground={};mineral_seams.clear()
+	if ground_source!=null and ground_source.get_ref()==w and ground_version==token:return
+	ground_source=weakref(w);ground_version=token;ground_kinds={};ground_offsets={};geology_ground={};mineral_seams.clear()
 static func prepare_ground(w):
 	cache_ground(w)
 	GeologyArt.prepare(w)
@@ -178,6 +178,9 @@ static func prepare_ground(w):
 			if w.terrain.has("geology") and w.Biome.material(w,p) in ["sand","clay"]:geology_ground[p]=GeologyArt.surface(w,p,w.Biome.material(w,p))
 			if w.terrain.get("version",1)>=4 or ground_kinds[p]==["biome_environment_v2/rock_ground/pebbly_soil.png"]:
 				ground_offsets[p]=Vector2(floori(w.Biome.unit(w.terrain.seed,x,y,181)*17)-8,floori(w.Biome.unit(w.terrain.seed,x,y,191)*13)-6)
+static func release_ground(w):
+	if ground_source==null or ground_source.get_ref()!=w:return
+	ground_source=null;ground_version="";ground_kinds.clear();ground_offsets.clear();geology_ground.clear();mineral_seams.clear()
 static func ground(g,region: Rect2=Rect2()):
 	var w=g.world;cache_ground(w)
 	var visible=Rect2(Vector2.ZERO,Vector2(w.W,w.H)*g.TILE)

@@ -1,0 +1,121 @@
+{
+	"checks": [
+		{
+			"check": "Satiety band 100",
+			"passed": true
+		},
+		{
+			"check": "Satiety band 76",
+			"passed": true
+		},
+		{
+			"check": "Satiety band 75",
+			"passed": true
+		},
+		{
+			"check": "Satiety band 51",
+			"passed": true
+		},
+		{
+			"check": "Satiety band 50",
+			"passed": true
+		},
+		{
+			"check": "Satiety band 26",
+			"passed": true
+		},
+		{
+			"check": "Satiety band 25",
+			"passed": true
+		},
+		{
+			"check": "Satiety band 1",
+			"passed": true
+		},
+		{
+			"check": "Satiety band 0",
+			"passed": true
+		},
+		{
+			"check": "Shared idle recovery exactly once",
+			"passed": true
+		},
+		{
+			"check": "Movement has no duplicated combat cost",
+			"passed": true
+		},
+		{
+			"check": "Low stamina enters recovery",
+			"passed": true
+		},
+		{
+			"check": "Recovery hysteresis prevents short task switches",
+			"passed": true
+		},
+		{
+			"check": "Recovered actor resumes",
+			"passed": true
+		},
+		{
+			"check": "Egg meal gain and timed regen",
+			"passed": true
+		},
+		{
+			"check": "Repeated food buff cannot stack",
+			"passed": true
+		},
+		{
+			"check": "Effect expires by world time",
+			"passed": true
+		},
+		{
+			"check": "Meat reduces existing combat cost once",
+			"passed": true
+		},
+		{
+			"check": "New meal replaces previous effect",
+			"passed": true
+		},
+		{
+			"check": "Starvation damage and max stamina",
+			"passed": true
+		},
+		{
+			"check": "Starvation never revives an unconscious human",
+			"passed": true
+		},
+		{
+			"check": "Starving shiba is unconscious, not killed",
+			"passed": true
+		},
+		{
+			"check": "Recipe has complete data: roast_mushroom",
+			"passed": true
+		},
+		{
+			"check": "Recipe has complete data: egg_meal",
+			"passed": true
+		},
+		{
+			"check": "Recipe has complete data: roast_meat",
+			"passed": true
+		},
+		{
+			"check": "Recipe has complete data: stew",
+			"passed": true
+		},
+		{
+			"check": "Recipe has complete data: wood_crate",
+			"passed": true
+		},
+		{
+			"check": "Recipe has complete data: wood_shelf",
+			"passed": true
+		},
+		{
+			"check": "Recipe has complete data: fiber_clothes",
+			"passed": true
+		}
+	],
+	"failures": 0
+}

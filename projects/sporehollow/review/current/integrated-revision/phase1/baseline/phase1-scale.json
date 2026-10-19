@@ -1,0 +1,130 @@
+{
+  "checks": [
+    {
+      "check": "Register 10 reservations",
+      "passed": true
+    },
+    {
+      "check": "Register 50 reservations",
+      "passed": true
+    },
+    {
+      "check": "Register 100 reservations",
+      "passed": true
+    },
+    {
+      "check": "101st job rejected",
+      "passed": true
+    },
+    {
+      "check": "World RefCounted lifetime releases after factory call 0",
+      "passed": true
+    },
+    {
+      "check": "World RefCounted lifetime releases after factory call 1",
+      "passed": true
+    },
+    {
+      "check": "World RefCounted lifetime releases after factory call 2",
+      "passed": true
+    },
+    {
+      "check": "World RefCounted lifetime releases after factory call 3",
+      "passed": true
+    },
+    {
+      "check": "World RefCounted lifetime releases after factory call 4",
+      "passed": true
+    },
+    {
+      "check": "Repeated cancel leaves no live job/claims/deliveries",
+      "passed": true
+    }
+  ],
+  "count": 10,
+  "failed": 0,
+  "rows": [
+    {
+      "choose_ms": 8.689,
+      "humans": 1,
+      "jobs": 10,
+      "objects": 3114,
+      "register_ms": 0.596,
+      "static_bytes": 109127038
+    },
+    {
+      "choose_ms": 34.534,
+      "humans": 5,
+      "jobs": 10,
+      "objects": 3114,
+      "register_ms": 0.596,
+      "static_bytes": 109152994
+    },
+    {
+      "choose_ms": 68.833,
+      "humans": 10,
+      "jobs": 10,
+      "objects": 3114,
+      "register_ms": 0.596,
+      "static_bytes": 109185142
+    },
+    {
+      "choose_ms": 60.151,
+      "humans": 1,
+      "jobs": 50,
+      "objects": 3114,
+      "register_ms": 5.488,
+      "static_bytes": 109265482
+    },
+    {
+      "choose_ms": 248.759,
+      "humans": 5,
+      "jobs": 50,
+      "objects": 3114,
+      "register_ms": 5.488,
+      "static_bytes": 109291406
+    },
+    {
+      "choose_ms": 488.931,
+      "humans": 10,
+      "jobs": 50,
+      "objects": 3114,
+      "register_ms": 5.488,
+      "static_bytes": 109323554
+    },
+    {
+      "choose_ms": 162.193,
+      "humans": 1,
+      "jobs": 100,
+      "objects": 3114,
+      "register_ms": 17.952,
+      "static_bytes": 109441714
+    },
+    {
+      "choose_ms": 655.707,
+      "humans": 5,
+      "jobs": 100,
+      "objects": 3114,
+      "register_ms": 17.952,
+      "static_bytes": 109467590
+    },
+    {
+      "choose_ms": 1296.356,
+      "humans": 10,
+      "jobs": 100,
+      "objects": 3114,
+      "register_ms": 17.952,
+      "static_bytes": 109499738
+    },
+    {
+      "actions": 1200,
+      "event": "1200 build/cancel cycles",
+      "field_items": 0,
+      "job_log": 2401,
+      "jobs": 0,
+      "work_claims": 0
+    }
+  ],
+  "scope": "Finite headless CPU and Godot managed memory samples; GPU/VRAM/Windows presentation/long-term leak not measured",
+  "wall_seconds": 27.592
+}

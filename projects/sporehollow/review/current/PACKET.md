@@ -1,3 +1,9 @@
+# 工程1：統合・安定化（2026-10-19）
+
+資材待ちの経路探索、描画キャッシュのWorld残留、履歴蓄積を修正。3seed翌朝・1seed3夜・物流/生活/救出/UI・有限CPUと参照寿命をheadlessで確認。通常画面・GPU・長期安定性は未検証。工程2は未着手。[報告と検証・配布](integrated-revision/phase1/REPORT.md) / [比較・工程2ベースライン](integrated-revision/phase1/RESULTS.json)。
+
+---
+
 # カテゴリボタンのクリック修正（2026-10-19）
 
 在庫・仕事数更新が押下中のカテゴリボタンを破棄する問題を再現し、固定ボタンの再利用で修正。[原因・検証・配布](interaction-revision/REPORT.md)。

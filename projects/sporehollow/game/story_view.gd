@@ -9,7 +9,7 @@ static func tree_foot(g,p: Vector2i) -> Vector2:
 	return g.center(p)+Vector2((rank%15)-7,14+(rank%9)-4)
 
 const GroundArt=preload("res://game/rock_art.gd")
-static var stump_source=null
+static var stump_source:WeakRef
 static var stump_revision=""
 static var stump_cells=[]
 static func tree_variant(w,p: Vector2i) -> String:
@@ -32,13 +32,16 @@ static func cut_cells(w) -> Array:
 	# The saved original tree records keep exact IDs/positions after logging.
 	# Rebuild this small lookup only when history grows (or a different save opens).
 	var token="%s:%s:%s"%[w.seed_value,w.story.get("trees",[]).size(),w.story.get("cleared",[]).size()]
-	if stump_source!=w or stump_revision!=token:
-		stump_source=w;stump_revision=token;stump_cells=[]
+	if stump_source==null or stump_source.get_ref()!=w or stump_revision!=token:
+		stump_source=weakref(w);stump_revision=token;stump_cells=[]
 		var cleared={}
 		for id in w.story.get("cleared",[]):cleared[id]=true
 		for row in w.story.get("trees",[]):
 			if cleared.has(row.id):stump_cells.append(w.Story.cell(row.position))
 	return stump_cells
+static func release_stumps(w):
+	if stump_source==null or stump_source.get_ref()!=w:return
+	stump_source=null;stump_revision="";stump_cells.clear()
 static func stumps(g,visible: Rect2):
 	var w=g.world
 	for p in cut_cells(w):

@@ -1,0 +1,2376 @@
+{
+  "layouts": [
+    {
+      "name": "food",
+      "nodes": [
+        {
+          "name": "Timetable",
+          "rect": [
+            16.0,
+            402.0,
+            796.0,
+            340.0
+          ],
+          "type": "Panel"
+        },
+        {
+          "font": 20,
+          "name": "@Label@1055",
+          "rect": [
+            28.0,
+            410.0,
+            40.0,
+            30.0
+          ],
+          "text": "生活",
+          "type": "Label"
+        },
+        {
+          "color": "eadebfff",
+          "font": 14,
+          "name": "LifeResident",
+          "rect": [
+            98.0,
+            410.0,
+            250.0,
+            30.0
+          ],
+          "text": "田中",
+          "type": "OptionButton"
+        },
+        {
+          "color": "e7d9b5ff",
+          "font": 14,
+          "name": "@Button@1066",
+          "rect": [
+            364.0,
+            410.0,
+            104.0,
+            30.0
+          ],
+          "text": "時間割",
+          "type": "Button"
+        },
+        {
+          "color": "bbd99cff",
+          "font": 14,
+          "name": "@Button@1067",
+          "rect": [
+            474.0,
+            410.0,
+            104.0,
+            30.0
+          ],
+          "text": "食事",
+          "type": "Button"
+        },
+        {
+          "color": "eadebfff",
+          "font": 14,
+          "name": "@Button@1068",
+          "rect": [
+            692.0,
+            410.0,
+            108.0,
+            30.0
+          ],
+          "text": "戻る",
+          "type": "Button"
+        },
+        {
+          "font": 14,
+          "name": "LifeSummary",
+          "rect": [
+            28.0,
+            452.0,
+            760.0,
+            49.0
+          ],
+          "text": "生活タイプ：通常　食欲：通常　危険反応：リラックス\n満足度 50/100　｜　普段の生活",
+          "type": "Label"
+        },
+        {
+          "name": "@HSeparator@1069",
+          "rect": [
+            28.0,
+            500.0,
+            772.0,
+            4.0
+          ],
+          "type": "HSeparator"
+        },
+        {
+          "name": "LifeContent",
+          "rect": [
+            28.0,
+            512.0,
+            772.0,
+            218.0
+          ],
+          "type": "ScrollContainer"
+        },
+        {
+          "name": "LifeBody",
+          "rect": [
+            28.0,
+            512.0,
+            746.0,
+            204.0
+          ],
+          "type": "Control"
+        },
+        {
+          "font": 14,
+          "name": "@Label@1072",
+          "rect": [
+            28.0,
+            512.0,
+            329.0,
+            47.0
+          ],
+          "text": "1が最優先、数字が大きいほど優先度が下がります。\n同じ数字は同順位として扱われます。",
+          "type": "Label"
+        },
+        {
+          "font": 14,
+          "name": "@Label@1073",
+          "rect": [
+            222.0,
+            562.0,
+            28.0,
+            22.0
+          ],
+          "text": "簡素",
+          "type": "Label"
+        },
+        {
+          "font": 14,
+          "name": "@Label@1074",
+          "rect": [
+            358.0,
+            562.0,
+            28.0,
+            22.0
+          ],
+          "text": "普通",
+          "type": "Label"
+        },
+        {
+          "font": 14,
+          "name": "@Label@1075",
+          "rect": [
+            494.0,
+            562.0,
+            28.0,
+            22.0
+          ],
+          "text": "上等",
+          "type": "Label"
+        },
+        {
+          "font": 14,
+          "name": "@Label@1076",
+          "rect": [
+            630.0,
+            562.0,
+            28.0,
+            22.0
+          ],
+          "text": "豪華",
+          "type": "Label"
+        },
+        {
+          "font": 14,
+          "name": "@Label@1077",
+          "rect": [
+            28.0,
+            594.0,
+            84.0,
+            22.0
+          ],
+          "text": "調理済み食品",
+          "type": "Label"
+        },
+        {
+          "color": "eadebfff",
+          "font": 14,
+          "name": "Food_cooked0",
+          "rect": [
+            194.0,
+            588.0,
+            116.0,
+            34.0
+          ],
+          "text": "1",
+          "type": "OptionButton"
+        },
+        {
+          "color": "eadebfff",
+          "font": 14,
+          "name": "Food_cooked1",
+          "rect": [
+            330.0,
+            588.0,
+            116.0,
+            34.0
+          ],
+          "text": "3",
+          "type": "OptionButton"
+        },
+        {
+          "color": "eadebfff",
+          "font": 14,
+          "name": "Food_cooked2",
+          "rect": [
+            466.0,
+            588.0,
+            116.0,
+            34.0
+          ],
+          "text": "2",
+          "type": "OptionButton"
+        },
+        {
+          "color": "eadebfff",
+          "font": 14,
+          "name": "Food_cooked3",
+          "rect": [
+            602.0,
+            588.0,
+            116.0,
+            34.0
+          ],
+          "text": "1",
+          "type": "OptionButton"
+        },
+        {
+          "font": 14,
+          "name": "@Label@1118",
+          "rect": [
+            28.0,
+            640.0,
+            42.0,
+            22.0
+          ],
+          "text": "生食材",
+          "type": "Label"
+        },
+        {
+          "color": "eadebfff",
+          "font": 14,
+          "name": "Food_raw0",
+          "rect": [
+            194.0,
+            634.0,
+            116.0,
+            34.0
+          ],
+          "text": "1",
+          "type": "OptionButton"
+        },
+        {
+          "color": "eadebfff",
+          "font": 14,
+          "name": "Food_raw1",
+          "rect": [
+            330.0,
+            634.0,
+            116.0,
+            34.0
+          ],
+          "text": "7",
+          "type": "OptionButton"
+        },
+        {
+          "color": "eadebfff",
+          "font": 14,
+          "name": "Food_raw2",
+          "rect": [
+            466.0,
+            634.0,
+            116.0,
+            34.0
+          ],
+          "text": "6",
+          "type": "OptionButton"
+        },
+        {
+          "color": "eadebfff",
+          "font": 14,
+          "name": "Food_raw3",
+          "rect": [
+            602.0,
+            634.0,
+            116.0,
+            34.0
+          ],
+          "text": "5",
+          "type": "OptionButton"
+        },
+        {
+          "font": 13,
+          "name": "@Label@1159",
+          "rect": [
+            28.0,
+            690.0,
+            364.0,
+            20.0
+          ],
+          "text": "利用権限・禁止・予約・通路を確認して選択。飼料は対象外。",
+          "type": "Label"
+        },
+        {
+          "name": "_v_scroll",
+          "rect": [
+            788.0,
+            512.0,
+            12.0,
+            218.0
+          ],
+          "type": "VScrollBar"
+        },
+        {
+          "color": "eadebfff",
+          "font": 16,
+          "name": "@Button@19",
+          "rect": [
+            16.0,
+            754.0,
+            184.0,
+            44.0
+          ],
+          "text": "アーキテクト",
+          "type": "Button"
+        },
+        {
+          "color": "eadebfff",
+          "font": 16,
+          "name": "@Button@20",
+          "rect": [
+            208.0,
+            754.0,
+            116.0,
+            44.0
+          ],
+          "text": "動物",
+          "type": "Button"
+        },
+        {
+          "color": "eadebfff",
+          "font": 16,
+          "name": "@Button@21",
+          "rect": [
+            332.0,
+            754.0,
+            116.0,
+            44.0
+          ],
+          "text": "役割",
+          "type": "Button"
+        },
+        {
+          "color": "eadebfff",
+          "font": 16,
+          "name": "@Button@22",
+          "rect": [
+            456.0,
+            754.0,
+            116.0,
+            44.0
+          ],
+          "text": "命令",
+          "type": "Button"
+        },
+        {
+          "color": "eadebfff",
+          "font": 16,
+          "name": "@Button@1053",
+          "rect": [
+            580.0,
+            754.0,
+            116.0,
+            44.0
+          ],
+          "text": "生活",
+          "type": "Button"
+        }
+      ],
+      "window": [
+        1280,
+        800
+      ]
+    },
+    {
+      "name": "schedule",
+      "nodes": [
+        {
+          "name": "Timetable",
+          "rect": [
+            16.0,
+            402.0,
+            796.0,
+            340.0
+          ],
+          "type": "Panel"
+        },
+        {
+          "font": 20,
+          "name": "@Label@1396",
+          "rect": [
+            28.0,
+            410.0,
+            40.0,
+            30.0
+          ],
+          "text": "生活",
+          "type": "Label"
+        },
+        {
+          "color": "eadebfff",
+          "font": 14,
+          "name": "LifeResident",
+          "rect": [
+            98.0,
+            410.0,
+            250.0,
+            30.0
+          ],
+          "text": "田中",
+          "type": "OptionButton"
+        },
+        {
+          "color": "bbd99cff",
+          "font": 14,
+          "name": "@Button@1407",
+          "rect": [
+            364.0,
+            410.0,
+            104.0,
+            30.0
+          ],
+          "text": "時間割",
+          "type": "Button"
+        },
+        {
+          "color": "e7d9b5ff",
+          "font": 14,
+          "name": "@Button@1408",
+          "rect": [
+            474.0,
+            410.0,
+            104.0,
+            30.0
+          ],
+          "text": "食事",
+          "type": "Button"
+        },
+        {
+          "color": "eadebfff",
+          "font": 14,
+          "name": "@Button@1409",
+          "rect": [
+            692.0,
+            410.0,
+            108.0,
+            30.0
+          ],
+          "text": "戻る",
+          "type": "Button"
+        },
+        {
+          "font": 14,
+          "name": "LifeSummary",
+          "rect": [
+            28.0,
+            452.0,
+            760.0,
+            49.0
+          ],
+          "text": "生活タイプ：通常　食欲：通常　危険反応：リラックス\n満足度 50/100　｜　普段の生活",
+          "type": "Label"
+        },
+        {
+          "name": "@HSeparator@1410",
+          "rect": [
+            28.0,
+            500.0,
+            772.0,
+            4.0
+          ],
+          "type": "HSeparator"
+        },
+        {
+          "name": "LifeContent",
+          "rect": [
+            28.0,
+            512.0,
+            772.0,
+            218.0
+          ],
+          "type": "ScrollContainer"
+        },
+        {
+          "name": "LifeBody",
+          "rect": [
+            28.0,
+            512.0,
+            746.0,
+            204.0
+          ],
+          "type": "Control"
+        },
+        {
+          "font": 14,
+          "name": "@Label@1413",
+          "rect": [
+            28.0,
+            516.0,
+            415.0,
+            22.0
+          ],
+          "text": "0〜23時をドラッグして設定。変更は次の時間帯から適用します。",
+          "type": "Label"
+        },
+        {
+          "color": "e7d9b5ff",
+          "font": 14,
+          "name": "@Button@1414",
+          "rect": [
+            28.0,
+            556.0,
+            104.0,
+            34.0
+          ],
+          "text": "睡眠",
+          "type": "Button"
+        },
+        {
+          "color": "e7d9b5ff",
+          "font": 14,
+          "name": "@Button@1415",
+          "rect": [
+            138.0,
+            556.0,
+            104.0,
+            34.0
+          ],
+          "text": "仕事",
+          "type": "Button"
+        },
+        {
+          "color": "bbd99cff",
+          "font": 14,
+          "name": "@Button@1416",
+          "rect": [
+            248.0,
+            556.0,
+            104.0,
+            34.0
+          ],
+          "text": "自由",
+          "type": "Button"
+        },
+        {
+          "hours": [
+            "free",
+            "free",
+            "free",
+            "free",
+            "free",
+            "sleep",
+            "work",
+            "work",
+            "work",
+            "work",
+            "work",
+            "work",
+            "work",
+            "work",
+            "work",
+            "work",
+            "work",
+            "work",
+            "free",
+            "free",
+            "free",
+            "free",
+            "free",
+            "free"
+          ],
+          "name": "ScheduleHours",
+          "rect": [
+            28.0,
+            608.0,
+            576.0,
+            38.0
+          ],
+          "type": "Control"
+        },
+        {
+          "font": 14,
+          "name": "SleepStatus",
+          "rect": [
+            28.0,
+            662.0,
+            218.0,
+            22.0
+          ],
+          "text": "眠気：0　｜　仕事を探しています",
+          "type": "Label"
+        },
+        {
+          "name": "@VSeparator@1418",
+          "rect": [
+            622.0,
+            556.0,
+            4.0,
+            100.0
+          ],
+          "type": "VSeparator"
+        },
+        {
+          "font": 14,
+          "name": "@Label@1419",
+          "rect": [
+            642.0,
+            556.0,
+            70.0,
+            22.0
+          ],
+          "text": "現在の状態",
+          "type": "Label"
+        },
+        {
+          "font": 16,
+          "name": "CurrentState",
+          "rect": [
+            642.0,
+            582.0,
+            48.0,
+            24.0
+          ],
+          "text": "活動中",
+          "type": "Label"
+        },
+        {
+          "color": "eadebfff",
+          "font": 14,
+          "name": "Wake",
+          "rect": [
+            642.0,
+            612.0,
+            118.0,
+            34.0
+          ],
+          "text": "起こす",
+          "type": "Button"
+        },
+        {
+          "name": "_v_scroll",
+          "rect": [
+            788.0,
+            512.0,
+            12.0,
+            218.0
+          ],
+          "type": "VScrollBar"
+        },
+        {
+          "color": "eadebfff",
+          "font": 16,
+          "name": "@Button@19",
+          "rect": [
+            16.0,
+            754.0,
+            184.0,
+            44.0
+          ],
+          "text": "アーキテクト",
+          "type": "Button"
+        },
+        {
+          "color": "eadebfff",
+          "font": 16,
+          "name": "@Button@20",
+          "rect": [
+            208.0,
+            754.0,
+            116.0,
+            44.0
+          ],
+          "text": "動物",
+          "type": "Button"
+        },
+        {
+          "color": "eadebfff",
+          "font": 16,
+          "name": "@Button@21",
+          "rect": [
+            332.0,
+            754.0,
+            116.0,
+            44.0
+          ],
+          "text": "役割",
+          "type": "Button"
+        },
+        {
+          "color": "eadebfff",
+          "font": 16,
+          "name": "@Button@22",
+          "rect": [
+            456.0,
+            754.0,
+            116.0,
+            44.0
+          ],
+          "text": "命令",
+          "type": "Button"
+        },
+        {
+          "color": "eadebfff",
+          "font": 16,
+          "name": "@Button@1394",
+          "rect": [
+            580.0,
+            754.0,
+            116.0,
+            44.0
+          ],
+          "text": "生活",
+          "type": "Button"
+        }
+      ],
+      "window": [
+        1280,
+        800
+      ]
+    },
+    {
+      "name": "roles",
+      "nodes": [
+        {
+          "name": "@Panel@1423",
+          "rect": [
+            16.0,
+            566.0,
+            640.0,
+            176.0
+          ],
+          "type": "Panel"
+        },
+        {
+          "font": 19,
+          "name": "@Label@1424",
+          "rect": [
+            30.0,
+            575.0,
+            114.0,
+            29.0
+          ],
+          "text": "仕事の優先度",
+          "type": "Label"
+        },
+        {
+          "font": 13,
+          "name": "@Label@1425",
+          "rect": [
+            30.0,
+            609.0,
+            353.0,
+            20.0
+          ],
+          "text": "1 最優先 → 4 最低 · 空欄は停止 · 同順位は距離と条件で選択",
+          "type": "Label"
+        },
+        {
+          "font": 13,
+          "name": "@Label@1426",
+          "rect": [
+            34.0,
+            633.0,
+            26.0,
+            20.0
+          ],
+          "text": "人物",
+          "type": "Label"
+        },
+        {
+          "font": 13,
+          "name": "@Label@1427",
+          "rect": [
+            240.0,
+            633.0,
+            26.0,
+            20.0
+          ],
+          "text": "建築",
+          "type": "Label"
+        },
+        {
+          "font": 13,
+          "name": "@Label@1428",
+          "rect": [
+            300.0,
+            633.0,
+            26.0,
+            20.0
+          ],
+          "text": "採集",
+          "type": "Label"
+        },
+        {
+          "font": 13,
+          "name": "@Label@1429",
+          "rect": [
+            360.0,
+            633.0,
+            26.0,
+            20.0
+          ],
+          "text": "回収",
+          "type": "Label"
+        },
+        {
+          "font": 13,
+          "name": "@Label@1430",
+          "rect": [
+            420.0,
+            633.0,
+            26.0,
+            20.0
+          ],
+          "text": "動物",
+          "type": "Label"
+        },
+        {
+          "font": 13,
+          "name": "@Label@1431",
+          "rect": [
+            480.0,
+            633.0,
+            39.0,
+            20.0
+          ],
+          "text": "その他",
+          "type": "Label"
+        },
+        {
+          "font": 13,
+          "name": "@Label@1432",
+          "rect": [
+            540.0,
+            633.0,
+            26.0,
+            20.0
+          ],
+          "text": "運搬",
+          "type": "Label"
+        },
+        {
+          "name": "@ScrollContainer@1435",
+          "rect": [
+            28.0,
+            658.0,
+            616.0,
+            68.0
+          ],
+          "type": "ScrollContainer"
+        },
+        {
+          "name": "@VBoxContainer@1436",
+          "rect": [
+            28.0,
+            658.0,
+            616.0,
+            66.0
+          ],
+          "type": "VBoxContainer"
+        },
+        {
+          "name": "@HBoxContainer@1437",
+          "rect": [
+            28.0,
+            658.0,
+            616.0,
+            32.0
+          ],
+          "type": "HBoxContainer"
+        },
+        {
+          "color": "eadebfff",
+          "font": 14,
+          "name": "Person_keeper",
+          "rect": [
+            28.0,
+            658.0,
+            200.0,
+            32.0
+          ],
+          "text": "牧場主",
+          "type": "Button"
+        },
+        {
+          "color": "f1e8cfff",
+          "font": 17,
+          "name": "Priority_keeper_build",
+          "rect": [
+            232.0,
+            658.0,
+            56.0,
+            32.0
+          ],
+          "text": "3",
+          "type": "Button"
+        },
+        {
+          "color": "e5e9c7ff",
+          "font": 17,
+          "name": "Priority_keeper_gather",
+          "rect": [
+            292.0,
+            658.0,
+            56.0,
+            32.0
+          ],
+          "text": "2",
+          "type": "Button"
+        },
+        {
+          "color": "f1e8cfff",
+          "font": 17,
+          "name": "Priority_keeper_collect",
+          "rect": [
+            352.0,
+            658.0,
+            56.0,
+            32.0
+          ],
+          "text": "3",
+          "type": "Button"
+        },
+        {
+          "color": "eee9dfff",
+          "font": 17,
+          "name": "Priority_keeper_animal",
+          "rect": [
+            412.0,
+            658.0,
+            56.0,
+            32.0
+          ],
+          "text": "4",
+          "type": "Button"
+        },
+        {
+          "color": "eee9dfff",
+          "font": 17,
+          "name": "Priority_keeper_other",
+          "rect": [
+            472.0,
+            658.0,
+            56.0,
+            32.0
+          ],
+          "text": "4",
+          "type": "Button"
+        },
+        {
+          "color": "eee9dfff",
+          "font": 17,
+          "name": "Priority_keeper_haul",
+          "rect": [
+            532.0,
+            658.0,
+            56.0,
+            32.0
+          ],
+          "text": "4",
+          "type": "Button"
+        },
+        {
+          "name": "@HBoxContainer@1438",
+          "rect": [
+            28.0,
+            692.0,
+            616.0,
+            32.0
+          ],
+          "type": "HBoxContainer"
+        },
+        {
+          "color": "eadebfff",
+          "font": 14,
+          "name": "Person_helper",
+          "rect": [
+            28.0,
+            692.0,
+            200.0,
+            32.0
+          ],
+          "text": "田中",
+          "type": "Button"
+        },
+        {
+          "color": "f1e8cfff",
+          "font": 17,
+          "name": "Priority_helper_build",
+          "rect": [
+            232.0,
+            692.0,
+            56.0,
+            32.0
+          ],
+          "text": "3",
+          "type": "Button"
+        },
+        {
+          "color": "e5e9c7ff",
+          "font": 17,
+          "name": "Priority_helper_gather",
+          "rect": [
+            292.0,
+            692.0,
+            56.0,
+            32.0
+          ],
+          "text": "2",
+          "type": "Button"
+        },
+        {
+          "color": "f1e8cfff",
+          "font": 17,
+          "name": "Priority_helper_collect",
+          "rect": [
+            352.0,
+            692.0,
+            56.0,
+            32.0
+          ],
+          "text": "3",
+          "type": "Button"
+        },
+        {
+          "color": "eee9dfff",
+          "font": 17,
+          "name": "Priority_helper_animal",
+          "rect": [
+            412.0,
+            692.0,
+            56.0,
+            32.0
+          ],
+          "text": "4",
+          "type": "Button"
+        },
+        {
+          "color": "eee9dfff",
+          "font": 17,
+          "name": "Priority_helper_other",
+          "rect": [
+            472.0,
+            692.0,
+            56.0,
+            32.0
+          ],
+          "text": "4",
+          "type": "Button"
+        },
+        {
+          "color": "eee9dfff",
+          "font": 17,
+          "name": "Priority_helper_haul",
+          "rect": [
+            532.0,
+            692.0,
+            56.0,
+            32.0
+          ],
+          "text": "4",
+          "type": "Button"
+        },
+        {
+          "color": "eadebfff",
+          "font": 14,
+          "name": "RoleLifeResident",
+          "rect": [
+            270.0,
+            574.0,
+            244.0,
+            28.0
+          ],
+          "text": "牧場主",
+          "type": "OptionButton"
+        },
+        {
+          "color": "eadebfff",
+          "font": 14,
+          "name": "@Button@1450",
+          "rect": [
+            526.0,
+            574.0,
+            116.0,
+            28.0
+          ],
+          "text": "生活",
+          "type": "Button"
+        },
+        {
+          "color": "eadebfff",
+          "font": 16,
+          "name": "@Button@19",
+          "rect": [
+            16.0,
+            754.0,
+            184.0,
+            44.0
+          ],
+          "text": "アーキテクト",
+          "type": "Button"
+        },
+        {
+          "color": "eadebfff",
+          "font": 16,
+          "name": "@Button@20",
+          "rect": [
+            208.0,
+            754.0,
+            116.0,
+            44.0
+          ],
+          "text": "動物",
+          "type": "Button"
+        },
+        {
+          "color": "cdd7afff",
+          "font": 16,
+          "name": "@Button@21",
+          "rect": [
+            332.0,
+            754.0,
+            116.0,
+            44.0
+          ],
+          "text": "役割",
+          "type": "Button"
+        },
+        {
+          "color": "eadebfff",
+          "font": 16,
+          "name": "@Button@22",
+          "rect": [
+            456.0,
+            754.0,
+            116.0,
+            44.0
+          ],
+          "text": "命令",
+          "type": "Button"
+        },
+        {
+          "color": "eadebfff",
+          "font": 16,
+          "name": "@Button@1439",
+          "rect": [
+            580.0,
+            754.0,
+            116.0,
+            44.0
+          ],
+          "text": "生活",
+          "type": "Button"
+        }
+      ],
+      "window": [
+        1280,
+        800
+      ]
+    },
+    {
+      "name": "food",
+      "nodes": [
+        {
+          "name": "Timetable",
+          "rect": [
+            16.0,
+            402.0,
+            796.0,
+            340.0
+          ],
+          "type": "Panel"
+        },
+        {
+          "font": 20,
+          "name": "@Label@1589",
+          "rect": [
+            28.0,
+            410.0,
+            40.0,
+            30.0
+          ],
+          "text": "生活",
+          "type": "Label"
+        },
+        {
+          "color": "eadebfff",
+          "font": 14,
+          "name": "LifeResident",
+          "rect": [
+            98.0,
+            410.0,
+            250.0,
+            30.0
+          ],
+          "text": "田中",
+          "type": "OptionButton"
+        },
+        {
+          "color": "e7d9b5ff",
+          "font": 14,
+          "name": "@Button@1600",
+          "rect": [
+            364.0,
+            410.0,
+            104.0,
+            30.0
+          ],
+          "text": "時間割",
+          "type": "Button"
+        },
+        {
+          "color": "bbd99cff",
+          "font": 14,
+          "name": "@Button@1601",
+          "rect": [
+            474.0,
+            410.0,
+            104.0,
+            30.0
+          ],
+          "text": "食事",
+          "type": "Button"
+        },
+        {
+          "color": "eadebfff",
+          "font": 14,
+          "name": "@Button@1602",
+          "rect": [
+            692.0,
+            410.0,
+            108.0,
+            30.0
+          ],
+          "text": "戻る",
+          "type": "Button"
+        },
+        {
+          "font": 14,
+          "name": "LifeSummary",
+          "rect": [
+            28.0,
+            452.0,
+            760.0,
+            49.0
+          ],
+          "text": "生活タイプ：通常　食欲：通常　危険反応：リラックス\n満足度 50/100　｜　普段の生活",
+          "type": "Label"
+        },
+        {
+          "name": "@HSeparator@1603",
+          "rect": [
+            28.0,
+            500.0,
+            772.0,
+            4.0
+          ],
+          "type": "HSeparator"
+        },
+        {
+          "name": "LifeContent",
+          "rect": [
+            28.0,
+            512.0,
+            772.0,
+            218.0
+          ],
+          "type": "ScrollContainer"
+        },
+        {
+          "name": "LifeBody",
+          "rect": [
+            28.0,
+            512.0,
+            746.0,
+            204.0
+          ],
+          "type": "Control"
+        },
+        {
+          "font": 14,
+          "name": "@Label@1606",
+          "rect": [
+            28.0,
+            512.0,
+            329.0,
+            47.0
+          ],
+          "text": "1が最優先、数字が大きいほど優先度が下がります。\n同じ数字は同順位として扱われます。",
+          "type": "Label"
+        },
+        {
+          "font": 14,
+          "name": "@Label@1607",
+          "rect": [
+            222.0,
+            562.0,
+            28.0,
+            22.0
+          ],
+          "text": "簡素",
+          "type": "Label"
+        },
+        {
+          "font": 14,
+          "name": "@Label@1608",
+          "rect": [
+            358.0,
+            562.0,
+            28.0,
+            22.0
+          ],
+          "text": "普通",
+          "type": "Label"
+        },
+        {
+          "font": 14,
+          "name": "@Label@1609",
+          "rect": [
+            494.0,
+            562.0,
+            28.0,
+            22.0
+          ],
+          "text": "上等",
+          "type": "Label"
+        },
+        {
+          "font": 14,
+          "name": "@Label@1610",
+          "rect": [
+            630.0,
+            562.0,
+            28.0,
+            22.0
+          ],
+          "text": "豪華",
+          "type": "Label"
+        },
+        {
+          "font": 14,
+          "name": "@Label@1611",
+          "rect": [
+            28.0,
+            594.0,
+            84.0,
+            22.0
+          ],
+          "text": "調理済み食品",
+          "type": "Label"
+        },
+        {
+          "color": "eadebfff",
+          "font": 14,
+          "name": "Food_cooked0",
+          "rect": [
+            194.0,
+            588.0,
+            116.0,
+            34.0
+          ],
+          "text": "1",
+          "type": "OptionButton"
+        },
+        {
+          "color": "eadebfff",
+          "font": 14,
+          "name": "Food_cooked1",
+          "rect": [
+            330.0,
+            588.0,
+            116.0,
+            34.0
+          ],
+          "text": "3",
+          "type": "OptionButton"
+        },
+        {
+          "color": "eadebfff",
+          "font": 14,
+          "name": "Food_cooked2",
+          "rect": [
+            466.0,
+            588.0,
+            116.0,
+            34.0
+          ],
+          "text": "2",
+          "type": "OptionButton"
+        },
+        {
+          "color": "eadebfff",
+          "font": 14,
+          "name": "Food_cooked3",
+          "rect": [
+            602.0,
+            588.0,
+            116.0,
+            34.0
+          ],
+          "text": "1",
+          "type": "OptionButton"
+        },
+        {
+          "font": 14,
+          "name": "@Label@1652",
+          "rect": [
+            28.0,
+            640.0,
+            42.0,
+            22.0
+          ],
+          "text": "生食材",
+          "type": "Label"
+        },
+        {
+          "color": "eadebfff",
+          "font": 14,
+          "name": "Food_raw0",
+          "rect": [
+            194.0,
+            634.0,
+            116.0,
+            34.0
+          ],
+          "text": "1",
+          "type": "OptionButton"
+        },
+        {
+          "color": "eadebfff",
+          "font": 14,
+          "name": "Food_raw1",
+          "rect": [
+            330.0,
+            634.0,
+            116.0,
+            34.0
+          ],
+          "text": "7",
+          "type": "OptionButton"
+        },
+        {
+          "color": "eadebfff",
+          "font": 14,
+          "name": "Food_raw2",
+          "rect": [
+            466.0,
+            634.0,
+            116.0,
+            34.0
+          ],
+          "text": "6",
+          "type": "OptionButton"
+        },
+        {
+          "color": "eadebfff",
+          "font": 14,
+          "name": "Food_raw3",
+          "rect": [
+            602.0,
+            634.0,
+            116.0,
+            34.0
+          ],
+          "text": "5",
+          "type": "OptionButton"
+        },
+        {
+          "font": 13,
+          "name": "@Label@1693",
+          "rect": [
+            28.0,
+            690.0,
+            364.0,
+            20.0
+          ],
+          "text": "利用権限・禁止・予約・通路を確認して選択。飼料は対象外。",
+          "type": "Label"
+        },
+        {
+          "name": "_v_scroll",
+          "rect": [
+            788.0,
+            512.0,
+            12.0,
+            218.0
+          ],
+          "type": "VScrollBar"
+        },
+        {
+          "color": "eadebfff",
+          "font": 16,
+          "name": "@Button@19",
+          "rect": [
+            16.0,
+            754.0,
+            184.0,
+            44.0
+          ],
+          "text": "アーキテクト",
+          "type": "Button"
+        },
+        {
+          "color": "eadebfff",
+          "font": 16,
+          "name": "@Button@20",
+          "rect": [
+            208.0,
+            754.0,
+            116.0,
+            44.0
+          ],
+          "text": "動物",
+          "type": "Button"
+        },
+        {
+          "color": "eadebfff",
+          "font": 16,
+          "name": "@Button@21",
+          "rect": [
+            332.0,
+            754.0,
+            116.0,
+            44.0
+          ],
+          "text": "役割",
+          "type": "Button"
+        },
+        {
+          "color": "eadebfff",
+          "font": 16,
+          "name": "@Button@22",
+          "rect": [
+            456.0,
+            754.0,
+            116.0,
+            44.0
+          ],
+          "text": "命令",
+          "type": "Button"
+        },
+        {
+          "color": "eadebfff",
+          "font": 16,
+          "name": "@Button@1587",
+          "rect": [
+            580.0,
+            754.0,
+            116.0,
+            44.0
+          ],
+          "text": "生活",
+          "type": "Button"
+        }
+      ],
+      "window": [
+        1600,
+        1000
+      ]
+    },
+    {
+      "name": "schedule",
+      "nodes": [
+        {
+          "name": "Timetable",
+          "rect": [
+            16.0,
+            402.0,
+            796.0,
+            340.0
+          ],
+          "type": "Panel"
+        },
+        {
+          "font": 20,
+          "name": "@Label@1696",
+          "rect": [
+            28.0,
+            410.0,
+            40.0,
+            30.0
+          ],
+          "text": "生活",
+          "type": "Label"
+        },
+        {
+          "color": "eadebfff",
+          "font": 14,
+          "name": "LifeResident",
+          "rect": [
+            98.0,
+            410.0,
+            250.0,
+            30.0
+          ],
+          "text": "田中",
+          "type": "OptionButton"
+        },
+        {
+          "color": "bbd99cff",
+          "font": 14,
+          "name": "@Button@1707",
+          "rect": [
+            364.0,
+            410.0,
+            104.0,
+            30.0
+          ],
+          "text": "時間割",
+          "type": "Button"
+        },
+        {
+          "color": "e7d9b5ff",
+          "font": 14,
+          "name": "@Button@1708",
+          "rect": [
+            474.0,
+            410.0,
+            104.0,
+            30.0
+          ],
+          "text": "食事",
+          "type": "Button"
+        },
+        {
+          "color": "eadebfff",
+          "font": 14,
+          "name": "@Button@1709",
+          "rect": [
+            692.0,
+            410.0,
+            108.0,
+            30.0
+          ],
+          "text": "戻る",
+          "type": "Button"
+        },
+        {
+          "font": 14,
+          "name": "LifeSummary",
+          "rect": [
+            28.0,
+            452.0,
+            760.0,
+            49.0
+          ],
+          "text": "生活タイプ：通常　食欲：通常　危険反応：リラックス\n満足度 50/100　｜　普段の生活",
+          "type": "Label"
+        },
+        {
+          "name": "@HSeparator@1710",
+          "rect": [
+            28.0,
+            500.0,
+            772.0,
+            4.0
+          ],
+          "type": "HSeparator"
+        },
+        {
+          "name": "LifeContent",
+          "rect": [
+            28.0,
+            512.0,
+            772.0,
+            218.0
+          ],
+          "type": "ScrollContainer"
+        },
+        {
+          "name": "LifeBody",
+          "rect": [
+            28.0,
+            512.0,
+            746.0,
+            204.0
+          ],
+          "type": "Control"
+        },
+        {
+          "font": 14,
+          "name": "@Label@1713",
+          "rect": [
+            28.0,
+            516.0,
+            415.0,
+            22.0
+          ],
+          "text": "0〜23時をドラッグして設定。変更は次の時間帯から適用します。",
+          "type": "Label"
+        },
+        {
+          "color": "e7d9b5ff",
+          "font": 14,
+          "name": "@Button@1714",
+          "rect": [
+            28.0,
+            556.0,
+            104.0,
+            34.0
+          ],
+          "text": "睡眠",
+          "type": "Button"
+        },
+        {
+          "color": "e7d9b5ff",
+          "font": 14,
+          "name": "@Button@1715",
+          "rect": [
+            138.0,
+            556.0,
+            104.0,
+            34.0
+          ],
+          "text": "仕事",
+          "type": "Button"
+        },
+        {
+          "color": "bbd99cff",
+          "font": 14,
+          "name": "@Button@1716",
+          "rect": [
+            248.0,
+            556.0,
+            104.0,
+            34.0
+          ],
+          "text": "自由",
+          "type": "Button"
+        },
+        {
+          "hours": [
+            "free",
+            "free",
+            "free",
+            "free",
+            "free",
+            "sleep",
+            "work",
+            "work",
+            "work",
+            "work",
+            "work",
+            "work",
+            "work",
+            "work",
+            "work",
+            "work",
+            "work",
+            "work",
+            "free",
+            "free",
+            "free",
+            "free",
+            "free",
+            "free"
+          ],
+          "name": "ScheduleHours",
+          "rect": [
+            28.0,
+            608.0,
+            576.0,
+            38.0
+          ],
+          "type": "Control"
+        },
+        {
+          "font": 14,
+          "name": "SleepStatus",
+          "rect": [
+            28.0,
+            662.0,
+            218.0,
+            22.0
+          ],
+          "text": "眠気：0　｜　仕事を探しています",
+          "type": "Label"
+        },
+        {
+          "name": "@VSeparator@1718",
+          "rect": [
+            622.0,
+            556.0,
+            4.0,
+            100.0
+          ],
+          "type": "VSeparator"
+        },
+        {
+          "font": 14,
+          "name": "@Label@1719",
+          "rect": [
+            642.0,
+            556.0,
+            70.0,
+            22.0
+          ],
+          "text": "現在の状態",
+          "type": "Label"
+        },
+        {
+          "font": 16,
+          "name": "CurrentState",
+          "rect": [
+            642.0,
+            582.0,
+            48.0,
+            24.0
+          ],
+          "text": "活動中",
+          "type": "Label"
+        },
+        {
+          "color": "eadebfff",
+          "font": 14,
+          "name": "Wake",
+          "rect": [
+            642.0,
+            612.0,
+            118.0,
+            34.0
+          ],
+          "text": "起こす",
+          "type": "Button"
+        },
+        {
+          "name": "_v_scroll",
+          "rect": [
+            788.0,
+            512.0,
+            12.0,
+            218.0
+          ],
+          "type": "VScrollBar"
+        },
+        {
+          "color": "eadebfff",
+          "font": 16,
+          "name": "@Button@19",
+          "rect": [
+            16.0,
+            754.0,
+            184.0,
+            44.0
+          ],
+          "text": "アーキテクト",
+          "type": "Button"
+        },
+        {
+          "color": "eadebfff",
+          "font": 16,
+          "name": "@Button@20",
+          "rect": [
+            208.0,
+            754.0,
+            116.0,
+            44.0
+          ],
+          "text": "動物",
+          "type": "Button"
+        },
+        {
+          "color": "eadebfff",
+          "font": 16,
+          "name": "@Button@21",
+          "rect": [
+            332.0,
+            754.0,
+            116.0,
+            44.0
+          ],
+          "text": "役割",
+          "type": "Button"
+        },
+        {
+          "color": "eadebfff",
+          "font": 16,
+          "name": "@Button@22",
+          "rect": [
+            456.0,
+            754.0,
+            116.0,
+            44.0
+          ],
+          "text": "命令",
+          "type": "Button"
+        },
+        {
+          "color": "eadebfff",
+          "font": 16,
+          "name": "@Button@1694",
+          "rect": [
+            580.0,
+            754.0,
+            116.0,
+            44.0
+          ],
+          "text": "生活",
+          "type": "Button"
+        }
+      ],
+      "window": [
+        1600,
+        1000
+      ]
+    },
+    {
+      "name": "roles",
+      "nodes": [
+        {
+          "name": "@Panel@1723",
+          "rect": [
+            16.0,
+            566.0,
+            640.0,
+            176.0
+          ],
+          "type": "Panel"
+        },
+        {
+          "font": 19,
+          "name": "@Label@1724",
+          "rect": [
+            30.0,
+            575.0,
+            114.0,
+            29.0
+          ],
+          "text": "仕事の優先度",
+          "type": "Label"
+        },
+        {
+          "font": 13,
+          "name": "@Label@1725",
+          "rect": [
+            30.0,
+            609.0,
+            353.0,
+            20.0
+          ],
+          "text": "1 最優先 → 4 最低 · 空欄は停止 · 同順位は距離と条件で選択",
+          "type": "Label"
+        },
+        {
+          "font": 13,
+          "name": "@Label@1726",
+          "rect": [
+            34.0,
+            633.0,
+            26.0,
+            20.0
+          ],
+          "text": "人物",
+          "type": "Label"
+        },
+        {
+          "font": 13,
+          "name": "@Label@1727",
+          "rect": [
+            240.0,
+            633.0,
+            26.0,
+            20.0
+          ],
+          "text": "建築",
+          "type": "Label"
+        },
+        {
+          "font": 13,
+          "name": "@Label@1728",
+          "rect": [
+            300.0,
+            633.0,
+            26.0,
+            20.0
+          ],
+          "text": "採集",
+          "type": "Label"
+        },
+        {
+          "font": 13,
+          "name": "@Label@1729",
+          "rect": [
+            360.0,
+            633.0,
+            26.0,
+            20.0
+          ],
+          "text": "回収",
+          "type": "Label"
+        },
+        {
+          "font": 13,
+          "name": "@Label@1730",
+          "rect": [
+            420.0,
+            633.0,
+            26.0,
+            20.0
+          ],
+          "text": "動物",
+          "type": "Label"
+        },
+        {
+          "font": 13,
+          "name": "@Label@1731",
+          "rect": [
+            480.0,
+            633.0,
+            39.0,
+            20.0
+          ],
+          "text": "その他",
+          "type": "Label"
+        },
+        {
+          "font": 13,
+          "name": "@Label@1732",
+          "rect": [
+            540.0,
+            633.0,
+            26.0,
+            20.0
+          ],
+          "text": "運搬",
+          "type": "Label"
+        },
+        {
+          "name": "@ScrollContainer@1735",
+          "rect": [
+            28.0,
+            658.0,
+            616.0,
+            68.0
+          ],
+          "type": "ScrollContainer"
+        },
+        {
+          "name": "@VBoxContainer@1736",
+          "rect": [
+            28.0,
+            658.0,
+            616.0,
+            66.0
+          ],
+          "type": "VBoxContainer"
+        },
+        {
+          "name": "@HBoxContainer@1737",
+          "rect": [
+            28.0,
+            658.0,
+            616.0,
+            32.0
+          ],
+          "type": "HBoxContainer"
+        },
+        {
+          "color": "eadebfff",
+          "font": 14,
+          "name": "Person_keeper",
+          "rect": [
+            28.0,
+            658.0,
+            200.0,
+            32.0
+          ],
+          "text": "牧場主",
+          "type": "Button"
+        },
+        {
+          "color": "f1e8cfff",
+          "font": 17,
+          "name": "Priority_keeper_build",
+          "rect": [
+            232.0,
+            658.0,
+            56.0,
+            32.0
+          ],
+          "text": "3",
+          "type": "Button"
+        },
+        {
+          "color": "e5e9c7ff",
+          "font": 17,
+          "name": "Priority_keeper_gather",
+          "rect": [
+            292.0,
+            658.0,
+            56.0,
+            32.0
+          ],
+          "text": "2",
+          "type": "Button"
+        },
+        {
+          "color": "f1e8cfff",
+          "font": 17,
+          "name": "Priority_keeper_collect",
+          "rect": [
+            352.0,
+            658.0,
+            56.0,
+            32.0
+          ],
+          "text": "3",
+          "type": "Button"
+        },
+        {
+          "color": "eee9dfff",
+          "font": 17,
+          "name": "Priority_keeper_animal",
+          "rect": [
+            412.0,
+            658.0,
+            56.0,
+            32.0
+          ],
+          "text": "4",
+          "type": "Button"
+        },
+        {
+          "color": "eee9dfff",
+          "font": 17,
+          "name": "Priority_keeper_other",
+          "rect": [
+            472.0,
+            658.0,
+            56.0,
+            32.0
+          ],
+          "text": "4",
+          "type": "Button"
+        },
+        {
+          "color": "eee9dfff",
+          "font": 17,
+          "name": "Priority_keeper_haul",
+          "rect": [
+            532.0,
+            658.0,
+            56.0,
+            32.0
+          ],
+          "text": "4",
+          "type": "Button"
+        },
+        {
+          "name": "@HBoxContainer@1738",
+          "rect": [
+            28.0,
+            692.0,
+            616.0,
+            32.0
+          ],
+          "type": "HBoxContainer"
+        },
+        {
+          "color": "eadebfff",
+          "font": 14,
+          "name": "Person_helper",
+          "rect": [
+            28.0,
+            692.0,
+            200.0,
+            32.0
+          ],
+          "text": "田中",
+          "type": "Button"
+        },
+        {
+          "color": "f1e8cfff",
+          "font": 17,
+          "name": "Priority_helper_build",
+          "rect": [
+            232.0,
+            692.0,
+            56.0,
+            32.0
+          ],
+          "text": "3",
+          "type": "Button"
+        },
+        {
+          "color": "e5e9c7ff",
+          "font": 17,
+          "name": "Priority_helper_gather",
+          "rect": [
+            292.0,
+            692.0,
+            56.0,
+            32.0
+          ],
+          "text": "2",
+          "type": "Button"
+        },
+        {
+          "color": "f1e8cfff",
+          "font": 17,
+          "name": "Priority_helper_collect",
+          "rect": [
+            352.0,
+            692.0,
+            56.0,
+            32.0
+          ],
+          "text": "3",
+          "type": "Button"
+        },
+        {
+          "color": "eee9dfff",
+          "font": 17,
+          "name": "Priority_helper_animal",
+          "rect": [
+            412.0,
+            692.0,
+            56.0,
+            32.0
+          ],
+          "text": "4",
+          "type": "Button"
+        },
+        {
+          "color": "eee9dfff",
+          "font": 17,
+          "name": "Priority_helper_other",
+          "rect": [
+            472.0,
+            692.0,
+            56.0,
+            32.0
+          ],
+          "text": "4",
+          "type": "Button"
+        },
+        {
+          "color": "eee9dfff",
+          "font": 17,
+          "name": "Priority_helper_haul",
+          "rect": [
+            532.0,
+            692.0,
+            56.0,
+            32.0
+          ],
+          "text": "4",
+          "type": "Button"
+        },
+        {
+          "color": "eadebfff",
+          "font": 14,
+          "name": "RoleLifeResident",
+          "rect": [
+            270.0,
+            574.0,
+            244.0,
+            28.0
+          ],
+          "text": "牧場主",
+          "type": "OptionButton"
+        },
+        {
+          "color": "eadebfff",
+          "font": 14,
+          "name": "@Button@1750",
+          "rect": [
+            526.0,
+            574.0,
+            116.0,
+            28.0
+          ],
+          "text": "生活",
+          "type": "Button"
+        },
+        {
+          "color": "eadebfff",
+          "font": 16,
+          "name": "@Button@19",
+          "rect": [
+            16.0,
+            754.0,
+            184.0,
+            44.0
+          ],
+          "text": "アーキテクト",
+          "type": "Button"
+        },
+        {
+          "color": "eadebfff",
+          "font": 16,
+          "name": "@Button@20",
+          "rect": [
+            208.0,
+            754.0,
+            116.0,
+            44.0
+          ],
+          "text": "動物",
+          "type": "Button"
+        },
+        {
+          "color": "cdd7afff",
+          "font": 16,
+          "name": "@Button@21",
+          "rect": [
+            332.0,
+            754.0,
+            116.0,
+            44.0
+          ],
+          "text": "役割",
+          "type": "Button"
+        },
+        {
+          "color": "eadebfff",
+          "font": 16,
+          "name": "@Button@22",
+          "rect": [
+            456.0,
+            754.0,
+            116.0,
+            44.0
+          ],
+          "text": "命令",
+          "type": "Button"
+        },
+        {
+          "color": "eadebfff",
+          "font": 16,
+          "name": "@Button@1739",
+          "rect": [
+            580.0,
+            754.0,
+            116.0,
+            44.0
+          ],
+          "text": "生活",
+          "type": "Button"
+        }
+      ],
+      "window": [
+        1600,
+        1000
+      ]
+    }
+  ]
+}

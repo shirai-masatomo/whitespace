@@ -1,0 +1,161 @@
+{
+	"checks": [
+		{
+			"check": "Normal project explicitly limits frame rate to 60 fps",
+			"passed": true
+		},
+		{
+			"check": "Loading leaves world tick frozen and simulation disabled",
+			"passed": true
+		},
+		{
+			"check": "Loading rejects world keyboard input",
+			"passed": true
+		},
+		{
+			"check": "Loading leaves world tick frozen and simulation disabled",
+			"passed": true
+		},
+		{
+			"check": "Loading rejects world keyboard input",
+			"passed": true
+		},
+		{
+			"check": "Loading leaves world tick frozen and simulation disabled",
+			"passed": true
+		},
+		{
+			"check": "Loading rejects world keyboard input",
+			"passed": true
+		},
+		{
+			"check": "Loading leaves world tick frozen and simulation disabled",
+			"passed": true
+		},
+		{
+			"check": "Loading rejects world keyboard input",
+			"passed": true
+		},
+		{
+			"check": "Loading leaves world tick frozen and simulation disabled",
+			"passed": true
+		},
+		{
+			"check": "Loading rejects world keyboard input",
+			"passed": true
+		},
+		{
+			"check": "Loading leaves world tick frozen and simulation disabled",
+			"passed": true
+		},
+		{
+			"check": "Loading rejects world keyboard input",
+			"passed": true
+		},
+		{
+			"check": "Loading leaves world tick frozen and simulation disabled",
+			"passed": true
+		},
+		{
+			"check": "Loading rejects world keyboard input",
+			"passed": true
+		},
+		{
+			"check": "Preparation completes only after frozen initial draw",
+			"passed": true
+		},
+		{
+			"check": "New map is complete and controls enabled",
+			"passed": true
+		},
+		{
+			"check": "First-day merchant remains disabled",
+			"passed": true
+		},
+		{
+			"check": "Save fixture in isolated user-data",
+			"passed": true
+		},
+		{
+			"check": "Loading leaves world tick frozen and simulation disabled",
+			"passed": true
+		},
+		{
+			"check": "Loading rejects world keyboard input",
+			"passed": true
+		},
+		{
+			"check": "Loading leaves world tick frozen and simulation disabled",
+			"passed": true
+		},
+		{
+			"check": "Loading rejects world keyboard input",
+			"passed": true
+		},
+		{
+			"check": "Loading leaves world tick frozen and simulation disabled",
+			"passed": true
+		},
+		{
+			"check": "Loading rejects world keyboard input",
+			"passed": true
+		},
+		{
+			"check": "Loading leaves world tick frozen and simulation disabled",
+			"passed": true
+		},
+		{
+			"check": "Loading rejects world keyboard input",
+			"passed": true
+		},
+		{
+			"check": "Loading leaves world tick frozen and simulation disabled",
+			"passed": true
+		},
+		{
+			"check": "Loading rejects world keyboard input",
+			"passed": true
+		},
+		{
+			"check": "Loading leaves world tick frozen and simulation disabled",
+			"passed": true
+		},
+		{
+			"check": "Loading rejects world keyboard input",
+			"passed": true
+		},
+		{
+			"check": "Loading leaves world tick frozen and simulation disabled",
+			"passed": true
+		},
+		{
+			"check": "Loading rejects world keyboard input",
+			"passed": true
+		},
+		{
+			"check": "Preparation completes only after frozen initial draw",
+			"passed": true
+		},
+		{
+			"check": "Normal startup ignores existing snapshot and creates a new map",
+			"passed": true
+		},
+		{
+			"check": "Menu exposes no save/load or save-on-exit",
+			"passed": true
+		},
+		{
+			"check": "New game creates no save history",
+			"passed": true
+		},
+		{
+			"check": "Loading does not overwrite the existing save",
+			"passed": true
+		},
+		{
+			"check": "Simulation can advance after preparation",
+			"passed": true
+		}
+	],
+	"failures": 0
+}
