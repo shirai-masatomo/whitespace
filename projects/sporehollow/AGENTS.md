@@ -22,7 +22,7 @@
 
 ## 資料の更新・整理（2026-10-14）
 
-- ユーザーが仕様を採用・変更したら、[GAME_SPEC.md](docs/internal/GAME_SPEC.md) に短く反映し、詳細は関係する設計正本（例：[CRAFTING_NEEDS_DESIGN.md](docs/internal/CRAFTING_NEEDS_DESIGN.md)、[WORK_SYSTEMS.md](docs/internal/WORK_SYSTEMS.md)、[ITEMS.md](docs/catalog/ITEMS.md)）だけ更新する。READMEは入口・操作概要に限定し、同じ表を無制限に複製しない。
+- ユーザーが仕様を採用・変更したら、**[SPEC.md](SPEC.md) のみをユーザー向け仕様の正本として更新**し、技術詳細は関係する開発者資料（例：[CRAFTING_NEEDS_DESIGN.md](docs/internal/CRAFTING_NEEDS_DESIGN.md)、[WORK_SYSTEMS.md](docs/internal/WORK_SYSTEMS.md)、[ITEMS.md](docs/catalog/ITEMS.md)）へ記録する。現行の工程順は[ROADMAP.md](docs/internal/ROADMAP.md)、工程1〜6の指示は[TASKS.md](docs/internal/TASKS.md)に保存し、ユーザーの個別開始依頼なしに次工程へ着手しない。READMEは入口・操作概要に限定し、同じ表を無制限に複製しない。
 - 資料の各節に **現行実装／採用した将来仕様／未確定案／過去記録** を明記する。ドキュメントへの記載だけでコード・EXE反映済みとは報告しない。
 - 現行仕様と過去レビューを同じ場所で「最新」と呼ばない。過去の引継ぎ・古い定点レビューは review/archive へ整理する。重要な検査・素材権利・納品・署名・Git履歴を一括削除しない。
 - 詳細な敵・動物・品目はそれぞれ ENEMIES／ANIMALS／ITEMS、建築・物流は BUILDINGS／WORK_SYSTEMS を正本にする。
