@@ -1,0 +1,21 @@
+{
+  "head_sha": "c8ca625ceae51cc033dc89c95166c94e6c32921e",
+  "conclusion": "success",
+  "run_id": 39246303803,
+  "url": "https://github.com/shirai-masatomo/whitespace/actions/runs/39246303803",
+  "verification_scope": "ui-refinement-01-09-title",
+  "build_artifact_id": 12183543510,
+  "evidence_artifact_id": 12183258716,
+  "build_artifact_digest": "sha256:3edfa7843325bd0b1c8884b8290d5b39d8254f0b52f4a144c9d58701b1c232a8",
+  "evidence_artifact_digest": "sha256:f2f8d7ae8db362d8d71290fdf1c339f7f37a50acfbb67eede732f17302d793d6",
+  "final_after_processes": 1,
+  "final_after_elapsed_ms": 18114,
+  "baseline_run_id": 39244216616,
+  "baseline_process_elapsed_ms": 14205,
+  "baseline_process_success": true,
+  "baseline_overall_run_success": false,
+  "local_engine_launches": 0,
+  "manual_os_input": false,
+  "viewport_input": true,
+  "user_visual_evaluation": "pending"
+}

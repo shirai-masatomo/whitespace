@@ -1,3 +1,5 @@
+> 最新の実画面：main・通常0.6.4。[今回のUI／操作01〜09とタイトルの比較・確認](../review/ui-feedback/responses/0.6.4/README.md)。正式参考は変更せず、下記の版情報は当時の履歴。
+
 > 統合時点（2026-10-19）：mainへ実装0.6.0を統合。最新の通常入口は review/current/Play.cmd。本文内の旧版・取込待ち記述は策定時点の履歴で、現在の実装は review/ui-integration-0.6.0/ と区別して参照する。
 
 # Dive In Under — UI参照入口（旧索引）

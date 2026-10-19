@@ -1,0 +1,12 @@
+{
+  "original": "assets/equipment/v1/adventurer-cloak-blue.png",
+  "original_preserved": true,
+  "new_asset": "assets/equipment/v1/adventurer-cloak-navy.png",
+  "width": 1289,
+  "height": 1220,
+  "sha256": "0b24dca9847892f577d37d42efe69a72961ef64c41a565a6cb3f7d5c46515049",
+  "tool": "built-in image_gen, editing existing image",
+  "prompt": "Edit target: the attached existing pixel-art adventurer hooded cloak item icon. Make only a colorway adjustment: change the vivid saturated royal blue cloth to subdued deep navy / slate gray-blue, matching a dark navy protagonist hood in a lantern-lit cave RPG. Keep cloth folds and readable highlights, with dark inky shadows and restrained desaturated blue-gray highlights. Preserve exactly the cloak silhouette, ragged hem, hood opening, silver clasp, composition, original crisp pixel-art style, and transparent alpha background. One isolated cloak, no character, no text, no frame, no floor, no new ornament. Do not redesign the item. The art must remain readable as a 48–64 pixel icon. Save output image and return its local file path for direct use in the Godot project.",
+  "usage": "Shared EquipmentArt.texture A02 for status, equipment, warehouse and details. No item performance or slot changes.",
+  "original_sha256": "c9aad2358957bd09455c99ae4afb69e3b005852009c335ebdcc862a3783c2d23"
+}

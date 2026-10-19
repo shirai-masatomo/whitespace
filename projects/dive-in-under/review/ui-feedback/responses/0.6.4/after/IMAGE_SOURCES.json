@@ -1,0 +1,64 @@
+{
+  "kind": "Actual final exported Windows EXE/PCK, not generated reference",
+  "runtime_source": "c8ca625ceae51cc033dc89c95166c94e6c32921e",
+  "ci_run_id": 39246303803,
+  "pck_sha256": "FBAB1852E070A2E0C27630BB2FD6263A2802D3C25CC9CC67992D88A6C8D39951",
+  "resolution": [
+    1280,
+    720
+  ],
+  "files": [
+    {
+      "path": "01-title.png",
+      "sha256": "bc77c3be9124b8a929784fa234198b9356854c647f00f8d4db3ad35dafe58856"
+    },
+    {
+      "path": "02-status-equipment.png",
+      "sha256": "eee51a72f010d52ff7920dde4a13c4bf01781f6e8c212770c7af66d4ca656419"
+    },
+    {
+      "path": "04-status-abilities.png",
+      "sha256": "142c0dba6f134e779aa8ccdd667005751bacca5b4af380c4a7d6651676ffe575"
+    },
+    {
+      "path": "04-status-empty.png",
+      "sha256": "712eeb95a55a9738e8ada55b1bb51927179ef29e737b0eb028cc6bf586e955ec"
+    },
+    {
+      "path": "05-exploration.png",
+      "sha256": "2e650a74f9affb94b9e63610a2304b268176e94b92bb49670b85c84a27b4011b"
+    },
+    {
+      "path": "05-preparation.png",
+      "sha256": "e0204ebc20c32693f34029790bc94d48da3aa549d73a63c5447db35c84493203"
+    },
+    {
+      "path": "05-warehouse.png",
+      "sha256": "3516e1215bf47db94482055ec1b165ae3555f5fb727a3a848f2705b5e06ec5cc"
+    },
+    {
+      "path": "06-battle-paused.png",
+      "sha256": "bc55dece8d8213193ade6290ae6038501bd2e54a0e7b2a9389bb259eb017b6cd"
+    },
+    {
+      "path": "06-battle-running.png",
+      "sha256": "da66ddb702191d7dcf5c0a28f0b755c279357d83f4a7a5a46acf6a6500b7c2dd"
+    },
+    {
+      "path": "07-next-departure.png",
+      "sha256": "6082f07a375edf8f8102dca1da9e52f8ea4e031b0028b34a9a55cf60be7f35fd"
+    },
+    {
+      "path": "08-backpack-full.png",
+      "sha256": "451647893a384bd425e7f8eb4d8b932b1d023fce7bf37b930902a9b3aa67e1d8"
+    },
+    {
+      "path": "08-equipment.png",
+      "sha256": "3eafdf85d75d02a03ad7194553a028c34886fe888bf65b7c08bce1f85bd5c746"
+    },
+    {
+      "path": "09-before-departure.png",
+      "sha256": "b591914c4b8d8e274487564fbbfb14bc7312aa7ccd582ca3b90b52de5331928b"
+    }
+  ]
+}

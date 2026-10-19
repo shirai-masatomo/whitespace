@@ -1,3 +1,5 @@
+> 最新の実画面：main・通常0.6.4。[今回のUI／操作01〜09とタイトルの比較・確認](../review/ui-feedback/responses/0.6.4/README.md)。正式参考は変更せず、下記の版情報は当時の履歴。
+
 > 最新実装：main・通常0.6.1。01〜07の対象修正とユーザー評価待ちは [番号別一覧](../review/ui-feedback/README.md)。以下の0.6.0以前の記録は履歴。
 
 > 現在の統合実装：通常0.6.0（ソース1c39a5c、CI39150351325）。[実画面と比較](../review/ui-integration-0.6.0/README.md)／[番号別フィードバック](../review/ui-feedback/README.md)／[SHA付き素材台帳](../assets/ui-reference/manifest.json)。

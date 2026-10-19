@@ -1,0 +1,57 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+WARNING: Your video card drivers seem not to support the required OpenGL 3.3 version, switching to ANGLE.
+   at: DisplayServerWindows (platform/windows/display_server_windows.cpp:8227)
+OpenGL API OpenGL ES 3.0 (ANGLE 2.1.1 git hash: aaebda1c5a40) - Compatibility - Using Device: Google Inc. (Microsoft) - ANGLE (Microsoft, Microsoft Basic Render Driver (0x0000008C) Direct3D11 vs_5_0 ps_5_0, D3D11-10.0.26100.33438)
+
+SCRIPT ERROR: Invalid access to property or key 'A01' on a base object of type 'Dictionary'.
+   at: act (res://core/expedition.gd:324)
+   GDScript backtrace (most recent call first):
+       [0] act (res://core/expedition.gd:324)
+       [1] fixture (D:/a/whitespace/whitespace/projects/dive-in-under/ui/refinement_review.gd:17)
+       [2] run (D:/a/whitespace/whitespace/projects/dive-in-under/ui/refinement_review.gd:54)
+       [3] click (res://ui/integration_review.gd:16)
+SCRIPT ERROR: Invalid access to property or key 'next_item' on a base object of type 'Dictionary'.
+   at: add_item (res://core/expedition.gd:130)
+   GDScript backtrace (most recent call first):
+       [0] add_item (res://core/expedition.gd:130)
+       [1] fixture (D:/a/whitespace/whitespace/projects/dive-in-under/ui/refinement_review.gd:18)
+       [2] run (D:/a/whitespace/whitespace/projects/dive-in-under/ui/refinement_review.gd:54)
+       [3] click (res://ui/integration_review.gd:16)
+SCRIPT ERROR: Invalid access to property or key 'next_item' on a base object of type 'Dictionary'.
+   at: add_item (res://core/expedition.gd:130)
+   GDScript backtrace (most recent call first):
+       [0] add_item (res://core/expedition.gd:130)
+       [1] fixture (D:/a/whitespace/whitespace/projects/dive-in-under/ui/refinement_review.gd:18)
+       [2] run (D:/a/whitespace/whitespace/projects/dive-in-under/ui/refinement_review.gd:54)
+       [3] click (res://ui/integration_review.gd:16)
+SCRIPT ERROR: Invalid access to property or key 'next_item' on a base object of type 'Dictionary'.
+   at: add_item (res://core/expedition.gd:130)
+   GDScript backtrace (most recent call first):
+       [0] add_item (res://core/expedition.gd:130)
+       [1] fixture (D:/a/whitespace/whitespace/projects/dive-in-under/ui/refinement_review.gd:18)
+       [2] run (D:/a/whitespace/whitespace/projects/dive-in-under/ui/refinement_review.gd:54)
+       [3] click (res://ui/integration_review.gd:16)
+SCRIPT ERROR: Invalid access to property or key 'next_item' on a base object of type 'Dictionary'.
+   at: add_item (res://core/expedition.gd:130)
+   GDScript backtrace (most recent call first):
+       [0] add_item (res://core/expedition.gd:130)
+       [1] fixture (D:/a/whitespace/whitespace/projects/dive-in-under/ui/refinement_review.gd:20)
+       [2] run (D:/a/whitespace/whitespace/projects/dive-in-under/ui/refinement_review.gd:54)
+       [3] click (res://ui/integration_review.gd:16)
+SCRIPT ERROR: Invalid access to property or key 'inventory' on a base object of type 'Dictionary'.
+   at: fixture (D:/a/whitespace/whitespace/projects/dive-in-under/ui/refinement_review.gd:20)
+   GDScript backtrace (most recent call first):
+       [0] fixture (D:/a/whitespace/whitespace/projects/dive-in-under/ui/refinement_review.gd:20)
+       [1] run (D:/a/whitespace/whitespace/projects/dive-in-under/ui/refinement_review.gd:54)
+       [2] click (res://ui/integration_review.gd:16)
+SCRIPT ERROR: Invalid access to property or key 'phase' on a base object of type 'Dictionary'.
+   at: open_status (res://ui/game.gd:411)
+   GDScript backtrace (most recent call first):
+       [0] open_status (res://ui/game.gd:411)
+       [1] <anonymous lambda> (res://ui/play_view.gd:88)
+       [2] click_control (res://ui/main.gd:409)
+SCRIPT ERROR: Invalid access to property or key 'item_buttons' on a base object of type 'Nil'.
+   at: run (D:/a/whitespace/whitespace/projects/dive-in-under/ui/refinement_review.gd:58)
+   GDScript backtrace (most recent call first):
+       [0] run (D:/a/whitespace/whitespace/projects/dive-in-under/ui/refinement_review.gd:58)
+       [1] click (res://ui/integration_review.gd:16)

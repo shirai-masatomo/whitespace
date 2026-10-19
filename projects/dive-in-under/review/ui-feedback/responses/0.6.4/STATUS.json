@@ -1,0 +1,65 @@
+{
+  "version": "0.6.4",
+  "runtime_commit": "c8ca625ceae51cc033dc89c95166c94e6c32921e",
+  "source_of_truth": "main",
+  "cases": {
+    "01": {
+      "implementation": "修正済み",
+      "user_evaluation": "未評価",
+      "already_resolved": "タイトル採用ロゴと背景のみ黒12%（0.6.3）を維持"
+    },
+    "02": {
+      "implementation": "修正済み",
+      "user_evaluation": "未評価"
+    },
+    "03": {
+      "implementation": "修正済み",
+      "user_evaluation": "未評価"
+    },
+    "04": {
+      "implementation": "修正済み",
+      "user_evaluation": "未評価",
+      "already_resolved": "0.6.1の能力行整列を基礎に、見出しと内部装飾を整理"
+    },
+    "05": {
+      "implementation": "修正済み",
+      "user_evaluation": "未評価"
+    },
+    "06": {
+      "implementation": "修正済み",
+      "user_evaluation": "未評価"
+    },
+    "07": {
+      "implementation": "修正済み",
+      "user_evaluation": "未評価"
+    },
+    "08": {
+      "implementation": "修正済み",
+      "user_evaluation": "未評価",
+      "already_resolved": "コアのバッグ満杯拒否を維持し、UIの理由と無効化を追加"
+    },
+    "09": {
+      "implementation": "修正済み",
+      "user_evaluation": "未評価"
+    }
+  },
+  "title_addendum": {
+    "status": "修正済み",
+    "katakana_removed": true,
+    "single_panel": true,
+    "dimmer": 0.12,
+    "user_evaluation": "未評価"
+  },
+  "space_latest_authorization": "再入力で再開、再開ボタンも保持、echo無視",
+  "deferred": {
+    "status_background": "洞窟を維持。町へそろえる案は保留",
+    "known_phase2": "初期装備追加・死亡全損と再調達・上限超過戦利品は今回未決定"
+  },
+  "unchanged": [
+    "BGM",
+    "保存方針",
+    "戦闘バランス",
+    "進行範囲",
+    "モデル設定"
+  ]
+}

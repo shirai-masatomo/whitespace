@@ -1,0 +1,92 @@
+{
+	"checks": {
+		"01": {
+			"logo_screens": [
+				{
+					"count": 1,
+					"screen": "preparation"
+				},
+				{
+					"count": 1,
+					"screen": "status"
+				},
+				{
+					"count": 1,
+					"screen": "equipment"
+				},
+				{
+					"count": 1,
+					"screen": "warehouse"
+				},
+				{
+					"count": 1,
+					"screen": "exploration"
+				},
+				{
+					"count": 1,
+					"screen": "battle"
+				}
+			],
+			"title_dimmer_already_resolved": true
+		},
+		"02": {
+			"full_name_in_details": true,
+			"icon_only": true,
+			"no_actor_overlap": true,
+			"slots": 11
+		},
+		"06": {
+			"all_state_frozen": true,
+			"button_resume": true,
+			"echo_ignored": true,
+			"freeze_seconds": 2.0,
+			"space_stop_resume": true
+		},
+		"09": {
+			"actual_state": true,
+			"sequence": [
+				0,
+				1,
+				1,
+				2
+			]
+		},
+		"title": {
+			"dimmer_alpha": 0.119999997317791,
+			"exit": false,
+			"katakana_removed": true,
+			"single_panel": true,
+			"start": false
+		}
+	},
+	"logo_screens": [
+		{
+			"count": 1,
+			"screen": "preparation"
+		},
+		{
+			"count": 1,
+			"screen": "status"
+		},
+		{
+			"count": 1,
+			"screen": "equipment"
+		},
+		{
+			"count": 1,
+			"screen": "warehouse"
+		},
+		{
+			"count": 1,
+			"screen": "exploration"
+		},
+		{
+			"count": 1,
+			"screen": "battle"
+		}
+	],
+	"mode": "after",
+	"no_save_store": true,
+	"rendered": true,
+	"run_id": "cca4d7f36fb04fa6a46d6f0769090c4e"
+}

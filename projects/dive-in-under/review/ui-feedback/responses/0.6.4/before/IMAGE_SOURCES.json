@@ -1,0 +1,64 @@
+{
+  "kind": "Actual published 0.6.3 PCK rendered by pinned Godot 4.7.2 engine",
+  "source_commit": "9089418d05c442195313ebb2cd2cc2be18747461",
+  "capture_harness_commit": "e4c41ccbd92b7cec95e67146cedbf8f001050e08",
+  "ci_run_id": 39244216616,
+  "process_success": true,
+  "overall_run_success": false,
+  "overall_failure": "After EXE terminated during graphics initialization before test hook",
+  "pck_sha256": "258A7BFDD0179F8F0D49B634EC5169F30B0DDF74DA578562137D8AFCFFB24751",
+  "files": [
+    {
+      "path": "01-title.png",
+      "sha256": "f219a7ee770aacba1eeb3fb0adbfe49b21dde0fbd9bc1d9ed1fb102b0f8c8856"
+    },
+    {
+      "path": "02-status-equipment.png",
+      "sha256": "7f0cb94a58f4173e2d10c27324b5f0c70b5f82d51485d536a6492b9633a820af"
+    },
+    {
+      "path": "04-status-abilities.png",
+      "sha256": "1947b9ac4eb588e779c8af9b79597f08f7ca72e0c06f654754a2de234b7682e9"
+    },
+    {
+      "path": "04-status-empty.png",
+      "sha256": "a3128655dc255252651404dde92f0a712e370cc57370c2acaac3e736f5079570"
+    },
+    {
+      "path": "05-exploration.png",
+      "sha256": "0d270c732ab2a4bca1936c4d37dcfd0aaa5a8f32f7cd27b50458fba1a6ce8b25"
+    },
+    {
+      "path": "05-preparation.png",
+      "sha256": "3817c1b3a027b812cb1094f7a2fd7a07d8dfaf72877642fc7d6b4604cf21df15"
+    },
+    {
+      "path": "05-warehouse.png",
+      "sha256": "b83f4da738bdff23d64a9fd7f393cbabd2480c411a3c019a83642ac8c3cf347c"
+    },
+    {
+      "path": "06-battle-paused.png",
+      "sha256": "0375e09c979e9489035990892a9d175da83eb2bb6865c067a4ea86bd52bce666"
+    },
+    {
+      "path": "06-battle-running.png",
+      "sha256": "0375e09c979e9489035990892a9d175da83eb2bb6865c067a4ea86bd52bce666"
+    },
+    {
+      "path": "07-next-departure.png",
+      "sha256": "a2b82a11006af4609e2b9a6554c9f39379081342d60762d9a6b89736b7c42fdb"
+    },
+    {
+      "path": "08-backpack-full.png",
+      "sha256": "2d4e6c174d4e070310cc2ebb7a8109150a7e6d7d26423b12abcb1e3e98fbc62d"
+    },
+    {
+      "path": "08-equipment.png",
+      "sha256": "60eab700ca76fcdb214eba810acb233bc0493509a222e6cfd29d14778d189e63"
+    },
+    {
+      "path": "09-before-departure.png",
+      "sha256": "cfa596d86a378c6806f09a76914636715bc88cc9ba37e2077751e0feb79fc982"
+    }
+  ]
+}

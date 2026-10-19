@@ -1,0 +1,24 @@
+{
+  "exe_sha256": "AB1824F85BFD8E0E4128182C000C4003A3E042245B2967848D089B2A04B22424",
+  "mode": "before",
+  "pck_sha256": "258A7BFDD0179F8F0D49B634EC5169F30B0DDF74DA578562137D8AFCFFB24751",
+  "renderer": "Pinned Godot engine with exact published 0.6.3 PCK",
+  "save_before_sha256": "5D113A1E4F6153E6256A8E3DBE2C2C89F5C6F4F00FB451116CE7DED081E1A707",
+  "normal_desktop_fallback": false,
+  "normal_user_data_accessed": false,
+  "run_id": "4008a607b363437dac1ecb6ad0ba6f7e",
+  "result": {
+    "PID": 5168,
+    "ThreadID": 3848,
+    "ExitCode": 0,
+    "OwnedWindowCount": 1,
+    "Station": "Service-0x0-1124da$",
+    "Desktop": "Render_a3439d9ccb924bbeb12fd00b826ac9e0",
+    "ObservedDesktop": "Render_a3439d9ccb924bbeb12fd00b826ac9e0",
+    "NonInteractive": true,
+    "DesktopMatched": true,
+    "TimedOut": false
+  },
+  "save_after_sha256": "5D113A1E4F6153E6256A8E3DBE2C2C89F5C6F4F00FB451116CE7DED081E1A707",
+  "elapsed_ms": 14205
+}

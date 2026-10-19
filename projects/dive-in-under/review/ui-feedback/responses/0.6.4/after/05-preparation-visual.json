@@ -1,0 +1,27 @@
+{
+	"controls": [
+		{
+			"rect": "[P: (1096.0, 27.0), S: (140.0, 32.0)]",
+			"text": "G  37"
+		},
+		{
+			"rect": "[P: (928.0, 190.0), S: (246.0, 27.0)]",
+			"text": "HP  39 / 39"
+		},
+		{
+			"rect": "[P: (928.0, 242.0), S: (246.0, 27.0)]",
+			"text": "SP  3 / 3"
+		}
+	],
+	"run_id": "cca4d7f36fb04fa6a46d6f0769090c4e",
+	"screenshot": "05-preparation.png",
+	"stages": [
+		{
+			"kind": "session-ui",
+			"route": [],
+			"screen": "hub",
+			"session_only": true,
+			"stage_rect": ""
+		}
+	]
+}
