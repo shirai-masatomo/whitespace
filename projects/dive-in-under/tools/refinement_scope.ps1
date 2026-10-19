@@ -1,7 +1,7 @@
 param([string]$Base='1a8da5b')
 $ErrorActionPreference='Stop'
 $project=Split-Path $PSScriptRoot -Parent
-$changed=@(git -C $project diff --name-only $Base HEAD -- core data)
+$changed=@(git -C $project diff --name-only --relative $Base HEAD -- core data)
 if ($LASTEXITCODE -ne 0 -or $changed.Count -ne 1 -or $changed[0] -ne 'core/expedition.gd') {throw 'Only reviewed initial-trip validation may change in core/data'}
 $old=(git -C $project show "${Base}:projects/dive-in-under/core/expedition.gd") -join "`n"
 $expected=$old.Replace('or s.trips<1: return "Invalid progression"','or (s.trips==0 and (s.phase!="town" or s.schema_version<5 or s.highest_floor!=0)): return "Invalid progression"')
