@@ -125,7 +125,18 @@ static func run(game: Control) -> void:
 	await key(game,KEY_E)
 	if not check(game,game.campaign.floor==4 and game.campaign.phase=="battle" and game.campaign.battle.hero.def==E.hero(game.campaign,game.cfg).def,"Event result E reaches next battle with changed stats"): return
 	game.auto_play=false; game.play_timer.stop(); await wait(game,.5)
-	var normal: Dictionary={"from_fresh_start":true,"first_trip_to_floor":4,"received_all_one_input":true,"event_result_one_input":true,"field_double_click":true,"new_battle_stats":true}
+	await key(game,KEY_SPACE)
+	for i in 350:
+		if game.campaign.phase=="reward" and not game.presenting: break
+		await game.get_tree().process_frame
+	if not check(game,game.campaign.phase=="reward" and game.campaign.pending_rewards.is_empty(),"Normal 4F battle resolves before direct return"): return
+	await command(game,"return_ready")
+	if not check(game,game.campaign.phase=="result" and game.campaign.result.kind=="return" and not game.route_map_open,"Direct return keeps normal loop reachable without exploration interstitial"): return
+	await command(game,"town"); await key(game,KEY_E)
+	if not check(game,game.campaign.trips==2 and game.campaign.floor==1 and game.campaign.phase=="battle","Normal prepare/return/redepart loop remains reachable"): return
+	game.auto_play=false; game.play_timer.stop(); await shot(game,"19-normal-redeparture")
+	var normal: Dictionary={"from_fresh_start":true,"first_trip_to_floor":4,"received_all_one_input":true,"event_result_one_input":true,"field_double_click":true,"new_battle_stats":true,"direct_return_redepart":true}
+
 	# Separate 15-slot fixture; never installed into normal new-game state.
 	fixture(game)
 	var old: String=E.add_item(game.campaign,"I02"); game.campaign.inventory.erase(old); game.campaign.equipment.body=old; game.campaign.item_condition[old].current=37

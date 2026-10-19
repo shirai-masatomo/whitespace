@@ -339,6 +339,12 @@ static func act(previous: Dictionary, action: String, expected_revision: int, ar
 		"return":
 			if s.phase=="explore":
 				finish(s,"return","持ち帰った品を抱え、町への道を戻った。",cfg); changed=true
+		"return_ready":
+			if Journey.active(s) and s.phase in ["explore","reward","event_result"] and s.pending_rewards.is_empty():
+				if s.phase=="reward" and s.reward_return=="clear":
+					s.highest_floor=int(s.floor)+1; finish(s,"clear","%dFの門番を倒した。次の層域への到達を記録し、町へ帰還する。"%s.floor,cfg)
+				else: finish(s,"return","持ち帰った品を抱え、町への道を戻った。",cfg)
+				s.erase("round_presentation"); changed=true
 		"open_chest":
 			if Journey.active(s) and s.phase=="treasure": s.phase="reward"; changed=true
 		"claim_reward","exchange_reward":

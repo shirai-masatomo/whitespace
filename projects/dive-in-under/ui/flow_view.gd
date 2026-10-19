@@ -67,7 +67,7 @@ func build_left() -> void:
 	descend.tooltip_text="この出来事を確認してから進めます。" if s.phase!="battle" else "戦闘中は進めません。"
 	var gear:=nav(p,"所持品・装備［I］",Rect2(14,112,196,42),game.open_field_equipment,"field-equipment"); gear.disabled=not battle.is_empty(); gear.tooltip_text="戦闘中は装備を変更できません。" if gear.disabled else "比較・ダブルクリック・ドラッグで装備交換"
 	nav(p,"ステータス［C］",Rect2(14,164,196,42),game.open_status,"field-status")
-	var back:=action(p,"町へ帰還",Rect2(14,216,196,42),"return"); back.disabled=s.phase!="explore" or game.presenting; back.tooltip_text="未受領品や出来事を確認してから帰還できます。"
+	var back:=action(p,"突破して帰還" if s.phase=="reward" and s.reward_return=="clear" else "町へ帰還",Rect2(14,216,196,42),"return_ready"); back.disabled=s.phase not in ["explore","reward","event_result"] or not s.pending_rewards.is_empty() or not battle.is_empty(); back.tooltip_text="未受領品や出来事を確認してから帰還できます。"
 	var hero: Dictionary=battle.hero if not battle.is_empty() else E.hero(s,game.cfg)
 	var card:=UISkin.panel(self,Rect2(16,364,224,84),"")
 	var pick:=Button.new(); pick.flat=true; pick.size=Vector2(224,84); pick.mouse_default_cursor_shape=CURSOR_POINTING_HAND; card.add_child(pick); pick.pressed.connect(func():select_actor("hero")); pick.set_meta("actor_select","hero")
