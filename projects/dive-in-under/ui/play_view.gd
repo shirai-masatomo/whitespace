@@ -113,8 +113,8 @@ func build_exploration() -> void:
 			if game.auto_play: game.auto_play=false; game.play_timer.stop(); game.show_campaign()
 			else: game.resume_auto_battle(),"pause")
 		UISkin.quiet_button(pause,not game.auto_play)
-		UISkin.label(left,"動作中" if game.auto_play else "停止中",Rect2(18,369,185,22),16,UISkin.GOLD)
-		UISkin.label(left,"Space：自動戦闘停止／再開",Rect2(18,392,190,22),14,UISkin.MUTED)
+		UISkin.label(left,"自動戦闘：動作中" if game.auto_play else "自動戦闘：停止中",Rect2(18,369,185,22),16,UISkin.GOLD)
+		UISkin.label(left,"Space：停止／再開",Rect2(24,392,178,22),14,UISkin.MUTED)
 	elif s.phase=="event":
 		command(left,game.cfg.events[s.event].choice,Rect2(14,287,192,53),"event",{"choice":"accept"})
 		command(left,"見送る",Rect2(14,349,192,53),"event",{"choice":"skip"})
@@ -190,7 +190,7 @@ func build_equipment() -> void:
 		var name: String="装備なし" if uid=="" else game.cfg.items[game.campaign.items[uid]].name
 		var b:=nav(center,"",Rect2(x,y,254,64),func():game.equipment_focus=slot;game.show_campaign(),"slot-"+slot,game.equipment_focus==slot)
 		UISkin.quiet_button(b,game.equipment_focus==slot)
-		var ink: Color=UISkin.DARK if game.equipment_focus==slot else UISkin.INK
+		var ink: Color=UISkin.INK
 		UISkin.label(b,game.cfg.slots[slot],Rect2(54,10,185,20),13,ink); UISkin.label(b,name,Rect2(54,30,185,24),16,ink)
 		if uid!="": UISkin.picture(b,Items.texture(game.campaign.items[uid],slot),Rect2(8,12,40,40))
 	var details:=UISkin.panel(self,Rect2(894,92,370,532),"装備の詳細",true)
