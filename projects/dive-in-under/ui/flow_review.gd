@@ -97,6 +97,7 @@ static func run(game: Control) -> void:
 	if not check(game,Replay.hash_state(game.campaign)==frozen,"E held and echo do not receive/advance destination"): return
 	await key_event(game,KEY_E,false)
 	await shot(game,"06-rewards")
+	if not check(game,preload("res://ui/warehouse_catalog.gd").DESCRIPTIONS.I02 in preload("res://ui/status_review.gd").text_in(game.screen),"Pending item description remains available in right detail without receipt"): return
 	var receipt: Dictionary=game.campaign.duplicate(true)
 	var view:=shell(game); await click_at(game,view.route.get_global_rect().position+Vector2(70,65)); await wait(game,.12)
 	if not check(game,game.route_map_open,"Minimap opens detailed vertical map"): return

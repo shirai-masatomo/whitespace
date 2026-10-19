@@ -216,9 +216,13 @@ func refresh_details() -> void:
 	if item.slot!="" and selection.kind in ["inventory","pending"]:
 		var before: Dictionary=E.hero(game.campaign,game.cfg); var after: Dictionary=Gear.compared_hero(game,selection.kind,uid)
 		var compare: Array[String]=[]
-		for key in [["atk","攻撃"],["def","防御"],["spd","速"],["max_hp","HP"],["max_sp","SP"]]: compare.append("%s %+d"%[key[1],int(after[key[0]])-int(before[key[0]])])
-		lines.append("交換差："+" / ".join(compare))
-	label_at(detail_body,"\n".join(lines),Rect2(0,96,250,93),15,true)
+		for key in [["atk","攻撃"],["def","防御"],["spd","速"],["max_hp","HP"],["max_sp","SP"]]:
+			var delta: int=int(after[key[0]])-int(before[key[0]])
+			if delta!=0: compare.append("%s %+d"%[key[1],delta])
+		lines.append("交換差："+(" / ".join(compare) if not compare.is_empty() else "変化なし"))
+	var description: String=item.get("description",preload("res://ui/warehouse_catalog.gd").DESCRIPTIONS.get(template,""))
+	var scroll:=ScrollContainer.new(); scroll.position=Vector2(0,96); scroll.size=Vector2(250,93); scroll.horizontal_scroll_mode=ScrollContainer.SCROLL_MODE_DISABLED; scroll.theme=UISkin.scroll_theme(); detail_body.add_child(scroll)
+	var text:=Label.new(); text.language="ja"; text.text="\n".join(lines)+("\n"+description if description!="" else ""); text.autowrap_mode=TextServer.AUTOWRAP_WORD; text.size_flags_horizontal=Control.SIZE_EXPAND_FILL; text.add_theme_font_size_override("font_size",15); text.add_theme_color_override("font_color",UISkin.DARK); scroll.add_child(text)
 	if selection.kind=="pending" and game.campaign.phase=="reward":
 		var claim:=action(detail_body,"この品を受け取る",Rect2(0,194,250,34),"claim_reward",{"token":uid}); claim.disabled=game.campaign.inventory.size()>=15
 		if item.slot!="":
@@ -230,7 +234,7 @@ func refresh_details() -> void:
 	elif selection.kind=="inventory" and item.slot!="":
 		var equip:=nav(detail_body,"この装備へ交換",Rect2(0,237,250,34),func():activate_item("inventory",uid),"equip-selected"); equip.disabled=not battle.is_empty()
 	else:
-		label_at(detail_body,item.get("description",preload("res://ui/warehouse_catalog.gd").DESCRIPTIONS.get(template,"")),Rect2(0,194,250,82),16,true)
+		scroll.size.y=178
 func refresh_live() -> void:
 	battle=game.display_battle()
 	if battle.is_empty(): return
