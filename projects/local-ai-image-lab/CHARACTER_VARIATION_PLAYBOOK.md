@@ -23,7 +23,7 @@
 
 - [README](README.md)によれば、現時点の通常用モデルは **Animagine XL 4.0 Opt**。**SDXL Base重みは削除済み**（過去の比較画像は残存）。Animagine 3.1は比較用。
 - 既存の [09-animagine40-normal.json](workflows/09-animagine40-normal.json) は基本の **text-to-image**: CheckpointLoaderSimple → CLIPTextEncode ×2＋EmptyLatentImage → KSampler → VAEDecode → SaveImage。**参照画像読み込み・Inpainting・OpenPoseは含まない**。これを直接「ポーズ編集済みワークフロー」と呼ばない。
-- 同READMEでは、Animagine 4.0 Optに切替後の **参照一致・ポーズ制御・Inpaintingは未再検証**と明記。ローカルの別フォルダー \`tools/local-ai-foundation/\` にワークフローがあるという会話上の報告はあるが、このGitHub比較フォルダー上から該当JSONの実装、モデル互換性、実行結果は確認していない。
+- 同READMEでは、Animagine 4.0 Optに切替後の **参照一致・ポーズ制御・Inpaintingは未再検証**と明記。ローカルの別フォルダー `tools/local-ai-foundation/` にワークフローがあるという会話上の報告はあるが、このGitHub比較フォルダー上から該当JSONの実装、モデル互換性、実行結果は確認していない。
 - IP-Adapterの存在、SDXL対応重みとCLIP Visionの組合せ、ControlNetのSDXL互換モデル、必要なプリプロセッサ、各ノードのロード可否を**先にローカルで検査する**。IPAdapter Plusの開発元は2025年から「maintenance only」と説明しており、バージョン固定が重要。
 - 個人のローカルディスクをGitHubから直接確認することはできない。**実機未検証の欄を検証済みに書き換えない**。
 
@@ -31,7 +31,7 @@
 
 一例（公開リポジトリには画像を無断で上げない）:
 
-\`\`\`text
+```text
 local-output/character_A/
   00-reference/master.png              # オリジナル基準絵（変更しない）
   00-reference/face_crop.png           # 顔特徴の補助参照
@@ -41,9 +41,9 @@ local-output/character_A/
   03-revisions/                       # 修正履歴
   04-approved/                        # 確定版
   manifest.csv                         # メタデータ
-\`\`\`
+```
 
-\`identity.md\` の例（今回の金髪の**成人女性**を例にするが、あくまで基準画像を最優先）:
+`identity.md` の例（今回の金髪の**成人女性**を例にするが、あくまで基準画像を最優先）:
 
 - **固定**: 28歳の成人女性、青い瞳、前髪形状、長い金髪、顔の輪郭、体型・頭身の印象、線画・塗りの質感。
 - **シーン単位で変更可**: 服、笑顔・驚き等の表情、手の位置、体の向き、背景、光源。
@@ -55,10 +55,10 @@ local-output/character_A/
 
 ## 3. 経路A：ChatGPT画像編集を第一候補にする
 
-1. \`master.png\` を添付し、変更を一文で依頼。例: **「同じ成人女性の顔立ち、金髪、青い瞳、服装と図書館を保ち、左手で本を持ち、右手だけ小さく手を振る。全身が画面内に収まる日本の2Dアニメイラスト。」**
+1. `master.png` を添付し、変更を一文で依頼。例: **「同じ成人女性の顔立ち、金髪、青い瞳、服装と図書館を保ち、左手で本を持ち、右手だけ小さく手を振る。全身が画面内に収まる日本の2Dアニメイラスト。」**
 2. 出力を原本の横に並べて目視評価（顔、前髪、目の色、体型、左右の手、本、画風）。
 3. 変更が想定より大きい場合は「右手以外は変更しない」のように**変更範囲を狭めて再編集**。大きなポーズの時は正面・斜め・背面など構図の参考画像を追加する。
-4. 採用できたら原本を上書きせず \`02-candidates/chat_edit_001.png\` に保存し、採用版を \`04-approved/\` にコピー。
+4. 採用できたら原本を上書きせず `02-candidates/chat_edit_001.png` に保存し、採用版を `04-approved/` にコピー。
 5. 使用した参考画像、依頼文、変更理由、採用結果を記録。ChatGPTの編集は固定シードによる完全再現を保証しない。
 
 **停止条件**: 十分よい画像が得られたなら、ComfyUIに通す必要はない。背景や髪の線が崩れた時だけ局所修正を検討。
@@ -67,32 +67,32 @@ local-output/character_A/
 
 ### 4-1. 事前確認
 
-1. Windowsでローカル基盤の \`Start-ComfyUI.cmd\` を起動し、画面が開けるか確認。実際の導入ディレクトリはローカルの \`tools/local-ai-foundation/\` のREADMEを参照。
+1. Windowsでローカル基盤の `Start-ComfyUI.cmd` を起動し、画面が開けるか確認。実際の導入ディレクトリはローカルの `tools/local-ai-foundation/` のREADMEを参照。
 2. このリポジトリの [09-animagine40-normal.json](workflows/09-animagine40-normal.json) をComfyUIにドラッグして**土台のモデル選択、CLIP、VAE、KSamplerを確認**。09は直接画像編集できないのでコピーを作る。
-3. \`CheckpointLoaderSimple\` で \`animagine-xl-4.0-opt.safetensors\` が選択できること、生成に必要なメモリがあることを確認。既存の実行設定を記録してから変更する。
+3. `CheckpointLoaderSimple` で `animagine-xl-4.0-opt.safetensors` が選択できること、生成に必要なメモリがあることを確認。既存の実行設定を記録してから変更する。
 
 ### 4-2. img2imgの接続（小〜中程度の変更）
 
 ノードの構成:
 
-\`\`\`text
+```text
 LoadImage(master.png) --> VAEEncode [pixels] ---> KSampler [latent_image]
 CheckpointLoaderSimple --[vae]--> VAEEncode
 CheckpointLoaderSimple --[model]--> KSampler
 CheckpointLoaderSimple --[clip]--> CLIPTextEncode(positive/negative) --> KSampler
 KSampler --> VAEDecode(vae) --> SaveImage
-\`\`\`
+```
 
-1. \`LoadImage\` で基準画像を選択し、\`EmptyLatentImage\` を \`VAEEncode\` に置き換える。
+1. `LoadImage` で基準画像を選択し、`EmptyLatentImage` を `VAEEncode` に置き換える。
 2. 肖像を維持する要素と変更したい要素をpositive/negativeに記述する。**ここではまだポーズを厳密には固定できない**。
-3. \`KSampler\` のdenoiseをまず **0.25 / 0.40 / 0.55** の3条件で試す（**初期探索値であり、成功保証値ではない**）。通常は小さいほど構造を残しやすいが、変更も弱くなる。
+3. `KSampler` のdenoiseをまず **0.25 / 0.40 / 0.55** の3条件で試す（**初期探索値であり、成功保証値ではない**）。通常は小さいほど構造を残しやすいが、変更も弱くなる。
 4. seed、steps、CFG、samplerはひとまず固定。denoiseだけ変えて差を比べる。うまくいかなければ一度に複数パラメータを変更しない。
 5. 元の全身画像と同じ縦横比で処理し、顔、袖、手、本の見え方を比較する。
 
 ### 4-3. 衣装など「指定範囲だけ」変えるならInpainting
 
-1. \`LoadImage\` のマスク編集機能などで**服だけ白く、残す顔・髪・背景を黒く**指定。髪と服の境界に注意。
-2. \`VAEEncodeForInpaint\`（導入バージョンによって名称・構成を確認）へ元画像・マスク・VAEを与え、出力latentを\`KSampler\`に接続する。
+1. `LoadImage` のマスク編集機能などで**服だけ白く、残す顔・髪・背景を黒く**指定。髪と服の境界に注意。
+2. `VAEEncodeForInpaint`（導入バージョンによって名称・構成を確認）へ元画像・マスク・VAEを与え、出力latentを`KSampler`に接続する。
 3. positiveに変更衣装を指定。腕・手・体の位置がそのままでよい場合はマスクを小さく保つ。
 4. **採用前にマスク外ピクセルがどれだけ変わったか比較**。必要なら元画像の非マスク部を合成で戻す。境界の継ぎ目を再修正。
 5. 局所修正に不向きな大きなポーズ変更を、無理に小マスク1枚だけで実現しようとしない。
@@ -104,10 +104,10 @@ KSampler --> VAEDecode(vae) --> SaveImage
 **重要**: ここからは参考人物・ポーズ・画風を別々に制御する。OpenPoseだけでは顔を固定できず、IP-Adapterだけでは正確な手足の座標を固定しにくい。
 
 1. まず**目標の画面比率とカメラ位置**を決める（正面全身・全身の占有割合・頭とつま先の余白）。
-2. 権利のあるポーズ参考画像を作り、OpenPose用の骨格画像にする。自動プリプロセッサが未導入なら、外部で作成した骨格ガイドを\`LoadImage\`で読み込める。骨格を確認し、腕と脚が混線していないことを確認。
-3. ローカルに**SDXLと互換性がありAnimagineで動くことを確認した**ControlNetモデルを用意。\`ControlNetLoader\` → \`ControlNetApplyAdvanced\` を追加し、ポーズ画像とpositive/negative conditioningを接続する。
-4. 人物参照は別系統: \`LoadImage(master/face_crop)\` →（必要なら\`PrepImageForClipVision\`）→ \`IPAdapterAdvanced\`。互換性のある**SDXL用IP-Adapter重み・CLIP Vision**を指定し、モデルをKSamplerへ渡す。**SD 1.5用の重みをSDXLへ流用しない**。
-5. \`CLIPTextEncode\`では成人女性の識別特徴・新しい衣装・背景・光源を指示。ポーズの位置はControlNet、顔や画風の参考はIP-Adapter、全体の生成はAnimagineという役割に分ける。
+2. 権利のあるポーズ参考画像を作り、OpenPose用の骨格画像にする。自動プリプロセッサが未導入なら、外部で作成した骨格ガイドを`LoadImage`で読み込める。骨格を確認し、腕と脚が混線していないことを確認。
+3. ローカルに**SDXLと互換性がありAnimagineで動くことを確認した**ControlNetモデルを用意。`ControlNetLoader` → `ControlNetApplyAdvanced` を追加し、ポーズ画像とpositive/negative conditioningを接続する。
+4. 人物参照は別系統: `LoadImage(master/face_crop)` →（必要なら`PrepImageForClipVision`）→ `IPAdapterAdvanced`。互換性のある**SDXL用IP-Adapter重み・CLIP Vision**を指定し、モデルをKSamplerへ渡す。**SD 1.5用の重みをSDXLへ流用しない**。
+5. `CLIPTextEncode`では成人女性の識別特徴・新しい衣装・背景・光源を指示。ポーズの位置はControlNet、顔や画風の参考はIP-Adapter、全体の生成はAnimagineという役割に分ける。
 6. seedを固定したまま、(A)ポーズ制御のみ (B)人物参照のみ (C)両方、を小枚数比較する。weightは採用した各ノード版の仕様に従い、**最初は1つずつ変更**。
 7. 顔が崩れるならIP-Adapterの参照範囲・強度や顔参照画像を調整。ポーズが崩れるなら骨格画像・ControlNetの強度と適用区間を調整。**どの組み合わせも同一人物保証ではない**。
 8. 服・背景の照明や影を最終構図に合わせ、必要なら顔と手の部分だけInpainting。完全一致が多数必要で参照方式が限界なら、**権利のある複数画像を使うキャラクター専用LoRA**を別工程で検討する（まだ学習済みとは記載しない）。
@@ -118,7 +118,7 @@ KSampler --> VAEDecode(vae) --> SaveImage
 
 キャラクターは架空の成人女性。露骨な描写を必要としない一般向けの衣装・シーンを例にする。
 
-- **A. 完成案を先に見る**: ChatGPTに\`master.png\`を添付し「同じ顔・青い瞳・金髪・体格と日本のアニメ塗りを維持。シンプルなワンピース水着、晴天の海辺、笑顔で両腕を広げてはしゃぎ、頭から足先まで画面内」と指示。採用できたらここで終了でもよい。
+- **A. 完成案を先に見る**: ChatGPTに`master.png`を添付し「同じ顔・青い瞳・金髪・体格と日本のアニメ塗りを維持。シンプルなワンピース水着、晴天の海辺、笑顔で両腕を広げてはしゃぎ、頭から足先まで画面内」と指示。採用できたらここで終了でもよい。
 - **B. 顔だけずれた**: 完成案をComfyUIに入力し、顔・前髪のみInpaintingまたは参照制御。表情に応じて顔の輪郭が不自然になっていないか確認する。
 - **C. ポーズだけずれた**: 目標の骨格ガイドを用意し、経路CでControlNetのポーズを強くする。必要なら基準画像と生成画像を別々に保存して参照。
 - **D. 衣装だけずれた**: 服の形をInpainting。顔や背景はできるだけ触らない。
@@ -129,11 +129,11 @@ KSampler --> VAEDecode(vae) --> SaveImage
 
 Codexには、創作判断よりも**調査・準備・実行・記録**を担当させる。
 
-1. ローカルの\`tools/local-ai-foundation/\`にある既存ワークフローとComfyUIのノード一覧を列挙し、モデル名・バージョン・重みの対応・ライセンスを報告。
-2. \`09\`は触らずコピーを作って、**img2img / Inpainting / OpenPose / IP-Adapter併用**の各UIワークフローとAPI版を保存。ノード不足なら不足リストと導入先、費用を示す。
+1. ローカルの`tools/local-ai-foundation/`にある既存ワークフローとComfyUIのノード一覧を列挙し、モデル名・バージョン・重みの対応・ライセンスを報告。
+2. `09`は触らずコピーを作って、**img2img / Inpainting / OpenPose / IP-Adapter併用**の各UIワークフローとAPI版を保存。ノード不足なら不足リストと導入先、費用を示す。
 3. 実行前に設定と既存画像をバックアップ。モデルを勝手に大量ダウンロードしない。
 4. **同じ基準画像・同じ狙い**について、ChatGPT画像編集の結果（手動保存）とComfyUI出力を比較。顔一致・髪・衣装・手指・全身構図・背景・画風を評価。
-5. 各生成ごとに次を\`manifest.csv\`へ記録: \`case_id,source_sha256,tool,model,model_hash,workflow,seed,steps,cfg,sampler,denoise,pose_asset,reference_weight,control_weight,output_sha256,result,notes\`。外部サービスで再現できないパラメータは\`N/A\`と記録。
+5. 各生成ごとに次を`manifest.csv`へ記録: `case_id,source_sha256,tool,model,model_hash,workflow,seed,steps,cfg,sampler,denoise,pose_asset,reference_weight,control_weight,output_sha256,result,notes`。外部サービスで再現できないパラメータは`N/A`と記録。
 6. **未実行／失敗／成功を分離**。失敗画像も消さず、原因仮説を記録。各テストの合否と証拠PNGの相対パスを報告。
 7. 完成画像を勝手にゲームへ統合しない。既存のホイッスル牧場・Dive In Underを変更しない。
 
