@@ -13,8 +13,8 @@ static func fixture(game: Control) -> void:
 	game.auto_play=false; game.play_timer.stop()
 	game.campaign=E.fresh(game.cfg,123); game.campaign.phase="town"
 	game.campaign.trips=2; game.campaign.exp=90; game.campaign.gold=37
-	var sword: String=E.add_item(game.campaign,"A01")
-	game.campaign=E.act(game.campaign,"equip",int(game.campaign.revision),{"uid":sword},game.data,game.cfg)
+	game.campaign.hp=E.hero(game.campaign,game.cfg).max_hp; game.campaign.sp=E.hero(game.campaign,game.cfg).max_sp
+	game.session_departed=true
 	for id in ["I02","I03","I04"]: E.add_item(game.campaign,id)
 	for id in ["A02","I05","I06","I07","I08","I09","I10","I11"]:
 		var uid: String=E.add_item(game.campaign,id); game.campaign.inventory.erase(uid); game.campaign.warehouse.append(uid)
@@ -40,6 +40,8 @@ static func run(game: Control, before: bool=false) -> void:
 		proof.checks.title={"single_panel":true,"katakana_removed":true,"dimmer_alpha":game.play_view.get_node("TitleBackgroundDimmer").color.a,"start":false,"exit":false}
 	await UI.click(game,"start"); game.auto_play=false
 	if not UI.check(game,game.campaign.phase=="town","Start opens preparation"): return
+	await UI.click(game,"status"); await UI.shot(game,"09-before-departure")
+	await game.click_control(game.status_view.back_button); await wait(game,0.3)
 	if not before:
 		if not UI.check(game,game.campaign.trips==0 and E.normal_trips(game.campaign)==0 and E.validate(game.campaign,game.data,game.cfg)=="","New unstarted session really records zero trips"): return
 		game.perform("depart",{},int(game.campaign.revision)); game.auto_play=false; game.play_timer.stop()
@@ -83,6 +85,14 @@ static func run(game: Control, before: bool=false) -> void:
 	game.campaign.phase="explore"; game.campaign.floor=1; game.campaign.highest_floor=1; game.show_campaign(); await UI.shot(game,"05-exploration")
 	if not before: proof.logo_screens.append({"screen":"exploration","count":count_logos(game.screen)})
 	battle_fixture(game); await UI.shot(game,"06-battle-paused")
+	game.auto_play=true; game.show_campaign(); game.play_timer.stop(); await UI.shot(game,"06-battle-running")
+	battle_fixture(game)
+	# Same death/return/departure fixture in both versions exposes the old carried map.
+	game.route_map_open=true; game.show_campaign()
+	E.finish(game.campaign,"death","地図持越しの固定確認",game.cfg); game.show_campaign()
+	game.perform("town",{},int(game.campaign.revision)); game.perform("depart",{},int(game.campaign.revision))
+	game.auto_play=false; game.play_timer.stop(); await UI.shot(game,"07-next-departure")
+	fixture(game); battle_fixture(game)
 	if not before:
 		proof.logo_screens.append({"screen":"battle","count":count_logos(game.screen)})
 		for record in proof.logo_screens:
@@ -139,6 +149,11 @@ static func run(game: Control, before: bool=false) -> void:
 		proof.checks["03"]={"shared_art":"adventurer-cloak-navy.png","original_blue_preserved":true}
 		proof.checks["04"]={"grouped_left":true,"brief_empty":true,"real_details":true,"ability_columns":true}
 		proof.checks["05"]={"warehouse_columns":3,"quiet_internal_rows":true,"shared_hero_card":true}
+	if before:
+		fixture(game); var old_cloak: String=game.campaign.equipment.head
+		game.campaign.item_condition[old_cloak].current=37
+		while game.campaign.inventory.size()<15: E.add_item(game.campaign,"I10")
+		game.open_town_page("equipment"); game.equipment_focus="head"; game.show_campaign(); await UI.shot(game,"08-backpack-full")
 	# Real title Exit button, external harness also confirms code zero.
 	game.show_title(); await wait(game,0.25)
 	var quit: Button=UI.find_nav(game.screen,"quit")
