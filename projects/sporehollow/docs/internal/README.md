@@ -7,7 +7,8 @@
 - 製作・生活： [CRAFTING_NEEDS_DESIGN.md](CRAFTING_NEEDS_DESIGN.md)
 - 建築・物流： [BUILDINGS.md](BUILDINGS.md)、[WORK_SYSTEMS.md](WORK_SYSTEMS.md)
 - アート・開発： [ART_SPEC.md](ART_SPEC.md)、[DEVELOPMENT.md](DEVELOPMENT.md)
-- 旧レビュー・タスクなど： GAME_SPEC.md / ROADMAP.md / TASKS.md / PLAYTEST.md
+- **現行の6工程ロードマップ**： [ROADMAP.md](ROADMAP.md)（順番とゲート）、[TASKS.md](TASKS.md)（工程1〜6のCodex向け全文指示）。実装・実行済みとは限らない。
+- 旧レビューと旧版仕様： GAME_SPEC.md / PLAYTEST.md。過去の記述を現行SPECと混同しない。
 - 大きな一覧： [動物](../catalog/ANIMALS.md)、[敵](../catalog/ENEMIES.md)、[品目](../catalog/ITEMS.md)
 - 版・検証原本： [review/current](../../review/current/README.md)
 
