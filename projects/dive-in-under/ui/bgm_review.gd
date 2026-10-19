@@ -62,13 +62,15 @@ static func run(game: Control) -> void:
 	player.seek(stream.get_length()-1.5)
 	await wait(game,0.2)
 	capture.clear_buffer()
+	var loop_identity: int=player.get_stream_playback().get_instance_id() # Godot seek intentionally replaces playback.
 	var near_end: float=player.get_playback_position()
 	await wait(game,2.8)
 	var after_wrap: float=player.get_playback_position()
 	var pcm: PackedVector2Array=capture.get_buffer(capture.get_frames_available())
 	var info:=samples_info(pcm)
 	save_wav(game,pcm,"native-loop-boundary.wav")
-	if not UI.check(game,near_end>70.0 and after_wrap>0.1 and after_wrap<3.0 and player.playing and player.get_stream_playback().get_instance_id()==identity,"Native OGG wraps without restarting player"): return
+	UI.write(game,{"near_end":near_end,"after_wrap":after_wrap,"before_loop_playback_id":loop_identity,"after_loop_playback_id":player.get_stream_playback().get_instance_id(),"pcm":info},"loop-diagnostic.json")
+	if not UI.check(game,near_end>70.0 and after_wrap>0.1 and after_wrap<3.0 and player.playing and player.get_stream_playback().get_instance_id()==loop_identity,"Native OGG wraps without restarting player"): return
 	if not UI.check(game,info.frames>int(AudioServer.get_mix_rate()*2.5) and info.rms>0.001 and info.peak<1.0 and capture.get_discarded_frames()==0,"Exported game mixes audible unclipped PCM across loop"): return
 	# A conservative technical check; perceived musical naturalness remains a listening judgment.
 	if not UI.check(game,info.longest_near_silence_seconds<0.2 and info.max_sample_delta<0.12,"No measured long dropout or abrupt full-scale click in captured loop"): return
