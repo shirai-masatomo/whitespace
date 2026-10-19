@@ -6,6 +6,8 @@
 
 **別系統の画風も見る:** [Web上の公式参考画像（Animagine / Illustrious / Pony、NoobAIはリンク）](WEB_REFERENCES.md)。モデルを追加取得せずに閲覧できる外部作例で、このPCの生成結果とは区別する。
 
+**現在のPC構成:** 通常用は **Animagine XL 4.0 Opt**。導入済みの無料公開版を使用し、SDXL Baseの重みはユーザーの希望で削除した。下のSDXL画像は過去の比較記録として残している。通常生成は [`09-animagine40-normal.json`](workflows/09-animagine40-normal.json) をComfyUIに読み込む。SDXL Base削除後の一般向け生成に成功。参照一致・ポーズ・InpaintingはAnimagineへの切替後未再検証。
+
 ## 画像を比較する
 
 金髪・青い瞳・28歳の成人女性・私服・図書館という共通の文章指示。上段はシード419274、下段は419275。画像をクリックすると原寸で確認できる。

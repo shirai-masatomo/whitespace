@@ -1,6 +1,6 @@
 {
   "checked_at": "2026-10-19",
-  "note": "Model weights are not included. These are pinned official download references.",
+  "note": "Pinned official sources for historical comparisons. Installed status updated 2026-10-19; SDXL Base weight removed at user request.",
   "models": [
     {
       "id": "sdxl",
@@ -9,7 +9,9 @@
       "path": "models/checkpoints/sd_xl_base_1.0.safetensors",
       "bytes": 6938078334,
       "sha256": "31e35c80fc4829d14f90153f4c74cd59c90b779f6afe05a74cd6120b893f7e5b",
-      "license": "CreativeML Open RAIL++-M"
+      "license": "CreativeML Open RAIL++-M",
+      "installed": false,
+      "role": "historical-only"
     },
     {
       "id": "animagine31",
@@ -20,7 +22,9 @@
       "sha256": "e3c47aedb06418c6c331443cd89f2b3b3b34b7ed2102a3d4c4408a8d35aad6b0",
       "license": "CreativeML Open RAIL++-M; see fixed official model card and underlying SDXL terms",
       "enabled": true,
-      "note": "2026-10-19 local non-explicit style comparison; adult content capability not tested."
+      "note": "2026-10-19 local non-explicit style comparison; adult content capability not tested.",
+      "installed": true,
+      "role": "comparison"
     },
     {
       "id": "animagine40",
@@ -31,7 +35,9 @@
       "sha256": "6327eca98bfb6538dd7a4edce22484a1bbc57a8cff6b11d075d40da1afb847ac",
       "license": "CreativeML Open RAIL++-M; see fixed official model card and underlying SDXL terms",
       "enabled": true,
-      "note": "2026-10-19 local non-explicit style comparison; adult content capability not tested."
+      "note": "2026-10-19 local non-explicit style comparison; adult content capability not tested.",
+      "installed": true,
+      "role": "primary"
     }
   ]
 }
