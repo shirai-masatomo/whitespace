@@ -1,0 +1,167 @@
+{
+  "date": "2026-10-20",
+  "method": "Practical workflow comparison, not a blinded model benchmark",
+  "source": {
+    "original": "assets/image_a.png",
+    "local_working_size": [
+      832,
+      1216
+    ]
+  },
+  "scope": "One character, 5 built-in edits; 3 local cases and 2 targeted retries. No statistical superiority claim.",
+  "local": {
+    "expression": {
+      "image": "assets/benchmark/comfy-expression.png",
+      "workflow": "workflows/30-benchmark-expression.json",
+      "api_workflow": "workflows/30-benchmark-expression.api.json",
+      "elapsed_seconds": 8.239,
+      "sampled_gpu_peak_mib": 8696,
+      "seed": 54001,
+      "denoise": 0.5,
+      "sha256": "be2b0f02025271de7e53fe1421f891dc5f8ba76152007c4f2af7b47f35873164",
+      "preservation_check": {
+        "mask_zero_pixels": 1009368,
+        "changed_pixels_outside_mask": 0,
+        "note": "Checks original working-image pixels only; not an image-quality or identity score."
+      },
+      "input_mask": "assets/benchmark/workshop_bench_expression_full.png"
+    },
+    "pose": {
+      "image": "assets/benchmark/comfy-pose.png",
+      "workflow": "workflows/31-benchmark-pose.json",
+      "api_workflow": "workflows/31-benchmark-pose.api.json",
+      "elapsed_seconds": 10.292,
+      "sampled_gpu_peak_mib": 9492,
+      "seed": 54002,
+      "denoise": 0.8,
+      "sha256": "5314643e1d5d61748a98cb2f95d5c8df53f875e254033f342c1f9f705b7c14c0",
+      "preservation_check": {
+        "mask_zero_pixels": 982230,
+        "changed_pixels_outside_mask": 0,
+        "note": "Checks original working-image pixels only; not an image-quality or identity score."
+      },
+      "input_mask": "assets/benchmark/workshop_bench_pose_mask.png"
+    },
+    "clothing": {
+      "image": "assets/benchmark/comfy-clothing.png",
+      "workflow": "workflows/32-benchmark-clothing.json",
+      "api_workflow": "workflows/32-benchmark-clothing.api.json",
+      "elapsed_seconds": 10.303,
+      "sampled_gpu_peak_mib": 8457,
+      "seed": 54003,
+      "denoise": 0.8,
+      "sha256": "2e8f359ea5ebf8d9c0978b57e550a516b61e8bc07472662452ce6156bc6a83f5",
+      "preservation_check": {
+        "mask_zero_pixels": 806177,
+        "changed_pixels_outside_mask": 0,
+        "note": "Checks original working-image pixels only; not an image-quality or identity score."
+      },
+      "input_mask": "assets/benchmark/workshop_bench_clothing_mask.png"
+    },
+    "clothing-retry": {
+      "image": "assets/benchmark/comfy-clothing-retry.png",
+      "workflow": "workflows/33-benchmark-clothing-retry.json",
+      "api_workflow": "workflows/33-benchmark-clothing-retry.api.json",
+      "elapsed_seconds": 10.299,
+      "sampled_gpu_peak_mib": 9135,
+      "seed": 54003,
+      "denoise": 1.0,
+      "sha256": "58d1c7a4c9c5aa0042b04141e2ba25ce38019557405de9ed3a0060370ada4a28",
+      "preservation_check": {
+        "mask_zero_pixels": 765894,
+        "changed_pixels_outside_mask": 0,
+        "note": "Checks original working-image pixels only; not an image-quality or identity score."
+      },
+      "input_mask": "assets/benchmark/workshop_bench_clothing_mask_v2.png"
+    },
+    "pose-retry": {
+      "image": "assets/benchmark/comfy-pose-retry.png",
+      "workflow": "workflows/34-benchmark-pose-retry.json",
+      "api_workflow": "workflows/34-benchmark-pose-retry.api.json",
+      "elapsed_seconds": 14.405,
+      "sampled_gpu_peak_mib": 10979,
+      "seed": 54002,
+      "denoise": 1.0,
+      "sha256": "777874773683d00200755503fdd4bec7ca3824e226b52df2607a2345485c9756",
+      "preservation_check": {
+        "mask_zero_pixels": 982230,
+        "changed_pixels_outside_mask": 0,
+        "note": "Checks original working-image pixels only; not an image-quality or identity score."
+      },
+      "input_mask": "assets/benchmark/workshop_bench_pose_mask.png"
+    }
+  },
+  "builtin": {
+    "expression": {
+      "image": "assets/benchmark/builtin-expression.png",
+      "size": [
+        1037,
+        1517
+      ],
+      "sha256": "c269d6215631f58504456252420638b8087e4a39acf71d48c70741089f9337e4",
+      "prompt": "records/builtin-prompts.json#expression",
+      "seed": null,
+      "exact_model_version": "Not exposed by built-in tool",
+      "references": [
+        "assets/image_a.png"
+      ]
+    },
+    "pose": {
+      "image": "assets/benchmark/builtin-pose.png",
+      "size": [
+        1037,
+        1516
+      ],
+      "sha256": "f5e91925196c0857907c345fa3ba96e41b9002000f1b90ff38f3a2e8a6af80bb",
+      "prompt": "records/builtin-prompts.json#pose",
+      "seed": null,
+      "exact_model_version": "Not exposed by built-in tool",
+      "references": [
+        "assets/image_a.png"
+      ]
+    },
+    "clothing": {
+      "image": "assets/benchmark/builtin-clothing.png",
+      "size": [
+        1037,
+        1516
+      ],
+      "sha256": "196d7bf6ed62f54114598177308c7a38b6359b1f47664d711799020320e9a90c",
+      "prompt": "records/builtin-prompts.json#clothing",
+      "seed": null,
+      "exact_model_version": "Not exposed by built-in tool",
+      "references": [
+        "assets/image_a.png"
+      ]
+    },
+    "seated": {
+      "image": "assets/benchmark/builtin-seated.png",
+      "size": [
+        1037,
+        1516
+      ],
+      "sha256": "48928a0f4bcfe396fb60f08b71d36ef5d231cd1aed8fb77887970d35f59a9ad4",
+      "prompt": "records/builtin-prompts.json#seated",
+      "seed": null,
+      "exact_model_version": "Not exposed by built-in tool",
+      "references": [
+        "assets/image_a.png"
+      ]
+    },
+    "beach": {
+      "image": "assets/benchmark/builtin-beach.png",
+      "size": [
+        1037,
+        1517
+      ],
+      "sha256": "b7f7f7b663eb88e8ac2f6c5366d15a3f868c55ce3af183dc6fa3c096adccf564",
+      "prompt": "records/builtin-prompts.json#beach",
+      "seed": null,
+      "exact_model_version": "Not exposed by built-in tool",
+      "references": [
+        "assets/image_a.png",
+        "assets/benchmark/builtin-clothing.png"
+      ]
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "checked_at": "2026-10-20",
+  "generator": "built-in image_gen editing",
+  "model_seed": "Not exposed by the tool",
+  "cases": {
+    "expression": {
+      "prompt": "Edit the attached Image A, an original fictional adult woman age 28. Preserve her recognizable anime face, rounded straight honey-blonde bangs, long softly curled blonde hair, blue eyes, natural adult body proportions, and the original delicate Japanese 2D anime outlines and soft cel shading. Preserve the complete head-to-shoes framing, the warm library background, camera angle and daylight, unless the requested change explicitly requires it. One adult woman only, no text or watermark. Make only this requested change: Change only her facial expression to a joyful open-mouth smile with bright open blue eyes. Keep her head angle, body pose, book, white high-neck blouse, blue cardigan, long navy skirt and brown flats unchanged.",
+      "error": null
+    },
+    "pose": {
+      "prompt": "Edit the attached Image A, an original fictional adult woman age 28. Preserve her recognizable anime face, rounded straight honey-blonde bangs, long softly curled blonde hair, blue eyes, natural adult body proportions, and the original delicate Japanese 2D anime outlines and soft cel shading. Preserve the complete head-to-shoes framing, the warm library background, camera angle and daylight, unless the requested change explicitly requires it. One adult woman only, no text or watermark. Make only this requested change: Keep the original outfit and facial expression. Change only her arms: hold the open book with her left hand at waist height, and raise her right hand beside her shoulder in a friendly open-palm wave. Preserve the original standing three-quarter body angle and both feet on the floor. Draw anatomically plausible five-finger hands.",
+      "error": null
+    },
+    "clothing": {
+      "prompt": "Edit the attached Image A, an original fictional adult woman age 28. Preserve her recognizable anime face, rounded straight honey-blonde bangs, long softly curled blonde hair, blue eyes, natural adult body proportions, and the original delicate Japanese 2D anime outlines and soft cel shading. Preserve the complete head-to-shoes framing, the warm library background, camera angle and daylight, unless the requested change explicitly requires it. One adult woman only, no text or watermark. Make only this requested change: Change only her clothing to an opaque navy athletic one-piece swimsuit with broad shoulder straps and modest conventional sports-swimwear coverage; she is barefoot. Keep her same adult identity, nonsexual neutral standing pose, facial expression, hair, body proportions, open book held in both hands, library background and lighting. This is an ordinary adult swimwear costume reference with no erotic framing.",
+      "error": null
+    },
+    "seated": {
+      "prompt": "Edit Image A to show the SAME original fictional adult woman age 28 sitting naturally on a simple wooden library bench, full body with both shoes visible, three-quarter view at seated eye level. She holds the same open book on her lap and looks toward the viewer with a warm joyful smile. Preserve her recognizable exact anime face, blue eyes and eye shape, rounded straight honey-blonde bangs, long gently curled blonde hair, original adult body proportions, white high-neck blouse, blue cardigan, opaque long navy skirt and plain brown flats. Keep the source's delicate polished Japanese 2D anime outlines, soft cel shading, colors and warm library daylight. Change only the seated pose and the camera framing needed to show it. Make her arms, hands, skirt folds, knees and contact with the bench physically plausible. One woman, no text, no watermark, no sexual framing.",
+      "error": null
+    },
+    "beach": {
+      "prompt": "Create a full-body color anime scene of the SAME original fictional ADULT woman age 28. Image 1 is the primary reference for her face, adult identity, hair and original delicate anime art style. Image 2 is the approved opaque navy athletic one-piece swimsuit with conventional modest sports coverage; keep this exact costume design. Show her at the edge of a sunny beach taking one light playful running step through shallow water, arms gently spread for balance, one foot slightly lifted and the other touching the wet sand, laughing joyfully with open blue eyes. Keep a natural relaxed nonsexual action pose, realistic adult limb proportions, plausible hands and feet. Preserve her recognizable face shape, rounded blonde bangs, long gently curling blonde hair and the original polished fine Japanese 2D anime linework with soft cel shading. Eye-level three-quarter view, full head-to-feet framing, blue sky, gentle waves and small natural splashes. She is not holding a book in this action scene. One woman only, no text, no watermark, no erotic framing, no exaggerated anatomy.",
+      "error": null
+    }
+  }
+}

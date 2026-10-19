@@ -1,0 +1,29 @@
+{
+  "4": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "workshop_image_a_work.png"
+    }
+  },
+  "5": {
+    "class_type": "ImageScaleBy",
+    "inputs": {
+      "image": [
+        "4",
+        0
+      ],
+      "upscale_method": "lanczos",
+      "scale_by": 2.0
+    }
+  },
+  "9": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "images": [
+        "5",
+        0
+      ],
+      "filename_prefix": "workshop/F_2x_lanczos"
+    }
+  }
+}

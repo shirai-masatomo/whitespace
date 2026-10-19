@@ -1,0 +1,130 @@
+{
+  "1": {
+    "class_type": "CheckpointLoaderSimple",
+    "inputs": {
+      "ckpt_name": "animagine-xl-4.0-opt.safetensors"
+    }
+  },
+  "2": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "clip": [
+        "1",
+        1
+      ],
+      "text": "one adult woman age 28, long honey blonde hair, rounded straight bangs, blue eyes, natural adult proportions, clean detailed color anime illustration, soft cel shading, consistent linework and shading, natural anatomy"
+    }
+  },
+  "3": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "clip": [
+        "1",
+        1
+      ],
+      "text": "child, teenager, chibi, multiple people, extra arms, extra legs, malformed hands, text, watermark, monochrome, exaggerated anatomy, transparent clothing"
+    }
+  },
+  "4": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "workshop_image_a_work.png"
+    }
+  },
+  "5": {
+    "class_type": "VAEEncode",
+    "inputs": {
+      "pixels": [
+        "4",
+        0
+      ],
+      "vae": [
+        "1",
+        2
+      ]
+    }
+  },
+  "6": {
+    "class_type": "KSampler",
+    "inputs": {
+      "model": [
+        "1",
+        0
+      ],
+      "positive": [
+        "2",
+        0
+      ],
+      "negative": [
+        "3",
+        0
+      ],
+      "latent_image": [
+        "12",
+        0
+      ],
+      "seed": 53004,
+      "steps": 28,
+      "cfg": 5.0,
+      "sampler_name": "euler_ancestral",
+      "scheduler": "normal",
+      "denoise": 0.35
+    }
+  },
+  "7": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "6",
+        0
+      ],
+      "vae": [
+        "1",
+        2
+      ]
+    }
+  },
+  "8": {
+    "class_type": "ImageCompositeMasked",
+    "inputs": {
+      "destination": [
+        "4",
+        0
+      ],
+      "source": [
+        "7",
+        0
+      ],
+      "x": 0,
+      "y": 0,
+      "resize_source": false,
+      "mask": [
+        "4",
+        1
+      ]
+    }
+  },
+  "9": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "images": [
+        "8",
+        0
+      ],
+      "filename_prefix": "workshop/E_repair"
+    }
+  },
+  "12": {
+    "class_type": "SetLatentNoiseMask",
+    "inputs": {
+      "samples": [
+        "5",
+        0
+      ],
+      "mask": [
+        "4",
+        1
+      ]
+    }
+  }
+}
