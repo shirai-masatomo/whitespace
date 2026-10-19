@@ -347,7 +347,7 @@ static func validate(s: Dictionary, data: Dictionary, cfg: Dictionary) -> String
 		if not integer(s[key],0,2147483647): return "Invalid number: "+key
 	if not s.first_done is bool or s.story_deaths>1 or s.first_done!=(s.story_deaths==1): return "Invalid legacy history flags"
 	if s.deaths<s.story_deaths or normal_deaths(s)>normal_trips(s): return "Invalid death counters"
-	if s.floor>10 or s.highest_floor>11 or s.floor>s.highest_floor or s.next_item<1 or s.trips<1: return "Invalid progression"
+	if s.floor>10 or s.highest_floor>11 or s.floor>s.highest_floor or s.next_item<1 or (s.trips==0 and (s.phase!="town" or s.schema_version<5 or s.highest_floor!=0)): return "Invalid progression"
 	if not s.phase in ["explore","battle","event","result","town"]: return "Unknown phase"
 	if not s.get("last_outcome","") in ["","victory"]: return "Invalid encounter outcome"
 	for key in ["rng","items","equipment","battle","result"]:

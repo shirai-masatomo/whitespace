@@ -2,7 +2,7 @@ extends RefCounted
 ## Item-template art, separate from live text, slot symbols and ownership data.
 const Fallback=preload("res://ui/item_icons.gd")
 const SHEET=preload("res://assets/equipment/v1/equipment-sheet.png")
-const BLUE=preload("res://assets/equipment/v1/adventurer-cloak-blue.png")
+const BLUE=preload("res://assets/equipment/v1/adventurer-cloak-navy.png")
 const REGIONS={"A01":[20,65,275,345],"red_cloak":[297,65,283,345],"A03":[585,76,307,338],"A04":[901,77,244,334],"A05":[1150,129,285,283],"I01":[20,437,278,290],"I02":[299,423,293,308],"I03":[597,417,266,314],"I04":[864,447,284,287],"I05":[1178,470,253,264],"I06":[20,758,276,293],"I07":[306,742,290,306],"I08":[620,749,185,299],"I09":[867,757,287,299],"I11":[1164,747,270,306]}
 static var cache: Dictionary={}
 static var source_images: Dictionary={}

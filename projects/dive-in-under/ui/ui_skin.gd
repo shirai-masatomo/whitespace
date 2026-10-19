@@ -52,3 +52,25 @@ static func fit_name(l: Label, full_name: String, width: float) -> void:
 		visible+="…"
 	l.text=visible; l.tooltip_text=full_name; l.set_meta("full_name",full_name)
 	l.clip_text=true; l.size.x=width
+
+static func logo(parent: Node, r: Rect2) -> TextureRect:
+	var t:=picture(parent,preload("res://assets/title/v1/dive-in-under-logo-gold-deep-shadow.png"),r)
+	t.name="ProductLogo"; t.texture_filter=CanvasItem.TEXTURE_FILTER_LINEAR
+	return t
+static func quiet_button(b: Button, selected: bool=false) -> void:
+	b.set_meta("gold_surface",false)
+	for state in ["normal","hover","pressed","disabled","focus"]:
+		var st:=StyleBoxFlat.new(); st.bg_color=Color("162a30") if selected else Color("0b1c23")
+		st.border_color=GOLD if selected else Color("405156"); st.set_border_width_all(2 if selected else 1)
+		st.set_content_margin_all(4)
+		if state=="hover": st.bg_color=Color("24383c"); st.border_color=Color("a99a70")
+		if state=="pressed": st.bg_color=Color("30403e")
+		if state=="disabled": st.bg_color=Color("101b20"); st.border_color=Color("2c393d")
+		if state=="focus": st.bg_color=Color.TRANSPARENT; st.border_color=Color("83d0d5")
+		b.add_theme_stylebox_override(state,st)
+	b.add_theme_font_size_override("font_size",17)
+	b.add_theme_color_override("font_color",INK); b.add_theme_color_override("font_hover_color",INK)
+	b.add_theme_color_override("font_focus_color",INK); b.add_theme_color_override("font_pressed_color",GOLD)
+	b.add_theme_color_override("font_disabled_color",MUTED)
+static func rule(parent: Control, r: Rect2, ink: Color=Color("455153")) -> void:
+	var line:=ColorRect.new(); line.position=r.position; line.size=r.size; line.color=ink; line.mouse_filter=Control.MOUSE_FILTER_IGNORE; parent.add_child(line)

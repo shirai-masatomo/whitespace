@@ -58,32 +58,15 @@ func face() -> Texture2D:
 func panel(r: Rect2, title: String, prominent: bool=false, ornament_only: bool=false) -> Control:
 	return UISkin.panel(self,r,title)
 func skin(b: Button, selected: bool=false) -> void:
-	var textured:=b.size.y>=45
-	b.set_meta("gold_surface",selected and textured)
-	for child in b.get_children():
-		if child is Label: child.add_theme_color_override("font_color",DARK if selected and textured else child.get_meta("normal_color",INK))
-	for mode in ["normal","hover","pressed","disabled","focus"]:
-		var st:=StyleBoxFlat.new(); st.set_content_margin_all(4); st.set_border_width_all(1); st.bg_color=Color("0b1b21"); st.border_color=Color("6a5b41")
-		if selected: st.bg_color=Color("393329"); st.border_color=GOLD; st.set_border_width_all(2)
-		if mode=="hover": st.border_color=Color("ffe3a1"); st.bg_color=Color("2b352f")
-		if mode=="pressed": st.bg_color=Color("4b3925"); st.border_color=Color("85653a"); st.border_width_top=3; st.border_width_left=3
-		if mode=="disabled": st.bg_color=Color("101c20"); st.border_color=Color("364443")
-		if mode=="focus": st.bg_color=Color.TRANSPARENT; st.border_color=Color("71bec6"); st.set_border_width_all(2)
-		b.add_theme_stylebox_override(mode,st if mode=="focus" or not textured else InterfaceArt.button_style(mode,selected))
-	b.add_theme_color_override("font_color",INK); b.add_theme_color_override("font_hover_color",Color("fff2d5")); b.add_theme_color_override("font_pressed_color",GOLD); b.add_theme_color_override("font_focus_color",INK); b.add_theme_color_override("font_disabled_color",Color("71807d"))
-	if selected and textured:
-		for key in ["font_color","font_hover_color","font_focus_color"]: b.add_theme_color_override(key,DARK)
-	b.add_theme_color_override("font_hover_color",DARK if selected and textured else INK)
-	b.add_theme_font_size_override("font_size",18)
+	UISkin.quiet_button(b,selected)
 func button_at(parent: Control, text: String, r: Rect2, callback: Callable, selected: bool=false) -> Button:
 	var b:=Button.new(); b.text=text; b.position=r.position; b.size=r.size; skin(b,selected); parent.add_child(b); b.pressed.connect(callback); return b
 func paper_at(parent: Control, r: Rect2) -> void:
 	InterfaceArt.paper(parent,r)
 func build() -> void:
 	var header:=panel(Rect2(16,14,1248,64),"",true)
-	image_at(header,Icons.texture("lantern"),Rect2(12,8,40,40))
-	var brand:=label_at(header,"Dive In Under",Rect2(54,9,280,44),31,GOLD); var serif:=SystemFont.new(); serif.font_names=PackedStringArray(["Georgia"]); brand.add_theme_font_override("font",serif)
-	label_at(header,"ステータス",Rect2(350,10,280,40),27)
+	UISkin.logo(header,Rect2(20,1,168,56))
+	label_at(header,"ステータス",Rect2(222,10,380,40),27)
 	label_at(header,"冒険の準備  /  主人公",Rect2(780,14,250,34),18,MUTED)
 	label_at(header,"G  %d"%game.campaign.gold,Rect2(1080,11,145,40),23,GOLD)
 	left_panel=panel(Rect2(16,92,296,510),unit.name,true)
@@ -95,8 +78,9 @@ func build() -> void:
 		b.add_theme_font_size_override("font_size",17); b.set_meta("status_tab",key); tab_buttons[key]=b; index+=1
 	central=Control.new(); central.position=Vector2(14,61); central.size=Vector2(552,432); middle.add_child(central)
 	var right:=panel(Rect2(916,92,348,510),"詳細")
-	detail_scroll=ScrollContainer.new(); detail_scroll.position=Vector2(18,54); detail_scroll.size=Vector2(312,436); detail_scroll.horizontal_scroll_mode=ScrollContainer.SCROLL_MODE_DISABLED; detail_scroll.theme=UISkin.scroll_theme(); right.add_child(detail_scroll)
+	detail_scroll=ScrollContainer.new(); detail_scroll.position=Vector2(18,54); detail_scroll.size=Vector2(312,382); detail_scroll.horizontal_scroll_mode=ScrollContainer.SCROLL_MODE_DISABLED; detail_scroll.theme=UISkin.scroll_theme(); right.add_child(detail_scroll)
 	details=VBoxContainer.new(); details.size_flags_horizontal=Control.SIZE_EXPAND_FILL; details.add_theme_constant_override("separation",12); detail_scroll.add_child(details)
+	label_at(right,"変更・修理は準備の「装備」から",Rect2(20,454,310,38),14,MUTED)
 	build_party()
 	back_button=button_at(self,"戻る",Rect2(1060,616,204,88),request_close)
 	var border:=Control.new(); border.set_script(Frame); border.ornament_only=true; back_button.add_child(border); border.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
@@ -105,26 +89,28 @@ func build() -> void:
 	wire_tabs()
 func build_left() -> void:
 	paper_at(left_panel,Rect2(9,48,278,453))
-	image_at(left_panel,face(),Rect2(20,64,106,140))
-	label_at(left_panel,"Lv.%d"%unit.level,Rect2(141,62,137,35),25,DARK)
-	make_gauge("hp","HP",int(unit.hp),int(unit.max_hp),105,Color("a83d32"))
-	make_gauge("sp","SP",int(unit.sp),int(unit.max_sp),147,Color("267c9c"))
+	image_at(left_panel,face(),Rect2(24,61,105,124))
+	label_at(left_panel,"Lv.%d"%unit.level,Rect2(145,73,130,38),27,DARK)
+	label_at(left_panel,Model.profile().get("species","未設定"),Rect2(145,119,130,28),17,Color("675135"))
+	label_at(left_panel,"冒険準備中",Rect2(145,150,130,26),14,Color("675135"))
+	UISkin.rule(left_panel,Rect2(24,201,248,1),Color("ad946b"))
+	make_gauge("hp","HP",int(unit.hp),int(unit.max_hp),225,Color("a83d32"))
+	make_gauge("sp","SP",int(unit.sp),int(unit.max_sp),270,Color("267c9c"))
 	var level: Dictionary=E.level_info(game.campaign,game.cfg)
-	make_gauge("exp","EXP",int(level.progress),int(level.next),189,Color("b78229"))
+	make_gauge("exp","EXP",int(level.progress),int(level.next),315,Color("b78229"))
 	if unit.level>=int(game.cfg.growth.level_cap): left_values.exp.text="MAX"; bars.exp.value=bars.exp.max_value
-	var rows: Array=[["種族",Model.profile().get("species","未設定")],["現在地","町"],["到達記録","%d F"%game.campaign.highest_floor],["探索回数","%d 回"%E.normal_trips(game.campaign)],["装備中","%d / 11"%game.campaign.equipment.values().filter(func(uid):return uid!="").size()]]
+	UISkin.rule(left_panel,Rect2(24,365,248,1),Color("ad946b"))
+	label_at(left_panel,"探索記録",Rect2(24,376,248,27),17,Color("675135"))
+	var rows: Array=[["到達記録","%d F"%game.campaign.highest_floor],["探索回数","%d 回"%E.normal_trips(game.campaign)],["装備中","%d / 11"%game.campaign.equipment.values().filter(func(uid):return uid!="").size()]]
 	for i in rows.size():
-		var y:=244+i*35
-		var line:=ColorRect.new(); line.position=Vector2(22,y-2); line.size=Vector2(250,1); line.color=Color("ae9465"); line.mouse_filter=Control.MOUSE_FILTER_IGNORE; left_panel.add_child(line)
-		label_at(left_panel,rows[i][0],Rect2(24,y+2,90,28),17,Color("675135"))
-		label_at(left_panel,rows[i][1],Rect2(122,y+2,153,28),18,DARK)
-	var note:=label_at(left_panel,"ひとり、地下を歩む。",Rect2(24,446,247,38),18,DARK); note.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART
+		label_at(left_panel,rows[i][0],Rect2(24,411+i*28,118,25),15,Color("675135"))
+		label_at(left_panel,rows[i][1],Rect2(153,411+i*28,119,25),18,DARK)
 func make_gauge(key: String, title: String, current: int, maximum: int, y: int, color: Color) -> void:
-	label_at(left_panel,title,Rect2(141,y-6,47,23),14,DARK)
-	left_values[key]=label_at(left_panel,"%d / %d"%[current,maximum],Rect2(184,y-6,88,23),14,DARK)
+	label_at(left_panel,title,Rect2(24,y-8,54,25),16,DARK)
+	left_values[key]=label_at(left_panel,"%d / %d"%[current,maximum],Rect2(91,y-8,181,25),18,DARK)
 	left_values[key].horizontal_alignment=HORIZONTAL_ALIGNMENT_RIGHT
-	var bar:=Control.new(); bar.set_script(preload("res://ui/vital_gauge.gd")); bar.position=Vector2(141,y+19); bar.size=Vector2(132,13); bar.max_value=maxi(1,maximum); bar.value=current; bar.mouse_filter=Control.MOUSE_FILTER_IGNORE
-	bar.tint=color; left_panel.add_child(bar); bar.size=Vector2(132,13); bars[key]=bar
+	var bar:=Control.new(); bar.set_script(preload("res://ui/vital_gauge.gd")); bar.position=Vector2(24,y+20); bar.size=Vector2(248,12); bar.max_value=maxi(1,maximum); bar.value=current; bar.mouse_filter=Control.MOUSE_FILTER_IGNORE
+	bar.tint=color; left_panel.add_child(bar); bars[key]=bar
 	gauges[key]={"current":current,"maximum":maximum}
 func refresh_character() -> void:
 	# Called only when the owning screen receives an actual data refresh.
@@ -186,29 +172,25 @@ func build_content() -> void:
 	if not ids.is_empty(): tab_buttons[active_tab].focus_next=tab_buttons[active_tab].get_path_to(item_buttons[ids[0]])
 	back_button.focus_next=back_button.get_path_to(tab_buttons[active_tab])
 func build_equipment() -> void:
-	var scene:=image_at(central,Art.texture("cavern"),Rect2(151,10,250,380),true); scene.modulate=Color(0.62,0.72,0.72)
-	image_at(central,Art.actor_texture("hero"),Rect2(142,52,268,326))
+	var scene:=image_at(central,Art.texture("cavern"),Rect2(94,5,364,411),true); scene.modulate=Color(0.62,0.72,0.72)
+	var actor:=image_at(central,Art.actor_texture("hero"),Rect2(100,64,352,324)); actor.name="EquipmentActor"
 	for c in 2:
-		var column: Array=[["head","body","right_hand","legs","feet"],["neck","ears","eyes","left_hand","wrist","finger"]][c]
-		var right: bool=c==1; var x:=402 if right else 0
-		for i in column.size():
-			var slot: String=column[i]; var item:=Model.equipment(game.campaign,game.cfg,slot)
-			var b:=item_button(slot,"",Rect2(x,16+i*(64 if right else 72),150,58))
-			label_at(b,game.cfg.slots[slot],Rect2(47,10,90,16),12,MUTED)
-			var name_label:=label_at(b,item.name,Rect2(47,29,90,19),14)
-			UISkin.fit_name(name_label,item.name,90)
-			if not item.empty: image_at(b,EquipmentArt.texture(item.template_id,slot),Rect2(3,11,39,39))
-			else: label_at(b,"—",Rect2(10,14,30,28),23,Color("667b7c"))
-			b.tooltip_text=game.cfg.slots[slot]+" / "+item.name+" / Enterで詳細"
-	label_at(central,"装備枠を選ぶと詳細を表示",Rect2(164,365,226,26),15,GOLD)
-	var art_note:=label_at(central,"装備の見た目は共通イラスト",Rect2(163,392,233,23),13,MUTED); art_note.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER
+		var slots: Array=[["head","body","right_hand","legs","feet"],["neck","ears","eyes","left_hand","wrist","finger"]][c]
+		for i in slots.size():
+			var slot: String=slots[i]; var item:=Model.equipment(game.campaign,game.cfg,slot)
+			var b:=item_button(slot,"",Rect2(472 if c==1 else 12,8+i*68,68,64))
+			if not item.empty: image_at(b,EquipmentArt.texture(item.template_id,slot),Rect2(7,5,54,54))
+			else:
+				var silhouette:=Control.new(); silhouette.set_script(preload("res://ui/slot_silhouette.gd")); silhouette.slot=slot; silhouette.position=Vector2(15,12); silhouette.size=Vector2(38,38); b.add_child(silhouette)
+			b.tooltip_text=game.cfg.slots[slot]+" / "+("未装備" if item.empty else item.name)
+	var art_note:=label_at(central,"人物の外観は共通イラスト",Rect2(117,393,320,25),13,MUTED); art_note.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER
 func build_abilities() -> void:
 	label_at(central,"基本能力",Rect2(9,6,220,34),25,GOLD)
 	label_at(central,"現在値       基礎 ＋ 装備",Rect2(217,10,320,28),16,MUTED)
 	var i:=0
 	for key in Model.STAT_NAMES:
 		var base:=Model.base_value(game.campaign,game.cfg,key); var total: int=unit[key]
-		var b:=item_button(key,"",Rect2(8,54+i*62,536,54))
+		var b:=item_button(key,"",Rect2(8,54+i*58,536,50))
 		image_at(b,Symbols.texture({"max_hp":"hp","max_sp":"sp"}.get(key,key)),Rect2(7,11,32,32))
 		label_at(b,Model.STAT_NAMES[key],Rect2(48,12,160,30),18)
 		var current: String="%d / %d"%[unit["hp" if key=="max_hp" else "sp"],total] if key in ["max_hp","max_sp"] else str(total)
@@ -268,20 +250,16 @@ func update_details() -> void:
 	var id: String=selection[active_tab]
 	if active_tab=="equipment":
 		var item:=Model.equipment(game.campaign,game.cfg,id)
-		detail_heading(item.name,EquipmentArt.texture(item.template_id,id) if not item.empty else Symbols.texture("def"),"装備・"+game.cfg.slots[id])
 		if item.empty:
-			detail_text("この部位には何も装備していません。",18)
+			detail_heading(game.cfg.slots[id],Icons.texture(id),"未装備")
 		else:
-			detail_text(item.description,17)
-			details.add_child(HSeparator.new())
+			detail_heading(item.name,EquipmentArt.texture(item.template_id,id),game.cfg.slots[id])
 			detail_row("現在の補正",game.item_effects(item.item,item.uid),GOLD)
 			detail_row("耐久度","%d / %d"%[item.condition.current,item.condition.maximum])
-			detail_row("特殊効果","—")
-			detail_row("追加能力","未導入")
-			detail_row("刻印","未導入")
-		section("装備の変更","装備枠の選択では外れません。変更・修理は、冒険準備に戻って「装備」から行えます。")
-		detail_text("大切な装備は、準備画面の倉庫や父親の風呂敷へ保管できます。",16,MUTED)
-		if id=="head": detail_text("マントも、この頭枠に装備します。",15,MUTED)
+			for field in [["特殊効果","special_effects"],["刻印","marks"]]:
+				if item.item.has(field[1]): detail_row(field[0],str(item.item[field[1]]))
+			if item.description!="":
+				details.add_child(HSeparator.new()); detail_text(item.description,17)
 	elif active_tab=="abilities":
 		detail_heading(Model.STAT_NAMES[id],Symbols.texture({"max_hp":"hp","max_sp":"sp"}.get(id,id)))
 		var total: int=unit[id]; var base:=Model.base_value(game.campaign,game.cfg,id)

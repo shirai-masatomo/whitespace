@@ -67,7 +67,7 @@ func tile_skin(b: Button, selected: bool) -> void:
 	b.set_meta("gold_surface",false)
 	for state in ["normal","hover","pressed","disabled"]:
 		var st:=StyleBoxFlat.new(); st.bg_color=Color("25352f") if selected else Color("0b1c23")
-		st.border_color=GOLD if selected or state=="hover" else Color("716047")
+		st.border_color=GOLD if selected or state=="hover" else Color("405156")
 		st.set_border_width_all(2 if selected else 1); st.set_content_margin_all(8)
 		if state=="hover": st.bg_color=Color("20343a")
 		if state=="pressed": st.bg_color=Color("3a3b2f")
@@ -91,7 +91,7 @@ func build_list(p: Control, source: String, r: Rect2) -> ScrollContainer:
 	for uid in game.campaign[source]:
 		var item: Dictionary=game.cfg.items[game.campaign.items[uid]]
 		var b:=Button.new(); b.custom_minimum_size=Vector2(r.size.x-12,34 if source=="cloth" else 42); b.size_flags_horizontal=Control.SIZE_EXPAND_FILL
-		skin(b,uid==selected_uid,source=="cloth"); box.add_child(b)
+		UISkin.quiet_button(b,uid==selected_uid); box.add_child(b)
 		icon_at(b,item.slot,Rect2(5,0,32,32) if source=="cloth" else Rect2(5,2,36,36),game.campaign.items[uid])
 		var name_label:=label_at(b,Catalog.name_of(item),Rect2(46,0,r.size.x-100,32 if source=="cloth" else 36),17)
 		name_label.text_overrun_behavior=TextServer.OVERRUN_TRIM_ELLIPSIS
@@ -112,9 +112,8 @@ func build() -> void:
 				selected_source=source; selected_uid=game.campaign[source][0]; break
 	game.warehouse_state.source=selected_source; game.warehouse_state.uid=selected_uid
 	var header:=panel(Rect2(16,14,1248,64),"","lantern")
-	var brand:=label_at(header,"Dive In Under",Rect2(53,9,285,44),31,GOLD)
-	var serif:=SystemFont.new(); serif.font_names=PackedStringArray(["Georgia"]); brand.add_theme_font_override("font",serif)
-	label_at(header,"倉庫 ・ 所持品",Rect2(352,11,300,40),27)
+	UISkin.logo(header,Rect2(20,1,168,56))
+	label_at(header,"倉庫 ・ 所持品",Rect2(222,11,370,40),27)
 	label_at(header,"持ち帰ったものを、次の旅へ。",Rect2(690,14,340,34),16,MUTED)
 	label_at(header,"G  %d"%game.campaign.gold,Rect2(1080,11,150,40),23,GOLD)
 	var left:=panel(Rect2(16,92,296,300),"所持品","backpack")
@@ -133,7 +132,7 @@ func build() -> void:
 	order.pressed.connect(func(): remember_scroll(); game.warehouse_state.sort=order_keys[(order_index+1)%3]; rebuild())
 	var tab_index:=0
 	for category in Catalog.CATEGORIES:
-		var tab:=Button.new(); tab.text=Catalog.CATEGORIES[category]; tab.position=Vector2(14+tab_index*92,54); tab.size=Vector2(88,32); skin(tab,game.warehouse_state.get("category","all")==category); tab.add_theme_font_size_override("font_size",15); center.add_child(tab)
+		var tab:=Button.new(); tab.text=Catalog.CATEGORIES[category]; tab.position=Vector2(14+tab_index*92,54); tab.size=Vector2(88,32); UISkin.quiet_button(tab,game.warehouse_state.get("category","all")==category); tab.add_theme_font_size_override("font_size",15); center.add_child(tab)
 		tab.pressed.connect(func(): remember_scroll(); game.warehouse_state.category=category; game.warehouse_state.grid_scroll=0; rebuild())
 		tab_index+=1
 	grid_scroll=scroll_area(center,Rect2(14,98,552,379))
@@ -179,14 +178,16 @@ func build_details(p: Control) -> void:
 	label_at(p,"所持数 %d     倉庫内数 %d"%[d.carried,d.stored],Rect2(20,151,310,28),17)
 	var paper:=ColorRect.new(); paper.position=Vector2(18,190); paper.size=Vector2(312,73); paper.color=Color("c4b28a"); paper.mouse_filter=Control.MOUSE_FILTER_IGNORE; p.add_child(paper)
 	var desc:=label_at(p,d.description,Rect2(26,196,296,62),17,Color("302c22")); desc.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART
-	var values: Array=[["効果",game.item_effects(item,selected_uid) if not item.stats.is_empty() else "—"],["使用回数",d.uses],["耐久度",game.condition_text(selected_uid).replace("耐久 ","") if item.slot!="" else "—"],["特殊効果",d.special],["刻印",d.marks]]
+	var values: Array=[]
+	if not item.stats.is_empty(): values.append(["性能",game.item_effects(item,selected_uid)])
+	if item.slot!="": values.append(["耐久度",game.condition_text(selected_uid).replace("耐久 ","")])
+	for field in [["使用回数",d.uses],["特殊効果",d.special],["刻印",d.marks]]:
+		if str(field[1]) not in ["","—","未導入"]: values.append(field)
 	for i in values.size():
-		var y:=276+i*35
-		var separator:=ColorRect.new(); separator.color=Color("37484a"); separator.position=Vector2(18,y); separator.size=Vector2(312,1); separator.mouse_filter=Control.MOUSE_FILTER_IGNORE; p.add_child(separator)
-		label_at(p,values[i][0],Rect2(21,y+3,86,29),16,MUTED)
-		var value:=label_at(p,values[i][1],Rect2(111,y+3,217,29),16); value.text_overrun_behavior=TextServer.OVERRUN_TRIM_ELLIPSIS; value.tooltip_text=values[i][1]; value.mouse_filter=Control.MOUSE_FILTER_PASS
-	var note:=label_at(p,"父が残した、小さな守り。\n大切なものは風呂敷へ。",Rect2(22,453,303,43),16,Color("c5ac7a"))
-	note.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART
+		var y:=276+i*43
+		UISkin.rule(p,Rect2(18,y,312,1))
+		label_at(p,values[i][0],Rect2(21,y+5,78,32),15,MUTED)
+		var value:=label_at(p,values[i][1],Rect2(102,y+5,225,36),16); value.autowrap_mode=TextServer.AUTOWRAP_WORD; value.tooltip_text=values[i][1]
 func build_actions() -> void:
 	var entries: Array=[["預ける","deposit","warehouse","warehouse"],["引き出す","withdraw","inventory","body"],["整理","organize","","material"],["風呂敷へ","to_cloth","cloth","cloth"],["戻る","back","","lantern"]]
 	for i in entries.size():

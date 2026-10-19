@@ -37,7 +37,7 @@ var campaign_seed := 123
 const CampaignReplay = preload("res://ui/campaign_replay.gd")
 
 func initialize_game() -> void:
-	get_window().title="Dive In Under 0.6.3"
+	get_window().title="Dive In Under 0.6.4"
 	Engine.max_fps=60
 	legacy_persistence_mode=smoke_dir!="" and "--legacy-persistence-check" in OS.get_cmdline_user_args()
 	cfg=Expedition.load_config()
@@ -60,7 +60,7 @@ func initialize_game() -> void:
 		loaded={"ok":false,"status":"missing"}
 	play_timer=Timer.new()
 	play_timer.wait_time=0.6
-	play_timer.timeout.connect(func(): if campaign.get("phase")=="battle" and ui_mode=="campaign": perform("round",{},int(campaign.revision)))
+	play_timer.timeout.connect(func(): if campaign.get("phase")=="battle" and ui_mode=="campaign" and auto_play: perform("round",{},int(campaign.revision)))
 	add_child(play_timer)
 	preparation_music=Node.new()
 	preparation_music.set_script(preload("res://ui/preparation_music.gd"))
@@ -73,6 +73,7 @@ func _notification(what: int) -> void:
 		get_tree().quit()
 
 func show_title() -> void:
+	route_map_open=false
 	preparation_music.set_preparation_active(false)
 	if not legacy_persistence_mode:
 		timer.stop(); play_timer.stop(); ui_mode="title"; title_visible=true; show_play_view("title"); return
@@ -131,7 +132,7 @@ func request_new() -> void:
 func start_new() -> void:
 	if not legacy_persistence_mode:
 		cfg=Expedition.load_config(); campaign=Expedition.fresh(cfg,campaign_seed if smoke_dir!="" else int(Time.get_ticks_usec()%2147483647))
-		campaign.phase="town"; town_page="hub"; session_departed=false; warehouse_state={}; auto_play=true; notice=""; show_campaign(); return
+		campaign.phase="town"; campaign.trips=0; town_page="hub"; session_departed=false; warehouse_state={}; auto_play=true; notice=""; show_campaign(); return
 	var error: String=save_store.preserve_current()
 	if error!="": notice=error; show_title(); return
 	cfg=Expedition.load_config(); save_store.cfg=cfg
@@ -165,7 +166,6 @@ func perform(action: String, args: Dictionary, revision: int) -> void:
 			auto_play=false; notice="保存できないため操作を取り消しました："+error
 			show_campaign(); return
 	elif action=="depart":
-		if not session_departed: candidate.trips-=1
 		session_departed=true
 		candidate=Expedition.act(candidate,"descend",int(candidate.revision),{},data,cfg)
 	campaign=candidate; loaded={"ok":true,"status":"ok"}; notice=""
@@ -205,6 +205,7 @@ func show_play_view(mode: String) -> void:
 	for side in ["left","right","top","bottom"]: screen.add_theme_constant_override("margin_"+side,0)
 	play_view=Control.new(); play_view.set_script(preload("res://ui/play_view.gd")); play_view.game=self; play_view.mode=mode; screen.add_child(play_view)
 func show_campaign() -> void:
+	if campaign.get("phase") in ["result","town"]: route_map_open=false
 	preparation_music.set_preparation_active(campaign.get("phase")=="town")
 	if not legacy_persistence_mode:
 		timer.stop(); play_timer.stop(); title_visible=false; ui_mode="campaign"; play_buttons={}
@@ -473,6 +474,8 @@ func show_equipment(root: VBoxContainer) -> void:
 	var depart:=command("HP/SP回復済み  →  もう一度地下へ","depart"); root.add_child(depart)
 
 func smoke(quit_on_finish: bool = true) -> void:
+	if "--refinement-review" in OS.get_cmdline_user_args():
+		await preload("res://ui/refinement_review.gd").run(self); return
 	if "--title-review" in OS.get_cmdline_user_args():
 		await preload("res://ui/title_review.gd").run(self); return
 	if "--bgm-review" in OS.get_cmdline_user_args():
@@ -596,3 +599,13 @@ func find_button(node: Node, label: String) -> Button:
 		var found:=find_button(child,label)
 		if found!=null: return found
 	return null
+
+func _input(event: InputEvent) -> void:
+	if legacy_persistence_mode or campaign.get("phase")!="battle": return
+	if event is InputEventKey and (event.keycode==KEY_SPACE or event.physical_keycode==KEY_SPACE):
+		get_viewport().set_input_as_handled()
+		if event.pressed and not event.echo:
+			auto_play=not auto_play; play_timer.stop(); show_campaign()
+func resume_auto_battle() -> void:
+	if campaign.get("phase")=="battle" and not auto_play:
+		auto_play=true; show_campaign()
