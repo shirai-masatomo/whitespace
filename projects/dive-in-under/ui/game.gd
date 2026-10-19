@@ -37,7 +37,7 @@ var campaign_seed := 123
 const CampaignReplay = preload("res://ui/campaign_replay.gd")
 
 func initialize_game() -> void:
-	get_window().title="Dive In Under 0.6.2"
+	get_window().title="Dive In Under 0.6.3"
 	Engine.max_fps=60
 	legacy_persistence_mode=smoke_dir!="" and "--legacy-persistence-check" in OS.get_cmdline_user_args()
 	cfg=Expedition.load_config()
@@ -473,6 +473,8 @@ func show_equipment(root: VBoxContainer) -> void:
 	var depart:=command("HP/SP回復済み  →  もう一度地下へ","depart"); root.add_child(depart)
 
 func smoke(quit_on_finish: bool = true) -> void:
+	if "--title-review" in OS.get_cmdline_user_args():
+		await preload("res://ui/title_review.gd").run(self); return
 	if "--bgm-review" in OS.get_cmdline_user_args():
 		await preload("res://ui/bgm_review.gd").run(self); return
 	if "--ui-feedback-review" in OS.get_cmdline_user_args():

@@ -78,6 +78,13 @@ jobs:
               $artOnly = $files.Count -gt 0 -and @($files | Where-Object { $_ -notmatch $allowed }).Count -eq 0
             }
           }
+          $titleOnly = $false
+          if ($integrationOnly -and (Test-Path ui/title_review.gd) -and $env:PREVIOUS_HEAD -match '^[0-9a-f]{40}$' -and $env:PREVIOUS_HEAD -ne ('0' * 40)) {
+            $titleFiles = @(git diff --name-only $env:PREVIOUS_HEAD $env:CURRENT_HEAD)
+            $titleAllowed = '^(projects/dive-in-under/(review/|docs/|assets/title/)|projects/dive-in-under/ui/(title_review|game|play_view)\.gd(\.uid)?$|projects/dive-in-under/(project\.godot|export_presets\.cfg)$|projects/dive-in-under/tools/(title_review|publish_title)\.ps1$|\.github/workflows/dive-in-under-windows\.yml$)'
+            $titleOnly = @($titleFiles | Where-Object { $_ -match '(title_review|publish_title|assets/title)' }).Count -gt 0 -and @($titleFiles | Where-Object { $_ -notmatch $titleAllowed }).Count -eq 0
+          }
+          "title_only=$($titleOnly.ToString().ToLowerInvariant())" >> $env:GITHUB_OUTPUT
           $bgmOnly = $false
           if ($integrationOnly -and (Test-Path ui/bgm_review.gd) -and $env:PREVIOUS_HEAD -match '^[0-9a-f]{40}$' -and $env:PREVIOUS_HEAD -ne ('0' * 40)) {
             $bgmFiles = @(git diff --name-only $env:PREVIOUS_HEAD $env:CURRENT_HEAD)
@@ -85,7 +92,7 @@ jobs:
             $bgmOnly = @($bgmFiles | Where-Object { $_ -match '(preparation_music|bgm_review|publish_bgm|assets/bgm)' }).Count -gt 0 -and @($bgmFiles | Where-Object { $_ -notmatch $bgmAllowed }).Count -eq 0
           }
           "bgm_only=$($bgmOnly.ToString().ToLowerInvariant())" >> $env:GITHUB_OUTPUT
-          $feedbackOnly = $integrationOnly -and (Test-Path ui/feedback_review.gd) -and !$bgmOnly
+          $feedbackOnly = $integrationOnly -and (Test-Path ui/feedback_review.gd) -and !$bgmOnly -and !$titleOnly
           "feedback_only=$($feedbackOnly.ToString().ToLowerInvariant())" >> $env:GITHUB_OUTPUT
           "integration_only=$($integrationOnly.ToString().ToLowerInvariant())" >> $env:GITHUB_OUTPUT
           $global:LASTEXITCODE = 0
@@ -156,7 +163,7 @@ jobs:
         if: steps.scope.outputs.integration_only == 'true'
         run: ./dev.ps1 -Task build -GameCommit '${{ github.event.pull_request.head.sha || github.sha }}'
       - name: Isolated session UI, transitions, comparison screenshots and fresh restart
-        if: steps.scope.outputs.integration_only == 'true' && steps.scope.outputs.feedback_only != 'true' && steps.scope.outputs.bgm_only != 'true'
+        if: steps.scope.outputs.integration_only == 'true' && steps.scope.outputs.feedback_only != 'true' && steps.scope.outputs.bgm_only != 'true' && steps.scope.outputs.title_only != 'true'
         timeout-minutes: 4
         run: ./tools/ui_integration_review.ps1
       - name: Focused feedback 01-07, one isolated EXE process
@@ -167,6 +174,10 @@ jobs:
         if: steps.scope.outputs.bgm_only == 'true'
         timeout-minutes: 2
         run: ./tools/bgm_review.ps1
+      - name: Title logo, Start and Exit, one isolated EXE process
+        if: steps.scope.outputs.title_only == 'true'
+        timeout-minutes: 2
+        run: ./tools/title_review.ps1
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -178,6 +189,9 @@ jobs:
         with:
           name: DiveInUnder-foundation-evidence
           path: |
+            projects/dive-in-under/artifacts/title/*.json
+            projects/dive-in-under/artifacts/title/*.log
+            projects/dive-in-under/artifacts/title/*.png
             projects/dive-in-under/artifacts/bgm/*.json
             projects/dive-in-under/artifacts/bgm/*.log
             projects/dive-in-under/artifacts/bgm/*.wav

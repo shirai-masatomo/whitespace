@@ -6,6 +6,8 @@ const Items=preload("res://ui/equipment_art.gd")
 const Symbols=preload("res://ui/status_symbols.gd")
 const Routes=preload("res://ui/route_map.gd")
 const E=preload("res://core/expedition.gd")
+const TITLE_LOGO=preload("res://assets/title/v1/dive-in-under-logo-gold-deep-shadow.png")
+const TITLE_DIM_ALPHA: float=0.12
 var game: Control
 var mode: String
 var stage: Control
@@ -16,7 +18,12 @@ func _ready() -> void:
 	if mode in ["title","hub","equipment","result"]:
 		# These are empty town backgrounds, separately supplied without any UI.
 		var bg: Texture2D=preload("res://assets/interface/v2/surface-title.png") if mode=="title" else preload("res://assets/interface/v2/surface-preparation.png")
-		UISkin.picture(self,bg,Rect2(0,0,1280,720),true)
+		var backdrop:=UISkin.picture(self,bg,Rect2(0,0,1280,720),true)
+		backdrop.name="TownBackdrop"
+		if mode=="title":
+			var dimmer:=ColorRect.new(); dimmer.name="TitleBackgroundDimmer"
+			dimmer.color=Color(0,0,0,TITLE_DIM_ALPHA); dimmer.size=Vector2(1280,720)
+			dimmer.mouse_filter=Control.MOUSE_FILTER_IGNORE; add_child(dimmer)
 	match mode:
 		"title": build_title()
 		"hub": build_hub()
@@ -59,16 +66,17 @@ func hero_card(r: Rect2) -> Control:
 		UISkin.label(p,state_text if state_text!="" else "状態異常なし",Rect2(20,383,r.size.x-40,36),16,UISkin.DARK,true)
 	return p
 func build_title() -> void:
-	var p:=Control.new(); p.position=Vector2(96,128); p.size=Vector2(620,460); add_child(p)
-	var title_plate:=UISkin.panel(p,Rect2(0,0,620,148)); title_plate.self_modulate.a=0.82
-	var brand:=UISkin.label(p,"Dive In Under",Rect2(38,28,560,78),55,UISkin.GOLD)
-	var serif:=SystemFont.new(); serif.font_names=PackedStringArray(["Georgia"]); brand.add_theme_font_override("font",serif)
-	UISkin.label(p,"ダイブ・イン・アンダー",Rect2(42,106,550,34),22)
-	preload("res://ui/interface_art.gd").paper(p,Rect2(34,165,552,65))
-	UISkin.label(p,"支度を整え、まだ見ぬ深みへ。",Rect2(54,180,513,36),23,UISkin.DARK)
-	game.new_button=nav(p,"はじめる",Rect2(66,263,488,68),game.request_new,"start",true)
-	nav(p,"終了",Rect2(66,348,488,57),func():game.get_tree().quit(),"quit")
-	UISkin.label(self,"0.6.2",Rect2(1170,675,85,25),15)
+	var p:=Control.new(); p.name="TitleMenu"; p.position=Vector2(96,128); p.size=Vector2(620,550); add_child(p)
+	# Keep the existing frame and native controls; give the 3:1 logo/ornament their own space.
+	var title_plate:=UISkin.panel(p,Rect2(0,0,620,238)); title_plate.self_modulate.a=0.82
+	var logo:=UISkin.picture(p,TITLE_LOGO,Rect2(40,8,540,180)); logo.name="TitleLogo"
+	logo.texture_filter=CanvasItem.TEXTURE_FILTER_LINEAR
+	var subtitle:=UISkin.label(p,"ダイブ・イン・アンダー",Rect2(42,194,550,34),22); subtitle.name="JapaneseSubtitle"
+	preload("res://ui/interface_art.gd").paper(p,Rect2(34,255,552,65))
+	UISkin.label(p,"支度を整え、まだ見ぬ深みへ。",Rect2(54,270,513,36),23,UISkin.DARK)
+	game.new_button=nav(p,"はじめる",Rect2(66,353,488,68),game.request_new,"start",true)
+	nav(p,"終了",Rect2(66,438,488,57),func():game.get_tree().quit(),"quit")
+	UISkin.label(self,"0.6.3",Rect2(1170,675,85,25),15)
 	game.new_button.add_theme_font_size_override("font_size",30)
 	game.new_button.grab_focus()
 func build_hub() -> void:
