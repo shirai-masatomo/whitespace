@@ -6,10 +6,20 @@
 - **長さ**：約75.789秒（4/4・152 BPM・48小節）
 - **雰囲気**：やや懐かしいRPG調、軽快な町の準備・旅立ち、笛／撥弦楽器／軽い打楽器を中心にした明るさとほのかな哀愁。
 - **ループ用形式**：Ogg Vorbis、44.1 kHz、ステレオ、約1.62 MB
-- **音源配置先（予定）**：`projects/dive-in-under/assets/bgm/adventure_preparation_loop.ogg`
+- **音源配置先**：`projects/dive-in-under/assets/bgm/adventure_preparation_loop.ogg`
 - **元ファイルSHA-256**：`133bdd590b005469e20c9b9520e8b5047bb279ad09f0d29df0bd7d675c87f7df`
 
-> **共有状態（2026-10-19）**：このREADMEのみGitHubに登録。音源のバイナリ `adventure_preparation_loop.ogg` は、GitHub上へ別途アップロードする必要がある。音源未確認のまま「実装済み」と判定しないこと。
+> **共有状態（2026-10-19更新）**：音源はGitHub登録済み。指定SHA-256との一致を確認。以前の「READMEのみ登録、バイナリ未共有」は登録前の記録であり、現在の状態ではない。
+
+## 0.6.2への実装
+
+- 起動中のゲームルートが保持する `ui/preparation_music.gd` と単一AudioStreamPlayerを利用。
+- `AudioStreamOggVorbis.loop=true`、`loop_offset=0`。`finished`通知による再生し直しを使わず、Godot内蔵ループを使用。音源そのものは変更しない。
+- 冒険準備／ステータス4タブ／倉庫／装備は同じ再生を継続。町でのアイテム操作・表示更新でも再開しない。
+- 専用BGMバス初期値 **−16 dB**。Master・効果音の音量は変更しない。`set_gain_db`で将来の設定UIから調整可能。
+- 開始時0.35秒フェードイン。出発／タイトルへ移動時0.7秒で無音までフェードアウトし停止。帰還後の準備画面で再開。フェード途中に戻っても古い停止処理を取り消す。
+- クラウドの隔離Windows EXEで変更箇所のみ確認する。結果と試聴用の実ゲームPCMは [BGM導入レビュー](../../review/bgm-0.6.2/README.md) に記録予定。通常プレイから検証処理へ入らない。
+- 実装確認と利用者の聴感・採用評価は分けて記録する。実PCの音声機器／既存効果音との聴感バランスは利用者の確認待ち。
 
 ## Dive In Under 実装担当への依頼
 

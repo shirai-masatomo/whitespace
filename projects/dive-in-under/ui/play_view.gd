@@ -68,7 +68,7 @@ func build_title() -> void:
 	UISkin.label(p,"支度を整え、まだ見ぬ深みへ。",Rect2(54,180,513,36),23,UISkin.DARK)
 	game.new_button=nav(p,"はじめる",Rect2(66,263,488,68),game.request_new,"start",true)
 	nav(p,"終了",Rect2(66,348,488,57),func():game.get_tree().quit(),"quit")
-	UISkin.label(self,"0.6.1",Rect2(1170,675,85,25),15)
+	UISkin.label(self,"0.6.2",Rect2(1170,675,85,25),15)
 	game.new_button.add_theme_font_size_override("font_size",30)
 	game.new_button.grab_focus()
 func build_hub() -> void:

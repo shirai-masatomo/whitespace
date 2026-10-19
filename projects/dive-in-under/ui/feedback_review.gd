@@ -109,6 +109,6 @@ static func run(game: Control) -> void:
 	await UI.shot(game,"07-normal-encounter")
 	checks["07"].normal_case={"seed":123,"id":b.enemy.id,"name":b.enemy.name,"appearance_log":game.campaign.journal[-1],"consistent":true}
 	checks["05"]={"start_button_tested":true,"layout_change":"Only title plate reduced from 620x460 to 620x148; controls stay in place","user_evaluation":"pending"}
-	if not UI.check(game,descendants(game).filter(func(n):return n is AudioStreamPlayer or n is AudioStreamPlayer2D).is_empty(),"No BGM playback added"): return
+	if not UI.check(game,descendants(game).filter(func(n):return n is AudioStreamPlayer or n is AudioStreamPlayer2D).size()==1,"One persistent BGM player"): return
 	UI.write(game,{"run_id":game.smoke_run_id,"complete":true,"rendered":DisplayServer.get_name()!="headless","no_save_store":game.save_store==null,"review":"ui-feedback-01-07","version":"0.6.1","checks":checks,"status_read_only":true,"warehouse_transfers":true,"normal_encounter_sample":1,"battle_core_changed":false,"user_evaluation":"pending","user_adoption":"pending"},"feedback-review.json")
 	game.get_tree().quit()

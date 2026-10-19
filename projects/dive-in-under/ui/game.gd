@@ -4,6 +4,7 @@ const SaveStore = preload("res://core/save_store.gd")
 var last_defense_flash := ""
 var legacy_persistence_mode:=false
 var session_departed:=false
+var preparation_music: Node
 var route_map_open:=false
 var play_view: Control
 var equipment_focus: String="head"
@@ -36,7 +37,7 @@ var campaign_seed := 123
 const CampaignReplay = preload("res://ui/campaign_replay.gd")
 
 func initialize_game() -> void:
-	get_window().title="Dive In Under 0.6.1"
+	get_window().title="Dive In Under 0.6.2"
 	Engine.max_fps=60
 	legacy_persistence_mode=smoke_dir!="" and "--legacy-persistence-check" in OS.get_cmdline_user_args()
 	cfg=Expedition.load_config()
@@ -61,6 +62,9 @@ func initialize_game() -> void:
 	play_timer.wait_time=0.6
 	play_timer.timeout.connect(func(): if campaign.get("phase")=="battle" and ui_mode=="campaign": perform("round",{},int(campaign.revision)))
 	add_child(play_timer)
+	preparation_music=Node.new()
+	preparation_music.set_script(preload("res://ui/preparation_music.gd"))
+	add_child(preparation_music)
 	get_tree().auto_accept_quit=false
 
 func _notification(what: int) -> void:
@@ -69,6 +73,7 @@ func _notification(what: int) -> void:
 		get_tree().quit()
 
 func show_title() -> void:
+	preparation_music.set_preparation_active(false)
 	if not legacy_persistence_mode:
 		timer.stop(); play_timer.stop(); ui_mode="title"; title_visible=true; show_play_view("title"); return
 	background.set_depth(1)
@@ -105,6 +110,7 @@ func show_title() -> void:
 	new_button.grab_focus()
 
 func show_battle() -> void:
+	preparation_music.set_preparation_active(false)
 	play_timer.stop(); ui_mode="tool"; timer.wait_time=0.5
 	super.show_battle()
 
@@ -199,6 +205,7 @@ func show_play_view(mode: String) -> void:
 	for side in ["left","right","top","bottom"]: screen.add_theme_constant_override("margin_"+side,0)
 	play_view=Control.new(); play_view.set_script(preload("res://ui/play_view.gd")); play_view.game=self; play_view.mode=mode; screen.add_child(play_view)
 func show_campaign() -> void:
+	preparation_music.set_preparation_active(campaign.get("phase")=="town")
 	if not legacy_persistence_mode:
 		timer.stop(); play_timer.stop(); title_visible=false; ui_mode="campaign"; play_buttons={}
 		background.set_depth(maxi(1,int(campaign.floor)))
@@ -466,6 +473,8 @@ func show_equipment(root: VBoxContainer) -> void:
 	var depart:=command("HP/SP回復済み  →  もう一度地下へ","depart"); root.add_child(depart)
 
 func smoke(quit_on_finish: bool = true) -> void:
+	if "--bgm-review" in OS.get_cmdline_user_args():
+		await preload("res://ui/bgm_review.gd").run(self); return
 	if "--ui-feedback-review" in OS.get_cmdline_user_args():
 		await preload("res://ui/feedback_review.gd").run(self); return
 	if "--ui-integration-review" in OS.get_cmdline_user_args():
