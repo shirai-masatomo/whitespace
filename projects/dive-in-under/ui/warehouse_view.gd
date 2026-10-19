@@ -62,6 +62,16 @@ func skin(b: Button, selected: bool=false, purple: bool=false) -> void:
 		b.add_theme_color_override("font_"+("color" if state=="normal" else state+"_color"),INK if state!="disabled" else Color("697c7c"))
 	b.add_theme_color_override("font_hover_color",Color("302b23") if selected and textured else INK)
 	if selected and textured: b.add_theme_color_override("font_color",Color("302b23"))
+func tile_skin(b: Button, selected: bool) -> void:
+	# Tall inventory tiles need a quiet content area, not stretched button end caps.
+	b.set_meta("gold_surface",false)
+	for state in ["normal","hover","pressed","disabled"]:
+		var st:=StyleBoxFlat.new(); st.bg_color=Color("25352f") if selected else Color("0b1c23")
+		st.border_color=GOLD if selected or state=="hover" else Color("716047")
+		st.set_border_width_all(2 if selected else 1); st.set_content_margin_all(8)
+		if state=="hover": st.bg_color=Color("20343a")
+		if state=="pressed": st.bg_color=Color("3a3b2f")
+		b.add_theme_stylebox_override(state,st)
 func rebuild() -> void:
 	game.show_campaign()
 func select_item(source: String, uid: String) -> void:
@@ -133,7 +143,7 @@ func build() -> void:
 		var item: Dictionary=game.cfg.items[game.campaign.items[uid]]
 		if category!="all" and Storage.category(item)!=category: continue
 		visible_items.append(uid)
-		var tile:=Button.new(); tile.custom_minimum_size=Vector2(84,112); skin(tile,uid==selected_uid); grid.add_child(tile)
+		var tile:=Button.new(); tile.custom_minimum_size=Vector2(84,112); skin(tile,uid==selected_uid); tile_skin(tile,uid==selected_uid); grid.add_child(tile)
 		icon_at(tile,item.slot,Rect2(14,10,56,52),game.campaign.items[uid])
 		label_at(tile,"×1",Rect2(50,58,24,18),13)
 		var title:=label_at(tile,Catalog.name_of(item),Rect2(10,76,64,22),12,INK); UISkin.fit_name(title,Catalog.name_of(item),64); title.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER
@@ -142,7 +152,7 @@ func build() -> void:
 		tile.tooltip_text=Catalog.name_of(item)+" ×1\n"+game.condition_text(uid)
 		tile.pressed.connect(func(): select_item("warehouse",uid)); rows[uid]=tile
 	if visible_items.is_empty(): label_at(center,"この分類にアイテムはありません",Rect2(40,230,500,32),19,MUTED)
-	label_at(center,"容量制限なし  ·  1枠1点 / 個別の耐久を保持",Rect2(18,479,545,21),14,MUTED)
+	label_at(center,"容量制限なし  ·  1枠1点 / 個別の耐久を保持",Rect2(28,474,524,22),14,MUTED)
 	var right:=panel(Rect2(916,92,348,510),"アイテム詳細","eyes")
 	build_details(right)
 	build_actions()
