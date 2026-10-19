@@ -7,10 +7,10 @@ const INK=Color("eee6d2")
 const MUTED=Color("a6b7b3")
 const DARK=Color("30291e")
 static func label(parent: Node, text: String, r: Rect2, pixels: int=18, color: Color=INK, wrap: bool=false) -> Label:
-	var l:=Label.new(); l.text=text; l.position=r.position; l.size=r.size
+	var l:=Label.new(); l.language="ja"; l.text=text; l.position=r.position; l.size=r.size
 	l.add_theme_font_size_override("font_size",pixels); l.add_theme_color_override("font_color",color)
 	l.mouse_filter=Control.MOUSE_FILTER_IGNORE
-	l.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART if wrap else TextServer.AUTOWRAP_OFF
+	l.autowrap_mode=TextServer.AUTOWRAP_WORD if wrap else TextServer.AUTOWRAP_OFF
 	l.clip_text=true; parent.add_child(l); l.size=r.size; return l
 static func picture(parent: Node, texture: Texture2D, r: Rect2, cover: bool=false) -> TextureRect:
 	var t:=TextureRect.new(); t.expand_mode=TextureRect.EXPAND_IGNORE_SIZE; t.texture=texture; t.position=r.position; t.size=r.size
@@ -40,3 +40,15 @@ static func scroll_theme() -> Theme:
 		var s:=StyleBoxFlat.new(); s.bg_color=Color("15262b") if mode=="scroll" else Color("c2a264"); s.border_color=Color("725832"); s.set_border_width_all(1)
 		s.content_margin_left=4; s.content_margin_right=4; t.set_stylebox(mode,"VScrollBar",s)
 	return t
+
+static func fit_name(l: Label, full_name: String, width: float) -> void:
+	# Show an explicit ellipsis within the measured content area; data stays unchanged.
+	var font:=l.get_theme_font("font")
+	var pixels:=l.get_theme_font_size("font_size")
+	var visible:=full_name
+	if font.get_string_size(visible,HORIZONTAL_ALIGNMENT_LEFT,-1,pixels).x>width:
+		while not visible.is_empty() and font.get_string_size(visible+"…",HORIZONTAL_ALIGNMENT_LEFT,-1,pixels).x>width:
+			visible=visible.left(visible.length()-1)
+		visible+="…"
+	l.text=visible; l.tooltip_text=full_name; l.set_meta("full_name",full_name)
+	l.clip_text=true; l.size.x=width

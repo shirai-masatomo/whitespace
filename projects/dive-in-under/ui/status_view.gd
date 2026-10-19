@@ -45,10 +45,10 @@ func _ready() -> void:
 	var entry:=create_tween(); entry.tween_property(self,"modulate:a",1.0,0.20)
 	entry.finished.connect(func(): input_locked=false; tab_buttons.equipment.grab_focus())
 func label_at(parent: Control, value: String, r: Rect2, font_size: int=18, color: Color=INK) -> Label:
-	var l:=Label.new(); l.clip_text=true; l.text=value; l.position=r.position; l.size=r.size
+	var l:=Label.new(); l.language="ja"; l.vertical_alignment=VERTICAL_ALIGNMENT_CENTER; l.clip_text=true; l.text=value; l.position=r.position; l.size=r.size
 	l.set_meta("normal_color",color)
 	if parent is Button and parent.get_meta("gold_surface",false): color=DARK
-	l.add_theme_font_size_override("font_size",font_size); l.add_theme_color_override("font_color",color); l.mouse_filter=Control.MOUSE_FILTER_IGNORE; parent.add_child(l); return l
+	l.add_theme_font_size_override("font_size",font_size); l.add_theme_color_override("font_color",color); l.mouse_filter=Control.MOUSE_FILTER_IGNORE; parent.add_child(l); l.size=r.size; return l
 func image_at(parent: Control, texture: Texture2D, r: Rect2, crop: bool=false) -> TextureRect:
 	var t:=TextureRect.new(); t.expand_mode=TextureRect.EXPAND_IGNORE_SIZE; t.texture=texture; t.position=r.position; t.size=r.size
 	t.clip_contents=crop; t.stretch_mode=TextureRect.STRETCH_KEEP_ASPECT_COVERED if crop else TextureRect.STRETCH_KEEP_ASPECT_CENTERED
@@ -194,9 +194,9 @@ func build_equipment() -> void:
 		for i in column.size():
 			var slot: String=column[i]; var item:=Model.equipment(game.campaign,game.cfg,slot)
 			var b:=item_button(slot,"",Rect2(x,16+i*(64 if right else 72),150,58))
-			label_at(b,game.cfg.slots[slot],Rect2(44,9,101,18),13,MUTED)
-			var name_label:=label_at(b,item.name,Rect2(44,28,101,22),14)
-			name_label.text_overrun_behavior=TextServer.OVERRUN_TRIM_ELLIPSIS
+			label_at(b,game.cfg.slots[slot],Rect2(47,10,90,16),12,MUTED)
+			var name_label:=label_at(b,item.name,Rect2(47,29,90,19),14)
+			UISkin.fit_name(name_label,item.name,90)
 			if not item.empty: image_at(b,EquipmentArt.texture(item.template_id,slot),Rect2(3,11,39,39))
 			else: label_at(b,"—",Rect2(10,14,30,28),23,Color("667b7c"))
 			b.tooltip_text=game.cfg.slots[slot]+" / "+item.name+" / Enterで詳細"
@@ -208,12 +208,12 @@ func build_abilities() -> void:
 	var i:=0
 	for key in Model.STAT_NAMES:
 		var base:=Model.base_value(game.campaign,game.cfg,key); var total: int=unit[key]
-		var b:=item_button(key,"",Rect2(8,54+i*59,536,49))
-		image_at(b,Symbols.texture({"max_hp":"hp","max_sp":"sp"}.get(key,key)),Rect2(7,8,32,32))
-		label_at(b,Model.STAT_NAMES[key],Rect2(48,8,160,32),19)
+		var b:=item_button(key,"",Rect2(8,54+i*62,536,54))
+		image_at(b,Symbols.texture({"max_hp":"hp","max_sp":"sp"}.get(key,key)),Rect2(7,11,32,32))
+		label_at(b,Model.STAT_NAMES[key],Rect2(48,12,160,30),18)
 		var current: String="%d / %d"%[unit["hp" if key=="max_hp" else "sp"],total] if key in ["max_hp","max_sp"] else str(total)
-		var value:=label_at(b,current,Rect2(205,8,118,32),20,GOLD); value.horizontal_alignment=HORIZONTAL_ALIGNMENT_RIGHT
-		var correction:=label_at(b,"%d ＋ %d"%[base,total-base],Rect2(342,8,177,32),17,MUTED); correction.horizontal_alignment=HORIZONTAL_ALIGNMENT_RIGHT
+		var value:=label_at(b,current,Rect2(205,12,118,30),18,GOLD); value.horizontal_alignment=HORIZONTAL_ALIGNMENT_RIGHT
+		var correction:=label_at(b,"%d ＋ %d"%[base,total-base],Rect2(342,12,177,30),18,MUTED); correction.horizontal_alignment=HORIZONTAL_ALIGNMENT_RIGHT
 		i+=1
 	label_at(central,"装備と耐久を反映した、現在の能力です。",Rect2(12,365,525,31),16,MUTED)
 func build_conditions() -> void:
@@ -249,7 +249,7 @@ func build_profile() -> void:
 	paper_at(central,Rect2(8,314,536,99))
 	var note:=label_at(central,str(facts.get("description","人物紹介はまだ設定されていません。")),Rect2(23,329,507,69),18,DARK); note.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART
 func detail_text(value: String, font_size: int=18, color: Color=INK) -> Label:
-	var l:=Label.new(); l.text=value; l.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART; l.add_theme_font_size_override("font_size",font_size); l.add_theme_color_override("font_color",color); details.add_child(l); return l
+	var l:=Label.new(); l.language="ja"; l.text=value; l.autowrap_mode=TextServer.AUTOWRAP_WORD; l.add_theme_font_size_override("font_size",font_size); l.add_theme_color_override("font_color",color); details.add_child(l); return l
 func section(title: String, body: String) -> void:
 	detail_text(title,16,MUTED); detail_text(body,18); details.add_child(HSeparator.new())
 func detail_row(title: String, value: String, color: Color=INK) -> void:
@@ -262,7 +262,7 @@ func detail_heading(title: String, icon: Texture2D, subtitle: String="") -> void
 	var text:=VBoxContainer.new(); text.size_flags_horizontal=Control.SIZE_EXPAND_FILL; row.add_child(text)
 	for value in [[title,23,GOLD],[subtitle,15,MUTED]]:
 		if value[0]=="": continue
-		var l:=Label.new(); l.text=value[0]; l.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART; l.add_theme_font_size_override("font_size",value[1]); l.add_theme_color_override("font_color",value[2]); text.add_child(l)
+		var l:=Label.new(); l.language="ja"; l.text=value[0]; l.autowrap_mode=TextServer.AUTOWRAP_WORD; l.add_theme_font_size_override("font_size",value[1]); l.add_theme_color_override("font_color",value[2]); text.add_child(l)
 func update_details() -> void:
 	clear_children(details)
 	var id: String=selection[active_tab]

@@ -46,7 +46,8 @@ func hero_card(r: Rect2) -> Control:
 	UISkin.picture(p,face,Rect2(20,56,92,111))
 	UISkin.label(p,"HP",Rect2(126,63,50,24),17,UISkin.DARK)
 	UISkin.label(p,"%d / %d"%[h.hp,h.max_hp],Rect2(125,88,r.size.x-145,26),19,UISkin.DARK)
-	UISkin.gauge(p,h.hp,h.max_hp,Rect2(20,184,r.size.x-40,15),Color("b83e32"))
+	var hp_rect:=Rect2(126,130,r.size.x-146,15) if mode=="hub" else Rect2(20,184,r.size.x-40,15)
+	UISkin.gauge(p,h.hp,h.max_hp,hp_rect,Color("b83e32"))
 	UISkin.label(p,"SP   %d / %d"%[h.sp,h.max_sp],Rect2(20,213,r.size.x-40,28),18,UISkin.DARK)
 	UISkin.gauge(p,h.sp,h.max_sp,Rect2(20,246,r.size.x-40,15),Color("267fae"))
 	var lv:=E.level_info(s,game.cfg)
@@ -58,7 +59,8 @@ func hero_card(r: Rect2) -> Control:
 		UISkin.label(p,state_text if state_text!="" else "状態異常なし",Rect2(20,383,r.size.x-40,36),16,UISkin.DARK,true)
 	return p
 func build_title() -> void:
-	var p:=UISkin.panel(self,Rect2(96,128,620,460))
+	var p:=Control.new(); p.position=Vector2(96,128); p.size=Vector2(620,460); add_child(p)
+	var title_plate:=UISkin.panel(p,Rect2(0,0,620,148)); title_plate.self_modulate.a=0.82
 	var brand:=UISkin.label(p,"Dive In Under",Rect2(38,28,560,78),55,UISkin.GOLD)
 	var serif:=SystemFont.new(); serif.font_names=PackedStringArray(["Georgia"]); brand.add_theme_font_override("font",serif)
 	UISkin.label(p,"ダイブ・イン・アンダー",Rect2(42,106,550,34),22)
@@ -66,7 +68,7 @@ func build_title() -> void:
 	UISkin.label(p,"支度を整え、まだ見ぬ深みへ。",Rect2(54,180,513,36),23,UISkin.DARK)
 	game.new_button=nav(p,"はじめる",Rect2(66,263,488,68),game.request_new,"start",true)
 	nav(p,"終了",Rect2(66,348,488,57),func():game.get_tree().quit(),"quit")
-	UISkin.label(self,"0.6.0",Rect2(1170,675,85,25),15)
+	UISkin.label(self,"0.6.1",Rect2(1170,675,85,25),15)
 	game.new_button.add_theme_font_size_override("font_size",30)
 	game.new_button.grab_focus()
 func build_hub() -> void:

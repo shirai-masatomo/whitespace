@@ -22,6 +22,8 @@ static func write(game: Control, record: Dictionary, name: String) -> void:
 static func fixture(game: Control, enemy: String, floor_number: int) -> void:
 	game.campaign.phase="battle"; game.campaign.floor=floor_number; game.campaign.highest_floor=maxi(floor_number,game.campaign.highest_floor)
 	game.campaign.battle={"enemy_id":enemy,"enemy_level":1 if floor_number<10 else 10,"seed":123,"hero":E.hero(game.campaign,game.cfg),"rounds":0,"rules_version":3,"encounter_version":2}
+	var level: int=game.campaign.battle.enemy_level
+	game.campaign.journal=["町でHP/SPを回復し、地下へ向かった。","地下%dF：%s Lv.%d が現れた。"%[floor_number,game.data.enemies[enemy].name,level]]
 	game.show_campaign()
 static func compare(game: Control, root: String, target: String, screenshot: String, output: String, note: String) -> void:
 	var im:=Image.load_from_file(root.path_join(target))

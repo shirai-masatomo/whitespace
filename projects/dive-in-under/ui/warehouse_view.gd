@@ -22,7 +22,7 @@ func _ready() -> void:
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	build()
 func label_at(parent: Control, value: String, r: Rect2, font_size: int=18, color: Color=INK) -> Label:
-	var l:=Label.new(); l.clip_text=true; l.text=value; l.position=r.position; l.size=r.size
+	var l:=Label.new(); l.language="ja"; l.clip_text=true; l.text=value; l.position=r.position; l.size=r.size
 	if parent.get_meta("paper_header",false) and r.position.y<40: color=Color("30291e")
 	if parent.get_meta("paper_body",false) and r.position.y>=40: color=Color("655035") if color==MUTED else Color("30291e")
 	l.set_meta("normal_color",color)
@@ -107,14 +107,14 @@ func build() -> void:
 	label_at(header,"倉庫 ・ 所持品",Rect2(352,11,300,40),27)
 	label_at(header,"持ち帰ったものを、次の旅へ。",Rect2(690,14,340,34),16,MUTED)
 	label_at(header,"G  %d"%game.campaign.gold,Rect2(1080,11,150,40),23,GOLD)
-	var left:=panel(Rect2(16,92,296,318),"所持品","backpack")
+	var left:=panel(Rect2(16,92,296,300),"所持品","backpack")
 	label_at(left,"%d / 15"%game.campaign.inventory.size(),Rect2(198,9,78,30),18)
-	bag_scroll=build_list(left,"inventory",Rect2(14,55,268,246))
-	var cloth:=panel(Rect2(16,422,296,200),"父親の風呂敷","cloth",true)
+	bag_scroll=build_list(left,"inventory",Rect2(14,55,268,228))
+	var cloth:=panel(Rect2(16,404,296,198),"父親の風呂敷","cloth",true)
 	label_at(cloth,"%d / 3"%game.campaign.cloth.size(),Rect2(226,11,55,30),17)
 	label_at(cloth,"死亡しても失われない",Rect2(18,46,260,23),14,Color("d7bfed"))
 	cloth_scroll=build_list(cloth,"cloth",Rect2(14,73,268,114))
-	var center:=panel(Rect2(324,92,580,530),"倉庫","warehouse",false,true)
+	var center:=panel(Rect2(324,92,580,510),"倉庫","warehouse",false,true)
 	label_at(center,"保管  %d 点"%game.campaign.warehouse.size(),Rect2(205,9,140,30),18)
 	var order_names: Array=["種別","名前","耐久"]
 	var order_keys: Array=["category","name","condition"]
@@ -126,27 +126,28 @@ func build() -> void:
 		var tab:=Button.new(); tab.text=Catalog.CATEGORIES[category]; tab.position=Vector2(14+tab_index*92,54); tab.size=Vector2(88,32); skin(tab,game.warehouse_state.get("category","all")==category); tab.add_theme_font_size_override("font_size",15); center.add_child(tab)
 		tab.pressed.connect(func(): remember_scroll(); game.warehouse_state.category=category; game.warehouse_state.grid_scroll=0; rebuild())
 		tab_index+=1
-	grid_scroll=scroll_area(center,Rect2(14,98,552,399))
+	grid_scroll=scroll_area(center,Rect2(14,98,552,379))
 	var grid:=GridContainer.new(); grid.columns=6; grid.add_theme_constant_override("h_separation",5); grid.add_theme_constant_override("v_separation",6); grid_scroll.add_child(grid)
 	var category: String=game.warehouse_state.get("category","all")
 	for uid in game.campaign.warehouse:
 		var item: Dictionary=game.cfg.items[game.campaign.items[uid]]
 		if category!="all" and Storage.category(item)!=category: continue
 		visible_items.append(uid)
-		var tile:=Button.new(); tile.custom_minimum_size=Vector2(84,88); skin(tile,uid==selected_uid); grid.add_child(tile)
-		icon_at(tile,item.slot,Rect2(13,8,58,54),game.campaign.items[uid])
-		label_at(tile,"×1",Rect2(53,45,28,22),15)
-		var title:=label_at(tile,Catalog.name_of(item),Rect2(4,64,76,20),12,MUTED); title.text_overrun_behavior=TextServer.OVERRUN_TRIM_ELLIPSIS; title.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER
+		var tile:=Button.new(); tile.custom_minimum_size=Vector2(84,112); skin(tile,uid==selected_uid); grid.add_child(tile)
+		icon_at(tile,item.slot,Rect2(14,10,56,52),game.campaign.items[uid])
+		label_at(tile,"×1",Rect2(50,58,24,18),13)
+		var title:=label_at(tile,Catalog.name_of(item),Rect2(10,76,64,22),12,INK); UISkin.fit_name(title,Catalog.name_of(item),64); title.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER
 		if item.slot!="":
-			var bar:=ColorRect.new(); bar.position=Vector2(8,84); bar.size=Vector2(68.0*game.campaign.item_condition[uid].current/100,2); bar.color=Color("72b8a1") if game.campaign.item_condition[uid].current>0 else Color("a95646"); bar.mouse_filter=Control.MOUSE_FILTER_IGNORE; tile.add_child(bar)
+			var bar:=ColorRect.new(); bar.position=Vector2(10,101); bar.size=Vector2(64.0*game.campaign.item_condition[uid].current/100,2); bar.color=Color("72b8a1") if game.campaign.item_condition[uid].current>0 else Color("a95646"); bar.mouse_filter=Control.MOUSE_FILTER_IGNORE; tile.add_child(bar)
 		tile.tooltip_text=Catalog.name_of(item)+" ×1\n"+game.condition_text(uid)
 		tile.pressed.connect(func(): select_item("warehouse",uid)); rows[uid]=tile
 	if visible_items.is_empty(): label_at(center,"この分類にアイテムはありません",Rect2(40,230,500,32),19,MUTED)
-	label_at(center,"容量制限なし  ·  1枠1点 / 個別の耐久を保持",Rect2(18,499,545,23),14,MUTED)
-	var right:=panel(Rect2(916,92,348,530),"アイテム詳細","eyes")
+	label_at(center,"容量制限なし  ·  1枠1点 / 個別の耐久を保持",Rect2(18,479,545,21),14,MUTED)
+	var right:=panel(Rect2(916,92,348,510),"アイテム詳細","eyes")
 	build_details(right)
 	build_actions()
-	label_at(self,game.notice if game.notice!="" else "アイテムを選び、下のボタンで移動します。移動後もこの起動中は保持されます。",Rect2(24,623,1230,22),14,MUTED)
+	var guide:=ColorRect.new(); guide.position=Vector2(16,610); guide.size=Vector2(1248,30); guide.color=Color("10242d"); guide.mouse_filter=Control.MOUSE_FILTER_IGNORE; add_child(guide)
+	label_at(self,game.notice if game.notice!="" else "アイテムを選び、下のボタンで移動します。移動後もこの起動中は保持されます。",Rect2(28,613,1224,24),15,INK)
 	bag_scroll.set_deferred("scroll_vertical",game.warehouse_state.get("bag_scroll",0))
 	grid_scroll.set_deferred("scroll_vertical",game.warehouse_state.get("grid_scroll",0))
 	cloth_scroll.set_deferred("scroll_vertical",game.warehouse_state.get("cloth_scroll",0))
@@ -174,7 +175,7 @@ func build_details(p: Control) -> void:
 		var separator:=ColorRect.new(); separator.color=Color("37484a"); separator.position=Vector2(18,y); separator.size=Vector2(312,1); separator.mouse_filter=Control.MOUSE_FILTER_IGNORE; p.add_child(separator)
 		label_at(p,values[i][0],Rect2(21,y+3,86,29),16,MUTED)
 		var value:=label_at(p,values[i][1],Rect2(111,y+3,217,29),16); value.text_overrun_behavior=TextServer.OVERRUN_TRIM_ELLIPSIS; value.tooltip_text=values[i][1]; value.mouse_filter=Control.MOUSE_FILTER_PASS
-	var note:=label_at(p,"父が残した、小さな守り。\n大切なものは風呂敷へ。",Rect2(22,463,303,47),16,Color("c5ac7a"))
+	var note:=label_at(p,"父が残した、小さな守り。\n大切なものは風呂敷へ。",Rect2(22,453,303,43),16,Color("c5ac7a"))
 	note.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART
 func build_actions() -> void:
 	var entries: Array=[["預ける","deposit","warehouse","warehouse"],["引き出す","withdraw","inventory","body"],["整理","organize","","material"],["風呂敷へ","to_cloth","cloth","cloth"],["戻る","back","","lantern"]]

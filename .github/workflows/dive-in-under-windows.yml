@@ -78,6 +78,8 @@ jobs:
               $artOnly = $files.Count -gt 0 -and @($files | Where-Object { $_ -notmatch $allowed }).Count -eq 0
             }
           }
+          $feedbackOnly = $integrationOnly -and (Test-Path ui/feedback_review.gd)
+          "feedback_only=$($feedbackOnly.ToString().ToLowerInvariant())" >> $env:GITHUB_OUTPUT
           "integration_only=$($integrationOnly.ToString().ToLowerInvariant())" >> $env:GITHUB_OUTPUT
           $global:LASTEXITCODE = 0
           "art_only=$($artOnly.ToString().ToLowerInvariant())" >> $env:GITHUB_OUTPUT
@@ -147,9 +149,13 @@ jobs:
         if: steps.scope.outputs.integration_only == 'true'
         run: ./dev.ps1 -Task build -GameCommit '${{ github.event.pull_request.head.sha || github.sha }}'
       - name: Isolated session UI, transitions, comparison screenshots and fresh restart
-        if: steps.scope.outputs.integration_only == 'true'
+        if: steps.scope.outputs.integration_only == 'true' && steps.scope.outputs.feedback_only != 'true'
         timeout-minutes: 4
         run: ./tools/ui_integration_review.ps1
+      - name: Focused feedback 01-07, one isolated EXE process
+        if: steps.scope.outputs.feedback_only == 'true'
+        timeout-minutes: 2
+        run: ./tools/ui_feedback_review.ps1
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -161,6 +167,9 @@ jobs:
         with:
           name: DiveInUnder-foundation-evidence
           path: |
+            projects/dive-in-under/artifacts/ui-feedback/*.png
+            projects/dive-in-under/artifacts/ui-feedback/*.json
+            projects/dive-in-under/artifacts/ui-feedback/*.log
             projects/dive-in-under/artifacts/ui-integration/*.png
             projects/dive-in-under/artifacts/ui-integration/*.json
             projects/dive-in-under/artifacts/ui-integration/*.log
