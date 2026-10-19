@@ -1,0 +1,20 @@
+{
+	"complete": true,
+	"exit_button_pressed": true,
+	"layout": {
+		"dimmer_alpha": 0.119999997317791,
+		"layer_order": true,
+		"logo": "res://assets/title/v1/dive-in-under-logo-gold-deep-shadow.png",
+		"logo_aspect": 3.0,
+		"logo_rect": "[P: (136.0, 136.0), S: (540.0, 180.0)]",
+		"lower_ornament_unclipped": true,
+		"original_background": "res://assets/interface/v2/surface-title.png",
+		"subtitle_rect": "[P: (138.0, 322.0), S: (550.0, 34.0)]",
+		"ui_untinted": true
+	},
+	"no_save_store": true,
+	"rendered": true,
+	"run_id": "bbe7fbd0f24142b5be4f8e0a82a17ff6",
+	"start_button": true,
+	"title_shown": true
+}

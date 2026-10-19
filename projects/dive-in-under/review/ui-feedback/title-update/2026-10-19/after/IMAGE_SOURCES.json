@@ -1,0 +1,19 @@
+{
+  "kind": "Actual exported Windows EXE screenshots, not generated references",
+  "runtime_source": "9089418d05c442195313ebb2cd2cc2be18747461",
+  "ci_run_id": 39238056663,
+  "resolution": [
+    1280,
+    720
+  ],
+  "files": [
+    {
+      "path": "title-quit-focused.png",
+      "sha256": "f1781f9bad0c19430fbe55620459ba09a85110757d9c4746791112ec8ed0525b"
+    },
+    {
+      "path": "title-start-focused.png",
+      "sha256": "f219a7ee770aacba1eeb3fb0adbfe49b21dde0fbd9bc1d9ed1fb102b0f8c8856"
+    }
+  ]
+}
