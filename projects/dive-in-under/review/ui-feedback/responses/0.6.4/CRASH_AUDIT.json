@@ -1,0 +1,136 @@
+{
+  "audit_utc": "2026-10-19T11:59:10.171681+00:00",
+  "main_at_audit": "476c4e04aed61a7d46483c1328d65eeb778715bd",
+  "failed_run": {
+    "id": 39244216616,
+    "head_sha": "e4c41ccbd92b7cec95e67146cedbf8f001050e08",
+    "job_id": 118032084508,
+    "conclusion": "failure",
+    "export_step": "success",
+    "verification_step": 25,
+    "evidence_artifact_id": 12183540329,
+    "exit_code_decimal": 3221225477,
+    "exit_code_hex": "0xC0000005",
+    "elapsed_ms": 16292,
+    "complete_report_present": false,
+    "full_backpack_image_present": false,
+    "pngs": [
+      {
+        "file": "01-title.png",
+        "sha256": "BC77C3BE9124B8A929784FA234198B9356854C647F00F8D4DB3AD35DAFE58856",
+        "bytes": 1615147
+      },
+      {
+        "file": "02-status-equipment.png",
+        "sha256": "A22F4C5F6B4B1186FDBEAEB6D5C55CFF4932FC19FBAE6B40B31FEC6C5E80DEC2",
+        "bytes": 1036645
+      },
+      {
+        "file": "04-status-abilities.png",
+        "sha256": "9148A39FB84FAD21E1897B1A995CCC4810F1A76DE3C4418ED92609A671247656",
+        "bytes": 722930
+      },
+      {
+        "file": "04-status-empty.png",
+        "sha256": "67AAEAAB325372BCF707F54C0B8D0DAF5EBCA5A7B10818C836FE6E4D9415A4D2",
+        "bytes": 1011442
+      },
+      {
+        "file": "05-exploration.png",
+        "sha256": "1D8D208F9855F2BC914C449281158E9B0B08B876289DB48E4948EEA8B1BE2D44",
+        "bytes": 1541364
+      },
+      {
+        "file": "05-preparation.png",
+        "sha256": "E0204EBC20C32693F34029790BC94D48DA3AA549D73A63C5447DB35C84493203",
+        "bytes": 1592744
+      },
+      {
+        "file": "05-warehouse.png",
+        "sha256": "3516E1215BF47DB94482055EC1B165AE3555F5FB727A3A848F2705B5E06EC5CC",
+        "bytes": 916285
+      },
+      {
+        "file": "06-battle-paused.png",
+        "sha256": "5EF020B583F9D70550C02D056FE85C274D1D33B782550F23146EA5E67ED6E27E",
+        "bytes": 1515892
+      },
+      {
+        "file": "06-battle-running.png",
+        "sha256": "64C7EB3B2C2AEA15C4121E546C140286A7F6035FEB45E230A44778435CA5BA14",
+        "bytes": 1516955
+      },
+      {
+        "file": "07-next-departure.png",
+        "sha256": "8030BAE7DADDEEAC8D29BB7D7DE6BF5B8C61FCA3A0538E20B7DC5065657619E4",
+        "bytes": 1508819
+      },
+      {
+        "file": "08-equipment.png",
+        "sha256": "A5BBD7C45E52421189A7D093F287445484C1B45F827198C35DA95D4E76B501EA",
+        "bytes": 961510
+      },
+      {
+        "file": "09-before-departure.png",
+        "sha256": "B591914C4B8D8E274487564FBBFB14BC7312AA7CCD582CA3B90B52DE5331928B",
+        "bytes": 1035443
+      }
+    ]
+  },
+  "existing_fix_commits": [
+    "87dd10b041b98b5863cab341e6435cac09c1f94e",
+    "3aab6f605b7816b07adb088940669262f1325c50"
+  ],
+  "verified_release": {
+    "user_save_edited_by_publish": false,
+    "exe_sha256": "D34D36F3BE1A6C49C56525AE86469B92E4F417DDF0B43CF00DD80C385C4B0562",
+    "ci_run_id": 39246303803,
+    "game_commit": "c8ca625ceae51cc033dc89c95166c94e6c32921e",
+    "previous_directory": "releases/9089418d05c442195313ebb2cd2cc2be18747461-0.6.3",
+    "pck_sha256": "FBAB1852E070A2E0C27630BB2FD6263A2802D3C25CC9CC67992D88A6C8D39951",
+    "evidence_artifact_id": 12183258716,
+    "zip_sha256": "B8B07F417C696B236A468B6FCB9005D783C382F4D067E02FC40661B5260A2EF8",
+    "published_utc": "2026-10-19T11:45:30.6142626Z",
+    "verification": "cloud-ui-refinement-01-09-title",
+    "build_artifact_id": 12183543510,
+    "version": "0.6.4",
+    "previous_zip_archive": "C:\\Users\\masat\\Documents\\Codex\\2026-10-17\\task\\dive-in-under-work\\projects\\dive-in-under\\build\\archive\\DiveInUnder-previous-D186A5D843F5.zip",
+    "relative_directory": "releases/c8ca625ceae51cc033dc89c95166c94e6c32921e-0.6.4",
+    "existing_processes_untouched": true
+  },
+  "confirmation": {
+    "ci_job_id": 118038949977,
+    "ci_conclusion": "success",
+    "exit_code": 0,
+    "elapsed_ms": 18114,
+    "complete": true,
+    "checks": [
+      "01",
+      "02",
+      "03",
+      "04",
+      "05",
+      "06",
+      "07",
+      "08",
+      "09",
+      "title"
+    ],
+    "after_png_count": 13,
+    "png_hashes_match": true,
+    "png_dimensions": [
+      1280,
+      720
+    ],
+    "current_exe_pck_hashes_match": true,
+    "normal_zip_hash_matches": true,
+    "runtime_diff_since_verified_source": [],
+    "local_game_launches_this_audit": 0,
+    "cloud_reruns_this_audit": 0
+  },
+  "limits": [
+    "Native stack and dump not collected; exact C++ fault location unproven.",
+    "Normal game key handlers were fixed; physical-key reproduction not performed.",
+    "Earlier whole-PC freeze not diagnosed by these CI records."
+  ]
+}
