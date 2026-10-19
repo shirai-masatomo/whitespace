@@ -34,7 +34,7 @@ foreach($mode in $modes) {
     $payload=$BuildDirectory
     if($mode -eq 'before') {
         $payload=$BaselineDirectory
-        $exe=Join-Path $project '.tools/Godot_v4.7.2-stable_win64_console.exe'
+        $exe=Join-Path $project '.tools/Godot_v4.7.2-stable_win64.exe'
         $arguments+=@('--main-pack',(Join-Path $payload 'DiveInUnder.pck'),'--script',(Join-Path $PSScriptRoot 'refinement_before.gd'),'--',"--review-dir=$dir","--review-run-id=$runId","--review-script=$(Join-Path $project 'ui/refinement_review.gd')")
     } else {
         $exe=Join-Path $payload 'DiveInUnder.exe'
