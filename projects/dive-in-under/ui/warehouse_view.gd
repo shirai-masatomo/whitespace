@@ -214,6 +214,6 @@ func build_actions() -> void:
 		if i==0: b.grab_focus()
 func _unhandled_key_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
-		game.open_town_page("hub"); get_viewport().set_input_as_handled()
+		get_viewport().set_input_as_handled(); game.call_deferred("open_town_page","hub")
 func visual_audit() -> Dictionary:
 	return {"kind":"warehouse","columns":3,"selected_source":selected_source,"selected_uid":selected_uid,"visible_warehouse_items":visible_items.size(),"backpack_capacity":15,"cloth_capacity":3,"no_equipment_commands":true}

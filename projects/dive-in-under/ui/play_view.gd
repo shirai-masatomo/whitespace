@@ -50,7 +50,7 @@ func hero_card(r: Rect2) -> Control:
 	var p:=UISkin.panel(self,r,"主人公  /  Lv.%d"%h.level,true)
 	var face:=AtlasTexture.new(); face.atlas=Art.texture("hero"); face.region=Rect2(410,210,390,370)
 	UISkin.picture(p,face,Rect2(20,57,72,88))
-	var pixels:=17 if r.size.x>300 else 15
+	var pixels:=17
 	UISkin.label(p,"HP  %d / %d"%[h.hp,h.max_hp],Rect2(108,59,r.size.x-126,27),pixels,UISkin.DARK)
 	UISkin.gauge(p,h.hp,h.max_hp,Rect2(108,91,r.size.x-128,11),Color("b83e32"))
 	UISkin.label(p,"SP  %d / %d"%[h.sp,h.max_sp],Rect2(108,111,r.size.x-126,27),pixels,UISkin.DARK)
@@ -107,14 +107,14 @@ func build_exploration() -> void:
 	var back:=command(left,"帰還する",Rect2(14,140,192,58),"return"); back.disabled=s.phase!="explore"
 	nav(left,"地図を開く",Rect2(14,214,192,53),open_routes,"map")
 	if battling:
-		var speed:=nav(left,"進行  %d倍速"%game.play_speed,Rect2(14,279,192,44),func():game.play_speed=2 if game.play_speed==1 else 1; game.show_campaign(),"speed")
+		var speed:=nav(left,"進行  %d倍速"%game.play_speed,Rect2(14,274,192,40),func():game.play_speed=2 if game.play_speed==1 else 1; game.show_campaign(),"speed")
 		speed.tooltip_text="戦闘は自動で進みます。"
-		var pause:=nav(left,"自動戦闘を停止" if game.auto_play else "戦闘を再開",Rect2(14,334,192,44),func():
+		var pause:=nav(left,"自動戦闘を停止" if game.auto_play else "戦闘を再開",Rect2(14,323,192,42),func():
 			if game.auto_play: game.auto_play=false; game.play_timer.stop(); game.show_campaign()
 			else: game.resume_auto_battle(),"pause")
 		UISkin.quiet_button(pause,not game.auto_play)
-		UISkin.label(left,"動作中" if game.auto_play else "停止中",Rect2(18,381,185,22),16,UISkin.GOLD)
-		UISkin.label(left,"Space：自動戦闘停止／再開",Rect2(18,404,190,18),12,UISkin.MUTED)
+		UISkin.label(left,"動作中" if game.auto_play else "停止中",Rect2(18,369,185,22),16,UISkin.GOLD)
+		UISkin.label(left,"Space：自動戦闘停止／再開",Rect2(18,392,190,22),14,UISkin.MUTED)
 	elif s.phase=="event":
 		command(left,game.cfg.events[s.event].choice,Rect2(14,287,192,53),"event",{"choice":"accept"})
 		command(left,"見送る",Rect2(14,349,192,53),"event",{"choice":"skip"})
@@ -213,10 +213,11 @@ func build_equipment() -> void:
 	UISkin.label(self,"所持品から装備し、部位を選んで詳細を確認。",Rect2(349,654,700,37),19)
 func _unhandled_key_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
-		if game.route_map_open: close_routes()
-		elif mode=="equipment": game.open_town_page("hub")
-		elif mode=="hub": game.show_title()
 		get_viewport().set_input_as_handled()
+		# Keep the receiving Control alive until the viewport finishes dispatching this key.
+		if game.route_map_open: call_deferred("close_routes")
+		elif mode=="equipment": game.call_deferred("open_town_page","hub")
+		elif mode=="hub": game.call_deferred("show_title")
 func visual_audit() -> Dictionary:
 	return {"kind":"session-ui","screen":mode,"session_only":not game.legacy_persistence_mode,"stage_rect":str(stage.get_global_rect()) if is_instance_valid(stage) else "","route":route.nodes() if is_instance_valid(route) else []}
 

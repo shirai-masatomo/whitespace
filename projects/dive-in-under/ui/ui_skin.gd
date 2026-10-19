@@ -63,7 +63,7 @@ static func quiet_button(b: Button, selected: bool=false) -> void:
 		var st:=StyleBoxFlat.new(); st.bg_color=Color("162a30") if selected else Color("0b1c23")
 		st.border_color=GOLD if selected else Color("405156"); st.set_border_width_all(2 if selected else 1)
 		st.set_content_margin_all(4)
-		if state=="hover": st.bg_color=Color("24383c"); st.border_color=Color("a99a70")
+		if state=="hover": st.bg_color=Color("24383c"); st.border_color=GOLD if selected else Color("a99a70")
 		if state=="pressed": st.bg_color=Color("30403e")
 		if state=="disabled": st.bg_color=Color("101b20"); st.border_color=Color("2c393d")
 		if state=="focus": st.bg_color=Color.TRANSPARENT; st.border_color=Color("83d0d5")

@@ -186,16 +186,17 @@ func build_equipment() -> void:
 	var art_note:=label_at(central,"人物の外観は共通イラスト",Rect2(117,393,320,25),13,MUTED); art_note.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER
 func build_abilities() -> void:
 	label_at(central,"基本能力",Rect2(9,6,220,34),25,GOLD)
-	label_at(central,"現在値       基礎 ＋ 装備",Rect2(217,10,320,28),16,MUTED)
+	var current_header:=label_at(central,"現在値",Rect2(205,10,118,28),15,MUTED); current_header.horizontal_alignment=HORIZONTAL_ALIGNMENT_RIGHT
+	var parts_header:=label_at(central,"基礎 ＋ 装備",Rect2(342,10,177,28),15,MUTED); parts_header.horizontal_alignment=HORIZONTAL_ALIGNMENT_RIGHT
 	var i:=0
 	for key in Model.STAT_NAMES:
 		var base:=Model.base_value(game.campaign,game.cfg,key); var total: int=unit[key]
 		var b:=item_button(key,"",Rect2(8,54+i*58,536,50))
-		image_at(b,Symbols.texture({"max_hp":"hp","max_sp":"sp"}.get(key,key)),Rect2(7,11,32,32))
-		label_at(b,Model.STAT_NAMES[key],Rect2(48,12,160,30),18)
+		image_at(b,Symbols.texture({"max_hp":"hp","max_sp":"sp"}.get(key,key)),Rect2(7,9,32,32))
+		label_at(b,Model.STAT_NAMES[key],Rect2(48,10,160,30),18)
 		var current: String="%d / %d"%[unit["hp" if key=="max_hp" else "sp"],total] if key in ["max_hp","max_sp"] else str(total)
-		var value:=label_at(b,current,Rect2(205,12,118,30),18,GOLD); value.horizontal_alignment=HORIZONTAL_ALIGNMENT_RIGHT
-		var correction:=label_at(b,"%d ＋ %d"%[base,total-base],Rect2(342,12,177,30),18,MUTED); correction.horizontal_alignment=HORIZONTAL_ALIGNMENT_RIGHT
+		var value:=label_at(b,current,Rect2(205,10,118,30),18,GOLD); value.horizontal_alignment=HORIZONTAL_ALIGNMENT_RIGHT
+		var correction:=label_at(b,"%d ＋ %d"%[base,total-base],Rect2(342,10,177,30),18,MUTED); correction.horizontal_alignment=HORIZONTAL_ALIGNMENT_RIGHT
 		i+=1
 	label_at(central,"装備と耐久を反映した、現在の能力です。",Rect2(12,365,525,31),16,MUTED)
 func build_conditions() -> void:

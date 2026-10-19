@@ -127,17 +127,22 @@ static func run(game: Control, before: bool=false) -> void:
 		checkpoint(game,"06-complete")
 		proof.checks["06"]={"space_stop_resume":true,"echo_ignored":true,"freeze_seconds":2.0,"all_state_frozen":true,"button_resume":true}
 		# Transition fixtures call the actual existing finish function. No long death/clear simulation.
+		UI.write(game,proof,"partial-report.json")
 		checkpoint(game,"07-start")
 		for result_kind in ["death","clear"]:
+			checkpoint(game,"07-"+result_kind+"-fixture")
 			fixture(game); battle_fixture(game); game.route_map_open=true; game.show_campaign()
 			E.finish(game.campaign,result_kind,"地図持越しの固定確認",game.cfg); game.show_campaign()
 			if not UI.check(game,not game.route_map_open and game.play_view.mode=="result","Map flag reset on "+result_kind): return
 			game.perform("town",{},int(game.campaign.revision))
 			if not UI.check(game,not game.route_map_open and game.play_view.mode=="hub","Map reset in town"): return
+			checkpoint(game,"07-"+result_kind+"-before-esc")
 			await key(game,KEY_ESCAPE)
+			checkpoint(game,"07-"+result_kind+"-after-esc")
 			if not UI.check(game,game.title_visible,"First town Esc opens title without invisible-map interception"): return
 			game.show_campaign(); game.perform("depart",{},int(game.campaign.revision)); game.auto_play=false; game.play_timer.stop()
 			if not UI.check(game,not game.route_map_open and not is_instance_valid(game.play_view.routes_overlay),"Next expedition keeps map closed"): return
+		checkpoint(game,"07-complete")
 		proof.checks["07"]={"death":true,"clear":true,"first_town_esc":true,"next_departure_closed":true,"map_does_not_pause_battle":true}
 		checkpoint(game,"08-start")
 		fixture(game); var cloak: String=game.campaign.equipment.head
