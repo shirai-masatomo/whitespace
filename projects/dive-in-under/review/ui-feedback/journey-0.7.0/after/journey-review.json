@@ -1,0 +1,37 @@
+{
+	"complete": true,
+	"exit_button_pressed": true,
+	"fixtures": {
+		"click_select": true,
+		"death_reset": true,
+		"full_receipt": true,
+		"identity_durability": 37,
+		"later_data": true,
+		"native_drag": true,
+		"outside_drop": true,
+		"shift": true
+	},
+	"no_save_store": true,
+	"normal_route": {
+		"clear_trip": 9.0,
+		"field_equips": 6,
+		"final_trips": 10,
+		"highest_floor": 11,
+		"normal_timer": true,
+		"prepared_growth_or_gear": false,
+		"steps": 419,
+		"viewport_input": true
+	},
+	"rendered": true,
+	"run_id": "6d9de580a2ab4bd980b98e178b7010c8",
+	"seen": {
+		"boss": true,
+		"chest": true,
+		"compare": true,
+		"event": true,
+		"event_result": true,
+		"impact": true,
+		"intro": true,
+		"reward": true
+	}
+}

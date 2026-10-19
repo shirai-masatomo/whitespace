@@ -1,0 +1,98 @@
+{
+  "version": "0.7.0",
+  "implementation": "implemented",
+  "final_verification": "passed",
+  "user_visual_evaluation": "pending",
+  "user_play_quality_evaluation": "pending",
+  "items": [
+    {
+      "id": "01",
+      "topic": "所持品・倉庫",
+      "implementation": "implemented",
+      "verification": "confirmed_by_focused_core_and_actual_exported_exe",
+      "details": "左クリックは選択、詳細ボタン／Enter・Shiftクリック・ドラッグは共通の個体移動。15＋3・支給制限・個別耐久を維持。",
+      "after": "after/13-warehouse.png",
+      "before": "../responses/0.6.4/after/05-warehouse.png"
+    },
+    {
+      "id": "02",
+      "topic": "探索中の装備",
+      "implementation": "implemented",
+      "verification": "confirmed_by_focused_core_and_actual_exported_exe",
+      "details": "戦闘外の探索・受領画面で所持品を開き、現在→交換後の能力と±で比較。満杯の一対一交換、HP/SPの着脱回復防止。",
+      "after": "after/06-field-comparison.png",
+      "before": "../responses/0.6.4/after/08-equipment.png"
+    },
+    {
+      "id": "03",
+      "topic": "戦闘開始",
+      "implementation": "implemented",
+      "verification": "confirmed_by_focused_core_and_actual_exported_exe",
+      "details": "通常0.45秒／ボス0.85秒、敵名・短い表示と効果音。整うまでTimerを止める。",
+      "after": "after/03-encounter.png",
+      "before": "../responses/0.6.4/after/06-battle-running.png"
+    },
+    {
+      "id": "04",
+      "topic": "攻撃・被ダメージ",
+      "implementation": "implemented",
+      "verification": "confirmed_by_focused_core_and_actual_exported_exe",
+      "details": "確定済みのログを順に表示。短い踏込み・命中時のHP/数値・点滅、MISS・撃破・既存状態表示。",
+      "after": "after/04-attack-impact.png",
+      "before": "../responses/0.6.4/after/06-battle-running.png"
+    },
+    {
+      "id": "05",
+      "topic": "宝箱と受領",
+      "implementation": "implemented",
+      "verification": "confirmed_by_focused_core_and_actual_exported_exe",
+      "details": "閉→開→選択した品の確認。未受領は別管理、満杯の入替と放棄は確認付き。",
+      "after": "after/07-chest-discovered.png",
+      "before": "../responses/0.6.4/after/05-exploration.png"
+    },
+    {
+      "id": "06",
+      "topic": "イベント",
+      "implementation": "implemented",
+      "verification": "confirmed_by_focused_core_and_actual_exported_exe",
+      "details": "画像アイコン・短文・2択→結果→復帰。既存の湧き水／標識／祈祷の残光を使用。",
+      "after": "after/09-event-choice.png",
+      "before": "../responses/0.6.4/after/05-exploration.png"
+    },
+    {
+      "id": "07",
+      "topic": "10Fの一周",
+      "implementation": "implemented",
+      "verification": "confirmed_by_focused_core_and_actual_exported_exe",
+      "details": "固定ノードで戦闘・宝・イベントを配分。途中で比較交換し、ボス突破・獲得→町→整理→再出発。",
+      "after": "after/11-10F-clear.png",
+      "before": "../responses/0.6.4/after/07-next-departure.png"
+    },
+    {
+      "id": "08",
+      "topic": "後続用データ",
+      "implementation": "implemented",
+      "verification": "confirmed_by_focused_core_and_actual_exported_exe",
+      "details": "共通のノード・受領・イベント・戦闘画面。非公開の11〜13F試験データで敵／Lv・宝・イベント・背景・BGMを差替え。",
+      "after": "after/fixture-15-later-treasure.png",
+      "before": null
+    }
+  ],
+  "normal_entry_version": "0.7.0",
+  "runtime_source": "295be973fa9f8411aa10cc48625bb82bf85c674e",
+  "ci_run_id": 39262374060,
+  "core_checks": {
+    "journey": 58,
+    "storage": 16,
+    "equipment_condition": 39
+  },
+  "actual_exe": {
+    "exit_code": 0,
+    "elapsed_ms": 225269,
+    "screenshots": 20,
+    "normal_steps": 419,
+    "field_equips": 6,
+    "clear_trip": 9,
+    "redeparture_trip": 10
+  }
+}

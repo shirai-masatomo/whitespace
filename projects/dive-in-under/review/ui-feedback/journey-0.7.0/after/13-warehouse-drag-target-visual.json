@@ -1,0 +1,72 @@
+{
+	"controls": [
+		{
+			"rect": "[P: (1096.0, 25.0), S: (150.0, 40.0)]",
+			"text": "G  0"
+		},
+		{
+			"rect": "[P: (966.0, 100.0), S: (283.0, 32.0)]",
+			"text": "アイテム詳細"
+		},
+		{
+			"rect": "[P: (1032.0, 148.0), S: (212.0, 52.0)]",
+			"text": "粗布の上着"
+		},
+		{
+			"rect": "[P: (1032.0, 202.0), S: (213.0, 28.0)]",
+			"text": "防具 / 倉庫"
+		},
+		{
+			"rect": "[P: (936.0, 243.0), S: (310.0, 28.0)]",
+			"text": "所持数 0     倉庫内数 1"
+		},
+		{
+			"rect": "[P: (942.0, 288.0), S: (296.0, 62.0)]",
+			"text": "丈夫な粗布で仕立てた上着。軽く、動きやすい。"
+		},
+		{
+			"rect": "[P: (937.0, 373.0), S: (78.0, 32.0)]",
+			"text": "性能"
+		},
+		{
+			"rect": "[P: (1018.0, 373.0), S: (225.0, 36.0)]",
+			"text": "DEF +1"
+		},
+		{
+			"rect": "[P: (937.0, 416.0), S: (78.0, 32.0)]",
+			"text": "耐久度"
+		},
+		{
+			"rect": "[P: (1018.0, 416.0), S: (225.0, 36.0)]",
+			"text": "37/100"
+		},
+		{
+			"disabled": false,
+			"focus": false,
+			"font_color": "(0.1882, 0.1608, 0.1176, 1.0)",
+			"rect": "[P: (938.0, 537.0), S: (304.0, 44.0)]",
+			"text": "取り出す [Enter]"
+		},
+		{
+			"disabled": false,
+			"focus": false,
+			"font_color": "(0.9098, 0.8902, 0.8078, 1.0)",
+			"rect": "[P: (1024.0, 646.0), S: (240.0, 58.0)]",
+			"text": "戻る"
+		}
+	],
+	"run_id": "6d9de580a2ab4bd980b98e178b7010c8",
+	"screenshot": "13-warehouse-drag-target.png",
+	"stages": [
+		{
+			"backpack_capacity": 15,
+			"cloth_capacity": 3,
+			"columns": 3,
+			"kind": "warehouse",
+			"no_equipment_commands": true,
+			"selected_source": "warehouse",
+			"selected_uid": "item-2",
+			"visible_warehouse_items": 1
+		}
+	]
+}

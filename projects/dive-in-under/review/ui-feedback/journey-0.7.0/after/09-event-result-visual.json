@@ -1,0 +1,21 @@
+{
+	"controls": [],
+	"run_id": "6d9de580a2ab4bd980b98e178b7010c8",
+	"screenshot": "09-event-result.png",
+	"stages": [
+		{
+			"kind": "session-ui",
+			"route": [],
+			"screen": "event_result",
+			"session_only": true,
+			"stage_rect": ""
+		},
+		{
+			"background": "cavern",
+			"floor": 3,
+			"kind": "journey-receipt-event",
+			"pending": 0,
+			"phase": "event_result"
+		}
+	]
+}

@@ -1,0 +1,211 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+[   0% ] first_scan_filesystem | Started Project initialization (5 steps)
+[   0% ] first_scan_filesystem | Scanning file structure...
+[  16% ] first_scan_filesystem | Loading global class names...
+[  33% ] first_scan_filesystem | Verifying GDExtensions...
+[  50% ] first_scan_filesystem | Creating autoload scripts...
+[  66% ] first_scan_filesystem | Initializing plugins...
+[  83% ] first_scan_filesystem | Starting file scan...
+[ DONE ] first_scan_filesystem
+
+[   0% ] update_scripts_classes | Started Registering global classes... (69 steps)
+[   0% ] update_scripts_classes | 
+[   1% ] update_scripts_classes | 
+[   2% ] update_scripts_classes | 
+[   4% ] update_scripts_classes | 
+[   5% ] update_scripts_classes | 
+[   7% ] update_scripts_classes | 
+[   8% ] update_scripts_classes | 
+[  10% ] update_scripts_classes | 
+[  11% ] update_scripts_classes | 
+[  12% ] update_scripts_classes | 
+[  14% ] update_scripts_classes | 
+[  15% ] update_scripts_classes | 
+[  17% ] update_scripts_classes | 
+[  18% ] update_scripts_classes | 
+[  20% ] update_scripts_classes | 
+[  21% ] update_scripts_classes | 
+[  22% ] update_scripts_classes | 
+[  24% ] update_scripts_classes | 
+[  25% ] update_scripts_classes | 
+[  27% ] update_scripts_classes | 
+[  28% ] update_scripts_classes | 
+[  30% ] update_scripts_classes | 
+[  31% ] update_scripts_classes | 
+[  32% ] update_scripts_classes | 
+[  34% ] update_scripts_classes | 
+[  35% ] update_scripts_classes | 
+[  37% ] update_scripts_classes | 
+[  38% ] update_scripts_classes | 
+[  40% ] update_scripts_classes | 
+[  41% ] update_scripts_classes | 
+[  42% ] update_scripts_classes | 
+[  44% ] update_scripts_classes | 
+[  45% ] update_scripts_classes | 
+[  47% ] update_scripts_classes | 
+[  48% ] update_scripts_classes | 
+[  50% ] update_scripts_classes | 
+[  51% ] update_scripts_classes | 
+[  52% ] update_scripts_classes | 
+[  54% ] update_scripts_classes | 
+[  55% ] update_scripts_classes | 
+[  57% ] update_scripts_classes | 
+[  58% ] update_scripts_classes | 
+[  60% ] update_scripts_classes | 
+[  61% ] update_scripts_classes | 
+[  62% ] update_scripts_classes | 
+[  64% ] update_scripts_classes | 
+[  65% ] update_scripts_classes | 
+[  67% ] update_scripts_classes | 
+[  68% ] update_scripts_classes | 
+[  70% ] update_scripts_classes | 
+[  71% ] update_scripts_classes | 
+[  72% ] update_scripts_classes | 
+[  74% ] update_scripts_classes | 
+[  75% ] update_scripts_classes | 
+[  77% ] update_scripts_classes | 
+[  78% ] update_scripts_classes | 
+[  80% ] update_scripts_classes | 
+[  81% ] update_scripts_classes | 
+[  82% ] update_scripts_classes | 
+[  84% ] update_scripts_classes | 
+[  85% ] update_scripts_classes | 
+[  87% ] update_scripts_classes | 
+[  88% ] update_scripts_classes | 
+[  90% ] update_scripts_classes | 
+[  91% ] update_scripts_classes | 
+[  92% ] update_scripts_classes | 
+[  94% ] update_scripts_classes | 
+[  95% ] update_scripts_classes | 
+[  97% ] update_scripts_classes | 
+[ DONE ] update_scripts_classes
+
+[   0% ] _update_scan_actions | Started Scanning actions... (37 steps)
+[   0% ] _update_scan_actions | adventure_preparation_loop.ogg
+[   2% ] _update_scan_actions | adventurer-cloak-blue.png
+[   5% ] _update_scan_actions | adventurer-cloak-navy.png
+[   7% ] _update_scan_actions | equipment-sheet.png
+[  10% ] _update_scan_actions | interface-sheet.png
+[  13% ] _update_scan_actions | containers.png
+[  15% ] _update_scan_actions | preparation-town.png
+[  18% ] _update_scan_actions | surface-preparation.png
+[  21% ] _update_scan_actions | surface-title.png
+[  23% ] _update_scan_actions | surface-warehouse.png
+[  26% ] _update_scan_actions | symbols.png
+[  28% ] _update_scan_actions | warehouse-room-duplicate.png
+[  31% ] _update_scan_actions | warehouse-room.png
+[  34% ] _update_scan_actions | treasure-chest-states.png
+[  36% ] _update_scan_actions | dive-in-under-logo-gold-deep-shadow.png
+[  39% ] _update_scan_actions | 01_title_screen.webp
+[  42% ] _update_scan_actions | 02_first_exploration.webp
+[  44% ] _update_scan_actions | 03_death_result.webp
+[  47% ] _update_scan_actions | 04_warehouse.webp
+[  50% ] _update_scan_actions | 01_exploration_pixel.webp
+[  52% ] _update_scan_actions | 02_battle_pixel.webp
+[  55% ] _update_scan_actions | 03_status_pixel.webp
+[  57% ] _update_scan_actions | dive-b10-gatekeeper-static-candidate-v1.png
+[  60% ] _update_scan_actions | dive-boss-gate-cave-candidate-v1.png
+[  63% ] _update_scan_actions | dive-boss-gate-cave-candidate-v2.png
+[  65% ] _update_scan_actions | dive-e01-underground-rat-static-candidate-v1.png
+[  68% ] _update_scan_actions | dive-e01-underground-rat-static-candidate-v2.png
+[  71% ] _update_scan_actions | dive-e02-slime-mold-static-candidate-v1.png
+[  73% ] _update_scan_actions | dive-e03-ironwing-bat-static-candidate-v1.png
+[  76% ] _update_scan_actions | dive-e04-goblin-static-candidate-v1.png
+[  78% ] _update_scan_actions | dive-e05-rock-beetle-static-candidate-v1.png
+[  81% ] _update_scan_actions | dive-e06-wet-rock-crab-static-candidate-v1.png
+[  84% ] _update_scan_actions | dive-e07-cave-frog-static-candidate-v1.png
+[  86% ] _update_scan_actions | dive-e08-aquatic-lizard-static-candidate-v1.png
+[  89% ] _update_scan_actions | dive-hero-static-candidate-v1.png
+[  92% ] _update_scan_actions | dive-ordinary-cave-candidate-v1.png
+[  94% ] _update_scan_actions | dive-ordinary-cave-candidate-v2.png
+[ DONE ] _update_scan_actions
+
+[   0% ] reimport | Started (Re)Importing Assets (37 steps)
+[   0% ] reimport | Preparing files to reimport...
+[   2% ] reimport | Preparing files to reimport...
+[   5% ] reimport | Preparing files to reimport...
+[   7% ] reimport | Preparing files to reimport...
+[  10% ] reimport | Preparing files to reimport...
+[  13% ] reimport | Preparing files to reimport...
+[  15% ] reimport | Preparing files to reimport...
+[  18% ] reimport | Preparing files to reimport...
+[  21% ] reimport | Preparing files to reimport...
+[  23% ] reimport | Preparing files to reimport...
+[  26% ] reimport | Preparing files to reimport...
+[  28% ] reimport | Preparing files to reimport...
+[  31% ] reimport | Preparing files to reimport...
+[  34% ] reimport | Preparing files to reimport...
+[  36% ] reimport | Preparing files to reimport...
+[  39% ] reimport | Preparing files to reimport...
+[  42% ] reimport | Preparing files to reimport...
+[  44% ] reimport | Preparing files to reimport...
+[  47% ] reimport | Preparing files to reimport...
+[  50% ] reimport | Preparing files to reimport...
+[  52% ] reimport | Preparing files to reimport...
+[  55% ] reimport | Preparing files to reimport...
+[  57% ] reimport | Preparing files to reimport...
+[  60% ] reimport | Preparing files to reimport...
+[  63% ] reimport | Preparing files to reimport...
+[  65% ] reimport | Preparing files to reimport...
+[  68% ] reimport | Preparing files to reimport...
+[  71% ] reimport | Preparing files to reimport...
+[  73% ] reimport | Preparing files to reimport...
+[  76% ] reimport | Preparing files to reimport...
+[  78% ] reimport | Preparing files to reimport...
+[  81% ] reimport | Preparing files to reimport...
+[  84% ] reimport | Preparing files to reimport...
+[  86% ] reimport | Preparing files to reimport...
+[  89% ] reimport | Preparing files to reimport...
+[  92% ] reimport | Preparing files to reimport...
+[  94% ] reimport | Preparing files to reimport...
+[   0% ] reimport | Executing pre-reimport operations...
+[   0% ] reimport | adventure_preparation_loop.ogg
+[   2% ] reimport | adventure_preparation_loop.ogg
+[   5% ] reimport | 01_exploration_pixel.webp
+[   7% ] reimport | 02_battle_pixel.webp
+[  10% ] reimport | 03_status_pixel.webp
+[  13% ] reimport | dive-b10-gatekeeper-static-candidate-v1.png
+[  15% ] reimport | dive-boss-gate-cave-candidate-v1.png
+[  18% ] reimport | dive-boss-gate-cave-candidate-v2.png
+[  21% ] reimport | dive-e01-underground-rat-static-candidate-v1.png
+[  23% ] reimport | dive-e01-underground-rat-static-candidate-v2.png
+[  26% ] reimport | dive-e02-slime-mold-static-candidate-v1.png
+[  28% ] reimport | dive-e03-ironwing-bat-static-candidate-v1.png
+[  31% ] reimport | dive-e04-goblin-static-candidate-v1.png
+[  34% ] reimport | dive-e05-rock-beetle-static-candidate-v1.png
+[  36% ] reimport | dive-e06-wet-rock-crab-static-candidate-v1.png
+[  39% ] reimport | dive-e07-cave-frog-static-candidate-v1.png
+[  42% ] reimport | dive-e08-aquatic-lizard-static-candidate-v1.png
+[  44% ] reimport | dive-hero-static-candidate-v1.png
+[  47% ] reimport | dive-ordinary-cave-candidate-v1.png
+[  50% ] reimport | dive-ordinary-cave-candidate-v2.png
+[  52% ] reimport | adventurer-cloak-blue.png
+[  55% ] reimport | adventurer-cloak-navy.png
+[  57% ] reimport | equipment-sheet.png
+[  60% ] reimport | interface-sheet.png
+[  63% ] reimport | containers.png
+[  65% ] reimport | preparation-town.png
+[  68% ] reimport | surface-preparation.png
+[  71% ] reimport | surface-title.png
+[  73% ] reimport | surface-warehouse.png
+[  76% ] reimport | symbols.png
+[  78% ] reimport | warehouse-room-duplicate.png
+[  81% ] reimport | warehouse-room.png
+[  84% ] reimport | treasure-chest-states.png
+[  86% ] reimport | dive-in-under-logo-gold-deep-shadow.png
+[  89% ] reimport | 01_title_screen.webp
+[  92% ] reimport | 02_first_exploration.webp
+[  94% ] reimport | 03_death_result.webp
+[  97% ] reimport | Finalizing Asset Import...
+[ DONE ] reimport
+
+[   0% ] reimport | Started (Re)Importing Assets (37 steps)
+[   0% ] reimport | Executing post-reimport operations...
+[ DONE ] reimport
+
+[   0% ] loading_editor_layout | Started Loading editor (5 steps)
+[   0% ] loading_editor_layout | Loading editor layout...
+[  16% ] loading_editor_layout | Loading docks...
+[ DONE ] loading_editor_layout
+

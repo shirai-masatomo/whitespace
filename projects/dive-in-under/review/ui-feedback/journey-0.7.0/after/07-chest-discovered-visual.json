@@ -1,0 +1,21 @@
+{
+	"controls": [],
+	"run_id": "6d9de580a2ab4bd980b98e178b7010c8",
+	"screenshot": "07-chest-discovered.png",
+	"stages": [
+		{
+			"kind": "session-ui",
+			"route": [],
+			"screen": "treasure",
+			"session_only": true,
+			"stage_rect": ""
+		},
+		{
+			"background": "cavern",
+			"floor": 2,
+			"kind": "journey-receipt-event",
+			"pending": 1,
+			"phase": "treasure"
+		}
+	]
+}

@@ -1,0 +1,17 @@
+{
+  "verification": "journey-0.7.0",
+  "previous_directory": "releases/c8ca625ceae51cc033dc89c95166c94e6c32921e-0.6.4",
+  "previous_zip_archive": "C:\\Users\\masat\\Documents\\Codex\\2026-10-17\\task\\dive-in-under-work\\projects\\dive-in-under\\build\\archive\\DiveInUnder-previous-B8B07F417C69.zip",
+  "game_commit": "295be973fa9f8411aa10cc48625bb82bf85c674e",
+  "version": "0.7.0",
+  "zip_sha256": "EFFECD6C271792F1548E144AAF6745B62A9E040BB19DF4D2C78BE2FE1B61E318",
+  "evidence_artifact_id": 12191982875,
+  "build_artifact_id": 12191628680,
+  "relative_directory": "releases/295be973fa9f8411aa10cc48625bb82bf85c674e-0.7.0",
+  "exe_sha256": "D34D36F3BE1A6C49C56525AE86469B92E4F417DDF0B43CF00DD80C385C4B0562",
+  "pck_sha256": "A0D4CBDC7C9DFCCE11F9A090BF293D49878427C41364327830EA5B8E3EB5922D",
+  "user_save_edited_by_publish": false,
+  "published_utc": "2026-10-19T13:53:14.7364068Z",
+  "ci_run_id": 39262374060,
+  "existing_processes_untouched": true
+}

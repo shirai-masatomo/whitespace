@@ -1,0 +1,21 @@
+{
+	"controls": [],
+	"run_id": "6d9de580a2ab4bd980b98e178b7010c8",
+	"screenshot": "fixture-15-later-treasure.png",
+	"stages": [
+		{
+			"kind": "session-ui",
+			"route": [],
+			"screen": "treasure",
+			"session_only": true,
+			"stage_rect": ""
+		},
+		{
+			"background": "res://assets/visual-candidates/v1/dive-boss-gate-cave-candidate-v2.png",
+			"floor": 11,
+			"kind": "journey-receipt-event",
+			"pending": 1,
+			"phase": "treasure"
+		}
+	]
+}

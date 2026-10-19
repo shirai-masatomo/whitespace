@@ -1,0 +1,21 @@
+{
+  "head_sha": "295be973fa9f8411aa10cc48625bb82bf85c674e",
+  "version": "0.7.0",
+  "run_id": 39262374060,
+  "job_id": 118093087043,
+  "url": "https://github.com/shirai-masatomo/whitespace/actions/runs/39262374060",
+  "conclusion": "success",
+  "verification_scope": "journey-0.7.0",
+  "build_artifact_id": 12191628680,
+  "evidence_artifact_id": 12191982875,
+  "build_artifact_digest": "sha256:230ae9dc4b6cf19a36503a0ed1a4de2b5bc8b3a418091f56574345c374cdedca",
+  "evidence_artifact_digest": "sha256:74bd2138a2bdec29ff72deef73f48b32452c50048f034b4893dcffa7e003f5c9",
+  "local_game_launches": 0,
+  "local_engine_builds": 0,
+  "normal_route_seeds": [
+    10000
+  ],
+  "first_full_loop_run_id": 39260149991,
+  "first_full_loop_elapsed_ms": 223725,
+  "final_full_loop_elapsed_ms": 225269
+}

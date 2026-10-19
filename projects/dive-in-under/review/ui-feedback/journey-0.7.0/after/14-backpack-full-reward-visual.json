@@ -1,0 +1,53 @@
+{
+	"controls": [
+		{
+			"rect": "[P: (863.0, 104.0), S: (378.0, 30.0)]",
+			"text": "獲得品の詳細"
+		},
+		{
+			"rect": "[P: (974.0, 157.0), S: (264.0, 89.0)]",
+			"text": "深層の指輪"
+		},
+		{
+			"rect": "[P: (868.0, 266.0), S: (364.0, 36.0)]",
+			"text": "指 / 数量 1"
+		},
+		{
+			"rect": "[P: (868.0, 315.0), S: (364.0, 72.0)]",
+			"text": "攻撃 +4"
+		},
+		{
+			"rect": "[P: (868.0, 393.0), S: (364.0, 92.0)]",
+			"text": "深層から持ち帰った指輪。強い力を秘めている。"
+		},
+		{
+			"rect": "[P: (868.0, 488.0), S: (368.0, 30.0)]",
+			"text": "バックパックに空きがありません"
+		},
+		{
+			"disabled": true,
+			"focus": false,
+			"font_color": "(0.4745, 0.5176, 0.4941, 1.0)",
+			"rect": "[P: (868.0, 528.0), S: (368.0, 48.0)]",
+			"text": "選択した所持品と入替"
+		}
+	],
+	"run_id": "6d9de580a2ab4bd980b98e178b7010c8",
+	"screenshot": "14-backpack-full-reward.png",
+	"stages": [
+		{
+			"kind": "session-ui",
+			"route": [],
+			"screen": "reward",
+			"session_only": true,
+			"stage_rect": ""
+		},
+		{
+			"background": "cavern",
+			"floor": 2,
+			"kind": "journey-receipt-event",
+			"pending": 1,
+			"phase": "reward"
+		}
+	]
+}

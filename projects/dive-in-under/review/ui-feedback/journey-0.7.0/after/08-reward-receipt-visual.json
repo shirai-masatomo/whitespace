@@ -1,0 +1,49 @@
+{
+	"controls": [
+		{
+			"rect": "[P: (863.0, 104.0), S: (378.0, 30.0)]",
+			"text": "獲得品の詳細"
+		},
+		{
+			"rect": "[P: (974.0, 157.0), S: (264.0, 89.0)]",
+			"text": "粗布の上着"
+		},
+		{
+			"rect": "[P: (868.0, 266.0), S: (364.0, 36.0)]",
+			"text": "上半身 / 数量 1"
+		},
+		{
+			"rect": "[P: (868.0, 315.0), S: (364.0, 72.0)]",
+			"text": "防御 +2"
+		},
+		{
+			"rect": "[P: (868.0, 393.0), S: (364.0, 92.0)]",
+			"text": "丈夫な粗布で仕立てた上着。軽く、動きやすい。"
+		},
+		{
+			"disabled": false,
+			"focus": false,
+			"font_color": "(0.1882, 0.1608, 0.1176, 1.0)",
+			"rect": "[P: (868.0, 520.0), S: (368.0, 56.0)]",
+			"text": "この品を受け取る"
+		}
+	],
+	"run_id": "6d9de580a2ab4bd980b98e178b7010c8",
+	"screenshot": "08-reward-receipt.png",
+	"stages": [
+		{
+			"kind": "session-ui",
+			"route": [],
+			"screen": "reward",
+			"session_only": true,
+			"stage_rect": ""
+		},
+		{
+			"background": "cavern",
+			"floor": 2,
+			"kind": "journey-receipt-event",
+			"pending": 1,
+			"phase": "reward"
+		}
+	]
+}

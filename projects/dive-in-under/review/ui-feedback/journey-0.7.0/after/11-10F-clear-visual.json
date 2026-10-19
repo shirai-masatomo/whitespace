@@ -1,0 +1,19 @@
+{
+	"controls": [
+		{
+			"rect": "[P: (1096.0, 27.0), S: (140.0, 32.0)]",
+			"text": "G  183"
+		}
+	],
+	"run_id": "6d9de580a2ab4bd980b98e178b7010c8",
+	"screenshot": "11-10F-clear.png",
+	"stages": [
+		{
+			"kind": "session-ui",
+			"route": [],
+			"screen": "result",
+			"session_only": true,
+			"stage_rect": ""
+		}
+	]
+}

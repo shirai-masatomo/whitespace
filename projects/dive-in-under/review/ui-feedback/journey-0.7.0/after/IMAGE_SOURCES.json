@@ -1,0 +1,135 @@
+{
+  "runtime_source": "295be973fa9f8411aa10cc48625bb82bf85c674e",
+  "ci_run_id": 39262374060,
+  "pck_sha256": "A0D4CBDC7C9DFCCE11F9A090BF293D49878427C41364327830EA5B8E3EB5922D",
+  "generated_reference": false,
+  "resolution": [
+    1280,
+    720
+  ],
+  "manual_os_input": false,
+  "viewport_input": true,
+  "files": [
+    {
+      "file": "01-title.png",
+      "sha256": "dfe6c3125774a7e33202ee12d1e968802279e1b6de5b2b8290def993698d2e9e",
+      "kind": "actual-exported-EXE screenshot",
+      "scenario": "fresh normal route from seed10000"
+    },
+    {
+      "file": "02-preparation.png",
+      "sha256": "0e2c3166b7fe37712fcf06004fb3f5ed4ddc50e464fd9a78389ccd1a5470aaf0",
+      "kind": "actual-exported-EXE screenshot",
+      "scenario": "fresh normal route from seed10000"
+    },
+    {
+      "file": "03-encounter.png",
+      "sha256": "1a7f646a1ba77e4a02f5f2c692a637bd6129ced8928aeebf01b93f9a2789f905",
+      "kind": "actual-exported-EXE screenshot",
+      "scenario": "fresh normal route from seed10000"
+    },
+    {
+      "file": "04-attack-before-impact.png",
+      "sha256": "352ebbdd7b2dfd8955e0cbd34495d2e749944349afb5daa2a1a66602b6eb8ca8",
+      "kind": "actual-exported-EXE screenshot",
+      "scenario": "fresh normal route from seed10000"
+    },
+    {
+      "file": "04-attack-impact.png",
+      "sha256": "f8ca7e9bb5f08f1fc052d7948a8c3f2f0b47e53ab2461560614f08211218d2e6",
+      "kind": "actual-exported-EXE screenshot",
+      "scenario": "fresh normal route from seed10000"
+    },
+    {
+      "file": "04-attack-return.png",
+      "sha256": "5ca05b6ed00b961ef4ebbee61dd0199bef7d4201a9bf7bc6888281f5ebd35c0b",
+      "kind": "actual-exported-EXE screenshot",
+      "scenario": "fresh normal route from seed10000"
+    },
+    {
+      "file": "05-battle-paused.png",
+      "sha256": "0df8ede0df5798e1baf6026bed5f9ab2fe6f139696bdfa6e643448667ed9ad8a",
+      "kind": "actual-exported-EXE screenshot",
+      "scenario": "fresh normal route from seed10000"
+    },
+    {
+      "file": "06-field-comparison.png",
+      "sha256": "95744dd7c3aec66d984fd88dcb2f8b4c25c03d56ad8e3b8b1b174a9b606659c7",
+      "kind": "actual-exported-EXE screenshot",
+      "scenario": "fresh normal route from seed10000"
+    },
+    {
+      "file": "07-chest-discovered.png",
+      "sha256": "a59a60704956984b7124c65c419d2bb786adb9fb7dadd89f82d30c1bc9be77b8",
+      "kind": "actual-exported-EXE screenshot",
+      "scenario": "fresh normal route from seed10000"
+    },
+    {
+      "file": "08-reward-receipt.png",
+      "sha256": "aaeeff771ed1f5b7b6e8687c1b1d5c45b8d66cda0301a84063bd049c1e7095af",
+      "kind": "actual-exported-EXE screenshot",
+      "scenario": "fresh normal route from seed10000"
+    },
+    {
+      "file": "09-event-choice.png",
+      "sha256": "9542ddcc9d31e561dcee826c3d5110775de9cf1996efd67a6fca382ef1219d9f",
+      "kind": "actual-exported-EXE screenshot",
+      "scenario": "fresh normal route from seed10000"
+    },
+    {
+      "file": "09-event-result.png",
+      "sha256": "97f1efb2b92c9fbc7090f08a476e9421bb4c98acc37acb2ef30f1c90c487502f",
+      "kind": "actual-exported-EXE screenshot",
+      "scenario": "fresh normal route from seed10000"
+    },
+    {
+      "file": "10-boss-intro.png",
+      "sha256": "2f1cfdcd117438e9e2208cca23f4a25ab6e0a9c87c0aa7b8374a2ded26cc7742",
+      "kind": "actual-exported-EXE screenshot",
+      "scenario": "fresh normal route from seed10000"
+    },
+    {
+      "file": "11-10F-clear.png",
+      "sha256": "fc0f1ec55de14c523aec831386041883d97a4d6018c388613cc8a85e7e30fe53",
+      "kind": "actual-exported-EXE screenshot",
+      "scenario": "fresh normal route from seed10000"
+    },
+    {
+      "file": "12-redeparture.png",
+      "sha256": "853a0c0cb5d8ce74bd8e5c37c63dfd436cf8c5a4b51909aaf3a4410b44800e6e",
+      "kind": "actual-exported-EXE screenshot",
+      "scenario": "fresh normal route from seed10000"
+    },
+    {
+      "file": "13-warehouse-drag-target.png",
+      "sha256": "2c570a82e267b3c5943fa9f88b6faedc717889b0ee5b2bf467b8d5b75516c8b7",
+      "kind": "actual-exported-EXE screenshot",
+      "scenario": "isolated safety/data fixture"
+    },
+    {
+      "file": "13-warehouse.png",
+      "sha256": "1105bb00334173b261a10a4c5d7f3ef68caa80fb21ea6b787a71a2cb55ed9220",
+      "kind": "actual-exported-EXE screenshot",
+      "scenario": "isolated safety/data fixture"
+    },
+    {
+      "file": "14-backpack-full-reward.png",
+      "sha256": "4d87f87065d9f559beffc5be24b1f1124cffb52e1a07c008b1e1883912e3c21e",
+      "kind": "actual-exported-EXE screenshot",
+      "scenario": "isolated safety/data fixture"
+    },
+    {
+      "file": "fixture-15-later-treasure.png",
+      "sha256": "f0f217113312ae90c093c1a7c60ca9c26d60053ac3808846f53c9ba273452942",
+      "kind": "actual-exported-EXE screenshot",
+      "scenario": "isolated safety/data fixture"
+    },
+    {
+      "file": "fixture-16-later-enemy.png",
+      "sha256": "d5a4fd014c9d8caaf0219e7283c1ead118abfbdc9039cdc4acf68ad4538a7be8",
+      "kind": "actual-exported-EXE screenshot",
+      "scenario": "isolated safety/data fixture"
+    }
+  ],
+  "note": "The separate chest PNG is a generated asset. These PNGs are rendered game evidence. Extension screenshots do not widen the public route."
+}

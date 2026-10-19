@@ -1,11 +1,11 @@
-# Dive In Under 0.6.4 — UI改善01〜09・操作修正・タイトル整理
+# Dive In Under 通常版0.7.0
 
-通常の「01 ゲームを起動」で検証済み0.6.4。Spaceで自動戦闘を停止／再開し、「戦闘を再開」ボタンからも再開できます。押しっぱなしでは切り替わりません。
+いつもの「01 ゲームを起動」または[Play.cmd](Play.cmd)から起動。検証済み0.7.0を選択する。新規開始→準備→1F、起動中の状態は保持、次の起動は新規。
 
-[変更前後13画面を比較](../ui-feedback/responses/0.6.4/index.html)／[番号別の対応・確認・保留](../ui-feedback/responses/0.6.4/README.md)／[起動先・旧版・SHA](local-release.json)。
+[10F体験の実画面・前後比較・操作](../ui-feedback/journey-0.7.0/index.html) ／ [実装8項目・確認・未確認](../ui-feedback/journey-0.7.0/README.md)。見た目・遊びの利用者評価は未評価。
 
-全通常画面のロゴ、アイコン主体の11装備枠、濃紺マント、情報のまとまりと内部装飾を整理。タイトルはカタカナを削除し、一つのパネルへまとめました。背景のみ12%暗転は維持。地図持越し、満杯解除の理由、探索回数0→1→1→2も修正。
-反映ソースc8ca625ceae51cc033dc89c95166c94e6c32921e、CI39246303803成功。最終隔離EXE1プロセス18.114秒。旧画面の比較は配布0.6.3PCKを固定エンジンで描画し、beforeの成功分14.205秒を再利用。ローカルビルド・ゲーム起動なし。
+実装ソース295be973fa9f8411aa10cc48625bb82bf85c674e、[CI39262374060成功](https://github.com/shirai-masatomo/whitespace/actions/runs/39262374060)。配布EXEの隔離1プロセス225.269秒・終了0、通常419操作で10F突破・帰還・整理・再出発。ローカルのゲーム起動・大量seedなし。
 
-見た目の最終評価は未評価。ステータスの洞窟背景を町へ変更する案は保留。BGM・保存方針・戦闘バランス・進行範囲・モデル設定を維持。旧0.6.3と元素材・評価履歴・ユーザー保存を保持。
-[旧0.6.3案内](README-0.6.3.md)／[UI0.6.1の比較と履歴](../ui-feedback/responses/0.6.1/index.html)／[BGMの記録](../bgm-0.6.2/README.md)。
+[Windows ZIP](https://github.com/shirai-masatomo/whitespace/actions/runs/39262374060/artifacts/12191628680)を取得する場合は、外側artifact ZIPを開き、中のDiveInUnder-foundation-windows-x64.zipを展開する。EXEとPCKを同じフォルダに置く。[来歴・SHA・旧版復元先](local-release.json)。
+
+[旧0.6.4](README-0.6.4.md)・旧実行物・元の評価履歴を保全。死亡時の正式全損／再支給・初期装備の未決分・仲間・新しいセーブ・11F公開は今回追加していない。

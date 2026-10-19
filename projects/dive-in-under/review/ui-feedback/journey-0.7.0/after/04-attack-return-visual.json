@@ -1,0 +1,188 @@
+{
+	"presenting": true,
+	"run_id": "6d9de580a2ab4bd980b98e178b7010c8",
+	"stage": {
+		"actors": [
+			{
+				"adoption": "adopted-current-baseline",
+				"body_region": "[P: (0.0, 22.0), S: (1234.0, 1232.0)]",
+				"candidate_loaded": true,
+				"foot": [
+					509.0,
+					362.0
+				],
+				"id": "hero",
+				"static_hover_px": 0.0,
+				"top_left": [
+					402.686859130859,
+					177.114822387695
+				],
+				"visible_size": [
+					204.985015869141,
+					204.652786254883
+				],
+				"within_stage": true
+			},
+			{
+				"adoption": "adopted-current-baseline",
+				"body_region": "[P: (24.0, 323.0), S: (1206.0, 632.0)]",
+				"candidate_loaded": true,
+				"foot": [
+					225.0,
+					261.0
+				],
+				"id": "E02",
+				"static_hover_px": 0.0,
+				"top_left": [
+					97.8399963378906,
+					128.989791870117
+				],
+				"visible_size": [
+					254.320007324219,
+					133.275482177734
+				],
+				"within_stage": true
+			}
+		],
+		"adoption": "twelve-assets-current-baseline",
+		"aspect": "preserved",
+		"background": "cavern",
+		"background_aspect": 1.77777777777778,
+		"background_loaded": true,
+		"background_zoom": 1.0,
+		"composition": "wide-floor-reference-comparison",
+		"depth": 1,
+		"far_enemy_foot": [
+			225.0,
+			261.0
+		],
+		"filter": "nearest",
+		"formation_rules": false,
+		"global_rect": "[P: (248.0, 86.0), S: (748.0, 421.0)]",
+		"motion": "rest",
+		"near_hero_foot": [
+			509.0,
+			362.0
+		],
+		"stage_size": [
+			748.0,
+			421.0
+		],
+		"static_only": true,
+		"wide_layout": true
+	},
+	"ticks_ms": 8090,
+	"visual_battle": {
+		"enemy": {
+			"action_count": 0,
+			"atk": 3,
+			"cooldown_until": 0,
+			"def": 1,
+			"defense_until": -1,
+			"exp": 5,
+			"gold": 3,
+			"hp": 6,
+			"id": "E02",
+			"level": 1,
+			"max_hp": 11,
+			"max_sp": 0,
+			"name": "粘菌スライム",
+			"skill_cooldowns": {},
+			"skills": [],
+			"sp": 0,
+			"spd": 2,
+			"statuses": {}
+		},
+		"hero": {
+			"action_count": 0,
+			"atk": 6,
+			"cooldown_until": 0,
+			"def": 2,
+			"defense_until": -1,
+			"hp": 24,
+			"level": 1,
+			"max_hp": 24,
+			"max_sp": 0,
+			"name": "主人公",
+			"skill_cooldowns": {},
+			"skills": [
+				"S105"
+			],
+			"sp": 0,
+			"spd": 6,
+			"statuses": {}
+		},
+		"log": [],
+		"outcome": "ongoing",
+		"reward": {
+			"exp": 0,
+			"gold": 0
+		},
+		"rng_state": 794981071029845895,
+		"round": 0,
+		"rules": {
+			"critical_chance": 0.05,
+			"critical_multiplier": 1.5,
+			"enemy_growth": {
+				"atk": 0.06,
+				"def_interval": 5.0,
+				"exp": 0.14,
+				"gold": 0.12,
+				"hp": 0.1,
+				"sp_interval": 3.0
+			},
+			"hit_chance": 0.95,
+			"max_rounds": 50.0,
+			"skills": {
+				"S102": {
+					"apply_chance": 0.3,
+					"cooldown_own_actions": 3.0,
+					"damage_multiplier": 0.9,
+					"duration_own_actions": 3.0,
+					"name": "毒牙",
+					"potency": 0.2,
+					"sp_cost": 4.0,
+					"stack_rule": "replace",
+					"status_id": "poison",
+					"trigger_timing": "opportunity_start"
+				},
+				"S103": {
+					"apply_chance": 0.5,
+					"cooldown_own_actions": 3.0,
+					"damage_multiplier": 0.8,
+					"duration_own_actions": 2.0,
+					"name": "目くらまし",
+					"potency": 0.25,
+					"sp_cost": 3.0,
+					"stack_rule": "replace",
+					"status_id": "blind",
+					"trigger_timing": "opportunity"
+				},
+				"S104": {
+					"apply_chance": 0.2,
+					"cooldown_own_actions": 4.0,
+					"damage_multiplier": 0.8,
+					"duration_own_actions": 1.0,
+					"name": "足止め",
+					"potency": 0.0,
+					"sp_cost": 5.0,
+					"stack_rule": "replace",
+					"status_id": "paralysis",
+					"trigger_timing": "opportunity"
+				},
+				"S105": {
+					"cooldown_own_actions": 3.0,
+					"def_bonus": 0.3,
+					"duration_own_actions": 1.0,
+					"hp_threshold": 0.6,
+					"name": "防御",
+					"sp_cost": 3.0
+				}
+			},
+			"status_pilot": true,
+			"variance_max": 1.05,
+			"variance_min": 0.95
+		},
+		"seed": 1860697833
+	}
+}
