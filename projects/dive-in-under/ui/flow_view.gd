@@ -144,7 +144,7 @@ func build_rewards() -> void:
 		if game.flow_selection.get("kind")=="actor": game.flow_selection={"kind":"pending","uid":game.reward_selected}
 		for i in s.pending_rewards.size():
 			var reward: Dictionary=s.pending_rewards[i]; var item: Dictionary=game.cfg.items[reward.id]
-			var x:=30+(i%4)*168; var y:=148+int(i/4)*100
+			var x: int=30+(i%4)*168; var y: int=148+int(i/4)*100
 			Grid.cell(center,game,self,Rect2(x,y,64,64),"pending",reward.token,"",game.flow_selection.get("uid")==reward.token)
 			label_at(center,item.name,Rect2(x,y+66,160,28),15,true)
 	label_at(center,"装備中  /  獲得品をダブルクリック、または部位へドラッグ",Rect2(30,313,658,40),16,true)
