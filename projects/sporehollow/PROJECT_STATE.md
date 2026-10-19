@@ -1,3 +1,9 @@
+# 工程1〜6の指示書を保存（2026-10-19／ゲームは未変更）
+
+承認済み工程の順序を [docs/internal/ROADMAP.md](docs/internal/ROADMAP.md)、Codexが1工程ずつ実行する**全文プロンプト**を [docs/internal/TASKS.md](docs/internal/TASKS.md) へ格納。キノコ栽培床・住民募集・追加資源等は【仮】設計であり、この文書更新だけでは**工程1〜6の実装・テスト・EXE反映は未実施**。実装状況と配布実体は下の既存記録および [review/current/interaction-revision/DELIVERY.json](review/current/interaction-revision/DELIVERY.json) を参照。ユーザーから工程1の個別開始依頼を受けるまで作業を自動開始しない。
+
+---
+
 # 生活UIと食事の同順位設定（2026-10-16）
 
 実装 176b79af を既存の最新開発版EXEへ反映済み。生活画面の配置と役割からの住民引継ぎを改善し、食事優先は同順位可・他セル交換なし。関連159チェック失敗0、2解像度の実Control座標とCPU確認図を保存。ゲームの自動起動なし。セーブ機能は無効のままで、旧順位データの互換移行のみ検証。[結果・残課題](review/current/interaction-revision/REPORT.md)／[配布記録](review/current/interaction-revision/DELIVERY.json)。以下は過去記録。
