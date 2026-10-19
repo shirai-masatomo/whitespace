@@ -25,6 +25,18 @@
 
 各工程の実装対象はTASKS.mdの全文プロンプト。**工程6の安定性作業を最後まで放置しない**。すべての工程で関連テストと安全な配布確認を必須とする。
 
+## 工程2のUI・デザインレビュー工程（2026-10-19追加）
+
+工程2は **A. 食料・栽培の実装とバランス検証 → B. 既存UI/新UIのスクリーンショット格納 → C. ChatGPTによる工程1〜2の横断デザインレビュー → D. 改善事項の優先順位決定** の順に扱う。Bまでを製造担当の引継ぎ納品とし、**レビューC/Dは製造担当が勝手に完了と見なさない**。レビュー前に工程3は開始しない。
+
+- PNG保存先：`review/current/integrated-revision/phase2/screenshots/`
+- 一覧：`review/current/integrated-revision/phase2/UI_REVIEW_INDEX.md`
+- 撮影条件・fixture一覧：`review/current/integrated-revision/phase2/SCREENSHOT_MANIFEST.json`
+- 詳細な撮影対象・安全条件・レビュー観点は [工程2指示](TASKS.md) に統一。
+- 通常デスクトップのゲーム起動は禁止、非対話隔離・30fps・短時間、失敗時通常画面へフォールバック不可。GPUを共有するため物理的な安全は保証されず、安全なスクショが得られなければ「撮影待ち」のままにする。
+- UIレビューは「RimWorld／Oxygen Not Included／Against the Storm／Clanfolk」等から使いやすさを比較するが、他作の画面素材やデザインを無断転載・模写しない。
+- ユーザーから完了連絡を受けてChatGPTが現行ソースの画像を直接視認し、P0/P1/P2の改善案を提示する。改善するかはレビュー内容で判断し、ロジックの工程2実装・レビュー待ちを区別する。
+
 ## 工程1の実施記録（2026-10-19）
 
 工程1のheadless連携ゲートを完了。複数seed昼夜・3夜、現物/仕事/容量、部分搬入と取消、生活・住居権限・救出、有限CPU/参照寿命を確認。実機操作・GPU・長期安定性は未検証。結果と工程2向けベースラインは [工程1報告](../../review/current/integrated-revision/phase1/REPORT.md)。工程2以降は未着手、個別開始指示待ち。
