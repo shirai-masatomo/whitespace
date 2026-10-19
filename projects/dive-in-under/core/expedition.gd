@@ -4,6 +4,7 @@ const Combat = preload("res://core/combat.gd")
 const Catalog = preload("res://core/catalog.gd")
 const Condition = preload("res://core/equipment_condition.gd")
 const Storage = preload("res://core/storage.gd")
+const Journey = preload("res://core/journey.gd")
 const STATS = ["max_hp","atk","def","spd","max_sp"]
 const SLOTS = ["right_hand","left_hand","head","body","legs","feet","neck","ears","eyes","finger","wrist"]
 
@@ -15,6 +16,10 @@ static func load_config(version: String="") -> Dictionary:
 	value.condition_rules=JSON.parse_string(FileAccess.get_file_as_string("res://data/v1/equipment-condition.json"))
 	var problem:=validate_config(value,Catalog.load_data())
 	if problem!="": push_error(problem); return {}
+	if version=="":
+		value.journey=Journey.load_data()
+		var route_problem: String=Journey.validate_definition(value.journey,Catalog.load_data(),value)
+		if route_problem!="": push_error(route_problem); return {}
 	return value
 
 static func validate_config(c: Dictionary, data: Dictionary) -> String:
@@ -187,6 +192,7 @@ static func finish(s: Dictionary, kind: String, reason: String, cfg: Dictionary)
 	s.phase = "result"
 	s.battle = {}
 	s.event = ""
+	if Journey.active(s): s.event_result={}
 	note(s,reason)
 
 static func battle_state(s: Dictionary, data: Dictionary) -> Dictionary:
@@ -204,6 +210,7 @@ static func battle_state(s: Dictionary, data: Dictionary) -> Dictionary:
 static func step_battle(s: Dictionary, data: Dictionary, cfg: Dictionary) -> void:
 	var previous := battle_state(s,data)
 	var b := Combat.advance(previous)
+	if Journey.active(s): s.round_presentation={"before":previous,"after":b,"events":b.log.slice(previous.log.size())}
 	s.battle.rounds += 1
 	s.hp = int(b.hero.hp)
 	s.sp = int(b.hero.sp)
@@ -233,10 +240,16 @@ static func step_battle(s: Dictionary, data: Dictionary, cfg: Dictionary) -> voi
 		var drops: Dictionary=drop_table(cfg,data,b.enemy.id)
 		for id in drops:
 			if draw(s,"loot",100) < drops[id]:
-				add_item(s,id)
-				note(s,"入手："+cfg.items[id].name)
+				if Journey.active(s): Journey.add_reward(s,id)
+				else: add_item(s,id)
+				note(s,"発見："+cfg.items[id].name)
 		s.phase = "explore"
 		s.battle = {}
+		if Journey.active(s):
+			s.trip_exp+=int(b.reward.exp); s.trip_gold+=int(b.reward.gold)
+			s.phase="reward"; s.reward_origin="戦闘の戦利品"; s.reward_return="clear" if Journey.node(cfg,int(s.floor)).kind=="boss" else "explore"
+			s.last_reward={"exp":int(b.reward.exp),"gold":int(b.reward.gold)}
+			return
 		if int(s.floor)==10:
 			s.highest_floor = 11
 			finish(s,"clear","10Fの門番を倒した。11Fへの到達を記録し、町へ帰還する。",cfg)
@@ -247,6 +260,23 @@ static func descend(s: Dictionary, data: Dictionary, cfg: Dictionary) -> void:
 	s.last_outcome=""
 	s.floor += 1
 	s.highest_floor = maxi(int(s.floor),int(s.highest_floor))
+	if Journey.active(s):
+		var node: Dictionary=Journey.node(cfg,int(s.floor))
+		if node.kind in ["enemy","boss"]:
+			var id: String=weighted(s,"explore",node.enemies)
+			var level: int=int(node.levels[0])+draw(s,"explore",int(node.levels[1]-node.levels[0])+1)
+			s.battle={"enemy_id":id,"enemy_level":level,"seed":draw(s,"battle",2147483647),"hero":hero(s,cfg),"rounds":0,"rules_version":3,"encounter_version":2}
+			s.phase="battle"; note(s,"地下%dF：%s Lv.%d が現れた。"%[s.floor,data.enemies[id].name,level])
+		elif node.kind=="treasure":
+			Journey.add_reward(s,weighted(s,"loot",node.rewards)); s.phase="treasure"; s.reward_origin="宝箱"; s.reward_return="explore"; s.last_reward={}
+			note(s,"地下%dF：宝箱を見つけた。"%s.floor)
+		else:
+			var eligible: Array=node.events.filter(func(id):return Journey.eligible(s,cfg.journey.events[id],cfg))
+			if eligible.is_empty(): s.phase="explore"; note(s,"道は静かだった。")
+			else:
+				s.event=eligible[draw(s,"explore",eligible.size())]; s.phase="event"; s.event_result={}
+				note(s,"地下%dF：%s"%[s.floor,cfg.events[s.event].name])
+		return
 	var row := floor_row(data.floors,int(s.floor))
 	var roll := draw(s,"explore",100)
 	if roll < row.encounters[0]:
@@ -272,13 +302,49 @@ static func act(previous: Dictionary, action: String, expected_revision: int, ar
 	var changed := false
 	match action:
 		"descend":
-			if s.phase=="explore" and s.floor<10:
+			if s.phase=="explore" and s.floor<(int(cfg.journey.public_max_floor) if Journey.active(s) else 10):
 				descend(s,data,cfg); changed=true
 		"round":
 			if s.phase=="battle": step_battle(s,data,cfg); changed=true
 		"return":
 			if s.phase=="explore":
 				finish(s,"return","持ち帰った品を抱え、町への道を戻った。",cfg); changed=true
+		"open_chest":
+			if Journey.active(s) and s.phase=="treasure": s.phase="reward"; changed=true
+		"claim_reward","exchange_reward":
+			if Journey.active(s) and s.phase=="reward":
+				var index: int=Journey.reward_index(s,args.get("token",""))
+				var replace_uid: String=args.get("replace_uid","")
+				if index>=0 and (s.inventory.size()<Storage.BACKPACK_CAPACITY or (action=="exchange_reward" and replace_uid in s.inventory and args.get("confirmed",false))):
+					if action=="exchange_reward" and replace_uid in s.inventory and args.get("confirmed",false):
+						note(s,"手放した："+cfg.items[s.items[replace_uid]].name)
+						s.inventory.erase(replace_uid); s.items.erase(replace_uid); s.item_condition.erase(replace_uid)
+					var reward: Dictionary=s.pending_rewards.pop_at(index)
+					add_item(s,reward.id); s.trip_items+=1; note(s,"受領："+cfg.items[reward.id].name+" ×1"); changed=true
+		"abandon_rewards":
+			if Journey.active(s) and s.phase=="reward" and args.get("confirmed",false) and not s.pending_rewards.is_empty():
+				note(s,"未受領の%d点を明示的に諦めた。"%s.pending_rewards.size()); s.pending_rewards.clear(); changed=true
+		"continue_rewards":
+			if Journey.active(s) and s.phase=="reward" and s.pending_rewards.is_empty():
+				if s.reward_return=="clear":
+					s.highest_floor=int(s.floor)+1; finish(s,"clear","%dFの門番を倒した。次の層域への到達を記録し、町へ帰還する。"%s.floor,cfg)
+				else: s.phase="explore"
+				s.erase("round_presentation"); changed=true
+		"journey_event":
+			if Journey.active(s) and s.phase=="event":
+				var definition: Dictionary=cfg.journey.events[s.event]
+				for choice in definition.choices:
+					if choice.id!=args.get("choice",""): continue
+					var old_hp: int=s.hp
+					if choice.effect=="hp": s.hp=clampi(int(s.hp)+int(choice.amount),0,hero(s,cfg).max_hp)
+					elif choice.effect=="exp": gain_exp(s,int(choice.amount),cfg); s.trip_exp+=int(choice.amount)
+					elif choice.effect=="item": Journey.add_reward(s,choice.item)
+					s.event_result={"title":cfg.events[s.event].name,"text":choice.result,"hp_delta":int(s.hp)-old_hp,"exp":int(choice.get("amount",0)) if choice.effect=="exp" else 0}
+					note(s,choice.result); s.event=""; s.phase="event_result"; changed=true
+					if s.hp==0: finish(s,"death","崩れた足場で力尽きた。",cfg)
+		"continue_event":
+			if Journey.active(s) and s.phase=="event_result":
+				s.phase="explore" if s.pending_rewards.is_empty() else "reward"; s.reward_return="explore"; s.reward_origin="イベントの獲得品"; s.last_reward={}; s.event_result={}; changed=true
 		"event":
 			if s.phase=="event" and args.get("choice","") in ["accept","skip"]:
 				var event: Dictionary = cfg.events[s.event]
@@ -299,6 +365,7 @@ static func act(previous: Dictionary, action: String, expected_revision: int, ar
 			if s.phase=="town":
 				s.last_outcome=""
 				s.phase="explore"; s.floor=0; s.result={}; s.journal=[]; s.trips+=1
+				if Journey.active(s): s.trip_exp=0; s.trip_gold=0; s.trip_items=0; s.pending_rewards=[]; s.erase("round_presentation")
 				note(s,"町でHP/SPを回復し、地下へ向かった。"); changed=true
 		"repair":
 			var uid: String=args.get("uid","")
@@ -309,12 +376,14 @@ static func act(previous: Dictionary, action: String, expected_revision: int, ar
 					s.item_condition[uid].current=s.item_condition[uid].maximum
 					var h:=hero(s,cfg); s.hp=h.max_hp; s.sp=h.max_sp
 					note(s,"装備を修理した。Gold -%d"%price); changed=true
+		"transfer":
+			changed=Storage.move(s,args.get("uid",""),args.get("source",""),args.get("destination",""),cfg)
 		"organize":
 			changed=Storage.organize(s,cfg,args.get("mode","category"))
 		"to_cloth":
 			changed=Storage.move(s,args.get("uid",""),args.get("source","inventory"),"cloth",cfg)
 		"deposit","withdraw","equip","unequip":
-			if s.phase=="town":
+			if s.phase=="town" or (Journey.active(s) and s.phase in ["explore","reward"] and action in ["equip","unequip"]):
 				var uid: String = args.get("uid","")
 				if action=="deposit":
 					changed=Storage.move(s,uid,args.get("source","inventory"),"warehouse",cfg)
@@ -331,7 +400,8 @@ static func act(previous: Dictionary, action: String, expected_revision: int, ar
 						s.inventory.append(s.equipment[slot]); s.equipment[slot]=""; changed=true
 				if changed:
 					var h := hero(s,cfg)
-					s.hp=h.max_hp; s.sp=h.max_sp
+					if s.phase=="town": s.hp=h.max_hp; s.sp=h.max_sp
+					else: s.hp=mini(int(s.hp),int(h.max_hp)); s.sp=mini(int(s.sp),int(h.max_sp))
 	if changed: s.revision += 1
 	return s if changed else previous
 
@@ -347,8 +417,8 @@ static func validate(s: Dictionary, data: Dictionary, cfg: Dictionary) -> String
 		if not integer(s[key],0,2147483647): return "Invalid number: "+key
 	if not s.first_done is bool or s.story_deaths>1 or s.first_done!=(s.story_deaths==1): return "Invalid legacy history flags"
 	if s.deaths<s.story_deaths or normal_deaths(s)>normal_trips(s): return "Invalid death counters"
-	if s.floor>10 or s.highest_floor>11 or s.floor>s.highest_floor or s.next_item<1 or (s.trips==0 and (s.phase!="town" or s.schema_version<5 or s.highest_floor!=0)): return "Invalid progression"
-	if not s.phase in ["explore","battle","event","result","town"]: return "Unknown phase"
+	if s.floor>(int(cfg.journey.public_max_floor) if Journey.active(s) else 10) or s.highest_floor>(int(cfg.journey.public_max_floor)+1 if Journey.active(s) else 11) or s.floor>s.highest_floor or s.next_item<1 or (s.trips==0 and (s.phase!="town" or s.schema_version<5 or s.highest_floor!=0)): return "Invalid progression"
+	if not s.phase in (["explore","battle","event","result","town","treasure","reward","event_result"] if Journey.active(s) else ["explore","battle","event","result","town"]): return "Unknown phase"
 	if not s.get("last_outcome","") in ["","victory"]: return "Invalid encounter outcome"
 	for key in ["rng","items","equipment","battle","result"]:
 		if not s[key] is Dictionary: return "Invalid dictionary: "+key
@@ -380,6 +450,13 @@ static func validate(s: Dictionary, data: Dictionary, cfg: Dictionary) -> String
 		if int(uid.trim_prefix("item-"))<1 or int(uid.trim_prefix("item-"))>=s.next_item: return "Invalid next item ID"
 		if not s.items[uid] is String or not cfg.items.has(s.items[uid]): return "Unknown item ID"
 	if seen.size()!=s.items.size(): return "Orphaned item"
+	if Journey.active(s):
+		if s.inventory.size()>Storage.BACKPACK_CAPACITY or not s.get("pending_rewards") is Array: return "Invalid journey inventory"
+		var reward_tokens: Array=[]
+		for reward in s.pending_rewards:
+			if not reward is Dictionary or not cfg.items.has(reward.get("id","")) or reward.get("quantity")!=1 or reward.get("token","")=="" or reward.token in reward_tokens: return "Invalid pending reward"
+			reward_tokens.append(reward.token)
+		if not s.pending_rewards.is_empty() and not s.phase in ["treasure","reward","event_result"]: return "Pending reward outside receipt screen"
 	var condition_error:=Condition.validate(s)
 	if condition_error!="": return condition_error
 	var h := hero(s,cfg)
@@ -387,7 +464,7 @@ static func validate(s: Dictionary, data: Dictionary, cfg: Dictionary) -> String
 	if s.phase!="result" and s.hp==0: return "Dead hero outside result"
 	if s.phase=="town" and (s.floor!=0 or s.hp!=h.max_hp or s.sp!=h.max_sp): return "Invalid town"
 	if s.phase=="event":
-		if not cfg.events.has(s.event) or s.floor<1 or s.floor>9: return "Invalid event"
+		if not cfg.events.has(s.event) or s.floor<1 or s.floor>int(cfg.journey.public_max_floor if Journey.active(s) else 9): return "Invalid event"
 	elif s.event!="": return "Event outside event phase"
 	if s.phase=="battle":
 		var b: Dictionary=s.battle
@@ -405,7 +482,7 @@ static func validate(s: Dictionary, data: Dictionary, cfg: Dictionary) -> String
 		# Existing checkpoints are validated against the table that created them.
 		# All newly drawn encounters use v2, including after a legacy save resumes.
 		var table: Array=data.get("legacy_floors",data.floors) if b.get("encounter_version",1)==1 else data.floors
-		var row:=floor_row(table,int(s.floor))
+		var row: Dictionary=Journey.node(cfg,int(s.floor)) if Journey.active(s) else floor_row(table,int(s.floor))
 		if not row.enemies.has(b.enemy_id) or b.enemy_level<row.levels[0] or b.enemy_level>row.levels[1]: return "Battle enemy outside floor table"
 		var combat := battle_state(s,data)
 		if combat.outcome!="ongoing" or combat.hero.hp!=s.hp or combat.hero.sp!=s.sp: return "Inconsistent battle checkpoint"

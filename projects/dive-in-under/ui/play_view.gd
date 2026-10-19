@@ -13,9 +13,10 @@ var mode: String
 var stage: Control
 var route: Control
 var routes_overlay: Control
+var vitals: Dictionary={}
 func _ready() -> void:
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	if mode in ["title","hub","equipment","result"]:
+	if mode in ["title","hub","equipment","result"] and (mode!="equipment" or game.campaign.phase=="town"):
 		# These are empty town backgrounds, separately supplied without any UI.
 		var bg: Texture2D=preload("res://assets/interface/v2/surface-title.png") if mode=="title" else preload("res://assets/interface/v2/surface-preparation.png")
 		var backdrop:=UISkin.picture(self,bg,Rect2(0,0,1280,720),true)
@@ -24,11 +25,14 @@ func _ready() -> void:
 			var dimmer:=ColorRect.new(); dimmer.name="TitleBackgroundDimmer"
 			dimmer.color=Color(0,0,0,TITLE_DIM_ALPHA); dimmer.size=Vector2(1280,720)
 			dimmer.mouse_filter=Control.MOUSE_FILTER_IGNORE; add_child(dimmer)
+	if mode=="equipment" and game.campaign.phase!="town": UISkin.picture(self,Art.texture("cavern"),Rect2(0,0,1280,720),true)
 	match mode:
 		"title": build_title()
 		"hub": build_hub()
 		"equipment": build_equipment()
 		"result": build_result()
+		"treasure","reward","event","event_result":
+			var view:=Control.new(); view.set_script(preload("res://ui/journey_view.gd")); view.game=game; add_child(view)
 		_: build_exploration()
 func header(title: String) -> void:
 	var p:=UISkin.panel(self,Rect2(16,14,1248,60),"",true)
@@ -46,15 +50,15 @@ func command(parent: Node, text: String, r: Rect2, action: String, args: Diction
 	return b
 func hero_card(r: Rect2) -> Control:
 	var s: Dictionary=game.campaign
-	var h: Dictionary=E.battle_state(s,game.data).hero if s.phase=="battle" else E.hero(s,game.cfg)
+	var h: Dictionary=game.display_battle().hero if s.phase=="battle" or game.presenting else E.hero(s,game.cfg)
 	var p:=UISkin.panel(self,r,"主人公  /  Lv.%d"%h.level,true)
 	var face:=AtlasTexture.new(); face.atlas=Art.texture("hero"); face.region=Rect2(410,210,390,370)
 	UISkin.picture(p,face,Rect2(20,57,72,88))
 	var pixels:=17
-	UISkin.label(p,"HP  %d / %d"%[h.hp,h.max_hp],Rect2(108,59,r.size.x-126,27),pixels,UISkin.DARK)
-	UISkin.gauge(p,h.hp,h.max_hp,Rect2(108,91,r.size.x-128,11),Color("b83e32"))
-	UISkin.label(p,"SP  %d / %d"%[h.sp,h.max_sp],Rect2(108,111,r.size.x-126,27),pixels,UISkin.DARK)
-	UISkin.gauge(p,h.sp,h.max_sp,Rect2(108,143,r.size.x-128,11),Color("267fae"))
+	vitals.hero_hp=UISkin.label(p,"HP  %d / %d"%[h.hp,h.max_hp],Rect2(108,59,r.size.x-126,27),pixels,UISkin.DARK)
+	vitals.hero_bar=UISkin.gauge(p,h.hp,h.max_hp,Rect2(108,91,r.size.x-128,11),Color("b83e32"))
+	vitals.hero_sp=UISkin.label(p,"SP  %d / %d"%[h.sp,h.max_sp],Rect2(108,111,r.size.x-126,27),pixels,UISkin.DARK)
+	vitals.hero_sp_bar=UISkin.gauge(p,h.sp,h.max_sp,Rect2(108,143,r.size.x-128,11),Color("267fae"))
 	var lv:=E.level_info(s,game.cfg)
 	UISkin.label(p,"EXP   %d / %d"%[lv.progress,lv.next],Rect2(20,177,r.size.x-40,27),16,UISkin.DARK)
 	UISkin.gauge(p,lv.progress,lv.next,Rect2(20,211,r.size.x-40,11),Color("b8862b"))
@@ -71,7 +75,7 @@ func build_title() -> void:
 	var caption:=UISkin.label(p,"支度を整え、まだ見ぬ深みへ。",Rect2(78,215,464,32),22,UISkin.DARK); caption.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER
 	game.new_button=nav(p,"はじめる",Rect2(66,275,488,64),game.request_new,"start",true)
 	nav(p,"終了",Rect2(66,355,488,64),func():game.get_tree().quit(),"quit")
-	UISkin.label(self,"0.6.4",Rect2(1170,675,85,25),15)
+	UISkin.label(self,"0.7.0",Rect2(1170,675,85,25),15)
 	game.new_button.add_theme_font_size_override("font_size",30); game.new_button.grab_focus()
 func build_hub() -> void:
 	header("冒険の準備")
@@ -98,19 +102,19 @@ func build_hub() -> void:
 	UISkin.label(note,"持ち帰った品を預け、装備を整えよう。",Rect2(17,15,190,65),17,UISkin.INK,true)
 func add_stage(r: Rect2, enemy: String="") -> void:
 	stage=Control.new(); stage.set_script(game.BattleStage); stage.wide_layout=true; stage.integrated_layout=true
-	stage.floor_number=game.campaign.floor; stage.enemy_id=enemy; stage.position=r.position; stage.size=r.size; add_child(stage)
+	stage.floor_number=game.campaign.floor; stage.enemy_id=enemy; stage.background_override=E.Journey.node(game.cfg,int(game.campaign.floor)).get("background","") if E.Journey.active(game.campaign) else ""; stage.position=r.position; stage.size=r.size; add_child(stage)
 func build_exploration() -> void:
-	var s: Dictionary=game.campaign; var battling: bool=s.phase=="battle"
+	var s: Dictionary=game.campaign; var battling: bool=s.phase=="battle" or game.presenting
 	header("地下 %d F  /  %s"%[s.floor,"自動戦闘" if battling else "探索"])
 	var left:=UISkin.panel(self,Rect2(16,86,220,424),"探索")
 	var down:=command(left,"さらに潜る",Rect2(14,65,192,62),"descend",{},true); down.disabled=s.phase!="explore"
 	var back:=command(left,"帰還する",Rect2(14,140,192,58),"return"); back.disabled=s.phase!="explore"
 	nav(left,"地図を開く",Rect2(14,214,192,53),open_routes,"map")
 	if battling:
-		var speed:=nav(left,"進行  %d倍速"%game.play_speed,Rect2(14,274,192,40),func():game.play_speed=2 if game.play_speed==1 else 1; game.show_campaign(),"speed")
+		var speed:=nav(left,"進行  %d倍速"%game.play_speed,Rect2(14,274,192,40),func():game.play_speed=2 if game.play_speed==1 else 1; game.cancel_presentation(); game.show_campaign(),"speed")
 		speed.tooltip_text="戦闘は自動で進みます。"
 		var pause:=nav(left,"自動戦闘を停止" if game.auto_play else "戦闘を再開",Rect2(14,323,192,42),func():
-			if game.auto_play: game.auto_play=false; game.play_timer.stop(); game.show_campaign()
+			if game.auto_play: game.auto_play=false; game.play_timer.stop(); game.cancel_presentation(); game.show_campaign()
 			else: game.resume_auto_battle(),"pause")
 		UISkin.quiet_button(pause,not game.auto_play)
 		UISkin.label(left,"自動戦闘：動作中" if game.auto_play else "自動戦闘：停止中",Rect2(18,369,185,22),16,UISkin.GOLD)
@@ -118,18 +122,19 @@ func build_exploration() -> void:
 	elif s.phase=="event":
 		command(left,game.cfg.events[s.event].choice,Rect2(14,287,192,53),"event",{"choice":"accept"})
 		command(left,"見送る",Rect2(14,349,192,53),"event",{"choice":"skip"})
-	else: UISkin.label(left,"灯りの先へ進むか、\n準備へ戻るか。",Rect2(18,298,185,80),18,UISkin.INK,true)
-	add_stage(Rect2(248,86,748,421),s.battle.get("enemy_id",""))
+	else: UISkin.label(left,"拾った品は [E] で比較・交換。",Rect2(18,346,185,74),17,UISkin.INK,true)
+	if not battling and s.phase=="explore": nav(left,"所持品・装備 [E]",Rect2(14,279,192,51),game.open_field_equipment,"field-equipment")
+	add_stage(Rect2(248,86,748,421),game.display_battle().enemy.id if battling else "")
 	var border:=UISkin.panel(self,Rect2(248,86,748,421)); border.mouse_filter=Control.MOUSE_FILTER_IGNORE; border.ornament_only=true
 	if s.phase=="event":
 		var event_panel:=UISkin.panel(self,Rect2(276,111,692,91),"",true)
 		UISkin.label(event_panel,game.cfg.events[s.event].name,Rect2(24,20,644,45),25,UISkin.DARK)
 	if battling:
-		var b: Dictionary=E.battle_state(s,game.data)
+		var b: Dictionary=game.display_battle()
 		var foe:=UISkin.panel(self,Rect2(264,101,287,92))
 		UISkin.label(foe,"%s  Lv.%d"%[b.enemy.name,b.enemy.level],Rect2(16,10,255,28),18,UISkin.GOLD)
-		UISkin.gauge(foe,b.enemy.hp,b.enemy.max_hp,Rect2(16,45,255,12),Color("b64735"))
-		UISkin.label(foe,"HP %d / %d  ・  ROUND %d"%[b.enemy.hp,b.enemy.max_hp,b.round],Rect2(16,61,255,23),14)
+		vitals.enemy_bar=UISkin.gauge(foe,b.enemy.hp,b.enemy.max_hp,Rect2(16,45,255,12),Color("b64735"))
+		vitals.enemy_hp=UISkin.label(foe,"HP %d / %d  ・  ROUND %d"%[b.enemy.hp,b.enemy.max_hp,b.round],Rect2(16,61,255,23),14)
 		var overlay:=Control.new(); overlay.set_script(game.StatusOverlay); overlay.battle=b
 		overlay.effects=b.log.filter(func(x):return x.round==b.round and x.type in ["status_applied","status_damage","action_skipped"])
 		stage.add_child(overlay)
@@ -145,7 +150,11 @@ func build_exploration() -> void:
 		UISkin.picture(bag,Items.texture(s.items[uid],game.cfg.items[s.items[uid]].slot),Rect2(20+i*44,94,40,40))
 	UISkin.label(bag,"風呂敷  %d / 3"%s.cloth.size(),Rect2(20,144,180,24),15,UISkin.MUTED)
 	var journal:=UISkin.panel(self,Rect2(248,522,748,182),"旅の記録")
-	var log:=RichTextLabel.new(); log.position=Vector2(17,51); log.size=Vector2(714,116); log.text="\n".join(s.journal.slice(-8)); log.scroll_following=true; log.add_theme_font_size_override("normal_font_size",17); log.theme=UISkin.scroll_theme(); journal.add_child(log)
+	var log:=RichTextLabel.new(); log.position=Vector2(17,51); log.size=Vector2(714,116); log.text="\n".join((game.presentation_journal if game.presenting else s.journal).slice(-8)); log.scroll_following=true; log.add_theme_font_size_override("normal_font_size",17); log.theme=UISkin.scroll_theme(); journal.add_child(log)
+	if game.intro_active and battling:
+		var intro:=UISkin.panel(stage,Rect2(80,170,588,80),"",true)
+		var label:=UISkin.label(intro,("10Fの門番  /  " if s.floor==10 else "遭遇  /  ")+game.display_battle().enemy.name,Rect2(18,15,552,47),27,UISkin.DARK); label.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER
+		intro.modulate.a=0; intro.create_tween().tween_property(intro,"modulate:a",1.0,0.12)
 	if game.route_map_open: open_routes()
 func open_routes() -> void:
 	if is_instance_valid(routes_overlay): return
@@ -166,6 +175,7 @@ func build_result() -> void:
 	var paper:=UISkin.panel(self,Rect2(90,128,630,516),text,true)
 	UISkin.label(paper,s.result.reason,Rect2(30,77,570,96),24,UISkin.DARK,true)
 	UISkin.label(paper,"到達  %d F\n主人公  Lv.%d\n所持金  %d G"%[s.result.floor,E.hero(s,game.cfg).level,s.gold],Rect2(30,200,570,132),24,UISkin.DARK,true)
+	if E.Journey.active(s): UISkin.label(paper,"今回の獲得  EXP +%d / Gold +%d / 品物 %d点"%[s.trip_exp,s.trip_gold,s.trip_items],Rect2(30,327,570,30),17,UISkin.DARK)
 	var loss: Dictionary=s.result.loss
 	UISkin.label(paper,"今回の損失   Gold %d / EXP %d / 携行品 %d"%[loss.gold,loss.exp,loss.items],Rect2(30,359,570,48),17,UISkin.DARK,true)
 	command(paper,"冒険準備へ戻る",Rect2(31,432,566,58),"town",{},true)
@@ -181,7 +191,7 @@ func build_equipment() -> void:
 		var row:=Control.new(); row.custom_minimum_size=Vector2(255,96); list.add_child(row)
 		UISkin.picture(row,Items.texture(game.campaign.items[uid],item.slot),Rect2(4,4,44,44))
 		UISkin.label(row,item.name,Rect2(54,6,196,33),16)
-		var equip:=command(row,"装備する",Rect2(52,47,192,40),"equip",{"uid":uid}); equip.disabled=item.slot==""
+		var pick:=nav(row,"比較する",Rect2(52,47,192,40),func():game.equipment_candidate=uid; game.equipment_focus=item.slot if item.slot!="" else game.equipment_focus; game.show_campaign(),"compare-"+uid); pick.disabled=item.slot==""
 	if game.campaign.inventory.is_empty(): UISkin.label(bag,"所持品はありません。",Rect2(22,85,256,50),17,UISkin.MUTED)
 	var center:=UISkin.panel(self,Rect2(328,92,554,532),"装備部位")
 	for i in E.SLOTS.size():
@@ -194,29 +204,49 @@ func build_equipment() -> void:
 		UISkin.label(b,game.cfg.slots[slot],Rect2(54,10,185,20),13,ink); UISkin.label(b,name,Rect2(54,30,185,24),16,ink)
 		if uid!="": UISkin.picture(b,Items.texture(game.campaign.items[uid],slot),Rect2(8,12,40,40))
 	var details:=UISkin.panel(self,Rect2(894,92,370,532),"装備の詳細",true)
-	var selected: String=game.campaign.equipment[game.equipment_focus]
+	var equipped: String=game.campaign.equipment[game.equipment_focus]
+	var selected: String=game.equipment_candidate if game.equipment_candidate in game.campaign.inventory else equipped
 	if selected!="":
 		var item: Dictionary=game.cfg.items[game.campaign.items[selected]]
 		UISkin.picture(details,Items.texture(game.campaign.items[selected],item.slot),Rect2(26,64,85,85))
 		UISkin.label(details,item.name,Rect2(125,73,217,74),22,UISkin.DARK,true)
 		UISkin.label(details,game.item_effects(item,selected)+"\n"+game.condition_text(selected),Rect2(26,180,320,88),21,UISkin.DARK,true)
-		UISkin.label(details,item.get("description",preload("res://ui/warehouse_catalog.gd").DESCRIPTIONS.get(game.campaign.items[selected],"")),Rect2(26,280,320,105),18,UISkin.DARK,true)
-		var remove:=command(details,"装備を外す",Rect2(22,398,326,50),"unequip",{"slot":game.equipment_focus})
-		remove.disabled=game.campaign.inventory.size()>=15
+		UISkin.label(details,item.get("description",preload("res://ui/warehouse_catalog.gd").DESCRIPTIONS.get(game.campaign.items[selected],"")),Rect2(26,280,320,105) if game.equipment_candidate=="" else Rect2(26,360,320,26),18,UISkin.DARK,true)
+		var candidate: bool=selected!=equipped
+		if candidate:
+			var preview: Dictionary=E.act(game.campaign,"equip",int(game.campaign.revision),{"uid":selected},game.data,game.cfg)
+			var before: Dictionary=E.hero(game.campaign,game.cfg); var after: Dictionary=E.hero(preview,game.cfg)
+			var delta: Array[String]=[]
+			for key in [["atk","攻撃"],["def","防御"],["spd","素早さ"],["max_hp","最大HP"],["max_sp","最大SP"]]: delta.append("%s %+d"%[key[1],int(after[key[0]])-int(before[key[0]])])
+			UISkin.label(details,"比較："+" / ".join(delta),Rect2(24,275,322,86),17,UISkin.DARK,true)
+		var remove:=command(details,"この装備へ交換" if candidate else "装備を外す",Rect2(22,398,326,50),"equip" if candidate else "unequip",{"uid":selected} if candidate else {"slot":game.equipment_focus})
+		remove.disabled=not candidate and game.campaign.inventory.size()>=15
 		if remove.disabled:
 			remove.tooltip_text="バックパックに空きがありません"
 			UISkin.label(details,"バックパックに空きがありません",Rect2(22,363,326,28),15,UISkin.DARK)
 		var cost:=E.Condition.cost(game.campaign,selected,game.cfg)
-		var repair:=command(details,"修理  %d G"%maxi(0,cost),Rect2(22,461,326,50),"repair",{"uid":selected}); repair.disabled=cost<=0 or game.campaign.gold<cost
+		var repair:=command(details,"修理  %d G"%maxi(0,cost),Rect2(22,461,326,50),"repair",{"uid":selected}); repair.disabled=game.campaign.phase!="town" or cost<=0 or game.campaign.gold<cost
 	else: UISkin.label(details,"この部位には何も装備していません。",Rect2(28,184,314,100),23,UISkin.DARK,true)
-	nav(self,"冒険準備へ戻る",Rect2(16,643,300,60),func():game.open_town_page("hub"),"back")
+	nav(self,"冒険準備へ戻る" if game.campaign.phase=="town" else "探索へ戻る",Rect2(16,643,300,60),func():game.open_town_page("hub") if game.campaign.phase=="town" else game.close_equipment(),"back")
 	UISkin.label(self,"所持品から装備し、部位を選んで詳細を確認。",Rect2(349,654,700,37),19)
+func refresh_vitals() -> void:
+	if game.display_battle().is_empty(): return
+	var b: Dictionary=game.display_battle()
+	if vitals.has("hero_hp"):
+		vitals.hero_hp.text="HP  %d / %d"%[b.hero.hp,b.hero.max_hp]; vitals.hero_bar.value=b.hero.hp
+		vitals.hero_sp.text="SP  %d / %d"%[b.hero.sp,b.hero.max_sp]; vitals.hero_sp_bar.value=b.hero.sp
+	if vitals.has("enemy_hp"):
+		vitals.enemy_hp.text="HP %d / %d  ・  ROUND %d"%[b.enemy.hp,b.enemy.max_hp,b.round]; vitals.enemy_bar.value=b.enemy.hp
 func _unhandled_key_input(event: InputEvent) -> void:
+	if event is InputEventKey and event.pressed and not event.echo and event.keycode==KEY_E and game.campaign.get("phase")=="explore":
+		get_viewport().set_input_as_handled(); game.call_deferred("open_field_equipment"); return
 	if event.is_action_pressed("ui_cancel"):
 		get_viewport().set_input_as_handled()
 		# Keep the receiving Control alive until the viewport finishes dispatching this key.
 		if game.route_map_open: call_deferred("close_routes")
-		elif mode=="equipment": game.call_deferred("open_town_page","hub")
+		elif mode=="equipment":
+			if game.campaign.phase=="town": game.call_deferred("open_town_page","hub")
+			else: game.call_deferred("close_equipment")
 		elif mode=="hub": game.call_deferred("show_title")
 func visual_audit() -> Dictionary:
 	return {"kind":"session-ui","screen":mode,"session_only":not game.legacy_persistence_mode,"stage_rect":str(stage.get_global_rect()) if is_instance_valid(stage) else "","route":route.nodes() if is_instance_valid(route) else []}

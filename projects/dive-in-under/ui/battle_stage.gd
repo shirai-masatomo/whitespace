@@ -7,6 +7,7 @@ var integrated_layout:=false
 var scenery: TextureRect
 var hero_art: Sprite2D
 var enemy_art: Sprite2D
+var background_override: String=""
 var enemy_id := "E04"
 var hero_alive := true
 var enemy_alive := true
@@ -59,7 +60,7 @@ func _ready() -> void:
 	scenery = TextureRect.new()
 	scenery.show_behind_parent = true
 	scenery.mouse_filter = MOUSE_FILTER_IGNORE
-	scenery.texture = VisualAssets.texture(VisualAssets.background_key(floor_number))
+	scenery.texture = VisualAssets.texture(background_override if background_override!="" else VisualAssets.background_key(floor_number))
 	scenery.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	scenery.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED if wide_layout else TextureRect.STRETCH_KEEP_ASPECT_COVERED
 	scenery.modulate = VisualAssets.depth_tint(floor_number)
@@ -183,3 +184,28 @@ func _draw() -> void:
 			draw_string(get_theme_default_font(),point+Vector2(18,30),enemy_id,HORIZONTAL_ALIGNMENT_LEFT,-1,22,Color("e2ddcc"))
 			draw_string(get_theme_default_font(),point+Vector2(18,60),"画像待ち",HORIZONTAL_ALIGNMENT_LEFT,-1,18,Color("e2ddcc"))
 	if hero_art == null or hero_art.texture == null: sprite(HERO,display_foot(hero_position_hint())-Vector2(45,HERO.size()*5),5,hero_alive)
+
+func present_event(event: Dictionary, game: Control) -> void:
+	var actor: Sprite2D=hero_art if event.get("actor","hero")=="hero" else enemy_art
+	var target: Sprite2D=hero_art if event.get("target",event.get("actor","hero"))=="hero" else enemy_art
+	var origin: Vector2=actor.position
+	var tween:=create_tween()
+	var duration: float=0.08/float(game.play_speed)
+	if event.type=="attack": tween.tween_property(actor,"position",origin+Vector2(-18 if actor==hero_art else 18,-3),duration)
+	else: tween.tween_interval(duration)
+	tween.tween_callback(func():
+		game.impact(event)
+		var text: String=""
+		var color:=Color("ffd581")
+		if event.type=="attack": text=("-%d"%event.damage if event.hit else "MISS")+(" 撃破" if event.get("death",false) else "")
+		elif event.type=="status_damage": text="毒 -%d"%event.damage; color=Color("93cf77")
+		elif event.type=="action_skipped": text="麻痺 / 行動不能"
+		elif event.type=="skill": text=game.data.rules.skills[event.skill].name
+		if text!="":
+			var label:=Label.new(); label.text=text; label.add_theme_font_size_override("font_size",24); label.add_theme_color_override("font_color",color); label.add_theme_color_override("font_outline_color",Color("091820")); label.add_theme_constant_override("outline_size",6)
+			label.position=target.position+Vector2(-45,-145); label.mouse_filter=MOUSE_FILTER_IGNORE; label.z_index=990; add_child(label)
+			var float_tween:=label.create_tween(); float_tween.tween_property(label,"position:y",label.position.y-18,0.14); float_tween.tween_property(label,"modulate:a",0.0,0.06); float_tween.tween_callback(label.queue_free)
+		if event.get("hit",false) or event.type=="status_damage": target.modulate=Color("f39c7d")
+	)
+	tween.tween_property(actor,"position",origin,duration)
+	tween.tween_callback(func(): target.modulate=Color.WHITE)

@@ -17,6 +17,19 @@ var auto_play := true
 var play_speed := 1
 var ui_mode := "title"
 var notice := ""
+var field_equipment:=false
+var equipment_candidate: String=""
+var reward_selected: String=""
+var replace_selected: String=""
+var reward_confirmation: String=""
+var presenting:=false
+var presentation_battle: Dictionary={}
+var presentation_journal: Array=[]
+var presentation_generation:=0
+var intro_active:=false
+var intro_seen: Dictionary={}
+var dungeon_music: AudioStreamPlayer
+var dungeon_music_path: String=""
 var play_buttons: Dictionary = {}
 var town_page := "hub"
 var warehouse_state: Dictionary = {}
@@ -37,7 +50,7 @@ var campaign_seed := 123
 const CampaignReplay = preload("res://ui/campaign_replay.gd")
 
 func initialize_game() -> void:
-	get_window().title="Dive In Under 0.6.4"
+	get_window().title="Dive In Under 0.7.0"
 	Engine.max_fps=60
 	legacy_persistence_mode=smoke_dir!="" and "--legacy-persistence-check" in OS.get_cmdline_user_args()
 	cfg=Expedition.load_config()
@@ -73,6 +86,8 @@ func _notification(what: int) -> void:
 		get_tree().quit()
 
 func show_title() -> void:
+	cancel_presentation(); intro_active=false; field_equipment=false
+	if is_instance_valid(dungeon_music): dungeon_music.stop(); dungeon_music_path=""
 	route_map_open=false
 	preparation_music.set_preparation_active(false)
 	if not legacy_persistence_mode:
@@ -132,6 +147,7 @@ func request_new() -> void:
 func start_new() -> void:
 	if not legacy_persistence_mode:
 		cfg=Expedition.load_config(); campaign=Expedition.fresh(cfg,campaign_seed if smoke_dir!="" else int(Time.get_ticks_usec()%2147483647))
+		Expedition.Journey.enable(campaign)
 		campaign.phase="town"; campaign.trips=0; town_page="hub"; session_departed=false; warehouse_state={}; auto_play=true; notice=""; show_campaign(); return
 	var error: String=save_store.preserve_current()
 	if error!="": notice=error; show_title(); return
@@ -156,6 +172,9 @@ func continue_campaign() -> void:
 	campaign=loaded.state; auto_play=false; notice=""; show_campaign()
 
 func perform(action: String, args: Dictionary, revision: int) -> void:
+	if presenting or intro_active:
+		if action=="round": return
+	var old_journal: Array=campaign.get("journal",[]).duplicate()
 	var candidate:=Expedition.act(campaign,action,revision,args,data,cfg)
 	if candidate==campaign:
 		if action=="organize": notice="すでに選択した順序に整理されています。"; show_campaign()
@@ -169,12 +188,21 @@ func perform(action: String, args: Dictionary, revision: int) -> void:
 		session_departed=true
 		candidate=Expedition.act(candidate,"descend",int(candidate.revision),{},data,cfg)
 	campaign=candidate; loaded={"ok":true,"status":"ok"}; notice=""
-	if action=="town": town_page="hub"
+	if action in ["town","depart"]:
+		town_page="hub"; field_equipment=false; intro_seen={}; intro_active=false; cancel_presentation()
+		if action=="depart": auto_play=true
+	if action=="round" and Expedition.Journey.active(campaign) and campaign.has("round_presentation"):
+		presentation_journal=old_journal
+		present_round(campaign.round_presentation)
+		return
 	if action in ["deposit","withdraw","to_cloth"]:
 		warehouse_state.uid=args.get("uid","")
 		warehouse_state.source={"deposit":"warehouse","withdraw":"inventory","to_cloth":"cloth"}[action]
 		notice={"deposit":"倉庫へ預けました。","withdraw":"バックパックへ引き出しました。","to_cloth":"父親の風呂敷へ移しました。"}[action]
 	if action=="organize": notice="選択した順序に整理しました。"
+	if action=="transfer": notice="%sへ移しました。×1 / 個体・耐久を保持"%{"warehouse":"倉庫","inventory":"バックパック","cloth":"父親の風呂敷"}[args.destination]
+	if action in ["claim_reward","exchange_reward","abandon_rewards"]: reward_confirmation=""
+	if action in ["equip","unequip"]: equipment_candidate=""
 	show_campaign()
 
 func command(label: String, action: String, args: Dictionary = {}) -> Button:
@@ -205,7 +233,11 @@ func show_play_view(mode: String) -> void:
 	for side in ["left","right","top","bottom"]: screen.add_theme_constant_override("margin_"+side,0)
 	play_view=Control.new(); play_view.set_script(preload("res://ui/play_view.gd")); play_view.game=self; play_view.mode=mode; screen.add_child(play_view)
 func show_campaign() -> void:
-	if campaign.get("phase") in ["result","town"]: route_map_open=false
+	if campaign.get("phase") in ["result","town"]:
+		route_map_open=false; field_equipment=false
+		if not presenting: presentation_battle={}
+	if Expedition.Journey.active(campaign) and campaign.get("phase")=="battle" and not presenting: ensure_intro()
+	update_dungeon_music()
 	preparation_music.set_preparation_active(campaign.get("phase")=="town")
 	if not legacy_persistence_mode:
 		timer.stop(); play_timer.stop(); title_visible=false; ui_mode="campaign"; play_buttons={}
@@ -219,8 +251,8 @@ func show_campaign() -> void:
 			else:
 				warehouse_view=Control.new(); warehouse_view.set_script(preload("res://ui/warehouse_view.gd")); warehouse_view.game=self; screen.add_child(warehouse_view)
 		else:
-			show_play_view("equipment" if campaign.phase=="town" and town_page=="equipment" else ("hub" if campaign.phase=="town" else ("result" if campaign.phase=="result" else "exploration")))
-		if campaign.phase=="battle" and auto_play: play_timer.wait_time=0.6/play_speed; play_timer.start()
+			show_play_view("equipment" if field_equipment or (campaign.phase=="town" and town_page=="equipment") else ("exploration" if presenting else ("hub" if campaign.phase=="town" else campaign.phase)))
+		if campaign.phase=="battle" and auto_play and not field_equipment and not presenting and not intro_active: play_timer.wait_time=0.6/play_speed; play_timer.start()
 		return
 	timer.stop(); play_timer.stop(); title_visible=false; ui_mode="campaign"; play_buttons={}
 	background.set_depth(campaign.floor if campaign.phase not in ["town","result"] else 1)
@@ -474,6 +506,8 @@ func show_equipment(root: VBoxContainer) -> void:
 	var depart:=command("HP/SP回復済み  →  もう一度地下へ","depart"); root.add_child(depart)
 
 func smoke(quit_on_finish: bool = true) -> void:
+	if "--journey-review" in OS.get_cmdline_user_args():
+		await preload("res://ui/journey_review.gd").run(self); return
 	if "--refinement-review" in OS.get_cmdline_user_args():
 		await preload("res://ui/refinement_review.gd").run(self); return
 	if "--title-review" in OS.get_cmdline_user_args():
@@ -601,11 +635,69 @@ func find_button(node: Node, label: String) -> Button:
 	return null
 
 func _input(event: InputEvent) -> void:
-	if legacy_persistence_mode or campaign.get("phase")!="battle": return
+	if legacy_persistence_mode or (campaign.get("phase")!="battle" and not presenting): return
 	if event is InputEventKey and (event.keycode==KEY_SPACE or event.physical_keycode==KEY_SPACE):
 		get_viewport().set_input_as_handled()
 		if event.pressed and not event.echo:
-			auto_play=not auto_play; play_timer.stop(); call_deferred("show_campaign")
+			auto_play=not auto_play; play_timer.stop(); cancel_presentation(); call_deferred("show_campaign")
 func resume_auto_battle() -> void:
 	if campaign.get("phase")=="battle" and not auto_play:
 		auto_play=true; show_campaign()
+
+func transfer_item(uid: String, source: String, destination: String, revision: int) -> void:
+	var reason: String=Expedition.Storage.reason(campaign,uid,source,destination,cfg)
+	if revision!=int(campaign.revision): reason="表示が更新されました。もう一度選んでください。"
+	if reason!="": notice=reason; call_deferred("show_campaign"); return
+	warehouse_state.uid=uid; warehouse_state.source=destination
+	perform("transfer",{"uid":uid,"source":source,"destination":destination},revision)
+
+func open_field_equipment() -> void:
+	if campaign.get("phase") not in ["explore","reward"] or presenting: return
+	field_equipment=true; equipment_candidate=""; play_timer.stop(); show_campaign()
+func close_equipment() -> void:
+	field_equipment=false; equipment_candidate=""; show_campaign()
+func display_battle() -> Dictionary:
+	return presentation_battle if presenting else Expedition.battle_state(campaign,data)
+func cancel_presentation() -> void:
+	presentation_generation+=1; presenting=false; presentation_battle={}
+func ensure_intro() -> void:
+	var key: String="%d/%d/%d"%[campaign.trips,campaign.floor,campaign.battle.seed]
+	if intro_seen.has(key): return
+	intro_seen[key]=true; intro_active=true; play_timer.stop()
+	var duration: float=float(cfg.journey.boss_intro_seconds if Expedition.Journey.node(cfg,int(campaign.floor)).kind=="boss" else cfg.journey.intro_seconds)
+	preload("res://ui/journey_sound.gd").play(self,90 if campaign.floor==10 else 220)
+	finish_intro(key,duration)
+func finish_intro(key: String, duration: float) -> void:
+	await get_tree().create_timer(duration).timeout
+	if campaign.get("phase")=="battle" and key=="%d/%d/%d"%[campaign.trips,campaign.floor,campaign.battle.seed]:
+		intro_active=false; show_campaign()
+	else: intro_active=false
+func present_round(record: Dictionary) -> void:
+	cancel_presentation(); var generation: int=presentation_generation
+	presenting=true; presentation_battle=record.before.duplicate(true); play_timer.stop(); show_campaign()
+	for event in record.events:
+		if generation!=presentation_generation: return
+		if not event.type in ["attack","status_damage","action_skipped","skill"]: continue
+		if is_instance_valid(play_view.stage): play_view.stage.present_event(event,self)
+		await get_tree().create_timer(0.30/float(play_speed)).timeout
+		if generation!=presentation_generation: return
+	if generation!=presentation_generation: return
+	presenting=false; presentation_battle={}; show_campaign()
+func impact(event: Dictionary) -> void:
+	if not presenting: return
+	var side: String=event.get("target",event.get("actor","hero"))
+	if event.has("target_hp"): presentation_battle[side].hp=event.target_hp
+	if event.type=="skill" and event.has("sp"): presentation_battle[event.actor].sp=event.sp
+	if is_instance_valid(play_view): play_view.refresh_vitals()
+func update_dungeon_music() -> void:
+	var path: String=""
+	if not campaign.is_empty() and Expedition.Journey.active(campaign) and not title_visible and campaign.phase not in ["town","result"]:
+		path=Expedition.Journey.node(cfg,int(campaign.floor)).get("bgm","")
+	if path==dungeon_music_path: return
+	dungeon_music_path=path
+	if not is_instance_valid(dungeon_music): dungeon_music=AudioStreamPlayer.new(); dungeon_music.bus=&"BGM"; add_child(dungeon_music)
+	dungeon_music.stop()
+	if path!="":
+		var track=load(path).duplicate()
+		if track is AudioStreamOggVorbis: track.loop=true
+		dungeon_music.stream=track; dungeon_music.volume_db=-4; dungeon_music.play()

@@ -18,6 +18,8 @@ var grid_scroll: ScrollContainer
 var bag_scroll: ScrollContainer
 var cloth_scroll: ScrollContainer
 var visible_items: Array=[]
+var drag_payload: Dictionary={}
+var detail_move: Button
 func _ready() -> void:
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	build()
@@ -82,22 +84,22 @@ func remember_scroll() -> void:
 	if is_instance_valid(grid_scroll): game.warehouse_state.grid_scroll=grid_scroll.scroll_vertical
 	if is_instance_valid(cloth_scroll): game.warehouse_state.cloth_scroll=cloth_scroll.scroll_vertical
 func scroll_area(p: Control, r: Rect2) -> ScrollContainer:
-	var sc:=ScrollContainer.new(); sc.position=r.position; sc.size=r.size
+	var sc:=ScrollContainer.new(); sc.set_script(preload("res://ui/warehouse_drop.gd")); sc.view=self; sc.position=r.position; sc.size=r.size
 	sc.theme=UISkin.scroll_theme(); sc.horizontal_scroll_mode=ScrollContainer.SCROLL_MODE_DISABLED; p.add_child(sc)
 	return sc
 func build_list(p: Control, source: String, r: Rect2) -> ScrollContainer:
-	var sc:=scroll_area(p,r)
+	var sc:=scroll_area(p,r); sc.destination=source
 	var box:=VBoxContainer.new(); box.size_flags_horizontal=Control.SIZE_EXPAND_FILL; box.add_theme_constant_override("separation",4); sc.add_child(box)
 	for uid in game.campaign[source]:
 		var item: Dictionary=game.cfg.items[game.campaign.items[uid]]
-		var b:=Button.new(); b.custom_minimum_size=Vector2(r.size.x-12,34 if source=="cloth" else 42); b.size_flags_horizontal=Control.SIZE_EXPAND_FILL
+		var b:=Button.new(); b.set_script(preload("res://ui/warehouse_item.gd")); b.view=self; b.source=source; b.uid=uid; b.custom_minimum_size=Vector2(r.size.x-12,34 if source=="cloth" else 42); b.size_flags_horizontal=Control.SIZE_EXPAND_FILL
 		UISkin.quiet_button(b,uid==selected_uid); box.add_child(b)
 		icon_at(b,item.slot,Rect2(5,0,32,32) if source=="cloth" else Rect2(5,2,36,36),game.campaign.items[uid])
 		var name_label:=label_at(b,Catalog.name_of(item),Rect2(46,0,r.size.x-100,32 if source=="cloth" else 36),17)
 		name_label.text_overrun_behavior=TextServer.OVERRUN_TRIM_ELLIPSIS
 		label_at(b,"×1",Rect2(r.size.x-51,0,30,32 if source=="cloth" else 34),16,MUTED)
 		b.tooltip_text=Catalog.name_of(item)+" / "+game.condition_text(uid)
-		b.pressed.connect(func(): select_item(source,uid))
+		b.pressed.connect(func(): if not Input.is_key_pressed(KEY_SHIFT): select_item(source,uid))
 		rows[uid]=b
 	if game.campaign[source].is_empty(): label_at(p,"中身はありません",Rect2(22,r.position.y+12,r.size.x-20,28),17,MUTED)
 	return sc
@@ -135,28 +137,28 @@ func build() -> void:
 		var tab:=Button.new(); tab.text=Catalog.CATEGORIES[category]; tab.position=Vector2(14+tab_index*92,54); tab.size=Vector2(88,32); UISkin.quiet_button(tab,game.warehouse_state.get("category","all")==category); tab.add_theme_font_size_override("font_size",15); center.add_child(tab)
 		tab.pressed.connect(func(): remember_scroll(); game.warehouse_state.category=category; game.warehouse_state.grid_scroll=0; rebuild())
 		tab_index+=1
-	grid_scroll=scroll_area(center,Rect2(14,98,552,379))
+	grid_scroll=scroll_area(center,Rect2(14,98,552,379)); grid_scroll.destination="warehouse"
 	var grid:=GridContainer.new(); grid.columns=6; grid.add_theme_constant_override("h_separation",5); grid.add_theme_constant_override("v_separation",6); grid_scroll.add_child(grid)
 	var category: String=game.warehouse_state.get("category","all")
 	for uid in game.campaign.warehouse:
 		var item: Dictionary=game.cfg.items[game.campaign.items[uid]]
 		if category!="all" and Storage.category(item)!=category: continue
 		visible_items.append(uid)
-		var tile:=Button.new(); tile.custom_minimum_size=Vector2(84,112); skin(tile,uid==selected_uid); tile_skin(tile,uid==selected_uid); grid.add_child(tile)
+		var tile:=Button.new(); tile.set_script(preload("res://ui/warehouse_item.gd")); tile.view=self; tile.source="warehouse"; tile.uid=uid; tile.custom_minimum_size=Vector2(84,112); skin(tile,uid==selected_uid); tile_skin(tile,uid==selected_uid); grid.add_child(tile)
 		icon_at(tile,item.slot,Rect2(14,10,56,52),game.campaign.items[uid])
 		label_at(tile,"×1",Rect2(50,58,24,18),13)
 		var title:=label_at(tile,Catalog.name_of(item),Rect2(10,76,64,22),12,INK); UISkin.fit_name(title,Catalog.name_of(item),64); title.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER
 		if item.slot!="":
 			var bar:=ColorRect.new(); bar.position=Vector2(10,101); bar.size=Vector2(64.0*game.campaign.item_condition[uid].current/100,2); bar.color=Color("72b8a1") if game.campaign.item_condition[uid].current>0 else Color("a95646"); bar.mouse_filter=Control.MOUSE_FILTER_IGNORE; tile.add_child(bar)
 		tile.tooltip_text=Catalog.name_of(item)+" ×1\n"+game.condition_text(uid)
-		tile.pressed.connect(func(): select_item("warehouse",uid)); rows[uid]=tile
+		tile.pressed.connect(func(): if not Input.is_key_pressed(KEY_SHIFT): select_item("warehouse",uid)); rows[uid]=tile
 	if visible_items.is_empty(): label_at(center,"この分類にアイテムはありません",Rect2(40,230,500,32),19,MUTED)
 	label_at(center,"容量制限なし  ·  1枠1点 / 個別の耐久を保持",Rect2(28,474,524,22),14,MUTED)
 	var right:=panel(Rect2(916,92,348,510),"アイテム詳細","eyes")
 	build_details(right)
 	build_actions()
 	var guide:=ColorRect.new(); guide.position=Vector2(16,610); guide.size=Vector2(1248,30); guide.color=Color("10242d"); guide.mouse_filter=Control.MOUSE_FILTER_IGNORE; add_child(guide)
-	label_at(self,game.notice if game.notice!="" else "アイテムを選び、下のボタンで移動します。移動後もこの起動中は保持されます。",Rect2(28,613,1224,24),15,INK)
+	label_at(self,game.notice if game.notice!="" else "左クリック：詳細 / Shift＋クリック：倉庫⇔所持品 / ドラッグ：光る収納へ / 1枠1点",Rect2(28,613,1224,24),15,INK)
 	bag_scroll.set_deferred("scroll_vertical",game.warehouse_state.get("bag_scroll",0))
 	grid_scroll.set_deferred("scroll_vertical",game.warehouse_state.get("grid_scroll",0))
 	cloth_scroll.set_deferred("scroll_vertical",game.warehouse_state.get("cloth_scroll",0))
@@ -188,6 +190,10 @@ func build_details(p: Control) -> void:
 		UISkin.rule(p,Rect2(18,y,312,1))
 		label_at(p,values[i][0],Rect2(21,y+5,78,32),15,MUTED)
 		var value:=label_at(p,values[i][1],Rect2(102,y+5,225,36),16); value.autowrap_mode=TextServer.AUTOWRAP_WORD; value.tooltip_text=values[i][1]
+	var destination: String="inventory" if selected_source=="warehouse" else "warehouse"
+	detail_move=UISkin.button(p,("取り出す" if selected_source=="warehouse" else "預ける")+" [Enter]",Rect2(22,445,304,44),func():move_item(selected_uid,selected_source,destination,int(game.campaign.revision)),true)
+	detail_move.tooltip_text=Storage.reason(game.campaign,selected_uid,selected_source,destination,game.cfg)
+	if detail_move.tooltip_text!="": label_at(p,detail_move.tooltip_text,Rect2(22,412,304,28),14)
 func build_actions() -> void:
 	var entries: Array=[["預ける","deposit","warehouse","warehouse"],["引き出す","withdraw","inventory","body"],["整理","organize","","material"],["風呂敷へ","to_cloth","cloth","cloth"],["戻る","back","","lantern"]]
 	for i in entries.size():
@@ -202,17 +208,36 @@ func build_actions() -> void:
 				args={"uid":selected_uid}
 				var default_source: String="warehouse" if e[1]=="withdraw" else "inventory"
 				if selected_source!=default_source: args.source=selected_source
-			b=game.command(e[0],e[1],args)
+			if e[1]=="organize": b=game.command(e[0]+" [R]",e[1],args)
+			else:
+				b=game.button(e[0]+(" [F]" if e[1]=="to_cloth" else ""),func():move_item(selected_uid,selected_source,e[2],int(game.campaign.revision)))
+				b.set_meta("campaign_action",e[1]); game.play_buttons[e[1]]=b
 			if e[1]!="organize":
 				var error:=Storage.reason(game.campaign,selected_uid,selected_source,e[2],game.cfg)
-				b.disabled=error!=""; b.tooltip_text=error
+				b.tooltip_text=error
 		b.position=Vector2(16+i*252,646); b.size=Vector2(240,58); b.custom_minimum_size=Vector2.ZERO
 		skin(b,false,e[1]=="to_cloth"); add_child(b)
 		var ornament:=Control.new(); ornament.set_script(Frame); ornament.ornament_only=true; b.add_child(ornament); ornament.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 		icon_at(b,e[3],Rect2(16,8,40,40))
 		b.pressed.connect(remember_scroll)
-		if i==0: b.grab_focus()
+		if i==0 and is_instance_valid(detail_move): detail_move.grab_focus()
+func accepts(value: Variant, destination: String) -> bool:
+	return value is Dictionary and value.get("kind")=="dive-item" and value.get("revision")==game.campaign.revision and Storage.reason(game.campaign,value.get("uid",""),value.get("source",""),destination,game.cfg)==""
+func move_item(uid: String, source: String, destination: String, revision: int) -> void:
+	remember_scroll()
+	game.transfer_item(uid,source,destination,revision)
+func _notification(what: int) -> void:
+	if what==NOTIFICATION_DRAG_END and not drag_payload.is_empty():
+		if not get_viewport().gui_is_drag_successful():
+			game.notice="移動を取り消しました。移動先の空き・収納制限を確認してください。"
+			game.call_deferred("show_campaign")
+		drag_payload={}
 func _unhandled_key_input(event: InputEvent) -> void:
+	if event is InputEventKey and event.pressed and not event.echo and event.keycode in [KEY_ENTER,KEY_R,KEY_F]:
+		get_viewport().set_input_as_handled()
+		if event.keycode==KEY_R: game.call_deferred("perform","organize",{"mode":game.warehouse_state.get("sort","category")},int(game.campaign.revision))
+		else: call_deferred("move_item",selected_uid,selected_source,"cloth" if event.keycode==KEY_F else ("inventory" if selected_source=="warehouse" else "warehouse"),int(game.campaign.revision))
+		return
 	if event.is_action_pressed("ui_cancel"):
 		get_viewport().set_input_as_handled(); game.call_deferred("open_town_page","hub")
 func visual_audit() -> Dictionary:

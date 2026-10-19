@@ -55,6 +55,9 @@ jobs:
           PREVIOUS_HEAD: ${{ github.event.before }}
           CURRENT_HEAD: ${{ github.event.pull_request.head.sha || github.sha }}
         run: |
+          $journeyOnly = Test-Path tools/journey-stage.txt
+          if ($journeyOnly) { ./tools/journey_scope.ps1 }
+          "journey_only=$($journeyOnly.ToString().ToLowerInvariant())" >> $env:GITHUB_OUTPUT
           $integrationOnly = $false
           if (Test-Path ui/play_view.gd) {
             git diff --exit-code a5c3c6925fbc501d24ce84ccfa1f2fbbeed74456 HEAD -- core data | Out-Null
@@ -103,7 +106,8 @@ jobs:
             $bgmOnly = @($bgmFiles | Where-Object { $_ -match '(preparation_music|bgm_review|publish_bgm|assets/bgm)' }).Count -gt 0 -and @($bgmFiles | Where-Object { $_ -notmatch $bgmAllowed }).Count -eq 0
           }
           "bgm_only=$($bgmOnly.ToString().ToLowerInvariant())" >> $env:GITHUB_OUTPUT
-          $feedbackOnly = $integrationOnly -and (Test-Path ui/feedback_review.gd) -and !$bgmOnly -and !$titleOnly -and !$refinementOnly
+          if ($journeyOnly) { $integrationOnly = $true }
+          $feedbackOnly = !$journeyOnly -and $integrationOnly -and (Test-Path ui/feedback_review.gd) -and !$bgmOnly -and !$titleOnly -and !$refinementOnly
           "feedback_only=$($feedbackOnly.ToString().ToLowerInvariant())" >> $env:GITHUB_OUTPUT
           "integration_only=$($integrationOnly.ToString().ToLowerInvariant())" >> $env:GITHUB_OUTPUT
           $global:LASTEXITCODE = 0
@@ -170,11 +174,28 @@ jobs:
       - name: Targeted exported EXE image and first-return smoke
         if: steps.scope.outputs.art_only == 'true' && steps.scope.outputs.integration_only != 'true'
         run: ./tools/enemy_art_review.ps1
+      - name: Focused journey core checkpoint
+        if: steps.scope.outputs.journey_only == 'true'
+        timeout-minutes: 3
+        run: |
+          $env:APPDATA = "$PWD/artifacts/journey-core-user"
+          New-Item -ItemType Directory -Force artifacts | Out-Null
+          $engine = "$PWD/.tools/Godot_v4.7.2-stable_win64_console.exe"
+          foreach ($entry in @(@('--editor','--import','--quit'),@('--script','tests/test_journey.gd'),@('--script','tests/test_storage.gd'),@('--script','tests/test_equipment_condition.gd'))) {
+            $label = if ($entry[0] -eq '--editor') { 'import' } else { [IO.Path]::GetFileNameWithoutExtension($entry[1]) }
+            $log = "$PWD/artifacts/journey-$label.log"
+            $arguments = @('--headless','--path',"$PWD",'--log-file',$log) + $entry
+            $process = Start-Process -FilePath $engine -ArgumentList (($arguments | ForEach-Object { '"' + $_ + '"' }) -join ' ') -WindowStyle Hidden -PassThru
+            if (!$process.WaitForExit(45000)) { $process.Kill(); throw 'Focused core/import timeout' }
+            $process.Refresh()
+            if ($process.ExitCode -ne 0 -or (Select-String -LiteralPath $log -Pattern 'SCRIPT ERROR:|^ERROR:' -Quiet)) { Get-Content $log; throw 'Focused core/import failed' }
+            Get-Content $log | Select-Object -Last 4
+          }
       - name: Export session UI with unchanged core and data
-        if: steps.scope.outputs.integration_only == 'true'
+        if: steps.scope.outputs.integration_only == 'true' && (steps.scope.outputs.journey_only != 'true' || hashFiles('projects/dive-in-under/tools/journey-ready.txt') != '')
         run: ./dev.ps1 -Task build -GameCommit '${{ github.event.pull_request.head.sha || github.sha }}'
       - name: Isolated session UI, transitions, comparison screenshots and fresh restart
-        if: steps.scope.outputs.integration_only == 'true' && steps.scope.outputs.feedback_only != 'true' && steps.scope.outputs.bgm_only != 'true' && steps.scope.outputs.title_only != 'true' && steps.scope.outputs.refinement_only != 'true'
+        if: steps.scope.outputs.integration_only == 'true' && steps.scope.outputs.feedback_only != 'true' && steps.scope.outputs.bgm_only != 'true' && steps.scope.outputs.title_only != 'true' && steps.scope.outputs.refinement_only != 'true' && steps.scope.outputs.journey_only != 'true'
         timeout-minutes: 4
         run: ./tools/ui_integration_review.ps1
       - name: Focused feedback 01-07, one isolated EXE process
@@ -206,6 +227,9 @@ jobs:
         with:
           name: DiveInUnder-foundation-evidence
           path: |
+            projects/dive-in-under/artifacts/journey/**/*.png
+            projects/dive-in-under/artifacts/journey/**/*.json
+            projects/dive-in-under/artifacts/journey/**/*.log
             projects/dive-in-under/artifacts/refinement/before/*.png
             projects/dive-in-under/artifacts/refinement/before/*.json
             projects/dive-in-under/artifacts/refinement/before/*.log
