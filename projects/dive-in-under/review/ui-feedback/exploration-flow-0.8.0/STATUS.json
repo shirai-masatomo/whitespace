@@ -1,0 +1,115 @@
+{
+  "version": "0.8.0",
+  "user_adoption": "未評価",
+  "items": [
+    {
+      "number": 1,
+      "title": "タイトルだけにロゴ",
+      "implementation": "実装済み",
+      "verification": "確認済み（変更箇所限定）",
+      "detail": "タイトルの採用ロゴ・町背景・12%背景フィルターを保持。通常画面の見出しからロゴと空白を除去。",
+      "after": "after/01-preparation.png",
+      "before": "../journey-0.7.0/after/02-preparation.png",
+      "not_verified": [],
+      "verification_detail": "タイトル1ロゴ、準備・ステータス・装備・探索/戦闘・宝箱・イベント・報酬0ロゴを隔離EXEで確認。倉庫のヘッダー除去はコード照合。"
+    },
+    {
+      "number": 2,
+      "title": "探索の固定配置",
+      "implementation": "実装済み",
+      "verification": "確認済み（変更箇所限定）",
+      "detail": "探索・戦闘・宝箱・イベント・獲得品で左操作と所持品、中央内容、右上縦地図、右下詳細を共通化。戦闘中の探索・帰還・装備変更は無効。",
+      "after": "after/02-battle.png",
+      "before": "../journey-0.7.0/after/03-encounter.png",
+      "not_verified": []
+    },
+    {
+      "number": 3,
+      "title": "縦型マップ",
+      "implementation": "実装済み",
+      "verification": "確認済み（変更箇所限定）",
+      "detail": "浅い階から下へ。現在地まで自動スクロールし、内容種類は開示しない。クリックで詳細、Escで閉じて状態保持。",
+      "after": "after/07-map-pending.png",
+      "before": "../journey-0.7.0/after/03-encounter.png",
+      "not_verified": []
+    },
+    {
+      "number": 4,
+      "title": "確認から直接進む",
+      "implementation": "実装済み",
+      "verification": "確認済み（変更箇所限定）",
+      "detail": "イベント結果はE1回。報酬は全受領＋次の探索を一つのトランザクションへ。満杯時は全体を拒否し未受領品を保持。 解決済みで未受領品がない場合は、その画面から直接帰還できる。",
+      "after": "after/09-event-result.png",
+      "before": "../journey-0.7.0/after/09-event-result.png",
+      "not_verified": []
+    },
+    {
+      "number": 5,
+      "title": "Eの肯定操作と入力保護",
+      "implementation": "実装済み",
+      "verification": "確認済み（変更箇所限定）",
+      "detail": "Eはその画面の主操作だけ。I＝所持品・装備、C＝ステータス。選択肢未選択・キー反復・保持・遷移直後の連打を拒否。破棄と放棄はE対象外。",
+      "after": "after/08-event-choice.png",
+      "before": "../journey-0.7.0/after/09-event-choice.png",
+      "not_verified": []
+    },
+    {
+      "number": 6,
+      "title": "バックパックと装備の直接交換",
+      "implementation": "実装済み",
+      "verification": "確認済み（変更箇所限定）",
+      "detail": "共通グリッドで選択・比較、ダブルクリック、装備枠へのドラッグ、バックパックへの解除。11枠はアイコン／薄い部位シルエット。",
+      "after": "after/10-equipment.png",
+      "before": "../journey-0.7.0/after/06-field-comparison.png",
+      "not_verified": []
+    },
+    {
+      "number": 7,
+      "title": "ステータス入口",
+      "implementation": "実装済み",
+      "verification": "確認済み（変更箇所限定）",
+      "detail": "左メニューとCから主人公の情報を確認。戻っても元の出来事・対象選択と明示的停止を保持。未実装仲間は追加しない。",
+      "after": "after/04-field-status.png",
+      "before": "../journey-0.7.0/after/06-field-comparison.png",
+      "not_verified": []
+    },
+    {
+      "number": 8,
+      "title": "小さなHPと対象詳細",
+      "implementation": "実装済み",
+      "verification": "確認済み（変更箇所限定）",
+      "detail": "敵味方の足元の小カードでHPを表示。人物またはHPをクリックすると右下へ情報表示。対象は更新で変わらず、撃破時は旧情報を解除。",
+      "after": "after/03-enemy-detail.png",
+      "before": "../journey-0.7.0/after/03-encounter.png",
+      "not_verified": []
+    },
+    {
+      "number": 9,
+      "title": "状態異常の対象追従",
+      "implementation": "実装済み",
+      "verification": "確認済み（変更箇所限定）",
+      "detail": "既存4種の小アイコンと控えめな周辺表現が実Sprite位置を追従。付与・解除・撃破と画面切替に追従し、詳細は右下へ。",
+      "after": "after/14-status-around-actors.png",
+      "before": "../journey-0.7.0/after/05-battle-paused.png",
+      "not_verified": [
+        "通常戦闘の全4種を各1回新UIで発生させる再現は未実施（既存コア証拠を再利用）。"
+      ],
+      "verification_detail": "固定表示データの毒・暗闇・麻痺、小アイコン、実Sprite位置の追従・解除・画面切替を確認。既存戦闘コアは変更なし。"
+    },
+    {
+      "number": 10,
+      "title": "獲得品と共通バッグ",
+      "implementation": "実装済み",
+      "verification": "確認済み（変更箇所限定）",
+      "detail": "左は15枠アイコングリッド、中央は未受領、下段に現装備、右下で比較・受領・直接装備。整列と明示的入替を併用。EXP/Goldの0項目は非表示。 長い説明も受領前から右下でスクロールして確認できる。",
+      "after": "after/06-rewards.png",
+      "before": "../journey-0.7.0/after/08-reward-receipt.png",
+      "not_verified": []
+    }
+  ],
+  "unverified_common": [
+    "人間による通常デスクトップの操作感",
+    "他解像度・長時間試遊",
+    "新UIで10Fまで全周回を再走するGUI確認（既存0.7.0の証拠を再利用）"
+  ]
+}

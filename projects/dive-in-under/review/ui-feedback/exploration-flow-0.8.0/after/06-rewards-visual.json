@@ -1,0 +1,280 @@
+{
+	"controls": [
+		{
+			"rect": "[P: (1096.0, 27.0), S: (140.0, 30.0)]",
+			"text": "G  3"
+		},
+		{
+			"rect": "[P: (1005.0, 98.0), S: (236.0, 30.0)]",
+			"text": "地図  /  クリックで拡大"
+		},
+		{
+			"rect": "[P: (1005.0, 370.0), S: (236.0, 30.0)]",
+			"text": "詳細"
+		},
+		{
+			"rect": "[P: (1065.0, 410.0), S: (183.0, 61.0)]",
+			"text": "粗布の上着"
+		},
+		{
+			"rect": "[P: (998.0, 476.0), S: (250.0, 26.0)]",
+			"text": "上半身 / ×1 / 未受領"
+		},
+		{
+			"rect": "[P: (998.0, 506.0), S: (250.0, 81.0)]",
+			"text": "防御 +2\n交換差：防御 +2\n丈夫な粗布で仕立てた上着。軽く、動きやすい。"
+		},
+		{
+			"disabled": false,
+			"focus": false,
+			"font_color": "(0.9333, 0.902, 0.8235, 1.0)",
+			"rect": "[P: (998.0, 604.0), S: (250.0, 34.0)]",
+			"text": "この品を受け取る"
+		},
+		{
+			"disabled": false,
+			"focus": false,
+			"font_color": "(0.9333, 0.902, 0.8235, 1.0)",
+			"rect": "[P: (998.0, 647.0), S: (250.0, 34.0)]",
+			"text": "受け取って装備"
+		},
+		{
+			"disabled": false,
+			"focus": false,
+			"font_color": "(0.9333, 0.902, 0.8235, 1.0)",
+			"rect": "[P: (882.0, 450.0), S: (56.0, 56.0)]",
+			"text": ""
+		}
+	],
+	"run_id": "c7a04142a1a344f7ac6045a1d492327e",
+	"screenshot": "06-rewards.png",
+	"stages": [
+		{
+			"kind": "session-ui",
+			"route": [
+				{
+					"current": false,
+					"id": "floor-1",
+					"label": "1 F",
+					"type_revealed": false,
+					"visited": true
+				},
+				{
+					"current": true,
+					"id": "floor-2",
+					"label": "2 F",
+					"type_revealed": false,
+					"visited": false
+				},
+				{
+					"current": false,
+					"id": "floor-3",
+					"label": "3 F",
+					"type_revealed": false,
+					"visited": false
+				},
+				{
+					"current": false,
+					"id": "floor-4",
+					"label": "4 F",
+					"type_revealed": false,
+					"visited": false
+				},
+				{
+					"current": false,
+					"id": "floor-5",
+					"label": "5 F",
+					"type_revealed": false,
+					"visited": false
+				},
+				{
+					"current": false,
+					"id": "floor-6",
+					"label": "6 F",
+					"type_revealed": false,
+					"visited": false
+				},
+				{
+					"current": false,
+					"id": "floor-7",
+					"label": "7 F",
+					"type_revealed": false,
+					"visited": false
+				},
+				{
+					"current": false,
+					"id": "floor-8",
+					"label": "8 F",
+					"type_revealed": false,
+					"visited": false
+				},
+				{
+					"current": false,
+					"id": "floor-9",
+					"label": "9 F",
+					"type_revealed": false,
+					"visited": false
+				},
+				{
+					"current": false,
+					"id": "floor-10",
+					"label": "10 F",
+					"type_revealed": false,
+					"visited": false
+				}
+			],
+			"screen": "reward",
+			"session_only": true,
+			"stage_rect": ""
+		},
+		{
+			"actor_huds": [],
+			"detail_rect": [
+				982,
+				358,
+				282,
+				346
+			],
+			"kind": "stable-exploration-shell",
+			"left_rect": [
+				16,
+				86,
+				224,
+				266
+			],
+			"logo": false,
+			"map_open": false,
+			"map_rect": [
+				982,
+				86,
+				282,
+				260
+			],
+			"map_vertical": true,
+			"pending": 1,
+			"phase": "reward",
+			"primary": "すべて受け取って進む［E］",
+			"selected": {
+				"kind": "pending",
+				"uid": "reward-1"
+			}
+		},
+		{
+			"nodes": [
+				{
+					"current": false,
+					"id": "floor-1",
+					"label": "1 F",
+					"type_revealed": false,
+					"visited": true
+				},
+				{
+					"current": true,
+					"id": "floor-2",
+					"label": "2 F",
+					"type_revealed": false,
+					"visited": false
+				},
+				{
+					"current": false,
+					"id": "floor-3",
+					"label": "3 F",
+					"type_revealed": false,
+					"visited": false
+				},
+				{
+					"current": false,
+					"id": "floor-4",
+					"label": "4 F",
+					"type_revealed": false,
+					"visited": false
+				},
+				{
+					"current": false,
+					"id": "floor-5",
+					"label": "5 F",
+					"type_revealed": false,
+					"visited": false
+				},
+				{
+					"current": false,
+					"id": "floor-6",
+					"label": "6 F",
+					"type_revealed": false,
+					"visited": false
+				},
+				{
+					"current": false,
+					"id": "floor-7",
+					"label": "7 F",
+					"type_revealed": false,
+					"visited": false
+				},
+				{
+					"current": false,
+					"id": "floor-8",
+					"label": "8 F",
+					"type_revealed": false,
+					"visited": false
+				},
+				{
+					"current": false,
+					"id": "floor-9",
+					"label": "9 F",
+					"type_revealed": false,
+					"visited": false
+				},
+				{
+					"current": false,
+					"id": "floor-10",
+					"label": "10 F",
+					"type_revealed": false,
+					"visited": false
+				}
+			],
+			"orientation": "vertical",
+			"positions": [
+				[
+					50.0,
+					25.0
+				],
+				[
+					50.0,
+					69.0
+				],
+				[
+					50.0,
+					113.0
+				],
+				[
+					50.0,
+					157.0
+				],
+				[
+					50.0,
+					201.0
+				],
+				[
+					50.0,
+					245.0
+				],
+				[
+					50.0,
+					289.0
+				],
+				[
+					50.0,
+					333.0
+				],
+				[
+					50.0,
+					377.0
+				],
+				[
+					50.0,
+					421.0
+				]
+			]
+		}
+	]
+}

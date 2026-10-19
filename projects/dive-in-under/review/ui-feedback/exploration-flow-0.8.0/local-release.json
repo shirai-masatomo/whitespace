@@ -1,0 +1,17 @@
+{
+  "game_commit": "33b33a2cafaf086c497ef53d006baf8957f70dce",
+  "build_artifact_id": 12196508922,
+  "version": "0.8.0",
+  "previous_directory": "releases/81ccb6a9bf37a50d740539c85eafe4bb81d5d0f6-0.8.0",
+  "existing_processes_untouched": true,
+  "pck_sha256": "520F85C2493EB6CD2D1BC9CBB4CE62BE1DD1B49AF90EFBFE38DA50FE460AF283",
+  "published_utc": "2026-10-19T15:18:48.6366265Z",
+  "ci_run_id": 39275995061,
+  "relative_directory": "releases/33b33a2cafaf086c497ef53d006baf8957f70dce-0.8.0",
+  "zip_sha256": "96D5E21E4490501BA27AF22D02777F7C4A59CB6F9F3F60FDCD828D4673FCD3F2",
+  "verification": "exploration-flow-0.8.0",
+  "previous_zip_archive": "C:\\Users\\masat\\Documents\\Codex\\2026-10-17\\task\\dive-in-under-work\\projects\\dive-in-under\\build\\archive\\DiveInUnder-previous-1B06394831CF.zip",
+  "evidence_artifact_id": 12197946566,
+  "exe_sha256": "D34D36F3BE1A6C49C56525AE86469B92E4F417DDF0B43CF00DD80C385C4B0562",
+  "user_save_edited_by_publish": false
+}

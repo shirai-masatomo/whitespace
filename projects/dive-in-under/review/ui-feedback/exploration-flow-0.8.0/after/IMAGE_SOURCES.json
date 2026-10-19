@@ -1,0 +1,141 @@
+{
+  "kind": "actual exported Windows EXE screenshots",
+  "generated_reference_images": false,
+  "source_commit": "33b33a2cafaf086c497ef53d006baf8957f70dce",
+  "version": "0.8.0",
+  "ci_run_id": 39275995061,
+  "run_id": "c7a04142a1a344f7ac6045a1d492327e",
+  "normal_desktop": false,
+  "fixed_fixtures": [
+    "11-full-reward",
+    "12-valid-gear-drop",
+    "13-direct-reward-equip",
+    "14-status-around-actors",
+    "15-status-follow-motion",
+    "16-status-cleared",
+    "17-after-battle",
+    "18-boss-and-deep-map"
+  ],
+  "files": [
+    {
+      "file": "00-title.png",
+      "sha256": "a83e5b0e32046e3e2d2743fc72c603b7b2754d44ef3d564f1be4f56c921db031",
+      "origin": "actual EXE viewport",
+      "fixture": false
+    },
+    {
+      "file": "01-preparation.png",
+      "sha256": "1ef29d82bfd3ac069ac3cd2e181a641216cfb9805c88126e06a286bfca4b3d85",
+      "origin": "actual EXE viewport",
+      "fixture": false
+    },
+    {
+      "file": "02-battle.png",
+      "sha256": "1b624e73cb33865bba7d02cbbbf943c9eaa9d1be0319ba01db3636b719460bbc",
+      "origin": "actual EXE viewport",
+      "fixture": false
+    },
+    {
+      "file": "03-enemy-detail.png",
+      "sha256": "50d50ea3fda7861f8667912329be1cdf4d9e5f8fc7a9caf4da09c6c4b31749e7",
+      "origin": "actual EXE viewport",
+      "fixture": false
+    },
+    {
+      "file": "04-field-status.png",
+      "sha256": "1b738adc06bb6e12d23d486d438b176c140b1cfc59924e7ee3215524f4ffd8ec",
+      "origin": "actual EXE viewport",
+      "fixture": false
+    },
+    {
+      "file": "05-chest.png",
+      "sha256": "3f7a19233e4578484047cf317f593e57192ae72ebc888c664603a47ae23a752b",
+      "origin": "actual EXE viewport",
+      "fixture": false
+    },
+    {
+      "file": "06-rewards.png",
+      "sha256": "21d506198ea5919f0825594d3e6daad20d1c758862637d52900b740077536fe1",
+      "origin": "actual EXE viewport",
+      "fixture": false
+    },
+    {
+      "file": "07-map-pending.png",
+      "sha256": "d243e807485e3c45b5a66858f73c702c0b536541087de099101e88cda8759663",
+      "origin": "actual EXE viewport",
+      "fixture": false
+    },
+    {
+      "file": "08-event-choice.png",
+      "sha256": "890baf9c703748bae3241656d13869caf8c4c323488042a6faa8bed2ff7dd2ee",
+      "origin": "actual EXE viewport",
+      "fixture": false
+    },
+    {
+      "file": "09-event-result.png",
+      "sha256": "3f478f77cd44795a56600e9925cf48fc712cfb5a8e739114278687cd829ceed8",
+      "origin": "actual EXE viewport",
+      "fixture": false
+    },
+    {
+      "file": "10-equipment.png",
+      "sha256": "b187942e685cab3db361a8550f68d0e686a1812f39417d15f3f87187670b1733",
+      "origin": "actual EXE viewport",
+      "fixture": false
+    },
+    {
+      "file": "11-full-reward.png",
+      "sha256": "1b9dc278084c7d79323f142950beedd37c35ffce7f3a2706557051557e1f2bae",
+      "origin": "actual EXE viewport",
+      "fixture": true
+    },
+    {
+      "file": "12-valid-gear-drop.png",
+      "sha256": "d1befcacb15c31ec24087a58f10f50887902ad6e5abe9771c3a0f0f44430edf5",
+      "origin": "actual EXE viewport",
+      "fixture": true
+    },
+    {
+      "file": "13-direct-reward-equip.png",
+      "sha256": "653a524d50708e2b857f14949df930c5ae39eaa19d6a0eccae69aee257ab6d96",
+      "origin": "actual EXE viewport",
+      "fixture": true
+    },
+    {
+      "file": "14-status-around-actors.png",
+      "sha256": "739ffaf635f936397d49e1c9f600b66316190758053ef15402d4f9a4032d004f",
+      "origin": "actual EXE viewport",
+      "fixture": true
+    },
+    {
+      "file": "15-status-follow-motion.png",
+      "sha256": "d6eb421c565c2c1bee28e14a98f8dc23bd4bb01d2e85c713c6030767caff0a22",
+      "origin": "actual EXE viewport",
+      "fixture": true
+    },
+    {
+      "file": "16-status-cleared.png",
+      "sha256": "c79fd9a3f866d97febca3c50d4e3030da97ff191a4f07be0bba851e6bb54456b",
+      "origin": "actual EXE viewport",
+      "fixture": true
+    },
+    {
+      "file": "17-after-battle.png",
+      "sha256": "460708966a267e66d9fbda4a961f6d03ffe56452b0ef685519b23692d079d599",
+      "origin": "actual EXE viewport",
+      "fixture": true
+    },
+    {
+      "file": "18-boss-and-deep-map.png",
+      "sha256": "eda8105a90f4b559d79bf7e08ca9d1e398e3f6f98140e0183be0dcee6cce4816",
+      "origin": "actual EXE viewport",
+      "fixture": true
+    },
+    {
+      "file": "19-normal-redeparture.png",
+      "sha256": "8cf5856723da820484432a807c25fc708fb16d475f8449ab5eca18b86ee3c80c",
+      "origin": "actual EXE viewport",
+      "fixture": false
+    }
+  ]
+}

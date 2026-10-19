@@ -1,0 +1,28 @@
+{
+	"complete": true,
+	"exit_button_pressed": true,
+	"fixtures": {
+		"full_one_for_one": true,
+		"full_unequip": true,
+		"held_E": true,
+		"invalid_drop": true,
+		"map_preserves_pending": true,
+		"mouse_repeat": true,
+		"outside_drop": true,
+		"pending_direct_equip": true,
+		"stable_shell": true,
+		"status_cleanup": true,
+		"status_follows_sprite": true
+	},
+	"no_save_store": true,
+	"normal": {
+		"event_result_one_input": true,
+		"field_double_click": true,
+		"first_trip_to_floor": 4,
+		"from_fresh_start": true,
+		"new_battle_stats": true,
+		"received_all_one_input": true
+	},
+	"rendered": true,
+	"run_id": "edbd5a36839f42bd994de7c1b8001536"
+}

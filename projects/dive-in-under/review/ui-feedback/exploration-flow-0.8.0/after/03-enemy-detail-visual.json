@@ -1,0 +1,355 @@
+{
+	"controls": [
+		{
+			"rect": "[P: (1096.0, 27.0), S: (140.0, 30.0)]",
+			"text": "G  0"
+		},
+		{
+			"rect": "[P: (1005.0, 98.0), S: (236.0, 30.0)]",
+			"text": "地図  /  クリックで拡大"
+		},
+		{
+			"rect": "[P: (1005.0, 370.0), S: (236.0, 30.0)]",
+			"text": "詳細"
+		},
+		{
+			"rect": "[P: (998.0, 410.0), S: (250.0, 25.0)]",
+			"text": "粘菌スライム  Lv.1"
+		},
+		{
+			"rect": "[P: (998.0, 447.0), S: (250.0, 89.0)]",
+			"text": "HP 11 / 11\nSP 0 / 0\n攻撃 3   防御 1\n素早さ 2"
+		},
+		{
+			"rect": "[P: (998.0, 548.0), S: (250.0, 18.0)]",
+			"text": "状態異常なし"
+		}
+	],
+	"run_id": "c7a04142a1a344f7ac6045a1d492327e",
+	"screenshot": "03-enemy-detail.png",
+	"stages": [
+		{
+			"kind": "session-ui",
+			"route": [
+				{
+					"current": true,
+					"id": "floor-1",
+					"label": "1 F",
+					"type_revealed": false,
+					"visited": false
+				},
+				{
+					"current": false,
+					"id": "floor-2",
+					"label": "2 F",
+					"type_revealed": false,
+					"visited": false
+				},
+				{
+					"current": false,
+					"id": "floor-3",
+					"label": "3 F",
+					"type_revealed": false,
+					"visited": false
+				},
+				{
+					"current": false,
+					"id": "floor-4",
+					"label": "4 F",
+					"type_revealed": false,
+					"visited": false
+				},
+				{
+					"current": false,
+					"id": "floor-5",
+					"label": "5 F",
+					"type_revealed": false,
+					"visited": false
+				},
+				{
+					"current": false,
+					"id": "floor-6",
+					"label": "6 F",
+					"type_revealed": false,
+					"visited": false
+				},
+				{
+					"current": false,
+					"id": "floor-7",
+					"label": "7 F",
+					"type_revealed": false,
+					"visited": false
+				},
+				{
+					"current": false,
+					"id": "floor-8",
+					"label": "8 F",
+					"type_revealed": false,
+					"visited": false
+				},
+				{
+					"current": false,
+					"id": "floor-9",
+					"label": "9 F",
+					"type_revealed": false,
+					"visited": false
+				},
+				{
+					"current": false,
+					"id": "floor-10",
+					"label": "10 F",
+					"type_revealed": false,
+					"visited": false
+				}
+			],
+			"screen": "battle",
+			"session_only": true,
+			"stage_rect": "[P: (252.0, 86.0), S: (718.0, 400.0)]"
+		},
+		{
+			"actor_huds": [
+				"hero",
+				"enemy"
+			],
+			"detail_rect": [
+				982,
+				358,
+				282,
+				346
+			],
+			"kind": "stable-exploration-shell",
+			"left_rect": [
+				16,
+				86,
+				224,
+				266
+			],
+			"logo": false,
+			"map_open": false,
+			"map_rect": [
+				982,
+				86,
+				282,
+				260
+			],
+			"map_vertical": true,
+			"pending": 0,
+			"phase": "battle",
+			"primary": "",
+			"selected": {
+				"kind": "actor",
+				"side": "enemy"
+			}
+		},
+		{
+			"nodes": [
+				{
+					"current": true,
+					"id": "floor-1",
+					"label": "1 F",
+					"type_revealed": false,
+					"visited": false
+				},
+				{
+					"current": false,
+					"id": "floor-2",
+					"label": "2 F",
+					"type_revealed": false,
+					"visited": false
+				},
+				{
+					"current": false,
+					"id": "floor-3",
+					"label": "3 F",
+					"type_revealed": false,
+					"visited": false
+				},
+				{
+					"current": false,
+					"id": "floor-4",
+					"label": "4 F",
+					"type_revealed": false,
+					"visited": false
+				},
+				{
+					"current": false,
+					"id": "floor-5",
+					"label": "5 F",
+					"type_revealed": false,
+					"visited": false
+				},
+				{
+					"current": false,
+					"id": "floor-6",
+					"label": "6 F",
+					"type_revealed": false,
+					"visited": false
+				},
+				{
+					"current": false,
+					"id": "floor-7",
+					"label": "7 F",
+					"type_revealed": false,
+					"visited": false
+				},
+				{
+					"current": false,
+					"id": "floor-8",
+					"label": "8 F",
+					"type_revealed": false,
+					"visited": false
+				},
+				{
+					"current": false,
+					"id": "floor-9",
+					"label": "9 F",
+					"type_revealed": false,
+					"visited": false
+				},
+				{
+					"current": false,
+					"id": "floor-10",
+					"label": "10 F",
+					"type_revealed": false,
+					"visited": false
+				}
+			],
+			"orientation": "vertical",
+			"positions": [
+				[
+					50.0,
+					25.0
+				],
+				[
+					50.0,
+					69.0
+				],
+				[
+					50.0,
+					113.0
+				],
+				[
+					50.0,
+					157.0
+				],
+				[
+					50.0,
+					201.0
+				],
+				[
+					50.0,
+					245.0
+				],
+				[
+					50.0,
+					289.0
+				],
+				[
+					50.0,
+					333.0
+				],
+				[
+					50.0,
+					377.0
+				],
+				[
+					50.0,
+					421.0
+				]
+			]
+		},
+		{
+			"actors": [
+				{
+					"adoption": "adopted-current-baseline",
+					"body_region": "[P: (0.0, 22.0), S: (1234.0, 1232.0)]",
+					"candidate_loaded": true,
+					"foot": [
+						488.0,
+						344.0
+					],
+					"id": "hero",
+					"static_hover_px": 0.0,
+					"top_left": [
+						386.989898681641,
+						168.337112426758
+					],
+					"visible_size": [
+						194.760101318359,
+						194.444442749023
+					],
+					"within_stage": true
+				},
+				{
+					"adoption": "adopted-current-baseline",
+					"body_region": "[P: (24.0, 323.0), S: (1206.0, 632.0)]",
+					"candidate_loaded": true,
+					"foot": [
+						216.0,
+						248.0
+					],
+					"id": "E02",
+					"static_hover_px": 0.0,
+					"top_left": [
+						93.9399948120117,
+						121.284309387207
+					],
+					"visible_size": [
+						244.120010375977,
+						127.930221557617
+					],
+					"within_stage": true
+				}
+			],
+			"adoption": "twelve-assets-current-baseline",
+			"aspect": "preserved",
+			"background": "cavern",
+			"background_aspect": 1.77777777777778,
+			"background_loaded": true,
+			"background_zoom": 1.0,
+			"composition": "wide-floor-reference-comparison",
+			"depth": 1,
+			"far_enemy_foot": [
+				216.0,
+				248.0
+			],
+			"filter": "nearest",
+			"formation_rules": false,
+			"global_rect": "[P: (252.0, 86.0), S: (718.0, 400.0)]",
+			"motion": "rest",
+			"near_hero_foot": [
+				488.0,
+				344.0
+			],
+			"stage_size": [
+				718.0,
+				400.0
+			],
+			"static_only": true,
+			"wide_layout": true
+		},
+		{
+			"combat_rng_used": false,
+			"duration": "while active; removed on expiry/death/end",
+			"effect": "phase1-statuses",
+			"enemy_statuses": {},
+			"events": [],
+			"follows_actual_sprite": true,
+			"hero_statuses": {}
+		},
+		{
+			"body_rect": "[P: (638.9899, 254.3371), S: (194.7601, 194.4444)]",
+			"hp": "24 / 24",
+			"rect": "[P: (662.0, 436.0), S: (156.0, 43.0)]",
+			"side": "hero",
+			"visible": true
+		},
+		{
+			"body_rect": "[P: (345.94, 207.2843), S: (244.12, 127.9302)]",
+			"hp": "11 / 11",
+			"rect": "[P: (390.0, 340.0), S: (156.0, 43.0)]",
+			"side": "enemy",
+			"visible": true
+		}
+	]
+}
