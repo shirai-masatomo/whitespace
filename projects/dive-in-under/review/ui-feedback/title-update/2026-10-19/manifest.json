@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-19",
+  "branch": "main",
+  "scope": "Title artwork delivery only; not integrated into the game by this commit.",
+  "selected_logo": {
+    "path": "projects/dive-in-under/assets/title/v1/dive-in-under-logo-gold-deep-shadow.png",
+    "role": "Selected production asset",
+    "text": "Dive In Under",
+    "final_character": "lowercase r",
+    "description": "Gold engraved serif logo with preserved bright highlights, deeper dark faces and engraving, and a downward underline ornament.",
+    "format": "PNG",
+    "mode": "RGBA",
+    "width": 2172,
+    "height": 724,
+    "bytes": 929072,
+    "alpha_range": [
+      0,
+      255
+    ],
+    "alpha_nonzero_bbox": [
+      35,
+      112,
+      2128,
+      707
+    ],
+    "alpha_pixels": {
+      "transparent": 1122870,
+      "semi_transparent": 445938,
+      "opaque": 3720
+    },
+    "sha256": "eacfcc2ecb4e46458f193fd0d1c1e141f5816a93d9cf3df6a2c8586a87ad7f43",
+    "git_blob_sha1": "88781d749bbe8037f2ca50b211bc9e31a22667f9"
+  },
+  "visual_reference": {
+    "path": "projects/dive-in-under/review/ui-feedback/title-update/2026-10-19/layout-dimming-reference.png",
+    "role": "Generated layout and background-dimming reference only",
+    "final_logo_composited": false,
+    "actual_game_screenshot": false,
+    "warning": "The reference retains the older plain-text title. Do not recreate that text or use this full image as the game background/UI.",
+    "format": "PNG",
+    "mode": "RGB",
+    "width": 1672,
+    "height": 941,
+    "bytes": 2188783,
+    "has_alpha": false,
+    "sha256": "14b6239e992d9dbbd66eecf75b00fdbc23658d48a9ad9fe14f434864e65b0794",
+    "git_blob_sha1": "fcce07fe62a43de3e8f873c133198c78ebaf4402"
+  },
+  "integration": {
+    "instructions": "projects/dive-in-under/assets/title/v1/README.md",
+    "background": "Keep the original town background asset.",
+    "black_overlay_alpha_start": [
+      0.1,
+      0.15
+    ],
+    "layer_order": [
+      "Original town background",
+      "Adjustable black dimming overlay",
+      "All title UI including logo, Japanese subtitle and buttons"
+    ],
+    "preserve_logo_aspect_ratio": true,
+    "keep_lower_ornament_visible": true,
+    "preserve_layout_buttons_and_subtitle": true,
+    "bgm_changes": false,
+    "after_screenshot_directory": "projects/dive-in-under/review/ui-feedback/title-update/2026-10-19/after/"
+  },
+  "validation": {
+    "png_decode": "passed",
+    "alpha": "verified on selected logo",
+    "letter_case": "lowercase final r visually verified",
+    "game_integration": "not performed",
+    "game_tests": "not run; asset delivery only"
+  }
+}
