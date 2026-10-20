@@ -14,6 +14,23 @@
 
 隔離内の実機テストはゼロ。通常デスクトップでの代替実行は行わない。
 
+### 他タスクの独自撮影方式を追加確認
+
+ユーザーの指摘を受け、Codexタスク「ホイッスル牧場 製造」と実装側のファイルを読み取りで調査した。
+標準配置のVMツールだけを調べた当初の調査では、この方式を見落としていた。
+独自方式と実画面撮影の成功記録は存在する。「独自方式もない」「スクリーンショットの自動取得自体が不可能」という意味ではない。
+
+- `projects/sporehollow/tools/isolated_desktop.cs`: 非対話Window Stationと専用Desktopを作成し、そこへゲームを起動。通常の入力デスクトップへ切り替えず、所属ウィンドウ・正常終了・タイムアウトを確認する。
+- `tools/isolated_visual.ps1`: `APPDATA`と`LOCALAPPDATA`を専用保存先へ変更し、Dummy音声・FPS制限・直列実行・通常画面へのfallback禁止を適用する。
+- `tests/review_integrated_visual.gd`、`tests/capture_phase2.gd`: Godotの実際のviewportを`get_texture().get_image().save_png()`で保存。ホスト全画面のキャプチャや合成した理想画像ではない。
+- 過去の`review/current/review02/tests/isolated-ui/isolation.json`には`ExitCode=0`、`NonInteractive=true`、`DesktopMatched=true`、`TimedOut=false`が記録されている。現在進行中の工程2の撮影完了を示す記録として流用しない。
+
+確認したランナーは通常の`CreateProcess`を使用し、独立したゲストOS、ファイルアクセス制限、レジストリ分離、ネットワーク遮断を確立する処理は見つからなかった。
+環境変数で保存先を変える処理は、ホストの他のフォルダへのアクセス禁止を実証するものではない。GPUもホスト側を共有する。
+したがってこの実装だけでは、最新規約の「ファイルシステム・設定・プロセス隔離」を満たすと確認できない。
+画面への干渉を避ける設計と内部フレーム保存は再利用候補だが、そのままRen'Pyを起動する根拠にはしない。
+今回の調査では他作品のコードを変更せず、撮影スクリプトも実行していない。
+
 ## 前回のホスト実行で確認された変更
 
 隔離規約が提示される前の作業で、ホストのWindows上でSDKのテンプレート生成、Lint、GUI画像生成、ゲーム／Launcherの起動を試行した。
