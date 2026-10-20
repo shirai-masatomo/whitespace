@@ -54,6 +54,7 @@ func portals_supply() -> void:
 	check(s.floor==5 and s.phase=="portal" and P.can_return(s),"5F return offered before actual encounter")
 	check(act(s,"return_ready").phase=="result","5F pre-stay return")
 	s=act(s,"portal_stay");check(s.node.stayed and not P.can_return(s),"5F stay locks return")
+	check(P.next_return_floor(s)==10,"next return map changes to 10F after staying")
 	# All post-event phases must share the lock, no alternate return action bypass.
 	for phase in ["portal_done","reward","event_result","explore"]:
 		var resolved: Dictionary=s.duplicate(true);resolved.phase=phase;resolved.node.resolved=true;resolved.pending_rewards=[];resolved.battle={}

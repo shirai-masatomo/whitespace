@@ -61,7 +61,7 @@ func _ready() -> void:
 	UISkin.picture(self,Art.background_texture(node.get("background","cavern")),Rect2(0,0,1280,720),true).modulate=Color(.46,.55,.58)
 	var head:=UISkin.panel(self,Rect2(16,14,1248,60),"",true)
 	var phase: String="battle" if not battle.is_empty() else s.phase
-	label_at(head,"地下 %d F  /  %s  /  %s"%[s.floor,Art.depth_name(s.floor),{"battle":"自動戦闘","explore":"探索","treasure":"宝箱を発見","reward":"獲得品","event":"道中の出来事","event_result":"選択の結果","portal":"帰還ポータル","portal_done":"帰還か続行"}.get(phase,"探索")],Rect2(26,10,1010,38),24,true)
+	label_at(head,"地下 %d F  /  %s  /  %s"%[s.floor,Art.depth_name(s.floor),{"battle":"自動戦闘","explore":"探索","treasure":"宝箱を発見","reward":"獲得品","event":"道中の出来事","event_result":"選択の結果","portal":"帰還ポータル","portal_done":"次の階へ" if s.floor==5 and s.node.get("stayed",false) else "帰還か続行"}.get(phase,"探索")],Rect2(26,10,1010,38),24,true)
 	label_at(head,"G  %d"%E.money(s),Rect2(1080,13,140,30),20,true)
 	build_left(); build_map()
 	if game.debug_run: nav(head,"デバッグ操作",Rect2(880,15,170,30),func():game.open_services("debug"),"debug-services")
@@ -118,7 +118,7 @@ func build_left() -> void:
 	Grid.bag(bag,game,self,Vector2(18,50),4,44)
 	drag_hint=label_at(self,game.notice,Rect2(260,74,702,18),12); drag_hint.z_index=1000
 func build_map() -> void:
-	var p:=UISkin.panel(self,Rect2(982,86,282,260),"地図 / 帰還地点 %dF"%(mini(10,int(ceil(float(game.campaign.floor)/5.0))*5)))
+	var p:=UISkin.panel(self,Rect2(982,86,282,260),"地図 / 帰還地点 %dF"%(E.Adventure.next_return_floor(game.campaign) if E.Adventure.active(game.campaign) else mini(10,int(ceil(float(game.campaign.floor)/5.0))*5)))
 	var sc:=ScrollContainer.new(); sc.position=Vector2(14,52); sc.size=Vector2(254,193); sc.horizontal_scroll_mode=ScrollContainer.SCROLL_MODE_DISABLED; sc.theme=UISkin.scroll_theme(); p.add_child(sc); mini_scroll=sc
 	route=Control.new(); route.set_script(Routes); route.floor_number=int(game.campaign.floor); route.highest_floor=int(game.campaign.highest_floor); route.max_floor=int(game.cfg.journey.public_max_floor); sc.add_child(route)
 	route.opened.connect(func():call_deferred("open_routes")); route.size_flags_horizontal=Control.SIZE_EXPAND_FILL

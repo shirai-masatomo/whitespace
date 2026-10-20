@@ -95,5 +95,6 @@ func cancel_modal() -> void:
 func modal_key(code: int, _backwards: bool=false) -> void:
 	if code in [KEY_ESCAPE,KEY_X]:call_deferred("cancel_modal")
 func allows_native_key(code: int) -> bool:
-	if code in [KEY_ESCAPE,KEY_X]: return false
+	if code==KEY_ESCAPE: return false
+	if code==KEY_X: return get_viewport().gui_get_focus_owner() is LineEdit
 	return code not in [KEY_C,KEY_I,KEY_E] or get_viewport().gui_get_focus_owner() is LineEdit

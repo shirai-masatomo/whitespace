@@ -48,6 +48,9 @@ static func fits(s: Dictionary, rewards: Array) -> bool:
 	for r in rewards:
 		if not receive(trial,r): return false
 	return true
+static func next_return_floor(s: Dictionary) -> int:
+	if int(s.floor)==5 and s.node.get("stayed",false): return 10
+	return mini(10,maxi(5,int(ceil(float(s.floor)/5.0))*5))
 static func can_return(s: Dictionary) -> bool:
 	if int(s.floor)==5 and s.node.get("stayed",false): return false
 	return int(s.floor)>0 and int(s.floor)%5==0 and s.phase in ["portal","portal_done","reward","event_result","explore"] and (s.phase=="portal" or s.node.get("resolved",false)) and s.pending_rewards.is_empty()

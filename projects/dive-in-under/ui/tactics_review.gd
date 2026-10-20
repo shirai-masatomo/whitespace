@@ -59,7 +59,7 @@ static func run(game: Control) -> void:
 				else:await F.nav(game,"choice-"+choice.id)
 				break
 	if game.campaign.phase in ["reward","event_result"]:await F.key(game,KEY_E)
-	if not check(game,game.campaign.floor==5 and game.campaign.phase=="portal_done" and not P.can_return(game.campaign) and game.play_buttons.return_ready.disabled,"5F after stay and resolution return disabled"):return
+	if not check(game,game.campaign.floor==5 and game.campaign.phase=="portal_done" and not P.can_return(game.campaign) and game.play_buttons.return_ready.disabled and "帰還地点 10F" in preload("res://ui/status_review.gd").text_in(game.screen),"5F after stay return disabled and next portal 10F shown"):return
 	await shot(game,"09-fixture-five-return-locked")
 	# Medicine fixture: actual turn commits consume one UID, then normal action occurs.
 	s=E.fresh(game.cfg,7);M.credit(s,2);s=E.act(s,"buy_remedy",int(s.revision),{"id":"RP"},game.data,game.cfg);s=E.act(s,"depart",int(s.revision),{},game.data,game.cfg);s=E.act(s,"descend",int(s.revision),{},game.data,game.cfg)
