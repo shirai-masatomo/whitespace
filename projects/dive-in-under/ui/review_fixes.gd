@@ -168,9 +168,10 @@ static func run(game: Control) -> void:
 	game.campaign.battle={"enemy_id":"E04","enemy_level":3,"seed":123,"hero":E.hero(game.campaign,game.cfg),"rounds":0,"rules_version":3,"encounter_version":2}
 	game.presenting=true; game.presentation_battle=E.battle_state(game.campaign,game.data)
 	game.presentation_battle.enemy.statuses={"poison":{"remaining":3,"potency":1,"skill":"S102"},"blind":{"remaining":2,"potency":.2,"skill":"S103"},"paralysis":{"remaining":1,"potency":0,"skill":"S104"}}
+	game.presentation_battle.enemy.defense_until=3; game.presentation_battle.enemy.action_count=0
 	game.flow_selection={"kind":"actor","side":"enemy"}; game.show_campaign(); await F.wait(game); view=F.shell(game)
 	view.detail_scroll.scroll_vertical=65; await F.wait(game,.1); var scroll_y: int=view.detail_scroll.scroll_vertical; var scroll_control: Control=view.detail_scroll
-	if not check(game,scroll_y>0 and view.detail_heading.text=="敵の情報" and "Lv.3" in text(game),"Enemy detail has actual scroll and matching heading/level"): return
+	if not check(game,scroll_y>=50 and view.detail_heading.text=="敵の情報" and "Lv.3" in text(game),"Enemy detail has actual scroll and matching heading/level"): return
 	game.impact({"type":"attack","target":"enemy","target_hp":game.presentation_battle.enemy.hp-1})
 	if not check(game,view.detail_scroll==scroll_control and view.detail_scroll.scroll_vertical==scroll_y and game.flow_selection.side=="enemy","Numeric impact keeps same detail Control, selection and scroll"): return
 	await shot(game,"14-detail-scroll-kept"); view.open_routes(); await F.wait(game,.15); view.map_scroll.scroll_vertical=35; await F.wait(game,.1); var map_y: int=view.map_scroll.scroll_vertical

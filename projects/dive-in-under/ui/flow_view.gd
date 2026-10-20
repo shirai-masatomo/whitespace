@@ -353,7 +353,7 @@ func confirmation() -> void:
 		prompt="失う品："+game.cfg.items[game.campaign.items[uid]].name+("（"+game.condition_text(uid)+"）" if game.cfg.items[game.campaign.items[uid]].slot!="" else "")+"\n得る品："+game.cfg.items[game.campaign.pending_rewards[index].id].name+"\n手放した個体は元に戻せません。"
 	label_at(panel,prompt,Rect2(30,63,680,171),20,true)
 	action(panel,"手放して受け取る" if exchange else "未受領品を諦める",Rect2(30,264,328,55),"exchange_reward" if exchange else "abandon_rewards",{"confirmed":true,"replace_uid":game.replace_selected,"token":game.reward_selected})
-	var cancel:=nav(panel,"取消［Esc／X］",Rect2(382,264,328,55),cancel_modal,"cancel-reward"); cancel.grab_focus()
+	var cancel:=nav(panel,"取消［Esc／X／右クリック］",Rect2(382,264,328,55),cancel_modal,"cancel-reward"); cancel.add_theme_font_size_override("font_size",16); cancel.grab_focus()
 func cancel_modal() -> void:
 	game.reward_confirmation=""; game.modal_owner=null; game.ui_block_until=Time.get_ticks_msec()+360
 	if is_instance_valid(modal_root): remove_child(modal_root); modal_root.queue_free()
