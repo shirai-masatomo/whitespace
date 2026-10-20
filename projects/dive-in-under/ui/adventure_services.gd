@@ -96,4 +96,11 @@ func modal_key(code: int, backwards: bool=false) -> void:
 func collect(node: Node, nodes: Array) -> void:
 	for child in node.get_children():
 		if child is Button and not child.disabled:nodes.append(child)
+		elif child is SpinBox:nodes.append(child.get_line_edit())
 		collect(child,nodes)
+
+func allows_native_key(code: int) -> bool:
+	var focused: Control=get_viewport().gui_get_focus_owner()
+	if focused is OptionButton: return code in [KEY_UP,KEY_DOWN,KEY_LEFT,KEY_RIGHT,KEY_ENTER,KEY_KP_ENTER,KEY_SPACE]
+	if is_instance_valid(amount) and focused==amount.get_line_edit(): return (code>=KEY_0 and code<=KEY_9) or (code>=KEY_KP_0 and code<=KEY_KP_9) or code in [KEY_BACKSPACE,KEY_DELETE,KEY_LEFT,KEY_RIGHT,KEY_HOME,KEY_END,KEY_ENTER,KEY_KP_ENTER]
+	return false

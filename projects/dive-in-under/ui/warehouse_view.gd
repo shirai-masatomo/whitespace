@@ -196,7 +196,7 @@ func build_details(p: Control) -> void:
 		var y:=276+i*43
 		UISkin.rule(p,Rect2(18,y,312,1))
 		label_at(p,values[i][0],Rect2(21,y+5,78,32),15,MUTED)
-		var value:=label_at(p,values[i][1],Rect2(102,y+5,225,36),16); value.autowrap_mode=TextServer.AUTOWRAP_WORD; value.tooltip_text=values[i][1]
+		var value:=label_at(p,values[i][1],Rect2(102,y+5,225,67 if values[i][0]=="個体・印" else 36),13 if values[i][0]=="個体・印" else 16); value.autowrap_mode=TextServer.AUTOWRAP_WORD; value.tooltip_text=values[i][1]
 	var destination: String="inventory" if selected_source=="warehouse" else "warehouse"
 	detail_move=UISkin.button(p,("取り出す" if selected_source=="warehouse" else "預ける")+" [Enter]",Rect2(22,445,304,44),func():move_item(selected_uid,selected_source,destination,int(game.campaign.revision)),true)
 	detail_move.tooltip_text=Storage.reason(game.campaign,selected_uid,selected_source,destination,game.cfg)

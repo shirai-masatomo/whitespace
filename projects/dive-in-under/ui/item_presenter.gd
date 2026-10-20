@@ -39,4 +39,4 @@ static func profile(s: Dictionary, cfg: Dictionary, uid: String) -> String:
 	var d: Dictionary=s.item_details[uid]
 	var seals: Array[String]=[]
 	for status in d.seals:seals.append(cfg.progression.seals[status].name)
-	return "個体基礎："+text(d.base_roll)+" / 追加："+(text(d.affix_stats) if not d.affix_stats.is_empty() else "なし")+"\n印 %d枠："%d.seal_slots+("・".join(seals) if not seals.is_empty() else "未加工")+("（破損中は停止）" if s.item_condition[uid].current==0 else "")+" / 入手："+d.origin
+	return "個体基礎："+text(d.base_roll)+" / 追加："+(text(d.affix_stats) if not d.affix_stats.is_empty() else "なし")+"\n印 %d枠："%d.seal_slots+("・".join(seals) if not seals.is_empty() else "未加工")+("（破損中は停止）" if s.item_condition[uid].current==0 else "")+" / 入手："+{"loot":"拾得","chest":"宝箱","drop":"敵の戦利品","supply":"支給","first-clear":"初突破保証","boss-drop":"再討伐","event":"イベント","shop":"購入","currency":"コイン","guaranteed-resource":"確定素材"}.get(d.origin,d.origin)

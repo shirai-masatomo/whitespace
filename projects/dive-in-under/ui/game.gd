@@ -246,7 +246,7 @@ func perform(action: String, args: Dictionary, revision: int) -> void:
 		notice={"deposit":"倉庫へ預けました。","withdraw":"バックパックへ引き出しました。","to_cloth":"父親の風呂敷へ移しました。"}[action]
 	if action in ["organize","organize_bag"]: notice="選択した順序に整理しました。"
 	if action=="open_chest": preload("res://ui/journey_sound.gd").play(self,330)
-	if action=="transfer": notice="%sへ移しました。×1 / 個体・耐久を保持"%{"warehouse":"倉庫","inventory":"バックパック","cloth":"父親の風呂敷"}[args.destination]
+	if action=="transfer": notice="%sへ移しました。数量・個体・耐久を保持"%{"warehouse":"倉庫","inventory":"バックパック","cloth":"父親の風呂敷"}[args.destination]
 	if action in ["claim_reward","exchange_reward","abandon_rewards","equip_reward"]: reward_confirmation=""
 	if action in ["equip","unequip"]: equipment_candidate=""
 	show_campaign()
@@ -726,6 +726,7 @@ func _input(event: InputEvent) -> void:
 		if code==KEY_X: x_held=false
 	if is_instance_valid(modal_owner) and modal_owner.is_inside_tree():
 		if event is InputEventKey:
+			if modal_owner.has_method("allows_native_key") and modal_owner.allows_native_key(code): return
 			viewport.set_input_as_handled()
 			if event.pressed and not event.echo:
 				if code==KEY_X:

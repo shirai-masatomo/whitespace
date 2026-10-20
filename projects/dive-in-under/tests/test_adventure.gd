@@ -123,7 +123,13 @@ func normal_loop() -> void:
 	for trip in 12:
 		if s.phase=="result":
 			death=death or s.result.kind=="death";s=route_act(s,"town")
-		s=route_act(s,"supply");s=improve(s)
+		s=route_act(s,"supply")
+		for slot in E.SLOTS:
+			var best: String=s.equipment[slot]
+			for uid in s.warehouse:
+				if cfg.items[s.items[uid]].slot==slot and (best=="" or gear_score(s,uid)>gear_score(s,best)):best=uid
+			if best in s.warehouse:s=route_act(s,"transfer",{"uid":best,"source":"warehouse","destination":"inventory"});s=route_act(s,"equip",{"uid":best})
+		s=improve(s)
 		for uid in s.inventory.duplicate():
 			if not s.item_details[uid].supply:s=route_act(s,"transfer",{"uid":uid,"source":"inventory","destination":"warehouse"})
 		for id in ["RB","RP","RM"]:s=route_act(s,"buy_remedy",{"id":id,"source":"warehouse"})
@@ -156,7 +162,7 @@ func normal_loop() -> void:
 				"portal_done":s=route_act(s,"portal_continue")
 				"explore":s=route_act(s,"descend")
 			first=first or s.records.first_reward_claimed;repeat=repeat or s.records.boss_kills>=2
-			summary.append({"trip":trip+1,"floor":s.floor,"kind":s.result.get("kind",""),"level":E.hero(s,cfg).level,"exp":s.exp,"kills":s.records.boss_kills})
+		summary.append({"trip":trip+1,"floor":s.floor,"kind":s.result.get("kind",""),"level":E.hero(s,cfg).level,"exp":s.exp,"kills":s.records.boss_kills})
 		if repeat:break
 	print("ADVENTURE_NORMAL_SUMMARY "+JSON.stringify(summary))
 	var proof: Dictionary={"seed":10000,"normal_tables":true,"no_stat_injection":true,"five_return":five_return,"five_stay":five_stay,"ten_early_return":early_ten,"death_retry":death,"first_reward":first,"repeat":repeat,"summary":summary,"actions":route,"checks":checks}

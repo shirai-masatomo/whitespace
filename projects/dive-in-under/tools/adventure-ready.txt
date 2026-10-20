@@ -1,0 +1,1 @@
+Grouped v0.9.0 candidate: publish only after core + actual EXE + visual inspection pass.
