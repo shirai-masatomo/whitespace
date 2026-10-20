@@ -83,9 +83,15 @@ Control座標とfixture遷移は1280×800/1600×1000で確認。headlessの描�
 
 ## 実画面・配布
 
-実画面の入口は [UI_REVIEW_INDEX.md](UI_REVIEW_INDEX.md)。撮影成功枚数・解像度・source_commit・seed・時刻・fixture条件は [SCREENSHOT_MANIFEST.json](SCREENSHOT_MANIFEST.json)、WindowStation検査と実行結果はCAPTURE_ISOLATION.jsonへ記録する。CPU合成画像を実画面として提出しない。
+実装コミット`763ae39e08ed6e521f63a90f8a0de76b12f95985`を既存の最新開発版EXEへ反映済み。SHA256は`79F7EAB18099C40CCAF4015E0F3424FE1B17EF431CD6045CA927800DE5A60025`。[DELIVERY.json](DELIVERY.json)と[EXE_SMOKE.json](EXE_SMOKE.json)に対応を保存。配布EXEは既存artifacts/autonomy-entry-01/bundle/WhistleRanch-Autonomy-Partial.exeの1本で、確認入口の「最新開発版.lnk」は同じ入口を維持する。
 
-コード検証のコミット後、既存最新EXE1本へ反映し、実装コミット/ハッシュをDELIVERY.jsonに保存する。反映完了は同ファイルとPROJECT_STATEの最新記録を参照。通常デスクトップでのゲーム自動起動や高負荷GPU測定は行わない。撮影は同じ実装コミットの開発用Godotで実ゲームViewportを描画し、正式EXEとのソース対応・EXEハッシュを記録する。
+正式EXEの隔離headless起動・終了は7.42秒、終了コード0、SCRIPT ERRORなし。ただし終了時の**ObjectDB警告1422件**は残る（工程1は1421）。正常終了と、警告が解消したことを混同しない。通常デスクトップでのゲーム自動起動は行っていない。通常セーブは無効のまま。
+
+[実ゲーム画像14枚](UI_REVIEW_INDEX.md)を同じ実装コミットの開発用Godotで撮影済み。13枚1280×800＋1枚1600×1000。要求12場面を全て収録し、住民/食事と役割/自動収集を別画像にした。未撮影の要求場面はない。正式EXEのウィンドウ撮影ではなく、同じコードの本番loading.tscn/main.gdを使った実Viewportである。画像加工・切抜き・CPU合成・過去画像流用はない。source_commit、PNGハッシュ、seed、時刻、fixture、EXEハッシュは[SCREENSHOT_MANIFEST.json](SCREENSHOT_MANIFEST.json)。
+
+非対話WindowStationと専用Desktopを既存ヘルパーで検査し、1プロセス/最大30fps/60秒上限/Dummy音声で直列実行、最終撮影は13.33秒、終了0、異常/timeout/fallbackなし。記録は[CAPTURE_ISOLATION.json](CAPTURE_ISOLATION.json)。物理GPUを共有しているため、短い成功を長時間安定性や通常操作の快適さの証明にはしない。
+
+01は初期マップを停止した実画面。02以降は建築済み設備・部分搬入・成熟時刻・夜襲・家屋/睡眠などのfixtureを使用し、各画像の条件を公開。植菌・収穫・素材運搬・調理進捗は実際の仕事処理を使用するが、48時間や家屋完成まで自然プレイした撮影ではない。全条件はUI_REVIEW_INDEXに日本語でも記載。UI比較レビューは未実施で、大規模改修は先行していない。
 
 ## UIレビュー待ち・残課題
 
@@ -98,6 +104,10 @@ Control座標とfixture遷移は1280×800/1600×1000で確認。headlessの描�
 
 ## 初回撮影で見つかった描画問題
 
-初回608eb58eの栽培床は、未対応IDのBoardArt.iconを毎描画呼び出していたため、単なる四角い代替表示と一時テクスチャ生成になっていた。描画時の画像生成をやめ、共通UIキャッシュ内の仮キノコ記号をUI/盤面で共有する。新規正式PNGは制作しない。同一Texture再利用の2解像度チェックを追加。初回の[比較原寸1枚](prototype-icon-before-608eb58e.png)だけを保持し、最新画像は修正版EXE反映後に全14枚を撮り直す。初回記録はFIRST_CAPTURE_MANIFEST.json。新旧画像を同じ版と呼ばない。
+初回608eb58eの栽培床は、未対応IDのBoardArt.iconを毎描画呼び出していたため、単なる四角い代替表示と一時テクスチャ生成になっていた。描画時の画像生成をやめ、共通UIキャッシュ内の仮キノコ記号をUI/盤面で共有するよう修正済み。新規正式PNGは制作しない。同一Texture再利用の2解像度チェックを追加。初回の[比較原寸1枚](prototype-icon-before-608eb58e.png)だけを保持し、最新画像は修正版EXE反映後に全14枚を撮り直した。初回記録はFIRST_CAPTURE_MANIFEST.json。新旧画像を同じ版と呼ばない。
 
-初回実PNGでは、栽培指示パネルと設備情報カードの重なり（モード/数量欄付近）、人物の足元に出た収穫物の見えづらさ、画面左上の小さな空矩形、上部の「使える」補助値の弱いコントラストを確認。これらは加工で隠さず、正式UIレビューへ残す。UI全体の改装はしていない。
+修正後の実PNGでも、栽培指示パネルと設備情報カードの重なり（モード/数量欄付近）、人物の足元に出た収穫物の見えづらさ、画面左上の小さな空矩形、上部の「使える」補助値の弱いコントラストを確認。これらは加工で隠さず、正式UIレビューへ残す。UI全体の改装はしていない。
+
+## 後片付け
+
+自分が作成した一時編集/検証補助18ファイル（120128 bytes）を削除。検証専用snapshot・候補EXE・隔離current領域は各手順で回収済み。通常配布EXEは1本。今回のプロジェクト実測は 1107095780 bytes、工程1の直近記録1101092775 bytesからの差は 6003005 bytes（作業開始時実測との厳密な差ではない）。最新レビューPNGは4680900 bytes。既存のimportメタデータ、過去の検証原本、正式素材、ユーザーデータには手を加えていない。MAINTENANCE.jsonに内訳を記録。

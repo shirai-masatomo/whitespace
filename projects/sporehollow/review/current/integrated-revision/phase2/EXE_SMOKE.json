@@ -1,0 +1,12 @@
+{
+  "pid": 31532,
+  "start_utc": "2026-10-20T12:53:42.2451237Z",
+  "warning": "WARNING: 1422 ObjectDB instances were leaked at exit (run with `--verbose` for details).",
+  "sha256": "79F7EAB18099C40CCAF4015E0F3424FE1B17EF431CD6045CA927800DE5A60025",
+  "end_utc": "2026-10-20T12:53:49.6687932Z",
+  "success": true,
+  "method": "Packaged EXE, headless DisplayServer, Dummy audio, isolated APPDATA,30fps cap,30sec timeout",
+  "script_errors": false,
+  "normal_desktop_launched": false,
+  "exit_code": 0
+}

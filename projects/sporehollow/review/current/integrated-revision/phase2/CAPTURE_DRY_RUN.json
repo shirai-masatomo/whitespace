@@ -1,5 +1,5 @@
 {
-  "elapsed_ms": 10275,
+  "elapsed_ms": 10396,
   "failed": false,
   "fps_limit": 30,
   "method": "Headless scene/control fixture preflight only; no rendered PNG, no GPU or private desktop launch",
@@ -77,6 +77,5 @@
     }
   ],
   "source_commit": "",
-  "source_exe_sha256": "",
-  "not_a_screenshot": true
+  "source_exe_sha256": ""
 }

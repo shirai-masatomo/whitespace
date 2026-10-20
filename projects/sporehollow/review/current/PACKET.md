@@ -1,6 +1,6 @@
 # 工程2：食料・栽培／工程1〜2のUIレビュー（2026-10-20）
 
-[報告・既知の制限](integrated-revision/phase2/REPORT.md) / [実画面PNG一覧](integrated-revision/phase2/UI_REVIEW_INDEX.md) / [撮影条件](integrated-revision/phase2/SCREENSHOT_MANIFEST.json) / [検証結果](integrated-revision/phase2/RESULTS.json)。機能実装済み・UIレビュー待ち。全条件の需給比較は未完。工程3は未着手。以下は過去記録。
+[報告・既知の制限](integrated-revision/phase2/REPORT.md) / [実画面PNG一覧](integrated-revision/phase2/UI_REVIEW_INDEX.md) / [撮影条件](integrated-revision/phase2/SCREENSHOT_MANIFEST.json) / [検証結果](integrated-revision/phase2/RESULTS.json)。実装763ae39eを最新EXEへ反映済み。実ゲーム原寸PNG14枚を収録。機能実装済み・UIレビュー待ち。全条件の需給比較は未完。工程3は未着手。以下は過去記録。
 
 ---
 

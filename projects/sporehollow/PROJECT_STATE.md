@@ -2,7 +2,7 @@
 
 キノコ栽培床（1×1、木8＋土4、種菌1→48h→3）、複数素材建築、現地収穫→備蓄→調理→食事を接続。料理の完成数を仮調整、搾乳を現地物資へ統一。最終headless確認706件、失敗0。全24条件の需給比較は未完で、UIレビュー待ち・追加比較待ち。工程3は未着手。
 
-[実装・検証・不足範囲](review/current/integrated-revision/phase2/REPORT.md) / [UI実画面入口](review/current/integrated-revision/phase2/UI_REVIEW_INDEX.md)。EXE反映・撮影はコードコミット後に行い、最終のDELIVERY.jsonとSCREENSHOT_MANIFEST.jsonで実体を識別する。以下の「工程2未着手」は過去記録。
+[実装・検証・不足範囲](review/current/integrated-revision/phase2/REPORT.md) / [UI実画面入口](review/current/integrated-revision/phase2/UI_REVIEW_INDEX.md)。実装`763ae39e`を既存の最新開発版EXEへ反映済み（SHA256 `79F7EAB18099C40CCAF4015E0F3424FE1B17EF431CD6045CA927800DE5A60025`）。隔離headless起動/終了0、7.42秒。ObjectDB警告1422件は未解消。実ゲームPNG14枚（13枚1280×800＋1枚1600×1000）を同一コードから非対話環境で撮影済み。DELIVERY.jsonとSCREENSHOT_MANIFEST.jsonに対応を記録。以下の「工程2未着手」は過去記録。
 
 ---
 

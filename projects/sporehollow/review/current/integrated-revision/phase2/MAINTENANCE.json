@@ -1,0 +1,33 @@
+{
+  "utc": "2026-10-20T13:05:02.1969315Z",
+  "project_bytes_at_delivery": 1107095780.0,
+  "prior_phase1_record_bytes": 1101092775,
+  "delta_from_prior_record": 6003005.0,
+  "delta_note": "Previous phase1 record, not phase2 start measurement",
+  "own_helper_files_removed": [
+    "phase2_edit.py",
+    "phase2_finish.py",
+    "phase2_evidence.py",
+    "phase2_capture.py",
+    "phase2_extra.py",
+    "phase2_chunk.py",
+    "phase2_labels.py",
+    "phase2_pipeline.py",
+    "phase2_polish.py",
+    "phase2_output.py",
+    "phase2_docs.py",
+    "phase2_group.py",
+    "phase2_reason.py",
+    "phase2_precommit.py",
+    "phase2_icon.py",
+    "phase2_icon_docs.py",
+    "phase2_smoke.ps1",
+    "phase2_finalize.py"
+  ],
+  "own_helper_bytes_removed": 120128,
+  "normal_bundle_exe_count": 1,
+  "isolated_current_exists": false,
+  "validation_current_exists": false,
+  "preexisting_import_metadata_and_artifacts_retained": true,
+  "user_data_removed": false
+}
