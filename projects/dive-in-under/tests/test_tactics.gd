@@ -112,6 +112,12 @@ func battle_cases() -> void:
 	var guard: Dictionary=C.start(defender,boss,data.rules,9,T.default_set("defense",true));guard.units.enemy.ai_phase=2;S.sync(guard)
 	guard=C.advance(guard);check(guard.units.hero.last_decision.skill=="S105" and guard.units.hero.sp==defender.sp-2 and not guard.log.any(func(e):return e.type=="attack" and e.actor=="hero"),"strategy defense spends own action instead of attacking")
 	guard=C.advance(guard);check(guard.units.enemy.last_decision.label=="強打" and guard.units.enemy.sp==boss.sp-4,"boss actual pattern action and SP match displayed decision")
+	var lethal_rules: Dictionary=data.rules.duplicate(true);lethal_rules.hit_chance=1.0
+	var o: Dictionary=unit("O",1);o.hp=1;o.exp=2;o.gold=3
+	var p: Dictionary=unit("P",2);p.hp=1;p.exp=4;p.gold=5
+	var multiple: Dictionary=S.start([unit("A",99),unit("B",90)],[o,p],lethal_rules,3,strategy(["A","B"]))
+	multiple=S.advance(multiple);check(multiple.outcome=="ongoing" and multiple.units.O.hp==0,"first enemy defeat does not end multi-enemy battle")
+	multiple=S.advance(multiple);check(multiple.outcome=="victory" and multiple.reward.exp==6 and multiple.reward.gold==8,"all enemies defeated then aggregate actual rewards once")
 func book_cases() -> void:
 	var book: Dictionary=T.initial();var value: Dictionary=T.default_set("custom");value.name="試遊作戦";value.favorite=false
 	check(T.save(book,value)=="" and T.select(book,"custom") and T.active(book).name=="試遊作戦","named squad save select and favorite field")

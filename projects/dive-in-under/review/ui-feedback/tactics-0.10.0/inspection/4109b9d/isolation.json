@@ -1,0 +1,23 @@
+{
+  "run_id": "49b0fd6cee9148a3b8be54b4005abd79",
+  "pck_sha256": "3E356041A90F45B264CE02936047DDD12B14ABDB66720E363DB8522ADFFED25A",
+  "normal_user_data_accessed": false,
+  "normal_desktop_fallback": false,
+  "save_after_sha256": "5D113A1E4F6153E6256A8E3DBE2C2C89F5C6F4F00FB451116CE7DED081E1A707",
+  "result": {
+    "PID": 9304,
+    "ThreadID": 7520,
+    "ExitCode": 0,
+    "OwnedWindowCount": 1,
+    "Station": "Service-0x0-c38dc$",
+    "Desktop": "Render_604daeb3325743cea58d8c631d9dcd39",
+    "ObservedDesktop": "Render_604daeb3325743cea58d8c631d9dcd39",
+    "NonInteractive": true,
+    "DesktopMatched": true,
+    "TimedOut": false
+  },
+  "elapsed_ms": 56778,
+  "exe_sha256": "D34D36F3BE1A6C49C56525AE86469B92E4F417DDF0B43CF00DD80C385C4B0562",
+  "save_before_sha256": "5D113A1E4F6153E6256A8E3DBE2C2C89F5C6F4F00FB451116CE7DED081E1A707",
+  "renderer": "Actual distribution EXE/PCK"
+}

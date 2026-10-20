@@ -4,7 +4,7 @@ static var cache: Dictionary={}
 static func texture(kind: String) -> Texture2D:
 	if cache.has(kind): return cache[kind]
 	var im:=Image.create(32,32,false,Image.FORMAT_RGBA8)
-	var palette: Dictionary={"o":Color("151511"),"s":Color("5c3d29"),"m":Color("94673d"),"l":Color("c8a171"),"h":Color("ead3a0"),"g":Color("dbab47"),"b":Color("4f9ca7"),"v":Color("8c65ac")}
+	var palette: Dictionary={"o":Color("151511"),"s":Color("5c3d29"),"m":Color("94673d"),"l":Color("c8a171"),"h":Color("ead3a0"),"g":Color("dbab47"),"b":Color("4f9ca7"),"t":Color("293943"),"v":Color("8c65ac")}
 	var pixels: Array=[]
 	match kind:
 		"shield": pixels=["       ggggg       ","    gggbbbbbggg    ","  ggbbbbbbbbbbbgg  ","  gbttttgttttttbg  ","  gbttttgttttttbg  ","  gbttttgttttttbg  ","  gbgggggggggggbg  ","  gbttttgttttttbg  ","   gbtttgtttttbg   ","    gbttgttttbg    ","     gbtttttbg     ","      gbtttbg      ","       gbbbg       ","        ggg        "]

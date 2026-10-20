@@ -21,7 +21,7 @@ func button(parent: Control, value: String, rect: Rect2, callback: Callable, key
 	if key!="": b.set_meta("nav",key)
 	return b
 func option(parent: Control, names: Array, chosen: int, rect: Rect2, callback: Callable) -> OptionButton:
-	var b:=OptionButton.new(); b.position=rect.position; b.size=rect.size; b.add_theme_font_size_override("font_size",14); b.fit_to_longest_item=false; compact(b); parent.add_child(b)
+	var b:=OptionButton.new(); b.position=rect.position; b.size=rect.size; b.add_theme_font_size_override("font_size",14); b.fit_to_longest_item=false; b.clip_text=true; compact(b); parent.add_child(b)
 	for name in names: b.add_item(str(name))
 	b.select(maxi(0,chosen)); b.get_popup().add_theme_font_size_override("font_size",14); b.item_selected.connect(func(index):callback.call_deferred(index)); return b
 func _ready() -> void:
@@ -31,6 +31,7 @@ func compact(control: Control) -> void:
 	for state in ["normal","hover","pressed","focus","disabled"]:
 		var box:=StyleBoxFlat.new();box.bg_color=Color("d2bc8b");box.border_color=Color("88714b");box.set_border_width_all(1);box.set_content_margin_all(4)
 		control.add_theme_stylebox_override(state,box)
+	for color_name in ["font_color","font_hover_color","font_pressed_color","font_focus_color","font_selected_color"]: control.add_theme_color_override(color_name,UISkin.DARK)
 func rebuild() -> void:
 	if not draft.characters.has(actor): actor=str(draft.order[0])
 	if is_instance_valid(contents): remove_child(contents); contents.queue_free()
@@ -55,7 +56,7 @@ func rebuild() -> void:
 	button(panel,"順序 ↓",Rect2(625,164,110,34),func():move_actor(1))
 	option(panel,["前衛","後衛"],0 if draft.characters[actor].rank=="front" else 1,Rect2(750,164,150,34),func(i):draft.characters[actor].rank="front" if i==0 else "back")
 	text(panel,"行動順："+" → ".join(names),Rect2(260,203,920,25),15)
-	text(panel,"技能                条件1・割合                 条件2・割合                 対象                 優先順",Rect2(260,235,920,25),15)
+	for heading in [["技能",260],["条件1・割合",420],["条件2・割合",630],["対象",842],["優先順",1005]]: text(panel,heading[0],Rect2(heading[1],235,180,25),15)
 	var rows: Array=draft.characters[actor].rows
 	var unit: Dictionary=game.campaign.battle.get("current",{}).get("units",{}).get(actor,E.hero(game.campaign,game.cfg))
 	for i in rows.size():
@@ -66,8 +67,8 @@ func rebuild() -> void:
 		while row.conditions.size()<2: row.conditions.append({"kind":"always","value":50})
 		for j in 2:
 			var c: Dictionary=row.conditions[j];var x: int=420+j*210
-			option(panel,C_LABELS,T.CONDITIONS.find(c.kind),Rect2(x,y,140,31),func(n):c.kind=T.CONDITIONS[n])
-			var number:=SpinBox.new();number.min_value=0;number.max_value=100;number.value=c.get("value",50);number.position=Vector2(x+144,y);number.size=Vector2(60,31);number.add_theme_font_size_override("font_size",13);number.get_line_edit().add_theme_font_size_override("font_size",13);compact(number.get_line_edit());panel.add_child(number);number.value_changed.connect(func(v):c.value=int(v))
+			option(panel,C_LABELS,T.CONDITIONS.find(c.kind),Rect2(x,y,140,31),func(n):c.kind=T.CONDITIONS[n];call_deferred("rebuild"))
+			var number:=SpinBox.new();number.min_value=0;number.max_value=100;number.value=c.get("value",50);number.position=Vector2(x+144,y);number.size=Vector2(60,31);number.add_theme_font_size_override("font_size",13);number.get_line_edit().add_theme_font_size_override("font_size",13);compact(number.get_line_edit());panel.add_child(number);number.value_changed.connect(func(v):c.value=int(v));number.visible=c.kind in ["hp_below","sp_above"]
 		option(panel,TARGET_LABELS,T.TARGETS.find(row.target),Rect2(842,y,155,31),func(n):row.target=T.TARGETS[n])
 		button(panel,"↑",Rect2(1005,y,50,31),func():move_row(i,-1))
 		button(panel,"↓",Rect2(1060,y,50,31),func():move_row(i,1))
