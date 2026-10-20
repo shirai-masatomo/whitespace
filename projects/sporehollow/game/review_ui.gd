@@ -8,7 +8,7 @@ static func button(g,parent,id,title,rect,callback):
 	g.add_button(parent,id,title,rect,callback);Panels.compact_button(g,g.buttons[id],14);g.buttons[id].size=rect.size
 static func icon(kind):
 	var id=kind.trim_prefix("place_")
-	if id=="mushroom_bed":return preload("res://game/board_art.gd").icon("mushroom")
+	if id=="mushroom_bed":return preload("res://game/ui_style.gd").icon("mushroom")
 	if Art.FURNITURE_UI.has(id):return Art.FURNITURE_UI[id]
 	if kind.ends_with("_tile"):return Art.TEXTURES.get(Art.floor_path(kind)+("wood_00.png" if kind=="wood_tile" else "base.png"))
 	if kind in ["wall","wood_wall","stone_wall"]:return Art.TEXTURES.get(("wall/normal/wood_mask_00.png" if kind=="wood_wall" else Art.material(kind)+"/wall/normal/mask_00.png"))

@@ -10,7 +10,7 @@
     },
     {
       "suite": "phase2-ui",
-      "checks": 17,
+      "checks": 19,
       "failures": 0,
       "file": "phase2-ui.json"
     },
@@ -2374,7 +2374,7 @@
       "wall_seconds": 43.192
     }
   ],
-  "checks": 704,
+  "checks": 706,
   "failures": 0,
   "unmeasured_conditions": [
     {

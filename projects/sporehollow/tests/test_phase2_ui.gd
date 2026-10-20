@@ -9,6 +9,7 @@ func run():
 		var g=boot.game;g.set_process(false);g.world=fixture();w=g.world;w.paused=true;g.story_modal="";g.field_book=false;g.field_shop=false
 		for dimensions in [Vector2i(1280,800),Vector2i(1600,1000)]:
 			root.size=dimensions;g.select_group(0);g.ColonyPanels.architecture_category(g,"設置");g.select_tool("mushroom_bed");await process_frame
+			check(g.ReviewUI.icon("mushroom_bed")==g.ReviewUI.icon("mushroom_bed"),"Prototype mushroom icon reuses cached texture")
 			check(g.buttons.has("mushroom_bed") and g.buttons.mushroom_bed.has_node("BuildIcon"),"Existing architect exposes bed with adopted icon")
 			check(g.colony_panel.get_node("BuildDescription").text.contains("木材8・土4"),"UI shows both construction materials")
 			var rect=g.buttons.mushroom_bed.get_global_rect();check(rect.size.x>=102 and rect.size.x<=108 and rect.size.y==96,"Full building button clickable rectangle")

@@ -303,7 +303,7 @@ static func bench(game,p:Vector2,kind:String,tint:Color=Color.WHITE):
 		game.draw_rect(Rect2(p+Vector2(-22,-12),Vector2(44,30)),Color("785a3e")*tint)
 		game.draw_rect(Rect2(p+Vector2(-18,-9),Vector2(36,21)),Color("4c4833")*tint)
 		game.draw_rect(Rect2(p+Vector2(-22,-12),Vector2(44,30)),Color("bd9a65")*tint,false,3)
-		var texture=preload("res://game/board_art.gd").icon("mushroom")
+		var texture=preload("res://game/ui_style.gd").icon("mushroom")
 		if texture!=null:game.draw_texture_rect(texture,Rect2(p+Vector2(-10,-13),Vector2(20,20)),false,tint)
 		return
 	# 48x48 original, anchor(24,44), foot at cell center+(0,21).

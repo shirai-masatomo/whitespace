@@ -1,0 +1,32 @@
+{
+  "elapsed_ms": 12534,
+  "failed": false,
+  "fps_limit": 30,
+  "method": "Current source Godot loading.tscn/main.gd viewport, matching packaged implementation commit; private noninteractive desktop, no OS input, Dummy audio, single process",
+  "renderer": "NVIDIA GeForce RTX 4070 SUPER",
+  "source_commit": "608eb58e16184210f6031c1784a906fb7fc4cf5c",
+  "source_exe_sha256": "2C1B91CB190316843AC9013BBDEE49B3A71D12E9C39B9789C0426EA08D96E95E",
+  "retained_screens": [
+    {
+      "conditions": "Local empty placement fixture near base; existing architect selects 1x1 cultivation bed, mixed wood8/soil4 cost and real ghost; other terrain retained",
+      "day": 1,
+      "file": "02-architect-mushroom.png",
+      "fixture": true,
+      "game_time": "05:00  朝",
+      "method": "Actual Godot Viewport PNG on private noninteractive Windows desktop; unmodified full frame",
+      "paused": true,
+      "png_error": 0,
+      "resolution": [
+        1280,
+        800
+      ],
+      "seed": 1140030970,
+      "source_commit": "608eb58e16184210f6031c1784a906fb7fc4cf5c",
+      "tick": 0,
+      "retained_file": "prototype-icon-before-608eb58e.png"
+    }
+  ],
+  "initial_captured_count": 14,
+  "superseded_intermediate_pngs_not_retained": true,
+  "not_current_screenshot_set": true
+}

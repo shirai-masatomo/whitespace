@@ -5,6 +5,10 @@
       "passed": true
     },
     {
+      "check": "Prototype mushroom icon reuses cached texture",
+      "passed": true
+    },
+    {
       "check": "Existing architect exposes bed with adopted icon",
       "passed": true
     },
@@ -34,6 +38,10 @@
     },
     {
       "check": "Panel avoids log and bottom menu: cultivation-growing",
+      "passed": true
+    },
+    {
+      "check": "Prototype mushroom icon reuses cached texture",
       "passed": true
     },
     {
