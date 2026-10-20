@@ -338,3 +338,9 @@ jobs:
           name: DiveInUnder-adventure-windows-x64
           path: projects/dive-in-under/build/DiveInUnder-foundation-windows-x64.zip
           if-no-files-found: error
+      - uses: actions/upload-artifact@v4
+        if: success() && steps.scope.outputs.adventure_only == 'true' && hashFiles('projects/dive-in-under/tools/tactics-ready.txt') != ''
+        with:
+          name: DiveInUnder-tactics-windows-x64
+          path: projects/dive-in-under/build/DiveInUnder-foundation-windows-x64.zip
+          if-no-files-found: error
