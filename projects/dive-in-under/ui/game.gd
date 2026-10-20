@@ -32,7 +32,7 @@ var modal_owner: Control
 var x_held:=false
 var last_x_down: int=-1000
 var flow_memory: Dictionary={}
-var return_after_drag_cancel:=false
+var last_left_item: String=""
 var gear_drag: Dictionary={}
 var status_memory: Dictionary={}
 var equipment_candidate: String=""
@@ -678,6 +678,13 @@ func find_button(node: Node, label: String) -> Button:
 		if found!=null: return found
 	return null
 
+func item_at(node: Node, point: Vector2) -> String:
+	if node is Button and node.is_visible_in_tree() and node.has_meta("item_source") and node.get_global_rect().has_point(point):
+		return "%s/%s/%s"%[node.get_meta("item_source"),node.get_meta("item_uid",""),node.get_meta("equip_slot","")]
+	for child in node.get_children():
+		var found: String=item_at(child,point)
+		if found!="": return found
+	return ""
 func _input(event: InputEvent) -> void:
 	if legacy_persistence_mode: return
 	var viewport:=get_viewport()
@@ -707,11 +714,12 @@ func _input(event: InputEvent) -> void:
 			if event.pressed and not event.double_click: modal_owner.call_deferred("cancel_modal")
 			return
 	if event is InputEventMouseButton and event.pressed:
+		var target: String=item_at(screen,event.position) if event.button_index==MOUSE_BUTTON_LEFT else ""
 		if event.button_index in [MOUSE_BUTTON_LEFT,MOUSE_BUTTON_RIGHT] and (now<ui_block_until or event.double_click):
-			# Item double-click is a single intended equipment gesture, not navigation.
-			var hovered:=viewport.gui_get_hovered_control()
-			if event.button_index==MOUSE_BUTTON_LEFT and event.double_click and now>=ui_block_until and is_instance_valid(hovered) and hovered.has_meta("item_source"): return
+			# Only a genuine second click on the same item may equip; scene transitions never inherit it.
+			if event.button_index==MOUSE_BUTTON_LEFT and event.double_click and now>=ui_block_until and target!="" and target==last_left_item: return
 			viewport.set_input_as_handled(); return
+		if event.button_index==MOUSE_BUTTON_LEFT: last_left_item=target
 		if event.button_index==MOUSE_BUTTON_RIGHT:
 			viewport.set_input_as_handled()
 			if route_map_open:
@@ -731,6 +739,9 @@ func _input(event: InputEvent) -> void:
 			var b: Button=primary_button if code==KEY_E else secondary_button
 			if now-previous>=500 and now>=ui_block_until and is_instance_valid(b) and not b.disabled and b.is_visible_in_tree(): b.emit_signal("pressed")
 			return
+		if event.pressed and not event.echo and not route_map_open and not field_equipment and not field_status and ui_mode=="campaign":
+			for child in play_view.get_children():
+				if child.has_method("handle_choice_key") and child.handle_choice_key(code): viewport.set_input_as_handled(); return
 		if event.pressed and not event.echo and code in [KEY_I,KEY_C] and ui_mode=="campaign":
 			viewport.set_input_as_handled()
 			if now<ui_block_until or route_map_open or field_equipment or field_status: return

@@ -8,7 +8,7 @@ const Grid=preload("res://ui/item_grid.gd")
 const Gear=preload("res://ui/gear_actions.gd")
 const Routes=preload("res://ui/route_map.gd")
 const Model=preload("res://ui/status_model.gd")
-const Performance=preload("res://ui/item_presenter.gd")
+const ItemInfo=preload("res://ui/item_presenter.gd")
 const Choices=preload("res://ui/event_choices.gd")
 var game: Control
 var stage: Control
@@ -283,12 +283,12 @@ func refresh_details() -> void:
 		label_at(detail_body,game.cfg.slots.get(item.slot,"素材")+(" / 未受領" if selection.kind=="pending" else ""),Rect2(0,66,250,26),15,true)
 		var lines: Array[String]=[]
 		if uid in game.campaign.items:
-			if not item.stats.is_empty(): lines.append(Performance.performance(game.campaign,game.cfg,uid))
+			if not item.stats.is_empty(): lines.append(ItemInfo.performance(game.campaign,game.cfg,uid))
 			if item.slot!="": lines.append(game.condition_text(uid))
-		elif not item.stats.is_empty(): lines.append("現在値  "+Performance.text(item.stats))
+		elif not item.stats.is_empty(): lines.append("現在値  "+ItemInfo.text(item.stats))
 		if item.slot!="" and selection.kind in ["inventory","pending"]:
 			var compare: Array[String]=[]
-			for row in Performance.comparison(E.hero(game.campaign,game.cfg),Gear.compared_hero(game,selection.kind,uid)):
+			for row in ItemInfo.comparison(E.hero(game.campaign,game.cfg),Gear.compared_hero(game,selection.kind,uid)):
 				if row.delta!=0: compare.append("%s %+d"%[row.name,row.delta])
 			lines.append("交換差："+(" / ".join(compare) if not compare.is_empty() else "変化なし"))
 		var description: String=item.get("description",preload("res://ui/warehouse_catalog.gd").DESCRIPTIONS.get(template,""))
@@ -318,7 +318,7 @@ func open_routes() -> void:
 	var panel:=UISkin.panel(routes_overlay,Rect2(380,82,520,556),"詳細地図 / 過去の到達記録",true)
 	var sc:=ScrollContainer.new(); sc.position=Vector2(75,60); sc.size=Vector2(370,410); sc.theme=UISkin.scroll_theme(); sc.horizontal_scroll_mode=ScrollContainer.SCROLL_MODE_DISABLED; panel.add_child(sc); map_scroll=sc
 	var map:=Control.new(); map.set_script(Routes); map.expanded=true; map.floor_number=int(game.campaign.floor); map.highest_floor=int(game.campaign.highest_floor); map.max_floor=int(game.cfg.journey.public_max_floor); sc.add_child(map); sc.set_deferred("scroll_vertical",int(game.flow_memory.map) if int(game.flow_memory.map)>=0 else maxi(0,(int(game.campaign.floor)-1)*44-176))
-	nav(panel,"閉じる［Esc］",Rect2(78,485,364,48),close_routes,"close-map")
+	nav(panel,"閉じる［Esc／右クリック］",Rect2(78,485,364,48),close_routes,"close-map").add_theme_font_size_override("font_size",16)
 func close_routes() -> void:
 	save_ui_state(); game.ui_block_until=Time.get_ticks_msec()+360
 	game.route_map_open=false
@@ -350,7 +350,7 @@ func confirmation() -> void:
 	var prompt: String="失う品："+" / ".join(names)+"\n得る品：なし\n未受領品だけを諦めます。所持品は変更しません。"
 	if exchange:
 		var uid: String=game.replace_selected
-		prompt="失う品："+game.cfg.items[game.campaign.items[uid]].name+"（"+game.condition_text(uid)+"）\n得る品："+game.cfg.items[game.campaign.pending_rewards[index].id].name+"\n手放した個体は元に戻せません。"
+		prompt="失う品："+game.cfg.items[game.campaign.items[uid]].name+("（"+game.condition_text(uid)+"）" if game.cfg.items[game.campaign.items[uid]].slot!="" else "")+"\n得る品："+game.cfg.items[game.campaign.pending_rewards[index].id].name+"\n手放した個体は元に戻せません。"
 	label_at(panel,prompt,Rect2(30,63,680,171),20,true)
 	action(panel,"手放して受け取る" if exchange else "未受領品を諦める",Rect2(30,264,328,55),"exchange_reward" if exchange else "abandon_rewards",{"confirmed":true,"replace_uid":game.replace_selected,"token":game.reward_selected})
 	var cancel:=nav(panel,"取消［Esc／X］",Rect2(382,264,328,55),cancel_modal,"cancel-reward"); cancel.grab_focus()
@@ -370,17 +370,19 @@ func collect_modal_buttons(node: Node) -> void:
 	for child in node.get_children():
 		if child is Button and not child.disabled: modal_buttons.append(child)
 		collect_modal_buttons(child)
+func handle_choice_key(code: int) -> bool:
+	if game.campaign.phase!="event" or Choices.simple(game.cfg.journey.events[game.campaign.event]): return false
+	var choices: Array=game.cfg.journey.events[game.campaign.event].choices
+	var at: int=-1
+	for i in choices.size():
+		if choices[i].id==game.event_choice: at=i
+	if code in [KEY_UP,KEY_DOWN]: at=posmod(at+(-1 if code==KEY_UP else 1),choices.size())
+	elif code>=KEY_1 and code<KEY_1+choices.size(): at=code-KEY_1
+	else: return false
+	choose_event(choices[at].id); return true
 func _unhandled_key_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel") and not event.is_echo():
 		get_viewport().set_input_as_handled()
 		if game.route_map_open: call_deferred("close_routes")
-	elif event is InputEventKey and event.pressed and not event.echo and game.campaign.phase=="event" and not Choices.simple(game.cfg.journey.events[game.campaign.event]):
-		var code: int=event.keycode; var choices: Array=game.cfg.journey.events[game.campaign.event].choices; var at: int=-1
-		for i in choices.size():
-			if choices[i].id==game.event_choice: at=i
-		if code in [KEY_UP,KEY_DOWN]: at=posmod(at+(-1 if code==KEY_UP else 1),choices.size())
-		elif code>=KEY_1 and code<KEY_1+choices.size(): at=code-KEY_1
-		else: return
-		get_viewport().set_input_as_handled(); choose_event(choices[at].id)
 func visual_audit() -> Dictionary:
 	return {"kind":"stable-exploration-shell","phase":game.campaign.phase,"left_rect":[16,86,224,266],"map_rect":[982,86,282,260],"detail_rect":[982,358,282,346],"selected":game.flow_selection.duplicate(true),"map_vertical":true,"map_open":game.route_map_open,"pending":game.campaign.pending_rewards.size(),"primary":game.primary_button.text if is_instance_valid(game.primary_button) else "","primary_rect":str(main_button.get_global_rect()),"detail_scroll":detail_scroll.scroll_vertical if is_instance_valid(detail_scroll) else 0,"map_scroll":map_scroll.scroll_vertical if is_instance_valid(map_scroll) else 0,"modal":game.reward_confirmation,"actor_huds":actor_huds.keys(),"logo":false}
