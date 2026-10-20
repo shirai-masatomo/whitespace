@@ -31,6 +31,7 @@ static func note(s: Dictionary, message: String) -> void:
 static func label(s: Dictionary, uid: String) -> String:
 	return s.item_rules[s.items[uid]].name+(" ×%d"%s.quantities[uid] if s.items[uid]=="C01" else ("（耐久%d）"%s.item_condition[uid].current if s.item_rules[s.items[uid]].slot!="" else ""))
 static func reward(s: Dictionary, id: String, quantity: int=1, origin: String="loot", guaranteed: bool=false) -> void:
+	if quantity<=0: return
 	s.reward_serial+=1
 	s.pending_rewards.append({"id":id,"token":"reward-%d"%s.reward_serial,"quantity":quantity,"profile":Instances.roll(s,id,origin),"guaranteed":guaranteed})
 static func receive(s: Dictionary, r: Dictionary) -> bool:
@@ -123,7 +124,8 @@ static func round_step(s: Dictionary, data: Dictionary, cfg: Dictionary) -> void
 	if s.node.kind=="boss" and b.enemy.id=="B10":
 		s.records.boss_kills+=1; s.highest_floor=maxi(s.highest_floor,11)
 		var first: bool=not s.records.first_reward_issued
-		reward(s,cfg.progression.boss_reward,1,"first-clear" if first else "boss-drop",first); s.records.first_reward_issued=true
+		if first or e.draw(s,"loot",100)<int(cfg.progression.boss_repeat_chance): reward(s,cfg.progression.boss_reward,1,"first-clear" if first else "boss-drop",first)
+		s.records.first_reward_issued=true
 		s.reward_return="clear"
 	else: s.reward_return="explore"
 	s.reward_origin="戦闘の戦利品"; s.last_reward={"exp":b.reward.exp,"gold":b.reward.gold}; s.phase="reward"; s.last_outcome="victory"; s.battle={}
@@ -174,7 +176,7 @@ static func transition(previous: Dictionary, action: String, args: Dictionary, d
 	match action:
 		"depart":
 			if s.phase=="town":
-				s.floor=0; s.phase="explore"; s.result={}; s.trips+=1; s.event_counts={}; s.node={}; s.trip_exp=0; s.trip_gold=0; s.trip_items=0; s.pending_rewards=[]; s.journal=[]; changed=true
+				s.payment_source="inventory"; s.floor=0; s.phase="explore"; s.result={}; s.trips+=1; s.event_counts={}; s.node={}; s.trip_exp=0; s.trip_gold=0; s.trip_items=0; s.pending_rewards=[]; s.journal=[]; changed=true
 		"descend":
 			if s.phase=="explore" and s.floor<10: descend(s,data,cfg); changed=true
 		"portal_stay":
@@ -259,8 +261,8 @@ static func transition(previous: Dictionary, action: String, args: Dictionary, d
 			if s.phase=="town" or (s.floor==5 and s.phase in ["portal","portal_done"]):
 				var id: String=args.get("id","")
 				if not id in ["RB","RP","RM"]: error="対策品を選んでください。"
-				elif s.inventory.size()>=15: error="薬を受け取るバッグの空きが必要です。"
 				elif not Money.pay(s,int(cfg.items[id].price),args.get("source",s.payment_source)): error="選んだ収納のコインが不足しています。"
+				elif s.inventory.size()>=15: error="薬を受け取るバッグの空きが必要です。"
 				else: Instances.install(s,id,Instances.roll(s,id,"shop")); changed=true
 		"auto_remedy":
 			if s.phase!="battle" and args.get("status","") in s.auto_remedy: s.auto_remedy[args.status]=not s.auto_remedy[args.status]; changed=true

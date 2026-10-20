@@ -67,7 +67,7 @@ func build() -> void:
 	var header:=panel(Rect2(16,14,1248,64),"",true)
 	label_at(header,"ステータス",Rect2(28,10,540,40),27)
 	label_at(header,"主人公  /  能力・装備の確認",Rect2(780,14,250,34),18,MUTED)
-	label_at(header,"G  %d"%game.campaign.gold,Rect2(1080,11,145,40),23,GOLD)
+	label_at(header,"G  %d"%E.money(game.campaign),Rect2(1080,11,145,40),23,GOLD)
 	left_panel=panel(Rect2(16,92,296,510),unit.name,true)
 	build_left()
 	var middle:=panel(Rect2(324,92,580,510),"",true)
@@ -258,6 +258,7 @@ func update_details() -> void:
 			var base: Dictionary=E.Condition.stats(game.campaign,item.uid,game.cfg,true)
 			if base!=E.Condition.stats(game.campaign,item.uid,game.cfg): detail_row("基礎値",preload("res://ui/item_presenter.gd").text(base))
 			detail_row("耐久度","%d / %d"%[item.condition.current,item.condition.maximum])
+			detail_text(preload("res://ui/item_presenter.gd").profile(game.campaign,game.cfg,item.uid),16)
 			for field in [["特殊効果","special_effects"],["刻印","marks"]]:
 				if item.item.has(field[1]): detail_row(field[0],str(item.item[field[1]]))
 			if item.description!="":

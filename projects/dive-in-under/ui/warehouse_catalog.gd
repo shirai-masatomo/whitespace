@@ -20,11 +20,11 @@ static func details(s: Dictionary, uid: String, cfg: Dictionary) -> Dictionary:
 	var carried:=0; var stored:=0
 	for source in ["inventory","cloth"]:
 		for key in s[source]:
-			if s.items[key]==id: carried+=1
+			if s.items[key]==id: carried+=int(s.get("quantities",{}).get(key,1))
 	for key in s.equipment.values():
-		if key!="" and s.items[key]==id: carried+=1
+		if key!="" and s.items[key]==id: carried+=int(s.get("quantities",{}).get(key,1))
 	for key in s.warehouse:
-		if s.items[key]==id: stored+=1
+		if s.items[key]==id: stored+=int(s.get("quantities",{}).get(key,1))
 	return {"name":name_of(item),"type":CATEGORIES.get(Storage.category(item),"その他"),
 	"carried":carried,"stored":stored,"description":item.get("description",DESCRIPTIONS.get(id,"")),
 	"uses":str(item.get("uses","—")),"special":str(item.get("special_effects","—")),"marks":str(item.get("marks","—"))}

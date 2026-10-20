@@ -16,6 +16,10 @@ static func cell(parent: Control, game: Control, host: Control, rect: Rect2, sou
 		var item: Dictionary=game.cfg.items[template]
 		b.tooltip_text=game.cfg.slots.get(slot,game.cfg.slots.get(item.slot,"素材"))+" / "+item.name
 		UISkin.picture(b,Items.texture(template,item.slot),Rect2(5,4,rect.size.x-10,rect.size.y-9))
+		if template=="C01":
+			var quantity: int=game.campaign.pending_rewards[preload("res://core/journey.gd").reward_index(game.campaign,uid)].get("quantity",1) if source=="pending" else int(game.campaign.quantities.get(uid,1))
+			var amount:=UISkin.label(b,"×%d"%quantity,Rect2(2,rect.size.y-18,rect.size.x-4,16),12); amount.horizontal_alignment=HORIZONTAL_ALIGNMENT_RIGHT
+			b.tooltip_text+=" / %dG"%quantity
 		if source!="pending" and item.slot!="" and game.campaign.item_condition.has(uid):
 			var condition: Dictionary=game.campaign.item_condition[uid]
 			var back:=ColorRect.new(); back.color=Color(.015,.04,.055,.94); back.position=Vector2(2,rect.size.y-17); back.size=Vector2(rect.size.x-4,15); back.mouse_filter=Control.MOUSE_FILTER_IGNORE; b.add_child(back)

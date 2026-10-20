@@ -48,6 +48,10 @@ var intro_seen: Dictionary={}
 var dungeon_music: AudioStreamPlayer
 var dungeon_music_path: String=""
 var play_buttons: Dictionary = {}
+var service_mode: String=""
+var service_uid: String=""
+var service_source: String="inventory"
+var debug_run: bool=false
 var town_page := "hub"
 var warehouse_state: Dictionary = {}
 var warehouse_view: Control
@@ -70,7 +74,9 @@ func initialize_game() -> void:
 	get_window().title="Dive In Under "+str(ProjectSettings.get_setting("application/config/version"))
 	Engine.max_fps=60
 	legacy_persistence_mode=smoke_dir!="" and "--legacy-persistence-check" in OS.get_cmdline_user_args()
-	cfg=Expedition.load_config()
+	debug_run="--debug-run" in OS.get_cmdline_user_args()
+	cfg=Expedition.load_config("2026-10-17.loop-provisional.5" if legacy_persistence_mode else "")
+	if not legacy_persistence_mode: data=Expedition.Adventure.combat_data(data,cfg)
 	if cfg.is_empty(): get_tree().quit(1); return
 	var save_path := "user://campaign-v1.json"
 	if smoke_dir!="": save_path=smoke_dir.path_join("campaign-smoke.json")
@@ -108,6 +114,7 @@ func show_title() -> void:
 	if is_instance_valid(dungeon_music): dungeon_music.stop(); dungeon_music_path=""
 	route_map_open=false
 	preparation_music.set_preparation_active(false)
+	service_mode=""
 	if not legacy_persistence_mode:
 		timer.stop(); play_timer.stop(); ui_mode="title"; title_visible=true; show_play_view("title"); return
 	background.set_depth(1)
@@ -166,6 +173,8 @@ func start_new() -> void:
 	if not legacy_persistence_mode:
 		flow_memory={}; cfg=Expedition.load_config(); campaign=Expedition.fresh(cfg,campaign_seed if smoke_dir!="" else int(Time.get_ticks_usec()%2147483647))
 		Expedition.Journey.enable(campaign)
+		campaign.debug=debug_run
+		data=Expedition.Adventure.combat_data(data,cfg)
 		campaign.phase="town"; campaign.trips=0; town_page="hub"; session_departed=false; warehouse_state={}; auto_play=true; notice=""; show_campaign(); return
 	var error: String=save_store.preserve_current()
 	if error!="": notice=error; show_title(); return
@@ -192,9 +201,17 @@ func continue_campaign() -> void:
 func perform(action: String, args: Dictionary, revision: int) -> void:
 	if presenting or intro_active:
 		if action=="round": return
+	if action=="debug_return" and campaign.get("debug",false):
+		play_timer.stop();cancel_presentation();intro_active=false;field_equipment=false;field_status=false;route_map_open=false;service_mode=""
+	var claimed_template: String=""
+	if action=="claim_reward" and Expedition.Adventure.active(campaign):
+		var index: int=Expedition.Journey.reward_index(campaign,args.get("token",""))
+		if index>=0:claimed_template=campaign.pending_rewards[index].id
 	var old_journal: Array=campaign.get("journal",[]).duplicate()
 	var candidate:=Expedition.act(campaign,action,revision,args,data,cfg)
 	if candidate==campaign:
+		if Expedition.Adventure.active(campaign):
+			notice=Expedition.Adventure.transition(campaign,action,args,data,cfg).error;show_campaign();return
 		if action in ["organize","organize_bag"]: notice="すでに選択した順序に整理されています。"; show_campaign()
 		return
 	if legacy_persistence_mode:
@@ -212,8 +229,11 @@ func perform(action: String, args: Dictionary, revision: int) -> void:
 			equipment_focus=cfg.items[campaign.items[equipped_uid]].slot
 			flow_selection={"kind":"equipment","uid":equipped_uid,"slot":equipment_focus}
 	elif action=="unequip" and not campaign.inventory.is_empty(): flow_selection={"kind":"inventory","uid":campaign.inventory[-1],"slot":""}
-	elif action=="claim_reward": flow_selection={"kind":"inventory","uid":"item-%d"%(int(campaign.next_item)-1),"slot":""}
+	elif action=="claim_reward":
+		var matches: Array=campaign.inventory.filter(func(uid):return campaign.items[uid]==claimed_template) if claimed_template!="" else []
+		flow_selection={"kind":"inventory","uid":matches[-1] if not matches.is_empty() else "item-%d"%(int(campaign.next_item)-1),"slot":""}
 	if action in ["town","depart"]:
+		service_mode=""
 		town_page="hub"; field_equipment=false; intro_seen={}; intro_active=false; cancel_presentation()
 		if action=="depart": auto_play=true
 	if action=="round" and Expedition.Journey.active(campaign) and campaign.has("round_presentation"):
@@ -280,7 +300,10 @@ func show_campaign() -> void:
 				warehouse_view=Control.new(); warehouse_view.set_script(preload("res://ui/warehouse_view.gd")); warehouse_view.game=self; screen.add_child(warehouse_view)
 		else:
 			show_play_view("equipment" if field_equipment or (campaign.phase=="town" and town_page=="equipment") else ("exploration" if presenting else ("hub" if campaign.phase=="town" else campaign.phase)))
-		if campaign.phase=="battle" and auto_play and not field_equipment and not field_status and not presenting and not intro_active: play_timer.wait_time=0.6/play_speed; play_timer.start()
+		if campaign.phase=="battle" and auto_play and not field_equipment and not field_status and not presenting and not intro_active and service_mode=="": play_timer.wait_time=(1.1 if display_battle().get("enemy",{}).get("ai_phase",0)==2 else 0.6)/play_speed; play_timer.start()
+		if debug_run:
+			var badge:=text_label("デバッグ中 / 通常の成果には反映しません",16);badge.position=Vector2(350,0);badge.size=Vector2(580,24);badge.z_index=1500;screen.add_child(badge)
+		if service_mode!="":attach_services()
 		return
 	timer.stop(); play_timer.stop(); title_visible=false; ui_mode="campaign"; play_buttons={}
 	background.set_depth(campaign.floor if campaign.phase not in ["town","result"] else 1)
@@ -363,7 +386,7 @@ func show_wide_exploration() -> void:
 	var hpbar:=health_bar(Color("a84936")); hpbar.max_value=h.max_hp; hpbar.value=h.hp; status.add_child(hpbar)
 	status.add_child(text_label("SP  %d / %d" % [h.sp,h.max_sp],20))
 	var spbar:=health_bar(Color("327e9b")); spbar.max_value=maxi(1,h.max_sp); spbar.value=h.sp; status.add_child(spbar)
-	paragraph(status,"ATK %d   DEF %d   SPD %d\nGold %d  / 携行品 %d個" % [h.atk,h.def,h.spd,campaign.gold,campaign.inventory.size()],18)
+	paragraph(status,"ATK %d   DEF %d   SPD %d\nGold %d  / 携行品 %d個" % [h.atk,h.def,h.spd,Expedition.money(campaign),campaign.inventory.size()],18)
 	var defense_text: String="防御 / 自動・SP%d"%int(data.rules.skills.S105.sp_cost)
 	if campaign.phase=="battle":
 		var defense_state:=Expedition.battle_state(campaign,data)
@@ -405,7 +428,7 @@ func show_result(root: VBoxContainer) -> void:
 	var banner:=paragraph(info,labels[campaign.result.kind],36)
 	banner.add_theme_color_override("font_color",Color("f0bd72"))
 	paragraph(info,campaign.result.reason,24)
-	paragraph(info,"到達 %dF   /   Lv.%d   /   Gold %d" % [campaign.result.floor,Expedition.hero(campaign,cfg).level,campaign.gold],22)
+	paragraph(info,"到達 %dF   /   Lv.%d   /   Gold %d" % [campaign.result.floor,Expedition.hero(campaign,cfg).level,Expedition.money(campaign)],22)
 	var loss: Dictionary=campaign.result.loss
 	paragraph(info,"今回の損失：Gold %d / EXP %d / 携行品 %d\n町ではHP/SPを全回復します。再挑戦に費用はかかりません。" % [loss.gold,loss.exp,loss.items],18)
 	if campaign.result.kind=="story_death": paragraph(info,"旧版の履歴です。通常死亡数には加えません。町へ戻って探索を続けられます。",18)
@@ -455,7 +478,7 @@ func repair_button(uid: String) -> Button:
 	var price:=Expedition.Condition.cost(campaign,uid,cfg)
 	var revision:=int(campaign.revision)
 	var b:=compact_button("修理 %dG"%maxi(0,price),func(): perform("repair",{"uid":uid},revision))
-	b.disabled=price<=0 or campaign.gold<price
+	b.disabled=price<=0 or Expedition.money(campaign)<price
 	b.set_meta("campaign_action","repair"); b.set_meta("campaign_args",{"uid":uid})
 	return b
 
@@ -505,7 +528,7 @@ func show_equipment(root: VBoxContainer) -> void:
 	summary_style.content_margin_top=4; summary_style.content_margin_bottom=4
 	summary.add_theme_stylebox_override("panel",summary_style)
 	root.add_child(summary)
-	var summary_text:=text_label("HP %d / %d   SP %d / %d   Lv.%d   ATK %d  DEF %d  SPD %d   /   Gold %d" % [h.hp,h.max_hp,h.sp,h.max_sp,h.level,h.atk,h.def,h.spd,campaign.gold],21)
+	var summary_text:=text_label("HP %d / %d   SP %d / %d   Lv.%d   ATK %d  DEF %d  SPD %d   /   Gold %d" % [h.hp,h.max_hp,h.sp,h.max_sp,h.level,h.atk,h.def,h.spd,Expedition.money(campaign)],21)
 	summary_text.add_theme_color_override("font_color",Color("f1ead9"))
 	summary.add_child(summary_text)
 	var row:=HBoxContainer.new(); row.size_flags_vertical=Control.SIZE_EXPAND_FILL; row.add_theme_constant_override("separation",16); root.add_child(row)
@@ -546,6 +569,8 @@ func show_equipment(root: VBoxContainer) -> void:
 	var depart:=command("HP/SP回復済み  →  もう一度地下へ","depart"); root.add_child(depart)
 
 func smoke(quit_on_finish: bool = true) -> void:
+	if "--adventure-review" in OS.get_cmdline_user_args():
+		await preload("res://ui/adventure_review.gd").run(self); return
 	if "--review-fixes" in OS.get_cmdline_user_args():
 		await preload("res://ui/review_fixes.gd").run(self); return
 	if "--flow-review" in OS.get_cmdline_user_args():
@@ -773,7 +798,7 @@ func transfer_item(uid: String, source: String, destination: String, revision: i
 
 func open_field_equipment() -> void:
 	if is_instance_valid(modal_owner): return
-	if campaign.get("phase") not in ["explore","reward","treasure","event","event_result"] or presenting: return
+	if campaign.get("phase") not in ["explore","reward","treasure","event","event_result","portal","portal_done"] or presenting: return
 	field_equipment=true; play_timer.stop(); show_campaign()
 func close_equipment() -> void:
 	field_equipment=false; show_campaign()
@@ -785,7 +810,7 @@ func ensure_intro() -> void:
 	var key: String="%d/%d/%d"%[campaign.trips,campaign.floor,campaign.battle.seed]
 	if intro_seen.has(key): return
 	intro_seen[key]=true; intro_active=true; play_timer.stop()
-	var duration: float=float(cfg.journey.boss_intro_seconds if Expedition.Journey.node(cfg,int(campaign.floor)).kind=="boss" else cfg.journey.intro_seconds)
+	var duration: float=float(cfg.journey.boss_intro_seconds if Expedition.Journey.node(cfg,int(campaign.floor),campaign).kind=="boss" else cfg.journey.intro_seconds)
 	preload("res://ui/journey_sound.gd").play(self,90 if campaign.floor==10 else 220)
 	finish_intro(key,duration)
 func finish_intro(key: String, duration: float) -> void:
@@ -824,7 +849,7 @@ func impact(event: Dictionary) -> void:
 func update_dungeon_music() -> void:
 	var path: String=""
 	if not campaign.is_empty() and Expedition.Journey.active(campaign) and not title_visible and campaign.phase not in ["town","result"]:
-		path=Expedition.Journey.node(cfg,int(campaign.floor)).get("bgm","")
+		path=Expedition.Journey.node(cfg,int(campaign.floor),campaign).get("bgm","")
 	if path==dungeon_music_path: return
 	dungeon_music_path=path
 	if not is_instance_valid(dungeon_music): dungeon_music=AudioStreamPlayer.new(); dungeon_music.bus=&"BGM"; add_child(dungeon_music)
@@ -833,3 +858,11 @@ func update_dungeon_music() -> void:
 		var track=load(path).duplicate()
 		if track is AudioStreamOggVorbis: track.loop=true
 		dungeon_music.stream=track; dungeon_music.volume_db=-4; dungeon_music.play()
+
+func open_services(mode: String="prepare", uid: String="", source: String="inventory") -> void:
+	if not Expedition.Adventure.active(campaign) or is_instance_valid(modal_owner):return
+	if campaign.phase=="battle" and mode!="debug":return
+	if mode=="debug" and not campaign.debug:return
+	service_mode=mode;service_uid=uid;service_source=source;play_timer.stop();attach_services()
+func attach_services() -> void:
+	var overlay:=Control.new();overlay.set_script(preload("res://ui/adventure_services.gd"));overlay.game=self;overlay.mode=service_mode;overlay.uid=service_uid;overlay.source=service_source;screen.add_child(overlay)

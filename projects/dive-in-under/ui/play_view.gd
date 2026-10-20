@@ -31,13 +31,13 @@ func _ready() -> void:
 		"hub": build_hub()
 		"equipment": build_equipment()
 		"result": build_result()
-		"exploration","explore","battle","treasure","reward","event","event_result":
+		"exploration","explore","battle","treasure","reward","event","event_result","portal","portal_done":
 			var view:=Control.new(); view.set_script(preload("res://ui/flow_view.gd")); view.game=game; stage=null; add_child(view); stage=view.stage; route=view.route
 		_: build_exploration()
 func header(title: String) -> void:
 	var p:=UISkin.panel(self,Rect2(16,14,1248,60),"",true)
 	UISkin.label(p,title,Rect2(28,12,1000,34),25,UISkin.DARK)
-	if not game.campaign.is_empty(): UISkin.label(p,"G  %d"%game.campaign.gold,Rect2(1080,13,140,32),21,UISkin.DARK)
+	if not game.campaign.is_empty(): UISkin.label(p,"G  %d"%E.money(game.campaign),Rect2(1080,13,140,32),21,UISkin.DARK)
 func nav(parent: Node, text: String, r: Rect2, call: Callable, key: String="", primary: bool=false) -> Button:
 	var epoch: int=game.ui_epoch
 	var b:=UISkin.button(parent,text,r,func():game.ui_action(call,epoch),primary)
@@ -78,6 +78,7 @@ func build_title() -> void:
 	nav(p,"終了",Rect2(66,355,488,64),func():game.get_tree().quit(),"quit")
 	UISkin.label(self,str(ProjectSettings.get_setting("application/config/version")),Rect2(1170,675,85,25),15)
 	session_notice()
+	if game.debug_run:UISkin.label(self,"デバッグ中 / 通常セッションと別起動",Rect2(770,632,470,36),18,UISkin.GOLD)
 	game.new_button.add_theme_font_size_override("font_size",30); game.new_button.grab_focus()
 func session_notice() -> void:
 	var backing:=ColorRect.new(); backing.position=Vector2(65,680); backing.size=Vector2(1068,30); backing.color=Color(.015,.04,.055,.91); backing.mouse_filter=Control.MOUSE_FILTER_IGNORE; add_child(backing)
@@ -96,6 +97,8 @@ func build_hub() -> void:
 	command(menu,"探索に出発［E］",Rect2(27,331,412,76),"depart",{},true).add_theme_font_size_override("font_size",27)
 	nav(menu,"タイトルへ",Rect2(27,435,193,58),game.show_title,"title")
 	nav(menu,"終了",Rect2(231,435,208,58),func():game.get_tree().quit(),"quit")
+	nav(self,"支給所・個体・印・自動対策",Rect2(560,585,620,58),func():game.open_services(),"services")
+	if game.debug_run:nav(self,"デバッグ操作",Rect2(560,80,620,40),func():game.open_services("debug"),"debug-services")
 	var card:=hero_card(Rect2(820,131,372,430))
 	UISkin.label(card,"装備中のアイテム",Rect2(20,332,332,28),17,UISkin.DARK)
 	var index:=0
@@ -104,11 +107,10 @@ func build_hub() -> void:
 		if uid=="": continue
 		UISkin.picture(card,Items.texture(game.campaign.items[uid],slot),Rect2(20+index*58,364,50,50)); index+=1
 		if index==5: break
-	var note:=UISkin.panel(self,Rect2(570,588,224,91))
-	UISkin.label(note,"持ち帰った品を預け、装備を整えよう。",Rect2(17,15,190,65),17,UISkin.INK,true)
+	UISkin.label(self,"5Fごとのポータルで帰還 / 装備・バッグ全損、風呂敷・倉庫・成長は保持",Rect2(570,651,620,38),15,UISkin.INK,true)
 func add_stage(r: Rect2, enemy: String="") -> void:
 	stage=Control.new(); stage.set_script(game.BattleStage); stage.wide_layout=true; stage.integrated_layout=true
-	stage.floor_number=game.campaign.floor; stage.enemy_id=enemy; stage.background_override=E.Journey.node(game.cfg,int(game.campaign.floor)).get("background","") if E.Journey.active(game.campaign) else ""; stage.position=r.position; stage.size=r.size; add_child(stage)
+	stage.floor_number=game.campaign.floor; stage.enemy_id=enemy; stage.background_override=E.Journey.node(game.cfg,int(game.campaign.floor),game.campaign).get("background","") if E.Journey.active(game.campaign) else ""; stage.position=r.position; stage.size=r.size; add_child(stage)
 func build_exploration() -> void:
 	var s: Dictionary=game.campaign; var battling: bool=s.phase=="battle" or game.presenting
 	header("地下 %d F  /  %s"%[s.floor,"自動戦闘" if battling else "探索"])
@@ -176,12 +178,13 @@ func close_routes() -> void:
 	game.route_map_open=false
 	if is_instance_valid(routes_overlay): routes_overlay.queue_free(); routes_overlay=null
 func build_result() -> void:
+	if E.Adventure.active(game.campaign):build_adventure_result();return
 	var s: Dictionary=game.campaign
 	var text: String={"return":"帰還","death":"探索を終えた","clear":"10 F 突破","draw":"探索を中断"}.get(s.result.kind,"探索の記録")
 	header(text)
 	var paper:=UISkin.panel(self,Rect2(90,128,630,516),text,true)
 	UISkin.label(paper,s.result.reason,Rect2(30,77,570,96),24,UISkin.DARK,true)
-	UISkin.label(paper,"到達  %d F\n主人公  Lv.%d\n所持金  %d G"%[s.result.floor,E.hero(s,game.cfg).level,s.gold],Rect2(30,200,570,132),24,UISkin.DARK,true)
+	UISkin.label(paper,"到達  %d F\n主人公  Lv.%d\n所持金  %d G"%[s.result.floor,E.hero(s,game.cfg).level,E.money(s)],Rect2(30,200,570,132),24,UISkin.DARK,true)
 	if E.Journey.active(s): UISkin.label(paper,"今回の獲得  EXP +%d / Gold +%d / 品物 %d点"%[s.trip_exp,s.trip_gold,s.trip_items],Rect2(30,327,570,30),17,UISkin.DARK)
 	var loss: Dictionary=s.result.loss
 	UISkin.label(paper,"今回の損失   Gold %d / EXP %d / 携行品 %d"%[loss.gold,loss.exp,loss.items],Rect2(30,359,570,48),17,UISkin.DARK,true)
@@ -237,6 +240,7 @@ func build_equipment() -> void:
 		repair.tooltip_text=(reason+"\n" if reason!="" else "")+preload("res://ui/item_presenter.gd").repair_delta(game.campaign,game.cfg,selected)
 	else: UISkin.label(details,"この部位には何も装備していません。",Rect2(28,184,314,100),23,UISkin.DARK,true)
 	nav(self,"冒険準備へ戻る" if game.campaign.phase=="town" else "探索へ戻る",Rect2(16,643,300,60),func():game.open_town_page("hub") if game.campaign.phase=="town" else game.close_equipment(),"back")
+	nav(self,"個体・印・自動対策",Rect2(328,590,554,32),func():game.open_services("prepare",selected),"equipment-services").add_theme_font_size_override("font_size",15)
 	var backing:=ColorRect.new(); backing.position=Vector2(328,643); backing.size=Vector2(936,60); backing.color=Color(.015,.04,.055,.94); backing.mouse_filter=Control.MOUSE_FILTER_IGNORE; add_child(backing)
 	var effective: Dictionary=E.hero(game.campaign,game.cfg)
 	UISkin.label(self,"現在の能力  攻撃 %d / 防御 %d / 素早さ %d / HP %d/%d / SP %d/%d"%[effective.atk,effective.def,effective.spd,effective.hp,effective.max_hp,effective.sp,effective.max_sp],Rect2(339,654,920,37),17)
@@ -279,3 +283,16 @@ func accepts_gear(value: Variant, destination: String, slot: String="") -> bool:
 	return preload("res://ui/gear_actions.gd").reason(game,value,destination,slot)==""
 func drop_gear(value: Dictionary, destination: String, slot: String="") -> void:
 	preload("res://ui/gear_actions.gd").apply(game,value,destination,slot)
+
+func build_adventure_result() -> void:
+	var s: Dictionary=game.campaign
+	header("探索結果 / "+{"return":"帰還","death":"死亡","clear":"10F突破","draw":"探索中断"}.get(s.result.kind,"結果"))
+	var p:=UISkin.panel(self,Rect2(36,102,1208,510),s.result.reason,true)
+	UISkin.label(p,"到達%dF / Lv.%d / 累積EXP %d / バッグのコイン%dG"%[s.result.floor,E.hero(s,game.cfg).level,s.exp,E.money(s)],Rect2(24,61,1160,48),23,UISkin.DARK)
+	for i in 2:
+		var title: String="失ったもの" if i==0 else "保持したもの"
+		UISkin.label(p,title,Rect2(28+i*584,123,550,38),22,UISkin.DARK)
+		var scroll:=ScrollContainer.new();scroll.position=Vector2(28+i*584,171);scroll.size=Vector2(550,285);scroll.horizontal_scroll_mode=ScrollContainer.SCROLL_MODE_DISABLED;scroll.theme=UISkin.scroll_theme();p.add_child(scroll)
+		var lines: Array=s.result.get("lost" if i==0 else "kept",[])
+		var label:=Label.new();label.text="\n".join(lines) if not lines.is_empty() else "なし";label.language="ja";label.autowrap_mode=TextServer.AUTOWRAP_WORD;label.size_flags_horizontal=Control.SIZE_EXPAND_FILL;label.add_theme_font_size_override("font_size",19);label.add_theme_color_override("font_color",UISkin.DARK);scroll.add_child(label)
+	command(self,"冒険準備へ戻る［E］",Rect2(36,633,1208,66),"town",{},true)

@@ -1,4 +1,5 @@
 extends Control
+const E=preload("res://core/expedition.gd")
 const InterfaceArt=preload("res://ui/interface_art.gd")
 const UISkin=preload("res://ui/ui_skin.gd")
 const Symbols=preload("res://ui/status_symbols.gd")
@@ -98,6 +99,7 @@ func build_list(p: Control, source: String, r: Rect2) -> ScrollContainer:
 		icon_at(b,item.slot,Rect2(5,0,32,32) if source=="cloth" else Rect2(5,2,36,36),game.campaign.items[uid])
 		var name_label:=label_at(b,Catalog.name_of(item),Rect2(46,0,r.size.x-118,32 if source=="cloth" else 36),17)
 		name_label.text_overrun_behavior=TextServer.OVERRUN_TRIM_ELLIPSIS
+		if game.campaign.items[uid]=="C01": label_at(b,"×%d"%game.campaign.quantities[uid],Rect2(r.size.x-65,0,55,32),16)
 		if item.slot!="": label_at(b,"耐%d"%int(game.campaign.item_condition[uid].current),Rect2(r.size.x-65,0,55,32 if source=="cloth" else 34),13,MUTED)
 		b.tooltip_text=Catalog.name_of(item)+" / "+game.condition_text(uid)
 		b.pressed.connect(func(): if not Input.is_key_pressed(KEY_SHIFT): select_item(source,uid))
@@ -117,7 +119,7 @@ func build() -> void:
 	var header:=panel(Rect2(16,14,1248,64),"","lantern")
 	label_at(header,"倉庫 ・ 所持品",Rect2(28,11,370,40),27)
 	label_at(header,"持ち帰ったものを、次の旅へ。",Rect2(690,14,340,34),16,MUTED)
-	label_at(header,"G  %d"%game.campaign.gold,Rect2(1080,11,150,40),23,GOLD)
+	label_at(header,"G  %d"%E.money(game.campaign),Rect2(1080,11,150,40),23,GOLD)
 	var left:=panel(Rect2(16,92,296,300),"所持品","backpack")
 	label_at(left,"%d / 15"%game.campaign.inventory.size(),Rect2(198,9,78,30),18)
 	bag_scroll=build_list(left,"inventory",Rect2(14,55,268,228))
@@ -146,6 +148,7 @@ func build() -> void:
 		visible_items.append(uid)
 		var tile:=Button.new(); tile.set_script(preload("res://ui/warehouse_item.gd")); tile.view=self; tile.source="warehouse"; tile.uid=uid; tile.custom_minimum_size=Vector2(84,112); skin(tile,uid==selected_uid); tile_skin(tile,uid==selected_uid); grid.add_child(tile)
 		icon_at(tile,item.slot,Rect2(14,10,56,52),game.campaign.items[uid])
+		if game.campaign.items[uid]=="C01": label_at(tile,"×%d"%game.campaign.quantities[uid],Rect2(22,58,52,18),15)
 		if item.slot!="": label_at(tile,"耐%d"%int(game.campaign.item_condition[uid].current),Rect2(22,58,52,18),12)
 		var title:=label_at(tile,Catalog.name_of(item),Rect2(10,76,64,22),12,INK); UISkin.fit_name(title,Catalog.name_of(item),64); title.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER
 		if item.slot!="":
@@ -153,12 +156,12 @@ func build() -> void:
 		tile.tooltip_text=Catalog.name_of(item)+"\n"+game.condition_text(uid)
 		tile.pressed.connect(func(): if not Input.is_key_pressed(KEY_SHIFT): select_item("warehouse",uid)); rows[uid]=tile
 	if visible_items.is_empty(): label_at(center,"この分類にアイテムはありません",Rect2(40,230,500,32),19,MUTED)
-	label_at(center,"容量制限なし  ·  1枠1点 / 個別の耐久を保持",Rect2(28,474,524,22),14,MUTED)
+	label_at(center,"容量制限なし / コイン99枚で1枠 / 装備は1個体1枠",Rect2(28,474,524,22),14,MUTED)
 	var right:=panel(Rect2(916,92,348,510),"アイテム詳細","eyes")
 	build_details(right)
 	build_actions()
 	var guide:=ColorRect.new(); guide.position=Vector2(16,610); guide.size=Vector2(1248,30); guide.color=Color("10242d"); guide.mouse_filter=Control.MOUSE_FILTER_IGNORE; add_child(guide)
-	guide_label=label_at(self,game.notice if game.notice!="" else "左クリック：詳細 / Shift＋クリック：倉庫⇔所持品 / ドラッグ：光る収納へ / 1枠1点",Rect2(28,613,1224,24),15,INK)
+	guide_label=label_at(self,game.notice if game.notice!="" else "左クリック：詳細 / Shift＋クリック：倉庫⇔所持品 / ドラッグ：光る収納へ / コインは数量指定可",Rect2(28,613,1224,24),15,INK)
 	bag_scroll.set_deferred("scroll_vertical",game.warehouse_state.get("bag_scroll",0))
 	grid_scroll.set_deferred("scroll_vertical",game.warehouse_state.get("grid_scroll",0))
 	cloth_scroll.set_deferred("scroll_vertical",game.warehouse_state.get("cloth_scroll",0))
@@ -180,9 +183,13 @@ func build_details(p: Control) -> void:
 	label_at(p,"所持数 %d     倉庫内数 %d"%[d.carried,d.stored],Rect2(20,151,310,28),17)
 	var paper:=ColorRect.new(); paper.position=Vector2(18,190); paper.size=Vector2(312,73); paper.color=Color("c4b28a"); paper.mouse_filter=Control.MOUSE_FILTER_IGNORE; p.add_child(paper)
 	var desc:=label_at(p,d.description,Rect2(26,196,296,62),17,Color("302c22")); desc.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART
+	if game.campaign.items[selected_uid]=="C01":
+		label_at(p,"この束：%d枚 / 1枚=1G"%game.campaign.quantities[selected_uid],Rect2(22,277,304,30),18)
+		var coins:=UISkin.button(p,"数量指定 / 分割・結合",Rect2(22,328,304,44),func():game.open_services("coin",selected_uid,selected_source))
+		coins.set_meta("nav","warehouse-coins")
 	var values: Array=[]
 	if not item.stats.is_empty(): values.append(["現在値",game.item_effects(item,selected_uid)])
-	if item.slot!="": values.append(["耐久度",game.condition_text(selected_uid).replace("耐久 ","")])
+	if item.slot!="": values.append(["耐久度",game.condition_text(selected_uid).replace("耐久 ","")]); values.append(["個体・印",preload("res://ui/item_presenter.gd").profile(game.campaign,game.cfg,selected_uid)])
 	for field in [["使用回数",d.uses],["特殊効果",d.special],["刻印",d.marks]]:
 		if str(field[1]) not in ["","—","未導入"]: values.append(field)
 	for i in values.size():
@@ -224,7 +231,7 @@ func build_actions() -> void:
 func accepts(value: Variant, destination: String, explain: bool=false) -> bool:
 	if not value is Dictionary or value.get("kind")!="dive-item" or value.get("revision")!=game.campaign.revision: return false
 	var reason: String=Storage.reason(game.campaign,value.get("uid",""),value.get("source",""),destination,game.cfg)
-	if explain and is_instance_valid(guide_label): guide_label.text=reason if reason!="" else "離すと%sへ移動します。×1 / 個体・耐久を保持"%{"inventory":"バックパック","warehouse":"倉庫","cloth":"風呂敷"}[destination]
+	if explain and is_instance_valid(guide_label): guide_label.text=reason if reason!="" else "離すと%sへ全量移動します。数量・個体・耐久を保持"%{"inventory":"バックパック","warehouse":"倉庫","cloth":"風呂敷"}[destination]
 	return reason==""
 func move_item(uid: String, source: String, destination: String, revision: int) -> void:
 	remember_scroll()

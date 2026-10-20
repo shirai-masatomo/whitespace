@@ -24,7 +24,7 @@ static func repair_reason(s: Dictionary, cfg: Dictionary, uid: String) -> String
 	if cost<0: return "修理対象外"
 	if cost==0: return "修理不要"
 	if s.phase!="town": return "町で修理できます"
-	if int(s.gold)<cost: return "所持金不足"
+	if E.money(s,s.get("payment_source","inventory"))<cost: return "所持金不足"
 	return ""
 static func comparison(before: Dictionary, after: Dictionary) -> Array:
 	var changed: Array=[]; var same: Array=[]
@@ -33,3 +33,10 @@ static func comparison(before: Dictionary, after: Dictionary) -> Array:
 		if row.delta!=0: changed.append(row)
 		else: same.append(row)
 	return changed+same
+
+static func profile(s: Dictionary, cfg: Dictionary, uid: String) -> String:
+	if not s.has("item_details") or not s.item_details.has(uid): return ""
+	var d: Dictionary=s.item_details[uid]
+	var seals: Array[String]=[]
+	for status in d.seals:seals.append(cfg.progression.seals[status].name)
+	return "個体基礎："+text(d.base_roll)+" / 追加："+(text(d.affix_stats) if not d.affix_stats.is_empty() else "なし")+"\n印 %d枠："%d.seal_slots+("・".join(seals) if not seals.is_empty() else "未加工")+("（破損中は停止）" if s.item_condition[uid].current==0 else "")+" / 入手："+d.origin

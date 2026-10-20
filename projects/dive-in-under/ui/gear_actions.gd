@@ -5,7 +5,7 @@ static func reason(game: Control, payload: Variant, destination: String, target_
 	if not payload is Dictionary or payload.get("kind")!="equipment-item": return "移動できるアイテムを選んでください。"
 	var s: Dictionary=game.campaign
 	if int(payload.get("revision",-1))!=int(s.revision): return "表示が更新されました。もう一度選んでください。"
-	if s.phase not in ["town","explore","reward","event","event_result","treasure"]: return "戦闘中は装備を変更できません。"
+	if s.phase not in ["town","explore","reward","event","event_result","treasure","portal","portal_done"]: return "戦闘中は装備を変更できません。"
 	var source: String=payload.source; var uid: String=payload.uid
 	if destination=="inventory":
 		if source!="equipment" or s.equipment.get(payload.slot,"")!=uid: return "装備枠からバックパックへ移してください。"
@@ -37,6 +37,7 @@ static func compared_hero(game: Control, source: String, uid: String) -> Diction
 		if index>=0:
 			var template: String=preview.pending_rewards[index].id; var slot: String=game.cfg.items[template].slot
 			if slot!="":
+				if preview.has("item_details"): preview.item_details["comparison-only"]=preview.pending_rewards[index].profile.duplicate(true)
 				preview.items["comparison-only"]=template; preview.item_condition["comparison-only"]=E.Condition.fresh(); preview.equipment[slot]="comparison-only"
 	elif uid in preview.inventory:
 		var slot: String=game.cfg.items[preview.items[uid]].slot
