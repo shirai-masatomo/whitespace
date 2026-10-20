@@ -14,9 +14,13 @@ static func cell(parent: Control, game: Control, host: Control, rect: Rect2, sou
 	elif uid!="": template=game.campaign.items.get(uid,"")
 	if template!="":
 		var item: Dictionary=game.cfg.items[template]
-		b.tooltip_text=game.cfg.slots.get(slot,game.cfg.slots.get(item.slot,"素材"))+" / "+item.name+" ×1"
+		b.tooltip_text=game.cfg.slots.get(slot,game.cfg.slots.get(item.slot,"素材"))+" / "+item.name
 		UISkin.picture(b,Items.texture(template,item.slot),Rect2(5,4,rect.size.x-10,rect.size.y-9))
-		var count:=UISkin.label(b,"1",Rect2(rect.size.x-18,rect.size.y-22,15,20),12); count.horizontal_alignment=HORIZONTAL_ALIGNMENT_RIGHT
+		if source!="pending" and item.slot!="" and game.campaign.item_condition.has(uid):
+			var condition: Dictionary=game.campaign.item_condition[uid]
+			var back:=ColorRect.new(); back.color=Color(.015,.04,.055,.94); back.position=Vector2(2,rect.size.y-17); back.size=Vector2(rect.size.x-4,15); back.mouse_filter=Control.MOUSE_FILTER_IGNORE; b.add_child(back)
+			var value:=UISkin.label(b,"耐%d"%int(condition.current),Rect2(3,rect.size.y-18,rect.size.x-6,16),11); value.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER
+			b.tooltip_text+=" / 耐久 %d/%d"%[condition.current,condition.maximum]
 	elif slot!="":
 		var silhouette:=Control.new(); silhouette.set_script(Silhouette); silhouette.slot=slot; silhouette.position=Vector2.ONE*10; silhouette.size=rect.size-Vector2.ONE*20; b.add_child(silhouette); b.tooltip_text=game.cfg.slots[slot]+" / 未装備"
 	else: b.tooltip_text="バックパック / 空き枠"

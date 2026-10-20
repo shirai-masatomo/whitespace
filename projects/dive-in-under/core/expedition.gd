@@ -124,7 +124,8 @@ static func hero(s: Dictionary, cfg: Dictionary) -> Dictionary:
 	for key in STATS: h[key] = int(cfg.initial[key]) + (level-1)*int(cfg.growth[key])
 	for uid in s.equipment.values():
 		if uid == "": continue
-		for key in cfg.items[s.items[uid]].stats: h[key] += Condition.bonus(s,uid,int(cfg.items[s.items[uid]].stats[key]))
+		var values: Dictionary=Condition.stats(s,uid,cfg)
+		for key in values: h[key] += values[key]
 	return Combat.normalized(h)
 
 static func note(s: Dictionary, value: String) -> void:
@@ -345,6 +346,12 @@ static func act(previous: Dictionary, action: String, expected_revision: int, ar
 					s.highest_floor=int(s.floor)+1; finish(s,"clear","%dFの門番を倒した。次の層域への到達を記録し、町へ帰還する。"%s.floor,cfg)
 				else: finish(s,"return","持ち帰った品を抱え、町への道を戻った。",cfg)
 				s.erase("round_presentation"); changed=true
+		"skip_chest":
+			if Journey.active(s) and s.phase=="treasure":
+				# Only an UNOPENED chest may be skipped without a discard confirmation.
+				s.pending_rewards=[]; s.phase="explore"; note(s,"未開封の宝箱を見送り、先へ進んだ。")
+				if int(s.floor)<int(cfg.journey.public_max_floor): descend(s,data,cfg)
+				changed=true
 		"open_chest":
 			if Journey.active(s) and s.phase=="treasure": s.phase="reward"; changed=true
 		"claim_reward","exchange_reward":

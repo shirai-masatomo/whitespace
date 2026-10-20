@@ -55,6 +55,8 @@ jobs:
           PREVIOUS_HEAD: ${{ github.event.before }}
           CURRENT_HEAD: ${{ github.event.pull_request.head.sha || github.sha }}
         run: |
+          $reviewFixes = Test-Path tools/review-fixes-stage.txt
+          "review_fixes=$($reviewFixes.ToString().ToLowerInvariant())" >> $env:GITHUB_OUTPUT
           $flowOnly = Test-Path tools/flow-stage.txt
           "flow_only=$($flowOnly.ToString().ToLowerInvariant())" >> $env:GITHUB_OUTPUT
           $journeyOnly = Test-Path tools/journey-stage.txt
@@ -185,6 +187,7 @@ jobs:
           $engine = "$PWD/.tools/Godot_v4.7.2-stable_win64_console.exe"
           $entries = @(@('--editor','--import','--quit'),@('--script','tests/test_journey.gd'),@('--script','tests/test_storage.gd'),@('--script','tests/test_equipment_condition.gd'))
           if (Test-Path tools/flow-stage.txt) { $entries += ,@('--script','tests/test_flow.gd') }
+          if (Test-Path tools/review-fixes-stage.txt) { $entries += ,@('--script','tests/test_review_fixes.gd') }
           foreach ($entry in $entries) {
             $label = if ($entry[0] -eq '--editor') { 'import' } else { [IO.Path]::GetFileNameWithoutExtension($entry[1]) }
             $log = "$PWD/artifacts/journey-$label.log"
@@ -196,14 +199,18 @@ jobs:
             Get-Content $log | Select-Object -Last 4
           }
       - name: Export selected UI or journey build
-        if: steps.scope.outputs.integration_only == 'true' && ((steps.scope.outputs.flow_only == 'true' && hashFiles('projects/dive-in-under/tools/flow-ready.txt') != '') || (steps.scope.outputs.flow_only != 'true' && (steps.scope.outputs.journey_only != 'true' || hashFiles('projects/dive-in-under/tools/journey-ready.txt') != '')))
+        if: steps.scope.outputs.integration_only == 'true' && ((steps.scope.outputs.review_fixes == 'true' && hashFiles('projects/dive-in-under/tools/review-fixes-ready.txt') != '') || (steps.scope.outputs.flow_only == 'true' && steps.scope.outputs.review_fixes != 'true' && hashFiles('projects/dive-in-under/tools/flow-ready.txt') != '') || (steps.scope.outputs.flow_only != 'true' && (steps.scope.outputs.journey_only != 'true' || hashFiles('projects/dive-in-under/tools/journey-ready.txt') != '')))
         run: ./dev.ps1 -Task build -GameCommit '${{ github.event.pull_request.head.sha || github.sha }}'
       - name: One normal journey and focused safety fixtures in isolated exported EXE
         if: steps.scope.outputs.journey_only == 'true' && steps.scope.outputs.flow_only != 'true' && hashFiles('projects/dive-in-under/tools/journey-ready.txt') != ''
         timeout-minutes: 6
         run: ./tools/journey_review.ps1
+      - name: Review defects and presentation, one focused isolated EXE
+        if: steps.scope.outputs.review_fixes == 'true' && hashFiles('projects/dive-in-under/tools/review-fixes-ready.txt') != ''
+        timeout-minutes: 3
+        run: ./tools/review_fixes.ps1
       - name: Focused exploration controls in one isolated exported EXE
-        if: steps.scope.outputs.flow_only == 'true' && hashFiles('projects/dive-in-under/tools/flow-ready.txt') != ''
+        if: steps.scope.outputs.flow_only == 'true' && steps.scope.outputs.review_fixes != 'true' && hashFiles('projects/dive-in-under/tools/flow-ready.txt') != ''
         timeout-minutes: 3
         run: ./tools/flow_review.ps1
       - name: Isolated session UI, transitions, comparison screenshots and fresh restart
@@ -239,6 +246,9 @@ jobs:
         with:
           name: DiveInUnder-foundation-evidence
           path: |
+            projects/dive-in-under/artifacts/review-fixes/**/*.png
+            projects/dive-in-under/artifacts/review-fixes/**/*.json
+            projects/dive-in-under/artifacts/review-fixes/**/*.log
             projects/dive-in-under/artifacts/flow/**/*.png
             projects/dive-in-under/artifacts/flow/**/*.json
             projects/dive-in-under/artifacts/flow/**/*.log

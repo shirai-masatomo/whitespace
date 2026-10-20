@@ -96,9 +96,9 @@ func build_list(p: Control, source: String, r: Rect2) -> ScrollContainer:
 		var b:=Button.new(); b.set_script(preload("res://ui/warehouse_item.gd")); b.view=self; b.source=source; b.uid=uid; b.custom_minimum_size=Vector2(r.size.x-12,34 if source=="cloth" else 42); b.size_flags_horizontal=Control.SIZE_EXPAND_FILL
 		UISkin.quiet_button(b,uid==selected_uid); box.add_child(b)
 		icon_at(b,item.slot,Rect2(5,0,32,32) if source=="cloth" else Rect2(5,2,36,36),game.campaign.items[uid])
-		var name_label:=label_at(b,Catalog.name_of(item),Rect2(46,0,r.size.x-100,32 if source=="cloth" else 36),17)
+		var name_label:=label_at(b,Catalog.name_of(item),Rect2(46,0,r.size.x-118,32 if source=="cloth" else 36),17)
 		name_label.text_overrun_behavior=TextServer.OVERRUN_TRIM_ELLIPSIS
-		label_at(b,"×1",Rect2(r.size.x-51,0,30,32 if source=="cloth" else 34),16,MUTED)
+		if item.slot!="": label_at(b,"耐%d"%int(game.campaign.item_condition[uid].current),Rect2(r.size.x-65,0,55,32 if source=="cloth" else 34),13,MUTED)
 		b.tooltip_text=Catalog.name_of(item)+" / "+game.condition_text(uid)
 		b.pressed.connect(func(): if not Input.is_key_pressed(KEY_SHIFT): select_item(source,uid))
 		rows[uid]=b
@@ -146,11 +146,11 @@ func build() -> void:
 		visible_items.append(uid)
 		var tile:=Button.new(); tile.set_script(preload("res://ui/warehouse_item.gd")); tile.view=self; tile.source="warehouse"; tile.uid=uid; tile.custom_minimum_size=Vector2(84,112); skin(tile,uid==selected_uid); tile_skin(tile,uid==selected_uid); grid.add_child(tile)
 		icon_at(tile,item.slot,Rect2(14,10,56,52),game.campaign.items[uid])
-		label_at(tile,"×1",Rect2(50,58,24,18),13)
+		if item.slot!="": label_at(tile,"耐%d"%int(game.campaign.item_condition[uid].current),Rect2(22,58,52,18),12)
 		var title:=label_at(tile,Catalog.name_of(item),Rect2(10,76,64,22),12,INK); UISkin.fit_name(title,Catalog.name_of(item),64); title.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER
 		if item.slot!="":
 			var bar:=ColorRect.new(); bar.position=Vector2(10,101); bar.size=Vector2(64.0*game.campaign.item_condition[uid].current/100,2); bar.color=Color("72b8a1") if game.campaign.item_condition[uid].current>0 else Color("a95646"); bar.mouse_filter=Control.MOUSE_FILTER_IGNORE; tile.add_child(bar)
-		tile.tooltip_text=Catalog.name_of(item)+" ×1\n"+game.condition_text(uid)
+		tile.tooltip_text=Catalog.name_of(item)+"\n"+game.condition_text(uid)
 		tile.pressed.connect(func(): if not Input.is_key_pressed(KEY_SHIFT): select_item("warehouse",uid)); rows[uid]=tile
 	if visible_items.is_empty(): label_at(center,"この分類にアイテムはありません",Rect2(40,230,500,32),19,MUTED)
 	label_at(center,"容量制限なし  ·  1枠1点 / 個別の耐久を保持",Rect2(28,474,524,22),14,MUTED)
@@ -181,7 +181,7 @@ func build_details(p: Control) -> void:
 	var paper:=ColorRect.new(); paper.position=Vector2(18,190); paper.size=Vector2(312,73); paper.color=Color("c4b28a"); paper.mouse_filter=Control.MOUSE_FILTER_IGNORE; p.add_child(paper)
 	var desc:=label_at(p,d.description,Rect2(26,196,296,62),17,Color("302c22")); desc.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART
 	var values: Array=[]
-	if not item.stats.is_empty(): values.append(["性能",game.item_effects(item,selected_uid)])
+	if not item.stats.is_empty(): values.append(["現在値",game.item_effects(item,selected_uid)])
 	if item.slot!="": values.append(["耐久度",game.condition_text(selected_uid).replace("耐久 ","")])
 	for field in [["使用回数",d.uses],["特殊効果",d.special],["刻印",d.marks]]:
 		if str(field[1]) not in ["","—","未導入"]: values.append(field)

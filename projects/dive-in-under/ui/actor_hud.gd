@@ -26,7 +26,7 @@ func _process(_delta: float) -> void:
 func refresh() -> void:
 	var unit: Dictionary=host.battle[side]
 	visible=unit.hp>0; body_pick.visible=visible
-	name_label.text=unit.name; hp.text="%d / %d"%[unit.hp,unit.max_hp]; bar.value=unit.hp; bar.max_value=unit.max_hp
+	name_label.text=unit.name+" Lv.%d"%int(unit.level); hp.text="%d / %d"%[unit.hp,unit.max_hp]; bar.value=unit.hp; bar.max_value=unit.max_hp
 func visual_audit() -> Dictionary:
 	return {"side":side,"visible":visible,"rect":str(get_global_rect()),"body_rect":str(body_pick.get_global_rect()),"hp":hp.text}
 

@@ -72,10 +72,10 @@ try {
         New-Item -ItemType Directory -Force $build | Out-Null
         Set-Content (Join-Path $project 'build/.gdignore') ''
         Run-Godot 'export' @('--export-release','Windows Desktop',(Join-Path $build 'DiveInUnder.exe'))
-        Copy-Item (Join-Path $project 'tools/PLAY.txt') $build
         Copy-Item (Join-Path $project 'assets/licenses/GODOT_LICENSE.txt') $build
         Copy-Item (Join-Path $project 'assets/licenses/GODOT_COPYRIGHT.txt') $build
         $appVersion = [regex]::Match((Get-Content (Join-Path $project 'project.godot') -Raw),'config/version="([^"]+)"').Groups[1].Value
+        (Get-Content (Join-Path $project 'tools/PLAY.txt') -Raw).Replace('{{VERSION}}',$appVersion) | Set-Content (Join-Path $build 'PLAY.txt') -Encoding utf8
         @{ version=$appVersion; game_commit=$GameCommit; engine=$version.Trim(); data_version=(Get-Content (Join-Path $project 'data/v1/balance.json') -Raw | ConvertFrom-Json).data_version; campaign_config_version=(Get-Content (Join-Path $project 'data/v1/expedition.json') -Raw | ConvertFrom-Json).config_version } | ConvertTo-Json | Set-Content (Join-Path $build 'BUILD.json') -Encoding utf8
         Compress-Archive -Path (Join-Path $build '*') -DestinationPath (Join-Path $project 'build/DiveInUnder-foundation-windows-x64.zip') -Force
         Set-Content (Join-Path $project 'build/candidate.txt') $relativeBuild -Encoding ascii

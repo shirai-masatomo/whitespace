@@ -9,7 +9,7 @@ func _gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index==MOUSE_BUTTON_LEFT and event.pressed and event.double_click:
 		accept_event(); host.call_deferred("activate_item",source,uid,slot)
 func _get_drag_data(_at: Vector2) -> Variant:
-	if uid=="": return null
+	if uid=="" or is_instance_valid(game.modal_owner): return null
 	var payload: Dictionary={"kind":"equipment-item","source":source,"uid":uid,"slot":slot,"revision":int(game.campaign.revision)}
 	var preview:=Label.new(); preview.text=tooltip_text; preview.add_theme_font_size_override("font_size",16)
 	set_drag_preview(preview); game.gear_drag=payload; return payload

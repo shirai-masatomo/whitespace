@@ -23,13 +23,13 @@ static func effects(unit: Dictionary, rules: Dictionary) -> Array:
 	var rows: Array=[]
 	for id in unit.get("statuses",{}):
 		var effect: Dictionary=unit.statuses[id]
-		var text: String={"poison":"自身の行動機会の開始時にHPを%d失う。"%int(effect.potency),"blind":"命中率が%dポイント低下する。"%roundi(float(effect.potency)*100),"paralysis":"自身の行動機会を失う。"}.get(id,"付与中の状態。")
+		var text: String={"poison":"自分の行動が来るたび、最初にHPを%d失う。"%int(effect.potency),"blind":"命中率が%dポイント低下する。"%roundi(float(effect.potency)*100),"paralysis":"自分の行動ができなくなる。"}.get(id,"付与中の状態。")
 		rows.append({"id":id,"name":EFFECT_NAMES.get(id,id),"remaining":int(effect.remaining),"text":text,"skill":effect.skill})
 	if unit.get("defense_until",-1)>=0:
 		rows.append({"id":"defense","name":"防御態勢","remaining":maxi(0,int(unit.defense_until)-int(unit.action_count)),"text":"防御力が%d%%上昇する。"%roundi(float(rules.skills.S105.def_bonus)*100),"skill":"S105"})
 	return rows
 static func effect_detail(effect: Dictionary, data: Dictionary) -> String:
-	return "%s\n\n残り %d 回の自身の行動機会。\n発生元：%s\n\n残り期間はラウンド数ではなく、このキャラクターの行動機会を基準に数える。"%[effect.text,effect.remaining,data.rules.skills.get(effect.skill,{}).get("name",effect.skill)]
+	return "%s\n\n自分の行動あと%d回分。\n発生元：%s\n\n残りはラウンド数ではなく、自分の行動が来るたびに数える。行動できない回も含む。"%[effect.text,effect.remaining,data.rules.skills.get(effect.skill,{}).get("name",effect.skill)]
 static func profile() -> Dictionary:
 	var value=JSON.parse_string(FileAccess.get_file_as_string("res://data/v1/hero-profile.json"))
 	return value.facts if value is Dictionary and value.get("schema_version")==1 else {}

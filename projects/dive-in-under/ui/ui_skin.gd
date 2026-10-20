@@ -21,7 +21,7 @@ static func panel(parent: Node, r: Rect2, title: String="", paper: bool=false) -
 	if paper: Art.paper(c,Rect2(10,10,r.size.x-20,r.size.y-20))
 	if title!="":
 		if not paper: Art.paper(c,Rect2(12,10,r.size.x-24,34))
-		label(c,title,Rect2(23,12,r.size.x-46,30),20,DARK)
+		c.set_meta("heading_label",label(c,title,Rect2(23,12,r.size.x-46,30),20,DARK))
 	return c
 static func button(parent: Node, text: String, r: Rect2, call: Callable, primary: bool=false) -> Button:
 	var b:=Button.new(); b.text=text; b.position=r.position; b.size=r.size; b.pressed.connect(call); parent.add_child(b)

@@ -27,6 +27,12 @@ var ui_block_until:=0
 var last_e_down: int=-1000
 var e_held:=false
 var primary_button: Button
+var secondary_button: Button
+var modal_owner: Control
+var x_held:=false
+var last_x_down: int=-1000
+var flow_memory: Dictionary={}
+var return_after_drag_cancel:=false
 var gear_drag: Dictionary={}
 var status_memory: Dictionary={}
 var equipment_candidate: String=""
@@ -61,7 +67,7 @@ var campaign_seed := 123
 const CampaignReplay = preload("res://ui/campaign_replay.gd")
 
 func initialize_game() -> void:
-	get_window().title="Dive In Under 0.8.0"
+	get_window().title="Dive In Under "+str(ProjectSettings.get_setting("application/config/version"))
 	Engine.max_fps=60
 	legacy_persistence_mode=smoke_dir!="" and "--legacy-persistence-check" in OS.get_cmdline_user_args()
 	cfg=Expedition.load_config()
@@ -97,7 +103,7 @@ func _notification(what: int) -> void:
 		get_tree().quit()
 
 func show_title() -> void:
-	ui_epoch+=1; primary_button=null
+	ui_epoch+=1; primary_button=null; secondary_button=null; modal_owner=null
 	cancel_presentation(); intro_active=false; field_equipment=false
 	if is_instance_valid(dungeon_music): dungeon_music.stop(); dungeon_music_path=""
 	route_map_open=false
@@ -158,7 +164,7 @@ func request_new() -> void:
 
 func start_new() -> void:
 	if not legacy_persistence_mode:
-		cfg=Expedition.load_config(); campaign=Expedition.fresh(cfg,campaign_seed if smoke_dir!="" else int(Time.get_ticks_usec()%2147483647))
+		flow_memory={}; cfg=Expedition.load_config(); campaign=Expedition.fresh(cfg,campaign_seed if smoke_dir!="" else int(Time.get_ticks_usec()%2147483647))
 		Expedition.Journey.enable(campaign)
 		campaign.phase="town"; campaign.trips=0; town_page="hub"; session_departed=false; warehouse_state={}; auto_play=true; notice=""; show_campaign(); return
 	var error: String=save_store.preserve_current()
@@ -253,7 +259,8 @@ func show_play_view(mode: String) -> void:
 	for side in ["left","right","top","bottom"]: screen.add_theme_constant_override("margin_"+side,0)
 	play_view=Control.new(); play_view.set_script(preload("res://ui/play_view.gd")); play_view.game=self; play_view.mode=mode; screen.add_child(play_view)
 func show_campaign() -> void:
-	ui_epoch+=1; primary_button=null
+	remember_flow()
+	ui_epoch+=1; primary_button=null; secondary_button=null; modal_owner=null
 	if campaign.get("phase") in ["result","town"]:
 		route_map_open=false; field_equipment=false; field_status=false
 		if not presenting: presentation_battle={}
@@ -453,22 +460,30 @@ func repair_button(uid: String) -> Button:
 	return b
 
 func item_effects(item: Dictionary, uid: String="") -> String:
-	var effects: Array[String] = []
-	for key in item.stats:
-		effects.append("%s %+d" % [{"max_hp":"HP","max_sp":"SP","atk":"ATK","def":"DEF","spd":"SPD"}[key],Expedition.Condition.bonus(campaign,uid,int(item.stats[key])) if uid!="" else int(item.stats[key])])
-	return " / ".join(effects)
+	return preload("res://ui/item_presenter.gd").current(campaign,cfg,uid) if uid!="" else preload("res://ui/item_presenter.gd").text(item.stats)
 
 func open_town_page(page: String) -> void:
 	town_page=page; show_campaign()
 
 func open_status() -> void:
+	if is_instance_valid(modal_owner): return
 	if campaign.phase=="town":
-		status_return_page=town_page; open_town_page("status")
+		if town_page=="status": return
+		status_return_page=town_page if town_page in ["hub","equipment","warehouse"] else "hub"
+		open_town_page("status")
 	else:
+		if field_status: return
 		field_status=true; play_timer.stop(); cancel_presentation(); show_campaign()
 func close_status() -> void:
 	if field_status: field_status=false; show_campaign()
-	else: open_town_page(status_return_page)
+	else: open_town_page(status_return_page if status_return_page in ["hub","equipment","warehouse"] else "hub")
+func remember_flow() -> void:
+	if not is_instance_valid(play_view) or not play_view.is_inside_tree(): return
+	for child in play_view.get_children():
+		if child.has_method("save_ui_state"): child.save_ui_state()
+func toggle_auto_battle() -> void:
+	if campaign.get("phase")!="battle" and not presenting: return
+	auto_play=not auto_play; play_timer.stop(); cancel_presentation(); show_campaign()
 
 func show_town_hub(root: VBoxContainer) -> void:
 	var welcome:=column(root,700)
@@ -531,6 +546,8 @@ func show_equipment(root: VBoxContainer) -> void:
 	var depart:=command("HP/SP回復済み  →  もう一度地下へ","depart"); root.add_child(depart)
 
 func smoke(quit_on_finish: bool = true) -> void:
+	if "--review-fixes" in OS.get_cmdline_user_args():
+		await preload("res://ui/review_fixes.gd").run(self); return
 	if "--flow-review" in OS.get_cmdline_user_args():
 		await preload("res://ui/flow_review.gd").run(self); return
 	if "--journey-review" in OS.get_cmdline_user_args():
@@ -663,34 +680,75 @@ func find_button(node: Node, label: String) -> Button:
 
 func _input(event: InputEvent) -> void:
 	if legacy_persistence_mode: return
-	if event is InputEventKey:
-		var code: int=event.physical_keycode if event.physical_keycode else event.keycode
-		if code==KEY_E:
-			get_viewport().set_input_as_handled()
-			if not event.pressed: e_held=false; return
-			if event.echo or e_held: return
-			e_held=true
-			var now: int=Time.get_ticks_msec(); var quiet: bool=now-last_e_down>=500; last_e_down=now
-			if quiet and now>=ui_block_until and is_instance_valid(primary_button) and not primary_button.disabled and primary_button.is_visible_in_tree():
-				primary_button.emit_signal("pressed")
-			return
-		if event.pressed and not event.echo and not field_status and not field_equipment and code in [KEY_I,KEY_C] and ui_mode=="campaign":
-			get_viewport().set_input_as_handled()
-			if Time.get_ticks_msec()<ui_block_until or route_map_open: return
-			ui_block_until=Time.get_ticks_msec()+360
-			call_deferred("open_field_equipment" if code==KEY_I else "open_status"); return
-		if code==KEY_SPACE and (campaign.get("phase")=="battle" or presenting):
-			get_viewport().set_input_as_handled()
+	var viewport:=get_viewport()
+	var now: int=Time.get_ticks_msec()
+	var code: int=0
+	if event is InputEventKey: code=event.physical_keycode if event.physical_keycode else event.keycode
+	# Drag cancellation wins over ALL scene-level right-click/X actions.
+	if viewport.gui_is_dragging() and ((event is InputEventMouseButton and event.pressed and event.button_index==MOUSE_BUTTON_RIGHT) or (event is InputEventKey and event.pressed and code in [KEY_ESCAPE,KEY_X])):
+		viewport.set_input_as_handled(); viewport.gui_cancel_drag(); gear_drag={}; ui_block_until=now+360
+		if code==KEY_X: x_held=true; last_x_down=now
+		return
+	if event is InputEventKey and not event.pressed:
+		if code==KEY_E: e_held=false
+		if code==KEY_X: x_held=false
+	if is_instance_valid(modal_owner) and modal_owner.is_inside_tree():
+		if event is InputEventKey:
+			viewport.set_input_as_handled()
 			if event.pressed and not event.echo:
-				auto_play=not auto_play; play_timer.stop(); cancel_presentation(); call_deferred("show_campaign")
+				if code==KEY_X:
+					if x_held: return
+					x_held=true; last_x_down=now
+				if code==KEY_E: e_held=true; last_e_down=now
+				modal_owner.modal_key(code,event.shift_pressed)
+			return
+		if event is InputEventMouseButton and event.button_index==MOUSE_BUTTON_RIGHT:
+			viewport.set_input_as_handled()
+			if event.pressed and not event.double_click: modal_owner.call_deferred("cancel_modal")
+			return
+	if event is InputEventMouseButton and event.pressed:
+		if event.button_index in [MOUSE_BUTTON_LEFT,MOUSE_BUTTON_RIGHT] and (now<ui_block_until or event.double_click):
+			# Item double-click is a single intended equipment gesture, not navigation.
+			var hovered:=viewport.gui_get_hovered_control()
+			if event.button_index==MOUSE_BUTTON_LEFT and event.double_click and now>=ui_block_until and is_instance_valid(hovered) and hovered.has_meta("item_source"): return
+			viewport.set_input_as_handled(); return
+		if event.button_index==MOUSE_BUTTON_RIGHT:
+			viewport.set_input_as_handled()
+			if route_map_open:
+				for child in play_view.get_children():
+					if child.has_method("close_routes"): child.call_deferred("close_routes")
+			elif now-last_x_down>=500 and is_instance_valid(secondary_button):
+				last_x_down=now; secondary_button.emit_signal("pressed")
+			return
+	if event is InputEventKey:
+		if code in [KEY_E,KEY_X]:
+			viewport.set_input_as_handled()
+			if not event.pressed: return
+			if event.echo or (e_held if code==KEY_E else x_held): return
+			var previous: int=last_e_down if code==KEY_E else last_x_down
+			if code==KEY_E: e_held=true; last_e_down=now
+			else: x_held=true; last_x_down=now
+			var b: Button=primary_button if code==KEY_E else secondary_button
+			if now-previous>=500 and now>=ui_block_until and is_instance_valid(b) and not b.disabled and b.is_visible_in_tree(): b.emit_signal("pressed")
+			return
+		if event.pressed and not event.echo and code in [KEY_I,KEY_C] and ui_mode=="campaign":
+			viewport.set_input_as_handled()
+			if now<ui_block_until or route_map_open or field_equipment or field_status: return
+			ui_block_until=now+360
+			if code==KEY_C: call_deferred("open_status")
+			elif campaign.get("phase")=="town": call_deferred("open_town_page","equipment")
+			else: call_deferred("open_field_equipment")
+			return
+		if code==KEY_SPACE and (campaign.get("phase")=="battle" or presenting):
+			viewport.set_input_as_handled()
+			if event.pressed and not event.echo: call_deferred("toggle_auto_battle")
 func ui_action(callback: Callable, epoch: int) -> void:
-	# Native pressed callbacks never free the receiving control during event dispatch.
-	# A short quarantine consumes double clicks and destination-screen carry-through.
 	if epoch!=ui_epoch or Time.get_ticks_msec()<ui_block_until: return
-	ui_block_until=Time.get_ticks_msec()+360
-	callback.call_deferred()
+	ui_block_until=Time.get_ticks_msec()+360; callback.call_deferred()
 func set_primary(b: Button) -> void:
 	primary_button=b; b.set_meta("primary_affirmative",true)
+func set_secondary(b: Button) -> void:
+	secondary_button=b; b.set_meta("secondary_affirmative",true)
 func resume_auto_battle() -> void:
 	if campaign.get("phase")=="battle" and not auto_play:
 		auto_play=true; show_campaign()
@@ -703,6 +761,7 @@ func transfer_item(uid: String, source: String, destination: String, revision: i
 	perform("transfer",{"uid":uid,"source":source,"destination":destination},revision)
 
 func open_field_equipment() -> void:
+	if is_instance_valid(modal_owner): return
 	if campaign.get("phase") not in ["explore","reward","treasure","event","event_result"] or presenting: return
 	field_equipment=true; play_timer.stop(); show_campaign()
 func close_equipment() -> void:

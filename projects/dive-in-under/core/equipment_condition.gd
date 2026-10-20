@@ -7,6 +7,12 @@ static func bonus(s: Dictionary, uid: String, base_value: int) -> int:
 	if int(s.schema_version)<4: return base_value
 	var condition: Dictionary=s.item_condition[uid]
 	return roundi(float(base_value)*int(condition.current)/int(condition.maximum))
+static func stats(s: Dictionary, uid: String, cfg: Dictionary, restored: bool=false) -> Dictionary:
+	if not s.items.has(uid): return {}
+	var base: Dictionary=cfg.items[s.items[uid]].stats
+	var result: Dictionary={}
+	for key in base: result[key]=int(base[key]) if restored else bonus(s,uid,int(base[key]))
+	return result
 static func cost(s: Dictionary, uid: String, cfg: Dictionary) -> int:
 	if int(s.schema_version)<4 or not s.items.has(uid) or cfg.items[s.items[uid]].slot=="": return -1
 	var condition: Dictionary=s.item_condition[uid]

@@ -210,7 +210,7 @@ func build_conditions() -> void:
 		var b:=item_button(id,"",Rect2(8+(i%2)*270,100+(i/2)*55,266,49))
 		var symbol:=image_at(b,Symbols.texture(id),Rect2(7,8,32,32)); symbol.modulate.a=1.0 if not active.is_empty() else 0.55
 		label_at(b,Model.EFFECT_NAMES[id],Rect2(46,7,117,32),17)
-		var value:=label_at(b,"残り%d"%active[0].remaining if not active.is_empty() else ("未発動" if id=="defense" else "未付与"),Rect2(166,7,90,32),15,MUTED); value.horizontal_alignment=HORIZONTAL_ALIGNMENT_RIGHT
+		var value:=label_at(b,"行動あと%d回分"%active[0].remaining if not active.is_empty() else ("未発動" if id=="defense" else "未付与"),Rect2(138,7,118,32),13,MUTED); value.horizontal_alignment=HORIZONTAL_ALIGNMENT_RIGHT
 	label_at(central,"属性耐性",Rect2(9,222,525,34),24,GOLD)
 	label_at(central,"属性ごとの耐性は未設定です。",Rect2(12,259,525,26),15,MUTED)
 	var names: Array=["火","水","雷","土","風","光","闇","無"]
@@ -254,7 +254,9 @@ func update_details() -> void:
 			detail_heading(game.cfg.slots[id],Icons.texture(id),"未装備")
 		else:
 			detail_heading(item.name,EquipmentArt.texture(item.template_id,id),game.cfg.slots[id])
-			detail_row("現在の補正",game.item_effects(item.item,item.uid),GOLD)
+			detail_row("現在値",game.item_effects(item.item,item.uid),GOLD)
+			var base: Dictionary=E.Condition.stats(game.campaign,item.uid,game.cfg,true)
+			if base!=E.Condition.stats(game.campaign,item.uid,game.cfg): detail_row("基礎値",preload("res://ui/item_presenter.gd").text(base))
 			detail_row("耐久度","%d / %d"%[item.condition.current,item.condition.maximum])
 			for field in [["特殊効果","special_effects"],["刻印","marks"]]:
 				if item.item.has(field[1]): detail_row(field[0],str(item.item[field[1]]))
@@ -276,7 +278,7 @@ func update_details() -> void:
 		if not found:
 			if id=="current":
 				detail_heading("現在の状態",Symbols.texture("normal"))
-				detail_text("状態異常や防御態勢は付与されていません。" if Model.effects(unit,game.data.rules).is_empty() else "各状態を選ぶと、効果と残りの自身行動機会を確認できます。",18)
+				detail_text("状態異常や防御態勢は付与されていません。" if Model.effects(unit,game.data.rules).is_empty() else "各状態を選ぶと、効果と自分の行動の残り回数を確認できます。",18)
 			else:
 				detail_heading(Model.EFFECT_NAMES[id],Symbols.texture(id),"現在は未発動" if id=="defense" else "現在は未付与")
 				var descriptions: Dictionary={"poison":"自身の行動機会の開始時にHPを失う状態。ダメージ量は付与時の攻撃力を基に決まります。","blind":"命中率が低下する状態。低下量は発生元の技によって決まります。","paralysis":"自身の行動機会を失う状態。","defense":"防御力を上げる自動スキル。条件を満たしたときに発動します。"}
@@ -284,7 +286,7 @@ func update_details() -> void:
 				if id=="defense":
 					var rule: Dictionary=game.data.rules.skills.S105
 					detail_row("消費SP",str(int(rule.sp_cost))); detail_row("防御力","＋%d%%"%roundi(float(rule.def_bonus)*100))
-				detail_text("付与中は、残りの自身行動機会と発生元をここで確認できます。",16,MUTED)
+				detail_text("付与中は、自分の行動の残り回数と発生元をここで確認できます。",16,MUTED)
 		section("属性耐性","火・水・雷・土・風・光・闇・無。属性ごとの耐性は未設定です。")
 	else:
 		if id=="species":
