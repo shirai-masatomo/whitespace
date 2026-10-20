@@ -8,7 +8,7 @@ const Old=preload("res://ui/journey_review.gd")
 const Text=preload("res://ui/status_review.gd")
 const Info=preload("res://ui/item_presenter.gd")
 static func check(game: Control, value: bool, message: String) -> bool:
-	UI.write(game,{"last_check":message,"passed":value,"run_id":game.smoke_run_id,"phase":game.campaign.get("phase",""),"floor":game.campaign.get("floor",0),"ticks_ms":Time.get_ticks_msec()},"review-progress.json")
+	UI.write(game,{"last_check":message,"passed":value,"run_id":game.smoke_run_id,"phase":game.campaign.get("phase",""),"floor":game.campaign.get("floor",0),"ticks_ms":Time.get_ticks_msec(),"primary":game.primary_button.text if is_instance_valid(game.primary_button) else "", "primary_action":game.primary_button.get_meta("campaign_action","") if is_instance_valid(game.primary_button) else ""},"review-progress.json")
 	return game.smoke_check(value,message)
 static func text(game: Control) -> String:
 	return Text.text_in(game.screen)
@@ -16,6 +16,7 @@ static func shot(game: Control, name: String) -> void:
 	await F.wait(game,.12); await game.capture(name+".png")
 static func fixture(game: Control, phase: String="reward", floor_number: int=2) -> void:
 	F.fixture(game); game.campaign.phase=phase; game.campaign.floor=floor_number; game.campaign.highest_floor=floor_number; game.flow_memory={}; game.event_choice=""; game.event_choice_key=""; game.town_page="hub"; game.equipment_candidate=""; game.equipment_focus="head"
+	if phase=="treasure": E.Journey.add_reward(game.campaign,"I02")
 static func right(game: Control, point: Vector2=Vector2(700,400)) -> void:
 	for pressed in [true,false]:
 		var event:=InputEventMouseButton.new(); event.button_index=MOUSE_BUTTON_RIGHT; event.position=point; event.global_position=point; event.pressed=pressed
