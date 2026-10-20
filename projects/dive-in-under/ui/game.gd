@@ -872,6 +872,8 @@ func open_services(mode: String="prepare", uid: String="", source: String="inven
 	if not Expedition.Adventure.active(campaign) or is_instance_valid(modal_owner):return
 	if campaign.phase=="battle" and mode not in ["debug","tactics"]:return
 	if mode=="debug" and not campaign.debug:return
-	service_mode=mode;service_uid=uid;service_source=source;play_timer.stop();attach_services()
+	service_mode=mode;service_uid=uid;service_source=source;play_timer.stop()
+	if mode=="tactics": cancel_presentation();intro_active=false;show_campaign()
+	else: attach_services()
 func attach_services() -> void:
 	var overlay:=Control.new();overlay.set_script(preload("res://ui/tactics_view.gd") if service_mode=="tactics" else preload("res://ui/adventure_services.gd"));overlay.game=self;overlay.mode=service_mode;overlay.uid=service_uid;overlay.source=service_source;screen.add_child(overlay)

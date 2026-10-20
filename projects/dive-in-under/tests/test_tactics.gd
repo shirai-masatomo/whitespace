@@ -107,6 +107,11 @@ func battle_cases() -> void:
 	st.characters.A.rows=[];b.strategy=st;decision=S.decide(b,"A");check(decision.skill=="attack","all rows fail defaults normal attack")
 	b.rules.tactics_ranges.attack="none";check(S.decide(b,"A").skill=="wait","no reachable fallback waits");check(S.targets(b,"A","enemy_back","self").is_empty(),"target choice cannot bypass self range")
 	b.units.A.hp=0;check(S.candidates(b).all(func(id):return id!="A"),"dead ally excluded")
+	var defender: Dictionary=E.hero(E.fresh(cfg,5),cfg);defender.hp=defender.max_hp;defender.spd=100
+	var boss: Dictionary=C.enemy(data,"B10",3);boss.spd=1
+	var guard: Dictionary=C.start(defender,boss,data.rules,9,T.default_set("defense",true));guard.units.enemy.ai_phase=2;S.sync(guard)
+	guard=C.advance(guard);check(guard.units.hero.last_decision.skill=="S105" and guard.units.hero.sp==defender.sp-2 and not guard.log.any(func(e):return e.type=="attack" and e.actor=="hero"),"strategy defense spends own action instead of attacking")
+	guard=C.advance(guard);check(guard.units.enemy.last_decision.label=="強打" and guard.units.enemy.sp==boss.sp-4,"boss actual pattern action and SP match displayed decision")
 func book_cases() -> void:
 	var book: Dictionary=T.initial();var value: Dictionary=T.default_set("custom");value.name="試遊作戦";value.favorite=false
 	check(T.save(book,value)=="" and T.select(book,"custom") and T.active(book).name=="試遊作戦","named squad save select and favorite field")

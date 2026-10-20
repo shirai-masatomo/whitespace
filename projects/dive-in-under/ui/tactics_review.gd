@@ -82,7 +82,10 @@ static func run(game: Control) -> void:
 		if n in [0,1,3,5]:await shot(game,"13-fixture-order-"+str(n+1))
 	if not check(game,order==["Q","B","P","A","C","O"],"Actual distribution six-unit order Q B P A C O"):return
 	var view: Control=F.shell(game);view.select_actor("Q");await shot(game,"14-fixture-selected-enemy-reason")
-	await F.nav(game,"tactics");await shot(game,"15-fixture-squad-strategy-editor");await F.key(game,KEY_ESCAPE)
+	UI.write(game,{"last_check":"about to open squad editor","passed":true,"run_id":game.smoke_run_id},"tactics-progress.json")
+	await F.nav(game,"tactics")
+	if not check(game,game.modal_owner.actor=="B" and game.modal_owner.draft.characters.size()==3,"Squad editor starts at actual first actor B, not absent hero"):return
+	await shot(game,"15-fixture-squad-strategy-editor");await F.key(game,KEY_ESCAPE)
 	game.show_title();await F.wait(game)
 	UI.write(game,{"complete":true,"rendered":true,"version":ProjectSettings.get_setting("application/config/version"),"run_id":game.smoke_run_id,"no_save_store":game.save_store==null,"normal_new_game_and_first_battle":true,"fixtures":["currency_999_split","five_stay_lock","antidote_action","six_unit_order"],"order":order,"strategy_switch_ledger_preserved":true,"exit_button_pressed":true,"user_evaluation":"not_reviewed"},"tactics-review.json")
 	await F.nav(game,"quit")

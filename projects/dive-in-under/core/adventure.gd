@@ -15,7 +15,7 @@ static func configure(cfg: Dictionary) -> Dictionary:
 	for id in rules.events: cfg.events[id]={"name":rules.events[id].name}
 	return cfg
 static func initialize(s: Dictionary, cfg: Dictionary) -> void:
-	s.tactics=Tactics.initial(); s.coin_stack_max=Money.STACK_MAX
+	s.tactics=Tactics.initial(); s.coin_stack_max=int(cfg.progression.coin_stack_max)
 	s.ruleset="adventure-0.9.0"; s.erase("gold"); s.item_rules=cfg.items.duplicate(true); s.affix_rules=cfg.progression.affixes.duplicate(true); s.rng.instance=0
 	s.item_details={}; s.quantities={}; s.auto_remedy={"blind":true,"poison":true,"paralysis":true}; s.payment_source="inventory"
 	s.records={"boss_kills":0,"first_reward_issued":false,"first_reward_claimed":false}; s.debug=false; s.debug_next=""; s.node={}; s.event_counts={}; s.event_target=""
@@ -372,7 +372,7 @@ static func validate(s: Dictionary, _data: Dictionary, cfg: Dictionary) -> Strin
 	for uid in owned:
 		if seen.has(uid) or not s.items.has(uid) or not s.item_details.has(uid) or not s.quantities.has(uid) or not s.item_condition.has(uid): return "個体の重複／欠落"
 		seen[uid]=true
-		if not cfg.items.has(s.items[uid]) or int(s.quantities[uid])<1 or int(s.quantities[uid])>(Money.STACK_MAX if s.items[uid]=="C01" else 1): return "数量不正"
+		if not cfg.items.has(s.items[uid]) or int(s.quantities[uid])<1 or int(s.quantities[uid])>(Money.stack_max(s) if s.items[uid]=="C01" else 1): return "数量不正"
 		if s.item_condition[uid].current<0 or s.item_condition[uid].current>100: return "耐久不正"
 	if seen.size()!=s.items.size() or s.item_details.size()!=seen.size() or s.quantities.size()!=seen.size() or s.item_condition.size()!=seen.size(): return "孤立個体"
 	var tokens: Dictionary={}

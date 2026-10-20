@@ -104,14 +104,20 @@ static func advance(previous: Dictionary) -> Dictionary:
 	s.acted.append(id); var unit: Dictionary=s.units[id]; unit.action_count+=1
 	s.log.append({"type":"opportunity","actor":id,"round":s.round})
 	if c.start_opportunity(s,id):
-		var decision: Dictionary=decide(s,id); var skill_id: String=decision.skill; var target_id: String=decision.target
+		var decision: Dictionary=decide(s,id)
+		var move: Dictionary=c.boss_move(s,id,rng) if unit.has("ai_pattern") else {}
+		if unit.has("ai_pattern"):
+			var available: Array=targets(s,id,"enemy_front","front")
+			decision={"skill":"wait" if move.get("skip",false) or available.is_empty() else "attack","target":available[0] if not available.is_empty() else "","row":-1,"skipped":[]}
+		var skill_id: String=decision.skill; var target_id: String=decision.target
 		decision.label=s.rules.get("skills",{}).get(skill_id,{}).get("name","通常攻撃" if skill_id=="attack" else "待機")
+		if unit.has("ai_pattern"):
+			decision.label=("強打の予告" if int(unit.ai_phase)==2 else "隙を見せている") if move.get("skip",false) else ("強打" if float(move.get("multiplier",1.0))>1.0 else "通常攻撃")
 		decision.target_name=s.units[target_id].name if target_id!="" else "なし"
 		unit.last_decision=decision.duplicate(true)
 		s.log.append({"type":"decision","actor":id,"round":s.round,"decision":decision.duplicate(true),"strategy":s.strategy.get("name","")})
 		if skill_id!="wait":
 			var skill: Dictionary=s.rules.get("skills",{}).get(skill_id,{})
-			var move: Dictionary=c.boss_move(s,id,rng) if unit.has("ai_pattern") else {}
 			if not move.get("skip",false):
 				if unit.has("ai_pattern"): skill_id="attack"; skill={}
 				if skill_id!="attack":
