@@ -35,6 +35,7 @@ func _initialize() -> void:
 	var portal: Dictionary=E.fresh(cfg,456);portal=act(portal,"depart");portal.floor=4;portal.highest_floor=4
 	portal=act(portal,"descend");check(portal.phase=="portal" and portal.floor==5 and portal.battle.is_empty(),"portal before encounter")
 	var return_state: Dictionary=act(portal,"return_ready");check(return_state.phase=="result" and return_state.result.kind=="return","5F return")
+	check(return_state.result.kept.any(func(t):return str(t).begins_with("装備：")),"return result explicitly lists retained equipment")
 	portal=act(portal,"portal_stay");var node: Dictionary=portal.node.duplicate(true);var revision: int=portal.revision;portal=act(portal,"portal_stay");check(portal.node==node and portal.revision==revision,"portal stay cannot reroll")
 	var ten: Dictionary=E.fresh(cfg,789);ten=act(ten,"depart");ten.floor=9;ten.highest_floor=9;ten=act(ten,"descend");ten=act(ten,"return_ready");check(ten.records.boss_kills==0 and not ten.records.first_reward_issued,"10F early return no clear")
 	var early: Dictionary=E.fresh(cfg,1);early=act(early,"depart");early=act(early,"descend");check(act(early,"return_ready")==early,"ordinary floors cannot return")
@@ -103,7 +104,8 @@ func safety_cases() -> void:
 	var ev: Dictionary=E.fresh(cfg,4);ev=act(ev,"depart");ev.floor=7;ev.node={"kind":"event","started":true,"resolved":false};ev.phase="event";ev.event="EV14";ev.item_condition[ev.equipment.head].current=30
 	var c: Dictionary=cfg.progression.events.EV14.choices[0]
 	check(act(ev,"journey_event",{"choice":c.id,"uid":ev.equipment.head})==ev,"unaffordable event leaves cost and effect unchanged")
-	M.credit(ev,4);ev=act(ev,"journey_event",{"choice":c.id,"uid":ev.equipment.head});check(ev.phase=="event_result" and M.amount(ev)==0 and ev.item_condition[ev.equipment.head].current==100,"event payment and repair commit together")
+	M.credit(ev,4);ev=act(ev,"journey_event",{"choice":c.id,"uid":ev.equipment.head});check("バッグ" in ev.event_result.text and not "inventory" in ev.event_result.text,"event names the payment storage in readable Japanese")
+	check(ev.phase=="event_result" and M.amount(ev)==0 and ev.item_condition[ev.equipment.head].current==100,"event payment and repair commit together")
 	check(act(ev,"journey_event",{"choice":c.id})==ev,"event cannot apply twice")
 func gear_score(s: Dictionary, uid: String) -> int:
 	var value: Dictionary=E.Condition.stats(s,uid,cfg)

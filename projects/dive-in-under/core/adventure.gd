@@ -55,6 +55,10 @@ static func finish(s: Dictionary, kind: String, reason: String) -> void:
 			if uid!="": doomed.append(uid)
 		for uid in doomed: lost.append(label(s,uid)); Instances.erase(s,uid)
 		s.deaths+=1; s.hp=0
+	if kind!="death":
+		for uid in s.inventory: kept.append("バッグ："+label(s,uid))
+		for uid in s.equipment.values():
+			if uid!="": kept.append("装備："+label(s,uid))
 	for source in ["cloth","warehouse"]:
 		for uid in s[source]: kept.append(("風呂敷：" if source=="cloth" else "倉庫：")+label(s,uid))
 	kept.append("成長EXP %d（レベル保持）"%s.exp)
@@ -159,7 +163,7 @@ static func event_reason(s: Dictionary, choice: Dictionary, args: Dictionary, cf
 	return ""
 static func resolve_event(s: Dictionary, choice: Dictionary, args: Dictionary, cfg: Dictionary) -> void:
 	var e: GDScript=api(); var old_hp: int=s.hp; var exp: int=0; var result: Array[String]=[]; var cost: Dictionary=choice.cost
-	if cost.has("coin"): Money.pay(s,int(cost.coin),args.get("payment_source",s.payment_source)); result.append("支払：%dG / %s"%[cost.coin,args.get("payment_source",s.payment_source)])
+	if cost.has("coin"): Money.pay(s,int(cost.coin),args.get("payment_source",s.payment_source)); result.append("支払：%dG / %s"%[cost.coin,{"inventory":"バッグ","cloth":"風呂敷"}.get(args.get("payment_source",s.payment_source),"選択した収納")])
 	if cost.has("hp"): s.hp-=int(cost.hp)
 	if cost.has("sp"): s.sp-=int(cost.sp)
 	if cost.has("item"):

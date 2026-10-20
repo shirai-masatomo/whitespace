@@ -196,7 +196,10 @@ func build_portal() -> void:
 	UISkin.picture(center,preload("res://ui/status_symbols.gd").texture("exp"),Rect2(285,78,148,148))
 	label_at(center,"地下 %d F  /  帰還地点"%s.floor,Rect2(58,235,602,45),28,true)
 	label_at(center,("まだ、この階の出来事は始まっていません。\n「居座る」で先へ。「町へ帰還」で成果を持ち帰れます。" if s.phase=="portal" else "この階の出来事は解決済みです。\n帰還するか、左の［E］で続行するか選んでください。"),Rect2(58,299,602,119),23,true)
-	label_at(center,"10Fで居座ると石像のボス戦へ。帰還だけでは討伐になりません。" if s.floor==10 else "次の帰還地点：10F。5Fから再開する機能ではありません。",Rect2(58,430,602,68),18,true)
+	var portal_note: String="次の帰還地点：10F。5Fから再開する機能ではありません。"
+	if s.floor==10:
+		portal_note="10Fで居座ると石像のボス戦へ。帰還だけでは討伐になりません。" if s.phase=="portal" else ("討伐と受領は完了。［E］で突破帰還します。再戦は地上から新しい遠征で。" if s.node.kind=="boss" else "指定した出来事は解決済みです。ボス討伐にはなりません。")
+	label_at(center,portal_note,Rect2(58,430,602,68),18,true)
 	nav(center,"支度を確認 / 状態対策の薬",Rect2(140,530,438,48),func():game.open_services("prepare"),"portal-services")
 	if game.debug_run: nav(center,"デバッグ専用操作",Rect2(390,65,290,36),func():game.open_services("debug"),"debug-services")
 func build_modern_event(event: Dictionary) -> void:

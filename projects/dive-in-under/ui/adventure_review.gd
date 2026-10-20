@@ -99,6 +99,7 @@ static func run(game: Control) -> void:
 	if not check(game,game.campaign.phase=="result" and game.campaign.result.kind=="death" and game.campaign.inventory.is_empty() and game.campaign.equipment.values().all(func(v):return v=="") and M.amount(game.campaign,"cloth")==33 and game.campaign.items.has(stored) and game.campaign.exp==kept_exp and not "G10" in game.campaign.items.values(),"Actual combat death keeps only protected belongings and growth"):return
 	await shot(game,"18-fixture-death-loss-kept");await F.command(game,"town");await F.nav(game,"services");await service(game,"supply")
 	if not check(game,game.campaign.equipment.values().filter(func(v):return v!="").size()==5,"Actual supply action restores minimum five slots"):return
+	if not check(game,"5点支給" in game.notice,"Supply success and quantity visible in the open panel"):return
 	await shot(game,"19-fixture-resupply");await F.key(game,KEY_ESCAPE);await F.key(game,KEY_E);await F.key(game,KEY_SPACE)
 	if not check(game,game.campaign.floor==1 and game.campaign.phase=="battle","Resupply can depart again"):return
 	# Debug-only fresh session and one-floor override, then escape during combat.

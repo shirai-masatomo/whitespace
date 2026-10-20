@@ -207,6 +207,7 @@ func perform(action: String, args: Dictionary, revision: int) -> void:
 	if action=="claim_reward" and Expedition.Adventure.active(campaign):
 		var index: int=Expedition.Journey.reward_index(campaign,args.get("token",""))
 		if index>=0:claimed_template=campaign.pending_rewards[index].id
+	var old_item_count: int=campaign.items.size()
 	var old_journal: Array=campaign.get("journal",[]).duplicate()
 	var candidate:=Expedition.act(campaign,action,revision,args,data,cfg)
 	if candidate==campaign:
@@ -244,6 +245,7 @@ func perform(action: String, args: Dictionary, revision: int) -> void:
 		warehouse_state.uid=args.get("uid","")
 		warehouse_state.source={"deposit":"warehouse","withdraw":"inventory","to_cloth":"cloth"}[action]
 		notice={"deposit":"倉庫へ預けました。","withdraw":"バックパックへ引き出しました。","to_cloth":"父親の風呂敷へ移しました。"}[action]
+	if action=="supply": notice="不足部位へ最低装備を%d点支給しました。既存の装備と風呂敷は変更しません。"%(campaign.items.size()-old_item_count)
 	if action in ["organize","organize_bag"]: notice="選択した順序に整理しました。"
 	if action=="open_chest": preload("res://ui/journey_sound.gd").play(self,330)
 	if action=="transfer": notice="%sへ移しました。数量・個体・耐久を保持"%{"warehouse":"倉庫","inventory":"バックパック","cloth":"父親の風呂敷"}[args.destination]
