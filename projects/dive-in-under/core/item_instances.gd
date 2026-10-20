@@ -28,3 +28,6 @@ static func base(s: Dictionary, uid: String) -> Dictionary:
 	var value: Dictionary=s.item_details[uid].base_roll.duplicate(true)
 	for key in s.item_details[uid].affix_stats: value[key]=int(value.get(key,0))+int(s.item_details[uid].affix_stats[key])
 	return value
+
+static func evaluation_inputs(profile: Dictionary) -> Dictionary:
+	return {"status":"unrated","additional_stats":profile.get("affix_stats",{}).duplicate(true),"special_effects":profile.get("special_effects",[]).duplicate(true),"granted_skills":profile.get("granted_skills",[]).duplicate(true),"seals":profile.get("seals",[]).duplicate(true)}

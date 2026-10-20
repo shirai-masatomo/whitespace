@@ -77,7 +77,7 @@ try {
         $appVersion = [regex]::Match((Get-Content (Join-Path $project 'project.godot') -Raw),'config/version="([^"]+)"').Groups[1].Value
         Copy-Item (Join-Path $project 'tools/Debug.cmd') (Join-Path $build 'Debug.cmd')
         (Get-Content (Join-Path $project 'tools/PLAY.txt') -Raw).Replace('{{VERSION}}',$appVersion) | Set-Content (Join-Path $build 'PLAY.txt') -Encoding utf8
-        @{ version=$appVersion; game_commit=$GameCommit; engine=$version.Trim(); data_version=(Get-Content (Join-Path $project 'data/v1/balance.json') -Raw | ConvertFrom-Json).data_version; campaign_config_version=(Get-Content (Join-Path $project 'data/v1/expedition.json') -Raw | ConvertFrom-Json).config_version } | ConvertTo-Json | Set-Content (Join-Path $build 'BUILD.json') -Encoding utf8
+        @{ version=$appVersion; game_commit=$GameCommit; engine=$version.Trim(); data_version=(Get-Content (Join-Path $project 'data/v1/balance.json') -Raw | ConvertFrom-Json).data_version; campaign_config_version=(Get-Content (Join-Path $project 'data/v1/adventure.json') -Raw | ConvertFrom-Json).version; tactics_config_version=(Get-Content (Join-Path $project 'data/v1/tactics.json') -Raw | ConvertFrom-Json).version } | ConvertTo-Json | Set-Content (Join-Path $build 'BUILD.json') -Encoding utf8
         Compress-Archive -Path (Join-Path $build '*') -DestinationPath (Join-Path $project 'build/DiveInUnder-foundation-windows-x64.zip') -Force
         Set-Content (Join-Path $project 'build/candidate.txt') $relativeBuild -Encoding ascii
         Get-FileHash (Join-Path $project 'build/DiveInUnder-foundation-windows-x64.zip') -Algorithm SHA256 | Format-List

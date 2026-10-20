@@ -49,6 +49,7 @@ static func next_actor(s: Dictionary, rng: RandomNumberGenerator) -> String:
 static func rank(s: Dictionary, id: String) -> String:
 	return s.strategy.get("characters",{}).get(id,{}).get("rank",s.units[id].rank) if id in s.allies else str(s.units[id].rank)
 static func targets(s: Dictionary, id: String, selector: String, range_name: String) -> Array:
+	if range_name not in ["self","front","any"]: return []
 	if range_name=="self": return [id] if selector=="self" else []
 	if selector=="self": return []
 	var other: String="enemies" if id in s.allies else "allies"

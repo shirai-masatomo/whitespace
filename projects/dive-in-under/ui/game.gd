@@ -573,6 +573,8 @@ func show_equipment(root: VBoxContainer) -> void:
 	var depart:=command("HP/SP回復済み  →  もう一度地下へ","depart"); root.add_child(depart)
 
 func smoke(quit_on_finish: bool = true) -> void:
+	if "--tactics-review" in OS.get_cmdline_user_args():
+		await preload("res://ui/tactics_review.gd").run(self); return
 	if "--adventure-review" in OS.get_cmdline_user_args():
 		await preload("res://ui/adventure_review.gd").run(self); return
 	if "--review-fixes" in OS.get_cmdline_user_args():

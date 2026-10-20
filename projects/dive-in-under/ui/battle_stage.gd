@@ -202,6 +202,7 @@ func present_event(event: Dictionary, game: Control) -> void:
 		if event.type=="attack": text=("-%d"%event.damage if event.hit else "MISS")+(" 撃破" if event.get("death",false) else "")
 		elif event.type=="status_damage": text="毒 -%d"%event.damage; color=Color("93cf77")
 		elif event.type=="action_skipped": text="麻痺 / 行動不能"
+		elif event.type=="remedy_used" and event.has("healing"): text="解毒 HP +%d"%event.healing; color=Color("93cf77")
 		elif event.type=="skill": text=game.data.rules.skills[event.skill].name
 		if text!="":
 			var label:=Label.new(); label.text=text; label.add_theme_font_size_override("font_size",24); label.add_theme_color_override("font_color",color); label.add_theme_color_override("font_outline_color",Color("091820")); label.add_theme_constant_override("outline_size",6)

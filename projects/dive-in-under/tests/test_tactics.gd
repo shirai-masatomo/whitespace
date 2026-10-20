@@ -105,7 +105,7 @@ func battle_cases() -> void:
 	b.units.F.hp=0;decision=S.decide(b,"A");check(decision.target=="R","back reachable when no living front")
 	b.units.A.sp=10;b.units.A.skill_cooldowns.S101=4;decision=S.decide(b,"A");check(decision.skipped.any(func(v):return "クールダウン" in v),"cooldown skip")
 	st.characters.A.rows=[];b.strategy=st;decision=S.decide(b,"A");check(decision.skill=="attack","all rows fail defaults normal attack")
-	b.rules.tactics_ranges.attack="none";check(S.targets(b,"A","enemy_back","self").is_empty(),"target choice cannot bypass self range")
+	b.rules.tactics_ranges.attack="none";check(S.decide(b,"A").skill=="wait","no reachable fallback waits");check(S.targets(b,"A","enemy_back","self").is_empty(),"target choice cannot bypass self range")
 	b.units.A.hp=0;check(S.candidates(b).all(func(id):return id!="A"),"dead ally excluded")
 func book_cases() -> void:
 	var book: Dictionary=T.initial();var value: Dictionary=T.default_set("custom");value.name="試遊作戦";value.favorite=false
@@ -117,3 +117,13 @@ func book_cases() -> void:
 	for n in 9:value.characters.hero.rows.append({"skill":"attack","conditions":[],"target":"enemy_front"})
 	check(T.validate(value)!="","eight row limit validated in core")
 	check(T.initial().sets.size()==2,"fresh session resets strategy storage")
+	var session: Dictionary=E.fresh(cfg,40);var set_value: Dictionary=T.default_set("session-test");set_value.name="保存と適用"
+	session=act(session,"tactic_save",{"value":set_value,"apply":true});check(T.active(session.tactics).name=="保存と適用","public transaction saves and selects")
+	session=act(session,"depart");session=act(session,"descend");session=act(session,"round")
+	var before_acted: Array=session.battle.current.acted.duplicate();var counts: Array=session.battle.current.units.values().map(func(u):return u.action_count)
+	session=act(session,"tactic_select",{"id":"defense"});check(session.battle.current.acted==before_acted and session.battle.current.units.values().map(func(u):return u.action_count)==counts,"public switch consumes no extra action and resets no ledger")
+	var st: Dictionary=strategy(["A","B"]);var one: Dictionary=S.start([unit("A",10),unit("B",30)],[unit("O",20)],data.rules,5,st)
+	one=S.advance(one);one.units.B.spd=40;one=S.advance(one);check(one.acted==["O","A"],"faster waiting ally remains gated by specified head")
+	one=S.advance(one);check(one.acted==["O","A","B"],"speed re-evaluation does not break order")
+	var tie: Dictionary=S.start([unit("A",10)],[unit("O",10)],data.rules,9,strategy(["A"]))
+	check(S.advance(tie).acted==S.advance(tie).acted,"same-speed choice deterministic for same seed")

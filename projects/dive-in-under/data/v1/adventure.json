@@ -38,7 +38,8 @@
       "supply": true,
       "seal_slots": 0,
       "art": "A01",
-      "description": "支給品。倉庫・対価・換金には使えない。手元に同じ品がある間は再支給されない。"
+      "description": "支給品。倉庫・対価・換金には使えない。手元に同じ品がある間は再支給されない。",
+      "kind_family": "basic"
     },
     "A02": {
       "name": "冒険者のマント",
@@ -49,7 +50,8 @@
       "supply": true,
       "seal_slots": 1,
       "art": "A02",
-      "description": "支給品。倉庫・対価・換金には使えない。手元に同じ品がある間は再支給されない。"
+      "description": "支給品。倉庫・対価・換金には使えない。手元に同じ品がある間は再支給されない。",
+      "kind_family": "basic"
     },
     "A03": {
       "name": "冒険者の服",
@@ -60,7 +62,8 @@
       "supply": true,
       "seal_slots": 0,
       "art": "A03",
-      "description": "支給品。倉庫・対価・換金には使えない。手元に同じ品がある間は再支給されない。"
+      "description": "支給品。倉庫・対価・換金には使えない。手元に同じ品がある間は再支給されない。",
+      "kind_family": "basic"
     },
     "A04": {
       "name": "冒険者のズボン",
@@ -72,7 +75,8 @@
       "supply": true,
       "seal_slots": 0,
       "art": "A04",
-      "description": "支給品。倉庫・対価・換金には使えない。手元に同じ品がある間は再支給されない。"
+      "description": "支給品。倉庫・対価・換金には使えない。手元に同じ品がある間は再支給されない。",
+      "kind_family": "basic"
     },
     "A05": {
       "name": "冒険者の靴",
@@ -83,7 +87,8 @@
       "supply": false,
       "seal_slots": 0,
       "art": "A05",
-      "description": "足用の装備。今回の初期・再支給5種には含まれない。"
+      "description": "足用の装備。今回の初期・再支給5種には含まれない。",
+      "kind_family": "basic"
     },
     "W01": {
       "name": "風切りの短剣",
@@ -95,7 +100,8 @@
       },
       "seal_slots": 1,
       "art": "A01",
-      "description": "攻撃・防御・行動順の得失を比較して選ぶ装備。個体の性能は生成時に固定。"
+      "description": "攻撃・防御・行動順の得失を比較して選ぶ装備。個体の性能は生成時に固定。",
+      "kind_family": "role"
     },
     "W02": {
       "name": "坑道の重剣",
@@ -106,7 +112,8 @@
       },
       "seal_slots": 1,
       "art": "A01",
-      "description": "攻撃・防御・行動順の得失を比較して選ぶ装備。個体の性能は生成時に固定。"
+      "description": "攻撃・防御・行動順の得失を比較して選ぶ装備。個体の性能は生成時に固定。",
+      "kind_family": "role"
     },
     "W03": {
       "name": "守り手の剣",
@@ -118,7 +125,8 @@
       },
       "seal_slots": 1,
       "art": "A01",
-      "description": "攻撃・防御・行動順の得失を比較して選ぶ装備。個体の性能は生成時に固定。"
+      "description": "攻撃・防御・行動順の得失を比較して選ぶ装備。個体の性能は生成時に固定。",
+      "kind_family": "role"
     },
     "B01": {
       "name": "斥候の上着",
@@ -129,7 +137,8 @@
       },
       "seal_slots": 1,
       "art": "I02",
-      "description": "攻撃・防御・行動順の得失を比較して選ぶ装備。個体の性能は生成時に固定。"
+      "description": "攻撃・防御・行動順の得失を比較して選ぶ装備。個体の性能は生成時に固定。",
+      "kind_family": "role"
     },
     "B02": {
       "name": "坑夫の重衣",
@@ -140,7 +149,8 @@
       },
       "seal_slots": 1,
       "art": "A03",
-      "description": "攻撃・防御・行動順の得失を比較して選ぶ装備。個体の性能は生成時に固定。"
+      "description": "攻撃・防御・行動順の得失を比較して選ぶ装備。個体の性能は生成時に固定。",
+      "kind_family": "role"
     },
     "F01": {
       "name": "鋭刃の指輪",
@@ -151,7 +161,8 @@
       },
       "seal_slots": 1,
       "art": "I05",
-      "description": "攻撃・防御・行動順の得失を比較して選ぶ装備。個体の性能は生成時に固定。"
+      "description": "攻撃・防御・行動順の得失を比較して選ぶ装備。個体の性能は生成時に固定。",
+      "kind_family": "role"
     },
     "G10": {
       "name": "門守の継ぎ輪",
@@ -163,7 +174,8 @@
       },
       "seal_slots": 1,
       "art": "I11",
-      "description": "攻撃・防御・行動順の得失を比較して選ぶ装備。個体の性能は生成時に固定。"
+      "description": "攻撃・防御・行動順の得失を比較して選ぶ装備。個体の性能は生成時に固定。",
+      "kind_family": "dedicated"
     },
     "I10": {
       "name": "補修石",
@@ -222,7 +234,8 @@
       "supply": true,
       "seal_slots": 0,
       "art": "shield",
-      "description": "支給品。倉庫・対価・換金には使えない。手元に同じ品がある間は再支給されない。"
+      "description": "支給品。倉庫・対価・換金には使えない。手元に同じ品がある間は再支給されない。",
+      "kind_family": "basic"
     }
   },
   "affixes": [
@@ -1139,5 +1152,11 @@
       "cooldown_own_actions": 3
     }
   },
-  "processing_enabled": false
+  "processing_enabled": false,
+  "equipment_families": [
+    "basic",
+    "role",
+    "upper",
+    "dedicated"
+  ]
 }
