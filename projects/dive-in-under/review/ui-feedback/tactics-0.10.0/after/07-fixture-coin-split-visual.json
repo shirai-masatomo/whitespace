@@ -1,0 +1,67 @@
+{
+	"controls": [
+		{
+			"rect": "[P: (1096.0, 25.0), S: (150.0, 40.0)]",
+			"text": "G  1000"
+		},
+		{
+			"rect": "[P: (966.0, 100.0), S: (283.0, 32.0)]",
+			"text": "アイテム詳細"
+		},
+		{
+			"rect": "[P: (1032.0, 148.0), S: (212.0, 52.0)]",
+			"text": "コイン"
+		},
+		{
+			"rect": "[P: (1032.0, 202.0), S: (213.0, 28.0)]",
+			"text": "素材 / バックパック"
+		},
+		{
+			"rect": "[P: (936.0, 243.0), S: (310.0, 28.0)]",
+			"text": "所持数 1000     倉庫内数 0"
+		},
+		{
+			"rect": "[P: (942.0, 288.0), S: (296.0, 62.0)]",
+			"text": "1枚1G。1枠99枚まで。支払元は明示して選ぶ。"
+		},
+		{
+			"rect": "[P: (938.0, 369.0), S: (304.0, 30.0)]",
+			"text": "この束：599枚 / 1枚=1G"
+		},
+		{
+			"disabled": false,
+			"focus": false,
+			"font_color": "(0.9333, 0.902, 0.8235, 1.0)",
+			"rect": "[P: (938.0, 420.0), S: (304.0, 44.0)]",
+			"text": "数量指定 / 分割・結合"
+		},
+		{
+			"disabled": false,
+			"focus": false,
+			"font_color": "(0.1882, 0.1608, 0.1176, 1.0)",
+			"rect": "[P: (938.0, 537.0), S: (304.0, 44.0)]",
+			"text": "預ける [Enter]"
+		},
+		{
+			"disabled": false,
+			"focus": false,
+			"font_color": "(0.9098, 0.8902, 0.8078, 1.0)",
+			"rect": "[P: (1024.0, 646.0), S: (240.0, 58.0)]",
+			"text": "戻る"
+		}
+	],
+	"run_id": "2df4cdaf8f0e4e789f44a39b827e91e6",
+	"screenshot": "07-fixture-coin-split.png",
+	"stages": [
+		{
+			"backpack_capacity": 15,
+			"cloth_capacity": 3,
+			"columns": 3,
+			"kind": "warehouse",
+			"no_equipment_commands": true,
+			"selected_source": "inventory",
+			"selected_uid": "item-6",
+			"visible_warehouse_items": 0
+		}
+	]
+}

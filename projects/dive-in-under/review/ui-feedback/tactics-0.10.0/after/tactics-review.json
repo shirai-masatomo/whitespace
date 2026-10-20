@@ -1,0 +1,25 @@
+{
+	"complete": true,
+	"exit_button_pressed": true,
+	"fixtures": [
+		"currency_999_split",
+		"five_stay_lock",
+		"antidote_action",
+		"six_unit_order"
+	],
+	"no_save_store": true,
+	"normal_new_game_and_first_battle": true,
+	"order": [
+		"Q",
+		"B",
+		"P",
+		"A",
+		"C",
+		"O"
+	],
+	"rendered": true,
+	"run_id": "2df4cdaf8f0e4e789f44a39b827e91e6",
+	"strategy_switch_ledger_preserved": true,
+	"user_evaluation": "not_reviewed",
+	"version": "0.10.0"
+}

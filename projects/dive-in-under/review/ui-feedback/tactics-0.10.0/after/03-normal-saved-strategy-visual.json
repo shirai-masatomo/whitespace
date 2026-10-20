@@ -1,0 +1,133 @@
+{
+	"controls": [
+		{
+			"rect": "[P: (1096.0, 27.0), S: (140.0, 32.0)]",
+			"text": "G  0"
+		},
+		{
+			"rect": "[P: (928.0, 190.0), S: (246.0, 27.0)]",
+			"text": "HP  26 / 26"
+		},
+		{
+			"rect": "[P: (928.0, 242.0), S: (246.0, 27.0)]",
+			"text": "SP  4 / 4"
+		},
+		{
+			"disabled": false,
+			"focus": false,
+			"font_color": "(0.1373, 0.1216, 0.1059, 1.0)",
+			"rect": "[P: (868.0, 142.0), S: (154.0, 48.0)]",
+			"text": "お気に入り"
+		},
+		{
+			"rect": "[P: (866.0, 259.0), S: (180.0, 25.0)]",
+			"text": "対象"
+		},
+		{
+			"rect": "[P: (1029.0, 259.0), S: (180.0, 25.0)]",
+			"text": "優先順"
+		},
+		{
+			"disabled": false,
+			"focus": false,
+			"font_color": "(0.1882, 0.1608, 0.1176, 1.0)",
+			"rect": "[P: (866.0, 291.0), S: (155.0, 31.0)]",
+			"text": "自分"
+		},
+		{
+			"disabled": false,
+			"focus": false,
+			"font_color": "(0.9333, 0.902, 0.8235, 1.0)",
+			"rect": "[P: (1029.0, 291.0), S: (50.0, 31.0)]",
+			"text": "↑"
+		},
+		{
+			"disabled": false,
+			"focus": false,
+			"font_color": "(0.9333, 0.902, 0.8235, 1.0)",
+			"rect": "[P: (1084.0, 291.0), S: (50.0, 31.0)]",
+			"text": "↓"
+		},
+		{
+			"disabled": false,
+			"focus": false,
+			"font_color": "(0.9333, 0.902, 0.8235, 1.0)",
+			"rect": "[P: (1139.0, 291.0), S: (50.0, 31.0)]",
+			"text": "×"
+		},
+		{
+			"disabled": false,
+			"focus": false,
+			"font_color": "(0.1882, 0.1608, 0.1176, 1.0)",
+			"rect": "[P: (866.0, 327.0), S: (155.0, 31.0)]",
+			"text": "敵前衛"
+		},
+		{
+			"disabled": false,
+			"focus": false,
+			"font_color": "(0.9333, 0.902, 0.8235, 1.0)",
+			"rect": "[P: (1029.0, 327.0), S: (50.0, 31.0)]",
+			"text": "↑"
+		},
+		{
+			"disabled": false,
+			"focus": false,
+			"font_color": "(0.9333, 0.902, 0.8235, 1.0)",
+			"rect": "[P: (1084.0, 327.0), S: (50.0, 31.0)]",
+			"text": "↓"
+		},
+		{
+			"disabled": false,
+			"focus": false,
+			"font_color": "(0.9333, 0.902, 0.8235, 1.0)",
+			"rect": "[P: (1139.0, 327.0), S: (50.0, 31.0)]",
+			"text": "×"
+		},
+		{
+			"disabled": false,
+			"focus": false,
+			"font_color": "(0.1882, 0.1608, 0.1176, 1.0)",
+			"rect": "[P: (866.0, 363.0), S: (155.0, 31.0)]",
+			"text": "敵前衛"
+		},
+		{
+			"disabled": false,
+			"focus": false,
+			"font_color": "(0.9333, 0.902, 0.8235, 1.0)",
+			"rect": "[P: (1029.0, 363.0), S: (50.0, 31.0)]",
+			"text": "↑"
+		},
+		{
+			"disabled": false,
+			"focus": false,
+			"font_color": "(0.9333, 0.902, 0.8235, 1.0)",
+			"rect": "[P: (1084.0, 363.0), S: (50.0, 31.0)]",
+			"text": "↓"
+		},
+		{
+			"disabled": false,
+			"focus": false,
+			"font_color": "(0.9333, 0.902, 0.8235, 1.0)",
+			"rect": "[P: (1139.0, 363.0), S: (50.0, 31.0)]",
+			"text": "×"
+		},
+		{
+			"disabled": false,
+			"focus": false,
+			"font_color": "(0.9333, 0.902, 0.8235, 1.0)",
+			"rect": "[P: (924.0, 587.0), S: (267.0, 34.0)]",
+			"text": "閉じる［Esc］"
+		}
+	],
+	"run_id": "2df4cdaf8f0e4e789f44a39b827e91e6",
+	"screenshot": "03-normal-saved-strategy.png",
+	"stages": [
+		{
+			"kind": "session-ui",
+			"route": [],
+			"screen": "hub",
+			"session_only": true,
+			"stage_rect": ""
+		}
+	]
+}

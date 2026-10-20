@@ -1,0 +1,109 @@
+{
+  "source_commit": "e4c42721ae13bc8fa125c9e67fa5e7c6dddcef03",
+  "code": "main_reflected",
+  "distribution": "0.10.0_published",
+  "isolated_exe": "verified",
+  "physical_user_pc": "not_run",
+  "user_visual_and_gameplay_evaluation": "not_reviewed",
+  "items": [
+    {
+      "id": "1-coin",
+      "scope": "999枚・分割・結合・収納満杯",
+      "implementation": "実装済み",
+      "verification": "コア確認済み／分割UI確認済み",
+      "image": "after/06-fixture-999-and-one.png"
+    },
+    {
+      "id": "1-portal",
+      "scope": "5F到着前帰還／居座り後不可、次10F",
+      "implementation": "実装済み",
+      "verification": "コア・実EXE確認済み",
+      "image": "after/09-fixture-five-return-locked.png"
+    },
+    {
+      "id": "1-supply",
+      "scope": "初期・支給の剣盾上半身下半身マント5種",
+      "implementation": "実装済み",
+      "verification": "初期実EXE／再支給・保護品重複はコア",
+      "image": "after/01-normal-five-starter.png"
+    },
+    {
+      "id": "1-antidote",
+      "scope": "毒消し草：手番開始・解毒HP3・通常行動",
+      "implementation": "実装済み",
+      "verification": "コア・実EXE確認済み／麻痺併存はコア",
+      "image": "after/11-fixture-antidote-and-action.png"
+    },
+    {
+      "id": "1-instance",
+      "scope": "固定種類基礎値、追加効果・印・技能の分離",
+      "implementation": "実装済み",
+      "verification": "固定・交換・修理をコア確認。新しい例示効果は未追加",
+      "image": null,
+      "evidence": "core.json"
+    },
+    {
+      "id": "1-processing",
+      "scope": "未承認の有料加工を通常UIとアクションで停止",
+      "implementation": "実装済み",
+      "verification": "コードと拒否ケース確認済み",
+      "image": null,
+      "evidence": "core.json"
+    },
+    {
+      "id": "2",
+      "scope": "キャラ別技能・AND条件・対象・優先順／作戦保存切替",
+      "implementation": "実装済み",
+      "verification": "保存・選択・切替はコア／実EXE。全プルダウン・並替えのGUI総当たりは未実施",
+      "image": "after/03-normal-saved-strategy.png"
+    },
+    {
+      "id": "3",
+      "scope": "複数敵味方の前後衛と射程の独立判定",
+      "implementation": "実装済み",
+      "verification": "射程外スキップ・前衛不在はコア、複数表示は実EXE",
+      "image": "after/12-fixture-six-combatants.png"
+    },
+    {
+      "id": "4",
+      "scope": "指定順待機 Q→B→P→A→C→O",
+      "implementation": "実装済み",
+      "verification": "コアと実EXEの6行動で一致。切替済み再行動なし",
+      "image": "after/13-fixture-order-6.png"
+    },
+    {
+      "id": "5",
+      "scope": "多人数の実行・勝敗・報酬基盤",
+      "implementation": "実装済み",
+      "verification": "3対3実EXE。途中敵撃破・全滅報酬はコア。通常加入は未追加",
+      "image": "after/15-fixture-squad-strategy-editor.png"
+    },
+    {
+      "id": "6",
+      "scope": "正本・採用回答・仮値・未決・確認記録",
+      "implementation": "実装済み",
+      "verification": "TACTICS第10節・ITEMS・関連資料を照合",
+      "image": "after/14-fixture-selected-enemy-reason.png"
+    },
+    {
+      "id": "7",
+      "scope": "隔離・時間制限・配布物照合・通常入口",
+      "implementation": "実装済み",
+      "verification": "CI39445866618成功、71件／EXE58,161ms終了0、完了記録あり",
+      "image": "after/04-normal-battle-strategy.png"
+    },
+    {
+      "id": "pending",
+      "scope": "レア度点数・相乗効果・閾値・不朽／加工方法料金／加入内容",
+      "implementation": "保留・未対応",
+      "verification": "確認待ちの仕様は通常へ自動採用しない",
+      "image": null
+    }
+  ],
+  "pending": [
+    "rarity scoring, synergy, thresholds, imperishable effect",
+    "seal processing and fees, natural seal distributions",
+    "normal companion joining content and timing",
+    "human full 10F replay and statistical balance evaluation"
+  ]
+}

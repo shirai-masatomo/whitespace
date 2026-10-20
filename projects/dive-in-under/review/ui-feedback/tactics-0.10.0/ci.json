@@ -1,0 +1,18 @@
+{
+  "run_id": 39445866618,
+  "job_id": 118707543865,
+  "conclusion": "success",
+  "head_sha": "e4c42721ae13bc8fa125c9e67fa5e7c6dddcef03",
+  "version": "0.10.0",
+  "verification_scope": "tactics-0.10.0",
+  "build_artifact_id": 12276981338,
+  "evidence_artifact_id": 12276761331,
+  "build_artifact_sha256": "15d486d7111bf04414a4799a88fdb1806dfe25f6e62d934d4169cd065933df09",
+  "evidence_artifact_sha256": "427159976393105d67ecd81526c4753efeef20206dacfbc057fca7d593e8eee0",
+  "core_checks": 71,
+  "isolated_exe_ms": 58161,
+  "exit_code": 0,
+  "no_local_game_launch": true,
+  "normal_full_10F_ui_replay": false,
+  "human_gameplay_evaluation": "not_reviewed"
+}

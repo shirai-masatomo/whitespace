@@ -1,3 +1,7 @@
+# 通常0.10.0 — 作戦・0.9.0差分
+
+[通常入口と操作](review/current/README.md)／[今回の実画面](review/ui-feedback/tactics-0.10.0/index.html)／[実装・確認・保留](review/ui-feedback/tactics-0.10.0/README.md)。いつもの「入口 / 01 ゲームを起動」から確認版0.10.0。作戦も冒険も終了でリセット。旧保存・旧0.9.0リリースとZIPは保全。以下は以前の版の履歴。
+
 ## 現在の通常入口：0.9.0（2026-10-20）
 
 [起動・版・配布](review/current/README.md) / [装備と再挑戦A〜H・実画面](review/ui-feedback/adventure-0.9.0/index.html) / [操作](review/ui-feedback/adventure-0.9.0/OPERATIONS.md) / [試作採用値](review/ui-feedback/adventure-0.9.0/PROVISIONAL_VALUES.md)。mainで実装。全ロスト・支給・コイン・ポータルを一組で確認して通常入口へ反映。実行ソース7b70a518f8307febcb71c4797aafd1473c876130、CI39418256675成功。コア70確認と隔離実EXE正常終了・22画面。
