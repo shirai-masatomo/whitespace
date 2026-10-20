@@ -1,0 +1,223 @@
+[
+  {
+    "file": "after/00-title-session-notice.png",
+    "sha256": "70a1f0f4bd8f5a17c08ec7319d7b39bcff28c24e66e0149b416cd3ad44c7a40e",
+    "source_commit": "8b92fd85ffab2b8203ed19a5c785471968d52091",
+    "ci_run_id": 39408062823,
+    "run_id": "0bb0d9772ffc4527939c952f9f678e3d",
+    "kind": "actual-exported-game-screenshot",
+    "size": [
+      1280,
+      720
+    ],
+    "generated_reference": false
+  },
+  {
+    "file": "after/01-preparation-returned.png",
+    "sha256": "99fc1965658777c82592d2e6eef0cfdb2b3381dfab2e7cd636af306971dde049",
+    "source_commit": "8b92fd85ffab2b8203ed19a5c785471968d52091",
+    "ci_run_id": 39408062823,
+    "run_id": "0bb0d9772ffc4527939c952f9f678e3d",
+    "kind": "actual-exported-game-screenshot",
+    "size": [
+      1280,
+      720
+    ],
+    "generated_reference": false
+  },
+  {
+    "file": "after/02-normal-battle-level.png",
+    "sha256": "9b9ad813f260cbc0a513d91b6bd3711501e255bad21526ca4a8597e52a87f99e",
+    "source_commit": "8b92fd85ffab2b8203ed19a5c785471968d52091",
+    "ci_run_id": 39408062823,
+    "run_id": "0bb0d9772ffc4527939c952f9f678e3d",
+    "kind": "actual-exported-game-screenshot",
+    "size": [
+      1280,
+      720
+    ],
+    "generated_reference": false
+  },
+  {
+    "file": "after/03-owned-current-comparison.png",
+    "sha256": "c40b634246bc0495f75353c1bddff30c8f97663bc36d3fda6b900ece62d9e895",
+    "source_commit": "8b92fd85ffab2b8203ed19a5c785471968d52091",
+    "ci_run_id": 39408062823,
+    "run_id": "0bb0d9772ffc4527939c952f9f678e3d",
+    "kind": "actual-exported-game-screenshot",
+    "size": [
+      1280,
+      720
+    ],
+    "generated_reference": false
+  },
+  {
+    "file": "after/04-equipment-current-backed.png",
+    "sha256": "16dc274ebaa0db6303cedf0856fbe9773b89b5a0c1b74e38792d9a077ec84619",
+    "source_commit": "8b92fd85ffab2b8203ed19a5c785471968d52091",
+    "ci_run_id": 39408062823,
+    "run_id": "0bb0d9772ffc4527939c952f9f678e3d",
+    "kind": "actual-exported-game-screenshot",
+    "size": [
+      1280,
+      720
+    ],
+    "generated_reference": false
+  },
+  {
+    "file": "after/05-status-current.png",
+    "sha256": "9c88ecb378807be3f2fc3e2a4edfb02c4759cb0f7f32c11fd860816a1af1c5c9",
+    "source_commit": "8b92fd85ffab2b8203ed19a5c785471968d52091",
+    "ci_run_id": 39408062823,
+    "run_id": "0bb0d9772ffc4527939c952f9f678e3d",
+    "kind": "actual-exported-game-screenshot",
+    "size": [
+      1280,
+      720
+    ],
+    "generated_reference": false
+  },
+  {
+    "file": "after/06-reward-comparison.png",
+    "sha256": "e061dfbf97fe8d643dda5e8d9686c989447c0ad7bb5f386790b619bcb9252b5b",
+    "source_commit": "8b92fd85ffab2b8203ed19a5c785471968d52091",
+    "ci_run_id": 39408062823,
+    "run_id": "0bb0d9772ffc4527939c952f9f678e3d",
+    "kind": "actual-exported-game-screenshot",
+    "size": [
+      1280,
+      720
+    ],
+    "generated_reference": false
+  },
+  {
+    "file": "after/07-chest-left-primary.png",
+    "sha256": "53ed3348beaffc99a21738195488941b32d2a556564ce13edfb1e18ae0abc928",
+    "source_commit": "8b92fd85ffab2b8203ed19a5c785471968d52091",
+    "ci_run_id": 39408062823,
+    "run_id": "0bb0d9772ffc4527939c952f9f678e3d",
+    "kind": "actual-exported-game-screenshot",
+    "size": [
+      1280,
+      720
+    ],
+    "generated_reference": false
+  },
+  {
+    "file": "after/08-simple-event.png",
+    "sha256": "7b4338b9fab056c623e1c33b3f3cdf39b8352cf4c0ca69b537ad16dac918ae84",
+    "source_commit": "8b92fd85ffab2b8203ed19a5c785471968d52091",
+    "ci_run_id": 39408062823,
+    "run_id": "0bb0d9772ffc4527939c952f9f678e3d",
+    "kind": "actual-exported-game-screenshot",
+    "size": [
+      1280,
+      720
+    ],
+    "generated_reference": false
+  },
+  {
+    "file": "after/09-event-result.png",
+    "sha256": "0603c50ec75289e7190a8383812b08fb1b74d4cef194680109cdcf79c33d8907",
+    "source_commit": "8b92fd85ffab2b8203ed19a5c785471968d52091",
+    "ci_run_id": 39408062823,
+    "run_id": "0bb0d9772ffc4527939c952f9f678e3d",
+    "kind": "actual-exported-game-screenshot",
+    "size": [
+      1280,
+      720
+    ],
+    "generated_reference": false
+  },
+  {
+    "file": "after/10-full-reward.png",
+    "sha256": "1275a7dca65b14df5a897ebc561ded6ec44756d8453bf4ffc5574d2b7edc01b7",
+    "source_commit": "8b92fd85ffab2b8203ed19a5c785471968d52091",
+    "ci_run_id": 39408062823,
+    "run_id": "0bb0d9772ffc4527939c952f9f678e3d",
+    "kind": "actual-exported-game-screenshot",
+    "size": [
+      1280,
+      720
+    ],
+    "generated_reference": false
+  },
+  {
+    "file": "after/11-replacement-picker.png",
+    "sha256": "bdc507ea70d52b8838eae835f9d17a5bbfce7dae0131c4d5e523a90c61718da8",
+    "source_commit": "8b92fd85ffab2b8203ed19a5c785471968d52091",
+    "ci_run_id": 39408062823,
+    "run_id": "0bb0d9772ffc4527939c952f9f678e3d",
+    "kind": "actual-exported-game-screenshot",
+    "size": [
+      1280,
+      720
+    ],
+    "generated_reference": false
+  },
+  {
+    "file": "after/12-loss-gain-confirmation.png",
+    "sha256": "31c9be9eaffa3dc5b9dc16f671f47d26e6744608e09a32cbd0ec16b212deb290",
+    "source_commit": "8b92fd85ffab2b8203ed19a5c785471968d52091",
+    "ci_run_id": 39408062823,
+    "run_id": "0bb0d9772ffc4527939c952f9f678e3d",
+    "kind": "actual-exported-game-screenshot",
+    "size": [
+      1280,
+      720
+    ],
+    "generated_reference": false
+  },
+  {
+    "file": "after/13-received-complete.png",
+    "sha256": "403da7fd4274ef1ca56a26ecb5fc699463bb02f3556be66d8513067c853f95ec",
+    "source_commit": "8b92fd85ffab2b8203ed19a5c785471968d52091",
+    "ci_run_id": 39408062823,
+    "run_id": "0bb0d9772ffc4527939c952f9f678e3d",
+    "kind": "actual-exported-game-screenshot",
+    "size": [
+      1280,
+      720
+    ],
+    "generated_reference": false
+  },
+  {
+    "file": "after/14-detail-scroll-kept.png",
+    "sha256": "8588fe019a018f9682c5bdc2729b743c980b2b8460e441bad018f8a7d0e9d2c1",
+    "source_commit": "8b92fd85ffab2b8203ed19a5c785471968d52091",
+    "ci_run_id": 39408062823,
+    "run_id": "0bb0d9772ffc4527939c952f9f678e3d",
+    "kind": "actual-exported-game-screenshot",
+    "size": [
+      1280,
+      720
+    ],
+    "generated_reference": false
+  },
+  {
+    "file": "after/15-map-scroll-kept.png",
+    "sha256": "221a8cbd7e6b40eee7b0551ddd49885257555399ed57a74ab3bd25fafe2bc436",
+    "source_commit": "8b92fd85ffab2b8203ed19a5c785471968d52091",
+    "ci_run_id": 39408062823,
+    "run_id": "0bb0d9772ffc4527939c952f9f678e3d",
+    "kind": "actual-exported-game-screenshot",
+    "size": [
+      1280,
+      720
+    ],
+    "generated_reference": false
+  },
+  {
+    "file": "after/16-repaired-current.png",
+    "sha256": "f7a9fc00321bd91a51f9596d95599a4a5444a70258f04321c40f692546688de2",
+    "source_commit": "8b92fd85ffab2b8203ed19a5c785471968d52091",
+    "ci_run_id": 39408062823,
+    "run_id": "0bb0d9772ffc4527939c952f9f678e3d",
+    "kind": "actual-exported-game-screenshot",
+    "size": [
+      1280,
+      720
+    ],
+    "generated_reference": false
+  }
+]

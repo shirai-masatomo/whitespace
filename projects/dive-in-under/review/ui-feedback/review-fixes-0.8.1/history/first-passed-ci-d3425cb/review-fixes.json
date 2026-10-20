@@ -1,0 +1,22 @@
+{
+	"checks": {
+		"empty_slot_reward_equip": true,
+		"full_replacement": true,
+		"input_carry_and_drag_cancel": true,
+		"left_primary": true,
+		"modal_isolation": true,
+		"scroll_and_target": true,
+		"shared_current": true,
+		"simple_and_complex_input": true,
+		"status_reentry": true,
+		"text_and_repair": true
+	},
+	"complete": true,
+	"exit_button_pressed": true,
+	"no_save_store": true,
+	"normal_departure_space": true,
+	"normal_fresh_status_return": true,
+	"rendered": true,
+	"run_id": "7b50dba0d3fd46519bb6a5a85534c9c5",
+	"version": "0.8.1"
+}

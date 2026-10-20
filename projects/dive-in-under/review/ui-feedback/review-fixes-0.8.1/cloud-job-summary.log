@@ -1,0 +1,11 @@
+2026-10-20T10:27:42.0318604Z HEAD is now at 8b92fd8 Check preserved scroll against the actual content extent
+2026-10-20T10:28:28.2721589Z JOURNEY_TESTS: 58 checks, 0 failures
+2026-10-20T10:28:28.7978304Z STORAGE_TESTS: 16 checks, 0 failures
+2026-10-20T10:28:29.3069665Z EQUIPMENT_CONDITION_TESTS: 39 checks, 0 failures
+2026-10-20T10:28:29.7286285Z FLOW_CORE_OK checks=26
+2026-10-20T10:28:30.1379143Z REVIEW_FIXES_CORE_OK checks=25
+2026-10-20T10:30:02.7194376Z REVIEW_FIXES_EXE_OK: focused review defects, exit 0, 73735 ms.
+2026-10-20T10:30:05.8659540Z Artifact DiveInUnder-foundation-windows-x64.zip successfully finalized. Artifact ID 12257434840
+2026-10-20T10:30:05.8660886Z Artifact DiveInUnder-foundation-windows-x64 has been successfully uploaded! Final size is 72168682 bytes. Artifact ID is 12257434840
+2026-10-20T10:30:07.5463670Z Artifact DiveInUnder-foundation-evidence.zip successfully finalized. Artifact ID 12258245387
+2026-10-20T10:30:07.5465096Z Artifact DiveInUnder-foundation-evidence has been successfully uploaded! Final size is 19591999 bytes. Artifact ID is 12258245387

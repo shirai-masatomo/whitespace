@@ -1,0 +1,27 @@
+{
+	"controls": [
+		{
+			"rect": "[P: (1096.0, 27.0), S: (140.0, 32.0)]",
+			"text": "G  0"
+		},
+		{
+			"rect": "[P: (928.0, 190.0), S: (246.0, 27.0)]",
+			"text": "HP  24 / 24"
+		},
+		{
+			"rect": "[P: (928.0, 242.0), S: (246.0, 27.0)]",
+			"text": "SP  0 / 0"
+		}
+	],
+	"run_id": "0bb0d9772ffc4527939c952f9f678e3d",
+	"screenshot": "01-preparation-returned.png",
+	"stages": [
+		{
+			"kind": "session-ui",
+			"route": [],
+			"screen": "hub",
+			"session_only": true,
+			"stage_rect": ""
+		}
+	]
+}
