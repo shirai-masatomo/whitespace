@@ -744,7 +744,7 @@ func _input(event: InputEvent) -> void:
 				if child.has_method("handle_choice_key") and child.handle_choice_key(code): viewport.set_input_as_handled(); return
 		if event.pressed and not event.echo and code in [KEY_I,KEY_C] and ui_mode=="campaign":
 			viewport.set_input_as_handled()
-			if now<ui_block_until or route_map_open or field_equipment or field_status: return
+			if now<ui_block_until or route_map_open or field_equipment or field_status or (code==KEY_C and campaign.get("phase")=="town" and town_page=="status"): return
 			ui_block_until=now+360
 			if code==KEY_C: call_deferred("open_status")
 			elif campaign.get("phase")=="town": call_deferred("open_town_page","equipment")
