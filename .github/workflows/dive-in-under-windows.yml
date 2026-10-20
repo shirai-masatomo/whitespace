@@ -319,6 +319,7 @@ jobs:
           path: |
             projects/dive-in-under/artifacts/adventure-*.log
             projects/dive-in-under/artifacts/adventure/**/*.json
+            projects/dive-in-under/artifacts/tactics/**/*.json
             projects/dive-in-under/artifacts/adventure/**/*.png
             projects/dive-in-under/artifacts/adventure/**/*.log
           if-no-files-found: warn

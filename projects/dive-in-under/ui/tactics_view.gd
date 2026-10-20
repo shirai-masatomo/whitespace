@@ -1,5 +1,5 @@
 extends Control
-const Skin=preload("res://ui/ui_skin.gd")
+const UISkin=preload("res://ui/ui_skin.gd")
 const T=preload("res://core/tactics.gd")
 const E=preload("res://core/expedition.gd")
 var game: Control
@@ -14,9 +14,9 @@ const SKILLS=["attack","S101","S102","S103","S104","S105"]
 const C_LABELS=["いつでも","HP以下%","SP以上%","自分が毒","敵が強打予告"]
 const TARGET_LABELS=["敵前衛","敵後衛","敵全体から1体","自分"]
 func text(parent: Control, value: String, rect: Rect2, px: int=16) -> Label:
-	return Skin.label(parent,value,rect,px,Skin.DARK,true)
+	return UISkin.label(parent,value,rect,px,UISkin.DARK,true)
 func button(parent: Control, value: String, rect: Rect2, callback: Callable, key: String="") -> Button:
-	var b: Button=Skin.button(parent,value,rect,callback); b.add_theme_font_size_override("font_size",15)
+	var b: Button=UISkin.button(parent,value,rect,callback); b.add_theme_font_size_override("font_size",15)
 	if key!="": b.set_meta("nav",key)
 	return b
 func option(parent: Control, names: Array, chosen: int, rect: Rect2, callback: Callable) -> OptionButton:
@@ -30,7 +30,7 @@ func rebuild() -> void:
 	if is_instance_valid(contents): remove_child(contents); contents.queue_free()
 	contents=Control.new(); contents.size=size; add_child(contents)
 	var shade:=ColorRect.new(); shade.color=Color(0,0,0,.78); shade.size=size; contents.add_child(shade)
-	var panel: Control=Skin.panel(contents,Rect2(24,24,1232,672),"部隊の作戦",true)
+	var panel: Control=UISkin.panel(contents,Rect2(24,24,1232,672),"部隊の作戦",true)
 	var book: Dictionary=game.campaign.tactics; var active: Dictionary=T.active(book)
 	text(panel,"適用中："+active.name+" / 切替：次の未実行行動から・消費なし",Rect2(24,48,1184,27),19)
 	text(panel,"8作戦・1人8行・AND条件2つ / 起動中だけ保存。終了するとリセット。",Rect2(24,79,1184,26),15)

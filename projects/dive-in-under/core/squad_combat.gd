@@ -115,7 +115,7 @@ static func advance(previous: Dictionary) -> Dictionary:
 				if unit.has("ai_pattern"): skill_id="attack"; skill={}
 				if skill_id!="attack":
 					unit.sp-=int(skill.sp_cost); unit.skill_cooldowns[skill_id]=unit.action_count+int(skill.cooldown_own_actions)
-					s.log.append({"type":"skill","actor":id,"skill":skill_id,"sp":unit.sp,"round":s.round})
+					s.log.append({"type":"skill","actor":id,"skill":skill_id,"sp":unit.sp,"round":s.round,"expires_after_action":unit.action_count+int(skill.get("duration_own_actions",0))})
 				if skill_id=="S105": unit.defense_until=unit.action_count+int(skill.duration_own_actions)
 				else:
 					skill=skill.duplicate(true); skill.id=skill_id; strike(s,id,target_id,skill,move,rng)

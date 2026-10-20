@@ -830,7 +830,7 @@ func present_round(record: Dictionary) -> void:
 		if generation!=presentation_generation: return
 		if event.type in ["status_applied","status_removed"]:
 			impact(event); continue
-		if not event.type in ["attack","status_damage","action_skipped","skill"]: continue
+		if not event.type in ["attack","status_damage","action_skipped","skill","remedy_used"]: continue
 		if is_instance_valid(play_view.stage): play_view.stage.present_event(event,self)
 		await get_tree().create_timer(0.30/float(play_speed)).timeout
 		if generation!=presentation_generation: return
@@ -840,6 +840,7 @@ func impact(event: Dictionary) -> void:
 	if not presenting: return
 	var side: String=event.get("target",event.get("actor","hero"))
 	if event.has("target_hp"): presentation_battle[side].hp=event.target_hp
+	if event.has("healing"): presentation_battle[side].hp=mini(int(presentation_battle[side].max_hp),int(presentation_battle[side].hp)+int(event.healing))
 	if event.type=="skill" and event.has("sp"):
 		presentation_battle[event.actor].sp=event.sp
 		if event.skill=="S105":
@@ -850,6 +851,7 @@ func impact(event: Dictionary) -> void:
 		if event.status=="defense": presentation_battle[side].defense_until=-1
 		else: presentation_battle[side].statuses.erase(event.status)
 	if presentation_battle[side].hp<=0: presentation_battle[side].statuses={}; presentation_battle[side].defense_until=-1
+	if presentation_battle.has("units") and presentation_battle.units.has(side): presentation_battle.units[side]=presentation_battle[side]
 	if is_instance_valid(play_view): play_view.refresh_vitals()
 func update_dungeon_music() -> void:
 	var path: String=""

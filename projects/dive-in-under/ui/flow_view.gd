@@ -102,10 +102,10 @@ func build_left() -> void:
 		main_button.tooltip_text="容量不足：獲得品の「所持品と入れ替える…」から手放す品を選べます。" if main_button.disabled else "すべて受領し、次の探索を1回進めます。"
 	else: main_button=action(p,"帰還／続行へ［E］" if s.floor%5==0 and s.floor>0 else "さらに潜る［E］",rect,"advance_ready",{},true)
 	main_button.add_theme_font_size_override("font_size",16)
-	var gear:=nav(p,"所持品・装備［I］",Rect2(14,112,196,42),game.open_field_equipment,"field-equipment"); gear.disabled=not battle.is_empty(); gear.tooltip_text="戦闘中は装備を変更できません。" if gear.disabled else "比較・ダブルクリック・ドラッグで装備交換"
-	nav(p,"ステータス［C］",Rect2(14,164,196,42),game.open_status,"field-status")
-	var tactics_button:=nav(p,"作戦",Rect2(14,266,196,32),func():game.open_services("tactics"),"tactics"); tactics_button.add_theme_font_size_override("font_size",16)
-	var back:=action(p,"突破して帰還" if s.phase=="reward" and s.reward_return=="clear" else "町へ帰還",Rect2(14,216,196,42),"return_ready"); back.disabled=not E.Adventure.can_return(s) if E.Adventure.active(s) else s.phase not in ["explore","reward","event_result"] or not s.pending_rewards.is_empty() or not battle.is_empty(); back.tooltip_text="5Fは居座る前のみ。居座った後は10F到着時まで帰還できません。"
+	var gear:=nav(p,"所持品・装備［I］",Rect2(14,112,196,32),game.open_field_equipment,"field-equipment"); gear.disabled=not battle.is_empty(); gear.tooltip_text="戦闘中は装備を変更できません。" if gear.disabled else "比較・ダブルクリック・ドラッグで装備交換"
+	nav(p,"ステータス［C］",Rect2(14,150,196,32),game.open_status,"field-status")
+	var tactics_button:=nav(p,"作戦",Rect2(14,188,196,32),func():game.open_services("tactics"),"tactics"); tactics_button.add_theme_font_size_override("font_size",16)
+	var back:=action(p,"突破して帰還" if s.phase=="reward" and s.reward_return=="clear" else "町へ帰還",Rect2(14,226,196,32),"return_ready"); back.add_theme_font_size_override("font_size",16); back.disabled=not E.Adventure.can_return(s) if E.Adventure.active(s) else s.phase not in ["explore","reward","event_result"] or not s.pending_rewards.is_empty() or not battle.is_empty(); back.tooltip_text="5Fは居座る前のみ。居座った後は10F到着時まで帰還できません。"
 	var hero: Dictionary=battle.hero if not battle.is_empty() else E.hero(s,game.cfg)
 	var card:=UISkin.panel(self,Rect2(16,364,224,84),"")
 	var pick:=Button.new(); pick.flat=true; pick.size=Vector2(224,84); pick.mouse_default_cursor_shape=CURSOR_POINTING_HAND; card.add_child(pick); pick.pressed.connect(func():select_actor("hero")); pick.set_meta("actor_select","hero")
@@ -124,9 +124,11 @@ func build_map() -> void:
 	route.opened.connect(func():call_deferred("open_routes")); route.size_flags_horizontal=Control.SIZE_EXPAND_FILL
 	sc.set_deferred("scroll_vertical",int(game.flow_memory.mini) if int(game.flow_memory.mini)>=0 else maxi(0,(int(game.campaign.floor)-1)*44-78))
 func build_field() -> void:
-	stage=Control.new(); stage.set_script(preload("res://ui/battle_stage.gd")); stage.position=Vector2(252,86); stage.size=Vector2(718,400); stage.integrated_layout=true; stage.wide_layout=true; stage.floor_number=int(game.campaign.floor); stage.background_override=E.Journey.node(game.cfg,int(game.campaign.floor),game.campaign).get("background",""); stage.enemy_id=battle.enemy.id if not battle.is_empty() else ""; add_child(stage)
+	stage=Control.new(); stage.set_script(preload("res://ui/squad_stage.gd") if battle.get("units",{}).size()>2 else preload("res://ui/battle_stage.gd")); stage.position=Vector2(252,86); stage.size=Vector2(718,400); stage.integrated_layout=true; stage.wide_layout=true; stage.floor_number=int(game.campaign.floor); stage.background_override=E.Journey.node(game.cfg,int(game.campaign.floor),game.campaign).get("background",""); stage.enemy_id=battle.enemy.id if not battle.is_empty() else "";
+	if battle.get("units",{}).size()>2: stage.host=self; stage.battle=battle
+	add_child(stage)
 	if battle.is_empty(): stage.enemy_art.visible=false
-	else:
+	elif battle.get("units",{}).size()<=2:
 		var overlay:=Control.new(); overlay.set_script(preload("res://ui/status_overlay.gd")); overlay.battle=battle; stage.add_child(overlay)
 		for side in ["hero","enemy"]:
 			var hud:=Control.new(); hud.set_script(preload("res://ui/actor_hud.gd")); hud.host=self; hud.stage=stage; hud.side=side; stage.add_child(hud); actor_huds[side]=hud
@@ -260,7 +262,7 @@ func build_rewards() -> void:
 func select_actor(side: String) -> void:
 	if is_instance_valid(game.modal_owner): return
 	save_ui_state()
-	if side=="enemy" and (battle.is_empty() or battle.enemy.hp<=0): return
+	if not battle.is_empty() and (not battle.has(side) or battle[side].hp<=0): return
 	game.flow_selection={"kind":"actor","side":side}; refresh_details()
 func select_item(source: String, uid: String, slot: String="") -> void:
 	if is_instance_valid(game.modal_owner):
@@ -302,9 +304,14 @@ func update_actor_detail(h: Dictionary) -> void:
 	detail_values.stats.text="HP %d / %d\nSP %d / %d\n攻撃 %d   防御 %d\n素早さ %d"%[h.hp,h.max_hp,h.sp,h.max_sp,h.atk,h.def,h.spd]
 	var texts: Array[String]=[]
 	for effect in Model.effects(h,game.data.rules): texts.append(effect.name+" / 自分の行動あと%d回分"%effect.remaining+"\n"+effect.text)
-	detail_values.effects.text="\n".join(texts) if not texts.is_empty() else "状態異常なし"
+	texts.append(preload("res://core/tactics.gd").reasons_text(h))
+	detail_values.effects.text="\n".join(texts)
 func refresh_details() -> void:
 	var selection: Dictionary=game.flow_selection
+	if selection.get("kind")=="actor" and not battle.is_empty():
+		var selected: String=selection.get("side","hero")
+		if not battle.has(selected) or battle[selected].hp<=0:
+			game.flow_selection={"kind":"actor","side":"hero"}; selection=game.flow_selection
 	if selection.get("kind")=="actor" and selection.get("side")=="enemy" and (battle.is_empty() or battle.enemy.hp<=0): game.flow_selection={"kind":"actor","side":"hero"}; selection=game.flow_selection; game.flow_memory.details[selection_key()]=0
 	var key: String=selection_key()
 	if key==detail_key and selection.get("kind")=="actor" and not detail_values.is_empty():
@@ -316,7 +323,7 @@ func refresh_details() -> void:
 	for hud in actor_huds.values(): hud.queue_redraw()
 	if selection.get("kind")=="actor":
 		var side: String=selection.get("side","hero"); var h: Dictionary=battle[side] if not battle.is_empty() else E.hero(game.campaign,game.cfg)
-		detail_heading.text="敵の情報" if side=="enemy" else "主人公の状態"
+		detail_heading.text="敵の情報" if (side=="enemy" or h.get("team","")=="enemies") else ("主人公の状態" if side=="hero" else "味方の状態")
 		detail_scroll=ScrollContainer.new(); detail_scroll.size=Vector2(250,278); detail_scroll.horizontal_scroll_mode=ScrollContainer.SCROLL_MODE_DISABLED; detail_scroll.theme=UISkin.scroll_theme(); detail_body.add_child(detail_scroll)
 		var body:=VBoxContainer.new(); body.size_flags_horizontal=Control.SIZE_EXPAND_FILL; body.add_theme_constant_override("separation",12); detail_scroll.add_child(body)
 		for row in [["name",22],["stats",18],["effects",15]]:
@@ -368,6 +375,7 @@ func refresh_live() -> void:
 	if battle.is_empty(): return
 	hero_hp.text="HP %d / %d"%[battle.hero.hp,battle.hero.max_hp]; hero_bar.value=battle.hero.hp; hero_sp.text="SP %d / %d"%[battle.hero.sp,battle.hero.max_sp]
 	for hud in actor_huds.values(): hud.refresh()
+	if stage.has_method("refresh_squad"): stage.refresh_squad(battle)
 	for child in stage.get_children():
 		if child.get_script()==preload("res://ui/status_overlay.gd"): child.battle=battle; child.queue_redraw()
 	refresh_details()
