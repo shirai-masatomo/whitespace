@@ -29,4 +29,9 @@ screen circle_map():
 
             null height 10
             text "どの場所も繰り返し訪問できます。" xalign 0.5 size 18 color "#556c80"
-            text "セーブ・ロードはRen'Py標準メニューで確認。" xalign 0.5 size 18 color "#556c80"
+            hbox:
+                xalign 0.5
+                spacing 16
+                textbutton "セーブ" action ShowMenu("save")
+                textbutton "ロード" action ShowMenu("load")
+                textbutton "タイトルへ" action MainMenu(confirm=True)
