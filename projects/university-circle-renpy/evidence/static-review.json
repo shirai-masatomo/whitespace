@@ -1,0 +1,435 @@
+{
+  "checked_at": "2026-10-20",
+  "method": "Pure stdlib file reading; no RenPy imports, SDK process, or game execution",
+  "isolation": "not used: file-only static checks",
+  "not_runtime_validation": true,
+  "version": [
+    "0.1.0"
+  ],
+  "labels": {
+    "circle_map_loop": "game\\circle_map.rpy",
+    "start": "game\\script.rpy",
+    "beach_event": "game\\story\\beach.rpy",
+    "campus_event": "game\\story\\campus.rpy",
+    "clubroom_event": "game\\story\\clubroom.rpy"
+  },
+  "asset_references_checked": [
+    "images/bg/opening.svg",
+    "images/bg/campus.svg",
+    "images/bg/clubroom.svg",
+    "images/bg/beach.svg",
+    "images/characters/aoi/neutral.svg",
+    "images/characters/aoi/smile.svg",
+    "audio/bgm/campus.wav",
+    "audio/bgm/beach.wav",
+    "audio/se/chime.wav"
+  ],
+  "audio_headers": [
+    {
+      "file": "game\\audio\\bgm\\beach.wav",
+      "seconds": 8.0,
+      "channels": 1
+    },
+    {
+      "file": "game\\audio\\bgm\\campus.wav",
+      "seconds": 8.0,
+      "channels": 1
+    },
+    {
+      "file": "game\\audio\\se\\chime.wav",
+      "seconds": 0.6499773242630386,
+      "channels": 1
+    }
+  ],
+  "font_metadata": {
+    "0": [
+      "?2014-2019 Adobe (http://www.adobe.com/), with Reserved Font Name 'Source'.\n?2014-2019 Adobe (http://www.adobe.com/), with Reserved Font Name 'Source'.\n?2014-2019 Adobe (http://www.adobe.com/), with Reserved Font Name 'Source'.",
+      "© 2014-2019 Adobe (http://www.adobe.com/), with Reserved Font Name 'Source'.\n© 2014-2019 Adobe (http://www.adobe.com/), with Reserved Font Name 'Source'.\n© 2014-2019 Adobe (http://www.adobe.com/), with Reserved Font Name 'Source'."
+    ],
+    "1": [
+      "Source Han Sans Lite for RenPy"
+    ],
+    "5": [
+      "Version 2.001 October 29, 2020"
+    ],
+    "13": [
+      "This Font Software is licensed under the SIL Open Font License, Version 1.1. This Font Software is distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the SIL Open Font License for the specific language, permissions and limitations governing your use of this Font Software."
+    ],
+    "14": [
+      "https://scripts.sil.org/OFL"
+    ]
+  },
+  "issues": [],
+  "files": [
+    {
+      "file": "game\\assets.rpy",
+      "bytes": 583,
+      "sha256": "36a4b98de1607a50dbf081c573f18e9a139a9bbae49977f45596199f6cbb1e21"
+    },
+    {
+      "file": "game\\audio\\bgm\\beach.wav",
+      "bytes": 352844,
+      "sha256": "1ca1ad01bb7f4b87a0650f9132d6f71dc4646aba7227212fb637b149bc46e7a5"
+    },
+    {
+      "file": "game\\audio\\bgm\\campus.wav",
+      "bytes": 352844,
+      "sha256": "9ea826c98d7c5ffe7c9aed5e58284e82ec0282594cf5ccab971d2fafa8618e33"
+    },
+    {
+      "file": "game\\audio\\se\\chime.wav",
+      "bytes": 28708,
+      "sha256": "3232810d47e90e9aeb8b37c86305bac87b47922149bfa6c762e35fd649b7edef"
+    },
+    {
+      "file": "game\\characters.rpy",
+      "bytes": 269,
+      "sha256": "44cd48820676232fb272212c636596aba779b2df11ffa2d1356664d466f9e174"
+    },
+    {
+      "file": "game\\circle_map.rpy",
+      "bytes": 1908,
+      "sha256": "2c6ef67fef2bd0e26b37552eb9dfcc20d6e2cbe176f449252e0755d8286ddc20"
+    },
+    {
+      "file": "game\\gui\\bar\\bottom.png",
+      "bytes": 428,
+      "sha256": "14bff07f8b84fedb067ecaf73f568283022dc4416af843224f489766886513fa"
+    },
+    {
+      "file": "game\\gui\\bar\\left.png",
+      "bytes": 295,
+      "sha256": "25e1df86d8160d22ca5f15ba659485e2e60c3aff4f126a674526bd903a946479"
+    },
+    {
+      "file": "game\\gui\\bar\\right.png",
+      "bytes": 294,
+      "sha256": "d7e57ff2cb7082f3412944cc0d00031dbd85da1f631ec28c211ae45e320a37c3"
+    },
+    {
+      "file": "game\\gui\\bar\\top.png",
+      "bytes": 428,
+      "sha256": "ef0dd8966169c5e2fcbdd52353f72ed7d0360e56d4b03141044d036abf3332be"
+    },
+    {
+      "file": "game\\gui\\bubble.png",
+      "bytes": 6886,
+      "sha256": "a1d09a38be1acf64e305e225614f994c6ca758a38908f2f8cd87ea5714947133"
+    },
+    {
+      "file": "game\\gui\\button\\check_foreground.png",
+      "bytes": 91,
+      "sha256": "2b6955a6300da5ec2876199ff0a150b769e0cf24eee79ffe31167871e350e868"
+    },
+    {
+      "file": "game\\gui\\button\\check_selected_foreground.png",
+      "bytes": 126,
+      "sha256": "c191482794927776c52c823101584af8e1f59f8e0d7d1905e1fc5ee84627dbba"
+    },
+    {
+      "file": "game\\gui\\button\\choice_hover_background.png",
+      "bytes": 920,
+      "sha256": "ebbb7a080a1ba2155dd738516f9bcc027fdd6db7d9371c0839293894b36b12ea"
+    },
+    {
+      "file": "game\\gui\\button\\choice_idle_background.png",
+      "bytes": 841,
+      "sha256": "cc9f3e64b4f7a41e1c229c158b0468b72ab3016029f5c3da448261d0be827317"
+    },
+    {
+      "file": "game\\gui\\button\\hover_background.png",
+      "bytes": 253,
+      "sha256": "487243bf807815ddf783f7289369c06cd910f5db48e6405cd5de8d97dcd1298c"
+    },
+    {
+      "file": "game\\gui\\button\\idle_background.png",
+      "bytes": 253,
+      "sha256": "487243bf807815ddf783f7289369c06cd910f5db48e6405cd5de8d97dcd1298c"
+    },
+    {
+      "file": "game\\gui\\button\\quick_hover_background.png",
+      "bytes": 133,
+      "sha256": "a797767c0ab31b5eec7ec553ad3924776d078fbee432a4623f638cf047db0b9f"
+    },
+    {
+      "file": "game\\gui\\button\\quick_idle_background.png",
+      "bytes": 133,
+      "sha256": "a797767c0ab31b5eec7ec553ad3924776d078fbee432a4623f638cf047db0b9f"
+    },
+    {
+      "file": "game\\gui\\button\\radio_foreground.png",
+      "bytes": 91,
+      "sha256": "2b6955a6300da5ec2876199ff0a150b769e0cf24eee79ffe31167871e350e868"
+    },
+    {
+      "file": "game\\gui\\button\\radio_selected_foreground.png",
+      "bytes": 126,
+      "sha256": "c191482794927776c52c823101584af8e1f59f8e0d7d1905e1fc5ee84627dbba"
+    },
+    {
+      "file": "game\\gui\\button\\slot_hover_background.png",
+      "bytes": 1419,
+      "sha256": "731c80a33d0eca86a0d0fb91e4ff115cdb36e8e16bdd00912335ac17e400ddbe"
+    },
+    {
+      "file": "game\\gui\\button\\slot_idle_background.png",
+      "bytes": 1542,
+      "sha256": "93a10457c6cae026fee8e3c689ba883183f69582a9d07388fe8cea1f513e22d8"
+    },
+    {
+      "file": "game\\gui\\frame.png",
+      "bytes": 3534,
+      "sha256": "139fde2b0066caec74462bf396478f89662d5ab1b9d731aa231278dd4b10c7d4"
+    },
+    {
+      "file": "game\\gui\\game_menu.png",
+      "bytes": 17711,
+      "sha256": "ec3c2659427e2558688fa80f283e60d6913c5ab7ab2e7d453a1943252f9ba7e7"
+    },
+    {
+      "file": "game\\gui\\main_menu.png",
+      "bytes": 17711,
+      "sha256": "ec3c2659427e2558688fa80f283e60d6913c5ab7ab2e7d453a1943252f9ba7e7"
+    },
+    {
+      "file": "game\\gui\\namebox.png",
+      "bytes": 269,
+      "sha256": "bacda0751bcdd1a853e6441d4b3dcfa4a01ff55cdfa028e7f4dfb27a142038e5"
+    },
+    {
+      "file": "game\\gui\\notify.png",
+      "bytes": 950,
+      "sha256": "0eec495378a96561b61db1e1220ec2700401ab203b5c7d13e9c478fd3b171397"
+    },
+    {
+      "file": "game\\gui\\nvl.png",
+      "bytes": 18898,
+      "sha256": "f0e60df6c89ab685368729a526ba760ec2b53a8e05a4941a895455aa80837752"
+    },
+    {
+      "file": "game\\gui\\overlay\\confirm.png",
+      "bytes": 17710,
+      "sha256": "eb857a3e076dc09e8fd53d33a901207558f6871e38d5da4cc78afca0a5737adc"
+    },
+    {
+      "file": "game\\gui\\overlay\\game_menu.png",
+      "bytes": 18711,
+      "sha256": "286acf1e39936acca6811f7464f3a53474e6ce8dcb3ac7399a947d28245e73b3"
+    },
+    {
+      "file": "game\\gui\\overlay\\main_menu.png",
+      "bytes": 18814,
+      "sha256": "3ed58510a055286479b312cda649934b46c6157e2b0ae49176cb945996c72b1d"
+    },
+    {
+      "file": "game\\gui\\phone\\button\\choice_hover_background.png",
+      "bytes": 920,
+      "sha256": "ebbb7a080a1ba2155dd738516f9bcc027fdd6db7d9371c0839293894b36b12ea"
+    },
+    {
+      "file": "game\\gui\\phone\\button\\choice_idle_background.png",
+      "bytes": 841,
+      "sha256": "cc9f3e64b4f7a41e1c229c158b0468b72ab3016029f5c3da448261d0be827317"
+    },
+    {
+      "file": "game\\gui\\phone\\nvl.png",
+      "bytes": 17710,
+      "sha256": "24014733ccbae6e9aa7c37b4baaaf655edaf37b0a2dc21a6d79ca2b93ad6cb6a"
+    },
+    {
+      "file": "game\\gui\\phone\\overlay\\game_menu.png",
+      "bytes": 18826,
+      "sha256": "a1ae7df95df47c72ffcd67a53c39486996f69724519e0c04ababc188b02c8202"
+    },
+    {
+      "file": "game\\gui\\phone\\overlay\\main_menu.png",
+      "bytes": 18634,
+      "sha256": "408bb6c0b6a9a6f03319db930718329595361bbb9d92a602db0f0e1846815702"
+    },
+    {
+      "file": "game\\gui\\phone\\textbox.png",
+      "bytes": 5959,
+      "sha256": "a66ee5c01333ef37383853c849c1d8ee6ed436c8f5f02866151512ae172a9cc9"
+    },
+    {
+      "file": "game\\gui\\scrollbar\\horizontal_hover_bar.png",
+      "bytes": 262,
+      "sha256": "bf945f866b75b3d6678470fb0de037a461f3354fd007ca8db3868ce27e0d70ca"
+    },
+    {
+      "file": "game\\gui\\scrollbar\\horizontal_hover_thumb.png",
+      "bytes": 263,
+      "sha256": "20b594a54f437d1cdf707358481f60da6d70dd8ed0d761b7993a82ffe7e5235c"
+    },
+    {
+      "file": "game\\gui\\scrollbar\\horizontal_idle_bar.png",
+      "bytes": 263,
+      "sha256": "12fd979ba5c2cda28790c6f470caaf32061ccbc53d0d06dc3a64adf2be9ddf62"
+    },
+    {
+      "file": "game\\gui\\scrollbar\\horizontal_idle_thumb.png",
+      "bytes": 262,
+      "sha256": "09d337ca31e53e36c6f31c58fde0997cbd7452ad54b12943e41d052926079ac5"
+    },
+    {
+      "file": "game\\gui\\scrollbar\\vertical_hover_bar.png",
+      "bytes": 384,
+      "sha256": "438a0b560cf0e9197d89eaa4f4dd8142b7a94fde0599417ba48cebba6731ef20"
+    },
+    {
+      "file": "game\\gui\\scrollbar\\vertical_hover_thumb.png",
+      "bytes": 385,
+      "sha256": "3ceb66eae787d1316b98d11b61bd10b14f9f32a3982b0c0dba5bd2bd4ec11b8d"
+    },
+    {
+      "file": "game\\gui\\scrollbar\\vertical_idle_bar.png",
+      "bytes": 385,
+      "sha256": "62502fee3bbfddc4c6b282efda508410a8bfb2d852a4a504376251ab9242a20d"
+    },
+    {
+      "file": "game\\gui\\scrollbar\\vertical_idle_thumb.png",
+      "bytes": 384,
+      "sha256": "35e61dc8808b61a2a69b6f32a5063f5015dee7f4b46e16d8916699a528779ee8"
+    },
+    {
+      "file": "game\\gui\\skip.png",
+      "bytes": 398,
+      "sha256": "e7c723c88f9eb5d9ec9f18f77a464ac38a6c6161e2acfbe170d5ebb7a977992b"
+    },
+    {
+      "file": "game\\gui\\slider\\horizontal_hover_bar.png",
+      "bytes": 293,
+      "sha256": "549e9752a45359775b215d19531080cd34c14004f0dd191945cb2161333baf17"
+    },
+    {
+      "file": "game\\gui\\slider\\horizontal_hover_thumb.png",
+      "bytes": 94,
+      "sha256": "618217004509a708b0f04b6b1ffc75d35676cbef631f9d8de4a0d28a232088a7"
+    },
+    {
+      "file": "game\\gui\\slider\\horizontal_idle_bar.png",
+      "bytes": 294,
+      "sha256": "d7e57ff2cb7082f3412944cc0d00031dbd85da1f631ec28c211ae45e320a37c3"
+    },
+    {
+      "file": "game\\gui\\slider\\horizontal_idle_thumb.png",
+      "bytes": 94,
+      "sha256": "e217e0aad177e2ace4f219c2e7021087285b5ae79fe03f912a0c00114fc48d66"
+    },
+    {
+      "file": "game\\gui\\slider\\vertical_hover_bar.png",
+      "bytes": 427,
+      "sha256": "720710e4145067afa8a36cd3dfa08cb0634ba9df3d5339dd0f3634d9e5cd3b91"
+    },
+    {
+      "file": "game\\gui\\slider\\vertical_hover_thumb.png",
+      "bytes": 90,
+      "sha256": "261c7ea5172fe0de83f06548d6dc86e1fcdb70657ac5510a33befbc8cfd6e134"
+    },
+    {
+      "file": "game\\gui\\slider\\vertical_idle_bar.png",
+      "bytes": 428,
+      "sha256": "ef0dd8966169c5e2fcbdd52353f72ed7d0360e56d4b03141044d036abf3332be"
+    },
+    {
+      "file": "game\\gui\\slider\\vertical_idle_thumb.png",
+      "bytes": 89,
+      "sha256": "0a6d5540f8216c86d640bde133717f711208ed0783654bce6837282f0df9c550"
+    },
+    {
+      "file": "game\\gui\\textbox.png",
+      "bytes": 4944,
+      "sha256": "ad0049cc470ac0d11233c05faa4c67686ef228a2a534a69bcfef60340390d34d"
+    },
+    {
+      "file": "game\\gui\\thoughtbubble.png",
+      "bytes": 4215,
+      "sha256": "fd012edefef7819e06b1dbb380a125d34d35bc71e4f5952fcd59067f4d96869c"
+    },
+    {
+      "file": "game\\gui\\window_icon.png",
+      "bytes": 19500,
+      "sha256": "6bfd3378ded67315e119791f3015a1022fd2c82af4095bc2ace2d1693f6740c1"
+    },
+    {
+      "file": "game\\gui.rpy",
+      "bytes": 21992,
+      "sha256": "6423afd645798ca3ec336d07a76d87af432ecb3a19e4ef905276840164b36f90"
+    },
+    {
+      "file": "game\\images\\bg\\beach.svg",
+      "bytes": 593,
+      "sha256": "6075874d0128ef532d5fdf0d9d7001cde03896d50af834c1d2d7917916772b8c"
+    },
+    {
+      "file": "game\\images\\bg\\campus.svg",
+      "bytes": 1183,
+      "sha256": "216d53d203c58b080eba4fdc5d36ce265efa76aa7c03e039a5035d52d8852300"
+    },
+    {
+      "file": "game\\images\\bg\\clubroom.svg",
+      "bytes": 779,
+      "sha256": "11ac69be5fc1fbb70d3ed2ddb4764c61d260dd931e711a7c690ad2dd1b103fcb"
+    },
+    {
+      "file": "game\\images\\bg\\opening.svg",
+      "bytes": 1183,
+      "sha256": "96ba61e41185488158a57157d60bf13c5d5981483ffab33a409058a526507f07"
+    },
+    {
+      "file": "game\\images\\characters\\aoi\\neutral.svg",
+      "bytes": 1115,
+      "sha256": "f5d9b0efe03de34a97a019078e6977ef11b12a490c07ca6d62301a141db93c83"
+    },
+    {
+      "file": "game\\images\\characters\\aoi\\smile.svg",
+      "bytes": 1105,
+      "sha256": "28bd2e75bb44b59b8bbabb034b4a7301e27f54623584cc4c2e65812f278266ee"
+    },
+    {
+      "file": "game\\options.rpy",
+      "bytes": 10502,
+      "sha256": "ff9e742a2de4f4ffa0dec1a40516c42424c1b8aa7357d7bfc48e6478ed75787c"
+    },
+    {
+      "file": "game\\screens.rpy",
+      "bytes": 48291,
+      "sha256": "178853ab30ee1a289f58606ecd99d3da755e88829f9ee0925d8e8487cfc1a810"
+    },
+    {
+      "file": "game\\script.rpy",
+      "bytes": 967,
+      "sha256": "8a1518ecb0734b5fbf5ea1bc751281441e0b31dca81dca509fce5cee85f35d55"
+    },
+    {
+      "file": "game\\SourceHanSansLite.ttf",
+      "bytes": 2901056,
+      "sha256": "b2aaf73b7acc23d746b110f1caeaecc93d4292824979af44e96000200591b2a7"
+    },
+    {
+      "file": "game\\state.rpy",
+      "bytes": 372,
+      "sha256": "772c484b632ca4762c5263e8f6e4ce716841cb3ed20cd1506f44c59c714f5ba9"
+    },
+    {
+      "file": "game\\story\\beach.rpy",
+      "bytes": 870,
+      "sha256": "583ce360cfb4fd40e936303f8f4714d526ac89698c7e352ff4cc5a811215a0f6"
+    },
+    {
+      "file": "game\\story\\campus.rpy",
+      "bytes": 830,
+      "sha256": "217a80a79d3dac31221ae77fc7c8c0b2aa2fa5a2db8b9be0fe345e2d82d3db22"
+    },
+    {
+      "file": "game\\story\\clubroom.rpy",
+      "bytes": 821,
+      "sha256": "434c627b2b45bb698740211cebcba4b41b332d98593b6c95d3c207ed52f5e055"
+    },
+    {
+      "file": "game\\tl\\None\\common.rpym",
+      "bytes": 32082,
+      "sha256": "58fb9cace2d3148eb687eb091e062a90d83cb2d7f1698789f8d1f43afb64069f"
+    }
+  ]
+}

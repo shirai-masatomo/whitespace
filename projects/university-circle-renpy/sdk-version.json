@@ -1,0 +1,11 @@
+{
+  "version": "8.5.3",
+  "engine_reported_version": "8.5.3.26051504",
+  "source": "https://www.renpy.org/dl/8.5.3/renpy-8.5.3-sdk.zip",
+  "sha256": "ff57648f9c04f27e381c48af6d8e3ee3cdec296bed4d3831f47f09b0a71b505e",
+  "archive_bytes": 163008121,
+  "checked_at": "2026-10-20",
+  "execution_policy": "SDK and game execution only inside a verified isolated Windows environment",
+  "isolated_runtime_verification": "not performed",
+  "historical_host_execution": "see docs/HOST_ENVIRONMENT_AUDIT.md"
+}

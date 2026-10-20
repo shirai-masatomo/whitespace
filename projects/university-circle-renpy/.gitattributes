@@ -1,0 +1,3 @@
+# The unmodified upstream license is reStructuredText and uses seven '=' characters
+# as section adornments. Reserve longer markers for actual merge conflicts here.
+RENPY-LICENSE.txt conflict-marker-size=32

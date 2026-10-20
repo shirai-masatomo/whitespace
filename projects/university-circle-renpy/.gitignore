@@ -1,4 +1,3 @@
-# Ren'Py transient and user-specific files
 **/*.rpyc
 **/*.rpymc
 **/cache/
@@ -7,3 +6,9 @@
 **/traceback.txt
 **/errors.txt
 **/.DS_Store
+sdk/
+dist/
+tests/
+lint.txt
+*.zip
+*.bak
