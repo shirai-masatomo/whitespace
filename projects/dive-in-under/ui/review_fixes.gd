@@ -70,6 +70,7 @@ static func run(game: Control) -> void:
 	if not check(game,expected in text(game) and "現在値" in text(game) and "基礎値" in text(game),"Status selected same worn instance uses effective and labelled base"): return
 	await shot(game,"05-status-current"); await F.key(game,KEY_ESCAPE)
 	E.Journey.add_reward(game.campaign,"I02"); game.show_campaign(); await F.wait(game)
+	await game.click_control(F.cell(game.screen,"pending",game.campaign.pending_rewards[0].token)); await F.wait(game,.1)
 	if not check(game,"交換差：防御 +1" in text(game),"Fresh reward comparison uses same worn current difference"): return
 	await shot(game,"06-reward-comparison")
 	# A true item double click still swaps one-for-one at full capacity.
