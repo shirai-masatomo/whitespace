@@ -739,7 +739,7 @@ func _input(event: InputEvent) -> void:
 			var b: Button=primary_button if code==KEY_E else secondary_button
 			if now-previous>=500 and now>=ui_block_until and is_instance_valid(b) and not b.disabled and b.is_visible_in_tree(): b.emit_signal("pressed")
 			return
-		if event.pressed and not event.echo and not route_map_open and not field_equipment and not field_status and ui_mode=="campaign":
+		if event.pressed and not event.echo and not route_map_open and not field_equipment and not field_status and campaign.get("phase")=="event" and is_instance_valid(play_view) and ui_mode=="campaign":
 			for child in play_view.get_children():
 				if child.has_method("handle_choice_key") and child.handle_choice_key(code): viewport.set_input_as_handled(); return
 		if event.pressed and not event.echo and code in [KEY_I,KEY_C] and ui_mode=="campaign":

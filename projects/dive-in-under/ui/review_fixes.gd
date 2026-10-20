@@ -60,13 +60,13 @@ static func run(game: Control) -> void:
 	game.flow_selection={"kind":"inventory","uid":worn,"slot":""}; game.show_campaign(); await F.wait(game)
 	var expected: String=Info.current(game.campaign,game.cfg,worn)
 	if not check(game,expected in text(game) and "基礎値" in text(game) and "交換差" in text(game),"Exploration detail uses shared current, base and comparison"): return
-	await shot(game,"03-owned-current-comparison"); await F.key(game,KEY_I)
+	await shot(game,"03-owned-current-comparison"); await F.key(game,KEY_I); await F.wait(game)
 	await game.click_control(F.cell(game.screen,"inventory",worn)); await F.wait(game,.15)
 	if not check(game,expected in text(game) and "町で修理できます" in text(game),"Equipment shows same current and town-only repair reason"): return
 	await shot(game,"04-equipment-current-backed"); await F.key(game,KEY_ESCAPE)
 	# Equip the worn instance, then status uses the exact same current calculation.
 	game.perform("equip",{"uid":worn},int(game.campaign.revision)); await F.wait(game)
-	await F.key(game,KEY_C); await game.click_control(game.status_view.item_buttons.body); await F.wait(game,.1)
+	await F.key(game,KEY_C); await F.wait(game); await game.click_control(game.status_view.item_buttons.body); await F.wait(game,.1)
 	if not check(game,expected in text(game) and "現在値" in text(game) and "基礎値" in text(game),"Status selected same worn instance uses effective and labelled base"): return
 	await shot(game,"05-status-current"); await F.key(game,KEY_ESCAPE)
 	E.Journey.add_reward(game.campaign,"I02"); game.show_campaign(); await F.wait(game)
