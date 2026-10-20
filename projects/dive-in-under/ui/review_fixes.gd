@@ -8,6 +8,7 @@ const Old=preload("res://ui/journey_review.gd")
 const Text=preload("res://ui/status_review.gd")
 const Info=preload("res://ui/item_presenter.gd")
 static func check(game: Control, value: bool, message: String) -> bool:
+	UI.write(game,{"last_check":message,"passed":value,"run_id":game.smoke_run_id,"phase":game.campaign.get("phase",""),"floor":game.campaign.get("floor",0),"ticks_ms":Time.get_ticks_msec()},"review-progress.json")
 	return game.smoke_check(value,message)
 static func text(game: Control) -> String:
 	return Text.text_in(game.screen)
@@ -68,7 +69,8 @@ static func run(game: Control) -> void:
 	game.perform("equip",{"uid":worn},int(game.campaign.revision)); await F.wait(game)
 	await F.key(game,KEY_C); await F.wait(game); await game.click_control(game.status_view.item_buttons.body); await F.wait(game,.1)
 	if not check(game,expected in text(game) and "現在値" in text(game) and "基礎値" in text(game),"Status selected same worn instance uses effective and labelled base"): return
-	await shot(game,"05-status-current"); await F.key(game,KEY_ESCAPE)
+	await shot(game,"05-status-current"); await F.key(game,KEY_ESCAPE); await F.wait(game,.3)
+	if not check(game,not game.field_status and game.campaign.phase=="reward","Status fade finishes before following reward selection"): return
 	E.Journey.add_reward(game.campaign,"I02"); game.show_campaign(); await F.wait(game)
 	await game.click_control(F.cell(game.screen,"pending",game.campaign.pending_rewards[0].token)); await F.wait(game,.1)
 	if not check(game,"交換差：防御 +1" in text(game),"Fresh reward comparison uses same worn current difference"): return
@@ -103,6 +105,14 @@ static func run(game: Control) -> void:
 	if not check(game,game.campaign.floor==3,"Explicit right-click skips an unopened chest"): return
 	frozen=Replay.hash_state(game.campaign); await right(game)
 	if not check(game,Replay.hash_state(game.campaign)==frozen,"Rapid right-click cannot skip destination event"): return
+	# Mouse double click on a changing left primary must not activate the destination.
+	fixture(game,"treasure"); game.show_campaign(); await F.wait(game)
+	var main_point: Vector2=game.primary_button.get_global_rect().get_center()
+	await F.click_at(game,main_point); await F.wait(game,.04); frozen=Replay.hash_state(game.campaign)
+	for pressed in [true,false]:
+		var twice:=InputEventMouseButton.new(); twice.button_index=MOUSE_BUTTON_LEFT; twice.position=main_point; twice.global_position=main_point; twice.pressed=pressed; twice.double_click=pressed
+		game.get_viewport().push_input(twice,true); await game.get_tree().process_frame
+	if not check(game,game.campaign.phase=="reward" and Replay.hash_state(game.campaign)==frozen,"Navigation double click cannot trigger destination receipt or advance"): return
 	# Native drag cancellation must not invoke the underlying chest skip.
 	fixture(game,"treasure"); var drag_uid: String=E.add_item(game.campaign,"I02"); game.show_campaign(); await F.wait(game)
 	var point: Vector2=F.cell(game.screen,"inventory",drag_uid).get_global_rect().get_center()

@@ -396,6 +396,8 @@ func capture(filename: String) -> void:
 	audit.close()
 
 func click_control(control: Button) -> void:
+	if not is_instance_valid(control) or not control.is_inside_tree():
+		smoke_check(false,"Requested input control is absent or detached"); return
 	# Route through this app's viewport hit-testing; never inject OS input.
 	await get_tree().process_frame
 	await get_tree().process_frame
