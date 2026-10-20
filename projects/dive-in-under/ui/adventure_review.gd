@@ -88,6 +88,7 @@ static func run(game: Control) -> void:
 	await F.key_event(game,KEY_SPACE,true);await F.key_event(game,KEY_SPACE,false);await F.wait(game,.2)
 	await shot(game,"14-fixture-boss-telegraph");await F.key(game,KEY_SPACE);await settled(game,35)
 	if not check(game,game.campaign.phase=="reward" and game.campaign.records.boss_kills==1 and game.campaign.pending_rewards.any(func(r):return r.id=="G10" and r.guaranteed),"Boss first guarantee exists once"):return
+	if not check(game,"門守の継ぎ輪［保証］" in preload("res://ui/status_review.gd").text_in(game.screen),"Guarantee card keeps full equipment name on one line"):return
 	await shot(game,"15-fixture-first-guarantee");await F.key(game,KEY_E)
 	if not check(game,game.campaign.phase=="portal_done" and game.campaign.floor==10 and game.campaign.records.first_reward_claimed,"Receive at 10F stops for explicit return"):return
 	await shot(game,"16-fixture-post-boss-portal");await F.key(game,KEY_E);await shot(game,"17-fixture-clear-result")

@@ -241,7 +241,7 @@ func build_rewards() -> void:
 			var item: Dictionary=game.cfg.items[reward.id]
 			var card:=Control.new(); card.custom_minimum_size=Vector2(205,151); grid.add_child(card)
 			Grid.cell(card,game,self,Rect2(67,0,72,72),"pending",reward.token,"",game.flow_selection.get("uid")==reward.token)
-			var name_label:=label_at(card,("初突破保証\n" if reward.get("guaranteed",false) else "")+item.name,Rect2(0,74,205,40),16,true); name_label.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER
+			var name_label:=label_at(card,item.name+("［保証］" if reward.get("guaranteed",false) else ""),Rect2(0,74,205,40),16,true); name_label.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER
 			var swap:=nav(card,"所持品と入れ替える…",Rect2(0,116,205,32),func():begin_replacement(reward.token),"replace-reward-"+reward.token); swap.add_theme_font_size_override("font_size",14); swap.disabled=s.inventory.is_empty()
 	label_at(center,"装備 / 所持品をダブルクリック、または部位へドラッグで交換",Rect2(30,318,658,36),16,true)
 	for i in E.SLOTS.size():

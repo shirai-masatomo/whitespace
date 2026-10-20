@@ -40,6 +40,7 @@ func _initialize() -> void:
 	var early: Dictionary=E.fresh(cfg,1);early=act(early,"depart");early=act(early,"descend");check(act(early,"return_ready")==early,"ordinary floors cannot return")
 	check(E.validate(return_state,data,cfg)=="" and E.validate(ten,data,cfg)=="","result states valid")
 	safety_cases()
+	event_cases()
 	normal_loop()
 	print("ADVENTURE_CORE_OK checks="+str(checks));quit()
 
@@ -169,3 +170,31 @@ func normal_loop() -> void:
 	DirAccess.make_dir_recursive_absolute("res://artifacts/adventure")
 	var file:=FileAccess.open("res://artifacts/adventure/normal-plan.json",FileAccess.WRITE);file.store_string(JSON.stringify(proof,"  "));file.close()
 	check(five_return and five_stay and early_ten and first and repeat,"bounded normal route reaches return, first clear and repeat without stat injection")
+
+func event_state(id: String) -> Dictionary:
+	var s: Dictionary=E.fresh(cfg,42);s=act(s,"depart");s.floor=7;s.highest_floor=7;s.phase="event";s.event=id;s.node={"kind":"event","started":true,"resolved":false}
+	return s
+func event_cases() -> void:
+	var s: Dictionary=event_state("EV11");s=act(s,"journey_event",{"choice":"take"})
+	check(s.phase=="event_result" and s.pending_rewards.size()==1 and s.pending_rewards[0].quantity==5,"free coin event creates pending physical coins")
+	s=event_state("EV12");s=act(s,"journey_event",{"choice":"stone"});check(s.pending_rewards.size()==1 and s.pending_rewards[0].id=="I10","benefit choice gives stone only")
+	s=event_state("EV12");s=act(s,"journey_event",{"choice":"coin"});check(s.pending_rewards.size()==1 and s.pending_rewards[0].quantity==7,"alternative choice gives coin only")
+	s=event_state("EV15");var stone: String=E.add_item(s,"I10");s=act(s,"journey_event",{"choice":"defense"});check(not s.items.has(stone) and s.pending_rewards.size()==1 and s.pending_rewards[0].id=="W03","material exchange consumes actual non-supply item")
+	s=event_state("EV18");var before: Dictionary=s.duplicate(true);s=act(s,"journey_event",{"choice":"wear","uid":s.equipment.head});check(s==before,"supply cannot fund durability event")
+	var gear: String=E.add_item(s,"W02");var profile: Dictionary=s.item_details[gear].duplicate(true);s=act(s,"journey_event",{"choice":"wear","uid":gear});check(s.item_condition[gear].current==85 and s.item_details[gear]==profile and s.pending_rewards[0].id=="B02","durability event preserves roll and pays once")
+	s=event_state("EV18");var hp: int=s.hp;s=act(s,"journey_event",{"choice":"hp"});check(s.hp==hp-4 and s.pending_rewards[0].id=="B01","HP trade leaves explicit pending equipment")
+	s=event_state("EV18");s.hp=4;check(act(s,"journey_event",{"choice":"hp"})==s,"HP cost cannot silently kill")
+	s=event_state("EV13");hp=s.hp;s=act(s,"journey_event",{"choice":"dive"});var count: int=s.pending_rewards.size();check(s.hp==hp-4 and count in [0,1] and (count==0 or s.pending_rewards[0].id=="W02"),"probability event cost and one outcome commit together")
+	check(act(s,"journey_event",{"choice":"dive"})==s,"chance event cannot reroll on replay")
+	s=E.fresh(cfg,12);s=act(s,"depart");s.phase="explore";s.floor=1;s.highest_floor=1;s.hp=12
+	gear=E.add_item(s,"B01");s.item_details[gear].affix_id="stout";s.item_details[gear].affix_stats={"max_hp":2};hp=s.hp
+	s=act(s,"equip",{"uid":gear});s=act(s,"unequip",{"slot":"body"});check(s.hp==hp,"HP equipment exchange never heals during expedition")
+	var rules: Dictionary=P.combat_data(data,cfg).rules
+	var b: Dictionary=E.Combat.start(E.hero(E.fresh(cfg,1),cfg),E.Combat.enemy(P.combat_data(data,cfg),"B10",3),rules,20)
+	b.enemy.ai_pattern.normal_weights={"attack":1,"strong":0};b.enemy.ai_pattern.low_weights={"attack":0,"strong":1};b.enemy.action_count=1
+	var rng:=RandomNumberGenerator.new();rng.seed=1;var sp: int=b.enemy.sp
+	check(E.Combat.boss_move(b,"enemy",rng).multiplier==1.0 and b.enemy.sp==sp,"boss high HP follows ordinary weight branch")
+	b.enemy.ai_phase=0;b.enemy.hp=1;b.enemy.action_count=2
+	check(E.Combat.boss_move(b,"enemy",rng).multiplier==1.3 and b.enemy.sp==sp-3,"boss low HP follows strong weight branch")
+	b.enemy.ai_phase=0;b.enemy.action_count=3
+	check(E.Combat.boss_move(b,"enemy",rng).multiplier==1.0 and b.enemy.sp==sp-3,"boss cooldown blocks immediate repeated strong")
