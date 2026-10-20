@@ -313,8 +313,8 @@ func refresh_details() -> void:
 		if not battle.has(selected) or battle[selected].hp<=0:
 			var alive: Array=battle.get("allies",["hero"]).filter(func(id):return battle.has(id) and battle[id].hp>0)
 			game.flow_selection={"kind":"actor","side":alive[0] if not alive.is_empty() else "hero"}; selection=game.flow_selection
-	if selection.get("kind")=="actor" and selection.get("side")=="enemy" and (battle.is_empty() or battle.enemy.hp<=0): var alive: Array=battle.get("allies",["hero"]).filter(func(id):return battle.has(id) and battle[id].hp>0)
-			game.flow_selection={"kind":"actor","side":alive[0] if not alive.is_empty() else "hero"}; selection=game.flow_selection; game.flow_memory.details[selection_key()]=0
+	if selection.get("kind")=="actor" and battle.is_empty() and selection.get("side","hero")!="hero":
+		game.flow_selection={"kind":"actor","side":"hero"}; selection=game.flow_selection; game.flow_memory.details[selection_key()]=0
 	var key: String=selection_key()
 	if key==detail_key and selection.get("kind")=="actor" and not detail_values.is_empty():
 		update_actor_detail(battle[selection.side] if not battle.is_empty() else E.hero(game.campaign,game.cfg)); return
