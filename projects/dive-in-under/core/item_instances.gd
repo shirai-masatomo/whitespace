@@ -6,15 +6,13 @@ static func roll(s: Dictionary, id: String, origin: String="loot") -> Dictionary
 	var supply: bool=item.get("supply",false)
 	var affix: Dictionary={"id":"plain","stats":{}}
 	if item.slot!="" and not supply:
-		for key in item.get("roll",{}):
-			var span: Array=item.roll[key]; base[key]=int(span[0])+draw(s,int(span[1])-int(span[0])+1)
 		var total: int=0
 		for candidate in s.affix_rules: total+=int(candidate.weight)
 		var value: int=draw(s,total)
 		for candidate in s.affix_rules:
 			value-=int(candidate.weight)
 			if value<0: affix=candidate; break
-	return {"base_roll":base,"affix_id":affix.id,"affix_stats":affix.stats.duplicate(true),"seals":[],"seal_slots":int(item.get("seal_slots",0)),"origin":origin,"supply":supply}
+	return {"base_roll":base,"affix_id":affix.id,"affix_stats":affix.stats.duplicate(true),"seals":[],"seal_slots":int(item.get("seal_slots",0)),"origin":origin,"supply":supply,"special_effects":[],"granted_skills":[],"rarity":{"status":"unrated","label":"未評価"}}
 static func draw(s: Dictionary, maximum: int) -> int:
 	var rng:=RandomNumberGenerator.new(); rng.seed=(int(s.seed)+int(s.rng.instance)*1103515245+907)%2147483647
 	s.rng.instance+=1; return rng.randi_range(0,maximum-1)

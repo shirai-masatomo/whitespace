@@ -1,0 +1,14 @@
+{
+  "adopted_response": [
+    "推奨セットを採用する",
+    "この扱いで進める"
+  ],
+  "normal_allies": "hero_only",
+  "rarity": "unrated",
+  "boss_pattern": "existing_provisional",
+  "first_source": "7b70a518",
+  "start_main": "73bcb87",
+  "code": "in_progress",
+  "distribution": "0.9.0_unchanged",
+  "user_visual_evaluation": "not_reviewed"
+}

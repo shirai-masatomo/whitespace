@@ -97,7 +97,8 @@ func build_hub() -> void:
 	command(menu,"探索に出発［E］",Rect2(27,331,412,76),"depart",{},true).add_theme_font_size_override("font_size",27)
 	nav(menu,"タイトルへ",Rect2(27,435,193,58),game.show_title,"title")
 	nav(menu,"終了",Rect2(231,435,208,58),func():game.get_tree().quit(),"quit")
-	nav(self,"支給所・個体・印・自動対策",Rect2(560,585,620,58),func():game.open_services(),"services")
+	nav(self,"作戦",Rect2(560,535,234,39),func():game.open_services("tactics"),"tactics")
+	nav(self,"支給所・個体・自動対策",Rect2(560,585,620,58),func():game.open_services(),"services")
 	if game.debug_run:nav(self,"デバッグ操作",Rect2(560,80,620,40),func():game.open_services("debug"),"debug-services")
 	var card:=hero_card(Rect2(820,131,372,430))
 	UISkin.label(card,"装備中のアイテム",Rect2(20,332,332,28),17,UISkin.DARK)
@@ -108,7 +109,7 @@ func build_hub() -> void:
 		UISkin.picture(card,Items.texture(game.campaign.items[uid],slot),Rect2(20+index*58,364,50,50)); index+=1
 		if index==5: break
 	var warning:=ColorRect.new(); warning.position=Vector2(560,649); warning.size=Vector2(632,28); warning.color=Color(.015,.04,.055,.94); warning.mouse_filter=Control.MOUSE_FILTER_IGNORE; add_child(warning)
-	UISkin.label(self,"5Fごとに帰還 / 死亡：装備・バッグ全損、風呂敷・倉庫・成長は保持",Rect2(570,651,612,25),14,UISkin.INK)
+	UISkin.label(self,"5Fは居座る前のみ帰還 / 死亡：装備・バッグ全損、風呂敷・倉庫・成長は保持",Rect2(570,651,612,25),14,UISkin.INK)
 func add_stage(r: Rect2, enemy: String="") -> void:
 	stage=Control.new(); stage.set_script(game.BattleStage); stage.wide_layout=true; stage.integrated_layout=true
 	stage.floor_number=game.campaign.floor; stage.enemy_id=enemy; stage.background_override=E.Journey.node(game.cfg,int(game.campaign.floor),game.campaign).get("background","") if E.Journey.active(game.campaign) else ""; stage.position=r.position; stage.size=r.size; add_child(stage)

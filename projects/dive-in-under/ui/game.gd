@@ -843,8 +843,8 @@ func impact(event: Dictionary) -> void:
 	if event.type=="skill" and event.has("sp"):
 		presentation_battle[event.actor].sp=event.sp
 		if event.skill=="S105":
-			presentation_battle[event.actor].defense_until=event.expires_after_action
-			presentation_battle[event.actor].action_count=int(event.expires_after_action)-int(data.rules.skills.S105.duration_own_actions)
+			presentation_battle[event.actor].defense_until=event.get("expires_after_action",int(presentation_battle[event.actor].action_count)+int(data.rules.skills.S105.duration_own_actions))
+			presentation_battle[event.actor].action_count=int(presentation_battle[event.actor].defense_until)-int(data.rules.skills.S105.duration_own_actions)
 	if event.type=="status_applied": presentation_battle[side].statuses[event.status]={"remaining":event.remaining,"potency":event.potency,"skill":event.skill,"source":event.actor}
 	if event.type=="status_removed":
 		if event.status=="defense": presentation_battle[side].defense_until=-1
@@ -866,8 +866,8 @@ func update_dungeon_music() -> void:
 
 func open_services(mode: String="prepare", uid: String="", source: String="inventory") -> void:
 	if not Expedition.Adventure.active(campaign) or is_instance_valid(modal_owner):return
-	if campaign.phase=="battle" and mode!="debug":return
+	if campaign.phase=="battle" and mode not in ["debug","tactics"]:return
 	if mode=="debug" and not campaign.debug:return
 	service_mode=mode;service_uid=uid;service_source=source;play_timer.stop();attach_services()
 func attach_services() -> void:
-	var overlay:=Control.new();overlay.set_script(preload("res://ui/adventure_services.gd"));overlay.game=self;overlay.mode=service_mode;overlay.uid=service_uid;overlay.source=service_source;screen.add_child(overlay)
+	var overlay:=Control.new();overlay.set_script(preload("res://ui/tactics_view.gd") if service_mode=="tactics" else preload("res://ui/adventure_services.gd"));overlay.game=self;overlay.mode=service_mode;overlay.uid=service_uid;overlay.source=service_source;screen.add_child(overlay)

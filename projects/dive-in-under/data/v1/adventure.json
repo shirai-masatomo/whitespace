@@ -1,8 +1,8 @@
 {
-  "version": "2026-10-20.adventure-provisional.1",
+  "version": "2026-10-20.tactics.1",
   "provisional": true,
   "coin_value": 1,
-  "coin_stack_max": 99,
+  "coin_stack_max": 999,
   "initial": {
     "max_hp": 26,
     "atk": 4,
@@ -16,7 +16,7 @@
       "head": "A02",
       "body": "A03",
       "legs": "A04",
-      "feet": "A05"
+      "left_hand": "A06"
     }
   },
   "growth": {
@@ -80,10 +80,10 @@
       "stats": {
         "spd": 1
       },
-      "supply": true,
+      "supply": false,
       "seal_slots": 0,
       "art": "A05",
-      "description": "支給品。倉庫・対価・換金には使えない。手元に同じ品がある間は再支給されない。"
+      "description": "足用の装備。今回の初期・再支給5種には含まれない。"
     },
     "W01": {
       "name": "風切りの短剣",
@@ -92,12 +92,6 @@
         "atk": 2,
         "def": -1,
         "spd": 2
-      },
-      "roll": {
-        "atk": [
-          2,
-          3
-        ]
       },
       "seal_slots": 1,
       "art": "A01",
@@ -109,12 +103,6 @@
       "stats": {
         "atk": 4,
         "spd": -2
-      },
-      "roll": {
-        "atk": [
-          4,
-          5
-        ]
       },
       "seal_slots": 1,
       "art": "A01",
@@ -128,12 +116,6 @@
         "def": 2,
         "spd": -1
       },
-      "roll": {
-        "def": [
-          2,
-          3
-        ]
-      },
       "seal_slots": 1,
       "art": "A01",
       "description": "攻撃・防御・行動順の得失を比較して選ぶ装備。個体の性能は生成時に固定。"
@@ -144,12 +126,6 @@
       "stats": {
         "def": 1,
         "spd": 2
-      },
-      "roll": {
-        "def": [
-          1,
-          2
-        ]
       },
       "seal_slots": 1,
       "art": "I02",
@@ -162,12 +138,6 @@
         "def": 4,
         "spd": -2
       },
-      "roll": {
-        "def": [
-          3,
-          4
-        ]
-      },
       "seal_slots": 1,
       "art": "A03",
       "description": "攻撃・防御・行動順の得失を比較して選ぶ装備。個体の性能は生成時に固定。"
@@ -178,12 +148,6 @@
       "stats": {
         "atk": 3,
         "def": -1
-      },
-      "roll": {
-        "atk": [
-          2,
-          3
-        ]
       },
       "seal_slots": 1,
       "art": "I05",
@@ -196,12 +160,6 @@
         "atk": 2,
         "def": 2,
         "spd": -1
-      },
-      "roll": {
-        "def": [
-          1,
-          2
-        ]
       },
       "seal_slots": 1,
       "art": "I11",
@@ -235,14 +193,15 @@
       "description": "バッグ内で自動使用をONにすると、対応する状態の付与を1回防いで消費する。"
     },
     "RP": {
-      "name": "毒除けの薬",
+      "name": "毒消し草",
       "slot": "",
       "stats": {},
       "category": "consumable",
-      "ward": "poison",
       "price": 2,
       "art": "hp",
-      "description": "バッグ内で自動使用をONにすると、対応する状態の付与を1回防いで消費する。"
+      "description": "バッグ内で自動使用がONの場合、毒状態の自分の行動機会に毒ダメージより先に1個消費。解毒しHP3回復。麻痺中も使用できるが麻痺は治らない。通常行動は消費しない。",
+      "cure": "poison",
+      "heal": 3
     },
     "RM": {
       "name": "痺れ除けの薬",
@@ -253,6 +212,17 @@
       "price": 2,
       "art": "exp",
       "description": "バッグ内で自動使用をONにすると、対応する状態の付与を1回防いで消費する。"
+    },
+    "A06": {
+      "name": "冒険者の盾",
+      "slot": "left_hand",
+      "stats": {
+        "def": 1
+      },
+      "supply": true,
+      "seal_slots": 0,
+      "art": "shield",
+      "description": "支給品。倉庫・対価・換金には使えない。手元に同じ品がある間は再支給されない。"
     }
   },
   "affixes": [
@@ -1168,5 +1138,6 @@
       "damage_multiplier": 1.3,
       "cooldown_own_actions": 3
     }
-  }
+  },
+  "processing_enabled": false
 }

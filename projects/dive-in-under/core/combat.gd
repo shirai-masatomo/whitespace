@@ -42,7 +42,8 @@ static func normalized(unit: Dictionary) -> Dictionary:
 	result.ai_phase=0; result.strong_until=0
 	return result
 
-static func start(hero: Dictionary, foe: Dictionary, rules: Dictionary, battle_seed: int) -> Dictionary:
+static func start(hero: Dictionary, foe: Dictionary, rules: Dictionary, battle_seed: int, strategy: Dictionary={}) -> Dictionary:
+	if rules.get("tactics_enabled",false): return preload("res://core/squad_combat.gd").start([hero],[foe],rules,battle_seed,strategy)
 	var rng := RandomNumberGenerator.new()
 	rng.seed = battle_seed
 	var state := {"hero": normalized(hero), "enemy": normalized(foe), "rules": rules.duplicate(true),
@@ -122,6 +123,14 @@ static func apply_status(state: Dictionary, side: String, target: String, skill_
 static func start_opportunity(state: Dictionary, side: String) -> bool:
 	var unit: Dictionary=state[side]
 	if unit.statuses.has("poison"):
+		for cure in unit.get("cures",[]).duplicate():
+			if cure.status!="poison": continue
+			unit.cures.erase(cure); var before_hp: int=unit.hp
+			unit.hp=mini(int(unit.max_hp),int(unit.hp)+int(cure.heal))
+			remove_status(state,side,"poison","cured")
+			state.log.append({"type":"remedy_used","actor":side,"target":side,"status":"poison","uid":cure.uid,"item":cure.item,"healing":unit.hp-before_hp,"round":state.round})
+			break
+	if unit.statuses.has("poison"):
 		var effect: Dictionary=unit.statuses.poison
 		var amount:=int(effect.potency)
 		unit.hp=maxi(0,int(unit.hp)-amount)
@@ -166,6 +175,7 @@ static func boss_move(state: Dictionary, side: String, rng: RandomNumberGenerato
 	return {"multiplier":1.0}
 
 static func advance(previous: Dictionary) -> Dictionary:
+	if previous.get("squad",false): return preload("res://core/squad_combat.gd").advance(previous)
 	var state := previous.duplicate(true)
 	if state.outcome != "ongoing":
 		return state

@@ -9,6 +9,7 @@ static var source_images: Dictionary={}
 static func texture(template_id: String, fallback_kind: String="") -> Texture2D:
 	var aliases: Dictionary={"W01":"A01","W02":"A01","W03":"A01","B01":"I02","B02":"A03","F01":"I05","G10":"I11"}
 	if aliases.has(template_id): return texture(aliases[template_id],fallback_kind)
+	if template_id=="A06": return Fallback.texture("shield")
 	if template_id=="C01": return Fallback.texture("coin")
 	if template_id in ["RB","RP","RM"]: return preload("res://ui/status_symbols.gd").texture({"C01":"gold","RB":"sp","RP":"hp","RM":"exp"}[template_id])
 	if cache.has(template_id): return cache[template_id]

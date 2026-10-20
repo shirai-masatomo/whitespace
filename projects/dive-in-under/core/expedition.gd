@@ -134,13 +134,16 @@ static func hero(s: Dictionary, cfg: Dictionary) -> Dictionary:
 		var values: Dictionary=Condition.stats(s,uid,cfg)
 		for key in values: h[key] += values[key]
 	if Adventure.active(s):
-		h.wards=[]; h.remedies=[]
+		h.wards=[]; h.remedies=[]; h.cures=[]
 		for uid in s.equipment.values():
 			if uid!="" and int(s.item_condition[uid].current)>0:
+				for skill in s.item_details[uid].get("granted_skills",[]):
+					if skill not in h.skills: h.skills.append(skill)
 				for seal in s.item_details[uid].seals:
 					if not seal in h.wards: h.wards.append(seal)
 		for uid in s.inventory:
 			var item: Dictionary=cfg.items[s.items[uid]]
+			if item.has("cure") and s.auto_remedy.get(item.cure,false): h.cures.append({"uid":uid,"item":s.items[uid],"status":item.cure,"heal":int(item.heal)})
 			if item.has("ward") and s.auto_remedy.get(item.ward,false): h.remedies.append({"uid":uid,"item":s.items[uid],"status":item.ward})
 	return Combat.normalized(h)
 

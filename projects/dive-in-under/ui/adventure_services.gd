@@ -19,7 +19,7 @@ func action(parent: Control, text: String, rect: Rect2, name: String, args: Dict
 func _ready() -> void:
 	size=Vector2(1280,720); z_index=1400;game.modal_owner=self;game.primary_button=null;game.secondary_button=null
 	var shade:=ColorRect.new();shade.color=Color(0,0,0,.73);shade.size=size;add_child(shade)
-	var panel: Control=UISkin.panel(self,Rect2(150,58,980,604),"デバッグ専用操作" if mode=="debug" else ("コインの収納・分割・結合" if mode=="coin" else "支給所・個体・印・自動対策"),true)
+	var panel: Control=UISkin.panel(self,Rect2(150,58,980,604),"デバッグ専用操作" if mode=="debug" else ("コインの収納・分割・結合" if mode=="coin" else "支給所・個体・自動対策"),true)
 	txt(panel,game.notice,Rect2(26,53,928,45),16)
 	if mode=="debug": debug_controls(panel)
 	elif mode=="coin": coin_controls(panel)
@@ -37,7 +37,7 @@ func prepare_controls(panel: Control) -> void:
 	var s: Dictionary=game.campaign;var town: bool=s.phase=="town";var shop: bool=town or (s.floor==5 and s.phase in ["portal","portal_done"])
 	payment(panel,Vector2(26,95))
 	var supply: Button=action(panel,"不足部位の最低装備を再支給",Rect2(655,121,299,40),"supply");supply.disabled=not town
-	txt(panel,"バッグ内の予防薬のみ自動使用 / 印が先、薬は付与1回に1個消費",Rect2(26,177,920,28),18)
+	txt(panel,"バッグの対策品を自動使用 / 毒消し草は毒の自分の手番に解毒＋HP3",Rect2(26,177,920,28),18)
 	for i in 3:
 		var status: String=["blind","poison","paralysis"][i];var id: String=["RB","RP","RM"][i];var name: String=game.cfg.items[id].name
 		var x: int=26+i*310
@@ -57,10 +57,8 @@ func prepare_controls(panel: Control) -> void:
 	var selected: String=game.service_uid
 	if not s.items.has(selected):selected=""
 	if selected!="":txt(panel,Info.profile(s,game.cfg,selected),Rect2(26,386,928,66),16)
-	for i in 3:
-		var status: String=["blind","poison","paralysis"][i]
-		var b: Button=action(panel,game.cfg.progression.seals[status].name+"（石1＋2G）",Rect2(26+i*310,463,297,38),"seal",{"uid":selected,"status":status,"source":s.payment_source});b.disabled=not town or selected=="" or s.item_details.get(selected,{}).get("seal_slots",0)==0
-	txt(panel,"印は1枠1種・確定加工。破損中は印停止。支給品をイベントの対価にはできません。",Rect2(26,504,928,27),14)
+	txt(panel,"印の加工方法・料金は未確定です。加工機能は通常プレイでは提供しません。",Rect2(26,463,928,58),17)
+
 func coin_controls(panel: Control) -> void:
 	var s: Dictionary=game.campaign
 	if not s.items.has(uid) or s.items[uid]!="C01":txt(panel,"コインを選んでください。",Rect2(26,130,928,60));return

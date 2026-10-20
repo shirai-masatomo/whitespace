@@ -1,0 +1,25 @@
+{
+  "version": "2026-10-20.adopted.1",
+  "adopted": true,
+  "max_rules": 8,
+  "max_conditions": 2,
+  "max_sets": 8,
+  "max_favorites": 8,
+  "persistence": "session",
+  "switch": "next_unacted_action",
+  "switch_cost": 0,
+  "fallback": "normal_attack_or_wait",
+  "tie": "seeded_random",
+  "speed": "each_selection",
+  "dead": "exclude",
+  "incapacitated": "consume_opportunity",
+  "ranges": {
+    "attack": "front",
+    "S101": "front",
+    "S102": "front",
+    "S103": "front",
+    "S104": "front",
+    "S105": "self"
+  },
+  "empty_front": "back_reachable"
+}

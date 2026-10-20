@@ -2,6 +2,8 @@ extends RefCounted
 ## Session rules v0.9.0. Old saves/rules never enter this dispatcher.
 const Money=preload("res://core/currency.gd")
 const Instances=preload("res://core/item_instances.gd")
+const Tactics=preload("res://core/tactics.gd")
+const Squad=preload("res://core/squad_combat.gd")
 const Combat=preload("res://core/combat.gd")
 static func api() -> GDScript: return load("res://core/expedition.gd")
 static func active(s: Dictionary) -> bool: return s.get("ruleset","")=="adventure-0.9.0"
@@ -13,6 +15,7 @@ static func configure(cfg: Dictionary) -> Dictionary:
 	for id in rules.events: cfg.events[id]={"name":rules.events[id].name}
 	return cfg
 static func initialize(s: Dictionary, cfg: Dictionary) -> void:
+	s.tactics=Tactics.initial(); s.coin_stack_max=Money.STACK_MAX
 	s.ruleset="adventure-0.9.0"; s.erase("gold"); s.item_rules=cfg.items.duplicate(true); s.affix_rules=cfg.progression.affixes.duplicate(true); s.rng.instance=0
 	s.item_details={}; s.quantities={}; s.auto_remedy={"blind":true,"poison":true,"paralysis":true}; s.payment_source="inventory"
 	s.records={"boss_kills":0,"first_reward_issued":false,"first_reward_claimed":false}; s.debug=false; s.debug_next=""; s.node={}; s.event_counts={}; s.event_target=""
@@ -24,7 +27,7 @@ static func combat_data(data: Dictionary, cfg: Dictionary) -> Dictionary:
 	for id in cfg.progression.skills:
 		var skill: Dictionary=d.rules.skills.get(id,{})
 		skill.merge(cfg.progression.skills[id],true); d.rules.skills[id]=skill
-	d.rules.adventure=true; return d
+	d.rules.adventure=true; d.rules.tactics_enabled=true; d.rules.tactics_ranges=JSON.parse_string(FileAccess.get_file_as_string("res://data/v1/tactics.json")).ranges; return d
 static func note(s: Dictionary, message: String) -> void:
 	s.journal.append(message)
 	if s.journal.size()>24: s.journal.pop_front()
@@ -46,6 +49,7 @@ static func fits(s: Dictionary, rewards: Array) -> bool:
 		if not receive(trial,r): return false
 	return true
 static func can_return(s: Dictionary) -> bool:
+	if int(s.floor)==5 and s.node.get("stayed",false): return false
 	return int(s.floor)>0 and int(s.floor)%5==0 and s.phase in ["portal","portal_done","reward","event_result","explore"] and (s.phase=="portal" or s.node.get("resolved",false)) and s.pending_rewards.is_empty()
 static func finish(s: Dictionary, kind: String, reason: String) -> void:
 	var lost: Array=[]; var kept: Array=[]; var coin_loss: int=Money.amount(s)
@@ -100,7 +104,7 @@ static func start_node(s: Dictionary, data: Dictionary, cfg: Dictionary) -> void
 		var id: String=e.weighted(s,"explore",n.enemies); var level: int=int(n.levels[0])+e.draw(s,"explore",int(n.levels[1])-int(n.levels[0])+1)
 		var seed_value: int=e.draw(s,"battle",2147483647)
 		var d: Dictionary=combat_data(data,cfg); var h: Dictionary=e.hero(s,cfg)
-		s.battle={"enemy_id":id,"enemy_level":level,"seed":seed_value,"hero":h,"rounds":0,"rules_version":3,"encounter_version":3,"current":Combat.start(h,Combat.enemy(d,id,level),d.rules,seed_value)}
+		s.battle={"enemy_id":id,"enemy_level":level,"seed":seed_value,"hero":h,"rounds":0,"rules_version":3,"encounter_version":3,"current":Combat.start(h,Combat.enemy(d,id,level),d.rules,seed_value,Tactics.active(s.tactics))}
 		s.phase="battle"; note(s,"地下%dF：%s Lv.%d が現れた。"%[s.floor,d.enemies[id].name,level])
 	elif n.kind=="treasure":
 		reward(s,e.weighted(s,"loot",n.rewards),1,"chest")
@@ -118,7 +122,10 @@ static func round_step(s: Dictionary, data: Dictionary, cfg: Dictionary) -> void
 	var e: GDScript=api(); var previous: Dictionary=s.battle.current; var b: Dictionary=Combat.advance(previous)
 	var events: Array=b.log.slice(previous.log.size())
 	for event in events:
-		if event.type=="remedy_used": Instances.erase(s,event.uid); note(s,"バッグの%sで%sを予防した。"%[s.item_rules[event.item].name,event.status])
+		if event.type=="remedy_used": Instances.erase(s,event.uid); note(s,"バッグの%sで解毒・HP%d回復。通常行動は続行。"%[s.item_rules[event.item].name,event.healing] if event.has("healing") else "バッグの%sで%sを予防した。"%[s.item_rules[event.item].name,event.status])
+		elif event.type=="decision":
+			var decision: Dictionary=event.decision
+			note(s,b[event.actor].name+"："+decision.label+(" / "+"・".join(decision.skipped) if not decision.skipped.is_empty() else ""))
 		elif event.type=="telegraph": note(s,"石像が力を溜めた。次は強打！ 防御と装備で備えよう。")
 		elif event.type=="opening": note(s,"石像に隙ができた。")
 		elif event.type=="attack": note(s,"%s → %s：%s"%[b[event.actor].name,b[event.target].name,str(event.damage)+"ダメージ" if event.hit else "MISS"])
@@ -126,7 +133,7 @@ static func round_step(s: Dictionary, data: Dictionary, cfg: Dictionary) -> void
 		elif event.type=="status_prevented": note(s,"印で%sを防いだ。"%event.status)
 		elif event.type=="status_applied": note(s,b[event.target].name+"："+event.status+"を付与")
 	s.round_presentation={"before":previous,"after":b,"events":events}
-	s.battle.current=b; s.battle.rounds+=1; s.hp=b.hero.hp; s.sp=b.hero.sp
+	s.battle.current=b; s.battle.rounds=int(b.round); s.hp=b.hero.hp; s.sp=b.hero.sp
 	if b.outcome=="ongoing": return
 	e.Condition.wear(s,cfg); var h: Dictionary=e.hero(s,cfg); s.hp=mini(s.hp,h.max_hp); s.sp=mini(s.sp,h.max_sp)
 	if b.outcome=="defeat": finish(s,"death",b.enemy.name+"との戦闘で力尽きた。"); return
@@ -188,13 +195,25 @@ static func resolve_event(s: Dictionary, choice: Dictionary, args: Dictionary, c
 static func transition(previous: Dictionary, action: String, args: Dictionary, data: Dictionary, cfg: Dictionary) -> Dictionary:
 	var s: Dictionary=previous.duplicate(true); var error: String=""; var changed: bool=false; var e: GDScript=api()
 	match action:
+		"tactic_save":
+			var value: Dictionary=args.get("value",{})
+			error=Tactics.save(s.tactics,value)
+			if error=="":
+				changed=true
+				if args.get("apply",false): Tactics.select(s.tactics,value.id)
+				if s.phase=="battle" and s.tactics.active==value.id: Squad.switch(s.battle.current,value)
+		"tactic_select":
+			if Tactics.select(s.tactics,args.get("id","")):
+				changed=true
+				if s.phase=="battle": Squad.switch(s.battle.current,Tactics.active(s.tactics))
+			else: error="保存された作戦を選んでください。"
 		"depart":
 			if s.phase=="town":
 				s.payment_source="inventory"; s.floor=0; s.phase="explore"; s.result={}; s.trips+=1; s.event_counts={}; s.node={}; s.trip_exp=0; s.trip_gold=0; s.trip_items=0; s.pending_rewards=[]; s.journal=[]; changed=true
 		"descend":
 			if s.phase=="explore" and s.floor<10: descend(s,data,cfg); changed=true
 		"portal_stay":
-			if s.phase=="portal": start_node(s,data,cfg); changed=true
+			if s.phase=="portal": s.node.stayed=true; start_node(s,data,cfg); changed=true
 		"portal_continue":
 			if s.phase=="portal_done" and s.pending_rewards.is_empty():
 				if s.floor==10 and s.node.kind=="boss" and s.records.boss_kills>0: finish(s,"clear","10Fの石像を討伐し、成果を持って帰還した。")
@@ -203,7 +222,7 @@ static func transition(previous: Dictionary, action: String, args: Dictionary, d
 				changed=true
 		"return","return_ready":
 			if can_return(s): finish(s,"clear" if s.floor==10 and s.node.resolved and s.node.kind=="boss" else "return","ポータルを通って地上へ帰還した。"); changed=true
-			else: error="帰還は5の倍数階のポータルで、未受領品の解決後にできます。戦闘中は帰還できません。"
+			else: error="5Fは居座る前だけ帰還可能です。居座った後は10F到着時まで帰還できません。戦闘中・未受領品がある間も帰還できません。"
 		"round":
 			if s.phase=="battle": round_step(s,data,cfg); changed=true
 		"open_chest":
@@ -283,7 +302,8 @@ static func transition(previous: Dictionary, action: String, args: Dictionary, d
 		"payment_source":
 			if args.get("source","") in (["inventory","cloth","warehouse"] if s.phase=="town" else ["inventory","cloth"]): s.payment_source=args.source; changed=true
 		"seal":
-			if s.phase=="town":
+			if not cfg.progression.get("processing_enabled",false): error="印の加工方法・料金は未採用のため利用できません。"
+			elif s.phase=="town":
 				var uid: String=args.get("uid",""); var status: String=args.get("status","")
 				if not s.items.has(uid) or status not in cfg.progression.seals or s.item_details[uid].seal_slots<1: error="印枠のある装備を選んでください。"
 				elif s.item_details[uid].seals==[status]: error="同じ印が付いています。"
@@ -352,7 +372,7 @@ static func validate(s: Dictionary, _data: Dictionary, cfg: Dictionary) -> Strin
 	for uid in owned:
 		if seen.has(uid) or not s.items.has(uid) or not s.item_details.has(uid) or not s.quantities.has(uid) or not s.item_condition.has(uid): return "個体の重複／欠落"
 		seen[uid]=true
-		if not cfg.items.has(s.items[uid]) or int(s.quantities[uid])<1 or int(s.quantities[uid])>(99 if s.items[uid]=="C01" else 1): return "数量不正"
+		if not cfg.items.has(s.items[uid]) or int(s.quantities[uid])<1 or int(s.quantities[uid])>(Money.STACK_MAX if s.items[uid]=="C01" else 1): return "数量不正"
 		if s.item_condition[uid].current<0 or s.item_condition[uid].current>100: return "耐久不正"
 	if seen.size()!=s.items.size() or s.item_details.size()!=seen.size() or s.quantities.size()!=seen.size() or s.item_condition.size()!=seen.size(): return "孤立個体"
 	var tokens: Dictionary={}

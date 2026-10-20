@@ -104,7 +104,8 @@ func build_left() -> void:
 	main_button.add_theme_font_size_override("font_size",16)
 	var gear:=nav(p,"所持品・装備［I］",Rect2(14,112,196,42),game.open_field_equipment,"field-equipment"); gear.disabled=not battle.is_empty(); gear.tooltip_text="戦闘中は装備を変更できません。" if gear.disabled else "比較・ダブルクリック・ドラッグで装備交換"
 	nav(p,"ステータス［C］",Rect2(14,164,196,42),game.open_status,"field-status")
-	var back:=action(p,"突破して帰還" if s.phase=="reward" and s.reward_return=="clear" else "町へ帰還",Rect2(14,216,196,42),"return_ready"); back.disabled=not E.Adventure.can_return(s) if E.Adventure.active(s) else s.phase not in ["explore","reward","event_result"] or not s.pending_rewards.is_empty() or not battle.is_empty(); back.tooltip_text="帰還は5の倍数階のポータルのみ。戦闘中・未受領品がある間は帰還できません。"
+	var tactics_button:=nav(p,"作戦",Rect2(14,266,196,32),func():game.open_services("tactics"),"tactics"); tactics_button.add_theme_font_size_override("font_size",16)
+	var back:=action(p,"突破して帰還" if s.phase=="reward" and s.reward_return=="clear" else "町へ帰還",Rect2(14,216,196,42),"return_ready"); back.disabled=not E.Adventure.can_return(s) if E.Adventure.active(s) else s.phase not in ["explore","reward","event_result"] or not s.pending_rewards.is_empty() or not battle.is_empty(); back.tooltip_text="5Fは居座る前のみ。居座った後は10F到着時まで帰還できません。"
 	var hero: Dictionary=battle.hero if not battle.is_empty() else E.hero(s,game.cfg)
 	var card:=UISkin.panel(self,Rect2(16,364,224,84),"")
 	var pick:=Button.new(); pick.flat=true; pick.size=Vector2(224,84); pick.mouse_default_cursor_shape=CURSOR_POINTING_HAND; card.add_child(pick); pick.pressed.connect(func():select_actor("hero")); pick.set_meta("actor_select","hero")
@@ -139,7 +140,7 @@ func build_field() -> void:
 	var y:=53
 	if not battle.is_empty():
 		label_at(center,"停止中" if not game.auto_play else "自動戦闘中",Rect2(20,51,190,34),18)
-		label_at(center,"Space：停止 / 再開   ・   ROUND %d"%battle.round,Rect2(224,54,470,29),16); y=94
+		label_at(center,"Space：停止 / 再開 ・ R%d ・ %s"%[battle.round,battle.get("strategy",{}).get("name","")],Rect2(224,54,470,29),16); y=94
 	var journal: Array=game.presentation_journal if game.presenting else game.campaign.journal
 	label_at(center,"\n".join(journal.slice(maxi(0,journal.size()-(4 if not battle.is_empty() else 6)))),Rect2(22,y,675,190-y),16)
 func chest_texture(opened: bool=false) -> Texture2D:
@@ -195,7 +196,7 @@ func build_portal() -> void:
 	var s: Dictionary=game.campaign
 	UISkin.picture(center,preload("res://ui/status_symbols.gd").texture("exp"),Rect2(285,78,148,148))
 	label_at(center,"地下 %d F  /  帰還地点"%s.floor,Rect2(58,235,602,45),28,true)
-	label_at(center,("まだ、この階の出来事は始まっていません。\n「居座る」で先へ。「町へ帰還」で成果を持ち帰れます。" if s.phase=="portal" else "この階の出来事は解決済みです。\n帰還するか、左の［E］で続行するか選んでください。"),Rect2(58,299,602,119),23,true)
+	label_at(center,("まだ、この階の出来事は始まっていません。\n「居座る」で先へ。「町へ帰還」で成果を持ち帰れます。" if s.phase=="portal" else ("5Fで居座った後は帰還できません。\n出来事は解決済みです。左の［E］で6Fへ。" if s.floor==5 else "この階の出来事は解決済みです。\n未受領品を確認して地上へ帰還できます。")),Rect2(58,299,602,119),23,true)
 	var portal_note: String="次の帰還地点：10F。5Fから再開する機能ではありません。"
 	if s.floor==10:
 		portal_note="10Fで居座ると石像のボス戦へ。帰還だけでは討伐になりません。" if s.phase=="portal" else ("討伐と受領は完了。［E］で突破帰還します。再戦は地上から新しい遠征で。" if s.node.kind=="boss" else "指定した出来事は解決済みです。ボス討伐にはなりません。")
@@ -336,7 +337,7 @@ func refresh_details() -> void:
 		if uid in game.campaign.items:
 			if not item.stats.is_empty(): lines.append(ItemInfo.performance(game.campaign,game.cfg,uid))
 			if item.slot!="": lines.append(game.condition_text(uid)); lines.append(ItemInfo.profile(game.campaign,game.cfg,uid))
-			if template=="C01": lines.append("%d枚 / 1枚=1G / 上限99枚"%game.campaign.quantities[uid])
+			if template=="C01": lines.append("%d枚 / 1枚=1G / 上限999枚"%game.campaign.quantities[uid])
 		elif not item.stats.is_empty():
 			var current: Dictionary=item.stats
 			if E.Adventure.active(game.campaign):
