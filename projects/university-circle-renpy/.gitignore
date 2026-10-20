@@ -1,0 +1,14 @@
+**/*.rpyc
+**/*.rpymc
+**/cache/
+**/saves/
+**/log.txt
+**/traceback.txt
+**/errors.txt
+**/.DS_Store
+sdk/
+dist/
+tests/
+lint.txt
+*.zip
+*.bak

@@ -1,0 +1,49 @@
+{
+  "updated_at": "2026-10-20",
+  "status": "placeholder assets; not a final commercial clearance",
+  "assets": [
+    {
+      "files": ["game/images/bg/opening.svg", "game/images/bg/campus.svg", "game/images/bg/clubroom.svg", "game/images/bg/beach.svg", "game/images/characters/aoi/neutral.svg", "game/images/characters/aoi/smile.svg"],
+      "origin": "Project-specific simple vector paths authored with Codex assistance",
+      "external_reference_images": [],
+      "image_generation_model": null,
+      "purpose": "Temporary visual placeholders for the initial foundation",
+      "rights_notes": "No downloaded third-party character/background artwork. Keep AI-assistance provenance for store disclosure review. No warranty of final commercial clearance."
+    },
+    {
+      "files": ["game/audio/bgm/campus.wav", "game/audio/bgm/beach.wav", "game/audio/se/chime.wav"],
+      "origin": "Deterministic sine-wave synthesis code authored with Codex assistance",
+      "external_recordings": [],
+      "audio_generation_model": null,
+      "purpose": "Temporary audio-channel and mixer validation",
+      "rights_notes": "No external recording or sampled voice. Final music selection and listening tests remain open."
+    },
+    {
+      "files": ["game/gui/", "game/gui.rpy", "game/screens.rpy", "game/tl/None/common.rpym"],
+      "origin": "Official RenPy 8.5.3 SDK generated Japanese GUI and official common translations",
+      "source": "https://www.renpy.org/dl/8.5.3/renpy-8.5.3-sdk.zip",
+      "license": "RenPy MIT and component-specific licenses",
+      "notice": "RENPY-LICENSE.txt",
+      "checked_at": "2026-10-20"
+    },
+    {
+      "files": ["game/SourceHanSansLite.ttf"],
+      "origin": "Unmodified font copied by official RenPy Japanese GUI generator",
+      "internal_name": "Source Han Sans Lite for RenPy",
+      "internal_version": "Version 2.001 October 29, 2020",
+      "copyright": "Adobe 2014-2019; Reserved Font Name Source (font name table)",
+      "license": "SIL Open Font License 1.1",
+      "source": "RenPy 8.5.3 SDK sdk-fonts/SourceHanSansLite.ttf",
+      "license_url": "https://scripts.sil.org/OFL",
+      "notice": "FONT-LICENSE.txt",
+      "checked_at": "2026-10-20"
+    },
+    {
+      "files": ["game/script.rpy", "game/story/"],
+      "origin": "Temporary fixed dialogue authored with Codex assistance",
+      "purpose": "Adult university characters, ordinary non-explicit dialogue",
+      "rights_notes": "Review AI-assisted narrative disclosure along with final shipped content. Character names and story are provisional."
+    }
+  ],
+  "future_asset_fields": ["file", "sha256", "creator", "source_url", "acquired_at", "license_name_and_version", "license_evidence_path", "commercial_game_use", "adult_work_use", "modification", "redistribution", "credit", "model_name_version_hash", "additional_models", "seed_settings", "reference_image_rights", "distribution_decision", "open_questions"]
+}
