@@ -66,7 +66,9 @@ static func choose_node(s: Dictionary, cfg: Dictionary) -> void:
 		if int(n.floor)==int(s.floor): definition=n.duplicate(true); break
 	var kind: String=definition.kind
 	if kind=="mixed": kind=e.weighted(s,"explore",definition.kinds)
-	if s.debug and s.debug_next!="": kind=s.debug_next; s.debug_next=""
+	if s.debug and s.debug_next!="":
+		kind=s.debug_next; s.debug_next=""; definition.debug_override=true
+		if kind=="enemy" and definition.kind=="boss": definition.enemies={"E02":100}; definition.levels=[2,2]
 	definition.kind=kind; definition.resolved=false; definition.started=false; definition.encounter_id="%d/%d"%[s.trips,s.floor]
 	s.node=definition
 static func descend(s: Dictionary, data: Dictionary, cfg: Dictionary) -> void:
@@ -75,8 +77,16 @@ static func descend(s: Dictionary, data: Dictionary, cfg: Dictionary) -> void:
 		s.phase="portal"; note(s,"地下%dF：地上に戻れるポータルを発見。居座るか帰還を選べる。"%s.floor)
 	else: start_node(s,data,cfg)
 static func eligible(s: Dictionary, definition: Dictionary, cfg: Dictionary) -> bool:
-	if definition.get("candidate_only",false) or s.floor<int(definition.min_floor) or s.floor>int(definition.max_floor): return false
+	if definition.get("candidate_only",false): return false
+	if not (s.debug and s.node.get("debug_override",false)) and (s.floor<int(definition.min_floor) or s.floor>int(definition.max_floor)): return false
 	if definition.get("requires_sp",false) and api().hero(s,cfg).max_sp==0: return false
+	if definition.choices.any(func(c):return c.get("target","")=="gear"):
+		var useful: bool=false
+		for uid in s.inventory+s.equipment.values():
+			if uid=="" or cfg.items[s.items[uid]].slot=="": continue
+			for choice in definition.choices:
+				if choice.get("target","")=="gear" and ((choice.cost.has("durability") and not s.item_details[uid].supply and s.item_condition[uid].current>=int(choice.cost.durability)) or (not choice.cost.has("durability") and s.item_condition[uid].current<100)): useful=true
+		if not useful and definition.choices.filter(func(c):return not c.ops.is_empty() and c.get("target","")!="gear").is_empty(): return false
 	return int(s.event_counts.get(definition.get("id",""),0))<int(definition.get("limit_per_trip",1))
 static func start_node(s: Dictionary, data: Dictionary, cfg: Dictionary) -> void:
 	if s.node.started: return

@@ -1,6 +1,6 @@
 extends Control
 const E=preload("res://core/expedition.gd")
-const Skin=preload("res://ui/ui_skin.gd")
+const UISkin=preload("res://ui/ui_skin.gd")
 const Money=preload("res://core/currency.gd")
 const Info=preload("res://ui/item_presenter.gd")
 var game: Control
@@ -11,20 +11,20 @@ var amount: SpinBox
 var destination: OptionButton
 var gear: OptionButton
 func txt(parent: Control, text: String, rect: Rect2, px: int=18) -> Label:
-	return Skin.label(parent,text,rect,px,Skin.DARK,true)
+	return UISkin.label(parent,text,rect,px,UISkin.DARK,true)
 func action(parent: Control, text: String, rect: Rect2, name: String, args: Dictionary={}) -> Button:
 	var epoch: int=game.ui_epoch; var revision: int=game.campaign.revision
-	var button: Button=Skin.button(parent,text,rect,func():game.ui_action(func():game.perform(name,args,revision),epoch))
+	var button: Button=UISkin.button(parent,text,rect,func():game.ui_action(func():game.perform(name,args,revision),epoch))
 	button.add_theme_font_size_override("font_size",16); button.set_meta("service_action",name);button.set_meta("service_args",args); return button
 func _ready() -> void:
 	size=Vector2(1280,720); z_index=1400;game.modal_owner=self;game.primary_button=null;game.secondary_button=null
 	var shade:=ColorRect.new();shade.color=Color(0,0,0,.73);shade.size=size;add_child(shade)
-	var panel: Control=Skin.panel(self,Rect2(150,58,980,604),"デバッグ専用操作" if mode=="debug" else ("コインの収納・分割・結合" if mode=="coin" else "支給所・個体・印・自動対策"),true)
+	var panel: Control=UISkin.panel(self,Rect2(150,58,980,604),"デバッグ専用操作" if mode=="debug" else ("コインの収納・分割・結合" if mode=="coin" else "支給所・個体・印・自動対策"),true)
 	txt(panel,game.notice,Rect2(26,53,928,45),16)
 	if mode=="debug": debug_controls(panel)
 	elif mode=="coin": coin_controls(panel)
 	else: prepare_controls(panel)
-	var b: Button=Skin.button(panel,"閉じる［Esc／X／右クリック］",Rect2(300,545,380,44),func():call_deferred("cancel_modal"));b.add_theme_font_size_override("font_size",16);b.grab_focus()
+	var b: Button=UISkin.button(panel,"閉じる［Esc／X／右クリック］",Rect2(300,545,380,44),func():call_deferred("cancel_modal"));b.add_theme_font_size_override("font_size",16);b.grab_focus()
 func payment(parent: Control, point: Vector2) -> void:
 	txt(parent,"支払元を明示（他収納から自動補填しません）",Rect2(point,Vector2(670,25)),16)
 	var select:=OptionButton.new();select.position=point+Vector2(0,30);select.size=Vector2(600,36);parent.add_child(select)
@@ -71,8 +71,8 @@ func coin_controls(panel: Control) -> void:
 		if key==source:continue
 		destination.add_item({"inventory":"バッグ","cloth":"風呂敷","warehouse":"地上倉庫"}[key]);destination.set_item_metadata(destination.item_count-1,key)
 	var epoch: int=game.ui_epoch
-	var move: Button=Skin.button(panel,"指定枚数を移す（全量も可）",Rect2(30,278,880,45),func():game.ui_action(func():game.perform("coin_move",{"uid":uid,"source":source,"destination":destination.get_item_metadata(destination.selected),"quantity":int(amount.value)},int(s.revision)),epoch));move.set_meta("nav","coin-move")
-	var split: Button=Skin.button(panel,"同じ収納内で指定枚数を分割",Rect2(30,344,880,45),func():game.ui_action(func():game.perform("coin_split",{"uid":uid,"source":source,"quantity":int(amount.value)},int(s.revision)),epoch));split.set_meta("nav","coin-split")
+	var move: Button=UISkin.button(panel,"指定枚数を移す（全量も可）",Rect2(30,278,880,45),func():game.ui_action(func():game.perform("coin_move",{"uid":uid,"source":source,"destination":destination.get_item_metadata(destination.selected),"quantity":int(amount.value)},int(s.revision)),epoch));move.set_meta("nav","coin-move")
+	var split: Button=UISkin.button(panel,"同じ収納内で指定枚数を分割",Rect2(30,344,880,45),func():game.ui_action(func():game.perform("coin_split",{"uid":uid,"source":source,"quantity":int(amount.value)},int(s.revision)),epoch));split.set_meta("nav","coin-split")
 	action(panel,"同じ収納のコインを結合",Rect2(30,410,880,45),"coin_combine",{"source":source})
 	txt(panel,"入りきらない移動は全体を取消し、元の枚数を保持します。支払いは別の支払元選択から。",Rect2(30,475,880,45),17)
 func debug_controls(panel: Control) -> void:
