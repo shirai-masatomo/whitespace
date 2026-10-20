@@ -1,0 +1,9 @@
+# Ren'Py transient and user-specific files
+**/*.rpyc
+**/*.rpymc
+**/cache/
+**/saves/
+**/log.txt
+**/traceback.txt
+**/errors.txt
+**/.DS_Store
