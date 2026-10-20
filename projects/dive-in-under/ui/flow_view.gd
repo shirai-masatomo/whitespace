@@ -89,15 +89,15 @@ func build_left() -> void:
 		var event: Dictionary=game.cfg.journey.events[s.event]
 		if Choices.simple(event):
 			var benefit: Dictionary=event.choices.filter(func(c):return not c.ops.is_empty() if c.has("ops") else c.effect!="none")[0]
-			var short: String="石を拾う" if benefit.id=="take" else benefit.label
+			var short: String=benefit.label
 			main_button=action(p,short+"［E］",rect,"journey_event",{"choice":benefit.id},true)
 		else:
-			main_button=nav(p,"選んだ行動を決定［E］",rect,func():choose_event(game.event_choice,true),"event-confirm",true)
+			main_button=nav(p,"選択を決定［E］",rect,func():choose_event(game.event_choice,true),"event-confirm",true)
 			main_button.disabled=game.event_choice==""
 	elif s.phase=="portal": main_button=action(p,"居座る［E］",rect,"portal_stay",{},true)
 	elif s.phase=="portal_done": main_button=action(p,"突破して帰還［E］" if s.floor==10 and s.node.kind=="boss" else "次の階へ［E］",rect,"portal_continue",{},true)
 	elif s.phase in ["reward","event_result"] and not s.pending_rewards.is_empty():
-		main_button=action(p,"受領して立ち止まる［E］" if s.floor%5==0 else "受け取って進む［E］",rect,"claim_all_advance",{},true)
+		main_button=action(p,"受け取る［E］" if s.floor%5==0 else "受け取って進む［E］",rect,"claim_all_advance",{},true)
 		main_button.disabled=not E.Adventure.fits(s,s.pending_rewards) if E.Adventure.active(s) else s.inventory.size()+s.pending_rewards.size()>15
 		main_button.tooltip_text="容量不足：獲得品の「所持品と入れ替える…」から手放す品を選べます。" if main_button.disabled else "すべて受領し、次の探索を1回進めます。"
 	else: main_button=action(p,"帰還／続行へ［E］" if s.floor%5==0 and s.floor>0 else "さらに潜る［E］",rect,"advance_ready",{},true)
@@ -241,7 +241,7 @@ func build_rewards() -> void:
 			var item: Dictionary=game.cfg.items[reward.id]
 			var card:=Control.new(); card.custom_minimum_size=Vector2(205,151); grid.add_child(card)
 			Grid.cell(card,game,self,Rect2(67,0,72,72),"pending",reward.token,"",game.flow_selection.get("uid")==reward.token)
-			var name_label:=label_at(card,item.name,Rect2(0,74,205,40),16,true); name_label.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER
+			var name_label:=label_at(card,("初突破保証\n" if reward.get("guaranteed",false) else "")+item.name,Rect2(0,74,205,40),16,true); name_label.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER
 			var swap:=nav(card,"所持品と入れ替える…",Rect2(0,116,205,32),func():begin_replacement(reward.token),"replace-reward-"+reward.token); swap.add_theme_font_size_override("font_size",14); swap.disabled=s.inventory.is_empty()
 	label_at(center,"装備 / 所持品をダブルクリック、または部位へドラッグで交換",Rect2(30,318,658,36),16,true)
 	for i in E.SLOTS.size():

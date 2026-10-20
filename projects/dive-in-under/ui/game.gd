@@ -302,7 +302,9 @@ func show_campaign() -> void:
 			show_play_view("equipment" if field_equipment or (campaign.phase=="town" and town_page=="equipment") else ("exploration" if presenting else ("hub" if campaign.phase=="town" else campaign.phase)))
 		if campaign.phase=="battle" and auto_play and not field_equipment and not field_status and not presenting and not intro_active and service_mode=="": play_timer.wait_time=(1.1 if display_battle().get("enemy",{}).get("ai_phase",0)==2 else 0.6)/play_speed; play_timer.start()
 		if debug_run:
-			var badge:=text_label("デバッグ中 / 通常の成果には反映しません",16);badge.position=Vector2(350,0);badge.size=Vector2(580,24);badge.z_index=1500;screen.add_child(badge)
+			var overlay:=Control.new(); overlay.mouse_filter=Control.MOUSE_FILTER_IGNORE; overlay.z_index=1500; screen.add_child(overlay)
+			var dark:=ColorRect.new(); dark.position=Vector2(350,0); dark.size=Vector2(580,24); dark.color=Color(.015,.04,.055,.96); dark.mouse_filter=Control.MOUSE_FILTER_IGNORE; overlay.add_child(dark)
+			var badge:=text_label("デバッグ中 / 通常の成果には反映しません",16);badge.position=Vector2(360,0);badge.size=Vector2(560,24);badge.set_meta("debug_badge",true);overlay.add_child(badge)
 		if service_mode!="":attach_services()
 		return
 	timer.stop(); play_timer.stop(); title_visible=false; ui_mode="campaign"; play_buttons={}

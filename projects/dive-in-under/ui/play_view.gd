@@ -107,7 +107,8 @@ func build_hub() -> void:
 		if uid=="": continue
 		UISkin.picture(card,Items.texture(game.campaign.items[uid],slot),Rect2(20+index*58,364,50,50)); index+=1
 		if index==5: break
-	UISkin.label(self,"5Fごとのポータルで帰還 / 装備・バッグ全損、風呂敷・倉庫・成長は保持",Rect2(570,651,620,38),15,UISkin.INK,true)
+	var warning:=ColorRect.new(); warning.position=Vector2(560,649); warning.size=Vector2(632,28); warning.color=Color(.015,.04,.055,.94); warning.mouse_filter=Control.MOUSE_FILTER_IGNORE; add_child(warning)
+	UISkin.label(self,"5Fごとに帰還 / 死亡：装備・バッグ全損、風呂敷・倉庫・成長は保持",Rect2(570,651,612,25),14,UISkin.INK)
 func add_stage(r: Rect2, enemy: String="") -> void:
 	stage=Control.new(); stage.set_script(game.BattleStage); stage.wide_layout=true; stage.integrated_layout=true
 	stage.floor_number=game.campaign.floor; stage.enemy_id=enemy; stage.background_override=E.Journey.node(game.cfg,int(game.campaign.floor),game.campaign).get("background","") if E.Journey.active(game.campaign) else ""; stage.position=r.position; stage.size=r.size; add_child(stage)

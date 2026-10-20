@@ -64,7 +64,7 @@ func prepare_controls(panel: Control) -> void:
 func coin_controls(panel: Control) -> void:
 	var s: Dictionary=game.campaign
 	if not s.items.has(uid) or s.items[uid]!="C01":txt(panel,"コインを選んでください。",Rect2(26,130,928,60));return
-	txt(panel,"選択：%s / %d枚（1枚1G）\n全量も分割も同じ収納処理。装備は個体別でスタックしません。"%[source,s.quantities[uid]],Rect2(26,100,928,80),21)
+	txt(panel,"選択：%s / %d枚（1枚1G）\n全量も分割も同じ収納処理。装備は個体別でスタックしません。"%[{"inventory":"バッグ","cloth":"風呂敷","warehouse":"地上倉庫"}[source],s.quantities[uid]],Rect2(26,100,928,80),21)
 	amount=SpinBox.new();amount.min_value=1;amount.max_value=int(s.quantities[uid]);amount.value=int(s.quantities[uid]);amount.position=Vector2(30,210);amount.size=Vector2(250,42);amount.set_meta("coin_quantity",true);panel.add_child(amount)
 	destination=OptionButton.new();destination.position=Vector2(330,210);destination.size=Vector2(580,42);panel.add_child(destination)
 	for key in ["inventory","cloth","warehouse"]:

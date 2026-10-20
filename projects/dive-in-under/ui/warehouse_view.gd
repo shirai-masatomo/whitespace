@@ -117,7 +117,7 @@ func build() -> void:
 				selected_source=source; selected_uid=game.campaign[source][0]; break
 	game.warehouse_state.source=selected_source; game.warehouse_state.uid=selected_uid
 	var header:=panel(Rect2(16,14,1248,64),"","lantern")
-	label_at(header,"倉庫 ・ 所持品",Rect2(28,11,370,40),27)
+	label_at(header,"倉庫 ・ 所持品",Rect2(56,11,370,40),27)
 	label_at(header,"持ち帰ったものを、次の旅へ。",Rect2(690,14,340,34),16,MUTED)
 	label_at(header,"G  %d"%E.money(game.campaign),Rect2(1080,11,150,40),23,GOLD)
 	var left:=panel(Rect2(16,92,296,300),"所持品","backpack")

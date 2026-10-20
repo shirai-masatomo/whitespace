@@ -7,6 +7,7 @@ static func texture(kind: String) -> Texture2D:
 	var palette: Dictionary={"o":Color("151511"),"s":Color("5c3d29"),"m":Color("94673d"),"l":Color("c8a171"),"h":Color("ead3a0"),"g":Color("dbab47"),"b":Color("4f9ca7"),"v":Color("8c65ac")}
 	var pixels: Array=[]
 	match kind:
+		"coin": pixels=["       ooooooo       ","     oogggggggoo     ","    ogghhhhhggggo    ","   ogghgggggggmgo   ","   ogghggghgggmgo   ","   ogghgghhgggmgo   ","   ogghggghgggmgo   ","   ogghggghgggmgo   ","   oggggghhhggmgo   ","   oggggggggggmgo   ","    oggmmmmmmggo    ","     oogggggggoo     ","       ooooooo       "]
 		"head": pixels=["       oooooooo       ","     oossmmmmssoo     ","    osmmlllllmmso     ","   osmmllhhlllmmso    ","   osmmlllllllmmso    ","  oosssssssssssssoo   "," oommllllllllllmmoo   ","  oooooooooooooooo    "]
 		"body": pixels=["     ooo     ooo     ","   oosmsooooosmsoo   ","  osmmlmssssmlmmso   "," osmmmlmmllmmlmmmso  "," osmmmlmmllmmlmmmso  ","  ooomlmmllmmlmooo   ","    omlmmllmmlmo     ","    omlmmllmmlmo     ","    osssssssssso     ","     oooooooooo      "]
 		"legs": pixels=["    oooooooooooo    ","    osmllllllmso    ","    osmmllllmmso    ","    osmmmssmmmso    ","    osmmooommmso    ","    osmmsoosmmso    ","    osmmsoosmmso    ","    ollmsoosmlho    ","    oooo  oooooo    "]
