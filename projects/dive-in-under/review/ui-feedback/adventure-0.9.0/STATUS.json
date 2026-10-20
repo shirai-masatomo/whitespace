@@ -1,0 +1,98 @@
+[
+  {
+    "number": "A",
+    "title": "正本・仮値・履歴",
+    "implementation": "実装済み",
+    "verification": "静的照合。現行と旧仕様を区別。",
+    "scope": "SPECと7台帳、判断・未決・実装状況を整理。旧全文を履歴へ保全。",
+    "after": "after/01-normal-preparation.png",
+    "references": "docs/SPEC",
+    "source_commit": "7b70a518f8307febcb71c4797aafd1473c876130",
+    "user_evaluation": "未評価",
+    "adoption": "未判断"
+  },
+  {
+    "number": "B",
+    "title": "全損・支給・コイン・ポータル",
+    "implementation": "実装済み",
+    "verification": "共通処理と実EXEの死亡・支給・数量入力・5F帰還を確認。全GUI組合せは未確認。",
+    "scope": "装備とバッグを全損、保護収納と成長を保持。不足部位へ支給。コイン分割・結合・明示支払。5F/10Fで停止。",
+    "after": "after/18-fixture-death-loss-kept.png",
+    "references": "ITEMS/FLOORS",
+    "source_commit": "7b70a518f8307febcb71c4797aafd1473c876130",
+    "user_evaluation": "未評価",
+    "adoption": "未判断"
+  },
+  {
+    "number": "C",
+    "title": "横の装備と固定個体",
+    "implementation": "実装済み",
+    "verification": "交換・整理・修理で固定、満杯交換、HP付け外しで回復しないことを限定確認。",
+    "scope": "軽快・重打・守備、軽装・重装、指輪。主能力の均等ロール＋排他追加能力。印と耐久を分離。",
+    "after": "after/04-normal-status.png",
+    "references": "ITEMS",
+    "source_commit": "7b70a518f8307febcb71c4797aafd1473c876130",
+    "user_evaluation": "未評価",
+    "adoption": "未判断"
+  },
+  {
+    "number": "D",
+    "title": "状態異常と対策",
+    "implementation": "実装済み",
+    "verification": "毒を代表に印優先・薬1個・無料再発動なしを確認。全状態×全装備の総当たりは未実施。",
+    "scope": "後半の暗闇→毒→麻痺。町と5Fで薬を購入、バッグ実物を消費。印が先、破損時は薬へ。",
+    "after": "after/02-preparation-services.png",
+    "references": "ITEMS/SKILLS",
+    "source_commit": "7b70a518f8307febcb71c4797aafd1473c876130",
+    "user_evaluation": "未評価",
+    "adoption": "未判断"
+  },
+  {
+    "number": "E",
+    "title": "自動防御・石像の行動",
+    "implementation": "実装済み",
+    "verification": "予告・防御の実画面、HP分岐・SP不足・連用制限を限定確認。",
+    "scope": "通常→予告→強打→隙。通常枠の重みとHP条件、SP不足代替。防御は攻撃1手を使う。",
+    "after": "after/14-fixture-boss-telegraph.png",
+    "references": "ENEMIES/COMBAT/SKILLS",
+    "source_commit": "7b70a518f8307febcb71c4797aafd1473c876130",
+    "user_evaluation": "未評価",
+    "adoption": "未判断"
+  },
+  {
+    "number": "F",
+    "title": "初突破と再入手",
+    "implementation": "実装済み",
+    "verification": "初回受領・満杯直接装備・二重受領拒否・全損、通常表の再討伐を確認。",
+    "scope": "門守の継ぎ輪を初回保証、再討伐でも入手。保証を重複生成せず、満杯でも未受領保持。死亡例外なし。",
+    "after": "after/15-fixture-first-guarantee.png",
+    "references": "ITEMS/ENEMIES",
+    "source_commit": "7b70a518f8307febcb71c4797aafd1473c876130",
+    "user_evaluation": "未評価",
+    "adoption": "未判断"
+  },
+  {
+    "number": "G",
+    "title": "イベント台帳と実装",
+    "implementation": "実装済み",
+    "verification": "無料／利益選択／HP・耐久・素材・コイン費用／確率を限定確認。個別GUI全件は未確認。",
+    "scope": "新規6件＋既存3件を通常表へ。費用と効果を一括確定。EV16/17は候補のみ。",
+    "after": "after/11-fixture-costed-event.png",
+    "references": "EVENTS",
+    "source_commit": "7b70a518f8307febcb71c4797aafd1473c876130",
+    "user_evaluation": "未評価",
+    "adoption": "未判断"
+  },
+  {
+    "number": "H",
+    "title": "独立デバッグ",
+    "implementation": "実装済み",
+    "verification": "3種置換のコア、10Fイベントと戦闘中帰還の実EXEを確認。専用Cmdの人間による起動は未確認。",
+    "scope": "専用起動・常時表示、次の1階の種類指定、いつでも帰還。実際の種類で判定。通常成果と分離。",
+    "after": "after/20-fixture-debug-10f-event.png",
+    "references": "SPEC/FLOORS",
+    "source_commit": "7b70a518f8307febcb71c4797aafd1473c876130",
+    "user_evaluation": "未評価",
+    "adoption": "未判断"
+  }
+]

@@ -1,0 +1,4 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+ADVENTURE_NORMAL_SUMMARY [{"exp":10,"floor":5,"kills":0,"kind":"return","level":1,"trip":1},{"exp":45,"floor":9,"kills":0,"kind":"death","level":3,"trip":2},{"exp":98,"floor":10,"kills":0,"kind":"return","level":4,"trip":3},{"exp":156,"floor":10,"kills":0,"kind":"death","level":5,"trip":4},{"exp":204,"floor":10,"kills":0,"kind":"death","level":6,"trip":5},{"exp":259,"floor":10,"kills":0,"kind":"death","level":7,"trip":6},{"exp":314,"floor":10,"kills":0,"kind":"death","level":7,"trip":7},{"exp":379,"floor":10,"kills":0,"kind":"death","level":8,"trip":8},{"exp":428,"floor":10,"kills":0,"kind":"death","level":8,"trip":9},{"exp":490,"floor":10,"kills":0,"kind":"death","level":9,"trip":10},{"exp":579,"floor":10,"kills":1,"kind":"clear","level":10,"trip":11},{"exp":669,"floor":10,"kills":2,"kind":"clear","level":11,"trip":12}]
+ADVENTURE_CORE_OK checks=70

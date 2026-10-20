@@ -1,3 +1,13 @@
+## 現在の通常入口：0.9.0（2026-10-20）
+
+[起動・版・配布](review/current/README.md) / [装備と再挑戦A〜H・実画面](review/ui-feedback/adventure-0.9.0/index.html) / [操作](review/ui-feedback/adventure-0.9.0/OPERATIONS.md) / [試作採用値](review/ui-feedback/adventure-0.9.0/PROVISIONAL_VALUES.md)。mainで実装。全ロスト・支給・コイン・ポータルを一組で確認して通常入口へ反映。実行ソース7b70a518f8307febcb71c4797aafd1473c876130、CI39418256675成功。コア70確認と隔離実EXE正常終了・22画面。
+
+横の装備・固定個体、状態対策、予告への防御、初突破装備と再入手、新6型イベント、独立デバッグを接続。保存なし・終了でリセット。旧セーブ、旧配布、原画像・評価履歴を保持。見た目・遊び・試作値のユーザー評価は未評価。確認範囲と未対応候補はレビューで区別。
+
+## 以下は過去の開発・配布履歴
+
+以下に残す旧版の「現在」「通常入口」、保存、帰還、Gold喪失の説明は当時の記録。現行仕様はSPECと冒頭のreview/currentを参照。
+
 ## 現在の通常入口：0.8.1（2026-10-20）
 
 [通常の起動・版・配布](review/current/README.md)／[今回のレビュー修正01〜09・実画面比較](review/ui-feedback/review-fixes-0.8.1/index.html)／[操作方法](review/ui-feedback/review-fixes-0.8.1/OPERATIONS.md)。mainで開発。確認済み0.8.1へ通常入口を更新。保存なしで、終了時に進行をリセット。E＝左主操作、I＝所持品・装備、C＝ステータス、Space＝停止／再開、X／右クリック＝画面に明示した取消・見送り。詳細は現行PLAYを参照。

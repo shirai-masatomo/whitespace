@@ -1,0 +1,115 @@
+{
+	"complete": true,
+	"exit_button_pressed": true,
+	"fixtures": [
+		"currency_modal",
+		"event_cost",
+		"boss_telegraph_and_guarantee",
+		"combat_death_and_resupply",
+		"debug_override_and_return"
+	],
+	"no_save_store": true,
+	"normal_first_five_ui": true,
+	"normal_full_route": "separate public-core transactions, no stat injection; see normal-plan.json",
+	"normal_tables_plan": [
+		{
+			"exp": 10.0,
+			"floor": 5.0,
+			"kills": 0.0,
+			"kind": "return",
+			"level": 1.0,
+			"trip": 1.0
+		},
+		{
+			"exp": 45.0,
+			"floor": 9.0,
+			"kills": 0.0,
+			"kind": "death",
+			"level": 3.0,
+			"trip": 2.0
+		},
+		{
+			"exp": 98.0,
+			"floor": 10.0,
+			"kills": 0.0,
+			"kind": "return",
+			"level": 4.0,
+			"trip": 3.0
+		},
+		{
+			"exp": 156.0,
+			"floor": 10.0,
+			"kills": 0.0,
+			"kind": "death",
+			"level": 5.0,
+			"trip": 4.0
+		},
+		{
+			"exp": 204.0,
+			"floor": 10.0,
+			"kills": 0.0,
+			"kind": "death",
+			"level": 6.0,
+			"trip": 5.0
+		},
+		{
+			"exp": 259.0,
+			"floor": 10.0,
+			"kills": 0.0,
+			"kind": "death",
+			"level": 7.0,
+			"trip": 6.0
+		},
+		{
+			"exp": 314.0,
+			"floor": 10.0,
+			"kills": 0.0,
+			"kind": "death",
+			"level": 7.0,
+			"trip": 7.0
+		},
+		{
+			"exp": 379.0,
+			"floor": 10.0,
+			"kills": 0.0,
+			"kind": "death",
+			"level": 8.0,
+			"trip": 8.0
+		},
+		{
+			"exp": 428.0,
+			"floor": 10.0,
+			"kills": 0.0,
+			"kind": "death",
+			"level": 8.0,
+			"trip": 9.0
+		},
+		{
+			"exp": 490.0,
+			"floor": 10.0,
+			"kills": 0.0,
+			"kind": "death",
+			"level": 9.0,
+			"trip": 10.0
+		},
+		{
+			"exp": 579.0,
+			"floor": 10.0,
+			"kills": 1.0,
+			"kind": "clear",
+			"level": 10.0,
+			"trip": 11.0
+		},
+		{
+			"exp": 669.0,
+			"floor": 10.0,
+			"kills": 2.0,
+			"kind": "clear",
+			"level": 11.0,
+			"trip": 12.0
+		}
+	],
+	"rendered": true,
+	"run_id": "54549fe251b44d61a2dad5cd9998a90c",
+	"version": "0.9.0"
+}

@@ -1,0 +1,4158 @@
+{
+  "actions": [
+    {
+      "action": "depart",
+      "args": {},
+      "exp": 0,
+      "floor": 0,
+      "phase": "explore",
+      "revision": 1
+    },
+    {
+      "action": "descend",
+      "args": {},
+      "exp": 0,
+      "floor": 1,
+      "phase": "battle",
+      "revision": 2
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 0,
+      "floor": 1,
+      "phase": "battle",
+      "revision": 3
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 0,
+      "floor": 1,
+      "phase": "battle",
+      "revision": 4
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 5,
+      "floor": 1,
+      "phase": "reward",
+      "revision": 5
+    },
+    {
+      "action": "claim_all_advance",
+      "args": {},
+      "exp": 5,
+      "floor": 2,
+      "phase": "treasure",
+      "revision": 6
+    },
+    {
+      "action": "open_chest",
+      "args": {},
+      "exp": 5,
+      "floor": 2,
+      "phase": "reward",
+      "revision": 7
+    },
+    {
+      "action": "claim_all_advance",
+      "args": {},
+      "exp": 5,
+      "floor": 3,
+      "phase": "event",
+      "revision": 8
+    },
+    {
+      "action": "equip",
+      "args": {
+        "uid": "item-7"
+      },
+      "exp": 5,
+      "floor": 3,
+      "phase": "event",
+      "revision": 9
+    },
+    {
+      "action": "journey_event",
+      "args": {
+        "choice": "drink"
+      },
+      "exp": 5,
+      "floor": 3,
+      "phase": "event_result",
+      "revision": 10
+    },
+    {
+      "action": "advance_ready",
+      "args": {},
+      "exp": 5,
+      "floor": 4,
+      "phase": "battle",
+      "revision": 11
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 5,
+      "floor": 4,
+      "phase": "battle",
+      "revision": 12
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 10,
+      "floor": 4,
+      "phase": "reward",
+      "revision": 13
+    },
+    {
+      "action": "claim_all_advance",
+      "args": {},
+      "exp": 10,
+      "floor": 5,
+      "phase": "portal",
+      "revision": 14
+    },
+    {
+      "action": "return_ready",
+      "args": {},
+      "exp": 10,
+      "floor": 5,
+      "phase": "result",
+      "revision": 15
+    },
+    {
+      "action": "town",
+      "args": {},
+      "exp": 10,
+      "floor": 0,
+      "phase": "town",
+      "revision": 16
+    },
+    {
+      "action": "transfer",
+      "args": {
+        "destination": "warehouse",
+        "source": "inventory",
+        "uid": "item-6"
+      },
+      "exp": 10,
+      "floor": 0,
+      "phase": "town",
+      "revision": 17
+    },
+    {
+      "action": "transfer",
+      "args": {
+        "destination": "warehouse",
+        "source": "inventory",
+        "uid": "item-8"
+      },
+      "exp": 10,
+      "floor": 0,
+      "phase": "town",
+      "revision": 18
+    },
+    {
+      "action": "buy_remedy",
+      "args": {
+        "id": "RB",
+        "source": "warehouse"
+      },
+      "exp": 10,
+      "floor": 0,
+      "phase": "town",
+      "revision": 19
+    },
+    {
+      "action": "buy_remedy",
+      "args": {
+        "id": "RP",
+        "source": "warehouse"
+      },
+      "exp": 10,
+      "floor": 0,
+      "phase": "town",
+      "revision": 20
+    },
+    {
+      "action": "buy_remedy",
+      "args": {
+        "id": "RM",
+        "source": "warehouse"
+      },
+      "exp": 10,
+      "floor": 0,
+      "phase": "town",
+      "revision": 21
+    },
+    {
+      "action": "depart",
+      "args": {},
+      "exp": 10,
+      "floor": 0,
+      "phase": "explore",
+      "revision": 22
+    },
+    {
+      "action": "descend",
+      "args": {},
+      "exp": 10,
+      "floor": 1,
+      "phase": "battle",
+      "revision": 23
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 10,
+      "floor": 1,
+      "phase": "battle",
+      "revision": 24
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 14,
+      "floor": 1,
+      "phase": "reward",
+      "revision": 25
+    },
+    {
+      "action": "claim_all_advance",
+      "args": {},
+      "exp": 14,
+      "floor": 2,
+      "phase": "treasure",
+      "revision": 26
+    },
+    {
+      "action": "open_chest",
+      "args": {},
+      "exp": 14,
+      "floor": 2,
+      "phase": "reward",
+      "revision": 27
+    },
+    {
+      "action": "claim_all_advance",
+      "args": {},
+      "exp": 14,
+      "floor": 3,
+      "phase": "event",
+      "revision": 28
+    },
+    {
+      "action": "equip",
+      "args": {
+        "uid": "item-14"
+      },
+      "exp": 14,
+      "floor": 3,
+      "phase": "event",
+      "revision": 29
+    },
+    {
+      "action": "journey_event",
+      "args": {
+        "choice": "leave"
+      },
+      "exp": 14,
+      "floor": 3,
+      "phase": "event_result",
+      "revision": 30
+    },
+    {
+      "action": "advance_ready",
+      "args": {},
+      "exp": 14,
+      "floor": 4,
+      "phase": "battle",
+      "revision": 31
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 14,
+      "floor": 4,
+      "phase": "battle",
+      "revision": 32
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 19,
+      "floor": 4,
+      "phase": "reward",
+      "revision": 33
+    },
+    {
+      "action": "claim_all_advance",
+      "args": {},
+      "exp": 19,
+      "floor": 5,
+      "phase": "portal",
+      "revision": 34
+    },
+    {
+      "action": "portal_stay",
+      "args": {},
+      "exp": 19,
+      "floor": 5,
+      "phase": "battle",
+      "revision": 35
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 19,
+      "floor": 5,
+      "phase": "battle",
+      "revision": 36
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 19,
+      "floor": 5,
+      "phase": "battle",
+      "revision": 37
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 25,
+      "floor": 5,
+      "phase": "reward",
+      "revision": 38
+    },
+    {
+      "action": "claim_all_advance",
+      "args": {},
+      "exp": 25,
+      "floor": 5,
+      "phase": "portal_done",
+      "revision": 39
+    },
+    {
+      "action": "portal_continue",
+      "args": {},
+      "exp": 25,
+      "floor": 6,
+      "phase": "battle",
+      "revision": 40
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 25,
+      "floor": 6,
+      "phase": "battle",
+      "revision": 41
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 25,
+      "floor": 6,
+      "phase": "battle",
+      "revision": 42
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 34,
+      "floor": 6,
+      "phase": "reward",
+      "revision": 43
+    },
+    {
+      "action": "claim_all_advance",
+      "args": {},
+      "exp": 34,
+      "floor": 7,
+      "phase": "event",
+      "revision": 44
+    },
+    {
+      "action": "journey_event",
+      "args": {
+        "choice": "safe"
+      },
+      "exp": 34,
+      "floor": 7,
+      "phase": "event_result",
+      "revision": 45
+    },
+    {
+      "action": "claim_all_advance",
+      "args": {},
+      "exp": 34,
+      "floor": 8,
+      "phase": "battle",
+      "revision": 46
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 34,
+      "floor": 8,
+      "phase": "battle",
+      "revision": 47
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 34,
+      "floor": 8,
+      "phase": "battle",
+      "revision": 48
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 34,
+      "floor": 8,
+      "phase": "battle",
+      "revision": 49
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 34,
+      "floor": 8,
+      "phase": "battle",
+      "revision": 50
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 45,
+      "floor": 8,
+      "phase": "reward",
+      "revision": 51
+    },
+    {
+      "action": "claim_all_advance",
+      "args": {},
+      "exp": 45,
+      "floor": 9,
+      "phase": "battle",
+      "revision": 52
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 45,
+      "floor": 9,
+      "phase": "battle",
+      "revision": 53
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 45,
+      "floor": 9,
+      "phase": "battle",
+      "revision": 54
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 45,
+      "floor": 9,
+      "phase": "result",
+      "revision": 55
+    },
+    {
+      "action": "town",
+      "args": {},
+      "exp": 45,
+      "floor": 0,
+      "phase": "town",
+      "revision": 56
+    },
+    {
+      "action": "supply",
+      "args": {},
+      "exp": 45,
+      "floor": 0,
+      "phase": "town",
+      "revision": 57
+    },
+    {
+      "action": "depart",
+      "args": {},
+      "exp": 45,
+      "floor": 0,
+      "phase": "explore",
+      "revision": 58
+    },
+    {
+      "action": "descend",
+      "args": {},
+      "exp": 45,
+      "floor": 1,
+      "phase": "battle",
+      "revision": 59
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 45,
+      "floor": 1,
+      "phase": "battle",
+      "revision": 60
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 50,
+      "floor": 1,
+      "phase": "reward",
+      "revision": 61
+    },
+    {
+      "action": "claim_all_advance",
+      "args": {},
+      "exp": 50,
+      "floor": 2,
+      "phase": "treasure",
+      "revision": 62
+    },
+    {
+      "action": "open_chest",
+      "args": {},
+      "exp": 50,
+      "floor": 2,
+      "phase": "reward",
+      "revision": 63
+    },
+    {
+      "action": "claim_all_advance",
+      "args": {},
+      "exp": 50,
+      "floor": 3,
+      "phase": "event",
+      "revision": 64
+    },
+    {
+      "action": "equip",
+      "args": {
+        "uid": "item-23"
+      },
+      "exp": 50,
+      "floor": 3,
+      "phase": "event",
+      "revision": 65
+    },
+    {
+      "action": "journey_event",
+      "args": {
+        "choice": "take"
+      },
+      "exp": 50,
+      "floor": 3,
+      "phase": "event_result",
+      "revision": 66
+    },
+    {
+      "action": "claim_all_advance",
+      "args": {},
+      "exp": 50,
+      "floor": 4,
+      "phase": "battle",
+      "revision": 67
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 50,
+      "floor": 4,
+      "phase": "battle",
+      "revision": 68
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 55,
+      "floor": 4,
+      "phase": "reward",
+      "revision": 69
+    },
+    {
+      "action": "claim_all_advance",
+      "args": {},
+      "exp": 55,
+      "floor": 5,
+      "phase": "portal",
+      "revision": 70
+    },
+    {
+      "action": "portal_stay",
+      "args": {},
+      "exp": 55,
+      "floor": 5,
+      "phase": "treasure",
+      "revision": 71
+    },
+    {
+      "action": "open_chest",
+      "args": {},
+      "exp": 55,
+      "floor": 5,
+      "phase": "reward",
+      "revision": 72
+    },
+    {
+      "action": "claim_all_advance",
+      "args": {},
+      "exp": 55,
+      "floor": 5,
+      "phase": "portal_done",
+      "revision": 73
+    },
+    {
+      "action": "equip",
+      "args": {
+        "uid": "item-25"
+      },
+      "exp": 55,
+      "floor": 5,
+      "phase": "portal_done",
+      "revision": 74
+    },
+    {
+      "action": "portal_continue",
+      "args": {},
+      "exp": 55,
+      "floor": 6,
+      "phase": "battle",
+      "revision": 75
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 55,
+      "floor": 6,
+      "phase": "battle",
+      "revision": 76
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 64,
+      "floor": 6,
+      "phase": "reward",
+      "revision": 77
+    },
+    {
+      "action": "claim_all_advance",
+      "args": {},
+      "exp": 64,
+      "floor": 7,
+      "phase": "event",
+      "revision": 78
+    },
+    {
+      "action": "journey_event",
+      "args": {
+        "choice": "read"
+      },
+      "exp": 68,
+      "floor": 7,
+      "phase": "event_result",
+      "revision": 79
+    },
+    {
+      "action": "advance_ready",
+      "args": {},
+      "exp": 68,
+      "floor": 8,
+      "phase": "battle",
+      "revision": 80
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 68,
+      "floor": 8,
+      "phase": "battle",
+      "revision": 81
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 68,
+      "floor": 8,
+      "phase": "battle",
+      "revision": 82
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 79,
+      "floor": 8,
+      "phase": "reward",
+      "revision": 83
+    },
+    {
+      "action": "claim_all_advance",
+      "args": {},
+      "exp": 79,
+      "floor": 9,
+      "phase": "battle",
+      "revision": 84
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 79,
+      "floor": 9,
+      "phase": "battle",
+      "revision": 85
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 79,
+      "floor": 9,
+      "phase": "battle",
+      "revision": 86
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 79,
+      "floor": 9,
+      "phase": "battle",
+      "revision": 87
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 79,
+      "floor": 9,
+      "phase": "battle",
+      "revision": 88
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 98,
+      "floor": 9,
+      "phase": "reward",
+      "revision": 89
+    },
+    {
+      "action": "claim_all_advance",
+      "args": {},
+      "exp": 98,
+      "floor": 10,
+      "phase": "portal",
+      "revision": 90
+    },
+    {
+      "action": "return_ready",
+      "args": {},
+      "exp": 98,
+      "floor": 10,
+      "phase": "result",
+      "revision": 91
+    },
+    {
+      "action": "town",
+      "args": {},
+      "exp": 98,
+      "floor": 0,
+      "phase": "town",
+      "revision": 92
+    },
+    {
+      "action": "transfer",
+      "args": {
+        "destination": "warehouse",
+        "source": "inventory",
+        "uid": "item-22"
+      },
+      "exp": 98,
+      "floor": 0,
+      "phase": "town",
+      "revision": 93
+    },
+    {
+      "action": "transfer",
+      "args": {
+        "destination": "warehouse",
+        "source": "inventory",
+        "uid": "item-24"
+      },
+      "exp": 98,
+      "floor": 0,
+      "phase": "town",
+      "revision": 94
+    },
+    {
+      "action": "transfer",
+      "args": {
+        "destination": "warehouse",
+        "source": "inventory",
+        "uid": "item-26"
+      },
+      "exp": 98,
+      "floor": 0,
+      "phase": "town",
+      "revision": 95
+    },
+    {
+      "action": "transfer",
+      "args": {
+        "destination": "warehouse",
+        "source": "inventory",
+        "uid": "item-27"
+      },
+      "exp": 98,
+      "floor": 0,
+      "phase": "town",
+      "revision": 96
+    },
+    {
+      "action": "buy_remedy",
+      "args": {
+        "id": "RB",
+        "source": "warehouse"
+      },
+      "exp": 98,
+      "floor": 0,
+      "phase": "town",
+      "revision": 97
+    },
+    {
+      "action": "buy_remedy",
+      "args": {
+        "id": "RP",
+        "source": "warehouse"
+      },
+      "exp": 98,
+      "floor": 0,
+      "phase": "town",
+      "revision": 98
+    },
+    {
+      "action": "buy_remedy",
+      "args": {
+        "id": "RM",
+        "source": "warehouse"
+      },
+      "exp": 98,
+      "floor": 0,
+      "phase": "town",
+      "revision": 99
+    },
+    {
+      "action": "depart",
+      "args": {},
+      "exp": 98,
+      "floor": 0,
+      "phase": "explore",
+      "revision": 100
+    },
+    {
+      "action": "descend",
+      "args": {},
+      "exp": 98,
+      "floor": 1,
+      "phase": "battle",
+      "revision": 101
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 103,
+      "floor": 1,
+      "phase": "reward",
+      "revision": 102
+    },
+    {
+      "action": "claim_all_advance",
+      "args": {},
+      "exp": 103,
+      "floor": 2,
+      "phase": "treasure",
+      "revision": 103
+    },
+    {
+      "action": "open_chest",
+      "args": {},
+      "exp": 103,
+      "floor": 2,
+      "phase": "reward",
+      "revision": 104
+    },
+    {
+      "action": "claim_all_advance",
+      "args": {},
+      "exp": 103,
+      "floor": 3,
+      "phase": "event",
+      "revision": 105
+    },
+    {
+      "action": "journey_event",
+      "args": {
+        "choice": "take"
+      },
+      "exp": 103,
+      "floor": 3,
+      "phase": "event_result",
+      "revision": 106
+    },
+    {
+      "action": "claim_all_advance",
+      "args": {},
+      "exp": 103,
+      "floor": 4,
+      "phase": "battle",
+      "revision": 107
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 108,
+      "floor": 4,
+      "phase": "reward",
+      "revision": 108
+    },
+    {
+      "action": "claim_all_advance",
+      "args": {},
+      "exp": 108,
+      "floor": 5,
+      "phase": "portal",
+      "revision": 109
+    },
+    {
+      "action": "portal_stay",
+      "args": {},
+      "exp": 108,
+      "floor": 5,
+      "phase": "battle",
+      "revision": 110
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 108,
+      "floor": 5,
+      "phase": "battle",
+      "revision": 111
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 108,
+      "floor": 5,
+      "phase": "battle",
+      "revision": 112
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 108,
+      "floor": 5,
+      "phase": "battle",
+      "revision": 113
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 117,
+      "floor": 5,
+      "phase": "reward",
+      "revision": 114
+    },
+    {
+      "action": "claim_all_advance",
+      "args": {},
+      "exp": 117,
+      "floor": 5,
+      "phase": "portal_done",
+      "revision": 115
+    },
+    {
+      "action": "portal_continue",
+      "args": {},
+      "exp": 117,
+      "floor": 6,
+      "phase": "battle",
+      "revision": 116
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 117,
+      "floor": 6,
+      "phase": "battle",
+      "revision": 117
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 126,
+      "floor": 6,
+      "phase": "reward",
+      "revision": 118
+    },
+    {
+      "action": "claim_all_advance",
+      "args": {},
+      "exp": 126,
+      "floor": 7,
+      "phase": "event",
+      "revision": 119
+    },
+    {
+      "action": "journey_event",
+      "args": {
+        "choice": "safe"
+      },
+      "exp": 126,
+      "floor": 7,
+      "phase": "event_result",
+      "revision": 120
+    },
+    {
+      "action": "claim_all_advance",
+      "args": {},
+      "exp": 126,
+      "floor": 8,
+      "phase": "battle",
+      "revision": 121
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 126,
+      "floor": 8,
+      "phase": "battle",
+      "revision": 122
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 137,
+      "floor": 8,
+      "phase": "reward",
+      "revision": 123
+    },
+    {
+      "action": "claim_all_advance",
+      "args": {},
+      "exp": 137,
+      "floor": 9,
+      "phase": "battle",
+      "revision": 124
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 137,
+      "floor": 9,
+      "phase": "battle",
+      "revision": 125
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 137,
+      "floor": 9,
+      "phase": "battle",
+      "revision": 126
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 156,
+      "floor": 9,
+      "phase": "reward",
+      "revision": 127
+    },
+    {
+      "action": "claim_all_advance",
+      "args": {},
+      "exp": 156,
+      "floor": 10,
+      "phase": "portal",
+      "revision": 128
+    },
+    {
+      "action": "portal_stay",
+      "args": {},
+      "exp": 156,
+      "floor": 10,
+      "phase": "battle",
+      "revision": 129
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 156,
+      "floor": 10,
+      "phase": "battle",
+      "revision": 130
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 156,
+      "floor": 10,
+      "phase": "battle",
+      "revision": 131
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 156,
+      "floor": 10,
+      "phase": "result",
+      "revision": 132
+    },
+    {
+      "action": "town",
+      "args": {},
+      "exp": 156,
+      "floor": 0,
+      "phase": "town",
+      "revision": 133
+    },
+    {
+      "action": "supply",
+      "args": {},
+      "exp": 156,
+      "floor": 0,
+      "phase": "town",
+      "revision": 134
+    },
+    {
+      "action": "transfer",
+      "args": {
+        "destination": "inventory",
+        "source": "warehouse",
+        "uid": "item-27"
+      },
+      "exp": 156,
+      "floor": 0,
+      "phase": "town",
+      "revision": 135
+    },
+    {
+      "action": "equip",
+      "args": {
+        "uid": "item-27"
+      },
+      "exp": 156,
+      "floor": 0,
+      "phase": "town",
+      "revision": 136
+    },
+    {
+      "action": "buy_remedy",
+      "args": {
+        "id": "RB",
+        "source": "warehouse"
+      },
+      "exp": 156,
+      "floor": 0,
+      "phase": "town",
+      "revision": 137
+    },
+    {
+      "action": "buy_remedy",
+      "args": {
+        "id": "RP",
+        "source": "warehouse"
+      },
+      "exp": 156,
+      "floor": 0,
+      "phase": "town",
+      "revision": 138
+    },
+    {
+      "action": "buy_remedy",
+      "args": {
+        "id": "RM",
+        "source": "warehouse"
+      },
+      "exp": 156,
+      "floor": 0,
+      "phase": "town",
+      "revision": 139
+    },
+    {
+      "action": "depart",
+      "args": {},
+      "exp": 156,
+      "floor": 0,
+      "phase": "explore",
+      "revision": 140
+    },
+    {
+      "action": "descend",
+      "args": {},
+      "exp": 156,
+      "floor": 1,
+      "phase": "battle",
+      "revision": 141
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 160,
+      "floor": 1,
+      "phase": "reward",
+      "revision": 142
+    },
+    {
+      "action": "claim_all_advance",
+      "args": {},
+      "exp": 160,
+      "floor": 2,
+      "phase": "treasure",
+      "revision": 143
+    },
+    {
+      "action": "open_chest",
+      "args": {},
+      "exp": 160,
+      "floor": 2,
+      "phase": "reward",
+      "revision": 144
+    },
+    {
+      "action": "claim_all_advance",
+      "args": {},
+      "exp": 160,
+      "floor": 3,
+      "phase": "event",
+      "revision": 145
+    },
+    {
+      "action": "equip",
+      "args": {
+        "uid": "item-46"
+      },
+      "exp": 160,
+      "floor": 3,
+      "phase": "event",
+      "revision": 146
+    },
+    {
+      "action": "journey_event",
+      "args": {
+        "choice": "stone"
+      },
+      "exp": 160,
+      "floor": 3,
+      "phase": "event_result",
+      "revision": 147
+    },
+    {
+      "action": "claim_all_advance",
+      "args": {},
+      "exp": 160,
+      "floor": 4,
+      "phase": "battle",
+      "revision": 148
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 160,
+      "floor": 4,
+      "phase": "battle",
+      "revision": 149
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 160,
+      "floor": 4,
+      "phase": "battle",
+      "revision": 150
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 165,
+      "floor": 4,
+      "phase": "reward",
+      "revision": 151
+    },
+    {
+      "action": "claim_all_advance",
+      "args": {},
+      "exp": 165,
+      "floor": 5,
+      "phase": "portal",
+      "revision": 152
+    },
+    {
+      "action": "portal_stay",
+      "args": {},
+      "exp": 165,
+      "floor": 5,
+      "phase": "treasure",
+      "revision": 153
+    },
+    {
+      "action": "open_chest",
+      "args": {},
+      "exp": 165,
+      "floor": 5,
+      "phase": "reward",
+      "revision": 154
+    },
+    {
+      "action": "claim_all_advance",
+      "args": {},
+      "exp": 165,
+      "floor": 5,
+      "phase": "portal_done",
+      "revision": 155
+    },
+    {
+      "action": "equip",
+      "args": {
+        "uid": "item-49"
+      },
+      "exp": 165,
+      "floor": 5,
+      "phase": "portal_done",
+      "revision": 156
+    },
+    {
+      "action": "portal_continue",
+      "args": {},
+      "exp": 165,
+      "floor": 6,
+      "phase": "battle",
+      "revision": 157
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 165,
+      "floor": 6,
+      "phase": "battle",
+      "revision": 158
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 165,
+      "floor": 6,
+      "phase": "battle",
+      "revision": 159
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 174,
+      "floor": 6,
+      "phase": "reward",
+      "revision": 160
+    },
+    {
+      "action": "claim_all_advance",
+      "args": {},
+      "exp": 174,
+      "floor": 7,
+      "phase": "event",
+      "revision": 161
+    },
+    {
+      "action": "journey_event",
+      "args": {
+        "choice": "drink"
+      },
+      "exp": 174,
+      "floor": 7,
+      "phase": "event_result",
+      "revision": 162
+    },
+    {
+      "action": "advance_ready",
+      "args": {},
+      "exp": 174,
+      "floor": 8,
+      "phase": "battle",
+      "revision": 163
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 174,
+      "floor": 8,
+      "phase": "battle",
+      "revision": 164
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 185,
+      "floor": 8,
+      "phase": "reward",
+      "revision": 165
+    },
+    {
+      "action": "claim_all_advance",
+      "args": {},
+      "exp": 185,
+      "floor": 9,
+      "phase": "battle",
+      "revision": 166
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 185,
+      "floor": 9,
+      "phase": "battle",
+      "revision": 167
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 185,
+      "floor": 9,
+      "phase": "battle",
+      "revision": 168
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 185,
+      "floor": 9,
+      "phase": "battle",
+      "revision": 169
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 204,
+      "floor": 9,
+      "phase": "reward",
+      "revision": 170
+    },
+    {
+      "action": "claim_all_advance",
+      "args": {},
+      "exp": 204,
+      "floor": 10,
+      "phase": "portal",
+      "revision": 171
+    },
+    {
+      "action": "portal_stay",
+      "args": {},
+      "exp": 204,
+      "floor": 10,
+      "phase": "battle",
+      "revision": 172
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 204,
+      "floor": 10,
+      "phase": "battle",
+      "revision": 173
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 204,
+      "floor": 10,
+      "phase": "battle",
+      "revision": 174
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 204,
+      "floor": 10,
+      "phase": "battle",
+      "revision": 175
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 204,
+      "floor": 10,
+      "phase": "battle",
+      "revision": 176
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 204,
+      "floor": 10,
+      "phase": "battle",
+      "revision": 177
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 204,
+      "floor": 10,
+      "phase": "battle",
+      "revision": 178
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 204,
+      "floor": 10,
+      "phase": "result",
+      "revision": 179
+    },
+    {
+      "action": "town",
+      "args": {},
+      "exp": 204,
+      "floor": 0,
+      "phase": "town",
+      "revision": 180
+    },
+    {
+      "action": "supply",
+      "args": {},
+      "exp": 204,
+      "floor": 0,
+      "phase": "town",
+      "revision": 181
+    },
+    {
+      "action": "transfer",
+      "args": {
+        "destination": "inventory",
+        "source": "warehouse",
+        "uid": "item-26"
+      },
+      "exp": 204,
+      "floor": 0,
+      "phase": "town",
+      "revision": 182
+    },
+    {
+      "action": "equip",
+      "args": {
+        "uid": "item-26"
+      },
+      "exp": 204,
+      "floor": 0,
+      "phase": "town",
+      "revision": 183
+    },
+    {
+      "action": "buy_remedy",
+      "args": {
+        "id": "RB",
+        "source": "warehouse"
+      },
+      "exp": 204,
+      "floor": 0,
+      "phase": "town",
+      "revision": 184
+    },
+    {
+      "action": "buy_remedy",
+      "args": {
+        "id": "RP",
+        "source": "warehouse"
+      },
+      "exp": 204,
+      "floor": 0,
+      "phase": "town",
+      "revision": 185
+    },
+    {
+      "action": "buy_remedy",
+      "args": {
+        "id": "RM",
+        "source": "warehouse"
+      },
+      "exp": 204,
+      "floor": 0,
+      "phase": "town",
+      "revision": 186
+    },
+    {
+      "action": "depart",
+      "args": {},
+      "exp": 204,
+      "floor": 0,
+      "phase": "explore",
+      "revision": 187
+    },
+    {
+      "action": "descend",
+      "args": {},
+      "exp": 204,
+      "floor": 1,
+      "phase": "battle",
+      "revision": 188
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 208,
+      "floor": 1,
+      "phase": "reward",
+      "revision": 189
+    },
+    {
+      "action": "claim_all_advance",
+      "args": {},
+      "exp": 208,
+      "floor": 2,
+      "phase": "treasure",
+      "revision": 190
+    },
+    {
+      "action": "open_chest",
+      "args": {},
+      "exp": 208,
+      "floor": 2,
+      "phase": "reward",
+      "revision": 191
+    },
+    {
+      "action": "claim_all_advance",
+      "args": {},
+      "exp": 208,
+      "floor": 3,
+      "phase": "event",
+      "revision": 192
+    },
+    {
+      "action": "equip",
+      "args": {
+        "uid": "item-60"
+      },
+      "exp": 208,
+      "floor": 3,
+      "phase": "event",
+      "revision": 193
+    },
+    {
+      "action": "journey_event",
+      "args": {
+        "choice": "take"
+      },
+      "exp": 208,
+      "floor": 3,
+      "phase": "event_result",
+      "revision": 194
+    },
+    {
+      "action": "claim_all_advance",
+      "args": {},
+      "exp": 208,
+      "floor": 4,
+      "phase": "battle",
+      "revision": 195
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 213,
+      "floor": 4,
+      "phase": "reward",
+      "revision": 196
+    },
+    {
+      "action": "claim_all_advance",
+      "args": {},
+      "exp": 213,
+      "floor": 5,
+      "phase": "portal",
+      "revision": 197
+    },
+    {
+      "action": "portal_stay",
+      "args": {},
+      "exp": 213,
+      "floor": 5,
+      "phase": "treasure",
+      "revision": 198
+    },
+    {
+      "action": "open_chest",
+      "args": {},
+      "exp": 213,
+      "floor": 5,
+      "phase": "reward",
+      "revision": 199
+    },
+    {
+      "action": "claim_all_advance",
+      "args": {},
+      "exp": 213,
+      "floor": 5,
+      "phase": "portal_done",
+      "revision": 200
+    },
+    {
+      "action": "portal_continue",
+      "args": {},
+      "exp": 213,
+      "floor": 6,
+      "phase": "battle",
+      "revision": 201
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 213,
+      "floor": 6,
+      "phase": "battle",
+      "revision": 202
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 222,
+      "floor": 6,
+      "phase": "reward",
+      "revision": 203
+    },
+    {
+      "action": "claim_all_advance",
+      "args": {},
+      "exp": 222,
+      "floor": 7,
+      "phase": "event",
+      "revision": 204
+    },
+    {
+      "action": "journey_event",
+      "args": {
+        "choice": "read"
+      },
+      "exp": 226,
+      "floor": 7,
+      "phase": "event_result",
+      "revision": 205
+    },
+    {
+      "action": "advance_ready",
+      "args": {},
+      "exp": 226,
+      "floor": 8,
+      "phase": "battle",
+      "revision": 206
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 226,
+      "floor": 8,
+      "phase": "battle",
+      "revision": 207
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 226,
+      "floor": 8,
+      "phase": "battle",
+      "revision": 208
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 240,
+      "floor": 8,
+      "phase": "reward",
+      "revision": 209
+    },
+    {
+      "action": "claim_all_advance",
+      "args": {},
+      "exp": 240,
+      "floor": 9,
+      "phase": "battle",
+      "revision": 210
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 240,
+      "floor": 9,
+      "phase": "battle",
+      "revision": 211
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 240,
+      "floor": 9,
+      "phase": "battle",
+      "revision": 212
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 259,
+      "floor": 9,
+      "phase": "reward",
+      "revision": 213
+    },
+    {
+      "action": "claim_all_advance",
+      "args": {},
+      "exp": 259,
+      "floor": 10,
+      "phase": "portal",
+      "revision": 214
+    },
+    {
+      "action": "portal_stay",
+      "args": {},
+      "exp": 259,
+      "floor": 10,
+      "phase": "battle",
+      "revision": 215
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 259,
+      "floor": 10,
+      "phase": "battle",
+      "revision": 216
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 259,
+      "floor": 10,
+      "phase": "battle",
+      "revision": 217
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 259,
+      "floor": 10,
+      "phase": "battle",
+      "revision": 218
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 259,
+      "floor": 10,
+      "phase": "battle",
+      "revision": 219
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 259,
+      "floor": 10,
+      "phase": "battle",
+      "revision": 220
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 259,
+      "floor": 10,
+      "phase": "battle",
+      "revision": 221
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 259,
+      "floor": 10,
+      "phase": "battle",
+      "revision": 222
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 259,
+      "floor": 10,
+      "phase": "battle",
+      "revision": 223
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 259,
+      "floor": 10,
+      "phase": "result",
+      "revision": 224
+    },
+    {
+      "action": "town",
+      "args": {},
+      "exp": 259,
+      "floor": 0,
+      "phase": "town",
+      "revision": 225
+    },
+    {
+      "action": "supply",
+      "args": {},
+      "exp": 259,
+      "floor": 0,
+      "phase": "town",
+      "revision": 226
+    },
+    {
+      "action": "buy_remedy",
+      "args": {
+        "id": "RB",
+        "source": "warehouse"
+      },
+      "exp": 259,
+      "floor": 0,
+      "phase": "town",
+      "revision": 227
+    },
+    {
+      "action": "buy_remedy",
+      "args": {
+        "id": "RP",
+        "source": "warehouse"
+      },
+      "exp": 259,
+      "floor": 0,
+      "phase": "town",
+      "revision": 228
+    },
+    {
+      "action": "buy_remedy",
+      "args": {
+        "id": "RM",
+        "source": "warehouse"
+      },
+      "exp": 259,
+      "floor": 0,
+      "phase": "town",
+      "revision": 229
+    },
+    {
+      "action": "depart",
+      "args": {},
+      "exp": 259,
+      "floor": 0,
+      "phase": "explore",
+      "revision": 230
+    },
+    {
+      "action": "descend",
+      "args": {},
+      "exp": 259,
+      "floor": 1,
+      "phase": "battle",
+      "revision": 231
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 263,
+      "floor": 1,
+      "phase": "reward",
+      "revision": 232
+    },
+    {
+      "action": "claim_all_advance",
+      "args": {},
+      "exp": 263,
+      "floor": 2,
+      "phase": "treasure",
+      "revision": 233
+    },
+    {
+      "action": "open_chest",
+      "args": {},
+      "exp": 263,
+      "floor": 2,
+      "phase": "reward",
+      "revision": 234
+    },
+    {
+      "action": "claim_all_advance",
+      "args": {},
+      "exp": 263,
+      "floor": 3,
+      "phase": "event",
+      "revision": 235
+    },
+    {
+      "action": "equip",
+      "args": {
+        "uid": "item-73"
+      },
+      "exp": 263,
+      "floor": 3,
+      "phase": "event",
+      "revision": 236
+    },
+    {
+      "action": "journey_event",
+      "args": {
+        "choice": "read"
+      },
+      "exp": 267,
+      "floor": 3,
+      "phase": "event_result",
+      "revision": 237
+    },
+    {
+      "action": "advance_ready",
+      "args": {},
+      "exp": 267,
+      "floor": 4,
+      "phase": "battle",
+      "revision": 238
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 272,
+      "floor": 4,
+      "phase": "reward",
+      "revision": 239
+    },
+    {
+      "action": "claim_all_advance",
+      "args": {},
+      "exp": 272,
+      "floor": 5,
+      "phase": "portal",
+      "revision": 240
+    },
+    {
+      "action": "portal_stay",
+      "args": {},
+      "exp": 272,
+      "floor": 5,
+      "phase": "event",
+      "revision": 241
+    },
+    {
+      "action": "journey_event",
+      "args": {
+        "choice": "drink"
+      },
+      "exp": 272,
+      "floor": 5,
+      "phase": "event_result",
+      "revision": 242
+    },
+    {
+      "action": "advance_ready",
+      "args": {},
+      "exp": 272,
+      "floor": 5,
+      "phase": "portal_done",
+      "revision": 243
+    },
+    {
+      "action": "portal_continue",
+      "args": {},
+      "exp": 272,
+      "floor": 6,
+      "phase": "battle",
+      "revision": 244
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 272,
+      "floor": 6,
+      "phase": "battle",
+      "revision": 245
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 281,
+      "floor": 6,
+      "phase": "reward",
+      "revision": 246
+    },
+    {
+      "action": "claim_all_advance",
+      "args": {},
+      "exp": 281,
+      "floor": 7,
+      "phase": "event",
+      "revision": 247
+    },
+    {
+      "action": "journey_event",
+      "args": {
+        "choice": "take"
+      },
+      "exp": 281,
+      "floor": 7,
+      "phase": "event_result",
+      "revision": 248
+    },
+    {
+      "action": "claim_all_advance",
+      "args": {},
+      "exp": 281,
+      "floor": 8,
+      "phase": "battle",
+      "revision": 249
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 281,
+      "floor": 8,
+      "phase": "battle",
+      "revision": 250
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 295,
+      "floor": 8,
+      "phase": "reward",
+      "revision": 251
+    },
+    {
+      "action": "claim_all_advance",
+      "args": {},
+      "exp": 295,
+      "floor": 9,
+      "phase": "battle",
+      "revision": 252
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 295,
+      "floor": 9,
+      "phase": "battle",
+      "revision": 253
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 295,
+      "floor": 9,
+      "phase": "battle",
+      "revision": 254
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 314,
+      "floor": 9,
+      "phase": "reward",
+      "revision": 255
+    },
+    {
+      "action": "equip",
+      "args": {
+        "uid": "item-76"
+      },
+      "exp": 314,
+      "floor": 9,
+      "phase": "reward",
+      "revision": 256
+    },
+    {
+      "action": "claim_all_advance",
+      "args": {},
+      "exp": 314,
+      "floor": 10,
+      "phase": "portal",
+      "revision": 257
+    },
+    {
+      "action": "equip",
+      "args": {
+        "uid": "item-77"
+      },
+      "exp": 314,
+      "floor": 10,
+      "phase": "portal",
+      "revision": 258
+    },
+    {
+      "action": "portal_stay",
+      "args": {},
+      "exp": 314,
+      "floor": 10,
+      "phase": "battle",
+      "revision": 259
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 314,
+      "floor": 10,
+      "phase": "battle",
+      "revision": 260
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 314,
+      "floor": 10,
+      "phase": "battle",
+      "revision": 261
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 314,
+      "floor": 10,
+      "phase": "battle",
+      "revision": 262
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 314,
+      "floor": 10,
+      "phase": "battle",
+      "revision": 263
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 314,
+      "floor": 10,
+      "phase": "battle",
+      "revision": 264
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 314,
+      "floor": 10,
+      "phase": "battle",
+      "revision": 265
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 314,
+      "floor": 10,
+      "phase": "result",
+      "revision": 266
+    },
+    {
+      "action": "town",
+      "args": {},
+      "exp": 314,
+      "floor": 0,
+      "phase": "town",
+      "revision": 267
+    },
+    {
+      "action": "supply",
+      "args": {},
+      "exp": 314,
+      "floor": 0,
+      "phase": "town",
+      "revision": 268
+    },
+    {
+      "action": "buy_remedy",
+      "args": {
+        "id": "RB",
+        "source": "warehouse"
+      },
+      "exp": 314,
+      "floor": 0,
+      "phase": "town",
+      "revision": 269
+    },
+    {
+      "action": "buy_remedy",
+      "args": {
+        "id": "RP",
+        "source": "warehouse"
+      },
+      "exp": 314,
+      "floor": 0,
+      "phase": "town",
+      "revision": 270
+    },
+    {
+      "action": "buy_remedy",
+      "args": {
+        "id": "RM",
+        "source": "warehouse"
+      },
+      "exp": 314,
+      "floor": 0,
+      "phase": "town",
+      "revision": 271
+    },
+    {
+      "action": "depart",
+      "args": {},
+      "exp": 314,
+      "floor": 0,
+      "phase": "explore",
+      "revision": 272
+    },
+    {
+      "action": "descend",
+      "args": {},
+      "exp": 314,
+      "floor": 1,
+      "phase": "battle",
+      "revision": 273
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 318,
+      "floor": 1,
+      "phase": "reward",
+      "revision": 274
+    },
+    {
+      "action": "claim_all_advance",
+      "args": {},
+      "exp": 318,
+      "floor": 2,
+      "phase": "treasure",
+      "revision": 275
+    },
+    {
+      "action": "open_chest",
+      "args": {},
+      "exp": 318,
+      "floor": 2,
+      "phase": "reward",
+      "revision": 276
+    },
+    {
+      "action": "claim_all_advance",
+      "args": {},
+      "exp": 318,
+      "floor": 3,
+      "phase": "event",
+      "revision": 277
+    },
+    {
+      "action": "equip",
+      "args": {
+        "uid": "item-88"
+      },
+      "exp": 318,
+      "floor": 3,
+      "phase": "event",
+      "revision": 278
+    },
+    {
+      "action": "journey_event",
+      "args": {
+        "choice": "take"
+      },
+      "exp": 318,
+      "floor": 3,
+      "phase": "event_result",
+      "revision": 279
+    },
+    {
+      "action": "claim_all_advance",
+      "args": {},
+      "exp": 318,
+      "floor": 4,
+      "phase": "battle",
+      "revision": 280
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 324,
+      "floor": 4,
+      "phase": "reward",
+      "revision": 281
+    },
+    {
+      "action": "claim_all_advance",
+      "args": {},
+      "exp": 324,
+      "floor": 5,
+      "phase": "portal",
+      "revision": 282
+    },
+    {
+      "action": "portal_stay",
+      "args": {},
+      "exp": 324,
+      "floor": 5,
+      "phase": "battle",
+      "revision": 283
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 324,
+      "floor": 5,
+      "phase": "battle",
+      "revision": 284
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 333,
+      "floor": 5,
+      "phase": "reward",
+      "revision": 285
+    },
+    {
+      "action": "claim_all_advance",
+      "args": {},
+      "exp": 333,
+      "floor": 5,
+      "phase": "portal_done",
+      "revision": 286
+    },
+    {
+      "action": "portal_continue",
+      "args": {},
+      "exp": 333,
+      "floor": 6,
+      "phase": "battle",
+      "revision": 287
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 333,
+      "floor": 6,
+      "phase": "battle",
+      "revision": 288
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 342,
+      "floor": 6,
+      "phase": "reward",
+      "revision": 289
+    },
+    {
+      "action": "claim_all_advance",
+      "args": {},
+      "exp": 342,
+      "floor": 7,
+      "phase": "event",
+      "revision": 290
+    },
+    {
+      "action": "journey_event",
+      "args": {
+        "choice": "read"
+      },
+      "exp": 346,
+      "floor": 7,
+      "phase": "event_result",
+      "revision": 291
+    },
+    {
+      "action": "advance_ready",
+      "args": {},
+      "exp": 346,
+      "floor": 8,
+      "phase": "battle",
+      "revision": 292
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 346,
+      "floor": 8,
+      "phase": "battle",
+      "revision": 293
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 360,
+      "floor": 8,
+      "phase": "reward",
+      "revision": 294
+    },
+    {
+      "action": "claim_all_advance",
+      "args": {},
+      "exp": 360,
+      "floor": 9,
+      "phase": "battle",
+      "revision": 295
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 360,
+      "floor": 9,
+      "phase": "battle",
+      "revision": 296
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 360,
+      "floor": 9,
+      "phase": "battle",
+      "revision": 297
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 379,
+      "floor": 9,
+      "phase": "reward",
+      "revision": 298
+    },
+    {
+      "action": "claim_all_advance",
+      "args": {},
+      "exp": 379,
+      "floor": 10,
+      "phase": "portal",
+      "revision": 299
+    },
+    {
+      "action": "portal_stay",
+      "args": {},
+      "exp": 379,
+      "floor": 10,
+      "phase": "battle",
+      "revision": 300
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 379,
+      "floor": 10,
+      "phase": "battle",
+      "revision": 301
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 379,
+      "floor": 10,
+      "phase": "battle",
+      "revision": 302
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 379,
+      "floor": 10,
+      "phase": "battle",
+      "revision": 303
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 379,
+      "floor": 10,
+      "phase": "battle",
+      "revision": 304
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 379,
+      "floor": 10,
+      "phase": "result",
+      "revision": 305
+    },
+    {
+      "action": "town",
+      "args": {},
+      "exp": 379,
+      "floor": 0,
+      "phase": "town",
+      "revision": 306
+    },
+    {
+      "action": "supply",
+      "args": {},
+      "exp": 379,
+      "floor": 0,
+      "phase": "town",
+      "revision": 307
+    },
+    {
+      "action": "buy_remedy",
+      "args": {
+        "id": "RB",
+        "source": "warehouse"
+      },
+      "exp": 379,
+      "floor": 0,
+      "phase": "town",
+      "revision": 308
+    },
+    {
+      "action": "buy_remedy",
+      "args": {
+        "id": "RP",
+        "source": "warehouse"
+      },
+      "exp": 379,
+      "floor": 0,
+      "phase": "town",
+      "revision": 309
+    },
+    {
+      "action": "buy_remedy",
+      "args": {
+        "id": "RM",
+        "source": "warehouse"
+      },
+      "exp": 379,
+      "floor": 0,
+      "phase": "town",
+      "revision": 310
+    },
+    {
+      "action": "depart",
+      "args": {},
+      "exp": 379,
+      "floor": 0,
+      "phase": "explore",
+      "revision": 311
+    },
+    {
+      "action": "descend",
+      "args": {},
+      "exp": 379,
+      "floor": 1,
+      "phase": "battle",
+      "revision": 312
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 384,
+      "floor": 1,
+      "phase": "reward",
+      "revision": 313
+    },
+    {
+      "action": "claim_all_advance",
+      "args": {},
+      "exp": 384,
+      "floor": 2,
+      "phase": "treasure",
+      "revision": 314
+    },
+    {
+      "action": "open_chest",
+      "args": {},
+      "exp": 384,
+      "floor": 2,
+      "phase": "reward",
+      "revision": 315
+    },
+    {
+      "action": "claim_all_advance",
+      "args": {},
+      "exp": 384,
+      "floor": 3,
+      "phase": "event",
+      "revision": 316
+    },
+    {
+      "action": "equip",
+      "args": {
+        "uid": "item-99"
+      },
+      "exp": 384,
+      "floor": 3,
+      "phase": "event",
+      "revision": 317
+    },
+    {
+      "action": "journey_event",
+      "args": {
+        "choice": "leave"
+      },
+      "exp": 384,
+      "floor": 3,
+      "phase": "event_result",
+      "revision": 318
+    },
+    {
+      "action": "advance_ready",
+      "args": {},
+      "exp": 384,
+      "floor": 4,
+      "phase": "battle",
+      "revision": 319
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 389,
+      "floor": 4,
+      "phase": "reward",
+      "revision": 320
+    },
+    {
+      "action": "claim_all_advance",
+      "args": {},
+      "exp": 389,
+      "floor": 5,
+      "phase": "portal",
+      "revision": 321
+    },
+    {
+      "action": "equip",
+      "args": {
+        "uid": "item-101"
+      },
+      "exp": 389,
+      "floor": 5,
+      "phase": "portal",
+      "revision": 322
+    },
+    {
+      "action": "portal_stay",
+      "args": {},
+      "exp": 389,
+      "floor": 5,
+      "phase": "treasure",
+      "revision": 323
+    },
+    {
+      "action": "open_chest",
+      "args": {},
+      "exp": 389,
+      "floor": 5,
+      "phase": "reward",
+      "revision": 324
+    },
+    {
+      "action": "claim_all_advance",
+      "args": {},
+      "exp": 389,
+      "floor": 5,
+      "phase": "portal_done",
+      "revision": 325
+    },
+    {
+      "action": "portal_continue",
+      "args": {},
+      "exp": 389,
+      "floor": 6,
+      "phase": "battle",
+      "revision": 326
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 389,
+      "floor": 6,
+      "phase": "battle",
+      "revision": 327
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 398,
+      "floor": 6,
+      "phase": "reward",
+      "revision": 328
+    },
+    {
+      "action": "claim_all_advance",
+      "args": {},
+      "exp": 398,
+      "floor": 7,
+      "phase": "event",
+      "revision": 329
+    },
+    {
+      "action": "journey_event",
+      "args": {
+        "choice": "leave"
+      },
+      "exp": 398,
+      "floor": 7,
+      "phase": "event_result",
+      "revision": 330
+    },
+    {
+      "action": "advance_ready",
+      "args": {},
+      "exp": 398,
+      "floor": 8,
+      "phase": "battle",
+      "revision": 331
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 398,
+      "floor": 8,
+      "phase": "battle",
+      "revision": 332
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 409,
+      "floor": 8,
+      "phase": "reward",
+      "revision": 333
+    },
+    {
+      "action": "claim_all_advance",
+      "args": {},
+      "exp": 409,
+      "floor": 9,
+      "phase": "battle",
+      "revision": 334
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 409,
+      "floor": 9,
+      "phase": "battle",
+      "revision": 335
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 409,
+      "floor": 9,
+      "phase": "battle",
+      "revision": 336
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 428,
+      "floor": 9,
+      "phase": "reward",
+      "revision": 337
+    },
+    {
+      "action": "claim_all_advance",
+      "args": {},
+      "exp": 428,
+      "floor": 10,
+      "phase": "portal",
+      "revision": 338
+    },
+    {
+      "action": "portal_stay",
+      "args": {},
+      "exp": 428,
+      "floor": 10,
+      "phase": "battle",
+      "revision": 339
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 428,
+      "floor": 10,
+      "phase": "battle",
+      "revision": 340
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 428,
+      "floor": 10,
+      "phase": "battle",
+      "revision": 341
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 428,
+      "floor": 10,
+      "phase": "battle",
+      "revision": 342
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 428,
+      "floor": 10,
+      "phase": "battle",
+      "revision": 343
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 428,
+      "floor": 10,
+      "phase": "battle",
+      "revision": 344
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 428,
+      "floor": 10,
+      "phase": "battle",
+      "revision": 345
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 428,
+      "floor": 10,
+      "phase": "result",
+      "revision": 346
+    },
+    {
+      "action": "town",
+      "args": {},
+      "exp": 428,
+      "floor": 0,
+      "phase": "town",
+      "revision": 347
+    },
+    {
+      "action": "supply",
+      "args": {},
+      "exp": 428,
+      "floor": 0,
+      "phase": "town",
+      "revision": 348
+    },
+    {
+      "action": "depart",
+      "args": {},
+      "exp": 428,
+      "floor": 0,
+      "phase": "explore",
+      "revision": 349
+    },
+    {
+      "action": "descend",
+      "args": {},
+      "exp": 428,
+      "floor": 1,
+      "phase": "battle",
+      "revision": 350
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 428,
+      "floor": 1,
+      "phase": "battle",
+      "revision": 351
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 428,
+      "floor": 1,
+      "phase": "battle",
+      "revision": 352
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 433,
+      "floor": 1,
+      "phase": "reward",
+      "revision": 353
+    },
+    {
+      "action": "claim_all_advance",
+      "args": {},
+      "exp": 433,
+      "floor": 2,
+      "phase": "treasure",
+      "revision": 354
+    },
+    {
+      "action": "open_chest",
+      "args": {},
+      "exp": 433,
+      "floor": 2,
+      "phase": "reward",
+      "revision": 355
+    },
+    {
+      "action": "claim_all_advance",
+      "args": {},
+      "exp": 433,
+      "floor": 3,
+      "phase": "event",
+      "revision": 356
+    },
+    {
+      "action": "equip",
+      "args": {
+        "uid": "item-111"
+      },
+      "exp": 433,
+      "floor": 3,
+      "phase": "event",
+      "revision": 357
+    },
+    {
+      "action": "journey_event",
+      "args": {
+        "choice": "read"
+      },
+      "exp": 437,
+      "floor": 3,
+      "phase": "event_result",
+      "revision": 358
+    },
+    {
+      "action": "advance_ready",
+      "args": {},
+      "exp": 437,
+      "floor": 4,
+      "phase": "battle",
+      "revision": 359
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 442,
+      "floor": 4,
+      "phase": "reward",
+      "revision": 360
+    },
+    {
+      "action": "claim_all_advance",
+      "args": {},
+      "exp": 442,
+      "floor": 5,
+      "phase": "portal",
+      "revision": 361
+    },
+    {
+      "action": "portal_stay",
+      "args": {},
+      "exp": 442,
+      "floor": 5,
+      "phase": "battle",
+      "revision": 362
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 442,
+      "floor": 5,
+      "phase": "battle",
+      "revision": 363
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 448,
+      "floor": 5,
+      "phase": "reward",
+      "revision": 364
+    },
+    {
+      "action": "claim_all_advance",
+      "args": {},
+      "exp": 448,
+      "floor": 5,
+      "phase": "portal_done",
+      "revision": 365
+    },
+    {
+      "action": "portal_continue",
+      "args": {},
+      "exp": 448,
+      "floor": 6,
+      "phase": "battle",
+      "revision": 366
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 448,
+      "floor": 6,
+      "phase": "battle",
+      "revision": 367
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 457,
+      "floor": 6,
+      "phase": "reward",
+      "revision": 368
+    },
+    {
+      "action": "claim_all_advance",
+      "args": {},
+      "exp": 457,
+      "floor": 7,
+      "phase": "event",
+      "revision": 369
+    },
+    {
+      "action": "journey_event",
+      "args": {
+        "choice": "leave"
+      },
+      "exp": 457,
+      "floor": 7,
+      "phase": "event_result",
+      "revision": 370
+    },
+    {
+      "action": "advance_ready",
+      "args": {},
+      "exp": 457,
+      "floor": 8,
+      "phase": "battle",
+      "revision": 371
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 457,
+      "floor": 8,
+      "phase": "battle",
+      "revision": 372
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 471,
+      "floor": 8,
+      "phase": "reward",
+      "revision": 373
+    },
+    {
+      "action": "claim_all_advance",
+      "args": {},
+      "exp": 471,
+      "floor": 9,
+      "phase": "battle",
+      "revision": 374
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 471,
+      "floor": 9,
+      "phase": "battle",
+      "revision": 375
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 471,
+      "floor": 9,
+      "phase": "battle",
+      "revision": 376
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 471,
+      "floor": 9,
+      "phase": "battle",
+      "revision": 377
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 471,
+      "floor": 9,
+      "phase": "battle",
+      "revision": 378
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 490,
+      "floor": 9,
+      "phase": "reward",
+      "revision": 379
+    },
+    {
+      "action": "claim_all_advance",
+      "args": {},
+      "exp": 490,
+      "floor": 10,
+      "phase": "portal",
+      "revision": 380
+    },
+    {
+      "action": "portal_stay",
+      "args": {},
+      "exp": 490,
+      "floor": 10,
+      "phase": "battle",
+      "revision": 381
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 490,
+      "floor": 10,
+      "phase": "battle",
+      "revision": 382
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 490,
+      "floor": 10,
+      "phase": "battle",
+      "revision": 383
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 490,
+      "floor": 10,
+      "phase": "battle",
+      "revision": 384
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 490,
+      "floor": 10,
+      "phase": "battle",
+      "revision": 385
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 490,
+      "floor": 10,
+      "phase": "battle",
+      "revision": 386
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 490,
+      "floor": 10,
+      "phase": "battle",
+      "revision": 387
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 490,
+      "floor": 10,
+      "phase": "result",
+      "revision": 388
+    },
+    {
+      "action": "town",
+      "args": {},
+      "exp": 490,
+      "floor": 0,
+      "phase": "town",
+      "revision": 389
+    },
+    {
+      "action": "supply",
+      "args": {},
+      "exp": 490,
+      "floor": 0,
+      "phase": "town",
+      "revision": 390
+    },
+    {
+      "action": "depart",
+      "args": {},
+      "exp": 490,
+      "floor": 0,
+      "phase": "explore",
+      "revision": 391
+    },
+    {
+      "action": "descend",
+      "args": {},
+      "exp": 490,
+      "floor": 1,
+      "phase": "battle",
+      "revision": 392
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 494,
+      "floor": 1,
+      "phase": "reward",
+      "revision": 393
+    },
+    {
+      "action": "claim_all_advance",
+      "args": {},
+      "exp": 494,
+      "floor": 2,
+      "phase": "treasure",
+      "revision": 394
+    },
+    {
+      "action": "open_chest",
+      "args": {},
+      "exp": 494,
+      "floor": 2,
+      "phase": "reward",
+      "revision": 395
+    },
+    {
+      "action": "claim_all_advance",
+      "args": {},
+      "exp": 494,
+      "floor": 3,
+      "phase": "event",
+      "revision": 396
+    },
+    {
+      "action": "equip",
+      "args": {
+        "uid": "item-120"
+      },
+      "exp": 494,
+      "floor": 3,
+      "phase": "event",
+      "revision": 397
+    },
+    {
+      "action": "journey_event",
+      "args": {
+        "choice": "safe"
+      },
+      "exp": 494,
+      "floor": 3,
+      "phase": "event_result",
+      "revision": 398
+    },
+    {
+      "action": "claim_all_advance",
+      "args": {},
+      "exp": 494,
+      "floor": 4,
+      "phase": "battle",
+      "revision": 399
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 499,
+      "floor": 4,
+      "phase": "reward",
+      "revision": 400
+    },
+    {
+      "action": "claim_all_advance",
+      "args": {},
+      "exp": 499,
+      "floor": 5,
+      "phase": "portal",
+      "revision": 401
+    },
+    {
+      "action": "portal_stay",
+      "args": {},
+      "exp": 499,
+      "floor": 5,
+      "phase": "treasure",
+      "revision": 402
+    },
+    {
+      "action": "open_chest",
+      "args": {},
+      "exp": 499,
+      "floor": 5,
+      "phase": "reward",
+      "revision": 403
+    },
+    {
+      "action": "claim_all_advance",
+      "args": {},
+      "exp": 499,
+      "floor": 5,
+      "phase": "portal_done",
+      "revision": 404
+    },
+    {
+      "action": "equip",
+      "args": {
+        "uid": "item-122"
+      },
+      "exp": 499,
+      "floor": 5,
+      "phase": "portal_done",
+      "revision": 405
+    },
+    {
+      "action": "portal_continue",
+      "args": {},
+      "exp": 499,
+      "floor": 6,
+      "phase": "battle",
+      "revision": 406
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 508,
+      "floor": 6,
+      "phase": "reward",
+      "revision": 407
+    },
+    {
+      "action": "claim_all_advance",
+      "args": {},
+      "exp": 508,
+      "floor": 7,
+      "phase": "event",
+      "revision": 408
+    },
+    {
+      "action": "journey_event",
+      "args": {
+        "choice": "leave"
+      },
+      "exp": 508,
+      "floor": 7,
+      "phase": "event_result",
+      "revision": 409
+    },
+    {
+      "action": "advance_ready",
+      "args": {},
+      "exp": 508,
+      "floor": 8,
+      "phase": "battle",
+      "revision": 410
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 508,
+      "floor": 8,
+      "phase": "battle",
+      "revision": 411
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 522,
+      "floor": 8,
+      "phase": "reward",
+      "revision": 412
+    },
+    {
+      "action": "claim_all_advance",
+      "args": {},
+      "exp": 522,
+      "floor": 9,
+      "phase": "battle",
+      "revision": 413
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 522,
+      "floor": 9,
+      "phase": "battle",
+      "revision": 414
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 522,
+      "floor": 9,
+      "phase": "battle",
+      "revision": 415
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 522,
+      "floor": 9,
+      "phase": "battle",
+      "revision": 416
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 522,
+      "floor": 9,
+      "phase": "battle",
+      "revision": 417
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 541,
+      "floor": 9,
+      "phase": "reward",
+      "revision": 418
+    },
+    {
+      "action": "equip",
+      "args": {
+        "uid": "item-123"
+      },
+      "exp": 541,
+      "floor": 9,
+      "phase": "reward",
+      "revision": 419
+    },
+    {
+      "action": "claim_all_advance",
+      "args": {},
+      "exp": 541,
+      "floor": 10,
+      "phase": "portal",
+      "revision": 420
+    },
+    {
+      "action": "portal_stay",
+      "args": {},
+      "exp": 541,
+      "floor": 10,
+      "phase": "battle",
+      "revision": 421
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 541,
+      "floor": 10,
+      "phase": "battle",
+      "revision": 422
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 541,
+      "floor": 10,
+      "phase": "battle",
+      "revision": 423
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 541,
+      "floor": 10,
+      "phase": "battle",
+      "revision": 424
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 541,
+      "floor": 10,
+      "phase": "battle",
+      "revision": 425
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 541,
+      "floor": 10,
+      "phase": "battle",
+      "revision": 426
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 541,
+      "floor": 10,
+      "phase": "battle",
+      "revision": 427
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 541,
+      "floor": 10,
+      "phase": "battle",
+      "revision": 428
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 541,
+      "floor": 10,
+      "phase": "battle",
+      "revision": 429
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 579,
+      "floor": 10,
+      "phase": "reward",
+      "revision": 430
+    },
+    {
+      "action": "claim_all_advance",
+      "args": {},
+      "exp": 579,
+      "floor": 10,
+      "phase": "portal_done",
+      "revision": 431
+    },
+    {
+      "action": "equip",
+      "args": {
+        "uid": "item-125"
+      },
+      "exp": 579,
+      "floor": 10,
+      "phase": "portal_done",
+      "revision": 432
+    },
+    {
+      "action": "portal_continue",
+      "args": {},
+      "exp": 579,
+      "floor": 10,
+      "phase": "result",
+      "revision": 433
+    },
+    {
+      "action": "town",
+      "args": {},
+      "exp": 579,
+      "floor": 0,
+      "phase": "town",
+      "revision": 434
+    },
+    {
+      "action": "transfer",
+      "args": {
+        "destination": "warehouse",
+        "source": "inventory",
+        "uid": "item-119"
+      },
+      "exp": 579,
+      "floor": 0,
+      "phase": "town",
+      "revision": 435
+    },
+    {
+      "action": "transfer",
+      "args": {
+        "destination": "warehouse",
+        "source": "inventory",
+        "uid": "item-121"
+      },
+      "exp": 579,
+      "floor": 0,
+      "phase": "town",
+      "revision": 436
+    },
+    {
+      "action": "transfer",
+      "args": {
+        "destination": "warehouse",
+        "source": "inventory",
+        "uid": "item-120"
+      },
+      "exp": 579,
+      "floor": 0,
+      "phase": "town",
+      "revision": 437
+    },
+    {
+      "action": "transfer",
+      "args": {
+        "destination": "warehouse",
+        "source": "inventory",
+        "uid": "item-124"
+      },
+      "exp": 579,
+      "floor": 0,
+      "phase": "town",
+      "revision": 438
+    },
+    {
+      "action": "buy_remedy",
+      "args": {
+        "id": "RB",
+        "source": "warehouse"
+      },
+      "exp": 579,
+      "floor": 0,
+      "phase": "town",
+      "revision": 439
+    },
+    {
+      "action": "buy_remedy",
+      "args": {
+        "id": "RP",
+        "source": "warehouse"
+      },
+      "exp": 579,
+      "floor": 0,
+      "phase": "town",
+      "revision": 440
+    },
+    {
+      "action": "buy_remedy",
+      "args": {
+        "id": "RM",
+        "source": "warehouse"
+      },
+      "exp": 579,
+      "floor": 0,
+      "phase": "town",
+      "revision": 441
+    },
+    {
+      "action": "depart",
+      "args": {},
+      "exp": 579,
+      "floor": 0,
+      "phase": "explore",
+      "revision": 442
+    },
+    {
+      "action": "descend",
+      "args": {},
+      "exp": 579,
+      "floor": 1,
+      "phase": "battle",
+      "revision": 443
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 583,
+      "floor": 1,
+      "phase": "reward",
+      "revision": 444
+    },
+    {
+      "action": "claim_all_advance",
+      "args": {},
+      "exp": 583,
+      "floor": 2,
+      "phase": "treasure",
+      "revision": 445
+    },
+    {
+      "action": "open_chest",
+      "args": {},
+      "exp": 583,
+      "floor": 2,
+      "phase": "reward",
+      "revision": 446
+    },
+    {
+      "action": "claim_all_advance",
+      "args": {},
+      "exp": 583,
+      "floor": 3,
+      "phase": "event",
+      "revision": 447
+    },
+    {
+      "action": "equip",
+      "args": {
+        "uid": "item-130"
+      },
+      "exp": 583,
+      "floor": 3,
+      "phase": "event",
+      "revision": 448
+    },
+    {
+      "action": "journey_event",
+      "args": {
+        "choice": "safe"
+      },
+      "exp": 583,
+      "floor": 3,
+      "phase": "event_result",
+      "revision": 449
+    },
+    {
+      "action": "claim_all_advance",
+      "args": {},
+      "exp": 583,
+      "floor": 4,
+      "phase": "battle",
+      "revision": 450
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 588,
+      "floor": 4,
+      "phase": "reward",
+      "revision": 451
+    },
+    {
+      "action": "claim_all_advance",
+      "args": {},
+      "exp": 588,
+      "floor": 5,
+      "phase": "portal",
+      "revision": 452
+    },
+    {
+      "action": "portal_stay",
+      "args": {},
+      "exp": 588,
+      "floor": 5,
+      "phase": "treasure",
+      "revision": 453
+    },
+    {
+      "action": "open_chest",
+      "args": {},
+      "exp": 588,
+      "floor": 5,
+      "phase": "reward",
+      "revision": 454
+    },
+    {
+      "action": "claim_all_advance",
+      "args": {},
+      "exp": 588,
+      "floor": 5,
+      "phase": "portal_done",
+      "revision": 455
+    },
+    {
+      "action": "portal_continue",
+      "args": {},
+      "exp": 588,
+      "floor": 6,
+      "phase": "battle",
+      "revision": 456
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 597,
+      "floor": 6,
+      "phase": "reward",
+      "revision": 457
+    },
+    {
+      "action": "claim_all_advance",
+      "args": {},
+      "exp": 597,
+      "floor": 7,
+      "phase": "event",
+      "revision": 458
+    },
+    {
+      "action": "journey_event",
+      "args": {
+        "choice": "read"
+      },
+      "exp": 601,
+      "floor": 7,
+      "phase": "event_result",
+      "revision": 459
+    },
+    {
+      "action": "advance_ready",
+      "args": {},
+      "exp": 601,
+      "floor": 8,
+      "phase": "battle",
+      "revision": 460
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 601,
+      "floor": 8,
+      "phase": "battle",
+      "revision": 461
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 601,
+      "floor": 8,
+      "phase": "battle",
+      "revision": 462
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 612,
+      "floor": 8,
+      "phase": "reward",
+      "revision": 463
+    },
+    {
+      "action": "claim_all_advance",
+      "args": {},
+      "exp": 612,
+      "floor": 9,
+      "phase": "battle",
+      "revision": 464
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 612,
+      "floor": 9,
+      "phase": "battle",
+      "revision": 465
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 631,
+      "floor": 9,
+      "phase": "reward",
+      "revision": 466
+    },
+    {
+      "action": "equip",
+      "args": {
+        "uid": "item-133"
+      },
+      "exp": 631,
+      "floor": 9,
+      "phase": "reward",
+      "revision": 467
+    },
+    {
+      "action": "claim_all_advance",
+      "args": {},
+      "exp": 631,
+      "floor": 10,
+      "phase": "portal",
+      "revision": 468
+    },
+    {
+      "action": "portal_stay",
+      "args": {},
+      "exp": 631,
+      "floor": 10,
+      "phase": "battle",
+      "revision": 469
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 631,
+      "floor": 10,
+      "phase": "battle",
+      "revision": 470
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 631,
+      "floor": 10,
+      "phase": "battle",
+      "revision": 471
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 631,
+      "floor": 10,
+      "phase": "battle",
+      "revision": 472
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 631,
+      "floor": 10,
+      "phase": "battle",
+      "revision": 473
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 631,
+      "floor": 10,
+      "phase": "battle",
+      "revision": 474
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 631,
+      "floor": 10,
+      "phase": "battle",
+      "revision": 475
+    },
+    {
+      "action": "round",
+      "args": {},
+      "exp": 669,
+      "floor": 10,
+      "phase": "reward",
+      "revision": 476
+    },
+    {
+      "action": "claim_all_advance",
+      "args": {},
+      "exp": 669,
+      "floor": 10,
+      "phase": "portal_done",
+      "revision": 477
+    },
+    {
+      "action": "equip",
+      "args": {
+        "uid": "item-136"
+      },
+      "exp": 669,
+      "floor": 10,
+      "phase": "portal_done",
+      "revision": 478
+    },
+    {
+      "action": "portal_continue",
+      "args": {},
+      "exp": 669,
+      "floor": 10,
+      "phase": "result",
+      "revision": 479
+    }
+  ],
+  "checks": 69,
+  "death_retry": true,
+  "first_reward": true,
+  "five_return": true,
+  "five_stay": true,
+  "no_stat_injection": true,
+  "normal_tables": true,
+  "repeat": true,
+  "seed": 10000,
+  "summary": [
+    {
+      "exp": 10,
+      "floor": 5,
+      "kills": 0,
+      "kind": "return",
+      "level": 1,
+      "trip": 1
+    },
+    {
+      "exp": 45,
+      "floor": 9,
+      "kills": 0,
+      "kind": "death",
+      "level": 3,
+      "trip": 2
+    },
+    {
+      "exp": 98,
+      "floor": 10,
+      "kills": 0,
+      "kind": "return",
+      "level": 4,
+      "trip": 3
+    },
+    {
+      "exp": 156,
+      "floor": 10,
+      "kills": 0,
+      "kind": "death",
+      "level": 5,
+      "trip": 4
+    },
+    {
+      "exp": 204,
+      "floor": 10,
+      "kills": 0,
+      "kind": "death",
+      "level": 6,
+      "trip": 5
+    },
+    {
+      "exp": 259,
+      "floor": 10,
+      "kills": 0,
+      "kind": "death",
+      "level": 7,
+      "trip": 6
+    },
+    {
+      "exp": 314,
+      "floor": 10,
+      "kills": 0,
+      "kind": "death",
+      "level": 7,
+      "trip": 7
+    },
+    {
+      "exp": 379,
+      "floor": 10,
+      "kills": 0,
+      "kind": "death",
+      "level": 8,
+      "trip": 8
+    },
+    {
+      "exp": 428,
+      "floor": 10,
+      "kills": 0,
+      "kind": "death",
+      "level": 8,
+      "trip": 9
+    },
+    {
+      "exp": 490,
+      "floor": 10,
+      "kills": 0,
+      "kind": "death",
+      "level": 9,
+      "trip": 10
+    },
+    {
+      "exp": 579,
+      "floor": 10,
+      "kills": 1,
+      "kind": "clear",
+      "level": 10,
+      "trip": 11
+    },
+    {
+      "exp": 669,
+      "floor": 10,
+      "kills": 2,
+      "kind": "clear",
+      "level": 11,
+      "trip": 12
+    }
+  ],
+  "ten_early_return": true
+}

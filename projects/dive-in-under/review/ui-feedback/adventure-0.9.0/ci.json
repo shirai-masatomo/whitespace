@@ -1,0 +1,17 @@
+{
+  "run_id": 39418256675,
+  "head_sha": "7b70a518f8307febcb71c4797aafd1473c876130",
+  "conclusion": "success",
+  "verification_scope": "adventure-0.9.0",
+  "build_artifact_id": 12263565440,
+  "evidence_artifact_id": 12262951175,
+  "build_artifact_sha256": "3860e19d35144a620230bd6c285736ff2a8e12fd190cf7ceb923c77e79d31601",
+  "evidence_artifact_sha256": "329f5ac4b6051f4e7d7e381200d6823e60e7392f1565df05806b509fc53d9dce",
+  "core_checks": 70,
+  "isolated_exe_ms": 85522,
+  "exit_code": 0,
+  "screenshots": 22,
+  "local_game_launched": false,
+  "runtime_config_version": "2026-10-20.adventure-provisional.1",
+  "base_build_campaign_config_version": "2026-10-17.loop-provisional.5"
+}

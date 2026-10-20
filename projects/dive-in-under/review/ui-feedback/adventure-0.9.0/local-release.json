@@ -1,0 +1,17 @@
+{
+  "build_artifact_id": 12263565440,
+  "verification": "adventure-0.9.0",
+  "zip_sha256": "21B9B4DE1A5C5B41ECB74A08A46B8A64F200A807625F386EDC216FE8481074D9",
+  "relative_directory": "releases/7b70a518f8307febcb71c4797aafd1473c876130-0.9.0",
+  "ci_run_id": 39418256675,
+  "existing_processes_untouched": true,
+  "published_utc": "2026-10-20T12:07:14.6421714Z",
+  "version": "0.9.0",
+  "evidence_artifact_id": 12262951175,
+  "previous_directory": "releases/8b92fd85ffab2b8203ed19a5c785471968d52091-0.8.1",
+  "previous_zip_archive": "C:\\Users\\masat\\Documents\\Codex\\2026-10-17\\task\\dive-in-under-work\\projects\\dive-in-under\\build\\archive\\DiveInUnder-previous-D30836B511BC.zip",
+  "exe_sha256": "D34D36F3BE1A6C49C56525AE86469B92E4F417DDF0B43CF00DD80C385C4B0562",
+  "game_commit": "7b70a518f8307febcb71c4797aafd1473c876130",
+  "user_save_edited_by_publish": false,
+  "pck_sha256": "F60A4BFADF26A5B89E85945EF5D5358BB0C3E869743D41B2538E0A496540B931"
+}
