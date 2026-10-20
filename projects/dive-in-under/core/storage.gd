@@ -12,12 +12,15 @@ static func reason(s: Dictionary, uid: String, source: String, destination: Stri
 	if s.phase!="town": return "町で整理できます"
 	if not source in SOURCES or not destination in SOURCES or source==destination: return "移動先を選んでください"
 	if not s.has(source) or not uid in s[source] or not s.items.has(uid): return "アイテムを選んでください"
+	if s.has("quantities") and s.items[uid]=="C01":
+		return "" if preload("res://core/currency.gd").room(s,destination)>=int(s.quantities[uid]) else "コインが入りきりません。分割して移せます。"
 	if destination=="inventory" and s.inventory.size()>=BACKPACK_CAPACITY: return "バックパックに空きがありません"
 	if destination=="cloth" and s.cloth.size()>=CLOTH_CAPACITY: return "風呂敷に空きがありません"
 	if destination=="warehouse" and cfg.items[s.items[uid]].get("supply",false): return "支給品は倉庫へ預けられません"
 	return ""
 static func move(s: Dictionary, uid: String, source: String, destination: String, cfg: Dictionary) -> bool:
 	if reason(s,uid,source,destination,cfg)!="": return false
+	if s.has("quantities") and s.items[uid]=="C01": return preload("res://core/currency.gd").move(s,uid,source,destination)
 	s[source].erase(uid); s[destination].append(uid)
 	return true
 static func sort_key(s: Dictionary, uid: String, cfg: Dictionary, mode: String) -> String:

@@ -10,11 +10,14 @@ static func enemy(data: Dictionary, enemy_id: String, level: int) -> Dictionary:
 	var n := level - 1
 	var hp := maxi(1, roundi(base.hp * (1.0 + growth.hp * n)))
 	var sp := int(base.sp) + floori(float(n) / growth.sp_interval)
-	return {"id": enemy_id, "name": base.name, "level": level,
+	var unit: Dictionary={"id": enemy_id, "name": base.name, "level": level,
 		"max_hp": hp, "hp": hp, "atk": maxi(1, roundi(base.atk * (1.0 + growth.atk * n))),
 		"def": int(base.def) + floori(float(n) / growth.def_interval), "spd": int(base.spd),
 		"max_sp": sp, "sp": sp, "exp": maxi(1, roundi(base.exp * (1.0 + growth.exp * n))),
 		"gold": maxi(0, roundi(base.gold * (1.0 + growth.gold * n))), "skills":base.get("skills",[]).duplicate()}
+
+	if base.has("ai_pattern"): unit.ai_pattern=base.ai_pattern.duplicate(true)
+	return unit
 
 static func damage(attack: int, defense: float, variance: float = 1.0, critical: float = 1.0, multiplier: float = 1.0) -> int:
 	var a := float(maxi(1, attack))
@@ -36,6 +39,7 @@ static func normalized(unit: Dictionary) -> Dictionary:
 	result.cooldown_until = 0
 	result.statuses = {}
 	result.skill_cooldowns = {}
+	result.ai_phase=0; result.strong_until=0
 	return result
 
 static func start(hero: Dictionary, foe: Dictionary, rules: Dictionary, battle_seed: int) -> Dictionary:
@@ -77,7 +81,11 @@ static func use_defense(state: Dictionary, side: String) -> bool:
 	var unit: Dictionary=state[side]
 	var skill: Dictionary=state.rules.get("skills",{}).get("S105",{})
 	if not "S105" in unit.skills or skill.is_empty(): return false
-	if unit.hp>unit.max_hp*float(skill.hp_threshold) or unit.sp<int(skill.sp_cost) or unit.defense_until>=0 or unit.action_count<=unit.cooldown_until: return false
+	if state.rules.get("adventure",false):
+		var target: Dictionary=state["enemy" if side=="hero" else "hero"]
+		if unit.def<=0 or not target.has("ai_pattern") or int(target.ai_phase)!=2: return false
+	elif unit.hp>unit.max_hp*float(skill.hp_threshold): return false
+	if unit.sp<int(skill.sp_cost) or unit.defense_until>=0 or unit.action_count<=unit.cooldown_until: return false
 	unit.sp-=int(skill.sp_cost)
 	unit.defense_until=unit.action_count+int(skill.duration_own_actions)
 	unit.cooldown_until=unit.action_count+int(skill.cooldown_own_actions)
@@ -96,6 +104,14 @@ static func clear_statuses(state: Dictionary, side: String, reason: String) -> v
 static func apply_status(state: Dictionary, side: String, target: String, skill_id: String) -> void:
 	var skill: Dictionary=state.rules.skills[skill_id]
 	var id: String=skill.status_id
+	if state.rules.get("adventure",false):
+		var unit: Dictionary=state[target]
+		if id in unit.get("wards",[]):
+			state.log.append({"type":"status_prevented","actor":target,"target":target,"status":id,"round":state.round}); return
+		for remedy in unit.get("remedies",[]):
+			if remedy.status!=id: continue
+			unit.remedies.erase(remedy)
+			state.log.append({"type":"remedy_used","actor":target,"target":target,"status":id,"uid":remedy.uid,"item":remedy.item,"round":state.round}); return
 	var effects: Dictionary=state[target].statuses
 	var replaced:=effects.has(id)
 	# Provisional contract: snapshot effective ATK once; replace, never stack.
@@ -123,7 +139,7 @@ static func attack_skill(state: Dictionary, side: String) -> String:
 	var unit: Dictionary=state[side]
 	# Catalog order only. Smarter selection belongs to phase 4.
 	for id in unit.skills:
-		if not id in ["S102","S103","S104"]: continue
+		if not id in (["S101","S102","S103","S104"] if state.rules.get("adventure",false) else ["S102","S103","S104"]): continue
 		var skill: Dictionary=state.rules.skills.get(id,{})
 		if skill.is_empty() or unit.sp<skill.sp_cost or unit.action_count<=unit.skill_cooldowns.get(id,0): continue
 		unit.sp-=int(skill.sp_cost)
@@ -131,6 +147,23 @@ static func attack_skill(state: Dictionary, side: String) -> String:
 		state.log.append({"type":"skill","actor":side,"skill":id,"round":state.round,"sp":unit.sp,"cooldown_until":unit.skill_cooldowns[id]})
 		return id
 	return ""
+
+static func boss_move(state: Dictionary, side: String, rng: RandomNumberGenerator) -> Dictionary:
+	var unit: Dictionary=state[side]; var pattern: Dictionary=unit.ai_pattern
+	var phase: int=int(unit.ai_phase); unit.ai_phase=(phase+1)%4
+	if phase==1:
+		if unit.sp<int(pattern.heavy_sp): unit.ai_phase=3; return {"multiplier":1.0}
+		state.log.append({"type":"telegraph","actor":side,"round":state.round}); return {"skip":true}
+	if phase==2:
+		if unit.sp<int(pattern.heavy_sp): return {"multiplier":1.0}
+		unit.sp-=int(pattern.heavy_sp); return {"multiplier":float(pattern.heavy_multiplier)}
+	if phase==3:
+		state.log.append({"type":"opening","actor":side,"round":state.round}); return {"skip":true}
+	var weights: Dictionary=pattern.low_weights if unit.hp<=unit.max_hp*float(pattern.low_hp_threshold) else pattern.normal_weights
+	var strong: bool=rng.randi_range(1,int(weights.attack)+int(weights.strong))>int(weights.attack)
+	if strong and unit.sp>=int(pattern.strong_sp) and unit.action_count>unit.strong_until:
+		unit.sp-=int(pattern.strong_sp); unit.strong_until=unit.action_count+int(pattern.strong_cooldown); return {"multiplier":float(pattern.strong_multiplier)}
+	return {"multiplier":1.0}
 
 static func advance(previous: Dictionary) -> Dictionary:
 	var state := previous.duplicate(true)
@@ -158,7 +191,9 @@ static func advance(previous: Dictionary) -> Dictionary:
 		if use_defense(state,side):
 			finish_action(state,side)
 			continue
-		var skill_id:=attack_skill(state,side)
+		var move: Dictionary=boss_move(state,side,rng) if state.rules.get("adventure",false) and actor.has("ai_pattern") else {}
+		if move.get("skip",false): finish_action(state,side); continue
+		var skill_id: String="" if actor.has("ai_pattern") else attack_skill(state,side)
 		var skill: Dictionary=state.rules.get("skills",{}).get(skill_id,{})
 		var hit_chance:=clampf(float(state.rules.hit_chance)-float(actor.statuses.get("blind",{}).get("potency",0.0)),0.0,1.0)
 		var hit := rng.randf() < hit_chance
@@ -167,12 +202,12 @@ static func advance(previous: Dictionary) -> Dictionary:
 		if hit:
 			critical = rng.randf() < float(state.rules.critical_chance)
 			amount = damage(actor.atk, effective_def(target,state.rules), rng.randf_range(state.rules.variance_min, state.rules.variance_max),
-				float(state.rules.critical_multiplier) if critical else 1.0,float(skill.get("damage_multiplier",1.0)))
+				float(state.rules.critical_multiplier) if critical else 1.0,float(move.get("multiplier",skill.get("damage_multiplier",1.0))))
 			target.hp = maxi(0, int(target.hp) - amount)
 		state.log.append({"type": "attack", "round": state.round, "actor": side, "target": other,
 			"hit": hit, "critical": critical, "damage": amount, "target_hp": target.hp, "death": target.hp == 0})
 		if target.hp==0: clear_statuses(state,other,"death")
-		elif hit and not skill_id.is_empty() and rng.randf()<float(skill.apply_chance): apply_status(state,side,other,skill_id)
+		elif hit and skill.has("status_id") and rng.randf()<float(skill.get("apply_chance",0.0)): apply_status(state,side,other,skill_id)
 		finish_action(state,side)
 	state.rng_state = rng.state
 	finish_if_needed(state)

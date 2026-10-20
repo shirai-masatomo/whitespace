@@ -4,13 +4,16 @@ const Combat = preload("res://core/combat.gd")
 const Catalog = preload("res://core/catalog.gd")
 const Condition = preload("res://core/equipment_condition.gd")
 const Storage = preload("res://core/storage.gd")
+const Adventure=preload("res://core/adventure.gd")
+const Instances=preload("res://core/item_instances.gd")
+const Money=preload("res://core/currency.gd")
 const Journey = preload("res://core/journey.gd")
 const STATS = ["max_hp","atk","def","spd","max_sp"]
 const SLOTS = ["right_hand","left_hand","head","body","legs","feet","neck","ears","eyes","finger","wrist"]
 
 static func load_config(version: String="") -> Dictionary:
 	if not version in ["","2026-10-17.loop-provisional.1","2026-10-17.loop-provisional.2","2026-10-17.loop-provisional.3","2026-10-17.loop-provisional.4","2026-10-17.loop-provisional.5"]: return {}
-	var filename: String="expedition-legacy.json" if version=="2026-10-17.loop-provisional.1" else ("expedition-legacy-2.json" if version=="2026-10-17.loop-provisional.2" else ("expedition-legacy-3.json" if version=="2026-10-17.loop-provisional.3" else ("expedition-legacy-4.json" if version=="2026-10-17.loop-provisional.4" else "expedition.json")))
+	var filename: String="expedition-legacy.json" if version=="2026-10-17.loop-provisional.1" else ("expedition-legacy-2.json" if version=="2026-10-17.loop-provisional.2" else ("expedition-legacy-3.json" if version=="2026-10-17.loop-provisional.3" else ("expedition-legacy-4.json" if version=="2026-10-17.loop-provisional.4" else ("expedition-legacy-5.json" if version=="2026-10-17.loop-provisional.5" else "expedition.json"))))
 	var value = JSON.parse_string(FileAccess.get_file_as_string("res://data/v1/"+filename))
 	if not value is Dictionary: return {}
 	value.condition_rules=JSON.parse_string(FileAccess.get_file_as_string("res://data/v1/equipment-condition.json"))
@@ -20,7 +23,10 @@ static func load_config(version: String="") -> Dictionary:
 		value.journey=Journey.load_data()
 		var route_problem: String=Journey.validate_definition(value.journey,Catalog.load_data(),value)
 		if route_problem!="": push_error(route_problem); return {}
-	return value
+	return Adventure.configure(value) if version=="" else value
+
+static func money(s: Dictionary, source: String="inventory") -> int:
+	return Money.amount(s,source) if Adventure.active(s) else int(s.get("gold",0))
 
 static func validate_config(c: Dictionary, data: Dictionary) -> String:
 	if not c.get("condition_rules") is Dictionary: return "Invalid condition rules"
@@ -95,6 +101,7 @@ static func fresh(cfg: Dictionary, seed_value: int) -> Dictionary:
 		"floor":0,"highest_floor":0,"exp":0,"gold":int(cfg.initial.gold),"hp":int(cfg.initial.max_hp),
 		"sp":int(cfg.initial.max_sp),"items":{},"inventory":[],"warehouse":[],"equipment":{},"next_item":1,
 		"battle":{},"event":"","result":{},"journal":[cfg.get("intro","主人公ひとりで地下へ踏み出した。探索の解決後は町へ帰還できる。")],"trips":1,"deaths":0}
+	if cfg.has("progression"): Adventure.initialize(s,cfg)
 	for slot in SLOTS: s.equipment[slot] = ""
 	for id in cfg.initial.items: add_item(s,id)
 	for slot in cfg.initial.get("equipment",{}):
@@ -126,6 +133,15 @@ static func hero(s: Dictionary, cfg: Dictionary) -> Dictionary:
 		if uid == "": continue
 		var values: Dictionary=Condition.stats(s,uid,cfg)
 		for key in values: h[key] += values[key]
+	if Adventure.active(s):
+		h.wards=[]; h.remedies=[]
+		for uid in s.equipment.values():
+			if uid!="" and int(s.item_condition[uid].current)>0:
+				for seal in s.item_details[uid].seals:
+					if not seal in h.wards: h.wards.append(seal)
+		for uid in s.inventory:
+			var item: Dictionary=cfg.items[s.items[uid]]
+			if item.has("ward") and s.auto_remedy.get(item.ward,false): h.remedies.append({"uid":uid,"item":s.items[uid],"status":item.ward})
 	return Combat.normalized(h)
 
 static func note(s: Dictionary, value: String) -> void:
@@ -133,6 +149,7 @@ static func note(s: Dictionary, value: String) -> void:
 	if s.journal.size() > 24: s.journal.pop_front()
 
 static func add_item(s: Dictionary, id: String) -> String:
+	if Adventure.active(s): return Instances.install(s,id,Instances.roll(s,id,"supply" if s.item_rules[id].get("supply",false) else "loot"))
 	var uid := "item-%d" % int(s.next_item)
 	s.next_item += 1
 	s.items[uid] = id
@@ -174,6 +191,7 @@ static func gain_exp(s: Dictionary, amount: int, cfg: Dictionary) -> void:
 	if after.level > before.level: note(s,"Lv.%d に成長した。" % after.level)
 
 static func finish(s: Dictionary, kind: String, reason: String, cfg: Dictionary) -> void:
+	if Adventure.active(s): Adventure.finish(s,kind,reason); return
 	var loss := {"gold":0,"exp":0,"items":0}
 	if kind=="story_death": return # Legacy history is read-only; never create a new forced death.
 	if kind=="death":
@@ -197,6 +215,7 @@ static func finish(s: Dictionary, kind: String, reason: String, cfg: Dictionary)
 	note(s,reason)
 
 static func battle_state(s: Dictionary, data: Dictionary) -> Dictionary:
+	if Adventure.active(s): return s.battle.get("current",{}).duplicate(true)
 	if s.battle.is_empty(): return {}
 	var b: Dictionary = s.battle
 	var foe:=Combat.enemy(data,b.enemy_id,int(b.enemy_level))
@@ -209,6 +228,7 @@ static func battle_state(s: Dictionary, data: Dictionary) -> Dictionary:
 	return result
 
 static func step_battle(s: Dictionary, data: Dictionary, cfg: Dictionary) -> void:
+	if Adventure.active(s): Adventure.round_step(s,data,cfg); return
 	var previous := battle_state(s,data)
 	var b := Combat.advance(previous)
 	if Journey.active(s): s.round_presentation={"before":previous,"after":b,"events":b.log.slice(previous.log.size())}
@@ -258,6 +278,7 @@ static func step_battle(s: Dictionary, data: Dictionary, cfg: Dictionary) -> voi
 	elif b.outcome == "draw": finish(s,"draw","50ラウンドで戦闘を打ち切り、探索を中断した。",cfg)
 
 static func descend(s: Dictionary, data: Dictionary, cfg: Dictionary) -> void:
+	if Adventure.active(s): Adventure.descend(s,data,cfg); return
 	s.last_outcome=""
 	s.floor += 1
 	s.highest_floor = maxi(int(s.floor),int(s.highest_floor))
@@ -299,6 +320,7 @@ static func descend(s: Dictionary, data: Dictionary, cfg: Dictionary) -> void:
 static func act(previous: Dictionary, action: String, expected_revision: int, args: Dictionary, data: Dictionary, cfg: Dictionary) -> Dictionary:
 	# A queued old UI callback cannot repeat rewards, movement, or inventory operations.
 	if int(previous.revision) != expected_revision: return previous
+	if Adventure.active(previous): return Adventure.transition(previous,action,args,data,cfg).state
 	var s := previous.duplicate(true)
 	var changed := false
 	match action:
@@ -457,6 +479,7 @@ static func integer(v: Variant, low: int, high: int) -> bool:
 	return Catalog.numeric(v) and v==floorf(v) and v>=low and v<=high
 
 static func validate(s: Dictionary, data: Dictionary, cfg: Dictionary) -> String:
+	if Adventure.active(s): return Adventure.validate(s,data,cfg)
 	for key in ["schema_version","config_version","revision","seed","rng","phase","first_done","story_deaths","floor","highest_floor","exp","gold","hp","sp","items","inventory","warehouse","equipment","next_item","battle","event","result","journal","trips","deaths"]:
 		if not s.has(key): return "Missing save field: "+key
 	if (s.schema_version!=1 and s.schema_version!=2 and s.schema_version!=3 and s.schema_version!=4 and s.schema_version!=5) or s.config_version!=cfg.config_version: return "Unsupported save/config version"

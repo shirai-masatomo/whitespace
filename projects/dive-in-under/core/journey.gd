@@ -6,7 +6,8 @@ static func load_data() -> Dictionary:
 static func enable(s: Dictionary) -> void:
 	s.journey_version=1; s.pending_rewards=[]; s.reward_serial=0; s.reward_return="explore"; s.reward_origin=""; s.event_result={}; s.trip_exp=0; s.trip_gold=0; s.trip_items=0
 static func active(s: Dictionary) -> bool: return s.get("journey_version",0)==1
-static func node(cfg: Dictionary, floor_number: int) -> Dictionary:
+static func node(cfg: Dictionary, floor_number: int, s: Dictionary={}) -> Dictionary:
+	if s.get("ruleset","")=="adventure-0.9.0" and int(s.get("floor",-1))==floor_number and not s.get("node",{}).is_empty(): return s.node
 	for row in cfg.get("journey",{}).get("nodes",[]):
 		if int(row.floor)==floor_number: return row
 	return {}

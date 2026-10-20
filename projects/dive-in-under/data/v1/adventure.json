@@ -1,0 +1,1162 @@
+{
+  "version": "2026-10-20.adventure-provisional.1",
+  "provisional": true,
+  "coin_value": 1,
+  "coin_stack_max": 99,
+  "initial": {
+    "max_hp": 26,
+    "atk": 4,
+    "def": 1,
+    "spd": 6,
+    "max_sp": 4,
+    "gold": 0,
+    "items": [],
+    "equipment": {
+      "right_hand": "A01",
+      "head": "A02",
+      "body": "A03",
+      "legs": "A04",
+      "feet": "A05"
+    }
+  },
+  "growth": {
+    "max_hp": 4,
+    "atk": 1,
+    "def": 0,
+    "spd": 0,
+    "max_sp": 1,
+    "exp_step": 12,
+    "level_cap": 50
+  },
+  "items": {
+    "A01": {
+      "name": "冒険者の剣",
+      "slot": "right_hand",
+      "stats": {
+        "atk": 1
+      },
+      "supply": true,
+      "seal_slots": 0,
+      "art": "A01",
+      "description": "支給品。倉庫・対価・換金には使えない。手元に同じ品がある間は再支給されない。"
+    },
+    "A02": {
+      "name": "冒険者のマント",
+      "slot": "head",
+      "stats": {
+        "def": 1
+      },
+      "supply": true,
+      "seal_slots": 1,
+      "art": "A02",
+      "description": "支給品。倉庫・対価・換金には使えない。手元に同じ品がある間は再支給されない。"
+    },
+    "A03": {
+      "name": "冒険者の服",
+      "slot": "body",
+      "stats": {
+        "def": 1
+      },
+      "supply": true,
+      "seal_slots": 0,
+      "art": "A03",
+      "description": "支給品。倉庫・対価・換金には使えない。手元に同じ品がある間は再支給されない。"
+    },
+    "A04": {
+      "name": "冒険者のズボン",
+      "slot": "legs",
+      "stats": {
+        "def": 1,
+        "spd": -1
+      },
+      "supply": true,
+      "seal_slots": 0,
+      "art": "A04",
+      "description": "支給品。倉庫・対価・換金には使えない。手元に同じ品がある間は再支給されない。"
+    },
+    "A05": {
+      "name": "冒険者の靴",
+      "slot": "feet",
+      "stats": {
+        "spd": 1
+      },
+      "supply": true,
+      "seal_slots": 0,
+      "art": "A05",
+      "description": "支給品。倉庫・対価・換金には使えない。手元に同じ品がある間は再支給されない。"
+    },
+    "W01": {
+      "name": "風切りの短剣",
+      "slot": "right_hand",
+      "stats": {
+        "atk": 2,
+        "def": -1,
+        "spd": 2
+      },
+      "roll": {
+        "atk": [
+          2,
+          3
+        ]
+      },
+      "seal_slots": 1,
+      "art": "A01",
+      "description": "攻撃・防御・行動順の得失を比較して選ぶ装備。個体の性能は生成時に固定。"
+    },
+    "W02": {
+      "name": "坑道の重剣",
+      "slot": "right_hand",
+      "stats": {
+        "atk": 4,
+        "spd": -2
+      },
+      "roll": {
+        "atk": [
+          4,
+          5
+        ]
+      },
+      "seal_slots": 1,
+      "art": "A01",
+      "description": "攻撃・防御・行動順の得失を比較して選ぶ装備。個体の性能は生成時に固定。"
+    },
+    "W03": {
+      "name": "守り手の剣",
+      "slot": "right_hand",
+      "stats": {
+        "atk": 1,
+        "def": 2,
+        "spd": -1
+      },
+      "roll": {
+        "def": [
+          2,
+          3
+        ]
+      },
+      "seal_slots": 1,
+      "art": "A01",
+      "description": "攻撃・防御・行動順の得失を比較して選ぶ装備。個体の性能は生成時に固定。"
+    },
+    "B01": {
+      "name": "斥候の上着",
+      "slot": "body",
+      "stats": {
+        "def": 1,
+        "spd": 2
+      },
+      "roll": {
+        "def": [
+          1,
+          2
+        ]
+      },
+      "seal_slots": 1,
+      "art": "I02",
+      "description": "攻撃・防御・行動順の得失を比較して選ぶ装備。個体の性能は生成時に固定。"
+    },
+    "B02": {
+      "name": "坑夫の重衣",
+      "slot": "body",
+      "stats": {
+        "def": 4,
+        "spd": -2
+      },
+      "roll": {
+        "def": [
+          3,
+          4
+        ]
+      },
+      "seal_slots": 1,
+      "art": "A03",
+      "description": "攻撃・防御・行動順の得失を比較して選ぶ装備。個体の性能は生成時に固定。"
+    },
+    "F01": {
+      "name": "鋭刃の指輪",
+      "slot": "finger",
+      "stats": {
+        "atk": 3,
+        "def": -1
+      },
+      "roll": {
+        "atk": [
+          2,
+          3
+        ]
+      },
+      "seal_slots": 1,
+      "art": "I05",
+      "description": "攻撃・防御・行動順の得失を比較して選ぶ装備。個体の性能は生成時に固定。"
+    },
+    "G10": {
+      "name": "門守の継ぎ輪",
+      "slot": "finger",
+      "stats": {
+        "atk": 2,
+        "def": 2,
+        "spd": -1
+      },
+      "roll": {
+        "def": [
+          1,
+          2
+        ]
+      },
+      "seal_slots": 1,
+      "art": "I11",
+      "description": "攻撃・防御・行動順の得失を比較して選ぶ装備。個体の性能は生成時に固定。"
+    },
+    "I10": {
+      "name": "補修石",
+      "slot": "",
+      "stats": {},
+      "category": "material",
+      "art": "I10",
+      "description": "加工や交換で使用する石。支給品を素材へ変換する機能はない。"
+    },
+    "C01": {
+      "name": "コイン",
+      "slot": "",
+      "stats": {},
+      "category": "material",
+      "stack_max": 99,
+      "art": "coin",
+      "description": "1枚1G。1枠99枚まで。支払元は明示して選ぶ。"
+    },
+    "RB": {
+      "name": "目守りの薬",
+      "slot": "",
+      "stats": {},
+      "category": "consumable",
+      "ward": "blind",
+      "price": 2,
+      "art": "sp",
+      "description": "バッグ内で自動使用をONにすると、対応する状態の付与を1回防いで消費する。"
+    },
+    "RP": {
+      "name": "毒除けの薬",
+      "slot": "",
+      "stats": {},
+      "category": "consumable",
+      "ward": "poison",
+      "price": 2,
+      "art": "hp",
+      "description": "バッグ内で自動使用をONにすると、対応する状態の付与を1回防いで消費する。"
+    },
+    "RM": {
+      "name": "痺れ除けの薬",
+      "slot": "",
+      "stats": {},
+      "category": "consumable",
+      "ward": "paralysis",
+      "price": 2,
+      "art": "exp",
+      "description": "バッグ内で自動使用をONにすると、対応する状態の付与を1回防いで消費する。"
+    }
+  },
+  "affixes": [
+    {
+      "id": "plain",
+      "weight": 70,
+      "stats": {}
+    },
+    {
+      "id": "stout",
+      "weight": 20,
+      "stats": {
+        "max_hp": 2
+      }
+    },
+    {
+      "id": "focused",
+      "weight": 10,
+      "stats": {
+        "max_sp": 1
+      }
+    }
+  ],
+  "seals": {
+    "blind": {
+      "name": "明視の印",
+      "item_cost": "I10",
+      "coin_cost": 2
+    },
+    "poison": {
+      "name": "解毒の印",
+      "item_cost": "I10",
+      "coin_cost": 2
+    },
+    "paralysis": {
+      "name": "抗痺の印",
+      "item_cost": "I10",
+      "coin_cost": 2
+    }
+  },
+  "nodes": [
+    {
+      "id": "main-01",
+      "floor": 1,
+      "kind": "enemy",
+      "background": "cavern",
+      "bgm": "",
+      "levels": [
+        1,
+        1
+      ],
+      "enemies": {
+        "E01": 70,
+        "E02": 30
+      },
+      "rewards": {
+        "W01": 20,
+        "W02": 20,
+        "W03": 20,
+        "B01": 20,
+        "B02": 20
+      },
+      "events": [
+        "EV01",
+        "EV04",
+        "EV11",
+        "EV12",
+        "EV13",
+        "EV14",
+        "EV15",
+        "EV18"
+      ]
+    },
+    {
+      "id": "main-02",
+      "floor": 2,
+      "kind": "treasure",
+      "background": "cavern",
+      "bgm": "",
+      "levels": [
+        1,
+        1
+      ],
+      "enemies": {
+        "E01": 70,
+        "E02": 30
+      },
+      "rewards": {
+        "W01": 20,
+        "W02": 20,
+        "W03": 20,
+        "B01": 20,
+        "B02": 20
+      },
+      "events": [
+        "EV01",
+        "EV04",
+        "EV11",
+        "EV12",
+        "EV13",
+        "EV14",
+        "EV15",
+        "EV18"
+      ]
+    },
+    {
+      "id": "main-03",
+      "floor": 3,
+      "kind": "event",
+      "background": "cavern",
+      "bgm": "",
+      "levels": [
+        1,
+        1
+      ],
+      "enemies": {
+        "E01": 70,
+        "E02": 30
+      },
+      "rewards": {
+        "W01": 20,
+        "W02": 20,
+        "W03": 20,
+        "B01": 20,
+        "B02": 20
+      },
+      "events": [
+        "EV01",
+        "EV04",
+        "EV11",
+        "EV12",
+        "EV13",
+        "EV14",
+        "EV15",
+        "EV18"
+      ]
+    },
+    {
+      "id": "main-04",
+      "floor": 4,
+      "kind": "enemy",
+      "background": "cavern",
+      "bgm": "",
+      "levels": [
+        2,
+        2
+      ],
+      "enemies": {
+        "E01": 70,
+        "E02": 30
+      },
+      "rewards": {
+        "W01": 20,
+        "W02": 20,
+        "W03": 20,
+        "B01": 20,
+        "B02": 20
+      },
+      "events": [
+        "EV01",
+        "EV04",
+        "EV11",
+        "EV12",
+        "EV13",
+        "EV14",
+        "EV15",
+        "EV18"
+      ]
+    },
+    {
+      "id": "main-05",
+      "floor": 5,
+      "kind": "mixed",
+      "background": "cavern",
+      "bgm": "",
+      "levels": [
+        2,
+        2
+      ],
+      "enemies": {
+        "E02": 70,
+        "E05": 30
+      },
+      "rewards": {
+        "W01": 20,
+        "W02": 20,
+        "W03": 20,
+        "B01": 20,
+        "B02": 20
+      },
+      "events": [
+        "EV01",
+        "EV04",
+        "EV11",
+        "EV12",
+        "EV13",
+        "EV14",
+        "EV15",
+        "EV18"
+      ],
+      "kinds": {
+        "enemy": 30,
+        "treasure": 40,
+        "event": 30
+      }
+    },
+    {
+      "id": "main-06",
+      "floor": 6,
+      "kind": "enemy",
+      "background": "cavern",
+      "bgm": "",
+      "levels": [
+        2,
+        2
+      ],
+      "enemies": {
+        "E03": 100
+      },
+      "rewards": {
+        "W01": 20,
+        "W02": 20,
+        "W03": 20,
+        "B01": 20,
+        "B02": 20
+      },
+      "events": [
+        "EV01",
+        "EV04",
+        "EV11",
+        "EV12",
+        "EV13",
+        "EV14",
+        "EV15",
+        "EV18"
+      ]
+    },
+    {
+      "id": "main-07",
+      "floor": 7,
+      "kind": "event",
+      "background": "cavern",
+      "bgm": "",
+      "levels": [
+        2,
+        2
+      ],
+      "enemies": {
+        "E02": 70,
+        "E05": 30
+      },
+      "rewards": {
+        "W01": 20,
+        "W02": 20,
+        "W03": 20,
+        "B01": 20,
+        "B02": 20
+      },
+      "events": [
+        "EV01",
+        "EV04",
+        "EV11",
+        "EV12",
+        "EV13",
+        "EV14",
+        "EV15",
+        "EV18"
+      ]
+    },
+    {
+      "id": "main-08",
+      "floor": 8,
+      "kind": "enemy",
+      "background": "cavern",
+      "bgm": "",
+      "levels": [
+        2,
+        2
+      ],
+      "enemies": {
+        "E04": 65,
+        "E07": 35
+      },
+      "rewards": {
+        "W01": 20,
+        "W02": 20,
+        "W03": 20,
+        "B01": 20,
+        "B02": 20
+      },
+      "events": [
+        "EV01",
+        "EV04",
+        "EV11",
+        "EV12",
+        "EV13",
+        "EV14",
+        "EV15",
+        "EV18"
+      ]
+    },
+    {
+      "id": "main-09",
+      "floor": 9,
+      "kind": "enemy",
+      "background": "cavern",
+      "bgm": "",
+      "levels": [
+        3,
+        3
+      ],
+      "enemies": {
+        "E08": 100
+      },
+      "rewards": {
+        "W01": 20,
+        "W02": 20,
+        "W03": 20,
+        "B01": 20,
+        "B02": 20
+      },
+      "events": [
+        "EV01",
+        "EV04",
+        "EV11",
+        "EV12",
+        "EV13",
+        "EV14",
+        "EV15",
+        "EV18"
+      ]
+    },
+    {
+      "id": "main-10",
+      "floor": 10,
+      "kind": "boss",
+      "background": "cavern",
+      "bgm": "",
+      "levels": [
+        3,
+        3
+      ],
+      "enemies": {
+        "B10": 100
+      },
+      "rewards": {
+        "W01": 20,
+        "W02": 20,
+        "W03": 20,
+        "B01": 20,
+        "B02": 20
+      },
+      "events": [
+        "EV01",
+        "EV04",
+        "EV11",
+        "EV12",
+        "EV13",
+        "EV14",
+        "EV15",
+        "EV18"
+      ]
+    }
+  ],
+  "events": {
+    "EV01": {
+      "name": "地下の湧き水",
+      "description": "岩間に澄んだ水が湧いている。",
+      "choices": [
+        {
+          "id": "drink",
+          "label": "水を飲む",
+          "ops": [
+            {
+              "kind": "hp",
+              "amount": 6
+            }
+          ],
+          "cost": {}
+        },
+        {
+          "id": "leave",
+          "label": "見送る",
+          "ops": [],
+          "cost": {}
+        }
+      ],
+      "min_floor": 1,
+      "max_floor": 9,
+      "weight": 1,
+      "limit_per_trip": 1,
+      "material": "既存の状態／装備アイコン"
+    },
+    "EV04": {
+      "name": "古い標識",
+      "description": "削れた道標に、先人の記録が残る。",
+      "choices": [
+        {
+          "id": "read",
+          "label": "記録を読む",
+          "ops": [
+            {
+              "kind": "exp",
+              "amount": 4
+            }
+          ],
+          "cost": {}
+        },
+        {
+          "id": "leave",
+          "label": "見送る",
+          "ops": [],
+          "cost": {}
+        }
+      ],
+      "min_floor": 1,
+      "max_floor": 9,
+      "weight": 1,
+      "limit_per_trip": 1,
+      "material": "既存の状態／装備アイコン"
+    },
+    "EV05": {
+      "name": "祈祷の残光",
+      "description": "灯りの跡に補修石が残されている。",
+      "choices": [
+        {
+          "id": "take",
+          "label": "石を拾う",
+          "ops": [
+            {
+              "kind": "item",
+              "id": "I10"
+            }
+          ],
+          "cost": {}
+        },
+        {
+          "id": "leave",
+          "label": "見送る",
+          "ops": [],
+          "cost": {}
+        }
+      ],
+      "min_floor": 5,
+      "max_floor": 9,
+      "weight": 1,
+      "limit_per_trip": 1,
+      "material": "既存の状態／装備アイコン"
+    },
+    "EV11": {
+      "name": "橋桁の小銭",
+      "description": "木橋の隙間で小銭が光っている。",
+      "choices": [
+        {
+          "id": "take",
+          "label": "コインを拾う",
+          "ops": [
+            {
+              "kind": "coin",
+              "amount": 5
+            }
+          ],
+          "cost": {}
+        },
+        {
+          "id": "leave",
+          "label": "見送る",
+          "ops": [],
+          "cost": {}
+        }
+      ],
+      "min_floor": 1,
+      "max_floor": 9,
+      "weight": 1,
+      "limit_per_trip": 1,
+      "material": "既存の状態／装備アイコン"
+    },
+    "EV12": {
+      "name": "置き土産",
+      "description": "石と小銭。どちらかを次の旅人へ残そう。",
+      "choices": [
+        {
+          "id": "stone",
+          "label": "補修石を受け取る",
+          "ops": [
+            {
+              "kind": "item",
+              "id": "I10"
+            }
+          ],
+          "cost": {}
+        },
+        {
+          "id": "coin",
+          "label": "コインを受け取る",
+          "ops": [
+            {
+              "kind": "coin",
+              "amount": 7
+            }
+          ],
+          "cost": {}
+        },
+        {
+          "id": "leave",
+          "label": "見送る",
+          "ops": [],
+          "cost": {}
+        }
+      ],
+      "min_floor": 1,
+      "max_floor": 9,
+      "weight": 1,
+      "limit_per_trip": 1,
+      "material": "既存の状態／装備アイコン"
+    },
+    "EV13": {
+      "name": "水底の光",
+      "description": "浅瀬には小銭、奥には品物らしい影。",
+      "choices": [
+        {
+          "id": "safe",
+          "label": "浅瀬のコイン",
+          "ops": [
+            {
+              "kind": "coin",
+              "amount": 4
+            }
+          ],
+          "cost": {}
+        },
+        {
+          "id": "dive",
+          "label": "HP4を払って探す",
+          "ops": [
+            {
+              "kind": "chance_item",
+              "id": "W02",
+              "chance": 60
+            }
+          ],
+          "cost": {
+            "hp": 4
+          }
+        },
+        {
+          "id": "leave",
+          "label": "見送る",
+          "ops": [],
+          "cost": {}
+        }
+      ],
+      "min_floor": 3,
+      "max_floor": 9,
+      "weight": 1,
+      "limit_per_trip": 1,
+      "material": "既存の状態／装備アイコン"
+    },
+    "EV14": {
+      "name": "置き工房",
+      "description": "置かれた工具で装備を手入れできる。",
+      "choices": [
+        {
+          "id": "repair",
+          "label": "コイン4で選んだ装備を全修理",
+          "ops": [
+            {
+              "kind": "repair",
+              "amount": 100
+            }
+          ],
+          "cost": {
+            "coin": 4
+          },
+          "target": "gear"
+        },
+        {
+          "id": "leave",
+          "label": "見送る",
+          "ops": [],
+          "cost": {}
+        }
+      ],
+      "min_floor": 3,
+      "max_floor": 9,
+      "weight": 1,
+      "limit_per_trip": 1,
+      "material": "既存の状態／装備アイコン"
+    },
+    "EV15": {
+      "name": "交換棚",
+      "description": "補修石を置き、攻撃か守備の装備を選ぶ。",
+      "choices": [
+        {
+          "id": "attack",
+          "label": "補修石1→風切りの短剣",
+          "ops": [
+            {
+              "kind": "item",
+              "id": "W01"
+            }
+          ],
+          "cost": {
+            "item": "I10",
+            "amount": 1
+          }
+        },
+        {
+          "id": "defense",
+          "label": "補修石1→守り手の剣",
+          "ops": [
+            {
+              "kind": "item",
+              "id": "W03"
+            }
+          ],
+          "cost": {
+            "item": "I10",
+            "amount": 1
+          }
+        },
+        {
+          "id": "leave",
+          "label": "見送る",
+          "ops": [],
+          "cost": {}
+        }
+      ],
+      "min_floor": 3,
+      "max_floor": 9,
+      "weight": 1,
+      "limit_per_trip": 1,
+      "material": "既存の状態／装備アイコン"
+    },
+    "EV16": {
+      "name": "手入れ台",
+      "description": "擦り減った装備を整える台。",
+      "choices": [
+        {
+          "id": "repair",
+          "label": "選んだ装備の耐久を20回復",
+          "ops": [
+            {
+              "kind": "repair",
+              "amount": 20
+            }
+          ],
+          "cost": {},
+          "target": "gear"
+        },
+        {
+          "id": "leave",
+          "label": "見送る",
+          "ops": [],
+          "cost": {}
+        }
+      ],
+      "min_floor": 1,
+      "max_floor": 9,
+      "weight": 1,
+      "limit_per_trip": 1,
+      "material": "既存の状態／装備アイコン",
+      "candidate_only": true
+    },
+    "EV17": {
+      "name": "蓄光苔",
+      "description": "苔に触れると生命と気力が入れ替わる。",
+      "choices": [
+        {
+          "id": "sp",
+          "label": "HP3→SP2",
+          "ops": [
+            {
+              "kind": "sp",
+              "amount": 2
+            }
+          ],
+          "cost": {
+            "hp": 3
+          }
+        },
+        {
+          "id": "hp",
+          "label": "SP2→HP6",
+          "ops": [
+            {
+              "kind": "hp",
+              "amount": 6
+            }
+          ],
+          "cost": {
+            "sp": 2
+          }
+        },
+        {
+          "id": "leave",
+          "label": "見送る",
+          "ops": [],
+          "cost": {}
+        }
+      ],
+      "min_floor": 3,
+      "max_floor": 9,
+      "weight": 1,
+      "limit_per_trip": 1,
+      "material": "既存の状態／装備アイコン",
+      "requires_sp": true,
+      "candidate_only": true
+    },
+    "EV18": {
+      "name": "岩間の小箱",
+      "description": "狭い割れ目に小箱がある。",
+      "choices": [
+        {
+          "id": "hp",
+          "label": "HP4を払って開ける",
+          "ops": [
+            {
+              "kind": "item",
+              "id": "B01"
+            }
+          ],
+          "cost": {
+            "hp": 4
+          }
+        },
+        {
+          "id": "wear",
+          "label": "非支給装備の耐久15を払って開ける",
+          "ops": [
+            {
+              "kind": "item",
+              "id": "B02"
+            }
+          ],
+          "cost": {
+            "durability": 15
+          },
+          "target": "gear"
+        },
+        {
+          "id": "leave",
+          "label": "見送る",
+          "ops": [],
+          "cost": {}
+        }
+      ],
+      "min_floor": 4,
+      "max_floor": 9,
+      "weight": 1,
+      "limit_per_trip": 1,
+      "material": "既存の状態／装備アイコン"
+    }
+  },
+  "boss_reward": "G10",
+  "boss_repeat_chance": 100,
+  "enemies": {
+    "E01": {
+      "hp": 8,
+      "atk": 3,
+      "def": 0,
+      "spd": 6,
+      "sp": 0,
+      "exp": 4,
+      "gold": 3,
+      "skills": []
+    },
+    "E02": {
+      "hp": 11,
+      "atk": 3,
+      "def": 1,
+      "spd": 2,
+      "sp": 0,
+      "exp": 5,
+      "gold": 3,
+      "skills": []
+    },
+    "E03": {
+      "hp": 14,
+      "atk": 5,
+      "def": 0,
+      "spd": 8,
+      "sp": 5,
+      "exp": 8,
+      "gold": 5,
+      "skills": [
+        "S103"
+      ]
+    },
+    "E04": {
+      "hp": 20,
+      "atk": 6,
+      "def": 1,
+      "spd": 5,
+      "sp": 8,
+      "exp": 10,
+      "gold": 7,
+      "skills": [
+        "S102"
+      ]
+    },
+    "E05": {
+      "hp": 19,
+      "atk": 4,
+      "def": 3,
+      "spd": 2,
+      "sp": 0,
+      "exp": 8,
+      "gold": 6,
+      "skills": []
+    },
+    "E07": {
+      "hp": 18,
+      "atk": 6,
+      "def": 1,
+      "spd": 6,
+      "sp": 8,
+      "exp": 12,
+      "gold": 8,
+      "skills": [
+        "S102"
+      ]
+    },
+    "E08": {
+      "hp": 25,
+      "atk": 7,
+      "def": 2,
+      "spd": 6,
+      "sp": 10,
+      "exp": 15,
+      "gold": 10,
+      "skills": [
+        "S104",
+        "S101"
+      ]
+    },
+    "B10": {
+      "hp": 64,
+      "atk": 10,
+      "def": 4,
+      "spd": 3,
+      "sp": 14,
+      "exp": 30,
+      "gold": 40,
+      "skills": [],
+      "ai_pattern": {
+        "normal_weights": {
+          "attack": 3,
+          "strong": 1
+        },
+        "low_hp_threshold": 0.35,
+        "low_weights": {
+          "attack": 1,
+          "strong": 2
+        },
+        "heavy_sp": 4,
+        "heavy_multiplier": 1.8,
+        "strong_sp": 3,
+        "strong_multiplier": 1.3,
+        "strong_cooldown": 3
+      }
+    }
+  },
+  "drops": {
+    "E01": {
+      "W01": 15
+    },
+    "E02": {
+      "B01": 15
+    },
+    "E03": {
+      "W01": 20,
+      "F01": 10
+    },
+    "E04": {
+      "W02": 20,
+      "I10": 25
+    },
+    "E05": {
+      "W03": 20
+    },
+    "E07": {
+      "B02": 20
+    },
+    "E08": {
+      "F01": 20,
+      "I10": 25
+    },
+    "B10": {
+      "I10": 100
+    }
+  },
+  "skills": {
+    "S105": {
+      "sp_cost": 2,
+      "def_bonus": 1.0,
+      "duration_own_actions": 1,
+      "cooldown_own_actions": 2
+    },
+    "S101": {
+      "name": "強打",
+      "sp_cost": 3,
+      "damage_multiplier": 1.3,
+      "cooldown_own_actions": 3
+    }
+  }
+}

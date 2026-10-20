@@ -55,6 +55,9 @@ jobs:
           PREVIOUS_HEAD: ${{ github.event.before }}
           CURRENT_HEAD: ${{ github.event.pull_request.head.sha || github.sha }}
         run: |
+          $adventure = Test-Path tools/adventure-stage.txt
+          "adventure_only=$($adventure.ToString().ToLowerInvariant())" >> $env:GITHUB_OUTPUT
+          if ($adventure) { $global:LASTEXITCODE=0; return }
           $reviewFixes = Test-Path tools/review-fixes-stage.txt
           "review_fixes=$($reviewFixes.ToString().ToLowerInvariant())" >> $env:GITHUB_OUTPUT
           $flowOnly = Test-Path tools/flow-stage.txt
@@ -125,61 +128,72 @@ jobs:
           key: dive-in-under-godot-${{ runner.os }}-${{ hashFiles('projects/dive-in-under/tools/godot-version.json') }}
       - name: Verify engine and templates
         run: ./tools/setup.ps1
+      - name: Adventure rule checkpoint, bounded focused cases
+        if: steps.scope.outputs.adventure_only == 'true'
+        timeout-minutes: 3
+        run: ./tools/adventure_core.ps1
+      - name: Export grouped adventure candidate
+        if: steps.scope.outputs.adventure_only == 'true' && hashFiles('projects/dive-in-under/tools/adventure-ready.txt') != ''
+        run: ./dev.ps1 -Task build -GameCommit '${{ github.sha }}'
+      - name: Grouped adventure, one isolated EXE
+        if: steps.scope.outputs.adventure_only == 'true' && hashFiles('projects/dive-in-under/tools/adventure-ready.txt') != ''
+        timeout-minutes: 6
+        run: ./tools/adventure_review.ps1
       - name: Functional tests, 8-seed smoke and export
-        if: steps.scope.outputs.art_only != 'true' && steps.scope.outputs.status_only != 'true' && steps.scope.outputs.integration_only != 'true'
+        if: steps.scope.outputs.adventure_only != 'true' && (steps.scope.outputs.art_only != 'true' && steps.scope.outputs.status_only != 'true' && steps.scope.outputs.integration_only != 'true')
         run: ./dev.ps1 -Task verify -Trials 8 -GameCommit '${{ github.event.pull_request.head.sha || github.sha }}'
       - name: Repeat same seeds and compare
-        if: steps.scope.outputs.art_only != 'true' && steps.scope.outputs.status_only != 'true' && steps.scope.outputs.integration_only != 'true'
+        if: steps.scope.outputs.adventure_only != 'true' && (steps.scope.outputs.art_only != 'true' && steps.scope.outputs.status_only != 'true' && steps.scope.outputs.integration_only != 'true')
         run: ./dev.ps1 -Task simulate -Trials 8 -GameCommit '${{ github.event.pull_request.head.sha || github.sha }}' -Baseline "$PWD/artifacts/simulation.json" -Output "$PWD/artifacts/comparison.json" -StrictRepeat
       - name: Three fixed campaigns and strict replay
-        if: steps.scope.outputs.art_only != 'true' && steps.scope.outputs.status_only != 'true' && steps.scope.outputs.integration_only != 'true'
+        if: steps.scope.outputs.adventure_only != 'true' && (steps.scope.outputs.art_only != 'true' && steps.scope.outputs.status_only != 'true' && steps.scope.outputs.integration_only != 'true')
         run: ./tools/verify_campaign.ps1 -Trials 3 -GameCommit '${{ github.event.pull_request.head.sha || github.sha }}'
       - name: Replay normal 10F with three exported EXE processes
-        if: steps.scope.outputs.art_only != 'true' && steps.scope.outputs.status_only != 'true' && steps.scope.outputs.integration_only != 'true'
+        if: steps.scope.outputs.adventure_only != 'true' && (steps.scope.outputs.art_only != 'true' && steps.scope.outputs.status_only != 'true' && steps.scope.outputs.integration_only != 'true')
         run: |
           ./tools/campaign_smoke.ps1
           ./tests/test_campaign_harness.ps1
       - name: Run exported Windows EXE (headless UI smoke)
-        if: steps.scope.outputs.art_only != 'true' && steps.scope.outputs.status_only != 'true' && steps.scope.outputs.integration_only != 'true'
+        if: steps.scope.outputs.adventure_only != 'true' && (steps.scope.outputs.art_only != 'true' && steps.scope.outputs.status_only != 'true' && steps.scope.outputs.integration_only != 'true')
         run: ./tools/smoke.ps1
       - name: Migrate legacy saves in exported EXE and restart
-        if: steps.scope.outputs.art_only != 'true' && steps.scope.outputs.status_only != 'true' && steps.scope.outputs.integration_only != 'true'
+        if: steps.scope.outputs.adventure_only != 'true' && (steps.scope.outputs.art_only != 'true' && steps.scope.outputs.status_only != 'true' && steps.scope.outputs.integration_only != 'true')
         run: ./tools/migration_smoke.ps1
       - name: Repair exported equipment and reopen save
-        if: steps.scope.outputs.art_only != 'true' && steps.scope.outputs.status_only != 'true' && steps.scope.outputs.integration_only != 'true'
+        if: steps.scope.outputs.adventure_only != 'true' && (steps.scope.outputs.art_only != 'true' && steps.scope.outputs.status_only != 'true' && steps.scope.outputs.integration_only != 'true')
         run: |
           ./tools/enemy_art_review.ps1 -Review equipment
           ./tools/enemy_art_review.ps1 -Review equipment -Resume
       - name: Warehouse transfer, filtering and separate restart
-        if: steps.scope.outputs.art_only != 'true' && steps.scope.outputs.status_only != 'true' && steps.scope.outputs.integration_only != 'true'
+        if: steps.scope.outputs.adventure_only != 'true' && (steps.scope.outputs.art_only != 'true' && steps.scope.outputs.status_only != 'true' && steps.scope.outputs.integration_only != 'true')
         run: |
           ./tools/enemy_art_review.ps1 -Review warehouse
           ./tools/enemy_art_review.ps1 -Review warehouse -Resume
       - name: Blue starter cloak, item artwork, transfers and separate restart
-        if: steps.scope.outputs.art_only != 'true' && steps.scope.outputs.status_only != 'true' && steps.scope.outputs.integration_only != 'true'
+        if: steps.scope.outputs.adventure_only != 'true' && (steps.scope.outputs.art_only != 'true' && steps.scope.outputs.status_only != 'true' && steps.scope.outputs.integration_only != 'true')
         run: |
           ./tools/enemy_art_review.ps1 -Isolated -Review equipment-assets
           ./tools/enemy_art_review.ps1 -Isolated -Review equipment-assets -Resume
       - name: Reject injected replay and UI smoke faults
-        if: steps.scope.outputs.art_only != 'true' && steps.scope.outputs.status_only != 'true' && steps.scope.outputs.integration_only != 'true'
+        if: steps.scope.outputs.adventure_only != 'true' && (steps.scope.outputs.art_only != 'true' && steps.scope.outputs.status_only != 'true' && steps.scope.outputs.integration_only != 'true')
         run: ./tests/test_harness.ps1
       - name: Export status-only UI update
-        if: steps.scope.outputs.status_only == 'true' && steps.scope.outputs.integration_only != 'true'
+        if: steps.scope.outputs.adventure_only != 'true' && (steps.scope.outputs.status_only == 'true' && steps.scope.outputs.integration_only != 'true')
         run: ./dev.ps1 -Task build -GameCommit '${{ github.event.pull_request.head.sha || github.sha }}'
       - name: Status tabs, selections, keyboard, return and read-only save
-        if: steps.scope.outputs.art_only != 'true' && steps.scope.outputs.integration_only != 'true'
+        if: steps.scope.outputs.adventure_only != 'true' && (steps.scope.outputs.art_only != 'true' && steps.scope.outputs.integration_only != 'true')
         run: |
           ./tools/enemy_art_review.ps1 -Isolated -Review status
           ./tools/enemy_art_review.ps1 -Isolated -Review status -Resume
           ./tools/smoke.ps1
       - name: Import and export unchanged-core art update
-        if: steps.scope.outputs.art_only == 'true' && steps.scope.outputs.integration_only != 'true'
+        if: steps.scope.outputs.adventure_only != 'true' && (steps.scope.outputs.art_only == 'true' && steps.scope.outputs.integration_only != 'true')
         run: ./dev.ps1 -Task build -GameCommit '${{ github.event.pull_request.head.sha || github.sha }}'
       - name: Targeted exported EXE image and first-return smoke
-        if: steps.scope.outputs.art_only == 'true' && steps.scope.outputs.integration_only != 'true'
+        if: steps.scope.outputs.adventure_only != 'true' && (steps.scope.outputs.art_only == 'true' && steps.scope.outputs.integration_only != 'true')
         run: ./tools/enemy_art_review.ps1
       - name: Focused journey core checkpoint
-        if: steps.scope.outputs.journey_only == 'true'
+        if: steps.scope.outputs.adventure_only != 'true' && (steps.scope.outputs.journey_only == 'true')
         timeout-minutes: 3
         run: |
           $env:APPDATA = "$PWD/artifacts/journey-core-user"
@@ -199,50 +213,50 @@ jobs:
             Get-Content $log | Select-Object -Last 4
           }
       - name: Export selected UI or journey build
-        if: steps.scope.outputs.integration_only == 'true' && ((steps.scope.outputs.review_fixes == 'true' && hashFiles('projects/dive-in-under/tools/review-fixes-ready.txt') != '') || (steps.scope.outputs.flow_only == 'true' && steps.scope.outputs.review_fixes != 'true' && hashFiles('projects/dive-in-under/tools/flow-ready.txt') != '') || (steps.scope.outputs.flow_only != 'true' && (steps.scope.outputs.journey_only != 'true' || hashFiles('projects/dive-in-under/tools/journey-ready.txt') != '')))
+        if: steps.scope.outputs.adventure_only != 'true' && (steps.scope.outputs.integration_only == 'true' && ((steps.scope.outputs.review_fixes == 'true' && hashFiles('projects/dive-in-under/tools/review-fixes-ready.txt') != '') || (steps.scope.outputs.flow_only == 'true' && steps.scope.outputs.review_fixes != 'true' && hashFiles('projects/dive-in-under/tools/flow-ready.txt') != '') || (steps.scope.outputs.flow_only != 'true' && (steps.scope.outputs.journey_only != 'true' || hashFiles('projects/dive-in-under/tools/journey-ready.txt') != ''))))
         run: ./dev.ps1 -Task build -GameCommit '${{ github.event.pull_request.head.sha || github.sha }}'
       - name: One normal journey and focused safety fixtures in isolated exported EXE
-        if: steps.scope.outputs.journey_only == 'true' && steps.scope.outputs.flow_only != 'true' && hashFiles('projects/dive-in-under/tools/journey-ready.txt') != ''
+        if: steps.scope.outputs.adventure_only != 'true' && (steps.scope.outputs.journey_only == 'true' && steps.scope.outputs.flow_only != 'true' && hashFiles('projects/dive-in-under/tools/journey-ready.txt') != '')
         timeout-minutes: 6
         run: ./tools/journey_review.ps1
       - name: Review defects and presentation, one focused isolated EXE
-        if: steps.scope.outputs.review_fixes == 'true' && hashFiles('projects/dive-in-under/tools/review-fixes-ready.txt') != ''
+        if: steps.scope.outputs.adventure_only != 'true' && (steps.scope.outputs.review_fixes == 'true' && hashFiles('projects/dive-in-under/tools/review-fixes-ready.txt') != '')
         timeout-minutes: 3
         run: ./tools/review_fixes.ps1
       - name: Focused exploration controls in one isolated exported EXE
-        if: steps.scope.outputs.flow_only == 'true' && steps.scope.outputs.review_fixes != 'true' && hashFiles('projects/dive-in-under/tools/flow-ready.txt') != ''
+        if: steps.scope.outputs.adventure_only != 'true' && (steps.scope.outputs.flow_only == 'true' && steps.scope.outputs.review_fixes != 'true' && hashFiles('projects/dive-in-under/tools/flow-ready.txt') != '')
         timeout-minutes: 3
         run: ./tools/flow_review.ps1
       - name: Isolated session UI, transitions, comparison screenshots and fresh restart
-        if: steps.scope.outputs.integration_only == 'true' && steps.scope.outputs.feedback_only != 'true' && steps.scope.outputs.bgm_only != 'true' && steps.scope.outputs.title_only != 'true' && steps.scope.outputs.refinement_only != 'true' && steps.scope.outputs.journey_only != 'true'
+        if: steps.scope.outputs.adventure_only != 'true' && (steps.scope.outputs.integration_only == 'true' && steps.scope.outputs.feedback_only != 'true' && steps.scope.outputs.bgm_only != 'true' && steps.scope.outputs.title_only != 'true' && steps.scope.outputs.refinement_only != 'true' && steps.scope.outputs.journey_only != 'true')
         timeout-minutes: 4
         run: ./tools/ui_integration_review.ps1
       - name: Focused feedback 01-07, one isolated EXE process
-        if: steps.scope.outputs.feedback_only == 'true'
+        if: steps.scope.outputs.adventure_only != 'true' && (steps.scope.outputs.feedback_only == 'true')
         timeout-minutes: 2
         run: ./tools/ui_feedback_review.ps1
       - name: Preparation BGM, one isolated EXE process
-        if: steps.scope.outputs.bgm_only == 'true'
+        if: steps.scope.outputs.adventure_only != 'true' && (steps.scope.outputs.bgm_only == 'true')
         timeout-minutes: 2
         run: ./tools/bgm_review.ps1
       - name: Title logo, Start and Exit, one isolated EXE process
-        if: steps.scope.outputs.title_only == 'true'
+        if: steps.scope.outputs.adventure_only != 'true' && (steps.scope.outputs.title_only == 'true')
         timeout-minutes: 2
         run: ./tools/title_review.ps1
       - name: Targeted UI refinement and input fixes, sequential isolated before and after
-        if: steps.scope.outputs.refinement_only == 'true'
+        if: steps.scope.outputs.adventure_only != 'true' && (steps.scope.outputs.refinement_only == 'true')
         timeout-minutes: 4
         env:
           GITHUB_TOKEN: ${{ github.token }}
         run: ./tools/refinement_review.ps1 -AfterOnly
       - uses: actions/upload-artifact@v4
-        if: always()
+        if: steps.scope.outputs.adventure_only != 'true' && (always())
         with:
           name: DiveInUnder-foundation-windows-x64
           path: projects/dive-in-under/build/DiveInUnder-foundation-windows-x64.zip
           if-no-files-found: warn
       - uses: actions/upload-artifact@v4
-        if: always()
+        if: steps.scope.outputs.adventure_only != 'true' && (always())
         with:
           name: DiveInUnder-foundation-evidence
           path: |
@@ -298,3 +312,19 @@ jobs:
             projects/dive-in-under/artifacts/migration-headless/**/*.json
             projects/dive-in-under/artifacts/migration-headless/**/*.log
           if-no-files-found: warn
+      - uses: actions/upload-artifact@v4
+        if: always() && steps.scope.outputs.adventure_only == 'true'
+        with:
+          name: DiveInUnder-adventure-evidence
+          path: |
+            projects/dive-in-under/artifacts/adventure-*.log
+            projects/dive-in-under/artifacts/adventure/**/*.json
+            projects/dive-in-under/artifacts/adventure/**/*.png
+            projects/dive-in-under/artifacts/adventure/**/*.log
+          if-no-files-found: warn
+      - uses: actions/upload-artifact@v4
+        if: success() && steps.scope.outputs.adventure_only == 'true' && hashFiles('projects/dive-in-under/tools/adventure-ready.txt') != ''
+        with:
+          name: DiveInUnder-adventure-windows-x64
+          path: projects/dive-in-under/build/DiveInUnder-foundation-windows-x64.zip
+          if-no-files-found: error

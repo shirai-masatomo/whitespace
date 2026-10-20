@@ -9,7 +9,7 @@ static func bonus(s: Dictionary, uid: String, base_value: int) -> int:
 	return roundi(float(base_value)*int(condition.current)/int(condition.maximum))
 static func stats(s: Dictionary, uid: String, cfg: Dictionary, restored: bool=false) -> Dictionary:
 	if not s.items.has(uid): return {}
-	var base: Dictionary=cfg.items[s.items[uid]].stats
+	var base: Dictionary=preload("res://core/item_instances.gd").base(s,uid) if s.has("item_details") else cfg.items[s.items[uid]].stats
 	var result: Dictionary={}
 	for key in base: result[key]=int(base[key]) if restored else bonus(s,uid,int(base[key]))
 	return result
